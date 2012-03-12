@@ -1,11 +1,11 @@
 # Files #
 #########
-.DS_Store
+*.DS_Store
 *.app
-*.html
-*.rtf
-*.mfil
-*.tfil
+Patch.html
+Battle.net Authenticator Serial.rtf
+WoW.mfil
+WoW.tfil
 
 # Folders #
 ###########
