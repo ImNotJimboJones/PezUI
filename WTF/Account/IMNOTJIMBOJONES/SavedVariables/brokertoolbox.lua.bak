@@ -1,0 +1,21 @@
+
+BrokerToolBoxDB = {
+	["Burning Blade"] = {
+		["Pezzer"] = {
+			["tools"] = {
+				["money"] = {
+					["UnitFactionGroup"] = "Horde",
+					["money"] = 548454585,
+				},
+				["repair"] = {
+					["autorepair"] = true,
+					["BrokenWarningSound"] = true,
+					["autoguildrepair"] = true,
+					["autojunksell"] = true,
+					["BrokenWarningThreshold"] = 40,
+					["BrokenWarning"] = true,
+				},
+			},
+		},
+	},
+}

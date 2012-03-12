@@ -1,8 +1,8 @@
 
 MADB = {
-	["tooltips"] = 1,
 	["characters"] = {
 	},
+	["tooltips"] = 1,
 	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {

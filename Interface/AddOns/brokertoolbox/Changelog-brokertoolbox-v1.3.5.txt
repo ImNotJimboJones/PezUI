@@ -1,0 +1,50 @@
+------------------------------------------------------------------------
+r18 | pathur | 2012-02-25 22:08:38 +0000 (Sat, 25 Feb 2012) | 1 line
+Changed paths:
+   A /tags/v1.3.5 (from /trunk:17)
+
+Tagged as v1.3.5
+------------------------------------------------------------------------
+r17 | pathur | 2012-02-25 22:06:27 +0000 (Sat, 25 Feb 2012) | 3 lines
+Changed paths:
+   M /trunk/core.lua
+   D /trunk/libs/LibDataBroker-1.1/README.textile
+   M /trunk/localization/deDE.lua
+   M /trunk/localization/enUS.lua
+   M /trunk/tools/experience.lua
+   A /trunk/tools/freeBagSlots.lua
+   M /trunk/tools/microbutton.lua
+   M /trunk/tools/recountControl/recountControl.lua
+   M /trunk/tools/reputation.lua
+   M /trunk/tools/token.lua
+   M /trunk/tools.xml
+
+- Experience, Reputation: Set a symbol
+- Token: Added weekly and daily max values of tokens
+- Added Moduls: Recount Control, Free Bag Slots
+------------------------------------------------------------------------
+r16 | pathur | 2012-02-15 18:41:55 +0000 (Wed, 15 Feb 2012) | 6 lines
+Changed paths:
+   M /trunk/BrokerToolBox.toc
+   M /trunk/core.lua
+   M /trunk/localization/deDE.lua
+   M /trunk/localization/enUS.lua
+   M /trunk/tools/equipment.lua
+   M /trunk/tools/microbutton.lua
+   A /trunk/tools/newMail
+   A /trunk/tools/newMail/newMail.lua
+   A /trunk/tools/newMail/new_mail.tga
+   A /trunk/tools/newMail/no_mail.tga
+   A /trunk/tools/recountControl
+   A /trunk/tools/recountControl/icon.tga
+   A /trunk/tools/recountControl/recountControl.lua
+   M /trunk/tools/token.lua
+   M /trunk/tools.xml
+
+-updated for patch 4.3
+-token: added Darkmoon Faire Ticket
+-equipment: bugfix
+-microbutton: added raid finder and reloadUI
+-New Modul: newMail: shows you, if you got a new mail
+-New Modul: recountControl: Simple modul to control Recount (Toggle, ...)
+------------------------------------------------------------------------

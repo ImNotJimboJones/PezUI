@@ -17,31 +17,68 @@ BazookaDB = {
 			["adjustFrames"] = false,
 			["plugins"] = {
 				["data source"] = {
-					["Broker_MicroMenu"] = {
-						["showupdates"] = "",
-						["stripColors"] = false,
-						["showValue"] = false,
-						["pos"] = 6,
-						["bar"] = 2,
+					["YssEquipmentBroker"] = {
+						["enabled"] = false,
+						["pos"] = 24,
 					},
 					["Skada"] = {
-						["pos"] = 5,
+						["area"] = "left",
+						["pos"] = 3,
 					},
-					["Volumizer"] = {
-						["pos"] = 8,
+					["Broker_wDurability"] = {
+						["enabled"] = false,
+						["pos"] = 9,
 					},
-					["Broker_uClock"] = {
-						["stripColors"] = false,
-						["showIcon"] = false,
-						["bar"] = 2,
-						["showValue"] = false,
-						["showupdates"] = "",
+					["Broker_Equipment"] = {
+						["enabled"] = false,
+						["pos"] = 23,
+					},
+					["iMoney"] = {
+						["enabled"] = false,
 						["pos"] = 7,
 					},
-					["LonnyMenu"] = {
+					["Broker_DurabilityInfo"] = {
+						["area"] = "cright",
+						["enabled"] = false,
+						["pos"] = 1,
+					},
+					["Broker_Money"] = {
 						["area"] = "left",
+						["enabled"] = false,
 						["pos"] = 2,
 						["bar"] = 2,
+					},
+					["MailMinder"] = {
+						["stripColors"] = false,
+						["pos"] = 12,
+						["bar"] = 2,
+					},
+					["SimpleCurrency"] = {
+						["enabled"] = false,
+						["pos"] = 19,
+					},
+					["BrokerToolBox - Clock"] = {
+						["showValue"] = false,
+						["showIcon"] = false,
+						["pos"] = 13,
+						["bar"] = 2,
+					},
+					["Broker_Clock"] = {
+						["enabled"] = false,
+						["pos"] = 10,
+					},
+					["Broker_repair"] = {
+						["area"] = "cright",
+						["enabled"] = false,
+						["pos"] = 1,
+					},
+					["Broker_Wallet"] = {
+						["enabled"] = false,
+						["pos"] = 18,
+					},
+					["Broker_DualSpecObject"] = {
+						["area"] = "left",
+						["pos"] = 5,
 					},
 					["YssDrop"] = {
 						["stripColors"] = false,
@@ -50,13 +87,100 @@ BazookaDB = {
 						["alignment"] = "LEFT",
 						["pos"] = 1,
 						["showText"] = false,
+					},
+					["Broker_MailBox"] = {
+						["enabled"] = false,
+						["pos"] = 14,
+					},
+					["Broker_MicroMenu"] = {
+						["stripColors"] = false,
+						["pos"] = 11,
+						["showupdates"] = "",
+						["showValue"] = false,
 						["bar"] = 2,
+					},
+					["SwapSpec"] = {
+						["enabled"] = false,
+						["pos"] = 15,
+					},
+					["BrokerToolBox - Equipments"] = {
+						["enabled"] = false,
+						["showValue"] = false,
+						["pos"] = 10,
+					},
+					["Broker_uClock"] = {
+						["stripColors"] = false,
+						["showIcon"] = false,
+						["enabled"] = false,
+						["bar"] = 2,
+						["showupdates"] = "",
+						["showValue"] = false,
+						["pos"] = 9,
+					},
+					["BrokerToolBox - Token"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["BrokerToolBox - Money"] = {
+						["showValue"] = false,
+						["area"] = "left",
+						["enabled"] = false,
+						["bar"] = 2,
+						["pos"] = 2,
+						["showSuffix"] = false,
+					},
+					["BrokerToolBox - Repair"] = {
+						["bar"] = 2,
+						["pos"] = 3,
+					},
+					["Broker Currency"] = {
+						["enabled"] = false,
+						["pos"] = 13,
+					},
+					["LonnyMenu"] = {
+						["area"] = "left",
+						["pos"] = 2,
+						["bar"] = 2,
+					},
+					["Currencyflow"] = {
+						["pos"] = 2,
+						["bar"] = 2,
+					},
+					["Volumizer"] = {
+						["stripColors"] = false,
+						["enabled"] = false,
+						["showText"] = false,
+						["showValue"] = false,
+						["pos"] = 10,
+						["bar"] = 2,
+					},
+					["MailNotifier"] = {
+						["enabled"] = false,
+						["pos"] = 16,
+					},
+					["LauncherMenu"] = {
+						["enabled"] = false,
+						["pos"] = 7,
+					},
+					["BrokerToolBox - Position"] = {
+						["showValue"] = false,
+						["showIcon"] = false,
+						["enabled"] = false,
+						["pos"] = 13,
 					},
 				},
 				["launcher"] = {
 					["Swatter"] = {
 						["enabled"] = false,
 						["pos"] = 12,
+					},
+					["Informant"] = {
+						["enabled"] = false,
+						["pos"] = 13,
+					},
+					["kgPanels"] = {
+						["enabled"] = false,
+						["pos"] = 7,
 					},
 					["PitBull4"] = {
 						["enabled"] = false,
@@ -66,24 +190,23 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 3,
 					},
-					["Informant"] = {
-						["enabled"] = false,
-						["pos"] = 13,
+					["BrokerRecountFu"] = {
+						["pos"] = 2,
 					},
 					["Grid"] = {
 						["enabled"] = false,
 						["pos"] = 4,
 					},
-					["kgPanels"] = {
+					["AddonMgr"] = {
 						["enabled"] = false,
-						["pos"] = 7,
+						["pos"] = 5,
 					},
 					["Bazooka"] = {
 						["enabled"] = false,
 					},
-					["AddonMgr"] = {
+					["BrokerToolBox"] = {
 						["enabled"] = false,
-						["pos"] = 5,
+						["pos"] = 2,
 					},
 					["Prat"] = {
 						["enabled"] = false,
@@ -122,13 +245,16 @@ BazookaDB = {
 					["bgTexture"] = "Wglass",
 					["y"] = 1.27897047996521,
 					["relPoint"] = "BOTTOMRIGHT",
+					["rightMargin"] = 4,
 					["frameWidth"] = 341,
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMRIGHT",
+					["leftMargin"] = 4,
 					["pluginOpacity"] = 0.75,
 					["frameHeight"] = 26,
 					["attach"] = "none",
+					["rightSpacing"] = 14,
 					["x"] = -0.5021693110466003,
 					["textColor"] = {
 						["a"] = 1,

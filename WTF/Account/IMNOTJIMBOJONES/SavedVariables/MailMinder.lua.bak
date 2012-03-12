@@ -1,0 +1,17 @@
+
+MailMinderDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["global"] = {
+		["characters"] = {
+			["Burning Blade"] = {
+				["Pezzer"] = {
+					["mail_entries"] = {
+					},
+					["class"] = "HUNTER",
+				},
+			},
+		},
+	},
+}

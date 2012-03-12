@@ -1,0 +1,14 @@
+## Interface: 40300
+## Title: BrokerToolBox
+## Notes: Various Broker Tools
+## Author: Sanori/Pathur
+## SavedVariables: BrokerToolBoxDB
+## X-Curse-Packaged-Version: v1.3.5
+## X-Curse-Project-Name: BrokerToolBox
+## X-Curse-Project-ID: brokertoolbox
+## X-Curse-Repository-ID: wow/brokertoolbox/mainline
+
+libs\libs.xml
+core.lua
+localization\localization.xml
+tools.xml

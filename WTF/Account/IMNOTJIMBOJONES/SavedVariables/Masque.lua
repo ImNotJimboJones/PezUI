@@ -58,15 +58,20 @@ MasqueDB = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
 				},
+				["Bison_buff"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
 				["Macaroon_Shortcuts - Top"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
 					["Gloss"] = 1,
 					["Inherit"] = false,
 				},
-				["Bison_buff"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
+				["Blizzard Buffs_Debuffs"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.8,
+					["SkinID"] = "Renaitre: Fade",
 				},
 				["Blizzard Buffs_TempEnchant"] = {
 					["SkinID"] = "Renaitre: Fade",
@@ -116,11 +121,6 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
-				["Blizzard Buffs_Buffs"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
-					["Inherit"] = false,
-				},
 				["Macaroon_Shortcuts"] = {
 					["Colors"] = {
 						["Normal"] = {
@@ -139,6 +139,11 @@ MasqueDB = {
 					["Inherit"] = false,
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
+				},
+				["Blizzard Buffs_Buffs"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+					["Inherit"] = false,
 				},
 				["PitBull4_Target"] = {
 					["Inherit"] = false,

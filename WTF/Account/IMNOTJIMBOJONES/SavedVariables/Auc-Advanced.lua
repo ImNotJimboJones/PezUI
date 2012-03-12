@@ -1,5 +1,6 @@
 
 AucAdvancedConfig = {
+	["users.Burning Blade.Pezzer"] = "Default",
 	["version"] = 1,
 	["profile.Default"] = {
 		["configator.left"] = 322.8235778808594,
@@ -38,7 +39,6 @@ AucAdvancedConfig = {
 		},
 		["configator.top"] = 676.7647705078125,
 	},
-	["users.Burning Blade.Pezzer"] = "Default",
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {

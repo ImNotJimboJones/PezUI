@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r23 | broliant | 2011-12-04 22:43:18 +0000 (Sun, 04 Dec 2011) | 1 line
+Changed paths:
+   A /tags/Release-1.10 (from /trunk:22)
+
+Broker_RecountFu: Tagging as release of version 1.10.
+------------------------------------------------------------------------
+r22 | broliant | 2011-12-04 22:42:31 +0000 (Sun, 04 Dec 2011) | 3 lines
+Changed paths:
+   M /trunk/Broker_RecountFu.toc
+   M /trunk/Localisation/enUS.lua
+
+Broker_RecountFu:
+2011-12-04 ("Winning on Threat:1.10")
+- Updated TOC et-al for patch 4.3.
+------------------------------------------------------------------------

@@ -1,0 +1,33 @@
+## Interface: 40303
+## Revision: $Rev: 137 $
+## Title: Broker_Currencyflow
+## Notes: LDB data source for currency flow
+## Author: Aledara (wowi AT jocosoft DOT com), masi (mfourtytwoi@gmail.com)
+##
+## SavedVariables: Currencyflow_DB
+##
+## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
+## X-Curse-Packaged-Version: v0.4
+## X-Curse-Project-Name: Broker_Currencyflow
+## X-Curse-Project-ID: broker_currencyflow
+## X-Curse-Repository-ID: wow/broker_currencyflow/mainline
+
+# embeds
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibQTip-1.0\LibQTip-1.0.lua
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+#@end-no-lib-strip@
+
+Locales\locales.xml
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Broker_Currencyflow.lua

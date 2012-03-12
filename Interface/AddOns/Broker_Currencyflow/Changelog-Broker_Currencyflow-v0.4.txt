@@ -1,0 +1,13 @@
+tag v0.4
+12775198ff74a964c5407e559b87b3d334e3f1f5
+masiar <masiarfarahani@gmail.com>
+2012-02-29 18:24:18 +0100
+
+Release "v0.4"
+
+
+--------------------
+
+m42i:
+	- Bump Interface version to 4.3.3
+	- Update deDE localization

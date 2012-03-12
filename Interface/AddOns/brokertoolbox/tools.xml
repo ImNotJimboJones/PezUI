@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<!--Add Tools Here-->
+	<Script file="tools\clock.lua"/>
+	<Script file="tools\location.lua"/>
+	<Script file="tools\money.lua"/>
+	<Script file="tools\equipment.lua"/>
+	<Script file="tools\token.lua"/>
+	<Script file="tools\microbutton.lua"/>
+	<Script file="tools\repair.lua"/>
+	<Script file="tools\reputation.lua"/>
+	<Script file="tools\experience.lua"/>
+	<Script file="tools\recountControl\recountControl.lua"/>
+	<Script file="tools\newMail\newMail.lua"/>
+	<Script file="tools\freeBagSlots.lua"/>
+</Ui>
