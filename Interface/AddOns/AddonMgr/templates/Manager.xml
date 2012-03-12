@@ -1,0 +1,262 @@
+<!--
+    This contains the Addon List Frame. This consists of the following
+    elements:
+-->
+<!--
+    TITLE: Settable title for the frame. AddonListFrame,
+    AddonListFrame.title
+-->
+<!--
+    ADDON LIST: Scroll frame intended to hold the list of addons.
+    AddonListFrame,
+    AddonListFrame.scrollFrame,
+    AddonListFrame.scrollFrame.scrollChild
+-->
+<!--
+    DISABLE/ENABLE ALL BUTTONS: Two buttons at the bottom with settable
+    names and functions. AddonListFrame, AddonListFrameButtonFrame,
+    AddonListFrame.buttonFrame.enableAll,
+    AddonListFrame.buttonFrame.disableAll
+-->
+<!--
+    SAVE NAME SELECT SAVE LOAD DELETE: Buttons associated with saving and
+    loading different selections. Settable names and functions
+-->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <!--
+        This is the frame that contains the scroll frame. This has to exist
+        because the scroll frame has a slider which is off to the side. By
+        having this, it becomes easier to handle the combined frame and
+        slider. In addition to this, putting a border on this frame instead of
+        the scroll frame makes the content not overlap the border
+    -->
+    <Frame name="AddonListFrame" virtual="true">
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" text="Addon Manager"
+                    inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="TOP">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="16" y="-16" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <Frame parentKey="searchFrame">
+                <Frames>
+                    <EditBox parentKey="editBox" inherits="AddonManagerEditBox"
+                        letters="80" autoFocus="false">
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString parentKey="title" inherits="GameFontNormal"
+                                    text="Search:">
+                                    <Anchors>
+                                        <Anchor point="RIGHT" RELATIVEPOINT="LEFT">
+                                            <Offset x="-10" />
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Size x="180" y="32" />
+
+                        <Anchors>
+                            <Anchor point="TOP"/>
+                        </Anchors>
+                    </EditBox>
+                </Frames>
+                
+                <Size x="180" y="32" />
+                
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset y="-32" />
+                    </Anchor>
+                </Anchors>
+            </Frame>
+            <Frame parentKey="scrollFrameBorder" >
+                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border"
+                    tile="true">
+                    <EdgeSize>
+                        <AbsValue val="12" />
+                    </EdgeSize>
+                    <TileSize>
+                        <AbsValue val="16" />
+                    </TileSize>
+                    <BackgroundInsets>
+                        <AbsInset left="0" right="0" top="0" bottom="0" />
+                    </BackgroundInsets>
+                </Backdrop>
+
+                <Frames>
+                    <ScrollFrame parentKey="scrollFrame" inherits="AddonManagerScrollFrame"/>
+                </Frames>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset x="16" y="-64" />
+                    </Anchor>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset x="-16" y="97" />
+                    </Anchor>
+                </Anchors>
+            </Frame>
+
+            <Frame parentKey="buttonFrame">
+                <Frames>
+                    <Button parentKey="disableAll" inherits="AddonManagerButton" 
+                        text="Disable Filtered">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" />
+                        </Anchors>
+                    </Button>
+                    <Button parentKey="enableAll" inherits="AddonManagerButton" 
+                        text="Enable Filtered">
+                        <Anchors>
+                            <Anchor point="TOPRIGHT" />
+                        </Anchors>
+                    </Button>
+                </Frames>
+
+                <Size y="21" />
+
+                <Anchors>
+                    <Anchor point="LEFT">
+                        <Offset x="16" />
+                    </Anchor>
+                    <Anchor point="RIGHT">
+                        <Offset x="-16" />
+                    </Anchor>
+                </Anchors>
+                
+                <Scripts>
+                    <OnLoad>
+                        self:SetPoint("TOP", self:GetParent().scrollFrameBorder, "BOTTOM", 0, -16)
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+
+            <Frame parentKey="saveFrame">
+                <Frames>
+                    <EditBox parentKey="editBox" inherits="AddonManagerEditBox"
+                        letters="80" autoFocus="false">
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString parentKey="title" inherits="GameFontNormal"
+                                    text="Save Name:">
+                                    <Anchors>
+                                        <Anchor point="RIGHT" relativePoint="LEFT">
+                                            <Offset x="-10" />
+                                        </Anchor>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+
+                        <Size x="180" y="32" />
+
+                        <Anchors>
+                            <Anchor point="TOP"/>
+                        </Anchors>
+                    </EditBox>
+
+                    <Button parentKey="selectButton" enable="false" toplevel="true">
+                        <Size>
+                            <AbsDimension x="24" y="24"/>
+                        </Size>
+                        
+                        <Scripts>
+                            <OnLoad>
+                                self:SetPoint("LEFT", self:GetParent().editBox, "RIGHT", -12, 0)
+                            </OnLoad>
+                        </Scripts>
+                        
+                        <NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
+                            <Size>
+                                <AbsDimension x="24" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT"/>
+                            </Anchors>
+                        </NormalTexture>
+                        <PushedTexture name="$parentPushedTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down">
+                            <Size>
+                                <AbsDimension x="24" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT"/>
+                            </Anchors>
+                        </PushedTexture>
+                        <HighlightTexture name="$parentHighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
+                            <Size>
+                                <AbsDimension x="24" y="24"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="RIGHT"/>
+                            </Anchors>
+                        </HighlightTexture>
+                    </Button>
+                    <Button parentKey="saveButton" inherits="AddonManagerButton"
+                        text="Save">
+                        <Anchors>
+                            <Anchor point="LEFT">
+                                <Offset x="16" />
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnLoad>
+                                self:SetPoint("TOP", self:GetParent().editBox, "BOTTOM")
+                            </OnLoad>
+                        </Scripts>
+                    </Button>
+                    <Button parentKey="deleteButton" inherits="AddonManagerButton"
+                        text="Delete">
+                        <Anchors>
+                            <Anchor point="CENTER"/>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnLoad>
+                                self:SetPoint("TOP", self:GetParent().editBox, "BOTTOM")
+                            </OnLoad>
+                        </Scripts>
+                    </Button>
+                    <Button parentKey="reloadButton" inherits="AddonManagerButton"
+                        text="RELOAD UI">
+                        <Anchors>
+                            <Anchor point="RIGHT">
+                                <Offset x="-16" />
+                            </Anchor>
+                        </Anchors>
+                        
+                        <Scripts>
+                            <OnLoad>
+                                self:SetPoint("TOP", self:GetParent().editBox, "BOTTOM")
+                            </OnLoad>
+                        </Scripts>
+                    </Button>
+                </Frames>
+
+                <Anchors>
+                    <Anchor point="LEFT" />
+                    <Anchor point="RIGHT" />
+                    <Anchor point="BOTTOM" />
+                </Anchors>
+                
+                <Scripts>
+                    <OnLoad>
+                        self:SetPoint("TOP", self:GetParent().buttonFrame, "BOTTOM")
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+        </Frames>
+    </Frame>
+</Ui>

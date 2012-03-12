@@ -1,0 +1,12 @@
+tag 4.0.3
+3658da0021d9e2762e6957d5f9de366f57ce515e
+Extaliones <extaliones@gmail.com>
+2010-12-18 15:02:31 +0100
+
+* fixing bug for some quest rewards
+
+
+--------------------
+
+Extaliones:
+	- * Fixed bug with some quests rewards

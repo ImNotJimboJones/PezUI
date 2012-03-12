@@ -1,0 +1,23 @@
+## Interface: 40200
+## Title: GridStatusRole
+## Notes: Adds role status to Grid.
+## Author: Greltok
+## Version: 1.3.4
+## Grid Author: Pastamancer & Maia
+## X-Website: http://wowace.com/wiki/Grid
+## X-Category: UnitFrame
+## X-GridStatusModule: GridStatusRole
+## Dependencies: Grid
+## OptionalDeps: LibTalentQuery-1.0, LibGroupTalents-1.0
+## X-Curse-Packaged-Version: 1.3.4
+## X-Curse-Project-Name: GridStatusRole
+## X-Curse-Project-ID: gridstatusrole
+## X-Curse-Repository-ID: wow/gridstatusrole/mainline
+
+#@no-lib-strip@
+libs\LibTalentQuery-1.0\LibTalentQuery-1.0.lua
+libs\LibGroupTalents-1.0\LibGroupTalents-1.0.lua
+#@end-no-lib-strip@
+
+GridStatusRoleLocale-koKR.lua
+GridStatusRole.lua

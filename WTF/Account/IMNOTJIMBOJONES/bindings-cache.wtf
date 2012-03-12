@@ -1,0 +1,28 @@
+BINDINGMODE 0
+bind NUMLOCK TOGGLEAUTORUN
+bind BUTTON4 NONE
+bind SHIFT-1 CLICK BT4Button61:LeftButton
+bind SHIFT-2 CLICK BT4Button62:LeftButton
+bind SHIFT-3 CLICK BT4Button63:LeftButton
+bind SHIFT-4 CLICK BT4Button64:LeftButton
+bind SHIFT-5 CLICK BT4Button65:LeftButton
+bind SHIFT-6 CLICK BT4Button66:LeftButton
+bind SHIFT-UP TOGGLEAUTORUN
+bind SHIFT-7 CLICK BT4Button67:LeftButton
+bind SHIFT-8 CLICK BT4Button68:LeftButton
+bind SHIFT-9 CLICK BT4Button69:LeftButton
+bind SHIFT-0 CLICK BT4Button70:LeftButton
+bind SHIFT-- CLICK BT4Button71:LeftButton
+bind SHIFT-= CLICK BT4Button72:LeftButton
+bind ALT-SHIFT-= CLICK BT4Button60:LeftButton
+bind ALT-SHIFT-- CLICK BT4Button59:LeftButton
+bind ALT-SHIFT-0 CLICK BT4Button58:LeftButton
+bind ALT-SHIFT-9 CLICK BT4Button57:LeftButton
+bind ALT-SHIFT-8 CLICK BT4Button56:LeftButton
+bind ALT-SHIFT-7 CLICK BT4Button55:LeftButton
+bind ALT-SHIFT-6 CLICK BT4Button54:LeftButton
+bind ALT-SHIFT-5 CLICK BT4Button53:LeftButton
+bind ALT-SHIFT-1 CLICK BT4Button49:LeftButton
+bind ALT-SHIFT-2 CLICK BT4Button50:LeftButton
+bind ALT-SHIFT-3 CLICK BT4Button51:LeftButton
+bind ALT-SHIFT-4 CLICK BT4Button52:LeftButton

@@ -1,0 +1,7 @@
+
+MacaroonBoundSavedState = {
+	["macros"] = {
+	},
+	["spells"] = {
+	},
+}

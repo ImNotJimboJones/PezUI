@@ -1,0 +1,16 @@
+tag v1.2.4
+fcfcd8791779fa5d7fbca74e7c872f91a9b6064e
+matthewf <matthewf@curseforge.com>
+2011-02-01 23:26:58 +0000
+
+Fixes issue reported by s-conley
+
+The new functionality should now work correctly.
+
+
+--------------------
+
+matthewf:
+	- Fixes bug reported by s-conley
+	- Removes unrequired call
+	- Removes unrequired field

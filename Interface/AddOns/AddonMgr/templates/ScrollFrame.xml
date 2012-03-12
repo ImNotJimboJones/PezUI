@@ -1,0 +1,216 @@
+<Ui>
+    <!-- Blizzard Interface Data (enGB)/FrameXML/UIPanelTemplates.xml : UIPanelScrollBarTemplateLightBorder -->
+    <Slider name="AddonManagerScrollBar" virtual="true">
+        <Size>
+            <AbsDimension x="16" y="0"/>
+        </Size>
+        <Frames>
+            <Button parentKey="scrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativePoint="TOP"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        local parent = self:GetParent()
+                        parent:SetValue(parent:GetValue() - (parent:GetHeight() / 2))
+                        PlaySound("UChatScrollButton")
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="scrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOP" relativePoint="BOTTOM"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        local parent = self:GetParent()
+                        parent:SetValue(parent:GetValue() + (parent:GetHeight() / 2))
+                        PlaySound("UChatScrollButton")
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Frame parentKey="border">
+                <Size>
+                    <AbsDimension x="24" y="0"/>
+                </Size>
+                <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+                    <EdgeSize>
+                        <AbsValue val="12"/>
+                    </EdgeSize>
+                    <TileSize>
+                        <AbsValue val="16"/>
+                    </TileSize>
+                    <BackgroundInsets>
+                        <AbsInset left="0" right="0" top="5" bottom="5"/>
+                    </BackgroundInsets>
+                </Backdrop>
+                <Scripts>
+                    <!-- 
+                    Converted the anchors to lua OnLoad code, which can reference the keys 
+                    
+                    obj:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy);
+                    http://www.wowwiki.com/API_Region_SetPoint
+                    -->
+                    <OnLoad>
+                        self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b, 0.5)
+                        
+                        self:SetPoint("TOPLEFT", self:GetParent().scrollUpButton, "TOPLEFT", -5, 5)
+                        self:SetPoint("BOTTOMRIGHT", self:GetParent().scrollDownButton, "BOTTOMRIGHT", 5, -3)
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnValueChanged>
+                self:GetParent():SetVerticalScroll(value)
+            </OnValueChanged>
+        </Scripts>
+        <ThumbTexture parentKey="thumbTexture" inherits="UIPanelScrollBarButton" file="Interface\Buttons\UI-ScrollBar-Knob">
+            <Size>
+                <AbsDimension x="16" y="24"/>
+            </Size>
+            <TexCoords left="0.25" right="0.75" top="0.125" bottom="0.875"/>
+        </ThumbTexture>
+    </Slider>
+    
+    <!--
+        This is a generic scroll frame that has been constructed out of
+        the templates from UIPanelTemplates.xml
+        
+        This does not require a name. The scrollChild key of this frame
+        holds the scroll child frame.
+    -->
+    <ScrollFrame name="AddonManagerScrollFrame" virtual="true">
+        <!--
+            This initial content combines the Slider from FauxScrollPane with
+            the logic from UIPanelScrollFrameTemplate
+        -->
+        <Frames>
+            <!--
+                This must be called $parentScrollBar because ScrollFrame_OnLoad
+                expects it
+            -->
+            <Slider parentKey="scrollBar" inherits="AddonManagerScrollBar">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="6" y="-16" />
+                        </Offset>
+                    </Anchor>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="6" y="16" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Slider>
+        </Frames>
+        
+        <Scripts>
+            <OnLoad>
+                local scrollBar = self.scrollBar
+                local scrollUpButton, scrollDownButton = 
+                    scrollBar.scrollUpButton, scrollBar.scrollDownButton
+                
+                scrollDownButton:Disable()
+                scrollUpButton:Disable()
+                
+                scrollBar:SetMinMaxValues(0, 0)
+                scrollBar:SetValue(0)
+                self.offset = 0
+                
+                scrollDownButton:Disable()
+                scrollUpButton:Disable()
+            </OnLoad>
+            <!-- This cannot have a track and cannot be hidden atm, otherwise duplicate code -->
+            <OnScrollRangeChanged>
+                local scrollBar = self.scrollBar
+                local scrollUpButton, scrollDownButton, thumbTexture = 
+                    scrollBar.scrollUpButton, scrollBar.scrollDownButton, scrollBar.thumbTexture
+                
+                if ( not yrange ) then
+                    yrange = self:GetVerticalScrollRange()
+                end
+                local value = scrollBar:GetValue()
+                if ( value > yrange ) then
+                    value = yrange
+                end
+                
+                scrollBar:SetMinMaxValues(0, yrange)
+                scrollBar:SetValue(value)
+                
+                if ( floor(yrange) == 0 ) then
+                    scrollDownButton:Disable()
+                    scrollUpButton:Disable()
+                    
+                    thumbTexture:Hide()
+                else
+                    thumbTexture:Show()
+                    
+                    -- The 0.005 is to account for precision errors
+                    if ( yrange - value > 0.005 ) then
+                        scrollDownButton:Enable()
+                    else
+                        scrollDownButton:Disable()
+                    end
+                end
+            </OnScrollRangeChanged>
+            <!--
+                The code to disable the ScrollDownButton is pretty hacked, but
+                it works
+            -->
+            <OnVerticalScroll>
+                local scrollBar = self.scrollBar
+                local scrollUpButton, scrollDownButton = 
+                    scrollBar.scrollUpButton, scrollBar.scrollDownButton
+                
+                scrollBar:SetValue(offset)
+                
+                local min, max = scrollBar:GetMinMaxValues()
+                
+                if ( offset == 0 ) then
+                    scrollUpButton:Disable()
+                else
+                    scrollUpButton:Enable()
+                end
+                
+                -- The 0.005 is to account for precision errors
+                if ((max - scrollBar:GetValue()) > 0.05) then
+                    scrollDownButton:Enable();
+                else
+                    scrollDownButton:Disable();
+                end
+            </OnVerticalScroll>
+            <OnMouseWheel>
+                local scrollBar = self.scrollBar
+                
+                if ( delta > 0 ) then
+                    scrollBar:SetValue(scrollBar:GetValue() - (scrollBar:GetHeight() / 2));
+                else
+                    scrollBar:SetValue(scrollBar:GetValue() + (scrollBar:GetHeight() / 2));
+                end
+            </OnMouseWheel>
+        </Scripts>
+        
+        <!--
+            This section is not copied. The scroll child contains the addon
+            checkboxes which must be created programmatically. This must be
+            initialised by hand.
+        -->
+        <ScrollChild>
+            <Frame parentKey="scrollChild">
+                <Size>
+                    <AbsDimension x="1" y="1" />
+                </Size>
+            </Frame>
+        </ScrollChild>
+        <Anchors>
+            <Anchor point="TOPLEFT">
+                <Offset x="8" y="-5" />
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+                <Offset x="-28" y="5" />
+            </Anchor>
+        </Anchors>
+    </ScrollFrame>
+</Ui>

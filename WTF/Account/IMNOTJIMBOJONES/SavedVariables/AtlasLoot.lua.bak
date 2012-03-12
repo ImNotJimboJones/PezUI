@@ -1,0 +1,21 @@
+
+AtlasLootDB = {
+	["namespaces"] = {
+		["WishList"] = {
+		},
+		["AtlasLootPanel"] = {
+		},
+		["DefaultFrame"] = {
+		},
+		["Filter"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+			["AtlasType"] = "Preview",
+		},
+	},
+}

@@ -1,0 +1,23 @@
+
+RuneWatchDB = {
+	["profileKeys"] = {
+		["Frostblight - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["widgets"] = {
+				["Diseases"] = {
+					["enabled"] = true,
+				},
+			},
+			["minimap"] = {
+				["hide"] = false,
+			},
+			["frame"] = {
+				["runes"] = {
+					["order"] = "bfu",
+				},
+			},
+		},
+	},
+}

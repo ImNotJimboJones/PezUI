@@ -1,0 +1,23 @@
+MACRO 3 "Pet" Ability_Hunter_BeastCall
+/run g={"their","his","her"}; x=UnitSex("player");i=random(GetNumCompanions("critter"));id,name=GetCompanionInfo("critter",i);SendChatMessage("gasps as "..name .." hops out of "..g[x] .." pocket!","emote");CallCompanion("critter",i);
+END
+MACRO 1 "Strip" Spell_Misc_EmotionHappy
+/run function f(x) PickupInventoryItem(x) PutItemInBackpack() end;
+/run f(1) f(3) f(4) f(5) f(6) f(7) f(8) f(9) f(10) f(15) f(19);
+/dance
+END
+MACRO 5 "Trinket 1" INV_Misc_QuestionMark
+/use 13
+END
+MACRO 6 "Trinket 2" INV_Misc_QuestionMark
+/use 14
+END
+MACRO 4 "Trinkets" Spell_Shadow_SoulGem
+/run UIErrorsFrame:Hide();
+/console Sound_EnableSFX 0
+/use 13
+/use 14
+/console Sound_EnableSFX 1
+/run UIErrorsFrame:Clear();
+/run UIErrorsFrame:Show();
+END

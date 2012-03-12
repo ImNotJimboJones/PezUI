@@ -1,0 +1,72 @@
+
+MSBTProfiles_SavedVars = {
+	["profiles"] = {
+		["Default"] = {
+			["critFontAlpha"] = 60,
+			["critFontName"] = "Friz Quadrata TT",
+			["creationVersion"] = "5.5.91",
+			["critFontSize"] = 14,
+			["events"] = {
+				["NOTIFICATION_PET_COOLDOWN"] = {
+					["disabled"] = true,
+				},
+				["NOTIFICATION_COOLDOWN"] = {
+					["disabled"] = true,
+				},
+				["NOTIFICATION_MONEY"] = {
+					["disabled"] = true,
+				},
+				["NOTIFICATION_LOOT"] = {
+					["disabled"] = true,
+				},
+			},
+			["triggers"] = {
+				["MSBT_TRIGGER_LOW_MANA"] = {
+					["scrollArea"] = "Custom1",
+				},
+				["MSBT_TRIGGER_LOW_HEALTH"] = {
+					["iconSkill"] = "3273",
+					["scrollArea"] = "Custom1",
+				},
+				["MSBT_TRIGGER_KILL_SHOT"] = {
+					["soundFile"] = "Bonk 1",
+					["iconSkill"] = "53351",
+					["scrollArea"] = "Custom1",
+				},
+			},
+			["scrollAreas"] = {
+				["Notification"] = {
+					["offsetY"] = 133,
+					["disabled"] = true,
+				},
+				["Custom1"] = {
+					["critFontAlpha"] = 80,
+					["critFontSize"] = 18,
+					["scrollHeight"] = 140,
+					["offsetX"] = -3,
+					["normalFontAlpha"] = 60,
+					["offsetY"] = -90,
+					["name"] = "Custom Notification",
+					["normalFontSize"] = 14,
+				},
+				["Static"] = {
+					["critFontSize"] = 18,
+					["critFontAlpha"] = 80,
+					["offsetX"] = 2,
+					["normalFontAlpha"] = 60,
+					["offsetY"] = 97,
+					["normalFontSize"] = 14,
+				},
+			},
+			["normalFontName"] = "Friz Quadrata TT",
+			["normalFontAlpha"] = 40,
+			["normalFontSize"] = 10,
+		},
+	},
+}
+MSBT_SavedMedia = {
+	["fonts"] = {
+	},
+	["sounds"] = {
+	},
+}

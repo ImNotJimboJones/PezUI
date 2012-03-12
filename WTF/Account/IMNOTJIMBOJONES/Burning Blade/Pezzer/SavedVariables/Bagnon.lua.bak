@@ -1,0 +1,9 @@
+
+BagnonFrameSettings = {
+	["frames"] = {
+		["inventory"] = {
+			["y"] = 150.0000152587891,
+		},
+	},
+	["version"] = "2.14.0",
+}

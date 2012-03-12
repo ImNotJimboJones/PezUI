@@ -1,0 +1,35 @@
+MrDressup 1.0.6
+by Animal
+----------------------
+MrDressup is an addon I wrote for a very specific use for myself. All it does is add checkboxes directly to the character frame for easy access to change the display of your cloak and helm.
+
+Although there are many great addons that allow you to automate the display of cloak and helm based on specific gear sets, I still wanted to be able to quickly alter the options without having to open the Blizzard options.
+
+Use "/mrdressup show" or "/mrdressup hide" chat commands to show or hide the checkboxes.
+Use "/mrdressup left" or "/mrdressup right" chat commands to move the checkboxes to the left or right side of the character frame.
+
+This addon should work for all locales.
+---------------------
+	
+----Version History----
+Version 1.0.6
+ - Updated TOC for WoW version 4.2
+
+Version 1.0.5
+ - Corrected issue on first log in of Checkboxes not showing the actual setting.
+ - Modified the code to avoid the weird 'fast clicking' bug that plagues the default Blizzard options Checkboxes.
+
+Version 1.0.4
+ - Updated for WoW version 4.0.1.
+
+Version 1.0.3
+ - Fixed the hit location of the checkboxes when set to 'right' to not overlap ring and boot equipment slots.
+
+Version 1.0.2
+ - Added commands "left" and "right" to move checkboxes to left or right side of character frame to avoid overlapping with other addons (e.g. GearScore)
+
+Version 1.0.1
+ - Fixed stupid little bug. Don't code late at night.
+
+Version 1.0 beta
+ - First release.

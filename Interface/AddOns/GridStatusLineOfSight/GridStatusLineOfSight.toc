@@ -1,0 +1,19 @@
+## Interface: 40300
+## Title: GridStatusLineOfSight
+## Notes: Adds "line of sight" status to Grid (after the error occurs).
+## Author: Pachelbel
+## Version: 1.4
+## Grid Author: Pastamancer & Maia
+## X-ReleaseDate: 2011-11-29T14:08:28Z
+## X-Website: http://wowace.com/wiki/GridStatusLineOfSight
+## X-Category: UnitFrame
+## X-AceForum: 11500
+## X-GridStatusModule: GridStatusLineOfSight
+## Dependencies: Grid
+## X-Curse-Packaged-Version: 1.4
+## X-Curse-Project-Name: GridStatusLineOfSight
+## X-Curse-Project-ID: project-14129
+## X-Curse-Repository-ID: wow/project-14129/mainline
+
+GridStatusLineOfSightLocale-enUS.lua
+GridStatusLineOfSight.lua

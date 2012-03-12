@@ -1,0 +1,19 @@
+﻿## Interface: 40300
+## Title: GridStatusDirectionArrows
+## Notes: Shows direction arrows to other players
+## Dependencies: Grid
+## OptionalDeps: LibMapData-1.0
+## Author: Slaren
+## Version: v1.1d
+## Grid Author: Pastamancer & Maia
+## X-GridStatusModule: GridStatusDirectionArrows
+## X-Curse-Packaged-Version: v1.1d
+## X-Curse-Project-Name: GridStatusDirectionArrows
+## X-Curse-Project-ID: gridstatusdirectionarrows
+## X-Curse-Repository-ID: wow/gridstatusdirectionarrows/mainline
+
+#@no-lib-strip@
+libs\LibMapData-1.0\library.lua
+#@end-no-lib-strip@
+
+GridStatusDirectionArrows.lua

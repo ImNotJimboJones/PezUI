@@ -1,0 +1,42 @@
+------------------------------------------------------------------------
+r43 | papsol | 2011-12-03 15:11:46 +0000 (Sat, 03 Dec 2011) | 1 line
+Changed paths:
+   A /tags/Release 1.2.9 (from /trunk:42)
+
+Tagging as Release 1.2.9
+------------------------------------------------------------------------
+r42 | papsol | 2011-12-03 15:10:13 +0000 (Sat, 03 Dec 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanCurrTrack.lua
+   M /trunk/TitanCurrTrack.toc
+
+v1.2.9
+
+added glamour alert threshold for Honor Points. This feature will only work in English clients and will prevent glamour alerts from firing for Honor Gains of less than 10 points. This should help with the addon lag generated on PvP map victories.
+------------------------------------------------------------------------
+r40 | papsol | 2011-12-01 00:16:42 +0000 (Thu, 01 Dec 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanCurrTrack.lua
+   M /trunk/TitanCurrTrack.toc
+
+v1.2.8
+
+Cosmetic changes with "Reset Character Data" function.
+------------------------------------------------------------------------
+r38 | papsol | 2011-11-30 23:49:05 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanCurrTrack.lua
+   M /trunk/TitanCurrTrack.toc
+
+v1.2.7
+
+fixed bug where tooltip wasn't being written in the latest version of Titan Panel.
+------------------------------------------------------------------------
+r35 | papsol | 2011-11-30 21:12:17 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanCurrTrack.toc
+
+v1.2.6
+
+TOC update
+------------------------------------------------------------------------

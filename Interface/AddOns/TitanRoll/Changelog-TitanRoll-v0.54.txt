@@ -1,0 +1,15 @@
+------------------------------------------------------------------------
+r11 | slartibartfast | 2011-06-29 20:44:47 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   A /tags/v0.54 (from /trunk:10)
+
+updated for patch 4.2
+------------------------------------------------------------------------
+r10 | slartibartfast | 2011-06-29 20:44:27 +0000 (Wed, 29 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/TitanRoll.toc
+   M /trunk/localization.lua
+   M /trunk/readme.txt
+
+updated for patch 4.2
+------------------------------------------------------------------------

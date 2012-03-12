@@ -1,0 +1,18 @@
+# Files #
+#########
+.DS_Store
+*.app
+*.html
+*.rtf
+*.mfil
+*.tfil
+
+# Folders #
+###########
+Cache/*
+Data/*
+Errors/*
+Logs/*
+Movies/*
+PTR*
+Updates/*

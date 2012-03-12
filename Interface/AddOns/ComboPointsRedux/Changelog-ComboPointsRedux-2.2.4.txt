@@ -1,0 +1,29 @@
+------------------------------------------------------------------------
+r247 | starinnia | 2012-01-24 07:35:56 +0000 (Tue, 24 Jan 2012) | 1 line
+Changed paths:
+   A /tags/2.2.4 (from /trunk:246)
+
+Tagging as release 2.2.4
+------------------------------------------------------------------------
+r246 | starinnia | 2012-01-20 17:08:27 +0000 (Fri, 20 Jan 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+-update default colors for Bone Shield (1-5 is yellow, 6 is red)
+-Death Knights, check your color options and graphics positions, going from 4-6 stack has moved stuff!
+------------------------------------------------------------------------
+r245 | starinnia | 2012-01-20 08:32:53 +0000 (Fri, 20 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/Modules/BoneShield.lua
+
+Bone Shield has 6 charges now
+------------------------------------------------------------------------
+r244 | starinnia | 2011-12-09 22:09:34 +0000 (Fri, 09 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/ComboPointsRedux.toc
+   A /trunk/Locales/ptBR.lua
+   M /trunk/Options/ComboPointsRedux_Options.toc
+   A /trunk/Options/Locales/ptBR.lua
+
+-add ptBR support, although translations are needed on the wowace app
+------------------------------------------------------------------------

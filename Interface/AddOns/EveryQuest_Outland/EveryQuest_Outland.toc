@@ -1,0 +1,14 @@
+## Interface: 40000
+## Title: Every|cffffffffQuest|r2 Outland Quests
+## Notes: Contains a list of quests for Outland
+## Author: kandarz
+## X-Email: kandarz@gmail.com
+## Version: r217-release
+## LoadOnDemand: 1
+## X-Category: Quest
+## X-Curse-Packaged-Version: r217-release
+## X-Curse-Project-Name: EveryQuest
+## X-Curse-Project-ID: everyquest
+## X-Curse-Repository-ID: wow/everyquest/mainline
+
+Outland.lua

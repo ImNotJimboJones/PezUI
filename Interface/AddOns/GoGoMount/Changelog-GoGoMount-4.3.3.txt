@@ -1,0 +1,35 @@
+------------------------------------------------------------------------
+r333 | tiker | 2012-01-31 13:21:25 +0000 (Tue, 31 Jan 2012) | 1 line
+Changed paths:
+   A /tags/4.3.3 (from /trunk:332)
+
+Tagging as 4.3.3
+------------------------------------------------------------------------
+r332 | tiker | 2012-01-31 13:20:52 +0000 (Tue, 31 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/GoGoMount.toc
+   M /trunk/GoGoMountData.lua
+
+- removed testing flag for release
+------------------------------------------------------------------------
+r331 | tiker | 2012-01-24 21:28:05 +0000 (Tue, 24 Jan 2012) | 4 lines
+Changed paths:
+   M /trunk/GoGoMount.lua
+   M /trunk/GoGoMountData.lua
+
+- New feature - Zone specific exclusions - /gogo options - to specify exclusions
+- Added support for Feldrake as a slow ground mount and scaling
+- Debug lines added for Mists of Pandaria reporting
+- small speed optimizations for mounting with filtering unusable mounts
+------------------------------------------------------------------------
+r330 | tiker | 2011-12-31 15:30:52 +0000 (Sat, 31 Dec 2011) | 5 lines
+Changed paths:
+   M /trunk/GoGoMount.lua
+   M /trunk/GoGoMount.toc
+
+- Added zone ID for Well of Eternity
+- Added zone ID for Hour of Twilight
+- Added zone ID for End Time
+- Added zone ID for Darkmoon Island
+- Added zone ID for Dragon Soul
+------------------------------------------------------------------------

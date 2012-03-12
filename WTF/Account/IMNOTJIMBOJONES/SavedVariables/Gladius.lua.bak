@@ -1,0 +1,10 @@
+
+Gladius2DB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

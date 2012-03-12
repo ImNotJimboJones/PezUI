@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <CheckButton name="AddonListEntry" virtual="true">
+        <Size>
+            <AbsDimension x="26" y="26"/>
+        </Size>
+        
+        <HitRectInsets>
+            <AbsInset left="0" right="-100" top="0" bottom="0"/>
+        </HitRectInsets>
+        
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" inherits="GameFontNormal" text="Addon List Entry">
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="0" y="1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+        
+        <Scripts>
+            <OnClick>
+                Template_DefaultCheckButtonFunction(self);
+                
+                self:OnClick();
+            </OnClick>
+            <OnEnter>
+                self:ShowTooltip();
+            </OnEnter>
+            <OnLeave>
+                Template_HideTooltip();
+            </OnLeave>
+        </Scripts>
+    </CheckButton>
+</Ui>

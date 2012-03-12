@@ -1,0 +1,104 @@
+
+    <!--
+        This is used to display a title with an expandable list of items. The
+        title comes with an expand / collapse button and a select / deselect
+        all button. These buttons can have behaviors assigned to them.
+    -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Frame name="AddonListGroup" virtual="true">
+        <Size x="200" y="26" />
+
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" inherits="GameFontNormal"
+                    text="Addon Group" justifyH="LEFT" justifyV="CENTER">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="43" y="-7"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <CheckButton parentKey="expander" checked="false">
+                <Size x="16" y="16" />
+
+                <!--
+                    This expands the area that can be clicked on in order to select
+                    this button to the right by 100 pixels (i.e. covers the label)
+                -->
+                <HitRectInsets>
+                    <AbsInset left="0" right="-100" top="0" bottom="0" />
+                </HitRectInsets>
+
+                <!-- In future this needs to update the pushed texture as the state changes -->
+                <NormalTexture file="Interface\Buttons\UI-PlusButton-Up" />
+                <PushedTexture file="Interface\Buttons\UI-PlusButton-Down" />
+                <HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight"
+                    alphaMode="ADD" />
+                <CheckedTexture file="Interface\Buttons\UI-MinusButton-Up" />
+                <DisabledCheckedTexture file="Interface\Buttons\UI-PlusButton-Disabled" />
+
+                <Scripts>
+                    <OnLoad>
+                        self:SetPoint("RIGHT", self:GetParent().title, "LEFT")
+                    </OnLoad>
+                    <OnClick>
+                        Template_DefaultCheckButtonFunction(self);
+                        
+                        if self:GetChecked()
+                        then
+                            self:GetParent():DoExpand();
+                        else
+                            self:GetParent():DoCollapse();
+                        end
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+            
+            <CheckButton parentKey="selector">
+                <Size x="26" y="26" />
+
+                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up" />
+                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down" />
+                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight"
+                    alphaMode="ADD" />
+                <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check" />
+                <DisabledCheckedTexture
+                    file="Interface\Buttons\UI-CheckBox-Check-Disabled" />
+
+                <Scripts>
+                    <OnLoad>
+                        self:SetPoint("RIGHT", self:GetParent().expander, "LEFT")
+                    </OnLoad>
+                    <OnClick>
+                        Template_DefaultCheckButtonFunction(self);
+                        
+                        if self:GetChecked()
+                        then
+                            self:GetParent():DoCheck();
+                        else
+                            self:GetParent():DoUncheck();
+                        end
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+            
+            <Frame parentKey="content" hidden="true">
+                <Size x="200" />
+                
+                <Scripts>
+                    <OnLoad>
+                        self:SetPoint("TOP", self:GetParent().expander, "BOTTOM", 0, -4)
+                        self:SetPoint("LEFT", self:GetParent().expander, "LEFT", -5, 0)
+                        self:SetPoint("RIGHT")
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+        </Frames>
+    </Frame>
+</Ui>

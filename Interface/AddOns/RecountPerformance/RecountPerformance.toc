@@ -1,0 +1,10 @@
+## Interface: 40000
+## Title: RecountPerformance
+## Author: Epy
+## Notes: Module de performance Heal et Dps pour Recount
+## Dependencies: Recount
+## OptionalDeps: RecountGuessedAbsorbs
+embeds.xml
+locales\Core-enUS.lua
+locales\Core-frFR.lua
+Core.lua

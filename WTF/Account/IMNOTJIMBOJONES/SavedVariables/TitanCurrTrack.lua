@@ -1,0 +1,21 @@
+
+TitanCurrTrackData = {
+	["Burning Blade-Lasjdlfjsdf"] = "",
+	["Burning Blade-Lkjasdlkfjsd"] = "",
+	["Anasterian (US)-Pezzer"] = " |TInterface\\Icons\\pvecurrency-justice:SIZE|t2677  |TInterface\\Icons\\Ability_Paladin_ArtofWar:SIZE|t26  |TInterface\\Icons\\achievement_profession_chefhat:SIZE|t15  |TInterface\\Icons\\INV_Misc_Ribbon_01:SIZE|t2  |TInterface\\Icons\\PVPCurrency-Honor-Horde:SIZE|t2727  |TInterface\\Icons\\achievement_zone_tolbarad:SIZE|t8 ",
+	["Ysondre-Zelyna"] = " |TInterface\\Icons\\PVPCurrency-Honor-Horde:20|t217 ",
+	["Burning Blade-X"] = " |TInterface\\Icons\\pvecurrency-justice:SIZE|t3365  |TInterface\\Icons\\pvecurrency-valor:SIZE|t650  |TInterface\\Icons\\achievement_profession_chefhat:SIZE|t7  |TInterface\\Icons\\INV_Misc_Ribbon_01:SIZE|t2  |TInterface\\Icons\\PVPCurrency-Conquest-Horde:SIZE|t70  |TInterface\\Icons\\PVPCurrency-Honor-Horde:SIZE|t2408  |TInterface\\Icons\\achievement_zone_tolbarad:SIZE|t1 ",
+	["Burning Blade-Materials"] = "",
+	["Burning Blade-Bånoman"] = "",
+	["Burning Blade-Clothstorage"] = "",
+	["Burning Blade-Bobbayom"] = "",
+	["Burning Blade-Temptoon"] = "",
+	["Burning Blade-Frostblight"] = " |TInterface\\Icons\\pvecurrency-justice:SIZE|t1865  |TInterface\\Icons\\pvecurrency-valor:SIZE|t100  |TInterface\\Icons\\inv_misc_markoftheworldtree:SIZE|t23  |TInterface\\Icons\\PVPCurrency-Conquest-Horde:SIZE|t150  |TInterface\\Icons\\PVPCurrency-Honor-Horde:SIZE|t204  |TInterface\\Icons\\achievement_zone_tolbarad:SIZE|t33 ",
+	["Burning Blade-Bañoman"] = "",
+	["Ysondre-Bobbayom"] = " |TInterface\\Icons\\PVPCurrency-Honor-Horde:20|t4 ",
+	["Burning Blade-Lélu"] = " |TInterface\\Icons\\pvecurrency-justice:SIZE|t39  |TInterface\\Icons\\PVPCurrency-Honor-Horde:SIZE|t6 ",
+	["Burning Blade-Pezzer"] = " |TInterface\\Icons\\pvecurrency-justice:SIZE|t693  |TInterface\\Icons\\spell_shadow_sealofkings:SIZE|t3  |TInterface\\Icons\\pvecurrency-valor:SIZE|t4650  |TInterface\\Icons\\Ability_Paladin_ArtofWar:SIZE|t26  |TInterface\\Icons\\achievement_profession_chefhat:SIZE|t15  |TInterface\\Icons\\INV_Misc_Ribbon_01:SIZE|t2  |TInterface\\Icons\\inv_misc_ticket_darkmoon_01:SIZE|t25  |TInterface\\Icons\\inv_misc_markoftheworldtree:SIZE|t1  |TInterface\\Icons\\PVPCurrency-Conquest-Horde:SIZE|t800  |TInterface\\Icons\\PVPCurrency-Honor-Horde:SIZE|t362  |TInterface\\Icons\\achievement_zone_tolbarad:SIZE|t8 ",
+	["Burning Blade-Xëthra"] = "",
+	["Burning Blade-Itemstorage"] = "",
+	["Burning Blade-Broker"] = "",
+}

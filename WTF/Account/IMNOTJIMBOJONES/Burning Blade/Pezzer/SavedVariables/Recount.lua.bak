@@ -1,0 +1,171 @@
+
+RecountPerCharDB = {
+	["version"] = "1.3",
+	["combatants"] = {
+		["Dog <Pezzer>"] = {
+			["GUID"] = "0xF1409CAED4000D35",
+			["LastEventHealth"] = {
+				"23598 (100%)", -- [1]
+				"23598 (100%)", -- [2]
+				"23598 (100%)", -- [3]
+				"23598 (100%)", -- [4]
+				"23598 (100%)", -- [5]
+				"23598 (100%)", -- [6]
+				"23598 (100%)", -- [7]
+			},
+			["LastEventType"] = {
+				"HEAL", -- [1]
+				"HEAL", -- [2]
+				"HEAL", -- [3]
+				"HEAL", -- [4]
+				"HEAL", -- [5]
+				"HEAL", -- [6]
+				"HEAL", -- [7]
+			},
+			["enClass"] = "PET",
+			["unit"] = "Dog",
+			["level"] = 1,
+			["LastFightIn"] = 0,
+			["LastEventNum"] = {
+				5.246207305703873, -- [1]
+				5.250444952962115, -- [2]
+				5.246207305703873, -- [3]
+				5.250444952962115, -- [4]
+				5.250444952962115, -- [5]
+				5.250444952962115, -- [6]
+				5.250444952962115, -- [7]
+			},
+			["type"] = "Pet",
+			["Owner"] = "Pezzer",
+			["NextEventNum"] = 8,
+			["LastEventHealthNum"] = {
+				100, -- [1]
+				100, -- [2]
+				100, -- [3]
+				100, -- [4]
+				100, -- [5]
+				100, -- [6]
+				100, -- [7]
+			},
+			["LastEvents"] = {
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1238 (1238 overheal)", -- [1]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [2]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1238 (1238 overheal)", -- [3]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [4]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [5]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [6]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [7]
+			},
+			["Name"] = "Dog",
+			["LastEventIncoming"] = {
+				true, -- [1]
+				true, -- [2]
+				true, -- [3]
+				true, -- [4]
+				true, -- [5]
+				true, -- [6]
+				true, -- [7]
+			},
+			["LastEventTimes"] = {
+				10725.386, -- [1]
+				10727.384, -- [2]
+				10729.389, -- [3]
+				10731.392, -- [4]
+				10733.368, -- [5]
+				10735.419, -- [6]
+				10737.371, -- [7]
+			},
+			["Fights"] = {
+			},
+			["UnitLockout"] = 1291154810,
+			["LastActive"] = 1291154822,
+		},
+		["Pezzer"] = {
+			["GUID"] = "0x0280000003A36C77",
+			["LastEventHealth"] = {
+				"29264 (100%)", -- [1]
+				"29264 (100%)", -- [2]
+				"29264 (100%)", -- [3]
+				"29264 (100%)", -- [4]
+				"29264 (100%)", -- [5]
+				"29264 (100%)", -- [6]
+				"29264 (100%)", -- [7]
+			},
+			["LastEventType"] = {
+				"HEAL", -- [1]
+				"HEAL", -- [2]
+				"HEAL", -- [3]
+				"HEAL", -- [4]
+				"HEAL", -- [5]
+				"HEAL", -- [6]
+				"HEAL", -- [7]
+			},
+			["enClass"] = "HUNTER",
+			["unit"] = "Pezzer",
+			["level"] = 80,
+			["LastFightIn"] = 0,
+			["type"] = "Self",
+			["GuardianReverseGUIDs"] = {
+				["Spirit Beast"] = {
+					["LatestGuardian"] = 1,
+					["GUIDs"] = {
+						"0xF140920D86000E0D", -- [1]
+						[0] = "0xF140920D86000E03",
+					},
+				},
+			},
+			["Owner"] = false,
+			["Pet"] = {
+				"Dog <Pezzer>", -- [1]
+				"Spirit Beast <Pezzer>", -- [2]
+			},
+			["NextEventNum"] = 8,
+			["LastEventHealthNum"] = {
+				100, -- [1]
+				100, -- [2]
+				100, -- [3]
+				100, -- [4]
+				100, -- [5]
+				100, -- [6]
+				100, -- [7]
+			},
+			["LastEvents"] = {
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1238 (1238 overheal)", -- [1]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [2]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1238 (1238 overheal)", -- [3]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [4]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [5]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [6]
+				"Pezzer Mend Pet Dog <Pezzer> Tick +1239 (1239 overheal)", -- [7]
+			},
+			["Name"] = "Pezzer",
+			["LastEventIncoming"] = {
+				false, -- [1]
+				false, -- [2]
+				false, -- [3]
+				false, -- [4]
+				false, -- [5]
+				false, -- [6]
+				false, -- [7]
+			},
+			["LastEventTimes"] = {
+				10725.386, -- [1]
+				10727.383, -- [2]
+				10729.389, -- [3]
+				10731.392, -- [4]
+				10733.368, -- [5]
+				10735.418, -- [6]
+				10737.371, -- [7]
+			},
+			["Fights"] = {
+			},
+			["UnitLockout"] = 1291154810,
+			["LastActive"] = 1291154822,
+		},
+	},
+	["FightNum"] = 0,
+	["CombatTimes"] = {
+	},
+	["FoughtWho"] = {
+	},
+}

@@ -1,0 +1,103 @@
+MACRO 16777226 "Binding Heal " "INV_MISC_QUESTIONMARK"
+#show Binding Heal
+#showtooltip Binding Heal
+/cast Inner Focus
+/cast [target=mouseover, exists, help, nodead] Binding Heal
+END
+MACRO 16777218 "Bubble" "INV_Misc_QuestionMark"
+#show Power Word: Shield
+#showtooltip Power Word: Shield
+/cast [@mouseover, exists, help, nodead] Power Word: Shield
+END
+MACRO 16777229 "Cure Disease " "INV_MISC_QUESTIONMARK"
+#show Cure Disease
+#showtooltip Cure Disease
+/cast [target=mouseover, exists, help, nodead] Cure Disease
+/cast [help] Cure Disease
+END
+MACRO 16777228 "Dispel Magic " "INV_MISC_QUESTIONMARK"
+#show Dispel Magic
+#showtooltip Dispel Magic
+/cast [target=mouseover, exists, help, nodead] Dispel Magic
+/cast [help] Dispel Magic
+END
+MACRO 16777233 "Fear Ward " "INV_MISC_QUESTIONMARK"
+#show Fear Ward
+#showtooltip Fear Ward
+/cast [target=mouseover, exists, help, nodead] Fear Ward
+END
+MACRO 16777221 "Flash Heal " "INV_MISC_QUESTIONMARK"
+#show Flash Heal
+#showtooltip Flash Heal
+/cast [target=mouseover, exists, help, nodead] Inner Focus
+/cast [target=mouseover, exists, help, nodead] Flash Heal
+END
+MACRO 16777225 "Greater Heal " "INV_MISC_QUESTIONMARK"
+#show Greater Heal
+#showtooltip Greater Heal
+/cast [target=mouseover, exists, help, nodead] Inner Focus
+/cast [target=mouseover, exists, help, nodead] Greater Heal
+END
+MACRO 16777219 "Heal" "INV_Misc_QuestionMark"
+#show Heal
+#showtooltip Heal
+/cast [target=mouseover, exists, help, nodead] Heal
+END
+MACRO 16777235 "Holy Fire " "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/cast [@mouseovertarget, harm] [@mouseover, harm] [@targettarget, harm] [harm] Holy Fire
+/cast Holy Fire
+END
+MACRO 16777224 "Levitate " "INV_Misc_QuestionMark"
+#show
+#showtooltip
+/dismount
+/cast [target=mouseover, exists, help, nodead] Levitate
+/cast Levitate
+END
+MACRO 16777234 "Pain Suppress" "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/cast [target=mouseover, exists, help, nodead] Pain Suppression
+/cast Pain Suppression
+END
+MACRO 16777232 "Penance " "INV_MISC_QUESTIONMARK"
+#show Penance
+#showtooltip Penance
+/cast [target=mouseover, exists, help, nodead] Penance
+/cast [exists] Penance
+END
+MACRO 16777227 "PoH" "INV_MISC_QUESTIONMARK"
+#show Prayer of Healing
+#showtooltip Prayer of Healing
+/cast [target=mouseover, exists, help, nodead] Inner Focus
+/cast [target=mouseover, exists, help, nodead] Prayer of Healing
+END
+MACRO 16777236 "PoM" "INV_MISC_QUESTIONMARK"
+#show Prayer of Mending
+#showtooltip Prayer of Mending
+/cast [target=mouseover, exists, help, nodead] Prayer of Mending
+END
+MACRO 16777230 "Power Infusion " "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/cast [target=mouseover, exists, help, nodead] Power Infusion
+/cast Power Infusion
+END
+MACRO 16777220 "Renew " "INV_Misc_QuestionMark"
+#show Renew
+#showtooltip Renew
+/cast [target=mouseover, exists, help, nodead] Renew
+END
+MACRO 16777217 "Shadowform " "INV_Misc_QuestionMark"
+#show Shadowform
+#showtooltip Shadowform
+/cast !Shadowform
+END
+MACRO 16777231 "Smite " "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/cast [@mouseovertarget, harm] [@mouseover, harm] [@targettarget, harm] [harm] Smite
+/cast Smite
+END

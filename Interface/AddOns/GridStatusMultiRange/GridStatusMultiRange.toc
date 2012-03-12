@@ -1,0 +1,21 @@
+## Interface: 40300
+## Version: 20
+## X-Curse-Packaged-Version: 4.3.0.20
+## X-Curse-Project-Name: GridStatusMultiRange
+## X-Curse-Project-ID: gridstatusmultirange
+## X-Curse-Repository-ID: wow/gridstatusmultirange/mainline
+
+## Title: GridStatus MultiRange
+## Notes: Adds spell-based range checking to Grid, and the ability to check multiple ranges.
+## Author: Pastamancer, Phanx
+
+## Dependencies: Grid
+## OptionalDeps: LibGratuity-3.0
+
+Libs\LibStub\LibStub.lua
+Libs\LibGratuity-3.0\LibGratuity-3.0.lua
+
+Localization.lua
+
+GridRange.lua
+GridStatusMultiRange.lua

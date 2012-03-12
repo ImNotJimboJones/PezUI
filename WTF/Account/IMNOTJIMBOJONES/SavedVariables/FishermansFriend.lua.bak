@@ -1,0 +1,12 @@
+
+FishermansFriendDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["sounds"] = false,
+			["autolure"] = false,
+		},
+	},
+}

@@ -1,0 +1,32 @@
+## Interface: 40000
+## Title: Addon Manager
+## Notes: This allows the currently loaded addons to be changed without reloading. This also allows saving sets of addons.
+## SavedVariables: SavedAddonConfigurations, SavedGroupConfigurations, Options
+## X-Curse-Packaged-Version: v1.2.4
+## X-Curse-Project-Name: Addon Mgr
+## X-Curse-Project-ID: addonmgr
+## X-Curse-Repository-ID: wow/addonmgr/mainline
+lib\LibStub\LibStub.lua
+lib\CallbackHandler-1.0\CallbackHandler-1.0.lua
+lib\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+templates\Template.xml
+templates\Template.lua
+templates\Button.xml
+templates\EditBox.xml
+templates\Entry.xml
+templates\Entry.lua
+templates\Group.xml
+templates\Group.lua
+templates\Manager.xml
+templates\Manager.lua
+templates\ScrollFrame.xml
+templates\DropDownMenu.xml
+templates\DropDownMenu.lua
+
+ListManager.lua
+
+frames\Addons.lua
+frames\Groups.lua
+frames\Options.lua
+frames\Options.xml

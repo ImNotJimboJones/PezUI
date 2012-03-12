@@ -1,0 +1,11 @@
+
+MacroBankDB = {
+	["DBVersion"] = 5,
+	["profileKeys"] = {
+		["Xëthra - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

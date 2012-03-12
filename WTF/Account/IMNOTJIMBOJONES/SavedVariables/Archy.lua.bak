@@ -1,0 +1,28 @@
+
+ArchyDB = {
+	["char"] = {
+		["Pezzer - Burning Blade"] = {
+			["digsites"] = {
+				["counter"] = {
+					["Felstone Fossil Field"] = 0,
+					["Greenwarden's Fossil Bank"] = 0,
+					["Eastern Zul'Kunda Digsite"] = 0,
+					["Red Reaches Fossil Bank"] = 0,
+				},
+				["blacklist"] = {
+				},
+			},
+		},
+	},
+	["global"] = {
+		["surveyNodes"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

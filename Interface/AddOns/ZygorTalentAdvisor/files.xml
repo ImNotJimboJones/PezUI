@@ -1,0 +1,12 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/FrameXMULI.xsd">
+
+	<Script file="ZygorTalentAdvisor.lua"/>
+	<Script file="Events.lua"/>
+	<Script file="TalentPreviewFix.lua"/>
+	<Script file="Build.lua"/>
+	<Script file="Glyphs.lua"/>
+	<Script file="Build_Data.lua"/>
+	<Script file="Ver.lua"/>
+	<Include file="Popout.xml"/>
+
+</Ui>

@@ -1,0 +1,63 @@
+<Ui>
+    <Button name="AddonManagerDropDownMenuButton" virtual="true">
+        <Size>
+            <AbsDimension x="200" y="16" />
+        </Size>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" inherits="GameFontNormal" text="Menu Entry">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnClick>
+                self:GetParent():GetParent():GetParent():Hide()
+                    -- scroll child -> scroll frame -> drop down menu
+                self:OnClick()
+            </OnClick>
+            <OnEnter>
+                self.title:SetTextColor(1,1,1,1)
+            </OnEnter>
+            <OnLeave>
+                self.title:SetTextColor(1,0.8,0,1)
+            </OnLeave>
+        </Scripts>
+    </Button>
+    
+    <Frame name="AddonManagerDropDownMenu" virtual="true">
+        <Size>
+            <AbsDimension x="200" y="200" />
+        </Size>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <BackgroundInsets>
+                <AbsInset left="11" right="11" top="12" bottom="10"/>
+            </BackgroundInsets>
+            <TileSize>
+                <AbsValue val="32"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="32"/>
+            </EdgeSize>
+        </Backdrop>
+        <Frames>
+            <ScrollFrame parentKey="scrollFrame" inherits="AddonManagerScrollFrame">
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset x="16" y="-16"/>
+                    </Anchor>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset x="-38" y="12"/>
+                    </Anchor>
+                </Anchors>
+            </ScrollFrame>
+        </Frames>
+        <Scripts>
+            <OnMouseDown>
+                -- Used to stop the buttons underneath from highlighting
+            </OnMouseDown>
+        </Scripts>
+    </Frame>
+</Ui>

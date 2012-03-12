@@ -1,0 +1,332 @@
+------------------------------------------------------------------------
+r217 | kandarz | 2011-02-07 04:27:01 +0000 (Mon, 07 Feb 2011) | 1 line
+Changed paths:
+   A /tags/r217-release (from /trunk:216)
+
+Created tag r217-release.
+------------------------------------------------------------------------
+r216 | kandarz | 2011-02-07 04:26:42 +0000 (Mon, 07 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Hide loading module
+------------------------------------------------------------------------
+r214 | kandarz | 2011-02-07 02:44:27 +0000 (Mon, 07 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/frames.lua
+
+Bug Fixes
+------------------------------------------------------------------------
+r213 | kandarz | 2011-02-07 01:14:39 +0000 (Mon, 07 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Push new locales
+------------------------------------------------------------------------
+r211 | kandarz | 2011-02-06 12:29:40 +0000 (Sun, 06 Feb 2011) | 5 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+   A /trunk/Images/wh_icon.tga
+   A /trunk/Images/wh_icon_hover.tga
+   M /trunk/Modules/Reputation/EveryQuest_Reputation.toc
+   M /trunk/Modules/Reputation/Reputation.lua
+   M /trunk/events.lua
+   M /trunk/frames.lua
+   M /trunk/libs/LibQuestEvents-1.0/LibQuestEvents-1.0.lua
+   A /trunk/libs/tekKonfigAboutPanel.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/options.lua
+   M /trunk/query.lua
+   M /trunk/zonemenu.lua
+
+Show reputation lists in the menu
+Naming cleanup and consistancy
+About panel
+Wowhead icon
+No more import (I think server query is just fine)
+------------------------------------------------------------------------
+r210 | kandarz | 2011-02-06 04:44:32 +0000 (Sun, 06 Feb 2011) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/locales/deDE.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/locales/esES.lua
+   M /trunk/locales/esMX.lua
+   M /trunk/locales/frFR.lua
+   M /trunk/locales/koKR.lua
+   M /trunk/locales/ruRU.lua
+   M /trunk/locales/zhCN.lua
+   M /trunk/locales/zhTW.lua
+
+Make locales use GlobalStrings
+Fix GetZoneId() (Ticket 114)
+------------------------------------------------------------------------
+r208 | kandarz | 2011-02-05 09:11:07 +0000 (Sat, 05 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/locales/enUS.lua
+
+Update dev locale
+------------------------------------------------------------------------
+r207 | kandarz | 2011-02-05 09:00:00 +0000 (Sat, 05 Feb 2011) | 2 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+   M /trunk/Modules/Reputation/EveryQuest_Reputation.toc
+   M /trunk/libs
+   M /trunk/zonemenu.lua
+
+Use the new cleaned up zone menu
+Try out some pkgmeta things for Reputation libs
+------------------------------------------------------------------------
+r206 | kandarz | 2011-02-05 00:47:51 +0000 (Sat, 05 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix button click on unknown quests
+------------------------------------------------------------------------
+r205 | kandarz | 2011-02-04 13:22:12 +0000 (Fri, 04 Feb 2011) | 2 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Core.lua
+   M /trunk/Modules/Battlegrounds/Battlegrounds.lua
+   M /trunk/Modules/Classes/Classes.lua
+   M /trunk/Modules/Dungeons/Dungeons.lua
+   M /trunk/Modules/Eastern_Kingdoms/Eastern_Kingdoms.lua
+   M /trunk/Modules/Kalimdor/Kalimdor.lua
+   M /trunk/Modules/Miscellaneous/Miscellaneous.lua
+   M /trunk/Modules/Northrend/Northrend.lua
+   M /trunk/Modules/Outland/Outland.lua
+   M /trunk/Modules/Professions/Professions.lua
+   M /trunk/Modules/Raids/Raids.lua
+   A /trunk/Modules/Reputation
+   A /trunk/Modules/Reputation/EveryQuest_Reputation.toc
+   A /trunk/Modules/Reputation/Reputation.lua
+   A /trunk/Modules/Series
+   A /trunk/Modules/Series/EveryQuest_Series.toc
+   A /trunk/Modules/Series/Series.lua
+   M /trunk/Modules/The_Maelstrom/EveryQuest_The_Maelstrom.toc
+   M /trunk/Modules/The_Maelstrom/The_Maelstrom.lua
+   M /trunk/Modules/World_Events/World_Events.lua
+   M /trunk/modules.xml
+
+Change to new database structure, add Reputation lists, Series information (not yet implemented)
+Fix purge old data dialog
+------------------------------------------------------------------------
+r203 | kandarz | 2011-02-04 05:38:37 +0000 (Fri, 04 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/libs/LibQuestEvents-1.0/LibQuestEvents-1.0.lua
+
+UNIT_QUEST_LOG_CHANGED doesn't fire at the right time apparently, go back to QUEST_LOG_UPDATE
+------------------------------------------------------------------------
+r202 | kandarz | 2011-02-04 03:30:39 +0000 (Fri, 04 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix AddQuest()/GetQuestData()
+------------------------------------------------------------------------
+r201 | kandarz | 2011-02-03 09:51:24 +0000 (Thu, 03 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/query.lua
+
+Fix delete server query import
+------------------------------------------------------------------------
+r200 | kandarz | 2011-02-03 09:48:30 +0000 (Thu, 03 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix track zone
+------------------------------------------------------------------------
+r197 | kandarz | 2011-02-01 01:09:48 +0000 (Tue, 01 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix tooltip colors
+------------------------------------------------------------------------
+r195 | kandarz | 2011-02-01 00:58:06 +0000 (Tue, 01 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/query.lua
+
+Remove old code
+------------------------------------------------------------------------
+r194 | kandarz | 2011-02-01 00:23:18 +0000 (Tue, 01 Feb 2011) | 1 line
+Changed paths:
+   M /trunk
+   M /trunk/Core.lua
+
+Fix more internal messages
+------------------------------------------------------------------------
+r192 | kandarz | 2011-01-31 09:37:20 +0000 (Mon, 31 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+
+OptionalDependency: LibBabble-Race-3.0, change scroll to not send update message
+------------------------------------------------------------------------
+r190 | kandarz | 2011-01-31 07:43:17 +0000 (Mon, 31 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix GetHistoryStatus
+------------------------------------------------------------------------
+r189 | kandarz | 2011-01-31 03:02:11 +0000 (Mon, 31 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix message names
+------------------------------------------------------------------------
+r188 | kandarz | 2011-01-30 12:26:25 +0000 (Sun, 30 Jan 2011) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+   M /trunk/events.lua
+   M /trunk/frames.lua
+   M /trunk/import.lua
+   M /trunk/libs/LibQuestEvents-1.0/LibQuestEvents-1.0.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/options.lua
+   M /trunk/query.lua
+
+Cleanup
+Changes to work with new Quest Givers module
+------------------------------------------------------------------------
+r186 | kandarz | 2011-01-27 13:51:47 +0000 (Thu, 27 Jan 2011) | 5 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+   M /trunk/Modules/Battlegrounds/Battlegrounds.lua
+   M /trunk/Modules/Classes/Classes.lua
+   M /trunk/Modules/Dungeons/Dungeons.lua
+   M /trunk/Modules/Eastern_Kingdoms/Eastern_Kingdoms.lua
+   M /trunk/Modules/Kalimdor/Kalimdor.lua
+   M /trunk/Modules/Miscellaneous/Miscellaneous.lua
+   M /trunk/Modules/Northrend/Northrend.lua
+   M /trunk/Modules/Outland/Outland.lua
+   M /trunk/Modules/Professions/Professions.lua
+   M /trunk/Modules/Raids/Raids.lua
+   M /trunk/Modules/World_Events/World_Events.lua
+   M /trunk/events.lua
+   M /trunk/import.lua
+   A /trunk/libs/LibQuestEvents-1.0
+   A /trunk/libs/LibQuestEvents-1.0/LibQuestEvents-1.0.lua
+   A /trunk/libs/LibQuestEvents-1.0/lib.xml
+   M /trunk/query.lua
+   M /trunk/zonemenu.lua
+
+Remove dependency on LibQuixote-2.0
+Fix Zonemenu
+Fix memory leak in filterer
+Properly track repeatable quests
+General cleanup
+------------------------------------------------------------------------
+r184 | kandarz | 2011-01-27 07:22:16 +0000 (Thu, 27 Jan 2011) | 3 lines
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/Everyquest.xml
+   A /trunk/Images/book_down.tga
+   A /trunk/Images/book_up.tga
+   M /trunk/events.lua
+   M /trunk/frames.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/options.lua
+
+Go to Current Zone button: Click the book icon
+Set your own colors for quests.
+Repeatable Quests separately colored, tracks daily and weekly reset so they are colored normally if you can't do them.
+------------------------------------------------------------------------
+r182 | kandarz | 2011-01-27 03:09:20 +0000 (Thu, 27 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix defaults so they don't break adding quests
+------------------------------------------------------------------------
+r179 | kandarz | 2011-01-26 22:30:37 +0000 (Wed, 26 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Modules/The_Maelstrom/EveryQuest_The_Maelstrom.toc
+
+Fix stupid name mistake
+------------------------------------------------------------------------
+r177 | kandarz | 2011-01-26 22:22:54 +0000 (Wed, 26 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+   M /trunk/Modules/Classes/Classes.lua
+   M /trunk/Modules/Dungeons/Dungeons.lua
+   M /trunk/Modules/Eastern_Kingdoms/Eastern_Kingdoms.lua
+   M /trunk/Modules/Kalimdor/Kalimdor.lua
+   M /trunk/Modules/Miscellaneous/Miscellaneous.lua
+   M /trunk/Modules/Northrend/Northrend.lua
+   M /trunk/Modules/Outland/Outland.lua
+   M /trunk/Modules/Professions/Professions.lua
+   M /trunk/Modules/Raids/Raids.lua
+   M /trunk/Modules/The_Maelstrom/The_Maelstrom.lua
+   M /trunk/libs
+   M /trunk/locales/enUS.lua
+   M /trunk/options.lua
+
+Race and Class filters
+------------------------------------------------------------------------
+r176 | kandarz | 2011-01-26 05:47:05 +0000 (Wed, 26 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/EveryQuest.toc
+
+Bump version, fix Add Quest
+------------------------------------------------------------------------
+r174 | kandarz | 2011-01-26 05:13:37 +0000 (Wed, 26 Jan 2011) | 1 line
+Changed paths:
+   A /trunk/Modules/The_Maelstrom
+   A /trunk/Modules/The_Maelstrom/EveryQuest_The_Maelstrom.toc
+   A /trunk/Modules/The_Maelstrom/The_Maelstrom.lua
+
+Add Maelstrom
+------------------------------------------------------------------------
+r172 | kandarz | 2011-01-25 12:28:40 +0000 (Tue, 25 Jan 2011) | 2 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Modules/Battlegrounds/Battlegrounds.lua
+   M /trunk/Modules/Classes/Classes.lua
+   M /trunk/Modules/Dungeons/Dungeons.lua
+   M /trunk/Modules/Eastern_Kingdoms/Eastern_Kingdoms.lua
+   M /trunk/Modules/Kalimdor/Kalimdor.lua
+   M /trunk/Modules/Miscellaneous/Miscellaneous.lua
+   M /trunk/Modules/Northrend/Northrend.lua
+   M /trunk/Modules/Outland/Outland.lua
+   M /trunk/Modules/Professions/Professions.lua
+   M /trunk/Modules/Raids/Raids.lua
+   M /trunk/Modules/World_Events/World_Events.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/modules.xml
+   M /trunk/query.lua
+   M /trunk/zonemenu.lua
+
+Cataclysm Data
+No more "Unknowns", but only shows what is in the database
+------------------------------------------------------------------------
+r171 | kandarz | 2011-01-25 04:05:57 +0000 (Tue, 25 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Seams to work with new storage, data update coming
+------------------------------------------------------------------------
+r170 | kandarz | 2011-01-25 01:42:43 +0000 (Tue, 25 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/events.lua
+   M /trunk/import.lua
+   M /trunk/query.lua
+
+Change storage - dry coded
+------------------------------------------------------------------------
+r169 | kandarz | 2010-11-04 03:31:54 +0000 (Thu, 04 Nov 2010) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix this->self, globals in Popup window
+------------------------------------------------------------------------

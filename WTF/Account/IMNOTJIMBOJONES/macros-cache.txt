@@ -1,0 +1,89 @@
+MACRO 18 "Assist Focus" "ABILITY_HUNTER_MARKEDFORDEATH"
+/target [target=focus, harm, nodead]
+/target [target=focustarget, harm, nodead]
+/startattack
+END
+MACRO 22 "ExraAction" "Spell_Frost_FrostWard"
+/click ExtraActionButton1
+END
+MACRO 20 "Kill Shot" "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/stopcasting
+/stopcasting
+/stopcasting
+/cast Kill Shot
+END
+MACRO 13 "Left" "ABILITY_MAGE_INVISIBILITY"
+/tar Left Foot
+END
+MACRO 3 "Pet" "Ability_Hunter_BeastCall"
+/run i=random(GetNumCompanions("critter")); CallCompanion("critter", 1);
+END
+MACRO 19 "Pet Assist" "Ability_Druid_ChallangingRoar"
+/petattack [@focus, exists, harm, nodead] [@focustarget, exists, harm, nodead]
+END
+MACRO 21 "PvP Trink" "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/use 14
+END
+MACRO 15 "Raptor Clip" "INV_Misc_QuestionMark"
+#show Wing Clip
+#showtooltip Wing Clip
+/cast Raptor Strike
+/cast Wing Clip
+/stopcasting
+END
+MACRO 9 "Recruit" "Spell_ChargePositive"
+/2 {skull} Denial of Service {skull} (6/7) is looking for an experienced Holy Paladin for our core 10 man raid group. All levels welcomed for fun as well. Pst for more info!  www.clandos.org
+END
+MACRO 12 "right" "Ability_Creature_Cursed_02"
+/tar Right Foot
+END
+MACRO 7 "Roar" "Ability_Creature_Cursed_02"
+/roar
+END
+MACRO 24 "Shoot " "INV_MISC_QUESTIONMARK"
+#show
+#showtooltip
+/cast !Shoot
+END
+MACRO 16 "Silence Focus" "INV_Misc_QuestionMark"
+#show Silencing Shot
+#showtooltip Silencing Shot
+/stopcasting
+/stopcasting
+/stopcasting
+/cast [@focus] Silencing Shot
+END
+MACRO 27 "Strip" "SPELL_MISC_EMOTIONHAPPY"
+/run function f(x) PickupInventoryItem(x) PutItemInBackpack() end;
+/run if GetContainerNumFreeSlots(0) >= 11 then f(1) f(3) f(4) f(5) f(6) f(7) f(8) f(9) f(10) f(15) f(19) else print('Not enough bag space to strip') end;
+/dance
+END
+MACRO 17 "Target1" "Ability_Mage_ArcaneBarrage"
+/tar Yor
+END
+MACRO 23 "Target2" "INV_WEAPON_BOW_02"
+/tar Mana
+END
+MACRO 11 "temp" "INV_Misc_QuestionMark"
+END
+MACRO 5 "Trinket 1" "INV_Misc_QuestionMark"
+/use 13
+END
+MACRO 6 "Trinket 2" "INV_Misc_QuestionMark"
+/use 14
+END
+MACRO 4 "Trinkets" "INV_Misc_QuestionMark"
+#show
+#showtooltip
+/run UIErrorsFrame:Hide();
+/console Sound_EnableSFX 0
+/use 13
+/use 14
+/console Sound_EnableSFX 1
+/run UIErrorsFrame:Clear();
+/run UIErrorsFrame:Show();
+END

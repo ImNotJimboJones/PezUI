@@ -1,0 +1,25 @@
+## Interface: 40300
+## Title: GridConfigurableLayouts
+## Notes: Adds options to create customized layouts from within grid.
+## Author: msaint
+## Version: 0.4.3b
+## Grid Author: Pastamancer & Maia
+## X-Website: http://wowace.com/wiki/Grid
+## X-Category: UnitFrame
+## X-GridLayoutModule: GridConfigurableLayouts
+## Dependencies: Grid
+## SavedVariables: GridConfigurableLayoutsDB
+## OptionalDeps: LibTalentQuery-1.0, LibGroupTalents-1.0
+## X-Curse-Packaged-Version: 0.4.3b
+## X-Curse-Project-Name: GridConfigurableLayouts
+## X-Curse-Project-ID: gridconfigurablelayouts
+## X-Curse-Repository-ID: wow/gridconfigurablelayouts/mainline
+
+#@no-lib-strip@
+Libs\LibTalentQuery-1.0\LibTalentQuery-1.0.lua
+Libs\LibGroupTalents-1.0\LibGroupTalents-1.0.lua
+Libs\LibSharedMedia-3.0\lib.xml
+#@end-no-lib-strip@
+
+GridConfigurableLayouts.lua
+GCLRole.lua

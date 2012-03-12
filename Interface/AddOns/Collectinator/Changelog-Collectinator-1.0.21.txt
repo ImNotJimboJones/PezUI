@@ -1,0 +1,13 @@
+tag 1.0.21
+ed46b4cd6c4f37b7698396178c3ce6eeccaa2a6f
+mike <mike@broinitup.com>
+2012-02-15 11:27:09 -0500
+
+Tagging as 1.0.21
+
+
+--------------------
+
+mike:
+	- Update changelog
+	- Add a new mount: Heart of the Aspects

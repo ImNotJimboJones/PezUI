@@ -1,0 +1,33 @@
+------------------------------------------------------------------------
+r40 | papsol | 2011-12-01 00:39:51 +0000 (Thu, 01 Dec 2011) | 1 line
+Changed paths:
+   A /tags/Release 3.7.6 (from /trunk:39)
+
+Tagging as Release 3.7.6
+------------------------------------------------------------------------
+r39 | papsol | 2011-12-01 00:39:19 +0000 (Thu, 01 Dec 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanReputation.lua
+   M /trunk/TitanReputation.toc
+
+v3.7.6
+
+Added: Reset Session Data feature
+------------------------------------------------------------------------
+r37 | papsol | 2011-11-30 23:43:22 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanReputation.lua
+   M /trunk/TitanReputation.toc
+
+v3.7.5
+
+Fixed bug with tooltip not being written under newest Titan Panel.
+------------------------------------------------------------------------
+r35 | papsol | 2011-11-30 21:06:32 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/TitanReputation.toc
+
+v3.7.4
+
+TOC update
+------------------------------------------------------------------------

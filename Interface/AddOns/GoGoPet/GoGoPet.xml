@@ -1,0 +1,24 @@
+<Ui>
+	<Script file="localization.lua"/>
+	<Script file="GoGoPet.lua"/>
+	<Frame name="GoGoPetFrame">
+		<Scripts>
+			<OnLoad>
+				GoGoPet_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				GoGoPet_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame>
+	<Button name="GoGoPetButton" inherits="SecureActionButtonTemplate" parent="UIParent" frameStrata="LOW" hidden="false">
+		<Attributes>
+			<Attribute name="type" type="string" value="macro"/>
+		</Attributes>
+		<Scripts>
+			<PreClick>
+				GoGoPet_PreClick(self)
+			</PreClick>
+		</Scripts>    
+	</Button>
+</Ui>

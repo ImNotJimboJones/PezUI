@@ -1,0 +1,22 @@
+﻿## Interface: 40200
+## Title: EasyMD
+## Notes: The easiest way to create/edit a misdirection macro.
+## Author: Shenton
+## SavedVariables: easyMDConfig
+## Version: 0.4
+## X-Category: Combat
+## X-Curse-Packaged-Version: v0.4-beta
+## X-Curse-Project-Name: Easy Misdirection
+## X-Curse-Project-ID: easy-misdirection
+## X-Curse-Repository-ID: wow/easy-misdirection/mainline
+
+Embeds.xml
+
+Localization\Locales-enUS.lua
+
+Core.lua
+
+Modules\LDB.lua
+Modules\Announce.lua
+Modules\Pet.lua
+Modules\Tanks.lua

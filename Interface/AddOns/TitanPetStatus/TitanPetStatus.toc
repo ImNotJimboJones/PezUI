@@ -1,0 +1,11 @@
+## Interface: 40000
+## Title: Titan Panel [Pet Status]
+## Version: 4.0a
+## Notes: Displays Pet Name, Level, Experience, Happiness, and Food Types in Titan Panel.
+## Notes-esES: Muestra nombre Mascota, Nivel, Experiencia, felicidad y Tipos de Comida en Titan Panel.
+## Notes-deDE: Zeige Tiername, Tierstufe, XP-Prozente, Zufriedenheit und Futter in Titan Panel.
+## Author: Hotluck (based on Titan PetState by Noctornus)
+## Dependencies: Titan
+Localization.lua
+TitanPetStatus.lua
+TitanPetStatus.xml

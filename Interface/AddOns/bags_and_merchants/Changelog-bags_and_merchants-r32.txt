@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r32 | elkano | 2011-06-29 09:05:28 +0000 (Wed, 29 Jun 2011) | 2 lines
+Changed paths:
+   M /trunk
+   M /trunk/bags_and_merchants.lua
+   M /trunk/bags_and_merchants.toc
+
+- updated for 4.1 changes
+- drycoded ^^
+------------------------------------------------------------------------
+r31 | elkano | 2008-10-13 09:21:18 +0000 (Mon, 13 Oct 2008) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+
+bags_and_merchants: more fixes to .pkgmeta
+------------------------------------------------------------------------

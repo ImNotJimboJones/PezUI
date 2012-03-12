@@ -1,0 +1,61 @@
+<Ui>
+    <!-- Blizzard Interface Data (enGB)/FrameXML/UIPanelTemplates.xml : InputBoxTemplate -->
+    <EditBox name="AddonManagerEditBox" enableMouse="true" virtual="true">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="left" file="Interface\Common\Common-Input-Border">
+                    <Size>
+                        <AbsDimension x="8" y="20"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset>
+                                <AbsDimension x="-5" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+                </Texture>
+                <Texture parentKey="right" file="Interface\Common\Common-Input-Border">
+                    <Size>
+                        <AbsDimension x="8" y="20"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="RIGHT">
+                            <Offset>
+                                <AbsDimension x="0" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+                </Texture>
+                <Texture parentKey="middle" file="Interface\Common\Common-Input-Border">
+                    <Size>
+                        <AbsDimension x="8" y="20"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="LEFT">
+                            <Offset x="3"/>
+                        </Anchor>
+                        <Anchor point="RIGHT">
+                            <Offset x="-8"/>
+                        </Anchor>
+                    </Anchors>
+                    <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnEscapePressed>
+                EditBox_ClearFocus(self);
+            </OnEscapePressed>
+            <OnEditFocusLost>
+                EditBox_ClearHighlight(self);
+            </OnEditFocusLost>
+            <OnEditFocusGained>
+                EditBox_HighlightText(self);
+            </OnEditFocusGained>
+        </Scripts>
+        <FontString inherits="ChatFontNormal"/>
+    </EditBox>
+</Ui>

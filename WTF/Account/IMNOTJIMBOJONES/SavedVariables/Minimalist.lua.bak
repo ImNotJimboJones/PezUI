@@ -1,0 +1,21 @@
+
+MinimalistDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+			["AUTOSELL"] = true,
+			["CHATCLEAN"] = true,
+			["REPUTATION"] = false,
+			["QUESTLEVEL"] = false,
+			["AUTOREPAIR"] = true,
+			["AUTOREZ"] = true,
+			["GOSSIPSKIP"] = true,
+			["CHATBUTTONS"] = true,
+			["GRYPH"] = false,
+			["MAPSCROLL"] = false,
+			["CHATARROWS"] = true,
+		},
+	},
+}

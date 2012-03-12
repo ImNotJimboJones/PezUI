@@ -1,0 +1,6 @@
+assert(ZygorTalentAdvisor,"Zygor Talent Advisor failed to load.")
+local name,_=...
+ZygorTalentAdvisor.revision = tonumber(string.sub("$Revision: $WCREV$ $", 12, -3))
+ZygorTalentAdvisor.version = GetAddOnMetadata(name,"version") .. "." .. ZygorTalentAdvisor.revision
+ZygorTalentAdvisor.date = string.sub("$Date: $WCDATE$ $", 8, 17)
+--$WCNOW$

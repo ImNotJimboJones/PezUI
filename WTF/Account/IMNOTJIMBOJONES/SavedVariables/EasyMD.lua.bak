@@ -1,0 +1,28 @@
+
+easyMDConfig = {
+	["namespaces"] = {
+		["PET"] = {
+		},
+		["TANKS"] = {
+		},
+		["ANN"] = {
+		},
+		["LDB"] = {
+			["profiles"] = {
+				["Pezzer - Burning Blade"] = {
+					["titan"] = true,
+					["icon"] = {
+						["hide"] = true,
+					},
+				},
+			},
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+		},
+	},
+}

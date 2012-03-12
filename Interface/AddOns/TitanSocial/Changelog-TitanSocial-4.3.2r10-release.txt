@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r58 | solocommand | 2012-02-03 01:40:06 +0000 (Fri, 03 Feb 2012) | 1 line
+Changed paths:
+   A /tags/4.3.2r10-release (from /trunk:57)
+
+Tagging as 4.3.2r10-release
+------------------------------------------------------------------------
+r57 | solocommand | 2012-02-03 01:39:24 +0000 (Fri, 03 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/TitanSocial.lua
+   M /trunk/TitanSocial.toc
+
+updated version numbers
+------------------------------------------------------------------------
+r56 | solocommand | 2012-02-03 01:36:41 +0000 (Fri, 03 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/TitanSocial.lua
+
+Resolved bug with playerStatus text
+------------------------------------------------------------------------
+r55 | solocommand | 2012-02-03 00:25:34 +0000 (Fri, 03 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/TitanSocial.lua
+
+Fixing displayed value for playerStatus
+------------------------------------------------------------------------

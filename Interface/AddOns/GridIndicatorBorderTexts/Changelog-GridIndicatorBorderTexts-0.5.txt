@@ -1,0 +1,32 @@
+------------------------------------------------------------------------
+r4 | sirjoga | 2012-01-04 06:51:42 +0000 (Wed, 04 Jan 2012) | 1 line
+Changed paths:
+   A /tags/0.5 (from /trunk:3)
+
+Tagging as 0.5
+------------------------------------------------------------------------
+r3 | sirjoga | 2012-01-03 23:09:41 +0000 (Tue, 03 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/GridIndicatorBorderTexts.toc
+
+fixed deps in toc
+------------------------------------------------------------------------
+r2 | sirjoga | 2012-01-03 22:37:52 +0000 (Tue, 03 Jan 2012) | 1 line
+Changed paths:
+   A /trunk/GridIndicatorBorderTexts.toc
+   A /trunk/core.lua
+   A /trunk/locals
+   A /trunk/locals/en_US.lua
+   A /trunk/locals/locals.xml
+   A /trunk/locals/ru_RU.lua
+
+initial state
+------------------------------------------------------------------------
+r1 | svn | 2012-01-03 22:35:23 +0000 (Tue, 03 Jan 2012) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+gridindicatorbordertexts/mainline: Initial Import
+------------------------------------------------------------------------

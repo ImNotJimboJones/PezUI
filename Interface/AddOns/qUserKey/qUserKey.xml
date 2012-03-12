@@ -1,0 +1,736 @@
+<!--
+	Adds user-defined keybindings for secure actions in WoW 2.0
+	By Deathwing!Quel
+	qwarlock@gmail.com
+	11/18/06, 8/23/08 v3.0
+
+	Notes:
+		UserKeyFrame receives OnMouseDown to move the window
+		UserKeyScrollFrame receives OnMouseDown to accept mousekeys as bindable
+		UserKeyGrabber receives all keyboard input so we can disable/enable stealing the keyboard.
+
+		Reminder: for a given event (say OnMouseDown), the active frame checks for a handler, then
+		the parent, then the grandparent, all the way to UIParent at the top level. The first handler found
+		processes the event.
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="qUserKey.lua" /> 
+
+
+	<!-- this button adds an entry to the main game menu -->
+	<Button name="GameMenuButtonUserKey" parent = "GameMenuFrame" inherits="GameMenuButtonTemplate" text="User Key Bindings">
+		<Scripts>
+			<OnLoad>
+				UserKey_AddGameMenuButton( self );
+			</OnLoad>
+			<OnClick>
+				PlaySound("igMainMenuContinue");
+				HideUIPanel(GameMenuFrame);
+				UserKey_ShowData();
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<!-- this private tooltip is used for scanning the "Use:" attributes on inventory items, to determine which can be bound to keys -->
+	<GameTooltip name="UserKeyTooltip" frameStrata="TOOLTIP" hidden="true" parent="UIParent" inherits="GameTooltipTemplate"/>
+
+	<!-- Template for the keybind clickable buttons -->
+	<Button name="UserKeyBindButtonTemplate" inherits="UIPanelButtonTemplate2" virtual="true">
+		<Scripts>
+			<OnClick>
+				UserKey_ButtonClick(self, button);  
+			</OnClick>
+			<OnLoad>
+				<!-- this causes any mouse button click to trigger OnClick(). Without this register, you must use
+				  OnMouseDown() to capture anything other than leftclick and rightclick -->
+				self:RegisterForClicks("AnyUp");
+			</OnLoad>
+		</Scripts>
+		<NormalFont inherits="GameFontHighlightSmall"/>
+		<DisabledFont inherits="GameFontDisable"/>
+		<HighlightFont inherits="GameFontHighlightSmall"/>
+	</Button>
+
+	<!-- set the initial size of the window.  -->
+	<Frame name="UserKeyFrame" toplevel="true" frameStrate="HIGH"  movable="true" enableMouse="true" parent="UIParent" enableKeyboard="false" hidden="true">
+		<Size><AbsDimension x="570" y="440" /> </Size>
+
+		<!-- define starting window position. Anchors tie specific points on the frame to locations, usually relative to other 
+		UI elements. -->
+
+		<Anchors>
+			<Anchor point="TopLeft" relativeTo="UIParent" relativePoint="TopLeft" >
+				<Offset><AbsDimension x="100" y="-100" /> </Offset>
+			</Anchor>
+		</Anchors>
+
+		<!-- ****************************************************************************************************** -->
+		<!-- backdrop defines the background and the border of the frame -->
+
+		<Backdrop name="UserKeyFrameBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>	
+
+		<!-- ****************************************************************************************************** -->
+		<!-- now that the main window is defined, start defining internal objects Layers specify which objects are shown in front of other obects:
+			BACKGROUND - Level 0. Place the background objects here (but not the actual background texture)
+			BORDER - Level 1. 
+			ARTWORK - Level 2. Middle Level
+			OVERLAY - Level 3. The foreground. Place your text, objects, and buttons in this level
+			HIGHLIGHT - Level 4. Foremost level. Auto hides/shows when the mouse enters/leaves
+		
+		we can define the dialog header, fontstrings, maybe all static text in Layers section, but we can't define clickable
+		buttons. Those will be added down below in the Frames section. 
+		-->
+
+		<Layers>
+			<!-- start with items in the "mid" level of graphics layers -->
+			<Layer level="ARTWORK">
+				
+				<!-- first, put a title box at the top of the frame. This texture statement makes the standard style box along the top border
+				of the frame. The FontString provides the text contents (our window label) -->
+
+				<Texture name="UserKeyFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size><AbsDimension x="430" y="64"/></Size>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="Top"> <!-- relative to the parent, the main UserKeyFrame -->
+							<Offset><AbsDimension x="0" y="12"/></Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+
+				<FontString name="UserKeyFrameTitleText" inherits="GameToolTipHeaderText" text="User Key Bindings by Quel" justifyH="LEFT">
+					<Color r="25" g="25" b="0"/> <!-- makes the text color yellow, standard for diaglog titles -->
+					<Anchors>	
+						<Anchor point="Top" relativeTo="UserKeyFrameHeader" relativePoint="Top"> 
+							<Offset><AbsDimension x="0" y="-12"/>	</Offset>
+						</Anchor>
+					</Anchors>			
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<!-- ****************************************************************************************************** -->
+		<!-- Items the user interacts with must be defined in the Frames section, so clickable buttons are
+		defined here. -->
+
+		<Frames>
+
+				<!-- ************************************************************************************************* -->
+				<!-- this checkbox defines whether bindings are saved as "account-wide" or "character-specific" -->
+<!--			disabled now... all settings are character-specific. Not quite ready to delete this code yet, tho.
+				<CheckButton name="UserKeyFrameCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+					<Size><AbsDimension x="20" y="20"/></Size>
+					<Anchors>
+						<Anchor point="TopLeft" relativeTo="UserKeyFrame" relativePoint="TopRight">
+							<Offset><AbsDimension x="-90" y="-10"/></Offset>
+						</Anchor>
+					</Anchors>
+				</CheckButton>
+-->
+				<!-- *************************************************************************************************** -->
+				<!-- this sub frame contains the scroll-able block of action buttons -->
+				<ScrollFrame name="UserKeyScrollFrame" parent="UserKeyFrame" inherits="FauxScrollFrameTemplate">
+					<Size><AbsDimension x="330" y="325" /> </Size>
+					<Anchors>
+						<!-- relative to the parent, the main UserKeyFrame -->
+						<Anchor point="TopLeft" relativeTo="UserKeyFrame" relativePoint="TopLeft"> 
+							<Offset><AbsDimension x="5" y="-30"/></Offset>
+						</Anchor>
+						<!-- has to be x=-30 to account for the scroll bar on the right side -->
+						<Anchor point="TopRight" relativeTo="UserKeyFrame" relativePoint="TopRight">
+							<Offset><AbsDimension x="-30" y="-30"/></Offset>
+						</Anchor>
+					</Anchors>
+
+					<!-- backdrop defines the background and the border of the frame -->
+					<Backdrop name="UserKeyScrollBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+						<EdgeSize>
+							<AbsValue val="16"/>
+						</EdgeSize>
+						<TileSize>
+							<AbsValue val="16"/>
+						</TileSize>
+						<BackgroundInsets>
+							<AbsInset left="5" right="5" top="5" bottom="5"/>
+						</BackgroundInsets>
+					</Backdrop>	
+
+					<!-- define the items users can't interact with in the Layers section of this subframe. The clickable buttons are defined in the Frames
+					section of this subframe. -->
+					<Layers>
+						<Layer level="OVERLAY">
+					
+							<!-- Our table will have two columns: the label text and the button showing the key bound to that action
+							first, define the label text FontStrings, positioned relative to each other. The first element, the group title
+							is positioned relative to the main UserKey frame. -->
+
+							<FontString name="UserKeySlot1" inherits="GameTooltipTextSmall" text="General Abilities" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeyScrollFrame" relativePoint="TopLeft">
+										<Offset><AbsDimension x="10" y="-10"/></Offset>
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot2" inherits="GameTooltipTextSmall" text="Mount" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot1" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+	
+							<FontString name="UserKeySlot3" inherits="GameTooltipTextSmall" text="Shoot" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot2" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+	
+							<FontString name="UserKeySlot4" inherits="GameTooltipTextSmall" text="Warlock Spells" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot3" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset>
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot5" inherits="GameTooltipTextSmall" text="Fear" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot4" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+	
+							<FontString name="UserKeySlot6" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot5" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot7" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot6" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+							
+							<FontString name="UserKeySlot8" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot7" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot9" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot8" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot10" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot9" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot11" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot10" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot12" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot11" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot13" inherits="GameTooltipTextSmall" text="Warlock Spells" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot12" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset>
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+							<FontString name="UserKeySlot14" inherits="GameTooltipTextSmall" text="Howl" >
+								<Anchors>
+									<Anchor point="TopLeft" relativeTo="UserKeySlot13" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="0" y="-12"/></Offset> <!-- have to space the items far enough apart -->
+									</Anchor>
+								</Anchors>
+							</FontString>
+
+						</Layer>
+					</Layers>
+
+					<!-- use the Frames section to define items the user can interact with, like buttons -->
+					<Frames>
+						<!-- ****************************************************************************************************** -->
+						<!-- the first clickable button is positioned relative to it's action text. -->
+						<Button name="UserKeyButton1" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot1" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton1b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton1" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						
+						<Button name="UserKeyButton2" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot2" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>			
+						<Button name="UserKeyButton2b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton2" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>			
+
+						<Button name="UserKeyButton3" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot3" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+							<Button name="UserKeyButton3b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton3" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						
+						<Button name="UserKeyButton4" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot4" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						<Button name="UserKeyButton4b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton4" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						
+						<Button name="UserKeyButton5" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot5" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton5b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton5" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton6" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot6" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton6b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton6" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton7" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot7" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton7b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton7" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton8" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot8" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						<Button name="UserKeyButton8b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton8" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						
+						<Button name="UserKeyButton9" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot9" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>							
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton9b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton9" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton10" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot10" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton10b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton10" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton11" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot11" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton11b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton11" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton12" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot12" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton12b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton12" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+						<Button name="UserKeyButton13" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot13" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						<Button name="UserKeyButton13b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton13" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+						
+						<Button name="UserKeyButton14" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="Left" relativeTo="UserKeySlot14" relativePoint="Left">
+									<Offset><AbsDimension x="220" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>	
+						<Button name="UserKeyButton14b" inherits="UserKeyBindButtonTemplate" Text="Not Bound" >
+							<Size><AbsDimension x="150" y="20"/></Size>
+							<Anchors>
+								<Anchor point="TopLeft" relativeTo="UserKeyButton14" relativePoint="TopRight">
+									<Offset><AbsDimension x="1" y="0" /></Offset>
+								</Anchor>
+							</Anchors>	
+						</Button>
+
+					</Frames>
+
+					<Scripts> <!-- UserKeyScrollFrame -->
+						<OnVerticalScroll>FauxScrollFrame_OnVerticalScroll(self, offset, 16, UserKeyScrollBar_Update);</OnVerticalScroll>
+						<OnShow>UserKeyScrollBar_Update()</OnShow>
+						<OnMouseDown>
+							if (UserKeyUnBind:IsEnabled() == 1) then
+								UserKey_OnKeyDown(self, key);
+							end
+						</OnMouseDown>
+						<OnMouseWheel>
+							if (UserKeyUnBind:IsEnabled() == 1) then
+<!--							if (arg1 > 0) then -->
+								if (delta > 0 ) then
+									UserKey_OnKeyDown(self, "MOUSEWHEELUP");
+								else
+									UserKey_OnKeyDown(self, "MOUSEWHEELDOWN");
+								end
+							else
+								ScrollFrameTemplate_OnMouseWheel(self,delta,self.scrollBar);
+							end
+						</OnMouseWheel>
+
+					</Scripts>
+				</ScrollFrame>
+
+					<!-- ****************************************************************************************************** -->
+				<!-- this frame provides the save and cancel buttons -->
+				<Frame name="UserKeyControlFrame" parent="UserKeyFrame" >
+					<Size><AbsDimension x="355" y="65" /> </Size>
+					<Anchors>
+						<!-- use these three anchors to tie the size of this frame to the parent frame. When the parent frame 
+							changes size, this frame stretches to match. -->
+
+						<Anchor point="BottomLeft" relativeTo="UserKeyFrame" relativePoint="BottomLeft"> <!-- relative to the parent, the main UserKeyFrame -->
+							<Offset><AbsDimension x="5" y="4"/></Offset>
+						</Anchor>
+
+						<Anchor point="Right" relativeTo="UserKeyFrame" relativePoint="Right">
+							<Offset><AbsDimension x="-5" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+
+					<!-- backdrop defines the background and the border of the frame -->
+					<Backdrop name="UserKeyStatusBarBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+						<EdgeSize>
+							<AbsValue val="16"/>
+						</EdgeSize>
+						<TileSize>
+							<AbsValue val="16"/>
+						</TileSize>
+						<BackgroundInsets>
+							<AbsInset left="5" right="5" top="5" bottom="5"/>
+						</BackgroundInsets>
+					</Backdrop>	
+
+					<Frames>
+						<!-- define the control buttons (cancel, unbind, and ok) -->
+						<Button name="UserKeyScanReset" inherits="OptionsButtonTemplate" Text="Reset All Data" >
+							<Size><AbsDimension x="100" y="20"/></Size>
+								<Anchors>
+									<Anchor point="BottomLeft" relativeTo="UserKeyControlFrame" relativePoint="BottomLeft">
+										<Offset><AbsDimension x="5" y="7" /></Offset>
+									</Anchor>
+								</Anchors>	
+							<Scripts>
+								<OnClick>UserKey_ResetAllData();</OnClick>
+							</Scripts>
+						</Button>	
+					
+						<Button name="UserKeyOK" inherits="OptionsButtonTemplate" Text="OK" >
+							<Size><AbsDimension x="100" y="20"/></Size>
+								<Anchors>
+									<Anchor point="BottomRight" relativeTo="UserKeyControlFrame" relativePoint="BottomRight">
+										<Offset><AbsDimension x="-5" y="7" /></Offset>
+									</Anchor>
+								</Anchors>	
+							<Scripts>
+								<OnClick>UserKey_ButtonOK();</OnClick>
+							</Scripts>
+						</Button>	
+
+						<Button name="UserKeyUnBind" inherits="OptionsButtonTemplate" Text="UnBind Key" >
+							<Size><AbsDimension x="100" y="20"/></Size>
+								<Anchors>
+									<Anchor point="Right" relativeTo="UserKeyOK" relativePoint="Left">
+										<Offset><AbsDimension x="-10" y="0" /></Offset>
+									</Anchor>
+								</Anchors>	
+							<Scripts>
+								<OnClick>UserKey_ButtonUnBind();</OnClick>
+							</Scripts>
+						</Button>	
+						
+						<Button name="UserKeyCancelBind" inherits="OptionsButtonTemplate" Text="Cancel Bind" >
+							<Size><AbsDimension x="100" y="20"/></Size>
+								<Anchors>
+									<Anchor point="BottomLeft" relativeTo="UserKeyUnBind" relativePoint="TopLeft">
+										<Offset><AbsDimension x="0" y="10" /></Offset>
+									</Anchor>
+								</Anchors>	
+							<Scripts>
+								<OnClick>
+										UserKey_CancelInput();
+								</OnClick>
+							</Scripts>
+						</Button>					
+						
+						<Button name="UserKeyScan" inherits="OptionsButtonTemplate" Text="Scan" >
+							<Size><AbsDimension x="100" y="20"/></Size>
+								<Anchors>
+									<Anchor point="BottomLeft" relativeTo="UserKeyOK" relativePoint="TopLeft">
+										<Offset><AbsDimension x="0" y="10" /></Offset>
+									</Anchor>
+								</Anchors>	
+							<Scripts>
+								<OnClick>
+										UserKey_OnScanSpells();
+										UserKey_OnScanPets();
+										UserKey_OnScanItems();
+										UserKey_OnScanMacros();
+										UserKeyFrame:Hide();
+										UserKey_AssembleBindingTable();
+										UserKeyScrollBar_Update();
+										UserKey_ShowData();
+								</OnClick>
+							</Scripts>
+						</Button>	
+
+					</Frames>
+				</Frame>
+
+				<!-- ****************************************************************************************************** -->
+				<!-- this frame provides a status window at the bottom of UserKeyFrame to let the user know if their
+				actions succeeded for failed. -->
+
+				<Frame name="UserKeyStatusBar" parent="UserKeyFrame" >
+					<Size><AbsDimension x="355" y="25" /> </Size>
+					<Anchors>
+						<!-- use these three anchors to tie the size of this frame to the parent frame. When the parent frame 
+							changes size, this frame stretches to match. -->
+
+						<Anchor point="Bottom" relativeTo="UserKeyControlFrame" relativePoint="Top"> <!-- relative to the parent, the main UserKeyFrame -->
+							<Offset><AbsDimension x="0" y="-5"/></Offset>
+						</Anchor>
+						<Anchor point="Left" relativeTo="UserKeyFrame" relativePoint="Left">
+							<Offset><AbsDimension x="5" y="0"/></Offset>
+						</Anchor>
+						<Anchor point="Right" relativeTo="UserKeyFrame" relativePoint="Right">
+							<Offset><AbsDimension x="-5" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+
+					<!-- backdrop defines the background and the border of the frame -->
+					<Backdrop name="UserKeyStatusBarBackdrop" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+						<EdgeSize>
+							<AbsValue val="16"/>
+						</EdgeSize>
+						<TileSize>
+							<AbsValue val="16"/>
+						</TileSize>
+						<BackgroundInsets>
+							<AbsInset left="5" right="5" top="5" bottom="5"/>
+						</BackgroundInsets>
+					</Backdrop>	
+
+					<!-- now we define the text string that will show the message to the user -->
+					<Layers>
+						<Layer>
+							<FontString name="UserKeyStatusBarText" inherits="GameTooltipText" text=" ">
+								<Anchors>
+									<Anchor point="Center" relativeTo="UserKeyStatusBar" relativePoint="Center"> <!-- relative to UserKeyStatusBar -->
+										<Offset><AbsDimension x="0" y="0"/> </Offset>
+									</Anchor>
+								</Anchors>
+							</FontString>
+						</Layer>
+					</Layers>
+				</Frame>
+
+				<!-- ****************************************************************************************************** -->
+				<!-- this simple frame handles the keyboard input for the bound key. The default UI doesn't use a sub
+				  frame like this. Instead, it incorporates the OnKeyDown() right into the scrollframe, but then you can't
+				  use any other keypresses while the bind interface is open. With my method, all keystrokes are fine
+				  except during an actual bind operation. -->
+
+				<Frame name="UserKeyGrabber" >
+					<Scripts>
+						<OnKeyDown>UserKey_OnKeyDown(self, key)</OnKeyDown>
+					</Scripts>					
+				</Frame>
+
+		</Frames>
+
+		<Scripts> <!-- UserKeyFrame -->
+			<OnEvent>UserKey_OnEvent(self, event, ...)</OnEvent>
+			<OnLoad>UserKey_OnLoad()</OnLoad>
+			<OnMouseDown>self:StartMoving()</OnMouseDown>
+			<OnMouseUp>self:StopMovingOrSizing()</OnMouseUp>
+		</Scripts>
+
+	</Frame>
+</Ui>

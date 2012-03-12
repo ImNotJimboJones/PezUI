@@ -1,0 +1,19 @@
+
+TomTomDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}
+TomTomWaypoints = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+		},
+	},
+}

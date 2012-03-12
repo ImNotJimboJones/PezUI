@@ -1,0 +1,26 @@
+
+GoGo_Prefs = {
+	["AspectPack"] = false,
+	["GlobalPrefMount"] = false,
+	["DruidFlightForm"] = false,
+	["RemoveBuffs"] = true,
+	["UnknownMounts"] = {
+	},
+	["DruidFormNotRandomize"] = false,
+	["DruidDisableInCombat"] = false,
+	["DisableMountNotice"] = false,
+	["autodismount"] = true,
+	["DisableUpdateNotice"] = false,
+	["Zones"] = {
+	},
+	["version"] = "4.3.1",
+	["DruidClickForm"] = true,
+	["GlobalPrefMounts"] = {
+	},
+	["GlobalExclude"] = {
+	},
+	["PaladinUseCrusaderAura"] = false,
+	["DisableWaterFlight"] = true,
+}
+GoGo_DebugLog = {
+}

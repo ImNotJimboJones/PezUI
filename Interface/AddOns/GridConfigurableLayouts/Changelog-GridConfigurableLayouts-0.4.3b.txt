@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r82 | msaint | 2011-12-04 14:55:32 +0000 (Sun, 04 Dec 2011) | 1 line
+Changed paths:
+   A /tags/0.4.3b (from /trunk:81)
+
+Tagging as 0.4.3b
+------------------------------------------------------------------------
+r81 | msaint | 2011-12-04 14:54:17 +0000 (Sun, 04 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/GridConfigurableLayouts.toc
+
+Updated game version in toc.
+------------------------------------------------------------------------
+r78 | msaint | 2011-07-01 16:13:05 +0000 (Fri, 01 Jul 2011) | 2 lines
+Changed paths:
+   M /trunk/GridConfigurableLayouts.lua
+   M /trunk/GridConfigurableLayouts.toc
+
+Fixed bug where using namelists could prevent other players from showing.
+Fixed bug where namelists did not handle special characters correctly.
+------------------------------------------------------------------------

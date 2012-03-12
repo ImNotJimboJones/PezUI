@@ -1,0 +1,18 @@
+
+ZygorTalentAdvisorSettings = {
+	["char"] = {
+		["Pezzer - Burning Blade"] = {
+			["debuglog"] = {
+				"18:12:09> Viewer started. ---------------------------", -- [1]
+				"18:12:10> PLAYER_ALIVE", -- [2]
+			},
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+		},
+	},
+}

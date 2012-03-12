@@ -1,0 +1,22 @@
+
+RatingBusterDB = {
+	["namespaces"] = {
+		["LibDualSpec-1.0"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["profileVersion"] = 1,
+			["sumIgnoreMail"] = false,
+			["sumRangedHaste"] = true,
+			["showCritFromAgi"] = true,
+			["sumRangedHit"] = true,
+			["sumRAP"] = true,
+			["sumRangedCrit"] = true,
+			["ratingPhysical"] = true,
+		},
+	},
+}

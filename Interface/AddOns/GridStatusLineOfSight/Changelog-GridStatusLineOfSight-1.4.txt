@@ -1,0 +1,22 @@
+------------------------------------------------------------------------
+r36 | misterb1986 | 2011-11-29 14:08:52 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   A /tags/1.4 (from /trunk:35)
+
+Tag as 1.4.
+------------------------------------------------------------------------
+r35 | misterb1986 | 2011-11-29 14:08:28 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/GridStatusLineOfSight.lua
+   M /trunk/GridStatusLineOfSight.toc
+
+Bump toc to 4.3.
+------------------------------------------------------------------------
+r34 | misterb1986 | 2011-10-06 23:33:02 +0000 (Thu, 06 Oct 2011) | 3 lines
+Changed paths:
+   M /trunk/GridStatusLineOfSight.lua
+
+Use existing Grid_UnitLeft message instead of iterating roster on every roster change.
+Use OnStatusEnable/Disable instead of OnEnable/Disable.
+Add Reset() method.
+------------------------------------------------------------------------

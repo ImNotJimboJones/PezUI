@@ -1,0 +1,587 @@
+
+UserKeyBindings = {
+	{
+		["action"] = "none",
+		["text"] = "************************ Abilities and Spells ****************************************",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [1]
+	{
+		["action"] = "none",
+		["text"] = "     -----General-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [2]
+	{
+		["action"] = "Arcane Torrent",
+		["text"] = "Arcane Torrent",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [3]
+	{
+		["action"] = "Auto Attack",
+		["text"] = "Auto Attack",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [4]
+	{
+		["action"] = "none",
+		["text"] = "     -----Holy-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [5]
+	{
+		["action"] = "Cleanse",
+		["text"] = "Cleanse",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [6]
+	{
+		["action"] = "Consecration",
+		["text"] = "Consecration",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [7]
+	{
+		["action"] = "Exorcism",
+		["text"] = "Exorcism",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [8]
+	{
+		["action"] = "Flash of Light",
+		["text"] = "Flash of Light",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [9]
+	{
+		["action"] = "Holy Light",
+		["text"] = "Holy Light",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [10]
+	{
+		["action"] = "Holy Wrath",
+		["text"] = "Holy Wrath",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [11]
+	{
+		["action"] = "Lay on Hands",
+		["text"] = "Lay on Hands",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [12]
+	{
+		["action"] = "Redemption",
+		["text"] = "Redemption",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [13]
+	{
+		["action"] = "Seal of Insight",
+		["text"] = "Seal of Insight",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [14]
+	{
+		["action"] = "Word of Glory",
+		["text"] = "Word of Glory",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [15]
+	{
+		["action"] = "Concentration Aura",
+		["text"] = "Concentration Aura",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [16]
+	{
+		["action"] = "Divine Plea",
+		["text"] = "Divine Plea",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [17]
+	{
+		["action"] = "Divine Light",
+		["text"] = "Divine Light",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [18]
+	{
+		["action"] = "Turn Evil",
+		["text"] = "Turn Evil",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [19]
+	{
+		["action"] = "Holy Radiance",
+		["text"] = "Holy Radiance",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [20]
+	{
+		["action"] = "none",
+		["text"] = "     -----Protection-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [21]
+	{
+		["action"] = "Avenger's Shield",
+		["text"] = "Avenger's Shield",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [22]
+	{
+		["action"] = "Blessing of Kings",
+		["text"] = "Blessing of Kings",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [23]
+	{
+		["action"] = "Devotion Aura",
+		["text"] = "Devotion Aura",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [24]
+	{
+		["action"] = "Divine Protection",
+		["text"] = "Divine Protection",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [25]
+	{
+		["action"] = "Hammer of Justice",
+		["text"] = "Hammer of Justice",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [26]
+	{
+		["action"] = "Hammer of the Righteous",
+		["text"] = "Hammer of the Righteous",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [27]
+	{
+		["action"] = "Hand of Protection",
+		["text"] = "Hand of Protection",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [28]
+	{
+		["action"] = "Hand of Reckoning",
+		["text"] = "Hand of Reckoning",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [29]
+	{
+		["action"] = "Righteous Fury",
+		["text"] = "Righteous Fury",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [30]
+	{
+		["action"] = "Seal of Righteousness",
+		["text"] = "Seal of Righteousness",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [31]
+	{
+		["action"] = "Righteous Defense",
+		["text"] = "Righteous Defense",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [32]
+	{
+		["action"] = "Divine Shield",
+		["text"] = "Divine Shield",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [33]
+	{
+		["action"] = "Hand of Freedom",
+		["text"] = "Hand of Freedom",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [34]
+	{
+		["action"] = "Seal of Justice",
+		["text"] = "Seal of Justice",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [35]
+	{
+		["action"] = "Hand of Salvation",
+		["text"] = "Hand of Salvation",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [36]
+	{
+		["action"] = "Resistance Aura",
+		["text"] = "Resistance Aura",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [37]
+	{
+		["action"] = "Hand of Sacrifice",
+		["text"] = "Hand of Sacrifice",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [38]
+	{
+		["action"] = "Guardian of Ancient Kings",
+		["text"] = "Guardian of Ancient Kings",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [39]
+	{
+		["action"] = "none",
+		["text"] = "     -----Retribution-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [40]
+	{
+		["action"] = "Crusader Strike",
+		["text"] = "Crusader Strike",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [41]
+	{
+		["action"] = "Judgement",
+		["text"] = "Judgement",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [42]
+	{
+		["action"] = "Retribution Aura",
+		["text"] = "Retribution Aura",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [43]
+	{
+		["action"] = "Seal of Truth",
+		["text"] = "Seal of Truth",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [44]
+	{
+		["action"] = "Hammer of Wrath",
+		["text"] = "Hammer of Wrath",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [45]
+	{
+		["action"] = "Rebuke",
+		["text"] = "Rebuke",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [46]
+	{
+		["action"] = "Blessing of Might",
+		["text"] = "Blessing of Might",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [47]
+	{
+		["action"] = "Crusader Aura",
+		["text"] = "Crusader Aura",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [48]
+	{
+		["action"] = "Avenging Wrath",
+		["text"] = "Avenging Wrath",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [49]
+	{
+		["action"] = "Inquisition",
+		["text"] = "Inquisition",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [50]
+	{
+		["action"] = "none",
+		["text"] = "     -----All - Guild Perks-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [51]
+	{
+		["action"] = "Have Group, Will Travel",
+		["text"] = "Have Group, Will Travel",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [52]
+	{
+		["action"] = "Mobile Banking",
+		["text"] = "Mobile Banking",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [53]
+	{
+		["action"] = "none",
+		["text"] = "     -----Enchanting-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [54]
+	{
+		["action"] = "Enchanting",
+		["text"] = "Enchanting",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [55]
+	{
+		["action"] = "Disenchant",
+		["text"] = "Disenchant",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [56]
+	{
+		["action"] = "none",
+		["text"] = "     -----First Aid-----",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [57]
+	{
+		["action"] = "First Aid",
+		["text"] = "First Aid",
+		["bindtype"] = "Spell",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [58]
+	{
+		["action"] = "none",
+		["text"] = "*********************** Macros ************************************************",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [59]
+	{
+		["action"] = "Assist Focus",
+		["text"] = "Assist Focus",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [60]
+	{
+		["action"] = "ExraAction",
+		["text"] = "ExraAction",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [61]
+	{
+		["action"] = "horror",
+		["text"] = "horror",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [62]
+	{
+		["action"] = "Kill Shot",
+		["text"] = "Kill Shot",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [63]
+	{
+		["action"] = "Left",
+		["text"] = "Left",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [64]
+	{
+		["action"] = "Pet",
+		["text"] = "Pet",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [65]
+	{
+		["action"] = "Pet Assist",
+		["text"] = "Pet Assist",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [66]
+	{
+		["action"] = "PvP Trink",
+		["text"] = "PvP Trink",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [67]
+	{
+		["action"] = "Raptor Clip",
+		["text"] = "Raptor Clip",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [68]
+	{
+		["action"] = "Recruit",
+		["text"] = "Recruit",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [69]
+	{
+		["action"] = "right",
+		["text"] = "right",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [70]
+	{
+		["action"] = "Roar",
+		["text"] = "Roar",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [71]
+	{
+		["action"] = "Silence Focus",
+		["text"] = "Silence Focus",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [72]
+	{
+		["action"] = "Spark",
+		["text"] = "Spark",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [73]
+	{
+		["action"] = "Strip",
+		["text"] = "Strip",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [74]
+	{
+		["action"] = "temp",
+		["text"] = "temp",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [75]
+	{
+		["action"] = "Trinket 1",
+		["text"] = "Trinket 1",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [76]
+	{
+		["action"] = "Trinket 2",
+		["text"] = "Trinket 2",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [77]
+	{
+		["action"] = "Trinkets",
+		["text"] = "Trinkets",
+		["bindtype"] = "Macro",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [78]
+	{
+		["action"] = "none",
+		["text"] = "************************ Usable Equipment******************************************",
+		["bindtype"] = "na",
+		["k"] = "BUTTON4",
+		["k2"] = "Not Bound",
+	}, -- [79]
+	{
+		["action"] = "Lesser Astral Essence",
+		["text"] = "Lesser Astral Essence|c00a0a0a0 Bag(3,2)",
+		["bindtype"] = "Item",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [80]
+	{
+		["action"] = "Greater Magic Essence",
+		["text"] = "Greater Magic Essence|c00a0a0a0 Bag(3,5)",
+		["bindtype"] = "Item",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [81]
+	{
+		["action"] = "Greater Astral Essence",
+		["text"] = "Greater Astral Essence|c00a0a0a0 Bag(3,7)",
+		["bindtype"] = "Item",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [82]
+	{
+		["action"] = "Hearthstone",
+		["text"] = "Hearthstone|c00a0a0a0 Bag(4,1)",
+		["bindtype"] = "Item",
+		["k"] = "Not Bound",
+		["k2"] = "Not Bound",
+	}, -- [83]
+}
+UK_MAX_BINDS = 83
+UK_DATA_VALID = 0
+UK_MACRO_TYPE = -1

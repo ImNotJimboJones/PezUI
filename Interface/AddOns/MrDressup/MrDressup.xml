@@ -1,0 +1,72 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+	..\..\FrameXML\UI.xsd">
+	<Frame name="MrDressupFrame" parent="CharacterModelFrame">
+		<Frames>
+			<CheckButton name="$parentShowHelm" inherits="OptionsSmallCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="CharacterModelFrame" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="-302"/>
+						</Offset>
+					</Anchor>					
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName().."Text"]:SetText(SHOW_HELM);
+						self.tooltipText = OPTION_TOOLTIP_SHOW_HELM;
+						self:SetHitRectInsets(0,0,0,0);
+					</OnLoad>
+					<OnClick>
+						local value = self:GetChecked();
+						if ( value == 1 ) then
+							PlaySound("igMainMenuOptionCheckBoxOn");
+						else
+							PlaySound("igMainMenuOptionCheckBoxOff");
+						end
+						ShowHelm(value);
+					</OnClick>
+					<OnShow>
+						self:SetChecked(ShowingHelm());
+					</OnShow>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentShowCloak" inherits="OptionsSmallCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentShowHelm" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="0" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName().."Text"]:SetText(SHOW_CLOAK);
+						self.tooltipText = OPTION_TOOLTIP_SHOW_CLOAK;
+						self:SetHitRectInsets(0,0,0,0);
+					</OnLoad>
+					<OnClick>
+						local value = self:GetChecked();
+						if ( value == 1 ) then
+							PlaySound("igMainMenuOptionCheckBoxOn");
+						else
+							PlaySound("igMainMenuOptionCheckBoxOff");
+						end
+						ShowCloak(value);
+					</OnClick>
+					<OnShow>
+						self:SetChecked(ShowingCloak());
+					</OnShow>					
+				</Scripts>
+			</CheckButton>			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterEvent("ADDON_LOADED");
+				MrDressup.OnLoad();
+			</OnLoad>
+			<OnEvent>
+				MrDressup.OnEvent(self, event, ...)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>

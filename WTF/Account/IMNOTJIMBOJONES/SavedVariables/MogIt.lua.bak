@@ -1,0 +1,31 @@
+
+MogItDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["global"] = {
+		["version"] = "2.0.2",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["noAnim"] = true,
+		},
+	},
+}
+MogItWishlist = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+	},
+	["profiles"] = {
+		["Pezzer - Burning Blade"] = {
+			["sets"] = {
+				{
+					["name"] = "Conqueror's Scourgestalker Battlegear",
+					["items"] = {
+						["HeadSlot"] = 46143,
+					},
+				}, -- [1]
+			},
+		},
+	},
+}

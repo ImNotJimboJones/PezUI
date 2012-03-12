@@ -1,0 +1,126 @@
+<!--
+    This contains the Addon List Options. This consists of the following
+    elements:
+-->
+<!--
+    TITLE: Settable title for the frame. Key name is title.
+-->
+<!--
+    Reload On Exit Checkbox
+        Indicates if the ui should be reloaded when the addon
+        settings are applied.
+-->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+    <!-- This is a checkbox entry in the options frame -->
+    <CheckButton name="AddonListOptionsEntry" virtual="true">
+        <Size>
+            <AbsDimension x="26" y="26"/>
+        </Size>
+
+        <HitRectInsets>
+            <AbsInset left="0" right="-100" top="0" bottom="0"/>
+        </HitRectInsets>
+
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" inherits="GameFontNormal" text="">
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="RIGHT">
+                            <Offset>
+                                <AbsDimension x="0" y="1"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+    </CheckButton>
+
+    <!--
+        This is the frame that contains the scroll frame. This has to exist
+        because the scroll frame has a slider which is off to the side. By
+        having this, it becomes easier to handle the combined frame and
+        slider. In addition to this, putting a border on this frame instead of
+        the scroll frame makes the content not overlap the border
+    -->
+    <Frame name="AddonListOptions" virtual="true">
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="title" text="Options"
+                    inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="TOP">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="16" y="-16" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <CheckButton parentKey="reloadUI" inherits="AddonListOptionsEntry">
+                <Anchors>
+                    <Anchor point="LEFT">
+                        <Offset>
+                            <AbsDimension x="16"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                
+                <Scripts>
+                    <OnLoad>
+                        self.title:SetText("Reload UI when changing Addons");
+                    </OnLoad>
+                    <OnClick>
+                        Template_DefaultCheckButtonFunction(self);
+                        
+                        AddonListOptions_ReloadUI_OnClick(self);
+                    </OnClick>
+                    <OnEnter>
+                        Template_ShowTooltip_OneLine(self, "Will force the UI to reload when you apply addon changes");
+                    </OnEnter>
+                    <OnLeave>
+                        Template_HideTooltip(self);
+                    </OnLeave>
+                </Scripts>
+            </CheckButton>
+            <CheckButton parentKey="showMemory" inherits="AddonListOptionsEntry">
+                <Scripts>
+                    <OnLoad>
+                        self.title:SetText("Show Memory Used");
+                        self:SetPoint("TOP", self:GetParent().reloadUI, "BOTTOM", 0, -16);
+                    </OnLoad>
+                    <OnClick>
+                        Template_DefaultCheckButtonFunction(self);
+                        
+                        AddonListOptions_ShowMemory_OnClick(self);
+                    </OnClick>
+                    <OnEnter>
+                        Template_ShowTooltip_OneLine(self, "Will show the memory useage of loaded addons in their tooltips");
+                    </OnEnter>
+                    <OnLeave>
+                        Template_HideTooltip(self);
+                    </OnLeave>
+                </Scripts>
+            </CheckButton>
+        </Frames>
+    </Frame>
+    
+    <Frame inherits="AddonListOptions">
+       <Scripts>
+           <OnLoad>
+               Options_Initialize(self);
+           </OnLoad>
+       </Scripts>
+    </Frame>
+</Ui>

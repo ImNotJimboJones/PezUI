@@ -1,0 +1,39 @@
+﻿## Interface: 40300
+## Author: Aelobin (The Maelstrom EU)
+## Version: 2.1
+## LoadOnDemand: 1
+## RequiredDeps: MogIt
+## X-Curse-Packaged-Version: v2.2.1
+## X-Curse-Project-Name: MogIt
+## X-Curse-Project-ID: mogit
+## X-Curse-Repository-ID: wow/mogit/mainline
+
+## Title: MogIt_Mail
+## Title-deDE: MogIt_Kette
+## Title-frFR: MogIt_Mailles
+## Title-esES: MogIt_Mallas
+## Title-ruRU: MogIt_Кольчуга
+## Title-koKR: MogIt_사슬
+## Title-zhTW: MogIt_鎖甲
+## Title-zhCN: MogIt_锁甲
+
+## Notes: MogIt Data
+## Notes-deDE: MogIt Daten
+## Notes-frFR: MogIt Données
+## Notes-esES: MogIt Datos
+## Notes-ruRU: MogIt данные
+## Notes-koKR: MogIt 데이터
+## Notes-zhTW: MogIt 的數據
+## Notes-zhCN: MogIt 数据
+
+Bosses.lua
+Colours.lua
+
+Head.lua
+Shoulders.lua
+Chest.lua
+Wrists.lua
+Hands.lua
+Waist.lua
+Legs.lua
+Feet.lua

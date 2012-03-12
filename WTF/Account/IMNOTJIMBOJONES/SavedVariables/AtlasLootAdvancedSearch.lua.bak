@@ -1,0 +1,14 @@
+
+AtlasLootAdvancedSearchConfig = {
+	["namespaces"] = {
+		["ModuleSettings"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

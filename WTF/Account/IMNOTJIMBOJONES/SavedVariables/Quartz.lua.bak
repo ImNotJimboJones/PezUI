@@ -1,0 +1,124 @@
+
+Quartz3DB = {
+	["namespaces"] = {
+		["Swing"] = {
+		},
+		["Buff"] = {
+		},
+		["Interrupt"] = {
+			["profiles"] = {
+				["Default"] = {
+					["interruptcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+				},
+				["Lélu - Burning Blade"] = {
+					["interruptcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+				},
+			},
+		},
+		["Flight"] = {
+		},
+		["Pet"] = {
+			["profiles"] = {
+				["Default"] = {
+					["x"] = 668.0000610351562,
+				},
+				["Lélu - Burning Blade"] = {
+					["x"] = 668.0000610351562,
+				},
+			},
+		},
+		["EnemyCasts"] = {
+		},
+		["Player"] = {
+			["profiles"] = {
+				["Default"] = {
+					["h"] = 15,
+					["y"] = 155,
+					["border"] = "None",
+					["x"] = 643.0000610351562,
+				},
+				["Lélu - Burning Blade"] = {
+					["h"] = 15,
+					["y"] = 155,
+					["border"] = "None",
+					["x"] = 643.0000610351562,
+				},
+			},
+		},
+		["GCD"] = {
+			["profiles"] = {
+				["Default"] = {
+					["gcdposition"] = "top",
+					["gcdheight"] = 5,
+				},
+				["Lélu - Burning Blade"] = {
+					["gcdposition"] = "top",
+					["gcdheight"] = 5,
+				},
+			},
+		},
+		["Focus"] = {
+			["profiles"] = {
+				["Default"] = {
+					["showfriendly"] = false,
+					["y"] = 568,
+					["x"] = 668.0000610351562,
+				},
+				["Lélu - Burning Blade"] = {
+					["showfriendly"] = false,
+					["y"] = 568,
+					["x"] = 668.0000610351562,
+				},
+			},
+		},
+		["Target"] = {
+			["profiles"] = {
+				["Default"] = {
+					["showfriendly"] = false,
+					["y"] = 602,
+					["x"] = 661,
+				},
+				["Lélu - Burning Blade"] = {
+					["showfriendly"] = false,
+					["y"] = 602,
+					["x"] = 661,
+				},
+			},
+		},
+		["Range"] = {
+		},
+		["Mirror"] = {
+		},
+		["Latency"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Lélu - Burning Blade"] = "Lélu - Burning Blade",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["modules"] = {
+				["EnemyCasts"] = true,
+				["Pet"] = false,
+				["Swing"] = false,
+			},
+		},
+		["Lélu - Burning Blade"] = {
+			["modules"] = {
+				["EnemyCasts"] = true,
+				["Pet"] = false,
+				["Swing"] = false,
+			},
+		},
+	},
+}
