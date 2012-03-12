@@ -1,0 +1,64 @@
+
+BazookaDB = {
+	["namespaces"] = {
+		["LibDualSpec-1.0"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["plugins"] = {
+				["launcher"] = {
+					["Swatter"] = {
+						["pos"] = 12,
+					},
+					["PitBull4"] = {
+						["pos"] = 2,
+					},
+					["Auc-Util-AutoMagic"] = {
+						["pos"] = 3,
+					},
+					["Informant"] = {
+						["pos"] = 13,
+					},
+					["Grid"] = {
+						["pos"] = 4,
+					},
+					["Prat"] = {
+						["pos"] = 11,
+					},
+					["Omen"] = {
+						["pos"] = 10,
+					},
+					["AddonMgr"] = {
+						["pos"] = 5,
+					},
+					["Auc-Util-SearchUI"] = {
+						["pos"] = 8,
+					},
+					["AucAdvanced"] = {
+						["pos"] = 6,
+					},
+					["kgPanels"] = {
+						["pos"] = 7,
+					},
+					["Masque"] = {
+						["pos"] = 9,
+					},
+				},
+				["data source"] = {
+					["Skada"] = {
+						["pos"] = 1,
+					},
+				},
+			},
+			["bars"] = {
+				{
+					["pos"] = 1,
+				}, -- [1]
+			},
+		},
+	},
+}

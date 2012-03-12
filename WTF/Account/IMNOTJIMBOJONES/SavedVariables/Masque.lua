@@ -27,8 +27,8 @@ MasqueDB = {
 				},
 				["Bison_prog"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["PitBull4_Player"] = {
 					["SkinID"] = "Renaitre: Fade",
@@ -41,13 +41,13 @@ MasqueDB = {
 				},
 				["Bison_combo"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Bison"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Macaroon_Pet"] = {
 					["SkinID"] = "Sleek",
@@ -65,8 +65,8 @@ MasqueDB = {
 				},
 				["Bison_buff"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Blizzard Buffs_TempEnchant"] = {
 					["SkinID"] = "Renaitre: Fade",
@@ -74,8 +74,8 @@ MasqueDB = {
 					["Inherit"] = false,
 				},
 				["Masque"] = {
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Blizzard Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
@@ -98,8 +98,6 @@ MasqueDB = {
 					["Inherit"] = false,
 				},
 				["Macaroon_Spell Bar"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
 					["Colors"] = {
 						["Normal"] = {
 							1, -- [1]
@@ -114,6 +112,8 @@ MasqueDB = {
 							1, -- [4]
 						},
 					},
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
 				["Blizzard Buffs_Buffs"] = {
@@ -122,8 +122,6 @@ MasqueDB = {
 					["Inherit"] = false,
 				},
 				["Macaroon_Shortcuts"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.8,
 					["Colors"] = {
 						["Normal"] = {
 							0.3, -- [1]
@@ -138,6 +136,8 @@ MasqueDB = {
 							1, -- [4]
 						},
 					},
+					["Inherit"] = false,
+					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
 				},
 				["PitBull4_Target"] = {
@@ -147,13 +147,13 @@ MasqueDB = {
 				},
 				["Bison_weapon"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Bison_debuff"] = {
 					["Disabled"] = true,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 			},
 		},

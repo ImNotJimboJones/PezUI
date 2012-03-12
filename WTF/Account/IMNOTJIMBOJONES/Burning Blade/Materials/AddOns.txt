@@ -115,3 +115,7 @@ DBM-Sunwell: disabled
 DBM-AQ40: disabled
 DBM-TheEye: disabled
 DBM-ThroneFourWinds: disabled
+Broker_uClock: disabled
+Broker_MicroMenu: disabled
+Volumizer: disabled
+Broker_LonnyMenu: disabled

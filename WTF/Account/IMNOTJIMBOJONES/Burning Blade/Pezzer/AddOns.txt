@@ -186,3 +186,7 @@ PitBull4_VoiceIcon: enabled
 Stuf: enabled
 Stuf_Options: enabled
 SexyMap: enabled
+Broker_uClock: enabled
+Broker_MicroMenu: enabled
+Volumizer: enabled
+Broker_LonnyMenu: disabled
