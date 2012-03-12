@@ -1,6 +1,0 @@
-
-GlamourConfig = {
-	["Burning Blade-Pezzer"] = {
-		["CHECK0"] = 1,
-	},
-}

@@ -4,9 +4,8 @@ InformantConfig = {
 	["profile.Default"] = {
 	},
 	["position"] = {
-		["y"] = 480.0000305175781,
-		["x"] = 768.0000610351562,
+		["y"] = 384.0000305175781,
+		["x"] = 614.3999633789062,
 	},
 }
-InformantLocalUpdates = {
-}
+InformantLocalUpdates = nil

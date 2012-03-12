@@ -1,12 +1,11 @@
 
 TidyPlatesOptions = {
-	["autohide"] = 1,
+	["_EnableMiniButton"] = false,
+	["EnableMinimapButton"] = false,
 	["WelcomeShown"] = true,
-	["LDB"] = {
-	},
 	["FriendlyAutomation"] = "No Automation",
-	["EnemyAutomation"] = "Show during Combat, Hide when Combat ends",
-	["primary"] = "Threat Plates",
-	["EnableCastWatcher"] = 1,
-	["secondary"] = "Neon/|cFFFF4400Damage",
+	["EnemyAutomation"] = "No Automation",
+	["primary"] = "Neon/|cFFFF4400Damage",
+	["EnableCastWatcher"] = false,
+	["secondary"] = "Neon/|cFF3782D1Tank",
 }

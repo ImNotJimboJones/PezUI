@@ -1,9 +1,0 @@
-## Interface: 40300
-## Title: EnergyWatch
-## Version: 4.3.2
-## Notes: A mobile, configurable Energy/Focus/Mana/Rage/Runic Power bar with Combo Point/Holy Power/Soul Shard tracking
-## Author: OneWingedAngel
-## SavedVariablesPerCharacter: EnergyWatchConfig
-
-EnergyWatchUI.lua
-EnergyWatch.lua

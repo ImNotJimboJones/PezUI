@@ -1,7 +1,0 @@
-
-TidyPlatesOptions = {
-	["EnableCastWatcher"] = 1,
-	["primary"] = "Graphite",
-	["autohide"] = 1,
-	["secondary"] = "Graphite",
-}

@@ -1,0 +1,14 @@
+
+kgPanelsDB = {
+	["namespaces"] = {
+		["LibDualSpec-1.0"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

@@ -1,35 +1,26 @@
 
 AucAdvancedConfig = {
+	["users.Burning Blade.Pezzer"] = "Default",
+	["version"] = 1,
 	["profile.Default"] = {
-		["scandata.summaryonpartial"] = false,
-		["scandata.summaryonfull"] = false,
-		["tooltip"] = {
-			["marketprice"] = {
-			},
-		},
-		["configator.left"] = 368.0001220703125,
-		["core"] = {
-			["matcher"] = {
-				["matcherlist"] = {
-					"Undercut", -- [1]
-					"BeanCount", -- [2]
+		["stat"] = {
+			["sales"] = {
+				["ignoredsigs"] = {
 				},
 			},
 		},
 		["util"] = {
 			["appraiser"] = {
-			},
-			["EasyBuyout"] = {
-				["EGL.EBuy.limit"] = 1000000,
-				["active"] = true,
+				["columnsortcurDir"] = -1,
+				["columnsortcurSort"] = 6,
 			},
 			["mover"] = {
 				["anchors"] = {
 					"TOPLEFT", -- [1]
 					nil, -- [2]
 					"TOPLEFT", -- [3]
-					16.00000190734863, -- [4]
-					-115.9999923706055, -- [5]
+					0, -- [4]
+					-104.0000305175781, -- [5]
 				},
 			},
 			["automagic"] = {
@@ -38,20 +29,10 @@ AucAdvancedConfig = {
 			["pricelevel"] = {
 			},
 		},
-		["ModTTShow"] = "alt",
-		["stat"] = {
-			["sales"] = {
-				["ignoredsigs"] = {
-				},
-			},
-		},
-		["configator.top"] = 705,
 	},
-	["version"] = 1,
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
-		["Ysondre"] = "Zelyna",
 		["Burning Blade"] = "Pezzer",
 	},
 	["Stats"] = {

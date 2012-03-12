@@ -9,6 +9,7 @@ RecountDB = {
 			["MainWindow"] = {
 				["Position"] = {
 					["y"] = 3.0517578125e-05,
+					["w"] = 139.9999694824219,
 					["h"] = 199.9999847412109,
 				},
 			},
@@ -21,7 +22,6 @@ RecountDB = {
 			},
 			["DetailWindowY"] = 0,
 			["DetailWindowX"] = 0,
-			["MainWindowVis"] = false,
 			["GraphWindowX"] = 0,
 			["CurDataSet"] = "OverallData",
 		},

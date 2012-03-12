@@ -1,0 +1,50 @@
+------------------------------------------------------------------------
+r9 | fammy2k | 2010-12-17 05:30:56 +0000 (Fri, 17 Dec 2010) | 2 lines
+Changed paths:
+   A /tags/v4.0.0-beta19-11 (from /trunk:8)
+
+Version: v4.0.0-beta19-11
+ * Fixed bug on toc
+------------------------------------------------------------------------
+r8 | fammy2k | 2010-12-17 05:30:23 +0000 (Fri, 17 Dec 2010) | 2 lines
+Changed paths:
+   M /trunk/PitBull4_HealthFlash.toc
+
+v4.0.0-beta19-11
+ * Fixed bug on toc
+------------------------------------------------------------------------
+r6 | fammy2k | 2010-12-17 05:24:59 +0000 (Fri, 17 Dec 2010) | 2 lines
+Changed paths:
+   A /trunk/.pkgmeta
+   M /trunk/PitBull4_HealthFlash.toc
+
+v4.0.0-beta19-10
+ * Removed Load on Demand
+------------------------------------------------------------------------
+r4 | fammy2k | 2010-12-15 15:30:32 +0000 (Wed, 15 Dec 2010) | 2 lines
+Changed paths:
+   M /trunk/PitBull4_HealthFlash.toc
+
+v4.0.0-beta19
+ * Match Pitbull4 version
+------------------------------------------------------------------------
+r2 | fammy2k | 2010-12-04 16:39:25 +0000 (Sat, 04 Dec 2010) | 1 line
+Changed paths:
+   M /trunk
+   A /trunk/GlobalOptions.lua
+   A /trunk/HealthFlash.lua
+   A /trunk/LayoutOptions.lua
+   A /trunk/PitBull4_HealthFlash.toc
+   A /trunk/VisualHelperIndicator.lua
+   A /trunk/load.xml
+
+v0.9.0-beta1
+------------------------------------------------------------------------
+r1 | root | 2010-12-04 16:36:41 +0000 (Sat, 04 Dec 2010) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+"pitbull4_healthflash/mainline: Initial Import"
+------------------------------------------------------------------------

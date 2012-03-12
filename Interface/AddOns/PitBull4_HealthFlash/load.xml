@@ -1,0 +1,50 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+
+   <Script file="HealthFlash.lua"/>
+
+   <Frame name="PitBull4_HealthFlash_TemplateFrame" virtual="true">
+      <Layers>
+         <Layer level="OVERLAY">
+             <Texture name="$parentBlank" parentKey="blank" file="Interface\Buttons\WHITE8X8" alpha="0" setAllPoints="true" alphaMode="ADD">
+                 <Anchors>
+                     <Anchor point="CENTER"/>
+                 </Anchors>
+             </Texture>
+         </Layer>
+      </Layers>
+      <Scripts>
+         <OnHide>
+             if ( self.anim:IsPlaying() ) then
+                 self.anim:Stop();
+                 self:HealthFlashAnimFinished(self.anim);
+             end
+         </OnHide>
+      </Scripts>
+      <Animations>
+         <AnimationGroup parentKey="anim">
+             <Alpha parentKey="step1" target="$parentBlank" duration="0.1" change="0.7" order="1" smoothing="IN"/>
+             <Alpha parentKey="step2" target="$parentBlank" duration="0.5" change="-0.7" order="2" smoothing="IN_OUT"/>
+             <Scripts>
+                 <OnPlay>
+                     local frame = self:GetParent();
+                     frame.blank:SetPoint("TOPLEFT", frame.healthbar, "TOPLEFT", 0, 0)
+                     frame.blank:SetPoint("BOTTOMRIGHT", frame.healthbar, "BOTTOMRIGHT", frame.healthbar.fg, 0)
+                     frame.blank:SetAlpha(0)
+                     frame:Show();
+                 </OnPlay>
+                 <OnUpdate>
+                     local frame = self:GetParent();
+                     local f = frame.healthbar.anim or frame.healthbar.fg
+                     frame.blank:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
+                 </OnUpdate>
+                 <OnFinished>
+                     local frame = self:GetParent();
+                     frame.blank:SetAlpha(0);
+                     self:GetParent():HealthFlashAnimFinished(self);
+                 </OnFinished>
+             </Scripts>
+         </AnimationGroup>
+      </Animations>
+   </Frame>
+
+</Ui>

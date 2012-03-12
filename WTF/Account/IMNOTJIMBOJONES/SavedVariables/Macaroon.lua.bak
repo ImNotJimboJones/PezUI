@@ -31,17 +31,6 @@ MacaroonMacroMaster = nil
 MacaroonMacroVault = {
 	["Main Vault"] = {
 	},
-	["Burning Blade"] = {
-		["Pezzer"] = {
-			["Bar 1: Button 10"] = {
-				"", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
-		},
-	},
 }
 MacaroonItemCache = {
 }

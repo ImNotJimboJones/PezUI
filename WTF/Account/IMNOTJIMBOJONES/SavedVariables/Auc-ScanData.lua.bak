@@ -3,9 +3,9 @@ AucScanData = {
 	["Version"] = 1.3,
 	["scans"] = {
 		["Burning Blade"] = {
-			["Alliance"] = {
+			["Horde"] = {
 				["scanstats"] = {
-					["ImageUpdated"] = 1291165168,
+					["ImageUpdated"] = 1330226755,
 				},
 				["image"] = "rope",
 				["ropes"] = {

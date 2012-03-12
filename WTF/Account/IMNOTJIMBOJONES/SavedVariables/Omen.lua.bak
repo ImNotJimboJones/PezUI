@@ -1,25 +1,46 @@
 
 Omen3DB = {
 	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
-		["Pezzer - Burning Blade"] = {
-			["PositionW"] = 261.7412109375,
-			["NumBars"] = 8,
-			["PositionH"] = 118.0000152587891,
-			["VGrip2"] = 150.5012077713934,
-			["PositionY"] = 238.3789215087891,
-			["Shown"] = true,
-			["PositionX"] = 235.3587799072266,
-			["MinimapIcon"] = {
-				["hide"] = true,
+		["Default"] = {
+			["PositionW"] = 257.931396484375,
+			["Scale"] = 1.05,
+			["PositionH"] = 78.91263580322266,
+			["VGrip2"] = 148.3106164624356,
+			["PositionY"] = 110.6910171508789,
+			["Locked"] = true,
+			["Background"] = {
+				["BorderTexture"] = "None",
+				["Color"] = {
+					["a"] = 0,
+				},
+				["BarInset"] = 1,
+				["Texture"] = "Solid",
 			},
-			["UseFocus"] = true,
-			["VGrip1"] = 111.2400231353777,
-			["Alpha"] = 0.72,
-			["GrowUp"] = true,
-			["Autocollapse"] = true,
+			["Shown"] = true,
+			["PositionX"] = 1055.558837890625,
+			["VGrip1"] = 109.6208904287567,
+			["ShowWith"] = {
+				["Alone"] = true,
+				["UseShowWith"] = false,
+				["HideWhileResting"] = false,
+			},
+			["TitleBar"] = {
+				["ShowTitleBar"] = false,
+			},
+			["Warnings"] = {
+				["Message"] = true,
+				["Shake"] = true,
+				["SinkOptions"] = {
+					["sink20OutputSink"] = "Popup",
+				},
+			},
+			["Bar"] = {
+				["Texture"] = "Minimalist",
+				["Spacing"] = 1,
+			},
 		},
 	},
 }

@@ -1,8 +1,0 @@
-## Interface: 40200
-## Title: MrDressup
-## Author: Animal
-## Version: 1.0.6
-## Notes: Adds two checkboxes to the Character Frame to show or hide the Cloak and Helm of the player.
-## SavedVariablesPerCharacter: MrDressup_SV
-MrDressup.lua
-MrDressup.xml

@@ -1,6 +1,0 @@
-MACRO 16777217 "Lichborne" INV_Misc_QuestionMark
-#show
-#showtooltip
-/cast Lichborne
-/cast [@player] Death Coil
-END

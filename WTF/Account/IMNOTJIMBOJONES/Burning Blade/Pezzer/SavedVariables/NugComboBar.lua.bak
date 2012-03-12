@@ -1,2 +1,0 @@
-
-NugComboBarDB_Character = nil

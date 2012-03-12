@@ -1,6 +1,0 @@
-
-TidyPlatesHubSavedVariables = nil
-TidyPlatesHubTankSavedVariables = {
-}
-TidyPlatesHubDamageSavedVariables = {
-}

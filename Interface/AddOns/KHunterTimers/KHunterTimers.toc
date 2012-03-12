@@ -1,8 +1,0 @@
-## Interface: 40300
-## Title: Kharthus's Hunter Timers
-## Notes: Times hunter buffs/debuffs
-## Version: 3.4.12
-## DefaultState: Enabled
-## LoadOnDemand: 0
-## SavedVariables: KHTvars
-KHunterTimers.xml

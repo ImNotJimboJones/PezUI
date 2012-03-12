@@ -1,0 +1,22 @@
+------------------------------------------------------------------------
+r53 | moncai | 2011-12-04 13:56:23 +0000 (Sun, 04 Dec 2011) | 1 line
+Changed paths:
+   A /tags/v4.3.0 (from /trunk:52)
+
+Tagging as 4.3.0
+------------------------------------------------------------------------
+r52 | moncai | 2011-12-04 13:55:47 +0000 (Sun, 04 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/MoncaiQuestTracker.toc
+   M /trunk/WatchFrame.lua
+
+4.3.0 update
+------------------------------------------------------------------------
+r50 | moncai | 2011-11-29 12:09:29 +0000 (Tue, 29 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/MoncaiQuestTracker.toc
+   M /trunk/WatchFrame.lua
+
+v4.2.1, fixes ticket #32 (table index could be nil in some cases)
+------------------------------------------------------------------------

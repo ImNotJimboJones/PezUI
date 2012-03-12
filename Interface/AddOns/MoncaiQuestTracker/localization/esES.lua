@@ -1,0 +1,32 @@
+﻿local L = LibStub("AceLocale-3.0"):NewLocale("MoncaiQuestTracker", "esES", true)
+if L then	
+	L["(.*)(: ?.*)"] = "(.*)(: ?.*)"
+	L["([^ ]+)$"] = "([^ ]+)$"
+	L["are finished"] = "terminado" -- Needs review
+	L["Command not found"] = "Comando no encontrado"
+	L["Could not add buddy, buffer full"] = "No se puede añadir amigo, buffer completo" -- Needs review
+	L[".*: (%d+) ?/ ?%d+"] = ".*: (%d+) ?/ ?%d+"
+	L["(.*): (%d+) ?/ ?(%d+)"] = "(.*): (%d+) ?/ ?(%d+)"
+	L["(.*): %d+ ?/ ?%d+"] = "(.*): %d+ ?/ ?%d+"
+	L["[%d] %s"] = "[%d] %s"
+	L["Goodbye, "] = "Adiós,"
+	L["has "] = "tiene" -- Needs review
+	L["Hey, you're working on %s, I'll add it!"] = "Hey, you're working on %s, I'll add it!" -- Requires localization
+	L["is finished"] = "está terminada" -- Needs review
+	L["is finished with %s "] = "is finished with %s " -- Requires localization
+	L["Let's Party!"] = "Let's Party!" -- Requires localization
+	L["Moncaí Questtracker"] = "Moncaí Questtracker"
+	L["Moncaí's Quest Tracker disabled"] = "Moncaí's Quest Tracker deshabilitado"
+	L["Moncaí's Quest Tracker enabled"] = "Moncaí's Quest Tracker habilitado"
+	L["Moncaí's Quest Tracker loading, stand by..."] = "Moncaí's Quest Tracker cargando, stand by..." -- Needs review
+	L["mqt"] = "mqt" -- Requires localization
+	L["need"] = "need" -- Requires localization
+	L["needs"] = "needs" -- Requires localization
+	L["needs %1$d more %2$s "] = "needs %1$d more %2$s " -- Requires localization
+	L["PANIC!"] = "¡PÁNICO!"
+	L["QuestHelper integration active"] = "QuestHelper integration active" -- Requires localization
+	L["QuestHelper integration disabled"] = "QuestHelper integration disabled" -- Requires localization
+	L["rl"] = "rl" -- Requires localization
+	L["Welcome to the group, "] = "Bienvenido al grupo,"
+	L["You"] = "Tú"
+end

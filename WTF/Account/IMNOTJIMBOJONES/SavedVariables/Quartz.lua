@@ -2,19 +2,29 @@
 Quartz3DB = {
 	["namespaces"] = {
 		["Swing"] = {
+			["profiles"] = {
+				["Default"] = {
+					["swingposition"] = "free",
+					["y"] = 305,
+					["x"] = 645,
+					["remainingtext"] = false,
+					["durationtext"] = false,
+					["swingheight"] = 2,
+				},
+				["HUNTER"] = {
+					["y"] = 305,
+					["x"] = 645,
+					["remainingtext"] = false,
+					["swingheight"] = 2,
+					["durationtext"] = false,
+					["swingposition"] = "free",
+				},
+			},
 		},
 		["Buff"] = {
 		},
 		["Interrupt"] = {
 			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["interruptcolor"] = {
-						nil, -- [1]
-						nil, -- [2]
-						nil, -- [3]
-						1, -- [4]
-					},
-				},
 				["Default"] = {
 					["interruptcolor"] = {
 						nil, -- [1]
@@ -23,7 +33,7 @@ Quartz3DB = {
 						1, -- [4]
 					},
 				},
-				["Pezzer - Burning Blade"] = {
+				["HUNTER"] = {
 					["interruptcolor"] = {
 						nil, -- [1]
 						nil, -- [2]
@@ -37,128 +47,182 @@ Quartz3DB = {
 		},
 		["Pet"] = {
 			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["x"] = 668.0000610351562,
-				},
 				["Default"] = {
-					["x"] = 668.0000610351562,
+					["h"] = 10,
+					["w"] = 620,
+					["hideicon"] = true,
+					["x"] = 3530.000247955319,
+					["scale"] = 0.2000000029802322,
+					["hidenametext"] = true,
+					["y"] = 1240,
 				},
-				["Pezzer - Burning Blade"] = {
-					["x"] = 668.0000610351562,
+				["HUNTER"] = {
+					["y"] = 1240,
+					["h"] = 10,
+					["hideicon"] = true,
+					["scale"] = 0.2000000029802322,
+					["x"] = 3530.000247955319,
+					["w"] = 620,
+					["hidenametext"] = true,
+				},
+			},
+		},
+		["Player"] = {
+			["profiles"] = {
+				["Default"] = {
+					["h"] = 15,
+					["w"] = 230,
+					["y"] = 330,
+					["x"] = 603,
+					["hidetimetext"] = true,
+					["hideicon"] = true,
+				},
+				["HUNTER"] = {
+					["hideicon"] = true,
+					["h"] = 15,
+					["y"] = 350,
+					["x"] = 641,
+					["w"] = 245,
+					["hidetimetext"] = true,
 				},
 			},
 		},
 		["EnemyCasts"] = {
 		},
-		["Player"] = {
-			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["y"] = 155,
-					["h"] = 15,
-					["border"] = "None",
-					["x"] = 643.0000610351562,
-				},
-				["Default"] = {
-					["y"] = 155,
-					["h"] = 15,
-					["border"] = "None",
-					["x"] = 643.0000610351562,
-				},
-				["Pezzer - Burning Blade"] = {
-					["h"] = 15,
-					["y"] = 155,
-					["border"] = "None",
-					["x"] = 643.0000610351562,
-				},
-			},
-		},
 		["GCD"] = {
 			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["gcdposition"] = "top",
-					["gcdheight"] = 5,
-				},
 				["Default"] = {
-					["gcdheight"] = 5,
-					["gcdposition"] = "top",
+					["sparkcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+					["deplete"] = true,
 				},
-				["Pezzer - Burning Blade"] = {
-					["gcdposition"] = "top",
-					["gcdheight"] = 5,
+				["HUNTER"] = {
+					["sparkcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
 				},
 			},
 		},
 		["Focus"] = {
 			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["showfriendly"] = false,
-					["x"] = 668.0000610351562,
-					["y"] = 568,
-				},
 				["Default"] = {
-					["showfriendly"] = false,
-					["x"] = 668.0000610351562,
-					["y"] = 568,
+					["h"] = 17,
+					["w"] = 198,
+					["y"] = 342,
+					["iconposition"] = "right",
+					["texture"] = "Blizzard Character Skills Bar",
+					["x"] = 340,
+					["hidetimetext"] = true,
+					["hideicon"] = true,
 				},
-				["Pezzer - Burning Blade"] = {
-					["showfriendly"] = false,
-					["y"] = 568,
-					["x"] = 668.0000610351562,
+				["HUNTER"] = {
+					["y"] = 314,
+					["x"] = 413,
+					["iconposition"] = "right",
+					["hideicon"] = true,
+					["w"] = 180,
+					["hidetimetext"] = true,
 				},
 			},
 		},
 		["Target"] = {
 			["profiles"] = {
-				["Lélu - Burning Blade"] = {
-					["showfriendly"] = false,
-					["x"] = 661,
-					["y"] = 602,
-				},
 				["Default"] = {
-					["showfriendly"] = false,
-					["x"] = 661,
-					["y"] = 602,
+					["h"] = 17,
+					["w"] = 198,
+					["hideicon"] = true,
+					["texture"] = "Blizzard Character Skills Bar",
+					["x"] = 898,
+					["hidetimetext"] = true,
+					["y"] = 342,
 				},
-				["Pezzer - Burning Blade"] = {
-					["showfriendly"] = false,
-					["y"] = 602,
-					["x"] = 661,
+				["HUNTER"] = {
+					["hideicon"] = true,
+					["x"] = 932.3998413085938,
+					["y"] = 314,
+					["w"] = 180,
+					["hidetimetext"] = true,
+				},
+			},
+		},
+		["Mirror"] = {
+			["profiles"] = {
+				["Default"] = {
+					["mirrorheight"] = 4,
+					["mirrorposition"] = "top",
+				},
+				["HUNTER"] = {
+					["mirrorposition"] = "top",
 				},
 			},
 		},
 		["Range"] = {
 		},
-		["Mirror"] = {
-		},
 		["Latency"] = {
+			["profiles"] = {
+				["Default"] = {
+					["lagtext"] = false,
+					["lagcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+					["lagalpha"] = 0.6000000238418579,
+				},
+				["HUNTER"] = {
+					["lagcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+					["lagtext"] = false,
+					["lagalpha"] = 0.6000000238418579,
+				},
+			},
 		},
 	},
 	["profileKeys"] = {
-		["Lélu - Burning Blade"] = "Lélu - Burning Blade",
-		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
-		["Lélu - Burning Blade"] = {
-			["modules"] = {
-				["EnemyCasts"] = true,
-				["Swing"] = false,
-				["Pet"] = false,
-				["Buff"] = false,
-			},
-		},
 		["Default"] = {
+			["borderalpha"] = 0.5,
+			["failcolor"] = {
+				nil, -- [1]
+				nil, -- [2]
+				nil, -- [3]
+				1, -- [4]
+			},
+			["backgroundalpha"] = 0.75,
 			["modules"] = {
-				["EnemyCasts"] = true,
-				["Pet"] = false,
 				["Swing"] = false,
+				["Buff"] = false,
+				["Timer"] = false,
+				["Pet"] = false,
 			},
 		},
-		["Pezzer - Burning Blade"] = {
+		["HUNTER"] = {
 			["modules"] = {
-				["EnemyCasts"] = true,
+				["Timer"] = false,
 				["Swing"] = false,
-				["Pet"] = false,
 				["Buff"] = false,
+			},
+			["borderalpha"] = 0.5,
+			["backgroundalpha"] = 0.75,
+			["failcolor"] = {
+				nil, -- [1]
+				nil, -- [2]
+				nil, -- [3]
+				1, -- [4]
 			},
 		},
 	},

@@ -1,0 +1,9 @@
+## Interface: 40300
+## Title: Masque|c0000FF00:|r|cffa335ee Renaitre|r 
+## Version: v4.3
+## Notes: Renaitre's Skins for Masque (the addon formerly known as ButtonFacade).
+## Author: Limb0 (Renaitre, US Burning Blade)
+## Credits: StormFX and JJ Sheets (the creators of Masque and ButtonFacade), Sairen (creator of cyCircled)
+## Dependencies: Masque
+
+Skins.lua

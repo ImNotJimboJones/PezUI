@@ -1,5 +1,0 @@
-<Bindings>
-	<Binding name="GOGOPETBINDING" header="GOGOPETHEADER">
-		moo()
-	</Binding>
-</Bindings>

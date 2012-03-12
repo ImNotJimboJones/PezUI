@@ -1,0 +1,27 @@
+## Interface: 40000
+## Title: PitBull4 |r[|cffeda55fHealth flash|r]
+## Title-deDE: PitBull4 |r[|cffeda55fxxxx|r]
+## Title-esES: PitBull4 |r[|cffeda55fResalta Salud|r]
+## Title-frFR: PitBull4 |r[|cffeda55fxxxx|r]
+## Title-koKR: PitBull4 |r[|cffeda55fxxxx|r]
+## Title-ruRU: PitBull4 |r[|cffeda55fxxxx|r]
+## Title-zhCN: PitBull4 |r[|cffeda55fxxxx|r]
+## Title-zhTW: PitBull4 |r[|cffeda55fxxxx|r]
+## Notes: Flashes Health bar when life drops under a specified percent.
+## Notes-deDE: xxxx.
+## Notes-esES: Resalta la barra de salud cuando la vida baja de un porciento especificado.
+## Notes-frFR: xxxx.
+## Notes-koKR: xxxx.
+## Notes-ruRU: xxxx.
+## Notes-zhCN: xxxx
+## Notes-zhTW: xxxx
+## Author: fammy
+## DefaultState: enabled
+## Dependencies: PitBull4, PitBull4_HealthBar
+## Version: v4.0.0-beta19-11
+## X-Curse-Packaged-Version: v4.0.0-beta19-11
+## X-Curse-Project-Name: PitBull4_HealthFlash
+## X-Curse-Project-ID: pitbull4_healthflash
+## X-Curse-Repository-ID: wow/pitbull4_healthflash/mainline
+
+load.xml

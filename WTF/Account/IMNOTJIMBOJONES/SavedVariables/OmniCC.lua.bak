@@ -1,10 +1,10 @@
 
 OmniCC4Config = {
+	["version"] = "4.3.2",
+	["groups"] = {
+	},
 	["groupSettings"] = {
 		["base"] = {
 		},
-	},
-	["version"] = "4.0.waffles6",
-	["groups"] = {
 	},
 }

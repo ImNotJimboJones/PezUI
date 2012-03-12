@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r17 | cybeloras | 2011-11-30 02:51:15 +0000 (Wed, 30 Nov 2011) | 1 line
+Changed paths:
+   A /tags/1.5.0 (from /trunk:16)
+
+Tagging as 1.5.0
+------------------------------------------------------------------------
+r16 | cybeloras | 2011-11-30 02:11:05 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/PitBull4Facade.lua
+   M /trunk/PitBull4Facade.toc
+
+Renamed to "Masque Skinner: Pitbull4"
+TOC bump
+Removed legacy ButtonFacade support
+------------------------------------------------------------------------

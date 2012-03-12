@@ -1,0 +1,25 @@
+﻿## Interface: 40300
+## Title: Moncaí's |cff00ff00Quest Tracker|r
+## Notes: Improved Quest Tracker
+## Title-deDE: Moncaí's |cff00ff00Quest Tracker|r
+## Notes-deDE: Verbessertes Quest Tracker
+## Title-frFR: Moncaí's |cff00ff00Traqueur de Quetes|r
+## Notes-frFR: une amélioration de Traqueur de Quetes
+## SavedVariables: MQTC, MQTdb
+## OptionalDeps: QuestHelper, Swatter
+## Author: Moncaí
+## Version: 4.3.0-beta
+## X-Date: $Date: 2011-12-04 13:55:47 +0000 (Sun, 04 Dec 2011) $
+## X-Revision: $Rev: 52 $
+## X-Localizations: enUS, deDE, frFR
+## X-Website: http://wow.curse.com/downloads/wow-addons/details/moncaiqt.aspx
+## X-Curse-Packaged-Version: v4.3.0
+## X-Curse-Project-Name: Moncai Quest Tracker
+## X-Curse-Project-ID: moncaiqt
+## X-Curse-Repository-ID: wow/moncaiqt/mainline
+
+embeds.xml
+locale.xml
+
+Core.lua
+modules.xml

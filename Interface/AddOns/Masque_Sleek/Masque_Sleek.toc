@@ -1,0 +1,14 @@
+## Interface: 40300
+
+## Title: Masque: Sleek
+## Notes: Sleek skin for Masque.
+## Version: 4.3.0
+
+## Author: Kallieen
+## X-eMail: kallieenchan@gmail.com
+## X-Credits: JJSheets for BF, StormFX for continuing it.
+
+## X-Category: Action Bars
+## Dependencies: Masque
+
+Skin.lua

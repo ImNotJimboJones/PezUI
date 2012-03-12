@@ -1,7 +1,0 @@
-## Interface: 40000
-## Title: GoGoPet
-## Version: 4.0.1
-## Notes: One-key solution for calling random pet critters to your side.
-## Author: Tiker / Rulix @ Altar of Storms
-## SavedVariablesPerCharacter: GoGoPet_Prefs
-GoGoPet.xml

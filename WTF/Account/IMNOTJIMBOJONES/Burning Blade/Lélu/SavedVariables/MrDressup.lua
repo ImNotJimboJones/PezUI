@@ -1,3 +1,0 @@
-
-MrDressup_SV = {
-}

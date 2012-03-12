@@ -1,0 +1,29 @@
+
+BisonDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["buff"] = {
+				["xPos"] = 1256.77734375,
+				["rows"] = 8,
+				["flashing"] = false,
+				["cols"] = 5,
+				["yPadding"] = -15,
+				["yPos"] = 244.719482421875,
+				["horizontal"] = false,
+			},
+			["debuff"] = {
+				["show"] = false,
+			},
+			["timer"] = 2,
+			["weapon"] = {
+				["show"] = false,
+			},
+			["prog"] = {
+				["show"] = false,
+			},
+		},
+	},
+}

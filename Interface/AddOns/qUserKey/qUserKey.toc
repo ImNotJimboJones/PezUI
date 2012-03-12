@@ -1,6 +1,0 @@
-## Interface: 40000
-## Title: qUserKey
-## Notes: Adds user-defined keybindings to secure actions in WoW 3.0 (WOTLK)
-## Author: Quel
-## SavedVariablesPerCharacter: UserKeyBindings, UK_MAX_BINDS, UK_DATA_VALID, UK_MACRO_TYPE
-qUserKey.xml

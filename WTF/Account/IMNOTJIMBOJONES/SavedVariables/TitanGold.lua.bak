@@ -1,8 +1,0 @@
-
-GoldSave = {
-	["Pezzer_Burning Blade::Alliance"] = {
-		["show"] = true,
-		["name"] = "Pezzer",
-		["gold"] = 9844546,
-	},
-}

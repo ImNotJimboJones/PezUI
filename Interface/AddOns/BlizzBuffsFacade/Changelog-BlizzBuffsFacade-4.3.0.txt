@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r13 | cybeloras | 2011-11-30 02:51:16 +0000 (Wed, 30 Nov 2011) | 1 line
+Changed paths:
+   A /tags/4.3.0 (from /trunk:12)
+
+Tagging as 4.3.0
+------------------------------------------------------------------------
+r12 | cybeloras | 2011-11-30 01:45:05 +0000 (Wed, 30 Nov 2011) | 3 lines
+Changed paths:
+   M /trunk/BlizzBuffsFacade.lua
+   M /trunk/BlizzBuffsFacade.toc
+
+Renamed to "Masque Skinner: Blizz Buffs"
+TOC bump
+Fix: Temp enchant border should now be purple again instead of white.
+------------------------------------------------------------------------

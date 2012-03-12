@@ -1,61 +1,98 @@
 
 GridDB = {
 	["namespaces"] = {
-		["GridStatusAuras"] = {
+		["GridAutoFrameSize"] = {
 			["profiles"] = {
-				["Disc Priest"] = {
-					["buff_Renew"] = {
-						["icon"] = "Interface\\Icons\\Spell_Holy_Renew",
-					},
-					["buff_PowerWord:Shield"] = {
-						["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
-					},
+				["Default"] = {
+					["lastLayout"] = "None",
 				},
 			},
 		},
-		["GridStatusMana"] = {
-		},
 		["GridFrame"] = {
 			["profiles"] = {
-				["Disc Priest"] = {
+				["Default"] = {
 					["statusmap"] = {
-						["text2"] = {
-							["unit_name"] = true,
-							["alert_feignDeath"] = false,
-							["alert_offline"] = false,
-							["unit_healthDeficit"] = false,
-							["alert_lowHealth"] = false,
-							["alert_heals"] = false,
-							["alert_death"] = false,
-							["debuff_Ghost"] = false,
+						["cornertextbottomright"] = {
 						},
-						["text"] = {
-							["alert_voice"] = false,
-							["unit_health"] = false,
-							["player_target"] = false,
-							["unit_name"] = false,
+						["sidetexttop"] = {
 						},
-						["healingBar"] = {
-							["player_target"] = false,
-							["alert_lowHealth"] = false,
-							["alert_aggro"] = false,
+						["sidetextbottom"] = {
+						},
+						["iconTLcornerright"] = {
+						},
+						["iconBLcornerleft"] = {
+						},
+						["iconbottom"] = {
+						},
+						["cornertextbottomleft"] = {
+						},
+						["sidetextleft"] = {
+						},
+						["iconTRcornerright"] = {
+						},
+						["iconleft"] = {
+						},
+						["icon"] = {
+							["alert_RaidDebuff"] = true,
+						},
+						["cornertexttopleft"] = {
+						},
+						["icontop"] = {
+						},
+						["iconBRcornerright"] = {
+						},
+						["sidetextright"] = {
+						},
+						["iconBRcornerleft"] = {
+						},
+						["iconBLcornerright"] = {
+						},
+						["iconTRcornerleft"] = {
+						},
+						["iconright"] = {
+						},
+						["iconTLcornerleft"] = {
+						},
+						["cornertexttopright"] = {
 						},
 					},
-					["enableBarColor"] = true,
-					["textlength"] = 13,
-					["frameHeight"] = 50,
-					["enableText2"] = true,
-					["invertBarColor"] = true,
-					["orientation"] = "HORIZONTAL",
-					["frameWidth"] = 100,
 				},
 			},
 		},
 		["GridStatusVehicle"] = {
 		},
-		["GridRoster"] = {
+		["LibDualSpec-1.0"] = {
 		},
-		["GridStatusVoiceComm"] = {
+		["GridIndicatorBorderTexts"] = {
+		},
+		["GridStatusName"] = {
+		},
+		["GridStatusRaidIcons"] = {
+		},
+		["GridStatusIncomingRes"] = {
+		},
+		["GridStatusTarget"] = {
+		},
+		["GridStatusRaidDebuff"] = {
+			["profiles"] = {
+				["Default"] = {
+					["isFirst"] = false,
+				},
+			},
+		},
+		["GridIndicatorCornerIcons"] = {
+		},
+		["GridStatusHots"] = {
+		},
+		["GridStatusDirectionArrows"] = {
+		},
+		["GridStatusMana"] = {
+		},
+		["GridStatusLineOfSight"] = {
+		},
+		["GridStatusRange"] = {
+		},
+		["GridConfigurableLayouts"] = {
 		},
 		["GridStatus"] = {
 			["profiles"] = {
@@ -113,60 +150,6 @@ GridDB = {
 						},
 					},
 				},
-				["Disc Priest"] = {
-					["colors"] = {
-						["PALADIN"] = {
-							["r"] = 0.96,
-							["g"] = 0.55,
-							["b"] = 0.73,
-						},
-						["MAGE"] = {
-							["r"] = 0.41,
-							["g"] = 0.8,
-							["b"] = 0.9399999999999999,
-						},
-						["DRUID"] = {
-							["r"] = 1,
-							["g"] = 0.49,
-							["b"] = 0.04,
-						},
-						["DEATHKNIGHT"] = {
-							["r"] = 0.77,
-							["g"] = 0.12,
-							["b"] = 0.23,
-						},
-						["WARRIOR"] = {
-							["r"] = 0.78,
-							["g"] = 0.61,
-							["b"] = 0.43,
-						},
-						["PRIEST"] = {
-							["r"] = 1,
-							["g"] = 1,
-							["b"] = 1,
-						},
-						["SHAMAN"] = {
-							["r"] = 0,
-							["g"] = 0.44,
-							["b"] = 0.87,
-						},
-						["ROGUE"] = {
-							["r"] = 1,
-							["g"] = 0.96,
-							["b"] = 0.41,
-						},
-						["WARLOCK"] = {
-							["r"] = 0.58,
-							["g"] = 0.51,
-							["b"] = 0.79,
-						},
-						["HUNTER"] = {
-							["r"] = 0.67,
-							["g"] = 0.83,
-							["b"] = 0.45,
-						},
-					},
-				},
 			},
 		},
 		["GridStatusAggro"] = {
@@ -175,44 +158,32 @@ GridDB = {
 		},
 		["GridStatusReadyCheck"] = {
 		},
-		["GridStatusHealth"] = {
+		["GridStatusAuras"] = {
 		},
-		["GridStatusName"] = {
+		["GridIndicatorSideIcons"] = {
 		},
 		["GridLayout"] = {
 			["profiles"] = {
 				["Default"] = {
 					["anchorRel"] = "TOPLEFT",
-					["layout"] = "By Group 5",
-					["PosX"] = 500.0000190257997,
-					["PosY"] = -400.0000005722031,
-				},
-				["Disc Priest"] = {
-					["anchorRel"] = "TOPLEFT",
-					["layout"] = "By Group 5",
-					["PosX"] = 170.3998799800938,
-					["PosY"] = -262.3997890472529,
+					["layout"] = "None",
+					["PosX"] = 499.9999694824219,
 				},
 			},
 		},
-		["GridStatusTarget"] = {
+		["GridRoster"] = {
 		},
-		["GridStatusRange"] = {
+		["GridStatusVoiceComm"] = {
 		},
-		["LibDualSpec-1.0"] = {
+		["GridStatusHealth"] = {
 		},
 	},
 	["profileKeys"] = {
-		["Lélu - Burning Blade"] = "Disc Priest",
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["minimap"] = {
-			},
-		},
-		["Disc Priest"] = {
-			["minimap"] = {
-				["hide"] = true,
 			},
 		},
 	},

@@ -1,0 +1,8 @@
+2012-02-10  Jens Ameskamp  <jens@ameskamp.de>
+
+[ddac16cea7cb] [0.52]
+* PitBull4_AuraBar.toc:
+
+bumped toc to 40300
+
+

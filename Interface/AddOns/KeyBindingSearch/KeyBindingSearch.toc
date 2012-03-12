@@ -1,7 +1,0 @@
-## Interface: 30300
-## Title: KeyBindingSearch
-## Notes: Be able to search through your key bindings
-## Author: Genisis329
-## Version: 1.2
-
-KeyBindingSearch.lua

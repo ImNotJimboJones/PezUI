@@ -1,5 +1,0 @@
-<Bindings>
-  <Binding name="CLICK FeedItButton:LeftButton" description="Feed It !" header="FEEDIT">
-		-- NOOP
-  </Binding>
-</Bindings>

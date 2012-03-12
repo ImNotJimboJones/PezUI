@@ -1,0 +1,11 @@
+## Interface: 40300
+## Title: Power Auras Classic - IP1 (My Little Pony)
+## Author: Killerpet
+## Notes: Power Auras Classic - Image Pack 1 (My Little Pony)
+## Dependencies: PowerAuras
+## SavedVariables: PowaIP_DB
+
+PowerAuraImageFix.lua
+
+PowerAuras_ImagePack_ImageFileInfo.lua
+PowerAuras_ImagePack_Main.lua

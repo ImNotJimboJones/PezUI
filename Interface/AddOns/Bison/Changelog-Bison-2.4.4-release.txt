@@ -1,0 +1,106 @@
+------------------------------------------------------------------------
+r217 | grayal | 2011-11-13 14:23:01 +0000 (Sun, 13 Nov 2011) | 1 line
+Changed paths:
+   A /tags/2.4.4-release (from /trunk:216)
+
+Tagging as 2.4.4-release
+------------------------------------------------------------------------
+r216 | grayal | 2011-11-13 14:20:08 +0000 (Sun, 13 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Combo.lua
+   M /trunk/Prototype.lua
+
+combo bar added
+------------------------------------------------------------------------
+r215 | grayal | 2011-11-11 14:55:22 +0000 (Fri, 11 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.lua
+   M /trunk/BisonWidget-Buff.lua
+   M /trunk/Buffs.lua
+   M /trunk/Combo.lua
+   M /trunk/Debuffs.lua
+   M /trunk/Progs.lua
+   M /trunk/Prototype.lua
+   M /trunk/Weapons.lua
+
+scale handling
+------------------------------------------------------------------------
+r213 | grayal | 2011-11-10 10:50:03 +0000 (Thu, 10 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Progs.lua
+
+Update toc
+------------------------------------------------------------------------
+r211 | grayal | 2011-11-10 10:48:55 +0000 (Thu, 10 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.toc
+
+Update toc
+------------------------------------------------------------------------
+r210 | grayal | 2011-10-31 11:03:38 +0000 (Mon, 31 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Combo.lua
+
+combo bar
+------------------------------------------------------------------------
+r209 | grayal | 2011-10-31 11:01:51 +0000 (Mon, 31 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.lua
+   M /trunk/Bison.toc
+   M /trunk/Combo.lua
+   M /trunk/Localization.lua
+   M /trunk/Progs.lua
+   M /trunk/Prototype.lua
+
+combo bar
+------------------------------------------------------------------------
+r208 | Grayal | 2011-10-30 10:11:08 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.toc
+   M /trunk/Buffs.lua
+   M /trunk/Combo.lua
+   M /trunk/Debuffs.lua
+   M /trunk/Hidden.lua
+   M /trunk/Progs.lua
+
+combo bar added
+------------------------------------------------------------------------
+r206 | Grayal | 2011-10-30 10:02:51 +0000 (Sun, 30 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.lua
+   M /trunk/Bison.toc
+   M /trunk/Buffs.lua
+   M /trunk/Combo.lua
+   M /trunk/Debuffs.lua
+   M /trunk/Hidden.lua
+   M /trunk/Progs.lua
+   M /trunk/Prototype.lua
+   M /trunk/Weapons.lua
+
+combo bar added
+------------------------------------------------------------------------
+r204 | grayal | 2011-10-29 17:03:03 +0000 (Sat, 29 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.lua
+   M /trunk/BisonContainer-Group.lua
+   M /trunk/BisonWidget-Buff.lua
+   M /trunk/Buffs.lua
+   M /trunk/Combo.lua
+   M /trunk/Debuffs.lua
+   M /trunk/Hidden.lua
+   M /trunk/Localization.lua
+   M /trunk/Options.lua
+   M /trunk/Profile.lua
+   M /trunk/Progs.lua
+   M /trunk/Prototype.lua
+   M /trunk/Weapons.lua
+
+combo bar added
+------------------------------------------------------------------------
+r203 | grayal | 2011-10-21 09:56:50 +0000 (Fri, 21 Oct 2011) | 1 line
+Changed paths:
+   M /trunk/Bison.toc
+   A /trunk/Combo.lua
+
+combos
+------------------------------------------------------------------------

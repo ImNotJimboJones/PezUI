@@ -1,15 +1,8 @@
 
 SwatterData = {
 	["enabled"] = true,
+	["warning"] = true,
 	["autoshow"] = true,
 	["errors"] = {
-		{
-			["message"] = "[string \"AMP_Button:OnLoad\"]:1: attempt to index global 'this' (a nil value)",
-			["count"] = 1,
-			["addons"] = "  Swatter, v5.9.4960 (WhackyWallaby)\n  AMP, v3.7.1\n  Titan, v5.0.1.40000 - Revision 485\n  BlizRuntimeLib_enUS v4.0.3.40000 <us>\n  (ck=80)\n",
-			["timestamp"] = "2010-11-30 19:52:55",
-			["context"] = "Global",
-			["stack"] = "[C]: ?\n[string \"*:OnLoad\"]:1: in function <[string \"*:OnLoad\"]:1>\n",
-		}, -- [1]
 	},
 }

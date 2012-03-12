@@ -1,6 +1,5 @@
 
 MADB = {
-	["collapsed"] = true,
 	["characters"] = {
 	},
 	["frameListRows"] = 18,
@@ -9,15 +8,6 @@ MADB = {
 		["default"] = {
 			["name"] = "default",
 			["frames"] = {
-				["Boss1TargetFrame"] = {
-					["name"] = "Boss1TargetFrame",
-				},
-				["PlayerBuffsMover"] = {
-					["name"] = "PlayerBuffsMover",
-				},
-				["CastingBarFrame"] = {
-					["name"] = "CastingBarFrame",
-				},
 			},
 		},
 	},

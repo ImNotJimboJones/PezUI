@@ -1,0 +1,36 @@
+## Interface: 40300
+## Title: Bison
+## Notes: Customizing your buff display
+## Notes-ruRU: Настройка отображения ваших (де)баффов
+## Notes-deDE: Anpassung der Buff Anzeige
+## Author: Grayal
+## DefaultState: enabled
+## SavedVariables: BisonDB
+## OptionalDeps: Ace3, LibDebugLog-1.0, ButtonFacade
+## X-Name: Bison
+## X-Embeds: Ace3, LibDebugLog-1.0
+## X-Email: grayal@gmx.de
+## X-Category: Buffs
+## X-CompatibleLocales: enUS, enGB, deDE, ruRU
+## X-Revision: 216
+## Version: 2.4.4-release
+## X-Curse-Packaged-Version: 2.4.4-release
+## X-Curse-Project-Name: Bison
+## X-Curse-Project-ID: bison
+## X-Curse-Repository-ID: wow/bison/mainline
+
+embeds.xml
+
+BisonWidget-Buff.lua
+BisonContainer-Group.lua
+Localization.lua
+Bison.lua
+Options.lua
+Prototype.lua
+Buffs.lua
+Debuffs.lua
+Weapons.lua
+#Hidden.lua
+Progs.lua
+Combo.lua
+Profile.lua

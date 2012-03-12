@@ -1,5 +1,6 @@
 
 AucAdvancedConfig = {
+	["version"] = 1,
 	["profile.Default"] = {
 		["stat"] = {
 			["sales"] = {
@@ -12,7 +13,7 @@ AucAdvancedConfig = {
 			},
 		},
 	},
-	["version"] = 1,
+	["users.Burning Blade.Pezzer"] = "Default",
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
