@@ -9,9 +9,9 @@ MailMinderDB = {
 				["Pezzer"] = {
 					["mail_entries"] = {
 						{
-							["subject"] = "DS cancelled.",
 							["expiration_seconds"] = 2180499,
 							["stationary_icon"] = "Interface\\Icons\\INV_Misc_Note_01",
+							["subject"] = "DS cancelled.",
 							["sender_name"] = "Raei",
 						}, -- [1]
 						{

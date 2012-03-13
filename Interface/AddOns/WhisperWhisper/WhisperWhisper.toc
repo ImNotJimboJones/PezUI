@@ -1,0 +1,14 @@
+## Interface: 40300
+## Title: WhisperWhisper
+## Notes: Displays Movable Whisper List
+## Version: 2.5
+## Author: Matthew "Blacksen" Enthoven
+## OptionalDeps: Ace3, LibDataBroker-1.1, LibCrayon-3.0
+## SavedVariables: Broker_WhisperWhisperDB
+## DefaultState: enabled
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+WhisperWhisper.lua
