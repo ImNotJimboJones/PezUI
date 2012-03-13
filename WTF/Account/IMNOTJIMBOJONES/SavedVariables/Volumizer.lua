@@ -8,10 +8,8 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["loop"] = 0,
-			["listener"] = 1,
-			["sfx"] = {
+			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
@@ -19,12 +17,14 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.4,
 			},
-			["background"] = 0,
-			["error"] = 1,
-			["master"] = {
+			["sfx"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["background"] = 0,
+			["listener"] = 1,
+			["error"] = 1,
+			["pet"] = 1,
 		},
 	}, -- [1]
 	{
@@ -35,10 +35,8 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["loop"] = 0,
-			["listener"] = 1,
-			["sfx"] = {
+			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
@@ -46,12 +44,14 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.4,
 			},
-			["background"] = 0,
-			["error"] = 1,
-			["master"] = {
+			["sfx"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["background"] = 0,
+			["listener"] = 1,
+			["error"] = 1,
+			["pet"] = 1,
 		},
 	}, -- [2]
 	{
@@ -62,10 +62,8 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["loop"] = 0,
-			["listener"] = 1,
-			["sfx"] = {
+			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
@@ -73,12 +71,14 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.4,
 			},
-			["background"] = 0,
-			["error"] = 1,
-			["master"] = {
+			["sfx"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["background"] = 0,
+			["listener"] = 1,
+			["error"] = 1,
+			["pet"] = 1,
 		},
 	}, -- [3]
 	{
@@ -89,10 +89,8 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["loop"] = 0,
-			["listener"] = 1,
-			["sfx"] = {
+			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
@@ -100,12 +98,14 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.4,
 			},
-			["background"] = 0,
-			["error"] = 1,
-			["master"] = {
+			["sfx"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["background"] = 0,
+			["listener"] = 1,
+			["error"] = 1,
+			["pet"] = 1,
 		},
 	}, -- [4]
 	{
@@ -116,10 +116,8 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["loop"] = 0,
-			["listener"] = 1,
-			["sfx"] = {
+			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
@@ -127,12 +125,14 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.4,
 			},
-			["background"] = 0,
-			["error"] = 1,
-			["master"] = {
+			["sfx"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["background"] = 0,
+			["listener"] = 1,
+			["error"] = 1,
+			["pet"] = 1,
 		},
 	}, -- [5]
 }

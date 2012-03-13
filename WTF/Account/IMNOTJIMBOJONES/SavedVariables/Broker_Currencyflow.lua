@@ -1,31 +1,12 @@
 
 Currencyflow_DB = {
-	["profiles"] = {
-		["Default"] = {
-			["cashFormat"] = 2,
-			["showCashPerHour"] = false,
-			["showCurrency396"] = true,
-			["colorMaxReached"] = true,
-			["showYesterdayTotal"] = false,
-			["showThisSession"] = false,
-			["showTodayTotal"] = false,
-			["showCurrency390"] = true,
-			["showThisWeekTotal"] = false,
-			["showThisMonthTotal"] = false,
-			["showYesterdaySelf"] = false,
-			["showCurrency0"] = false,
-		},
-	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["factionrealm"] = {
 		["Horde - Burning Blade"] = {
 			["version"] = 10,
 			["chars"] = {
 				{
 					[416] = 1,
-					["maxReached396"] = true,
+					["maxReached396"] = false,
 					[515] = 25,
 					["maxReached0"] = false,
 					["class"] = "HUNTER",
@@ -34,7 +15,7 @@ Currencyflow_DB = {
 					["maxReached397"] = false,
 					["maxReached393"] = false,
 					["charname"] = "Pezzer",
-					["lastWeekEarned396"] = 1000,
+					["lastWeekEarned396"] = 0,
 					["ignore"] = false,
 					["maxReached392"] = false,
 					["maxReached398"] = false,
@@ -53,13 +34,10 @@ Currencyflow_DB = {
 					[400] = 2,
 					[401] = 9,
 					["lastWeekEarned390"] = 0,
-					[402] = 15,
+					[81] = 2,
 					["maxReached395"] = false,
-					["maxReached400"] = false,
-					["maxReached384"] = false,
+					["maxReached401"] = false,
 					["maxReached385"] = false,
-					[396] = 6150,
-					["maxReached390"] = false,
 					["history"] = {
 						[15411] = {
 							[394] = {
@@ -74,7 +52,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							["time"] = 4635,
+							["time"] = 4638,
 							["gold"] = {
 								["gained"] = 0,
 								["spent"] = 0,
@@ -107,7 +85,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[385] = {
+							[396] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -123,7 +101,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[81] = {
+							[401] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -135,21 +113,58 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[401] = {
+							[81] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[396] = {
+							[385] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
 						},
+						[15412] = {
+							[395] = {
+							},
+							[396] = {
+							},
+							["time"] = 319,
+							["gold"] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[392] = {
+							},
+							[390] = {
+							},
+						},
 					},
-					["maxReached401"] = false,
+					["maxReached390"] = false,
+					[396] = 6150,
+					["maxReached384"] = false,
+					["maxReached400"] = false,
 					[241] = 26,
-					[81] = 2,
+					[402] = 15,
 				}, -- [1]
 			},
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["cashFormat"] = 2,
+			["showYesterdaySelf"] = false,
+			["showCurrency396"] = true,
+			["colorMaxReached"] = true,
+			["showYesterdayTotal"] = false,
+			["showThisSession"] = false,
+			["showTodayTotal"] = false,
+			["showCurrency390"] = true,
+			["showThisWeekTotal"] = false,
+			["showThisMonthTotal"] = false,
+			["showCashPerHour"] = false,
+			["showCurrency0"] = false,
 		},
 	},
 }

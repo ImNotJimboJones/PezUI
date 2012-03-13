@@ -54,11 +54,12 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
-				["PitBull4_Focus"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
+				["Bison_debuff"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
-				["Bison_buff"] = {
+				["Bison_weapon"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
@@ -78,11 +79,7 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
-				["Masque"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-				},
-				["Blizzard Buffs"] = {
+				["Blizzard Buffs_Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
@@ -105,6 +102,11 @@ MasqueDB = {
 					["Inherit"] = false,
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
+				},
+				["Macaroon_Action Bar - Left"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+					["Inherit"] = false,
 				},
 				["Macaroon_Shortcuts - Right"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
@@ -135,30 +137,28 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
-				["Macaroon_Action Bar - Left"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-					["Inherit"] = false,
-				},
-				["Blizzard Buffs_Buffs"] = {
+				["Blizzard Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
+				},
+				["Masque"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["PitBull4_Target"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Fade",
 				},
-				["Bison_weapon"] = {
+				["Bison_buff"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Bison_debuff"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
+				["PitBull4_Focus"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
 				},
 			},
 		},

@@ -8,11 +8,21 @@ Broker_WhisperWhisperDB = {
 			["flashRight"] = true,
 			["flashTop"] = true,
 			["flashLeft"] = true,
-			["flashBottom"] = true,
 			["showFrame"] = false,
 			["flashMaster"] = true,
 			["flashEntireFrame"] = true,
+			["flashBottom"] = true,
 			["whisperList"] = {
+				{
+					"Dskittle", -- [1]
+					{
+						"|cff66ff66aright haha cya later then", -- [1]
+						"|cff6666ffnothing really... just about to log :P", -- [2]
+						"|cff66ff66yo what up", -- [3]
+					}, -- [2]
+					false, -- [3]
+					false, -- [4]
+				}, -- [1]
 				{
 					"Pezzer", -- [1]
 					{
@@ -27,7 +37,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 			},
 		},
 	},

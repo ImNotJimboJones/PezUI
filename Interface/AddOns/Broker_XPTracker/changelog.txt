@@ -1,0 +1,7 @@
+Changelog
+
+1.1
+- Updated ACE3 Lib
+- Updated toc to 4.1
+- Fixed wrong Level shown on Levelup Message
+
