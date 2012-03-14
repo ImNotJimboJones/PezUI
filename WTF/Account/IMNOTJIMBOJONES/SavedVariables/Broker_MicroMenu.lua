@@ -6,8 +6,8 @@ Broker_MicroMenuDB = {
 	["profiles"] = {
 		["Default"] = {
 			["showHomeLatency"] = false,
-			["fpsFirst"] = true,
 			["disableColoring"] = false,
+			["fpsFirst"] = true,
 		},
 	},
 }

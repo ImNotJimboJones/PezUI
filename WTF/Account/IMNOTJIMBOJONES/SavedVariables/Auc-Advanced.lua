@@ -1,13 +1,17 @@
 
 AucAdvancedConfig = {
-	["users.Burning Blade.Pezzer"] = "Default",
-	["version"] = 1,
 	["profile.Default"] = {
 		["configator.left"] = 322.8235778808594,
 		["core"] = {
 			["matcher"] = {
 				["matcherlist"] = {
 					"Undercut", -- [1]
+				},
+			},
+		},
+		["stat"] = {
+			["sales"] = {
+				["ignoredsigs"] = {
 				},
 			},
 		},
@@ -31,14 +35,10 @@ AucAdvancedConfig = {
 			["pricelevel"] = {
 			},
 		},
-		["stat"] = {
-			["sales"] = {
-				["ignoredsigs"] = {
-				},
-			},
-		},
 		["configator.top"] = 676.7647705078125,
 	},
+	["users.Burning Blade.Pezzer"] = "Default",
+	["version"] = 1,
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
@@ -47,15 +47,15 @@ AucAdvancedData = {
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Global"] = {
-			["configator.left"] = 318.0000305175781,
-			["configator.top"] = 730.0000610351562,
-		},
+		["Version"] = 1,
 		["Current"] = {
 			["snatch.itemsList"] = {
 			},
 		},
-		["Version"] = 1,
+		["Global"] = {
+			["configator.left"] = 318.0000305175781,
+			["configator.top"] = 730.0000610351562,
+		},
 		["SavedSearches"] = {
 		},
 	},

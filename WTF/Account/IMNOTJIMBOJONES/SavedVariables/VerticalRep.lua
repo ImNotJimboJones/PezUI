@@ -9,8 +9,8 @@ VerticalRepDB = {
 			["borderTexture"] = "Blizzard Tooltip",
 			["barTexture"] = "Minimalist",
 			["width"] = 15,
-			["clamp"] = false,
 			["positionX"] = -5.584367275238037,
+			["clamp"] = false,
 		},
 	},
 }

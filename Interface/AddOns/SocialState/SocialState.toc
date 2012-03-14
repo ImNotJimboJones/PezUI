@@ -1,0 +1,22 @@
+## Interface: 40200
+## Title: SocialState
+## Notes: A friend/guild list viewer
+## Author: CodeRedLin
+## SavedVariables: SocialStateDB
+## OptionalDeps: Ace3, LibQTip-1.0, LibStub, CallbackHandler-1.0
+## X-Curse-Packaged-Version: 4.2-Release3
+## X-Curse-Project-Name: SocialState
+## X-Curse-Project-ID: broker_socialstate
+## X-Curse-Repository-ID: wow/broker_socialstate/mainline
+
+#@no-lib-strip@
+lib\LibStub\LibStub.lua
+lib\CallbackHandler-1.0\CallbackHandler-1.0.xml
+lib\AceGUI-3.0\AceGUI-3.0.xml
+lib\AceConfig-3.0\AceConfig-3.0.xml
+lib\LibQTip-1.0\lib.xml
+#@end-no-lib-strip@
+
+lib\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+SocialState.lua
