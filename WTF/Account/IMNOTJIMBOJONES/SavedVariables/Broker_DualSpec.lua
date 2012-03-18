@@ -8,10 +8,10 @@ Broker_DualSpecDB = {
 			["specname"] = false,
 			["gear"] = true,
 			["primary"] = "PvE",
-			["secondary"] = "PvP",
 			["minimap"] = {
 				["hide"] = true,
 			},
+			["secondary"] = "PvP",
 		},
 	},
 }

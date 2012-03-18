@@ -6,18 +6,18 @@ Quartz3DB = {
 				["Default"] = {
 					["swingposition"] = "free",
 					["y"] = 305,
-					["x"] = 645,
-					["remainingtext"] = false,
 					["durationtext"] = false,
+					["remainingtext"] = false,
+					["x"] = 645,
 					["swingheight"] = 2,
 				},
 				["HUNTER"] = {
 					["y"] = 305,
 					["x"] = 645,
 					["remainingtext"] = false,
-					["swingheight"] = 2,
-					["durationtext"] = false,
 					["swingposition"] = "free",
+					["durationtext"] = false,
+					["swingheight"] = 2,
 				},
 			},
 		},
@@ -50,11 +50,11 @@ Quartz3DB = {
 				["Default"] = {
 					["h"] = 10,
 					["w"] = 620,
-					["hideicon"] = true,
+					["y"] = 1240,
 					["x"] = 3530.000247955319,
 					["scale"] = 0.2000000029802322,
 					["hidenametext"] = true,
-					["y"] = 1240,
+					["hideicon"] = true,
 				},
 				["HUNTER"] = {
 					["y"] = 1240,
@@ -67,15 +67,17 @@ Quartz3DB = {
 				},
 			},
 		},
+		["EnemyCasts"] = {
+		},
 		["Player"] = {
 			["profiles"] = {
 				["Default"] = {
 					["h"] = 15,
 					["w"] = 230,
-					["y"] = 330,
+					["hideicon"] = true,
 					["x"] = 603,
 					["hidetimetext"] = true,
-					["hideicon"] = true,
+					["y"] = 330,
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -86,8 +88,6 @@ Quartz3DB = {
 					["hidetimetext"] = true,
 				},
 			},
-		},
-		["EnemyCasts"] = {
 		},
 		["GCD"] = {
 			["profiles"] = {
@@ -117,18 +117,18 @@ Quartz3DB = {
 					["w"] = 198,
 					["y"] = 342,
 					["iconposition"] = "right",
-					["texture"] = "Blizzard Character Skills Bar",
-					["x"] = 340,
 					["hidetimetext"] = true,
+					["x"] = 340,
+					["texture"] = "Blizzard Character Skills Bar",
 					["hideicon"] = true,
 				},
 				["HUNTER"] = {
 					["y"] = 314,
 					["x"] = 413,
-					["iconposition"] = "right",
+					["hidetimetext"] = true,
 					["hideicon"] = true,
 					["w"] = 180,
-					["hidetimetext"] = true,
+					["iconposition"] = "right",
 				},
 			},
 		},
@@ -137,11 +137,11 @@ Quartz3DB = {
 				["Default"] = {
 					["h"] = 17,
 					["w"] = 198,
-					["hideicon"] = true,
-					["texture"] = "Blizzard Character Skills Bar",
-					["x"] = 898,
-					["hidetimetext"] = true,
 					["y"] = 342,
+					["hidetimetext"] = true,
+					["x"] = 898,
+					["texture"] = "Blizzard Character Skills Bar",
+					["hideicon"] = true,
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -151,6 +151,8 @@ Quartz3DB = {
 					["hidetimetext"] = true,
 				},
 			},
+		},
+		["Range"] = {
 		},
 		["Mirror"] = {
 			["profiles"] = {
@@ -162,8 +164,6 @@ Quartz3DB = {
 					["mirrorposition"] = "top",
 				},
 			},
-		},
-		["Range"] = {
 		},
 		["Latency"] = {
 			["profiles"] = {
@@ -216,14 +216,14 @@ Quartz3DB = {
 				["Swing"] = false,
 				["Buff"] = false,
 			},
-			["borderalpha"] = 0.5,
-			["backgroundalpha"] = 0.75,
 			["failcolor"] = {
 				nil, -- [1]
 				nil, -- [2]
 				nil, -- [3]
 				1, -- [4]
 			},
+			["backgroundalpha"] = 0.75,
+			["borderalpha"] = 0.5,
 		},
 	},
 }

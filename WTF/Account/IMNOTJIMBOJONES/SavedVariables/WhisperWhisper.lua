@@ -7,13 +7,28 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["r"] = 140,
-				["g"] = 140,
 				["b"] = 140,
+				["g"] = 140,
+				["r"] = 140,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
+			["flashBottom"] = true,
+			["flashLeft"] = true,
+			["altView"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["b"] = 255,
+				["g"] = 100,
+				["r"] = 0,
+			},
+			["frameOpts"] = {
+				["offsetx"] = -580.2666473388672,
+				["offsety"] = -78.30596923828125,
+			},
 			["whisperList"] = {
 				{
 					"Pezzer", -- [1]
@@ -33,21 +48,6 @@ Broker_WhisperWhisperDB = {
 					false, -- [4]
 				}, -- [1]
 			},
-			["flashLeft"] = true,
-			["frameOpts"] = {
-				["offsetx"] = -580.2666473388672,
-				["offsety"] = -78.30596923828125,
-			},
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["r"] = 0,
-				["g"] = 100,
-				["b"] = 255,
-			},
-			["flashBottom"] = true,
-			["altView"] = false,
 		},
 	},
 }

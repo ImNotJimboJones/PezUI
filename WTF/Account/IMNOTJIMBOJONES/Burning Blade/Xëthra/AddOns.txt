@@ -76,12 +76,12 @@ TitanBag: disabled
 TitanClock: disabled
 TitanGold: disabled
 TitanLocation: disabled
-TitanLootType: disabled
+TitanLootType: enabled
 TitanPerformance: disabled
 TitanRepair: disabled
 TitanVolume: disabled
-TitanXP: disabled
-Titan: disabled
+TitanXP: enabled
+Titan: enabled
 TomTom: disabled
 DBM-WorldEvents: enabled
 DBM-VoA: enabled
