@@ -1,0 +1,313 @@
+credits:
+beginning with version 3.0.0: Luke1410
+version 1.00 to 2.14.30300:   urnati
+version 0.24:                 PcHaXoR
+version 0.23 to 0.23.2:       r3neGaDe
+version 0.22:                 PcHaXoR
+version 0.21 and before:      Corgi/Ryessa
+
+localizations:
+English       (enUS): Corgi, Ryessa, urnati, Luke1410
+German        (deDE): Scarabeus, Kaesemuffin, Luke1410
+French        (frFR): Vorpale
+Latin America (mxMX): MogoOrc
+Spanish       (esES): PatoDaia
+Russian       (ruRU): djDan, StingerSoft, hotZED
+
+legend:
++ = added feature
+* = changed feature (bugfixes, changed behavior, etc.)
+- = removed feature
+
+version 3.0.6 (09-12-2011 19:52 UTC)
+* updated readme file
+
+version 3.0.6 - beta 1 (01-12-2011 09:02 UTC)
+* updated toc for WoW 4.3.x
+* updated AceLocale lib from 3.0-2 to 3.0-6
+
+version 3.0.5 (07-18-2011 06:53 UTC)
+* no changes compared to 3.0.5 - beta 1
+
+version 3.0.5 - beta 1 (07-04-2011 20:26 UTC)
+* updated toc for WoW 4.2.x
+
+version 3.0.4 (05-15-2011 17:46 UTC)
+* no changes compared to 3.0.4 - beta 1
+
+version 3.0.4 - beta 1 (05-01-2011 09:46 UTC)
+* updated toc for WoW 4.1.x
+
+version 3.0.3 (01-23-2010 22:04 UTC)
+* no changes compared to 3.0.3 - beta 1
+
+version 3.0.3 - beta 1 (12-29-2010 02:44 UTC)
+* fixed incorrectly grouped/sorted questlist (thanks to Woundheir for reporting the bug)
+* fixed FrameXML.log warnings
+
+version 3.0.2 (12-20-2010 14:38 UTC)
+* no changes compared to 3.0.2 - beta 1
+
+version 3.0.2 - beta 1 (11-28-2010 14:38 UTC)
+* fixed checkboxes being visible for all entries in the Titan Quests menus (even for menus)
+* minor corrections in the changelog
+
+version 3.0.1 (11-15-2010 22:44 UTC)
+* fixed incorrect version number in addon-menu (was reported as version 3.0,1 - beta 1 for non-Russian versions)
+* updated Russian localization (thanks to hotZED)
+
+version 3.0.1 - beta 1 (10-27-2010 17:11 UTC)
+* fixed incompatibility issues with WoW 4.0.x
+* fixed Titan Panel error message about duplicated registering of Titan Quests on startup
+* fixed incorrect positioning of wrapped quest objectives in the quest detail view (all lines except the last one of wrapped objectives were positioned too high)
+* fixed long quest objectives exceeding the window length (long objectives are wrapped now)
+* fixed Titan Quests button text being larger than the button texts for all other Titan Panel Plugins (thanks to Joseph Jankowski for reporting this bug)
+* fixed incorrect version number (version 3.0.0 was still reported as 3.0.0 - beta 1)
+* updated toc for WoW 4.0.x
+* updated readme file
+- removed honor points from reward section since quests no longer reward any honor points directly
+
+version 3.0.0 (05-23-2010 14:26 UTC)
+* reviewed readme file and made some minor updates
+
+version 3.0.0 - beta 1 (04-28-2010 23:52 UTC)
++ added support for heroic quests (quest counter and quest filter added - prefix used in questlist: "h")
++ added shift-left-click on quests in the questlist to open the questlog for the selected quest directly or toggle watching the quest (the behavior of the left-click can be changed via a new setting in the options dialog - this functionality was restored from pre 1.0 versions)
++ added database upgrade facility
++ added text to the questlist, if no quest matches the selected filter
++ added more hints for left-/right-click actions
++ added readme file
++ added 3rd party libraries (AceLocale and LibStub)
+* the mod is now distributed under the GPL v3 license (added gpl-3.0.txt and added licensing notes to all lua files)
+* changed version numbering style to [major].[minor].[bugfix]
+* refactored questlist handling to improve overall performance (performance for the most common use-cases was increased by up to 50%)
+* refactored entire code structure and moved to a more OO-design (added/removed several lua files, moved all variables to TitanQuests global in order to reduce pollution of the global namespace)
+* refactored localization system (made use of AceLocale, moved localization files to separate folder, added complete localization support)
+* fixed issue with grayed-out buttons when displaying too long quest details
+* fixed questlist being displayed off-screen when there are too many quests (occurs especially when using a lower resolutions)
+* fixed one issue with the tick-symbol for quest rewards not behaving correctly
+* fixed party members being clickable in quest party member list
+* fixed crashes with German WoW clients
+* fixed garbled questlist when sorting by title
+* changed Titan Quest tooltip layout (removed static/redundant information, improved the layout of quest counters)
+* changed quest details display when mousing over a quest in the quest list (only display information which actually exist, removed quest detail text / summary text, changed color support to comply with the color code for completed/failed objectives)
+* changed quest list complete/failed display (removed "*" and "!" for completed/failed quests and made coloring for completed/failed quests/objectives consistent throughout TitanQuests)
+* changed default sort order from "location" back to "title" (as it was in pre 1.0 versions)
+* changed the behavior of toggling sort/show quest settings (when clicking on the current selected entry it will no longer set the setting back to its default (i.e. the current setting is unchanged) )
+* changed prefix for daily quests from "y" to "*"
+* improved text wrapper function (words are no longer separated in between and "_"-characters no longer pollute the text output)
+* spell rewards are now clickable, whenever possible
+* moved the toggle icon/text settings back into the options dialog (as it was in pre 1.0 versions)
+* all quests can now be added to the watchlist (since WoW no longer has any restrictions for the watchlist)
+* better error reporting, if problems related to localization occur
+* improved German localization
+* moved all documentation to doc subdirectory
+* updated changelog to contain older version information and unified timestamps to use UTC
+* minor changes (mostly code layout, optimization and removed deprecated code/comments)
+- removed quest description and summary from quest detail view (this reduces the size of the single quest view --- open the questlog, if you need to read the detailed information)
+- removed quest details setting switches (all details are displayed, if applicaple)
+- removed toggle options menu - the menu provided entries to toggle the quest log as well as for several third party addons (like QuestIOn, QuestHistory, etc.) - considering the efford required to always keep the toggling integration up-to-date with all these third party addons and with the added feature to toggle the questlog with a simple left-click on the Titan Quest icon, the decision had been made to remove this feature
+- removed quest event display (since that's considered a feature outside the scope of Titan Quests)
+- removed persistant quest tracking support - since that functionality was added to WoW 3.3.0, and hence became redundant
+- removed option to use colored-text only (all text would be green)
+- removed TitanQuests.xml (since it's no longer required - creation of frame objects has been moved to wowintegration.lua)
+
+version 2.14.30300 (12-13-2009)
+* updated russian translation (thanks to StingerSoft)
+
+version 2.12.30300 (12-12-2009)
+* updated toc version because the zip was not right
+
+version 2.11.30300 (12-12-2009)
+* updated toc#
+
+version 2.10.30200 (08-11-2009)
++ added required money in the objectives, if there is any
+* changed the 'Link Quest' to put a clickable link into chat rather than text
+* changed the 'complete' and 'failed' from text after the title to '*' (green) for complete and '!' (red) after the level
+* changed the tooltip text
+
+version 2.09.30200 (07-05-2009)
++ added more info to the quest reward line
++ added talent points, title, and honor points to the Rewards section, if given as a reward
+* GetDifficultyColor moved and became GetQuestDifficultyColor
+* per Blizz changes, the way the quest log is parsed was changed
+
+version 2.08.30100 (04-05-2009)
+* modified Titan options per upcoming changes (the Titan options are now at the bottom of the first menu rather than under the 'options' to be in line with other Titan addons)
+* modified watched quests to work with 3.1 patch changes
+* quests now honors the Titan 'colored text'
+
+version 2.07.30000 (02-??-2009)
++ added <complete>/<total> to the tooltip
+* fixed an issue where the check mark would not be in sync with the watched quests
+
+version 2.06.30000 (02-01-2009)
+* fixed russian translation not working (thanks to djDan)
+
+version 2.05.30000 (02-01-2009)
++ added russian translation (thanks to djDan)
++ added a button to the quest details menu (2nd menu) which will open the quest log at that quest (other addons that 'override' the quest log will work such as Lightheaded or Carbonite)
+* error when selecting Add / Remove from Watcher in the quest details menu (2nd menu)
+* error in startup fixed
+
+version 2.04.30000 (01-27-2009)
+* fix for reported error
+* updated toc#
+
+version 2.03.30000 (01-10-2009)
++ added an option (ON by default) to show quest events
+* made usEN a separate file
+* put localization within TitanQuests to reduce global namespace
+
+version 2.02.30000 (01-01-2009)
++ added Spanish translation (thanks to PatoDaia)
+
+version 2.01.30000 (01-01-2009)
+* fixed an error on left click to properly open the Blizzard quest log
+
+version 2.00.30000 (09-28-2008)
+* incremented the release to 2.xx to denote this is Lich King only
+* updated because of changes in Titan Panel 4.0.0.30000r901 (the changes are NOT backwards compatible - if you run an older version of TitanQuests in the new Titan Panel, neither will you get any errors (Titan Quests will not be displayed) nor will you be able to enable it using Titan Panel)
+* tightened some default checking when getting quest info (it is possible that a quest does not return a valid 'quality' (green | blue | ...) so the default is 'gray' when this happens -- not sure if this is a feature or a bug)
+
+version 1.03.30000 (09-21-2008)
+* updated because of changes in Titan Panel (the changes are backwards compatible)
+* updated the interface number for Lich King
+
+version 1.02.20400 (08-10-2008)
++ left click on the button brings up the Blizz quest log
+* fixed an issue where spell rewards were not showing (unfortunately there is limited information to work with so quality, number, and usability had to assumed)
+* small change to make the above change work on the Lich King (beta)
+
+version 1.01.20400 (08-07-2008)
+* cosmetic changes to display the proper version
+
+version 1.00.20400 (08-02-2008)
++ added Latin America translation (thanks MogoOrc)
++ hovering over the quest also displays the quest objective text
++ the main quest list now includes the suggested group size
++ the main quest list now includes the number of party members on the same quest
++ the quest submenu now includes the party members on the same quest
+* changed _OnLoad so Titan will show proper version
+* seperated the localization into seperate files
+
+version 0.24 (08-07-2008 - 20:07 UTC)
+* updated toc#
+
+version 0.23.2 (08-02-2007)
+* fixed the ZIP file folder structure and removed DS_Store file and _MACOSX folder. I also added a RAR version of the mod.
+
+version 0.23.1 (unknown)
+* uploaded the correct ZIP file, the mod will now work when installed
+
+version 0.23 (unknown)
++ added Group Quest Support
++ group quests are now tagged with a 'g'
++ group quest count is now included in the Titan Panel tooltip
++ view can now be filtered to show only group quests
+
+version 0.22 (07-09-2007 14:54 UTC)
+* updated toc#
+
+version 0.21 (01-13-2006 17:03 UTC)
+* update for changes to GetQuestLogTitle() (thanks Perigoso)
+* updated toc#
+- removed quest list display truncation
+
+version 0.20 (12-27-2006 19:00 UTC)
+* changed MaxQuests to 25 (thanks Bubs)
+
+version 0.19 (12-11-2006 17:15 UTC)
+* updated toc# [Corgi]
+
+version 0.18 (06-08-2006 09:00 UTC)
+* fixed background on quest detail frame [Ryessa]
+* re-positioned close button on text frame [Ryessa]
+* updated toc# to latest patch [Ryessa]
+
+version 0.17 (01-07-2006 21:30 UTC)
+* fixed quest detail frame
+
+version 0.16 (01-06-2006 18:00 UTC)
+* updated toc# for 1.9 patch
+
+version 0.15 (09-20-2005 18:15 UTC)
+* fixed the error caused when minimizing a quest section in Blizzard's QuestLog
+* updated toc# for 1.70 patch
+
+version 0.14 (07-06-2005 18:18 UTC)
++ Added persistence of quests over UI reloads and logout [Ryessa]
+* Refactored Titan Quests into smaller, more logical files TitanQuests (.lua, .xml), TitanQuestsDetails (.lua, .xml), and TitanQuestsUtils (.lua) [Ryessa]
+
+version 0.13 (06-28-2005 17:11 UTC)
+* fixed bug when clicking on "Quest Details"
+* minor German translation fix (thanks Scarabeus)
+
+version 0.12 (06-26-2005 9:00 UTC)
++ added ability to click on a quest to add to the quest tracker directly [Ryessa]
++ added option to set "Watch" or "Quest Details" as primary action when clicking a quest [Ryessa]
++ added SHIFT-click to perform the secondary action ("Watch" or "Quest Details") [Ryessa]
++ added "Failed" quest tag [Corgi]
++ added option to disable grouping of quests under Zone or Level headings [Ryessa]
+* cleaned up info display panel a bit [Ryessa]
+* set quests to store their toggle state in Titan variables (prep to persist watched quests between sessions) [Ryessa]
+* moved a lot of code into utility functions for code cleanliness at cost of a slight perf hit (not noticable) [Ryessa]
+
+version 0.11 (06-16-2005 00:40 UTC)
++ added option to show only incomplete quests (need loc guys to review) [Ryessa]
++ added grouping headers when sorting by location or level [Ryessa]
+* new quest list layout [Ryessa]
+* moved most options to a side menu because of the larger size from grouping [Ryessa]
+* Shortened English tooltip descriptors [Ryessa]
+* changed Titan button text to be NumComplete/NumCurrent [Ryessa]
+* updated for Titan Panel 1.24 [Corgi]
+
+version 0.10 (06-08-2005 04:30 UTC)
++ added French localization (thanks Vorpale)
+* German localization changes (thanks Kaesemuffin)
+* toc updated for 1.50 patch
+
+version 0.09 (06-02-2005 23:31 UTC)
++ added German localization (thanks Scarabeus)
+* fixed bug that was causing WoW.exe to crash when changing characters
+	
+version 0.08 (05-31-2005 00:00 UTC)
++ added the ability to sort the quest list by location (default), level or title
++ added the ability to just show quests based on their type (i.e., just show elite quests)
+
+version 0.07 (05-28-2005 01:41 UTC)
++ added a [Quests] icon for the Titan Panel, which can be turned on/off
+* minor changes to text displayed in mouseover tooltip
+
+version 0.06 (05-21-2005 04:27 UTC)
++ added 'Quest Details' button to quest dropdown menu
++ added a 'Link Quest' button to quest dropdown menu
++ added Location to Quest Details
++ added colored quest level text to Quest Details window title
++ added 'Toggle' dropdown menu to toggle the blizzard's quest log and various 3rd party addons
++ Share Quest has been added to quest dropdown menu
++ Abandon Quest has been added to quest dropdown menu (a window will open for confirmation)
+* clicking on quest now opens a movable window with complete quest info, including rewards
+* fixed ui scaling issue with Quest Details window
+* localization.lua is ready for german, french and korean translations
+
+version 0.05 (05-16-2005 00:20 UTC)
++ added quest location and complete tag to the quest list
++ added the ability to toggle PartyQuests, QuestBank, QuestIon if they are installed
+* changed 'About' button to open a dropdown menu displaying mod name, version and author name
+* clicking on a quest in the quest list will open a dropdown menu showing the quest objectives and a button to add/remove the quest from Blizzard's Quest Tracker
+
+version 0.04 (05-15-2005 03:43 UTC)
++ added the ability to toggle MonkeyQuest and/or QuestHistory from the right-click menu if they are installed
++ added version info to mouseover tooltip
++ added 'About' to right-click menu, which opens a window displaying mod name, version and author name
+
+version 0.03 (05-14-2005 00:28 UTC)
+* clicking on quest will now open the quest log to that particular quest
+
+version 0.02 (05-13-2005 20:01 UTC)
+* fixed typo to allow 'Show Label Text' to work
+
+version 0.01 (05-13-2005 18:30 UTC)
++ Initial Release

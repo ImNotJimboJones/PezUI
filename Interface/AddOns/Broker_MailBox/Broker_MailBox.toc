@@ -1,0 +1,18 @@
+## Interface: 40300
+## Title: Broker: MailBox
+## Notes: LDB Display for Mail.
+## Author: Computerpunk
+## Version: 0.3
+## X-Category: Mail
+## OptionalDeps: Ace3
+## SavedVariables: Broker_MailBoxDB
+## X-Curse-Packaged-Version: 0.4.4 Beta
+## X-Curse-Project-Name: Broker_MailBox
+## X-Curse-Project-ID: broker_mailbox
+## X-Curse-Repository-ID: wow/broker_mailbox/mainline
+
+embeds.xml
+
+localization-enUS.lua
+
+Broker_MailBox.lua

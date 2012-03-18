@@ -10,6 +10,7 @@ Prat3DB = {
 				["Default"] = {
 					["level"] = false,
 					["bracketscommoncolor"] = false,
+					["subgroup"] = false,
 				},
 			},
 		},

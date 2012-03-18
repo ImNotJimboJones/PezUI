@@ -1,0 +1,22 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="TitanMicrobuttons.lua"/>
+	<Frame parent="UIParent">
+		<Frames>
+			<Button name="TitanPanelMicrobuttonsButton" inherits="TitanPanelIconTemplate" frameStrata="FULLSCREEN" toplevel="true">
+			    <Scripts>
+				    <OnLoad>
+					    TitanPanelMicrobuttonsButton_OnLoad(self);
+                        TitanPanelButton_OnLoad(self)
+				    </OnLoad>
+                    <OnDoubleClick>
+                        TitanPanelMicrobuttonsButton_OnDoubleClick(button);
+                    </OnDoubleClick>
+                    <OnUpdate>
+                        TitanPanelMicrobuttonsButton_OnUpdate()
+                    </OnUpdate>    
+		        </Scripts>
+			</Button>
+		</Frames>
+	</Frame>	
+</Ui>

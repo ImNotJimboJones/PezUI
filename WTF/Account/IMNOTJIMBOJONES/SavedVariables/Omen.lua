@@ -24,6 +24,8 @@ Omen3DB = {
 			},
 			["ShowWith"] = {
 				["Alone"] = true,
+				["UseShowWith"] = false,
+				["HideWhileResting"] = false,
 			},
 			["VGrip1"] = 109.6208904287567,
 			["PositionX"] = 1055.558837890625,
@@ -34,6 +36,7 @@ Omen3DB = {
 					["sink20OutputSink"] = "Default",
 				},
 			},
+			["Shown"] = true,
 			["TitleBar"] = {
 				["ShowTitleBar"] = false,
 			},

@@ -1,0 +1,25 @@
+## Interface: 40300
+## Title: |cffff0000DE|cff0062ffTracking|cffffffffBroker|r
+## Notes: Change minimap tracking modes plugin for any LibDataBroker display.
+## Author: |cff69ccf0by Dark_Elf|r
+## Version: |cffff7d0av4.0.3|r
+## X-Localizations: enUS
+## SavedVariablesPerCharacter: DETrackingBrokerDB
+#@no-lib-strip@
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+#@end-no-lib-strip@
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+#@no-lib-strip@
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+#@end-no-lib-strip@
+locales\enUS.lua
+DETrackingBroker.lua

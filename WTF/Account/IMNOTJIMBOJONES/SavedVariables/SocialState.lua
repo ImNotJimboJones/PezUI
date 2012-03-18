@@ -1,7 +1,7 @@
 
 SocialStateDB = {
-	["RealIDSort"] = "REALID",
-	["GuildSort"] = "revZONENAME",
+	["RealIDSort"] = "ZONENAME",
+	["GuildSort"] = "revRANKINDEX",
 	["hide_LDB_totals"] = true,
 	["hide_LDB_labels"] = false,
 	["hide_gmotd"] = false,

@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: Titan Panel [|cffeda55fMicroButtons|r] |cff00aa004.0.1|r
+## Author: Suddendeath2000
+## Version: 4.0.1
+## Notes: Puts the standard Blizzard microbuttons (quest, social, achievement,..) in a Titan plugin.
+## RequiredDeps: Titan
+## DefaultState: Enabled
+## LoadOnDemand: 0
+TitanMicrobuttons.xml

@@ -5,50 +5,65 @@ SexyMapDB = {
 		},
 		["Coordinates"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
-					["enabled"] = true,
+				["Default"] = {
 					["fontSize"] = 10,
 					["fontColor"] = {
 						["a"] = 1,
-						["r"] = 1,
-						["g"] = 1,
 						["b"] = 1,
+						["g"] = 1,
+						["r"] = 1,
 					},
 					["borderColor"] = {
 						["a"] = 0.7000000178813934,
-						["r"] = 0,
-						["g"] = 0,
 						["b"] = 0,
+						["g"] = 0,
+						["r"] = 0,
 					},
 					["locked"] = true,
-					["x"] = -0.360107421875,
+					["y"] = 62.23907470703125,
 					["backgroundColor"] = {
 						["a"] = 0.7000000178813934,
-						["r"] = 0,
-						["g"] = 0,
 						["b"] = 0,
+						["g"] = 0,
+						["r"] = 0,
 					},
-					["y"] = 62.23907470703125,
+					["x"] = -0.360107421875,
 				},
 			},
 		},
 		["Buttons"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
+				["Default"] = {
 					["direction"] = {
 						["hide"] = "never",
 					},
-					["calendar"] = {
+					["MiniMapRecordingButton"] = {
 						["hide"] = "never",
 					},
 					["voice"] = {
 						["hide"] = "never",
 					},
+					["MacaroonMinimapButton"] = {
+						["hide"] = "never",
+					},
 					["zoom"] = {
 						["hide"] = "never",
 					},
+					["MiniMapInstanceDifficulty"] = {
+						["hide"] = "never",
+					},
+					["radius"] = 0,
 					["lockDragging"] = false,
 					["lfg"] = {
+						["hide"] = "never",
+					},
+					["tracking"] = {
+						["hide"] = "never",
+					},
+					["MiniMapLFGFrame"] = {
+						["hide"] = "never",
+					},
+					["close"] = {
 						["hide"] = "never",
 					},
 					["worldmap"] = {
@@ -58,35 +73,37 @@ SexyMapDB = {
 						["hide"] = "always",
 					},
 					["mapclock"] = {
-						["hide"] = "never",
+						["hide"] = "hover",
 					},
-					["close"] = {
+					["calendar"] = {
 						["hide"] = "never",
 					},
 					["DBMMinimapButton"] = {
-						["hide"] = "hover",
-					},
-					["mail"] = {
 						["hide"] = "never",
 					},
+					["mail"] = {
+						["hide"] = "hover",
+					},
 					["dragPositions"] = {
+						["MinimapZoomIn"] = -31.51559554458952,
+						["MiniMapMailFrame"] = 176.8271674923576,
+						["GameTimeFrame"] = 39.90599214133294,
+						["MiniMapWorldMapButton"] = 42.60297915413958,
 						["MinimapZoomOut"] = -56.07895483376067,
-						["TimeManagerClockButton"] = 175.0962290337762,
+						["TimeManagerClockButton"] = -89.45977552062108,
+						["MiniMapLFGFrame"] = 165.1088245815029,
 						["MiniMapTrackingButton"] = 158.8424850050231,
 						["MacaroonMinimapButton"] = 210.0155001660639,
-						["GameTimeFrame"] = 39.90599214133294,
-						["MinimapZoomIn"] = -31.51559554458952,
-						["MiniMapWorldMapButton"] = 42.60297915413958,
 					},
-					["tracking"] = {
-						["hide"] = "hover",
+					["GuildInstanceDifficulty"] = {
+						["hide"] = "never",
 					},
 				},
 			},
 		},
 		["AutoZoom"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
+				["Default"] = {
 					["autoZoom"] = 10,
 				},
 			},
@@ -94,9 +111,6 @@ SexyMapDB = {
 		["Shapes"] = {
 			["profiles"] = {
 				["Default"] = {
-					["shape"] = "Textures\\MinimapMask",
-				},
-				["Pezzer - Burning Blade"] = {
 					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
 				},
 			},
@@ -105,7 +119,7 @@ SexyMapDB = {
 		},
 		["Movers"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
+				["Default"] = {
 					["clamp"] = false,
 					["scale"] = 0.72,
 					["framePositions"] = {
@@ -166,41 +180,6 @@ SexyMapDB = {
 			},
 			["profiles"] = {
 				["Default"] = {
-					["applyPreset"] = false,
-					["borders"] = {
-						{
-							["a"] = 1,
-							["b"] = 1,
-							["name"] = "Rune 1",
-							["r"] = 0.3098039215686275,
-							["scale"] = 1.4,
-							["rotSpeed"] = -16,
-							["g"] = 0.4784313725490196,
-							["texture"] = "SPELLS\\AURARUNE256.BLP",
-						}, -- [1]
-						{
-							["a"] = 0.3799999952316284,
-							["b"] = 1,
-							["rotSpeed"] = 4,
-							["r"] = 0.196078431372549,
-							["scale"] = 2.1,
-							["name"] = "Rune 2",
-							["g"] = 0.2901960784313725,
-							["texture"] = "SPELLS\\AuraRune_A.blp",
-						}, -- [2]
-						{
-							["a"] = 0.3,
-							["name"] = "Fade",
-							["b"] = 1,
-							["scale"] = 1.6,
-							["r"] = 0,
-							["g"] = 0.2235294117647059,
-							["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
-						}, -- [3]
-					},
-					["shape"] = "Textures\\MinimapMask",
-				},
-				["Pezzer - Burning Blade"] = {
 					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
 					["applyPreset"] = false,
 					["backdrop"] = {
@@ -211,9 +190,9 @@ SexyMapDB = {
 						},
 						["borderColor"] = {
 							["a"] = 1,
-							["r"] = 0.2666666666666667,
-							["g"] = 0.2666666666666667,
 							["b"] = 0.2666666666666667,
+							["g"] = 0.2666666666666667,
+							["r"] = 0.2666666666666667,
 						},
 						["scale"] = 1.07,
 						["alpha"] = 1,
@@ -223,7 +202,7 @@ SexyMapDB = {
 		},
 		["HudMap"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
+				["Default"] = {
 					["setNewScale"] = true,
 					["scale"] = 1.4,
 				},
@@ -231,21 +210,19 @@ SexyMapDB = {
 		},
 		["ZoneText"] = {
 			["profiles"] = {
-				["Pezzer - Burning Blade"] = {
+				["Default"] = {
 					["fontsize"] = 12,
 					["show"] = "hover",
-					["yOffset"] = -20,
+					["yOffset"] = -9,
 				},
 			},
 		},
 	},
 	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Pezzer - Burning Blade",
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
-		},
-		["Pezzer - Burning Blade"] = {
 		},
 	},
 }

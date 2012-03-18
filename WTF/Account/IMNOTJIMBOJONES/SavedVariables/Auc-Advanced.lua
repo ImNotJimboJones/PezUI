@@ -1,15 +1,37 @@
 
 AucAdvancedConfig = {
 	["profile.Default"] = {
-		["configator.left"] = 322.8235778808594,
+		["scandata"] = {
+			["tooltip"] = {
+			},
+		},
+		["tooltip"] = {
+			["marketprice"] = {
+				["show"] = false,
+			},
+		},
+		["match"] = {
+			["undercut"] = {
+				["value"] = 1000,
+			},
+		},
 		["core"] = {
 			["matcher"] = {
 				["matcherlist"] = {
 					"Undercut", -- [1]
 				},
 			},
+			["tooltip"] = {
+			},
 		},
+		["filter"] = {
+			["basic"] = {
+			},
+		},
+		["configator.left"] = 322.8235778808594,
 		["stat"] = {
+			["wowecon"] = {
+			},
 			["sales"] = {
 				["ignoredsigs"] = {
 				},
@@ -17,8 +39,16 @@ AucAdvancedConfig = {
 		},
 		["util"] = {
 			["appraiser"] = {
-				["columnsortcurDir"] = -1,
 				["columnsortcurSort"] = 6,
+				["columnsortcurDir"] = -1,
+			},
+			["EasyBuyout"] = {
+				["active"] = true,
+			},
+			["simpleauc"] = {
+				["tooltip"] = false,
+			},
+			["scanstart"] = {
 			},
 			["mover"] = {
 				["anchors"] = {
@@ -26,7 +56,7 @@ AucAdvancedConfig = {
 					nil, -- [2]
 					"TOPLEFT", -- [3]
 					0, -- [4]
-					-104.0000305175781, -- [5]
+					-104, -- [5]
 				},
 			},
 			["automagic"] = {

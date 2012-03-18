@@ -34,7 +34,7 @@ Currencyflow_DB = {
 					["maxReached397"] = false,
 					["maxReached393"] = false,
 					["charname"] = "Pezzer",
-					["lastWeekEarned396"] = 500,
+					["lastWeekEarned396"] = 800,
 					["ignore"] = false,
 					["maxReached392"] = false,
 					["maxReached398"] = false,
@@ -46,22 +46,72 @@ Currencyflow_DB = {
 					[393] = 78,
 					[394] = 40,
 					[395] = 1155,
-					["gold"] = 575773656,
+					["gold"] = 578389410,
 					[397] = 20,
 					[398] = 14,
 					[399] = 15,
 					[400] = 2,
 					[401] = 9,
 					["lastWeekEarned390"] = 0,
-					[614] = 5,
+					[614] = 0,
 					[402] = 15,
 					["maxReached395"] = false,
 					["maxReached400"] = false,
 					["maxReached384"] = false,
 					["maxReached385"] = false,
-					[396] = 6650,
-					["maxReached390"] = false,
+					[396] = 6950,
 					["history"] = {
+						[15416] = {
+							[614] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[396] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							["time"] = 11573,
+							["gold"] = {
+								["gained"] = 6610097,
+								["spent"] = 526654,
+							},
+							[392] = {
+							},
+							[390] = {
+							},
+							[395] = {
+							},
+						},
+						[15413] = {
+							[614] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[396] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							["time"] = 2,
+							["gold"] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+						},
+						[15417] = {
+							[395] = {
+							},
+							[396] = {
+							},
+							["time"] = 1339,
+							["gold"] = {
+								["gained"] = 543904,
+								["spent"] = 1168783,
+							},
+							[392] = {
+							},
+							[390] = {
+							},
+						},
 						[15411] = {
 							[394] = {
 								["gained"] = 0,
@@ -145,21 +195,6 @@ Currencyflow_DB = {
 								["spent"] = 0,
 							},
 						},
-						[15413] = {
-							[614] = {
-								["gained"] = 0,
-								["spent"] = 0,
-							},
-							[396] = {
-								["gained"] = 0,
-								["spent"] = 0,
-							},
-							["time"] = 2,
-							["gold"] = {
-								["gained"] = 0,
-								["spent"] = 0,
-							},
-						},
 						[15412] = {
 							[395] = {
 							},
@@ -176,6 +211,7 @@ Currencyflow_DB = {
 							},
 						},
 					},
+					["maxReached390"] = false,
 					["maxReached401"] = false,
 					[241] = 26,
 					[81] = 2,

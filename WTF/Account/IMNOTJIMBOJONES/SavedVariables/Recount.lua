@@ -59,12 +59,12 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -24329.333984375,
-			["DetailWindowX"] = 3960.59033203125,
+			["DetailWindowY"] = -1202473.625,
+			["DetailWindowX"] = 195751.75,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["Scaling"] = 0.85,
-			["LastInstanceName"] = "Well of Eternity",
+			["LastInstanceName"] = "Black Temple",
 			["BarTexture"] = "Minimalist",
 			["RealtimeWindows"] = {
 				["Realtime_FPS_FPS"] = {
@@ -88,7 +88,7 @@ RecountDB = {
 					false, -- [8]
 				},
 			},
-			["CurDataSet"] = "LastFightData",
+			["CurDataSet"] = "CurrentFightData",
 			["BarTextColorSwap"] = false,
 			["MainWindowWidth"] = 226.0703887939453,
 		},

@@ -319,8 +319,8 @@ GridDB = {
 					["buff_Riptide"] = {
 						["icon"] = "Interface\\Icons\\spell_nature_riptide",
 					},
-					["buff_PowerWord:Shield"] = {
-						["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
+					["buff_BeaconofLight"] = {
+						["icon"] = "Interface\\Icons\\Ability_Paladin_BeaconofLight",
 					},
 					["buff_Rejuvenation"] = {
 						["icon"] = "Interface\\Icons\\Spell_Nature_Rejuvenation",
@@ -330,6 +330,9 @@ GridDB = {
 					},
 					["buff_EarthShield"] = {
 						["icon"] = "Interface\\Icons\\Spell_Nature_SkinofEarth",
+					},
+					["buff_PowerWord:Shield"] = {
+						["icon"] = "Interface\\Icons\\Spell_Holy_PowerWordShield",
 					},
 					["buff_Regrowth"] = {
 						["icon"] = "Interface\\Icons\\Spell_Nature_ResistNature",
@@ -823,13 +826,13 @@ GridDB = {
 					["borderTexture"] = "None",
 					["anchor"] = "TOP",
 					["BackgroundG"] = 0,
-					["PosY"] = -661.7500106860593,
+					["PosY"] = -691.5000094343618,
 					["layout"] = "Custom Group Solo",
 					["BackgroundA"] = 0,
 					["BorderG"] = 0,
 					["horizontal"] = true,
 					["BackgroundB"] = 0,
-					["PosX"] = 0.1353051605517521,
+					["PosX"] = 0.3653867567825273,
 				},
 				["Default"] = {
 					["BackgroundG"] = 0,

@@ -50,7 +50,7 @@ SkadaDB = {
 						["texture"] = "Minimalist",
 					},
 					["barheight"] = 14,
-					["mode"] = "DPS",
+					["mode"] = "Healing and Absorbs",
 				}, -- [1]
 			},
 			["icon"] = {

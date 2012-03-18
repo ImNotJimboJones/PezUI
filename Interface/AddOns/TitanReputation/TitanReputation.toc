@@ -1,0 +1,13 @@
+## Title: Titan [|cffeda55fReputation|r]
+## Authors: PapaSol, Aquator
+## Notes: Adds Reputation tracking and monitoring tools to Titan Panel.
+## Version: 3.7.6
+## Interface: 40300
+## Dependencies: Titan
+## OptionalDeps: Glamour
+## X-Category: Interface Enhancements Titan Reputation
+## X-Curse-Packaged-Version: Release 3.7.6
+## X-Curse-Project-Name: Titan [Reputation] (+Glamour)
+## X-Curse-Project-ID: titanrep
+## X-Curse-Repository-ID: wow/titanrep/mainline
+TitanReputation.xml

@@ -1,0 +1,41 @@
+﻿## Interface: 40300
+## Title: Titan Panel [|cffeda55fQuests|r] |cff00aa003.0.6|r
+## Title-ruRU: Titan Panel [|cffeda55fЗадания|r] |cff00aa003.0.6|r
+## Notes: A quest list for Titan Panel.
+## Notes-deDE: Questliste für Titan Panel.
+## Author: Corgi/Ryessa/PcHaXoR/r3neGaDe/urnati/Luke1410
+## Dependencies: Titan
+## Version: 3.0.6
+## X-Website: http://www.luke1410.de/typo3/index.php?id=14
+
+# 3rd party library includes
+libs\LibStub\LibStub.lua
+libs\AceLocale-3.0\AceLocale-3.0.xml
+
+# main include
+titanquests.lua
+
+# i18n includes
+locale\locale.lua
+locale\localeenUS.lua
+locale\localedeDE.lua
+locale\localefrFR.lua
+locale\localeesES.lua
+locale\localemxMX.lua
+locale\localeruRU.lua
+
+# tool includes
+configuration.lua
+database.lua
+questlist.lua
+utilities.lua
+
+# main integration includes
+titanpanelintegration.lua
+wowintegration.lua
+
+# dialog includes
+dialog.lua
+
+# initialization
+init.lua

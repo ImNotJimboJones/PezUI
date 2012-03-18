@@ -84,6 +84,13 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
+			["Keybinds: Button 7"] = {
+				"/cast [@focus] Misdirection;", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
 			["ScreenGrid: Button 3"] = {
 				"/screengrid 20", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
@@ -116,6 +123,7 @@ MacaroonMacroVault = {
 	},
 }
 MacaroonItemCache = {
+	["Belt of the Beloved Companion"] = "77241",
 	["Kiroptyric Sigil"] = "77113",
 	["Sporebeard Gauntlets"] = "78362",
 }
