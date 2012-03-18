@@ -39,7 +39,7 @@ FrameLevel: 16
 Anchor: RIGHT
 X: -195
 Y: 10
-W: 365
+W: 305
 H: 240
 Frame: DurabilityFrame
 FrameLevel: 0
@@ -49,7 +49,7 @@ Y: -172
 W: 58
 H: 75
 Frame: VehicleSeatIndicator
-FrameLevel: 17
+FrameLevel: 16
 Anchor: LEFT
 X: 15
 Y: -146
@@ -161,14 +161,14 @@ Y: -96
 W: 208
 H: 27
 Frame: Recount_MainWindow
-FrameLevel: 30
+FrameLevel: 19
 Anchor: BOTTOM
 X: -329
 Y: 0
 W: 226
 H: 151
 Frame: Recount_DetailWindow
-FrameLevel: 10
+FrameLevel: 9
 Anchor: LEFT
 X: 8
 Y: -51
@@ -179,5 +179,5 @@ FrameLevel: 3
 Anchor: BOTTOMRIGHT
 X: -65
 Y: 171
-W: 75
+W: 72
 H: 20

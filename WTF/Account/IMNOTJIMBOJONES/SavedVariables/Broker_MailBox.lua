@@ -2,8 +2,8 @@
 Broker_MailBoxDB = {
 	["char"] = {
 		["Pezzer - Burning Blade"] = {
-			["total"] = 1,
 			["new"] = 1,
+			["total"] = 1,
 		},
 	},
 	["profileKeys"] = {
