@@ -1,5 +1,6 @@
 
 AucAdvancedConfig = {
+	["users.Burning Blade.Pezzer"] = "Default",
 	["version"] = 1,
 	["profile.Default"] = {
 		["scandata"] = {
@@ -30,6 +31,14 @@ AucAdvancedConfig = {
 			},
 		},
 		["configator.left"] = 322.8235778808594,
+		["stat"] = {
+			["wowecon"] = {
+			},
+			["sales"] = {
+				["ignoredsigs"] = {
+				},
+			},
+		},
 		["util"] = {
 			["appraiser"] = {
 				["columnsortcurSort"] = 6,
@@ -41,8 +50,7 @@ AucAdvancedConfig = {
 			["simpleauc"] = {
 				["tooltip"] = false,
 			},
-			["automagic"] = {
-				["uierrormsg"] = 1,
+			["scanstart"] = {
 			},
 			["mover"] = {
 				["anchors"] = {
@@ -53,22 +61,14 @@ AucAdvancedConfig = {
 					-104, -- [5]
 				},
 			},
-			["scanstart"] = {
+			["automagic"] = {
+				["uierrormsg"] = 1,
 			},
 			["pricelevel"] = {
 			},
 		},
-		["stat"] = {
-			["sales"] = {
-				["ignoredsigs"] = {
-				},
-			},
-			["wowecon"] = {
-			},
-		},
 		["configator.top"] = 676.7647705078125,
 	},
-	["users.Burning Blade.Pezzer"] = "Default",
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
@@ -77,15 +77,15 @@ AucAdvancedData = {
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Global"] = {
-			["configator.left"] = 318.0000305175781,
-			["configator.top"] = 730.0000610351562,
-		},
+		["Version"] = 1,
 		["Current"] = {
 			["snatch.itemsList"] = {
 			},
 		},
-		["Version"] = 1,
+		["Global"] = {
+			["configator.left"] = 318.0000305175781,
+			["configator.top"] = 730.0000610351562,
+		},
 		["SavedSearches"] = {
 		},
 	},
