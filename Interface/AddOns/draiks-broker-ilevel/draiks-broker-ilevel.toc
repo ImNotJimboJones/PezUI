@@ -1,0 +1,32 @@
+﻿## Interface: 40000
+## Title: DraiksBrokeriLevel
+## Notes: Shows current iLevel
+## Author: Draik@Silvermoon@US
+## X-eMail: timothy@minahan.net
+## X-Category: Miscellaneous
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+## SavedVariables: draiksAddonInitialised ilvlDB
+## X-Curse-Packaged-Version: r54
+## X-Curse-Project-Name: Draiks Broker iLevel
+## X-Curse-Project-ID: draiks-broker-ilevel
+## X-Curse-Repository-ID: wow/draiks-broker-ilevel/mainline
+
+
+
+Lib\LibStub\LibStub.lua
+Lib\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Lib\LibDataBroker-1.1\libDataBroker-1.1.lua
+Lib\LibQTip-1.0\LibQTip-1.0.lua
+
+
+embeds.xml
+
+DraiksBrokerDB-enUS.lua
+DraiksBrokerDB-deDE.lua
+DraiksBrokerDB-frFR.lua
+DraiksBrokerDB-ruRU.lua
+DraiksBrokerDB-zhCN.lua
+DraiksBrokerDB-zhTW.lua
+
+brokeriLevel.lua

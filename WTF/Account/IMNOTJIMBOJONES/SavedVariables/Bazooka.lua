@@ -4,84 +4,22 @@ BazookaDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["bars"] = {
 			["iconSize"] = 14,
 			["pluginOpacity"] = 0.5,
 		},
-		["sortDisabledLast"] = true,
 		["enableOpacityWorkaround"] = false,
+		["sortDisabledLast"] = true,
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["numBars"] = 3,
 			["adjustFrames"] = false,
-			["locked"] = true,
 			["plugins"] = {
-				["launcher"] = {
-					["Informant"] = {
-						["enabled"] = false,
-						["pos"] = 13,
-					},
-					["Swatter"] = {
-						["enabled"] = false,
-						["pos"] = 12,
-					},
-					["Omen"] = {
-						["enabled"] = false,
-						["pos"] = 10,
-					},
-					["PitBull4"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["Auc-Util-AutoMagic"] = {
-						["enabled"] = false,
-						["pos"] = 3,
-					},
-					["AucAdvanced"] = {
-						["enabled"] = false,
-						["pos"] = 6,
-					},
-					["Grid"] = {
-						["enabled"] = false,
-						["pos"] = 4,
-					},
-					["Auc-Util-SearchUI"] = {
-						["enabled"] = false,
-						["pos"] = 8,
-					},
-					["Bazooka"] = {
-						["enabled"] = false,
-					},
-					["Prat"] = {
-						["enabled"] = false,
-						["pos"] = 11,
-					},
-					["AddonMgr"] = {
-						["enabled"] = false,
-						["pos"] = 5,
-					},
-					["BrokerToolBox"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["BrokerRecountFu"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["kgPanels"] = {
-						["enabled"] = false,
-						["pos"] = 7,
-					},
-					["Masque"] = {
-						["enabled"] = false,
-						["pos"] = 9,
-					},
-				},
 				["data source"] = {
 					["YssEquipmentBroker"] = {
 						["enabled"] = false,
@@ -89,16 +27,16 @@ BazookaDB = {
 					},
 					["LonnyMenu"] = {
 						["area"] = "left",
-						["bar"] = 2,
 						["pos"] = 2,
+						["bar"] = 2,
 					},
 					["Friend XP"] = {
 						["pos"] = 4,
 					},
 					["BrokerToolBox - Clock"] = {
-						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
+						["showValue"] = false,
 						["pos"] = 4,
 					},
 					["Broker_repair"] = {
@@ -113,47 +51,61 @@ BazookaDB = {
 					["YssDrop"] = {
 						["stripColors"] = false,
 						["area"] = "left",
-						["showText"] = false,
 						["alignment"] = "LEFT",
+						["showText"] = false,
 						["showValue"] = false,
 						["pos"] = 1,
 					},
 					["Broker_WhisperWhisper"] = {
-						["bar"] = 3,
 						["pos"] = 2,
+						["bar"] = 3,
 					},
 					["Broker_Speed"] = {
 						["area"] = "cright",
 						["enabled"] = false,
 						["pos"] = 1,
 					},
+					["AllPlayed"] = {
+						["area"] = "left",
+						["pos"] = 4,
+						["showText"] = false,
+					},
 					["BrokerToolBox - Token"] = {
 						["area"] = "center",
-						["pos"] = 12,
 						["bar"] = 2,
+						["pos"] = 12,
 					},
 					["Broker_DualSpecObject"] = {
 						["area"] = "left",
-						["pos"] = 1,
 						["bar"] = 3,
+						["pos"] = 2,
 					},
 					["BrokerToolBox - Repair"] = {
-						["area"] = "cleft",
-						["pos"] = 1,
+						["area"] = "left",
 						["bar"] = 3,
+						["pos"] = 3,
+					},
+					["Broker_Leveltime"] = {
+						["area"] = "left",
+						["pos"] = 5,
+						["showText"] = false,
+					},
+					["SimpleCurrency"] = {
+						["enabled"] = false,
+						["pos"] = 19,
 					},
 					["Currencyflow"] = {
 						["area"] = "left",
-						["bar"] = 2,
 						["pos"] = 1,
-					},
-					["BrokerToolBox - Money"] = {
-						["showValue"] = false,
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 2,
-						["showSuffix"] = false,
 						["bar"] = 2,
+					},
+					["shLatency"] = {
+						["disableMouseInCombat"] = true,
+						["showIcon"] = false,
+						["disableTooltip"] = true,
+						["pos"] = 2,
+						["bar"] = 2,
+						["disableMouseOutOfCombat"] = true,
 					},
 					["Broker_Wallet"] = {
 						["enabled"] = false,
@@ -163,25 +115,30 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 23,
 					},
-					["ElkExperience"] = {
-						["pos"] = 5,
+					["LauncherMenu"] = {
+						["enabled"] = false,
+						["pos"] = 7,
 					},
-					["Aanye_XP"] = {
+					["SpeedyGonzales"] = {
+						["showValue"] = false,
+						["showLabel"] = true,
+						["area"] = "left",
+						["stripColors"] = false,
+						["disableMouseInCombat"] = true,
 						["pos"] = 6,
 					},
 					["BrokerToolBox - Position"] = {
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
-						["showValue"] = false,
 						["pos"] = 13,
 					},
-					["Volumizer"] = {
-						["stripColors"] = false,
-						["enabled"] = false,
-						["showText"] = false,
-						["showValue"] = false,
+					["shFps"] = {
+						["disableMouseInCombat"] = true,
+						["disableTooltip"] = true,
+						["pos"] = 1,
 						["bar"] = 2,
-						["pos"] = 10,
+						["disableMouseOutOfCombat"] = true,
 					},
 					["Whistle"] = {
 						["area"] = "left",
@@ -207,17 +164,20 @@ BazookaDB = {
 					["Broker_Money"] = {
 						["area"] = "left",
 						["enabled"] = false,
-						["bar"] = 2,
 						["pos"] = 2,
+						["bar"] = 2,
 					},
 					["SocialState"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 4,
 					},
-					["SimpleCurrency"] = {
-						["enabled"] = false,
-						["pos"] = 19,
+					["Draiks Broker ILevel"] = {
+						["showIcon"] = false,
+						["area"] = "left",
+						["showValue"] = false,
+						["pos"] = 4,
+						["bar"] = 3,
 					},
 					["SwapSpec"] = {
 						["enabled"] = false,
@@ -236,58 +196,58 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["MailNotifier"] = {
+					["Broker Currency"] = {
 						["enabled"] = false,
-						["pos"] = 16,
-					},
-					["BrokerToolBox - Equipments"] = {
-						["showValue"] = false,
-						["enabled"] = false,
-						["pos"] = 10,
-					},
-					["Broker_MailBox"] = {
-						["enabled"] = false,
-						["pos"] = 14,
-					},
-					["Broker_uClock"] = {
-						["showValue"] = false,
-						["showIcon"] = false,
-						["enabled"] = false,
-						["pos"] = 9,
-						["stripColors"] = false,
-						["showupdates"] = "",
 						["bar"] = 2,
-					},
-					["MailMinder"] = {
-						["stripColors"] = false,
-						["enabled"] = false,
-						["pos"] = 3,
-					},
-					["BrokerXPBar"] = {
-						["pos"] = 3,
-					},
-					["Broker_DurabilityInfo"] = {
-						["area"] = "cright",
-						["enabled"] = false,
-						["pos"] = 1,
+						["pos"] = 13,
 					},
 					["Skada"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 3,
 					},
-					["Broker Currency"] = {
+					["Broker_MailBox"] = {
 						["enabled"] = false,
-						["pos"] = 13,
-						["bar"] = 2,
+						["pos"] = 14,
 					},
-					["Broker_MicroMenu"] = {
+					["Broker_DurabilityInfo"] = {
+						["area"] = "cright",
+						["enabled"] = false,
+						["pos"] = 1,
+					},
+					["BrokerXPBar"] = {
+						["pos"] = 3,
+					},
+					["BrokerToolBox - Equipments"] = {
+						["enabled"] = false,
 						["showValue"] = false,
+						["pos"] = 10,
+					},
+					["Broker_uClock"] = {
+						["showupdates"] = "",
+						["showIcon"] = false,
+						["enabled"] = false,
+						["bar"] = 2,
+						["showValue"] = false,
+						["stripColors"] = false,
+						["pos"] = 9,
+					},
+					["MailMinder"] = {
 						["enabled"] = false,
 						["stripColors"] = false,
+						["pos"] = 3,
+					},
+					["MailNotifier"] = {
+						["enabled"] = false,
+						["pos"] = 16,
+					},
+					["Broker_MicroMenu"] = {
 						["showupdates"] = "",
-						["bar"] = 2,
+						["enabled"] = false,
+						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 4,
+						["bar"] = 2,
 					},
 					["LDB_Guild"] = {
 						["pos"] = 6,
@@ -298,32 +258,88 @@ BazookaDB = {
 					["LDB_Friends"] = {
 						["pos"] = 5,
 					},
-					["shFps"] = {
-						["disableMouseInCombat"] = true,
-						["disableTooltip"] = true,
-						["disableMouseOutOfCombat"] = true,
-						["bar"] = 2,
-						["pos"] = 1,
-					},
-					["SpeedyGonzales"] = {
+					["Volumizer"] = {
 						["stripColors"] = false,
-						["showLabel"] = true,
-						["area"] = "left",
-						["disableMouseInCombat"] = true,
+						["enabled"] = false,
+						["showText"] = false,
 						["showValue"] = false,
+						["pos"] = 10,
+						["bar"] = 2,
+					},
+					["Aanye_XP"] = {
+						["pos"] = 6,
+					},
+					["ElkExperience"] = {
+						["pos"] = 5,
+					},
+					["BrokerToolBox - Money"] = {
+						["showValue"] = false,
+						["area"] = "left",
+						["enabled"] = false,
+						["showSuffix"] = false,
+						["bar"] = 2,
 						["pos"] = 2,
 					},
-					["LauncherMenu"] = {
+				},
+				["launcher"] = {
+					["Swatter"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["Informant"] = {
+						["enabled"] = false,
+						["pos"] = 13,
+					},
+					["kgPanels"] = {
 						["enabled"] = false,
 						["pos"] = 7,
 					},
-					["shLatency"] = {
-						["disableMouseInCombat"] = true,
-						["showIcon"] = false,
-						["disableTooltip"] = true,
-						["disableMouseOutOfCombat"] = true,
-						["bar"] = 2,
+					["PitBull4"] = {
+						["enabled"] = false,
 						["pos"] = 2,
+					},
+					["Auc-Util-AutoMagic"] = {
+						["enabled"] = false,
+						["pos"] = 3,
+					},
+					["BrokerRecountFu"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["Grid"] = {
+						["enabled"] = false,
+						["pos"] = 4,
+					},
+					["BrokerToolBox"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["Bazooka"] = {
+						["enabled"] = false,
+					},
+					["AddonMgr"] = {
+						["enabled"] = false,
+						["pos"] = 5,
+					},
+					["Prat"] = {
+						["enabled"] = false,
+						["pos"] = 11,
+					},
+					["Auc-Util-SearchUI"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+					},
+					["AucAdvanced"] = {
+						["enabled"] = false,
+						["pos"] = 6,
+					},
+					["Omen"] = {
+						["enabled"] = false,
+						["pos"] = 10,
+					},
+					["Masque"] = {
+						["enabled"] = false,
+						["pos"] = 9,
 					},
 				},
 			},
@@ -333,7 +349,7 @@ BazookaDB = {
 					["bgTexture"] = "Solid",
 					["bgTileSize"] = 19,
 					["y"] = -0.7883102893829346,
-					["fadeInCombat"] = true,
+					["x"] = -3.996078729629517,
 					["fitToContentWidth"] = true,
 					["frameWidth"] = 97.20001983642578,
 					["pos"] = 0,
@@ -342,12 +358,9 @@ BazookaDB = {
 					["bgColor"] = {
 						["a"] = 0.6000000238418579,
 					},
-					["iconSize"] = 10,
-					["x"] = -3.996078729629517,
 					["frameHeight"] = 15.0000467300415,
 					["attach"] = "none",
-					["pluginOpacity"] = 0.75,
-					["leftSpacing"] = 12,
+					["iconSize"] = 10,
 					["relPoint"] = "TOPLEFT",
 					["textColor"] = {
 						["a"] = 1,
@@ -364,8 +377,8 @@ BazookaDB = {
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMRIGHT",
-					["iconSize"] = 14,
 					["pluginOpacity"] = 0.75,
+					["iconSize"] = 14,
 					["frameHeight"] = 26,
 					["attach"] = "none",
 					["rightSpacing"] = 4,
@@ -383,8 +396,9 @@ BazookaDB = {
 					["fontSize"] = 10,
 					["point"] = "BOTTOMLEFT",
 					["x"] = 1.170600771903992,
-					["iconSize"] = 14,
 					["pluginOpacity"] = 0.75,
+					["iconSize"] = 14,
+					["leftSpacing"] = 15,
 					["frameHeight"] = 26.00001335144043,
 				}, -- [3]
 			},

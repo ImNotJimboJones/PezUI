@@ -15,16 +15,16 @@ MacaroonButtonDefaults = {
 		["bindColor"] = "1;1;1;1",
 		["countColor"] = "1;1;1;1",
 		["buffcolor"] = "0;0.8;0;1",
-		["debuffcolor"] = "0.8;0;0;1",
+		["spellCounts"] = false,
 		["auraText"] = false,
 		["rangecolor"] = "0.7;0.15;0.15;1",
-		["cdcolor2"] = "1;0.1;0.1;1",
-		["auracolor2"] = "1;0.1;0.1;1",
-		["macroText"] = true,
-		["clearerrors"] = false,
 		["cdText"] = false,
+		["clearerrors"] = false,
+		["macroText"] = true,
+		["auracolor2"] = "1;0.1;0.1;1",
+		["cdcolor2"] = "1;0.1;0.1;1",
 		["cdcolor1"] = "1;0.82;0;1",
-		["spellCounts"] = false,
+		["debuffcolor"] = "0.8;0;0;1",
 	},
 }
 MacaroonMacroMaster = nil
@@ -124,11 +124,11 @@ MacaroonMacroVault = {
 }
 MacaroonItemCache = {
 	["Belt of the Beloved Companion"] = "77241",
-	["Sporebeard Gauntlets"] = "78362",
 	["Kiroptyric Sigil"] = "77113",
+	["Sporebeard Gauntlets"] = "78362",
 }
 MacaroonLocale = {
-	["Current"] = "enUS",
 	["Macaroon"] = {
 	},
+	["Current"] = "enUS",
 }

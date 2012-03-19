@@ -1,0 +1,88 @@
+------------------------------------------------------------------------
+r54 | timothyluke | 2011-02-16 03:23:05 +0000 (Wed, 16 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+initialisation bug
+------------------------------------------------------------------------
+r53 | timothyluke | 2011-02-15 21:46:27 +0000 (Tue, 15 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Update to initial dataobject code for efficiency
+------------------------------------------------------------------------
+r52 | timothyluke | 2011-02-12 22:13:14 +0000 (Sat, 12 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Inspect Bug
+------------------------------------------------------------------------
+r51 | timothyluke | 2011-02-12 22:12:27 +0000 (Sat, 12 Feb 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+   M /trunk/draiks-broker-ilevel.toc
+
+InspectBug and Lib fix
+------------------------------------------------------------------------
+r50 | timothyluke | 2011-01-29 12:14:37 +0000 (Sat, 29 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/draiks-broker-ilevel.toc
+
+Localisation update
+------------------------------------------------------------------------
+r49 | timothyluke | 2011-01-19 09:21:14 +0000 (Wed, 19 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Fiinally got group code to work - 1.5 branch is complete.
+------------------------------------------------------------------------
+r48 | timothyluke | 2011-01-18 12:51:38 +0000 (Tue, 18 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Localisation Updates and minor group check update.
+------------------------------------------------------------------------
+r47 | timothyluke | 2011-01-17 12:07:55 +0000 (Mon, 17 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/draiks-broker-ilevel.toc
+
+Update Russian Localisations
+------------------------------------------------------------------------
+r46 | timothyluke | 2011-01-17 06:41:48 +0000 (Mon, 17 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/DraiksBrokerDB-deDE.lua
+   M /trunk/DraiksBrokerDB-frFR.lua
+   M /trunk/DraiksBrokerDB-ruRU.lua
+   M /trunk/DraiksBrokerDB-zhCN.lua
+   M /trunk/DraiksBrokerDB-zhTW.lua
+
+Localisation updates
+------------------------------------------------------------------------
+r45 | timothyluke | 2011-01-17 06:19:19 +0000 (Mon, 17 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Update to group code
+------------------------------------------------------------------------
+r44 | timothyluke | 2011-01-17 05:57:05 +0000 (Mon, 17 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/DraiksBrokerDB-deDE.lua
+   M /trunk/DraiksBrokerDB-frFR.lua
+   A /trunk/DraiksBrokerDB-ruRU.lua
+   A /trunk/DraiksBrokerDB-zhCN.lua
+   A /trunk/DraiksBrokerDB-zhTW.lua
+
+Localisation Updates
+------------------------------------------------------------------------
+r43 | timothyluke | 2011-01-16 20:01:30 +0000 (Sun, 16 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Minor tweak - still need to sort out if the person has left the party and also the unknown party members.
+------------------------------------------------------------------------
+r42 | timothyluke | 2011-01-14 10:40:47 +0000 (Fri, 14 Jan 2011) | 1 line
+Changed paths:
+   M /trunk/brokeriLevel.lua
+
+Final 1.5.3 build i hope
+------------------------------------------------------------------------

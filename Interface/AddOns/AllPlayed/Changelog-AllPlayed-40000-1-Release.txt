@@ -1,0 +1,87 @@
+------------------------------------------------------------------------
+r234 | laotseu | 2010-10-22 05:06:20 +0000 (Fri, 22 Oct 2010) | 8 lines
+Changed paths:
+   A /tags/40000-1-Release (from /trunk:233)
+
+Tagging as 40000-1-Release
+
+v40000-1
+- Support for Cataclysm and v4.0.1 (I do not have the official XP needed in Cataclysm, these will be update after release)
+- Backward compatible with v3.5.5 (just click Load out of date AddOns)
+- Support for Justice and Conquest points
+- Use the same icons as the Currency windows
+- Justice Points, Honor Kills, Honor Points and Conquest Points have their own column
+------------------------------------------------------------------------
+r232 | LaoTseu | 2010-10-19 05:32:36 +0000 (Tue, 19 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/AllPlayed.lua
+
+AllPlayed:
+- Register CURRENCY_DISPLAY_UPDATE in order to catch justice points and conquest points update
+------------------------------------------------------------------------
+r231 | LaoTseu | 2010-10-18 02:07:01 +0000 (Mon, 18 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/AllPlayed-koKR.lua
+
+AllPlayed:
+- Touch the koKR to regenerate the packager koKR localization after some corrections I did to remove multiples lines where there should be just one.
+------------------------------------------------------------------------
+r230 | LaoTseu | 2010-10-18 01:36:44 +0000 (Mon, 18 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/AllPlayed.toc
+
+AllPlayed:
+- New koKR translations (thanks for chkid and maknea)
+------------------------------------------------------------------------
+r228 | LaoTseu | 2010-10-16 04:32:36 +0000 (Sat, 16 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/Config.lua
+
+AllPlayed:
+- Got rid of a possible problem. I was using an initialised global variable.
+------------------------------------------------------------------------
+r227 | LaoTseu | 2010-10-03 05:49:57 +0000 (Sun, 03 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/AllPlayed-koKR.lua
+   M /trunk/AllPlayed-zhCN.lua
+   M /trunk/AllPlayed-zhTW.lua
+
+AllPlayed:
+- Fix the Repository Keyword Substitution command for Asian languages
+------------------------------------------------------------------------
+r226 | LaoTseu | 2010-10-03 02:07:14 +0000 (Sun, 03 Oct 2010) | 3 lines
+Changed paths:
+   M /trunk/AllPlayed-deDE.lua
+   M /trunk/AllPlayed-frFR.lua
+   M /trunk/AllPlayed-koKR.lua
+   M /trunk/AllPlayed-zhCN.lua
+   M /trunk/AllPlayed-zhTW.lua
+   M /trunk/AllPlayed.toc
+
+AllPlayed:
+- Now use Repository keyword substitutions for all localization files
+- Translators (in case you read this): there are some new strings that need love. If you do anything, drop me a mail or private message so I know to regenerate the package.
+------------------------------------------------------------------------
+r225 | LaoTseu | 2010-10-03 01:50:22 +0000 (Sun, 03 Oct 2010) | 2 lines
+Changed paths:
+   M /trunk/AllPlayed-frFR.lua
+
+AllPlayed:
+- Test of the localization strings packaged using Repository keyword substitutions
+------------------------------------------------------------------------
+r224 | LaoTseu | 2010-10-03 00:18:18 +0000 (Sun, 03 Oct 2010) | 3 lines
+Changed paths:
+   M /trunk/AllPlayed-enUS.lua
+   M /trunk/AllPlayed.lua
+   M /trunk/AllPlayed.toc
+   M /trunk/Config.lua
+   D /trunk/Copper.tga
+   D /trunk/Gold.tga
+   D /trunk/Silver.tga
+   D /trunk/UI-PVP-Alliance.tga
+   D /trunk/UI-PVP-Horde.tga
+
+AllPlayed:
+- Merge the Cataclysm branch
+- Some compatibility fixes
+------------------------------------------------------------------------

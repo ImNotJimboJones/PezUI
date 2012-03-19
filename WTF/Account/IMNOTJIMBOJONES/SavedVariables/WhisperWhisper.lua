@@ -7,45 +7,26 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["b"] = 210,
-				["g"] = 210,
 				["r"] = 210,
+				["g"] = 210,
+				["b"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
-			["flashBottom"] = true,
-			["flashLeft"] = true,
-			["altView"] = false,
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["b"] = 8,
-				["g"] = 0,
-				["r"] = 255,
-			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
+			["flashLeft"] = true,
 			["whisperList"] = {
 				{
 					"|Kf11|k00000000000000000000|k", -- [1]
 					{
-						"|cffd2d2d2titanprof", -- [1]
-						"|cffd2d2d2lol np", -- [2]
-						"|cffff0008oops lol", -- [3]
-						"|cffff0008i'll int", -- [4]
-						"|cffff0008ok coolio", -- [5]
-						"|cffd2d2d2im not on right now... ill be on in a bit", -- [6]
-						"|cffff0008ts3?", -- [7]
-						"|cffff0008runnin HoT w fate", -- [8]
-						"|cffff0008sup dude!", -- [9]
-						"|cffd2d2d2hey man, whatcha up to?", -- [10]
+						"|cffff0008test test", -- [1]
+						"|cffd2d2d2testing whisperwhisper", -- [2]
 					}, -- [2]
-					true, -- [3]
+					false, -- [3]
 					true, -- [4]
 				}, -- [1]
 				{
@@ -84,6 +65,17 @@ Broker_WhisperWhisperDB = {
 					false, -- [4]
 				}, -- [4]
 			},
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["r"] = 255,
+				["g"] = 0,
+				["b"] = 8,
+			},
+			["flashBottom"] = true,
+			["altView"] = false,
 		},
 	},
 }
