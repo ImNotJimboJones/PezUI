@@ -1,0 +1,105 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="TitanProfessions.lua"/>
+	<Frame parent="UIParent">
+		<Frames>
+			<Button name="TitanPanelProfessionsButton" inherits="TitanPanelComboTemplate" frameStrata="FULLSCREEN" toplevel="true">
+			    <Scripts>
+                    <OnLoad>
+					    TitanPanelProfessionsButton_OnLoad(self)
+                        TitanPanelButton_OnLoad(self)
+                    </OnLoad>                    
+                    </Scripts>
+			</Button>
+		</Frames>
+	</Frame>    
+    
+    <Button name="DisenchantButton" inherits="SecureActionButtonTemplate" parent="UIParent" hidden="true">    
+      <Attributes>
+        <Attribute name="type" type="string" value="spell"/>
+        <Attribute name="spell" type="string" value="Disenchant"/>
+        <Attribute name="unit" type="string" value="player"/>
+      </Attributes>  
+      <Size x="24" y="24"/>
+      <Layers>
+        <Layer level="OVERLAY">
+          <Texture name="$parentIcon" file="Interface\Icons\Inv_enchant_disenchant" setAllPoints="true" />
+        </Layer>
+      </Layers>
+      <Anchors>
+        <Anchor point="CENTER" />
+      </Anchors>
+      <Scripts>
+        <OnDoubleClick>
+          DisenchantButton:Hide()
+        </OnDoubleClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="ProspectingButton" inherits="SecureActionButtonTemplate" parent="UIParent" hidden="true">    
+      <Attributes>
+        <Attribute name="type" type="string" value="spell"/>
+        <Attribute name="spell" type="string" value="Prospecting"/>
+        <Attribute name="unit" type="string" value="player"/>
+      </Attributes>  
+      <Size x="24" y="24"/>
+      <Layers>
+        <Layer level="OVERLAY">
+          <Texture name="$parentIcon" file="Interface\Icons\Inv_misc_gem_bloodgem_01" setAllPoints="true" />
+        </Layer>
+      </Layers>
+      <Anchors>
+        <Anchor point="CENTER" />
+      </Anchors>
+      <Scripts>
+        <OnDoubleClick>
+          ProspectingButton:Hide()
+        </OnDoubleClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="SurveyButton" inherits="SecureActionButtonTemplate" parent="UIParent" hidden="true">    
+      <Attributes>
+        <Attribute name="type" type="string" value="spell"/>
+        <Attribute name="spell" type="string" value="Survey"/>
+        <Attribute name="unit" type="string" value="player"/>
+      </Attributes>  
+      <Size x="24" y="24"/>
+      <Layers>
+        <Layer level="OVERLAY">
+          <Texture name="$parentIcon" file="Interface\Icons\inv_misc_shovel_01" setAllPoints="true" />
+        </Layer>
+      </Layers>
+      <Anchors>
+        <Anchor point="CENTER" />
+      </Anchors>
+      <Scripts>
+        <OnDoubleClick>
+          SurveyButton:Hide()
+        </OnDoubleClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="MillingButton" inherits="SecureActionButtonTemplate" parent="UIParent" hidden="true">    
+      <Attributes>
+        <Attribute name="type" type="string" value="spell"/>
+        <Attribute name="spell" type="string" value="Milling"/>
+        <Attribute name="unit" type="string" value="player"/>
+      </Attributes>  
+      <Size x="24" y="24"/>
+      <Layers>
+        <Layer level="OVERLAY">
+          <Texture name="$parentIcon" file="Interface\Icons\Ability_miling" setAllPoints="true" />
+        </Layer>
+      </Layers>
+      <Anchors>
+        <Anchor point="CENTER" />
+      </Anchors>
+      <Scripts>
+        <OnDoubleClick>
+          MillingButton:Hide()
+        </OnDoubleClick>
+      </Scripts>
+    </Button>
+</Ui>
+

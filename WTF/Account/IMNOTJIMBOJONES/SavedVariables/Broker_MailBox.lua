@@ -2,8 +2,8 @@
 Broker_MailBoxDB = {
 	["char"] = {
 		["Pezzer - Burning Blade"] = {
-			["new"] = 1,
 			["total"] = 1,
+			["new"] = 1,
 		},
 	},
 	["profileKeys"] = {
@@ -12,7 +12,6 @@ Broker_MailBoxDB = {
 	["profiles"] = {
 		["Default"] = {
 			["textformat"] = "number",
-			["showminimap"] = true,
 		},
 	},
 }

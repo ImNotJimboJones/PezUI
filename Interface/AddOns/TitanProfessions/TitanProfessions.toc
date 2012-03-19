@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: Titan Panel [|cffeda55fProfessions|r] |cff00aa004.0.2|r
+## Author: Suddendeath2000
+## Version: 4.0.2
+## Notes: Titan Panel plugin to use professions.
+## RequiredDeps: Titan
+## DefaultState: Enabled
+## LoadOnDemand: 0
+TitanProfessions.xml
