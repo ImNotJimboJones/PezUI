@@ -190,3 +190,8 @@ Broker_uClock: enabled
 Broker_MicroMenu: enabled
 Volumizer: enabled
 Broker_LonnyMenu: disabled
+Broker_StatsNow_Defense: disabled
+Broker_StatsNow_Melee: disabled
+Broker_StatsNow_PvP: disabled
+Broker_StatsNow_Range: disabled
+Broker_StatsNow_Spells: disabled

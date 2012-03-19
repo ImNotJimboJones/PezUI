@@ -1,0 +1,59 @@
+------------------------------------------------------------------------
+r137 | oscarucb | 2012-03-14 21:27:36 +0000 (Wed, 14 Mar 2012) | 1 line
+Changed paths:
+   A /tags/4.6.0 (from /trunk:136)
+
+Tagging as 4.6.0
+------------------------------------------------------------------------
+r135 | oscarucb | 2012-03-12 07:31:01 +0000 (Mon, 12 Mar 2012) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix detach header strata
+fix daily show criteria
+
+------------------------------------------------------------------------
+r134 | oscarucb | 2012-03-11 05:26:47 +0000 (Sun, 11 Mar 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix DailyCount reset on logout
+
+------------------------------------------------------------------------
+r133 | oscarucb | 2012-03-11 02:29:21 +0000 (Sun, 11 Mar 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+NEW FEATURE: Daily/Weekly quest tracking
+
+------------------------------------------------------------------------
+r132 | oscarucb | 2012-03-02 18:06:03 +0000 (Fri, 02 Mar 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 81: ElvUI skinning support
+
+------------------------------------------------------------------------
+r130 | oscarucb | 2012-02-27 15:57:13 +0000 (Mon, 27 Feb 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix a database upgrade glitch causing lua errors
+
+------------------------------------------------------------------------
+r129 | oscarucb | 2012-02-27 04:32:42 +0000 (Mon, 27 Feb 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add an instance entry for deDE
+
+------------------------------------------------------------------------
+r127 | oscarucb | 2012-02-25 09:57:16 +0000 (Sat, 25 Feb 2012) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix an accounting glitch in the 5-instane-per-hour limit
+were not counting non-heroic 5-mans when saved to the heroic
+
+------------------------------------------------------------------------
