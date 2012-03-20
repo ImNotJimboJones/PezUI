@@ -1,5 +1,8 @@
 
 AllPlayedDB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
@@ -10,18 +13,18 @@ AllPlayedDB = {
 						["zone_text"] = "Orgrimmar",
 						["honor_kills"] = 7488,
 						["level"] = 85,
-						["coin"] = 578389410,
-						["highest_rank"] = 0,
+						["coin"] = 640035535,
+						["honor_points"] = 362,
 						["xp"] = 1141,
-						["seconds_played_last_update"] = 1332142494,
-						["seconds_played"] = 9264735,
-						["last_update"] = 1332142494,
+						["is_resting"] = 1,
+						["seconds_played"] = 9270796,
+						["last_update"] = 1332211877,
 						["class_loc"] = "Hunter",
 						["justice_points"] = 1155,
 						["subzone_text"] = "Valley of Strength",
 						["max_rested_xp"] = 18400500,
-						["is_resting"] = 1,
-						["honor_points"] = 362,
+						["seconds_played_last_update"] = 1332211684,
+						["highest_rank"] = 0,
 					},
 				},
 			},
@@ -34,9 +37,6 @@ AllPlayedDB = {
 			},
 		},
 	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["profiles"] = {
 		["Default"] = {
 			["options"] = {
@@ -45,10 +45,10 @@ AllPlayedDB = {
 				["show_coins"] = false,
 				["all_realms"] = false,
 				["show_rested_xp_countdown"] = false,
-				["show_xp_total"] = false,
 				["ldbicon"] = {
 					["hide"] = true,
 				},
+				["show_xp_total"] = false,
 			},
 		},
 	},
