@@ -8,11 +8,11 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["loop"] = 0,
 			["music"] = {
 				["enable"] = 1,
 				["volume"] = 0.4,
@@ -24,7 +24,7 @@ VolumizerPresets = {
 			["background"] = 0,
 			["listener"] = 1,
 			["error"] = 1,
-			["loop"] = 0,
+			["pet"] = 1,
 		},
 	}, -- [1]
 	{
@@ -35,11 +35,11 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["loop"] = 0,
 			["music"] = {
 				["enable"] = 1,
 				["volume"] = 0.4,
@@ -51,7 +51,7 @@ VolumizerPresets = {
 			["background"] = 0,
 			["listener"] = 1,
 			["error"] = 1,
-			["loop"] = 0,
+			["pet"] = 1,
 		},
 	}, -- [2]
 	{
@@ -62,11 +62,11 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["loop"] = 0,
 			["music"] = {
 				["enable"] = 1,
 				["volume"] = 0.4,
@@ -78,7 +78,7 @@ VolumizerPresets = {
 			["background"] = 0,
 			["listener"] = 1,
 			["error"] = 1,
-			["loop"] = 0,
+			["pet"] = 1,
 		},
 	}, -- [3]
 	{
@@ -89,11 +89,11 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["loop"] = 0,
 			["music"] = {
 				["enable"] = 1,
 				["volume"] = 0.4,
@@ -105,7 +105,7 @@ VolumizerPresets = {
 			["background"] = 0,
 			["listener"] = 1,
 			["error"] = 1,
-			["loop"] = 0,
+			["pet"] = 1,
 		},
 	}, -- [4]
 	{
@@ -116,11 +116,11 @@ VolumizerPresets = {
 				["enable"] = 1,
 				["volume"] = 0.6,
 			},
-			["pet"] = 1,
 			["master"] = {
 				["enable"] = 1,
 				["volume"] = 1,
 			},
+			["loop"] = 0,
 			["music"] = {
 				["enable"] = 1,
 				["volume"] = 0.4,
@@ -132,7 +132,7 @@ VolumizerPresets = {
 			["background"] = 0,
 			["listener"] = 1,
 			["error"] = 1,
-			["loop"] = 0,
+			["pet"] = 1,
 		},
 	}, -- [5]
 }
