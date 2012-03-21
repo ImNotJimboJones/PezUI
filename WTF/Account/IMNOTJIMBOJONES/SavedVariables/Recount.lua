@@ -26,7 +26,6 @@ RecountDB = {
 				},
 				["RowHeight"] = 16,
 			},
-			["MainWindowMode"] = 2,
 			["MaxFights"] = 25,
 			["MainWindowHeight"] = 150.8973541259766,
 			["ClampToScreen"] = true,
@@ -59,12 +58,12 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -8453735,
-			["DetailWindowX"] = 1376190.5,
+			["DetailWindowY"] = -11700673,
+			["DetailWindowX"] = 1904761.875,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["Scaling"] = 0.85,
-			["LastInstanceName"] = "Black Temple",
+			["LastInstanceName"] = "Ragefire Chasm",
 			["BarTexture"] = "Minimalist",
 			["RealtimeWindows"] = {
 				["Realtime_FPS_FPS"] = {
@@ -88,8 +87,9 @@ RecountDB = {
 					false, -- [8]
 				},
 			},
-			["CurDataSet"] = "LastFightData",
+			["CurDataSet"] = "CurrentFightData",
 			["BarTextColorSwap"] = false,
+			["MainWindowMode"] = 2,
 			["MainWindowWidth"] = 226.0703887939453,
 		},
 		["Pezzer - Burning Blade"] = {
@@ -142,11 +142,11 @@ RecountDB = {
 					},
 				},
 			},
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,
-			["DetailWindowY"] = 0,
+			["GraphWindowX"] = 0,
 		},
 	},
 }

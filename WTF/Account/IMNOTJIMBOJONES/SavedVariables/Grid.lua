@@ -561,9 +561,9 @@ GridDB = {
 						["icon"] = {
 							["alert_direction"] = false,
 							["alert_RaidDebuff"] = true,
+							["role"] = false,
 							["player_target"] = false,
 							["unit_name"] = false,
-							["role"] = false,
 							["unit_health"] = false,
 						},
 						["iconTRcornerleft"] = {
@@ -764,9 +764,9 @@ GridDB = {
 		},
 		["GridStatusLineOfSight"] = {
 		},
-		["GridStatusHots"] = {
+		["GridConfigurableLayouts"] = {
 		},
-		["GridStatusVoiceComm"] = {
+		["GridStatusHots"] = {
 		},
 		["GridStatusRaidDebuff"] = {
 			["profiles"] = {
@@ -787,7 +787,7 @@ GridDB = {
 					["BackgroundG"] = 0,
 					["anchorRel"] = "TOP",
 					["BorderB"] = 0,
-					["BackgroundR"] = 0,
+					["BackgroundB"] = 0,
 					["layouts"] = {
 						["party"] = "Custom Group 5",
 						["solo"] = "Custom Group Solo",
@@ -797,15 +797,15 @@ GridDB = {
 						["bg"] = "GCL Group 25",
 					},
 					["layout"] = "Custom Group Solo",
-					["BackgroundB"] = 0,
-					["BorderG"] = 0,
+					["BackgroundR"] = 0,
+					["PosX"] = 0.1353286686226056,
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["PosX"] = 0.1353286686226056,
+					["borderTexture"] = "None",
 					["anchor"] = "TOP",
 					["horizontal"] = true,
-					["borderTexture"] = "None",
+					["BorderG"] = 0,
 					["PosY"] = -661.7500106860593,
 				},
 				["Default 10"] = {
@@ -819,7 +819,7 @@ GridDB = {
 						["raid_10"] = "Custom Group 10",
 						["bg"] = "GCL Group 25",
 					},
-					["BackgroundR"] = 0,
+					["BackgroundB"] = 0,
 					["FrameLock"] = true,
 					["BorderR"] = 0,
 					["borderTexture"] = "None",
@@ -830,7 +830,7 @@ GridDB = {
 					["BackgroundA"] = 0,
 					["BorderG"] = 0,
 					["horizontal"] = true,
-					["BackgroundB"] = 0,
+					["BackgroundR"] = 0,
 					["PosX"] = 0.365392431144528,
 				},
 				["Default"] = {
@@ -847,11 +847,11 @@ GridDB = {
 					},
 					["layout"] = "Test",
 					["BackgroundB"] = 0,
-					["PosX"] = 0.135253898188239,
+					["borderTexture"] = "None",
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["borderTexture"] = "None",
+					["PosX"] = 0.135253898188239,
 					["anchor"] = "TOP",
 					["BackgroundR"] = 0,
 					["BorderG"] = 0,
@@ -859,7 +859,7 @@ GridDB = {
 				},
 			},
 		},
-		["GridConfigurableLayouts"] = {
+		["GridStatusVoiceComm"] = {
 		},
 		["GridStatusReadyCheck"] = {
 		},

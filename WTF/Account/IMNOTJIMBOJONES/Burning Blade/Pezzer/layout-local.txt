@@ -1,9 +1,9 @@
 Version: 1
 Frame: InterfaceOptionsFrame
 FrameLevel: 12
-Anchor: CENTER
-X: 0
-Y: 0
+Anchor: RIGHT
+X: -40
+Y: 39
 W: 899
 H: 634
 Frame: MinimapCluster
@@ -30,8 +30,8 @@ H: 904
 Frame: LootFrame
 FrameLevel: 9
 Anchor: CENTER
-X: 62
-Y: 32
+X: 28
+Y: -79
 W: 256
 H: 256
 Frame: ColorPickerFrame
@@ -39,7 +39,7 @@ FrameLevel: 16
 Anchor: RIGHT
 X: -195
 Y: 10
-W: 365
+W: 305
 H: 240
 Frame: DurabilityFrame
 FrameLevel: 0

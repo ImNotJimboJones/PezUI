@@ -6,9 +6,10 @@ ilvlDB = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["class"] = "HUNTER",
-						["level"] = 85,
 						["ilvl"] = 403,
+						["class"] = "HUNTER",
+						["key"] = "0x0280000004B625CB",
+						["level"] = 85,
 					},
 				},
 			},

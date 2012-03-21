@@ -155,7 +155,14 @@ Quartz3DB = {
 		["Mirror"] = {
 			["profiles"] = {
 				["Default"] = {
-					["mirrorheight"] = 4,
+					["mirrortextcolor"] = {
+						nil, -- [1]
+						nil, -- [2]
+						nil, -- [3]
+						1, -- [4]
+					},
+					["mirrortexture"] = "Steel",
+					["mirrorwidth"] = 150,
 					["mirrorposition"] = "top",
 				},
 				["HUNTER"] = {

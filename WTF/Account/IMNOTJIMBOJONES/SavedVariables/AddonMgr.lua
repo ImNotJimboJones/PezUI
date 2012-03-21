@@ -8,15 +8,14 @@ SavedGroupConfigurations = {
 	["Recount"] = {
 		["Recount"] = 1,
 	},
+	["Vertical Rep Bar"] = {
+		["VerticalRep"] = 1,
+	},
 	["Omen"] = {
 		["Omen"] = 1,
 	},
-	["kgPanels"] = {
-		["kgPanels"] = 1,
-		["kgPanelsConfig"] = 1,
-	},
-	["Bison"] = {
-		["Bison"] = 1,
+	["PlayerScore / GearScore"] = {
+		["GearScore"] = 1,
 	},
 	["Deadly Boss Mods"] = {
 		["DBM-Core"] = 1,
@@ -31,23 +30,23 @@ SavedGroupConfigurations = {
 		["DBM-Icecrown"] = 1,
 		["DBM-VoA"] = 1,
 		["DBM-Karazhan"] = 1,
-		["DBM-AQ40"] = 1,
-		["DBM-PvP"] = 1,
+		["DBM-Ulduar"] = 1,
+		["DBM-Serpentshrine"] = 1,
 		["DBM-TheEye"] = 1,
 		["DBM-BaradinHold"] = 1,
-		["DBM-MC"] = 1,
+		["DBM-Onyxia"] = 1,
 		["DBM-Outlands"] = 1,
 		["DBM-ThroneFourWinds"] = 1,
 		["DBM-Firelands"] = 1,
-		["DBM-Serpentshrine"] = 1,
-		["DBM-DragonSoul"] = 1,
+		["DBM-PvP"] = 1,
+		["DBM-MC"] = 1,
 		["DBM-BWL"] = 1,
 		["DBM-GUI"] = 1,
-		["DBM-Onyxia"] = 1,
-		["DBM-Hyjal"] = 1,
 		["DBM-BlackTemple"] = 1,
+		["DBM-Hyjal"] = 1,
+		["DBM-DragonSoul"] = 1,
 		["DBM-BlackwingDescent"] = 1,
-		["DBM-Ulduar"] = 1,
+		["DBM-AQ40"] = 1,
 		["DBM-Party-WotLK"] = 1,
 		["DBM-Party-Cataclysm"] = 1,
 		["DBM-Coliseum"] = 1,
@@ -117,13 +116,13 @@ SavedGroupConfigurations = {
 		["GridUnitMenu"] = 1,
 		["GridBuffIcons"] = 1,
 		["GridStatusRaidIcons"] = 1,
-		["GridConfigurableLayouts"] = 1,
+		["GridStatusHots"] = 1,
 		["GridCustomLayouts"] = 1,
 		["GridIndicatorSideIcons"] = 1,
 		["GridStatusFastHealth"] = 1,
 		["GridStatusHostileUnit"] = 1,
 		["GridIndicatorCornerIcons"] = 1,
-		["GridStatusHots"] = 1,
+		["GridConfigurableLayouts"] = 1,
 		["GridStatusDirectionArrows"] = 1,
 	},
 	["SexyMap"] = {
@@ -132,16 +131,21 @@ SavedGroupConfigurations = {
 	["Greedy Quester"] = {
 		["GreedyQuester"] = 1,
 	},
-	["Moncai's Quest Tracker"] = {
-		["MoncaiQuestTracker"] = 1,
+	["Auctioneer"] = {
+		["Auc-Util-FixAH"] = 1,
+		["Stubby"] = 1,
+		["Auc-Filter-Basic"] = 1,
+		["Auc-Advanced"] = 1,
+		["Auc-ScanData"] = 1,
+		["Informant"] = 1,
 	},
 	["Prat"] = {
 		["Prat-3.0_Libraries"] = 1,
 		["Prat-3.0_HighCPUUsageModules"] = 1,
 		["Prat-3.0"] = 1,
 	},
-	["PlayerScore / GearScore"] = {
-		["GearScore"] = 1,
+	["Quartz"] = {
+		["Quartz"] = 1,
 	},
 	["LightHeaded"] = {
 		["LightHeaded_Data_QIDNames"] = 1,
@@ -185,8 +189,8 @@ SavedGroupConfigurations = {
 		["Broker_Currencyflow"] = 1,
 		["TitanLootType"] = 1,
 	},
-	["Quartz"] = {
-		["Quartz"] = 1,
+	["Moncai's Quest Tracker"] = {
+		["MoncaiQuestTracker"] = 1,
 	},
 	["SharedMedia"] = {
 		["SharedMedia"] = 1,
@@ -224,13 +228,8 @@ SavedGroupConfigurations = {
 		["MacaroonXtras"] = 1,
 		["MacaroonProfiles"] = 1,
 	},
-	["Auctioneer"] = {
-		["Auc-Util-FixAH"] = 1,
-		["Stubby"] = 1,
-		["Auc-Filter-Basic"] = 1,
-		["Auc-Advanced"] = 1,
-		["Auc-ScanData"] = 1,
-		["Informant"] = 1,
+	["Bison"] = {
+		["Bison"] = 1,
 	},
 	["OmniCC"] = {
 		["OmniCC_Config"] = 1,
@@ -255,14 +254,15 @@ SavedGroupConfigurations = {
 		["SkadaHealAbsorbs"] = 1,
 		["SkadaDebuffs"] = 1,
 	},
-	["Vertical Rep Bar"] = {
-		["VerticalRep"] = 1,
+	["kgPanels"] = {
+		["kgPanels"] = 1,
+		["kgPanelsConfig"] = 1,
 	},
 	["Masque"] = {
 		["Masque_Renaitre"] = 1,
 		["BlizzBuffsFacade"] = 1,
-		["Masque_Sleek"] = 1,
 		["PitBull4Facade"] = 1,
+		["Masque_Sleek"] = 1,
 		["ButtonFacade"] = 1,
 		["Masque"] = 1,
 	},
