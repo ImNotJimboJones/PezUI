@@ -11,7 +11,7 @@ Auc-Util-FixAH: enabled
 BeanCounter: disabled
 Enchantrix: disabled
 Enchantrix-Barker: disabled
-GreedyQuester: disabled
+GreedyQuester: enabled
 Grid: enabled
 GridUnitMenu: enabled
 Grid_QuickHealth: enabled
@@ -104,7 +104,7 @@ XPerl_RaidPets: disabled
 XPerl_RaidFrames: disabled
 XPerl_TargetTarget: disabled
 XPerl_Target: disabled
-TomTom: disabled
+TomTom: enabled
 DBM-WorldEvents: enabled
 DBM-VoA: enabled
 DBM-Ulduar: enabled

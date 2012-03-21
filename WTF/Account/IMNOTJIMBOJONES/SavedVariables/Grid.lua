@@ -452,9 +452,9 @@ GridDB = {
 		},
 		["GridStatusLineOfSight"] = {
 		},
-		["GridConfigurableLayouts"] = {
+		["GridStatusVoiceComm"] = {
 		},
-		["GridStatusHots"] = {
+		["GridConfigurableLayouts"] = {
 		},
 		["GridLayout"] = {
 			["profiles"] = {
@@ -472,16 +472,16 @@ GridDB = {
 						["bg"] = "GCL Group 25",
 					},
 					["layout"] = "Custom Group Solo",
-					["BackgroundR"] = 0,
-					["PosX"] = 0.1353286686226056,
+					["BackgroundB"] = 0,
+					["borderTexture"] = "None",
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["borderTexture"] = "None",
+					["BorderG"] = 0,
 					["anchor"] = "TOP",
 					["horizontal"] = true,
-					["BorderG"] = 0,
-					["BackgroundB"] = 0,
+					["PosX"] = 0.1353286686226056,
+					["BackgroundR"] = 0,
 				},
 				["Default 10"] = {
 					["anchorRel"] = "TOP",
@@ -494,7 +494,7 @@ GridDB = {
 						["raid_10"] = "Custom Group 10",
 						["bg"] = "GCL Group 25",
 					},
-					["BackgroundB"] = 0,
+					["BackgroundR"] = 0,
 					["FrameLock"] = true,
 					["BorderR"] = 0,
 					["borderTexture"] = "None",
@@ -506,7 +506,7 @@ GridDB = {
 					["BorderG"] = 0,
 					["horizontal"] = true,
 					["PosX"] = 0.365392431144528,
-					["BackgroundR"] = 0,
+					["BackgroundB"] = 0,
 				},
 				["Default"] = {
 					["BackgroundG"] = 0,
@@ -526,11 +526,11 @@ GridDB = {
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["PosX"] = 0.135253898188239,
+					["borderTexture"] = "None",
 					["anchor"] = "TOP",
 					["BorderG"] = 0,
 					["BackgroundR"] = 0,
-					["borderTexture"] = "None",
+					["PosX"] = 0.135253898188239,
 				},
 			},
 		},
@@ -547,7 +547,7 @@ GridDB = {
 				},
 			},
 		},
-		["GridStatusVoiceComm"] = {
+		["GridStatusHots"] = {
 		},
 		["GridStatusReadyCheck"] = {
 		},
@@ -720,9 +720,9 @@ GridDB = {
 						["icon"] = {
 							["alert_direction"] = false,
 							["alert_RaidDebuff"] = true,
+							["unit_name"] = false,
 							["role"] = false,
 							["player_target"] = false,
-							["unit_name"] = false,
 							["unit_health"] = false,
 						},
 						["iconTRcornerleft"] = {
