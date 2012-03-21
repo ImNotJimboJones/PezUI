@@ -49,17 +49,16 @@ MasqueDB = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Bison_debuff"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
+				["PitBull4_Focus"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
 				},
 				["Macaroon_Pet"] = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
-				["Bison_weapon"] = {
+				["Bison_buff"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
@@ -88,24 +87,18 @@ MasqueDB = {
 					["Gloss"] = 1,
 					["Inherit"] = false,
 				},
-				["Blizzard Buffs_Debuffs"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.8,
-					["SkinID"] = "Renaitre: Fade",
+				["Masque"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Blizzard Buffs_TempEnchant"] = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
-				["Blizzard Buffs_Buffs"] = {
+				["Blizzard Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
-					["Inherit"] = false,
-				},
-				["Macaroon_Action Bar - Left"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
 				["Macaroon_Shortcuts"] = {
@@ -127,6 +120,11 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
 				},
+				["Macaroon_Action Bar - Left"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+					["Inherit"] = false,
+				},
 				["Macaroon_Shortcuts - Right"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
 					["Gloss"] = 1,
@@ -142,28 +140,30 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Blizzard Buffs"] = {
+				["Blizzard Buffs_Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
-				["Masque"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
+				["Blizzard Buffs_Debuffs"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.8,
+					["SkinID"] = "Renaitre: Fade",
 				},
 				["PitBull4_Target"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Fade",
 				},
-				["Bison_buff"] = {
+				["Bison_weapon"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["PitBull4_Focus"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
+				["Bison_debuff"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 			},
 		},
