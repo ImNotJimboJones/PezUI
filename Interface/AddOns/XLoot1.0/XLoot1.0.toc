@@ -1,0 +1,31 @@
+﻿## Interface: 40300
+## Title: XLoot
+## Notes: A customizable, skinnable loot frame.
+## Version: z28b-USE_MASQUE_BETA-release
+## Author: Xuerian
+## X-Category: Inventory
+## X-Curse-Packaged-Version: z28b-USE_MASQUE_BETA-release
+## X-Curse-Project-Name: XLoot 1.0
+## X-Curse-Project-ID: xloot-1-0
+## X-Curse-Repository-ID: wow/xloot-1-0/mainline
+
+## OptionalDeps: ButtonFacade, Masque, LibStub, LibXTools
+## SavedVariables: XLoot_Options
+
+# Libraries
+# Scumbag developer
+# > Gotta remove the Ace2! Gotta remove the embeds!
+# Makes more libraries. 
+libs\LibStub\LibStub.lua 
+libs\LibXTools\LibXUI.lua
+libs\LibXTools\LibXConfig.lua
+libs\LibXTools\LibXProfile.lua
+
+# Locales
+localization.lua
+
+# Configuration
+config.lua
+
+# Add-On
+XLoot.lua

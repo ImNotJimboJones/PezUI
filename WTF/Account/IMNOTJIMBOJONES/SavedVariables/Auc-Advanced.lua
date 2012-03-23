@@ -1,6 +1,5 @@
 
 AucAdvancedConfig = {
-	["version"] = 1,
 	["profile.Default"] = {
 		["scandata"] = {
 			["tooltip"] = {
@@ -70,6 +69,7 @@ AucAdvancedConfig = {
 		["configator.top"] = 676.7647705078125,
 	},
 	["users.Burning Blade.Pezzer"] = "Default",
+	["version"] = 1,
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {

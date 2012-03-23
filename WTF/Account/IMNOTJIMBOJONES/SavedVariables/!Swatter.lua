@@ -5,21 +5,13 @@ SwatterData = {
 	["autoshow"] = true,
 	["errors"] = {
 		{
-			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:Hide()) during combat lockdown.",
-			["count"] = 1,
-			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.0\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  DBMCore, v\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  OmniCCConfig, v\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  Recount, v\n  SavedInstances, v4.6.0\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=1327)\n",
-			["timestamp"] = "2012-03-21 10:45:09",
-			["context"] = "AddOn: TidyPlatesHub",
-			["stack"] = "[C]: in function `Hide'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:560: in function `CompactRaidFrameManager_LockContainer'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:553: in function `CompactRaidFrameManager_UpdateContainerLockVisibility'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:395: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:390>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:490: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [1]
-		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:unusedFunc()) during combat lockdown.",
 			["count"] = 1,
 			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.0\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  DBMCore, v\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  OmniCCConfig, v\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  Recount, v\n  SavedInstances, v4.6.0\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=1327)\n",
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [2]
+		}, -- [1]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:SetParent()) during combat lockdown.",
 			["count"] = 3,
@@ -27,7 +19,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [3]
+		}, -- [2]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:SetFrameStrata()) during combat lockdown.",
 			["count"] = 3,
@@ -35,7 +27,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [4]
+		}, -- [3]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -43,7 +35,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [5]
+		}, -- [4]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:ClearAllPoints()) during combat lockdown.",
 			["count"] = 3,
@@ -51,7 +43,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [6]
+		}, -- [5]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:SetPoint()) during combat lockdown.",
 			["count"] = 3,
@@ -59,7 +51,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [7]
+		}, -- [6]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:unusedFunc()) during combat lockdown.",
 			["count"] = 2,
@@ -67,7 +59,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:96: in function `CompactRaidFrameContainer_SetFlowSortFunction'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:406: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:403>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:492: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [8]
+		}, -- [7]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember1:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -75,7 +67,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [9]
+		}, -- [8]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember2:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -83,7 +75,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [10]
+		}, -- [9]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember3:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -91,7 +83,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [11]
+		}, -- [10]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember4:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -99,7 +91,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [12]
+		}, -- [11]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember5:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -107,7 +99,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [13]
+		}, -- [12]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember1:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -115,7 +107,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [14]
+		}, -- [13]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember2:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -123,7 +115,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [15]
+		}, -- [14]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember3:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -131,7 +123,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [16]
+		}, -- [15]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember4:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -139,7 +131,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [17]
+		}, -- [16]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember5:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -147,7 +139,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [18]
+		}, -- [17]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember1:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -155,7 +147,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:89: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [19]
+		}, -- [18]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember1:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -163,7 +155,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:90: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [20]
+		}, -- [19]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember2:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -171,7 +163,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [21]
+		}, -- [20]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember2:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -179,7 +171,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [22]
+		}, -- [21]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember3:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -187,7 +179,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [23]
+		}, -- [22]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember3:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -195,7 +187,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [24]
+		}, -- [23]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember4:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -203,7 +195,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [25]
+		}, -- [24]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember4:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -211,7 +203,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [26]
+		}, -- [25]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember5:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -219,7 +211,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [27]
+		}, -- [26]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrameMember5:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -227,7 +219,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [28]
+		}, -- [27]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactPartyFrame:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -235,7 +227,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactRaidGroup.lua:106: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [29]
+		}, -- [28]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -243,7 +235,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `ClearAllPoints'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:543: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [30]
+		}, -- [29]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -251,7 +243,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetPoint'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:544: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [31]
+		}, -- [30]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:SetHeight()) during combat lockdown.",
 			["count"] = 1,
@@ -259,7 +251,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetHeight'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:545: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [32]
+		}, -- [31]
 		{
 			["message"] = "Note: AddOn TidyPlatesHub attempted to call a protected function (CompactRaidFrameContainer:SetHeight()) during combat lockdown.",
 			["count"] = 2,
@@ -267,7 +259,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 10:45:09",
 			["context"] = "AddOn: TidyPlatesHub",
 			["stack"] = "[C]: in function `SetHeight'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:617: in function `CompactRaidFrameManager_ResizeFrame_UpdateContainerSize'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:547: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [33]
+		}, -- [32]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomLeft:Hide()) during combat lockdown.",
 			["count"] = 6,
@@ -275,7 +267,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\MultiActionBars.lua:41: in function `MultiActionBar_Update'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:1284: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [34]
+		}, -- [33]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRight:Hide()) during combat lockdown.",
 			["count"] = 6,
@@ -283,7 +275,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\MultiActionBars.lua:49: in function `MultiActionBar_Update'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:1284: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [35]
+		}, -- [34]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRight:Hide()) during combat lockdown.",
 			["count"] = 6,
@@ -291,7 +283,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\MultiActionBars.lua:56: in function `MultiActionBar_Update'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:1284: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [36]
+		}, -- [35]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeft:Hide()) during combat lockdown.",
 			["count"] = 6,
@@ -299,7 +291,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\MultiActionBars.lua:63: in function `MultiActionBar_Update'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:1284: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [37]
+		}, -- [36]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomLeftButton10:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -307,7 +299,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:76: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [38]
+		}, -- [37]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomLeftButton11:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -315,7 +307,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:76: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [39]
+		}, -- [38]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton2:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -323,7 +315,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [40]
+		}, -- [39]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton4:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -331,7 +323,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [41]
+		}, -- [40]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton5:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -339,7 +331,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [42]
+		}, -- [41]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton6:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -347,7 +339,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [43]
+		}, -- [42]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton7:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -355,7 +347,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [44]
+		}, -- [43]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton11:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -363,7 +355,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [45]
+		}, -- [44]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarBottomRightButton12:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -371,7 +363,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:77: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [46]
+		}, -- [45]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton1:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -379,7 +371,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [47]
+		}, -- [46]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton2:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -387,7 +379,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [48]
+		}, -- [47]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton3:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -395,7 +387,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [49]
+		}, -- [48]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton4:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -403,7 +395,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:31",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [50]
+		}, -- [49]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton5:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -411,7 +403,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [51]
+		}, -- [50]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton6:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -419,7 +411,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [52]
+		}, -- [51]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton7:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -427,7 +419,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [53]
+		}, -- [52]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton8:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -435,7 +427,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [54]
+		}, -- [53]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton9:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -443,7 +435,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [55]
+		}, -- [54]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton10:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -451,7 +443,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [56]
+		}, -- [55]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton11:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -459,7 +451,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [57]
+		}, -- [56]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarRightButton12:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -467,7 +459,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:78: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [58]
+		}, -- [57]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton5:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -475,7 +467,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [59]
+		}, -- [58]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton6:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -483,7 +475,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [60]
+		}, -- [59]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton7:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -491,7 +483,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [61]
+		}, -- [60]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton8:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -499,7 +491,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [62]
+		}, -- [61]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton9:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -507,7 +499,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [63]
+		}, -- [62]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton10:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -515,7 +507,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [64]
+		}, -- [63]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton11:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -523,7 +515,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [65]
+		}, -- [64]
 		{
 			["message"] = "Note: AddOn AllPlayed attempted to call a protected function (MultiBarLeftButton12:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -531,7 +523,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AllPlayed",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:345: in function `ActionButton_HideGrid'\nInterface\\FrameXML\\MultiActionBars.lua:87: in function `MultiActionBar_UpdateGrid'\nInterface\\FrameXML\\MultiActionBars.lua:79: in function `MultiActionBar_HideAllGrids'\nInterface\\FrameXML\\MultiActionBars.lua:96: in function `MultiActionBar_UpdateGridVisibility'\n[string \"*:OnLoad\"]:4: in function `setFunc'\nInterface\\FrameXML\\InterfaceOptionsPanels.lua:90: in function <Interface\\FrameXML\\InterfaceOptionsPanels.lua:86>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [66]
+		}, -- [65]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameContainer:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -539,7 +531,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `Hide'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:516: in function `CompactRaidFrameManager_UpdateContainerVisibility'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:461: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:450>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:500: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [67]
+		}, -- [66]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -547,7 +539,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `Hide'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:560: in function `CompactRaidFrameManager_LockContainer'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:553: in function `CompactRaidFrameManager_UpdateContainerLockVisibility'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:395: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:390>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:490: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [68]
+		}, -- [67]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:unusedFunc()) during combat lockdown.",
 			["count"] = 3,
@@ -555,7 +547,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [69]
+		}, -- [68]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:SetParent()) during combat lockdown.",
 			["count"] = 3,
@@ -563,7 +555,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [70]
+		}, -- [69]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:SetFrameStrata()) during combat lockdown.",
 			["count"] = 3,
@@ -571,7 +563,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [71]
+		}, -- [70]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -579,7 +571,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:216: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [72]
+		}, -- [71]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:ClearAllPoints()) during combat lockdown.",
 			["count"] = 3,
@@ -587,7 +579,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [73]
+		}, -- [72]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:SetPoint()) during combat lockdown.",
 			["count"] = 3,
@@ -595,7 +587,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:77: in function `CompactRaidFrameContainer_SetGroupMode'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:426: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:417>\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:494: in function `CompactRaidFrameManager_SetSetting'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:560: in function `func'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:537: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [74]
+		}, -- [73]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactPartyFrameMember1:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -603,7 +595,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [75]
+		}, -- [74]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember2:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -611,7 +603,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [76]
+		}, -- [75]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember3:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -619,7 +611,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [77]
+		}, -- [76]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember4:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -627,7 +619,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [78]
+		}, -- [77]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember5:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -635,7 +627,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactUnitFrame.lua:906: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:542: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [79]
+		}, -- [78]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactPartyFrameMember1:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -643,7 +635,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [80]
+		}, -- [79]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember2:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -651,7 +643,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [81]
+		}, -- [80]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember3:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -659,7 +651,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [82]
+		}, -- [81]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember4:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -667,7 +659,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [83]
+		}, -- [82]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember5:Hide()) during combat lockdown.",
 			["count"] = 1,
@@ -675,7 +667,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\CompactUnitFrame.lua:266: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:18: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:543: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [84]
+		}, -- [83]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember1:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -683,7 +675,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:89: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [85]
+		}, -- [84]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember1:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -691,7 +683,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:90: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [86]
+		}, -- [85]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember2:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -699,7 +691,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [87]
+		}, -- [86]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember2:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -707,7 +699,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [88]
+		}, -- [87]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember3:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -715,7 +707,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [89]
+		}, -- [88]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember3:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -723,7 +715,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [90]
+		}, -- [89]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember4:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -731,7 +723,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [91]
+		}, -- [90]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember4:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -739,7 +731,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [92]
+		}, -- [91]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember5:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -747,7 +739,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\CompactRaidGroup.lua:94: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [93]
+		}, -- [92]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember5:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -755,7 +747,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\CompactRaidGroup.lua:95: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [94]
+		}, -- [93]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrame:SetSize()) during combat lockdown.",
 			["count"] = 1,
@@ -763,7 +755,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetSize'\nInterface\\FrameXML\\CompactRaidGroup.lua:106: in function `CompactRaidGroup_UpdateLayout'\nInterface\\FrameXML\\CompactRaidGroup.lua:115: in function `func'\nInterface\\FrameXML\\CompactRaidGroup.lua:21: in function `applyFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:122: in function `CompactRaidFrameContainer_ApplyToFrames'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:549: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [95]
+		}, -- [94]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:ClearAllPoints()) during combat lockdown.",
 			["count"] = 1,
@@ -771,7 +763,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `ClearAllPoints'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:543: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [96]
+		}, -- [95]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:SetPoint()) during combat lockdown.",
 			["count"] = 1,
@@ -779,7 +771,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `SetPoint'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:544: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [97]
+		}, -- [96]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:SetHeight()) during combat lockdown.",
 			["count"] = 1,
@@ -787,7 +779,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `SetHeight'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:545: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [98]
+		}, -- [97]
 		{
 			["message"] = "Note: AddOn AddonMgr attempted to call a protected function (CompactRaidFrameContainer:SetHeight()) during combat lockdown.",
 			["count"] = 1,
@@ -795,12 +787,20 @@ SwatterData = {
 			["timestamp"] = "2012-03-21 11:43:32",
 			["context"] = "AddOn: AddonMgr",
 			["stack"] = "[C]: in function `SetHeight'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:617: in function `CompactRaidFrameManager_ResizeFrame_UpdateContainerSize'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:547: in function `CompactRaidFrameManager_UpdateContainerBounds'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:686: in function `CompactRaidFrameManager_ResizeFrame_LoadPosition'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:552: in function `CompactUnitFrameProfiles_ApplyProfile'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:170: in function `CompactUnitFrameProfiles_ApplyCurrentSettings'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:79: in function `CompactUnitFrameProfiles_CancelChanges'\n...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:72: in function <...rd_CUFProfiles\\Blizzard_CompactUnitFrameProfiles.lua:70>\n[C]: in function `pcall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:217: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:216>\n[C]: in function `securecall'\nInterface\\FrameXML\\InterfaceOptionsFrame.lua:252: in function <Interface\\FrameXML\\InterfaceOptionsFrame.lua:248>\n[C]: in function `Click'\nInterface\\FrameXML\\UIParent.lua:2951: in function `ToggleGameMenu'\n[string \"TOGGLEGAMEMENU\"]:1: in function <[string \"TOGGLEGAMEMENU\"]:1>\n",
-		}, -- [99]
+		}, -- [98]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember1:Show()) during combat lockdown.",
 			["count"] = 3,
 			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.0\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  DBMCore, v\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  Recount, v\n  SavedInstances, v4.6.0\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacItemRef, v11.09.29\n  TipTacOptions, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=138b)\n",
 			["timestamp"] = "2012-03-22 01:24:31",
+			["context"] = "AddOn: Volumizer",
+			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:105: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
+		}, -- [99]
+		{
+			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactPartyFrameMember1:Show()) during combat lockdown.",
+			["count"] = 3,
+			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.0\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  DBMCore, v\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  OmniCCConfig, v\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  Recount, v\n  SavedInstances, v4.6.0\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacAuctioneer, v1.0\n  TipTacItemRef, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  XLoot, v\n  XLoot10, vz28b-USE_MASQUE_BETA-release\n  XLootMaster, v0.82\n  XLootMonitor, v0.72\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=13fa)\n",
+			["timestamp"] = "2012-03-23 02:35:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:105: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
 		}, -- [100]

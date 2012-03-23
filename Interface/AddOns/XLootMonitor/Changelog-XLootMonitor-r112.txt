@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r112 | dridzt | 2011-12-17 04:38:36 +0000 (Sat, 17 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/XLootMonitor.toc
+
+- .toc update, compatible with Hour of Twilight (4.3)
+------------------------------------------------------------------------
+r111 | dridzt | 2011-06-30 17:39:13 +0000 (Thu, 30 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/XLootMonitor.toc
+
+- .toc update, compatible with WoW 4.2
+------------------------------------------------------------------------

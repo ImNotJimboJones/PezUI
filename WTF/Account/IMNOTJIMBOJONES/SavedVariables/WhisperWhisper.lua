@@ -32,6 +32,23 @@ Broker_WhisperWhisperDB = {
 			},
 			["whisperList"] = {
 				{
+					"|Kf16|k0000000000000|k", -- [1]
+					{
+						"|cffd2d2d2i hate that quest :P", -- [1]
+						"|cffd2d2d2like that annoying simon says game", -- [2]
+						"|cffd2d2d2you have to collect one of the crystal drops to activate it... then stand in the middle of the 4 small crystals and click on them in the order they sound off", -- [3]
+						"|cffd2d2d2oh ya that ones annoying", -- [4]
+						"|cffff0008the one with the crystal colors", -- [5]
+						"|cffd2d2d2which?", -- [6]
+						"|cffd2d2d2ahh fun lol", -- [7]
+						"|cffff0008except I forgot how to do this one -_- hate these", -- [8]
+						"|cffff0008ogri'la dailies XD", -- [9]
+						"|cffd2d2d2what you up to in Blade's Edge?", -- [10]
+					}, -- [2]
+					true, -- [3]
+					true, -- [4]
+				}, -- [1]
+				{
 					"Pezzer", -- [1]
 					{
 						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [1]
@@ -47,7 +64,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 				{
 					"Dùbstëp", -- [1]
 					{
@@ -64,7 +81,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [3]
 				{
 					"Rognon", -- [1]
 					{
@@ -74,7 +91,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [4]
 				{
 					"Varasolan", -- [1]
 					{
@@ -82,7 +99,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [5]
 			},
 		},
 	},

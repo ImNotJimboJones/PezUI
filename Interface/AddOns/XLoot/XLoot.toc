@@ -1,0 +1,26 @@
+﻿## Interface: 40300
+## Title: XLoot (Old plugin support)
+## Notes: Enables use of XLoot Group, Monitor, and Master
+
+## OptionalDeps: Ace2, DewdropLib, Deformat, AnchorsAway, SpecialEventsEmbed, SpecialEvents-Loot-1.0
+## X-Embeds: Ace2, DewdropLib, Deformat, AnchorsAway, SpecialEventsEmbed
+## SavedVariables: XLootDB
+
+embeds.xml
+
+XLoot.lua
+XLootSkin.lua
+XLootOptions.lua
+
+XLootUtilities.lua
+XLootRowTools.lua
+XLootTooltip.lua
+
+locales\enUS.lua
+locales\ruRU.lua
+locales\koKR.lua
+locales\zhTW.lua
+locales\zhCN.lua
+locales\deDE.lua
+locales\frFR.lua
+locales\esES.lua
