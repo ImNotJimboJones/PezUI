@@ -25,11 +25,11 @@ AucAdvancedConfig = {
 			["tooltip"] = {
 			},
 		},
+		["configator.left"] = 322.8235778808594,
 		["filter"] = {
 			["basic"] = {
 			},
 		},
-		["configator.left"] = 322.8235778808594,
 		["util"] = {
 			["appraiser"] = {
 				["columnsortcurSort"] = 6,
@@ -58,6 +58,7 @@ AucAdvancedConfig = {
 			["pricelevel"] = {
 			},
 		},
+		["ModTTShow"] = "never",
 		["stat"] = {
 			["sales"] = {
 				["ignoredsigs"] = {

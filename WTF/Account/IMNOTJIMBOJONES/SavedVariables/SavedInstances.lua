@@ -294,7 +294,7 @@ SavedInstancesDB = {
 				[3] = {
 					["Expires"] = 1332864000,
 					["Extended"] = false,
-					["Link"] = "|cffff8000|Hinstancelock:0280000004B625CB:967:2:62|h[Dragon Soul]|h|r",
+					["Link"] = "|cffff8000|Hinstancelock:0280000004B625CB:967:2:255|h[Dragon Soul]|h|r",
 					["ID"] = 100820814,
 					["Locked"] = true,
 				},
@@ -1013,11 +1013,6 @@ SavedInstancesDB = {
 		},
 	},
 	["History"] = {
-		["Pezzer - Burning Blade:Ragefire Chasm:party:1:1"] = {
-			["last"] = 1332344800,
-			["create"] = 1332333417,
-			["desc"] = "Pezzer: Ragefire Chasm",
-		},
 	},
 	["Broker"] = {
 		["HistoryText"] = false,
@@ -1034,16 +1029,16 @@ SavedInstancesDB = {
 			["Show"] = "saved",
 			["currency"] = {
 				[395] = {
-					["amount"] = 1155,
+					["earnedThisWeek"] = 0,
 					["weeklyMax"] = 0,
 					["totalMax"] = 4000,
-					["earnedThisWeek"] = 0,
+					["amount"] = 1155,
 				},
 				[396] = {
-					["amount"] = 7450,
+					["earnedThisWeek"] = 800,
 					["weeklyMax"] = 1000,
 					["totalMax"] = 0,
-					["earnedThisWeek"] = 500,
+					["amount"] = 7750,
 				},
 				[390] = {
 					["earnedThisWeek"] = 0,
@@ -1061,7 +1056,7 @@ SavedInstancesDB = {
 				},
 			},
 			["LClass"] = "Hunter",
-			["DailyResetTime"] = 1332403200,
+			["DailyResetTime"] = 1332489600,
 			["ILe"] = 403,
 			["DailyCount"] = 0,
 			["Quests"] = {

@@ -32,6 +32,23 @@ Broker_WhisperWhisperDB = {
 			},
 			["whisperList"] = {
 				{
+					"Pezzer", -- [1]
+					{
+						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [1]
+						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [2]
+						"|cffd2d2d2 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffd2d2d2r", -- [3]
+						"|cffff0008 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffff0008r", -- [4]
+						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [5]
+						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [6]
+						"|cffd2d2d2 |cffffff00|Hachievement:1658:0280000004B625CB:1:8:24:11:4294967295:4294967295:4294967295:4294967295|h[Champion of the Frozen Wastes]|h|r|cffd2d2d2r", -- [7]
+						"|cffff0008 |cffffff00|Hachievement:1658:0280000004B625CB:1:8:24:11:4294967295:4294967295:4294967295:4294967295|h[Champion of the Frozen Wastes]|h|r|cffff0008r", -- [8]
+						"|cffd2d2d2 |cffffff00|Hachievement:2957:0280000004B625CB:1:8:27:11:4294967295:4294967295:4294967295:4294967295|h[Glory of the Ulduar Raider (10 player)]|h|r|cffd2d2d2r", -- [9]
+						"|cffff0008 |cffffff00|Hachievement:2957:0280000004B625CB:1:8:27:11:4294967295:4294967295:4294967295:4294967295|h[Glory of the Ulduar Raider (10 player)]|h|r|cffff0008r", -- [10]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [1]
+				{
 					"Dùbstëp", -- [1]
 					{
 						"|cffff0008i know i cant wait to be lvl 85", -- [1]
@@ -46,23 +63,6 @@ Broker_WhisperWhisperDB = {
 						"|cffff0008na first hunter", -- [10]
 					}, -- [2]
 					false, -- [3]
-					false, -- [4]
-				}, -- [1]
-				{
-					"Pezzer", -- [1]
-					{
-						"|cffd2d2d2kjlks jdlfkj sdf", -- [1]
-						"|cffff0008kjlks jdlfkj sdf", -- [2]
-						"|cffd2d2d2lkjsldkfj lskdjf lksjd f", -- [3]
-						"|cffff0008lkjsldkfj lskdjf lksjd f", -- [4]
-						"|cffd2d2d2lkjsdlfkj sdlfkjs dlkfj ", -- [5]
-						"|cffff0008lkjsdlfkj sdlfkjs dlkfj ", -- [6]
-						"|cffd2d2d2lkj lskdjf lksdj flksdjf", -- [7]
-						"|cffff0008lkj lskdjf lksdj flksdjf", -- [8]
-						"|cffd2d2d2 lkjs ldkfj slkdfj ", -- [9]
-						"|cffff0008 lkjs ldkfj slkdfj ", -- [10]
-					}, -- [2]
-					true, -- [3]
 					false, -- [4]
 				}, -- [2]
 				{

@@ -195,3 +195,8 @@ Broker_StatsNow_Melee: disabled
 Broker_StatsNow_PvP: disabled
 Broker_StatsNow_Range: disabled
 Broker_StatsNow_Spells: disabled
+TipTac: enabled
+TipTacAuctioneer: enabled
+TipTacItemRef: enabled
+TipTacOptions: enabled
+TipTacTalents: enabled

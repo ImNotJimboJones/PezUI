@@ -505,7 +505,7 @@ GridDB = {
 					["BackgroundA"] = 0,
 					["BorderG"] = 0,
 					["horizontal"] = true,
-					["PosX"] = 0.365392431144528,
+					["PosX"] = 0.3654062117377634,
 					["BackgroundB"] = 0,
 				},
 				["Default"] = {

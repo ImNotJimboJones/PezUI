@@ -5,15 +5,68 @@ SavedGroupConfigurations = {
 	["ScreenGrid"] = {
 		["ScreenGrid"] = 1,
 	},
-	["Recount"] = {
-		["Recount"] = 1,
+	["Grid"] = {
+		["GridAutoFrameSize"] = 1,
+		["GridStatusRD_BC"] = 1,
+		["GridStatusRole"] = 1,
+		["GridIndicatorBorderTexts"] = 1,
+		["GridStatusRD_WotLK"] = 1,
+		["Grid"] = 1,
+		["GridStatusRes"] = 1,
+		["GridStatusRaidDebuff"] = 1,
+		["GridStatusDungeonRole"] = 1,
+		["GridStatusRD_Cata"] = 1,
+		["GridSideIndicators"] = 1,
+		["GridStatusEmphasize"] = 1,
+		["GridStatusLineOfSight"] = 1,
+		["GridUnitMenu"] = 1,
+		["GridStatusDirectionArrows"] = 1,
+		["GridConfigurableLayouts"] = 1,
+		["GridStatusHots"] = 1,
+		["GridIndicatorCornerIcons"] = 1,
+		["GridStatusFastHealth"] = 1,
+		["GridIndicatorSideIcons"] = 1,
+		["GridStatusHostileUnit"] = 1,
+		["GridCustomLayouts"] = 1,
+		["GridStatusRaidIcons"] = 1,
+		["GridBuffIcons"] = 1,
 	},
-	["kgPanels"] = {
-		["kgPanels"] = 1,
-		["kgPanelsConfig"] = 1,
+	["MoveAnything"] = {
+		["MoveAnything"] = 1,
 	},
-	["Vertical Rep Bar"] = {
-		["VerticalRep"] = 1,
+	["LightHeaded"] = {
+		["LightHeaded_Data_QIDNames"] = 1,
+		["LightHeaded_Data_NPC"] = 1,
+		["LightHeaded_Data_C"] = 1,
+		["LightHeaded_Data_QIDDesc"] = 1,
+		["LightHeaded_Data_D"] = 1,
+		["LightHeaded_Data_B"] = 1,
+		["LightHeaded_Data_E"] = 1,
+		["LightHeaded"] = 1,
+		["LightHeaded_Data_A"] = 1,
+	},
+	["Moncai's Quest Tracker"] = {
+		["MoncaiQuestTracker"] = 1,
+	},
+	["Swatter"] = {
+		["!Swatter"] = 1,
+	},
+	["Vertical XP Bar"] = {
+		["VerticalXP"] = 1,
+	},
+	["Macaroon"] = {
+		["Macaroon"] = 1,
+		["MacaroonBound"] = 1,
+		["MacaroonXtras"] = 1,
+		["MacaroonProfiles"] = 1,
+	},
+	["OmniCC"] = {
+		["OmniCC_Config"] = 1,
+		["OmniCC"] = 1,
+	},
+	["Mik's Scrolling Battle Text"] = {
+		["MSBTOptions"] = 1,
+		["MikScrollingBattleText"] = 1,
 	},
 	["Skada"] = {
 		["Skada"] = 1,
@@ -44,18 +97,18 @@ SavedGroupConfigurations = {
 		["DBM-AQ40"] = 1,
 		["DBM-TheEye"] = 1,
 		["DBM-Ulduar"] = 1,
-		["DBM-Onyxia"] = 1,
+		["DBM-DragonSoul"] = 1,
 		["DBM-Karazhan"] = 1,
 		["DBM-BaradinHold"] = 1,
-		["DBM-BlackTemple"] = 1,
+		["DBM-MC"] = 1,
 		["DBM-Outlands"] = 1,
 		["DBM-ThroneFourWinds"] = 1,
 		["DBM-Firelands"] = 1,
 		["DBM-Serpentshrine"] = 1,
-		["DBM-MC"] = 1,
+		["DBM-BlackTemple"] = 1,
 		["DBM-BWL"] = 1,
 		["DBM-GUI"] = 1,
-		["DBM-DragonSoul"] = 1,
+		["DBM-Onyxia"] = 1,
 		["DBM-Hyjal"] = 1,
 		["DBM-PvP"] = 1,
 		["DBM-BlackwingDescent"] = 1,
@@ -64,52 +117,8 @@ SavedGroupConfigurations = {
 		["DBM-WorldEvents"] = 1,
 		["DBM-Coliseum"] = 1,
 	},
-	["Mik's Scrolling Battle Text"] = {
-		["MSBTOptions"] = 1,
-		["MikScrollingBattleText"] = 1,
-	},
-	["Grid"] = {
-		["GridAutoFrameSize"] = 1,
-		["GridStatusRD_BC"] = 1,
-		["GridStatusRole"] = 1,
-		["GridIndicatorBorderTexts"] = 1,
-		["GridStatusRD_WotLK"] = 1,
-		["Grid"] = 1,
-		["GridStatusRes"] = 1,
-		["GridStatusRaidDebuff"] = 1,
-		["GridStatusDungeonRole"] = 1,
-		["GridStatusRD_Cata"] = 1,
-		["GridSideIndicators"] = 1,
-		["GridStatusEmphasize"] = 1,
-		["GridStatusLineOfSight"] = 1,
-		["GridUnitMenu"] = 1,
-		["GridStatusDirectionArrows"] = 1,
-		["GridConfigurableLayouts"] = 1,
-		["GridStatusHots"] = 1,
-		["GridIndicatorCornerIcons"] = 1,
-		["GridStatusFastHealth"] = 1,
-		["GridIndicatorSideIcons"] = 1,
-		["GridStatusHostileUnit"] = 1,
-		["GridCustomLayouts"] = 1,
-		["GridStatusRaidIcons"] = 1,
-		["GridBuffIcons"] = 1,
-	},
 	["SexyMap"] = {
 		["SexyMap"] = 1,
-	},
-	["Greedy Quester"] = {
-		["GreedyQuester"] = 1,
-	},
-	["LightHeaded"] = {
-		["LightHeaded_Data_QIDNames"] = 1,
-		["LightHeaded_Data_NPC"] = 1,
-		["LightHeaded_Data_C"] = 1,
-		["LightHeaded_Data_QIDDesc"] = 1,
-		["LightHeaded_Data_D"] = 1,
-		["LightHeaded_Data_B"] = 1,
-		["LightHeaded_Data_E"] = 1,
-		["LightHeaded"] = 1,
-		["LightHeaded_Data_A"] = 1,
 	},
 	["Prat"] = {
 		["Prat-3.0_Libraries"] = 1,
@@ -118,14 +127,6 @@ SavedGroupConfigurations = {
 	},
 	["Bison"] = {
 		["Bison"] = 1,
-	},
-	["Auctioneer"] = {
-		["Auc-Util-FixAH"] = 1,
-		["Stubby"] = 1,
-		["Auc-Filter-Basic"] = 1,
-		["Auc-Advanced"] = 1,
-		["Auc-ScanData"] = 1,
-		["Informant"] = 1,
 	},
 	["Power Auras"] = {
 		["PowerAuras"] = 1,
@@ -161,51 +162,18 @@ SavedGroupConfigurations = {
 	["Quartz"] = {
 		["Quartz"] = 1,
 	},
-	["Macaroon"] = {
-		["Macaroon"] = 1,
-		["MacaroonBound"] = 1,
-		["MacaroonXtras"] = 1,
-		["MacaroonProfiles"] = 1,
+	["Recount"] = {
+		["Recount"] = 1,
 	},
-	["Swatter"] = {
-		["!Swatter"] = 1,
+	["kgPanels"] = {
+		["kgPanels"] = 1,
+		["kgPanelsConfig"] = 1,
 	},
 	["SpeedyLoad"] = {
 		["SpeedyLoad"] = 1,
 	},
-	["Vertical XP Bar"] = {
-		["VerticalXP"] = 1,
-	},
-	["MoveAnything"] = {
-		["MoveAnything"] = 1,
-	},
-	["ColorPickerPlus"] = {
-		["ColorPickerPlus"] = 1,
-	},
 	["TomTom"] = {
 		["TomTom"] = 1,
-	},
-	["Tidy Plates"] = {
-		["TidyPlates_Neon"] = 1,
-		["TidyPlates_Graphite"] = 1,
-		["TidyPlatesWidgets"] = 1,
-		["TidyPlates"] = 1,
-		["TidyPlates_Grey"] = 1,
-		["TidyPlates_Quatre"] = 1,
-		["TidyPlatesHub"] = 1,
-	},
-	["SharedMedia"] = {
-		["SharedMedia"] = 1,
-	},
-	["Moncai's Quest Tracker"] = {
-		["MoncaiQuestTracker"] = 1,
-	},
-	["OmniCC"] = {
-		["OmniCC_Config"] = 1,
-		["OmniCC"] = 1,
-	},
-	["PlayerScore / GearScore"] = {
-		["GearScore"] = 1,
 	},
 	["PitBull"] = {
 		["PitBull4_Portrait"] = 1,
@@ -255,8 +223,47 @@ SavedGroupConfigurations = {
 		["PitBull4_CastBarLatency"] = 1,
 		["PitBull4_PowerBar"] = 1,
 	},
+	["ColorPickerPlus"] = {
+		["ColorPickerPlus"] = 1,
+	},
+	["Auctioneer"] = {
+		["Auc-Util-FixAH"] = 1,
+		["Stubby"] = 1,
+		["Auc-Filter-Basic"] = 1,
+		["Auc-Advanced"] = 1,
+		["Auc-ScanData"] = 1,
+		["Informant"] = 1,
+	},
+	["Tidy Plates"] = {
+		["TidyPlates_Neon"] = 1,
+		["TidyPlates_Graphite"] = 1,
+		["TidyPlatesWidgets"] = 1,
+		["TidyPlates"] = 1,
+		["TidyPlates_Grey"] = 1,
+		["TidyPlates_Quatre"] = 1,
+		["TidyPlatesHub"] = 1,
+	},
+	["Greedy Quester"] = {
+		["GreedyQuester"] = 1,
+	},
+	["SharedMedia"] = {
+		["SharedMedia"] = 1,
+	},
 	["Omen"] = {
 		["Omen"] = 1,
+	},
+	["PlayerScore / GearScore"] = {
+		["GearScore"] = 1,
+	},
+	["TipTac"] = {
+		["TipTacItemRef"] = 1,
+		["TipTacAuctioneer"] = 1,
+		["TipTacOptions"] = 1,
+		["TipTacTalents"] = 1,
+		["TipTac"] = 1,
+	},
+	["Vertical Rep Bar"] = {
+		["VerticalRep"] = 1,
 	},
 	["Masque"] = {
 		["Masque_Renaitre"] = 1,

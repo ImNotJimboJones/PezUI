@@ -4,6 +4,7 @@ InformantConfig = {
 	["profile.Default"] = {
 		["configator.left"] = 322.8235778808594,
 		["configator.top"] = 676.7647705078125,
+		["show-ilevel"] = false,
 	},
 	["position"] = {
 		["y"] = 384.0000305175781,

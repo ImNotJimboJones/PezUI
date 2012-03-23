@@ -537,6 +537,7 @@ kgPanelsDB = {
 						["r"] = -4,
 					},
 					["scripts"] = {
+						["LOAD"] = "",
 					},
 					["bg_style"] = "SOLID",
 					["gradient_color"] = {
