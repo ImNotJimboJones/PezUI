@@ -53,7 +53,7 @@ MacaroonBound: enabled
 MacaroonStatusBars: disabled
 MikScrollingBattleText: enabled
 MSBTOptions: enabled
-GearScore: disabled
+GearScore: enabled
 PowerAuras: disabled
 PowerAuras_ImagePack1: disabled
 PowerAuras_SoundPack1: disabled

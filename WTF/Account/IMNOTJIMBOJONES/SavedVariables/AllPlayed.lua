@@ -1,28 +1,27 @@
 
 AllPlayedDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["highest_rank"] = 0,
+						["conquest_points"] = 800,
 						["class"] = "HUNTER",
-						["zone_text"] = "Durotar",
+						["zone_text"] = "Orgrimmar",
 						["honor_kills"] = 7488,
+						["is_resting"] = 1,
 						["honor_points"] = 362,
 						["coin"] = 640067392,
 						["xp"] = 1141,
-						["conquest_points"] = 800,
-						["seconds_played"] = 9345630,
-						["last_update"] = 1332513733,
+						["subzone_text"] = "Valley of Honor",
+						["highest_rank"] = 0,
+						["last_update"] = 1332516754,
 						["class_loc"] = "Hunter",
 						["justice_points"] = 1155,
-						["level"] = 85,
+						["seconds_played"] = 9348142,
 						["max_rested_xp"] = 18400500,
-						["seconds_played_last_update"] = 1332513733,
+						["seconds_played_last_update"] = 1332516754,
+						["level"] = 85,
 					},
 				},
 			},
@@ -35,6 +34,9 @@ AllPlayedDB = {
 			},
 		},
 	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["profiles"] = {
 		["Default"] = {
 			["options"] = {
@@ -43,10 +45,10 @@ AllPlayedDB = {
 				["show_coins"] = false,
 				["all_realms"] = false,
 				["show_rested_xp_countdown"] = false,
+				["show_xp_total"] = false,
 				["ldbicon"] = {
 					["hide"] = true,
 				},
-				["show_xp_total"] = false,
 			},
 		},
 	},

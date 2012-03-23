@@ -1,21 +1,22 @@
 
 draiksAddonInitialised = true
 ilvlDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["ilvl"] = 403,
+						["key"] = "0x0280000004B625CB",
 						["level"] = 85,
 						["class"] = "HUNTER",
+						["ilvl"] = 403,
 					},
 				},
 			},
 		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

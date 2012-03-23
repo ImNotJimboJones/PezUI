@@ -7,64 +7,36 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["b"] = 210,
-				["g"] = 210,
 				["r"] = 210,
+				["g"] = 210,
+				["b"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
-			["flashBottom"] = true,
-			["flashLeft"] = true,
-			["altView"] = false,
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["b"] = 8,
-				["g"] = 0,
-				["r"] = 255,
-			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
+			["flashLeft"] = true,
 			["whisperList"] = {
-				{
-					"|Kf16|k0000000000000|k", -- [1]
-					{
-						"|cffd2d2d2i hate that quest :P", -- [1]
-						"|cffd2d2d2like that annoying simon says game", -- [2]
-						"|cffd2d2d2you have to collect one of the crystal drops to activate it... then stand in the middle of the 4 small crystals and click on them in the order they sound off", -- [3]
-						"|cffd2d2d2oh ya that ones annoying", -- [4]
-						"|cffff0008the one with the crystal colors", -- [5]
-						"|cffd2d2d2which?", -- [6]
-						"|cffd2d2d2ahh fun lol", -- [7]
-						"|cffff0008except I forgot how to do this one -_- hate these", -- [8]
-						"|cffff0008ogri'la dailies XD", -- [9]
-						"|cffd2d2d2what you up to in Blade's Edge?", -- [10]
-					}, -- [2]
-					true, -- [3]
-					true, -- [4]
-				}, -- [1]
 				{
 					"Pezzer", -- [1]
 					{
-						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [1]
-						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [2]
-						"|cffd2d2d2 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffd2d2d2r", -- [3]
-						"|cffff0008 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffff0008r", -- [4]
-						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [5]
-						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [6]
-						"|cffd2d2d2 |cffffff00|Hachievement:1658:0280000004B625CB:1:8:24:11:4294967295:4294967295:4294967295:4294967295|h[Champion of the Frozen Wastes]|h|r|cffd2d2d2r", -- [7]
-						"|cffff0008 |cffffff00|Hachievement:1658:0280000004B625CB:1:8:24:11:4294967295:4294967295:4294967295:4294967295|h[Champion of the Frozen Wastes]|h|r|cffff0008r", -- [8]
-						"|cffd2d2d2 |cffffff00|Hachievement:2957:0280000004B625CB:1:8:27:11:4294967295:4294967295:4294967295:4294967295|h[Glory of the Ulduar Raider (10 player)]|h|r|cffd2d2d2r", -- [9]
-						"|cffff0008 |cffffff00|Hachievement:2957:0280000004B625CB:1:8:27:11:4294967295:4294967295:4294967295:4294967295|h[Glory of the Ulduar Raider (10 player)]|h|r|cffff0008r", -- [10]
+						"|cffd2d2d2 |cffffff00|Hachievement:5538:0280000004B625CB:0:0:0:-1:0:0:0:0|h[50,000 Valor Points]|h|r|cffd2d2d2r", -- [1]
+						"|cffff0008 |cffffff00|Hachievement:5538:0280000004B625CB:0:0:0:-1:0:0:0:0|h[50,000 Valor Points]|h|r|cffff0008r", -- [2]
+						"|cffd2d2d2 |cffa335ee|Hitem:70339:0:4007:4000:0:0:0:-1165028608:85:0|h[Ruthless Gladiator's Links of Accuracy]|h|r|cffd2d2d2r", -- [3]
+						"|cffff0008 |cffa335ee|Hitem:70339:0:4007:4000:0:0:0:-1165028608:85:0|h[Ruthless Gladiator's Links of Accuracy]|h|r|cffff0008r", -- [4]
+						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [5]
+						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [6]
+						"|cffd2d2d2 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffd2d2d2r", -- [7]
+						"|cffff0008 |cffa335ee|Hitem:78661:4102:3996:3996:4011:0:0:0:85:152|h[Wyrmstalker's Tunic]|h|r|cffff0008r", -- [8]
+						"|cffd2d2d2 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffd2d2d2r", -- [9]
+						"|cffff0008 |cffffff00|Hachievement:4853:0280000004B625CB:0:0:0:-1:9736384:0:0:0|h[Glory of the Cataclysm Raider]|h|r|cffff0008r", -- [10]
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [1]
 				{
 					"Dùbstëp", -- [1]
 					{
@@ -81,7 +53,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [2]
 				{
 					"Rognon", -- [1]
 					{
@@ -91,7 +63,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [3]
 				{
 					"Varasolan", -- [1]
 					{
@@ -99,8 +71,19 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [5]
+				}, -- [4]
 			},
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["r"] = 255,
+				["g"] = 0,
+				["b"] = 8,
+			},
+			["flashBottom"] = true,
+			["altView"] = false,
 		},
 	},
 }
