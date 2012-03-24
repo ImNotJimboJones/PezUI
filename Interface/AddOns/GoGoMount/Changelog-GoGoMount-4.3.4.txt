@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r335 | tiker | 2012-03-03 00:33:44 +0000 (Sat, 03 Mar 2012) | 1 line
+Changed paths:
+   A /tags/4.3.4 (from /trunk:334)
+
+Tagging as 4.3.4
+------------------------------------------------------------------------
+r334 | tiker | 2012-03-03 00:33:19 +0000 (Sat, 03 Mar 2012) | 1 line
+Changed paths:
+   M /trunk/GoGoMount.toc
+   M /trunk/GoGoMountData.lua
+
+- Fixed a problem where Golden King or Kor'kron Annihilator are the only mounts that would summon if they were known with only 160% mount speed.  Mounts should scale properly as well.
+------------------------------------------------------------------------

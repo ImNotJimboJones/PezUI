@@ -70,7 +70,7 @@ Y: 157
 W: 32
 H: 32
 Frame: TenTonHammer
-FrameLevel: 28
+FrameLevel: 22
 Anchor: CENTER
 X: 0
 Y: 132
@@ -114,10 +114,10 @@ H: 169
 Frame: MacaroonBars4
 FrameLevel: 2
 Anchor: BOTTOMRIGHT
-X: -5
-Y: 34
-W: 49
-H: 84
+X: 10
+Y: 68
+W: 195
+H: 18
 Frame: MacaroonBars5
 FrameLevel: 2
 Anchor: BOTTOMLEFT
@@ -209,3 +209,10 @@ X: -138
 Y: -3
 W: 17
 H: 16
+Frame: SavedInstancesDetachHeader
+FrameLevel: 1
+Anchor: CENTER
+X: 0
+Y: 0
+W: 247
+H: 113
