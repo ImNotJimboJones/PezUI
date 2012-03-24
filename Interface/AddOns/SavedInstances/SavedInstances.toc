@@ -2,9 +2,9 @@
 ## Title: SavedInstances
 ## Notes: Tracks raid/instance lockouts on your characters, related currencies and cooldowns.
 ## Author: oscarucb
-## Version: 4.6.0
-## X-Build: 135
-## X-ReleaseDate: 2012-03-12T07:31:01Z
+## Version: 4.6.1
+## X-Build: 140
+## X-ReleaseDate: 2012-03-20T01:09:40Z
 ## X-Revision: $Revision: 103 $
 ## X-AceForum: 14896
 ## X-License: BSD
@@ -16,7 +16,7 @@
 ## SavedVariables: SavedInstancesDB
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed
-## X-Curse-Packaged-Version: 4.6.0
+## X-Curse-Packaged-Version: 4.6.1
 ## X-Curse-Project-Name: SavedInstances
 ## X-Curse-Project-ID: saved_instances
 ## X-Curse-Repository-ID: wow/saved_instances/mainline

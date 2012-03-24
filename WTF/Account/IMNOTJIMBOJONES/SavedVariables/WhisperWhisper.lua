@@ -21,6 +21,23 @@ Broker_WhisperWhisperDB = {
 			["flashLeft"] = true,
 			["whisperList"] = {
 				{
+					"|Kf21|k00000000000000|k", -- [1]
+					{
+						"|cffff0008and if he does it is obvious favoritism", -- [1]
+						"|cffff0008<Deadly Boss Mods> Roilyn is busy fighting against Normal (10) - Madness of Deathwing (100%, 10/10 people alive)", -- [2]
+						"|cffd2d2d2i agree though... id be pissed if brad gets put on it over you", -- [3]
+						"|cffd2d2d2but for the DB", -- [4]
+						"|cffd2d2d2tony def will", -- [5]
+						"|cffff0008and im gonna be supe rpissed if i find out that tony or brad got put on AIMS to do j2ee when im better qualified", -- [6]
+						"|cffff0008im not doing that", -- [7]
+						"|cffd2d2d2thats insane", -- [8]
+						"|cffd2d2d2wow", -- [9]
+						"|cffff0008for like 4 months straight", -- [10]
+					}, -- [2]
+					false, -- [3]
+					true, -- [4]
+				}, -- [1]
+				{
 					"Pezzer", -- [1]
 					{
 						"|cffd2d2d2 |cffffff00|Hachievement:5538:0280000004B625CB:0:0:0:-1:0:0:0:0|h[50,000 Valor Points]|h|r|cffd2d2d2r", -- [1]
@@ -36,7 +53,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 				{
 					"Dùbstëp", -- [1]
 					{
@@ -53,7 +70,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [3]
 				{
 					"Rognon", -- [1]
 					{
@@ -63,7 +80,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [4]
 				{
 					"Varasolan", -- [1]
 					{
@@ -71,7 +88,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [5]
 			},
 			["showFrame"] = false,
 			["flashMaster"] = true,
