@@ -1,9 +1,9 @@
 
 TidyPlatesOptions = {
-	["FriendlyAutomation"] = "No Automation",
+	["FriendlyAutomation"] = "Show during Combat, Hide when Combat ends",
 	["EnableCastWatcher"] = 1,
 	["_EnableMiniButton"] = false,
-	["EnemyAutomation"] = "No Automation",
+	["EnemyAutomation"] = "Show during Combat, Hide when Combat ends",
 	["primary"] = "Neon/|cFFFF4400Damage",
 	["WelcomeShown"] = true,
 	["secondary"] = "Neon/|cFFFF4400Damage",

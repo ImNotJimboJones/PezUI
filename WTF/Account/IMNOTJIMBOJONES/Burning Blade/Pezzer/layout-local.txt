@@ -2,8 +2,8 @@ Version: 1
 Frame: InterfaceOptionsFrame
 FrameLevel: 12
 Anchor: CENTER
-X: 0
-Y: 0
+X: -4
+Y: 37
 W: 899
 H: 634
 Frame: MinimapCluster
@@ -69,6 +69,13 @@ X: -157
 Y: 157
 W: 32
 H: 32
+Frame: FishingWatchDrag
+FrameLevel: 16
+Anchor: LEFT
+X: 24
+Y: 104
+W: 273
+H: 26
 Frame: TenTonHammer
 FrameLevel: 20
 Anchor: CENTER

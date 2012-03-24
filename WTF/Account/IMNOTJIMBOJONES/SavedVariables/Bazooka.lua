@@ -77,11 +77,10 @@ BazookaDB = {
 						["bar"] = 2,
 					},
 					["SpeedyGonzales"] = {
-						["stripColors"] = false,
-						["showLabel"] = true,
-						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["area"] = "left",
 						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -135,10 +134,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
 						["stripColors"] = false,
+						["enabled"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -215,12 +214,12 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["Broker_uClock"] = {
-						["showValue"] = false,
+						["stripColors"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
-						["stripColors"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["pos"] = 9,
 					},
 					["SN - Melee Armor Penetration"] = {
@@ -273,10 +272,8 @@ BazookaDB = {
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -307,8 +304,8 @@ BazookaDB = {
 						["showValue"] = false,
 						["pos"] = 1,
 					},
-					["SN - Melee Crit"] = {
-						["pos"] = 29,
+					["SN - Melee Attack Power"] = {
+						["pos"] = 14,
 					},
 					["MailMinder"] = {
 						["enabled"] = false,
@@ -327,21 +324,23 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["bar"] = 2,
 						["pos"] = 2,
 						["showSuffix"] = false,
-						["bar"] = 2,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,
 					},
-					["SN - Melee Attack Power"] = {
-						["pos"] = 14,
+					["SN - Melee Crit"] = {
+						["pos"] = 29,
 					},
 					["ElkExperience"] = {
 						["pos"] = 5,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["SN - Parry"] = {
 						["pos"] = 26,
