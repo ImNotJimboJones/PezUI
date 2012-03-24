@@ -1,13 +1,12 @@
 
 GoGo_Prefs = {
+	["DruidDisableInCombat"] = false,
 	["AspectPack"] = false,
 	["DruidFlightForm"] = false,
 	["RemoveBuffs"] = 1,
 	["UnknownMounts"] = {
 	},
-	["DruidFormNotRandomize"] = false,
-	["DruidDisableInCombat"] = false,
-	["autodismount"] = 1,
+	["DisableWaterFlight"] = 1,
 	["Zones"] = {
 		["Orgrimmar"] = {
 			["Preferred"] = {
@@ -17,14 +16,15 @@ GoGo_Prefs = {
 			["ZoneID"] = 321,
 		},
 	},
-	["version"] = "4.3.4",
-	["DruidClickForm"] = true,
-	["GlobalPrefMounts"] = {
-	},
 	["GlobalExclude"] = {
 	},
+	["version"] = "4.3.4",
+	["GlobalPrefMounts"] = {
+	},
+	["DruidFormNotRandomize"] = false,
+	["DruidClickForm"] = true,
 	["PaladinUseCrusaderAura"] = false,
-	["DisableWaterFlight"] = 1,
+	["autodismount"] = 1,
 }
 GoGo_DebugLog = {
 }

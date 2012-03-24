@@ -10,22 +10,22 @@ SexyMapDB = {
 					["fontSize"] = 10,
 					["fontColor"] = {
 						["a"] = 1,
-						["r"] = 1,
-						["g"] = 1,
 						["b"] = 1,
+						["g"] = 1,
+						["r"] = 1,
 					},
 					["borderColor"] = {
 						["a"] = 0.7000000178813934,
-						["r"] = 0,
-						["g"] = 0,
 						["b"] = 0,
+						["g"] = 0,
+						["r"] = 0,
 					},
 					["locked"] = true,
 					["backgroundColor"] = {
 						["a"] = 0.7000000178813934,
-						["r"] = 0,
-						["g"] = 0,
 						["b"] = 0,
+						["g"] = 0,
+						["r"] = 0,
 					},
 					["x"] = -0.360107421875,
 				},
@@ -46,18 +46,18 @@ SexyMapDB = {
 					["MacaroonMinimapButton"] = {
 						["hide"] = "never",
 					},
-					["radius"] = 0,
-					["MiniMapInstanceDifficulty"] = {
-						["hide"] = "never",
-					},
 					["zoom"] = {
 						["hide"] = "never",
 					},
+					["MiniMapInstanceDifficulty"] = {
+						["hide"] = "never",
+					},
+					["radius"] = 0,
 					["lockDragging"] = false,
 					["lfg"] = {
 						["hide"] = "never",
 					},
-					["GuildInstanceDifficulty"] = {
+					["tracking"] = {
 						["hide"] = "never",
 					},
 					["MiniMapLFGFrame"] = {
@@ -90,12 +90,12 @@ SexyMapDB = {
 						["GameTimeFrame"] = 39.90599214133294,
 						["MiniMapWorldMapButton"] = 42.60297915413958,
 						["MinimapZoomOut"] = -56.07895483376067,
-						["MiniMapLFGFrame"] = 165.1088245815029,
+						["TimeManagerClockButton"] = -89.45977552062108,
 						["MacaroonMinimapButton"] = 210.0155001660639,
 						["MiniMapTrackingButton"] = 158.8424850050231,
-						["TimeManagerClockButton"] = -89.45977552062108,
+						["MiniMapLFGFrame"] = 165.1088245815029,
 					},
-					["tracking"] = {
+					["GuildInstanceDifficulty"] = {
 						["hide"] = "never",
 					},
 				},
@@ -168,9 +168,9 @@ SexyMapDB = {
 							},
 							["borderColor"] = {
 								["a"] = 1,
-								["r"] = 0.3882352941176471,
-								["g"] = 0.3882352941176471,
 								["b"] = 0.3882352941176471,
+								["g"] = 0.3882352941176471,
+								["r"] = 0.3882352941176471,
 							},
 							["scale"] = 1.07,
 						},
@@ -190,9 +190,9 @@ SexyMapDB = {
 						},
 						["borderColor"] = {
 							["a"] = 1,
-							["r"] = 0.2666666666666667,
-							["g"] = 0.2666666666666667,
 							["b"] = 0.2666666666666667,
+							["g"] = 0.2666666666666667,
+							["r"] = 0.2666666666666667,
 						},
 						["scale"] = 1.07,
 						["alpha"] = 1,
