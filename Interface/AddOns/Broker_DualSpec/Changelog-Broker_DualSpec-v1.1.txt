@@ -1,0 +1,25 @@
+------------------------------------------------------------------------
+r22 | shenton | 2012-03-24 20:58:57 +0000 (Sat, 24 Mar 2012) | 1 line
+Changed paths:
+   A /tags/v1.1 (from /trunk:21)
+
+Tagging as v1.1
+------------------------------------------------------------------------
+r21 | shenton | 2012-03-24 20:56:08 +0000 (Sat, 24 Mar 2012) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Embeds.xml
+   A /trunk/Localization/locales-esES.lua
+   A /trunk/Localization/locales-zhCN.lua
+
+Added Spanish localization
+Added Simplified Chinese localization
+Moved ldb to tools
+------------------------------------------------------------------------
+r19 | shenton | 2012-02-24 10:42:02 +0000 (Fri, 24 Feb 2012) | 1 line
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+
+Toc bump
+------------------------------------------------------------------------
