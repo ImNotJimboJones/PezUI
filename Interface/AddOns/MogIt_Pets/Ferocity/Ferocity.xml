@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+<Script file="CarrionBird.lua"/>
+<Script file="Cat.lua"/>
+<Script file="CoreHound.lua"/>
+<Script file="Devilsaur.lua"/>
+<Script file="Dog.lua"/>
+<Script file="Fox.lua"/>
+<Script file="Hyena.lua"/>
+<Script file="Moth.lua"/>
+<Script file="Raptor.lua"/>
+<Script file="SpiritBeast.lua"/>
+<Script file="Tallstrider.lua"/>
+<Script file="Wasp.lua"/>
+<Script file="Wolf.lua"/>
+</Ui>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+<Script file="Bear.lua"/>
+<Script file="Beetle.lua"/>
+<Script file="Boar.lua"/>
+<Script file="Crab.lua"/>
+<Script file="Crocolisk.lua"/>
+<Script file="Gorilla.lua"/>
+<Script file="Rhino.lua"/>
+<Script file="Scorpid.lua"/>
+<Script file="ShaleSpider.lua"/>
+<Script file="Turtle.lua"/>
+<Script file="WarpStalker.lua"/>
+<Script file="Worm.lua"/>
+</Ui>

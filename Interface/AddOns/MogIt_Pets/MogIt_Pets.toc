@@ -1,0 +1,19 @@
+﻿## Interface: 40300
+## Title: MogIt_Pets
+## Notes: Hunter pets module for MogIt
+## Author: Aelobin (The Maelstrom EU)
+## Version: 2.1
+## LoadOnDemand: 1
+## RequiredDeps: MogIt
+## X-Curse-Packaged-Version: v2.1
+## X-Curse-Project-Name: MogIt_Pets
+## X-Curse-Project-ID: mogit_pets
+## X-Curse-Repository-ID: wow/mogit_pets/mainline
+
+MogIt_Pets.lua
+
+Cunning\Cunning.xml
+Ferocity\Ferocity.xml
+Tenacity\Tenacity.xml
+
+Filters.lua

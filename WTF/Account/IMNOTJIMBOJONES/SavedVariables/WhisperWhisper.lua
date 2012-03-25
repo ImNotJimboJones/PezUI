@@ -7,9 +7,9 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["r"] = 210,
-				["g"] = 210,
 				["b"] = 210,
+				["g"] = 210,
+				["r"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
@@ -24,11 +24,24 @@ Broker_WhisperWhisperDB = {
 			["flashEntireFrame"] = true,
 			["flashDuration"] = 900,
 			["recColor"] = {
-				["r"] = 255,
-				["g"] = 0,
 				["b"] = 8,
+				["g"] = 0,
+				["r"] = 255,
 			},
 			["flashBottom"] = true,
+			["whisperList"] = {
+				{
+					"|Kf21|k00000000000000|k", -- [1]
+					{
+						"|cffd2d2d2not a model tooltip... the informant info tooltip is appended to the item tooltip", -- [1]
+						"|cffff0008i dont have it turned on i guess", -- [2]
+						"|cffff0008to be honest, i didn't even know auctioneer has a model tooltip", -- [3]
+						"|cffd2d2d2i found a solution to the conflict between Informant and MogIt, if you're interested", -- [4]
+					}, -- [2]
+					true, -- [3]
+					true, -- [4]
+				}, -- [1]
+			},
 			["altView"] = false,
 		},
 	},
