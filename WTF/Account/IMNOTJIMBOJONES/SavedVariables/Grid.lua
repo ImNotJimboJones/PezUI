@@ -452,9 +452,9 @@ GridDB = {
 		},
 		["GridStatusLineOfSight"] = {
 		},
-		["GridStatusHots"] = {
+		["GridConfigurableLayouts"] = {
 		},
-		["GridStatusVoiceComm"] = {
+		["GridStatusHots"] = {
 		},
 		["GridLayout"] = {
 			["profiles"] = {
@@ -472,16 +472,16 @@ GridDB = {
 						["bg"] = "GCL Group 25",
 					},
 					["layout"] = "Custom Group Solo",
-					["BackgroundR"] = 0,
-					["BorderG"] = 0,
+					["BackgroundB"] = 0,
+					["PosX"] = 0.1353286686226056,
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["PosX"] = 0.1353286686226056,
+					["borderTexture"] = "None",
 					["anchor"] = "TOP",
 					["horizontal"] = true,
-					["borderTexture"] = "None",
-					["BackgroundB"] = 0,
+					["BorderG"] = 0,
+					["BackgroundR"] = 0,
 				},
 				["Default 10"] = {
 					["anchorRel"] = "TOP",
@@ -527,11 +527,11 @@ GridDB = {
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["PosX"] = 0.135253898188239,
+					["borderTexture"] = "None",
 					["anchor"] = "TOP",
 					["BorderG"] = 0,
 					["BackgroundR"] = 0,
-					["borderTexture"] = "None",
+					["PosX"] = 0.135253898188239,
 				},
 			},
 		},
@@ -548,7 +548,7 @@ GridDB = {
 				},
 			},
 		},
-		["GridConfigurableLayouts"] = {
+		["GridStatusVoiceComm"] = {
 		},
 		["GridStatusReadyCheck"] = {
 		},
@@ -721,9 +721,9 @@ GridDB = {
 						["icon"] = {
 							["alert_direction"] = false,
 							["alert_RaidDebuff"] = true,
+							["role"] = false,
 							["player_target"] = false,
 							["unit_name"] = false,
-							["role"] = false,
 							["unit_health"] = false,
 						},
 						["iconTRcornerleft"] = {

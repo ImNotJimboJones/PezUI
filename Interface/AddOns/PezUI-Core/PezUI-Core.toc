@@ -1,0 +1,6 @@
+## Interface: 40300
+## Title: |cffffe00a<|r|cffff7d0aPezUI|r|cffffe00a>|r |cff69ccf0Core|r
+## Notes: PezUI Core
+## Version: 1.0
+## Author: Pezzer
+PezUI-Core.lua

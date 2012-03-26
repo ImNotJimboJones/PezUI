@@ -25,10 +25,10 @@ GoGo_Prefs = {
 	["GlobalExclude"] = {
 	},
 	["version"] = "4.3.4",
-	["DisableWaterFlight"] = 1,
 	["DruidFormNotRandomize"] = false,
 	["GlobalPrefMounts"] = {
 	},
+	["DisableWaterFlight"] = 1,
 	["PaladinUseCrusaderAura"] = false,
 	["UnknownMounts"] = {
 	},
