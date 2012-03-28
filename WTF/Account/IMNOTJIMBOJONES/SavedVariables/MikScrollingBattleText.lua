@@ -73,10 +73,10 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_ECLIPSE_LUNAR"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_PVP_TRINKET"] = {
+				["MSBT_TRIGGER_NIGHTFALL"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_NIGHTFALL"] = {
+				["MSBT_TRIGGER_PVP_TRINKET"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_KILL_SHOT"] = {
@@ -267,13 +267,13 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_DAMAGE_SHIELD_CRIT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_DAMAGE"] = {
+				["PET_INCOMING_SPELL_ABSORB"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["PET_INCOMING_ABSORB"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["PET_INCOMING_SPELL_ABSORB"] = {
+				["INCOMING_DAMAGE"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DOT_CRIT"] = {
@@ -291,11 +291,11 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_COMBAT_ENTER"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_ENVIRONMENTAL"] = {
+				["PET_INCOMING_SPELL_DEFLECT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["NOTIFICATION_EXTRA_ATTACK"] = {
-					["disabled"] = true,
+				["INCOMING_ENVIRONMENTAL"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_COOLDOWN"] = {
 					["disabled"] = true,
@@ -303,13 +303,13 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_EXPERIENCE_GAIN"] = {
 					["disabled"] = false,
 				},
-				["INCOMING_MISS"] = {
+				["INCOMING_SPELL_DOT"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_HOLY_POWER_CHANGE"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_SPELL_DOT"] = {
+				["INCOMING_MISS"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["PET_INCOMING_IMMUNE"] = {
@@ -360,8 +360,8 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_BUFF_STACK"] = {
 					["disabled"] = true,
 				},
-				["PET_INCOMING_SPELL_DEFLECT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_EXTRA_ATTACK"] = {
+					["disabled"] = true,
 				},
 				["INCOMING_SPELL_RESIST"] = {
 					["scrollArea"] = "Custom2",
@@ -394,10 +394,10 @@ MSBTProfiles_SavedVars = {
 					["stickyDirection"] = "Up",
 					["scrollHeight"] = 90,
 					["offsetX"] = 384,
-					["textAlignIndex"] = 2,
+					["animationStyle"] = "Straight",
 					["iconAlign"] = "Right",
 					["offsetY"] = -325,
-					["animationStyle"] = "Straight",
+					["textAlignIndex"] = 2,
 					["scrollWidth"] = 100,
 				},
 				["Custom2"] = {
@@ -430,9 +430,9 @@ MSBTProfiles_SavedVars = {
 				["Outgoing"] = {
 					["stickyTextAlignIndex"] = 2,
 					["behavior"] = "MSBT_NORMAL",
-					["scrollHeight"] = 90,
-					["stickyDirection"] = "Up",
 					["scrollWidth"] = 100,
+					["stickyDirection"] = "Up",
+					["scrollHeight"] = 90,
 					["offsetX"] = 492,
 					["textAlignIndex"] = 2,
 					["iconAlign"] = "Left",

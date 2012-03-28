@@ -1,6 +1,0 @@
-## Interface: 40300
-## Title: TipTacAuctioneer
-## Notes: Configures Auctioneer and Informant to match the TipTac look and feel
-## Version: 1.0
-## Author: Pezzer
-TipTacAuctioneer.lua

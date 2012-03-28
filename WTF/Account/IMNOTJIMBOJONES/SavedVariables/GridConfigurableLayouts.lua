@@ -3,7 +3,6 @@ GridConfigurableLayoutsDB = {
 	["blizzRolesRule"] = false,
 	["useBlizzRoles"] = true,
 	["debug"] = false,
-	["configLayout"] = "Custom Group Solo",
 	["filterColors"] = {
 		["ranged"] = {
 			["a"] = 0.85,
@@ -120,14 +119,26 @@ GridConfigurableLayoutsDB = {
 			["r"] = 0.75,
 		},
 	},
-	["filterToColor"] = "tank",
 	["layouts"] = {
 		["GCL Group 10"] = {
 			["petOptions"] = {
 				["HUNTER"] = true,
 				["DEATHKNIGHT"] = true,
-				["allPets"] = true,
 				["WARLOCK"] = true,
+				["allPets"] = true,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -152,23 +163,8 @@ GridConfigurableLayoutsDB = {
 				},
 				["sortMethod"] = "role",
 			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 5,
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -182,13 +178,28 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 5,
+			["unitsPerColumn"] = 5,
 		},
 		["GCL Group 25"] = {
 			["petOptions"] = {
 				["HUNTER"] = true,
 				["DEATHKNIGHT"] = true,
-				["allPets"] = true,
 				["WARLOCK"] = true,
+				["allPets"] = true,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -213,23 +224,8 @@ GridConfigurableLayoutsDB = {
 				},
 				["sortMethod"] = "role",
 			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 8,
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -243,13 +239,28 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 8,
+			["unitsPerColumn"] = 5,
 		},
 		["GCL Default"] = {
 			["petOptions"] = {
 				["HUNTER"] = true,
 				["DEATHKNIGHT"] = true,
-				["allPets"] = false,
 				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -274,23 +285,8 @@ GridConfigurableLayoutsDB = {
 				},
 				["sortMethod"] = "name",
 			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 			["createBorders"] = true,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 6,
 			["groupType"] = {
 				"tank", -- [1]
 				"melee", -- [2]
@@ -304,13 +300,28 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 6,
+			["unitsPerColumn"] = 5,
 		},
 		["Test"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
 				["HUNTER"] = true,
-				["allPets"] = false,
 				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -335,23 +346,8 @@ GridConfigurableLayoutsDB = {
 				},
 				["sortMethod"] = "name",
 			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 5,
 			["groupType"] = {
 				"ranged", -- [1]
 				"pets", -- [2]
@@ -365,26 +361,15 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 5,
+			["unitsPerColumn"] = 5,
 		},
 		["Custom Group 10"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
 				["HUNTER"] = true,
-				["WARLOCK"] = true,
 				["allPets"] = true,
-			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
+				["WARLOCK"] = true,
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -410,32 +395,6 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = true,
 				["sortMethod"] = "role",
 			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["groupType"] = {
-				"rg1", -- [1]
-				"everyone", -- [2]
-				"pets", -- [3]
-				"none", -- [4]
-				"none", -- [5]
-				"none", -- [6]
-				"none", -- [7]
-				"none", -- [8]
-				"none", -- [9]
-				"none", -- [10]
-				"none", -- [11]
-			},
-			["numGroups"] = 3,
-			["unitsPerColumn"] = 5,
-		},
-		["Custom Group 5"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["allPets"] = false,
-				["WARLOCK"] = true,
-				["HUNTER"] = true,
-			},
-			["unitsPerColumn"] = 5,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -451,6 +410,29 @@ GridConfigurableLayoutsDB = {
 			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 3,
+			["groupType"] = {
+				"rg1", -- [1]
+				"everyone", -- [2]
+				"pets", -- [3]
+				"none", -- [4]
+				"none", -- [5]
+				"none", -- [6]
+				"none", -- [7]
+				"none", -- [8]
+				"none", -- [9]
+				"none", -- [10]
+				"none", -- [11]
+			},
+		},
+		["Custom Group 5"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+				["HUNTER"] = true,
+			},
 			["groupType"] = {
 				"everyone", -- [1]
 				"pets", -- [2]
@@ -464,7 +446,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 2,
 			["sortOptions"] = {
 				["sortOrder"] = {
 					["role"] = {
@@ -489,13 +470,43 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = false,
 				["sortMethod"] = "role",
 			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 2,
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
 		},
 		["Custom Group Solo"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
 				["HUNTER"] = true,
-				["allPets"] = false,
 				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -521,23 +532,8 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = true,
 				["sortMethod"] = "role",
 			},
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 2,
 			["groupType"] = {
 				"everyone", -- [1]
 				"pets", -- [2]
@@ -551,7 +547,11 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 2,
+			["unitsPerColumn"] = 5,
 		},
 	},
+	["filterToColor"] = "tank",
+	["configLayout"] = "Custom Group Solo",
 	["checkOOZFrequency"] = 3,
 }

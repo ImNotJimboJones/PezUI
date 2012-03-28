@@ -153,10 +153,10 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["showValue"] = false,
-						["area"] = "left",
 						["stripColors"] = false,
+						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["showValue"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -210,10 +210,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showupdates"] = "",
-						["enabled"] = false,
 						["showValue"] = false,
+						["enabled"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["bar"] = 2,
 						["pos"] = 4,
 					},
@@ -317,19 +317,19 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 3,
 					},
+					["SN - Ranged Crit"] = {
+						["pos"] = 27,
+					},
+					["Broker_wDurability"] = {
+						["enabled"] = false,
+						["pos"] = 9,
+					},
 					["shFps"] = {
 						["disableMouseInCombat"] = true,
 						["disableTooltip"] = true,
 						["disableMouseOutOfCombat"] = true,
 						["bar"] = 2,
 						["pos"] = 1,
-					},
-					["Broker_wDurability"] = {
-						["enabled"] = false,
-						["pos"] = 9,
-					},
-					["SN - Ranged Crit"] = {
-						["pos"] = 27,
 					},
 					["DungeonHelper"] = {
 						["area"] = "cright",
@@ -339,16 +339,16 @@ BazookaDB = {
 					["SN - Vengeance"] = {
 						["pos"] = 16,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -370,22 +370,22 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
+					["BrokerXPBar"] = {
+						["pos"] = 3,
+					},
 					["SN - Melee Crit"] = {
 						["pos"] = 29,
 					},
 					["SN - Melee Attack Power"] = {
 						["pos"] = 14,
 					},
-					["BrokerXPBar"] = {
-						["pos"] = 3,
-					},
 					["BrokerToolBox - Money"] = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["pos"] = 2,
 						["showSuffix"] = false,
 						["bar"] = 2,
-						["pos"] = 2,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -439,12 +439,12 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["Broker_uClock"] = {
-						["showupdates"] = "",
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["pos"] = 9,
-						["showValue"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["bar"] = 2,
 					},
 					["SN - Ranged Attack Power"] = {
