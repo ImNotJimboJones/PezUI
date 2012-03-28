@@ -13,7 +13,7 @@ SkadaDB = {
 			["windows"] = {
 				{
 					["mode"] = "Healing and Absorbs",
-					["barheight"] = 14,
+					["point"] = "BOTTOM",
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
 						["b"] = 0.3019607843137255,
@@ -25,7 +25,7 @@ SkadaDB = {
 						["g"] = 0.7490196078431373,
 						["r"] = 0.7490196078431373,
 					},
-					["point"] = "BOTTOM",
+					["barheight"] = 14,
 					["barslocked"] = true,
 					["background"] = {
 						["color"] = {

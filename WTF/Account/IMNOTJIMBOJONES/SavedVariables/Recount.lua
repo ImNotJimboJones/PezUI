@@ -58,8 +58,8 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -2496814848,
-			["DetailWindowX"] = 406458432,
+			["DetailWindowY"] = -3455799040,
+			["DetailWindowX"] = 562572224,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["Scaling"] = 0.85,
@@ -88,8 +88,8 @@ RecountDB = {
 				},
 			},
 			["CurDataSet"] = "LastFightData",
-			["LastInstanceName"] = "Ragefire Chasm",
 			["MainWindowMode"] = 2,
+			["LastInstanceName"] = "Ragefire Chasm",
 			["MainWindowWidth"] = 226.0703887939453,
 		},
 		["Pezzer - Burning Blade"] = {
@@ -116,7 +116,7 @@ RecountDB = {
 			["MaxFights"] = 25,
 			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = 0,
 			["CurDataSet"] = "OverallData",
 			["Colors"] = {
 				["Window"] = {
@@ -142,7 +142,7 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = 0,
+			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,

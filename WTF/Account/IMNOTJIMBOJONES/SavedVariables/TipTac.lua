@@ -54,7 +54,7 @@ TipTac_Config = {
 		0, -- [1]
 		0, -- [2]
 		0, -- [3]
-		0.6899999976158142, -- [4]
+		0.8500000089406967, -- [4]
 	},
 	["hideDefaultBar"] = false,
 	["healthBar"] = false,
@@ -70,28 +70,28 @@ TipTac_Config = {
 	["if_showIcon"] = false,
 	["showGuildRank"] = true,
 	["gradientTip"] = true,
-	["if_showItemLevelAndId"] = false,
+	["if_itemQualityBorder"] = false,
 	["iconCombat"] = false,
 	["fontSize"] = 12,
-	["if_itemQualityBorder"] = false,
+	["if_showItemLevelAndId"] = false,
 	["colRace"] = "|cffffffff",
 	["colGuild"] = "|cff40ff40",
 	["showBuffs"] = false,
 	["reactText"] = false,
 	["showTargetedBy"] = false,
 	["anchorWorldUnitPoint"] = "BOTTOMRIGHT",
-	["backdropInsets"] = 4,
+	["classification_worldboss"] = "%s|r (Boss) ",
 	["anchorFrameTipType"] = "normal",
 	["classColoredBorder"] = false,
-	["classification_worldboss"] = "%s|r (Boss) ",
+	["backdropInsets"] = 4,
 	["iconRaid"] = false,
 	["classification_rareelite"] = "+%s|r (Rare) ",
 	["if_borderlessIcons"] = false,
 	["showTalents"] = true,
 	["colorNameByClass"] = true,
 	["talentFormat"] = 2,
-	["iconAnchor"] = "TOPLEFT",
 	["colSameGuild"] = "|cffff32ff",
+	["iconAnchor"] = "TOPLEFT",
 	["healthBarColor"] = {
 		0.3, -- [1]
 		0.9, -- [2]

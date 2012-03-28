@@ -15,7 +15,7 @@ Currencyflow_DB = {
 					["maxReached397"] = false,
 					["maxReached393"] = false,
 					["charname"] = "Pezzer",
-					["lastWeekEarned396"] = 800,
+					["lastWeekEarned396"] = 0,
 					["ignore"] = false,
 					["maxReached392"] = false,
 					["maxReached398"] = false,
@@ -38,7 +38,6 @@ Currencyflow_DB = {
 					[402] = 15,
 					["maxReached401"] = false,
 					["maxReached390"] = false,
-					["maxReached385"] = false,
 					["history"] = {
 						[15420] = {
 							[395] = {
@@ -155,7 +154,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[416] = {
+							[385] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -167,7 +166,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[385] = {
+							[416] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -296,7 +295,23 @@ Currencyflow_DB = {
 							[390] = {
 							},
 						},
+						[15426] = {
+							[395] = {
+							},
+							[396] = {
+							},
+							["time"] = 1661,
+							["gold"] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[392] = {
+							},
+							[390] = {
+							},
+						},
 					},
+					["maxReached385"] = false,
 					[396] = 7750,
 					["maxReached384"] = false,
 					["maxReached400"] = false,

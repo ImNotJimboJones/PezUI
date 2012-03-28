@@ -10,9 +10,9 @@ ilvlDB = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
 						["ilvl"] = 403,
-						["class"] = "HUNTER",
-						["key"] = "0x0280000004B625CB",
 						["level"] = 85,
+						["key"] = "0x0280000004B625CB",
+						["class"] = "HUNTER",
 					},
 				},
 			},

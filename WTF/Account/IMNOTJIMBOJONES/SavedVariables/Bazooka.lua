@@ -147,10 +147,10 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["disableMouseInCombat"] = true,
-						["area"] = "left",
 						["showValue"] = false,
+						["area"] = "left",
 						["stripColors"] = false,
+						["disableMouseInCombat"] = true,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -204,10 +204,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["stripColors"] = false,
-						["enabled"] = false,
 						["showupdates"] = "",
+						["enabled"] = false,
 						["showValue"] = false,
+						["stripColors"] = false,
 						["bar"] = 2,
 						["pos"] = 4,
 					},
@@ -330,16 +330,16 @@ BazookaDB = {
 					["SN - Vengeance"] = {
 						["pos"] = 16,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
-					},
-					["SN - MP5"] = {
-						["pos"] = 18,
-					},
 					["SocialState"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 4,
+					},
+					["SN - MP5"] = {
+						["pos"] = 18,
+					},
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -361,11 +361,11 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["SN - Melee Attack Power"] = {
-						["pos"] = 14,
-					},
 					["SN - Melee Crit"] = {
 						["pos"] = 29,
+					},
+					["SN - Melee Attack Power"] = {
+						["pos"] = 14,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,
@@ -374,9 +374,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["showSuffix"] = false,
 						["bar"] = 2,
 						["pos"] = 2,
-						["showSuffix"] = false,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -429,12 +429,12 @@ BazookaDB = {
 						["pos"] = 24,
 					},
 					["Broker_uClock"] = {
-						["stripColors"] = false,
+						["showupdates"] = "",
 						["showIcon"] = false,
 						["enabled"] = false,
 						["pos"] = 9,
-						["showupdates"] = "",
 						["showValue"] = false,
+						["stripColors"] = false,
 						["bar"] = 2,
 					},
 					["SN - Ranged Attack Power"] = {
