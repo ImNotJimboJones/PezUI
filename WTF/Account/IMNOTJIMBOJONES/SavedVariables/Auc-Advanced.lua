@@ -27,7 +27,14 @@ AucAdvancedConfig = {
 			},
 		},
 		["configator.left"] = 322.8235778808594,
-		["scancommit.targetFPS"] = 30,
+		["stat"] = {
+			["wowecon"] = {
+			},
+			["sales"] = {
+				["ignoredsigs"] = {
+				},
+			},
+		},
 		["filter"] = {
 			["basic"] = {
 			},
@@ -43,8 +50,7 @@ AucAdvancedConfig = {
 			["simpleauc"] = {
 				["tooltip"] = false,
 			},
-			["automagic"] = {
-				["uierrormsg"] = 1,
+			["scanstart"] = {
 			},
 			["mover"] = {
 				["anchors"] = {
@@ -55,20 +61,14 @@ AucAdvancedConfig = {
 					-104, -- [5]
 				},
 			},
-			["scanstart"] = {
+			["automagic"] = {
+				["uierrormsg"] = 1,
 			},
 			["pricelevel"] = {
 			},
 		},
 		["ModTTShow"] = "never",
-		["stat"] = {
-			["sales"] = {
-				["ignoredsigs"] = {
-				},
-			},
-			["wowecon"] = {
-			},
-		},
+		["scancommit.targetFPS"] = 30,
 		["configator.top"] = 676.7647705078125,
 	},
 	["users.Burning Blade.Pezzer"] = "Default",
@@ -80,15 +80,15 @@ AucAdvancedData = {
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Global"] = {
-			["configator.left"] = 318.0000305175781,
-			["configator.top"] = 730.0000610351562,
-		},
+		["Version"] = 1,
 		["Current"] = {
 			["snatch.itemsList"] = {
 			},
 		},
-		["Version"] = 1,
+		["Global"] = {
+			["configator.left"] = 318.0000305175781,
+			["configator.top"] = 730.0000610351562,
+		},
 		["SavedSearches"] = {
 		},
 	},

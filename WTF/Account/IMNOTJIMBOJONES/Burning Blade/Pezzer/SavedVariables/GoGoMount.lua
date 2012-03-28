@@ -1,21 +1,5 @@
 
 GoGo_Prefs = {
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["DruidFlightForm"] = false,
-	["RemoveBuffs"] = 1,
-	["UnknownMounts"] = {
-	},
-	["DruidFormNotRandomize"] = false,
-	["DruidClickForm"] = true,
-	["autodismount"] = 1,
-	["version"] = "4.3.4",
-	["DisableWaterFlight"] = 1,
-	["GlobalPrefMounts"] = {
-	},
-	["GlobalExclude"] = {
-	},
-	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Durotar"] = {
 			["Preferred"] = {
@@ -24,6 +8,13 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 4,
 		},
+		["Hyjal Summit"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
@@ -31,6 +22,22 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
+	},
+	["DruidClickForm"] = true,
+	["DruidFlightForm"] = false,
+	["GlobalExclude"] = {
+	},
+	["autodismount"] = 1,
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["RemoveBuffs"] = 1,
+	["version"] = "4.3.4",
+	["UnknownMounts"] = {
+	},
+	["DruidFormNotRandomize"] = false,
+	["DisableWaterFlight"] = 1,
+	["PaladinUseCrusaderAura"] = false,
+	["GlobalPrefMounts"] = {
 	},
 }
 GoGo_DebugLog = {
