@@ -1,10 +1,10 @@
 --- AceConfigDialog-3.0 generates AceGUI-3.0 based windows based on option tables.
 -- @class file
 -- @name AceConfigDialog-3.0
--- @release $Id: AceConfigDialog-3.0.lua 1048 2012-03-24 19:38:00Z mikk $
+-- @release $Id: AceConfigDialog-3.0.lua 998 2010-12-01 18:39:53Z nevcairiel $
 
 local LibStub = LibStub
-local MAJOR, MINOR = "AceConfigDialog-3.0", 56
+local MAJOR, MINOR = "AceConfigDialog-3.0", 54
 local AceConfigDialog, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not AceConfigDialog then return end
@@ -580,7 +580,6 @@ local function confirmPopup(appName, rootframe, basepath, info, message, func, .
 	t.text = message
 	t.button1 = ACCEPT
 	t.button2 = CANCEL
-	t.preferredIndex = 3
 	local dialog, oldstrata
 	t.OnAccept = function()
 		safecall(func, unpack(t))
@@ -1316,7 +1315,7 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 				elseif v.type == "color" then
 					control = gui:Create("ColorPicker")
 					control:SetLabel(name)
-					control:SetHasAlpha(GetOptionsMemberValue("hasAlpha",v, options, path, appName))
+					control:SetHasAlpha(v.hasAlpha)
 					control:SetColor(GetOptionsMemberValue("get",v, options, path, appName))
 					control:SetCallback("OnValueChanged",ActivateControl)
 					control:SetCallback("OnValueConfirmed",ActivateControl)
