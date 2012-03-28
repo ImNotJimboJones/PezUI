@@ -1,0 +1,22 @@
+------------------------------------------------------------------------
+r58 | slaren | 2012-01-06 20:40:22 +0000 (Fri, 06 Jan 2012) | 2 lines
+Changed paths:
+   A /tags/v1.1d (from /trunk:57)
+
+Tagging as v1.1d
+
+------------------------------------------------------------------------
+r57 | slaren | 2012-01-06 20:39:46 +0000 (Fri, 06 Jan 2012) | 2 lines
+Changed paths:
+   M /trunk/DeathNote.toc
+   M /trunk/SurvivalIDs.lua
+
+- Added Warrior and DK tier procs to the list of survival cooldowns (thanks Typhosy)
+- Updated .toc version
+------------------------------------------------------------------------
+r56 | slaren | 2012-01-06 20:23:27 +0000 (Fri, 06 Jan 2012) | 1 line
+Changed paths:
+   M /trunk/DataCapture.lua
+
+- Fix for new SoR behaviour
+------------------------------------------------------------------------

@@ -1,0 +1,47 @@
+------------------------------------------------------------------------
+r502 | danielbarron | 2011-12-26 07:56:23 +0000 (Mon, 26 Dec 2011) | 2 lines
+Changed paths:
+   A /tags/v4.32 (from /trunk:501)
+
+RaidBuffStatus:
+- Updated to include new translations.
+------------------------------------------------------------------------
+r500 | oscarucb | 2011-12-06 04:32:19 +0000 (Tue, 06 Dec 2011) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+   M /trunk/ToolScanner.lua
+
+fix ticket 347: Well Fed and Weapon checks malfunctioning on DS gunship
+
+------------------------------------------------------------------------
+r499 | oscarucb | 2011-12-01 22:49:56 +0000 (Thu, 01 Dec 2011) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+fix zone checking for Wyrmrest Summit in Dragon Soul
+
+------------------------------------------------------------------------
+r498 | oscarucb | 2011-11-30 22:18:12 +0000 (Wed, 30 Nov 2011) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+better fix to BG queue issue
+
+------------------------------------------------------------------------
+r496 | danielbarron | 2011-11-30 19:49:09 +0000 (Wed, 30 Nov 2011) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/RaidBuffStatus.toc
+
+RaidBuffStatus:
+- Fixed error with battle ground queue checking.  Most often seen when being invited to a group.  Thanks to Dridzt.
+------------------------------------------------------------------------
+r495 | oscarucb | 2011-09-02 01:17:15 +0000 (Fri, 02 Sep 2011) | 2 lines
+Changed paths:
+   A /trunk/Localization/ptBR.lua
+   M /trunk/RaidBuffStatus.toc
+
+add ptBR locale
+
+------------------------------------------------------------------------

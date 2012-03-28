@@ -4,16 +4,16 @@ BazookaDB = {
 		["LibDualSpec-1.0"] = {
 		},
 	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["global"] = {
 		["bars"] = {
 			["iconSize"] = 14,
 			["pluginOpacity"] = 0.5,
 		},
-		["enableOpacityWorkaround"] = false,
 		["sortDisabledLast"] = true,
-	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
+		["enableOpacityWorkaround"] = false,
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -21,6 +21,82 @@ BazookaDB = {
 			["adjustFrames"] = false,
 			["locked"] = true,
 			["plugins"] = {
+				["launcher"] = {
+					["RaidBuffStatus"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["PitBull4"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["Grid"] = {
+						["enabled"] = false,
+						["pos"] = 4,
+					},
+					["GearScore"] = {
+						["enabled"] = false,
+						["pos"] = 3,
+					},
+					["Bazooka"] = {
+						["enabled"] = false,
+					},
+					["Prat"] = {
+						["enabled"] = false,
+						["pos"] = 11,
+					},
+					["SavedInstances"] = {
+						["pos"] = 6,
+					},
+					["Swatter"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
+					["Auc-Util-SearchUI"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+					},
+					["AddonMgr"] = {
+						["enabled"] = false,
+						["pos"] = 5,
+					},
+					["Omen"] = {
+						["enabled"] = false,
+						["pos"] = 10,
+					},
+					["AucAdvanced"] = {
+						["enabled"] = false,
+						["pos"] = 6,
+					},
+					["Auc-Util-AutoMagic"] = {
+						["enabled"] = false,
+						["pos"] = 3,
+					},
+					["MogIt"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+					},
+					["BrokerToolBox"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["Informant"] = {
+						["enabled"] = false,
+						["pos"] = 13,
+					},
+					["BrokerRecountFu"] = {
+						["enabled"] = false,
+						["pos"] = 2,
+					},
+					["kgPanels"] = {
+						["enabled"] = false,
+						["pos"] = 7,
+					},
+					["Masque"] = {
+						["enabled"] = false,
+						["pos"] = 9,
+					},
+				},
 				["data source"] = {
 					["YssEquipmentBroker"] = {
 						["enabled"] = false,
@@ -28,8 +104,8 @@ BazookaDB = {
 					},
 					["LonnyMenu"] = {
 						["area"] = "left",
-						["pos"] = 2,
 						["bar"] = 2,
+						["pos"] = 2,
 					},
 					["SN - Melee Haste"] = {
 						["pos"] = 3,
@@ -52,41 +128,41 @@ BazookaDB = {
 						["pos"] = 8,
 					},
 					["Broker_WhisperWhisper"] = {
-						["pos"] = 2,
 						["bar"] = 3,
+						["pos"] = 2,
 					},
 					["shLatency"] = {
 						["disableMouseInCombat"] = true,
 						["showIcon"] = false,
 						["disableTooltip"] = true,
-						["pos"] = 2,
-						["bar"] = 2,
 						["disableMouseOutOfCombat"] = true,
+						["bar"] = 2,
+						["pos"] = 2,
 					},
 					["BrokerToolBox - Repair"] = {
 						["area"] = "left",
-						["bar"] = 3,
 						["pos"] = 3,
+						["bar"] = 3,
 					},
 					["SN - Melee Mastery"] = {
 						["pos"] = 12,
 					},
 					["Currencyflow"] = {
 						["area"] = "left",
-						["pos"] = 1,
 						["bar"] = 2,
+						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["stripColors"] = false,
-						["area"] = "left",
-						["disableMouseInCombat"] = true,
 						["showValue"] = false,
+						["area"] = "left",
+						["stripColors"] = false,
+						["disableMouseInCombat"] = true,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
-						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
+						["showValue"] = false,
 						["pos"] = 13,
 					},
 					["SN - Spell Haste"] = {
@@ -124,8 +200,8 @@ BazookaDB = {
 						["pos"] = 22,
 					},
 					["BrokerToolBox - Equipments"] = {
-						["enabled"] = false,
 						["showValue"] = false,
+						["enabled"] = false,
 						["pos"] = 10,
 					},
 					["Broker_Leveltime"] = {
@@ -134,12 +210,12 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
-						["stripColors"] = false,
 						["showupdates"] = "",
-						["pos"] = 4,
+						["enabled"] = false,
+						["showValue"] = false,
+						["stripColors"] = false,
 						["bar"] = 2,
+						["pos"] = 4,
 					},
 					["Sexy Reputation"] = {
 						["pos"] = 7,
@@ -147,8 +223,8 @@ BazookaDB = {
 					["Broker_Money"] = {
 						["area"] = "left",
 						["enabled"] = false,
-						["pos"] = 2,
 						["bar"] = 2,
+						["pos"] = 2,
 					},
 					["LauncherMenu"] = {
 						["enabled"] = false,
@@ -170,9 +246,9 @@ BazookaDB = {
 						["pos"] = 6,
 					},
 					["BrokerToolBox - Clock"] = {
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
-						["showValue"] = false,
 						["pos"] = 4,
 					},
 					["Broker_Speed_Horizontal"] = {
@@ -181,8 +257,8 @@ BazookaDB = {
 					},
 					["Broker Currency"] = {
 						["enabled"] = false,
-						["bar"] = 2,
 						["pos"] = 13,
+						["bar"] = 2,
 					},
 					["SN - Ranged Armor Penetration"] = {
 						["pos"] = 10,
@@ -197,30 +273,27 @@ BazookaDB = {
 					},
 					["BrokerToolBox - Token"] = {
 						["area"] = "center",
-						["bar"] = 2,
 						["pos"] = 12,
+						["bar"] = 2,
 					},
 					["Broker_DualSpecObject"] = {
 						["area"] = "left",
-						["bar"] = 3,
 						["pos"] = 2,
+						["bar"] = 3,
 					},
 					["Aanye_XP"] = {
 						["pos"] = 6,
+					},
+					["SN - Ranged Speed"] = {
+						["pos"] = 24,
 					},
 					["Broker_DurabilityInfo"] = {
 						["area"] = "cright",
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["Broker_uClock"] = {
-						["showValue"] = false,
-						["showIcon"] = false,
-						["enabled"] = false,
-						["bar"] = 2,
-						["stripColors"] = false,
-						["showupdates"] = "",
-						["pos"] = 9,
+					["SN - Expertise"] = {
+						["pos"] = 28,
 					},
 					["SN - Melee Armor Penetration"] = {
 						["pos"] = 13,
@@ -229,8 +302,9 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 16,
 					},
-					["SN - Ranged Speed"] = {
-						["pos"] = 24,
+					["LDB_PitchSpeed"] = {
+						["enabled"] = false,
+						["pos"] = 5,
 					},
 					["SN - Spell Hit"] = {
 						["pos"] = 17,
@@ -246,16 +320,16 @@ BazookaDB = {
 					["shFps"] = {
 						["disableMouseInCombat"] = true,
 						["disableTooltip"] = true,
-						["pos"] = 1,
-						["bar"] = 2,
 						["disableMouseOutOfCombat"] = true,
+						["bar"] = 2,
+						["pos"] = 1,
 					},
 					["Broker_wDurability"] = {
 						["enabled"] = false,
 						["pos"] = 9,
 					},
-					["LDB_Guild"] = {
-						["pos"] = 6,
+					["SN - Ranged Crit"] = {
+						["pos"] = 27,
 					},
 					["DungeonHelper"] = {
 						["area"] = "cright",
@@ -265,9 +339,10 @@ BazookaDB = {
 					["SN - Vengeance"] = {
 						["pos"] = 16,
 					},
-					["Broker_Equipment"] = {
+					["SocialState"] = {
+						["area"] = "left",
 						["enabled"] = false,
-						["pos"] = 23,
+						["pos"] = 4,
 					},
 					["SN - MP5"] = {
 						["pos"] = 18,
@@ -279,15 +354,14 @@ BazookaDB = {
 						["showValue"] = false,
 						["showIcon"] = false,
 						["area"] = "left",
-						["pos"] = 4,
 						["bar"] = 3,
+						["pos"] = 4,
 					},
 					["SN - Spell Crit"] = {
 						["pos"] = 23,
 					},
-					["Broker_Wallet"] = {
-						["enabled"] = false,
-						["pos"] = 18,
+					["ElkExperience"] = {
+						["pos"] = 5,
 					},
 					["SN - Dmg Reduction"] = {
 						["pos"] = 20,
@@ -296,57 +370,57 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["YssDrop"] = {
-						["stripColors"] = false,
-						["area"] = "left",
-						["alignment"] = "LEFT",
-						["showText"] = false,
-						["showValue"] = false,
-						["pos"] = 1,
+					["SN - Melee Crit"] = {
+						["pos"] = 29,
 					},
 					["SN - Melee Attack Power"] = {
 						["pos"] = 14,
 					},
-					["MailMinder"] = {
-						["enabled"] = false,
-						["stripColors"] = false,
+					["BrokerXPBar"] = {
 						["pos"] = 3,
+					},
+					["BrokerToolBox - Money"] = {
+						["showValue"] = false,
+						["area"] = "left",
+						["enabled"] = false,
+						["showSuffix"] = false,
+						["bar"] = 2,
+						["pos"] = 2,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
 						["enabled"] = false,
 						["showText"] = false,
 						["showValue"] = false,
+						["bar"] = 2,
 						["pos"] = 10,
-						["bar"] = 2,
 					},
-					["BrokerToolBox - Money"] = {
-						["showValue"] = false,
-						["area"] = "left",
+					["MailMinder"] = {
+						["stripColors"] = false,
 						["enabled"] = false,
-						["pos"] = 2,
-						["showSuffix"] = false,
-						["bar"] = 2,
-					},
-					["BrokerXPBar"] = {
 						["pos"] = 3,
 					},
-					["SN - Melee Crit"] = {
-						["pos"] = 29,
-					},
-					["ElkExperience"] = {
-						["pos"] = 5,
-					},
-					["SocialState"] = {
+					["YssDrop"] = {
+						["stripColors"] = false,
 						["area"] = "left",
+						["showText"] = false,
+						["alignment"] = "LEFT",
+						["showValue"] = false,
+						["pos"] = 1,
+					},
+					["Broker_Wallet"] = {
 						["enabled"] = false,
-						["pos"] = 4,
+						["pos"] = 18,
+					},
+					["Broker_Equipment"] = {
+						["enabled"] = false,
+						["pos"] = 23,
 					},
 					["SN - Parry"] = {
 						["pos"] = 26,
 					},
-					["SN - Ranged Crit"] = {
-						["pos"] = 27,
+					["LDB_Guild"] = {
+						["pos"] = 6,
 					},
 					["AllPlayed"] = {
 						["area"] = "left",
@@ -360,85 +434,21 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 19,
 					},
-					["LDB_PitchSpeed"] = {
+					["Death Note"] = {
 						["enabled"] = false,
-						["pos"] = 5,
+						["pos"] = 1,
 					},
-					["SN - Expertise"] = {
-						["pos"] = 28,
+					["Broker_uClock"] = {
+						["showupdates"] = "",
+						["showIcon"] = false,
+						["enabled"] = false,
+						["pos"] = 9,
+						["showValue"] = false,
+						["stripColors"] = false,
+						["bar"] = 2,
 					},
 					["SN - Ranged Attack Power"] = {
 						["pos"] = 30,
-					},
-				},
-				["launcher"] = {
-					["PitBull4"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["Grid"] = {
-						["enabled"] = false,
-						["pos"] = 4,
-					},
-					["GearScore"] = {
-						["pos"] = 2,
-					},
-					["Bazooka"] = {
-						["enabled"] = false,
-					},
-					["Prat"] = {
-						["enabled"] = false,
-						["pos"] = 11,
-					},
-					["SavedInstances"] = {
-						["pos"] = 6,
-					},
-					["Swatter"] = {
-						["enabled"] = false,
-						["pos"] = 12,
-					},
-					["Auc-Util-SearchUI"] = {
-						["enabled"] = false,
-						["pos"] = 8,
-					},
-					["AddonMgr"] = {
-						["enabled"] = false,
-						["pos"] = 5,
-					},
-					["kgPanels"] = {
-						["enabled"] = false,
-						["pos"] = 7,
-					},
-					["BrokerRecountFu"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["Informant"] = {
-						["enabled"] = false,
-						["pos"] = 13,
-					},
-					["BrokerToolBox"] = {
-						["enabled"] = false,
-						["pos"] = 2,
-					},
-					["MogIt"] = {
-						["pos"] = 8,
-					},
-					["Auc-Util-AutoMagic"] = {
-						["enabled"] = false,
-						["pos"] = 3,
-					},
-					["AucAdvanced"] = {
-						["enabled"] = false,
-						["pos"] = 6,
-					},
-					["Omen"] = {
-						["enabled"] = false,
-						["pos"] = 10,
-					},
-					["Masque"] = {
-						["enabled"] = false,
-						["pos"] = 9,
 					},
 				},
 			},
@@ -448,7 +458,7 @@ BazookaDB = {
 					["bgTexture"] = "Solid",
 					["bgTileSize"] = 19,
 					["y"] = -0.7883102893829346,
-					["x"] = -3.996078729629517,
+					["relPoint"] = "TOPLEFT",
 					["fitToContentWidth"] = true,
 					["frameWidth"] = 97.20001983642578,
 					["pos"] = 0,
@@ -460,7 +470,7 @@ BazookaDB = {
 					["iconSize"] = 10,
 					["frameHeight"] = 15.0000467300415,
 					["attach"] = "none",
-					["relPoint"] = "TOPLEFT",
+					["x"] = -3.996078729629517,
 					["textColor"] = {
 						["a"] = 1,
 						["g"] = 0.8196078431372549,
@@ -497,8 +507,8 @@ BazookaDB = {
 					["fontSize"] = 10,
 					["point"] = "BOTTOMLEFT",
 					["x"] = 1.170600771903992,
-					["pluginOpacity"] = 0.75,
 					["iconSize"] = 14,
+					["pluginOpacity"] = 0.75,
 					["frameHeight"] = 26.00001335144043,
 					["fadeInCombat"] = true,
 				}, -- [3]

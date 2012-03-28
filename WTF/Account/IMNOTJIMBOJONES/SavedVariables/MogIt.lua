@@ -1,20 +1,20 @@
 
 MogItDB = {
-	["global"] = {
-		["version"] = "2.2.1",
-	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
 	},
+	["global"] = {
+		["version"] = "2.2.1",
+	},
 	["profiles"] = {
 		["Default"] = {
-			["clearOnPreviewSet"] = true,
+			["tooltipMog"] = false,
 			["minimap"] = {
 				["hide"] = true,
 			},
 			["tooltipMouse"] = true,
 			["tooltipRotate"] = false,
-			["tooltipMog"] = false,
+			["clearOnPreviewSet"] = true,
 		},
 	},
 }

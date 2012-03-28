@@ -15,8 +15,8 @@ TomTomDB = {
 				["savewaypoints"] = false,
 			},
 			["mapcoords"] = {
-				["cursoraccuracy"] = 1,
 				["playeraccuracy"] = 1,
+				["cursoraccuracy"] = 1,
 			},
 			["block"] = {
 				["accuracy"] = 1,
