@@ -7,8 +7,14 @@ pez.scripts = {};
 ------------------------------------------------------
 -- Define PezUI LoginScripts options
 ------------------------------------------------------
-pez.scripts.options = {}
-pez.scripts.options.MOGIT_SCALE = .8;
+pez.scripts.options = {
+	TOOLTIP_CLAMP_INSET_ADJUST_ENABLED = true,
+	TOOLTIP_CLAMP_INSET_ADJUST = 20.0;
+	LIB_EXTRA_TIP_STYLE_COPY_ENABLED = true,
+	MOGIT_STYLE_COPY_ENABLED = true,
+	MOGIT_SCALE_ENABLED = true,
+	MOGIT_SCALE = 0.8
+};
 
 
 
@@ -46,15 +52,22 @@ end
 -- fix the styling to match the default tooltip, 
 -- and scale the frame down.
 ------------------------------------------------------
+
 pez.scripts.mogItFixed = false;
 if (MogItTooltip) then
 	MogItTooltip:HookScript("OnShow", function(self)
 		if (not pez.scripts.mogItFixed) then
 			-- fix styling
-			pez.scripts.mogItFixed = pez.scripts.copyGameTooltipStyle(self);
+			if (pez.scripts.options.MOGIT_STYLE_COPY_ENABLED) then
+				pez.scripts.mogItFixed = pez.scripts.copyGameTooltipStyle(self);
+			else
+				pez.scripts.mogItFixed = true;
+			end
 			
 			-- scale frame
-			self:SetScale(pez.scripts.options.MOGIT_SCALE);
+			if (pez.scripts.options.MOGIT_SCALE_ENABLED) then
+				self:SetScale(pez.scripts.options.MOGIT_SCALE);
+			end
 		end
 	end);
 else
@@ -66,10 +79,25 @@ end
 -- When a LibExtraTip tooltip frame is created, fix
 -- the styling to match the default tooltip.
 ------------------------------------------------------
-hooksecurefunc("CreateFrame", 
-	function(type, name, parent, template) 
-		if strfind(tostring(name), "LibExtraTip") then
-			pez.scripts.copyGameTooltipStyle(_G[name]);
+if (LIB_EXTRA_TIP_STYLE_COPY_ENABLED) then
+	hooksecurefunc("CreateFrame", 
+		function(type, name, parent, template) 
+			if strfind(tostring(name), "LibExtraTip") then
+				pez.scripts.copyGameTooltipStyle(_G[name]);
+			end
 		end
-	end
-);
+	);
+end
+
+
+------------------------------------------------------
+-- When the default game tooltip is shown for the first
+-- time, adjust the top clamp inset so it never overlaps 
+-- the Titan/LDB panel at the top of the screen.
+------------------------------------------------------
+if (pez.scripts.options.TOOLTIP_CLAMP_INSET_ADJUST_ENABLED) then
+	local l,r,t,b = GameTooltip:GetClampRectInsets();
+	t = (t + pez.scripts.options.TOOLTIP_CLAMP_INSET_ADJUST);
+	GameTooltip:SetClampRectInsets(l,r,t,b);
+end
+

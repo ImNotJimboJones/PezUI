@@ -8,8 +8,9 @@ pez = {};
 ------------------------------------------------------
 -- PezUI Core Options
 ------------------------------------------------------
-pez.options = {};
-pez.options.DEBUG = true;
+pez.options = {
+	DEBUG = true
+};
 
 
 

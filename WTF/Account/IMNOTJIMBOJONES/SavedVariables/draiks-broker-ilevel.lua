@@ -7,9 +7,9 @@ ilvlDB = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
 						["key"] = "0x0280000004B625CB",
-						["class"] = "HUNTER",
 						["level"] = 85,
 						["ilvl"] = 403,
+						["class"] = "HUNTER",
 					},
 				},
 			},
@@ -20,6 +20,12 @@ ilvlDB = {
 						["level"] = 85,
 						["ilvl"] = 393.875,
 						["name"] = "Pezzer",
+					},
+					["12/03/28 00:13:15"] = {
+						["name"] = "Pezzer",
+						["class"] = "HUNTER",
+						["ilvl"] = 393.875,
+						["level"] = 85,
 					},
 				},
 				["0x0280000003F92D44"] = {
@@ -96,7 +102,7 @@ ilvlDB = {
 		["Default"] = {
 			["options"] = {
 				["group"] = {
-					["formedDate"] = "12/03/27 23:19:53",
+					["formedDate"] = "12/03/28 00:13:15",
 					["type"] = "raid",
 					["active"] = true,
 				},

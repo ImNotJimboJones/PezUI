@@ -322,7 +322,7 @@ Currencyflow_DB = {
 							},
 							[396] = {
 							},
-							["time"] = 3481,
+							["time"] = 3538,
 							["gold"] = {
 								["gained"] = 1576492,
 								["spent"] = 0,

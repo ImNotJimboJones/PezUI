@@ -289,11 +289,11 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_COMBAT_ENTER"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_ENVIRONMENTAL"] = {
+				["PET_INCOMING_SPELL_DEFLECT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["NOTIFICATION_EXTRA_ATTACK"] = {
-					["disabled"] = true,
+				["INCOMING_ENVIRONMENTAL"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_BUFF_STACK"] = {
 					["disabled"] = true,
@@ -358,8 +358,8 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_COOLDOWN"] = {
 					["disabled"] = true,
 				},
-				["PET_INCOMING_SPELL_DEFLECT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_EXTRA_ATTACK"] = {
+					["disabled"] = true,
 				},
 				["INCOMING_SPELL_RESIST"] = {
 					["scrollArea"] = "Custom2",

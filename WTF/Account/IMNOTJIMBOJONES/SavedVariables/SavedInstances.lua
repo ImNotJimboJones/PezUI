@@ -946,10 +946,10 @@ SavedInstancesDB = {
 	["histGeneration"] = 1,
 	["Toons"] = {
 		["Pezzer - Burning Blade"] = {
-			["Level"] = 85,
-			["PlayedTotal"] = 9409886,
-			["WeeklyResetTime"] = 1333440001,
+			["DailyResetTime"] = 1332921601,
+			["PlayedTotal"] = 9411842,
 			["IL"] = 403,
+			["WeeklyResetTime"] = 1333440001,
 			["Money"] = 645435106,
 			["Class"] = "HUNTER",
 			["Show"] = "saved",
@@ -981,11 +981,11 @@ SavedInstancesDB = {
 					["season"] = "Season Total Earned: |cffffffff800",
 				},
 			},
-			["PlayedLevel"] = 5426030,
+			["PlayedLevel"] = 5427986,
 			["Quests"] = {
 			},
 			["ILe"] = 393.875,
-			["DailyResetTime"] = 1332921601,
+			["Level"] = 85,
 			["LClass"] = "Hunter",
 			["DailyCount"] = 0,
 		},

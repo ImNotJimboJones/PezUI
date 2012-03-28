@@ -90,20 +90,20 @@ PitBull4DB = {
 						["Player"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -120,20 +120,20 @@ PitBull4DB = {
 						["Focus"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -150,20 +150,20 @@ PitBull4DB = {
 						["Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -180,20 +180,20 @@ PitBull4DB = {
 						["Focus' Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -210,20 +210,20 @@ PitBull4DB = {
 						["Pet"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -240,20 +240,20 @@ PitBull4DB = {
 						["Target's Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]

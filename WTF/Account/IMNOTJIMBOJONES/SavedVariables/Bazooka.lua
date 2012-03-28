@@ -77,10 +77,10 @@ BazookaDB = {
 						["bar"] = 2,
 					},
 					["SpeedyGonzales"] = {
-						["showValue"] = false,
-						["area"] = "left",
 						["stripColors"] = false,
+						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["showValue"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -134,10 +134,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showupdates"] = "",
-						["enabled"] = false,
 						["showValue"] = false,
+						["enabled"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -214,12 +214,12 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["Broker_uClock"] = {
-						["showupdates"] = "",
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
-						["showValue"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 9,
 					},
 					["SN - Melee Armor Penetration"] = {
@@ -324,9 +324,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["pos"] = 2,
 						["showSuffix"] = false,
 						["bar"] = 2,
-						["pos"] = 2,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,

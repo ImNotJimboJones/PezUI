@@ -3,7 +3,6 @@ GridConfigurableLayoutsDB = {
 	["blizzRolesRule"] = false,
 	["debug"] = false,
 	["useBlizzRoles"] = true,
-	["configLayout"] = "Custom Group 10",
 	["filterColors"] = {
 		["ranged"] = {
 			["a"] = 0.85,
@@ -120,7 +119,6 @@ GridConfigurableLayoutsDB = {
 			["b"] = 0.75,
 		},
 	},
-	["filterToColor"] = "tank",
 	["layouts"] = {
 		["GCL Group 10"] = {
 			["petOptions"] = {
@@ -553,5 +551,7 @@ GridConfigurableLayoutsDB = {
 			["unitsPerColumn"] = 5,
 		},
 	},
+	["filterToColor"] = "tank",
+	["configLayout"] = "Custom Group 10",
 	["checkOOZFrequency"] = 3,
 }
