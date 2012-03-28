@@ -1,0 +1,12 @@
+tag v1.2.6
+8af9c57fffcb21bafcaa66806f3df734da59ee5c
+James D. Callahan III <jcallahan@curse.com>
+2012-03-27 14:16:46 -0500
+
+Tagging new release.
+
+
+--------------------
+
+James D. Callahan III:
+	- Updated ToC interface version to 40300

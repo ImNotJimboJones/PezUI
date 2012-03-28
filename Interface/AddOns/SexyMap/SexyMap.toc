@@ -1,4 +1,4 @@
-## Interface: 40200
+## Interface: 40300
 ## Title: SexyMap
 ## Notes: Spice up ye olde minimap with some sexytime options.
 ## Notes-zhCN: 热辣小地图并包含一些性感计时器选项。
@@ -6,7 +6,7 @@
 ## Author: Antiarc
 ## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibBetterBlizzOptions-1.0, LibSharedMedia-3.0, Blizzard_TimeManager, TomTom, Capping
 ## SavedVariables: SexyMapDB
-## X-Curse-Packaged-Version: v1.2.5
+## X-Curse-Packaged-Version: v1.2.6
 ## X-Curse-Project-Name: SexyMap
 ## X-Curse-Project-ID: sexymap
 ## X-Curse-Repository-ID: wow/sexymap/mainline
@@ -46,4 +46,4 @@ HudMap.xml
 HudMap.lua
 Ping.lua
 ZoneText.lua
- 
+
