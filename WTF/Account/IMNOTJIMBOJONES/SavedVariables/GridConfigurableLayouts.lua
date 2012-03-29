@@ -1,132 +1,172 @@
 
 GridConfigurableLayoutsDB = {
 	["blizzRolesRule"] = false,
-	["debug"] = false,
 	["useBlizzRoles"] = true,
+	["debug"] = false,
+	["configLayout"] = "Custom Group Solo",
 	["filterColors"] = {
 		["ranged"] = {
 			["a"] = 0.85,
-			["r"] = 0.35,
-			["g"] = 0.35,
 			["b"] = 0.99,
+			["g"] = 0.35,
+			["r"] = 0.35,
 		},
 		["tank"] = {
 			["a"] = 0.85,
-			["r"] = 0.99,
-			["g"] = 0.3,
 			["b"] = 0.3,
+			["g"] = 0.3,
+			["r"] = 0.99,
 		},
 		["guild"] = {
 			["a"] = 0.8,
-			["r"] = 0.2,
-			["g"] = 0.9,
 			["b"] = 0.65,
+			["g"] = 0.9,
+			["r"] = 0.2,
 		},
 		["rg3"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["blizztank"] = {
 			["a"] = 0.85,
-			["r"] = 0.99,
-			["g"] = 0.3,
 			["b"] = 0.3,
+			["g"] = 0.3,
+			["r"] = 0.99,
 		},
 		["pets"] = {
 			["a"] = 0.9,
-			["r"] = 0.35,
-			["g"] = 0.5,
 			["b"] = 0.35,
+			["g"] = 0.5,
+			["r"] = 0.35,
 		},
 		["ooz"] = {
 			["a"] = 0.65,
-			["r"] = 0.45,
-			["g"] = 0.45,
 			["b"] = 0.45,
+			["g"] = 0.45,
+			["r"] = 0.45,
 		},
 		["rg4"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["empty"] = {
 			["a"] = 0.8,
-			["r"] = 0.6,
-			["g"] = 0.6,
 			["b"] = 0.6,
+			["g"] = 0.6,
+			["r"] = 0.6,
 		},
 		["damage"] = {
 			["a"] = 0.85,
-			["r"] = 0.75,
-			["g"] = 0.3,
 			["b"] = 0.9,
+			["g"] = 0.3,
+			["r"] = 0.75,
 		},
 		["rg1"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["melee"] = {
 			["a"] = 0.85,
-			["r"] = 0.9,
-			["g"] = 0.85,
 			["b"] = 0.35,
+			["g"] = 0.85,
+			["r"] = 0.9,
 		},
 		["everyone"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["rg6"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["rg2"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 		["healer"] = {
 			["a"] = 0.85,
-			["r"] = 0.35,
-			["g"] = 0.99,
 			["b"] = 0.35,
-		},
-		["rg5"] = {
-			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
-			["b"] = 0.75,
-		},
-		["rg7"] = {
-			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
-			["b"] = 0.75,
+			["g"] = 0.99,
+			["r"] = 0.35,
 		},
 		["rg8"] = {
 			["a"] = 0.8,
-			["r"] = 0.75,
-			["g"] = 0.75,
 			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
+		},
+		["rg7"] = {
+			["a"] = 0.8,
+			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
+		},
+		["rg5"] = {
+			["a"] = 0.8,
+			["b"] = 0.75,
+			["g"] = 0.75,
+			["r"] = 0.75,
 		},
 	},
+	["filterToColor"] = "tank",
 	["layouts"] = {
 		["GCL Group 10"] = {
 			["petOptions"] = {
 				["HUNTER"] = true,
+				["DEATHKNIGHT"] = true,
 				["WARLOCK"] = true,
 				["allPets"] = true,
-				["DEATHKNIGHT"] = true,
 			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
+			["sortOptions"] = {
+				["sortOrder"] = {
+					["class"] = {
+						"deathknight", -- [1]
+						"druid", -- [2]
+						"hunter", -- [3]
+						"mage", -- [4]
+						"paladin", -- [5]
+						"priest", -- [6]
+						"rogue", -- [7]
+						"shaman", -- [8]
+						"warlock", -- [9]
+						"warrior", -- [10]
+					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
+				},
+				["sortMethod"] = "role",
+			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -140,33 +180,16 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["sortOptions"] = {
-				["sortMethod"] = "role",
-				["sortOrder"] = {
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
-					},
-					["class"] = {
-						"deathknight", -- [1]
-						"druid", -- [2]
-						"hunter", -- [3]
-						"mage", -- [4]
-						"paladin", -- [5]
-						"priest", -- [6]
-						"rogue", -- [7]
-						"shaman", -- [8]
-						"warlock", -- [9]
-						"warrior", -- [10]
-					},
-				},
-			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
 			["numGroups"] = 5,
+			["unitsPerColumn"] = 5,
+		},
+		["GCL Group 25"] = {
+			["petOptions"] = {
+				["HUNTER"] = true,
+				["DEATHKNIGHT"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = true,
+			},
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -180,14 +203,31 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-		},
-		["GCL Group 25"] = {
-			["petOptions"] = {
-				["HUNTER"] = true,
-				["WARLOCK"] = true,
-				["allPets"] = true,
-				["DEATHKNIGHT"] = true,
+			["sortOptions"] = {
+				["sortOrder"] = {
+					["class"] = {
+						"deathknight", -- [1]
+						"druid", -- [2]
+						"hunter", -- [3]
+						"mage", -- [4]
+						"paladin", -- [5]
+						"priest", -- [6]
+						"rogue", -- [7]
+						"shaman", -- [8]
+						"warlock", -- [9]
+						"warrior", -- [10]
+					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
+				},
+				["sortMethod"] = "role",
 			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -201,33 +241,16 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["sortOptions"] = {
-				["sortMethod"] = "role",
-				["sortOrder"] = {
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
-					},
-					["class"] = {
-						"deathknight", -- [1]
-						"druid", -- [2]
-						"hunter", -- [3]
-						"mage", -- [4]
-						"paladin", -- [5]
-						"priest", -- [6]
-						"rogue", -- [7]
-						"shaman", -- [8]
-						"warlock", -- [9]
-						"warrior", -- [10]
-					},
-				},
-			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
 			["numGroups"] = 8,
+			["unitsPerColumn"] = 5,
+		},
+		["GCL Default"] = {
+			["petOptions"] = {
+				["HUNTER"] = true,
+				["DEATHKNIGHT"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -241,14 +264,31 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-		},
-		["GCL Default"] = {
-			["petOptions"] = {
-				["HUNTER"] = true,
-				["WARLOCK"] = true,
-				["allPets"] = false,
-				["DEATHKNIGHT"] = true,
+			["sortOptions"] = {
+				["sortOrder"] = {
+					["class"] = {
+						"deathknight", -- [1]
+						"druid", -- [2]
+						"hunter", -- [3]
+						"mage", -- [4]
+						"paladin", -- [5]
+						"priest", -- [6]
+						"rogue", -- [7]
+						"shaman", -- [8]
+						"warlock", -- [9]
+						"warrior", -- [10]
+					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
+				},
+				["sortMethod"] = "name",
 			},
+			["createBorders"] = true,
+			["allowRepeats"] = false,
 			["groupType"] = {
 				"tank", -- [1]
 				"melee", -- [2]
@@ -262,33 +302,16 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["sortOptions"] = {
-				["sortMethod"] = "name",
-				["sortOrder"] = {
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
-					},
-					["class"] = {
-						"deathknight", -- [1]
-						"druid", -- [2]
-						"hunter", -- [3]
-						"mage", -- [4]
-						"paladin", -- [5]
-						"priest", -- [6]
-						"rogue", -- [7]
-						"shaman", -- [8]
-						"warlock", -- [9]
-						"warrior", -- [10]
-					},
-				},
-			},
-			["createBorders"] = true,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
 			["numGroups"] = 6,
+			["unitsPerColumn"] = 5,
+		},
+		["Test"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["HUNTER"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -302,14 +325,31 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-		},
-		["Test"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["WARLOCK"] = true,
-				["allPets"] = false,
-				["HUNTER"] = true,
+			["sortOptions"] = {
+				["sortOrder"] = {
+					["class"] = {
+						"deathknight", -- [1]
+						"druid", -- [2]
+						"hunter", -- [3]
+						"mage", -- [4]
+						"paladin", -- [5]
+						"priest", -- [6]
+						"rogue", -- [7]
+						"shaman", -- [8]
+						"warlock", -- [9]
+						"warrior", -- [10]
+					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
+				},
+				["sortMethod"] = "name",
 			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["groupType"] = {
 				"ranged", -- [1]
 				"pets", -- [2]
@@ -323,15 +363,18 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 5,
+			["unitsPerColumn"] = 5,
+		},
+		["Custom Group 10"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["HUNTER"] = true,
+				["allPets"] = true,
+				["WARLOCK"] = true,
+			},
 			["sortOptions"] = {
-				["sortMethod"] = "name",
 				["sortOrder"] = {
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
-					},
 					["class"] = {
 						"deathknight", -- [1]
 						"druid", -- [2]
@@ -344,34 +387,16 @@ GridConfigurableLayoutsDB = {
 						"warlock", -- [9]
 						"warrior", -- [10]
 					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
 				},
+				["playerFirst"] = true,
+				["sortMethod"] = "role",
 			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 5,
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
-		},
-		["Custom Group 10"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["allPets"] = true,
-				["WARLOCK"] = true,
-				["HUNTER"] = true,
-			},
-			["unitsPerColumn"] = 5,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -387,6 +412,8 @@ GridConfigurableLayoutsDB = {
 			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 3,
 			["groupType"] = {
 				"rg1", -- [1]
 				"everyone", -- [2]
@@ -400,33 +427,8 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 3,
-			["sortOptions"] = {
-				["sortOrder"] = {
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
-					},
-					["class"] = {
-						"deathknight", -- [1]
-						"druid", -- [2]
-						"hunter", -- [3]
-						"mage", -- [4]
-						"paladin", -- [5]
-						"priest", -- [6]
-						"rogue", -- [7]
-						"shaman", -- [8]
-						"warlock", -- [9]
-						"warrior", -- [10]
-					},
-				},
-				["playerFirst"] = true,
-				["sortMethod"] = "role",
-			},
 		},
-		["Custom Group Solo"] = {
+		["Custom Group 5"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
 				["WARLOCK"] = true,
@@ -465,60 +467,15 @@ GridConfigurableLayoutsDB = {
 						"shaman", -- [8]
 						"warlock", -- [9]
 						"warrior", -- [10]
-					},
-				},
-				["playerFirst"] = true,
-				["sortMethod"] = "role",
-			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 2,
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
-		},
-		["Custom Group 5"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["HUNTER"] = true,
-				["allPets"] = false,
-				["WARLOCK"] = true,
-			},
-			["sortOptions"] = {
-				["sortOrder"] = {
-					["class"] = {
-						"deathknight", -- [1]
-						"druid", -- [2]
-						"hunter", -- [3]
-						"mage", -- [4]
-						"paladin", -- [5]
-						"priest", -- [6]
-						"rogue", -- [7]
-						"shaman", -- [8]
-						"warlock", -- [9]
-						"warrior", -- [10]
-					},
-					["role"] = {
-						"tank", -- [1]
-						"healer", -- [2]
-						"melee", -- [3]
-						"ranged", -- [4]
 					},
 				},
 				["playerFirst"] = false,
 				["sortMethod"] = "role",
 			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 2,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -532,10 +489,53 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
+		},
+		["Custom Group Solo"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["HUNTER"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
+			["sortOptions"] = {
+				["sortOrder"] = {
+					["class"] = {
+						"deathknight", -- [1]
+						"druid", -- [2]
+						"hunter", -- [3]
+						"mage", -- [4]
+						"paladin", -- [5]
+						"priest", -- [6]
+						"rogue", -- [7]
+						"shaman", -- [8]
+						"warlock", -- [9]
+						"warrior", -- [10]
+					},
+					["role"] = {
+						"tank", -- [1]
+						"healer", -- [2]
+						"melee", -- [3]
+						"ranged", -- [4]
+					},
+				},
+				["playerFirst"] = true,
+				["sortMethod"] = "role",
+			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 2,
 			["groupType"] = {
 				"everyone", -- [1]
 				"pets", -- [2]
@@ -549,9 +549,9 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 2,
+			["unitsPerColumn"] = 5,
 		},
 	},
-	["filterToColor"] = "tank",
-	["configLayout"] = "Custom Group Solo",
 	["checkOOZFrequency"] = 3,
 }

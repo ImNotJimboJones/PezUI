@@ -15,6 +15,10 @@ CritlineDB = {
 				},
 			},
 		},
+		["LibDualSpec-1.0"] = {
+		},
+		["filters"] = {
+		},
 		["minimap"] = {
 			["profiles"] = {
 				["Default"] = {
@@ -22,18 +26,14 @@ CritlineDB = {
 				},
 			},
 		},
-		["LibDualSpec-1.0"] = {
-		},
-		["filters"] = {
-		},
 	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
-			["playSound"] = false,
 			["sound"] = "Bell",
+			["playSound"] = false,
 		},
 	},
 }

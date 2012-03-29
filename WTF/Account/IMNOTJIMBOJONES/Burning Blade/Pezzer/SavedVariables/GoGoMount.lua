@@ -29,16 +29,16 @@ GoGo_Prefs = {
 	},
 	["UnknownMounts"] = {
 	},
-	["DruidDisableInCombat"] = false,
+	["GlobalPrefMounts"] = {
+	},
 	["DruidClickForm"] = true,
-	["RemoveBuffs"] = 1,
+	["DisableWaterFlight"] = 1,
 	["version"] = "4.3.4",
 	["autodismount"] = 1,
 	["DruidFormNotRandomize"] = false,
-	["DisableWaterFlight"] = 1,
+	["RemoveBuffs"] = 1,
 	["PaladinUseCrusaderAura"] = false,
-	["GlobalPrefMounts"] = {
-	},
+	["DruidDisableInCombat"] = false,
 }
 GoGo_DebugLog = {
 }
