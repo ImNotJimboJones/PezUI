@@ -9,10 +9,10 @@ WoW.tfil
 
 # Folders #
 ###########
-Cache/*
-Data/*
-Errors/*
-Logs/*
-Movies/*
+Cache
+Data
+Errors
+Logs
+Movies
 PTR*
-Updates/*
+Updates
