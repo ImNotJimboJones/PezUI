@@ -1,6 +1,5 @@
 
 OmniCC4Config = {
-	["version"] = "4.3.2",
 	["groups"] = {
 	},
 	["groupSettings"] = {
@@ -8,4 +7,5 @@ OmniCC4Config = {
 			["minSize"] = 0.4,
 		},
 	},
+	["version"] = "4.3.2",
 }

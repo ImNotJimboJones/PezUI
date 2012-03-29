@@ -26,7 +26,6 @@ RecountDB = {
 				},
 				["RowHeight"] = 16,
 			},
-			["MainWindowMode"] = 2,
 			["MaxFights"] = 25,
 			["MainWindowHeight"] = 150.8973541259766,
 			["ClampToScreen"] = true,
@@ -59,8 +58,8 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -33626648576,
-			["DetailWindowX"] = 5474108416,
+			["DetailWindowY"] = -46542073856,
+			["DetailWindowX"] = 7576620544,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["Scaling"] = 0.85,
@@ -88,8 +87,9 @@ RecountDB = {
 					false, -- [8]
 				},
 			},
-			["CurDataSet"] = "LastFightData",
+			["CurDataSet"] = "CurrentFightData",
 			["LastInstanceName"] = "The Battle for Mount Hyjal",
+			["MainWindowMode"] = 2,
 			["MainWindowWidth"] = 226.0703887939453,
 		},
 		["Pezzer - Burning Blade"] = {
@@ -116,7 +116,7 @@ RecountDB = {
 			["MaxFights"] = 25,
 			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = 0,
 			["CurDataSet"] = "OverallData",
 			["Colors"] = {
 				["Window"] = {
@@ -142,7 +142,7 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = 0,
+			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,

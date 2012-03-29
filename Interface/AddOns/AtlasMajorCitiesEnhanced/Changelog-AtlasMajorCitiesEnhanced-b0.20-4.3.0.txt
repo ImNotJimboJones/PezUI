@@ -1,0 +1,53 @@
+------------------------------------------------------------------------
+r31 | andymon | 2011-12-22 14:40:58 +0000 (Thu, 22 Dec 2011) | 1 line
+Changed paths:
+   A /tags/b0.20-4.3.0 (from /trunk:30)
+
+Tagging as b0.20-4.3.0
+------------------------------------------------------------------------
+r30 | andymon | 2011-12-22 14:03:20 +0000 (Thu, 22 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/Locale/AtlasMajorCities_deDE.lua
+   M /trunk/Locale/AtlasMajorCities_enUS.lua
+   M /trunk/Locale/AtlasMajorCities_esES.lua
+   M /trunk/Locale/AtlasMajorCities_frFR.lua
+   M /trunk/Locale/AtlasMajorCities_ruRU.lua
+   M /trunk/Locale/AtlasMajorCities_zhCN.lua
+   M /trunk/Locale/AtlasMajorCities_zhTW.lua
+
+* The missing locale files
+------------------------------------------------------------------------
+r29 | andymon | 2011-12-22 14:01:30 +0000 (Thu, 22 Dec 2011) | 2 lines
+Changed paths:
+   M /trunk/AtlasMajorCities.lua
+   M /trunk/AtlasMajorCitiesEnhanced.toc
+   M /trunk/AtlasMajorCities_db.lua
+   M /trunk/AtlasMajorCities_edit.lua
+   M /trunk/AtlasMajorCities_loc.lua
+   M /trunk/AtlasMajorCities_zones.lua
+   M /trunk/Bindings.xml
+
+* a few small fixes
+* actual 4.3 data base and locale for enUS and deDE
+------------------------------------------------------------------------
+r28 | andymon | 2011-11-07 19:51:45 +0000 (Mon, 07 Nov 2011) | 6 lines
+Changed paths:
+   M /trunk/AtlasMajorCities.lua
+   M /trunk/AtlasMajorCities_db.lua
+   M /trunk/AtlasMajorCities_edit.lua
+   M /trunk/AtlasMajorCities_loc.lua
+   M /trunk/Locale/AtlasMajorCities_deDE.lua
+   M /trunk/Locale/AtlasMajorCities_enUS.lua
+   M /trunk/Locale/AtlasMajorCities_esES.lua
+   M /trunk/Locale/AtlasMajorCities_frFR.lua
+   M /trunk/Locale/AtlasMajorCities_ruRU.lua
+   M /trunk/Locale/AtlasMajorCities_zhCN.lua
+   M /trunk/Locale/AtlasMajorCities_zhTW.lua
+
+* DB re-structured
+- Area level removed
+- Zone level removed
+- Zone has now an entry in the shop
+- The shops are now listed below the city
+
+------------------------------------------------------------------------

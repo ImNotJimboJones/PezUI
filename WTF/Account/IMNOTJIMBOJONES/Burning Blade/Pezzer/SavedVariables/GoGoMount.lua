@@ -1,11 +1,5 @@
 
 GoGo_Prefs = {
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["DruidFlightForm"] = false,
-	["RemoveBuffs"] = 1,
-	["UnknownMounts"] = {
-	},
 	["Zones"] = {
 		["Durotar"] = {
 			["Preferred"] = {
@@ -30,15 +24,21 @@ GoGo_Prefs = {
 		},
 	},
 	["DruidClickForm"] = true,
+	["DruidFlightForm"] = false,
 	["GlobalExclude"] = {
 	},
+	["UnknownMounts"] = {
+	},
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["RemoveBuffs"] = 1,
 	["version"] = "4.3.4",
 	["DisableWaterFlight"] = 1,
-	["DruidFormNotRandomize"] = false,
-	["autodismount"] = 1,
-	["PaladinUseCrusaderAura"] = false,
 	["GlobalPrefMounts"] = {
 	},
+	["autodismount"] = 1,
+	["PaladinUseCrusaderAura"] = false,
+	["DruidFormNotRandomize"] = false,
 }
 GoGo_DebugLog = {
 }
