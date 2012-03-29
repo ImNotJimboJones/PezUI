@@ -1,0 +1,5 @@
+## Interface: 40300
+## Author: albin
+## Title: Undress Button
+## Notes: Enhances the Dressing Room with additional buttons.
+UndressButton.xml
