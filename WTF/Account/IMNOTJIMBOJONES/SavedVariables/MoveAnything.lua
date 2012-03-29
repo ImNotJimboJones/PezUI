@@ -1,9 +1,9 @@
 
 MADB = {
+	["tooltips"] = 1,
 	["characters"] = {
 	},
 	["frameListRows"] = 18,
-	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -29,6 +29,16 @@ MADB = {
 						294.2891463489281, -- [5]
 					},
 				},
+				["WatchFrame"] = {
+					["name"] = "WatchFrame",
+					["pos"] = {
+						"BOTTOMRIGHT", -- [1]
+						"MoncaiQuestTrackerFloater", -- [2]
+						"CENTER", -- [3]
+						-6.99993896484375, -- [4]
+						7.62939453125e-06, -- [5]
+					},
+				},
 				["BankFrame"] = {
 					["name"] = "BankFrame",
 					["scale"] = 0.7999999523162842,
@@ -38,16 +48,6 @@ MADB = {
 						"BOTTOMLEFT", -- [3]
 						0, -- [4]
 						459.8040195773834, -- [5]
-					},
-				},
-				["WatchFrame"] = {
-					["name"] = "WatchFrame",
-					["pos"] = {
-						"BOTTOMRIGHT", -- [1]
-						"MoncaiQuestTrackerFloater", -- [2]
-						"CENTER", -- [3]
-						-6.99993896484375, -- [4]
-						7.62939453125e-06, -- [5]
 					},
 				},
 				["GuildBankFrame"] = {

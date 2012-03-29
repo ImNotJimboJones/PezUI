@@ -7,30 +7,29 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["b"] = 210,
-				["g"] = 210,
 				["r"] = 210,
+				["g"] = 210,
+				["b"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
-			["flashBottom"] = true,
-			["flashLeft"] = true,
-			["altView"] = false,
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["b"] = 8,
-				["g"] = 0,
-				["r"] = 255,
-			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
+			["flashLeft"] = true,
 			["whisperList"] = {
+				{
+					"Raei", -- [1]
+					{
+						"|cffff0008when u coming to mse", -- [1]
+						"|cffff0008yep, sent an email no response ", -- [2]
+						"|cffd2d2d2still waiting around?", -- [3]
+					}, -- [2]
+					false, -- [3]
+					false, -- [4]
+				}, -- [1]
 				{
 					"Bäudso", -- [1]
 					{
@@ -38,7 +37,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 				{
 					"Simfraya", -- [1]
 					{
@@ -55,7 +54,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [3]
 				{
 					"Pezzer", -- [1]
 					{
@@ -64,8 +63,19 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [4]
 			},
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["r"] = 255,
+				["g"] = 0,
+				["b"] = 8,
+			},
+			["flashBottom"] = true,
+			["altView"] = false,
 		},
 	},
 }

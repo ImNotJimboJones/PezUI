@@ -23,22 +23,22 @@ GoGo_Prefs = {
 			["ZoneID"] = 321,
 		},
 	},
-	["DruidClickForm"] = true,
+	["AspectPack"] = false,
 	["DruidFlightForm"] = false,
 	["GlobalExclude"] = {
 	},
 	["UnknownMounts"] = {
 	},
 	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
+	["DruidClickForm"] = true,
 	["RemoveBuffs"] = 1,
 	["version"] = "4.3.4",
+	["autodismount"] = 1,
+	["DruidFormNotRandomize"] = false,
 	["DisableWaterFlight"] = 1,
+	["PaladinUseCrusaderAura"] = false,
 	["GlobalPrefMounts"] = {
 	},
-	["autodismount"] = 1,
-	["PaladinUseCrusaderAura"] = false,
-	["DruidFormNotRandomize"] = false,
 }
 GoGo_DebugLog = {
 }

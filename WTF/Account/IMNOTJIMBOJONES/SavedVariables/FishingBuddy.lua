@@ -18,10 +18,7 @@ FishingBuddy_Info = {
 		},
 	},
 	["Version"] = 9907,
-	["SubZones"] = {
-		[1000] = 1,
-		[1001] = "Valley of Honor",
-	},
+	["FishInfo2"] = 0,
 	["ZoneIndex"] = {
 		"Orgrimmar", -- [1]
 	},
@@ -30,11 +27,14 @@ FishingBuddy_Info = {
 		[6291] = {
 			["enUS"] = "Raw Brilliant Smallfish",
 			["mods"] = 30,
-			["texture"] = "Interface\\Icons\\INV_Misc_Fish_08",
+			["quality"] = 1,
 			["level"] = 555,
 			["skill"] = 525,
-			["quality"] = 1,
+			["texture"] = "Interface\\Icons\\INV_Misc_Fish_08",
 		},
 	},
-	["FishInfo2"] = 0,
+	["SubZones"] = {
+		[1000] = 1,
+		[1001] = "Valley of Honor",
+	},
 }
