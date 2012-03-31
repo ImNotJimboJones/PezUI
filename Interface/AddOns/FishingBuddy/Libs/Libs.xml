@@ -6,5 +6,6 @@
 	<Include file="LibBabble-SubZone-3.0\lib.xml" />
 	<Include file="LibTourist-3.0\lib.xml" />
 	<Include file="LibFishing-1.0\lib.xml" />
+	<Include file="LibTabbedFrame-1.0\lib.xml" />
 	<Include file="Astrolabe\Load.xml" />
 </Ui>

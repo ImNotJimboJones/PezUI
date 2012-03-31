@@ -410,7 +410,7 @@ local function Setup(options, nomap)
 					button:ClearAllPoints();
 					button:SetParent(FishingOptionsFrame);
 				end
-				if ( option.v ) then
+				if ( button.checkbox and option.v ) then
 					button:SetScript("OnShow", CheckButton_OnShow);
 					button:SetScript("OnClick", CheckButton_OnClick);
 				end
@@ -427,6 +427,7 @@ local function Setup(options, nomap)
 				optionbuttons[index] = button;
 			end
 			button.checkbox = 1;
+			index = index + 1;
 		end
 		if ( button ) then
 			if ( not nomap ) then
@@ -491,7 +492,6 @@ local function Setup(options, nomap)
 			if ( option.setup ) then
 				option.setup(button);
 			end
-			index = index + 1;
 		end
 	end
 	
@@ -527,8 +527,8 @@ local function Setup(options, nomap)
 	local lastbutton = nil;
 	local maxwidth = 0;
 	local order = orderbuttons(pb);
-	for iorder,index in ipairs(order) do
-		local name = primaries[index];
+	for iorder,which in ipairs(order) do
+		local name = primaries[which];
 		local button = optionmap[name];
 		if ( not lastbutton ) then
 			button:SetPoint("TOPLEFT", 32, -82);
@@ -554,8 +554,8 @@ local function Setup(options, nomap)
 			end
 		end
 	end
-	for iorder,index in ipairs(order) do
-		local name = primaries[index];
+	for iorder,which in ipairs(order) do
+		local name = primaries[which];
 		local button = optionmap[name];
 		if (button.right) then
 			if ( button.checkbox ) then
@@ -609,8 +609,8 @@ local function Setup(options, nomap)
 			maxwidth = 0;
 			local rlast = nil;
 			local llast = nil;
-			for iorder,index in ipairs(order) do
-				local colbut = deps[index];
+			for iorder,which in ipairs(order) do
+				local colbut = deps[which];
 				if ( colbut ) then
 					local yoff = 0;
 					if ( colbut.margin ) then
@@ -638,8 +638,8 @@ local function Setup(options, nomap)
 					end
 				end
 			end
-			for index=1,#deps do
-				local colbut = deps[index];
+			for which=1,#deps do
+				local colbut = deps[which];
 				if (colbut.right) then
 					if ( colbut.checkbox ) then
 						colbut:SetPoint("RIGHT", FishingOptionsFrame, "RIGHT", -32-maxwidth, 0);
@@ -931,6 +931,10 @@ FishingBuddy.GetOptionList = function()
 end
 
 -- Create the options frame, unmanaged -- we get managed specially later
-local f = FishingBuddy.CreateManagedFrame("FishingOptionsFrame");
+local f = FishingBuddyFrame:CreateManagedFrame("FishingOptionsFrame");
 f:SetScript("OnShow", OptionsFrame_OnShow);
 f:SetScript("OnHide", OptionsFrame_OnHide);
+
+if ( FishingBuddy.Debugging ) then
+	FishingBuddy.FBOptionsTable = FBOptionsTable;
+end

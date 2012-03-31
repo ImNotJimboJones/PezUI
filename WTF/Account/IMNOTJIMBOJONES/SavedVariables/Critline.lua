@@ -15,16 +15,16 @@ CritlineDB = {
 				},
 			},
 		},
+		["filters"] = {
+		},
+		["LibDualSpec-1.0"] = {
+		},
 		["minimap"] = {
 			["profiles"] = {
 				["Default"] = {
 					["show"] = false,
 				},
 			},
-		},
-		["LibDualSpec-1.0"] = {
-		},
-		["filters"] = {
 		},
 	},
 	["profileKeys"] = {

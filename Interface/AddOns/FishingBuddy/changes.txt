@@ -1,4 +1,8 @@
-﻿Version 1.0.7f
+﻿Version 1.0.7g
+- Another attempt at fixing random "no more casting" issues
+- Update LibTourist library
+
+Version 1.0.7f
 - Clean up pet handling
 - Fixes for Curse Bugs: 147
 - Don't look for missing fish errors anymore, since there aren't any

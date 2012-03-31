@@ -1,0 +1,7 @@
+------------------------------------------------------------------------
+r139 | Odica | 2012-03-16 19:07:50 +0000 (Fri, 16 Mar 2012) | 1 line
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+Changed faction for Shadowfang Keep (was Horde, now for both factions)
+------------------------------------------------------------------------

@@ -40,12 +40,6 @@ local Accessories = {
 	[3567] = { ["n"] = "Dwarven Fishing Pole", ["score"] = 1, },
 };
 
-local OutfitOptions = {
-	["OutfitManager"] = {
-		["margin"] = { 12, 4 },
-		["button"] = "FishingBuddyOption_OutfitManager", },
-}
-
 FishingBuddy.Commands[FBConstants.SWITCH] = {};
 FishingBuddy.Commands[FBConstants.SWITCH].func = function()
 													 FishingBuddy.OutfitManager.Switch();
@@ -218,8 +212,15 @@ local function UpdateManagers()
 	end
 end
 
-local OMEvents = {};
+local OutfitOptions = {
+	["OutfitManager"] = {
+		["margin"] = { 12, 4 },
+		["button"] = "FishingBuddyOption_OutfitManager",
+		["setup"] =  UpdateManagers,
+	},
+}
 
+local OMEvents = {};
 OMEvents["VARIABLES_LOADED"] = function()
 	FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, OutfitOptions);
 end
@@ -231,6 +232,6 @@ FishingBuddy.API.RegisterHandlers(OMEvents);
 FishingBuddy.OutfitManagers = OutfitManagers;
 
 FishingBuddy.OutfitManager.RegisterManager(NONE_KEY,
-															 function() end,
-															 function(useme) end,
-															 function(o) end);
+											 function() end,
+											 function(useme) end,
+											 function(o) end);

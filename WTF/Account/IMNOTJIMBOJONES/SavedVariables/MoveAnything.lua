@@ -2,8 +2,8 @@
 MADB = {
 	["characters"] = {
 	},
-	["frameListRows"] = 18,
 	["tooltips"] = 1,
+	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -69,16 +69,6 @@ MADB = {
 						74.00004577636719, -- [5]
 					},
 				},
-				["VehicleMenuBarLeaveButton"] = {
-					["name"] = "VehicleMenuBarLeaveButton",
-					["pos"] = {
-						"BOTTOMRIGHT", -- [1]
-						"VehicleMenuBar", -- [2]
-						"BOTTOMRIGHT", -- [3]
-						0, -- [4]
-						0, -- [5]
-					},
-				},
 				["BagsMover"] = {
 					["scale"] = 0.7999999523162842,
 					["name"] = "BagsMover",
@@ -100,16 +90,6 @@ MADB = {
 						680, -- [5]
 					},
 				},
-				["VehicleMenuBar"] = {
-					["name"] = "VehicleMenuBar",
-					["pos"] = {
-						"BOTTOM", -- [1]
-						"UIParent", -- [2]
-						"BOTTOM", -- [3]
-						-0.00011444091796875, -- [4]
-						-1.00000011920929, -- [5]
-					},
-				},
 				["AchievementFrame"] = {
 					["name"] = "AchievementFrame",
 					["pos"] = {
@@ -118,6 +98,16 @@ MADB = {
 						"BOTTOMLEFT", -- [3]
 						0, -- [4]
 						299.5295104980469, -- [5]
+					},
+				},
+				["VehicleMenuBar"] = {
+					["name"] = "VehicleMenuBar",
+					["pos"] = {
+						"BOTTOM", -- [1]
+						"UIParent", -- [2]
+						"BOTTOM", -- [3]
+						-0.00011444091796875, -- [4]
+						-1.00000011920929, -- [5]
 					},
 				},
 				["GroupLootFrame3"] = {
@@ -130,25 +120,14 @@ MADB = {
 						580, -- [5]
 					},
 				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
+				["VehicleMenuBarLeaveButton"] = {
+					["name"] = "VehicleMenuBarLeaveButton",
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						380, -- [5]
-					},
-				},
-				["GuildBankFrame"] = {
-					["scale"] = 0.7999999523162842,
-					["name"] = "GuildBankFrame",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						20.00002224325717, -- [4]
-						529.4000679223512, -- [5]
+						"BOTTOMRIGHT", -- [1]
+						"VehicleMenuBar", -- [2]
+						"BOTTOMRIGHT", -- [3]
+						0, -- [4]
+						0, -- [5]
 					},
 				},
 				["GuildFrame"] = {
@@ -171,14 +150,14 @@ MADB = {
 						-128, -- [5]
 					},
 				},
-				["AchievementAlertFrame1"] = {
-					["name"] = "AchievementAlertFrame1",
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
 					["pos"] = {
-						"TOP", -- [1]
+						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
-						"TOP", -- [3]
-						-3.0517578125e-05, -- [4]
-						-128, -- [5]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						380, -- [5]
 					},
 				},
 				["VehicleMenuBarHealthBar"] = {
@@ -189,6 +168,27 @@ MADB = {
 						"BOTTOMLEFT", -- [3]
 						0, -- [4]
 						0, -- [5]
+					},
+				},
+				["AchievementAlertFrame1"] = {
+					["name"] = "AchievementAlertFrame1",
+					["pos"] = {
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-3.0517578125e-05, -- [4]
+						-128, -- [5]
+					},
+				},
+				["GuildBankFrame"] = {
+					["scale"] = 0.7999999523162842,
+					["name"] = "GuildBankFrame",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						20.00002224325717, -- [4]
+						529.4000679223512, -- [5]
 					},
 				},
 				["AchievementAlertFrame2"] = {

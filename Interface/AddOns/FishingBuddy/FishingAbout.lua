@@ -151,8 +151,8 @@ local function UpdateCreditPanel(self, elapsed)
 		self.started = true;
 		self.fadestate = 5;
 		self.fadevalue = 0;
-		self.whatidx = 1
-		self.currenttime = 0.1 + elapsed + math.random()*5.0;
+		self.whatidx = 1;
+		self.currenttime = 0.1 + elapsed + math.random()*2.0;
 	end
 	self.currenttime = self.currenttime - elapsed;
 	if (self.currenttime > 0) then
@@ -160,6 +160,7 @@ local function UpdateCreditPanel(self, elapsed)
 	end
 
 	if (self.fadestate == 0) then
+		-- pick a new thing to display, and fade it in
 		self.data = self.credits[self.idx]
 		self.lines[1]:SetText(self.categories[self.data.title])
 		self.lines[2]:SetText(self.data.who)
@@ -234,6 +235,7 @@ local function UpdateCreditPanel(self, elapsed)
 	elseif (self.fadestate == 5) then
 		-- Pause after fading out
 		self.fadestate = 0
+		self.currenttime = 2.5 - math.random()*0.5;
 	end
 end
 
