@@ -87,7 +87,7 @@ CritlinePerCharDB = {
 								["target"] = "Training Dummy",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 85,
-								["amount"] = 1039,
+								["amount"] = 1044,
 							},
 						}, -- [1]
 					},
@@ -208,16 +208,16 @@ CritlinePerCharDB = {
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Mature Swine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1750,
+								["targetLevel"] = 11,
+								["amount"] = 1853,
 							},
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Mature Swine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 3539,
+								["targetLevel"] = 9,
+								["amount"] = 3639,
 							},
 						}, -- [1]
 					},

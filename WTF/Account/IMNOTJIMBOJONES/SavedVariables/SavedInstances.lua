@@ -105,9 +105,18 @@ SavedInstancesDB = {
 		["Icecrown Citadel"] = {
 			["LFDID"] = 280,
 			["Expansion"] = 2,
+			["Raid"] = true,
 			["Show"] = "saved",
 			["RecLevel"] = 80,
-			["Raid"] = true,
+			["Pezzer - Burning Blade"] = {
+				[4] = {
+					["Expires"] = 1333468801,
+					["Extended"] = false,
+					["Link"] = "|cffff8000|Hinstancelock:0280000004B625CB:631:3:1015|h[Icecrown Citadel]|h|r",
+					["ID"] = 101374106,
+					["Locked"] = true,
+				},
+			},
 		},
 		["Razorfen Downs"] = {
 			["LFDID"] = 20,
@@ -241,7 +250,7 @@ SavedInstancesDB = {
 			["Raid"] = true,
 			["Pezzer - Burning Blade"] = {
 				{
-					["Expires"] = 1333468800,
+					["Expires"] = 1333468801,
 					["Extended"] = false,
 					["Link"] = "|cffff8000|Hinstancelock:0280000004B625CB:534:0:31|h[The Battle for Mount Hyjal]|h|r",
 					["ID"] = 101185146,
@@ -285,7 +294,7 @@ SavedInstancesDB = {
 			["Raid"] = true,
 			["Pezzer - Burning Blade"] = {
 				[3] = {
-					["Expires"] = 1333468800,
+					["Expires"] = 1333468801,
 					["Extended"] = false,
 					["Link"] = "|cffff8000|Hinstancelock:0280000004B625CB:967:2:255|h[Dragon Soul]|h|r",
 					["ID"] = 101175809,
@@ -938,28 +947,28 @@ SavedInstancesDB = {
 	["Broker"] = {
 		["HistoryText"] = false,
 	},
-	["histGeneration"] = 1,
+	["histGeneration"] = 4,
 	["Toons"] = {
 		["Pezzer - Burning Blade"] = {
-			["PlayedTotal"] = 9466479,
+			["PlayedTotal"] = 9491004,
 			["IL"] = 403,
-			["WeeklyResetTime"] = 1333440002,
-			["Money"] = 642432303,
+			["WeeklyResetTime"] = 1333440001,
+			["Money"] = 643357267,
 			["Class"] = "HUNTER",
-			["DailyCount"] = 0,
+			["Level"] = 85,
 			["Show"] = "saved",
 			["currency"] = {
 				[395] = {
-					["amount"] = 1155,
+					["earnedThisWeek"] = 0,
 					["weeklyMax"] = 0,
 					["totalMax"] = 4000,
-					["earnedThisWeek"] = 0,
+					["amount"] = 1155,
 				},
 				[396] = {
-					["amount"] = 8550,
+					["earnedThisWeek"] = 800,
 					["weeklyMax"] = 1000,
 					["totalMax"] = 0,
-					["earnedThisWeek"] = 800,
+					["amount"] = 8550,
 				},
 				[392] = {
 					["earnedThisWeek"] = 0,
@@ -976,13 +985,13 @@ SavedInstancesDB = {
 					["season"] = "Season Total Earned: |cffffffff800",
 				},
 			},
-			["PlayedLevel"] = 5482623,
+			["PlayedLevel"] = 5507148,
 			["Quests"] = {
 			},
 			["ILe"] = 401.8125,
-			["DailyResetTime"] = 1333267202,
+			["DailyCount"] = 0,
 			["LClass"] = "Hunter",
-			["Level"] = 85,
+			["DailyResetTime"] = 1333353601,
 		},
 	},
 	["MinimapIcon"] = {

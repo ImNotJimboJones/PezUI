@@ -50,7 +50,7 @@ DBM_SavedOptions = {
 	["HealthFrameWidth"] = 200,
 	["WarningIconLeft"] = true,
 	["RangeFrameSound1"] = "none",
-	["HPFrameY"] = 3.881396532058716,
+	["HPFrameY"] = -28.24412155151367,
 	["ShowMinimapButton"] = false,
 	["MoviesSeen"] = {
 	},
@@ -64,7 +64,7 @@ DBM_SavedOptions = {
 	["AutoRespond"] = true,
 	["HealthFrameGrowUp"] = false,
 	["HideBossEmoteFrame"] = false,
-	["RangeFrameRadarX"] = 0.8621649146080017,
+	["RangeFrameRadarX"] = 17.9288215637207,
 	["ShowBigBrotherOnCombatStart"] = false,
 	["InfoFrameShowSelf"] = false,
 	["SpecialWarningFont"] = "Fonts\\FRIZQT__.TTF",
@@ -84,16 +84,16 @@ DBM_SavedOptions = {
 	["MovieFilters"] = {
 	},
 	["RangeFrameFrames"] = "radar",
-	["HealthFrameLocked"] = false,
+	["HealthFrameLocked"] = true,
 	["SpecialWarningFontColor"] = {
 		0, -- [1]
 		0, -- [2]
 		1, -- [3]
 	},
-	["RangeFrameRadarY"] = -160.2353515625,
+	["RangeFrameRadarY"] = -150.1961517333984,
 	["RangeFrameLocked"] = false,
 	["AlwaysShowHealthFrame"] = true,
-	["HPFrameX"] = 71.49460601806641,
+	["HPFrameX"] = 94.58477783203125,
 	["ArrowPosY"] = -150,
 	["SpamBlockBossWhispers"] = false,
 	["DontSendBossWhispers"] = false,

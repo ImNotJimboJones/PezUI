@@ -561,9 +561,9 @@ GridDB = {
 						["icon"] = {
 							["alert_direction"] = false,
 							["alert_RaidDebuff"] = true,
+							["unit_name"] = false,
 							["role"] = false,
 							["player_target"] = false,
-							["unit_name"] = false,
 							["unit_health"] = false,
 						},
 						["iconTRcornerleft"] = {
@@ -764,9 +764,9 @@ GridDB = {
 		},
 		["GridStatusLineOfSight"] = {
 		},
-		["GridConfigurableLayouts"] = {
+		["GridStatusVoiceComm"] = {
 		},
-		["GridStatusHots"] = {
+		["GridConfigurableLayouts"] = {
 		},
 		["GridStatusRaidDebuff"] = {
 			["profiles"] = {
@@ -798,14 +798,14 @@ GridDB = {
 					},
 					["layout"] = "Custom Group Solo",
 					["BackgroundB"] = 0,
-					["PosX"] = 0.1353286686226056,
+					["borderTexture"] = "None",
 					["FrameLock"] = true,
 					["BackgroundA"] = 0,
 					["BorderR"] = 0,
-					["borderTexture"] = "None",
+					["BorderG"] = 0,
 					["anchor"] = "TOP",
 					["horizontal"] = true,
-					["BorderG"] = 0,
+					["PosX"] = 0.1353286686226056,
 					["PosY"] = -661.7500106860593,
 				},
 				["Default 10"] = {
@@ -832,7 +832,7 @@ GridDB = {
 					["clamp"] = false,
 					["horizontal"] = true,
 					["BackgroundR"] = 1,
-					["PosX"] = 1.218712707742043,
+					["PosX"] = 1.218660827861413,
 				},
 				["Default"] = {
 					["BackgroundG"] = 0,
@@ -860,7 +860,7 @@ GridDB = {
 				},
 			},
 		},
-		["GridStatusVoiceComm"] = {
+		["GridStatusHots"] = {
 		},
 		["GridStatusReadyCheck"] = {
 		},

@@ -58,12 +58,12 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -75785994240,
-			["DetailWindowX"] = 12337262592,
+			["DetailWindowY"] = -278123347968,
+			["DetailWindowX"] = 45275922432,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
 			["Scaling"] = 0.85,
-			["LastInstanceName"] = "The Battle for Mount Hyjal",
+			["LastInstanceName"] = "Icecrown Citadel",
 			["BarTexture"] = "Minimalist",
 			["RealtimeWindows"] = {
 				["Realtime_FPS_FPS"] = {
@@ -88,8 +88,8 @@ RecountDB = {
 				},
 			},
 			["CurDataSet"] = "LastFightData",
-			["BarTextColorSwap"] = false,
 			["MainWindowMode"] = 2,
+			["BarTextColorSwap"] = false,
 			["MainWindowWidth"] = 226.0703887939453,
 		},
 		["Pezzer - Burning Blade"] = {

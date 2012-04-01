@@ -15,6 +15,20 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
+		["Icecrown"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
@@ -27,18 +41,18 @@ GoGo_Prefs = {
 	["DruidFlightForm"] = false,
 	["GlobalExclude"] = {
 	},
+	["autodismount"] = 1,
+	["DruidClickForm"] = true,
+	["DisableWaterFlight"] = 1,
 	["UnknownMounts"] = {
 	},
-	["DruidDisableInCombat"] = false,
-	["DisableWaterFlight"] = 1,
-	["RemoveBuffs"] = 1,
 	["version"] = "4.3.4",
 	["DruidFormNotRandomize"] = false,
 	["GlobalPrefMounts"] = {
 	},
-	["autodismount"] = 1,
+	["RemoveBuffs"] = 1,
 	["PaladinUseCrusaderAura"] = false,
-	["DruidClickForm"] = true,
+	["DruidDisableInCombat"] = false,
 }
 GoGo_DebugLog = {
 }

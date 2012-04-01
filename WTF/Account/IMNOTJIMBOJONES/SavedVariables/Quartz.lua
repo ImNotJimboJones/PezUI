@@ -117,7 +117,6 @@ Quartz3DB = {
 					["w"] = 198,
 					["y"] = 342,
 					["iconposition"] = "right",
-					["texture"] = "Blizzard Character Skills Bar",
 					["x"] = 340,
 					["hidetimetext"] = true,
 					["hideicon"] = true,
@@ -138,7 +137,6 @@ Quartz3DB = {
 					["h"] = 17,
 					["w"] = 198,
 					["hideicon"] = true,
-					["texture"] = "Blizzard Character Skills Bar",
 					["x"] = 898,
 					["hidetimetext"] = true,
 					["y"] = 342,
@@ -215,6 +213,7 @@ Quartz3DB = {
 				["Buff"] = false,
 				["Timer"] = false,
 				["Pet"] = false,
+				["Latency"] = false,
 			},
 		},
 		["HUNTER"] = {
