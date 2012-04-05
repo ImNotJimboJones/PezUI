@@ -44,10 +44,10 @@ GoGo_Prefs = {
 		},
 	},
 	["AspectPack"] = false,
-	["DisableWaterFlight"] = 1,
-	["version"] = "4.3.4",
 	["GlobalExclude"] = {
 	},
+	["version"] = "4.3.4",
+	["DisableWaterFlight"] = 1,
 	["GlobalPrefMounts"] = {
 	},
 	["autodismount"] = 1,

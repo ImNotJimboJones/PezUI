@@ -13,7 +13,6 @@ MogItDB = {
 				["hide"] = true,
 			},
 			["tooltipMouse"] = true,
-			["tooltipRotate"] = false,
 			["tooltipMog"] = false,
 		},
 	},

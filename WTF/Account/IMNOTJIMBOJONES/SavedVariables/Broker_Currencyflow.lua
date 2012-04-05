@@ -58,6 +58,8 @@ Currencyflow_DB = {
 					["maxReached395"] = false,
 					["maxReached400"] = false,
 					["maxReached384"] = false,
+					["maxReached385"] = false,
+					[396] = 9500,
 					["history"] = {
 						[15435] = {
 							[395] = {
@@ -68,7 +70,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							["time"] = 15,
+							["time"] = 114,
 							["gold"] = {
 								["gained"] = 0,
 								["spent"] = 0,
@@ -326,7 +328,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[416] = {
+							[385] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -346,7 +348,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[385] = {
+							[416] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -400,8 +402,6 @@ Currencyflow_DB = {
 							},
 						},
 					},
-					[396] = 9500,
-					["maxReached385"] = false,
 					["maxReached390"] = false,
 					["maxReached401"] = false,
 					[241] = 26,

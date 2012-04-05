@@ -9,7 +9,7 @@ local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 local tipshown
 local lastUp = 0
 local toff = L["Tracking Off"]
-local string_format = string.format
+local sformat = string.format
 MiniMapTracking:UnregisterAllEvents()
 MiniMapTracking:Hide()
 local defaults = {
@@ -239,12 +239,12 @@ function DETrackingBroker:UpdateText()
 	local g = self.db.char.textg * 255
 	local b = self.db.char.textb * 255
 	Object.icon = "Interface\\Minimap\\Tracking\\None"
-	Object.text = string.format("|CFF%02x%02x%02x%s|r", r, g, b, toff)
+	Object.text = sformat("|CFF%02x%02x%02x%s|r", r, g, b, toff)
 	for Index = 1, GetNumTrackingTypes() do
 	local name, texture, active, category  = GetTrackingInfo(Index)
 		if active then	
 			Object.icon = texture
-			Object.text = string.format("|CFF%02x%02x%02x%s|r", r, g, b, name)
+			Object.text = sformat("|CFF%02x%02x%02x%s|r", r, g, b, name)
 		return
 		end
 	end

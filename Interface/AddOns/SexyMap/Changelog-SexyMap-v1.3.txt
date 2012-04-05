@@ -1,0 +1,19 @@
+tag v1.3
+d8b04df9a35915bae8ccb701bd98cac969fa9e85
+funkydude <none>
+2012-04-01 03:28:11 +0100
+
+Tagging as v1.3
+
+
+--------------------
+
+funkydude:
+	- add version to toc
+	- Fix the HudMap keybinding and give it a name in the keybinding options.
+	- remove AceConsole reference in embeds file
+	- Cleanup & Optimize Coordinates module
+	- remove aceconsole embed
+	- No need to set a global SexyMap, cleanup AutoZoom (remove hook)
+	- Fix Astrolabe reference in the HudMap module
+	- Fix GetMinimapShape() (and test if this git stuff works...)

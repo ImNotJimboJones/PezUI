@@ -1,0 +1,12 @@
+tag z28e-release
+f04deda7e740d2fb25bab29ccc745be479e24c1c
+Xuerian <sky.shell@gmail.com>
+2012-04-03 14:53:29 -0400
+
+Fixing the fixing of the TOC/pkgmeta
+
+
+--------------------
+
+Xuerian:
+	- Remove mistakenly added externals, change to included libstub to avoid grabbing tests

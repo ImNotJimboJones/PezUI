@@ -73,7 +73,7 @@ SexyMapDB = {
 						["hide"] = "always",
 					},
 					["mapclock"] = {
-						["hide"] = "hover",
+						["hide"] = "never",
 					},
 					["calendar"] = {
 						["hide"] = "never",
@@ -82,7 +82,7 @@ SexyMapDB = {
 						["hide"] = "never",
 					},
 					["mail"] = {
-						["hide"] = "hover",
+						["hide"] = "never",
 					},
 					["dragPositions"] = {
 						["MinimapZoomIn"] = -31.51559554458952,
@@ -91,9 +91,9 @@ SexyMapDB = {
 						["MiniMapWorldMapButton"] = 42.60297915413958,
 						["MinimapZoomOut"] = -56.07895483376067,
 						["TimeManagerClockButton"] = -89.45977552062108,
-						["MacaroonMinimapButton"] = 210.0155001660639,
-						["MiniMapTrackingButton"] = 158.8424850050231,
 						["MiniMapLFGFrame"] = 165.1088245815029,
+						["MiniMapTrackingButton"] = 158.8424850050231,
+						["MacaroonMinimapButton"] = 210.0155001660639,
 					},
 					["GuildInstanceDifficulty"] = {
 						["hide"] = "never",

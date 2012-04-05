@@ -4,9 +4,10 @@ local NAME, addon = ...
 addon.NAME = NAME
 local L = addon.L
 local frame = CreateFrame("Frame", "XLootFrame", UIParent)
+frame.addon = addon
 frame:Hide()
 local _G, opt = _G
-local XUI = LibStub('X-UI')
+local XSkin = LibStub('X-Skin')
 
 -- Default options
 local defaults = {
@@ -46,12 +47,12 @@ local defaults = {
 	linkall_channel = 'RAID',
 	linkall_show = 'auto',
 
-	frame_color_border = { .7, .7, .7 },
-	frame_color_backdrop = { 0, 0, 0, .9 },
-	frame_color_gradient = { .5, .5, .5, .6 },
+	frame_color_border = { .5, .5, .5 },
+	frame_color_backdrop = { 0, 0, 0, .7 },
+	frame_color_gradient = { .5, .5, .5, .3 },
 	loot_color_border = { .5, .5, .5 },
 	loot_color_backdrop = { 0, 0, 0, .9 },
-	loot_color_gradient = { .5, .5, .5, .6 },
+	loot_color_gradient = { .5, .5, .5, .4 },
 	loot_color_info = { .5, .5, .5 },
 
 	skin = 'smooth'
@@ -103,12 +104,6 @@ do
 		size_highlight = 12,
 		
 		color_mod = .85,
-		frame_color_border = { .5, .5, .5 },
-		frame_color_backdrop = { .0, .0, .0, .7 },
-		frame_color_gradient = { .5, .5, .5, .3 },
-		loot_color_border = { .5, .5, .5 },
-		loot_color_backdrop = { .0, .0, .0, .9 },
-		loot_color_gradient = { .5, .5, .5, .4 },
 	}
 	local smooth = {
 		name = ('|c2244dd22%s|r'):format(L.config.skin_smooth),
@@ -121,12 +116,6 @@ do
 		padding_highlight = -1,
 		
 		color_mod = .9,
-		frame_color_border = { .5, .5, .5 },
-		frame_color_backdrop = { .0, .0, .0, .7 },
-		frame_color_gradient = { .5, .5, .5, .3 },
-		loot_color_border = { .5, .5, .5 },
-		loot_color_backdrop = { .0, .0, .0, .9 },
-		loot_color_gradient = { .5, .5, .5, .4 },
 	}
 	local mt = { __index = base }
 	function XLootFrame:RegisterSkin(skin_name, skin_table)
@@ -138,7 +127,7 @@ do
 	XLootFrame:RegisterSkin('smooth', smooth)
 	
 	-- Masque skins
-	local MasqueSkins = XUI:SkinsFromMasque()
+	local MasqueSkins = XSkin:SkinsFromMasque()
 	if MasqueSkins then
 		for name, skin in pairs(MasqueSkins) do
 			XLootFrame:RegisterSkin(name, skin)
@@ -532,7 +521,7 @@ do
 		
 		self:Show()
 		
-		return max(self.text_info:GetStringWidth(), self.text_name:GetStringWidth())
+		return max(self.text_info:GetStringWidth() + 2, self.text_name:GetStringWidth())
 	end
 
 	-- Factory
@@ -798,7 +787,7 @@ do
 		f.UpdateAppearance = UpdateAppearance
 		
 		-- Set up frame skins
-		XUI:SetupSkins(f, {
+		XSkin:SetupSkins(f, {
 			default = { },
 			item = { backdrop = false },
 			row_highlight = { type = 'highlight' },
@@ -1113,16 +1102,6 @@ local function cache(key, value, initial)
 end
 
 -- Configuration callbacks
-function addon:ConfigSet(key, value)
-	local default = defaults[key]
-	-- Force boolean
-	if type(default) == 'boolean' then
-		value = value and true or false
-	end
-	-- Update
-	opt[key] = value
-end
-
 function addon:ConfigGet(key, initial)
 	local v = opt[key]
 	if key == 'skin' and not skins[v] then
@@ -1138,10 +1117,6 @@ function addon:ConfigSave()
 		XLootFrame:UpdateAppearance()
 	end
 	PluginTrigger('SkinUpdate')
-end
-
-function addon:ConfigDefault()
-	wipe(opt)
 end
 
 -- Set up preview frame
