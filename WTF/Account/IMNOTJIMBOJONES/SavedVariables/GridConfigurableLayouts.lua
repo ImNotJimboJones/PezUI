@@ -3,7 +3,6 @@ GridConfigurableLayoutsDB = {
 	["blizzRolesRule"] = false,
 	["debug"] = false,
 	["useBlizzRoles"] = true,
-	["configLayout"] = "Custom Group Solo",
 	["filterColors"] = {
 		["ranged"] = {
 			["a"] = 0.85,
@@ -120,31 +119,14 @@ GridConfigurableLayoutsDB = {
 			["b"] = 0.75,
 		},
 	},
-	["filterToColor"] = "tank",
 	["layouts"] = {
 		["GCL Group 10"] = {
 			["petOptions"] = {
 				["HUNTER"] = true,
-				["allPets"] = true,
 				["WARLOCK"] = true,
+				["allPets"] = true,
 				["DEATHKNIGHT"] = true,
 			},
-			["unitsPerColumn"] = 5,
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -158,7 +140,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 5,
 			["sortOptions"] = {
 				["sortMethod"] = "role",
 				["sortOrder"] = {
@@ -182,15 +163,10 @@ GridConfigurableLayoutsDB = {
 					},
 				},
 			},
-		},
-		["GCL Group 25"] = {
-			["petOptions"] = {
-				["HUNTER"] = true,
-				["allPets"] = true,
-				["WARLOCK"] = true,
-				["DEATHKNIGHT"] = true,
-			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["unitsPerColumn"] = 5,
+			["numGroups"] = 5,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -204,8 +180,14 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
+		},
+		["GCL Group 25"] = {
+			["petOptions"] = {
+				["HUNTER"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = true,
+				["DEATHKNIGHT"] = true,
+			},
 			["groupType"] = {
 				"tank", -- [1]
 				"rg1", -- [2]
@@ -219,7 +201,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 8,
 			["sortOptions"] = {
 				["sortMethod"] = "role",
 				["sortOrder"] = {
@@ -243,15 +224,10 @@ GridConfigurableLayoutsDB = {
 					},
 				},
 			},
-		},
-		["GCL Default"] = {
-			["petOptions"] = {
-				["HUNTER"] = true,
-				["allPets"] = false,
-				["WARLOCK"] = true,
-				["DEATHKNIGHT"] = true,
-			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["unitsPerColumn"] = 5,
+			["numGroups"] = 8,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -265,8 +241,14 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-			["createBorders"] = true,
-			["allowRepeats"] = false,
+		},
+		["GCL Default"] = {
+			["petOptions"] = {
+				["HUNTER"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+				["DEATHKNIGHT"] = true,
+			},
 			["groupType"] = {
 				"tank", -- [1]
 				"melee", -- [2]
@@ -280,7 +262,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 6,
 			["sortOptions"] = {
 				["sortMethod"] = "name",
 				["sortOrder"] = {
@@ -304,15 +285,10 @@ GridConfigurableLayoutsDB = {
 					},
 				},
 			},
-		},
-		["Test"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["allPets"] = false,
-				["WARLOCK"] = true,
-				["HUNTER"] = true,
-			},
+			["createBorders"] = true,
+			["allowRepeats"] = false,
 			["unitsPerColumn"] = 5,
+			["numGroups"] = 6,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -326,8 +302,14 @@ GridConfigurableLayoutsDB = {
 				"", -- [10]
 				"", -- [11]
 			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
+		},
+		["Test"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["WARLOCK"] = true,
+				["allPets"] = false,
+				["HUNTER"] = true,
+			},
 			["groupType"] = {
 				"ranged", -- [1]
 				"pets", -- [2]
@@ -341,7 +323,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 5,
 			["sortOptions"] = {
 				["sortMethod"] = "name",
 				["sortOrder"] = {
@@ -365,14 +346,47 @@ GridConfigurableLayoutsDB = {
 					},
 				},
 			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 5,
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
 		},
 		["Custom Group 10"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
-				["WARLOCK"] = true,
 				["allPets"] = true,
+				["WARLOCK"] = true,
 				["HUNTER"] = true,
 			},
+			["unitsPerColumn"] = 5,
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
 			["groupType"] = {
 				"rg1", -- [1]
 				"everyone", -- [2]
@@ -386,6 +400,7 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
+			["numGroups"] = 3,
 			["sortOptions"] = {
 				["sortOrder"] = {
 					["role"] = {
@@ -410,47 +425,14 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = true,
 				["sortMethod"] = "role",
 			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
-			["unitsPerColumn"] = 5,
-			["numGroups"] = 3,
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
 		},
 		["Custom Group Solo"] = {
 			["petOptions"] = {
 				["DEATHKNIGHT"] = true,
-				["allPets"] = false,
 				["WARLOCK"] = true,
+				["allPets"] = false,
 				["HUNTER"] = true,
 			},
-			["unitsPerColumn"] = 5,
-			["nameList"] = {
-				"", -- [1]
-				"", -- [2]
-				"", -- [3]
-				"", -- [4]
-				"", -- [5]
-				"", -- [6]
-				"", -- [7]
-				"", -- [8]
-				"", -- [9]
-				"", -- [10]
-				"", -- [11]
-			},
-			["createBorders"] = false,
-			["allowRepeats"] = false,
 			["groupType"] = {
 				"everyone", -- [1]
 				"pets", -- [2]
@@ -464,7 +446,6 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 2,
 			["sortOptions"] = {
 				["sortOrder"] = {
 					["role"] = {
@@ -489,14 +470,10 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = true,
 				["sortMethod"] = "role",
 			},
-		},
-		["Custom Group 5"] = {
-			["petOptions"] = {
-				["DEATHKNIGHT"] = true,
-				["HUNTER"] = true,
-				["WARLOCK"] = true,
-				["allPets"] = false,
-			},
+			["createBorders"] = false,
+			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 2,
 			["nameList"] = {
 				"", -- [1]
 				"", -- [2]
@@ -509,6 +486,14 @@ GridConfigurableLayoutsDB = {
 				"", -- [9]
 				"", -- [10]
 				"", -- [11]
+			},
+		},
+		["Custom Group 5"] = {
+			["petOptions"] = {
+				["DEATHKNIGHT"] = true,
+				["HUNTER"] = true,
+				["allPets"] = false,
+				["WARLOCK"] = true,
 			},
 			["sortOptions"] = {
 				["sortOrder"] = {
@@ -534,8 +519,23 @@ GridConfigurableLayoutsDB = {
 				["playerFirst"] = false,
 				["sortMethod"] = "role",
 			},
+			["nameList"] = {
+				"", -- [1]
+				"", -- [2]
+				"", -- [3]
+				"", -- [4]
+				"", -- [5]
+				"", -- [6]
+				"", -- [7]
+				"", -- [8]
+				"", -- [9]
+				"", -- [10]
+				"", -- [11]
+			},
 			["createBorders"] = false,
 			["allowRepeats"] = false,
+			["unitsPerColumn"] = 5,
+			["numGroups"] = 2,
 			["groupType"] = {
 				"everyone", -- [1]
 				"pets", -- [2]
@@ -549,9 +549,9 @@ GridConfigurableLayoutsDB = {
 				"none", -- [10]
 				"none", -- [11]
 			},
-			["numGroups"] = 2,
-			["unitsPerColumn"] = 5,
 		},
 	},
+	["filterToColor"] = "tank",
+	["configLayout"] = "Custom Group Solo",
 	["checkOOZFrequency"] = 3,
 }

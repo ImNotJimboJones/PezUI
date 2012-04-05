@@ -5,29 +5,13 @@ SwatterData = {
 	["autoshow"] = true,
 	["errors"] = {
 		{
-			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarRightButton12:Hide()) during combat lockdown.",
-			["count"] = 29,
-			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  Atlas, v1.21.1\n  AtlasBattlegrounds, v1.21.1\n  AtlasBurningCrusade, v1.21.0\n  AtlasClassicWoW, v1.21.0\n  AtlasDungeonLocs, v1.21.0\n  AtlasTransportation, v1.21.1\n  AtlasWrathoftheLichKing, v1.21.0\n  AtlasLootLoader, vv6.05.04\n  AtlasMajorCitiesEnhanced, vv0.20\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.1\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  Critline, v4.3.0\n  DBMCore, v\n  DBMIcecrown, v\n  DeathNote, vv1.1d\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  FishingBuddy, v1.0.7g\n  GearScore, v4.11.00.00\n  GoGoMount, v4.3.4\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MogIt, v2.2.1\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  PezUICore, v1.0\n  PezUILoginScripts, v1.0\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Postal, v3.4.13\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  RaidBuffStatus, vv4.16g-beta\n  Recount, v\n  SavedInstances, v4.6.1\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacItemRef, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  UndressButton, v\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  XLoot, v\n  XLoot10, vz28b-USE_MASQUE_BETA-release\n  XLootMaster, v0.82\n  XLootMonitor, v0.72\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=15f2)\n",
-			["timestamp"] = "2012-03-31 23:22:17",
-			["context"] = "AddOn: Macaroon",
-			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [1]
-		{
-			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton1:Show()) during combat lockdown.",
-			["count"] = 29,
-			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  Atlas, v1.21.1\n  AtlasBattlegrounds, v1.21.1\n  AtlasBurningCrusade, v1.21.0\n  AtlasClassicWoW, v1.21.0\n  AtlasDungeonLocs, v1.21.0\n  AtlasTransportation, v1.21.1\n  AtlasWrathoftheLichKing, v1.21.0\n  AtlasLootLoader, vv6.05.04\n  AtlasMajorCitiesEnhanced, vv0.20\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.1\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  Critline, v4.3.0\n  DBMCore, v\n  DBMIcecrown, v\n  DeathNote, vv1.1d\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  FishingBuddy, v1.0.7g\n  GearScore, v4.11.00.00\n  GoGoMount, v4.3.4\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MogIt, v2.2.1\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  PezUICore, v1.0\n  PezUILoginScripts, v1.0\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Postal, v3.4.13\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  RaidBuffStatus, vv4.16g-beta\n  Recount, v\n  SavedInstances, v4.6.1\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacItemRef, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  UndressButton, v\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  XLoot, v\n  XLoot10, vz28b-USE_MASQUE_BETA-release\n  XLootMaster, v0.82\n  XLootMonitor, v0.72\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=15f2)\n",
-			["timestamp"] = "2012-03-31 23:22:17",
-			["context"] = "AddOn: Macaroon",
-			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [2]
-		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton2:Show()) during combat lockdown.",
 			["count"] = 29,
 			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  Atlas, v1.21.1\n  AtlasBattlegrounds, v1.21.1\n  AtlasBurningCrusade, v1.21.0\n  AtlasClassicWoW, v1.21.0\n  AtlasDungeonLocs, v1.21.0\n  AtlasTransportation, v1.21.1\n  AtlasWrathoftheLichKing, v1.21.0\n  AtlasLootLoader, vv6.05.04\n  AtlasMajorCitiesEnhanced, vv0.20\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.1\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  Critline, v4.3.0\n  DBMCore, v\n  DBMIcecrown, v\n  DeathNote, vv1.1d\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  FishingBuddy, v1.0.7g\n  GearScore, v4.11.00.00\n  GoGoMount, v4.3.4\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MogIt, v2.2.1\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  PezUICore, v1.0\n  PezUILoginScripts, v1.0\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Postal, v3.4.13\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  RaidBuffStatus, vv4.16g-beta\n  Recount, v\n  SavedInstances, v4.6.1\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacItemRef, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  UndressButton, v\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  XLoot, v\n  XLoot10, vz28b-USE_MASQUE_BETA-release\n  XLootMaster, v0.82\n  XLootMonitor, v0.72\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=15f2)\n",
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [3]
+		}, -- [1]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton3:Show()) during combat lockdown.",
 			["count"] = 29,
@@ -35,7 +19,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [4]
+		}, -- [2]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton4:Show()) during combat lockdown.",
 			["count"] = 29,
@@ -43,7 +27,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [5]
+		}, -- [3]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton5:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -51,7 +35,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [6]
+		}, -- [4]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton6:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -59,7 +43,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [7]
+		}, -- [5]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton7:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -67,7 +51,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [8]
+		}, -- [6]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton8:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -75,7 +59,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [9]
+		}, -- [7]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton9:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -83,7 +67,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [10]
+		}, -- [8]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton10:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -91,7 +75,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [11]
+		}, -- [9]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton11:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -99,7 +83,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [12]
+		}, -- [10]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarLeftButton12:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -107,7 +91,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [13]
+		}, -- [11]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton1:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -115,7 +99,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [14]
+		}, -- [12]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton2:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -123,7 +107,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [15]
+		}, -- [13]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton3:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -131,7 +115,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [16]
+		}, -- [14]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton4:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -139,7 +123,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [17]
+		}, -- [15]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton5:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -147,7 +131,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [18]
+		}, -- [16]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton6:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -155,7 +139,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [19]
+		}, -- [17]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton7:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -163,7 +147,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [20]
+		}, -- [18]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton8:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -171,7 +155,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [21]
+		}, -- [19]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton9:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -179,7 +163,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [22]
+		}, -- [20]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton10:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -187,7 +171,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [23]
+		}, -- [21]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton11:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -195,7 +179,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [24]
+		}, -- [22]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiCastActionButton12:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -203,7 +187,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [25]
+		}, -- [23]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton6:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -211,7 +195,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [26]
+		}, -- [24]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton7:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -219,7 +203,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [27]
+		}, -- [25]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton8:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -227,7 +211,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [28]
+		}, -- [26]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton9:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -235,7 +219,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [29]
+		}, -- [27]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton10:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -243,7 +227,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [30]
+		}, -- [28]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton11:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -251,7 +235,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [31]
+		}, -- [29]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton12:Show()) during combat lockdown.",
 			["count"] = 3,
@@ -259,7 +243,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [32]
+		}, -- [30]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (ExtraActionButton1:Show()) during combat lockdown.",
 			["count"] = 29,
@@ -267,7 +251,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [33]
+		}, -- [31]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton1:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -275,7 +259,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [34]
+		}, -- [32]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton2:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -283,7 +267,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [35]
+		}, -- [33]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton3:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -291,7 +275,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [36]
+		}, -- [34]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton4:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -299,7 +283,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [37]
+		}, -- [35]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton5:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -307,7 +291,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [38]
+		}, -- [36]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (VehicleMenuBarActionButton6:Hide()) during combat lockdown.",
 			["count"] = 29,
@@ -315,7 +299,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:22:17",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [39]
+		}, -- [37]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton2:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -323,7 +307,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [40]
+		}, -- [38]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton3:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -331,7 +315,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [41]
+		}, -- [39]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton4:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -339,7 +323,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [42]
+		}, -- [40]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton5:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -347,7 +331,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [43]
+		}, -- [41]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton6:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -355,7 +339,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [44]
+		}, -- [42]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton7:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -363,7 +347,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [45]
+		}, -- [43]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton8:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -371,7 +355,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [46]
+		}, -- [44]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton9:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -379,7 +363,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [47]
+		}, -- [45]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton10:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -387,7 +371,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [48]
+		}, -- [46]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton11:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -395,7 +379,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [49]
+		}, -- [47]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomLeftButton12:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -403,7 +387,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [50]
+		}, -- [48]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton1:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -411,7 +395,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [51]
+		}, -- [49]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton2:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -419,7 +403,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [52]
+		}, -- [50]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton3:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -427,7 +411,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [53]
+		}, -- [51]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton4:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -435,7 +419,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [54]
+		}, -- [52]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton5:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -443,7 +427,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [55]
+		}, -- [53]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton6:Hide()) during combat lockdown.",
 			["count"] = 22,
@@ -451,7 +435,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [56]
+		}, -- [54]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (MultiBarBottomRightButton7:Show()) during combat lockdown.",
 			["count"] = 22,
@@ -459,7 +443,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\ActionButton.lua:246: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [57]
+		}, -- [55]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton1:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -467,7 +451,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [58]
+		}, -- [56]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton2:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -475,7 +459,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:04",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [59]
+		}, -- [57]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton3:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -483,7 +467,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [60]
+		}, -- [58]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton4:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -491,7 +475,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [61]
+		}, -- [59]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton5:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -499,7 +483,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [62]
+		}, -- [60]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton6:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -507,7 +491,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [63]
+		}, -- [61]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton7:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -515,7 +499,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [64]
+		}, -- [62]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton8:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -523,7 +507,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [65]
+		}, -- [63]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton9:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -531,7 +515,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [66]
+		}, -- [64]
 		{
 			["message"] = "Note: AddOn Macaroon attempted to call a protected function (BonusActionButton12:Hide()) during combat lockdown.",
 			["count"] = 26,
@@ -539,7 +523,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:24:05",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `Hide'\nInterface\\FrameXML\\ActionButton.lua:259: in function `ActionButton_Update'\nInterface\\FrameXML\\ActionButton.lua:484: in function `ActionButton_OnEvent'\nInterface\\FrameXML\\ActionButton.lua:105: in function <Interface\\FrameXML\\ActionButton.lua:98>\n",
-		}, -- [67]
+		}, -- [65]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2Member2:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -547,7 +531,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [68]
+		}, -- [66]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2Member3:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -555,7 +539,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [69]
+		}, -- [67]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2Member4:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -563,7 +547,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [70]
+		}, -- [68]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2Member5:Show()) during combat lockdown.",
 			["count"] = 2,
@@ -571,7 +555,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [71]
+		}, -- [69]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3Member2:Show()) during combat lockdown.",
 			["count"] = 2,
@@ -579,7 +563,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [72]
+		}, -- [70]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3Member3:Show()) during combat lockdown.",
 			["count"] = 1,
@@ -587,7 +571,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:25:26",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\nInterface\\FrameXML\\CompactUnitFrame.lua:264: in function `CompactUnitFrame_UpateVisible'\nInterface\\FrameXML\\CompactUnitFrame.lua:224: in function `CompactUnitFrame_UpdateAll'\nInterface\\FrameXML\\CompactUnitFrame.lua:52: in function <Interface\\FrameXML\\CompactUnitFrame.lua:49>\n",
-		}, -- [73]
+		}, -- [71]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:unusedFunc()) during combat lockdown.",
 			["count"] = 6,
@@ -595,7 +579,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [74]
+		}, -- [72]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:unusedFunc()) during combat lockdown.",
 			["count"] = 6,
@@ -603,7 +587,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [75]
+		}, -- [73]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:unusedFunc()) during combat lockdown.",
 			["count"] = 6,
@@ -611,7 +595,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [76]
+		}, -- [74]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:unusedFunc()) during combat lockdown.",
 			["count"] = 6,
@@ -619,7 +603,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `unusedFunc'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:161: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [77]
+		}, -- [75]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:SetParent()) during combat lockdown.",
 			["count"] = 6,
@@ -627,7 +611,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [78]
+		}, -- [76]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:SetFrameStrata()) during combat lockdown.",
 			["count"] = 6,
@@ -635,7 +619,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [79]
+		}, -- [77]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:Show()) during combat lockdown.",
 			["count"] = 6,
@@ -643,7 +627,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [80]
+		}, -- [78]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:SetParent()) during combat lockdown.",
 			["count"] = 6,
@@ -651,7 +635,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [81]
+		}, -- [79]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:SetFrameStrata()) during combat lockdown.",
 			["count"] = 6,
@@ -659,7 +643,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [82]
+		}, -- [80]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:Show()) during combat lockdown.",
 			["count"] = 6,
@@ -667,7 +651,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [83]
+		}, -- [81]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:SetParent()) during combat lockdown.",
 			["count"] = 6,
@@ -675,7 +659,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [84]
+		}, -- [82]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:SetFrameStrata()) during combat lockdown.",
 			["count"] = 6,
@@ -683,7 +667,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [85]
+		}, -- [83]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:Show()) during combat lockdown.",
 			["count"] = 6,
@@ -691,7 +675,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [86]
+		}, -- [84]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:SetParent()) during combat lockdown.",
 			["count"] = 6,
@@ -699,7 +683,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetParent'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:234: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [87]
+		}, -- [85]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:SetFrameStrata()) during combat lockdown.",
 			["count"] = 6,
@@ -707,7 +691,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetFrameStrata'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:235: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [88]
+		}, -- [86]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:Show()) during combat lockdown.",
 			["count"] = 6,
@@ -715,7 +699,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Show'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:242: in function `CompactRaidFrameContainer_AddGroup'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:212: in function `CompactRaidFrameContainer_AddGroups'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:175: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [89]
+		}, -- [87]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:ClearAllPoints()) during combat lockdown.",
 			["count"] = 6,
@@ -723,7 +707,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [90]
+		}, -- [88]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup1:SetPoint()) during combat lockdown.",
 			["count"] = 6,
@@ -731,7 +715,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [91]
+		}, -- [89]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:ClearAllPoints()) during combat lockdown.",
 			["count"] = 6,
@@ -739,7 +723,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [92]
+		}, -- [90]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup2:SetPoint()) during combat lockdown.",
 			["count"] = 6,
@@ -747,7 +731,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [93]
+		}, -- [91]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:ClearAllPoints()) during combat lockdown.",
 			["count"] = 6,
@@ -755,7 +739,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [94]
+		}, -- [92]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup3:SetPoint()) during combat lockdown.",
 			["count"] = 6,
@@ -763,7 +747,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [95]
+		}, -- [93]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:ClearAllPoints()) during combat lockdown.",
 			["count"] = 6,
@@ -771,7 +755,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `ClearAllPoints'\nInterface\\FrameXML\\FlowContainer.lua:147: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [96]
+		}, -- [94]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidGroup4:SetPoint()) during combat lockdown.",
 			["count"] = 6,
@@ -779,7 +763,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `SetPoint'\nInterface\\FrameXML\\FlowContainer.lua:151: in function `FlowContainer_DoLayout'\nInterface\\FrameXML\\FlowContainer.lua:17: in function `FlowContainer_ResumeUpdates'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:186: in function `CompactRaidFrameContainer_LayoutFrames'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:131: in function `CompactRaidFrameContainer_TryUpdate'\n...actRaidFrames\\Blizzard_CompactRaidFrameContainer.lua:58: in function `CompactRaidFrameContainer_OnEvent'\n[string \"*:OnEvent\"]:1: in function <[string \"*:OnEvent\"]:1>\n",
-		}, -- [97]
+		}, -- [95]
 		{
 			["message"] = "Note: AddOn Volumizer attempted to call a protected function (CompactRaidFrameManagerContainerResizeFrame:Hide()) during combat lockdown.",
 			["count"] = 3,
@@ -787,7 +771,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:33:33",
 			["context"] = "AddOn: Volumizer",
 			["stack"] = "[C]: in function `Hide'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:560: in function `CompactRaidFrameManager_LockContainer'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:553: in function `CompactRaidFrameManager_UpdateContainerLockVisibility'\n...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:47: in function <...mpactRaidFrames\\Blizzard_CompactRaidFrameManager.lua:40>\n",
-		}, -- [98]
+		}, -- [96]
 		{
 			["message"] = "...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: Usage: GetCategoryNumAchievements(categoryID)",
 			["count"] = 3,
@@ -795,7 +779,7 @@ SwatterData = {
 			["timestamp"] = "2012-03-31 23:37:47",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n[C]: in function `GetCategoryNumAchievements'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: in function `AchievementFrameComparison_UpdateStatusBars'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2669: in function <...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2666>\n",
-		}, -- [99]
+		}, -- [97]
 		{
 			["message"] = "...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: Usage: GetCategoryNumAchievements(categoryID)",
 			["count"] = 5,
@@ -803,7 +787,7 @@ SwatterData = {
 			["timestamp"] = "2012-04-01 00:06:29",
 			["context"] = "Global",
 			["stack"] = "[C]: ?\n[C]: in function `GetCategoryNumAchievements'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: in function `AchievementFrameComparison_UpdateStatusBars'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2669: in function <...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2666>\n",
-		}, -- [100]
+		}, -- [98]
 		{
 			["message"] = "Error: AddOn Macaroon attempted to call a forbidden function (CastSpellByName()) from a tainted execution path.",
 			["count"] = 3,
@@ -811,6 +795,14 @@ SwatterData = {
 			["timestamp"] = "2012-04-01 19:28:22",
 			["context"] = "AddOn: Macaroon",
 			["stack"] = "[C]: in function `CastSpellByName'\nInterface\\FrameXML\\ChatFrame.lua:1084: in function `?'\nInterface\\FrameXML\\ChatFrame.lua:4273: in function <Interface\\FrameXML\\ChatFrame.lua:4239>\n[C]: ?\n[C]: in function `ChatEdit_ParseText'\nInterface\\FrameXML\\ChatFrame.lua:3992: in function <Interface\\FrameXML\\ChatFrame.lua:3991>\n[C]: in function `ChatEdit_SendText'\nInterface\\FrameXML\\ChatFrame.lua:4031: in function `ChatEdit_OnEnterPressed'\n[string \"*:OnEnterPressed\"]:1: in function <[string \"*:OnEnterPressed\"]:1>\n",
-		}, -- [101]
+		}, -- [99]
+		{
+			["message"] = "...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: Usage: GetCategoryNumAchievements(categoryID)",
+			["count"] = 1,
+			["addons"] = "  Swatter, v5.13.5258 (BoldBandicoot)\n  AddonMgr, v\n  AllPlayed, v40000-1 $Revision: 230 $\n  Atlas, v1.21.1\n  AtlasBattlegrounds, v1.21.1\n  AtlasBurningCrusade, v1.21.0\n  AtlasClassicWoW, v1.21.0\n  AtlasDungeonLocs, v1.21.0\n  AtlasTransportation, v1.21.1\n  AtlasWrathoftheLichKing, v1.21.0\n  AtlasLootLoader, vv6.05.04\n  AtlasMajorCitiesEnhanced, vv0.20\n  AucAdvanced, v5.13.5258 (BoldBandicoot)\n  AucFilterBasic, v5.13.5258 (BoldBandicoot)\n  AucFilterOutlier, v5.13.5258.5187(5.13/embedded)\n  AucMatchUndercut, v5.13.5258.5232(5.13/embedded)\n  AucStatSales, v5.13.5258.4838(5.13/embedded)\n  AucStatWOWEcon, v5.13.5258.4828(5.13/embedded)\n  AucUtilAHWindowControl, v5.13.5258.5133(5.13/embedded)\n  AucUtilAppraiser, v5.13.5258.5241(5.13/embedded)\n  AucUtilAskPrice, v5.13.5258.5160(5.13/embedded)\n  AucUtilAutoMagic, v5.13.5258.5224(5.13/embedded)\n  AucUtilCompactUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilEasyBuyout, v5.13.5258.5241(5.13/embedded)\n  AucUtilFixAH, v5.13.5258 (BoldBandicoot)\n  AucUtilItemSuggest, v5.13.5258.5224(5.13/embedded)\n  AucUtilPriceLevel, v5.13.5258.5241(5.13/embedded)\n  AucUtilScanButton, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanFinish, v5.13.5258.5153(5.13/embedded)\n  AucUtilScanProgress, v5.13.5258.4979(5.13/embedded)\n  AucUtilScanStart, v5.13.5258.5153(5.13/embedded)\n  AucUtilSearchUI, v5.13.5258.5254(5.13/embedded)\n  AucUtilSimpleAuction, v5.13.5258.5210(5.13/embedded)\n  AucUtilVendMarkup, v5.13.5258.4828(5.13/embedded)\n  Babylonian, v5.1.DEV.312(/embedded)\n  Bazooka, vv2.1.4\n  Bison, v2.4.4-release\n  BlizzBuffsFacade, v4.3.0\n  BrokerCurrencyflow, v\n  BrokerDualSpec, v1.1\n  BrokerMailBox, v0.3\n  brokertoolbox, v\n  ButtonFacade, v4.2.375\n  ColorPickerPlus, v\n  Configator, v5.1.DEV.312(/embedded)\n  Critline, v4.3.0\n  DBMCore, v\n  DeathNote, vv1.1d\n  DebugLib, v5.1.DEV.312(/embedded)\n  DETrackingBroker, v|cffff7d0av4.0.3|r\n  draiksbrokerilevel, v\n  DungeonHelper, vv2.2.3\n  FishingBuddy, v1.0.7g\n  GearScore, v4.11.00.00\n  GoGoMount, v4.3.4\n  GreedyQuester, v4.0.3\n  Grid, v4.3.2.1458\n  GridAutoFrameSize, v2.4.4\n  GridBuffIcons, v\n  GridConfigurableLayouts, v0.4.3b\n  GridCustomLayouts, v\n  GridIndicatorCornerIcons, v40300-1\n  GridIndicatorSideIcons, v40300-1\n  GridSideIndicators, v4.0.1-1\n  GridStatusDirectionArrows, vv1.1d\n  GridStatusDungeonRole, v1.2.0\n  GridStatusEmphasize, vv0.99\n  GridStatusFastHealth, v1.1\n  GridStatusHostileUnit, v0.91\n  GridStatusHots, v4.3.1b\n  GridStatusLineOfSight, v1.4\n  GridStatusRaidDebuff, vv3.32\n  GridStatusRaidIcons, v40300-1\n  GridStatusRDBC, v1.0.1\n  GridStatusRDCata, v1.4\n  GridStatusRDWotLK, v1.1\n  GridStatusRes, v4.3.0.76\n  GridStatusRole, v1.3.5\n  GridUnitMenu, v30300.1\n  Informant, v5.13.5258 (BoldBandicoot)\n  kgPanels, v1.7\n  LibExtraTip, v5.12.DEV.319(/embedded)\n  LibRangeCheck20, vv3.6.5\n  Macaroon, v40300.1\n  MacaroonBound, v40300.1\n  MacaroonXtras, v40300.1.2\n  Masque, v4.2.375\n  MasqueRenaitre, vv4.3\n  MasqueSleek, v4.3.0\n  MikScrollingBattleText, v5.6.113\n  MogIt, v2.2.1\n  MoncaiQuestTracker, v4.3.0-beta\n  MoveAnything, v12.2.3\n  Omen, v3.1.6\n  OmniCC, v4.3.2\n  PezUICore, v1.0\n  PezUILoginScripts, v1.0\n  PitBull4, vv4.0.0-beta30\n  PitBull4Aggro, vv4.0.0-beta30\n  PitBull4AltPowerBar, vv4.0.0-beta30\n  PitBull4Aura, vv4.0.0-beta30\n  PitBull4AuraBar, v\n  PitBull4Background, vv4.0.0-beta30\n  PitBull4Border, vv4.0.0-beta30\n  PitBull4CombatFader, vv4.0.0-beta30\n  PitBull4CombatText, vv4.0.0-beta30\n  PitBull4ComboPoints, vv4.0.0-beta30\n  PitBull4HealthBar, vv4.0.0-beta30\n  PitBull4HealthFlash, vv4.0.0-beta19-11\n  PitBull4HideBlizzard, vv4.0.0-beta30\n  PitBull4Highlight, vv4.0.0-beta30\n  PitBull4HostilityFader, vv4.0.0-beta30\n  PitBull4LeaderIcon, vv4.0.0-beta30\n  PitBull4LuaTexts, vv4.0.0-beta30\n  PitBull4MasterLooterIcon, vv4.0.0-beta30\n  PitBull4PhaseIcon, vv4.0.0-beta30\n  PitBull4Portrait, vv4.0.0-beta30\n  PitBull4PowerBar, vv4.0.0-beta30\n  PitBull4PvPIcon, vv4.0.0-beta30\n  PitBull4QuestIcon, vv4.0.0-beta30\n  PitBull4RaidTargetIcon, vv4.0.0-beta30\n  PitBull4RangeFader, vv4.0.0-beta30\n  PitBull4RoleIcon, vv4.0.0-beta30\n  PitBull4Sounds, vv4.0.0-beta30\n  PitBull4ThreatBar, vv4.0.0-beta30\n  PitBull4VisualHeal, vv4.0.0-beta30\n  PitBull4Facade, v1.5.0\n  Postal, v3.4.13\n  Prat30, v3.4.25      \n  Prat30HighCPUUsageModules, v\n  Prat30Libraries, v\n  Quartz, v3.0.8\n  RaidBuffStatus, vv4.16g-beta\n  Recount, v\n  SavedInstances, v4.6.1\n  ScreenGrid, vv1.6\n  SexyMap, v\n  SharedMedia, v3.0.4-179\n  shPerformance, v6.1\n  Skada, v1.3-11\n  SkadaCC, v1.0\n  SkadaDamage, v1.0\n  SkadaDamageTaken, v1.0\n  SkadaDeaths, v1.0\n  SkadaDebuffs, v1.0\n  SkadaDispels, v1.0\n  SkadaEnemies, v1.0\n  SkadaHealAbsorbs, v\n  SkadaHealing, v1.0\n  SkadaPower, v1.0\n  SkadaThreat, v1.0\n  SkadaWindowButtons, v1.0\n  SocialState, v\n  SpeedyGonzales, v1.7.1\n  SpeedyLoad, v1.3\n  Stubby, v5.13.5258 (BoldBandicoot)\n  TidyPlates, v6.5.7 (R433)\n  TidyPlatesGraphite, v\n  TidyPlatesGrey, v\n  TidyPlatesNeon, v\n  TidyPlatesQuatre, v\n  TidyPlatesThreatPlates, v5.4\n  TidyPlatesHub, vr432\n  TidyPlatesWidgets, vr433\n  TipHelper, v5.12.DEV.315(/embedded)\n  TipTac, v11.09.29\n  TipTacItemRef, v11.09.29\n  TipTacTalents, v11.09.29\n  Titan, v5.0.12.40300 - Revision 519\n  TitanLootType, v5.0.12.40300\n  TitanMicrobuttons, v4.0.1\n  TitanProfessions, v4.0.2\n  TitanQuests, v3.0.6\n  TitanReputation, v3.7.6\n  TitanXP, v5.0.12.40300\n  TomTom, vv40300-1.4.4\n  UndressButton, v\n  VerticalRep, v1.0\n  VerticalXP, v1.0\n  Volumizer, v4.3.3-2.0.2\n  WhisperWhisper, v2.5\n  XLoot, v\n  XLoot10, vz28b-USE_MASQUE_BETA-release\n  XLootMaster, v0.82\n  XLootMonitor, v0.72\n  YssDrop, vv1.8.11\n  BlizRuntimeLib_enUS v4.3.3.40300 <us>\n  (ck=15e1)\n",
+			["timestamp"] = "2012-04-05 03:07:53",
+			["context"] = "Global",
+			["stack"] = "[C]: ?\n[C]: in function `GetCategoryNumAchievements'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:689: in function `AchievementFrameComparison_UpdateStatusBars'\n...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2669: in function <...ns\\Blizzard_AchievementUI\\Blizzard_AchievementUI.lua:2666>\n",
+		}, -- [100]
 	},
 }

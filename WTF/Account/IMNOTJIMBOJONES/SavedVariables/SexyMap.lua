@@ -91,9 +91,9 @@ SexyMapDB = {
 						["MiniMapWorldMapButton"] = 42.60297915413958,
 						["MinimapZoomOut"] = -56.07895483376067,
 						["TimeManagerClockButton"] = -89.45977552062108,
-						["MiniMapLFGFrame"] = 165.1088245815029,
-						["MiniMapTrackingButton"] = 158.8424850050231,
 						["MacaroonMinimapButton"] = 210.0155001660639,
+						["MiniMapTrackingButton"] = 158.8424850050231,
+						["MiniMapLFGFrame"] = 165.1088245815029,
 					},
 					["GuildInstanceDifficulty"] = {
 						["hide"] = "never",
@@ -134,10 +134,6 @@ SexyMapDB = {
 						["VehicleSeatIndicator"] = {
 							["y"] = 369.3122863769531,
 							["x"] = 15.01337814331055,
-						},
-						["WatchFrame"] = {
-							["y"] = 903.5294799804688,
-							["x"] = 1309.940551757812,
 						},
 					},
 					["rightClickToConfig"] = false,

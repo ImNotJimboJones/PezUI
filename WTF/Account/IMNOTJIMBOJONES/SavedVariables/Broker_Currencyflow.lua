@@ -26,7 +26,7 @@ Currencyflow_DB = {
 				{
 					[416] = 1,
 					["maxReached396"] = false,
-					[515] = 25,
+					[515] = 112,
 					["maxReached0"] = false,
 					["class"] = "HUNTER",
 					["maxReached394"] = false,
@@ -34,7 +34,7 @@ Currencyflow_DB = {
 					["maxReached397"] = false,
 					["maxReached393"] = false,
 					["charname"] = "Pezzer",
-					["lastWeekEarned396"] = 800,
+					["lastWeekEarned396"] = 950,
 					["ignore"] = false,
 					["maxReached392"] = false,
 					["maxReached398"] = false,
@@ -43,10 +43,10 @@ Currencyflow_DB = {
 					[390] = 800,
 					[391] = 8,
 					[392] = 362,
-					[393] = 78,
+					[393] = 63,
 					[394] = 40,
-					[395] = 1155,
-					["gold"] = 643357267,
+					[395] = 1386,
+					["gold"] = 625973066,
 					[397] = 20,
 					[398] = 14,
 					[399] = 15,
@@ -58,9 +58,30 @@ Currencyflow_DB = {
 					["maxReached395"] = false,
 					["maxReached400"] = false,
 					["maxReached384"] = false,
-					["maxReached385"] = false,
-					[396] = 8550,
 					["history"] = {
+						[15435] = {
+							[395] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[396] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							["time"] = 15,
+							["gold"] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[393] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+							[515] = {
+								["gained"] = 0,
+								["spent"] = 0,
+							},
+						},
 						[15412] = {
 							[395] = {
 							},
@@ -305,7 +326,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[385] = {
+							[416] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -325,7 +346,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[416] = {
+							[385] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -379,6 +400,8 @@ Currencyflow_DB = {
 							},
 						},
 					},
+					[396] = 9500,
+					["maxReached385"] = false,
 					["maxReached390"] = false,
 					["maxReached401"] = false,
 					[241] = 26,

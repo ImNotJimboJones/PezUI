@@ -1,8 +1,8 @@
 
 MADB = {
+	["tooltips"] = 1,
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {
@@ -80,6 +80,16 @@ MADB = {
 						74.00004577636719, -- [5]
 					},
 				},
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						380, -- [5]
+					},
+				},
 				["GuildChallengeAlertFrame"] = {
 					["name"] = "GuildChallengeAlertFrame",
 					["pos"] = {
@@ -115,14 +125,14 @@ MADB = {
 					["name"] = "PlayerDebuffsMover",
 					["hidden"] = true,
 				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
+				["WatchFrame"] = {
+					["name"] = "WatchFrame",
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						380, -- [5]
+						"BOTTOMRIGHT", -- [1]
+						"MoncaiQuestTrackerFloater", -- [2]
+						"CENTER", -- [3]
+						-6.99993896484375, -- [4]
+						0.1099166870117188, -- [5]
 					},
 				},
 				["AchievementAlertFrame2"] = {

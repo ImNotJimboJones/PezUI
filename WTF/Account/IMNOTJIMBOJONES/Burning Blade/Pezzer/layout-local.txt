@@ -22,11 +22,11 @@ W: 232
 H: 100
 Frame: WatchFrame
 FrameLevel: 1
-Anchor: TOPRIGHT
+Anchor: RIGHT
 X: 0
-Y: 0
+Y: -192
 W: 204
-H: 904
+H: 84
 Frame: LootFrame
 FrameLevel: 9
 Anchor: CENTER
@@ -137,7 +137,7 @@ FrameLevel: 2
 Anchor: BOTTOMRIGHT
 X: -8
 Y: 34
-W: 44
+W: 43
 H: 84
 Frame: MacaroonBars5
 FrameLevel: 2
@@ -240,7 +240,7 @@ H: 20
 Frame: TitanPanelProfessionsButton
 FrameLevel: 11
 Anchor: TOPRIGHT
-X: -115
+X: -117
 Y: -3
 W: 17
 H: 16
