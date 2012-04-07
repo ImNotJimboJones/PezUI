@@ -17,223 +17,311 @@ CritlinePerCharDB = {
 		["Pezzer - Burning Blade"] = {
 			["spells"] = {
 				["dmg"] = {
-					[109724] = {
+					[2643] = {
 						{
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Nerubian Burrower",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 22141,
+								["targetLevel"] = 82,
+								["amount"] = 19779,
 							},
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Onyxia",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 10904,
+								["targetLevel"] = -1,
+								["amount"] = 9266,
 							},
 						}, -- [1]
 					},
-					[107821] = {
+					[88453] = {
 						[2] = {
-							["normal"] = {
-								["target"] = "Training Dummy",
+							["crit"] = {
+								["target"] = "Brienna Nightfell",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1011,
+								["targetLevel"] = -1,
+								["amount"] = 8734,
+							},
+							["normal"] = {
+								["target"] = "Nerubian Burrower",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 4088,
+							},
+						},
+					},
+					[109724] = {
+						{
+							["crit"] = {
+								["target"] = "Anub'arak",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 27750,
+							},
+							["normal"] = {
+								["target"] = "Icehowl",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 13625,
+							},
+						}, -- [1]
+					},
+					[13813] = {
+						{
+							["normal"] = {
+								["target"] = "Anub'arak",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 3167,
 							},
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Nerubian Burrower",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1561,
+								["targetLevel"] = 82,
+								["amount"] = 5591,
+							},
+						}, -- [1]
+						{
+							["crit"] = {
+								["target"] = "Nerubian Burrower",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 4804,
+							},
+							["normal"] = {
+								["target"] = "Nerubian Burrower",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 82,
+								["amount"] = 3109,
+							},
+						}, -- [2]
+					},
+					[1978] = {
+						[2] = {
+							["crit"] = {
+								["target"] = "Lord Jaraxxus",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 8742,
+							},
+							["normal"] = {
+								["target"] = "Onyxia",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 4162,
+							},
+						},
+					},
+					[13795] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Unrelenting Trainee",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 80,
+								["amount"] = 1426,
 							},
 						},
 					},
 					[6603] = {
 						{
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Tenebron",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 9608,
+								["targetLevel"] = -1,
+								["amount"] = 11492,
 							},
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Tenebron",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 4441,
+								["targetLevel"] = -1,
+								["amount"] = 5797,
+							},
+						}, -- [1]
+					},
+					[53351] = {
+						{
+							["crit"] = {
+								["target"] = "Lord Jaraxxus",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 61913,
+							},
+							["normal"] = {
+								["target"] = "Dreadscale",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 31001,
 							},
 						}, -- [1]
 					},
 					[75] = {
 						{
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Anub'arak",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 15159,
+								["targetLevel"] = -1,
+								["amount"] = 18511,
 							},
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Lord Jaraxxus",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 7746,
+								["targetLevel"] = -1,
+								["amount"] = 8644,
 							},
 						}, -- [1]
 					},
 					[99621] = {
 						{
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Necro Knight",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1044,
+								["targetLevel"] = 81,
+								["amount"] = 1238,
 							},
 						}, -- [1]
 					},
 					[77767] = {
 						{
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Icehowl",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 13672,
+								["targetLevel"] = -1,
+								["amount"] = 16178,
 							},
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Anub'arak",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 28942,
+								["targetLevel"] = -1,
+								["amount"] = 34725,
 							},
 						}, -- [1]
 					},
 					[3674] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 3703,
-							},
-							["crit"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 7739,
-							},
-						},
-					},
-					[1978] = {
-						[2] = {
-							["crit"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 8166,
-							},
-							["normal"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 3702,
-							},
-						},
-					},
-					[83077] = {
-						{
-							["crit"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 12714,
-							},
-							["normal"] = {
-								["target"] = "Raider's Training Dummy",
+								["target"] = "Onyxia",
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
-								["amount"] = 3333,
+								["amount"] = 4482,
 							},
-						}, -- [1]
-					},
-					[53301] = {
-						[2] = {
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Onyxia",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 23957,
-							},
-							["normal"] = {
-								["target"] = "Training Dummy",
-								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 11463,
+								["targetLevel"] = -1,
+								["amount"] = 9366,
 							},
 						},
 					},
 					[3044] = {
 						{
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Anub'arak",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 34401,
+								["targetLevel"] = -1,
+								["amount"] = 37582,
 							},
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Icehowl",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 16184,
+								["targetLevel"] = -1,
+								["amount"] = 17562,
 							},
 						}, -- [1]
+					},
+					[83077] = {
+						{
+							["crit"] = {
+								["target"] = "Anub'arak",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 20156,
+							},
+							["normal"] = {
+								["target"] = "Lord Jaraxxus",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 6275,
+							},
+						}, -- [1]
+					},
+					[53301] = {
+						[2] = {
+							["crit"] = {
+								["target"] = "Anub'arak",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 27945,
+							},
+							["normal"] = {
+								["target"] = "Gluth",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 13333,
+							},
+						},
+					},
+					[107821] = {
+						[2] = {
+							["normal"] = {
+								["target"] = "Icehowl",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 1041,
+							},
+							["crit"] = {
+								["target"] = "Icehowl",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 1608,
+							},
+						},
 					},
 				},
 				["pet"] = {
 					[17253] = {
 						{
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Dreadscale",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 5673,
+								["targetLevel"] = -1,
+								["amount"] = 7850,
 							},
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Dreadscale",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 11275,
+								["targetLevel"] = -1,
+								["amount"] = 15603,
 							},
 						}, -- [1]
 					},
 					[6603] = {
 						{
 							["normal"] = {
-								["target"] = "Mature Swine",
+								["target"] = "Gormok the Impaler",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 11,
-								["amount"] = 1853,
+								["targetLevel"] = -1,
+								["amount"] = 2611,
 							},
 							["crit"] = {
-								["target"] = "Mature Swine",
+								["target"] = "Gormok the Impaler",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 9,
-								["amount"] = 3639,
+								["targetLevel"] = -1,
+								["amount"] = 5213,
 							},
 						}, -- [1]
 					},
 					[53508] = {
 						{
 							["normal"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Snobold Vassal",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1124,
+								["targetLevel"] = 82,
+								["amount"] = 1473,
 							},
 							["crit"] = {
-								["target"] = "Training Dummy",
+								["target"] = "Dreadscale",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 2223,
+								["targetLevel"] = -1,
+								["amount"] = 3198,
 							},
 						}, -- [1]
 					},

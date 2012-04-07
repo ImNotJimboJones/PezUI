@@ -1,7 +1,5 @@
 
 FishingBuddy_Player = {
-	["Outfit"] = {
-	},
 	["Settings"] = {
 		["WatchBobber"] = 0,
 		["ResetWatcher"] = 1,
@@ -10,15 +8,17 @@ FishingBuddy_Player = {
 			["y"] = -334.807861328125,
 			["x"] = 24.09412574768066,
 		},
-		["EasyCast"] = 1,
-		["CaughtSoFar"] = 1,
+		["MinimapButtonVisible"] = 0,
+		["DrinkHeavily"] = 0,
 		["OutfitManager"] = "None",
 		["AutoLoot"] = 1,
-		["EnhanceFishingSounds"] = 1,
+		["EasyCast"] = 1,
 		["EnhancePools"] = 1,
-		["DrinkHeavily"] = 0,
-		["MinimapButtonVisible"] = 0,
+		["CaughtSoFar"] = 1,
+		["EnhanceFishingSounds"] = 1,
 		["MountedCast"] = 1,
+	},
+	["Outfit"] = {
 	},
 	["WasWearing"] = {
 	},

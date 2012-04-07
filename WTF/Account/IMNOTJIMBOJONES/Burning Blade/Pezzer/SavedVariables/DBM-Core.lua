@@ -9,24 +9,24 @@ DBM_SavedOptions = {
 	["RangeFrameX"] = 140.1834564208984,
 	["WarningColors"] = {
 		{
-			["b"] = 0.9411764705882353,
-			["g"] = 0.8,
 			["r"] = 0.4117647058823529,
+			["g"] = 0.8,
+			["b"] = 0.9411764705882353,
 		}, -- [1]
 		{
-			["b"] = 0,
-			["g"] = 0.9490196078431372,
 			["r"] = 0.9490196078431372,
+			["g"] = 0.9490196078431372,
+			["b"] = 0,
 		}, -- [2]
 		{
-			["b"] = 0,
-			["g"] = 0.5019607843137255,
 			["r"] = 1,
+			["g"] = 0.5019607843137255,
+			["b"] = 0,
 		}, -- [3]
 		{
-			["b"] = 0.1019607843137255,
-			["g"] = 0.1019607843137255,
 			["r"] = 1,
+			["g"] = 0.1019607843137255,
+			["b"] = 0.1019607843137255,
 		}, -- [4]
 	},
 	["AlwaysShowSpeedKillTimer"] = true,
@@ -76,28 +76,28 @@ DBM_SavedOptions = {
 	["RangeFramePoint"] = "LEFT",
 	["RangeFrameSound2"] = "none",
 	["ShowLHFrame"] = true,
-	["WarningIconRight"] = true,
+	["DontShowBossAnnounces"] = false,
 	["Enabled"] = true,
-	["ShowSpecialWarnings"] = true,
+	["DontSendBossWhispers"] = false,
 	["SpecialWarningSound2"] = "Sound\\Creature\\AlgalonTheObserver\\UR_Algalon_BHole01.wav",
 	["DisableCinematics"] = false,
 	["MovieFilters"] = {
 	},
-	["RangeFrameFrames"] = "radar",
+	["ArrowPosY"] = -150,
 	["HealthFrameLocked"] = true,
 	["SpecialWarningFontColor"] = {
 		0, -- [1]
 		0, -- [2]
 		1, -- [3]
 	},
-	["RangeFrameRadarY"] = -150.1961517333984,
 	["RangeFrameLocked"] = false,
+	["RangeFrameRadarY"] = -150.1961517333984,
 	["AlwaysShowHealthFrame"] = true,
 	["HPFrameX"] = 94.58477783203125,
-	["ArrowPosY"] = -150,
+	["RangeFrameFrames"] = "radar",
 	["SpamBlockBossWhispers"] = false,
-	["DontSendBossWhispers"] = false,
-	["DontShowBossAnnounces"] = false,
+	["ShowSpecialWarnings"] = true,
+	["WarningIconRight"] = true,
 }
 DBT_SavedOptions = {
 	["DBM"] = {
@@ -111,21 +111,21 @@ DBT_SavedOptions = {
 		["TimerX"] = -264.6600341796875,
 		["IconLeft"] = true,
 		["ClickThrough"] = true,
-		["IconRight"] = false,
-		["HugeTimerX"] = 0,
+		["FillUpBars"] = true,
+		["StartColorB"] = 0,
 		["ExpandUpwards"] = true,
 		["TimerPoint"] = "BOTTOM",
 		["StartColorG"] = 0.7019607843137254,
-		["HugeBarYOffset"] = 0,
-		["HugeScale"] = 1,
+		["TimerY"] = 111.4355773925781,
+		["EndColorG"] = 0,
 		["EndColorR"] = 1,
 		["Width"] = 206,
 		["HugeTimerPoint"] = "CENTER",
 		["BarYOffset"] = 0,
-		["EndColorG"] = 0,
-		["TimerY"] = 111.4355773925781,
-		["StartColorB"] = 0,
-		["FillUpBars"] = true,
+		["HugeScale"] = 1,
+		["HugeBarYOffset"] = 0,
+		["HugeTimerX"] = 0,
+		["IconRight"] = false,
 		["BarXOffset"] = 0,
 		["EndColorB"] = 0,
 	},

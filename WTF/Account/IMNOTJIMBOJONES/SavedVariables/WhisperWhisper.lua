@@ -7,19 +7,46 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["r"] = 210,
-				["g"] = 210,
 				["b"] = 210,
+				["g"] = 210,
+				["r"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
+			["flashBottom"] = true,
+			["flashLeft"] = true,
+			["altView"] = false,
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["b"] = 8,
+				["g"] = 0,
+				["r"] = 255,
+			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
-			["flashLeft"] = true,
 			["whisperList"] = {
+				{
+					"Keporra", -- [1]
+					{
+						"|cffd2d2d2403 hunter... inv please", -- [1]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [1]
+				{
+					"Kabz", -- [1]
+					{
+						"|cffd2d2d2reinv please", -- [1]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [2]
 				{
 					"Simfraya", -- [1]
 					{
@@ -36,7 +63,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [3]
 				{
 					"Pezzer", -- [1]
 					{
@@ -47,7 +74,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [4]
 				{
 					"Fríktíon", -- [1]
 					{
@@ -64,7 +91,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [5]
 				{
 					"Unoshotz", -- [1]
 					{
@@ -81,7 +108,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [6]
 				{
 					"Raei", -- [1]
 					{
@@ -91,7 +118,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [5]
+				}, -- [7]
 				{
 					"Bäudso", -- [1]
 					{
@@ -99,19 +126,8 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [6]
+				}, -- [8]
 			},
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["r"] = 255,
-				["g"] = 0,
-				["b"] = 8,
-			},
-			["flashBottom"] = true,
-			["altView"] = false,
 		},
 	},
 }
