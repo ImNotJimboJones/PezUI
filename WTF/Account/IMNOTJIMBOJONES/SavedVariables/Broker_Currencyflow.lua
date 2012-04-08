@@ -1,5 +1,24 @@
 
 Currencyflow_DB = {
+	["profiles"] = {
+		["Default"] = {
+			["cashFormat"] = 2,
+			["showCashPerHour"] = false,
+			["showCurrency396"] = true,
+			["colorMaxReached"] = true,
+			["showYesterdayTotal"] = false,
+			["showThisSession"] = false,
+			["showTodayTotal"] = false,
+			["showCurrency390"] = true,
+			["showThisWeekTotal"] = false,
+			["showThisMonthTotal"] = false,
+			["showYesterdaySelf"] = false,
+			["showCurrency0"] = false,
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["factionrealm"] = {
 		["Horde - Burning Blade"] = {
 			["version"] = 10,
@@ -22,22 +41,25 @@ Currencyflow_DB = {
 					[384] = 47,
 					[385] = 23,
 					[390] = 800,
-					[391] = 8,
-					[392] = 367,
+					[391] = 11,
+					[392] = 825,
 					[393] = 63,
 					[394] = 40,
 					[395] = 1386,
-					["gold"] = 630552179,
+					["gold"] = 630576743,
 					[397] = 20,
 					[398] = 14,
 					[399] = 15,
 					[400] = 2,
 					[401] = 9,
 					["lastWeekEarned390"] = 0,
-					[81] = 2,
+					[614] = 0,
 					[402] = 15,
-					["maxReached401"] = false,
-					["maxReached390"] = false,
+					["maxReached395"] = false,
+					["maxReached400"] = false,
+					["maxReached384"] = false,
+					["maxReached385"] = false,
+					[396] = 9500,
 					["history"] = {
 						[15435] = {
 							[395] = {
@@ -89,11 +111,11 @@ Currencyflow_DB = {
 							},
 							[392] = {
 							},
-							[390] = {
-							},
 							[614] = {
 								["gained"] = 0,
 								["spent"] = 0,
+							},
+							[390] = {
 							},
 						},
 						[15428] = {
@@ -152,12 +174,16 @@ Currencyflow_DB = {
 						},
 						[15437] = {
 							[392] = {
-								["gained"] = 5,
+								["gained"] = 463,
 								["spent"] = 0,
 							},
-							["time"] = 4711,
+							["time"] = 9424,
+							[391] = {
+								["gained"] = 3,
+								["spent"] = 0,
+							},
 							["gold"] = {
-								["gained"] = 880542,
+								["gained"] = 905106,
 								["spent"] = 139925,
 							},
 						},
@@ -213,9 +239,9 @@ Currencyflow_DB = {
 							},
 							[392] = {
 							},
-							[395] = {
-							},
 							[390] = {
+							},
+							[395] = {
 							},
 						},
 						[15424] = {
@@ -324,7 +350,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[396] = {
+							[385] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -340,11 +366,11 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[401] = {
+							[81] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[385] = {
+							[416] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -352,11 +378,11 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[81] = {
+							[401] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							[416] = {
+							[396] = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
@@ -377,9 +403,9 @@ Currencyflow_DB = {
 							},
 							[392] = {
 							},
-							[395] = {
-							},
 							[390] = {
+							},
+							[395] = {
 							},
 						},
 						[15427] = {
@@ -398,34 +424,12 @@ Currencyflow_DB = {
 							},
 						},
 					},
-					["maxReached385"] = false,
-					[396] = 9500,
-					["maxReached384"] = false,
-					["maxReached400"] = false,
-					["maxReached395"] = false,
+					["maxReached390"] = false,
+					["maxReached401"] = false,
 					[241] = 26,
-					[614] = 0,
+					[81] = 2,
 				}, -- [1]
 			},
-		},
-	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
-	["profiles"] = {
-		["Default"] = {
-			["cashFormat"] = 2,
-			["showYesterdaySelf"] = false,
-			["showCurrency396"] = true,
-			["colorMaxReached"] = true,
-			["showYesterdayTotal"] = false,
-			["showThisSession"] = false,
-			["showTodayTotal"] = false,
-			["showCurrency390"] = true,
-			["showThisWeekTotal"] = false,
-			["showThisMonthTotal"] = false,
-			["showCashPerHour"] = false,
-			["showCurrency0"] = false,
 		},
 	},
 }

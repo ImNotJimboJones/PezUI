@@ -7,42 +7,38 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["b"] = 210,
-				["g"] = 210,
 				["r"] = 210,
+				["g"] = 210,
+				["b"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
-			["flashBottom"] = true,
-			["flashLeft"] = true,
-			["altView"] = false,
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["b"] = 8,
-				["g"] = 0,
-				["r"] = 255,
-			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
+			["flashLeft"] = true,
 			["whisperList"] = {
 				{
-					"Keporra", -- [1]
+					"Alarice", -- [1]
 					{
-						"|cffd2d2d2403 hunter... inv please", -- [1]
+						"|cffff0008meet me by the gates?", -- [1]
+						"|cffff0008invite me", -- [2]
+						"|cffff0008sure", -- [3]
+						"|cffd2d2d2would you mind MCing me then? :P", -- [4]
+						"|cffff0008we could find out lol", -- [5]
+						"|cffff0008i believe that you can", -- [6]
+						"|cffd2d2d2hey do know if you can MC in a duel?", -- [7]
 					}, -- [2]
-					true, -- [3]
+					false, -- [3]
 					false, -- [4]
 				}, -- [1]
 				{
-					"Kabz", -- [1]
+					"Ezzulinzakal", -- [1]
 					{
-						"|cffd2d2d2reinv please", -- [1]
+						"|cffd2d2d2?", -- [1]
+						"|cffff0008question", -- [2]
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
@@ -50,20 +46,55 @@ Broker_WhisperWhisperDB = {
 				{
 					"Simfraya", -- [1]
 					{
-						"|cffff0008one moment im on a skype call with my girl", -- [1]
-						"|cffd2d2d2come back in TS", -- [2]
-						"|cffff0008yeah im not entirely sure, he told me last friday, but anyway, like i said if u guys need me for dps or heals for some reason ill be on :}", -- [3]
-						"|cffd2d2d2something like that", -- [4]
-						"|cffff0008something about scirocco going dps or something im not really sure haha", -- [5]
-						"|cffff0008haha yeah he was telling me that, but i think a dps was switching to a tanking char or something like that.", -- [6]
-						"|cffd2d2d2talking^", -- [7]
-						"|cffd2d2d2but we were taling about having people offspec various fights so you can come with us", -- [8]
-						"|cffd2d2d2well, we actually need a tank :P", -- [9]
-						"|cffff0008okay, apparently he was saying u guys needed dps, so yeah, ill be on if im needed :}", -- [10]
+						"|cffd2d2d2hey you mind grouping up with me?... im trying to configure my party/raid frames", -- [1]
+						"|cffff0008one moment im on a skype call with my girl", -- [2]
+						"|cffd2d2d2come back in TS", -- [3]
+						"|cffff0008yeah im not entirely sure, he told me last friday, but anyway, like i said if u guys need me for dps or heals for some reason ill be on :}", -- [4]
+						"|cffd2d2d2something like that", -- [5]
+						"|cffff0008something about scirocco going dps or something im not really sure haha", -- [6]
+						"|cffff0008haha yeah he was telling me that, but i think a dps was switching to a tanking char or something like that.", -- [7]
+						"|cffd2d2d2talking^", -- [8]
+						"|cffd2d2d2but we were taling about having people offspec various fights so you can come with us", -- [9]
+						"|cffd2d2d2well, we actually need a tank :P", -- [10]
 					}, -- [2]
-					false, -- [3]
+					true, -- [3]
 					false, -- [4]
 				}, -- [3]
+				{
+					"Betrolled", -- [1]
+					{
+						"|cffd2d2d2invite", -- [1]
+						"|cffff0008yep", -- [2]
+						"|cffd2d2d2heroic LK?", -- [3]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [4]
+				{
+					"Necrobane", -- [1]
+					{
+						"|cffd2d2d2k", -- [1]
+						"|cffff0008ima tricks you for 10% dmg", -- [2]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [5]
+				{
+					"Keporra", -- [1]
+					{
+						"|cffd2d2d2403 hunter... inv please", -- [1]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [6]
+				{
+					"Kabz", -- [1]
+					{
+						"|cffd2d2d2reinv please", -- [1]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [7]
 				{
 					"Pezzer", -- [1]
 					{
@@ -74,7 +105,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [8]
 				{
 					"Fríktíon", -- [1]
 					{
@@ -91,43 +122,19 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [5]
-				{
-					"Unoshotz", -- [1]
-					{
-						"|cffff0008but couldnt find it", -- [1]
-						"|cffff0008i saw it last staurday", -- [2]
-						"|cffd2d2d2haha i saw that once, but was a noob and ignored it, not knowing how rare it is", -- [3]
-						"|cffff0008i rather camp time lost drake :p", -- [4]
-						"|cffff0008true", -- [5]
-						"|cffd2d2d2your best bet is to google it :P", -- [6]
-						"|cffd2d2d2the questline is in shadowmoon valley, but im not sure where it starts", -- [7]
-						"|cffd2d2d2hold on...", -- [8]
-						"|cffd2d2d2you have to do a questline to open up the dailies", -- [9]
-						"|cffd2d2d2oooo :)", -- [10]
-					}, -- [2]
-					false, -- [3]
-					false, -- [4]
-				}, -- [6]
-				{
-					"Raei", -- [1]
-					{
-						"|cffff0008when u coming to mse", -- [1]
-						"|cffff0008yep, sent an email no response ", -- [2]
-						"|cffd2d2d2still waiting around?", -- [3]
-					}, -- [2]
-					false, -- [3]
-					false, -- [4]
-				}, -- [7]
-				{
-					"Bäudso", -- [1]
-					{
-						"|cffff0008spare any gold? trying to get flying training", -- [1]
-					}, -- [2]
-					false, -- [3]
-					false, -- [4]
-				}, -- [8]
+				}, -- [9]
 			},
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["r"] = 255,
+				["g"] = 0,
+				["b"] = 8,
+			},
+			["flashBottom"] = true,
+			["altView"] = false,
 		},
 	},
 }

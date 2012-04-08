@@ -2,3056 +2,47 @@
 RecountPerCharDB = {
 	["version"] = "1.3",
 	["combatants"] = {
-		["Gus <Pezzer>"] = {
-			["GUID"] = "0xF140BFFA430001B1",
+		["Risen Ghoul <Chocolutis>"] = {
+			["GUID"] = "0xF130660D000E8B68",
 			["LastEventHealth"] = {
-				"91712 (88%)", -- [1]
-				"91712 (88%)", -- [2]
-				"91712 (88%)", -- [3]
-				"94434 (90%)", -- [4]
-				"94434 (90%)", -- [5]
-				"94434 (90%)", -- [6]
-				"93571 (89%)", -- [7]
-				"93571 (89%)", -- [8]
-				"92505 (88%)", -- [9]
-				"92504 (88%)", -- [10]
-				"91322 (87%)", -- [11]
-				"89980 (86%)", -- [12]
-				"98149 (94%)", -- [13]
-				"98149 (94%)", -- [14]
-				"94020 (90%)", -- [15]
-				"94020 (90%)", -- [16]
-				"90573 (86%)", -- [17]
-				"90573 (86%)", -- [18]
-				"90573 (86%)", -- [19]
-				"87381 (83%)", -- [20]
-				"87381 (83%)", -- [21]
-				"88423 (84%)", -- [22]
-				"85021 (81%)", -- [23]
-				"86063 (82%)", -- [24]
-				"87105 (83%)", -- [25]
-				"87105 (83%)", -- [26]
-				"87105 (83%)", -- [27]
-				"88147 (84%)", -- [28]
-				"84287 (80%)", -- [29]
-				"85336 (81%)", -- [30]
-				"85336 (81%)", -- [31]
-				"85336 (81%)", -- [32]
-				"81653 (78%)", -- [33]
-				"81653 (78%)", -- [34]
-				"102215 (98%)", -- [35]
-				"101514 (97%)", -- [36]
-				"100300 (96%)", -- [37]
-				"100300 (96%)", -- [38]
-				"100300 (96%)", -- [39]
-				"97092 (93%)", -- [40]
-				"96189 (92%)", -- [41]
-				"96189 (92%)", -- [42]
-				"95206 (91%)", -- [43]
-				"94467 (90%)", -- [44]
-				"94467 (90%)", -- [45]
-				"93588 (89%)", -- [46]
-				"92645 (88%)", -- [47]
-				"92645 (88%)", -- [48]
-				"92645 (88%)", -- [49]
-				"91926 (88%)", -- [50]
-			},
-			["LastAttackedBy"] = "Drakos the Interrogator",
-			["LastEventType"] = {
-				"DAMAGE", -- [1]
-				"DAMAGE", -- [2]
-				"DAMAGE", -- [3]
-				"DAMAGE", -- [4]
-				"DAMAGE", -- [5]
-				"DAMAGE", -- [6]
-				"DAMAGE", -- [7]
-				"DAMAGE", -- [8]
-				"DAMAGE", -- [9]
-				"DAMAGE", -- [10]
-				"DAMAGE", -- [11]
-				"DAMAGE", -- [12]
-				"DAMAGE", -- [13]
-				"DAMAGE", -- [14]
-				"DAMAGE", -- [15]
-				"DAMAGE", -- [16]
-				"DAMAGE", -- [17]
-				"DAMAGE", -- [18]
-				"DAMAGE", -- [19]
-				"DAMAGE", -- [20]
-				"DAMAGE", -- [21]
-				"HEAL", -- [22]
-				"DAMAGE", -- [23]
-				"HEAL", -- [24]
-				"HEAL", -- [25]
-				"DAMAGE", -- [26]
-				"DAMAGE", -- [27]
-				"HEAL", -- [28]
-				"DAMAGE", -- [29]
-				"HEAL", -- [30]
-				"DAMAGE", -- [31]
-				"DAMAGE", -- [32]
-				"DAMAGE", -- [33]
-				"DAMAGE", -- [34]
-				"DAMAGE", -- [35]
-				"DAMAGE", -- [36]
-				"DAMAGE", -- [37]
-				"DAMAGE", -- [38]
-				"DAMAGE", -- [39]
-				"DAMAGE", -- [40]
-				"DAMAGE", -- [41]
-				"DAMAGE", -- [42]
-				"DAMAGE", -- [43]
-				"DAMAGE", -- [44]
-				"DAMAGE", -- [45]
-				"DAMAGE", -- [46]
-				"DAMAGE", -- [47]
-				"DAMAGE", -- [48]
-				"DAMAGE", -- [49]
-				"DAMAGE", -- [50]
-			},
-			["TimeWindows"] = {
-				["TimeHeal"] = {
-					3.58, -- [1]
-				},
-				["Healing"] = {
-					5210, -- [1]
-				},
-				["DamageTaken"] = {
-					45590, -- [1]
-				},
-				["EnergyGain"] = {
-					100, -- [1]
-				},
-				["HealingTaken"] = {
-					5210, -- [1]
-				},
-				["HOT_Time"] = {
-					15, -- [1]
-				},
-				["TimeDamage"] = {
-					77.97000000000001, -- [1]
-				},
-				["ActiveTime"] = {
-					81.55, -- [1]
-				},
-				["Damage"] = {
-					100570, -- [1]
-				},
-			},
-			["enClass"] = "PET",
-			["unit"] = "Gus",
-			["level"] = 1,
-			["LastDamageAbility"] = "Melee",
-			["LastFightIn"] = 7,
-			["LastEventNum"] = {
-				[30] = 0.9999616137576293,
-				[16] = 3.307934436298031,
-				[32] = 3.534413266285363,
-				[9] = 1.134313462055199,
-				[35] = 0.6496871521246785,
-				[36] = 0.6727188975471191,
-				[37] = 1.008598518291044,
-				[38] = 2.350197689148209,
-				[50] = 0.6899927066139495,
-				[40] = 0.7283789489846839,
-				[21] = 3.264749913630955,
-				[41] = 0.8665694215193275,
-				[22] = 0.9999616137576293,
-				[44] = 0.7091858277993167,
-				[5] = 0.8281831791485932,
-				[46] = 0.8435376760968869,
-				[47] = 0.9049556638900618,
-				[48] = 0.2044067406241603,
-				[25] = 0.9999616137576293,
-				[13] = 3.957621588422709,
-				[24] = 0.9999616137576293,
-				[19] = 3.066101109362405,
-				[7] = 1.02299335918007,
-				[10] = 1.287858431538137,
-				[28] = 0.9999616137576293,
-				[43] = 0.9433419062607962,
-				[27] = 3.704272388775863,
-			},
-			["type"] = "Pet",
-			["FightsSaved"] = 8,
-			["LastDamageTaken"] = 3683,
-			["TimeLast"] = {
-				["TimeHeal"] = 1333780437,
-				["OVERALL"] = 1333780441,
-				["DamageTaken"] = 1333780439,
-				["EnergyGain"] = 1333780438,
-				["HealingTaken"] = 1333780437,
-				["HOT_Time"] = 1333780437,
-				["TimeDamage"] = 1333780441,
-				["Healing"] = 1333780437,
-				["ActiveTime"] = 1333780441,
-				["Damage"] = 1333780441,
-			},
-			["Owner"] = "Pezzer",
-			["LastAbility"] = 256778.439,
-			["NextEventNum"] = 35,
-			["LastEventHealthNum"] = {
-				88.01197650761966, -- [1]
-				88.01197650761966, -- [2]
-				88.01197650761966, -- [3]
-				90.62416030094813, -- [4]
-				90.62416030094813, -- [5]
-				90.62416030094813, -- [6]
-				89.79597712179955, -- [7]
-				89.79597712179955, -- [8]
-				88.77298376261948, -- [9]
-				88.77202410656021, -- [10]
-				87.63771064450501, -- [11]
-				86.34985221296687, -- [12]
-				94.18928256113009, -- [13]
-				94.18928256113009, -- [14]
-				90.22686269241105, -- [15]
-				90.22686269241105, -- [16]
-				86.91892825611301, -- [17]
-				86.91892825611301, -- [18]
-				86.91892825611301, -- [19]
-				83.85570611492841, -- [20]
-				83.85570611492841, -- [21]
-				84.85566772868604, -- [22]
-				81.59091781505508, -- [23]
-				82.59087942881271, -- [24]
-				83.59084104257035, -- [25]
-				83.59084104257035, -- [26]
-				83.59084104257035, -- [27]
-				84.59080265632797, -- [28]
-				80.8865302675521, -- [29]
-				81.89320947372461, -- [30]
-				81.89320947372461, -- [31]
-				81.89320947372461, -- [32]
-				78.35879620743925, -- [33]
-				78.35879620743925, -- [34]
-				98.09124409811524, -- [35]
-				97.41852520056811, -- [36]
-				96.25350274461633, -- [37]
-				96.25350274461633, -- [38]
-				96.25350274461633, -- [39]
-				93.17492610648344, -- [40]
-				92.30835668496411, -- [41]
-				92.30835668496411, -- [42]
-				91.36501477870331, -- [43]
-				90.655828950904, -- [44]
-				90.655828950904, -- [45]
-				89.81229127480711, -- [46]
-				88.90733561091704, -- [47]
-				88.90733561091704, -- [48]
-				88.90733561091704, -- [49]
-				88.21734290430309, -- [50]
-			},
-			["LastEvents"] = {
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Miss (Arcane)", -- [1]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Miss (Arcane)", -- [2]
-				"Gus <Pezzer> Melee Azure Ley-Whelp Crit -3000 (Physical)", -- [3]
-				"Gus <Pezzer> Melee Azure Spellbinder Crit -3201 (Physical)", -- [4]
-				"Azure Spellbinder Melee Gus <Pezzer> Hit -863 (Physical)", -- [5]
-				"Azure Spellbinder Melee Gus <Pezzer> Dodge", -- [6]
-				"Azure Inquisitor Melee Gus <Pezzer> Hit -1066 (Physical)", -- [7]
-				"Gus <Pezzer> Melee Azure Inquisitor Crit -3318 (Physical)", -- [8]
-				"Azure Spellbinder Melee Gus <Pezzer> Hit -1182 (Physical)", -- [9]
-				"Azure Spellbinder Melee Gus <Pezzer> Hit -1342 (Physical)", -- [10]
-				"Gus <Pezzer> Melee Azure Spellbinder Crit -3335 (Physical)", -- [11]
-				"Gus <Pezzer> Melee Azure Spellbinder Hit -1672 (Physical)", -- [12]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -4124 (Physical)", -- [13]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2890 (Physical)", -- [14]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2839 (Physical)", -- [15]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3447 (Physical)", -- [16]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1401 (Physical)", -- [17]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2786 (Physical)", -- [18]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3195 (Physical)", -- [19]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3162 (Physical)", -- [20]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3402 (Physical)", -- [21]
-				"Gus <Pezzer> Bloodthirsty Gus <Pezzer> Tick +1042", -- [22]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1603 (Physical)", -- [23]
-				"Gus <Pezzer> Bloodthirsty Gus <Pezzer> Tick +1042", -- [24]
-				"Gus <Pezzer> Bloodthirsty Gus <Pezzer> Tick +1042", -- [25]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3171 (Physical)", -- [26]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3860 (Physical)", -- [27]
-				"Gus <Pezzer> Bloodthirsty Gus <Pezzer> Tick +1042", -- [28]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3302 (Physical)", -- [29]
-				"Gus <Pezzer> Bloodthirsty Gus <Pezzer> Tick +1042", -- [30]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1738 (Physical)", -- [31]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3683 (Physical)", -- [32]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1740 (Physical)", -- [33]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3443 (Physical)", -- [34]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -677 (290 resisted) (Arcane)", -- [35]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -701 (175 resisted) (Arcane)", -- [36]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -1051 (Arcane)", -- [37]
-				"Azure Inquisitor Melee Gus <Pezzer> Crit -2449 (Physical)", -- [38]
-				"Gus <Pezzer> Melee Azure Inquisitor Hit -1531 (Physical)", -- [39]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -759 (326 resisted) (Arcane)", -- [40]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -903 (100 resisted) (Arcane)", -- [41]
-				"Gus <Pezzer> Melee Azure Inquisitor Crit -3056 (Physical)", -- [42]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -983 (109 resisted) (Arcane)", -- [43]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -739 (317 resisted) (Arcane)", -- [44]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Miss (Arcane)", -- [45]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -879 (220 resisted) (Arcane)", -- [46]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -943 (105 resisted) (Arcane)", -- [47]
-				"Azure Ley-Whelp Melee Gus <Pezzer> Hit -213 (Physical)", -- [48]
-				"Gus <Pezzer> Melee Azure Ley-Whelp Hit -1515 (Physical)", -- [49]
-				"Azure Ley-Whelp Arcane Bolt Gus <Pezzer> Hit -719 (308 resisted) (Arcane)", -- [50]
-			},
-			["Name"] = "Gus",
-			["LastEventIncoming"] = {
-				true, -- [1]
-				true, -- [2]
-				false, -- [3]
-				false, -- [4]
-				true, -- [5]
-				true, -- [6]
-				true, -- [7]
-				false, -- [8]
-				true, -- [9]
-				true, -- [10]
-				false, -- [11]
-				false, -- [12]
-				true, -- [13]
-				false, -- [14]
-				false, -- [15]
-				true, -- [16]
-				false, -- [17]
-				false, -- [18]
-				true, -- [19]
-				false, -- [20]
-				true, -- [21]
-				true, -- [22]
-				false, -- [23]
-				true, -- [24]
-				true, -- [25]
-				false, -- [26]
-				true, -- [27]
-				true, -- [28]
-				false, -- [29]
-				true, -- [30]
-				false, -- [31]
-				true, -- [32]
-				false, -- [33]
-				false, -- [34]
-				true, -- [35]
-				true, -- [36]
-				true, -- [37]
-				true, -- [38]
-				false, -- [39]
-				true, -- [40]
-				true, -- [41]
-				false, -- [42]
-				true, -- [43]
-				true, -- [44]
-				true, -- [45]
-				true, -- [46]
-				true, -- [47]
-				true, -- [48]
-				false, -- [49]
-				true, -- [50]
-			},
-			["LastEventTimes"] = {
-				256728.481, -- [1]
-				256729.205, -- [2]
-				256729.928, -- [3]
-				256740.37, -- [4]
-				256740.37, -- [5]
-				256741.08, -- [6]
-				256741.582, -- [7]
-				256742.014, -- [8]
-				256742.385, -- [9]
-				256743.087, -- [10]
-				256743.424, -- [11]
-				256745.086, -- [12]
-				256763.222, -- [13]
-				256763.222, -- [14]
-				256764.689, -- [15]
-				256765.183, -- [16]
-				256766.233, -- [17]
-				256767.755, -- [18]
-				256767.994, -- [19]
-				256769.266, -- [20]
-				256770.003, -- [21]
-				256770.214, -- [22]
-				256770.791, -- [23]
-				256771.2, -- [24]
-				256772.193, -- [25]
-				256772.324, -- [26]
-				256772.806, -- [27]
-				256773.208, -- [28]
-				256773.846, -- [29]
-				256774.197, -- [30]
-				256775.381, -- [31]
-				256776.418, -- [32]
-				256776.912, -- [33]
-				256778.439, -- [34]
-				256718.686, -- [35]
-				256718.856, -- [36]
-				256719.55, -- [37]
-				256719.872, -- [38]
-				256720.112, -- [39]
-				256720.992, -- [40]
-				256721.201, -- [41]
-				256721.646, -- [42]
-				256721.975, -- [43]
-				256723.432, -- [44]
-				256724.148, -- [45]
-				256724.375, -- [46]
-				256725.74, -- [47]
-				256725.796, -- [48]
-				256725.908, -- [49]
-				256725.908, -- [50]
-			},
-			["Fights"] = {
-				["Fight5"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 2037,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 3,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 2037,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 8784,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 8784,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8784,
-								},
-							},
-							["amount"] = 8784,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 2037,
-								},
-							},
-							["amount"] = 2037,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 10,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 6.539999999999999,
-								},
-							},
-							["amount"] = 6.539999999999999,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["ActiveTime"] = 6.539999999999999,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3528,
-									["min"] = 3518,
-									["count"] = 2,
-									["amount"] = 7046,
-								},
-								["Hit"] = {
-									["max"] = 1738,
-									["min"] = 1738,
-									["count"] = 1,
-									["amount"] = 1738,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 8784,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 6.539999999999999,
-					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 6.539999999999999,
-								},
-							},
-							["amount"] = 6.539999999999999,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["Fight7"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 1263,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 1263,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 1467,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 1467,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1467,
-								},
-							},
-							["amount"] = 1467,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1263,
-								},
-							},
-							["amount"] = 1263,
-						},
-					},
-					["EnergyGainedFrom"] = {
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 0,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-					},
-					["ActiveTime"] = 3.5,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 1467,
-									["min"] = 1467,
-									["count"] = 1,
-									["amount"] = 1467,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 1467,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 3.5,
-					["TimeDamaging"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["OverallData"] = {
-					["ElementDoneBlock"] = {
-						["Melee"] = 440,
-					},
-					["TimeHealing"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-					},
-					["PartialBlock"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Blocked"] = {
-									["max"] = 370,
-									["min"] = 70,
-									["count"] = 2,
-									["amount"] = 440,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 440,
-						},
-					},
-					["WhoHealed"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 33.11,
-								},
-							},
-							["amount"] = 33.11,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8.1,
-								},
-							},
-							["amount"] = 8.1,
-						},
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21.63,
-								},
-							},
-							["amount"] = 21.63,
-						},
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-					},
-					["DamageTaken"] = 45590,
-					["ElementTakenResist"] = {
-						["Arcane"] = 2265,
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 22,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 22,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["50%Resist"] = {
-									["max"] = 326,
-									["min"] = 290,
-									["count"] = 4,
-									["amount"] = 1241,
-								},
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-								["25%Resist"] = {
-									["max"] = 220,
-									["min"] = 100,
-									["count"] = 7,
-									["amount"] = 1024,
-								},
-							},
-							["count"] = 17,
-							["amount"] = 2265,
-						},
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Dodge"] = {
-									["count"] = 1,
-								},
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 20,
-								},
-							},
-							["amount"] = 22,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Miss"] = {
-									["count"] = 5,
-								},
-								["Hit"] = {
-									["count"] = 12,
-								},
-							},
-							["amount"] = 17,
-						},
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 22,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 22,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 17,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 17,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 81.55,
-					["HealedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["ElementTaken"] = {
-						["Melee"] = 35430,
-						["Arcane"] = 10160,
-					},
-					["HOTs"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Gus <Pezzer>"] = {
-									["count"] = 15,
-								},
-							},
-							["amount"] = 15,
-						},
-					},
-					["Damage"] = 100570,
-					["Heals"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 1042,
-									["min"] = 1042,
-									["count"] = 5,
-									["amount"] = 5210,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 5210,
-						},
-					},
-					["TimeHeal"] = 3.58,
-					["ElementTakenBlock"] = {
-						["Melee"] = 440,
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 100,
-								},
-							},
-							["amount"] = 100,
-						},
-					},
-					["HOT_Time"] = 15,
-					["Healing"] = 5210,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit (Blocked)"] = {
-									["max"] = 1026,
-									["min"] = 1026,
-									["count"] = 1,
-									["amount"] = 1026,
-								},
-								["Crit"] = {
-									["max"] = 3528,
-									["min"] = 2786,
-									["count"] = 23,
-									["amount"] = 73793,
-								},
-								["Hit"] = {
-									["max"] = 1740,
-									["min"] = 1401,
-									["count"] = 16,
-									["amount"] = 25751,
-								},
-							},
-							["count"] = 40,
-							["amount"] = 100570,
-						},
-					},
-					["EnergyGain"] = 100,
-					["ElementDone"] = {
-						["Melee"] = 100570,
-					},
-					["HealingTaken"] = 5210,
-					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28338,
-								},
-							},
-							["amount"] = 28338,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 34785,
-								},
-							},
-							["amount"] = 34785,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 9372,
-								},
-							},
-							["amount"] = 9372,
-						},
-					},
-					["TimeDamage"] = 77.97000000000001,
-					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21.63,
-								},
-							},
-							["amount"] = 21.63,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 33.11,
-								},
-							},
-							["amount"] = 33.11,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8.1,
-								},
-							},
-							["amount"] = 8.1,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 100,
-								},
-							},
-							["amount"] = 100,
-						},
-					},
-					["WhoDamaged"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 6606,
-								},
-							},
-							["amount"] = 6606,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1152,
-								},
-								["Arcane Bolt"] = {
-									["count"] = 10160,
-								},
-							},
-							["amount"] = 11312,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 5961,
-								},
-							},
-							["amount"] = 5961,
-						},
-					},
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 23,
-								},
-								["Hit"] = {
-									["count"] = 17,
-								},
-							},
-							["amount"] = 40,
-						},
-					},
-				},
-				["Fight8"] = {
-					["ElementDoneBlock"] = {
-						["Melee"] = 440,
-					},
-					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 17.49,
-								},
-							},
-							["amount"] = 17.49,
-						},
-					},
-					["DamageTaken"] = 1759,
-					["ElementTakenResist"] = {
-						["Arcane"] = 109,
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 3,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["25%Resist"] = {
-									["max"] = 109,
-									["min"] = 109,
-									["count"] = 1,
-									["amount"] = 109,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 109,
-						},
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 3,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 17.49,
-					["ElementTaken"] = {
-						["Melee"] = 776,
-						["Arcane"] = 983,
-					},
-					["Damage"] = 23852,
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit (Blocked)"] = {
-									["max"] = 1026,
-									["min"] = 1026,
-									["count"] = 1,
-									["amount"] = 1026,
-								},
-								["Crit"] = {
-									["max"] = 3471,
-									["min"] = 2813,
-									["count"] = 5,
-									["amount"] = 16184,
-								},
-								["Hit"] = {
-									["max"] = 1734,
-									["min"] = 1527,
-									["count"] = 4,
-									["amount"] = 6642,
-								},
-							},
-							["count"] = 10,
-							["amount"] = 23852,
-						},
-					},
-					["EnergyGain"] = 10,
-					["ElementDone"] = {
-						["Melee"] = 23852,
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 3,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 23852,
-								},
-							},
-							["amount"] = 23852,
-						},
-					},
-					["TimeDamage"] = 17.49,
-					["TimeDamaging"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 17.49,
-								},
-							},
-							["amount"] = 17.49,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 776,
-								},
-								["Arcane Bolt"] = {
-									["count"] = 983,
-								},
-							},
-							["amount"] = 1759,
-						},
-					},
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 5,
-								},
-								["Hit"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-				},
-				["Fight2"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 4453,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Dodge"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 5,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 3,
-								},
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 4,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 4453,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 11526,
-					["ElementTakenBlock"] = {
-						["Melee"] = 370,
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 11526,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8208,
-								},
-							},
-							["amount"] = 8208,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3318,
-								},
-							},
-							["amount"] = 3318,
-						},
-					},
-					["PartialBlock"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Blocked"] = {
-									["max"] = 370,
-									["min"] = 370,
-									["count"] = 1,
-									["amount"] = 370,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 370,
-						},
-					},
-					["WhoDamaged"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3387,
-								},
-							},
-							["amount"] = 3387,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1066,
-								},
-							},
-							["amount"] = 1066,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 10,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 6.57,
-								},
-							},
-							["amount"] = 6.57,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1.64,
-								},
-							},
-							["amount"] = 1.64,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["ActiveTime"] = 8.209999999999999,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3335,
-									["min"] = 3201,
-									["count"] = 3,
-									["amount"] = 9854,
-								},
-								["Hit"] = {
-									["max"] = 1672,
-									["min"] = 1672,
-									["count"] = 1,
-									["amount"] = 1672,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 11526,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 8.209999999999999,
-					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 6.57,
-								},
-							},
-							["amount"] = 6.57,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1.64,
-								},
-							},
-							["amount"] = 1.64,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["CurrentFightData"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 0,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 0,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-					},
-					["PartialAbsorb"] = {
-					},
-					["DamagedWho"] = {
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-					},
-					["EnergyGainedFrom"] = {
-					},
-					["PartialResist"] = {
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 0,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-					},
-					["ActiveTime"] = 0,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 0,
-					["TimeDamaging"] = {
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["Fight6"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 1182,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 3,
-								},
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 4,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 1182,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 11346,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 11346,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 11346,
-								},
-							},
-							["amount"] = 11346,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 1182,
-								},
-							},
-							["amount"] = 1182,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 10,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8.52,
-								},
-							},
-							["amount"] = 8.52,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 10,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["ActiveTime"] = 8.52,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3439,
-									["min"] = 2982,
-									["count"] = 3,
-									["amount"] = 9706,
-								},
-								["Hit"] = {
-									["max"] = 1640,
-									["min"] = 1640,
-									["count"] = 1,
-									["amount"] = 1640,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 11346,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 8.52,
-					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 8.52,
-								},
-							},
-							["amount"] = 8.52,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["Fight4"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 823,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Arcane"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Arcane"] = 823,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 3354,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-						["Arcane"] = 206,
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 3354,
-					},
-					["PartialAbsorb"] = {
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3354,
-								},
-							},
-							["amount"] = 3354,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Arcane Bolt"] = {
-									["count"] = 823,
-								},
-							},
-							["amount"] = 823,
-						},
-					},
-					["EnergyGainedFrom"] = {
-					},
-					["PartialResist"] = {
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["25%Resist"] = {
-									["max"] = 206,
-									["min"] = 206,
-									["count"] = 1,
-									["amount"] = 206,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 206,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 0,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-					},
-					["ActiveTime"] = 3.5,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3354,
-									["min"] = 3354,
-									["count"] = 1,
-									["amount"] = 3354,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 3354,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 3.5,
-					["TimeDamaging"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["LastFightData"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 21711,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 6,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 15,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 7,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 11,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 21711,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 28075,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 3.58,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 28075,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 40,
-								},
-							},
-							["amount"] = 40,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["EnergyGain"] = 40,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 1042,
-									["min"] = 1042,
-									["count"] = 5,
-									["amount"] = 5210,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 5210,
-						},
-					},
-					["WhoHealed"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 40,
-								},
-							},
-							["amount"] = 40,
-						},
-					},
-					["ActiveTime"] = 18.71,
-					["Healing"] = 5210,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3443,
-									["min"] = 2786,
-									["count"] = 7,
-									["amount"] = 21593,
-								},
-								["Hit"] = {
-									["max"] = 1740,
-									["min"] = 1401,
-									["count"] = 4,
-									["amount"] = 6482,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 28075,
-						},
-					},
-					["HealingTaken"] = 5210,
-					["RageGain"] = 0,
-					["TimeDamage"] = 15.13,
-					["TimeDamaging"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Gus <Pezzer>"] = {
-									["count"] = 15,
-								},
-							},
-							["amount"] = 15,
-						},
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["Fight1"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 21711,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 6,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 15,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 7,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 11,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 21711,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 28075,
-					["ElementTakenBlock"] = {
-					},
-					["TimeHeal"] = 3.58,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 28075,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
-						},
-					},
-					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 40,
-								},
-							},
-							["amount"] = 40,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["EnergyGain"] = 40,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 3.58,
-								},
-							},
-							["amount"] = 3.58,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 1042,
-									["min"] = 1042,
-									["count"] = 5,
-									["amount"] = 5210,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 5210,
-						},
-					},
-					["WhoHealed"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Bloodthirsty"] = {
-									["count"] = 5210,
-								},
-							},
-							["amount"] = 5210,
-						},
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 40,
-								},
-							},
-							["amount"] = 40,
-						},
-					},
-					["ActiveTime"] = 18.71,
-					["Healing"] = 5210,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3443,
-									["min"] = 2786,
-									["count"] = 7,
-									["amount"] = 21593,
-								},
-								["Hit"] = {
-									["max"] = 1740,
-									["min"] = 1401,
-									["count"] = 4,
-									["amount"] = 6482,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 28075,
-						},
-					},
-					["HealingTaken"] = 5210,
-					["RageGain"] = 0,
-					["TimeDamage"] = 15.13,
-					["TimeDamaging"] = {
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 15.13,
-								},
-							},
-							["amount"] = 15.13,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-						["Bloodthirsty"] = {
-							["Details"] = {
-								["Gus <Pezzer>"] = {
-									["count"] = 15,
-								},
-							},
-							["amount"] = 15,
-						},
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["Fight3"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 12362,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 4,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 10,
-								},
-								["Miss"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 15,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-						["Melee"] = 4008,
-						["Arcane"] = 8354,
-					},
-					["DOT_Time"] = 0,
-					["Damage"] = 12166,
-					["ElementTakenBlock"] = {
-						["Melee"] = 70,
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["ElementTakenResist"] = {
-						["Arcane"] = 1950,
-					},
-					["ElementDoneAbsorb"] = {
-					},
-					["FAttacks"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementDone"] = {
-						["Melee"] = 12166,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 4,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 15,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 15,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 7579,
-								},
-							},
-							["amount"] = 7579,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 4587,
-								},
-							},
-							["amount"] = 4587,
-						},
-					},
-					["PartialBlock"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Blocked"] = {
-									["max"] = 70,
-									["min"] = 70,
-									["count"] = 1,
-									["amount"] = 70,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 70,
-						},
-					},
-					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 376,
-								},
-								["Arcane Bolt"] = {
-									["count"] = 8354,
-								},
-							},
-							["amount"] = 8730,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3632,
-								},
-							},
-							["amount"] = 3632,
-						},
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Go for the Throat"] = {
-									["count"] = 20,
-								},
-							},
-							["amount"] = 20,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 4,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 0,
-						},
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["50%Resist"] = {
-									["max"] = 326,
-									["min"] = 290,
-									["count"] = 4,
-									["amount"] = 1241,
-								},
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-								["25%Resist"] = {
-									["max"] = 220,
-									["min"] = 100,
-									["count"] = 5,
-									["amount"] = 709,
-								},
-							},
-							["count"] = 15,
-							["amount"] = 1950,
-						},
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["OverHeals"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 20,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 12.12,
-								},
-							},
-							["amount"] = 12.12,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 2.96,
-								},
-							},
-							["amount"] = 2.96,
-						},
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["Heals"] = {
-					},
-					["WhoHealed"] = {
-					},
-					["EnergyGained"] = {
-						["Go for the Throat"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 20,
-								},
-							},
-							["amount"] = 20,
-						},
-					},
-					["ActiveTime"] = 15.08,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 3056,
-									["min"] = 3000,
-									["count"] = 2,
-									["amount"] = 6056,
-								},
-								["Hit"] = {
-									["max"] = 1533,
-									["min"] = 1515,
-									["count"] = 4,
-									["amount"] = 6110,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 12166,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 15.08,
-					["TimeDamaging"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 12.12,
-								},
-							},
-							["amount"] = 12.12,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 2.96,
-								},
-							},
-							["amount"] = 2.96,
-						},
-					},
-					["ManaGain"] = 0,
-					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-			},
-			["UnitLockout"] = 1333780296,
-			["LastActive"] = 1333780441,
-		},
-		["Drakos the Interrogator"] = {
-			["GUID"] = "0xF1306C0600003F96",
-			["LastEventHealth"] = {
-				"314327 (96%)", -- [1]
-				"303416 (93%)", -- [2]
-				"303416 (93%)", -- [3]
-				"303416 (93%)", -- [4]
-				"293624 (90%)", -- [5]
-				"285732 (87%)", -- [6]
-				"266349 (81%)", -- [7]
-				"253040 (77%)", -- [8]
-				"253040 (77%)", -- [9]
-				"253040 (77%)", -- [10]
-				"242309 (74%)", -- [11]
-				"236663 (72%)", -- [12]
-				"236663 (72%)", -- [13]
-				"213713 (65%)", -- [14]
-				"207403 (63%)", -- [15]
-				"207403 (63%)", -- [16]
-				"207403 (63%)", -- [17]
-				"198351 (60%)", -- [18]
-				"198351 (60%)", -- [19]
-				"198351 (60%)", -- [20]
-				"180351 (55%)", -- [21]
-				"171155 (52%)", -- [22]
-				"171155 (52%)", -- [23]
-				"150331 (46%)", -- [24]
-				"144065 (44%)", -- [25]
-				"118436 (36%)", -- [26]
-				"109240 (33%)", -- [27]
-				"109240 (33%)", -- [28]
-				"101914 (31%)", -- [29]
-				"101914 (31%)", -- [30]
-				"98743 (30%)", -- [31]
-				"72190 (22%)", -- [32]
-				"62623 (19%)", -- [33]
-				"52430 (16%)", -- [34]
-				"38403 (11%)", -- [35]
-				"38403 (11%)", -- [36]
-				"36665 (11%)", -- [37]
-				"36665 (11%)", -- [38]
-				"31927 (9%)", -- [39]
-				"8180 (2%)", -- [40]
-				"1809 (0%)", -- [41]
-				"1809 (0%)", -- [42]
-				"0 (0%)", -- [43]
+				"???", -- [1]
+				"???", -- [2]
+				"???", -- [3]
+				"???", -- [4]
+				"???", -- [5]
+				"???", -- [6]
+				"???", -- [7]
+				"???", -- [8]
+				"???", -- [9]
+				"???", -- [10]
+				"???", -- [11]
+				"???", -- [12]
+				"???", -- [13]
+				"???", -- [14]
+				"???", -- [15]
+				"???", -- [16]
+				"???", -- [17]
+				"???", -- [18]
+				"???", -- [19]
+				"???", -- [20]
+				"???", -- [21]
+				"???", -- [22]
+				"???", -- [23]
+				"???", -- [24]
+				"???", -- [25]
+				"???", -- [26]
+				"???", -- [27]
+				"???", -- [28]
+				"???", -- [29]
+				"???", -- [30]
+				"???", -- [31]
+				"???", -- [32]
+				"???", -- [33]
+				"???", -- [34]
+				"???", -- [35]
+				"???", -- [36]
+				"???", -- [37]
+				"???", -- [38]
 			},
 			["LastEventType"] = {
 				"DAMAGE", -- [1]
@@ -3072,7 +63,7 @@ RecountPerCharDB = {
 				"DAMAGE", -- [16]
 				"DAMAGE", -- [17]
 				"DAMAGE", -- [18]
-				"DAMAGE", -- [19]
+				"HEAL", -- [19]
 				"DAMAGE", -- [20]
 				"DAMAGE", -- [21]
 				"DAMAGE", -- [22]
@@ -3091,269 +82,596 @@ RecountPerCharDB = {
 				"DAMAGE", -- [35]
 				"DAMAGE", -- [36]
 				"DAMAGE", -- [37]
-				"DAMAGE", -- [38]
-				"DAMAGE", -- [39]
-				"DAMAGE", -- [40]
-				"DAMAGE", -- [41]
-				"DAMAGE", -- [42]
-				"MISC", -- [43]
+				"MISC", -- [38]
 			},
 			["TimeWindows"] = {
+				["ActiveTime"] = {
+					44.75000000000001, -- [1]
+				},
 				["DeathCount"] = {
 					1, -- [1]
 				},
-				["ActiveTime"] = {
-					16.58, -- [1]
+				["FDamage"] = {
+					37327, -- [1]
 				},
 				["TimeDamage"] = {
-					16.58, -- [1]
-				},
-				["DamageTaken"] = {
-					327459, -- [1]
-				},
-				["Damage"] = {
-					21711, -- [1]
+					44.75000000000001, -- [1]
 				},
 			},
-			["enClass"] = "MOB",
-			["unit"] = "playertarget",
+			["enClass"] = "PET",
+			["level"] = 1,
+			["LastFightIn"] = 0,
+			["type"] = "Pet",
+			["FightsSaved"] = 25,
+			["LastActive"] = 1333834112,
+			["UnitLockout"] = 1333834114,
+			["Owner"] = "Chocolutis",
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["TimeSpent"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+								["Claw"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["FAttacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+								["Hit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Claw"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+								["Hit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["Attacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Claw"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 0,
+					["FDamage"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+								["Claw"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["ActiveTime"] = 0,
+					["FDamagedWho"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+								["Claw"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+				},
+				["OverallData"] = {
+					["TimeSpent"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24.27,
+								},
+								["Claw"] = {
+									["count"] = 20.48,
+								},
+							},
+							["amount"] = 44.75000000000001,
+						},
+					},
+					["FAttacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 2098,
+									["min"] = 1911,
+									["count"] = 5,
+									["amount"] = 9977,
+								},
+								["Hit"] = {
+									["max"] = 1045,
+									["min"] = 936,
+									["count"] = 11,
+									["amount"] = 10932,
+								},
+							},
+							["count"] = 16,
+							["amount"] = 20909,
+						},
+						["Claw"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 2570,
+									["min"] = 2570,
+									["count"] = 1,
+									["amount"] = 2570,
+								},
+								["Hit"] = {
+									["max"] = 1307,
+									["min"] = 1186,
+									["count"] = 11,
+									["amount"] = 13848,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 16418,
+						},
+					},
+					["Attacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+						["Claw"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 1,
+					["FDamage"] = 37327,
+					["TimeDamage"] = 44.75000000000001,
+					["TimeDamaging"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24.27,
+								},
+								["Claw"] = {
+									["count"] = 20.48,
+								},
+							},
+							["amount"] = 44.75000000000001,
+						},
+					},
+					["ActiveTime"] = 44.75000000000001,
+					["FDamagedWho"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 20909,
+								},
+								["Claw"] = {
+									["count"] = 16418,
+								},
+							},
+							["amount"] = 37327,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+				},
+			},
+			["NextEventNum"] = 39,
+			["LastEventHealthNum"] = {
+				0, -- [1]
+				0, -- [2]
+				0, -- [3]
+				0, -- [4]
+				0, -- [5]
+				0, -- [6]
+				0, -- [7]
+				0, -- [8]
+				0, -- [9]
+				0, -- [10]
+				0, -- [11]
+				0, -- [12]
+				0, -- [13]
+				0, -- [14]
+				0, -- [15]
+				0, -- [16]
+				0, -- [17]
+				0, -- [18]
+				0, -- [19]
+				0, -- [20]
+				0, -- [21]
+				0, -- [22]
+				0, -- [23]
+				0, -- [24]
+				0, -- [25]
+				0, -- [26]
+				0, -- [27]
+				0, -- [28]
+				0, -- [29]
+				0, -- [30]
+				0, -- [31]
+				0, -- [32]
+				0, -- [33]
+				0, -- [34]
+				0, -- [35]
+				0, -- [36]
+				0, -- [37]
+				0, -- [38]
+			},
+			["LastEvents"] = {
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -1042 (Physical)", -- [1]
+				"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [2]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1261 (Physical)", -- [3]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -986 (Physical)", -- [4]
+				"Risen Ghoul <Chocolutis> Claw Trida Crit -2570 (Physical)", -- [5]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -997 (Physical)", -- [6]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1295 (Physical)", -- [7]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -1045 (Physical)", -- [8]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1261 (Physical)", -- [9]
+				"Risen Ghoul <Chocolutis> Melee Trida Crit -2057 (Physical)", -- [10]
+				"Risen Ghoul <Chocolutis> Melee Trida Crit -1940 (Physical)", -- [11]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1292 (Physical)", -- [12]
+				"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [13]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -986 (Physical)", -- [14]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1245 (Physical)", -- [15]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -1034 (Physical)", -- [16]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1186 (Physical)", -- [17]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -961 (Physical)", -- [18]
+				"Bloodworm <Chocolutis> Blood Burst Risen Ghoul <Chocolutis> Hit +4881 (4881 overheal)", -- [19]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -958 (Physical)", -- [20]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1307 (Physical)", -- [21]
+				"Risen Ghoul <Chocolutis> Melee Trida Crit -2098 (Physical)", -- [22]
+				"Risen Ghoul <Chocolutis> Melee Trida Crit -1971 (Physical)", -- [23]
+				"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [24]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -936 (Physical)", -- [25]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1243 (Physical)", -- [26]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -995 (Physical)", -- [27]
+				"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [28]
+				"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [29]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1214 (Physical)", -- [30]
+				"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [31]
+				"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [32]
+				"Risen Ghoul <Chocolutis> Melee Trida Crit -1911 (Physical)", -- [33]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1278 (Physical)", -- [34]
+				"Risen Ghoul <Chocolutis> Melee Trida Hit -992 (Physical)", -- [35]
+				"Risen Ghoul <Chocolutis> Claw Trida Hit -1266 (Physical)", -- [36]
+				"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [37]
+				"Risen Ghoul <Chocolutis> dies.", -- [38]
+			},
+			["Name"] = "Risen Ghoul",
+			["TimeLast"] = {
+				["DeathCount"] = 1333834114,
+				["FDamage"] = 1333834111,
+				["ActiveTime"] = 1333834112,
+				["OVERALL"] = 1333834114,
+				["TimeDamage"] = 1333834112,
+			},
+			["LastEventIncoming"] = {
+				false, -- [1]
+				false, -- [2]
+				false, -- [3]
+				false, -- [4]
+				false, -- [5]
+				false, -- [6]
+				false, -- [7]
+				false, -- [8]
+				false, -- [9]
+				false, -- [10]
+				false, -- [11]
+				false, -- [12]
+				false, -- [13]
+				false, -- [14]
+				false, -- [15]
+				false, -- [16]
+				false, -- [17]
+				false, -- [18]
+				true, -- [19]
+				false, -- [20]
+				false, -- [21]
+				false, -- [22]
+				false, -- [23]
+				false, -- [24]
+				false, -- [25]
+				false, -- [26]
+				false, -- [27]
+				false, -- [28]
+				false, -- [29]
+				false, -- [30]
+				false, -- [31]
+				false, -- [32]
+				false, -- [33]
+				false, -- [34]
+				false, -- [35]
+				false, -- [36]
+				false, -- [37]
+				true, -- [38]
+			},
 			["DeathLogs"] = {
 				{
+					["MessageTimes"] = {
+						-13.53499999997439, -- [1]
+						-11.92099999997299, -- [2]
+						-11.53200000000652, -- [3]
+						-10.39499999996042, -- [4]
+						-9.554000000003725, -- [5]
+						-8.010999999998603, -- [6]
+						-7.511999999987893, -- [7]
+						-6.430999999982305, -- [8]
+						-4.052999999956228, -- [9]
+						-3.197999999974854, -- [10]
+						-1.990999999979977, -- [11]
+						0, -- [12]
+					},
 					["MessageIncoming"] = {
-						true, -- [1]
-						true, -- [2]
-						true, -- [3]
+						false, -- [1]
+						false, -- [2]
+						false, -- [3]
 						false, -- [4]
-						true, -- [5]
-						true, -- [6]
-						true, -- [7]
-						true, -- [8]
-						true, -- [9]
-						true, -- [10]
+						false, -- [5]
+						false, -- [6]
+						false, -- [7]
+						false, -- [8]
+						false, -- [9]
+						false, -- [10]
 						false, -- [11]
 						true, -- [12]
-						true, -- [13]
-						false, -- [14]
-						true, -- [15]
-						true, -- [16]
-						true, -- [17]
-						true, -- [18]
-						true, -- [19]
-						true, -- [20]
-						true, -- [21]
-						true, -- [22]
-						true, -- [23]
-						false, -- [24]
-						true, -- [25]
-						true, -- [26]
-						true, -- [27]
-						true, -- [28]
-						true, -- [29]
-						true, -- [30]
-						false, -- [31]
-						true, -- [32]
-						true, -- [33]
-						true, -- [34]
-						true, -- [35]
-						true, -- [36]
-						true, -- [37]
 					},
 					["Messages"] = {
-						"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -16493 (Fire)", -- [1]
-						"Pezzer Auto Shot Drakos the Interrogator Crit -13309 (Physical)", -- [2]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -2839 (Physical)", -- [3]
-						"Drakos the Interrogator Melee Gus <Pezzer> Hit -3447 (Physical)", -- [4]
-						"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -7892 (Fire)", -- [5]
-						"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -5646 (Nature)", -- [6]
-						"Gus <Pezzer> Melee Drakos the Interrogator Hit -1401 (Physical)", -- [7]
-						"Pezzer Cobra Shot Drakos the Interrogator Crit -21549 (Nature)", -- [8]
-						"Pezzer Auto Shot Drakos the Interrogator Hit -6310 (Physical)", -- [9]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -2786 (Physical)", -- [10]
-						"Drakos the Interrogator Melee Gus <Pezzer> Hit -3195 (Physical)", -- [11]
-						"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [12]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -3162 (Physical)", -- [13]
-						"Drakos the Interrogator Melee Gus <Pezzer> Hit -3402 (Physical)", -- [14]
-						"Pezzer Auto Shot Drakos the Interrogator Crit -14838 (Physical)", -- [15]
-						"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [16]
-						"Gus <Pezzer> Melee Drakos the Interrogator Hit -1603 (Physical)", -- [17]
-						"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -19221 (Fire)", -- [18]
-						"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [19]
-						"Pezzer Arcane Shot Drakos the Interrogator Crit -25629 (Arcane)", -- [20]
-						"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [21]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -3171 (Physical)", -- [22]
-						"Pezzer Auto Shot Drakos the Interrogator Hit -7326 (Physical)", -- [23]
-						"Drakos the Interrogator Melee Gus <Pezzer> Hit -3860 (Physical)", -- [24]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -3302 (Physical)", -- [25]
-						"Pezzer Arcane Shot Drakos the Interrogator Crit -26553 (Arcane)", -- [26]
-						"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6265 (Nature)", -- [27]
-						"Pezzer Lightning Strike Drakos the Interrogator Hit -10193 (Physical)", -- [28]
-						"Pezzer Auto Shot Drakos the Interrogator Crit -14027 (Physical)", -- [29]
-						"Gus <Pezzer> Melee Drakos the Interrogator Hit -1738 (Physical)", -- [30]
-						"Drakos the Interrogator Melee Gus <Pezzer> Hit -3683 (Physical)", -- [31]
-						"Gus <Pezzer> Melee Drakos the Interrogator Hit -1740 (Physical)", -- [32]
-						"Pezzer Serpent Sting (DoT) Drakos the Interrogator Tick -2998 (Nature)", -- [33]
-						"Pezzer Kill Shot Drakos the Interrogator Hit -23747 (Physical)", -- [34]
-						"Pezzer Auto Shot Drakos the Interrogator Hit -6371 (Physical)", -- [35]
-						"Gus <Pezzer> Melee Drakos the Interrogator Crit -3443 (Physical)", -- [36]
-						"Drakos the Interrogator dies.", -- [37]
+						"Risen Ghoul <Chocolutis> Melee Trida Hit -995 (Physical)", -- [1]
+						"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [2]
+						"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [3]
+						"Risen Ghoul <Chocolutis> Claw Trida Hit -1214 (Physical)", -- [4]
+						"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [5]
+						"Risen Ghoul <Chocolutis> Claw Trida Dodge (Physical)", -- [6]
+						"Risen Ghoul <Chocolutis> Melee Trida Crit -1911 (Physical)", -- [7]
+						"Risen Ghoul <Chocolutis> Claw Trida Hit -1278 (Physical)", -- [8]
+						"Risen Ghoul <Chocolutis> Melee Trida Hit -992 (Physical)", -- [9]
+						"Risen Ghoul <Chocolutis> Claw Trida Hit -1266 (Physical)", -- [10]
+						"Risen Ghoul <Chocolutis> Melee Trida Dodge", -- [11]
+						"Risen Ghoul <Chocolutis> dies.", -- [12]
 					},
-					["DeathAt"] = 1333780444,
 					["HealthNum"] = {
-						81.74602931021253, -- [1]
-						77.66132126141333, -- [2]
-						77.66132126141333, -- [3]
-						77.66132126141333, -- [4]
-						74.36783549451393, -- [5]
-						72.63500345277373, -- [6]
-						72.63500345277373, -- [7]
-						65.59134504718791, -- [8]
-						63.65472262717716, -- [9]
-						63.65472262717716, -- [10]
-						63.65472262717716, -- [11]
-						60.87654415713957, -- [12]
-						60.87654415713957, -- [13]
-						60.87654415713957, -- [14]
-						55.35210619197422, -- [15]
-						52.5297322182153, -- [16]
-						52.5297322182153, -- [17]
-						46.13857131895956, -- [18]
-						44.21545308064145, -- [19]
-						36.34957415790685, -- [20]
-						33.52720018414793, -- [21]
-						33.52720018414793, -- [22]
-						31.27875393232564, -- [23]
-						31.27875393232564, -- [24]
-						30.30553211079567, -- [25]
-						22.15606537251592, -- [26]
-						19.21982659403054, -- [27]
-						16.09146013964552, -- [28]
-						11.78638839868027, -- [29]
-						11.78638839868027, -- [30]
-						11.25297322182153, -- [31]
-						11.25297322182153, -- [32]
-						9.798818384101896, -- [33]
-						2.510550141947364, -- [34]
-						0.5552060154991176, -- [35]
-						0.5552060154991176, -- [36]
-						0, -- [37]
-					},
-					["MessageTimes"] = {
-						-14.33299999998417, -- [1]
-						-14.19999999998254, -- [2]
-						-14.14299999998184, -- [3]
-						-13.64900000000489, -- [4]
-						-13.35000000000582, -- [5]
-						-13.13999999998487, -- [6]
-						-12.59899999998743, -- [7]
-						-11.82800000000861, -- [8]
-						-11.7729999999865, -- [9]
-						-11.07699999999022, -- [10]
-						-10.83799999998882, -- [11]
-						-10.14199999999255, -- [12]
-						-9.565999999991618, -- [13]
-						-8.828999999997905, -- [14]
-						-8.691999999980908, -- [15]
-						-8.600000000005821, -- [16]
-						-8.040999999997439, -- [17]
-						-7.595999999990454, -- [18]
-						-7.144999999989523, -- [19]
-						-6.940000000002328, -- [20]
-						-6.603000000002794, -- [21]
-						-6.50800000000163, -- [22]
-						-6.173999999999069, -- [23]
-						-6.025999999983469, -- [24]
-						-4.986000000004424, -- [25]
-						-4.671999999991385, -- [26]
-						-4.139999999984866, -- [27]
-						-4.00800000000163, -- [28]
-						-3.487999999983003, -- [29]
-						-3.451000000000931, -- [30]
-						-2.413999999989755, -- [31]
-						-1.919999999983702, -- [32]
-						-1.144999999989523, -- [33]
-						-0.9539999999979045, -- [34]
-						-0.8979999999864958, -- [35]
-						-0.3929999999818392, -- [36]
-						0, -- [37]
-					},
-					["KilledBy"] = "Gus <Pezzer>",
-					["Health"] = {
-						"266349 (81%)", -- [1]
-						"253040 (77%)", -- [2]
-						"253040 (77%)", -- [3]
-						"253040 (77%)", -- [4]
-						"242309 (74%)", -- [5]
-						"236663 (72%)", -- [6]
-						"236663 (72%)", -- [7]
-						"213713 (65%)", -- [8]
-						"207403 (63%)", -- [9]
-						"207403 (63%)", -- [10]
-						"207403 (63%)", -- [11]
-						"198351 (60%)", -- [12]
-						"198351 (60%)", -- [13]
-						"198351 (60%)", -- [14]
-						"180351 (55%)", -- [15]
-						"171155 (52%)", -- [16]
-						"171155 (52%)", -- [17]
-						"150331 (46%)", -- [18]
-						"144065 (44%)", -- [19]
-						"118436 (36%)", -- [20]
-						"109240 (33%)", -- [21]
-						"109240 (33%)", -- [22]
-						"101914 (31%)", -- [23]
-						"101914 (31%)", -- [24]
-						"98743 (30%)", -- [25]
-						"72190 (22%)", -- [26]
-						"62623 (19%)", -- [27]
-						"52430 (16%)", -- [28]
-						"38403 (11%)", -- [29]
-						"38403 (11%)", -- [30]
-						"36665 (11%)", -- [31]
-						"36665 (11%)", -- [32]
-						"31927 (9%)", -- [33]
-						"8180 (2%)", -- [34]
-						"1809 (0%)", -- [35]
-						"1809 (0%)", -- [36]
-						"0 (0%)", -- [37]
-					},
-					["EventNum"] = {
-						5.061919742192895, -- [1]
-						4.084708048799202, -- [2]
-						0.8713266323946904, -- [3]
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
 						0, -- [4]
-						2.422159134504719, -- [5]
-						1.732832041740198, -- [6]
-						0.4299854216220363, -- [7]
-						6.613672983963784, -- [8]
-						1.936622420010742, -- [9]
-						0.8550602317194813, -- [10]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+						0, -- [10]
 						0, -- [11]
-						1.923118238318116, -- [12]
-						0.9704596025473797, -- [13]
-						0, -- [14]
-						4.55397836261797, -- [15]
-						2.82237397375892, -- [16]
-						0.4919818921200031, -- [17]
-						5.899179007135732, -- [18]
-						1.923118238318116, -- [19]
-						7.865878922734597, -- [20]
-						2.82237397375892, -- [21]
-						0.9732218215299624, -- [22]
-						2.248446251822297, -- [23]
-						0, -- [24]
-						1.013427453387555, -- [25]
-						8.149466738279751, -- [26]
-						1.922811325097828, -- [27]
-						3.128366454385023, -- [28]
-						4.305071740965242, -- [29]
-						0.5334151768587432, -- [30]
-						0, -- [31]
-						0.5340290032993171, -- [32]
-						0.9201258344203177, -- [33]
-						7.288268242154531, -- [34]
-						1.955344126448247, -- [35]
-						1.056702217448017, -- [36]
-						0, -- [37]
+						0, -- [12]
+					},
+					["DeathAt"] = 1333834116,
+					["EventNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+						0, -- [10]
+						0, -- [11]
+						0, -- [12]
+					},
+					["Health"] = {
+						"???", -- [1]
+						"???", -- [2]
+						"???", -- [3]
+						"???", -- [4]
+						"???", -- [5]
+						"???", -- [6]
+						"???", -- [7]
+						"???", -- [8]
+						"???", -- [9]
+						"???", -- [10]
+						"???", -- [11]
+						"???", -- [12]
 					},
 					["MessageType"] = {
 						"DAMAGE", -- [1]
@@ -3367,1045 +685,178 @@ RecountPerCharDB = {
 						"DAMAGE", -- [9]
 						"DAMAGE", -- [10]
 						"DAMAGE", -- [11]
-						"DAMAGE", -- [12]
-						"DAMAGE", -- [13]
-						"DAMAGE", -- [14]
-						"DAMAGE", -- [15]
-						"DAMAGE", -- [16]
-						"DAMAGE", -- [17]
-						"DAMAGE", -- [18]
-						"DAMAGE", -- [19]
-						"DAMAGE", -- [20]
-						"DAMAGE", -- [21]
-						"DAMAGE", -- [22]
-						"DAMAGE", -- [23]
-						"DAMAGE", -- [24]
-						"DAMAGE", -- [25]
-						"DAMAGE", -- [26]
-						"DAMAGE", -- [27]
-						"DAMAGE", -- [28]
-						"DAMAGE", -- [29]
-						"DAMAGE", -- [30]
-						"DAMAGE", -- [31]
-						"DAMAGE", -- [32]
-						"DAMAGE", -- [33]
-						"DAMAGE", -- [34]
-						"DAMAGE", -- [35]
-						"DAMAGE", -- [36]
-						"MISC", -- [37]
+						"MISC", -- [12]
 					},
 				}, -- [1]
 			},
-			["level"] = -1,
-			["LastDamageAbility"] = "Melee",
-			["LastFightIn"] = 7,
-			["LastEventNum"] = {
-				3.528888206859511, -- [1]
-				3.348730146551063, -- [2]
-				nil, -- [3]
-				0.8869792066293256, -- [4]
-				3.00529425304995, -- [5]
-				2.422159134504719, -- [6]
-				5.061919742192895, -- [7]
-				4.084708048799202, -- [8]
-				0.8713266323946904, -- [9]
-				nil, -- [10]
-				2.422159134504719, -- [11]
-				1.732832041740198, -- [12]
-				0.4299854216220363, -- [13]
-				6.613672983963784, -- [14]
-				1.936622420010742, -- [15]
-				0.8550602317194813, -- [16]
-				nil, -- [17]
-				1.923118238318116, -- [18]
-				0.9704596025473797, -- [19]
-				nil, -- [20]
-				4.55397836261797, -- [21]
-				2.82237397375892, -- [22]
-				0.4919818921200031, -- [23]
-				5.899179007135732, -- [24]
-				1.923118238318116, -- [25]
-				7.865878922734597, -- [26]
-				2.82237397375892, -- [27]
-				0.9732218215299624, -- [28]
-				2.248446251822297, -- [29]
-				nil, -- [30]
-				1.013427453387555, -- [31]
-				8.149466738279751, -- [32]
-				1.922811325097828, -- [33]
-				3.128366454385023, -- [34]
-				4.305071740965242, -- [35]
-				0.5334151768587432, -- [36]
-				nil, -- [37]
-				0.5340290032993171, -- [38]
-				0.9201258344203177, -- [39]
-				7.288268242154531, -- [40]
-				1.955344126448247, -- [41]
-				1.056702217448017, -- [42]
-			},
-			["type"] = "Boss",
-			["FightsSaved"] = 1,
-			["LastAbility"] = 256776.418,
-			["LastDamageTaken"] = 3443,
-			["Owner"] = false,
-			["TimeLast"] = {
-				["DeathCount"] = 1333780442,
-				["ActiveTime"] = 1333780439,
-				["TimeDamage"] = 1333780439,
-				["OVERALL"] = 1333780442,
-				["DamageTaken"] = 1333780441,
-				["Damage"] = 1333780439,
-			},
-			["NextEventNum"] = 44,
-			["LastEventHealthNum"] = {
-				96.47111179314049, -- [1]
-				93.12238164658943, -- [2]
-				93.12238164658943, -- [3]
-				93.12238164658943, -- [4]
-				90.11708739353948, -- [5]
-				87.69492825903475, -- [6]
-				81.74602931021253, -- [7]
-				77.66132126141333, -- [8]
-				77.66132126141333, -- [9]
-				77.66132126141333, -- [10]
-				74.36783549451393, -- [11]
-				72.63500345277373, -- [12]
-				72.63500345277373, -- [13]
-				65.59134504718791, -- [14]
-				63.65472262717716, -- [15]
-				63.65472262717716, -- [16]
-				63.65472262717716, -- [17]
-				60.87654415713957, -- [18]
-				60.87654415713957, -- [19]
-				60.87654415713957, -- [20]
-				55.35210619197422, -- [21]
-				52.5297322182153, -- [22]
-				52.5297322182153, -- [23]
-				46.13857131895956, -- [24]
-				44.21545308064145, -- [25]
-				36.34957415790685, -- [26]
-				33.52720018414793, -- [27]
-				33.52720018414793, -- [28]
-				31.27875393232564, -- [29]
-				31.27875393232564, -- [30]
-				30.30553211079567, -- [31]
-				22.15606537251592, -- [32]
-				19.21982659403054, -- [33]
-				16.09146013964552, -- [34]
-				11.78638839868027, -- [35]
-				11.78638839868027, -- [36]
-				11.25297322182153, -- [37]
-				11.25297322182153, -- [38]
-				9.798818384101896, -- [39]
-				2.510550141947364, -- [40]
-				0.5552060154991176, -- [41]
-				0.5552060154991176, -- [42]
-				0, -- [43]
-			},
-			["LastEvents"] = {
-				"Pezzer Improved Serpent Sting Drakos the Interrogator Crit -11498 (Nature)", -- [1]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -10911 (Physical)", -- [2]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -4124 (Physical)", -- [3]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2890 (Physical)", -- [4]
-				"Pezzer Lightning Strike Drakos the Interrogator Hit -9792 (Physical)", -- [5]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -7892 (Fire)", -- [6]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -16493 (Fire)", -- [7]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -13309 (Physical)", -- [8]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2839 (Physical)", -- [9]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3447 (Physical)", -- [10]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -7892 (Fire)", -- [11]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -5646 (Nature)", -- [12]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1401 (Physical)", -- [13]
-				"Pezzer Cobra Shot Drakos the Interrogator Crit -21549 (Nature)", -- [14]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -6310 (Physical)", -- [15]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -2786 (Physical)", -- [16]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3195 (Physical)", -- [17]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [18]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3162 (Physical)", -- [19]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3402 (Physical)", -- [20]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -14838 (Physical)", -- [21]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [22]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1603 (Physical)", -- [23]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -19221 (Fire)", -- [24]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [25]
-				"Pezzer Arcane Shot Drakos the Interrogator Crit -25629 (Arcane)", -- [26]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [27]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3171 (Physical)", -- [28]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -7326 (Physical)", -- [29]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3860 (Physical)", -- [30]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3302 (Physical)", -- [31]
-				"Pezzer Arcane Shot Drakos the Interrogator Crit -26553 (Arcane)", -- [32]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6265 (Nature)", -- [33]
-				"Pezzer Lightning Strike Drakos the Interrogator Hit -10193 (Physical)", -- [34]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -14027 (Physical)", -- [35]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1738 (Physical)", -- [36]
-				"Drakos the Interrogator Melee Gus <Pezzer> Hit -3683 (Physical)", -- [37]
-				"Gus <Pezzer> Melee Drakos the Interrogator Hit -1740 (Physical)", -- [38]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Tick -2998 (Nature)", -- [39]
-				"Pezzer Kill Shot Drakos the Interrogator Hit -23747 (Physical)", -- [40]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -6371 (Physical)", -- [41]
-				"Gus <Pezzer> Melee Drakos the Interrogator Crit -3443 (Physical)", -- [42]
-				"Drakos the Interrogator dies.", -- [43]
-			},
-			["Name"] = "Drakos the Interrogator",
-			["LastEventIncoming"] = {
-				true, -- [1]
-				true, -- [2]
-				false, -- [3]
-				true, -- [4]
-				true, -- [5]
-				true, -- [6]
-				true, -- [7]
-				true, -- [8]
-				true, -- [9]
-				false, -- [10]
-				true, -- [11]
-				true, -- [12]
-				true, -- [13]
-				true, -- [14]
-				true, -- [15]
-				true, -- [16]
-				false, -- [17]
-				true, -- [18]
-				true, -- [19]
-				false, -- [20]
-				true, -- [21]
-				true, -- [22]
-				true, -- [23]
-				true, -- [24]
-				true, -- [25]
-				true, -- [26]
-				true, -- [27]
-				true, -- [28]
-				true, -- [29]
-				false, -- [30]
-				true, -- [31]
-				true, -- [32]
-				true, -- [33]
-				true, -- [34]
-				true, -- [35]
-				true, -- [36]
-				false, -- [37]
-				true, -- [38]
-				true, -- [39]
-				true, -- [40]
-				true, -- [41]
-				true, -- [42]
-				true, -- [43]
-			},
 			["LastEventTimes"] = {
-				256761.965, -- [1]
-				256762.421, -- [2]
-				256763.222, -- [3]
-				256763.222, -- [4]
-				256763.222, -- [5]
-				256763.489, -- [6]
-				256764.499, -- [7]
-				256764.632, -- [8]
-				256764.689, -- [9]
-				256765.183, -- [10]
-				256765.482, -- [11]
-				256765.692, -- [12]
-				256766.233, -- [13]
-				256767.004, -- [14]
-				256767.059, -- [15]
-				256767.755, -- [16]
-				256767.994, -- [17]
-				256768.69, -- [18]
-				256769.266, -- [19]
-				256770.003, -- [20]
-				256770.14, -- [21]
-				256770.232, -- [22]
-				256770.791, -- [23]
-				256771.236, -- [24]
-				256771.687, -- [25]
-				256771.892, -- [26]
-				256772.229, -- [27]
-				256772.324, -- [28]
-				256772.658, -- [29]
-				256772.806, -- [30]
-				256773.846, -- [31]
-				256774.16, -- [32]
-				256774.692, -- [33]
-				256774.824, -- [34]
-				256775.344, -- [35]
-				256775.381, -- [36]
-				256776.418, -- [37]
-				256776.912, -- [38]
-				256777.687, -- [39]
-				256777.878, -- [40]
-				256777.934, -- [41]
-				256778.439, -- [42]
-				256778.832, -- [43]
+				281203.559, -- [1]
+				281203.559, -- [2]
+				281205.121, -- [3]
+				281205.527, -- [4]
+				281206.715, -- [5]
+				281207.625, -- [6]
+				281208.397, -- [7]
+				281209.555, -- [8]
+				281211.542, -- [9]
+				281211.542, -- [10]
+				281213.656, -- [11]
+				281215.702, -- [12]
+				281215.702, -- [13]
+				281217.575, -- [14]
+				281222.861, -- [15]
+				281222.972, -- [16]
+				281224.566, -- [17]
+				281224.862, -- [18]
+				281225.797, -- [19]
+				281226.918, -- [20]
+				281227.654, -- [21]
+				281228.928, -- [22]
+				281231.127, -- [23]
+				281231.725, -- [24]
+				281233.052, -- [25]
+				281233.325, -- [26]
+				281235.048, -- [27]
+				281236.662, -- [28]
+				281237.051, -- [29]
+				281238.188, -- [30]
+				281239.029, -- [31]
+				281240.572, -- [32]
+				281241.071, -- [33]
+				281242.152, -- [34]
+				281244.53, -- [35]
+				281245.385, -- [36]
+				281246.592, -- [37]
+				281248.583, -- [38]
 			},
-			["Fights"] = {
-				["Fight1"] = {
-					["TimeDamaging"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
+			["LastAbility"] = 286409.996,
+		},
+		["Chocolutis"] = {
+			["type"] = "Ungrouped",
+			["FightsSaved"] = 25,
+			["GuardianReverseGUIDs"] = {
+				["Bloodworm"] = {
+					["LatestGuardian"] = 2,
+					["GUIDs"] = {
+						"0xF1306D71000E8BFF", -- [1]
+						"0xF1306D71000E8C2B", -- [2]
+						[0] = "0xF1306D71000E8B87",
 					},
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 6,
-						},
-					},
-					["DamagedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-					},
-					["ElementDone"] = {
-						["Melee"] = 21711,
-					},
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 4124,
-									["min"] = 3195,
-									["count"] = 6,
-									["amount"] = 21711,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 21711,
-						},
-					},
-					["ElementHitsTaken"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 10,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 7,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 11,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 7,
-						},
-					},
-					["DamageTaken"] = 327459,
-					["TimeSpent"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
-					},
-					["PartialResist"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 0,
-						},
-					},
-					["DeathCount"] = 1,
-					["PartialAbsorb"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 16.58,
-					["WhoDamaged"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
-						},
-						["Pezzer"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
-								},
-							},
-							["amount"] = 299384,
-						},
-					},
-					["ElementTaken"] = {
-						["Physical"] = 116824,
-						["Melee"] = 28075,
-						["Arcane"] = 52182,
-						["Fire"] = 69890,
-						["Nature"] = 60488,
-					},
-					["TimeDamage"] = 16.58,
-					["Damage"] = 21711,
 				},
+			},
+			["Owner"] = false,
+			["enClass"] = "UNGROUPED",
+			["LastAbility"] = 286409.996,
+			["Name"] = "Chocolutis",
+			["UnitLockout"] = 1333834069,
+			["Pet"] = {
+				"Risen Ghoul <Chocolutis>", -- [1]
+				"Bloodworm <Chocolutis>", -- [2]
+			},
+			["level"] = 1,
+			["Fights"] = {
 				["LastFightData"] = {
-					["TimeDamaging"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
+					["DOTs"] = {
 					},
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 6,
-						},
+					["ElementDoneResist"] = {
 					},
-					["DamagedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-					},
-					["ElementDone"] = {
-						["Melee"] = 21711,
-					},
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 4124,
-									["min"] = 3195,
-									["count"] = 6,
-									["amount"] = 21711,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 21711,
-						},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 10,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 7,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 11,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 7,
-						},
 					},
-					["DamageTaken"] = 327459,
-					["TimeSpent"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
 					},
-					["PartialResist"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 0,
-						},
-					},
-					["DeathCount"] = 1,
-					["PartialAbsorb"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 16.58,
-					["WhoDamaged"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
-						},
-						["Pezzer"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
-								},
-							},
-							["amount"] = 299384,
-						},
+					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
-						["Physical"] = 116824,
-						["Melee"] = 28075,
-						["Arcane"] = 52182,
-						["Fire"] = 69890,
-						["Nature"] = 60488,
 					},
-					["TimeDamage"] = 16.58,
-					["Damage"] = 21711,
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
 				},
 				["CurrentFightData"] = {
 					["DOTs"] = {
@@ -4510,449 +961,444 @@ RecountPerCharDB = {
 					["DispelledWho"] = {
 					},
 				},
-				["OverallData"] = {
-					["TimeDamaging"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
+			},
+			["LastFightIn"] = 0,
+		},
+		["Bestheal"] = {
+			["GUID"] = "0x0280000004804EEE",
+			["LastEventHealth"] = {
+				"152141 (100%)", -- [1]
+				"152141 (100%)", -- [2]
+				"152141 (100%)", -- [3]
+				"152141 (100%)", -- [4]
+				"152141 (100%)", -- [5]
+				"152141 (100%)", -- [6]
+				"152141 (100%)", -- [7]
+				"98059 (64%)", -- [8]
+				"107017 (70%)", -- [9]
+				"113631 (74%)", -- [10]
+				"120239 (79%)", -- [11]
+				"125167 (82%)", -- [12]
+			},
+			["LastAttackedBy"] = "Environment",
+			["LastEventType"] = {
+				"HEAL", -- [1]
+				"HEAL", -- [2]
+				"HEAL", -- [3]
+				"HEAL", -- [4]
+				"HEAL", -- [5]
+				"HEAL", -- [6]
+				"HEAL", -- [7]
+				"DAMAGE", -- [8]
+				"HEAL", -- [9]
+				"HEAL", -- [10]
+				"HEAL", -- [11]
+				"HEAL", -- [12]
+			},
+			["TimeWindows"] = {
+				["DamageTaken"] = {
+					54082, -- [1]
+				},
+			},
+			["enClass"] = "PRIEST",
+			["unit"] = "Bestheal",
+			["level"] = 85,
+			["LastDamageAbility"] = "Falling",
+			["LastFightIn"] = 0,
+			["LastEventNum"] = {
+				3.681453388632913, -- [1]
+				2.277492589111416, -- [2]
+				2.277492589111416, -- [3]
+				4.554985178222832, -- [4]
+				2.278149874129919, -- [5]
+				2.278149874129919, -- [6]
+				nil, -- [7]
+				35.54728837065617, -- [8]
+				3.681453388632913, -- [9]
+				2.136833595151866, -- [10]
+				2.136833595151866, -- [11]
+				2.136176310133363, -- [12]
+			},
+			["type"] = "Ungrouped",
+			["FightsSaved"] = 25,
+			["LastAbility"] = 286409.996,
+			["UnitLockout"] = 1333834083,
+			["Owner"] = false,
+			["LastDamageTaken"] = 54082,
+			["NextEventNum"] = 13,
+			["LastEventHealthNum"] = {
+				100, -- [1]
+				100, -- [2]
+				100, -- [3]
+				100, -- [4]
+				100, -- [5]
+				100, -- [6]
+				100, -- [7]
+				64.45271162934384, -- [8]
+				70.34067082508989, -- [9]
+				74.68795393746591, -- [10]
+				79.03129333973091, -- [11]
+				82.27039391091159, -- [12]
+			},
+			["LastEvents"] = {
+				"Bestheal Glyph of Power Word: Shield Bestheal Hit +5601 (5601 overheal)", -- [1]
+				"Bestheal Renew Bestheal Tick +3465 (3465 overheal)", -- [2]
+				"Bestheal Renew Bestheal Tick +3465 (3465 overheal)", -- [3]
+				"Bestheal Renew Bestheal Crit +6930 (6930 overheal)", -- [4]
+				"Bestheal Renew Bestheal Tick +3466 (3466 overheal)", -- [5]
+				"Bestheal Renew Bestheal Tick +3466 (3466 overheal)", -- [6]
+				"Bestheal Glyph of Power Word: Shield Pezzer Hit +5601 (5601 overheal)", -- [7]
+				"Environment Falling Bestheal Hit -54082 (Physical)", -- [8]
+				"Bestheal Glyph of Power Word: Shield Bestheal Hit +5601", -- [9]
+				"Bestheal Renew Bestheal Tick +3251", -- [10]
+				"Bestheal Renew Bestheal Tick +3251", -- [11]
+				"Bestheal Renew Bestheal Tick +3250", -- [12]
+			},
+			["LastEventIncoming"] = {
+				true, -- [1]
+				true, -- [2]
+				true, -- [3]
+				true, -- [4]
+				true, -- [5]
+				true, -- [6]
+				false, -- [7]
+				true, -- [8]
+				true, -- [9]
+				true, -- [10]
+				true, -- [11]
+				true, -- [12]
+			},
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
 					},
-					["ElementHitsDone"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 6,
-						},
+					["ElementDoneResist"] = {
 					},
-					["DamagedWho"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 21711,
-								},
-							},
-							["amount"] = 21711,
-						},
-					},
-					["ElementDone"] = {
-						["Melee"] = 21711,
-					},
-					["Attacks"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 4124,
-									["min"] = 3195,
-									["count"] = 6,
-									["amount"] = 21711,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 21711,
-						},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 10,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 7,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 11,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 7,
-						},
 					},
-					["DamageTaken"] = 327459,
-					["TimeSpent"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 16.58,
-								},
-							},
-							["amount"] = 16.58,
-						},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
 					},
 					["PartialResist"] = {
-						["Explosive Shot (DoT)"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["PartialResist"] = {
+						["Falling"] = {
 							["Details"] = {
 								["No Resist"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 6,
+									["count"] = 0,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 6,
-							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
+							["count"] = 0,
 							["amount"] = 0,
 						},
 					},
-					["DeathCount"] = 1,
-					["PartialAbsorb"] = {
-						["Explosive Shot (DoT)"] = {
+					["ShieldedWho"] = {
+						["Bestheal"] = {
 							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 6,
-									["amount"] = 0,
+								["Power Word: Shield"] = {
+									["count"] = 0,
+								},
+								["Divine Aegis"] = {
+									["count"] = 0,
 								},
 							},
-							["count"] = 6,
 							["amount"] = 0,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 5,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 0,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 0,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 7,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 0,
-						},
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 11,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 11,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 16.58,
-					["WhoDamaged"] = {
-						["Gus <Pezzer>"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 28075,
-								},
-							},
-							["amount"] = 28075,
 						},
 						["Pezzer"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
+								["Power Word: Shield"] = {
+									["count"] = 0,
 								},
 							},
-							["amount"] = 299384,
+							["amount"] = 0,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Falling"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["WhoDamaged"] = {
+						["Environment"] = {
+							["Details"] = {
+								["Falling"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
 						},
 					},
 					["ElementTaken"] = {
-						["Physical"] = 116824,
-						["Melee"] = 28075,
-						["Arcane"] = 52182,
-						["Fire"] = 69890,
-						["Nature"] = 60488,
+						["Physical"] = 0,
 					},
-					["TimeDamage"] = 16.58,
-					["Damage"] = 21711,
+					["DamageTaken"] = 0,
+					["ElementHitsTaken"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+				},
+				["OverallData"] = {
+					["PartialResist"] = {
+						["Falling"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["ShieldedWho"] = {
+						["Bestheal"] = {
+							["Details"] = {
+								["Power Word: Shield"] = {
+									["count"] = 2,
+								},
+								["Divine Aegis"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 3,
+						},
+						["Pezzer"] = {
+							["Details"] = {
+								["Power Word: Shield"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Falling"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["WhoDamaged"] = {
+						["Environment"] = {
+							["Details"] = {
+								["Falling"] = {
+									["count"] = 54082,
+								},
+							},
+							["amount"] = 54082,
+						},
+					},
+					["ElementTaken"] = {
+						["Physical"] = 54082,
+					},
+					["DamageTaken"] = 54082,
+					["ElementHitsTaken"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
 				},
 			},
-			["UnitLockout"] = 1333780425,
-			["LastActive"] = 1333780441,
-		},
-		["Pezzer"] = {
-			["GUID"] = "0x0280000004B625CB",
-			["LastEventHealth"] = {
-				"114892 (78%)", -- [1]
-				"114892 (78%)", -- [2]
-				"114892 (78%)", -- [3]
-				"114892 (78%)", -- [4]
-				"114892 (78%)", -- [5]
-				"98765 (67%)", -- [6]
-				"98765 (67%)", -- [7]
-				"98765 (67%)", -- [8]
-				"98765 (67%)", -- [9]
-				"98765 (67%)", -- [10]
-				"98765 (67%)", -- [11]
-				"98765 (67%)", -- [12]
-				"103165 (70%)", -- [13]
-				"103165 (70%)", -- [14]
-				"103165 (70%)", -- [15]
-				"103165 (70%)", -- [16]
-				"103165 (70%)", -- [17]
-				"103165 (70%)", -- [18]
-				"103165 (70%)", -- [19]
-				"103165 (70%)", -- [20]
-				"103165 (70%)", -- [21]
-				"103165 (70%)", -- [22]
-				"103165 (70%)", -- [23]
-				"103165 (70%)", -- [24]
-				"103165 (70%)", -- [25]
-				"103165 (70%)", -- [26]
-				"103165 (70%)", -- [27]
-				"103165 (70%)", -- [28]
-				"103165 (70%)", -- [29]
-				"103165 (70%)", -- [30]
-				"114892 (78%)", -- [31]
-				"114892 (78%)", -- [32]
-				"114892 (78%)", -- [33]
-				"114892 (78%)", -- [34]
-				"114892 (78%)", -- [35]
-				"114892 (78%)", -- [36]
-				"114892 (78%)", -- [37]
-				"114892 (78%)", -- [38]
-				"114892 (78%)", -- [39]
-				"114892 (78%)", -- [40]
-				"114892 (78%)", -- [41]
-				"114892 (78%)", -- [42]
-				"114892 (78%)", -- [43]
-				"114892 (78%)", -- [44]
-				"114892 (78%)", -- [45]
-				"114892 (78%)", -- [46]
-				"114892 (78%)", -- [47]
-				"114892 (78%)", -- [48]
-				"114892 (78%)", -- [49]
-				"114892 (78%)", -- [50]
+			["TimeLast"] = {
+				["DamageTaken"] = 1333834151,
+				["OVERALL"] = 1333834151,
 			},
-			["LastAttackedBy"] = "Azure Ley-Whelp",
+			["Name"] = "Bestheal",
+			["LastEventTimes"] = {
+				281217.575, -- [1]
+				281222.601, -- [2]
+				281225.048, -- [3]
+				281227.654, -- [4]
+				281230.12, -- [5]
+				281232.577, -- [6]
+				281252.832, -- [7]
+				281285.791, -- [8]
+				281290.527, -- [9]
+				281294.546, -- [10]
+				281297.063, -- [11]
+				281299.613, -- [12]
+			},
+			["LastActive"] = 1333834165,
+		},
+		["Âssface <Pezzer>"] = {
+			["GUID"] = "0xF140CB159000A03B",
+			["LastEventHealth"] = {
+				"115241 (99%)", -- [1]
+				"115241 (99%)", -- [2]
+				"115241 (99%)", -- [3]
+				"115241 (99%)", -- [4]
+				"115241 (99%)", -- [5]
+				"115241 (99%)", -- [6]
+				"115241 (99%)", -- [7]
+				"115241 (99%)", -- [8]
+				"115238 (99%)", -- [9]
+				"115238 (99%)", -- [10]
+				"115235 (99%)", -- [11]
+				"115230 (99%)", -- [12]
+				"115230 (99%)", -- [13]
+				"115256 (100%)", -- [14]
+				"115255 (99%)", -- [15]
+				"115255 (99%)", -- [16]
+				"115249 (99%)", -- [17]
+				"115249 (99%)", -- [18]
+				"115247 (99%)", -- [19]
+				"115245 (99%)", -- [20]
+				"115245 (99%)", -- [21]
+				"115241 (99%)", -- [22]
+				"115256 (100%)", -- [23]
+				"115256 (100%)", -- [24]
+				"115256 (100%)", -- [25]
+				"115256 (100%)", -- [26]
+				"115019 (99%)", -- [27]
+				"115019 (99%)", -- [28]
+				"115019 (99%)", -- [29]
+				"115008 (99%)", -- [30]
+				"115006 (99%)", -- [31]
+				"115002 (99%)", -- [32]
+				"115002 (99%)", -- [33]
+				"115002 (99%)", -- [34]
+				"114993 (99%)", -- [35]
+				"114993 (99%)", -- [36]
+				"114991 (99%)", -- [37]
+				"114982 (99%)", -- [38]
+				"115256 (100%)", -- [39]
+				"115256 (100%)", -- [40]
+				"115255 (99%)", -- [41]
+				"115256 (100%)", -- [42]
+				"115253 (99%)", -- [43]
+				"115253 (99%)", -- [44]
+				"115253 (99%)", -- [45]
+				"115253 (99%)", -- [46]
+				"115253 (99%)", -- [47]
+				"115246 (99%)", -- [48]
+				"115246 (99%)", -- [49]
+				"115241 (99%)", -- [50]
+			},
+			["LastAttackedBy"] = "Razormane Hunter",
 			["LastEventType"] = {
 				"DAMAGE", -- [1]
 				"DAMAGE", -- [2]
@@ -5009,309 +1455,262 @@ RecountPerCharDB = {
 				["EnergyGain"] = {
 					90, -- [1]
 				},
-				["ActiveTime"] = {
-					90.56999999999999, -- [1]
+				["HealingTaken"] = {
+					3, -- [1]
 				},
-				["DOT_Time"] = {
-					75, -- [1]
+				["ActiveTime"] = {
+					7, -- [1]
 				},
 				["TimeDamage"] = {
-					90.56999999999999, -- [1]
+					7, -- [1]
 				},
 				["DamageTaken"] = {
-					26630, -- [1]
+					514, -- [1]
 				},
 				["Damage"] = {
-					1121976, -- [1]
+					3150, -- [1]
 				},
 			},
-			["enClass"] = "HUNTER",
-			["unit"] = "Pezzer",
-			["LastDamageTaken"] = 982,
-			["LastAbility"] = 256777.934,
-			["level"] = 85,
-			["LastDamageAbility"] = "Arcane Bolt",
-			["LastFightIn"] = 7,
+			["enClass"] = "PET",
+			["unit"] = "Âssface",
+			["LastActive"] = 1333843693,
+			["level"] = 1,
+			["LastDamageAbility"] = "Shoot",
+			["LastFightIn"] = 25,
 			["LastEventNum"] = {
+				nil, -- [1]
+				nil, -- [2]
+				nil, -- [3]
+				nil, -- [4]
+				nil, -- [5]
+				nil, -- [6]
+				nil, -- [7]
+				0.002602901367390852, -- [8]
+				nil, -- [9]
+				0.002602901367390852, -- [10]
+				0.004338168945651419, -- [11]
+				nil, -- [12]
+				0.004338168945651419, -- [13]
+				0.0008676337891302839, -- [14]
+				nil, -- [15]
+				0.001735267578260568, -- [16]
+				0.003470535156521136, -- [17]
+				0.001735267578260568, -- [18]
+				0.001735267578260568, -- [19]
+				nil, -- [20]
+				0.001735267578260568, -- [21]
+				0.001735267578260568, -- [22]
+				nil, -- [23]
+				nil, -- [24]
+				nil, -- [25]
+				nil, -- [26]
+				0.001735267578260568, -- [27]
+				0.004338168945651419, -- [28]
+				0.001735267578260568, -- [29]
+				0.003470535156521136, -- [30]
+				0.003470535156521136, -- [31]
+				0.001735267578260568, -- [32]
+				nil, -- [33]
+				0.002602901367390852, -- [34]
+				0.003470535156521136, -- [35]
+				0.001735267578260568, -- [36]
+				0.004338168945651419, -- [37]
+				0.003470535156521136, -- [38]
+				nil, -- [39]
+				0.0008676337891302839, -- [40]
+				[49] = 0.004338168945651419,
+				[42] = 0.002602901367390852,
+				[48] = 0.006073436523911987,
 			},
-			["type"] = "Self",
-			["FightsSaved"] = 8,
-			["GuardianReverseGUIDs"] = {
-				["Gus"] = {
-					["LatestGuardian"] = 0,
-					["GUIDs"] = {
-						[0] = "0xF140BFFA430001B1",
-					},
-				},
-				["Amber Drake"] = {
-					["LatestGuardian"] = 3,
-					["GUIDs"] = {
-						"0xF1506C6B00003FFC", -- [1]
-						"0xF1506C6B00003FFE", -- [2]
-						"0xF1506C6B00003FFF", -- [3]
-						[0] = "0xF1506C6B00003FFB",
-					},
-				},
-			},
-			["TimeLast"] = {
-				["EnergyGain"] = 1333780429,
-				["DOT_Time"] = 1333780441,
-				["ActiveTime"] = 1333780441,
-				["TimeDamage"] = 1333780441,
-				["OVERALL"] = 1333780441,
-				["DamageTaken"] = 1333780370,
-				["Damage"] = 1333780441,
-			},
-			["Owner"] = false,
-			["Pet"] = {
-				"Gus <Pezzer>", -- [1]
-				"Amber Drake <Pezzer>", -- [2]
-			},
-			["NextEventNum"] = 6,
-			["LastEventHealthNum"] = {
-				78.72927987501113, -- [1]
-				78.72927987501113, -- [2]
-				78.72927987501113, -- [3]
-				78.72927987501113, -- [4]
-				78.72927987501113, -- [5]
-				67.67831813229358, -- [6]
-				67.67831813229358, -- [7]
-				67.67831813229358, -- [8]
-				67.67831813229358, -- [9]
-				67.67831813229358, -- [10]
-				67.67831813229358, -- [11]
-				67.67831813229358, -- [12]
-				70.69340039607216, -- [13]
-				70.69340039607216, -- [14]
-				70.69340039607216, -- [15]
-				70.69340039607216, -- [16]
-				70.69340039607216, -- [17]
-				70.69340039607216, -- [18]
-				70.69340039607216, -- [19]
-				70.69340039607216, -- [20]
-				70.69340039607216, -- [21]
-				70.69340039607216, -- [22]
-				70.69340039607216, -- [23]
-				70.69340039607216, -- [24]
-				70.69340039607216, -- [25]
-				70.69340039607216, -- [26]
-				70.69340039607216, -- [27]
-				70.69340039607216, -- [28]
-				70.69340039607216, -- [29]
-				70.69340039607216, -- [30]
-				78.72927987501113, -- [31]
-				78.72927987501113, -- [32]
-				78.72927987501113, -- [33]
-				78.72927987501113, -- [34]
-				78.72927987501113, -- [35]
-				78.72927987501113, -- [36]
-				78.72927987501113, -- [37]
-				78.72927987501113, -- [38]
-				78.72927987501113, -- [39]
-				78.72927987501113, -- [40]
-				78.72927987501113, -- [41]
-				78.72927987501113, -- [42]
-				78.72927987501113, -- [43]
-				78.72927987501113, -- [44]
-				78.72927987501113, -- [45]
-				78.72927987501113, -- [46]
-				78.72927987501113, -- [47]
-				78.72927987501113, -- [48]
-				78.72927987501113, -- [49]
-				78.72927987501113, -- [50]
-			},
-			["LastEvents"] = {
-				"Pezzer Lightning Strike Drakos the Interrogator Hit -10193 (Physical)", -- [1]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -14027 (Physical)", -- [2]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Tick -2998 (Nature)", -- [3]
-				"Pezzer Kill Shot Drakos the Interrogator Hit -23747 (Physical)", -- [4]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -6371 (Physical)", -- [5]
-				"Pezzer Arcane Shot Azure Inquisitor Hit -10092 (Arcane)", -- [6]
-				"Pezzer Auto Shot Azure Inquisitor Hit -5832 (Physical)", -- [7]
-				"Pezzer Auto Shot Azure Ley-Whelp Hit -5872 (Physical)", -- [8]
-				"Pezzer Cobra Shot Azure Ley-Whelp Hit -9945 (Nature)", -- [9]
-				"Pezzer Arcane Shot Azure Ley-Whelp Crit -21067 (Arcane)", -- [10]
-				"Pezzer Auto Shot Azure Ley-Whelp Hit -4861 (Physical)", -- [11]
-				"Pezzer Arcane Shot Azure Ley-Whelp Hit -9846 (Arcane)", -- [12]
-				"Pezzer Auto Shot Azure Spellbinder Hit -6094 (Physical)", -- [13]
-				"Pezzer Multi-Shot Azure Inquisitor Hit -7089 (Physical)", -- [14]
-				"Pezzer Multi-Shot Azure Spellbinder Hit -6972 (Physical)", -- [15]
-				"Pezzer Multi-Shot Azure Spellbinder Hit -6564 (Physical)", -- [16]
-				"Pezzer Lightning Strike Azure Spellbinder Crit -19474 (Physical)", -- [17]
-				"Pezzer Improved Serpent Sting Azure Spellbinder Hit -3726 (Nature)", -- [18]
-				"Pezzer Improved Serpent Sting Azure Spellbinder Hit -3726 (Nature)", -- [19]
-				"Pezzer Improved Serpent Sting Azure Inquisitor Crit -11626 (Nature)", -- [20]
-				"Pezzer Auto Shot Azure Inquisitor Crit -11448 (Physical)", -- [21]
-				"Pezzer Serpent Sting (DoT) Azure Spellbinder Crit -5709 (Nature)", -- [22]
-				"Pezzer Serpent Sting (DoT) Azure Spellbinder Crit -5708 (Nature)", -- [23]
-				"Pezzer Serpent Sting (DoT) Azure Inquisitor Crit -5709 (Nature)", -- [24]
-				"Pezzer Cobra Shot Azure Inquisitor Hit -9689 (Nature)", -- [25]
-				"Pezzer Auto Shot Azure Spellbinder Hit -6123 (Physical)", -- [26]
-				"Pezzer Multi-Shot Azure Spellbinder Hit -7474 (Physical)", -- [27]
-				"Pezzer Multi-Shot Azure Spellbinder Hit -7412 (Physical)", -- [28]
-				"Pezzer Improved Serpent Sting Azure Spellbinder Crit -13255 (Nature)", -- [29]
-				"Pezzer Serpent Sting (DoT) Azure Spellbinder Crit -5917 (Nature)", -- [30]
-				"Pezzer Improved Serpent Sting Drakos the Interrogator Crit -11498 (Nature)", -- [31]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -10911 (Physical)", -- [32]
-				"Pezzer Lightning Strike Drakos the Interrogator Hit -9792 (Physical)", -- [33]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -7892 (Fire)", -- [34]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -16493 (Fire)", -- [35]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -13309 (Physical)", -- [36]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -7892 (Fire)", -- [37]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -5646 (Nature)", -- [38]
-				"Pezzer Cobra Shot Drakos the Interrogator Crit -21549 (Nature)", -- [39]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -6310 (Physical)", -- [40]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [41]
-				"Pezzer Auto Shot Drakos the Interrogator Crit -14838 (Physical)", -- [42]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [43]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Crit -19221 (Fire)", -- [44]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6266 (Nature)", -- [45]
-				"Pezzer Arcane Shot Drakos the Interrogator Crit -25629 (Arcane)", -- [46]
-				"Pezzer Explosive Shot (DoT) Drakos the Interrogator Tick -9196 (Fire)", -- [47]
-				"Pezzer Auto Shot Drakos the Interrogator Hit -7326 (Physical)", -- [48]
-				"Pezzer Arcane Shot Drakos the Interrogator Crit -26553 (Arcane)", -- [49]
-				"Pezzer Serpent Sting (DoT) Drakos the Interrogator Crit -6265 (Nature)", -- [50]
-			},
-			["Name"] = "Pezzer",
-			["LastEventIncoming"] = {
-				false, -- [1]
-				false, -- [2]
-				false, -- [3]
-				false, -- [4]
-				false, -- [5]
-				false, -- [6]
-				false, -- [7]
-				false, -- [8]
-				false, -- [9]
-				false, -- [10]
-				false, -- [11]
-				false, -- [12]
-				false, -- [13]
-				false, -- [14]
-				false, -- [15]
-				false, -- [16]
-				false, -- [17]
-				false, -- [18]
-				false, -- [19]
-				false, -- [20]
-				false, -- [21]
-				false, -- [22]
-				false, -- [23]
-				false, -- [24]
-				false, -- [25]
-				false, -- [26]
-				false, -- [27]
-				false, -- [28]
-				false, -- [29]
-				false, -- [30]
-				false, -- [31]
-				false, -- [32]
-				false, -- [33]
-				false, -- [34]
-				false, -- [35]
-				false, -- [36]
-				false, -- [37]
-				false, -- [38]
-				false, -- [39]
-				false, -- [40]
-				false, -- [41]
-				false, -- [42]
-				false, -- [43]
-				false, -- [44]
-				false, -- [45]
-				false, -- [46]
-				false, -- [47]
-				false, -- [48]
-				false, -- [49]
-				false, -- [50]
-			},
-			["LastEventTimes"] = {
-				256774.824, -- [1]
-				256775.344, -- [2]
-				256777.687, -- [3]
-				256777.878, -- [4]
-				256777.934, -- [5]
-				256723.036, -- [6]
-				256723.527, -- [7]
-				256727.291, -- [8]
-				256727.395, -- [9]
-				256729.095, -- [10]
-				256730.076, -- [11]
-				256730.303, -- [12]
-				256738.446, -- [13]
-				256738.889, -- [14]
-				256738.889, -- [15]
-				256738.889, -- [16]
-				256739.072, -- [17]
-				256739.072, -- [18]
-				256739.072, -- [19]
-				256739.072, -- [20]
-				256740.929, -- [21]
-				256742.441, -- [22]
-				256742.461, -- [23]
-				256742.651, -- [24]
-				256742.695, -- [25]
-				256743.989, -- [26]
-				256744.195, -- [27]
-				256744.195, -- [28]
-				256744.312, -- [29]
-				256745.44, -- [30]
-				256761.965, -- [31]
-				256762.421, -- [32]
-				256763.222, -- [33]
-				256763.489, -- [34]
-				256764.499, -- [35]
-				256764.632, -- [36]
-				256765.482, -- [37]
-				256765.692, -- [38]
-				256767.004, -- [39]
-				256767.059, -- [40]
-				256768.69, -- [41]
-				256770.14, -- [42]
-				256770.232, -- [43]
-				256771.236, -- [44]
-				256771.687, -- [45]
-				256771.892, -- [46]
-				256772.229, -- [47]
-				256772.658, -- [48]
-				256774.16, -- [49]
-				256774.692, -- [50]
-			},
+			["type"] = "Pet",
+			["FightsSaved"] = 23,
+			["UnitLockout"] = 1333835190,
 			["Fights"] = {
-				["Fight5"] = {
+				["Fight11"] = {
 					["DOTs"] = {
-						["Serpent Sting (DoT)"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 1,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Azure Spellbinder"] = {
-									["count"] = 3,
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 1,
 								},
 							},
 							["amount"] = 3,
 						},
 					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementTakenBlock"] = {
+						["Melee"] = 1,
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 1,
+					},
+					["HOTs"] = {
+					},
+					["Damage"] = 0,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 1,
+									["amount"] = 1,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 1,
+						},
+					},
+					["DamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementDone"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementHitsDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["HealedWho"] = {
+					},
+					["CCBreak"] = 0,
+					["ElementTakenAbsorb"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["ElementTakenResist"] = {
+					},
+					["Heals"] = {
+					},
+					["Interrupts"] = 0,
+					["EnergyGained"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["Healing"] = 0,
+					["RageGained"] = {
+					},
+					["OverHeals"] = {
+					},
+					["Attacks"] = {
+					},
+					["RageGain"] = 0,
+					["FDamagedWho"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["DOT_Time"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight7"] = {
+					["DOTs"] = {
+					},
 					["ElementDoneResist"] = {
 					},
 					["Ressed"] = 0,
-					["DamageTaken"] = 0,
+					["DamageTaken"] = 7,
 					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Physical"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
+								["Miss"] = {
+									["count"] = 1,
 								},
 								["Hit"] = {
 									["count"] = 2,
 								},
 							},
-							["amount"] = 6,
+							["amount"] = 3,
 						},
-						["Arcane"] = {
+						["Physical"] = {
 							["Details"] = {
 								["Hit"] = {
 									["count"] = 1,
@@ -5319,24 +1718,19 @@ RecountPerCharDB = {
 							},
 							["amount"] = 1,
 						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 3,
-						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
+						["Melee"] = 3,
+						["Physical"] = 4,
 					},
-					["DOT_Time"] = 3,
-					["Damage"] = 101082,
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -5352,47 +1746,82 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Physical"] = 65100,
-						["Arcane"] = 9999,
-						["Nature"] = 25983,
 					},
 					["PartialAbsorb"] = {
-					},
-					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 872,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 2731,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 23252,
-								},
-								["Auto Shot"] = {
-									["count"] = 19550,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19332,
-								},
-								["Multi-Shot"] = {
-									["count"] = 25346,
-								},
-								["Arcane Shot"] = {
-									["count"] = 9999,
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
 								},
 							},
-							["amount"] = 101082,
+							["count"] = 3,
+							["amount"] = 0,
 						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["DamagedWho"] = {
 					},
 					["PartialBlock"] = {
 					},
 					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
 					},
 					["EnergyGainedFrom"] = {
 					},
 					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
 					},
 					["CCBroken"] = {
 					},
@@ -5418,32 +1847,6 @@ RecountPerCharDB = {
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.72,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 1.24,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.28,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.27,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.04,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.74,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.47,
-								},
-							},
-							["amount"] = 7.76,
-						},
 					},
 					["WhoDispelled"] = {
 					},
@@ -5456,133 +1859,17 @@ RecountPerCharDB = {
 					},
 					["EnergyGained"] = {
 					},
-					["ActiveTime"] = 7.76,
+					["ActiveTime"] = 0,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Flintlocke's Woodchucker"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 872,
-									["min"] = 872,
-									["count"] = 1,
-									["amount"] = 872,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 872,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 2731,
-									["min"] = 2731,
-									["count"] = 1,
-									["amount"] = 2731,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 2731,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11626,
-									["min"] = 11626,
-									["count"] = 2,
-									["amount"] = 23252,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 23252,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13744,
-									["min"] = 13744,
-									["count"] = 1,
-									["amount"] = 13744,
-								},
-								["Hit"] = {
-									["max"] = 5806,
-									["min"] = 5806,
-									["count"] = 1,
-									["amount"] = 5806,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 19550,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 19332,
-									["min"] = 19332,
-									["count"] = 1,
-									["amount"] = 19332,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 19332,
-						},
-						["Multi-Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13196,
-									["min"] = 12150,
-									["count"] = 2,
-									["amount"] = 25346,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 25346,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 9999,
-									["min"] = 9999,
-									["count"] = 1,
-									["amount"] = 9999,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 9999,
-						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 7.76,
+					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.72,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 1.24,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.28,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.27,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.04,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.74,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.47,
-								},
-							},
-							["amount"] = 7.76,
-						},
 					},
 					["ManaGain"] = 0,
 					["HOTs"] = {
@@ -5590,16 +1877,263 @@ RecountPerCharDB = {
 					["DispelledWho"] = {
 					},
 				},
-				["Fight7"] = {
+				["Fight17"] = {
 					["DOTs"] = {
-						["Explosive Shot (DoT)"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 290,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Azure Inquisitor"] = {
+								["Hit"] = {
+									["count"] = 76,
+								},
+								["Miss"] = {
+									["count"] = 17,
+								},
+								["Dodge"] = {
+									["count"] = 9,
+								},
+								["Parry"] = {
+									["count"] = 6,
+								},
+							},
+							["amount"] = 108,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 276,
+						["Physical"] = 14,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+						["Melee"] = 5,
+						["Physical"] = 1,
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 2,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 5,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 5,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 1,
+									["amount"] = 1,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 1,
+						},
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 41,
+								},
+							},
+							["amount"] = 41,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 173,
+								},
+								["Shoot"] = {
+									["count"] = 14,
+								},
+							},
+							["amount"] = 187,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 62,
+								},
+							},
+							["amount"] = 62,
+						},
+					},
+					["EnergyGainedFrom"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Go for the Throat"] = {
+									["count"] = 30,
+								},
+							},
+							["amount"] = 30,
+						},
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Mend Pet"] = {
 									["count"] = 3,
 								},
 							},
 							["amount"] = 3,
 						},
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 108,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 108,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 30,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 108,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 108,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+						["Go for the Throat"] = {
+							["Details"] = {
+								["Pezzer"] = {
+									["count"] = 30,
+								},
+							},
+							["amount"] = 30,
+						},
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 3,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight1"] = {
+					["DOTs"] = {
 					},
 					["ElementDoneResist"] = {
 					},
@@ -5608,44 +2142,31 @@ RecountPerCharDB = {
 					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 2,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 4,
+						},
 					},
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
 					["ElementHitsDone"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 3,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
 					},
-					["DOT_Time"] = 3,
-					["Damage"] = 48659,
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -5661,38 +2182,50 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Physical"] = 31139,
-						["Fire"] = 7264,
-						["Arcane"] = 10256,
 					},
 					["PartialAbsorb"] = {
-					},
-					["DamagedWho"] = {
-						["Azure Inquisitor"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Lightning Strike"] = {
-									["count"] = 20153,
-								},
-								["Auto Shot"] = {
-									["count"] = 10986,
-								},
-								["Explosive Shot (DoT)"] = {
-									["count"] = 7264,
-								},
-								["Arcane Shot"] = {
-									["count"] = 10256,
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
 								},
 							},
-							["amount"] = 48659,
+							["count"] = 4,
+							["amount"] = 0,
 						},
+					},
+					["DamagedWho"] = {
 					},
 					["PartialBlock"] = {
 					},
 					["WhoDamaged"] = {
 					},
 					["EnergyGainedFrom"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Go for the Throat"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
 					},
 					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
 					},
 					["CCBroken"] = {
 					},
@@ -5711,30 +2244,13 @@ RecountPerCharDB = {
 					},
 					["HealedWho"] = {
 					},
-					["EnergyGain"] = 0,
+					["EnergyGain"] = 10,
 					["ManaGained"] = {
 					},
 					["FDamage"] = 0,
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Lightning Strike"] = {
-									["count"] = 0.53,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.76,
-								},
-								["Explosive Shot (DoT)"] = {
-									["count"] = 0.71,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.57,
-								},
-							},
-							["amount"] = 5.57,
-						},
 					},
 					["WhoDispelled"] = {
 					},
@@ -5746,83 +2262,26 @@ RecountPerCharDB = {
 					["WhoHealed"] = {
 					},
 					["EnergyGained"] = {
+						["Go for the Throat"] = {
+							["Details"] = {
+								["Pezzer"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
 					},
-					["ActiveTime"] = 5.57,
+					["ActiveTime"] = 0,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 20153,
-									["min"] = 20153,
-									["count"] = 1,
-									["amount"] = 20153,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 20153,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 5795,
-									["min"] = 5191,
-									["count"] = 2,
-									["amount"] = 10986,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 10986,
-						},
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 7264,
-									["min"] = 7264,
-									["count"] = 1,
-									["amount"] = 7264,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 7264,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 10256,
-									["min"] = 10256,
-									["count"] = 1,
-									["amount"] = 10256,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 10256,
-						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 5.57,
+					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Lightning Strike"] = {
-									["count"] = 0.53,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.76,
-								},
-								["Explosive Shot (DoT)"] = {
-									["count"] = 0.71,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.57,
-								},
-							},
-							["amount"] = 5.57,
-						},
 					},
 					["ManaGain"] = 0,
 					["HOTs"] = {
@@ -5831,224 +2290,181 @@ RecountPerCharDB = {
 					},
 				},
 				["OverallData"] = {
-					["DOTs"] = {
-						["Explosive Shot (DoT)"] = {
+					["PartialBlock"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Drakos the Interrogator"] = {
-									["count"] = 18,
-								},
-								["Azure Inquisitor"] = {
-									["count"] = 3,
+								["Blocked"] = {
+									["max"] = 2,
+									["min"] = 1,
+									["count"] = 13,
+									["amount"] = 15,
 								},
 							},
-							["amount"] = 21,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Azure Spellbinder"] = {
-									["count"] = 15,
-								},
-								["Drakos the Interrogator"] = {
-									["count"] = 15,
-								},
-								["Azure Ley-Whelp"] = {
-									["count"] = 6,
-								},
-								["Azure Inquisitor"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 39,
-						},
-						["Speaking of Rage (DoT)"] = {
-							["Details"] = {
-								["Azure Ley-Whelp"] = {
-									["count"] = 15,
-								},
-							},
+							["count"] = 13,
 							["amount"] = 15,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 2,
+									["amount"] = 2,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 2,
 						},
 					},
 					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.72,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.55,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.8200000000000001,
-								},
-								["Auto Shot"] = {
-									["count"] = 16.06,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.76,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.08,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.6499999999999999,
+								["Melee"] = {
+									["count"] = 7,
 								},
 							},
-							["amount"] = 25.64,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
-								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
-								},
-							},
-							["amount"] = 19.46,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 5.99,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 1.42,
-								},
-								["Auto Shot"] = {
-									["count"] = 14.06,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.93,
-								},
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.93,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.64,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 3.47,
-								},
-								["Multi-Shot"] = {
-									["count"] = 4.07,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.02,
-								},
-							},
-							["amount"] = 32.52999999999999,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 0.71,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 0.04,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 8.83,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.53,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.44,
-								},
-								["Arcane Shot"] = {
-									["count"] = 2.2,
-								},
-							},
-							["amount"] = 12.94,
+							["amount"] = 7,
 						},
 					},
-					["DamageTaken"] = 26630,
+					["DamageTaken"] = 514,
+					["ElementTakenResist"] = {
+						["Fire"] = 30,
+					},
 					["PartialResist"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 13,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 13,
+							["amount"] = 0,
+						},
 						["Melee"] = {
 							["Details"] = {
 								["No Resist"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 2,
+									["count"] = 191,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 2,
+							["count"] = 191,
 							["amount"] = 0,
 						},
-						["Arcane Bolt"] = {
+						["Fireball"] = {
 							["Details"] = {
+								["75%Resist"] = {
+									["max"] = 30,
+									["min"] = 30,
+									["count"] = 1,
+									["amount"] = 30,
+								},
 								["No Resist"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 32,
+									["count"] = 9,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 32,
-							["amount"] = 0,
+							["count"] = 10,
+							["amount"] = 30,
 						},
 					},
 					["PartialAbsorb"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 13,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 13,
+							["amount"] = 0,
+						},
 						["Melee"] = {
 							["Details"] = {
 								["No Absorb"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 2,
+									["count"] = 191,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 2,
+							["count"] = 191,
 							["amount"] = 0,
 						},
-						["Arcane Bolt"] = {
+						["Fireball"] = {
 							["Details"] = {
 								["No Absorb"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 32,
+									["count"] = 10,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 32,
+							["count"] = 10,
 							["amount"] = 0,
 						},
 					},
-					["ActiveTime"] = 90.56999999999999,
+					["ActiveTime"] = 7,
 					["ElementTaken"] = {
-						["Melee"] = 2545,
-						["Arcane"] = 24085,
+						["Physical"] = 36,
+						["Melee"] = 471,
+						["Fire"] = 7,
 					},
-					["DOT_Time"] = 75,
-					["Damage"] = 1121976,
+					["ElementTakenBlock"] = {
+						["Melee"] = 15,
+						["Physical"] = 2,
+					},
+					["ElementHitsTaken"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 10,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 13,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 134,
+								},
+								["Miss"] = {
+									["count"] = 30,
+								},
+								["Dodge"] = {
+									["count"] = 14,
+								},
+								["Parry"] = {
+									["count"] = 13,
+								},
+							},
+							["amount"] = 191,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 9,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
 					["EnergyGained"] = {
-						["Energize"] = {
+						["Go for the Throat"] = {
 							["Details"] = {
 								["Pezzer"] = {
 									["count"] = 90,
@@ -6057,398 +2473,55 @@ RecountPerCharDB = {
 							["amount"] = 90,
 						},
 					},
-					["ElementDone"] = {
-						["Arcane"] = 143994,
-						["Physical"] = 594107,
-						["Fire"] = 82649,
-						["Nature"] = 301226,
+					["WhoHealed"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
 					},
-					["EnergyGain"] = 90,
 					["Attacks"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 19221,
-									["min"] = 16493,
-									["count"] = 2,
-									["amount"] = 35714,
-								},
-								["Tick"] = {
-									["max"] = 9196,
-									["min"] = 7264,
-									["count"] = 5,
-									["amount"] = 41440,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 77154,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 22835,
-									["min"] = 21549,
-									["count"] = 2,
-									["amount"] = 44384,
-								},
-								["Hit"] = {
-									["max"] = 9945,
-									["min"] = 8784,
-									["count"] = 3,
-									["amount"] = 28418,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 72802,
-						},
-						["Speaking of Rage (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 1395,
-									["min"] = 1394,
-									["count"] = 2,
-									["amount"] = 2789,
-								},
-								["Tick"] = {
-									["max"] = 902,
-									["min"] = 902,
-									["count"] = 3,
-									["amount"] = 2706,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 5495,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 14838,
-									["min"] = 10611,
-									["count"] = 10,
-									["amount"] = 125322,
-								},
-								["Hit"] = {
-									["max"] = 7326,
-									["min"] = 4758,
-									["count"] = 15,
-									["amount"] = 88222,
-								},
-							},
-							["count"] = 25,
-							["amount"] = 213544,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 26553,
-									["min"] = 20281,
-									["count"] = 4,
-									["amount"] = 93530,
-								},
-								["Hit"] = {
-									["max"] = 10271,
-									["min"] = 9846,
-									["count"] = 5,
-									["amount"] = 50464,
-								},
-							},
-							["count"] = 9,
-							["amount"] = 143994,
-						},
-						["Flintlocke's Woodchucker"] = {
+						["Melee"] = {
 							["Details"] = {
 								["Hit"] = {
-									["max"] = 1048,
-									["min"] = 872,
+									["max"] = 1577,
+									["min"] = 1573,
 									["count"] = 2,
-									["amount"] = 1920,
+									["amount"] = 3150,
 								},
 							},
 							["count"] = 2,
-							["amount"] = 1920,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13255,
-									["min"] = 11498,
-									["count"] = 10,
-									["amount"] = 119831,
-								},
-								["Hit"] = {
-									["max"] = 4218,
-									["min"] = 3472,
-									["count"] = 11,
-									["amount"] = 41244,
-								},
-							},
-							["count"] = 21,
-							["amount"] = 161075,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 23747,
-									["min"] = 23747,
-									["count"] = 1,
-									["amount"] = 23747,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 23747,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 6266,
-									["min"] = 5646,
-									["count"] = 10,
-									["amount"] = 58888,
-								},
-								["Tick"] = {
-									["max"] = 2998,
-									["min"] = 2731,
-									["count"] = 3,
-									["amount"] = 8461,
-								},
-							},
-							["count"] = 13,
-							["amount"] = 67349,
-						},
-						["Multi-Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 14480,
-									["min"] = 11189,
-									["count"] = 10,
-									["amount"] = 130815,
-								},
-								["Hit"] = {
-									["max"] = 7762,
-									["min"] = 5562,
-									["count"] = 16,
-									["amount"] = 106824,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 237639,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 20153,
-									["min"] = 18248,
-									["count"] = 5,
-									["amount"] = 97272,
-								},
-								["Hit"] = {
-									["max"] = 10193,
-									["min"] = 9792,
-									["count"] = 2,
-									["amount"] = 19985,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 117257,
+							["amount"] = 3150,
 						},
 					},
-					["ElementHitsDone"] = {
-						["Arcane"] = {
+					["TimeDamaging"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 5,
+								["Melee"] = {
+									["count"] = 7,
 								},
 							},
-							["amount"] = 9,
-						},
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 25,
-								},
-								["Hit"] = {
-									["count"] = 36,
-								},
-							},
-							["amount"] = 61,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Tick"] = {
-									["count"] = 8,
-								},
-							},
-							["amount"] = 12,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Tick"] = {
-									["count"] = 3,
-								},
-								["Crit"] = {
-									["count"] = 22,
-								},
-								["Hit"] = {
-									["count"] = 14,
-								},
-							},
-							["amount"] = 39,
+							["amount"] = 7,
 						},
 					},
 					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 872,
-								},
-								["Lightning Strike"] = {
-									["count"] = 58871,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 59787,
-								},
-								["Auto Shot"] = {
-									["count"] = 49604,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 25766,
-								},
-								["Multi-Shot"] = {
-									["count"] = 81765,
-								},
-								["Arcane Shot"] = {
-									["count"] = 20270,
-								},
-							},
-							["amount"] = 296935,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
-								},
-							},
-							["amount"] = 299384,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 41564,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 5495,
-								},
-								["Auto Shot"] = {
-									["count"] = 51534,
-								},
-								["Arcane Shot"] = {
-									["count"] = 30913,
-								},
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 1048,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 78164,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 8433,
-								},
-								["Multi-Shot"] = {
-									["count"] = 148785,
-								},
-								["Lightning Strike"] = {
-									["count"] = 18248,
-								},
-							},
-							["amount"] = 384184,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 7264,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5709,
-								},
-								["Cobra Shot"] = {
-									["count"] = 9689,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11626,
-								},
-								["Auto Shot"] = {
-									["count"] = 39314,
-								},
-								["Lightning Strike"] = {
-									["count"] = 20153,
-								},
-								["Multi-Shot"] = {
-									["count"] = 7089,
-								},
-								["Arcane Shot"] = {
-									["count"] = 40629,
-								},
-							},
-							["amount"] = 141473,
-						},
-					},
-					["TimeDamage"] = 90.56999999999999,
-					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Arcane Bolt"] = {
-									["count"] = 24085,
-								},
-							},
-							["amount"] = 24085,
-						},
-						["Azure Spellbinder"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
 								["Melee"] = {
-									["count"] = 2545,
+									["count"] = 3150,
 								},
 							},
-							["amount"] = 2545,
+							["amount"] = 3150,
 						},
 					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Energize"] = {
-									["count"] = 90,
-								},
-							},
-							["amount"] = 90,
-						},
+					["ElementDone"] = {
+						["Melee"] = 3150,
 					},
-					["ElementHitsTaken"] = {
+					["HealingTaken"] = 3,
+					["ElementHitsDone"] = {
 						["Melee"] = {
 							["Details"] = {
 								["Hit"] = {
@@ -6457,417 +2530,105 @@ RecountPerCharDB = {
 							},
 							["amount"] = 2,
 						},
-						["Arcane"] = {
+					},
+					["TimeDamage"] = 7,
+					["WhoDamaged"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
-								["Hit"] = {
+								["Melee"] = {
 									["count"] = 24,
 								},
-								["Miss"] = {
-									["count"] = 8,
+								["Fireball"] = {
+									["count"] = 7,
 								},
 							},
-							["amount"] = 32,
+							["amount"] = 31,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 139,
+								},
+							},
+							["amount"] = 139,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 103,
+								},
+							},
+							["amount"] = 103,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 36,
+								},
+								["Melee"] = {
+									["count"] = 205,
+								},
+							},
+							["amount"] = 241,
 						},
 					},
-					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
+					["EnergyGainedFrom"] = {
+						["Pezzer"] = {
 							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.72,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.55,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.8200000000000001,
-								},
-								["Auto Shot"] = {
-									["count"] = 16.06,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.76,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.08,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.6499999999999999,
+								["Go for the Throat"] = {
+									["count"] = 90,
 								},
 							},
-							["amount"] = 25.64,
-						},
-						["Drakos the Interrogator"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
-								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
-								},
-							},
-							["amount"] = 19.46,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 5.99,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 1.42,
-								},
-								["Auto Shot"] = {
-									["count"] = 14.06,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.93,
-								},
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.93,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.64,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 3.47,
-								},
-								["Multi-Shot"] = {
-									["count"] = 4.07,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.02,
-								},
-							},
-							["amount"] = 32.52999999999999,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 0.71,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 0.04,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 8.83,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.53,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.44,
-								},
-								["Arcane Shot"] = {
-									["count"] = 2.2,
-								},
-							},
-							["amount"] = 12.94,
+							["amount"] = 90,
 						},
 					},
+					["EnergyGain"] = 90,
+					["Damage"] = 3150,
 				},
-				["Fight8"] = {
-					["ElementHitsDone"] = {
-						["Nature"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 3,
-						},
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 5,
-								},
-								["Hit"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 10,
-						},
-					},
-					["DamagedWho"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 1048,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 10501,
-								},
-								["Lightning Strike"] = {
-									["count"] = 18248,
-								},
-								["Multi-Shot"] = {
-									["count"] = 56690,
-								},
-								["Auto Shot"] = {
-									["count"] = 18208,
-								},
-							},
-							["amount"] = 104695,
-						},
-					},
-					["ElementDone"] = {
-						["Nature"] = 10501,
-						["Physical"] = 94194,
-					},
-					["Attacks"] = {
-						["Flintlocke's Woodchucker"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 1048,
-									["min"] = 1048,
-									["count"] = 1,
-									["amount"] = 1048,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 1048,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 3557,
-									["min"] = 3472,
-									["count"] = 3,
-									["amount"] = 10501,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 10501,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 18248,
-									["min"] = 18248,
-									["count"] = 1,
-									["amount"] = 18248,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 18248,
-						},
-						["Multi-Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 14480,
-									["min"] = 11189,
-									["count"] = 3,
-									["amount"] = 39261,
-								},
-								["Hit"] = {
-									["max"] = 6216,
-									["min"] = 5562,
-									["count"] = 3,
-									["amount"] = 17429,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 56690,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13450,
-									["min"] = 13450,
-									["count"] = 1,
-									["amount"] = 13450,
-								},
-								["Hit"] = {
-									["max"] = 4758,
-									["min"] = 4758,
-									["count"] = 1,
-									["amount"] = 4758,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 18208,
-						},
-					},
-					["ElementHitsTaken"] = {
-						["Arcane"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 16,
-								},
-								["Miss"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 21,
-						},
-					},
-					["DamageTaken"] = 15852,
-					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.93,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.15,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.02,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.46,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.15,
-								},
-							},
-							["amount"] = 6.710000000000001,
-						},
-					},
-					["PartialResist"] = {
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 21,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 21,
-							["amount"] = 0,
-						},
-					},
-					["TimeDamaging"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Flintlocke's Woodchucker"] = {
-									["count"] = 0.93,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.15,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.02,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.46,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.15,
-								},
-							},
-							["amount"] = 6.710000000000001,
-						},
-					},
-					["PartialAbsorb"] = {
-						["Arcane Bolt"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 21,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 21,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 6.710000000000001,
-					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Arcane Bolt"] = {
-									["count"] = 15852,
-								},
-							},
-							["amount"] = 15852,
-						},
-					},
-					["ElementTaken"] = {
-						["Arcane"] = 15852,
-					},
-					["TimeDamage"] = 6.710000000000001,
-					["Damage"] = 104695,
-				},
-				["Fight2"] = {
+				["Fight6"] = {
 					["DOTs"] = {
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Azure Spellbinder"] = {
-									["count"] = 9,
-								},
-								["Azure Inquisitor"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 12,
-						},
 					},
 					["ElementDoneResist"] = {
 					},
 					["Ressed"] = 0,
-					["DamageTaken"] = 0,
+					["DamageTaken"] = 2,
 					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 1,
+						},
 					},
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
 					["ElementHitsDone"] = {
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Hit"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 9,
-						},
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Hit"] = {
-									["count"] = 7,
-								},
-							},
-							["amount"] = 9,
-						},
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
+						["Melee"] = 0,
+						["Physical"] = 2,
 					},
-					["DOT_Time"] = 12,
-					["Damage"] = 143715,
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
 					["ElementTakenBlock"] = {
+						["Physical"] = 1,
 					},
 					["TimeHeal"] = 0,
 					["RessedWho"] = {
@@ -6882,68 +2643,94 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Nature"] = 65065,
-						["Physical"] = 78650,
 					},
 					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
 					},
 					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 20707,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19474,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 17334,
-								},
-								["Multi-Shot"] = {
-									["count"] = 28422,
-								},
-								["Auto Shot"] = {
-									["count"] = 12217,
-								},
-							},
-							["amount"] = 98154,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 9689,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11626,
-								},
-								["Auto Shot"] = {
-									["count"] = 11448,
-								},
-								["Multi-Shot"] = {
-									["count"] = 7089,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5709,
-								},
-							},
-							["amount"] = 45561,
-						},
 					},
 					["PartialBlock"] = {
-					},
-					["WhoDamaged"] = {
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
+						["Shoot"] = {
 							["Details"] = {
-								["Energize"] = {
-									["count"] = 18,
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 1,
+									["amount"] = 1,
 								},
 							},
-							["amount"] = 18,
+							["count"] = 1,
+							["amount"] = 1,
 						},
 					},
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
 					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
 					},
 					["CCBroken"] = {
 					},
@@ -6962,53 +2749,13 @@ RecountPerCharDB = {
 					},
 					["HealedWho"] = {
 					},
-					["EnergyGain"] = 18,
+					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
 					["FDamage"] = 0,
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 0.12,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.18,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 2.66,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.21,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.79,
-								},
-							},
-							["amount"] = 7.96,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 0.04,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 1.86,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.44,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.19,
-								},
-							},
-							["amount"] = 2.53,
-						},
 					},
 					["WhoDispelled"] = {
 					},
@@ -7020,150 +2767,18 @@ RecountPerCharDB = {
 					["WhoHealed"] = {
 					},
 					["EnergyGained"] = {
-						["Energize"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
-					["ActiveTime"] = 10.49,
+					["ActiveTime"] = 0,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 9689,
-									["min"] = 9689,
-									["count"] = 1,
-									["amount"] = 9689,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 9689,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13255,
-									["min"] = 11626,
-									["count"] = 2,
-									["amount"] = 24881,
-								},
-								["Hit"] = {
-									["max"] = 3726,
-									["min"] = 3726,
-									["count"] = 2,
-									["amount"] = 7452,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 32333,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 19474,
-									["min"] = 19474,
-									["count"] = 1,
-									["amount"] = 19474,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 19474,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 5917,
-									["min"] = 5708,
-									["count"] = 4,
-									["amount"] = 23043,
-								},
-							},
-							["count"] = 4,
-							["amount"] = 23043,
-						},
-						["Multi-Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 7474,
-									["min"] = 6564,
-									["count"] = 5,
-									["amount"] = 35511,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 35511,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11448,
-									["min"] = 11448,
-									["count"] = 1,
-									["amount"] = 11448,
-								},
-								["Hit"] = {
-									["max"] = 6123,
-									["min"] = 6094,
-									["count"] = 2,
-									["amount"] = 12217,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 23665,
-						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 10.49,
+					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
-							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 0.12,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.18,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 2.66,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.21,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.79,
-								},
-							},
-							["amount"] = 7.96,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 0.04,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 1.86,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.44,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.19,
-								},
-							},
-							["amount"] = 2.53,
-						},
 					},
 					["ManaGain"] = 0,
 					["HOTs"] = {
@@ -7274,35 +2889,258 @@ RecountPerCharDB = {
 					["DispelledWho"] = {
 					},
 				},
-				["Fight6"] = {
+				["Fight23"] = {
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 22,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 22,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 22,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 22,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["PartialBlock"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 3,
+									["amount"] = 3,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 3,
+						},
+					},
+					["ElementTaken"] = {
+						["Melee"] = 62,
+						["Physical"] = 8,
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 39,
+								},
+							},
+							["amount"] = 39,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 11,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 8,
+								},
+								["Melee"] = {
+									["count"] = 12,
+								},
+							},
+							["amount"] = 20,
+						},
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 18,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 22,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+					},
+					["DamageTaken"] = 70,
+					["ElementTakenBlock"] = {
+						["Melee"] = 3,
+					},
+				},
+				["Fight18"] = {
 					["DOTs"] = {
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Azure Spellbinder"] = {
-									["count"] = 3,
-								},
-								["Azure Ley-Whelp"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Speaking of Rage (DoT)"] = {
-							["Details"] = {
-								["Azure Ley-Whelp"] = {
-									["count"] = 15,
-								},
-							},
-							["amount"] = 15,
-						},
 					},
 					["ElementDoneResist"] = {
 					},
 					["Ressed"] = 0,
-					["DamageTaken"] = 9796,
+					["DamageTaken"] = 0,
 					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Melee"] = 3150,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 3150,
+								},
+							},
+							["amount"] = 3150,
+						},
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 7,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 7,
+								},
+							},
+							["amount"] = 7,
+						},
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 1577,
+									["min"] = 1573,
+									["count"] = 2,
+									["amount"] = 3150,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 3150,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
 						["Melee"] = {
 							["Details"] = {
 								["Hit"] = {
@@ -7311,63 +3149,58 @@ RecountPerCharDB = {
 							},
 							["amount"] = 2,
 						},
-						["Arcane"] = {
+					},
+					["TimeDamage"] = 7,
+					["TimeDamaging"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
-								["Hit"] = {
+								["Melee"] = {
 									["count"] = 7,
 								},
+							},
+							["amount"] = 7,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 3150,
+					["DispelledWho"] = {
+					},
+				},
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 1,
+								},
 								["Miss"] = {
+									["count"] = 2,
+								},
+								["Dodge"] = {
 									["count"] = 1,
 								},
 							},
-							["amount"] = 8,
+							["amount"] = 4,
 						},
 					},
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
 					["ElementHitsDone"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 9,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 5,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 8,
-						},
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
-						["Melee"] = 2545,
-						["Arcane"] = 7251,
 					},
-					["DOT_Time"] = 21,
-					["Damage"] = 138914,
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -7383,11 +3216,2364 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Physical"] = 83302,
-						["Fire"] = 5495,
-						["Nature"] = 50117,
 					},
 					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Go for the Throat"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 10,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+						["Go for the Throat"] = {
+							["Details"] = {
+								["Pezzer"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight22"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+								["Dodge"] = {
+									["count"] = 0,
+								},
+								["Miss"] = {
+									["count"] = 0,
+								},
+								["Parry"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+								["Miss"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 0,
+						["Physical"] = 0,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+						["Melee"] = 0,
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 0,
+								},
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight10"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 31,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 6,
+								},
+								["Parry"] = {
+									["count"] = 5,
+								},
+								["Miss"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 12,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 9,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["HOTs"] = {
+					},
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 24,
+						["Fire"] = 7,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+						["Fireball"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 10,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 10,
+							["amount"] = 0,
+						},
+					},
+					["RageGain"] = 0,
+					["FAttacks"] = {
+					},
+					["PartialBlock"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Blocked"] = {
+									["max"] = 1,
+									["min"] = 1,
+									["count"] = 3,
+									["amount"] = 3,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 3,
+						},
+					},
+					["ElementDone"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementHitsDone"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoDamaged"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24,
+								},
+								["Fireball"] = {
+									["count"] = 7,
+								},
+							},
+							["amount"] = 31,
+						},
+					},
+					["EnergyGainedFrom"] = {
+						["Pezzer"] = {
+							["Details"] = {
+								["Go for the Throat"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["FDamagedWho"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["RageGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["CCBreak"] = 0,
+					["EnergyGain"] = 10,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+						["Fireball"] = {
+							["Details"] = {
+								["75%Resist"] = {
+									["max"] = 30,
+									["min"] = 30,
+									["count"] = 1,
+									["amount"] = 30,
+								},
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 9,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 10,
+							["amount"] = 30,
+						},
+					},
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+						["Fire"] = 30,
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGained"] = {
+						["Go for the Throat"] = {
+							["Details"] = {
+								["Pezzer"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["RunicPowerGained"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["DamagedWho"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTakenBlock"] = {
+						["Melee"] = 3,
+					},
+					["DispelledWho"] = {
+					},
+				},
+			},
+			["Owner"] = "Pezzer",
+			["LastFlags"] = 4648,
+			["NextEventNum"] = 27,
+			["LastEventHealthNum"] = {
+				99.98698549316305, -- [1]
+				99.98698549316305, -- [2]
+				99.98698549316305, -- [3]
+				99.98698549316305, -- [4]
+				99.98698549316305, -- [5]
+				99.98698549316305, -- [6]
+				99.98698549316305, -- [7]
+				99.98698549316305, -- [8]
+				99.98438259179565, -- [9]
+				99.98438259179565, -- [10]
+				99.98177969042827, -- [11]
+				99.97744152148262, -- [12]
+				99.97744152148262, -- [13]
+				100, -- [14]
+				99.99913236621087, -- [15]
+				99.99913236621087, -- [16]
+				99.99392656347609, -- [17]
+				99.99392656347609, -- [18]
+				99.99219129589783, -- [19]
+				99.99045602831957, -- [20]
+				99.99045602831957, -- [21]
+				99.98698549316305, -- [22]
+				100, -- [23]
+				100, -- [24]
+				100, -- [25]
+				100, -- [26]
+				99.79437079197612, -- [27]
+				99.79437079197612, -- [28]
+				99.79437079197612, -- [29]
+				99.78482682029569, -- [30]
+				99.78309155271742, -- [31]
+				99.77962101756091, -- [32]
+				99.77962101756091, -- [33]
+				99.77962101756091, -- [34]
+				99.77181231345874, -- [35]
+				99.77181231345874, -- [36]
+				99.77007704588047, -- [37]
+				99.7622683417783, -- [38]
+				100, -- [39]
+				100, -- [40]
+				99.99913236621087, -- [41]
+				100, -- [42]
+				99.9973970986326, -- [43]
+				99.9973970986326, -- [44]
+				99.9973970986326, -- [45]
+				99.9973970986326, -- [46]
+				99.9973970986326, -- [47]
+				99.9913236621087, -- [48]
+				99.9913236621087, -- [49]
+				99.98698549316305, -- [50]
+			},
+			["LastEvents"] = {
+				"Razormane Geomancer Melee Âssface <Pezzer> Parry", -- [1]
+				"Razormane Geomancer Melee Âssface <Pezzer> Parry", -- [2]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [3]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [4]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [5]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [6]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [7]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -3 (Physical)", -- [8]
+				"Razormane Geomancer Melee Âssface <Pezzer> Parry", -- [9]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -3 (Physical)", -- [10]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -5 (Physical)", -- [11]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [12]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -5 (Physical)", -- [13]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -1 (Physical)", -- [14]
+				"Razormane Wolf Melee Âssface <Pezzer> Miss", -- [15]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [16]
+				"Razormane Hunter Shoot Âssface <Pezzer> Hit -4 (Physical)", -- [17]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [18]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [19]
+				"Razormane Hunter Shoot Âssface <Pezzer> Miss (Physical)", -- [20]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [21]
+				"Razormane Hunter Shoot Âssface <Pezzer> Hit -2 (Physical)", -- [22]
+				"Razormane Hunter Melee Âssface <Pezzer> Dodge", -- [23]
+				"Razormane Wolf <Razormane Hunter> Melee Âssface <Pezzer> Miss", -- [24]
+				"Razormane Hunter Melee Âssface <Pezzer> Parry", -- [25]
+				"Razormane Wolf <Razormane Hunter> Melee Âssface <Pezzer> Miss", -- [26]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [27]
+				"Razormane Frenzy Melee Âssface <Pezzer> Hit -5 (Physical)", -- [28]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [29]
+				"Razormane Hunter Shoot Âssface <Pezzer> Hit -4 (Physical)", -- [30]
+				"Razormane Hunter Melee Âssface <Pezzer> Hit -4 (Physical)", -- [31]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [32]
+				"Razormane Frenzy Melee Âssface <Pezzer> Parry", -- [33]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -3 (Physical)", -- [34]
+				"Razormane Hunter Shoot Âssface <Pezzer> Hit -4 (Physical)", -- [35]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -2 (Physical)", -- [36]
+				"Razormane Frenzy Melee Âssface <Pezzer> Hit -5 (Physical)", -- [37]
+				"Razormane Hunter Shoot Âssface <Pezzer> Hit -4 (Physical)", -- [38]
+				"Razormane Wolf Melee Âssface <Pezzer> Dodge", -- [39]
+				"Razormane Wolf Melee Âssface <Pezzer> Hit -1 (Physical)", -- [40]
+				"Razormane Wolf Melee Âssface <Pezzer> Miss", -- [41]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -3 (Physical)", -- [42]
+				"Razormane Geomancer Melee Âssface <Pezzer> Parry", -- [43]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [44]
+				"Razormane Geomancer Melee Âssface <Pezzer> Miss", -- [45]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [46]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Miss (Fire)", -- [47]
+				"Razormane Geomancer Fireball Âssface <Pezzer> Hit -7 (30 resisted) (Fire)", -- [48]
+				"Razormane Geomancer Melee Âssface <Pezzer> Hit -5 (Physical)", -- [49]
+				"Razormane Geomancer Melee Âssface <Pezzer> Parry", -- [50]
+			},
+			["Name"] = "Âssface",
+			["LastEventIncoming"] = {
+				true, -- [1]
+				true, -- [2]
+				true, -- [3]
+				true, -- [4]
+				true, -- [5]
+				true, -- [6]
+				true, -- [7]
+				true, -- [8]
+				true, -- [9]
+				true, -- [10]
+				true, -- [11]
+				true, -- [12]
+				true, -- [13]
+				true, -- [14]
+				true, -- [15]
+				true, -- [16]
+				true, -- [17]
+				true, -- [18]
+				true, -- [19]
+				true, -- [20]
+				true, -- [21]
+				true, -- [22]
+				true, -- [23]
+				true, -- [24]
+				true, -- [25]
+				true, -- [26]
+				true, -- [27]
+				true, -- [28]
+				true, -- [29]
+				true, -- [30]
+				true, -- [31]
+				true, -- [32]
+				true, -- [33]
+				true, -- [34]
+				true, -- [35]
+				true, -- [36]
+				true, -- [37]
+				true, -- [38]
+				true, -- [39]
+				true, -- [40]
+				true, -- [41]
+				true, -- [42]
+				true, -- [43]
+				true, -- [44]
+				true, -- [45]
+				true, -- [46]
+				true, -- [47]
+				true, -- [48]
+				true, -- [49]
+				true, -- [50]
+			},
+			["TimeLast"] = {
+				["EnergyGain"] = 1333843693,
+				["HealingTaken"] = 1333835698,
+				["ActiveTime"] = 1333835674,
+				["TimeDamage"] = 1333835674,
+				["OVERALL"] = 1333843693,
+				["DamageTaken"] = 1333841425,
+				["Damage"] = 1333835674,
+			},
+			["LastDamageTaken"] = 2,
+			["LastEventTimes"] = {
+				285270.638, -- [1]
+				285272.379, -- [2]
+				285277.463, -- [3]
+				285282.19, -- [4]
+				285285.814, -- [5]
+				285290.655, -- [6]
+				285295.583, -- [7]
+				285296.432, -- [8]
+				285298.394, -- [9]
+				285300.472, -- [10]
+				285302.452, -- [11]
+				285307.56, -- [12]
+				285308.392, -- [13]
+				286549.568, -- [14]
+				286551.406, -- [15]
+				286553.309, -- [16]
+				286554.373, -- [17]
+				286555.265, -- [18]
+				286557.557, -- [19]
+				286558.466, -- [20]
+				286559.341, -- [21]
+				286561.537, -- [22]
+				288825.941, -- [23]
+				288825.941, -- [24]
+				288828.194, -- [25]
+				288828.194, -- [26]
+				282919.884, -- [27]
+				282920.313, -- [28]
+				282920.593, -- [29]
+				282920.707, -- [30]
+				282921.097, -- [31]
+				282921.915, -- [32]
+				282922.305, -- [33]
+				282922.584, -- [34]
+				282923.479, -- [35]
+				282923.873, -- [36]
+				282924.276, -- [37]
+				282926.894, -- [38]
+				285026.489, -- [39]
+				285028.486, -- [40]
+				285030.497, -- [41]
+				285245.752, -- [42]
+				285247.898, -- [43]
+				285252.121, -- [44]
+				285253.148, -- [45]
+				285258.125, -- [46]
+				285261.782, -- [47]
+				285264.518, -- [48]
+				285266.383, -- [49]
+				285268.394, -- [50]
+			},
+			["LastAbility"] = 286409.996,
+		},
+		["Smokeybönes"] = {
+			["GUID"] = "0x0280000004F7CE0E",
+			["type"] = "Ungrouped",
+			["FightsSaved"] = 25,
+			["GuardianReverseGUIDs"] = {
+				["Worg Pup"] = {
+					["LatestGuardian"] = 1,
+					["GUIDs"] = {
+						"0xF1302813000E9078", -- [1]
+						[0] = "0xF1302813000E8E05",
+					},
+				},
+			},
+			["Owner"] = false,
+			["enClass"] = "UNGROUPED",
+			["LastAbility"] = 286409.996,
+			["Name"] = "Smokeybönes",
+			["UnitLockout"] = 1333834477,
+			["Pet"] = {
+				"Worg Pup <Smokeybönes>", -- [1]
+			},
+			["level"] = 1,
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+			},
+			["LastFightIn"] = 0,
+		},
+		["Bloodworm <Chocolutis>"] = {
+			["GUID"] = "0xF1306D71000E8C2B",
+			["LastEventHealth"] = {
+				"???", -- [1]
+				"???", -- [2]
+				"???", -- [3]
+				"???", -- [4]
+				"???", -- [5]
+				"???", -- [6]
+				"???", -- [7]
+				"???", -- [8]
+				"???", -- [9]
+				"???", -- [10]
+				"???", -- [11]
+				"???", -- [12]
+				"???", -- [13]
+				"???", -- [14]
+				"???", -- [15]
+				"???", -- [16]
+				"???", -- [17]
+				"???", -- [18]
+				"???", -- [19]
+				"???", -- [20]
+				"???", -- [21]
+				"???", -- [22]
+				"???", -- [23]
+				"???", -- [24]
+				"???", -- [25]
+			},
+			["LastEventType"] = {
+				"DAMAGE", -- [1]
+				"DAMAGE", -- [2]
+				"DAMAGE", -- [3]
+				"DAMAGE", -- [4]
+				"DAMAGE", -- [5]
+				"DAMAGE", -- [6]
+				"HEAL", -- [7]
+				"MISC", -- [8]
+				"MISC", -- [9]
+				"DAMAGE", -- [10]
+				"DAMAGE", -- [11]
+				"DAMAGE", -- [12]
+				"DAMAGE", -- [13]
+				"DAMAGE", -- [14]
+				"HEAL", -- [15]
+				"MISC", -- [16]
+				"MISC", -- [17]
+				"DAMAGE", -- [18]
+				"DAMAGE", -- [19]
+				"DAMAGE", -- [20]
+				"DAMAGE", -- [21]
+				"DAMAGE", -- [22]
+				"DAMAGE", -- [23]
+				"DAMAGE", -- [24]
+				"DAMAGE", -- [25]
+			},
+			["TimeWindows"] = {
+				["ActiveTime"] = {
+					35.77, -- [1]
+				},
+				["DeathCount"] = {
+					2, -- [1]
+				},
+				["FDamage"] = {
+					4244, -- [1]
+				},
+				["TimeDamage"] = {
+					35.77, -- [1]
+				},
+			},
+			["enClass"] = "PET",
+			["LastActive"] = 1333834195,
+			["level"] = 1,
+			["UnitLockout"] = 1333834195,
+			["LastFightIn"] = 0,
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["TimeSpent"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["FAttacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["Attacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+									["amount"] = 0,
+								},
+								["Miss"] = {
+									["count"] = 0,
+									["amount"] = 0,
+								},
+								["Parry"] = {
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 0,
+					["FDamage"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["ActiveTime"] = 0,
+					["FDamagedWho"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 0,
+								},
+								["Miss"] = {
+									["count"] = 0,
+								},
+								["Parry"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+				},
+				["OverallData"] = {
+					["TimeSpent"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 35.77,
+								},
+							},
+							["amount"] = 35.77,
+						},
+					},
+					["FAttacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 365,
+									["min"] = 58,
+									["count"] = 14,
+									["amount"] = 4244,
+								},
+							},
+							["count"] = 14,
+							["amount"] = 4244,
+						},
+					},
+					["Attacks"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 2,
+									["amount"] = 0,
+								},
+								["Miss"] = {
+									["count"] = 2,
+									["amount"] = 0,
+								},
+								["Parry"] = {
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 2,
+					["FDamage"] = 4244,
+					["TimeDamage"] = 35.77,
+					["TimeDamaging"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 35.77,
+								},
+							},
+							["amount"] = 35.77,
+						},
+					},
+					["ActiveTime"] = 35.77,
+					["FDamagedWho"] = {
+						["Trida"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 4244,
+								},
+							},
+							["amount"] = 4244,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 2,
+								},
+								["Miss"] = {
+									["count"] = 2,
+								},
+								["Parry"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 5,
+						},
+					},
+				},
+			},
+			["type"] = "Pet",
+			["LastKilledAt"] = 281302.295,
+			["DeathLogs"] = {
+				{
+					["MessageIncoming"] = {
+						false, -- [1]
+						false, -- [2]
+						false, -- [3]
+						false, -- [4]
+						false, -- [5]
+						true, -- [6]
+						true, -- [7]
+						true, -- [8]
+					},
+					["Messages"] = {
+						"Bloodworm <Chocolutis> Melee Trida Hit -336 (Physical)", -- [1]
+						"Bloodworm <Chocolutis> Melee Trida Dodge", -- [2]
+						"Bloodworm <Chocolutis> Melee Trida Hit -332 (Physical)", -- [3]
+						"Bloodworm <Chocolutis> Melee Trida Hit -335 (Physical)", -- [4]
+						"Bloodworm <Chocolutis> Melee Trida Hit -334 (Physical)", -- [5]
+						"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +3417 (3417 overheal)", -- [6]
+						"Bloodworm <Chocolutis> dies.", -- [7]
+						"Bloodworm <Chocolutis> dies.", -- [8]
+					},
+					["DeathAt"] = 1333834170,
+					["HealthNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["MessageTimes"] = {
+						-6.73699999996461, -- [1]
+						-5.231999999959953, -- [2]
+						-3.789999999979045, -- [3]
+						-2.407999999995809, -- [4]
+						-0.915999999968335, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["KilledBy"] = "Bloodworm <Chocolutis>",
+					["Health"] = {
+						"???", -- [1]
+						"???", -- [2]
+						"???", -- [3]
+						"???", -- [4]
+						"???", -- [5]
+						"???", -- [6]
+						"???", -- [7]
+						"???", -- [8]
+					},
+					["EventNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["MessageType"] = {
+						"DAMAGE", -- [1]
+						"DAMAGE", -- [2]
+						"DAMAGE", -- [3]
+						"DAMAGE", -- [4]
+						"DAMAGE", -- [5]
+						"HEAL", -- [6]
+						"MISC", -- [7]
+						"MISC", -- [8]
+					},
+				}, -- [1]
+				{
+					["MessageIncoming"] = {
+						false, -- [1]
+						false, -- [2]
+						false, -- [3]
+						false, -- [4]
+						false, -- [5]
+						true, -- [6]
+						true, -- [7]
+						true, -- [8]
+					},
+					["Messages"] = {
+						"Bloodworm <Chocolutis> Melee Trida Hit -336 (Physical)", -- [1]
+						"Bloodworm <Chocolutis> Melee Trida Dodge", -- [2]
+						"Bloodworm <Chocolutis> Melee Trida Hit -332 (Physical)", -- [3]
+						"Bloodworm <Chocolutis> Melee Trida Hit -335 (Physical)", -- [4]
+						"Bloodworm <Chocolutis> Melee Trida Hit -334 (Physical)", -- [5]
+						"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +3417 (3417 overheal)", -- [6]
+						"Bloodworm <Chocolutis> dies.", -- [7]
+						"Bloodworm <Chocolutis> dies.", -- [8]
+					},
+					["DeathAt"] = 1333834170,
+					["HealthNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["MessageTimes"] = {
+						-6.73699999996461, -- [1]
+						-5.231999999959953, -- [2]
+						-3.789999999979045, -- [3]
+						-2.407999999995809, -- [4]
+						-0.915999999968335, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["KilledBy"] = "Bloodworm <Chocolutis>",
+					["Health"] = {
+						"???", -- [1]
+						"???", -- [2]
+						"???", -- [3]
+						"???", -- [4]
+						"???", -- [5]
+						"???", -- [6]
+						"???", -- [7]
+						"???", -- [8]
+					},
+					["EventNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+					},
+					["MessageType"] = {
+						"DAMAGE", -- [1]
+						"DAMAGE", -- [2]
+						"DAMAGE", -- [3]
+						"DAMAGE", -- [4]
+						"DAMAGE", -- [5]
+						"HEAL", -- [6]
+						"MISC", -- [7]
+						"MISC", -- [8]
+					},
+				}, -- [2]
+				{
+					["MessageIncoming"] = {
+						false, -- [1]
+						false, -- [2]
+						false, -- [3]
+						false, -- [4]
+						false, -- [5]
+						false, -- [6]
+						true, -- [7]
+						true, -- [8]
+						true, -- [9]
+					},
+					["Messages"] = {
+						"Bloodworm <Chocolutis> Melee Trida Hit -58 (Physical)", -- [1]
+						"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [2]
+						"Bloodworm <Chocolutis> Melee Trida Dodge", -- [3]
+						"Bloodworm <Chocolutis> Melee Trida Hit -357 (Physical)", -- [4]
+						"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [5]
+						"Bloodworm <Chocolutis> Melee Trida Hit -365 (Physical)", -- [6]
+						"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +4881 (4881 overheal)", -- [7]
+						"Bloodworm <Chocolutis> dies.", -- [8]
+						"Bloodworm <Chocolutis> dies.", -- [9]
+					},
+					["DeathAt"] = 1333834093,
+					["HealthNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["MessageTimes"] = {
+						-11.49000000004889, -- [1]
+						-9.703000000037719, -- [2]
+						-8.605000000039581, -- [3]
+						-7.116000000038184, -- [4]
+						-2.395000000018626, -- [5]
+						-0.8010000000358559, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["KilledBy"] = "Bloodworm <Chocolutis>",
+					["Health"] = {
+						"???", -- [1]
+						"???", -- [2]
+						"???", -- [3]
+						"???", -- [4]
+						"???", -- [5]
+						"???", -- [6]
+						"???", -- [7]
+						"???", -- [8]
+						"???", -- [9]
+					},
+					["EventNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["MessageType"] = {
+						"DAMAGE", -- [1]
+						"DAMAGE", -- [2]
+						"DAMAGE", -- [3]
+						"DAMAGE", -- [4]
+						"DAMAGE", -- [5]
+						"DAMAGE", -- [6]
+						"HEAL", -- [7]
+						"MISC", -- [8]
+						"MISC", -- [9]
+					},
+				}, -- [3]
+				{
+					["MessageIncoming"] = {
+						false, -- [1]
+						false, -- [2]
+						false, -- [3]
+						false, -- [4]
+						false, -- [5]
+						false, -- [6]
+						true, -- [7]
+						true, -- [8]
+						true, -- [9]
+					},
+					["Messages"] = {
+						"Bloodworm <Chocolutis> Melee Trida Hit -58 (Physical)", -- [1]
+						"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [2]
+						"Bloodworm <Chocolutis> Melee Trida Dodge", -- [3]
+						"Bloodworm <Chocolutis> Melee Trida Hit -357 (Physical)", -- [4]
+						"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [5]
+						"Bloodworm <Chocolutis> Melee Trida Hit -365 (Physical)", -- [6]
+						"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +4881 (4881 overheal)", -- [7]
+						"Bloodworm <Chocolutis> dies.", -- [8]
+						"Bloodworm <Chocolutis> dies.", -- [9]
+					},
+					["DeathAt"] = 1333834093,
+					["HealthNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["MessageTimes"] = {
+						-11.49000000004889, -- [1]
+						-9.703000000037719, -- [2]
+						-8.605000000039581, -- [3]
+						-7.116000000038184, -- [4]
+						-2.395000000018626, -- [5]
+						-0.8010000000358559, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["KilledBy"] = "Bloodworm <Chocolutis>",
+					["Health"] = {
+						"???", -- [1]
+						"???", -- [2]
+						"???", -- [3]
+						"???", -- [4]
+						"???", -- [5]
+						"???", -- [6]
+						"???", -- [7]
+						"???", -- [8]
+						"???", -- [9]
+					},
+					["EventNum"] = {
+						0, -- [1]
+						0, -- [2]
+						0, -- [3]
+						0, -- [4]
+						0, -- [5]
+						0, -- [6]
+						0, -- [7]
+						0, -- [8]
+						0, -- [9]
+					},
+					["MessageType"] = {
+						"DAMAGE", -- [1]
+						"DAMAGE", -- [2]
+						"DAMAGE", -- [3]
+						"DAMAGE", -- [4]
+						"DAMAGE", -- [5]
+						"DAMAGE", -- [6]
+						"HEAL", -- [7]
+						"MISC", -- [8]
+						"MISC", -- [9]
+					},
+				}, -- [4]
+			},
+			["LastKilledBy"] = "Bloodworm <Chocolutis>",
+			["Owner"] = "Chocolutis",
+			["Name"] = "Bloodworm",
+			["NextEventNum"] = 26,
+			["LastEventHealthNum"] = {
+				0, -- [1]
+				0, -- [2]
+				0, -- [3]
+				0, -- [4]
+				0, -- [5]
+				0, -- [6]
+				0, -- [7]
+				0, -- [8]
+				0, -- [9]
+				0, -- [10]
+				0, -- [11]
+				0, -- [12]
+				0, -- [13]
+				0, -- [14]
+				0, -- [15]
+				0, -- [16]
+				0, -- [17]
+				0, -- [18]
+				0, -- [19]
+				0, -- [20]
+				0, -- [21]
+				0, -- [22]
+				0, -- [23]
+				0, -- [24]
+				0, -- [25]
+			},
+			["LastEvents"] = {
+				"Bloodworm <Chocolutis> Melee Trida Hit -58 (Physical)", -- [1]
+				"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [2]
+				"Bloodworm <Chocolutis> Melee Trida Dodge", -- [3]
+				"Bloodworm <Chocolutis> Melee Trida Hit -357 (Physical)", -- [4]
+				"Bloodworm <Chocolutis> Melee Trida Hit -362 (Physical)", -- [5]
+				"Bloodworm <Chocolutis> Melee Trida Hit -365 (Physical)", -- [6]
+				"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +4881 (4881 overheal)", -- [7]
+				"Bloodworm <Chocolutis> dies.", -- [8]
+				"Bloodworm <Chocolutis> dies.", -- [9]
+				"Bloodworm <Chocolutis> Melee Trida Hit -336 (Physical)", -- [10]
+				"Bloodworm <Chocolutis> Melee Trida Dodge", -- [11]
+				"Bloodworm <Chocolutis> Melee Trida Hit -332 (Physical)", -- [12]
+				"Bloodworm <Chocolutis> Melee Trida Hit -335 (Physical)", -- [13]
+				"Bloodworm <Chocolutis> Melee Trida Hit -334 (Physical)", -- [14]
+				"Bloodworm <Chocolutis> Blood Burst Bloodworm <Chocolutis> Hit +3417 (3417 overheal)", -- [15]
+				"Bloodworm <Chocolutis> dies.", -- [16]
+				"Bloodworm <Chocolutis> dies.", -- [17]
+				"Bloodworm <Chocolutis> Melee Trida Hit -61 (Physical)", -- [18]
+				"Bloodworm <Chocolutis> Melee Trida Hit -339 (Physical)", -- [19]
+				"Bloodworm <Chocolutis> Melee Trida Hit -339 (Physical)", -- [20]
+				"Bloodworm <Chocolutis> Melee Trida Hit -330 (Physical)", -- [21]
+				"Bloodworm <Chocolutis> Melee Trida Miss", -- [22]
+				"Bloodworm <Chocolutis> Melee Trida Parry", -- [23]
+				"Bloodworm <Chocolutis> Melee Trida Miss", -- [24]
+				"Bloodworm <Chocolutis> Melee Trida Hit -334 (Physical)", -- [25]
+			},
+			["LastEventIncoming"] = {
+				false, -- [1]
+				false, -- [2]
+				false, -- [3]
+				false, -- [4]
+				false, -- [5]
+				false, -- [6]
+				true, -- [7]
+				true, -- [8]
+				true, -- [9]
+				false, -- [10]
+				false, -- [11]
+				false, -- [12]
+				false, -- [13]
+				false, -- [14]
+				true, -- [15]
+				true, -- [16]
+				true, -- [17]
+				false, -- [18]
+				false, -- [19]
+				false, -- [20]
+				false, -- [21]
+				false, -- [22]
+				false, -- [23]
+				false, -- [24]
+				false, -- [25]
+			},
+			["LastFlags"] = 2600,
+			["TimeLast"] = {
+				["DeathCount"] = 1333834168,
+				["FDamage"] = 1333834195,
+				["ActiveTime"] = 1333834195,
+				["OVERALL"] = 1333834195,
+				["TimeDamage"] = 1333834195,
+			},
+			["FightsSaved"] = 25,
+			["LastEventTimes"] = {
+				281213.877, -- [1]
+				281215.664, -- [2]
+				281216.762, -- [3]
+				281218.251, -- [4]
+				281222.972, -- [5]
+				281224.566, -- [6]
+				281225.367, -- [7]
+				281225.367, -- [8]
+				281225.367, -- [9]
+				281295.558, -- [10]
+				281297.063, -- [11]
+				281298.505, -- [12]
+				281299.887, -- [13]
+				281301.379, -- [14]
+				281302.295, -- [15]
+				281302.295, -- [16]
+				281302.295, -- [17]
+				281319.202, -- [18]
+				281320.643, -- [19]
+				281322.258, -- [20]
+				281323.563, -- [21]
+				281324.884, -- [22]
+				281326.322, -- [23]
+				281327.796, -- [24]
+				281329.182, -- [25]
+			},
+			["LastAbility"] = 286409.996,
+		},
+		["Draxxon"] = {
+			["GUID"] = "0x02800000024DA32E",
+			["type"] = "Ungrouped",
+			["FightsSaved"] = 25,
+			["GuardianReverseGUIDs"] = {
+				["Winter Reindeer"] = {
+					["LatestGuardian"] = 1,
+					["GUIDs"] = {
+						"0xF1303D5A000E9046", -- [1]
+						[0] = "0xF1303D5A000E9007",
+					},
+				},
+			},
+			["Owner"] = false,
+			["enClass"] = "UNGROUPED",
+			["LastAbility"] = 286409.996,
+			["Name"] = "Draxxon",
+			["UnitLockout"] = 1333834762,
+			["Pet"] = {
+				"Winter Reindeer <Draxxon>", -- [1]
+			},
+			["level"] = 1,
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+			},
+			["LastFightIn"] = 0,
+		},
+		["Pezzer"] = {
+			["GUID"] = "0x0280000004B625CB",
+			["LastEventHealth"] = {
+				"149915 (99%)", -- [1]
+				"149915 (99%)", -- [2]
+				"149915 (99%)", -- [3]
+				"149915 (99%)", -- [4]
+				"149913 (99%)", -- [5]
+				"149913 (99%)", -- [6]
+				"149913 (99%)", -- [7]
+				"149913 (99%)", -- [8]
+				"149913 (99%)", -- [9]
+				"149913 (99%)", -- [10]
+				"149911 (99%)", -- [11]
+				"149911 (99%)", -- [12]
+				"149911 (99%)", -- [13]
+				"149911 (99%)", -- [14]
+				"149911 (99%)", -- [15]
+				"149909 (99%)", -- [16]
+				"149909 (99%)", -- [17]
+				"149909 (99%)", -- [18]
+				"149909 (99%)", -- [19]
+				"149909 (99%)", -- [20]
+				"149909 (99%)", -- [21]
+				"149896 (99%)", -- [22]
+				"149896 (99%)", -- [23]
+				"149896 (99%)", -- [24]
+				"149896 (99%)", -- [25]
+				"149896 (99%)", -- [26]
+				"149896 (99%)", -- [27]
+				"149896 (99%)", -- [28]
+				"149891 (99%)", -- [29]
+				"149891 (99%)", -- [30]
+				"149891 (99%)", -- [31]
+				"149891 (99%)", -- [32]
+				"149891 (99%)", -- [33]
+				"149891 (99%)", -- [34]
+				"149891 (99%)", -- [35]
+				"149886 (99%)", -- [36]
+				"149886 (99%)", -- [37]
+				"149886 (99%)", -- [38]
+				"149886 (99%)", -- [39]
+				"149886 (99%)", -- [40]
+				"149886 (99%)", -- [41]
+				"149881 (99%)", -- [42]
+				"149881 (99%)", -- [43]
+				"149881 (99%)", -- [44]
+				"149937 (100%)", -- [45]
+				"149937 (100%)", -- [46]
+				"149921 (99%)", -- [47]
+				"149915 (99%)", -- [48]
+				"149915 (99%)", -- [49]
+				"149915 (99%)", -- [50]
+			},
+			["LastAttackedBy"] = "Razormane Geomancer",
+			["LastEventType"] = {
+				"DAMAGE", -- [1]
+				"DAMAGE", -- [2]
+				"DAMAGE", -- [3]
+				"DAMAGE", -- [4]
+				"DAMAGE", -- [5]
+				"DAMAGE", -- [6]
+				"DAMAGE", -- [7]
+				"DAMAGE", -- [8]
+				"DAMAGE", -- [9]
+				"DAMAGE", -- [10]
+				"DAMAGE", -- [11]
+				"DAMAGE", -- [12]
+				"DAMAGE", -- [13]
+				"DAMAGE", -- [14]
+				"DAMAGE", -- [15]
+				"DAMAGE", -- [16]
+				"DAMAGE", -- [17]
+				"DAMAGE", -- [18]
+				"DAMAGE", -- [19]
+				"DAMAGE", -- [20]
+				"DAMAGE", -- [21]
+				"DAMAGE", -- [22]
+				"DAMAGE", -- [23]
+				"DAMAGE", -- [24]
+				"DAMAGE", -- [25]
+				"DAMAGE", -- [26]
+				"DAMAGE", -- [27]
+				"DAMAGE", -- [28]
+				"DAMAGE", -- [29]
+				"DAMAGE", -- [30]
+				"DAMAGE", -- [31]
+				"DAMAGE", -- [32]
+				"DAMAGE", -- [33]
+				"DAMAGE", -- [34]
+				"DAMAGE", -- [35]
+				"DAMAGE", -- [36]
+				"DAMAGE", -- [37]
+				"DAMAGE", -- [38]
+				"DAMAGE", -- [39]
+				"DAMAGE", -- [40]
+				"DAMAGE", -- [41]
+				"DAMAGE", -- [42]
+				"DAMAGE", -- [43]
+				"DAMAGE", -- [44]
+				"DAMAGE", -- [45]
+				"DAMAGE", -- [46]
+				"DAMAGE", -- [47]
+				"DAMAGE", -- [48]
+				"DAMAGE", -- [49]
+				"DAMAGE", -- [50]
+			},
+			["TimeWindows"] = {
+				["TimeHeal"] = {
+					3.5, -- [1]
+				},
+				["Dispelled"] = {
+					1, -- [1]
+				},
+				["Healing"] = {
+					3, -- [1]
+				},
+				["DamageTaken"] = {
+					1732, -- [1]
+				},
+				["EnergyGain"] = {
+					20, -- [1]
+				},
+				["HOT_Time"] = {
+					30, -- [1]
+				},
+				["TimeDamage"] = {
+					70.95999999999998, -- [1]
+				},
+				["Overhealing"] = {
+					92203, -- [1]
+				},
+				["ActiveTime"] = {
+					74.45999999999998, -- [1]
+				},
+				["Damage"] = {
+					319003, -- [1]
+				},
+			},
+			["enClass"] = "HUNTER",
+			["unit"] = "Pezzer",
+			["LastActive"] = 1333843693,
+			["UnitLockout"] = 1333834118,
+			["level"] = 85,
+			["LastDamageAbility"] = "Melee",
+			["LastFightIn"] = 25,
+			["LastEventNum"] = {
+				nil, -- [1]
+				nil, -- [2]
+				0.001333893568632159, -- [3]
+				nil, -- [4]
+				nil, -- [5]
+				nil, -- [6]
+				nil, -- [7]
+				0.001333893568632159, -- [8]
+				[15] = 0.001333893568632159,
+				[19] = 0.002000840352948238,
+				[20] = 0.002667787137264318,
+				[21] = 0.004001680705896476,
+				[27] = 0.003334733921580397,
+				[41] = 0.003334733921580397,
+				[47] = 0.002667787137264318,
+				[34] = 0.003334733921580397,
+			},
+			["type"] = "Self",
+			["FightsSaved"] = 25,
+			["GuardianReverseGUIDs"] = {
+				["Âssface"] = {
+					["LatestGuardian"] = 0,
+					["GUIDs"] = {
+						[0] = "0xF140CB159000A03B",
+					},
+				},
+			},
+			["Fights"] = {
+				["Fight11"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 1,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 2,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTaken"] = {
+						["Physical"] = 0,
+					},
+					["HOTs"] = {
+					},
+					["Damage"] = 26250,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6295,
+								},
+							},
+							["amount"] = 6295,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+								["Arcane Shot"] = {
+									["count"] = 19955,
+								},
+							},
+							["amount"] = 19955,
+						},
+					},
+					["FAttacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementDone"] = {
+						["Physical"] = 6295,
+						["Arcane"] = 19955,
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+						["Arcane"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["ManaGainedFrom"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["EnergyGainedFrom"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Roar of Recovery"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["HealedWho"] = {
+					},
+					["CCBreak"] = 0,
+					["ElementTakenAbsorb"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["PartialAbsorb"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
 						["Melee"] = {
 							["Details"] = {
 								["No Absorb"] = {
@@ -7400,76 +5586,1835 @@ RecountPerCharDB = {
 							["count"] = 2,
 							["amount"] = 0,
 						},
-						["Arcane Bolt"] = {
+					},
+					["ActiveTime"] = 5.16,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+								["Arcane Shot"] = {
+									["count"] = 1.66,
+								},
+							},
+							["amount"] = 1.66,
+						},
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["ElementTakenResist"] = {
+					},
+					["Heals"] = {
+					},
+					["Interrupts"] = 0,
+					["EnergyGained"] = {
+						["Roar of Recovery"] = {
+							["Details"] = {
+								["Âssface <Pezzer>"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["PartialResist"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["Healing"] = 0,
+					["RageGained"] = {
+					},
+					["OverHeals"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 6295,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 6295,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 6295,
+						},
+						["Multi-Shot"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Arcane Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 19955,
+									["min"] = 19955,
+									["count"] = 1,
+									["amount"] = 19955,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 19955,
+						},
+					},
+					["RageGain"] = 0,
+					["FDamagedWho"] = {
+					},
+					["TimeDamage"] = 5.16,
+					["TimeDamaging"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+								["Arcane Shot"] = {
+									["count"] = 1.66,
+								},
+							},
+							["amount"] = 1.66,
+						},
+					},
+					["ManaGain"] = 0,
+					["DOT_Time"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight17"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 81,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 2,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 10,
+								},
+								["Parry"] = {
+									["count"] = 2,
+								},
+								["Miss"] = {
+									["count"] = 7,
+								},
+								["Dodge"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 22,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 15,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Fire"] = 33,
+						["Melee"] = 41,
+						["Physical"] = 7,
+					},
+					["HOTs"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Âssface <Pezzer>"] = {
+									["count"] = 15,
+								},
+							},
+							["amount"] = 15,
+						},
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 3.5,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Nature"] = 3052,
+						["Physical"] = 77029,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Improved Serpent Sting"] = {
+									["count"] = 3052,
+								},
+							},
+							["amount"] = 3052,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 14073,
+								},
+								["Multi-Shot"] = {
+									["count"] = 15026,
+								},
+							},
+							["amount"] = 29099,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 7948,
+								},
+								["Auto Shot"] = {
+									["count"] = 14573,
+								},
+							},
+							["amount"] = 22521,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 14279,
+								},
+								["Auto Shot"] = {
+									["count"] = 11130,
+								},
+							},
+							["amount"] = 25409,
+						},
+					},
+					["OverHeals"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Tick"] = {
+									["max"] = 9221,
+									["min"] = 9218,
+									["count"] = 5,
+									["amount"] = 46099,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 46099,
+						},
+					},
+					["WhoDamaged"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 11,
+								},
+								["Fireball"] = {
+									["count"] = 33,
+								},
+							},
+							["amount"] = 44,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 25,
+								},
+							},
+							["amount"] = 25,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 7,
+								},
+							},
+							["amount"] = 7,
+						},
+					},
+					["EnergyGainedFrom"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Roar of Recovery"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Fireball"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 22,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 22,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 10,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 17.96,
+					["Overhealing"] = 46099,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Improved Serpent Sting"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0.09,
+								},
+							},
+							["amount"] = 3.59,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.37,
+								},
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.87,
+						},
+					},
+					["Heals"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Tick"] = {
+									["max"] = 3,
+									["min"] = 3,
+									["count"] = 1,
+									["amount"] = 3,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 3,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Fireball"] = {
 							["Details"] = {
 								["No Absorb"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 8,
+									["count"] = 2,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 8,
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 22,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 22,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+						["Roar of Recovery"] = {
+							["Details"] = {
+								["Âssface <Pezzer>"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["HealedWho"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["Healing"] = 3,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 14573,
+									["min"] = 11130,
+									["count"] = 3,
+									["amount"] = 39776,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 39776,
+						},
+						["Multi-Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 15026,
+									["min"] = 14279,
+									["count"] = 2,
+									["amount"] = 29305,
+								},
+								["Hit"] = {
+									["max"] = 7948,
+									["min"] = 7948,
+									["count"] = 1,
+									["amount"] = 7948,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 37253,
+						},
+						["Improved Serpent Sting"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 3052,
+									["min"] = 3052,
+									["count"] = 1,
+									["amount"] = 3052,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 3052,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+						["Nature"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 5,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 6,
+						},
+					},
+					["TimeDamage"] = 14.46,
+					["TimeDamaging"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Improved Serpent Sting"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0.09,
+								},
+							},
+							["amount"] = 3.59,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.37,
+								},
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.87,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 80081,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight19"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 4,
+								},
+								["Parry"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 5,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["OverallData"] = {
+					["TimeHealing"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Dispelled"] = 1,
+					["TimeSpent"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6.19,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 6.19,
+						},
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 9.859999999999999,
+								},
+								["Multi-Shot"] = {
+									["count"] = 1.53,
+								},
+								["Improved Serpent Sting"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 14.89,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 14,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0.09,
+								},
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 17.59,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+								["Multi-Shot"] = {
+									["count"] = 3.76,
+								},
+								["Arcane Shot"] = {
+									["count"] = 5.16,
+								},
+							},
+							["amount"] = 12.42,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.5,
+								},
+								["Auto Shot"] = {
+									["count"] = 19.37,
+								},
+							},
+							["amount"] = 19.87,
+						},
+					},
+					["DamageTaken"] = 1732,
+					["ElementHitsTaken"] = {
+						["Shadow"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 41,
+								},
+								["Hit"] = {
+									["count"] = 409,
+								},
+								["Miss"] = {
+									["count"] = 126,
+								},
+								["Dodge"] = {
+									["count"] = 52,
+								},
+							},
+							["amount"] = 628,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 9,
+								},
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 11,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 11,
+						},
+						["Nature"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 3,
+								},
+								["Tick"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+					["PartialResist"] = {
+						["Fireball"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 628,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 628,
+							["amount"] = 0,
+						},
+						["Lightning Cloud (DoT)"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Lightning Cloud"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Howling Screech"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Lightning Bolt"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+					},
+					["Damage"] = 319003,
+					["PartialAbsorb"] = {
+						["Fireball"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 628,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 628,
+							["amount"] = 0,
+						},
+						["Lightning Cloud (DoT)"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Lightning Cloud"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Howling Screech"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+						["Lightning Bolt"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+					},
+					["ActiveTime"] = 74.45999999999998,
+					["HealedWho"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Mend Pet"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["ElementTaken"] = {
+						["Physical"] = 42,
+						["Fire"] = 71,
+						["Melee"] = 1565,
+						["Nature"] = 54,
+					},
+					["HOTs"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Âssface <Pezzer>"] = {
+									["count"] = 30,
+								},
+							},
+							["amount"] = 30,
+						},
+					},
+					["WhoDispelled"] = {
+						["Bestheal"] = {
+							["Details"] = {
+								["Power Word: Fortitude (Dispel Magic)"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["TimeDamaging"] = {
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6.19,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 6.19,
+						},
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 9.859999999999999,
+								},
+								["Multi-Shot"] = {
+									["count"] = 1.53,
+								},
+								["Improved Serpent Sting"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 14.89,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 14,
+								},
+								["Multi-Shot"] = {
+									["count"] = 0.09,
+								},
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 17.59,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+								["Multi-Shot"] = {
+									["count"] = 3.76,
+								},
+								["Arcane Shot"] = {
+									["count"] = 5.16,
+								},
+							},
+							["amount"] = 12.42,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.5,
+								},
+								["Auto Shot"] = {
+									["count"] = 19.37,
+								},
+							},
+							["amount"] = 19.87,
+						},
+					},
+					["TimeHeal"] = 3.5,
+					["Heals"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Tick"] = {
+									["max"] = 3,
+									["min"] = 3,
+									["count"] = 1,
+									["amount"] = 3,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 3,
+						},
+					},
+					["EnergyGained"] = {
+						["Roar of Recovery"] = {
+							["Details"] = {
+								["Âssface <Pezzer>"] = {
+									["count"] = 20,
+								},
+							},
+							["amount"] = 20,
+						},
+					},
+					["DamagedWho"] = {
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 17866,
+								},
+								["Multi-Shot"] = {
+									["count"] = 14212,
+								},
+							},
+							["amount"] = 32078,
+						},
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 32658,
+								},
+								["Multi-Shot"] = {
+									["count"] = 8135,
+								},
+								["Improved Serpent Sting"] = {
+									["count"] = 3052,
+								},
+							},
+							["amount"] = 43845,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 48059,
+								},
+								["Multi-Shot"] = {
+									["count"] = 15026,
+								},
+								["Arcane Shot"] = {
+									["count"] = 9368,
+								},
+							},
+							["amount"] = 72453,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 14573,
+								},
+								["Multi-Shot"] = {
+									["count"] = 30377,
+								},
+								["Arcane Shot"] = {
+									["count"] = 38867,
+								},
+							},
+							["amount"] = 83817,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 35993,
+								},
+								["Auto Shot"] = {
+									["count"] = 50817,
+								},
+							},
+							["amount"] = 86810,
+						},
+					},
+					["Healing"] = 3,
+					["OverHeals"] = {
+						["Mend Pet"] = {
+							["Details"] = {
+								["Tick"] = {
+									["max"] = 9221,
+									["min"] = 9218,
+									["count"] = 10,
+									["amount"] = 92203,
+								},
+							},
+							["count"] = 10,
+							["amount"] = 92203,
+						},
+					},
+					["ElementDone"] = {
+						["Physical"] = 267716,
+						["Nature"] = 3052,
+						["Arcane"] = 48235,
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 14602,
+									["min"] = 11130,
+									["count"] = 9,
+									["amount"] = 120546,
+								},
+								["Hit"] = {
+									["max"] = 6705,
+									["min"] = 5627,
+									["count"] = 7,
+									["amount"] = 43427,
+								},
+							},
+							["count"] = 16,
+							["amount"] = 163973,
+						},
+						["Improved Serpent Sting"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 3052,
+									["min"] = 3052,
+									["count"] = 1,
+									["amount"] = 3052,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 3052,
+						},
+						["Multi-Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 15550,
+									["min"] = 14212,
+									["count"] = 5,
+									["amount"] = 73929,
+								},
+								["Hit"] = {
+									["max"] = 8135,
+									["min"] = 6852,
+									["count"] = 4,
+									["amount"] = 29814,
+								},
+							},
+							["count"] = 9,
+							["amount"] = 103743,
+						},
+						["Arcane Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 19955,
+									["min"] = 18912,
+									["count"] = 2,
+									["amount"] = 38867,
+								},
+								["Hit"] = {
+									["max"] = 9368,
+									["min"] = 9368,
+									["count"] = 1,
+									["amount"] = 9368,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 48235,
+						},
+					},
+					["HOT_Time"] = 30,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 14,
+								},
+								["Hit"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 25,
+						},
+						["Nature"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+						["Arcane"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 2,
+								},
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["TimeDamage"] = 70.95999999999998,
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 42,
+								},
+								["Melee"] = {
+									["count"] = 725,
+								},
+							},
+							["amount"] = 767,
+						},
+						["Kolkar Stormseer"] = {
+							["Details"] = {
+								["Lightning Cloud (DoT)"] = {
+									["count"] = 54,
+								},
+							},
+							["amount"] = 54,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 261,
+								},
+							},
+							["amount"] = 261,
+						},
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 72,
+								},
+								["Fireball"] = {
+									["count"] = 71,
+								},
+							},
+							["amount"] = 143,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 379,
+								},
+							},
+							["amount"] = 379,
+						},
+						["Sunscale Screecher"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 68,
+								},
+							},
+							["amount"] = 68,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 60,
+								},
+							},
+							["amount"] = 60,
+						},
+					},
+					["EnergyGainedFrom"] = {
+						["Âssface <Pezzer>"] = {
+							["Details"] = {
+								["Roar of Recovery"] = {
+									["count"] = 20,
+								},
+							},
+							["amount"] = 20,
+						},
+					},
+					["Overhealing"] = 92203,
+					["EnergyGain"] = 20,
+				},
+				["Fight25"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 40,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 7,
+								},
+								["Miss"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 11,
+						},
+						["Shadow"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 40,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Sunscale Screecher"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 40,
+								},
+							},
+							["amount"] = 40,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+						["Howling Screech"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 11,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 11,
+							["amount"] = 0,
+						},
+						["Howling Screech"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight2"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 56,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 13,
+								},
+								["Dodge"] = {
+									["count"] = 14,
+								},
+								["Hit"] = {
+									["count"] = 15,
+								},
+								["Miss"] = {
+									["count"] = 14,
+								},
+							},
+							["amount"] = 56,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+						["Melee"] = 56,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 29052,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+						["Physical"] = 29052,
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 56,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 56,
+							["amount"] = 0,
+						},
+						["Fireball"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
 							["amount"] = 0,
 						},
 					},
 					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 5901,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5701,
-								},
 								["Multi-Shot"] = {
-									["count"] = 14316,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 15828,
+									["count"] = 8135,
 								},
 							},
-							["amount"] = 41746,
+							["amount"] = 8135,
 						},
-						["Azure Ley-Whelp"] = {
+						["Razormane Wolf <Razormane Hunter>"] = {
 							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 22887,
-								},
-								["Auto Shot"] = {
-									["count"] = 10611,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5701,
-								},
 								["Multi-Shot"] = {
-									["count"] = 52474,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 5495,
+									["count"] = 14212,
 								},
 							},
-							["amount"] = 97168,
+							["amount"] = 14212,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6705,
+								},
+							},
+							["amount"] = 6705,
 						},
 					},
 					["PartialBlock"] = {
 					},
 					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Arcane Bolt"] = {
-									["count"] = 7251,
-								},
-							},
-							["amount"] = 7251,
-						},
-						["Azure Spellbinder"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
 								["Melee"] = {
-									["count"] = 2545,
+									["count"] = 15,
 								},
 							},
-							["amount"] = 2545,
+							["amount"] = 15,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 13,
+								},
+							},
+							["amount"] = 13,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 28,
+								},
+							},
+							["amount"] = 28,
 						},
 					},
 					["EnergyGainedFrom"] = {
@@ -7480,23 +7425,23 @@ RecountPerCharDB = {
 								["No Resist"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 2,
+									["count"] = 56,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 2,
+							["count"] = 56,
 							["amount"] = 0,
 						},
-						["Arcane Bolt"] = {
+						["Fireball"] = {
 							["Details"] = {
 								["No Resist"] = {
 									["max"] = 0,
 									["min"] = 0,
-									["count"] = 8,
+									["count"] = 4,
 									["amount"] = 0,
 								},
 							},
-							["count"] = 8,
+							["count"] = 4,
 							["amount"] = 0,
 						},
 					},
@@ -7524,42 +7469,29 @@ RecountPerCharDB = {
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 1.53,
+								},
+							},
+							["amount"] = 1.53,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Razormane Hunter"] = {
 							["Details"] = {
 								["Auto Shot"] = {
 									["count"] = 3.5,
 								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 1.86,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.13,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.42,
-								},
 							},
-							["amount"] = 5.910000000000001,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 1.5,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.15,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.35,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 1.42,
-								},
-							},
-							["amount"] = 3.42,
+							["amount"] = 3.5,
 						},
 					},
 					["WhoDispelled"] = {
@@ -7573,142 +7505,458 @@ RecountPerCharDB = {
 					},
 					["EnergyGained"] = {
 					},
-					["ActiveTime"] = 9.33,
+					["ActiveTime"] = 5.03,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11610,
-									["min"] = 11610,
-									["count"] = 2,
-									["amount"] = 23220,
-								},
-								["Hit"] = {
-									["max"] = 4218,
-									["min"] = 3721,
-									["count"] = 4,
-									["amount"] = 15495,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 38715,
-						},
 						["Auto Shot"] = {
 							["Details"] = {
-								["Crit"] = {
-									["max"] = 10611,
-									["min"] = 10611,
-									["count"] = 1,
-									["amount"] = 10611,
-								},
 								["Hit"] = {
-									["max"] = 5901,
-									["min"] = 5901,
+									["max"] = 6705,
+									["min"] = 6705,
 									["count"] = 1,
-									["amount"] = 5901,
+									["amount"] = 6705,
 								},
 							},
-							["count"] = 2,
-							["amount"] = 16512,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 5701,
-									["min"] = 5701,
-									["count"] = 2,
-									["amount"] = 11402,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 11402,
+							["count"] = 1,
+							["amount"] = 6705,
 						},
 						["Multi-Shot"] = {
 							["Details"] = {
 								["Crit"] = {
-									["max"] = 13977,
-									["min"] = 12521,
-									["count"] = 3,
-									["amount"] = 39499,
+									["max"] = 14212,
+									["min"] = 14212,
+									["count"] = 1,
+									["amount"] = 14212,
 								},
 								["Hit"] = {
-									["max"] = 7762,
-									["min"] = 6249,
-									["count"] = 4,
-									["amount"] = 27291,
+									["max"] = 8135,
+									["min"] = 8135,
+									["count"] = 1,
+									["amount"] = 8135,
 								},
 							},
-							["count"] = 7,
-							["amount"] = 66790,
-						},
-						["Speaking of Rage (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 1395,
-									["min"] = 1394,
-									["count"] = 2,
-									["amount"] = 2789,
-								},
-								["Tick"] = {
-									["max"] = 902,
-									["min"] = 902,
-									["count"] = 3,
-									["amount"] = 2706,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 5495,
+							["count"] = 2,
+							["amount"] = 22347,
 						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 9.33,
+					["TimeDamage"] = 5.03,
 					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 1.53,
+								},
+							},
+							["amount"] = 1.53,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Razormane Hunter"] = {
 							["Details"] = {
 								["Auto Shot"] = {
 									["count"] = 3.5,
 								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 1.86,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.13,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.42,
-								},
 							},
-							["amount"] = 5.910000000000001,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Improved Serpent Sting"] = {
-									["count"] = 0,
-								},
-								["Auto Shot"] = {
-									["count"] = 1.5,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 0.15,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.35,
-								},
-								["Speaking of Rage (DoT)"] = {
-									["count"] = 1.42,
-								},
-							},
-							["amount"] = 3.42,
+							["amount"] = 3.5,
 						},
 					},
 					["ManaGain"] = 0,
 					["HOTs"] = {
 					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight24"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 28,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 5,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 28,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Sunscale Screecher"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 28,
+								},
+							},
+							["amount"] = 28,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight23"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 76,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Fire"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 17,
+								},
+								["Miss"] = {
+									["count"] = 5,
+								},
+								["Parry"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 24,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 65,
+						["Physical"] = 11,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 30,
+								},
+							},
+							["amount"] = 30,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24,
+								},
+							},
+							["amount"] = 24,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 11,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 11,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Fireball"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 24,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 24,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Fireball"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 24,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 24,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
 					["DispelledWho"] = {
 					},
 				},
@@ -7718,55 +7966,36 @@ RecountPerCharDB = {
 					["ElementDoneResist"] = {
 					},
 					["Ressed"] = 0,
-					["DamageTaken"] = 982,
+					["DamageTaken"] = 23,
 					["RageGainedFrom"] = {
 					},
 					["ElementHitsTaken"] = {
-						["Arcane"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Hit"] = {
+								["Miss"] = {
 									["count"] = 1,
 								},
-								["Miss"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 3,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 3,
-								},
-								["Hit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 5,
-						},
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
+								["Parry"] = {
 									["count"] = 1,
 								},
 								["Hit"] = {
 									["count"] = 4,
 								},
 							},
-							["amount"] = 5,
+							["amount"] = 6,
 						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
-						["Arcane"] = 982,
+						["Melee"] = 23,
 					},
 					["DOT_Time"] = 0,
-					["Damage"] = 99889,
+					["Damage"] = 0,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -7782,11 +8011,1127 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Nature"] = 61043,
-						["Physical"] = 38846,
 					},
 					["PartialAbsorb"] = {
-						["Arcane Bolt"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 6,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 6,
+							["amount"] = 0,
+						},
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 23,
+								},
+							},
+							["amount"] = 23,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 6,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 6,
+							["amount"] = 0,
+						},
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight15"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 16,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 16,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 16,
+								},
+							},
+							["amount"] = 16,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight22"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 10,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 4,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 8,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 10,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 5,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 8,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 8,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 8,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 8,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight13"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 24,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 4,
+								},
+								["Hit"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 9,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 24,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24,
+								},
+							},
+							["amount"] = 24,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 9,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 9,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 9,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 9,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight12"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 17,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 17,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Physical"] = 13861,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 13861,
+								},
+							},
+							["amount"] = 13861,
+						},
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 17,
+								},
+							},
+							["amount"] = 17,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 4,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 4,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 13861,
+									["min"] = 13861,
+									["count"] = 1,
+									["amount"] = 13861,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 13861,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 13861,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight5"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 42,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+								["Hit"] = {
+									["count"] = 8,
+								},
+							},
+							["amount"] = 12,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+						["Melee"] = 42,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 42,
+								},
+							},
+							["amount"] = 42,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight7"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 4,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+						["Physical"] = 4,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 4,
+								},
+							},
+							["amount"] = 4,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight3"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 54,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 5,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+						["Melee"] = 16,
+						["Fire"] = 38,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 5627,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+						["Physical"] = 5627,
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+						["Fireball"] = {
 							["Details"] = {
 								["No Absorb"] = {
 									["max"] = 0,
@@ -7800,48 +9145,46 @@ RecountPerCharDB = {
 						},
 					},
 					["DamagedWho"] = {
-						["Azure Ley-Whelp"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
 								["Auto Shot"] = {
-									["count"] = 11982,
-								},
-								["Cobra Shot"] = {
-									["count"] = 31619,
-								},
-								["Multi-Shot"] = {
-									["count"] = 26864,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 29424,
+									["count"] = 5627,
 								},
 							},
-							["amount"] = 99889,
+							["amount"] = 5627,
 						},
 					},
 					["PartialBlock"] = {
 					},
 					["WhoDamaged"] = {
-						["Azure Ley-Whelp"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
-								["Arcane Bolt"] = {
-									["count"] = 982,
+								["Melee"] = {
+									["count"] = 16,
+								},
+								["Fireball"] = {
+									["count"] = 38,
 								},
 							},
-							["amount"] = 982,
+							["amount"] = 54,
 						},
 					},
 					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Energize"] = {
-									["count"] = 36,
-								},
-							},
-							["amount"] = 36,
-						},
 					},
 					["PartialResist"] = {
-						["Arcane Bolt"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 5,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 5,
+							["amount"] = 0,
+						},
+						["Fireball"] = {
 							["Details"] = {
 								["No Resist"] = {
 									["max"] = 0,
@@ -7871,29 +9214,20 @@ RecountPerCharDB = {
 					},
 					["HealedWho"] = {
 					},
-					["EnergyGain"] = 36,
+					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
 					["FDamage"] = 0,
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Ley-Whelp"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
 								["Auto Shot"] = {
-									["count"] = 3.93,
-								},
-								["Cobra Shot"] = {
-									["count"] = 5.890000000000001,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.65,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.28,
+									["count"] = 3.5,
 								},
 							},
-							["amount"] = 11.75,
+							["amount"] = 3.5,
 						},
 					},
 					["WhoDispelled"] = {
@@ -7906,515 +9240,573 @@ RecountPerCharDB = {
 					["WhoHealed"] = {
 					},
 					["EnergyGained"] = {
-						["Energize"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+						["Auto Shot"] = {
 							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 36,
+								["Hit"] = {
+									["max"] = 5627,
+									["min"] = 5627,
+									["count"] = 1,
+									["amount"] = 5627,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 5627,
+						},
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight14"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 11,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 2,
+								},
+								["Parry"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 11,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Physical"] = 13517,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 13517,
+								},
+							},
+							["amount"] = 13517,
+						},
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 11,
+								},
+							},
+							["amount"] = 11,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 13517,
+									["min"] = 13517,
+									["count"] = 1,
+									["amount"] = 13517,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 13517,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 13517,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight18"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 107,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 21,
+								},
+								["Miss"] = {
+									["count"] = 5,
+								},
+								["Parry"] = {
+									["count"] = 6,
+								},
+								["Dodge"] = {
+									["count"] = 4,
 								},
 							},
 							["amount"] = 36,
 						},
 					},
-					["ActiveTime"] = 11.75,
-					["Healing"] = 0,
-					["FDamagedWho"] = {
-					},
-					["Dispelled"] = 0,
-					["Attacks"] = {
-						["Auto Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 6040,
-									["min"] = 5942,
-									["count"] = 2,
-									["amount"] = 11982,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 11982,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 22835,
-									["min"] = 22835,
-									["count"] = 1,
-									["amount"] = 22835,
-								},
-								["Hit"] = {
-									["max"] = 8784,
-									["min"] = 8784,
-									["count"] = 1,
-									["amount"] = 8784,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 31619,
-						},
-						["Multi-Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 13028,
-									["min"] = 13028,
-									["count"] = 1,
-									["amount"] = 13028,
-								},
-								["Hit"] = {
-									["max"] = 7324,
-									["min"] = 6512,
-									["count"] = 2,
-									["amount"] = 13836,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 26864,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 12677,
-									["min"] = 12677,
-									["count"] = 2,
-									["amount"] = 25354,
-								},
-								["Hit"] = {
-									["max"] = 4070,
-									["min"] = 4070,
-									["count"] = 1,
-									["amount"] = 4070,
-								},
-							},
-							["count"] = 3,
-							["amount"] = 29424,
-						},
-					},
-					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 11.75,
-					["TimeDamaging"] = {
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.93,
-								},
-								["Cobra Shot"] = {
-									["count"] = 5.890000000000001,
-								},
-								["Multi-Shot"] = {
-									["count"] = 1.65,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.28,
-								},
-							},
-							["amount"] = 11.75,
-						},
-					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 15,
+					["DOT_Time"] = 0,
 					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 107,
+					},
 					["HOTs"] = {
-					},
-					["DispelledWho"] = {
-					},
-				},
-				["LastFightData"] = {
-					["DOTs"] = {
-						["Explosive Shot (DoT)"] = {
+						["Mend Pet"] = {
 							["Details"] = {
-								["Drakos the Interrogator"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Drakos the Interrogator"] = {
+								["Âssface <Pezzer>"] = {
 									["count"] = 15,
 								},
 							},
 							["amount"] = 15,
 						},
 					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 0,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementHitsDone"] = {
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 10,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Tick"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 7,
-						},
-					},
-					["ElementTakenAbsorb"] = {
-					},
-					["ElementTaken"] = {
-					},
-					["DOT_Time"] = 33,
-					["Damage"] = 299384,
 					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
 					},
 					["TimeHeal"] = 0,
 					["RessedWho"] = {
 					},
 					["Dispels"] = 0,
-					["ElementTakenResist"] = {
+					["PartialBlock"] = {
 					},
-					["ElementDoneAbsorb"] = {
+					["FDamagedWho"] = {
 					},
 					["FAttacks"] = {
 					},
-					["RunicPowerGainedFrom"] = {
-					},
+					["RageGain"] = 0,
 					["ElementDone"] = {
-						["Arcane"] = 52182,
-						["Physical"] = 116824,
-						["Fire"] = 69890,
-						["Nature"] = 60488,
 					},
-					["PartialAbsorb"] = {
+					["ManaGainedFrom"] = {
 					},
 					["DamagedWho"] = {
-						["Drakos the Interrogator"] = {
+					},
+					["OverHeals"] = {
+						["Mend Pet"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
+								["Tick"] = {
+									["max"] = 9221,
+									["min"] = 9220,
+									["count"] = 5,
+									["amount"] = 46104,
 								},
 							},
-							["amount"] = 299384,
+							["count"] = 5,
+							["amount"] = 46104,
 						},
-					},
-					["PartialBlock"] = {
 					},
 					["WhoDamaged"] = {
-					},
-					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
-								["Energize"] = {
-									["count"] = 18,
+								["Melee"] = {
+									["count"] = 107,
 								},
 							},
-							["amount"] = 18,
+							["amount"] = 107,
 						},
 					},
-					["PartialResist"] = {
+					["EnergyGainedFrom"] = {
 					},
-					["CCBroken"] = {
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDoneBlock"] = {
 					},
 					["TimeHealing"] = {
 					},
-					["OverHeals"] = {
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
 					},
-					["ManaGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBreak"] = 0,
-					["RageGained"] = {
-					},
-					["HealedWho"] = {
-					},
-					["EnergyGain"] = 18,
-					["ManaGained"] = {
-					},
-					["FDamage"] = 0,
-					["Interrupts"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-						["Drakos the Interrogator"] = {
+					["PartialResist"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
-								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 36,
+									["amount"] = 0,
 								},
 							},
-							["amount"] = 19.46,
+							["count"] = 36,
+							["amount"] = 0,
 						},
 					},
-					["WhoDispelled"] = {
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 46104,
+					["ElementTakenResist"] = {
 					},
 					["InterruptData"] = {
 					},
-					["RunicPowerGain"] = 0,
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
 					["Heals"] = {
 					},
-					["WhoHealed"] = {
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 36,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 36,
+							["amount"] = 0,
+						},
 					},
 					["EnergyGained"] = {
-						["Energize"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
-					["ActiveTime"] = 19.46,
+					["HealedWho"] = {
+					},
 					["Healing"] = 0,
-					["FDamagedWho"] = {
+					["CCBroken"] = {
 					},
-					["Dispelled"] = 0,
+					["RunicPowerGained"] = {
+					},
 					["Attacks"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 19221,
-									["min"] = 16493,
-									["count"] = 2,
-									["amount"] = 35714,
-								},
-								["Tick"] = {
-									["max"] = 9196,
-									["min"] = 7892,
-									["count"] = 4,
-									["amount"] = 34176,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 69890,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 23747,
-									["min"] = 23747,
-									["count"] = 1,
-									["amount"] = 23747,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 23747,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 21549,
-									["min"] = 21549,
-									["count"] = 1,
-									["amount"] = 21549,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 21549,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11498,
-									["min"] = 11498,
-									["count"] = 1,
-									["amount"] = 11498,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 11498,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 10193,
-									["min"] = 9792,
-									["count"] = 2,
-									["amount"] = 19985,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 19985,
-						},
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 14838,
-									["min"] = 10911,
-									["count"] = 4,
-									["amount"] = 53085,
-								},
-								["Hit"] = {
-									["max"] = 7326,
-									["min"] = 6310,
-									["count"] = 3,
-									["amount"] = 20007,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 73092,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 6266,
-									["min"] = 5646,
-									["count"] = 4,
-									["amount"] = 24443,
-								},
-								["Tick"] = {
-									["max"] = 2998,
-									["min"] = 2998,
-									["count"] = 1,
-									["amount"] = 2998,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 27441,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 26553,
-									["min"] = 25629,
-									["count"] = 2,
-									["amount"] = 52182,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 52182,
-						},
 					},
 					["HealingTaken"] = 0,
-					["RageGain"] = 0,
-					["TimeDamage"] = 19.46,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
-						["Drakos the Interrogator"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight20"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 58,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
+								["Hit"] = {
+									["count"] = 19,
 								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
+								["Parry"] = {
+									["count"] = 5,
 								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
+								["Dodge"] = {
+									["count"] = 6,
 								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
+								["Miss"] = {
+									["count"] = 2,
 								},
 							},
-							["amount"] = 19.46,
+							["amount"] = 32,
 						},
 					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
 					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 58,
+					},
 					["HOTs"] = {
 					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 37,
+								},
+							},
+							["amount"] = 37,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 21,
+								},
+							},
+							["amount"] = 21,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 32,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 32,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 32,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 32,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
 					["DispelledWho"] = {
 					},
 				},
 				["Fight1"] = {
 					["DOTs"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["Drakos the Interrogator"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Drakos the Interrogator"] = {
-									["count"] = 15,
-								},
-							},
-							["amount"] = 15,
-						},
 					},
 					["ElementDoneResist"] = {
 					},
@@ -8427,54 +9819,24 @@ RecountPerCharDB = {
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
 					["ElementHitsDone"] = {
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
 						["Physical"] = {
 							["Details"] = {
 								["Crit"] = {
-									["count"] = 4,
+									["count"] = 1,
 								},
 								["Hit"] = {
-									["count"] = 6,
-								},
-							},
-							["amount"] = 10,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Tick"] = {
-									["count"] = 4,
-								},
-							},
-							["amount"] = 6,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 6,
-								},
-								["Tick"] = {
 									["count"] = 1,
 								},
 							},
-							["amount"] = 7,
+							["amount"] = 2,
 						},
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
 					},
-					["DOT_Time"] = 33,
-					["Damage"] = 299384,
+					["DOT_Time"] = 0,
+					["Damage"] = 18611,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -8490,42 +9852,26 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Arcane"] = 52182,
-						["Physical"] = 116824,
-						["Fire"] = 69890,
-						["Nature"] = 60488,
+						["Physical"] = 18611,
 					},
 					["PartialAbsorb"] = {
 					},
 					["DamagedWho"] = {
-						["Drakos the Interrogator"] = {
+						["Razormane Hunter"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 69890,
-								},
-								["Kill Shot"] = {
-									["count"] = 23747,
-								},
-								["Cobra Shot"] = {
-									["count"] = 21549,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 11498,
-								},
-								["Lightning Strike"] = {
-									["count"] = 19985,
-								},
-								["Auto Shot"] = {
-									["count"] = 73092,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 27441,
-								},
-								["Arcane Shot"] = {
-									["count"] = 52182,
+								["Multi-Shot"] = {
+									["count"] = 6852,
 								},
 							},
-							["amount"] = 299384,
+							["amount"] = 6852,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 11759,
+								},
+							},
+							["amount"] = 11759,
 						},
 					},
 					["PartialBlock"] = {
@@ -8533,14 +9879,6 @@ RecountPerCharDB = {
 					["WhoDamaged"] = {
 					},
 					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Energize"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
 					["PartialResist"] = {
 					},
@@ -8561,41 +9899,28 @@ RecountPerCharDB = {
 					},
 					["HealedWho"] = {
 					},
-					["EnergyGain"] = 18,
+					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
 					["FDamage"] = 0,
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Drakos the Interrogator"] = {
+						["Razormane Hunter"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
-								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
+								["Multi-Shot"] = {
+									["count"] = 0.13,
 								},
 							},
-							["amount"] = 19.46,
+							["amount"] = 0.13,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
 						},
 					},
 					["WhoDispelled"] = {
@@ -8608,168 +9933,57 @@ RecountPerCharDB = {
 					["WhoHealed"] = {
 					},
 					["EnergyGained"] = {
-						["Energize"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
-					["ActiveTime"] = 19.46,
+					["ActiveTime"] = 3.63,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Explosive Shot (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 19221,
-									["min"] = 16493,
-									["count"] = 2,
-									["amount"] = 35714,
-								},
-								["Tick"] = {
-									["max"] = 9196,
-									["min"] = 7892,
-									["count"] = 4,
-									["amount"] = 34176,
-								},
-							},
-							["count"] = 6,
-							["amount"] = 69890,
-						},
-						["Kill Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 23747,
-									["min"] = 23747,
-									["count"] = 1,
-									["amount"] = 23747,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 23747,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 21549,
-									["min"] = 21549,
-									["count"] = 1,
-									["amount"] = 21549,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 21549,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11498,
-									["min"] = 11498,
-									["count"] = 1,
-									["amount"] = 11498,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 11498,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 10193,
-									["min"] = 9792,
-									["count"] = 2,
-									["amount"] = 19985,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 19985,
-						},
 						["Auto Shot"] = {
 							["Details"] = {
 								["Crit"] = {
-									["max"] = 14838,
-									["min"] = 10911,
-									["count"] = 4,
-									["amount"] = 53085,
-								},
-								["Hit"] = {
-									["max"] = 7326,
-									["min"] = 6310,
-									["count"] = 3,
-									["amount"] = 20007,
-								},
-							},
-							["count"] = 7,
-							["amount"] = 73092,
-						},
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 6266,
-									["min"] = 5646,
-									["count"] = 4,
-									["amount"] = 24443,
-								},
-								["Tick"] = {
-									["max"] = 2998,
-									["min"] = 2998,
+									["max"] = 11759,
+									["min"] = 11759,
 									["count"] = 1,
-									["amount"] = 2998,
+									["amount"] = 11759,
 								},
 							},
-							["count"] = 5,
-							["amount"] = 27441,
+							["count"] = 1,
+							["amount"] = 11759,
 						},
-						["Arcane Shot"] = {
+						["Multi-Shot"] = {
 							["Details"] = {
-								["Crit"] = {
-									["max"] = 26553,
-									["min"] = 25629,
-									["count"] = 2,
-									["amount"] = 52182,
+								["Hit"] = {
+									["max"] = 6852,
+									["min"] = 6852,
+									["count"] = 1,
+									["amount"] = 6852,
 								},
 							},
-							["count"] = 2,
-							["amount"] = 52182,
+							["count"] = 1,
+							["amount"] = 6852,
 						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 19.46,
+					["TimeDamage"] = 3.63,
 					["TimeDamaging"] = {
-						["Drakos the Interrogator"] = {
+						["Razormane Hunter"] = {
 							["Details"] = {
-								["Explosive Shot (DoT)"] = {
-									["count"] = 3.56,
-								},
-								["Kill Shot"] = {
-									["count"] = 0.19,
-								},
-								["Cobra Shot"] = {
-									["count"] = 1.31,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 3.5,
-								},
-								["Lightning Strike"] = {
-									["count"] = 0.93,
-								},
-								["Auto Shot"] = {
-									["count"] = 3.11,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 5.16,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.7,
+								["Multi-Shot"] = {
+									["count"] = 0.13,
 								},
 							},
-							["amount"] = 19.46,
+							["amount"] = 0.13,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
 						},
 					},
 					["ManaGain"] = 0,
@@ -8778,17 +9992,1032 @@ RecountPerCharDB = {
 					["DispelledWho"] = {
 					},
 				},
-				["Fight3"] = {
+				["Fight6"] = {
 					["DOTs"] = {
-						["Serpent Sting (DoT)"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
 							["Details"] = {
-								["Azure Ley-Whelp"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+						["Arcane"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 24782,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+						["Physical"] = 5870,
+						["Arcane"] = 18912,
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 5870,
+								},
+							},
+							["amount"] = 5870,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Arcane Shot"] = {
+									["count"] = 18912,
+								},
+							},
+							["amount"] = 18912,
+						},
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 1.87,
+								},
+							},
+							["amount"] = 1.87,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 5.37,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 5870,
+									["min"] = 5870,
+									["count"] = 1,
+									["amount"] = 5870,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 5870,
+						},
+						["Arcane Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 18912,
+									["min"] = 18912,
+									["count"] = 1,
+									["amount"] = 18912,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 18912,
+						},
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 5.37,
+					["TimeDamaging"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 1.87,
+								},
+							},
+							["amount"] = 1.87,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["PartialResist"] = {
+						["Lightning Bolt"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Lightning Cloud"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Lightning Cloud (DoT)"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Lightning Bolt"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Lightning Cloud"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Lightning Cloud (DoT)"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["Dispelled"] = 0,
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Nature"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 0,
+								},
+								["Tick"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["WhoDamaged"] = {
+						["Kolkar Stormseer"] = {
+							["Details"] = {
+								["Lightning Cloud (DoT)"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["ElementTaken"] = {
+						["Nature"] = 0,
+					},
+					["DamageTaken"] = 0,
+					["WhoDispelled"] = {
+						["Bestheal"] = {
+							["Details"] = {
+								["Power Word: Fortitude (Dispel Magic)"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+				},
+				["Fight10"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["HOTs"] = {
+					},
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 13888,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialAbsorb"] = {
+					},
+					["RageGain"] = 0,
+					["FAttacks"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["ElementDone"] = {
+						["Physical"] = 13888,
+					},
+					["CCBroken"] = {
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["Dispelled"] = 0,
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["RageGained"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["CCBreak"] = 0,
+					["EnergyGain"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+					},
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Heals"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["RunicPowerGained"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 13888,
+									["min"] = 13888,
+									["count"] = 1,
+									["amount"] = 13888,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 13888,
+						},
+					},
+					["HealingTaken"] = 0,
+					["DamagedWho"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 13888,
+								},
+							},
+							["amount"] = 13888,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight9"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 942,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 71,
+								},
+								["Hit"] = {
+									["count"] = 261,
+								},
+								["Dodge"] = {
+									["count"] = 12,
+								},
+								["Parry"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 349,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
 									["count"] = 3,
 								},
 							},
 							["amount"] = 3,
 						},
 					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["HOTs"] = {
+					},
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 929,
+						["Physical"] = 13,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 27317,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 349,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 349,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["RageGain"] = 0,
+					["FAttacks"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["ElementDone"] = {
+						["Physical"] = 27317,
+					},
+					["CCBroken"] = {
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 3,
+						},
+					},
+					["Dispelled"] = 0,
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 66,
+								},
+							},
+							["amount"] = 66,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 248,
+								},
+							},
+							["amount"] = 248,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 615,
+								},
+								["Shoot"] = {
+									["count"] = 13,
+								},
+							},
+							["amount"] = 628,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["RageGained"] = {
+					},
+					["ActiveTime"] = 9.69,
+					["CCBreak"] = 0,
+					["EnergyGain"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 349,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 349,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 3,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 0,
+						},
+					},
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 2.69,
+								},
+							},
+							["amount"] = 2.69,
+						},
+					},
+					["Heals"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["RunicPowerGained"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 14602,
+									["min"] = 14602,
+									["count"] = 1,
+									["amount"] = 14602,
+								},
+								["Hit"] = {
+									["max"] = 6608,
+									["min"] = 6107,
+									["count"] = 2,
+									["amount"] = 12715,
+								},
+							},
+							["count"] = 3,
+							["amount"] = 27317,
+						},
+					},
+					["HealingTaken"] = 0,
+					["DamagedWho"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6608,
+								},
+							},
+							["amount"] = 6608,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 14602,
+								},
+							},
+							["amount"] = 14602,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 6107,
+								},
+							},
+							["amount"] = 6107,
+						},
+					},
+					["TimeDamage"] = 9.69,
+					["TimeDamaging"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 2.69,
+								},
+							},
+							["amount"] = 2.69,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight21"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 26,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+								["Hit"] = {
+									["count"] = 8,
+								},
+							},
+							["amount"] = 12,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 26,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Physical"] = 30412,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 15550,
+								},
+							},
+							["amount"] = 15550,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 14862,
+								},
+							},
+							["amount"] = 14862,
+						},
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 8,
+								},
+							},
+							["amount"] = 8,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 18,
+								},
+							},
+							["amount"] = 18,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 12,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 12,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Multi-Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 15550,
+									["min"] = 14862,
+									["count"] = 2,
+									["amount"] = 30412,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 30412,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 30412,
+					["DispelledWho"] = {
+					},
+				},
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
 					["ElementDoneResist"] = {
 					},
 					["Ressed"] = 0,
@@ -8803,46 +11032,21 @@ RecountPerCharDB = {
 						["Physical"] = {
 							["Details"] = {
 								["Crit"] = {
-									["count"] = 4,
-								},
-								["Hit"] = {
-									["count"] = 5,
-								},
-							},
-							["amount"] = 9,
-						},
-						["Nature"] = {
-							["Details"] = {
-								["Tick"] = {
-									["count"] = 1,
-								},
-								["Crit"] = {
 									["count"] = 1,
 								},
 								["Hit"] = {
-									["count"] = 2,
+									["count"] = 1,
 								},
 							},
-							["amount"] = 4,
-						},
-						["Arcane"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-								["Hit"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 5,
+							["amount"] = 2,
 						},
 					},
 					["ElementTakenAbsorb"] = {
 					},
 					["ElementTaken"] = {
 					},
-					["DOT_Time"] = 3,
-					["Damage"] = 185638,
+					["DOT_Time"] = 0,
+					["Damage"] = 18611,
 					["ElementTakenBlock"] = {
 					},
 					["TimeHeal"] = 0,
@@ -8858,63 +11062,26 @@ RecountPerCharDB = {
 					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDone"] = {
-						["Physical"] = 86052,
-						["Nature"] = 28029,
-						["Arcane"] = 71557,
+						["Physical"] = 18611,
 					},
 					["PartialAbsorb"] = {
 					},
 					["DamagedWho"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Hunter"] = {
 							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 11936,
-								},
-								["Lightning Strike"] = {
-									["count"] = 20065,
-								},
 								["Multi-Shot"] = {
-									["count"] = 13681,
-								},
-								["Arcane Shot"] = {
-									["count"] = 10271,
+									["count"] = 6852,
 								},
 							},
-							["amount"] = 55953,
+							["amount"] = 6852,
 						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 9945,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 15352,
-								},
-								["Auto Shot"] = {
-									["count"] = 10733,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 2732,
-								},
-								["Multi-Shot"] = {
-									["count"] = 12757,
-								},
-								["Arcane Shot"] = {
-									["count"] = 30913,
-								},
-							},
-							["amount"] = 82432,
-						},
-						["Azure Inquisitor"] = {
+						["Razormane Wolf <Razormane Hunter>"] = {
 							["Details"] = {
 								["Auto Shot"] = {
-									["count"] = 16880,
-								},
-								["Arcane Shot"] = {
-									["count"] = 30373,
+									["count"] = 11759,
 								},
 							},
-							["amount"] = 47253,
+							["amount"] = 11759,
 						},
 					},
 					["PartialBlock"] = {
@@ -8922,14 +11089,6 @@ RecountPerCharDB = {
 					["WhoDamaged"] = {
 					},
 					["EnergyGainedFrom"] = {
-						["Pezzer"] = {
-							["Details"] = {
-								["Energize"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
 					["PartialResist"] = {
 					},
@@ -8950,63 +11109,28 @@ RecountPerCharDB = {
 					},
 					["HealedWho"] = {
 					},
-					["EnergyGain"] = 18,
+					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
 					["FDamage"] = 0,
 					["Interrupts"] = 0,
 					["Overhealing"] = 0,
 					["TimeSpent"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.13,
+								},
+							},
+							["amount"] = 0.13,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
 							["Details"] = {
 								["Auto Shot"] = {
 									["count"] = 3.5,
 								},
-								["Lightning Strike"] = {
-									["count"] = 0.33,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0,
-								},
-								["Arcane Shot"] = {
-									["count"] = 0.18,
-								},
 							},
-							["amount"] = 4.01,
-						},
-						["Azure Ley-Whelp"] = {
-							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 0.1,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.21,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.48,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 3.32,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.61,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.93,
-								},
-							},
-							["amount"] = 10.65,
-						},
-						["Azure Inquisitor"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.21,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.63,
-								},
-							},
-							["amount"] = 4.840000000000001,
+							["amount"] = 3.5,
 						},
 					},
 					["WhoDispelled"] = {
@@ -9019,185 +11143,957 @@ RecountPerCharDB = {
 					["WhoHealed"] = {
 					},
 					["EnergyGained"] = {
-						["Energize"] = {
-							["Details"] = {
-								["Pezzer"] = {
-									["count"] = 18,
-								},
-							},
-							["amount"] = 18,
-						},
 					},
-					["ActiveTime"] = 19.5,
+					["ActiveTime"] = 3.63,
 					["Healing"] = 0,
 					["FDamagedWho"] = {
 					},
 					["Dispelled"] = 0,
 					["Attacks"] = {
-						["Serpent Sting (DoT)"] = {
-							["Details"] = {
-								["Tick"] = {
-									["max"] = 2732,
-									["min"] = 2732,
-									["count"] = 1,
-									["amount"] = 2732,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 2732,
-						},
-						["Cobra Shot"] = {
-							["Details"] = {
-								["Hit"] = {
-									["max"] = 9945,
-									["min"] = 9945,
-									["count"] = 1,
-									["amount"] = 9945,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 9945,
-						},
-						["Improved Serpent Sting"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11626,
-									["min"] = 11626,
-									["count"] = 1,
-									["amount"] = 11626,
-								},
-								["Hit"] = {
-									["max"] = 3726,
-									["min"] = 3726,
-									["count"] = 1,
-									["amount"] = 3726,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 15352,
-						},
-						["Lightning Strike"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 20065,
-									["min"] = 20065,
-									["count"] = 1,
-									["amount"] = 20065,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 20065,
-						},
 						["Auto Shot"] = {
 							["Details"] = {
 								["Crit"] = {
-									["max"] = 11936,
-									["min"] = 11048,
-									["count"] = 2,
-									["amount"] = 22984,
-								},
-								["Hit"] = {
-									["max"] = 5872,
-									["min"] = 4861,
-									["count"] = 3,
-									["amount"] = 16565,
+									["max"] = 11759,
+									["min"] = 11759,
+									["count"] = 1,
+									["amount"] = 11759,
 								},
 							},
-							["count"] = 5,
-							["amount"] = 39549,
+							["count"] = 1,
+							["amount"] = 11759,
 						},
 						["Multi-Shot"] = {
 							["Details"] = {
-								["Crit"] = {
-									["max"] = 13681,
-									["min"] = 13681,
+								["Hit"] = {
+									["max"] = 6852,
+									["min"] = 6852,
 									["count"] = 1,
-									["amount"] = 13681,
-								},
-								["Hit"] = {
-									["max"] = 6595,
-									["min"] = 6162,
-									["count"] = 2,
-									["amount"] = 12757,
+									["amount"] = 6852,
 								},
 							},
-							["count"] = 3,
-							["amount"] = 26438,
-						},
-						["Arcane Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 21067,
-									["min"] = 20281,
-									["count"] = 2,
-									["amount"] = 41348,
-								},
-								["Hit"] = {
-									["max"] = 10271,
-									["min"] = 9846,
-									["count"] = 3,
-									["amount"] = 30209,
-								},
-							},
-							["count"] = 5,
-							["amount"] = 71557,
+							["count"] = 1,
+							["amount"] = 6852,
 						},
 					},
 					["HealingTaken"] = 0,
 					["RageGain"] = 0,
-					["TimeDamage"] = 19.5,
+					["TimeDamage"] = 3.63,
 					["TimeDamaging"] = {
-						["Azure Spellbinder"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Multi-Shot"] = {
+									["count"] = 0.13,
+								},
+							},
+							["amount"] = 0.13,
+						},
+						["Razormane Wolf <Razormane Hunter>"] = {
 							["Details"] = {
 								["Auto Shot"] = {
 									["count"] = 3.5,
 								},
-								["Lightning Strike"] = {
-									["count"] = 0.33,
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["Fight16"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 24,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Dodge"] = {
+									["count"] = 1,
 								},
-								["Multi-Shot"] = {
+								["Hit"] = {
+									["count"] = 5,
+								},
+							},
+							["amount"] = 6,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 24,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+						["Physical"] = 0,
+						["Arcane"] = 9368,
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
 									["count"] = 0,
 								},
-								["Arcane Shot"] = {
-									["count"] = 0.18,
-								},
 							},
-							["amount"] = 4.01,
+							["amount"] = 0,
 						},
-						["Azure Ley-Whelp"] = {
+						["Razormane Frenzy"] = {
 							["Details"] = {
-								["Cobra Shot"] = {
-									["count"] = 0.1,
-								},
-								["Improved Serpent Sting"] = {
-									["count"] = 0.21,
-								},
-								["Auto Shot"] = {
-									["count"] = 4.48,
-								},
-								["Serpent Sting (DoT)"] = {
-									["count"] = 3.32,
-								},
-								["Multi-Shot"] = {
-									["count"] = 0.61,
-								},
 								["Arcane Shot"] = {
-									["count"] = 1.93,
+									["count"] = 9368,
 								},
 							},
-							["amount"] = 10.65,
+							["amount"] = 9368,
 						},
-						["Azure Inquisitor"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 24,
+								},
+							},
+							["amount"] = 24,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 6,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 6,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 3.5,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+						["Razormane Geomancer"] = {
 							["Details"] = {
 								["Auto Shot"] = {
-									["count"] = 3.21,
-								},
-								["Arcane Shot"] = {
-									["count"] = 1.63,
+									["count"] = 0,
 								},
 							},
-							["amount"] = 4.840000000000001,
+							["amount"] = 0,
 						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 6,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 6,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+						["Arcane Shot"] = {
+							["Details"] = {
+								["Hit"] = {
+									["max"] = 9368,
+									["min"] = 9368,
+									["count"] = 1,
+									["amount"] = 9368,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 9368,
+						},
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Arcane"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["TimeDamaging"] = {
+						["Razormane Geomancer"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+						["Razormane Frenzy"] = {
+							["Details"] = {
+								["Arcane Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 9368,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight8"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 36,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Parry"] = {
+									["count"] = 2,
+								},
+								["Dodge"] = {
+									["count"] = 3,
+								},
+								["Hit"] = {
+									["count"] = 9,
+								},
+								["Miss"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 17,
+						},
+						["Physical"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["HOTs"] = {
+					},
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Melee"] = 32,
+						["Physical"] = 4,
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 17,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 17,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["RageGain"] = 0,
+					["FAttacks"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["ElementDone"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementHitsDone"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoDamaged"] = {
+						["Razormane Hunter"] = {
+							["Details"] = {
+								["Shoot"] = {
+									["count"] = 4,
+								},
+								["Melee"] = {
+									["count"] = 22,
+								},
+							},
+							["amount"] = 26,
+						},
+						["Razormane Wolf"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 10,
+								},
+							},
+							["amount"] = 10,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["RageGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["CCBreak"] = 0,
+					["EnergyGain"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 17,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 17,
+							["amount"] = 0,
+						},
+						["Shoot"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 0,
+						},
+					},
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["FDamage"] = 0,
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["RunicPowerGained"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["DamagedWho"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+			},
+			["Owner"] = false,
+			["Pet"] = {
+				"Âssface <Pezzer>", -- [1]
+			},
+			["NextEventNum"] = 47,
+			["LastEventHealthNum"] = {
+				99.98532717074505, -- [1]
+				99.98532717074505, -- [2]
+				99.98532717074505, -- [3]
+				99.98532717074505, -- [4]
+				99.98399327717641, -- [5]
+				99.98399327717641, -- [6]
+				99.98399327717641, -- [7]
+				99.98399327717641, -- [8]
+				99.98399327717641, -- [9]
+				99.98399327717641, -- [10]
+				99.98265938360778, -- [11]
+				99.98265938360778, -- [12]
+				99.98265938360778, -- [13]
+				99.98265938360778, -- [14]
+				99.98265938360778, -- [15]
+				99.98132549003915, -- [16]
+				99.98132549003915, -- [17]
+				99.98132549003915, -- [18]
+				99.98132549003915, -- [19]
+				99.98132549003915, -- [20]
+				99.98132549003915, -- [21]
+				99.97265518184304, -- [22]
+				99.97265518184304, -- [23]
+				99.97265518184304, -- [24]
+				99.97265518184304, -- [25]
+				99.97265518184304, -- [26]
+				99.97265518184304, -- [27]
+				99.97265518184304, -- [28]
+				99.96932044792146, -- [29]
+				99.96932044792146, -- [30]
+				99.96932044792146, -- [31]
+				99.96932044792146, -- [32]
+				99.96932044792146, -- [33]
+				99.96932044792146, -- [34]
+				99.96932044792146, -- [35]
+				99.96598571399988, -- [36]
+				99.96598571399988, -- [37]
+				99.96598571399988, -- [38]
+				99.96598571399988, -- [39]
+				99.96598571399988, -- [40]
+				99.96598571399988, -- [41]
+				99.96265098007829, -- [42]
+				99.96265098007829, -- [43]
+				99.96265098007829, -- [44]
+				100, -- [45]
+				100, -- [46]
+				99.98932885145095, -- [47]
+				99.98532717074505, -- [48]
+				99.98532717074505, -- [49]
+				99.98532717074505, -- [50]
+			},
+			["LastEvents"] = {
+				"Razormane Hunter Melee Pezzer Miss", -- [1]
+				"Razormane Geomancer Fireball Pezzer Miss (Fire)", -- [2]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Hit -2 (Physical)", -- [3]
+				"Razormane Hunter Melee Pezzer Miss", -- [4]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Parry", -- [5]
+				"Razormane Hunter Melee Pezzer Parry", -- [6]
+				"Razormane Geomancer Fireball Pezzer Miss (Fire)", -- [7]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Hit -2 (Physical)", -- [8]
+				"Razormane Hunter Melee Pezzer Parry", -- [9]
+				"Razormane Geomancer Melee Pezzer Parry", -- [10]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Miss", -- [11]
+				"Razormane Hunter Melee Pezzer Miss", -- [12]
+				"Razormane Geomancer Melee Pezzer Dodge", -- [13]
+				"Razormane Hunter Melee Pezzer Miss", -- [14]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Hit -2 (Physical)", -- [15]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Miss", -- [16]
+				"Razormane Hunter Melee Pezzer Parry", -- [17]
+				"Razormane Geomancer Fireball Pezzer Miss (Fire)", -- [18]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Hit -3 (Physical)", -- [19]
+				"Razormane Hunter Melee Pezzer Hit -4 (Physical)", -- [20]
+				"Razormane Geomancer Melee Pezzer Hit -6 (Physical)", -- [21]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Dodge", -- [22]
+				"Razormane Hunter Melee Pezzer Dodge", -- [23]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Dodge", -- [24]
+				"Razormane Hunter Melee Pezzer Parry", -- [25]
+				"Razormane Geomancer Fireball Pezzer Miss (Fire)", -- [26]
+				"Razormane Hunter Melee Pezzer Hit -5 (Physical)", -- [27]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Dodge", -- [28]
+				"Razormane Geomancer Melee Pezzer Dodge", -- [29]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Parry", -- [30]
+				"Razormane Hunter Melee Pezzer Parry", -- [31]
+				"Razormane Geomancer Melee Pezzer Parry", -- [32]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Miss", -- [33]
+				"Razormane Hunter Melee Pezzer Hit -5 (Physical)", -- [34]
+				"Razormane Geomancer Melee Pezzer Dodge", -- [35]
+				"Razormane Hunter Melee Pezzer Dodge", -- [36]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Dodge", -- [37]
+				"Razormane Geomancer Melee Pezzer Miss", -- [38]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Miss", -- [39]
+				"Razormane Hunter Melee Pezzer Dodge", -- [40]
+				"Razormane Geomancer Melee Pezzer Hit -5 (Physical)", -- [41]
+				"Pezzer Auto Shot Razormane Hunter Hit -6705 (Physical)", -- [42]
+				"Pezzer Multi-Shot Razormane Geomancer Hit -8135 (Physical)", -- [43]
+				"Pezzer Multi-Shot Razormane Wolf <Razormane Hunter> Crit -14212 (Physical)", -- [44]
+				"Pezzer Auto Shot Razormane Wolf <Razormane Hunter> Crit -11759 (Physical)", -- [45]
+				"Pezzer Multi-Shot Razormane Hunter Hit -6852 (Physical)", -- [46]
+				"Razormane Hunter Melee Pezzer Hit -4 (Physical)", -- [47]
+				"Razormane Hunter Melee Pezzer Parry", -- [48]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Dodge", -- [49]
+				"Razormane Wolf <Razormane Hunter> Melee Pezzer Miss", -- [50]
+			},
+			["Name"] = "Pezzer",
+			["TimeLast"] = {
+				["TimeHeal"] = 1333835698,
+				["Dispelled"] = 1333834169,
+				["OVERALL"] = 1333843693,
+				["DamageTaken"] = 1333841980,
+				["EnergyGain"] = 1333839752,
+				["HOT_Time"] = 1333835706,
+				["TimeDamage"] = 1333843693,
+				["Healing"] = 1333835698,
+				["ActiveTime"] = 1333843693,
+				["Overhealing"] = 1333835706,
+				["Damage"] = 1333843693,
+			},
+			["LastEventIncoming"] = {
+				true, -- [1]
+				true, -- [2]
+				true, -- [3]
+				true, -- [4]
+				true, -- [5]
+				true, -- [6]
+				true, -- [7]
+				true, -- [8]
+				true, -- [9]
+				true, -- [10]
+				true, -- [11]
+				true, -- [12]
+				true, -- [13]
+				true, -- [14]
+				true, -- [15]
+				true, -- [16]
+				true, -- [17]
+				true, -- [18]
+				true, -- [19]
+				true, -- [20]
+				true, -- [21]
+				true, -- [22]
+				true, -- [23]
+				true, -- [24]
+				true, -- [25]
+				true, -- [26]
+				true, -- [27]
+				true, -- [28]
+				true, -- [29]
+				true, -- [30]
+				true, -- [31]
+				true, -- [32]
+				true, -- [33]
+				true, -- [34]
+				true, -- [35]
+				true, -- [36]
+				true, -- [37]
+				true, -- [38]
+				true, -- [39]
+				true, -- [40]
+				true, -- [41]
+				false, -- [42]
+				false, -- [43]
+				false, -- [44]
+				false, -- [45]
+				false, -- [46]
+				true, -- [47]
+				true, -- [48]
+				true, -- [49]
+				true, -- [50]
+			},
+			["LastDamageTaken"] = 5,
+			["LastEventTimes"] = {
+				287087.927, -- [1]
+				287088.206, -- [2]
+				287089.788, -- [3]
+				287089.788, -- [4]
+				287091.747, -- [5]
+				287091.747, -- [6]
+				287093.116, -- [7]
+				287093.96, -- [8]
+				287093.96, -- [9]
+				287093.979, -- [10]
+				287095.78, -- [11]
+				287095.78, -- [12]
+				287095.911, -- [13]
+				287097.815, -- [14]
+				287097.815, -- [15]
+				287100.09, -- [16]
+				287100.09, -- [17]
+				287101.401, -- [18]
+				287101.829, -- [19]
+				287101.829, -- [20]
+				287102.405, -- [21]
+				287104.1, -- [22]
+				287104.1, -- [23]
+				287105.859, -- [24]
+				287105.859, -- [25]
+				287107.549, -- [26]
+				287108.093, -- [27]
+				287108.093, -- [28]
+				287108.42, -- [29]
+				287109.936, -- [30]
+				287109.936, -- [31]
+				287110.425, -- [32]
+				287111.997, -- [33]
+				287111.997, -- [34]
+				287112.397, -- [35]
+				287113.928, -- [36]
+				287113.928, -- [37]
+				287114.529, -- [38]
+				287116.01, -- [39]
+				287116.01, -- [40]
+				287116.437, -- [41]
+				287117.611, -- [42]
+				287119.14, -- [43]
+				287119.14, -- [44]
+				288829.303, -- [45]
+				288829.433, -- [46]
+				287083.816, -- [47]
+				287085.755, -- [48]
+				287085.755, -- [49]
+				287087.927, -- [50]
+			},
+			["LastAbility"] = 288829.433,
+		},
+		["Razormane Hunter"] = {
+			["GUID"] = "0xF1300CC1000E94AC",
+			["type"] = "Nontrivial",
+			["FightsSaved"] = 18,
+			["GuardianReverseGUIDs"] = {
+				["Razormane Wolf"] = {
+					["LatestGuardian"] = 6,
+					["GUIDs"] = {
+						"0xF1300F63000E9698", -- [1]
+						"0xF1300F63000E998B", -- [2]
+						"0xF1300F63000EB57A", -- [3]
+						"0xF1300F63000EBACE", -- [4]
+						"0xF1300F63000EBF96", -- [5]
+						"0xF1300F63000EC2DD", -- [6]
+						[0] = "0xF1300F63000E95B6",
+					},
+				},
+			},
+			["Owner"] = false,
+			["enClass"] = "MOB",
+			["LastAbility"] = 286409.996,
+			["Name"] = "Razormane Hunter",
+			["UnitLockout"] = 1333835583,
+			["Pet"] = {
+				"Razormane Wolf <Razormane Hunter>", -- [1]
+			},
+			["level"] = 1,
+			["Fights"] = {
+				["LastFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["ManaGain"] = 0,
+					["HOTs"] = {
+					},
+					["DispelledWho"] = {
+					},
+				},
+				["CurrentFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ElementTaken"] = {
+					},
+					["DOT_Time"] = 0,
+					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDone"] = {
+					},
+					["PartialAbsorb"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["PartialBlock"] = {
+					},
+					["WhoDamaged"] = {
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["PartialResist"] = {
+					},
+					["CCBroken"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["OverHeals"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["CCBreak"] = 0,
+					["RageGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["Overhealing"] = 0,
+					["TimeSpent"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["InterruptData"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Heals"] = {
+					},
+					["WhoHealed"] = {
+					},
+					["EnergyGained"] = {
+					},
+					["ActiveTime"] = 0,
+					["Healing"] = 0,
+					["FDamagedWho"] = {
+					},
+					["Dispelled"] = 0,
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["RageGain"] = 0,
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
 					},
 					["ManaGain"] = 0,
 					["HOTs"] = {
@@ -9206,77 +12102,219 @@ RecountPerCharDB = {
 					},
 				},
 			},
-			["UnitLockout"] = 1333780294,
-			["LastActive"] = 1333780441,
+			["LastFightIn"] = 8,
 		},
 	},
-	["FightNum"] = 8,
+	["FightNum"] = 26,
 	["CombatTimes"] = {
 		{
-			1333780294, -- [1]
-			1333780312, -- [2]
-			"02:31:34", -- [3]
-			"02:31:52", -- [4]
-			"Azure Ley-Whelp", -- [5]
+			1333835020, -- [1]
+			1333835037, -- [2]
+			"17:43:40", -- [3]
+			"17:43:57", -- [4]
+			"Kolkar Stormseer", -- [5]
 		}, -- [1]
 		{
-			1333780331, -- [1]
-			1333780335, -- [2]
-			"02:32:11", -- [3]
-			"02:32:15", -- [4]
-			"Azure Inquisitor", -- [5]
+			1333835085, -- [1]
+			1333835109, -- [2]
+			"17:44:46", -- [3]
+			"17:45:09", -- [4]
+			"Sunscale Screecher", -- [5]
 		}, -- [2]
 		{
-			1333780340, -- [1]
-			1333780348, -- [2]
-			"02:32:20", -- [3]
-			"02:32:28", -- [4]
-			"Azure Spellbinder", -- [5]
+			1333835109, -- [1]
+			1333835120, -- [2]
+			"17:45:10", -- [3]
+			"17:45:20", -- [4]
+			"Sunscale Screecher", -- [5]
 		}, -- [3]
 		{
-			1333780353, -- [1]
-			1333780360, -- [2]
-			"02:32:33", -- [3]
-			"02:32:40", -- [4]
-			"Azure Spellbinder", -- [5]
+			1333835156, -- [1]
+			1333835201, -- [2]
+			"17:45:57", -- [3]
+			"17:46:41", -- [4]
+			"Razormane Geomancer", -- [5]
 		}, -- [4]
 		{
-			1333780361, -- [1]
-			1333780372, -- [2]
-			"02:32:41", -- [3]
-			"02:32:52", -- [4]
-			"Azure Ley-Whelp", -- [5]
+			1333835232, -- [1]
+			1333835241, -- [2]
+			"17:47:13", -- [3]
+			"17:47:21", -- [4]
+			"Razormane Hunter", -- [5]
 		}, -- [5]
 		{
-			1333780377, -- [1]
-			1333780395, -- [2]
-			"02:32:57", -- [3]
-			"02:33:15", -- [4]
-			"Azure Spellbinder", -- [5]
+			1333835253, -- [1]
+			1333835266, -- [2]
+			"17:47:33", -- [3]
+			"17:47:46", -- [4]
+			"Razormane Hunter", -- [5]
 		}, -- [6]
 		{
-			1333780401, -- [1]
-			1333780410, -- [2]
-			"02:33:22", -- [3]
-			"02:33:30", -- [4]
-			"Azure Spellbinder", -- [5]
+			1333835284, -- [1]
+			1333835317, -- [2]
+			"17:48:04", -- [3]
+			"17:48:37", -- [4]
+			"Razormane Hunter", -- [5]
 		}, -- [7]
 		{
-			1333780425, -- [1]
-			1333780443, -- [2]
-			"02:33:45", -- [3]
-			"02:34:03", -- [4]
-			"Drakos the Interrogator", -- [5]
+			1333835354, -- [1]
+			1333835359, -- [2]
+			"17:49:14", -- [3]
+			"17:49:19", -- [4]
+			"Razormane Hunter", -- [5]
 		}, -- [8]
+		{
+			1333835614, -- [1]
+			1333835677, -- [2]
+			"17:53:35", -- [3]
+			"17:54:37", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [9]
+		{
+			1333835692, -- [1]
+			1333835809, -- [2]
+			"17:54:53", -- [3]
+			"17:56:49", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [10]
+		{
+			1333835857, -- [1]
+			1333835870, -- [2]
+			"17:57:37", -- [3]
+			"17:57:50", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [11]
+		{
+			1333835886, -- [1]
+			1333835894, -- [2]
+			"17:58:07", -- [3]
+			"17:58:14", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [12]
+		{
+			1333835901, -- [1]
+			1333835908, -- [2]
+			"17:58:22", -- [3]
+			"17:58:28", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [13]
+		{
+			1333835925, -- [1]
+			1333835945, -- [2]
+			"17:58:46", -- [3]
+			"17:59:05", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [14]
+		{
+			1333839742, -- [1]
+			1333839752, -- [2]
+			"19:02:23", -- [3]
+			"19:02:32", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [15]
+		{
+			1333839890, -- [1]
+			1333839898, -- [2]
+			"19:04:51", -- [3]
+			"19:04:58", -- [4]
+			"Razormane Hunter", -- [5]
+		}, -- [16]
+		{
+			1333840110, -- [1]
+			1333840177, -- [2]
+			"19:08:30", -- [3]
+			"19:09:37", -- [4]
+			"Razormane Geomancer", -- [5]
+		}, -- [17]
+		{
+			1333840385, -- [1]
+			1333840703, -- [2]
+			"19:13:05", -- [3]
+			"19:18:23", -- [4]
+			"Razormane Hunter", -- [5]
+		}, -- [18]
+		{
+			1333841393, -- [1]
+			1333841412, -- [2]
+			"19:29:53", -- [3]
+			"19:30:12", -- [4]
+			"Razormane Hunter", -- [5]
+		}, -- [19]
+		{
+			1333841413, -- [1]
+			1333841419, -- [2]
+			"19:30:14", -- [3]
+			"19:30:19", -- [4]
+			"Razormane Wolf", -- [5]
+		}, -- [20]
+		{
+			1333841424, -- [1]
+			1333841428, -- [2]
+			"19:30:25", -- [3]
+			"19:30:28", -- [4]
+			"Razormane Wolf", -- [5]
+		}, -- [21]
+		{
+			1333841437, -- [1]
+			1333841451, -- [2]
+			"19:30:38", -- [3]
+			"19:30:51", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [22]
+		{
+			1333841460, -- [1]
+			1333841474, -- [2]
+			"19:31:01", -- [3]
+			"19:31:14", -- [4]
+			"Razormane Frenzy", -- [5]
+		}, -- [23]
+		{
+			1333841525, -- [1]
+			1333841552, -- [2]
+			"19:32:06", -- [3]
+			"19:32:32", -- [4]
+			"Razormane Geomancer", -- [5]
+		}, -- [24]
+		{
+			1333841934, -- [1]
+			1333841985, -- [2]
+			"19:38:54", -- [3]
+			"19:39:45", -- [4]
+			"Razormane Hunter", -- [5]
+		}, -- [25]
+		{
+			1333843690, -- [1]
+			1333843695, -- [2]
+			"20:08:10", -- [3]
+			"20:08:15", -- [4]
+			"Razormane Hunter", -- [5]
+		}, -- [26]
 	},
 	["FoughtWho"] = {
-		"Drakos the Interrogator 02:33:45-02:34:03", -- [1]
-		"Azure Spellbinder 02:33:22-02:33:30", -- [2]
-		"Azure Spellbinder 02:32:57-02:33:15", -- [3]
-		"Azure Ley-Whelp 02:32:41-02:32:52", -- [4]
-		"Azure Spellbinder 02:32:33-02:32:40", -- [5]
-		"Azure Spellbinder 02:32:20-02:32:28", -- [6]
-		"Azure Inquisitor 02:32:11-02:32:15", -- [7]
-		"Azure Ley-Whelp 02:31:34-02:31:52", -- [8]
+		"Razormane Hunter 20:08:10-20:08:15", -- [1]
+		"Razormane Hunter 19:38:54-19:39:45", -- [2]
+		"Razormane Geomancer 19:32:06-19:32:32", -- [3]
+		"Razormane Frenzy 19:31:01-19:31:14", -- [4]
+		"Razormane Frenzy 19:30:38-19:30:51", -- [5]
+		"Razormane Wolf 19:30:25-19:30:28", -- [6]
+		"Razormane Wolf 19:30:14-19:30:19", -- [7]
+		"Razormane Hunter 19:29:53-19:30:12", -- [8]
+		"Razormane Hunter 19:13:05-19:18:23", -- [9]
+		"Razormane Geomancer 19:08:30-19:09:37", -- [10]
+		"Razormane Hunter 19:04:51-19:04:58", -- [11]
+		"Razormane Frenzy 19:02:23-19:02:32", -- [12]
+		"Razormane Frenzy 17:58:46-17:59:05", -- [13]
+		"Razormane Frenzy 17:58:22-17:58:28", -- [14]
+		"Razormane Frenzy 17:58:07-17:58:14", -- [15]
+		"Razormane Frenzy 17:57:37-17:57:50", -- [16]
+		"Razormane Frenzy 17:54:53-17:56:49", -- [17]
+		"Razormane Frenzy 17:53:35-17:54:37", -- [18]
+		"Razormane Hunter 17:49:14-17:49:19", -- [19]
+		"Razormane Hunter 17:48:04-17:48:37", -- [20]
+		"Razormane Hunter 17:47:33-17:47:46", -- [21]
+		"Razormane Hunter 17:47:13-17:47:21", -- [22]
+		"Razormane Geomancer 17:45:57-17:46:41", -- [23]
+		"Sunscale Screecher 17:45:10-17:45:20", -- [24]
+		"Sunscale Screecher 17:44:46-17:45:09", -- [25]
 	},
 }

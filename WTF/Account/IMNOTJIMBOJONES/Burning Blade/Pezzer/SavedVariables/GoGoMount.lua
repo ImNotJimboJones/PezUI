@@ -27,6 +27,20 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
+		["Pit of Saron"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["The Forge of Souls"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 602,
+		},
 		["Dustwallow Marsh"] = {
 			["Preferred"] = {
 			},
@@ -48,13 +62,6 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
-		["Crystalsong Forest"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 510,
-		},
 		["Trial of the Crusader"] = {
 			["Preferred"] = {
 			},
@@ -62,12 +69,33 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Obsidian Sanctum"] = {
+		["Crystalsong Forest"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 510,
+		},
+		["Hyjal Summit"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["The Eye of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
+		},
+		["Uldum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 720,
 		},
 		["Borean Tundra"] = {
 			["Preferred"] = {
@@ -83,12 +111,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 4,
 		},
+		["Northern Barrens"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 11,
+		},
 		["Icecrown Citadel"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 492,
 		},
 		["Onyxia's Lair"] = {
 			["Preferred"] = {
@@ -111,14 +146,14 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Eye of Eternity"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 486,
+			["ZoneID"] = 488,
 		},
-		["Hyjal Summit"] = {
+		["Tol Barad"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -127,16 +162,16 @@ GoGo_Prefs = {
 		},
 	},
 	["AspectPack"] = false,
-	["GlobalExclude"] = {
+	["UnknownMounts"] = {
 	},
 	["version"] = "4.3.4",
-	["DruidFormNotRandomize"] = false,
+	["GlobalExclude"] = {
+	},
 	["GlobalPrefMounts"] = {
 	},
 	["DisableWaterFlight"] = 1,
 	["PaladinUseCrusaderAura"] = false,
-	["UnknownMounts"] = {
-	},
+	["DruidFormNotRandomize"] = false,
 }
 GoGo_DebugLog = {
 }

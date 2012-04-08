@@ -1,10 +1,10 @@
 
 MogItDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["version"] = "2.2.1",
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
