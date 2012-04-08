@@ -1,10 +1,5 @@
 
 GoGo_Prefs = {
-	["DruidDisableInCombat"] = false,
-	["DruidClickForm"] = true,
-	["DruidFlightForm"] = false,
-	["RemoveBuffs"] = 1,
-	["autodismount"] = 1,
 	["Zones"] = {
 		["Icecrown"] = {
 			["Preferred"] = {
@@ -41,6 +36,13 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 602,
 		},
+		["Mulgore"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 823,
+		},
 		["Dustwallow Marsh"] = {
 			["Preferred"] = {
 			},
@@ -55,33 +57,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["Orgrimmar"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 321,
-		},
-		["Trial of the Crusader"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Crystalsong Forest"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 510,
-		},
 		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
+		},
+		["Orgrimmar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 321,
 		},
 		["The Eye of Eternity"] = {
 			["Preferred"] = {
@@ -90,12 +78,47 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 486,
 		},
-		["Uldum"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
+			["ZoneID"] = 13,
+		},
+		["Dalaran"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 504,
+		},
+		["Crystalsong Forest"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 510,
+		},
+		["Trial of the Crusader"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Onyxia's Lair"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["The Obsidian Sanctum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 488,
 		},
 		["Borean Tundra"] = {
 			["Preferred"] = {
@@ -118,40 +141,33 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 11,
 		},
-		["Icecrown Citadel"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 492,
-		},
-		["Onyxia's Lair"] = {
+		["Darkmoon Island"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Dalaran"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 504,
-		},
-		["The Oculus"] = {
+		["The Molten Core"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Obsidian Sanctum"] = {
+		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 720,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
 		},
 		["Tol Barad"] = {
 			["Preferred"] = {
@@ -160,18 +176,30 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
 	},
-	["AspectPack"] = false,
-	["UnknownMounts"] = {
-	},
-	["version"] = "4.3.4",
+	["DruidClickForm"] = true,
+	["DruidFlightForm"] = false,
 	["GlobalExclude"] = {
 	},
+	["DisableWaterFlight"] = 1,
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["RemoveBuffs"] = 1,
+	["version"] = "4.3.4",
+	["autodismount"] = 1,
+	["DruidFormNotRandomize"] = false,
+	["UnknownMounts"] = {
+	},
+	["PaladinUseCrusaderAura"] = false,
 	["GlobalPrefMounts"] = {
 	},
-	["DisableWaterFlight"] = 1,
-	["PaladinUseCrusaderAura"] = false,
-	["DruidFormNotRandomize"] = false,
 }
 GoGo_DebugLog = {
 }

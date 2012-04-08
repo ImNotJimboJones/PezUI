@@ -84,16 +84,16 @@ CritlinePerCharDB = {
 					[6603] = {
 						{
 							["crit"] = {
-								["target"] = "Tenebron",
+								["target"] = "Core Rager",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 11492,
+								["targetLevel"] = 62,
+								["amount"] = 12713,
 							},
 							["normal"] = {
-								["target"] = "Tenebron",
+								["target"] = "Flamewaker Healer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 5797,
+								["targetLevel"] = 60,
+								["amount"] = 5922,
 							},
 						}, -- [1]
 					},
@@ -174,16 +174,16 @@ CritlinePerCharDB = {
 					[19503] = {
 						{
 							["normal"] = {
-								["target"] = "Soulguard Reaper",
+								["target"] = "Flameguard",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 2675,
+								["targetLevel"] = 62,
+								["amount"] = 4045,
 							},
 							["crit"] = {
-								["target"] = "Spectral Warden",
+								["target"] = "Flamewaker",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 6752,
+								["targetLevel"] = 62,
+								["amount"] = 7469,
 							},
 						}, -- [1]
 					},
@@ -220,10 +220,10 @@ CritlinePerCharDB = {
 					[99621] = {
 						{
 							["normal"] = {
-								["target"] = "Necro Knight",
+								["target"] = "Flamewaker Healer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 81,
-								["amount"] = 1238,
+								["targetLevel"] = 60,
+								["amount"] = 1383,
 							},
 						}, -- [1]
 					},
@@ -252,10 +252,10 @@ CritlinePerCharDB = {
 								["amount"] = 18511,
 							},
 							["normal"] = {
-								["target"] = "Lord Jaraxxus",
+								["target"] = "Ragnaros",
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
-								["amount"] = 8644,
+								["amount"] = 8667,
 							},
 						}, -- [1]
 					},
@@ -278,16 +278,16 @@ CritlinePerCharDB = {
 					[2643] = {
 						{
 							["crit"] = {
-								["target"] = "Nerubian Burrower",
+								["target"] = "Core Rager",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 19779,
+								["targetLevel"] = 62,
+								["amount"] = 20256,
 							},
 							["normal"] = {
-								["target"] = "Wrathbone Laborer",
+								["target"] = "Lava Elemental",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 9515,
+								["targetLevel"] = 62,
+								["amount"] = 10395,
 							},
 						}, -- [1]
 					},

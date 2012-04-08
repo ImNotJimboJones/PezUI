@@ -13,7 +13,7 @@ BrokerToolBoxDB = {
 				},
 				["money"] = {
 					["UnitFactionGroup"] = "Horde",
-					["money"] = 630576743,
+					["money"] = 631716470,
 					["showtotal"] = true,
 				},
 				["token"] = {

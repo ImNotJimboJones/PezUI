@@ -69,7 +69,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_MAELSTROM_WEAPON"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_NIGHTFALL"] = {
+				["MSBT_TRIGGER_PVP_TRINKET"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_KILL_SHOT"] = {
@@ -129,7 +129,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_REVENGE"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_PVP_TRINKET"] = {
+				["MSBT_TRIGGER_NIGHTFALL"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_BRAIN_FREEZE"] = {
@@ -281,7 +281,7 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_BLOCK"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["PET_INCOMING_SPELL_ABSORB"] = {
+				["INCOMING_DAMAGE"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DOT_CRIT"] = {
@@ -317,7 +317,7 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_EXPERIENCE_GAIN"] = {
 					["disabled"] = false,
 				},
-				["INCOMING_SPELL_DOT"] = {
+				["INCOMING_MISS"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_BUFF"] = {
@@ -329,8 +329,8 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_SPELL_INTERRUPT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_DEBUFF_STACK"] = {
+					["disabled"] = true,
 				},
 				["NOTIFICATION_ITEM_COOLDOWN"] = {
 					["disabled"] = true,
@@ -338,8 +338,8 @@ MSBTProfiles_SavedVars = {
 				["INCOMING_SPELL_DEFLECT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["NOTIFICATION_DEBUFF_STACK"] = {
-					["disabled"] = true,
+				["INCOMING_SPELL_INTERRUPT"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
@@ -350,7 +350,7 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_HOLY_POWER_FULL"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_MISS"] = {
+				["INCOMING_SPELL_DOT"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DAMAGE_CRIT"] = {
@@ -374,7 +374,7 @@ MSBTProfiles_SavedVars = {
 				["INCOMING_SPELL_RESIST"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_DAMAGE"] = {
+				["PET_INCOMING_SPELL_ABSORB"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["PET_INCOMING_HOT"] = {
@@ -399,52 +399,52 @@ MSBTProfiles_SavedVars = {
 					["disabled"] = true,
 					["behavior"] = "MSBT_NORMAL",
 					["stickyDirection"] = "Up",
-					["scrollWidth"] = 100,
-					["offsetX"] = 384,
+					["scrollHeight"] = 90,
+					["offsetX"] = 390,
 					["iconAlign"] = "Right",
 					["offsetY"] = -325,
 					["animationStyle"] = "Straight",
-					["scrollHeight"] = 90,
+					["scrollWidth"] = 100,
 				},
 				["Custom2"] = {
-					["direction"] = "Down",
+					["stickyTextAlignIndex"] = 3,
 					["stickyBehavior"] = "Jiggle",
-					["scrollWidth"] = 100,
-					["name"] = "Incoming Damage",
 					["scrollHeight"] = 90,
-					["offsetX"] = 384,
+					["offsetX"] = 390,
+					["name"] = "Incoming Damage",
+					["direction"] = "Down",
 					["offsetY"] = -325,
 					["textAlignIndex"] = 3,
-					["stickyTextAlignIndex"] = 3,
+					["scrollWidth"] = 100,
 				},
 				["Outgoing"] = {
-					["stickyTextAlignIndex"] = 2,
+					["direction"] = "Up",
 					["behavior"] = "MSBT_NORMAL",
-					["scrollHeight"] = 90,
-					["stickyDirection"] = "Up",
-					["scrollWidth"] = 100,
-					["offsetX"] = 492,
 					["animationStyle"] = "Straight",
+					["stickyDirection"] = "Up",
+					["scrollHeight"] = 90,
+					["offsetX"] = 492,
+					["scrollWidth"] = 100,
 					["iconAlign"] = "Left",
 					["offsetY"] = -325,
 					["textAlignIndex"] = 3,
-					["direction"] = "Up",
+					["stickyTextAlignIndex"] = 2,
 				},
 				["Static"] = {
 					["offsetY"] = -30,
-					["disabled"] = true,
 					["offsetX"] = -400,
+					["disabled"] = true,
 				},
 				["Custom1"] = {
-					["direction"] = "Up",
+					["stickyTextAlignIndex"] = 1,
 					["stickyBehavior"] = "Jiggle",
-					["scrollWidth"] = 100,
-					["name"] = "Incoming Heals",
 					["scrollHeight"] = 90,
-					["offsetX"] = 276,
+					["offsetX"] = 288,
+					["name"] = "Incoming Heals",
+					["direction"] = "Up",
 					["offsetY"] = -325,
 					["textAlignIndex"] = 1,
-					["stickyTextAlignIndex"] = 1,
+					["scrollWidth"] = 100,
 				},
 				["Notification"] = {
 					["offsetX"] = -550,

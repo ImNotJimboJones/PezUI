@@ -21,6 +21,45 @@ Broker_WhisperWhisperDB = {
 			["flashLeft"] = true,
 			["whisperList"] = {
 				{
+					"Howdoyoudo", -- [1]
+					{
+						"|cffff0008find more ppl too", -- [1]
+						"|cffff0008ill promote u and u can invite(:", -- [2]
+						"|cffff0008nice", -- [3]
+						"|cffd2d2d2i have a bunch of guildies that will go", -- [4]
+						"|cffff00084", -- [5]
+						"|cffff00083", -- [6]
+						"|cffd2d2d2how many in the group so far?", -- [7]
+					}, -- [2]
+					false, -- [3]
+					false, -- [4]
+				}, -- [1]
+				{
+					"Zanzel", -- [1]
+					{
+						"|cffff0008hey can u invite me to guild? it's simfraya", -- [1]
+					}, -- [2]
+					false, -- [3]
+					false, -- [4]
+				}, -- [2]
+				{
+					"Kurosakki", -- [1]
+					{
+						"|cffd2d2d2nice", -- [1]
+						"|cffff0008best raiding experience ive had since playing wow", -- [2]
+						"|cffff0008use to heal 25 man sunweel n BT for Band f Brotherz on my shammy back in the day : P", -- [3]
+						"|cffd2d2d2i didnt play a hunter in bc, so idk :P", -- [4]
+						"|cffff0008i remeber ppl playing survval back in bc ", -- [5]
+						"|cffff0008n i see what u mean abut not globaling ES or waiting t shoot it ", -- [6]
+						"|cffd2d2d2its always been this good... bliz just made it easier this expansion", -- [7]
+						"|cffd2d2d2ive been SV since wrath :P", -- [8]
+						"|cffd2d2d2lol ya man", -- [9]
+						"|cffff0008surv is the shit", -- [10]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [3]
+				{
 					"Alarice", -- [1]
 					{
 						"|cffff0008meet me by the gates?", -- [1]
@@ -33,7 +72,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [4]
 				{
 					"Ezzulinzakal", -- [1]
 					{
@@ -42,7 +81,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [5]
 				{
 					"Simfraya", -- [1]
 					{
@@ -59,7 +98,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [6]
 				{
 					"Betrolled", -- [1]
 					{
@@ -69,7 +108,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [7]
 				{
 					"Necrobane", -- [1]
 					{
@@ -78,7 +117,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [5]
+				}, -- [8]
 				{
 					"Keporra", -- [1]
 					{
@@ -86,7 +125,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [6]
+				}, -- [9]
 				{
 					"Kabz", -- [1]
 					{
@@ -94,35 +133,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [7]
-				{
-					"Pezzer", -- [1]
-					{
-						"|cffd2d2d2lkjlsdjf", -- [1]
-						"|cffff0008lkjlsdjf", -- [2]
-						"|cffd2d2d2 |cffffff00|Hachievement:6110:0280000004B625CB:1:2:29:12:0:0:0:0|h[Heroic: Warlord Zon'ozz]|h|r|cffd2d2d2r", -- [3]
-						"|cffff0008 |cffffff00|Hachievement:6110:0280000004B625CB:1:2:29:12:0:0:0:0|h[Heroic: Warlord Zon'ozz]|h|r|cffff0008r", -- [4]
-					}, -- [2]
-					true, -- [3]
-					false, -- [4]
-				}, -- [8]
-				{
-					"Fríktíon", -- [1]
-					{
-						"|cffff0008yeah tell me about it", -- [1]
-						"|cffd2d2d2that sux lol", -- [2]
-						"|cffff0008was in fortune faded, and everybody kind of left because they quit doing 25m so everybody's spots went out the window", -- [3]
-						"|cffff0008yeah pretty much to raid every week", -- [4]
-						"|cffd2d2d2are you looking for a regularly scheduled gig?", -- [5]
-						"|cffd2d2d2they should be on heroics now, but they may hold you back", -- [6]
-						"|cffd2d2d2im not sure what the state of that group is", -- [7]
-						"|cffff0008ah dang", -- [8]
-						"|cffd2d2d2well... we dont need you for our main group, and our second group is sketchy at the moment", -- [9]
-						"|cffff0008397 ilvl", -- [10]
-					}, -- [2]
-					false, -- [3]
-					false, -- [4]
-				}, -- [9]
+				}, -- [10]
 			},
 			["showFrame"] = false,
 			["flashMaster"] = true,

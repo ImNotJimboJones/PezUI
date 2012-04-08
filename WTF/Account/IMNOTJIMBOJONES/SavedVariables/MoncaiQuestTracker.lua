@@ -24,7 +24,6 @@ MQTdb = {
 		["Default"] = {
 			["itemleft"] = true,
 			["verbosechat"] = false,
-			["floatfixed"] = true,
 			["float"] = true,
 			["showlevel"] = false,
 		},
