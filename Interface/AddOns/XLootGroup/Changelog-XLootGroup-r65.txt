@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r65 | dridzt | 2011-12-17 04:41:06 +0000 (Sat, 17 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/XLootGroup.toc
+
+- toc update, compatible with Hour of Twilight (4.3)
+------------------------------------------------------------------------
+r64 | dridzt | 2011-06-30 17:34:07 +0000 (Thu, 30 Jun 2011) | 1 line
+Changed paths:
+   M /trunk/XLootGroup.lua
+   M /trunk/XLootGroup.toc
+
+- Undocumented 4.2 GetItemQualityColor() change fix
+------------------------------------------------------------------------

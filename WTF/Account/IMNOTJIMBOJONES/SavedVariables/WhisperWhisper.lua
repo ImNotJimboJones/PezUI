@@ -7,30 +7,29 @@ Broker_WhisperWhisperDB = {
 		["Default"] = {
 			["flashRight"] = true,
 			["sendColor"] = {
-				["b"] = 210,
-				["g"] = 210,
 				["r"] = 210,
+				["g"] = 210,
+				["b"] = 210,
 			},
 			["flashTop"] = true,
 			["frameLock"] = true,
 			["flashOffCombat"] = false,
-			["flashBottom"] = true,
-			["flashLeft"] = true,
-			["altView"] = false,
-			["showFrame"] = false,
-			["flashMaster"] = true,
-			["flashEntireFrame"] = true,
-			["flashDuration"] = 900,
-			["recColor"] = {
-				["b"] = 8,
-				["g"] = 0,
-				["r"] = 255,
-			},
 			["frameOpts"] = {
 				["offsetx"] = -580.2666473388672,
 				["offsety"] = -78.30596923828125,
 			},
+			["flashLeft"] = true,
 			["whisperList"] = {
+				{
+					"Wickedlust", -- [1]
+					{
+						"|cffd2d2d2 |cffffff00|Hachievement:5828:0280000004B625CB:1:10:6:11:4294967295:4294967295:4294967295:4294967295|h[Glory of the Firelands Raider]|h|r|cffd2d2d2r |cffffff00|Hachievement:6169:0280000004B625CB:0:0:0:-1:16367:0:0:0|h[Glory of the Dragon Soul Raider]|h|r|cffd2d2d2r", -- [1]
+						"|cffff0008of course", -- [2]
+						"|cffd2d2d2heroic?", -- [3]
+					}, -- [2]
+					true, -- [3]
+					false, -- [4]
+				}, -- [1]
 				{
 					"Howdoyoudo", -- [1]
 					{
@@ -44,7 +43,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 				{
 					"Zanzel", -- [1]
 					{
@@ -52,7 +51,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [3]
 				{
 					"Kurosakki", -- [1]
 					{
@@ -69,7 +68,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [4]
 				{
 					"Alarice", -- [1]
 					{
@@ -83,7 +82,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [5]
 				{
 					"Ezzulinzakal", -- [1]
 					{
@@ -92,7 +91,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [5]
+				}, -- [6]
 				{
 					"Simfraya", -- [1]
 					{
@@ -109,7 +108,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [6]
+				}, -- [7]
 				{
 					"Betrolled", -- [1]
 					{
@@ -119,7 +118,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [7]
+				}, -- [8]
 				{
 					"Necrobane", -- [1]
 					{
@@ -128,7 +127,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [8]
+				}, -- [9]
 				{
 					"Keporra", -- [1]
 					{
@@ -136,16 +135,19 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [9]
-				{
-					"Kabz", -- [1]
-					{
-						"|cffd2d2d2reinv please", -- [1]
-					}, -- [2]
-					true, -- [3]
-					false, -- [4]
 				}, -- [10]
 			},
+			["showFrame"] = false,
+			["flashMaster"] = true,
+			["flashEntireFrame"] = true,
+			["flashDuration"] = 900,
+			["recColor"] = {
+				["r"] = 255,
+				["g"] = 0,
+				["b"] = 8,
+			},
+			["flashBottom"] = true,
+			["altView"] = false,
 		},
 	},
 }

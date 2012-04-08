@@ -46,8 +46,8 @@ FrameLevel: 1
 Anchor: LEFT
 X: 77
 Y: 163
-W: 128
-H: 64
+W: 399
+H: 147
 Frame: ColorPickerFrame
 FrameLevel: 4
 Anchor: LEFT
@@ -233,7 +233,7 @@ H: 42
 Frame: TitanPanelProfessionsButton
 FrameLevel: 11
 Anchor: TOPRIGHT
-X: -123
+X: -125
 Y: -3
 W: 17
 H: 16
@@ -241,9 +241,9 @@ Frame: Vd1
 FrameLevel: 2
 Anchor: BOTTOM
 X: 0
-Y: 76
-W: 75
-H: 45
+Y: -4
+W: 285
+H: 125
 Frame: Vd2
 FrameLevel: 2
 Anchor: TOPLEFT
@@ -272,6 +272,13 @@ X: 0
 Y: 0
 W: 648
 H: 420
+Frame: AnchorsAway_roll_Anchor
+FrameLevel: 1
+Anchor: LEFT
+X: 219
+Y: 151
+W: 150
+H: 20
 Frame: PlayerDebuffsMover
 FrameLevel: 1
 Anchor: TOPRIGHT
