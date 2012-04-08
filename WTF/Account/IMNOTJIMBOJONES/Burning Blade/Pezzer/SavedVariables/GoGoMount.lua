@@ -1,5 +1,10 @@
 
 GoGo_Prefs = {
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["DruidFlightForm"] = false,
+	["RemoveBuffs"] = 1,
+	["autodismount"] = 1,
 	["Zones"] = {
 		["Icecrown"] = {
 			["Preferred"] = {
@@ -57,12 +62,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["Hyjal Summit"] = {
+		["Icecrown Citadel"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 492,
 		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
@@ -71,26 +76,26 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
-		["The Eye of Eternity"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 486,
-		},
-		["The Oculus"] = {
+		["Tol Barad"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Dalaran"] = {
+		["Blackrock Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 504,
+			["ZoneID"] = 29,
+		},
+		["Uldum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 720,
 		},
 		["Crystalsong Forest"] = {
 			["Preferred"] = {
@@ -99,14 +104,14 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Trial of the Crusader"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Onyxia's Lair"] = {
+		["The Molten Core"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -148,57 +153,52 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Molten Core"] = {
+		["Onyxia's Lair"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Uldum"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 720,
-		},
-		["Blackrock Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 29,
-		},
-		["Tol Barad"] = {
+		["Trial of the Crusader"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Icecrown Citadel"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 492,
+			["ZoneID"] = 13,
+		},
+		["Dalaran"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 504,
+		},
+		["The Eye of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
 		},
 	},
 	["DruidClickForm"] = true,
-	["DruidFlightForm"] = false,
 	["GlobalExclude"] = {
 	},
-	["DisableWaterFlight"] = 1,
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["RemoveBuffs"] = 1,
 	["version"] = "4.3.4",
-	["autodismount"] = 1,
+	["DisableWaterFlight"] = 1,
 	["DruidFormNotRandomize"] = false,
-	["UnknownMounts"] = {
+	["GlobalPrefMounts"] = {
 	},
 	["PaladinUseCrusaderAura"] = false,
-	["GlobalPrefMounts"] = {
+	["UnknownMounts"] = {
 	},
 }
 GoGo_DebugLog = {

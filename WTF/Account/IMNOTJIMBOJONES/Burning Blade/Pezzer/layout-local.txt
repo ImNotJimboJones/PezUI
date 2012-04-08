@@ -1,9 +1,9 @@
 Version: 1
 Frame: InterfaceOptionsFrame
 FrameLevel: 12
-Anchor: TOP
-X: 9
-Y: -34
+Anchor: CENTER
+X: 0
+Y: 0
 W: 899
 H: 634
 Frame: MinimapCluster
@@ -233,7 +233,7 @@ H: 42
 Frame: TitanPanelProfessionsButton
 FrameLevel: 11
 Anchor: TOPRIGHT
-X: -116
+X: -123
 Y: -3
 W: 17
 H: 16
