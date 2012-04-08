@@ -36,6 +36,13 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 602,
 		},
+		["The Molten Core"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
 		["Mulgore"] = {
 			["Preferred"] = {
 			},
@@ -57,6 +64,13 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
@@ -64,33 +78,26 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
-		["The Eye of Eternity"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 486,
-		},
-		["Dalaran"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 504,
-		},
-		["The Oculus"] = {
+		["Tol Barad"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Hyjal Summit"] = {
+		["Blackrock Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 29,
+		},
+		["Uldum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 720,
 		},
 		["Crystalsong Forest"] = {
 			["Preferred"] = {
@@ -99,19 +106,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Trial of the Crusader"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Onyxia's Lair"] = {
+		["Tirisfal Glades"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 20,
 		},
 		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
@@ -132,7 +139,7 @@ GoGo_Prefs = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 4,
+			["ZoneID"] = 14,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {
@@ -148,40 +155,40 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Molten Core"] = {
+		["Onyxia's Lair"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Uldum"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 720,
-		},
-		["Blackrock Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 29,
-		},
-		["Tol Barad"] = {
+		["Trial of the Crusader"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Icecrown Citadel"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 492,
+			["ZoneID"] = 13,
+		},
+		["Dalaran"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 504,
+		},
+		["The Eye of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
 		},
 	},
 	["DruidClickForm"] = true,
@@ -189,17 +196,17 @@ GoGo_Prefs = {
 	["GlobalExclude"] = {
 	},
 	["DisableWaterFlight"] = 1,
-	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
 	["UnknownMounts"] = {
 	},
-	["RemoveBuffs"] = 1,
+	["autodismount"] = 1,
 	["version"] = "4.3.4",
-	["DruidFormNotRandomize"] = false,
 	["GlobalPrefMounts"] = {
 	},
-	["autodismount"] = 1,
+	["DruidFormNotRandomize"] = false,
+	["RemoveBuffs"] = 1,
 	["PaladinUseCrusaderAura"] = false,
-	["AspectPack"] = false,
+	["DruidDisableInCombat"] = false,
 }
 GoGo_DebugLog = {
 }

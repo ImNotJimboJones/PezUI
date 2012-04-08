@@ -2,8 +2,8 @@
 MADB = {
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -122,8 +122,8 @@ MADB = {
 					},
 				},
 				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
 					["hidden"] = true,
+					["name"] = "PlayerDebuffsMover",
 				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
