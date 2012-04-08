@@ -602,8 +602,7 @@ local function UpdateFishieEntry(index, info)
 		fishietext = fishietext..numbers..white..")|r";
 	end
 	SetEntry(index, fishietext);
-	index = index + 1;
-	return index;
+	return index + 1;
 end
 
 WatchEvents[FBConstants.OPT_UPDATE_EVT] = function(changed)

@@ -1,6 +1,6 @@
---[[
+﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 139 $
+Revision: $Rev: 141 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -11,7 +11,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 139 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 141 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 if not LibStub("LibBabble-Zone-3.0") then error(MAJOR_VERSION .. " requires LibBabble-Zone-3.0.") end
@@ -1248,6 +1248,12 @@ do
 	local DALARAN_ORGRIMMAR_PORTAL = string.format(X_Y_PORTAL, BZ["Dalaran"], BZ["Orgrimmar"])
 	local DALARAN_STORMWIND_PORTAL = string.format(X_Y_PORTAL, BZ["Dalaran"], BZ["Stormwind City"])
 
+	local DARKMOON_MULGORE_PORTAL = string.format(X_Y_PORTAL, BZ["Darkmoon Island"], BZ["Mulgore"])
+	local DARKMOON_ELWYNNFOREST_PORTAL = string.format(X_Y_PORTAL, BZ["Darkmoon Island"], BZ["Elwynn Forest"])
+	local MULGORE_DARKMOON_PORTAL = string.format(X_Y_PORTAL, BZ["Mulgore"], BZ["Darkmoon Island"])
+	local ELWYNNFOREST_DARKMOON_PORTAL = string.format(X_Y_PORTAL, BZ["Elwynn Forest"], BZ["Darkmoon Island"])
+
+
 	local zones = {}
 
 	zones[BZ["Eastern Kingdoms"]] = {
@@ -1426,6 +1432,32 @@ do
 	}
 
 
+
+
+	zones[MULGORE_DARKMOON_PORTAL] = {
+		paths = BZ["Darkmoon Island"],
+		faction = "Horde",
+		type = "Transport",
+	}
+
+	zones[DARKMOON_MULGORE_PORTAL] = {
+		paths = BZ["Mulgore"],
+		faction = "Horde",
+		type = "Transport",
+	}
+
+
+	zones[ELWYNNFOREST_DARKMOON_PORTAL] = {
+		paths = BZ["Darkmoon Island"],
+		faction = "Alliance",
+		type = "Transport",
+	}
+
+	zones[DARKMOON_ELWYNNFOREST_PORTAL] = {
+		paths = BZ["Elwynn Forest"],
+		faction = "Alliance",
+		type = "Transport",
+	}
 
 
 
@@ -1827,6 +1859,7 @@ do
 			[BZ["Stormwind City"]] = true,
 			[BZ["Duskwood"]] = true,
 			[BZ["Burning Steppes"]] = true,
+			[ELWYNNFOREST_DARKMOON_PORTAL] = true,
 		},
 		faction = "Alliance",
 		fishing_min = 25,
@@ -2552,6 +2585,7 @@ do
 		paths = {
 			[BZ["Thunder Bluff"]] = true,
 			[BZ["Southern Barrens"]] = true,
+			[MULGORE_DARKMOON_PORTAL] = true,
 		},
 		faction = "Horde",
 		fishing_min = 25,
@@ -2710,10 +2744,17 @@ do
 		low = 35,
 		high = 40,
 		continent = Kalimdor,
-		instances = BZ["Dire Maul"],
+		instances = {
+			[BZ["Dire Maul (East)"]] = true,
+			[BZ["Dire Maul (North)"]] = true,
+			[BZ["Dire Maul (West)"]] = true,
+		},
 		paths = {
 			[BZ["Thousand Needles"]] = true,
 			[BZ["Desolace"]] = true,
+			[BZ["Dire Maul"]] = true,
+		},
+		complexes = {
 			[BZ["Dire Maul"]] = true,
 		},
 		fishing_min = 225,
@@ -2829,7 +2870,7 @@ do
 		continent = Kalimdor,
 		paths = BZ["Northern Barrens"],
 		groupSize = 5,
-		faction = "Horde",
+--		faction = "Horde",
 		type = "Instance",
 		fishing_min = 75,
 		entrancePortal = { BZ["Northern Barrens"], 42.1, 66.5 },
@@ -2891,10 +2932,51 @@ do
 		low = 36,
 		high = 52,
 		continent = Kalimdor,
-		paths = BZ["Feralas"],
+		instances = {
+			[BZ["Dire Maul (East)"]] = true,
+			[BZ["Dire Maul (North)"]] = true,
+			[BZ["Dire Maul (West)"]] = true,
+		},
+		paths = {
+			[BZ["Feralas"]] = true,
+			[BZ["Dire Maul (East)"]] = true,
+			[BZ["Dire Maul (North)"]] = true,
+			[BZ["Dire Maul (West)"]] = true,
+		},
+		type = "Complex",
+	}
+
+	zones[BZ["Dire Maul (East)"]] = {
+		low = 36,
+		high = 46,
+		continent = Kalimdor,
+		paths = BZ["Dire Maul"],
 		groupSize = 5,
 		type = "Instance",
-		entrancePortal = { BZ["Feralas"], 58.5, 44.1 },
+		complex = BZ["Dire Maul"],
+		entrancePortal = { BZ["Feralas"], 66.7, 34.8 },
+	}
+
+	zones[BZ["Dire Maul (North)"]] = {
+		low = 42,
+		high = 52,
+		continent = Kalimdor,
+		paths = BZ["Dire Maul"],
+		groupSize = 5,
+		type = "Instance",
+		complex = BZ["Dire Maul"],
+		entrancePortal = { BZ["Feralas"], 62.5, 24.9 },
+	}
+
+	zones[BZ["Dire Maul (West)"]] = {
+		low = 39,
+		high = 49,
+		continent = Kalimdor,
+		paths = BZ["Dire Maul"],
+		groupSize = 5,
+		type = "Instance",
+		complex = BZ["Dire Maul"],
+		entrancePortal = { BZ["Feralas"], 60.3, 30.6 },
 	}
 
 	zones[BZ["Onyxia's Lair"]] = {
@@ -4224,6 +4306,17 @@ do
 	}
 
 
+
+--	Patch 4.3 zone
+
+	zones[BZ["Darkmoon Island"]] = {
+		continent = The_Maelstrom,
+		fishing_min = 75,
+		paths = {
+			[DARKMOON_MULGORE_PORTAL] = true,
+			[DARKMOON_ELWYNNFOREST_PORTAL] = true,
+		},
+	}
 
 
 

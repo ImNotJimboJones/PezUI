@@ -17,7 +17,7 @@ credits[FBConstants.ROLE_TRANSLATE_ZHCN] = {
 	["wowuicon"] = { "Version 0.9.9e4 (CurseForge)", "Version 1.0.2 (CurseForge)", },
 	["yahooor"] = { "Version 0.9.9e4 (CurseForge)" },
 	["foxdodo"] = { "Version 1.0.2 (CurseForge)" },
-	["dh0000"] = { "Version 1.0.7a (CurseForge)", "Version 1.0.7e (CurseForge)" },
+	["dh0000"] = { "Version 1.0.7a (CurseForge)", "Version 1.0.7e (CurseForge)", "Version 1.0.7h (CurseForge)", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
@@ -26,6 +26,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "Version 0.8.1d", },
 	["RustyXXL"] = { "Version 1.0.4 (CurseForge)", },
 	["Ithilrandir"] = { "Version 1.0.5 (CurseForge)", },
+	["DirtyHarryGermany"] = { "Version 1.0.7h (CurseForge)", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_FRFR] = {

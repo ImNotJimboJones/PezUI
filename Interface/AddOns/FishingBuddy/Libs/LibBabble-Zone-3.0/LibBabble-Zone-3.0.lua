@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Zone-3.0
-Revision: $Rev: 341 $
+Revision: $Rev: 343 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-zone-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Zone-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 341 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 343 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -676,7 +676,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Dalaran Arena"] = "Arène de Dalaran",
 	["Dalaran Sewers"] = "Égouts de Dalaran",
 	["Darkmoon Faire"] = "Foire de Sombrelune",
-	["Darkmoon Island"] = "Île de Sombrelune", -- Needs review
+	["Darkmoon Island"] = "Île de Sombrelune",
 	Darkshore = "Sombrivage",
 	Darnassus = "Darnassus",
 	Deadmines = "Mortemines",
@@ -689,7 +689,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Dire Maul (North)"] = "Hache-tripes (Nord)",
 	["Dire Maul (West)"] = "Hache-tripes (Ouest)",
 	Dragonblight = "Désolation des dragons",
-	["Dragon Soul"] = "L’Âme des dragons", -- Needs review
+	["Dragon Soul"] = "L’Âme des dragons",
 	["Drak'Tharon Keep"] = "Donjon de Drak'Tharon",
 	["Dun Morogh"] = "Dun Morogh",
 	Durotar = "Durotar",
@@ -698,13 +698,13 @@ elseif GAME_LOCALE == "frFR" then
 	["Eastern Kingdoms"] = "Royaumes de l'est",
 	["Eastern Plaguelands"] = "Maleterres de l'Est",
 	["Elwynn Forest"] = "Forêt d'Elwynn",
-	["End Time"] = "La Fin des temps", -- Needs review
-	Everlook = "Long-Guet", -- Needs review
+	["End Time"] = "La Fin des temps",
+	Everlook = "Long-Guet",
 	["Eversong Woods"] = "Bois des Chants éternels",
 	["Eye of the Storm"] = "L'Œil du cyclone",
 	Felwood = "Gangrebois",
 	Feralas = "Féralas",
-	Firelands = "Terres de Feu", -- Needs review
+	Firelands = "Terres de Feu",
 	["Forge Camp: Terror"] = "Camp de forge : Terreur",
 	["Forge Camp: Wrath"] = "Camp de forge : Courroux",
 	["Frostwyrm Lair"] = "Repaire du wyrm de givre",
@@ -721,7 +721,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Grom'gol Base Camp"] = "Campement Grom'gol",
 	["Gruul's Lair"] = "Repaire de Gruul",
 	Gundrak = "Gundrak",
-	["Hall of Blackhand"] = "Hall de Main-noire", -- Needs review
+	["Hall of Blackhand"] = "Hall de Main-noire",
 	["Hall of Champions"] = "Hall des Champions",
 	["Hall of Legends"] = "Hall des Légendes",
 	["Halls of Lightning"] = "Les salles de Foudre",
@@ -733,7 +733,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Hellfire Ramparts"] = "Remparts des Flammes infernales",
 	["Hillsbrad Foothills"] = "Contreforts de Hautebrande",
 	["Horde Encampment"] = "Campement de la Horde",
-	["Hour of Twilight"] = "L'heure du Crépuscule", -- Needs review
+	["Hour of Twilight"] = "L'heure du Crépuscule",
 	["Howling Fjord"] = "Fjord Hurlant",
 	["Hrothgar's Landing"] = "Accostage de Hrothgar",
 	Hyjal = "Hyjal",
@@ -760,7 +760,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Marshlight Lake"] = "Lac des furoles",
 	["Menethil Harbor"] = "Port de Menethil",
 	["Molten Core"] = "Cœur du Magma",
-	["Molten Front"] = "Front du Magma", -- Needs review
+	["Molten Front"] = "Front du Magma",
 	Moonglade = "Reflet-de-Lune",
 	["Mount Hyjal"] = "Mont Hyjal",
 	Mulgore = "Mulgore",
@@ -777,7 +777,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Old Hillsbrad Foothills"] = "Contreforts de Hautebrande d'antan",
 	["Old Stratholme"] = "L'Épuration de Stratholme",
 	["Onyxia's Lair"] = "Repaire d'Onyxia",
-	["Opening of the Dark Portal"] = "Ouverture de la Porte des ténèbres", -- Needs review
+	["Opening of the Dark Portal"] = "Ouverture de la Porte des ténèbres",
 	Orgrimmar = "Orgrimmar",
 	Outland = "Outreterre",
 	["Pit of Saron"] = "Fosse de Saron",
@@ -849,7 +849,7 @@ elseif GAME_LOCALE == "frFR" then
 	["The Dark Portal"] = "La Porte des ténèbres",
 	["The Deadmines"] = "Les Mortemines",
 	["The Descent into Madness"] = "La Descente dans la folie",
-	["The Escape From Durnholde"] = "L'évasion de Fort-de-Durn", -- Needs review
+	["The Escape From Durnholde"] = "L'évasion de Fort-de-Durn",
 	["The Exodar"] = "L'Exodar",
 	["The Eye"] = "L'Œil",
 	["The Eye of Eternity"] = "L'Œil de l'éternité",
@@ -912,7 +912,7 @@ elseif GAME_LOCALE == "frFR" then
 	["Vortex Pinnacle"] = "La cime du Vortex",
 	["Wailing Caverns"] = "Cavernes des lamentations",
 	["Warsong Gulch"] = "Goulet des Chanteguerres",
-	["Well of Eternity"] = "Puits d'Éternité", -- Needs review
+	["Well of Eternity"] = "Puits d'Éternité",
 	["Western Plaguelands"] = "Maleterres de l'Ouest",
 	Westfall = "Marche de l'Ouest",
 	Wetlands = "Les Paluns",
@@ -1000,7 +1000,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Eastern Kingdoms"] = "동부 왕국",
 	["Eastern Plaguelands"] = "동부 역병지대",
 	["Elwynn Forest"] = "엘윈 숲",
-	["End Time"] = "종말의 시간", -- Needs review
+	["End Time"] = "시간의 끝", -- Needs review
 	Everlook = "눈망루 마을",
 	["Eversong Woods"] = "영원노래 숲",
 	["Eye of the Storm"] = "폭풍의 눈",

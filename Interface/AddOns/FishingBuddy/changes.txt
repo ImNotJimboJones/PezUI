@@ -1,4 +1,10 @@
-﻿Version 1.0.7g
+﻿Version 1.0.7h
+- Tighten up the click-to-cast code a little bit more
+- Updated German translation (thanks DirtyHarryGermany!)
+- Updated Simplified Chinese translation (thanks again dh0000!)
+- Update LibTourist and LibBabble-Zone (no more hacks for Darkmoon Faire!)
+
+Version 1.0.7g
 - Another attempt at fixing random "no more casting" issues
 - Update LibTourist library
 
