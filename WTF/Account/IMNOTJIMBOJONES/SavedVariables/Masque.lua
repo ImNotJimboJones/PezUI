@@ -50,11 +50,10 @@ MasqueDB = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["VuhDo"] = {
+				["Bison"] = {
 					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["PitBull4_Player"] = {
 					["SkinID"] = "Renaitre: Fade",
@@ -65,15 +64,16 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["Inherit"] = false,
 				},
-				["Bison_combo"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
+				["Macaroon_Bar 7"] = {
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
 				},
-				["Bison"] = {
+				["VuhDo"] = {
 					["Disabled"] = true,
-					["SkinID"] = "Sleek",
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
 				},
 				["Masque"] = {
 					["SkinID"] = "Sleek",
@@ -154,10 +154,10 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Macaroon_Bar 7"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
+				["Bison_combo"] = {
+					["Disabled"] = true,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 				["Macaroon_Spell Bar"] = {
 					["Colors"] = {

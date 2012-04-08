@@ -57,19 +57,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["The Eye of Eternity"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 486,
-		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 321,
+		},
+		["The Eye of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
 		},
 		["Dalaran"] = {
 			["Preferred"] = {
@@ -85,7 +85,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Trial of the Crusader"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -99,7 +99,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Hyjal Summit"] = {
+		["Trial of the Crusader"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -113,12 +113,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Uldum"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
+			["ZoneID"] = 488,
 		},
 		["Borean Tundra"] = {
 			["Preferred"] = {
@@ -155,12 +155,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Obsidian Sanctum"] = {
+		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 720,
 		},
 		["Blackrock Depths"] = {
 			["Preferred"] = {
@@ -190,16 +190,16 @@ GoGo_Prefs = {
 	},
 	["DisableWaterFlight"] = 1,
 	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["RemoveBuffs"] = 1,
-	["version"] = "4.3.4",
-	["autodismount"] = 1,
-	["DruidFormNotRandomize"] = false,
 	["UnknownMounts"] = {
 	},
-	["PaladinUseCrusaderAura"] = false,
+	["RemoveBuffs"] = 1,
+	["version"] = "4.3.4",
+	["DruidFormNotRandomize"] = false,
 	["GlobalPrefMounts"] = {
 	},
+	["autodismount"] = 1,
+	["PaladinUseCrusaderAura"] = false,
+	["AspectPack"] = false,
 }
 GoGo_DebugLog = {
 }

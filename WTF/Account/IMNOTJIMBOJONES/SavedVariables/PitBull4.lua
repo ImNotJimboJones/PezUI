@@ -93,20 +93,20 @@ PitBull4DB = {
 						["Player"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -123,20 +123,20 @@ PitBull4DB = {
 						["Focus"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -153,20 +153,20 @@ PitBull4DB = {
 						["Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -183,20 +183,20 @@ PitBull4DB = {
 						["Focus' Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -213,20 +213,20 @@ PitBull4DB = {
 						["Pet"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -243,20 +243,20 @@ PitBull4DB = {
 						["Target's Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["elite_texture"] = "Tooltip enlarged",
-							["normal_texture"] = "Tooltip enlarged",
-							["rare_color"] = {
-								0.7019607843137254, -- [1]
-								0.7019607843137254, -- [2]
-								0.7019607843137254, -- [3]
-								0.7000000178813934, -- [4]
-							},
 							["normal_color"] = {
 								nil, -- [1]
 								nil, -- [2]
 								nil, -- [3]
 								0, -- [4]
 							},
+							["elite_texture"] = "Tooltip enlarged",
+							["rare_color"] = {
+								0.7019607843137254, -- [1]
+								0.7019607843137254, -- [2]
+								0.7019607843137254, -- [3]
+								0.7000000178813934, -- [4]
+							},
+							["normal_texture"] = "Tooltip enlarged",
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -1166,17 +1166,16 @@ PitBull4DB = {
 										["UNIT_NAME_UPDATE"] = true,
 									},
 								},
-								["Lua:Cast time"] = {
+								["Lua:Cast"] = {
 									["exists"] = true,
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-									["location"] = "right",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+									["location"] = "left",
 									["attach_to"] = "CastBar",
 									["events"] = {
-										["UNIT_SPELLCAST_SUCCEEDED"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
 										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
 										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
 										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
 										["UNIT_SPELLCAST_STOP"] = true,
 										["UNIT_SPELLCAST_INTERRUPTED"] = true,
@@ -1191,16 +1190,17 @@ PitBull4DB = {
 									},
 									["code"] = "if unit == \"player\" then\n  local pvp = PVPDuration()\n  if pvp then\n    return \"|cffff0000%s|r\",FormatDuration(pvp)\n  end\nend",
 								},
-								["Lua:Cast"] = {
+								["Lua:Cast time"] = {
 									["exists"] = true,
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["location"] = "right",
 									["attach_to"] = "CastBar",
 									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_SUCCEEDED"] = true,
 										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
 										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
 										["UNIT_SPELLCAST_STOP"] = true,
 										["UNIT_SPELLCAST_INTERRUPTED"] = true,
@@ -1493,6 +1493,23 @@ PitBull4DB = {
 									["attach_to"] = "DruidManaBar",
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 								},
+								["Lua:Cast"] = {
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+								},
 								["Lua:Cast time"] = {
 									["exists"] = true,
 									["position"] = 18,
@@ -1510,23 +1527,6 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-								},
-								["Lua:Cast"] = {
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:PVPTimer"] = {
 									["enabled"] = false,
@@ -1809,23 +1809,6 @@ PitBull4DB = {
 									["attach_to"] = "DruidManaBar",
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 								},
-								["Lua:Cast"] = {
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-								},
 								["Lua:Cast time"] = {
 									["exists"] = true,
 									["position"] = 18,
@@ -1843,6 +1826,23 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+								},
+								["Lua:Cast"] = {
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:PVPTimer"] = {
 									["enabled"] = false,
@@ -2120,23 +2120,6 @@ PitBull4DB = {
 									["attach_to"] = "PowerBar",
 									["code"] = "local max = MaxPower(unit)\nif max > 0 then\n  return \"%s%%\",Percent(Power(unit),max)\nend",
 								},
-								["Lua:Cast"] = {
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-								},
 								["Lua:Cast time"] = {
 									["exists"] = true,
 									["position"] = 18,
@@ -2154,6 +2137,23 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+								},
+								["Lua:Cast"] = {
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:Druid mana"] = {
 									["exists"] = true,
@@ -2443,6 +2443,24 @@ PitBull4DB = {
 									["attach_to"] = "PowerBar",
 									["code"] = "local max = MaxPower(unit)\nif max > 0 then\n  return \"%s%%\",Percent(Power(unit),max)\nend",
 								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -2461,24 +2479,6 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:Druid mana"] = {
 									["enabled"] = false,
@@ -2771,6 +2771,24 @@ PitBull4DB = {
 									["attach_to"] = "PowerBar",
 									["code"] = "local max = MaxPower(unit)\nif max > 0 then\n  return \"%s%%\",Percent(Power(unit),max)\nend",
 								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -2789,24 +2807,6 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:Druid mana"] = {
 									["enabled"] = false,
@@ -3106,24 +3106,6 @@ PitBull4DB = {
 									["attach_to"] = "DruidManaBar",
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["position"] = 34,
-									["location"] = "left",
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["attach_to"] = "CastBar",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -3142,6 +3124,24 @@ PitBull4DB = {
 									},
 									["attach_to"] = "CastBar",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["position"] = 34,
+									["location"] = "left",
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["attach_to"] = "CastBar",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 								},
 								["Lua:PVPTimer"] = {
 									["enabled"] = false,
@@ -3281,20 +3281,21 @@ PitBull4DB = {
 									["location"] = "right",
 									["attach_to"] = "AltPowerBar",
 								},
-								["Lua:Cast"] = {
+								["Lua:Cast time"] = {
 									["exists"] = true,
 									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_SUCCEEDED"] = true,
 										["UNIT_SPELLCAST_START"] = true,
 										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
 									},
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["location"] = "right",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:Health"] = {
@@ -3327,21 +3328,20 @@ PitBull4DB = {
 									["location"] = "left",
 									["attach_to"] = "PowerBar",
 								},
-								["Lua:Cast time"] = {
+								["Lua:Cast"] = {
 									["exists"] = true,
 									["events"] = {
-										["UNIT_SPELLCAST_SUCCEEDED"] = true,
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
 										["UNIT_SPELLCAST_START"] = true,
 										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
 									},
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-									["location"] = "right",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+									["location"] = "left",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:Name"] = {
@@ -3912,23 +3912,6 @@ PitBull4DB = {
 									["code"] = "local max = MaxPower(unit)\nif max > 0 then\n  return \"%s%%\",Percent(Power(unit),max)\nend",
 									["attach_to"] = "PowerBar",
 								},
-								["Lua:Cast"] = {
-									["exists"] = true,
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-									},
-									["position"] = 34,
-									["location"] = "left",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["attach_to"] = "CastBar",
-								},
 								["Lua:Cast time"] = {
 									["exists"] = true,
 									["events"] = {
@@ -3945,6 +3928,23 @@ PitBull4DB = {
 									["position"] = 18,
 									["location"] = "right",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["attach_to"] = "CastBar",
+								},
+								["Lua:Cast"] = {
+									["exists"] = true,
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+									},
+									["position"] = 34,
+									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:Druid mana"] = {
@@ -4234,6 +4234,23 @@ PitBull4DB = {
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 									["attach_to"] = "DruidManaBar",
 								},
+								["Lua:Cast"] = {
+									["exists"] = true,
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["position"] = 40,
+									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
+									["attach_to"] = "CastBar",
+								},
 								["Lua:Cast time"] = {
 									["exists"] = true,
 									["events"] = {
@@ -4250,23 +4267,6 @@ PitBull4DB = {
 									["position"] = 23,
 									["location"] = "right",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
-									["attach_to"] = "CastBar",
-								},
-								["Lua:Cast"] = {
-									["exists"] = true,
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["position"] = 40,
-									["location"] = "left",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:PVPTimer"] = {
@@ -4558,24 +4558,6 @@ PitBull4DB = {
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 									["attach_to"] = "DruidManaBar",
 								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["position"] = 34,
-									["location"] = "left",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["attach_to"] = "CastBar",
-								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -4593,6 +4575,24 @@ PitBull4DB = {
 									["position"] = 18,
 									["location"] = "right",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["attach_to"] = "CastBar",
+								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["position"] = 34,
+									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:PVPTimer"] = {
@@ -4886,24 +4886,6 @@ PitBull4DB = {
 									["code"] = "if UnitPowerType(unit) ~= 0 then\n  return \"%s/%s\",Power(unit,0),MaxPower(unit,0)\nend",
 									["attach_to"] = "DruidManaBar",
 								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-									},
-									["position"] = 34,
-									["location"] = "left",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["attach_to"] = "CastBar",
-								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -4921,6 +4903,24 @@ PitBull4DB = {
 									["position"] = 18,
 									["location"] = "right",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["attach_to"] = "CastBar",
+								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+									},
+									["position"] = 34,
+									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:PVPTimer"] = {
@@ -5208,24 +5208,6 @@ PitBull4DB = {
 									["code"] = "local max = MaxPower(unit)\nif max > 0 then\n  return \"%s%%\",Percent(Power(unit),max)\nend",
 									["attach_to"] = "PowerBar",
 								},
-								["Lua:Cast"] = {
-									["enabled"] = false,
-									["exists"] = true,
-									["events"] = {
-										["UNIT_SPELLCAST_DELAYED"] = true,
-										["UNIT_SPELLCAST_CHANNEL_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
-										["UNIT_SPELLCAST_START"] = true,
-										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
-										["UNIT_SPELLCAST_STOP"] = true,
-										["UNIT_SPELLCAST_INTERRUPTED"] = true,
-										["UNIT_SPELLCAST_FAILED"] = true,
-									},
-									["position"] = 34,
-									["location"] = "left",
-									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
-									["attach_to"] = "CastBar",
-								},
 								["Lua:Cast time"] = {
 									["enabled"] = false,
 									["exists"] = true,
@@ -5243,6 +5225,24 @@ PitBull4DB = {
 									["position"] = 18,
 									["location"] = "right",
 									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  if not cast_data.stop_time then\n    local delay,end_time = cast_data.delay, cast_data.end_time\n    local duration\n    if end_time then\n      duration = end_time - GetTime()\n    end\n    if delay and delay ~= 0 then\n      local delay_sign = '+'\n      if delay < 0 then\n        delay_sign = ''\n      end\n      if duration and duration >= 0 then\n        return \"|cffff0000%s%s|r %.1f\",delay_sign,Round(delay,1),duration\n      else\n        return \"|cffff0000%s%s|r\",delay_sign,Round(delay,1)\n      end\n    elseif duration and duration >= 0 then\n      return \"%.1f\",duration\n    end\n  end\nend\nreturn ConfigMode()",
+									["attach_to"] = "CastBar",
+								},
+								["Lua:Cast"] = {
+									["enabled"] = false,
+									["exists"] = true,
+									["events"] = {
+										["UNIT_SPELLCAST_DELAYED"] = true,
+										["UNIT_SPELLCAST_CHANNEL_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_UPDATE"] = true,
+										["UNIT_SPELLCAST_START"] = true,
+										["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
+										["UNIT_SPELLCAST_STOP"] = true,
+										["UNIT_SPELLCAST_INTERRUPTED"] = true,
+										["UNIT_SPELLCAST_FAILED"] = true,
+									},
+									["position"] = 34,
+									["location"] = "left",
+									["code"] = "local cast_data = CastData(unit)\nif cast_data then\n  local spell,stop_message,target = cast_data.spell,cast_data.stop_message,cast_data.target\n  local stop_time,stop_duration = cast_data.stop_time\n  if stop_time then\n    stop_duration = GetTime() - stop_time\n  end\n  Alpha(-(stop_duration or 0) + 1)\n  if stop_message then\n    return stop_message\n  elseif target then\n    return \"%s (%s)\",spell,target\n  else\n    return spell \n  end\nend\nreturn ConfigMode()",
 									["attach_to"] = "CastBar",
 								},
 								["Lua:Druid mana"] = {
@@ -5598,6 +5598,51 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
+				["Default"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Portrait Only"] = {
+							["enabled"] = false,
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Pet"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+							["position"] = 40,
+							["size"] = 1.299999952316284,
+						},
+						["Player"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Focus"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Target"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Focus's Target"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+						["Target's Target"] = {
+							["position"] = 30,
+							["size"] = 1.299999952316284,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
 				["Rev1"] = {
 					["layouts"] = {
 						["Target Test"] = {
@@ -5643,49 +5688,260 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+			},
+		},
+		["CombatIcon"] = {
+			["profiles"] = {
+				["HUNTER"] = {
 					["layouts"] = {
 						["Target Test"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Portrait Only"] = {
 							["enabled"] = false,
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["position"] = 29,
 						},
 						["Pet"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Player Test"] = {
 							["enabled"] = false,
-							["position"] = 40,
-							["size"] = 1.299999952316284,
+							["position"] = 39,
 						},
 						["Player"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Focus"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Target"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Focus's Target"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 						["Target's Target"] = {
-							["position"] = 30,
-							["size"] = 1.299999952316284,
+							["enabled"] = false,
+							["position"] = 29,
 						},
 					},
 					["global"] = {
 						["enabled"] = false,
+					},
+				},
+				["test"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Portrait Only"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+							["position"] = 39,
+						},
+						["Player"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+				["Default"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Portrait Only"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+							["position"] = 39,
+						},
+						["Player"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+				["Rev1"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Portrait Only"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+							["position"] = 39,
+						},
+						["Player"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Focus's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["position"] = 29,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+			},
+		},
+		["RaceIcon"] = {
+			["profiles"] = {
+				["Default"] = {
+					["layouts"] = {
+						["Player"] = {
+							["enabled"] = false,
+							["position"] = 7,
+						},
+						["Focus"] = {
+							["enabled"] = false,
+						},
+						["Target"] = {
+							["enabled"] = false,
+							["position"] = 4,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+						},
+						["Focus' Target"] = {
+							["enabled"] = false,
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+						},
+					},
+				},
+			},
+		},
+		["Aggro"] = {
+			["profiles"] = {
+				["Rev1"] = {
+					["layouts"] = {
+						["Player"] = {
+							["kind"] = "Background",
+						},
+						["Focus"] = {
+							["kind"] = "Background",
+						},
+						["Target"] = {
+							["kind"] = "Background",
+						},
+						["Pet"] = {
+							["kind"] = "Background",
+						},
+						["Focus' Target"] = {
+							["enabled"] = false,
+							["kind"] = "Background",
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["kind"] = "Background",
+						},
+					},
+				},
+				["Default"] = {
+					["layouts"] = {
+						["Player"] = {
+							["kind"] = "Background",
+						},
+						["Focus"] = {
+							["kind"] = "Background",
+						},
+						["Target"] = {
+							["kind"] = "Background",
+						},
+						["Pet"] = {
+							["kind"] = "Background",
+						},
+						["Focus' Target"] = {
+							["enabled"] = false,
+							["kind"] = "Background",
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["kind"] = "Background",
+						},
 					},
 				},
 			},
@@ -5817,212 +6073,6 @@ PitBull4DB = {
 				},
 			},
 		},
-		["CombatIcon"] = {
-			["profiles"] = {
-				["HUNTER"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Portrait Only"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-							["position"] = 39,
-						},
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["test"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Portrait Only"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-							["position"] = 39,
-						},
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["Rev1"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Portrait Only"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-							["position"] = 39,
-						},
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["Default"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Portrait Only"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-							["position"] = 39,
-						},
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Focus's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 29,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-			},
-		},
-		["Background"] = {
-		},
-		["RaceIcon"] = {
-			["profiles"] = {
-				["Default"] = {
-					["layouts"] = {
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 7,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 4,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-						},
-					},
-				},
-			},
-		},
 		["ExperienceBar"] = {
 			["profiles"] = {
 				["HUNTER"] = {
@@ -6093,7 +6143,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -6127,7 +6177,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -6282,57 +6332,7 @@ PitBull4DB = {
 				},
 			},
 		},
-		["Aggro"] = {
-			["profiles"] = {
-				["Rev1"] = {
-					["layouts"] = {
-						["Player"] = {
-							["kind"] = "Background",
-						},
-						["Focus"] = {
-							["kind"] = "Background",
-						},
-						["Target"] = {
-							["kind"] = "Background",
-						},
-						["Pet"] = {
-							["kind"] = "Background",
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-							["kind"] = "Background",
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["kind"] = "Background",
-						},
-					},
-				},
-				["Default"] = {
-					["layouts"] = {
-						["Player"] = {
-							["kind"] = "Background",
-						},
-						["Focus"] = {
-							["kind"] = "Background",
-						},
-						["Target"] = {
-							["kind"] = "Background",
-						},
-						["Pet"] = {
-							["kind"] = "Background",
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-							["kind"] = "Background",
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["kind"] = "Background",
-						},
-					},
-				},
-			},
+		["Sounds"] = {
 		},
 		["AuraBar"] = {
 			["profiles"] = {
@@ -6485,7 +6485,193 @@ PitBull4DB = {
 				},
 			},
 		},
-		["Sounds"] = {
+		["CastBar"] = {
+			["profiles"] = {
+				["HUNTER"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Portrait Only"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+						},
+						["Player"] = {
+							["enabled"] = false,
+						},
+						["Focus"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Focus's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+				["test"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Portrait Only"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+						},
+						["Player"] = {
+							["enabled"] = false,
+						},
+						["Focus"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Focus's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+				["Default"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Portrait Only"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+						},
+						["Player"] = {
+							["enabled"] = false,
+						},
+						["Focus"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Focus's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+				["Rev1"] = {
+					["layouts"] = {
+						["Target Test"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Portrait Only"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+						},
+						["Player Test"] = {
+							["enabled"] = false,
+						},
+						["Player"] = {
+							["enabled"] = false,
+						},
+						["Focus"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Focus's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+						["Target's Target"] = {
+							["auto_hide"] = true,
+							["enabled"] = false,
+							["size"] = 2,
+						},
+					},
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+			},
 		},
 		["AltPowerBar"] = {
 			["profiles"] = {
@@ -6550,121 +6736,65 @@ PitBull4DB = {
 				},
 			},
 		},
-		["Highlight"] = {
+		["PvPIcon"] = {
 			["profiles"] = {
 				["Rev1"] = {
 					["layouts"] = {
 						["Player"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 31,
+							["size"] = 1.200000047683716,
 						},
 						["Focus"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 31,
+							["size"] = 1.600000023841858,
 						},
 						["Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 31,
+							["size"] = 1.600000023841858,
 						},
 						["Focus' Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
+							["size"] = 1.200000047683716,
 						},
 						["Pet"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
 						},
 						["Target's Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
+							["size"] = 1.200000047683716,
 						},
 					},
 				},
 				["Default"] = {
 					["layouts"] = {
 						["Player"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 36,
+							["size"] = 1.100000023841858,
 						},
 						["Focus"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 31,
+							["size"] = 1.350000023841858,
 						},
 						["Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["position"] = 37,
+							["size"] = 1.200000047683716,
 						},
 						["Focus' Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
+							["size"] = 1.200000047683716,
 						},
 						["Pet"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
 						},
 						["Target's Target"] = {
-							["color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0.2400000095367432, -- [4]
-							},
-							["show_target"] = false,
+							["enabled"] = false,
+							["position"] = 31,
+							["size"] = 1.200000047683716,
 						},
 					},
 				},
@@ -6989,69 +7119,7 @@ PitBull4DB = {
 				},
 			},
 		},
-		["PvPIcon"] = {
-			["profiles"] = {
-				["Rev1"] = {
-					["layouts"] = {
-						["Player"] = {
-							["position"] = 31,
-							["size"] = 1.200000047683716,
-						},
-						["Focus"] = {
-							["position"] = 31,
-							["size"] = 1.600000023841858,
-						},
-						["Target"] = {
-							["position"] = 31,
-							["size"] = 1.600000023841858,
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-							["position"] = 31,
-							["size"] = 1.200000047683716,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 31,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 31,
-							["size"] = 1.200000047683716,
-						},
-					},
-				},
-				["Default"] = {
-					["layouts"] = {
-						["Player"] = {
-							["position"] = 36,
-							["size"] = 1.100000023841858,
-						},
-						["Focus"] = {
-							["position"] = 31,
-							["size"] = 1.350000023841858,
-						},
-						["Target"] = {
-							["position"] = 37,
-							["size"] = 1.200000047683716,
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-							["position"] = 31,
-							["size"] = 1.200000047683716,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 31,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 31,
-							["size"] = 1.200000047683716,
-						},
-					},
-				},
-			},
+		["Background"] = {
 		},
 		["PowerBar"] = {
 			["profiles"] = {
@@ -7108,34 +7176,18 @@ PitBull4DB = {
 				},
 			},
 		},
-		["DCIcon"] = {
+		["HideBlizzard"] = {
 			["profiles"] = {
+				["Rev1"] = {
+					["global"] = {
+						["altpower"] = false,
+						["raid"] = true,
+						["runebar"] = false,
+					},
+				},
 				["Default"] = {
-					["layouts"] = {
-						["Player"] = {
-							["enabled"] = false,
-							["position"] = 35,
-						},
-						["Focus"] = {
-							["enabled"] = false,
-							["position"] = 1.00001,
-						},
-						["Target"] = {
-							["enabled"] = false,
-							["position"] = 36,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-							["position"] = 1.00001,
-						},
-						["Focus' Target"] = {
-							["enabled"] = false,
-							["position"] = 1.00001,
-						},
-						["Target's Target"] = {
-							["enabled"] = false,
-							["position"] = 1.00001,
-						},
+					["global"] = {
+						["raid"] = true,
 					},
 				},
 			},
@@ -7152,12 +7204,12 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["global"] = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["global"] = {
 						["enabled"] = false,
 					},
@@ -7318,7 +7370,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["position"] = 27,
@@ -7354,7 +7406,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["position"] = 27,
@@ -7480,7 +7532,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -7523,7 +7575,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -7720,7 +7772,7 @@ PitBull4DB = {
 						["show_gcd"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -7756,7 +7808,7 @@ PitBull4DB = {
 						["show_gcd"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["layouts"] = {
 						["Target Test"] = {
 							["enabled"] = false,
@@ -7830,18 +7882,34 @@ PitBull4DB = {
 				},
 			},
 		},
-		["HideBlizzard"] = {
+		["DCIcon"] = {
 			["profiles"] = {
-				["Rev1"] = {
-					["global"] = {
-						["altpower"] = false,
-						["raid"] = true,
-						["runebar"] = false,
-					},
-				},
 				["Default"] = {
-					["global"] = {
-						["raid"] = true,
+					["layouts"] = {
+						["Player"] = {
+							["enabled"] = false,
+							["position"] = 35,
+						},
+						["Focus"] = {
+							["enabled"] = false,
+							["position"] = 1.00001,
+						},
+						["Target"] = {
+							["enabled"] = false,
+							["position"] = 36,
+						},
+						["Pet"] = {
+							["enabled"] = false,
+							["position"] = 1.00001,
+						},
+						["Focus' Target"] = {
+							["enabled"] = false,
+							["position"] = 1.00001,
+						},
+						["Target's Target"] = {
+							["enabled"] = false,
+							["position"] = 1.00001,
+						},
 					},
 				},
 			},
@@ -8091,7 +8159,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Rev1"] = {
+				["Default"] = {
 					["layouts"] = {
 						["Normal"] = {
 							["elements"] = {
@@ -8195,7 +8263,7 @@ PitBull4DB = {
 						["enabled"] = false,
 					},
 				},
-				["Default"] = {
+				["Rev1"] = {
 					["layouts"] = {
 						["Normal"] = {
 							["elements"] = {
@@ -8329,6 +8397,126 @@ PitBull4DB = {
 				},
 			},
 		},
+		["Highlight"] = {
+			["profiles"] = {
+				["Rev1"] = {
+					["layouts"] = {
+						["Player"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Focus"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Focus' Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Pet"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Target's Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+					},
+				},
+				["Default"] = {
+					["layouts"] = {
+						["Player"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Focus"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Focus' Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Pet"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+						["Target's Target"] = {
+							["color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0.2400000095367432, -- [4]
+							},
+							["show_target"] = false,
+						},
+					},
+				},
+			},
+		},
 		["DeadIcon"] = {
 			["profiles"] = {
 				["Default"] = {
@@ -8355,194 +8543,6 @@ PitBull4DB = {
 							["enabled"] = false,
 							["position"] = 1.00002,
 						},
-					},
-				},
-			},
-		},
-		["CastBar"] = {
-			["profiles"] = {
-				["HUNTER"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Portrait Only"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-						},
-						["Player"] = {
-							["enabled"] = false,
-						},
-						["Focus"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Focus's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["test"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Portrait Only"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-						},
-						["Player"] = {
-							["enabled"] = false,
-						},
-						["Focus"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Focus's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["Rev1"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Portrait Only"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-						},
-						["Player"] = {
-							["enabled"] = false,
-						},
-						["Focus"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Focus's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
-					},
-				},
-				["Default"] = {
-					["layouts"] = {
-						["Target Test"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Portrait Only"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Pet"] = {
-							["enabled"] = false,
-						},
-						["Player Test"] = {
-							["enabled"] = false,
-						},
-						["Player"] = {
-							["enabled"] = false,
-						},
-						["Focus"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Focus's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-						["Target's Target"] = {
-							["auto_hide"] = true,
-							["enabled"] = false,
-							["size"] = 2,
-						},
-					},
-					["global"] = {
-						["enabled"] = false,
 					},
 				},
 			},
@@ -8674,22 +8674,22 @@ PitBull4DB = {
 					["position_y"] = 117.5671691894531,
 				},
 				["focustarget"] = {
-					["size_x"] = 0.5,
 					["position_x"] = -365,
+					["size_x"] = 0.5,
 					["position_y"] = -218,
-					["font_multiplier"] = 1.200000047683716,
+					["scale"] = 0.6000000238418579,
 					["size_y"] = 0.800000011920929,
 					["layout"] = "Focus' Target",
-					["scale"] = 0.6000000238418579,
+					["font_multiplier"] = 1.200000047683716,
 				},
 				["targettarget"] = {
-					["size_x"] = 0.5,
 					["position_x"] = 365,
+					["size_x"] = 0.5,
 					["position_y"] = -218,
-					["font_multiplier"] = 1.200000047683716,
+					["scale"] = 0.6,
 					["size_y"] = 0.800000011920929,
 					["layout"] = "Target's Target",
-					["scale"] = 0.6,
+					["font_multiplier"] = 1.200000047683716,
 				},
 				["player"] = {
 					["layout"] = "Player",
@@ -8817,22 +8817,22 @@ PitBull4DB = {
 					["position_y"] = 117.5671691894531,
 				},
 				["focustarget"] = {
-					["size_x"] = 0.5,
+					["position_x"] = -435,
 					["scale"] = 0.6000000238418579,
-					["size_y"] = 0.800000011920929,
+					["layout"] = "Focus' Target",
 					["position_y"] = -140,
 					["font_multiplier"] = 1.200000047683716,
-					["layout"] = "Focus' Target",
-					["position_x"] = -435,
+					["size_y"] = 0.800000011920929,
+					["size_x"] = 0.5,
 				},
 				["targettarget"] = {
-					["size_x"] = 0.5,
+					["position_x"] = 435,
 					["scale"] = 0.6000000238418579,
-					["size_y"] = 0.800000011920929,
+					["layout"] = "Target's Target",
 					["position_y"] = -140,
 					["font_multiplier"] = 1.200000047683716,
-					["layout"] = "Target's Target",
-					["position_x"] = 435,
+					["size_y"] = 0.800000011920929,
+					["size_x"] = 0.5,
 				},
 				["player"] = {
 					["position_y"] = -160,

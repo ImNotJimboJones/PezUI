@@ -69,7 +69,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_MAELSTROM_WEAPON"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_NIGHTFALL"] = {
+				["MSBT_TRIGGER_PVP_TRINKET"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_KILL_SHOT"] = {
@@ -129,7 +129,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_REVENGE"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_PVP_TRINKET"] = {
+				["MSBT_TRIGGER_NIGHTFALL"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_BRAIN_FREEZE"] = {
@@ -281,7 +281,7 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_BLOCK"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["PET_INCOMING_SPELL_ABSORB"] = {
+				["INCOMING_DAMAGE"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DOT_CRIT"] = {
@@ -317,7 +317,7 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_EXPERIENCE_GAIN"] = {
 					["disabled"] = false,
 				},
-				["INCOMING_SPELL_DOT"] = {
+				["INCOMING_MISS"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_BUFF"] = {
@@ -329,8 +329,8 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_SPELL_INTERRUPT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_DEBUFF_STACK"] = {
+					["disabled"] = true,
 				},
 				["NOTIFICATION_ITEM_COOLDOWN"] = {
 					["disabled"] = true,
@@ -338,8 +338,8 @@ MSBTProfiles_SavedVars = {
 				["INCOMING_SPELL_DEFLECT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["NOTIFICATION_DEBUFF_STACK"] = {
-					["disabled"] = true,
+				["INCOMING_SPELL_INTERRUPT"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
@@ -350,7 +350,7 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_HOLY_POWER_FULL"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_MISS"] = {
+				["INCOMING_SPELL_DOT"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DAMAGE_CRIT"] = {
@@ -374,7 +374,7 @@ MSBTProfiles_SavedVars = {
 				["INCOMING_SPELL_RESIST"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_DAMAGE"] = {
+				["PET_INCOMING_SPELL_ABSORB"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["PET_INCOMING_HOT"] = {
@@ -420,9 +420,9 @@ MSBTProfiles_SavedVars = {
 				["Outgoing"] = {
 					["direction"] = "Up",
 					["behavior"] = "MSBT_NORMAL",
-					["scrollWidth"] = 100,
-					["stickyDirection"] = "Up",
 					["scrollHeight"] = 90,
+					["stickyDirection"] = "Up",
+					["scrollWidth"] = 100,
 					["offsetX"] = 492,
 					["animationStyle"] = "Straight",
 					["iconAlign"] = "Left",
