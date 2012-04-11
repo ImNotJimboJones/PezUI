@@ -5,6 +5,16 @@ GoGo_Prefs = {
 	["DruidFlightForm"] = false,
 	["RemoveBuffs"] = 1,
 	["autodismount"] = 1,
+	["DruidClickForm"] = true,
+	["GlobalExclude"] = {
+	},
+	["version"] = "4.3.5",
+	["DruidFormNotRandomize"] = false,
+	["GlobalPrefMounts"] = {
+	},
+	["UnknownMounts"] = {
+	},
+	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -139,12 +149,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Abyssal Depths"] = {
+		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 720,
 		},
 		["Crystalsong Forest"] = {
 			["Preferred"] = {
@@ -153,19 +163,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Tanaris"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 816,
+			["ZoneID"] = 13,
 		},
-		["Icecrown Citadel"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 492,
+			["ZoneID"] = 13,
 		},
 		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
@@ -174,19 +184,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["Blackrock Depths"] = {
+		["Hour of Twilight"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 29,
+			["ZoneID"] = 13,
 		},
-		["Orgrimmar"] = {
+		["End Time"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 321,
+			["ZoneID"] = 13,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {
@@ -202,52 +212,42 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["End Time"] = {
+		["Orgrimmar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 321,
+		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
+		},
+		["Tanaris"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 816,
+		},
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["The Oculus"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Hyjal Summit"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Uldum"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 720,
-		},
 	},
-	["GlobalExclude"] = {
-	},
-	["version"] = "4.3.5",
-	["UnknownMounts"] = {
-	},
-	["GlobalPrefMounts"] = {
-	},
-	["DruidFormNotRandomize"] = false,
-	["PaladinUseCrusaderAura"] = false,
-	["DruidClickForm"] = true,
 }
 GoGo_DebugLog = {
 }
