@@ -1,8 +1,5 @@
 
 Postal3DB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["BlackBook"] = {
 			["alts"] = {
@@ -10,10 +7,18 @@ Postal3DB = {
 			},
 		},
 	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["profiles"] = {
 		["Default"] = {
 			["ModuleEnabledState"] = {
 				["OpenAll"] = false,
+			},
+			["BlackBook"] = {
+				["recent"] = {
+					"Liilth|Burning Blade|Horde", -- [1]
+				},
 			},
 		},
 	},

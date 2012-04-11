@@ -1,29 +1,27 @@
 
 AllPlayedDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["conquest_points"] = 800,
-						["class"] = "HUNTER",
-						["zone_text"] = "Tirisfal Glades",
+						["seconds_played"] = 9624797,
+						["subzone_text"] = "Valley of Honor",
+						["zone_text"] = "Orgrimmar",
 						["honor_kills"] = 7548,
-						["level"] = 85,
-						["coin"] = 632829021,
-						["subzone_text"] = "Brill",
+						["honor_points"] = 825,
+						["coin"] = 640412136,
+						["is_resting"] = 1,
 						["xp"] = 1141,
 						["highest_rank"] = 0,
-						["seconds_played_last_update"] = 1333880136,
-						["last_update"] = 1333880136,
+						["conquest_points"] = 800,
+						["last_update"] = 1334103556,
 						["class_loc"] = "Hunter",
-						["justice_points"] = 1386,
-						["seconds_played"] = 9605245,
+						["justice_points"] = 1925,
+						["level"] = 85,
 						["max_rested_xp"] = 18400500,
-						["honor_points"] = 825,
+						["seconds_played_last_update"] = 1334103556,
+						["class"] = "HUNTER",
 					},
 				},
 			},
@@ -31,10 +29,13 @@ AllPlayedDB = {
 		["cache"] = {
 			["XPToNextLevel"] = {
 				["15354"] = {
-					[85] = 0,
+					[85] = 12267000,
 				},
 			},
 		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
@@ -44,10 +45,10 @@ AllPlayedDB = {
 				["show_coins"] = false,
 				["all_realms"] = false,
 				["show_rested_xp_countdown"] = false,
+				["show_xp_total"] = false,
 				["ldbicon"] = {
 					["hide"] = true,
 				},
-				["show_xp_total"] = false,
 			},
 		},
 	},

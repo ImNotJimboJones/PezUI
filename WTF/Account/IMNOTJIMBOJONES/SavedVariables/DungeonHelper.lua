@@ -6,20 +6,20 @@ DungeonHelperDB = {
 	["profiles"] = {
 		["Default"] = {
 			["porposalSoundFile"] = "Interface\\AddOns\\DungeonHelper\\media\\alert.mp3",
-			["hideMinimap"] = false,
+			["hideMinimap"] = true,
 			["iconSize"] = 1,
 			["startTime"] = 0,
 			["showTime"] = true,
 			["endMessage"] = "",
 			["playAlarm"] = false,
-			["showText"] = false,
+			["reportTime"] = true,
 			["startMessage"] = "",
 			["showTimerBar"] = false,
 			["leaveDialoge"] = false,
 			["display"] = "icons",
 			["bonusChatAlert"] = false,
 			["bonusSoundFile"] = "Sound\\Interface\\AlarmClockWarning3.ogg",
-			["reportTime"] = true,
+			["showText"] = false,
 		},
 	},
 }

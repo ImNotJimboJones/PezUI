@@ -7,32 +7,31 @@ SkadaDB = {
 		["Default"] = {
 			["showtotals"] = true,
 			["modules"] = {
-				["ccignoremaintanks"] = true,
 				["ccannounce"] = true,
+				["ccignoremaintanks"] = true,
 			},
 			["windows"] = {
 				{
-					["mode"] = "Damage taken",
+					["barfont"] = "Arial Narrow",
 					["barheight"] = 14,
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
-						["b"] = 0.3019607843137255,
-						["g"] = 0.3019607843137255,
 						["r"] = 0.3019607843137255,
+						["g"] = 0.3019607843137255,
+						["b"] = 0.3019607843137255,
 					},
 					["barcolor"] = {
-						["b"] = 0.7490196078431373,
-						["g"] = 0.7490196078431373,
 						["r"] = 0.7490196078431373,
+						["g"] = 0.7490196078431373,
+						["b"] = 0.7490196078431373,
 					},
-					["point"] = "BOTTOM",
 					["barslocked"] = true,
 					["background"] = {
+						["height"] = 103.6235427856445,
 						["color"] = {
 							["a"] = 0,
 							["b"] = 0.5019607843137255,
 						},
-						["height"] = 103.6235427856445,
 					},
 					["bartexture"] = "Minimalist",
 					["barwidth"] = 189.8040466308594,
@@ -44,13 +43,14 @@ SkadaDB = {
 						["fontsize"] = 13,
 						["color"] = {
 							["a"] = 0,
-							["b"] = 0.3019607843137255,
-							["g"] = 0.1019607843137255,
 							["r"] = 0.1019607843137255,
+							["g"] = 0.1019607843137255,
+							["b"] = 0.3019607843137255,
 						},
 						["texture"] = "Minimalist",
 					},
-					["barfont"] = "Arial Narrow",
+					["point"] = "BOTTOM",
+					["mode"] = "Damage taken",
 				}, -- [1]
 			},
 			["icon"] = {

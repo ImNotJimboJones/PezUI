@@ -20,64 +20,64 @@ CritlinePerCharDB = {
 					[107821] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Devourer of Souls",
+								["target"] = "Asira Dawnslayer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 1073,
+								["targetLevel"] = 87,
+								["amount"] = 1197,
 							},
 							["crit"] = {
-								["target"] = "Devourer of Souls",
+								["target"] = "Asira Dawnslayer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 1657,
+								["targetLevel"] = 87,
+								["amount"] = 1849,
 							},
 						},
 					},
 					[1978] = {
 						[2] = {
 							["crit"] = {
-								["target"] = "Lord Jaraxxus",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 8742,
+								["targetLevel"] = 87,
+								["amount"] = 10729,
 							},
 							["normal"] = {
-								["target"] = "Onyxia",
+								["target"] = "Echo of Baine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 4162,
+								["targetLevel"] = 87,
+								["amount"] = 5042,
 							},
 						},
 					},
 					[109724] = {
 						{
 							["crit"] = {
-								["target"] = "Anub'arak",
+								["target"] = "Echo of Baine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 27750,
+								["targetLevel"] = 87,
+								["amount"] = 27839,
 							},
 							["normal"] = {
-								["target"] = "Icehowl",
+								["target"] = "Echo of Baine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 13625,
+								["targetLevel"] = 87,
+								["amount"] = 14813,
 							},
 						}, -- [1]
 					},
 					[77767] = {
 						{
 							["normal"] = {
-								["target"] = "Icehowl",
+								["target"] = "Echo of Jaina",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 16178,
+								["targetLevel"] = 87,
+								["amount"] = 18118,
 							},
 							["crit"] = {
-								["target"] = "Anub'arak",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 34725,
+								["targetLevel"] = 87,
+								["amount"] = 39833,
 							},
 						}, -- [1]
 					},
@@ -110,64 +110,64 @@ CritlinePerCharDB = {
 					[3044] = {
 						{
 							["crit"] = {
-								["target"] = "Devourer of Souls",
+								["target"] = "Echo of Baine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 38169,
+								["targetLevel"] = 87,
+								["amount"] = 44434,
 							},
 							["normal"] = {
-								["target"] = "Devourer of Souls",
+								["target"] = "Echo of Baine",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 17763,
+								["targetLevel"] = 87,
+								["amount"] = 21945,
 							},
 						}, -- [1]
 					},
 					[53351] = {
 						{
 							["crit"] = {
-								["target"] = "Lord Jaraxxus",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 61913,
+								["targetLevel"] = 87,
+								["amount"] = 69468,
 							},
 							["normal"] = {
-								["target"] = "Dreadscale",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 31001,
+								["targetLevel"] = 87,
+								["amount"] = 32429,
 							},
 						}, -- [1]
 					},
 					[3674] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Onyxia",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 4482,
+								["targetLevel"] = 87,
+								["amount"] = 4979,
 							},
 							["crit"] = {
-								["target"] = "Onyxia",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 9366,
+								["targetLevel"] = 87,
+								["amount"] = 10406,
 							},
 						},
 					},
 					[88453] = {
 						[2] = {
 							["crit"] = {
-								["target"] = "Brienna Nightfell",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 8734,
+								["targetLevel"] = 85,
+								["amount"] = 9999,
 							},
 							["normal"] = {
-								["target"] = "Nerubian Burrower",
+								["target"] = "Infinite Warden",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 4088,
+								["targetLevel"] = 85,
+								["amount"] = 4784,
 							},
 						},
 					},
@@ -204,16 +204,16 @@ CritlinePerCharDB = {
 						}, -- [1]
 						{
 							["crit"] = {
-								["target"] = "Nerubian Burrower",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 4804,
+								["targetLevel"] = 85,
+								["amount"] = 5611,
 							},
 							["normal"] = {
-								["target"] = "Nerubian Burrower",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 3109,
+								["targetLevel"] = 85,
+								["amount"] = 3632,
 							},
 						}, -- [2]
 					},
@@ -230,64 +230,64 @@ CritlinePerCharDB = {
 					[53301] = {
 						[2] = {
 							["crit"] = {
-								["target"] = "Anub'arak",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 27945,
+								["targetLevel"] = 87,
+								["amount"] = 33209,
 							},
 							["normal"] = {
-								["target"] = "Gluth",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 13333,
+								["targetLevel"] = 87,
+								["amount"] = 15890,
 							},
 						},
 					},
 					[75] = {
 						{
 							["crit"] = {
-								["target"] = "Anub'arak",
+								["target"] = "Arcurion",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 18511,
+								["targetLevel"] = 87,
+								["amount"] = 19841,
 							},
 							["normal"] = {
-								["target"] = "Ragnaros",
+								["target"] = "Arcurion",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 8667,
+								["targetLevel"] = 87,
+								["amount"] = 9593,
 							},
 						}, -- [1]
 					},
 					[83077] = {
 						{
 							["crit"] = {
-								["target"] = "Anub'arak",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 20156,
+								["targetLevel"] = 85,
+								["amount"] = 22397,
 							},
 							["normal"] = {
-								["target"] = "Lord Jaraxxus",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 6275,
+								["targetLevel"] = 85,
+								["amount"] = 7179,
 							},
 						}, -- [1]
 					},
 					[2643] = {
 						{
 							["crit"] = {
-								["target"] = "Core Rager",
+								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 62,
-								["amount"] = 20256,
+								["targetLevel"] = 85,
+								["amount"] = 23302,
 							},
 							["normal"] = {
-								["target"] = "Lava Elemental",
+								["target"] = "Time-Twisted Footman",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 62,
-								["amount"] = 10395,
+								["targetLevel"] = 85,
+								["amount"] = 11114,
 							},
 						}, -- [1]
 					},
@@ -328,10 +328,10 @@ CritlinePerCharDB = {
 					[53508] = {
 						{
 							["normal"] = {
-								["target"] = "Iceborn Proto-Drake",
+								["target"] = "Time-Twisted Footman",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1512,
+								["targetLevel"] = 85,
+								["amount"] = 1533,
 							},
 							["crit"] = {
 								["target"] = "Dreadscale",

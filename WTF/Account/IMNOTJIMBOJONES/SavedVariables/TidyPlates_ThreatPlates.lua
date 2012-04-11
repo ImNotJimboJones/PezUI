@@ -122,20 +122,20 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["castbar"] = {
-					["texture"] = "Minimalist",
-				},
 				["healthborder"] = {
 					["texture"] = "TP_HealthBarOverlayThin",
+				},
+				["castbar"] = {
+					["texture"] = "Minimalist",
 				},
 			},
 			["cacheClass"] = true,
