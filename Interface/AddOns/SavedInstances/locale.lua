@@ -3,14 +3,13 @@
 -- To help with missing translations please go here:
 -- http://www.wowace.com/addons/saved_instances/localization/
 
+local addonName, vars = ...
 local Ld, La = {}, {}
 local locale = GAME_LOCALE or GetLocale()
 
-function SavedInstances_locale()
-  return setmetatable({},{
+vars.L = setmetatable({},{
     __index = function(t, s) return La[s] or Ld[s] or rawget(t,s) or s end
-  })
-end
+})
 
 Ld["Alternating columns are colored differently"] = "Alternating columns are colored differently"
 Ld["Always show"] = "Always show"
@@ -622,7 +621,7 @@ La["Show Holiday"] = "显示节日" -- Needs review
 La["Show holiday boss rewards"] = "显示节日boss奖励" -- Needs review
 La["Show minimap button"] = "显示小地图按钮"
 La["Show name for a category when all displayed instances belong only to that category"] = "显示所有已显示副本所归属的分类名字" -- Needs review
--- La["Show self first"] = ""
+La["Show self first"] = "首先显示自身" -- Needs review
 La["Show the SavedInstances minimap button"] = "显示 SavedInstances 小地图按钮"
 La["Show tooltip hints"] = "显示提示信息"
 La["Show when not saved"] = "当未保存时显示"
@@ -631,7 +630,7 @@ La["Show which characters have completed a random dungeon"] = "显示哪个角�
 La["Similarly, the words KILLED and TOTAL will be substituted with the number of bosses killed and total in the lockout."] = "词汇 KILLED 和 TOTAL 将被匹配为首领的击杀数量和总数." -- Needs review
 La["Single category name"] = "单独类别名字"
 La["%s instances"] = "%s 副本"
--- La["Sort by server"] = ""
+La["Sort by server"] = "按服务器排序" -- Needs review
 La["Sort categories by"] = "排序分类按" -- Needs review
 La["Space between categories"] = "分类的间距" -- Needs review
 La["Text"] = "文本"
@@ -804,7 +803,7 @@ La["Show Holiday"] = "顯示節日"
 La["Show holiday boss rewards"] = "顯示節日地城獎勵"
 La["Show minimap button"] = "顯示小地圖按鈕"
 La["Show name for a category when all displayed instances belong only to that category"] = "當所有顯示的副本只屬於該類別時顯示類別名稱"
-La["Show self first"] = "優先顯示自己" -- Needs review
+La["Show self first"] = "優先顯示自己"
 La["Show the SavedInstances minimap button"] = "顯示SavedInstances小地圖按鈕"
 La["Show tooltip hints"] = "顯示工具列提示"
 La["Show when not saved"] = "當無進度時顯示"
@@ -813,7 +812,7 @@ La["Show which characters have completed a random dungeon"] = "顯示哪個角�
 La["Similarly, the words KILLED and TOTAL will be substituted with the number of bosses killed and total in the lockout."] = "同樣的，「KILLED」和「TOTAL」字樣也會被替換為首領已擊殺與總數的數字。"
 La["Single category name"] = "單一分類名稱"
 La["%s instances"] = "%s 副本"
-La["Sort by server"] = "排序根據伺服器" -- Needs review
+La["Sort by server"] = "排序根據伺服器"
 La["Sort categories by"] = "排序分類按"
 La["Space between categories"] = "分類的間隔"
 La["Text"] = "文字"
@@ -922,5 +921,96 @@ La["Use class color"] = "Usar cor das classes"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "Atenção: Você entrou em cerca de%i Instância e esta se aproximando de %i , limite por hora para a sua conta. Mais instâncias devem estar disponíveis em %s."
 -- La["Weekly Quests"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "Você pode combinar os ícones e texto em um único indicador, se desejar. Basta escolher um ícone, e inserir o ícone no campo de texto. Em qualquer lugar do ícone for encontrado, o ícone que você escolheu será substituída dentro"
+
+elseif locale == "itIT" then do end
+-- La["Alternating columns are colored differently"] = ""
+-- La["Always show"] = ""
+-- La["Always show new instances"] = ""
+-- La["Bind a key to toggle the SavedInstances tooltip"] = ""
+-- La["Blizzard currently imposes a limit of 5 instances per hour per account. This feature will show you how many different instances you have entered in the last hour (if you have been in more than two). Once you have reached the limit, you will be shown how much time you must wait until you will be allowed to enter a new instance."] = ""
+-- La["Categories"] = ""
+-- La["|cffffff00Left-click|r to detach tooltip"] = ""
+-- La["|cffffff00Middle-click|r to show Blizzard's Raid Information"] = ""
+-- La["|cffffff00Right-click|r to configure SavedInstances"] = ""
+-- La["Character column style"] = ""
+-- La["Character details"] = ""
+-- La["Characters"] = ""
+-- La["Columns are colored according to the characters class"] = ""
+-- La["Columns are the same color as the whole tooltip"] = ""
+-- La["Completed encounters"] = ""
+-- La["Daily Quests"] = ""
+-- La["Display instances in order of recommended level from lowest to highest"] = ""
+-- La["Display instances with space inserted between categories"] = ""
+-- La["Dungeon Finder ID"] = ""
+-- La["Encounters"] = ""
+-- La["Expansion"] = ""
+-- La["Expired Lockout - Can be extended"] = ""
+-- La["Extended Lockout - Not yet saved"] = ""
+-- La["General settings"] = ""
+-- La["Hold Alt to show all data"] = ""
+-- La["Hover mouse on indicator for details"] = ""
+-- La["Indicators"] = ""
+-- La["Instance details"] = ""
+-- La["Instance options"] = ""
+-- La["Instances"] = ""
+-- La["List categories from the current expansion pack first"] = ""
+-- La["List is empty"] = ""
+-- La["List raid categories before dungeon categories"] = ""
+-- La["Lockouts"] = ""
+-- La["Members"] = ""
+-- La["Miscellaneous"] = ""
+-- La["Most recent first"] = ""
+-- La["Move down"] = ""
+-- La["Move up"] = ""
+-- La["Never show"] = ""
+-- La["Note"] = ""
+-- La["Raids before dungeons"] = ""
+-- La["Recent instance activity"] = ""
+-- La["Recent Instances"] = ""
+-- La["Report instance resets to group"] = ""
+-- La["Reverse ordering"] = ""
+-- La["Selected category"] = ""
+-- La["Selected character"] = ""
+-- La["Selected instance"] = ""
+-- La["Show category names"] = ""
+-- La["Show category names in the tooltip"] = ""
+-- La["Show cooldown for characters to use battleground system"] = ""
+-- La["Show cooldown for characters to use LFG dungeon system"] = ""
+-- La["Show Expired"] = ""
+-- La["Show expired instance lockouts"] = ""
+-- La["Show/Hide the SavedInstances tooltip"] = ""
+-- La["Show history in Broker data feed"] = ""
+-- La["Show history in tooltip"] = ""
+-- La["Show Holiday"] = ""
+-- La["Show holiday boss rewards"] = ""
+-- La["Show minimap button"] = ""
+-- La["Show name for a category when all displayed instances belong only to that category"] = ""
+-- La["Show self first"] = ""
+-- La["Show the SavedInstances minimap button"] = ""
+-- La["Show tooltip hints"] = ""
+-- La["Show when not saved"] = ""
+-- La["Show when saved"] = ""
+-- La["Show which characters have completed a random dungeon"] = ""
+-- La["Similarly, the words KILLED and TOTAL will be substituted with the number of bosses killed and total in the lockout."] = ""
+-- La["Single category name"] = ""
+-- La["%s instances"] = ""
+-- La["Sort by server"] = ""
+-- La["Sort categories by"] = ""
+-- La["Space between categories"] = ""
+-- La["Text"] = ""
+-- La["These are the instances that count towards the %i instances per hour account limit, and the time until they expire."] = ""
+-- La["Time Left"] = ""
+-- La["Track"] = ""
+-- La["Track Battleground Deserter cooldown"] = ""
+-- La["Track Daily Quests"] = ""
+-- La["Track LFG dungeon cooldown"] = ""
+-- La["Track random daily dungeon"] = ""
+-- La["Track the instance IDs saved against your characters"] = ""
+-- La["Track Weekly Quests"] = ""
+-- La["Type"] = ""
+-- La["Use class color"] = ""
+-- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
+-- La["Weekly Quests"] = ""
+-- La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = ""
 
 end

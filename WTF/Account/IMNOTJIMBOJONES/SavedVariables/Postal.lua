@@ -1,14 +1,14 @@
 
 Postal3DB = {
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["global"] = {
 		["BlackBook"] = {
 			["alts"] = {
 				"Pezzer|Burning Blade|Horde|85|HUNTER", -- [1]
 			},
 		},
-	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

@@ -1,10 +1,8 @@
 local addonName, vars = ...
 SavedInstances = vars
 local addon = vars
-local addonName = "SavedInstances"
-vars.core = LibStub("AceAddon-3.0"):NewAddon("SavedInstances", "AceEvent-3.0", "AceTimer-3.0")
+vars.core = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceEvent-3.0", "AceTimer-3.0")
 local core = vars.core
-vars.L = SavedInstances_locale()
 local L = vars.L
 vars.LDB = LibStub("LibDataBroker-1.1", true)
 vars.icon = vars.LDB and LibStub("LibDBIcon-1.0", true)
@@ -13,19 +11,16 @@ local QTip = LibStub("LibQTip-1.0")
 local dataobject, db, config
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 140 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 145 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
-local GetExpansionLevel = GetExpansionLevel
-local GetInstanceDifficulty = GetInstanceDifficulty
-local GetNumSavedInstances = GetNumSavedInstances
-local GetSavedInstanceInfo = GetSavedInstanceInfo
-local IsInInstance = IsInInstance
-local SecondsToTime = SecondsToTime
+local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
+      table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub
+local GetSavedInstanceInfo, GetNumSavedInstances, GetSavedInstanceChatLink, GetLFGDungeonNumEncounters, GetLFGDungeonEncounterInfo, GetNumRandomDungeons, GetLFGRandomDungeonInfo, GetLFGDungeonInfo, LFGGetDungeonInfoByID, GetLFGDungeonRewards, GetTime, UnitIsUnit, GetInstanceInfo, GetLFGMode, IsInInstance, SecondsToTime, GetQuestResetTime, GetGameTime, GetCurrencyInfo, GetNumRaidMembers, GetNumPartyMembers = 
+      GetSavedInstanceInfo, GetNumSavedInstances, GetSavedInstanceChatLink, GetLFGDungeonNumEncounters, GetLFGDungeonEncounterInfo, GetNumRandomDungeons, GetLFGRandomDungeonInfo, GetLFGDungeonInfo, LFGGetDungeonInfoByID, GetLFGDungeonRewards, GetTime, UnitIsUnit, GetInstanceInfo, GetLFGMode, IsInInstance, SecondsToTime, GetQuestResetTime, GetGameTime, GetCurrencyInfo, GetNumRaidMembers, GetNumPartyMembers
 
 -- local (optimal) references to Blizzard's strings
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
-local NO_RAID_INSTANCES_SAVED = NO_RAID_INSTANCES_SAVED -- "You are not saved to any instances"
 local RAID_FINDER = PLAYER_DIFFICULTY3
 local FONTEND = FONT_COLOR_CODE_CLOSE
 local GOLDFONT = NORMAL_FONT_COLOR_CODE
@@ -35,6 +30,8 @@ local GREENFONT = GREEN_FONT_COLOR_CODE
 local WHITEFONT = HIGHLIGHT_FONT_COLOR_CODE
 local GRAYFONT = GRAY_FONT_COLOR_CODE
 local LFD_RANDOM_REWARD_EXPLANATION2 = LFD_RANDOM_REWARD_EXPLANATION2
+local INSTANCE_SAVED, TRANSFER_ABORT_TOO_MANY_INSTANCES, NO_RAID_INSTANCES_SAVED = 
+      INSTANCE_SAVED, TRANSFER_ABORT_TOO_MANY_INSTANCES, NO_RAID_INSTANCES_SAVED
 
 vars.Indicators = {
 	ICON_STAR = ICON_LIST[1] .. "16:16:0:0|t",
@@ -283,7 +280,7 @@ function addon:GetServerOffset()
 	local localHour, localMinute = tonumber(date("%H")), tonumber(date("%M"))
 	local server = serverHour + serverMinute / 60
 	local localT = localHour + localMinute / 60
-	offset = floor((server - localT) * 2 + 0.5) / 2
+	local offset = floor((server - localT) * 2 + 0.5) / 2
 	if raw then return offset end
 	if offset >= 12 then
 		offset = offset - 24
@@ -560,7 +557,7 @@ function addon:OrderedCategories()
 end
 
 local function DifficultyString(instance, diff, toon, expired)
-	local setting
+	local setting,color
 	if not instance then
 		setting = "D" .. diff
 	else
@@ -1645,7 +1642,7 @@ function core:ShowTooltip(anchorframe)
 	tooltip:SetScript("OnUpdate", UpdateTooltip)
 	tooltip:Clear()
 	local hFont = tooltip:GetHeaderFont()
-	local hFontPath, hFontSize
+	local hFontPath, hFontSize,_
 	hFontPath, hFontSize, _ = hFont:GetFont()
 	hFont:SetFont(hFontPath, hFontSize, "OUTLINE")
 	tooltip:SetHeaderFont(hFont)

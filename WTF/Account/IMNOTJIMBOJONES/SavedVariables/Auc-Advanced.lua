@@ -1,7 +1,5 @@
 
 AucAdvancedConfig = {
-	["users.Burning Blade.Pezzer"] = "Default",
-	["version"] = 1,
 	["profile.Default"] = {
 		["scandata.summaryonpartial"] = false,
 		["scandata"] = {
@@ -28,14 +26,7 @@ AucAdvancedConfig = {
 			},
 		},
 		["configator.left"] = 322.8235778808594,
-		["stat"] = {
-			["wowecon"] = {
-			},
-			["sales"] = {
-				["ignoredsigs"] = {
-				},
-			},
-		},
+		["scancommit.targetFPS"] = 30,
 		["filter"] = {
 			["basic"] = {
 			},
@@ -51,7 +42,8 @@ AucAdvancedConfig = {
 			["simpleauc"] = {
 				["tooltip"] = false,
 			},
-			["scanstart"] = {
+			["automagic"] = {
+				["uierrormsg"] = 1,
 			},
 			["mover"] = {
 				["anchors"] = {
@@ -62,16 +54,24 @@ AucAdvancedConfig = {
 					-104, -- [5]
 				},
 			},
-			["automagic"] = {
-				["uierrormsg"] = 1,
+			["scanstart"] = {
 			},
 			["pricelevel"] = {
 			},
 		},
 		["ModTTShow"] = "never",
-		["scancommit.targetFPS"] = 30,
+		["stat"] = {
+			["sales"] = {
+				["ignoredsigs"] = {
+				},
+			},
+			["wowecon"] = {
+			},
+		},
 		["configator.top"] = 676.7647705078125,
 	},
+	["users.Burning Blade.Pezzer"] = "Default",
+	["version"] = 1,
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
@@ -80,15 +80,15 @@ AucAdvancedData = {
 	["Stats"] = {
 	},
 	["UtilSearchUiData"] = {
-		["Version"] = 1,
-		["Current"] = {
-			["snatch.itemsList"] = {
-			},
-		},
 		["Global"] = {
 			["configator.left"] = 318.0000305175781,
 			["configator.top"] = 730.0000610351562,
 		},
+		["Current"] = {
+			["snatch.itemsList"] = {
+			},
+		},
+		["Version"] = 1,
 		["SavedSearches"] = {
 		},
 	},
