@@ -46,8 +46,8 @@ FrameLevel: 1
 Anchor: LEFT
 X: 77
 Y: 163
-W: 284
-H: 204
+W: 128
+H: 64
 Frame: ColorPickerFrame
 FrameLevel: 4
 Anchor: LEFT

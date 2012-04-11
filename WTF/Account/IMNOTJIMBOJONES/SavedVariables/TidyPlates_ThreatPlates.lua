@@ -23,6 +23,9 @@ ThreatPlatesDB = {
 				"Marksmanship", -- [2]
 				"Survival", -- [3]
 			},
+			["threat"] = {
+				["tanking"] = false,
+			},
 		},
 	},
 	["profileKeys"] = {
@@ -34,6 +37,9 @@ ThreatPlatesDB = {
 				["toggle"] = {
 					["Totem"] = true,
 				},
+			},
+			["comboWidget"] = {
+				["ON"] = true,
 			},
 			["allowClass"] = true,
 			["uniqueSettings"] = {
@@ -108,6 +114,23 @@ ThreatPlatesDB = {
 					"", -- [50]
 				},
 			},
+			["threatWidget"] = {
+				["ON"] = true,
+			},
+			["threat"] = {
+				["tank"] = {
+					["scale"] = {
+						["MEDIUM"] = 1.1,
+						["HIGH"] = 1,
+					},
+				},
+				["dps"] = {
+					["scale"] = {
+						["MEDIUM"] = 1.1,
+						["LOW"] = 1,
+					},
+				},
+			},
 			["text"] = {
 				["amount"] = false,
 			},
@@ -122,21 +145,25 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["healthborder"] = {
-					["texture"] = "TP_HealthBarOverlayThin",
-				},
 				["castbar"] = {
 					["texture"] = "Minimalist",
 				},
+				["healthborder"] = {
+					["texture"] = "TP_HealthBarOverlayThin",
+				},
+			},
+			["friendlyClassIcon"] = true,
+			["targetWidget"] = {
+				["theme"] = "arrows",
 			},
 			["cacheClass"] = true,
 			["castbarColor"] = {
@@ -144,7 +171,13 @@ ThreatPlatesDB = {
 				["g"] = 0.8274509803921568,
 				["b"] = 0.4509803921568628,
 			},
+			["classWidget"] = {
+				["ON"] = false,
+			},
 			["friendlyClass"] = true,
+			["debuffWidget"] = {
+				["mode"] = "blacklistMine",
+			},
 		},
 	},
 }

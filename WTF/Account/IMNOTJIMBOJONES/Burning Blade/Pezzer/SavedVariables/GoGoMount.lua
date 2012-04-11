@@ -1,20 +1,5 @@
 
 GoGo_Prefs = {
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["DruidFlightForm"] = false,
-	["RemoveBuffs"] = 1,
-	["autodismount"] = 1,
-	["DruidClickForm"] = true,
-	["GlobalExclude"] = {
-	},
-	["version"] = "4.3.5",
-	["DruidFormNotRandomize"] = false,
-	["GlobalPrefMounts"] = {
-	},
-	["UnknownMounts"] = {
-	},
-	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -149,12 +134,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Uldum"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
+			["ZoneID"] = 13,
 		},
 		["Crystalsong Forest"] = {
 			["Preferred"] = {
@@ -163,7 +148,63 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Hyjal Summit"] = {
+		["Tanaris"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 816,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
+		},
+		["Uldum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 720,
+		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
+		["Orgrimmar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 321,
+		},
+		["Northern Barrens"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 11,
+		},
+		["The Molten Core"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["End Time"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Hour of Twilight"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -184,63 +225,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["End Time"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Northern Barrens"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 11,
-		},
-		["The Molten Core"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Orgrimmar"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 321,
-		},
-		["Icecrown Citadel"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 492,
-		},
-		["Blackrock Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 29,
-		},
-		["Tanaris"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 816,
-		},
-		["Abyssal Depths"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -248,6 +233,21 @@ GoGo_Prefs = {
 			["ZoneID"] = 13,
 		},
 	},
+	["DruidClickForm"] = true,
+	["DruidFlightForm"] = false,
+	["GlobalExclude"] = {
+	},
+	["UnknownMounts"] = {
+	},
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["version"] = "4.3.5",
+	["RemoveBuffs"] = 1,
+	["GlobalPrefMounts"] = {
+	},
+	["autodismount"] = 1,
+	["PaladinUseCrusaderAura"] = false,
+	["DruidFormNotRandomize"] = false,
 }
 GoGo_DebugLog = {
 }
