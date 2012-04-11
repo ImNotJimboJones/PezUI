@@ -173,10 +173,10 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["stripColors"] = false,
-						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["area"] = "left",
 						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -230,10 +230,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
 						["stripColors"] = false,
+						["enabled"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["bar"] = 2,
 						["pos"] = 4,
 					},
@@ -363,16 +363,16 @@ BazookaDB = {
 					["SN - Vengeance"] = {
 						["pos"] = 16,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
-					},
-					["SN - MP5"] = {
-						["pos"] = 18,
-					},
 					["SocialState"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 4,
+					},
+					["SN - MP5"] = {
+						["pos"] = 18,
+					},
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -407,9 +407,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["bar"] = 2,
 						["pos"] = 2,
 						["showSuffix"] = false,
-						["bar"] = 2,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -463,12 +463,12 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["Broker_uClock"] = {
-						["showValue"] = false,
+						["stripColors"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["pos"] = 9,
-						["stripColors"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["bar"] = 2,
 					},
 					["SN - Ranged Attack Power"] = {

@@ -1,19 +1,11 @@
 
 GoGo_Prefs = {
+	["DruidDisableInCombat"] = false,
 	["AspectPack"] = false,
 	["DruidFlightForm"] = false,
 	["RemoveBuffs"] = 1,
 	["autodismount"] = 1,
-	["DruidFormNotRandomize"] = false,
-	["DruidDisableInCombat"] = false,
 	["Zones"] = {
-		["Icecrown"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 492,
-		},
 		["Wintergrasp"] = {
 			["Preferred"] = {
 			},
@@ -28,7 +20,84 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["Icecrown Citadel"] = {
+		["The Forge of Souls"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 602,
+		},
+		["Well of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Dustwallow Marsh"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 141,
+		},
+		["Naxxramas"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 488,
+		},
+		["The Eye of Eternity"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
+		},
+		["Trial of the Crusader"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Tirisfal Glades"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Borean Tundra"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 486,
+		},
+		["Durotar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 820,
+		},
+		["Darkmoon Island"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Onyxia's Lair"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Icecrown"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -49,20 +118,6 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Forge of Souls"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 602,
-		},
-		["Blackrock Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 29,
-		},
 		["Mulgore"] = {
 			["Preferred"] = {
 			},
@@ -70,12 +125,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 823,
 		},
-		["Dustwallow Marsh"] = {
+		["Kelp'thar Forest"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 141,
+			["ZoneID"] = 13,
 		},
 		["Dalaran"] = {
 			["Preferred"] = {
@@ -84,12 +139,47 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["The Eye of Eternity"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 486,
+			["ZoneID"] = 13,
+		},
+		["Crystalsong Forest"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 510,
+		},
+		["Tanaris"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 816,
+		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
+		["The Obsidian Sanctum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 488,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
 		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
@@ -98,7 +188,35 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
+		["Northern Barrens"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 11,
+		},
 		["The Molten Core"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["End Time"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Hour of Twilight"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -119,107 +237,17 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 720,
 		},
-		["Crystalsong Forest"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 510,
-		},
-		["Trial of the Crusader"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Tirisfal Glades"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["The Obsidian Sanctum"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 488,
-		},
-		["Borean Tundra"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 486,
-		},
-		["Durotar"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 820,
-		},
-		["Northern Barrens"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 11,
-		},
-		["Darkmoon Island"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Onyxia's Lair"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["The Oculus"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["End Time"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 820,
-		},
-		["Naxxramas"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 488,
-		},
 	},
-	["DruidClickForm"] = true,
+	["GlobalExclude"] = {
+	},
 	["version"] = "4.3.5",
 	["UnknownMounts"] = {
 	},
 	["GlobalPrefMounts"] = {
 	},
-	["GlobalExclude"] = {
-	},
+	["DruidFormNotRandomize"] = false,
 	["PaladinUseCrusaderAura"] = false,
+	["DruidClickForm"] = true,
 }
 GoGo_DebugLog = {
 }

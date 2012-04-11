@@ -49,6 +49,16 @@ CritlinePerCharDB = {
 							},
 						},
 					},
+					[105006] = {
+						{
+							["normal"] = {
+								["target"] = "Mannoroth",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 32400,
+							},
+						}, -- [1]
+					},
 					[109724] = {
 						{
 							["crit"] = {
@@ -68,10 +78,10 @@ CritlinePerCharDB = {
 					[77767] = {
 						{
 							["normal"] = {
-								["target"] = "Echo of Jaina",
+								["target"] = "Murozond",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 87,
-								["amount"] = 18118,
+								["amount"] = 19273,
 							},
 							["crit"] = {
 								["target"] = "Murozond",
@@ -142,26 +152,26 @@ CritlinePerCharDB = {
 					[3674] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Murozond",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 87,
-								["amount"] = 4979,
+								["targetLevel"] = -1,
+								["amount"] = 5066,
 							},
 							["crit"] = {
-								["target"] = "Murozond",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 87,
-								["amount"] = 10406,
+								["targetLevel"] = -1,
+								["amount"] = 10586,
 							},
 						},
 					},
 					[88453] = {
 						[2] = {
 							["crit"] = {
-								["target"] = "Infinite Suppressor",
+								["target"] = "Highguard Elite",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 9999,
+								["targetLevel"] = 86,
+								["amount"] = 10397,
 							},
 							["normal"] = {
 								["target"] = "Infinite Warden",
@@ -180,10 +190,10 @@ CritlinePerCharDB = {
 								["amount"] = 4045,
 							},
 							["crit"] = {
-								["target"] = "Flamewaker",
+								["target"] = "Eye of the Legion",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 62,
-								["amount"] = 7469,
+								["targetLevel"] = 85,
+								["amount"] = 8394,
 							},
 						}, -- [1]
 					},
@@ -196,10 +206,10 @@ CritlinePerCharDB = {
 								["amount"] = 3167,
 							},
 							["crit"] = {
-								["target"] = "Nerubian Burrower",
+								["target"] = "Enchanted Magus",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 82,
-								["amount"] = 5591,
+								["targetLevel"] = 85,
+								["amount"] = 5781,
 							},
 						}, -- [1]
 						{
@@ -220,10 +230,10 @@ CritlinePerCharDB = {
 					[99621] = {
 						{
 							["normal"] = {
-								["target"] = "Flamewaker Healer",
+								["target"] = "Enchanted Magus",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 60,
-								["amount"] = 1383,
+								["targetLevel"] = 85,
+								["amount"] = 1387,
 							},
 						}, -- [1]
 					},
@@ -233,7 +243,7 @@ CritlinePerCharDB = {
 								["target"] = "Murozond",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 87,
-								["amount"] = 33209,
+								["amount"] = 34024,
 							},
 							["normal"] = {
 								["target"] = "Murozond",
@@ -246,32 +256,52 @@ CritlinePerCharDB = {
 					[75] = {
 						{
 							["crit"] = {
-								["target"] = "Arcurion",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 87,
-								["amount"] = 19841,
+								["targetLevel"] = -1,
+								["amount"] = 20366,
 							},
 							["normal"] = {
-								["target"] = "Arcurion",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 87,
-								["amount"] = 9593,
+								["targetLevel"] = -1,
+								["amount"] = 10293,
+							},
+						}, -- [1]
+					},
+					[103919] = {
+						{
+							["normal"] = {
+								["target"] = "Doomguard Annihilator",
+								["isPvPTarget"] = false,
+								["targetLevel"] = 85,
+								["amount"] = 134764,
 							},
 						}, -- [1]
 					},
 					[83077] = {
 						{
 							["crit"] = {
-								["target"] = "Infinite Suppressor",
+								["target"] = "Highguard Elite",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 22397,
+								["targetLevel"] = 86,
+								["amount"] = 23289,
 							},
 							["normal"] = {
 								["target"] = "Infinite Suppressor",
 								["isPvPTarget"] = false,
 								["targetLevel"] = 85,
 								["amount"] = 7179,
+							},
+						}, -- [1]
+					},
+					[105523] = {
+						{
+							["normal"] = {
+								["target"] = "Mannoroth",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 1504887,
 							},
 						}, -- [1]
 					},
@@ -293,6 +323,16 @@ CritlinePerCharDB = {
 					},
 				},
 				["pet"] = {
+					[105523] = {
+						{
+							["normal"] = {
+								["target"] = "Mannoroth",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 1661370,
+							},
+						}, -- [1]
+					},
 					[17253] = {
 						{
 							["normal"] = {
@@ -302,10 +342,10 @@ CritlinePerCharDB = {
 								["amount"] = 7850,
 							},
 							["crit"] = {
-								["target"] = "Dreadscale",
+								["target"] = "Highguard Elite",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 15603,
+								["targetLevel"] = 86,
+								["amount"] = 15794,
 							},
 						}, -- [1]
 					},
@@ -328,10 +368,10 @@ CritlinePerCharDB = {
 					[53508] = {
 						{
 							["normal"] = {
-								["target"] = "Time-Twisted Footman",
+								["target"] = "Highguard Elite",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1533,
+								["targetLevel"] = 86,
+								["amount"] = 1591,
 							},
 							["crit"] = {
 								["target"] = "Dreadscale",
