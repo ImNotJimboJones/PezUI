@@ -323,16 +323,6 @@ CritlinePerCharDB = {
 					},
 				},
 				["pet"] = {
-					[105523] = {
-						{
-							["normal"] = {
-								["target"] = "Mannoroth",
-								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 1661370,
-							},
-						}, -- [1]
-					},
 					[17253] = {
 						{
 							["normal"] = {
@@ -349,19 +339,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[6603] = {
+					[105523] = {
 						{
 							["normal"] = {
-								["target"] = "Gormok the Impaler",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
-								["amount"] = 2611,
-							},
-							["crit"] = {
-								["target"] = "Gormok the Impaler",
-								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 5213,
+								["amount"] = 1661370,
 							},
 						}, -- [1]
 					},
@@ -378,6 +362,22 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
 								["amount"] = 3198,
+							},
+						}, -- [1]
+					},
+					[6603] = {
+						{
+							["normal"] = {
+								["target"] = "Gormok the Impaler",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 2611,
+							},
+							["crit"] = {
+								["target"] = "Gormok the Impaler",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 5213,
 							},
 						}, -- [1]
 					},

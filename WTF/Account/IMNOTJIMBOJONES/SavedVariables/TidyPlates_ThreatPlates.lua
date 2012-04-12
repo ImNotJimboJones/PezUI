@@ -2,7 +2,6 @@
 ThreatPlatesDB = {
 	["char"] = {
 		["Pezzer - Burning Blade"] = {
-			["welcome"] = true,
 			["spec"] = {
 				["primary"] = false,
 			},
@@ -23,9 +22,7 @@ ThreatPlatesDB = {
 				"Marksmanship", -- [2]
 				"Survival", -- [3]
 			},
-			["threat"] = {
-				["tanking"] = false,
-			},
+			["welcome"] = true,
 		},
 	},
 	["profileKeys"] = {
@@ -41,7 +38,7 @@ ThreatPlatesDB = {
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -131,8 +128,8 @@ ThreatPlatesDB = {
 					},
 				},
 			},
-			["text"] = {
-				["amount"] = false,
+			["debuffWidget"] = {
+				["mode"] = "blacklistMine",
 			},
 			["cache"] = {
 			},
@@ -145,20 +142,20 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["castbar"] = {
-					["texture"] = "Minimalist",
-				},
 				["healthborder"] = {
 					["texture"] = "TP_HealthBarOverlayThin",
+				},
+				["castbar"] = {
+					["texture"] = "Minimalist",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -174,9 +171,9 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["friendlyClass"] = true,
-			["debuffWidget"] = {
-				["mode"] = "blacklistMine",
+			["allowClass"] = true,
+			["text"] = {
+				["amount"] = false,
 			},
 		},
 	},

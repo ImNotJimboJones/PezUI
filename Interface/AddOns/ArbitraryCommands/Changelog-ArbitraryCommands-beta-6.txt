@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r24 | farmbuyer | 2011-11-30 20:50:31 +0000 (Wed, 30 Nov 2011) | 1 line
+Changed paths:
+   A /tags/beta-6 (from /trunk:23)
+
+Tagging as beta-6
+------------------------------------------------------------------------
+r23 | farmbuyer | 2011-11-30 20:50:07 +0000 (Wed, 30 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/ArbitraryCommands.toc
+   M /trunk/ac.lua
+
+TOC bump for 4.3.  Tweak error reporting for player scripts a tiny bit.
+------------------------------------------------------------------------

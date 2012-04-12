@@ -1,5 +1,10 @@
 
 GoGo_Prefs = {
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["DruidFlightForm"] = false,
+	["RemoveBuffs"] = 1,
+	["autodismount"] = 1,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -134,7 +139,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Abyssal Depths"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -148,19 +153,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Tanaris"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 816,
+			["ZoneID"] = 488,
 		},
-		["Blackrock Depths"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 29,
+			["ZoneID"] = 13,
 		},
 		["Uldum"] = {
 			["Preferred"] = {
@@ -169,19 +174,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 720,
 		},
-		["Icecrown Citadel"] = {
+		["Hour of Twilight"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 492,
+			["ZoneID"] = 13,
 		},
-		["Orgrimmar"] = {
+		["End Time"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 321,
+			["ZoneID"] = 13,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {
@@ -197,35 +202,35 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["End Time"] = {
+		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 321,
 		},
-		["Hour of Twilight"] = {
+		["Icecrown Citadel"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 492,
 		},
-		["The Oculus"] = {
+		["Blackrock Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 29,
 		},
-		["The Obsidian Sanctum"] = {
+		["Tanaris"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 816,
 		},
-		["Hyjal Summit"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -234,18 +239,13 @@ GoGo_Prefs = {
 		},
 	},
 	["DruidClickForm"] = true,
-	["DruidFlightForm"] = false,
+	["version"] = "4.3.5",
 	["GlobalExclude"] = {
+	},
+	["GlobalPrefMounts"] = {
 	},
 	["UnknownMounts"] = {
 	},
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["version"] = "4.3.5",
-	["RemoveBuffs"] = 1,
-	["GlobalPrefMounts"] = {
-	},
-	["autodismount"] = 1,
 	["PaladinUseCrusaderAura"] = false,
 	["DruidFormNotRandomize"] = false,
 }
