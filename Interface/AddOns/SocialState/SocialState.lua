@@ -528,7 +528,7 @@ function LDB.OnEnter(self)
 							CLASS = class,
 							FCOLOR = fcolor,
 							STATUS = status,
-							BROADCAST_TEXT = broadcast,
+							BROADCAST_TEXT = broadcast or "",
 							TOONNAME = toonName,
 							CLIENT = client,
 							ZONENAME = zoneName,
@@ -569,6 +569,10 @@ function LDB.OnEnter(self)
 						line = tooltip:SetCell(line, 5, player["GAMETEXT"])
 						if player["CLIENT"] == "S2" then
 							line = tooltip:SetCell(line, 6, "|cff82c5ffStarCraft 2|r")
+						end
+
+						if player["CLIENT"] == "D3" then
+							line = tooltip:SetCell(line, 6, "|cff82c5ffDiablo 3|r")
 						end
 					end
 

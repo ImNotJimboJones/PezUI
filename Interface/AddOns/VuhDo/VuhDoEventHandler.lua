@@ -324,6 +324,7 @@ local function VUHDO_init()
 	VUHDO_initBuffs();
 	VUHDO_initDebuffs(); -- Too soon obviously => ReloadUI
 	VUHDO_clearUndefinedModelEntries();
+	VUHDO_registerAllBouquets(true);
 	VUHDO_reloadUI();
 	VUHDO_getAutoProfile();
 	VUHDO_initCliqueSupport(false);
@@ -333,7 +334,6 @@ local function VUHDO_init()
 		VuhDoNewOptionsTabbedFrame:SetPoint("CENTER",  "UIParent", "CENTER",  0,  0);
 	end
 
-	VUHDO_registerAllBouquets(true);
 	VUHDO_initSharedMedia();
 	VUHDO_initFuBar();
 	VUHDO_initButtonFacade(VUHDO_INSTANCE);

@@ -248,7 +248,7 @@ local function VUHDO_initHotPosOffset(anIndex)
 
 	tHotIcon:SetWidth(sHotIconSize);
 	tHotIcon:SetHeight(sHotIconSize);
-	VUHDO_getBarIconFrame(sButton, anIndex):SetScale(VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"]["" .. anIndex]["scale"] or 1);
+	VUHDO_getBarIconFrame(sButton, anIndex):SetScale(1);
 end
 
 

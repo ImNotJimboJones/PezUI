@@ -1,0 +1,14 @@
+tag v1.0
+af34394ec7eabb6ffd4a8b1b93057109062316f2
+m42i <mfourtytwoi@gmail.com>
+2012-04-25 22:50:09 +0200
+
+1.000 downloads -> 1.0
+
+
+--------------------
+
+m42i:
+	- Added Simplified Chinese translation, thanks ttpod.
+	- Update .gitignore
+	- Bump Interface version to 4.3.4

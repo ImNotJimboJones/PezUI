@@ -1,0 +1,13 @@
+tag 4.3-Release1
+8f2e6714f26fdb2e71062e45563b71b1adffd85f
+CodeRedLin <no@email.(none)>
+2012-04-20 19:51:40 -0400
+
+4.3-Release1
+
+
+--------------------
+
+CodeRedLin:
+	- Update ToC for 4.3
+	- Add Diablo 3 support

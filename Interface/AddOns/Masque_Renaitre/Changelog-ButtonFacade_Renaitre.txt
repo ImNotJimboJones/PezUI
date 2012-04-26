@@ -1,5 +1,8 @@
+v4.3.4
+-code cleanup, version update
+
 v4.3
--update TOC
+-updated TOC
 
 v4.2m1
 -transitioning to Masque, revised code accordingly
