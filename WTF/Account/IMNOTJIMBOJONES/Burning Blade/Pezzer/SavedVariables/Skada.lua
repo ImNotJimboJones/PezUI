@@ -1,201 +1,5 @@
 
 SkadaPerCharDB = {
-	["sets"] = {
-		{
-			["healingabsorbed"] = 0,
-			["absorbTotal"] = 0,
-			["dispells"] = 0,
-			["ccbreaks"] = 0,
-			["time"] = 54,
-			["interrupts"] = 0,
-			["damage"] = 11767,
-			["players"] = {
-				{
-					["last"] = 1335632218,
-					["healingabsorbed"] = 0,
-					["class"] = "HUNTER",
-					["damaged"] = {
-						["Kvaldir Raider"] = 11767,
-					},
-					["auras"] = {
-						["Aspect of the Cheetah"] = {
-							["name"] = "Aspect of the Cheetah",
-							["active"] = 1,
-							["id"] = 5118,
-							["auratype"] = "BUFF",
-							["uptime"] = 48,
-						},
-						["Combat Trance"] = {
-							["name"] = "Combat Trance",
-							["active"] = 1,
-							["id"] = 107960,
-							["auratype"] = "BUFF",
-							["uptime"] = 2,
-						},
-						["Dazed"] = {
-							["name"] = "Dazed",
-							["active"] = 1,
-							["id"] = 15571,
-							["auratype"] = "DEBUFF",
-							["uptime"] = 44,
-						},
-						["Sniper Training"] = {
-							["name"] = "Sniper Training",
-							["active"] = 0,
-							["id"] = 64420,
-							["auratype"] = "BUFF",
-							["uptime"] = 25,
-						},
-						["Âssface: Roar of Recovery"] = {
-							["name"] = "Âssface: Roar of Recovery",
-							["active"] = 0,
-							["id"] = 53517,
-							["auratype"] = "BUFF",
-							["uptime"] = 9,
-						},
-					},
-					["ccbreaks"] = 0,
-					["time"] = 50,
-					["interrupts"] = 0,
-					["healingspells"] = {
-					},
-					["absorbTotal"] = 0,
-					["damage"] = 11767,
-					["damagespells"] = {
-						["Auto Shot"] = {
-							["DODGE"] = 0,
-							["REFLECT"] = 0,
-							["crushing"] = 0,
-							["IMMUNE"] = 0,
-							["glancing"] = 0,
-							["totalhits"] = 1,
-							["MISS"] = 0,
-							["damage"] = 11767,
-							["DEFLECT"] = 0,
-							["id"] = 75,
-							["max"] = 11767,
-							["min"] = 11767,
-							["PARRY"] = 0,
-							["critical"] = 1,
-							["ABSORB"] = 0,
-							["EVADE"] = 0,
-							["RESIST"] = 0,
-							["BLOCK"] = 0,
-							["hit"] = 0,
-						},
-					},
-					["deaths"] = {
-					},
-					["damagetaken"] = 3972,
-					["deathlog"] = {
-					},
-					["id"] = "0x0280000004B625CB",
-					["first"] = 1335632168,
-					["maxhp"] = 149629,
-					["damagetakenspells"] = {
-						["Attack"] = {
-							["id"] = 6603,
-							["name"] = "Attack",
-							["damage"] = 3972,
-						},
-					},
-					["overhealing"] = 0,
-					["healing"] = 0,
-					["name"] = "Pezzer",
-					["absorbSpells"] = {
-					},
-					["healed"] = {
-					},
-					["dispells"] = 0,
-					["power"] = {
-						[2] = {
-							["amount"] = 10,
-							["spells"] = {
-								[34953] = 10,
-							},
-						},
-					},
-					["absorbed"] = {
-					},
-				}, -- [1]
-				{
-					["last"] = 1335632169,
-					["healingabsorbed"] = 0,
-					["class"] = "SHAMAN",
-					["damaged"] = {
-					},
-					["auras"] = {
-						["Unleashed Rage"] = {
-							["name"] = "Unleashed Rage",
-							["active"] = 0,
-							["id"] = 30808,
-							["auratype"] = "BUFF",
-							["uptime"] = 2,
-						},
-					},
-					["ccbreaks"] = 0,
-					["time"] = 1,
-					["interrupts"] = 0,
-					["healingspells"] = {
-					},
-					["absorbTotal"] = 0,
-					["damage"] = 0,
-					["damagespells"] = {
-					},
-					["deaths"] = {
-					},
-					["damagetaken"] = 0,
-					["deathlog"] = {
-					},
-					["id"] = "0x0280000004AD6D3C",
-					["first"] = 1335632168,
-					["maxhp"] = 142845,
-					["damagetakenspells"] = {
-					},
-					["overhealing"] = 0,
-					["healing"] = 0,
-					["name"] = "Raei",
-					["absorbSpells"] = {
-					},
-					["healed"] = {
-					},
-					["dispells"] = 0,
-					["power"] = {
-					},
-					["absorbed"] = {
-					},
-				}, -- [2]
-			},
-			["deaths"] = 0,
-			["mobs"] = {
-				["Kvaldir Raider"] = {
-					["taken"] = 11767,
-					["done"] = 3972,
-					["players"] = {
-						{
-							["taken"] = 11767,
-							["done"] = 3972,
-							["name"] = "Pezzer",
-							["class"] = "HUNTER",
-						}, -- [1]
-					},
-				},
-			},
-			["mobtaken"] = 11767,
-			["healing"] = 0,
-			["endtime"] = 1335632220,
-			["starttime"] = 1335632166,
-			["power"] = {
-				[2] = 10,
-			},
-			["name"] = "Kvaldir Raider",
-			["mobname"] = "Kvaldir Raider",
-			["damagetaken"] = 3972,
-			["overhealing"] = 0,
-			["last_action"] = 1335632166,
-			["mobdone"] = 3972,
-		}, -- [1]
-	},
 	["total"] = {
 		["healingabsorbed"] = 0,
 		["absorbTotal"] = 0,
@@ -215,43 +19,43 @@ SkadaPerCharDB = {
 						["name"] = "Aspect of the Cheetah",
 						["active"] = 1,
 						["id"] = 5118,
-						["auratype"] = "BUFF",
 						["uptime"] = 48,
+						["auratype"] = "BUFF",
 					},
 					["Combat Trance"] = {
 						["name"] = "Combat Trance",
 						["active"] = 2,
 						["id"] = 107960,
-						["auratype"] = "BUFF",
 						["uptime"] = 60,
+						["auratype"] = "BUFF",
 					},
 					["Dazed"] = {
 						["name"] = "Dazed",
 						["active"] = 1,
 						["id"] = 15571,
-						["auratype"] = "DEBUFF",
 						["uptime"] = 44,
+						["auratype"] = "DEBUFF",
 					},
 					["Sniper Training"] = {
 						["name"] = "Sniper Training",
 						["active"] = 0,
 						["id"] = 64420,
-						["auratype"] = "BUFF",
 						["uptime"] = 25,
+						["auratype"] = "BUFF",
 					},
 					["Fury of the Beast"] = {
 						["name"] = "Fury of the Beast",
 						["active"] = 1,
 						["id"] = 108011,
-						["auratype"] = "BUFF",
 						["uptime"] = 60,
+						["auratype"] = "BUFF",
 					},
 					["Âssface: Roar of Recovery"] = {
 						["name"] = "Âssface: Roar of Recovery",
 						["active"] = 0,
 						["id"] = 53517,
-						["auratype"] = "BUFF",
 						["uptime"] = 9,
+						["auratype"] = "BUFF",
 					},
 				},
 				["ccbreaks"] = 0,
@@ -272,15 +76,15 @@ SkadaPerCharDB = {
 						["damage"] = 23807,
 						["DEFLECT"] = 0,
 						["id"] = 75,
-						["max"] = 12040,
+						["hit"] = 0,
 						["min"] = 11767,
 						["PARRY"] = 0,
 						["critical"] = 2,
 						["ABSORB"] = 0,
-						["EVADE"] = 0,
-						["RESIST"] = 0,
 						["BLOCK"] = 0,
-						["hit"] = 0,
+						["RESIST"] = 0,
+						["EVADE"] = 0,
+						["max"] = 12040,
 					},
 				},
 				["deaths"] = {
@@ -288,14 +92,30 @@ SkadaPerCharDB = {
 				["damagetaken"] = 3972,
 				["power"] = {
 					[2] = {
-						["amount"] = 10,
 						["spells"] = {
 							[34953] = 10,
 						},
+						["amount"] = 10,
 					},
 				},
 				["id"] = "0x0280000004B625CB",
 				["maxhp"] = 149629,
+				["dispells"] = 0,
+				["damagetakenspells"] = {
+					["Attack"] = {
+						["id"] = 6603,
+						["name"] = "Attack",
+						["damage"] = 3972,
+					},
+				},
+				["healed"] = {
+				},
+				["healing"] = 0,
+				["name"] = "Pezzer",
+				["absorbSpells"] = {
+				},
+				["overhealing"] = 0,
+				["absorbTotal"] = 0,
 				["deathlog"] = {
 					{
 						["ts"] = 1335632247.412,
@@ -403,22 +223,6 @@ SkadaPerCharDB = {
 						["hp"] = 149018,
 					}, -- [15]
 				},
-				["damagetakenspells"] = {
-					["Attack"] = {
-						["id"] = 6603,
-						["name"] = "Attack",
-						["damage"] = 3972,
-					},
-				},
-				["absorbTotal"] = 0,
-				["overhealing"] = 0,
-				["name"] = "Pezzer",
-				["absorbSpells"] = {
-				},
-				["healing"] = 0,
-				["healed"] = {
-				},
-				["dispells"] = 0,
 				["absorbed"] = {
 				},
 			}, -- [1]
@@ -432,8 +236,8 @@ SkadaPerCharDB = {
 						["name"] = "Unleashed Rage",
 						["active"] = 0,
 						["id"] = 30808,
-						["auratype"] = "BUFF",
 						["uptime"] = 2,
+						["auratype"] = "BUFF",
 					},
 				},
 				["ccbreaks"] = 0,
@@ -451,19 +255,19 @@ SkadaPerCharDB = {
 				},
 				["id"] = "0x0280000004AD6D3C",
 				["maxhp"] = 142845,
-				["deathlog"] = {
-				},
+				["dispells"] = 0,
 				["damagetakenspells"] = {
 				},
-				["absorbTotal"] = 0,
-				["overhealing"] = 0,
+				["healed"] = {
+				},
+				["healing"] = 0,
 				["name"] = "Raei",
 				["absorbSpells"] = {
 				},
-				["healing"] = 0,
-				["healed"] = {
+				["overhealing"] = 0,
+				["absorbTotal"] = 0,
+				["deathlog"] = {
 				},
-				["dispells"] = 0,
 				["absorbed"] = {
 				},
 			}, -- [2]
@@ -478,9 +282,205 @@ SkadaPerCharDB = {
 		},
 		["name"] = "Total",
 		["starttime"] = 1335632112,
-		["damagetaken"] = 3972,
 		["overhealing"] = 0,
+		["damagetaken"] = 3972,
 		["last_action"] = 1335632112,
 		["mobdone"] = 0,
+	},
+	["sets"] = {
+		{
+			["healingabsorbed"] = 0,
+			["absorbTotal"] = 0,
+			["dispells"] = 0,
+			["ccbreaks"] = 0,
+			["time"] = 54,
+			["interrupts"] = 0,
+			["damage"] = 11767,
+			["players"] = {
+				{
+					["last"] = 1335632218,
+					["healingabsorbed"] = 0,
+					["class"] = "HUNTER",
+					["damaged"] = {
+						["Kvaldir Raider"] = 11767,
+					},
+					["auras"] = {
+						["Aspect of the Cheetah"] = {
+							["name"] = "Aspect of the Cheetah",
+							["active"] = 1,
+							["id"] = 5118,
+							["uptime"] = 48,
+							["auratype"] = "BUFF",
+						},
+						["Combat Trance"] = {
+							["name"] = "Combat Trance",
+							["active"] = 1,
+							["id"] = 107960,
+							["uptime"] = 2,
+							["auratype"] = "BUFF",
+						},
+						["Dazed"] = {
+							["name"] = "Dazed",
+							["active"] = 1,
+							["id"] = 15571,
+							["uptime"] = 44,
+							["auratype"] = "DEBUFF",
+						},
+						["Sniper Training"] = {
+							["name"] = "Sniper Training",
+							["active"] = 0,
+							["id"] = 64420,
+							["uptime"] = 25,
+							["auratype"] = "BUFF",
+						},
+						["Âssface: Roar of Recovery"] = {
+							["name"] = "Âssface: Roar of Recovery",
+							["active"] = 0,
+							["id"] = 53517,
+							["uptime"] = 9,
+							["auratype"] = "BUFF",
+						},
+					},
+					["ccbreaks"] = 0,
+					["time"] = 50,
+					["interrupts"] = 0,
+					["healingspells"] = {
+					},
+					["power"] = {
+						[2] = {
+							["spells"] = {
+								[34953] = 10,
+							},
+							["amount"] = 10,
+						},
+					},
+					["damage"] = 11767,
+					["damagespells"] = {
+						["Auto Shot"] = {
+							["DODGE"] = 0,
+							["REFLECT"] = 0,
+							["crushing"] = 0,
+							["IMMUNE"] = 0,
+							["glancing"] = 0,
+							["totalhits"] = 1,
+							["MISS"] = 0,
+							["damage"] = 11767,
+							["DEFLECT"] = 0,
+							["id"] = 75,
+							["hit"] = 0,
+							["min"] = 11767,
+							["PARRY"] = 0,
+							["critical"] = 1,
+							["ABSORB"] = 0,
+							["BLOCK"] = 0,
+							["RESIST"] = 0,
+							["EVADE"] = 0,
+							["max"] = 11767,
+						},
+					},
+					["deaths"] = {
+					},
+					["damagetaken"] = 3972,
+					["deathlog"] = {
+					},
+					["id"] = "0x0280000004B625CB",
+					["first"] = 1335632168,
+					["dispells"] = 0,
+					["damagetakenspells"] = {
+						["Attack"] = {
+							["id"] = 6603,
+							["name"] = "Attack",
+							["damage"] = 3972,
+						},
+					},
+					["healed"] = {
+					},
+					["healing"] = 0,
+					["name"] = "Pezzer",
+					["absorbSpells"] = {
+					},
+					["overhealing"] = 0,
+					["maxhp"] = 149629,
+					["absorbTotal"] = 0,
+					["absorbed"] = {
+					},
+				}, -- [1]
+				{
+					["last"] = 1335632169,
+					["healingabsorbed"] = 0,
+					["class"] = "SHAMAN",
+					["damaged"] = {
+					},
+					["auras"] = {
+						["Unleashed Rage"] = {
+							["name"] = "Unleashed Rage",
+							["active"] = 0,
+							["id"] = 30808,
+							["uptime"] = 2,
+							["auratype"] = "BUFF",
+						},
+					},
+					["ccbreaks"] = 0,
+					["time"] = 1,
+					["interrupts"] = 0,
+					["healingspells"] = {
+					},
+					["power"] = {
+					},
+					["damage"] = 0,
+					["damagespells"] = {
+					},
+					["deaths"] = {
+					},
+					["damagetaken"] = 0,
+					["deathlog"] = {
+					},
+					["id"] = "0x0280000004AD6D3C",
+					["first"] = 1335632168,
+					["dispells"] = 0,
+					["damagetakenspells"] = {
+					},
+					["healed"] = {
+					},
+					["healing"] = 0,
+					["name"] = "Raei",
+					["absorbSpells"] = {
+					},
+					["overhealing"] = 0,
+					["maxhp"] = 142845,
+					["absorbTotal"] = 0,
+					["absorbed"] = {
+					},
+				}, -- [2]
+			},
+			["deaths"] = 0,
+			["mobs"] = {
+				["Kvaldir Raider"] = {
+					["taken"] = 11767,
+					["done"] = 3972,
+					["players"] = {
+						{
+							["taken"] = 11767,
+							["done"] = 3972,
+							["name"] = "Pezzer",
+							["class"] = "HUNTER",
+						}, -- [1]
+					},
+				},
+			},
+			["mobtaken"] = 11767,
+			["healing"] = 0,
+			["mobdone"] = 3972,
+			["starttime"] = 1335632166,
+			["overhealing"] = 0,
+			["name"] = "Kvaldir Raider",
+			["mobname"] = "Kvaldir Raider",
+			["damagetaken"] = 3972,
+			["power"] = {
+				[2] = 10,
+			},
+			["last_action"] = 1335632166,
+			["endtime"] = 1335632220,
+		}, -- [1]
 	},
 }

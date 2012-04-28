@@ -5,6 +5,16 @@ GoGo_Prefs = {
 	["DruidFlightForm"] = false,
 	["RemoveBuffs"] = 1,
 	["autodismount"] = 1,
+	["DruidClickForm"] = true,
+	["UnknownMounts"] = {
+	},
+	["version"] = "4.3.5",
+	["DruidFormNotRandomize"] = false,
+	["GlobalPrefMounts"] = {
+	},
+	["GlobalExclude"] = {
+	},
+	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -139,7 +149,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Hyjal Summit"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -153,6 +163,20 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
+		["Tanaris"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 816,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
+		},
 		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
@@ -160,33 +184,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 488,
 		},
-		["The Oculus"] = {
+		["Icecrown Citadel"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 492,
 		},
-		["Uldum"] = {
+		["Orgrimmar"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
-		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["End Time"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 321,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {
@@ -202,35 +212,35 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Orgrimmar"] = {
+		["End Time"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 321,
+			["ZoneID"] = 13,
 		},
-		["Icecrown Citadel"] = {
+		["Hour of Twilight"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 492,
+			["ZoneID"] = 13,
 		},
-		["Blackrock Depths"] = {
+		["The Oculus"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 29,
+			["ZoneID"] = 13,
 		},
-		["Tanaris"] = {
+		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 816,
+			["ZoneID"] = 720,
 		},
-		["Abyssal Depths"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -238,16 +248,6 @@ GoGo_Prefs = {
 			["ZoneID"] = 13,
 		},
 	},
-	["UnknownMounts"] = {
-	},
-	["version"] = "4.3.5",
-	["GlobalExclude"] = {
-	},
-	["GlobalPrefMounts"] = {
-	},
-	["DruidFormNotRandomize"] = false,
-	["PaladinUseCrusaderAura"] = false,
-	["DruidClickForm"] = true,
 }
 GoGo_DebugLog = {
 }

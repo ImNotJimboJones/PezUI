@@ -11,9 +11,19 @@ RecountPerCharDB = {
 			},
 			["Owner"] = "Pezzer",
 			["enClass"] = "PET",
-			["LastActive"] = 1335632217,
+			["LastAbility"] = 185825.971,
+			["UnitLockout"] = 1335632217,
+			["LastFightIn"] = 0,
+			["Name"] = "Âssface",
+			["FightsSaved"] = 1,
+			["TimeWindows"] = {
+				["EnergyGain"] = {
+					10, -- [1]
+				},
+			},
+			["level"] = 1,
 			["Fights"] = {
-				["Fight1"] = {
+				["OverallData"] = {
 					["EnergyGain"] = 10,
 					["EnergyGainedFrom"] = {
 						["Pezzer"] = {
@@ -72,14 +82,14 @@ RecountPerCharDB = {
 					},
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
-					["ElementTakenBlock"] = {
-					},
-					["RunicPowerGain"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
 					["ElementTaken"] = {
 					},
 					["HOTs"] = {
 					},
-					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
 					["ElementDoneAbsorb"] = {
 					},
 					["TimeHeal"] = 0,
@@ -88,26 +98,26 @@ RecountPerCharDB = {
 					["Dispels"] = 0,
 					["PartialBlock"] = {
 					},
-					["DamagedWho"] = {
+					["FDamagedWho"] = {
 					},
 					["FAttacks"] = {
 					},
-					["HealingTaken"] = 0,
+					["RageGain"] = 0,
 					["ElementDone"] = {
 					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementHitsDone"] = {
-					},
 					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
 					},
 					["WhoDamaged"] = {
 					},
 					["EnergyGainedFrom"] = {
 					},
-					["RunicPowerGained"] = {
+					["RageGained"] = {
 					},
-					["CCBroken"] = {
+					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDoneBlock"] = {
 					},
@@ -116,53 +126,53 @@ RecountPerCharDB = {
 					["Dispelled"] = 0,
 					["WhoHealed"] = {
 					},
-					["HealedWho"] = {
+					["PartialResist"] = {
 					},
 					["CCBreak"] = 0,
-					["ElementTakenAbsorb"] = {
-					},
 					["FDamage"] = 0,
+					["Interrupts"] = 0,
 					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
-					["PartialAbsorb"] = {
+					["ElementTakenAbsorb"] = {
 					},
 					["ActiveTime"] = 0,
 					["Overhealing"] = 0,
-					["TimeSpent"] = {
-					},
-					["WhoDispelled"] = {
+					["ElementTakenResist"] = {
 					},
 					["InterruptData"] = {
 					},
-					["ElementTakenResist"] = {
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
 					},
 					["Heals"] = {
 					},
-					["Interrupts"] = 0,
+					["PartialAbsorb"] = {
+					},
 					["EnergyGained"] = {
 					},
-					["PartialResist"] = {
+					["HealedWho"] = {
 					},
 					["Healing"] = 0,
-					["RageGained"] = {
+					["CCBroken"] = {
 					},
-					["OverHeals"] = {
+					["RunicPowerGained"] = {
 					},
 					["Attacks"] = {
 					},
-					["RageGain"] = 0,
-					["FDamagedWho"] = {
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
 					},
 					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
 					},
-					["ManaGain"] = 0,
-					["DOT_Time"] = 0,
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
 					["DispelledWho"] = {
 					},
 				},
-				["OverallData"] = {
+				["Fight1"] = {
 					["EnergyGain"] = 10,
 					["EnergyGainedFrom"] = {
 						["Pezzer"] = {
@@ -186,27 +196,20 @@ RecountPerCharDB = {
 					},
 				},
 			},
-			["LastFightIn"] = 0,
-			["Name"] = "Âssface",
-			["TimeWindows"] = {
-				["EnergyGain"] = {
-					10, -- [1]
-				},
-			},
-			["FightsSaved"] = 1,
-			["level"] = 1,
-			["UnitLockout"] = 1335632217,
-			["LastAbility"] = 184765.754,
+			["LastActive"] = 1335632217,
 		},
 		["Raei"] = {
 			["GUID"] = "0x0280000004AD6D3C",
-			["type"] = "Grouped",
+			["type"] = "Ungrouped",
 			["FightsSaved"] = 1,
 			["Owner"] = false,
 			["enClass"] = "SHAMAN",
 			["unit"] = "Raei",
-			["LastFightIn"] = 0,
+			["LastAbility"] = 185825.971,
 			["Name"] = "Raei",
+			["UnitLockout"] = 1335632150,
+			["lazysync"] = true,
+			["level"] = 85,
 			["Fights"] = {
 				["CurrentFightData"] = {
 					["DOTs"] = {
@@ -221,14 +224,14 @@ RecountPerCharDB = {
 					},
 					["DeathCount"] = 0,
 					["HOT_Time"] = 0,
-					["ElementTakenBlock"] = {
-					},
-					["RunicPowerGain"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
 					["ElementTaken"] = {
 					},
 					["HOTs"] = {
 					},
-					["Damage"] = 0,
+					["ElementTakenBlock"] = {
+					},
 					["ElementDoneAbsorb"] = {
 					},
 					["TimeHeal"] = 0,
@@ -237,26 +240,26 @@ RecountPerCharDB = {
 					["Dispels"] = 0,
 					["PartialBlock"] = {
 					},
-					["DamagedWho"] = {
+					["FDamagedWho"] = {
 					},
 					["FAttacks"] = {
 					},
-					["HealingTaken"] = 0,
+					["RageGain"] = 0,
 					["ElementDone"] = {
 					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementHitsDone"] = {
-					},
 					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
 					},
 					["WhoDamaged"] = {
 					},
 					["EnergyGainedFrom"] = {
 					},
-					["RunicPowerGained"] = {
+					["RageGained"] = {
 					},
-					["CCBroken"] = {
+					["RunicPowerGainedFrom"] = {
 					},
 					["ElementDoneBlock"] = {
 					},
@@ -265,57 +268,54 @@ RecountPerCharDB = {
 					["Dispelled"] = 0,
 					["WhoHealed"] = {
 					},
-					["HealedWho"] = {
+					["PartialResist"] = {
 					},
 					["CCBreak"] = 0,
-					["ElementTakenAbsorb"] = {
-					},
 					["FDamage"] = 0,
+					["Interrupts"] = 0,
 					["EnergyGain"] = 0,
 					["ManaGained"] = {
 					},
-					["PartialAbsorb"] = {
+					["ElementTakenAbsorb"] = {
 					},
 					["ActiveTime"] = 0,
 					["Overhealing"] = 0,
-					["TimeSpent"] = {
-					},
-					["WhoDispelled"] = {
+					["ElementTakenResist"] = {
 					},
 					["InterruptData"] = {
 					},
-					["ElementTakenResist"] = {
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
 					},
 					["Heals"] = {
 					},
-					["Interrupts"] = 0,
+					["PartialAbsorb"] = {
+					},
 					["EnergyGained"] = {
 					},
-					["PartialResist"] = {
+					["HealedWho"] = {
 					},
 					["Healing"] = 0,
-					["RageGained"] = {
+					["CCBroken"] = {
 					},
-					["OverHeals"] = {
+					["RunicPowerGained"] = {
 					},
 					["Attacks"] = {
 					},
-					["RageGain"] = 0,
-					["FDamagedWho"] = {
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
 					},
 					["TimeDamage"] = 0,
 					["TimeDamaging"] = {
 					},
-					["ManaGain"] = 0,
-					["DOT_Time"] = 0,
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
 					["DispelledWho"] = {
 					},
 				},
 			},
-			["lazysync"] = true,
-			["level"] = 85,
-			["UnitLockout"] = 1335632150,
-			["LastAbility"] = 184765.754,
+			["LastFightIn"] = 0,
 		},
 		["Pezzer"] = {
 			["GUID"] = "0x0280000004B625CB",
@@ -385,7 +385,7 @@ RecountPerCharDB = {
 				"DAMAGE", -- [30]
 			},
 			["TimeWindows"] = {
-				["TimeDamage"] = {
+				["ActiveTime"] = {
 					7, -- [1]
 				},
 				["Damage"] = {
@@ -394,13 +394,13 @@ RecountPerCharDB = {
 				["DamageTaken"] = {
 					3999, -- [1]
 				},
-				["ActiveTime"] = {
+				["TimeDamage"] = {
 					7, -- [1]
 				},
 			},
 			["enClass"] = "HUNTER",
 			["unit"] = "Pezzer",
-			["LastAbility"] = 184765.754,
+			["LastActive"] = 1335632849,
 			["level"] = 85,
 			["LastDamageAbility"] = "Fire",
 			["LastFightIn"] = 1,
@@ -425,52 +425,579 @@ RecountPerCharDB = {
 				0.1583917556088726, -- [18]
 				[27] = 0.1350005680716973,
 				[24] = 0.2994072004758436,
-				[30] = 0.008019835727031525,
+				[29] = 0.01002479465878941,
 				[22] = 0.1309906502081816,
 				[26] = 0.1309906502081816,
+				[30] = 0.008019835727031525,
 				[23] = 0.1476986413061639,
-				[29] = 0.01002479465878941,
 			},
 			["type"] = "Self",
 			["FightsSaved"] = 1,
-			["LastEventTimes"] = {
-				184269.844, -- [1]
-				184284.923, -- [2]
-				184286.675, -- [3]
-				184289.174, -- [4]
-				184291.12, -- [5]
-				184293.138, -- [6]
-				184295.226, -- [7]
-				184297.154, -- [8]
-				184299.238, -- [9]
-				184301.264, -- [10]
-				184303.228, -- [11]
-				184305.184, -- [12]
-				184307.27, -- [13]
-				184309.237, -- [14]
-				184311.173, -- [15]
-				184313.157, -- [16]
-				184315.236, -- [17]
-				184317.247, -- [18]
-				184319.156, -- [19]
-				184321.275, -- [20]
-				184323.235, -- [21]
-				184325.285, -- [22]
-				184327.282, -- [23]
-				184329.234, -- [24]
-				184331.255, -- [25]
-				184333.163, -- [26]
-				184335.271, -- [27]
-				184336.797, -- [28]
-				184626.518, -- [29]
-				184967.907, -- [30]
-			},
-			["TimeLast"] = {
-				["ActiveTime"] = 1335632217,
-				["TimeDamage"] = 1335632217,
-				["OVERALL"] = 1335632849,
-				["DamageTaken"] = 1335632849,
-				["Damage"] = 1335632217,
+			["UnitLockout"] = 1335632150,
+			["Fights"] = {
+				["OverallData"] = {
+					["TimeSpent"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 7,
+								},
+							},
+							["amount"] = 7,
+						},
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 12040,
+									["min"] = 11767,
+									["count"] = 2,
+									["amount"] = 23807,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 23807,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["TimeDamaging"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 7,
+								},
+							},
+							["amount"] = 7,
+						},
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 4,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 17,
+								},
+								["Crit"] = {
+									["count"] = 1,
+								},
+								["Parry"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 26,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+					},
+					["DamageTaken"] = 3999,
+					["ActiveTime"] = 7,
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+						["Fire"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 2,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 2,
+							["amount"] = 0,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 2,
+								},
+							},
+							["amount"] = 2,
+						},
+					},
+					["DamagedWho"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 23807,
+								},
+							},
+							["amount"] = 23807,
+						},
+					},
+					["TimeDamage"] = 7,
+					["WhoDamaged"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 3972,
+								},
+							},
+							["amount"] = 3972,
+						},
+						["Environment"] = {
+							["Details"] = {
+								["Fire"] = {
+									["count"] = 27,
+								},
+							},
+							["amount"] = 27,
+						},
+					},
+					["ElementTaken"] = {
+						["Melee"] = 3972,
+						["Fire"] = 27,
+					},
+					["ElementDone"] = {
+						["Physical"] = 23807,
+					},
+					["Damage"] = 23807,
+				},
+				["LastFightData"] = {
+					["TimeSpent"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 11767,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 11767,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 11767,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+					},
+					["TimeDamaging"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 4,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 17,
+								},
+								["Crit"] = {
+									["count"] = 1,
+								},
+								["Parry"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 26,
+						},
+					},
+					["DamageTaken"] = 3972,
+					["ActiveTime"] = 3.5,
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["DamagedWho"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 11767,
+								},
+							},
+							["amount"] = 11767,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["WhoDamaged"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 3972,
+								},
+							},
+							["amount"] = 3972,
+						},
+					},
+					["ElementTaken"] = {
+						["Melee"] = 3972,
+					},
+					["ElementDone"] = {
+						["Physical"] = 11767,
+					},
+					["Damage"] = 11767,
+				},
+				["CurrentFightData"] = {
+					["DOTs"] = {
+					},
+					["ElementDoneResist"] = {
+					},
+					["Ressed"] = 0,
+					["DamageTaken"] = 0,
+					["RageGainedFrom"] = {
+					},
+					["ElementHitsTaken"] = {
+						["Fire"] = {
+							["Details"] = {
+								["Hit"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["DeathCount"] = 0,
+					["HOT_Time"] = 0,
+					["DOT_Time"] = 0,
+					["ManaGain"] = 0,
+					["ElementTaken"] = {
+						["Fire"] = 0,
+					},
+					["HOTs"] = {
+					},
+					["ElementTakenBlock"] = {
+					},
+					["ElementDoneAbsorb"] = {
+					},
+					["TimeHeal"] = 0,
+					["RessedWho"] = {
+					},
+					["Dispels"] = 0,
+					["PartialBlock"] = {
+					},
+					["FDamagedWho"] = {
+					},
+					["FAttacks"] = {
+					},
+					["RageGain"] = 0,
+					["ElementDone"] = {
+					},
+					["ManaGainedFrom"] = {
+					},
+					["DamagedWho"] = {
+					},
+					["OverHeals"] = {
+					},
+					["WhoDamaged"] = {
+						["Environment"] = {
+							["Details"] = {
+								["Fire"] = {
+									["count"] = 0,
+								},
+							},
+							["amount"] = 0,
+						},
+					},
+					["EnergyGainedFrom"] = {
+					},
+					["RageGained"] = {
+					},
+					["RunicPowerGainedFrom"] = {
+					},
+					["ElementDoneBlock"] = {
+					},
+					["TimeHealing"] = {
+					},
+					["Dispelled"] = 0,
+					["WhoHealed"] = {
+					},
+					["PartialResist"] = {
+						["Fire"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["CCBreak"] = 0,
+					["FDamage"] = 0,
+					["Interrupts"] = 0,
+					["EnergyGain"] = 0,
+					["ManaGained"] = {
+					},
+					["ElementTakenAbsorb"] = {
+					},
+					["ActiveTime"] = 0,
+					["Overhealing"] = 0,
+					["ElementTakenResist"] = {
+					},
+					["InterruptData"] = {
+					},
+					["WhoDispelled"] = {
+					},
+					["TimeSpent"] = {
+					},
+					["Heals"] = {
+					},
+					["PartialAbsorb"] = {
+						["Fire"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 0,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 0,
+							["amount"] = 0,
+						},
+					},
+					["EnergyGained"] = {
+					},
+					["HealedWho"] = {
+					},
+					["Healing"] = 0,
+					["CCBroken"] = {
+					},
+					["RunicPowerGained"] = {
+					},
+					["Attacks"] = {
+					},
+					["HealingTaken"] = 0,
+					["ElementHitsDone"] = {
+					},
+					["TimeDamage"] = 0,
+					["TimeDamaging"] = {
+					},
+					["RunicPowerGain"] = 0,
+					["Damage"] = 0,
+					["DispelledWho"] = {
+					},
+				},
+				["Fight1"] = {
+					["TimeSpent"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["Attacks"] = {
+						["Auto Shot"] = {
+							["Details"] = {
+								["Crit"] = {
+									["max"] = 11767,
+									["min"] = 0,
+									["count"] = 1,
+									["amount"] = 11767,
+								},
+							},
+							["count"] = 1,
+							["amount"] = 11767,
+						},
+					},
+					["PartialAbsorb"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Absorb"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+					},
+					["TimeDamaging"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 3.5,
+								},
+							},
+							["amount"] = 3.5,
+						},
+					},
+					["ElementHitsTaken"] = {
+						["Melee"] = {
+							["Details"] = {
+								["Miss"] = {
+									["count"] = 4,
+								},
+								["Dodge"] = {
+									["count"] = 1,
+								},
+								["Hit"] = {
+									["count"] = 17,
+								},
+								["Crit"] = {
+									["count"] = 1,
+								},
+								["Parry"] = {
+									["count"] = 3,
+								},
+							},
+							["amount"] = 26,
+						},
+					},
+					["DamageTaken"] = 3972,
+					["ActiveTime"] = 3.5,
+					["PartialResist"] = {
+						["Melee"] = {
+							["Details"] = {
+								["No Resist"] = {
+									["max"] = 0,
+									["min"] = 0,
+									["count"] = 26,
+									["amount"] = 0,
+								},
+							},
+							["count"] = 26,
+							["amount"] = 0,
+						},
+					},
+					["ElementHitsDone"] = {
+						["Physical"] = {
+							["Details"] = {
+								["Crit"] = {
+									["count"] = 1,
+								},
+							},
+							["amount"] = 1,
+						},
+					},
+					["DamagedWho"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Auto Shot"] = {
+									["count"] = 11767,
+								},
+							},
+							["amount"] = 11767,
+						},
+					},
+					["TimeDamage"] = 3.5,
+					["WhoDamaged"] = {
+						["Kvaldir Raider"] = {
+							["Details"] = {
+								["Melee"] = {
+									["count"] = 3972,
+								},
+							},
+							["amount"] = 3972,
+						},
+					},
+					["ElementTaken"] = {
+						["Melee"] = 3972,
+					},
+					["ElementDone"] = {
+						["Physical"] = 11767,
+					},
+					["Damage"] = 11767,
+				},
 			},
 			["Owner"] = false,
 			["Pet"] = {
@@ -542,6 +1069,7 @@ RecountPerCharDB = {
 				"Environment Fire Pezzer Hit -12 (Fire)", -- [30]
 			},
 			["Name"] = "Pezzer",
+			["LastDamageTaken"] = 12,
 			["LastEventIncoming"] = {
 				false, -- [1]
 				true, -- [2]
@@ -574,574 +1102,46 @@ RecountPerCharDB = {
 				true, -- [29]
 				true, -- [30]
 			},
-			["LastDamageTaken"] = 12,
-			["Fights"] = {
-				["Fight1"] = {
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Miss"] = {
-									["count"] = 4,
-								},
-								["Dodge"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 17,
-								},
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Parry"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 26,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 11767,
-								},
-							},
-							["amount"] = 11767,
-						},
-					},
-					["WhoDamaged"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3972,
-								},
-							},
-							["amount"] = 3972,
-						},
-					},
-					["TimeSpent"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["DamageTaken"] = 3972,
-					["TimeDamage"] = 3.5,
-					["ElementDone"] = {
-						["Physical"] = 11767,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-					},
-					["ElementHitsDone"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["ActiveTime"] = 3.5,
-					["TimeDamaging"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["ElementTaken"] = {
-						["Melee"] = 3972,
-					},
-					["Attacks"] = {
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11767,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 11767,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 11767,
-						},
-					},
-					["Damage"] = 11767,
-				},
-				["LastFightData"] = {
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Miss"] = {
-									["count"] = 4,
-								},
-								["Dodge"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 17,
-								},
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Parry"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 26,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 11767,
-								},
-							},
-							["amount"] = 11767,
-						},
-					},
-					["WhoDamaged"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3972,
-								},
-							},
-							["amount"] = 3972,
-						},
-					},
-					["TimeSpent"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["DamageTaken"] = 3972,
-					["TimeDamage"] = 3.5,
-					["ElementDone"] = {
-						["Physical"] = 11767,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-					},
-					["ElementHitsDone"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 1,
-								},
-							},
-							["amount"] = 1,
-						},
-					},
-					["ActiveTime"] = 3.5,
-					["TimeDamaging"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 3.5,
-								},
-							},
-							["amount"] = 3.5,
-						},
-					},
-					["ElementTaken"] = {
-						["Melee"] = 3972,
-					},
-					["Attacks"] = {
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 11767,
-									["min"] = 0,
-									["count"] = 1,
-									["amount"] = 11767,
-								},
-							},
-							["count"] = 1,
-							["amount"] = 11767,
-						},
-					},
-					["Damage"] = 11767,
-				},
-				["CurrentFightData"] = {
-					["DOTs"] = {
-					},
-					["ElementDoneResist"] = {
-					},
-					["Ressed"] = 0,
-					["DamageTaken"] = 0,
-					["RageGainedFrom"] = {
-					},
-					["ElementHitsTaken"] = {
-						["Fire"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 0,
-								},
-							},
-							["amount"] = 0,
-						},
-					},
-					["DeathCount"] = 0,
-					["HOT_Time"] = 0,
-					["ElementTakenBlock"] = {
-					},
-					["RunicPowerGain"] = 0,
-					["ElementTaken"] = {
-						["Fire"] = 0,
-					},
-					["HOTs"] = {
-					},
-					["Damage"] = 0,
-					["ElementDoneAbsorb"] = {
-					},
-					["TimeHeal"] = 0,
-					["RessedWho"] = {
-					},
-					["Dispels"] = 0,
-					["PartialBlock"] = {
-					},
-					["DamagedWho"] = {
-					},
-					["FAttacks"] = {
-					},
-					["HealingTaken"] = 0,
-					["ElementDone"] = {
-					},
-					["RunicPowerGainedFrom"] = {
-					},
-					["ElementHitsDone"] = {
-					},
-					["ManaGainedFrom"] = {
-					},
-					["WhoDamaged"] = {
-						["Environment"] = {
-							["Details"] = {
-								["Fire"] = {
-									["count"] = 0,
-								},
-							},
-							["amount"] = 0,
-						},
-					},
-					["EnergyGainedFrom"] = {
-					},
-					["RunicPowerGained"] = {
-					},
-					["CCBroken"] = {
-					},
-					["ElementDoneBlock"] = {
-					},
-					["TimeHealing"] = {
-					},
-					["Dispelled"] = 0,
-					["WhoHealed"] = {
-					},
-					["HealedWho"] = {
-					},
-					["CCBreak"] = 0,
-					["ElementTakenAbsorb"] = {
-					},
-					["FDamage"] = 0,
-					["EnergyGain"] = 0,
-					["ManaGained"] = {
-					},
-					["PartialAbsorb"] = {
-						["Fire"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 0,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 0,
-							["amount"] = 0,
-						},
-					},
-					["ActiveTime"] = 0,
-					["Overhealing"] = 0,
-					["TimeSpent"] = {
-					},
-					["WhoDispelled"] = {
-					},
-					["InterruptData"] = {
-					},
-					["ElementTakenResist"] = {
-					},
-					["Heals"] = {
-					},
-					["Interrupts"] = 0,
-					["EnergyGained"] = {
-					},
-					["PartialResist"] = {
-						["Fire"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 0,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 0,
-							["amount"] = 0,
-						},
-					},
-					["Healing"] = 0,
-					["RageGained"] = {
-					},
-					["OverHeals"] = {
-					},
-					["Attacks"] = {
-					},
-					["RageGain"] = 0,
-					["FDamagedWho"] = {
-					},
-					["TimeDamage"] = 0,
-					["TimeDamaging"] = {
-					},
-					["ManaGain"] = 0,
-					["DOT_Time"] = 0,
-					["DispelledWho"] = {
-					},
-				},
-				["OverallData"] = {
-					["ElementHitsTaken"] = {
-						["Melee"] = {
-							["Details"] = {
-								["Miss"] = {
-									["count"] = 4,
-								},
-								["Dodge"] = {
-									["count"] = 1,
-								},
-								["Hit"] = {
-									["count"] = 17,
-								},
-								["Crit"] = {
-									["count"] = 1,
-								},
-								["Parry"] = {
-									["count"] = 3,
-								},
-							},
-							["amount"] = 26,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["Hit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-					},
-					["PartialResist"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["No Resist"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-					},
-					["DamagedWho"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 23807,
-								},
-							},
-							["amount"] = 23807,
-						},
-					},
-					["WhoDamaged"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Melee"] = {
-									["count"] = 3972,
-								},
-							},
-							["amount"] = 3972,
-						},
-						["Environment"] = {
-							["Details"] = {
-								["Fire"] = {
-									["count"] = 27,
-								},
-							},
-							["amount"] = 27,
-						},
-					},
-					["TimeSpent"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 7,
-								},
-							},
-							["amount"] = 7,
-						},
-					},
-					["DamageTaken"] = 3999,
-					["TimeDamage"] = 7,
-					["ElementDone"] = {
-						["Physical"] = 23807,
-					},
-					["PartialAbsorb"] = {
-						["Melee"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 26,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 26,
-							["amount"] = 0,
-						},
-						["Fire"] = {
-							["Details"] = {
-								["No Absorb"] = {
-									["max"] = 0,
-									["min"] = 0,
-									["count"] = 2,
-									["amount"] = 0,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 0,
-						},
-					},
-					["ElementHitsDone"] = {
-						["Physical"] = {
-							["Details"] = {
-								["Crit"] = {
-									["count"] = 2,
-								},
-							},
-							["amount"] = 2,
-						},
-					},
-					["ActiveTime"] = 7,
-					["TimeDamaging"] = {
-						["Kvaldir Raider"] = {
-							["Details"] = {
-								["Auto Shot"] = {
-									["count"] = 7,
-								},
-							},
-							["amount"] = 7,
-						},
-					},
-					["ElementTaken"] = {
-						["Melee"] = 3972,
-						["Fire"] = 27,
-					},
-					["Attacks"] = {
-						["Auto Shot"] = {
-							["Details"] = {
-								["Crit"] = {
-									["max"] = 12040,
-									["min"] = 11767,
-									["count"] = 2,
-									["amount"] = 23807,
-								},
-							},
-							["count"] = 2,
-							["amount"] = 23807,
-						},
-					},
-					["Damage"] = 23807,
-				},
+			["TimeLast"] = {
+				["ActiveTime"] = 1335632217,
+				["TimeDamage"] = 1335632217,
+				["OVERALL"] = 1335632849,
+				["DamageTaken"] = 1335632849,
+				["Damage"] = 1335632217,
 			},
-			["UnitLockout"] = 1335632150,
-			["LastActive"] = 1335632849,
+			["LastEventTimes"] = {
+				184269.844, -- [1]
+				184284.923, -- [2]
+				184286.675, -- [3]
+				184289.174, -- [4]
+				184291.12, -- [5]
+				184293.138, -- [6]
+				184295.226, -- [7]
+				184297.154, -- [8]
+				184299.238, -- [9]
+				184301.264, -- [10]
+				184303.228, -- [11]
+				184305.184, -- [12]
+				184307.27, -- [13]
+				184309.237, -- [14]
+				184311.173, -- [15]
+				184313.157, -- [16]
+				184315.236, -- [17]
+				184317.247, -- [18]
+				184319.156, -- [19]
+				184321.275, -- [20]
+				184323.235, -- [21]
+				184325.285, -- [22]
+				184327.282, -- [23]
+				184329.234, -- [24]
+				184331.255, -- [25]
+				184333.163, -- [26]
+				184335.271, -- [27]
+				184336.797, -- [28]
+				184626.518, -- [29]
+				184967.907, -- [30]
+			},
+			["LastAbility"] = 185825.971,
 		},
 	},
 	["FightNum"] = 1,

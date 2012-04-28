@@ -1,24 +1,5 @@
 
 Currencyflow_DB = {
-	["profiles"] = {
-		["Default"] = {
-			["cashFormat"] = 2,
-			["showCashPerHour"] = false,
-			["showCurrency396"] = true,
-			["colorMaxReached"] = true,
-			["showYesterdayTotal"] = false,
-			["showThisSession"] = false,
-			["showTodayTotal"] = false,
-			["showCurrency390"] = true,
-			["showThisWeekTotal"] = false,
-			["showThisMonthTotal"] = false,
-			["showYesterdaySelf"] = false,
-			["showCurrency0"] = false,
-		},
-	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["factionrealm"] = {
 		["Horde - Burning Blade"] = {
 			["version"] = 10,
@@ -53,13 +34,10 @@ Currencyflow_DB = {
 					[400] = 2,
 					[401] = 9,
 					["lastWeekEarned390"] = 0,
-					[614] = 0,
+					[81] = 2,
 					[402] = 15,
-					["maxReached395"] = false,
-					["maxReached400"] = false,
-					["maxReached384"] = false,
-					["maxReached385"] = false,
-					[396] = 6150,
+					["maxReached401"] = false,
+					["maxReached390"] = false,
 					["history"] = {
 						[15435] = {
 							[395] = {
@@ -98,15 +76,15 @@ Currencyflow_DB = {
 								["gained"] = 463,
 								["spent"] = 0,
 							},
-							[391] = {
-								["gained"] = 3,
-								["spent"] = 0,
+							[390] = {
 							},
 							[515] = {
 								["gained"] = 10,
 								["spent"] = 90,
 							},
-							[390] = {
+							[391] = {
+								["gained"] = 3,
+								["spent"] = 0,
 							},
 						},
 						[15439] = {
@@ -136,7 +114,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							["time"] = 2977,
+							["time"] = 2981,
 							["gold"] = {
 								["gained"] = 0,
 								["spent"] = 0,
@@ -193,12 +171,34 @@ Currencyflow_DB = {
 							},
 						},
 					},
-					["maxReached390"] = false,
-					["maxReached401"] = false,
+					["maxReached385"] = false,
+					[396] = 6150,
+					["maxReached384"] = false,
+					["maxReached400"] = false,
+					["maxReached395"] = false,
 					[241] = 26,
-					[81] = 2,
+					[614] = 0,
 				}, -- [1]
 			},
+		},
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+			["cashFormat"] = 2,
+			["showYesterdaySelf"] = false,
+			["showCurrency396"] = true,
+			["colorMaxReached"] = true,
+			["showYesterdayTotal"] = false,
+			["showThisSession"] = false,
+			["showTodayTotal"] = false,
+			["showCurrency390"] = true,
+			["showThisWeekTotal"] = false,
+			["showThisMonthTotal"] = false,
+			["showCashPerHour"] = false,
+			["showCurrency0"] = false,
 		},
 	},
 }

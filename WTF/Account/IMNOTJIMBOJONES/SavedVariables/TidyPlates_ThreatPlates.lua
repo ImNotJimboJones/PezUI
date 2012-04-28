@@ -38,7 +38,7 @@ ThreatPlatesDB = {
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -142,20 +142,20 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["healthborder"] = {
-					["texture"] = "TP_HealthBarOverlayThin",
-				},
 				["castbar"] = {
 					["texture"] = "Minimalist",
+				},
+				["healthborder"] = {
+					["texture"] = "TP_HealthBarOverlayThin",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -171,7 +171,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
