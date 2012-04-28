@@ -15,13 +15,12 @@ MasqueDB = {
 					["Gloss"] = 1,
 					["Inherit"] = false,
 				},
-				["VuhDo_Buff Watch"] = {
+				["Bison_debuff"] = {
 					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
-				["Bison_buff"] = {
+				["Bison_weapon"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
@@ -45,13 +44,26 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
-				["Bison_prog"] = {
-					["Disabled"] = true,
+				["Macaroon_Spell Bar"] = {
+					["Colors"] = {
+						["Normal"] = {
+							1, -- [1]
+							1, -- [2]
+							1, -- [3]
+							0.75, -- [4]
+						},
+						["Gloss"] = {
+							1, -- [1]
+							1, -- [2]
+							1, -- [3]
+							1, -- [4]
+						},
+					},
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
+					["Inherit"] = false,
 				},
-				["VuhDo"] = {
-					["Disabled"] = true,
+				["Macaroon_Bar 7"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
@@ -70,10 +82,11 @@ MasqueDB = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Bison"] = {
+				["VuhDo"] = {
 					["Disabled"] = true,
-					["SkinID"] = "Sleek",
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
 				},
 				["Masque"] = {
 					["SkinID"] = "Sleek",
@@ -89,15 +102,36 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
+				["Macaroon_Vehicle Bar"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
 				["Macaroon_Shortcuts - Top"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
 					["Gloss"] = 1,
 					["Inherit"] = false,
 				},
-				["Macaroon_Vehicle Bar"] = {
+				["Macaroon_Action Bar - Left"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+					["Inherit"] = false,
+				},
+				["Blizzard Buffs_TempEnchant"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+					["Inherit"] = false,
+				},
+				["VuhDo_HoTs"] = {
+					["Disabled"] = true,
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+				},
+				["Blizzard Buffs_Debuffs"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.8,
+					["SkinID"] = "Renaitre: Fade",
 				},
 				["Macaroon_Shortcuts"] = {
 					["Colors"] = {
@@ -118,27 +152,6 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
 				},
-				["Blizzard Buffs_TempEnchant"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
-					["Inherit"] = false,
-				},
-				["VuhDo_HoTs"] = {
-					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Blizzard Buffs_Debuffs"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.8,
-					["SkinID"] = "Renaitre: Fade",
-				},
-				["Macaroon_Action Bar - Left"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-					["Inherit"] = false,
-				},
 				["Macaroon_Shortcuts - Right"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
 					["Gloss"] = 1,
@@ -154,44 +167,31 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Macaroon_Bar 7"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
+				["Bison"] = {
+					["Disabled"] = true,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
-				["Macaroon_Spell Bar"] = {
-					["Colors"] = {
-						["Normal"] = {
-							1, -- [1]
-							1, -- [2]
-							1, -- [3]
-							0.75, -- [4]
-						},
-						["Gloss"] = {
-							1, -- [1]
-							1, -- [2]
-							1, -- [3]
-							1, -- [4]
-						},
-					},
+				["Bison_prog"] = {
+					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
-					["Inherit"] = false,
 				},
 				["PitBull4_Target"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Fade",
 				},
-				["Bison_weapon"] = {
+				["Bison_buff"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Bison_debuff"] = {
+				["VuhDo_Buff Watch"] = {
 					["Disabled"] = true,
-					["SkinID"] = "Sleek",
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
 				},
 			},
 		},

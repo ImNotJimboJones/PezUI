@@ -12,9 +12,9 @@ AtlasOptions = {
 	["AtlasButtonShown"] = false,
 	["AtlasVersion"] = "1.18.2",
 	["AtlasButtonPosition"] = 26,
-	["AtlasRightClick"] = false,
-	["AtlasZone"] = 1,
-	["AtlasLocked"] = false,
-	["AtlasBossDesc"] = true,
 	["AtlasBossDescScale"] = 0.8999999761581421,
+	["AtlasZone"] = 1,
+	["AtlasBossDesc"] = true,
+	["AtlasLocked"] = false,
+	["AtlasRightClick"] = false,
 }
