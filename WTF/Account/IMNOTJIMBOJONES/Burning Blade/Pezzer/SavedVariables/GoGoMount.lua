@@ -5,16 +5,6 @@ GoGo_Prefs = {
 	["DruidFlightForm"] = false,
 	["RemoveBuffs"] = 1,
 	["autodismount"] = 1,
-	["DruidFormNotRandomize"] = false,
-	["DruidClickForm"] = true,
-	["version"] = "4.3.5",
-	["UnknownMounts"] = {
-	},
-	["GlobalPrefMounts"] = {
-	},
-	["GlobalExclude"] = {
-	},
-	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -84,14 +74,14 @@ GoGo_Prefs = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 486,
+			["ZoneID"] = 13,
 		},
 		["Durotar"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 820,
+			["ZoneID"] = 485,
 		},
 		["Darkmoon Island"] = {
 			["Preferred"] = {
@@ -149,7 +139,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Abyssal Depths"] = {
+		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -163,68 +153,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 510,
 		},
-		["Tanaris"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 816,
-		},
-		["Blackrock Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 29,
-		},
 		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 488,
-		},
-		["Icecrown Citadel"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 492,
-		},
-		["Orgrimmar"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 321,
-		},
-		["Northern Barrens"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 11,
-		},
-		["The Molten Core"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["End Time"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
 		},
 		["The Oculus"] = {
 			["Preferred"] = {
@@ -240,7 +174,63 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 720,
 		},
-		["Hyjal Summit"] = {
+		["Hour of Twilight"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["End Time"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Northern Barrens"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 11,
+		},
+		["The Molten Core"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
+		["Orgrimmar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 321,
+		},
+		["Icecrown Citadel"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 492,
+		},
+		["Blackrock Depths"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 29,
+		},
+		["Tanaris"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 816,
+		},
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -248,6 +238,16 @@ GoGo_Prefs = {
 			["ZoneID"] = 13,
 		},
 	},
+	["UnknownMounts"] = {
+	},
+	["version"] = "4.3.5",
+	["GlobalExclude"] = {
+	},
+	["GlobalPrefMounts"] = {
+	},
+	["DruidFormNotRandomize"] = false,
+	["PaladinUseCrusaderAura"] = false,
+	["DruidClickForm"] = true,
 }
 GoGo_DebugLog = {
 }

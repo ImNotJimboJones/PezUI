@@ -4,11 +4,7 @@ ReforgeLiteDB = {
 	["updateTooltip"] = 1,
 	["windowY"] = 883.348876953125,
 	["reforgeCheat"] = 20,
-	["activeWindowTitle"] = {
-		0.8, -- [1]
-		0, -- [2]
-		0, -- [3]
-	},
+	["windowX"] = 653.1138916015625,
 	["profiles"] = {
 		["Pezzer - Burning Blade"] = {
 			["caps"] = {
@@ -40,19 +36,120 @@ ReforgeLiteDB = {
 					{
 						["dst"] = 4,
 						["src"] = 8,
+						["reforge"] = 53,
+						["amount"] = 84,
+					}, -- [1]
+					{
+						["dst"] = 5,
+						["src"] = 6,
+						["reforge"] = 40,
+						["amount"] = 73,
+					}, -- [2]
+					{
+						["dst"] = 4,
+						["src"] = 6,
+						["reforge"] = 39,
+						["amount"] = 88,
+					}, -- [3]
+					{
+						["dst"] = 8,
+						["src"] = 6,
+						["reforge"] = 42,
 						["amount"] = 0,
+					}, -- [4]
+					{
+						["dst"] = 5,
+						["src"] = 6,
+						["reforge"] = 40,
+						["amount"] = 131,
+					}, -- [5]
+					{
+						["dst"] = 4,
+						["src"] = 8,
+						["reforge"] = 53,
+						["amount"] = 80,
+					}, -- [6]
+					{
+						["dst"] = 8,
+						["src"] = 6,
+						["reforge"] = 42,
+						["amount"] = 78,
+					}, -- [7]
+					{
+						["dst"] = 4,
+						["src"] = 6,
+						["reforge"] = 39,
+						["amount"] = 68,
+					}, -- [8]
+					{
+						["dst"] = 4,
+						["src"] = 8,
+						["reforge"] = 53,
+						["amount"] = 128,
+					}, -- [9]
+					{
+						["dst"] = 5,
+						["src"] = 6,
+						["reforge"] = 40,
+						["amount"] = 86,
+					}, -- [10]
+					{
+						["dst"] = 5,
+						["src"] = 6,
+						["reforge"] = 40,
+						["amount"] = 73,
+					}, -- [11]
+					{
+						["dst"] = 8,
+						["src"] = 6,
+						["reforge"] = 42,
+						["amount"] = 62,
+					}, -- [12]
+					{
+						["dst"] = 5,
+						["src"] = 6,
+						["reforge"] = 40,
+						["amount"] = 0,
+					}, -- [13]
+					{
+					}, -- [14]
+					{
+					}, -- [15]
+					{
+					}, -- [16]
+					{
+					}, -- [17]
+				},
+				["stats"] = {
+					123, -- [1]
+					0, -- [2]
+					0, -- [3]
+					1119, -- [4]
+					2402, -- [5]
+					1035, -- [6]
+					0, -- [7]
+					1157, -- [8]
+				},
+			},
+			["targetLevel"] = 3,
+			["method"] = {
+				["items"] = {
+					{
+						["dst"] = 4,
+						["src"] = 8,
+						["amount"] = 84,
 						["reforge"] = 53,
 					}, -- [1]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 73,
 						["reforge"] = 40,
 					}, -- [2]
 					{
 						["dst"] = 4,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 88,
 						["reforge"] = 39,
 					}, -- [3]
 					{
@@ -64,49 +161,49 @@ ReforgeLiteDB = {
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 131,
 						["reforge"] = 40,
 					}, -- [5]
 					{
 						["dst"] = 4,
 						["src"] = 8,
-						["amount"] = 0,
+						["amount"] = 80,
 						["reforge"] = 53,
 					}, -- [6]
 					{
 						["dst"] = 8,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 78,
 						["reforge"] = 42,
 					}, -- [7]
 					{
 						["dst"] = 4,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 68,
 						["reforge"] = 39,
 					}, -- [8]
 					{
 						["dst"] = 4,
 						["src"] = 8,
-						["amount"] = 0,
+						["amount"] = 128,
 						["reforge"] = 53,
 					}, -- [9]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 86,
 						["reforge"] = 40,
 					}, -- [10]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 73,
 						["reforge"] = 40,
 					}, -- [11]
 					{
 						["dst"] = 8,
 						["src"] = 6,
-						["amount"] = 0,
+						["amount"] = 62,
 						["reforge"] = 42,
 					}, -- [12]
 					{
@@ -125,18 +222,15 @@ ReforgeLiteDB = {
 					}, -- [17]
 				},
 				["stats"] = {
-					0, -- [1]
+					123, -- [1]
 					0, -- [2]
 					0, -- [3]
-					0, -- [4]
-					0, -- [5]
-					0, -- [6]
+					1119, -- [4]
+					2402, -- [5]
+					1035, -- [6]
 					0, -- [7]
-					0, -- [8]
+					1157, -- [8]
 				},
-			},
-			["targetLevel"] = 3,
-			["buffs"] = {
 			},
 			["weights"] = {
 				0, -- [1]
@@ -151,105 +245,7 @@ ReforgeLiteDB = {
 			["itemsLocked"] = {
 				false, -- [1]
 			},
-			["method"] = {
-				["items"] = {
-					{
-						["dst"] = 4,
-						["src"] = 8,
-						["reforge"] = 53,
-						["amount"] = 0,
-					}, -- [1]
-					{
-						["dst"] = 5,
-						["src"] = 6,
-						["reforge"] = 40,
-						["amount"] = 0,
-					}, -- [2]
-					{
-						["dst"] = 4,
-						["src"] = 6,
-						["reforge"] = 39,
-						["amount"] = 0,
-					}, -- [3]
-					{
-						["dst"] = 8,
-						["src"] = 6,
-						["reforge"] = 42,
-						["amount"] = 0,
-					}, -- [4]
-					{
-						["dst"] = 5,
-						["src"] = 6,
-						["reforge"] = 40,
-						["amount"] = 0,
-					}, -- [5]
-					{
-						["dst"] = 4,
-						["src"] = 8,
-						["reforge"] = 53,
-						["amount"] = 0,
-					}, -- [6]
-					{
-						["dst"] = 8,
-						["src"] = 6,
-						["reforge"] = 42,
-						["amount"] = 0,
-					}, -- [7]
-					{
-						["dst"] = 4,
-						["src"] = 6,
-						["reforge"] = 39,
-						["amount"] = 0,
-					}, -- [8]
-					{
-						["dst"] = 4,
-						["src"] = 8,
-						["reforge"] = 53,
-						["amount"] = 0,
-					}, -- [9]
-					{
-						["dst"] = 5,
-						["src"] = 6,
-						["reforge"] = 40,
-						["amount"] = 0,
-					}, -- [10]
-					{
-						["dst"] = 5,
-						["src"] = 6,
-						["reforge"] = 40,
-						["amount"] = 0,
-					}, -- [11]
-					{
-						["dst"] = 8,
-						["src"] = 6,
-						["reforge"] = 42,
-						["amount"] = 0,
-					}, -- [12]
-					{
-						["dst"] = 5,
-						["src"] = 6,
-						["reforge"] = 40,
-						["amount"] = 0,
-					}, -- [13]
-					{
-					}, -- [14]
-					{
-					}, -- [15]
-					{
-					}, -- [16]
-					{
-					}, -- [17]
-				},
-				["stats"] = {
-					0, -- [1]
-					0, -- [2]
-					0, -- [3]
-					0, -- [4]
-					0, -- [5]
-					0, -- [6]
-					0, -- [7]
-					0, -- [8]
-				},
+			["buffs"] = {
 			},
 		},
 	},
@@ -257,13 +253,17 @@ ReforgeLiteDB = {
 	["itemSize"] = 24,
 	["methodWindowY"] = 822.1961669921875,
 	["methodWindowX"] = 345.937255859375,
+	["openOnReforge"] = true,
+	["customPresets"] = {
+	},
 	["inactiveWindowTitle"] = {
 		0.5, -- [1]
 		0.5, -- [2]
 		0.5, -- [3]
 	},
-	["customPresets"] = {
+	["activeWindowTitle"] = {
+		0.8, -- [1]
+		0, -- [2]
+		0, -- [3]
 	},
-	["openOnReforge"] = true,
-	["windowX"] = 653.1138916015625,
 }

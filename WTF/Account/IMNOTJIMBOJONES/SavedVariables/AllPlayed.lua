@@ -1,29 +1,27 @@
 
 AllPlayedDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["highest_rank"] = 0,
-						["subzone_text"] = "Thorn Hill",
-						["zone_text"] = "Northern Barrens",
+						["conquest_points"] = 800,
+						["class"] = "HUNTER",
+						["zone_text"] = "Orgrimmar",
 						["honor_kills"] = 7548,
 						["honor_points"] = 825,
 						["coin"] = 533995385,
-						["seconds_played"] = 9739766,
+						["seconds_played"] = 9743512,
 						["xp"] = 1141,
-						["class"] = "HUNTER",
-						["last_update"] = 1335628992,
+						["seconds_played_last_update"] = 1335632908,
+						["highest_rank"] = 0,
+						["last_update"] = 1335632908,
 						["class_loc"] = "Hunter",
 						["justice_points"] = 2618,
 						["level"] = 85,
 						["max_rested_xp"] = 18400500,
-						["seconds_played_last_update"] = 1335628992,
-						["conquest_points"] = 800,
+						["is_resting"] = 1,
+						["subzone_text"] = "Valley of Honor",
 					},
 				},
 			},
@@ -39,6 +37,9 @@ AllPlayedDB = {
 			},
 		},
 	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["profiles"] = {
 		["Default"] = {
 			["options"] = {
@@ -47,10 +48,10 @@ AllPlayedDB = {
 				["show_coins"] = false,
 				["all_realms"] = false,
 				["show_rested_xp_countdown"] = false,
+				["show_xp_total"] = false,
 				["ldbicon"] = {
 					["hide"] = true,
 				},
-				["show_xp_total"] = false,
 			},
 		},
 	},
