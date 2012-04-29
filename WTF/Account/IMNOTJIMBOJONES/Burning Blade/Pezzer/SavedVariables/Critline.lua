@@ -236,10 +236,10 @@ CritlinePerCharDB = {
 					[99621] = {
 						{
 							["normal"] = {
-								["target"] = "Enchanted Magus",
+								["target"] = "Flamewaker Healer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 85,
-								["amount"] = 1387,
+								["targetLevel"] = 60,
+								["amount"] = 1409,
 							},
 						}, -- [1]
 					},
@@ -380,10 +380,10 @@ CritlinePerCharDB = {
 								["amount"] = 1591,
 							},
 							["crit"] = {
-								["target"] = "Dreadscale",
+								["target"] = "Garr",
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
-								["amount"] = 3198,
+								["amount"] = 3226,
 							},
 						}, -- [1]
 					},

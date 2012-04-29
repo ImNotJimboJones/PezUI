@@ -9,9 +9,9 @@ GoGo_Prefs = {
 	["UnknownMounts"] = {
 	},
 	["version"] = "4.3.5",
+	["DruidFormNotRandomize"] = false,
 	["GlobalPrefMounts"] = {
 	},
-	["DruidFormNotRandomize"] = false,
 	["GlobalExclude"] = {
 	},
 	["PaladinUseCrusaderAura"] = false,
@@ -177,12 +177,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 29,
 		},
-		["Uldum"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
+			["ZoneID"] = 488,
 		},
 		["Icecrown Citadel"] = {
 			["Preferred"] = {
@@ -233,12 +233,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Obsidian Sanctum"] = {
+		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 720,
 		},
 		["Hyjal Summit"] = {
 			["Preferred"] = {
