@@ -1,4 +1,7 @@
-﻿Version 1.0.7h
+﻿Version 1.0.7i
+- Fix casting failure after skill-up
+
+Version 1.0.7h
 - Tighten up the click-to-cast code a little bit more
 - Updated German translation (thanks DirtyHarryGermany!)
 - Updated Simplified Chinese translation (thanks again dh0000!)
