@@ -1,0 +1,74 @@
+------------------------------------------------------------------------
+r11 | eggsampler | 2012-04-13 23:51:06 +0000 (Fri, 13 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Fix for cooldowns
+------------------------------------------------------------------------
+r10 | eggsampler | 2012-04-13 23:47:44 +0000 (Fri, 13 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Fixes
+------------------------------------------------------------------------
+r9 | eggsampler | 2012-04-13 15:22:52 +0000 (Fri, 13 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+itt working code
+------------------------------------------------------------------------
+r8 | eggsampler | 2012-04-13 14:37:05 +0000 (Fri, 13 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+More efficient, should be faster
+------------------------------------------------------------------------
+r7 | eggsampler | 2012-04-13 12:47:34 +0000 (Fri, 13 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Changed method from hooking secure functions to post hooking companion update method and manually updating the buttons replicating some of blizzard's code
+------------------------------------------------------------------------
+r6 | eggsampler | 2012-04-12 08:24:49 +0000 (Thu, 12 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Only changes selected companion if filtered count changes
+------------------------------------------------------------------------
+r5 | eggsampler | 2012-04-12 08:10:04 +0000 (Thu, 12 Apr 2012) | 1 line
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Set the text colour to match the style of the frame
+------------------------------------------------------------------------
+r4 | eggsampler | 2012-04-12 08:02:49 +0000 (Thu, 12 Apr 2012) | 2 lines
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Fixed bug with picking up companions
+Simplified method for  updating companion list
+------------------------------------------------------------------------
+r3 | eggsampler | 2012-04-12 07:54:18 +0000 (Thu, 12 Apr 2012) | 2 lines
+Changed paths:
+   M /trunk/CompanionFilter.lua
+
+Fixed bug where invalid mount name effectively closed the mount/pet window
+Added some text around the search box
+------------------------------------------------------------------------
+r2 | eggsampler | 2012-04-12 05:25:10 +0000 (Thu, 12 Apr 2012) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+   A /trunk/CompanionFilter.lua
+   A /trunk/CompanionFilter.toc
+   A /trunk/embeds.xml
+
+Initial import
+------------------------------------------------------------------------
+r1 | svn | 2012-04-12 05:21:57 +0000 (Thu, 12 Apr 2012) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+companionfilter/mainline: Initial Import
+------------------------------------------------------------------------
