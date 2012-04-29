@@ -110,16 +110,16 @@ CritlinePerCharDB = {
 					[13795] = {
 						[2] = {
 							["normal"] = {
-								["target"] = "Unrelenting Trainee",
+								["target"] = "Abyssal Doombringer",
 								["isPvPTarget"] = false,
-								["targetLevel"] = 80,
-								["amount"] = 1426,
+								["targetLevel"] = 86,
+								["amount"] = 2105,
 							},
 							["crit"] = {
-								["target"] = "Raider's Training Dummy",
+								["target"] = "Archbishop Benedictus",
 								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 2124,
+								["targetLevel"] = 87,
+								["amount"] = 3176,
 							},
 						},
 					},
@@ -329,16 +329,6 @@ CritlinePerCharDB = {
 					},
 				},
 				["pet"] = {
-					[105523] = {
-						{
-							["normal"] = {
-								["target"] = "Mannoroth",
-								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 1661370,
-							},
-						}, -- [1]
-					},
 					[17253] = {
 						{
 							["normal"] = {
@@ -355,19 +345,13 @@ CritlinePerCharDB = {
 							},
 						}, -- [1]
 					},
-					[6603] = {
+					[105523] = {
 						{
 							["normal"] = {
-								["target"] = "Gormok the Impaler",
+								["target"] = "Mannoroth",
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
-								["amount"] = 2611,
-							},
-							["crit"] = {
-								["target"] = "Gormok the Impaler",
-								["isPvPTarget"] = false,
-								["targetLevel"] = -1,
-								["amount"] = 5213,
+								["amount"] = 1661372,
 							},
 						}, -- [1]
 					},
@@ -384,6 +368,22 @@ CritlinePerCharDB = {
 								["isPvPTarget"] = false,
 								["targetLevel"] = -1,
 								["amount"] = 3226,
+							},
+						}, -- [1]
+					},
+					[6603] = {
+						{
+							["normal"] = {
+								["target"] = "Gormok the Impaler",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 2611,
+							},
+							["crit"] = {
+								["target"] = "Gormok the Impaler",
+								["isPvPTarget"] = false,
+								["targetLevel"] = -1,
+								["amount"] = 5213,
 							},
 						}, -- [1]
 					},

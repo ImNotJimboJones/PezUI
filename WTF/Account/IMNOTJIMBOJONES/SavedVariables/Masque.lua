@@ -105,17 +105,18 @@ MasqueDB = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Bison_debuff"] = {
+				["VuhDo_Buff Watch"] = {
 					["Disabled"] = true,
-					["SkinID"] = "Sleek",
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
 				},
 				["Macaroon_Vehicle / Possession Bar"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Bison_weapon"] = {
+				["Bison_buff"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
@@ -130,9 +131,9 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Macaroon_Shortcuts - Top"] = {
-					["SkinID"] = "Renaitre: Circle Pro",
-					["Gloss"] = 1,
+				["Blizzard Buffs"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
 					["Inherit"] = false,
 				},
 				["VuhDo_HoTs"] = {
@@ -141,9 +142,9 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Masque"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
+				["PitBull4_Focus"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
 				},
 				["Macaroon_Shortcuts"] = {
 					["Colors"] = {
@@ -178,13 +179,13 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["PitBull4_Focus"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
+				["Masque"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
-				["Blizzard Buffs"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
+				["Macaroon_Shortcuts - Top"] = {
+					["SkinID"] = "Renaitre: Circle Pro",
+					["Gloss"] = 1,
 					["Inherit"] = false,
 				},
 				["PitBull4_Target"] = {
@@ -192,16 +193,15 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Fade",
 				},
-				["Bison_buff"] = {
+				["Bison_weapon"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["VuhDo_Buff Watch"] = {
+				["Bison_debuff"] = {
 					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
 				},
 			},
 		},
