@@ -31,20 +31,20 @@ ThreatPlatesDB = {
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["toggle"] = {
-					["Totem"] = true,
-				},
 				["scale"] = {
-					["Elite"] = 0.9500000476837158,
+					["Normal"] = 0.9000000357627869,
 					["Boss"] = 1,
 					["Neutral"] = 0.800000011920929,
-					["Normal"] = 0.9000000357627869,
+					["Elite"] = 0.9500000476837158,
+				},
+				["toggle"] = {
+					["Totem"] = true,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -118,16 +118,16 @@ ThreatPlatesDB = {
 				},
 			},
 			["threat"] = {
-				["tank"] = {
-					["scale"] = {
-						["MEDIUM"] = 1.1,
-						["HIGH"] = 1,
-					},
-				},
 				["dps"] = {
 					["scale"] = {
 						["MEDIUM"] = 1.1,
 						["LOW"] = 1,
+					},
+				},
+				["tank"] = {
+					["scale"] = {
+						["MEDIUM"] = 1.1,
+						["HIGH"] = 1,
 					},
 				},
 				["useHPColor"] = false,
@@ -146,20 +146,20 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["healthborder"] = {
-					["texture"] = "TP_HealthBarOverlayThin",
-				},
 				["castbar"] = {
 					["texture"] = "Minimalist",
+				},
+				["healthborder"] = {
+					["texture"] = "TP_HealthBarOverlayThin",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -175,7 +175,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},

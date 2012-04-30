@@ -1,9 +1,9 @@
 
 MADB = {
-	["tooltips"] = 1,
 	["characters"] = {
 	},
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -38,6 +38,16 @@ MADB = {
 						480, -- [5]
 					},
 				},
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						380, -- [5]
+					},
+				},
 				["GroupLootFrame3"] = {
 					["name"] = "GroupLootFrame3",
 					["pos"] = {
@@ -60,8 +70,8 @@ MADB = {
 					},
 				},
 				["GuildBankFrame"] = {
-					["scale"] = 0.7999999523162842,
 					["name"] = "GuildBankFrame",
+					["scale"] = 0.7999999523162842,
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
@@ -80,14 +90,14 @@ MADB = {
 						74.00004577636719, -- [5]
 					},
 				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
+				["GroupLootFrame4"] = {
+					["name"] = "GroupLootFrame4",
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
 						200, -- [4]
-						380, -- [5]
+						680, -- [5]
 					},
 				},
 				["GuildChallengeAlertFrame"] = {
@@ -111,19 +121,13 @@ MADB = {
 						294.2891463489281, -- [5]
 					},
 				},
-				["GroupLootFrame4"] = {
-					["name"] = "GroupLootFrame4",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						680, -- [5]
-					},
+				["RaidUnitFramesMover"] = {
+					["name"] = "RaidUnitFramesMover",
+					["hidden"] = true,
 				},
 				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
 					["hidden"] = true,
+					["name"] = "PlayerDebuffsMover",
 				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
