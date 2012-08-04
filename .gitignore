@@ -6,6 +6,18 @@ Patch.html
 Battle.net Authenticator Serial.rtf
 WoW.mfil
 WoW.tfil
+BackgroundDownloader.exe
+Battle.net.dll
+Blizzard Updater.exe
+Launcher.exe
+Microsoft.VC80.CRT.manifest
+Repair.exe
+Scan.dll
+Wow.exe
+WowError.exe
+dbghelp.dll
+divxdecoder.dll
+msvcr80.dll
 
 # Folders #
 ###########
@@ -16,3 +28,4 @@ Logs
 Movies
 PTR*
 Updates
+Temp
