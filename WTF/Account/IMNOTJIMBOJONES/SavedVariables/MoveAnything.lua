@@ -1,24 +1,13 @@
 
 MADB = {
-	["modifiedFramesOnly"] = true,
 	["characters"] = {
 	},
-	["frameListRows"] = 18,
 	["tooltips"] = 1,
+	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
 			["frames"] = {
-				["AchievementAlertFrame1"] = {
-					["name"] = "AchievementAlertFrame1",
-					["pos"] = {
-						"TOP", -- [1]
-						"UIParent", -- [2]
-						"TOP", -- [3]
-						-3.0517578125e-005, -- [4]
-						-128, -- [5]
-					},
-				},
 				["VehicleSeatIndicator"] = {
 					["name"] = "VehicleSeatIndicator",
 					["pos"] = {
@@ -49,49 +38,6 @@ MADB = {
 						380, -- [5]
 					},
 				},
-				["GroupLootFrame3"] = {
-					["name"] = "GroupLootFrame3",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						580, -- [5]
-					},
-				},
-				["BankFrame"] = {
-					["name"] = "BankFrame",
-					["scale"] = 0.8199999928474426,
-					["pos"] = {
-						"TOPLEFT", -- [1]
-						"UIParent", -- [2]
-						"TOPLEFT", -- [3]
-						24.39024411518612, -- [4]
-						-126.8292693989678, -- [5]
-					},
-				},
-				["GuildBankFrame"] = {
-					["scale"] = 0.8199999928474426,
-					["name"] = "GuildBankFrame",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						20.00001525878906, -- [4]
-						516.4879076348972, -- [5]
-					},
-				},
-				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
-					["hidden"] = true,
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						1370.274780064928, -- [4]
-						741.5294770544057, -- [5]
-					},
-				},
 				["BNToastFrame"] = {
 					["name"] = "BNToastFrame",
 					["pos"] = {
@@ -100,16 +46,6 @@ MADB = {
 						"TOPLEFT", -- [3]
 						11.00001204013824, -- [4]
 						74.00004577636719, -- [5]
-					},
-				},
-				["GuildChallengeAlertFrame"] = {
-					["name"] = "GuildChallengeAlertFrame",
-					["pos"] = {
-						"TOP", -- [1]
-						"UIParent", -- [2]
-						"TOP", -- [3]
-						-3.0517578125e-005, -- [4]
-						-128, -- [5]
 					},
 				},
 				["BagsMover"] = {
@@ -133,10 +69,6 @@ MADB = {
 						680, -- [5]
 					},
 				},
-				["RaidUnitFramesMover"] = {
-					["name"] = "RaidUnitFramesMover",
-					["hidden"] = true,
-				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
 					["pos"] = {
@@ -145,6 +77,93 @@ MADB = {
 						"CENTER", -- [3]
 						-6.99993896484375, -- [4]
 						0.1099166870117188, -- [5]
+					},
+				},
+				["AchievementAlertFrame1"] = {
+					["name"] = "AchievementAlertFrame1",
+					["pos"] = {
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-3.0517578125e-005, -- [4]
+						-128, -- [5]
+					},
+				},
+				["RaidUnitFramesManagerMover"] = {
+					["name"] = "RaidUnitFramesManagerMover",
+					["pos"] = {
+						"TOPLEFT", -- [1]
+						"UIParent", -- [2]
+						"TOPLEFT", -- [3]
+						-6.999999658063802, -- [4]
+						-139.9999931612761, -- [5]
+					},
+				},
+				["GroupLootFrame3"] = {
+					["name"] = "GroupLootFrame3",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						580, -- [5]
+					},
+				},
+				["GuildBankFrame"] = {
+					["scale"] = 0.8199999928474426,
+					["name"] = "GuildBankFrame",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						20.00001525878906, -- [4]
+						516.4879076348972, -- [5]
+					},
+				},
+				["GuildChallengeAlertFrame"] = {
+					["name"] = "GuildChallengeAlertFrame",
+					["pos"] = {
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-3.0517578125e-005, -- [4]
+						-128, -- [5]
+					},
+				},
+				["MACompactRaidFrameManagerToggleButton"] = {
+					["name"] = "MACompactRaidFrameManagerToggleButton",
+					["pos"] = {
+						"TOPLEFT", -- [1]
+						"UIParent", -- [2]
+						"TOPLEFT", -- [3]
+						-5, -- [4]
+						-224.9999264837177, -- [5]
+					},
+				},
+				["RaidUnitFramesMover"] = {
+					["hidden"] = true,
+					["name"] = "RaidUnitFramesMover",
+				},
+				["BankFrame"] = {
+					["name"] = "BankFrame",
+					["scale"] = 0.8199999928474426,
+					["pos"] = {
+						"TOPLEFT", -- [1]
+						"UIParent", -- [2]
+						"TOPLEFT", -- [3]
+						24.39024411518612, -- [4]
+						-126.8292693989678, -- [5]
+					},
+				},
+				["PlayerDebuffsMover"] = {
+					["name"] = "PlayerDebuffsMover",
+					["hidden"] = true,
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						1370.274780064928, -- [4]
+						741.5294770544057, -- [5]
 					},
 				},
 				["AchievementAlertFrame2"] = {
