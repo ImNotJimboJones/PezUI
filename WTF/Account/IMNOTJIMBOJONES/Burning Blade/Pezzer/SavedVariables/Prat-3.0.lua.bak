@@ -1,5 +1,0 @@
-
-Prat3CharDB = {
-	["history"] = {
-	},
-}
