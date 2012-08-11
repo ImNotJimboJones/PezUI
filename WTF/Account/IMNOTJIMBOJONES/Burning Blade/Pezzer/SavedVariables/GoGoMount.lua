@@ -1,20 +1,5 @@
 
 GoGo_Prefs = {
-	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
-	["DruidFlightForm"] = false,
-	["RemoveBuffs"] = 1,
-	["autodismount"] = 1,
-	["DruidClickForm"] = true,
-	["UnknownMounts"] = {
-	},
-	["version"] = "4.3.5",
-	["DruidFormNotRandomize"] = false,
-	["GlobalPrefMounts"] = {
-	},
-	["GlobalExclude"] = {
-	},
-	["PaladinUseCrusaderAura"] = false,
 	["Zones"] = {
 		["Wintergrasp"] = {
 			["Preferred"] = {
@@ -191,7 +176,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 29,
 		},
-		["Abyssal Depths"] = {
+		["End Time"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -226,12 +211,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 720,
 		},
-		["Mount Hyjal"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 606,
+			["ZoneID"] = 488,
 		},
 		["Orgrimmar"] = {
 			["Preferred"] = {
@@ -254,14 +239,14 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 11,
 		},
-		["The Molten Core"] = {
+		["Mount Hyjal"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 13,
+			["ZoneID"] = 606,
 		},
-		["End Time"] = {
+		["The Molten Core"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -282,12 +267,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["The Obsidian Sanctum"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 488,
+			["ZoneID"] = 13,
 		},
 		["Hyjal Summit"] = {
 			["Preferred"] = {
@@ -296,6 +281,21 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
+	},
+	["DruidClickForm"] = true,
+	["DruidFlightForm"] = false,
+	["GlobalExclude"] = {
+	},
+	["UnknownMounts"] = {
+	},
+	["DruidDisableInCombat"] = false,
+	["AspectPack"] = false,
+	["version"] = "4.3.5",
+	["RemoveBuffs"] = 1,
+	["DruidFormNotRandomize"] = false,
+	["autodismount"] = 1,
+	["PaladinUseCrusaderAura"] = false,
+	["GlobalPrefMounts"] = {
 	},
 }
 GoGo_DebugLog = {

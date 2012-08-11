@@ -42,6 +42,13 @@ MacaroonMacroVault = {
 	},
 	["Burning Blade"] = {
 		["Pezzer"] = {
+			["Keybinds: Button 13"] = {
+				"/cast !Aspect of the Cheetah()", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
 			["Test: Button 1"] = {
 				"#show Ice Trap\n/cast Ice Trap", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
@@ -49,15 +56,15 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 16"] = {
-				"/cast !Aspect of the Pack()", -- [1]
+			["Keybinds: Button 15"] = {
+				"/cast !Aspect of the Hawk()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 13"] = {
-				"/cast !Aspect of the Cheetah()", -- [1]
+			["Action Bar - Left: Button 9"] = {
+				"/cast Scatter Shot()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
@@ -77,8 +84,8 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 15"] = {
-				"/cast !Aspect of the Hawk()", -- [1]
+			["Keybinds: Button 16"] = {
+				"/cast !Aspect of the Pack()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
@@ -98,10 +105,10 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 14"] = {
-				"/cast !Aspect of the Fox()", -- [1]
+			["ScreenGrid: Button 3"] = {
+				"/screengrid 20", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"", -- [3]
+				"SG 20", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
@@ -119,10 +126,10 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["ScreenGrid: Button 3"] = {
-				"/screengrid 20", -- [1]
+			["Keybinds: Button 14"] = {
+				"/cast !Aspect of the Fox()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"SG 20", -- [3]
+				"", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},

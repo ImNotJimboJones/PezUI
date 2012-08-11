@@ -4,7 +4,7 @@ SpeedyGonzalesDB = {
 	["showTopSpeed"] = false,
 	["shown"] = false,
 	["pos"] = {
-		["yOff"] = -99.99999237060547,
+		["yOff"] = -99.99999261417814,
 		["xOff"] = 0,
 		["point"] = "CENTER",
 	},

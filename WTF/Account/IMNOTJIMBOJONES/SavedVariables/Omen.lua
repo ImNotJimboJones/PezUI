@@ -5,11 +5,11 @@ Omen3DB = {
 	},
 	["profiles"] = {
 		["Default"] = {
-			["PositionW"] = 257.931396484375,
+			["PositionW"] = 335.2172046428644,
 			["Shown"] = true,
-			["PositionH"] = 78.91263580322266,
-			["VGrip2"] = 148.3106164624356,
-			["PositionY"] = 110.6910171508789,
+			["PositionH"] = 79.00000239355339,
+			["VGrip2"] = 192.749943054947,
+			["PositionY"] = 111.4880509370044,
 			["Locked"] = true,
 			["Background"] = {
 				["BorderTexture"] = "None",
@@ -27,8 +27,8 @@ Omen3DB = {
 				["UseShowWith"] = false,
 				["HideWhileResting"] = false,
 			},
-			["VGrip1"] = 109.6208904287567,
-			["PositionX"] = 1055.558837890625,
+			["VGrip1"] = 142.467349214526,
+			["PositionX"] = 1132.04548325877,
 			["Warnings"] = {
 				["Message"] = true,
 				["Shake"] = true,

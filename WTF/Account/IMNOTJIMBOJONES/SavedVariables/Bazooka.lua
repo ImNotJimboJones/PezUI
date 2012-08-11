@@ -177,10 +177,10 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["stripColors"] = false,
-						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["area"] = "left",
 						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -234,10 +234,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
 						["stripColors"] = false,
+						["enabled"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["bar"] = 2,
 						["pos"] = 4,
 					},
@@ -301,7 +301,7 @@ BazookaDB = {
 					},
 					["BrokerToolBox - Token"] = {
 						["area"] = "center",
-						["pos"] = 12,
+						["pos"] = 1,
 						["bar"] = 2,
 					},
 					["Broker_DualSpecObject"] = {
@@ -367,16 +367,16 @@ BazookaDB = {
 					["SN - Vengeance"] = {
 						["pos"] = 16,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -411,9 +411,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["bar"] = 2,
 						["pos"] = 2,
 						["showSuffix"] = false,
-						["bar"] = 2,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -467,12 +467,12 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["Broker_uClock"] = {
-						["showValue"] = false,
+						["stripColors"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["pos"] = 9,
-						["stripColors"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["bar"] = 2,
 					},
 					["SN - Ranged Attack Power"] = {
@@ -510,7 +510,7 @@ BazookaDB = {
 					["centerSpacing"] = 8,
 					["y"] = 1.27897047996521,
 					["relPoint"] = "BOTTOMRIGHT",
-					["frameWidth"] = 341,
+					["frameWidth"] = 421,
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMRIGHT",
@@ -530,7 +530,7 @@ BazookaDB = {
 					["y"] = 1.302266597747803,
 					["relPoint"] = "BOTTOMLEFT",
 					["leftSpacing"] = 15,
-					["frameWidth"] = 340,
+					["frameWidth"] = 420,
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMLEFT",

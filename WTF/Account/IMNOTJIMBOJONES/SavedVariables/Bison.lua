@@ -6,7 +6,7 @@ BisonDB = {
 	["profiles"] = {
 		["Default"] = {
 			["buff"] = {
-				["xPos"] = 700.6270141601562,
+				["xPos"] = 700.6270141601563,
 				["flashing"] = false,
 				["yPos"] = 786.4393920898438,
 			},

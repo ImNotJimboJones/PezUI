@@ -13,7 +13,7 @@ SkadaDB = {
 			["windows"] = {
 				{
 					["mode"] = "Damage taken",
-					["point"] = "BOTTOM",
+					["barheight"] = 14,
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
 						["b"] = 0.3019607843137255,
@@ -25,7 +25,7 @@ SkadaDB = {
 						["g"] = 0.7490196078431373,
 						["r"] = 0.7490196078431373,
 					},
-					["barheight"] = 14,
+					["point"] = "BOTTOM",
 					["barslocked"] = true,
 					["background"] = {
 						["color"] = {
@@ -37,7 +37,7 @@ SkadaDB = {
 					["bartexture"] = "Minimalist",
 					["barwidth"] = 189.8040466308594,
 					["barspacing"] = 1,
-					["y"] = 6.350785406539217e-05,
+					["y"] = 6.350785406539217e-005,
 					["x"] = 280.5475463867188,
 					["title"] = {
 						["font"] = "Arial Narrow",

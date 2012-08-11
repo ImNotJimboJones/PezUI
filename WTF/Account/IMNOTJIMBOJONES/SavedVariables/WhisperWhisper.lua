@@ -32,6 +32,14 @@ Broker_WhisperWhisperDB = {
 			},
 			["whisperList"] = {
 				{
+					"Lívely", -- [1]
+					{
+						"|cffff0008where is fate?", -- [1]
+					}, -- [2]
+					false, -- [3]
+					false, -- [4]
+				}, -- [1]
+				{
 					"Btchgrip", -- [1]
 					{
 						"|cffff0008too hard with 5 people", -- [1]
@@ -39,7 +47,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [1]
+				}, -- [2]
 				{
 					"Vâcano", -- [1]
 					{
@@ -56,7 +64,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					true, -- [3]
 					false, -- [4]
-				}, -- [2]
+				}, -- [3]
 				{
 					"Shiftsalot", -- [1]
 					{
@@ -73,7 +81,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [3]
+				}, -- [4]
 				{
 					"Mytios", -- [1]
 					{
@@ -90,7 +98,7 @@ Broker_WhisperWhisperDB = {
 					}, -- [2]
 					false, -- [3]
 					false, -- [4]
-				}, -- [4]
+				}, -- [5]
 			},
 		},
 	},

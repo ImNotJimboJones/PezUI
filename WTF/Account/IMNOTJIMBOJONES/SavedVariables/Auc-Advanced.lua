@@ -1,5 +1,7 @@
 
 AucAdvancedConfig = {
+	["users.Burning Blade.Pezzer"] = "Default",
+	["version"] = 1,
 	["profile.Default"] = {
 		["scandata.summaryonpartial"] = false,
 		["scandata"] = {
@@ -70,8 +72,6 @@ AucAdvancedConfig = {
 		},
 		["configator.top"] = 676.7647705078125,
 	},
-	["users.Burning Blade.Pezzer"] = "Default",
-	["version"] = 1,
 }
 AucAdvancedData = {
 	["AserArbitrageRealms"] = {
@@ -82,7 +82,7 @@ AucAdvancedData = {
 	["UtilSearchUiData"] = {
 		["Global"] = {
 			["configator.left"] = 318.0000305175781,
-			["configator.top"] = 730.0000610351562,
+			["configator.top"] = 730.0000610351563,
 		},
 		["Current"] = {
 			["snatch.itemsList"] = {

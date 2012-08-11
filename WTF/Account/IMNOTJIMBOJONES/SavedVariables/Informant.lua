@@ -8,8 +8,8 @@ InformantConfig = {
 		["show-ilevel"] = false,
 	},
 	["position"] = {
-		["y"] = 384.0000305175781,
-		["x"] = 614.3999633789062,
+		["y"] = 384.0000262606999,
+		["x"] = 614.3999579828801,
 	},
 }
 InformantLocalUpdates = {
