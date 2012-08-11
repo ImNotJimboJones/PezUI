@@ -3,8 +3,8 @@ MADB = {
 	["modifiedFramesOnly"] = true,
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -39,15 +39,14 @@ MADB = {
 						480, -- [5]
 					},
 				},
-				["BankFrame"] = {
-					["name"] = "BankFrame",
-					["scale"] = 0.8199999928474426,
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
 					["pos"] = {
-						"TOPLEFT", -- [1]
+						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
-						"TOPLEFT", -- [3]
-						24.39024411518612, -- [4]
-						-126.8292693989678, -- [5]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						380, -- [5]
 					},
 				},
 				["GroupLootFrame3"] = {
@@ -60,19 +59,20 @@ MADB = {
 						580, -- [5]
 					},
 				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
+				["BankFrame"] = {
+					["name"] = "BankFrame",
+					["scale"] = 0.8199999928474426,
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
+						"TOPLEFT", -- [1]
 						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						380, -- [5]
+						"TOPLEFT", -- [3]
+						24.39024411518612, -- [4]
+						-126.8292693989678, -- [5]
 					},
 				},
 				["GuildBankFrame"] = {
-					["name"] = "GuildBankFrame",
 					["scale"] = 0.8199999928474426,
+					["name"] = "GuildBankFrame",
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
@@ -113,14 +113,14 @@ MADB = {
 					},
 				},
 				["BagsMover"] = {
-					["name"] = "BagsMover",
 					["scale"] = 0.8199999928474426,
+					["name"] = "BagsMover",
 					["pos"] = {
 						"BOTTOMRIGHT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMRIGHT", -- [3]
-						-8.604884756525873, -- [4]
-						287.1113351007527, -- [5]
+						-16.76691442865434, -- [4]
+						306.496052175634, -- [5]
 					},
 				},
 				["GroupLootFrame4"] = {
@@ -134,8 +134,8 @@ MADB = {
 					},
 				},
 				["RaidUnitFramesMover"] = {
-					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
+					["hidden"] = true,
 				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
