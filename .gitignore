@@ -2,6 +2,8 @@
 #########
 *.DS_Store
 *.app
+*.bak
+WTF/Launch.wtf
 Patch.html
 Battle.net Authenticator Serial.rtf
 WoW.mfil
@@ -29,3 +31,4 @@ Movies
 PTR*
 Updates
 Temp
+TempMig
