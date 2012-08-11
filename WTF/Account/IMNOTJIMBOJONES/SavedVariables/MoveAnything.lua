@@ -1,9 +1,10 @@
 
 MADB = {
+	["modifiedFramesOnly"] = true,
 	["characters"] = {
 	},
-	["frameListRows"] = 18,
 	["tooltips"] = 1,
+	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -24,8 +25,8 @@ MADB = {
 						"TOPLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						15.01337814331055, -- [4]
-						369.3122863769531, -- [5]
+						15.01337893759193, -- [4]
+						369.3122767199374, -- [5]
 					},
 				},
 				["GroupLootFrame2"] = {
@@ -38,14 +39,15 @@ MADB = {
 						480, -- [5]
 					},
 				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
+				["BankFrame"] = {
+					["name"] = "BankFrame",
+					["scale"] = 0.8199999928474426,
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
+						"TOPLEFT", -- [1]
 						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						380, -- [5]
+						"TOPLEFT", -- [3]
+						24.39024411518612, -- [4]
+						-126.8292693989678, -- [5]
 					},
 				},
 				["GroupLootFrame3"] = {
@@ -58,26 +60,36 @@ MADB = {
 						580, -- [5]
 					},
 				},
-				["BankFrame"] = {
-					["name"] = "BankFrame",
-					["scale"] = 0.7999999523162842,
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						0, -- [4]
-						459.8040466308594, -- [5]
+						200, -- [4]
+						380, -- [5]
 					},
 				},
 				["GuildBankFrame"] = {
-					["scale"] = 0.7999999523162842,
 					["name"] = "GuildBankFrame",
+					["scale"] = 0.8199999928474426,
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						20.00002224325717, -- [4]
-						529.4000679223512, -- [5]
+						20.00001525878906, -- [4]
+						516.4879076348972, -- [5]
+					},
+				},
+				["PlayerDebuffsMover"] = {
+					["name"] = "PlayerDebuffsMover",
+					["hidden"] = true,
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						1370.274780064928, -- [4]
+						741.5294770544057, -- [5]
 					},
 				},
 				["BNToastFrame"] = {
@@ -88,16 +100,6 @@ MADB = {
 						"TOPLEFT", -- [3]
 						11.00001204013824, -- [4]
 						74.00004577636719, -- [5]
-					},
-				},
-				["GroupLootFrame4"] = {
-					["name"] = "GroupLootFrame4",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						680, -- [5]
 					},
 				},
 				["GuildChallengeAlertFrame"] = {
@@ -111,23 +113,29 @@ MADB = {
 					},
 				},
 				["BagsMover"] = {
-					["scale"] = 0.7999999523162842,
 					["name"] = "BagsMover",
+					["scale"] = 0.8199999928474426,
 					["pos"] = {
 						"BOTTOMRIGHT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMRIGHT", -- [3]
-						-5.817697244340031, -- [4]
-						294.2891463489281, -- [5]
+						-8.604884756525873, -- [4]
+						287.1113351007527, -- [5]
+					},
+				},
+				["GroupLootFrame4"] = {
+					["name"] = "GroupLootFrame4",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						200, -- [4]
+						680, -- [5]
 					},
 				},
 				["RaidUnitFramesMover"] = {
+					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
-					["hidden"] = true,
-				},
-				["PlayerDebuffsMover"] = {
-					["hidden"] = true,
-					["name"] = "PlayerDebuffsMover",
 				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
