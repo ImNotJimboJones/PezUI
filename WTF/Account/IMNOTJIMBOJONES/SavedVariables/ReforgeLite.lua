@@ -40,19 +40,19 @@ ReforgeLiteDB = {
 					{
 						["dst"] = 4,
 						["src"] = 8,
-						["amount"] = 96,
+						["amount"] = 0,
 						["reforge"] = 53,
 					}, -- [1]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 73,
+						["amount"] = 0,
 						["reforge"] = 40,
 					}, -- [2]
 					{
 						["dst"] = 4,
 						["src"] = 6,
-						["amount"] = 88,
+						["amount"] = 0,
 						["reforge"] = 39,
 					}, -- [3]
 					{
@@ -64,49 +64,49 @@ ReforgeLiteDB = {
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 131,
+						["amount"] = 0,
 						["reforge"] = 40,
 					}, -- [5]
 					{
 						["dst"] = 4,
 						["src"] = 8,
-						["amount"] = 80,
+						["amount"] = 0,
 						["reforge"] = 53,
 					}, -- [6]
 					{
 						["dst"] = 8,
 						["src"] = 6,
-						["amount"] = 78,
+						["amount"] = 0,
 						["reforge"] = 42,
 					}, -- [7]
 					{
 						["dst"] = 4,
 						["src"] = 6,
-						["amount"] = 68,
+						["amount"] = 0,
 						["reforge"] = 39,
 					}, -- [8]
 					{
 						["dst"] = 4,
 						["src"] = 8,
-						["amount"] = 128,
+						["amount"] = 0,
 						["reforge"] = 53,
 					}, -- [9]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 86,
+						["amount"] = 0,
 						["reforge"] = 40,
 					}, -- [10]
 					{
 						["dst"] = 5,
 						["src"] = 6,
-						["amount"] = 73,
+						["amount"] = 0,
 						["reforge"] = 40,
 					}, -- [11]
 					{
 						["dst"] = 8,
 						["src"] = 6,
-						["amount"] = 71,
+						["amount"] = 0,
 						["reforge"] = 42,
 					}, -- [12]
 					{
@@ -125,17 +125,19 @@ ReforgeLiteDB = {
 					}, -- [17]
 				},
 				["stats"] = {
-					123, -- [1]
+					0, -- [1]
 					0, -- [2]
 					0, -- [3]
-					1221, -- [4]
-					2473, -- [5]
-					1013, -- [6]
+					0, -- [4]
+					0, -- [5]
+					0, -- [6]
 					0, -- [7]
-					1771, -- [8]
+					0, -- [8]
 				},
 			},
 			["targetLevel"] = 3,
+			["buffs"] = {
+			},
 			["weights"] = {
 				0, -- [1]
 				0, -- [2]
@@ -146,8 +148,6 @@ ReforgeLiteDB = {
 				0, -- [7]
 				130, -- [8]
 			},
-			["buffs"] = {
-			},
 			["itemsLocked"] = {
 				false, -- [1]
 			},
@@ -157,19 +157,19 @@ ReforgeLiteDB = {
 						["dst"] = 4,
 						["src"] = 8,
 						["reforge"] = 53,
-						["amount"] = 96,
+						["amount"] = 0,
 					}, -- [1]
 					{
 						["dst"] = 5,
 						["src"] = 6,
 						["reforge"] = 40,
-						["amount"] = 73,
+						["amount"] = 0,
 					}, -- [2]
 					{
 						["dst"] = 4,
 						["src"] = 6,
 						["reforge"] = 39,
-						["amount"] = 88,
+						["amount"] = 0,
 					}, -- [3]
 					{
 						["dst"] = 8,
@@ -181,49 +181,49 @@ ReforgeLiteDB = {
 						["dst"] = 5,
 						["src"] = 6,
 						["reforge"] = 40,
-						["amount"] = 131,
+						["amount"] = 0,
 					}, -- [5]
 					{
 						["dst"] = 4,
 						["src"] = 8,
 						["reforge"] = 53,
-						["amount"] = 80,
+						["amount"] = 0,
 					}, -- [6]
 					{
 						["dst"] = 8,
 						["src"] = 6,
 						["reforge"] = 42,
-						["amount"] = 78,
+						["amount"] = 0,
 					}, -- [7]
 					{
 						["dst"] = 4,
 						["src"] = 6,
 						["reforge"] = 39,
-						["amount"] = 68,
+						["amount"] = 0,
 					}, -- [8]
 					{
 						["dst"] = 4,
 						["src"] = 8,
 						["reforge"] = 53,
-						["amount"] = 128,
+						["amount"] = 0,
 					}, -- [9]
 					{
 						["dst"] = 5,
 						["src"] = 6,
 						["reforge"] = 40,
-						["amount"] = 86,
+						["amount"] = 0,
 					}, -- [10]
 					{
 						["dst"] = 5,
 						["src"] = 6,
 						["reforge"] = 40,
-						["amount"] = 73,
+						["amount"] = 0,
 					}, -- [11]
 					{
 						["dst"] = 8,
 						["src"] = 6,
 						["reforge"] = 42,
-						["amount"] = 71,
+						["amount"] = 0,
 					}, -- [12]
 					{
 						["dst"] = 5,
@@ -241,14 +241,14 @@ ReforgeLiteDB = {
 					}, -- [17]
 				},
 				["stats"] = {
-					123, -- [1]
+					0, -- [1]
 					0, -- [2]
 					0, -- [3]
-					1221, -- [4]
-					2473, -- [5]
-					1013, -- [6]
+					0, -- [4]
+					0, -- [5]
+					0, -- [6]
 					0, -- [7]
-					1771, -- [8]
+					0, -- [8]
 				},
 			},
 		},

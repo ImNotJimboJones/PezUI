@@ -134,6 +134,13 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
+		["Hour of Twilight"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 13,
+		},
 		["Mulgore"] = {
 			["Preferred"] = {
 			},
@@ -155,13 +162,6 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 504,
 		},
-		["Hour of Twilight"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
 		["Southern Barrens"] = {
 			["Preferred"] = {
 			},
@@ -176,7 +176,7 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 29,
 		},
-		["End Time"] = {
+		["Abyssal Depths"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -190,13 +190,6 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 816,
 		},
-		["Crystalsong Forest"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 510,
-		},
 		["Azshara"] = {
 			["Preferred"] = {
 			},
@@ -204,12 +197,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 181,
 		},
-		["Uldum"] = {
+		["Crystalsong Forest"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 720,
+			["ZoneID"] = 510,
 		},
 		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
@@ -225,12 +218,26 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
+		["Mount Hyjal"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 606,
+		},
 		["Icecrown Citadel"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 492,
+		},
+		["Uldum"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 720,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {
@@ -239,14 +246,14 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 11,
 		},
-		["Mount Hyjal"] = {
+		["The Molten Core"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 606,
+			["ZoneID"] = 13,
 		},
-		["The Molten Core"] = {
+		["End Time"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
@@ -267,19 +274,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 13,
 		},
-		["Abyssal Depths"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 13,
-		},
 		["Hyjal Summit"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 13,
+		},
+		["Ulduar"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 529,
 		},
 	},
 	["DruidClickForm"] = true,
@@ -289,14 +296,14 @@ GoGo_Prefs = {
 	["UnknownMounts"] = {
 	},
 	["DruidDisableInCombat"] = false,
-	["AspectPack"] = false,
+	["autodismount"] = 1,
 	["version"] = "4.3.5",
 	["RemoveBuffs"] = 1,
-	["DruidFormNotRandomize"] = false,
-	["autodismount"] = 1,
-	["PaladinUseCrusaderAura"] = false,
 	["GlobalPrefMounts"] = {
 	},
+	["DruidFormNotRandomize"] = false,
+	["PaladinUseCrusaderAura"] = false,
+	["AspectPack"] = false,
 }
 GoGo_DebugLog = {
 }

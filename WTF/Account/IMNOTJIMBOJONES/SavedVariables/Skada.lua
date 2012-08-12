@@ -13,7 +13,7 @@ SkadaDB = {
 			["windows"] = {
 				{
 					["barfont"] = "Arial Narrow",
-					["point"] = "BOTTOM",
+					["barheight"] = 14,
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
 						["r"] = 0.3019607843137255,
@@ -48,7 +48,7 @@ SkadaDB = {
 						},
 						["texture"] = "Minimalist",
 					},
-					["barheight"] = 14,
+					["point"] = "BOTTOM",
 					["mode"] = "DPS",
 				}, -- [1]
 			},
