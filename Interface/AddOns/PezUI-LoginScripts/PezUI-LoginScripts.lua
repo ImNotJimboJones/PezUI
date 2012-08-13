@@ -13,7 +13,8 @@ pez.scripts.options = {
 	LIB_EXTRA_TIP_STYLE_COPY_ENABLED = true,
 	MOGIT_STYLE_COPY_ENABLED = true,
 	MOGIT_SCALE_ENABLED = true,
-	MOGIT_SCALE = 0.8
+	MOGIT_SCALE = 0.8,
+	VUHDO_AUTO_PROFILE_LOGIN_FIX = true
 };
 
 
@@ -43,6 +44,17 @@ function pez.scripts.copyGameTooltipStyle(tooltip)
 	tooltip:SetBackdropColor(GameTooltip:GetBackdropColor());
 	tooltip:SetBackdropBorderColor(GameTooltip:GetBackdropBorderColor());
 	return true;
+end
+
+--**************************************************--
+-- Tells VuhDo to auto-load the appropriate profile
+-- based on the current group size.
+-- @return		the name of the loaded profile
+--**************************************************--
+function pez.scripts.loadVuhDoProfile()
+	local profile = VUHDO_getBestProfileAfterSizeChange();
+	VUHDO_loadProfile(profile);
+	return profile;
 end
 
 
@@ -101,3 +113,20 @@ if (pez.scripts.options.TOOLTIP_CLAMP_INSET_ADJUST_ENABLED) then
 	GameTooltip:SetClampRectInsets(l,r,t,b);
 end
 
+
+
+------------------------------------------------------
+-- Register an event to auto-load VuhDo profile when
+-- player enters the world.
+------------------------------------------------------
+if(pez.scripts.options.VUHDO_AUTO_PROFILE_LOGIN_FIX) then
+	local vuhDoAutoLoadEventFrame = CreateFrame("FRAME", "Pez_VuhDoAutoLoadFrame");
+	vuhDoAutoLoadEventFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
+	local function vuhDoAutoLoadEventHandler(self, event, ...)
+		if (event == "PLAYER_ENTERING_WORLD") then
+			local profile = pez.scripts.loadVuhDoProfile();
+			pez.log("Loaded VuhDo profile: " .. profile);
+		end
+	end
+	vuhDoAutoLoadEventFrame:SetScript("OnEvent", vuhDoAutoLoadEventHandler);
+end
