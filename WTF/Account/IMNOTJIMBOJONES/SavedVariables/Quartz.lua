@@ -73,6 +73,7 @@ Quartz3DB = {
 					["h"] = 15,
 					["w"] = 230,
 					["y"] = 330,
+					["texture"] = "Steel",
 					["x"] = 683,
 					["hidetimetext"] = true,
 					["hideicon"] = true,
@@ -115,11 +116,12 @@ Quartz3DB = {
 				["Default"] = {
 					["h"] = 17,
 					["w"] = 198,
-					["y"] = 342,
-					["iconposition"] = "right",
-					["x"] = 420,
-					["hidetimetext"] = true,
 					["hideicon"] = true,
+					["iconposition"] = "right",
+					["hidetimetext"] = true,
+					["x"] = 420,
+					["texture"] = "Runes",
+					["y"] = 342,
 				},
 				["HUNTER"] = {
 					["y"] = 314,
@@ -137,8 +139,9 @@ Quartz3DB = {
 					["h"] = 17,
 					["w"] = 198,
 					["hideicon"] = true,
-					["x"] = 978,
 					["hidetimetext"] = true,
+					["x"] = 978,
+					["texture"] = "Runes",
 					["y"] = 342,
 				},
 				["HUNTER"] = {
@@ -207,7 +210,12 @@ Quartz3DB = {
 				nil, -- [3]
 				1, -- [4]
 			},
-			["backgroundalpha"] = 0.75,
+			["castingcolor"] = {
+				nil, -- [1]
+				0.4901960784313725, -- [2]
+				nil, -- [3]
+				1, -- [4]
+			},
 			["modules"] = {
 				["Swing"] = false,
 				["Buff"] = false,
@@ -215,6 +223,7 @@ Quartz3DB = {
 				["Pet"] = false,
 				["Latency"] = false,
 			},
+			["backgroundalpha"] = 0.75,
 		},
 		["HUNTER"] = {
 			["modules"] = {

@@ -6,10 +6,10 @@ VerticalXPDB = {
 	["profiles"] = {
 		["Default"] = {
 			["enabled"] = false,
-			["barTexture"] = "Minimalist",
+			["barTexture"] = "Glaze",
 			["width"] = 15,
-			["positionY"] = 315.4510803222656,
-			["positionX"] = -5.01960563659668,
+			["positionY"] = 319.6342103335717,
+			["positionX"] = -5.856206665143455,
 			["borderTexture"] = "Blizzard Tooltip",
 			["clamp"] = false,
 		},
