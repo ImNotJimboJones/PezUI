@@ -3,7 +3,7 @@
 	please see the included License.txt file.
 
 	* File.....: Core\Groups.lua
-	* Revision.: 366
+	* Revision.: 381
 	* Author...: StormFX, JJSheets
 
 	Group API
@@ -12,9 +12,39 @@
 local MASQUE, Core = ...
 local error, pairs, setmetatable, type, unpack = error, pairs, setmetatable, type, unpack
 
-local Skins, SkinList = Core:GetSkins()
-local GetColor = Core.GetColor
-local SkinButton = Core.SkinButton
+local Skins, SkinList = Core.Skins, Core.SkinList
+local GetColor, SkinButton = Core.GetColor, Core.SkinButton
+
+---------------------------------------------
+-- Callbacks
+---------------------------------------------
+
+local FireCB
+
+do
+	local Callbacks = {}
+
+	-- Notifies an add-on of skin changes.
+	function FireCB(Addon, Group, SkinID, Gloss, Backdrop, Colors, Fonts)
+		local args = Callbacks[Addon]
+		if args then
+			for arg, callback in pairs(args) do
+				callback(arg and arg, Group, SkinID, Gloss, Backdrop, Colors, Fonts)
+			end
+		end
+	end
+
+	-- Registers an add-on to be notified on skin changes.
+	function Core.API:Register(Addon, Callback, arg)
+		local arg = Callback and arg or false
+		Callbacks[Addon] = Callbacks[Addon] or {}
+		Callbacks[Addon][arg] = Callback
+	end
+end
+
+---------------------------------------------
+-- Groups
+---------------------------------------------
 
 local Groups = {}
 local GMT
@@ -86,6 +116,10 @@ function Core.API:Group(Addon, Group)
 	return Core:Group(Addon, Group)
 end
 
+---------------------------------------------
+-- Group Metatable
+---------------------------------------------
+
 do
 	local Group = {}
 	local Layers = {
@@ -103,6 +137,7 @@ do
 		HotKey = "Text",
 		Duration = "Text",
 		AutoCast = "Frame",
+		FloatingBG = "Texture",
 	}
 
 	local __MTF = function() end
@@ -151,7 +186,8 @@ do
 				end
 				self.Buttons[Button] = ButtonData
 				if not self.db.Disabled then
-					SkinButton(Button, ButtonData, self.db.SkinID, self.db.Gloss, self.db.Backdrop, self.db.Colors, self.db.Fonts)
+					local db = self.db
+					SkinButton(Button, ButtonData, db.SkinID, db.Gloss, db.Backdrop, db.Colors)
 				end
 			end,
 
@@ -192,8 +228,12 @@ do
 			-- Reskins the group with its current settings.
 			ReSkin = function(self)
 				if not self.db.Disabled then
+					local db = self.db
 					for Button in pairs(self.Buttons) do
-						SkinButton(Button, self.Buttons[Button], self.db.SkinID, self.db.Gloss, self.db.Backdrop, self.db.Colors, self.db.Fonts)
+						SkinButton(Button, self.Buttons[Button], db.SkinID, db.Gloss, db.Backdrop, db.Colors)
+					end
+					if self.Addon then
+						FireCB(self.Addon, self.Group, db.SkinID, db.Gloss, db.Backdrop, db.Colors, db.Fonts)
 					end
 				end
 			end,
@@ -257,8 +297,8 @@ do
 					self.db.Gloss = Value
 				elseif Option == "Backdrop" then
 					self.db.Backdrop = (Value and true) or false
-				elseif Option == "Fonts" then
-					self.db.Fonts = (Value and true) or false
+				--elseif Option == "Fonts" then
+					--self.db.Fonts = (Value and true) or false
 				else
 					return
 				end
@@ -292,7 +332,7 @@ do
 			Reset = function(self, Static)
 				self.db.Gloss = 0
 				self.db.Backdrop = false
-				self.db.Fonts = false
+				--self.db.Fonts = false
 				for Layer in pairs(self.db.Colors) do
 					self.db.Colors[Layer] = nil
 				end
@@ -316,7 +356,7 @@ do
 						self.db.SkinID = db.SkinID
 						self.db.Gloss = db.Gloss
 						self.db.Backdrop = db.Backdrop
-						self.db.Fonts = db.Fonts
+						--self.db.Fonts = db.Fonts
 						for Layer in pairs(self.db.Colors) do
 							self.db.Colors[Layer] = nil
 						end
