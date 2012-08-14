@@ -2,8 +2,8 @@
 MADB = {
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -48,6 +48,11 @@ MADB = {
 						74.00004577636719, -- [5]
 					},
 				},
+				["Boss2TargetFrame"] = {
+					["name"] = "Boss2TargetFrame",
+					["hidden"] = true,
+					["unit"] = "boss2",
+				},
 				["BagsMover"] = {
 					["scale"] = 0.8199999928474426,
 					["name"] = "BagsMover",
@@ -78,6 +83,11 @@ MADB = {
 						-6.99993896484375, -- [4]
 						0.1099166870117188, -- [5]
 					},
+				},
+				["Boss3TargetFrame"] = {
+					["name"] = "Boss3TargetFrame",
+					["hidden"] = true,
+					["unit"] = "boss3",
 				},
 				["AchievementAlertFrame1"] = {
 					["name"] = "AchievementAlertFrame1",
@@ -120,6 +130,22 @@ MADB = {
 						516.4879076348972, -- [5]
 					},
 				},
+				["PlayerDebuffsMover"] = {
+					["name"] = "PlayerDebuffsMover",
+					["hidden"] = true,
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						1370.274780064928, -- [4]
+						741.5294770544057, -- [5]
+					},
+				},
+				["Boss1TargetFrame"] = {
+					["name"] = "Boss1TargetFrame",
+					["hidden"] = true,
+					["unit"] = "boss1",
+				},
 				["GuildChallengeAlertFrame"] = {
 					["name"] = "GuildChallengeAlertFrame",
 					["pos"] = {
@@ -141,8 +167,8 @@ MADB = {
 					},
 				},
 				["RaidUnitFramesMover"] = {
-					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
+					["hidden"] = true,
 				},
 				["BankFrame"] = {
 					["name"] = "BankFrame",
@@ -155,16 +181,10 @@ MADB = {
 						-126.8292693989678, -- [5]
 					},
 				},
-				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
+				["Boss4TargetFrame"] = {
+					["name"] = "Boss4TargetFrame",
 					["hidden"] = true,
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						1370.274780064928, -- [4]
-						741.5294770544057, -- [5]
-					},
+					["unit"] = "boss4",
 				},
 				["AchievementAlertFrame2"] = {
 					["name"] = "AchievementAlertFrame2",
