@@ -1,5 +1,6 @@
 local font = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
 local PanelHelpers = TidyPlatesUtility.PanelHelpers 		-- PanelTools
+local DropdownFrame = CreateFrame("Frame", "TidyPlatesHubCategoryFrame", UIParent, "UIDropDownMenuTemplate" )
 
 --[[
 The basic concept of RapidPanel is that each UI widget will get attached to a 'rail' or alignment column.  This rail
@@ -138,24 +139,29 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 	local function CreateQuickHeadingLabel(name, label, ...)
 		local columnFrame = ...
 		local frame = CreateFrame("Frame", name, columnFrame)
+		-- Heading Appearance
 		frame:SetHeight(20)
 		frame:SetWidth(500)
-		--frame.Text = frame:CreateFontString(name.."Text", 'ARTWORK', 'GameFontNormal')
 		frame.Text = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-		-- frame.Text:SetFont("Fonts\\FRIZQT__.TTF", 18 )
-		-- frame.Text:SetFont("Fonts\\ARIALN.TTF", 18 )
-		frame.Text:SetFont(font, 22 )
-		--frame.Text:SetTextColor(1, .7, 0)
-		--frame.Text:SetTextColor(55/255, 173/255, 255/255)
+		frame.Text:SetFont(font, 22)
 		frame.Text:SetTextColor(255/255, 105/255, 6/255)
 		frame.Text:SetAllPoints()
 		frame.Text:SetText(label)
 		frame.Text:SetJustifyH("LEFT")
 		frame.Text:SetJustifyV("BOTTOM")
-		-- Margins	-- Bottom/Left are supposed to be negative
+		-- Margins
 		frame.Margins = { Left = 6, Right = 2, Top = 2, Bottom = 2,}
 		-- Set Positions
 		QuickSetPoints(frame, ...)
+		-- Bookmark
+		local bookmark = CreateFrame("Frame", nil, columnFrame)
+		bookmark:SetPoint("TOPLEFT", columnFrame, "TOPLEFT")
+		bookmark:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
+		columnFrame.Headings = columnFrame.Headings or {}
+		columnFrame.Headings[(#columnFrame.Headings)+1] = label
+		columnFrame.HeadingBookmarks = columnFrame.HeadingBookmarks or {}
+		columnFrame.HeadingBookmarks[label] = bookmark
+		-- Done!
 		return frame
 	end
 	
@@ -235,39 +241,23 @@ local CopyTable = TidyPlatesUtility.copyTable
 
 local function CheckVariableIntegrity(objectName)
 	for i,v in pairs(TidyPlatesHubDefaults) do
-		if TidyPlatesHubSettings[objectName][i] == nil then
-			TidyPlatesHubSettings[objectName][i] = v
-			TidyPlatesHubCache[objectName][i] = v
-		end
+		if TidyPlatesHubSettings[objectName][i] == nil then TidyPlatesHubSettings[objectName][i] = v end		
 	end
 end
---[[
-local function VerifyVariableSet(objectName)
-	TidyPlatesHubSettings[objectName] = TidyPlatesHubSettings[objectName] or {}
-	TidyPlatesHubCache[objectName] = TidyPlatesHubCache[objectName] or {}
-	
-
-	for i,v in pairs(TidyPlatesHubDefaults) do
-		if not TidyPlatesHubSettings[objectName][i] then
-			if type(v) == "table" then new = CopyTable(v) else new = v end
-			TidyPlatesHubSettings[objectName][i] = new
-			TidyPlatesHubCache[objectName][i] = new
-		end
-		local new
-
-	end
-end
---]]
 
 local function CreateVariableSet(objectName)
 	TidyPlatesHubSettings[objectName] = CopyTable(TidyPlatesHubDefaults)
-	TidyPlatesHubCache[objectName] = CopyTable(TidyPlatesHubDefaults)
-	
 	return TidyPlatesHubSettings[objectName]
 end
 
 local function GetVariableSet(panel)
 	return TidyPlatesHubSettings[panel.objectName]
+end
+
+local function CheckCacheSet(objectName)
+	for i,v in pairs(TidyPlatesHubDefaults) do	
+		if TidyPlatesHubCache[objectName][i] == nil then TidyPlatesHubCache[objectName][i] = v end
+	end
 end
 
 local function ClearVariableSet(panel)
@@ -276,8 +266,12 @@ local function ClearVariableSet(panel)
 	ReloadUI()
 end
 
-local function GetCacheSet(panel)
-	return TidyPlatesHubCache[panel.objectName]
+local function GetCacheSet(objectName)
+	if not TidyPlatesHubCache[objectName] then
+		TidyPlatesHubCache[objectName] = {}
+	end
+	CheckCacheSet(objectName)
+	return TidyPlatesHubCache[objectName]
 end
 
 local function RefreshSettings(LocalVars)
@@ -293,35 +287,81 @@ local function OnPanelItemChange(panel)
 end
 
 -- Colors
-local yellow, blue, red, orange = "|cffffff00", "|cFF3782D1", "|cFFFF1100", "|cFFFF6906"
+local yellow, blue, red, orange = "|cffffff00", "|cFF5599EE", "|cFFFF1100", "|cFFFF9920"
 
 local function PasteSettings(panel)
-	local LocalVars = GetCacheSet(panel)
-	print(yellow.."Pasted "..orange..panel.name..yellow.." Theme Values from Cache")
+	local cacheName, LocalVars
+	
+	if IsShiftKeyDown() then
+		cacheName = panel.objectName
+		print(orange.."Settings pasted from the "..yellow..panel.name..orange.." clipboard.")
+	else
+		cacheName = "GlobalClipboard"
+		print(orange.."Settings pasted from the clipboard.")
+	end
+
+	LocalVars = GetCacheSet(cacheName)
+	
 	SetPanelValues(panel, LocalVars)
 	OnPanelItemChange(panel)
+	PlaySound("igMainMenuOptionCheckBoxOn")
 end
 
 local function CopySettings(panel)
-	local LocalVars = GetCacheSet(panel)
-	print(yellow.."Copied "..orange..panel.name..yellow.." Theme Values to Cache")
-	GetPanelValues(panel, LocalVars)	
+	local cacheName, LocalVars
+
+	if IsShiftKeyDown() then
+		cacheName = panel.objectName
+		print(blue.."Settings copied to the "..yellow..panel.name..blue.." clipboard."..yellow.."  To use these values, hold down 'Shift' while clicking 'Paste'.")
+	else
+		cacheName = "GlobalClipboard"
+		print(blue.."Settings copied to the clipboard.")
+	end
+
+	LocalVars = GetCacheSet(cacheName)
+
+	GetPanelValues(panel, LocalVars)
+	PlaySound("igMainMenuOptionCheckBoxOn")	
 end
-
-
 
 local function ResetSettings(panel)
 	if IsShiftKeyDown() then
 		ClearVariableSet(panel)
 		CreateVariableSet(panel.objectName)
+		for index, obj in pairs(TidyPlatesWidgetData) do
+			if type(obj) == 'table' then
+				for subIndex in pairs(obj) do
+					TidyPlatesWidgetData[index][subIndex] = nil
+				end
+			end
+		end
+		ReloadUI()
 	else
 		SetPanelValues(panel, TidyPlatesHubDefaults)
 		OnPanelItemChange(panel)
 		print(yellow.."Resetting "..orange..panel.name..yellow.." Configuration to Default")
-		print(yellow.."Holding down "..blue.."Shift"..yellow.." while clicking "..red.."Reset"..yellow.." will clear all saved settings, and reload the user interface.")
+		print(yellow.."Holding down "..blue.."Shift"..yellow.." while clicking "..red.."Reset"..yellow.." will clear all saved settings, cached data, and reload the user interface.")
 	end
 end
 
+local function AddDropdownTitle(title)
+	local DropdownTitle, DropdownSpacer = {}, {}
+
+	-- Define Spacer
+	DropdownSpacer.text = ""
+	DropdownSpacer.notCheckable = 1
+	DropdownSpacer.isTitle = 1
+	
+	-- Define Title
+	DropdownTitle.text = title
+	DropdownTitle.notCheckable = 1
+	DropdownTitle.isTitle = 1
+	DropdownTitle.padding = 16
+	
+	-- Add Menu Buttons
+	UIDropDownMenu_AddButton(DropdownTitle)
+	--UIDropDownMenu_AddButton(DropdownSpacer)	
+end
 	
 
 local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
@@ -335,7 +375,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	local panel = CreateFrame( "Frame", objectName.."_InterfaceOptionsPanel", UIParent);
 	panel.objectName = objectName
 	panel:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", insets = { left = 2, right = 2, top = 2, bottom = 2 },})
-	panel:SetBackdropColor(0.06, 0.06, 0.06, 1)
+	panel:SetBackdropColor(0.06, 0.06, 0.06, .5)
 	if parentTitle then panel.parent = parentTitle end
 	panel.name = panelTitle
 	
@@ -369,7 +409,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 												insets = { left = 4, right = 4, top = 4, bottom = 4 }
 												});
 	panel.ScrollFrameBorder:SetBackdropColor(0.05, 0.05, 0.05, 0)
-	panel.ScrollFrameBorder:SetBackdropBorderColor(0.2, 0.2, 0.2, 1)
+	panel.ScrollFrameBorder:SetBackdropBorderColor(0.2, 0.2, 0.2, 0)
 	
 	-- Alignment Colum
 	------------------------------
@@ -377,12 +417,6 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	panel.AlignmentColumn:SetPoint("TOPLEFT", 12,0)
 	panel.AlignmentColumn:SetPoint("BOTTOMRIGHT", panel.MainFrame, "BOTTOM")	
 	panel.AlignmentColumn.Callback = function() OnPanelItemChange(panel) end
-	
-	-----------------
-	-- Button Handlers
-	-----------------
-	panel.okay = function() OnPanelItemChange(panel) end
-	panel.refresh = function() SetPanelValues(panel, GetVariableSet(panel)) ; panel:UnRegisterForDrag() end
 
 	-----------------
 	-- Panel Event Handler
@@ -401,9 +435,11 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	-- Config Management Buttons
 	-----------------
 
+	
 	-- Paste
-	PasteThemeDataButton = CreateFrame("Button", objectName.."PasteThemeDataButton", panel, "UIPanelButtonTemplate2")
-	PasteThemeDataButton:SetPoint("TOPRIGHT", -16, -20)
+	local PasteThemeDataButton = CreateFrame("Button", objectName.."PasteThemeDataButton", panel, "UIPanelButtonTemplate2")
+	PasteThemeDataButton.tooltipText = "Pastes your settings from the clipboard.  'Shift'-clicking uses the panel-specific clipboard"
+	PasteThemeDataButton:SetPoint("TOPRIGHT", -40, -22)
 	PasteThemeDataButton:SetWidth(60)
 	PasteThemeDataButton:SetScale(.85)
 	PasteThemeDataButton:SetText("Paste")
@@ -411,7 +447,9 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	PasteThemeDataButton:SetScript("OnClick", function() PasteSettings(panel); end)
 	
 	-- Copy
-	CopyThemeDataButton = CreateFrame("Button", objectName.."CopyThemeDataButton", panel, "UIPanelButtonTemplate2")
+	local CopyThemeDataButton = CreateFrame("Button", objectName.."CopyThemeDataButton", panel, "UIPanelButtonTemplate2")
+	CopyThemeDataButton.tooltipText = "Copies your settings to the clipboard.  'Shift'-clicking uses a panel-specific clipboard"
+	---- This feature works between matching panel types (ie. Hub/Damage to Hub/Damage)
 	CopyThemeDataButton:SetPoint("TOPRIGHT", PasteThemeDataButton, "TOPLEFT", -4, 0)
 	CopyThemeDataButton:SetWidth(60)
 	CopyThemeDataButton:SetScale(.85)
@@ -420,27 +458,87 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	CopyThemeDataButton:SetScript("OnClick", function() CopySettings(panel); end)
 	
 	-- Reset
-	ReloadThemeDataButton = CreateFrame("Button", objectName.."ReloadThemeDataButton", panel, "UIPanelButtonTemplate2")
+	local ReloadThemeDataButton = CreateFrame("Button", objectName.."ReloadThemeDataButton", panel, "UIPanelButtonTemplate2")
+	ReloadThemeDataButton.tooltipText = "Resets the configuration to Default.  Holding down 'Shift' will also clear saved unit data, and restart your UI."
 	ReloadThemeDataButton:SetPoint("TOPRIGHT", CopyThemeDataButton, "TOPLEFT", -4, 0)
 	ReloadThemeDataButton:SetWidth(60)
 	ReloadThemeDataButton:SetScale(.85)
 	ReloadThemeDataButton:SetText("Reset")
 		
-	ReloadThemeDataButton:SetScript("OnClick", function() ResetSettings(panel); end)
+	ReloadThemeDataButton:SetScript("OnClick", function() 
+		PlaySound("igMainMenuOptionCheckBoxOn"); ResetSettings(panel);
+	end)
 	
-	--[[
-	-- Jump
-	JumpToButton = CreateFrame("Button", objectName.."JumpToButton", panel, "UIPanelButtonTemplate2")
-	JumpToButton:SetPoint("TOPRIGHT", ReloadThemeDataButton, "TOPLEFT", -4, 0)
-	JumpToButton:SetWidth(75)
-	JumpToButton:SetScale(.85)
-	JumpToButton:SetText("Unlink")
+
+	-- Bookmarks
+	local BookmarkButton = CreateFrame("Button", objectName.."BookmarkButton", panel, "UIPanelButtonTemplate2")
+	BookmarkButton:SetPoint("TOPRIGHT", ReloadThemeDataButton, "TOPLEFT", -4, 0)
+	BookmarkButton:SetWidth(110)
+	BookmarkButton:SetScale(.85)
+	BookmarkButton:SetText("Bookmarks...")
 	
-	--JumpToButton:SetScript("OnClick", function() panel.ScrollFrame:SetVerticalScroll(500) end)
+	local function InitializeDropdownMenu()	
+		AddDropdownTitle("Bookmarks")
+		-- Populate List with Categories
+		local CatgegoryHeading = {}
+		for index, name in pairs(panel.AlignmentColumn.Headings) do
+			CatgegoryHeading.text = name
+			CatgegoryHeading.padding = 16
+			CatgegoryHeading.notCheckable = 1
+			--CatgegoryHeading.keepShownOnClick = 1
+			CatgegoryHeading.func = function(self) 
+				local scrollTo = panel.AlignmentColumn.HeadingBookmarks[self:GetText()]:GetHeight()
+				panel.ScrollFrame:SetVerticalScroll(ceil(scrollTo - 27))
+			end 
+			UIDropDownMenu_AddButton(CatgegoryHeading)
+		end
+	end
 	
-	JumpToButton:SetScript("OnClick", function(self)
+	BookmarkButton:SetScript("OnClick", function(frame)
+		UIDropDownMenu_Initialize(DropdownFrame, InitializeDropdownMenu, "MENU")
+		ToggleDropDownMenu(1, nil, DropdownFrame, frame)
+		PlaySound("igMainMenuOptionCheckBoxOn")
+	end)
+
+	
+	local function SetMaximizeButtonTexture(frame)
+		--frame:SetNormalTexture("Interface\\Buttons\\UI-Panel-BiggerButton-Up")
+		frame:SetNormalTexture("Interface\\Buttons\\UI-Panel-SmallerButton-Up")
+		--frame:SetPushedTexture("Interface\\Buttons\\UI-Panel-BiggerButton-Down")
+		frame:SetPushedTexture("Interface\\Buttons\\UI-Panel-SmallerButton-Down")
+	end
+	
+	-- Unlink - Detach - 
+	local ClosePanel, UnLinkPanel, EnableUnlink
+	local UnlinkButton
+	UnlinkButton = CreateFrame("Button", objectName.."UnlinkButton", panel, "UIPanelCloseButton")
+	UnlinkButton:SetPoint("LEFT", PasteThemeDataButton, "RIGHT", 0, -0.5)
+	UnlinkButton:SetScale(.95)
+	SetMaximizeButtonTexture(UnlinkButton)
+	
+	
+	
+	EnableUnlink = function()
+		UnlinkButton:SetScript("OnClick", UnLinkPanel)
+		SetMaximizeButtonTexture(UnlinkButton)
+		UnlinkButton:SetScript("OnClick", UnLinkPanel)
+		
+		panel:SetScale(1)
+		panel:SetMovable(false)
+		panel:SetScript("OnDragStart",nil)
+		panel:SetScript("OnDragStop",nil)
+	end
+	
+	-- The Unlink feature will pop the config panel onto its own movable window frame
+	UnLinkPanel = function (self)
 		HideUIPanel(InterfaceOptionsFrame)		-- ShowUIPanel(InterfaceOptionsFrame);
+		local height, width = panel:GetHeight(), panel:GetWidth()
 		panel:SetParent(UIParent)
+		panel:ClearAllPoints()
+		panel:SetHeight(height - 40)
+		panel:SetWidth(width - 90)
+		panel:SetPoint("CENTER")
+		panel:SetScale(.9)
 		
 		panel:SetBackdrop({ bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
 											edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
@@ -456,14 +554,29 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 		panel:RegisterForDrag("LeftButton")
 		panel:EnableMouse(true)
 		panel:SetMovable(true)
-		panel:SetScript("OnDragStart",function(self, button) panel:SetAlpha(.8); if button =="LeftButton" then panel:StartMoving() end end)
-		panel:SetScript("OnDragStop",function(self, button) panel:SetAlpha(1); panel:StopMovingOrSizing() end)
+		panel:SetScript("OnDragStart", function(self, button) panel:SetAlpha(.9); if button =="LeftButton" then panel:StartMoving() end end)
+		panel:SetScript("OnDragStop", function(self, button) panel:SetAlpha(1); panel:StopMovingOrSizing() end)
+		
+		-- Repurpose button for Close
+		self:SetScript("OnClick", ClosePanel)
+		self:SetScale(.90)
+		self:SetNormalTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
+		self:SetPushedTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Down")
+	end
 	
-		--self:Hide()
-	end)
+	ClosePanel = function(self)
+		OnPanelItemChange(panel)
+		EnableUnlink()
+		panel:Hide()
+	end
 	
-	--]]
-	
+	UnlinkButton:SetScript("OnClick", UnLinkPanel)
+
+	-----------------
+	-- Button Handlers
+	-----------------
+	panel.okay = function() OnPanelItemChange(panel) end
+	panel.refresh = function() SetPanelValues(panel, GetVariableSet(panel)); EnableUnlink(UnlinkButton) end
 	
 	----------------
 	-- Return a pointer to the whole thingy

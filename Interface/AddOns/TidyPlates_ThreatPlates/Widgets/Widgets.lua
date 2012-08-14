@@ -187,6 +187,7 @@ local function OnInitialize(plate)
 	end
 	
 	-- Tanked Widget
+	--[[
 	if db.tankedWidget.ON and TidyPlatesThreat.db.char.threat.tanking then
 		if not w.TankedWidget then
 			local widget
@@ -199,7 +200,7 @@ local function OnInitialize(plate)
 	elseif w.TankedWidget then
 		w.TankedWidget:Hide()
 		w.TankedWidget = nil
-	end
+	end]]--
 	
 	-- Combo Point Widget
 	if db.comboWidget.ON then
@@ -302,13 +303,13 @@ local function OnUpdate(plate, unit)
 		w.ThreatArtWidget:Update(unit)
 	end
 	-- Tanked Widget
-	if db.tankedWidget.ON and TidyPlatesThreat.db.char.threat.tanking and InCombatLockdown() then
+	--[[if db.tankedWidget.ON and TidyPlatesThreat.db.char.threat.tanking and InCombatLockdown() then
 		if not w.TankedWidget then OnInitialize(plate) end
 		w.TankedWidget:SetHeight(db.tankedWidget.scale)
 		w.TankedWidget:SetWidth(db.tankedWidget.scale)
 		w.TankedWidget:SetPoint("CENTER", plate, db.tankedWidget.x, db.tankedWidget.y)
 		w.TankedWidget:Update(unit)
-	end
+	end]]--
 end
 
 local f = CreateFrame("Frame")

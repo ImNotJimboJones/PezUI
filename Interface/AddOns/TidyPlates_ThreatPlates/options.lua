@@ -3619,7 +3619,7 @@ local function GetOptions()
 								},
 							},
 						},
-						TankedWidget = {
+						--[[TankedWidget = {
 							name = L["Tanked Targets"],
 							type = "group",
 							order = 50,
@@ -3693,7 +3693,7 @@ local function GetOptions()
 									},
 								},
 							},
-						},
+						},]]
 						TargetArtWidget = {
 							name = L["Target Highlight"],
 							type = "group",

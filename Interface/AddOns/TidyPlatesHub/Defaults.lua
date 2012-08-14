@@ -35,6 +35,7 @@ TidyPlatesHubDefaults = {
 	ScaleIgnoreNeutralUnits = false,
 	ScaleIgnoreNonEliteUnits = false,
 	ScaleIgnoreInactive = false,
+	ScaleCastingSpotlight = false,
 	
 	-- Text
 	---------------------------------------
@@ -87,6 +88,7 @@ TidyPlatesHubDefaults = {
 	WidgetsRangeIndicator = false,
 	WidgetsRangeMode = 1,
 	WidgetsDebuff = true,
+	WidgetsDebuffStyle = 1,
 	WidgetsDebuffMode = 3,
 	WidgetsDebuffTrackList = "My Rake\nMy Rip\nMy Moonfire\nAll 339",
 	WidgetsDebuffLookup = {},
