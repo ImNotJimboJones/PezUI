@@ -105,20 +105,6 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 7"] = {
-				"/cast [@focus] Misdirection;", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
-			["ScreenGrid: Button 1"] = {
-				"/screengrid 0", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"SG 0", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
 			["Keybinds: Button 14"] = {
 				"/cast !Aspect of the Fox()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
@@ -130,6 +116,20 @@ MacaroonMacroVault = {
 				"/cast !Aspect of the Pack()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
+			["Keybinds: Button 7"] = {
+				"/cast [@focus] Misdirection;", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
+			["ScreenGrid: Button 1"] = {
+				"/screengrid 0", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"SG 0", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
