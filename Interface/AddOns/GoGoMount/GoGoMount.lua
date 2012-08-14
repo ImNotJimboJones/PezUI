@@ -20,6 +20,7 @@ function GoGo_OnEvent(self, event, ...)
 ---------
 	local arg1, arg2, arg3, arg4 = ...
 	if event == "ADDON_LOADED" and arg1 == "GoGoMount" then
+		GoGoFrame:UnregisterEvent("ADDON_LOADED")
 		if not GoGo_Prefs then
 			GoGo_Settings_Default()
 		end --if
@@ -38,19 +39,15 @@ function GoGo_OnEvent(self, event, ...)
 			GoGo_Variables.Druid = {}
 			GoGoFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
 			GoGo_Druid_Panel()
-			GoGo_Panel_UpdateViews("DRUID")
 		elseif (GoGo_Variables.Player.Class == "SHAMAN") then
 			GoGo_Variables.Shaman = {}
 			GoGoFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
 		elseif (GoGo_Variables.Player.Class == "HUNTER") then
 			GoGo_Hunter_Panel()
-			GoGo_Panel_UpdateViews("HUNTER")
 		elseif (GoGo_Variables.Player.Class == "PALADIN") then
 			GoGo_Paladin_Panel()
---			GoGo_Panel_UpdateViews("HUNTER")
 		end --if
 		GoGo_Panel_Options()
-		GoGo_Panel_UpdateViews()
 		GoGo_ZoneFavorites_Panel()
 		GoGo_GlobalFavorites_Panel()
 		GoGo_ZoneExclusions_Panel()
@@ -245,7 +242,7 @@ function GoGo_ChooseMount()
 	local mounts = {}
 	GoGo_Variables.FilteredMounts = {}
 	GoGo_GetMountDB()
-	
+
 	GoGo_Variables.Player.Zone = GetRealZoneText()
 	GoGo_Variables.Player.SubZone = GetSubZoneText()
 	GoGo_Variables.Player.MiniSubZone = GetMinimapZoneText()
@@ -272,6 +269,7 @@ function GoGo_ChooseMount()
 	if (table.getn(mounts) == 0) then
 		if table.getn(GoGo_Prefs.Zones[GoGo_Variables.Player.Zone]["Preferred"]) > 0 then
 			GoGo_Variables.FilteredMounts = GoGo_Prefs.Zones[GoGo_Variables.Player.Zone]["Preferred"] or {}
+			GoGo_CheckForUnknownMounts(GoGo_Variables.FilteredMounts)
 			GoGo_Variables.FilteredMounts = GoGo_RemoveUnusableMounts(GoGo_Variables.FilteredMounts)  -- remove mounts blizzard says we can't use
 --			GoGo_Variables.UnknownMountMsgShown = true
 		end --if
@@ -283,6 +281,7 @@ function GoGo_ChooseMount()
 	if (table.getn(mounts) == 0) and (table.getn(GoGo_Variables.FilteredMounts) == 0) then
 		if GoGo_Prefs.GlobalPrefMounts then
 			GoGo_Variables.FilteredMounts = GoGo_Prefs.GlobalPrefMounts or {}
+			GoGo_CheckForUnknownMounts(GoGo_Variables.FilteredMounts)
 			GoGo_Variables.FilteredMounts = GoGo_RemoveUnusableMounts(GoGo_Variables.FilteredMounts)  -- remove mounts blizzard says we can't use
 --			GoGo_Variables.UnknownMountMsgShown = true
 		end --if
@@ -577,7 +576,13 @@ function GoGo_ChooseMount()
 			end --if
 			return selected
 		else
+			local GoGo_SpellTemp = {}
+			table.insert(GoGo_SpellTemp, selected)
+			GoGo_SpellTemp = GoGo_FilterMountsIn(GoGo_SpellTemp, 50000)
 			selected = GoGo_GetIDName(selected)
+			if table.getn(GoGo_SpellTemp) == 0 then
+				selected = selected .. "()"
+			end --if
 			return selected
 		end --if
 	end --if
@@ -669,9 +674,15 @@ function GoGo_Dismount(button)
 				GoGo_FillButton(button, GoGo_IsShifted())
 			end --if
 		end --if
-	elseif GoGo_Variables.Player.Class == "SHAMAN" and UnitBuff("player", GetSpellInfo(GoGo_Variables.Localize.GhostWolf)) and button then
---		CancelUnitBuff("player", GoGo_InBook(GoGo_Variables.Localize.GhostWolf))
-		GoGo_FillButton(button, GoGo_InBook(GoGo_Variables.Localize.GhostWolf))
+	elseif GoGo_Variables.Player.Class == "SHAMAN" then
+		if UnitBuff("player", GetSpellInfo(GoGo_Variables.Localize.GhostWolf)) and button then
+			if GoGo_Prefs.ShamanClickForm then
+				GoGo_FillButton(button, GoGo_GetMount())
+			else
+		--		CancelUnitBuff("player", GoGo_InBook(GoGo_Variables.Localize.GhostWolf))
+				GoGo_FillButton(button, GoGo_InBook(GoGo_Variables.Localize.GhostWolf))
+			end --if
+		end --if
 	else
 		return nil
 	end --if
@@ -773,32 +784,33 @@ function GoGo_RemoveUnusableMounts(MountList)  -- Remove mounts Blizzard says we
 	end --if
 	
 	local GoGo_NewTable = {}
-	
 	for a=1, table.getn(MountList) do
 		local GoGo_SpellID = MountList[a]
-		if GoGo_Variables.MountDB[GoGo_SpellID][50000] then
-			-- item mount, check item status
-			local GoGo_ItemID = GoGo_Variables.MountDB[GoGo_SpellID][50000]  -- get item id
-			if GoGo_Variables.MountItemIDs[GoGo_ItemID][51000] then  -- if item should be in bags
-				if GoGo_InBags(GoGo_ItemID) then  -- if item is in bag
-					if GetItemCooldown(GoGo_ItemID) == 0 then  -- if item doens't have a cooldown timer
-						if IsUsableItem(GoGo_ItemID) then  -- if item can be used
-							table.insert(GoGo_NewTable, GoGo_SpellID)
+		if not GoGo_SearchTable(GoGo_Prefs.UnknownMounts, GoGo_SpellID) then		-- if mount spell is unknown then don't search the database - it's not in it
+			if GoGo_Variables.MountDB[GoGo_SpellID][50000] then
+				-- item mount, check item status
+				local GoGo_ItemID = GoGo_Variables.MountDB[GoGo_SpellID][50000]  -- get item id
+				if GoGo_Variables.MountItemIDs[GoGo_ItemID][51000] then  -- if item should be in bags
+					if GoGo_InBags(GoGo_ItemID) then  -- if item is in bag
+						if GetItemCooldown(GoGo_ItemID) == 0 then  -- if item doens't have a cooldown timer
+							if IsUsableItem(GoGo_ItemID) then  -- if item can be used
+								table.insert(GoGo_NewTable, GoGo_SpellID)
+							end --if
+						end --if
+					end --if
+				elseif GoGo_Variables.MountItemIDs[GoGo_ItemID][51001] then  -- if item should be equiped
+					if IsEquippedItem(GoGo_ItemID) then  -- if item is equipped
+						if GetItemCooldown(GoGo_ItemID) == 0 then  -- if item doens't have a cooldown timer
+							if IsUsableItem(GoGo_ItemID) then  -- if item can be used
+								table.insert(GoGo_NewTable, GoGo_SpellID)
+							end --if
 						end --if
 					end --if
 				end --if
-			elseif GoGo_Variables.MountItemIDs[GoGo_ItemID][51001] then  -- if item should be equiped
-				if IsEquippedItem(GoGo_ItemID) then  -- if item is equipped
-					if GetItemCooldown(GoGo_ItemID) == 0 then  -- if item doens't have a cooldown timer
-						if IsUsableItem(GoGo_ItemID) then  -- if item can be used
-							table.insert(GoGo_NewTable, GoGo_SpellID)
-						end --if
-					end --if
+			else  -- it's a mount spell or class shape form
+				if IsUsableSpell(GoGo_SpellID) then
+					table.insert(GoGo_NewTable, GoGo_SpellID)
 				end --if
-			end --if
-		else  -- it's a mount spell or class shape form
-			if IsUsableSpell(GoGo_SpellID) then
-				table.insert(GoGo_NewTable, GoGo_SpellID)
 			end --if
 		end --if
 	end --for
@@ -890,6 +902,19 @@ function GoGo_IsShifted()
 end --function
 
 ---------
+function GoGo_SearchTable(GoGo_Table, GoGo_Value)
+---------
+	if type(GoGo_Table) == "table" and table.getn(GoGo_Table) > 0 then
+		for a=1, table.getn(GoGo_Table) do
+			if GoGo_Table[a] == GoGo_Value then
+				return true
+			end --if
+		end --for
+	end --if
+	return false
+end --function
+
+---------
 function GoGo_RemoveBuffs()  -- adds lines to button macro to remove removable buffs
 ---------
 	if not GoGo_Prefs.RemoveBuffs then
@@ -948,7 +973,9 @@ function GoGo_ZonePrefMount(SpellID)
 			return -- mount found, removed and now returning
 		end --if
 	end --for
-	table.insert(GoGo_Prefs.Zones[GoGo_Variables.Player.Zone]["Preferred"], SpellID)
+	if not GoGo_SearchTable(GoGo_Prefs.UnknownMounts, SpellID) then
+		table.insert(GoGo_Prefs.Zones[GoGo_Variables.Player.Zone]["Preferred"], SpellID)
+	end --if
 end --function
 
 ---------
@@ -986,7 +1013,6 @@ function GoGo_GlobalPrefMount(SpellID)
 
 	if not GoGo_Prefs.GlobalPrefMounts then
 		GoGo_Prefs.GlobalPrefMounts = {}
-		table.insert(GoGo_Prefs.GlobalPrefMounts, SpellID)
 	else
 		for GoGo_CounterA = 1, table.getn(GoGo_Prefs.GlobalPrefMounts) do
 			if GoGo_Prefs.GlobalPrefMounts[GoGo_CounterA] == SpellID then
@@ -997,6 +1023,9 @@ function GoGo_GlobalPrefMount(SpellID)
 				return -- mount found, removed and now returning
 			end --if
 		end --for
+	end --if
+
+	if not GoGo_SearchTable(GoGo_Prefs.UnknownMounts, SpellID) then
 		table.insert(GoGo_Prefs.GlobalPrefMounts, SpellID)
 	end --if
 end --function
@@ -1123,7 +1152,11 @@ function GoGo_CheckForUnknownMounts(MountList)
 	for a = 1, table.getn(MountList) do
 		local MountID = MountList[a]
 		if not GoGo_Variables.MountDB[MountID] then
-			GoGo_Prefs.UnknownMounts[MountID] = true
+			if not GoGo_SearchTable(GoGo_Prefs.UnknownMounts, MountID) then
+				table.insert(GoGo_Prefs.UnknownMounts, MountID)
+			end --if
+			GoGo_ZonePrefMount(MountID)		-- to remove zone favorite flag if mount unknown
+			GoGo_GlobalPrefMount(MountID)		-- to remove global favorite flag if mount unknown
 			if GoGo_Variables.Debug >= 10 then
 				GoGo_DebugAddLine("GoGo_CheckForUnknownMounts: Unknown mount found:  " .. MountID)
 			end --if
@@ -1300,6 +1333,7 @@ function GoGo_ZoneCheck()
 			-- The Forbidden Sea (east of Loch Modan)
 			-- Blackrock Mountains
 			-- Karazhan
+			-- Dread Wastes
 		end --if
 		if not IsInInstance() then
 			if GoGo_InBook(GoGo_Variables.Localize.FlightMastersLicense) then
@@ -2341,6 +2375,47 @@ function GoGo_ZoneCheck()
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Firelands (10 / 25 player instance")
 		end --if
 		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 806 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for The Jade Forest")
+			-- Stormstout Brewery using the same zone id?  (instanced scene)
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 807 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Valley of the Four Winds")
+			-- Stormstout Brewery using the same zone id?  (instanced scene)
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 809 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Kun-Lai Summit")
+			-- Serpent's Spine
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 810 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Townlong Steppes")
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 811 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Vale of Eternal Blossoms")
+			-- Mogu'shan Palace
+			-- Shrine of Seven Stars?
+			-- Shrine of Two Moons
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
 	elseif GoGo_Variables.Player.ZoneID == 816 then
 		if GoGo_Variables.Debug >= 10 then
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Well of Eternity (5 player instance")
@@ -2371,6 +2446,53 @@ function GoGo_ZoneCheck()
 		end --if
 		GoGo_Variables.ZoneExclude.CanFly = false
 		-- can ride = true
+	elseif GoGo_Variables.Player.ZoneID == 857 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Krasarang Wilds")
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 858 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Dread Wastes")
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 862 then
+		-- New zone for Stormwind City??
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Stormwind City?????")
+		end --if
+--		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+--			GoGo_Variables.ZoneExclude.CanFly = true
+--		end --if
+	elseif GoGo_Variables.Player.ZoneID == 873 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for The Veiled Stair")
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.WisdomOfTheFourWinds) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
+	elseif GoGo_Variables.Player.ZoneID == 903 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Shrine of Two Moons")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 905 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Shrine of Seven Stars")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == -1 then
+		-- Arenas:
+		-- -- Nagrand Arena
+		-- -- Ruins of Lordaeron
+		
+		if GoGo_Variables.Debug >= 4 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Arena??? - " .. GoGo_Variables.Player.ZoneID)
+		end --if
 	else
 		if GoGo_Variables.Debug >= 4 then
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Unconfigured ZoneID - " .. GoGo_Variables.Player.ZoneID)
@@ -2880,7 +3002,11 @@ GOGO_COMMANDS = {
 	["auto"] = function()
 		GoGo_Prefs.autodismount = not GoGo_Prefs.autodismount
 		GoGo_Msg("auto")
-		GoGo_Panel_UpdateViews()
+		if GoGo_Prefs.autodismount then
+			GoGo_Panel_AutoDismount:SetChecked(1)
+		else
+			GoGo_Panel_AutoDismount:SetChecked(0)
+		end --if
 	end, --function
 	["clear"] = function()
 		if GoGo_Prefs.GlobalPrefMount then
@@ -2915,22 +3041,38 @@ GOGO_COMMANDS = {
 	["updatenotice"] = function()
 		GoGo_Prefs.DisableUpdateNotice = not GoGo_Prefs.DisableUpdateNotice
 		GoGo_Msg("updatenotice")
-		GoGo_Panel_UpdateViews()
+		if GoGo_Prefs.DisableUpdateNotice then
+			GoGo_Panel_DisableUpdateNotice:SetChecked(1)
+		else
+			GoGo_Panel_DisableUpdateNotice:SetChecked(0)
+		end --if
 	end, --function
 	["mountnotice"] = function()
 		GoGo_Prefs.DisableMountNotice = not GoGo_Prefs.DisableMountNotice
 		GoGo_Msg("mountnotice")
-		GoGo_Panel_UpdateViews()
+		if GoGo_Prefs.DisableMountNotice then
+			GoGo_Panel_DisableMountNotice:SetChecked(1)
+		else
+			GoGo_Panel_DisableMountNotice:SetChecked(0)
+		end --if
 	end, --function
 	["druidclickform"] = function()
 		GoGo_Prefs.DruidClickForm = not GoGo_Prefs.DruidClickForm
 		GoGo_Msg("druidclickform")
-		GoGo_Panel_UpdateViews()
+		if GoGo_Prefs.DruidClickForm then
+			GoGo_Druid_Panel_ClickForm:SetChecked(1)
+		else
+			GoGo_Druid_Panel_ClickForm:SetChecked(0)
+		end --if
 	end, --function
 	["druidflightform"] = function()
 		GoGo_Prefs.DruidFlightForm = not GoGo_Prefs.DruidFlightForm
 		GoGo_Msg("druidflightform")
-		GoGo_Panel_UpdateViews()
+		if GoGo_Prefs.DruidFlightForm then
+			GoGo_Druid_Panel_FlightForm:SetChecked(1)
+		else
+			GoGo_Druid_Panel_FlightForm:SetChecked(0)
+		end --if
 	end, --function
 	["options"] = function()
 		InterfaceOptionsFrame_OpenToCategory(GoGo_Panel)
@@ -3043,11 +3185,8 @@ end --function
 ---------
 function GoGo_Panel_OnLoad(GoGo_Panel)
 ---------
---	local GoGo_Panel = CreateFrame("FRAME", nil);
---	GoGo_Panel:SetScript("OnShow",function() GoGo_Panel_UpdateViews(); end);
 	GoGo_Panel.name = "GoGoMount"
-	GoGo_Panel.okay = function (self) GoGo_Panel_Okay("MAIN"); end;
-	GoGo_Panel.default = function (self) GoGo_Settings_Default("ALL"); GoGo_Panel_UpdateViews(); end;
+	GoGo_Panel.default = function (self) GoGo_Settings_Default("MAIN"); end;
 	InterfaceOptions_AddCategory(GoGo_Panel)
 	
 end --function
@@ -3060,7 +3199,20 @@ function GoGo_Panel_Options()
 	GoGo_Panel_AutoDismountText:SetText(GoGo_Variables.Localize.String.EnableAutoDismount)
 	GoGo_Panel_AutoDismount:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_AutoDismount:GetChecked() then
+				GoGo_Prefs.autodismount = true
+			else
+				GoGo_Prefs.autodismount = false
+			end --if
+		end --function
+	)
+	GoGo_Panel_AutoDismount:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.autodismount then
+				GoGo_Panel_AutoDismount:SetChecked(1)
+			else
+				GoGo_Panel_AutoDismount:SetChecked(0)
+			end --if
 		end --function
 	)
 
@@ -3069,7 +3221,20 @@ function GoGo_Panel_Options()
 	GoGo_Panel_GlobalPrefMountText:SetText("Preferred mount changes apply to global setting")
 	GoGo_Panel_GlobalPrefMount:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_GlobalPrefMount:GetChecked() then
+				GoGo_Prefs.GlobalPrefMount = true
+			else
+				GoGo_Prefs.GlobalPrefMount = false
+			end --if
+		end --function
+	)
+	GoGo_Panel_GlobalPrefMount:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.GlobalPrefMount then
+				GoGo_Panel_GlobalPrefMount:SetChecked(1)
+			else
+				GoGo_Panel_GlobalPrefMount:SetChecked(0)
+			end --if
 		end --function
 	)
 
@@ -3078,7 +3243,20 @@ function GoGo_Panel_Options()
 	GoGo_Panel_DisableUpdateNoticeText:SetText(GoGo_Variables.Localize.String.DisableUpdateNotices)
 	GoGo_Panel_DisableUpdateNotice:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_DisableUpdateNotice:GetChecked() then
+				GoGo_Prefs.DisableUpdateNotice = true
+			else
+				GoGo_Prefs.DisableUpdateNotice = false
+			end --if
+		end --function
+	)
+	GoGo_Panel_DisableUpdateNotice:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DisableUpdateNotice then
+				GoGo_Panel_DisableUpdateNotice:SetChecked(1)
+			else
+				GoGo_Panel_DisableUpdateNotice:SetChecked(0)
+			end --if
 		end --function
 	)
 
@@ -3087,7 +3265,20 @@ function GoGo_Panel_Options()
 	GoGo_Panel_DisableMountNoticeText:SetText(GoGo_Variables.Localize.String.DisableUnknownMountNotices)
 	GoGo_Panel_DisableMountNotice:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_DisableMountNotice:GetChecked() then
+				GoGo_Prefs.DisableMountNotice = true
+			else
+				GoGo_Prefs.DisableMountNotice = false
+			end --if
+		end --function
+	)
+	GoGo_Panel_DisableMountNotice:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DisableMountNotice then
+				GoGo_Panel_DisableMountNotice:SetChecked(1)
+			else
+				GoGo_Panel_DisableMountNotice:SetChecked(0)
+			end --if
 		end --function
 	)
 
@@ -3096,7 +3287,20 @@ function GoGo_Panel_Options()
 	GoGo_Panel_DisableWaterFlightText:SetText(GoGo_Variables.Localize.String.DisableFlyingFromWater)
 	GoGo_Panel_DisableWaterFlight:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_DisableWaterFlight:GetChecked() then
+				GoGo_Prefs.DisableWaterFlight = true
+			else
+				GoGo_Prefs.DisableWaterFlight = false
+			end --if
+		end --function
+	)
+	GoGo_Panel_DisableWaterFlight:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DisableWaterFlight then
+				GoGo_Panel_DisableWaterFlight:SetChecked(1)
+			else
+				GoGo_Panel_DisableWaterFlight:SetChecked(0)
+			end --if
 		end --function
 	)
 	
@@ -3106,25 +3310,22 @@ function GoGo_Panel_Options()
 	GoGo_Panel_RemoveBuffs.tooltipText = GoGo_Variables.Localize.String.RemoveBuffs_Long
 	GoGo_Panel_RemoveBuffs:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("MAIN")
+			if GoGo_Panel_RemoveBuffs:GetChecked() then
+				GoGo_Prefs.RemoveBuffs = true
+			else
+				GoGo_Prefs.RemoveBuffs = false
+			end --if
 		end --function
 	)
-
-	--[[	
-	local GoGo_Panel_ClearGlobalFavorites = CreateFrame("FRAME")
-	local GoGo_Panel_ClearGlobalFavorites_Text = GoGo_Panel_ClearGlobalFavorites:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-	GoGo_Panel_ClearGlobalFavorites_Text:SetText(GoGo_Variables.Localize.String.ClearGlobalFavoriteMounts)
-	GoGo_Panel_ClearGlobalFavorites_Text:SetNonSpaceWrap(true)
-	GoGo_Panel_ClearGlobalFavorites_Text:SetJustifyH("LEFT")
-	GoGo_Panel_ClearGlobalFavorites_Text:SetJustifyV("TOP")
-	GoGo_Panel_ClearGlobalFavorites_Text:SetWidth(350)
-	GoGo_Panel_ClearGlobalFavorites_Text:SetPoint("BOTTOMLEFT", 16, 112)
-	GoGo_Panel_ClearGlobalFavorites_Button = CreateFrame("Button","GoGo_Panel_ClearGlobalFavorites_Button",GoGo_Panel,"UIPanelButtonTemplate")
-	GoGo_Panel_ClearGlobalFavorites_Button:SetPoint("BOTTOMLEFT",16,16)
-	GoGo_Panel_ClearGlobalFavorites_Button:SetWidth(80)
-	GoGo_Panel_ClearGlobalFavorites_Button:SetHeight(22)
-	GoGo_Panel_ClearGlobalFavorites_Button:SetText(GoGo_Variables.Localize.String.Clear)
-	]]
+	GoGo_Panel_RemoveBuffs:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.RemoveBuffs then
+				GoGo_Panel_RemoveBuffs:SetChecked(1)
+			else
+				GoGo_Panel_RemoveBuffs:SetChecked(0)
+			end --if
+		end --function
+	)
 end --function
 
 ---------
@@ -3134,7 +3335,7 @@ function GoGo_Druid_Panel()
 	GoGo_Druid_Panel.name = GoGo_Variables.Localize.String.DruidOptions
 	GoGo_Druid_Panel.parent = "GoGoMount"
 	GoGo_Druid_Panel.okay = function (self) GoGo_Panel_Okay("DRUID"); end;
-	GoGo_Druid_Panel.default = function (self) GoGo_Settings_Default("DRUID"); GoGo_Panel_UpdateViews("DRUID"); end;  -- use clear command with default button
+	GoGo_Druid_Panel.default = function (self) GoGo_Settings_Default("DRUID"); end;  -- use clear command with default button
 	InterfaceOptions_AddCategory(GoGo_Druid_Panel)
 
 	GoGo_Druid_Panel_ClickForm = CreateFrame("CheckButton", "GoGo_Druid_Panel_ClickForm", GoGo_Druid_Panel, "OptionsCheckButtonTemplate")
@@ -3142,7 +3343,20 @@ function GoGo_Druid_Panel()
 	GoGo_Druid_Panel_ClickFormText:SetText(GoGo_Variables.Localize.String.DruidSingleClick)
 	GoGo_Druid_Panel_ClickForm:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("DRUID")
+			if GoGo_Druid_Panel_ClickForm:GetChecked() then
+				GoGo_Prefs.DruidClickForm = true
+			else
+				GoGo_Prefs.DruidClickForm = false
+			end --if
+		end --function
+	)
+	GoGo_Druid_Panel_ClickForm:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DruidClickForm then
+				GoGo_Druid_Panel_ClickForm:SetChecked(1)
+			else
+				GoGo_Druid_Panel_ClickForm:SetChecked(0)
+			end --if
 		end --function
 	)
 
@@ -3151,32 +3365,64 @@ function GoGo_Druid_Panel()
 	GoGo_Druid_Panel_FlightFormText:SetText(GoGo_Variables.Localize.String.DruidFlightPreference)
 	GoGo_Druid_Panel_FlightForm:SetScript("OnClick",
 		function(self)
-			if self:GetChecked() then
-				GoGo_Druid_Panel_NoShapeInRandom:SetChecked(0)
-			end  --if
-			GoGo_Panel_Okay("DRUID")
+			if GoGo_Druid_Panel_FlightForm:GetChecked() then
+				GoGo_Prefs.DruidFlightForm = true
+			else
+				GoGo_Prefs.DruidFlightForm = false
+			end --if
 		end --function
 	)
-	
+	GoGo_Druid_Panel_FlightForm:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DruidFlightForm then
+				GoGo_Druid_Panel_FlightForm:SetChecked(1)
+			else
+				GoGo_Druid_Panel_FlightForm:SetChecked(0)
+			end --if
+		end --function
+	)
+
 	GoGo_Druid_Panel_NoShapeInRandom = CreateFrame("CheckButton", "GoGo_Druid_Panel_NoShapeInRandom", GoGo_Druid_Panel, "OptionsCheckButtonTemplate")
 	GoGo_Druid_Panel_NoShapeInRandom:SetPoint("TOPLEFT", "GoGo_Druid_Panel_FlightForm", "BOTTOMLEFT", 0, -4)
 	GoGo_Druid_Panel_NoShapeInRandomText:SetText(GoGo_Variables.Localize.String.NoShapeInRandom)
 	GoGo_Druid_Panel_NoShapeInRandom:SetScript("OnClick",
 		function(self)
-			if self:GetChecked() then
-				GoGo_Druid_Panel_FlightForm:SetChecked(0)
+			if GoGo_Druid_Panel_NoShapeInRandom:GetChecked() then
+				GoGo_Prefs.DruidFormNotRandomize = true
+			else
+				GoGo_Prefs.DruidFormNotRandomize = false
 			end --if
-			GoGo_Panel_Okay("DRUID")
 		end --function
 	)
-	
+	GoGo_Druid_Panel_NoShapeInRandom:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DruidFormNotRandomize then
+				GoGo_Druid_Panel_NoShapeInRandom:SetChecked(1)
+			else
+				GoGo_Druid_Panel_NoShapeInRandom:SetChecked(0)
+			end --if
+		end --function
+	)
 	GoGo_Druid_Panel_DisableInCombat = CreateFrame("CheckButton", "GoGo_Druid_Panel_DisableInCombat", GoGo_Druid_Panel, "OptionsCheckButtonTemplate")
 	GoGo_Druid_Panel_DisableInCombat:SetPoint("TOPLEFT", "GoGo_Druid_Panel_NoShapeInRandom", "BOTTOMLEFT", 0, -4)
 	GoGo_Druid_Panel_DisableInCombatText:SetText(GoGo_Variables.Localize.String.DisableInCombat)
 	GoGo_Druid_Panel_DisableInCombat.tooltipText = GoGo_Variables.Localize.String.DisableInCombat_Long
 	GoGo_Druid_Panel_ClickForm:SetScript("OnClick",
 		function(self)
-			GoGo_Panel_Okay("DRUID")
+			if GoGo_Druid_Panel_DisableInCombat:GetChecked() then
+				GoGo_Prefs.DruidDisableInCombat = true
+			else
+				GoGo_Prefs.DruidDisableInCombat = false
+			end --if
+		end --function
+	)
+	GoGo_Druid_Panel_DisableInCombat:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.DruidDisableInCombat then
+				GoGo_Druid_Panel_DisableInCombat:SetChecked(1)
+			else
+				GoGo_Druid_Panel_DisableInCombat:SetChecked(0)
+			end --if
 		end --function
 	)
 end --function
@@ -3188,7 +3434,7 @@ function GoGo_Hunter_Panel()
 	GoGo_Hunter_Panel.name = GoGo_Variables.Localize.String.HunterOptions
 	GoGo_Hunter_Panel.parent = "GoGoMount"
 --	GoGo_Hunter_Panel.okay = function (self) GoGo_Panel_Okay("HUNTER"); end;
-	GoGo_Hunter_Panel.default = function (self) GoGo_Settings_Default("HUNTER"); GoGo_Panel_UpdateViews("HUNTER"); end;  -- use clear command with default button
+	GoGo_Hunter_Panel.default = function (self) GoGo_Settings_Default("HUNTER"); end;  -- use clear command with default button
 	InterfaceOptions_AddCategory(GoGo_Hunter_Panel)
 
 	GoGo_Hunter_Panel_AspectOfPack = CreateFrame("CheckButton", "GoGo_Hunter_Panel_AspectOfPack", GoGo_Hunter_Panel, "OptionsCheckButtonTemplate")
@@ -3222,7 +3468,7 @@ function GoGo_Paladin_Panel()
 	GoGo_Paladin_Panel.name = GoGo_Variables.Localize.String.PaladinOptions
 	GoGo_Paladin_Panel.parent = "GoGoMount"
 --	GoGo_Paladin_Panel.okay = function (self) GoGo_Panel_Okay("PALADIN"); end;
-	GoGo_Paladin_Panel.default = function (self) GoGo_Settings_Default("PALADIN"); GoGo_Panel_UpdateViews("PALADIN"); end;  -- use clear command with default button
+	GoGo_Paladin_Panel.default = function (self) GoGo_Settings_Default("PALADIN"); end;  -- use clear command with default button
 	InterfaceOptions_AddCategory(GoGo_Paladin_Panel)
 
 	GoGo_Paladin_Panel_AutoStartCrusaderAura = CreateFrame("CheckButton", "GoGo_Paladin_Panel_AutoStartCrusaderAura", GoGo_Paladin_Panel, "OptionsCheckButtonTemplate")
@@ -3416,70 +3662,29 @@ function GoGo_ZoneExclusions_Panel()
 end --function
 
 ---------
-function GoGo_Panel_UpdateViews(Class)  -- check to see what's calling this (improve performance)
----------
-	if Class == "DRUID" then
-		GoGo_Druid_Panel_ClickForm:SetChecked(GoGo_Prefs.DruidClickForm)
-		GoGo_Druid_Panel_FlightForm:SetChecked(GoGo_Prefs.DruidFlightForm)
-		GoGo_Druid_Panel_NoShapeInRandom:SetChecked(GoGo_Prefs.DruidFormNotRandomize)
-		GoGo_Druid_Panel_DisableInCombat:SetChecked(GoGo_Prefs.DruidDisableInCombat)
-	elseif Class == "HUNTER" then
-		GoGo_Hunter_Panel_AspectOfPack:SetChecked(GoGo_Prefs.AspectPack)
-	elseif Class == "PALADIN" then
-		GoGo_Paladin_Panel_AutoStartCrusaderAura:SetChecked(GoGo_Prefs.PaladinUseCrusaderAura)
-	else
-		GoGo_Panel_AutoDismount:SetChecked(GoGo_Prefs.autodismount)
-		GoGo_Panel_DisableUpdateNotice:SetChecked(GoGo_Prefs.DisableUpdateNotice)
-		GoGo_Panel_DisableMountNotice:SetChecked(GoGo_Prefs.DisableMountNotice)
-		GoGo_Panel_GlobalPrefMount:SetChecked(GoGo_Prefs.GlobalPrefMount)
-		GoGo_Panel_DisableWaterFlight:SetChecked(GoGo_Prefs.DisableWaterFlight)
-		GoGo_Panel_RemoveBuffs:SetChecked(GoGo_Prefs.RemoveBuffs)
-	end --if
-	
-	if GoGo_Prefs.autodismount then
-		GoGoFrame:RegisterEvent("UI_ERROR_MESSAGE")
-	else
-		GoGoFrame:UnregisterEvent("UI_ERROR_MESSAGE")
-	end --if
-end -- function
-
----------
-function GoGo_Panel_Okay(Panel)
----------
-	if Panel == "MAIN" then
-		GoGo_Prefs.autodismount = GoGo_Panel_AutoDismount:GetChecked()
-		GoGo_Prefs.DisableUpdateNotice = GoGo_Panel_DisableUpdateNotice:GetChecked()
-		GoGo_Prefs.DisableMountNotice = GoGo_Panel_DisableMountNotice:GetChecked()
-		GoGo_Prefs.GlobalPrefMount = GoGo_Panel_GlobalPrefMount:GetChecked()
-		GoGo_Prefs.DisableWaterFlight = GoGo_Panel_DisableWaterFlight:GetChecked()
-		GoGo_Prefs.RemoveBuffs = GoGo_Panel_RemoveBuffs:GetChecked()
-	elseif Panel == "DRUID" then
-		GoGo_Prefs.DruidClickForm = GoGo_Druid_Panel_ClickForm:GetChecked()
-		GoGo_Prefs.DruidFlightForm = GoGo_Druid_Panel_FlightForm:GetChecked()
-		GoGo_Prefs.DruidFormNotRandomize = GoGo_Druid_Panel_NoShapeInRandom:GetChecked()
-		GoGo_Prefs.DruidDisableInCombat = GoGo_Druid_Panel_DisableInCombat:GetChecked()
-	end--if
-end --function
-
----------
 function GoGo_Settings_Default(Class)
 ---------
+	-- class should only be set if using the default button from the option gui
 	if Class == "DRUID" then
 		GoGo_Prefs.DruidClickForm = true
 		GoGo_Prefs.DruidFlightForm = false
 		GoGo_Prefs.DruidFormNotRandomize = false
 		GoGo_Prefs.DruidDisableInCombat = false
+		InterfaceOptionsFrame_OpenToCategory(GoGo_Druid_Panel)
 	elseif Class == "HUNTER" then
 		GoGo_Prefs.AspectPack = false
+		InterfaceOptionsFrame_OpenToCategory(GoGo_Hunter_Panel)
 	elseif Class == "PALADIN" then
 		GoGo_Prefs.PaladinUseCrusaderAura = false
-	elseif Class == "ALL" then
+		InterfaceOptionsFrame_OpenToCategory(GoGo_Paladin_Panel)
+	elseif Class == "MAIN" then
 		GoGo_Prefs.autodismount = true
 		GoGo_Prefs.DisableUpdateNotice = false
 		GoGo_Prefs.DisableMountNotice = false
 		GoGo_Prefs.GlobalPrefMount = false
 		GoGo_Prefs.DisableWaterFlight = true
 		GoGo_Prefs.RemoveBuffs = true
+		InterfaceOptionsFrame_OpenToCategory(GoGo_Panel)
 	else
 		GoGo_Prefs = {}
 		GoGo_Prefs.Zones = {}
@@ -3685,7 +3890,6 @@ function GoGo_DebugCollectInformation()
 		GoGo_DebugAddLine("Information: Game - World of Warcraft: Mists of Pandaria enabled.")
 	end --if
 	GoGo_DebugAddLine("Information: Client locale is " .. GetLocale())
-	
 	GoGo_DebugAddLine("Information: Location = " .. GetRealZoneText() .. " - " .. GetZoneText() .. " - " ..GetSubZoneText() .. " - " .. GetMinimapZoneText())
 	GoGo_DebugAddLine("Information: Current zone area ID as per GetCurrentMapAreaID(): " .. GetCurrentMapAreaID())
 	local posX, posY = GetPlayerMapPosition("Player")
@@ -3732,6 +3936,11 @@ function GoGo_DebugCollectInformation()
 	else
 		GoGo_DebugAddLine("Information: We are not swimming as per IsSwimming()")
 	end --if
+	if IsSubmerged() then
+		GoGo_DebugAddLine("Information: We are swimming as per IsSubmerged()")
+	else
+		GoGo_DebugAddLine("Information: We are not swimming as per IsSubmerged()")
+	end --if
 	if IsFalling() then
 		GoGo_DebugAddLine("Information: We are falling as per IsFalling()")
 	else
@@ -3757,7 +3966,6 @@ function GoGo_DebugCollectInformation()
 		buffs = table.concat(buffs, ", ")
 	end --if
 	GoGo_DebugAddLine("Information: " .. buffs)
-	GoGo_DebugAddLine("Information: Mount List:")
 	GoGo_DebugAddLine("Information: End of information.")	
 end --function
 

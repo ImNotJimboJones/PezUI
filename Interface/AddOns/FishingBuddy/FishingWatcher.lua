@@ -367,13 +367,14 @@ local function BuildCurrentData(zone, subzone, zidx, sidx)
 end
 
 local function HandleZoneChange()
+FishingBuddy.Debug("HandleZoneChanged");
 	if ( not FishingBuddy.IsLoaded() ) then
 		return;
 	end
 	fishsort = nil
 	fishdata = nil;
 	FishingBuddy.WatchUpdate();
-	if ( TotalTimeFishing ) then
+	if ( FL:IsFishingPole() and TotalTimeFishing ) then
 		TotalTimeFishing = TotalTimeFishing + ZoneFishingTime;
 		ZoneFishingTime = 0;
 		FishingBuddy.SetSetting("TotalTimeFishing", TotalTimeFishing);
@@ -384,9 +385,6 @@ end
 local lastSkillCheck = 0;
 local lastSkillMax = 0;
 local WatchEvents = {};
-WatchEvents["ZONE_CHANGED"] = HandleZoneChange;
-WatchEvents["ZONE_CHANGED_INDOORS"] = HandleZoneChange;
-WatchEvents["ZONE_CHANGED_NEW_AREA"] = HandleZoneChange;
 
 WatchEvents["SKILL_LINES_CHANGED"] = function()
 	if ( FishingBuddy.GetSettingBool("WatchCurrentSkill") ) then
@@ -624,6 +622,7 @@ local function WatchUpdate()
 	local noshow = NoShow();
 
 	if ( noshow ) then
+FishingBuddy.Debug("Watcher: noshow");
 		if ( FishingWatchFrame:IsVisible() ) then
 			HideDraggerFrame();
 			FishingWatchFrame:Hide();
@@ -706,6 +705,12 @@ FishingBuddy.WatchFrame.OnLoad = function(self)
 	timerframe = CreateFrame("FRAME");
 	timerframe:Hide();
 	timerframe:SetScript("OnUpdate", UpdateTimerLine);
+
+	-- since we can leave this open all the time, register these against the window itself
+	self:RegisterEvent("ZONE_CHANGED");
+	self:RegisterEvent("ZONE_CHANGED_INDOORS");
+	self:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+	self:SetScript("OnEvent", HandleZoneChange);
 
 	FishingBuddy.API.RegisterHandlers(WatchEvents);
 end

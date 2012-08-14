@@ -7,7 +7,7 @@ Licensed under a Creative Commons "Attribution Non-Commercial Share Alike" Licen
 --]]
 
 local MAJOR_VERSION = "LibFishing-1.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 581 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 587 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -299,48 +299,44 @@ end
 
 -- Handle events we care about
 local canCreateFrame = false;
-local isLooting = 0;
 local caughtSoFar = 0;
 
-local libfishframe = FishLibFrame;
-if ( not libfishframe) then
-	libfishframe = CreateFrame("Frame", "FishLibFrame");
-	libfishframe:RegisterEvent("UPDATE_CHAT_WINDOWS");
-	libfishframe:RegisterEvent("LOOT_OPENED");
-	libfishframe:RegisterEvent("LOOT_CLOSED");
-	libfishframe:RegisterEvent("SKILL_LINES_CHANGED");
-	libfishframe:RegisterEvent("UNIT_INVENTORY_CHANGED");
-	libfishframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
-	libfishframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+local FISHLIBFRAMENAME="FishLibFrame";
+local fishlibframe = getglobal(FISHLIBFRAMENAME);
+if ( not fishlibframe) then
+	fishlibframe = CreateFrame("Frame", FISHLIBFRAMENAME);
+	fishlibframe:RegisterEvent("UPDATE_CHAT_WINDOWS");
+	fishlibframe:RegisterEvent("LOOT_CLOSED");
+	fishlibframe:RegisterEvent("SKILL_LINES_CHANGED");
+	fishlibframe:RegisterEvent("UNIT_INVENTORY_CHANGED");
+	fishlibframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+	fishlibframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
 end
 
-libfishframe:SetScript("OnEvent", function(self, event, ...)
+fishlibframe.fl = FishLib;
+
+fishlibframe:SetScript("OnEvent", function(self, event, ...)
 	local arg1 = select(1, ...);
 	if ( event == "UPDATE_CHAT_WINDOWS" ) then
 		canCreateFrame = true;
 		self:UnregisterEvent(event);
 	elseif ( event == "SKILL_LINES_CHANGED" or
 		( event == "UNIT_INVENTORY_CHANGED" and arg1 == "player" ) ) then
-		if (libfishframe.fl) then
-			libfishframe.fl:UpdateLureInventory();
-		end
-	elseif (event == "LOOT_OPENED") then
-		if ( IsFishingLoot() ) then
-			isLooting = isLooting + 1;
+		if (self.fl) then
+			self.fl:UpdateLureInventory();
 		end
 	elseif ( event == "LOOT_CLOSED" ) then
-		isLooting = isLooting - 1;
 		caughtSoFar = caughtSoFar + 1;
 	elseif ( event == "UNIT_SPELLCAST_CHANNEL_START" or event == "UNIT_SPELLCAST_CHANNEL_STOP" ) then
 		if (arg1 ~= "player" ) then
 			return;
 		end
 	end
-	if (libfishframe.fl) then
-		libfishframe.fl:ResetOverride();
+	if (self.fl) then
+		self.fl:ResetOverride();
 	end
 end);
-libfishframe:Show();
+fishlibframe:Show();
 
 local bobber = {};
 bobber["enUS"] = "Fishing Bobber";
@@ -364,34 +360,35 @@ function FishLib:SetBobberName(name)
 	self.BOBBER_NAME = name;
 end
 
+
 -- set up a table of slot mappings for looking up item information
 local slotinfo = {
-	[0] = { name = "AmmoSlot", },
-	[1] = { name = "HeadSlot", },
-	[2] = { name = "NeckSlot", },
-	[3] = { name = "ShoulderSlot", },
-	[4] = { name = "ShirtSlot", },
-	[5] = { name = "BackSlot", },
-	[6] = { name = "ChestSlot", },
-	[7] = { name = "WaistSlot", },
-	[8] = { name = "LegsSlot", },
-	[9] = { name = "FeetSlot", },
-	[10] = { name = "WristSlot", },
-	[11] = { name = "HandsSlot", },
-	[12] = { name = "Finger0Slot", },
-	[13] = { name = "Finger1Slot", },
-	[14] = { name = "Trinket0Slot", },
-	[15] = { name = "Trinket1Slot", },
-	[16] = { name = "MainHandSlot", },
-	[17] = { name = "SecondaryHandSlot", },
-	[18] = { name = "RangedSlot", },
-	[19] = { name = "TabardSlot", },
+	[0] = { name = "AmmoSlot", tooltip = AMMOSLOT },
+	[1] = { name = "HeadSlot", tooltip = HEADSLOT },
+	[2] = { name = "NeckSlot", tooltip = NECKSLOT },
+	[3] = { name = "ShoulderSlot", tooltip = SHOULDERSLOT },
+	[4] = { name = "BackSlot", tooltip = BACKSLOT },
+	[5] = { name = "ChestSlot", tooltip = CHESTSLOT },
+	[6] = { name = "ShirtSlot", tooltip = SHIRTSLOT },
+	[7] = { name = "TabardSlot", tooltip = TABARDSLOT },
+	[8] = { name = "WristSlot", tooltip = WRISTSLOT },
+	[9] = { name = "HandsSlot", tooltip = HANDSSLOT },
+	[10] = { name = "WaistSlot", tooltip = WAISTSLOT },
+	[11] = { name = "LegsSlot", tooltip = LEGSSLOT },
+	[12] = { name = "FeetSlot", tooltip = FEETSLOT },
+	[13] = { name = "Finger0Slot", tooltip = FINGER0SLOT },
+	[14] = { name = "Finger1Slot", tooltip = FINGER1SLOT },
+	[15] = { name = "Trinket0Slot", tooltip = TRINKET0SLOT },
+	[16] = { name = "Trinket1Slot", tooltip = TRINKET1SLOT },
+	[17] = { name = "MainHandSlot", tooltip = MAINHANDSLOT },
+	[18] = { name = "SecondaryHandSlot", tooltip = SECONDARYHANDSLOT },
+	[19] = { name = "RangedSlot", tooltip = RANGEDSLOT },
 }
 for i=0,19,1 do
 	local sn = slotinfo[i].name;
 	slotinfo[i].id, _ = GetInventorySlotInfo(sn);
 end
-local mainhand = slotinfo[16].id;
+local mainhand = slotinfo[17].id;
 
 -- A map of item types to locations
 local slotmap = {
@@ -425,6 +422,14 @@ local slotmap = {
 	["INVTYPE_QUIVER"] = { 20,21,22,23 }, 
 	[""] = { },
 };
+
+function FishLib:GetSlotInfo()
+	return slotinfo[17].id, slotinfo[18].id, slotinfo;
+end
+
+function FishLib:GetSlotMap()
+	return slotmap;
+end
 
 function FishLib:copytable(tab, level)
 	local t = {};
@@ -684,7 +689,7 @@ end
 
 -- look for double clicks
 function FishLib:CheckForDoubleClick()
-	if ( (isLooting == 0) and self.lastClickTime ) then
+	if ( not LootFrame:IsShown() and self.lastClickTime ) then
 		local pressTime = GetTime();
 		local doubleTime = pressTime - self.lastClickTime;
 		if ( (doubleTime < ACTIONDOUBLEWAIT) and (doubleTime > MINACTIONDOUBLECLICK) ) then
@@ -1056,16 +1061,22 @@ end
 -- Secure action button
 local SABUTTONNAME = "LibFishingSAButton";
 
+local function WaitForCombat(self)
+	if (self.clear and not InCombatLockdown()) then
+		self.clear = nil;
+		self:Hide();
+		ClearOverrideBindings(self);
+	end
+end
+
 function FishLib:ResetOverride()
 	local btn = self.sabutton;
 	if ( btn ) then
-		btn:Hide();
-		ClearOverrideBindings(btn);
+		btn.clear = true;
 	end
 end
 
 local function ClickHandled(self)
-	self:Hide();
 	self.fl:ResetOverride();
 	if ( self.postclick ) then
 		self.postclick();
@@ -1076,10 +1087,12 @@ function FishLib:CreateSAButton()
 	local btn = getglobal(SABUTTONNAME);
 	if ( not btn ) then
 		btn = CreateFrame("Button", SABUTTONNAME, UIParent, "SecureActionButtonTemplate");
+		btn.clear = nil;
 		btn:SetPoint("LEFT", UIParent, "RIGHT", 10000, 0);
 		btn:SetFrameStrata("LOW");
 		btn:EnableMouse(true);
 		btn:RegisterForClicks("RightButtonUp");
+		btn:SetScript("OnUpdate", WaitForCombat);
 		btn:Hide();
 	end
 	btn:SetScript("PostClick", ClickHandled);
@@ -1126,9 +1139,10 @@ function FishLib:OverrideClick(postclick)
 	if ( not btn ) then
 		return;
 	end
-	libfishframe.fl = self;
+	fishlibframe.fl = self;
 	btn.postclick = postclick;
 	SetOverrideBindingClick(btn, true, "BUTTON2", SABUTTONNAME);
+	btn.clear = nil;
 	btn:Show();
 end
 

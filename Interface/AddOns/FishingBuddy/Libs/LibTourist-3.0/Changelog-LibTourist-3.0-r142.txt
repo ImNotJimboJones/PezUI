@@ -1,0 +1,15 @@
+------------------------------------------------------------------------
+r142 | Odica | 2012-06-13 20:23:49 +0000 (Wed, 13 Jun 2012) | 1 line
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+Added Twilight Highlands return portals to Orgrimmar and Stormwind City.
+------------------------------------------------------------------------
+r141 | Odica | 2012-04-06 17:55:50 +0000 (Fri, 06 Apr 2012) | 3 lines
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+- added Darkmoon Island
+- added Elwynn Forest - Darkmoon Island portal v.v.
+- added Mulgore - Darkmoon Island portal v.v.
+------------------------------------------------------------------------

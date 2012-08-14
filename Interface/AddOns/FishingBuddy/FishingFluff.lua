@@ -159,13 +159,15 @@ local function Untrack(yes)
 end
 
 local function DoPetReset(pet)
-	local nowpet = FindCurrentPet();
-	if ( pet and petmap[pet] ) then
-		if ( pet ~= nowpet ) then
-			CallCompanion("CRITTER", petmap[pet]);
+	if ( pet ) then
+		local nowpet = FindCurrentPet();
+		if ( petmap[pet] ) then
+			if ( pet ~= nowpet ) then
+				CallCompanion("CRITTER", petmap[pet]);
+			end
+		elseif ( nowpet ) then
+			DismissCompanion("CRITTER");
 		end
-	elseif ( nowpet ) then
-		DismissCompanion("CRITTER");
 	end
 end
 
@@ -432,7 +434,6 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingBuddy.OptionsFrame.HandleOptions(nil, nil, InvisibleOptions);
 		
 	FishingPetFrame:SetScript("OnHide", FishingPetFrame_OnHide);
-	frame:SetPoint("TOPLEFT", f, "TOPLEFT", 2, 2);
 	FishingPetFrameButton:SetScript("OnClick", FishingPetsMenu_Toggle);
 	
 	FindCurrentPet();

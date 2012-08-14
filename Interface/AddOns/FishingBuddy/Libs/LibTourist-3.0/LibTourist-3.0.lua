@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 141 $
+Revision: $Rev: 142 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -11,7 +11,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 141 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 142 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 if not LibStub("LibBabble-Zone-3.0") then error(MAJOR_VERSION .. " requires LibBabble-Zone-3.0.") end
@@ -1227,6 +1227,7 @@ do
 	local MOAKI_KAMAGUA_BOAT = string.format(X_Y_BOAT, BZ["Dragonblight"], BZ["Howling Fjord"])
 	local DALARAN_COT_PORTAL = string.format(X_Y_PORTAL, BZ["Dalaran"], BZ["Caverns of Time"])
 	local DALARAN_CRYSTALSONG_TELEPORT = string.format(X_Y_TELEPORT, BZ["Dalaran"], BZ["Crystalsong Forest"])
+	local TWILIGHTHIGHLANDS_ORGRIMMAR_PORTAL = string.format(X_Y_PORTAL, BZ["Twilight Highlands"], BZ["Orgrimmar"])
 	local ORGRIMMAR_TWILIGHTHIGHLANDS_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["Twilight Highlands"])
 	local ORGRIMMAR_MOUNTHYJAL_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["Mount Hyjal"])
 	local ORGRIMMAR_DEEPHOLM_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["Deepholm"])
@@ -1235,6 +1236,7 @@ do
 	local ORGRIMMAR_VASHJIR_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["Vashj'ir"])
 	local ORGRIMMAR_TOLBARAD_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["Tol Barad Peninsula"])
 	local TOLBARAD_ORGRIMMAR_PORTAL = string.format(X_Y_PORTAL, BZ["Tol Barad Peninsula"], BZ["Orgrimmar"])
+	local TWILIGHTHIGHLANDS_STORMWIND_PORTAL = string.format(X_Y_PORTAL, BZ["Twilight Highlands"], BZ["Stormwind City"])
 	local STORMWIND_TWILIGHTHIGHLANDS_PORTAL = string.format(X_Y_PORTAL, BZ["Stormwind City"], BZ["Twilight Highlands"])
 	local STORMWIND_MOUNTHYJAL_PORTAL = string.format(X_Y_PORTAL, BZ["Stormwind City"], BZ["Mount Hyjal"])
 	local STORMWIND_DEEPHOLM_PORTAL = string.format(X_Y_PORTAL, BZ["Stormwind City"], BZ["Deepholm"])
@@ -1624,6 +1626,14 @@ do
 		type = "Transport",
 	}
 
+	zones[TWILIGHTHIGHLANDS_STORMWIND_PORTAL] = {
+		paths = {
+			[BZ["Stormwind City"]] = true,
+		},
+		faction = "Alliance",
+		type = "Transport",
+	}
+
 	zones[STORMWIND_MOUNTHYJAL_PORTAL] = {
 		paths = {
 			[BZ["Mount Hyjal"]] = true,
@@ -1683,6 +1693,14 @@ do
 	zones[ORGRIMMAR_TWILIGHTHIGHLANDS_PORTAL] = {
 		paths = {
 			[BZ["Twilight Highlands"]] = true,
+		},
+		faction = "Horde",
+		type = "Transport",
+	}
+
+	zones[TWILIGHTHIGHLANDS_ORGRIMMAR_PORTAL] = {
+		paths = {
+			[BZ["Orgrimmar"]] = true,
 		},
 		faction = "Horde",
 		type = "Transport",
@@ -4190,6 +4208,8 @@ do
 			[BZ["Wetlands"]] = true,
 			[BZ["Grim Batol"]] = true,
 			[BZ["Twin Peaks"]] = true,
+			[TWILIGHTHIGHLANDS_STORMWIND_PORTAL] = true,
+			[TWILIGHTHIGHLANDS_ORGRIMMAR_PORTAL] = true,
 		},
 		fishing_min = 650,
 	}

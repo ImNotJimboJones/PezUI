@@ -120,7 +120,7 @@ local CastingOptions = {
 		["layoutright"] = "EasyCastKeys",
 		["v"] = 1,
 		["m"] = 1,
-		["default"] = 0 },
+		["default"] = 1 },
 	["EasyLures"] = {
 		["text"] = FBConstants.CONFIG_EASYLURES_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_EASYLURES_INFO,
@@ -939,7 +939,7 @@ local function PostCastUpdate()
 		if ( AddingLure ) then
 			local sp, sub, txt, tex, st, et, trade, int = UnitChannelInfo("player");
 			local _, lure = FL:GetPoleBonus();
-			if ( not sp or lure and lure == LastLure.b ) then
+			if ( not sp or (lure and lure == LastLure.b) ) then
 				AddingLure = false;
 				FL:UpdateLureInventory();
 			else
@@ -1073,6 +1073,8 @@ CaptureEvents["LOOT_OPENED"] = function()
 			poolhint = true;
 		end
 		
+		-- if we want to autoloot, and Blizz isn't, let's grab stuff
+		local doautoloot = ShouldAutoLoot() and (GetCVar("autoLootDefault") ~= "1" );
 		local zone, subzone = FL:GetZoneInfo();
 		for index = 1, GetNumLootItems(), 1 do
 			if (LootSlotIsItem(index)) then
@@ -1088,12 +1090,22 @@ CaptureEvents["LOOT_OPENED"] = function()
 					DoEscaped = 1;
 				end
 			end
+			if (doautoloot) then
+				LootSlot(index);
+			end
 		end
 		ClearTooltipText();
 		FL:ExtendDoubleClick();
 		LureState = 0;
 	end
 end
+
+local function ClearAddingLure()
+	AddingLure = false;
+end
+
+CaptureEvents["UNIT_SPELLCAST_STOP"] = ClearAddingLure;
+CaptureEvents["UNIT_SPELLCAST_INTERRUPTED"] = ClearAddingLure;
 
 StatusEvents = {};
 StatusEvents["ACTIONBAR_SLOT_CHANGED"] = function()
@@ -1253,20 +1265,12 @@ end
 -- do everything we think is necessary when we start fishing
 -- even if we didn't do the switch to a fishing pole
 local resetClickToMove = nil;
-local resetAutoLoot = nil;
 local function StartFishingMode()
 	if ( not FishingBuddy.StartedFishing ) then
 		-- Disable Click-to-Move if we're fishing
 		if ( GetCVar("autointeract") == "1" ) then
 			resetClickToMove = true;
 			SetCVar("autointeract", "0");
-		end
-		-- make sure we reset this if we need to
-		if ( ShouldAutoLoot() ) then
-			if ( GetCVar("autoLootDefault") ~= "1" ) then
-				resetAutoLoot = true;
-				SetCVar("autoLootDefault", "1");
-			end
 		end
 		FishingBuddy.EnhanceFishingSounds(true);
 		EventRegistration(true);
@@ -1299,10 +1303,6 @@ local function StopFishingMode(logout)
 		-- Re-enable Click-to-Move if we changed it
 		SetCVar("autointeract", "1");
 		resetClickToMove = nil;
-	end
-	if ( resetAutoLoot ) then
-		SetCVar("autoLootDefault", "0");
-		resetAutoLoot = nil;
 	end
 end
 

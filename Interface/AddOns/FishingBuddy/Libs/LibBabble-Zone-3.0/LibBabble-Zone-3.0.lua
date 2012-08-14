@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Zone-3.0
-Revision: $Rev: 343 $
+Revision: $Rev: 345 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-zone-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Zone-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 343 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 345 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -241,6 +241,7 @@ lib:SetBaseTranslations {
 	["The Dark Portal"] = "The Dark Portal",
 	["The Deadmines"] = "The Deadmines",
 	["The Descent into Madness"] = "The Descent into Madness",
+	["The Dragon Wastes"] = "The Dragon Wastes",
 	["The Escape From Durnholde"] = "The Escape From Durnholde",
 	["The Exodar"] = "The Exodar",
 	["The Eye"] = "The Eye",
@@ -256,6 +257,7 @@ lib:SetBaseTranslations {
 	["The Maelstrom"] = "The Maelstrom",
 	["The Mechanar"] = "The Mechanar",
 	["The Military Quarter"] = "The Military Quarter",
+	["The Molten Core"] = "The Molten Core",
 	["The Nexus"] = "The Nexus",
 	["The North Sea"] = "The North Sea",
 	["The Obsidian Sanctum"] = "The Obsidian Sanctum",
@@ -547,6 +549,7 @@ elseif GAME_LOCALE == "deDE" then
 	["The Dark Portal"] = "Das Dunkle Portal",
 	["The Deadmines"] = "Die Todesminen",
 	["The Descent into Madness"] = "Der Abstieg in den Wahnsinn",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "Flucht aus Burg Durnholde",
 	["The Exodar"] = "Die Exodar",
 	["The Eye"] = "Festung der Stürme",
@@ -562,6 +565,7 @@ elseif GAME_LOCALE == "deDE" then
 	["The Maelstrom"] = "Der Mahlstrom",
 	["The Mechanar"] = "Die Mechanar",
 	["The Military Quarter"] = "Das Militärviertel",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "Der Nexus",
 	["The North Sea"] = "Das nördliche Meer",
 	["The Obsidian Sanctum"] = "Das Obsidiansanktum",
@@ -849,6 +853,7 @@ elseif GAME_LOCALE == "frFR" then
 	["The Dark Portal"] = "La Porte des ténèbres",
 	["The Deadmines"] = "Les Mortemines",
 	["The Descent into Madness"] = "La Descente dans la folie",
+	["The Dragon Wastes"] = "La Chute d'Aile de mort", -- Needs review
 	["The Escape From Durnholde"] = "L'évasion de Fort-de-Durn",
 	["The Exodar"] = "L'Exodar",
 	["The Eye"] = "L'Œil",
@@ -864,6 +869,7 @@ elseif GAME_LOCALE == "frFR" then
 	["The Maelstrom"] = "Le Maelström",
 	["The Mechanar"] = "Le Méchanar",
 	["The Military Quarter"] = "Le quartier Militaire",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "Le Nexus",
 	["The North Sea"] = "La mer Boréale",
 	["The Obsidian Sanctum"] = "Le sanctum Obsidien",
@@ -978,7 +984,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Dalaran Arena"] = "달라란 투기장",
 	["Dalaran Sewers"] = "달라란 하수도",
 	["Darkmoon Faire"] = "다크문 축제",
-	["Darkmoon Island"] = "다크문 축제", -- Needs review
+	["Darkmoon Island"] = "다크문 축제",
 	Darkshore = "어둠의 해안",
 	Darnassus = "다르나서스",
 	Deadmines = "죽음의 폐광",
@@ -991,7 +997,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Dire Maul (North)"] = "혈투의 전장 북부",
 	["Dire Maul (West)"] = "혈투의 전장 서부",
 	Dragonblight = "용의 안식처",
-	["Dragon Soul"] = "용의 영혼", -- Needs review
+	["Dragon Soul"] = "용의 영혼",
 	["Drak'Tharon Keep"] = "드락타론 성채",
 	["Dun Morogh"] = "던 모로",
 	Durotar = "듀로타",
@@ -1000,7 +1006,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Eastern Kingdoms"] = "동부 왕국",
 	["Eastern Plaguelands"] = "동부 역병지대",
 	["Elwynn Forest"] = "엘윈 숲",
-	["End Time"] = "시간의 끝", -- Needs review
+	["End Time"] = "시간의 끝",
 	Everlook = "눈망루 마을",
 	["Eversong Woods"] = "영원노래 숲",
 	["Eye of the Storm"] = "폭풍의 눈",
@@ -1023,7 +1029,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Grom'gol Base Camp"] = "그롬골 주둔지",
 	["Gruul's Lair"] = "그룰의 둥지",
 	Gundrak = "군드락",
-	["Hall of Blackhand"] = "검은손 전당", -- Needs review
+	["Hall of Blackhand"] = "검은손 전당",
 	["Hall of Champions"] = "용사의 전당",
 	["Hall of Legends"] = "전설의 전당",
 	["Halls of Lightning"] = "번개의 전당",
@@ -1035,7 +1041,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Hellfire Ramparts"] = "지옥불 성루",
 	["Hillsbrad Foothills"] = "언덕마루 구릉지",
 	["Horde Encampment"] = "호드 야영지",
-	["Hour of Twilight"] = "황혼의 시간", -- Needs review
+	["Hour of Twilight"] = "황혼의 시간",
 	["Howling Fjord"] = "울부짖는 협만",
 	["Hrothgar's Landing"] = "흐로스가르 상륙지",
 	Hyjal = "하이잘",
@@ -1062,7 +1068,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Marshlight Lake"] = "수렁등불 호수",
 	["Menethil Harbor"] = "메네실 항구",
 	["Molten Core"] = "화산 심장부",
-	["Molten Front"] = "녹아내린 전초지", -- Needs review
+	["Molten Front"] = "녹아내린 전초지",
 	Moonglade = "달의 숲",
 	["Mount Hyjal"] = "하이잘 산",
 	Mulgore = "멀고어",
@@ -1079,7 +1085,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Old Hillsbrad Foothills"] = "옛 힐스브래드 구릉지",
 	["Old Stratholme"] = "옛 스트라솔름",
 	["Onyxia's Lair"] = "오닉시아의 둥지",
-	["Opening of the Dark Portal"] = "어둠의 문 열기", -- Needs review
+	["Opening of the Dark Portal"] = "어둠의 문 열기",
 	Orgrimmar = "오그리마",
 	Outland = "아웃랜드",
 	["Pit of Saron"] = "사론의 구덩이",
@@ -1151,7 +1157,8 @@ elseif GAME_LOCALE == "koKR" then
 	["The Dark Portal"] = "어둠의 문",
 	["The Deadmines"] = "죽음의 폐광",
 	["The Descent into Madness"] = "광기의 내리막길",
-	["The Escape From Durnholde"] = "던홀드 탈출", -- Needs review
+	-- ["The Dragon Wastes"] = "",
+	["The Escape From Durnholde"] = "던홀드 탈출",
 	["The Exodar"] = "엑소다르",
 	["The Eye"] = "눈",
 	["The Eye of Eternity"] = "영원의 눈",
@@ -1166,6 +1173,7 @@ elseif GAME_LOCALE == "koKR" then
 	["The Maelstrom"] = "혼돈의 소용돌이",
 	["The Mechanar"] = "메카나르",
 	["The Military Quarter"] = "군사 지구",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "마력의 탑",
 	["The North Sea"] = "북해",
 	["The Obsidian Sanctum"] = "흑요석 성소",
@@ -1214,7 +1222,7 @@ elseif GAME_LOCALE == "koKR" then
 	["Vortex Pinnacle"] = "소용돌이 누각 ",
 	["Wailing Caverns"] = "통곡의 동굴",
 	["Warsong Gulch"] = "전쟁노래 협곡",
-	["Well of Eternity"] = "영원의 샘", -- Needs review
+	["Well of Eternity"] = "영원의 샘",
 	["Western Plaguelands"] = "서부 역병지대",
 	Westfall = "서부 몰락지대",
 	Wetlands = "저습지",
@@ -1453,6 +1461,7 @@ elseif GAME_LOCALE == "esES" then
 	["The Dark Portal"] = "El Portal Oscuro",
 	["The Deadmines"] = "Las Minas de la Muerte",
 	["The Descent into Madness"] = "Descenso a la Locura",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "La Fuga de Durnholde", -- Needs review
 	["The Exodar"] = "El Exodar",
 	["The Eye"] = "El Ojo",
@@ -1468,6 +1477,7 @@ elseif GAME_LOCALE == "esES" then
 	["The Maelstrom"] = "La Vorágine",
 	["The Mechanar"] = "El Mechanar",
 	["The Military Quarter"] = "Ala Militar",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "El Nexo",
 	["The North Sea"] = "El Mar del Norte",
 	["The Obsidian Sanctum"] = "El Sagrario Obsidiana",
@@ -1755,6 +1765,7 @@ elseif GAME_LOCALE == "esMX" then
 	["The Dark Portal"] = "El Portal Oscuro",
 	["The Deadmines"] = "Las Minas de la Muerte",
 	["The Descent into Madness"] = "El Descenso a la Locura",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "La Fuga de Durnholde",
 	["The Exodar"] = "El Exodar",
 	["The Eye"] = "El Ojo",
@@ -1770,6 +1781,7 @@ elseif GAME_LOCALE == "esMX" then
 	["The Maelstrom"] = "La Vorágine", -- Needs review
 	["The Mechanar"] = "El Mechanar",
 	["The Military Quarter"] = "El Arrabal Militar",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "El Nexo",
 	["The North Sea"] = "El Mar del Norte",
 	["The Obsidian Sanctum"] = "El Sagrario Obsidiana",
@@ -1852,7 +1864,7 @@ elseif GAME_LOCALE == "ptBR" then
 	["Azjol-Nerub"] = "Azjol-Nerub",
 	Azshara = "Azshara",
 	["Azuremyst Isle"] = "Ilha Névoa Lazúli",
-	Badlands = "Badlands",
+	Badlands = "Ermos",
 	["Baradin Hold"] = "Guarnição Baradin",
 	["Bash'ir Landing"] = "Patamar de Bash'ir",
 	["Battle for Gilneas"] = "Batalha por Guilnéas",
@@ -1867,9 +1879,9 @@ elseif GAME_LOCALE == "ptBR" then
 	["Blackwing Lair"] = "Covil Asa Negra",
 	["Blade's Edge Arena"] = "Arena da Lâmina Afiada",
 	["Blade's Edge Mountains"] = "Montanhas da Lâmina Afiada",
-	["Blasted Lands"] = "Terras Almadiçoadas",
+	["Blasted Lands"] = "Barreira do Inferno",
 	["Bloodmyst Isle"] = "Ilha Névoa Rubra",
-	["Booty Bay"] = "Baía do Saque",
+	["Booty Bay"] = "Angra do Butim",
 	["Borean Tundra"] = "Tundra Boreana",
 	["Burning Steppes"] = "Estepes Ardentes",
 	Cathedral = "Catedral",
@@ -2057,6 +2069,7 @@ elseif GAME_LOCALE == "ptBR" then
 	["The Dark Portal"] = "Portal Negro",
 	["The Deadmines"] = "Minas Mortas",
 	["The Descent into Madness"] = "A Espiral da Loucura",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "A Fuga de Forte do Desterro",
 	["The Exodar"] = "Exodar",
 	["The Eye"] = "O Olho",
@@ -2072,6 +2085,7 @@ elseif GAME_LOCALE == "ptBR" then
 	["The Maelstrom"] = "Voragem",
 	["The Mechanar"] = "Mecanar",
 	["The Military Quarter"] = "O Distrito Militar",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "Nexus - Missão Lendária",
 	["The North Sea"] = "Mar do Norte",
 	["The Obsidian Sanctum"] = "Santuário Obsidiano",
@@ -2359,6 +2373,7 @@ elseif GAME_LOCALE == "ruRU" then
 	["The Dark Portal"] = "Темный портал",
 	["The Deadmines"] = "Мертвые копи",
 	["The Descent into Madness"] = "Провал Безумия",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "Побег из Дарнхольда",
 	["The Exodar"] = "Экзодар",
 	["The Eye"] = "Око",
@@ -2374,6 +2389,7 @@ elseif GAME_LOCALE == "ruRU" then
 	["The Maelstrom"] = "Водоворот",
 	["The Mechanar"] = "Механар",
 	["The Military Quarter"] = "Военный квартал",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "Нексус",
 	["The North Sea"] = "Северное море",
 	["The Obsidian Sanctum"] = "Обсидиановое святилище",
@@ -2661,6 +2677,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["The Dark Portal"] = "黑暗之门",
 	["The Deadmines"] = "死亡矿井",
 	["The Descent into Madness"] = "疯狂阶梯",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "逃离敦霍尔德",
 	["The Exodar"] = "埃索达",
 	["The Eye"] = "风暴要塞",
@@ -2676,6 +2693,7 @@ elseif GAME_LOCALE == "zhCN" then
 	["The Maelstrom"] = "大漩涡",
 	["The Mechanar"] = "能源舰",
 	["The Military Quarter"] = "军事区",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "魔枢",
 	["The North Sea"] = "北海",
 	["The Obsidian Sanctum"] = "黑曜石圣殿",
@@ -2963,6 +2981,7 @@ elseif GAME_LOCALE == "zhTW" then
 	["The Dark Portal"] = "黑暗之門",
 	["The Deadmines"] = "死亡礦坑",
 	["The Descent into Madness"] = "驟狂斜廊",
+	-- ["The Dragon Wastes"] = "",
 	["The Escape From Durnholde"] = "逃離敦霍爾德",
 	["The Exodar"] = "艾克索達",
 	["The Eye"] = "風暴要塞",
@@ -2978,6 +2997,7 @@ elseif GAME_LOCALE == "zhTW" then
 	["The Maelstrom"] = "大漩渦",
 	["The Mechanar"] = "麥克納爾",
 	["The Military Quarter"] = "軍事區",
+	-- ["The Molten Core"] = "",
 	["The Nexus"] = "奧核之心",
 	["The North Sea"] = "北海",
 	["The Obsidian Sanctum"] = "黑曜聖所",

@@ -39,9 +39,14 @@ gearframe:SetScript("OnUpdate", function(self)
 	elseif ( self.state == 1 ) then
 		-- reset slot ignore flags
 		EquipmentManagerClearIgnoredSlotsForSave();
-		EquipmentManager_EquipSet(FB_TEMP_OUTFIT);
-		self.state = 2;
-		self.nextstate = 3;
+		local icon, _ = GetEquipmentSetInfoByName(FB_TEMP_OUTFIT);
+		if ( icon ) then
+			EquipmentManager_EquipSet(FB_TEMP_OUTFIT);
+			self.state = 2;
+			self.nextstate = 3;
+		else
+			self.state = FINAL_STATE;
+		end
 	elseif ( self.state == 2 ) then
 		-- waiting for EQUIPMENT_SWAP_FINISHED
 	elseif (self.state == 3) then

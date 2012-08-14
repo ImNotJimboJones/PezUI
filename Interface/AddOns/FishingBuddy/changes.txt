@@ -1,4 +1,22 @@
-﻿Version 1.0.7i
+﻿Version 1.0.8b
+- Fixed Video Options bug (CurseForge #159, #162, #149)
+- Fixed some small issues with the Equipment Manager
+- Fixed pet summoning and dismissing bug
+- Update LibTourist and LibBabble-Zone to latest versions
+
+Version 1.0.8a
+- Really fix fish watcher updating bug, CurseForge #146 (Thanks WildCard_25!)
+
+Version 1.0.8
+- Complete rewrite of cast handling
+- Handle auto loot internally instead of messing with the UI setting
+- Make "Easy Cast" default to "on", since that's the whole point after all
+- Fixes for Curse bugs: 100, 146, 155, 156, 157, 158, 160
+
+Version 1.0.7j
+- Random flailing trying to figure out why it works for some people and not others
+
+Version 1.0.7i
 - Fix casting failure after skill-up
 
 Version 1.0.7h

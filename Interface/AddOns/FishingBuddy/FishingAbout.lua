@@ -77,6 +77,7 @@ credits[FBConstants.ROLE_HELP_BUGS] = {
 	["oscarucb"] = { "Help with the fix for repeat lure bug" },
 	["callumw"] = { "Typo identification in fishing lib" },
 	["Ninmah"] = { "Beta tester", "Auto-loot reset bug" },
+	["WildCard_25"] = { "Fish Watcher update bug" },
 };
 
 -- Ideas and suggestions
