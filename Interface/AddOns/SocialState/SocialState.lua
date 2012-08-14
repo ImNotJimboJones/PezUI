@@ -209,6 +209,11 @@ local options = {
 LibStub("AceConfig-3.0"):RegisterOptionsTable("SocialState", options)
 LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SocialState")
 
+-- MoP Fix <3 Chinchilla
+local MISTS_OF_PANDARIA = GetBuildInfo():match("5") and true or false
+local GetNumPartyMembers = MISTS_OF_PANDARIA and GetNumSubgroupMembers or GetNumPartyMembers
+local GetNumRaidMembers = MISTS_OF_PANDARIA and GetNumGroupMembers or GetNumRaidMembers
+
 -------------------------------------------------------------------------------
 -- Helper Routines
 -------------------------------------------------------------------------------
