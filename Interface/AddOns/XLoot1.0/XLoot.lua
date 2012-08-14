@@ -1,4 +1,4 @@
-﻿-- Texture slicing code copied from Rabbit, who copied from !BeatyCase, who thanked Phanx.
+-- Texture slicing code copied from Rabbit, who copied from !BeatyCase, who thanked Phanx.
 -- Default texture from Svelte
 local NAME, addon = ...
 addon.NAME = NAME
@@ -176,8 +176,8 @@ local function GetBindOn(item)
 	local tt = XLootTooltip
 	tt:SetOwner(UIParent, 'ANCHOR_NONE')
 	tt:SetHyperlink(item)
-	if XLootTooltip:NumLines() > 1 and XLootTooltipTextLeft2:GetText() then
-		local t = XLootTooltipTextLeft2:GetText()
+	local t = (GetCVar('colorblindMode') == '1' and XLootTooltipTextLeft3 or XLootTooltipTextLeft2):GetText()
+	if XLootTooltip:NumLines() > 1 and t then
 		tt:Hide()
 		if t == ITEM_BIND_ON_PICKUP then
 			return 'pickup'
@@ -480,13 +480,18 @@ do
 		self.text_info:SetText(text_info)
 		self.text_bind:SetText(text_bind)
 		self.text_quantity:SetText(quantity > 1 and quantity or nil)
+		if questId or isQuestItem then
+			self.text_info:SetTextColor(1, .8, .1)
+		else
+			self.text_info:SetTextColor(owner:GetColor('loot_color_info'))
+		end
 
 		-- Icon
 		self.texture_item:SetTexture(icon)
 		if locked then
-			self.texture_item:SetVertexColor(.5, .1, .1)
+			self.text_locked:Show()
 		else
-			self.texture_item:SetVertexColor(1, 1, 1)
+			self.text_locked:Hide()
 		end
 		
 		-- Layout
@@ -539,17 +544,22 @@ do
 		local info = row:CreateFontString()
 		local bind = item:CreateFontString()
 		local quantity = item:CreateFontString()
+		local locked = item:CreateFontString()
 
 		-- Setup fontstrings
 		smalltext(name, opt.font_size_loot)
 		smalltext(info, opt.font_size_info)
 		smalltext(bind, 8, 'outline')
+		smalltext(locked, 9, 'outline')
 		smalltext(quantity, 10, 'outline')
 		textpoints(name, item, row, 2)
 		textpoints(info, item, row, 8)
 		bind:SetPoint('BOTTOMLEFT', 2, 2)
 		quantity:SetPoint('BOTTOMRIGHT', -2, 2)
 		quantity:SetJustifyH('RIGHT')
+		locked:SetPoint('CENTER')
+		locked:SetText(LOCKED)
+		locked:SetTextColor(1, .2, .1)
 
 		-- Align frames
 		row:SetHeight(30)
@@ -591,6 +601,7 @@ do
 		row.text_name = name
 		row.text_info = info
 		row.text_bind = bind
+		row.text_locked = locked
 		row.text_quantity = quantity
 		row.frame_item = item
 		row.texture_item = tex
@@ -637,7 +648,7 @@ do
 			else
 				x = f:GetLeft() or x
 			end
-
+   
 			-- Vertical position
 			y = (y / s) + 30
 			local sHeight, fHeight, uHeight = GetScreenHeight(), f:GetHeight(), UIParent:GetHeight()
@@ -649,7 +660,7 @@ do
 			x = opt.frame_position_x or x
 			y = opt.frame_position_y or y
 		end
-
+   
 		-- Apply
 		f:ClearAllPoints()
 		f:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x, y)
@@ -816,7 +827,7 @@ do
 			f:SetScript('OnDragStart', OnDragStart)
 			f:SetScript('OnDragStop', OnDragStop)
 			lb:SetScript('OnClick', LinkClick)
-			cb:SetScript('OnClick', function() CloseLoot() end)
+			cb:SetScript('OnClick', function() pcall(CloseLoot) end)
 			f.SnapToCursor = SnapToCursor
 		end
 
@@ -938,7 +949,7 @@ function XLootFrame:Update()
 	
 	-- Exit if we autolooted everything
 	if our_slot == 0 then
-		CloseLoot()
+		pcall(CloseLoot)
 		return nil
 	end
 	
@@ -979,12 +990,16 @@ local function Opened(self)
 			PlaySound('FISHING REEL IN')
 		end
 	else
-		CloseLoot()
+		pcall(CloseLoot)
 	end
 end
 
 local function Cleared(self, slot)
 	local slots = self.slots
+	-- Apparently auto-looting addons like EasyLoot will cause strange issues
+	if slots == nil then
+		return
+	end
 	for id, row in ipairs(slots) do
 		if row.slot == slot then
 			clear(row)

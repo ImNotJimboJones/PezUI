@@ -1,0 +1,15 @@
+tag z8-release
+b8bfb96cff8acdb280e7ef3577395819b1e438e4
+Xuerian <sky.shell@gmail.com>
+2012-05-10 05:23:35 -0400
+
+Add Win type icon/Time remaining/Undecided players options
+
+
+--------------------
+
+Xuerian:
+	- Fix issue with debugging
+	- Add "Show undecided" option
+	- Add "Show winning type icon" option
+	- Add "Show time remaining" option

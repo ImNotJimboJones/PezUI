@@ -1,0 +1,12 @@
+tag z30-release
+303b0657557d770cb8b26dae0fad0cbd5995d776
+Xuerian <sky.shell@gmail.com>
+2012-05-09 22:31:59 -0400
+
+"Locked" text instead of tint
+
+
+--------------------
+
+Xuerian:
+	- Add "Locked" text instead of tinting icon

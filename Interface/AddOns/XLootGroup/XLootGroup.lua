@@ -1,379 +1,887 @@
-local L = AceLibrary("AceLocale-2.2"):new("XLootGroup")
-local XL = AceLibrary("AceLocale-2.2"):new("XLoot")
+local NAME, addon = ...
+addon.NAME = NAME
+XLootGroup = addon
 
-XLootGroup = XLoot:NewModule("XLootGroup")
+local L = addon.L
+local me = UnitName('player')
 
-XLootGroup.dewdrop = AceLibrary("Dewdrop-2.0")
+local opt, anchor
+local GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print =
+	GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print
 
-local AA = AceLibrary("AnchorsAway-1.0")
-XLootGroup.AA = AA
+addon.defaults = {
+	text_outline = true,
+	text_time = false,
+	role_icon = true,
+	win_icon = false,
+	show_undecided = false,
 
-local _G = _G
+	roll_button_size = 28,
+	roll_width = 325,
 
-XLootGroup.revision  = tonumber((string.gsub("$Revision: 64 $", "^%$Revision: (%d+) %$$", "%1")))
+	roll_anchor = {
+		direction = 'up',
+		visible = true,
+		scale = 1.0,
+		x = UIParent:GetWidth() * .85,
+		y = UIParent:GetHeight() * .6
+	},
 
-function XLootGroup:OnInitialize()
-	self.db = XLoot:AcquireDBNamespace("XLootGroupDB")
-	self.defaults = {
-		extra = false,
-		buttonscale = 24,
-		nametrunc = 15,
-		lockbop = false,
-		faderows = true,
-		showrolls = true,
-	}
-	XLoot:RegisterDefaults("XLootGroupDB", "profile", self.defaults)
-end
+	track_all = true,
+	track_player_roll = false,
+	track_by_threshold = false,
+	track_threshold = 3,
 
-function XLootGroup:OpenMenu(frame)
-	self.dewdrop:Open(frame,
-		'children', function(level, value)
-				self.dewdrop:FeedAceOptionsTable(self.fullopts)
-			end,
-		'cursorX', true,
-		'cursorY', true
-	)
-end
+	expire_won = 20,
+	expire_lost = 10
+}
 
-function XLootGroup:OnEnable()
-	local db = self.db.profile
-	UIParent:UnregisterEvent("START_LOOT_ROLL")
-	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
-	self:RegisterEvent("START_LOOT_ROLL", "AddGroupLoot")
-	self:RegisterEvent("CANCEL_LOOT_ROLL", "CancelGroupLoot")
-	self:RegisterEvent("SpecialEvents_RollSelected", "RollSelect")
-	
-	if not AA.stacks.roll then
-		local stack = AA:NewAnchor("roll", "Loot Rolls", "Interface\\Buttons\\UI-GroupLoot-Dice-Up", db, self.dewdrop, nil, 'add')
-		XLoot:Skin(stack.frame)
-		stack.SizeRow = XLoot.SizeRow
-		stack.BuildRow = self.GroupBuildRow
-		stack.opts.threshold = nil
-		stack.opts.timeout = nil
-		stack.opts.extra = { 
-			type = "toggle", 
-			name = L["Show countdown text"], 
-			desc = L["Show small text beside the item indicating how much time remains"], 
-			get = function() if db.extra == nil then db.extra = true end return db.extra end,
-			set = function(v) db.extra = v if v and db.showrolls then db.showrolls = false end end,
-			order = 18 
-		}
-		stack.opts.showrolls = {
-			type = "toggle", 
-			name = L["Show current rolls"], 
-			desc = L["Show small text beside the item indicating how many have chosen what to roll"], 
-			get = function() return db.showrolls end,
-			set = function(v) db.showrolls = v if v and db.extra then db.extra = false end end,
-			order = 19
-		}
-		stack.opts.faderows = { 
-			type = "toggle", 
-			name = L["Fade out rows"], 
-			desc = L["Smoothly fade rows out once rolled on."], 
-			get = function() if db.faderows == nil then db.faderows = true end return db.faderows end,
-			set = function(v) db.faderows = v end,
-			order = 21
-		}
-		stack.opts.buttonsize = {
-			type = "range",
-			name = L["Roll button size"],
-			desc = L["Size of the Need, Greed, Disenchant and Pass buttons"], -- 3.3 added Disenchant
-			get = function() return db.buttonscale end,
-			set = function(v) db.buttonscale = v; XLootGroup:ResizeButtons() end,
-			min = 10,
-			max = 36,
-			step = 1,
-			order = 22
-		}
-		stack.opts.trunc = {
-			type = "range",
-			name = L["Trim item names to..."],
-			desc = L["Length in characters to trim item names to"],
-			get = function() return db.nametrunc end,
-			set = function(v) db.nametrunc = v end,
-			min = 4,
-			max = 100,
-			step = 2,
-			order = 23
-		}
-		stack.opts.lockbop = {
-			type = "toggle",
-			name = L["Prevent rolls on BoP items"],
-			desc = L["Locks the Need and Greed buttons for any BoP items"],
-			get = function() return db.lockbop end,
-			set = function(v) db.lockbop = v end,
-			order = 24
-		}
-		local stackdb = AA.stacks.roll.db
-		stackdb.timeout = 10000
-		stackdb.threshold = 10000
-		stack.clear = function(row)
-			row.rollID = nil
-			row.rollTime = nil
-			row.timeout = nil
-			row.link = nil
-			row.name = nil
-			row.clicked = nil
-			row.high = nil
-			row.need = 0
-			row.greed = 0
-			row.dis = 0 -- patch 3.3
-			row.pass = 0
-		end
-		
-		if not XLoot.opts.args.pluginspacer then
-			XLoot.opts.args.pluginspacer = {
-				type = "header",
-				order = 85
-			}
-		end
-		
-		XLoot.opts.args.group =  {
-			name = "|cFF44EE66"..L["XLoot Group"],
-			desc = L["A stack of frames for showing group loot information"],
-			icon = "Interface\\Buttons\\UI-GroupLoot-Dice-Up",
-			type = "group",
-			order = 87,
-			args = stack.opts
-		}
+---------------------------------------------------------------------------
+-- Skinning
+---------------------------------------------------------------------------
+local Skinner = {}
+LibStub('X-Skin'):SetupSkins(Skinner, {
+	row = {},
+	item = {},
+	anchor = {}
+})
+local skin
+local skin_default = {
+	name = ('|c2244dd22%s|r'):format('Smooth'),
+	texture = [[Interface\AddOns\XLootGroup\textures\border_smooth]],
+	bar_texture = [[Interface\AddOns\XLootGroup\textures\bar]],
+	color_mod = .85,
+	size = 14,
+	padding = 1,
+}
+local skins_base = {
+	anchor = { r = .6, g = .6, b = .6, a = .8 },
+	row = { gradient = false },
+	item = { backdrop = false }
+}
+addon.skin_default = skin_default
+
+local function CompileSkins()
+	local skins = Skinner._skins
+	if XLootFrame and XLootFrame.skin then
+		skin = XLootFrame.skin
+	else
+		skin = skin_default
 	end
-end
-
-function XLootGroup:OnDisable()
-	self:UnregisterAllEvents()
-	UIParent:RegisterEvent("START_LOOT_ROLL")
-	UIParent:RegisterEvent("CANCEL_LOOT_ROLL")
-end
-
-function XLootGroup:ResizeButtons()
-	local size = self.db.profile.buttonscale
-	for _, row in pairs(AA.stacks.roll.rows) do
-		row.bgreed:SetWidth(size)
-		row.bgreed:SetHeight(size)
-		row.bneed:SetWidth(size)
-		row.bneed:SetHeight(size)
-		row.bpass:SetWidth(size)
-		row.bpass:SetHeight(size)
-		XLoot:SizeRow(nil, row)
-	end
-end
-
-XLootGroup.rollbuttons = { 'bneed', 'bgreed', 'bdis', 'bpass' } -- patch 3.3 'bdis' added
-function XLootGroup:AddGroupLoot(item, time)
-	local stack = AA.stacks.roll
-	local row = AA:AddRow(stack)
-	row.rollID = item
-	row.rollTime = time
-	row.timeout = time
-	row.link = GetLootRollItemLink(item)
-	row.status:SetMinMaxValues(0, time)
-	local texture, name, count, quality, bop, cneed, cgreed, cdis = GetLootRollItemInfo(item) -- patch 3.3 'canNeed,canGreed,canDis' params added
-	XLoot:SetBindText(XLoot:GetBindOn(row.link), row.fsbind)
-	row.bind = bind
-	local length = self.db.profile.nametrunc
-	if string.len(name) > length then
-		name = string.sub(name, 1, length)..".."
-	end
-	row.name = ("%s%s%s|r"):format("|c"..select(4, GetItemQualityColor(quality)), count>1 and count.."x " or "", name)
-	SetItemButtonTexture(row.button, texture)
-	row.fsloot:SetText(row.name)
-	row:SetScript("OnUpdate", self:RollUpdateClosure(item, time, row, stack, id))
-	for k, v in pairs(XLootGroup.rollbuttons) do
-		local b = row[v]
-		UIFrameFadeRemoveFrame(b)
-		b.fadeInfo = nil
-		b:Show()
-		if v=='bpass' or (v=='bneed' and cneed) or (v=='bgreed' and cgreed) or (v=='bdis' and cdis) then
-			b:Enable()
-			SetDesaturation(b:GetNormalTexture(), false);
-		else
-			b:Disable()
-			SetDesaturation(b:GetNormalTexture(), true);
+	for which,subskin in pairs(skins) do
+		wipe(subskin)
+		for k,v in pairs(skin_default) do
+			subskin[k] = skin[k]
 		end
-		b:SetAlpha(1)
+		for k,v in pairs(skins_base[which]) do
+			subskin[k] = v
+		end
 	end
-	XLoot:QualityColorRow(row, quality)
-	XLoot:SizeRow(stack, row)
+	addon.skin = skin
 end
 
-function XLootGroup:RollUpdateClosure(item, time, row, stack, id)
-	local width, lastleft, niltext
-	return function()
-		if not width then
-			width = row.status:GetWidth()
-		end
-		local left = GetLootRollTimeLeft(item)
-		if left <= 0 then 
-			row:Hide()
-			AA:PopRow(AA.stacks.roll, row.id, nil, nil, 0)
-			return nil
-		end
-		if not lastleft then lastleft = left
-		elseif lastleft < left then return nil end
-		left = math.max(0, math.min(left, time))
-		row.status:SetValue(left)
-		if self.db.profile.extra then
-			row.fsextra:SetText(string.format("%.f ", left/1000))
-			niltext = false
-		elseif not niltext then
-			row.fsextra:SetText("")
-			niltext = true
-		end
-		local point = width*(left/time)+1
-		return row.status.spark:SetPoint("CENTER", row.status, "LEFT", point, 0)
+addon.bars = {}
+
+---------------------------------------------------------------------------
+-- Helpers
+---------------------------------------------------------------------------
+-- Since # doesn't work for non-contiguous tables
+local function count(table)
+	local i = 0
+	for k,v in pairs(table) do
+		i = i + 1
 	end
+	return i
 end
 
-function XLootGroup:CancelGroupLoot(id, timeout)
-	 for k, row in ipairs(AA.stacks.roll.rowstack) do
-	 	if row.rollID == id then
-			row:SetScript("OnUpdate", nil)
-			row.fsextra:SetText("")
-			if self.db.profile.faderows then
-				AA:PopRow(AA.stacks.roll, row.id, nil, nil, 5)
-				for i, v in pairs(XLootGroup.rollbuttons) do
-					row[v]:Disable()
-					if v ~= row.clicked then
-						local rowt = row[v]
-						UIFrameFadeOut(rowt, 1, 1, 0)
-						rowt.fadeInfo.finishedFunc = function() rowt:Hide()  end
-						rowt.fadeInfo.fadeHoldTime = 5
+-- Tack role icon on to player name and return class colors
+local white = { r = 1, g = 1, b = 1 }
+local dimensions = {
+	HEALER = '48:64',
+	DAMAGER = '16:32',
+	TANK = '32:48'
+}
+local string_format = string.format
+local function FancyPlayerName(name)
+	local c = RAID_CLASS_COLORS[select(2, UnitClass(name))] or white
+	local role = UnitGroupRolesAssigned(name)
+	if role ~= 'NONE' and opt.role_icon then
+		name = string_format('\124TInterface\\LFGFRAME\\LFGROLE:12:12:-1:0:64:16:%s:0:16\124t%s', dimensions[role], name)
+	end
+	return name, c.r, c.g, c.b
+end
+
+local types = {
+	need = NEED,
+	greed = GREED,
+	disenchant = ROLL_DISENCHANT,
+	pass = PASS
+}
+
+local rolls, canceled = { }, { }
+
+---------------------------------------------------------------------------
+-- Frame creation
+---------------------------------------------------------------------------
+local mouse_focus, CreateRollFrame
+do
+	-- Add a specific roll type to the tooltip
+	local function RollLines(players)
+		local me = UnitName('player')
+		local sf = string.format
+		for player, roll in pairs(players) do
+			local text, r, g, b, color = FancyPlayerName(player)
+			if roll ~= true then
+				if mouse_focus.winner == player then
+					color = '44ff22'
+				elseif player == me then
+					color = 'ff2244'
+				else
+					color = 'CCCCCC'
+				end
+				GameTooltip:AddLine(sf('   |cff%s%s|r  %s', color, roll, text), r, g, b)
+			else
+				GameTooltip:AddLine('   '..text, r, g, b)
+			end
+		end
+	end
+
+	-- Add roll status or summary to tooltip
+	local plist = {}
+	local function AddTooltipLines(self, clean, full)
+		local rolls_player = self.rolls_player
+		if next(rolls_player) then
+			local list
+			if clean then
+				GameTooltip:AddLine('.', 0, 0, 0)
+				-- Players who haven't rolled yet
+				-- Only shown when "clean", or showing on frame mouseover
+				if opt.show_undecided then
+					list = wipe(plist)
+					if GetNumRaidMembers() > 0 then
+						for i = 1, GetNumRaidMembers() do
+							local name = UnitName('raid'..i)
+							if not rolls_player[name] then
+								list[name] = true
+							end
+						end
+					else
+						for i = 1, GetNumPartyMembers() do
+							local name = UnitName('party'..i)
+							if not rolls_player[name] then
+								list[name] = true
+							end
+						end
+					end
+					if not rolls_player[me] then
+						list[me] = true
 					end
 				end
-			else
-				row:Hide()
-				AA:PopRow(AA.stacks.roll, row.id, nil, nil, 0)
 			end
-	 	end
-	 end
-end
-
-local function GetRoll(item)
-	for k, row in ipairs(AA.stacks.roll.rowstack) do
-		if row.link == item then
-			return row
+			local rolls_type = self.rolls_type
+			if count(rolls_type.need) > 0 then
+				GameTooltip:AddLine(NEED, .2, 1, .1)
+				RollLines(rolls_type.need)
+			end
+			if count(rolls_type.greed) > 0 then
+				GameTooltip:AddLine(GREED, .1, .2, 1)
+				RollLines(rolls_type.greed)
+			end
+			if count(rolls_type.disenchant) > 0 then
+				GameTooltip:AddLine(ROLL_DISENCHANT, 1, .2, 1)
+				RollLines(rolls_type.disenchant)
+			end
+			if count(rolls_type.pass) > 0 then
+				GameTooltip:AddLine(PASS, .7, .7, .7)
+				RollLines(rolls_type.pass)
+			end
+			if list and next(list) then
+				GameTooltip:AddLine(L.undecided, .7, .3, .2)
+				RollLines(list)
+			end
+			GameTooltip:Show()
+			return true
 		end
 	end
-	return nil
-end
 
-local function ClickRoll(row, which, id)
-	if which == 'bpass' or not (XLootGroup.db.profile.lockbop and row.bind == 'pickup') then
-		row.clicked = which
-		RollOnLoot(row.rollID, id)
+	---------------------------------------------------------------------------
+	-- Roll buttons
+	---------------------------------------------------------------------------
+	local CreateRollButton
+	do
+		local function OnClick(self)
+			RollOnLoot(self.parent.rollid, self.type)
+		end
+		
+		local function Toggle(self, status)
+			if status then
+				self:Enable()
+				self:SetAlpha(1)
+			else
+				self:Disable()
+				self:SetAlpha(.6)
+			end
+			SetDesaturation(self:GetNormalTexture(), not status)
+		end
+
+		local function OnEnter(self)
+			mouse_focus = self
+			GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT')
+			if not AddTooltipLines(self.parent) and self:IsEnabled() ~= 0 then
+				GameTooltip:SetText(self.label)
+				GameTooltip:Show()
+			end
+		end
+
+		local function OnLeave(self)
+			mouse_focus = nil
+			GameTooltip:Hide()
+		end
+
+		local function SetText(self, text)
+			if text and text > 0 then
+				self.text:SetText(text)
+			else
+				self.text:SetText()
+			end
+		end
+
+		local path = [[Interface\Buttons\UI-GroupLoot-%s-%s]]
+		function CreateRollButton(parent, roll, label, tex, to, x, y)
+			local b = CreateFrame('Button', nil, parent)
+			b:SetPoint('LEFT', to, 'RIGHT', x, y)
+			b:SetWidth(opt.roll_button_size)
+			b:SetHeight(opt.roll_button_size)
+			b:SetNormalTexture(path:format(tex, 'Up'))
+			if tex ~= 'Pass' then
+				b:SetHighlightTexture(path:format(tex, 'Highlight'))
+				b:SetPushedTexture(path:format(tex, 'Down'))
+			else
+				b:SetHighlightTexture(path:format(tex, 'Up'))
+				b:GetNormalTexture():SetVertexColor(0.8, 0.7, 0.7)
+				b:GetHighlightTexture():SetAlpha(0.5)
+			end
+			b.parent = parent
+
+			local text = b:CreateFontString(nil, 'OVERLAY')
+			text:SetFont([[Fonts\FRIZQT__.TTF]], 12, 'THICKOUTLINE')
+			text:SetPoint("CENTER", -x + 1, -y)
+			b.text = text
+
+			b:SetScript('OnEnter', OnEnter)
+			b:SetScript('OnLeave', OnLeave)
+			b:SetScript('OnClick', OnClick)
+			b:SetMotionScriptsWhileDisabled(true)
+			b.OnEnter = OnEnter
+			b.Toggle = Toggle
+			b.type = roll
+			b.label = label
+			b.SetText = SetText
+
+			return b
+		end
+	end
+
+	---------------------------------------------------------------------------
+	-- Roll frames
+	---------------------------------------------------------------------------
+	-- Events
+	local function OnEnter(self)
+		mouse_focus = self
+		GameTooltip:SetOwner(self.icon_frame, 'ANCHOR_TOPLEFT', 28, 0)
+		GameTooltip:SetHyperlink(self.link)
+		AddTooltipLines(self, true)
+		if IsShiftKeyDown() then
+			GameTooltip_ShowCompareItem()
+		end
+		if IsModifiedClick('DRESSUP') then
+			ShowInspectCursor()
+		else
+			ResetCursor()
+		end
+	end
+
+	local function OnLeave(self)
+		mouse_focus = nil
+		GameTooltip:Hide()
+	end
+
+	local function OnClick(self, button)
+		if IsControlKeyDown() then
+			DressUpItemLink(self.link)
+		elseif IsShiftKeyDown() then
+			ChatEdit_InsertLink(self.link)
+		end
+	end
+
+	-- Status bar update
+	local max, sf = math.max, string.format
+	local function BarUpdate(self)
+		local parent = self.parent
+		if parent.winner then
+			self.spark:Hide()
+			self:SetValue(0)
+			return
+		end
+		local time = GetTime()
+		if not parent.fake and GetLootRollTimeLeft(parent.rollid) == 0 then
+			local ended = parent.rollended
+			if ended then
+				if time - ended > 10 then
+					anchor:Pop(parent)
+				end
+			else
+				parent.rollended = time
+			end
+		end
+		local remaining = self.expires - time
+		if remaining < -4 then
+			anchor:Pop(parent)
+		else
+			local now, length = max(remaining, -1), self.length
+			self.spark:SetPoint('CENTER', self, 'LEFT', (now / length) * self:GetWidth(), 0)
+			self:SetValue(now)
+			self.spark:Show()
+			if opt.text_time then
+				parent.text_time:SetText(sf('%.0f', remaining))
+			end
+		end
+	end
+
+	local function Popped(self)
+		rolls[self.rollid] = nil
+	end
+
+	-- Create roll frame
+	function CreateRollFrame()
+		-- Base frame
+		local frame = CreateFrame('Button', nil, UIParent)
+		frame:SetFrameLevel(anchor:GetFrameLevel())
+		frame:SetHeight(24)
+		frame:SetWidth(addon.opt.roll_width)
+		frame:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
+		frame:SetScript('OnEnter', OnEnter)
+		frame:SetScript('OnLeave', OnLeave)
+		frame:SetScript('OnClick', OnClick)
+		frame.OnEnter = OnEnter
+		frame.Start = Start
+		frame.Popped = Popped
+		
+		-- Overlay (For skin border)
+		local overlay = CreateFrame('frame', nil, frame)
+		overlay:SetFrameLevel(frame:GetFrameLevel())
+		overlay:SetAllPoints()
+		Skinner:Skin(overlay, 'row')
+
+		-- Item icon (For skin border)
+		local icon_frame = CreateFrame('Frame', nil, frame)
+		icon_frame:SetPoint('LEFT', 0, 0)
+		icon_frame:SetWidth(28)
+		icon_frame:SetHeight(28)
+		Skinner:Skin(icon_frame, 'item')
+
+		-- Item texture
+		local icon = icon_frame:CreateTexture(nil, 'BACKGROUND')
+		icon:SetPoint('TOPLEFT', 3, -3)
+		icon:SetPoint('BOTTOMRIGHT', -3, 3)
+		icon:SetTexCoord(.07,.93,.07,.93)
+		
+		-- Timer bar
+		local bar = CreateFrame('StatusBar', nil, frame)
+		bar:SetFrameLevel(frame:GetFrameLevel())
+		local pad = skin.padding or skin_default.padding
+		bar:SetPoint('TOPRIGHT', -pad - 3, -pad - 3)
+		bar:SetPoint('BOTTOMRIGHT', -pad - 3, pad + 3)
+		bar:SetPoint('LEFT', icon_frame, 'RIGHT', -pad, 0)
+		bar:SetStatusBarTexture(skin.bar_texture or skin_default.bar_texture)
+		bar:SetScript('OnUpdate', BarUpdate)
+		bar.parent = frame
+		-- Reference bar for quick re-skinning when XLoot skin changes
+		table.insert(addon.bars, bar)
+		
+		local spark = bar:CreateTexture(nil, 'OVERLAY')
+		spark:SetWidth(14)
+		spark:SetHeight(38)
+		spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]])
+		spark:SetBlendMode('ADD')
+		bar.spark = spark
+
+		-- Bind text
+		local bind = icon_frame:CreateFontString(nil, 'OVERLAY')
+		bind:SetPoint('BOTTOM', 0, 1)
+		bind:SetFont([[Fonts\FRIZQT__.TTF]], 8, 'THICKOUTLINE')
+
+		-- Time text
+		local time = icon_frame:CreateFontString(nil, 'OVERLAY')
+		time:SetPoint('CENTER', 0, 2)
+		time:SetFont([[Fonts\FRIZQT__.TTF]], 12, 'OUTLINE')
+
+		-- Roll buttons
+		local n = CreateRollButton(frame, 1, NEED, 'Dice', icon_frame, 3, -1)
+		local g = CreateRollButton(frame, 2, GREED, 'Coin', n, 0, -2)
+		local d = CreateRollButton(frame, 3, ROLL_DISENCHANT, 'DE', g, 0, 2)
+		local p = CreateRollButton(frame, 0, PASS, 'Pass', d, 0, 2)
+
+		-- Roll status text
+		local status = frame:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+		status:SetHeight(16)
+		status:SetJustifyH('LEFT')
+		if opt.text_outline then
+			local f, s = status:GetFont()
+			status:SetFont(f, s, 'OUTLINE')
+		end
+		status:SetPoint('LEFT', icon_frame, 'RIGHT', 1, 0)
+		status:SetPoint('RIGHT', p, 'RIGHT', 2, 0)
+
+		-- Loot name/link
+		local loot = frame:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+		loot:SetHeight(16)
+		loot:SetJustifyH('LEFT')
+		if addon.opt.text_outline then
+			local f, s = loot:GetFont()
+			loot:SetFont(f, s, 'OUTLINE')
+		end
+		loot:SetPoint('LEFT', p, 'RIGHT', 3, -1)
+		loot:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
+
+		-- Frame references
+		frame.need, frame.greed, frame.disenchant, frame.pass = n, g, d, p
+		frame.text_bind = bind
+		frame.text_status = status
+		frame.text_loot = loot
+		frame.text_time = time
+		frame.overlay = overlay
+		frame.bar = bar
+		frame.icon = icon
+		frame.icon_frame = icon_frame
+		frame.Update = UpdateRow
+
+		-- Roll data
+		frame.rolls_player = {}
+		frame.rolls_type = {
+			need = {},
+			greed = {},
+			disenchant = {},
+			pass = {}
+		}
+
+		return frame
 	end
 end
 
--- Group loot - Roll made (Need - x, Greed - x, Dis - x) -- patch 3.3 Dis added.
-function XLootGroup:RollSelect(ty, who, item)
-	if not self.db.profile.showrolls then return nil end
-	local row = GetRoll(item)
-	if not row then return nil end
-	
-	row[ty] = row[ty] and row[ty] + 1 or 1
-	local need = row.need > 0 and ('|cffff1111%sn'):format(tostring(row.need)) or ''
-	local greed = row.greed > 0 and ('|cff11ff11%sg'):format(tostring(row.greed)) or ''
-	local dis = row.dis > 0 and ('|cff1111ff%sd'):format(tostring(row.dis)) or '' -- patch 3.3 dis added.
-	local pass = row.pass > 0 and ('|cffaaaaaa%sp'):format(tostring(row.pass)) or ''
-	row.fsextra:SetText(("%s%s%s%s  "):format(need, greed, dis, pass)) -- patch 3.3 dis.
+local string_format = string.format
+local function UpdateRollStatus(frame)
+	if frame.winner then return end
+	local r, rt = frame.rolls_player, frame.rolls_type
+
+	local n, g, d, p, num, rtype = count(rt.need), count(rt.greed), count(rt.disenchant), count(rt.pass), 0
+
+	if n > 0 then
+		num = n
+		rtype = 'need'
+	elseif g > 0 or d > 0 then
+		num = g + d
+		rtype = 'greed'
+	elseif p > 0 then
+		num = p
+		rtype = 'pass'
+	end
+
+	if not rtype then
+		return
+	end
+
+	local r, g, b, mytype = .7, .7, .7, r[me]
+	if mytype == rtype or (mytype == 'disenchant' and rtype == 'greed') then
+		r, g, b = .2, 1, .1
+	elseif mytype and mytype ~= 'pass' then
+		r, g, b = 1, .2, .1
+	end
+	frame.text_status:SetText(string_format('%s: %s', types[rtype], num))
+	frame.text_status:SetTextColor(r, g, b)
 end
 
-
-function XLootGroup:GroupBuildRow(stack, id)
-	local row = XLoot:GenericItemRow(stack, id, AA)
-	local rowname = row:GetName()
-	
-	local bneed = CreateFrame("Button", rowname.."NeedButton", row)
-	bneed:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Up")
-	bneed:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Highlight")
-	bneed:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Down")
-	bneed:SetScript("OnClick", function() ClickRoll(row, 'bneed', 1) end)
-	bneed:SetScript("OnEnter", function() GameTooltip:SetOwner(bneed, "ANCHOR_RIGHT"); GameTooltip:SetText(NEED) end)
-	bneed:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	local bgreed = CreateFrame("Button", rowname.."GreedButton", row)
-	bgreed:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Up")
-	bgreed:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Highlight")
-	bgreed:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Down")
-	bgreed:SetScript("OnClick", function() ClickRoll(row, 'bgreed', 2) end)
-	bgreed:SetScript("OnEnter", function() GameTooltip:SetOwner(bgreed, "ANCHOR_RIGHT"); GameTooltip:SetText(GREED) end)
-	bgreed:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	local bdis = CreateFrame("Button", rowname.."DisButton", row) -- 3.3 patch dis button section added.
-	bdis:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-DE-Up")
-	bdis:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-DE-Highlight")
-	bdis:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-DE-Down")
-	bdis:SetScript("OnClick", function() ClickRoll(row, 'bdis', 3) end)
-	bdis:SetScript("OnEnter", function() GameTooltip:SetOwner(bdis, "ANCHOR_RIGHT"); GameTooltip:SetText(ROLL_DISENCHANT) end)
-	bdis:SetScript("OnLeave", function() GameTooltip:Hide() end) -- 3.3 dis button end
-	local bpass = CreateFrame("Button", rowname.."PassButton", row)
-	bpass:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Up")
-	bpass:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Down")
-	bpass:SetScript("OnClick", function() ClickRoll(row, 'bpass', 0) end)
-	bpass:SetScript("OnEnter", function() GameTooltip:SetOwner(bpass, "ANCHOR_RIGHT"); GameTooltip:SetText(PASS) end)
-	bpass:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	
-	local status = CreateFrame("StatusBar", rowname.."StatusBar", row)
-	status:SetMinMaxValues(0, 60000)
-	status:SetValue(0)
-	status:SetStatusBarTexture("Interface\\AddOns\\XLootGroup\\DarkBottom.tga")
-	
-	local spark = row:CreateTexture(nil, "OVERLAY")
-	spark:SetTexture("Interface\\CastingBar\\UI-CastingBar-Spark")
-	spark:SetBlendMode("ADD")
-	status.spark = spark
-	
-	local bind = row:CreateFontString(rowname.."Bind")
-	bind:SetFont("Fonts\\FRIZQT__.TTF", 11, "THICKOUTLINE")
-	
-	row:SetScale(1.2)
-	
-	local size = XLootGroup.db.profile.buttonscale
-	bneed:SetWidth(size)
-	bneed:SetHeight(size)
-	bgreed:SetWidth(size)
-	bgreed:SetHeight(size)
-	bdis:SetWidth(size) -- 3.3 patch
-	bdis:SetHeight(size) -- 3.3 patch
-	bpass:SetWidth(size)
-	bpass:SetHeight(size)
-	
-	local level = row.overlay:GetFrameLevel()+1
-	bneed:SetFrameLevel(level)
-	bgreed:SetFrameLevel(level)
-	bdis:SetFrameLevel(level) -- 3.3 patch
-	bpass:SetFrameLevel(level)
-	
-	bneed:SetPoint("LEFT", row.button, "RIGHT", 5, -1)
-	bgreed:SetPoint("LEFT", bneed, "RIGHT", 0, -1) 
-	bdis:SetPoint("LEFT", bgreed, "RIGHT", 0, 1) -- 3.3 patch add 'bdis' button (disenchant)
-	bpass:SetPoint("LEFT", bdis, "RIGHT", 0, 2.2) -- 3.3 patch shift anchoring to 'bdis'
-	row.fsplayer:ClearAllPoints()
-	bind:SetPoint("LEFT", bpass, "RIGHT", 3, 1)
-	row.fsloot:SetPoint("LEFT", bind, "RIGHT", 0, .12)
-	status:SetFrameLevel(status:GetFrameLevel()-1)
-	status:SetStatusBarColor(.8, .8, .8, .9)
-	status:SetPoint("TOP", row, "TOP", 0, -4)
-	status:SetPoint("BOTTOM", row, "BOTTOM", 0, 4)
-	status:SetPoint("LEFT", row.button, "RIGHT", -1, 0)
-	status:SetPoint("RIGHT", row, "RIGHT", -4, 0)
-	
-	row.fsextra:SetVertexColor(.8, .8, .8, .8)
-	
-	spark:SetWidth(12)
-	spark:SetHeight(status:GetHeight()*2.44)
-
-	XLoot:ItemButtonWrapper(row.button, 8, 8, 20)
-	
-	row.bneed = bneed
-	row.bgreed = bgreed
-	row.bdis = bdis -- 3.3 patch
-	row.bpass = bpass
-	row.need = 0
-	row.greed = 0
-	row.dis = 0 -- 3.3 patch
-	row.pass = 0
-	row.fsbind = bind
-	row.status = status
-	row.candismiss = false
-	row.sizeoffset = 52
-	return row
+---------------------------------------------------------------------------
+-- Roll tracking
+---------------------------------------------------------------------------
+local math_max = math.max
+local function winroll(t)
+	local win = 0
+	for k,v in pairs(t) do
+		win = math_max(win, type(v) == 'number' and v or 0)
+	end
+	return win
 end
+
+local string_format = string.format
+local function rollevent(event, chat_event, ...)
+	local link = ...
+	local name = GetItemInfo(link)
+
+	-- Roll type selected (First frame without selection by player)
+	local frame
+	if event == 'selected' then
+		local item, who, rtype = ...
+		-- Update roll data
+		for k,v in pairs(rolls) do
+			if v.link == item and not v.rolls_player[who] then
+				frame = v
+				frame.rolls_player[who] = rtype
+				frame.rolls_type[rtype][who] = true
+
+				if canceled[frame.rollid] then
+					UpdateRollStatus(frame)
+				else
+					frame[rtype]:SetText(count(frame.rolls_type[rtype]))
+				end
+				if mouse_focus == frame[rtype] then
+					frame[rtype]:OnEnter()
+				end
+				break
+			end
+		end
+
+	-- All pass (First frame without any selections but pass)
+	elseif event == 'allpass' then
+		local item = ...
+		for k,v in pairs(rolls) do
+			if v.link == item and count(v.rolls_type.need) == 0 and count(v.rolls_type.greed) == 0 and count(v.rolls_type.disenchant) == 0 then
+				frame = v
+				frame.winner = true
+				frame.text_status:SetText(string_format('%s: %s', PASS, ALL))
+				frame.text_status:SetTextColor(.7, .7, .7)
+				frame.bar.expires = GetTime()
+				anchor:Expire(frame, opt.expire_lost)
+				break
+			end
+		end
+
+	-- Rolled (Only store roll)
+	elseif event == 'rolled' then
+		local item, who, rtype, roll = ...
+		for k,v in pairs(rolls) do
+			if v.link == item and v.rolls_player[who] == rtype then
+				frame = v
+				frame.rolls_type[rtype][who] = roll
+				break
+			end
+		end
+
+	-- Won (frame with matching winner roll)
+	elseif event == 'won' then
+		local item, who = ...
+		-- Sigh
+		local ftemp
+		for k,v in pairs(rolls) do
+			if v.link == item then
+				ftemp = v
+				local rtype = v.rolls_player[who]
+				if rtype and rtype ~= 'pass' then
+					local rt = v.rolls_type
+					local roll = rt[rtype][who]
+					local n, g, d = winroll(rt.need), winroll(rt.greed) or winroll(rt.disenchant)
+					if rtype == 'need' then
+						if winroll(rt.need) == roll then
+							frame = v
+							break
+						end
+					else
+						if winroll(rt.greed) == roll or winroll(rt.disenchant) == roll then
+							frame = v
+							break
+						end
+					end
+				end
+			end
+		end
+		-- Roll that we didn't catch any events for but matched
+		if ftemp and not frame then
+			frame = ftemp
+			frame.rolls_player[who] = true
+			frame.rolls_type.pass[who] = 0
+		end
+		if frame then
+			frame.winner = who
+			local player, r, g, b = FancyPlayerName(who)
+			if opt.win_icon then
+				local win_type = frame.rolls_player[who]
+				if win_type == 'need' then
+					player = [[|TInterface\Buttons\UI-GroupLoot-Dice-Up:16:16:-1:-1|t]]..player
+				elseif win_type == 'greed' then
+					player = [[|TInterface\Buttons\UI-GroupLoot-Coin-Up:16:16:-1:-2|t]]..player
+				elseif win_type == 'disenchant' then
+					player = [[|TInterface\Buttons\UI-GroupLoot-DE-Up:16:16:-1:-1|t]]..player
+				end
+			end
+			frame.text_status:SetText(player)
+			frame.text_status:SetTextColor(r, g, b)
+			frame.bar.expires = GetTime()
+			anchor:Expire(frame, who == me and opt.expire_won or opt.expire_lost)
+		end
+	end
+	-- Refresh tooltip
+	if frame and mouse_focus == frame then
+		frame:OnEnter()
+	end
+end
+
+---------------------------------------------------------------------------
+-- Group events
+---------------------------------------------------------------------------
+local function start(id, length, ongoing)
+	if id and canceled[id] then return end -- Failsafe?
+	
+	local icon, name, count, quality, bop, need, greed, de = GetLootRollItemInfo(id)
+	local link = GetLootRollItemLink(id)
+	local r, g, b = GetItemQualityColor(quality)
+
+	local start = length
+	if ongoing then
+		if quality == 2 then
+			length = 60000
+		else
+			length = 180000
+		end
+	end
+	length, start = length/1000, start/1000
+
+	local frame = anchor:Push()
+	rolls[id] = frame
+
+	frame.need:Show()
+	frame.greed:Show()
+	frame.disenchant:Show()
+	frame.pass:Show()
+	frame.text_status:Hide()
+	frame.text_status:SetText()
+	if opt.text_time then
+		frame.text_time:Show()
+	else
+		frame.text_time:Hide()
+	end
+
+	frame.need:Toggle(need)
+	frame.greed:Toggle(greed)
+	frame.disenchant:Toggle(de)
+
+	frame.need:SetText()
+	frame.greed:SetText()
+	frame.pass:SetText()
+	frame.disenchant:SetText()
+
+	local bar = frame.bar
+	bar.length = length
+	bar.expires = GetTime() + start
+
+	frame.link = link
+	frame.rollid = id
+	frame.rollended = nil
+	frame.quality = quality
+	frame.expires = bar.expires
+	frame.winner = nil
+	wipe(frame.rolls_player)
+	for k,v in pairs(frame.rolls_type) do
+		wipe(v)
+	end
+
+	frame.text_bind:SetText(bop and '|cffff4422BoP' or '')
+	frame.text_loot:SetText(name)
+
+	frame.text_loot:SetVertexColor(r, g, b)
+	frame.overlay:SetBorderColor(r, g, b)
+	frame.icon_frame:SetBorderColor(r, g, b)
+	bar:SetStatusBarColor(r, g, b, .7)
+	frame.icon:SetTexture(icon)
+
+	bar:SetMinMaxValues(0, length)
+	bar:SetValue(start)
+
+
+	return frame
+end
+
+local function cancel(id)
+	canceled[id] = true
+
+	for k,v in pairs(anchor.children) do
+		if v.rollid == id then
+			local frame = v
+			if opt.track_all or 
+			(opt.track_player_roll and frame.rolls_player[me] and frame.rolls_player[me] ~= 'pass') or
+			(opt.track_by_threshold and frame.quality >= opt.track_threshold) then
+				frame.need:Hide()
+				frame.greed:Hide()
+				frame.disenchant:Hide()
+				frame.pass:Hide()
+				frame.text_status:Show()
+				UpdateRollStatus(frame)
+			else
+				anchor:Pop(frame)
+			end
+			break
+		end
+	end
+end
+
+-- To avoid a OnUpdate for every mouseoverable frame, use modifier events
+local function modifier(self, modifier, state)
+	if mouse_focus and MouseIsOver(mouse_focus) and mouse_focus.OnEnter then
+		mouse_focus:OnEnter()
+	end
+end
+
+---------------------------------------------------------------------------
+-- AddOn setup and events
+---------------------------------------------------------------------------
+LibStub('X-Profile'):Setup(addon, 'XLootGroup_Options')
+function addon:OnProfileChanged(options)
+	opt = options
+	addon.opt = opt
+end
+
+-- Update skins when XLoot skin changes
+function addon:SkinUpdate()
+	CompileSkins()
+	Skinner:Reskin()
+	local pad = skin.padding or skin_default.padding
+	local tex = skin.bar_texture or skin_default.bar_texture
+	local p, n = pad + 3, -pad - 3
+	for _,bar in pairs(addon.bars) do
+		bar:ClearAllPoints()
+		bar:SetPoint('TOPRIGHT', n, n)
+		bar:SetPoint('BOTTOMRIGHT', n, p)
+		bar:SetPoint('LEFT', bar.parent.icon_frame, 'RIGHT', -pad, 0)
+		bar:SetStatusBarTexture(tex)
+		local link = bar.parent.link
+		if link then
+			local r, g, b = GetItemQualityColor(select(3, GetItemInfo(link)))
+			bar.parent.overlay:SetBorderColor(r, g, b)
+			bar.parent.icon_frame:SetBorderColor(r, g, b)
+		end
+	end
+
+end
+
+-- Move anchors when scale changes
+function addon:ConfigSave()
+	local mod = anchor:GetScale() / anchor.data.scale
+	anchor:Scale(anchor.data.scale)
+	anchor.data.x = anchor.data.x * mod
+	anchor.data.y = anchor.data.y * mod
+	anchor:Position()
+	anchor:Restack()
+	for _,frame in pairs(anchor.children) do
+		frame:SetWidth(opt.roll_width)
+		frame.need:SetWidth(opt.roll_button_size)
+		frame.need:SetHeight(opt.roll_button_size)
+		frame.greed:SetWidth(opt.roll_button_size)
+		frame.greed:SetHeight(opt.roll_button_size)
+		frame.disenchant:SetWidth(opt.roll_button_size)
+		frame.disenchant:SetHeight(opt.roll_button_size)
+		frame.pass:SetWidth(opt.roll_button_size)
+		frame.pass:SetHeight(opt.roll_button_size)
+	end
+end
+
+function addon:OnLoad()
+	XStack = LibStub('X-Stack')
+
+	-- Create Roll anchor
+	anchor = XStack:CreateStaticStack(CreateRollFrame, addon.L.anchor, opt.roll_anchor)
+	anchor:SetFrameLevel(7)
+	anchor:Scale(opt.roll_anchor.scale)
+	addon.anchor = anchor
+
+	-- Expire rolls
+	local pip_frame = CreateFrame('Frame')
+	local timer = 0
+	pip_frame:SetScript('OnUpdate', function(self, elapsed)
+		if timer < 1 then
+			timer = timer + elapsed
+		else
+			timer = 0
+			local time = GetTime()
+			-- Extend expiration for mouseovered frames
+			if mouse_focus and mouse_focus.aexpire and (mouse_focus.aexpire - time) < 5 then
+				mouse_focus.aexpire = time + 5
+			end
+			for i, frame in ipairs(anchor.expiring) do
+				if frame.aexpire and time > frame.aexpire then
+					anchor:Pop(frame)
+					table.remove(anchor.expiring, i)
+				end
+			end
+			if count(anchor.expiring) == 0 then
+				self:Hide()
+			end
+		end
+	end)
+	anchor.expiring = {}
+	function anchor:Expire(frame, time)
+		pip_frame:Show()
+		table.insert(self.expiring, frame)
+		frame.aexpire = GetTime() + time
+	end
+	
+	-- Register events
+	anchor:RegisterEvent('START_LOOT_ROLL')
+	anchor:RegisterEvent('CANCEL_LOOT_ROLL')
+	anchor:RegisterEvent('MODIFIER_STATE_CHANGED')
+	anchor:SetScript('OnEvent', function(_, e, ...)
+		if e == 'MODIFIER_STATE_CHANGED' then
+			modifier(...)
+		elseif e == 'START_LOOT_ROLL' then
+			start(...)
+		elseif e == 'CANCEL_LOOT_ROLL' then
+			cancel(...)
+		end
+	end)
+
+	UIParent:UnregisterEvent("START_LOOT_ROLL")
+	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
+
+	LibStub('LootEvents'):RegisterGroupCallback(rollevent)
+	LibStub('X-Config'):Setup(addon, 'XLootGroupOptionPanel')
+	
+	-- Register as XLoot plugin for skin callback
+	if XLootFrame and XLootFrame.RegisterPlugin then
+		XLootFrame:RegisterPlugin(addon)
+	end
+
+	-- Compile XSkin skin sets
+	CompileSkins()
+
+	-- Skin anchor
+	Skinner:Skin(anchor, 'row')
+	anchor:SetBorderColor(.4, .4, .4)
+
+	-- Find and show active rolls
+	if (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0) and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
+		for i=1,300 do
+			local time = GetLootRollTimeLeft(i)
+			if time > 0 then
+				start(i, time, true)
+			end
+		end
+	end
+end
+
+-- Slash command for toggling anchors
+local function option_handler(msg)
+	if msg == 'reset' then
+		addon:ResetProfile()
+		addon.anchor:Position()
+	elseif msg == 'opt' or msg == 'options' then
+		addon:ShowOptions()
+	else
+		if anchor:IsShown() then
+			anchor:Hide()
+		else
+			anchor:Show()
+		end
+	end
+end
+SLASH_XLOOTGROUP1 = '/xlg'
+SLASH_XLOOTGROUP2 = '/xlootgroup'
+SlashCmdList['XLOOTGROUP'] = option_handler
+

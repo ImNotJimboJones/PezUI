@@ -91,6 +91,7 @@ locales.frFR["button_close"] = "Fermer" -- Needs review
 locales.frFR["button_link"] = "Lien" -- Needs review
 locales.frFR["linkall_threshold_missed"] = "Aucun butin ne rencontre votre seuil de qualité" -- Needs review
 locales.frFR.config = {
+	font_size_loot = "Taille de police du butin", -- Needs review
 	frame_alpha = "Transparence du cadre", -- Needs review
 	frame_alpha_high = "Opaque", -- Needs review
 	frame_alpha_low = "Transparent", -- Needs review
@@ -98,9 +99,18 @@ locales.frFR.config = {
 	frame_scale_high = "Large", -- Needs review
 	frame_scale_low = "Petite", -- Needs review
 	frame_width = "Largeur de cadre", -- Needs review
+	frame_width_automatic = "Étendre auto. le cadre", -- Needs review
+	linkall_channel = "Canal de discussion par défaut pour les liens", -- Needs review
 	loot_alpha = "Transparence d'emplacement", -- Needs review
 	loot_alpha_high = "Opaque", -- Needs review
 	loot_alpha_low = "Transparent", -- Needs review
+	loot_color_backdrop = "Couleur de fond du butin", -- Needs review
+	loot_color_border = "Couleur de bordure du butin", -- Needs review
+	loot_color_gradient = "Gradient de couleur du butin", -- Needs review
+	loot_highlight = "Emplacements en surbrillance au survol", -- Needs review
+	loot_texts_bind = "Afficher le type de lien du butin", -- Needs review
+	loot_texts_info = "Afficher des informations détaillées", -- Needs review
+	quality_color_loot = "Colorer les bordures du butin selon la qualité", -- Needs review
 	skin = "Skin", -- Needs review
 	skin_default = "XLoot : défaut", -- Needs review
 	skin_legacy = "XLoot : héritage", -- Needs review
@@ -115,15 +125,25 @@ locales.frFR.config_panels = {
 	options = "Options", -- Needs review
 }
 
-locales.deDE["button_close"] = "Schliessen" -- Needs review
+locales.deDE["bind_on_equip_short"] = "BoE" -- Needs review
+locales.deDE["bind_on_pickup_short"] = "BoP" -- Needs review
+locales.deDE["bind_on_use_short"] = "BoU" -- Needs review
+locales.deDE["button_close"] = "Schliessen"
+locales.deDE["button_link"] = "Link" -- Needs review
 locales.deDE.config = {
-	frame_scale_high = "Groß", -- Needs review
-	frame_scale_low = "Klein", -- Needs review
+	frame_scale_high = "Groß",
+	frame_scale_low = "Klein",
+	loot_alpha_low = "Transparent", -- Needs review
+	skin = "Skin", -- Needs review
+	skin_default = "XLoot: Standard", -- Needs review
+	skin_legacy = "XLoot: Legacy", -- Needs review
 }
 locales.deDE.config_groups = {
-	appearance = "Aussehen", -- Needs review
+	appearance = "Aussehen",
+	general = "Allgemein", -- Needs review
 }
 locales.deDE.config_panels = {
+	options = "Optionen", -- Needs review
 }
 
 locales.koKR.config = {
