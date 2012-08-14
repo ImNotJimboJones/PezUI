@@ -1,0 +1,52 @@
+tag v4.0.0-beta31
+dce722750742e377f052251ea7a359faa1bb7ef2
+Shefki <shefki@shefki.org>
+2012-07-29 14:22:52 -0700
+
+Tagging as v4.0.0-beta31
+
+
+--------------------
+
+Shefki:
+	- Build the full sorting table for the group otherwise filtered frames won't work. (e.g. filtered by raid group)
+	I had an hackish way of doing it in there before that was a little
+	faster but it can't work now that I fixed the sorting.
+	- Remove debug code that whines about things being wrong when they aren't since I've made the code much smarter than this auto-detection can deal with.
+	- Sorting with a partial raid in config mode is now consistent with how you'd expect it to behave.
+	Unfilled slots are always considered to be towards the end of the sort
+	(higher index, higher group number, a class that is last on the sort
+	order, and a name that's alphabetically last).
+	- Fix duplicates frames for real players in config mode when in a partially filled raid with sorting by group descending.
+	- Fix an error with group sorted raid frames.
+	- Rename GroupHeader:AssignFakeUnitIDs to GroupHeader:ApplyConfigModeState.
+	No functional change just make the code make more sense now that
+	function does a lot more than just set unit ids.
+	- Fix Bug #864 - Group Config Mode Doesn't Work.
+	Major refactoring of the way config mode works.  It should be faster,
+	though it will still take some time if you go straight into raid40 mode
+	without any of the frames existing.  However, subsequent changes in
+	config mode states after that should be pretty quick.  One side
+	effect of this is that the farmes won't immediately have the fake
+	units assigned but will pick them up very shortly after.
+	
+	(Note to self: This commit differs from the anchor branch commit by the
+	removal of changes to the new/remove config options for units and by the
+	removal of logic in SwapGroupTemplate to check that the group is a pet
+	group)
+	Conflicts:
+		GroupHeader.lua
+		Options/Units.lua
+	- Fix previous patch to put variables inside the function and make _ be local.
+	- Remove an unused parameter on get_group_roster_info().
+	- Check frame.unit is set before using it in PvPIcon module.
+	- Switch to using the proper constants for a couple hardcoded values.
+	(Note to self: Difference here between anchors branch and master in
+	RefixSizeAndPosition)
+	Conflicts:
+		GroupHeader.lua
+	- Change the GetNumTalentTabs fix to the style I prefer. This style doesn't litter the special code all over the file.
+	- Put line endings back to Unix line endings on Filter.lua
+	- Fix bug #982 preventing Other filter from catching uncategorized auras.
+Benjamin Staneck:
+	- GetNumTalentTabs → GetNumSpecializations for MoP

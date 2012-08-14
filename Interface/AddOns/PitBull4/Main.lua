@@ -234,7 +234,7 @@ PitBull4.expect = _G.PitBull4_expect
 _G.PitBull4_expect = nil
 local expect = PitBull4.expect
 
-PitBull4.version = "v4.0.0-beta30"
+PitBull4.version = "v4.0.0-beta31"
 if PitBull4.version:match("@") then
 	PitBull4.version = "Development"
 end
