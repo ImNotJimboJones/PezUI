@@ -1,0 +1,61 @@
+------------------------------------------------------------------------
+r417 | kagaro | 2012-07-29 16:10:25 +0000 (Sun, 29 Jul 2012) | 1 line
+Changed paths:
+   A /tags/1.12 (from /trunk:416)
+
+Tagging as 1.12
+------------------------------------------------------------------------
+r416 | kagaro | 2012-07-29 16:08:11 +0000 (Sun, 29 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/kgPanels.lua
+
+When advance features are disabled for textures we disable the enhancements for that frame. The default is disabled
+------------------------------------------------------------------------
+r414 | kagaro | 2012-07-23 11:00:13 +0000 (Mon, 23 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/kgPanels.lua
+   M /trunk/kgPanels.toc
+
+made some changes for those who decided to disembed and lose functionality
+------------------------------------------------------------------------
+r412 | kagaro | 2012-07-15 12:38:17 +0000 (Sun, 15 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/kgPanels.lua
+
+fixes for backdrop enhancements on live
+------------------------------------------------------------------------
+r411 | kagaro | 2012-07-15 12:04:30 +0000 (Sun, 15 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/embeds.xml
+
+fixed ebeds.xml
+------------------------------------------------------------------------
+r410 | kagaro | 2012-07-15 11:53:38 +0000 (Sun, 15 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/kgPanelsConfig/ArtHelper.lua
+   M /trunk/kgPanelsConfig/kgPanelsConfig.lua
+
+Fixes for disembedded users using last tagged ace3 lib and not alpha included in kgPanels
+------------------------------------------------------------------------
+r409 | kagaro | 2012-07-14 14:57:12 +0000 (Sat, 14 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/embeds.xml
+   M /trunk/kgPanels.lua
+   M /trunk/kgPanelsConfig/PanelHelper.lua
+
+Experimental support for show/hide specific segments of the border, only brief testing on live and beta
+------------------------------------------------------------------------
+r407 | kagaro | 2012-07-09 15:27:35 +0000 (Mon, 09 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/kgPanels.lua
+
+updated the fetc art command
+------------------------------------------------------------------------
+r406 | kagaro | 2012-07-09 11:27:55 +0000 (Mon, 09 Jul 2012) | 1 line
+Changed paths:
+   M /trunk/kgPanels.lua
+
+Changed Interface\None to empty string, this works on live and on beta for a blank edgefile
+------------------------------------------------------------------------

@@ -846,6 +846,7 @@ function dataobj.OnEnter(self) -- When they enter
 		local myFont = CreateFont("tipFontTemp3");
 		myFont:SetFont(LSM:Fetch("font",tipFont), tipFontSize)
 		tooltip:SetFont(myFont)
+		if (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then tooltip:SetScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 	else -- Otherwise, make it
 		tooltip = LibQTip:Acquire("WhisperWhisper", 1, "LEFT")
 		tooltip:SetBackdropColor(0,0,0,1)
@@ -854,6 +855,7 @@ function dataobj.OnEnter(self) -- When they enter
 		local myFont = CreateFont("tipFontTemp3");
 		myFont:SetFont(LSM:Fetch("font",tipFont), tipFontSize)
 		tooltip:SetFont(myFont)
+		if (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then tooltip:SetScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 	end
 	if BWW_NOTIP or inCombat then
 		Broker_WhisperWhisper:WhisperHover(tooltip)

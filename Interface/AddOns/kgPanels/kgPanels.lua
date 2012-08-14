@@ -3,6 +3,7 @@ All Hello Kitty intellectual property and materials are © Sanrio
 ]]
 local kgPanels = LibStub("AceAddon-3.0"):NewAddon("kgPanels", "AceConsole-3.0")
 local LSM = LibStub:GetLibrary("LibSharedMedia-3.0",true)
+local BD = LibStub:GetLibrary("LibBackdrop-1.0",true)
 --[[
 	some defaults
 ]]
@@ -40,6 +41,19 @@ local defaultPanelOptions = {
 	border_color = {r=1,g=1,b=1,a=1},
 	border_texture = "Blizzard Tooltip",
 	border_edgeSize = 16,
+	border_advanced = {
+		enable = false,
+		show ={
+			TOP = true,
+			BOT = true,
+			LEFT = true,
+			RIGHT = true,
+			TOPLEFTCORNER = true,
+			TOPRIGHTCORNER = true,
+			BOTLEFTCORNER = true,
+			BOTRIGHTCORNER = true,
+		}
+	},
 	bg_blend = "BLEND",
 	bg_style = "SOLID",
 	bg_texture = "Solid",
@@ -106,11 +120,11 @@ end
 local dbDefaults = {
 	global = {
 		artwork = {
-			[l_None]  = "Interface\\None",
+			[l_None]  = "",
 			["Solid"] = "Interface\\Buttons\\WHITE8x8",
 		},
 		border = {
-			[l_None]    = "Interface\\None",
+			[l_None]    = false,
 			[l_Tooltip] = "Interface\\Tooltips\\UI-Tooltip-Border",
 			[l_Dialog]  = "Interface\\DialogFrame\\UI-DialogBox-Border"
 		},
@@ -338,6 +352,9 @@ end
 
 local function fetchArt(art,artType)
 	if not art then return nil end
+	if art == l_None then
+		return nil
+	end
 	if kgPanels.db.global.artwork[art] and artType == "background"then
 		return kgPanels.db.global.artwork[art]
 	elseif kgPanels.db.global.border[art] and artType == "border" then
@@ -347,7 +364,9 @@ local function fetchArt(art,artType)
 	elseif LSM and LSM.Fetch and LSM:Fetch("background",art,true) and artType == "background" then
 		return LSM:Fetch("background",art,true)
 	end
-	kgPanels:Print("Failed to find artwork "..art.." type "..artType)
+	if art ~= l_None then
+		kgPanels:Print("Failed to find artwork "..art.." type "..artType)
+	end
 	return nil
 end
 local function fetchFont(font)
@@ -374,6 +393,9 @@ local function getFrame()
 		frame.bg = frame:CreateTexture(nil, "PARENT")
 		frame.text = frame:CreateFontString(nil, "OVERLAY");
 		panelIndex = panelIndex + 1
+		if BD then
+			BD:EnhanceBackdrop(frame)
+		end
 	end
 	frame:SetScript("OnEvent",nil)
 	frame:SetScript("OnUpdate",nil)
@@ -564,6 +586,26 @@ function kgPanels:UpgradeDB()
 		end
 		self.db.global.version = 5
 	end
+	if self.db.global.version == 5 then
+		for k,v in pairs(self.db.global.layouts) do
+			for name,panel in pairs(v) do
+				panel.border_advanced = {
+					enable = false,
+					show ={
+						TOP = true,
+						BOT = true,
+						LEFT = true,
+						RIGHT = true,
+						TOPLEFTCORNER = true,
+						TOPRIGHTCORNER = true,
+						BOTLEFTCORNER = true,
+						BOTRIGHTCORNER = true,
+					}	
+				}
+			end
+		end
+		self.db.global.version = 6
+	end
 end
 -- add a fetch method to check our library or LSM, and use it in place frame
 function kgPanels:OnDisable()
@@ -644,6 +686,21 @@ function kgPanels:ApplyLayout(layoutData)
 			if not data.absolute_bg then
 				data.absolute_bg = {ULx=0, ULy=0, LLx=0,LLy=1,URx=0,URy=0,LRx=0,LRy=1}
 				data.use_absolute_bg = false
+			end
+			if not data.border_advanced then
+				data.border_advanced = {
+					enable = false,
+					show ={
+						TOP = true,
+						BOT = true,
+						LEFT = true,
+						RIGHT = true,
+						TOPLEFTCORNER = true,
+						TOPRIGHTCORNER = true,
+						BOTLEFTCORNER = true,
+						BOTRIGHTCORNER = true,
+					}	
+				}
 			end
 			self:PlaceFrame(name,data,true)
 		end
@@ -832,7 +889,12 @@ function kgPanels:ResetParent(frame,frameData,name,overrideParent,overrideAnchor
 end
 function kgPanels:ResetTextures(frame,frameData,name)
 	frame.bg:SetTexCoord(0,1,0,1)
-	local ULx,ULy,LLx,LLy,URx,URy,LRx,LRy = frame.bg:GetTexCoord()
+	if frameData.border_advanced.enable and BD then
+	 	BD:EnableEnhancements(frame)
+	else
+		BD:DisableEhancements(frame) 		
+	end
+	local ULx,ULy,LLx,LLy,URx,URy,LRx,LRy = frame.bg:GetTexCoord()	
 	--frame.bg:SetTexCoordModifiesRect(false)
 	frame.bg:SetBlendMode(frameData.bg_blend)
 	frame.bg:SetAlpha(frameData.bg_alpha)
@@ -885,10 +947,12 @@ function kgPanels:ResetTextures(frame,frameData,name)
 		if cataFeatures then
 			-- check direction
 			if frameData.vert_tile then
-				frame.bg:SetHorizTile(true)
+				frame.bg:SetHorizTile(false)
+				frame.bg:SetVertTile(true)
 			end
 			if frameData.horz_tile then
-				frame.bg:SetVertTile(true)
+				frame.bg:SetHorizTile(true)
+				frame.bg:SetVertTile(false)
 			end
 		end
 	else
@@ -920,6 +984,13 @@ function kgPanels:ResetTextures(frame,frameData,name)
 		frame.bg:SetDrawLayer("BACKGROUND",frameData.sub_level)
 	else
 		frame.bg:SetDrawLayer("BACKGROUND")
+	end
+	if frameData.border_advanced.enable and BD then
+		for k,v in pairs(frameData.border_advanced.show) do
+			if v == false then
+				frame:GetBackdropBorderSection(k):Hide()				
+			end
+		end
 	end
 end
 
@@ -956,7 +1027,7 @@ function kgPanels:SetupScript(frame,hook,code,name,initial)
 		frame:SetScript("OnEvent",nil)
 	end
 	if hook == "UPDATE" and strlen(code) > 1 then
-		local func, errorMessage = loadstring("return function(self,time) "..makeRef().." "..code.." end",name.."_OnUpdate")
+		local func, errorMessage = loadstring("return function(self,elapsed) "..makeRef().." "..code.." end",name.."_OnUpdate")
 		if func then
 			frame:SetScript("OnUpdate",func())
 		else
@@ -1023,7 +1094,7 @@ function kgPanels:SetupScript(frame,hook,code,name,initial)
 		frame:SetScript("OnMouseUp",nil)
 	end
 	if hook == "RESIZE" and strlen(code) > 1 then
-		local func, errorMessage = loadstring("return function(self,height,width) "..makeRef().." "..code.." end",name.."_OnResize")
+		local func, errorMessage = loadstring("return function(self,width,height) "..makeRef().." "..code.." end",name.."_OnResize")
 		if func then
 			frame:SetScript("OnSizeChanged",func())
 		else

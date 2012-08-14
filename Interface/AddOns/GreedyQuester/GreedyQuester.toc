@@ -1,10 +1,10 @@
-## Interface: 40000
+## Interface: 40300
 ## Title: GreedyQuester
-## Notes: Auto select most expensive item when you finish quests
+## Notes: Auto select most expensive item when you finish quest
 ## Author: Extaliones
 ## Email: extaliones@gmail.com
-## Version: 4.0.3
-## X-Curse-Packaged-Version: 4.0.3
+## Version: 4.4.0
+## X-Curse-Packaged-Version: v4.3.0
 ## X-Curse-Project-Name: Greedy Quester
 ## X-Curse-Project-ID: greedy_quester
 ## X-Curse-Repository-ID: wow/greedy_quester/mainline
