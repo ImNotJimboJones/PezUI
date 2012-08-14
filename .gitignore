@@ -20,6 +20,7 @@ WowError.exe
 dbghelp.dll
 divxdecoder.dll
 msvcr80.dll
+.curseclient
 
 # Folders #
 ###########
