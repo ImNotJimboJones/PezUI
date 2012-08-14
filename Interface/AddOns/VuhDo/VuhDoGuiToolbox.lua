@@ -660,7 +660,6 @@ end
 
 
 --
-local tFontHeight;
 function VUHDO_lnfPatchFont(aComponent, aLabelName)
 	if (not sIsNotInChina) then
 		VUHDO_GLOBAL[aComponent:GetName() .. aLabelName]:SetFont(VUHDO_OPTIONS_FONT_NAME, 12);
@@ -746,4 +745,18 @@ function VUHDO_setupAllButtonsUnitWatch(anIsRegister)
 	for tButton, _ in pairs(VUHDO_BUTTON_CACHE) do
 		tFunc(tButton);
 	end
+end
+
+
+
+--
+function VUHDO_backColor(aColor)
+	return aColor["R"], aColor["G"], aColor["B"], aColor["O"];
+end
+
+
+
+--
+function VUHDO_textColor(aColor)
+	return aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"];
 end

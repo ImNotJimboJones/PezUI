@@ -310,7 +310,6 @@
 							<OnLoad>
 								VUHDO_setComboModel(self, "VUHDO_PANEL_SETUP.RAID_ICON_FILTER", VUHDO_getRaidTargetComboModel(self));
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K414);
-								self:SetAttribute("custom_function", VUHDO_notifySoundSelect);
 								VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.RAID_ICON.show", false);
 							</OnLoad>
 						</Scripts>

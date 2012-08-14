@@ -246,7 +246,7 @@ local tAllUnits;
 local tUnit;
 local tInfo;
 local tOldMouseover;
-function VuhDoActionOnEnter(aButton, anIsDebuffIcon)
+function VuhDoActionOnEnter(aButton)
 	VUHDO_showTooltip(aButton);
 
 	tOldMouseover = sMouseoverUnit;
@@ -296,10 +296,8 @@ local tAllUnits;
 local tUnit;
 local tInfo;
 function VuhDoActionOnLeave(aButton)
-	if (not anIsDebuffIcon) then
-		VUHDO_hideTooltip();
-	end
 
+	VUHDO_hideTooltip();
 	VuhDoDirectionFrame["shown"] = false;
 	VuhDoDirectionFrame:Hide();
 
@@ -334,17 +332,16 @@ end
 --
 local tAllButtons, tButton, tQuota, tHighlightBar;
 function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
-	tQuota = (anIsActive or (aMaxValue or 0) > 1)
-		and 100 or 0;
+	tQuota = (anIsActive or (aMaxValue or 0) > 1)	and 1 or 0;
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
 			tHighlightBar = VUHDO_getHealthBar(tButton, 8);
 			if (aColor ~= nil) then
-				tHighlightBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+				tHighlightBar:SetVuhDoColor(aColor);
 			end
-			tHighlightBar:SetValue(tQuota); -- Mouseover highlight
+			tHighlightBar:SetValue(tQuota);
 		end
 	end
 end
@@ -354,7 +351,7 @@ end
 --
 local tModi;
 local tKey;
-function VuhDoActionPreClick(aButton, aMouseButton, aDown)
+function VuhDoActionPreClick(aButton, aMouseButton)
 	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		return;
 	end
@@ -394,25 +391,11 @@ end
 
 
 --
-function VuhDoActionPostClick(aButton, aMouseButton)
+function VuhDoActionPostClick(aButton)
 	if (VUHDO_IS_SMART_CAST) then
 		VUHDO_setupAllHealButtonAttributes(aButton, nil, false, false, false, false);
 		VUHDO_IS_SMART_CAST = false;
 	end
-end
-
-
-
----
-function VuhDoActionOnMouseDown(aPanel, aMouseButton)
-	VUHDO_startMoving(aPanel);
-end
-
-
-
----
-function VuhDoActionOnMouseUp(aPanel, aMouseButton)
-	VUHDO_stopMoving(aPanel);
 end
 
 

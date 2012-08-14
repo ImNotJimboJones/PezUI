@@ -91,6 +91,8 @@ local VUHDO_getBarIconTimer;
 local VUHDO_getBarIconCounter;
 local VUHDO_getBarIconCharge;
 local VUHDO_getBarIconClockOrStub;
+local VUHDO_backColor;
+local VUHDO_textColor;
 
 local VUHDO_PANEL_SETUP;
 local VUHDO_CAST_ICON_DIFF;
@@ -125,6 +127,8 @@ function VUHDO_customHotsInitBurst()
 	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
 	VUHDO_getBarIconCharge = VUHDO_GLOBAL["VUHDO_getBarIconCharge"];
 	VUHDO_getBarIconClockOrStub = VUHDO_GLOBAL["VUHDO_getBarIconClockOrStub"];
+	VUHDO_backColor = VUHDO_GLOBAL["VUHDO_backColor"];
+	VUHDO_textColor = VUHDO_GLOBAL["VUHDO_textColor"];
 
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
 	sHotCols = sBarColors["HOTS"];
@@ -188,13 +192,13 @@ local function VUHDO_customizeHotBar(aButton, aRest, anIndex, aDuration, aColor)
 	tHotBar = VUHDO_getHealthBar(aButton, anIndex + 3);
 
 	if (aColor ~= nil) then
-		tHotBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+		tHotBar:SetVuhDoColor(aColor);
 	end
 
 	if ((aDuration or 0) == 0 or aRest == nil) then
 		tHotBar:SetValue(0);
 	else
-		tHotBar:SetValue(100 * aRest / aDuration);
+		tHotBar:SetValue(aRest / aDuration);
 	end
 end
 
@@ -235,7 +239,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	tChargeTexture = VUHDO_getBarIconCharge(aButton, anIndex);
 
 	if (aColor ~= nil and aColor["useText"] and aColor["TR"] ~= nil) then
-		tCounter:SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+		tCounter:SetTextColor(VUHDO_textColor(aColor));
 	end
 
 	if (anIcon ~= nil and (sIsHotShowIcon or aColor ~= nil)) then
@@ -339,18 +343,18 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		end
 
 		if (tHotColor["useText"] and not sIsHotShowIcon) then
-			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
+			tTimer:SetTextColor(VUHDO_textColor(tHotColor));
 		end
 
 	elseif (sIsWarnColor and aRest < sHotCols["WARNING"]["lowSecs"]) then
 		tHotColor = sHotCols["WARNING"];
-		tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
+		tTimer:SetTextColor(VUHDO_textColor(tHotColor));
 	else
 		tHotColor = VUHDO_copyColor(tHotCfg);
 		if (sIsHotShowIcon) then
 			tHotColor["R"], tHotColor["G"], tHotColor["B"] = 1, 1, 1;
 		elseif (aTimes <= 1 or not sHotCols["useColorText"]) then
-			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
+			tTimer:SetTextColor(VUHDO_textColor(tHotColor));
 		end
 
 		if (aTimes > 1) then
@@ -363,7 +367,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 			if (sHotCols["useColorText"]) then
 				tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]
 					= tChargeColor["TR"], tChargeColor["TG"], tChargeColor["TB"], tChargeColor["TO"];
-				tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
+				tTimer:SetTextColor(VUHDO_textColor(tHotColor));
 			end
 		end
 	end
@@ -373,7 +377,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	if (tIsChargeShown) then
 		tChargeTexture:SetTexture(VUHDO_CHARGE_TEXTURES[aTimes]);
 		if (tHotColor["R"]) then
-			tChargeTexture:SetVertexColor(tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]);
+			tChargeTexture:SetVertexColor(VUHDO_backColor(tHotColor));
 		end
 		tChargeTexture:Show();
 	elseif (aShieldCharges > 0) then

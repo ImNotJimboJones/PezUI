@@ -1,4 +1,8 @@
-TipTacTalents Changes | 2010 Sep 29
+TipTacTalents Changes | 2012 May 20
+-----------------------------------
+- Changed the TOC version to 40300 for the 4.3 patch.
+
+TipTacTalents Changes | 2011 Sep 29
 -----------------------------------
 - Changed the TOC version to 40200 for the 4.2 patch.
 

@@ -355,6 +355,31 @@ end
 
 
 --
+local tACategSpec, tAnotherCategSpec;
+local function VUHDO_buffWatchSorter(aSwatch, anotherSwatch)
+	tACategSpec = aSwatch:GetAttribute("buffname");
+	tAnotherCategSpec = anotherSwatch:GetAttribute("buffname");
+	return (VUHDO_BUFF_ORDER[tACategSpec] or 1000) < (VUHDO_BUFF_ORDER[tAnotherCategSpec] or 1000);
+end
+
+
+--
+local tOrderedSwatches = { };
+function VUHDO_getAllBuffSwatchesOrdered()
+	table.wipe(tOrderedSwatches);
+
+	local tSwatch;
+	for _, tSwatch in pairs(VUHDO_BUFF_SWATCHES) do
+		tinsert(tOrderedSwatches, tSwatch);
+	end
+
+	table.sort(tOrderedSwatches, VUHDO_buffWatchSorter);
+	return tOrderedSwatches;
+end
+
+
+
+--
 function VUHDO_getAggroTexture(aHealthBar)
 	return VUHDO_GLOBAL[aHealthBar:GetName() .. "Aggro"];
 end
@@ -384,6 +409,10 @@ function VUHDO_repairStatusbar(tBar)
 	end
 
 
+	tBar["SetVuhDoColor"] = function(self, aColor)
+		self["texture"]:SetVertexColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+	end
+
 
 	tBar["GetStatusBarColor"] = function(self)
 		return self["texture"]:GetVertexColor();
@@ -400,12 +429,11 @@ function VUHDO_repairStatusbar(tBar)
 	tBar["SetValue"] = function(self, aValue)
 		if ((aValue or -1) < 0) then
 			aValue = 0;
-		elseif (aValue > 100) then
-			aValue = 100;
+		elseif (aValue > 1) then
+			aValue = 1;
 		end
 
 		self["value"] = aValue;
-		aValue = aValue * 0.01;
 		if (self["isInverted"]) then
 			aValue = 1 - aValue;
 		end
@@ -434,14 +462,14 @@ function VUHDO_repairStatusbar(tBar)
 
 		if ((aMinValue or -1) < 0) then
 			aMinValue = 0;
-		elseif (aMinValue > 100) then
-			aMinValue = 100;
+		elseif (aMinValue > 1) then
+			aMinValue = 1;
 		end
 
 		if ((aMaxValue or -1) < 0) then
 			aMaxValue = 0;
-		elseif (aMaxValue > 100) then
-			aMaxValue = 100;
+		elseif (aMaxValue > 1) then
+			aMaxValue = 1;
 		end
 
 		tValue = aMaxValue - aMinValue;
@@ -450,10 +478,7 @@ function VUHDO_repairStatusbar(tBar)
 		end
 
 		self["value"] = tValue;
-		tValue = tValue * 0.01;
 
-		aMinValue = aMinValue * 0.01;
-		aMaxValue = aMaxValue * 0.01;
 		if (self["isInverted"]) then
 			tValue = 1 - tValue;
 			aMinValue, aMaxValue = 1 - aMaxValue, 1 - aMinValue;
@@ -500,7 +525,7 @@ function VUHDO_repairStatusbar(tBar)
 
 
 	--[[tBar["SetMinMaxValues"] = function(self, aMinValue, aMaxValue)
-		-- Dummy, always 0-100
+		-- Dummy, always 0-1
 	end]]
 
 

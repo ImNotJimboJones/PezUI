@@ -1,3 +1,33 @@
+since Version 2.137 (to 2.138):
+
+Bugfixes:
+-- Minor bugfixes
+
+Improvements:
+-- Minor memory/performance optimizations
+-- Paladin's Inquisition now available in BuffWatch
+-- Smart cast buff will cast buffs in configured order now
+   (instead od random)
+
+Changes:
+-- Blacklisted debuffs in options=>debuffs=>standard will now
+   also prevent bar color from changing
+
+Features:
+
+--------------------------------------------------------------
+since Version 2.136 (to 2.137):
+
+Bugfixes:
+-- Minor bugfixes
+
+Improvements:
+
+Changes:
+
+Features:
+
+--------------------------------------------------------------
 since Version 2.135 (to 2.136):
 
 Bugfixes:

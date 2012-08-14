@@ -34,9 +34,9 @@ function VUHDO_determineIncHeal(aUnit)
 			tAllIncoming = (UnitGetIncomingHeals(aUnit) or 0) - (UnitGetIncomingHeals(aUnit, "player") or 0);
 			VUHDO_INC_HEAL[aUnit] = tAllIncoming < 0 and 0 or tAllIncoming;
 		else
-			VUHDO_INC_HEAL[aUnit] = UnitGetIncomingHeals(aUnit) or 0;
+			VUHDO_INC_HEAL[aUnit] = UnitGetIncomingHeals(aUnit);
 		end
 	else
-		VUHDO_INC_HEAL[aUnit] = UnitGetIncomingHeals(aUnit, "player") or 0;
+		VUHDO_INC_HEAL[aUnit] = UnitGetIncomingHeals(aUnit, "player");
 	end
 end

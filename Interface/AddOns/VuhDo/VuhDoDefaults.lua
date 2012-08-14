@@ -989,7 +989,7 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 	["HOTS"] = {
 		["radioValue"] = 20,
 		["iconRadioValue"] = 2,
-		["stacksRadioValue"] = 3,
+		["stacksRadioValue"] = 2,
 
 		["TIMER_TEXT"] = {
 			["ANCHOR"] = "BOTTOMRIGHT",

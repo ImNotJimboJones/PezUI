@@ -83,7 +83,7 @@ local function VUHDO_privateTanksItemSelected(_, aUnit)
 		VUHDO_PLAYER_TARGETS[tName] = true;
 	end
 
-	-- Reload assist group
+	-- Reload private tanks group
 	VUHDO_quickRaidReload();
 end
 

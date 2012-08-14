@@ -205,19 +205,6 @@ end
 
 
 --
---[[function VuhDo:VUHDO_buttonFacadeCallback(aSkinId, aGloss, aBackdrop, aGroup, aButton, aColors)
-	if (VUHDO_I18N_BUFF_WATCH == aGroup) then
-		VUHDO_BUFF_SETTINGS["CONFIG"]["BUTTON_FACADE"] = aSkinId;
-	end
-
-	if (VUHDO_I18N_HOTS == aGroup) then
-		VUHDO_PANEL_SETUP["HOTS"]["BUTTON_FACADE"] = aSkinId;
-	end
-end
-]]
-
-
---
 function VUHDO_initButtonFacade(anInstance)
 	if (VUHDO_CONFIG["IS_USE_BUTTON_FACADE"]) then
 		VUHDO_LibButtonFacade = LibStub("Masque", true);

@@ -45,7 +45,7 @@ In this file, you will have to locate "SavedVariables", and change it into "Save
 
 Lacking Features, Ideas & Problems
 ----------------------------------
-- ItemRefTooltip: Does not support "currency" and "archaeology".
+- ItemRefTooltip: Does not support "archaeology". "currency" should be supported now, but need verification.
 - ItemRefTooltip does not position well if scaled below 1.
 - Remove font size delta, add slider for each font size.
 - Add hover tips to "GuildBankMessageFrame".

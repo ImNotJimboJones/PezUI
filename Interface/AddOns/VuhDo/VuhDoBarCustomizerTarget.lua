@@ -44,6 +44,7 @@ local VUHDO_POWER_TYPE_COLORS;
 local VUHDO_BUTTON_CACHE;
 local VUHDO_getUnitZoneName;
 local VUHDO_getDisplayUnit;
+local VUHDO_textColor;
 
 local sOOROpacity;
 
@@ -64,6 +65,7 @@ function VUHDO_customTargetInitBurst()
 	VUHDO_POWER_TYPE_COLORS =  VUHDO_GLOBAL["VUHDO_POWER_TYPE_COLORS"];
 	VUHDO_getUnitZoneName = VUHDO_GLOBAL["VUHDO_getUnitZoneName"];
 	VUHDO_getDisplayUnit = VUHDO_GLOBAL["VUHDO_getDisplayUnit"];
+	VUHDO_textColor = VUHDO_GLOBAL["VUHDO_textColor"];
 
 	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]["useOpacity"]) then
 		sOOROpacity = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]["O"];
@@ -77,16 +79,14 @@ end
 --
 local tManaBar;
 local tInfo;
-local tColor;
 local function VUHDO_customizeManaBar(aButton)
 
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
 
 	if (tInfo["connected"]) then
 		tManaBar = VUHDO_getHealthBar(aButton, 2);
-		tManaBar:SetValue(tInfo["powermax"] < 2 and 0 or 100 * tInfo["power"] / tInfo["powermax"]); -- Some addons return 1 mana-max instead of zero
-		tColor = VUHDO_POWER_TYPE_COLORS[tInfo["powertype"]];
-		tManaBar:SetStatusBarColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
+		tManaBar:SetValue(tInfo["powermax"] < 2 and 0 or tInfo["power"] / tInfo["powermax"]); -- Some addons return 1 mana-max instead of zero
+		tManaBar:SetVuhDoColor(VUHDO_POWER_TYPE_COLORS[tInfo["powertype"]]);
 	else
 		VUHDO_getHealthBar(aButton, 2):SetValue(0);
 	end
@@ -136,19 +136,14 @@ local tQuota;
 local function VUHDO_targetHealthBouquetCallback(aButton, aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 
 	tQuota = anIsActive and (aMaxValue or 0) > 0
-		and 100 * aCurrValue / aMaxValue or 0;
-
-	--[[tQuota = not anIsActive and 0
-		or (aCurrValue == 0 and aMaxValue == 0) and 0
-		or (aMaxValue or 0) > 0 and 100 * aCurrValue / aMaxValue
-		or 0;]]
+		and aCurrValue / aMaxValue or 0;
 
 	if (tQuota > 0) then
 		tBar = VUHDO_getHealthBar(aButton, 1);
 		tBar:SetValue(tQuota);
-		tBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
-		VUHDO_getBarText(tBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
-		VUHDO_getLifeText(tBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+		tBar:SetVuhDoColor(aColor);
+		VUHDO_getBarText(tBar):SetTextColor(VUHDO_textColor(aColor));
+		VUHDO_getLifeText(tBar):SetTextColor(VUHDO_textColor(aColor));
 		aButton:SetAlpha(1);
 	else
 		aButton:SetAlpha(0);
@@ -161,8 +156,6 @@ end
 local tTexture;
 local tIconIdx;
 function VUHDO_customizeTargetBar(aButton, aUnit, anIsInRange)
-	--VUHDO_getHealthBar(aButton, 1):Show();
-
 	VUHDO_CUSTOM_INFO["range"] = anIsInRange;
 	VUHDO_invokeCustomBouquet(aButton, aUnit, VUHDO_RAID[aUnit] or VUHDO_CUSTOM_INFO, VUHDO_I18N_DEF_BOUQUET_TARGET_HEALTH, VUHDO_targetHealthBouquetCallback);
 	VUHDO_customizeText(aButton, 1, true); -- VUHDO_UPDATE_ALL

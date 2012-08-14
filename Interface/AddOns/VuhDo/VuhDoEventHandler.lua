@@ -36,6 +36,7 @@ local VUHDO_updateBouquetsForEvent = VUHDO_updateBouquetsForEvent;
 local VUHDO_getUnitZoneName;
 local VUHDO_updateClusterHighlights;
 local VUHDO_updateCustomDebuffTooltip;
+local VUHDO_getCurrentMouseOver;
 
 local GetTime = GetTime;
 local CheckInteractDistance = CheckInteractDistance;
@@ -63,6 +64,8 @@ local sRangeRefreshSecs = 1.1;
 local sClusterRefreshSecs = 1.2;
 local sAoeRefreshSecs = 1.3;
 local sBuffsRefreshSecs;
+local VuhDoDirectionFrame;
+
 
 local function VUHDO_eventHandlerInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
@@ -87,10 +90,12 @@ local function VUHDO_eventHandlerInitBurst()
 	VUHDO_aoeUpdateAll = VUHDO_GLOBAL["VUHDO_aoeUpdateAll"];
 	--VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
 	VuhDoGcdStatusBar = VUHDO_GLOBAL["VuhDoGcdStatusBar"];
+	VuhDoDirectionFrame = VUHDO_GLOBAL["VuhDoDirectionFrame"];
 	VUHDO_updateDirectionFrame = VUHDO_GLOBAL["VUHDO_updateDirectionFrame"];
 	VUHDO_getUnitZoneName = VUHDO_GLOBAL["VUHDO_getUnitZoneName"];
 	VUHDO_updateClusterHighlights = VUHDO_GLOBAL["VUHDO_updateClusterHighlights"];
 	VUHDO_updateCustomDebuffTooltip = VUHDO_GLOBAL["VUHDO_updateCustomDebuffTooltip"];
+	VUHDO_getCurrentMouseOver = VUHDO_GLOBAL["VUHDO_getCurrentMouseOver"];
 
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"] or "*foo*";
 	sIsHealerMode = not VUHDO_CONFIG["THREAT"]["IS_TANK_MODE"];
@@ -995,7 +1000,9 @@ local function VUHDO_updateAllRange()
 		if (tInfo["range"] ~= tIsInRange) then
 			tInfo["range"] = tIsInRange;
 			VUHDO_updateHealthBarsFor(tUnit, 5); -- VUHDO_UPDATE_RANGE
-			if (sIsDirectionArrow and VUHDO_getCurrentMouseOver() == tUnit and (VuhDoDirectionFrame["shown"] or (not tIsInRange or VUHDO_CONFIG["DIRECTION"]["isAlways"]))) then
+			if (sIsDirectionArrow and VUHDO_getCurrentMouseOver() == tUnit
+				and (VuhDoDirectionFrame["shown"] or (not tIsInRange or VUHDO_CONFIG["DIRECTION"]["isAlways"]))) then
+
 				VUHDO_updateDirectionFrame();
 			end
 		end
@@ -1167,12 +1174,12 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 
 	-- Update GCD-Bar
 	if (VUHDO_GCD_UPDATE and VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS] ~= nil) then
-		tGcdStart, tGcdDuration, _ = GetSpellCooldown(VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS]);
+		tGcdStart, tGcdDuration = GetSpellCooldown(VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS]);
 		if ((tGcdDuration or 0) == 0) then
 			VuhDoGcdStatusBar:SetValue(0);
 			VUHDO_GCD_UPDATE = false;
 		else
-			VuhDoGcdStatusBar:SetValue(100 * (tGcdDuration - (GetTime() - tGcdStart)) / tGcdDuration);
+			VuhDoGcdStatusBar:SetValue((tGcdDuration - (GetTime() - tGcdStart)) / tGcdDuration);
 		end
 	end
 

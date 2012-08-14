@@ -710,10 +710,10 @@
 		</Frames>
 		<Scripts>
 			<OnMouseDown>
-				VuhDoActionOnMouseDown(self,arg1);
+				VUHDO_startMoving(self);
 			</OnMouseDown>
 			<OnMouseUp>
-				VuhDoActionOnMouseUp(self,arg1);
+				VUHDO_stopMoving(self);
 			</OnMouseUp>
 	 </Scripts>
 	</Frame>

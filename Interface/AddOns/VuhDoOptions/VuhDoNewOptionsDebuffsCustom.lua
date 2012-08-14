@@ -33,10 +33,8 @@ end
 
 --
 function VUHDO_setupCustomDebuffsComboModel(aComboBox)
-	--if (VUHDO_COMBO_MODEL == nil) then
-		VUHDO_initCustomDebuffComboModel();
-		VUHDO_notifyCustomDebuffSelect(aComboBox, VUHDO_CONFIG.CUSTOM_DEBUFF.SELECTED);
-	--end
+	VUHDO_initCustomDebuffComboModel();
+	VUHDO_notifyCustomDebuffSelect(aComboBox, VUHDO_CONFIG.CUSTOM_DEBUFF.SELECTED);
 
 	VUHDO_setComboModel(aComboBox, "VUHDO_CONFIG.CUSTOM_DEBUFF.SELECTED", VUHDO_COMBO_MODEL);
 	VUHDO_lnfComboBoxInitFromModel(aComboBox);
@@ -217,21 +215,18 @@ end
 
 
 --
-local tEditBox;
-local tValue;
-local tIndex;
-local tCheckButton;
-local tPanelName;
 function VUHDO_saveCustomDebuffOnClick(aButton)
-	tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
-	tValue = strtrim(tEditBox:GetText());
-	tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
+	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
+	local tValue = strtrim(tEditBox:GetText());
+	local tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 
 	if (tIndex == nil and strlen(tValue) > 0) then
 		tinsert(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 		VuhDoNewOptionsDebuffsCustomStorePanelEditBox:SetText(tValue);
 		VuhDoNewOptionsDebuffsCustomStorePanelEditBox:SetTextColor(1, 1, 1);
 	end
+	local tCheckButton;
+	local tPanelName;
 
 	tPanelName = aButton:GetParent():GetName();
 
@@ -259,7 +254,8 @@ function VUHDO_saveCustomDebuffOnClick(aButton)
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isFullDuration = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
 	tComboBox = VUHDO_GLOBAL[tPanelName .. "SoundCombo"];
-	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].SOUND = VUHDO_lnfGetValueFromModel(tComboBox);
+	local tSoundName = VUHDO_GLOBAL[tComboBox:GetName() .. "Text"]:GetText();
+	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].SOUND = VUHDO_LibSharedMedia:Fetch("sound", tSoundName);
 	VUHDO_lnfComboBoxInitFromModel(tComboBox);
 
 	tColorSwatch = VUHDO_GLOBAL[tPanelName .. "ColorTexture"];
@@ -282,13 +278,10 @@ end
 
 
 --
-local tEditBox;
-local tValue;
-local tIndex;
 function VUHDO_deleteCustomDebuffOnClick(aButton)
-	tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
-	tValue = strtrim(tEditBox:GetText());
-	tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
+	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
+	local tValue = strtrim(tEditBox:GetText());
+	local tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 
 	if (tIndex ~= nil and strlen(tValue) > 0) then
 		tremove(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tIndex);
@@ -308,8 +301,9 @@ end
 
 
 --
-local tName, tSettings;
 function VUHDO_applyToAllCustomDebuffOnClick()
+	local tName, tSettings;
+
 	for tName, tSettings in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]) do
 		tSettings["isIcon"] = VUHDO_CONFIG.CUSTOM_DEBUFF.isIcon;
 		tSettings["isColor"] = VUHDO_CONFIG.CUSTOM_DEBUFF.isColor;

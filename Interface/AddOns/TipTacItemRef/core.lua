@@ -10,7 +10,8 @@ local cfg = {
 	if_showItemLevelAndId = true,
 	if_showQuestLevelAndId = true,
 	if_showSpellIdAndRank = false,
-	if_showAchievementIdAndCategory = false,
+	if_showCurrencyId = true,					-- Az: no option for this added to TipTac/options yet!
+	if_showAchievementIdAndCategory = false,	-- Az: no option for this added to TipTac/options yet!
 	if_modifyAchievementTips = true,
 	if_showIcon = true,
 	if_smartIcons = true,
@@ -246,9 +247,13 @@ end
 --------------------------------------------------------------------------------------------------------
 
 -- instancelock
---function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterbits)
---	AzDump(guid,mapId,difficulty,encounterbits)
---end
+function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterBits)
+	--AzDump(guid,mapId,difficulty,encounterBits)
+  	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
+--	if (cfg.if_itemQualityBorder) then
+--		self:SetBackdropBorderColor(1, .5, 0, 1);
+--	end
+end
 
 -- item
 function TipTypeFuncs:item(linkToken,id)
@@ -288,6 +293,10 @@ function TipTypeFuncs:spell(linkToken,id)
 		self:AddLine("SpellID: "..id..(rank and rank ~= "" and ", "..rank or ""),unpack(cfg.if_infoColor));
 		self:Show();
 	end
+  	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
+--	if (cfg.if_itemQualityBorder) then
+--		self:SetBackdropBorderColor(.44, .84, 1, 1);
+--	end
 end
 
 -- quest
@@ -296,6 +305,25 @@ function TipTypeFuncs:quest(linkToken,id,level)
 		self:AddLine(format("QuestLevel: %d, QuestID: %d",level or 0,id or 0),unpack(cfg.if_infoColor));
 		self:Show();
 	end
+  	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
+--	if (cfg.if_itemQualityBorder) then
+--		self:SetBackdropBorderColor(1, 1, 0, 1);
+--	end
+end
+
+-- currency -- Thanks to Vladinator for adding this!
+function TipTypeFuncs:currency(linkToken,id)
+	local _, currencyCount, currencyTexture = GetCurrencyInfo(id);
+	self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture, currencyCount);
+	-- ID
+	if (cfg.if_showCurrencyId) then
+		self:AddLine(format("CurrencyID: %d",id),unpack(cfg.if_infoColor));
+		self:Show();
+	end
+  	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
+--	if (cfg.if_itemQualityBorder) then
+--		self:SetBackdropBorderColor(0, .67, 0, 1);
+--	end
 end
 
 -- achievement
@@ -386,4 +414,8 @@ function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unk
 			self:Show();
 		end
 	end
+  	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
+--	if (cfg.if_itemQualityBorder) then
+--		self:SetBackdropBorderColor(1, 1, 0, 1);
+--	end
 end

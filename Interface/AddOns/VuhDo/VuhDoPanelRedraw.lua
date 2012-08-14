@@ -368,7 +368,7 @@ end
 local function VUHDO_initBackgroundBar(aBgBar)
 	VUHDO_setLlcStatusBarTexture(aBgBar, VUHDO_INDICATOR_CONFIG["CUSTOM"]["BACKGROUND_BAR"]["TEXTURE"]);
 	aBgBar:SetHeight(sBarScaling["barHeight"]);
-	aBgBar:SetValue(100);
+	aBgBar:SetValue(1);
 	aBgBar:SetStatusBarColor(0, 0, 0, 0);
 	aBgBar:Show();
 end
@@ -587,7 +587,7 @@ local function VUHDO_initTargetBar()
 		tTgButton:Show();
 
 		tTgHealthBar = VUHDO_getHealthBar(sButton, 5);
-		tTgHealthBar:SetValue(100);
+		tTgHealthBar:SetValue(1);
 		tTgHealthBar:SetHeight(sBarHeight);
 
 		VUHDO_initBackgroundBar(VUHDO_getHealthBar(sButton, 12));
@@ -638,7 +638,7 @@ local function VUHDO_initTotBar()
 		tTotButton:Show();
 
 		tTgHealthBar = VUHDO_getHealthBar(sButton, 14);
-		tTgHealthBar:SetValue(100);
+		tTgHealthBar:SetValue(1);
 		tTgHealthBar:SetHeight(sBarHeight);
 
 		VUHDO_initBackgroundBar(VUHDO_getHealthBar(sButton, 15));
@@ -1104,7 +1104,7 @@ function VUHDO_redrawAllPanels()
 
 	-- GCD bar
 	tGcdCol = VUHDO_PANEL_SETUP["BAR_COLORS"]["GCD_BAR"];
-	VuhDoGcdStatusBar:SetStatusBarColor(tGcdCol["R"], tGcdCol["G"], tGcdCol["B"], tGcdCol["O"]);
+	VuhDoGcdStatusBar:SetVuhDoColor(tGcdCol);
 	VuhDoGcdStatusBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
 	VuhDoGcdStatusBar:SetValue(0);
 	VuhDoGcdStatusBar:SetFrameStrata("TOOLTIP");

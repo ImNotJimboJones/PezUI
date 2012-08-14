@@ -16,11 +16,12 @@ local TT_DefaultConfig = {
 	showUnitTip = true,
 	showStatus = true,
 	showGuildRank = false,
+	showTargetedBy = true,
+	showPlayerGender = false,
 	nameType = "title",
 	showRealm = "show",
 	showTarget = "last",
 	targetYouText = "<<YOU>>",
-	showTargetedBy = true,
 
 	gttScale = 1,
 	updateFreq = 0.5,
@@ -141,6 +142,7 @@ local TT_DefaultConfig = {
 	if_showItemLevelAndId = true,
 	if_showQuestLevelAndId = true,
 	if_showSpellIdAndRank = false,
+	if_showCurrencyId = true,					-- Az: no option for this added to TipTac/options yet!
 	if_showAchievementIdAndCategory = false,	-- Az: no option for this added to TipTac/options yet!
 	if_modifyAchievementTips = true,
 	if_showIcon = true,
@@ -152,10 +154,13 @@ local TT_DefaultConfig = {
 -- Tips modified by TipTac in appearance and scale, you can add to this list if you want to modify more tips
 local TT_TipsToModify = {
 	"GameTooltip",
-	"ItemRefTooltip",
 	"ShoppingTooltip1",
 	"ShoppingTooltip2",
 	"ShoppingTooltip3",
+	"ItemRefTooltip",
+	"ItemRefShoppingTooltip1",
+	"ItemRefShoppingTooltip2",
+	"ItemRefShoppingTooltip3",
 	"WorldMapTooltip",
 	"WorldMapCompareTooltip1",
 	"WorldMapCompareTooltip2",
@@ -449,9 +454,18 @@ local function ModifyUnitTooltip()
 	end
 	local classification = UnitClassification(unit);
 	lineInfo[#lineInfo + 1] = (UnitCanAttack(unit,"player") or UnitCanAttack("player",unit)) and GetDifficultyLevelColor(level ~= -1 and level or 500) or cfg.colLevel;
-	lineInfo[#lineInfo + 1] = (cfg["classification_"..classification] or "%d? "):format(level == -1 and "??" or level);
+	lineInfo[#lineInfo + 1] = (cfg["classification_"..classification] or "%d? "):format(level == -1 and "??" or level); -- Why "%d? " on the alt format? Bug?
 	-- Players
 	if (u.isPlayer) then
+		-- gender
+		if (cfg.showPlayerGender) then
+			local sex = UnitSex(unit);
+			if (sex == 2) or (sex == 3) then
+				lineInfo[#lineInfo + 1] = " ";
+				lineInfo[#lineInfo + 1] = cfg.colRace;
+				lineInfo[#lineInfo + 1] = (sex == 3 and "Female" or "Male");
+			end
+		end
 		-- race
 		lineInfo[#lineInfo + 1] = " ";
 		lineInfo[#lineInfo + 1] = cfg.colRace;

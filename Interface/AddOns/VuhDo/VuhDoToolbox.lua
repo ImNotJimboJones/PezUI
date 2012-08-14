@@ -760,8 +760,8 @@ end
 
 
 --
-local tName;
 function VUHDO_compressAllBouquets()
+	local tName;
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
 		VUHDO_BOUQUETS["STORED"][tName] = VUHDO_compressTable(VUHDO_BOUQUETS["STORED"][tName]);
 	end
@@ -770,8 +770,8 @@ end
 
 
 --
-local tName;
 function VUHDO_decompressAllBouquets()
+	local tName;
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
 		VUHDO_BOUQUETS["STORED"][tName] = VUHDO_decompressIfCompressed(VUHDO_BOUQUETS["STORED"][tName]);
 	end

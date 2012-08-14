@@ -24,6 +24,7 @@ local VUHDO_updateBouquetsForEvent;
 local VUHDO_getBarIcon;
 local VUHDO_getBarIconTimer;
 local VUHDO_isInConeInFrontOf;
+local VUHDO_backColor;
 
 local sHealthLimit;
 local sIsRaid;
@@ -52,6 +53,7 @@ function VUHDO_customClustersInitBurst()
 	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
 	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
 	VUHDO_isInConeInFrontOf = VUHDO_GLOBAL["VUHDO_isInConeInFrontOf"];
+	VUHDO_backColor = VUHDO_GLOBAL["VUHDO_backColor"];
 
 	sClusterConfig = VUHDO_CONFIG["CLUSTER"];
 	sHealthLimit = sClusterConfig["BELOW_HEALTH_PERC"] * 0.01;
@@ -151,11 +153,7 @@ function VUHDO_updateAllClusterIcons(aUnit, anInfo)
 			VUHDO_getBarIconFrame(tButton, sClusterSlot):Hide();
 			VUHDO_getBarIconTimer(tButton, sClusterSlot):SetText("");
 		else
-			if (tNumLow < sThreshGood) then
-				VUHDO_getBarIcon(tButton, sClusterSlot):SetVertexColor(sColorFair["R"], sColorFair["G"], sColorFair["B"], sColorFair["O"]);
-			else
-				VUHDO_getBarIcon(tButton, sClusterSlot):SetVertexColor(sColorGood["R"], sColorGood["G"], sColorGood["B"], sColorGood["O"]);
-			end
+			VUHDO_getBarIcon(tButton, sClusterSlot):SetVertexColor(VUHDO_backColor(tNumLow < sThreshGood and sColorFair or sColorGood));
 			VUHDO_getBarIconFrame(tButton, sClusterSlot):Show();
 			if (sClusterConfig["IS_NUMBER"]) then
 				VUHDO_getBarIconTimer(tButton, sClusterSlot):SetText(tNumLow);
@@ -241,7 +239,7 @@ function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, a
 		for _, tButton in pairs(tAllButtons) do
 			tBorder = VUHDO_getClusterBorderFrame(tButton);
 			if (aColor ~= nil) then
-				tBorder:SetBackdropBorderColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+				tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
 				tBorder:Show();
 			else
 				tBorder:Hide();

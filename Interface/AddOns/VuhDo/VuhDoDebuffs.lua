@@ -113,11 +113,13 @@ local tIdx = 0;
 local tCopies = { };
 local tIsRevolvInit = true;
 local function VUHDO_copyColorRevolving()
-	tIdx = tIdx + 1;
-	if (tIdx > 40) then
+	if (tIdx > 39) then
 		tIdx = 1;
 		tIsRevolvInit = false;
+	else
+		tIdx = tIdx + 1;
 	end
+
 	if (tIsRevolvInit) then
 		tCopies[tIdx] = { };
 	else
@@ -258,6 +260,7 @@ local tChosen;
 local tName, tIcon, tStacks, tTypeString, tDuration, tExpiry, tSpellId, tIsBossDebuff;
 local tCustomDebuff;
 local tIsRelevant;
+local tNow;
 function VUHDO_determineDebuff(aUnit)
 	tInfo = (VUHDO_RAID or tEmptyCustomDebuf)[aUnit];
 	if (tInfo == nil) then
@@ -293,6 +296,7 @@ function VUHDO_determineDebuff(aUnit)
 	if (VUHDO_shouldScanUnit(aUnit)) then
 		tSoundDebuff = nil;
 		tIsStandardDebuff = false;
+		tNow = GetTime();
 
 		for tCnt = 1, 255 do
 			tName, _, tIcon, tStacks, tTypeString, tDuration, tExpiry, _, _, _, tSpellId, _, tIsBossDebuff, _ = UnitDebuff(aUnit, tCnt, false);
@@ -323,7 +327,7 @@ function VUHDO_determineDebuff(aUnit)
 				tSoundDebuff = tName;
 			end
 
-			tRemaining = floor((tExpiry or GetTime()) - GetTime());
+			tRemaining = floor((tExpiry or tNow) - tNow);
 
 			if (tIconsSet[tName] ~= nil) then
 				tStacks = tStacks + tIconsSet[tName][3];
@@ -346,12 +350,12 @@ function VUHDO_determineDebuff(aUnit)
 			end
 
 			if ((not sIsRemoveableOnly
-				or (tAbility == "I" and "player" == aUnit)
-				or (tAbility or "I") ~= "I") and tChosen ~= 6) then --VUHDO_DEBUFF_TYPE_CUSTOM
+					or (tAbility == "I" and "player" == aUnit)
+					or (tAbility or "I") ~= "I")
+				and tChosen ~= 6
+				and not VUHDO_DEBUFF_BLACKLIST[tName]) then --VUHDO_DEBUFF_TYPE_CUSTOM
 
-				if ((sIsUseDebuffIcon and (tIsBossDebuff or not sIsUseDebuffIconBossOnly))
-					and not VUHDO_DEBUFF_BLACKLIST[tName]) then
-
+				if (sIsUseDebuffIcon and (tIsBossDebuff or not sIsUseDebuffIconBossOnly)) then
 					tIconsSet[tName] = { tIcon, tExpiry, tStacks, tDuration, false };
 					tIsStandardDebuff = true;
 				end

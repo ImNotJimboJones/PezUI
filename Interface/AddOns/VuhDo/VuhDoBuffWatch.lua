@@ -978,7 +978,7 @@ function VUHDO_execSmartBuffPre(self)
 	end
 
 	local tCheckSwatch;
-	local tAllSwatches = VUHDO_getAllBuffSwatches();
+	local tAllSwatches = VUHDO_getAllBuffSwatchesOrdered();
 	local tVariants = nil;
 	local tTargetCode = nil;
 	local tRefSpell = nil;
@@ -990,7 +990,7 @@ function VUHDO_execSmartBuffPre(self)
 	local tNumLow, tCooldown, tTotalCd;
 	local tCooldown, tTotalCd;
 
-	for _, tCheckSwatch in pairs(tAllSwatches) do
+	for _, tCheckSwatch in ipairs(tAllSwatches) do
 		if (tCheckSwatch:IsShown()) then
 			tVariants = tCheckSwatch:GetAttribute("buff");
 			tTargetCode = tCheckSwatch:GetAttribute("target");

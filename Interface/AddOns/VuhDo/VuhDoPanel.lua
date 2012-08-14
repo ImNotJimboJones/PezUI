@@ -89,7 +89,7 @@ function VUHDO_customizeHeader(aHeader, aPanelNum, aModelId)
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
 	end
-	VUHDO_getHeaderBar(aHeader):SetStatusBarColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
+	VUHDO_getHeaderBar(aHeader):SetVuhDoColor(tColor);
 end
 
 

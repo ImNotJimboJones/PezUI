@@ -55,16 +55,45 @@ local function VUHDO_isFireSomething(anAction)
 		return false;
 	end
 
-	return ((VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_1"] or VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_2"] or VUHDO_SPELL_CONFIG["IS_FIRE_GLOVES"])
-	 or (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"] or "") > 0)
-	 or (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and strlen(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"] or "") > 0));
+	return VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_1"]
+		or VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_2"]
+		or VUHDO_SPELL_CONFIG["IS_FIRE_GLOVES"]
+		or (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and not VUHDO_strempty(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"]))
+		or (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and not VUHDO_strempty(VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"]));
 end
 
 
 
 --
-local tInstant;
-local tModi, tModi2;
+local tInstant, tModi2;
+local function VUHDO_getInstantFireText(aSlotNum)
+	tInstant = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_" .. aSlotNum .. "_SPELL"];
+	if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_" .. aSlotNum] and not VUHDO_strempty(tInstant)) then
+
+		if (VUHDO_SPELL_CONFIG["IS_FIRE_OUT_FIGHT"]) then
+			if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
+				tModi2 = " ";
+			else
+				tModi2 = " [@player] ";
+			end
+		else
+			if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
+				tModi2 = " [combat] ";
+			else
+				tModi2 = " [combat,@player] ";
+			end
+		end
+
+		return "/use" .. tModi2 .. tInstant .. "\n";
+	else
+		return "";
+	end
+end
+
+
+
+--
+local tModi;
 local function VUHDO_getFireText(anAction)
 
 	if (VUHDO_isFireSomething(anAction)) then
@@ -93,46 +122,9 @@ local function VUHDO_getFireText(anAction)
 			end
 
 			-- Instant 1
-			tInstant = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"];
-			if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"] and tInstant ~= nil and strlen(tInstant) > 0) then
-
-				if (VUHDO_SPELL_CONFIG["IS_FIRE_OUT_FIGHT"]) then
-					if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
-						tModi2 = " ";
-					else
-						tModi2 = " [@player] ";
-					end
-				else
-					if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
-						tModi2 = " [combat] ";
-					else
-						tModi2 = " [combat,@player] ";
-					end
-				end
-
-				sFireText = sFireText .. "/use" .. tModi2 .. VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"] .. "\n";
-			end
-
+			sFireText = sFireText .. VUHDO_getInstantFireText(1);
 			-- Instant 2
-			tInstant = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"];
-			if (VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"] and tInstant ~= nil and strlen(tInstant) > 0) then
-
-				if (VUHDO_SPELL_CONFIG["IS_FIRE_OUT_FIGHT"]) then
-					if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
-						tModi2 = " ";
-					else
-						tModi2 = " [@player] ";
-					end
-				else
-					if ((VUHDO_SPELLS[tInstant] or sEmpty)["noselftarget"]) then
-						tModi2 = " [combat] ";
-					else
-						tModi2 = " [combat,@player] ";
-					end
-				end
-
-				sFireText = sFireText .. "/use" .. tModi2 .. VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"] .. "\n";
-			end
+			sFireText = sFireText .. VUHDO_getInstantFireText(2);
 
 			-- Ton wieder an
 			if (VUHDO_IS_SFX_ENABLED) then
@@ -152,7 +144,6 @@ end
 
 
 --
-local tPet;
 local function VUHDO_getMacroPetUnit(aTarget)
 	if (VUHDO_RAID[aTarget] ~= nil and not VUHDO_RAID[aTarget]["isPet"]) then
 		return VUHDO_RAID[aTarget]["petUnit"];
@@ -263,6 +254,7 @@ end
 
 
 --
+local tPet;
 function VUHDO_buildFocusMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 
@@ -276,6 +268,7 @@ end
 
 
 --
+local tPet;
 function VUHDO_buildTargetMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 
@@ -289,6 +282,7 @@ end
 
 
 --
+local tPet;
 function VUHDO_buildAssistMacroText(aTarget)
 	tPet = VUHDO_getMacroPetUnit(aTarget);
 

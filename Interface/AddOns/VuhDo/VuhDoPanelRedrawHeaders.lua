@@ -87,7 +87,7 @@ function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 			tHeader:SetHeight(sHeight);
 
 			tHealthBar = VUHDO_getHeaderBar(tHeader);
-			tHealthBar:SetValue(100);
+			tHealthBar:SetValue(1);
 			tHealthBar:SetHeight(sHeight);
 
 			if (sStatusFile ~= nil) then

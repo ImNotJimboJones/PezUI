@@ -1,5 +1,5 @@
-## Interface: 40200
-## Version: 11.09.29
+## Interface: 40300
+## Version: 12.05.20
 ## Title: TipTacOptions
 ## Author: Aezay (Earthen Ring EU)
 ## Notes: Option Dialog for TipTac

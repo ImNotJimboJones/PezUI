@@ -107,6 +107,7 @@ local twipe = table.wipe;
 local tsort = table.sort;
 local _ = _;
 local sTrigger;
+local sCurrentMode;
 
 
 function VUHDO_vuhdoInitBurst()
@@ -144,6 +145,7 @@ function VUHDO_vuhdoInitBurst()
 	VUHDO_PANEL_UNITS = VUHDO_GLOBAL["VUHDO_PANEL_UNITS"];
 
 	sTrigger = VUHDO_CONFIG["EMERGENCY_TRIGGER"];
+	sCurrentMode = VUHDO_CONFIG["MODE"];
 end
 
 ----------------------------------------------------
@@ -221,7 +223,7 @@ local VUHDO_EMERGENCY_SORTERS = {
 --
 local tUnit, tInfo;
 local function VUHDO_sortEmergencies()
-	if (VUHDO_CONFIG["MODE"] == 1) then -- VUHDO_MODE_NEUTRAL
+	if (sCurrentMode == 1) then -- VUHDO_MODE_NEUTRAL
 		return;
 	end
 
@@ -235,7 +237,7 @@ local function VUHDO_sortEmergencies()
  		end
 	end
 
-	tsort(VUHDO_RAID_SORTED, VUHDO_EMERGENCY_SORTERS[VUHDO_CONFIG["MODE"]]);
+	tsort(VUHDO_RAID_SORTED, VUHDO_EMERGENCY_SORTERS[sCurrentMode]);
 	VUHDO_setTopEmergencies(VUHDO_CONFIG["MAX_EMERGENCIES"]);
 end
 
@@ -456,7 +458,7 @@ function VUHDO_updateHealth(aUnit, aMode)
 		end
 	end
 
-	if (1 ~= VUHDO_CONFIG["MODE"] -- VUHDO_MODE_NEUTRAL
+	if (1 ~= sCurrentMode -- VUHDO_MODE_NEUTRAL
 		and (2 == aMode or 3 == aMode)) then -- VUHDO_UPDATE_HEALTH -- VUHDO_UPDATE_HEALTH_MAX
 		-- Remove old emergencies
 		VUHDO_FORCE_RESET = true;

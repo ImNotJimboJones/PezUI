@@ -80,7 +80,7 @@ function VUHDO_initHotBars()
 			tHotBar:SetHeight(sHotBarHeight);
 			tHotBar:SetValue(0);
 			tHotBarColor = sBarColors[format("HOT%d", tCnt)];
-			tHotBar:SetStatusBarColor(tHotBarColor["R"], tHotBarColor["G"], tHotBarColor["B"], tHotBarColor["O"]);
+			tHotBar:SetVuhDoColor(tHotBarColor);
 
 			if (VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["turnAxis"]) then
 				if (VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"]) then

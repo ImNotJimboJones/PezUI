@@ -1,3 +1,9 @@
+TipTac Changes | 2012 May 20
+----------------------------
+- Changed the TOC version to 40300 for the 4.3 patch.
+- New option to show player gender. It will be displayed before the race. E.g. "85  Female Blood Elf Paladin".
+- Added the three "ItemRefShoppingTooltip" to the tooltips to get modified. These are the ones showing when you hold down shift over the ItemRefTooltip.
+
 TipTac Changes | 2011 Sep 29
 ----------------------------
 - Changed the TOC version to 40200 for the 4.2 patch.

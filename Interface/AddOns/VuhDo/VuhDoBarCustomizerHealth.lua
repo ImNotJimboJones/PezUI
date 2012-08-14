@@ -25,6 +25,7 @@ local VUHDO_getBarIconFrame;
 local VUHDO_updateClusterHighlights;
 local VUHDO_customizeTargetBar;
 local VUHDO_getColoredString;
+local VUHDO_textColor;
 
 local VUHDO_PANEL_SETUP;
 local VUHDO_BUTTON_CACHE;
@@ -86,6 +87,7 @@ function VUHDO_customHealthInitBurst()
   VUHDO_updateClusterHighlights = VUHDO_GLOBAL["VUHDO_updateClusterHighlights"];
 	VUHDO_customizeTargetBar = VUHDO_GLOBAL["VUHDO_customizeTargetBar"];
 	VUHDO_getColoredString = VUHDO_GLOBAL["VUHDO_getColoredString"];
+	VUHDO_textColor = VUHDO_GLOBAL["VUHDO_textColor"];
 
 	sIsOverhealText = VUHDO_CONFIG["SHOW_TEXT_OVERHEAL"]
 	sIsAggroText = VUHDO_CONFIG["THREAT"]["AGGRO_USE_TEXT"];
@@ -111,7 +113,7 @@ local tIncColor = { ["useBackground"] = true };
 --
 local function VUHDO_getUnitHealthModiPercent(anInfo, aModifier)
 	return anInfo["healthmax"] == 0 and 0
-		or 100 * (anInfo["health"] + aModifier) / anInfo["healthmax"];
+		or (anInfo["health"] + aModifier) / anInfo["healthmax"];
 end
 
 
@@ -164,8 +166,8 @@ local function VUHDO_updateIncHeal(aUnit)
 
 	if (tAmountInc > 0 and tInfo["connected"] and not tInfo["dead"]) then
 		tHealthPlusInc = VUHDO_getUnitHealthModiPercent(tInfo, tAmountInc);
-		if (tHealthPlusInc > 100) then
-			tHealthPlusInc = 100;
+		if (tHealthPlusInc > 1) then
+			tHealthPlusInc = 1;
 		end
 	else
 		tAmountInc = 0;
@@ -173,25 +175,21 @@ local function VUHDO_updateIncHeal(aUnit)
 	end
 
 	if (tAmountInc > 0) then
-		tIncColor["R"] = -1;
 
   	for _, tButton in pairs(tAllButtons) do
     	tIncBar = VUHDO_getHealthBar(tButton, 6);
 
 			if (sIsInvertGrowth and tInfo["healthmax"] > 0) then
-				tIncBar:SetValueRange(100 * tInfo["health"] / tInfo["healthmax"], tHealthPlusInc);
+				tIncBar:SetValueRange(tInfo["health"] / tInfo["healthmax"], tHealthPlusInc);
 			else
   			tIncBar:SetValue(tHealthPlusInc);
   		end
 
-   		if (tIncColor["R"] == -1) then
-   			tIncColor["R"], tIncColor["G"], tIncColor["B"] = VUHDO_getHealthBar(tButton, 1):GetStatusBarColor();
-   			tIncColor = VUHDO_getDiffColor(tIncColor, VUHDO_PANEL_SETUP["BAR_COLORS"]["INCOMING"]);
-   			_, _, _, tOpacity = VUHDO_getHealthBar(tButton, 1):GetStatusBarColor();
-   			if (tIncColor["O"] ~= nil and tOpacity ~= nil) then
-   				tIncColor["O"] = tIncColor["O"] * tOpacity;
-   			end
-   		end
+ 			tIncColor["R"], tIncColor["G"], tIncColor["B"], tOpacity = VUHDO_getHealthBar(tButton, 1):GetStatusBarColor();
+ 			tIncColor = VUHDO_getDiffColor(tIncColor, VUHDO_PANEL_SETUP["BAR_COLORS"]["INCOMING"]);
+ 			if (tIncColor["O"] ~= nil and tOpacity ~= nil) then
+ 				tIncColor["O"] = tIncColor["O"] * tOpacity;
+ 			end
 
     	VUHDO_setStatusBarColor(tIncBar, tIncColor);
     	tOverhealSetup = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["OVERHEAL_TEXT"];
@@ -393,7 +391,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 		if (tTagText ~= "" or tIsHideIrrel) then
 			tLifeString = "";
 		elseif (1 == tLifeConfig["mode"] or anIsTarget) then -- VUHDO_LT_MODE_PERCENT
-			tLifeString = format("%d%%", VUHDO_getUnitHealthModiPercent(tInfo, tLifeAmount - tInfo["health"]));
+			tLifeString = format("%d%%", VUHDO_getUnitHealthModiPercent(tInfo, tLifeAmount - tInfo["health"]) * 100);
 		elseif (3 == tLifeConfig["mode"]) then -- VUHDO_LT_MODE_MISSING
 			tMissLife = tLifeAmount - tInfo["healthmax"];
 			if (tMissLife < -10) then
@@ -484,7 +482,7 @@ function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, a
 	aCurrValue = aCurrValue or 0;
 
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
-		or aMaxValue > 1 and 100 * aCurrValue / aMaxValue
+		or aMaxValue > 1 and aCurrValue / aMaxValue
 		or 0;
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
@@ -495,10 +493,10 @@ function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, a
 
 				if (tQuota > 0) then
 					if (aColor ~= nil) then
-						tHealthBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+						tHealthBar:SetVuhDoColor(aColor);
 						if (aColor["useText"]) then
-							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
-							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+							VUHDO_getBarText(tHealthBar):SetTextColor(VUHDO_textColor(aColor));
+							VUHDO_getLifeText(tHealthBar):SetTextColor(VUHDO_textColor(aColor));
 						end
 					end
 				  tHealthBar:SetValue(tQuota);
@@ -535,7 +533,7 @@ function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrVa
 	aCurrValue = aCurrValue or 0;
 
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
-		or aMaxValue > 1 and 100 * aCurrValue / aMaxValue
+		or aMaxValue > 1 and aCurrValue / aMaxValue
 		or 0;
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
@@ -546,10 +544,10 @@ function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrVa
 
 				if (tQuota > 0) then
 					if (aColor ~= nil) then
-						tHealthBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+						tHealthBar:SetVuhDoColor(aColor);
 						if (aColor["useText"]) then
-							VUHDO_getBarText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
-							VUHDO_getLifeText(tHealthBar):SetTextColor(aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"]);
+							VUHDO_getBarText(tHealthBar):SetTextColor(VUHDO_textColor(aColor));
+							VUHDO_getLifeText(tHealthBar):SetTextColor(VUHDO_textColor(aColor));
 						end
 					end
 				  tHealthBar:SetValue(tQuota);
@@ -571,8 +569,8 @@ function VUHDO_aggroBarBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCount
 		for _, tButton in pairs(tAllButtons) do
 			if (anIsActive) then
 				tAggroBar = VUHDO_getHealthBar(tButton, 4);
-				tAggroBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
-				tAggroBar:SetValue(100);
+				tAggroBar:SetVuhDoColor(aColor);
+				tAggroBar:SetValue(1);
 			else
 				VUHDO_getHealthBar(tButton, 4):SetValue(0);
 			end
@@ -588,14 +586,14 @@ function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValu
 	aMaxValue = aMaxValue or 0;
 
 	tQuota = (anIsActive or (aMaxValue or 0) > 1)
-		and 100 or 0;
+		and 1 or 0;
 
 	tAllButtons =  VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
 			tBar = VUHDO_getHealthBar(tButton, 3);
 			if (aColor ~= nil) then
-				tBar:SetStatusBarColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+				tBar:SetVuhDoColor(aColor);
 			end
 			tBar:SetValue(tQuota);
 		end
