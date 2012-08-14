@@ -1,0 +1,28 @@
+tag v1.5
+eba6d022acc89cd6c6d8d4bc96c86582c3b2eb45
+funkydude <none>
+2012-08-14 01:27:57 +0100
+
+Tagging as v1.5
+
+
+--------------------
+
+funkydude:
+	- bump to v1.5
+	- You can once again change the rotation speed of a border without reloading (broken from when we moved to the Blizz animation system) Fix disabling a rotation screwing with the texture size
+	- Fix border customization and TexBrowser detection
+	- mop compat
+	- Remove AceTimer and the BetterBlizzOptions lib
+	- BorderPresets: Fix a crash on MoP when using the Jewels preset
+	- MoP fixes
+	- some minor tweaks
+	- Merge autozoom into the general module
+	- Borders: Re-write to use the Blizz animation system instead of using timers. You will need to re-select your preset to fix animation speed. Also, changing animation speed manually requires a reload for now.
+	- Ping: Looks far better with a 3 second delay into a 3 second fade.
+	- Ping: woops, some stuff got cut out
+	- Ping: re-write. Use a nice fadeout animation instead of using acetimer and a blanket hide, recycle the frame we've already made instead of using aceevent.
+	- Coordinates: Use an animation instead of AceTimer
+	- Remove AceLocale and use our addon scope table instead
+	- ZoneText: minor GUI display tweak
+	- fix pkgmeta to point to the latest CBH

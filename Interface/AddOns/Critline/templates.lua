@@ -1,10 +1,103 @@
 ﻿local addonName, addon = ...
-
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
 local templates = {}
 addon.templates = templates
 
+local function onSet(self, value)
+	addon:Debug(self.setting..":", value)
+	local func = self.func
+	if func then
+		if type(func) == "string" then
+			self = self.module
+			func = self[func]
+		end
+		func(self, value)
+	end
+end
+
+do
+	local objectData = {
+		CheckButton = {
+			x = -2,
+			y = -16,
+			bottomOffset = 8,
+		},
+		ColorButton = {
+			x = 3,
+			y = -21,
+			bottomOffset = 3,
+		},
+		Slider = {
+			x = 7,
+			y = -27,
+			bottomOffset = -5,
+		},
+		DropDownMenu = {
+			x = -17,
+			y = -32,
+			bottomOffset = 8,
+		},
+	}
+	
+	local function loadOptions(self, module, perchar)
+		module = module or self
+		for i, v in ipairs(self.options) do
+			if v.perchar == perchar then
+				v.db = module[perchar and "percharDB" or "db"].profile
+				v:LoadSetting(v.db[v.setting])
+				onSet(v, v.db[v.setting])
+			end
+		end
+	end
+	
+	--[[
+	
+	standard option fields:
+	
+		type (string) - type of widget
+		label (string) - label of the option
+		tooltipText (string) - description of the option
+		setting (string) - key in the database that this option relates to
+		perchar (boolean) - if true, this option will use .percharDB instead of .db
+		func (string | functon) - function to be called when this option is changed, if a string, will look for a method in the module table
+									gets passed the option widget and its value
+	
+	]]
+	
+	function templates:Add(object)
+		local options = self.options
+		local objectType = object.type
+		local option = self["Create"..objectType](self, object)
+		option.type = objectType
+		option.tooltipText = object.tooltipText
+		option.setting = object.setting
+		option.perchar = object.perchar
+		option.func = object.func
+		local data = objectData[objectType]
+		local previousOption = options[#options]
+		if object.newColumn or not previousOption then
+			option:SetPoint("TOPLEFT", self.title, object.newColumn and "BOTTOM" or "BOTTOMLEFT", data.x, data.y)
+		else
+			local previousData = objectData[previousOption.type]
+			option:SetPoint("TOPLEFT", previousOption, "BOTTOMLEFT", data.x - previousData.x, data.y + previousData.bottomOffset - (object.gap or 0))
+		end
+		tinsert(options, option)
+		self.registry[object.setting] = option
+		return option
+	end
+	
+	-- specify a module if your config frame is not the same as your main module table
+	function templates:CreateOptions(options, module)
+		self.options = {}
+		self.registry = {}
+		self.LoadOptions = loadOptions
+		for i, v in ipairs(options) do
+			local option = templates.Add(self, v)
+			option.module = module or self
+		end
+	end
+end
 
 do	-- config frame
 	local function createTitle(frame)
@@ -28,10 +121,25 @@ do	-- config frame
 		frame.desc = desc
 	end
 	
-	function templates:CreateConfigFrame(name, parent, addTitle, addDesc)
-		local frame = CreateFrame("Frame")
+	local embed = {
+		"CreateOptions",
+		"CreateCheckButton",
+		"CreateSlider",
+		"CreateColorButton",
+		"CreateEditBox",
+		"CreateDropDownMenu",
+		"CreateTabInterface",
+	}
+	
+	local function createConfigFrame(name, addTitle, addDesc, frame)
+		frame = frame or CreateFrame("Frame")
+		for i, v in ipairs(embed) do
+			frame[v] = templates[v]
+		end
 		frame.name = name
-		frame.parent = parent
+		if name ~= addonName then
+			frame.parent = addonName
+		end
 		if addTitle then
 			createTitle(frame)
 			if addDesc then
@@ -41,130 +149,40 @@ do	-- config frame
 		InterfaceOptions_AddCategory(frame)
 		return frame
 	end
-end
-
-
-do	-- click button
-	local textures = {"l", "r", "m"}
 	
-	local function setTexture(self, texture)
-		for _, v in ipairs(textures) do
-			self[v]:SetTexture(texture)
-		end
+	local function createModuleConfigFrame(self, name, addTitle, addDesc, frame)
+		return createConfigFrame(name, addTitle, addDesc, frame)
 	end
 	
-	local function onMouseDown(self)
-		if self:IsEnabled() == 1 then
-			setTexture(self, "Interface\\Buttons\\UI-Panel-Button-Down")
-		end
-	end
-	
-	local function onMouseUp(self)
-		if self:IsEnabled() == 1 then
-			setTexture(self, "Interface\\Buttons\\UI-Panel-Button-Up")
-		end
-	end
-	
-	local function onDisable(self)
-		setTexture(self, "Interface\\Buttons\\UI-Panel-Button-Disabled")
-	end
-	
-	local function onEnable(self)
-		setTexture(self, "Interface\\Buttons\\UI-Panel-Button-Up")
-	end
-	
-	function templates:CreateButton(parent)
-		local btn = CreateFrame("Button", nil, parent)
-		btn:SetNormalFontObject("GameFontNormal")
-		btn:SetHighlightFontObject("GameFontHighlight")
-		btn:SetDisabledFontObject("GameFontDisable")
-		btn:SetScript("OnMouseDown", onMouseDown)
-		btn:SetScript("OnMouseUp", onMouseUp)
-		btn:SetScript("OnDisable", onDisable)
-		btn:SetScript("OnEnable", onEnable)
-		
-		local highlight = btn:CreateTexture(nil, nil, "UIPanelButtonHighlightTexture")
-		btn:SetHighlightTexture(highlight)
-		
-		local l = btn:CreateTexture(nil, "BACKGROUND")
-		l:SetTexture("Interface\\Buttons\\UI-Panel-Button-Up")
-		l:SetTexCoord(0, 0.09375, 0, 0.6875)
-		l:SetWidth(12)
-		l:SetPoint("TOPLEFT")
-		l:SetPoint("BOTTOMLEFT")
-		btn.l = l
-		
-		local r = btn:CreateTexture(nil, "BACKGROUND")
-		r:SetTexture("Interface\\Buttons\\UI-Panel-Button-Up")
-		r:SetTexCoord(0.53125, 0.625, 0, 0.6875)
-		r:SetWidth(12)
-		r:SetPoint("TOPRIGHT")
-		r:SetPoint("BOTTOMRIGHT")
-		btn.r = r
-		
-		local m = btn:CreateTexture(nil, "BACKGROUND")
-		m:SetTexture("Interface\\Buttons\\UI-Panel-Button-Up")
-		m:SetTexCoord(0.09375, 0.53125, 0, 0.6875)
-		m:SetPoint("TOPLEFT", l, "TOPRIGHT")
-		m:SetPoint("BOTTOMRIGHT", r, "BOTTOMLEFT")
-		btn.m = m
-		
-		return btn
+	function addon:CreateConfigFrame()
+		local frame = createConfigFrame(addonName, true)
+		self.AddCategory = createModuleConfigFrame
+		return frame
 	end
 end
-
 
 do	-- check button
 	local function onClick(self)
-		local checked = self:GetChecked()
-		
-		if checked then
-			PlaySound("igMainMenuOptionCheckBoxOn")
-		else
-			PlaySound("igMainMenuOptionCheckBoxOff")
-		end
-		
-		self.module[self.db].profile[self.setting] = checked and true or false
-		
-		if self.func then
-			self:func(self.module)
-		end
-		
-		addon:Debug(self.setting..(checked and " on" or " off"))
+		local checked = self:GetChecked() ~= nil
+		PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+		self.db[self.setting] = checked
+		onSet(self, checked)
 	end
 	
-	local function loadSetting(self)
-		self:SetChecked(self.module[self.db].profile[self.setting])
-		if self.func then
-			self:func(self.module)
-		end
-	end
-
-	function templates:CreateCheckButton(parent, data)
-		local btn = CreateFrame("CheckButton", nil, parent, "OptionsBaseCheckButtonTemplate")
+	function templates:CreateCheckButton(data)
+		local btn = CreateFrame("CheckButton", nil, self, "OptionsBaseCheckButtonTemplate")
 		btn:SetPushedTextOffset(0, 0)
 		btn:SetScript("OnClick", onClick)
-		
-		btn.LoadSetting = loadSetting
+		btn.LoadSetting = btn.SetChecked
 		
 		local text = btn:CreateFontString(nil, nil, "GameFontHighlight")
 		text:SetPoint("LEFT", btn, "RIGHT", 0, 1)
 		btn:SetFontString(text)
+		btn:SetText(data.label)
 		
-		if data then
-			btn:SetText(data.text)
-			data.text = nil
-			data.db = data.perchar and "percharDB" or "db"
-			data.perchar = nil
-			for k, v in pairs(data) do
-				btn[k] = v
-			end
-		end
-
 		return btn
 	end
 end
-
 
 do	-- slider template
 	local backdrop = {
@@ -173,6 +191,23 @@ do	-- slider template
 		tile = true, tileSize = 8, edgeSize = 8,
 		insets = {left = 3, right = 3, top = 6, bottom = 6}
 	}
+	
+	local function setText(self, value, isPercent)
+		if isPercent then
+			self:SetFormattedText("%.0f%%", value * 100)
+		else
+			self:SetText(value)
+		end
+	end
+	
+	local function onValueChanged(self, value, userInput)
+		setText(self.currentValue, value, self.isPercent)
+		-- only set values if the value was set by a human; they will already have been set by LoadSettings
+		if userInput then
+			self.db[self.setting] = value
+			onSet(self, value)
+		end
+	end
 	
 	local function onEnter(self)
 		if self:IsEnabled() then
@@ -183,8 +218,8 @@ do	-- slider template
 		end
 	end
 	
-	function templates:CreateSlider(parent, data)
-		local slider = CreateFrame("Slider", nil, parent)
+	function templates:CreateSlider(data)
+		local slider = CreateFrame("Slider", nil, self)
 		slider:EnableMouse(true)
 		slider:SetSize(144, 17)
 		slider:SetOrientation("HORIZONTAL")
@@ -192,6 +227,8 @@ do	-- slider template
 		slider:SetBackdrop(backdrop)
 		slider:SetScript("OnEnter", onEnter)
 		slider:SetScript("OnLeave", GameTooltip_Hide)
+		
+		slider.LoadSetting = slider.SetValue
 		
 		local text = slider:CreateFontString(nil, nil, "GameFontNormal")
 		text:SetPoint("BOTTOM", slider, "TOP")
@@ -205,70 +242,65 @@ do	-- slider template
 		max:SetPoint("TOPRIGHT", slider, "BOTTOMRIGHT", 4, 3)
 		slider.max = max
 		
-		if data then
-			slider:SetMinMaxValues(data.minValue, data.maxValue)
-			slider:SetValueStep(data.valueStep)
-			slider:SetScript("OnValueChanged", data.func)
-			text:SetText(data.text)
-			min:SetText(data.minText or data.minValue)
-			max:SetText(data.maxText or data.maxValue)
-			slider.tooltipText = data.tooltipText
-		end
-		
 		-- font string for current value
-		local value = slider:CreateFontString(nil, "BACKGROUND", "GameFontHighlightSmall")
-		value:SetPoint("CENTER", 0, -15)
-		slider.value = value
+		local currentValue = slider:CreateFontString(nil, "BACKGROUND", "GameFontHighlightSmall")
+		currentValue:SetPoint("CENTER", 0, -15)
+		slider.currentValue = currentValue
 		
 		local thumb = slider:CreateTexture()
 		thumb:SetTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
 		thumb:SetSize(32, 32)
 		slider:SetThumbTexture(thumb)
 		
+		if data then
+			slider:SetMinMaxValues(data.minValue, data.maxValue)
+			slider:SetValueStep(data.valueStep)
+			slider:SetScript("OnValueChanged", onValueChanged)
+			text:SetText(data.label)
+			slider.isPercent = data.isPercent
+			setText(min, data.minText or data.minValue, data.isPercent)
+			setText(max, data.maxText or data.maxValue, data.isPercent)
+		end
+		
 		return slider
 	end
 end
 
-
 do	-- swatch button template
 	local ColorPickerFrame = ColorPickerFrame
 	
-	local function swatchFunc()
-		local button = ColorPickerFrame.extraInfo
-		local r, g, b = ColorPickerFrame:GetColorRGB()
-		button.swatch:SetVertexColor(r, g, b)
-		if button.func then button:func(r, g, b) end
-		local color = button.color
+	local function setColor(self, r, g, b)
+		self.swatch:SetVertexColor(r, g, b)
+	end
+	
+	local function saveColor(self, r, g, b)
+		setColor(self, r, g, b)
+		local color = self.color
 		color.r = r
 		color.g = g
 		color.b = b
+		onSet(self, color)
+	end
+	
+	local function loadSetting(self, value)
+		local color = self.db[self.setting]
+		self.color = color
+		setColor(self, color.r, color.g, color.b)
+	end
+	
+	local function swatchFunc()
+		saveColor(ColorPickerFrame.extraInfo, ColorPickerFrame:GetColorRGB())
 	end
 
 	local function cancelFunc(prev)
-		local button = ColorPickerFrame.extraInfo
-		local r, g, b, a = prev.r, prev.g, prev.b, prev.opacity
-		button.swatch:SetVertexColor(r, g, b)
-		if button.func then button:func(r, g, b) end
-		local color = button.color
-		color.r = r
-		color.g = g
-		color.b = b
+		saveColor(ColorPickerFrame.extraInfo, ColorPicker_GetPreviousValues())
 	end
 
-	-- local function opacityFunc()
-		-- local button = ColorPickerFrame.extraInfo
-		-- local alpha = 1.0 - OpacitySliderFrame:GetValue()
-		-- if button.opacityFunc then button:opacityFunc(alpha) end
-	-- end
-	
 	local function onClick(self)
 		local info = UIDropDownMenu_CreateInfo()
 		local color = self.color
 		info.r, info.g, info.b = color.r, color.g, color.b
 		info.swatchFunc = swatchFunc
-		-- info.hasOpacity = self.hasOpacity
-		-- info.opacityFunc = opacityFunc
-		-- info.opacity = color.a
 		info.cancelFunc = cancelFunc
 		info.extraInfo = self
 		OpenColorPicker(info)
@@ -287,12 +319,17 @@ do	-- swatch button template
 		GameTooltip:Hide()
 	end
 
-	function templates:CreateColorButton(parent)
-		local btn = CreateFrame("Button", nil, parent)
+	function templates:CreateColorButton(data)
+		local btn = CreateFrame("Button", nil, self)
 		btn:SetSize(16, 16)
 		btn:SetPushedTextOffset(0, 0)
+		btn:SetScript("OnClick", onClick)
+		btn:SetScript("OnEnter", onEnter)
+		btn:SetScript("OnLeave", onLeave)
 		
-		btn:SetNormalTexture("Interface\\ChatFrame\\ChatFrameColorSwatch")
+		btn.LoadSetting = loadSetting
+		
+		btn:SetNormalTexture([[Interface\ChatFrame\ChatFrameColorSwatch]])
 		btn.swatch = btn:GetNormalTexture()
 		
 		local bg = btn:CreateTexture(nil, "BACKGROUND")
@@ -306,39 +343,36 @@ do	-- swatch button template
 		text:SetJustifyH("LEFT")
 		btn:SetFontString(text)
 		
-		btn:SetScript("OnClick", onClick)
-		btn:SetScript("OnEnter", onEnter)
-		btn:SetScript("OnLeave", onLeave)
+		btn:SetText(data.label)
 		
 		return btn
 	end
 end
 
-
 do	-- editbox
-	function templates:CreateEditBox(parent)
-		local editbox = CreateFrame("EditBox", nil, parent)
+	function templates:CreateEditBox()
+		local editbox = CreateFrame("EditBox", nil, self)
 		editbox:SetAutoFocus(false)
 		editbox:SetHeight(20)
 		editbox:SetFontObject("ChatFontNormal")
 		editbox:SetTextInsets(5, 0, 0, 0)
 
 		local left = editbox:CreateTexture("BACKGROUND")
-		left:SetTexture("Interface\\Common\\Common-Input-Border")
+		left:SetTexture([[Interface\Common\Common-Input-Border]])
 		left:SetTexCoord(0, 0.0625, 0, 0.625)
 		left:SetWidth(8)
 		left:SetPoint("TOPLEFT")
 		left:SetPoint("BOTTOMLEFT")
 
 		local right = editbox:CreateTexture("BACKGROUND")
-		right:SetTexture("Interface\\Common\\Common-Input-Border")
+		right:SetTexture([[Interface\Common\Common-Input-Border]])
 		right:SetTexCoord(0.9375, 1, 0, 0.625)
 		right:SetWidth(8)
 		right:SetPoint("TOPRIGHT")
 		right:SetPoint("BOTTOMRIGHT")
 
 		local mid = editbox:CreateTexture("BACKGROUND")
-		mid:SetTexture("Interface\\Common\\Common-Input-Border")
+		mid:SetTexture([[Interface\Common\Common-Input-Border]])
 		mid:SetTexCoord(0.0625, 0.9375, 0, 0.625)
 		mid:SetPoint("TOPLEFT", left, "TOPRIGHT")
 		mid:SetPoint("BOTTOMRIGHT", right, "BOTTOMLEFT")
@@ -347,8 +381,13 @@ do	-- editbox
 	end
 end
 
-
 do	-- dropdown menu frame
+	local function onClick(self)
+		self.owner:SetSelectedValue(self.value)
+		self.owner.db[self.owner.setting] = self.value
+		onSet(self.owner, self.value)
+	end
+	
 	local function setSelectedValue(self, value)
 		UIDropDownMenu_SetSelectedValue(self, value)
 		UIDropDownMenu_SetText(self, self.menu and self.menu[value] or value)
@@ -375,8 +414,9 @@ do	-- dropdown menu frame
 		end
 	end
 	
-	function templates:CreateDropDownMenu(name, parent, menu, valueLookup)
-		local frame = CreateFrame("Frame", name, parent, "UIDropDownMenuTemplate")
+	function templates:CreateDropDownMenu(data, name)
+		name = name or "Critline"..data.setting.."DropDown"
+		local frame = CreateFrame("Frame", name, self, "UIDropDownMenuTemplate")
 		
 		frame.SetFrameWidth = UIDropDownMenu_SetWidth
 		frame.SetSelectedValue = setSelectedValue
@@ -387,13 +427,7 @@ do	-- dropdown menu frame
 		frame.Disable = UIDropDownMenu_DisableDropDown
 		frame.SetDisabled = setDisabled
 		frame.JustifyText = UIDropDownMenu_JustifyText
-		
-		if menu then
-			for _, v in ipairs(menu) do
-				menu[v.value] = v.text
-			end
-		end
-		frame.menu = menu or valueLookup
+		frame.LoadSetting = setSelectedValue
 		
 		frame.initialize = initialize
 		
@@ -401,205 +435,139 @@ do	-- dropdown menu frame
 		label:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 16, 3)
 		frame.label = label
 		
+		if data then
+			if data.menu then
+				for i, v in ipairs(data.menu) do
+					data.menu[v.value] = v.text
+				end
+			end
+			frame.menu = data.menu
+			frame.onClick = onClick
+			frame.initialize = data.initialize or initialize
+			frame.label:SetText(data.label)
+			frame:SetFrameWidth(data.width)
+		end
+		
 		return frame
 	end
 end
 
-
-do	-- used in Reset and Announce
-	local MAXSPELLBUTTONS = 12
-	local ITEMHEIGHT = 36
+do	-- tab interface
+	local function setLabel(self, text)
+		self:SetText(text)
+		self:SetWidth(self:GetTextWidth() + 16)
+	end
 	
-	local function update(self)
-		local selectedTree = self.tree:GetSelectedValue()
-		
-		local spells = addon:GetSpellArray(selectedTree)
-		
-		local size = #spells
-		
-		FauxScrollFrame_Update(self.scrollFrame, size, MAXSPELLBUTTONS, ITEMHEIGHT)
-		
-		local offset = FauxScrollFrame_GetOffset(self.scrollFrame)
-		
-		for line = 1, MAXSPELLBUTTONS do
-			local item = self.buttons[line]
-			local lineplusoffset = line + offset
-			if lineplusoffset <= size then
-				local data = spells[lineplusoffset]
-				item.data = data
-				item.button.data = data
-				local normal = data.normal and data.normal.amount
-				local crit = data.crit and data.crit.amount
-				item.icon:SetTexture(addon:GetSpellTexture(data.spellID))
-				if addon.filters then
-					item.icon:SetDesaturated(data.filtered)
-					item.spell:SetFontObject(data.filtered and "GameFontDisable" or "GameFontNormal")
+	local function selectTab(frame, tabIndex)
+		frame.selectedTab = tabIndex
+		for i, tab in ipairs(frame.tabs) do
+			if i == tabIndex then
+				tab:Disable()
+				tab:SetHeight(20)
+				tab.bg:SetTexture(0.3, 0.3, 0.3)
+				if tab.frame then
+					tab.frame:Show()
 				end
-				item.spell:SetText(addon:GetFullSpellName(data.spellID, data.periodic))
-				item.target:SetFormattedText("%s\n%s", data.normal and data.normal.target or "n/a", data.crit and data.crit.target or "n/a")
-				item.record:SetFormattedText("%s\n%s", addon:ShortenNumber(normal or 0), addon:ShortenNumber(crit or 0))
-				if self.history then
-					local prevRecord = self.history[selectedTree][data.spellID]
-					if prevRecord and prevRecord[data.periodic] then
-						item.button.bg:Hide()
-						item.button.texture:Hide()
-						item.button.action = "Undo"
-					else
-						item.button.bg:Show()
-						item.button.texture:Show()
-						item.button.action = "Reset"
-					end
-				end
-				item:Show()
 			else
-				item:Hide()
+				tab:Enable()
+				tab:SetHeight(16)
+				tab.bg:SetTexture(0.7, 0.7, 0.7)
+				if tab.frame then
+					tab.frame:Hide()
+				end
 			end
+		end
+		if frame.OnTabSelected then
+			frame:OnTabSelected(tabIndex)
 		end
 	end
 	
-	local function onMouseDown(self)
-		self:SetPoint("RIGHT", -7, -1)
+	local function onClick(self)
+		PlaySound("igMainMenuOptionCheckBoxOn")
+		selectTab(self.container, self:GetID())
 	end
 	
-	local function onMouseUp(self)
-		self:SetPoint("RIGHT", -8, 0)
+	local function createTab(frame)
+		local tab = CreateFrame("Button", nil, frame)
+		tab:SetSize(64, 20)
+		tab:SetNormalFontObject(GameFontNormalSmall)
+		tab:SetHighlightFontObject(GameFontHighlightSmall)
+		tab:SetDisabledFontObject(GameFontHighlightSmall)
+		local highlight = tab:CreateTexture()
+		highlight:SetTexture([[Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight]])
+		highlight:SetPoint("BOTTOMLEFT", -2, -6)
+		highlight:SetPoint("TOPRIGHT", 2, 6)
+		tab:SetHighlightTexture(highlight)
+		tab:SetScript("OnClick", onClick)
+		tab.SetLabel = setLabel
+		tab.container = frame
+
+		local index = #frame.tabs + 1
+		if index == 1 then
+			tab:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 6, 1)
+		else
+			tab:SetPoint("BOTTOMLEFT", frame.tabs[index - 1], "BOTTOMRIGHT", 6, 0)
+		end
+		tab:SetID(index)
+		frame.tabs[index] = tab
+		
+		local bg = tab:CreateTexture(nil, "BORDER")
+		bg:SetTexture(0.3, 0.3, 0.3)
+		bg:SetBlendMode("MOD")
+		bg:SetAllPoints()
+		tab.bg = bg
+
+		local border = tab:CreateTexture(nil, "BORDER", nil, -1)
+		border:SetTexture(0.5, 0.5, 0.5, 0.3)
+		border:SetPoint("TOPLEFT", -1, 1)
+		border:SetPoint("BOTTOMRIGHT", 1, 0)
+		
+		return tab
 	end
 	
-	-- this is used for creating the scroll frames for the Reset and Announce frames
-	function templates:CreateList(name, title, action)
-		local frame = templates:CreateConfigFrame(title, addonName)
+	local function getSelectedTab(frame)
+		return frame.selectedTab
+	end
+	
+	function templates:CreateTabInterface()
+		local frame = CreateFrame("Frame", nil, self)
 		
-		frame.Update = update
-		local function update()
-			frame:Update()
-		end
-		
-		addon.RegisterCallback(frame, "PerCharSettingsLoaded", "Update")
-		addon.RegisterCallback(frame, "RecordsChanged", "Update")
-		addon.RegisterCallback(frame, "SpellsChanged", "Update")
-		
-		local scrollFrame = CreateFrame("ScrollFrame", name.."ScrollFrame", frame, "FauxScrollFrameTemplate")
-		scrollFrame:SetHeight(MAXSPELLBUTTONS * ITEMHEIGHT + 4)
-		scrollFrame:SetPoint("TOPLEFT", 32, -24)
-		scrollFrame:SetPoint("TOPRIGHT", -32, -24)
-		scrollFrame:SetScript("OnVerticalScroll", function(self, offset) FauxScrollFrame_OnVerticalScroll(self, offset, ITEMHEIGHT, update) end)
-		frame.scrollFrame = scrollFrame
+		local bg = frame:CreateTexture(nil, "BORDER")
+		bg:SetTexture(0.3, 0.3, 0.3)
+		bg:SetBlendMode("MOD")
+		bg:SetAllPoints()
 
-		local function onClick(self)
-			frame[self.action](frame, self.data)
-		end
-		
-		local function onEnter(self)
-			GameTooltip.Critline = true
-			GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-			GameTooltip:SetSpellByID(self.data.spellID)
-			GameTooltip:AddLine(" ")
-			addon:AddTooltipLine(self.data)
-			if frame.history then
-				local prevRecord = frame.history[frame.tree.selectedValue][self.data.spellID]
-				prevRecord = prevRecord and prevRecord[self.data.periodic]
-				if prevRecord then
-					GameTooltip:AddLine(" ")
-					GameTooltip:AddLine(L["Previous record:"])
-					addon:AddTooltipLine(prevRecord)
-				end
-			end
-			GameTooltip:Show()
-		end
-		
-		-- create list of check buttons
-		local buttons = {}
-		for i = 1, MAXSPELLBUTTONS do
-			local item = CreateFrame("Frame", nil, frame)
-			item:SetHeight(ITEMHEIGHT)
-			if i == 1 then
-				item:SetPoint("TOPLEFT", scrollFrame)
-			else
-				item:SetPoint("TOP", buttons[i - 1], "BOTTOM")
-			end
-			item:SetPoint("RIGHT", scrollFrame)
-			item:SetScript("OnEnter", onEnter)
-			item:SetScript("OnLeave", GameTooltip_Hide)
-			
-			local icon = item:CreateTexture()
-			icon:SetSize(32, 32)
-			icon:SetPoint("LEFT")
-			item.icon = icon
+		local border = frame:CreateTexture(nil, "BORDER", nil, -1)
+		border:SetTexture(0.5, 0.5, 0.5, 0.3)
+		border:SetPoint("TOPLEFT", bg, -1, 1)
+		border:SetPoint("BOTTOMRIGHT", bg, 1, -1)
 
-			local spell = item:CreateFontString(nil, nil, "GameFontNormal")
-			spell:SetPoint("TOPLEFT", icon, "TOPRIGHT", 4, -4)
-			spell:SetJustifyH("LEFT")
-			item.spell = spell
-
-			local target = item:CreateFontString(nil, nil, "GameFontDisableSmall")
-			target:SetPoint("TOPRIGHT", -80, 0)
-			target:SetPoint("BOTTOMRIGHT", -80, 0)
-			target:SetJustifyH("RIGHT")
-			target:SetSpacing(2)
-			item.target = target
-			
-			local button = CreateFrame("Button", nil, item)
-			button:SetSize(24, 24)
-			button:SetPoint("RIGHT", -8, 0)
-			button:SetScript("OnClick", onClick)
-			button:SetScript("OnMouseDown", onMouseDown)
-			button:SetScript("OnMouseUp", onMouseUp)
-			button.action = action
-			item.button = button
-			
-			local border = button:CreateTexture(nil, "BORDER")
-			border:SetAllPoints()
-			border:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-Undo]])
-			
-			local bg = button:CreateTexture()
-			bg:SetSize(20, 20)
-			bg:SetPoint("CENTER")
-			bg:SetTexture(0, 0, 0)
-			button.bg = bg
-			
-			local texture = button:CreateTexture()
-			texture:SetPoint("CENTER")
-			button.texture = texture
-			
-			if action == "Announce" then
-				texture:SetSize(16, 16)
-				texture:SetTexture([[Interface\Buttons\UI-GuildButton-MOTD-Up]])
-			else
-				texture:SetSize(22, 22)
-				texture:SetTexture([[Interface\RaidFrame\ReadyCheck-NotReady]])
-			end
-			
-			-- font string for record amounts
-			local record = item:CreateFontString(nil, nil, "GameFontHighlightSmall")
-			record:SetPoint("TOPRIGHT", -36, 0)
-			record:SetPoint("BOTTOMRIGHT", -36, 0)
-			record:SetJustifyH("RIGHT")
-			record:SetSpacing(2)
-			item.record = record
-			
-			buttons[i] = item
-		end
-		frame.buttons = buttons
-		
-		local menu = {
-			{text = L["Damage"],	value = "dmg"},
-			{text = L["Healing"],	value = "heal"},
-			{text = L["Pet"],		value = "pet"},
-		}
-		
-		local tree = templates:CreateDropDownMenu(name.."Tree", frame, menu)
-		tree:SetPoint("TOPLEFT", scrollFrame, "BOTTOMLEFT", -16, -4)
-		tree:SetFrameWidth(120)
-		tree:SetSelectedValue("dmg")
-		tree.onClick = function(self)
-			self.owner:SetSelectedValue(self.value)
-			StaticPopup_Hide("CRITLINE_RESET_ALL")
-			FauxScrollFrame_SetOffset(scrollFrame, 0)
-			scrollFrame.ScrollBar:SetValue(0)
-			frame:Update()
-		end
-		frame.tree = tree
+		frame.tabs = {}
+		frame.CreateTab = createTab
+		frame.SelectTab = selectTab
+		frame.GetSelectedTab = getSelectedTab
 		
 		return frame
+	end
+end
+
+do	-- popup
+	local function editBoxOnEnterPressed(self, data)
+		local parent = self:GetParent()
+		StaticPopupDialogs[parent.which].OnAccept(parent, data)
+		parent:Hide()
+	end
+	
+	local function editBoxOnEscapePressed(self)
+		self:GetParent():Hide()
+	end
+	
+	function addon:CreatePopup(which, info)
+		StaticPopupDialogs[which] = info
+		info.EditBoxOnEnterPressed = editBoxOnEnterPressed
+		info.EditBoxOnEscapePressed = editBoxOnEscapePressed
+		info.hideOnEscape = true
+		info.whileDead = true
+		info.timeout = 0
 	end
 end

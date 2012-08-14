@@ -1,22 +1,92 @@
 local addonName, addon = ...
-
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-local templates = addon.templates
 
--- amount of buttons in the spell, mob and aura filter scroll lists
-local NUMSPELLBUTTONS = 20
-local SPELLBUTTONHEIGHT = 22
+local filters = addon:AddCategory(FILTERS, true, nil, addon.filters)
 
-local NUMFILTERBUTTONS = 25
-local FILTERBUTTONHEIGHT = 16
+do
+	local options = {
+		{
+			type = "CheckButton",
+			label = L["Filter new spells"],
+			tooltipText = L["Enable to filter out new spell entries by default."],
+			setting = "filterNew",
+		},
+		{
+			type = "CheckButton",
+			label = L["Ignore mob filter"],
+			tooltipText = L["Enable to ignore integrated mob filter."],
+			setting = "ignoreMobFilter",
+		},
+		{
+			type = "CheckButton",
+			label = L["Ignore aura filter"],
+			tooltipText = L["Enable to ignore integrated aura filter."],
+			setting = "ignoreAuraFilter",
+			func = function(self, checked)
+				if checked then
+					filters:ResetEmpowered()
+				else
+					filters:ScanAuras()
+				end
+			end,
+		},
+		{
+			type = "CheckButton",
+			label = L["Only known spells"],
+			tooltipText = L["Enable to ignore spells that are not in your (or your pet's) spell book."],
+			setting = "onlyKnown",
+		},
+		{
+			type = "CheckButton",
+			label = L["Suppress mind control"],
+			tooltipText = L["Suppress all records while mind controlled."],
+			setting = "suppressMC",
+		},
+		{
+			type = "CheckButton",
+			label = L["Don't filter magic"],
+			tooltipText = L["Enable to let magical damage ignore the level filter."],
+			setting = "dontFilterMagic",
+		},
+		{
+			type = "Slider",
+			label = L["Level filter"],
+			tooltipText = L["If level difference between you and the target is greater than this setting, records will not be registered."],
+			setting = "levelFilter",
+			minValue = -1,
+			maxValue = 10,
+			valueStep = 1,
+			minText = OFF,
+			func = function(self, value)
+				if value == -1 then
+					self.currentValue:SetText(OFF)
+				end
+			end,
+		}
+	}
 
+	filters:CreateOptions(options)
+end
 
-local filters = templates:CreateConfigFrame(FILTERS, addonName, true)
-filters:SetScript("OnEvent", function(self, event, ...)
-	return self[event] and self[event](self, ...)
-end)
-addon.filters = filters
+addon.spellList:AddSpellOption({
+	text = ENABLE,
+	func = function(self, tree, arg2, checked)
+		filters:FilterSpell(checked, tree, self.value)
+	end,
+	checked = function(self)
+		return not self.value.filtered
+	end,
+	isNotRadio = true,
+})
 
+local NUMFILTERBUTTONS = 24
+local FILTERBUTTONHEIGHT = 18
+local BUTTON_OFFSET_TOP = 2
+
+local filterList = filters:CreateTabInterface()
+filterList:SetPoint("TOPLEFT", filters.title, "BOTTOM", -32, -40)
+filterList:SetPoint("RIGHT", -48, 0)
+filterList:SetHeight(NUMFILTERBUTTONS * FILTERBUTTONHEIGHT + BUTTON_OFFSET_TOP)
 
 local function resetScroll(self)
 	FauxScrollFrame_SetOffset(self, 0)
@@ -25,7 +95,36 @@ local function resetScroll(self)
 end
 
 local function onVerticalScroll(self, offset)
-	FauxScrollFrame_OnVerticalScroll(self, offset, self.buttonHeight, self.Update)
+	FauxScrollFrame_OnVerticalScroll(self, offset, FILTERBUTTONHEIGHT, self.Update)
+end
+
+local function updateFilter(self)
+	local filter = filters.db.global[self.filter]
+	local size = #filter
+	
+	FauxScrollFrame_Update(self, size, NUMFILTERBUTTONS, FILTERBUTTONHEIGHT)
+	
+	local offset = FauxScrollFrame_GetOffset(self)
+	local buttons = self.buttons
+	for line = 1, NUMFILTERBUTTONS do
+		local button = buttons[line]
+		local lineplusoffset = line + offset
+		if lineplusoffset <= size then
+			if self.selected then
+				if self.selected - offset == line then
+					button:LockHighlight()
+				else
+					button:UnlockHighlight()
+				end
+			end
+			local entry = filter[lineplusoffset]
+			button.spellID = entry
+			button:SetText(type(entry) == "number" and GetSpellInfo(entry) or entry)
+			button:Show()
+		else
+			button:Hide()
+		end
+	end
 end
 
 local function filterFrameOnShow(self)
@@ -46,10 +145,9 @@ end
 
 local function deleteButtonOnClick(self)
 	local scrollFrame = self.scrollFrame
-	local filterName = scrollFrame.filter
 	local selection = scrollFrame.selected
 	if selection then
-		local filter = filters.db.global[filterName]
+		local filter = filters.db.global[scrollFrame.filter]
 		local selectedEntry = filter[selection]
 		tremove(filter, selection)
 		local prevHighlight = scrollFrame.buttons[selection - FauxScrollFrame_GetOffset(scrollFrame)]
@@ -61,209 +159,9 @@ local function deleteButtonOnClick(self)
 		self:Disable()
 		addon:Message(self.msg:format(GetSpellInfo(selectedEntry) or selectedEntry))
 		if self.func then
-			self.func(selectedEntry)
+			self.func(filters, selectedEntry)
 		end
 	end
-end
-
-local function createFilterFrame(name, parent, numButtons, buttonHeight)
-	local frame = CreateFrame("Frame", nil, parent)
-	frame:SetHeight(numButtons * buttonHeight)
-	parent[name] = frame
-
-	local scrollFrame = CreateFrame("ScrollFrame", "CritlineFilters"..name.."ScrollFrame", frame, "FauxScrollFrameTemplate")
-	scrollFrame:SetAllPoints()
-	scrollFrame:SetScript("OnShow", resetScroll)
-	scrollFrame:SetScript("OnVerticalScroll", onVerticalScroll)
-	scrollFrame.numButtons = numButtons
-	scrollFrame.buttonHeight = buttonHeight
-	scrollFrame.filter = name
-	frame.scrollFrame = scrollFrame
-	
-	if name ~= "spell" then
-		frame:SetScript("OnShow", filterFrameOnShow)
-
-		local add = templates:CreateButton(frame)
-		add:SetScript("OnClick", addButtonOnClick)
-		frame.add = add
-
-		local delete = templates:CreateButton(frame)
-		delete:Disable()
-		delete:SetScript("OnClick", deleteButtonOnClick)
-		delete.scrollFrame = scrollFrame
-		frame.delete = delete
-	end
-	
-	return frame
-end
-
-
-do
-	local options = {}
-	filters.options = options
-
-	local checkButtons = {
-		{
-			text = L["Filter new spells"],
-			tooltipText = L["Enable to filter out new spell entries by default."],
-			setting = "filterNew",
-		},
-		{
-			text = L["Ignore mob filter"],
-			tooltipText = L["Enable to ignore integrated mob filter."],
-			setting = "ignoreMobFilter",
-		},
-		{
-			text = L["Ignore aura filter"],
-			tooltipText = L["Enable to ignore integrated aura filter."],
-			setting = "ignoreAuraFilter",
-			func = function(self, module)
-				if self:GetChecked() then
-					module:ScanAuras()
-				else
-					module:ResetEmpowered()
-				end
-			end,
-		},
-		{
-			text = L["Only known spells"],
-			tooltipText = L["Enable to ignore spells that are not in your (or your pet's) spell book."],
-			setting = "onlyKnown",
-		},
-		{
-			text = L["Suppress mind control"],
-			tooltipText = L["Suppress all records while mind controlled."],
-			setting = "suppressMC",
-		},
-		{
-			text = L["Don't filter magic"],
-			tooltipText = L["Enable to let magical damage ignore the level filter."],
-			setting = "dontFilterMagic",
-		},
-	}
-
-	options.checkButtons = checkButtons
-	
-	local columnEnd = #checkButtons
-
-	for i, v in ipairs(checkButtons) do
-		local btn = templates:CreateCheckButton(filters, v)
-		if i == 1 then
-			btn:SetPoint("TOPLEFT", filters.title, "BOTTOMLEFT", -2, -16)
-		elseif btn.newColumn then
-			btn:SetPoint("TOPLEFT", filters.title, "BOTTOM", 0, -16)
-			columnEnd = i - 1
-		else
-			btn:SetPoint("TOP", checkButtons[i - 1], "BOTTOM", 0, -8)
-		end
-		btn.module = filters
-		checkButtons[i] = btn
-	end
-	
-	local slider = templates:CreateSlider(filters, {
-		text = L["Level filter"],
-		tooltipText = L["If level difference between you and the target is greater than this setting, records will not be registered."],
-		minValue = -1,
-		maxValue = 10,
-		valueStep = 1,
-		minText = OFF,
-		maxText = 10,
-		func = function(self)
-			local value = self:GetValue()
-			self.value:SetText(value == -1 and OFF or value)
-			filters.profile.levelFilter = value
-		end,
-	})
-	slider:SetPoint("TOPLEFT", checkButtons[#checkButtons], "BOTTOMLEFT", 9, -19)
-	options.slider = slider
-end
-
-local filterTypes = {}
-
-do	-- spell filter frame
-	local spellFilter = createFilterFrame("spell", filters, NUMSPELLBUTTONS, SPELLBUTTONHEIGHT)
-	spellFilter:SetPoint("TOPLEFT", filters.title, "BOTTOM", -32, -48)
-	spellFilter:SetPoint("RIGHT", -48, 0)
-	filterTypes.spell = spellFilter
-	
-	do	-- spell filter buttons
-		local function spellButtonOnClick(self)
-			local checked = self:GetChecked() == 1
-			PlaySound(checked and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
-			filters:FilterSpell(not checked, filters.spell.tree:GetSelectedValue(), self.data)
-		end
-		
-		local function spellButtonOnEnter(self)
-			-- prevent records being added twice
-			GameTooltip.Critline = true
-			GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-			GameTooltip:SetSpellByID(self.data.spellID)
-			GameTooltip:AddLine(" ")
-			addon:AddTooltipLine(self.data)
-			GameTooltip:Show()
-		end
-		
-		local buttons = {}
-		for i = 1, NUMSPELLBUTTONS do
-			local btn = templates:CreateCheckButton(spellFilter)
-			if i == 1 then
-				btn:SetPoint("TOPLEFT")
-			else
-				btn:SetPoint("TOP", buttons[i - 1], "BOTTOM", 0, 4)
-			end
-			btn:SetScript("OnClick", spellButtonOnClick)
-			btn:SetScript("OnEnter", spellButtonOnEnter)
-			buttons[i] = btn
-		end
-		spellFilter.scrollFrame.buttons = buttons
-	end
-	
-	-- spell filter scroll frame
-	local spellScrollFrame = spellFilter.scrollFrame
-
-	function spellScrollFrame:Update()
-		local selectedTree = self.tree:GetSelectedValue()
-		local spells = addon:GetSpellArray(selectedTree)
-		local size = #spells
-		
-		FauxScrollFrame_Update(self, size, self.numButtons, self.buttonHeight)
-		
-		local offset = FauxScrollFrame_GetOffset(self)
-		local buttons = self.buttons
-		for line = 1, NUMSPELLBUTTONS do
-			local button = buttons[line]
-			local lineplusoffset = line + offset
-			if lineplusoffset <= size then
-				local data = spells[lineplusoffset]
-				button.data = data
-				button:SetText(addon:GetFullSpellName(data.spellID, data.periodic))
-				button:SetChecked(not data.filtered)
-				button:Show()
-			else
-				button:Hide()
-			end
-		end
-	end
-	
-	-- spell filter tree dropdown
-	local menu = {
-		{text = L["Damage"],	value = "dmg"},
-		{text = L["Healing"],	value = "heal"},
-		{text = L["Pet"],		value = "pet"},
-	}
-
-	local spellFilterTree = templates:CreateDropDownMenu("CritlineSpellFilterTree", spellFilter, menu)
-	spellFilterTree:SetFrameWidth(120)
-	spellFilterTree:SetPoint("BOTTOMRIGHT", spellFilter, "TOPRIGHT", 16, 0)
-	spellFilterTree:SetSelectedValue("dmg")
-	spellFilterTree.onClick = function(self)
-		self.owner:SetSelectedValue(self.value)
-		FauxScrollFrame_SetOffset(spellScrollFrame, 0)
-		spellScrollFrame.ScrollBar:SetValue(0)
-		spellScrollFrame:Update()
-	end
-	spellFilter.tree = spellFilterTree
-	spellScrollFrame.tree = spellFilter.tree
 end
 
 local function filterButtonOnClick(self)
@@ -310,18 +208,50 @@ local function createFilterButton(parent)
 	btn:SetPoint("RIGHT")
 	btn:SetNormalFontObject("GameFontNormal")
 	btn:SetHighlightFontObject("GameFontHighlight")
-	btn:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight")
-	btn:SetPushedTextOffset(0, 0)
+	
+	local highlight = btn:CreateTexture()
+	highlight:SetPoint("TOPLEFT", 0, 1)
+	highlight:SetPoint("BOTTOMRIGHT", 0, 1)
+	highlight:SetTexture("Interface\\QuestFrame\\UI-QuestLogTitleHighlight")
+	highlight:SetVertexColor(.196, .388, .8)
+	btn:SetHighlightTexture(highlight)
+	
 	btn:SetScript("OnClick", filterButtonOnClick)
+	
 	return btn
 end
 
-local function createFilterButtons(parent, onEnter)
+local function createFilterFrame(name, onEnter)
+	local frame = CreateFrame("Frame", nil, filters)
+	frame:SetAllPoints(filterList)
+	filters[name] = frame
+
+	local scrollFrame = CreateFrame("ScrollFrame", "CritlineFilters"..name.."ScrollFrame", frame, "FauxScrollFrameTemplate")
+	scrollFrame:SetAllPoints()
+	scrollFrame:SetScript("OnShow", resetScroll)
+	scrollFrame:SetScript("OnVerticalScroll", onVerticalScroll)
+	scrollFrame.Update = updateFilter
+	scrollFrame.filter = name
+	frame.scrollFrame = scrollFrame
+	
+	frame:SetScript("OnShow", filterFrameOnShow)
+
+	local add = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+	add:SetScript("OnClick", addButtonOnClick)
+	frame.add = add
+
+	local delete = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+	delete:Disable()
+	delete:SetText(DELETE)
+	delete:SetScript("OnClick", deleteButtonOnClick)
+	delete.scrollFrame = scrollFrame
+	frame.delete = delete
+	
 	local buttons = {}
 	for i = 1, NUMFILTERBUTTONS do
-		local btn = createFilterButton(parent)
+		local btn = createFilterButton(frame)
 		if i == 1 then
-			btn:SetPoint("TOP")
+			btn:SetPoint("TOP", 0, -BUTTON_OFFSET_TOP)
 		else
 			btn:SetPoint("TOP", buttons[i - 1], "BOTTOM")
 		end
@@ -330,54 +260,18 @@ local function createFilterButtons(parent, onEnter)
 			btn:SetScript("OnEnter", onEnter)
 			btn:SetScript("OnLeave", GameTooltip_Hide)
 		end
-		btn.module = parent
+		btn.module = frame
 		buttons[i] = btn
 	end
-	parent.scrollFrame.buttons = buttons
-end
-
-local function updateFilter(self)
-	local filter = filters.db.global[self.filter]
-	local size = #filter
+	scrollFrame.buttons = buttons
 	
-	FauxScrollFrame_Update(self, size, self.numButtons, self.buttonHeight)
-	
-	local offset = FauxScrollFrame_GetOffset(self)
-	local buttons = self.buttons
-	for line = 1, self.numButtons do
-		local button = buttons[line]
-		local lineplusoffset = line + offset
-		if lineplusoffset <= size then
-			if self.selected then
-				if self.selected - offset == line then
-					button:LockHighlight()
-				else
-					button:UnlockHighlight()
-				end
-			end
-			local entry = filter[lineplusoffset]
-			button.spellID = entry
-			button:SetText(type(entry) == "number" and GetSpellInfo(entry) or entry)
-			button:Show()
-		else
-			button:Hide()
-		end
-	end
+	return frame
 end
 
 do	-- mob filter frame
-	local spellFilter = filterTypes.spell
-	local mobFilter = createFilterFrame("mobs", filters, NUMFILTERBUTTONS, FILTERBUTTONHEIGHT)
-	mobFilter:SetPoint("TOPLEFT", spellFilter)
-	mobFilter:SetPoint("TOPRIGHT", spellFilter)
-	mobFilter:Hide()
-	filterTypes.mobs = mobFilter
+	local mobFilter = createFilterFrame("mobs")
 	
-	mobFilter.scrollFrame.Update = updateFilter
-	
-	createFilterButtons(mobFilter)
-	
-	local addTarget = templates:CreateButton(mobFilter)
+	local addTarget = CreateFrame("Button", nil, mobFilter, "UIPanelButtonTemplate")
 	addTarget:SetSize(96, 22)
 	addTarget:SetPoint("TOPLEFT", mobFilter, "BOTTOMLEFT", 0, -8)
 	addTarget:SetText(L["Add target"])
@@ -404,24 +298,17 @@ do	-- mob filter frame
 	local delete = mobFilter.delete
 	delete:SetSize(96, 22)
 	delete:SetPoint("TOPRIGHT", mobFilter, "BOTTOMRIGHT", 0, -8)
-	delete:SetText(L["Delete mob"])
 	delete.msg = L["%s removed from mob filter."]
 end
 
 do	-- aura filter frame
-	local spellFilter = filterTypes.spell
-	local auraFilter = createFilterFrame("auras", filters, NUMFILTERBUTTONS, FILTERBUTTONHEIGHT)
-	auraFilter:SetPoint("TOPLEFT", spellFilter)
-	auraFilter:SetPoint("TOPRIGHT", spellFilter)
-	auraFilter:Hide()
-	filterTypes.auras = auraFilter
-	
-	auraFilter.scrollFrame.Update = updateFilter
-
-	createFilterButtons(auraFilter, function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT")
+	local function onEnter(self)
+		GameTooltip:SetOwner(self, "ANCHOR_LEFT")
 		GameTooltip:SetSpellByID(self.spellID)
-	end)
+	end
+	
+	local auraFilter = createFilterFrame("auras", onEnter)
+	auraFilter:Hide()
 	
 	local add = auraFilter.add
 	add:SetSize(128, 22)
@@ -432,24 +319,12 @@ do	-- aura filter frame
 	local delete = auraFilter.delete
 	delete:SetSize(128, 22)
 	delete:SetPoint("TOPRIGHT", auraFilter, "BOTTOMRIGHT", 0, -8)
-	delete:SetText(L["Delete aura"])
+	delete.func = filters.RemoveAura
 	delete.msg = L["%s removed from aura filter."]
-	delete.func = function(spellID)
-		if not filters:ScanAuras("player") then
-			addon:Debug("No filtered aura detected on player. Resuming record tracking.")
-		end
-		if not filters:ScanAuras("pet") then
-			addon:Debug("No filtered aura detected on pet. Resuming record tracking.")
-		end
-	end
 end
 
-do	-- filter tree dropdown
-	local menu = {
-		{
-			text = L["Spell filter"],
-			value = "spell",
-		},
+do	-- filter tabs
+	local tabs = {
 		{
 			text = L["Mob filter"],
 			value = "mobs",
@@ -460,57 +335,36 @@ do	-- filter tree dropdown
 		},
 	}
 	
-	local filterType = templates:CreateDropDownMenu("CritlineFilterType", filters, menu)
-	filterType:SetPoint("BOTTOMLEFT", filterTypes.spell, "TOPLEFT", -16, 0)
-	filterType:SetFrameWidth(120)
-	filterType:SetSelectedValue("spell")
-	filterType.onClick = function(self)
-		self.owner:SetSelectedValue(self.value)
-		for k, v in pairs(filterTypes) do
-			if k == self.value then
-				v:Show()
-			else
-				v:Hide()
-			end
-		end
+	for i, v in ipairs(tabs) do
+		local tab = filterList:CreateTab()
+		tab:SetLabel(v.text)
+		tab.frame = filters[v.value]
 	end
-	filters.type = filterType
+
+	filterList:SelectTab(1)
 end
 
-do
-	local function onAccept(self)
+addon:CreatePopup("CRITLINE_ADD_MOB_BY_NAME", {
+	text = L["Enter mob name"],
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	hasEditBox = true,
+	OnAccept = function(self)
 		local name = self.editBox:GetText():trim()
 		if not name:match("%S+") then
 			addon:Message(L["Invalid mob name."])
 			return
 		end
 		filters:AddMob(name)
-	end
+	end,
+})
 
-	StaticPopupDialogs["CRITLINE_ADD_MOB_BY_NAME"] = {
-		text = L["Enter mob name:"],
-		button1 = OKAY,
-		button2 = CANCEL,
-		hasEditBox = true,
-		OnAccept = onAccept,
-		EditBoxOnEnterPressed = function(self)
-			local parent = self:GetParent()
-			onAccept(parent)
-			parent:Hide()
-		end,
-		EditBoxOnEscapePressed = function(self)
-			self:GetParent():Hide()
-		end,
-		OnShow = function(self)
-			self.editBox:SetFocus()
-		end,
-		whileDead = true,
-		timeout = 0,
-	}
-end
-
-do
-	local function onAccept(self)
+addon:CreatePopup("CRITLINE_ADD_AURA_BY_ID", {
+	text = L["Enter spell ID"],
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	hasEditBox = true,
+	OnAccept = function(self)
 		local id = tonumber(self.editBox:GetText())
 		if not id then
 			addon:Message(L["Invalid input. Please enter a spell ID."])
@@ -520,26 +374,5 @@ do
 			return
 		end
 		filters:AddAura(id)
-	end
-
-	StaticPopupDialogs["CRITLINE_ADD_AURA_BY_ID"] = {
-		text = L["Enter spell ID:"],
-		button1 = OKAY,
-		button2 = CANCEL,
-		hasEditBox = true,
-		OnAccept = onAccept,
-		EditBoxOnEnterPressed = function(self)
-			local parent = self:GetParent()
-			onAccept(parent)
-			parent:Hide()
-		end,
-		EditBoxOnEscapePressed = function(self)
-			self:GetParent():Hide()
-		end,
-		OnShow = function(self)
-			self.editBox:SetFocus()
-		end,
-		whileDead = true,
-		timeout = 0,
-	}
-end
+	end,
+})

@@ -1,8 +1,5 @@
 local addonName, addon = ...
-
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
-local templates = addon.templates
-
 
 local function onUpdate(self)
 	local xpos, ypos = GetCursorPosition()
@@ -11,10 +8,10 @@ local function onUpdate(self)
 	xpos = xmin - xpos / Minimap:GetEffectiveScale() + 70
 	ypos = ypos / Minimap:GetEffectiveScale() - ymin - 70
 	
-	self.profile.pos = atan2(ypos, xpos)
-	self:Move()
+	local pos = atan2(ypos, xpos)
+	self.db.profile.pos = pos
+	self:Move(pos)
 end
-
 
 local minimap = CreateFrame("Button", "CritlineMinimapButton", Minimap)
 minimap:SetToplevel(true)
@@ -40,7 +37,7 @@ minimap:SetScript("OnEnter", function(self)
 		GameTooltip:AddLine(L["Left-click to toggle summary frame"], HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
 	end
 	GameTooltip:AddLine(L["Right-click to open options"], HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
-	if not self.profile.locked then
+	if not self.db.profile.locked then
 		GameTooltip:AddLine(L["Drag to move"], HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
 	end
 	GameTooltip:Show()
@@ -51,7 +48,7 @@ minimap:SetScript("OnDragStop", function(self) self:SetScript("OnUpdate", nil) e
 minimap:SetScript("OnHide", function(self) self:SetScript("OnUpdate", nil) end)
 
 local icon = minimap:CreateTexture(nil, "BORDER")
-icon:SetTexture(addon.icons.dmg)
+icon:SetTexture(addon.trees.dmg.icon)
 icon:SetSize(20, 20)
 icon:SetPoint("TOPLEFT", 6, -6)
 
@@ -60,43 +57,34 @@ border:SetTexture([[Interface\Minimap\MiniMap-TrackingBorder]])
 border:SetSize(54, 54)
 border:SetPoint("TOPLEFT")
 
-
-local config = templates:CreateConfigFrame(L["Minimap button"], addonName, true)
+local config = addon:AddCategory(L["Minimap button"], true)
 
 local options = {
 	{
-		text = L["Show"],
+		type = "CheckButton",
+		label = L["Show"],
 		tooltipText = L["Show minimap button."],
 		setting = "show",
-		func = function(self, module)
-			if self:GetChecked() then
-				module:Show()
+		func = function(self, checked)
+			if checked then
+				minimap:Show()
 			else
-				module:Hide()
+				minimap:Hide()
 			end
 		end,
 	},
 	{
-		text = L["Locked"],
+		type = "CheckButton",
+		label = L["Locked"],
 		tooltipText = L["Lock minimap button."],
 		setting = "locked",
-		func = function(self, module)
-			module:RegisterForDrag(not self:GetChecked() and "LeftButton")
+		func = function(self, checked)
+			minimap:RegisterForDrag(not checked and "LeftButton")
 		end,
 	},
 }
 
-for i, v in ipairs(options) do
-	local btn = templates:CreateCheckButton(config, v)
-	if i == 1 then
-		btn:SetPoint("TOPLEFT", config.title, "BOTTOMLEFT", -2, -16)
-	else
-		btn:SetPoint("TOP", options[i - 1], "BOTTOM", 0, -8)
-	end
-	btn.module = minimap
-	options[i] = btn
-end
-
+config:CreateOptions(options, minimap)
 
 local defaults = {
 	profile = {
@@ -113,19 +101,11 @@ end
 
 addon.RegisterCallback(minimap, "AddonLoaded")
 
-
 function minimap:LoadSettings()
-	self.profile = self.db.profile
-	
-	for _, btn in ipairs(options) do
-		btn:LoadSetting()
-	end
-	
-	self:Move()
+	config:LoadOptions(self)
+	self:Move(self.db.profile.pos)
 end
 
-
-function minimap:Move()
-	local angle = self.profile.pos
+function minimap:Move(angle)
 	self:SetPoint("TOPLEFT", (52 - 80 * cos(angle)), (80 * sin(angle) - 52))
 end

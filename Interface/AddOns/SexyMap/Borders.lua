@@ -3,13 +3,13 @@ local _, addon = ...
 local parent = addon.SexyMap
 local modName = "Borders"
 local mod = addon.SexyMap:NewModule(modName)
-local L = LibStub("AceLocale-3.0"):GetLocale("SexyMap")
+local L = addon.L
 local db
 local textures = {}
 local texturePool = {}
 local rotateTextures = {}
 local defaultSize = 180
-local rotFrame = CreateFrame("Frame")
+--local rotFrame = CreateFrame("Frame")
 local MinimapBackdrop
 local media = LibStub("LibSharedMedia-3.0")
 local Shape
@@ -29,11 +29,7 @@ local blendModes = {
 	ADD = L["Add Blend (additive)"],
 }
 
-local _G = getfenv(0)
-local tinsert, tremove, pairs, ipairs, type, select = _G.tinsert, _G.tremove, _G.pairs, _G.ipairs, _G.type, _G.select
-local sin, cos = _G.sin, _G.cos
-
-local Minimap, MinimapCluster, MinimapBorder = _G.Minimap, _G.MinimapCluster, _G.MinimapBorder
+local Minimap, MinimapCluster, MinimapBorder = Minimap, MinimapCluster, MinimapBorder
 
 local presets, userPresets = {}, {}
 
@@ -50,11 +46,9 @@ local function deepCopyHash(t)
 	return nt
 end
 
-local GetPlayerBearing = _G.GetPlayerFacing
-
 local function RotateTexture(self, inc, set)
 	if type(inc) == "string" then
-		local bearing = GetPlayerBearing()
+		local bearing = GetPlayerFacing()
 		if inc == "normal" then
 			bearing = bearing * -1
 		end
@@ -203,7 +197,7 @@ local options = {
 										openTexBrowser = {
 											type = "execute",
 											name = function()
-												if GetAddOnInfo("TexBrowser") ~= nil then
+												if select(5, GetAddOnInfo("TexBrowser")) then
 													return L["Open TexBrowser"]
 												else
 													return L["TexBrowser Not Installed"]
@@ -218,7 +212,7 @@ local options = {
 												TexBrowser:OnEnable()
 											end,
 											disabled = function()
-												return GetAddOnInfo("TexBrowser") == nil
+												return not select(5, GetAddOnInfo("TexBrowser"))
 											end
 										},
 										textureSelect = {
@@ -459,7 +453,7 @@ local options = {
 }
 
 local function getLeaf(info)
-	return info.options.args[info[1]].args[info[2]].args[info[3]].args[info[4]]
+	return info.options.args[info[1]].args[info[2]].args[info[3]]
 end
 
 local function getTextureAndDB(info)
@@ -500,7 +494,7 @@ local borderOptions = {
 					break
 				end
 			end
-			info.options.args[info[1]].args[info[2]].args[info[3]].args[index] = nil
+			info.options.args[info[1]].args[info[2]].args[index] = nil
 			rotateTextures[textures[index]] = nil
 			tinsert(texturePool, textures[index])
 			textures[index]:Hide()
@@ -520,7 +514,7 @@ local borderOptions = {
 	openTexBrowser = {
 		type = "execute",
 		name = function()
-			if GetAddOnInfo("TexBrowser") ~= nil then
+			if select(5, GetAddOnInfo("TexBrowser")) then
 				return L["Open TexBrowser"]
 			else
 				return L["TexBrowser Not Installed"]
@@ -535,7 +529,7 @@ local borderOptions = {
 			TexBrowser:OnEnable()
 		end,
 		disabled = function()
-			return GetAddOnInfo("TexBrowser") == nil
+			return not select(5, GetAddOnInfo("TexBrowser"))
 		end
 	},
 	texture = {
@@ -580,10 +574,10 @@ local borderOptions = {
 	},
 	rotation = {
 		type = "range",
-		name = L["Rotation Speed"],
-		desc = L["Speed to rotate the texture at. A setting of 0 turns off rotation."],
-		min = -120,
-		max = 120,
+		name = L["Rotation Speed (seconds)"],
+		desc = L["The time it takes (in seconds) to complete one rotation. A setting of 0 turns off rotation."],
+		min = -300,
+		max = 300,
 		step = 1,
 		bigStep = 1,
 		order = 114,
@@ -600,7 +594,16 @@ local borderOptions = {
 			local tex = getTextureAndDB(info)
 			tex.settings.rotSpeed = v
 			tex.rotSpeed = v
-			rotateTextures[tex] = v ~= 0 and v or nil
+			if v == 0 then
+				local getAnim = tex:GetAnimationGroups()
+				if getAnim then
+					getAnim:Stop()
+				end
+				rotateTextures[tex] = nil
+			else
+				rotateTextures[tex] = v
+				mod:StartRotations()
+			end
 		end
 	},
 	staticRotation = {
@@ -630,7 +633,7 @@ local borderOptions = {
 			rotateTextures[tex] = nil
 		end
 	},
-	playerRotation = {
+	--[[playerRotation = {
 		type = "multiselect",
 		name = L["Match player rotation"],
 		values = {
@@ -652,7 +655,7 @@ local borderOptions = {
 			end
 			tex.settings.playerRotation = v
 		end
-	},
+	},]]
 	color = {
 		type = "color",
 		name = L["Texture tint"],
@@ -750,12 +753,18 @@ local borderOptions = {
 		set = function(info, v)
 			local tex = getTextureAndDB(info)
 			tex.settings.disableRotation = v
+			RotateTexture(tex, tex.settings.rotation or 0, true)
+			local getAnim = tex:GetAnimationGroups()
 			if v then
-				tex:SetTexCoord(0, 1, 0, 1)
+				if getAnim then
+					getAnim:Stop()
+				end
 				rotateTextures[tex] = nil
 			else
+				if getAnim then
+					getAnim:Play()
+				end
 				rotateTextures[tex] = tex.settings.rotSpeed
-				RotateTexture(tex, tex.settings.rotation or 0, true)
 			end
 		end
 	}
@@ -807,7 +816,7 @@ function mod:OnInitialize()
 	MinimapBackdrop:SetHeight(Minimap:GetHeight())
 end
 
-local updateTime = 1/60
+--[[local updateTime = 1/60
 local totalTime = 0
 local function updateRotations(self, t)
 	totalTime = totalTime + t
@@ -823,7 +832,7 @@ local function updateRotations(self, t)
 			totalTime = totalTime - updateTime
 		end
 	end
-end
+end]]
 
 function mod:OnEnable()
 	db = self.db.profile
@@ -939,9 +948,49 @@ function mod:ClearWidgets()
 		textures[k] = nil
 	end
 	for k, v in pairs(rotateTextures) do
+		local getAnim = k:GetAnimationGroups()
+		if getAnim then
+			getAnim:Stop()
+		end
 		rotateTextures[k] = nil
 	end
-	rotFrame:SetScript("OnUpdate", nil)
+end
+
+function mod:StartRotations()
+	if next(rotateTextures) then
+		for k, v in pairs(rotateTextures) do
+			if type(v) == "number" then
+				local getAnim = k:GetAnimationGroups()
+				if getAnim then
+					getAnim:Stop()
+					local anim = getAnim:GetAnimations()
+					if v > 0 then
+						anim:SetDegrees(-360)
+						anim:SetDuration(v)
+						getAnim:Play()
+					elseif v < 0 then
+						anim:SetDegrees(360)
+						anim:SetDuration(-v)
+						getAnim:Play()
+					end
+				else
+					local animgroup = k:CreateAnimationGroup()
+					local anim = animgroup:CreateAnimation("Rotation")
+					anim:SetOrder(1)
+					animgroup:SetLooping("REPEAT")
+					if v > 0 then
+						anim:SetDegrees(-360)
+						anim:SetDuration(v)
+						animgroup:Play()
+					elseif v < 0 then
+						anim:SetDegrees(360)
+						anim:SetDuration(-v)
+						animgroup:Play()
+					end
+				end
+			end
+		end
+	end
 end
 
 function mod:ApplySettings()
@@ -955,11 +1004,7 @@ function mod:ApplySettings()
 		self:CreateBorderFromParams(v)
 	end
 
-	if next(rotateTextures) then
-		rotFrame:SetScript("OnUpdate", updateRotations)
-	else
-		rotFrame:SetScript("OnUpdate", nil)
-	end
+	self:StartRotations()
 
 	self:UpdateBorder()
 	self:UpdateBackdrop()
@@ -988,3 +1033,4 @@ function mod:UpdateBackdrop()
 		MinimapBackdrop:Hide()
 	end
 end
+

@@ -1,0 +1,21 @@
+------------------------------------------------------------------------
+r159 | oscarucb | 2012-07-18 05:44:19 +0000 (Wed, 18 Jul 2012) | 1 line
+Changed paths:
+   A /tags/4.7.1 (from /trunk:158)
+
+Tagging as 4.7.1
+------------------------------------------------------------------------
+r158 | oscarucb | 2012-07-18 05:29:09 +0000 (Wed, 18 Jul 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+create a private Font object so we don't change GameTooltipHeaderText font
+
+------------------------------------------------------------------------
+r156 | oscarucb | 2012-07-08 16:23:33 +0000 (Sun, 08 Jul 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+Add tracking for Darkmoon Faire monthly quests
+
+------------------------------------------------------------------------

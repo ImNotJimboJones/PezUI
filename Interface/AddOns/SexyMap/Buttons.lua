@@ -2,8 +2,8 @@
 local _, addon = ...
 local parent = addon.SexyMap
 local modName = "Buttons"
-local mod = addon.SexyMap:NewModule(modName, "AceTimer-3.0", "AceHook-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale("SexyMap")
+local mod = addon.SexyMap:NewModule(modName, "AceHook-3.0")
+local L = addon.L
 local Shape
 local db
 
@@ -280,6 +280,7 @@ function mod:OnInitialize()
 	parent:RegisterModuleOptions(modName, options, modName)
 end
 
+local updateTimer
 function mod:OnEnable()
 	Shape = parent:GetModule("Shapes")
 	Shape.RegisterCallback(self, "SexyMap_ShapeChanged")
@@ -287,7 +288,6 @@ function mod:OnEnable()
 	db = self.db.profile
 	local gotLast = false
 
-	self.findClock = self:ScheduleRepeatingTimer("FindClock", 0.5)
 	self:Update()
 
 	-- MiniMapWorldMapButton:SetParent(Minimap)
@@ -301,7 +301,15 @@ function mod:OnEnable()
 	self:FixTrackingAnchoring()
 
 	-- Try to capture new buttons periodically
-	self:ScheduleRepeatingTimer("MakeMovables", 1)
+	if not updateTimer then -- Temp, should scrap this entirely
+		updateTimer = CreateFrame("Frame"):CreateAnimationGroup()
+		local anim = updateTimer:CreateAnimation()
+		updateTimer:SetScript("OnLoop", self.MakeMovables)
+		anim:SetOrder(1)
+		anim:SetDuration(1)
+		updateTimer:SetLooping("REPEAT")
+	end
+	updateTimer:Play()
 	self:MakeMovables()
 
 	MiniMapInstanceDifficulty:SetFrameLevel(Minimap:GetFrameLevel() + 10)
@@ -310,7 +318,7 @@ function mod:OnEnable()
 end
 
 function mod:OnDisable()
-	self:CancelTimer(self.movableTimer, true)
+	updateTimer:Stop()
 end
 
 function mod:SexyMap_ShapeChanged()
@@ -347,13 +355,6 @@ function mod:CaptureButtons()
 			mod:addButtonOptions(k, v)
 		end
 		self:Update()
-	end
-end
-
-function mod:FindClock()
-	if _G.TimeManagerClockButton then
-		self:CancelTimer(self.findClock, true)
-		self.findClock = nil
 	end
 end
 
@@ -409,6 +410,7 @@ do
 		local mx, my = Minimap:GetCenter()
 		if not mx or not my or not bx or not by then return 0 end
 		local h, w = (by - my), (bx - mx)
+		if w == 0 then w = 0.001 end
 		local angle = atan(h / w)
 		if w < 0 then
 			angle = angle + 180
@@ -478,7 +480,7 @@ do
 
 	local lastChildCount = 0
 	function mod:MakeMovables()
-		self:CaptureButtons()
+		mod:CaptureButtons()
 
 		if not db.allowDragging then return end
 
@@ -491,10 +493,10 @@ do
 			local w, h = child.GetWidth and child:GetWidth() or 0, child.GetHeight and child:GetHeight() or 0
 			local sizeOk = w > 25 and w < 100 and h > 25 and h < 100
 			if sizeOk and child:GetName() then
-				self:MakeMovable(child)
+				mod:MakeMovable(child)
 			end
 		end
-		self:UpdateDraggables()
+		mod:UpdateDraggables()
 	end
 
 	function mod:ReleaseMovables()

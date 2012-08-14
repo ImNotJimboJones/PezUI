@@ -11,7 +11,7 @@ local QTip = LibStub("LibQTip-1.0")
 local dataobject, db, config
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 145 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 158 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -134,6 +134,7 @@ vars.defaultDB = {
 				   -- Link: hyperlink 
                                    -- Zone: string
 				   -- isDaily: boolean
+				   -- Expires: expiration (non-daily)
 
 	Indicators = {
 		D1Indicator = "BLANK", -- indicator: ICON_*, BLANK
@@ -339,6 +340,22 @@ function addon:GetNextWeeklyResetTime()
     nightlyReset = nightlyReset + 24 * 3600
   end
   return nightlyReset
+end
+
+do
+local saturday_night = {hour=23, min=59}
+function addon:GetNextDarkmoonResetTime()
+  -- Darkmoon faire runs from first Sunday of each month to following Saturday
+  -- this function only returns valid date during the faire
+  local weekday, month, day, year = CalendarGetDate() -- date in server timezone (Sun==1)
+  saturday_night.year = year
+  saturday_night.month = month
+  saturday_night.day = day + (7-weekday)
+  local ret = time(saturday_night)
+  local offset = addon:GetServerOffset() * 3600
+  ret = ret - offset
+  return ret
+end
 end
 
 -- local addon functions below
@@ -803,8 +820,8 @@ function addon:UpdateToonData()
 	        ti.Quests[id] = nil
 	      end
 	    end
+	    ti.DailyResetTime = nextreset
           end 
-	  ti.DailyResetTime = nextreset
 	 end
 	end
 	-- Weekly Reset
@@ -817,10 +834,16 @@ function addon:UpdateToonData()
 	      ti.currency[idx] = ti.currency[idx] or {}
 	      ti.currency[idx].earnedThisWeek = 0
 	    end
-	    wipe(ti.Quests)
+	    ti.WeeklyResetTime = nextreset
           end 
-	  ti.WeeklyResetTime = nextreset
 	 end
+	end
+	for toon, ti in pairs(vars.db.Toons) do
+	  for id,qi in pairs(ti.Quests) do
+	      if not qi.isDaily and (qi.Expires or 0) < time() then
+	        ti.Quests[id] = nil
+	      end
+	  end
 	end
 	local dc = GetDailyQuestsCompleted()
 	if dc > 0 then -- zero during logout
@@ -842,12 +865,29 @@ function addon:UpdateToonData()
 	end
 end
 
+local special_weekly_defaults = {
+     -- Darkmoon Faire "weekly" quests
+     [29433] = true, -- Test Your Strength
+  }
+
+function addon:QuestIsDarkmoonMonthly()
+  if QuestIsDaily() then return false end
+  for i=1,GetNumRewardCurrencies() do
+    local name,texture,amount = GetQuestCurrencyInfo("reward",i)
+    if texture:find("_ticket_darkmoon_") then
+      return true
+    end
+  end
+  return false
+end
+
 local function SI_GetQuestReward()
   local t = vars and vars.db.Toons[thisToon]
   if not t then return end
   local id = GetQuestID() or -1
   local title = GetTitleText() or "<unknown>"
   local link = nil
+  local isMonthly = addon:QuestIsDarkmoonMonthly()
   local isWeekly = QuestIsWeekly()
   local isDaily = QuestIsDaily()
   for index = 1, GetNumQuestLogEntries() do
@@ -858,10 +898,21 @@ local function SI_GetQuestReward()
         break
      end
   end
-  debug("Quest Complete: "..(link or title).." "..id.." : "..title.." "..(isWeekly and "(Weekly)" or isDaily and "(Daily)" or "(Regular)"))
-  if not isWeekly and not isDaily then return end
+  local expires
+  if isWeekly then
+    expires = addon:GetNextWeeklyResetTime()
+  elseif isMonthly then 
+    expires = addon:GetNextDarkmoonResetTime()
+  end
+  debug("Quest Complete: "..(link or title).." "..id.." : "..title.." "..
+        (isMonthly and "(Monthly)" or isWeekly and "(Weekly)" or isDaily and "(Daily)" or "(Regular)").."  "..
+	(expires and date("%c",expires) or ""))
+  if not isMonthly and not isWeekly and not isDaily then return end
   t.Quests = t.Quests or {}
-  t.Quests[id] = { ["Title"] = title, ["Link"] = link, ["isDaily"] = isDaily, ["Zone"] = GetRealZoneText() }
+  t.Quests[id] = { ["Title"] = title, ["Link"] = link, 
+                   ["isDaily"] = isDaily, 
+		   ["Expires"] = expires,
+		   ["Zone"] = GetRealZoneText() }
 end
 hooksecurefunc("GetQuestReward", SI_GetQuestReward)
 
@@ -1480,15 +1531,16 @@ function core:Refresh()
 		end
 	end
 
+        local weeklyreset = addon:GetNextWeeklyResetTime()
 	for id,_ in pairs(addon.LFRInstances) do
 	  local numEncounters, numCompleted = GetLFGDungeonNumEncounters(id);
-	  if ( numCompleted > 0 ) then
+	  if ( numCompleted > 0 and weeklyreset ) then
             local truename, instance = addon:LookupInstance(id, nil, true)
             instance[thisToon] = instance[thisToon] or temp[truename] or { }
 	    local info = instance[thisToon][2] or {}
 	    wipe(info)
             instance[thisToon][2] = info
-  	    info.Expires = addon:GetNextWeeklyResetTime()
+  	    info.Expires = weeklyreset
             info.ID = -1*numEncounters
 	    for i=1, numEncounters do
 	      local bossName, texture, isKilled = GetLFGDungeonEncounterInfo(id, i);
@@ -1585,17 +1637,21 @@ function addon:ShowDetached()
       f:EnableMouse(true)
       f:SetUserPlaced(true)
       f:SetAlpha(0.5)
-      if f:GetNumPoints() == 0 then
+      if vars.db.Tooltip.posx and vars.db.Tooltip.posy then
+        f:SetPoint("TOPLEFT",vars.db.Tooltip.posx,-vars.db.Tooltip.posy)
+      else
         f:SetPoint("CENTER")
       end
       f:SetScript("OnMouseDown", function() f:StartMoving() end)
-      f:SetScript("OnMouseUp", function() f:StopMovingOrSizing() end )
+      f:SetScript("OnMouseUp", function() f:StopMovingOrSizing()
+                      vars.db.Tooltip.posx = f:GetLeft()
+                      vars.db.Tooltip.posy = UIParent:GetTop() - (f:GetTop()*f:GetScale())
+                  end)
       f:SetScript("OnHide", function() if tooltip then QTip:Release(tooltip); tooltip = nil end  end )
       f:SetScript("OnUpdate", function(self)
 		  if not tooltip then return end
-		  self:SetScale(tooltip:GetScale())
 		  local w,h = tooltip:GetSize()
-		  self:SetSize(w,h+20)
+		  self:SetSize(w*tooltip:GetScale(),(h+20)*tooltip:GetScale())
 		  tooltip:ClearAllPoints()
 		  tooltip:SetPoint("BOTTOMLEFT",addon.detachframe)
 		  tooltip:SetFrameLevel(addon.detachframe:GetFrameLevel()+1)
@@ -1641,11 +1697,13 @@ function core:ShowTooltip(anchorframe)
 	tooltip.anchorframe = anchorframe
 	tooltip:SetScript("OnUpdate", UpdateTooltip)
 	tooltip:Clear()
-	local hFont = tooltip:GetHeaderFont()
-	local hFontPath, hFontSize,_
-	hFontPath, hFontSize, _ = hFont:GetFont()
-	hFont:SetFont(hFontPath, hFontSize, "OUTLINE")
-	tooltip:SetHeaderFont(hFont)
+	if not addon.headerfont then
+	  addon.headerfont = CreateFont("SavedInstancedTooltipHeaderFont")
+	  local hFont = tooltip:GetHeaderFont()
+	  local hFontPath, hFontSize,_ hFontPath, hFontSize, _ = hFont:GetFont()
+	  addon.headerfont:SetFont(hFontPath, hFontSize, "OUTLINE")
+	end
+	tooltip:SetHeaderFont(addon.headerfont)
 	local headLine = tooltip:AddHeader(GOLDFONT .. "SavedInstances" .. FONTEND)
 	tooltip:SetCellScript(headLine, 1, "OnEnter", ShowHistoryTooltip )
 	tooltip:SetCellScript(headLine, 1, "OnLeave", 

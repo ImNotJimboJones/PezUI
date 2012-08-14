@@ -1,8 +1,8 @@
 
 local _, addon = ...
 local parent = addon.SexyMap
-local mod = addon.SexyMap:NewModule("General", "AceTimer-3.0", "AceEvent-3.0", "AceHook-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale("SexyMap")
+local mod = addon.SexyMap:NewModule("General", "AceEvent-3.0", "AceHook-3.0")
+local L = addon.L
 
 local db
 
@@ -78,23 +78,23 @@ local options = {
 				mod:Update()
 			end
 		},
-		-- alpha = {
-			-- type = "range",
-			-- name = L["Opacity"],
-			-- min = 0,
-			-- max = 1.0,
-			-- step = 0.01,
-			-- bigStep = 0.01,
-			-- order = 105,
-			-- width = "full",
-			-- get = function(info)
-				-- return db.alpha or 1
-			-- end,
-			-- set = function(info, v)
-				-- db.alpha = v
-				-- mod:Update()
-			-- end
-		-- },
+		zoom = {
+			order = 6,
+			type = "range",
+			name = L["Autozoom out after..."],
+			desc = L["Number of seconds to autozoom out after. Set to 0 to turn off Autozoom."],
+			min = 0,
+			width = "double",
+			max = 60,
+			step = 1,
+			bigStep = 1,
+			get = function()
+				return mod.db.profile.autoZoom
+			end,
+			set = function(info, v)
+				mod.db.profile.autoZoom = v
+			end
+		}
 	}
 }
 
@@ -104,6 +104,7 @@ local defaults = {
 		clamp = true,
 		movers = false,
 		rightClickToConfig = true,
+		autoZoom = 5,
 		framePositions = {}
 	}
 }
@@ -120,14 +121,18 @@ mod.options = options
 function mod:OnInitialize()
 	self.db = parent.db:RegisterNamespace("Movers", defaults)
 	db = self.db.profile
-	parent:RegisterModuleOptions("Movers", options, "Movers")
+	parent:RegisterModuleOptions("General", options, "General")
 
 	MinimapBorderTop:Hide()
 	Minimap:RegisterForDrag("LeftButton")
 	MinimapZoneTextButton:RegisterForDrag("LeftButton")
 	self:SetLock(db.lock)
 
-	self:SecureHook("updateContainerFrameAnchors", "CreateMoversAndSetMovables")
+	if updateContainerFrameAnchors then --XXX MoP compat
+		self:SecureHook("updateContainerFrameAnchors", "CreateMoversAndSetMovables")
+	else
+		self:SecureHook("UpdateContainerFrameAnchors", "CreateMoversAndSetMovables")
+	end
 end
 
 function mod:WatchFrame_Update(...)
@@ -138,6 +143,33 @@ function mod:WatchFrame_Update(...)
 end
 
 function mod:OnEnable()
+	--[[ AutoZoom & MouseWheelZoom setup ]]--
+	local animGroup = CreateFrame("Frame"):CreateAnimationGroup()
+	local anim = animGroup:CreateAnimation()
+	animGroup:SetScript("OnFinished", function()
+		for i = 1, 5 do
+			MinimapZoomOut:Click()
+		end
+	end)
+	anim:SetOrder(1)
+	anim:SetDuration(1)
+	Minimap:EnableMouseWheel(true)
+	Minimap:SetScript("OnMouseWheel", function(frame, d)
+		if d > 0 then
+			MinimapZoomIn:Click()
+		elseif d < 0 then
+			MinimapZoomOut:Click()
+		end
+		if mod.db.profile.autoZoom > 0 then
+			animGroup:Stop()
+			anim:SetDuration(mod.db.profile.autoZoom)
+			animGroup:Play()
+		end
+	end)
+	if self.db.profile.autoZoom > 0 then
+		animGroup:Play()
+	end
+
 	db = self.db.profile
 	MinimapCluster:SetClampedToScreen(db.clamp)
 	self:SetLock(db.lock)

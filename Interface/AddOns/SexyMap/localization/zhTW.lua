@@ -1,8 +1,7 @@
-﻿-- This file is script-generated and should not be manually edited. 
--- Localizers may copy this file to edit as necessary. 
-local AceLocale = LibStub:GetLibrary("AceLocale-3.0") 
-local L = AceLocale:NewLocale("SexyMap", "zhTW", false) 
-if not L then return end 
+
+if GetLocale() ~= "zhTW" then return end
+local _, sm = ...
+local L = sm.L
  
 -- ./AutoZoom.lua
 L["Autozoom out after..."] = "自動縮放到最小"
@@ -63,8 +62,8 @@ L["Really delete this border?"] = "確定刪除此邊框？"
 L["Texture path"] = "材質路徑"
 L["Enter the full path to a texture to use. It's recommended that you use something like |cffff6600TexBrowser|r to find textures to use."] = "請輸入要使用的材質完整路徑。建議使用如 TexBrowser 來尋找可用的材質。"
 L["Texture options"] = "材質選項"
-L["Rotation Speed"] = "旋轉速度"
-L["Speed to rotate the texture at. A setting of 0 turns off rotation."] = "材質旋轉速度，設定為 0 則停止旋轉"
+L["Rotation Speed (seconds)"] = "旋轉速度"
+L["The time it takes (in seconds) to complete one rotation. A setting of 0 turns off rotation."] = "材質旋轉速度，設定為 0 則停止旋轉"
 L["Static Rotation"] = "靜態旋轉"
 L["A static amount to rotate the texture by."] = "材質靜態旋轉量"
 L["Match player rotation"] = "隨玩家旋轉"

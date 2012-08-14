@@ -1,8 +1,8 @@
 
 local sexymap, addon = ...
-addon.SexyMap = LibStub("AceAddon-3.0"):NewAddon(sexymap, "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
+addon.SexyMap = LibStub("AceAddon-3.0"):NewAddon(sexymap, "AceEvent-3.0", "AceHook-3.0")
 local mod = addon.SexyMap
-local L = LibStub("AceLocale-3.0"):GetLocale(sexymap)
+local L = addon.L
 
 local _G = getfenv(0)
 local pairs, ipairs, type, select = _G.pairs, _G.ipairs, _G.type, _G.select
@@ -10,12 +10,6 @@ local pairs, ipairs, type, select = _G.pairs, _G.ipairs, _G.type, _G.select
 local min = _G.math.min
 local MinimapCluster = _G.MinimapCluster
 local GetMouseFocus = _G.GetMouseFocus
-
-local options = {
-	type = "group",
-	args = {}
-}
-mod.options = options
 
 local defaults = {
 	profile = {}
@@ -29,11 +23,8 @@ mod.backdrop = {
 	tile = true
 }
 
-local optionFrames = {}
-local ACD3 = LibStub("AceConfigDialog-3.0")
 function mod:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("SexyMapDB", defaults)
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(sexymap, options)
 
 	-- Configure Slash Handler
 	SlashCmdList[sexymap] = function() InterfaceOptionsFrame_OpenToCategory(sexymap) end
@@ -41,6 +32,7 @@ function mod:OnInitialize()
 	SLASH_SexyMap2 = "/sexymap"
 end
 
+local updateTimer, fadeTimer, fadeAnim
 function mod:OnEnable()
 	if _G.simpleMinimap then
 		print("|cFF33FF99SexyMap|r: |cffff0000Warning!|r simpleMinimap is enabled. SexyMap may not work correctly.")
@@ -57,6 +49,24 @@ function mod:OnEnable()
 	self.db.RegisterCallback(self, "OnProfileChanged", "ReloadAddon")
 	self.db.RegisterCallback(self, "OnProfileCopied", "ReloadAddon")
 	self.db.RegisterCallback(self, "OnProfileReset", "ReloadAddon")
+
+	-- Terrible, clean this up
+	if not updateTimer then
+		updateTimer = CreateFrame("Frame"):CreateAnimationGroup()
+		local anim = updateTimer:CreateAnimation()
+		updateTimer:SetScript("OnLoop", self.CheckExited)
+		anim:SetOrder(1)
+		anim:SetDuration(0.1)
+		updateTimer:SetLooping("REPEAT")
+	end
+	if not fadeTimer then
+		fadeTimer = CreateFrame("Frame"):CreateAnimationGroup()
+		fadeAnim = fadeTimer:CreateAnimation()
+		fadeTimer:SetScript("OnFinished", self.EnableFade)
+		fadeAnim:SetOrder(1)
+		fadeAnim:SetDuration(1)
+		fadeTimer:SetLooping("NONE")
+	end
 end
 
 function mod:ReloadAddon()
@@ -72,14 +82,9 @@ function mod:HookAll(frame, script, ...)
 	end
 end
 
-function mod:OpenConfig(name)
-	InterfaceOptionsFrame_OpenToCategory(optionFrames.Profiles)
-	InterfaceOptionsFrame_OpenToCategory(optionFrames[name] or optionFrames.default)
-end
-
 function mod.Minimap_OnClick(frame, button)
 	if button == "RightButton" and mod:GetModule("General").db.profile.rightClickToConfig then
-		mod:OpenConfig()
+		InterfaceOptionsFrame_OpenToCategory(sexymap)
 	else
 		Minimap_OnClick(frame, button)
 	end
@@ -89,11 +94,12 @@ function mod:OnDisable()
 end
 
 function mod:RegisterModuleOptions(name, optionTbl, displayName)
-	options.args[name] = (type(optionTbl) == "function") and optionTbl() or optionTbl
-	if not optionFrames.default then
-		optionFrames.default = ACD3:AddToBlizOptions(sexymap, nil, nil, name)
+	if name == "General" then
+		LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(sexymap, optionTbl)
+		LibStub("AceConfigDialog-3.0"):AddToBlizOptions(sexymap)
 	else
-		optionFrames[name] = ACD3:AddToBlizOptions(sexymap, displayName, sexymap, name)
+		LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(sexymap..name, optionTbl)
+		LibStub("AceConfigDialog-3.0"):AddToBlizOptions(sexymap..name, displayName, sexymap)
 	end
 end
 
@@ -203,8 +209,7 @@ do
 	end
 
 	function mod:OnEnter()
-		if self.checkExit then return end
-		self.checkExit = self:ScheduleRepeatingTimer("CheckExited", 0.1)
+		updateTimer:Play()
 		fadeTarget = 1
 		for k, v in pairs(hoverButtons) do
 			if not hoverExempt[k] and (v == true or type(v) == "function" and v(k)) then
@@ -215,8 +220,7 @@ do
 	end
 
 	function mod:OnExit()
-		self:CancelTimer(self.checkExit, true)
-		self.checkExit = nil
+		updateTimer:Stop()
 
 		fadeTarget = 0
 		for k, v in pairs(hoverButtons) do
@@ -228,7 +232,7 @@ do
 	end
 
 	function mod:CheckExited()
-		if self.fadeDisabled then return end
+		if mod.fadeDisabled then return end
 		local f = GetMouseFocus()
 		if f then
 			local p = f:GetParent()
@@ -236,20 +240,21 @@ do
 				if p == MinimapCluster then return true end
 				p = p:GetParent()
 			end
-			self:OnExit()
+			mod:OnExit()
 		end
 	end
 
 	function mod:EnableFade()
-		self.fadeDisabled = false
+		mod.fadeDisabled = false
 	end
 
 	function mod:DisableFade(forHowLong)
 		self.fadeDisabled = true
 		self:OnEnter()
 		if forHowLong and forHowLong > 0 then
-			self:CancelTimer(self.enableFadeAfter, true)
-			self.enableFadeAfter = self:ScheduleTimer("EnableFade", forHowLong)
+			fadeTimer:Stop()
+			fadeAnim:SetDuration(forHowLong)
+			fadeTimer:Play()
 		end
 	end
 end
