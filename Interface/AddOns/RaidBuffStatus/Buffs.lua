@@ -4,13 +4,13 @@ local SP = RaidBuffStatus.SP
 local GT = RaidBuffStatus.GT
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 500 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 509 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
 local BSI = setmetatable({}, BSmeta)
 BSmeta.__index = function(self, key)
-	local name, icon
+	local name, _, icon
 	if type(key) == "number" then
 		name, _, icon = GetSpellInfo(key)
 	else
@@ -40,7 +40,7 @@ local ITT = setmetatable({}, ITmeta)
 ITN.unknown = L["Please relog or reload UI to update the item cache."]
 ITT.unknown = "Interface\\Icons\\INV_Misc_QuestionMark"
 ITmeta.__index = function(self, key)
-	local name, icon
+	local name, _, icon
 	if type(key) == "number" then
 		name, _, _, _, _, _, _, _, _, icon = GetItemInfo(key)
 		if not name then
@@ -430,7 +430,12 @@ scrollofspirit.shortname = L["Spi"]
 --}
 
 local roguewepbuffs = {
-	L["( Poison ?[IVX]*)"], -- Anesthetic Poison, Deadly Poison [IVX]*, Crippling Poison [IVX]*, Wound Poison [IVX]*, Instant Poison [IVX]*, Mind-numbing Poison [IVX]*
+	-- L["( Poison ?[IVX]*)"], -- Anesthetic Poison, Deadly Poison [IVX]*, Crippling Poison [IVX]*, Wound Poison [IVX]*, Instant Poison [IVX]*, Mind-numbing Poison [IVX]*
+	BS[8680],  -- Instant
+	BS[2818],  -- Deadly
+	BS[3409],  -- Crippling
+	BS[13218], -- Wound 
+	BS[5760],  -- Mind-numbing
 }
 
 local shamanwepbuffs = {
@@ -922,24 +927,36 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			if class == "HUNTER" then
 				report.checking.cheetahpack = true
-				local hasbuff = nil
 				for _, v in ipairs(badaspects) do
 					if unit.hasbuff[v] then
-						hasbuff = unit.hasbuff[v].caster
-						break
-					end
-				end
-				if hasbuff then
-					if RaidBuffStatus.db.profile.ShowGroupNumber then
-						table.insert(report.cheetahpacklist, hasbuff .. "(" .. unit.group .. ")" )
-					else
-						table.insert(report.cheetahpacklist, hasbuff)
+						local caster = unit.hasbuff[v].caster
+						if not caster or #caster == 0 then
+						   caster = name -- caster is nil when out of range
+						end
+						if RaidBuffStatus.db.profile.ShowGroupNumber then
+					 		caster = caster .. "(" .. unit.group .. ")" 
+						end
+						-- only report each caster once
+						report.cheetahpacklist[caster] = caster
 					end
 				end
 			end
 		end,
 		post = function(self, raid, report)
-			RaidBuffStatus:SortNameBySuffix(report.cheetahpacklist)
+		        local l = report.cheetahpacklist
+			local gotone = true
+			while gotone do
+			  gotone = false
+		          for k,v in pairs(l) do -- convert to numeric list for sorting
+			    if type(k) ~= "number" then
+			      l[k] = nil
+			      table.insert(l,v) 
+			      gotone = true
+			      break
+			    end
+			  end
+			end
+			RaidBuffStatus:SortNameBySuffix(l)
 		end,
 		icon = BSI[5118], -- Aspect of the Cheetah
 		update = function(self)
@@ -1043,11 +1060,15 @@ local BF = {
 				end
 			end
 			if hasfood then
+			        local foodz = unit.hasbuff["foodz"]
+			        foodz = foodz and foodz:lower()
 				slacking = true
-				if unit.hasbuff["foodz"] then
-					if unit.hasbuff["foodz"]:find(L["Stamina increased by 90"]) or (RaidBuffStatus.db.profile.foodquality >= 1 and (unit.hasbuff["foodz"]:find(L["Stamina increased by 60"]) or select(11,UnitBuff(unit.unitid, foods[1])) == 66623)) then -- bountiful feast
+				if foodz and (
+			   	   foodz:find(L["Stamina increased by 90"]:lower()) or 
+				   (RaidBuffStatus.db.profile.foodquality >= 1 and 
+				            (foodz:find(L["Stamina increased by 60"]:lower()) or 
+					     select(11,UnitBuff(unit.unitid, foods[1])) == 66623))) then -- bountiful feast
 						slacking = false
-					end
 				end
 			end
 			if slacking then
@@ -1863,18 +1884,18 @@ local BF = {
 		chat = BS[35272], -- Well Fed
 		main = function(self, name, class, unit, raid, report)
 			local missingbuff = true
+			local foodz = unit.hasbuff["foodz"]
+			foodz = foodz and foodz:lower()
 			if RaidBuffStatus.db.profile.foodquality == 0 then
-				if unit.hasbuff["foodz"] then
-					if unit.hasbuff["foodz"]:find(L["Stamina increased by 90"]) then
-						missingbuff = false
-					end
+				if foodz and foodz:find(L["Stamina increased by 90"]:lower()) then
+					missingbuff = false
 				end
 			elseif RaidBuffStatus.db.profile.foodquality == 1 then
-				if unit.hasbuff["foodz"] then
-					if unit.hasbuff["foodz"]:find(L["Stamina increased by 60"]) or unit.hasbuff["foodz"]:find(L["Stamina increased by 90"])
-						or select(11,UnitBuff(unit.unitid, foods[1])) == 66623 then -- bountiful feast
+				if foodz and 
+				  ( foodz:find(L["Stamina increased by 60"]:lower()) or 
+				    foodz:find(L["Stamina increased by 90"]:lower()) or
+				    select(11,UnitBuff(unit.unitid, foods[1])) == 66623) then -- bountiful feast
 						missingbuff = false
-					end
 				end
 			else
 				for _, v in ipairs(foods) do
@@ -2146,12 +2167,26 @@ local BF = {
 			report.checking.wepbuff = true
 			local missingbuffmh = true
 			local missingbuffoh = true
+			local notified
 			RBSToolScanner:Reset()
 			RBSToolScanner:SetInventoryItem(unit.unitid, 16)
 			if RBSToolScanner:NumLines() < 1 then
 				if not UnitIsUnit(unit.unitid, "player") then
+				   local lastcheck = RaidBuffStatus.lastweapcheck[unit.guid] or 0
+				   local failed = lastcheck and lastcheck < 0
+				   if failed then lastcheck = -lastcheck end
+				   if GetTime() < lastcheck + 5*60 then
+					RaidBuffStatus:Debug("skipping weapcheck for:" .. unit.unitid)
+					if failed then
+					  table.insert(report.wepbufflist, name)
+				        end	
+				        return
+				   else
 					RaidBuffStatus:Debug("having to call notifyinspect for:" .. unit.unitid)
 					NotifyInspect(unit.unitid)
+					notified = unit.unitid
+					RaidBuffStatus.lastweapcheck[unit.guid] = GetTime()
+				   end
 				else
 					RaidBuffStatus:Debug("skipping call notifyinspect for:" .. unit.unitid)
 				end
@@ -2178,14 +2213,12 @@ local BF = {
 					missingbuffoh = false -- nothing equipped
 				end
 			end
-			if dualw then
-				if missingbuffmh or missingbuffoh then
-					table.insert(report.wepbufflist, name)
-				end
-			else
-				if missingbuffmh then
-					table.insert(report.wepbufflist, name)
-				end
+			if missingbuffmh or (dualw and missingbuffoh) then
+				table.insert(report.wepbufflist, name)
+			        RaidBuffStatus.lastweapcheck[unit.guid] = -GetTime()
+			end
+			if notified then
+			  ClearInspectPlayer(notified)
 			end
 		end,
 		post = nil,
@@ -3658,7 +3691,7 @@ local BF = {
 				needspet = false
 			end
 			 
-			if needspet then
+			if needspet and UnitIsVisible(unit.unitid) then
 				if UnitIsUnit(unit.unitid, "player") then 
 					haspet = SecureCmdOptionParse("[target=pet,dead] false; [mounted] true ; [nopet] false; true")
 					haspet = (haspet == "true")

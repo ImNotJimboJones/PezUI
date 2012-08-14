@@ -9,7 +9,7 @@
 ## X-ReleaseDate: $Date$
 ## X-Website: http://wowace.com/wiki/LibGroupTalents-1.0
 ## X-License: MIT
-## X-Curse-Packaged-Version: r68
+## X-Curse-Packaged-Version: r70
 ## X-Curse-Project-Name: LibGroupTalents-1.0
 ## X-Curse-Project-ID: libgrouptalents-1-0
 ## X-Curse-Repository-ID: wow/libgrouptalents-1-0/mainline

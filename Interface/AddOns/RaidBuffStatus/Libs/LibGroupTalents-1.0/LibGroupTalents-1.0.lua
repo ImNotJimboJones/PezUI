@@ -1,6 +1,6 @@
 --[[
 Name: LibGroupTalents-1.0
-Revision: $Rev: 68 $
+Revision: $Rev: 70 $
 Author: Zek
 Documentation: http://wowace.com/wiki/LibGroupTalents-1.0
 SVN: svn://svn.wowace.com/wow/libgrouptalents-1-0/mainline/trunk
@@ -72,7 +72,7 @@ Events:
 
 local TalentQuery = LibStub("LibTalentQuery-1.0")
 
-local MAJOR, MINOR = "LibGroupTalents-1.0", tonumber(("$Rev: 68 $"):match("(%d+)"))
+local MAJOR, MINOR = "LibGroupTalents-1.0", tonumber(("$Rev: 70 $"):match("(%d+)"))
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -1045,9 +1045,9 @@ function lib:GetGUIDGlyphs(guid, group)
 			for i,str in ipairs(temp) do
 				temp[i] = tonumber(str)
 			end
-			local a, b, c, d, e, f = unpack(temp)
+			local a, b, c, d, e, f, g, h, i = unpack(temp)
 			del(temp)
-			return a, b, c, d, e, f
+			return a, b, c, d, e, f, g, h, i
 		end
 	end
 end

@@ -4,7 +4,7 @@ local GT = LibStub("LibGroupTalents-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 500 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 508 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GT = GT
@@ -23,7 +23,7 @@ local nextscan = 0
 RaidBuffStatus.timer = false
 local playerid = UnitGUID("player")
 local playername = UnitName("player")
-local _, playerclass = UnitClass("player")
+local playerclass = select(2,UnitClass("player"))
 local xperltankrequest = false
 local xperltankrequestt = 0
 local nextfeastannounce = 0
@@ -48,13 +48,14 @@ RaidBuffStatus.itemcheck = {}
 RaidBuffStatus.soulwelllastseen = 0
 RaidBuffStatus.rezerrezee = {}
 RaidBuffStatus.rezeetime = {}
+RaidBuffStatus.lastweapcheck = {}
 
 -- babblespell replacement using GetSpellInfo(key)
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
 local BSI = setmetatable({}, BSmeta)
 BSmeta.__index = function(self, key)
-	local name, icon
+	local name, _, icon
 	if type(key) == "number" then
 		name, _, icon = GetSpellInfo(key)
 	else
@@ -1363,7 +1364,14 @@ function RaidBuffStatus:CopyTalentRowDataToRowFrames()
 end
 
 function RaidBuffStatus:DoReport(force)
-	if not force then
+	if force then
+		nextdurability = 0
+		nextitemcheck = 0
+		wipe(RaidBuffStatus.lastweapcheck)
+		for itemcheck, _ in pairs(RaidBuffStatus.itemcheck) do
+			RaidBuffStatus.itemcheck[itemcheck].next = 0
+		end
+	else -- not forced
 		if nextscan > GetTime() then
 			return  -- ensure we don't get called many times a second
 		end
@@ -1398,7 +1406,7 @@ function RaidBuffStatus:DoReport(force)
 	end
 	playerid = UnitGUID("player") -- this never changes but on logging in it may take time before it returns a value
 	playername = UnitName("player") -- ditto
-	_, playerclass = UnitClass("player") -- ditto
+	playerclass = select(2,UnitClass("player")) -- ditto
 	if raid.israid and not raid.isbattle and not incombat then
 		if report.checking.durabilty and not _G.oRA3 and GetTime() > nextdurability then
 			if #report.durabilitylist > 0 then
@@ -2285,7 +2293,7 @@ function RaidBuffStatus:SetupFrames()
 		if RaidBuffStatus.db.profile.abouttorunoutdash then
 			RaidBuffStatus.db.profile.checkabouttorunout = true
 		end
-		RaidBuffStatus:DoReport()
+		RaidBuffStatus:DoReport(true)
 		RaidBuffStatus:UpdateButtons()
 		if IsControlKeyDown() then
 			RaidBuffStatus:ReportToWhisper(true)
@@ -2305,7 +2313,7 @@ function RaidBuffStatus:SetupFrames()
 	RaidBuffStatus.button:SetPoint("BOTTOMRIGHT", RaidBuffStatus.frame, "BOTTOMRIGHT", -7, 5)
 	RaidBuffStatus.button:SetScript("OnClick", function()
 		RaidBuffStatus.db.profile.checkabouttorunout = false
-		RaidBuffStatus:DoReport()
+		RaidBuffStatus:DoReport(true)
 		RaidBuffStatus:UpdateButtons()
 		if IsControlKeyDown() then
 			RaidBuffStatus:ReportToWhisper(false)
@@ -2368,11 +2376,6 @@ function RaidBuffStatus:SetupFrames()
 	RaidBuffStatus.button:SetHeight(15)
 	RaidBuffStatus.button:SetPoint("TOP", RaidBuffStatus.frame, "TOP", 0, -18)
 	RaidBuffStatus.button:SetScript("OnClick", function()
-		nextdurability = 0
-		nextitemcheck = 0
-		for itemcheck, _ in pairs(RaidBuffStatus.itemcheck) do
-			RaidBuffStatus.itemcheck[itemcheck].next = 0
-		end
 		RaidBuffStatus:DoReport(true)
 		RaidBuffStatus:Debug("Scan button")
 	end)
@@ -3157,6 +3160,7 @@ function RaidBuffStatus:DelayedEnable()
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY", "CHAT_MSG_RAID_WARNING")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY_LEADER", "CHAT_MSG_RAID_WARNING")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_WHISPER", "CHAT_MSG_WHISPER")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_BN_WHISPER", "CHAT_MSG_BN_WHISPER")
 	RaidBuffStatus:RegisterEvent("PARTY_INVITE_REQUEST", "PARTY_INVITE_REQUEST")
 	if not _G.oRA3 then
 		RaidBuffStatus:RegisterEvent("PLAYER_DEAD", "SendDurability")
@@ -3458,6 +3462,7 @@ function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, r
 				end
 			end
 		elseif action == "report" then
+			RaidBuffStatus:DoReport(true)
 			local canspeak = IsRaidLeader() or IsRaidOfficer() or raid.pug
 			if not canspeak and RaidBuffStatus.db.profile.ReportChat and raid.israid then
 				RaidBuffStatus:OfficerWarning()
@@ -3482,6 +3487,7 @@ function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, r
 				BF[buffcheck].chat(report, raid, prefix)
 			end
 		elseif action == "whisper" then
+			RaidBuffStatus:DoReport(true)
 			RaidBuffStatus:WhisperBuff(BF[buffcheck], report, raid, prefix)
 			
 		elseif action == "enabledisable" then
@@ -5341,12 +5347,16 @@ function RaidBuffStatus:PlayerActiveGlyphs()
   return t
 end
 
+function RaidBuffStatus:CHAT_MSG_BN_WHISPER(event, msg, sender,...)
+  local pid = select(11,...)
+  RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, pid)
+end  
 function RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, whom)
 	RaidBuffStatus:Debug(":" .. msg .. ":" .. whom .. ":")
 	if msg:lower() ~= (L["invite"]):lower() or not whom then
 		return
 	end
-	_, _, queued = GetLFGInfoServer()
+	local _, _, queued = GetLFGInfoServer()
 	if queued then
 		RaidBuffStatus:Say(L["Sorry, I am queued for a dungeon."], whom, true)
 		return
@@ -5374,13 +5384,14 @@ function RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, whom)
 		end
 	end
 	if RaidBuffStatus.db.profile.aiwbnfriends and BNFeaturesEnabledAndConnected() then
-		local myrealm = GetRealmName()
 		for i=1, BNGetNumFriends() do
-			pID,_,_,_,_,client,isOnline = BNGetFriendInfo(i)
+			local pID,fName,lName,toonname,_,client,isOnline = BNGetFriendInfo(i)
 			if (client == "WoW" and isOnline) then
-				_,name,_,realm = BNGetToonInfo(pID)
-				if realm == myrealm and name == whom then
+				if whom == toonname then
 					RaidBuffStatus:SendInvite(whom)
+					return
+				elseif whom == pID then -- CHAT_MSG_BN_WHISPER
+  		                        FriendsFrame_BattlenetInvite(nil, pID)
 					return
 				end
 			end
@@ -5412,7 +5423,7 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 	if not whom then
 		return
 	end
-	_, _, queued = GetLFGInfoServer()
+	local _, _, queued = GetLFGInfoServer()
 	if queued then
 		RaidBuffStatus:Say(L["I am queued for a dungeon."], whom, true)
 		return
