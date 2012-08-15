@@ -2,8 +2,8 @@
 MADB = {
 	["characters"] = {
 	},
-	["frameListRows"] = 18,
 	["tooltips"] = 1,
+	["frameListRows"] = 18,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -28,6 +28,10 @@ MADB = {
 						480, -- [5]
 					},
 				},
+				["CompactRaidGroup5"] = {
+					["name"] = "CompactRaidGroup5",
+					["hidden"] = true,
+				},
 				["GroupLootFrame1"] = {
 					["name"] = "GroupLootFrame1",
 					["pos"] = {
@@ -37,6 +41,10 @@ MADB = {
 						200, -- [4]
 						380, -- [5]
 					},
+				},
+				["CompactRaidGroup6"] = {
+					["name"] = "CompactRaidGroup6",
+					["hidden"] = true,
 				},
 				["BNToastFrame"] = {
 					["name"] = "BNToastFrame",
@@ -52,6 +60,10 @@ MADB = {
 					["name"] = "Boss2TargetFrame",
 					["hidden"] = true,
 					["unit"] = "boss2",
+				},
+				["CompactRaidGroup7"] = {
+					["name"] = "CompactRaidGroup7",
+					["hidden"] = true,
 				},
 				["BagsMover"] = {
 					["scale"] = 0.8199999928474426,
@@ -73,6 +85,10 @@ MADB = {
 						200, -- [4]
 						680, -- [5]
 					},
+				},
+				["CompactRaidGroup8"] = {
+					["name"] = "CompactRaidGroup8",
+					["hidden"] = true,
 				},
 				["WatchFrame"] = {
 					["name"] = "WatchFrame",
@@ -99,6 +115,10 @@ MADB = {
 						-128, -- [5]
 					},
 				},
+				["CompactRaidGroup1"] = {
+					["name"] = "CompactRaidGroup1",
+					["hidden"] = true,
+				},
 				["RaidUnitFramesManagerMover"] = {
 					["name"] = "RaidUnitFramesManagerMover",
 					["pos"] = {
@@ -109,6 +129,15 @@ MADB = {
 						-139.9999931612761, -- [5]
 					},
 				},
+				["CompactRaidGroup3"] = {
+					["name"] = "CompactRaidGroup3",
+					["hidden"] = true,
+				},
+				["Boss1TargetFrame"] = {
+					["name"] = "Boss1TargetFrame",
+					["hidden"] = true,
+					["unit"] = "boss1",
+				},
 				["GroupLootFrame3"] = {
 					["name"] = "GroupLootFrame3",
 					["pos"] = {
@@ -118,6 +147,10 @@ MADB = {
 						200, -- [4]
 						580, -- [5]
 					},
+				},
+				["CompactRaidGroup4"] = {
+					["name"] = "CompactRaidGroup4",
+					["hidden"] = true,
 				},
 				["GuildBankFrame"] = {
 					["scale"] = 0.8199999928474426,
@@ -141,10 +174,9 @@ MADB = {
 						741.5294770544057, -- [5]
 					},
 				},
-				["Boss1TargetFrame"] = {
-					["name"] = "Boss1TargetFrame",
+				["CompactRaidGroup2"] = {
+					["name"] = "CompactRaidGroup2",
 					["hidden"] = true,
-					["unit"] = "boss1",
 				},
 				["GuildChallengeAlertFrame"] = {
 					["name"] = "GuildChallengeAlertFrame",
@@ -167,8 +199,8 @@ MADB = {
 					},
 				},
 				["RaidUnitFramesMover"] = {
-					["name"] = "RaidUnitFramesMover",
 					["hidden"] = true,
+					["name"] = "RaidUnitFramesMover",
 				},
 				["BankFrame"] = {
 					["name"] = "BankFrame",
