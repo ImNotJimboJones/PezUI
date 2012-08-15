@@ -32,8 +32,6 @@ CritlineDB = {
 	},
 	["profiles"] = {
 		["Default"] = {
-			["playSound"] = false,
-			["sound"] = "Bell",
 		},
 	},
 }
