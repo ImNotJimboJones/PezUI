@@ -7,7 +7,7 @@ BisonDB = {
 		["Default"] = {
 			["buff"] = {
 				["xPos"] = 858.7449166226196,
-				["flashing"] = false,
+				["timer"] = 1,
 				["yPos"] = 783.929583027272,
 			},
 			["debuff"] = {
