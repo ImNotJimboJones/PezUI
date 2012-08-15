@@ -1,6 +1,19 @@
 
 XLootDB = {
 	["namespaces"] = {
+		["XLootMasterDB"] = {
+			["profiles"] = {
+				["Default"] = {
+					["mlthreshold"] = 5,
+					["mlrolls"] = true,
+					["announce"] = {
+						["group"] = 1,
+						["guild"] = 1,
+						["rw"] = 4,
+					},
+				},
+			},
+		},
 		["XLootMonitorDB"] = {
 			["profiles"] = {
 				["Default"] = {

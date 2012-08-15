@@ -8,11 +8,11 @@ Prat3DB = {
 		["Prat_PlayerNames"] = {
 			["profiles"] = {
 				["Default"] = {
+					["coloreverywhere"] = false,
 					["level"] = false,
 					["bracketscommoncolor"] = false,
 					["subgroup"] = false,
 					["tabcomplete"] = false,
-					["coloreverywhere"] = false,
 				},
 			},
 		},
@@ -130,35 +130,23 @@ Prat3DB = {
 		["Prat_ChannelNames"] = {
 			["profiles"] = {
 				["Default"] = {
-					["shortnames"] = {
-						["battleground"] = "[BG]",
-					},
-					["on"] = false,
 					["replace"] = {
-						["guild"] = false,
 						["bnwhisper"] = false,
-						["channel3"] = false,
-						["channel2"] = false,
-						["battleground"] = false,
 						["channel5"] = false,
-						["raid"] = false,
-						["battlegroundleader"] = false,
-						["raidleader"] = false,
-						["raidwarning"] = false,
 						["channel6"] = false,
 						["channel7"] = false,
 						["channel9"] = false,
-						["partyleader"] = false,
 						["whisper"] = false,
-						["yell"] = false,
 						["whisperincome"] = false,
-						["channel4"] = false,
+						["bnwhisperincome"] = false,
 						["channel8"] = false,
-						["say"] = false,
-						["partyguide"] = false,
-						["party"] = false,
-						["channel1"] = false,
-						["officer"] = false,
+					},
+					["shortnames"] = {
+						["channel2"] = "[Trade]",
+						["channel3"] = "[LD]",
+						["channel4"] = "[LFG]",
+						["channel1"] = "[Gen]",
+						["battleground"] = "[BG]",
 					},
 				},
 			},
@@ -237,7 +225,6 @@ Prat3DB = {
 	["profiles"] = {
 		["Default"] = {
 			["modules"] = {
-				["ChannelNames"] = 1,
 				["Alias"] = 1,
 				["AltNames"] = 1,
 				["Paragraph"] = 1,
