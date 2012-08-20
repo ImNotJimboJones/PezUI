@@ -53,9 +53,9 @@ SexyMapDB = {
 					["zoom"] = {
 						["hide"] = "never",
 					},
-					["lockDragging"] = false,
+					["lockDragging"] = true,
 					["lfg"] = {
-						["hide"] = "never",
+						["hide"] = "always",
 					},
 					["GuildInstanceDifficulty"] = {
 						["hide"] = "never",
@@ -90,8 +90,9 @@ SexyMapDB = {
 						["GameTimeFrame"] = 39.90599214133294,
 						["MiniMapWorldMapButton"] = 42.60297915413958,
 						["MinimapZoomOut"] = -56.07895483376067,
+						["MiniMapBattlefieldFrame"] = 201.3477895524124,
+						["MiniMapLFGFrame"] = 161.779295366276,
 						["MacaroonMinimapButton"] = 210.0155001660639,
-						["MiniMapLFGFrame"] = 165.1088245815029,
 						["MiniMapTrackingButton"] = 158.8424850050231,
 						["TimeManagerClockButton"] = -89.45977552062108,
 					},
