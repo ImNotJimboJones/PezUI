@@ -20,6 +20,7 @@ SexyMapDB = {
 		["Buttons"] = {
 			["profiles"] = {
 				["Default"] = {
+					["radius"] = 3,
 					["lockDragging"] = true,
 					["visibilitySettings"] = {
 						["MiniMapRecordingButton"] = "hover",
@@ -28,17 +29,22 @@ SexyMapDB = {
 						["MiniMapLFGFrame"] = "always",
 						["MiniMapInstanceDifficulty"] = "always",
 						["MinimapZoneTextButton"] = "hover",
-						["TenTonHammer_MinimapButton"] = "never",
+						["VuhDoMinimapButton"] = "never",
 						["GameTimeFrame"] = "never",
 						["RBSMinimapButton"] = "never",
 						["TimeManagerClockButton"] = "never",
 						["MacaroonMinimapButton"] = "never",
-						["DBMMinimapButton"] = "never",
 						["FishingBuddyMinimapFrame"] = "never",
+						["DBMMinimapButton"] = "never",
 						["MiniMapTracking"] = "never",
 						["CritlineMinimapButton"] = "never",
 						["GuildInstanceDifficulty"] = "always",
-						["VuhDoMinimapButton"] = "never",
+						["TenTonHammer_MinimapButton"] = "never",
+					},
+					["dragPositions"] = {
+						["MiniMapLFGFrame"] = 162.0154208416845,
+						["MiniMapMailFrame"] = 253.4972688983889,
+						["MiniMapBattlefieldFrame"] = 199.2490782806349,
 					},
 				},
 			},
@@ -53,7 +59,7 @@ SexyMapDB = {
 		["Shapes"] = {
 			["profiles"] = {
 				["Default"] = {
-					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
+					["shape"] = "SPELLS\\T_VFX_BORDER",
 				},
 				["Burning Blade"] = {
 					["shape"] = "Textures\\MinimapMask",
@@ -93,9 +99,9 @@ SexyMapDB = {
 							},
 							["borderColor"] = {
 								["a"] = 1,
-								["b"] = 0.3882352941176471,
-								["g"] = 0.3882352941176471,
 								["r"] = 0.3882352941176471,
+								["g"] = 0.3882352941176471,
+								["b"] = 0.3882352941176471,
 							},
 							["scale"] = 1.07,
 						},
@@ -105,7 +111,7 @@ SexyMapDB = {
 			},
 			["profiles"] = {
 				["Default"] = {
-					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
+					["shape"] = "SPELLS\\T_VFX_BORDER",
 					["applyPreset"] = false,
 					["backdrop"] = {
 						["settings"] = {
@@ -119,9 +125,9 @@ SexyMapDB = {
 					["borders"] = {
 						{
 							["a"] = 1,
-							["b"] = 1,
-							["name"] = "Rune 1",
 							["r"] = 0.3098039215686275,
+							["name"] = "Rune 1",
+							["b"] = 1,
 							["scale"] = 1.4,
 							["rotSpeed"] = -30,
 							["g"] = 0.4784313725490196,
@@ -129,9 +135,9 @@ SexyMapDB = {
 						}, -- [1]
 						{
 							["a"] = 0.3799999952316284,
-							["b"] = 1,
-							["rotSpeed"] = 60,
 							["r"] = 0.196078431372549,
+							["rotSpeed"] = 60,
+							["b"] = 1,
 							["scale"] = 2.1,
 							["name"] = "Rune 2",
 							["g"] = 0.2901960784313725,
@@ -168,7 +174,7 @@ SexyMapDB = {
 					["borderColor"] = {
 						["a"] = 0.5,
 					},
-					["yOffset"] = -20,
+					["yOffset"] = -18,
 				},
 			},
 		},
