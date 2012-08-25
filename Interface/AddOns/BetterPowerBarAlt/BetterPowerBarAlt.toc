@@ -1,0 +1,12 @@
+## Interface: 40300
+## Title: BetterPowerBarAlt
+## Notes: Fancy up the PlayerPowerBarAlt frame
+## Author: Neb
+## Version: 1.4
+## SavedVariables: BetterPowerBarAltDB
+## X-Curse-Packaged-Version: 1.4
+## X-Curse-Project-Name: BetterPowerBarAlt
+## X-Curse-Project-ID: betterpowerbaralt
+## X-Curse-Repository-ID: wow/betterpowerbaralt/mainline
+
+BetterPowerBarAlt.lua

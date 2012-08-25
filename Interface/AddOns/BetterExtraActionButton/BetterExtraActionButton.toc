@@ -1,0 +1,13 @@
+## Interface: 40300
+## Title: BetterExtraActionButton
+## Notes: Fancy up the ExtraActionButton frame
+## Author: Neb
+## Version: 1.1.1
+## OptionalDeps: Masque
+## SavedVariables: BetterExtraActionBarDB
+## X-Curse-Packaged-Version: 1.1.1
+## X-Curse-Project-Name: BetterExtraActionButton
+## X-Curse-Project-ID: betterextraactionbutton
+## X-Curse-Repository-ID: wow/betterextraactionbutton/mainline
+
+BetterExtraActionButton.lua
