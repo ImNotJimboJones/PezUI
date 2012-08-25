@@ -6,13 +6,6 @@ local mod = addon.SexyMap:NewModule(modName)
 local L = addon.L
 local pingFrame
 
-local defaults = {
-	profile = {
-		showPing = true,
-		showAt = "map"
-	}
-}
-
 local options = {
 	type = "group",
 	name = modName,
@@ -62,13 +55,7 @@ local options = {
 }
 
 pingFrame = CreateFrame("Frame", "SexyMapPingFrame", Minimap)
-pingFrame:SetBackdrop({
-	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-	insets = {left = 2, top = 2, right = 2, bottom = 2},
-	edgeSize = 12,
-	tile = true
-})
+pingFrame:SetBackdrop(addon.backdrop)
 pingFrame:SetBackdropColor(0,0,0,0.8)
 pingFrame:SetBackdropBorderColor(0,0,0,0.6)
 pingFrame:SetHeight(20)
@@ -88,7 +75,8 @@ anim:SetDuration(3)
 anim:SetStartDelay(3)
 
 pingFrame:SetScript("OnEvent", function(_, _, unit)
-	local color = RAID_CLASS_COLORS[select(2, UnitClass(unit))]
+	local class = select(2, UnitClass(unit))
+	local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class] or GRAY_FONT_COLOR
 	if mod.db.profile.showAt == "chat" then
 		DEFAULT_CHAT_FRAME:AddMessage(("Ping: |cFF%02x%02x%02x%s|r"):format(color.r * 255, color.g * 255, color.b * 255, UnitName(unit)))
 	else
@@ -102,8 +90,14 @@ pingFrame:SetScript("OnEvent", function(_, _, unit)
 end)
 
 function mod:OnInitialize()
+	local defaults = {
+		profile = {
+			showPing = true,
+			showAt = "map"
+		}
+	}
 	self.db = parent.db:RegisterNamespace(modName, defaults)
-	parent:RegisterModuleOptions(modName, options, modName)
+	parent:RegisterModuleOptions(modName, options, L["Ping"])
 	if self.db.profile.showPing then
 		pingFrame:RegisterEvent("MINIMAP_PING")
 	end

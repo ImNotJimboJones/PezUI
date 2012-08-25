@@ -4,100 +4,41 @@ SexyMapDB = {
 		["Ping"] = {
 		},
 		["Coordinates"] = {
+		},
+		["General"] = {
 			["profiles"] = {
 				["Default"] = {
-					["y"] = 62.23907470703125,
-					["fontSize"] = 10,
-					["fontColor"] = {
-						["a"] = 1,
-						["b"] = 1,
-						["g"] = 1,
-						["r"] = 1,
-					},
-					["borderColor"] = {
-						["a"] = 0.7000000178813934,
-						["b"] = 0,
-						["g"] = 0,
-						["r"] = 0,
-					},
-					["locked"] = true,
-					["backgroundColor"] = {
-						["a"] = 0.7000000178813934,
-						["b"] = 0,
-						["g"] = 0,
-						["r"] = 0,
-					},
-					["x"] = -0.360107421875,
+					["point"] = "BOTTOMRIGHT",
+					["relpoint"] = "BOTTOMRIGHT",
+					["y"] = 172.6491510989385,
+					["x"] = -33.81890142601755,
+					["scale"] = 0.72,
+					["rightClickToConfig"] = false,
 				},
 			},
 		},
 		["Buttons"] = {
 			["profiles"] = {
 				["Default"] = {
-					["direction"] = {
-						["hide"] = "never",
-					},
-					["MiniMapRecordingButton"] = {
-						["hide"] = "never",
-					},
-					["voice"] = {
-						["hide"] = "never",
-					},
-					["MacaroonMinimapButton"] = {
-						["hide"] = "never",
-					},
-					["zoom"] = {
-						["hide"] = "never",
-					},
-					["MiniMapInstanceDifficulty"] = {
-						["hide"] = "never",
-					},
-					["radius"] = 0,
 					["lockDragging"] = true,
-					["lfg"] = {
-						["hide"] = "always",
-					},
-					["tracking"] = {
-						["hide"] = "never",
-					},
-					["MiniMapLFGFrame"] = {
-						["hide"] = "never",
-					},
-					["close"] = {
-						["hide"] = "never",
-					},
-					["worldmap"] = {
-						["hide"] = "never",
-					},
-					["difficulty"] = {
-						["hide"] = "always",
-					},
-					["mapclock"] = {
-						["hide"] = "never",
-					},
-					["calendar"] = {
-						["hide"] = "never",
-					},
-					["DBMMinimapButton"] = {
-						["hide"] = "never",
-					},
-					["mail"] = {
-						["hide"] = "always",
-					},
-					["dragPositions"] = {
-						["MinimapZoomIn"] = -31.51559554458952,
-						["MiniMapMailFrame"] = 251.9238821069645,
-						["GameTimeFrame"] = 39.90599214133294,
-						["MiniMapWorldMapButton"] = 42.60297915413958,
-						["MinimapZoomOut"] = -56.07895483376067,
-						["MiniMapBattlefieldFrame"] = 201.3477895524124,
-						["TimeManagerClockButton"] = -89.45977552062108,
-						["MacaroonMinimapButton"] = 210.0155001660639,
-						["MiniMapTrackingButton"] = 158.8424850050231,
-						["MiniMapLFGFrame"] = 161.779295366276,
-					},
-					["GuildInstanceDifficulty"] = {
-						["hide"] = "never",
+					["visibilitySettings"] = {
+						["MiniMapRecordingButton"] = "hover",
+						["AtlasButtonFrame"] = "never",
+						["MiniMapBattlefieldFrame"] = "always",
+						["MiniMapLFGFrame"] = "always",
+						["MiniMapInstanceDifficulty"] = "always",
+						["MinimapZoneTextButton"] = "hover",
+						["TenTonHammer_MinimapButton"] = "never",
+						["GameTimeFrame"] = "never",
+						["RBSMinimapButton"] = "never",
+						["TimeManagerClockButton"] = "never",
+						["MacaroonMinimapButton"] = "never",
+						["DBMMinimapButton"] = "never",
+						["FishingBuddyMinimapFrame"] = "never",
+						["MiniMapTracking"] = "never",
+						["CritlineMinimapButton"] = "never",
+						["GuildInstanceDifficulty"] = "always",
+						["VuhDoMinimapButton"] = "never",
 					},
 				},
 			},
@@ -114,30 +55,17 @@ SexyMapDB = {
 				["Default"] = {
 					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
 				},
+				["Burning Blade"] = {
+					["shape"] = "Textures\\MinimapMask",
+				},
 			},
 		},
 		["Fader"] = {
 		},
 		["Movers"] = {
 			["profiles"] = {
-				["Default"] = {
-					["clamp"] = false,
-					["scale"] = 0.72,
-					["framePositions"] = {
-						["Boss1TargetFrame"] = {
-							["y"] = 1014.54638671875,
-							["x"] = 1689.606323242188,
-						},
-						["DurabilityFrame"] = {
-							["y"] = 317.3614807128906,
-							["x"] = 151.4260101318359,
-						},
-						["VehicleSeatIndicator"] = {
-							["y"] = 369.3122863769531,
-							["x"] = 15.01337814331055,
-						},
-					},
-					["rightClickToConfig"] = false,
+				["Burning Blade"] = {
+					["enabled"] = true,
 				},
 			},
 		},
@@ -180,20 +108,46 @@ SexyMapDB = {
 					["shape"] = "Interface\\BUTTONS\\WHITE8X8",
 					["applyPreset"] = false,
 					["backdrop"] = {
-						["show"] = true,
 						["settings"] = {
-							["bgFile"] = "Interface\\TabardFrame\\TabardFrameBackground",
-							["edgeFile"] = "\\\\Interface\\Media\\Borders\\pixelline.tga",
-						},
-						["borderColor"] = {
-							["a"] = 1,
-							["b"] = 0.2666666666666667,
-							["g"] = 0.2666666666666667,
-							["r"] = 0.2666666666666667,
+							["edgeSize"] = 17,
 						},
 						["scale"] = 1.07,
-						["alpha"] = 1,
 					},
+				},
+				["Burning Blade"] = {
+					["applyPreset"] = false,
+					["borders"] = {
+						{
+							["a"] = 1,
+							["b"] = 1,
+							["name"] = "Rune 1",
+							["r"] = 0.3098039215686275,
+							["scale"] = 1.4,
+							["rotSpeed"] = -30,
+							["g"] = 0.4784313725490196,
+							["texture"] = "SPELLS\\AURARUNE256.BLP",
+						}, -- [1]
+						{
+							["a"] = 0.3799999952316284,
+							["b"] = 1,
+							["rotSpeed"] = 60,
+							["r"] = 0.196078431372549,
+							["scale"] = 2.1,
+							["name"] = "Rune 2",
+							["g"] = 0.2901960784313725,
+							["texture"] = "SPELLS\\AuraRune_A.blp",
+						}, -- [2]
+						{
+							["a"] = 0.3,
+							["name"] = "Fade",
+							["b"] = 1,
+							["scale"] = 1.6,
+							["r"] = 0,
+							["g"] = 0.2235294117647059,
+							["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
+						}, -- [3]
+					},
+					["shape"] = "Textures\\MinimapMask",
 				},
 			},
 		},
@@ -208,9 +162,13 @@ SexyMapDB = {
 		["ZoneText"] = {
 			["profiles"] = {
 				["Default"] = {
-					["fontsize"] = 12,
-					["show"] = "hover",
-					["yOffset"] = -9,
+					["bgColor"] = {
+						["a"] = 0.800000011920929,
+					},
+					["borderColor"] = {
+						["a"] = 0.5,
+					},
+					["yOffset"] = -20,
 				},
 			},
 		},
@@ -220,6 +178,8 @@ SexyMapDB = {
 	},
 	["profiles"] = {
 		["Default"] = {
+		},
+		["Burning Blade"] = {
 		},
 	},
 }

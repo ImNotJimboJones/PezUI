@@ -9,8 +9,7 @@ local textures = {}
 local texturePool = {}
 local rotateTextures = {}
 local defaultSize = 180
---local rotFrame = CreateFrame("Frame")
-local MinimapBackdrop
+local customBackdrop
 local media = LibStub("LibSharedMedia-3.0")
 local Shape
 
@@ -93,7 +92,7 @@ local options = {
 				},
 				new = {
 					type = "input",
-					name = L["Create new border"],
+					name = L["Create a new border"],
 					order = 2,
 					width = "full",
 					set = function(info, v)
@@ -197,13 +196,14 @@ local options = {
 										openTexBrowser = {
 											type = "execute",
 											name = function()
-												if select(5, GetAddOnInfo("TexBrowser")) then
+												if select(2, GetAddOnInfo("TexBrowser")) then
 													return L["Open TexBrowser"]
 												else
 													return L["TexBrowser Not Installed"]
 												end
 											end,
 											order = 11,
+											width = "full",
 											func = function()
 												if not IsAddOnLoaded("TexBrowser") then
 													EnableAddOn("TexBrowser")
@@ -212,7 +212,7 @@ local options = {
 												TexBrowser:OnEnable()
 											end,
 											disabled = function()
-												return not select(5, GetAddOnInfo("TexBrowser"))
+												return not select(2, GetAddOnInfo("TexBrowser"))
 											end
 										},
 										textureSelect = {
@@ -232,7 +232,7 @@ local options = {
 										},
 										tile = {
 											type = "toggle",
-											name = L["Tile background"],
+											name = L["Tile Background"],
 											order = 13,
 											get = function()
 												return db.backdrop.settings.tile
@@ -244,7 +244,7 @@ local options = {
 										},
 										tileSize = {
 											type = "range",
-											name = L["Tile size"],
+											name = L["Tile Size"],
 											order = 14,
 											min = 0,
 											max = 500,
@@ -264,7 +264,7 @@ local options = {
 										},
 										textureColor = {
 											type = "color",
-											name = L["Backdrop color"],
+											name = L["Backdrop Color"],
 											order = 13,
 											hasAlpha = true,
 											get = function()
@@ -280,7 +280,7 @@ local options = {
 										},
 										inset = {
 											type = "range",
-											name = L["Backdrop insets"],
+											name = L["Backdrop Insets"],
 											order = 15,
 											min = 0,
 											max = 20,
@@ -309,7 +309,7 @@ local options = {
 									args = {
 										border = {
 											type = "input",
-											name = L["Border texture"],
+											name = L["Border Texture"],
 											order = 20,
 											width = "full",
 											get = function()
@@ -323,13 +323,14 @@ local options = {
 										openTexBrowser = {
 											type = "execute",
 											name = function()
-												if GetAddOnInfo("TexBrowser") ~= nil then
+												if select(2, GetAddOnInfo("TexBrowser")) then
 													return L["Open TexBrowser"]
 												else
 													return L["TexBrowser Not Installed"]
 												end
 											end,
 											order = 21,
+											width = "full",
 											func = function()
 												if not IsAddOnLoaded("TexBrowser") then
 													EnableAddOn("TexBrowser")
@@ -338,7 +339,7 @@ local options = {
 												TexBrowser:OnEnable()
 											end,
 											disabled = function()
-												return GetAddOnInfo("TexBrowser") == nil
+												return not select(2, GetAddOnInfo("TexBrowser"))
 											end
 										},
 										textureSelect = {
@@ -359,7 +360,7 @@ local options = {
 										borderColor = {
 											type = "color",
 											order = 23,
-											name = L["Border color"],
+											name = L["Border Color"],
 											hasAlpha = true,
 											get = function()
 												local c = db.backdrop.borderColor
@@ -374,7 +375,7 @@ local options = {
 										},
 										edgeSize = {
 											type = "range",
-											name = L["Border edge size"],
+											name = L["Border Edge Size"],
 											order = 25,
 											min = 6,
 											max = 48,
@@ -464,7 +465,7 @@ end
 local borderOptions = {
 	header1 = {
 		type = "header",
-		name = L["Entry options"],
+		name = L["Entry Options"],
 		order = 1
 	},
 	name = {
@@ -503,7 +504,7 @@ local borderOptions = {
 	},
 	header2 = {
 		type = "header",
-		name = L["Texture path"],
+		name = L["Texture Path"],
 		order = 50
 	},
 	textureText = {
@@ -514,13 +515,14 @@ local borderOptions = {
 	openTexBrowser = {
 		type = "execute",
 		name = function()
-			if select(5, GetAddOnInfo("TexBrowser")) then
+			if select(2, GetAddOnInfo("TexBrowser")) then
 				return L["Open TexBrowser"]
 			else
 				return L["TexBrowser Not Installed"]
 			end
 		end,
 		order = 52,
+		width = "full",
 		func = function()
 			if not IsAddOnLoaded("TexBrowser") then
 				EnableAddOn("TexBrowser")
@@ -529,12 +531,12 @@ local borderOptions = {
 			TexBrowser:OnEnable()
 		end,
 		disabled = function()
-			return not select(5, GetAddOnInfo("TexBrowser"))
+			return not select(2, GetAddOnInfo("TexBrowser"))
 		end
 	},
 	texture = {
 		type = "input",
-		name = L["Texture path"],
+		name = L["Texture Path"],
 		order = 53,
 		width = "full",
 		get = function(info)
@@ -549,7 +551,7 @@ local borderOptions = {
 	},
 	header3 = {
 		type = "header",
-		name = L["Texture options"],
+		name = L["Texture Options"],
 		order = 99
 	},
 	scale = {
@@ -658,7 +660,7 @@ local borderOptions = {
 	},]]
 	color = {
 		type = "color",
-		name = L["Texture tint"],
+		name = L["Texture Tint"],
 		order = 109,
 		width = "full",
 		hasAlpha = true,
@@ -674,7 +676,7 @@ local borderOptions = {
 	},
 	hNudge = {
 		type = "range",
-		name = L["Horizontal nudge"],
+		name = L["Horizontal Nudge"],
 		min = -100,
 		max = 100,
 		step = 1,
@@ -693,7 +695,7 @@ local borderOptions = {
 	},
 	vNudge = {
 		type = "range",
-		name = L["Vertical nudge"],
+		name = L["Vertical Nudge"],
 		min = -100,
 		max = 100,
 		step = 1,
@@ -799,7 +801,7 @@ function mod:OnInitialize()
 
 	self.db = parent.db:RegisterNamespace(modName, defaults)
 	db = self.db.profile
-	parent:RegisterModuleOptions(modName, options, modName)
+	parent:RegisterModuleOptions(modName, options, L["Borders"])
 	local args = parent:GetModule("General").options.args
 	args.presets = deepCopyHash(options.args.presets.args.preset)
 	if args.presets then
@@ -807,32 +809,14 @@ function mod:OnInitialize()
 		args.presets.width = nil
 		args.presets.values = presets
 	end
-	-- Minimap:SetFrameStrata("LOW")
-	MinimapBackdrop = CreateFrame("Frame", "SexyMapMinimapBackdrop", Minimap)
-	MinimapBackdrop:SetFrameStrata("BACKGROUND")
-	MinimapBackdrop:SetFrameLevel(MinimapBackdrop:GetFrameLevel() - 1)
-	MinimapBackdrop:SetPoint("CENTER")
-	MinimapBackdrop:SetWidth(Minimap:GetWidth())
-	MinimapBackdrop:SetHeight(Minimap:GetHeight())
-end
 
---[[local updateTime = 1/60
-local totalTime = 0
-local function updateRotations(self, t)
-	totalTime = totalTime + t
-	if totalTime >= updateTime then
-		for k, v in pairs(rotateTextures) do
-			if type(v) == "number" then
-				RotateTexture(k, v * totalTime)
-			else
-				RotateTexture(k, v)
-			end
-		end
-		while totalTime > updateTime do
-			totalTime = totalTime - updateTime
-		end
-	end
-end]]
+	customBackdrop = CreateFrame("Frame", "SexyMapCustomBackdrop", Minimap)
+	customBackdrop:SetFrameStrata("BACKGROUND")
+	customBackdrop:SetFrameLevel(customBackdrop:GetFrameLevel() - 1)
+	customBackdrop:SetPoint("CENTER")
+	customBackdrop:SetWidth(Minimap:GetWidth())
+	customBackdrop:SetHeight(Minimap:GetHeight())
+end
 
 function mod:OnEnable()
 	db = self.db.profile
@@ -1020,17 +1004,17 @@ end
 
 function mod:UpdateBackdrop()
 	if db.backdrop.show then
-		MinimapBackdrop:Show()
-		MinimapBackdrop:SetFrameStrata("BACKGROUND")
-		MinimapBackdrop:SetScale(db.backdrop.scale or 1)
-		MinimapBackdrop:SetAlpha(db.backdrop.alpha or 1)
-		MinimapBackdrop:SetBackdrop(db.backdrop.settings)
+		customBackdrop:Show()
+		customBackdrop:SetFrameStrata("BACKGROUND")
+		customBackdrop:SetScale(db.backdrop.scale or 1)
+		customBackdrop:SetAlpha(db.backdrop.alpha or 1)
+		customBackdrop:SetBackdrop(db.backdrop.settings)
 		local t = db.backdrop.textureColor
-		MinimapBackdrop:SetBackdropColor(t.r or 0, t.g or 0, t.b or 0, t.a or 1)
+		customBackdrop:SetBackdropColor(t.r or 0, t.g or 0, t.b or 0, t.a or 1)
 		t = db.backdrop.borderColor
-		MinimapBackdrop:SetBackdropBorderColor(t.r or 1, t.g or 1, t.b or 1, t.a or 1)
+		customBackdrop:SetBackdropBorderColor(t.r or 1, t.g or 1, t.b or 1, t.a or 1)
 	else
-		MinimapBackdrop:Hide()
+		customBackdrop:Hide()
 	end
 end
 

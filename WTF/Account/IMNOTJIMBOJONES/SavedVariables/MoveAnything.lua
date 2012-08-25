@@ -17,6 +17,8 @@ MADB = {
 						15.01337893759193, -- [4]
 						369.3122767199374, -- [5]
 					},
+					["frameStrata"] = "LOW",
+					["orgFrameStrata"] = "MEDIUM",
 				},
 				["GroupLootFrame2"] = {
 					["name"] = "GroupLootFrame2",
@@ -27,6 +29,10 @@ MADB = {
 						200, -- [4]
 						480, -- [5]
 					},
+				},
+				["CompactRaidGroup7"] = {
+					["name"] = "CompactRaidGroup7",
+					["hidden"] = true,
 				},
 				["GroupLootFrame1"] = {
 					["name"] = "GroupLootFrame1",
@@ -55,15 +61,19 @@ MADB = {
 						834.5499877929688, -- [5]
 					},
 				},
-				["BNToastFrame"] = {
-					["name"] = "BNToastFrame",
+				["Boss1TargetFrame"] = {
+					["name"] = "Boss1TargetFrame",
+					["forcedLock"] = true,
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"ChatFrame1ButtonFrame", -- [2]
-						"TOPLEFT", -- [3]
-						11.00001204013824, -- [4]
-						74.00004577636719, -- [5]
+						"TOPLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						10000, -- [4]
+						1014.549987792969, -- [5]
 					},
+					["unregisterAllEvents"] = true,
+					["hidden"] = true,
+					["unit"] = "boss1",
 				},
 				["Boss2TargetFrame"] = {
 					["name"] = "Boss2TargetFrame",
@@ -78,19 +88,16 @@ MADB = {
 					["hidden"] = true,
 					["unit"] = "boss2",
 				},
-				["Boss1TargetFrame"] = {
-					["name"] = "Boss1TargetFrame",
-					["forcedLock"] = true,
+				["BankFrame"] = {
+					["name"] = "BankFrame",
+					["scale"] = 0.8199999928474426,
 					["pos"] = {
 						"TOPLEFT", -- [1]
 						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						10000, -- [4]
-						1014.549987792969, -- [5]
+						"TOPLEFT", -- [3]
+						24.39024411518612, -- [4]
+						-126.8292693989678, -- [5]
 					},
-					["unregisterAllEvents"] = true,
-					["hidden"] = true,
-					["unit"] = "boss1",
 				},
 				["BagsMover"] = {
 					["scale"] = 0.8199999928474426,
@@ -141,9 +148,15 @@ MADB = {
 						-128, -- [5]
 					},
 				},
-				["CompactRaidGroup7"] = {
-					["name"] = "CompactRaidGroup7",
-					["hidden"] = true,
+				["DurabilityFrame"] = {
+					["name"] = "DurabilityFrame",
+					["pos"] = {
+						"TOPRIGHT", -- [1]
+						"MinimapCluster", -- [2]
+						"BOTTOMRIGHT", -- [3]
+						-1481.621653478986, -- [4]
+						-414.1176877371628, -- [5]
+					},
 				},
 				["RaidUnitFramesManagerMover"] = {
 					["name"] = "RaidUnitFramesManagerMover",
@@ -227,15 +240,14 @@ MADB = {
 					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
 				},
-				["BankFrame"] = {
-					["name"] = "BankFrame",
-					["scale"] = 0.8199999928474426,
+				["BNToastFrame"] = {
+					["name"] = "BNToastFrame",
 					["pos"] = {
-						"TOPLEFT", -- [1]
-						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [1]
+						"ChatFrame1ButtonFrame", -- [2]
 						"TOPLEFT", -- [3]
-						24.39024411518612, -- [4]
-						-126.8292693989678, -- [5]
+						11.00001204013824, -- [4]
+						74.00004577636719, -- [5]
 					},
 				},
 				["Boss4TargetFrame"] = {

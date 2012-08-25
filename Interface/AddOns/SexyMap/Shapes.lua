@@ -215,22 +215,22 @@ local shapes = {
 	["Interface\\AddOns\\SexyMap\\shapes\\bottomright"] = {
 		name = L["Rounded - Bottom Right"],
 		geometry = "bottomRight",
-		shape = "CORNER-BOTTOMRIGHT"
+		shape = "CORNER-TOPLEFT"
 	},
 	["Interface\\AddOns\\SexyMap\\shapes\\bottomleft"] = {
 		name = L["Rounded - Bottom Left"],
 		geometry = "bottomLeft",
-		shape = "CORNER-BOTTOMLEFT"
+		shape = "CORNER-TOPRIGHT"
 	},
 	["Interface\\AddOns\\SexyMap\\shapes\\topright"] = {
 		name = L["Rounded - Top Right"],
 		geometry = "topRight",
-		shape = "CORNER-TOPRIGHT"
+		shape = "CORNER-BOTTOMLEFT"
 	},
 	["Interface\\AddOns\\SexyMap\\shapes\\topleft"] = {
 		name = L["Rounded - Top Left"],
 		geometry = "topLeft",
-		shape = "CORNER-TOPLEFT"
+		shape = "CORNER-BOTTOMRIGHT"
 	},
 }
 
@@ -285,20 +285,22 @@ function mod:GetShape()
 	return db.shape
 end
 
-local minimapShape
-
 function mod:ApplyShape(shape)
 	shape = legacyMappings[shape] or shape
-	dbShape = db.shape and legacyMappings[db.shape] or db.shape
+	local dbShape = db.shape and legacyMappings[db.shape] or db.shape
 	if shape or dbShape then
-		minimapShape = (shape or dbShape).shape or "ROUND"
 		db.shape = shape or dbShape or "Textures\\MinimapMask"
+		parent:GetModule("Borders").db.profile.shape = db.shape
 		Minimap:SetMaskTexture(db.shape)
 	end
 	self.callbacks:Fire("SexyMap_ShapeChanged")
 end
 
 function GetMinimapShape()
-	return shapes[db.shape] and shapes[db.shape].shape or "ROUND"
+	if HudMapCluster and HudMapCluster:IsShown() then -- HudMap module compat
+		return "ROUND"
+	else
+		return shapes[db.shape] and shapes[db.shape].shape or "ROUND"
+	end
 end
 

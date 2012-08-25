@@ -1,13 +1,21 @@
 ## Interface: 40300
-## Version: 1.5
+## Version: 1.8.4
 ## Title: SexyMap
-## Notes: Spice up ye olde minimap with some sexytime options.
-## Notes-zhCN: 热辣小地图并包含一些性感计时器选项。
-## Notes-zhTW: 熱辣小地圖并包含一些性感計時器選項。
+## Notes: Spice up your minimap with some sexy options.
+## Notes-deDE: Spice up your minimap with some sexy options.
+## Notes-ruRU: Spice up your minimap with some sexy options.
+## Notes-esES: Spice up your minimap with some sexy options.
+## Notes-esMX: Spice up your minimap with some sexy options.
+## Notes-frFR: Spice up your minimap with some sexy options.
+## Notes-itIT: Spice up your minimap with some sexy options.
+## Notes-koKR: Spice up your minimap with some sexy options.
+## Notes-zhTW: Spice up your minimap with some sexy options.
+## Notes-zhCN: Spice up your minimap with some sexy options.
+## Notes-ptBR: Spice up your minimap with some sexy options.
 ## Author: Antiarc, Funkydude
-## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0, Blizzard_TimeManager, TomTom, Capping
+## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0, Blizzard_TimeManager, TomTom
 ## SavedVariables: SexyMapDB
-## X-Curse-Packaged-Version: v1.5
+## X-Curse-Packaged-Version: v1.8.4
 ## X-Curse-Project-Name: SexyMap
 ## X-Curse-Project-ID: sexymap
 ## X-Curse-Repository-ID: wow/sexymap/mainline
@@ -20,8 +28,16 @@ embeds.xml
 
 # Localization
 localization\enUS.lua
+localization\deDE.lua
+localization\ruRU.lua
+localization\esES.lua
+localization\esMX.lua
+localization\frFR.lua
+localization\itIT.lua
+localization\koKR.lua
 localization\zhTW.lua
 localization\zhCN.lua
+localization\ptBR.lua
 
 # Core
 SexyMap.lua
@@ -40,6 +56,7 @@ Coordinates.lua
 Fader.lua
 HudMap.xml
 HudMap.lua
+Movers.lua
 Ping.lua
 ZoneText.lua
 
