@@ -65,12 +65,12 @@ SlideBar: disabled
 Stubby: enabled
 !Swatter: enabled
 TidyPlates: enabled
-TidyPlatesHub: enabled
+TidyPlatesHub: disabled
 TidyPlatesWidgets: enabled
-TidyPlates_Graphite: enabled
-TidyPlates_Grey: enabled
-TidyPlates_Neon: enabled
-TidyPlates_Quatre: enabled
+TidyPlates_Graphite: disabled
+TidyPlates_Grey: disabled
+TidyPlates_Neon: disabled
+TidyPlates_Quatre: disabled
 TitanMail: disabled
 TitanBag: disabled
 TitanClock: disabled
