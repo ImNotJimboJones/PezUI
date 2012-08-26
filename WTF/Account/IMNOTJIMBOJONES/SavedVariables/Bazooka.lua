@@ -85,10 +85,10 @@ BazookaDB = {
 						["bar"] = 2,
 					},
 					["SpeedyGonzales"] = {
-						["stripColors"] = false,
-						["area"] = "left",
 						["disableMouseInCombat"] = true,
+						["area"] = "left",
 						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -142,10 +142,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
 						["stripColors"] = false,
+						["enabled"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -224,12 +224,12 @@ BazookaDB = {
 						["pos"] = 24,
 					},
 					["Broker_uClock"] = {
-						["showValue"] = false,
+						["stripColors"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
-						["stripColors"] = false,
 						["showupdates"] = "",
+						["showValue"] = false,
 						["pos"] = 9,
 					},
 					["SN - Expertise"] = {
@@ -287,10 +287,8 @@ BazookaDB = {
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -337,9 +335,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["bar"] = 2,
 						["pos"] = 2,
 						["showSuffix"] = false,
-						["bar"] = 2,
 					},
 					["SN - Melee Attack Power"] = {
 						["pos"] = 14,
@@ -350,8 +348,10 @@ BazookaDB = {
 					["ElkExperience"] = {
 						["pos"] = 5,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["SN - Vengeance"] = {
 						["pos"] = 16,
@@ -418,21 +418,25 @@ BazookaDB = {
 					["SavedInstances"] = {
 						["pos"] = 6,
 					},
-					["AtlasLoot"] = {
+					["Masque"] = {
 						["enabled"] = false,
 						["pos"] = 9,
-					},
-					["Swatter"] = {
-						["enabled"] = false,
-						["pos"] = 12,
 					},
 					["kgPanels"] = {
 						["enabled"] = false,
 						["pos"] = 7,
 					},
+					["Swatter"] = {
+						["enabled"] = false,
+						["pos"] = 12,
+					},
 					["BrokerRecountFu"] = {
 						["enabled"] = false,
 						["pos"] = 2,
+					},
+					["AddonMgr"] = {
+						["enabled"] = false,
+						["pos"] = 5,
 					},
 					["Auc-Util-SearchUI"] = {
 						["enabled"] = false,
@@ -441,10 +445,6 @@ BazookaDB = {
 					["ArbitraryCommands"] = {
 						["enabled"] = false,
 						["pos"] = 4,
-					},
-					["AddonMgr"] = {
-						["enabled"] = false,
-						["pos"] = 5,
 					},
 					["BrokerToolBox"] = {
 						["enabled"] = false,
@@ -458,13 +458,17 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 3,
 					},
+					["Atlas"] = {
+						["enabled"] = false,
+						["pos"] = 8,
+					},
 					["MogIt"] = {
 						["enabled"] = false,
 						["pos"] = 8,
 					},
-					["Atlas"] = {
+					["AtlasLoot"] = {
 						["enabled"] = false,
-						["pos"] = 8,
+						["pos"] = 9,
 					},
 					["AucAdvanced"] = {
 						["enabled"] = false,
@@ -474,9 +478,9 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 10,
 					},
-					["Masque"] = {
+					["RaidAchievement"] = {
 						["enabled"] = false,
-						["pos"] = 9,
+						["pos"] = 8,
 					},
 				},
 			},
