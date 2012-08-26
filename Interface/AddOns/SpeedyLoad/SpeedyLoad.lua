@@ -5,7 +5,8 @@
 -- --------------------------
 
 
-local pairs, wipe, select, pcall = pairs, wipe, select, pcall
+local pairs, wipe, select, pcall, issecurevariable, hooksecurefunc, getmetatable =
+	  pairs, wipe, select, pcall, issecurevariable, hooksecurefunc, getmetatable
 local GetFramesRegisteredForEvent = GetFramesRegisteredForEvent
 local enteredOnce, listenForUnreg
 
@@ -14,11 +15,14 @@ local events = {
 	SPELLS_CHANGED = {},
 	USE_GLYPH = {},
 	PET_TALENT_UPDATE = {},
+	PLAYER_TALENT_UPDATE = {},
 	WORLD_MAP_UPDATE = {},
 	UPDATE_WORLD_STATES = {},
 	CRITERIA_UPDATE = {},
 	RECEIVED_ACHIEVEMENT_LIST = {},
 	ACTIONBAR_SLOT_CHANGED = {},
+	SPELL_UPDATE_USABLE = {},
+	UPDATE_FACTION = {},
 }
 
 -- our PLAYER_ENTERING_WORLD handler needs to be absolutely the very first one that gets fired.
@@ -36,12 +40,28 @@ end
 wipe(t)
 t = nil
 
+local validUnregisterFuncs = {
+	[f.UnregisterEvent] = true, -- might as well add this since we already have the frame
+}
+local function isUnregisterFuncValid(table, func)
+	if not func then
+		return false
+	end
+	local isValid = issecurevariable(table, "UnregisterEvent")
+	if not validUnregisterFuncs[func] then
+		validUnregisterFuncs[func] = not not isValid
+	end
+	return isValid
+end
 
 local function unregister(event, ...)
 	for i = 1, select("#", ...) do
 		local frame = select(i, ...)
-		frame:UnregisterEvent(event)
-		events[event][frame] = 1
+		local UnregisterEvent = frame.UnregisterEvent
+		if validUnregisterFuncs[UnregisterEvent] or isUnregisterFuncValid(frame, UnregisterEvent) then
+			UnregisterEvent(frame, event)
+			events[event][frame] = 1
+		end
 	end
 end
 
@@ -89,7 +109,7 @@ f:SetScript("OnEvent", function(self, event)
 			wipe(occured)
 			for event in pairs(events) do
 				unregister(event, GetFramesRegisteredForEvent(event))
-				f:RegisterEvent(event) -- MUST REGISTER AFTER UNREGISTER (duh?)
+				f:RegisterEvent(event) -- must register on f >AFTER< unregistering everything (duh?)
 			end
 			listenForUnreg = 1
 		else
