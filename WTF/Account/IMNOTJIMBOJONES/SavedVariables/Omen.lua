@@ -6,7 +6,7 @@ Omen3DB = {
 	["profiles"] = {
 		["Default"] = {
 			["PositionW"] = 335.2172046428644,
-			["Shown"] = true,
+			["Scale"] = 1.05,
 			["PositionH"] = 79.00000239355339,
 			["VGrip2"] = 192.749943054947,
 			["PositionY"] = 111.4880509370044,
@@ -36,7 +36,7 @@ Omen3DB = {
 					["sink20OutputSink"] = "Default",
 				},
 			},
-			["Scale"] = 1.05,
+			["Shown"] = true,
 			["TitleBar"] = {
 				["ShowTitleBar"] = false,
 			},

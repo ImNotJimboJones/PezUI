@@ -31,20 +31,20 @@ ThreatPlatesDB = {
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["scale"] = {
-					["Normal"] = 0.9000000357627869,
-					["Boss"] = 1,
-					["Neutral"] = 0.800000011920929,
-					["Elite"] = 0.9500000476837158,
-				},
 				["toggle"] = {
 					["Totem"] = true,
+				},
+				["scale"] = {
+					["Elite"] = 0.9500000476837158,
+					["Boss"] = 1,
+					["Neutral"] = 0.800000011920929,
+					["Normal"] = 0.9000000357627869,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -146,20 +146,20 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["castbar"] = {
-					["texture"] = "Minimalist",
-				},
 				["healthborder"] = {
 					["texture"] = "TP_HealthBarOverlayThin",
+				},
+				["castbar"] = {
+					["texture"] = "Minimalist",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -175,7 +175,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},

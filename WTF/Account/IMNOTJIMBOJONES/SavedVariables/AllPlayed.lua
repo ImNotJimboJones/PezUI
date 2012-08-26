@@ -1,29 +1,26 @@
 
 AllPlayedDB = {
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["data"] = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
-						["highest_rank"] = 0,
-						["subzone_text"] = "Expedition Base Camp",
-						["zone_text"] = "Ulduar",
-						["honor_kills"] = 7593,
-						["level"] = 85,
-						["coin"] = 286190564,
-						["xp"] = 1141,
-						["class"] = "HUNTER",
 						["conquest_points"] = 900,
-						["last_update"] = 1344732187,
+						["class"] = "HUNTER",
+						["zone_text"] = "Durotar",
+						["honor_kills"] = 7612,
+						["level"] = 85,
+						["coin"] = 293434919,
+						["xp"] = 1141,
+						["honor_points"] = 2466,
+						["highest_rank"] = 0,
+						["last_update"] = 1345952056,
 						["class_loc"] = "Hunter",
-						["justice_points"] = 3960,
-						["seconds_played"] = 10312595,
+						["justice_points"] = 4000,
+						["seconds_played"] = 10452187,
 						["max_rested_xp"] = 18400500,
-						["seconds_played_last_update"] = 1344732187,
-						["honor_points"] = 2268,
+						["seconds_played_last_update"] = 1345952056,
+						["subzone_text"] = "The Dranosh'ar Blockade",
 					},
 				},
 			},
@@ -39,6 +36,9 @@ AllPlayedDB = {
 			},
 		},
 	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
+	},
 	["profiles"] = {
 		["Default"] = {
 			["options"] = {
@@ -47,10 +47,10 @@ AllPlayedDB = {
 				["show_coins"] = false,
 				["all_realms"] = false,
 				["show_rested_xp_countdown"] = false,
+				["show_xp_total"] = false,
 				["ldbicon"] = {
 					["hide"] = true,
 				},
-				["show_xp_total"] = false,
 			},
 		},
 	},

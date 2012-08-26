@@ -15,16 +15,16 @@ MacaroonButtonDefaults = {
 		["bindColor"] = "1;1;1;1",
 		["countColor"] = "1;1;1;1",
 		["buffcolor"] = "0;0.8;0;1",
-		["debuffcolor"] = "0.8;0;0;1",
+		["spellCounts"] = false,
 		["auraText"] = false,
 		["rangecolor"] = "0.7;0.15;0.15;1",
-		["cdcolor2"] = "1;0.1;0.1;1",
-		["auracolor2"] = "1;0.1;0.1;1",
-		["macroText"] = true,
-		["clearerrors"] = false,
 		["cdText"] = false,
+		["clearerrors"] = false,
+		["macroText"] = true,
+		["auracolor2"] = "1;0.1;0.1;1",
+		["cdcolor2"] = "1;0.1;0.1;1",
 		["cdcolor1"] = "1;0.82;0;1",
-		["spellCounts"] = false,
+		["debuffcolor"] = "0.8;0;0;1",
 	},
 }
 MacaroonMacroMaster = nil
@@ -42,8 +42,8 @@ MacaroonMacroVault = {
 	},
 	["Burning Blade"] = {
 		["Pezzer"] = {
-			["Action Bar - Left: Button 9"] = {
-				"/cast Scatter Shot()", -- [1]
+			["Keybinds: Button 13"] = {
+				"/cast !Aspect of the Cheetah()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
@@ -56,15 +56,15 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["ScreenGrid: Button 4"] = {
-				"/screengrid 40", -- [1]
-				"INTERFACE\\ICONS\\SPELL_FROST_FIRERESISTANCETOTEM", -- [2]
-				"SG 40", -- [3]
+			["ScreenGrid: Button 3"] = {
+				"/screengrid 20", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"SG 20", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 13"] = {
-				"/cast !Aspect of the Cheetah()", -- [1]
+			["Action Bar - Left: Button 9"] = {
+				"/cast Scatter Shot()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
@@ -77,17 +77,10 @@ MacaroonMacroVault = {
 				"Wing Clip + Raptor Strike", -- [4]
 				true, -- [5]
 			},
-			["ScreenGrid: Button 3"] = {
-				"/screengrid 20", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"SG 20", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
-			["ScreenGrid: Button 5"] = {
-				"/screengrid 80", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"SG 80", -- [3]
+			["ScreenGrid: Button 4"] = {
+				"/screengrid 40", -- [1]
+				"INTERFACE\\ICONS\\SPELL_FROST_FIRERESISTANCETOTEM", -- [2]
+				"SG 40", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
@@ -98,8 +91,29 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
+			["ScreenGrid: Button 5"] = {
+				"/screengrid 80", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"SG 80", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
 			["Spell Bar: Button 1"] = {
 				"/cast Misdirection()", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
+			["ScreenGrid: Button 1"] = {
+				"/screengrid 0", -- [1]
+				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
+				"SG 0", -- [3]
+				"", -- [4]
+				false, -- [5]
+			},
+			["Keybinds: Button 16"] = {
+				"/cast !Aspect of the Pack()", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
 				"", -- [4]
@@ -112,24 +126,10 @@ MacaroonMacroVault = {
 				"", -- [4]
 				false, -- [5]
 			},
-			["Keybinds: Button 16"] = {
-				"/cast !Aspect of the Pack()", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
 			["Keybinds: Button 7"] = {
 				"/cast [@focus] Misdirection;", -- [1]
 				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
 				"", -- [3]
-				"", -- [4]
-				false, -- [5]
-			},
-			["ScreenGrid: Button 1"] = {
-				"/screengrid 0", -- [1]
-				"INTERFACE\\ICONS\\INV_MISC_QUESTIONMARK", -- [2]
-				"SG 0", -- [3]
 				"", -- [4]
 				false, -- [5]
 			},
@@ -159,11 +159,11 @@ MacaroonMacroVault = {
 }
 MacaroonItemCache = {
 	["Belt of the Beloved Companion"] = "77241",
-	["Sporebeard Gauntlets"] = "78362",
 	["Kiroptyric Sigil"] = "77113",
+	["Sporebeard Gauntlets"] = "78362",
 }
 MacaroonLocale = {
-	["Current"] = "enUS",
 	["Macaroon"] = {
 	},
+	["Current"] = "enUS",
 }

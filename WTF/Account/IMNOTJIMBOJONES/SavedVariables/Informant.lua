@@ -3,9 +3,9 @@ InformantConfig = {
 	["welcomed"] = true,
 	["profile.Default"] = {
 		["configator.left"] = 156.1728057861328,
-		["configator.top"] = 597.4549560546875,
-		["embed"] = true,
 		["show-ilevel"] = false,
+		["embed"] = true,
+		["configator.top"] = 597.4549560546875,
 	},
 	["position"] = {
 		["y"] = 384.0000262606999,
