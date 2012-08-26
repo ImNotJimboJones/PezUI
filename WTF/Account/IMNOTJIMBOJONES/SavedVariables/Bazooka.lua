@@ -85,10 +85,10 @@ BazookaDB = {
 						["bar"] = 2,
 					},
 					["SpeedyGonzales"] = {
-						["disableMouseInCombat"] = true,
-						["area"] = "left",
-						["showValue"] = false,
 						["stripColors"] = false,
+						["area"] = "left",
+						["disableMouseInCombat"] = true,
+						["showValue"] = false,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -142,10 +142,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["stripColors"] = false,
-						["enabled"] = false,
-						["showupdates"] = "",
 						["showValue"] = false,
+						["enabled"] = false,
+						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -224,12 +224,12 @@ BazookaDB = {
 						["pos"] = 24,
 					},
 					["Broker_uClock"] = {
-						["stripColors"] = false,
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
+						["stripColors"] = false,
 						["showupdates"] = "",
-						["showValue"] = false,
 						["pos"] = 9,
 					},
 					["SN - Expertise"] = {
@@ -337,9 +337,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
-						["bar"] = 2,
 						["pos"] = 2,
 						["showSuffix"] = false,
+						["bar"] = 2,
 					},
 					["SN - Melee Attack Power"] = {
 						["pos"] = 14,

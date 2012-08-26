@@ -85,6 +85,13 @@ SkadaPerCharDB = {
 						["uptime"] = 193,
 						["auratype"] = "BUFF",
 					},
+					["Flurry"] = {
+						["name"] = "Flurry",
+						["active"] = 1,
+						["id"] = 16278,
+						["uptime"] = 216,
+						["auratype"] = "BUFF",
+					},
 					["Stormstrike"] = {
 						["name"] = "Stormstrike",
 						["active"] = 0,
@@ -97,13 +104,6 @@ SkadaPerCharDB = {
 						["active"] = 0,
 						["id"] = 29178,
 						["uptime"] = 173,
-						["auratype"] = "BUFF",
-					},
-					["Flurry"] = {
-						["name"] = "Flurry",
-						["active"] = 1,
-						["id"] = 16278,
-						["uptime"] = 216,
 						["auratype"] = "BUFF",
 					},
 					["Shamanistic Rage"] = {
@@ -150,14 +150,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[0] = {
-						["spells"] = {
-							[63375] = 167529,
-						},
-						["amount"] = 167529,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 5732052,
 				["damagespells"] = {
 					["Stormstrike Off-Hand"] = {
@@ -652,7 +645,13 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 1170494,
-				["deathlog"] = {
+				["power"] = {
+					[0] = {
+						["spells"] = {
+							[63375] = 167529,
+						},
+						["amount"] = 167529,
+					},
 				},
 				["id"] = "0x0280000004AD6D3C",
 				["maxhp"] = 148137,
@@ -737,7 +736,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 361229,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [1]
@@ -919,15 +919,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[3] = {
-						["spells"] = {
-							[35546] = 990,
-							[98440] = 800,
-						},
-						["amount"] = 1790,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 7017593,
 				["damagespells"] = {
 					["Killing Spree Off-Hand"] = {
@@ -1275,7 +1267,14 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 1042679,
-				["deathlog"] = {
+				["power"] = {
+					[3] = {
+						["spells"] = {
+							[35546] = 990,
+							[98440] = 800,
+						},
+						["amount"] = 1790,
+					},
 				},
 				["id"] = "0x0280000004B63790",
 				["maxhp"] = 154397,
@@ -1325,7 +1324,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 61760,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [2]
@@ -1545,25 +1545,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[0] = {
-						["spells"] = {
-							[84627] = 38021,
-							[31930] = 90892,
-							[54428] = 1988,
-						},
-						["amount"] = 130901,
-					},
-					[9] = {
-						["spells"] = {
-							[54428] = 3,
-							[35395] = 44,
-							[98057] = 7,
-							[53595] = 1,
-						},
-						["amount"] = 55,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 3320535,
 				["damagespells"] = {
 					["Judgement of Truth"] = {
@@ -2013,7 +1995,24 @@ SkadaPerCharDB = {
 					}, -- [2]
 				},
 				["damagetaken"] = 2684909,
-				["deathlog"] = {
+				["power"] = {
+					[0] = {
+						["spells"] = {
+							[84627] = 38021,
+							[31930] = 90892,
+							[54428] = 1988,
+						},
+						["amount"] = 130901,
+					},
+					[9] = {
+						["spells"] = {
+							[54428] = 3,
+							[35395] = 44,
+							[98057] = 7,
+							[53595] = 1,
+						},
+						["amount"] = 55,
+					},
 				},
 				["id"] = "0x02800000010DB32C",
 				["maxhp"] = 200707,
@@ -2083,7 +2082,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 64696,
 				["absorbTotal"] = 71565,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 					["Scirocco"] = {
 						["class"] = "PALADIN",
@@ -2132,12 +2132,12 @@ SkadaPerCharDB = {
 						["uptime"] = 77,
 						["auratype"] = "BUFF",
 					},
-					["Rejuvenation"] = {
-						["name"] = "Rejuvenation",
-						["active"] = 4,
-						["id"] = 774,
-						["uptime"] = 224,
+					["Innervate"] = {
+						["name"] = "Innervate",
+						["active"] = 0,
+						["id"] = 29166,
 						["auratype"] = "BUFF",
+						["uptime"] = 10,
 					},
 					["Wild Growth"] = {
 						["name"] = "Wild Growth",
@@ -2160,12 +2160,12 @@ SkadaPerCharDB = {
 						["uptime"] = 202,
 						["auratype"] = "BUFF",
 					},
-					["Innervate"] = {
-						["name"] = "Innervate",
-						["active"] = 0,
-						["id"] = 29166,
+					["Efflorescence"] = {
+						["name"] = "Efflorescence",
+						["active"] = 4,
+						["id"] = 81262,
+						["uptime"] = 197,
 						["auratype"] = "BUFF",
-						["uptime"] = 10,
 					},
 					["Natural Harmony"] = {
 						["name"] = "Natural Harmony",
@@ -2188,11 +2188,11 @@ SkadaPerCharDB = {
 						["uptime"] = 216,
 						["auratype"] = "BUFF",
 					},
-					["Efflorescence"] = {
-						["name"] = "Efflorescence",
+					["Rejuvenation"] = {
+						["name"] = "Rejuvenation",
 						["active"] = 4,
-						["id"] = 81262,
-						["uptime"] = 197,
+						["id"] = 774,
+						["uptime"] = 224,
 						["auratype"] = "BUFF",
 					},
 					["Nature's Grace"] = {
@@ -2323,16 +2323,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[0] = {
-						["spells"] = {
-							[81094] = 55220,
-							[57669] = 75001,
-							[29166] = 33189,
-						},
-						["amount"] = 163410,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 0,
 				["damagespells"] = {
 				},
@@ -2449,7 +2440,15 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 1071331,
-				["deathlog"] = {
+				["power"] = {
+					[0] = {
+						["spells"] = {
+							[81094] = 55220,
+							[57669] = 75001,
+							[29166] = 33189,
+						},
+						["amount"] = 163410,
+					},
 				},
 				["id"] = "0x0280000003F92D44",
 				["maxhp"] = 158387,
@@ -2558,7 +2557,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 1868442,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [4]
@@ -2735,17 +2735,7 @@ SkadaPerCharDB = {
 				["interrupts"] = 0,
 				["healingspells"] = {
 				},
-				["power"] = {
-					[2] = {
-						["spells"] = {
-							[34953] = 400,
-							[34720] = 284,
-							[53517] = 60,
-							[91954] = 864,
-						},
-						["amount"] = 1608,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 6780637,
 				["damagespells"] = {
 					["Âssface: Attack"] = {
@@ -3156,7 +3146,16 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 944260,
-				["deathlog"] = {
+				["power"] = {
+					[2] = {
+						["spells"] = {
+							[34953] = 400,
+							[34720] = 284,
+							[53517] = 60,
+							[91954] = 864,
+						},
+						["amount"] = 1608,
+					},
 				},
 				["id"] = "0x0280000004B625CB",
 				["maxhp"] = 149629,
@@ -3201,7 +3200,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 0,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [5]
@@ -3372,23 +3372,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[0] = {
-						["spells"] = {
-							[84627] = 17290,
-							[31930] = 95518,
-							[20167] = 54337,
-						},
-						["amount"] = 167145,
-					},
-					[9] = {
-						["spells"] = {
-							[35395] = 34,
-							[98057] = 4,
-						},
-						["amount"] = 38,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 1773683,
 				["damagespells"] = {
 					["Seal of Truth"] = {
@@ -3475,6 +3459,27 @@ SkadaPerCharDB = {
 						["EVADE"] = 0,
 						["max"] = 6326,
 					},
+					["Hammer of Wrath"] = {
+						["DODGE"] = 0,
+						["REFLECT"] = 0,
+						["crushing"] = 0,
+						["IMMUNE"] = 0,
+						["glancing"] = 0,
+						["totalhits"] = 2,
+						["MISS"] = 0,
+						["damage"] = 46819,
+						["DEFLECT"] = 0,
+						["id"] = 24275,
+						["ABSORB"] = 0,
+						["min"] = 15520,
+						["PARRY"] = 0,
+						["critical"] = 1,
+						["hit"] = 1,
+						["BLOCK"] = 0,
+						["RESIST"] = 0,
+						["EVADE"] = 0,
+						["max"] = 31299,
+					},
 					["Retribution Aura"] = {
 						["DODGE"] = 0,
 						["REFLECT"] = 0,
@@ -3491,26 +3496,6 @@ SkadaPerCharDB = {
 						["PARRY"] = 0,
 						["critical"] = 0,
 						["hit"] = 12,
-						["EVADE"] = 0,
-						["RESIST"] = 0,
-						["BLOCK"] = 0,
-						["ABSORB"] = 0,
-					},
-					["Vindication"] = {
-						["DODGE"] = 0,
-						["REFLECT"] = 0,
-						["crushing"] = 0,
-						["IMMUNE"] = 0,
-						["glancing"] = 0,
-						["totalhits"] = 1,
-						["MISS"] = 1,
-						["damage"] = 0,
-						["DEFLECT"] = 0,
-						["id"] = 26017,
-						["max"] = 0,
-						["PARRY"] = 0,
-						["critical"] = 0,
-						["hit"] = 0,
 						["EVADE"] = 0,
 						["RESIST"] = 0,
 						["BLOCK"] = 0,
@@ -3600,26 +3585,25 @@ SkadaPerCharDB = {
 						["EVADE"] = 0,
 						["max"] = 20085,
 					},
-					["Hammer of Wrath"] = {
+					["Vindication"] = {
 						["DODGE"] = 0,
 						["REFLECT"] = 0,
 						["crushing"] = 0,
 						["IMMUNE"] = 0,
 						["glancing"] = 0,
-						["totalhits"] = 2,
-						["MISS"] = 0,
-						["damage"] = 46819,
+						["totalhits"] = 1,
+						["MISS"] = 1,
+						["damage"] = 0,
 						["DEFLECT"] = 0,
-						["id"] = 24275,
-						["ABSORB"] = 0,
-						["min"] = 15520,
+						["id"] = 26017,
+						["max"] = 0,
 						["PARRY"] = 0,
-						["critical"] = 1,
-						["hit"] = 1,
-						["BLOCK"] = 0,
-						["RESIST"] = 0,
+						["critical"] = 0,
+						["hit"] = 0,
 						["EVADE"] = 0,
-						["max"] = 31299,
+						["RESIST"] = 0,
+						["BLOCK"] = 0,
+						["ABSORB"] = 0,
 					},
 					["Consecration"] = {
 						["DODGE"] = 0,
@@ -3819,7 +3803,22 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 1717247,
-				["deathlog"] = {
+				["power"] = {
+					[0] = {
+						["spells"] = {
+							[84627] = 17290,
+							[31930] = 95518,
+							[20167] = 54337,
+						},
+						["amount"] = 167145,
+					},
+					[9] = {
+						["spells"] = {
+							[35395] = 34,
+							[98057] = 4,
+						},
+						["amount"] = 38,
+					},
 				},
 				["id"] = "0x028000000517B042",
 				["maxhp"] = 175291,
@@ -3884,7 +3883,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 125289,
 				["absorbTotal"] = 35932,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 					["Tulkás"] = {
 						["amount"] = 35932,
@@ -4120,23 +4120,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[9] = {
-						["spells"] = {
-							[89023] = 7,
-							[88852] = 3,
-							[82327] = 4,
-							[25914] = 29,
-						},
-						["amount"] = 43,
-					},
-					[0] = {
-						["spells"] = {
-							[99069] = 15457,
-						},
-						["amount"] = 15457,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 16622,
 				["damagespells"] = {
 					["Attack"] = {
@@ -4295,7 +4279,22 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 872102,
-				["deathlog"] = {
+				["power"] = {
+					[9] = {
+						["spells"] = {
+							[25914] = 29,
+							[89023] = 7,
+							[82327] = 4,
+							[88852] = 3,
+						},
+						["amount"] = 43,
+					},
+					[0] = {
+						["spells"] = {
+							[99069] = 15457,
+						},
+						["amount"] = 15457,
+					},
 				},
 				["id"] = "0x02800000050DFE2A",
 				["maxhp"] = 144679,
@@ -4410,7 +4409,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 914929,
 				["absorbTotal"] = 210838,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 					["Scirocco"] = {
 						["class"] = "PALADIN",
@@ -4452,13 +4452,6 @@ SkadaPerCharDB = {
 				["damaged"] = {
 				},
 				["auras"] = {
-					["Freezing Fog"] = {
-						["name"] = "Freezing Fog",
-						["active"] = 0,
-						["id"] = 59052,
-						["uptime"] = 132,
-						["auratype"] = "BUFF",
-					},
 					["Killing Machine"] = {
 						["name"] = "Killing Machine",
 						["active"] = 0,
@@ -4466,19 +4459,26 @@ SkadaPerCharDB = {
 						["uptime"] = 58,
 						["auratype"] = "BUFF",
 					},
+					["Find Weakness"] = {
+						["name"] = "Find Weakness",
+						["active"] = 1,
+						["id"] = 109744,
+						["uptime"] = 162,
+						["auratype"] = "BUFF",
+					},
+					["Death and Decay"] = {
+						["name"] = "Death and Decay",
+						["active"] = 0,
+						["id"] = 43265,
+						["uptime"] = 20,
+						["auratype"] = "DEBUFF",
+					},
 					["Runic Mastery"] = {
 						["name"] = "Runic Mastery",
 						["active"] = 1,
 						["id"] = 105647,
 						["uptime"] = 191,
 						["auratype"] = "BUFF",
-					},
-					["Pillar of Frost"] = {
-						["name"] = "Pillar of Frost",
-						["active"] = 0,
-						["id"] = 51271,
-						["auratype"] = "BUFF",
-						["uptime"] = 20,
 					},
 					["Improved Icy Talons"] = {
 						["name"] = "Improved Icy Talons",
@@ -4543,18 +4543,18 @@ SkadaPerCharDB = {
 						["uptime"] = 175,
 						["auratype"] = "DEBUFF",
 					},
-					["Death and Decay"] = {
-						["name"] = "Death and Decay",
+					["Pillar of Frost"] = {
+						["name"] = "Pillar of Frost",
 						["active"] = 0,
-						["id"] = 43265,
+						["id"] = 51271,
+						["auratype"] = "BUFF",
 						["uptime"] = 20,
-						["auratype"] = "DEBUFF",
 					},
-					["Find Weakness"] = {
-						["name"] = "Find Weakness",
-						["active"] = 1,
-						["id"] = 109744,
-						["uptime"] = 162,
+					["Freezing Fog"] = {
+						["name"] = "Freezing Fog",
+						["active"] = 0,
+						["id"] = 59052,
+						["uptime"] = 132,
 						["auratype"] = "BUFF",
 					},
 					["Death Grip"] = {
@@ -4582,14 +4582,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[6] = {
-						["spells"] = {
-							[50163] = 40,
-						},
-						["amount"] = 40,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 5971455,
 				["damagespells"] = {
 					["Plague Strike Off-Hand"] = {
@@ -5000,7 +4993,13 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 997782,
-				["deathlog"] = {
+				["power"] = {
+					[6] = {
+						["spells"] = {
+							[50163] = 40,
+						},
+						["amount"] = 40,
+					},
 				},
 				["id"] = "0x0280000004EDA873",
 				["maxhp"] = 162025,
@@ -5045,7 +5044,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 52623,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [8]
@@ -5118,19 +5118,19 @@ SkadaPerCharDB = {
 						["uptime"] = 45,
 						["auratype"] = "DEBUFF",
 					},
-					["Combat Mind"] = {
-						["name"] = "Combat Mind",
-						["active"] = 0,
-						["id"] = 107970,
+					["Shadowfiend: Shadowcrawl"] = {
+						["name"] = "Shadowfiend: Shadowcrawl",
+						["active"] = 1,
+						["id"] = 63619,
 						["auratype"] = "BUFF",
-						["uptime"] = 94,
+						["uptime"] = 130,
 					},
-					["Mind Melt"] = {
-						["name"] = "Mind Melt",
+					["Power Word: Shield"] = {
+						["name"] = "Power Word: Shield",
 						["active"] = 0,
-						["id"] = 87160,
+						["id"] = 17,
+						["uptime"] = 15,
 						["auratype"] = "BUFF",
-						["uptime"] = 11,
 					},
 					["Shadow Orb"] = {
 						["name"] = "Shadow Orb",
@@ -5139,12 +5139,12 @@ SkadaPerCharDB = {
 						["uptime"] = 162,
 						["auratype"] = "BUFF",
 					},
-					["Shadowfiend: Shadowcrawl"] = {
-						["name"] = "Shadowfiend: Shadowcrawl",
-						["active"] = 1,
-						["id"] = 63619,
+					["Combat Mind"] = {
+						["name"] = "Combat Mind",
+						["active"] = 0,
+						["id"] = 107970,
 						["auratype"] = "BUFF",
-						["uptime"] = 130,
+						["uptime"] = 94,
 					},
 					["Power Torrent"] = {
 						["name"] = "Power Torrent",
@@ -5167,12 +5167,12 @@ SkadaPerCharDB = {
 						["uptime"] = 78,
 						["auratype"] = "DEBUFF",
 					},
-					["Power Word: Shield"] = {
-						["name"] = "Power Word: Shield",
+					["Mind Melt"] = {
+						["name"] = "Mind Melt",
 						["active"] = 0,
-						["id"] = 17,
-						["uptime"] = 15,
+						["id"] = 87160,
 						["auratype"] = "BUFF",
+						["uptime"] = 11,
 					},
 					["Devouring Plague"] = {
 						["name"] = "Devouring Plague",
@@ -5223,17 +5223,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[0] = {
-						["spells"] = {
-							[89007] = 107432,
-							[57669] = 10494,
-							[34650] = 45679,
-							[87152] = 36668,
-						},
-						["amount"] = 200273,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 3292395,
 				["damagespells"] = {
 					["Mind Spike"] = {
@@ -5539,7 +5529,16 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 345603,
-				["deathlog"] = {
+				["power"] = {
+					[0] = {
+						["spells"] = {
+							[89007] = 107432,
+							[87152] = 36668,
+							[57669] = 10494,
+							[34650] = 45679,
+						},
+						["amount"] = 200273,
+					},
 				},
 				["id"] = "0x0280000004AD6D87",
 				["maxhp"] = 159603,
@@ -5624,7 +5623,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 466656,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [9]
@@ -5813,16 +5813,7 @@ SkadaPerCharDB = {
 						["absorbed"] = 0,
 					},
 				},
-				["power"] = {
-					[2] = {
-						["spells"] = {
-							[34720] = 130,
-							[34953] = 250,
-							[91954] = 576,
-						},
-						["amount"] = 956,
-					},
-				},
+				["shielding"] = 0,
 				["damage"] = 4633065,
 				["damagespells"] = {
 					["Cobra Shot"] = {
@@ -6170,7 +6161,15 @@ SkadaPerCharDB = {
 					}, -- [1]
 				},
 				["damagetaken"] = 902221,
-				["deathlog"] = {
+				["power"] = {
+					[2] = {
+						["spells"] = {
+							[34720] = 130,
+							[34953] = 250,
+							[91954] = 576,
+						},
+						["amount"] = 956,
+					},
 				},
 				["id"] = "0x02800000050148CF",
 				["maxhp"] = 144673,
@@ -6215,7 +6214,8 @@ SkadaPerCharDB = {
 				},
 				["overhealing"] = 55836,
 				["absorbTotal"] = 0,
-				["shielding"] = 0,
+				["deathlog"] = {
+				},
 				["absorbed"] = {
 				},
 			}, -- [10]
@@ -7061,12 +7061,12 @@ SkadaPerCharDB = {
 							["auratype"] = "DEBUFF",
 							["uptime"] = 72,
 						},
-						["Shadowfiend: Shadowcrawl"] = {
-							["name"] = "Shadowfiend: Shadowcrawl",
-							["active"] = 1,
-							["id"] = 63619,
+						["Combat Mind"] = {
+							["name"] = "Combat Mind",
+							["active"] = 0,
+							["id"] = 107970,
 							["auratype"] = "BUFF",
-							["uptime"] = 130,
+							["uptime"] = 94,
 						},
 						["Power Torrent"] = {
 							["name"] = "Power Torrent",
@@ -7089,19 +7089,19 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 70,
 						},
-						["Combat Mind"] = {
-							["name"] = "Combat Mind",
-							["active"] = 0,
-							["id"] = 107970,
-							["auratype"] = "BUFF",
-							["uptime"] = 94,
-						},
 						["Mind Melt"] = {
 							["name"] = "Mind Melt",
 							["active"] = 0,
 							["id"] = 87160,
 							["auratype"] = "BUFF",
 							["uptime"] = 11,
+						},
+						["Shadowfiend: Shadowcrawl"] = {
+							["name"] = "Shadowfiend: Shadowcrawl",
+							["active"] = 1,
+							["id"] = 63619,
+							["auratype"] = "BUFF",
+							["uptime"] = 130,
 						},
 					},
 					["ccbreaks"] = 0,
@@ -7150,9 +7150,9 @@ SkadaPerCharDB = {
 							["amount"] = 151904,
 							["spells"] = {
 								[89007] = 62306,
+								[57669] = 7251,
 								[87152] = 36668,
 								[34650] = 45679,
-								[57669] = 7251,
 							},
 						},
 					},
@@ -7494,11 +7494,6 @@ SkadaPerCharDB = {
 							["shielding"] = 0,
 							["amount"] = 33676,
 						},
-						["Sunali"] = {
-							["class"] = "PRIEST",
-							["shielding"] = 0,
-							["amount"] = 68402,
-						},
 						["Shadowfiend"] = {
 							["class"] = "PALADIN",
 							["shielding"] = 0,
@@ -7508,6 +7503,11 @@ SkadaPerCharDB = {
 							["class"] = "WARRIOR",
 							["shielding"] = 0,
 							["amount"] = 0,
+						},
+						["Sunali"] = {
+							["class"] = "PRIEST",
+							["shielding"] = 0,
+							["amount"] = 68402,
 						},
 						["Lozeke"] = {
 							["class"] = "DEATHKNIGHT",
@@ -8138,19 +8138,19 @@ SkadaPerCharDB = {
 						["Son of Flame"] = 308475,
 					},
 					["auras"] = {
-						["Find Weakness"] = {
-							["name"] = "Find Weakness",
-							["active"] = 0,
-							["id"] = 109744,
-							["auratype"] = "BUFF",
-							["uptime"] = 20,
-						},
 						["Killing Machine"] = {
 							["name"] = "Killing Machine",
 							["active"] = 0,
 							["id"] = 51124,
 							["auratype"] = "BUFF",
 							["uptime"] = 31,
+						},
+						["Freezing Fog"] = {
+							["name"] = "Freezing Fog",
+							["active"] = 0,
+							["id"] = 59052,
+							["auratype"] = "BUFF",
+							["uptime"] = 83,
 						},
 						["Improved Icy Talons"] = {
 							["name"] = "Improved Icy Talons",
@@ -8236,12 +8236,12 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 20,
 						},
-						["Freezing Fog"] = {
-							["name"] = "Freezing Fog",
+						["Find Weakness"] = {
+							["name"] = "Find Weakness",
 							["active"] = 0,
-							["id"] = 59052,
+							["id"] = 109744,
 							["auratype"] = "BUFF",
-							["uptime"] = 83,
+							["uptime"] = 20,
 						},
 						["Death Grip"] = {
 							["name"] = "Death Grip",
@@ -9307,19 +9307,19 @@ SkadaPerCharDB = {
 						["Son of Flame"] = 79210,
 					},
 					["auras"] = {
+						["Divine Protection"] = {
+							["name"] = "Divine Protection",
+							["active"] = 0,
+							["id"] = 498,
+							["auratype"] = "BUFF",
+							["uptime"] = 10,
+						},
 						["Windwalk"] = {
 							["name"] = "Windwalk",
 							["active"] = 0,
 							["id"] = 74243,
 							["auratype"] = "BUFF",
 							["uptime"] = 32,
-						},
-						["Avenging Wrath"] = {
-							["name"] = "Avenging Wrath",
-							["active"] = 0,
-							["id"] = 31884,
-							["auratype"] = "BUFF",
-							["uptime"] = 20,
 						},
 						["Judgements of the Just"] = {
 							["name"] = "Judgements of the Just",
@@ -9328,12 +9328,12 @@ SkadaPerCharDB = {
 							["auratype"] = "DEBUFF",
 							["uptime"] = 22,
 						},
-						["Sacred Duty"] = {
-							["name"] = "Sacred Duty",
+						["Retribution Aura"] = {
+							["name"] = "Retribution Aura",
 							["active"] = 0,
-							["id"] = 85433,
+							["id"] = 7294,
 							["auratype"] = "BUFF",
-							["uptime"] = 50,
+							["uptime"] = 75,
 						},
 						["Reckoning"] = {
 							["name"] = "Reckoning",
@@ -9342,26 +9342,26 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 8,
 						},
-						["Consecration"] = {
-							["name"] = "Consecration",
-							["active"] = 0,
-							["id"] = 26573,
-							["auratype"] = "BUFF",
-							["uptime"] = 30,
-						},
-						["Vindication"] = {
-							["name"] = "Vindication",
-							["active"] = 2,
-							["id"] = 26017,
-							["auratype"] = "DEBUFF",
-							["uptime"] = 68,
-						},
 						["Guarded by the Light"] = {
 							["name"] = "Guarded by the Light",
 							["active"] = 0,
 							["id"] = 88063,
 							["auratype"] = "BUFF",
 							["uptime"] = 6,
+						},
+						["Sacred Duty"] = {
+							["name"] = "Sacred Duty",
+							["active"] = 0,
+							["id"] = 85433,
+							["auratype"] = "BUFF",
+							["uptime"] = 50,
+						},
+						["Holy Shield"] = {
+							["name"] = "Holy Shield",
+							["active"] = 0,
+							["id"] = 20925,
+							["auratype"] = "BUFF",
+							["uptime"] = 45,
 						},
 						["Hand of Reckoning"] = {
 							["name"] = "Hand of Reckoning",
@@ -9391,12 +9391,12 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 94,
 						},
-						["Holy Shield"] = {
-							["name"] = "Holy Shield",
+						["Consecration"] = {
+							["name"] = "Consecration",
 							["active"] = 0,
-							["id"] = 20925,
+							["id"] = 26573,
 							["auratype"] = "BUFF",
-							["uptime"] = 45,
+							["uptime"] = 30,
 						},
 						["Grand Crusader"] = {
 							["name"] = "Grand Crusader",
@@ -9405,19 +9405,19 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 1,
 						},
-						["Retribution Aura"] = {
-							["name"] = "Retribution Aura",
-							["active"] = 0,
-							["id"] = 7294,
-							["auratype"] = "BUFF",
-							["uptime"] = 75,
+						["Vindication"] = {
+							["name"] = "Vindication",
+							["active"] = 2,
+							["id"] = 26017,
+							["auratype"] = "DEBUFF",
+							["uptime"] = 68,
 						},
-						["Divine Protection"] = {
-							["name"] = "Divine Protection",
+						["Avenging Wrath"] = {
+							["name"] = "Avenging Wrath",
 							["active"] = 0,
-							["id"] = 498,
+							["id"] = 31884,
 							["auratype"] = "BUFF",
-							["uptime"] = 10,
+							["uptime"] = 20,
 						},
 					},
 					["ccbreaks"] = 0,
@@ -11485,6 +11485,13 @@ SkadaPerCharDB = {
 							["auratype"] = "BUFF",
 							["uptime"] = 121,
 						},
+						["Stormstrike"] = {
+							["name"] = "Stormstrike",
+							["active"] = 0,
+							["id"] = 17364,
+							["auratype"] = "DEBUFF",
+							["uptime"] = 121,
+						},
 						["Flurry"] = {
 							["name"] = "Flurry",
 							["active"] = 0,
@@ -11498,13 +11505,6 @@ SkadaPerCharDB = {
 							["id"] = 29178,
 							["auratype"] = "BUFF",
 							["uptime"] = 101,
-						},
-						["Stormstrike"] = {
-							["name"] = "Stormstrike",
-							["active"] = 0,
-							["id"] = 17364,
-							["auratype"] = "DEBUFF",
-							["uptime"] = 121,
 						},
 						["Shamanistic Rage"] = {
 							["name"] = "Shamanistic Rage",
@@ -12346,11 +12346,11 @@ SkadaPerCharDB = {
 					["damaged"] = {
 					},
 					["auras"] = {
-						["Regrowth"] = {
-							["name"] = "Regrowth",
+						["Clearcasting"] = {
+							["name"] = "Clearcasting",
 							["active"] = 0,
-							["id"] = 8936,
-							["uptime"] = 7,
+							["id"] = 16870,
+							["uptime"] = 0,
 							["auratype"] = "BUFF",
 						},
 						["Nature's Bounty"] = {
@@ -12367,11 +12367,11 @@ SkadaPerCharDB = {
 							["uptime"] = 26,
 							["auratype"] = "BUFF",
 						},
-						["Power Torrent"] = {
-							["name"] = "Power Torrent",
+						["Regrowth"] = {
+							["name"] = "Regrowth",
 							["active"] = 0,
-							["id"] = 74241,
-							["uptime"] = 12,
+							["id"] = 8936,
+							["uptime"] = 7,
 							["auratype"] = "BUFF",
 						},
 						["Rejuvenation"] = {
@@ -12395,11 +12395,11 @@ SkadaPerCharDB = {
 							["uptime"] = 15,
 							["auratype"] = "BUFF",
 						},
-						["Clearcasting"] = {
-							["name"] = "Clearcasting",
+						["Power Torrent"] = {
+							["name"] = "Power Torrent",
 							["active"] = 0,
-							["id"] = 16870,
-							["uptime"] = 0,
+							["id"] = 74241,
+							["uptime"] = 12,
 							["auratype"] = "BUFF",
 						},
 					},
@@ -12504,6 +12504,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -12513,15 +12514,14 @@ SkadaPerCharDB = {
 							["amount"] = 25605,
 						},
 					},
-					["deathlog"] = {
-					},
 					["damage"] = 0,
 					["damagespells"] = {
 					},
 					["deaths"] = {
 					},
 					["damagetaken"] = 126744,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000003F92D44",
 					["maxhp"] = 166983,
 					["dispells"] = 0,
@@ -12682,6 +12682,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -12689,8 +12690,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 30461,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1177089,
 					["damagespells"] = {
@@ -13055,7 +13054,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 112322,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004AD6D3C",
 					["maxhp"] = 156733,
 					["dispells"] = 0,
@@ -13178,6 +13178,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -13193,8 +13194,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 11,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 670432,
 					["damagespells"] = {
@@ -13370,7 +13369,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 297454,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000010DB32C",
 					["maxhp"] = 211095,
 					["dispells"] = 0,
@@ -13585,6 +13585,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[9] = {
 							["spells"] = {
@@ -13601,15 +13602,14 @@ SkadaPerCharDB = {
 							["amount"] = 2811,
 						},
 					},
-					["deathlog"] = {
-					},
 					["damage"] = 0,
 					["damagespells"] = {
 					},
 					["deaths"] = {
 					},
 					["damagetaken"] = 96202,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000050DFE2A",
 					["maxhp"] = 153289,
 					["dispells"] = 0,
@@ -13792,6 +13792,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[6] = {
 							["spells"] = {
@@ -13799,8 +13800,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 20,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1017390,
 					["damagespells"] = {
@@ -14039,7 +14038,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 114701,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004EDA873",
 					["maxhp"] = 170635,
 					["dispells"] = 0,
@@ -14135,6 +14135,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -14151,8 +14152,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 8,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 367828,
 					["damagespells"] = {
@@ -14349,7 +14348,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 320345,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x028000000517B042",
 					["maxhp"] = 185665,
 					["dispells"] = 0,
@@ -14459,6 +14459,7 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[3] = {
 							["spells"] = {
@@ -14467,8 +14468,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 290,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1350103,
 					["damagespells"] = {
@@ -14623,7 +14622,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 100681,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004B63790",
 					["maxhp"] = 162993,
 					["dispells"] = 0,
@@ -14669,12 +14669,12 @@ SkadaPerCharDB = {
 							["uptime"] = 34,
 							["auratype"] = "DEBUFF",
 						},
-						["Shadow Orb"] = {
-							["name"] = "Shadow Orb",
-							["active"] = 1,
-							["id"] = 77487,
-							["uptime"] = 28,
-							["auratype"] = "BUFF",
+						["Mind Flay"] = {
+							["name"] = "Mind Flay",
+							["active"] = 0,
+							["id"] = 15407,
+							["uptime"] = 17,
+							["auratype"] = "DEBUFF",
 						},
 						["Shadow Word: Pain"] = {
 							["name"] = "Shadow Word: Pain",
@@ -14683,18 +14683,18 @@ SkadaPerCharDB = {
 							["uptime"] = 26,
 							["auratype"] = "DEBUFF",
 						},
+						["Shadow Orb"] = {
+							["name"] = "Shadow Orb",
+							["active"] = 1,
+							["id"] = 77487,
+							["uptime"] = 28,
+							["auratype"] = "BUFF",
+						},
 						["Vampiric Touch"] = {
 							["name"] = "Vampiric Touch",
 							["active"] = 0,
 							["id"] = 34914,
 							["uptime"] = 31,
-							["auratype"] = "DEBUFF",
-						},
-						["Mind Flay"] = {
-							["name"] = "Mind Flay",
-							["active"] = 0,
-							["id"] = 15407,
-							["uptime"] = 17,
 							["auratype"] = "DEBUFF",
 						},
 						["Empowered Shadow"] = {
@@ -14746,6 +14746,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -14754,8 +14755,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 48369,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1055696,
 					["damagespells"] = {
@@ -14889,7 +14888,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 95408,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004AD6D87",
 					["maxhp"] = 168199,
 					["dispells"] = 0,
@@ -15050,6 +15050,7 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[2] = {
 							["spells"] = {
@@ -15059,8 +15060,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 254,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 843683,
 					["damagespells"] = {
@@ -15299,7 +15298,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 106022,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004B625CB",
 					["maxhp"] = 157819,
 					["dispells"] = 0,
@@ -15425,6 +15425,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[2] = {
 							["spells"] = {
@@ -15434,8 +15435,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 300,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1269549,
 					["damagespells"] = {
@@ -15653,7 +15652,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 114333,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000050148CF",
 					["maxhp"] = 152863,
 					["dispells"] = 0,
@@ -15872,19 +15872,19 @@ SkadaPerCharDB = {
 							["uptime"] = 19,
 							["auratype"] = "BUFF",
 						},
+						["Elemental Devastation"] = {
+							["name"] = "Elemental Devastation",
+							["active"] = 1,
+							["id"] = 29178,
+							["uptime"] = 36,
+							["auratype"] = "BUFF",
+						},
 						["Stormstrike"] = {
 							["name"] = "Stormstrike",
 							["active"] = 0,
 							["id"] = 17364,
 							["uptime"] = 26,
 							["auratype"] = "DEBUFF",
-						},
-						["Flurry"] = {
-							["name"] = "Flurry",
-							["active"] = 1,
-							["id"] = 16278,
-							["uptime"] = 47,
-							["auratype"] = "BUFF",
 						},
 						["Unleash Flame"] = {
 							["name"] = "Unleash Flame",
@@ -15893,11 +15893,11 @@ SkadaPerCharDB = {
 							["uptime"] = 20,
 							["auratype"] = "BUFF",
 						},
-						["Elemental Devastation"] = {
-							["name"] = "Elemental Devastation",
+						["Flurry"] = {
+							["name"] = "Flurry",
 							["active"] = 1,
-							["id"] = 29178,
-							["uptime"] = 36,
+							["id"] = 16278,
+							["uptime"] = 47,
 							["auratype"] = "BUFF",
 						},
 						["Maelstrom Weapon"] = {
@@ -15925,6 +15925,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -15932,8 +15933,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 32806,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1426811,
 					["damagespells"] = {
@@ -16298,7 +16297,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 223778,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004AD6D3C",
 					["maxhp"] = 156733,
 					["dispells"] = 0,
@@ -16465,6 +16465,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[3] = {
 							["spells"] = {
@@ -16473,8 +16474,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 340,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1248350,
 					["damagespells"] = {
@@ -16692,7 +16691,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 141163,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004B63790",
 					["maxhp"] = 162993,
 					["dispells"] = 0,
@@ -16840,6 +16840,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -16855,8 +16856,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 17,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 939266,
 					["damagespells"] = {
@@ -17032,7 +17031,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 531200,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000010DB32C",
 					["maxhp"] = 211095,
 					["dispells"] = 0,
@@ -17286,6 +17286,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -17295,15 +17296,14 @@ SkadaPerCharDB = {
 							["amount"] = 31032,
 						},
 					},
-					["deathlog"] = {
-					},
 					["damage"] = 0,
 					["damagespells"] = {
 					},
 					["deaths"] = {
 					},
 					["damagetaken"] = 126577,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000003F92D44",
 					["maxhp"] = 166983,
 					["dispells"] = 0,
@@ -17520,6 +17520,7 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[2] = {
 							["spells"] = {
@@ -17530,8 +17531,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 276,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1292751,
 					["damagespells"] = {
@@ -17833,7 +17832,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 99632,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004B625CB",
 					["maxhp"] = 157819,
 					["dispells"] = 0,
@@ -17926,6 +17926,7 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[0] = {
 							["spells"] = {
@@ -17940,8 +17941,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 8,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 454222,
 					["damagespells"] = {
@@ -18180,7 +18179,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 173169,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x028000000517B042",
 					["maxhp"] = 185665,
 					["dispells"] = 0,
@@ -18393,6 +18393,7 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
 						[9] = {
 							["spells"] = {
@@ -18408,8 +18409,6 @@ SkadaPerCharDB = {
 							},
 							["amount"] = 1405,
 						},
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 6439,
 					["damagespells"] = {
@@ -18438,7 +18437,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 104973,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000050DFE2A",
 					["maxhp"] = 153289,
 					["dispells"] = 0,
@@ -18630,9 +18630,8 @@ SkadaPerCharDB = {
 							["absorbed"] = 0,
 						},
 					},
+					["shielding"] = 0,
 					["power"] = {
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 1228814,
 					["damagespells"] = {
@@ -18892,7 +18891,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 135622,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004EDA873",
 					["maxhp"] = 170635,
 					["dispells"] = 0,
@@ -18947,9 +18947,8 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 0,
 					["damagespells"] = {
@@ -18957,7 +18956,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 0,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x0280000004AD6D87",
 					["maxhp"] = 168199,
 					["dispells"] = 0,
@@ -19002,9 +19002,8 @@ SkadaPerCharDB = {
 					["interrupts"] = 0,
 					["healingspells"] = {
 					},
+					["shielding"] = 0,
 					["power"] = {
-					},
-					["deathlog"] = {
 					},
 					["damage"] = 0,
 					["damagespells"] = {
@@ -19012,7 +19011,8 @@ SkadaPerCharDB = {
 					["deaths"] = {
 					},
 					["damagetaken"] = 0,
-					["shielding"] = 0,
+					["deathlog"] = {
+					},
 					["id"] = "0x02800000050148CF",
 					["maxhp"] = 152863,
 					["dispells"] = 0,

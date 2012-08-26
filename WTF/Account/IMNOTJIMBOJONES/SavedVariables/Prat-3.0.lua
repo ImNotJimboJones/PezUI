@@ -121,7 +121,10 @@ Prat3DB = {
 			["profiles"] = {
 				["Default"] = {
 					["incoming"] = {
+						["PARTY"] = "Text2",
+						["RAID"] = "Text2",
 						["OFFICER"] = "IM",
+						["GROUP_LEAD"] = "Text1",
 					},
 					["on"] = true,
 				},
@@ -195,6 +198,7 @@ Prat3DB = {
 		["Prat_Timestamps"] = {
 			["profiles"] = {
 				["Default"] = {
+					["on"] = false,
 					["show"] = {
 						["ChatFrame1"] = false,
 						["ChatFrame3"] = false,
@@ -231,6 +235,7 @@ Prat3DB = {
 		["Default"] = {
 			["modules"] = {
 				["Alias"] = 1,
+				["Timestamps"] = 1,
 				["AltNames"] = 1,
 				["Paragraph"] = 1,
 				["KeyBindings"] = 1,

@@ -13,7 +13,7 @@ XLootGroup_Options = {
 			["text_outline"] = true,
 			["track_player_roll"] = false,
 			["win_icon"] = true,
-			["expire_lost"] = 10,
+			["track_threshold"] = 3,
 			["track_by_threshold"] = false,
 			["roll_anchor"] = {
 				["y"] = 460.79998949572,
@@ -23,7 +23,7 @@ XLootGroup_Options = {
 				["visible"] = false,
 			},
 			["roll_width"] = 330,
-			["track_threshold"] = 3,
+			["expire_lost"] = 10,
 			["show_undecided"] = true,
 		},
 	},

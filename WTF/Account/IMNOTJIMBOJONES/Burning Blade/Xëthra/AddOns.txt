@@ -1,0 +1,6 @@
+Bazooka_Options: disabled
+kgPanelsConfig: disabled
+MSBTOptions: disabled
+OmniCC_Config: disabled
+TipTacOptions: disabled
+VuhDoOptions: disabled

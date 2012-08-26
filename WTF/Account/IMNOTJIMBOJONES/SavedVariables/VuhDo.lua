@@ -121,24 +121,24 @@ VUHDO_PROFILES = {
 					["invertGrowth"] = false,
 					["TEXTURE"] = "VuhDo - Plain White",
 				},
+				["MANA_BAR"] = {
+					["turnAxis"] = false,
+					["invertGrowth"] = false,
+					["TEXTURE"] = "VuhDo - Pipe, light",
+				},
 				["SIDE_RIGHT"] = {
 					["turnAxis"] = false,
 					["vertical"] = true,
 					["invertGrowth"] = false,
 					["TEXTURE"] = "VuhDo - Plain White",
 				},
-				["BAR_BORDER"] = {
-					["WIDTH"] = 1,
-				},
 				["HEALTH_BAR"] = {
 					["turnAxis"] = true,
 					["vertical"] = true,
 					["invertGrowth"] = true,
 				},
-				["MANA_BAR"] = {
-					["turnAxis"] = false,
-					["invertGrowth"] = false,
-					["TEXTURE"] = "VuhDo - Pipe, light",
+				["BAR_BORDER"] = {
+					["WIDTH"] = 1,
 				},
 				["SWIFTMEND_INDICATOR"] = {
 					["SCALE"] = 1,
@@ -149,16 +149,16 @@ VUHDO_PROFILES = {
 				["MOUSEOVER_HIGHLIGHT"] = "Grid: Mouseover Single",
 				["AGGRO_BAR"] = "",
 				["BACKGROUND_BAR"] = "Grid: Background Bar",
-				["DAMAGE_FLASH_BAR"] = "",
-				["SIDE_LEFT"] = "",
-				["INCOMING_BAR"] = "",
 				["CLUSTER_BORDER"] = "",
+				["SWIFTMEND_INDICATOR"] = "",
+				["INCOMING_BAR"] = "",
+				["DAMAGE_FLASH_BAR"] = "",
 				["THREAT_MARK"] = "",
-				["SIDE_RIGHT"] = "",
 				["MANA_BAR"] = "",
 				["BAR_BORDER"] = "Border: Multi",
+				["SIDE_RIGHT"] = "",
 				["HEALTH_BAR"] = "Health (generic, class col)",
-				["SWIFTMEND_INDICATOR"] = "",
+				["SIDE_LEFT"] = "",
 				["HEALTH_BAR_PANEL"] = {
 					"", -- [1]
 					"", -- [2]
@@ -201,7 +201,6 @@ VUHDO_PROFILES = {
 				},
 				["frameStrata"] = "MEDIUM",
 				["MODEL"] = {
-					["ordering"] = 0,
 					["groups"] = {
 						1, -- [1]
 						2, -- [2]
@@ -213,6 +212,7 @@ VUHDO_PROFILES = {
 						8, -- [8]
 					},
 					["sort"] = 0,
+					["ordering"] = 0,
 					["isReverse"] = false,
 				},
 				["PANEL_COLOR"] = {
@@ -802,24 +802,24 @@ VUHDO_PROFILES = {
 					["invertGrowth"] = false,
 					["TEXTURE"] = "VuhDo - Plain White",
 				},
+				["MANA_BAR"] = {
+					["turnAxis"] = false,
+					["invertGrowth"] = false,
+					["TEXTURE"] = "VuhDo - Pipe, light",
+				},
 				["SIDE_RIGHT"] = {
 					["turnAxis"] = false,
 					["vertical"] = true,
 					["invertGrowth"] = false,
 					["TEXTURE"] = "VuhDo - Plain White",
 				},
-				["BAR_BORDER"] = {
-					["WIDTH"] = 1,
-				},
 				["HEALTH_BAR"] = {
 					["turnAxis"] = false,
 					["vertical"] = false,
 					["invertGrowth"] = false,
 				},
-				["MANA_BAR"] = {
-					["turnAxis"] = false,
-					["invertGrowth"] = false,
-					["TEXTURE"] = "VuhDo - Pipe, light",
+				["BAR_BORDER"] = {
+					["WIDTH"] = 1,
 				},
 				["SWIFTMEND_INDICATOR"] = {
 					["SCALE"] = 1,
@@ -830,16 +830,16 @@ VUHDO_PROFILES = {
 				["MOUSEOVER_HIGHLIGHT"] = "",
 				["AGGRO_BAR"] = "",
 				["BACKGROUND_BAR"] = "Background: Solid",
-				["DAMAGE_FLASH_BAR"] = "",
-				["SIDE_LEFT"] = "",
-				["INCOMING_BAR"] = "",
 				["CLUSTER_BORDER"] = "",
+				["SWIFTMEND_INDICATOR"] = "Role Icon",
+				["INCOMING_BAR"] = "",
+				["DAMAGE_FLASH_BAR"] = "",
 				["THREAT_MARK"] = "",
-				["SIDE_RIGHT"] = "",
 				["MANA_BAR"] = "Manabars: Mana only",
 				["BAR_BORDER"] = "Border: Multi + Aggro",
+				["SIDE_RIGHT"] = "",
 				["HEALTH_BAR"] = "Health Bar: (generic, gradient)",
-				["SWIFTMEND_INDICATOR"] = "Role Icon",
+				["SIDE_LEFT"] = "",
 				["HEALTH_BAR_PANEL"] = {
 					"", -- [1]
 					"", -- [2]
@@ -882,7 +882,6 @@ VUHDO_PROFILES = {
 				},
 				["frameStrata"] = "MEDIUM",
 				["MODEL"] = {
-					["ordering"] = 0,
 					["groups"] = {
 						1, -- [1]
 						2, -- [2]
@@ -894,6 +893,7 @@ VUHDO_PROFILES = {
 						8, -- [8]
 					},
 					["sort"] = 0,
+					["ordering"] = 0,
 					["isReverse"] = false,
 				},
 				["TOOLTIP"] = {
@@ -1050,11 +1050,11 @@ VUHDO_PROFILES = {
 				},
 				["frameStrata"] = "MEDIUM",
 				["MODEL"] = {
-					["ordering"] = 0,
 					["groups"] = {
 						41, -- [1]
 					},
 					["sort"] = 0,
+					["ordering"] = 0,
 					["isReverse"] = false,
 				},
 				["TOOLTIP"] = {
@@ -1210,11 +1210,11 @@ VUHDO_PROFILES = {
 				},
 				["frameStrata"] = "MEDIUM",
 				["MODEL"] = {
-					["ordering"] = 1,
 					["groups"] = {
 						40, -- [1]
 					},
 					["sort"] = 0,
+					["ordering"] = 1,
 					["isReverse"] = false,
 				},
 				["TOOLTIP"] = {
@@ -1370,11 +1370,11 @@ VUHDO_PROFILES = {
 				},
 				["frameStrata"] = "MEDIUM",
 				["MODEL"] = {
-					["ordering"] = 0,
 					["groups"] = {
 						42, -- [1]
 					},
 					["sort"] = 0,
+					["ordering"] = 0,
 					["isReverse"] = false,
 				},
 				["TOOLTIP"] = {
@@ -2667,7 +2667,7 @@ VUHDO_BOUQUETS = {
 		["Health (generic, class col)"] = "N1=T188+S*n=S12+DISCONNECTEDS*h=1S*c=T110+STG=N5+0.576SB=N5+0.298STB=N5+0.576SG=N5+0.298STR=N5+0.576S*s=1STO=N4+0.58S*o=1S*b=1S*t=1SO=N4+0.21SR=N5+0.298S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N2=T157+S*n=S8+NO_RANGES*h=1S*c=T85+STG=N1+0SB=N1+0STB=N1+0SG=N1+0STR=N1+0S*s=1STO=N3+0.5S*o=1S*b=0S*t=0SO=N4+0.25SR=N1+0S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N3=T151+S*n=S12+RESURRECTIONS*h=1S*c=T74+STG=N1+1SR=N1+1STB=N3+0.4S*t=1STR=N3+0.4S*s=1STO=N1+1SB=N1+1SO=N1+1SG=N1+1S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N4=T166+S*n=S4+DEADS*h=1S*c=T98+STG=N1+0SR=N5+0.301STB=N5+0.035SG=N5+0.301STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N3+0.5SB=N5+0.301S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N5=T163+S*n=S18+OVERHEAL_HIGHLIGHTS*h=1S*c=T80+STG=N1+1SR=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1SB=N1+1S*b=1S*t=1SO=N1+1S*o=1S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N6=T161+S*n=S16+DEBUFF_BAR_COLORS*h=1S*c=T80+STG=N1+1SR=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1SB=N1+1S*b=1S*t=1SO=N1+1S*o=1S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N7=T156+S*n=S11+CLASS_COLORS*h=1S*c=T80+STG=N1+1SR=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1SB=N1+1S*b=0S*t=1SO=N1+1S*o=0S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1N8=T159+S*n=S13+STATUS_HEALTHS*h=1S*c=T81+STG=N1+1SB=N3+0.7STB=N1+1SG=N3+0.7S*b=1S*s=1STO=N1+1STR=N1+1S*o=1SO=N1+1SR=N3+0.7S*m=1S*i=N1+2S*u=T23+N1=N1+1S*g=N1+1S*r=N1+2",
 		["Threat: Marks"] = "N1=T153+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T80+STG=N1+1SB=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S13+STATUS_ACTIVES*i=N1+1S*m=1N2=T159+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T82+STG=N3+0.5SB=N1+0STB=N1+0SG=N1+0STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S17+THREAT_LEVEL_HIGHS*i=N1+2S*m=1N3=T163+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T84+STG=N3+0.5SB=N1+0STB=N1+0SG=N3+0.5STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S19+THREAT_LEVEL_MEDIUMS*i=N1+2S*m=1",
 		["Swiftmendable"] = "N1=T153+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T80+STG=N1+1SB=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S13+STATUS_ACTIVES*i=N1+1S*m=1N2=T148+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T80+STG=N1+0SB=N1+0STB=N1+0SG=N1+0STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S9+SWIFTMENDS*i=N1+6S*m=1",
-		["Sinestra: Wrack"] = "N1=T155+S*u=T24+N1=N2+10S*g=N1+1S*r=N1+2S*c=T80+STG=N1+0SB=N1+0STB=N1+0SG=N1+0STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S14+DURATION_ABOVES*i=N1+9S*m=1N2=T154+S*u=T23+N1=N1+8S*g=N1+1S*r=N1+2S*c=T80+STG=N1+1SB=N1+0STB=N1+0SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S14+DURATION_ABOVES*i=N1+8S*m=1N3=T157+S*n=S5+WrackS*h=1S*i=N1+1S*c=T80+STG=N1+1SB=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1Salive=1S*m=1S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1",
+		["Sinestra: Wrack"] = "N1=T155+S*u=T24+N1=N2+10S*g=N1+1S*r=N1+2S*c=T80+STG=N1+0SB=N1+0STB=N1+0SG=N1+0STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S14+DURATION_ABOVES*i=N1+9S*m=1N2=T154+S*u=T23+N1=N1+8S*g=N1+1S*r=N1+2S*c=T80+STG=N1+1SB=N1+0STB=N1+0SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S14+DURATION_ABOVES*i=N1+8S*m=1N3=T157+S*h=1S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*i=N1+1S*c=T80+STG=N1+1SB=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1Salive=1S*m=1S*n=S5+Wrack",
 		["Grid: Mouseover Single"] = "N1=T169+S*u=T23+N1=N1+1S*r=N1+1S*g=N1+1S*c=T97+STG=N1+1SB=N5+0.184STB=N1+1SG=N5+0.541STR=N1+1S*s=1STO=N4+0.75S*o=1S*b=1S*t=1SO=N3+0.6SR=N5+0.619S*n=S12+MOUSE_TARGETS*i=N1+2S*m=1",
 		["Mouseover: Single"] = "N1=T157+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T85+STG=N1+1SR=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N4+0.75SB=N1+1S*b=1S*t=1SO=N3+0.7S*o=1S*n=S12+MOUSE_TARGETS*i=N1+2S*m=1",
 		["Background: Solid"] = "N1=T183+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T110+STG=N5+0.576SB=N5+0.298STB=N5+0.576SG=N5+0.298STR=N5+0.576S*s=1STO=N4+0.58S*o=1S*b=1S*t=1SO=N4+0.21SR=N5+0.298S*n=S12+DISCONNECTEDS*i=N1+2S*m=1N2=T153+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T86+STG=N1+0SB=N1+0STB=N1+0SG=N1+0STR=N1+0S*s=1STO=N4+0.25S*o=1S*b=0S*t=0SO=N4+0.25SR=N1+0S*n=S8+NO_RANGES*i=N1+2S*m=1N3=T158+S*u=T25+N1=N1+1S*g=N3+0.4S*r=N1+1S*c=T80+STG=N1+1SB=N1+1STB=N1+1SG=N1+1STR=N1+1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N1+1SR=N1+1S*n=S16+DEBUFF_BAR_COLORS*i=N1+1S*m=1N4=T153+S*u=T23+N1=N1+1S*g=N1+1S*r=N1+1S*c=T88+STG=N3+0.1SB=N1+0STB=N3+0.1SG=N1+0STR=N3+0.1S*s=1STO=N1+1S*o=1S*b=1S*t=1SO=N3+0.7SR=N1+0S*n=S6+ALWAYSS*i=N1+1S*m=1",

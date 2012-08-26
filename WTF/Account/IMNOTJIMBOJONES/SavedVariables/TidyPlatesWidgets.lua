@@ -6,7 +6,7 @@ TidyPlatesWidgetData = {
 	["CachedAuraDurations"] = {
 	},
 	["UnitDescriptions"] = {
-		["Wild Mature Swine"] = "|cff80808010  |cffffffffBeast",
+		["Wild Mature Swine"] = "|cff8080809  |cffffffffBeast",
 	},
 	["UnitGuild"] = {
 		["Pezzer"] = "Denial of Service",

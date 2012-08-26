@@ -221,19 +221,19 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 321,
 		},
+		["Mount Hyjal"] = {
+			["Preferred"] = {
+			},
+			["Excluded"] = {
+			},
+			["ZoneID"] = 606,
+		},
 		["Uldum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
 			["ZoneID"] = 720,
-		},
-		["The Obsidian Sanctum"] = {
-			["Preferred"] = {
-			},
-			["Excluded"] = {
-			},
-			["ZoneID"] = 488,
 		},
 		["Icecrown Citadel"] = {
 			["Preferred"] = {
@@ -242,12 +242,12 @@ GoGo_Prefs = {
 			},
 			["ZoneID"] = 492,
 		},
-		["Mount Hyjal"] = {
+		["The Obsidian Sanctum"] = {
 			["Preferred"] = {
 			},
 			["Excluded"] = {
 			},
-			["ZoneID"] = 606,
+			["ZoneID"] = 488,
 		},
 		["Northern Barrens"] = {
 			["Preferred"] = {

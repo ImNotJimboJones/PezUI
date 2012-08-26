@@ -131,7 +131,7 @@ Currencyflow_DB = {
 								["gained"] = 0,
 								["spent"] = 0,
 							},
-							["time"] = 3,
+							["time"] = 21,
 							["gold"] = {
 								["gained"] = 0,
 								["spent"] = 0,

@@ -6,9 +6,10 @@ ilvlDB = {
 			["Horde"] = {
 				["Burning Blade"] = {
 					["Pezzer"] = {
+						["key"] = "0x0280000004B625CB",
+						["class"] = "HUNTER",
 						["ilvl"] = 404.6875,
 						["level"] = 85,
-						["class"] = "HUNTER",
 					},
 				},
 			},
@@ -156,6 +157,12 @@ ilvlDB = {
 						["ilvl"] = 387.5,
 						["level"] = 85,
 					},
+					["12/04/29 14:15:24"] = {
+						["level"] = 85,
+						["class"] = "SHAMAN",
+						["name"] = "Brîggs",
+						["ilvl"] = 386.6875,
+					},
 					["12/04/29 13:23:17"] = {
 						["level"] = 85,
 						["class"] = "SHAMAN",
@@ -163,12 +170,6 @@ ilvlDB = {
 						["ilvl"] = 388.8571428571428,
 					},
 					["12/04/29 13:52:12"] = {
-						["level"] = 85,
-						["class"] = "SHAMAN",
-						["name"] = "Brîggs",
-						["ilvl"] = 386.6875,
-					},
-					["12/04/29 14:15:24"] = {
 						["level"] = 85,
 						["class"] = "SHAMAN",
 						["name"] = "Brîggs",
@@ -314,6 +315,12 @@ ilvlDB = {
 					},
 				},
 				["0x0280000005292BCE"] = {
+					["12/04/29 14:15:24"] = {
+						["level"] = 85,
+						["class"] = "DEATHKNIGHT",
+						["name"] = "Btchgrip",
+						["ilvl"] = 369.9375,
+					},
 					["12/04/29 13:52:12"] = {
 						["level"] = 85,
 						["class"] = "DEATHKNIGHT",
@@ -325,12 +332,6 @@ ilvlDB = {
 						["class"] = "DEATHKNIGHT",
 						["name"] = "Btchgrip",
 						["ilvl"] = 378.4615384615385,
-					},
-					["12/04/29 14:15:24"] = {
-						["level"] = 85,
-						["class"] = "DEATHKNIGHT",
-						["name"] = "Btchgrip",
-						["ilvl"] = 369.9375,
 					},
 				},
 				["0x02800000051973B5"] = {
@@ -366,6 +367,12 @@ ilvlDB = {
 					},
 				},
 				["0x0280000001E121C3"] = {
+					["12/04/29 14:15:24"] = {
+						["level"] = 85,
+						["class"] = "MAGE",
+						["name"] = "Sinisterpyro",
+						["ilvl"] = 386.5625,
+					},
 					["12/04/29 13:52:12"] = {
 						["level"] = 85,
 						["class"] = "MAGE",
@@ -377,12 +384,6 @@ ilvlDB = {
 						["class"] = "MAGE",
 						["name"] = "Sinisterpyro",
 						["ilvl"] = 390.6,
-					},
-					["12/04/29 14:15:24"] = {
-						["level"] = 85,
-						["class"] = "MAGE",
-						["name"] = "Sinisterpyro",
-						["ilvl"] = 386.5625,
 					},
 				},
 				["0x0280000003E65CE0"] = {

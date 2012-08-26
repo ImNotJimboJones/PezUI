@@ -35,7 +35,7 @@ GridStatusRaidIcons: enabled
 GridStatusRole: enabled
 Informant: enabled
 kgPanels: enabled
-kgPanelsConfig: enabled
+kgPanelsConfig: disabled
 LightHeaded: enabled
 LightHeaded_Data_A: enabled
 LightHeaded_Data_B: enabled
@@ -52,7 +52,7 @@ MacaroonProfiles: enabled
 MacaroonBound: enabled
 MacaroonStatusBars: disabled
 MikScrollingBattleText: enabled
-MSBTOptions: enabled
+MSBTOptions: disabled
 GearScore: enabled
 PowerAuras: enabled
 PowerAuras_ImagePack1: enabled
@@ -120,3 +120,7 @@ Broker_MicroMenu: enabled
 Volumizer: enabled
 Broker_LonnyMenu: disabled
 TipTac: enabled
+Bazooka_Options: disabled
+OmniCC_Config: disabled
+TipTacOptions: disabled
+VuhDoOptions: disabled

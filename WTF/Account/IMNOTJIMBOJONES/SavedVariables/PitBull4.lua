@@ -79,12 +79,22 @@ PitBull4DB = {
 							["size"] = 0.699999988079071,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
 		["LibDualSpec-1.0"] = {
 		},
 		["RangeFader"] = {
+			["profiles"] = {
+				["Default"] = {
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+			},
 		},
 		["Border"] = {
 			["profiles"] = {
@@ -93,20 +103,20 @@ PitBull4DB = {
 						["Player"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -123,20 +133,20 @@ PitBull4DB = {
 						["Focus"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -153,20 +163,20 @@ PitBull4DB = {
 						["Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -183,20 +193,20 @@ PitBull4DB = {
 						["Focus' Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -213,20 +223,20 @@ PitBull4DB = {
 						["Pet"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -243,20 +253,20 @@ PitBull4DB = {
 						["Target's Target"] = {
 							["boss_texture"] = "Tooltip enlarged",
 							["rare_texture"] = "Tooltip enlarged",
-							["normal_color"] = {
-								nil, -- [1]
-								nil, -- [2]
-								nil, -- [3]
-								0, -- [4]
-							},
 							["elite_texture"] = "Tooltip enlarged",
+							["normal_texture"] = "Tooltip enlarged",
 							["rare_color"] = {
 								0.7019607843137254, -- [1]
 								0.7019607843137254, -- [2]
 								0.7019607843137254, -- [3]
 								0.7000000178813934, -- [4]
 							},
-							["normal_texture"] = "Tooltip enlarged",
+							["normal_color"] = {
+								nil, -- [1]
+								nil, -- [2]
+								nil, -- [3]
+								0, -- [4]
+							},
 							["elite_color"] = {
 								nil, -- [1]
 								nil, -- [2]
@@ -5317,6 +5327,13 @@ PitBull4DB = {
 			},
 		},
 		["HostilityFader"] = {
+			["profiles"] = {
+				["Default"] = {
+					["global"] = {
+						["enabled"] = false,
+					},
+				},
+			},
 		},
 		["MasterLooterIcon"] = {
 			["profiles"] = {
@@ -5943,6 +5960,9 @@ PitBull4DB = {
 							["enabled"] = false,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
@@ -6308,13 +6328,13 @@ PitBull4DB = {
 						},
 						["Focus"] = {
 							["enabled"] = false,
-							["position"] = 6,
 							["side"] = "right",
+							["position"] = 6,
 						},
 						["Target"] = {
 							["enabled"] = false,
-							["position"] = 6,
 							["side"] = "right",
+							["position"] = 6,
 						},
 						["Focus' Target"] = {
 							["enabled"] = false,
@@ -6328,6 +6348,9 @@ PitBull4DB = {
 							["enabled"] = false,
 							["position"] = 7,
 						},
+					},
+					["global"] = {
+						["enabled"] = false,
 					},
 				},
 			},
@@ -6735,6 +6758,9 @@ PitBull4DB = {
 							["position"] = 6,
 							["size"] = 1,
 						},
+					},
+					["global"] = {
+						["enabled"] = false,
 					},
 				},
 			},
@@ -7404,6 +7430,9 @@ PitBull4DB = {
 							["enabled"] = false,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
@@ -8044,6 +8073,9 @@ PitBull4DB = {
 							["position"] = 2,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
@@ -8075,6 +8107,9 @@ PitBull4DB = {
 							["enabled"] = false,
 							["position"] = 1.00001,
 						},
+					},
+					["global"] = {
+						["enabled"] = false,
 					},
 				},
 			},
@@ -8559,6 +8594,9 @@ PitBull4DB = {
 							["enabled"] = false,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
@@ -8709,6 +8747,9 @@ PitBull4DB = {
 							["position"] = 1.00002,
 						},
 					},
+					["global"] = {
+						["enabled"] = false,
+					},
 				},
 			},
 		},
@@ -8740,6 +8781,9 @@ PitBull4DB = {
 							["enabled"] = false,
 							["position"] = 1.00003,
 						},
+					},
+					["global"] = {
+						["enabled"] = false,
 					},
 				},
 			},

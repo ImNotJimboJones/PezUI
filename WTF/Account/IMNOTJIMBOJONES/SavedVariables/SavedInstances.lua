@@ -665,8 +665,8 @@ SavedInstancesDB = {
 		["Onyxia's Lair"] = {
 			["LFDID"] = 257,
 			["Expansion"] = 2,
-			["RecLevel"] = 80,
 			["Show"] = "saved",
+			["RecLevel"] = 80,
 			["Raid"] = true,
 		},
 		["Gundrak"] = {
@@ -686,8 +686,8 @@ SavedInstancesDB = {
 		["Ruby Sanctum"] = {
 			["LFDID"] = 294,
 			["Expansion"] = 2,
-			["RecLevel"] = 80,
 			["Show"] = "saved",
+			["RecLevel"] = 80,
 			["Raid"] = true,
 		},
 		["Firelands"] = {
@@ -820,7 +820,7 @@ SavedInstancesDB = {
 					false, -- [6]
 					false, -- [7]
 					false, -- [8]
-					["Expires"] = 1346140758,
+					["Expires"] = 1346140757,
 					["ID"] = -8,
 				},
 			},
@@ -948,7 +948,7 @@ SavedInstancesDB = {
 					true, -- [6]
 					true, -- [7]
 					true, -- [8]
-					["Expires"] = 1346140758,
+					["Expires"] = 1346140757,
 					["ID"] = -8,
 				},
 			},
@@ -970,24 +970,24 @@ SavedInstancesDB = {
 	["Toons"] = {
 		["Pezzer - Burning Blade"] = {
 			["Level"] = 85,
-			["PlayedTotal"] = 10452189,
-			["IL"] = 404.6875,
+			["PlayedTotal"] = 10454708,
 			["WeeklyResetTime"] = 1346140758,
+			["IL"] = 404.6875,
 			["Money"] = 293434919,
 			["Class"] = "HUNTER",
 			["Show"] = "saved",
 			["currency"] = {
 				[395] = {
-					["amount"] = 4000,
+					["earnedThisWeek"] = 0,
 					["weeklyMax"] = 0,
 					["totalMax"] = 4000,
-					["earnedThisWeek"] = 0,
+					["amount"] = 4000,
 				},
 				[396] = {
-					["amount"] = 11975,
+					["earnedThisWeek"] = 850,
 					["weeklyMax"] = 1000,
 					["totalMax"] = 0,
-					["earnedThisWeek"] = 850,
+					["amount"] = 11975,
 				},
 				[392] = {
 					["earnedThisWeek"] = 0,
@@ -1004,13 +1004,13 @@ SavedInstancesDB = {
 					["totalMax"] = 0,
 				},
 			},
-			["PlayedLevel"] = 6468333,
+			["PlayedLevel"] = 6470852,
 			["Quests"] = {
 			},
 			["ILe"] = 403.875,
-			["DailyResetTime"] = 1345967958,
-			["LClass"] = "Hunter",
 			["DailyCount"] = 0,
+			["LClass"] = "Hunter",
+			["DailyResetTime"] = 1345967958,
 		},
 	},
 	["MinimapIcon"] = {
