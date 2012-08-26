@@ -2,6 +2,8 @@
 #########
 *.DS_Store
 *.app
+*.bak
+WTF/Launcher.wtf
 Patch.html
 Battle.net Authenticator Serial.rtf
 WoW.mfil
@@ -18,6 +20,7 @@ WowError.exe
 dbghelp.dll
 divxdecoder.dll
 msvcr80.dll
+.curseclient
 
 # Folders #
 ###########
@@ -29,3 +32,5 @@ Movies
 PTR*
 Updates
 Temp
+TempMig
+Screenshots
