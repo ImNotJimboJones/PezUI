@@ -1,6 +1,6 @@
 
 SwatterData = {
-	["enabled"] = true,
+	["enabled"] = false,
 	["warning"] = true,
 	["autoshow"] = true,
 	["errors"] = {
