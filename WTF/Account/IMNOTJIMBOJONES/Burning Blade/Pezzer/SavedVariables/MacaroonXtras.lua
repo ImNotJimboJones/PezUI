@@ -9,10 +9,10 @@ MacaroonXtrasSavedState = {
 				["copyDrag"] = false,
 				["name"] = "Bag Bar 1",
 				["tooltips"] = true,
-				["stored"] = false,
+				["shift"] = false,
 				["hotKeyText"] = "",
 				["stealth"] = false,
-				["snapToPoint"] = false,
+				["homestate"] = true,
 				["buttonList"] = {
 					["homestate"] = "1;2;3;4;5",
 				},
@@ -21,48 +21,48 @@ MacaroonXtrasSavedState = {
 				["padData"] = {
 					["homestate"] = "3:3",
 				},
-				["shift"] = false,
+				["stored"] = false,
 				["origID"] = 1,
 				["pagedbar"] = false,
 				["custom"] = false,
 				["remap"] = false,
-				["homestate"] = true,
+				["snapToPoint"] = false,
 				["snapToPad"] = 0,
 				["hidden"] = false,
-				["point"] = "BOTTOMRIGHT",
+				["combat"] = false,
 				["y"] = 175.5671844482422,
 				["x"] = -11.170166015625,
 				["customRange"] = false,
 				["alphaUp"] = "none",
 				["snapToFrame"] = false,
 				["dualSpec"] = false,
-				["shape"] = 1,
+				["laststate"] = "homestate",
 				["skinnable"] = true,
 				["alt"] = false,
-				["scale"] = 0.5599999999999993,
-				["combat"] = false,
-				["possess"] = false,
 				["group"] = false,
+				["point"] = "BOTTOMRIGHT",
+				["possess"] = false,
+				["scale"] = 0.5599999999999993,
 				["companion"] = false,
-				["barLock"] = true,
-				["barLink"] = false,
+				["currentstate"] = "homestate",
+				["autoHide"] = false,
 				["fix101810"] = false,
 				["showstates"] = false,
 				["customNames"] = false,
-				["autoHide"] = false,
+				["barLink"] = false,
 				["barLockAlt"] = false,
 				["vehicle"] = false,
 				["hotKeysShown"] = true,
 				["tooltipsCombat"] = false,
 				["barStrata"] = "MEDIUM",
 				["fadeSpeed"] = 0.5,
-				["columns"] = 1,
 				["tooltipsEnhanced"] = true,
+				["columns"] = 1,
 				["fishing"] = false,
-				["currentstate"] = "homestate",
+				["barLock"] = true,
 				["alpha"] = 1,
 				["barLockShift"] = false,
-				["laststate"] = "homestate",
+				["shape"] = 1,
 				["ctrl"] = false,
 				["reaction"] = false,
 				["arcData"] = {
@@ -78,7 +78,9 @@ MacaroonXtrasSavedState = {
 	["menu"] = {
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -88,7 +90,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -96,7 +98,9 @@ MacaroonXtrasSavedState = {
 		}, -- [1]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -106,7 +110,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -114,7 +118,9 @@ MacaroonXtrasSavedState = {
 		}, -- [2]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -124,7 +130,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -132,7 +138,9 @@ MacaroonXtrasSavedState = {
 		}, -- [3]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -142,7 +150,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -150,7 +158,9 @@ MacaroonXtrasSavedState = {
 		}, -- [4]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -160,7 +170,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -168,7 +178,9 @@ MacaroonXtrasSavedState = {
 		}, -- [5]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -178,7 +190,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -186,7 +198,9 @@ MacaroonXtrasSavedState = {
 		}, -- [6]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -196,7 +210,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -204,7 +218,9 @@ MacaroonXtrasSavedState = {
 		}, -- [7]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -214,7 +230,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -222,7 +238,9 @@ MacaroonXtrasSavedState = {
 		}, -- [8]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -232,7 +250,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -240,7 +258,9 @@ MacaroonXtrasSavedState = {
 		}, -- [9]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -250,7 +270,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -258,7 +278,9 @@ MacaroonXtrasSavedState = {
 		}, -- [10]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -268,7 +290,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
@@ -276,7 +298,9 @@ MacaroonXtrasSavedState = {
 		}, -- [11]
 		{
 			{
+				["stored"] = false,
 				["hotKeyLock"] = false,
+				["mouseoverAnchor"] = false,
 				["hotKeys"] = ":",
 				["XOffset"] = 0,
 				["scale"] = 1,
@@ -286,7 +310,7 @@ MacaroonXtrasSavedState = {
 				["showstates"] = "homestate",
 				["anchoredBar"] = false,
 				["hotKeyText"] = ":",
-				["mouseoverAnchor"] = false,
+				["locked"] = false,
 				["clickAnchor"] = false,
 				["laststate"] = "",
 				["bar"] = 2,
