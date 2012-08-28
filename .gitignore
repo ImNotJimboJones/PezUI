@@ -3,6 +3,7 @@
 *.DS_Store
 *.app
 *.bak
+*.mpq
 WTF/Launcher.wtf
 WTF/Config.wtf
 Patch.html
@@ -22,6 +23,17 @@ dbghelp.dll
 divxdecoder.dll
 msvcr80.dll
 .curseclient
+.agent.db
+Battle.net-64.dll
+Launcher.db
+MovieProxy.exe
+WoW.pfil
+World of Warcraft Launcher.exe
+Wow-64.exe
+WowError-64.exe
+WTF/RunOnce.wtf
+WTF/RunOnce-Installer.wtf
+
 
 # Folders #
 ###########
