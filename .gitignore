@@ -17,6 +17,8 @@ Launcher.exe
 Microsoft.VC80.CRT.manifest
 Repair.exe
 Scan.dll
+Scan.dll.new
+Scan-64.dll.new
 Wow.exe
 WowError.exe
 dbghelp.dll
