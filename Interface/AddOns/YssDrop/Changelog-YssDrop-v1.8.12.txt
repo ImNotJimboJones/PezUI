@@ -1,0 +1,13 @@
+tag v1.8.12
+879fcc38e79dd50a996756f6e1ec6ff1b6986153
+Yssaril <-->
+2012-08-28 13:40:29 -0500
+
+Tagging as v1.8.12
+
+
+--------------------
+
+Yssaril:
+	- toc update
+	- toc update i guess i forgot

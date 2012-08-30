@@ -47,8 +47,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = true,
 	["Attach to..."] = true,
-	["Background Inset"] = true,
 	["Background color"] = true,
+	["Background Inset"] = true,
 	["Background texture"] = true,
 	["Border color"] = true,
 	["Border texture"] = true,
@@ -73,8 +73,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "Définit la position de la boîte d'édition.",
 	["Attach to..."] = "Position",
-	["Background Inset"] = "Marge du fond",
 	["Background color"] = "Couleur du fond",
+	["Background Inset"] = "Marge du fond",
 	["Background texture"] = "Texture du fond",
 	["Border color"] = "Couleur de la bordure",
 	["Border texture"] = "Texture de la bordure",
@@ -99,8 +99,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "Befestige Eingabefeld an ...",
 	["Attach to..."] = "Befestige an ...",
-	["Background Inset"] = "Hintergrundbild",
 	["Background color"] = "Hintergrundfarbe",
+	["Background Inset"] = "Hintergrundbild",
 	["Background texture"] = "Hintergrundtextur",
 	["Border color"] = "Randfarbe",
 	["Border texture"] = "Randtextur",
@@ -125,8 +125,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "입력창 붙이기...",
 	["Attach to..."] = "붙이기...",
-	-- ["Background Inset"] = "",
 	["Background color"] = "배경 색상",
+	-- ["Background Inset"] = "",
 	["Background texture"] = "배경 텍스쳐",
 	["Border color"] = "테두리 색상",
 	["Border texture"] = "테두리 텍스쳐",
@@ -151,8 +151,8 @@ Prat:AddModuleToLoad(function()
   {
 	-- ["Attach edit box to..."] = "",
 	-- ["Attach to..."] = "",
-	-- ["Background Inset"] = "",
 	-- ["Background color"] = "",
+	-- ["Background Inset"] = "",
 	-- ["Background texture"] = "",
 	-- ["Border color"] = "",
 	-- ["Border texture"] = "",
@@ -177,8 +177,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "Закрепить поле ввода к...",
 	["Attach to..."] = "Закрепить к...",
-	["Background Inset"] = "Фоновая врезка",
 	["Background color"] = "Цвет фона",
+	["Background Inset"] = "Фоновая врезка",
 	["Background texture"] = "Текстура фона",
 	["Border color"] = "Цвет границ",
 	["Border texture"] = "Текстура границы",
@@ -203,8 +203,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "把输入框附加到……", -- Needs review
 	["Attach to..."] = "附加到……", -- Needs review
-	["Background Inset"] = "背景嵌入", -- Needs review
 	["Background color"] = "背景颜色", -- Needs review
+	["Background Inset"] = "背景嵌入", -- Needs review
 	["Background texture"] = "背景纹理", -- Needs review
 	["Border color"] = "边框颜色", -- Needs review
 	["Border texture"] = "边框纹理", -- Needs review
@@ -229,8 +229,8 @@ Prat:AddModuleToLoad(function()
   {
 	-- ["Attach edit box to..."] = "",
 	-- ["Attach to..."] = "",
-	-- ["Background Inset"] = "",
 	-- ["Background color"] = "",
+	-- ["Background Inset"] = "",
 	-- ["Background texture"] = "",
 	-- ["Border color"] = "",
 	-- ["Border texture"] = "",
@@ -255,8 +255,8 @@ Prat:AddModuleToLoad(function()
   {
 	["Attach edit box to..."] = "附上編輯框...",
 	["Attach to..."] = "附上...",
-	["Background Inset"] = "背景插入",
 	["Background color"] = "背景色彩",
+	["Background Inset"] = "背景插入",
 	["Background texture"] = "背景材質",
 	["Border color"] = "邊緣色彩",
 	["Border texture"] = "邊緣材質",

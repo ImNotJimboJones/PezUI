@@ -1,3 +1,11 @@
+TipTacTalents Changes | 2012 Aug 30
+-----------------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Moved inspect frame check to a helper function.
+- Added a second inspect frame check for the scheduled inspect.
+- Modified the code to support the changes in the Mists of Pandaria expansion.
+- Removed the InspectPaperDollFrame.lua @ line 23 inspect workaround.
+
 TipTacTalents Changes | 2012 May 20
 -----------------------------------
 - Changed the TOC version to 40300 for the 4.3 patch.

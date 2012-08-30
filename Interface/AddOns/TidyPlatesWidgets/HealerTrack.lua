@@ -37,7 +37,9 @@ local ClassRoles = {
 	},
 	["Druid"] = {
 		["Balance"]       = "Ranged",
-		["Feral Combat"]  = "Tank",
+		["Guardian"]  = "Tank",
+		["Feral Combat"]  = "Melee",
+		["Feral"]  = "Melee",
 		["Restoration"]   = "Healer",
 	},
 	["Hunter"] = {
@@ -79,6 +81,11 @@ local ClassRoles = {
 		["Arms"]          = "Melee",
 		["Fury"]          = "Melee",
 		["Protection"]    = "Tank",
+	},
+	["Monk"] = {
+		["Windwalker"]          = "Melee",
+		["Mistweaver"]          = "Healer",
+		["Brewmaster"]    		= "Tank",
 	},
 }
 

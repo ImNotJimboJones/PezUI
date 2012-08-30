@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: Tidy Plates Hub
 ## Notes: Provides a common configuration panel for supported themes.
 ## Author: Daniel/Binbwen
@@ -13,3 +13,4 @@ Helpers.lua
 Templates.lua
 Hub.lua
 Functions.lua
+

@@ -3,21 +3,19 @@ local L = LibStub("AceLocale-3.0"):GetLocale("TidyPlatesThreat", false)
 
 
 local _, PlayerClass = UnitClass("player")
-local Active = function() return GetActiveTalentGroup() end
-local HEX_CLASS_COLOR = { 
-SHAMAN 		= "2459FF", 
-MAGE 		= "69CCF0",
-WARLOCK 	= "9482C9",
-HUNTER		= "ABD473",
-ROGUE		= "FFF569",
-PRIEST		= "FFFFFF",
-DRUID 		= "FF7D0A",
-DEATHKNIGHT = "C41F3B",
-WARRIOR 	= "C79C6E",
-PALADIN 	= "F58CBA",
-}
+local Active = function() return GetActiveSpecGroup() end
+
 local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
+
+do
+	HEX_CLASS_COLORS = {};
+	for i=1,#CLASS_SORT_ORDER do
+		local str = RAID_CLASS_COLORS[CLASS_SORT_ORDER[i]].colorStr;
+		local str = gsub(str,"(ff)","",1)
+		HEX_CLASS_COLORS[CLASS_SORT_ORDER[i]] = str;
+	end
+end
 
 --[[Set MultiStyle]]--
 if not TidyPlatesThemeList then TidyPlatesThemeList = {} end
@@ -77,38 +75,30 @@ function TidyPlatesThreat:roleText() --Staggered till after called
 end
 
 function TidyPlatesThreat:specName()
-	local Spec = TidyPlatesThreat.db.char.specName
-	local t = TidyPlatesThreat.db.char.specInfo[Active()]
-	local spentTotal = t[1] + t[2] + t[3]
-	if t[1] > t[2] and t[1] > t[3] then
-		return Spec[1]
-	elseif t[2] > t[1] and t[2] > t[3] then
-		return Spec[2]
-	elseif t[3] > t[1] and t[3] > t[2] then
-		return Spec[3]
+	local t = TidyPlatesThreat.db.char.specInfo[Active()].name
+	if t then
+		return t
 	else
-		if spentTotal < 1 then
-			return L["Undetermined"]
-		end
-		return ""
+		return L["Undetermined"]
 	end		
 end
 
 --[[Options and Default Settings]]--
 function TidyPlatesThreat:OnInitialize()
 	local defaults 	= {
+		global = {
+			version = "",
+		},
 		char = {
 			welcome = false,
 			specInfo = {
 				[1] = {
-					[1] = 0,
-					[2] = 0,
-					[3] = 0
+					name = "",
+					role = "",
 				},
 				[2] = {
-					[1] = 0,
-					[2] = 0,
-					[3] = 0
+					name = "",
+					role = "",
 				},
 			},
 			threat = {
@@ -117,11 +107,6 @@ function TidyPlatesThreat:OnInitialize()
 			spec = {
 				primary = true,
 				secondary = false
-			},
-			specName = {
-				[1] = nil,
-				[2] = nil,
-				[3] = nil
 			},
 			stances = {
 				ON = false,
@@ -165,6 +150,7 @@ function TidyPlatesThreat:OnInitialize()
 				toggle  = true,
 				amount = -0.3
 			},
+			tidyplatesFade = false,
 			healthColorChange = false,
 			customColor =  false,
 			allowClass = false,
@@ -883,6 +869,8 @@ function TidyPlatesThreat:OnInitialize()
 				x = 18,
 				y = 32,
 				mode = "whitelist",
+				style = "square",
+				targetOnly = false,
 				scale = 1,
 				anchor = "CENTER",
 				filter = {}
@@ -1442,21 +1430,41 @@ end
 -- EVENTS --
 ------------
 function TidyPlatesThreat:specInfo()
-	for i=1, GetNumTalentGroups() do
-		for z=1, GetNumTalentTabs() do
+	for i=1, GetNumSpecGroups() do
+		--for z=1, GetNumTalentTabs() do
 			--name, iconTexture, pointsSpent, background, previewPointsSpent = GetTalentTabInfo(z, false, false, i)
-			local SpellID, name, desc, icon, pointsSpent = GetTalentTabInfo(z, false, false, i)
-			TidyPlatesThreat.db.char.specInfo[i][z] = pointsSpent
-			TidyPlatesThreat.db.char.specName[z] = name
-		end
+			--local SpellID, name, desc, icon, pointsSpent = GetTalentTabInfo(z, false, false, i)
+			
+			local id, name, description, icon, background = GetSpecializationInfo(i, nil, false);
+			local pointsSpent = GetSpecializationRole(i,nil, false)
+			
+			TidyPlatesThreat.db.char.specInfo[i].role = pointsSpent
+			TidyPlatesThreat.db.char.specInfo[i].name = name
+		--end
 	end
+end
+
+local tankspecs = {
+    DEATHKNIGHT = 1,
+    DRUID = 2,
+    MONK = 1,
+    PALADIN = 2,
+    WARRIOR = 3,
+}
+ 
+function IsTank()
+    if tankspecs[select(2,UnitClass("player"))] and tankspecs[select(2,UnitClass("player"))] == GetSpecialization() then -- checks class and talent specialization match
+        return true
+    else
+        return false
+    end
 end
 
 function TidyPlatesThreat:StartUp()
 	TidyPlatesThreat:specInfo()
 	local t = self.db.char.specInfo[Active()]
 -- Welcome
-	local Welcome = L["|cff89f559Welcome to |rTidy Plates: |cff89f559Threat Plates!\nThis is your first time using Threat Plates and you are a(n):\n|r|cff"]..HEX_CLASS_COLOR[PlayerClass]..TidyPlatesThreat:specName().." "..UnitClass("player")..": "..t[1].."/"..t[2].."/"..t[3].."|r|cff89F559.|r\n"
+	local Welcome = L["|cff89f559Welcome to |rTidy Plates: |cff89f559Threat Plates!\nThis is your first time using Threat Plates and you are a(n):\n|r|cff"]..HEX_CLASS_COLORS[PlayerClass]..TidyPlatesThreat:specName().." "..UnitClass("player").."|r|cff89F559.|r\n"
 -- Body
 	local NotTank = Welcome..L["|cff89f559Your dual spec's have been set to |r"]..dpsRole.."|cff89f559.|r"
 	local CurrentlyDPS = Welcome..L["|cff89f559You are currently in your "]..dpsRole..L["|cff89f559 role.|r"]
@@ -1498,30 +1506,30 @@ function TidyPlatesThreat:StartUp()
 			or PlayerClass == "PRIEST" 
 			or PlayerClass == "WARLOCK" then
 			if TidyPlatesThreat.db.profile.verbose then	print(NotTank) end
-			for i=1, GetNumTalentGroups() do
+			for i=1, GetNumSpecGroups() do
 				TidyPlatesThreat:setSpecDPS(i)
 			end
-		elseif PlayerClass == "WARRIOR" then
-			if t[3] > t[2] and t[3] > t[1] then -- Detects protection spec
+		else
+			if IsTank() then
 				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyTank) end
 			else
-				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS)	end
+				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS) end
 			end
-			for i=1, GetNumTalentGroups() do
-				z = self.db.char.specInfo[i] 
-				if z[3] > z[2] and z[3] > z[1] then -- Detects protection spec
+			for i=1, GetNumSpecGroups() do
+				z = self.db.char.specInfo[i].role
+				if z == "TANK" then
 					TidyPlatesThreat:setSpecTank(i)
 				else
 					TidyPlatesThreat:setSpecDPS(i)
 				end
-			end
+			end--[[
 		elseif PlayerClass == "PALADIN" then
 			if t[2] > t[1] and t[2] > t[3] then -- Detects protection spec
 				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyTank) end
 			else
 				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS)	end
 			end
-			for i=1, GetNumTalentGroups() do
+			for i=1, GetNumSpecGroups() do
 				z = self.db.char.specInfo[i] 
 				if z[2] > z[1] and z[2] > z[3] then -- Detects protection spec
 					TidyPlatesThreat:setSpecTank(i)
@@ -1535,7 +1543,7 @@ function TidyPlatesThreat:StartUp()
 			else
 				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS)	end
 			end
-			for i=1, GetNumTalentGroups() do
+			for i=1, GetNumSpecGroups() do
 				z = self.db.char.specInfo[i] 
 				if z[2] > z[1] and z[2] > z[3] then -- Detects feral spec
 					TidyPlatesThreat:setSpecTank(i)
@@ -1547,22 +1555,19 @@ function TidyPlatesThreat:StartUp()
 			if TidyPlatesThreat.db.profile.verbose then	print(Undetermined)	end
 		else
 			if TidyPlatesThreat.db.profile.verbose then	print(Welcome) end
+			]]--
 		end
+	end
 	if TidyPlatesThreat.db.profile.verbose then	print(Conclusion) end
-	self.db.char.threat.tanking = TidyPlatesThreat:currentRoleBool(Active()) -- Aligns tanking role with current spec on log in, post setup.
-	if GetCVar("ShowVKeyCastbar") == "1" then
-		TidyPlatesThreat.db.profile.settings.castbar.show = true
-	else
-		TidyPlatesThreat.db.profile.settings.castbar.show = false
-	end
-	end
+	
 end
 --[[Events]]--
 local events = {}
 local f = CreateFrame("Frame")
 function f:Events(self,event,...)
-	local DB = TidyPlatesThreat.db.profile
+	local ProfDB = TidyPlatesThreat.db.profile
 	local CharDB = TidyPlatesThreat.db.char
+	local GlobDB = TidyPlatesThreat.db.global
 	local arg1, arg2 = ...
 	--[[if arg2 then
 		print(event.." "..arg1.." "..arg2)
@@ -1585,6 +1590,15 @@ function f:Events(self,event,...)
 				ShowConfigPanel = ShowConfigPanel,
 			}
 			TidyPlatesThemeList["Threat Plates"] = setup
+			if ProfDB.tidyplatesFade then
+				TidyPlates:EnableFadeIn()
+			else
+				TidyPlates:DisableFadeIn()
+			end
+			if GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
+				--print("Version found to be different")
+				GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
+			end
 		end
 		f:UnregisterEvent("ADDON_LOADED")
 	elseif event == "PLAYER_ALIVE" then
@@ -1593,14 +1607,14 @@ function f:Events(self,event,...)
 	elseif event == "PLAYER_LOGIN" then
 		CharDB.threat.tanking = TidyPlatesThreat:currentRoleBool(Active()) -- Aligns tanking role with current spec on log in.
 		if GetCVar("nameplateShowEnemyTotems") == "1" then
-			DB.nameplate.toggle["Totem"] = true
+			ProfDB.nameplate.toggle["Totem"] = true
 		else
-			DB.nameplate.toggle["Totem"] = false
+			ProfDB.nameplate.toggle["Totem"] = false
 		end
 		SetCVar("ShowClassColorInNameplate", 1)
 		--SetCVar("bloattest", 1)
-		if CharDB.welcome and ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and DB.verbose then
-			print(L["|cff89f559Threat Plates:|r Welcome back |cff"]..HEX_CLASS_COLOR[PlayerClass]..UnitName("player").."|r!!")
+		if CharDB.welcome and ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and ProfDB.verbose then
+			print(L["|cff89f559Threat Plates:|r Welcome back |cff"]..HEX_CLASS_COLORS[PlayerClass]..UnitName("player").."|r!!")
 		end
 		-- Enable Stances / Shapeshifts and Create Options Tables
 		if PlayerClass == "WARRIOR" or PlayerClass == "DRUID" or PlayerClass == "DEATHKNIGHT" or PlayerClass == "PALADIN" then
@@ -1609,29 +1623,42 @@ function f:Events(self,event,...)
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		local inInstance, iType = IsInInstance()
 		if iType == "arena" or iType == "pvp" then
-			DB.threat.ON = false
+			ProfDB.threat.ON = false
 		elseif iType == "party" or iType == "raid" or iType == "none" then
-			DB.threat.ON = DB.OldSetting
+			ProfDB.threat.ON = ProfDB.OldSetting
 		end
-		DB.cache = {}
+		ProfDB.cache = {}
 		self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+		-- Set Debuff Widget Style
+		if ProfDB.debuffWidget.style == "square" then
+			TidyPlatesWidgets.UseSquareDebuffIcon()
+		elseif ProfDB.debuffWidget.style == "wide" then
+			TidyPlatesWidgets.UseWideDebuffIcon()
+		end
+		--self.db.char.threat.tanking = TidyPlatesThreat:currentRoleBool(Active()) -- Aligns tanking role with current spec on log in, post setup.
+		if GetCVar("ShowVKeyCastbar") == "1" then
+			ProfDB.settings.castbar.show = true
+		else
+			ProfDB.settings.castbar.show = false
+		end
+		TidyPlates:ForceUpdate()
 	elseif event == "PLAYER_LEAVING_WORLD" then
 		self:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
 		local t = CharDB.specInfo[Active()]
 		CharDB.threat.tanking = TidyPlatesThreat:currentRoleBool(Active())
-		if ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and DB.verbose then
-			print(L["|cff89F559Threat Plates|r: Player spec change detected: |cff"]..HEX_CLASS_COLOR[PlayerClass]..TidyPlatesThreat:specName()..": ("..t[1].."/"..t[2].."/"..t[3]..L[")|r, you are now in your |cff89F559"]..TidyPlatesThreat:dualSpec()..L["|r spec and are now in your "]..TidyPlatesThreat:roleText()..L[" role."])
+		if ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and ProfDB.verbose then
+			print(L["|cff89F559Threat Plates|r: Player spec change detected: |cff"]..HEX_CLASS_COLORS[PlayerClass]..TidyPlatesThreat:specName()..": ("..L[")|r, you are now in your |cff89F559"]..TidyPlatesThreat:dualSpec()..L["|r spec and are now in your "]..TidyPlatesThreat:roleText()..L[" role."])
 		end
 		TidyPlates:ForceUpdate()
 	elseif event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" then
-		if DB.threat.ON and (GetCVar("threatWarning") ~= 3) then
+		if ProfDB.threat.ON and (GetCVar("threatWarning") ~= 3) then
 			SetCVar("threatWarning", 3)
-		elseif not DB.threat.ON and (GetCVar("threatWarning") ~= 0) then
+		elseif not ProfDB.threat.ON and (GetCVar("threatWarning") ~= 0) then
 			SetCVar("threatWarning", 0)
 		end
 	elseif event == "PLAYER_LOGOUT" then
-		DB.cache = {}
+		ProfDB.cache = {}
 	elseif event == "RAID_TARGET_UPDATE" then
 		TidyPlates:Update()
 	elseif event == "UPDATE_SHAPESHIFT_FORM" then -- Set tanking per Stances / Shapeshifts

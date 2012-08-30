@@ -68,6 +68,7 @@ L.MSG_STATIC			= "靜態訊息"
 
 L.MSG_COMBAT					= "戰鬥"
 L.MSG_DISPEL					= "驅散魔法"
+--L.MSG_CHI_FULL					= "Full Chi"
 L.MSG_CP						= "連擊點"
 L.MSG_CP_FULL					= "終結技"
 L.MSG_HOLY_POWER_FULL			= "滿聖能"

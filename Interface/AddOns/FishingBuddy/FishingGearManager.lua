@@ -83,7 +83,7 @@ local function GearManagerInitialize()
 			-- but we actually have to equip the items for this to work
 			-- let's save what we have on now...
 			SaveEquipmentSet(FB_TEMP_OUTFIT, 1);
-			for slot=1,19 do
+			for slot=1,18 do
 				EquipmentManagerIgnoreSlotForSave(slot);
 			end
 

@@ -1,5 +1,5 @@
-local GetNumRaidMembers = GetNumRaidMembers;
-local GetNumPartyMembers = GetNumPartyMembers;
+local GetNumGroupMembers = GetNumGroupMembers;
+local GetNumSubgroupMembers = GetNumSubgroupMembers;
 local twipe = table.wipe;
 local tonumber = tonumber;
 local pairs = pairs;
@@ -1971,7 +1971,7 @@ end
 --
 local tSpec;
 function VUHDO_getBestProfileAfterSpecChange()
-	tSpec = GetActiveTalentGroup(false);
+	tSpec = GetActiveSpecGroup(false);
 	return VUHDO_getBestProfileForSpecAndSize(tSpec, VUHDO_GROUP_SIZE)
 		or VUHDO_getBestProfileForSpec(tSpec)
 		or VUHDO_getBestProfileForSize(VUHDO_GROUP_SIZE);
@@ -1981,7 +1981,7 @@ end
 
 --
 function VUHDO_getBestProfileAfterSizeChange()
-	tSpec = GetActiveTalentGroup(false);
+	tSpec = GetActiveSpecGroup(false);
 	return VUHDO_getBestProfileForSpecAndSize(tSpec, VUHDO_GROUP_SIZE)
 		or VUHDO_getBestProfileForSize(VUHDO_GROUP_SIZE)
 		or VUHDO_getBestProfileForSpec(tSpec);
@@ -1998,26 +1998,34 @@ local VUHDO_PROFILE_CFG;
 
 
 --
+local tIsInPetBattle = false;
+function VUHDO_setPetBattle(anIsStarted)
+	tIsInPetBattle = anIsStarted and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"];
+end
+
+
+
+--
 local tGroupSize, tProfile;
 function VUHDO_getAutoProfile()
 	if (VUHDO_DEBUG_AUTO_PROFILE ~= nil) then
 		tGroupSize = VUHDO_DEBUG_AUTO_PROFILE;
-	elseif (GetNumRaidMembers() > 0 or VUHDO_IS_CONFIG) then
-		tGroupSize = GetNumRaidMembers();
+	elseif (GetNumGroupMembers() > 0 or VUHDO_IS_CONFIG) then
+		tGroupSize = GetNumGroupMembers();
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"]) then
+		if (not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
 			VUHDO_IS_SHOWN_BY_GROUP = true;
 			VUHDO_timeReloadUI(0.1);
 		end
-	elseif (GetNumPartyMembers() > 0) then
-		tGroupSize = GetNumPartyMembers() + 1;
+	elseif (GetNumSubgroupMembers() > 0) then
+		tGroupSize = GetNumSubgroupMembers() + 1;
 
 		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"]) then
+			if (not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
-		elseif (VUHDO_CONFIG["HIDE_PANELS_PARTY"]) then
+		elseif (VUHDO_CONFIG["HIDE_PANELS_PARTY"] or tIsInPetBattle) then
 			VUHDO_IS_SHOWN_BY_GROUP = false;
 			VUHDO_timeReloadUI(0.1);
 		end
@@ -2026,11 +2034,11 @@ function VUHDO_getAutoProfile()
 		twipe(VUHDO_MAINTANK_NAMES);
 
 		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"]) then
+			if (not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
-		elseif (VUHDO_CONFIG["HIDE_PANELS_SOLO"]) then
+		elseif (VUHDO_CONFIG["HIDE_PANELS_SOLO"] or tIsInPetBattle) then
 			VUHDO_IS_SHOWN_BY_GROUP = false;
 			VUHDO_timeReloadUI(0.1);
 		end

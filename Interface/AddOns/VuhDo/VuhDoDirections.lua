@@ -82,18 +82,13 @@ local VUHDO_getRedGreenForDistance = VUHDO_getRedGreenForDistance;
 local tInfo;
 function VUHDO_shouldDisplayArrow(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
-
-	if (UnitIsUnit("player", aUnit)
-		or tInfo == nil
-		or (tInfo["range"] and not sIsAlways)
-		or (sIsDeadOnly and not tInfo["dead"])
-		or not tInfo["connected"]
-		or tInfo["isPet"]) then
-
-		return false;
-	else
-		return true;
-	end
+	return
+	  not UnitIsUnit("player", aUnit)
+		and tInfo ~= nil
+		and (not tInfo["range"] or sIsAlways)
+		and (not sIsDeadOnly or tInfo["dead"])
+		and tInfo["connected"]
+		and not tInfo["isPet"];
 end
 local VUHDO_shouldDisplayArrow = VUHDO_shouldDisplayArrow;
 

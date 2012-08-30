@@ -2,6 +2,8 @@ VUHDO_DID_DC_RESTORE = false;
 
 VUHDO_IN_COMBAT_RELOG = false;
 
+VUHDO_DEBUG = { };
+
 
 VUHDO_RAID = { };
 local VUHDO_RAID;
@@ -80,8 +82,7 @@ local UnitIsAFK = UnitIsAFK;
 local UnitIsConnected = UnitIsConnected;
 local UnitIsCharmed = UnitIsCharmed;
 local UnitCanAttack = UnitCanAttack;
-local GetNumRaidMembers = GetNumRaidMembers;
-local GetNumPartyMembers = GetNumPartyMembers;
+local GetNumGroupMembers = GetNumGroupMembers;
 local UnitName = UnitName;
 local UnitMana = UnitMana;
 local UnitManaMax = UnitManaMax;
@@ -105,7 +106,7 @@ local ipairs = ipairs;
 local format = format;
 local twipe = table.wipe;
 local tsort = table.sort;
-local _ = _;
+local _;
 local sTrigger;
 local sCurrentMode;
 
@@ -223,10 +224,6 @@ local VUHDO_EMERGENCY_SORTERS = {
 --
 local tUnit, tInfo;
 local function VUHDO_sortEmergencies()
-	if (sCurrentMode == 1) then -- VUHDO_MODE_NEUTRAL
-		return;
-	end
-
 	twipe(VUHDO_RAID_SORTED);
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
@@ -246,11 +243,10 @@ end
 -- Avoid reordering sorting by max-health if someone dies or gets offline
 local tEmptyInfo = {};
 local function VUHDO_getUnitSortMaxHp(aUnit)
-	if ((VUHDO_RAID[aUnit] or tEmptyInfo)["sortMaxHp"] ~= nil and InCombatLockdown()) then
-		return VUHDO_RAID[aUnit]["sortMaxHp"];
-	else
-		return VUHDO_RAID[aUnit]["healthmax"];
-	end
+	return VUHDO_RAID[aUnit][
+		((VUHDO_RAID[aUnit] or tEmptyInfo)["sortMaxHp"] ~= nil and InCombatLockdown())
+			and "sortMaxHp" or "healthmax"
+	];
 end
 
 
@@ -373,7 +369,7 @@ function VUHDO_setHealth(aUnit, aMode)
 			tInfo["raidIcon"] = GetRaidTargetIndex(aUnit);
 			tInfo["visible"] = UnitIsVisible(aUnit); -- Reihenfolge beachten
 			tInfo["zone"], tInfo["map"] = VUHDO_getUnitZoneName(aUnit); -- ^^
-			tInfo["baseRange"] = UnitInRange(aUnit);
+			tInfo["baseRange"] = UnitInRange(aUnit) or "player" == aUnit;
 			tInfo["isAltPower"] = VUHDO_isAltPowerActive(aUnit);
 			--[[tInfo["missbuff"] = nil;
 			tInfo["mibucateg"] = nil;
@@ -452,7 +448,8 @@ function VUHDO_updateHealth(aUnit, aMode)
 
 	if (tIsPet) then -- Vehikel?
 		tOwner = VUHDO_RAID[aUnit]["ownerUnit"];
-		if (tOwner ~= nil and VUHDO_RAID[tOwner]["isVehicle"]) then
+		-- tOwner may not be present when leaving a vehicle
+		if (VUHDO_RAID[tOwner] ~= nil and VUHDO_RAID[tOwner]["isVehicle"]) then
 			VUHDO_setHealth(tOwner, aMode);
 			VUHDO_updateHealthBarsFor(tOwner, aMode);
 		end
@@ -559,7 +556,7 @@ local function VUHDO_addUnitToSpecial(aUnit)
 		return;
 	end
 
-	if (GetNumRaidMembers() == 0) then
+	if (GetNumGroupMembers() == 0) then
 		return;
 	end
 	_, _, _, _, _, _, _, _, _, tRole, _ = GetRaidRosterInfo(VUHDO_RAID[aUnit]["number"]);
@@ -810,7 +807,7 @@ function VUHDO_reloadRaidMembers()
 
 	VUHDO_IS_SUSPICIOUS_ROSTER = false;
 
-	if (GetNumRaidMembers() == 0 and not UnitExists("party1") and not VUHDO_DID_DC_RESTORE) then
+	if (GetNumGroupMembers() == 0 and not UnitExists("party1") and not VUHDO_DID_DC_RESTORE) then
 		VUHDO_IN_COMBAT_RELOG = true;
 		tWasRestored = VUHDO_buildRaidFromMacro();
 		VUHDO_updateAllRaidNames();
@@ -828,7 +825,7 @@ function VUHDO_reloadRaidMembers()
 		VUHDO_DID_DC_RESTORE = true;
 		tUnit, tPetUnit = VUHDO_getUnitIds();
 
-		tMaxMembers = ("raid" == tUnit) and GetNumRaidMembers() or ("party" == tUnit) and 4 or 0;
+		tMaxMembers = ("raid" == tUnit) and GetNumGroupMembers() or ("party" == tUnit) and 4 or 0;
 
 		twipe(VUHDO_RAID);
 		twipe(VUHDO_RAID_NAMES);
@@ -861,7 +858,11 @@ function VUHDO_reloadRaidMembers()
 	VUHDO_updateAllGuids();
 	VUHDO_updateBuffRaidGroup();
 	VUHDO_updateBuffPanel();
-	VUHDO_sortEmergencies();
+
+	if (sCurrentMode ~= 1) then -- VUHDO_MODE_NEUTRAL
+		VUHDO_sortEmergencies();
+	end
+
 	VUHDO_createClusterUnits();
 
 	if (VUHDO_IS_SUSPICIOUS_ROSTER) then
@@ -962,7 +963,9 @@ function VUHDO_refreshRaidMembers()
 	VUHDO_updateAllPanelUnits();
 	VUHDO_updateAllGuids();
 	VUHDO_updateBuffRaidGroup();
-	VUHDO_sortEmergencies();
+	if (sCurrentMode ~= 1) then -- VUHDO_MODE_NEUTRAL
+		VUHDO_sortEmergencies();
+	end
 	VUHDO_createClusterUnits();
 
 	if (VUHDO_IS_SUSPICIOUS_ROSTER) then

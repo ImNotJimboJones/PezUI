@@ -31,8 +31,8 @@ end
 -- Spell Cast Event Watcher.
 -------------------------------------------------------------------------
 local CombatCastEventWatcher
-local CombatEventHandlers = {}
-local StartCastAnimationOnNameplate = TidyPlates.StartCastAnimationOnNameplate		-- If you don't define a local reference, the Tidy Plates table will get passed to the function.
+local CombatLogEventHandlers = {}
+local StartCastAnimationOnNameplate = TidyPlates.StartCastAnimationOnNameplate		-- If you don't define this as a local reference, the 'Tidy Plates' table will get passed to the function if you use ':' to call the function.
 
 local function SearchNameplateByGUID(SearchFor)
 	local VisiblePlate, UnitGUID
@@ -72,8 +72,7 @@ local function SearchNameplateByIcon(UnitFlags)
 end
 
 --------------------------------------
--- OnSpellCast
--- Sends cast event to an available nameplate
+-- Combat Log Events
 --------------------------------------
 local function OnSpellCast(...)
 	local sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname = ...
@@ -112,43 +111,131 @@ local function OnSpellCast(...)
 end
 
 -- SPELL_CAST_START -- Non-channeled spells
-function CombatEventHandlers.SPELL_CAST_START(...)
+function CombatLogEventHandlers.SPELL_CAST_START(...)
+	local source = ...
+	--if source == UnitGUID("player") then print(GetTime(), ...) end
 	OnSpellCast(...)
 end
 
 --[[
 -- SPELL_CAST_SUCCESS -- Channeled and Instant spells
-function CombatEventHandlers.SPELL_CAST_SUCCESS(...)
+function CombatLogEventHandlers.SPELL_CAST_SUCCESS(...)
 	OnSpellCast(..., true)
 end
 --]]
 
 --------------------------------------
--- Watch Combat Log Events
+-- Combat Log Conversion
 --------------------------------------
 
-local GetCombatEventResults
-
-if (tonumber((select(2, GetBuildInfo()))) >= 14299) then
-	-- 4.2
-	function GetCombatEventResults(...)
-		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid, spellname = ...	
-		return combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname	
-	end
-
-else
-	 -- 4.1
-	function GetCombatEventResults(...)
-		local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, spellid, spellname = ...		
-		return combatevent, sourceGUID, sourceName, sourceFlags, sourceFlags, spellid, spellname
-	end
-
-end
+--local GetCombatEventResults
+--if (tonumber((select(2, GetBuildInfo()))) >= 14299) then end
 
 -- 4.2
-local function OnCombatEvent(self, event, ...)
+local function GetCombatEventResults(...)
+	local timestamp, combatevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlag, spellid, spellname = ...	
+	return combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname	
+end
+
+
+-----------------------------------
+-- Game Events
+-----------------------------------
+local GameEvents = {}
+
+function GameEvents.COMBAT_LOG_EVENT_UNFILTERED(...)
 	local combatevent, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname = GetCombatEventResults(...)
-	if CombatEventHandlers[combatevent] and sourceGUID ~= UnitGUID("target") then CombatEventHandlers[combatevent](sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname) end		
+	if CombatLogEventHandlers[combatevent] and sourceGUID ~= UnitGUID("target") then CombatLogEventHandlers[combatevent](sourceGUID, sourceName, sourceFlags, sourceRaidFlags, spellid, spellname) end	
+	
+end
+
+function GameEvents.PLAYER_ENTERING_WORLD(...)
+	CombatCastEventWatcher:UnregisterAllEvents()
+	
+	local isInstance, instanceType = IsInInstance()
+	if instanceType and instanceType == "arena" then
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_START");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_STOP");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_FAILED");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_DELAYED");
+		--CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_INTERRUPTIBLE");
+		--CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_NOT_INTERRUPTIBLE");
+		
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+		CombatCastEventWatcher:RegisterEvent("UNIT_SPELLCAST_CHANNEL_UPDATE");
+			
+		--[[
+		UNIT_SPELLCAST_CHANNEL_START	Fires when a unit starts channeling a spell
+		UNIT_SPELLCAST_CHANNEL_STOP	Fires when a unit stops or cancels a channeled spell
+		UNIT_SPELLCAST_CHANNEL_UPDATE	Fires when a unit's channeled spell is interrupted or delayed
+		UNIT_SPELLCAST_DELAYED	Fires when a unit's spell cast is delayed
+		UNIT_SPELLCAST_FAILED	Fires when a unit's spell cast fails
+		UNIT_SPELLCAST_FAILED_QUIET	Fires when a unit's spell cast fails and no error message should be displayed
+		UNIT_SPELLCAST_INTERRUPTED	Fires when a unit's spell cast is interrupted
+		UNIT_SPELLCAST_INTERRUPTIBLE	Fires when a unit's spell cast becomes interruptible again
+		UNIT_SPELLCAST_NOT_INTERRUPTIBLE	Fires when a unit's spell cast becomes uninterruptible
+		UNIT_SPELLCAST_SENT	Fires when a request to cast a spell (on behalf of the player or a unit controlled by the player) is sent to the server
+		UNIT_SPELLCAST_START	Fires when a unit begins casting a spell
+		UNIT_SPELLCAST_STOP	Fires when a unit stops or cancels casting a spell
+		UNIT_SPELLCAST_SUCCEEDED	Fires when a unit's spell cast succeeds
+		--]]
+	
+	else
+		CombatCastEventWatcher:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
+	end
+	
+	CombatCastEventWatcher:RegisterEvent("PLAYER_ENTERING_WORLD");
+	
+end
+
+function GameEvents.UNIT_SPELLCAST_START(...)
+	local unitid = ...
+	if UnitIsFriend("player", unitid) then return end	
+	local plate = SearchNameplateByName(UnitName(unitid))
+	
+	if plate then
+		local spell, _, name, icon, start, finish, _, spellid, nonInt = UnitCastingInfo(unitid)
+		
+		if spell then StartCastAnimation(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, false) 
+		else StopCastAnimation(plate) end
+	end
+end
+
+function GameEvents.UNIT_SPELLCAST_CHANNEL_START(...)
+	local unitid = ...
+	if UnitIsFriend("player", unitid) then return end																				
+	local plate = SearchNameplateByName(UnitName(unitid))
+	
+	if plate then
+		local spell, _, name, icon, start, finish, spellid, nonInt = UnitChannelInfo("target")	
+		
+		if spell then StartCastAnimation(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, true) 
+		else StopCastAnimation(plate) end
+	end
+end
+
+--[[
+function GameEvents.UNIT_SPELLCAST_STOP(...)
+	StopCastAnimation(plate)
+end
+--]]
+
+GameEvents.UNIT_SPELLCAST_STOP = GameEvents.UNIT_SPELLCAST_START
+GameEvents.UNIT_SPELLCAST_INTERRUPTED = GameEvents.UNIT_SPELLCAST_START
+GameEvents.UNIT_SPELLCAST_FAILED = GameEvents.UNIT_SPELLCAST_START
+GameEvents.UNIT_SPELLCAST_DELAYED = GameEvents.UNIT_SPELLCAST_START
+--GameEvents.UNIT_SPELLCAST_INTERRUPTIBLE = GameEvents.UNIT_SPELLCAST_START
+--GameEvents.UNIT_SPELLCAST_NOT_INTERRUPTIBLE = GameEvents.UNIT_SPELLCAST_START
+
+GameEvents.UNIT_SPELLCAST_CHANNEL_STOP = GameEvents.UNIT_SPELLCAST_CHANNEL_START
+GameEvents.UNIT_SPELLCAST_CHANNEL_UPDATE = GameEvents.UNIT_SPELLCAST_CHANNEL_START
+
+-- 4.2
+local function OnEvent(self, event, ...)
+	local eventFunction = GameEvents[event]
+	if eventFunction then eventFunction(...) end
 end
 
 -----------------------------------
@@ -158,9 +245,9 @@ end
 --/run TidyPlates:StartSpellCastWatcher()
 local function StartSpellCastWatcher()
 	if not CombatCastEventWatcher then CombatCastEventWatcher = CreateFrame("Frame") end
-	CombatCastEventWatcher:SetScript("OnEvent", OnCombatEvent) 
-	CombatCastEventWatcher:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
-	--print("Enabling Tidy Plates Spell Cast Monitor")
+	CombatCastEventWatcher:SetScript("OnEvent", OnEvent) 
+	CombatCastEventWatcher:RegisterEvent("PLAYER_ENTERING_WORLD");
+	GameEvents:PLAYER_ENTERING_WORLD()
 end
 
 local function StopSpellCastWatcher()

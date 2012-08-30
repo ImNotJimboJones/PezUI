@@ -176,7 +176,7 @@ end
 
 -- Working around this bug:
 -- http://forums.wowace.com/showpost.php?p=295202&postcount=31
-do
+if false then   -- XXX no longer needed?
 	local function FixFrameLevel (level, ...)
 		for i = 1, select("#", ...) do
 			local button = select(i, ...)

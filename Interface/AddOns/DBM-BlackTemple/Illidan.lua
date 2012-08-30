@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Illidan", "DBM-BlackTemple")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 399 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 411 $"):sub(12, -3))
 mod:SetCreatureID(22917)
 mod:SetModelID(21135)
 mod:SetUsedIcons(8)
@@ -141,7 +141,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if #shadowDemonTargets >= 4 then
 			showDemonTargets()
 		else
-			self:Schedule(1, showDemonTarget)
+			self:Schedule(1, showDemonTargets)
 		end
 	elseif args:IsSpellID(40683) then
 		warnEnrage:Show()

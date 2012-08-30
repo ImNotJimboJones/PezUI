@@ -7,29 +7,32 @@
 -- ********************************************************************************
 
 -- Ace libs (<3)
-Broker_DualSpec = LibStub("AceAddon-3.0"):NewAddon("Broker_DualSpec", "AceConsole-3.0", "AceEvent-3.0");
+local A = LibStub("AceAddon-3.0"):NewAddon("Broker_DualSpec", "AceConsole-3.0", "AceEvent-3.0");
 local L = LibStub("AceLocale-3.0"):GetLocale("Broker_DualSpec", false);
 
+-- Addon global
+_G["BrokerDualSpecGlobal"] = A;
+
 -- LibDBIcon
-Broker_DualSpec.icon = LibStub("LibDBIcon-1.0");
+A.icon = LibStub("LibDBIcon-1.0");
 
 -- ********************************************************************************
 -- Variables
 -- ********************************************************************************
 
 -- AddOn version
-Broker_DualSpec.version = GetAddOnMetadata("Broker_DualSpec", "Version");
+A.version = GetAddOnMetadata("Broker_DualSpec", "Version");
 
 -- Text colors
-Broker_DualSpec.color = {};
-Broker_DualSpec.color["RED"] = "|cFFFF3333";
-Broker_DualSpec.color["GREEN"] = "|cFF33FF99";
-Broker_DualSpec.color["WHITE"] = "|cFFFFFFFF";
-Broker_DualSpec.color["WARRIOR"] = "|cFFC79C6E";
-Broker_DualSpec.color["RESET"] = "|r";
+A.color = {};
+A.color["RED"] = "|cFFFF3333";
+A.color["GREEN"] = "|cFF33FF99";
+A.color["WHITE"] = "|cFFFFFFFF";
+A.color["WARRIOR"] = "|cFFC79C6E";
+A.color["RESET"] = "|r";
 
 -- Loading trick
-Broker_DualSpec.isLoading = false;
+A.isLoading = false;
 
 -- ********************************************************************************
 -- Dropdown Menu
@@ -43,55 +46,56 @@ local function DropdownMenu(self, level)
 	if ( not level ) then return; end
 
 	local info = self.info;
-	local db = Broker_DualSpec.config.profile;
-	local sets = Broker_DualSpec:GetGearSets();
-
-	wipe(info);
+	local db = A.db.profile;
+	local sets = A:GetGearSets();
 
 	if ( level == 1 ) then
 		-- Menu title
-		info.isTitle = true;
+		info.isTitle = 1;
 		info.text = L["ADDON_NAME"];
-		info.notCheckable = true;
+		info.notCheckable = 1;
+        info.icon = nil;
 		UIDropDownMenu_AddButton(info, level);
 
 		-- Set options
-		info.keepShownOnClick = true;
-		info.hasArrow = true;
+		info.keepShownOnClick = 1;
+		info.hasArrow = 1;
 		info.disabled = nil;
 		info.isTitle = nil;
 
-		if ( sets ) then
-			-- Primary spec gear set
-			info.text = "   "..L["PRIMARY_SPEC"];
-			info.value = "PRIMARY";
-			UIDropDownMenu_AddButton(info, level);
+        -- Primary spec gear set
+        info.text = "   "..L["PRIMARY_SPEC"];
+        info.value = "PRIMARY";
+        UIDropDownMenu_AddButton(info, level);
 
-			-- Secondary spec gear set
-			info.text = "   "..L["SECONDARY_SPEC"];
-			info.value = "SECONDARY";
-			UIDropDownMenu_AddButton(info, level);
+        -- Secondary spec gear set
+        info.text = "   "..L["SECONDARY_SPEC"];
+        info.value = "SECONDARY";
+        UIDropDownMenu_AddButton(info, level);
 
-			-- Blank separator
-			wipe(info);
-			info.disabled = true;
-			info.notCheckable = true;
-			UIDropDownMenu_AddButton(info, level);
+        -- Blank separator
+        info.text = nil;
+        info.value = nil;
+        info.hasArrow = nil;
+        info.disabled = 1;
+        info.notCheckable = 1;
+        UIDropDownMenu_AddButton(info, level);
 
-			-- Set options
-			info.disabled = nil;
-		end
+        -- Set options
+        info.disabled = nil;
 
 		-- Gear set switch
 		info.text = "   "..L["GEAR_SETS"];
 		info.value = "GEARSETS";
-		info.hasArrow = true;
+		info.hasArrow = 1;
 		UIDropDownMenu_AddButton(info, level);
 
 		-- Blank separator
-		wipe(info);
-		info.disabled = true;
-		info.notCheckable = true;
+        info.text = nil;
+        info.value = nil;
+        info.hasArrow = nil;
+		info.disabled = 1;
+		info.notCheckable = 1;
 		UIDropDownMenu_AddButton(info, level);
 
 		-- Set options
@@ -100,12 +104,12 @@ local function DropdownMenu(self, level)
 		-- Options
 		info.text = "   "..L["OPTIONS"];
 		info.value = "OPTIONS";
-		info.hasArrow = true;
+		info.hasArrow = 1;
 		UIDropDownMenu_AddButton(info, level);
 
 		-- Set options
 		info.keepShownOnClick = nil;
-		info.hasArrow = nil;
+        info.hasArrow = nil;
 
 		-- Close
 		info.text = L["CLOSE"];
@@ -113,17 +117,83 @@ local function DropdownMenu(self, level)
 		UIDropDownMenu_AddButton(info, level);
 	elseif ( level == 2 ) then
 		if ( UIDROPDOWNMENU_MENU_VALUE == "PRIMARY" ) then -- Primary spec gear set
-			wipe(info);
+            local spec,_, points = A:GetSpecInfos(1);
+
+            info.isTitle = 1;
+            info.text = spec.." ("..points..")";
+            info.notCheckable = 1;
+            info.icon = nil;
+            --info.keepShownOnClick = 1;
+            UIDropDownMenu_AddButton(info, level);
+
+            info.text = L["CLOAK"];
+            info.isTitle = nil;
+            info.disabled = nil;
+            info.notCheckable = nil;
+            info.checked = function()
+                if ( A.db.profile.primaryCloak == 0 ) then
+                    return nil;
+                else
+                    return 1;
+                end
+            end;
+            info.func = function()
+                local current = GetActiveSpecGroup(false);
+
+                if ( A.db.profile.primaryCloak == 0 ) then
+                    A.db.profile.primaryCloak = 1;
+
+                    if ( current == 1 ) then ShowCloak(1); end
+                else
+                    A.db.profile.primaryCloak = 0;
+
+                    if ( current == 1 ) then ShowCloak(nil); end
+                end
+            end;
+            UIDropDownMenu_AddButton(info, level);
+
+            info.text = L["HELM"];
+            info.checked = function()
+                if ( A.db.profile.primaryHelm == 0 ) then
+                    return nil;
+                else
+                    return 1;
+                end
+            end;
+            info.func = function()
+                local current = GetActiveSpecGroup(false);
+
+                if ( A.db.profile.primaryHelm == 0 ) then
+                    A.db.profile.primaryHelm = 1;
+
+                    if ( current == 1 ) then ShowHelm(1); end
+                else
+                    A.db.profile.primaryHelm = 0;
+
+                    if ( current == 1 ) then ShowHelm(nil); end
+                end
+            end;
+            UIDropDownMenu_AddButton(info, level);
 
 			if ( sets ) then
+                -- Blank separator
+                info.text = nil;
+                info.disabled = 1;
+                info.notCheckable = 1;
+                UIDropDownMenu_AddButton(info, level);
+
+                -- Options
+                info.disabled = nil;
+                info.notCheckable = nil;
+
 				for _,t in ipairs(sets) do
 					info.text = t.name;
 					info.icon = t.icon;
 					info.checked = function()
 						if ( t.name == db.primary ) then
-							return true;
+							return 1;
 						else
-							return false;
+							return nil;
 						end
 					end;
 					info.func = function() db.primary = t.name; end;
@@ -131,17 +201,83 @@ local function DropdownMenu(self, level)
 				end
 			end
 		elseif ( UIDROPDOWNMENU_MENU_VALUE == "SECONDARY" ) then -- Secondary spec gear set
-			wipe(info);
+            local spec,_, points = A:GetSpecInfos(2);
+
+            info.isTitle = 1;
+            info.text = spec.." ("..points..")";
+            info.notCheckable = 1;
+            info.icon = nil;
+            --info.keepShownOnClick = 1;
+            UIDropDownMenu_AddButton(info, level);
+
+            info.text = L["CLOAK"];
+            info.isTitle = nil;
+            info.disabled = nil;
+            info.notCheckable = nil;
+            info.checked = function()
+                if ( A.db.profile.secondaryCloak == 0 ) then
+                    return nil;
+                else
+                    return 1;
+                end
+            end;
+            info.func = function()
+                local current = GetActiveSpecGroup(false);
+
+                if ( A.db.profile.secondaryCloak == 0 ) then
+                    A.db.profile.secondaryCloak = 1;
+
+                    if ( current == 2 ) then ShowCloak(1); end
+                else
+                    A.db.profile.secondaryCloak = 0;
+
+                    if ( current == 2 ) then ShowCloak(nil); end
+                end
+            end;
+            UIDropDownMenu_AddButton(info, level);
+
+            info.text = L["HELM"];
+            info.checked = function()
+                if ( A.db.profile.secondaryHelm == 0 ) then
+                    return nil;
+                else
+                    return 1;
+                end
+            end;
+            info.func = function()
+                local current = GetActiveSpecGroup(false);
+
+                if ( A.db.profile.secondaryHelm == 0 ) then
+                    A.db.profile.secondaryHelm = 1;
+
+                    if ( current == 2 ) then ShowHelm(1); end
+                else
+                    A.db.profile.secondaryHelm = 0;
+
+                    if ( current == 2 ) then ShowHelm(nil); end
+                end
+            end;
+            UIDropDownMenu_AddButton(info, level);
 
 			if ( sets ) then
+                -- Blank separator
+                info.text = nil;
+                info.disabled = 1;
+                info.notCheckable = 1;
+                UIDropDownMenu_AddButton(info, level);
+
+                -- Options
+                info.disabled = nil;
+                info.notCheckable = nil;
+
 				for _,t in ipairs(sets) do
 					info.text = t.name;
 					info.icon = t.icon;
 					info.checked = function()
 						if ( t.name == db.secondary ) then
-							return true;
+							return 1;
 						else
-							return false;
+							return nil;
 						end
 					end;
 					info.func = function() db.secondary = t.name; end;
@@ -149,29 +285,27 @@ local function DropdownMenu(self, level)
 				end
 			end
 		elseif ( UIDROPDOWNMENU_MENU_VALUE == "GEARSETS" ) then -- Gear sets switch
-			wipe(info);
-
 			if ( sets ) then
 				for _,t in ipairs(sets) do
 					info.text = "   "..t.name;
 					info.icon = t.icon;
-					info.notCheckable = true;
+					info.notCheckable = 1;
 					info.func = function() UseEquipmentSet(t.name); end;
 					UIDropDownMenu_AddButton(info, level);
 				end
 			end
 		elseif ( UIDROPDOWNMENU_MENU_VALUE == "OPTIONS" ) then -- Options
-			wipe(info);
-
 			-- Set options
-			info.keepShownOnClick = true;
+			info.keepShownOnClick = 1;
+            info.notCheckable = nil;
+            info.icon = nil;
 
 			-- Display spec name
 			info.text = L["DISPLAY_SPEC_NAME"];
 			info.checked = db.specname;
 			info.func = function()
 				db.specname = not db.specname;
-				Broker_DualSpec:UpdateBroker()
+				A:UpdateBroker()
 			end;
 			UIDropDownMenu_AddButton(info, level);
 
@@ -180,7 +314,7 @@ local function DropdownMenu(self, level)
 			info.checked = db.points;
 			info.func = function()
 				db.points = not db.points;
-				Broker_DualSpec:UpdateBroker()
+				A:UpdateBroker()
 			end;
 			UIDropDownMenu_AddButton(info, level);
 
@@ -195,7 +329,7 @@ local function DropdownMenu(self, level)
 			info.checked = not db.minimap.hide;
 			info.func = function()
 				db.minimap.hide = not db.minimap.hide;
-				Broker_DualSpec:ShowHideMinimap();
+				A:ShowHideMinimap();
 			end;
 			UIDropDownMenu_AddButton(info, level);
 		end
@@ -209,58 +343,58 @@ end
 --- Send a message to the chat frame with the addon name colored
 -- @param text The message to display
 -- @param color Bool, if true will color in red
-function Broker_DualSpec:Message(text, color)
+function A:Message(text, color)
 	if ( color ) then
-		color = Broker_DualSpec.color["RED"];
+		color = A.color["RED"];
 	else
-		color = Broker_DualSpec.color["GREEN"]
+		color = A.color["GREEN"]
 	end
 
-	DEFAULT_CHAT_FRAME:AddMessage(color..L["ADDON_NAME"]..": "..Broker_DualSpec.color["RESET"]..text);
+	DEFAULT_CHAT_FRAME:AddMessage(color..L["ADDON_NAME"]..": "..A.color["RESET"]..text);
 end
 
 --- Update the button and icon
-function Broker_DualSpec:UpdateBroker()
-	local spec, icon, talents = Broker_DualSpec:GetSpecInfos();
+function A:UpdateBroker()
+	local spec, icon, talents = A:GetSpecInfos();
 
     if ( spec and icon and talents ) then
-        if ( Broker_DualSpec.config.profile.specname and Broker_DualSpec.config.profile.points ) then
-            Broker_DualSpec.ldb.text = spec.." ("..talents..")";
-        elseif ( Broker_DualSpec.config.profile.specname ) then
-            Broker_DualSpec.ldb.text = spec;
-        elseif ( Broker_DualSpec.config.profile.points ) then
-            Broker_DualSpec.ldb.text = "("..talents..")";
+        if ( A.db.profile.specname and A.db.profile.points ) then
+            A.ldb.text = spec.." ("..talents..")";
+        elseif ( A.db.profile.specname ) then
+            A.ldb.text = spec;
+        elseif ( A.db.profile.points ) then
+            A.ldb.text = "("..talents..")";
         else
-            Broker_DualSpec.ldb.text = "";
+            A.ldb.text = "";
         end
-        Broker_DualSpec.ldb.icon = icon;
+        A.ldb.icon = icon;
     else
-        Broker_DualSpec.ldb.text = L["NOT_AVAILABLE"];
+        A.ldb.text = L["NOT_AVAILABLE"];
     end
 end
 
 --- Show or hide the minimap icon
-function Broker_DualSpec:ShowHideMinimap()
-	if ( Broker_DualSpec.config.profile.minimap.hide ) then
-		Broker_DualSpec:Message(L["HIDE_MINIMAP"], true);
-		Broker_DualSpec.icon:Hide("Broker_DualSpecObject");
+function A:ShowHideMinimap()
+	if ( A.db.profile.minimap.hide ) then
+		A:Message(L["HIDE_MINIMAP"], true);
+		A.icon:Hide("Broker_DualSpecObject");
 	else
-		Broker_DualSpec.icon:Show("Broker_DualSpecObject");
+		A.icon:Show("Broker_DualSpecObject");
 	end
 end
 
 --- Handle the slash command
 -- @param input The string returned after the command
-function Broker_DualSpec:SlashCommand(input)
+function A:SlashCommand(input)
 	local arg1, arg2 = string.match(input, "(%a*)%s?(.*)");
 
 	if ( arg1 == "" ) then
-		Broker_DualSpec:SwitchSpec();
+		A:SwitchSpec();
 	elseif ( arg1 == "show" ) then
-		Broker_DualSpec.config.profile.minimap.hide = false;
-		Broker_DualSpec:ShowHideMinimap();
+		A.db.profile.minimap.hide = false;
+		A:ShowHideMinimap();
 	elseif ( arg1 == "list" ) then
-		local sets = Broker_DualSpec:GetGearSets();
+		local sets = A:GetGearSets();
 
 		if ( sets ) then
 			local out = "";
@@ -269,18 +403,18 @@ function Broker_DualSpec:SlashCommand(input)
 				out = out..", "..out;
 			end
 			out = strtrim(out, " ,");
-			Broker_DualSpec:Message(out);
+			A:Message(out);
 		else
-			Broker_DualSpec:Message(L["NO_GEAR_SETS"], true);
+			A:Message(L["NO_GEAR_SETS"], true);
 		end
 	elseif ( arg1 == "primary" ) then
 		if ( arg2 ) then
 			local exists,_ = GetEquipmentSetInfoByName(arg2);
 
 			if ( exists ) then
-				Broker_DualSpec.config.profile.primary = arg2;
+				A.db.profile.primary = arg2;
 			else
-				Broker_DualSpec:Message(L["GEAR_NOT_EXISTS"], true);
+				A:Message(L["GEAR_NOT_EXISTS"], true);
 			end
 		end
 	elseif ( arg1 == "secondary" ) then
@@ -288,54 +422,53 @@ function Broker_DualSpec:SlashCommand(input)
 			local exists,_ = GetEquipmentSetInfoByName(arg2);
 
 			if ( exists ) then
-				Broker_DualSpec.config.profile.secondary = arg2;
+				A.db.profile.secondary = arg2;
 			else
-				Broker_DualSpec:Message(L["GEAR_NOT_EXISTS"], true);
+				A:Message(L["GEAR_NOT_EXISTS"], true);
 			end
 		end
 	else
-		Broker_DualSpec:Message(L["COMMAND_USAGE_1"]);
-		Broker_DualSpec:Message(L["COMMAND_USAGE_2"]);
-		Broker_DualSpec:Message(L["COMMAND_USAGE_3"]);
-		Broker_DualSpec:Message(L["COMMAND_USAGE_4"]);
+		A:Message(L["COMMAND_USAGE_1"]);
+		A:Message(L["COMMAND_USAGE_2"]);
+		A:Message(L["COMMAND_USAGE_3"]);
+		A:Message(L["COMMAND_USAGE_4"]);
 	end
 end
 
 --- Get informations about the given spec
 -- @param group The spec group number (1 or 2)
 -- @return The spec name, the spec icon, the points spent
-function Broker_DualSpec:GetSpecInfos(group)
+function A:GetSpecInfos(group)
 	local talents = "";
 	local spec = L["NOT_AVAILABLE"];
 	local icon = "Interface\\ICONS\\INV_Misc_QuestionMark";
-    local compare;
+    local maxNumTalents, column, selected = 18, nil, nil;
 
-	if ( not group ) then group = GetActiveTalentGroup(false, false); end
+	if ( not group ) then group = GetActiveSpecGroup(false); end
 
-	for i=1,3 do
-		local _, name,_, tex, points,_,_,_ = GetTalentTabInfo(i, false, false, group);
+    local specId = GetSpecialization(false, false, group);
+    local _, spec, _, icon = GetSpecializationInfo(specId, false, false);
 
-        if ( compare ) then
-            if ( points > compare and points > 0 ) then
-                compare = points;
-                spec = name;
-                icon = tex;
-            end
-        elseif ( points > 0 ) then
-            compare = points;
-            spec = name;
-            icon = tex;
+    for i=1,maxNumTalents do
+        _, _, _, column, selected = GetTalentInfo(i, false, group);
+
+        if ( selected ) then
+            talents = talents.."/"..column;
         end
-		talents = talents.."/"..points;
-	end
-	talents = strtrim(talents, "/");
+    end
+
+    if ( talents == "" ) then
+        talents = "0/0/0/0/0/0";
+    else
+        talents = strtrim(talents, "/");
+    end
 
 	return spec, icon, talents;
 end
 
 --- Get gear sets names and icons
 -- @return A table with gear sets and icons
-function Broker_DualSpec:GetGearSets()
+function A:GetGearSets()
 	local num = GetNumEquipmentSets();
 
 	if ( num == 0 ) then
@@ -356,27 +489,57 @@ function Broker_DualSpec:GetGearSets()
 end
 
 --- Switch between spec
-function Broker_DualSpec:SwitchSpec()
+function A:SwitchSpec()
 	if ( UnitAffectingCombat("player") ) then
-		Broker_DualSpec:Message(L["IN_COMBAT"], true);
+		A:Message(L["IN_COMBAT"], true);
 		return;
 	end
 
-	local current = GetActiveTalentGroup(false, false);
+	local current = GetActiveSpecGroup(false);
 
 	if ( current == 1 ) then
-		SetActiveTalentGroup(2);
+		SetActiveSpecGroup(2);
 	else
-		SetActiveTalentGroup(1);
+		SetActiveSpecGroup(1);
 	end
+end
+
+--- Set display options depending on config and spec
+-- @param spec 1 or 2
+function SetDisplayOptions(spec)
+    if ( spec == 2 ) then
+        if ( A.db.profile.secondaryCloak == 0 ) then
+            ShowCloak(nil);
+        else
+            ShowCloak(1);
+        end
+
+        if ( A.db.profile.secondaryHelm == 0 ) then
+            ShowHelm(nil);
+        else
+            ShowHelm(1);
+        end
+    else
+        if ( A.db.profile.primaryCloak == 0 ) then
+            ShowCloak(nil);
+        else
+            ShowCloak(1);
+        end
+
+        if ( A.db.profile.primaryHelm == 0 ) then
+            ShowHelm(nil);
+        else
+            ShowHelm(1);
+        end
+    end
 end
 
 --- Callback function for event ZONE_CHANGED_NEW_AREA
 -- Used to update icon and text on login
-function Broker_DualSpec:ZONE_CHANGED_NEW_AREA()
-	if ( Broker_DualSpec.isLoading ) then
-		Broker_DualSpec.isLoading = false;
-		Broker_DualSpec:UpdateBroker();
+function A:ZONE_CHANGED_NEW_AREA()
+	if ( A.isLoading ) then
+		A.isLoading = false;
+		A:UpdateBroker();
 	end
 end
 
@@ -384,38 +547,40 @@ end
 -- Fire every time there is a loading screen
 -- but too soon so we use ZONE_CHANGED_NEW_AREA
 -- Added update function here in case of reloadui
-function Broker_DualSpec:PLAYER_ENTERING_WORLD()
-	Broker_DualSpec.isLoading = true;
-	Broker_DualSpec:UpdateBroker();
+function A:PLAYER_ENTERING_WORLD()
+	A.isLoading = true;
+	A:UpdateBroker();
 end
 
 --- Callback function for event ACTIVE_TALENT_GROUP_CHANGED
 -- Set the gear set attached to the given spec
-function Broker_DualSpec:ACTIVE_TALENT_GROUP_CHANGED()
-	if ( Broker_DualSpec.config.profile.gear ) then
-		local current = GetActiveTalentGroup(false, false);
+function A:ACTIVE_TALENT_GROUP_CHANGED()
+	if ( A.db.profile.gear ) then
+		local current = GetActiveSpecGroup(false);
 
 		if ( current == 1 ) then
-			if ( Broker_DualSpec.config.profile.primary ~= "" )then
-				UseEquipmentSet(Broker_DualSpec.config.profile.primary);
+			if ( A.db.profile.primary ~= "" )then
+				UseEquipmentSet(A.db.profile.primary);
+                SetDisplayOptions(1);
 			else
-				Broker_DualSpec:Message(L["NO_GEAR_DEFINED"], true);
+				A:Message(L["NO_GEAR_DEFINED"], true);
 			end
 		else
-			if ( Broker_DualSpec.config.profile.secondary ~= "" )then
-				UseEquipmentSet(Broker_DualSpec.config.profile.secondary);
+			if ( A.db.profile.secondary ~= "" )then
+				UseEquipmentSet(A.db.profile.secondary);
+                SetDisplayOptions(2);
 			else
-				Broker_DualSpec:Message(L["NO_GEAR_DEFINED"], true);
+				A:Message(L["NO_GEAR_DEFINED"], true);
 			end
 		end
 	end
 
-	Broker_DualSpec:UpdateBroker();
+	A:UpdateBroker();
 end
 
 --- Callback function for event CHARACTER_POINTS_CHANGED
-function Broker_DualSpec:CHARACTER_POINTS_CHANGED()
-    Broker_DualSpec:UpdateBroker();
+function A:CHARACTER_POINTS_CHANGED()
+    A:UpdateBroker();
 end
 
 -- ********************************************************************************
@@ -429,9 +594,13 @@ local defaults =
 	{
 		primary = "",
 		secondary = "",
-		specname = true,
-		points = true,
-		gear = false,
+		specname = 1,
+		points = 1,
+		gear = 1,
+        primaryCloak = nil,
+        primaryHelm = nil,
+        secondaryCloak = nil,
+        secondaryHelm = nil,
 		minimap =
 		{
 			hide = false
@@ -445,12 +614,12 @@ local defaults =
 
 --- AceAddon callback
 -- Called after the addon is fully loaded
-function Broker_DualSpec:OnInitialize()
+function A:OnInitialize()
 	-- Config db
-	Broker_DualSpec.config = LibStub("AceDB-3.0"):New("Broker_DualSpecDB", defaults);
+	A.db = LibStub("AceDB-3.0"):New("Broker_DualSpecDB", defaults);
 
 	-- LDB
-	Broker_DualSpec.ldb = LibStub("LibDataBroker-1.1"):NewDataObject("Broker_DualSpecObject",
+	A.ldb = LibStub("LibDataBroker-1.1"):NewDataObject("Broker_DualSpecObject",
 	{
 		type = "data source",
 		text = L["NOT_AVAILABLE"],
@@ -459,19 +628,19 @@ function Broker_DualSpec:OnInitialize()
 		tocname = "Broker_DualSpec",
 		OnClick = function(self, button)
 			if (button == "LeftButton") then
-				Broker_DualSpec:SwitchSpec();
+				A:SwitchSpec();
 			elseif ( button == "RightButton" ) then
-				if ( Broker_DualSpec.menuFrame.initialize ~= DropdownMenu ) then
+				if ( A.menuFrame.initialize ~= DropdownMenu ) then
 					CloseDropDownMenus();
-					Broker_DualSpec.menuFrame.initialize = DropdownMenu;
+					A.menuFrame.initialize = DropdownMenu;
 				end
-				ToggleDropDownMenu(1, nil, Broker_DualSpec.menuFrame, self:GetName(), 0, 0);
+				ToggleDropDownMenu(1, nil, A.menuFrame, self:GetName(), 0, 0);
 				GameTooltip:Hide();
 			end
 		end,
 		OnTooltipShow = function(tooltip)
 			local spec, points, currentGroup, altGroup;
-            local current = GetActiveTalentGroup(false, false);
+            local current = GetActiveSpecGroup(false);
 
             if ( current == 1 ) then
                 currentGroup = L["PRIMARY_SPEC"];
@@ -481,53 +650,71 @@ function Broker_DualSpec:OnInitialize()
                 currentGroup = L["SECONDARY_SPEC"];
             end
 
-			tooltip:AddDoubleLine(Broker_DualSpec.color["WHITE"]..L["ADDON_NAME"], Broker_DualSpec.color["GREEN"].." v"..Broker_DualSpec.version);
+			tooltip:AddDoubleLine(A.color["WHITE"]..L["ADDON_NAME"], A.color["GREEN"].." v"..A.version);
 			tooltip:AddLine(" ");
 
-			spec,_, points = Broker_DualSpec:GetSpecInfos();
+			spec,_, points = A:GetSpecInfos();
 			tooltip:AddLine(L["CURRENT_SPEC"]..": "..spec.." ("..points..") ("..currentGroup..")");
 			tooltip:AddLine(" ");
 
 			if ( current == 1 ) then
-				spec,_, points = Broker_DualSpec:GetSpecInfos(2);
+				spec,_, points = A:GetSpecInfos(2);
 			else
-				spec,_, points = Broker_DualSpec:GetSpecInfos(1);
+				spec,_, points = A:GetSpecInfos(1);
 			end
 			tooltip:AddLine(L["SWITCH_TO"]..": "..spec.." ("..points..") ("..altGroup..")");
 
-			if ( Broker_DualSpec.config.profile.gear ) then
+			if ( A.db.profile.gear ) then
 				if ( current == 1 ) then
-					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..Broker_DualSpec.config.profile.secondary);
+					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.secondary);
 				else
-					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..Broker_DualSpec.config.profile.primary);
+					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.primary);
 				end
 			end
 
 			tooltip:AddLine(" ");
-			tooltip:AddLine(string.format(L["TOOLTIP_TIPS"], Broker_DualSpec.color["WARRIOR"], Broker_DualSpec.color["GREEN"], Broker_DualSpec.color["WARRIOR"], Broker_DualSpec.color["GREEN"]));
+			tooltip:AddLine(string.format(L["TOOLTIP_TIPS"], A.color["WARRIOR"], A.color["GREEN"], A.color["WARRIOR"], A.color["GREEN"]));
 		end,
 	});
 
 	-- LDBIcon
-	Broker_DualSpec.icon:Register("Broker_DualSpecObject", Broker_DualSpec.ldb, Broker_DualSpec.config.profile.minimap);
-	Broker_DualSpec.icon:IconCallback("ZONE_CHANGED_NEW_AREA", "Broker_DualSpecObject", nil, nil, Broker_DualSpec.ldb);
-	Broker_DualSpec.icon:IconCallback("ACTIVE_TALENT_GROUP_CHANGED", "Broker_DualSpecObject", nil, nil, Broker_DualSpec.ldb);
-	Broker_DualSpec.icon:IconCallback("PLAYER_ENTERING_WORLD", "Broker_DualSpecObject", nil, nil, Broker_DualSpec.ldb);
-    Broker_DualSpec.icon:IconCallback("CHARACTER_POINTS_CHANGED", "Broker_DualSpecObject", nil, nil, Broker_DualSpec.ldb);
+	A.icon:Register("Broker_DualSpecObject", A.ldb, A.db.profile.minimap);
+	A.icon:IconCallback("ZONE_CHANGED_NEW_AREA", "Broker_DualSpecObject", nil, nil, A.ldb);
+	A.icon:IconCallback("ACTIVE_TALENT_GROUP_CHANGED", "Broker_DualSpecObject", nil, nil, A.ldb);
+	A.icon:IconCallback("PLAYER_ENTERING_WORLD", "Broker_DualSpecObject", nil, nil, A.ldb);
+    A.icon:IconCallback("CHARACTER_POINTS_CHANGED", "Broker_DualSpecObject", nil, nil, A.ldb);
 
 	-- Menu frame & table
-	Broker_DualSpec.menuFrame = CreateFrame("Frame", "Broker_DualSpecMenuFrame");
-	Broker_DualSpec.menuFrame.displayMode = "MENU";
-	Broker_DualSpec.menuFrame.info = {};
+	A.menuFrame = CreateFrame("Frame", "Broker_DualSpecMenuFrame");
+	A.menuFrame.displayMode = "MENU";
+	A.menuFrame.info = {};
 
 	-- Events
-	Broker_DualSpec:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	Broker_DualSpec:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
-	Broker_DualSpec:RegisterEvent("PLAYER_ENTERING_WORLD");
-    Broker_DualSpec:RegisterEvent("CHARACTER_POINTS_CHANGED");
+	A:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+	A:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+	A:RegisterEvent("PLAYER_ENTERING_WORLD");
+    A:RegisterEvent("CHARACTER_POINTS_CHANGED");
 
 	-- Slash command
-	Broker_DualSpec:RegisterChatCommand("brokerdualspec", "SlashCommand");
-	Broker_DualSpec:RegisterChatCommand("bds", "SlashCommand");
-	Broker_DualSpec:RegisterChatCommand("ds", "SlashCommand");
+	A:RegisterChatCommand("brokerdualspec", "SlashCommand");
+	A:RegisterChatCommand("bds", "SlashCommand");
+	A:RegisterChatCommand("ds", "SlashCommand");
+
+    if ( not A.db.profile.secondaryCloak and not A.db.profile.secondaryHelm and not A.db.profile.primaryCloak and not A.db.profile.primaryHelm ) then
+        if ( ShowingCloak() ) then
+            A.db.profile.secondaryCloak = 1;
+            A.db.profile.primaryCloak = 1;
+        else
+            A.db.profile.secondaryCloak = 0;
+            A.db.profile.primaryCloak = 0;
+        end
+
+        if ( ShowingHelm() ) then
+            A.db.profile.secondaryHelm = 1;
+            A.db.profile.primaryHelm = 1;
+        else
+            A.db.profile.secondaryHelm = 0;
+            A.db.profile.primaryHelm = 0;
+        end
+    end
 end

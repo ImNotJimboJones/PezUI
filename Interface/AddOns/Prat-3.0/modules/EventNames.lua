@@ -55,117 +55,117 @@ Prat:AddModuleToLoad(function()
   --@non-debug@
   L:AddLocale("enUS",
   {
+	allevents_desc = "Enable Prat processing for all chat events.",
+	allevents_name = "Process all events",
 	["Chat window event name options."] = true,
 	EventNames = true,
 	Show = true,
-	["Show events on chatframes"] = true,
-	allevents_desc = "Enable Prat processing for all chat events.",
-	allevents_name = "Process all events",
 	show_desc = "Toggle showing event names in each window.",
+	["Show events on chatframes"] = true,
 	show_name = "Show Event Names",
 }
 
   )
   L:AddLocale("frFR",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "Options des évènements de la fenêtre de chat",
 	EventNames = "Nom des évènements",
 	Show = "Montrer",
-	["Show events on chatframes"] = "Montrer les évènements dans le cadre du chat",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "Activer l'affichage des noms d'évènements dans chaque fenêtre",
+	["Show events on chatframes"] = "Montrer les évènements dans le cadre du chat",
 	show_name = "Montrer les noms d'évènements",
 }
 
   )
   L:AddLocale("deDE",
   {
+	allevents_desc = "Aktivieren, um alle Chat Ereignisse abzuwickeln",
+	allevents_name = "Alle Ereignisse abwickeln",
 	["Chat window event name options."] = "Optionen zu Ereignisnamen in Chatfenstern.",
 	EventNames = "Ereignisnamen",
 	Show = "Anzeigen",
-	["Show events on chatframes"] = "Ereignisse bei Chatrahmen anzeigen",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "Anzeige der Ereignisnamen in jedem Fenster ein- und ausschalten",
+	["Show events on chatframes"] = "Ereignisse bei Chatrahmen anzeigen",
 	show_name = "Ereignisnamen anzeigen",
 }
 
   )
   L:AddLocale("koKR",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "대화창에 이벤트 이름을 표시합니다..",
 	EventNames = "이벤트이름",
 	Show = "보기",
-	["Show events on chatframes"] = "대화창에 이벤트를 보입니다.",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "각 대화창에 이벤트 이름 보이기를 끄고켭니다.",
+	["Show events on chatframes"] = "대화창에 이벤트를 보입니다.",
 	show_name = "이벤트 이름 보이기",
 }
 
   )
   L:AddLocale("esMX",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	-- ["Chat window event name options."] = "",
 	-- EventNames = "",
 	-- Show = "",
-	-- ["Show events on chatframes"] = "",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	-- show_desc = "",
+	-- ["Show events on chatframes"] = "",
 	-- show_name = "",
 }
 
   )
   L:AddLocale("ruRU",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "Настройки названий событий в окне чата.",
 	EventNames = true,
 	Show = "Отображать",
-	["Show events on chatframes"] = "Отображать события в окне чата",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "Вкл/Выкл отображение названий событий во всех окнах.",
+	["Show events on chatframes"] = "Отображать события в окне чата",
 	show_name = "Названия событий",
 }
 
   )
   L:AddLocale("zhCN",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "聊天窗口项目名称选项",
 	EventNames = "事件名称",
 	Show = "显示",
-	["Show events on chatframes"] = "在聊天框显示事件",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "显示事件名称在每个聊天窗口",
+	["Show events on chatframes"] = "在聊天框显示事件",
 	show_name = "显示事件名称",
 }
 
   )
   L:AddLocale("esES",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "Opciones de nombre de evento de la ventana del chat.",
 	EventNames = "NombresEventos",
 	Show = "Mostrar",
-	["Show events on chatframes"] = "Mostrar eventos en los marcos de chat",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "Alterna el mostrar nombres de eventos en cada ventana.",
+	["Show events on chatframes"] = "Mostrar eventos en los marcos de chat",
 	show_name = "Mostrar Nombres de Eventos",
 }
 
   )
   L:AddLocale("zhTW",
   {
+	-- allevents_desc = "",
+	-- allevents_name = "",
 	["Chat window event name options."] = "聊天視窗事件名稱選項。",
 	EventNames = "事件名稱",
 	Show = "顯示",
-	["Show events on chatframes"] = "於聊天視窗顯示事件",
-	-- allevents_desc = "",
-	-- allevents_name = "",
 	show_desc = "切換顯示在每個視窗事件名稱。",
+	["Show events on chatframes"] = "於聊天視窗顯示事件",
 	show_name = "顯示事件名稱",
 }
 

@@ -360,6 +360,11 @@ L["This widget will display combo points on your target nameplate."] = "這個�
 ----
 L["Debuffs"] = "減益狀態(Debuffs)"
 L["This widget will display debuffs that match your filtering on your target nameplate and others you recently moused over."] = "這個組件將在你的目標姓名板與你最近鼠標指向過的其他單位姓名板上顯示符合你過濾條件的減益狀態(Debuffs)。"
+L["This lets you select the layout style of the debuff widget. (Reloading UI is needed)"] = "This lets you select the layout style of the debuff widget."
+L["Wide"] = "Wide"
+L["Square"] = "Square"
+L["Target Only"] = "Target Only"
+L["This will toggle the debuff widget to only show for your current target."] = "這樣做就只顯示你對當前目標施加的減益效果。"
 L["Sizing"] = "大小"
 L["Filtering"] = "過濾"
 L["Mode"] = "模式"

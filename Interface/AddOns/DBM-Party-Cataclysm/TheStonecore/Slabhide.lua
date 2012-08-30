@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(111, "DBM-Party-Cataclysm", 7, 67)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7663 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7780 $"):sub(12, -3))
 mod:SetCreatureID(43214)
 mod:SetModelID(36476)
 mod:SetZone()
@@ -21,7 +21,7 @@ local warnAirphase			= mod:NewAnnounce("WarnAirphase", 2, "Interface\\AddOns\\DB
 local warnFissure			= mod:NewSpellAnnounce(80803, 3)
 local warnCrystalStorm		= mod:NewSpellAnnounce(92265, 4)
 
-local specWarnEruption 		= mod:NewSpecialWarningMove(92658)
+local specWarnEruption 		= mod:NewSpecialWarningMove(80801)
 local specWarnCrystalStorm 	= mod:NewSpecialWarning("specWarnCrystalStorm")
 
 local timerFissureCD		= mod:NewCDTimer(6.2, 80803)
@@ -44,13 +44,12 @@ function mod:airphase()
 end
 
 function mod:OnCombatStart(delay)
-	spamEruption = 0
 --	timerFissureCD:Start(-delay)
 	timerAirphase:Start(12.5-delay)
 	self:ScheduleMethod(12.5-delay, "airphase")
 end
 
-function mod:SPELL_DAMAGE(sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, spellId)
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 	if (spellId == 80800 or spellId == 80801 or spellId == 92657 or spellId == 92658) and destGUID == UnitGUID("player") and self:AntiSpam() then
 		specWarnEruption:Show()
 	end

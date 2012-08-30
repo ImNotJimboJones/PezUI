@@ -83,7 +83,7 @@ do
 	local function UpdateRoster()
 		local index, size
 		if UnitInRaid("player") then
-			size = GetNumRaidMembers() - 1
+			size = TidyPlatesUtility.GetNumRaidMembers() - 1
 			for index = 1, size do
 				local raidid = "raid"..tostring(index)
 				local isAssigned = GetPartyAssignment("MAINTANK", raidid) or ("TANK" == UnitGroupRolesAssigned(raidid))
@@ -250,6 +250,7 @@ local updateCap = 1
 local lastUpdate = 0
 
 local function WatcherFrameHandler(frame, event)
+
 	if event == "UNIT_THREAT_LIST_UPDATE" and (lastUpdate + updateCap) > GetTime() then return end
 	
 	local widget, unitid, guid
@@ -264,11 +265,13 @@ local function WatcherFrameHandler(frame, event)
 	if guid then TargetList[guid] = "focus" end
 	
 	-- [[ This code enables full raid target watching
-	local raidsize = GetNumRaidMembers() - 1
-	for index = 1, raidsize do
-		unitid = "raid"..index.."target"
-		guid = UnitGUID(unitid)
-		if guid then TargetList[guid] = unitid end
+	if UnitInRaid("player") then
+		local raidsize = TidyPlatesUtility.GetNumRaidMembers() - 1
+		for index = 1, raidsize do
+			unitid = "raid"..index.."target"
+			guid = UnitGUID(unitid)
+			if guid then TargetList[guid] = unitid end
+		end
 	end
 	--]]
 	

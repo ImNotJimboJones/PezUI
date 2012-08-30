@@ -360,6 +360,11 @@ L["This widget will display combo points on your target nameplate."] = "This wid
 ----
 L["Debuffs"] = "Debuffs"
 L["This widget will display debuffs that match your filtering on your target nameplate and others you recently moused over."] = "This widget will display debuffs that match your filtering on your target nameplate and others you recently moused over."
+L["This lets you select the layout style of the debuff widget. (Reloading UI is needed)"] = "This lets you select the layout style of the debuff widget."
+L["Wide"] = "Wide"
+L["Square"] = "Square"
+L["Target Only"] = "Target Only"
+L["This will toggle the debuff widget to only show for your current target."] = "This will toggle the debuff widget to only show for your current target."
 L["Sizing"] = "Sizing"
 L["Filtering"] = "Filtering"
 L["Mode"] = "Mode"

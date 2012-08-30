@@ -6,7 +6,6 @@
 TidyPlates = {}
 local _
 local numChildren = -1
-local ScreenHeight
 local activetheme = {}
 --local pollQueue = {}
 local massQueue, targetQueue, functionQueue = {}, {}, {}		-- Queue Lists
@@ -14,7 +13,7 @@ local ForEachPlate												-- Allocated for Function (Defined later in file)
 local EMPTY_TEXTURE = "Interface\\Addons\\TidyPlates\\Media\\Empty"
 local select, pairs, tostring  = select, pairs, tostring 			-- Local function copies
 local CreateTidyPlatesStatusbar = CreateTidyPlatesStatusbar			-- Local function copy
-local InCombat, HasTarget = false, false
+local InCombat, HasTarget, EnableFadeIn = false, false, true
 local Plates, PlatesVisible, PlatesFading, GUID = {}, {}, {}, {}	-- Plate Lists
 local nameplate, extended, bars, regions, visual					-- Temp References
 local unit, unitcache, style, stylename, unitchanged				-- Temp References
@@ -55,7 +54,6 @@ local function SetObjectJustify(object, horz, vert) object:SetJustifyH(horz); ob
 local function SetObjectShadow(object, shadow) if shadow then object:SetShadowColor(0,0,0, tonumber(shadow) or 1); object:SetShadowOffset(.5, -.5) else object:SetShadowColor(0,0,0,0) end  end
 local function SetObjectAnchor(object, anchor, anchorTo, x, y) object:ClearAllPoints();object:SetPoint(anchor, anchorTo, anchor, x, y) end
 local function SetObjectTexture(object, texture) object:SetTexture(texture) end -- object:SetTexCoord(0,1,0,1)  end
-local function SetObjectCrop(object, coords) object:SetTexCoord(left,right,top,bottom)  end
 local function SetObjectBartexture(obj, tex, ori, crop) obj:SetStatusBarTexture(tex); obj:SetOrientation(ori); end
 -- SetFontGroupObject
 local function SetFontGroupObject(object, objectstyle) 
@@ -76,13 +74,8 @@ end
 local function SetTextureGroupObject(object, objectstyle)
 	if objectstyle then
 		SetObjectTexture(object, objectstyle.texture or EMPTY_TEXTURE)
+		object:SetTexCoord(objectstyle.left or 0, objectstyle.right or 1, objectstyle.top or 0, objectstyle.bottom or 1)
 	end
-end
--- SetCropGroupObject
-local function SetCropGroupObject(object, objectstyle)
-	if objectstyle and objectstyle.coords then
-		SetObjectCrop(object, objectstyle.coords)
-	else object:SetTexCoord(0,1,0,1) end
 end
 -- SetBarGroupObject
 local backdropTable = {}
@@ -94,6 +87,7 @@ local function SetBarGroupObject(object, objectstyle, anchorTo)
 			backdropTable.bgFile = objectstyle.backdrop
 			object:SetBackdrop(backdropTable)
 		end
+		object:SetTexCoord(objectstyle.left or 0, objectstyle.right or 1, objectstyle.top or 0, objectstyle.bottom or 1)
 	end
 end
 local function MatchTextWidth()
@@ -118,8 +112,7 @@ do
 						"name",  "spelltext", "customtext", "level",
 						"customart", "spellicon", "raidicon", "skullicon", "eliteicon", "target"}		
 	local bargroup = {"castbar", "healthbar"}
-	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon", "skullicon", "highlight", "target" }
-	--local cropgroup = { "healthborder", "castborder", "castnostop", "spellicon", "threatborder", "target", "eliteicon", "skullicon", "customart", }
+	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon", "skullicon", "highlight", "target", "customart" }
 	-- UpdateStyle: 
 	function UpdateStyle()
 		-- Frame
@@ -134,8 +127,6 @@ do
 		for index = 1, #bargroup do objectname = bargroup[index]; SetBarGroupObject(bars[objectname], style[objectname], extended) end
 		-- Texture
 		for index = 1, #texturegroup do objectname = texturegroup[index]; SetTextureGroupObject(visual[objectname], style[objectname]) end
-		-- Crop Group
-		--for index = 1, #cropgroup do objectname = cropgroup[index]; SetCropGroupObject(visual[objectname], style[objectname]) end
 		-- Font Group
 		for index = 1, #fontgroup do objectname = fontgroup[index];SetFontGroupObject(visual[objectname], style[objectname]) end
 		-- Hide Stuff
@@ -464,7 +455,7 @@ do
 		extended.stylename = ""	
 		
 		-- For Fading In
-		PlatesFading[plate] = true
+		PlatesFading[plate] = EnableFadeIn
 		extended.requestedAlpha = 0
 		extended.visibleAlpha = 0
 		extended:SetAlpha(0)
@@ -814,11 +805,13 @@ do
 
 		-- Set Frame Levels and Parent
 		GetNameplateRegions(plate, regions, bars.cast)
-			
+		
 		-- This block makes the Blizz nameplate invisible
 		regions.threatglow:SetTexCoord( 0, 0, 0, 0 )
 		regions.healthborder:SetTexCoord( 0, 0, 0, 0 )
+		regions.healthborder:SetTexture(EMPTY_TEXTURE)
 		regions.castborder:SetTexCoord( 0, 0, 0, 0 )
+		regions.castborder:SetTexture(EMPTY_TEXTURE)
 		regions.castnostop:SetTexCoord( 0, 0, 0, 0 )
 		regions.skullicon:SetTexCoord( 0, 0, 0, 0 )
 		regions.eliteicon:SetTexCoord( 0, 0, 0, 0 )
@@ -897,14 +890,27 @@ do
 	
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
-		local threatRegion, borderRegion = frame:GetRegions()
-		return borderRegion and borderRegion:GetObjectType() == "Texture" and borderRegion:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
+		local threat, border, highlight, name = frame:GetRegions()
+		--return borderRegion and borderRegion:GetObjectType() == "Texture" and borderRegion:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
+		
+		--[[
+		local frameName, splitName
+		frameName = frame:GetName()
+		if frameName then splitName = strsub(frameName, 1, 9) end
+		print(GetTime(), frame, frameName, splitName)
+		--]]
+		
+		return border and name and border:GetObjectType() == "Texture" and name:GetObjectType() == "FontString"
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates
 	local function OnWorldFrameChange(...)
 		for index = 1, select("#", ...) do
 			plate = select(index, ...)
+			
+			
+			IsFrameNameplate(plate)
+			
 			if not Plates[plate] and IsFrameNameplate(plate) then
 				ApplyPlateExtension(plate)
 			end
@@ -1026,6 +1032,7 @@ do
 			numChildren = curChildren
 			OnWorldFrameChange(WorldGetChildren(WorldFrame)) 
 		end	
+
 	end
 end
 --------------------------------------------------------------------------------------------------------------
@@ -1036,12 +1043,13 @@ do
 	local function EventHandler(self, event, ...)
 		events[event](event, ...)
 	end
+	--local PlateHandler = CreateFrame("Frame")
 	local PlateHandler = CreateFrame("Frame", nil, WorldFrame)
 	PlateHandler:SetFrameStrata("TOOLTIP") -- When parented to WorldFrame, causes OnUpdate handler to run close to last
 	PlateHandler:SetScript("OnEvent", EventHandler)
 	
 	-- Events
-	function events:PLAYER_ENTERING_WORLD() PlateHandler:SetScript("OnUpdate", OnUpdate); ScreenHeight = GetScreenHeight() end
+	function events:PLAYER_ENTERING_WORLD() PlateHandler:SetScript("OnUpdate", OnUpdate); end
 	function events:PLAYER_REGEN_ENABLED() InCombat = false; SetMassQueue(OnUpdateNameplate) end
 	function events:PLAYER_REGEN_DISABLED() InCombat = true; SetMassQueue(OnUpdateNameplate) end
 	
@@ -1072,6 +1080,7 @@ do
 	
 	-- Registration of Blizzard Events
 	for eventname in pairs(events) do PlateHandler:RegisterEvent(eventname) end	
+	TidyPlates.PlateHandler = PlateHandler
 end
 
 --------------------------------------------------------------------------------------------------------------
@@ -1083,6 +1092,8 @@ function TidyPlates:Update() SetMassQueue(OnUpdateNameplate) end
 function TidyPlates:RequestWidgetUpdate() SetMassQueue(OnRequestWidgetUpdate) end
 function TidyPlates:RequestDelegateUpdate() SetMassQueue(OnRequestDelegateUpdate) end
 function TidyPlates:ActivateTheme(theme) if theme and type(theme) == 'table' then TidyPlates.ActiveThemeTable, activetheme = theme, theme; SetMassQueue(OnResetNameplate) end end
+function TidyPlates:EnableFadeIn() EnableFadeIn = true; end
+function TidyPlates:DisableFadeIn() EnableFadeIn = nil; end
 TidyPlates.StartCastAnimationOnNameplate = StartCastAnimation
 TidyPlates.StopCastAnimationOnNameplate = StopCastAnimation
 TidyPlates.NameplatesByGUID, TidyPlates.NameplatesAll, TidyPlates.NameplatesByVisible = GUID, Plates, PlatesVisible

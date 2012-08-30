@@ -67,8 +67,8 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		frame.Margins = {Left = 4, Right = 24, Top = 8, Bottom = 8, }
 
 		-- Frame Size
-		frame:SetWidth(150)
-		frame:SetHeight(100)
+		frame:SetWidth(165)
+		frame:SetHeight(125)
 		-- Border
 		frame.BorderFrame:SetPoint("TOPLEFT", 0, 5)
 		frame.BorderFrame:SetPoint("BOTTOMRIGHT", 3, -5)
@@ -437,7 +437,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 
 	
 	-- Paste
-	local PasteThemeDataButton = CreateFrame("Button", objectName.."PasteThemeDataButton", panel, "UIPanelButtonTemplate2")
+	local PasteThemeDataButton = CreateFrame("Button", objectName.."PasteThemeDataButton", panel, "TidyPlatesPanelButtonTemplate")
 	PasteThemeDataButton.tooltipText = "Pastes your settings from the clipboard.  'Shift'-clicking uses the panel-specific clipboard"
 	PasteThemeDataButton:SetPoint("TOPRIGHT", -40, -22)
 	PasteThemeDataButton:SetWidth(60)
@@ -447,7 +447,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	PasteThemeDataButton:SetScript("OnClick", function() PasteSettings(panel); end)
 	
 	-- Copy
-	local CopyThemeDataButton = CreateFrame("Button", objectName.."CopyThemeDataButton", panel, "UIPanelButtonTemplate2")
+	local CopyThemeDataButton = CreateFrame("Button", objectName.."CopyThemeDataButton", panel, "TidyPlatesPanelButtonTemplate")
 	CopyThemeDataButton.tooltipText = "Copies your settings to the clipboard.  'Shift'-clicking uses a panel-specific clipboard"
 	---- This feature works between matching panel types (ie. Hub/Damage to Hub/Damage)
 	CopyThemeDataButton:SetPoint("TOPRIGHT", PasteThemeDataButton, "TOPLEFT", -4, 0)
@@ -458,7 +458,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	CopyThemeDataButton:SetScript("OnClick", function() CopySettings(panel); end)
 	
 	-- Reset
-	local ReloadThemeDataButton = CreateFrame("Button", objectName.."ReloadThemeDataButton", panel, "UIPanelButtonTemplate2")
+	local ReloadThemeDataButton = CreateFrame("Button", objectName.."ReloadThemeDataButton", panel, "TidyPlatesPanelButtonTemplate")
 	ReloadThemeDataButton.tooltipText = "Resets the configuration to Default.  Holding down 'Shift' will also clear saved unit data, and restart your UI."
 	ReloadThemeDataButton:SetPoint("TOPRIGHT", CopyThemeDataButton, "TOPLEFT", -4, 0)
 	ReloadThemeDataButton:SetWidth(60)
@@ -471,7 +471,7 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	
 
 	-- Bookmarks
-	local BookmarkButton = CreateFrame("Button", objectName.."BookmarkButton", panel, "UIPanelButtonTemplate2")
+	local BookmarkButton = CreateFrame("Button", objectName.."BookmarkButton", panel, "TidyPlatesPanelButtonTemplate")
 	BookmarkButton:SetPoint("TOPRIGHT", ReloadThemeDataButton, "TOPLEFT", -4, 0)
 	BookmarkButton:SetWidth(110)
 	BookmarkButton:SetScale(.85)
@@ -538,10 +538,11 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 		panel:SetHeight(height - 40)
 		panel:SetWidth(width - 90)
 		panel:SetPoint("CENTER")
-		panel:SetScale(.9)
+		panel:SetScale(.95)
 		
 		panel:SetBackdrop({ bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
 											edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
+											--edgeFile = "Interface/DialogFrame/UI-DialogBox-Gold-Border", 
 											--tile = true, tileSize = 16,
 											edgeSize = 16, 
 											insets = { left = 4, right = 4, top = 4, bottom = 4 }

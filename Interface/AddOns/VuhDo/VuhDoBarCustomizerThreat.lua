@@ -1,9 +1,12 @@
+local _;
 
 local sAllButtons;
 local sButton;
+
+
+
+--
 local tTexture;
-
-
 function VUHDO_threatIndicatorsBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	sAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (sAllButtons ~= nil) then

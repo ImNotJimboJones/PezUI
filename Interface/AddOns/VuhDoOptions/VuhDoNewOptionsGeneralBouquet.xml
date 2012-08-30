@@ -1033,11 +1033,7 @@
 			</OnLoad>
 			<OnShow>
 				VUHDO_bouquetsUpdateDefaultColors();
-				if (VUHDO_MENU_RETURN_TARGET ~= nil or VUHDO_MENU_RETURN_TARGET_MAIN ~= nil) then
-					VUHDO_GLOBAL[self:GetName() .. "BackButton"]:Show();
-				else
-					VUHDO_GLOBAL[self:GetName() .. "BackButton"]:Hide();
-				end
+				VUHDO_GLOBAL[self:GetName() .. "BackButton"]:SetShown(VUHDO_MENU_RETURN_TARGET ~= nil or VUHDO_MENU_RETURN_TARGET_MAIN ~= nil);
 			</OnShow>
 			<OnHide>
 				VUHDO_trimAllBouquetItems();

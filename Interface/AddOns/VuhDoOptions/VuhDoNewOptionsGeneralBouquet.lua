@@ -1,3 +1,4 @@
+local _;
 VUHDO_BOUQET_COMBO_MODEL = { };
 VUHDO_BOUQET_DETAILS_COMBO_MODEL = { };
 VUHDO_BOUQUET_ICON_COMBO_MODEL = { };
@@ -418,7 +419,7 @@ function VUHDO_rebuildBouquetContextEditors(anIndex)
 				tSlider = VUHDO_GLOBAL[tSubPanel:GetName() .. "Slider"];
 				VUHDO_lnfSetModel(tSlider, tModel .. ".custom.##1");
 				tSpecialName = VUHDO_BOUQUETS["STORED"][tBouquetName][tIndex]["name"];
-				VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 3, "");
+				VUHDO_lnfSliderOnLoad(tSlider, VUHDO_BOUQUET_BUFFS_SPECIAL[tSpecialName]["displayName"], 0, 5, "");
 				tSubPanel:Show();
 			elseif (VUHDO_BOUQUET_BUFFS_SPECIAL[tBuffName]["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_SECONDS) then
 				tSubPanel = VUHDO_GLOBAL[tInnerPanel:GetName() .. "PercentFrame"];

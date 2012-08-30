@@ -1,16 +1,13 @@
 --
 local UnitBuff = UnitBuff;
 local UnitPower = UnitPower;
---local GetPrimaryTalentTree = GetPrimaryTalentTree;
---local GetTalentInfo = GetTalentInfo;
---local GetSpellBonusHealing = GetSpellBonusHealing;
 local UnitGetIncomingHeals = UnitGetIncomingHeals;
 local pairs = pairs;
 local ipairs = ipairs;
 local floor = floor;
 local twipe = table.wipe;
 local select = select;
-local _ = _;
+local _;
 
 local sIsIncoming;
 local sIsCooldown;
@@ -33,15 +30,15 @@ end
 
 
 
-local VUHDO_SPELL_ID_COH = 34861;
-local VUHDO_SPELL_ID_POH = 596;
-local VUHDO_SPELL_ID_CH = 1064;
-local VUHDO_SPELL_ID_WG = 48438;
-local VUHDO_SPELL_ID_TQ = 740;
-local VUHDO_SPELL_ID_EF = 81275;
-local VUHDO_SPELL_ID_SM = 18562;
-local VUHDO_SPELL_ID_LOD = 85222;
-local VUHDO_SPELL_ID_HR = 82327;
+local VUHDO_SPELL_ID_COH = 34861; -- MOPok
+local VUHDO_SPELL_ID_POH = 596; -- MOPok
+local VUHDO_SPELL_ID_CH = 1064; -- MOPok
+local VUHDO_SPELL_ID_WG = 48438; -- MOPok
+local VUHDO_SPELL_ID_TQ = 740; -- MOPok
+--local VUHDO_SPELL_ID_EF = 81275;
+--local VUHDO_SPELL_ID_SM = 18562; -- MOPok
+local VUHDO_SPELL_ID_LOD = 85222; -- MOPok
+local VUHDO_SPELL_ID_HR = 82327; -- MOPok
 
 VUHDO_AOE_SPELLS = {
 
@@ -49,14 +46,14 @@ VUHDO_AOE_SPELLS = {
 	["coh"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_COH,
-		["base"] = (2309 + 2551) * 0.5,
+		["base"] = (4599 + 5082) * 0.5, -- MOPok
 		["divisor"] = 9345,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_COH)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_COH)),
 		["avg"] = 0,
 		["max_targets"] = 5,
 		["degress"] = 1,
-		["rangePow"] = 30 * 30,
+		["rangePow"] = 30 * 30, -- MOPok
 		["isRadial"] = true,
 		["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
@@ -70,7 +67,7 @@ VUHDO_AOE_SPELLS = {
 	["poh"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_POH,
-		["base"] = (3087 + 3261) * 0.5,
+		["base"] = (6766 + 7148) * 0.5, -- MOP
 		["divisor"] = 9345,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_POH)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_POH)),
@@ -91,14 +88,15 @@ VUHDO_AOE_SPELLS = {
 	["ch"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_CH,
-		["base"] = (3282 + 3748) * 0.5,
+		["base"] = (5135  + 5865) * 0.5, -- MOP
 		["divisor"] = 10035,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_CH)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_CH)),
 		["avg"] = 0,
 		["max_targets"] = 4,
-		["degress"] = 0.8,
+		["degress"] = 0.66,
 		["rangePow"] = 40 * 40,
+		["jumpRangePow"] = 11 * 11,
 		["isRadial"] = false,
 		["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
@@ -112,8 +110,8 @@ VUHDO_AOE_SPELLS = {
 	["wg"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_WG,
-		["base"] = 3717,
-		["divisor"] = 9345,
+		["base"] = 6930,
+		["divisor"] = 9345, -- MOP
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_WG)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_WG)),
 		["avg"] = 0,
@@ -133,7 +131,7 @@ VUHDO_AOE_SPELLS = {
 	["tq"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_TQ,
-		["base"] = 3882,
+		["base"] = 9037, -- MOP
 		["divisor"] = 9345,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_TQ)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_TQ)),
@@ -151,7 +149,7 @@ VUHDO_AOE_SPELLS = {
 	},
 
 	-- Efflorescence
-	["ef"] = {
+	--[[["ef"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_EF,
 		["base"] = 5229,
@@ -170,18 +168,18 @@ VUHDO_AOE_SPELLS = {
 		["checkCd"] = true,
 		["evaluator"] = VUHDO_isUnitSwiftmendable,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_SM)) or 0,
-	},
+	},]] -- MOP
 
 	-- Light of Dawn
 	["lod"] = {
 		["present"] = false,
 		["id"] = VUHDO_SPELL_ID_LOD,
-		["base"] = (606 + 674) * 3 * 0.5,
+		["base"] = (2027 + 2257) * 3 * 0.5, -- MOP
 		["divisor"] = 4859,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_LOD)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_LOD)),
 		["avg"] = 0,
-		["max_targets"] = 5,
+		["max_targets"] = 6, -- MOP
 		["degress"] = 1,
 		["rangePow"] = 30 * 30,
 		["isRadial"] = true,
@@ -206,13 +204,13 @@ VUHDO_AOE_SPELLS = {
 		["degress"] = 1,
 		["rangePow"] = 10 * 10,
 		["isRadial"] = true,
-		["isSourcePlayer"] = true,
+		["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
 		["thresh"] = 10000,
 		["cone"] = 360,
 		["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_HR)) or 0,
-	},
+	}, -- MOP
 };
 local VUHDO_AOE_SPELLS = VUHDO_AOE_SPELLS;
 
@@ -223,12 +221,10 @@ local tAltPower;
 local function VUHDO_getPlayerHealingMod()
 	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
 		return 1 + (0.15 * (UnitBuff("player", VUHDO_SPELL_ID.CHAKRA_SANCTUARY) and 1 or 0));
-	elseif ("DRUID" == VUHDO_PLAYER_CLASS) then
-		return 1 + (0.15 * (UnitBuff("player", VUHDO_SPELL_ID.TREE_OF_LIFE) and 1 or 0));
 	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
 		tAltPower = UnitPower("player", 9);
-		if ((tAltPower or 4) ~= 4) then
-			return 1 / (4 - tAltPower);
+		if ((tAltPower or 6) ~= 6) then
+			return 1 / (6 - tAltPower);
 		end
 	end
 
@@ -239,23 +235,6 @@ end
 
 --
 local function VUHDO_getTalentModifiers()
-	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
-		local tSpiriutalHealing = GetPrimaryTalentTree() == 2 and 1 or 0; -- Holy
-		local _, _, _, _, tTwinDisciplines = GetTalentInfo(1, 2);
-		return 1 + tSpiriutalHealing * 0.15 + (tTwinDisciplines * 0.02) * (1 + tSpiriutalHealing * 0.15);
-	elseif ("SHAMAN" == VUHDO_PLAYER_CLASS) then
-		local tPurification = GetPrimaryTalentTree() == 3 and 1 or 0;
-		local _, _, _, _, tSparcOfLife = GetTalentInfo(3, 3);
-		return 1 + tPurification * 0.25 + (tSparcOfLife * 0.02) * (1 + tPurification * 0.25);
-	elseif ("DRUID" == VUHDO_PLAYER_CLASS) then
-		local tGiftOfTheNature = GetPrimaryTalentTree == 3 and 1 or 0;
-		return 1 + tGiftOfTheNature * 0.25;
-	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
-		local tWalkInTheLight = GetPrimaryTalentTree() == 1 and 1 or 0;
-		local _, _, _, _, tDivinity = GetTalentInfo(2, 1);
-		return 1 + tWalkInTheLight * 0.1  + (tDivinity * 0.02) * (1 + tWalkInTheLight * 0.1);
-	end
-
 	return 1;
 end
 
@@ -264,13 +243,6 @@ end
 --
 local tPoints;
 local function VUHDO_getSpellTalentModifiers(anAoeInfo)
-	if ("DRUID" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_SPELL_ID_EF == anAoeInfo["id"]) then
-			_, _, _, _, tPoints = GetTalentInfo(3, 15);
-			return anAoeInfo["avg"] * 0.04 * tPoints;
-		end
-	end
-
 	return 1;
 end
 
@@ -307,6 +279,12 @@ local function VUHDO_isAoeSpellEnabled(aSpell)
 end
 
 
+-- MOP:
+-- Priester: Circle of Healing Ein Ziel mehr (42396)
+-- Priester: ???Heilige Nova, neuer Zauber Heilung max. 5 um 4950 (42401)
+-- Schamane: Kettenbildung Sprungreichweite +100% (41552)
+-- Paladin: Light of Dawn, -2 Ziele 25% mehr Heilung (41109)
+-- Druide: Wild Growth, + 1 Ziel (45602)
 
 --
 function VUHDO_aoeUpdateTalents()
@@ -318,7 +296,7 @@ function VUHDO_aoeUpdateTalents()
 	end
 
 	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_isGlyphed(55675)) then -- Glyph of CoH
+		if (VUHDO_isGlyphed(42396)) then -- Glyph of CoH -- MOPok
 			VUHDO_AOE_SPELLS["coh"]["max_targets"] = 6;
 		else
 			VUHDO_AOE_SPELLS["coh"]["max_targets"] = 5;
@@ -326,24 +304,24 @@ function VUHDO_aoeUpdateTalents()
 
 	elseif ("SHAMAN" == VUHDO_PLAYER_CLASS) then
 		tSpell = VUHDO_AOE_SPELLS["ch"];
-		if (VUHDO_isGlyphed(55437)) then -- Glyph of CH
-			tSpell["degress"] = 0.85;
-			tSpell["base"] = (3282 + 3748) * 0.5 * 0.92;
+		if (VUHDO_isGlyphed(41552)) then -- Kettenbildung -- MOPok
+			tSpell["jumpRangePow"] = 22 * 22;
 		else
-			tSpell["degress"] = 0.7;
-			tSpell["base"] = (3282 + 3748) * 0.5;
+			tSpell["jumpRangePow"] = 11 * 11;
 		end
 	elseif ("DRUID" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_isGlyphed(62970)) then -- Glyph of WG
+		if (VUHDO_isGlyphed(45602)) then -- Glyph of WG -- MOPok
 			VUHDO_AOE_SPELLS["wg"]["max_targets"] = 6;
 		else
 			VUHDO_AOE_SPELLS["wg"]["max_targets"] = 5;
 		end
 	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_isGlyphed(54940)) then -- Glyph of LoD
-			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 6;
+		if (VUHDO_isGlyphed(41109)) then -- Glyph of LoD -- MOPok
+			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 4;
+			VUHDO_AOE_SPELLS["lod"]["base"] = (4599 + 5082) * 0.75; -- MOPok
 		else
-			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 5;
+			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 6;
+			VUHDO_AOE_SPELLS["lod"]["base"] = (4599 + 5082) * 0.5; -- MOPok
 		end
 	end
 
@@ -405,6 +383,7 @@ local tIsSourcePlayer;
 local tIsDestRaid;
 local tIsRadial;
 local tRangePow;
+local tJumpRangePow;
 local tMaxTargets;
 local tCdSpell;
 local tCone;
@@ -430,7 +409,7 @@ local function VUHDO_getBestUnitForAoeGroup(anAoeInfo, aPlayerModi, aGroup)
 			VUHDO_getCustomDestCluster(tInfo["unit"], tCluster,
 				tIsSourcePlayer, tIsRadial, tRangePow,
 				tMaxTargets, 101, tIsDestRaid, -- 101% = no health limit
-				tCdSpell,	tCone
+				tCdSpell,	tCone, tJumpRangePow
 			);
 
 			if (#tCluster > 1) then
@@ -466,6 +445,7 @@ local function VUHDO_getBestUnitsForAoe(anAoeInfo, aPlayerModi)
 	tIsDestRaid = anAoeInfo["isDestRaid"];
 	tIsRadial = anAoeInfo["isRadial"];
 	tRangePow = anAoeInfo["rangePow"];
+	tJumpRangePow = anAoeInfo["jumpRangePow"];
 	tMaxTargets = anAoeInfo["max_targets"];
 	tCdSpell = sIsCooldown and anAoeInfo["checkCd"] and anAoeInfo["name"] or nil;
 	tCone = anAoeInfo["cone"];

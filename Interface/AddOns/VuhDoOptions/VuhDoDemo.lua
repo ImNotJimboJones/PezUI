@@ -14,6 +14,7 @@ local VUHDO_CLASS_ID_POWER_TYPES = {
 	[VUHDO_ID_DRUIDS] = VUHDO_UNIT_POWER_MANA,
 	[VUHDO_ID_PRIESTS] = VUHDO_UNIT_POWER_MANA,
 	[VUHDO_ID_DEATH_KNIGHT] = VUHDO_UNIT_POWER_RUNES,
+	[VUHDO_ID_MONKS] = VUHDO_UNIT_POWER_MANA,
 }
 
 
@@ -29,6 +30,7 @@ local sClassNamesForId = {
 	[VUHDO_ID_DRUIDS] = "Druid",
 	[VUHDO_ID_PRIESTS] = "Priest",
 	[VUHDO_ID_DEATH_KNIGHT] = "Death Knight",
+	[VUHDO_ID_MONKS] = "Monk",
 }
 
 --
@@ -47,13 +49,14 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_WARRIORS] = 1,
 		[VUHDO_ID_ROGUES] = 1,
 		[VUHDO_ID_HUNTERS] = 0,
-		[VUHDO_ID_PALADINS] = 1,
+		[VUHDO_ID_PALADINS] = 0,
 		[VUHDO_ID_MAGES] = 1,
 		[VUHDO_ID_WARLOCKS] = 0,
 		[VUHDO_ID_SHAMANS] = 0,
 		[VUHDO_ID_DRUIDS] = 0,
 		[VUHDO_ID_PRIESTS] = 1,
 		[VUHDO_ID_DEATH_KNIGHT] = 0,
+		[VUHDO_ID_MONKS] = 1,
 
 		[VUHDO_ID_PETS] = 2,
 		[VUHDO_ID_MAINTANKS] = 1,
@@ -80,7 +83,7 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_GROUP_8] = 0,
 		[VUHDO_ID_GROUP_OWN] = 5,
 
-		[VUHDO_ID_WARRIORS] = 2,
+		[VUHDO_ID_WARRIORS] = 1,
 		[VUHDO_ID_ROGUES] = 1,
 		[VUHDO_ID_HUNTERS] = 0,
 		[VUHDO_ID_PALADINS] = 1,
@@ -90,6 +93,7 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_DRUIDS] = 1,
 		[VUHDO_ID_PRIESTS] = 1,
 		[VUHDO_ID_DEATH_KNIGHT] = 1,
+		[VUHDO_ID_MONKS] = 1,
 
 		[VUHDO_ID_PETS] = 4,
 		[VUHDO_ID_MAINTANKS] = 2,
@@ -121,10 +125,11 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_PALADINS] = 3,
 		[VUHDO_ID_MAGES] = 3,
 		[VUHDO_ID_WARLOCKS] = 2,
-		[VUHDO_ID_SHAMANS] = 3,
+		[VUHDO_ID_SHAMANS] = 2,
 		[VUHDO_ID_DRUIDS] = 2,
-		[VUHDO_ID_PRIESTS] = 3,
+		[VUHDO_ID_PRIESTS] = 2,
 		[VUHDO_ID_DEATH_KNIGHT] = 2,
+		[VUHDO_ID_MONKS] = 2,
 
 		[VUHDO_ID_PETS] = 7,
 		[VUHDO_ID_MAINTANKS] = 3,
@@ -151,15 +156,16 @@ local VUHDO_DEMO_SETUP = {
 		[VUHDO_ID_GROUP_OWN] = 5,
 
 		[VUHDO_ID_WARRIORS] = 4,
-		[VUHDO_ID_ROGUES] = 4,
+		[VUHDO_ID_ROGUES] = 3,
 		[VUHDO_ID_HUNTERS] = 4,
 		[VUHDO_ID_PALADINS] = 4,
 		[VUHDO_ID_MAGES] = 4,
 		[VUHDO_ID_WARLOCKS] = 4,
-		[VUHDO_ID_SHAMANS] = 4,
+		[VUHDO_ID_SHAMANS] = 3,
 		[VUHDO_ID_DRUIDS] = 4,
 		[VUHDO_ID_PRIESTS] = 4,
-		[VUHDO_ID_DEATH_KNIGHT] = 4,
+		[VUHDO_ID_DEATH_KNIGHT] = 3,
+		[VUHDO_ID_MONKS] = 3,
 
 		[VUHDO_ID_PETS] = 6,
 		[VUHDO_ID_MAINTANKS] = 5,
@@ -311,7 +317,7 @@ local function VUHDO_createTestUser()
 		tPetDemoIdx = tPetDemoIdx + 1;
 	else
 		tUnit = "raid" .. tRaidDemoIdx;
-		tClassId = VUHDO_getNextFreeModelInRange(VUHDO_ID_WARRIORS, VUHDO_ID_DEATH_KNIGHT);
+		tClassId = VUHDO_getNextFreeModelInRange(VUHDO_ID_WARRIORS, VUHDO_ID_MONKS);
 		tGroup = VUHDO_getNextFreeModelInRange(VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_8);
 		tNumber = tRaidDemoIdx;
 		tRaidDemoIdx = tRaidDemoIdx + 1;
@@ -388,8 +394,8 @@ function VUHDO_reloadRaidDemoUsers()
 	VUHDO_TEST_USERS_LEFT = VUHDO_deepCopyTable(VUHDO_DEMO_SETUP[VUHDO_CONFIG_TEST_USERS]);
 	tPetDemoIdx = 1;
 	tRaidDemoIdx = 1;
-	while (VUHDO_createTestUser()) do
-	end
+
+	while (VUHDO_createTestUser()) do	end
 
 	twipe(VUHDO_MAINTANK_NAMES);
 	for tCnt = 1, VUHDO_TEST_USERS_LEFT[VUHDO_ID_MAINTANKS] do
@@ -398,7 +404,7 @@ function VUHDO_reloadRaidDemoUsers()
 
 	twipe(VUHDO_PLAYER_TARGETS);
 	for tCnt = 1, VUHDO_TEST_USERS_LEFT[VUHDO_ID_PRIVATE_TANKS] do
-		VUHDO_PLAYER_TARGETS[VUHDO_RAID["raid" .. (VUHDO_CONFIG_TEST_USERS - tCnt)]["name"]] = true;
+		VUHDO_PLAYER_TARGETS[VUHDO_RAID["raid" .. (VUHDO_CONFIG_TEST_USERS - tCnt)]["name"] ] = true;
 	end
 end
 

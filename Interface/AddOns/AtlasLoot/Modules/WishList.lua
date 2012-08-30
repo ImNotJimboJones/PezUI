@@ -1,4 +1,4 @@
--- $Id: WishList.lua 3705 2012-03-02 22:25:53Z lag123 $
+-- $Id: WishList.lua 3729 2012-07-31 13:38:29Z lag123 $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -28,6 +28,7 @@ WishList.Info = Wishlists_Info
 do
 	--StaticPopup_Show ("ATLASLOOT_SEND_WISHLIST",AtlasLootWishList["Own"][tab2][tabname]["info"][1]);
 	StaticPopupDialogs["ATLASLOOT_SEND_WISHLIST"] = {
+		preferredIndex = 3,
 		text = AL["Send Wishlist (%s) to"],
 		button1 = AL["Send"],
 		button2 = CANCEL,
@@ -1508,7 +1509,7 @@ function WishList:CreateCompareFrameWishListSelect()
 	
 	-- Wishlist frame
 	-- ###########################################
-	Frame.WishlistButton = CreateFrame("Button","AtlasLootCompareFrame_WishlistButton",Frame,"UIPanelButtonTemplate2")
+	Frame.WishlistButton = CreateFrame("Button","AtlasLootCompareFrame_WishlistButton",Frame,"UIPanelButtonTemplate")
 	Frame.WishlistButton:SetText(AL["Wishlist"])
 	Frame.WishlistButton:SetWidth(160)
 	Frame.WishlistButton:SetHeight(22)

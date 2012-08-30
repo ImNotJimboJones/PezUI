@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("BoTrash", "DBM-BastionTwilight")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7599 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7780 $"):sub(12, -3))
 mod:SetModelID(37193)
 mod:SetZone()
 
@@ -46,9 +46,9 @@ end
 
 function mod:RuptureTarget(sGUID)
 	local targetname = nil
-	for i=1, GetNumRaidMembers() do
+	for i=1, DBM:GetGroupMembers() do
 		if UnitGUID("raid"..i.."target") == sGUID then
-			targetname = UnitName("raid"..i.."targettarget")
+			targetname = DBM:GetUnitFullName("raid"..i.."targettarget")
 			break
 		end
 	end
@@ -58,9 +58,9 @@ end
 
 function mod:FlameStrikeTarget(sGUID)
 	local targetname = nil
-	for i=1, GetNumRaidMembers() do
+	for i=1, DBM:GetGroupMembers() do
 		if UnitGUID("raid"..i.."target") == sGUID then
-			targetname = UnitName("raid"..i.."targettarget")
+			targetname = DBM:GetUnitFullName("raid"..i.."targettarget")
 			break
 		end
 	end
@@ -87,9 +87,7 @@ function mod:SPELL_AURA_APPLIED(args)
 end
 
 function mod:SPELL_AURA_REMOVED(args)
-	if args:IsSpellID(80652) then
-		timerFrostWhirl:Cancel()
-	elseif args:IsSpellID(87903) then--I will have to log this trash to verify this spell event.
+	if args:IsSpellID(87903) then--I will have to log this trash to verify this spell event.
 		timerVolcanicWrath:Cancel()
 	end
 end

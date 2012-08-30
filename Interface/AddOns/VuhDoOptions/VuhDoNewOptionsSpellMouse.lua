@@ -1,3 +1,4 @@
+local _;
 VUHDO_CURR_SPELL_MODIFIER = "";
 
 

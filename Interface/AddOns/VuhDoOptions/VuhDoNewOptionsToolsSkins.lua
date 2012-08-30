@@ -1,3 +1,4 @@
+local _;
 VUHDO_CURRENT_PROFILE = "";
 
 VUHDO_PROFILE_TABLE_MODEL = { };

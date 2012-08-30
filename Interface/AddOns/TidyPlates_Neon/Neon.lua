@@ -298,7 +298,8 @@ local function OnInitialize(plate)
 	TidyPlatesHubFunctions.OnInitializeWidgets(plate, WidgetConfig)
 end
 
-local function OnActivateTheme(themeTable)
+local function OnActivateTheme(themeTable, other)
+		--print("NeonDamage", themeTable, other)
 		if Theme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
 			ApplyDamageCustomization()
@@ -330,6 +331,7 @@ do
 	end
 
 	local function OnActivateTheme(themeTable)
+		--print("NeonTank", themeTable, other)
 		if TankTheme == themeTable then
 			LocalVars = TidyPlatesHubFunctions:UseTankVariables()
 			ApplyTankCustomization()
@@ -364,4 +366,7 @@ do
 	GladiatorTheme.ShowConfigPanel = ShowTidyPlatesHubGladiatorPanel
 end
 --]]
+
+--AddTidyPlatesHubStyle("Neon", DefaultStyle, StyleTextOnly, WidgetConfig)
+
 

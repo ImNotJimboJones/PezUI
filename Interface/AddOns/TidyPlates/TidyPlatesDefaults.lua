@@ -31,6 +31,10 @@ theme.skullicon
 theme.frame
 theme.target
 theme.threatcolor
+theme.left
+theme.right
+theme.top
+theme.bottom
 --]]
 
 theme.hitbox = {
@@ -54,6 +58,11 @@ theme.healthborder = {
 	y = -5,
 	anchor = "CENTER",
 	show = true,
+	
+	left = 0,
+	right = 1,
+	top = 0,
+	bottom = 1,
 }
 
 theme.eliteicon = {
@@ -137,11 +146,7 @@ theme.healthbar = {
 	y = 10,
 	anchor = "CENTER",
 	orientation = "HORIZONTAL",
-	
-	linkwidth = false,
-	edgeFile = EMPTY_TEXTURE,
-	edgeSize = 1,
-	edgeInset = { left = 0, right = 0, top = 0, bottom = 0, }	,		
+		
 }
 
 theme.castbar = {
@@ -155,9 +160,9 @@ theme.castbar = {
 	orientation = "HORIZONTAL",
 	
 	linkwidth = false,
-	edgeFile = EMPTY_TEXTURE,
-	edgeSize = 1,		-- Border thickness and corner size
-	edgeInset = { left = 0, right = 0, top = 0, bottom = 0, },	-- Controls how far into the frame the background will be drawn (use higher values the thicker the edges are)
+	
+
+
 }
 
 theme.spelltext = {
@@ -345,7 +350,7 @@ end
 
 NameOnlyTheme.SetCustomText = TextDelegate
 
-TidyPlatesThemeList["None"] = NameOnlyTheme
+TidyPlatesThemeList["No Theme"] = NameOnlyTheme
 
 --[[
 	

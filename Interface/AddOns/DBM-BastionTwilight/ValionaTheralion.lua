@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(157, "DBM-BastionTwilight", nil, 72)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7780 $"):sub(12, -3))
 mod:SetCreatureID(45992, 45993)
 mod:SetModelID(34812)
 mod:SetZone()
@@ -50,13 +50,13 @@ local yellTwilightBlast				= mod:NewYell(86369, nil, false)
 local specWarnDeepBreath			= mod:NewSpecialWarningSpell(86059, nil, nil, nil, true)
 local specWarnFabulousFlames		= mod:NewSpecialWarningMove(86505)
 local specWarnFabulousFlamesNear	= mod:NewSpecialWarningClose(86505)
-local yellFabFlames					= mod:NewYell(92907)
+local yellFabFlames					= mod:NewYell(86505)
 local specWarnTwilightMeteorite		= mod:NewSpecialWarningYou(88518)
 local yellTwilightMeteorite			= mod:NewYell(88518, nil, false)
 local specWarnEngulfingMagic		= mod:NewSpecialWarningYou(86622)
 local yellEngulfingMagic			= mod:NewYell(86622)
 
-local specWarnTwilightZone			= mod:NewSpecialWarningStack(92887, nil, 20)
+local specWarnTwilightZone			= mod:NewSpecialWarningStack(86214, nil, 20)
 
 --Valiona Ground Phase
 local timerBlackout					= mod:NewTargetTimer(15, 86788)
@@ -67,7 +67,7 @@ local timerNextDazzlingDestruction	= mod:NewNextTimer(132, 86408)
 local timerTwilightMeteorite		= mod:NewCastTimer(6, 86013)		
 local timerEngulfingMagic			= mod:NewBuffFadesTimer(20, 86622)
 local timerEngulfingMagicNext		= mod:NewCDTimer(35, 86622)--30-40 second variations.
-local timerNextFabFlames			= mod:NewNextTimer(15, 92909)
+local timerNextFabFlames			= mod:NewNextTimer(15, 86505)
 local timerNextDeepBreath			= mod:NewNextTimer(98, 86059)
 
 local timerTwilightShift			= mod:NewTargetTimer(100, 93051)
@@ -339,7 +339,7 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
-function mod:SPELL_DAMAGE(args)
+function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 	if (spellId == 86505 or spellId == 92907 or spellId == 92908 or spellId == 92909) and destGUID == UnitGUID("player") and GetTime() - lastFab > 3 then
 		specWarnFabulousFlames:Show()
 		lastFab = GetTime()

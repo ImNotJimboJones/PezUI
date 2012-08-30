@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(171, "DBM-BlackwingDescent", nil, 73)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7782 $"):sub(12, -3))
 mod:SetCreatureID(41442)
 mod:SetModelID(34547)
 mod:SetZone()
@@ -78,7 +78,7 @@ function mod:OnCombatStart(delay)
 		berserkTimer:Start(-delay)
 	end
 	if self.Options.InfoFrame then
-		DBM.InfoFrame:SetHeader(Soundlevel)
+		DBM.InfoFrame:SetHeader(SoundLevel)
 		DBM.InfoFrame:Show(5, "playerpower", 10, ALTERNATE_POWER_INDEX)
 	end
 end

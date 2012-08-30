@@ -2,7 +2,6 @@ local VUHDO_CUSTOM_DEBUFF_LIST = { };
 local VUHDO_UNIT_CUSTOM_DEBUFFS = { };
 local VUHDO_LAST_UNIT_DEBUFFS = { };
 local VUHDO_CHOSEN_DEBUFF_INFO = { };
-local VUHDO_DEBUFF_ABILITIES = { };
 local VUHDO_UNIT_DEBUFF_SCHOOLS = { };
 local VUHDO_PLAYER_ABILITIES = { };
 
@@ -25,15 +24,15 @@ local VUHDO_DEBUFF_TYPES = {
 
 
 VUHDO_DEBUFF_BLACKLIST = {
-	[GetSpellInfo(69127)] = true, -- Chill of the Throne (st„ndiger debuff)
-	[GetSpellInfo(57724)] = true, -- Sated
-	[GetSpellInfo(71328)] = true  -- Dungeon Cooldown
+	[GetSpellInfo(69127)] = true, -- MOP okay Chill of the Throne (ständiger debuff)
+	[GetSpellInfo(57724)] = true, -- MOP okay Sated
+	[GetSpellInfo(71328)] = true  -- MOP okay Dungeon Cooldown
 }
 
 
 
 local VUHDO_CUSTOM_BUFF_BLACKLIST = {
-	[GetSpellInfo(67847)] = true -- Expose Weakness ist ein Boss-Debuff und gleichzeitig ein Jäger-Buff
+	--[GetSpellInfo(67847)] = true -- MOP
 }
 
 
@@ -72,6 +71,7 @@ local sIsUseDebuffIcon;
 local sIsUseDebuffIconBossOnly;
 local sIsMiBuColorsInFight;
 local sStdDebuffSound;
+local sAllDebuffSettings;
 
 function VUHDO_debuffsInitBurst()
 	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
@@ -349,9 +349,7 @@ function VUHDO_determineDebuff(aUnit)
 				end
 			end
 
-			if ((not sIsRemoveableOnly
-					or (tAbility == "I" and "player" == aUnit)
-					or (tAbility or "I") ~= "I")
+			if ((not sIsRemoveableOnly or tAbility ~= nil)
 				and tChosen ~= 6
 				and not VUHDO_DEBUFF_BLACKLIST[tName]) then --VUHDO_DEBUFF_TYPE_CUSTOM
 
@@ -470,41 +468,24 @@ end
 function VUHDO_initDebuffs()
 	local tDebuffType;
 	local tDebuffName;
-	local tAbility;
+	local tAbilities, tAbility;
+	local tCnt;
 
-	twipe(VUHDO_DEBUFF_ABILITIES);
-	VUHDO_DEBUFF_ABILITIES = VUHDO_deepCopyTable(VUHDO_INIT_DEBUFF_ABILITIES);
 	local _, tClass = UnitClass("player");
+	twipe(VUHDO_PLAYER_ABILITIES);
 
-	for tDebuffType, tAbility in pairs(VUHDO_DEBUFF_ABILITIES[tClass] or { }) do
-		if (not VUHDO_isSpellKnown(tAbility) and tAbility ~= "*" and tAbility ~= "I") then
-			VUHDO_DEBUFF_ABILITIES[tClass][tDebuffType] = nil;
+	for tDebuffType, tAbilities in pairs(VUHDO_INIT_DEBUFF_ABILITIES[tClass] or {}) do
+		for tCnt = 1, #tAbilities do
+			tAbility = tAbilities[tCnt];
+			--VUHDO_Msg("check: " .. tAbility);
+			if (VUHDO_isSpellKnown(tAbility) or tAbility == "*") then
+				VUHDO_PLAYER_ABILITIES[tDebuffType] = VUHDO_SPEC_TO_DEBUFF_ABIL[tAbility] or tAbility;
+				--VUHDO_Msg("KEEP:" .. VUHDO_PLAYER_ABILITIES[tDebuffType]);
+				break;
+			end
 		end
 	end
-
-	if ("DRUID" == tClass) then -- Kein Nature's cure?
-		local _, _, _, _, tRank, _, _, _ = GetTalentInfo(3, 17, false, false, nil);
-		if ((tRank or 0) == 0) then
-			VUHDO_DEBUFF_ABILITIES[tClass][VUHDO_DEBUFF_TYPE_MAGIC] = nil;
-		end
-	elseif ("SHAMAN" == tClass) then -- Kein improved cleanse spirit?
-		local _, _, _, _, tRank, _, _, _ = GetTalentInfo(3, 12, false, false, nil);
-		if ((tRank or 0) == 0) then
-			VUHDO_DEBUFF_ABILITIES[tClass][VUHDO_DEBUFF_TYPE_MAGIC] = nil;
-		end
-	elseif ("PALADIN" == tClass) then -- Keine heilige Läuterung?
-		local tName, _, _, _, tRank, _, _, _ = GetTalentInfo(1, 14, false, false, nil);
-		if ((tRank or 0) == 0) then
-			VUHDO_DEBUFF_ABILITIES[tClass][VUHDO_DEBUFF_TYPE_MAGIC] = nil;
-		end
-	elseif ("PRIEST" == tClass) then -- Kein Body & Soul?
-		local _, _, _, _, tRank, _, _, _ = GetTalentInfo(2, 13, false, false, nil);
-		if ((tRank or 0) == 0) then
-			VUHDO_DEBUFF_ABILITIES[tClass][VUHDO_DEBUFF_TYPE_POISON] = nil;
-		end
-	end
-
-	VUHDO_PLAYER_ABILITIES = VUHDO_DEBUFF_ABILITIES[tClass];
+	--VUHDO_Msg("---");
 
 	twipe(VUHDO_CUSTOM_DEBUFF_LIST);
 	if (VUHDO_CONFIG == nil) then
@@ -538,8 +519,8 @@ end
 
 
 --
-function VUHDO_getDebuffAbilities(aClass)
-	return VUHDO_DEBUFF_ABILITIES[aClass];
+function VUHDO_getDebuffAbilities()
+	return VUHDO_PLAYER_ABILITIES;
 end
 
 

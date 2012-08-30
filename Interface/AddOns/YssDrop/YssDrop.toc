@@ -1,11 +1,11 @@
-## Interface: 40000
+## Interface: 50001
 ## Title: YssDrop
 ## Notes: Creates a broker plugin for all your broker launchers
 ## Author: Yssaril
-## Version: v1.8.11
+## Version: v1.8.12
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDBIcon-1.0
 ## X-Category: Miscellaneous
-## X-Curse-Packaged-Version: v1.8.11
+## X-Curse-Packaged-Version: v1.8.12
 ## X-Curse-Project-Name: YssDrop
 ## X-Curse-Project-ID: yssdrop
 ## X-Curse-Repository-ID: wow/yssdrop/mainline

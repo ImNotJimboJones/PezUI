@@ -395,6 +395,13 @@ L= DBM:GetModLocalization(103)
 ------------ 
 L= DBM:GetModLocalization(104)
 
+L:SetTimerLocalization{
+	TimerPhase		= "2 단계"
+}
+
+L:SetOptionLocalization{
+	TimerPhase		= "2 단계까지 남은시간 바 표시"
+}
 ----------------
 --  Zul'Aman  --
 ----------------
@@ -432,7 +439,7 @@ L:SetOptionLocalization{
 	WarnNormal		= "인간 형상 알림 보기",
 	WarnNormalSoon	= "인간 형상 사전 알림 보기",
 	TimerBear		= "다음 곰 형상 바 표시",
-	TimerNormal		= "다음 인간 형상 바 표",
+	TimerNormal		= "다음 인간 형상 바 표시",
 	InfoFrame		= "$spell:42402 효과에 대한 정보 프레임 보기"
 }
 
@@ -506,8 +513,8 @@ L:SetTimerLocalization{
 L:SetOptionLocalization{
 	timerNextForm	= "형상 변환 바 표시",
 	InfoFrame		= "$spell:42402 효과에 대한 정보 프레임 보기",
-	ThrowIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(97639),
-	ClawRageIcon	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(97672)
+	ThrowIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(43093),
+	ClawRageIcon	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(43150)
 }
 
 L:SetMiscLocalization{
@@ -624,7 +631,7 @@ L:SetTimerLocalization{
 }
 
 L:SetOptionLocalization{
-	TimerFlarecoreDetonate	= "$spell:101927 폭발 까지 남은 시간 바 표시"
+	TimerFlarecoreDetonate	= "$spell:101927 폭발 까지 남은시간 바 표시"
 }
 
 ----------------------

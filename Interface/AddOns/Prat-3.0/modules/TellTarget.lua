@@ -57,109 +57,109 @@ Prat:AddModuleToLoad(function()
   --@non-debug@
   L:AddLocale("enUS",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = true,
-	["No target selected."] = true,
 	NoTarget = true,
+	["No target selected."] = true,
 	["Target does not exist."] = true,
 	["Target is not a player."] = true,
 	TellTarget = true,
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("frFR",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "Ajoute la commande telltarget (/tt) pour envoyer un message privé au joueur ciblé.",
-	["No target selected."] = "Pas de cible sélectionnée.",
 	NoTarget = "PasDeCible",
+	["No target selected."] = "Pas de cible sélectionnée.",
 	["Target does not exist."] = "La cible n'existe pas.",
 	["Target is not a player."] = "La cible n'est pas un joueur.",
 	TellTarget = true,
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("deDE",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "Fügt das Slash-Kommando TellTarget (/tt) hinzu",
-	["No target selected."] = "Kein Ziel ausgewählt.",
 	NoTarget = "KeinZiel",
+	["No target selected."] = "Kein Ziel ausgewählt.",
 	["Target does not exist."] = "Ziel existiert nicht.",
 	["Target is not a player."] = "Ziel ist kein Spieler.",
 	TellTarget = true,
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("koKR",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "대상에게 말하기 슬래쉬 명령어를 추가합니다 (/tt).",
-	["No target selected."] = "대상이 선택되지 않았습니다.",
 	NoTarget = "대상없음",
+	["No target selected."] = "대상이 선택되지 않았습니다.",
 	["Target does not exist."] = "대상이 존재하지 않습니다.",
 	["Target is not a player."] = "대상이 플레이어가 아닙니다.",
 	TellTarget = "대상에게말하기",
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("esMX",
   {
-	-- ["/tt"] = "",
 	-- ["Adds telltarget slash command (/tt)."] = "",
-	-- ["No target selected."] = "",
 	-- NoTarget = "",
+	-- ["No target selected."] = "",
 	-- ["Target does not exist."] = "",
 	-- ["Target is not a player."] = "",
 	-- TellTarget = "",
+	-- ["/tt"] = "",
 }
 
   )
   L:AddLocale("ruRU",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "Добавляет слеш-команду 'сказать о цели' (/tt).",
-	["No target selected."] = "Нет выбранной цели.",
 	NoTarget = "Нет цели",
+	["No target selected."] = "Нет выбранной цели.",
 	["Target does not exist."] = "Цель не существует.",
 	["Target is not a player."] = "Выбранная цель не является игроком.",
 	TellTarget = "Сказать цели",
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("zhCN",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "添加目标告知斜杠命令(/tt).",
-	["No target selected."] = "无目标被选取",
 	NoTarget = "无目标",
+	["No target selected."] = "无目标被选取",
 	["Target does not exist."] = "目标不存在",
 	["Target is not a player."] = "目标不是一个玩家",
 	TellTarget = "告知目标",
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("esES",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "Añade comando decir a objetivo (/tt).",
-	["No target selected."] = "Sin objetivo seleccionado.",
 	NoTarget = "SinObjetivo",
+	["No target selected."] = "Sin objetivo seleccionado.",
 	["Target does not exist."] = "El Objetivo no existe.",
 	["Target is not a player."] = "El Objetivo no es un jugador.",
 	TellTarget = "DecirObjetivo",
+	["/tt"] = true,
 }
 
   )
   L:AddLocale("zhTW",
   {
-	["/tt"] = true,
 	["Adds telltarget slash command (/tt)."] = "新增 telltarget 快捷命令（/tt）",
-	["No target selected."] = "未選取目標",
 	NoTarget = "沒有目標",
+	["No target selected."] = "未選取目標",
 	["Target does not exist."] = "目標並不存在",
 	["Target is not a player."] = "目標並不是玩家",
 	TellTarget = true,
+	["/tt"] = true,
 }
 
   )

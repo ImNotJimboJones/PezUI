@@ -1,3 +1,4 @@
+local _;
 VUHDO_KEY_LAYOUT_COMBO_MODEL = { };
 VUHDO_CURR_LAYOUT = "";
 

@@ -1,5 +1,11 @@
+--[[ File
+NAME: DocTitanPlugin.lua
+DESC: This file contains documentation of Titan to assist a developer.
+:DESC
+--]]
 --[[ API
-Updated Aug 2011
+NAME: Titan API overview for developers
+DESC: Updated Dec 2011
 
 This documentation is intended for addon developers that wish to create a Titan plugin.
 
@@ -45,5 +51,5 @@ It is strongly recommended that you download the TitanStarter plugin example(see
 
 Titan API:
 The functions that Titan offers to the plugin developer are in a separate document. Within the Titan files you can recognize an API routine by the comment just before the function declaration. The comment block will have "API" as part of the starting block.
-
+:DESC
 --]]

@@ -1,3 +1,7 @@
+local _;
+
+
+
 --
 local function VUHDO_hideAllPanel()
 	VuhDoNewOptionsPanelBasic:Hide();

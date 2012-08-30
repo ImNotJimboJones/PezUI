@@ -98,9 +98,9 @@ function VUHDO_lnfStandardFontUpdateDemoText()
 		tOutlineText = "";
 	end
 
-	if (sTable["USE_MONO"]) then
+	--[[if (sTable["USE_MONO"]) then -- -- Bugs out in MoP beta
 		tOutlineText = tOutlineText .. "MONOCHROME";
-	end
+	end]]
 
 	tLabel:SetFont(sTable["FONT"], sTable["SCALE"] * 0.01 * 32, tOutlineText);
 

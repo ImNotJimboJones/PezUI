@@ -1,13 +1,14 @@
+local _;
+
 local table = table;
 local floor = floor;
 local select = select;
 local strfind = strfind;
 local twipe = table.wipe;
 local pairs = pairs;
-local _ = _;
 local sIsSuspended = false;
 local tEmptyColor = { };
-
+local sPlayerArray = { };
 local VUHDO_MY_AND_OTHERS_HOTS = { };
 local VUHDO_MY_HOTS = { };
 local VUHDO_OTHER_HOTS = { };
@@ -37,6 +38,7 @@ function VUHDO_bouquetsInitBurst()
 	VUHDO_CUSTOM_ICONS = VUHDO_GLOBAL["VUHDO_CUSTOM_ICONS"];
 	VUHDO_BOUQUET_BUFFS_SPECIAL = VUHDO_GLOBAL["VUHDO_BOUQUET_BUFFS_SPECIAL"];
 	VUHDO_CUSTOM_INFO = VUHDO_GLOBAL["VUHDO_CUSTOM_INFO"];
+	sPlayerArray["player"] = VUHDO_RAID["player"];
 end
 
 ----------------------------------------------------------
@@ -44,9 +46,10 @@ end
 
 
 --
-local tHash;
+--local tHash;
 local function VUHDO_getColorHash(aColor)
-	tHash =
+	--tHash =
+		return
 			(aColor["R"] or 0) * 0.0001
 		+ (aColor["G"] or 0) * 0.001
 		+ (aColor["B"] or 0) * 0.01
@@ -56,7 +59,7 @@ local function VUHDO_getColorHash(aColor)
 		+ (aColor["TB"] or 0) * 100
 		+ (aColor["TO"] or 0) * 1000;
 
-	if aColor["useText"] then
+	--[[if aColor["useText"] then
 		tHash = tHash + 10000;
 	end
 	if aColor["useBackground"] then
@@ -66,7 +69,7 @@ local function VUHDO_getColorHash(aColor)
 		tHash = tHash + 40000;
 	end
 
-	return tHash;
+	return tHash;]]
 end
 
 
@@ -78,7 +81,6 @@ local function VUHDO_hasBouquetChanged(aUnit, aBouquetName, ...)
 	if (VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] == nil) then
 		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName] = { };
 	end
-
 	tLastTime = VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit];
 	if (tLastTime == nil) then
 		VUHDO_LAST_EVALUATED_BOUQUETS[aBouquetName][aUnit] = { };
@@ -135,10 +137,9 @@ local function VUHDO_getBouquetStatusBarColor(anEntry, anInfo, aValue, aMaxValue
 		end
 
 		tInvModi = 1 - tModi;
-		tDestColor["R"] = tR2 * tInvModi + tR1 * tModi;
-		tDestColor["G"] = tG2 * tInvModi + tG1 * tModi;
-		tDestColor["B"] = tB2 * tInvModi + tB1 * tModi;
-		tDestColor["O"] = tO2 * tInvModi + tO1 * tModi;
+		tDestColor["R"], tDestColor["G"], tDestColor["B"], tDestColor["O"]
+			= tR2 * tInvModi + tR1 * tModi, tG2 * tInvModi + tG1 * tModi,
+		 		tB2 * tInvModi + tB1 * tModi, tO2 * tInvModi + tO1 * tModi;
 		return tDestColor;
 	else
 		return anEntry["color"];
@@ -203,7 +204,6 @@ local tTimer;
 local tCounter;
 local tDuration;
 local tBuffInfo;
-local tHasChanged;
 local tColor;
 local tTimer2
 local tClipL, tClipR, tClipT, tClipB;
@@ -232,8 +232,8 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 	tInfo = anInfo or VUHDO_RAID[tUnit];
 
 	if (tInfo == nil) then
-		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, false, nil, nil, nil, nil, nil);
-		return false, nil, nil, nil, nil, nil, nil, tHasChanged, 0;
+		return false, nil, nil, nil, nil, nil, nil,
+			VUHDO_hasBouquetChanged(aUnit, aBouquetName, false), 0, 0;
 	end
 
 	txActive = false;
@@ -294,11 +294,8 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 			end
 			tIsActive = tBuffInfo ~= nil;
 			if (tIsActive) then
-				if (tInfos["alive"]) then
-					tIcon, tTimer, tCounter, tDuration = tBuffInfo[3], tBuffInfo[5], tBuffInfo[2], tBuffInfo[4];
-				else
-					tIcon, tTimer, tCounter, tDuration = tBuffInfo[3], tBuffInfo[1], tBuffInfo[2], tBuffInfo[4];
-				end
+				tIcon, tTimer, tCounter, tDuration = tBuffInfo[3], tBuffInfo[tInfos["alive"] and 5 or 1], tBuffInfo[2], tBuffInfo[4];
+
 				if (tTimer ~= nil) then
 					tTimer = floor(tTimer * 10) * 0.1;
 				end
@@ -385,11 +382,13 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 			txColor["TO"], txColor["O"] = 1, 1;
 		end
 
-		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, true, txIcon, txTimer, txCounter, txDuration, VUHDO_getColorHash(txColor), txClipL, txClipR, txClipT, txClipB);
-		return true, txIcon, txTimer, txCounter, txDuration, txColor, txName, tHasChanged, tAnzInfos - txLevel, txTimer2, txClipL, txClipR, txClipT, txClipB;
+		return true, txIcon, txTimer, txCounter, txDuration, txColor, txName,
+			VUHDO_hasBouquetChanged(aUnit, aBouquetName, true, txIcon, txTimer, txCounter, txDuration, VUHDO_getColorHash(txColor), txClipL, txClipR, txClipT, txClipB),
+			tAnzInfos - txLevel, txTimer2, txClipL, txClipR, txClipT, txClipB;
 	else
-		tHasChanged = VUHDO_hasBouquetChanged(aUnit, aBouquetName, false, nil, nil, nil, nil, nil, nil, nil, nil, nil);
-		return false, nil, nil, nil, nil, nil, nil, tHasChanged, tAnzInfos - txLevel, txTimer2, nil, nil, nil, nil;
+		return false, nil, nil, nil, nil, nil, nil,
+			VUHDO_hasBouquetChanged(aUnit, aBouquetName, false),
+			0, 0;
 	end
 
 end
@@ -556,8 +555,7 @@ end
 
 
 --
-local tAllListeners;
-local tOwner, tDelegate;
+local tDelegate;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2;
 local tClipL, tClipR, tClipT, tClipB;
 local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
@@ -575,28 +573,23 @@ local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
 	end
 
 	if (tIsActive) then
-		tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
-		for tOwner, tDelegate in pairs(tAllListeners) do
+		for _, tDelegate in pairs(VUHDO_REGISTERED_BOUQUETS[aBouquetName]) do
 			tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
 				tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
 		end
 		VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = true;
-	else
-		if (VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName]) then
-			tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
-			for tOwner, tDelegate in pairs(tAllListeners) do
-				tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
-					tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
-			end
-			VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = false;
+	elseif (VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName]) then
+		for _, tDelegate in pairs(VUHDO_REGISTERED_BOUQUETS[aBouquetName]) do
+			tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
+				tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
 		end
+		VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = false;
 	end
 end
 
 
 
 --
-local tOwner;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, _, tImpact, tTimer2;
 local tClipL, tClipR, tClipT, tClipB;
 function VUHDO_invokeCustomBouquet(aButton, aUnit, anInfo, aBouquetName, aDelegate)
@@ -640,8 +633,7 @@ end
 
 --
 local tInfo;
-local tAllListeners;
-local tOwner, tDelegate;
+local tDelegate;
 local tName;
 function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 	tInfo = VUHDO_RAID[aUnit];
@@ -651,8 +643,7 @@ function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 			if (tInfo ~= nil) then
 				VUHDO_updateEventBouquet(aUnit, tName);
 			elseif (aUnit ~= nil) then -- focus / n/a
-				tAllListeners = VUHDO_REGISTERED_BOUQUETS[tName];
-				for tOwner, tDelegate in pairs(tAllListeners) do
+				for _, tDelegate in pairs(VUHDO_REGISTERED_BOUQUETS[tName]) do
 					tDelegate(aUnit, true, nil, 100, 0, 100, VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"], nil, nil, 0);
 				end
 			end
@@ -700,78 +691,48 @@ end
 
 
 --
-local tAllListeners, tUnit, tOwner, tDelegate;
+local tAllListeners, tUnit, tDelegate;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffName, tInfo, tHasChanged, tImpact;
 local tClipL, tClipR, tClipT, tClipB;
-local function VUHDO_updateCyclicBouquet(aBouquetName, aUnit)
-	tAllListeners = VUHDO_REGISTERED_BOUQUETS[aBouquetName];
+local tDestArray;
+local tBouquetName;
+function VUHDO_updateAllCyclicBouquets(anIsPlayerOnly)
+	tDestArray = anIsPlayerOnly and sPlayerArray or VUHDO_RAID;
 
-	if (aUnit == nil) then
-		for tUnit, tInfo in pairs(VUHDO_RAID) do
-			if (VUHDO_ACTIVE_BOUQUETS[tUnit] == nil) then
-				VUHDO_ACTIVE_BOUQUETS[tUnit] = { };
-			end
+	for tBouquetName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
+		if (VUHDO_hasCyclic(tBouquetName)) then
 
-			tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged,
-				tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB = VUHDO_evaluateBouquet(tUnit, aBouquetName, nil);
+			tAllListeners = VUHDO_REGISTERED_BOUQUETS[tBouquetName];
 
-			if (tHasChanged) then
+			for tUnit, tInfo in pairs(tDestArray) do
+				if (VUHDO_ACTIVE_BOUQUETS[tUnit] == nil) then
+					VUHDO_ACTIVE_BOUQUETS[tUnit] = { };
+				end
 
-				if (tIsActive) then
-					for tOwner, tDelegate in pairs(tAllListeners) do
-						tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
-							tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
-					end
-					VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName] = true;
-				else
-					if (VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName]) then
-						for tOwner, tDelegate in pairs(tAllListeners) do
-							tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
+				tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged,
+					tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB = VUHDO_evaluateBouquet(tUnit, tBouquetName, nil);
+
+				if (tHasChanged) then
+
+					if (tIsActive) then
+						for _, tDelegate in pairs(tAllListeners) do
+							tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tBouquetName,
 								tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
 						end
-						VUHDO_ACTIVE_BOUQUETS[tUnit][aBouquetName] = nil;
+						VUHDO_ACTIVE_BOUQUETS[tUnit][tBouquetName] = true;
+					else
+						if (VUHDO_ACTIVE_BOUQUETS[tUnit][tBouquetName]) then
+							for _, tDelegate in pairs(tAllListeners) do
+								tDelegate(tUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tBouquetName,
+									tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
+							end
+							VUHDO_ACTIVE_BOUQUETS[tUnit][tBouquetName] = nil;
+						end
 					end
+
 				end
+
 			end
-		end
-	else
-
-		if (VUHDO_ACTIVE_BOUQUETS[aUnit] == nil) then
-			VUHDO_ACTIVE_BOUQUETS[aUnit] = { };
-		end
-
-		tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged,
-			tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB = VUHDO_evaluateBouquet(aUnit, aBouquetName, nil);
-
-		if (tHasChanged) then
-
-			if (tIsActive) then
-				for tOwner, tDelegate in pairs(tAllListeners) do
-					tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
-						tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
-				end
-				VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = true;
-			else
-				if (VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName]) then
-					for tOwner, tDelegate in pairs(tAllListeners) do
-						tDelegate(aUnit, tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, aBouquetName,
-							tImpact, tTimer2, tClipL, tClipR, tClipT, tClipB);
-					end
-					VUHDO_ACTIVE_BOUQUETS[aUnit][aBouquetName] = nil;
-				end
-			end
-		end
-	end
-end
-
-
-
---
-local tName;
-function VUHDO_updateAllCyclicBouquets(aUnit)
-	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
-		if (VUHDO_hasCyclic(tName)) then
-			VUHDO_updateCyclicBouquet(tName, aUnit);
 		end
 	end
 end

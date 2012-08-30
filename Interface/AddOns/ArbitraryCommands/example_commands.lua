@@ -118,6 +118,9 @@ addon:RegisterCommand (nil, "Toggle Music", [[
     v = (v=="1") and "0" or "1"
     SetCVar("Sound_EnableMusic",v)]])
 
+-- FIXME  These last few entries are less useful as examples now that the
+-- addons themselves are no longer maintained...
+
 addon:RegisterMenu "sRaidFrames"
 addon:RegisterCommand ("sRaidFrames", {
     menulabel = "sort by class",

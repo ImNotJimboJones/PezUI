@@ -58,7 +58,7 @@ function TitanPanelLootTypeButton_OnLoad(self)
     self:RegisterEvent("CHAT_MSG_SYSTEM");
 end
 
-function TitanPanelLootTypeButton_GetDungeonDifficultyText(isRaid, withpar)
+function TitanPanelLootTypeButton_GetDungeonDifficultyIDText(isRaid, withpar)
  	local par1, par2 = "", ""
  	if withpar then par1, par2 = "(", ")" end
  	local diffstr = "|cffffff9a"..par1.._G["UNKNOWN"]..par2.."|r"
@@ -76,7 +76,7 @@ function TitanPanelLootTypeButton_GetDungeonDifficultyText(isRaid, withpar)
 		end
 	else
 	-- dungeons
-	local diff = GetDungeonDifficulty()
+	local diff = GetDungeonDifficultyID()
 	if not diff then return diffstr end
 	-- remove () chars from difficulty
 	local tmpstr = string.gsub(_G["DUNGEON_DIFFICULTY"..tostring(diff)], "%(", "")
@@ -125,7 +125,7 @@ end
 function TitanPanelLootTypeButton_GetButtonText(id)
      local lootTypeText, lootThreshold, color, dungeondiff;
      dungeondiff = "";
-     if (GetNumPartyMembers() > 0) or (GetNumRaidMembers() > 0) then
+     if (GetNumSubgroupMembers() > 0) or (GetNumGroupMembers() > 0) then
           lootTypeText = TitanLootMethod[GetLootMethod()].text;
           lootThreshold = GetLootThreshold();
           color = _G["ITEM_QUALITY_COLORS"][lootThreshold];
@@ -137,14 +137,14 @@ function TitanPanelLootTypeButton_GetButtonText(id)
      if TitanGetVar(TITAN_LOOTTYPE_ID, "ShowDungeonDiff") then
      	if TitanGetVar(TITAN_LOOTTYPE_ID, "DungeonDiffType") == "DUNGEON" then
 			-- Dungeon
-				dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyText(false, true)
+				dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(false, true)
 			elseif TitanGetVar(TITAN_LOOTTYPE_ID, "DungeonDiffType") == "RAID" then
 			-- Raid
-				dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyText(true, true)
+				dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true, true)
 			elseif TitanGetVar(TITAN_LOOTTYPE_ID, "DungeonDiffType") == "AUTO" then
 			-- Auto
-				if UnitExists("party1") and (GetNumRaidMembers() == 0 or GetNumRaidMembers() < 0) then dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyText(false, true) end
-				if GetNumRaidMembers() > 0 then dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyText(true, true) end
+				if UnitExists("party1") and (GetNumGroupMembers() == 0 or GetNumGroupMembers() < 0) then dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(false, true) end
+				if GetNumGroupMembers() > 0 then dungeondiff = dungeondiff.." "..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true, true) end
 			end
      end
      
@@ -156,21 +156,21 @@ end
 -- DESC : Display tooltip text
 -- **************************************************************************
 function TitanPanelLootTypeButton_GetTooltipText()
-     if (GetNumPartyMembers() > 0) or (GetNumRaidMembers() > 0) then
+     if (GetNumSubgroupMembers() > 0) or (GetNumGroupMembers() > 0) then
           local lootTypeText = TitanLootMethod[GetLootMethod()].text;
           local lootThreshold = GetLootThreshold();
           local itemQualityDesc = _G["ITEM_QUALITY"..lootThreshold.."_DESC"];
           local color = _G["ITEM_QUALITY_COLORS"][lootThreshold];
           return ""..
-          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyText().."\n"..
-          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyText(true).."\n"..
+          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
+          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
                _G["LOOT_METHOD"]..": \t"..TitanUtils_GetHighlightText(lootTypeText).."\n"..
                _G["LOOT_THRESHOLD"]..": \t"..TitanUtils_GetColoredText(itemQualityDesc, color).."\n"..               
                TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
                TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
     else
-          return L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyText().."\n"..
-          L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyText(true).."\n"..
+          return L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
+          L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
           TitanUtils_GetNormalText(_G["ERR_NOT_IN_GROUP"]).."\n"..
           TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
           TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
@@ -244,9 +244,9 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info = {};
  info.text = _G["GREEN_FONT_COLOR_CODE"].._G["DUNGEON_DIFFICULTY1"].."|r";
  info.func = function() SetDungeonDifficulty(1) end
- info.checked = function() if GetDungeonDifficulty() == 1 then return true end return false end
+ info.checked = function() if GetDungeonDifficultyID() == 1 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;
@@ -255,7 +255,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetDungeonDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetDungeonDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false
@@ -265,9 +265,9 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info = {}
  info.text = _G["RED_FONT_COLOR_CODE"].._G["DUNGEON_DIFFICULTY2"].."|r";
  info.func = function() SetDungeonDifficulty(2) end
- info.checked = function() if GetDungeonDifficulty() == 2 then return true end return false end
+ info.checked = function() if GetDungeonDifficultyID() == 2 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;
@@ -276,7 +276,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetDungeonDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetDungeonDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false
@@ -289,7 +289,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info.func = function() SetRaidDifficulty(1) end
  info.checked = function() if GetRaidDifficulty() == 1 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;
@@ -310,7 +310,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info.func = function() SetRaidDifficulty(2) end
  info.checked = function() if GetRaidDifficulty() == 2 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;
@@ -331,7 +331,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info.func = function() SetRaidDifficulty(3) end
  info.checked = function() if GetRaidDifficulty() == 3 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;
@@ -352,7 +352,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  info.func = function() SetRaidDifficulty(4) end
  info.checked = function() if GetRaidDifficulty() == 4 then return true end return false end
  local inParty = 0;
- 	if (UnitExists("party1") or GetNumRaidMembers() > 0) then
+ 	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
 	end
 	local isLeader = 0;

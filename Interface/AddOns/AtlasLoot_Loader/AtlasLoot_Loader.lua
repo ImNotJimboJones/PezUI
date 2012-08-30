@@ -1,4 +1,4 @@
-﻿-- $Id: AtlasLoot_Loader.lua 3697 2012-01-31 15:17:37Z lag123 $
+﻿-- $Id: AtlasLoot_Loader.lua 3740 2012-08-28 19:35:32Z lag123 $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -20,6 +20,7 @@ AtlasLoot.Modules = {
 	{"AtlasLootBurningCrusade", "AtlasLoot_BurningCrusade", false, "", AL["Burning Crusade"] },
 	{"AtlasLootWotLK", "AtlasLoot_WrathoftheLichKing", false, "", AL["Wrath of the Lich King"] },
 	{"AtlasLootCataclysm", "AtlasLoot_Cataclysm", false, "", AL["Cataclysm"] },
+	--{"AtlasLootMoP", "AtlasLoot_MistsofPandoria", false, "", AL["Mists of Pandoria"] },
 	{"AtlasLootCrafting", "AtlasLoot_Crafting", false, ""},
 	{"AtlasLootWorldEvents", "AtlasLoot_WorldEvents", false, ""},
 }

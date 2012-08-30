@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(311, "DBM-DragonSoul", nil, 187)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7599 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7779 $"):sub(12, -3))
 mod:SetCreatureID(55265)
 mod:SetModelID(39094)
 mod:SetModelSound("sound\\CREATURE\\MORCHOK\\VO_DS_MORCHOK_EVENT_04.OGG", "sound\\CREATURE\\MORCHOK\\VO_DS_MORCHOK_ORB_01.OGG")
@@ -53,7 +53,6 @@ local crystalCount = 1--3 crystals between each vortex cast by Morchok, we ignor
 local kohcromSkip = 2--1 is crystal, 2 is stomp.
 
 function mod:OnCombatStart(delay)
-	spamBlood = 0
 	stompCount = 1
 	crystalCount = 1
 	if self:IsDifficulty("heroic10", "heroic25") then

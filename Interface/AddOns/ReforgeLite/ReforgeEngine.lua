@@ -6,6 +6,7 @@ local REFORGE_CHEAT = 5
 
 local _, playerClass = UnitClass ("player")
 local _, playerRace = UnitRace ("player")
+playerRace = string.upper(playerRace)
 local missChance = (playerRace == "NIGHTELF" and 7 or 5)
 
 local function DeepCopy (t, cache)
@@ -209,6 +210,10 @@ function ReforgeLite:UpdateMethodStats (method)
     method.stats[self.STATS.HIT] = method.stats[self.STATS.HIT] +
       math.floor ((method.stats[self.STATS.SPIRIT] - oldspi) * self.s2hFactor / 100 + 0.5)
   end
+  if self.s2eFactor and self.s2eFactor > 0 then
+    method.stats[self.STATS.EXPERTISE] = method.stats[self.STATS.EXPERTISE] +
+      math.floor ((method.stats[self.STATS.SPIRIT] - oldspi) * self.s2eFactor / 100 + 0.5)
+  end
   if method.tankingModel then
     local dodge_bonus, parry_bonus, mastery_bonus = self:GetBuffBonuses ()
     method.orig_stats = {}
@@ -314,6 +319,13 @@ function ReforgeLite:MakeReforgeOption (item, data, src, dst)
           delta2 = delta2 - math.floor (amount * self.s2hFactor / 100 + math.random ())
         end
       end
+      if self.s2eFactor and self.s2eFactor > 0 then
+        if data.caps[1].stat == self.STATS.EXPERTISE then
+          delta1 = delta1 - math.floor (amount * self.s2eFactor / 100 + math.random ())
+        elseif data.caps[2].stat == self.STATS.EXPERTISE then
+          delta2 = delta2 - math.floor (amount * self.s2eFactor / 100 + math.random ())
+        end
+      end
     else
       dscore = dscore - data.weights[src] * amount
     end
@@ -334,6 +346,13 @@ function ReforgeLite:MakeReforgeOption (item, data, src, dst)
           delta1 = delta1 + math.floor (amount * self.s2hFactor / 100 + math.random ())
         elseif data.caps[2].stat == self.STATS.HIT then
           delta2 = delta2 + math.floor (amount * self.s2hFactor / 100 + math.random ())
+        end
+      end
+      if self.s2eFactor and self.s2eFactor > 0 then
+        if data.caps[1].stat == self.STATS.EXPERTISE then
+          delta1 = delta1 + math.floor (amount * self.s2eFactor / 100 + math.random ())
+        elseif data.caps[2].stat == self.STATS.EXPERTISE then
+          delta2 = delta2 + math.floor (amount * self.s2eFactor / 100 + math.random ())
         end
       end
     else
@@ -477,6 +496,9 @@ function ReforgeLite:InitReforgeClassic ()
   if self.s2hFactor and self.s2hFactor > 0 then
     data.initial[self.STATS.HIT] = data.initial[self.STATS.HIT] - math.floor (reforgedSpirit * self.spiritBonus * self.s2hFactor / 100 + 0.5)
   end
+  if self.s2eFactor and self.s2eFactor > 0 then
+    data.initial[self.STATS.EXPERTISE] = data.initial[self.STATS.EXPERTISE] - math.floor (reforgedSpirit * self.spiritBonus * self.s2eFactor / 100 + 0.5)
+  end
   if data.caps[1].stat > 0 then
     data.caps[1].init = data.initial[data.caps[1].stat]
     for i = 1, #data.method.items do
@@ -502,6 +524,11 @@ function ReforgeLite:InitReforgeClassic ()
 
   if self.s2hFactor and self.s2hFactor > 0 then
     if data.weights[self.STATS.SPIRIT] == 0 and (data.caps[1].stat == self.STATS.HIT or data.caps[2].stat == self.STATS.HIT) then
+      data.weights[self.STATS.SPIRIT] = 1
+    end
+  end
+  if self.s2eFactor and self.s2eFactor > 0 then
+    if data.weights[self.STATS.SPIRIT] == 0 and (data.caps[1].stat == self.STATS.EXPERTISE or data.caps[2].stat == self.STATS.EXPERTISE) then
       data.weights[self.STATS.SPIRIT] = 1
     end
   end
@@ -919,6 +946,7 @@ local function FormatValue (value, prefix)
 end
 
 StaticPopupDialogs["REFORGELITE_COMPUTEERROR"] = {
+  preferredIndex = 3,
   text = L["ReforgeLite failed to compute your optimal reforge. Try increasing the speed by moving the speed slider.\nError message: %s"],
   button1 = OKAY,
   button2 = nil,
@@ -981,6 +1009,11 @@ function ReforgeLite:ComputeReforge (initFunc, optionFunc, chooseFunc)
           opt.dst = self.STATS.SPIRIT
         end
       end
+      if self.s2eFactor == 100 then
+        if opt.dst == self.STATS.EXPERTISE and data.method.items[i].stats[self.STATS.SPIRIT] == 0 then
+          opt.dst = self.STATS.SPIRIT
+        end
+      end
       data.method.items[i].src = opt.src
       data.method.items[i].dst = opt.dst
     end
@@ -999,8 +1032,9 @@ function ReforgeLite:Compute ()
   self.spiritBonus = self.spiritBonus or 1
   if self.pdb.tankingModel then
     return self:ComputeReforge ("InitReforgeTank", "GetItemReforgeOptionsTank", "ChooseReforgeTank")
-  elseif self.s2hFactor and self.s2hFactor > 0 and ((self.pdb.caps[1].stat == self.STATS.HIT and self.pdb.caps[2].stat == 0) or
-                                                    (self.pdb.caps[2].stat == self.STATS.HIT and self.pdb.caps[1].stat == 0)) then
+  elseif self.s2hFactor and self.s2hFactor > 0 and (not self.s2eFactor or self.s2eFactor == 0) and
+      ((self.pdb.caps[1].stat == self.STATS.HIT and self.pdb.caps[2].stat == 0) or
+       (self.pdb.caps[2].stat == self.STATS.HIT and self.pdb.caps[1].stat == 0)) then
     return self:ComputeReforge ("InitReforgeS2H", "GetItemReforgeOptionsS2H", "ChooseReforgeS2H")
   else
     return self:ComputeReforge ("InitReforgeClassic", "GetItemReforgeOptions", "ChooseReforgeClassic")

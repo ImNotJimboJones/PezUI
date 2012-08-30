@@ -23,6 +23,7 @@ VUHDO_HEADER_TEXTS = {
 	[VUHDO_ID_DRUIDS] = VUHDO_I18N_DRUIDS,
 	[VUHDO_ID_PRIESTS] = VUHDO_I18N_PRIESTS,
 	[VUHDO_ID_DEATH_KNIGHT] = VUHDO_I18N_DEATH_KNIGHT,
+	[VUHDO_ID_MONKS] = VUHDO_I18N_MONKS,
 
 	[VUHDO_ID_PETS] = VUHDO_I18N_PETS,
 	[VUHDO_ID_MAINTANKS] = VUHDO_I18N_MAINTANKS,
@@ -70,4 +71,6 @@ VUHDO_CUSTOM_ICONS = {
 	{ VUHDO_I18N_CUSTOM_ICON_ONE_THIRD, "Interface\\AddOns\\VuhDo\\Images\\third_one" }, -- 10
 	{ VUHDO_I18N_CUSTOM_ICON_TWO_THIRDS, "Interface\\AddOns\\VuhDo\\Images\\third_two" }, -- 11
 	{ VUHDO_I18N_CUSTOM_ICON_THREE_THIRDS, "Interface\\AddOns\\VuhDo\\Images\\third_three" }, -- 12
+	{ VUHDO_I18N_CUSTOM_ICON_FOUR_THIRDS, "Interface\\AddOns\\VuhDo\\Images\\third_four" }, -- 13
+	{ VUHDO_I18N_CUSTOM_ICON_FIVE_THIRDS, "Interface\\AddOns\\VuhDo\\Images\\third_five" }, -- 14
 };

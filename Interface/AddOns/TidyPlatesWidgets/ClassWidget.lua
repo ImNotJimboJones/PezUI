@@ -16,6 +16,19 @@ local ClassIconTable = {
 	PALADIN = "Interface\\AddOns\\addon\\UI-CharacterCreate-Classes_Paladin",
 	ROGUE = "Interface\\AddOns\\addon\\UI-CharacterCreate-Classes_Rogue",
 }
+
+myframe.icon = myframe:CreateTexture(nil,"CENTER"); -- create texture as child of myframe
+
+myframe.icon:SetAllPoints(myframe); -- copy dimensions of myframe to icon
+
+local _,class = UnitClass("player"); -- get non-localized class name
+
+myframe.icon:SetTexture("Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES"); -- this is the image containing all class icons
+
+local coords = CLASS_ICON_TCOORDS[class]; -- get the coordinates of the class icon we want
+
+myframe.icon:SetTexCoord(unpack(coords)); -- cut out the region with our class icon according to coords
+
 --]]
 
 

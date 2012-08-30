@@ -1,8 +1,8 @@
-## Interface: 40300
+## Interface: 50001
 
 ## Title: Masque: Sleek
 ## Notes: Sleek skin for Masque.
-## Version: 4.3.0
+## Version: 5.0.0
 
 ## Author: Kallieen
 ## X-eMail: kallieenchan@gmail.com

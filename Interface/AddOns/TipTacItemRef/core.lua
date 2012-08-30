@@ -49,7 +49,7 @@ local function BoolCol(bool) return (bool and "|cff80ff80" or "|cffff8080"); end
 -- Set Texture and Text
 local function SetIconTextureAndText(self,texture,count)
 	if (texture) then
-		self.ttIcon:SetTexture(texture == "" and "Interface\\Icons\\INV_Misc_QuestionMark" or texture);
+		self.ttIcon:SetTexture(texture ~= "" and texture or "Interface\\Icons\\INV_Misc_QuestionMark");
 		self.ttCount:SetText(count);
 		self.ttIcon:Show();
 	else
@@ -314,7 +314,9 @@ end
 -- currency -- Thanks to Vladinator for adding this!
 function TipTypeFuncs:currency(linkToken,id)
 	local _, currencyCount, currencyTexture = GetCurrencyInfo(id);
-	self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture, currencyCount);
+	if (self.SetIconTextureAndText) then
+		self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture,currencyCount);
+	end
 	-- ID
 	if (cfg.if_showCurrencyId) then
 		self:AddLine(format("CurrencyID: %d",id),unpack(cfg.if_infoColor));
@@ -386,9 +388,13 @@ function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unk
 				end
 				if (not isPlayer) then
 					myDone1 = select(3,GetAchievementCriteriaInfo(id,i));
-					myDone2 = select(3,GetAchievementCriteriaInfo(id,i + 1));
+					if (i + 1 <= #criteriaList) then
+						myDone2 = select(3,GetAchievementCriteriaInfo(id,i + 1));
+					end
 				end
-				self:AddDoubleLine((isPlayer and "" or BoolCol(myDone1).."*|r")..criteriaList[i].label,criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*"),r1,g1,b1,r2,g2,b2);
+				myDone1 = (isPlayer and "" or BoolCol(myDone1).."*|r")..criteriaList[i].label;
+				myDone2 = criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*"); 
+				self:AddDoubleLine(myDone1,myDone2,r1,g1,b1,r2,g2,b2);
 			end
 		end
 		-- ID + Category

@@ -53,118 +53,118 @@ Prat:AddModuleToLoad(function()
   --@non-debug@
   L:AddLocale("enUS",
   {
-	["Server name abbreviation options."] = true,
-	ServerNames = true,
 	autoabbreviate_desc = "Shorten the server name to 3 letters",
 	autoabbreviate_name = "Auto-abbreviate",
 	colon_desc = "Toggle adding colon after server replacement.",
 	colon_name = "Show Colon",
 	randomclr_desc = "Use a random color for each server.",
 	randomclr_name = "Random Colors",
+	["Server name abbreviation options."] = true,
+	ServerNames = true,
 }
 
   )
   L:AddLocale("frFR",
   {
-	["Server name abbreviation options."] = "Options d'abréviation des noms de serveur.",
-	ServerNames = "Noms de serveur",
 	autoabbreviate_desc = "Raccourcir le nom des serveurs à 3 lettres.",
 	autoabbreviate_name = "Abréviation",
 	-- colon_desc = "",
 	-- colon_name = "",
 	randomclr_desc = "Utiliser une couleur aléatoire pour chaque serveur.",
 	randomclr_name = "Couleurs aléatoires",
+	["Server name abbreviation options."] = "Options d'abréviation des noms de serveur.",
+	ServerNames = "Noms de serveur",
 }
 
   )
   L:AddLocale("deDE",
   {
-	["Server name abbreviation options."] = "Optionen für Abkürzungen von Server-Namen",
-	ServerNames = "ServerNamen",
 	autoabbreviate_desc = "Kürze den Server-Namen auf 3 Buchstaben",
 	autoabbreviate_name = "Auto-Abkürzen",
 	colon_desc = "Hinzufügen eines Doppelpunkts nach dem Ersetzen des Servers ein-/ausschalten.",
 	colon_name = "Doppelpunkt anzeigen",
 	randomclr_desc = "Eine zufällige Farbe für jeden Server verwenden.",
 	randomclr_name = "Zufällige Farben",
+	["Server name abbreviation options."] = "Optionen für Abkürzungen von Server-Namen",
+	ServerNames = "ServerNamen",
 }
 
   )
   L:AddLocale("koKR",
   {
-	["Server name abbreviation options."] = "서버이름 줄이기 옵션.",
-	ServerNames = "서버이름",
 	autoabbreviate_desc = "서버이름을 3글자로 줄임",
 	autoabbreviate_name = "자동-줄임",
 	colon_desc = "서버 대체이름 뒤에 콜론 추가",
 	colon_name = "콜론 보이기",
 	randomclr_desc = "서버이름에 무작위 색상 사용",
 	randomclr_name = "무작위 색상",
+	["Server name abbreviation options."] = "서버이름 줄이기 옵션.",
+	ServerNames = "서버이름",
 }
 
   )
   L:AddLocale("esMX",
   {
-	-- ["Server name abbreviation options."] = "",
-	-- ServerNames = "",
 	-- autoabbreviate_desc = "",
 	-- autoabbreviate_name = "",
 	-- colon_desc = "",
 	-- colon_name = "",
 	-- randomclr_desc = "",
 	-- randomclr_name = "",
+	-- ["Server name abbreviation options."] = "",
+	-- ServerNames = "",
 }
 
   )
   L:AddLocale("ruRU",
   {
-	["Server name abbreviation options."] = "Настройки сокращений имен серверов.",
-	ServerNames = true,
 	autoabbreviate_desc = "Сокращает название сервера до трех букв",
 	autoabbreviate_name = "Авто-сокращение",
 	colon_desc = "Вкл/Выкл добавление двоеточия после замещения сервера.",
 	colon_name = "Показывать двоеточие",
 	randomclr_desc = "Использовать случайные цвета для всех серверов.",
 	randomclr_name = "Случайные цвета",
+	["Server name abbreviation options."] = "Настройки сокращений имен серверов.",
+	ServerNames = true,
 }
 
   )
   L:AddLocale("zhCN",
   {
-	["Server name abbreviation options."] = "服务器名称缩写选项",
-	ServerNames = "服务器名称",
 	autoabbreviate_desc = "把服务器名缩到3个字符", -- Needs review
 	autoabbreviate_name = "自动缩写", -- Needs review
 	colon_desc = "在服务器后添加冒号",
 	colon_name = "显示冒号",
 	randomclr_desc = "为每个服务器使用随机颜色",
 	randomclr_name = "随机颜色",
+	["Server name abbreviation options."] = "服务器名称缩写选项",
+	ServerNames = "服务器名称",
 }
 
   )
   L:AddLocale("esES",
   {
-	["Server name abbreviation options."] = "Opciones de la abreviatura del nombre del servidor.",
-	ServerNames = "NombreServidor",
 	-- autoabbreviate_desc = "",
 	-- autoabbreviate_name = "",
 	colon_desc = "Alterna añadir dos puntos despues del servidor reemplazado.",
 	colon_name = "Mostrar dos puntos",
 	randomclr_desc = "Utiliza un color aleatorio para cada servidor.",
 	randomclr_name = "Colores Aleatorios",
+	["Server name abbreviation options."] = "Opciones de la abreviatura del nombre del servidor.",
+	ServerNames = "NombreServidor",
 }
 
   )
   L:AddLocale("zhTW",
   {
-	["Server name abbreviation options."] = "伺服器名稱縮寫選項",
-	ServerNames = "伺服器名稱",
 	-- autoabbreviate_desc = "",
 	autoabbreviate_name = "自動縮短",
 	-- colon_desc = "",
 	colon_name = "顯示冒號",
 	randomclr_desc = "伺服器名稱使用隨機色彩",
 	randomclr_name = "隨機色彩",
+	["Server name abbreviation options."] = "伺服器名稱縮寫選項",
+	ServerNames = "伺服器名稱",
 }
 
   )

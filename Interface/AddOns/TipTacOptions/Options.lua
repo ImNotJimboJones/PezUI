@@ -218,9 +218,9 @@ local options = {
 if (TipTacTalents) then
 	options[#options + 1] = {
 		[0] = "Talents",
-		{ type = "Check", var = "showTalents", label = "Enable TipTacTalents", tip = "This options makes the tip show the talents of other players" },
+		{ type = "Check", var = "showTalents", label = "Enable TipTacTalents", tip = "This option makes the tip show the talent specialization of other players" },
 		{ type = "Check", var = "talentOnlyInParty", label = "Only Show Talents for Players in Party or Raid", tip = "When you enable this, only talents of players in your party or raid will be requested and shown", y = 12 },
-		{ type = "DropDown", var = "talentFormat", label = "Talent Format", list = { ["Elemental (57/14/00)"] = 1, ["Elemental"] = 2, ["57/14/00"] = 3,}, y = 8 },
+--		{ type = "DropDown", var = "talentFormat", label = "Talent Format", list = { ["Elemental (57/14/00)"] = 1, ["Elemental"] = 2, ["57/14/00"] = 3,}, y = 8 },	-- not supported with MoP changes
 		{ type = "Slider", var = "talentCacheSize", label = "Talent Cache Size", min = 0, max = 50, step = 1 },
 	};
 end

@@ -1,3 +1,14 @@
+4.5.0
+- 5.0 update. Not backwards compatible.
+- Remove all types of hardcoded spell exceptions.
+- "Known spells" now works off of spell names rather than IDs.
+- Added advanced module as replacement for the spell exceptions. It allows for custom spell ID, tooltip, name and icon mappings. These are stored globally. (as opposed to profile specific)
+- Added include filter to force spells to count as player spells, and exclude filter that completely ignores spells. Both accept spell IDs and names.
+- Add a brief description to each filter type, explaining their purpose.
+- Popup dialogs with editbox now won't let you accept if the input is invalid.
+- Spells that no longer exist in the game are now removed on load.
+- Make sure minimap button is not overlapped by minimap.
+
 4.4.0
 * Introducing the spell list module. This is a centralised spell database manager which implements the features of the spell filter, reset module and announce module via a single menu. The latter are still modular, their functionality only added to said menu if loaded. spellList.lua is required for filter, reset and announce modules.
 - Add Korean and traditional Chinese localisation.

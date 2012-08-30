@@ -1,4 +1,4 @@
-﻿-- $Id: CompareFrame.lua 3705 2012-03-02 22:25:53Z lag123 $
+﻿-- $Id: CompareFrame.lua 3729 2012-07-31 13:38:29Z lag123 $
 local AtlasLoot = LibStub("AceAddon-3.0"):GetAddon("AtlasLoot")
 
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
@@ -258,6 +258,7 @@ local CURRENT_ITEM_LIST_TYPE
 -- #####################################################
 -- Options
 StaticPopupDialogs["ATLASLOOT_COMPAREFRAME_ITEMSTATSERROR"] = {
+			preferredIndex = 3,
 			text = string.format(AL["You cant set more then %d item stats."], NUM_ITEMS_TO_DISPLAY),
 			button1 = OKAY,
 			timeout = 0,
@@ -1751,7 +1752,7 @@ function AtlasLoot:CompareFrame_Create()
 							SearchFrame.SearchBox:ClearFocus()
 						end)
 	
-	SearchFrame.Search = CreateFrame("Button","AtlasLootCompareFrameSearch_SearchButton",Frame,"UIPanelButtonTemplate2")
+	SearchFrame.Search = CreateFrame("Button","AtlasLootCompareFrameSearch_SearchButton",Frame,"UIPanelButtonTemplate")
 	SearchFrame.Search:SetText(AL["Search"])
 	SearchFrame.Search:SetWidth(69)
 	SearchFrame.Search:SetHeight(20)
@@ -1761,7 +1762,7 @@ function AtlasLoot:CompareFrame_Create()
 							SearchFrame.SearchBox:ClearFocus()
 						end)
 						
-	SearchFrame.Clear = CreateFrame("Button","AtlasLootCompareFrameSearch_ClearButton",Frame,"UIPanelButtonTemplate2")
+	SearchFrame.Clear = CreateFrame("Button","AtlasLootCompareFrameSearch_ClearButton",Frame,"UIPanelButtonTemplate")
 	SearchFrame.Clear:SetText(AL["Clear"])
 	SearchFrame.Clear:SetWidth(80)
 	SearchFrame.Clear:SetHeight(22)
@@ -1813,7 +1814,7 @@ function AtlasLoot:CompareFrame_Create()
 	
 	-- ############################################
 	-- 3er button Leiste#
-	Frame.Close2 = CreateFrame("Button","AtlasLootCompareFrame_CloseButton2",Frame,"UIPanelButtonTemplate2")
+	Frame.Close2 = CreateFrame("Button","AtlasLootCompareFrame_CloseButton2",Frame,"UIPanelButtonTemplate")
 	Frame.Close2:SetText(CLOSE)
 	Frame.Close2:SetWidth(80)
 	Frame.Close2:SetHeight(22)

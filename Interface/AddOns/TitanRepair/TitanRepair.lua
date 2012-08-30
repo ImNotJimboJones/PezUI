@@ -14,8 +14,9 @@ local TPR = TitanRepairModule
 TPR.ITEM_STATUS = {};
 TPR.ITEM_BAG = {};
 
--- this index (0) will be never set, just accessed to this state,
+-- this index (0) will never be set, just accessed to this state,
 -- it simplifies code for TitanRepair_GetMostDamagedItem() when Tit_R_EquipedMinIndex == 0
+TPR.END=11
 TPR.ITEM_STATUS[0] = { values = {}, name = INVTYPE_HEAD, slot = "VIRTUAL" };
 TPR.ITEM_STATUS[1] = { values = {}, name = INVTYPE_HEAD, slot = "Head" };
 TPR.ITEM_STATUS[2] = { values = {}, name = INVTYPE_SHOULDER, slot = "Shoulder" };
@@ -27,8 +28,8 @@ TPR.ITEM_STATUS[7] = { values = {}, name = INVTYPE_WRIST, slot = "Wrist" };
 TPR.ITEM_STATUS[8] = { values = {}, name = INVTYPE_HAND, slot = "Hands" };
 TPR.ITEM_STATUS[9] = { values = {}, name = INVTYPE_WEAPONMAINHAND, slot = "MainHand" };
 TPR.ITEM_STATUS[10] = { values = {}, name = INVTYPE_WEAPONOFFHAND, slot = "SecondaryHand" };
-TPR.ITEM_STATUS[11] = { values = {}, name = INVTYPE_RANGED, slot = "Ranged" };
-TPR.ITEM_STATUS[12] = { values = {}, name = INVENTORY_TOOLTIP };
+--TPR.ITEM_STATUS[11] = { values = {}, name = INVTYPE_RANGED, slot = "Ranged" }; -- Ranged weapons are no longer available in WoW
+TPR.ITEM_STATUS[TPR.END] = { values = {}, name = INVENTORY_TOOLTIP };
 TPR.INVENTORY_STATUS = {}
 TPR.INVENTORY_STATUS[0] = { values = {}, name = INVENTORY_TOOLTIP };
 TPR.INVENTORY_STATUS[1] = { values = {}, name = INVENTORY_TOOLTIP };
@@ -53,22 +54,22 @@ TPR.PleaseCheckBag[5]  = 0; -- this will be used for equiped items, not very goo
 TPR.show_debug = false; -- will tell you a lot about what's happening
 
 StaticPopupDialogs["REPAIR_CONFIRMATION"] = {
-    text = L["REPAIR_LOCALE"]["confirmation"],
-    button1 = YES,
-    button2 = NO,
-    OnAccept = function(self)
-     TitanRepair_RepairItems();
-     TitanPanelRepairButton_ScanAllItems();     
-     TitanRepairModule:CancelAllTimers()
-     TitanRepairModule:ScheduleTimer(TitanPanelRepairButton_OnUpdate, 2)
-     TPR.CouldRepair = false;
-    end,
-    OnShow = function(self)
-     MoneyFrame_Update(self.moneyFrame, TPR.MONEY);
-    end,
-    hasMoneyFrame = 1,
-    timeout = 0,
-    hideOnEscape = 1
+	text = L["REPAIR_LOCALE"]["confirmation"],
+	button1 = YES,
+	button2 = NO,
+	OnAccept = function(self)
+		TitanRepair_RepairItems();
+		TitanPanelRepairButton_ScanAllItems();     
+		TitanRepairModule:CancelAllTimers()
+		TitanRepairModule:ScheduleTimer(TitanPanelRepairButton_OnUpdate, 2)
+		TPR.CouldRepair = false;
+	end,
+	OnShow = function(self)
+		MoneyFrame_Update(self.moneyFrame, TPR.MONEY);
+	end,
+	hasMoneyFrame = 1,
+	timeout = 0,
+	hideOnEscape = 1
 };
 
 -- ******************************** Functions *******************************
@@ -178,7 +179,10 @@ function TitanPanelRepairButton_OnEvent(self, event, a1, ...)
 
    -- NOTE that events test are done in probability order:
    -- The events that fires the most are tested first
-      
+	if (TPR.show_debug) then -- this is not necessary but is here to optimize this part the most possible
+		tit_debug_bis("Event " .. event .. "...");
+	end
+     
    if event == "UNIT_INVENTORY_CHANGED" and a1 == "player" then
    		TPR.PleaseCheckBag[5] = 1
       TitanRepairModule:CancelAllTimers()
@@ -411,7 +415,7 @@ function TitanRepair_GetMostDamagedItem()
    -- Get repair status for Equiped items and inventory
    -- NOTE: TitanRepair_GetStatusPercent() will return 1.0 if max value <= 0
    local equip_status = TPR.ITEM_STATUS[TPR.EquipedMinIndex].values
-   local inv_status = TPR.ITEM_STATUS[12].values
+   local inv_status = TPR.ITEM_STATUS[TPR.END].values
    local EquipedItemsStatus   = equip_status.item_frac;
    local InventoryItemsStatus = inv_status.item_frac;
 
@@ -428,12 +432,13 @@ function TitanRepair_GetMostDamagedItem()
    --         when this function will be called by TitanRepair_GetInventoryInformation(), TPR.EquipedMinIndex will point to an empty slot:
    --         since TitanRepair_GetEquipedInformation() won't have been called yet (bag update events are treated before equiped item event),
    --         EquipedItemsStatus will be egual to InventoryItemsStatus...
-   --         So the <= is to avoid that TPR.EquipedMinIndex points to nothing (even if it has no concequence right now, it may save hours of debugging some day...)
+   --         So the <= is to avoid that TPR.EquipedMinIndex points to nothing 
+	--        (even if it has no concequence right now, it may save hours of debugging some day...)
 
    if ( (InventoryItemsStatus <= EquipedItemsStatus)
            and (TitanGetVar(TITAN_REPAIR_ID,"ShowInventory") == 1) ) then
       tit_debug_bis("Inventory is more damaged than equiped items");
-      return 12;
+      return TPR.END;
    else -- if EquipedItemsStatus < InventoryItemsStatus
       tit_debug_bis("Equiped items are more damaged than inventory");
       return TPR.EquipedMinIndex;
@@ -441,10 +446,10 @@ function TitanRepair_GetMostDamagedItem()
 
    -- Typical 6 possibilities:
    --   - InventoryItemsStatus == 1 and EquipedItemsStatus == 1  ==> returns 0
-   --   - InventoryItemsStatus <  1 and EquipedItemsStatus == 1  ==> returns 12
+   --   - InventoryItemsStatus <  1 and EquipedItemsStatus == 1  ==> returns TPR.END
    --   - InventoryItemsStatus == 1 and EquipedItemsStatus <  1  ==> ! (InventoryItemsStatus <= EquipedItemsStatus) ==> returns TPR.EquipedMinIndex
    --   - InventoryItemsStatus <  1 and EquipedItemsStatus <  1  :
-   --          - InventoryItemsStatus  <=  EquipedItemsStatus       ==> returns 12
+   --          - InventoryItemsStatus  <=  EquipedItemsStatus       ==> returns TPR.END
    --          - InventoryItemsStatus  >   EquipedItemsStatus       ==> ! (InventoryItemsStatus <= EquipedItemsStatus) ==> returns TPR.EquipedMinIndex
 
 end;
@@ -493,22 +498,22 @@ function TitanRepair_GetInventoryInformation(bag)
    end
 
    -- Recalc the total repair of all bags
-   TPR.ITEM_STATUS[12].values.val = 0
-   TPR.ITEM_STATUS[12].values.max = 0
-   TPR.ITEM_STATUS[12].values.cost = 0
+   TPR.ITEM_STATUS[TPR.END].values.val = 0
+   TPR.ITEM_STATUS[TPR.END].values.max = 0
+   TPR.ITEM_STATUS[TPR.END].values.cost = 0
    for bag = 0, 4 do
       local act_val     = TPR.INVENTORY_STATUS[bag].values.val ;
       local act_max     = TPR.INVENTORY_STATUS[bag].values.max ;
       local act_cost    = TPR.INVENTORY_STATUS[bag].values.cost ;
       local act_status  = TPR.INVENTORY_STATUS[bag].values.item_frac;
 
-      TPR.ITEM_STATUS[12].values.val = TPR.ITEM_STATUS[12].values.val + act_val;
-      TPR.ITEM_STATUS[12].values.max = TPR.ITEM_STATUS[12].values.max + act_max;
+      TPR.ITEM_STATUS[TPR.END].values.val = TPR.ITEM_STATUS[TPR.END].values.val + act_val;
+      TPR.ITEM_STATUS[TPR.END].values.max = TPR.ITEM_STATUS[TPR.END].values.max + act_max;
       -- add each bag global repair cost to inventory global repair cost
-      TPR.ITEM_STATUS[12].values.cost = TPR.ITEM_STATUS[12].values.cost + act_cost;
+      TPR.ITEM_STATUS[TPR.END].values.cost = TPR.ITEM_STATUS[TPR.END].values.cost + act_cost;
    end
-   TPR.ITEM_STATUS[12].values.item_frac =
-      TitanRepair_GetStatusPercent(TPR.ITEM_STATUS[12].values.val, TPR.ITEM_STATUS[12].values.max)
+   TPR.ITEM_STATUS[TPR.END].values.item_frac =
+      TitanRepair_GetStatusPercent(TPR.ITEM_STATUS[TPR.END].values.val, TPR.ITEM_STATUS[TPR.END].values.max)
 
    TPR.INDEX = TitanRepair_GetMostDamagedItem();
 
@@ -533,6 +538,7 @@ end
 -- **************************************************************************
 function TitanRepair_GetEquipedInformation()
 
+	tit_debug_bis("_GetEquipedInfo Merchant=" ..(TPR.MerchantisOpen and "T" or "F") );
    -- check to see if a merchant that can repair is open
    if TPR.MerchantisOpen then
       local canRepair = CanMerchantRepair();
@@ -549,8 +555,11 @@ function TitanRepair_GetEquipedInformation()
 
      TitanRepairTooltip:SetOwner(UIParent, "ANCHOR_NONE");
 
+	tit_debug_bis("_GetEquipedInfo loop" );
      for index, value in pairs(INVENTORY_ALERT_STATUS_SLOTS) do -- index begins from 1
-
+if index==11 then
+--do nothing
+else
           local act_status, act_val, act_max, act_cost,
                 itemName, itemType, itemSubType, itemRarity, itemColor = TitanRepair_GetStatus(index);
           if TitanGetVar(TITAN_REPAIR_ID,"IgnoreThrown")
@@ -578,7 +587,9 @@ function TitanRepair_GetEquipedInformation()
           TPR.ITEM_STATUS[index].values.item_quality = itemRarity;
           TPR.ITEM_STATUS[index].values.item_color = itemColor;
           TPR.ITEM_STATUS[index].values.item_frac = act_status;
+end
      end
+	tit_debug_bis("_GetEquipedInfo loop end " .. (min_status or 0).. " | " ..(min_index or 0));
      TPR.EquipedMinIndex = min_index;
 
      TPR.INDEX = TitanRepair_GetMostDamagedItem();
@@ -608,6 +619,8 @@ function TitanRepair_GetStatus(index, bag)
    local cost = 0;
    local hasItem, repairCost, itemName, itemRarity, itemType, itemSubType, itemColor
 
+--tit_debug_bis("_GetStatus index="..(index or 0).." bag="..(bag or 0));
+--if index==11 then return end -- ranged slot no longer exists
    TitanRepairTooltip:ClearLines();
 
    if (bag) then
@@ -616,12 +629,15 @@ function TitanRepair_GetStatus(index, bag)
       hasItem = 1;
    else
       local slotName = TPR.ITEM_STATUS[index].slot .. "Slot";
+--tit_debug_bis("_GetStatus slotName="..(slotName or 0));
       local id = GetInventorySlotInfo(slotName);      
       local lHasItem, _, lRepairCost = TitanRepairTooltip:SetInventoryItem("player", id);
       hasItem = lHasItem;
       repairCost = lRepairCost;
+--tit_debug_bis("_GetStatus hasItem="..(hasItem or 0).." repairCost="..(repairCost or 0));
 
       if hasItem and GetInventoryItemLink("player", id) then
+--tit_debug_bis("_GetStatus id="..(id or 0).." slotName="..(slotName or 0).." link="..GetInventoryItemLink("player", id));
          -- get info on the item
                 itemName,
                 _,    --itemLink
@@ -667,6 +683,20 @@ function TitanRepair_GetStatus(index, bag)
       end
 
    end
+--[[
+tit_debug_bis("_GetStatus > val="..(val or 0)
+.." max="..(max or 0)
+.." cost="..(cost or 0)
+.." itemName="..(itemName or 0)
+.." itemType="..(itemType or 0)
+.." itemSubType="..(itemSubType or 0)
+.." itemRarity="..(itemRarity or 0)
+.." itemColor="..(itemColor or 0)
+)
+--]]
+tit_debug_bis("_GetStatus "
+.." cost="..(cost or 0)
+)
    return 
       TitanRepair_GetStatusPercent(val, max), -- cost as a percentage
       val, -- current durability
@@ -1293,10 +1323,20 @@ local info;
 		end
 
 		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "GuildBank" then
-			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
-			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());   
-			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
-			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_WITHDRAW"].." "..withdrawGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+--			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
+--			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());   
+--			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+			-- create somewhere to store the result and default it 
+			local dailyGoldWithdrawlLimit = 0 
+			-- need to get the guildRankIndex for the currently logged on player 
+			local guildName, _, guildRankIndex = GetGuildInfo("player") 
+			-- guildName is nil if the character isn't in a guild 
+			if (guildName ~= nil) then 
+				-- This character is in a guild, so set the current rank so the limit will work 
+				GuildControlSetRank(guildRankIndex) 
+				dailyGoldWithdrawlLimit = GetGuildBankWithdrawGoldLimit() 
+			end 
+			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_WITHDRAW"].." "..dailyGoldWithdrawlLimit, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 			info = {}
 			info.text = L["TITAN_REPAIR_GBANK_USEFUNDS"]
 			info.func = function() TitanToggleVar(TITAN_REPAIR_ID, "UseGuildBank"); end
@@ -1349,11 +1389,16 @@ local info;
 	info.hasArrow = 1;	 
 	UIDropDownMenu_AddButton(info);
 
+	local guildName, _, _ = GetGuildInfo("player") 
 	info = {};
 	info.notCheckable = true
 	info.text = _G["GUILD_BANK"];
 	info.value = "GuildBank"
-	info.hasArrow = 1;	 
+	if guildName then
+		info.hasArrow = 1
+	else
+		info.disabled = true
+	end
 	UIDropDownMenu_AddButton(info);
 
 	info = {};
@@ -1471,7 +1516,7 @@ function TitanRepair_ShowInventory()
    TitanToggleVar(TITAN_REPAIR_ID, "ShowInventory");
    
    if TitanGetVar(TITAN_REPAIR_ID,"ShowInventory") ~= 1 then
-      TitanPanelRepairButton_ResetStatus(TPR.ITEM_STATUS[12].values)
+      TitanPanelRepairButton_ResetStatus(TPR.ITEM_STATUS[TPR.END].values)
    end
          
    TitanPanelRepairButton_ScanAllItems();

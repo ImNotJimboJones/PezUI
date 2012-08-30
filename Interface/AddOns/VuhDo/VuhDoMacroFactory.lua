@@ -15,6 +15,7 @@ local gsub = gsub;
 local twipe = table.wipe;
 local format = format;
 local sEmpty = { };
+local _;
 
 CreateFrame("Button", "VDSTB", nil, "SecureActionButtonTemplate");
 VDSTB:SetAttribute("type", "stop"); -- Calls SpellStopTargeting
@@ -329,12 +330,12 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 	end
 
 	tSpellPost = "";
-	if ("DRUID" == VUHDO_PLAYER_CLASS and VUHDO_SPELL_CONFIG["autoBattleRez"]) then
-		tSpellPost = "/use [dead,nobonusbar:5,combat,";
+	if (("DRUID" == VUHDO_PLAYER_CLASS or "PALADIN" == VUHDO_PLAYER_CLASS) and VUHDO_SPELL_CONFIG["autoBattleRez"]) then
+		tSpellPost = "/use [dead,novehicleui,combat,";
 		if (VUHDO_SPELL_CONFIG["smartCastModi"] ~= "all") then
 			tSpellPost = tSpellPost .. "mod:" .. VUHDO_SPELL_CONFIG["smartCastModi"] .. ",";
 		end
-		tSpellPost =  tSpellPost .. "@mouseover] " .. VUHDO_SPELL_ID.REBIRTH .. "\n";
+		tSpellPost =  tSpellPost .. (anIsKeyboard and "@mouseover] " or "@vuhdo] ") .. VUHDO_SPELL_ID.REBIRTH .. "\n";
 	end
 
 	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
@@ -342,12 +343,12 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 
 		if ("DRUID" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1/3,";
-			tSpellPost = tSpellPost .. "/tar [form:1/3,nobonusbar:5,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
+			tSpellPost = tSpellPost .. "/tar [form:1/3,novehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
 		end
 
 		if ("PRIEST" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1,";
-			tSpellPost = "/tar [form:1,nobonusbar:5,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
+			tSpellPost = "/tar [form:1,novehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
 		end
 	end
 
@@ -356,14 +357,14 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		tText = tText .. tSpellPost;
 	else
 		if (aPet ~= nil and VUHDO_SPELL_ID.REBIRTH ~= anAction) then
-			tVehicleCond = "[nodead,help,nobonusbar:5,@vdpet]";
+			tVehicleCond = "[nodead,help,novehicleui,@vdpet]";
 		else
 			tVehicleCond = "";
 		end
-		tText = tText .. "/use [" .. tModiSpell .. "nobonusbar:5,@vuhdo]" .. tVehicleCond .. " " .. anAction .. "\n";
+		tText = tText .. "/use [" .. tModiSpell .. "novehicleui,@vuhdo]" .. tVehicleCond .. " " .. anAction .. "\n";
 		tText = tText .. tSpellPost;
 		if (aPet ~= nil) then
-			tText = tText .. "/tar [bonusbar:5,@vdpet]\n";
+			tText = tText .. "/tar [vehicleui,@vdpet]\n";
 		end
 
 		if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
@@ -373,7 +374,6 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		end
 	end
 
-	--VUHDO_Msg(tText);
 	return tText;
 end
 

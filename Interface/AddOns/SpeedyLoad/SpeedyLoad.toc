@@ -1,10 +1,9 @@
-﻿## Interface: 40300
-## X-Compatible-With: 50001
+﻿## Interface: 50001
 ## Title: Speedy Load
-## Version: 2.0.0
+## Version: 2.0.1
 ## Author: Cybeloras of Detheroc/Mal'Ganis
 ## Notes: Disables certain events during loading screens to drastically improve loading times.
-## X-Curse-Packaged-Version: 2.0.0
+## X-Curse-Packaged-Version: 2.0.1
 ## X-Curse-Project-Name: Speedy Load
 ## X-Curse-Project-ID: speedy-load
 ## X-Curse-Repository-ID: wow/speedy-load/mainline

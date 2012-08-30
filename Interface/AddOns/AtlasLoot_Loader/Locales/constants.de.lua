@@ -1,4 +1,4 @@
-﻿-- $Id: constants.de.lua 3708 2012-03-03 20:09:17Z Dynaletik $
+-- $Id: constants.de.lua 3736 2012-08-14 18:31:11Z hegarol $
 --[[
 constants.de.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -7,7 +7,6 @@ back to the English translation.
 
 The AL["text"] = true; shortcut can ONLY be used for English (the root translation).
 ]]
-
 	-- Table holding all loot tables is initialised here as it loads early
 	--AtlasLoot_Data = {};
 	--AtlasLoot_TableNames = {};
@@ -247,9 +246,7 @@ if AL then
 	AL["ilvl 226"] = "Gegenstandsstufe 226";
 	AL["ilvl 245"] = "Gegenstandsstufe 245";
 	AL["ilvl 264"] = "Gegenstandsstufe 264";
-	AL["ilvl 378"] = "Gegenstandsstufe 378";
 	AL["ilvl 397"] = "Gegenstandsstufe 397";
-	AL["ilvl 410"] = "Gegenstandsstufe 410";
 	-- AL["Gladiator"] = true;
 	AL["Vengeful"] = "Rachsüchtig";
 	AL["Merciless"] = "Erbarmungslos";
@@ -678,7 +675,6 @@ if AL then
 
 	-- General titles
 	AL["Achievement"] = "Erfolg";
-	AL["Promotional & Card Game"] = "Promotion & Kartenspiel";
 	-- AL["Dungeon"] = true;
 	AL["Outdoor"] = "Außenwelt";
 
@@ -1064,6 +1060,7 @@ if AL then
 	AL["Varlan Highbough"] = "Varlan Hochblatt";
 	AL["Firestone Vendor"] = "Händler für Feuersteine";
 	-- AL["Poseidus"] = true;
+	AL["Burgy Blackheart"] = "Bürgi Schwarzherz";
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = "Prüfung des Obersten Kreuzfahrers";
@@ -1132,6 +1129,9 @@ if AL then
 	AL["Hidden Stash"] = "Gebunkerte Güter";
 	AL["The Cache of Madness"] = "Der Hort des Wahnsinns";
 	AL["Stolen Present"] = "Gestohlenes Geschenk";
+	AL["Annual Pass"] = "Jahrespass";
+	AL["Scroll of Resurrection"] = "Rolle der Auferstehung";
+	AL["Recruit-A-Friend"] = "Werbt einen Freund";
 
 	-- Error Messages and warnings
 	AL["AtlasLoot Error!"] = "AtlasLoot Fehler!";

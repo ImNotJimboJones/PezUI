@@ -1,4 +1,5 @@
 local pairs = pairs;
+local _;
 
 VUHDO_GLOBAL_CONFIG = {
 	["PROFILES_VERSION"] = 1;
@@ -130,6 +131,7 @@ local VUHDO_DEFAULT_RANGE_SPELLS = {
 	["DRUID"] = VUHDO_SPELL_ID.REJUVENATION,
 	["PRIEST"] = VUHDO_SPELL_ID.HEAL,
 --	["DEATHKNIGHT"] = nil,
+	["MONK"] = VUHDO_SPELL_ID.DETOX,
 }
 
 
@@ -145,7 +147,7 @@ local VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = {
 		["1"] = {"", "1", VUHDO_SPELL_ID.FLASH_OF_LIGHT},
 		["2"] = {"", "2", VUHDO_SPELL_ID.PALA_CLEANSE},
 		["3"] = {"", "3", "menu"},
-		["4"] = {"", "4", VUHDO_SPELL_ID.DIVINE_FAVOR},
+		--["4"] = {"", "4", VUHDO_SPELL_ID.DIVINE_FAVOR}, -- MOP
 		["5"] = {"", "5", VUHDO_SPELL_ID.DIVINE_ILLUMINATION},
 
 		["alt1"] = {"alt-", "1", "target"},
@@ -218,7 +220,25 @@ local VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = {
 		["ctrl5"] = {"ctrl-", "5", VUHDO_SPELL_ID.TRANQUILITY},
 
 		["shift2"] = {"shift-", "2", VUHDO_SPELL_ID.REMOVE_CURSE},
-	}
+	},
+
+	["MONK"] = {
+		["1"] = { "", "1", VUHDO_SPELL_ID.SURGING_MIST },
+		["2"] = { "", "2", VUHDO_SPELL_ID.ENVELOPING_MIST },
+		["3"] = { "", "3", "menu"},
+		["4"] = { "", "4", VUHDO_SPELL_ID.RENEWING_MIST },
+		["5"] = { "", "5", VUHDO_SPELL_ID.SOOTHING_MIST },
+
+		["alt1"] = { "alt-", "1", "target" },
+		["alt2"] = { "alt-", "2", VUHDO_SPELL_ID.CHI_WAVE },
+
+		["ctrl1"] = { "ctrl-", "1", VUHDO_SPELL_ID.DETOX },
+		["ctrl2"] = { "ctrl-", "2", VUHDO_SPELL_ID.LIFE_COCOON },
+
+		["shift1"] = { "shift-", "1", VUHDO_SPELL_ID.UPLIFT },
+		["shift2"] = { "shift-", "2", VUHDO_SPELL_ID.REVIVAL },
+	},
+
 };
 
 
@@ -475,6 +495,7 @@ local VUHDO_DEFAULT_CONFIG = {
 	["SHOW_PANELS"] = true,
 	["HIDE_PANELS_SOLO"] = false,
 	["HIDE_PANELS_PARTY"] = false,
+	["HIDE_PANELS_PET_BATTLE"] = true,
 	["LOCK_PANELS"] = false,
 	["LOCK_CLICKS_THROUGH"] = false,
 	["LOCK_IN_FIGHT"] = true,
@@ -616,6 +637,7 @@ local VUHDO_DEFAULT_CONFIG = {
 	["CLUSTER"] = {
 		["REFRESH"] = 180,
 		["RANGE"] = 30,
+		["RANGE_JUMP"] = 11,
 		["BELOW_HEALTH_PERC"] = 85,
 		["THRESH_FAIR"] = 3,
 		["THRESH_GOOD"] = 5,
@@ -695,14 +717,14 @@ local VUHDO_DEFAULT_CONFIG = {
 				["enable"] = true,
 				["thresh"] = 8000,
 			},
-			["ef"] = {
+			--[[ ["ef"] = {
 				["enable"] = true,
 				["thresh"] = 8000,
-			},
+			}, ]] -- MOP
 			["hr"] = {
 				["enable"] = false,
 				["thresh"] = 10000,
-			},
+			}, -- MOP
 		},
 
 	},
@@ -774,7 +796,7 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["VERSION"] = 4;
 	end
 
-	VUHDO_addCustomSpellIds(14,
+	--[[VUHDO_addCustomSpellIds(14,
 		-- 4.1 raid
 		95173, -- Consuming Darkness
 		91911, -- Constricting Chains
@@ -853,7 +875,7 @@ function VUHDO_loadDefaultConfig()
 		96328, -- Toxic Torment
 		96326, -- Burning Blood
 		96325  -- Frostburn Formula
-	);
+	);]]
 
 
 	VUHDO_addCustomSpellIds(18,
@@ -924,23 +946,6 @@ function VUHDO_loadDefaultConfig()
 		--109592, -- Corrupted blood
 	);
 
-	--[[local tUpdateStacks = false;
-	if (VUHDO_CONFIG["CUSTOM_DEBUFF"].version < 20) then
-		VUHDO_tableRemoveValue(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], select(1, GetSpellInfo(109389)));
-		VUHDO_addCustomSpellIds(20,
-			"108220",
-			"105171",
-			"103628",
-			"109389",
-			"108349",
-			"108348",
-			"108347",
-			"105173",
-			"109390"
-		);
-		tUpdateStacks = true;
-	end]]
-
 
 	local tName;
 	for _, tName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
@@ -951,19 +956,6 @@ function VUHDO_loadDefaultConfig()
 			VUHDO_DEFAULT_CU_DE_STORED_SETTINGS
 		);
 	end
-
-	--[[if (tUpdateStacks) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["108220"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["105171"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["103628"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["109389"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["108349"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["108348"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["108347"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["105171"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]["109390"]["isStacks"] = true;
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][select(1, GetSpellInfo(109389))] = nil;
-	end]]
 
 	if (VUHDO_POWER_TYPE_COLORS == nil) then
 		VUHDO_POWER_TYPE_COLORS = VUHDO_decompressOrCopy(VUHDO_DEFAULT_POWER_TYPE_COLORS);
@@ -1647,7 +1639,6 @@ local VUHDO_DEFAULT_BUFF_CONFIG = {
 	["REBUFF_MIN_MINUTES"] = 3,
 	["HIGHLIGHT_COOLDOWN"] = true,
 	["WHEEL_SMART_BUFF"] = false,
-	["USE_COMBINED"] = true,
 
 	["SWATCH_COLOR_BUFF_OKAY"] = {
 		["R"] = 0, ["G"] = 0,	["B"] = 0,
@@ -1707,6 +1698,9 @@ VUHDO_DEFAULT_USER_CLASS_COLORS = {
 
 	[VUHDO_ID_DEATH_KNIGHT] = { ["R"]  = 0.77, ["G"]  = 0.12, ["B"]  = 0.23, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
 															["TR"] = 0.87, ["TG"] = 0.22, ["TB"] = 0.33, ["TO"] = 1, ["useText"] = true  },
+
+	[VUHDO_ID_MONKS] =        { ["R"]  = 0,    ["G"]  = 1,    ["B"]  = 0.59, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
+															["TR"] = 0,    ["TG"] = 1,    ["TB"] = 0.69, ["TO"] = 1, ["useText"] = true  },
 
 	[VUHDO_ID_PETS] =         { ["R"]  = 0.4,  ["G"]  = 0.6,  ["B"]  = 0.4,    ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
 															["TR"] = 0.5,    ["TG"] = 0.9,    ["TB"] = 0.5,    ["TO"] = 1, ["useText"] = true  },

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(132, "DBM-Party-Cataclysm", 3, 71)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7663 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7759 $"):sub(12, -3))
 mod:SetCreatureID(40177)
 mod:SetModelID(33429)
 mod:SetZone()
@@ -19,7 +19,7 @@ local warnDualBlades		= mod:NewSpellAnnounce(74981, 3)
 local warnEncumbered		= mod:NewSpellAnnounce(75007, 3)
 local warnPhalanx			= mod:NewSpellAnnounce(74908, 3)
 local warnImpalingSlam		= mod:NewTargetAnnounce(75056, 3)
-local warnDisorientingRoar	= mod:NewSpellAnnounce(90737, 3)
+local warnDisorientingRoar	= mod:NewSpellAnnounce(74976, 3)
 
 local specWarnCaveIn		= mod:NewSpecialWarningMove(74987)
 
@@ -41,7 +41,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(75056, 90756) then
 		warnImpalingSlam:Show(args.destName)
 		timerImpalingSlam:Start(args.destName)
-	elseif args:IsSpellID(90737) and self:AntiSpam(10) then
+	elseif args:IsSpellID(74976, 90737) and self:AntiSpam(10) then
 		warnDisorientingRoar:Show()
 	elseif args:IsSpellID(74987) and args:IsPlayer() then
 		specWarnCaveIn:Show()

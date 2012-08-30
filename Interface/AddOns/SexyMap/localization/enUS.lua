@@ -72,6 +72,9 @@ L["Blend Mode"] = "Blend Mode"
 L["Disable Rotation"] = "Disable Rotation"
 L["Force a square texture. Fixed distortion on square textures."] = "Force a square texture. Fixed distortion on square textures."
 
+L["Default Presets"] = "Default Presets"
+L["User-Submitted Presets"] = "User-Submitted Presets"
+
 -- ./Buttons.lua
 L["Calendar"] = "Calendar"
 L["Tracking Button"] = "Tracking Button"
@@ -87,7 +90,7 @@ L["Dungeon Difficulty Indicator (When Available)"] = "Dungeon Difficulty Indicat
 L["New Mail Indicator (When Available)"] = "New Mail Indicator (When Available)"
 L["Video Recording Button (Mac OSX Only, When Available)"] = "Video Recording Button (Mac OSX Only, When Available)"
 L["Voice Chat Button (When Available)"] = "Voice Chat Button (When Available)"
-L["Queue Status Button (When Available)"] = "Queue Status Button (When Available)"
+L["Queue Status (PvP/LFG) Button (When Available)"] = "Queue Status (PvP/LFG) Button (When Available)"
 
 L["Addon Buttons"] = "Addon Buttons"
 L["Dynamic Buttons"] = "Dynamic Buttons"
@@ -98,6 +101,7 @@ L["Allow SexyMap to assume drag ownership for buttons attached to the minimap. T
 L["Let SexyMap control button visibility"] = "Let SexyMap control button visibility"
 L["Turn this off if you want another mod to handle which buttons are visible on the minimap."] = "Turn this off if you want another mod to handle which buttons are visible on the minimap."
 L["Drag Radius"] = "Drag Radius"
+L["Visibility"] = "Visibility"
 
 L["Always"] = "Always"
 L["Never"] = "Never"
@@ -120,15 +124,6 @@ L["Normal Opacity"] = "Normal Opacity"
 L["Hover Opacity"] = "Hover Opacity"
 L["Fader"] = "Fader"
 
--- ./General.lua
-L["Lock Minimap"] = "Lock Minimap"
-L["Clamp to screen"] = "Clamp to screen"
-L["Prevent the minimap from being moved off the screen"] = "Prevent the minimap from being moved off the screen"
-L["Right Click Configure"] = "Right Click Configure"
-L["Right clicking the map will open the SexyMap options"] = "Right clicking the map will open the SexyMap options"
-L["Auto Zoom-Out Delay"] = "Auto Zoom-Out Delay"
-L["If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"] = "If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"
-
 -- ./HudMap.lua
 L["Enable a HUD minimap. This is very useful for gathering resources, but for technical reasons, the HUD map and the normal minimap can't be shown at the same time. Showing the HUD map will turn off the normal minimap."] = "Enable a HUD minimap. This is very useful for gathering resources, but for technical reasons, the HUD map and the normal minimap can't be shown at the same time. Showing the HUD map will turn off the normal minimap."
 L["Enable Hudmap"] = "Enable Hudmap"
@@ -140,6 +135,7 @@ L["Use GatherMate pins"] = "Use GatherMate pins"
 L["Use QuestHelper pins"] = "Use QuestHelper pins"
 L["Routes plots the shortest distance between resource nodes. Install it to show farming routes on your HudMap."] = "Routes plots the shortest distance between resource nodes. Install it to show farming routes on your HudMap."
 L["Use Routes"] = "Use Routes"
+L["Toggle HudMap On/Off"] = "Toggle HudMap On/Off"
 
 -- ./Movers.lua
 L["Movers Warning"] = "WARNING: This feature is not officially supported, expect problems when using this feature such as taints, loss of quest tracker functionality, or boss frames jumping around. Blizzard frames like the quest tracker and boss health aren't designed to be moved, I suggest you use addons that replace these frames e.g. Unit Frames for boss health."
@@ -159,7 +155,25 @@ L["Show on minimap"] = "Show on minimap"
 L["Ping"] = "Ping"
 
 -- ./SexyMap.lua
+L["Lock Minimap"] = "Lock Minimap"
+L["Clamp to screen"] = "Clamp to screen"
+L["Prevent the minimap from being moved off the screen"] = "Prevent the minimap from being moved off the screen"
+L["Right Click Configure"] = "Right Click Configure"
+L["Right clicking the map will open the SexyMap options"] = "Right clicking the map will open the SexyMap options"
+L["Auto Zoom-Out Delay"] = "Auto Zoom-Out Delay"
+L["If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"] = "If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"
+L["Show North Tag"] = "Show North Tag"
 L["Profiles"] = "Profiles"
+L["Copy a Profile"] = "Copy a Profile"
+L["Copying this profile will reload your UI, are you sure?"] = "Copying this profile will reload your UI, are you sure?"
+L["Delete a Profile"] = "Delete a Profile"
+L["Really delete this profile?"] = "Really delete this profile?"
+L["Reset Current Profile"] = "Reset Current Profile"
+L["Resetting this profile will reload your UI, are you sure?"] = "Resetting this profile will reload your UI, are you sure?"
+L["Quickly change the look of your minimap by using a minimap preset."] = "Quickly change the look of your minimap by using a minimap preset."
+L["Use the global profile if you want the same look on every character, or use a character-specific profile for a unique look on each character."] = "Use the global profile if you want the same look on every character, or use a character-specific profile for a unique look on each character."
+L["Use Global Profile"] = "Use Global Profile"
+L["If no global profile exists, your current profile will be copied over and used.\n\nIf one already exists, your current profile will be erased and you'll be moved over to the global profile.\n\nThis will also reload your UI, are you sure?"] = "If no global profile exists, your current profile will be copied over and used.\n\nIf one already exists, your current profile will be erased and you'll be moved over to the global profile.\n\nThis will also reload your UI, are you sure?"
 
 -- ./Shapes.lua
 L["Circle"] = "Circle"
@@ -186,6 +200,7 @@ L["Font"] = "Font"
 L["Horizontal Position"] = "Horizontal Position"
 L["Vertical Position"] = "Vertical Position"
 L["Background Color"] = "Background Color"
+L["(Requires button visibility control in the Buttons menu)"] = "(Requires button visibility control in the Buttons menu)"
 
 L["Zone Text"] = "Zone Text"
 

@@ -1,12 +1,9 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local modName = "Shapes"
-local mod = addon.SexyMap:NewModule(modName)
-local L = addon.L
-local db
-local CallbackHandler = LibStub:GetLibrary("CallbackHandler-1.0")
-mod.callbacks = CallbackHandler:New(mod)
+local _, sm = ...
+sm.shapes = {}
+
+local mod = sm.shapes
+local L = sm.L
 
 local keys = {}
 local function interpolate(points, angle)
@@ -255,14 +252,12 @@ local shapeOptions = {
 	end
 }
 
-function mod:OnInitialize()
-	self.db = parent.db:RegisterNamespace(modName, defaults)
-	db = self.db.profile
+function mod:OnInitialize(profile)
+	db = profile.core
 end
 
 function mod:OnEnable()
-	db = self.db.profile
-	db.shape = db.shape or parent:GetModule("General").db.profile.shape or "Textures\\MinimapMask"
+	db.shape = db.shape or "Textures\\MinimapMask"
 	self:ApplyShape()
 end
 
@@ -290,13 +285,13 @@ function mod:ApplyShape(shape)
 	local dbShape = db.shape and legacyMappings[db.shape] or db.shape
 	if shape or dbShape then
 		db.shape = shape or dbShape or "Textures\\MinimapMask"
-		parent:GetModule("Borders").db.profile.shape = db.shape
 		Minimap:SetMaskTexture(db.shape)
 	end
-	self.callbacks:Fire("SexyMap_ShapeChanged")
+	sm.buttons:UpdateDraggables()
 end
 
-function GetMinimapShape()
+-- Global function for other addons
+GetMinimapShape = function()
 	if HudMapCluster and HudMapCluster:IsShown() then -- HudMap module compat
 		return "ROUND"
 	else

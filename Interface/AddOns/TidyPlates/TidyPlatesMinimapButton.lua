@@ -10,7 +10,7 @@ local DropdownFrame = CreateFrame("Frame", "TidyPlatesDropdownFrame", UIParent, 
 local ButtonTexture = "Interface\\Addons\\TidyPlates\\media\\TidyPlatesIcon"
 
 local function GetCurrentSpec()
-	if GetActiveTalentGroup(false, false) == 2 then return "secondary" 
+	if TidyPlatesUtility.GetSpec(false, false) == 2 then return "secondary" 
 	else return "primary" end
 end
 

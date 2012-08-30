@@ -18,10 +18,10 @@ If you use the minimap menu, turning on Blizzard's +Beginner Tooltips> option
 may be useful until you are accustomed to the addon.
 
 More information is available at the Curse project page,
-http://wow.curse.com/downloads/wow-addons/details/arbitcomm.aspx
+www.curse.com/addons/wow/arbitcomm
 
 To submit a bug report or suggestion, use the ticket tracker at
-http://www.wowace.com/addons/arbitcomm/tickets/
+www.wowace.com/addons/arbitcomm/tickets
 ]]
 
 

@@ -8,6 +8,8 @@ local VUHDO_customizeIconText;
 local sSign;
 local sMaxNum;
 local sPoint;
+local sColSpacing, sRowSpacing;
+local sIsTooltipCache = { };
 
 function VUHDO_panelRedrawCustomDebuffsInitBurst()
 	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
@@ -41,6 +43,8 @@ function VUHDO_panelRedrwawCustomDebuffsInitLocalVars(aPanelNum)
 	sYOffset = -sDebuffConfig["yAdjust"] * sBarScaling["barHeight"] * 0.01;
 	sHeight = sBarScaling["barHeight"];
 	sStep = sSign * sHeight;
+	table.wipe(sIsTooltipCache);
+	sColSpacing, sRowSpacing = sBarScaling["columnSpacing"], sBarScaling["rowSpacing"];
 end
 
 
@@ -52,6 +56,29 @@ function VUHDO_initButtonStaticsCustomDebuffs(aButton, aPanelNum)
 end
 
 
+
+--
+local tMaxDiff, tMaxDiffX, tMaxDiffY, tRScale, tPScale;
+local function VUHDO_isMostlyInBounds(aRegion, aParent, aMaxDiffFactor)
+
+	if (aRegion:GetTop() == nil or aParent:GetTop() == nil) then
+		return nil;
+	end
+
+	tRScale, tPScale = aRegion:GetEffectiveScale() or 1, aParent:GetEffectiveScale() or 1;
+
+	tMaxDiff = (aRegion:GetWidth() or 0) * aMaxDiffFactor * tRScale;
+	tMaxDiffX = tMaxDiff + sColSpacing * tPScale;
+	tMaxDiffY = tMaxDiff + sRowSpacing * tPScale;
+
+	--VUHDO_xMsg(floor(tMaxDiffX + 0.5), floor(tMaxDiffY + 0.5));
+
+	return ((aRegion:GetLeft()   or 0) * tRScale >= (aParent:GetLeft()   or 0) * tPScale - tMaxDiffX
+		  and (aRegion:GetTop()    or 0) * tRScale <= (aParent:GetTop()    or 0) * tPScale + tMaxDiffY
+		  and (aRegion:GetRight()  or 0) * tRScale <= (aParent:GetRight()  or 0) * tPScale + tMaxDiffX
+		  and (aRegion:GetBottom() or 0) * tRScale >= (aParent:GetBottom() or 0) * tPScale - tMaxDiffY) and 1 or 0;
+
+end
 
 
 --
@@ -65,29 +92,35 @@ function VUHDO_initCustomDebuffs()
 	for tCnt = 0, sMaxNum - 1 do
 		tIconIdx = 40 + tCnt;
 
-		tFrame = VUHDO_getBarIconFrame(sButton, tIconIdx);
-		tFrame:ClearAllPoints();
-		tFrame:SetPoint(sPoint, sHealthBar:GetName(), sPoint,
-			 sXOffset + (tCnt * sStep), sYOffset); -- center
-		if (VUHDO_CONFIG["DEBUFF_TOOLTIP"]) then
-			tFrame:SetWidth(sHeight);
-			tFrame:SetHeight(sHeight);
-		else
-			tFrame:SetWidth(0.001);
-			tFrame:SetHeight(0.001);
-		end
-		tFrame:SetAlpha(0);
-		tFrame:SetScale(VUHDO_CONFIG["CUSTOM_DEBUFF"]["scale"] * 0.7);
-		tFrame:Show();
-
 		tButton = VUHDO_getBarIconButton(sButton, tIconIdx);
-		--tButton:SetPoint("CENTER", tFrame:GetName(), "CENTER", 0, 0);
 		tButton:ClearAllPoints();
 		tButton:SetPoint(sPoint, sHealthBar:GetName(), sPoint,
 			 sXOffset + (tCnt * sStep), sYOffset); -- center
 		tButton:SetWidth(sHeight);
 		tButton:SetHeight(sHeight);
 		tButton:SetScale(1);
+
+		tFrame = VUHDO_getBarIconFrame(sButton, tIconIdx);
+		tFrame:ClearAllPoints();
+		tFrame:SetPoint(sPoint, sHealthBar:GetName(), sPoint,
+			 sXOffset + (tCnt * sStep), sYOffset); -- center
+
+		if (sIsTooltipCache[tIconIdx] == nil) then
+			sIsTooltipCache[tIconIdx] = VUHDO_isMostlyInBounds(tButton, sButton, 0.33);
+		end
+
+		if (VUHDO_CONFIG["DEBUFF_TOOLTIP"] and sIsTooltipCache[tIconIdx] == 1) then
+			tFrame:SetWidth(sHeight);
+			tFrame:SetHeight(sHeight);
+		else
+			tFrame:SetWidth(0.001);
+			tFrame:SetHeight(0.001);
+			--VUHDO_Msg("Removing " .. (tCnt + 1));
+		end
+		tFrame:SetAlpha(0);
+		tFrame:SetScale(VUHDO_CONFIG["CUSTOM_DEBUFF"]["scale"] * 0.7);
+		tFrame:Show();
+
 
 		tIcon = VUHDO_getBarIcon(sButton, tIconIdx);
 		tIcon:SetAllPoints();

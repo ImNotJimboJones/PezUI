@@ -10,7 +10,11 @@ local TrackedUnitTargets = {}
 local TrackedUnitTargetHistory = {}
 local TargetWatcher
 
+local inRaid = false
+
 local function TargetWatcherEvents()
+	if not inRaid then return end
+	
 	local widget, plate
 	local target, unitid, guid
 	local changes = false
@@ -32,7 +36,12 @@ local function TargetWatcherEvents()
 	guid = UnitGUID("focus")
 	if guid then TrackedUnits[guid] = "focus" end
 	
-	local raidsize = GetNumRaidMembers() - 1
+	
+	local raidsize = (TidyPlatesUtility.GetNumRaidMembers() or 0 ) - 1
+	
+	--if raidsize then raidsize = raidsize - 1		-- Check for nils
+	--else return end
+	
 	for index = 1, raidsize do
 		unitid = "raid"..index.."target"
 		guid = UnitGUID(unitid)
@@ -67,6 +76,8 @@ local TankWatcher
 	- Paladin: Righteous Fury			SpellID: 25780
 	- Warrior: Defensive stance			SpellID: 71			-- GetShapeshiftFormID(), 18
 	- Death Knight: Blood Presence		SpellID: 48263
+	
+	- Monk: 
 
 --]]
 
@@ -87,6 +98,7 @@ local TankAuras = {
 	["25780"] = true, 		-- Paladin Righteous Fury
 	-- ["71"] = true, 
 	["48263"] = true, 		-- Blood
+	["115069"] = true, 		-- Stance of the Sturdy Ox
 }
 
 --TidyPlatesWidgets.IsTankingAuraActive = false
@@ -125,7 +137,8 @@ local function TankWatcherEvents(frame, event, ...)
 	
 	local index, size
 	if UnitInRaid("player") then
-		size = GetNumRaidMembers() - 1
+		inRaid = true
+		size = TidyPlatesUtility.GetNumRaidMembers() - 1
 		for index = 1, size do
 			local raidid = "raid"..tostring(index)
 			
@@ -135,6 +148,7 @@ local function TankWatcherEvents(frame, event, ...)
 			else TankNames[UnitName(raidid)] = nil end
 		end			
 	else 
+		inRaid = false
 		TankNames = wipe(TankNames)
 		if HasPetUI("player") and UnitName("pet") then 
 			TankNames[UnitName("pet")] = true  			-- Adds your pet to the list (for you, only)
@@ -148,6 +162,7 @@ end
 local function EnableTankWatch()
 	-- Target-Of Watcher
 	if not TargetWatcher then TargetWatcher = CreateFrame("Frame") end
+	TargetWatcher:RegisterEvent("PLAYER_ENTERING_WORLD")
 	TargetWatcher:RegisterEvent("PLAYER_REGEN_ENABLED")
 	TargetWatcher:RegisterEvent("PLAYER_REGEN_DISABLED")
 	TargetWatcher:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -159,6 +174,7 @@ local function EnableTankWatch()
 	-- Party Tanks
 	if not TankWatcher then TankWatcher = CreateFrame("Frame") end
 	TankWatcher:RegisterEvent("RAID_ROSTER_UPDATE")
+	TankWatcher:RegisterEvent("PLAYER_ENTERING_WORLD")
 	TankWatcher:RegisterEvent("PARTY_MEMBERS_CHANGED")
 	TankWatcher:RegisterEvent("PARTY_CONVERTED_TO_RAID")
 	TankWatcher:RegisterEvent("UNIT_AURA")

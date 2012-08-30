@@ -1,7 +1,8 @@
-local VUHDO_GLOBAL = getfenv();
+local _G = getfenv();
 local pairs = pairs;
 local format = format;
 local CreateFrame = CreateFrame;
+local _;
 
 -- Fast caches
 local VUHDO_HEALTH_BAR = { };
@@ -28,7 +29,6 @@ local VUHDO_STUB_COMPONENT = {
   ["SetAlpha"] = function(self, anAlpha) end,
   ["GetAlpha"] = function() return 1 end,
 	-- Clock
-  ["SetDrawEdge"] = function() end,
   ["SetReverse"] = function() end,
   ["SetCooldown"] = function() end
 };
@@ -41,14 +41,14 @@ local VUHDO_BUTTON_CACHE = VUHDO_BUTTON_CACHE;
 
 --
 function VUHDO_getBarRoleIcon(aButton, anIconNumber)
-	return VUHDO_GLOBAL[format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), anIconNumber)];
+	return _G[format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), anIconNumber)];
 end
 
 
 
 --
 function VUHDO_getTargetBarRoleIcon(aButton, anIconNumber)
-	return VUHDO_GLOBAL[format("%sBgBarHlBarIc%d", aButton:GetName(), anIconNumber)];
+	return _G[format("%sBgBarHlBarIc%d", aButton:GetName(), anIconNumber)];
 end
 
 
@@ -110,49 +110,49 @@ end
 
 --
 function VUHDO_getRaidTargetTexture(aTargetBar)
-	return VUHDO_GLOBAL[aTargetBar:GetName() .. "TgTxu"];
+	return _G[aTargetBar:GetName() .. "TgTxu"];
 end
 
 
 
 --
 function VUHDO_getRaidTargetTextureFrame(aTargetBar)
-	return VUHDO_GLOBAL[aTargetBar:GetName() .. "Tg"];
+	return _G[aTargetBar:GetName() .. "Tg"];
 end
 
 
 
 --
 function VUHDO_getGroupOrderLabel2(aGroupOrderPanel)
-	return VUHDO_GLOBAL[aGroupOrderPanel:GetName() .. "DrgLbl2Lbl"];
+	return _G[aGroupOrderPanel:GetName() .. "DrgLbl2Lbl"];
 end
 
 
 
 --
 function VUHDO_getPanelNumLabel(aPanel)
-	return VUHDO_GLOBAL[aPanel:GetName() .. "GrpLblLbl"];
+	return _G[aPanel:GetName() .. "GrpLblLbl"];
 end
 
 
 
 --
 function VUHDO_getGroupOrderPanel(aParentPanelNum, aPanelNum)
-	return VUHDO_GLOBAL[format("Vd%dGrpOrd%d", aParentPanelNum, aPanelNum)];
+	return _G[format("Vd%dGrpOrd%d", aParentPanelNum, aPanelNum)];
 end
 
 
 
 --
 function VUHDO_getGroupSelectPanel(aParentPanelNum, aPanelNum)
-	return VUHDO_GLOBAL[format("Vd%dGrpSel%d", aParentPanelNum, aPanelNum)];
+	return _G[format("Vd%dGrpSel%d", aParentPanelNum, aPanelNum)];
 end
 
 
 
 --
 function VUHDO_getActionPanel(aPanelNum)
-	return VUHDO_GLOBAL[format("Vd%d", aPanelNum)];
+	return _G[format("Vd%d", aPanelNum)];
 end
 
 
@@ -166,48 +166,48 @@ end
 
 --
 function VUHDO_getHeaderBar(aButton)
-	return VUHDO_GLOBAL[aButton:GetName() .. "Bar"];
+	return _G[aButton:GetName() .. "Bar"];
 end
 
 
 
 --
 function VUHDO_getPlayerTargetFrame(aButton)
-	return VUHDO_GLOBAL[VUHDO_HEALTH_BAR[aButton][1]:GetName() .. "PlTg"];
+	return _G[VUHDO_HEALTH_BAR[aButton][1]:GetName() .. "PlTg"];
 end
 
 
 --
 function VUHDO_getPlayerTargetFrameTarget(aButton)
-	return VUHDO_GLOBAL[aButton:GetName() .. "TgPlTg"];
+	return _G[aButton:GetName() .. "TgPlTg"];
 end
 
 
 
 --
 function VUHDO_getPlayerTargetFrameToT(aButton)
-	return VUHDO_GLOBAL[aButton:GetName() .. "TotPlTg"];
+	return _G[aButton:GetName() .. "TotPlTg"];
 end
 
 
 
 --
 function VUHDO_getClusterBorderFrame(aButton)
-	return VUHDO_GLOBAL[VUHDO_HEALTH_BAR[aButton][1]:GetName() .. "Clu"];
+	return _G[VUHDO_HEALTH_BAR[aButton][1]:GetName() .. "Clu"];
 end
 
 
 
 --
 function VUHDO_getTargetButton(aButton)
-	return VUHDO_GLOBAL[aButton:GetName() .. "Tg"];
+	return _G[aButton:GetName() .. "Tg"];
 end
 
 
 
 --
 function VUHDO_getTotButton(aButton)
-	return VUHDO_GLOBAL[aButton:GetName() .. "Tot"];
+	return _G[aButton:GetName() .. "Tot"];
 end
 
 
@@ -221,49 +221,49 @@ end
 
 --
 function VUHDO_getTextPanel(aBar)
-	return VUHDO_GLOBAL[aBar:GetName() .. "TxPnl"];
+	return _G[aBar:GetName() .. "TxPnl"];
 end
 
 
 
 --
 function VUHDO_getBarText(aBar)
-	return VUHDO_GLOBAL[aBar:GetName() .. "TxPnlUnN"];
+	return _G[aBar:GetName() .. "TxPnlUnN"];
 end
 
 
 
 --
 function VUHDO_getHeaderTextId(aHeader)
-	return VUHDO_GLOBAL[aHeader:GetName() .. "BarUnN"];
+	return _G[aHeader:GetName() .. "BarUnN"];
 end
 
 
 
 --
 function VUHDO_getLifeText(aBar)
-	return VUHDO_GLOBAL[aBar:GetName() .. "TxPnlLife"];
+	return _G[aBar:GetName() .. "TxPnlLife"];
 end
 
 
 
 --
 function VUHDO_getOverhealPanel(aBar)
-	return VUHDO_GLOBAL[aBar:GetName() .. "OvhPnl"];
+	return _G[aBar:GetName() .. "OvhPnl"];
 end
 
 
 
 --
 function VUHDO_getOverhealText(aBar)
-	return VUHDO_GLOBAL[aBar:GetName() .. "OvhPnlT"];
+	return _G[aBar:GetName() .. "OvhPnlT"];
 end
 
 
 
 --
 function VUHDO_getHeader(aHeaderNo, aPanelNum)
-	return VUHDO_GLOBAL[format("Vd%dHd%d", aPanelNum, aHeaderNo)];
+	return _G[format("Vd%dHd%d", aPanelNum, aHeaderNo)];
 end
 
 
@@ -274,7 +274,7 @@ function VUHDO_getOrCreateBuffSwatch(aName, aParent)
 
 	if (VUHDO_BUFF_SWATCHES[aName] == nil) then
 		VUHDO_BUFF_SWATCHES[aName] = CreateFrame("Frame", aName, aParent, "VuhDoBuffSwatchPanelTemplate");
-		tButton = VUHDO_GLOBAL[aName .. "GlassButton"];
+		tButton = _G[aName .. "GlassButton"];
 
 		tButton:SetAttribute("_onleave", [=[
 			self:ClearBindings();
@@ -288,7 +288,7 @@ function VUHDO_getOrCreateBuffSwatch(aName, aParent)
 			self:ClearBindings();
 		]=]);
 	else
-		tButton = VUHDO_GLOBAL[aName .. "GlassButton"];
+		tButton = _G[aName .. "GlassButton"];
 	end
 
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["WHEEL_SMART_BUFF"]) then
@@ -322,12 +322,12 @@ end
 --
 function VUHDO_getOrCreateCooldown(aFrame, aButton, anIndex)
 	local tName =	aFrame:GetName() .. "O";
-	if (VUHDO_GLOBAL[tName] == nil) then
+	if (_G[tName] == nil) then
 		CreateFrame("Cooldown", tName, aFrame, "VuhDoHotCooldown");
 	end
 
-	VUHDO_BAR_ICON_CLOCKS[aButton][anIndex] = VUHDO_GLOBAL[tName];
-	return VUHDO_GLOBAL[tName];
+	VUHDO_BAR_ICON_CLOCKS[aButton][anIndex] = _G[tName];
+	return _G[tName];
 end
 
 
@@ -381,7 +381,7 @@ end
 
 --
 function VUHDO_getAggroTexture(aHealthBar)
-	return VUHDO_GLOBAL[aHealthBar:GetName() .. "Aggro"];
+	return _G[aHealthBar:GetName() .. "Aggro"];
 end
 
 
@@ -524,12 +524,6 @@ function VUHDO_repairStatusbar(tBar)
 
 
 
-	--[[tBar["SetMinMaxValues"] = function(self, aMinValue, aMaxValue)
-		-- Dummy, always 0-1
-	end]]
-
-
-
 	tBar["SetOrientation"] = function(self, anOrientation)
 		self["texture"]:ClearAllPoints();
 
@@ -568,11 +562,11 @@ end
 local tPrefix;
 local function VUHDO_initIconCounterTimerStacksHoT(aButton, anIndex)
 	tPrefix = format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), anIndex);
-	VUHDO_BAR_ICON_FRAMES[aButton][anIndex] = VUHDO_GLOBAL[tPrefix];
-	VUHDO_BAR_ICONS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "I"];
-	VUHDO_BAR_ICON_TIMERS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "T"];
-	VUHDO_BAR_ICON_COUNTERS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "C"];
-	VUHDO_BAR_ICON_CHARGES[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "A"];
+	VUHDO_BAR_ICON_FRAMES[aButton][anIndex] = _G[tPrefix];
+	VUHDO_BAR_ICONS[aButton][anIndex] = _G[tPrefix .. "I"];
+	VUHDO_BAR_ICON_TIMERS[aButton][anIndex] = _G[tPrefix .. "T"];
+	VUHDO_BAR_ICON_COUNTERS[aButton][anIndex] = _G[tPrefix .. "C"];
+	VUHDO_BAR_ICON_CHARGES[aButton][anIndex] = _G[tPrefix .. "A"];
 end
 
 
@@ -581,14 +575,14 @@ end
 local tPrefix;
 local function VUHDO_initIconCounterTimerStacksCuDe(aButton, anIndex)
 	tPrefix = format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), anIndex);
-	VUHDO_BAR_ICON_FRAMES[aButton][anIndex] = VUHDO_GLOBAL[tPrefix];
+	VUHDO_BAR_ICON_FRAMES[aButton][anIndex] = _G[tPrefix];
 	tPrefix = tPrefix .. "B";
-	VUHDO_BAR_ICON_BUTTONS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix];
-	VUHDO_BAR_ICONS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "I"];
-	VUHDO_BAR_ICON_TIMERS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "T"];
-	VUHDO_BAR_ICON_COUNTERS[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "C"];
-	VUHDO_BAR_ICON_CHARGES[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "A"];
-	VUHDO_BAR_ICON_NAMES[aButton][anIndex] = VUHDO_GLOBAL[tPrefix .. "N"];
+	VUHDO_BAR_ICON_BUTTONS[aButton][anIndex] = _G[tPrefix];
+	VUHDO_BAR_ICONS[aButton][anIndex] = _G[tPrefix .. "I"];
+	VUHDO_BAR_ICON_TIMERS[aButton][anIndex] = _G[tPrefix .. "T"];
+	VUHDO_BAR_ICON_COUNTERS[aButton][anIndex] = _G[tPrefix .. "C"];
+	VUHDO_BAR_ICON_CHARGES[aButton][anIndex] = _G[tPrefix .. "A"];
+	VUHDO_BAR_ICON_NAMES[aButton][anIndex] = _G[tPrefix .. "N"];
 end
 
 
@@ -596,62 +590,62 @@ end
 --
 local function VUHDO_fastCacheInitButton(aPanelNum, aButtonNum)
 	local tButtonName = format("Vd%dH%d", aPanelNum, aButtonNum);
-	local tButton = VUHDO_GLOBAL[tButtonName];
-	local tTargetButton = VUHDO_GLOBAL[tButtonName .. "Tg"];
-	local tTotButton = VUHDO_GLOBAL[tButtonName .. "Tot"];
+	local tButton = _G[tButtonName];
+	local tTargetButton = _G[tButtonName .. "Tg"];
+	local tTotButton = _G[tButtonName .. "Tot"];
 
 	VUHDO_HEALTH_BAR[tButton] = { };
 	VUHDO_HEALTH_BAR[tTargetButton] = { };
 	VUHDO_HEALTH_BAR[tTotButton] = { };
 
 	--Health
-	VUHDO_HEALTH_BAR[tButton][1] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBar"];
+	VUHDO_HEALTH_BAR[tButton][1] = _G[tButtonName .. "BgBarIcBarHlBar"];
 	-- Mana
-	VUHDO_HEALTH_BAR[tButton][2] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarMaBar"];
+	VUHDO_HEALTH_BAR[tButton][2] = _G[tButtonName .. "BgBarIcBarHlBarMaBar"];
 	-- Background
-	VUHDO_HEALTH_BAR[tButton][3] = VUHDO_GLOBAL[tButtonName .. "BgBar"];
+	VUHDO_HEALTH_BAR[tButton][3] = _G[tButtonName .. "BgBar"];
 	-- Aggro
-	VUHDO_HEALTH_BAR[tButton][4] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarAgBar"];
+	VUHDO_HEALTH_BAR[tButton][4] = _G[tButtonName .. "BgBarIcBarHlBarAgBar"];
 	-- Target Health
-	VUHDO_HEALTH_BAR[tButton][5] = VUHDO_GLOBAL[tButtonName .. "TgBgBarHlBar"];
-	VUHDO_HEALTH_BAR[tTargetButton][1] = VUHDO_GLOBAL[tButtonName .. "TgBgBarHlBar"];
+	VUHDO_HEALTH_BAR[tButton][5] = _G[tButtonName .. "TgBgBarHlBar"];
+	VUHDO_HEALTH_BAR[tTargetButton][1] = _G[tButtonName .. "TgBgBarHlBar"];
 	-- Incoming
-	VUHDO_HEALTH_BAR[tButton][6] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBar"];
+	VUHDO_HEALTH_BAR[tButton][6] = _G[tButtonName .. "BgBarIcBar"];
 	VUHDO_HEALTH_BAR[tTargetButton][6] = VuhDoDummyStatusBar;
 	VUHDO_HEALTH_BAR[tTotButton][6] = VuhDoDummyStatusBar;
 	-- Threat
-	VUHDO_HEALTH_BAR[tButton][7] = VUHDO_GLOBAL[tButtonName .. "ThBar"];
+	VUHDO_HEALTH_BAR[tButton][7] = _G[tButtonName .. "ThBar"];
 	-- Group Highlight
-	VUHDO_HEALTH_BAR[tButton][8] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarHiBar"];
+	VUHDO_HEALTH_BAR[tButton][8] = _G[tButtonName .. "BgBarIcBarHlBarHiBar"];
 	VUHDO_HEALTH_BAR[tTargetButton][8] = VuhDoDummyStatusBar;
 	VUHDO_HEALTH_BAR[tTotButton][8] = VuhDoDummyStatusBar;
 	-- HoT 1
-	VUHDO_HEALTH_BAR[tButton][9] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarHotBar1"];
+	VUHDO_HEALTH_BAR[tButton][9] = _G[tButtonName .. "BgBarIcBarHlBarHotBar1"];
 	-- HoT 2
-	VUHDO_HEALTH_BAR[tButton][10] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarHotBar2"];
+	VUHDO_HEALTH_BAR[tButton][10] = _G[tButtonName .. "BgBarIcBarHlBarHotBar2"];
 	-- HoT 3
-	VUHDO_HEALTH_BAR[tButton][11] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarHotBar3"];
+	VUHDO_HEALTH_BAR[tButton][11] = _G[tButtonName .. "BgBarIcBarHlBarHotBar3"];
 
 	-- Target Background
-	VUHDO_HEALTH_BAR[tButton][12] = VUHDO_GLOBAL[tButtonName .. "TgBgBar"];
-	VUHDO_HEALTH_BAR[tTargetButton][3] = VUHDO_GLOBAL[tButtonName .. "TgBgBar"];
+	VUHDO_HEALTH_BAR[tButton][12] = _G[tButtonName .. "TgBgBar"];
+	VUHDO_HEALTH_BAR[tTargetButton][3] = _G[tButtonName .. "TgBgBar"];
 	-- Target Mana
-	VUHDO_HEALTH_BAR[tButton][13] = VUHDO_GLOBAL[tButtonName .. "TgBgBarHlBarMaBar"];
-	VUHDO_HEALTH_BAR[tTargetButton][2] = VUHDO_GLOBAL[tButtonName .. "TgBgBarHlBarMaBar"];
+	VUHDO_HEALTH_BAR[tButton][13] = _G[tButtonName .. "TgBgBarHlBarMaBar"];
+	VUHDO_HEALTH_BAR[tTargetButton][2] = _G[tButtonName .. "TgBgBarHlBarMaBar"];
 
 	-- Tot Health
-	VUHDO_HEALTH_BAR[tButton][14] = VUHDO_GLOBAL[tButtonName .. "TotBgBarHlBar"];
-	VUHDO_HEALTH_BAR[tTotButton][1] = VUHDO_GLOBAL[tButtonName .. "TotBgBarHlBar"];
+	VUHDO_HEALTH_BAR[tButton][14] = _G[tButtonName .. "TotBgBarHlBar"];
+	VUHDO_HEALTH_BAR[tTotButton][1] = _G[tButtonName .. "TotBgBarHlBar"];
 	-- Tot Background
-	VUHDO_HEALTH_BAR[tButton][15] = VUHDO_GLOBAL[tButtonName .. "TotBgBar"];
-	VUHDO_HEALTH_BAR[tTotButton][3] = VUHDO_GLOBAL[tButtonName .. "TotBgBar"];
+	VUHDO_HEALTH_BAR[tButton][15] = _G[tButtonName .. "TotBgBar"];
+	VUHDO_HEALTH_BAR[tTotButton][3] = _G[tButtonName .. "TotBgBar"];
 	-- Tot Mana
-	VUHDO_HEALTH_BAR[tButton][16] = VUHDO_GLOBAL[tButtonName .. "TotBgBarHlBarMaBar"];
-	VUHDO_HEALTH_BAR[tTotButton][2] = VUHDO_GLOBAL[tButtonName .. "TotBgBarHlBarMaBar"];
+	VUHDO_HEALTH_BAR[tButton][16] = _G[tButtonName .. "TotBgBarHlBarMaBar"];
+	VUHDO_HEALTH_BAR[tTotButton][2] = _G[tButtonName .. "TotBgBarHlBarMaBar"];
   -- Left side bar
-	VUHDO_HEALTH_BAR[tButton][17] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarLsBar"];
+	VUHDO_HEALTH_BAR[tButton][17] = _G[tButtonName .. "BgBarIcBarHlBarLsBar"];
   -- Right side bar
-	VUHDO_HEALTH_BAR[tButton][18] = VUHDO_GLOBAL[tButtonName .. "BgBarIcBarHlBarRsBar"];
+	VUHDO_HEALTH_BAR[tButton][18] = _G[tButtonName .. "BgBarIcBarHlBarRsBar"];
 
 	VUHDO_HEAL_BUTTON[aPanelNum][aButtonNum] = tButton;
 	VUHDO_BUTTON_CACHE[tButton] = aPanelNum;
@@ -688,7 +682,7 @@ function VUHDO_getOrCreateHealButton(aButtonNum, aPanelNum)
 	if (VUHDO_HEAL_BUTTON[aPanelNum][aButtonNum] == nil) then
 		local tNewButton = CreateFrame("Button",
 			format("Vd%dH%d", aPanelNum, aButtonNum),
-			VUHDO_GLOBAL[format("Vd%d", aPanelNum)], "VuhDoButtonSecureTemplate");
+			_G[format("Vd%d", aPanelNum)], "VuhDoButtonSecureTemplate");
 		VUHDO_fastCacheInitButton(aPanelNum, aButtonNum);
 		VUHDO_initLocalVars(aPanelNum);
 		VUHDO_initHealButton(tNewButton, aPanelNum);

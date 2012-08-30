@@ -52,17 +52,6 @@ VUHDO_DEFAULT_BOUQUETS = {
 
 		[VUHDO_I18N_DEF_BOUQUET_PW_S_WEAKENED_SOUL] = {
 			{
-				["name"] = GetSpellInfo(6788), -- "Weakened Soul",
-				["mine"] = true, ["others"] = true,	["icon"] = 9,
-				["color"] = {
-					["R"] = 1, ["G"] = 0.623, ["B"] = 0.305, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
-				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
-			},
-			{
 				["name"] = GetSpellInfo(17), -- "Powerword: Shield",
 				["mine"] = true, ["icon"] = 8,
 				["color"] = {
@@ -72,6 +61,17 @@ VUHDO_DEFAULT_BOUQUETS = {
 					["isManuallySet"] = true,
 				},
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
+			},
+			{
+				["name"] = GetSpellInfo(6788), -- "Weakened Soul",
+				["mine"] = true, ["others"] = true,	["icon"] = 9,
+				["color"] = {
+					["R"] = 1, ["G"] = 0.623, ["B"] = 0.305, ["O"] = 1,
+					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
+					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+					["isManuallySet"] = true,
+				},
+				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
 
@@ -554,10 +554,32 @@ VUHDO_DEFAULT_HOLY_POWER_BOUQUET = {
 	[VUHDO_I18N_DEF_PLAYER_HOLY_POWER] = {
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
-			["mine"] = true, ["icon"] = 12,
+			["mine"] = true, ["icon"] = 14,
 			["color"] = {
 				["R"] = 0.6, ["G"] = 1, ["B"] = 0.6, ["O"] = 1,
 				["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 5, ["radio"] = 1, ["bright"] = 1 },
+		},
+		{
+			["name"] = "OWN_HOLY_POWER_EQUALS",
+			["mine"] = true, ["icon"] = 13,
+			["color"] = {
+				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 4, ["radio"] = 1, ["bright"] = 1 },
+		},
+		{
+			["name"] = "OWN_HOLY_POWER_EQUALS",
+			["mine"] = true, ["icon"] = 12,
+			["color"] = {
+				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
 				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
 				["isManuallySet"] = true,
 			},
@@ -567,8 +589,8 @@ VUHDO_DEFAULT_HOLY_POWER_BOUQUET = {
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 11,
 			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
+				["R"] = 1, ["G"] = 0.75, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 0.75, ["TB"] = 0.4, ["TO"] = 1,
 				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
 				["isManuallySet"] = true,
 			},
@@ -576,6 +598,57 @@ VUHDO_DEFAULT_HOLY_POWER_BOUQUET = {
 		},
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
+			["mine"] = true, ["icon"] = 10,
+			["color"] = {
+				["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1	},
+		},
+	},
+}
+
+
+
+VUHDO_DEFAULT_CHI_BOUQUET = {
+	[VUHDO_I18N_DEF_PLAYER_CHI] = {
+		{
+			["name"] = "OWN_CHI_EQUALS",
+			["mine"] = true, ["icon"] = 13,
+			["color"] = {
+				["R"] = 0.6, ["G"] = 1, ["B"] = 0.6, ["O"] = 1,
+				["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 4, ["radio"] = 1, ["bright"] = 1 },
+		},
+		{
+			["name"] = "OWN_CHI_EQUALS",
+			["mine"] = true, ["icon"] = 12,
+			["color"] = {
+				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 3, ["radio"] = 1, ["bright"] = 1 },
+		},
+		{
+			["name"] = "OWN_CHI_EQUALS",
+			["mine"] = true, ["icon"] = 11,
+			["color"] = {
+				["R"] = 1, ["G"] = 0.75, ["B"] = 0.4, ["O"] = 1,
+				["TR"] = 1, ["TG"] = 0.75, ["TB"] = 0.4, ["TO"] = 1,
+				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				["isManuallySet"] = true,
+			},
+			["custom"] = { [1] = 2, ["radio"] = 1, ["bright"] = 1	},
+		},
+		{
+			["name"] = "OWN_CHI_EQUALS",
 			["mine"] = true, ["icon"] = 10,
 			["color"] = {
 				["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
@@ -644,7 +717,7 @@ VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET = {
 
 
 
-VUHDO_DEFAULT_WRACK_BOUQUET = {
+--[[VUHDO_DEFAULT_WRACK_BOUQUET = {
 	[VUHDO_I18N_DEF_WRACK] = {
 		{
 			["name"] = "DURATION_ABOVE",
@@ -683,7 +756,7 @@ VUHDO_DEFAULT_WRACK_BOUQUET = {
 
 	},
 }
-
+]]
 
 
 VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET = {
@@ -1331,10 +1404,8 @@ function VUHDO_loadDefaultBouquets()
 	end
 	if (VUHDO_BOUQUETS["VERSION"] < 5) then
 		VUHDO_BOUQUETS["VERSION"] = 5;
-		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_HOLY_POWER_BOUQUET);
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ROLE_ICON_BOUQUET);
 	end
-	VUHDO_DEFAULT_HOLY_POWER_BOUQUET = nil;
 	VUHDO_DEFAULT_ROLE_ICON_BOUQUET = nil;
 
 	if (VUHDO_BOUQUETS["VERSION"] < 6) then
@@ -1343,11 +1414,11 @@ function VUHDO_loadDefaultBouquets()
 	end
 	VUHDO_DEFAULT_AOE_ADVICE_BOUQUET = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 7) then
+	--[[if (VUHDO_BOUQUETS["VERSION"] < 7) then
 		VUHDO_BOUQUETS["VERSION"] = 7;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_WRACK_BOUQUET);
 	end
-	VUHDO_DEFAULT_WRACK_BOUQUET = nil;
+	VUHDO_DEFAULT_WRACK_BOUQUET = nil;]]
 
 	if (VUHDO_BOUQUETS["VERSION"] < 8) then
 		VUHDO_BOUQUETS["VERSION"] = 8;
@@ -1366,6 +1437,14 @@ function VUHDO_loadDefaultBouquets()
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ROLE_COLOR_BOUQUET);
 	end
 	VUHDO_DEFAULT_ROLE_COLOR_BOUQUET = nil;
+
+	if (VUHDO_BOUQUETS["VERSION"] < 11) then
+		VUHDO_BOUQUETS["VERSION"] = 11;
+		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_HOLY_POWER_BOUQUET);
+		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_CHI_BOUQUET);
+	end
+	VUHDO_DEFAULT_CHI_BOUQUET = nil;
+	VUHDO_DEFAULT_HOLY_POWER_BOUQUET = nil;
 
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_buildGenericTargetHealthBouquet();

@@ -20,7 +20,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="119" y="-230" />
+									<AbsDimension x="119" y="-273" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -221,11 +221,28 @@
 						</Scripts>
 					</Frame>
 
-					<Frame name="$parentPetsTexture" inherits="VuhDoColorSwatchTexture">
+					<Frame name="$parentMonksTexture" inherits="VuhDoColorSwatchTexture">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
 									<AbsDimension x="13" y="-230" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_lnfSetModel(self, "VUHDO_USER_CLASS_COLORS.##30");
+								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_MONKS, VUHDO_I18N_MONKS);
+								VUHDO_lnfSetTooltip(self, nil);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+
+					<Frame name="$parentPetsTexture" inherits="VuhDoColorSwatchTexture">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="119" y="-230" />
 								</Offset>
 							</Anchor>
 						</Anchors>

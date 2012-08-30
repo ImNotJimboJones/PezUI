@@ -47,7 +47,7 @@ local UnitIsUnit = UnitIsUnit;
 local pairs = pairs;
 local twipe = table.wipe;
 local format = format;
-local _ = _;
+local _;
 local UIFrameFlash = UIFrameFlash;
 local sIsOverhealText;
 local sIsAggroText;

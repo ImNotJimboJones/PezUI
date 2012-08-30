@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 142 $
+Revision: $Rev: 143 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -11,7 +11,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 142 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + 9999
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 if not LibStub("LibBabble-Zone-3.0") then error(MAJOR_VERSION .. " requires LibBabble-Zone-3.0.") end
@@ -651,7 +651,7 @@ end
 
 local function zoneIter(_, position)
 	local k = next(zonesInstances, position)
-	while k ~= nil and (types[k] == "Instance" or types[k] == "Battleground" or types[k] == "Arena") do
+	while k ~= nil and (types[k] == "Instance" or types[k] == "Battleground" or types[k] == "Arena" or types[k] == "Complex") do
 		k = next(zonesInstances, k)
 	end
 	return k
@@ -886,7 +886,7 @@ end
 
 function Tourist:IsZone(zone)
 	local t = types[zone]
-	return t and t ~= "Instance" and t ~= "Battleground" and t ~= "Transport" and t ~= "Arena"
+	return t and t ~= "Instance" and t ~= "Battleground" and t ~= "Transport" and t ~= "Arena" and t ~= "Complex" 
 end
 
 function Tourist:GetComplex(zone)
@@ -4628,8 +4628,16 @@ do
 	trace("Tourist: Initializing zones...")
 	
 	for continentID, continentName in ipairs(continentNames) do
+DEFAULT_CHAT_FRAME:AddMessage("============ "..continentName)
 		SetMapZoom(continentID)
 		if zones[continentName] then
+			zones[continentName].texture = GetMapInfo()
+		else
+			zones[continentName] = {}
+			zones[continentName].yards = 1737.499958992
+			zones[continentName].x_offset = 0 * eastkingYards
+			zones[continentName].y_offset = 0 * eastkingYards * 2/3
+			zones[continentName].texture = "StormwindCity"
 			zones[continentName].texture = GetMapInfo()
 		end
 		local zoneNames = { GetMapZones(continentID) }

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(158, "DBM-BastionTwilight", nil, 72)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7779 $"):sub(12, -3))
 mod:SetCreatureID(43686, 43687, 43688, 43689, 43735)
 mod:SetModelID(34822)
 mod:SetZone()
@@ -57,7 +57,7 @@ local warnFrostBeacon		= mod:NewTargetAnnounce(92307, 4)--Heroic Phase 2 ablity
 local specWarnHeartIce		= mod:NewSpecialWarningYou(82665, false)
 local specWarnGlaciate		= mod:NewSpecialWarningRun(82746, mod:IsMelee())
 local specWarnWaterLogged	= mod:NewSpecialWarningYou(82762)
-local specWarnHydroLance	= mod:NewSpecialWarningInterrupt(92509, mod:IsMelee())
+local specWarnHydroLance	= mod:NewSpecialWarningInterrupt(82752, mod:IsMelee())
 --Ignacious
 local specWarnBurningBlood	= mod:NewSpecialWarningYou(82660, false)
 local specWarnAegisFlame	= mod:NewSpecialWarningSpell(82631, nil, nil, nil, true)
@@ -88,7 +88,7 @@ local timerHeartIceCD		= mod:NewCDTimer(22, 82665, nil, false)--22-24 seconds
 local timerGlaciate			= mod:NewCDTimer(33, 82746, nil, mod:IsMelee())--33-35 seconds
 local timerWaterBomb		= mod:NewCDTimer(33, 82699)--33-35 seconds
 local timerFrozen			= mod:NewBuffFadesTimer(10, 82772, nil, mod:IsHealer())
-local timerHydroLanceCD		= mod:NewCDTimer(12, 92509, nil, false)--12 second cd but lowest cast priority
+local timerHydroLanceCD		= mod:NewCDTimer(12, 82752, nil, false)--12 second cd but lowest cast priority
 --Ignacious
 local timerBurningBlood		= mod:NewTargetTimer(60, 82660, nil, false)
 local timerBurningBloodCD	= mod:NewCDTimer(22, 82660, nil, false)--22-33 seconds, even worth having a timer?
@@ -141,6 +141,7 @@ local frozenCount = 0
 local isBeacon = false
 local isRod = false
 local infoFrameUpdated = false
+local phase = 1
 local groundedName = GetSpellInfo(83581)
 local searingName = GetSpellInfo(83500)
 local Ignacious = EJ_GetSectionInfo(3118)
@@ -191,7 +192,7 @@ local function checkSearingWinds()
 	end
 end
 
-local updateBossFrame = function(phase)
+local function updateBossFrame()
 	DBM.BossHealth:Clear()
 	if phase == 1 then
 		DBM.BossHealth:AddBoss(43687, Feludius)
@@ -229,9 +230,9 @@ do
 		if shieldedMob == destGUID then
 			local absorbed
 			if subEvent == "SWING_MISSED" then 
-				absorbed = select( 2, ... ) 
+				absorbed = select( 3, ... ) 
 			elseif subEvent == "RANGE_MISSED" or subEvent == "SPELL_MISSED" or subEvent == "SPELL_PERIODIC_MISSED" then 
-				absorbed = select( 5, ... )
+				absorbed = select( 6, ... )
 			end
 			if absorbed then
 				absorbRemaining = absorbRemaining - absorbed
@@ -254,7 +255,8 @@ end
 
 function mod:OnCombatStart(delay)
 	DBM:GetModByName("BoTrash"):SetFlamestrike(true)
-	updateBossFrame(1)
+	phase = 1
+	updateBossFrame()
 	table.wipe(frozenTargets)
 	table.wipe(lightningRodTargets)
 	table.wipe(gravityCrushTargets)
@@ -339,7 +341,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:Schedule(0.3, showLightningRodWarning)
 		end
 	elseif args:IsSpellID(82777) then
-		if self:GetUnitCreatureId("target") == 43686 or self:GetBossTarget(43686) == UnitName("target") then--Warn if the boss casting it is your target, OR your target is the person its being cast on.
+		if self:GetUnitCreatureId("target") == 43686 or self:GetBossTarget(43686) == DBM:GetUnitFullName("target") then--Warn if the boss casting it is your target, OR your target is the person its being cast on.
 			warnFlameTorrent:Show()
 		end
 	elseif args:IsSpellID(82631, 92512, 92513, 92514) then--Aegis of Flame
@@ -708,7 +710,8 @@ function mod:OnSync(msg, boss)
 		warnedLowHP[boss] = true
 		specWarnBossLow:Show(boss)
 	elseif msg == "Phase2" and self:IsInCombat() then
-		updateBossFrame(2)
+		phase = 2
+		updateBossFrame()
 		timerWaterBomb:Cancel()
 		timerGlaciate:Cancel()
 		timerAegisFlame:Cancel()
@@ -737,7 +740,8 @@ function mod:OnSync(msg, boss)
 			DBM.InfoFrame:Hide()
 		end
 	elseif msg == "Phase3" and self:IsInCombat() then
-		updateBossFrame(3)
+		phase = 3
+		updateBossFrame()
 		timerFrostBeaconCD:Cancel()--Cancel here to avoid problems with orbs that spawn during the transition.
 		timerLavaSeedCD:Start(18)
 		timerGravityCrushCD:Start(28)

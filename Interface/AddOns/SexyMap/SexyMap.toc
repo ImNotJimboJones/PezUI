@@ -1,5 +1,5 @@
-## Interface: 40300
-## Version: 1.8.4
+## Interface: 50001
+## Version: 2.1
 ## Title: SexyMap
 ## Notes: Spice up your minimap with some sexy options.
 ## Notes-deDE: Spice up your minimap with some sexy options.
@@ -8,14 +8,14 @@
 ## Notes-esMX: Spice up your minimap with some sexy options.
 ## Notes-frFR: Spice up your minimap with some sexy options.
 ## Notes-itIT: Spice up your minimap with some sexy options.
-## Notes-koKR: Spice up your minimap with some sexy options.
+## Notes-koKR: 미니맵에 다양한 기능을 부가합니다.
 ## Notes-zhTW: Spice up your minimap with some sexy options.
-## Notes-zhCN: Spice up your minimap with some sexy options.
+## Notes-zhCN: 为你的小地图增趣添彩，并包含一些性感选项。
 ## Notes-ptBR: Spice up your minimap with some sexy options.
 ## Author: Antiarc, Funkydude
 ## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0, Blizzard_TimeManager, TomTom
-## SavedVariables: SexyMapDB
-## X-Curse-Packaged-Version: v1.8.4
+## SavedVariables: SexyMap2DB
+## X-Curse-Packaged-Version: v2.1
 ## X-Curse-Project-Name: SexyMap
 ## X-Curse-Project-ID: sexymap
 ## X-Curse-Repository-ID: wow/sexymap/mainline
@@ -42,9 +42,6 @@ localization\ptBR.lua
 # Core
 SexyMap.lua
 
-# Comes first, has default option set
-General.lua
-
 # Utility, doesn't actually have menu options
 Shapes.lua
 
@@ -52,9 +49,9 @@ Shapes.lua
 Buttons.lua
 BorderPresets.lua
 Borders.lua
+Clock.lua
 Coordinates.lua
 Fader.lua
-HudMap.xml
 HudMap.lua
 Movers.lua
 Ping.lua

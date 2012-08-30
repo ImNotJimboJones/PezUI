@@ -1,4 +1,4 @@
-﻿-- $Id: constants.tw.lua 3693 2012-01-12 15:11:40Z ananhaid $
+-- $Id: constants.tw.lua 3736 2012-08-14 18:31:11Z hegarol $
 --[[
 constants.tw.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -44,6 +44,7 @@ if AL then
 	AL["Select Stats list"] = "選擇屬性列表";
 	AL["You cant set more then %d item stats."] = "您可以設定多達 %d 個物品狀態.";
 	AL["Slot"] = "空位";
+	AL["AtlasLoot has detected some corrupted items on your Wishlist. You can now run an automatic check to fix it. Please be aware that this could take a few moments."] = "AtlasLoot 已檢測到願望列表存在一些損壞的物品。現在可以運行自動檢查修復它。請注意，這可能需要一會兒。";
 
 	-- Stats short
 	AL["iLvl"] = "等級";	-- Item lvl
@@ -246,9 +247,7 @@ if AL then
 	AL["ilvl 226"] = "等級 226";
 	AL["ilvl 245"] = "等級 245";
 	AL["ilvl 264"] = "等級 264";
-	AL["ilvl 378"] = "等級 378";
 	AL["ilvl 397"] = "等級 397";
-	AL["ilvl 410"] = "等級 410";
 	AL["Gladiator"] = "鬥士";
 	AL["Vengeful"] = "復仇";
 	AL["Merciless"] = "殘忍";
@@ -677,7 +676,6 @@ if AL then
 
 	-- General titles
 	AL["Achievement"] = "成就";
-	AL["Promotional & Card Game"] = "促銷活動和卡牌遊戲";
 	AL["Dungeon"] = "副本";
 	AL["Outdoor"] = "野外";
 
@@ -1132,6 +1130,8 @@ if AL then
 	AL["Hidden Stash"] = "隱密藏匿物";
 	AL["The Cache of Madness"] = "瘋狂之緣";
 	AL["Stolen Present"] = "失竊的禮物";
+	AL["Annual Pass"] = "年卡";
+	AL["Scroll of Resurrection"] = "重返榮耀";
 
 	-- Error Messages and warnings
 	AL["AtlasLoot Error!"] = "AtlasLoot 錯誤!";

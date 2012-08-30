@@ -66,6 +66,8 @@ setfenv(1, Prat)
 
 NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
 CHAT_PLAYER_GUIDS = select(4, _G.GetBuildInfo()) >= 30200
+MOP = select(4, _G.GetBuildInfo()) >= 50000
+
 BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5")
 
 if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyColor end
@@ -83,7 +85,7 @@ Version = "Prat |cff8080ff3.0|r (|cff8080ff" .. "DEBUG" .. "|r)"
 --@end-debug@]===]
 
 --@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."3.4.25".."|r)"
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."3.5".."|r)"
 --@end-non-debug@
 
 

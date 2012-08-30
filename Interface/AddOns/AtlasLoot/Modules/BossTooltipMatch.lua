@@ -1,4 +1,4 @@
--- $Id: BossTooltipMatch.lua 3697 2012-01-31 15:17:37Z lag123 $
+-- $Id: BossTooltipMatch.lua 3718 2012-03-19 20:38:35Z Bahnak $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 
@@ -29,6 +29,12 @@ AtlasLoot_BossTooltipMatch[45872]					= AtlasLoot:EJ_GetBossName("Conclave of Wi
 -----------------------
 -- Cataclysm Dungeons
 -----------------------
+AtlasLoot_BossTooltipMatch[55419]					= AtlasLoot:EJ_GetBossName("Mannoroth and Varo'then", 292)
+AtlasLoot_BossTooltipMatch[54969]					= AtlasLoot:EJ_GetBossName("Mannoroth and Varo'then", 292)
+AtlasLoot_BossTooltipMatch[54544]					= "Echoes"
+AtlasLoot_BossTooltipMatch[54445]					= "Echoes"
+AtlasLoot_BossTooltipMatch[54431]					= "Echoes"
+AtlasLoot_BossTooltipMatch[54123]					= "Echoes"
 AtlasLoot_BossTooltipMatch[40319]					= AtlasLoot:EJ_GetBossName("Drahga Shadowburner", 133).." & "..BabbleBoss["Valiona"]
 AtlasLoot_BossTooltipMatch[40788]					= BabbleBoss["Erunak Stonespeaker"].." & "..AtlasLoot:EJ_GetBossName("Mindbender Ghur'sha", 103)
 AtlasLoot_BossTooltipMatch[40825]					= BabbleBoss["Erunak Stonespeaker"].." & "..AtlasLoot:EJ_GetBossName("Mindbender Ghur'sha", 103)

@@ -32,8 +32,8 @@ local function CheckRanges(self)
 	local group, size, index, unitid, inRange
 	local estRange = nil
 	-- Check Group Type
-	if UnitInRaid("player") then group = "raid"; size = GetNumRaidMembers() - 1
-	elseif UnitInParty("player") then group = "party"; size = GetNumPartyMembers()
+	if UnitInRaid("player") then group = "raid"; size = TidyPlatesUtility.GetNumRaidMembers() - 1
+	elseif UnitInParty("player") then group = "party"; size = TidyPlatesUtility.GetNumPartyMembers() - 1
 	else group = nil end
 
 	-- Cycle through Group

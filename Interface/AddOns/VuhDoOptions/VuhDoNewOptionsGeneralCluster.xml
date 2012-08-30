@@ -1,14 +1,15 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Frame name="VuhDoNewOptionsGeneralClusterTemplate" virtual="true">
 		<Frames>
+
 			<Frame name="$parentClusterPanel" inherits="VuhDoPanelTemplate">
 				<Size>
-					<AbsDimension x="235" y="355" />
+					<AbsDimension x="235" y="385" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="20" y="-20" />
+							<AbsDimension x="20" y="-13" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -223,6 +224,26 @@
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.CONE_DEGREES")
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_CONE, 1, 360, " " .. VUHDO_I18N_DEGREES, 1);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K544);
+							</OnLoad>
+						</Scripts>
+					</Frame>
+
+					<Frame name="$parentJumpRangeSlider" inherits="VuhDoHSliderTemplate">
+						<Size>
+							<AbsDimension x="205" y="32" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="13" y="-348" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.CLUSTER.RANGE_JUMP")
+								VUHDO_lnfSliderOnLoad(self, "Chain jump range", 1, 40, " " .. VUHDO_I18N_YARDS, 1);
+								VUHDO_lnfSetTooltip(self, nil);
 							</OnLoad>
 						</Scripts>
 					</Frame>

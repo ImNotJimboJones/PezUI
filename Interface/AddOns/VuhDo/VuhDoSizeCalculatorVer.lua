@@ -317,6 +317,7 @@ local tColSpacing;
 local function VUHDO_getColumnPos(aPlaceNum, aPanelNum, aRowNo)
 	tBarScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
 	tGridColNo = VUHDO_determineGridColumn(aPlaceNum, aPanelNum, aRowNo);
+
 	tColSpacing = VUHDO_getHealButtonWidth(aPanelNum) + tBarScaling["columnSpacing"];
 
 	tColX = tBarScaling["borderGapX"];

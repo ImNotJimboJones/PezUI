@@ -5,6 +5,7 @@ XLootGroup = addon
 local L = addon.L
 local me = UnitName('player')
 
+local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or _G.RAID_CLASS_COLORS
 local opt, anchor
 local GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print =
 	GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print
@@ -158,15 +159,16 @@ do
 				-- Only shown when "clean", or showing on frame mouseover
 				if opt.show_undecided then
 					list = wipe(plist)
-					if GetNumRaidMembers() > 0 then
-						for i = 1, GetNumRaidMembers() do
+					local in_raid,num_raid,num_party = IsInRaid(),GetNumGroupMembers(),GetNumSubgroupMembers() 
+					if in_raid then
+						for i = 1, num_raid do
 							local name = UnitName('raid'..i)
 							if not rolls_player[name] then
 								list[name] = true
 							end
 						end
 					else
-						for i = 1, GetNumPartyMembers() do
+						for i = 1, num_party do
 							local name = UnitName('party'..i)
 							if not rolls_player[name] then
 								list[name] = true
@@ -856,7 +858,8 @@ function addon:OnLoad()
 	anchor:SetBorderColor(.4, .4, .4)
 
 	-- Find and show active rolls
-	if (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0) and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
+	local in_raid,in_party = IsInRaid(),IsInGroup()
+	if (in_raid or in_party) and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
 		for i=1,300 do
 			local time = GetLootRollTimeLeft(i)
 			if time > 0 then

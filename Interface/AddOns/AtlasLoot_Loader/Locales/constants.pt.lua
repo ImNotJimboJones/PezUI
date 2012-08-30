@@ -1,4 +1,4 @@
-﻿-- $Id: constants.pt.lua 3676 2011-12-06 07:06:51Z hegarol $
+-- $Id: constants.pt.lua 3726 2012-04-27 18:50:30Z hegarol $
 --[[
 constants.pt.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -548,7 +548,6 @@ if AL then
 	AL["BRD Blacksmithing Plans"] = "Planos de Ferraria BRD";
 	-- General titles
 	AL["Achievement"] = "Conquista";
-	AL["Promotional & Card Game"] = "Promocional & Jogo de Cartas";
 
 	-- Companions
 	AL["Achievement"] = "Conquista";

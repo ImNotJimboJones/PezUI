@@ -1,4 +1,4 @@
--- ReforgeLite v1.10 by d07.RiV (Iroared)
+-- ReforgeLite v1.12 by d07.RiV (Iroared)
 -- All rights reserved
 
 local function DeepCopy (t, cache)
@@ -24,6 +24,8 @@ end
 
 local L = ReforgeLiteLocale
 local GUI = ReforgeLiteGUI
+
+local MOP = (GetNumTalentTabs == nil)
 
 ReforgeLite = CreateFrame ("Frame", nil, UIParent)
 ReforgeLite:Hide ()
@@ -78,6 +80,8 @@ local DefaultDBProfile = {
     }
   },
   itemsLocked = {},
+  customMethodPresets = {
+  },
 }
 local function MergeTables (dst, src)
   for k, v in pairs (src) do
@@ -97,6 +101,7 @@ end
 ReforgeLite.dbkey = UnitName ("player") .. " - " .. GetRealmName ()
 local _, playerClass = UnitClass ("player")
 local _, playerRace = UnitRace ("player")
+playerRace = string.upper(playerRace)
 local missChance = (playerRace == "NIGHTELF" and 7 or 5)
 
 function ReforgeLite:UpgradeDBCaps (caps)
@@ -132,6 +137,14 @@ function ReforgeLite:UpgradeDB ()
     MergeTables (db.profiles[self.dbkey], DefaultDBProfile)
   end
   local pdb = db.profiles[self.dbkey]
+  if MOP then
+    if pdb.method and pdb.method.items then
+      pdb.method.items[17] = nil
+    end
+    if pdb.storedMethod and pdb.storedMethod.items then
+      pdb.storedMethod.items[17] = nil
+    end
+  end
   for k, v in pairs (pdb) do
     if db[k] ~= nil then
       pdb[k] = db[k]
@@ -161,6 +174,7 @@ end
 -----------------------------------------------------------------
 
 StaticPopupDialogs["REFORGE_LITE_SAVE_PRESET"] = {
+  preferredIndex = 3,
   text = L["Enter the preset name"],
   button1 = ACCEPT,
   button2 = CANCEL,
@@ -209,25 +223,93 @@ StaticPopupDialogs["REFORGE_LITE_SAVE_PRESET"] = {
   hideOnEscape = true
 }
 
-ReforgeLite.itemSlots = {
-  "HeadSlot",
-  "NeckSlot",
-  "ShoulderSlot",
-  "BackSlot",
-  "ChestSlot",
-  "WristSlot",
-  "HandsSlot",
-  "WaistSlot",
-  "LegsSlot",
-  "FeetSlot",
-  "Finger0Slot",
-  "Finger1Slot",
-  "Trinket0Slot",
-  "Trinket1Slot",
-  "MainHandSlot",
-  "SecondaryHandSlot",
-  "RangedSlot"
+StaticPopupDialogs["REFORGE_LITE_SAVE_METHOD_PRESET"] = {
+  preferredIndex = 3,
+  text = L["Enter the preset name"],
+  button1 = ACCEPT,
+  button2 = CANCEL,
+  hasEditBox = true,
+  maxLetters = 31,
+  OnAccept = function (self)
+    local name = self.editBox:GetText ()
+    ReforgeLite.pdb.customMethodPresets[name] = DeepCopy(ReforgeLite.pdb.method)
+    ReforgeLite.methodPresetsButton:Enable ()
+    ReforgeLite.deleteMethodPresetButton:Enable ()
+  end,
+  EditBoxOnEnterPressed = function (self)
+    local name = self:GetParent ().editBox:GetText ()
+    if name ~= "" then
+      ReforgeLite.pdb.customMethodPresets[name] = DeepCopy(ReforgeLite.pdb.method)
+      ReforgeLite.methodPresetsButton:Enable ()
+      ReforgeLite.deleteMethodPresetButton:Enable ()
+      self:GetParent ():Hide ()
+    end
+  end,
+  EditBoxOnTextChanged = function (self, data)
+    if data ~= "" then
+      self:GetParent ().button1:Enable ()
+    else
+      self:GetParent ().button1:Disable ()
+    end
+  end,
+  EditBoxOnEscapePressed = function(self)
+		self:GetParent():Hide();
+	end,
+  OnShow = function (self)
+    self.editBox:SetText ("")
+    self.button1:Disable ()
+    self.editBox:SetFocus ()
+  end,
+  OnHide = function (self)
+    ChatEdit_FocusActiveWindow ()
+    self.editBox:SetText ("")
+  end,
+  timeout = 0,
+  whileDead = true,
+  hideOnEscape = true
 }
+
+if MOP then
+  ReforgeLite.itemSlots = {
+    "HeadSlot",
+    "NeckSlot",
+    "ShoulderSlot",
+    "BackSlot",
+    "ChestSlot",
+    "WristSlot",
+    "HandsSlot",
+    "WaistSlot",
+    "LegsSlot",
+    "FeetSlot",
+    "Finger0Slot",
+    "Finger1Slot",
+    "Trinket0Slot",
+    "Trinket1Slot",
+    "MainHandSlot",
+    "SecondaryHandSlot"
+  }
+else
+  ReforgeLite.itemSlots = {
+    "HeadSlot",
+    "NeckSlot",
+    "ShoulderSlot",
+    "BackSlot",
+    "ChestSlot",
+    "WristSlot",
+    "HandsSlot",
+    "WaistSlot",
+    "LegsSlot",
+    "FeetSlot",
+    "Finger0Slot",
+    "Finger1Slot",
+    "Trinket0Slot",
+    "Trinket1Slot",
+    "MainHandSlot",
+    "SecondaryHandSlot",
+    "RangedSlot"
+  }
+end
+
 local function RatingStat (i, name_, tip_, id_, hid_)
   if hid_ then
     local _, class = UnitClass ("player")
@@ -458,6 +540,7 @@ function ReforgeLite:ParsePawnString (pawn)
 end
 
 StaticPopupDialogs["REFORGE_LITE_PARSE_PAWN"] = {
+  preferredIndex = 3,
   text = L["Enter pawn string"],
   button1 = ACCEPT,
   button2 = CANCEL,
@@ -839,20 +922,16 @@ function ReforgeLite:CreateFrame (title, width, height)
 end
 
 function ReforgeLite:CreateItemTable ()
-  self.itemLevel = self:CreateFontString (nil, "OVERLAY", "GameFontNormal")
-  self.itemLevel:SetPoint ("TOPLEFT", self, "TOPLEFT", 12, -40)
-  self.itemLevel:SetTextColor (1, 1, 0.8)
-  self.itemLevel:SetText (L["Item level"] .. ": 0")
-  
+  local lockTip = self:CreateFontString (nil, "OVERLAY", "GameFontNormal")
+  lockTip:SetPoint ("TOPLEFT", self, "TOPLEFT", 12, -40)
+  lockTip:SetTextColor (1, 1, 1)
+  lockTip:SetText (L["Click an item to lock it"])
+
   self.itemTable = GUI:CreateTable (#self.itemSlots + 1, #self.itemStats, self.db.itemSize, self.db.itemSize + 4, {0.5, 0.5, 0.5, 1}, self)
-  self.itemTable:SetPoint ("TOPLEFT", self.itemLevel, "BOTTOMLEFT", 0, -10)
+  self.itemTable:SetPoint ("TOPLEFT", lockTip, "BOTTOMLEFT", 0, -10)
   self.itemTable:SetPoint ("BOTTOM", self, "BOTTOM", 0, 10)
   self.itemTable:SetWidth (400)
 
-  local lockTip = self:CreateFontString (nil, "OVERLAY", "GameFontNormal")
-  lockTip:SetTextColor (1, 1, 1)
-  lockTip:SetText (L["Click an item to lock it"])
-  lockTip:SetPoint ("BOTTOMRIGHT", self.itemTable, "TOPRIGHT", 0, 10)
 
   for i, v in ipairs (self.itemStats) do
     self.itemTable:SetCellText (0, i, v.tip)
@@ -1196,7 +1275,7 @@ function ReforgeLite:CreateOptionList ()
   self:SetAnchor (self.statWeightsCategory, "TOPLEFT", self.content, "TOPLEFT", 2, -2)
 
   self.presetsButton = GUI:CreateImageButton (self.content, 24, 24, "Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up",
-    "Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down", "Interface\]Buttons\\UI-Common-MouseHilight", function ()
+    "Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down", "Interface\\Buttons\\UI-Common-MouseHilight", function ()
     ToggleDropDownMenu (1, nil, self.presetMenu, self.presetsButton:GetName (), 0, 0)
   end)
   self.statWeightsCategory:AddFrame (self.presetsButton)
@@ -1247,6 +1326,17 @@ function ReforgeLite:CreateOptionList ()
   self.convertSpirit.text:SetText (L["Spirit to hit"] .. ": 0%")
   self.convertSpirit.text:Hide ()
   
+  local levelList = {{value = 0, name = L["PvP (+0)"]}, {value = 2, name = L["Heroic dungeons (+2)"]}, {value = 3, name = L["Raids (+3)"]}}
+  self.targetLevel = GUI:CreateDropdown(self.content, levelList, self.pdb.targetLevel,
+    function(val) self.pdb.targetLevel = val self:UpdateItems() end, 150)
+  self.targetLevel.tip = CreateFrame("Frame", nil, self.content)
+  self.statWeightsCategory:AddFrame(self.targetLevel)
+  self.statWeightsCategory:AddFrame(self.targetLevel.tip)
+  self.targetLevel.text = self.targetLevel.tip:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  self.targetLevel.text:SetText(L["Target level"])
+  self:SetAnchor(self.targetLevel.text, "TOPLEFT", self.pawnButton, "BOTTOMLEFT", 0, -8)
+  self.targetLevel:SetPoint("BOTTOMLEFT", self.targetLevel.text, "BOTTOMRIGHT", 0, -20)
+
   if playerClass == "PALADIN" or playerClass == "WARRIOR" or playerClass == "DEATHKNIGHT" then
     self.tankingModel = GUI:CreateCheckButton (self.content, L["Tanking model"] .. " (" .. (UnitClass ("player")) .. ")",
         self.pdb.tankingModel, function (val)
@@ -1255,11 +1345,11 @@ function ReforgeLite:CreateOptionList ()
       self:RefreshMethodStats ()
     end)
     self.statWeightsCategory:AddFrame (self.tankingModel)
-    self:SetAnchor (self.tankingModel, "TOPLEFT", self.pawnButton, "BOTTOMLEFT", 0, -8)
+    self:SetAnchor (self.tankingModel, "TOPLEFT", self.targetLevel.text, "BOTTOMLEFT", 0, -8)
   end
 
   self.statWeights = GUI:CreateTable (math.ceil (#self.itemStats / 2), 4)
-  self:SetAnchor (self.statWeights, "TOPLEFT", self.tankingModel or self.pawnButton, "BOTTOMLEFT", 0, -8)
+  self:SetAnchor (self.statWeights, "TOPLEFT", self.tankingModel or self.targetLevel.text, "BOTTOMLEFT", 0, -8)
   self.statWeights:SetPoint ("RIGHT", self.content, "RIGHT", -5, 0)
   self.statWeightsCategory:AddFrame (self.statWeights)
   self.statWeights:SetRowHeight (self.db.itemSize + 2)
@@ -1418,7 +1508,7 @@ function ReforgeLite:CreateOptionList ()
 
   self.settingsCategory = self:CreateCategory (L["Settings"])
   self:SetAnchor (self.settingsCategory, "TOPLEFT", self.storedClear, "BOTTOMLEFT", 0, -10)
-  self.settings = GUI:CreateTable (6, 1, nil, 200)
+  self.settings = GUI:CreateTable (5, 1, nil, 200)
   self.settingsCategory:AddFrame (self.settings)
   self:SetAnchor (self.settings, "TOPLEFT", self.settingsCategory, "BOTTOMLEFT", 0, -5)
   self.settings:SetPoint ("RIGHT", self.content, "RIGHT", -10, 0)
@@ -1434,6 +1524,9 @@ function ReforgeLite:CreateOptionList ()
   self:SetAnchor (self.lastElement, "TOPLEFT", self.settings, "BOTTOMLEFT", 0, -10)
   self:UpdateContentSize ()
 
+  if not self.pdb.method then
+    ReforgeLite:ResetMethod()
+  end
   if self.pdb.method then
     ReforgeLite:UpdateMethodCategory ()
   end
@@ -1444,12 +1537,8 @@ function ReforgeLite:FillSettings ()
   self.settings:SetCell (2, 0, GUI:CreateCheckButton (self.settings, L["Show reforged stats in item tooltips"],
     self.db.updateTooltip, function (val) self.db.updateTooltip = val end), "LEFT")
 
-  self.settings:SetCellText (3, 0, L["Target level"], "LEFT", nil, "GameFontNormal")
-  self.settings:SetCell (3, 1, GUI:CreateEditBox (self.settings, 50, 30, self.pdb.targetLevel,
-    function (val) self.pdb.targetLevel = val self:UpdateItems () end), "LEFT")
-
-  self.settings:SetCellText (4, 0, L["Active window color"], "LEFT", nil, "GameFontNormal")
-  self.settings:SetCell (4, 1, GUI:CreateColorPicker (self.settings, 20, 20, self.db.activeWindowTitle, function ()
+  self.settings:SetCellText (3, 0, L["Active window color"], "LEFT", nil, "GameFontNormal")
+  self.settings:SetCell (3, 1, GUI:CreateColorPicker (self.settings, 20, 20, self.db.activeWindowTitle, function ()
     if self.methodWindow and self.methodWindow:IsShown () and self.methodWindow:GetFrameLevel () > self:GetFrameLevel () then
       self.methodWindow:SetBackdropBorderColor (unpack (self.db.activeWindowTitle))
     else
@@ -1457,8 +1546,8 @@ function ReforgeLite:FillSettings ()
     end
   end), "LEFT")
 
-  self.settings:SetCellText (5, 0, L["Inactive window color"], "LEFT", nil, "GameFontNormal")
-  self.settings:SetCell (5, 1, GUI:CreateColorPicker (self.settings, 20, 20, self.db.inactiveWindowTitle, function ()
+  self.settings:SetCellText (4, 0, L["Inactive window color"], "LEFT", nil, "GameFontNormal")
+  self.settings:SetCell (4, 1, GUI:CreateColorPicker (self.settings, 20, 20, self.db.inactiveWindowTitle, function ()
     if self.methodWindow and self.methodWindow:IsShown () and self.methodWindow:GetFrameLevel () > self:GetFrameLevel () then
       self:SetBackdropBorderColor (unpack (self.db.inactiveWindowTitle))
     elseif self.methodWindow then
@@ -1466,14 +1555,14 @@ function ReforgeLite:FillSettings ()
     end
   end), "LEFT")
 
-  self.debugButton = CreateFrame ("Button", "ReforgeLiteDebugButton", self.content, "UIPanelButtonTemplate")
+  self.debugButton = CreateFrame ("Button", "ReforgeLiteDebugButton", self.settings, "UIPanelButtonTemplate")
   self.debugButton:SetWidth (114)
   self.debugButton:SetHeight (22)
   self.debugButton:SetText (L["Debug"])
   self.debugButton:SetScript ("OnClick", function (self)
     ReforgeLite:DebugMethod ()
   end)
-  self.settings:SetCell (6, 0, self.debugButton, "LEFT")
+  self.settings:SetCell (5, 0, self.debugButton, "LEFT")
 end
 function ReforgeLite:GetCurrentScore ()
   local score = 0
@@ -1567,8 +1656,6 @@ function ReforgeLite:UpdateMethodCategory ()
     self.methodCategory:AddFrame (self.methodReset)
     self:SetAnchor (self.methodReset, "BOTTOMLEFT", self.methodShow, "BOTTOMRIGHT", 8, 0)
 
-    self:SetAnchor (self.storedCategory, "TOPLEFT", self.methodShow, "BOTTOMLEFT", 0, -10)
-    
     self.methodTank = CreateFrame ("Frame", nil, self.content)
     self.methodCategory:AddFrame (self.methodTank)
     self.methodTank:SetPoint ("TOPLEFT", self.methodStats, "TOPRIGHT", 10, 0)
@@ -1597,6 +1684,48 @@ function ReforgeLite:UpdateMethodCategory ()
       m[m.counter]:Show ()
       m[m.counter]:SetText (string.format (text, ...))
     end
+
+    self.methodPresetsButton = GUI:CreateImageButton (self.content, 24, 24, "Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up",
+      "Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down", "Interface\\Buttons\\UI-Common-MouseHilight", function ()
+      if next(self.pdb.customMethodPresets) then
+        ToggleDropDownMenu (1, nil, self.methodPresetMenu, self.methodPresetsButton:GetName (), 0, 0)
+      end
+    end)
+    self.methodCategory:AddFrame(self.methodPresetsButton)
+    self:SetAnchor (self.methodPresetsButton, "TOPLEFT", self.methodShow, "BOTTOMLEFT", 0, -5)
+    self.methodPresetsButton.tip = self.methodPresetsButton:CreateFontString (nil, "OVERLAY", "GameFontNormal")
+    self.methodPresetsButton.tip:SetPoint ("LEFT", self.methodPresetsButton, "RIGHT", 5, 0)
+    self.methodPresetsButton.tip:SetText (L["Presets"])
+    if next(self.pdb.customMethodPresets) == nil then
+      self.methodPresetsButton:Disable()
+    end
+
+    self.saveMethodPresetButton = CreateFrame ("Button", "ReforgeLiteSaveMethodPresetButton", self.content, "UIPanelButtonTemplate")
+    self.methodCategory:AddFrame (self.saveMethodPresetButton)
+    self.saveMethodPresetButton:SetWidth (114)
+    self.saveMethodPresetButton:SetHeight (22)
+    self.saveMethodPresetButton:SetText (L["Save"])
+    self.saveMethodPresetButton:SetScript ("OnClick", function (self)
+      StaticPopup_Show ("REFORGE_LITE_SAVE_METHOD_PRESET")
+    end)
+    self:SetAnchor (self.saveMethodPresetButton, "LEFT", self.methodPresetsButton.tip, "RIGHT", 8, 0)
+
+    self.deleteMethodPresetButton = CreateFrame ("Button", "ReforgeLiteDeleteMethodPresetButton", self.content, "UIPanelButtonTemplate")
+    self.methodCategory:AddFrame (self.deleteMethodPresetButton)
+    self.deleteMethodPresetButton:SetWidth (114)
+    self.deleteMethodPresetButton:SetHeight (22)
+    self.deleteMethodPresetButton:SetText (L["Delete"])
+    self.deleteMethodPresetButton:SetScript ("OnClick", function ()
+      if next (self.pdb.customMethodPresets) then
+        ToggleDropDownMenu (1, nil, self.methodPresetDelMenu, self.deleteMethodPresetButton:GetName (), 0, 0)
+      end
+    end)
+    self:SetAnchor (self.deleteMethodPresetButton, "LEFT", self.saveMethodPresetButton, "RIGHT", 5, 0)
+    if next (self.pdb.customMethodPresets) == nil then
+      self.deleteMethodPresetButton:Disable ()
+    end
+
+    self:SetAnchor (self.storedCategory, "TOPLEFT", self.methodPresetsButton, "BOTTOMLEFT", 0, -10)    
   end
 
   self:RefreshMethodStats (true)
@@ -1727,26 +1856,7 @@ function ReforgeLite:GetReforgeID (item)
   return (id ~= 0 and (id - self.REFORGE_TABLE_BASE) or nil)
 end
 
-function GetUnitItemLevel (unit)
-  local itemLevel = 0
-  local slots = {}
-  for i, v in ipairs (ReforgeLite.itemData) do
-    local item = GetInventoryItemLink (unit, v.slotId)
-    local iLevel, equipSlot = 0, nil
-    if item then
-      _, _, _, iLevel, _, _, _, _, equipSlot = GetItemInfo (item)
-    end
-    slots[i] = {level = iLevel, slot = equipSlot}
-    itemLevel = itemLevel + iLevel
-  end
-  if slots[16].slot == nil and slots[15].slot == "INVTYPE_2HWEAPON" then
-    itemLevel = itemLevel + slots[15].level
-  end
-  return itemLevel / 17
-end
-
 function ReforgeLite:UpdateItems ()
-  local itemLevel = GetUnitItemLevel ("player")
   for i, v in ipairs (self.itemData) do
     local item = GetInventoryItemLink ("player", v.slotId)
     local texture = GetInventoryItemTexture ("player", v.slotId)
@@ -1795,30 +1905,55 @@ function ReforgeLite:UpdateItems ()
       end
     end
   end
-  itemLevel = math.floor (itemLevel + 0.5)
-  self.itemLevel:SetText (L["Item level"] .. ": " .. itemLevel)
 
   self.s2hFactor = 0
+  self.s2eFactor = 0
   local _, unitClass = UnitClass ("player")
-  if unitClass == "PRIEST" then
-    local _, _, _, _, pts = GetTalentInfo (3, 7, false, false)
-    self.s2hFactor = pts * 50
-  elseif unitClass == "DRUID" and GetPrimaryTalentTree (false, false) ~= 2 then
-    local _, _, _, _, pts = GetTalentInfo (1, 6, false, false)
-    self.s2hFactor = pts * 50
-  elseif unitClass == "SHAMAN" and GetPrimaryTalentTree (false, false) ~= 2 then
-    local _, _, _, _, pts = GetTalentInfo (1, 7, false, false)
-    self.s2hFactor = (pts == 3 and 100 or pts * 33)
-  elseif unitClass == "PALADIN" then
-    local _, _, _, _, pts = GetTalentInfo (1, 11, false, false)
-    self.s2hFactor = pts * 50
+  if MOP then
+    local lvl = UnitLevel("player")
+    if unitClass == "PRIEST" then
+      if GetSpecialization() == 3 and lvl >= 20 then
+        self.s2hFactor = 100
+      end
+    elseif unitClass == "DRUID" then
+      if GetSpecialization() == 1 and lvl >= 64 then
+        self.s2hFactor = 100
+      end
+    elseif unitClass == "SHAMAN" then
+      if GetSpecialization() == 1 and lvl >= 10 then
+        self.s2hFactor = 100
+      end
+    elseif unitClass == "MONK" then
+      if GetSpecialization() == 2 and lvl >= 10 then
+        self.s2hFactor = 50
+        self.s2eFactor = 50
+      end
+    end
+  else
+    if unitClass == "PRIEST" then
+      local _, _, _, _, pts = GetTalentInfo (3, 7, false, false)
+      self.s2hFactor = pts * 50
+    elseif unitClass == "DRUID" and GetPrimaryTalentTree (false, false) ~= 2 then
+      local _, _, _, _, pts = GetTalentInfo (1, 6, false, false)
+      self.s2hFactor = pts * 50
+    elseif unitClass == "SHAMAN" and GetPrimaryTalentTree (false, false) ~= 2 then
+      local _, _, _, _, pts = GetTalentInfo (1, 7, false, false)
+      self.s2hFactor = (pts == 3 and 100 or pts * 33)
+    elseif unitClass == "PALADIN" then
+      local _, _, _, _, pts = GetTalentInfo (1, 11, false, false)
+      self.s2hFactor = pts * 50
+    end
   end
   if self.s2hFactor and self.s2hFactor > 0 then
 --    self.pdb.caps[2].stat = 0
 --    self.statCaps[2].stat:SetValue (0)
 --    UIDropDownMenu_DisableDropDown (self.statCaps[2].stat)
 --    self.statCaps[2].cover:Show ()
-    self.convertSpirit.text:SetText (L["Spirit to hit"] .. ": " .. self.s2hFactor .. "%")
+    if self.s2eFactor and self.s2eFactor > 0 then
+      self.convertSpirit.text:SetText (L["Spirit to hit and expertise"] .. ": " .. self.s2hFactor .. "%")
+    else
+      self.convertSpirit.text:SetText (L["Spirit to hit"] .. ": " .. self.s2hFactor .. "%")
+    end
     self.convertSpirit.text:Show ()
   else
 --    UIDropDownMenu_EnableDropDown (self.statCaps[2].stat)

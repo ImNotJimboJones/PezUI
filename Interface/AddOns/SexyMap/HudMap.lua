@@ -1,27 +1,26 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local modName = "HudMap"
-local mod = addon.SexyMap:NewModule(modName)
-local L = addon.L
-local db
+local _, sm = ...
+sm.hudmap = {}
+
+local mod = sm.hudmap
+local L = sm.L
 
 local updateFrame = CreateFrame("Frame")
-local updateRotations
+local updateRotations, HudMapCluster, SexyMapHudMap
 
 local onShow = function(self)
 	self.rotSettings = GetCVar("rotateMinimap")
 	SetCVar("rotateMinimap", "1")
-	if db.useGatherMate and GatherMate2 then
+	if mod.db.useGatherMate and GatherMate2 then
 		GatherMate2:GetModule("Display"):ReparentMinimapPins(HudMapCluster)
 		GatherMate2:GetModule("Display"):ChangedVars(nil, "ROTATE_MINIMAP", "1")
 	end
 
-	if db.useQuestHelper and QuestHelper and QuestHelper.SetMinimapObject then
+	if mod.db.useQuestHelper and QuestHelper and QuestHelper.SetMinimapObject then
 		QuestHelper:SetMinimapObject(HudMapCluster)
 	end
 
-	if db.useRoutes and Routes and Routes.ReparentMinimap then
+	if mod.db.useRoutes and Routes and Routes.ReparentMinimap then
 		Routes:ReparentMinimap(HudMapCluster)
 		Routes:CVAR_UPDATE(nil, "ROTATE_MINIMAP", "1")
 	end
@@ -32,22 +31,23 @@ local onShow = function(self)
 		Astrolabe.processingFrame:SetParent(HudMapCluster)
 	end
 
+	mod:SetScales()
 	updateFrame:SetScript("OnUpdate", updateRotations)
 	Minimap:Hide()
 end
 
 local onHide = function(self, force)
 	SetCVar("rotateMinimap", self.rotSettings)
-	if (db.useGatherMate or force) and GatherMate2 then
+	if (mod.db.useGatherMate or force) and GatherMate2 then
 		GatherMate2:GetModule("Display"):ReparentMinimapPins(Minimap)
 		GatherMate2:GetModule("Display"):ChangedVars(nil, "ROTATE_MINIMAP", self.rotSettings)
 	end
 
-	if db.useQuestHelper and QuestHelper and QuestHelper.SetMinimapObject then
+	if mod.db.useQuestHelper and QuestHelper and QuestHelper.SetMinimapObject then
 		QuestHelper:SetMinimapObject(Minimap)
 	end
 
-	if (db.useRoutes or force) and Routes and Routes.ReparentMinimap then
+	if (mod.db.useRoutes or force) and Routes and Routes.ReparentMinimap then
 		Routes:ReparentMinimap(Minimap)
 		Routes:CVAR_UPDATE(nil, "ROTATE_MINIMAP", self.rotSettings)
 	end
@@ -64,7 +64,7 @@ end
 
 local options = {
 	type = "group",
-	name = modName,
+	name = "HudMap",
 	args = {
 		desc = {
 			type = "description",
@@ -100,11 +100,11 @@ local options = {
 			order = 3,
 			name = L["HUD Color"],
 			get = function()
-				local c = db.hudColor
+				local c = mod.db.hudColor
 				return c.r or 0, c.g or 1, c.b or 0, c.a or 1
 			end,
 			set = function(info, r, g, b, a)
-				local c = db.hudColor
+				local c = mod.db.hudColor
 				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:UpdateColors()
 			end
@@ -115,11 +115,11 @@ local options = {
 			name = L["Text Color"],
 			order = 4,
 			get = function()
-				local c = db.textColor
+				local c = mod.db.textColor
 				return c.r or 0, c.g or 1, c.b or 0, c.a or 1
 			end,
 			set = function(info, r, g, b, a)
-				local c = db.textColor
+				local c = mod.db.textColor
 				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:UpdateColors()
 			end
@@ -133,10 +133,10 @@ local options = {
 			step = 0.1,
 			bigStep = 0.1,
 			get = function()
-				return db.scale
+				return mod.db.scale
 			end,
 			set = function(info, v)
-				db.scale = v
+				mod.db.scale = v
 				mod:SetScales()
 			end
 		},
@@ -149,10 +149,10 @@ local options = {
 			step = 0.01,
 			bigStep = 0.01,
 			get = function()
-				return db.alpha
+				return mod.db.alpha
 			end,
 			set = function(info, v)
-				db.alpha = v
+				mod.db.alpha = v
 				HudMapCluster:SetAlpha(v)
 			end
 		},
@@ -169,10 +169,10 @@ local options = {
 				return GatherMate2 == nil
 			end,
 			get = function()
-				return db.useGatherMate
+				return mod.db.useGatherMate
 			end,
 			set = function(info, v)
-				db.useGatherMate = v
+				mod.db.useGatherMate = v
 				if HudMapCluster:IsVisible() then
 					onHide(HudMapCluster, true)
 					onShow(HudMapCluster)
@@ -187,10 +187,10 @@ local options = {
 				return QuestHelper == nil or QuestHelper.SetMinimapObject == nil
 			end,
 			get = function()
-				return db.useQuestHelper
+				return mod.db.useQuestHelper
 			end,
 			set = function(info, v)
-				db.useQuestHelper = v
+				mod.db.useQuestHelper = v
 				if HudMapCluster:IsVisible() then
 					onHide(HudMapCluster, true)
 					onShow(HudMapCluster)
@@ -210,10 +210,10 @@ local options = {
 				return Routes == nil or Routes.ReparentMinimap == nil
 			end,
 			get = function()
-				return db.useRoutes
+				return mod.db.useRoutes
 			end,
 			set = function(info, v)
-				db.useRoutes = v
+				mod.db.useRoutes = v
 				if HudMapCluster:IsVisible() then
 					onHide(HudMapCluster, true)
 					onShow(HudMapCluster)
@@ -226,43 +226,64 @@ local options = {
 local directions = {}
 local playerDot
 
-local defaults = {
-	profile = {
-		useGatherMate = true,
-		useQuestHelper = true,
-		useRoutes = true,
-		hudColor = {},
-		textColor = {r = 0.5, g = 1, b = 0.5, a = 1},
-		scale = 8,
-		alpha = 0.7
-	}
-}
-
 local coloredTextures = {}
 local gatherCircle, gatherLine
 local indicators = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"}
 
-function mod:OnInitialize()
-	self.db = parent.db:RegisterNamespace(modName, defaults)
-	db = self.db.profile
+do
+	local target = 1 / 90
+	local total = 0
 
-	-- Upgrade thingie for 3.1
-	if not db.setNewScale then
-		db.scale = 1.4
-		db.setNewScale = true
+	function updateRotations(self, t)
+		total = total + t
+		if total < target then return end
+		while total > target do total = total - target end
+		local bearing = GetPlayerFacing()
+		for k, v in ipairs(directions) do
+			local x, y = math.sin(v.rad + bearing), math.cos(v.rad + bearing)
+			v:ClearAllPoints()
+			v:SetPoint("CENTER", HudMapCluster, "CENTER", x * v.radius, y * v.radius)
+		end
 	end
+end
 
-	SexyMapHudMap.module = self
-	SexyMapHudMap:SetPoint("CENTER", UIParent, "CENTER")
+function mod:OnInitialize(profile)
+	if type(profile.hudmap) ~= "table" then
+		profile.hudmap = {
+			useGatherMate = true,
+			useQuestHelper = true,
+			useRoutes = true,
+			hudColor = {},
+			textColor = {r = 0.5, g = 1, b = 0.5, a = 1},
+			scale = 1.4,
+			alpha = 0.7
+		}
+	end
+	self.db = profile.hudmap
+end
+
+function mod:OnEnable()
+	sm.core:RegisterModuleOptions("HudMap", options, "HudMap")
+
+	HudMapCluster = CreateFrame("Frame", "HudMapCluster", UIParent)
+	HudMapCluster:SetWidth(140)
+	HudMapCluster:SetHeight(140)
+	HudMapCluster:SetPoint("CENTER", UIParent, "CENTER")
+
+	SexyMapHudMap = CreateFrame("Minimap", "SexyMapHudMap", HudMapCluster)
+	SexyMapHudMap:SetWidth(140)
+	SexyMapHudMap:SetHeight(140)
+	SexyMapHudMap:SetPoint("CENTER", HudMapCluster, "CENTER")
+
 	HudMapCluster:SetFrameStrata("BACKGROUND")
-	HudMapCluster:SetAlpha(db.alpha)
+	HudMapCluster:SetAlpha(mod.db.alpha)
 	SexyMapHudMap:SetAlpha(0)
 	SexyMapHudMap:EnableMouse(false)
 
 	setmetatable(HudMapCluster, { __index = SexyMapHudMap })
 
 	BINDING_HEADER_SexyMap = "SexyMap"
-	BINDING_NAME_TOGGLESEXYMAPGATHERMAP = "Toggle HudMap On/Off"
+	BINDING_NAME_TOGGLESEXYMAPGATHERMAP = L["Toggle HudMap On/Off"]
 	gatherCircle = HudMapCluster:CreateTexture()
 	gatherCircle:SetTexture([[SPELLS\CIRCLE.BLP]])
 	gatherCircle:SetBlendMode("ADD")
@@ -308,7 +329,6 @@ function mod:OnInitialize()
 	HudMapCluster:SetScript("OnHide", onHide)
 	Minimap:HookScript("OnShow", self.Minimap_OnShow)
 
-	parent:RegisterModuleOptions(modName, options, modName)
 	self:UpdateColors()
 	self:SetScales()
 
@@ -316,27 +336,7 @@ function mod:OnInitialize()
 	HudMapCluster.GetScale = function()
 		return 1
 	end
-end
 
-do
-	local target = 1 / 90
-	local total = 0
-
-	function updateRotations(self, t)
-		total = total + t
-		if total < target then return end
-		while total > target do total = total - target end
-		local bearing = GetPlayerFacing()
-		for k, v in ipairs(directions) do
-			local x, y = math.sin(v.rad + bearing), math.cos(v.rad + bearing)
-			v:ClearAllPoints()
-			v:SetPoint("CENTER", HudMapCluster, "CENTER", x * v.radius, y * v.radius)
-		end
-	end
-end
-
-function mod:OnEnable()
-	db = self.db.profile
 	updateFrame:RegisterEvent("PLAYER_LOGOUT")
 end
 
@@ -351,30 +351,20 @@ function mod:Minimap_OnShow()
 end
 
 function mod:Toggle(flag)
-	if flag == nil then
-		if HudMapCluster:IsVisible() then
-			HudMapCluster:Hide()
-		else
-			HudMapCluster:Show()
-			mod:SetScales()
-		end
+	if flag then
+		HudMapCluster:Show()
 	else
-		if flag then
-			HudMapCluster:Show()
-			mod:SetScales()
-		else
-			HudMapCluster:Hide()
-		end
+		HudMapCluster:Hide()
 	end
 end
 
 function mod:UpdateColors()
-	local c = db.hudColor
+	local c = mod.db.hudColor
 	for k, v in ipairs(coloredTextures) do
 		v:SetVertexColor(c.r or 0, c.g or 1, c.b or 0, (c.a or 1) * (v.alphaFactor or 1) / HudMapCluster:GetAlpha())
 	end
 
-	c = db.textColor
+	c = mod.db.textColor
 	for k, v in ipairs(directions) do
 		v:SetTextColor(c.r, c.g, c.b, c.a)
 	end
@@ -387,7 +377,7 @@ function mod:SetScales()
 	HudMapCluster:ClearAllPoints()
 	HudMapCluster:SetPoint("CENTER")
 
-	local size = UIParent:GetHeight() / db.scale
+	local size = UIParent:GetHeight() / mod.db.scale
 	SexyMapHudMap:SetWidth(size)
 	SexyMapHudMap:SetHeight(size)
 	HudMapCluster:SetHeight(size)
@@ -396,7 +386,7 @@ function mod:SetScales()
 	gatherCircle:SetHeight(size * 0.45)
 	gatherLine:SetHeight((SexyMapHudMap:GetWidth() * 0.214) - 0.65)
 
-	HudMapCluster:SetScale(db.scale)
+	HudMapCluster:SetScale(mod.db.scale)
 	playerDot:SetWidth(15)
 	playerDot:SetHeight(15)
 

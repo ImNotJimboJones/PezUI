@@ -100,10 +100,10 @@ local function extract(str, pattern)
 	return func(str)
 end
 
-SetCVar("showLootSpam", 1)
+local	in_raid, in_party = IsInRaid(),IsInGroup()
 
 -- Catch latent rolls
-if (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0) and GetLootMethod() == 'group' then
+if (in_raid or in_party) and GetLootMethod() == 'group' then
 	for i=1,200 do
 		local time = GetLootRollTimeLeft(i)
 		if time > 0 then
@@ -122,6 +122,7 @@ local function sort_func(a, b)
 end
 
 local function Handler(text)
+ 	text = text:gsub("\124HlootHistory:%d+\124h%[%w+%]\124h:%s*","") -- strip the [Loot] link to make our life a little easier
 	if need_group and activerolls > 0 then
 		-- Move through the patterns one by one, match against the message
 		for k, v in ipairs(group_patterns) do
@@ -137,7 +138,7 @@ local function Handler(text)
 	if need_loot then
 		-- Optimize by grouped/not and weight patterns by usage
 		-- Check group mode (1 corresponds to ungrouped, 2 to grouped)
-		group = (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0) and 2 or 1
+		group = (in_raid or in_party) and 2 or 1
 		-- If we're not currently sorting for our current mode, or it's been too long since last sort, sort ourpatterns for efficiency
 		if not currentsort or currentsort ~= group or unsortedloot > 100 then
 			unsortedloot, currentsort = 0, group
@@ -208,7 +209,8 @@ local player = UnitName('player')
 loot_patterns = { }
 do
 	local function handler(str, func)
-		table.insert(loot_patterns, { 0, 0, _G[str], func, str })
+		local stripped = gsub(_G[str],"\124HlootHistory:%%d\124h%[%w+%]\124h:%s*","")
+		table.insert(loot_patterns, { 0, 0, stripped, func, str })
 	end
 
 	-- Loot triggers
@@ -221,17 +223,19 @@ do
 	end
 
 	-- Add item patterns
-	handler('LOOT_ITEM', loot)
 	handler('LOOT_ITEM_MULTIPLE', loot)
-	handler('LOOT_ITEM_PUSHED_SELF', function(what) loot(player, what) end)
+	handler('LOOT_ITEM', loot)
 	handler('LOOT_ITEM_PUSHED_SELF_MULTIPLE', function(what, num) loot(player, what, num) end)
-	handler('LOOT_ITEM_SELF', function(what) loot(player, what) end)
+	handler('LOOT_ITEM_PUSHED_SELF', function(what) loot(player, what) end)
 	handler('LOOT_ITEM_SELF_MULTIPLE', function(what, num) loot(player, what, num) end)
+	handler('LOOT_ITEM_SELF', function(what) loot(player, what) end)
 
 	-- Add coin patterns
 	handler('LOOT_MONEY', function(who, str) coin(who, str) end)
+	handler('LOOT_MONEY_SPLIT_GUILD', function(str,_) coin(player, str) end)
 	handler('LOOT_MONEY_SPLIT', function(str) coin(player, str) end)
-	handler('YOU_LOOT_MONEY', function(str) coin(player, str) end)
+	handler('YOU_LOOT_MONEY_GUILD', function(str) coin(player, str) end)
+	handler('YOU_LOOT_MONEY', function(str,_) coin(player, str) end)
 end
 
 
@@ -241,7 +245,8 @@ do
 	-- Base handler function. Checks argument types, adds to handler table (Presorted)
 	--    The pattern is stored as the first key, and the function to be called in the second
 	local function handler(str, func)
-		table.insert(group_patterns, { _G[str], func, str })
+		local stripped = gsub(_G[str],"\124HlootHistory:%%d\124h%[%w+%]\124h:%s*","")
+		table.insert(group_patterns, { stripped, func, str })
 	end
 
 	-- Roll selected handler (You select Greed for XXXX, etc)
@@ -262,15 +267,15 @@ do
 	end
 
 	-- Add handlers using construct functions, ordered specifically
-	selected('LOOT_ROLL_DISENCHANT', 'disenchant')
-	selected('LOOT_ROLL_GREED', 'greed')
-	selected('LOOT_ROLL_NEED', 'need')
 	selected('LOOT_ROLL_DISENCHANT_SELF', 'disenchant', true)
+	selected('LOOT_ROLL_DISENCHANT', 'disenchant')
 	selected('LOOT_ROLL_GREED_SELF', 'greed', true)
+	selected('LOOT_ROLL_GREED', 'greed')
 	selected('LOOT_ROLL_NEED_SELF', 'need', true)
+	selected('LOOT_ROLL_NEED', 'need')
+	selected('LOOT_ROLL_PASSED_SELF_AUTO', 'pass', true)
 	selected('LOOT_ROLL_PASSED_AUTO', 'pass')
 	selected('LOOT_ROLL_PASSED_AUTO_FEMALE', 'pass')
-	selected('LOOT_ROLL_PASSED_SELF_AUTO', 'pass', true)
 	handler('LOOT_ROLL_ALL_PASSED', function(item) trigger_group('allpass', item) end)
 	selected('LOOT_ROLL_PASSED_SELF', 'pass', true)
 	selected('LOOT_ROLL_PASSED', 'pass')
@@ -278,6 +283,13 @@ do
 	rolled('LOOT_ROLL_ROLLED_GREED', 'greed')
 	rolled('LOOT_ROLL_ROLLED_NEED', 'need') 
 	rolled('LOOT_ROLL_ROLLED_NEED_ROLE_BONUS', 'need')
+	handler('LOOT_ROLL_YOU_WON_NO_SPAM_NEED', function(roll, item) trigger_group('won', item, player) end)
+	handler('LOOT_ROLL_YOU_WON_NO_SPAM_GREED', function(roll, item) trigger_group('won', item, player) end)
+	handler('LOOT_ROLL_YOU_WON_NO_SPAM_DE', function(roll, item) trigger_group('won', item, player) end)
 	handler('LOOT_ROLL_YOU_WON', function(item) trigger_group('won', item, player) end)
+ 	handler('LOOT_ROLL_WON_NO_SPAM_NEED', function(who, roll, item) trigger_group('won', item, who == YOU and player or who) end)
+	handler('LOOT_ROLL_WON_NO_SPAM_GREED', function(who, roll, item) trigger_group('won', item, who == YOU and player or who) end)
+	handler('LOOT_ROLL_WON_NO_SPAM_DE', function(who, roll, item) trigger_group('won', item, who == YOU and player or who) end)
 	handler('LOOT_ROLL_WON', function(who, item) trigger_group('won', item, who == YOU and player or who) end)
+	
 end

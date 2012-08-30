@@ -18,33 +18,45 @@ VUHDO_INIT_DEBUFF_ABILITIES = {
 	["HUNTER"] = {
 	},
 	["MAGE"] = {
-		[VUHDO_DEBUFF_TYPE_CURSE] = VUHDO_SPELL_ID.REMOVE_CURSE,
+		[VUHDO_DEBUFF_TYPE_CURSE] = { VUHDO_SPELL_ID.REMOVE_CURSE },
 	},
 	["DRUID"] = {
-		[VUHDO_DEBUFF_TYPE_POISON] = VUHDO_SPELL_ID.REMOVE_CORRUPTION,
-		[VUHDO_DEBUFF_TYPE_CURSE] = VUHDO_SPELL_ID.REMOVE_CORRUPTION,
-		[VUHDO_DEBUFF_TYPE_MAGIC] = VUHDO_SPELL_ID.REMOVE_CORRUPTION,
+		[VUHDO_DEBUFF_TYPE_POISON] = { VUHDO_SPELL_ID.REMOVE_CORRUPTION, VUHDO_SPELL_ID.NATURES_CURE },
+		[VUHDO_DEBUFF_TYPE_CURSE] = { VUHDO_SPELL_ID.REMOVE_CORRUPTION, VUHDO_SPELL_ID.NATURES_CURE },
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { VUHDO_SPELL_ID.NATURES_CURE },
 	},
 	["PALADIN"] = {
-		[VUHDO_DEBUFF_TYPE_POISON] = VUHDO_SPELL_ID.PALA_CLEANSE,
-		[VUHDO_DEBUFF_TYPE_DISEASE] = VUHDO_SPELL_ID.PALA_CLEANSE,
-		[VUHDO_DEBUFF_TYPE_MAGIC] = VUHDO_SPELL_ID.PALA_CLEANSE,
+		[VUHDO_DEBUFF_TYPE_POISON] = { VUHDO_SPELL_ID.PALA_CLEANSE },
+		[VUHDO_DEBUFF_TYPE_DISEASE] = { VUHDO_SPELL_ID.PALA_CLEANSE },
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { VUHDO_SPELL_ID.SACRED_CLEANSING },
 	},
 	["PRIEST"] = {
-		[VUHDO_DEBUFF_TYPE_DISEASE] = VUHDO_SPELL_ID.CURE_DISEASE,
-		[VUHDO_DEBUFF_TYPE_MAGIC] = VUHDO_SPELL_ID.DISPEL_MAGIC,
-		[VUHDO_DEBUFF_TYPE_POISON] = "I",
+		[VUHDO_DEBUFF_TYPE_DISEASE] = { VUHDO_SPELL_ID.PURIFY },
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { VUHDO_SPELL_ID.PURIFY },
 	},
 	["SHAMAN"] = {
-		[VUHDO_DEBUFF_TYPE_CURSE] = VUHDO_SPELL_ID.CLEANSE_SPIRIT,
-		[VUHDO_DEBUFF_TYPE_MAGIC] = VUHDO_SPELL_ID.CLEANSE_SPIRIT,
+		[VUHDO_DEBUFF_TYPE_CURSE] = { VUHDO_SPELL_ID.PURIFY_SPIRIT, VUHDO_SPELL_ID.CLEANSE_SPIRIT --[[ This is a MOP beta bug: PF is always unknown ]] },
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { VUHDO_SPELL_ID.PURIFY_SPIRIT, VUHDO_SPELL_ID.CLEANSE_SPIRIT },
 	},
 	["WARLOCK"] = {
-		[VUHDO_DEBUFF_TYPE_MAGIC] = "*",
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { "*" },
 	},
 	["DEATHKNIGHT"] = {
 	},
+	["MONK"] = {
+		[VUHDO_DEBUFF_TYPE_POISON] = { VUHDO_SPELL_ID.DETOX },
+		[VUHDO_DEBUFF_TYPE_DISEASE] = { VUHDO_SPELL_ID.DETOX },
+		[VUHDO_DEBUFF_TYPE_MAGIC] = { VUHDO_SPELL_ID.INTERNAL_MEDICINE },
+	},
 };
+
+
+
+
+VUHDO_SPEC_TO_DEBUFF_ABIL = {
+ [VUHDO_SPELL_ID.SACRED_CLEANSING] = VUHDO_SPELL_ID.PALA_CLEANSE,
+ [VUHDO_SPELL_ID.INTERNAL_MEDICINE] = VUHDO_SPELL_ID.DETOX,
+}
 
 
 
@@ -79,7 +91,7 @@ VUHDO_INIT_IGNORE_DEBUFFS_BY_CLASS = {
 		[VUHDO_SPELL_ID.DEBUFF_DECAYED_STR] = true,
 		[VUHDO_SPELL_ID.DEBUFF_CRIPPLE] = true,
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
-		[(GetSpellInfo(87923))] = true, -- Windschlag
+		[(GetSpellInfo(87923))] = true, -- MOP okay Windschlag
 	},
 	["DRUID"] = {
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
@@ -91,7 +103,7 @@ VUHDO_INIT_IGNORE_DEBUFFS_BY_CLASS = {
 		[VUHDO_SPELL_ID.DEBUFF_DECAYED_STR] = true,
 		[VUHDO_SPELL_ID.DEBUFF_CRIPPLE] = true,
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
-		[(GetSpellInfo(87923))] = true, -- Windschlag
+		[(GetSpellInfo(87923))] = true, -- MOP okay Windschlag
 	},
 	["SHAMAN"] = {
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
@@ -100,9 +112,12 @@ VUHDO_INIT_IGNORE_DEBUFFS_BY_CLASS = {
 		[VUHDO_SPELL_ID.DEBUFF_DECAYED_STR] = true,
 		[VUHDO_SPELL_ID.DEBUFF_CRIPPLE] = true,
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
-		[(GetSpellInfo(87923))] = true, -- Windschlag
+		[(GetSpellInfo(87923))] = true, -- MOP okay Windschlag
 	},
 	["DEATHKNIGHT"] = {
+		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
+	},
+	["MONK"] = {
 		[VUHDO_SPELL_ID.DEBUFF_UNSTABLE_AFFL] = true,
 	},
 };
@@ -121,28 +136,25 @@ VUHDO_INIT_IGNORE_DEBUFFS_MOVEMENT = {
 	[VUHDO_SPELL_ID.DEBUFF_DAZED] = true,
 	[VUHDO_SPELL_ID.DEBUFF_FROST_SHOCK] = true,
 	[VUHDO_SPELL_ID.FROSTBOLT_VOLLEY] = true,
-	[(GetSpellInfo(92642))] = true, -- Frostblitzsalve
-	[(GetSpellInfo(88184))] = true, -- Lethargisches Gift
-	[(GetSpellInfo(87759))] = true, -- Schockwelle
-	[(GetSpellInfo(88075))] = true, -- Taifun
-	[(GetSpellInfo(90938))] = true, -- Blutgeschoss
-	[(GetSpellInfo(92007))] = true, -- Dampf
-	[(GetSpellInfo(88169))] = true, -- Frostblüte
-	[(GetSpellInfo(87861))] = true, -- Frostfäuste
-	[(GetSpellInfo(83776))] = true, -- Drachenodem
-	[(GetSpellInfo(7964))] = true, -- Rauchbombe
-	[(GetSpellInfo(89989))] = true, -- Paralysierender Blasrohrpfeil
-	[(GetSpellInfo(83785))] = true, -- Schockwelle
-	[(GetSpellInfo(81630))] = true, -- Zähflüssiges Gift
-	[(GetSpellInfo(82764))] = true, -- Zurechtstutzen
-	[(GetSpellInfo(76825))] = true, -- Eisschlag
-	[(GetSpellInfo(73963))] = true, -- Blendendes Gift
-	[(GetSpellInfo(90006))] = true, -- Fluch der Erschöpfung
-	[(GetSpellInfo(76508))] = true, -- Frostblitz
-	[(GetSpellInfo(76682))] = true, -- Frostbombe
-	[(GetSpellInfo(12611))] = true, -- Kältekegel
-	[(GetSpellInfo(76094))] = true, -- Fluch der Ermüdung
-	[(GetSpellInfo(76604))] = true, -- Leerenreißen
+	[(GetSpellInfo(88184))] = true, -- MOP okay Lethargisches Gift
+	[(GetSpellInfo(87759))] = true, -- MOP okay Schockwelle
+	[(GetSpellInfo(88075))] = true, -- MOP okay Taifun
+	[(GetSpellInfo(90938))] = true, -- MOP okay Blutgeschoss
+	[(GetSpellInfo(92007))] = true, -- MOP okay Swirling Vapor
+	[(GetSpellInfo(88169))] = true, -- MOP okay Frostblüte
+	[(GetSpellInfo(87861))] = true, -- MOP okay Frostfäuste
+	[(GetSpellInfo(83776))] = true, -- MOP okay Drachenodem
+	[(GetSpellInfo(7964))] = true, --  MOP okay Rauchbombe
+	[(GetSpellInfo(83785))] = true, -- MOP okay Schockwelle
+	[(GetSpellInfo(81630))] = true, -- MOP okay Zähflüssiges Gift
+	[(GetSpellInfo(82764))] = true, -- MOP okay Zurechtstutzen
+	[(GetSpellInfo(76825))] = true, -- MOP okay Eisschlag
+	[(GetSpellInfo(73963))] = true, -- MOP okay Blendendes Gift
+	[(GetSpellInfo(76508))] = true, -- MOP okay Frostblitz
+	[(GetSpellInfo(76682))] = true, -- MOP okay Frostbombe
+	[(GetSpellInfo(12611))] = true, -- MOP okay Kältekegel
+	[(GetSpellInfo(76094))] = true, -- MOP okay Fluch der Ermüdung
+	[(GetSpellInfo(76604))] = true, -- MOP okay Leerenreißen
 };
 
 
@@ -154,18 +166,17 @@ VUHDO_INIT_IGNORE_DEBUFFS_DURATION = {
 	[VUHDO_SPELL_ID.DEBUFF_CONEOFCOLD] = true,
 	[VUHDO_SPELL_ID.DEBUFF_CONCUSSIVESHOT] = true,
 	[VUHDO_SPELL_ID.DEBUFF_FALTER] = true,
-	[(GetSpellInfo(92642))] = true, -- Frostblitzsalve
-	[(GetSpellInfo(87759))] = true, -- Schockwelle
-	[(GetSpellInfo(90938))] = true, -- Blutgeschoss
-	[(GetSpellInfo(92007))] = true, -- Dampf
-	[(GetSpellInfo(83776))] = true, -- Drachenodem
-	[(GetSpellInfo(7964))] = true, -- Rauchbombe
-	[(GetSpellInfo(83785))] = true, -- Schockwelle
-	[(GetSpellInfo(81630))] = true, -- Zähflüssiges Gift
-	[(GetSpellInfo(82670))] = true, -- Schädelkracher
-	[(GetSpellInfo(73963))] = true, -- Blendendes Gift
-	[(GetSpellInfo(76508))] = true, -- Frostblitz
-	[(GetSpellInfo(76185))] = true, -- Steinschlag
+	[(GetSpellInfo(87759))] = true, -- MOP okay Schockwelle
+	[(GetSpellInfo(90938))] = true, -- MOP okay Blutgeschoss
+	[(GetSpellInfo(92007))] = true, -- MOP pkay Dampf
+	[(GetSpellInfo(83776))] = true, -- MOP okay Drachenodem
+	[(GetSpellInfo(7964))] = true, -- MOP okay Rauchbombe
+	[(GetSpellInfo(83785))] = true, -- MOP okay Schockwelle
+	[(GetSpellInfo(81630))] = true, -- MOP okay Zähflüssiges Gift
+	[(GetSpellInfo(82670))] = true, -- MOP okay Schädelkracher
+	[(GetSpellInfo(73963))] = true, -- MOP okay Blendendes Gift
+	[(GetSpellInfo(76508))] = true, -- MOP okay Frostblitz
+	[(GetSpellInfo(76185))] = true, -- MOP okay Steinschlag
 };
 
 

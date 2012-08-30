@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(99, "DBM-Party-Cataclysm", 6, 64)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7663 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7759 $"):sub(12, -3))
 mod:SetCreatureID(46963)
 mod:SetModelID(34612)
 mod:SetZone()
@@ -14,9 +14,9 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED_DOSE"
 )
 
-local warnFrostMix		= mod:NewSpellAnnounce(93702, 3)
+local warnFrostMix		= mod:NewSpellAnnounce(93505, 3)
 local warnIceShards		= mod:NewSpellAnnounce(93527, 3)
-local warnPoisonMix		= mod:NewSpellAnnounce(93704, 3)
+local warnPoisonMix		= mod:NewSpellAnnounce(93697, 3)
 local warnGreenMix		= mod:NewSpellAnnounce(93617, 4)
 local warnRedMix		= mod:NewSpellAnnounce(93689, 4)
 
@@ -51,9 +51,9 @@ end
 mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 
 function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(93702) then
+	if args:IsSpellID(93505, 93702) then -- unconfirmed in mop
 		warnFrostMix:Show()
-	elseif args:IsSpellID(93704) then
+	elseif args:IsSpellID(93697, 93704) then -- unconfirmed in mop
 		warnPoisonMix:Show()
 	end
 end

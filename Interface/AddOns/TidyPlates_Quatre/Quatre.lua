@@ -104,11 +104,12 @@ StyleDefault.name = {
 
 StyleDefault.level = {
 	typeface =					font,
-	size = 11,
+	size = 10,
 	width = 93,
 	height = 10,
 	x = -2,
-	y = VerticalAdjustment + 14.85,
+	--y = VerticalAdjustment + 14.85,
+	y = VerticalAdjustment + 15.5,
 	align = "LEFT",
 	anchor = "CENTER",
 	vertical = "BOTTOM",
@@ -290,4 +291,4 @@ do
 	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
 end
 
-
+--AddTidyPlatesHubStyle("Quatre", StyleDefault, StyleTextOnly, WidgetConfig)

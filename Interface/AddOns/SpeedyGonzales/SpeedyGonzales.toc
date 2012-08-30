@@ -1,6 +1,6 @@
-## Interface: 40200
+## Interface: 50001
 ## Title: SpeedyGonzales
-## Version: 1.7.1
+## Version: 1.7.2
 ## Notes: Displays your current movement speed and pitch.
 ## Author: L'ombra
 ## SavedVariablesPerCharacter: SpeedyGonzalesDB

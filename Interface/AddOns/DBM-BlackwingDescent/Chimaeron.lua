@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(172, "DBM-BlackwingDescent", nil, 73)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7779 $"):sub(12, -3))
 mod:SetCreatureID(43296)
 mod:SetModelID(33308)
 mod:SetZone()
@@ -77,14 +77,14 @@ end
 
 do
 	local function sort_by_group(v1, v2)
-		return DBM:GetRaidSubgroup(UnitName(v1)) < DBM:GetRaidSubgroup(UnitName(v2))
+		return DBM:GetRaidSubgroup(DBM:GetUnitFullName(v1)) < DBM:GetRaidSubgroup(DBM:GetUnitFullName(v2))
 	end
 	function mod:SetSlimeIcons()
 		if DBM:GetRaidRank() > 0 then
 			table.sort(slimeTargetIcons, sort_by_group)
 			local slimeIcon = 8
 			for i, v in ipairs(slimeTargetIcons) do
-				self:SetIcon(UnitName(v), slimeIcon, 3)
+				self:SetIcon(v, slimeIcon, 3)
 				slimeIcon = slimeIcon - 1
 			end
 			self:Schedule(1.5, ClearSlimeTargets)--Table wipe delay so if icons go out too early do to low fps or bad latency, when they get new target on table, resort and reapplying should auto correct teh icon within .2-.4 seconds at most.
@@ -97,7 +97,6 @@ function mod:OnCombatStart(delay)
 	timerBreakCD:Start(4.5-delay)
 	prewarnedPhase2 = false
 	botOffline = false
-	slimeIcon = 8
 	massacreCast = 0
 	phase2 = false
 	table.wipe(slimeTargets)
@@ -139,7 +138,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			table.insert(slimeTargetIcons, DBM:GetRaidUnitId(args.destName))
 			self:UnscheduleMethod("SetSlimeIcons")
 			if self:LatencyCheck() then--lag can fail the icons so we check it before allowing.
-				self:ScheduleMethod(0.5, "SetSlimeIcons")--Still seems touchy and .3 is too fast even on a 70ms connection in rare cases so back to .4
+				self:ScheduleMethod(0.5, "SetSlimeIcons")--Still seems touchy and .3 is too fast even on a 70ms connection in rare cases so back to .5
 			end
 		end
 		self:Unschedule(showSlimeWarning)

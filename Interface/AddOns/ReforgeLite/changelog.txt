@@ -1,3 +1,17 @@
+** v1.12
+
+- Now automatically deletes relic reforge data
+- Only presets for your class are now listed
+- Changed supported game version to 5.0.4
+- PRESETS NOT UPDATED YET
+
+** v1.11
+
+- Updated for MoP (currently works with both live and beta)
+- Moved target level to weights section to avoid confusion
+- Added reforge saving options
+- Some bug fixes
+
 ** v1.10
 
 - Fixed some presets

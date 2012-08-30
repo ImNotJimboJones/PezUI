@@ -1,6 +1,7 @@
 local pairs = pairs;
 local UnitExists = UnitExists;
 local UnitIsUnit = UnitIsUnit;
+local _;
 
 
 local VUHDO_RAID = { };

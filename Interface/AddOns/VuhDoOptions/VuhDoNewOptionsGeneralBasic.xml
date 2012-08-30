@@ -87,12 +87,12 @@
 
 			<Frame name="$parentShowPanel" inherits="VuhDoPanelTemplate">
 				<Size>
-					<AbsDimension x="240" y="112" />
+					<AbsDimension x="240" y="150" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="220" y="-270" />
+							<AbsDimension x="220" y="-250" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -177,6 +177,22 @@
 							<OnLoad>
 								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.HIDE_EMPTY_BUTTONS");
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K548);
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+
+					<CheckButton name="$parenPetBattleCheckButton" text="Pet Battle" inherits="VuhDoCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="13" y="-107" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.HIDE_PANELS_PET_BATTLE");
+								VUHDO_lnfSetTooltip(self, "Hide panels in a pet battle.");
 							</OnLoad>
 						</Scripts>
 					</CheckButton>

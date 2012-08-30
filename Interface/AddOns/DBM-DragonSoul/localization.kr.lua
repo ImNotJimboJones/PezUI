@@ -29,7 +29,7 @@ L:SetMiscLocalization({
 L= DBM:GetModLocalization(324)
 
 L:SetOptionLocalization({
-	ShadowYell			= "$spell:104600 주문의 영향을 받은 경우 대화로 알리기 (영웅 난이도)",
+	ShadowYell			= "$spell:103434 주문의 영향을 받은 경우 대화로 알리기 (영웅 난이도)",
 	CustomRangeFrame	= "교란의 그림자 주문에 대한 거리 프레임 설정 (영웅 난이도)",
 	Never				= "거리 프레임 사용안함",
 	Normal				= "일반 거리 프레임",
@@ -87,7 +87,7 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	WarnPillars				= "$journal:3919 또는 $journal:4069 남은 횟수 알림 보기",
-	TimerSpecial			= "다음 $spell:105256 또는 $spell:105465 까지 남은 시간 바 표시",
+	TimerSpecial			= "다음 $spell:105256 또는 $spell:105465 까지 남은시간 바 표시",
 	RangeFrame				= "$spell:105269 (3m), $journal:4327 (10m) 주문의 영향을 받은 경우 거리 프레임 보기",
 	AnnounceFrostTombIcons	= "$spell:104451 대상을 공격대 대화로 알리기 (승급 권한 필요)",
 	warnFrostTombCast		= DBM_CORE_AUTO_ANNOUNCE_OPTIONS.cast:format(104448, GetSpellInfo(104448)),

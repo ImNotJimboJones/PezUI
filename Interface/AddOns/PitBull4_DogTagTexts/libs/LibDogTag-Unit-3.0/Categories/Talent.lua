@@ -1,10 +1,21 @@
 local MAJOR_VERSION = "LibDogTag-Unit-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 210 $"):match("%d+")) or 0
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 231 $"):match("%d+")) or 0
 
 if MINOR_VERSION > _G.DogTag_Unit_MINOR_VERSION then
 	_G.DogTag_Unit_MINOR_VERSION = MINOR_VERSION
 end
 
+local wow_ver = select(4, GetBuildInfo())
+local wow_500 = wow_ver >= 50000
+
+local _G, table, setmetatable, rawget = _G, table, setmetatable, rawget
+local UnitName, GetActiveTalentGroup, GetTalentTabInfo, UnitIsPlayer = 
+	  UnitName, GetActiveTalentGroup, GetTalentTabInfo, UnitIsPlayer
+
+if wow_500 then
+	GetActiveTalentGroup = GetActiveSpecGroup
+end
+	  
 DogTag_Unit_funcs[#DogTag_Unit_funcs+1] = function(DogTag_Unit, DogTag)
 
 local L = DogTag_Unit.L

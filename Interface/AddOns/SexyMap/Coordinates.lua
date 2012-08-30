@@ -1,29 +1,34 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local modName = "Coordinates"
-local mod = addon.SexyMap:NewModule(modName)
-local L = addon.L
+local _, sm = ...
+sm.coordinates = {}
+
+local mod = sm.coordinates
+local L = sm.L
+
+local media = LibStub("LibSharedMedia-3.0")
+local coordFrame, coordsText
 
 local options = {
 	type = "group",
 	name = L["Coordinates"],
 	childGroups = "tab",
-	disabled = function() return not mod.db.profile.enabled end,
+	disabled = function() return not mod.db.enabled end,
 	args = {
 		enable = {
 			type = "toggle",
 			name = L["Enable Coordinates"],
 			order = 1,
 			get = function()
-				return mod.db.profile.enabled
+				return mod.db.enabled
 			end,
 			set = function(info, v)
-				mod.db.profile.enabled = v
+				mod.db.enabled = v
 				if v then
-					parent:EnableModule(modName)
+					mod:CreateFrame()
 				else
-					parent:DisableModule(modName)
+					if coordFrame then
+						coordFrame:Hide()
+					end
 				end
 			end,
 			disabled = false,
@@ -32,42 +37,26 @@ local options = {
 			type = "toggle",
 			name = L["Lock Coordinates"],
 			order = 2,
+			width = "double",
 			get = function()
-				return mod.db.profile.locked
+				return mod.db.locked
 			end,
 			set = function(info, v)
-				mod.db.profile.locked = v
+				mod.db.locked = v
 			end,
-			width = "full",
-		},
-		fontSize = {
-			type = "range",
-			name = L["Font Size"],
-			order = 3,
-			min = 8,
-			max = 30,
-			step = 1,
-			bigStep = 1,
-			get = function()
-				return mod.db.profile.fontSize or 12
-			end,
-			set = function(info, v)
-				mod.db.profile.fontSize = v
-				mod:Update()
-			end
 		},
 		fontColor = {
 			type = "color",
 			name = L["Font Color"],
-			order = 4,
+			order = 3,
 			hasAlpha = true,
 			get = function()
-				local c = mod.db.profile.fontColor
+				local c = mod.db.fontColor
 				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
 				return r, g, b, a
 			end,
 			set = function(info, r, g, b, a)
-				local c = mod.db.profile.fontColor
+				local c = mod.db.fontColor
 				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:Update()
 			end
@@ -75,15 +64,15 @@ local options = {
 		backgroundColor = {
 			type = "color",
 			name = L["Backdrop Color"],
-			order = 5,
+			order = 4,
 			hasAlpha = true,
 			get = function()
-				local c = mod.db.profile.backgroundColor
+				local c = mod.db.backgroundColor
 				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
 				return r, g, b, a
 			end,
 			set = function(info, r, g, b, a)
-				local c = mod.db.profile.backgroundColor
+				local c = mod.db.backgroundColor
 				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:Update()
 			end
@@ -94,20 +83,65 @@ local options = {
 			order = 5,
 			hasAlpha = true,
 			get = function()
-				local c = mod.db.profile.borderColor
+				local c = mod.db.borderColor
 				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
 				return r, g, b, a
 			end,
 			set = function(info, r, g, b, a)
-				local c = mod.db.profile.borderColor
+				local c = mod.db.borderColor
 				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:Update()
 			end
 		},
+		fontSize = {
+			type = "range",
+			name = L["Font Size"],
+			order = 6,
+			min = 8,
+			max = 30,
+			step = 1,
+			bigStep = 1,
+			get = function()
+				return mod.db.fontSize or 12
+			end,
+			set = function(info, v)
+				mod.db.fontSize = v
+				mod:Update()
+			end
+		},
+		font = {
+			type = "select",
+			name = L["Font"],
+			order = 7,
+			dialogControl = "LSM30_Font",
+			values = AceGUIWidgetLSMlists.font,
+			get = function()
+				if not coordsText then return end
+				local font = nil
+				local curFont = coordsText:GetFont()
+				for k,v in pairs(AceGUIWidgetLSMlists.font) do
+					if v == curFont then
+						font = k
+						break
+					end
+				end
+				return mod.db.font or font
+			end,
+			set = function(info, v)
+				mod.db.font = v
+				mod:Update()
+			end
+		},
+		spacer = {
+			order = 8,
+			type = "description",
+			width = "normal",
+			name = "",
+		},
 		reset = {
 			type = "execute",
 			name = L["Reset Position"],
-			order = 6,
+			order = 9,
 			func = function()
 				mod:ResetPosition()
 			end,
@@ -115,30 +149,31 @@ local options = {
 	}
 }
 
-function mod:OnInitialize()
-	local defaults = {
-		profile = {
+function mod:OnInitialize(profile)
+	if type(profile.coordinates) ~= "table" then
+		profile.coordinates = {
 			borderColor = {},
 			backgroundColor = {},
 			locked = false,
 			fontColor = {},
-			enabled = false
+			enabled = false,
 		}
-	}
-	self.db = parent.db:RegisterNamespace(modName, defaults)
-	parent:RegisterModuleOptions(modName, options, L["Coordinates"])
+	end
+	self.db = profile.coordinates
 end
 
-local coordFrame, coordsText
 function mod:OnEnable()
-	if not self.db.profile.enabled then
-		parent:DisableModule(modName)
-		return
-	end
+	sm.core:RegisterModuleOptions("Coordinates", options, L["Coordinates"])
 
+	if mod.db.enabled then
+		self:CreateFrame()
+	end
+end
+
+function mod:CreateFrame()
 	if not coordFrame then
 		coordFrame = CreateFrame("Frame", "SexyMapCoordFrame", Minimap)
-		coordFrame:SetBackdrop(addon.backdrop)
+		coordFrame:SetBackdrop(sm.backdrop)
 		coordsText = coordFrame:CreateFontString(nil, nil, "GameFontNormalSmall")
 		coordsText:SetPoint("CENTER", coordFrame, "CENTER")
 		coordsText:SetJustifyH("CENTER")
@@ -146,10 +181,9 @@ function mod:OnEnable()
 
 		coordFrame:SetMovable(true)
 		coordFrame:EnableMouse()
-		coordFrame.sexyMapIgnore = true
 
 		coordFrame:SetScript("OnMouseDown", function(self)
-			if not mod.db.profile.locked then
+			if not mod.db.locked then
 				self:StartMoving()
 				self.moving = true
 			end
@@ -163,8 +197,8 @@ function mod:OnEnable()
 				local dx, dy = mx - x, my - y
 				self:ClearAllPoints()
 				self:SetPoint("CENTER", Minimap, "CENTER", -dx, -dy)
-				mod.db.profile.x = dx
-				mod.db.profile.y = dy
+				mod.db.x = dx
+				mod.db.y = dy
 			end
 		end)
 
@@ -180,43 +214,35 @@ function mod:OnEnable()
 		animgroup:SetLooping("REPEAT")
 		animgroup:Play()
 	end
-	if self.db.profile.x then
+	if mod.db.x then
 		coordFrame:ClearAllPoints()
-		coordFrame:SetPoint("CENTER", Minimap, "CENTER", -self.db.profile.x, -self.db.profile.y)
+		coordFrame:SetPoint("CENTER", Minimap, "CENTER", -mod.db.x, -mod.db.y)
 	else
-		coordFrame:SetPoint("CENTER", Minimap, "BOTTOM")
+		coordFrame:SetPoint("CENTER", Minimap, "BOTTOM", 0, 10)
 	end
 
 	coordFrame:Show()
 	self:Update()
 end
 
-function mod:OnDisable()
-	if coordFrame then
-		coordFrame:Hide()
-	end
-end
-
 function mod:Update()
-	if self.db.profile.borderColor then
-		local c = self.db.profile.borderColor
+	if mod.db.borderColor then
+		local c = mod.db.borderColor
 		coordFrame:SetBackdropBorderColor(c.r or 0, c.g or 0, c.b or 0, c.a or 1)
 	end
 
-	if self.db.profile.backgroundColor then
-		local c = self.db.profile.backgroundColor
+	if mod.db.backgroundColor then
+		local c = mod.db.backgroundColor
 		coordFrame:SetBackdropColor(c.r or 0, c.g or 0, c.b or 0, c.a or 1)
 	end
 
-	if self.db.profile.fontColor then
-		local c = self.db.profile.fontColor
+	if mod.db.fontColor then
+		local c = mod.db.fontColor
 		coordsText:SetTextColor(c.r or 1, c.g or 1, c.b or 1, c.a or 1)
 	end
 
-	if self.db.profile.fontSize then
-		local f, s, flags = coordsText:GetFont()
-		coordsText:SetFont(f, self.db.profile.fontSize, flags)
-	end
+	local a, b, c = coordsText:GetFont()
+	coordsText:SetFont(mod.db.font and media:Fetch("font", mod.db.font) or a, mod.db.fontSize or b, c)
 
 	coordFrame:SetWidth(coordsText:GetStringWidth() * 1.2)
 	coordFrame:SetHeight(coordsText:GetStringHeight() + 10)
@@ -225,6 +251,6 @@ end
 function mod:ResetPosition()
 	coordFrame:ClearAllPoints()
 	coordFrame:SetPoint("CENTER", Minimap, "BOTTOM")
-	self.db.profile.x, self.db.profile.y = nil, nil
+	mod.db.x, mod.db.y = nil, nil
 end
 

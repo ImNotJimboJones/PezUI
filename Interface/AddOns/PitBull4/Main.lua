@@ -1,7 +1,7 @@
 -- Constants ----------------------------------------------------------------
 local L = LibStub("AceLocale-3.0"):GetLocale("PitBull4")
 
-local cata_400 = select(4,GetBuildInfo()) >= 40000
+local mop_500 = select(4,GetBuildInfo()) >= 50000
 
 local SINGLETON_CLASSIFICATIONS = {
 	"player",
@@ -204,6 +204,9 @@ DATABASE_DEFAULTS.profile.colors.power["POWER_TYPE_HEAT"] = { 1, 0.4900196107421
 DATABASE_DEFAULTS.profile.colors.power["POWER_TYPE_BLOOD_POWER"] = { 0.73725494556129, 0, 1 }
 DATABASE_DEFAULTS.profile.colors.power["POWER_TYPE_OOZE"] = { 0.75686281919479, 1, 0 }
 DATABASE_DEFAULTS.profile.colors.power["PB4_ALTERNATE"] = { 0.96078431372549, 0.156862745098039, 0.529411764705882 }
+if not DATABASE_DEFAULTS.profile.colors.power["DEMONIC_FURY"] then
+	DATABASE_DEFAULTS.profile.colors.power["DEMONIC_FURY"] = { 0.58431372549, 0.270588235294, 0.78431372549 }
+end
 
 for reaction, color in pairs(FACTION_BAR_COLORS) do
 	DATABASE_DEFAULTS.profile.colors.reaction[reaction] = { color.r, color.g, color.b }
@@ -234,7 +237,7 @@ PitBull4.expect = _G.PitBull4_expect
 _G.PitBull4_expect = nil
 local expect = PitBull4.expect
 
-PitBull4.version = "v4.0.0-beta31"
+PitBull4.version = "v4.0.0-beta34"
 if PitBull4.version:match("@") then
 	PitBull4.version = "Development"
 end
@@ -1299,9 +1302,13 @@ function PitBull4:OnEnable()
 	-- enter/leave combat for :RunOnLeaveCombat
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
-	
-	self:RegisterEvent("RAID_ROSTER_UPDATE")
-	self:RegisterEvent("PARTY_MEMBERS_CHANGED")
+
+	if not mop_500 then
+		self:RegisterEvent("RAID_ROSTER_UPDATE", "GROUP_ROSTER_UPDATE")
+		self:RegisterEvent("PARTY_MEMBERS_CHANGED", "GROUP_ROSTER_UPDATE")
+	else
+		self:RegisterEvent("GROUP_ROSTER_UPDATE")
+	end
 	
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_LEAVING_WORLD")
@@ -1561,10 +1568,9 @@ function PitBull4:PLAYER_ENTERING_WORLD()
 	refresh_all_guids()
 end
 
-function PitBull4:RAID_ROSTER_UPDATE()
+function PitBull4:GROUP_ROSTER_UPDATE()
 	refresh_all_guids()
 end
-PitBull4.PARTY_MEMBERS_CHANGED = PitBull4.RAID_ROSTER_UPDATE
 
 do
 	local in_combat = false

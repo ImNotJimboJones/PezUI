@@ -1,3 +1,4 @@
+local _;
 VUHDO_ACTIVE_HOTS = { };
 VUHDO_ACTIVE_HOTS_OTHERS = { };
 VUHDO_PLAYER_HOTS = { };
@@ -35,6 +36,9 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.BUFF_BEACON_OF_LIGHT] = {
 		["isHot"] = true,
 	},
+	[VUHDO_SPELL_ID.SACRED_SHIELD] = {
+		["isHot"] = true,
+	},
 
 	-- Priest
 	[VUHDO_SPELL_ID.BUFF_FEAR_WARD] = {
@@ -49,8 +53,9 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.BUFF_POWER_WORD_FORTITUDE] = {
 		["nostance"] = true,
 	},
-
-
+	[VUHDO_SPELL_ID.SPIRIT_SHELL] = {
+		["isHot"] = true,
+	},
 	[VUHDO_SPELL_ID.RENEW] = {
 		["isHot"] = true,
 	},
@@ -78,14 +83,6 @@ VUHDO_SPELLS = {
 		["isHot"] = true,
 		["nohelp"] = true,
 		["noselftarget"] = true,
-	},
-	[VUHDO_SPELL_ID.RENEWED_HOPE] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
-	[VUHDO_SPELL_ID.INSPIRATION] = {
-		["isHot"] = true,
-		["nodefault"] = true,
 	},
 	[VUHDO_SPELL_ID.BLESSED_HEALING] = {
 		["isHot"] = true,
@@ -122,10 +119,6 @@ VUHDO_SPELLS = {
 		["isHot"] = true,
 		["target"] = VUHDO_BUFF_TARGET_UNIQUE,
 	},
-	[VUHDO_SPELL_ID.ANCESTRAL_HEALING] = {
-		["isHot"] = true,
-		["buff"] = VUHDO_SPELL_ID.ANCESTRAL_FORTITUDE,
-	},
 	[VUHDO_SPELL_ID.BUFF_WATER_SHIELD] = {
 		["isHot"] = true,
 	},
@@ -135,8 +128,6 @@ VUHDO_SPELLS = {
 	},
 
 	-- Druid
-
-	-- Dornen, Pflege, Rasche Heilung, Heilende Berührung, Anregen, Wiedergeburt, Wiederbelebung
 	[VUHDO_SPELL_ID.REJUVENATION] = {
 		["isHot"] = true,
 	},
@@ -154,6 +145,24 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.MEND_PET] = {
 		["isHot"] = true,
 	},
+
+	-- Monk
+	[VUHDO_SPELL_ID.SOOTHING_MIST] = {
+		["isHot"] = true,
+	},
+	[VUHDO_SPELL_ID.ENVELOPING_MIST] = {
+		["isHot"] = true,
+	},
+	[VUHDO_SPELL_ID.RENEWING_MIST] = {
+		["isHot"] = true,
+	},
+	[VUHDO_SPELL_ID.ZEN_SPHERE] = {
+		["isHot"] = true,
+	},
+	[VUHDO_SPELL_ID.CHI_WAVE] = {
+		["isHot"] = true,
+	},
+
 };
 local VUHDO_SPELLS = VUHDO_SPELLS;
 
@@ -161,13 +170,9 @@ local VUHDO_SPELLS = VUHDO_SPELLS;
 
 -- Spells from talents only, not in spellbook
 local function VUHDO_addTalentHots(someHots)
-	if (VUHDO_PLAYER_CLASS == "SHAMAN") then
-		someHots[VUHDO_SPELL_ID.ANCESTRAL_HEALING] = true;
-	elseif (VUHDO_PLAYER_CLASS == "PRIEST") then
+	if (VUHDO_PLAYER_CLASS == "PRIEST") then
 		someHots[VUHDO_SPELL_ID.GRACE] = true;
 		someHots[VUHDO_SPELL_ID.DIVINE_AEGIS] = true;
-		someHots[VUHDO_SPELL_ID.RENEWED_HOPE] = true;
-		someHots[VUHDO_SPELL_ID.INSPIRATION] = true;
 		someHots[VUHDO_SPELL_ID.BLESSED_HEALING] = true;
 		someHots[VUHDO_SPELL_ID.ECHO_OF_LIGHT] = true;
 		someHots[VUHDO_SPELL_ID.SERENDIPITY] = true;
@@ -178,56 +183,53 @@ end
 
 -- initializes some dynamic information into VUHDO_SPELLS
 function VUHDO_initFromSpellbook()
-	local tIndex = 1;
+	local tIndex;
 	local tSpellName;
 	local tPresentHots = { };
 	local tEmpty = {};
+	local tTabNum;
+	local tOffset, tNumSlots;
+	local tWasInitialized = false;
 
-	while (true) do
-		tSpellName = GetSpellBookItemName(tIndex, BOOKTYPE_SPELL);
-		if (tSpellName == nil) then
-			break;
+	for tTabNum = 1, GetNumSpellTabs() do
+		_, _, tOffset, tNumSlots, _, _ = GetSpellTabInfo(tTabNum);
+		for tIndex = tOffset + 1, tOffset + tNumSlots do
+			tSpellName = GetSpellBookItemName(tIndex, BOOKTYPE_SPELL);
+			tWasInitialized = true;
+			if ((VUHDO_SPELLS[tSpellName] or tEmpty)["isHot"]) then
+				tPresentHots[tSpellName] = true;
+			end
 		end
-
-		if ((VUHDO_SPELLS[tSpellName] or tEmpty)["isHot"]) then
-			tPresentHots[tSpellName] = true;
-		end
-
-		tIndex = tIndex + 1;
 	end
+
 
 	VUHDO_addTalentHots(tPresentHots);
 
 	twipe(VUHDO_PLAYER_HOTS);
 	for tSpellName, _ in pairs(tPresentHots) do
-		if (VUHDO_SPELLS[tSpellName]["buff"] ~= nil) then
-			tinsert(VUHDO_PLAYER_HOTS, VUHDO_SPELLS[tSpellName]["buff"]);
-		else
-			tinsert(VUHDO_PLAYER_HOTS, tSpellName);
-		end
+		VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = tSpellName;
 	end
 
-	local tSlotsUsed = 0;
 	twipe(VUHDO_ACTIVE_HOTS);
 	twipe(VUHDO_ACTIVE_HOTS_OTHERS);
 
 	local tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 	local tCnt;
 
-	if (tIndex > 1) then -- False if no spell infos yet loaded on early load
+	if (tWasInitialized) then -- False if no spell infos yet loaded on early load
 
 		if (tHotSlots["firstFlood"]) then
+			tHotSlots["firstFlood"] = nil;
+
 			for tCnt = 1, #VUHDO_PLAYER_HOTS do
 				if (not (VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt]] or tEmpty)["nodefault"]) then
 					tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt]);
-					tSlotsUsed = tSlotsUsed + 1;
-					if (tSlotsUsed == 10) then
+					if (#tHotSlots == 10) then
 						break;
 					end
 				end
 			end
 			tHotSlots[10] = "BOUQUET_" .. VUHDO_I18N_DEF_AOE_ADVICE;
-			tHotSlots["firstFlood"] = nil;
 		end
 
 		local tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
@@ -243,7 +245,7 @@ function VUHDO_initFromSpellbook()
 
 		local tHotName;
 		for tCnt, tHotName in pairs(tHotSlots) do
-			if (tHotName ~= nil and strlen(tHotName) > 0) then
+			if (not VUHDO_strempty(tHotName)) then
 				VUHDO_ACTIVE_HOTS[tHotName] = true;
 
 				if (tHotCfg["" .. tCnt]["others"]) then

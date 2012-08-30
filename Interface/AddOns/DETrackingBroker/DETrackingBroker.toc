@@ -1,8 +1,8 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: |cffff0000DE|cff0062ffTracking|cffffffffBroker|r
 ## Notes: Change minimap tracking modes plugin for any LibDataBroker display.
 ## Author: |cff69ccf0by Dark_Elf|r
-## Version: |cffff7d0av4.3.3|r
+## Version: |cffff7d0av5.0.4|r
 ## X-Localizations: enUS
 ## SavedVariablesPerCharacter: DETrackingBrokerDB
 ## OptionalDeps: Ace3, LibDBIcon-1.0

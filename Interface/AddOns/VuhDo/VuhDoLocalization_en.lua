@@ -14,6 +14,7 @@ VUHDO_I18N_SHAMANS = "Shamans";
 VUHDO_I18N_DRUIDS = "Druids";
 VUHDO_I18N_PRIESTS = "Priests";
 VUHDO_I18N_DEATH_KNIGHT = "Death Knights";
+VUHDO_I18N_MONKS = "Monks";
 -- Group Model Names
 -- @EXACT = false
 VUHDO_I18N_GROUP = "Group";
@@ -101,8 +102,8 @@ VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "132nd Weapon Enchant";
 VUHDO_I18N_BUFFC_SHIELDS = "09Shields";
 -- Paladin
 VUHDO_I18N_BUFFC_BLESSING = "01Blessing";
-VUHDO_I18N_BUFFC_AURA = "02Aura";
-VUHDO_I18N_BUFFC_SEAL = "03Seal";
+--VUHDO_I18N_BUFFC_AURA = "02Aura";
+VUHDO_I18N_BUFFC_SEAL = "02Seal";
 -- Druids
 -- Warlock
 VUHDO_I18N_BUFFC_SKIN = "01Skin";
@@ -114,6 +115,9 @@ VUHDO_BUFFC_PRESENCE    = "03Presence";
 VUHDO_I18N_BUFFC_SHOUT = "01Shout";
 -- Hunter
 VUHDO_I18N_BUFFC_ASPECT = "02Aspect";
+-- Monk
+VUHDO_I18N_BUFFC_STANCE = "01Stance";
+
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo - Raid Frames";
@@ -296,7 +300,7 @@ VUHDO_I18N_TT_WHEEL_UP = " Wheel up: ";
 VUHDO_I18N_TT_WHEEL_DOWN = " Wheel down: ";
 -- 2.13
 VUHDO_I18N_BOUQUET_CLASS_ICON = "Icon: Class";
-VUHDO_I18N_BOUQUET_RAID_ICON = "Icon: Raid target";
+VUHDO_I18N_BOUQUET_RAID_ICON = "Icon: Raid Symbol";
 VUHDO_I18N_BOUQUET_ROLE_ICON = "Icon: Role";
 -- 2.18
 VUHDO_I18N_LOAD_PROFILE = "Load Profile";
@@ -387,3 +391,9 @@ VUHDO_I18N_BOUQUET_ROLE_DAMAGE = "Flag: Role Damager";
 VUHDO_I18N_BOUQUET_ROLE_HEALER = "Flag: Role Healer";
 
 VUHDO_I18N_BOUQUET_STACKS = "Flag: Stacks >";
+VUHDO_I18N_DEF_PLAYER_CHI = "Player Chi";
+
+VUHDO_I18N_BOUQUET_TARGET_RAID_ICON = "Icon: Target's Raid Symbol";
+VUHDO_I18N_BOUQUET_OWN_CHI_EQUALS = "Flag: Own Chi ==";
+VUHDO_I18N_CUSTOM_ICON_FOUR_THIRDS = "Thirds: Four";
+VUHDO_I18N_CUSTOM_ICON_FIVE_THIRDS = "Thirds: Five";

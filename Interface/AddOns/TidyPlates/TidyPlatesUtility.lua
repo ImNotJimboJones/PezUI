@@ -16,6 +16,45 @@ copytable = function(original)
 	return duplicate
 end
 
+local function RaidMemberCount()
+	return GetNumRaidMembers() 
+end
+
+local function PartyMemberCount()
+		return GetNumPartyMembers() 
+end
+
+local function RaidMemberCount_MoP()
+	if UnitInRaid("player") then 
+		return GetNumGroupMembers() 
+	end
+end
+
+local function PartyMemberCount_MoP()
+	if UnitInParty("player") then 
+		return GetNumGroupMembers() 
+	end
+end
+
+local function GetSpec()
+	return GetActiveTalentGroup()
+end
+
+local function GetSpec_MoP()
+	return GetActiveSpecGroup()
+end
+
+if (tonumber((select(2, GetBuildInfo()))) >= 15799) then 
+	TidyPlatesUtility.GetNumRaidMembers = RaidMemberCount_MoP
+	TidyPlatesUtility.GetNumPartyMembers = PartyMemberCount_MoP
+	TidyPlatesUtility.GetSpec = GetSpec_MoP
+	
+else
+	TidyPlatesUtility.GetNumRaidMembers = RaidMemberCount
+	TidyPlatesUtility.GetNumPartyMembers = PartyMemberCount
+	TidyPlatesUtility.GetSpec = GetSpec
+end
+
 local function mergetable(master, mate)
 	local merged = {}
 	local matedata
@@ -87,8 +126,8 @@ do
 			leaderUnitID = "pet" 
 		end
 		-- Get Group Type
-		if UnitInRaid("player") then group = "raid"; size = GetNumRaidMembers() - 1
-		elseif UnitInParty("player") then group = "party"; size = GetNumPartyMembers()
+		if UnitInRaid("player") then group = "raid"; size = TidyPlatesUtility:GetNumRaidMembers() - 1
+		elseif UnitInParty("player") then group = "party"; size = TidyPlatesUtility:GetNumPartyMembers()
 		else group = nil end
 		-- Cycle through Group, picking highest threat holder
 		if group then

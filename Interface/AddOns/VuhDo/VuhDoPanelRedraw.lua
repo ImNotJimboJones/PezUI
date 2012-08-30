@@ -12,6 +12,7 @@ local pairs = pairs;
 local strfind = strfind;
 local twipe = table.wipe;
 local InCombatLockdown = InCombatLockdown;
+local _;
 
 
 --
@@ -73,9 +74,9 @@ function VUHDO_initLocalVars(aPanelNum)
 	sLifeFontHeight = sPanelSetup["PANEL_COLOR"]["TEXT"]["textSizeLife"];
 
 	sOutlineText = sPanelSetup["PANEL_COLOR"]["TEXT"]["outline"] and "OUTLINE|" or "";
-	if (sPanelSetup["PANEL_COLOR"]["TEXT"]["USE_MONO"]) then
+	--[[if (sPanelSetup["PANEL_COLOR"]["TEXT"]["USE_MONO"]) then -- Bugs out in MoP beta
 		sOutlineText = sOutlineText .. "MONOCHROME";
-	end
+	end]]
 	sShadowAlpha = sPanelSetup["PANEL_COLOR"]["TEXT"]["USE_SHADOW"] and 1 or 0;
 
 	sBarHeight = VUHDO_getHealthBarHeight(aPanelNum);
@@ -166,11 +167,7 @@ local function VUHDO_initPlayerTargetBorder(aButton, aBorderFrame, anIsNoIndicat
 	end
 	aBorderFrame:SetBackdrop(tBackdrop);
 	aBorderFrame:SetBackdropBorderColor(0, 0, 0, 1);
-	if (anIsNoIndicator) then
-		aBorderFrame:Show();
-	else
-		aBorderFrame:Hide();
-	end
+	aBorderFrame:SetShown(anIsNoIndicator);
 end
 
 
@@ -249,17 +246,15 @@ end
 --
 local tCnt;
 local tLeft, tRight, tTop, tBottom;
-function VUHDO_initButtonButtonFacade(aButton)
-	if (VUHDO_LibButtonFacade ~= nil) then
-		for tCnt = 1, 5 do
-			VUHDO_registerFacadeIcon(aButton, tCnt, VUHDO_I18N_HOTS);
-		end
-		for tCnt = 9, 10 do
-			VUHDO_registerFacadeIcon(aButton, tCnt, VUHDO_I18N_HOTS);
-		end
-		tLeft, tTop, _, _, _, _, tRight, tBottom = VUHDO_getBarIcon(aButton, 1):GetTexCoord();
-		VUHDO_hotsSetClippings(tLeft, tRight, tTop, tBottom);
+local function VUHDO_initButtonButtonFacade(aButton)
+	for tCnt = 1, 5 do
+		VUHDO_registerFacadeIcon(aButton, tCnt, VUHDO_I18N_HOTS);
 	end
+	for tCnt = 9, 10 do
+		VUHDO_registerFacadeIcon(aButton, tCnt, VUHDO_I18N_HOTS);
+	end
+	tLeft, tTop, _, _, _, _, tRight, tBottom = VUHDO_getBarIcon(aButton, 1):GetTexCoord();
+	VUHDO_hotsSetClippings(tLeft, tRight, tTop, tBottom);
 end
 
 
@@ -771,18 +766,12 @@ end
 --
 local tCnt;
 local tHealthBar, tIsInverted, tOrientation, tIconNum;
+local tClickPar;
 function VUHDO_initHealButton(aButton, aPanelNum)
-
-	if (VUHDO_CONFIG["ON_MOUSE_UP"]) then
-		aButton:RegisterForClicks("AnyUp");
-		for tCnt = 40, 44 do
-			VUHDO_getBarIconFrame(aButton, tCnt):RegisterForClicks("AnyUp");
-		end
-	else
-		aButton:RegisterForClicks("AnyDown");
-		for tCnt = 40, 44 do
-			VUHDO_getBarIconFrame(aButton, tCnt):RegisterForClicks("AnyDown");
-		end
+	tClickPar = VUHDO_CONFIG["ON_MOUSE_UP"] and "AnyUp" or "AnyDown";
+	aButton:RegisterForClicks(tClickPar);
+	for tCnt = 40, 44 do
+		VUHDO_getBarIconFrame(aButton, tCnt):RegisterForClicks(tClickPar);
 	end
 
 	-- Texture
@@ -880,7 +869,9 @@ local function VUHDO_initAllHealButtons(aPanel, aPanelNum)
 	tNumButtons = VUHDO_getNumButtonsPanel(aPanelNum);
 	for tCnt  = 1, tNumButtons do
 		tHealButton = VUHDO_getOrCreateHealButton(tCnt, aPanelNum);
-		VUHDO_initButtonButtonFacade(tHealButton);
+		if (VUHDO_LibButtonFacade ~= nil) then
+			VUHDO_initButtonButtonFacade(tHealButton);
+		end
 		VUHDO_initHealButton(tHealButton, aPanelNum);
 	end
 
@@ -977,12 +968,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 	VUHDO_STD_BACKDROP["insets"]["bottom"] = tPanelColor["BORDER"]["insets"];
 
 	aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
-	aPanel:SetBackdropBorderColor(
-		tPanelColor["BORDER"]["R"],
-		tPanelColor["BORDER"]["G"],
-		tPanelColor["BORDER"]["B"],
-		tPanelColor["BORDER"]["O"]
-	);
+	aPanel:SetBackdropBorderColor(VUHDO_backColor(tPanelColor["BORDER"]));
 
 	if (VUHDO_IS_PANEL_CONFIG) then
 		tLabel:SetText("[PANEL "  .. aPanelNum .. "]");
@@ -1001,12 +987,7 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0.4,  0.4, 0.4, 1);
 			UIFrameFlashStop(tLabel);
-			aPanel:SetBackdropBorderColor(
-				tPanelColor["BORDER"]["R"],
-				tPanelColor["BORDER"]["G"],
-				tPanelColor["BORDER"]["B"],
-				tPanelColor["BORDER"]["O"]
-			);
+			aPanel:SetBackdropBorderColor(VUHDO_backColor(tPanelColor["BORDER"]));
 		end
 
 		if (DESIGN_MISC_PANEL_NUM ~= nil) then
@@ -1016,13 +997,8 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:Hide();
 		end
 
-		if (not VUHDO_CONFIG_SHOW_RAID) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Show();
-			VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Show();
-		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Hide();
-			VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Hide();
-		end
+		VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
+		VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
 	else
 		VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Hide();
 		VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Hide();
@@ -1032,18 +1008,8 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 		end
 	end
 
-	aPanel:SetBackdropColor(
-		tPanelColor["BACK"]["R"],
-		tPanelColor["BACK"]["G"],
-		tPanelColor["BACK"]["B"],
-		tPanelColor["BACK"]["O"]
-	);
-
-	if (VUHDO_CONFIG["LOCK_CLICKS_THROUGH"]) then
-		aPanel:EnableMouse(false);
-	else
-		aPanel:EnableMouse(true);
-	end
+	aPanel:SetBackdropColor(VUHDO_backColor(tPanelColor["BACK"]));
+	aPanel:EnableMouse(not VUHDO_CONFIG["LOCK_CLICKS_THROUGH"]);
 
 	aPanel:StopMovingOrSizing();
 	aPanel["isMoving"] = false;

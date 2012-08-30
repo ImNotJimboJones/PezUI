@@ -1,0 +1,35 @@
+------------------------------------------------------------------------
+r18 | cybeloras | 2012-08-30 05:22:07 +0000 (Thu, 30 Aug 2012) | 1 line
+Changed paths:
+   A /tags/2.0.1 (from /trunk:17)
+
+Tagging as 2.0.1
+------------------------------------------------------------------------
+r17 | cybeloras | 2012-08-30 05:20:11 +0000 (Thu, 30 Aug 2012) | 1 line
+Changed paths:
+   M /trunk/SpeedyLoad.toc
+
+Forgot to bump addon version
+------------------------------------------------------------------------
+r16 | cybeloras | 2012-08-30 05:19:42 +0000 (Thu, 30 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SpeedyLoad.lua
+   M /trunk/SpeedyLoad.toc
+
+Bumped TOC version
+Updated author tag
+------------------------------------------------------------------------
+r14 | cybeloras | 2012-08-27 05:06:26 +0000 (Mon, 27 Aug 2012) | 1 line
+Changed paths:
+   M /trunk/SpeedyLoad.lua
+   M /trunk/SpeedyLoad.toc
+
+Updated for MoP (added a few events, version bump, etc)
+------------------------------------------------------------------------
+r13 | cybeloras | 2012-06-05 06:32:34 +0000 (Tue, 05 Jun 2012) | 1 line
+Changed paths:
+   M /trunk/SpeedyLoad.lua
+   M /trunk/SpeedyLoad.toc
+
+Pre-define the UnregisterEvent function for ordinary Frames (probably the most minor change in the world, why did I even bother?)
+------------------------------------------------------------------------

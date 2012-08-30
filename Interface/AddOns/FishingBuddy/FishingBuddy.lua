@@ -1076,8 +1076,9 @@ CaptureEvents["LOOT_OPENED"] = function()
 		-- if we want to autoloot, and Blizz isn't, let's grab stuff
 		local doautoloot = ShouldAutoLoot() and (GetCVar("autoLootDefault") ~= "1" );
 		local zone, subzone = FL:GetZoneInfo();
+		local checkloot = LootSlotIsItem or LootSlotHasItem;
 		for index = 1, GetNumLootItems(), 1 do
-			if (LootSlotIsItem(index)) then
+			if (checkloot(index)) then
 -- lootIcon, lootName, lootQuantity, rarity, locked = GetLootSlotInfo(index)
 -- itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,itemEquipLoc, itemTexture = GetItemInfo(itemID or "itemString" or "itemName" or "itemLink") ;
 				local texture, fishie, quantity, quality = GetLootSlotInfo(index);

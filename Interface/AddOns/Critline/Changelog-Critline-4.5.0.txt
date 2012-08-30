@@ -1,0 +1,62 @@
+------------------------------------------------------------------------
+r65 | lombra | 2012-08-28 23:23:53 +0000 (Tue, 28 Aug 2012) | 1 line
+Changed paths:
+   A /tags/4.5.0 (from /trunk:64)
+
+- Tagging as 4.5.0.
+------------------------------------------------------------------------
+r64 | lombra | 2012-08-28 22:08:28 +0000 (Tue, 28 Aug 2012) | 1 line
+Changed paths:
+   M /trunk/libs/AceDB-3.0.lua
+   M /trunk/libs/AceLocale-3.0.lua
+   M /trunk/libs/CallbackHandler-1.0.lua
+   M /trunk/libs/LibSharedMedia-3.0.lua
+   M /trunk/libs/LibStub.lua
+
+- Update libraries.
+------------------------------------------------------------------------
+r63 | lombra | 2012-08-28 21:33:50 +0000 (Tue, 28 Aug 2012) | 1 line
+Changed paths:
+   A /trunk/ChangeLog.txt
+
+- Change log.
+------------------------------------------------------------------------
+r62 | lombra | 2012-08-28 21:33:25 +0000 (Tue, 28 Aug 2012) | 17 lines
+Changed paths:
+   M /trunk/AuraTracker.lua
+   M /trunk/Broker.lua
+   M /trunk/Critline.toc
+   A /trunk/advanced.lua
+   M /trunk/announce.lua
+   D /trunk/changeLog.txt
+   M /trunk/core.lua
+   M /trunk/display.lua
+   M /trunk/filtersCore.lua
+   M /trunk/filtersGUI.lua
+   M /trunk/libs/LibDualSpec-1.0.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/minimap.lua
+   M /trunk/profiles.lua
+   M /trunk/reset.lua
+   M /trunk/spellList.lua
+   M /trunk/splash.lua
+   M /trunk/templates.lua
+
+- 5.0 update. Not backwards compatible.
+- Remove all types of hardcoded spell exceptions.
+- "Known spells" now works off of spell names rather than IDs.
+- Added advanced module as replacement for the spell exceptions. It allows for custom spell ID, tooltip, name and icon mappings. These are stored globally. (as opposed to profile specific)
+- Added include filter to force spells to count as player spells, and exclude filter that completely ignores spells. Both accept spell IDs and names.
+- Add a brief description to each filter type, explaining their purpose.
+- Core:GetFullSpellName now requires a string instead of spell ID.
+- Popup dialogs with editbox now won't let you accept if the input is invalid.
+- Implement RegisterUnitEvent.
+- Added a template for FauxScrollFrames.
+- Spells that no longer exist in the game are now removed on load.
+- Standardise the format of many debug messages.
+- Spell name is now passed to NewRecord callback. (inserted as third argument)
+- Organise the locales.
+- Use simpler minimap buttin positioning logic.
+- Make sure minimap button is not overlapped by minimap.
+- Add a label to editbox template.
+------------------------------------------------------------------------

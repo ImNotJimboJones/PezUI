@@ -10,6 +10,7 @@ local GetTime = GetTime;
 local pairs = pairs;
 local twipe = table.wipe;
 local _;
+local huge = math.huge;
 
 local VUHDO_GLOBAL = getfenv();
 
@@ -169,7 +170,7 @@ function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration,
 		VUHDO_DEBUFF_ICONS[aUnit] = { };
 	end
 
-	tOldest = GetTime();
+	tOldest = huge;
 	tSlot = 1;
 	for tCnt = 1, sMaxIcons do
 		if (VUHDO_DEBUFF_ICONS[aUnit][tCnt] == nil) then
@@ -183,7 +184,7 @@ function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration,
 			end
 		end
 	end
-	tIconInfo = { anIcon, -1, aName, anExpiry, aStacks, aDuration }
+	tIconInfo = { anIcon, -1, aName, anExpiry, aStacks, aDuration };
 	VUHDO_DEBUFF_ICONS[aUnit][tSlot] = tIconInfo;
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);

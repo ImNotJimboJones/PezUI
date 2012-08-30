@@ -1,7 +1,7 @@
 
-------------------------------------------------------
+------------------------------------------------------------------------------------
 -- Tidy Plates Hub
-------------------------------------------------------
+------------------------------------------------------------------------------------
 
 TidyPlatesHubFunctions = {}
 local LocalVars = TidyPlatesHubDefaults
@@ -108,9 +108,14 @@ local ReactionColors = {
 
 local RaidClassColors = RAID_CLASS_COLORS
 
----------------------------------------
+------------------------------------------------------------------------------------
 -- Helper Functions
----------------------------------------
+------------------------------------------------------------------------------------
+local function GetCurrentSpec()
+	if TidyPlatesUtility.GetSpec(false, false) == 2 then return "secondary" 
+	else return "primary" end
+end
+
 local function ShortenNumber(number)
 	if number > 1000000 then
 		return (ceil((number/10000))/100).." M"
@@ -145,127 +150,58 @@ local function GetEnemyClass(name)
 			return CachedUnitClass(name) end	
 end
 
+------------------------------------------------------------------------------------
+-- Style
+------------------------------------------------------------------------------------
 
----------------------------------------
--- Scale
----------------------------------------
+local BARMODE, HEADLINEMODE = 1, 2
 
--- By Low Health
-local function ScaleFunctionByLowHealth(unit)
-	if unit.health/unit.healthmax < LocalVars.LowHealthThreshold then return LocalVars.ScaleSpotlight end
-end
-
--- By Elite
-local function ScaleFunctionByElite(unit) 
-	if unit.isElite then return LocalVars.ScaleSpotlight end 
-end
-
--- By Target
-local function ScaleFunctionByTarget(unit) 
-	if unit.isTarget then return LocalVars.ScaleSpotlight end 
-end
-
--- By Threat (High) DPS Mode
-local function ScaleFunctionByThreatHigh(unit)
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if unit.type == "NPC" and unit.threatValue > 1 and unit.health > 2 then return LocalVars.ScaleSpotlight end
-	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
-		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
-	end
-end
-
--- By Threat (Low) Tank Mode
-local function ScaleFunctionByThreatLow(unit)
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if IsTankedByAnotherTank(unit) then return end
-		if unit.type == "NPC" and unit.health > 2 and unit.threatValue < 2 then return LocalVars.ScaleSpotlight end 
-	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
-		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
-	end
-end
-
--- By Debuff Widget
-local function ScaleFunctionByActiveDebuffs(unit, frame) 
-	local widget = unit.frame.widgets.DebuffWidget
-	--local widget = TidyPlatesWidgets.GetAuraWidgetByGUID(unit.guid)
-	if IsAuraShown(widget) then return LocalVars.ScaleSpotlight end
-end
-
--- By Enemy
-local function ScaleFunctionByEnemy(unit) 
-	if unit.reaction ~= "FRIENDLY" then return LocalVars.ScaleSpotlight end 
-end
-
--- By NPC
-local function ScaleFunctionByNPC(unit) 
-	if unit.type == "NPC" then return LocalVars.ScaleSpotlight end 
-end
-
--- By Raid Icon
-local function ScaleFunctionByRaidIcon(unit) 
-	if unit.isMarked then return LocalVars.ScaleSpotlight end 
-end
-
--- By Enemy Healer
-local function ScaleFunctionByEnemyHealer(unit)
-	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
-		if IsHealer(unit.name) then
-			return LocalVars.ScaleSpotlight
+local StyleModeFunctions = {
+	--	Full Bars and Widgets
+	function(unit)
+		return BARMODE
+	end,
+	-- NameOnly
+	function(unit)
+		return HEADLINEMODE
+	end,
+	-- Bars during combat
+	function(unit)
+		if InCombatLockdown() then 
+			return BARMODE
+		else return HEADLINEMODE end
+	end,
+	-- Bars when unit is active or damaged
+	function(unit)
+		if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then 
+			return BARMODE
 		end
-	end
-end
-
--- By Boss
-local function ScaleFunctionByBoss(unit) 
-	if unit.isBoss and unit.isElite then return LocalVars.ScaleSpotlight end 
-end
-
--- By Threat (Auto Detect)
-local function ScaleFunctionByThreatAutoDetect(unit) 
-	if TidyPlatesWidgets.IsTankingAuraActive then return ScaleFunctionByThreatLow(unit)	-- tank mode
-	else return ScaleFunctionByThreatHigh(unit) end										-- dps mode
-end
-
--- Function List
---local ScaleFunctionsDamage = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, ScaleFunctionByThreatHigh, ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy,ScaleFunctionByNPC, ScaleFunctionByRaidIcon, ScaleFunctionByEnemyHealer, ScaleFunctionByThreatAutoDetect}
-
---local ScaleFunctionsTank = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, ScaleFunctionByThreatLow, ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy, ScaleFunctionByNPC, ScaleFunctionByRaidIcon, ScaleFunctionByThreatAutoDetect}
-
-local ScaleFunctionsUniversal = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, 
-		ScaleFunctionByThreatAutoDetect, ScaleFunctionByThreatHigh, ScaleFunctionByThreatLow, 
-		ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy,ScaleFunctionByNPC, ScaleFunctionByRaidIcon, 
-		ScaleFunctionByEnemyHealer, ScaleFunctionByLowHealth, ScaleFunctionByBoss}
-
-
--- Scale Functions Listed by Role order: Damage, Tank, Heal
--- local ScaleFunctions = {ScaleFunctionsDamage, ScaleFunctionsTank}
-
-local function ScaleDelegate(...)
-	local unit = ...
-	local scale
+		return HEADLINEMODE
+	end,
+	-- elite units
+	function(unit)
+		if unit.isElite then 
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
+	-- marked
+	function(unit)
+		if unit.isMarked then 
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
+		-- player chars
+	function(unit)
+		if unit.type == "PLAYER" then 
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
 	
-	if LocalVars.ScaleIgnoreNonEliteUnits and (not unit.isElite) then
-	elseif LocalVars.ScaleIgnoreNeutralUnits and unit.reaction == "NEUTRAL" then 
-	elseif LocalVars.ScaleIgnoreInactive and not (unit.reaction == "FRIENDLY" and (unit.isInCombat or (unit.threatValue > 0) or (unit.health < unit.healthmax))) then 
-	elseif LocalVars.ScaleCastingSpotlight and unit.isCasting then scale = LocalVars.ScaleSpotlight
-	else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...)  
-	end
+	--[[
+		if TidyPlatesWidgets.IsTankingAuraActive then return AlphaFunctionByThreatLow(unit)	-- tank mode
+	else return AlphaFunctionByThreatHigh(unit) end		
 	
-	return scale or LocalVars.ScaleStandard
-end
-
-
----------------------------------------
--- Opacity / Alpha
----------------------------------------
-
--- By Low Health
-local function AlphaFunctionByLowHealth(unit)
-	if unit.health/unit.healthmax < LocalVars.LowHealthThreshold then return LocalVars.OpacitySpotlight end
-end
-
--- By Threat (High)
+	-- By Threat (High)
 local function AlphaFunctionByThreatHigh (unit) 
 	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
 		if unit.threatValue > 1 and unit.health > 0 then return LocalVars.OpacitySpotlight end
@@ -283,101 +219,48 @@ local function AlphaFunctionByThreatLow (unit)
 		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
 	end
 end
-
-local function AlphaFunctionByMouseover(unit) 
-	if unit.isMouseover then return LocalVars.OpacitySpotlight end
-end
-
-local function AlphaFunctionByEnemy(unit) 
-	if unit.reaction ~= "FRIENDLY" then return LocalVars.OpacitySpotlight end
-end
-
-local function AlphaFunctionByNPC(unit) 
-	if unit.type == "NPC" then return LocalVars.OpacitySpotlight end 
-end
-
-local function AlphaFunctionByRaidIcon(unit) 
-	if unit.isMarked then return LocalVars.OpacitySpotlight end 
-end
-
-local function AlphaFunctionByActive(unit) 		
-	if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then return LocalVars.OpacitySpotlight end 
-end
-
-local function AlphaFunctionByActiveDebuffs(unit) 
-	local widget = unit.frame.widgets.DebuffWidget
-	--local widget = TidyPlatesWidgets.GetAuraWidgetByGUID(unit.guid)
-	if IsAuraShown(widget) then return LocalVars.OpacitySpotlight end
-end
-
--- By Enemy Healer
-local function AlphaFunctionByEnemyHealer(unit)
-	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
-		if IsHealer(unit.name) then
-			return LocalVars.OpacitySpotlight
+	--]]
+	-- Current Target
+	function(unit)
+		if unit.isTarget == true then 
+			return BARMODE 
+		else return HEADLINEMODE end
+	end,
+	-- low threat
+	function(unit)
+		if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+			if IsTankedByAnotherTank(unit) then return HEADLINEMODE end
+			if unit.threatValue < 2 and unit.health > 0 then return BARMODE end
+		elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+			if GetAggroCondition(unit.name) == true then return BARMODE end
 		end
-	end
-end
+		return HEADLINEMODE
+	end,
+}
 
--- By Threat (Auto Detect)
-local function AlphaFunctionByThreatAutoDetect(unit) 
-	if TidyPlatesWidgets.IsTankingAuraActive then return AlphaFunctionByThreatLow(unit)	-- tank mode
-	else return AlphaFunctionByThreatHigh(unit) end										-- dps mode
-end
-
-local function AlphaFilter(unit)
-	if LocalVars.OpacityFilterLookup[unit.name] then return true
-	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
-	elseif LocalVars.OpacityFilterFriendlyNPC and unit.type == "NPC" and unit.reaction == "FRIENDLY" then return true
-	elseif LocalVars.OpacityFilterNPC and unit.type == "NPC" then return true
-	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
-	elseif LocalVars.OpacityFilterInactive then 
-		if unit.reaction ~= "FRIENDLY" and not (unit.isMarked or unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
-		
-	--elseif LocalVars.OpacityFilterInactive and (unit.isInCombat or unit.healthmax > unit.health) then return true
-	end
-end
-
-local AlphaFunctionsUniversal = { DummyFunction, AlphaFunctionByThreatAutoDetect, AlphaFunctionByThreatHigh, 
-		AlphaFunctionByThreatLow,  AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, 
-		AlphaFunctionByRaidIcon, AlphaFunctionByActive, AlphaFunctionByEnemyHealer, AlphaFunctionByLowHealth}
-
--- Alpha Functions Listed by Role order: Damage, Tank, Heal
-local AlphaFunctions = {AlphaFunctionsDamage, AlphaFunctionsTank}
-
-local function Diminish(num)
-	if num == 1 then return 1
-	elseif num < .3 then return num*.60
-	elseif num < .6 then return num*.70
-	else return num * .80 end
-end
-
-local function AlphaDelegate(...)
-	local unit = ...
-	local alpha
-	
-	if unit.isTarget then return Diminish(LocalVars.OpacityTarget)
-	elseif unit.isCasting and LocalVars.OpacityFullSpell then return Diminish(LocalVars.OpacityTarget)
-	elseif unit.isMouseover and LocalVars.OpacityFullMouseover then return Diminish(LocalVars.OpacityTarget)
-	else
-		-- Filter
-		if AlphaFilter(unit) then alpha = LocalVars.OpacityFiltered 
-		-- Spotlight
-		else alpha = AlphaFunctionsUniversal[LocalVars.OpacitySpotlightMode](...) end
-	end
-	
-	if alpha then return Diminish(alpha)
-	else 
-		if (not UnitExists("target")) and LocalVars.OpacityFullNoTarget then return Diminish(LocalVars.OpacityTarget)
-		else return Diminish(LocalVars.OpacityNonTarget) end
-	end
+local function StyleDelegate(unit)
+	if unit.reaction == "FRIENDLY" then return StyleModeFunctions[LocalVars.StyleFriendlyMode](unit)
+	else return StyleModeFunctions[LocalVars.StyleEnemyMode](unit) end
 end
 
 
----------------------------------------
+
+
+------------------------------------------------------------------------------------
+-- Binary Plate Styles
+------------------------------------------------------------------------------------
+
+local function SetStyleBinaryDelegate(unit)
+	if StyleDelegate(unit) == 2 then return "NameOnly"
+	else return "Default" end
+end
+
+
+
+
+------------------------------------------------------------------------------
 -- Health Bar Color
----------------------------------------
+------------------------------------------------------------------------------
 local tempColor = {}
 
 -- By Low Health
@@ -512,9 +395,9 @@ local function HealthColorDelegate(unit)
 	else return unit.red, unit.green, unit.blue end
 end
 
----------------------------------------
+------------------------------------------------------------------------------
 -- Warning Border Color
----------------------------------------
+------------------------------------------------------------------------------
 local WarningColor = {}
 
 -- Player Health (na)
@@ -584,9 +467,9 @@ local function ThreatColorDelegate(unit)
 end
 
 
----------------------------------------
+------------------------------------------------------------------------------
 -- Cast Bar Color
----------------------------------------
+------------------------------------------------------------------------------
 local function CastBarDelegate(unit)
 	local color
 	if unit.spellInterruptible then color = GoldColor 
@@ -596,9 +479,9 @@ end
 
 
 
----------------------------------------
+------------------------------------------------------------------------------
 -- Name Text Color
----------------------------------------
+------------------------------------------------------------------------------
 
 -- By Reaction
 local function NameColorByReaction(unit)
@@ -715,7 +598,8 @@ local function SetNameColorDelegate(unit)
 	end
 	
 	if not color then
-		if unit.style == "NameOnly" then 
+		--if unit.style == "NameOnly" then 
+		if StyleDelegate(unit) == 2 then
 			colorMode = tonumber(LocalVars.TextPlateNameColorMode)
 		else colorMode = tonumber(LocalVars.TextNameColorMode) end
 		
@@ -726,9 +610,419 @@ local function SetNameColorDelegate(unit)
 	else return 1, 1, 1, 1 end
 end
 
----------------------------------------
+------------------------------------------------------------------------------
+-- Optional/Health Text
+------------------------------------------------------------------------------
+
+local function HealthAndMana(unit) 
+	if unit.isTarget then
+		local power = ceil((UnitPower("target") / UnitPowerMax("target"))*100)
+		local _, powername = UnitPowerType("target")
+		if power and power > 0 then	return power.."% "..powername end
+	end
+end
+
+-- None
+local function HealthFunctionNone() return "" end
+-- Percent
+local function TextHealthPercentColored(unit)
+	local color = ColorFunctionByHealth(unit)
+	return ceil(100*(unit.health/unit.healthmax)).."%", color.r, color.g, color.b, .7
+end
+
+local function HealthFunctionPercent(unit)
+	if unit.health < unit.healthmax then
+		return TextHealthPercentColored(unit)
+	else return "" end
+end
+
+-- Actual
+local function HealthFunctionExact(unit) 
+	return SepThousands(unit.health) 
+end
+-- Approximate
+local function HealthFunctionApprox(unit) 
+	return ShortenNumber(unit.health) 
+end
+--Deficit
+local function HealthFunctionDeficit(unit) 
+	local health, healthmax = unit.health, unit.healthmax
+	if health ~= healthmax then return "-"..SepThousands(healthmax - health) end 
+end
+-- Total and Percent
+local function HealthFunctionTotal(unit) 
+	local health, healthmax = unit.health, unit.healthmax
+	return ShortenNumber(health).." / "..ShortenNumber(healthmax).." ("..ceil(100*(health/healthmax)).."%)" 
+end
+-- TargetOf
+local function HealthFunctionTargetOf(unit) 
+	if unit.isTarget then return UnitName("targettarget")
+	elseif unit.isMouseover then return UnitName("mouseovertarget")
+	else return "" end
+end
+-- Level
+local function HealthFunctionLevel(unit) 
+	local level = unit.level
+	if unit.isElite then level = level.." (Elite)" end
+	return level, unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
+end
+-- Level and Health
+local function HealthFunctionLevelHealth(unit) 
+	local level = unit.level
+	if unit.isElite then level = level.."E" end
+	return level.."  |cffffffff"..HealthFunctionApprox(unit), unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
+end
+
+
+local HealthTextModeFunctions = {
+	HealthFunctionNone,
+	HealthFunctionPercent,
+	HealthFunctionExact,
+	HealthFunctionDeficit,
+	HealthFunctionTotal,
+	HealthFunctionTargetOf,
+	HealthFunctionApprox,
+	HealthFunctionLevel,
+	HealthFunctionLevelHealth,
+	HealthAndMana,
+}
+
+local function HealthTextDelegate(unit) 
+	return HealthTextModeFunctions[LocalVars.TextHealthTextMode](unit) 
+end
+
+
+------------------------------------------------------------------------------------
+-- Binary/Headline Text Styles
+------------------------------------------------------------------------------------
+local function RoleOrGuildText(unit)
+	if unit.type == "NPC" then
+		return (CachedUnitDescription(unit.name) or GetLevelDescription(unit) or "") , 1, 1, 1, .70
+	end
+end
+
+-- Role, Guild or Level
+local function TextRoleGuildLevel(unit)
+	local description
+	local r, g, b = 1,1,1
+	
+	if unit.type == "NPC" then
+		description = CachedUnitDescription(unit.name)
+	
+		if not description and unit.reaction ~= "FRIENDLY" then 
+			description =  GetLevelDescription(unit)
+			r, g, b = unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue
+		end
+		
+	elseif unit.type == "PLAYER" then
+		description = CachedUnitGuild(unit.name)
+		r, g, b = .5, .5, .7
+	end
+	
+	return description, r, g, b, .70
+end
+	
+-- Role or Guild
+local function TextRoleGuild(unit)
+	local description
+	local r, g, b = 1,1,1
+	
+	if unit.type == "NPC" then
+		description = CachedUnitDescription(unit.name)
+
+	elseif unit.type == "PLAYER" then
+		description = CachedUnitGuild(unit.name)
+		r, g, b = .5, .5, .7
+	end
+	
+	return description, r, g, b, .70
+end
+	
+-- NPC Role
+local function TextNPCRole(unit)
+	if unit.type == "NPC" then
+		return CachedUnitDescription(unit.name)
+	end
+end
+
+-- Level
+local function TextLevelColored(unit)
+	--return GetLevelDescription(unit) , 1, 1, 1, .70
+	return GetLevelDescription(unit) , unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
+end
+
+-- Guild, Role, Level, Health
+function TextAll(unit)
+	local color = ColorFunctionByHealth(unit)
+	if unit.health < unit.healthmax then
+		return ceil(100*(unit.health/unit.healthmax)).."%", color.r, color.g, color.b, .7
+	else 
+		--return GetLevelDescription(unit) , unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .7
+		return TextRoleGuildLevel(unit)
+	end
+end
+	
+	
+	
+local TextPlateFieldFunctions = {
+	-- None
+	DummyFunction,
+	-- Health Text
+	TextHealthPercentColored,
+	-- Role, Guild or Level
+	TextRoleGuildLevel, 
+	-- Role or Guild
+	TextRoleGuild, 
+	-- NPC Role
+	TextNPCRole,
+	-- Level
+	TextLevelColored,
+	-- Level or Health
+	TextAll,
+}
+
+	
+local function CustomTextBinaryDelegate(unit)
+	--if unit.style == "NameOnly" then
+	if StyleDelegate(unit) == 2 then
+		return TextPlateFieldFunctions[LocalVars.TextPlateFieldMode](unit)
+	end
+	return HealthTextDelegate(unit) 
+end
+
+------------------------------------------------------------------------------
+-- Scale
+------------------------------------------------------------------------------
+
+-- By Low Health
+local function ScaleFunctionByLowHealth(unit)
+	if unit.health/unit.healthmax < LocalVars.LowHealthThreshold then return LocalVars.ScaleSpotlight end
+end
+
+-- By Elite
+local function ScaleFunctionByElite(unit) 
+	if unit.isElite then return LocalVars.ScaleSpotlight end 
+end
+
+-- By Target
+local function ScaleFunctionByTarget(unit) 
+	if unit.isTarget then return LocalVars.ScaleSpotlight end 
+end
+
+-- By Threat (High) DPS Mode
+local function ScaleFunctionByThreatHigh(unit)
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if unit.type == "NPC" and unit.threatValue > 1 and unit.health > 2 then return LocalVars.ScaleSpotlight end
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
+	end
+end
+
+-- By Threat (Low) Tank Mode
+local function ScaleFunctionByThreatLow(unit)
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if IsTankedByAnotherTank(unit) then return end
+		if unit.type == "NPC" and unit.health > 2 and unit.threatValue < 2 then return LocalVars.ScaleSpotlight end 
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
+	end
+end
+
+-- By Debuff Widget
+local function ScaleFunctionByActiveDebuffs(unit, frame) 
+	local widget = unit.frame.widgets.DebuffWidget
+	--local widget = TidyPlatesWidgets.GetAuraWidgetByGUID(unit.guid)
+	if IsAuraShown(widget) then return LocalVars.ScaleSpotlight end
+end
+
+-- By Enemy
+local function ScaleFunctionByEnemy(unit) 
+	if unit.reaction ~= "FRIENDLY" then return LocalVars.ScaleSpotlight end 
+end
+
+-- By NPC
+local function ScaleFunctionByNPC(unit) 
+	if unit.type == "NPC" then return LocalVars.ScaleSpotlight end 
+end
+
+-- By Raid Icon
+local function ScaleFunctionByRaidIcon(unit) 
+	if unit.isMarked then return LocalVars.ScaleSpotlight end 
+end
+
+-- By Enemy Healer
+local function ScaleFunctionByEnemyHealer(unit)
+	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		if IsHealer(unit.name) then
+			return LocalVars.ScaleSpotlight
+		end
+	end
+end
+
+-- By Boss
+local function ScaleFunctionByBoss(unit) 
+	if unit.isBoss and unit.isElite then return LocalVars.ScaleSpotlight end 
+end
+
+-- By Threat (Auto Detect)
+local function ScaleFunctionByThreatAutoDetect(unit) 
+	if TidyPlatesWidgets.IsTankingAuraActive then return ScaleFunctionByThreatLow(unit)	-- tank mode
+	else return ScaleFunctionByThreatHigh(unit) end										-- dps mode
+end
+
+-- Function List
+--local ScaleFunctionsDamage = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, ScaleFunctionByThreatHigh, ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy,ScaleFunctionByNPC, ScaleFunctionByRaidIcon, ScaleFunctionByEnemyHealer, ScaleFunctionByThreatAutoDetect}
+
+--local ScaleFunctionsTank = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, ScaleFunctionByThreatLow, ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy, ScaleFunctionByNPC, ScaleFunctionByRaidIcon, ScaleFunctionByThreatAutoDetect}
+
+local ScaleFunctionsUniversal = { DummyFunction, ScaleFunctionByElite, ScaleFunctionByTarget, 
+		ScaleFunctionByThreatAutoDetect, ScaleFunctionByThreatHigh, ScaleFunctionByThreatLow, 
+		ScaleFunctionByActiveDebuffs, ScaleFunctionByEnemy,ScaleFunctionByNPC, ScaleFunctionByRaidIcon, 
+		ScaleFunctionByEnemyHealer, ScaleFunctionByLowHealth, ScaleFunctionByBoss}
+
+
+-- Scale Functions Listed by Role order: Damage, Tank, Heal
+-- local ScaleFunctions = {ScaleFunctionsDamage, ScaleFunctionsTank}
+
+local function ScaleDelegate(...)
+	local unit = ...
+	local scale
+	
+	if LocalVars.ScaleIgnoreNonEliteUnits and (not unit.isElite) then
+	elseif LocalVars.ScaleIgnoreNeutralUnits and unit.reaction == "NEUTRAL" then 
+	elseif LocalVars.ScaleIgnoreInactive and not (unit.reaction == "FRIENDLY" and (unit.isInCombat or (unit.threatValue > 0) or (unit.health < unit.healthmax))) then 
+	elseif LocalVars.ScaleCastingSpotlight and unit.isCasting then scale = LocalVars.ScaleSpotlight
+	else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...)  
+	end
+	
+	return scale or LocalVars.ScaleStandard
+end
+
+
+------------------------------------------------------------------------------
+-- Opacity / Alpha
+------------------------------------------------------------------------------
+
+-- By Low Health
+local function AlphaFunctionByLowHealth(unit)
+	if unit.health/unit.healthmax < LocalVars.LowHealthThreshold then return LocalVars.OpacitySpotlight end
+end
+
+-- By Threat (High)
+local function AlphaFunctionByThreatHigh (unit) 
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if unit.threatValue > 1 and unit.health > 0 then return LocalVars.OpacitySpotlight end
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
+	end
+end
+
+-- Tank Mode
+local function AlphaFunctionByThreatLow (unit) 
+	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if IsTankedByAnotherTank(unit) then return end
+		if unit.threatValue < 2 and unit.health > 0 then return LocalVars.OpacitySpotlight end
+	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
+		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
+	end
+end
+
+local function AlphaFunctionByMouseover(unit) 
+	if unit.isMouseover then return LocalVars.OpacitySpotlight end
+end
+
+local function AlphaFunctionByEnemy(unit) 
+	if unit.reaction ~= "FRIENDLY" then return LocalVars.OpacitySpotlight end
+end
+
+local function AlphaFunctionByNPC(unit) 
+	if unit.type == "NPC" then return LocalVars.OpacitySpotlight end 
+end
+
+local function AlphaFunctionByRaidIcon(unit) 
+	if unit.isMarked then return LocalVars.OpacitySpotlight end 
+end
+
+local function AlphaFunctionByActive(unit) 		
+	if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then return LocalVars.OpacitySpotlight end 
+end
+
+local function AlphaFunctionByActiveDebuffs(unit) 
+	local widget = unit.frame.widgets.DebuffWidget
+	--local widget = TidyPlatesWidgets.GetAuraWidgetByGUID(unit.guid)
+	if IsAuraShown(widget) then return LocalVars.OpacitySpotlight end
+end
+
+-- By Enemy Healer
+local function AlphaFunctionByEnemyHealer(unit)
+	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		if IsHealer(unit.name) then
+			return LocalVars.OpacitySpotlight
+		end
+	end
+end
+
+-- By Threat (Auto Detect)
+local function AlphaFunctionByThreatAutoDetect(unit) 
+	if TidyPlatesWidgets.IsTankingAuraActive then return AlphaFunctionByThreatLow(unit)	-- tank mode
+	else return AlphaFunctionByThreatHigh(unit) end										-- dps mode
+end
+
+local function AlphaFilter(unit)
+	if LocalVars.OpacityFilterLookup[unit.name] then return true
+	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
+	elseif LocalVars.OpacityFilterFriendlyNPC and unit.type == "NPC" and unit.reaction == "FRIENDLY" then return true
+	elseif LocalVars.OpacityFilterNPC and unit.type == "NPC" then return true
+	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
+	elseif LocalVars.OpacityFilterInactive then 
+		if unit.reaction ~= "FRIENDLY" and not (unit.isMarked or unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
+		
+	--elseif LocalVars.OpacityFilterInactive and (unit.isInCombat or unit.healthmax > unit.health) then return true
+	end
+end
+
+local AlphaFunctionsUniversal = { DummyFunction, AlphaFunctionByThreatAutoDetect, AlphaFunctionByThreatHigh, 
+		AlphaFunctionByThreatLow,  AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, 
+		AlphaFunctionByRaidIcon, AlphaFunctionByActive, AlphaFunctionByEnemyHealer, AlphaFunctionByLowHealth}
+
+-- Alpha Functions Listed by Role order: Damage, Tank, Heal
+local AlphaFunctions = {AlphaFunctionsDamage, AlphaFunctionsTank}
+
+local function Diminish(num)
+	if num == 1 then return 1
+	elseif num < .3 then return num*.60
+	elseif num < .6 then return num*.70
+	else return num * .80 end
+end
+
+local function AlphaDelegate(...)
+	local unit = ...
+	local alpha
+	
+	if unit.isTarget then return Diminish(LocalVars.OpacityTarget)
+	elseif unit.isCasting and LocalVars.OpacityFullSpell then return Diminish(LocalVars.OpacityTarget)
+	elseif unit.isMouseover and LocalVars.OpacityFullMouseover then return Diminish(LocalVars.OpacityTarget)
+	else
+		-- Filter
+		if AlphaFilter(unit) then alpha = LocalVars.OpacityFiltered 
+		-- Spotlight
+		else alpha = AlphaFunctionsUniversal[LocalVars.OpacitySpotlightMode](...) end
+	end
+	
+	if alpha then return Diminish(alpha)
+	else 
+		if (not UnitExists("target")) and LocalVars.OpacityFullNoTarget then return Diminish(LocalVars.OpacityTarget)
+		else return Diminish(LocalVars.OpacityNonTarget) end
+	end
+end
+
+
+
+------------------------------------------------------------------------------
 -- Widgets
----------------------------------------
+------------------------------------------------------------------------------
 
 local function GetPrefixPriority(debuff)
 	local spellid = tostring(debuff.spellid)
@@ -762,31 +1056,35 @@ local DebuffPrefixModes = {
 }
 
 local DebuffFilterModes = {
-	-- All
-	function(debuff) 
-		return true
+			
+	--[[ 
+	aura.spellid, aura.name, aura.expiration, aura.stacks, aura.caster, aura.duration, aura.texture, aura.type, aura.target = GetAuraInstance(guid, instanceid)
+	local AURA_TYPE = {
+		["Buff"] = 1,
+		["Curse"] = 2,
+		["Disease"] = 3,
+		["Magic"] = 4,
+		["Poison"] = 5,
+		["Debuff"] = 6,
+	} --]]
+		
+		
+	-- My Debuffs	
+	function(aura) 
+		if aura.caster == UnitGUID("player") and aura.type > 1 then return true end
 	end,
-	-- Specific	
-	function(debuff) 
-		local prefix, priority = GetPrefixPriority(debuff)
-		--print(prefix, priority)
-		if prefix then return true, priority end
+	-- My Buffs	
+	function(aura) 
+		if aura.caster == UnitGUID("player") and aura.type == 1 and aura.duration < 120 then return true end
 	end,
-	-- All mine	
-	function(debuff) 
-		if debuff.caster == UnitGUID("player") then return true end
-	end,
-	-- My specific	
-	function(debuff) 
-		local prefix, priority = GetPrefixPriority(debuff)	
-		if prefix and debuff.caster == UnitGUID("player") then return true, priority end
-	end,	
 	-- By Prefix	
-	function(debuff) 
-		local prefix, priority = GetPrefixPriority(debuff)
-		if prefix then return DebuffPrefixModes[prefix](debuff), priority end
+	function(aura) 
+		local prefix, priority = GetPrefixPriority(aura)
+		if prefix then return DebuffPrefixModes[prefix](aura), priority end
 	end,
 }
+
+
 
 local AURA_TYPE_DEBUFF = 6
 local AURA_TYPE_BUFF = 1
@@ -819,7 +1117,7 @@ local function DebuffFilter(aura)
 	end
 
 	-- Debuffs on Hostile Units
-	return DebuffFilterModes[LocalVars.WidgetsDebuffMode](aura)
+	return DebuffFilterModes[LocalVars.WidgetsAuraMode](aura)
 end
 
 local function Prefilter(spellid, spellname, auratype)
@@ -936,9 +1234,9 @@ local function AddDebuffWidget(plate, enable, config)
 	 end
 end
 
----------------------------------------
+------------------------------------------------------------------------------
 -- Widget Activation
----------------------------------------
+------------------------------------------------------------------------------
 
 local function OnInitializeWidgets(plate, configTable)
 	AddClassIcon(plate, ((LocalVars.ClassEnemyIcon or LocalVars.ClassPartyIcon)) , configTable.ClassIcon)
@@ -1012,7 +1310,7 @@ local function EnableWatchers()
 	
 	-- /run print(GetCVar("threatWarning"))
 	
-	if LocalVars.WidgetsDebuffMode == 5 then TidyPlatesWidgets.SetDebuffPrefilter(Prefilter) else TidyPlatesWidgets.SetDebuffPrefilter(nil) end
+	if LocalVars.WidgetsAuraMode == 3 then TidyPlatesWidgets.SetDebuffPrefilter(Prefilter) else TidyPlatesWidgets.SetDebuffPrefilter(nil) end
 	
 	TidyPlatesWidgets:EnableTankWatch()
 	TidyPlatesWidgets:EnableAggroWatch()		--SetCVar("threatWarning", 3)		-- Required for threat/aggro detection
@@ -1046,368 +1344,6 @@ local function UseVariables(suffix)
 			return LocalVars
 	end
 end
-
----------------
--- Function List
----------------
-TidyPlatesHubFunctions.SetScale = ScaleDelegate
-TidyPlatesHubFunctions.SetNameColor = SetNameColorDelegate
-TidyPlatesHubFunctions.SetAlpha = AlphaDelegate
-TidyPlatesHubFunctions.SetCustomText = HealthTextDelegate
-TidyPlatesHubFunctions.OnUpdate = OnUpdateDelegate
-TidyPlatesHubFunctions.OnInitializeWidgets = OnInitializeWidgets
-TidyPlatesHubFunctions.SetHealthbarColor = HealthColorDelegate
-TidyPlatesHubFunctions.SetThreatColor = ThreatColorDelegate
-TidyPlatesHubFunctions.OnContextUpdate = OnContextUpdateDelegate
-TidyPlatesHubFunctions.SetCastbarColor = CastBarDelegate
-TidyPlatesHubFunctions.UseDamageVariables = UseDamageVariables
-TidyPlatesHubFunctions.UseTankVariables = UseTankVariables
-TidyPlatesHubFunctions.UseVariables = UseVariables
-TidyPlatesHubFunctions._WidgetDebuffFilter = DebuffFilter
-
-
----------------------------------------
--- Style
----------------------------------------
-
-local BARMODE, HEADLINEMODE = 1, 2
-
-local StyleModeFunctions = {
-	--	Full Bars and Widgets
-	function(unit)
-		return BARMODE
-	end,
-	-- NameOnly
-	function(unit)
-		return HEADLINEMODE
-	end,
-	-- Bars during combat
-	function(unit)
-		if InCombatLockdown() then 
-			return BARMODE
-		else return HEADLINEMODE end
-	end,
-	-- Bars when unit is active or damaged
-	function(unit)
-		if (unit.health < unit.healthmax) or (unit.threatValue > 1) or unit.isInCombat or unit.isMarked then 
-			return BARMODE
-		end
-		return HEADLINEMODE
-	end,
-	-- elite units
-	function(unit)
-		if unit.isElite then 
-			return BARMODE 
-		else return HEADLINEMODE end
-	end,
-	-- marked
-	function(unit)
-		if unit.isMarked then 
-			return BARMODE 
-		else return HEADLINEMODE end
-	end,
-		-- player chars
-	function(unit)
-		if unit.type == "PLAYER" then 
-			return BARMODE 
-		else return HEADLINEMODE end
-	end,
-	
-	--[[
-		if TidyPlatesWidgets.IsTankingAuraActive then return AlphaFunctionByThreatLow(unit)	-- tank mode
-	else return AlphaFunctionByThreatHigh(unit) end		
-	
-	-- By Threat (High)
-local function AlphaFunctionByThreatHigh (unit) 
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if unit.threatValue > 1 and unit.health > 0 then return LocalVars.OpacitySpotlight end
-	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
-		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
-	end
-end
-
--- Tank Mode
-local function AlphaFunctionByThreatLow (unit) 
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if IsTankedByAnotherTank(unit) then return end
-		if unit.threatValue < 2 and unit.health > 0 then return LocalVars.OpacitySpotlight end
-	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
-		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
-	end
-end
-	--]]
-	-- Current Target
-	function(unit)
-		if unit.isTarget == true then 
-			return BARMODE 
-		else return HEADLINEMODE end
-	end,
-	-- low threat
-	function(unit)
-		if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-			if IsTankedByAnotherTank(unit) then return HEADLINEMODE end
-			if unit.threatValue < 2 and unit.health > 0 then return BARMODE end
-		elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
-			if GetAggroCondition(unit.name) == true then return BARMODE end
-		end
-		return HEADLINEMODE
-	end,
-}
-
-local function StyleDelegate(unit)
-	if unit.reaction == "FRIENDLY" then return StyleModeFunctions[LocalVars.StyleFriendlyMode](unit)
-	else return StyleModeFunctions[LocalVars.StyleEnemyMode](unit) end
-end
-
-TidyPlatesHubFunctions.SetMultistyle = StyleDelegate
-
-
----------------------------------------
--- Optional/Health Text
----------------------------------------
-
--- None
-local function HealthFunctionNone() return "" end
--- Percent
-local function TextHealthPercentColored(unit)
-	local color = ColorFunctionByHealth(unit)
-	return ceil(100*(unit.health/unit.healthmax)).."%", color.r, color.g, color.b, .7
-end
-
-local function HealthFunctionPercent(unit)
-	if unit.health < unit.healthmax then
-		return TextHealthPercentColored(unit)
-	else return "" end
-end
-
--- Actual
-local function HealthFunctionExact(unit) 
-	return SepThousands(unit.health) 
-end
--- Approximate
-local function HealthFunctionApprox(unit) 
-	return ShortenNumber(unit.health) 
-end
---Deficit
-local function HealthFunctionDeficit(unit) 
-	local health, healthmax = unit.health, unit.healthmax
-	if health ~= healthmax then return "-"..SepThousands(healthmax - health) end 
-end
--- Total and Percent
-local function HealthFunctionTotal(unit) 
-	local health, healthmax = unit.health, unit.healthmax
-	return ShortenNumber(health).." / "..ShortenNumber(healthmax).." ("..ceil(100*(health/healthmax)).."%)" 
-end
--- TargetOf
-local function HealthFunctionTargetOf(unit) 
-	if unit.isTarget then return UnitName("targettarget")
-	elseif unit.isMouseover then return UnitName("mouseovertarget")
-	else return "" end
-end
--- Level
-local function HealthFunctionLevel(unit) 
-	local level = unit.level
-	if unit.isElite then level = level.." (Elite)" end
-	return level, unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
-end
--- Level and Health
-local function HealthFunctionLevelHealth(unit) 
-	local level = unit.level
-	if unit.isElite then level = level.."E" end
-	return level.."  |cffffffff"..HealthFunctionApprox(unit), unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
-end
-
-
-local HealthTextModeFunctions = {
-	HealthFunctionNone,
-	HealthFunctionPercent,
-	HealthFunctionExact,
-	HealthFunctionDeficit,
-	HealthFunctionTotal,
-	HealthFunctionTargetOf,
-	HealthFunctionApprox,
-	HealthFunctionLevel,
-	HealthFunctionLevelHealth,
-}
-
-local function HealthTextDelegate(unit) 
-	return HealthTextModeFunctions[LocalVars.TextHealthTextMode](unit) 
-end
-
----------------------------------------------
--- Binary Styles Theme Support (Bars/Text Styles)
----------------------------------------------
-
-local function SetStyleBinaryDelegate(unit)
-	if StyleDelegate(unit) == 2 then return "NameOnly"
-	else return "Default" end
-end
-
-local function RoleOrGuildText(unit)
-	if unit.type == "NPC" then
-		return (CachedUnitDescription(unit.name) or GetLevelDescription(unit) or "") , 1, 1, 1, .70
-	end
-end
-
-
-
-
--- Role, Guild or Level
-local function TextRoleGuildLevel(unit)
-	local description
-	local r, g, b = 1,1,1
-	
-	if unit.type == "NPC" then
-		description = CachedUnitDescription(unit.name)
-	
-		if not description and unit.reaction ~= "FRIENDLY" then 
-			description =  GetLevelDescription(unit)
-			r, g, b = unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue
-		end
-		
-	elseif unit.type == "PLAYER" then
-		description = CachedUnitGuild(unit.name)
-		r, g, b = .5, .5, .7
-	end
-	
-	return description, r, g, b, .70
-end
-	
--- Role or Guild
-local function TextRoleGuild(unit)
-	local description
-	local r, g, b = 1,1,1
-	
-	if unit.type == "NPC" then
-		description = CachedUnitDescription(unit.name)
-
-	elseif unit.type == "PLAYER" then
-		description = CachedUnitGuild(unit.name)
-		r, g, b = .5, .5, .7
-	end
-	
-	return description, r, g, b, .70
-end
-	
--- NPC Role
-local function TextNPCRole(unit)
-	if unit.type == "NPC" then
-		return CachedUnitDescription(unit.name)
-	end
-end
-
--- Level
-local function TextLevelColored(unit)
-	--return GetLevelDescription(unit) , 1, 1, 1, .70
-	return GetLevelDescription(unit) , unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .70
-end
-
--- Guild, Role, Level, Health
-function TextAll(unit)
-	local color = ColorFunctionByHealth(unit)
-	if unit.health < unit.healthmax then
-		return ceil(100*(unit.health/unit.healthmax)).."%", color.r, color.g, color.b, .7
-	else 
-		--return GetLevelDescription(unit) , unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue, .7
-		return TextRoleGuildLevel(unit)
-	end
-end
-	
-	
-	
-local TextPlateFieldFunctions = {
-	-- None
-	DummyFunction,
-	-- Health Text
-	TextHealthPercentColored,
-	-- Role, Guild or Level
-	TextRoleGuildLevel, 
-	-- Role or Guild
-	TextRoleGuild, 
-	-- NPC Role
-	TextNPCRole,
-	-- Level
-	TextLevelColored,
-	-- Level or Health
-	TextAll,
-}
-
-	
-local function CustomTextBinaryDelegate(unit)
-	if unit.style == "NameOnly" then
-		return TextPlateFieldFunctions[LocalVars.TextPlateFieldMode](unit)
-	end
-	return HealthTextDelegate(unit) 
-end
-
-TidyPlatesHubFunctions.SetStyleBinary = SetStyleBinaryDelegate
-TidyPlatesHubFunctions.SetCustomTextBinary = CustomTextBinaryDelegate
-
----------------------------------------------
--- Dynamic Style
----------------------------------------------
-
-local ThemeList = {
-	"Graphite", 
-	"Grey", 
-	"Neon",
-	"Quatre",
-}
-
-local TextThemeList = {
-	"GraphiteText", 
-	"GreyText", 
-	"NeonText",
-	"QuatreText",
-}
-
-local TextThemeListReverse = {
-	["GraphiteText"] = true, 
-	["GreyText"] = true, 
-	["NeonText"] = true,
-	["QuatreText"] = true,
-}
-
-local function SetStyleDynamic(unit)
-	if StyleDelegate(unit) == 2 then 
-		return TextThemeList[LocalVars.StyleTheme]
-	else 
-		return ThemeList[LocalVars.StyleTheme]
-	end
-end
-
-local function CustomTextDynamic(unit)
-	if TextThemeListReverse[unit.style] == true then
-		return TextPlateFieldFunctions[LocalVars.TextPlateFieldMode](unit)
-	end
-	return HealthTextDelegate(unit) 
-end
-
-local function SetNameColorDynamic(unit)
-	local color, colorMode
-		
-	if unit.reaction == "FRIENDLY" then
-		-- Party Aggro Coloring
-		if LocalVars.ColorShowPartyAggro and LocalVars.ColorPartyAggroText then
-			if GetAggroCondition(unit.name) then color = LocalVars.ColorPartyAggro end
-		end
-	end
-	
-	if not color then
-		if TextThemeListReverse[unit.style] == true then 
-			colorMode = tonumber(LocalVars.TextPlateNameColorMode)
-		else colorMode = tonumber(LocalVars.TextNameColorMode) end
-		
-		color = NameColorFunctions[colorMode or 1](unit)
-	end
-
-	if color then return color.r, color.g, color.b , (color.a or 1)
-	else return 1, 1, 1, 1 end
-end
-
-TidyPlatesHubFunctions.SetNameColorDynamic = SetNameColorDynamic
-TidyPlatesHubFunctions.SetStyleDynamic = SetStyleDynamic
-TidyPlatesHubFunctions.CustomTextDynamic = CustomTextDynamic
 
 ---------------
 -- Apply customization
@@ -1450,17 +1386,34 @@ local function ApplyThemeCustomization(theme)
 	TidyPlates:ForceUpdate()
 end
 	
+---------------------------------------------
+-- Function List
+---------------------------------------------
+TidyPlatesHubFunctions.SetScale = ScaleDelegate
+TidyPlatesHubFunctions.SetNameColor = SetNameColorDelegate
+TidyPlatesHubFunctions.SetAlpha = AlphaDelegate
+TidyPlatesHubFunctions.SetCustomText = HealthTextDelegate
+TidyPlatesHubFunctions.OnUpdate = OnUpdateDelegate
+TidyPlatesHubFunctions.OnInitializeWidgets = OnInitializeWidgets
+TidyPlatesHubFunctions.SetHealthbarColor = HealthColorDelegate
+TidyPlatesHubFunctions.SetThreatColor = ThreatColorDelegate
+TidyPlatesHubFunctions.OnContextUpdate = OnContextUpdateDelegate
+TidyPlatesHubFunctions.SetCastbarColor = CastBarDelegate
+TidyPlatesHubFunctions.UseDamageVariables = UseDamageVariables
+TidyPlatesHubFunctions.UseTankVariables = UseTankVariables
+TidyPlatesHubFunctions.UseVariables = UseVariables
+TidyPlatesHubFunctions.EnableWatchers = EnableWatchers
+TidyPlatesHubFunctions._WidgetDebuffFilter = DebuffFilter
 TidyPlatesHubFunctions.ApplyFontCustomization = ApplyFontCustomization
 TidyPlatesHubFunctions.ApplyStyleCustomization = ApplyStyleCustomization
 TidyPlatesHubFunctions.ApplyThemeCustomization = ApplyThemeCustomization
+TidyPlatesHubFunctions.SetMultistyle = StyleDelegate
+TidyPlatesHubFunctions.SetStyleBinary = SetStyleBinaryDelegate
+TidyPlatesHubFunctions.SetCustomTextBinary = CustomTextBinaryDelegate
 
-------------
-
-local function GetCurrentSpec()
-	if GetActiveTalentGroup(false, false) == 2 then return "secondary" 
-	else return "primary" end
-end
-
+---------------------------------------------
+-- Slash Commands
+---------------------------------------------
 local function ShowCurrentHubPanel()
 	local theme = TidyPlatesThemeList[TidyPlatesOptions[GetCurrentSpec()]]
 	if theme and theme.ShowConfigPanel and type(theme.ShowConfigPanel) == 'function' then theme.ShowConfigPanel() end
@@ -1468,17 +1421,3 @@ end
 
 SLASH_HUB1 = '/hub'
 SlashCmdList['HUB'] = ShowCurrentHubPanel
-
---[[
----------------
--- Apply Customization for Dynamic style
----------------
-local function ApplyThemeCustomizationDynamic(theme)
-	EnableWatchers()
-	for i,style in pairs(ThemeList) do ApplyStyleCustomization(theme[style]) end
-	for i,style in pairs(TextThemeList) do ApplyFontCustomization(theme[style]) end
-	TidyPlates:ForceUpdate()
-end
-
-TidyPlatesHubFunctions.ApplyThemeCustomizationDynamic = ApplyThemeCustomizationDynamic
---]]

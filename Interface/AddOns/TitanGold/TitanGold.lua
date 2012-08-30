@@ -29,7 +29,18 @@ local GoldTimer = nil;
 local _G = getfenv(0);
 -- ******************************** Functions *******************************
 
- function NiceCash(value, show_zero, show_neg, show_labels)
+ local function comma_value(amount)
+  local formatted = amount
+  while true do  
+    formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+    if (k==0) then
+      break
+    end
+  end
+  return formatted
+end
+
+function NiceCash(value, show_zero, show_neg, show_labels)
 --
 -- Take the 'amount' of gold and make it into a nice, colorful string
 -- of g s c (gold silver copper)
@@ -88,7 +99,7 @@ local _G = getfenv(0);
 		copper = amount - (silver * asilver)
 		-- now make them line up in a column
 		if gold > 0 then
-			gold_str = gc..(gold or "?")..g_lab.." "..FONT_COLOR_CODE_CLOSE
+			gold_str = gc..(comma_value(gold) or "?")..g_lab.." "..FONT_COLOR_CODE_CLOSE
 			silver_str = sc..(string.format("%02d", silver) or "?")..s_lab.." "..FONT_COLOR_CODE_CLOSE
 			copper_str = cc..(string.format("%02d", copper) or "?")..c_lab..""..FONT_COLOR_CODE_CLOSE
 		elseif (silver > 0) then

@@ -53,13 +53,13 @@ Usage:
     )
     L:AddLocale("deDE",
     {
-	err_notfound = "Nicht gefunden", -- Needs review
-	err_tooshort = "Subegriff ist zu kurz", -- Needs review
-	find_results = "Gefundene Ergebnisse", -- Needs review
-	module_desc = [=[Fügt den Chatfenstern die Suchfunktion hinzu
+	err_notfound = "Nicht gefunden",
+	err_tooshort = "Suchbegriff zu kurz",
+	find_results = "Gefundene Ergebnisse",
+	module_desc = [=[Aktiviert Suchfunktion in Chatfenstern
 
-Suche]=], -- Needs review
-	module_info = [=[Dieses Modul fügt die /find und /findall Kommandos der Suche in der Chathistory hinzu
+Suche]=],
+	module_info = [=[Aktiviert die Textbefehle /find und /findall, um die Chathistory zu durchsuchen
 
 Benutzung:
 
@@ -67,8 +67,8 @@ Benutzung:
 
 /findall <text>
 
-Suche]=], -- Needs review
-	module_name = "Suche", -- Needs review
+Suche]=],
+	module_name = "Suchen",
 }
 
     )

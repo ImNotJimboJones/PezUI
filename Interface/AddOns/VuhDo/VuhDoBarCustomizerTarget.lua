@@ -25,7 +25,7 @@ local tonumber = tonumber;
 local pairs = pairs;
 local tostring = tostring;
 local twipe = table.wipe;
-local _ = _;
+local _;
 
 
 local VUHDO_CUSTOM_INFO;

@@ -28,45 +28,26 @@ local DebuffMode = {
 }
 local totemID = {
 	[1] = {8177,"A1","b8d1ff"},
-	[2] = {8512,"A4","b8d1ff"},
-	[3] = {3738,"A5","b8d1ff"},
-	[4] = {98008,"A6","b8d1ff"},
-	[5] = {2062,"E1","ffb31f"},
-	[6] = {2484,"E2","ffb31f"},
-	[7] = {5730,"E3","ffb31f"},
-	[8] = {8071,"E4","ffb31f"},
-	[9] = {8075,"E5","ffb31f"},
-	[10] = {8143,"E6","ffb31f"},
+	[2] = {120668,"A2","b8d1ff"},
+	[3] = {108273,"A3","b8d1ff"},
+	[4] = {98008,"A4","b8d1ff"},
+	[5] = {108269,"A5","b8d1ff"},
+	[6] = {2062,"E1","ffb31f"},
+	[7] = {2484,"E2","ffb31f"},
+	[8] = {51485,"E3","ffb31f"},
+	[9] = {108270,"E4","ffb31f"},
+	[10] = {8143,"E5","ffb31f"},
 	[11] = {2894,"F1","ff8f8f"},
-	[12] = {8227,"F2","ff8f8f"},
-	[13] = {8190,"F4","ff8f8f"},
-	[14] = {3599,"F5","ff8f8f"},
-	[15] = {8184,"W2","2b76ff"},
-	[16] = {5394,"W3","2b76ff"},
-	[17] = {5675,"W4","2b76ff"},
-	[18] = {16190,"W5","2b76ff"},
-	[19] = {87718,"W6","2b76ff"}
+	[12] = {8190,"F2","ff8f8f"},
+	[13] = {3599,"F3","ff8f8f"},
+	[14] = {5394,"W1","2b76ff"},
+	[15] = {16190,"W2","2b76ff"},
+	[16] = {108280,"W3","2b76ff"}
+	--[13] = {8190,"F4","ff8f8f"},
+	--[18] = {16190,"W5","2b76ff"},
+	--[19] = {87718,"W6","2b76ff"}
 }
-StaticPopupDialogs["TPTP Donate"] = {
-	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." v"..GetAddOnMetadata("TidyPlates_ThreatPlates", "version")..L["\n\nThank you for supporting my work!\n"],
-	button1 = ACCEPT,
-	hasEditBox = 1,
-	editBoxWidth = 350,
-	OnShow = function(self)
-		self.editBox:SetText("http://pledgie.com/campaigns/14853")
-		self.editBox:SetFocus()		
-	end,
-	OnHide = function(self)
-		self.editBox:SetText("")
-	end,
-	OnAccept = function()
-	end,
-	OnCancel = function()		
-	end,
-	timeout = 30,
-	whileDead = 1,
-	hideOnEscape = 1,
-}
+
 -- Shared Media Configs
 local Media = LibStub("LibSharedMedia-3.0")
 local mediaWidgets = Media and LibStub("AceGUISharedMediaWidgets-1.0", true)
@@ -142,7 +123,6 @@ end
 
 local function SetValue(info, val)
 	local a, b, c, d = info.arg[1], info.arg[2], info.arg[3], info.arg[4]
-	
 	if d then
 		db[a][b][c][d] = val
 	elseif c and not d then
@@ -318,6 +298,32 @@ local function GetOptions()
 							type = "group",
 							order = 10,
 							args = {
+								TidyPlates = {
+									name = "Tidy Plates Fading",
+									type = "group",
+									order = 0,
+									inline = true,
+									args = {
+										Enable = {
+											type = "toggle",
+											order = 1,
+											name = "Enable",
+											desc = "This allows you to disable or enable the nameplates fading in or out when displayed or hidden.",
+											descStyle = "inline",
+											width = "full",
+											get = GetValue,											
+											set = function(info,val) 
+													SetValue(info,val)
+													if db.tidyplatesFade then
+														TidyPlates:EnableFadeIn()
+													else
+														TidyPlates:DisableFadeIn()
+													end
+												end,
+											arg = {"tidyplatesFade"},
+										},
+									},
+								},
 								Hiding = {
 									name = L["Hiding"],
 									type = "group",
@@ -3039,7 +3045,7 @@ local function GetOptions()
 											get = function() return TidyPlatesThreat.db.char.spec.primary end,
 											set = function(info,val) 
 												TidyPlatesThreat.db.char.spec.primary = true
-												if GetActiveTalentGroup() == 1 then
+												if GetActiveSpecGroup() == 1 then
 													TidyPlatesThreat.db.char.threat.tanking = true
 												end
 												Update()
@@ -3053,7 +3059,7 @@ local function GetOptions()
 											get = function() return not TidyPlatesThreat.db.char.spec.primary end,
 											set = function(info,val) 
 												TidyPlatesThreat.db.char.spec.primary = false
-												if GetActiveTalentGroup() == 1 then
+												if GetActiveSpecGroup() == 1 then
 													TidyPlatesThreat.db.char.threat.tanking = false
 												end
 												Update()
@@ -3075,7 +3081,7 @@ local function GetOptions()
 											get = function() return TidyPlatesThreat.db.char.spec.secondary end,
 											set = function(info,val) 
 												TidyPlatesThreat.db.char.spec.secondary = true
-												if GetActiveTalentGroup() == 2 then
+												if GetActiveSpecGroup() == 2 then
 													TidyPlatesThreat.db.char.threat.tanking = true
 												end
 												Update()
@@ -3089,7 +3095,7 @@ local function GetOptions()
 											get = function() return not TidyPlatesThreat.db.char.spec.secondary end,
 											set = function(info,val) 
 												TidyPlatesThreat.db.char.spec.secondary = false
-												if GetActiveTalentGroup() == 2 then
+												if GetActiveSpecGroup() == 2 then
 													TidyPlatesThreat.db.char.threat.tanking = false
 												end									
 												Update()
@@ -3403,6 +3409,50 @@ local function GetOptions()
 											arg = {"debuffWidget", "ON"},
 										},
 									},
+								},
+								Style = {
+									name = L["Style"],
+									type = "group",
+									inline = true,
+									order = 13,
+									args = {
+										Style = {
+											name = L["Style"],
+											type = "select",
+											order = 1,
+											desc = L["This lets you select the layout style of the debuff widget. (Reloading UI is needed)"],
+											descStyle = "inline",
+											width = "full",
+											values = {wide = L["Wide"],square = L["Square"]},
+											set = function(info,val)
+												SetValue(info,val)
+												if db.debuffWidget.style == "square" then
+													TidyPlatesWidgets.UseSquareDebuffIcon()
+												elseif db.debuffWidget.style == "wide" then
+													TidyPlatesWidgets.UseWideDebuffIcon()
+												end
+											end,
+											arg = {"debuffWidget", "style"},
+										},
+										--[[TargetOnly = {
+											name = L["Target Only"],
+											type = "toggle",
+											order = 2,
+											desc = L["This will toggle the debuff widget to only show for your current target."],
+											descStyle = "inline",
+											width = "full",
+											set = function(info,val)
+												SetValue(info,val)
+												if db.debuffWidget.targetOnly then
+													TidyPlatesWidgets.UseSquareDebuffIcon()
+												elseif db.debuffWidget.style == "wide" then
+													TidyPlatesWidgets.UseWideDebuffIcon()
+												end
+											end,
+											arg = {"debuffWidget","targetOnly"},
+										},]]
+									},
+									
 								},
 								Sizing = {
 									name = L["Sizing"],
@@ -3781,18 +3831,6 @@ local function GetOptions()
 					type = "group",
 					order = 80,
 					args = {
-						Donate = {
-							name = L["Click to Donate!"],
-							type = "execute",
-							order = 1,
-							width = "full",
-							image = path.."Logo2",
-							imageWidth = 256,
-							imageHeight = 32,
-							func = function()
-								StaticPopup_Show("TPTP Donate")
-							end,
-						},
 						AboutInfo = {
 							type = "description",
 							order = 2,
@@ -3889,7 +3927,7 @@ local function GetOptions()
 		TotemSettings = {
 			name = L["|cffffffffTotem Settings|r"],
 			type = "group",
-			order = 10,
+			order = 0,
 			args = {
 				Toggles = {
 					name = L["Toggling"],
@@ -4043,100 +4081,99 @@ local function GetOptions()
 			},
 		},
 	};
-	local TotemOpts_OrderCnt = 30;	
-	for k_c,v_c in ipairs(totemID) do
-		TotemOpts[GetSpellName(totemID[k_c][1])] = {
-			name = "|cff"..totemID[k_c][3]..GetSpellName(totemID[k_c][1]).."|r",
-			type = "group",
-			--disabled = function() if db.totemSettings[totemID[k_c][2]][1] then return false else return true end end,
-			order = TotemOps_OrderCnt,
-			args = {
-				Header = {
-					name = "> |cff"..totemID[k_c][3]..GetSpellName(totemID[k_c][1]).."|r <",
-					type = "header",
-					order = 0,
-				},
-				Enabled = {
-					name = L["Enable"],
-					type = "group",
-					inline = true,
-					order = 1,
-					args = {
-						Toggle = {
-							name = L["Show Nameplate"],
-							type = "toggle",
-							set = SetValue,
-							get = GetValue,
-							arg = {"totemSettings",totemID[k_c][2],1},
-						},
-					},
-				},
-				HealthColor = {
-					name = L["Health Coloring"],
-					type = "group",
-					order = 2,
-					inline = true,
-					disabled = function() if db.totemSettings[totemID[k_c][2]][1] then return false else return true end end,
-					args = {
-						Enable = {
-							name = L["Enable Custom Colors"],
-							type = "toggle",
-							order = 1,
-							get = GetValue,
-							set = SetValue,
-							arg = {"totemSettings",totemID[k_c][2],2},
-						},
-						Color = {
-							name = L["Color"],
-							type = "color",
-							order = 2,
-							get = GetColor,
-							set = SetColor,
-							disabled = function() if not db.totemSettings[totemID[k_c][2]][1] or not db.totemSettings[totemID[k_c][2]][2] then return true else return false end end,
-							arg = {"totemSettings",totemID[k_c][2],"color"},
-						},
-					},
-				},
-				Textures = {
-					name = L["Textures"],
-					type = "group",
-					order = 3,
-					inline = true,
-					disabled = function() if db.totemSettings[totemID[k_c][2]][1] then return false else return true end end,
-					args = {
-						Icon = {
-							name = "",
-							type = "execute",
-							width = "full",
-							order = 0,
-							image = "Interface\\Addons\\TidyPlates_ThreatPlates\\Widgets\\TotemIconWidget\\"..db.totemSettings[totemID[k_c][2]][7].."\\"..totemID[k_c][2],
-						},
-						Style = {
-							name = "",
-							type = "select",
-							order = 1,
-							width = "full",
-							get = GetValue,
-							set = function(info,val) 
-								SetValue(info, val)
-								options.args.Totems.args[GetSpellName(totemID[k_c][1])].args.Textures.args.Icon.image = "Interface\\Addons\\TidyPlates_ThreatPlates\\Widgets\\TotemIconWidget\\"..db.totemSettings[totemID[k_c][2]][7].."\\"..totemID[k_c][2];
-							end,
-							values = {normal = "Normal", special = "Special"},
-							arg = {"totemSettings",totemID[k_c][2],7},
-						},
+local TotemOpts_OrderCnt = 30;
+for k_c,v_c in ipairs(totemID) do
+	TotemOpts[GetSpellName(totemID[k_c][1])] = {
+		name = "|cff"..totemID[k_c][3]..GetSpellName(totemID[k_c][1]).."|r",
+		type = "group",
+		order = k_c,
+		args = {
+			Header = {
+				name = "> |cff"..totemID[k_c][3]..GetSpellName(totemID[k_c][1]).."|r <",
+				type = "header",
+				order = 0,
+			},
+			Enabled = {
+				name = L["Enable"],
+				type = "group",
+				inline = true,
+				order = 1,
+				args = {
+					Toggle = {
+						name = L["Show Nameplate"],
+						type = "toggle",
+						set = SetValue,
+						get = GetValue,
+						arg = {"totemSettings",totemID[k_c][2],1},
 					},
 				},
 			},
-		}
-		TotemOpts_OrderCnt = TotemOpts_OrderCnt + 10;
-	end
-	options.args.Totems.args = TotemOpts;
+			HealthColor = {
+				name = L["Health Coloring"],
+				type = "group",
+				order = 2,
+				inline = true,
+				disabled = function() if db.totemSettings[totemID[k_c][2]][1] then return false else return true end end,
+				args = {
+					Enable = {
+						name = L["Enable Custom Colors"],
+						type = "toggle",
+						order = 1,
+						get = GetValue,
+						set = SetValue,
+						arg = {"totemSettings",totemID[k_c][2],2},
+					},
+					Color = {
+						name = L["Color"],
+						type = "color",
+						order = 2,
+						get = GetColor,
+						set = SetColor,
+						disabled = function() if not db.totemSettings[totemID[k_c][2]][1] or not db.totemSettings[totemID[k_c][2]][2] then return true else return false end end,
+						arg = {"totemSettings",totemID[k_c][2],"color"},
+					},
+				},
+			},
+			Textures = {
+				name = L["Textures"],
+				type = "group",
+				order = 3,
+				inline = true,
+				disabled = function() if db.totemSettings[totemID[k_c][2]][1] then return false else return true end end,
+				args = {
+					Icon = {
+						name = "",
+						type = "execute",
+						width = "full",
+						order = 0,
+						image = "Interface\\Addons\\TidyPlates_ThreatPlates\\Widgets\\TotemIconWidget\\"..db.totemSettings[totemID[k_c][2]][7].."\\"..totemID[k_c][2],
+					},
+					Style = {
+						name = "",
+						type = "select",
+						order = 1,
+						width = "full",
+						get = GetValue,
+						set = function(info,val)
+							SetValue(info, val)
+							options.args.Totems.args[GetSpellName(totemID[k_c][1])].args.Textures.args.Icon.image = "Interface\\Addons\\TidyPlates_ThreatPlates\\Widgets\\TotemIconWidget\\"..db.totemSettings[totemID[k_c][2]][7].."\\"..totemID[k_c][2];
+						end,
+						values = {normal = "Normal", special = "Special"},
+						arg = {"totemSettings",totemID[k_c][2],7},
+					},
+				},
+			},
+		},
+	}
+	TotemOpts_OrderCnt = TotemOpts_OrderCnt + 10;
+end
+options.args.Totems.args = TotemOpts;
 	local CustomOpts_OrderCnt = 30;
 	local CustomOpts = {
 		GeneralSettings = {
 			name = L["|cffffffffGeneral Settings|r"],
 			type = "group",
-			order = 10,
+			order = 0,
 			args = {
 				Icon = {
 					name = L["Icon"],
@@ -4292,7 +4329,8 @@ local function GetOptions()
 						name = L["Copy"],
 						order = 5,
 						type = "execute",
-						func = function() 
+						func = function()
+							clipboard = {}
 							clipboard = db.uniqueSettings[k_c]
 							if type(clipboard) == "table" and db.verbose then
 								print(GetAddOnMetadata("TidyPlates_ThreatPlates", "Title")..": "..L["Copied!"])
@@ -4304,7 +4342,7 @@ local function GetOptions()
 						order = 6,
 						type = "execute",
 						func = function()
-							if type(clipboard) == "table" then
+							if type(clipboard) == "table" and clipboard.name then
 								db.uniqueSettings[k_c] = clipboard
 								if db.verbose then
 									print(GetAddOnMetadata("TidyPlates_ThreatPlates", "Title")..": "..L["Pasted!"])

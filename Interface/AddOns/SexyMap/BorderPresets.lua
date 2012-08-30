@@ -1,6 +1,6 @@
 
 local _, addon = ...
-addon.SexyMap.borderPresets = {
+addon.borderPresets = {
 	["Blue Rune Circles"] = {
 		borders = {
 			{
@@ -12,7 +12,7 @@ addon.SexyMap.borderPresets = {
 				["rotSpeed"] = -30,
 				["g"] = 0.4784313725490196,
 				["texture"] = "SPELLS\\AURARUNE256.BLP",
-			}, -- [1]
+			},
 			{
 				["a"] = 0.3799999952316284,
 				["r"] = 0.196078431372549,
@@ -22,7 +22,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Rune 2",
 				["g"] = 0.2901960784313725,
 				["texture"] = "SPELLS\\AuraRune_A.blp",
-			}, -- [2]
+			},
 			{
 				["a"] = 0.3,
 				["name"] = "Fade",
@@ -31,9 +31,97 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0,
 				["g"] = 0.2235294117647059,
 				["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
-			}, -- [3]
+			},
 		},
 		shape = "Textures\\MinimapMask"
+	},
+	["Diablo by Zork"] = {
+		borders = {
+			{
+				["name"] = "Ring",
+				["scale"] = 1.45,
+				["rotation"] = 225,
+				["texture"] = "INTERFACE\\ADDONS\\SEXYMAP\\MEDIA\\MAP_OVERLAY.TGA",
+				["blendMode"] = "BLEND",
+				["width"] = 364,
+				["height"] = 182,
+			},
+			{
+				["name"] = "Gloss",
+				["scale"] = 0.84,
+				["disableRotation"] = true,
+				["texture"] = "INTERFACE\\ADDONS\\SEXYMAP\\MEDIA\\MAP_GLOSS.TGA",
+				["blendMode"] = "ADD",
+				["r"] = 0.9,
+				["g"] = 0.95,
+				["b"] = 1,
+				["a"] = 1,
+			},
+			{
+				["name"] = "Inner Shadow",
+				["scale"] = 0.84,
+				["disableRotation"] = true,
+				["texture"] = "INTERFACE\\ADDONS\\SEXYMAP\\MEDIA\\MAP_INNERSHADOW.TGA",
+				["blendMode"] = "BLEND",
+				["drawLayer"] = "OVERLAY",
+				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
+				["a"] = 1,
+			},
+			{
+				["name"] = "Cogwheel",
+				["scale"] = 1.37,
+				["rotSpeed"] = 60,
+				["blendMode"] = "BLEND",
+				["texture"] = "INTERFACE\\ADDONS\\SEXYMAP\\MEDIA\\ZAHNRAD.TGA",
+				["drawLayer"] = "BACKGROUND",
+				["r"] = 0.18823529411765,
+				["g"] = 0.17254901960784,
+				["b"] = 0.13725490196078,
+				["a"] = 0.95,
+			},
+		},
+		shape = "Textures\\MinimapMask"
+	},
+	["Faded Square by Renaitre"] = {
+		["borders"] = {
+			{
+				["a"] = 1,
+				["rotSpeed"] = 0,
+				["r"] = 0,
+				["scale"] = 1.47,
+				["g"] = 0,
+				["rotation"] = 225,
+				["blendMode"] = "BLEND",
+				["drawLayer"] = "ARTWORK",
+				["name"] = "RenaitreFadeBorder",
+				["b"] = 0,
+				["texture"] = "Interface\\Addons\\SexyMap\\media\\RenaitreFadeBorder",
+			},
+			{
+				["a"] = 1,
+				["rotSpeed"] = 0,
+				["b"] = 1,
+				["scale"] = 1.47,
+				["g"] = 0,
+				["rotation"] = 225,
+				["name"] = "RenaitreFadeNormal",
+				["drawLayer"] = "HIGHLIGHT",
+				["blendMode"] = "BLEND",
+				["r"] = 0.4235294117647059,
+				["texture"] = "Interface\\Addons\\SexyMap\\media\\RenaitreFadeNormal",
+			},
+			{
+				["drawLayer"] = "OVERLAY",
+				["name"] = "RenaitreFadeGloss",
+				["scale"] = 1.48,
+				["rotation"] = 225,
+				["rotSpeed"] = 0,
+				["texture"] = "Interface\\Addons\\SexyMap\\media\\RenaitreFadeGloss",
+			},
+		},
+		["shape"] = "Interface\\BUTTONS\\WHITE8X8",
 	},
 	["Blue Rune Diamond"] = {
 		borders = {
@@ -50,7 +138,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "BACKGROUND",
 				["r"] = 0,
 				["texture"] = "SPELLS\\AuraRune256b.blp",
-			}, -- [1]
+			},
 			{
 				["a"] = 0.06999999284744263,
 				["r"] = 0.3294117647058824,
@@ -62,7 +150,7 @@ addon.SexyMap.borderPresets = {
 				["disableRotation"] = true,
 				["b"] = 1,
 				["texture"] = "Interface\\GLUES\\MODELS\\UI_Tauren\\gradientCircle.blp",
-			}, -- [2]
+			},
 		},
 		shape = "Interface\\AddOns\\SexyMap\\shapes\\diamond"
 	},
@@ -77,7 +165,7 @@ addon.SexyMap.borderPresets = {
 				["rotSpeed"] = 21,
 				["g"] = 0.2901960784313725,
 				["texture"] = "PARTICLES\\GENERICGLOW5.BLP",
-			}, -- [1]
+			},
 			{
 				["a"] = 1,
 				["b"] = 0.3529411764705882,
@@ -87,7 +175,7 @@ addon.SexyMap.borderPresets = {
 				["rotSpeed"] = -18,
 				["g"] = 0.8705882352941177,
 				["texture"] = "PARTICLES\\GENERICGLOW5.BLP",
-			}, -- [2]
+			},
 			{
 				["a"] = 0.449999988079071,
 				["name"] = "Tint",
@@ -96,7 +184,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 1,
 				["g"] = 0.6705882352941176,
 				["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
-			}, -- [3]
+			},
 		},
 		shape = "Textures\\MinimapMask"
 	},
@@ -113,7 +201,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "BACKGROUND",
 				["r"] = 0.615686274509804,
 				["texture"] = "TILESET\\EXPANSION01\\EVERSONG\\SwathSmallStones.blp",
-			}, -- [1]
+			},
 			{
 				["a"] = 1,
 				["hNudge"] = 0,
@@ -129,7 +217,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "BORDER",
 				["b"] = 1,
 				["texture"] = "Interface\\Minimap\\Ping\\ping5.blp",
-			}, -- [2]
+			},
 		},
 		shape = "Interface\\AddOns\\SexyMap\\shapes\\squareFuzzy"
 	},
@@ -150,7 +238,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "ARTWORK",
 				["rotation"] = 66,
 				["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\WORLDTREEPORTALS\\TWISTEDNETHER8.BLP",
-			}, -- [1]
+			},
 			{
 				["a"] = 1,
 				["hNudge"] = 0,
@@ -165,7 +253,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.3607843137254902,
 				["blendMode"] = "ADD",
 				["texture"] = "World\\GENERIC\\ACTIVEDOODADS\\INSTANCEPORTAL\\GENERICGLOW2.BLP",
-			}, -- [2]
+			},
 		},
 		shape = "Interface\\BUTTONS\\WHITE8X8"
 	},
@@ -215,7 +303,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "BACKGROUND",
 				["name"] = "Parchment",
 				["texture"] = "Interface\\AchievementFrame\\UI-Achievement-Parchment.blp",
-			}, -- [1]
+			},
 			{
 				["a"] = 0.3799999952316284,
 				["r"] = 0.2,
@@ -226,7 +314,7 @@ addon.SexyMap.borderPresets = {
 				["blendMode"] = "BLEND",
 				["b"] = 0,
 				["texture"] = "Interface\\BUTTONS\\WHITE8X8.BLP",
-			}, -- [2]
+			},
 			{
 				["disableRotation"] = true,
 				["r"] = 0.6313725490196078,
@@ -236,7 +324,7 @@ addon.SexyMap.borderPresets = {
 				["a"] = 1,
 				["g"] = 0.6313725490196078,
 				["texture"] = "Interface\\AchievementFrame\\UI-Achievement-Parchment-Horizontal.blp",
-			}, -- [3]
+			},
 		},
 		shape = "Interface\\AddOns\\SexyMap\\shapes\\squareFuzzy"
 	},
@@ -252,7 +340,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Rune 1",
 				["r"] = 0.5764705882352941,
 				["texture"] = "SPELLS\\AURARUNE256.BLP",
-			}, -- [1]
+			},
 			{
 				["a"] = 0.3799999952316284,
 				["rotSpeed"] = 0,
@@ -263,7 +351,7 @@ addon.SexyMap.borderPresets = {
 				["scale"] = 2.05,
 				["r"] = 0.2823529411764706,
 				["texture"] = "SPELLS\\AuraRune_A.blp",
-			}, -- [2]
+			},
 			{
 				["a"] = 0.3,
 				["name"] = "Fade",
@@ -272,7 +360,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0,
 				["g"] = 0.2235294117647059,
 				["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
-			}, -- [3]
+			},
 			{
 				["a"] = 1,
 				["rotSpeed"] = -120,
@@ -282,7 +370,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.1137254901960784,
 				["g"] = 0.1686274509803922,
 				["texture"] = "SPELLS\\AuraRune_B.blp",
-			}, -- [4]
+			},
 		},
 	},
 	["Simple Square"] = {
@@ -321,7 +409,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.1450980392156863,
 				["g"] = 0.00392156862745098,
 				["texture"] = "SPELLS\\RogueRune2.blp",
-			}, -- [1]
+			},
 			{
 				["a"] = 1,
 				["r"] = 0.6,
@@ -332,7 +420,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Glow",
 				["b"] = 0.09411764705882353,
 				["texture"] = "SPELLS\\White-Circle.blp",
-			}, -- [2]
+			},
 		},
 		["backdrop"] = {
 			["show"] = false,
@@ -436,7 +524,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Moss Ring CW",
 				["b"] = 0.01568627450980392,
 				["texture"] = "XTEXTURES\\splash\\splash.blp",
-			}, -- [1]
+			},
 			{
 				["a"] = 1,
 				["r"] = 1,
@@ -447,7 +535,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Outer Glow",
 				["b"] = 0.3490196078431372,
 				["texture"] = "Textures\\moonglare.blp",
-			}, -- [2]
+			},
 			{
 				["a"] = 0.09000003337860107,
 				["blendMode"] = "ADD",
@@ -457,7 +545,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.807843137254902,
 				["g"] = 1,
 				["texture"] = "Textures\\Moon02Glare.blp",
-			}, -- [3]
+			},
 			{
 				["a"] = 0.7199999988079071,
 				["hNudge"] = 41,
@@ -473,7 +561,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.1725490196078431,
 				["name"] = "Glare UR",
 				["texture"] = "SPELLS\\AURA_01.blp",
-			}, -- [4]
+			},
 			{
 				["a"] = 0.2599999904632568,
 				["hNudge"] = -57,
@@ -486,7 +574,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0,
 				["name"] = "Nature Rune UL",
 				["texture"] = "SPELLS\\Nature_Rune_128.blp",
-			}, -- [5]
+			},
 			{
 				["a"] = 0.1800000071525574,
 				["hNudge"] = 39,
@@ -498,7 +586,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Nature Rune LR",
 				["r"] = 0.4823529411764706,
 				["texture"] = "SPELLS\\Nature_Rune_128.blp",
-			}, -- [6]
+			},
 			{
 				["a"] = 0.1200000047683716,
 				["hNudge"] = 53,
@@ -510,7 +598,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Nature Rune UR",
 				["r"] = 0.2941176470588235,
 				["texture"] = "SPELLS\\Nature_Rune_128.blp",
-			}, -- [7]
+			},
 			{
 				["a"] = 0.09000003337860107,
 				["hNudge"] = -48,
@@ -522,7 +610,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Nature Rune LL",
 				["r"] = 0.7607843137254902,
 				["texture"] = "SPELLS\\Nature_Rune_128.blp",
-			}, -- [8]
+			},
 			{
 				["a"] = 0.14000004529953,
 				["rotSpeed"] = -20,
@@ -532,7 +620,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0.09019607843137255,
 				["g"] = 0.3372549019607843,
 				["texture"] = "SPELLS\\Nature_Rune_128.blp",
-			}, -- [9]
+			},
 			{
 				["a"] = 0.6599999964237213,
 				["rotSpeed"] = -300,
@@ -544,7 +632,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0,
 				["name"] = "Edge Shimmer CCW",
 				["texture"] = "SPELLS\\SHOCKWAVE_INVERTGREY.BLP",
-			}, -- [10]
+			},
 			{
 				["a"] = 0.5800000131130219,
 				["rotSpeed"] = 240,
@@ -555,7 +643,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Edge Shimmer CW",
 				["r"] = 0.02352941176470588,
 				["texture"] = "SPELLS\\SHOCKWAVE_INVERTGREY.BLP",
-			}, -- [11]
+			},
 			{
 				["a"] = 0.5,
 				["rotSpeed"] = 0,
@@ -568,7 +656,7 @@ addon.SexyMap.borderPresets = {
 				["drawLayer"] = "BACKGROUND",
 				["name"] = "Background Leaves",
 				["texture"] = "SPELLS\\TREANTLEAVES.BLP",
-			}, -- [12]
+			},
 		},
 		["backdrop"] = {
 			["show"] = false,
@@ -604,7 +692,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Rune Earth",
 				["r"] = 1,
 				["texture"] = "World\\GENERIC\\PASSIVEDOODADS\\ShamanStone\\SHAMANSTONEEARTH.blp",
-			}, -- [1]
+			},
 			{
 				["disableRotation"] = true,
 				["hNudge"] = -65,
@@ -612,7 +700,7 @@ addon.SexyMap.borderPresets = {
 				["scale"] = 0.35,
 				["texture"] = "World\\GENERIC\\PASSIVEDOODADS\\ShamanStone\\ShamanStoneAir.blp",
 				["vNudge"] = -65,
-			}, -- [2]
+			},
 			{
 				["a"] = 1,
 				["hNudge"] = 65,
@@ -624,7 +712,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Rune Water",
 				["r"] = 0.4392156862745098,
 				["texture"] = "World\\GENERIC\\PASSIVEDOODADS\\ShamanStone\\ShamanStoneWater.blp",
-			}, -- [3]
+			},
 			{
 				["a"] = 1,
 				["hNudge"] = -65,
@@ -636,7 +724,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Rune Fire",
 				["b"] = 1,
 				["texture"] = "World\\GENERIC\\PASSIVEDOODADS\\ShamanStone\\ShamanStoneFlame.blp",
-			}, -- [4]
+			},
 			{
 				["a"] = 1,
 				["rotSpeed"] = 60,
@@ -650,7 +738,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 1,
 				["blendMode"] = "ADD",
 				["texture"] = "SPELLS\\Shockwave4.blp",
-			}, -- [5]
+			},
 			{
 				["a"] = 0.75,
 				["rotSpeed"] = 40,
@@ -663,7 +751,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 0,
 				["blendMode"] = "ADD",
 				["texture"] = "World\\ENVIRONMENT\\DOODAD\\GENERALDOODADS\\ELEMENTALRIFTS\\Shockwave_blue.blp",
-			}, -- [6]
+			},
 			{
 				["a"] = 0.3700000047683716,
 				["name"] = "Edge Radiance",
@@ -673,7 +761,7 @@ addon.SexyMap.borderPresets = {
 				["r"] = 1,
 				["g"] = 0.6313725490196078,
 				["texture"] = "SPELLS\\SHOCKWAVE_INVERTGREY.BLP",
-			}, -- [7]
+			},
 			{
 				["a"] = 0.5,
 				["hNudge"] = -65,
@@ -685,7 +773,7 @@ addon.SexyMap.borderPresets = {
 				["disableRotation"] = true,
 				["r"] = 1,
 				["texture"] = "SPELLS\\GENERICGLOW64.BLP",
-			}, -- [8]
+			},
 			{
 				["a"] = 0.4700000286102295,
 				["hNudge"] = -65,
@@ -698,7 +786,7 @@ addon.SexyMap.borderPresets = {
 				["disableRotation"] = false,
 				["r"] = 1,
 				["texture"] = "SPELLS\\GENERICGLOW64.BLP",
-			}, -- [9]
+			},
 			{
 				["a"] = 0.5100000202655792,
 				["hNudge"] = 65,
@@ -710,7 +798,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Glow Water",
 				["b"] = 1,
 				["texture"] = "SPELLS\\GENERICGLOW64.BLP",
-			}, -- [10]
+			},
 			{
 				["a"] = 0.4000000357627869,
 				["hNudge"] = 65,
@@ -722,7 +810,7 @@ addon.SexyMap.borderPresets = {
 				["name"] = "Glow Earth",
 				["r"] = 0.2588235294117647,
 				["texture"] = "SPELLS\\GENERICGLOW64.BLP",
-			}, -- [11]
+			},
 		},
 		["backdrop"] = {
 			["show"] = false,

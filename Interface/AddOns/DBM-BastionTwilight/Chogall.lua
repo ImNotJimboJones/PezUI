@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(167, "DBM-BastionTwilight", nil, 72)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7687 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7773 $"):sub(12, -3))
 mod:SetCreatureID(43324)
 mod:SetModelID(34576)
 mod:SetZone()
@@ -95,12 +95,11 @@ local function resetCreatureIconState()
 	iconsSet = 0
 end
 
--- needs to be change in MoP (GetNumRaidMembers() removed in 5.0)
 function mod:CorruptingCrashTarget(sGUID)
 	local targetname = nil
-	for i=1, GetNumRaidMembers() do
+	for i=1, DBM:GetGroupMembers() do
 		if UnitGUID("raid"..i.."target") == sGUID then
-			targetname = UnitName("raid"..i.."targettarget")
+			targetname = DBM:GetUnitFullName("raid"..i.."targettarget")
 			break
 		end
 	end
@@ -171,7 +170,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif args:IsSpellID(81194, 93264, 93265, 93266) then
 		warnFlamingDestruction:Show()
-		if self:GetUnitCreatureId("target") == 43324 or self:GetBossTarget(43324) == UnitName("target") then--Add tank doesn't need this spam, just tank on chogal and healers healing that tank.
+		if self:GetUnitCreatureId("target") == 43324 or self:GetBossTarget(43324) == DBM:GetUnitFullName("target") then--Add tank doesn't need this spam, just tank on chogal and healers healing that tank.
 			specwarnFlamingDestruction:Show()
 		end
 		timerFlamingDestruction:Start()
@@ -230,7 +229,7 @@ end
 
 mod:RegisterOnUpdateHandler(function(self)
 	if self.Options.SetIconOnCreature and (DBM:GetRaidRank() > 0 and not (iconsSet == 8 and self:IsDifficulty("normal25", "heroic25") or iconsSet == 4 and self:IsDifficulty("normal10", "heroic10"))) then
-		for i = 1, GetNumRaidMembers() do
+		for i = 1, DBM:GetGroupMembers() do
 			local uId = "raid"..i.."target"
 			local guid = UnitGUID(uId)
 			if creatureIcons[guid] then

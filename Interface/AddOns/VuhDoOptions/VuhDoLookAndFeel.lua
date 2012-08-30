@@ -1,3 +1,4 @@
+local _;
 VUHDO_RESET_SIZES = false;
 
 local VUHDO_GLOBAL = getfenv();
@@ -59,11 +60,7 @@ end
 
 --
 function VUHDO_lnfCheckButtonClicked(aCheckButton)
-	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:Show();
-	else
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:Hide();
-	end
+	VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMark"]:SetShown(aCheckButton:GetChecked());
 end
 local VUHDO_lnfCheckButtonClicked = VUHDO_lnfCheckButtonClicked;
 
@@ -122,21 +119,11 @@ function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Show();
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-			VUHDO_ACTIVE_LABEL_COLOR["TR"],
-			VUHDO_ACTIVE_LABEL_COLOR["TG"],
-			VUHDO_ACTIVE_LABEL_COLOR["TB"],
-			VUHDO_ACTIVE_LABEL_COLOR["TO"]
-		);
+		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	end
 
 	if (VUHDO_GLOBAL[tName .. "Label2"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label2"]:SetTextColor(
-			VUHDO_ACTIVE_LABEL_COLOR["TR"],
-			VUHDO_ACTIVE_LABEL_COLOR["TG"],
-			VUHDO_ACTIVE_LABEL_COLOR["TB"],
-			VUHDO_ACTIVE_LABEL_COLOR["TO"]
-		);
+		VUHDO_GLOBAL[tName .. "Label2"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	end
 end
 
@@ -149,21 +136,11 @@ function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (VUHDO_GLOBAL[tName .. "Label"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-			VUHDO_NORMAL_LABEL_COLOR["TR"],
-			VUHDO_NORMAL_LABEL_COLOR["TG"],
-			VUHDO_NORMAL_LABEL_COLOR["TB"],
-			VUHDO_NORMAL_LABEL_COLOR["TO"]
-		);
+		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	end
 
 	if (VUHDO_GLOBAL[tName .. "Label2"] ~= nil) then
-		VUHDO_GLOBAL[tName .. "Label2"]:SetTextColor(
-			VUHDO_NORMAL_LABEL_COLOR["TR"],
-			VUHDO_NORMAL_LABEL_COLOR["TG"],
-			VUHDO_NORMAL_LABEL_COLOR["TB"],
-			VUHDO_NORMAL_LABEL_COLOR["TO"]
-		);
+		VUHDO_GLOBAL[tName .. "Label2"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	end
 end
 
@@ -190,19 +167,9 @@ function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Show();
 
 	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[tName .. "TextureCheckMarkLabel"]:SetTextColor(
-			VUHDO_ACTIVE_LABEL_COLOR.TR,
-			VUHDO_ACTIVE_LABEL_COLOR.TG,
-			VUHDO_ACTIVE_LABEL_COLOR.TB,
-			VUHDO_ACTIVE_LABEL_COLOR.TO
-		);
+		VUHDO_GLOBAL[tName .. "TextureCheckMarkLabel"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	else
-		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(
-			VUHDO_ACTIVE_LABEL_COLOR_DISA.TR,
-			VUHDO_ACTIVE_LABEL_COLOR_DISA.TG,
-			VUHDO_ACTIVE_LABEL_COLOR_DISA.TB,
-			VUHDO_ACTIVE_LABEL_COLOR_DISA.TO
-		);
+		VUHDO_GLOBAL[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR_DISA));
 	end
 end
 
@@ -215,19 +182,9 @@ function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
 	VUHDO_GLOBAL[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (aCheckButton:GetChecked()) then
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetTextColor(
-			VUHDO_NORMAL_LABEL_COLOR.TR,
-			VUHDO_NORMAL_LABEL_COLOR.TG,
-			VUHDO_NORMAL_LABEL_COLOR.TB,
-			VUHDO_NORMAL_LABEL_COLOR.TO
-		);
+		VUHDO_GLOBAL[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	else
-		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetTextColor(
-			VUHDO_NORMAL_LABEL_COLOR_DISA.TR,
-			VUHDO_NORMAL_LABEL_COLOR_DISA.TG,
-			VUHDO_NORMAL_LABEL_COLOR_DISA.TB,
-			VUHDO_NORMAL_LABEL_COLOR_DISA.TO
-		);
+		VUHDO_GLOBAL[aCheckButton:GetName() .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR_DISA));
 	end
 end
 

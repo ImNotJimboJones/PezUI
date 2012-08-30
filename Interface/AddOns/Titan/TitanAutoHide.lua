@@ -1,6 +1,6 @@
---[[ Titan
-TitanAutoHide.lua
-Contains the routines of AutoHide Titan plugin to auto hide a Titan bar.
+--[[ File
+NAME:TitanAutoHide.lua
+DESC: Contains the routines of AutoHide Titan plugin to auto hide a Titan bar.
 
 Auto hide uses a data driven approach. Rather than seperate routines for each bar, auto hide is implemented in a general manner. 
 The tables TitanBarData & AutoHideData hold relevant data needed to control auto hide. 
@@ -8,6 +8,7 @@ The index into AutoHideData is the plugin button name given in TitanPanel.xml.
 
 If auto hide is turned on these routines will show / hide the proper bar (and plugins on the bar).
 These routines control the 'push pin' on each bar, if shown.
+:DESC
 --]]
 local AceTimer = LibStub("AceTimer-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("Titan", true)
@@ -18,9 +19,8 @@ if AceLibrary and AceLibrary:HasInstance("Dewdrop-2.0") then Dewdrop = AceLibrar
 --[[ local
 NAME: Titan_AutoHide_SetIcon
 DESC: Set the icon for the plugin.
-VARS: 
-- self - The bar
-OUT : None
+VAR: self - The bar
+OUT: None
 --]]
 local function Titan_AutoHide_SetIcon(self)
 	local frame = self:GetName()
@@ -39,9 +39,8 @@ end
 --[[ Titan
 NAME: Titan_AutoHide_OnLoad
 DESC: Setup the plugin on the given bar.
-VARS: 
-- self - The bar
-OUT : None
+VAR: self - The bar
+OUT: None
 --]]
 function Titan_AutoHide_OnLoad(self)
 	local frame = self:GetName()
@@ -63,9 +62,8 @@ end
 --[[ Titan
 NAME: Titan_AutoHide_OnShow
 DESC: Show the plugin on the given bar.
-VARS: 
-- self - The bar
-OUT : None
+VAR: self - The bar
+OUT: None
 --]]
 function Titan_AutoHide_OnShow(self)
 	Titan_AutoHide_SetIcon(self)	
@@ -74,24 +72,23 @@ end
 --[[ Titan
 NAME: Titan_AutoHide_OnClick
 DESC: Handle button clicks on the given bar.
-VARS: 
-- self - The bar
-- button - The mouse button clicked
-OUT : None
+VAR: self - The bar
+VAR: button - The mouse button clicked
+OUT:  None
 --]]
 function Titan_AutoHide_OnClick(self, button)
 	if (button == "LeftButton") then
 		Titan_AutoHide_ToggleAutoHide(self);
 	end
 end
+
 -- Auto hide routines
 --[[ Titan
 NAME: Titan_AutoHide_Timers
 DESC: This routine accepts the display bar frame and whether the cursor is entering or leaving. On enter kill the timers that are looking to hide the bar. On leave start the timer to hide the bar.
-VARS: 
-- frame - The bar
-- action - "Enter" | "Leave"
-OUT : None
+VAR: frame - The bar
+VAR: action - "Enter" | "Leave"
+OUT:  None
 --]]
 function Titan_AutoHide_Timers(frame, action)
 	if not frame or not action then
@@ -114,9 +111,8 @@ end
 --[[ Titan
 NAME: Titan_AutoHide_Init
 DESC: Show / hide the given bar per the user requested settings
-VARS: 
-- self - The bar
-OUT : None
+VAR: self - The bar
+OUT: None
 --]]
 function Titan_AutoHide_Init(self)
 	if not self then return end -- sanity check
@@ -143,9 +139,8 @@ end
 --[[ Titan
 NAME: Titan_AutoHide_ToggleAutoHide
 DESC: Toggle the user requested show / hide setting then show / hide given bar
-VARS: 
-- self - The bar
-OUT : None
+VAR: self - The bar
+OUT: None
 --]]
 function Titan_AutoHide_ToggleAutoHide(self)
 	local frame = self:GetName()
@@ -160,9 +155,8 @@ end
 --[[ Titan
 NAME: Handle_OnUpdateAutoHide
 DESC: Hide the bar if the user has auto hide after the cursor leaves the display bar.
-VARS: 
-- frame - The bar
-OUT : None
+VAR: frame - The bar
+OUT: None
 --]]
 function Handle_OnUpdateAutoHide(frame)
 	if TitanPanelRightClickMenu_IsVisible() 

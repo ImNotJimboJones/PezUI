@@ -1,3 +1,5 @@
+local _;
+
 local VUHDO_SHIELDS = {
 	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = 15,
 	[VUHDO_SPELL_ID.DIVINE_AEGIS] = 15,
@@ -6,7 +8,7 @@ local VUHDO_SHIELDS = {
 	[VUHDO_SPELL_ID.MANA_SHIELD] = 60, -- Mana Shield
 	[VUHDO_SPELL_ID.SACRIFICE] = 30, -- Sacrifice
 	[VUHDO_SPELL_ID.SACRED_SHIELD] = 15, -- Sacred Shield
-	[VUHDO_SPELL_ID.SAVAGE_DEFENSE] = 10 -- Savage Defense
+	[VUHDO_SPELL_ID.SPIRIT_SHELL] = 15, -- Spirit Shell
 };
 
 
@@ -90,6 +92,11 @@ local function VUHDO_updateShieldValue(aUnit, aShieldName, anAmount, aDuration)
 		return;
 	end
 
+	if ((anAmount or 0) == 0) then
+		--VUHDO_xMsg("ERROR: Failed to update shield " .. aShieldName .. " on " .. aUnit, anAmount);
+		return;
+	end
+
 	if (aDuration ~= nil and VUHDO_SHIELD_LEFT[aUnit][aShieldName] <= anAmount) then
 		VUHDO_SHIELD_EXPIRY[aUnit][aShieldName] = GetTime() + aDuration;
 		--VUHDO_Msg("Shield overwritten");
@@ -100,7 +107,7 @@ local function VUHDO_updateShieldValue(aUnit, aShieldName, anAmount, aDuration)
 	end
 
 	VUHDO_SHIELD_LEFT[aUnit][aShieldName] = anAmount;
-	--VUHDO_xMsg("Updated shield " .. aShieldName .. " on " .. aUnit .. " to " .. anAmount, aDuration);
+--	VUHDO_xMsg("Updated shield " .. aShieldName .. " on " .. aUnit .. " to " .. anAmount, aDuration);
 end
 
 
@@ -158,7 +165,7 @@ local function VUHDO_updateShields(aUnit)
 	for tShieldName, _ in pairs(VUHDO_SHIELDS) do
 		tRemain = select(14, UnitAura(aUnit, tShieldName));
 
-		if (tRemain ~= nil) then
+		if (tRemain ~= nil and "number" == type(tRemain)) then
 			if (tRemain > 0) then
 				VUHDO_updateShieldValue(aUnit, tShieldName, tRemain, nil);
 			else
@@ -189,6 +196,7 @@ function VUHDO_getShieldPerc(aUnit, aShield)
 		return 0;
 	end
 end
+
 
 
 --

@@ -24,22 +24,11 @@ function VUHDO_setPickerColor(aPanel)
 	if (VUHDO_isTextEdit) then
 		aPanel:SetColorRGB(VUHDO_COLOR.TR, VUHDO_COLOR.TG, VUHDO_COLOR.TB);
 		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.TR, VUHDO_COLOR.TG, VUHDO_COLOR.TB);
-
-		if (VUHDO_COLOR.TO ~= nil and not strfind(VUHDO_PROHIBIT, "O")) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
-		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
-		end
-
+		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:SetShown(VUHDO_COLOR.TO ~= nil and not strfind(VUHDO_PROHIBIT, "O"));
 	else
 		aPanel:SetColorRGB(VUHDO_COLOR.R, VUHDO_COLOR.G, VUHDO_COLOR.B);
 		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.R, VUHDO_COLOR.G, VUHDO_COLOR.B);
-
-		if (VUHDO_COLOR.O ~= nil and not strfind(VUHDO_PROHIBIT, "O")) then
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Show();
-		else
-			VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:Hide();
-		end
+		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:SetShown(VUHDO_COLOR.O ~= nil and not strfind(VUHDO_PROHIBIT, "O"));
 	end
 
 	if (VUHDO_isTextEdit) then

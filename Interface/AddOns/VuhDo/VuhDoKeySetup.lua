@@ -15,7 +15,6 @@ local VUHDO_buildTargetButtonMacroText;
 local VUHDO_buildTargetMacroText;
 local VUHDO_buildFocusMacroText;
 local VUHDO_buildAssistMacroText;
-local VUHDO_getDebuffAbilities;
 local VUHDO_replaceMacroTemplates;
 local VUHDO_isActionValid;
 
@@ -47,7 +46,6 @@ function VUHDO_keySetupInitBurst()
 	VUHDO_buildTargetMacroText = VUHDO_GLOBAL["VUHDO_buildTargetMacroText"];
 	VUHDO_buildFocusMacroText = VUHDO_GLOBAL["VUHDO_buildFocusMacroText"];
 	VUHDO_buildAssistMacroText = VUHDO_GLOBAL["VUHDO_buildAssistMacroText"];
-	VUHDO_getDebuffAbilities = VUHDO_GLOBAL["VUHDO_getDebuffAbilities"];
 	VUHDO_replaceMacroTemplates = VUHDO_GLOBAL["VUHDO_replaceMacroTemplates"];
 	VUHDO_isActionValid = VUHDO_GLOBAL["VUHDO_isActionValid"];
 	sIsCliqueCompat = VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"];
@@ -62,6 +60,7 @@ local VUHDO_REZ_SPELLS_NAMES = {
 	[VUHDO_SPELL_ID.REVIVE] = true,
 	[VUHDO_SPELL_ID.REBIRTH] = true,
 	[VUHDO_SPELL_ID.RESURRECTION] = true,
+	[VUHDO_SPELL_ID.RESUSCITATE] = true,
 };
 
 
@@ -251,7 +250,7 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		aButton["raidid"] = aUnit;
 	end
 
-	if (aButton:GetAttribute("vd_tt_hook") == nil and not anIsTgButton) then
+	if (aButton:GetAttribute("vd_tt_hook") == nil) then
 		if (anIsIcButton) then
 			aButton:HookScript("OnEnter", function(self) VUHDO_showDebuffTooltip(self); VuhDoActionOnEnter(self:GetParent():GetParent():GetParent():GetParent()) end);
 			aButton:HookScript("OnLeave", function(self) VUHDO_hideDebuffTooltip(); VuhDoActionOnLeave(self:GetParent():GetParent():GetParent():GetParent()) end);
@@ -422,7 +421,7 @@ function VUHDO_setupSmartCast(aButton)
 	-- Cleanse?
 	if (VUHDO_CONFIG["SMARTCAST_CLEANSE"] and not tInfo["dead"]) then
 		if (VUHDO_DEBUFF_TYPE_NONE ~= tInfo["debuff"]) then
-			tAbilities = VUHDO_getDebuffAbilities(VUHDO_PLAYER_CLASS);
+			tAbilities = VUHDO_getDebuffAbilities();
 			if (tAbilities[tInfo["debuff"]] ~= nil) then
 				VUHDO_setupAllButtonsTo(aButton, tAbilities[tInfo["debuff"]]);
 				return true;

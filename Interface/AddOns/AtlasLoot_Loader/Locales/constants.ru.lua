@@ -1,4 +1,4 @@
-﻿-- $Id: constants.ru.lua 3660 2011-12-01 21:29:50Z hegarol $
+-- $Id: constants.ru.lua 3726 2012-04-27 18:50:30Z hegarol $
 --[[
 constants.ru.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -603,7 +603,6 @@ if AL then
 
 	-- General titles
 	AL["Achievement"] = "Достижение";
-	AL["Promotional & Card Game"] = "Поощрительные и карточные игры";
 	
 	-- Companions
 	AL["Achievement & Faction Reward Companions"] = "Спутники за достижения и фракции";

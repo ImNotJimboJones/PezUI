@@ -7,7 +7,7 @@ local tremove = tremove;
 local twipe = table.wipe;
 local ceil = ceil;
 local pairs = pairs;
-local _ = _;
+local _;
 
 local sCnt;
 local sConfiguredModels = {};

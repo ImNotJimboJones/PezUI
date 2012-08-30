@@ -12,6 +12,7 @@ local UnitMana = UnitMana;
 local UnitManaMax = UnitManaMax;
 local InCombatLockdown = InCombatLockdown;
 local pairs = pairs;
+local _;
 
 local VUHDO_getHealthBar;
 local VUHDO_isConfigDemoUsers;

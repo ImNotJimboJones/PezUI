@@ -1,3 +1,5 @@
+local _;
+
 --
 local VUHDO_INDICATORS = {
 	{ -- Outer Border

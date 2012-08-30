@@ -1,4 +1,4 @@
--- $Id: Panel.lua 3697 2012-01-31 15:17:37Z lag123 $
+-- $Id: Panel.lua 3729 2012-07-31 13:38:29Z lag123 $
 local AtlasLoot = LibStub("AceAddon-3.0"):GetAddon("AtlasLoot")
 
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
@@ -229,7 +229,7 @@ do
 		LineFrame = ButtonListLines[curLineButtonList]
 		-- Create new ButtonFrame
 		if not frame["ButtonList"][pos] then
-			frame["ButtonList"][pos] = CreateFrame("Button", "AtlasLoot_PanelButton_"..pos, LineFrame, "UIPanelButtonTemplate2")
+			frame["ButtonList"][pos] = CreateFrame("Button", "AtlasLoot_PanelButton_"..pos, LineFrame, "UIPanelButtonTemplate")
 		end
 		ButtonFrame = frame["ButtonList"][pos]
 		-- Set ButtonText and Button Width
@@ -420,7 +420,7 @@ do
 							end)
 		searchFrameWidth = searchFrameWidth + SearchFrame.SearchBox:GetWidth()
 		
-		SearchFrame.Search = CreateFrame("Button","AtlasLootPanelSearch_SearchButton",SearchFrame,"UIPanelButtonTemplate2")
+		SearchFrame.Search = CreateFrame("Button","AtlasLootPanelSearch_SearchButton",SearchFrame,"UIPanelButtonTemplate")
 		SearchFrame.Search:SetText(AL["Search"])
 		SearchFrame.Search:SetWidth(69)
 		SearchFrame.Search:SetHeight(20)
@@ -446,7 +446,7 @@ do
 		SearchFrame.SearchOptions:SetScript("OnClick", AtlasLoot.ShowSearchOptions)
 		]]--
 		
-		SearchFrame.Clear = CreateFrame("Button","AtlasLootPanelSearch_ClearButton",SearchFrame,"UIPanelButtonTemplate2")
+		SearchFrame.Clear = CreateFrame("Button","AtlasLootPanelSearch_ClearButton",SearchFrame,"UIPanelButtonTemplate")
 		SearchFrame.Clear:SetText(AL["Clear"])
 		SearchFrame.Clear:SetWidth(58)
 		SearchFrame.Clear:SetHeight(20)
@@ -457,7 +457,7 @@ do
 							end)
 		searchFrameWidth = searchFrameWidth + SearchFrame.Clear:GetWidth()
 							
-		SearchFrame.LastResult = CreateFrame("Button","AtlasLootPanelSearch_LastResultButton",SearchFrame,"UIPanelButtonTemplate2")
+		SearchFrame.LastResult = CreateFrame("Button","AtlasLootPanelSearch_LastResultButton",SearchFrame,"UIPanelButtonTemplate")
 		SearchFrame.LastResult:SetText(AL["Last Result"])
 		SearchFrame.LastResult:SetWidth(120)
 		SearchFrame.LastResult:SetHeight(20)

@@ -1,4 +1,4 @@
--- $Id: AtlasLoot.lua 3707 2012-03-03 15:31:59Z hegarol $
+-- $Id: AtlasLoot.lua 3739 2012-08-27 18:29:55Z hegarol $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -12,9 +12,9 @@ local AtlasLoot = _G.AtlasLoot
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 
 --Establish version number and compatible version of Atlas
-local VERSION_MAJOR = "6";
-local VERSION_MINOR = "05";
-local VERSION_BOSSES = "04";
+local VERSION_MAJOR = "7";
+local VERSION_MINOR = "00";
+local VERSION_BOSSES = "00";
 ATLASLOOT_VERSION = "|cffFF8400AtlasLoot Enhanced v"..VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES.."|r";
 ATLASLOOT_VERSION_NUM = VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES
 
@@ -130,6 +130,7 @@ local AtlasLootDBDefaults = {
 
 -- Popup Box for first time users
 StaticPopupDialogs["ATLASLOOT_SETUP"] = {
+	preferredIndex = 3,
 	text = AL["Welcome to Atlasloot Enhanced.  Please take a moment to set your preferences."],
 	button1 = AL["Setup"],
 	OnAccept = function()
@@ -142,6 +143,7 @@ StaticPopupDialogs["ATLASLOOT_SETUP"] = {
 
 --Popup Box for an old version of Atlas
 StaticPopupDialogs["ATLASLOOT_OLD_ATLAS"] = {
+	preferredIndex = 3,
 	text = AL["It has been detected that your version of Atlas does not match the version that Atlasloot is tuned for ("]..ATLASLOOT_CURRENT_ATLAS[1].."/"..ATLASLOOT_PREVIEW_ATLAS[1]..AL[").  Depending on changes, there may be the occasional error, so please visit http://www.atlasmod.com as soon as possible to update."],
 	button1 = AL["OK"],
 	OnAccept = function()
@@ -154,6 +156,7 @@ StaticPopupDialogs["ATLASLOOT_OLD_ATLAS"] = {
 
 --Popup Box for the bug with saved variables >.<
 StaticPopupDialogs["ATLASLOOT_SAVED_VARIABLES"] = {
+	preferredIndex = 3,
 	text = "AtlasLoot should now work fine with Patch 4.2. If you still got problems please delete the file AtlasLoot.lua in your WoW folder: WTF/Account/AccountName/SavedVariables while logged out of the game.",
 	button1 = AL["OK"],
 	OnAccept = function()

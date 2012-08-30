@@ -4,10 +4,11 @@
 - Option je Bouquet Stacks aufaddieren
 - Keine Balkenfarbe custom debuffs per spellID
 - Sound für auslaufende Buffs BuffWatch
-
 - Zweite Waffenverz. Schamanen, Erkennung welche Waffenverz.
 - Hot bars vertical
 - Rez-Spells DK, WL
+- Sehbehindertenmodus Optionen
+- Tooltip Gilde beschränken
 
 1. Health     3
 2. Mana       1

@@ -13,6 +13,7 @@ VUHDO_I18N_SHAMANS = "Шаманы";
 VUHDO_I18N_DRUIDS = "Друиды";
 VUHDO_I18N_PRIESTS = "Жрецы";
 VUHDO_I18N_DEATH_KNIGHT = "Рыцари Смерти";
+VUHDO_I18N_MONKS = "Monks";
 
 
 -- Group Model Names
@@ -125,8 +126,8 @@ VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Зачарование оружия 2";
 VUHDO_I18N_BUFFC_SHIELDS = "09Щиты";
 -- Paladin
 VUHDO_I18N_BUFFC_BLESSING = "01Благословение";
-VUHDO_I18N_BUFFC_AURA = "02Аура";
-VUHDO_I18N_BUFFC_SEAL = "03Печать";
+--VUHDO_I18N_BUFFC_AURA = "02Аура";
+VUHDO_I18N_BUFFC_SEAL = "02Печать";
 -- Druids
 -- Warlock
 VUHDO_I18N_BUFFC_SKIN = "01Шкура";
@@ -138,6 +139,8 @@ VUHDO_BUFFC_PRESENCE    = "03Власть";
 VUHDO_I18N_BUFFC_SHOUT = "01Крик";
 -- Hunter
 VUHDO_I18N_BUFFC_ASPECT = "02Дух";
+-- Monk
+VUHDO_I18N_BUFFC_STANCE = "01Stance";
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo";
@@ -173,7 +176,7 @@ VUHDO_I18N_VEHICLES = "Транспорт";
 
 
 -- #+v1.94
-VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "vuhdo, вернись к жизни, вагон!";
+VUHDO_I18N_DEFAULT_RES_ANNOUNCE = "vuhdo, вернись к жизни!";
 
 -- #v+1.151
 VUHDO_I18N_MAIN_ASSISTS = "Наводчики";
@@ -232,7 +235,7 @@ VUHDO_I18N_RANGED = "Дальний бой";
 
 -- #+1.196
 VUHDO_I18N_OPTIONS_NOT_LOADED = ">>> Модуль настроек VuhDo не загружен! <<<";
-VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_1 = "Ошибка: Размещение заклинания \"";
+VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_1 = "Ошибка: Раскладка способностей \"";
 VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_2 = "\" не существует.";
 VUHDO_I18N_AUTO_ARRANG_1 = "Количество участников группы изменено на: ";
 VUHDO_I18N_AUTO_ARRANG_2 = ". Автоприменение расположения: \"";
@@ -406,57 +409,62 @@ VUHDO_I18N_SIDE_BAR_LEFT = "Левая сторона";
 VUHDO_I18N_SIDE_BAR_RIGHT = "Правая сторона";
 VUHDO_I18N_OWN_PET = "Ваш питомец";
 -- 2.72
-VUHDO_I18N_SPELL = "Spell";
-VUHDO_I18N_COMMAND = "Command";
-VUHDO_I18N_MACRO = "Macro";
-VUHDO_I18N_ITEM = "Item";
+VUHDO_I18N_SPELL = "Каст";
+VUHDO_I18N_COMMAND = "Команда";
+VUHDO_I18N_MACRO = "Макрос";
+VUHDO_I18N_ITEM = "Предмет";
 -- 2.75
-VUHDO_I18N_ERR_NO_BOUQUET = "\"%s\" tries to hook to bouquet \"%s\" which doesn't exist!";
+VUHDO_I18N_ERR_NO_BOUQUET = "\"%s\" ссылается на несуществующий букет \"%s\"";
 
-VUHDO_I18N_BOUQUET_HEALTH_BELOW_ABS = "Flag: Health < k";
-VUHDO_I18N_BOUQUET_HEALTH_ABOVE_ABS = "Flag: Health > k";
-VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST = "Spell layout \"%s\" doesn't exist.";
+VUHDO_I18N_BOUQUET_HEALTH_BELOW_ABS = "Флаг: Здоровье < k";
+VUHDO_I18N_BOUQUET_HEALTH_ABOVE_ABS = "Флаг: Здоровье > k";
+VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST = "Раскладка способностей \"%s\" не существует.";
 
 --VUHDO_I18N_ADDON_WARNING = "WARNING: Addon |cffffffff\"%s\"|r is enabled along with VuhDo, which may be problematic. Reason: %s";
 --VUHDO_I18N_MAY_CAUSE_LAGS = "May cause severe lags.";
 
-VUHDO_I18N_DISABLE_BY_VERSION = "!!! VUHDO IS DISABLED !!! This version is for client versions %d and above only !!!"
+VUHDO_I18N_DISABLE_BY_VERSION = "!!! VUHDO ОТКЛЮЧЕН !!! Эта версия предназначена для игрового клиента версии %d и выше!!!"
 
-VUHDO_I18N_BOUQUET_STATUS_ALTERNATE_POWERS = "Statusbar: Alternate Power %"
-VUHDO_I18N_BOUQUET_ALTERNATE_POWERS_ABOVE = "Flag: Alternate Power > %";
-VUHDO_I18N_DEF_ALTERNATE_POWERS = "Alternative Powers";
-VUHDO_I18N_BOUQUET_HOLY_POWER_EQUALS = "Flag: Own Holy Power ==";
-VUHDO_I18N_DEF_PLAYER_HOLY_POWER = "Player Holy Power";
-VUHDO_I18N_CUSTOM_ICON_ONE_THIRD = "Thirds: One";
-VUHDO_I18N_CUSTOM_ICON_TWO_THIRDS = "Thirds: Two"
-VUHDO_I18N_CUSTOM_ICON_THREE_THIRDS = "Thirds: Three";
-VUHDO_I18N_DEF_ROLE_ICON = "Role Icon";
-VUHDO_I18N_DEF_BOUQUET_TARGET_HEALTH = "Health (generic, target)";
-VUHDO_I18N_TAPPED_COLOR = "Flag: Tapped";
-VUHDO_I18N_ENEMY_STATE_COLOR = "Color: Friend/Foe";
-VUHDO_I18N_BOUQUET_STATUS_ALWAYS_FULL = "Statusbar: always full";
-VUHDO_I18N_BOUQUET_STATUS_FULL_IF_ACTIVE = "Statusbar: full if active";
-VUHDO_I18N_AOE_ADVICE = "Icon: AOE Advice";
-VUHDO_I18N_DEF_AOE_ADVICE = "AOE Advice";
-VUHDO_I18N_BOUQUET_DURATION_ABOVE = "Flag: Duration > sec";
-VUHDO_I18N_BOUQUET_DURATION_BELOW = "Flag: Duration < sec";
-VUHDO_I18N_DEF_WRACK = "Sinestra: Wrack";
+VUHDO_I18N_BOUQUET_STATUS_ALTERNATE_POWERS = "Полоса состояния: Альтернативная энергия %"
+VUHDO_I18N_BOUQUET_ALTERNATE_POWERS_ABOVE = "Флаг: Альтернативная энергия > %";
+VUHDO_I18N_DEF_ALTERNATE_POWERS = "Альтернативная энергия";
+VUHDO_I18N_BOUQUET_HOLY_POWER_EQUALS = "Флаг: Энергия Света ==";
+VUHDO_I18N_DEF_PLAYER_HOLY_POWER = "Энергия Света";
+VUHDO_I18N_CUSTOM_ICON_ONE_THIRD = "Трети: Одна";
+VUHDO_I18N_CUSTOM_ICON_TWO_THIRDS = "Трети: Две"
+VUHDO_I18N_CUSTOM_ICON_THREE_THIRDS = "Трети: Три";
+VUHDO_I18N_DEF_ROLE_ICON = "Иконка роли";
+VUHDO_I18N_DEF_BOUQUET_TARGET_HEALTH = "Здоровье (общее, цель)";
+VUHDO_I18N_TAPPED_COLOR = "Флаг: Присоединенный";
+VUHDO_I18N_ENEMY_STATE_COLOR = "Цвет: Союзник/Враг";
+VUHDO_I18N_BOUQUET_STATUS_ALWAYS_FULL = "Полоса состояния: всегда полная";
+VUHDO_I18N_BOUQUET_STATUS_FULL_IF_ACTIVE = "Полоса состояния: полная при активности";
+VUHDO_I18N_AOE_ADVICE = "Иконка: AOE Советник";
+VUHDO_I18N_DEF_AOE_ADVICE = "AOE Советник";
+VUHDO_I18N_BOUQUET_DURATION_ABOVE = "Флаг: Длительность > сек";
+VUHDO_I18N_BOUQUET_DURATION_BELOW = "Флаг: Длительность < сек";
+VUHDO_I18N_DEF_WRACK = "Синестра: Смятие";
 
-VUHDO_I18N_DEF_DIRECTION_ARROW = "Direction Arrow";
-VUHDO_I18N_BOUQUET_DIRECTION_ARROW = "Direction Arrow";
-VUHDO_I18N_DEF_RAID_LEADER = "Icon: Raid leader";
-VUHDO_I18N_DEF_RAID_ASSIST = "Icon: Raid assist";
-VUHDO_I18N_DEF_MASTER_LOOTER = "Icon: Master looter";
-VUHDO_I18N_DEF_PVP_STATUS = "Icon: PvP Status";
+VUHDO_I18N_DEF_DIRECTION_ARROW = "Стрелка направления";
+VUHDO_I18N_BOUQUET_DIRECTION_ARROW = "Стрелка направления";
+VUHDO_I18N_DEF_RAID_LEADER = "Иконка: Лидер рейда";
+VUHDO_I18N_DEF_RAID_ASSIST = "Иконка: Помощник лидера";
+VUHDO_I18N_DEF_MASTER_LOOTER = "Иконка: Отвественный за добычу";
+VUHDO_I18N_DEF_PVP_STATUS = "Иконка: Статус PvP";
 
-VUHDO_I18N_GRID_MOUSEOVER_SINGLE = "Grid: Mouseover Single";
-VUHDO_I18N_GRID_BACKGROUND_BAR = "Grid: Background Bar";
+VUHDO_I18N_GRID_MOUSEOVER_SINGLE = "Grid: Наведение мыши";
+VUHDO_I18N_GRID_BACKGROUND_BAR = "Grid: Фоновая полоса";
 VUHDO_I18N_DEF_BIT_O_GRID = "Bit'o'Grid";
 VUHDO_I18N_DEF_VUHDO_ESQUE = "Vuhdo'esque";
 
 
-VUHDO_I18N_DEF_ROLE_COLOR = "Role Color";
-VUHDO_I18N_BOUQUET_ROLE_TANK = "Flag: Role Tank";
-VUHDO_I18N_BOUQUET_ROLE_DAMAGE = "Flag: Role Damager";
-VUHDO_I18N_BOUQUET_ROLE_HEALER = "Flag: Role Healer";
-VUHDO_I18N_BOUQUET_STACKS = "Flag: Stacks >";
+VUHDO_I18N_DEF_ROLE_COLOR = "Цвет роли";
+VUHDO_I18N_BOUQUET_ROLE_TANK = "Флаг: Роль - танк";
+VUHDO_I18N_BOUQUET_ROLE_DAMAGE = "Флаг: Роль - ДД";
+VUHDO_I18N_BOUQUET_ROLE_HEALER = "Флаг: Роль - Целитель";
+VUHDO_I18N_BOUQUET_STACKS = "Флаг: Стаки >";
+
+VUHDO_I18N_BOUQUET_TARGET_RAID_ICON = "Icon: Target's Raid Symbol";
+VUHDO_I18N_BOUQUET_OWN_CHI_EQUALS = "Flag: Own Chi ==";
+VUHDO_I18N_CUSTOM_ICON_FOUR_THIRDS = "Thirds: Four";
+VUHDO_I18N_CUSTOM_ICON_FIVE_THIRDS = "Thirds: Five";

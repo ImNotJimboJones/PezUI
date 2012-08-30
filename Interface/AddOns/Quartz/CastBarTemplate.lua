@@ -76,7 +76,7 @@ local function OnUpdate(self)
 
 		self.Bar:SetValue(perc)
 		self.Spark:ClearAllPoints()
-		self.Spark:SetPoint("CENTER", self.Bar, "LEFT", perc * db.w, 0)
+		self.Spark:SetPoint("CENTER", self.Bar, "LEFT", perc * self.Bar:GetWidth(), 0)
 
 		if delay and delay ~= 0 then
 			if db.hidecasttime then
@@ -380,9 +380,12 @@ function CastBarTemplate:ApplySettings()
 
 	ToggleCastNotInterruptible(self, self.lastNotInterruptible, true)
 
+	local iconwidth = db.h + db.icongap
+	local iconoffset = db.hideicon and 0 or (iconwidth/2 * (db.iconposition == "left" and 1 or -1))
+	local castbarwidth = db.hideicon and db.w or db.w-iconwidth
 	self.Bar:ClearAllPoints()
-	self.Bar:SetPoint("CENTER",self,"CENTER")
-	self.Bar:SetWidth(db.w)
+	self.Bar:SetPoint("CENTER",self,"CENTER", iconoffset, 0)
+	self.Bar:SetWidth(castbarwidth)
 	self.Bar:SetHeight(db.h)
 	self.Bar:SetStatusBarTexture(media:Fetch("statusbar", db.texture))
 	self.Bar:SetMinMaxValues(0, 1)
@@ -392,13 +395,16 @@ function CastBarTemplate:ApplySettings()
 	else
 		self.TimeText:Show()
 		self.TimeText:ClearAllPoints()
-		self.TimeText:SetWidth(db.w)
+		self.TimeText:SetWidth(castbarwidth)
 		local position = db.timetextposition
 		if position == "left" then
 			self.TimeText:SetPoint("LEFT", self.Bar, "LEFT", db.timetextx, db.timetexty)
 			self.TimeText:SetJustifyH("LEFT")
 		elseif position == "center" then
 			self.TimeText:SetPoint("CENTER", self.Bar, "CENTER", db.timetextx, db.timetexty)
+			self.TimeText:SetJustifyH("CENTER")
+		elseif position == "centerback" then
+			self.TimeText:SetPoint("CENTER", self, "CENTER", db.timetextx, db.timetexty)
 			self.TimeText:SetJustifyH("CENTER")
 		elseif position == "right" then
 			self.TimeText:SetPoint("RIGHT", self.Bar, "RIGHT", -1 * db.timetextx, db.timetexty)
@@ -431,20 +437,23 @@ function CastBarTemplate:ApplySettings()
 			self.Text:SetPoint("LEFT", self.Bar, "LEFT", db.nametextx, db.nametexty)
 			self.Text:SetJustifyH("LEFT")
 			if db.hidetimetext or db.timetextposition ~= "right" then
-				self.Text:SetWidth(db.w)
+				self.Text:SetWidth(castbarwidth)
 			else
-				self.Text:SetWidth(db.w - normaltimewidth - 5)
+				self.Text:SetWidth(castbarwidth - normaltimewidth - 5)
 			end
 		elseif position == "center" then
 			self.Text:SetPoint("CENTER", self.Bar, "CENTER", db.nametextx, db.nametexty)
+			self.Text:SetJustifyH("CENTER")
+		elseif position == "centerback" then
+			self.Text:SetPoint("CENTER", self, "CENTER", db.nametextx, db.nametexty)
 			self.Text:SetJustifyH("CENTER")
 		else -- L["Right"]
 			self.Text:SetPoint("RIGHT", self.Bar, "RIGHT", -1 * db.nametextx, db.nametexty)
 			self.Text:SetJustifyH("RIGHT")
 			if db.hidetimetext or db.timetextposition ~= "left" then
-				self.Text:SetWidth(db.w)
+				self.Text:SetWidth(castbarwidth)
 			else
-				self.Text:SetWidth(db.w - normaltimewidth - 5)
+				self.Text:SetWidth(castbarwidth - normaltimewidth - 5)
 			end
 		end
 	end
@@ -521,8 +530,8 @@ do
 	end
 
 	local function dragstop(self)
-		self.config.x = self:GetLeft()
-		self.config.y = self:GetBottom()
+		self.config.x = self:GetLeft()-UIParent:GetLeft()
+		self.config.y = self:GetBottom()-UIParent:GetBottom()
 		self:StopMovingOrSizing()
 	end
 
@@ -771,7 +780,7 @@ do
 					type = "select",
 					name = L["Spell Name Position"],
 					desc = L["Set the alignment of the spell name text"],
-					values = {["left"] = L["Left"], ["right"] = L["Right"], ["center"] = L["Center"]},
+					values = {["left"] = L["Left"], ["right"] = L["Right"], ["center"] = L["Center (CastBar)"], ["centerback"] = L["Center (Backdrop)"]},
 					disabled = hidenametextoptions,
 					order = 404,
 				},
@@ -824,7 +833,7 @@ do
 					type = "select",
 					name = L["Time Text Position"],
 					desc = L["Set the alignment of the time text"],
-					values = {["left"] = L["Left"], ["right"] = L["Right"], ["center"] = L["Center"], ["caststart"] = L["Cast Start Side"], ["castend"] = L["Cast End Side"]},
+					values = {["left"] = L["Left"], ["right"] = L["Right"], ["center"] = L["Center (CastBar)"], ["centerback"] = L["Center (Backdrop)"], ["caststart"] = L["Cast Start Side"], ["castend"] = L["Cast End Side"]},
 					disabled = hidetimetextoptions,
 					order = 415,
 				},
@@ -968,7 +977,7 @@ Quartz3.CastBarTemplate.defaults = {
 	alpha = 1,
 	iconalpha = 0.9,
 	iconposition = "left",
-	icongap = 4,
+	icongap = 1,
 	hidenametext = false,
 	nametextposition = "left",
 	timetextposition = "right",

@@ -1,7 +1,7 @@
 ﻿--[[TPTP Tank Toggle Command]]--
 local L = LibStub("AceLocale-3.0"):GetLocale("TidyPlatesThreat", false)
 
-local Active = function() return GetActiveTalentGroup() end
+local Active = function() return GetActiveSpecGroup() end
 function toggleDPS()
 	TidyPlatesThreat:setSpecDPS(Active())
 	TidyPlatesThreat.db.char.threat.tanking = false

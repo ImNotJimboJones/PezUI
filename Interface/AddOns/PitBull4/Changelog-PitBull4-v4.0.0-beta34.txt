@@ -1,0 +1,24 @@
+tag v4.0.0-beta34
+af1effad80823b9dc28005f300123467d13065b3
+Shefki <shefki@shefki.org>
+2012-08-30 17:03:57 -0700
+
+Tagging as v4.0.0-beta34
+
+
+--------------------
+
+Shefki:
+	- Fix background on the BurningEmbers module when set to vertical.
+	- Fix the background on the HolyPower module when set to vertical.
+	- Fix two typos.  One leaked a global variable.  Both prevented LuaTexts from knowing if a spell was interruptible or not.
+	- Fix a leak of the global variable _ in Portrait module, which also breaks the Glyph UI due to a Blizzard bug.
+	Only occured when class was the portrait type or fallback type.
+	- Fix a typo that leaked a global variable and that actually broke the OnUpdate throttling for the Aura module.
+	- Fix leak of player_in_group variable into global namespace.
+	Another case of me testing and forgetting to put back to local after
+	modifying for 5.0.
+	- Fix master_looter_guid leaking into the global namespace.
+	I removed the local while testing this and I forgot to put it back when
+	I finished updating the module for 5.0.
+	- Add Rapid Teleportation to Mage self buffs.

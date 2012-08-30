@@ -2,12 +2,28 @@
 -- All rights reserved
 
 local L = ReforgeLiteLocale
+local MOP = (GetNumTalentTabs == nil)
 
 ----------------------------------------- CAP PRESETS ---------------------------------
 
 function ReforgeLite:RatingPerPoint (stat, level)
   level = level or UnitLevel ("player")
   local factor
+  if level > 85 then
+    if stat == self.STATS.DODGE or stat == self.STATS.PARRY then
+      return 885
+    elseif stat == self.STATS.HIT or stat == self.STATS.SPELLHIT then
+      return 340
+    elseif stat == self.STATS.HASTE then
+      return 425
+    elseif stat == self.STATS.CRIT then
+      return 600
+    elseif stat == self.STATS.EXP then
+      return 340
+    elseif stat == self.STATS.MASTERY then
+      return 300
+    end
+  end
   if level <= 34 and (stat == self.STATS.DODGE or stat == self.STATS.PARRY) then
     factor = 0.5
   elseif level <= 10 then
@@ -35,7 +51,11 @@ function ReforgeLite:RatingPerPoint (stat, level)
   if stat == self.STATS.DODGE or stat == self.STATS.PARRY then
     return factor * 13.8
   elseif stat == self.STATS.HIT then
-    return factor * 9.37931
+    if MOP then
+      return factor * 8
+    else
+      return factor * 9.37931
+    end
   elseif stat == self.STATS.SPELLHIT then
     return factor * 8
   elseif stat == self.STATS.HASTE then
@@ -43,7 +63,11 @@ function ReforgeLite:RatingPerPoint (stat, level)
   elseif stat == self.STATS.CRIT then
     return factor * 14
   elseif stat == self.STATS.EXP then
-    return factor * 2.34483
+    if MOP then
+      return factor * 8
+    else
+      return factor * 2.34483
+    end
   elseif stat == self.STATS.MASTERY then
     return factor * 14
   end
@@ -56,34 +80,54 @@ function ReforgeLite:GetSpellHitBonus ()
   return GetSpellHitModifier () or 0
 end
 function ReforgeLite:GetExpertiseBonus ()
-  return GetExpertise () - math.floor (GetCombatRatingBonus (CR_EXPERTISE))
+  if MOP then
+    return GetExpertise () - GetCombatRatingBonus (CR_EXPERTISE)
+  else
+    return GetExpertise () - math.floor (GetCombatRatingBonus (CR_EXPERTISE))
+  end
 end
 function ReforgeLite:GetNeededMeleeHit ()
   local diff = self.pdb.targetLevel
-  if diff <= 2 then
-    return math.max (0, 5 + 0.5 * diff)
+  if MOP then
+    return math.max(0, 3 + 1.5 * diff)
   else
-    return 2 + 2 * diff
+    if diff <= 2 then
+      return math.max (0, 5 + 0.5 * diff)
+    else
+      return 2 + 2 * diff
+    end
   end
 end
 function ReforgeLite:GetNeededSpellHit ()
   local diff = self.pdb.targetLevel
-  if diff <= 2 then
-    return math.max (0, 4 + diff)
+  if MOP then
+    return math.max(0, 6 + 3 * diff)
   else
-    return 11 * diff - 16
+    if diff <= 2 then
+      return math.max (0, 4 + diff)
+    else
+      return 11 * diff - 16
+    end
   end
 end
 function ReforgeLite:GetNeededExpertiseSoft ()
   local diff = self.pdb.targetLevel
-  return math.ceil (math.max (0, 5 + 0.5 * diff) / 0.25)
+  if MOP then
+    return math.max(0, 3 + 1.5 * diff)
+  else
+    return math.ceil (math.max (0, 5 + 0.5 * diff) / 0.25)
+  end
 end
 function ReforgeLite:GetNeededExpertiseHard ()
   local diff = self.pdb.targetLevel
-  if diff <= 2 then
-    return math.ceil (math.max (0, 5 + 0.5 * diff) / 0.25)
+  if MOP then
+    return math.max(0, 6 + 3 * diff)
   else
-    return math.ceil (14 / 0.25)
+    if diff <= 2 then
+      return math.ceil (math.max (0, 5 + 0.5 * diff) / 0.25)
+    else
+      return math.ceil (14 / 0.25)
+    end
   end
 end
 
@@ -891,6 +935,28 @@ function ReforgeLite:InitPresets ()
     end
   end
 
+  self.methodPresetMenu = CreateFrame ("Frame", "ReforgeLiteMethodPresetMenu")
+  self.methodPresetMenu.info = {}
+  self.methodPresetMenu.initialize = function (menu, level)
+    if level ~= 1 then return end
+    local info = menu.info
+    wipe (info)
+    info.notCheckable = true
+
+    for k, v in pairs (self.pdb.customMethodPresets) do
+      info.text = k
+      info.value = v
+      info.func = function ()
+        CloseDropDownMenus ()
+        self.pdb.method = v
+        self:UpdateMethodCategory ()
+      end
+      info.hasArrow = nil
+      info.keepShownOnClick = nil
+      UIDropDownMenu_AddButton (info, level)
+    end
+  end
+
   self.presetDelMenu = CreateFrame ("Frame", "ReforgeLitePresetDelMenu")
   self.presetDelMenu.info = {}
   self.presetDelMenu.initialize = function (menu, level)
@@ -904,6 +970,27 @@ function ReforgeLite:InitPresets ()
         self.db.customPresets[k] = nil
         if next (self.db.customPresets) == nil then
           self.deletePresetButton:Disable ()
+        end
+      end
+      UIDropDownMenu_AddButton (info, level)
+    end
+  end
+
+  self.methodPresetDelMenu = CreateFrame ("Frame", "ReforgeLiteMethodPresetDelMenu")
+  self.methodPresetDelMenu.info = {}
+  self.methodPresetDelMenu.initialize = function (menu, level)
+    if level ~= 1 then return end
+    local info = menu.info
+    wipe (info)
+    info.notCheckable = true
+
+    for k, v in pairs (self.pdb.customMethodPresets) do
+      info.text = k
+      info.func = function ()
+        self.db.customMethodPresets[k] = nil
+        if next (self.pdb.customMethodPresets) == nil then
+          self.methodPresetsButton:Disable()
+          self.deleteMethodPresetButton:Disable ()
         end
       end
       UIDropDownMenu_AddButton (info, level)

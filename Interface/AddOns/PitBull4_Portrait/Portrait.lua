@@ -124,19 +124,11 @@ local function model_OnUpdate(self, elapsed)
 		self:TryOn(6836)
 		self:TryOn(2955)
 		self:TryOn(3935)
-		if not full_body then
-			self:SetCamera(0)
-		end
+		self:SetPortraitZoom(full_body and 0 or 1)
 	elseif style == "three_dimensional" then
 		if not frame.Portrait.falling_back then
 			self:SetUnit(frame.unit)
-			if not full_body then
-				-- For portrait mode set the models camera to the 0 preset.
-				-- Note: Full body is technically preset 1, but under no circumstances
-				-- should we directly set it.  The camera will already be set to preset
-				-- 1 and doing it ourselves causes some models to show up as just a blob.
-				self:SetCamera(0)
-			end
+			self:SetPortraitZoom(full_body and 0 or 1)
 		else
 			self:SetModelScale(4.25)
 			self:SetPosition(0, 0, -1.5)
@@ -171,6 +163,7 @@ end
 function PitBull4_Portrait:UpdateFrame(frame)
 	local layout_db = self:GetLayoutDB(frame)
 	local style = layout_db.style
+	local side = layout_db.side
 	local pirate = pirate_day and self.db.profile.global.pirate
 	local falling_back = false
 	
@@ -198,7 +191,11 @@ function PitBull4_Portrait:UpdateFrame(frame)
 	
 	local portrait = frame.Portrait
 	
-	if portrait and portrait.style ~= style then
+	-- rebuild the portrait if:
+	-- the style changes - model frame will be a different type
+	-- the effective scale cahnges - work around blizzard bug not updating zoom when scale changes.
+	-- the side changes - work around similar blizzard bug not updating zoom when frame changes shape.
+	if portrait and (portrait.style ~= style or portrait.effective_scale ~= portrait:GetEffectiveScale() or portrait.side ~= side) then
 		self:ClearFrame(frame)
 		portrait = nil
 	end
@@ -212,6 +209,7 @@ function PitBull4_Portrait:UpdateFrame(frame)
 		portrait:SetHeight(60)
 		portrait.height = 4
 		portrait.style = style
+		portrait.side = side
 	
 		if style == "pirate" then
 			local model = PitBull4.Controls.MakeDressUpModel(frame)
@@ -233,6 +231,8 @@ function PitBull4_Portrait:UpdateFrame(frame)
 		portrait.bg = bg
 		bg:SetAllPoints(portrait)
 		bg:SetTexture(unpack(layout_db.color))
+		
+		portrait.effective_scale = portrait:GetEffectiveScale()
 	end
 	
 	if portrait.guid == frame.guid and guid_demanding_update ~= frame.guid then
@@ -261,7 +261,7 @@ function PitBull4_Portrait:UpdateFrame(frame)
 	elseif style == "blank" then
 		portrait.texture:SetTexture("")
 	else -- class	
-		local class
+		local class, _
 		if unit then
 			_, class = UnitClass(unit)
 		end

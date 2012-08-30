@@ -31,6 +31,6 @@ L["SECONDARY_SPEC"] = "Secundaria"
 L["SHOW_HIDE_MINIMAP"] = "Mostrar/ocultar icono en el minimapa"
 L["SWITCH_GEAR_TOO"] = "Cambiar de equipación también"
 L["SWITCH_TO"] = "Cambiar a"
-L["TOOLTIP_TIPS"] = "%sClick izquierdo:%s Cambiar de especialización y equipo si está permitido\n%sClick derecho:%s Muestra el menú de configuración";
+L["TOOLTIP_TIPS"] = "%sClick izquierdo:%s Cambiar de especialización y equipo si está permitido\n%sClick derecho:%s Muestra el menú de configuración"
 L["WITH_GEAR_SET"] = "Con equipación"
 end

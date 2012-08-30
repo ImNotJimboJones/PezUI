@@ -1,3 +1,4 @@
+local _;
 VUHDO_MM_SETTINGS = { };
 local VUHDO_MENU_UNIT = nil;
 
@@ -135,9 +136,9 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	end
 
 	local tName = VUHDO_RAID[VUHDO_MENU_UNIT]["name"];
+	local tUniqueBuffs, _ = VUHDO_getAllUniqueSpells();
 
 	if (aLevel > 1) then
-		local tUniqueBuffs, _ = VUHDO_getAllUniqueSpells();
 		local tBuffName;
 
 		for _, tBuffName in pairs(tUniqueBuffs) do
@@ -216,8 +217,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	end
 
 	-- Unique Spells
-	local tUniques, _ = VUHDO_getAllUniqueSpells();
-	if (#tUniques > 0) then
+	if (#tUniqueBuffs > 0) then
 		VUHDO_playerTargetAddTitle();
 
 		tInfo = UIDropDownMenu_CreateInfo();
@@ -427,9 +427,5 @@ end
 
 --
 function VUHDO_initShowMinimap()
-	if (VUHDO_CONFIG["SHOW_MINIMAP"]) then
-		VuhDoMinimapButton:Show();
-	else
-		VuhDoMinimapButton:Hide();
-	end
+	VuhDoMinimapButton:SetShown(VUHDO_CONFIG["SHOW_MINIMAP"]);
 end

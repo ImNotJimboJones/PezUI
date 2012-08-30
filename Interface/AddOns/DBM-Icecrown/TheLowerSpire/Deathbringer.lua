@@ -21,18 +21,18 @@ local warnFrenzySoon		= mod:NewAnnounce("WarnFrenzySoon", 2, 72737, mod:IsTank()
 local warnAddsSoon			= mod:NewPreWarnAnnounce(72173, 10, 3)
 local warnAdds				= mod:NewSpellAnnounce(72173, 4)
 local warnFrenzy			= mod:NewSpellAnnounce(72737, 2, nil, mod:IsTank() or mod:IsHealer())
-local warnBloodNova			= mod:NewSpellAnnounce(73058, 2)
-local warnMark 				= mod:NewAnnounce("warnMark", 4, 72444)
-local warnBoilingBlood		= mod:NewTargetAnnounce(72441, 2, nil, mod:IsHealer())
+local warnBloodNova			= mod:NewSpellAnnounce(72378, 2)
+local warnMark 				= mod:NewAnnounce("warnMark", 4, 72293)
+local warnBoilingBlood		= mod:NewTargetAnnounce(72385, 2, nil, mod:IsHealer())
 local warnRuneofBlood		= mod:NewTargetAnnounce(72410, 3, nil, mod:IsTank() or mod:IsHealer())
 
-local specwarnMark			= mod:NewSpecialWarningTarget(72444, false)
+local specwarnMark			= mod:NewSpecialWarningTarget(72293, false)
 local specwarnRuneofBlood	= mod:NewSpecialWarningTarget(72410, mod:IsTank())
 
 local timerCombatStart		= mod:NewTimer(48, "TimerCombatStart", 2457)
 local timerRuneofBlood		= mod:NewNextTimer(20, 72410, nil, mod:IsTank() or mod:IsHealer())
-local timerBoilingBlood		= mod:NewNextTimer(15.5, 72441)
-local timerBloodNova		= mod:NewNextTimer(20, 73058)
+local timerBoilingBlood		= mod:NewNextTimer(15.5, 72385)
+local timerBloodNova		= mod:NewNextTimer(20, 72378)
 local timerCallBloodBeast	= mod:NewNextTimer(40, 72173)
 
 local enrageTimer			= mod:NewBerserkTimer(480)
@@ -94,7 +94,7 @@ do	-- add the additional Rune Power Bar
 			last = math.floor(UnitPower("focus")/UnitPowerMax("focus") * 100)
 			return last
 		end
-		for i = 0, GetNumRaidMembers(), 1 do
+		for i = 0, DBM:GetGroupMembers(), 1 do
 			local unitId = ((i == 0) and "target") or "raid"..i.."target"
 			local guid = UnitGUID(unitId)
 			if mod:GetCIDFromGUID(guid) == 37813 then
@@ -154,7 +154,7 @@ do
 	
 	mod:RegisterOnUpdateHandler(function(self)
 		if self.Options.BeastIcons and (DBM:GetRaidRank() > 0 and not (iconsSet == 5 and self:IsDifficulty("normal25", "heroic25") or iconsSet == 2 and self:IsDifficulty("normal10", "heroic10"))) then
-			for i = 1, GetNumRaidMembers() do
+			for i = 1, DBM:GetGroupMembers() do
 				local uId = "raid"..i.."target"
 				local guid = UnitGUID(uId)
 				if beastIcon[guid] then

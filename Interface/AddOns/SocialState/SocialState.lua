@@ -327,7 +327,7 @@ local function Entry_OnMouseUp(frame, info, button)
 		-- Invite to group/raid
 		if IsAltKeyDown() then
 			if i_type == "realid" then
-				local presenceID, givenName, surname, toonName, toonID = BNGetFriendInfo(BNGetFriendIndex(presence_id))
+				local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID = BNGetFriendInfo(BNGetFriendIndex(presence_id))
 				BNInviteFriend(toonID)
 				return
 			else
@@ -363,7 +363,9 @@ local function Entry_OnMouseUp(frame, info, button)
 			end
 		end
 		-- Send a tell to player
-		SetItemRef("player:"..full_name, "|Hplayer:"..full_name.."|h["..full_name.."|h", "LeftButton")
+			local edit_box = _G.ChatEdit_ChooseBoxForSend()
+			_G.ChatEdit_ActivateChat(edit_box)
+			edit_box:Insert("/w "..full_name.." ")
 	elseif button == "RightButton" then
 		-- Edit Guild Officer Notes
 		if IsControlKeyDown() then
@@ -505,11 +507,11 @@ function LDB.OnEnter(self)
 						local fcolor
 						local status = ""
 
-						local _, _, _, _, _, _, isOnline, lastOnline, isAFK, isDND, broadcast, note = BNGetFriendInfoByID(presenceID)
+						local _, _, _, _, _, _, _, isOnline, lastOnline, isAFK, isDND, broadcast, note = BNGetFriendInfoByID(presenceID)
 						local _, toonName, client, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetFriendToonInfo(i, toonidx)
 
 						if faction then
-							if faction == 0 then
+							if faction == "Horde" then
 								fcolor = FACTION_COLOR_HORDE
 							else
 								fcolor = FACTION_COLOR_ALLIANCE
@@ -528,7 +530,7 @@ function LDB.OnEnter(self)
 						
 						table.insert(realid_table, {
 							GIVENNAME = givenName,
-							SURNAME = surname,
+							SURNAME = surname or "",
 							LEVEL = level,
 							CLASS = class,
 							FCOLOR = fcolor,
@@ -565,7 +567,7 @@ function LDB.OnEnter(self)
 						string.format("|cff%s%s",CLASS_COLORS[player["CLASS"]] or "B8B8B8", player["TOONNAME"] .. "|r")..
 						(inGroup(player["TOONNAME"]) and GROUP_CHECKMARK or ""))
 					line = tooltip:SetCell(line, 4,
-						"|cff82c5ff" .. player["GIVENNAME"] .. " " .. player["SURNAME"] .. "|r" .. broadcast_flag)
+						"|cff82c5ff" .. player["GIVENNAME"] .. "|r" .. broadcast_flag)
 
 					if player["CLIENT"] == "WoW" then
 						line = tooltip:SetCell(line, 5, player["ZONENAME"])
@@ -585,12 +587,12 @@ function LDB.OnEnter(self)
 						line = tooltip:SetCell(line, 7, player["NOTE"])
 					end
 
-					tooltip:SetLineScript(line, "OnMouseUp", Entry_OnMouseUp, string.format("realid:%s:%s %s:%d", player["TOONNAME"], player["GIVENNAME"], player["SURNAME"], player["PRESENCEID"]))
+					tooltip:SetLineScript(line, "OnMouseUp", Entry_OnMouseUp, string.format("realid:%s:%s:%d", player["TOONNAME"], player["GIVENNAME"], player["PRESENCEID"]))
 
 					if SocialStateDB.expand_realID and player["BROADCAST_TEXT"] ~= "" then
 						line = tooltip:AddLine()
 						line = tooltip:SetCell(line, 1, BROADCAST_ICON .. " |cff7b8489" .. player["BROADCAST_TEXT"] .. "|r", "LEFT", 0)
-						tooltip:SetLineScript(line, "OnMouseUp", Entry_OnMouseUp, string.format("realid:%s:%s %s:%d", player["TOONNAME"], player["GIVENNAME"], player["SURNAME"], player["PRESENCEID"]))
+						tooltip:SetLineScript(line, "OnMouseUp", Entry_OnMouseUp, string.format("realid:%s:%s:%d", player["TOONNAME"], player["GIVENNAME"], player["PRESENCEID"]))
 					end
 				end
 				tooltip:AddLine(" ")

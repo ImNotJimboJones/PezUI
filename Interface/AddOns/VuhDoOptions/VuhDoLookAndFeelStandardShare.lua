@@ -1,3 +1,4 @@
+local _;
 
 VUHDO_BUDDY_NAME_MODEL = { };
 VUHDO_SELECTED_COMBO_BUDDY = "";

@@ -7,7 +7,7 @@ Licensed under a Creative Commons "Attribution Non-Commercial Share Alike" Licen
 --]]
 
 local MAJOR_VERSION = "LibFishing-1.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 587 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 602 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -382,9 +382,8 @@ local slotinfo = {
 	[16] = { name = "Trinket1Slot", tooltip = TRINKET1SLOT },
 	[17] = { name = "MainHandSlot", tooltip = MAINHANDSLOT },
 	[18] = { name = "SecondaryHandSlot", tooltip = SECONDARYHANDSLOT },
-	[19] = { name = "RangedSlot", tooltip = RANGEDSLOT },
 }
-for i=0,19,1 do
+for i=0,18,1 do
 	local sn = slotinfo[i].name;
 	slotinfo[i].id, _ = GetInventorySlotInfo(sn);
 end

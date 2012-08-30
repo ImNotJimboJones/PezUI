@@ -9,6 +9,7 @@ frame:Hide()
 local _G, opt = _G
 local XSkin = LibStub('X-Skin')
 
+local isMOP = tonumber(select(4,GetBuildInfo())) >= 50000
 -- Default options
 local defaults = {
 	frame_scale = 1.0,
@@ -168,40 +169,6 @@ end
 
 
 
------------------------
--- Soulbind scanning --
------------------------
-local function GetBindOn(item)
-	if not XLootTooltip then CreateFrame('GameTooltip', 'XLootTooltip', UIParent, 'GameTooltipTemplate') end
-	local tt = XLootTooltip
-	tt:SetOwner(UIParent, 'ANCHOR_NONE')
-	tt:SetHyperlink(item)
-	local t = (GetCVar('colorblindMode') == '1' and XLootTooltipTextLeft3 or XLootTooltipTextLeft2):GetText()
-	if XLootTooltip:NumLines() > 1 and t then
-		tt:Hide()
-		if t == ITEM_BIND_ON_PICKUP then
-			return 'pickup'
-		elseif t == ITEM_BIND_ON_EQUIP then
-			return 'equip'
-		elseif t == ITEM_BIND_ON_USE then
-			return 'use'
-		end
-	end
-	tt:Hide()
-	return nil
-end
-
-local bop, boe, bou
-local function BindText(bind)
-	if not bop then
-		bop = ('|cffff4422%s|r '):format(L.bind_on_pickup_short)
-		boe = ('|cff44ff44%s|r '):format(L.bind_on_equip_short)
-		bou = ('|cff2244ff%s|r '):format(L.bind_on_use_short)
-	end
-	local out = bind == 'pickup' and bop or bind == 'equip' and boe or bind == 'use' and bou or ''
-	return out
-end
-
 --------------
 -- Link-all --
 --------------
@@ -219,7 +186,7 @@ do
 
 		local linkthreshold, reached = opt.linkall_threshold
 		for i=1, GetNumLootItems() do
-			if LootSlotIsItem(i) then
+			if GetLootSlotType(i) == LOOT_SLOT_ITEM then 
 				local texture, item, quantity, rarity = GetLootSlotInfo(i)
 				local link = GetLootSlotLink(i)
 				if rarity >= linkthreshold then
@@ -362,9 +329,10 @@ do
 	do
 		local function show(self)
 			local f
-			if LootSlotIsItem(self.slot) then
+			local type = GetLootSlotType(self.slot)
+			if type == LOOT_SLOT_ITEM then
 				f = GameTooltip.SetLootItem
-			elseif LootSlotIsCurrency(self.slot) then
+			elseif type == LOOT_SLOT_CURRENCY then
 				f = GameTooltip.SetLootCurrency
 			else
 				return nil
@@ -405,10 +373,24 @@ do
 	end
 
 	local function OnClick(self, button)
-		if IsModifiedClick() then
+		if
+			QDKP2_IsManagingSession
+			and IsAltKeyDown()
+			and button == 'LeftButton'
+			and GetLootSlotLink(self.slot)
+			and QDKP2_IsManagingSession()
+			and self.quality > GetLootThreshold()
+			and (not QDKP2_BidM_isBidding())
+		then
+			pcall(QDKP2_BidM_StartBid, self.item)
+			if QDKP2GUI_Roster then
+				QDKP2GUI_Roster:ChangeList('bid')
+				QDKP2GUI_Roster:Show()
+			end
+		elseif IsModifiedClick() then
 			HandleModifiedItemClick(GetLootSlotLink(self.slot))
 		else
-			pcall(LootButton_OnClick, self, button)
+ 			pcall(LootButton_OnClick, self, button)
 		end
 	end
 	
@@ -444,6 +426,11 @@ do
 		end
 	end
 
+	-- Bind texts
+	bop = ('|cffff4422%s|r '):format(L.bind_on_pickup_short)
+	boe = ('|cff44ff44%s|r '):format(L.bind_on_equip_short)
+	bou = ('|cff2244ff%s|r '):format(L.bind_on_use_short)
+
 	-- Update slot with loot
 	local function Update(self, is_item, icon, name, link, quantity, quality, locked, isQuestItem, questId, isActive)
 		local r, g, b, hex
@@ -466,7 +453,23 @@ do
 			end
 			
 			if opt.loot_texts_bind then
-				text_bind = BindText(GetBindOn(link))
+				local bind
+				if not XLootTooltip then CreateFrame('GameTooltip', 'XLootTooltip', UIParent, 'GameTooltipTemplate') end
+				local tt = XLootTooltip
+				tt:SetOwner(UIParent, 'ANCHOR_NONE')
+				tt:SetHyperlink(link)
+				local t = (GetCVar('colorblindMode') == '1' and XLootTooltipTextLeft3 or XLootTooltipTextLeft2):GetText()
+				if XLootTooltip:NumLines() > 1 and t then
+					tt:Hide()
+					if t == ITEM_BIND_ON_PICKUP then
+						text_bind = bop
+					elseif t == ITEM_BIND_ON_EQUIP then
+						text_bind = boe
+					elseif t == ITEM_BIND_ON_USE then
+						text_bind = bou
+					end
+				end
+				tt:Hide()
 			end
 			
 		-- Currency
@@ -536,7 +539,7 @@ do
 		-- Create frames
 		local row = CreateFrame('Button', fake and nil or frame_name, frame)
 		local item = CreateFrame('Frame', nil, row)
-		local tex = item:CreateTexture(nil, 'BACKGROUND')
+		local tex = item:CreateTexture(fake and nil or frame_name..'IconTexture', 'BACKGROUND')
 		local bang = item:CreateTexture(nil, 'OVERLAY')
 
 		-- Create fontstrings
@@ -712,8 +715,8 @@ do
 		if show == 'auto' then
 			if default == 'SAY' or
 				((default == 'GUILD' or default == 'OFFICER') and IsInGuild()) or
-				((default == 'RAID' or default == 'RAID_WARNING') and GetNumRaidMembers() > 0) or
-				(default == 'PARTY' and GetNumPartyMembers() > 0)
+				((default == 'RAID' or default == 'RAID_WARNING') and IsInRaid()) or
+				(default == 'PARTY' and IsInGroup())
 			then
 				now = true
 			end
@@ -868,7 +871,8 @@ function XLootFrame:Update()
 	local rows, slots, slots_index = self.rows, wipe(self.slots), wipe(self.slots_index)
 	
 	-- Autolooting options
-	local party = (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0)
+	local party
+	local party = IsInGroup()
 	local auto_coin, auto_quest, auto_space = self.opt.autoloot_coin, self.opt.autoloot_quest
 	auto_coin = auto_coin == 'always' or (auto_coin == 'solo' and not party)
 	auto_quest = auto_quest == 'always' or (auto_quest == 'solo' and not party)
@@ -877,11 +881,12 @@ function XLootFrame:Update()
 	local max_quality, max_width, our_slot, slot = 0, 0, 0
 	for slot = 1, numloot do
 		local _, icon, name, quantity, quality, locked, isQuestItem, questId, isActive = pcall(GetLootSlotInfo, slot)
+		-- local texture, item, quantity, quality, locked, isQuestItem, questId, isActive = GetLootSlotInfo(slot)
 		if icon then -- Occasionally WoW will open loot with empty or invalid slots
 			local looted = false
 			
 			-- Autolooting coin
-			if auto_coin and LootSlotIsCoin(slot) then
+			if auto_coin and GetLootSlotType(slot) == LOOT_SLOT_MONEY then
 				LootSlot(slot)
 				looted = true
 				
@@ -926,7 +931,7 @@ function XLootFrame:Update()
 				
 				--local icon, name, quantity, quality, locked, isQuestItem, questId, isActive = GetLootSlotInfo(slot)
 				-- Row data
-				local is_item, link = LootSlotIsItem(slot)
+				local is_item, link = (GetLootSlotType(slot) == 1)
 				if is_item then
 					link = GetLootSlotLink(slot)
 				end
@@ -1042,6 +1047,18 @@ function addon:OnLoad()
 		LootFrame:UnregisterEvent(e)
 	end
 	XLootFrame:SetScript('OnEvent', function(self, e, ...) if events[e] then events[e](self, ...) end end)
+	XLootFrame:SetScript('OnHide', function(self) pcall(LootFrame_OnHide) end)
+	tinsert(UISpecialFrames,"XLootFrame")
+	if isMOP then
+		MasterLooterFrame:SetScript('OnShow', 
+		function(self)
+			if XLootFrame:IsVisible() then 
+				MasterLooterFrame:SetFrameLevel(XLootFrame:GetFrameLevel()+2)
+				MasterLooterFrame:ClearAllPoints()
+				MasterLooterFrame:SetPoint("BOTTOM",XLootFrame,"TOP")
+			end
+		end)
+	end
 	
 	-- Option frame
 	LibStub('X-Config'):Setup(addon, 'XLootOptionPanel')
@@ -1164,3 +1181,10 @@ local function option_handler(msg)
 end
 SLASH_XLOOT1 = '/xloot'
 SlashCmdList['XLOOT'] = option_handler
+
+
+--[[
+Notes:
+LootSlotHasItem() -- MoP generic 'check if slot has any loot', meaning item/coin/currency etc
+LootSlotIsCoin(slot) etc are replaced by GetLootSlotType(slot) == LOOT_SLOT_* checks
+]]

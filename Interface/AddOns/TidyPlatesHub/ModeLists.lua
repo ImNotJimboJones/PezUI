@@ -11,6 +11,17 @@
 
 TidyPlatesHubModes = {}
 				
+-- [[ 6.7 Testing				
+TidyPlatesHubModes.ArtStyles = {{ text = "Blizzard", notCheckable = 1 } ,}
+
+TidyPlatesHubModes.ArtModes = {
+	{ text = "By Elite", notCheckable = 1 } ,
+	{ text = "By Enemy", notCheckable = 1 } ,
+	{ text = "By NPC", notCheckable = 1 } ,
+}
+
+--]]
+
 TidyPlatesHubModes.StyleModes = { 											
 				{ text = "Default (Health bars always visible)", notCheckable = 1, } ,
 				{ text = "|cffffaa33Headline Mode (No Health Bar)",	notCheckable = 1, } ,
@@ -22,7 +33,7 @@ TidyPlatesHubModes.StyleModes = {
 				{ text = "Bar on Current Target; |cffffaa33Headline on other units", notCheckable = 1 } , 
 				{ text = "Bars by Low Threat/Party Aggro (Tank Mode) |cffffaa33Headline on other units", notCheckable = 1 } , 
 				--{ text = "Bars on Enemy Healers |cffffaa33Headline on other units", notCheckable = 1 } , 
-				}						
+			}						
 
 TidyPlatesHubModes.TextModes = { { text = "None", notCheckable = 1 },
 				{ text = "Percent Health", notCheckable = 1 } ,
@@ -33,18 +44,19 @@ TidyPlatesHubModes.TextModes = { { text = "None", notCheckable = 1 },
 				{ text = "Approximate Health", notCheckable = 1 } ,
 				{ text = "Level", notCheckable = 1 } ,
 				{ text = "Level and Health", notCheckable = 1 } ,
-				}
+				--{ text = "Health and Power", notCheckable = 1 } ,
+			}
 				
 TidyPlatesHubModes.RangeModes = { { text = "9 yards"} , 
 				{ text = "15 yards" } ,
 				{ text = "28 yards" } ,
 				{ text = "40 yards" } ,
-				}
+			}
 				
 TidyPlatesHubModes.DebuffStyles = { 
 				{ text = "Wide", notCheckable = 1 } ,
 				{ text = "Compact (May require UI reload to take effect)", notCheckable = 1 } , 						
-				}		
+			}		
 				
 TidyPlatesHubModes.DebuffModes = { 
 				{ text = "Show All", notCheckable = 1 } ,
@@ -52,7 +64,13 @@ TidyPlatesHubModes.DebuffModes = {
 				{ text = "Show All Mine ", notCheckable = 1 } , 
 				{ text = "Show My... ", notCheckable = 1 } ,
 				{ text = "By Prefix...", notCheckable = 1 } ,						
-				}
+			}
+				
+TidyPlatesHubModes.AuraWidgetModes = { 
+				{ text = "Show My Debuffs", notCheckable = 1 } ,
+				{ text = "Show My Buffs ", notCheckable = 1 } , 
+				{ text = "Specific Auras...", notCheckable = 1 } , 					
+			}
 
 TidyPlatesHubModes.ScaleModes = {
 				{ text = "None", notCheckable = 1 } ,

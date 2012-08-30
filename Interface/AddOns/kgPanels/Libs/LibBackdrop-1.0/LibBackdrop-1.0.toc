@@ -6,7 +6,7 @@
 ## X-Website: http://www.wowace.com
 ## X-Category: Library
 ## X-License: All Rights Reserved
-## X-Curse-Packaged-Version: 1.1.1-1-ge6b887f
+## X-Curse-Packaged-Version: 1.1.2
 ## X-Curse-Project-Name: LibBackdrop-1.0
 ## X-Curse-Project-ID: libbackdrop-1-0
 ## X-Curse-Repository-ID: wow/libbackdrop-1-0/mainline

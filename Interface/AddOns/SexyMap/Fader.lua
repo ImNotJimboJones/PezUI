@@ -1,30 +1,28 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local modName = "Fader"
-local mod = addon.SexyMap:NewModule(modName)
-local L = addon.L
-local db
+local _, sm = ...
+sm.fader = {}
+
+local mod = sm.fader
+local L = sm.L
 
 local options = {
 	type = "group",
-	name = modName,
+	name = L["Fader"],
 	childGroups = "tab",
-	disabled = function() return not db.enabled end,
+	disabled = function() return not mod.db.enabled end,
 	args = {
 		enabled = {
 			type = "toggle",
 			name = L["Enable Minimap Fader"],
 			get = function()
-				return db.enabled
+				return mod.db.enabled
 			end,
 			set = function(info, v)
-				db.enabled = v
+				mod.db.enabled = v
 				if v then
-					mod:Enable()
+					Minimap:SetAlpha(mod.db.normalOpacity)
 				else
 					Minimap:SetAlpha(1)
-					mod:Disable()
 				end
 			end,
 			disabled = false,
@@ -39,10 +37,10 @@ local options = {
 			step = 0.01,
 			isPercent = true,
 			get = function()
-				return db.normalOpacity
+				return mod.db.normalOpacity
 			end,
 			set = function(info, v)
-				db.normalOpacity = v
+				mod.db.normalOpacity = v
 				Minimap:SetAlpha(v)
 			end,
 			order = 2
@@ -55,35 +53,33 @@ local options = {
 			step = 0.01,
 			isPercent = true,
 			get = function()
-				return db.hoverOpacity
+				return mod.db.hoverOpacity
 			end,
 			set = function(info, v)
-				db.hoverOpacity = v
+				mod.db.hoverOpacity = v
 			end,
 			order = 3
 		},
 	}
 }
 
-function mod:OnInitialize()
-	local defaults = {
-		profile = {
+function mod:OnInitialize(profile)
+	if type(profile.fader) ~= "table" then
+		profile.fader = {
 			enabled = false,
 			hoverOpacity = 0.25,
 			normalOpacity = 1
 		}
-	}
-	self.db = parent.db:RegisterNamespace(modName, defaults)
-	parent:RegisterModuleOptions(modName, options, L["Fader"])
-	db = self.db.profile
-	self:SetEnabledState(db.enabled)
-
-	parent.RegisterCallback(self, "SexyMap_NewFrame")
+	end
+	self.db = profile.fader
 end
 
 function mod:OnEnable()
-	db = self.db.profile
-	Minimap:SetAlpha(db.normalOpacity)
+	sm.core:RegisterModuleOptions("Fader", options, L["Fader"])
+
+	if mod.db.enabled then
+		Minimap:SetAlpha(mod.db.normalOpacity)
+	end
 end
 
 do
@@ -92,44 +88,49 @@ do
 	animGroup:SetScript("OnFinished", function()
 		-- Minimap or Minimap icons including nil checks to compensate for other addons
 		local focus = GetMouseFocus()
-		if focus and focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap") then
-			Minimap:SetAlpha(db.hoverOpacity)
+		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
+			Minimap:SetAlpha(mod.db.hoverOpacity)
 		else
-			Minimap:SetAlpha(db.normalOpacity)
+			Minimap:SetAlpha(mod.db.normalOpacity)
 		end
 	end)
 	anim:SetOrder(1)
-	anim:SetDuration(0.5)
+	anim:SetDuration(0.3)
 
 	local fadeStop -- Use a variable to prevent fadeout/in when moving the mouse around minimap/icons
 
 	local OnEnter = function()
-		if db.enabled then
+		if mod.db.enabled then
 			if fadeStop then return end
 
+			local delayed = anim:IsDelaying()
 			animGroup:Stop()
-			Minimap:SetAlpha(db.normalOpacity)
-			anim:SetChange(db.hoverOpacity-db.normalOpacity)
-			animGroup:Play()
+			if not delayed then
+				Minimap:SetAlpha(mod.db.normalOpacity)
+				anim:SetStartDelay(0)
+				anim:SetChange(mod.db.hoverOpacity-mod.db.normalOpacity)
+				animGroup:Play()
+			end
 		end
 	end
 	local OnLeave = function()
-		if db.enabled then
+		if mod.db.enabled then
 			local focus = GetMouseFocus() -- Minimap or Minimap icons including nil checks to compensate for other addons
-			if focus and focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap") then
+			if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 				fadeStop = true
 				return
 			end
 			fadeStop = nil
 
 			animGroup:Stop()
-			Minimap:SetAlpha(db.hoverOpacity)
-			anim:SetChange(db.normalOpacity-db.hoverOpacity)
+			Minimap:SetAlpha(mod.db.hoverOpacity)
+			anim:SetStartDelay(1)
+			anim:SetChange(mod.db.normalOpacity-mod.db.hoverOpacity)
 			animGroup:Play()
 		end
 	end
 
-	function mod:SexyMap_NewFrame(_, f)
+	function mod:NewFrame(f)
 		f:HookScript("OnEnter", OnEnter)
 		f:HookScript("OnLeave", OnLeave)
 	end

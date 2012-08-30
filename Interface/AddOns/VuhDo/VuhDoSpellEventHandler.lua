@@ -1,3 +1,4 @@
+local _;
 --
 local smatch = string.match;
 
@@ -90,7 +91,7 @@ function VUHDO_spellcastSucceeded(aUnit, aSpellName)
 
 	if (VUHDO_ACTIVE_HOTS[aSpellName]) then
 		VUHDO_updateAllHoTs();
-		VUHDO_updateAllCyclicBouquets("player");
+		VUHDO_updateAllCyclicBouquets(true);
 	end
 
 	if (VUHDO_SPELL_ID.ACTIVATE_FIRST_TALENT == aSpellName) then
@@ -126,9 +127,9 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 		if (VUHDO_CONFIG["RES_IS_SHOW_TEXT"]) then
 			local tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName);
 
-			if (GetNumRaidMembers() > 0) then
+			if (GetNumGroupMembers() > 0) then
 				SendChatMessage(tText, "RAID", nil, nil);
-			elseif (GetNumPartyMembers() > 0) then
+			elseif (GetNumSubgroupMembers() > 0) then
 				SendChatMessage(tText, "PARTY", nil, nil);
 			else
 				SendChatMessage(tText, "WHISPER", nil, aTargetName);

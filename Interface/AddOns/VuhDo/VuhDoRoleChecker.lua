@@ -4,7 +4,7 @@ local VUHDO_INSPECTED_ROLES = { };
 local VUHDO_DF_TOOL_ROLES = { };
 local VUHDO_INSPECT_TIMEOUT = 5;
 
-local tPoints1, tPoints2, tPoints3, tRank;
+--local tPoints1, tPoints2, tPoints3, tRank;
 VUHDO_NEXT_INSPECT_UNIT = nil;
 VUHDO_NEXT_INSPECT_TIME_OUT = nil;
 
@@ -14,8 +14,8 @@ local twipe = table.wipe;
 local CheckInteractDistance = CheckInteractDistance;
 local UnitIsUnit = UnitIsUnit;
 local NotifyInspect = NotifyInspect;
-local GetActiveTalentGroup = GetActiveTalentGroup;
-local GetTalentTabInfo = GetTalentTabInfo;
+local GetActiveSpecGroup = GetActiveSpecGroup;
+local GetSpecializationInfo = GetSpecializationInfo;
 local ClearInspectPlayer = ClearInspectPlayer;
 local UnitBuff = UnitBuff;
 local UnitStat = UnitStat;
@@ -25,7 +25,7 @@ local UnitLevel = UnitLevel;
 local UnitPowerType = UnitPowerType;
 local VUHDO_isUnitInModel;
 local pairs = pairs;
-local _ = _;
+local _;
 
 local VUHDO_MANUAL_ROLES;
 local VUHDO_RAID_NAMES;
@@ -147,6 +147,9 @@ local tActiveTree;
 local tIsInspect;
 local tInfo;
 local tClassId;
+local tRole;
+local tTreeNum;
+local tTreeId;
 function VUHDO_inspectLockRole()
 	tInfo = VUHDO_RAID[VUHDO_NEXT_INSPECT_UNIT];
 
@@ -155,73 +158,69 @@ function VUHDO_inspectLockRole()
 		return;
 	end
 
-	tIsInspect = "player" ~= VUHDO_NEXT_INSPECT_UNIT;
+	if ("player" == VUHDO_NEXT_INSPECT_UNIT) then
+		tActiveTree = GetSpecialization();
 
-	tActiveTree = GetActiveTalentGroup(tIsInspect);
-	_, _, _, _, tPoints1 = GetTalentTabInfo(1, tIsInspect, false, tActiveTree);
-	_, _, _, _, tPoints2 = GetTalentTabInfo(2, tIsInspect, false, tActiveTree);
-	_, _, _, _, tPoints3 = GetTalentTabInfo(3, tIsInspect, false, tActiveTree);
-
-	tClassId = tInfo["classId"];
-
-	if (VUHDO_ID_PRIESTS == tClassId) then
-		-- 1 = Disc, 2 = Holy, 3 = Shadow
-		if (tPoints1 > tPoints3	or tPoints2 > tPoints3)	 then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
-		else
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 62; -- VUHDO_ID_RANGED_DAMAGE
+		if (tActiveTree == nil) then
+			VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_UNDEFINED;
+			VUHDO_NEXT_INSPECT_UNIT = nil;
+			return;
 		end
+		tTreeId, _, _, _, _, tRole = GetSpecializationInfo(tActiveTree, false, false);
 
-	elseif (VUHDO_ID_WARRIORS == tClassId) then
-		-- 1 = Waffen, 2 = Furor, 3 = Schutz
-		if (tPoints1 > tPoints3	or tPoints2 > tPoints3)	 then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
-		else
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 60; -- VUHDO_ID_MELEE_TANK
-		end
+	else
+		tTreeId = GetInspectSpecialization(VUHDO_NEXT_INSPECT_UNIT);
+		tRole = GetSpecializationRoleByID(tTreeId);
+		--tTreeNum = GetSpecializationInfoByID(tTreeId);
+		--VUHDO_xMsg(VUHDO_NEXT_INSPECT_UNIT, GetSpecializationInfoByID(tTreeId));
+	end
 
-	elseif (VUHDO_ID_DRUIDS == tClassId) then
-		-- 1 = Gleichgewicht, 2 = Wilder Kampf, 3 = Wiederherstellung
-		if (tPoints1 > tPoints2 and tPoints1 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 62; -- VUHDO_ID_RANGED_DAMAGE
-		elseif(tPoints3 > tPoints2) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
-		else
-			-- "Natürliche Reaktion" geskillt => Wahrsch. Tank?
-			_, _, _, _, tRank, _, _, _ = GetTalentInfo(2, 18, tIsInspect, false, tActiveTree);
-			if (tRank > 0) then
-				VUHDO_INSPECTED_ROLES[tInfo["name"]] = 60; -- VUHDO_ID_MELEE_TANK
-			else
-				VUHDO_INSPECTED_ROLES[tInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
+	if ((tTreeId or 0) == 0) then
+		ClearInspectPlayer();
+		VUHDO_NEXT_INSPECT_UNIT = nil;
+		VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_UNDEFINED;
+		return;
+	end
+
+	--VUHDO_xMsg(VUHDO_NEXT_INSPECT_UNIT, tTreeId);
+
+	if ("HEALER" == tRole) then
+		VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_RANGED_HEAL;
+	elseif ("TANK" == tRole) then
+		VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_MELEE_TANK;
+	elseif ("DAMAGER" == tRole) then
+
+
+		tClassId = tInfo["classId"];
+		if (VUHDO_ID_WARRIORS == tClassId
+			or VUHDO_ID_ROGUES == tClassId
+			or VUHDO_ID_PALADINS == tClassId
+			or VUHDO_ID_MONKS == tClassId
+			or VUHDO_ID_DEATH_KNIGHT == tClassId) then
+
+			VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_MELEE_DAMAGE;
+
+		elseif (VUHDO_ID_SHAMANS == tClassId) then
+
+			if (263 == tTreeId) then
+				VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_MELEE_DAMAGE;
+			else -- 2
+				VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_RANGED_DAMAGE;
 			end
-		end
 
-	elseif (VUHDO_ID_PALADINS == tClassId) then
-		-- 1 = Heilig, 2 = Schutz, 3 = Vergeltung
-		if (tPoints1 > tPoints2 and tPoints1 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
-		elseif (tPoints2 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 60; -- VUHDO_ID_MELEE_TANK
-		else
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
-		end
+		elseif (VUHDO_ID_DRUIDS == tClassId) then
 
-	elseif (VUHDO_ID_SHAMANS == tClassId) then
-		-- 1 = Elementar, 2 = Verstärker, 3 = Wiederherstellung
-		if (tPoints1 > tPoints2 and tPoints1 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 62; -- VUHDO_ID_RANGED_DAMAGE
-		elseif (tPoints2 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
+			if (103 == tTreeNum) then -- Feral
+				VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_MELEE_DAMAGE;
+			else -- 2
+				VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_RANGED_DAMAGE;
+			end
+
 		else
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 63; -- VUHDO_ID_RANGED_HEAL
+			VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_RANGED_DAMAGE;
 		end
-	elseif (VUHDO_ID_DEATH_KNIGHT == tClassId) then
-		-- 1 = Blut, 2 = Frost, 3 = Unheilig
-		if (tPoints1 > tPoints2 and tPoints1 > tPoints3) then
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 60; -- VUHDO_ID_MELEE_TANK
-		else
-			VUHDO_INSPECTED_ROLES[tInfo["name"]] = 61; -- VUHDO_ID_MELEE_DAMAGE
-		end
+	else
+		VUHDO_INSPECTED_ROLES[tInfo["name"]] = VUHDO_ID_UNDEFINED;
 	end
 
 	ClearInspectPlayer();
@@ -251,7 +250,8 @@ local function VUHDO_determineDfToolRole(anInfo)
 
 		if (anInfo["classId"] == VUHDO_ID_WARRIORS
 		or anInfo["classId"] == VUHDO_ID_PALADINS
-		or anInfo["classId"] == VUHDO_ID_DEATH_KNIGHT) then
+		or anInfo["classId"] == VUHDO_ID_DEATH_KNIGHT
+		or anInfo["classId"] == VUHDO_ID_MONKS) then
 			VUHDO_DF_TOOL_ROLES[tName] = VUHDO_ID_MELEE_DAMAGE;
 			tReturnRole = VUHDO_ID_MELEE_DAMAGE;
 		elseif (anInfo["classId"] == VUHDO_ID_PRIESTS) then
@@ -282,6 +282,7 @@ local tBuffExist;
 local tFixRole;
 local tIntellect, tStrength, tAgility;
 local tClassId, tClassRole, tName;
+local tLevel;
 function VUHDO_determineRole(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
 
@@ -307,7 +308,7 @@ function VUHDO_determineRole(aUnit)
 		return 60; -- VUHDO_ID_MELEE_TANK
 	end
 	-- Talent tree inspected?
-	if (VUHDO_INSPECTED_ROLES[tName] ~= nil) then
+	if ((VUHDO_INSPECTED_ROLES[tName] or VUHDO_ID_UNDEFINED) ~= VUHDO_ID_UNDEFINED) then
 		return VUHDO_INSPECTED_ROLES[tName];
 	end
 	-- Estimated role fixed?
@@ -316,7 +317,7 @@ function VUHDO_determineRole(aUnit)
 	end
 
 	if (29 == tClassId) then -- VUHDO_ID_DEATH_KNIGHT
-		_, _, tBuffExist = UnitBuff(aUnit, VUHDO_SPELL_ID.BUFF_FROST_PRESENCE);
+		_, _, tBuffExist = UnitBuff(aUnit, VUHDO_SPELL_ID.BUFF_BLOOD_PRESENCE);
 		if (tBuffExist) then
 			--VUHDO_FIX_ROLES[tName] = 60; -- VUHDO_ID_MELEE_TANK
 			return 60; -- VUHDO_ID_MELEE_TANK
@@ -352,10 +353,10 @@ function VUHDO_determineRole(aUnit)
 				VUHDO_FIX_ROLES[tName] = 62; -- VUHDO_ID_RANGED_DAMAGE
 				return 62; -- VUHDO_ID_RANGED_DAMAGE
 			else
-				_, _, tBuffExist = UnitBuff(aUnit, VUHDO_SPELL_ID.TREE_OF_LIFE);
+				--[[_, _, tBuffExist = UnitBuff(aUnit, VUHDO_SPELL_ID.TREE_OF_LIFE);
 				if (tBuffExist) then
 					VUHDO_FIX_ROLES[tName] = 63; -- VUHDO_ID_RANGED_HEAL
-				end
+				end]]
 
 				return 63; -- VUHDO_ID_RANGED_HEAL
 			end
@@ -369,7 +370,12 @@ function VUHDO_determineRole(aUnit)
 
 	elseif (23 == tClassId) then -- VUHDO_ID_PALADINS
 		_, tDefense = UnitDefense(aUnit);
-		tDefense = tDefense / UnitLevel(aUnit);
+		tLevel = UnitLevel(aUnit) or 0;
+		if (tLevel <= 0) then
+			return nil;
+		end
+
+		tDefense = tDefense / tLevel;
 
 		if (tDefense > 2) then
 			return 60; -- VUHDO_ID_MELEE_TANK

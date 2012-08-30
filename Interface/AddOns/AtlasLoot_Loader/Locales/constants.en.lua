@@ -1,4 +1,4 @@
--- $Id: constants.en.lua 3705 2012-03-02 22:25:53Z lag123 $
+-- $Id: constants.en.lua 3736 2012-08-14 18:31:11Z hegarol $
 --[[
 constants.en.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -247,9 +247,7 @@ if AL then
 	AL["ilvl 226"] = true;
 	AL["ilvl 245"] = true;
 	AL["ilvl 264"] = true;
-	AL["ilvl 378"] = true;
 	AL["ilvl 397"] = true;
-	AL["ilvl 410"] = true;
 	AL["Gladiator"] = true;
 	AL["Vengeful"] = true;
 	AL["Merciless"] = true;
@@ -270,6 +268,7 @@ if AL then
 	AL["Level 70"] = true;
 	AL["Level 80"] = true;
 	AL["Level 85"] = true;
+	AL["Level 90"] = true;
 	AL["|cffff0000(unsafe)"] = true;
 	AL["Misc"] = true;
 	AL["Rewards"] = true;
@@ -357,6 +356,7 @@ if AL then
 	AL["Tier 10 Set"] = true;
 	AL["Tier 11/12 Set"] = true;
 	AL["Tier 13 Set"] = true;
+	AL["Tier 14 Set"] = true;
 	AL["TCG Items"] = true; -- Trading Card Game Items
 
 	-- PvP Menu
@@ -532,6 +532,7 @@ if AL then
 	AL["Burning Crusade"] = true;
 	AL["Wrath of the Lich King"] = true;
 	AL["Cataclysm"] = true;
+	AL["Mists of Pandoria"] = true;
 	AL["Entrance"] = true;
 	AL["Dungeon Set 1"] = true;
 	AL["Dungeon Set 2"] = true;
@@ -678,7 +679,6 @@ if AL then
 
 	-- General titles
 	AL["Achievement"] = true;
-	AL["Promotional & Card Game"] = true;
 	AL["Dungeon"] = true;
 	AL["Outdoor"] = true;
 
@@ -942,6 +942,9 @@ if AL then
 	AL["Destruction"] = true;
 	AL["Tanking"] = true;
 	AL["DPS"] = true;
+	AL["Mistweaver"] = true;
+	AL["Brewmaster"] = true;
+	AL["Windwalker"] = true;
 
 	-- NPCs missing from BabbleBoss
 	AL["Trash Mobs"] = true;
@@ -1133,6 +1136,9 @@ if AL then
 	AL["Hidden Stash"] = true;
 	AL["The Cache of Madness"] = true;
 	AL["Stolen Present"] = true;
+	AL["Annual Pass"] = true;
+	AL["Scroll of Resurrection"] = true;
+	AL["Recruit-A-Friend"] = true;
 
 	-- Error Messages and warnings
 	AL["AtlasLoot Error!"] = true;

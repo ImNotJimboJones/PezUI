@@ -1,6 +1,6 @@
+local _;
 VUHDO_INTERNAL_TOGGLES = { };
 local VUHDO_INTERNAL_TOGGLES = VUHDO_INTERNAL_TOGGLES;
-
 local VUHDO_DEBUFF_ANIMATION = 0;
 
 --local VUHDO_EVENT_COUNT = 0;
@@ -120,7 +120,6 @@ local VUHDO_RELOAD_AFTER_BATTLE = false;
 local VUHDO_GCD_UPDATE = false;
 
 local VUHDO_RELOAD_PANEL_NUM = nil;
-local VUHDO_REFRESH_TOOLTIP_DELAY = 2.3;
 
 
 VUHDO_TIMERS = {
@@ -131,7 +130,7 @@ VUHDO_TIMERS = {
 	["RELOAD_ZONES"] = 3.45,
 	["UPDATE_CLUSTERS"] = 0,
 	["REFRESH_INSPECT"] = 2.1,
-	["REFRESH_TOOLTIP"] = VUHDO_REFRESH_TOOLTIP_DELAY,
+	["REFRESH_TOOLTIP"] = 2.3,
 	["UPDATE_AGGRO"] = 0,
 	["UPDATE_RANGE"] = 1,
 	["UPDATE_HOTS"] = 0.25,
@@ -173,14 +172,6 @@ function VUHDO_isVariablesLoaded()
 end
 
 
-
---
-function VUHDO_setTooltipDelay(aSecs)
-	VUHDO_REFRESH_TOOLTIP_DELAY = aSecs;
-end
-
-
-
 --
 function VUHDO_initBuffs()
 	VUHDO_initBuffsFromSpellBook();
@@ -192,7 +183,7 @@ end
 
 --
 function VUHDO_initTooltipTimer()
-	VUHDO_TIMERS["REFRESH_TOOLTIP"] = VUHDO_REFRESH_TOOLTIP_DELAY;
+	VUHDO_TIMERS["REFRESH_TOOLTIP"] = 2.3;
 end
 
 
@@ -390,7 +381,11 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		end
 	elseif ("UNIT_POWER" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
-			if ("HOLY_POWER" == anArg2) then
+			if ("LIGHT_FORCE" == anArg2 or "DARK_FORCE" == anArg2) then
+				if ("player" == anArg1) then
+					VUHDO_updateBouquetsForEvent("player", 35); -- VUHDO_UPDATE_CHI
+				end
+			elseif ("HOLY_POWER" == anArg2) then
 				if ("player" == anArg1) then
 					VUHDO_updateBouquetsForEvent("player", 31); -- VUHDO_UPDATE_OWN_HOLY_POWER
 				end
@@ -451,8 +446,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		VUHDO_normalRaidReload();
 	elseif ("RAID_TARGET_UPDATE" == anEvent) then
 		VUHDO_TIMERS["CUSTOMIZE"] = 0.1;
-	elseif ("PARTY_MEMBERS_CHANGED" == anEvent
-			 or "RAID_ROSTER_UPDATE" == anEvent) then
+	elseif ("GROUP_ROSTER_UPDATE" == anEvent) then
 		if (VUHDO_FIRST_RELOAD_UI) then
 			VUHDO_normalRaidReload(true);
 			if (VUHDO_TIMERS["RELOAD_ROSTER"] < 0.4) then
@@ -543,10 +537,10 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		if (VuhDoTooltip:IsShown()) then
 			VUHDO_updateTooltip();
 		end
-	elseif("ACTIONBAR_SLOT_CHANGED" == anEvent) then
+	--[[elseif("ACTIONBAR_SLOT_CHANGED" == anEvent) then
 		if ((anArg1 or 0) >= 133 and anArg1 <= 136 and "SHAMAN" == VUHDO_PLAYER_CLASS) then
 			VUHDO_setTotemSlotTo(anArg1);
-		end
+		end]]
 	elseif("PLAYER_LOGOUT" == anEvent) then
 		VUHDO_compressAllBouquets();
 	elseif("UNIT_NAME_UPDATE" == anEvent) then
@@ -572,6 +566,11 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			VUHDO_updateBouquetsForEvent(anArg1, VUHDO_UPDATE_RESURRECTION);
 		end
+	elseif("PET_BATTLE_OPENING_START" == anEvent) then
+		VUHDO_setPetBattle(true);
+
+	elseif("PET_BATTLE_CLOSE" == anEvent) then
+		VUHDO_setPetBattle(false);
 	else
 		VUHDO_xMsg("Error: Unexpected event: " .. anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16);
 	end
@@ -709,8 +708,9 @@ function VUHDO_slashCmd(aCommand)
 		SetCVar("scriptProfile", "0");
 		ReloadUI();
 	--[[elseif (strfind(tCommandWord, "chkvars")) then
+		table.wipe(VUHDO_DEBUG);
 		for tFName, tData in pairs(VUHDO_GLOBAL) do
-			if(strsub(tFName, 1, 1) == "t") then
+			if(strsub(tFName, 1, 1) == "t" or strsub(tFName, 1, 1) == "s") then
 				VUHDO_Msg("Emerging local variable " .. tFName);
 			end
 		end]]
@@ -731,13 +731,8 @@ function VUHDO_slashCmd(aCommand)
 		table.wipe(VUHDO_MANUAL_ROLES);
 		VUHDO_reloadUI();
 	--[[elseif (tCommandWord == "test") then
-		VUHDO_initProfiler();
-		local tCnt;
-		for tCnt = 1, 1000000 do
-			VUHDO_updateAllDebuffIcons(false);
-		end
-		VUHDO_seeProfiler();]]
-	--[[elseif (strfind(tCommandWord, "lfg1")) then
+		table.wipe(VUHDO_DEBUG);
+	elseif (strfind(tCommandWord, "lfg1")) then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_SHOW");
 	elseif (strfind(tCommandWord, "lfg2")) then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_FAILED");
@@ -969,7 +964,7 @@ local tUnit, tInfo;
 local tIsInRange, tIsCharmed;
 local function VUHDO_updateAllRange()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		tInfo["baseRange"] = UnitInRange(tUnit);
+		tInfo["baseRange"] = "player" == tUnit or UnitInRange(tUnit);
 		tInfo["visible"] = UnitIsVisible(tUnit);
 
 		-- Check if unit is charmed
@@ -992,7 +987,6 @@ local function VUHDO_updateAllRange()
 			tIsInRange
 				= tInfo["connected"]
 				 and (tInfo["baseRange"]
-							or "player" == tUnit
 							or ((tUnit == "focus" or tUnit == "target") and CheckInteractDistance(tUnit, 1))
 						 );
 		end
@@ -1260,7 +1254,7 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 				VUHDO_updateClusterHighlights();
 			end
 		elseif (tHotDebuffToggle == 2) then
-			VUHDO_updateAllCyclicBouquets();
+			VUHDO_updateAllCyclicBouquets(false);
 		else
 			VUHDO_updateAllDebuffIcons(false);
 
@@ -1298,7 +1292,7 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- Refresh Tooltip
-	if (VUHDO_checkResetTimer("REFRESH_TOOLTIP", VUHDO_REFRESH_TOOLTIP_DELAY)) then
+	if (VUHDO_checkResetTimer("REFRESH_TOOLTIP", 2.3)) then
 		if (VuhDoTooltip:IsShown()) then
 			VUHDO_updateTooltip();
 		end
@@ -1418,8 +1412,7 @@ local VUHDO_ALL_EVENTS = {
 	"UNIT_HEALTH", "UNIT_MAXHEALTH",
 	"UNIT_AURA",
 	"UNIT_TARGET",
-	"RAID_ROSTER_UPDATE",
-	"PARTY_MEMBERS_CHANGED",
+	"GROUP_ROSTER_UPDATE",
 	"UNIT_PET",
 	"UNIT_ENTERED_VEHICLE", "UNIT_EXITED_VEHICLE", "UNIT_EXITING_VEHICLE",
 	"CHAT_MSG_ADDON",
@@ -1442,13 +1435,14 @@ local VUHDO_ALL_EVENTS = {
 	"MODIFIER_STATE_CHANGED",
 	"UNIT_CONNECTION",
 	"UNIT_HEAL_PREDICTION",
-	"ACTIONBAR_SLOT_CHANGED",
+	--"ACTIONBAR_SLOT_CHANGED",
 	"UNIT_POWER_BAR_SHOW","UNIT_POWER_BAR_HIDE",
 	"UNIT_NAME_UPDATE",
 	"LFG_PROPOSAL_SHOW", "LFG_PROPOSAL_FAILED", "LFG_PROPOSAL_SUCCEEDED",
 	--"UPDATE_MACROS",
 	"UNIT_FACTION",
-	"INCOMING_RESURRECT_CHANGED"
+	"INCOMING_RESURRECT_CHANGED",
+	"PET_BATTLE_CLOSE", "PET_BATTLE_OPENING_START"
 };
 
 

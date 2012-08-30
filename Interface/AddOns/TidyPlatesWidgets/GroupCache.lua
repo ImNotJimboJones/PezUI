@@ -20,10 +20,10 @@ local function UpdateRoster(frame, event, ...)
 	local groupType, groupSize, unitId, unitName
 	if UnitInRaid("player") then 
 		groupType = "raid"
-		groupSize = GetNumRaidMembers() - 1
+		groupSize = TidyPlatesUtility.GetNumRaidMembers() - 1
 	elseif UnitInParty("player") then 
 		groupType = "party"
-		groupSize = GetNumPartyMembers() 
+		groupSize = TidyPlatesUtility.GetNumPartyMembers() 
 	else 
 		groupType = "solo"
 		groupSize = 1

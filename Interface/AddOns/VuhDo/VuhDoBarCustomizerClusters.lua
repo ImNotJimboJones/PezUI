@@ -6,6 +6,7 @@ local VUHDO_ACTIVE_HOTS = { };
 local sClusterConfig;
 
 local VUHDO_CLUSTER_UNIT = nil;
+local _;
 
 --
 local twipe = table.wipe;
@@ -39,6 +40,7 @@ local sIsRadial;
 local sClusterSlot;
 local sCdSpell;
 local sCone;
+local sJumpRangePow;
 local tIndex, tHotName
 function VUHDO_customClustersInitBurst()
 	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
@@ -68,6 +70,7 @@ function VUHDO_customClustersInitBurst()
 	sIsRadial = sClusterConfig["MODE"] == 1;
 	sCone = sClusterConfig["CONE_DEGREES"];
 	sCdSpell = sClusterConfig["COOLDOWN_SPELL"];
+	sJumpRangePow = sClusterConfig["RANGE_JUMP"] * sClusterConfig["RANGE_JUMP"];
 	if ((sCdSpell or "") == "" or not VUHDO_isSpellKnown(sCdSpell)) then
 		sCdSpell = nil;
 	end
@@ -86,7 +89,7 @@ end
 local tDestCluster = { };
 local tInfo, tSrcInfo, tNumArray;
 local tSrcGroup;
-function VUHDO_getCustomDestCluster(aUnit, anArray, anIsSourcePlayer, anIsRadial, aRangePow, aNumMaxTargets, aHealthLimit, anIsRaid, aCdSpell, aCone)
+function VUHDO_getCustomDestCluster(aUnit, anArray, anIsSourcePlayer, anIsRadial, aRangePow, aNumMaxTargets, aHealthLimit, anIsRaid, aCdSpell, aCone, aJumpRangePow)
 	twipe(anArray);
 	if (anIsSourcePlayer and aUnit ~= "player") then
 		return 0;
@@ -100,7 +103,7 @@ function VUHDO_getCustomDestCluster(aUnit, anArray, anIsSourcePlayer, anIsRadial
 	if (anIsRadial) then
 		VUHDO_getUnitsInRadialClusterWith(aUnit, aRangePow, tDestCluster, aCdSpell);
 	else
-		VUHDO_getUnitsInChainClusterWith(aUnit, aRangePow, tDestCluster, aNumMaxTargets, aCdSpell);
+		VUHDO_getUnitsInChainClusterWith(aUnit, aJumpRangePow, tDestCluster, aNumMaxTargets, aCdSpell);
 	end
 
 	tSrcGroup = tSrcInfo["group"];
@@ -124,7 +127,7 @@ local VUHDO_getCustomDestCluster = VUHDO_getCustomDestCluster;
 
 --
 local function VUHDO_getDestCluster(aUnit, anArray)
-	return VUHDO_getCustomDestCluster(aUnit, anArray, sIsSourcePlayer, sIsRadial, sRangePow, sNumMaxJumps, sHealthLimit, sIsRaid, sCdSpell, sCone);
+	return VUHDO_getCustomDestCluster(aUnit, anArray, sIsSourcePlayer, sIsRadial, sRangePow, sNumMaxJumps, sHealthLimit, sIsRaid, sCdSpell, sCone, sJumpRangePow);
 end
 
 

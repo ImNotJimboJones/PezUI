@@ -1,3 +1,5 @@
+local _;
+
 local sIsFade;
 local sIsWarnColor;
 local sIsSwiftmend;
@@ -72,7 +74,6 @@ local GetTime = GetTime;
 local strfind = strfind;
 local pairs = pairs;
 local twipe = table.wipe;
-local _ = _;
 local tostring = tostring;
 
 local VUHDO_GLOBAL = getfenv();
@@ -532,6 +533,8 @@ end
 
 local VUHDO_IGNORE_HOT_IDS = {
 	[67358] = true, -- "Rejuvenating" proc has same name in russian and spanish as rejuvenation
+	[126921] = true, -- "Weakened Soul" by Shao-Tien Soul-Render
+	[65148] = true, -- Second buff of Sacred Shield: New absorb buff every 6 (which actually lasts 30 sec.)
 }
 
 
@@ -561,7 +564,7 @@ local tDiffIcon;
 local tHotFromBuff;
 local tIsCastByPlayer;
 local tDuration;
-local tHotInfo, tIndex;
+local tHotInfo;
 local tSpellId, tDebuffOffset;
 local tNow;
 local tFilter;
@@ -586,15 +589,15 @@ local function VUHDO_updateHots(aUnit, anInfo)
 		VUHDO_MY_AND_OTHERS_HOTS[aUnit] = { };
 	end
 
-	for tIndex, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
+	for _, tHotInfo in pairs(VUHDO_MY_HOTS[aUnit]) do
 		tHotInfo[1] = nil; -- Rest == nil => Icon löschen
 	end
 
-	for tIndex, tHotInfo in pairs(VUHDO_OTHER_HOTS[aUnit]) do
+	for _, tHotInfo in pairs(VUHDO_OTHER_HOTS[aUnit]) do
 		tHotInfo[1] = nil;
 	end
 
-	for tIndex, tHotInfo in pairs(VUHDO_MY_AND_OTHERS_HOTS[aUnit]) do
+	for _, tHotInfo in pairs(VUHDO_MY_AND_OTHERS_HOTS[aUnit]) do
 		tHotInfo[1] = nil;
 	end
 
@@ -605,8 +608,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 	if (sOthersHotsInfo[aUnit] == nil) then
 		sOthersHotsInfo[aUnit] = { nil, 0 };
 	else
-		sOthersHotsInfo[aUnit][1] = nil;
-		sOthersHotsInfo[aUnit][2] = 0;
+		sOthersHotsInfo[aUnit][1], sOthersHotsInfo[aUnit][2] = nil, 0;
 	end
 
 	if (VUHDO_shouldScanUnit(aUnit)) then
@@ -768,9 +770,11 @@ end
 
 
 --
-local tCnt, tCnt2;
-local tButton;
 function VUHDO_removeAllHots()
+	local tCnt;
+	local tCnt2;
+	local tButton;
+
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		if (VUHDO_isPanelVisible(tCnt)) then
 

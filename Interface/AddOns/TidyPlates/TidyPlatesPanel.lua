@@ -92,13 +92,14 @@ local function LoadTheme(incomingtheme)
 		end
 		-- Choices: Overwrite incomingtheme as it's processed, or Overwrite after the processing is done
 		TidyPlates:ActivateTheme(theme)	
-		if theme.OnActivateTheme then theme.OnActivateTheme(theme, incomingtheme) end
+		if theme.OnActivateTheme then theme.OnActivateTheme(theme, incomingtheme) end		-- ie. (Theme Table, Theme Name) -- nil is sent for all themes, to reset everything, and then the current theme is activated
+			
 		currentThemeName = incomingtheme
 		return theme
 	else
-		TidyPlatesOptions[activespec] = "None"
-		currentThemeName = "None"
-		TidyPlates:ActivateTheme(TidyPlatesThemeList["None"])
+		TidyPlatesOptions[activespec] = "No Theme"
+		currentThemeName = "No Theme"
+		TidyPlates:ActivateTheme(TidyPlatesThemeList["No Theme"])
 		return nil
 	end
 
@@ -200,10 +201,10 @@ local function ActivateInterfacePanel()
 	-- Primary Spec
 	----------------------
 	--  Dropdown
-	panel.PrimarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown", panel, ThemeDropdownMenuItems, "None", nil, true)
+	panel.PrimarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown", panel, ThemeDropdownMenuItems, "No Theme", nil, true)
 	panel.PrimarySpecTheme:SetPoint("TOPLEFT", 16, -108)
 	
-	-- [[	Edit Button
+	-- [[	Prim. Edit Button
 	panel.PrimaryEditButton = CreateFrame("Button", "TidyPlatesEditButton", panel)
 	panel.PrimaryEditButton:SetPoint("LEFT", panel.PrimarySpecTheme, "RIGHT", 29, 2)
 	panel.PrimaryEditButton.Texture = panel.PrimaryEditButton:CreateTexture(nil, "OVERLAY")
@@ -215,6 +216,7 @@ local function ActivateInterfacePanel()
 	panel.PrimaryEditButton:EnableMouse()
 	panel.PrimaryEditButton:SetScript("OnClick", function() ConfigureTheme("primary") end)
 	--]]
+
 	
 	-- Label 
 	panel.PrimaryLabel = panel:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
@@ -227,10 +229,10 @@ local function ActivateInterfacePanel()
 	-- Secondary Spec
 	----------------------
 	-- Dropdown
-	panel.SecondarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown2", panel, ThemeDropdownMenuItems, "None", nil, true)
+	panel.SecondarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown2", panel, ThemeDropdownMenuItems, "No Theme", nil, true)
 	panel.SecondarySpecTheme:SetPoint("TOPLEFT",panel.PrimarySpecTheme, "TOPRIGHT", 45, 0)
 
-	-- [[	Edit Button
+	-- [[	Sec. Edit Button
 	panel.SecondaryEditButton = CreateFrame("Button", "TidyPlatesEditButton", panel)
 	panel.SecondaryEditButton:SetPoint("LEFT", panel.SecondarySpecTheme, "RIGHT", 29, 2)
 	panel.SecondaryEditButton.Texture = panel.SecondaryEditButton:CreateTexture(nil, "OVERLAY")
@@ -268,7 +270,7 @@ local function ActivateInterfacePanel()
 	
 	-- Enemy Visibility
 	panel.AutoShowEnemy = PanelHelpers:CreateDropdownFrame("TidyPlatesAutoShowEnemy", panel, AutomationDropdownItems, NO_AUTOMATION, nil, true)
-	panel.AutoShowEnemy:SetPoint("TOPLEFT", panel.PrimarySpecTheme, "TOPLEFT", 0, -80)
+	panel.AutoShowEnemy:SetPoint("TOPLEFT", panel.PrimarySpecTheme, "TOPLEFT", 0, -75)
 	--
 	panel.AutoShowEnemyLabel = panel:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
 	panel.AutoShowEnemyLabel:SetPoint("BOTTOMLEFT", panel.AutoShowEnemy,"TOPLEFT", 20, 5)
@@ -300,7 +302,7 @@ local function ActivateInterfacePanel()
 --]]
 	
 	-- Blizz Button
-	local BlizzOptionsButton = CreateFrame("Button", "TidyPlatesOptions_BlizzOptionsButton", panel, "UIPanelButtonTemplate2")
+	local BlizzOptionsButton = CreateFrame("Button", "TidyPlatesOptions_BlizzOptionsButton", panel, "TidyPlatesPanelButtonTemplate")
 	--BlizzOptionsButton:SetPoint("TOPRIGHT", ResetButton, "TOPLEFT", -8, 0)
 	BlizzOptionsButton:SetPoint("TOPLEFT", panel.AutoShowEnemy, "TOPLEFT", 16, -55)
 	BlizzOptionsButton:SetWidth(300)
@@ -318,7 +320,7 @@ local function ActivateInterfacePanel()
 	panel.EnableMinimapButton:Hide()
 	
 	-- Reset
-	ResetButton = CreateFrame("Button", "TidyPlatesOptions_ResetButton", panel, "UIPanelButtonTemplate2")
+	ResetButton = CreateFrame("Button", "TidyPlatesOptions_ResetButton", panel, "TidyPlatesPanelButtonTemplate")
 	ResetButton:SetPoint("BOTTOMRIGHT", -16, 8)
 	ResetButton:SetWidth(155)
 	ResetButton:SetText("Reset Configuration")
@@ -448,15 +450,16 @@ local function ShowWarnings()
 		end
 	end
 	
-	-- Warn user if no theme is selected
-	if currentThemeName == "None" and not warned[activespec] then
-		print("|cFFFF6600Tidy Plates: |cFFFF9900No Theme is Selected. |cFF77FF00Use |cFFFFFF00/tidyplates|cFF77FF00 to bring up the Theme Selection Window")
+	--[[ Warn user if no theme is selected
+	if currentThemeName == "No Theme" and not warned[activespec] then
+		print("|cFF77FF00Use |cFFFFFF00/tidyplates|cFF77FF00 to bring up the Theme Selection Window")
 		warned[activespec] = true
 	end
+	--]]
 end
 
 function panelevents:ACTIVE_TALENT_GROUP_CHANGED()
-	if GetActiveTalentGroup(false, false) == 2 then activespec = "secondary" 
+	if TidyPlatesUtility.GetSpec(false, false) == 2 then activespec = "secondary" 
 	else activespec = "primary" end
 	LoadTheme(TidyPlatesOptions[activespec])
 
@@ -504,7 +507,7 @@ function panelevents:PLAYER_LOGIN()
 	UpdateThemeNames()
 	ActivateInterfacePanel()
 	ShowWelcome()
-	LoadTheme("None")
+	LoadTheme("No Theme")
 	ApplyAutomationSettings()
 	SetCVar("repositionfrequency", 0)
 end

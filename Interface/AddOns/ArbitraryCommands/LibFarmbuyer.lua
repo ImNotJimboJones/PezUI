@@ -7,28 +7,30 @@ Library contents:
 - author_debug
   Evaluates to true if I'm hacking on something.
 
-- tableprint(t)
-  A single print() call to the contents of T, including nils; strings are
-  cleaned up with respect to embedded '|'/control chars.  If there is a
-  global LIBFARMPRINT function, it is called with the cleaned-up T instead
-  of directly calling print.
+- tableprint(t[,f])
+  A single print() call to the tostring'd contents of T, including nils;
+  strings are cleaned up with respect to embedded '|'/control chars.  A
+  single space is used during concatenation of T.  If a function F is passed,
+  calls that instead of print().  Returns the accumulated string and either
+  T or the returned values of F, depending on which was used.
 
 - safeprint(...)
-  Same as tableprint() on the argument list.
+  Same as tableprint() on the argument list.  Returns the results of tableprint.
+  Generates some garbage.
 
 - safeiprint(...)
-  Same as safeprint() but with index numbers inserted.  Ex:
-  safeiprint(a,b,c)  -->  <1>,a,<2>,b,<3>,c
+  Same as safeprint() but with <index> numbers inserted.  Returns the results
+  of tableprint.  Generates some garbage.
+  Ex:  safeiprint(a,b,c)  -->  <1>,a,<2>,b,<3>,c
 
-- CHAT(n)
-  Returns a function suitable for assigning to LIBFARMPRINT, directing all
-  output to builtin chat frame N.
+- safefprint/safefiprint(f,...)
+  Takes a function F as first parameter, for passing to tableprint().
 
 - t = StaticPopup(t)
   Fills out "typical" settings inside T, especially if T contains any kind
   of editbox:
    + cannot accept an empty editbox
-   + pressing Enter runs OnAccept
+   + pressing Enter runs OnAccept (also will not accept empty editbox)
    + editbox grabs keyboard focus
    + OnAccept runs with editbox's text in dialog.usertext
   Returns T.
@@ -53,7 +55,7 @@ Library contents:
   Ditto for table recycling.
 ]]
 
-local MAJOR, MINOR = "LibFarmbuyer", 9
+local MAJOR, MINOR = "LibFarmbuyer", 20
 assert(LibStub,MAJOR.." requires LibStub")
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -99,21 +101,19 @@ lib.new, lib.del, lib.copy, lib.clear = new, del, copy, clear
 
 ----------------------------------------------------------------------
 --[[
-	safeprint
+	safeprint and company (primarily for on-the-fly debugging)
 ]]
+local tconcat, tostring, tonumber = table.concat, tostring, tonumber
 local function undocontrol(c)
 	return ("\\%.3d"):format(c:byte())
 end
-function lib.CHAT(n)
-	local cf = _G["ChatFrame"..n]
-	return function(t)
-		local msg = table.concat(t,' ', i, tonumber(t.n) or #t)
-		cf:AddMessage(msg)
-	end
-end
 function lib.safeprint(...)
 	local args = { n=select('#',...), ... }
-	lib.tableprint(args)
+	return lib.tableprint(args)
+end
+function lib.safefprint(f,...)
+	local args = { n=select('#',...), ... }
+	return lib.tableprint(args,f)
 end
 function lib.safeiprint(...)
 	local args = { n=select('#',...), ... }
@@ -123,17 +123,29 @@ function lib.safeiprint(...)
 		last = last - 1
 	end
 	args.n = 2 * args.n
-	lib.tableprint(args)
+	return lib.tableprint(args)
 end
-function lib.tableprint(t)
+function lib.safefiprint(f,...)
+	local args = { n=select('#',...), ... }
+	local last = args.n
+	while last > 0 do
+		table.insert (args, last, "<"..last..">")
+		last = last - 1
+	end
+	args.n = 2 * args.n
+	return lib.tableprint(args,f)
+end
+function lib.tableprint(t,f)
 	for i = 1, (tonumber(t.n) or #t) do
 		t[i] = tostring(t[i]):gsub('\124','\124\124')
 		                     :gsub('(%c)', undocontrol)
 	end
-	if type(_G.LIBFARMPRINT) == 'function' then
-		return _G.LIBFARMPRINT(t)
+	local msg = tconcat(t,' ', 1, tonumber(t.n) or #t)
+	if type(f) == 'function' then
+		return msg,f(msg)
 	else
-		return print(unpack(t))
+		print(msg)
+		return msg,t
 	end
 end
 
@@ -151,50 +163,69 @@ local function EditBoxOnTextChanged_notempty (editbox) -- this is also called wh
 	end
 end
 local function EditBoxOnEnterPressed_accept (editbox)
-    local dialog = editbox:GetParent()
-    StaticPopupDialogs[dialog.which].OnAccept (dialog, dialog.data, dialog.data2)
-    dialog:Hide()
+	if editbox:GetText() == "" then return end
+	local dialog = editbox:GetParent()
+	StaticPopupDialogs[dialog.which].OnAccept (dialog, dialog.data, dialog.data2)
+	dialog:Hide()
 end
-local function OnShow_witheditbox (dialog, data)
+local function OnShow_ontop (dialog, data)
 	local info = StaticPopupDialogs[dialog.which]
-	dialog[info.hasWideEditBox and "wideEditBox" or "editBox"]:SetFocus()
+	-- ace3's elements are hardcoded to this strata, make sure popups
+	-- can also be seen (their toplevel=true attribute handles the
+	-- framelevels within the same strata)
+	info.saved_strata = dialog:GetFrameStrata()
+	dialog:SetFrameStrata("FULLSCREEN_DIALOG")
+	if info.hasEditBox then
+		dialog.editBox:SetFocus()
+	end
     if info.farm_OnShow then
         return info.farm_OnShow (dialog, data)
     end
 end
 local function OnAccept_witheditbox (dialog, data, data2)
 	local info = StaticPopupDialogs[dialog.which]
-	dialog.usertext = dialog[info.hasWideEditBox and "wideEditBox" or "editBox"]:GetText():trim()
+	dialog.usertext = dialog.editBox:GetText():trim()
     if info.farm_OnAccept then
         return info.farm_OnAccept (dialog, data, data2)
     end
+end
+local function OnHide_cleanup (dialog, data)
+	local info = StaticPopupDialogs[dialog.which]
+    if info.farm_OnHide then
+        return info.farm_OnHide (dialog, data)
+    end
+	dialog.data = nil
+	dialog.data2 = nil
+	dialog:SetFrameStrata(info.saved_strata or "DIALOG")
 end
 
 --[[
 	StaticPopup
 ]]
 function lib.StaticPopup (t)
-    if t.hasEditBox then
-        t.EditBoxOnTextChanged = EditBoxOnTextChanged_notempty
-        t.EditBoxOnEnterPressed = EditBoxOnEnterPressed_accept
-		if t.OnShow then
-			t.farm_OnShow = t.OnShow
-		end
-        t.OnShow = OnShow_witheditbox
+	if t.hasEditBox then
+		t.EditBoxOnTextChanged = EditBoxOnTextChanged_notempty
+		t.EditBoxOnEnterPressed = EditBoxOnEnterPressed_accept
 		if t.OnAccept then
 			t.farm_OnAccept = t.OnAccept
 		end
-        t.OnAccept = OnAccept_witheditbox
+		t.OnAccept = OnAccept_witheditbox
 		-- this calls OnCancel with "clicked", unless noCancelOnEscape is set
-        t.EditBoxOnEscapePressed = StaticPopup_EscapePressed
-    end
+		t.EditBoxOnEscapePressed = StaticPopup_EscapePressed
+	end
 
-    t.timeout = 0
-    t.whileDead = true
-    t.hideOnEscape = true
+	t.farm_OnShow = t.OnShow
+	t.OnShow = OnShow_ontop
+	t.farm_OnHide = t.OnHide
+	t.OnHide = OnHide_cleanup
+
+	t.timeout = 0
+	t.whileDead = true
+	t.hideOnEscape = true
 	t.enterClicksFirstButton = true
+	t.preferredIndex = 3  -- http://forums.wowace.com/showthread.php?t=19960
 
-    return t
+	return t
 end
 
 
@@ -208,16 +239,22 @@ if ({
 	["Bandwagon"] = true, ["Kilvin"] = true, ["Waterfaucet"] = true,
 	["Farmbuyer"] = true, ["Oxdeadbeef"] = true, ["Pointystick"] = true,
 	["Angryhobbit"] = true, ["Malrubius"] = true, ["Hemogoblin"] = true,
+	["Ossipago"] = true,
 })[UnitName("player")] then
 	lib.author_debug = true
 	_G.safeprint = lib.safeprint
 	_G.safeiprint = lib.safeiprint
 	function lib.tabledump(t)
-		_G.UIParentLoadAddOn("Blizzard_DebugTools")
+		-- Should instead load this and then call the subcommands directly.
+		--_G.UIParentLoadAddOn("Blizzard_DebugTools")
 		_G.LibF_DEBUG = t
 		_G.SlashCmdList.DUMP("LibF_DEBUG")
 	end
 else
+	-- make sure earlier lib's members aren't lingering
+	lib.author_debug = nil
+	_G.safeprint = nil
+	_G.safeiprint = nil
 	lib.tabledump = lib.nullfunc
 end
 lib.dumptable = lib.tabledump
@@ -284,7 +321,7 @@ do
 	local function CreateDispatcher(argCount)
 		local ARGS = {}
 		for i = 1, argCount do ARGS[i] = "arg"..i end
-		local code = template:gsub("ARGS", table.concat(ARGS, ", "))
+		local code = template:gsub("ARGS", tconcat(ARGS, ", "))
 		return assert(loadstring(code, "LibF/safecall Dispatcher["..argCount.."]"))(xpcall, errorhandler)
 	end
 

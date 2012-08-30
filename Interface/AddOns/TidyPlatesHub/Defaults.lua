@@ -5,6 +5,7 @@ TidyPlatesHubSettings = {}
 TidyPlatesHubDefaults = {
 	-- Style
 	---------------------------------------
+	ArtDefault = "Blizzard",
 	StyleTheme = 3, 
 	StyleEnemyMode = 1, 
 	StyleFriendlyMode = 1,
@@ -89,8 +90,8 @@ TidyPlatesHubDefaults = {
 	WidgetsRangeMode = 1,
 	WidgetsDebuff = true,
 	WidgetsDebuffStyle = 1,
-	WidgetsDebuffMode = 3,
-	WidgetsDebuffTrackList = "My Rake\nMy Rip\nMy Moonfire\nAll 339",
+	WidgetsAuraMode = 1,
+	WidgetsDebuffTrackList = "My Rake\nMy Rip\nMy Moonfire\nAll 339\nMy Regrowth\nMy Rejuvenation",
 	WidgetsDebuffLookup = {},
 	WidgetsDebuffPriority = {},	
 	

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Akmahat", "DBM-Party-Cataclysm", 15)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7378 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7729 $"):sub(12, -3))
 mod:SetCreatureID(50063)
 mod:SetModelID(34573)
 mod:SetZone(748, 720)--Uldum (both versions of it)
@@ -47,9 +47,9 @@ do
 		if shieldedMob == destGUID then
 			local absorbed
 			if subEvent == "SWING_MISSED" then 
-				absorbed = select( 2, ... ) 
+				absorbed = select( 3, ... ) 
 			elseif subEvent == "RANGE_MISSED" or subEvent == "SPELL_MISSED" or subEvent == "SPELL_PERIODIC_MISSED" then 
-				absorbed = select( 5, ... )
+				absorbed = select( 6, ... )
 			end
 			if absorbed then
 				absorbRemaining = absorbRemaining - absorbed

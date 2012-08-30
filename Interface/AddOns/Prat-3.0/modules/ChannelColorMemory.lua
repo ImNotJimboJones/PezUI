@@ -50,73 +50,73 @@ Prat:AddModuleToLoad(function()
   --@non-debug@
   L:AddLocale("enUS",
   {
-	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 	ChannelColorMemory = true,
 	["Remembers the colors of each channel name."] = true,
+	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 }
 
   )
   L:AddLocale("frFR",
   {
-	-- ["(%w+)%s?(.*)"] = "",
 	ChannelColorMemory = "Couleur Canal",
 	["Remembers the colors of each channel name."] = "Mémorise la couleur de chaque nom de canal.",
+	-- ["(%w+)%s?(.*)"] = "",
 }
 
   )
   L:AddLocale("deDE",
   {
-	["(%w+)%s?(.*)"] = true,
 	ChannelColorMemory = true,
 	["Remembers the colors of each channel name."] = "Speichert die Farbe jedes Kanalnamens.",
+	["(%w+)%s?(.*)"] = true,
 }
 
   )
   L:AddLocale("koKR",
   {
-	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)", -- Needs review
 	ChannelColorMemory = "채널색깔기억",
 	["Remembers the colors of each channel name."] = "각 채널이름의 색깔을 기억합니다.",
+	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)", -- Needs review
 }
 
   )
   L:AddLocale("esMX",
   {
-	-- ["(%w+)%s?(.*)"] = "",
 	-- ChannelColorMemory = "",
 	-- ["Remembers the colors of each channel name."] = "",
+	-- ["(%w+)%s?(.*)"] = "",
 }
 
   )
   L:AddLocale("ruRU",
   {
-	["(%w+)%s?(.*)"] = true,
 	ChannelColorMemory = "Сохранение цветов каналов",
 	["Remembers the colors of each channel name."] = "Запоминает цвета названия каждого канала.",
+	["(%w+)%s?(.*)"] = true,
 }
 
   )
   L:AddLocale("zhCN",
   {
-	["(%w+)%s?(.*)"] = true, -- Needs review
 	ChannelColorMemory = "频道颜色存储",
 	["Remembers the colors of each channel name."] = "记住每个频道名称的颜色",
+	["(%w+)%s?(.*)"] = true, -- Needs review
 }
 
   )
   L:AddLocale("esES",
   {
-	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 	ChannelColorMemory = "MemoriaColorCanal",
 	["Remembers the colors of each channel name."] = "Recordar los colores de cada nombre de canal.",
+	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 }
 
   )
   L:AddLocale("zhTW",
   {
-	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 	ChannelColorMemory = "頻道顏色記憶",
 	["Remembers the colors of each channel name."] = "記住每個頻道顏色的名稱。",
+	["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
 }
 
   )

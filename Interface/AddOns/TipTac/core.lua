@@ -443,15 +443,6 @@ local function ModifyUnitTooltip()
 	local hasGuildTitle;
 	-- Level + Classification
 	local level = UnitLevel(unit);
-	local tttData = (TipTacTalents and TipTacTalents.current);
-	if (tttData) and (level == -1) and (u.isPlayer) and (tttData.name == name) and (tttData[3]) then -- Using TipTacTalents, estimate level of ?? players by using talent points spent
-		local points = (tttData[1] + tttData[2] + tttData[3]);
-		if (points >= 36) then
-			level = (80 + points - 36);
-		else
-			level = ((points - 1) * 2 + 10);
-		end
-	end
 	local classification = UnitClassification(unit);
 	lineInfo[#lineInfo + 1] = (UnitCanAttack(unit,"player") or UnitCanAttack("player",unit)) and GetDifficultyLevelColor(level ~= -1 and level or 500) or cfg.colLevel;
 	lineInfo[#lineInfo + 1] = (cfg["classification_"..classification] or "%d? "):format(level == -1 and "??" or level); -- Why "%d? " on the alt format? Bug?
@@ -558,24 +549,25 @@ end
 
 -- Add "Targeted By" line
 local function AddTargetedBy()
-	local numParty, numRaid = GetNumPartyMembers(), GetNumRaidMembers();
-	if (numParty > 0 or numRaid > 0) then
-		for i = 1, (numRaid > 0 and numRaid or numParty) do
-			local unit = (numRaid > 0 and "raid"..i or "party"..i);
-			if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
-				local _, class = UnitClass(unit);
-				targetedList[#targetedList + 1] = TT_ClassColors[class];
-				targetedList[#targetedList + 1] = UnitName(unit);
-				targetedList[#targetedList + 1] = "|r, ";
-			end
+	local numGroup = GetNumGroupMembers();
+	if (not numGroup) or (numGroup <= 1) then
+		return;
+	end
+	for i = 1, numGroup do
+		local unit = (IsInRaid() and "raid"..i or "party"..i);
+		if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
+			local _, class = UnitClass(unit);
+			targetedList[#targetedList + 1] = TT_ClassColors[class];
+			targetedList[#targetedList + 1] = UnitName(unit);
+			targetedList[#targetedList + 1] = "|r, ";
 		end
-		if (#targetedList > 0) then
-			targetedList[#targetedList] = nil;
-			gtt:AddLine(" ",nil,nil,nil,1);
-			local line = _G["GameTooltipTextLeft"..gtt:NumLines()];
-			line:SetFormattedText("Targeted By (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
-			wipe(targetedList);
-		end
+	end
+	if (#targetedList > 0) then
+		targetedList[#targetedList] = nil;
+		gtt:AddLine(" ",nil,nil,nil,1);
+		local line = _G["GameTooltipTextLeft"..gtt:NumLines()];
+		line:SetFormattedText("Targeted By (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
+		wipe(targetedList);
 	end
 end
 

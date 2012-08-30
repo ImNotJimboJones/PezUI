@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Supremus", "DBM-BlackTemple")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 399 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 411 $"):sub(12, -3))
 mod:SetCreatureID(22898)
 mod:SetModelID(21145)
 mod:SetZone()
@@ -36,7 +36,7 @@ function mod:ScanTarget()
 	if target then
 		if lastTarget ~= target then
 			warnKite:Show(target)
-			lastTarget = Target
+			lastTarget = target
 			if self.Options.KiteIcon then
 				self:SetIcon(target, 8)
 			end

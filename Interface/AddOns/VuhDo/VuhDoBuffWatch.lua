@@ -1,3 +1,5 @@
+local _;
+
 local VUHDO_GLOBAL = getfenv();
 
 local VUHDO_BUFF_RAID = { };
@@ -53,12 +55,12 @@ local InCombatLockdown = InCombatLockdown;
 local GetWeaponEnchantInfo = GetWeaponEnchantInfo;
 local UnitOnTaxi = UnitOnTaxi;
 local IsSpellInRange = IsSpellInRange;
+local GetShapeshiftFormInfo = GetShapeshiftFormInfo;
 
 local tonumber = tonumber;
 local pairs = pairs;
 local ipairs = ipairs;
 local twipe = table.wipe;
-local _;
 local format = format;
 
 local sConfig = { };
@@ -329,14 +331,9 @@ function VuhDoBuffPreClick(aButton, aMouseButton)
 	end
 
 	local tTarget = VUHDO_IS_USED_SMART_BUFF
-		and tSwatch:GetAttribute("lowtarget")
-		or  tSwatch:GetAttribute("goodtarget");
+		and tSwatch:GetAttribute("lowtarget") or tSwatch:GetAttribute("goodtarget");
 
-	if (VUHDO_BUFF_TARGET_TOTEM == tVariant[2] and VUHDO_BUFF_SETTINGS["CONFIG"]["USE_COMBINED"]) then
-		VUHDO_setupAllBuffButtonsTo(aButton, VUHDO_SPELL_ID.CALL_OF_THE_ELEMENTS, tTarget, VUHDO_SPELL_ID.CALL_OF_THE_ELEMENTS);
-	else
 		VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget, tBuff);
-	end
 
 
 	if (tTarget == nil and aMouseButton ~= "RightButton") then
@@ -347,40 +344,31 @@ end
 
 
 --
-local tVariants;
-local tTarget;
-local tBuff;
 function VuhDoBuffPostClick(aButton, aMouseButton)
 	if (VUHDO_IS_USED_SMART_BUFF) then
-		tVariants = aButton:GetParent():GetAttribute("buff");
-		tTarget = aButton:GetParent():GetAttribute("goodtarget");
-		tBuff = tVariants[1];
-		VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget, tBuff);
+		local tBuff = aButton:GetParent():GetAttribute("buff")[1];
+		VUHDO_setupAllBuffButtonsTo(aButton, tBuff, aButton:GetParent():GetAttribute("goodtarget"), tBuff);
 	end
 end
 
 
 
 --
-local tUniqueBuffs = { };
-local tUniqueCategs = { };
-local tEmptyArray = { };
-local tCategName;
-local tAllBuffs;
-local tCategBuffs;
-local tSpellName;
 function VUHDO_getAllUniqueSpells()
-	twipe(tUniqueBuffs);
-	twipe(tUniqueCategs);
+	local tUniqueBuffs = { };
+	local tUniqueCategs = { };
 
-	tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
+	local tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
 
 	if (tAllBuffs == nil) then
-		return tEmptyArray, tEmptyArray;
+		return {}, {};
 	end
 
+	local tCategName;
+	local tCategBuffs;
+
 	for tCategName, tCategBuffs in pairs(tAllBuffs) do
-		tSpellName = tCategBuffs[1][1];
+		local tSpellName = tCategBuffs[1][1];
 		if (VUHDO_BUFFS[tSpellName] ~= nil and VUHDO_BUFFS[tSpellName]["present"] and VUHDO_BUFF_TARGET_UNIQUE == tCategBuffs[1][2]) then
 			tUniqueBuffs[#tUniqueBuffs + 1] = tSpellName;
 			tUniqueCategs[tSpellName] = strsub(tCategName, 3);
@@ -393,19 +381,26 @@ end
 
 
 --
-local function VUHDO_initDynamicBuffArray()
-	local tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
-
-	if (tAllBuffs == nil) then
-		return;
-	end
+function VUHDO_initBuffsFromSpellBook()
 
 	local tCateg, tCategSpells;
 	local tBuffInfo;
+	local tSpellName, tSpellId, tIcon;
 
-	for _, tCateg in pairs(tAllBuffs) do
+	for _, tCateg in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS] or {}) do
 		for _, tCategSpells in pairs(tCateg) do
-			VUHDO_BUFFS[tCategSpells[1]] = { ["present"] = false };
+			tSpellName = tCategSpells[1];
+			_, tSpellId = GetSpellBookItemInfo(tSpellName);
+			if (tSpellId ~= nil) then
+					_, _, tIcon = GetSpellInfo(tSpellId);
+					VUHDO_BUFFS[tSpellName] = {
+						["present"] = true,
+						["icon"] = tIcon,
+						["id"] = tSpellId
+					};
+			else
+				VUHDO_BUFFS[tSpellName] = { ["present"] = false };
+			end
 		end
 	end
 
@@ -416,51 +411,6 @@ local function VUHDO_initDynamicBuffArray()
 		end
 	end
 
-end
-
-
-
-local VUHDO_BLACKLIST_BUFFS = {
-	[VUHDO_SPELL_ID.BUFF_VIGILANCE] = "Interface\\Icons\\Spell_Nature_Sleep", -- "Wachsamkeit" gibt's einmal als racial und als warri-talent
-}
-
-
-
---
-function VUHDO_initBuffsFromSpellBook()
-	local tCnt;
-	local tSpellName;
-	local tIcon;
-
-	VUHDO_initDynamicBuffArray();
-
-	for tCnt = 1, 99999 do
-		tSpellName = GetSpellBookItemName(tCnt, BOOKTYPE_SPELL);
-		if (tSpellName == nil) then
-			break;
-		end
-
-		if (VUHDO_BUFFS[tSpellName] ~= nil and not VUHDO_BUFFS[tSpellName]["present"]) then
-			tIcon = GetSpellTexture(tCnt, BOOKTYPE_SPELL);
-			if (VUHDO_BLACKLIST_BUFFS[tSpellName] ~= tIcon) then
-				VUHDO_BUFFS[tSpellName] = {
-					["present"] = true,
-					["icon"] = tIcon,
-					["id"] = tCnt,
-					["booktype"] = BOOKTYPE_SPELL,
-				};
-			end
-		end
-	end
-
-	if (VUHDO_PLAYER_CLASS == "WARRIOR") then
-		VUHDO_BUFFS[VUHDO_SPELL_ID.BUFF_VIGILANCE] = {
-			["present"] = true,
-			["icon"] = GetSpellTexture(50720),
-			["id"] = 50720,
-			["booktype"] = nil,
-		};
-	end
 end
 
 
@@ -715,6 +665,7 @@ local tHasEnch1, tHasEnch2;
 local tCategName;
 local tEmpty = { };
 local tNameGroup = { };
+local tCnt, tStanceName, tIsActive;
 local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCategSpec)
 
 	if ("N" == strsub(aTargetCode, 1, 1)) then
@@ -733,6 +684,17 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 
 		elseif (VUHDO_BUFF_TARGET_OWN_GROUP == tMaxTarget) then
 			tDestGroup = VUHDO_GROUPS[(VUHDO_RAID["player"] or {})["group"] or 1];
+
+		elseif (VUHDO_BUFF_TARGET_STANCE == tMaxTarget) then
+			for tCnt = 1, NUM_STANCE_SLOTS do
+				_, tStanceName, tIsActive = GetShapeshiftFormInfo(tCnt);
+				if (tIsActive and tStanceName == someBuffVariants[1]) then
+					return {}, {}, "player", 0, "player", { "player" }, { }, 0;
+				end
+			end
+
+			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, strsub(aCategSpec, 3));
+			return { "player" }, {}, "player", 0, "player", { }, { }, 0;
 
 		elseif (VUHDO_BUFF_TARGET_ENCHANT == tMaxTarget) then
 			tHasEnch1, tEnchDuration1, _, _, _, _ = GetWeaponEnchantInfo();
@@ -763,15 +725,15 @@ local function VUHDO_setBuffSwatchColor(aSwatch, aColorInfo, aColorType)
 	end
 
 	tColor = VUHDO_getDiffColor(VUHDO_copyColor(sConfig["SWATCH_BG_COLOR"]), aColorInfo);
-	aSwatch:SetBackdropColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
+	aSwatch:SetBackdropColor(VUHDO_backColor(tColor));
 	tName = aSwatch:GetName();
 
 	if (tColor["useText"]) then
-		VUHDO_GLOBAL[tName .. "MessageLabelLabel"]:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
-		VUHDO_GLOBAL[tName .. "TimerLabelLabel"]:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
-		VUHDO_GLOBAL[tName .. "CounterLabelLabel"]:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
+		VUHDO_GLOBAL[tName .. "MessageLabelLabel"]:SetTextColor(VUHDO_textColor(tColor));
+		VUHDO_GLOBAL[tName .. "TimerLabelLabel"]:SetTextColor(VUHDO_textColor(tColor));
+		VUHDO_GLOBAL[tName .. "CounterLabelLabel"]:SetTextColor(VUHDO_textColor(tColor));
 		tColor = VUHDO_brightenTextColor(VUHDO_copyColor(aColorInfo), 0.2);
-		VUHDO_GLOBAL[tName .. "GroupLabelLabel"]:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
+		VUHDO_GLOBAL[tName .. "GroupLabelLabel"]:SetTextColor(VUHDO_textColor(tColor));
 	end
 
 	VUHDO_LAST_COLORS[tName] = aColorType;
@@ -811,7 +773,7 @@ end
 --
 local tStart, tDuration;
 local function VUHDO_getSpellCooldown(aSpellName)
-	tStart, tDuration, _ = GetSpellCooldown(VUHDO_BUFFS[aSpellName]["id"], VUHDO_BUFFS[aSpellName]["booktype"]);
+	tStart, tDuration = GetSpellCooldown(VUHDO_BUFFS[aSpellName]["id"]);
 	if ((tDuration or 0) == 0) then
 		return 0, 0;
 	else

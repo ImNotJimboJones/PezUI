@@ -1,3 +1,5 @@
+local _;
+
 local strlen = strlen;
 local strsub = strsub;
 local InCombatLockdown = InCombatLockdown;
@@ -28,7 +30,6 @@ local GetSpellBookItemInfo = GetSpellBookItemInfo;
 local VUHDO_atan2 = math.atan2;
 local VUHDO_PI, VUHDO_2_PI = math.pi, math.pi * 2;
 local pairs = pairs;
-local _ = _;
 local type = type;
 local abs = abs;
 local sEmpty = { };
@@ -108,6 +109,7 @@ function VUHDO_tableUniqueAdd(aTable, aValue)
 	aTable[#aTable + 1] = aValue;
 	return true;
 end
+
 
 
 --
@@ -273,7 +275,9 @@ end
 
 -- returns wether or not a unit is in range
 function VUHDO_isInRange(aUnit)
-	if ("focus" == aUnit or "target" == aUnit) then
+	if ("player" == aUnit) then
+		return true;
+	elseif ("focus" == aUnit or "target" == aUnit) then
 		return CheckInteractDistance(aUnit, 1);
 	elseif (sIsGuessRange) then
 		return UnitInRange(aUnit);
@@ -382,7 +386,7 @@ function VUHDO_getUnitRank(aUnit)
 		_, tRank, _, _, _, _, _, _, _, _, tIsMl = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
 		return tRank, tIsMl;
 	elseif (UnitExists("party1")) then
-		if (UnitIsPartyLeader(aUnit)) then
+		if (UnitIsGroupLeader(aUnit)) then
 			return 2, true;
 		else
 			return 0, true;
@@ -470,12 +474,9 @@ local VUHDO_isInSameZone = VUHDO_isInSameZone;
 local tHealthMax;
 function VUHDO_getUnitHealthPercent(anInfo)
 	tHealthMax = anInfo["healthmax"];
-	if (tHealthMax == 0) then
-		return 0;
-	end
-
-	return anInfo["health"] < tHealthMax
-		and 100 * anInfo["health"] / tHealthMax or 100;
+	return tHealthMax == 0 and 0
+		or anInfo["health"] < tHealthMax and 100 * anInfo["health"] / tHealthMax
+		or 100;
 end
 
 
@@ -495,13 +496,8 @@ function VUHDO_getDurationTextSince(aStartTime)
 	end
 
 	tDeltaSecs = GetTime() - aStartTime;
-	if (tDeltaSecs >= 0) then
-		return format("(|cffffffff%.0f:%02d %s|r)", tDeltaSecs / 3600, floor(tDeltaSecs / 60) % 60, VUHDO_I18N_HOURS);
-	elseif(tDeltaSecs >= 60) then
-		return format("(|cffffffff%d %s|r)", tDeltaSecs / 60, VUHDO_I18N_MINS);
-	else
-		return format("(|cffffffff%d %s|r)", tDeltaSecs, VUHDO_I18N_SECS);
-	end
+	return tDeltaSecs >= 3600 and format("(|cffffffff%.0f:%02d %s|r)", tDeltaSecs / 3600, floor(tDeltaSecs / 60) % 60, VUHDO_I18N_HOURS)
+		  or format("(|cffffffff%d:%02d %s|r)", tDeltaSecs / 60, tDeltaSecs % 60, VUHDO_I18N_MINS);
 end
 
 
@@ -510,13 +506,9 @@ end
 local tDistance;
 function VUHDO_getDistanceText(aUnit)
 	tDistance = VUHDO_getDistanceBetween("player", aUnit);
-	if (tDistance ~= nil) then
-		return format("%.1f %s", tDistance, VUHDO_I18N_YARDS);
-	elseif ("player" == aUnit) then
-		return sZeroRange;
-	else
-		return VUHDO_I18N_UNKNOWN;
-	end
+	return tDistance ~= nil and tDistance
+	    or "player" == aUnit and sZeroRange
+	    or VUHDO_I18N_UNKNOWN;
 end
 
 
@@ -525,11 +517,7 @@ end
 local sTargetUnits = { };
 function VUHDO_getTargetUnit(aSourceUnit)
 	if (sTargetUnits[aSourceUnit] == nil) then
-		if ("player" == aSourceUnit) then
-			sTargetUnits[aSourceUnit] = "target";
-		else
-			sTargetUnits[aSourceUnit] = aSourceUnit .. "target";
-		end
+		sTargetUnits[aSourceUnit] = "player" == aSourceUnit and "target" or aSourceUnit .. "target";
 	end
 
 	return sTargetUnits[aSourceUnit];
@@ -550,6 +538,7 @@ local tInfo;
 local tEmptyInfo = { };
 function VUHDO_resolveVehicleUnit(aUnit)
 	tInfo = VUHDO_RAID[aUnit] or tEmptyInfo;
+
 	if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
 		return tInfo["ownerUnit"];
 	else
@@ -595,17 +584,15 @@ function VUHDO_utf8Cut(aString, aNumChars)
 	tNumChars = 0;
 	while (tNumCut < tNumBytes and tNumChars < aNumChars) do
 		tByte = strbyte(aString, tNumCut);
-		if (tByte < 128) then
-			tNumCut = tNumCut + 1;
-		elseif (tByte >= 194 and tByte <= 223) then
-			tNumCut = tNumCut + 2;
-		elseif (tByte >= 224 and tByte <= 239) then
-			tNumCut = tNumCut + 3;
-		elseif (tByte >= 240 and tByte <= 244) then
-			tNumCut = tNumCut + 4;
-		else
-			tNumCut = tNumCut + 1; -- invalid
-		end
+
+		tNumCut = tNumCut + (
+			    tByte < 194 and 1
+			 or tByte < 224 and 2
+			 or tByte < 240 and 3
+			 or tByte < 245 and 4
+			 or 1 -- invalid
+		);
+
 		tNumChars = tNumChars + 1;
 	end
 

@@ -14,6 +14,7 @@ local sBarsPos;
 local sBarColors;
 local sStacksRadio;
 local sIcqqonRadio;
+local sIconRadio;
 
 --
 function VUHDO_panelRedrawHotsInitBurst()
@@ -198,7 +199,7 @@ local function VUHDO_initHotIcon(anIndex)
 		if (tHotColor["isClock"]) then
 			local tCd = VUHDO_getOrCreateCooldown(VUHDO_getBarIconFrame(sButton, anIndex), sButton, anIndex);
 			tCd:SetAllPoints(tHotIcon);
-			tCd:SetDrawEdge(true);
+			--tCd:SetDrawEdge(true);
 			tCd:SetReverse(true);
 			tCd:SetCooldown(GetTime(), 0);
 			tCd:SetAlpha(0);

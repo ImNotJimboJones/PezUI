@@ -1,3 +1,4 @@
+local _;
 VUHDO_HOT_MODELS = { };
 VUHDO_HOT_BAR_MODELS = { };
 

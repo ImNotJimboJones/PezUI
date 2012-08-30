@@ -116,17 +116,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = true,
 	Class = true,
 	["Color by Level Difference"] = true,
+	coloreverywhere_desc = "Color player names if they appear in the text of the chat message",
+	coloreverywhere_name = "Color Names Everywhere",
 	["Enable Alt-Invite"] = true,
 	["Enable Invite Links"] = true,
 	["Enable TabComplete"] = true,
+	hoverhilight_desc = "Hilight chat lines from a specific player when hovering over thier playerlink",
+	hoverhilight_name = "Hover Hilighting",
 	["How to color other player's level."] = true,
 	["How to color player's name."] = true,
 	["Keep Info"] = true,
 	["Keep Lots Of Info"] = true,
-	["Keep player information between session for all players except cross-server players"] = true,
 	["Keep player information between session, but limit it to friends and guild members."] = true,
+	["Keep player information between session for all players except cross-server players"] = true,
 	["Let TasteTheNaimbow set the common color for unknown player names."] = true,
 	["Level Color Mode"] = true,
+	linkifycommon_desc = "Linkify Common Messages",
+	linkifycommon_name = "Linkify Common Messages",
 	["No additional coloring"] = true,
 	None = true,
 	["Player Color Mode"] = true,
@@ -135,6 +141,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = true,
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = true,
 	Random = true,
+	realidcolor_desc = "RealID Name Coloring",
+	realidcolor_name = "RealID Coloring",
 	["Reset Settings"] = true,
 	["Restore default settings, and delete stored character data."] = true,
 	["Set common color of unknown player names."] = true,
@@ -144,6 +152,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = true,
 	["Show Raid Target Icon"] = true,
 	Square = true,
+	tabcomplete_name = "Possible Names",
 	["Tab completion : "] = true,
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = true,
 	["Toggle group invites by alt-clicking on player name."] = true,
@@ -160,15 +169,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = true,
 	["Use Player Color"] = true,
 	["Use toon name for RealID"] = true,
-	coloreverywhere_desc = "Color player names if they appear in the text of the chat message",
-	coloreverywhere_name = "Color Names Everywhere",
-	hoverhilight_desc = "Hilight chat lines from a specific player when hovering over thier playerlink",
-	hoverhilight_name = "Hover Hilighting",
-	linkifycommon_desc = "Linkify Common Messages",
-	linkifycommon_name = "Linkify Common Messages",
-	realidcolor_desc = "RealID Name Coloring",
-	realidcolor_name = "RealID Coloring",
-	tabcomplete_name = "Possible Names",
 }
 
   )
@@ -181,17 +181,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "Couleur des crochets",
 	Class = "Classe du joueur",
 	["Color by Level Difference"] = "Différence de niveau",
+	coloreverywhere_desc = "Colorier le nom des joueurs si ils apparaissent dans le texte des messages.",
+	coloreverywhere_name = "Couleur partout",
 	["Enable Alt-Invite"] = "Invitation avec Alt",
 	["Enable Invite Links"] = "Liens d'invitation",
 	["Enable TabComplete"] = "Complétion avec Tab",
+	-- hoverhilight_desc = "",
+	-- hoverhilight_name = "",
 	["How to color other player's level."] = "Définit la couleur du niveau des autres joueurs.",
 	["How to color player's name."] = "Définit la couleur du nom des joueurs.",
 	["Keep Info"] = "Garder les info.",
 	["Keep Lots Of Info"] = "Garder beaucoup d'info.",
-	["Keep player information between session for all players except cross-server players"] = "Garder les informations sur tous les joueurs entre les sessions sauf pour les joueurs inter-serveurs.",
 	["Keep player information between session, but limit it to friends and guild members."] = "Garder les informations sur les joueurs entre les sessions, mais seulement pour les amis et membres de la guilde.",
+	["Keep player information between session for all players except cross-server players"] = "Garder les informations sur tous les joueurs entre les sessions sauf pour les joueurs inter-serveurs.",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "Laisser TasteTheNaimbow définir la couleur des joueurs inconnus.",
 	["Level Color Mode"] = "Couleur des niveaux",
+	-- linkifycommon_desc = "",
+	-- linkifycommon_name = "",
 	["No additional coloring"] = "Pas de couleur",
 	None = "Aucun",
 	["Player Color Mode"] = "Couleur des joueurs",
@@ -200,6 +206,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: Informations des joueurs réinitialisées.",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Interroge le serveur pour tous les noms de joueurs que nous ne connaissons pas. Note : Cela peut être très lent, et les informations ne sont pas sauvegardées.",
 	Random = "Aléatoire",
+	realidcolor_desc = "Couleur des noms RealID.",
+	realidcolor_name = "Couleur RealID",
 	["Reset Settings"] = "Réinitialiser",
 	["Restore default settings, and delete stored character data."] = "Remets les options par défaut, et supprime toutes les informations enregistrées sur les joueurs.",
 	["Set common color of unknown player names."] = "Définit la couleur pour les noms de joueurs inconnus.",
@@ -209,6 +217,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "Montrer le niveau",
 	["Show Raid Target Icon"] = "Montrer l'icône de raid",
 	Square = "Crochets",
+	tabcomplete_name = "Noms possibles",
 	["Tab completion : "] = "Auto-complétion :",
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Active/Désactive l'invitation de groupe en faisant Alt+clic sur des mots-clé hyperliens comme 'inviter'.",
 	["Toggle group invites by alt-clicking on player name."] = "Active/Désactive l'invitation de groupe en faisant Alt+clic sur le nom d'un joueur.",
@@ -225,15 +234,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "Couleur du canal",
 	["Use Player Color"] = "Couleur du joueur",
 	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "Colorier le nom des joueurs si ils apparaissent dans le texte des messages.",
-	coloreverywhere_name = "Couleur partout",
-	-- hoverhilight_desc = "",
-	-- hoverhilight_name = "",
-	-- linkifycommon_desc = "",
-	-- linkifycommon_name = "",
-	realidcolor_desc = "Couleur des noms RealID.",
-	realidcolor_name = "Couleur RealID",
-	tabcomplete_name = "Noms possibles",
 }
 
   )
@@ -246,17 +246,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "Klammern verwende die Standardfarbe",
 	Class = "Klasse",
 	["Color by Level Difference"] = "Entsprechend des Stufenunterschieds einfärben",
+	coloreverywhere_desc = "Spielernamen einfärben, wenn diese im Text einer Chat-Mitteilung auftreten.",
+	coloreverywhere_name = "Namen überall einfärben",
 	["Enable Alt-Invite"] = "Alt-Einladungen aktivieren",
 	["Enable Invite Links"] = "Einladungs-Links aktivieren",
 	["Enable TabComplete"] = "TabComplete aktivieren",
+	hoverhilight_desc = "Chat-Zeilen eines bestimmten Spielers hervorheben, wenn die Maus über den Spielerlink gelegt wird.",
+	hoverhilight_name = "Schwebendes Hervorheben",
 	["How to color other player's level."] = "Wie die Stufen anderer Spieler eingefärbt werden sollen.",
 	["How to color player's name."] = "Wie die Namen der Spieler eingefärbt werden sollen.",
 	["Keep Info"] = "Informationen merken",
 	["Keep Lots Of Info"] = "Viele Informationen speichern",
-	["Keep player information between session for all players except cross-server players"] = "Spielerinformationen aller Spieler außer Spielern anderer Server zwischen Sitzungen merken.",
 	["Keep player information between session, but limit it to friends and guild members."] = "Spielerinformationen zwischen Sitzungen speichern, aber schränke dies ein auf Freunde und Gildenmitglieder.",
+	["Keep player information between session for all players except cross-server players"] = "Spielerinformationen aller Spieler außer Spielern anderer Server zwischen Sitzungen merken.",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "Lasse TasteTheNaimbow die übliche Farbe für unbekannte Spielernamen einstellen.",
 	["Level Color Mode"] = "Stufenfarbe-Modus",
+	linkifycommon_desc = "Allgemeine Mitteilungen in Links umwandeln",
+	linkifycommon_name = "Allgemeine Mitteilungen in Links umwandeln",
 	["No additional coloring"] = "Keine zusätzliche Einfärbung",
 	None = "Keine",
 	["Player Color Mode"] = "Spielerfarbe-Modus",
@@ -265,6 +271,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: Gespeicherte Spielerdaten gelöscht",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Alle uns unbekannten Spielernamen beim Server abfragen. Merke: dies passiert ziemlich langsam und diese Daten sind nicht gespeichert.",
 	Random = "Zufällig",
+	realidcolor_desc = "RealID Namenseinfärbung",
+	realidcolor_name = "RealID Einfärbung",
 	["Reset Settings"] = "Einstellungen zurücksetzen",
 	["Restore default settings, and delete stored character data."] = "Standardeinstellungen wiederherstellen und gespeicherte Charakterdaten löschen.",
 	["Set common color of unknown player names."] = "Allgemein übliche Farbe bei unbekannten Spielernamen einstellen.",
@@ -274,6 +282,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "Stufe anzeigen",
 	["Show Raid Target Icon"] = "Schlachtzugsziel-Symbol anzeigen",
 	Square = "Quadrat",
+	tabcomplete_name = "Mögliche Namen",
 	["Tab completion : "] = "Tab-Ergänzung:",
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Gruppeneinladungen umschalten, indem Hyperlinks von Stichworten wie \"invite\" bei gleichzeitigem Drücken der Alt-Taste angeklickt werden.",
 	["Toggle group invites by alt-clicking on player name."] = "Gruppeneinladungen umschalten, indem Spielernamen bei gleichzeitigem Drücken der Alt-Taste angeklickt werden.",
@@ -289,16 +298,7 @@ Prat:AddModuleToLoad(function()
 	["Unknown Use Common Color"] = "Unbekannt - übliche Farbe verwenden",
 	["Use Channel Color"] = "Kanalfarbe verwenden",
 	["Use Player Color"] = "Spielerfarbe verwenden",
-	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "Spielernamen einfärben, wenn diese im Text einer Chat-Mitteilung auftreten.",
-	coloreverywhere_name = "Namen überall einfärben",
-	hoverhilight_desc = "Chat-Zeilen eines bestimmten Spielers hervorheben, wenn die Maus über den Spielerlink gelegt wird.",
-	hoverhilight_name = "Schwebendes Hervorheben",
-	linkifycommon_desc = "Allgemeine Mitteilungen in Links umwandeln",
-	linkifycommon_name = "Allgemeine Mitteilungen in Links umwandeln",
-	realidcolor_desc = "RealID Namenseinfärbung",
-	realidcolor_name = "RealID Einfärbung",
-	tabcomplete_name = "Mögliche Namen",
+	["Use toon name for RealID"] = "Zeige Charakternamen statt RealID",
 }
 
   )
@@ -311,17 +311,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "괄호에 색깔 사용",
 	Class = "직업",
 	["Color by Level Difference"] = "레벨 차이에 의한 색깔",
+	coloreverywhere_desc = "채팅 메시지에 나타나는 플레이어 이름에 색상 적용",
+	coloreverywhere_name = "모든 곳에서 이름에 색상 사용",
 	["Enable Alt-Invite"] = "Alt 초대 켜기",
 	["Enable Invite Links"] = "초대 링크 켜기",
 	["Enable TabComplete"] = "탭완성 켜기",
+	hoverhilight_desc = "플레이어 이름 위에 마우스 오버 시 채팅 내용을 강조합니다",
+	hoverhilight_name = "마우스 오버 강조",
 	["How to color other player's level."] = "다른 플레이어들의 레벨 색깔 방법",
 	["How to color player's name."] = "플레이어 이름 색깔 방법",
 	["Keep Info"] = "길드유저 정보 저장",
 	["Keep Lots Of Info"] = "모든유저 정보 저장",
-	["Keep player information between session for all players except cross-server players"] = "모든유저에 대한 정보를 저장합니다. (다른 서버는 제외)",
 	["Keep player information between session, but limit it to friends and guild members."] = "친구와 길드유저에 대한 정보를 저장합니다.",
+	["Keep player information between session for all players except cross-server players"] = "모든유저에 대한 정보를 저장합니다. (다른 서버는 제외)",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "모르는 유저에 대한 색깔로 TasteTheNaimBow 애드온의 설정을 사용한다.",
 	["Level Color Mode"] = "레벨 색깔 설정",
+	-- linkifycommon_desc = "",
+	-- linkifycommon_name = "",
 	["No additional coloring"] = "색깔사용하지 않음",
 	None = "없음",
 	["Player Color Mode"] = "플레이어 색상 모드",
@@ -330,6 +336,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: 저장된 플레이어 데이타 초기화",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "알 수 없는 모든 플레이어 이름 정보를 서버에 요청합니다. 주의: 작동 시 느려질 수 있으며, 수집된 정보들은 저장되지 않습니다.",
 	Random = "무작위",
+	-- realidcolor_desc = "",
+	-- realidcolor_name = "",
 	["Reset Settings"] = "설정 초기화",
 	["Restore default settings, and delete stored character data."] = "기본 설정을 복구하고 저장된 케릭터 설정을 지웁니다.",
 	["Set common color of unknown player names."] = "알 수 없는 플레이어 이름 색상 설정",
@@ -339,6 +347,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "레벨 보이기",
 	["Show Raid Target Icon"] = "전술 아이콘 보이기",
 	Square = "사각형",
+	-- tabcomplete_name = "",
 	["Tab completion : "] = "탭 완성 :",
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "'초대'같은 단어를 Alt-클릭으로 초대하기",
 	["Toggle group invites by alt-clicking on player name."] = "플레이어 이름 Alt-클릭으로 초대하기",
@@ -355,15 +364,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "채널 색상 사용",
 	["Use Player Color"] = "플레이어 색상 사용",
 	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "채팅 메시지에 나타나는 플레이어 이름에 색상 적용",
-	coloreverywhere_name = "모든 곳에서 이름에 색상 사용",
-	hoverhilight_desc = "플레이어 이름 위에 마우스 오버 시 채팅 내용을 강조합니다",
-	hoverhilight_name = "마우스 오버 강조",
-	-- linkifycommon_desc = "",
-	-- linkifycommon_name = "",
-	-- realidcolor_desc = "",
-	-- realidcolor_name = "",
-	-- tabcomplete_name = "",
 }
 
   )
@@ -376,17 +376,23 @@ Prat:AddModuleToLoad(function()
 	-- ["Brackets Use Common Color"] = "",
 	-- Class = "",
 	-- ["Color by Level Difference"] = "",
+	-- coloreverywhere_desc = "",
+	-- coloreverywhere_name = "",
 	-- ["Enable Alt-Invite"] = "",
 	-- ["Enable Invite Links"] = "",
 	-- ["Enable TabComplete"] = "",
+	-- hoverhilight_desc = "",
+	-- hoverhilight_name = "",
 	-- ["How to color other player's level."] = "",
 	-- ["How to color player's name."] = "",
 	-- ["Keep Info"] = "",
 	-- ["Keep Lots Of Info"] = "",
-	-- ["Keep player information between session for all players except cross-server players"] = "",
 	-- ["Keep player information between session, but limit it to friends and guild members."] = "",
+	-- ["Keep player information between session for all players except cross-server players"] = "",
 	-- ["Let TasteTheNaimbow set the common color for unknown player names."] = "",
 	-- ["Level Color Mode"] = "",
+	-- linkifycommon_desc = "",
+	-- linkifycommon_name = "",
 	-- ["No additional coloring"] = "",
 	-- None = "",
 	-- ["Player Color Mode"] = "",
@@ -395,6 +401,8 @@ Prat:AddModuleToLoad(function()
 	-- ["Prat_Playernames: Stored Player Data Cleared"] = "",
 	-- ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "",
 	-- Random = "",
+	-- realidcolor_desc = "",
+	-- realidcolor_name = "",
 	-- ["Reset Settings"] = "",
 	-- ["Restore default settings, and delete stored character data."] = "",
 	-- ["Set common color of unknown player names."] = "",
@@ -404,6 +412,7 @@ Prat:AddModuleToLoad(function()
 	-- ["Show Level"] = "",
 	-- ["Show Raid Target Icon"] = "",
 	-- Square = "",
+	-- tabcomplete_name = "",
 	-- ["Tab completion : "] = "",
 	-- ["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "",
 	-- ["Toggle group invites by alt-clicking on player name."] = "",
@@ -420,15 +429,6 @@ Prat:AddModuleToLoad(function()
 	-- ["Use Channel Color"] = "",
 	-- ["Use Player Color"] = "",
 	-- ["Use toon name for RealID"] = "",
-	-- coloreverywhere_desc = "",
-	-- coloreverywhere_name = "",
-	-- hoverhilight_desc = "",
-	-- hoverhilight_name = "",
-	-- linkifycommon_desc = "",
-	-- linkifycommon_name = "",
-	-- realidcolor_desc = "",
-	-- realidcolor_name = "",
-	-- tabcomplete_name = "",
 }
 
   )
@@ -441,17 +441,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "Скобки общего цвета",
 	Class = "Класс",
 	["Color by Level Difference"] = "Окрашивание по отличию в уровне",
+	coloreverywhere_desc = "Окраска текст сообщения в цвет имени игрока, если цвет задан",
+	coloreverywhere_name = "Цвет имени везде",
 	["Enable Alt-Invite"] = "Включить приглашение с кнопкой Alt",
 	["Enable Invite Links"] = "Включить приглашение по ссылкам",
 	["Enable TabComplete"] = "Включить TabComplete",
+	hoverhilight_desc = "Подсвечивает строки чата от определенных игроков при наведении мышкой на их никнейм.",
+	hoverhilight_name = "Подсветка при наведении мышкой",
 	["How to color other player's level."] = "Как окрашивать уповень игрока.",
 	["How to color player's name."] = "Как окрашивать имя игрока.",
 	["Keep Info"] = "Хранить информацию",
 	["Keep Lots Of Info"] = "Хранить большое количество информации",
-	["Keep player information between session for all players except cross-server players"] = "Хранить информацию о всех собеседниках между сессиями за исключением игроков с других серверов",
 	["Keep player information between session, but limit it to friends and guild members."] = "Хранить информацию о собеседниках между сессиями, но ограничить этот список только друзьями и членами гильдии.",
+	["Keep player information between session for all players except cross-server players"] = "Хранить информацию о всех собеседниках между сессиями за исключением игроков с других серверов",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "Позволить TasteTheNaimbow установить общий цветдля неизвестных играков.",
 	["Level Color Mode"] = "Режим окрашивания уровня",
+	linkifycommon_desc = "Общие сообщения с сылками",
+	linkifycommon_name = "Общие сообщения с сылками",
 	["No additional coloring"] = "Отключить дополнительное цвето-выделение",
 	None = "Нет",
 	["Player Color Mode"] = "Режим цвета игрока",
@@ -460,6 +466,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: Информация о собеседниках очищена",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Запрос сервера для всех неизвестных играков. Заметка: Это происходит дастаточно медленно, и их данные не сохраняются.",
 	Random = "Случайно",
+	-- realidcolor_desc = "",
+	realidcolor_name = "RealID Цвет",
 	["Reset Settings"] = "Сброс настроек",
 	["Restore default settings, and delete stored character data."] = "Восстановить настройки по умолчанию и удалить сохраненную информацию о собеседниках.",
 	["Set common color of unknown player names."] = "Выбор цвета, которым будут окрашены неизвестные игроки.",
@@ -469,6 +477,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "Показывать уровень",
 	["Show Raid Target Icon"] = "Показать иконку цели рейда",
 	Square = "Квадратные",
+	tabcomplete_name = "Возможные имена",
 	["Tab completion : "] = "Завершение закладки : ",
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Вкл/выкл приглашение в группу с помощью alt+клик по ключевому слову типа: 'инвайт'.",
 	["Toggle group invites by alt-clicking on player name."] = "Включить режим, в котором можно пригласить игрока в группу щелкнув по его имени  с нажатой клавишей Alt.",
@@ -485,15 +494,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "Использовать цвет канала",
 	["Use Player Color"] = "Использовать цвет игрока",
 	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "Окраска текст сообщения в цвет имени игрока, если цвет задан",
-	coloreverywhere_name = "Цвет имени везде",
-	hoverhilight_desc = "Подсвечивает строки чата от определенных игроков при наведении мышкой на их никнейм.",
-	hoverhilight_name = "Подсветка при наведении мышкой",
-	linkifycommon_desc = "Общие сообщения с сылками",
-	linkifycommon_name = "Общие сообщения с сылками",
-	-- realidcolor_desc = "",
-	realidcolor_name = "RealID Цвет",
-	tabcomplete_name = "Возможные имена",
 }
 
   )
@@ -506,17 +506,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "使用同一颜色括号",
 	Class = "职业",
 	["Color by Level Difference"] = "彩色的等级差别",
+	coloreverywhere_desc = "彩色显示聊天信息中出现的玩家姓名",
+	coloreverywhere_name = "彩色显示姓名在所有地方",
 	["Enable Alt-Invite"] = "启用Alt-邀请",
 	["Enable Invite Links"] = "启用邀请链接",
 	["Enable TabComplete"] = "启用Tab键补全",
+	hoverhilight_desc = "当悬停在玩家链接上时高亮该玩家的聊天语句",
+	hoverhilight_name = "悬停高亮",
 	["How to color other player's level."] = "如何着色其他玩家的等级",
 	["How to color player's name."] = "如何着色玩家的名称",
 	["Keep Info"] = "保持信息",
 	["Keep Lots Of Info"] = "保持大量的信息",
-	["Keep player information between session for all players except cross-server players"] = "为除跨服玩家外的所有玩家在会话间保持玩家信息",
 	["Keep player information between session, but limit it to friends and guild members."] = "在会话间保持玩家信息,但仅限于朋友和公会成员",
+	["Keep player information between session for all players except cross-server players"] = "为除跨服玩家外的所有玩家在会话间保持玩家信息",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "让TasteTheNaimbow(插件)为未知玩家名称设置公共颜色",
 	["Level Color Mode"] = "等级着色模式",
+	linkifycommon_desc = "自助链接公共信息",
+	linkifycommon_name = "自助链接公共信息",
 	["No additional coloring"] = "无额外着色",
 	None = "无",
 	["Player Color Mode"] = "玩家着色模式",
@@ -525,6 +531,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_玩家名称: 玩家数据存储已清除",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "为所有未知玩家查询服务器,注意:这将非常缓慢,并且数据不会被存储",
 	Random = "随机",
+	realidcolor_desc = "实名名字颜色", -- Needs review
+	realidcolor_name = "实名颜色", -- Needs review
 	["Reset Settings"] = "重置设置",
 	["Restore default settings, and delete stored character data."] = "恢复默认设置并删除已存角色数据",
 	["Set common color of unknown player names."] = "设置未知玩家名称共有颜色",
@@ -534,6 +542,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "显示等级",
 	["Show Raid Target Icon"] = "显示团队目标图标",
 	Square = "直角",
+	tabcomplete_name = "可能的名称",
 	["Tab completion : "] = "Tab键补全",
 	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "组队邀请用alt-点击超链接的关键词如'邀请'",
 	["Toggle group invites by alt-clicking on player name."] = "组队邀请用alt-点击玩家名称",
@@ -550,15 +559,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "使用频道颜色",
 	["Use Player Color"] = "使用玩家颜色",
 	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "彩色显示聊天信息中出现的玩家姓名",
-	coloreverywhere_name = "彩色显示姓名在所有地方",
-	hoverhilight_desc = "当悬停在玩家链接上时高亮该玩家的聊天语句",
-	hoverhilight_name = "悬停高亮",
-	linkifycommon_desc = "自助链接公共信息",
-	linkifycommon_name = "自助链接公共信息",
-	realidcolor_desc = "实名名字颜色", -- Needs review
-	realidcolor_name = "实名颜色", -- Needs review
-	tabcomplete_name = "可能的名称",
 }
 
   )
@@ -571,17 +571,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "Utilizar Color Común Corchetes",
 	Class = "Clase",
 	["Color by Level Difference"] = "Color por Diferencia de Nivel",
+	coloreverywhere_desc = "Colorear nombres de jugadores si ellos aparecen en el texto de los mensajes del chat.",
+	coloreverywhere_name = "Colorear Nombres Siempre",
 	["Enable Alt-Invite"] = "Habilitar Alt-Invitar",
 	["Enable Invite Links"] = "Habilitar Enlaces Invitar",
 	["Enable TabComplete"] = "Habilitar Ficha completa",
+	hoverhilight_desc = "Resaltar líneas de chat de un jugador al situarse sobre su enlace de jugador",
+	-- hoverhilight_name = "",
 	["How to color other player's level."] = "Cómo el color de otro jugador de nivel.",
 	["How to color player's name."] = "Cómo el color de nombre del jugador.",
 	["Keep Info"] = "Mantener Información",
 	["Keep Lots Of Info"] = "Mantener Mucha Información",
-	["Keep player information between session for all players except cross-server players"] = "Mantiene información de jugadores entre sesiones para todos los jugadores excepto entre servidores",
 	["Keep player information between session, but limit it to friends and guild members."] = "Mantiene información de jugadores entre sesiones, pero lo limita a amigos y miembros de la hermandad.",
+	["Keep player information between session for all players except cross-server players"] = "Mantiene información de jugadores entre sesiones para todos los jugadores excepto entre servidores",
 	["Let TasteTheNaimbow set the common color for unknown player names."] = "Deje a TasteTheNaimbow establecer el color común para nombres de jugador desconocidos.",
 	["Level Color Mode"] = "Modo Color por Nivel",
+	linkifycommon_desc = "Linkify Common Messages",
+	linkifycommon_name = "Enlazar Mensajes Comunes",
 	["No additional coloring"] = "Sin color adicional",
 	None = "Ninguno",
 	["Player Color Mode"] = "Modo Color del Jugador",
@@ -590,6 +596,8 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: Limpiados los Datos de Jugador Guardados",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Consulta el servidor para todos los nombres de jugador que desconocemos. Nota: esto sucede muy lentamente, y estos datos no se guardan.",
 	Random = "Aleatorio",
+	-- realidcolor_desc = "",
+	-- realidcolor_name = "",
 	["Reset Settings"] = "Restablecer Ajustes",
 	["Restore default settings, and delete stored character data."] = "Restablece ajustes por defecto, y eliminar información del jugador guardada.",
 	["Set common color of unknown player names."] = "Establece el color común para los nombres de jugadores desconocidos.",
@@ -599,6 +607,7 @@ Prat:AddModuleToLoad(function()
 	["Show Level"] = "Mostrar Nivel",
 	["Show Raid Target Icon"] = "Mostrar Icono Objetivo Banda",
 	Square = "Cuadrado",
+	tabcomplete_name = "Nombres Posibles",
 	["Tab completion : "] = "Finalización de Pestaña : ",
 	-- ["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "",
 	["Toggle group invites by alt-clicking on player name."] = "Activa invitar a grupo al hacer alt-click en el nombre del jugador.",
@@ -615,15 +624,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "Utilizar Color Canal",
 	["Use Player Color"] = "Utilizar Color Jugador",
 	-- ["Use toon name for RealID"] = "",
-	coloreverywhere_desc = "Colorear nombres de jugadores si ellos aparecen en el texto de los mensajes del chat.",
-	coloreverywhere_name = "Colorear Nombres Siempre",
-	hoverhilight_desc = "Resaltar líneas de chat de un jugador al situarse sobre su enlace de jugador",
-	-- hoverhilight_name = "",
-	linkifycommon_desc = "Linkify Common Messages",
-	linkifycommon_name = "Enlazar Mensajes Comunes",
-	-- realidcolor_desc = "",
-	-- realidcolor_name = "",
-	tabcomplete_name = "Nombres Posibles",
 }
 
   )
@@ -636,17 +636,23 @@ Prat:AddModuleToLoad(function()
 	["Brackets Use Common Color"] = "括號使用的通用色彩",
 	Class = "職業",
 	["Color by Level Difference"] = "等級差異色彩",
+	-- coloreverywhere_desc = "",
+	coloreverywhere_name = "顏色名字到處",
 	["Enable Alt-Invite"] = "啟用 Alt 按鍵邀請",
 	["Enable Invite Links"] = "啟用邀請連結",
 	["Enable TabComplete"] = "啟用 TabComplete",
+	-- hoverhilight_desc = "",
+	hoverhilight_name = "滑鼠懸停高亮",
 	["How to color other player's level."] = "如何為玩家等級著色",
 	["How to color player's name."] = "如何為玩家名稱著色",
 	["Keep Info"] = "保存資訊",
 	["Keep Lots Of Info"] = "保存大量資訊",
-	["Keep player information between session for all players except cross-server players"] = "保存此階段所有玩家資訊，除了跨伺服器人物。",
 	["Keep player information between session, but limit it to friends and guild members."] = "保存此階段玩家資訊，但限制為好友以及公會成員。",
+	["Keep player information between session for all players except cross-server players"] = "保存此階段所有玩家資訊，除了跨伺服器人物。",
 	-- ["Let TasteTheNaimbow set the common color for unknown player names."] = "",
 	["Level Color Mode"] = "等級色彩模式",
+	linkifycommon_desc = "製作連結共同的訊息",
+	linkifycommon_name = "製作連結共同的訊息",
 	["No additional coloring"] = "無額外著色",
 	None = "無",
 	["Player Color Mode"] = "玩家色彩模式",
@@ -655,21 +661,24 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames：已清除儲存的玩家資料",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "查詢所有此伺服器我們不知道的角色名稱。備註：這個程序相當緩慢且並不會儲存此資料。",
 	Random = "隨機",
+	realidcolor_desc = "RealID 名稱著色",
+	realidcolor_name = "RealID 著色",
 	["Reset Settings"] = "重置設定",
 	["Restore default settings, and delete stored character data."] = "恢復至預設值且刪除儲存的角色資料。",
 	["Set common color of unknown player names."] = "設定未知角色的顯示色彩",
-	-- ["Sets common color of brackets to use around player names."] = "",
-	-- ["Sets style of brackets to use around player names."] = "",
+	["Sets common color of brackets to use around player names."] = "設定用來圍繞玩家名稱的括號顏色。", -- Needs review
+	["Sets style of brackets to use around player names."] = "設定用來圍繞玩家名稱的括號類型。", -- Needs review
 	["Show Group"] = "顯示隊伍編號",
 	["Show Level"] = "顯示等級",
 	["Show Raid Target Icon"] = "顯示團隊標記",
 	Square = "方框",
+	tabcomplete_name = "可能的名稱 ",
 	["Tab completion : "] = "標籤完成:",
 	-- ["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "",
-	-- ["Toggle group invites by alt-clicking on player name."] = "",
+	["Toggle group invites by alt-clicking on player name."] = "組隊邀請用alt-點擊玩家名稱。", -- Needs review
 	["Toggle level showing."] = "切換等級顯示。",
 	["Toggle raid group showing."] = "切換團隊組隊顯示。",
-	-- ["Toggle showing the raid target icon which is currently on the player."] = "",
+	["Toggle showing the raid target icon which is currently on the player."] = "顯示當前玩家的團隊目標圖標", -- Needs review
 	["Toggle tab completion of player names."] = "切換玩家名稱的標籤完成。",
 	-- ["Toggle using a common color for brackets around player names."] = "",
 	["Toggle using a common color for unknown player names."] = "切換未知玩家以一般色彩顯示",
@@ -680,15 +689,6 @@ Prat:AddModuleToLoad(function()
 	["Use Channel Color"] = "使用頻道文字顏色",
 	["Use Player Color"] = "使用腳色名稱文字色彩",
 	-- ["Use toon name for RealID"] = "",
-	-- coloreverywhere_desc = "",
-	coloreverywhere_name = "顏色名字到處",
-	-- hoverhilight_desc = "",
-	hoverhilight_name = "滑鼠懸停高亮",
-	linkifycommon_desc = "製作連結共同的訊息",
-	linkifycommon_name = "製作連結共同的訊息",
-	realidcolor_desc = "RealID 名稱著色",
-	realidcolor_name = "RealID 著色",
-	tabcomplete_name = "可能的名稱 ",
 }
 
   )
@@ -1040,11 +1040,7 @@ Prat:AddModuleToLoad(function()
     self:updatePlayer()
     self:updateParty()
 
-    if MiniMapBattlefieldFrame.status == "active" then
-      self:updateBG()
-    else
-      self:updateRaid()
-    end
+	self:updateRaid()
 
     self:updateFriends()
 
@@ -1057,7 +1053,7 @@ Prat:AddModuleToLoad(function()
   function module:updateGF()
     if IsInGuild() == 1 then GuildRoster() end
     self:updateFriends()
-    if MiniMapBattlefieldFrame.status == "active" then
+    if GetNumBattlefieldScores() > 0 then
       self:updateBG()
     end
     self:updateWho()
@@ -1099,6 +1095,7 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  local GetNumRaidMembers = GetNumGroupMembers or GetNumRaidMembers
   function module:updateRaid()
     --  self:Debug("updateRaid -->")
     local Name, Class, SubGroup, Level, Server, rank
@@ -1106,6 +1103,7 @@ Prat:AddModuleToLoad(function()
     for k, v in pairs(self.Subgroups) do
       self.Subgroups[k] = nil
     end
+	
     for i = 1, GetNumRaidMembers() do
       _, rank, SubGroup, Level, _, Class, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
       Name, Server = UnitName("raid" .. i)
@@ -1113,6 +1111,7 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  local GetNumPartyMembers = GetNumSubgroupMembers or GetNumPartyMembers -- Mists of Pandaria support
   function module:updateParty()
     local Class, Unit, Name, Server, _
     for i = 1, GetNumPartyMembers() do

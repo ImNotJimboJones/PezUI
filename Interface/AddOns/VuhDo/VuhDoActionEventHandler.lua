@@ -11,6 +11,7 @@ local pairs = pairs;
 local GameTooltip = GameTooltip;
 
 local sMouseoverUnit = nil;
+local _;
 
 
 
@@ -113,7 +114,7 @@ function VUHDO_getUnitGroupPrivileges(aUnit)
 			end
 		end
 	else
-		tIsLeader = UnitIsPartyLeader(aUnit);
+		tIsLeader = UnitIsGroupLeader(aUnit);
 	end
 
 	return tIsLeader, tIsAssist, tIsMasterLooter;
@@ -139,9 +140,9 @@ local function VUHDO_showPlayerIcons(aButton, aPanelNum)
 		return;
 	end
 
-	tIsLeader, tIsAssist, tIsMasterLooter = VUHDO_getUnitGroupPrivileges(tUnit);
-
 	local tIcon;
+
+	tIsLeader, tIsAssist, tIsMasterLooter = VUHDO_getUnitGroupPrivileges(tUnit);
 	if (tIsLeader) then
 		tIcon = VUHDO_getBarIcon(aButton, 1);
 		tIcon:SetTexture("Interface\\groupframe\\ui-group-leadericon");
@@ -160,12 +161,9 @@ local function VUHDO_showPlayerIcons(aButton, aPanelNum)
 
 	if (UnitIsPVP(tUnit) and VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] > 54) then
 		tIcon = VUHDO_getBarIcon(aButton, 3);
-
-		if ("Alliance" == (UnitFactionGroup(tUnit))) then
-			tIcon:SetTexture("Interface\\groupframe\\ui-group-pvp-alliance");
-		else
-			tIcon:SetTexture("Interface\\groupframe\\ui-group-pvp-horde");
-		end
+		tIcon:SetTexture("Alliance" == (UnitFactionGroup(tUnit))
+			and "Interface\\groupframe\\ui-group-pvp-alliance"
+			or "Interface\\groupframe\\ui-group-pvp-horde");
 
 		VUHDO_placePlayerIcon(aButton, 3, 2);
 		tIcon:SetWidth(32);
@@ -175,7 +173,6 @@ local function VUHDO_showPlayerIcons(aButton, aPanelNum)
 	tClass = tInfo["class"];
 	if (tClass ~= nil) then
 		tIcon = VUHDO_getBarIcon(aButton, 4);
-
 		tIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
 		tIcon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[tClass]));
 		VUHDO_placePlayerIcon(aButton, 4, 3);
@@ -185,13 +182,11 @@ local function VUHDO_showPlayerIcons(aButton, aPanelNum)
 	if (tRole ~= nil) then
 		tIcon = VUHDO_getBarIcon(aButton, 5);
 		tIcon:SetTexture("Interface\\LFGFrame\\UI-LFG-ICON-ROLES");
-		if (VUHDO_ID_MELEE_TANK == tRole) then
-			tIcon:SetTexCoord(GetTexCoordsForRole("TANK"));
-		elseif (VUHDO_ID_RANGED_HEAL == tRole) then
-			tIcon:SetTexCoord(GetTexCoordsForRole("HEALER"));
-		else
-			tIcon:SetTexCoord(GetTexCoordsForRole("DAMAGER"));
-		end
+		tIcon:SetTexCoord(GetTexCoordsForRole(
+			VUHDO_ID_MELEE_TANK == tRole and "TANK"
+			or VUHDO_ID_RANGED_HEAL == tRole and "HEALER"
+			or "DAMAGER"
+		));
 		VUHDO_placePlayerIcon(aButton, 5, 5);
 	end
 end

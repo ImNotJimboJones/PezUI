@@ -1,4 +1,4 @@
--- $Id: AtlasIntegration.lua 3697 2012-01-31 15:17:37Z lag123 $
+-- $Id: AtlasIntegration.lua 3725 2012-04-23 23:39:19Z lag123 $
 --[[
 self file contains all the Atlas specific functions
 ]]
@@ -27,7 +27,7 @@ StaticPopupDialogs["ATLASLOOT_INCOMPATIBLE_ATLAS"] = {
 	hideOnEscape = 1
 };
 
--- self function sets up the Atlas specific XML objects
+-- This function sets up the Atlas specific XML objects
 function AtlasLoot:SetupForAtlas()
 	if not AtlasFrame then return end
 	--Anchor the loot table to the Atlas frame

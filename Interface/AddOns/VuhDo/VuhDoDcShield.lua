@@ -10,7 +10,7 @@ local GetMacroIndexByName = GetMacroIndexByName;
 local tonumber = tonumber;
 local pairs = pairs;
 local GetNumMacros = GetNumMacros;
-local _ = _;
+local _;
 local format = format;
 
 local VUHDO_RAID;
@@ -38,7 +38,8 @@ local VUHDO_CLASS_TO_MACRO = {
 	[VUHDO_ID_SHAMANS] = "S",
 	[VUHDO_ID_DRUIDS] = "D",
 	[VUHDO_ID_PRIESTS] = "I",
-	[VUHDO_ID_DEATH_KNIGHT] = "E"
+	[VUHDO_ID_DEATH_KNIGHT] = "E",
+	[VUHDO_ID_MONKS] = "O",
 };
 
 
@@ -52,7 +53,8 @@ local VUHDO_MACRO_TO_CLASS = {
 	["S"] = VUHDO_ID_SHAMANS,
 	["D"] = VUHDO_ID_DRUIDS,
 	["I"] = VUHDO_ID_PRIESTS,
-	["E"] = VUHDO_ID_DEATH_KNIGHT
+	["E"] = VUHDO_ID_DEATH_KNIGHT,
+	["O"] = VUHDO_ID_MONKS,
 };
 
 

@@ -1,9 +1,10 @@
---[[ Titan
-TitanPanelTemplate.lua
-Contains the routines to handle a frame created as a Titan plugin.
+--[[ File
+NAME: TitanPanelTemplate.lua
+DESC: Contains the routines to handle a frame created as a Titan plugin.
 --]]
 --[[ API
-See TitanPanelButtonTemplate.xml also.
+NAME: TitanPanelTemplate overview
+DESC: See TitanPanelButtonTemplate.xml also.
 
 A Titan plugin is a frame created using one of the button types in TitanPanelButtonTemplate.xml which inherits TitanPanelButtonTemplate.
 The available plugin types are:
@@ -36,7 +37,7 @@ Each template contains:
 				TitanPanelButton_OnLeave(self);
 			</OnLeave>					
 If these events are overridden then the default routine needs to be included!
-
+:DESC
 --]]
 
 -- Globals
@@ -61,11 +62,11 @@ local media = LibStub("LibSharedMedia-3.0")
 --[[ local
 NAME: TitanTooltip_AddTooltipText
 DESC: Helper to add a line of tooltip text to the tooltip.
-VARS: 
-- text - string
-OUT : None
+VAR:  text - string
+OUT:  None
 NOTE:
 - Append a "\n" to the end if there is not one already there
+:NOTE
 --]]
 local function TitanTooltip_AddTooltipText(text)
 	if ( text ) then
@@ -93,15 +94,14 @@ end
 --[[ local
 NAME: TitanTooltip_SetOwnerPosition
 DESC: Set both the parent and the position of GameTooltip for the plugin tooltip.
-VARS: 
-- parent - reference to the frame to attach the tooltip to
-- anchorPoint - tooltip anchor location (side or corner) to use
-- relativeToFrame - string name name of the frame, usually the plugin), to attach the tooltip to
-- relativePoint - parent anchor location (side or corner) to use
-- xOffset - X offset from the anchor point
-- yOffset - Y offset from the anchor point
-- frame - reference to the tooltip
-OUT : None
+VAR: parent - reference to the frame to attach the tooltip to
+VAR: anchorPoint - tooltip anchor location (side or corner) to use
+VAR: relativeToFrame - string name name of the frame, usually the plugin), to attach the tooltip to
+VAR: relativePoint - parent anchor location (side or corner) to use
+VAR: xOffset - X offset from the anchor point
+VAR: yOffset - Y offset from the anchor point
+VAR: frame - reference to the tooltip
+OUT:  None
 --]]
 local function TitanTooltip_SetOwnerPosition(parent, anchorPoint, relativeToFrame, relativePoint, xOffset, yOffset, frame)
 	if not frame then
@@ -130,11 +130,11 @@ end
 NAME: TitanTooltip_SetGameTooltip
 DESC: Helper to set the tooltip of the given Titan plugin.
 First check for a custom function. If no function then use the plugin tooltip title and text.
-VARS: 
-- self - frame reference of the plugin
-OUT : None
+VAR: self - frame reference of the plugin
+OUT:  None
 NOTE:
 - If a custom function is given pcall (protected call) is used in case the function errors out. Currently the error is allowed to occur silently because it could generate a lot of text to chat.
+:NOTE
 --]]
 local function TitanTooltip_SetGameTooltip(self)
 	if ( self.tooltipCustomFunction ) then
@@ -159,11 +159,10 @@ end
 --[[ local
 NAME: TitanTooltip_SetPanelTooltip
 DESC: Helper to set the screen position of the tooltip of the given Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- id - string name of the plugin
-- frame - reference to the tooltip
-OUT : None
+VAR: self - frame reference of the plugin
+VAR: id - string name of the plugin
+VAR: frame - reference to the tooltip
+OUT:  None
 --]]
 local function TitanTooltip_SetPanelTooltip(self, id, frame)
 	-- sanity checks
@@ -209,9 +208,8 @@ end
 --[[ local
 NAME: TitanPanelButton_SetTooltip
 DESC: Set the tooltip of the given Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- id - string name of the plugin
+VAR: self - frame reference of the plugin
+VAR: id - string name of the plugin
 --]]
 local function TitanPanelButton_SetTooltip(self, id)
 	-- ensure that the 'self' passed is a valid frame reference
@@ -241,10 +239,8 @@ end
 --[[ local
 NAME: TitanPanelButton_IsText
 DESC: Is the given Titan plugin of type text?
-VARS: 
-- id - string name of the plugin
-OUT :
-- boolean
+VAR: id - string name of the plugin
+OUT: boolean
 --]]
 local function TitanPanelButton_IsText(id)
 	if (TitanPanelButton_GetType(id) == TITAN_PANEL_BUTTON_TYPE_TEXT) then
@@ -255,10 +251,8 @@ end
 --[[ Titan
 NAME: TitanPanelButton_IsIcon
 DESC: Is the given Titan plugin of type icon?
-VARS: 
-- id - string name of the plugin
-OUT :
-- boolean
+VAR: id - string name of the plugin
+OUT: boolean
 --]]
 function TitanPanelButton_IsIcon(id)
 	if (TitanPanelButton_GetType(id) == TITAN_PANEL_BUTTON_TYPE_ICON) then
@@ -269,10 +263,8 @@ end
 --[[ local
 NAME: TitanPanelButton_IsCombo
 DESC: Is the given Titan plugin of type combo?
-VARS: 
-- id - string name of the plugin
-OUT :
-- boolean
+VAR:  id - string name of the plugin
+OUT: boolean
 --]]
 local function TitanPanelButton_IsCombo(id)
 	if (TitanPanelButton_GetType(id) == TITAN_PANEL_BUTTON_TYPE_COMBO) then
@@ -283,10 +275,8 @@ end
 --[[ local
 NAME: TitanPanelButton_IsCustom
 DESC: Is the given Titan plugin of type custom?
-VARS: 
-- id - string name of the plugin
-OUT :
-- boolean
+VAR: id - string name of the plugin
+OUT: boolean
 --]]
 local function TitanPanelButton_IsCustom(id)
 	if (TitanPanelButton_GetType(id) == TITAN_PANEL_BUTTON_TYPE_CUSTOM) then
@@ -297,15 +287,15 @@ end
 --[[ local
 NAME: TitanPanelButton_OnDragStart
 DESC: Handle the OnDragStart event of the given Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- ChildButton - boolean
-OUT : None
+VAR:  self - frame reference of the plugin
+VAR: ChildButton - boolean
+OUT:  None
 NOTE:
 - Do nothing if the user has locked plugins or if in combat.
 - Set the .isMoving of the plugin (frame) so other routine can check it.
 - Set TITAN_PANEL_MOVING so any Titan routine will know a 'drag & drop' is in progress.
 - Set TITAN_PANEL_MOVE_ADDON so sanity checks can be done on the 'drop'.
+:NOTE
 --]]
 local function TitanPanelButton_OnDragStart(self, ChildButton)
 	if TitanPanelGetVar("LockButtons") or InCombatLockdown() then return end
@@ -370,14 +360,14 @@ end
 --[[ local
 NAME: TitanPanelButton_OnDragStop
 DESC: Handle the OnDragStop event of the given Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- ChildButton - boolean
-OUT : None
+VAR: self - frame reference of the plugin
+VAR: ChildButton - boolean
+OUT:  None
 NOTE:
 - Clear the .isMoving of the plugin (frame).
 - Clear TITAN_PANEL_MOVING.
 - Clear TITAN_PANEL_MOVE_ADDON.
+:NOTE
 --]]
 local function TitanPanelButton_OnDragStop(self, ChildButton)
 	if TitanPanelGetVar("LockButtons") then 
@@ -471,15 +461,14 @@ end
 --[[ local
 NAME: TitanTooltip_SetOwnerPosition
 DESC: Set both the parent and the position of GameTooltip for the plugin tooltip.
-VARS: 
-- parent - reference to the frame to attach the tooltip to
-- anchorPoint - tooltip anchor location (side or corner) to use
-- relativeToFrame - string name name of the frame, usually the plugin), to attach the tooltip to
-- relativePoint - parent anchor location (side or corner) to use
-- xOffset - X offset from the anchor point
-- yOffset - Y offset from the anchor point
-- frame - reference to the tooltip
-OUT : None
+VAR: parent - reference to the frame to attach the tooltip to
+VAR: anchorPoint - tooltip anchor location (side or corner) to use
+VAR: relativeToFrame - string name name of the frame, usually the plugin), to attach the tooltip to
+VAR: relativePoint - parent anchor location (side or corner) to use
+VAR: xOffset - X offset from the anchor point
+VAR: yOffset - Y offset from the anchor point
+VAR: frame - reference to the tooltip
+OUT:  None
 --]]
 local function TitanTooltip_SetOwnerPosition(parent, anchorPoint, relativeToFrame, relativePoint, xOffset, yOffset, frame)
 	if not frame then
@@ -507,11 +496,9 @@ end
 --[[ API
 NAME: TitanOptionSlider_TooltipText
 DESC: Set the color of the tooltip text to normal (white) with the value in green.
-VARS: 
-- text - the label for value
-- value - the value
-OUT : 
-- colored string of text and value
+VAR: text - the label for value
+VAR: value - the value
+OUT: string - encoded color string of text and value
 --]]
 function TitanOptionSlider_TooltipText(text, value) 
 	return text .. GREEN_FONT_COLOR_CODE .. value .. FONT_COLOR_CODE_CLOSE;
@@ -520,13 +507,12 @@ end
 --[[ API
 NAME: TitanPanelButton_OnLoad
 DESC: Handle the OnLoad event of the requested Titan plugin. Ensure the plugin is set to be registered.
-VARS: 
-- self - the frame of the plugin
-- isChildButton - boolean
+VAR: isChildButton - boolean
 NOTE:
 - This is called from the Titan plugin frame in the OnLoad event - usually as the frame is created.
 - This starts the plugin registration process. See TitanUtils for more details on plugin registration.
 - The plugin registration is a two step process because not all addons create Titan plugins in the frame create. The Titan feature of converting LDB addons to Titan plugins is an example.
+:NOTE
 --]]
 function TitanPanelButton_OnLoad(self, isChildButton) -- Used by plugins
 	TitanUtils_PluginToRegister(self, isChildButton)
@@ -535,18 +521,18 @@ end
 --[[ API
 NAME: TitanPanelPluginHandle_OnUpdate
 DESC: A method to refresh the display of a Titan plugin.
-VARS: 
-- table - the frame of the plugin
-- oldarg - nil or command
-1 = refresh button
-2 = refresh tooltip
-3 = refresh button and tooltip
-
+VAR: table - the frame of the plugin
+VAR: oldarg - nil or command
 NOTE:
 - This is used by some plugins. It is not used within Titan.
 - The expected usage is either:
 1) Table contains {<plugin id>, <update command>}
 2) table = <plugin id> and oldarg = <update command>
+- oldarg - nil or command
+1 = refresh button
+2 = refresh tooltip
+3 = refresh button and tooltip
+:NOTE
 --]]
 function TitanPanelPluginHandle_OnUpdate(table, oldarg) -- Used by plugins
 	local id, updateType = nil, nil
@@ -583,9 +569,8 @@ end
 --[[ API
 NAME: TitanPanelDetectPluginMethod
 DESC: Poorly named routine that sets the OnDragStart & OnDragStop scripts of a Titan plugin.
-VARS: 
-- id - the string name of the plugin
-- isChildButton - boolean
+VAR: id - the string name of the plugin
+VAR: isChildButton - boolean
 --]]
 function TitanPanelDetectPluginMethod(id, isChildButton)
 	-- Ensure the id is not nil
@@ -623,8 +608,7 @@ end
 --[[ API
 NAME: TitanPanelButton_OnShow
 DESC: Handle the OnShow event of the requested Titan plugin.
-VARS: 
-- self - frame reference of the plugin
+VAR:self - frame reference of the plugin
 --]]
 function TitanPanelButton_OnShow(self) -- Used by plugins
 	local id = nil;
@@ -641,12 +625,12 @@ end
 --[[ API
 NAME: TitanPanelButton_OnClick
 DESC: Handle the OnClick mouse event of the requested Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- button - mouse button that was clicked
-- isChildButton - boolean
+VAR: self - frame reference of the plugin
+VAR: button - mouse button that was clicked
+VAR: isChildButton - boolean
 NOTE:
 - Only the left and right mouse buttons are handled by Titan.
+:NOTE
 --]]
 function TitanPanelButton_OnClick(self, button, isChildButton) -- Used by plugins
 	local id
@@ -724,13 +708,13 @@ end
 --[[ API
 NAME: TitanPanelButton_OnEnter
 DESC: Handle the OnEnter cursor event of the requested Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- isChildButton - boolean
+VAR: self - frame reference of the plugin
+VAR: isChildButton - boolean
 NOTE:
 - The cursor has moved over the plugin so show the plugin tooltip.
 - Save same hassle by doing nothing if the tooltip is already shown or if the cursor is moving.
 - If the "is moving" is set the user is dragging this plugin around so do nothing here.
+:NOTE
 --]]
 function TitanPanelButton_OnEnter(self, isChildButton) -- Used by plugins
 	local id = nil;
@@ -761,11 +745,11 @@ end
 --[[ API
 NAME: TitanPanelButton_OnLeave
 DESC: Handle the OnLeave cursor event of the requested Titan plugin.
-VARS: 
-- self - frame reference of the plugin
-- isChildButton - boolean
+VAR: self - frame reference of the plugin
+VAR: isChildButton - boolean
 NOTE:
 - The cursor has moved off the plugin so hide the plugin tooltip.
+:NOTE
 --]]
 function TitanPanelButton_OnLeave(self, isChildButton)
 	local id = nil;
@@ -791,11 +775,11 @@ end
 --[[ local
 NAME: TitanPanelButton_SetButtonText
 DESC: Set / update the text of the given Titan plugin.
-VARS: 
-- id - string name of the plugin
+VAR: id - string name of the plugin
 NOTE:
 - The plugin is expected to tell Titan what routine is to be called in <self>.registry.buttonTextFunction.
 - The text routine is called in protected mode (pcall) to ensure the Titan main routines still run.
+:NOTE
 --]]
 local function TitanPanelButton_SetButtonText(id) 
 	if (id and TitanUtils_IsPluginRegistered(id)) then
@@ -875,11 +859,11 @@ end
 --[[ local
 NAME: TitanPanelButton_SetTextButtonWidth
 DESC: Set the text width of the given Titan plugin that is text only.
-VARS: 
-- id - string name of the plugin
-- setButtonWidth - new width
+VAR: id - string name of the plugin
+VAR: setButtonWidth - new width
 NOTE:
 - Titan uses a tolerance setting to prevent endless updating of the text width. 
+:NOTE
 --]]
 local function TitanPanelButton_SetTextButtonWidth(id, setButtonWidth) 
 	if (id) then
@@ -898,10 +882,10 @@ end
 --[[ local
 NAME: TitanPanelButton_SetIconButtonWidth
 DESC: Set the icon width of the given Titan plugin that is icon only.
-VARS: 
-- id - string name of the plugin
+VAR: id - string name of the plugin
 NOTE:
 - The plugin is expected to tell Titan what the icon width is in <self>.registry.iconButtonWidth.
+:NOTE
 --]]
 local function TitanPanelButton_SetIconButtonWidth(id) 
 	if (id) then
@@ -915,11 +899,11 @@ end
 --[[ local
 NAME: TitanPanelButton_SetComboButtonWidth
 DESC: Set the icon width of the given Titan plugin that is a combo - icon & text.
-VARS: 
-- id - string name of the plugin
-- setButtonWidth - new width
+VAR: id - string name of the plugin
+VAR: setButtonWidth - new width
 NOTE:
 - The plugin is expected to tell Titan what the icon width is in <self>.registry.iconButtonWidth.
+:NOTE
 --]]
 local function TitanPanelButton_SetComboButtonWidth(id, setButtonWidth) 
 	if (id) then
@@ -966,9 +950,8 @@ end
 --[[ API
 NAME: TitanPanelButton_UpdateButton
 DESC: Update the display of the given Titan plugin.
-VARS: 
-- id - string name of the plugin
-- setButtonWidth - new width
+VAR: id - string name of the plugin
+VAR: setButtonWidth - new width
 --]]
 function TitanPanelButton_UpdateButton(id, setButtonWidth)  -- Used by plugins
 	local button, id = TitanUtils_GetButton(id);
@@ -1001,8 +984,7 @@ end
 --[[ API
 NAME: TitanPanelButton_UpdateTooltip
 DESC: Update the tooltip of the given Titan plugin.
-VARS: 
-- self - frame reference of the plugin
+VAR: self - frame reference of the plugin
 --]]
 function TitanPanelButton_UpdateTooltip(self) -- Used by plugins
 	if not self then return end
@@ -1015,12 +997,11 @@ end
 --[[ API
 NAME: TitanPanelButton_SetButtonIcon
 DESC: Set the icon of the given Titan plugin.
-VARS: 
-- id - string name of the plugin
-- iconCoords - if given, this is the placing of the icon within the plugin
-- iconR - if given, this is the Red (RBG) setting of the icon
-- iconG - if given, this is the Green (RBG) setting of the icon
-- iconB - if given, this is the Blue (RBG) setting of the icon
+VAR: id - string name of the plugin
+VAR: iconCoords - if given, this is the placing of the icon within the plugin
+VAR: iconR - if given, this is the Red (RBG) setting of the icon
+VAR: iconG - if given, this is the Green (RBG) setting of the icon
+VAR: iconB - if given, this is the Blue (RBG) setting of the icon
 --]]
 function TitanPanelButton_SetButtonIcon(id, iconCoords, iconR, iconG, iconB) 	
 	if (id and TitanUtils_IsPluginRegistered(id)) then
@@ -1049,12 +1030,11 @@ end
 --[[ Titan
 NAME: TitanPanelButton_GetType
 DESC: Get the type of the given Titan plugin.
-VARS: 
-- id - string name of the plugin
-OUT :
-- The type of the plugin (text, icon, combo (default))
+VAR: id - string name of the plugin
+OUT: type - The type of the plugin (text, icon, combo (default))
 NOTE:
 - This assumes that the developer is playing nice and is using the Titan templates as is...
+:NOTE
 --]]
 function TitanPanelButton_GetType(id)
 	-- id is required

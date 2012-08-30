@@ -41,7 +41,7 @@ do
 	local function UpdateRoster()
 		local index, size
 		if UnitInRaid("player") then
-			size = GetNumRaidMembers() - 1
+			size = TidyPlatesUtility.GetNumRaidMembers() - 1
 			for index = 1, size do
 				local raidid = "raid"..tostring(index)
 				local isAssigned = GetPartyAssignment("MAINTANK", raidid)

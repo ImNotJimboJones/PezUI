@@ -1,6 +1,7 @@
 local pairs = pairs;
 local ipairs = ipairs;
 local InCombatLockdown = InCombatLockdown;
+local _;
 
 
 local VUHDO_BUFF_PANEL_BASE_HEIGHT = nil;
@@ -29,9 +30,9 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 
 	tBuffName = aBuffInfo[1];
 
-	if (VUHDO_MULTICAST_BUFFS[aCategSpec] ~= nil and VUHDO_MULTICAST_BUFFS[aCategSpec][tBuffName] ~= nil) then
+	--[[if (VUHDO_MULTICAST_BUFFS[aCategSpec] ~= nil and VUHDO_MULTICAST_BUFFS[aCategSpec][tBuffName] ~= nil) then
 		SetMultiCastSpell(VUHDO_MULTICAST_BUFFS[aCategSpec]["SLOT"], VUHDO_MULTICAST_BUFFS[aCategSpec][tBuffName]);
-	end
+	end]]
 
 	tPostfix = tBuffName .. (aBuffTarget or "");
 
@@ -312,7 +313,7 @@ end
 
 
 --
-function VUHDO_setTotemSlotTo(aSlotNum)
+--[[function VUHDO_setTotemSlotTo(aSlotNum)
 	local tType, tCurrentSpellId, _ = GetActionInfo(aSlotNum);
 
 	if ("spell" ~= tType) then
@@ -342,3 +343,4 @@ function VUHDO_setTotemSlotTo(aSlotNum)
 
 	end
 end
+]]

@@ -1,13 +1,13 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local mod = addon.SexyMap:NewModule("Movers")
-local L = addon.L
+local _, sm = ...
+sm.movers = {}
 
-local db
+local mod = sm.movers
+local L = sm.L
+
 local options = {
 	type = "group",
-	name = "Movers",
+	name = L["Movers"],
 	args = {
 		desc = {
 			order = 0.5,
@@ -19,16 +19,14 @@ local options = {
 			name = L["Enable Movers"],
 			type = "toggle",
 			get = function()
-				return db.enabled
+				return mod.db.enabled
 			end,
 			set = function(info, v)
-				db.enabled = v
-				if v then
-					mod:Enable()
-				else
-					mod:Disable()
-				end
+				mod.db.enabled = v
 				mod:SetMovers()
+				if v then
+					mod:Start()
+				end
 			end,
 		},
 		lock = {
@@ -36,13 +34,13 @@ local options = {
 			name = L["Lock Movers"],
 			type = "toggle",
 			get = function()
-				return db.lock
+				return mod.db.lock
 			end,
 			set = function(info, v)
-				db.lock = v
+				mod.db.lock = v
 				mod:SetMovers()
 			end,
-			disabled = function() return not db.enabled end,
+			disabled = function() return not mod.db.enabled end,
 		},
 	},
 }
@@ -54,55 +52,30 @@ local movables = {
 }
 local movers = {}
 
-function mod:OnInitialize()
-	local defaults = {
-		profile = {
+function mod:OnInitialize(profile)
+	if type(profile.movers) ~= "table" then
+		profile.movers = {
 			enabled = false,
 			lock = false,
 			framePositions = {},
 		}
-	}
-	self.db = parent.db:RegisterNamespace("Movers", defaults)
-	db = self.db.profile
-	parent:RegisterModuleOptions("Movers", options, L["Movers"])
+	end
+	self.db = profile.movers
+end
+
+function mod:OnEnable()
+	sm.core:RegisterModuleOptions("Movers", options, L["Movers"])
+	if mod.db.enabled then
+		self:SetMovers()
+		self:Start()
+	end
 end
 
 do
-	--[[local reanchorWatchFrame = function()
-		local mx, my = MinimapCluster:GetCenter()
-		local sx, sy = UIParent:GetCenter()
-		local change, from, to, side = false, nil, nil, nil
-		if my < sy then
-			from = "BOTTOM"
-			to = "TOP"
-			side = to
-		else
-			from = "TOP"
-			to = "BOTTOM"
-			side = to
-		end
-		if mx < sx then
-			from = from .. "LEFT"
-			to = to .. "LEFT"
-		else
-			from = from .. "RIGHT"
-			to = to .. "RIGHT"
-		end
-		WatchFrame:ClearAllPoints()
-		WatchFrame:SetPoint(from, MinimapCluster, to)
-		-- WatchFrame:SetHeight(1000)
-		WatchFrame:SetPoint(side, UIParent, side)
-	end]]
-
-	local hooked
-	function mod:OnEnable()
-		db = self.db.profile
-		if not db.enabled then self:Disable() return end
-
-		self:SetMovers()
-
-		if hooked then return end
-		hooked = true
+	local started = nil
+	function mod:Start()
+		if started then return end
+		started = true
 
 		if updateContainerFrameAnchors then --XXX MoP compat
 			hooksecurefunc("updateContainerFrameAnchors", self.CreateMoversAndSetMovables)
@@ -128,15 +101,8 @@ do
 			movables["VehicleSeatIndicator"] = L["Vehicle Seat"]
 		end
 		self:CreateMoversAndSetMovables()
-		--[[hooksecurefunc("WatchFrame_Update", function()
-			if not WatchFrame:IsUserPlaced() then
-				reanchorWatchFrame()
-			end
-		end)]]
 	end
 end
-
-mod.movables = movables
 
 do
 	local function start(self)
@@ -153,9 +119,9 @@ do
 		local x, y = f:GetLeft(), f:GetTop()
 		local n = f:GetName()
 
-		db.framePositions[n] = db.framePositions[n] or {}
-		db.framePositions[n].x = x
-		db.framePositions[n].y = y
+		mod.db.framePositions[n] = mod.db.framePositions[n] or {}
+		mod.db.framePositions[n].x = x
+		mod.db.framePositions[n].y = y
 		f:SetUserPlaced(true)
 	end
 
@@ -177,7 +143,7 @@ do
 					f:SetScript("OnLeave", stop)
 					l:SetText(("%s mover"):format(text))
 					l:SetPoint("BOTTOM", f, "TOP")
-					f:SetBackdrop(addon.backdrop)
+					f:SetBackdrop(sm.backdrop)
 					f:SetBackdropColor(0, 0.6, 0, 1)
 				end
 
@@ -197,12 +163,12 @@ do
 					f:SetWidth(40)
 				end
 
-				if not db.lock then
+				if not mod.db.lock then
 					f:Hide()
 				end
 
-				if db.framePositions[frame] then
-					local x, y = db.framePositions[frame].x, db.framePositions[frame].y
+				if mod.db.framePositions[frame] then
+					local x, y = mod.db.framePositions[frame].x, mod.db.framePositions[frame].y
 					pf:ClearAllPoints()
 					pf:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", x, y)
 					pf:SetUserPlaced(true)
@@ -214,7 +180,7 @@ do
 end
 
 function mod:SetMovers()
-	local v = db.enabled and (not db.lock)
+	local v = mod.db.enabled and (not mod.db.lock)
 	if v then
 		for _, f in ipairs(movers) do
 			f.showParent = not not f:GetParent():IsVisible() -- convert nil -> false

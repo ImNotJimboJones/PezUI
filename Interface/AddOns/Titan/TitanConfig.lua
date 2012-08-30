@@ -1,11 +1,12 @@
---[[ Titan
-TitanConfig.lua
-This file contains routines used by Titan to show and process the Titan options.
+--[[ File
+NAME: TitanConfig.lua
+DESC: This file contains routines used by Titan to show and process the Titan options.
 Titan uses Ace libraries to place the Titan options within the Blizzard option screens. 
 
 Most routines in this file are local because they create the Titan options. 
 These routines are called first when Titan processes the 'player entering world' event.
 If an options list (skins, extra, etc) is changed by the user then the Ace table needs to be updated and Blizz informed to 'redraw'.
+:DESC
 --]]
 
 local L = LibStub("AceLocale-3.0"):GetLocale(TITAN_ID, true)
@@ -49,9 +50,8 @@ end
 --[[ local
 NAME: TitanAdjustPanelScale
 DESC: Set the Tian bars and plugins to the selected scale then adjust other frames as needed.
-VARS: 
-- scale - the scale the user has selected for Titan
-OUT : None
+VAR: scale - the scale the user has selected for Titan
+OUT: None
 --]]
 local function TitanAdjustPanelScale(scale)
 	Titan_AdjustScale()		
@@ -64,8 +64,8 @@ end
 --[[ local
 NAME: TitanPanel_TicketReload
 DESC: When the user changes the option to adjust for the Blizz ticket frame the UI must be reloaded. Ask the user if they want to do it now.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 --]]
 local function TitanPanel_TicketReload()
 	StaticPopupDialogs["TITAN_RELOAD"] = {
@@ -169,6 +169,7 @@ This is the starting shell
 - the option description
 - add the tooltip transparency (at the bottom of the options screen)
 - the code for each bar will be added via another routine.
+:DESC
 --]]
 local optionsTrans = {
 	name = L["TITAN_TRANS_MENU_TEXT"],
@@ -195,14 +196,14 @@ local optionsTrans = {
 --[[ local
 NAME: TitanPanel_TransOptions
 DESC: This will add each Titan bar to the transparency option table so it can be adjusted by the user. Each bar is shown whether ot not the user has them displayed.
-VARS: 
-- args - the table holding the Titan option data
-OUT : None
+VAR: args - the table holding the Titan option data
+OUT: None
 --]]
 local function TitanPanel_TransOptions(args)
 	local bar = ""
 	local bar_name = ""
 	local var = ""
+	local vert = nil
 	local position
 	for idx,v in pairs (TitanBarData) do
 		bar = TitanBarData[idx].name
@@ -235,9 +236,8 @@ end
 --[[ local
 NAME: TitanPanel_SetCustomTexture
 DESC: Update the skin when the user changes it.
-VARS: 
-- path - the file path to the skin
-OUT : None
+VAR: path - the file path to the skin
+OUT: None
 --]]
 local function TitanPanel_SetCustomTexture(path)
 	if path ~= TitanPanelGetVar("TexturePath") then
@@ -253,13 +253,13 @@ end
 --[[ local
 NAME: TitanPanel_AddNewSkin
 DESC: Add each skin to the options list. If the user had added custom skins these will be shown as well.
-VARS: 
-- skinname - the file name to use
-- skinpath - the file path to use
-OUT : None
+VAR: skinname - the file name to use
+VAR: skinpath - the file path to use
+OUT:  None
 NOTE:
 - Blizz *does not allow* LUA to access the user file system dynamically so the skins have to be input by hand. Titan can not search for available skins in the Artwork folder.
 - On the flip side a user can add a custom skin to the Titan saved variables then later delete the skin from the file system. This will not cause an error when the user tries to use (show) that skin but Titan will show a 'blank' skin.
+:NOTE
 --]]
 local function TitanPanel_AddNewSkin(skinname, skinpath)
 	-- name and path must be provided
@@ -352,6 +352,7 @@ DESC: Local table to hold the Titan custom skins options that allow a user to ad
 - You may not remove the currently used skin 
 - or the default one
 - or a Titan default skin (it would only come back...)
+:DESC
 --]]
 local optionsSkinsCustom = {
 	name = L["TITAN_SKINS_TITLE_CUSTOM"],
@@ -498,6 +499,7 @@ DESC: Local table to hold the Titan options that allow a user to adjust:
 - Set Titan font (bar and plugins)
 - Set Titan font size
 - Set Titan bar strata (tells Blizz which frames could go over Titan bar (and plugins)
+:DESC
 --]]
 local optionsUIScale = {
 	name = L["TITAN_UISCALE_MENU_TEXT"],
@@ -642,6 +644,7 @@ Main (top) controls:
 - Disable screen adjust - allows character frame and minimap to be 'over' the Titan bars
 - Disable minimap adjust - allows the minimap to be 'over' the Titan bars
 - Ticket frame adjust - adjusts the Blizz open ticket frame to be under the Titan bar(s)
+:DESC
 --]]
 local optionsBars = {
 	name = L["TITAN_PANEL_MENU_OPTIONS_MAIN_BARS"],
@@ -759,6 +762,7 @@ Main (top) controls:
 - Disable screen adjust - allows action button bar to be 'over' the Titan bars
 - Log adjust - move the chat frame to be 'above' the Titan bars
 - Bag adjust - move the bag frames to be 'above' the Titan bars
+:DESC
 --]]
 local optionsAuxBars = {
 	name = L["TITAN_PANEL_MENU_OPTIONS_AUX_BARS"],
@@ -875,6 +879,7 @@ Actions:
 - Force LDB laucnhers to right side - This will move all converted LDB plugins of type launcher to the right side of the Titan bar.
 - Refresh plugins - This can be used when a plugin has not updated its text. It may allow a plugin to show if it is not visible but the user has selected show.
 - Reset Titan to default - used when the user wants to reset Titan options to a fresh install state. No plugins are removed by this.
+:DESC
 --]]
 local optionsFrames = {
 	name = L["TITAN_PANEL_MENU_OPTIONS"],
@@ -979,12 +984,13 @@ local optionsAddonAttempts = {
 --[[ local
 NAME: TitanUpdateAddonAttempts
 DESC: Show the each plugin that attempted to register with Titan. This can be used by plugin developers as the create / update plugins (Titan or LDB). It can also be used by user to attempt to figure out why a plugin is not shown or to report an issue to Titan.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - This is called after the plugins are registered in the 'player entering world' event. It can be called again as plugins registered.
 - Any plugins that attempted to register (no child frames though) are shown. See the Titan Utils section for more details on plugin registration.
 - This option page is for display only. The user can take not action.
+:NOTE
 --]]
 local function TitanUpdateAddonAttempts()
 	local args = optionsAddonAttempts.args
@@ -1107,13 +1113,14 @@ local optionsExtras = {
 --[[ local
 NAME: TitanUpdateAddonAttempts
 DESC: Show plugins that are not registered (loaded) but have config data. The data can be deleted by the user.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - As users change the plugins they use the old ones still have saved variable data stored by Titan.
 - The old plugin data can be removed by the user when they will not longer use that plugin.
 - This routine is called to 'redraw' the list as a user deletes data.
 - A message is sent to chat that the plugin data has been deleted.
+:NOTE
 --]]
 local function TitanUpdateExtras()
 	local args = optionsExtras.args
@@ -1176,13 +1183,14 @@ local optionsChars = {
 --[[ local
 NAME: TitanUpdateChars
 DESC: Allow the user to delete toon data (just not the one they are logged into).
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - Users can delete toons but the saved variable data is still stored by Titan.
 - The old toon data can be removed by the user.
 - This routine is called to 'redraw' the list as a user deletes toon data.
 - A message is sent to chat that the plugin data has been deleted.
+:NOTE
 --]]
 local function TitanUpdateChars()
 	local players = {};
@@ -1429,8 +1437,9 @@ Bar:
 - Drop down so the user can pick the bar the plugin is to be shown on.
 - The list contains only the bars the user has selected to be shown.
 - The user can not move a plugin to a hidden bar to 'hide' it. The user should ensure "Show Plugin" is unchecked.
-VARS: None
-OUT : None
+:DESC
+VAR:  None
+OUT:  None
 --]]
 local function TitanUpdateConfigAddons()
 	local args = optionsAddons.args
@@ -1627,6 +1636,7 @@ DESC: Set the table to allow the user to control advanced features.
 Controls:
 - Entering world timer - some users need Titan to wait longer whenever the splash / loading screen is shown before adjusting frames and (re)setting data.
 - Vehicle timer - some users need Titan to wait longer whenever entering or leaving a vehicle before adjusting frames.
+:DESC
 --]]
 local optionsAdvanced = {
 	name = L["TITAN_PANEL_MENU_ADV"],
@@ -1667,10 +1677,11 @@ local optionsAdvanced = {
 --[[ Titan
 NAME: TitanUpdateConfig
 DESC: This routine will handle the requests to update the various data items in Titan options screens.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - This is called after the plugins are registered in the 'player entering world' event. It can be called again as more plugins are registered.
+:NOTE
 --]]
 function TitanUpdateConfig(action)
 	if action == "init" then

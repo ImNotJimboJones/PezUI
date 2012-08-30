@@ -225,7 +225,10 @@ function MOD:PLAYER_ENTERING_WORLD()
 	mover:EnableMouse(true)
 	mover:SetScript('OnMouseDown', function() cpf:StartMoving() end)
 	mover:SetScript('OnMouseUp', function() cpf:StopMovingOrSizing() end)
+	mover:SetScript('OnHide', function() cpf:StopMovingOrSizing() end)
 	cpf:SetUserPlaced(true)
+	cpf:SetClampedToScreen(true)  -- keep color picker frame on-screen
+	cpf:SetClampRectInsets(120,-120,0,90) -- but allow for dragging partially off to sides and down
 	cpf:EnableKeyboard(false)
 
 end

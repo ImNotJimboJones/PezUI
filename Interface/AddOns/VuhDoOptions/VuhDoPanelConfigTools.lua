@@ -1,5 +1,6 @@
+local _;
 VUHDO_GLOBAL_ICONS = { };
-VUHDO_GI_SCAN_IDX = 150001;
+VUHDO_GI_SCAN_IDX = 200001;
 
 
 local GetSpellInfo = GetSpellInfo;
@@ -162,7 +163,8 @@ function VUHDO_updateGlobalIconList()
 	for _, tItems in pairs(VUHDO_BOUQUETS["STORED"]) do
 		tItems = VUHDO_decompressIfCompressed(tItems);
 		for _, tItem in pairs(tItems) do
-			if (VUHDO_BOUQUET_BUFFS_SPECIAL[tItem["name"]] == nil) then
+		  --  tItem["name"] can be nil for some reason (maybe on compressing bouquets?)
+			if (tItem["name"] ~= nil and VUHDO_BOUQUET_BUFFS_SPECIAL[tItem["name"]] == nil) then
 				VUHDO_USED_BUFFS[tItem["name"]] = true;
 			end
 		end
@@ -237,7 +239,7 @@ local function VUHDO_scanNextGlobalIcons()
 	VUHDO_GI_SCAN_IDX = VUHDO_GI_SCAN_IDX - tStep;
 
 	if (VUHDO_GI_SCAN_IDX < 1) then
-		VUHDO_GI_SCAN_IDX = 150001;
+		VUHDO_GI_SCAN_IDX = 200001;
 	end
 end
 

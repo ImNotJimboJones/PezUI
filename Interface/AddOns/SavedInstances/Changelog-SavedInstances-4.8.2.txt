@@ -1,0 +1,68 @@
+------------------------------------------------------------------------
+r173 | oscarucb | 2012-08-30 11:36:53 +0000 (Thu, 30 Aug 2012) | 1 line
+Changed paths:
+   A /tags/4.8.2 (from /trunk:172)
+
+Tagging as 4.8.2
+------------------------------------------------------------------------
+r172 | oscarucb | 2012-08-30 10:58:54 +0000 (Thu, 30 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+handle the new instance difficulty encodings
+
+------------------------------------------------------------------------
+r170 | oscarucb | 2012-08-30 02:43:34 +0000 (Thu, 30 Aug 2012) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix problems with raid instance detection
+initial hack to handle changes in difficulty encoding
+
+------------------------------------------------------------------------
+r167 | oscarucb | 2012-08-28 23:43:50 +0000 (Tue, 28 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+another minor tweak, fix a rare startup lua error
+
+------------------------------------------------------------------------
+r166 | oscarucb | 2012-08-28 23:17:33 +0000 (Tue, 28 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+minor tweak
+
+------------------------------------------------------------------------
+r164 | oscarucb | 2012-08-28 21:43:43 +0000 (Tue, 28 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+fix a typo in new expansion setting
+
+------------------------------------------------------------------------
+r162 | oscarucb | 2012-08-28 10:00:33 +0000 (Tue, 28 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+fix setting resets
+
+------------------------------------------------------------------------
+r161 | oscarucb | 2012-08-25 21:38:50 +0000 (Sat, 25 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+more 5.x fixes
+
+------------------------------------------------------------------------
+r160 | oscarucb | 2012-08-25 20:17:55 +0000 (Sat, 25 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/SavedInstances.toc
+
+5.x updates
+
+------------------------------------------------------------------------

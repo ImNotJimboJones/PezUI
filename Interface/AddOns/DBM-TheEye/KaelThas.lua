@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("KaelThas", "DBM-TheEye")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 399 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 411 $"):sub(12, -3))
 mod:SetCreatureID(19622)
 mod:SetModelID(20023)
 mod:SetZone()
@@ -88,9 +88,9 @@ do
 		if shieldedMob == destGUID then
 			local absorbed
 			if subEvent == "SWING_MISSED" then 
-				absorbed = select( 2, ... ) 
+				absorbed = select( 3, ... ) 
 			elseif subEvent == "RANGE_MISSED" or subEvent == "SPELL_MISSED" or subEvent == "SPELL_PERIODIC_MISSED" then 
-				absorbed = select( 5, ... )
+				absorbed = select( 6, ... )
 			end
 			if absorbed then
 				absorbRemaining = absorbRemaining - absorbed
@@ -112,7 +112,7 @@ do
 	end
 end
 
-local function eggSpawned()--Is there a better way then this? This is ugly
+function mod:EggSpawned() --Is there a better way then this? This is ugly
 	if self:AntiSpam(20) then 
 		warnEgg:Show()
 		specWarnEgg:Show()
@@ -224,13 +224,13 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnPhoenix:Show()
 		timerPhoenixCD:Start()
 	elseif args:GetDestCreatureID() == 21364 then
-		eggSpawned()
+		self:EggSpawned()
 	end
 end
 
 function mod:SPELL_DAMAGE(sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID)
 	if self:GetCIDFromGUID(destGUID) == 21364 then
-		eggSpawned()
+		self:EggSpawned()
 	end
 end
 mod.SWING_DAMAGE = mod.SPELL_DAMAGE
@@ -238,7 +238,7 @@ mod.RANGE_DAMAGE = mod.SPELL_DAMAGE
 
 function mod:UNIT_TARGET()
 	if self:GetUnitCreatureId("target") == 21364 then
-		eggSpawned()
+		self:EggSpawned()
 	end
 end
 

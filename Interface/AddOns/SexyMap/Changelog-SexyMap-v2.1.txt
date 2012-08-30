@@ -1,0 +1,17 @@
+tag v2.1
+7a9bf1cb9d2296574310db267c58b040d0c435b1
+funkydude <none>
+2012-08-30 00:31:11 +0100
+
+Tagging as v2.1
+
+
+--------------------
+
+funkydude:
+	- tweak the wording of some strings
+	- add a global profile checkbox
+	- Add new preset, faded square by Renaitre
+	- Buttons: Grab VuhDo/Altoholic
+	- Space out the widgets on the main menu a bit, separate the preset dropdown into 2 dropdowns: Default and User-Submitted.
+	- Buttons: grab the WIM button

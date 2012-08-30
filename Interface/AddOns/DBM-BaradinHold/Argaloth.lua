@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(139, "DBM-BaradinHold", nil, 74)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7779 $"):sub(12, -3))
 mod:SetCreatureID(47120)
 mod:SetModelID(35426)
 mod:SetZone()
@@ -46,7 +46,6 @@ local function showConsumingWarning()
 	warnConsuming:Show(table.concat(consumingTargets, "<, >"))
 	table.wipe(consumingTargets)
 	consumingIcon = 8
-	lastFlames = 0
 	prewarnedFirestorm = false
 end
 
@@ -54,7 +53,6 @@ function mod:OnCombatStart(delay)
 	table.wipe(consumingTargets)
 	consumingIcon = 8
 	berserkTimer:Start(-delay)
-	spamMeteor = 0
 	consuming = 0
 end
 

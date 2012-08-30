@@ -21,7 +21,7 @@ local PrefixList = {
 
 local function CallForStyleUpdate()
 	for name, theme in pairs(TidyPlatesThemeList) do
-		if theme.OnApplyThemeCustomization then theme.OnApplyThemeCustomization() end
+		if theme.OnApplyThemeCustomization then theme:OnApplyThemeCustomization() end
 	end
 end
 

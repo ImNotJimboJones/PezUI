@@ -39,7 +39,7 @@
 	<Cooldown name="VuhDoHotCooldown" virtual="true">
 	</Cooldown>
 
-	<Button name="VuhDoHotIconTemplate" virtual="true">
+	<Frame name="VuhDoHotIconTemplate" virtual="true">
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture name="$parentI"></Texture>
@@ -60,7 +60,7 @@
 				self.addLevel = 8;
 			</OnLoad>
 		</Scripts>
-	</Button>
+	</Frame>
 
 	<Frame name="VuhDoRaidTargetIconTemplate" virtual="true">
 		<Layers>

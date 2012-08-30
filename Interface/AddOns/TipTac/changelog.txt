@@ -1,3 +1,9 @@
+TipTac Changes | 2012 Aug 30
+----------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Fixed the "Show Who Targets the Unit" feature, so it now works with the changed API.
+- Removed the level estimator that was used for units returning -1 as level, those more than 10 levels above the player. This estimation was determined by the number of talent points they had spent.
+
 TipTac Changes | 2012 May 20
 ----------------------------
 - Changed the TOC version to 40300 for the 4.3 patch.

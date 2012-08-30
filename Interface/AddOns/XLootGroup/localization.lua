@@ -52,20 +52,28 @@ locales.ptBR.config_panels = {
 }
 
 locales.frFR["roll_anchor"] = "Jets de groupe" -- Needs review
+locales.frFR["undecided"] = "Non décidé" -- Needs review
 locales.frFR["watch_anchor"] = "Suivi des jets" -- Needs review
 locales.frFR.config = {
 	direction = "Direction d'ajout", -- Needs review
+	expire_lost = "Jets perdus/ignorés", -- Needs review
+	expire_won = "Jets gagnés", -- Needs review
 	large = "Large", -- Needs review
+	long = "Long", -- Needs review
 	roll_button_size = "Taille des boutons de jet", -- Needs review
 	roll_width = "Largeur des cadres de jet", -- Needs review
 	scale = "Échelle", -- Needs review
+	short = "Court", -- Needs review
+	show_undecided = "Afficher les non décidés", -- Needs review
 	small = "Petit", -- Needs review
 	text_outline = "Texte avec contour", -- Needs review
+	text_time = "Afficher temps restant", -- Needs review
 	track_all = "Suivre tous les jets", -- Needs review
 	track_by_threshold = "Suivre les objets selon une qualité min.", -- Needs review
 	track_player_roll = "Suivre les objets sur lesquels vous jouez", -- Needs review
 }
 locales.frFR.config_panels = {
+	expiration = "Expiration des jets terminés", -- Needs review
 	options = "Options", -- Needs review
 }
 

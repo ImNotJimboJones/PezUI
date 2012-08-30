@@ -1,10 +1,11 @@
 
-local _, addon = ...
-local parent = addon.SexyMap
-local modName = "Buttons"
-local mod = addon.SexyMap:NewModule(modName)
-local L = addon.L
-local Shape, db, moving, ButtonFadeOut
+local _, sm = ...
+sm.buttons = {}
+
+local mod = sm.buttons
+local L = sm.L
+
+local Shape, moving, ButtonFadeOut
 
 local animFrames = {}
 local blizzButtons = {
@@ -23,22 +24,32 @@ local dynamicButtons = {
 	MiniMapMailFrame = L["New Mail Indicator (When Available)"],
 	MiniMapRecordingButton = L["Video Recording Button (Mac OSX Only, When Available)"],
 	MiniMapVoiceChatFrame = L["Voice Chat Button (When Available)"],
-	QueueStatusMinimapButton = L["Queue Status Button (When Available)"],
+	QueueStatusMinimapButton = L["Queue Status (PvP/LFG) Button (When Available)"],
 
 	MiniMapBattlefieldFrame = "PVP", -- XXX mop temp
 	MiniMapLFGFrame = "LFG", -- XXX mop temp
 }
+local addonButtons = { -- For the rare addons that don't use LibDBIcon for some reason :(
+	EnxMiniMapIcon = "Enchantrix",
+	["FuBarPluginBig BrotherFrameMinimapButton"] = "Big Brother",
+	RA_MinimapButton = "RaidAchievement",
+	DBMMinimapButton = "DBM (Deadly Boss Mods)",
+	XPerl_MinimapButton_Frame = "X-Perl",
+	WIM3MinimapButton = "WIM (WoW Instant Messenger)",
+	VuhDoMinimapButton = "VuhDo",
+	AltoholicMinimapButton = "Altoholic",
+}
 
 local options = {
 	type = "group",
-	name = modName,
+	name = L["Buttons"],
 	childGroups = "tab",
 	args = {
 		custom = {
 			type = "group",
 			name = L["Addon Buttons"],
 			disabled = function()
-				return not db.controlVisibility
+				return not mod.db.controlVisibility
 			end,
 			args = {},
 			order = 3,
@@ -47,7 +58,7 @@ local options = {
 			type = "group",
 			name = L["Dynamic Buttons"],
 			disabled = function()
-				return not db.controlVisibility
+				return not mod.db.controlVisibility
 			end,
 			args = {},
 			order = 2,
@@ -55,59 +66,38 @@ local options = {
 		stock = {
 			type = "group",
 			disabled = function()
-				return not db.controlVisibility
+				return not mod.db.controlVisibility
 			end,
 			name = L["Standard Buttons"],
 			args = {},
 			order = 1,
 		},
-		lockDragging = {
-			type = "toggle",
-			name = L["Lock Button Dragging"],
-			width = "full",
-			order = 101,
-			disabled = function()
-				return not db.allowDragging
-			end,
-			get = function()
-				return db.lockDragging
-			end,
-			set = function(info, v)
-				db.lockDragging = v
-			end
-		},
 		enableDragging = {
 			type = "toggle",
 			name = L["Let SexyMap handle button dragging"],
 			desc = L["Allow SexyMap to assume drag ownership for buttons attached to the minimap. Turn this off if you have another mod that you want to use to position your minimap buttons."],
-			width = "full",
-			order = 102,
+			width = "double",
+			order = 101,
 			get = function()
-				return db.allowDragging
+				return mod.db.allowDragging
 			end,
 			set = function(info, v)
-				db.allowDragging = v
+				mod.db.allowDragging = v
 				if v then mod:UpdateDraggables() end
 			end
 		},
-		controlVisibility = {
+		lockDragging = {
 			type = "toggle",
-			name = L["Let SexyMap control button visibility"],
-			desc = L["Turn this off if you want another mod to handle which buttons are visible on the minimap."],
-			width = "full",
-			order = 103,
+			name = L["Lock Button Dragging"],
+			order = 102,
+			disabled = function()
+				return not mod.db.allowDragging
+			end,
 			get = function()
-				return db.controlVisibility
+				return mod.db.lockDragging
 			end,
 			set = function(info, v)
-				db.controlVisibility = v
-				for _,f in pairs(animFrames) do
-					if not v then
-						mod:ChangeFrameVisibility(f, "always")
-					else
-						mod:ChangeFrameVisibility(f, db.visibilitySettings[f:GetName()] or "hover")
-					end
-				end
+				mod.db.lockDragging = v
 			end
 		},
 		dragRadius = {
@@ -117,18 +107,43 @@ local options = {
 			max = 100,
 			step = 1,
 			bigStep = 1,
-			order = 104,
+			order = 103,
 			disabled = function()
-				return not db.allowDragging
+				return not mod.db.allowDragging
 			end,
 			get = function()
-				return db.radius
+				return mod.db.radius
 			end,
 			set = function(info, v)
-				db.radius = v
+				mod.db.radius = v
 				mod:UpdateDraggables()
 			end
-		}
+		},
+		visSpacer = {
+			order = 104,
+			type = "header",
+			name = L["Visibility"],
+		},
+		controlVisibility = {
+			type = "toggle",
+			name = L["Let SexyMap control button visibility"],
+			desc = L["Turn this off if you want another mod to handle which buttons are visible on the minimap."],
+			width = "full",
+			order = 105,
+			get = function()
+				return mod.db.controlVisibility
+			end,
+			set = function(info, v)
+				mod.db.controlVisibility = v
+				for _,f in pairs(animFrames) do
+					if not v then
+						mod:ChangeFrameVisibility(f, "always")
+					else
+						mod:ChangeFrameVisibility(f, mod.db.visibilitySettings[f:GetName()] or "hover")
+					end
+				end
+			end
+		},
 	}
 }
 
@@ -144,12 +159,12 @@ do
 	}
 
 	local function hideGet(info, v)
-		return (db.visibilitySettings[info[#info]] or "hover") == v
+		return (mod.db.visibilitySettings[info[#info]] or "hover") == v
 	end
 
 	local function hideSet(info, v)
 		local name = info[#info]
-		db.visibilitySettings[name] = v
+		mod.db.visibilitySettings[name] = v
 		mod:ChangeFrameVisibility(_G[name], v)
 	end
 
@@ -164,7 +179,7 @@ do
 		end
 		p[name] = {
 			type = "multiselect",
-			name = L["Show %s:"]:format(blizzButtons[name] or dynamicButtons[name] or name:gsub("LibDBIcon10_", "")),
+			name = L["Show %s:"]:format(blizzButtons[name] or dynamicButtons[name] or addonButtons[name] or name:gsub("LibDBIcon10_", "")),
 			values = dynamic and dynamicValues or hideValues,
 			get = hideGet,
 			set = hideSet,
@@ -172,9 +187,9 @@ do
 	end
 end
 
-function mod:OnInitialize()
-	local defaults = {
-		profile = {
+function mod:OnInitialize(profile)
+	if type(profile.buttons) ~= "table" then
+		profile.buttons = {
 			radius = 10,
 			dragPositions = {},
 			visibilitySettings = {
@@ -189,19 +204,12 @@ function mod:OnInitialize()
 			lockDragging = false,
 			controlVisibility = true
 		}
-	}
-	self.db = parent.db:RegisterNamespace(modName, defaults)
-	db = self.db.profile
-	parent:RegisterModuleOptions(modName, options, L["Buttons"])
-
-	Shape = parent:GetModule("Shapes")
-	Shape.RegisterCallback(self, "SexyMap_ShapeChanged", "UpdateDraggables")
-
-	parent.RegisterCallback(self, "SexyMap_NewFrame")
+	end
+	self.db = profile.buttons
 end
 
 function mod:OnEnable()
-	db = self.db.profile
+	sm.core:RegisterModuleOptions("Buttons", options, L["Buttons"])
 end
 
 --------------------------------------------------------------------------------
@@ -209,19 +217,10 @@ end
 --
 
 do
-	local fadeIgnore = {
-		Minimap = true,
-		MinimapBackdrop = true,
-		SexyMapPingFrame = true,
-		SexyMapCustomBackdrop = true,
-		SexyMapCoordFrame = true,
-		MiniMapTrackingButton = true, -- Child of MiniMapTracking which is faded
-	}
-
 	local OnFinished = function(anim)
 		-- Minimap or Minimap icons including nil checks to compensate for other addons
 		local f, focus = anim:GetParent(), GetMouseFocus()
-		if focus and focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap") then
+		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			f:SetAlpha(1)
 		else
 			f:SetAlpha(0)
@@ -231,22 +230,26 @@ do
 	local fadeStop -- Use a variable to prevent fadeout/in when moving the mouse around minimap/icons
 
 	local OnEnter = function()
-		if not db.controlVisibility or fadeStop or moving then return end
+		if not mod.db.controlVisibility or fadeStop or moving then return end
 
 		for _,f in pairs(animFrames) do
 			local n = f:GetName()
-			if not db.visibilitySettings[n] or db.visibilitySettings[n] == "hover" then
+			if not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then
+				local delayed = f.smAlphaAnim:IsDelaying()
 				f.smAnimGroup:Stop()
-				f:SetAlpha(0)
-				f.smAlphaAnim:SetChange(1)
-				f.smAnimGroup:Play()
+				if not delayed then
+					f:SetAlpha(0)
+					f.smAlphaAnim:SetStartDelay(0)
+					f.smAlphaAnim:SetChange(1)
+					f.smAnimGroup:Play()
+				end
 			end
 		end
 	end
 	local OnLeave = function()
-		if not db.controlVisibility or moving then return end
+		if not mod.db.controlVisibility or moving then return end
 		local focus = GetMouseFocus() -- Minimap or Minimap icons including nil checks to compensate for other addons
-		if focus and focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap") then
+		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			fadeStop = true
 			return
 		end
@@ -254,33 +257,35 @@ do
 
 		for _,f in pairs(animFrames) do
 			local n = f:GetName()
-			if not db.visibilitySettings[n] or db.visibilitySettings[n] == "hover" then
+			if not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then
 				f.smAnimGroup:Stop()
 				f:SetAlpha(1)
+				f.smAlphaAnim:SetStartDelay(1)
 				f.smAlphaAnim:SetChange(-1)
 				f.smAnimGroup:Play()
 			end
 		end
 	end
 
-	function mod:SexyMap_NewFrame(_, f)
-		local n, w, h = f:GetName(), f:GetWidth(), f:GetHeight()
+	function mod:NewFrame(f)
+		local n = f:GetName()
 		-- Always allow Blizz frames, skip ignored frames, dynamically try to skip frames that may not be minimap buttons by checking size
-		if (blizzButtons[n] or dynamicButtons[n]) or (not fadeIgnore[n] and w > 26 and h < 35) then
+		if blizzButtons[n] or dynamicButtons[n] or addonButtons[n] or n:find("LibDBIcon") then
 			-- Create the animations
 			f.smAnimGroup = f:CreateAnimationGroup()
 			f.smAlphaAnim = f.smAnimGroup:CreateAnimation("Alpha")
 			f.smAlphaAnim:SetOrder(1)
-			f.smAlphaAnim:SetDuration(0.5)
+			f.smAlphaAnim:SetDuration(0.3)
 			f.smAnimGroup:SetScript("OnFinished", OnFinished)
 			tinsert(animFrames, f)
 
 			-- Configure fading
-			if db.controlVisibility then
-				self:ChangeFrameVisibility(f, db.visibilitySettings[n] or "hover")
+			if mod.db.controlVisibility then
+				self:ChangeFrameVisibility(f, mod.db.visibilitySettings[n] or "hover")
 			end
 
-			if n ~= "MinimapZoneTextButton" then -- Don't add config or moving capability to the Zone Text frame, handled in the Zone Text module
+			-- Don't add config or moving capability to the Zone Text and Clock buttons, handled in their own modules
+			if n ~= "MinimapZoneTextButton" and n ~= "TimeManagerClockButton" then
 				self:AddButtonOptions(n, blizzButtons[n], dynamicButtons[n])
 
 				-- These two frames are parented to MinimapCluster, if the map scale is changed they won't drag properly, so we parent to Minimap
@@ -338,8 +343,8 @@ do
 	end
 
 	local setPosition = function(frame, angle)
-		local radius = (Minimap:GetWidth() / 2) + db.radius
-		local bx, by = Shape:GetPosition(angle, radius)
+		local radius = (Minimap:GetWidth() / 2) + mod.db.radius
+		local bx, by = sm.shapes:GetPosition(angle, radius)
 
 		frame:ClearAllPoints()
 		frame:SetPoint("CENTER", Minimap, "CENTER", bx, by)
@@ -349,12 +354,12 @@ do
 		local x, y = GetCursorPosition()
 		x, y = x / Minimap:GetEffectiveScale(), y / Minimap:GetEffectiveScale()
 		local angle = getCurrentAngle(Minimap, x, y)
-		db.dragPositions[moving:GetName()] = angle
+		mod.db.dragPositions[moving:GetName()] = angle
 		setPosition(moving, angle)
 	end
 
 	local OnDragStart = function(frame)
-		if db.lockDragging or not db.allowDragging then return end
+		if mod.db.lockDragging or not mod.db.allowDragging then return end
 
 		moving = frame
 		dragFrame:SetScript("OnUpdate", updatePosition)
@@ -370,7 +375,7 @@ do
 		frame:RegisterForDrag("LeftButton")
 		if tracking then
 			frame:SetScript("OnDragStart", function()
-				if db.lockDragging or not db.allowDragging then return end
+				if mod.db.lockDragging or not mod.db.allowDragging then return end
 
 				moving = tracking
 				dragFrame:SetScript("OnUpdate", updatePosition)
@@ -383,18 +388,18 @@ do
 	end
 
 	function mod:UpdateDraggables(frame)
-		if not db.allowDragging then return end
+		if not mod.db.allowDragging then return end
 
-		if frame and type(frame) == "table" then -- Type check because we have a callback sending a string on shape change
+		if frame then
 			local x, y = frame:GetCenter()
-			local angle = db.dragPositions[frame:GetName()] or getCurrentAngle(frame:GetParent(), x, y)
+			local angle = mod.db.dragPositions[frame:GetName()] or getCurrentAngle(frame:GetParent(), x, y)
 			if angle then
 				setPosition(frame, angle)
 			end
 		else
 			for _,f in pairs(animFrames) do
 				local x, y = f:GetCenter()
-				local angle = db.dragPositions[f:GetName()] or getCurrentAngle(f:GetParent(), x, y)
+				local angle = mod.db.dragPositions[f:GetName()] or getCurrentAngle(f:GetParent(), x, y)
 				if angle then
 					setPosition(f, angle)
 				end

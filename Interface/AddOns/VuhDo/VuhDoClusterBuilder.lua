@@ -48,7 +48,7 @@ local VUHDO_MAP_FIX_WIDTH = {
 	},
 
 	-- Cataclysm
-	["BlackrockCaverns"] = {
+	--[[["BlackrockCaverns"] = {
 		[1] = 1019.50793457031,
 		[2] = 1019.50793457031,
 	},
@@ -115,7 +115,7 @@ local VUHDO_MAP_FIX_WIDTH = {
 
 	["ZulAman"] = {
 		[1] = 1268.74993896484,
-	},
+	},]]
 
 	--[[["EndTime"] = {
 			[1] = 3295.8331298829,
@@ -287,13 +287,12 @@ local tNumRaid;
 local tIndex = 0;
 local tNumSamples, tNumIterations;
 local VuhDoDummyStub = {
-	["IsShown"] = function() return false; end,
 	["GetName"] = function() return ""; end
 };
 
 function VUHDO_updateAllClusters()
-	if (((WorldMapFrame or VuhDoDummyStub()):IsShown())
-		or ((GetMouseFocus() or VuhDoDummyStub):GetName() == nil)) then -- @UGLY Carbonite workaround
+	if (WorldMapFrame:IsShown()
+		or (GetMouseFocus() or VuhDoDummyStub):GetName() == nil) then -- @UGLY Carbonite workaround
 		return;
 	end
 
@@ -322,9 +321,9 @@ function VUHDO_updateAllClusters()
 		end
 
 		tInfo = VUHDO_CLUSTER_BASE_RAID[tIndex];
-		if (tInfo == nil) then
+		--[[if (tInfo == nil) then
 			break;
-		end
+		end]]
 
 		tUnit = tInfo["unit"];
 
@@ -335,12 +334,12 @@ function VUHDO_updateAllClusters()
 		if (VUHDO_isValidClusterUnit(tInfo)) then
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
-				if (tAnotherInfo == nil) then
+				--[[if (tAnotherInfo == nil) then
 					break;
-				end
-				tAnotherUnit = tAnotherInfo["unit"];
+				end]]
 
 				if (VUHDO_isValidClusterUnit(tAnotherInfo)) then
+					tAnotherUnit = tAnotherInfo["unit"];
 					tDeltaX, tDeltaY = VUHDO_determineDistanceBetween(tUnit, tAnotherUnit);
 
 					if (tDeltaX ~= nil) then
@@ -439,7 +438,7 @@ end
 --
 local tDeltas, tDistance, tNumber, tOtherUnit, tInfo;
 local tStart, tDuration;
-function VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, anArray, aCdSpell)
+function VUHDO_getUnitsInRadialClusterWith(aUnit, aYardsPow, anArray, aCdSpell)
 	twipe(anArray);
 
 	if (aCdSpell) then
@@ -464,7 +463,7 @@ function VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, anArray, aCdSpell)
 
 	for tOtherUnit, tDeltas in pairs(VUHDO_COORD_DELTAS[aUnit]) do
 		tDistance = (((tDeltas[1] or 0) * VUHDO_MAP_WIDTH) ^ 2)  + (((tDeltas[2] or 0) * VUHDO_MAP_WIDTH / 1.5) ^ 2);
-		if (tDistance <= aYards and not VUHDO_CLUSTER_BLACKLIST[tOtherUnit]) then
+		if (tDistance <= aYardsPow and not VUHDO_CLUSTER_BLACKLIST[tOtherUnit]) then
 			anArray[#anArray + 1] = tOtherUnit;
 		end
 	end
@@ -502,13 +501,13 @@ local tNextJumps = { };
 local tExcludeList = { };
 local tNumJumps = 0;
 local tCnt;
-function VUHDO_getUnitsInChainClusterWith(aUnit, aYards, anArray, aMaxTargets, aCdSpell)
+function VUHDO_getUnitsInChainClusterWith(aUnit, aYardsPow, anArray, aMaxTargets, aCdSpell)
 	twipe(anArray);
 	twipe(tExcludeList)
 	for tCnt = 1, aMaxTargets do
 		anArray[tCnt] = aUnit;
 		tExcludeList[aUnit] = true;
-		VUHDO_getUnitsInRadialClusterWith(aUnit, aYards, tNextJumps, aCdSpell);
+		VUHDO_getUnitsInRadialClusterWith(aUnit, aYardsPow, tNextJumps, aCdSpell);
 		aUnit = VUHDO_getMostDeficitUnitOutOf(tNextJumps, tExcludeList);
 		if (aUnit == nil) then
 			break;

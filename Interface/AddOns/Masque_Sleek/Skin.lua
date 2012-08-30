@@ -5,9 +5,9 @@ if not MSQ then return end
 
 MSQ:AddSkin("Sleek",{
 	Author = "Kallieen",
-	Version = "4.3.0",
+	Version = "5.0.0",
 	Shape = "Square",
-	Masque_Version = 40200,
+	Masque_Version = 40300,
 	-- Skin data start.
 	Backdrop = {
 		Width = 28,

@@ -1,9 +1,10 @@
---[[ Titan
-LibDataBrokerToTitan.lua
-A "bridge" module to ensure proper registration and communication of LDB plugins with Titan Panel
+--[[ File
+NAME: LibDataBrokerToTitan.lua
+DESC: A "bridge" module to ensure proper registration and communication of LDB plugins with Titan Panel
 --]]
 --[[ API
-Titan will automatically convert a LDB type addon to a Titan plugin.
+NAME: Titan LDB overview
+DESC: Titan will automatically convert a LDB type addon to a Titan plugin.
 Only LDB types listed in the LDB 1.1 spec are supported. Custom types are not supported.
 
 Supported
@@ -25,6 +26,7 @@ Supported
 
 * required by LDB spec
 ^ user controlled show / hide
+:DESC
 --]]
 
 --[[ doc
@@ -103,7 +105,13 @@ LDBToTitan:RegisterEvent("PLAYER_ENTERING_WORLD")
 --[[ Titan
 NAME: LDBToTitan:TitanLDBSetOwnerPosition
 DESC: Properly anchor tooltips of the Titan (LDB) plugin
-VARS:
+VAR: parent
+VAR: anchorPoint
+VAR: relativeToFrame
+VAR: relativePoint
+VAR: xOffset
+VAR: yOffset
+VAR: frame
 --]]
 function LDBToTitan:TitanLDBSetOwnerPosition(parent, anchorPoint, relativeToFrame, relativePoint, xOffset, yOffset, frame)
 	if frame:GetName() == "GameTooltip" then
@@ -131,11 +139,10 @@ end
 --[[ Titan
 NAME: LDBToTitan:TitanLDBSetTooltip
 DESC: Fill in the tooltip for the Titan (LDB) plugin
-VARS:
-- name - Titan id of the plugin
-- frame - tooltip frame
-- func - tooltip function to be run
-OUT : None
+VAR: name - Titan id of the plugin
+VAR: frame - tooltip frame
+VAR: func - tooltip function to be run
+OUT:  None
 --]]
 function LDBToTitan:TitanLDBSetTooltip(name, frame, func)
 -- Check to see if we allow tooltips to be shown
@@ -182,15 +189,15 @@ end
 --[[ Titan
 NAME: LDBToTitan:TitanLDBHandleScripts
 DESC: Script Handler for the Titan (LDB) plugin
-VARS:
-- event - event to process
-- name -  id of the plugin
-- _ - not used
-- func - function to be run
-- obj - LDB object
-OUT : None
+VAR: event - event to process
+VAR: name -  id of the plugin
+VAR: _ - not used
+VAR: func - function to be run
+VAR: obj - LDB object
+OUT:  None
 NOTE:
 - This implementation will work fine for a static tooltip but may have implications for dynamic ones so for now, we'll only set it once (no callback) and see what happens
+:NOTE
 --]]
 function LDBToTitan:TitanLDBHandleScripts(event, name, _, func, obj)
 	local TitanPluginframe = _G["TitanPanel"..NAME_PREFIX..name.."Button"];
@@ -362,14 +369,13 @@ end
 --[[ Titan
 NAME: LDBToTitan:TitanLDBTextUpdate
 DESC: Text callback for the Titan (LDB) plugin when the LDB addon changes display text of the LDB object
-VARS:
-- _ - not used
-- name -  id of the plugin
-- event - event to process
-- attr - LDB obj attribute (field) that changed
-- value - new value of attr
-- dataobj - LDB object
-OUT : None
+VAR: _ - not used
+VAR: name -  id of the plugin
+VAR: event - event to process
+VAR: attr - LDB obj attribute (field) that changed
+VAR: value - new value of attr
+VAR: dataobj - LDB object
+OUT:  None
 --]]
 function LDBToTitan:TitanLDBTextUpdate(_, name,  attr, value, dataobj)
 	-- just in case the LDB is active before Titan can register it...
@@ -398,13 +404,13 @@ end
 --[[ Titan
 NAME: TitanLDBShowText
 DESC: Text callback for the Titan (LDB) plugin when the LDB addon changes display text
-VARS:
-- name -  id of the plugin
-OUT : None
+VAR: name -  id of the plugin
+OUT: None
 NOTE:
 - One interpretation of 1.1 spec to show text is either
 1) use .text or use .value & .suffix (Titan implements)
 2) always use .text but .value & .suffix are parts if needed
+:NOTE
 --]]
 function TitanLDBShowText(name)
 	-- Set 'label1' and 'value1' for the Titan button display
@@ -458,12 +464,11 @@ end
 --[[ Titan
 NAME: LDBToTitan:TitanLDBTextUpdate
 DESC: Icon callback for the Titan (LDB) plugin when the LDB addon changes the icon of the LDB object
-VARS:
-- _ - not used
-- name -  id of the plugin
-- attr - LDB obj attribute (field) that changed
-- value - new value of attr
-- dataobj - LDB object
+VAR: _ - not used
+VAR: name -  id of the plugin
+VAR: attr - LDB obj attribute (field) that changed
+VAR: value - new value of attr
+VAR: dataobj - LDB object
 OUT: None
 --]]
 function LDBToTitan:TitanLDBIconUpdate(_, name,  attr, value, dataobj)
@@ -499,11 +504,12 @@ end
 --[[ Titan
 NAME: TitanLDBRefreshButton
 DESC: Refresh all text & icon for LDB addons that were successfully registered
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - Ensure all the LDB buttons are updated. 
 - This is called once x seconds after PEW. This helps close the gap where LDB addons set their text on their PEW event
+:NOTE
 --]]
 function TitanLDBRefreshButton()
 --	TitanDebug("LDB: RefreshButton")
@@ -520,14 +526,14 @@ end
 --[[ Titan
 NAME: LDBToTitan:TitanLDBCreateObject
 DESC: New DO (Data Object) gets created here
-VARS:
-- _ - not used
-- name -  id of the plugin
-- obj - LDB object
-OUT : None
+VAR: _ - not used
+VAR: name -  id of the plugin
+VAR: obj - LDB object
+OUT:  None
 NOTE:
 - This is the heart of the LDB to Titan. It reads the LDB DO (Data Object)and creates a Titan plugin.
 - This takes a stricter interpretation of the LDB 1.1 spec rather than guessing what LDB addon developers intended.
+:NOTE
 --]]
 function LDBToTitan:TitanLDBCreateObject(_, name, obj)
    --TitanDebug("Attempting to register "..name..".");
@@ -789,11 +795,13 @@ end
 --[[ Titan
 NAME: LDBToTitan:SetScript
 DESC: OnEvent handler for LDBToTitan
-VARS: None
-OUT : None
+VAR:  event - string
+VAR:  function
+OUT:  None
 NOTE:
 - PLAYER_LOGIN - Read through all the LDB object created so far and create cooresponding Titan plugins.
 - PLAYER_ENTERING_WORLD - Create a one time timer. This helps ensure the latest values are displayed on the plugin. Some LDB addons create their objects then update the addon values. Titan could have missed the updates as it created & registered the Titan plugin.
+:NOTE
 --]]
 LDBToTitan:SetScript("OnEvent", function(self, event, ...)
 	if (event == "PLAYER_LOGIN") then	 

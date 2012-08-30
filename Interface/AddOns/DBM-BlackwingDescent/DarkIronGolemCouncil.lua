@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(169, "DBM-BlackwingDescent", nil, 73)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7759 $"):sub(12, -3))
 mod:SetCreatureID(42180, 42178, 42179, 42166)
 mod:SetModelID(32688)
 mod:SetZone()
@@ -49,8 +49,8 @@ local warnActivated				= mod:NewTargetAnnounce(78740, 3)
 
 --Magmatron
 local specWarnBarrier			= mod:NewSpecialWarningSpell(79582, not mod:IsHealer())
-local specWarnAcquiringTarget	= mod:NewSpecialWarningYou(92037)
-local yellAcquiringTarget		= mod:NewYell(92037)
+local specWarnAcquiringTarget	= mod:NewSpecialWarningYou(79501)
+local yellAcquiringTarget		= mod:NewYell(79501)
 local specWarnEncasingShadows	= mod:NewSpecialWarningTarget(92023, false)--Heroic Ability
 local yellEncasingShadows		= mod:NewYell(92023, L.YellTargetLock)
 --Electron

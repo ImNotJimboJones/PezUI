@@ -68,7 +68,7 @@ L.MSG_STATIC			= "静态信息"
 
 L.MSG_COMBAT					= "战斗"
 L.MSG_DISPEL					= "驱散"
-L.MSG_CP						= "连击点"
+--L.MSG_CHI_FULL					= "Full Chi"L.MSG_CP						= "连击点"
 L.MSG_CP_FULL					= "终结技"
 L.MSG_HOLY_POWER_FULL			= "满圣能"
 L.MSG_KILLING_BLOW				= "击杀"

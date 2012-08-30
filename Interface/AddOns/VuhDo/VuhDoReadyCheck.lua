@@ -1,4 +1,5 @@
 local sIsChecking = false;
+local _;
 
 
 
@@ -93,9 +94,7 @@ end
 function VUHDO_readyCheckConfirm(aUnit, anIsReady)
 	if (VUHDO_RAID[aUnit] == nil) then
 		return;
-	end
-
-	if (not sIsChecking) then
+	elseif (not sIsChecking) then
 		VUHDO_readyCheckStarted();
 	end
 

@@ -1,3 +1,4 @@
+local _;
 local selectedIdx = 1;
 local tIsAssignmentPending = false;
 local VUHDO_FRAMES = { };

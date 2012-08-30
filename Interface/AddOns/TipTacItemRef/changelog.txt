@@ -1,3 +1,9 @@
+TipTacItemRef Changes | 2012 Aug 30
+-----------------------------------
+- Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.
+- Fixed an error for currency tooltips, when icons were disabled.
+- Removed an error that occurred when an achievement tooltip with an uneven number of critieria was shown.
+
 TipTacItemRef Changes | 2012 May 20
 -----------------------------------
 - Changed the TOC version to 40300 for the 4.3 patch.

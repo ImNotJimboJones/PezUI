@@ -1,3 +1,4 @@
+local _;
 local pairs = pairs;
 
 local VUHDO_BUFF_PANEL_X, VUHDO_BUFF_PANEL_Y;
@@ -160,11 +161,7 @@ local function VUHDO_setupStaticBuffPanel(aCategoryName, aBuffPanel, anIsPresent
 
 	local tEnableCheckButton = VUHDO_GLOBAL[aBuffPanel:GetName() .. "EnableCheckButton"];
 	tEnableCheckButton:SetChecked(tBuffSettings["enabled"] and anIsPresent);
-	if (anIsPresent) then
-		tEnableCheckButton:Show();
-	else
-		tEnableCheckButton:Hide();
-	end
+	tEnableCheckButton:SetShown(anIsPresent);
 	VUHDO_lnfCheckButtonClicked(tEnableCheckButton);
 
 	local tMissButton = VUHDO_GLOBAL[aBuffPanel:GetName() .. "MissingCheckButton"];

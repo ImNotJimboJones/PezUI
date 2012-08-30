@@ -1,3 +1,4 @@
+local _;
 local VUHDO_COMBO_MODEL = nil;
 local VUHDO_DEBUFFS_SORTABLE = { };
 

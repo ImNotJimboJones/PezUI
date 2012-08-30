@@ -58,9 +58,12 @@ do
 		-- Cycle through the watchlist, hiding frames which are timed-out
 		for frame, expiration in pairs(Framelist) do
 			-- If expired...
-			if expiration < curTime then frame:Hide(); Framelist[frame] = nil
-			TidyPlates:RequestDelegateUpdate()		-- Request an Update on Delegate functions, so we can catch when auras fall off
-			-- If active...
+			if expiration < curTime then 
+				if frame.Expire then frame:Expire() end
+				frame:Hide()
+				Framelist[frame] = nil
+				--TidyPlates:RequestDelegateUpdate()		-- Request an Update on Delegate functions, so we can catch when auras fall off
+			-- If still active...
 			else 
 				-- Update the frame
 				if frame.Poll then frame:Poll(expiration) end

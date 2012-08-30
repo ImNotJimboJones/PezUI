@@ -16,6 +16,7 @@ local sIsSideBarRight;
 local sShowPanels;
 local sHideEmptyAndClickThrough;
 local sEmpty = { };
+local _;
 
 local VUHDO_LibSharedMedia;
 local VUHDO_getActionPanel;
@@ -314,11 +315,11 @@ end
 
 
 --
-local tMX, tMY;
+--[[local tMX, tMY;
 function VUHDO_getMouseCoords()
 	tMX, tMY = GetCursorPosition();
 	return tMX / UIParent:GetEffectiveScale(), tMY / UIParent:GetEffectiveScale();
-end
+end]]
 
 
 
@@ -449,7 +450,7 @@ local function VUHDO_showBlizzParty()
 		local tPartyFrame;
 		for tCnt = 1, 4 do
 			tPartyFrame = VUHDO_GLOBAL["PartyMemberFrame" .. tCnt];
-			if (GetPartyMember(tCnt)) then
+			if (UnitExists("party" .. tCnt)) then
 				tPartyFrame:Show();
 			end
 
@@ -473,6 +474,8 @@ local function VUHDO_hideBlizzPlayer()
 	PlayerFrameHealthBar:UnregisterAllEvents();
 	PlayerFrameManaBar:UnregisterAllEvents();
 	PlayerFrame:Hide();
+	RuneFrame:UnregisterAllEvents();
+	RuneFrame:Hide();
 end
 
 
@@ -483,6 +486,10 @@ local function VUHDO_showBlizzPlayer()
 	PlayerFrameHealthBar:RegisterAllEvents();
 	PlayerFrameManaBar:RegisterAllEvents();
 	PlayerFrame:Show();
+	if ("DEATHKNIGHT" == VUHDO_PLAYER_CLASS) then
+		RuneFrame:RegisterAllEvents();
+		RuneFrame:Show();
+	end
 end
 
 
@@ -714,7 +721,7 @@ function VUHDO_customizeIconText(aParent, aHeight, aLabel, aSetup)
 	tFactor = aHeight * 0.01;
 	aLabel:SetPoint(aSetup["ANCHOR"], aParent:GetName(), aSetup["ANCHOR"], tFactor * aSetup["X_ADJUST"], -tFactor * aSetup["Y_ADJUST"]);
 	tOutline = aSetup["USE_OUTLINE"] and "OUTLINE|" or "";
-	tOutline = tOutline .. (aSetup["USE_MONO"] and "MONOCHROME" or "");
+	--tOutline = tOutline .. (aSetup["USE_MONO"] and "MONOCHROME" or ""); -- Bugs out in MoP beta
 
 	tColor = aSetup["COLOR"];
 	if (tColor ~= nil) then

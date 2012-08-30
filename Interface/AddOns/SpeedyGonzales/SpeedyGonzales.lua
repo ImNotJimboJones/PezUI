@@ -6,32 +6,23 @@ local IsFlying = IsFlying
 local IsSwimming = IsSwimming
 local IsFalling = IsFalling
 
+local BASE_WIDTH = 80
+
 local db, unit
 local speeder = "player"
 
-
 -- data for the various unit displays
 local unitData = {
-	percent = {
-		display = "%",
-		width = 64,
-	},
-	yards = {
-		display = " yd/s",
-		width = 80,
-	},
-	miles = {
-		display = " mph",
-		width = 80,
-	},
-	kilometers = {
-		display = " km/h",
-		width = 88,
-	},
-	meters = {
-		display = " m/s",
-		width = 80,
-	},
+	percent = "%",
+	yards = " yd/s",
+	miles = " mph",
+	kilometers = " km/h",
+	meters = " m/s",
+}
+
+local unitWidth = {
+	percent = -16,
+	kilometers = 8,
 }
 
 local unitTransformations = {
@@ -56,7 +47,6 @@ local function transform(speed)
 	return unitTransformations[db.units](speed)
 end
 
-
 local dataobj = LibStub("LibDataBroker-1.1"):NewDataObject(..., {
 	type = "data source",
 	text = "Speed",
@@ -77,7 +67,6 @@ local dataobj = LibStub("LibDataBroker-1.1"):NewDataObject(..., {
 	end,
 })
 
-
 -- create the speed-o-meter frame
 local addon = CreateFrame("Frame", "SpeedyGonzalesFrame", UIParent)
 addon:SetMovable(true)
@@ -93,8 +82,8 @@ addon:SetBackdropColor(0, 0, 0, 0.8)
 addon:SetBackdropBorderColor(0.5, 0.5, 0.5)
 addon:RegisterEvent("ADDON_LOADED")
 addon:RegisterEvent("PLAYER_ENTERING_WORLD")
-addon:RegisterEvent("UNIT_ENTERED_VEHICLE")
-addon:RegisterEvent("UNIT_EXITED_VEHICLE")
+addon:RegisterUnitEvent("UNIT_ENTERED_VEHICLE", "player")
+addon:RegisterUnitEvent("UNIT_EXITED_VEHICLE", "player")
 addon:SetScript("OnEvent", function(self, event, ...)
 	return self[event] and self[event](self, ...)
 end)
@@ -147,11 +136,9 @@ addonText:SetPoint("CENTER", addon)
 addonText:SetFontObject(GameFontHighlight)
 addon.text = addonText
 
-
 local optionsFrame = CreateFrame("Frame")
 optionsFrame.name = "SpeedyGonzales"
 InterfaceOptions_AddCategory(optionsFrame)
-
 
 local title = optionsFrame:CreateFontString(nil, nil, "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
@@ -160,7 +147,6 @@ title:SetJustifyH("LEFT")
 title:SetJustifyV("TOP")
 title:SetText(optionsFrame.name)
 optionsFrame.title = title
-
 
 local function onClick(self)
 	local checked = self:GetChecked() == 1
@@ -183,7 +169,6 @@ function optionsFrame:NewOption()
 	return button
 end
 
-
 -- check buttons data
 local options = {
 	{
@@ -204,10 +189,8 @@ local options = {
 	{
 		text = "Show top speed",
 		setting = "showTopSpeed",
-		-- func = "SetPitchDisplay",
 	},
 }
-
 
 optionsFrame.options = {}
 
@@ -224,13 +207,11 @@ for i, v in ipairs(options) do
 	optionsFrame.options[i] = option
 end
 
-
 local dropdown = CreateFrame("Frame", "SpeedyGonzalesUnitsMenu", optionsFrame, "UIDropDownMenuTemplate")
 dropdown:SetPoint("TOPLEFT", optionsFrame.options[#options], "BOTTOMLEFT", -13, -24)
 dropdown.label = dropdown:CreateFontString(nil, "BACKGROUND", "GameFontNormalSmall")
 dropdown.label:SetPoint("BOTTOMLEFT", dropdown, "TOPLEFT", 16, 3)
 dropdown.label:SetText("Units")
-
 
 -- slash command opens options frame
 SLASH_SPEEDYGONZALES1 = "/speedy"
@@ -247,11 +228,10 @@ SlashCmdList["SPEEDYGONZALES"] = function(msg)
 	end
 end
 
-
 function addon:ADDON_LOADED(addon)
 	if addon == "SpeedyGonzales" then
 		-- create options defaults if they do not exist
-		db = SpeedyGonzalesData or SpeedyGonzalesDB or {
+		db = SpeedyGonzalesDB or {
 			units = "percent",
 			shown = true,
 			locked = false,
@@ -269,27 +249,19 @@ function addon:ADDON_LOADED(addon)
 	end
 end
 
-
 function addon:PLAYER_ENTERING_WORLD()
 	if UnitInVehicle("player") then
 		speeder = "vehicle"
 	end
 end
 
-
-function addon:UNIT_ENTERED_VEHICLE(unit)
-	if unit == "player" then
-		speeder = "vehicle"
-	end
+function addon:UNIT_ENTERED_VEHICLE()
+	speeder = "vehicle"
 end
 
-
-function addon:UNIT_EXITED_VEHICLE(unit)
-	if unit == "player" then
-		speeder = "player"
-	end
+function addon:UNIT_EXITED_VEHICLE()
+	speeder = "player"
 end
-
 
 function addon:Initialize()
 	for i, button in ipairs(optionsFrame.options) do
@@ -300,7 +272,7 @@ function addon:Initialize()
 		local value = self.value
 		UIDropDownMenu_SetSelectedValue(dropdown, value)
 		db.units = value
-		unit = unitData[value].display
+		unit = unitData[value]
 		addon:FixWidth()
 	end
 	
@@ -331,15 +303,14 @@ function addon:Initialize()
 	UIDropDownMenu_SetWidth(dropdown, 120)
 	UIDropDownMenu_SetSelectedValue(dropdown, db.units)
 	
-	unit = unitData[db.units].display
+	unit = unitData[db.units]
 	
 	self:SetPosition()
-	self:SetVisibility()
-	self:SetLock()
-	self:SetPitchDisplay()
+	for k, v in pairs(options) do
+		if v.func then self[v.func](self) end
+	end
 	self:FixWidth()
 end
-
 
 function addon:OnMouseUp()
 	self:StopMovingOrSizing()
@@ -350,26 +321,18 @@ function addon:OnMouseUp()
 	pos.yOff = yOff
 end
 
-
 function addon:SetPosition()
 	local pos = db.pos
 	self:SetPoint(pos.point, pos.xOff, pos.yOff)
 end
 
-
 function addon:SetVisibility()
-	if db.shown then
-		self:Show()
-	else
-		self:Hide()
-	end
+	self:SetShown(db.shown)
 end
-
 
 function addon:SetLock()
 	self:EnableMouse(not db.locked)
 end
-
 
 -- resize frame so the pitch display fits
 function addon:SetPitchDisplay()
@@ -380,8 +343,7 @@ function addon:SetPitchDisplay()
 	end
 end
 
-
 -- set width depending on displayed unit type
 function addon:FixWidth()
-	self:SetWidth(unitData[db.units].width)
+	self:SetWidth(BASE_WIDTH + (unitWidth[db.units] or 0))
 end

@@ -18,7 +18,7 @@ local ThemeList = TidyPlatesHubModes.ThemeList
 local StyleModes = TidyPlatesHubModes.StyleModes
 local TextModes = TidyPlatesHubModes.TextModes
 local RangeModes = TidyPlatesHubModes.RangeModes
-local DebuffModes = TidyPlatesHubModes.DebuffModes
+local AuraWidgetModes = TidyPlatesHubModes.AuraWidgetModes
 local DebuffStyles = TidyPlatesHubModes.DebuffStyles
 local OpacityModes = TidyPlatesHubModes.OpacityModes
 local ScaleModes = TidyPlatesHubModes.ScaleModes
@@ -27,6 +27,8 @@ local WarningGlowModes = TidyPlatesHubModes.WarningGlowModes
 local ThreatModes = TidyPlatesHubModes.ThreatModes
 local NameColorModes = TidyPlatesHubModes.NameColorModes
 local TextPlateFieldModes = TidyPlatesHubModes.TextPlateFieldModes
+local ArtStyles = TidyPlatesHubModes.ArtStyles
+local ArtModes = TidyPlatesHubModes.ArtModes
 
 
 ------------------------------------------------------------------
@@ -40,8 +42,8 @@ local function CreateInterfacePanelWidgets(panel)
 	-- Style
 	------------------------------
 	panel.StyleLabel = CreateQuickHeadingLabel(nil, "Style", AlignmentColumn, nil, 0, 5)	
-	panel.StyleEnemyMode =  CreateQuickDropdown(objectName.."StyleEnemyMode", "Enemy Health Bars:", StyleModes, 1, AlignmentColumn, panel.StyleLabel, 0, 2)
-	panel.StyleFriendlyMode =  CreateQuickDropdown(objectName.."StyleFriendlyMode", "Friendly Health Bars:", StyleModes, 1, AlignmentColumn, panel.StyleEnemyMode)
+	panel.StyleEnemyMode =  CreateQuickDropdown(objectName.."StyleEnemyMode", "Enemy Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleLabel, 0, 2)
+	panel.StyleFriendlyMode =  CreateQuickDropdown(objectName.."StyleFriendlyMode", "Friendly Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleEnemyMode)
 
 	-- Headline View
 	------------------------------
@@ -51,23 +53,25 @@ local function CreateInterfacePanelWidgets(panel)
 	
 	-- Color & Text
 	------------------------------
-	--[[
-	panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Primary Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel, 0, 2)
-	panel.ArtSpotlight  =  CreateQuickDropdown(objectName.."ArtSpotlight", "Spotlight Art:", ArtStyles, 1, AlignmentColumn, panel.ArtDefault, 0, 2)
-	panel.ArtSpotlightMode  =  CreateQuickDropdown(objectName.."ArtSpotlightMode", "Art Spotlight Mode:", ArtModes, 1, AlignmentColumn, panel.ArtSpotlight, 0, 2)
-	
-	--]]
 	panel.ColorLabel = CreateQuickHeadingLabel(nil, "Health Bar Mode", AlignmentColumn, panel.StyleFriendlyMode, 0, 5)
-	panel.TextNameColorMode =  CreateQuickDropdown(objectName.."TextNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.ColorLabel)	
-	panel.ColorHealthBarMode =  CreateQuickDropdown(objectName.."ColorHealthBarMode", "Health Bar Color:", HealthColorModes, 1, AlignmentColumn, panel.TextNameColorMode)
+	--panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Health Bar Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel)	-- 6.x Multi-Theme First stage
+	panel.ColorHealthBarMode =  CreateQuickDropdown(objectName.."ColorHealthBarMode", "Health Bar Color:", HealthColorModes, 1, AlignmentColumn, panel.ColorLabel)
 	panel.ColorDangerGlowMode =  CreateQuickDropdown(objectName.."ColorDangerGlowMode", "Warning Border/Glow:", WarningGlowModes, 1, AlignmentColumn, panel.ColorHealthBarMode)
-	panel.TextHealthTextMode =  CreateQuickDropdown(objectName.."TextHealthTextMode", "Optional Text Field:", TextModes, 1, AlignmentColumn, panel.ColorDangerGlowMode)
-	panel.TextShowLevel = CreateQuickCheckbutton(objectName.."TextShowLevel", "Show Level", AlignmentColumn, panel.TextHealthTextMode)
-	panel.TextUseBlizzardFont = CreateQuickCheckbutton(objectName.."TextUseBlizzardFont", "Use Default Blizzard Font", AlignmentColumn, panel.TextShowLevel)
+	panel.TextNameColorMode =  CreateQuickDropdown(objectName.."TextNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.ColorDangerGlowMode)	
+	
+	panel.TextHealthTextMode =  CreateQuickDropdown(objectName.."TextHealthTextMode", "Optional Text Field:", TextModes, 1, AlignmentColumn, panel.ColorLabel, OffsetColumnB)
+	panel.TextShowLevel = CreateQuickCheckbutton(objectName.."TextShowLevel", "Show Level", AlignmentColumn, panel.TextHealthTextMode, OffsetColumnB)
+	panel.TextUseBlizzardFont = CreateQuickCheckbutton(objectName.."TextUseBlizzardFont", "Use Default Blizzard Font", AlignmentColumn, panel.TextShowLevel, OffsetColumnB)
+	
+	-- [[  6.x Multi-Theme
+	--panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Default Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel, OffsetColumnB)
+	--panel.ArtSpotlight  =  CreateQuickDropdown(objectName.."ArtSpotlight", "Spotlight Art:", ArtStyles, 1, AlignmentColumn, panel.ArtDefault, OffsetColumnB)
+	--panel.ArtSpotlightMode  =  CreateQuickDropdown(objectName.."ArtSpotlightMode", "Art Spotlight Mode:", ArtModes, 1, AlignmentColumn, panel.ArtSpotlight, OffsetColumnB)
+	--]]
 	
 	--Opacity
 	------------------------------
-	panel.OpacityLabel = CreateQuickHeadingLabel(nil, "Opacity", AlignmentColumn, panel.TextUseBlizzardFont, 0, 5)	
+	panel.OpacityLabel = CreateQuickHeadingLabel(nil, "Opacity", AlignmentColumn, panel.TextNameColorMode, 0, 5)	
 	panel.OpacityTarget = CreateQuickSlider(objectName.."OpacityTarget", "Current Target Opacity:", AlignmentColumn, panel.OpacityLabel, 0, 2)
 	panel.OpacityNonTarget = CreateQuickSlider(objectName.."OpacityNonTarget", "Non-Target Opacity:", AlignmentColumn, panel.OpacityTarget, 0, 2)
 	panel.OpacitySpotlightMode =  CreateQuickDropdown(objectName.."OpacitySpotlightMode", "Opacity Spotlight Mode:", OpacityModes, 1, AlignmentColumn, panel.OpacityNonTarget)
@@ -85,8 +89,8 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.OpacityFilterNPC = CreateQuickCheckbutton(objectName.."OpacityFilterNPC", "Filter NPC", AlignmentColumn, panel.OpacityFilterNonElite, 16)
 	panel.OpacityFilterFriendlyNPC = CreateQuickCheckbutton(objectName.."OpacityFilterFriendlyNPC", "Filter Friendly NPC", AlignmentColumn, panel.OpacityFilterNPC, 16)
 	panel.OpacityFilterInactive = CreateQuickCheckbutton(objectName.."OpacityFilterInactive", "Filter Inactive", AlignmentColumn, panel.OpacityFilterFriendlyNPC, 16)
-	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterInactive, 16)	
-	panel.OpacityFilterList = CreateQuickEditbox(objectName.."OpacityFilterList", AlignmentColumn, panel.OpacityCustomFilterLabel, 16)
+	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterInactive, 8)	
+	panel.OpacityFilterList = CreateQuickEditbox(objectName.."OpacityFilterList", AlignmentColumn, panel.OpacityCustomFilterLabel, 8)
 
 	--Scale
 	------------------------------
@@ -127,14 +131,45 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ColorMediumHealth = CreateQuickColorbox(objectName.."ColorMediumHealth", "Medium Health", AlignmentColumn, panel.ColorHighHealth , 16)
 	panel.ColorLowHealth = CreateQuickColorbox(objectName.."ColorLowHealth", "Low Health", AlignmentColumn, panel.ColorMediumHealth , 16)
 	
+	-- Aura (Buff and Debuff) Widget
+	------------------------------
+	panel.DebuffsLabel = CreateQuickHeadingLabel(nil, "Buffs & Debuffs", AlignmentColumn, panel.ColorLowHealth, 0, 5)
+	panel.WidgetsDebuff = CreateQuickCheckbutton(objectName.."WidgetsDebuff", "Show Aura Timers", AlignmentColumn, panel.DebuffsLabel)
+	panel.WidgetsDebuffStyle =  CreateQuickDropdown(objectName.."WidgetsDebuffStyle", "Icon Style:", DebuffStyles, 1, AlignmentColumn, panel.WidgetsDebuff, 16)
+	panel.WidgetsAuraMode =  CreateQuickDropdown(objectName.."WidgetsAuraMode", "Filter Mode:", AuraWidgetModes, 1, AlignmentColumn, panel.WidgetsDebuffStyle, 16)		-- used to be WidgetsDebuffMode
+	panel.WidgetsDebuffListLabel = CreateQuickItemLabel(nil, "Aura List:", AlignmentColumn, panel.WidgetsAuraMode, 16)	
+	panel.WidgetsDebuffTrackList = CreateQuickEditbox(objectName.."WidgetsDebuffTrackList", AlignmentColumn, panel.WidgetsDebuffListLabel, 16)
+
+		-- Debuff Help Tip
+		panel.DebuffHelpTip = CreateQuickItemLabel(nil, "Tip: |cffCCCCCCAuras should be listed with the exact name, or a spell ID number. "..
+			"You can use the prefixes, 'My' or 'All', to distinguish personal damage spells from global crowd control spells. "..
+			"Auras at the top of the list will get displayed before lower ones.", AlignmentColumn, panel.WidgetsDebuffListLabel, 225) -- 210, 275, )	
+		panel.DebuffHelpTip:SetHeight(128)
+		panel.DebuffHelpTip:SetWidth(200)
+		panel.DebuffHelpTip.Text:SetJustifyV("TOP")
+		
+		
+	--[[
+		Stage 1:
+			TidyPlatesHubModes.AuraModes = { 
+				{ text = "Show All Debuffs", notCheckable = 1 } ,
+				{ text = "Show All Buffs", notCheckable = 1 } , 
+				{ text = "Show Specific Auras...", notCheckable = 1 } ,						
+				}
+				
+		Stage 2:
+			- Expand Options
+			- Filtering mode: Show raid targets, show only my target
+			
+	--]]
 	
 	--Widgets
 	------------------------------
-	panel.WidgetsLabel = CreateQuickHeadingLabel(nil, "Widgets", AlignmentColumn, panel.ColorLowHealth, 0, 5)
+	panel.WidgetsLabel = CreateQuickHeadingLabel(nil, "Widgets", AlignmentColumn, panel.WidgetsDebuffTrackList, 0, 5)
 	panel.WidgetTargetHighlight = CreateQuickCheckbutton(objectName.."WidgetTargetHighlight", "Show Highlight on Current Target", AlignmentColumn, panel.WidgetsLabel)
 	panel.WidgetEliteIndicator = CreateQuickCheckbutton(objectName.."WidgetEliteIndicator", "Show Elite Indicator", AlignmentColumn, panel.WidgetTargetHighlight)
 	panel.ClassEnemyIcon = CreateQuickCheckbutton(objectName.."ClassEnemyIcon", "Show Enemy Class Icons", AlignmentColumn, panel.WidgetEliteIndicator)
-	panel.ClassPartyIcon = CreateQuickCheckbutton(objectName.."ClassPartyIcon", "Show Party Member Class Icons", AlignmentColumn, panel.ClassEnemyIcon)
+	panel.ClassPartyIcon = CreateQuickCheckbutton(objectName.."ClassPartyIcon", "Show Group Class Icons", AlignmentColumn, panel.ClassEnemyIcon)
 	panel.WidgetsTotemIcon = CreateQuickCheckbutton(objectName.."WidgetsTotemIcon", "Show Totem Icons", AlignmentColumn, panel.ClassPartyIcon)
 	panel.WidgetsComboPoints = CreateQuickCheckbutton(objectName.."WidgetsComboPoints", "Show Combo Points", AlignmentColumn, panel.WidgetsTotemIcon)
 	panel.WidgetsThreatIndicator = CreateQuickCheckbutton(objectName.."WidgetsThreatIndicator", "Show Threat Indicator", AlignmentColumn, panel.WidgetsComboPoints)
@@ -142,31 +177,17 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.WidgetsRangeIndicator = CreateQuickCheckbutton(objectName.."WidgetsRangeIndicator", "Show Party Range Warning", AlignmentColumn, panel.WidgetsThreatIndicatorMode)
 	panel.WidgetsRangeMode =  CreateQuickDropdown(objectName.."WidgetsRangeMode", "Range:", RangeModes, 1, AlignmentColumn, panel.WidgetsRangeIndicator, 16)
 	
-	-- Debuff Widget
-	------------------------------
-	panel.WidgetsDebuff = CreateQuickCheckbutton(objectName.."WidgetsDebuff", "Show My Debuff Timers", AlignmentColumn, panel.WidgetsRangeMode)
-	panel.WidgetsDebuffStyle =  CreateQuickDropdown(objectName.."WidgetsDebuffStyle", "Debuff Style:", DebuffStyles, 1, AlignmentColumn, panel.WidgetsDebuff, 16)
-	panel.WidgetsDebuffMode =  CreateQuickDropdown(objectName.."WidgetsDebuffMode", "Debuff Filter:", DebuffModes, 1, AlignmentColumn, panel.WidgetsDebuffStyle, 16)
-	panel.WidgetsDebuffListLabel = CreateQuickItemLabel(nil, "Debuff List:", AlignmentColumn, panel.WidgetsDebuffMode, 16)	
-	panel.WidgetsDebuffTrackList = CreateQuickEditbox(objectName.."WidgetsDebuffTrackList", AlignmentColumn, panel.WidgetsDebuffListLabel, 16)
-
-		-- Debuff Help Tip
-		panel.DebuffHelpTip = CreateQuickItemLabel(nil, "Tip: |cffCCCCCCDebuffs should be listed with the exact name, or a spell ID number. "..
-			"You can use the prefixes, 'My' or 'All', to distinguish personal damage spells from global crowd control spells. "..
-			"Auras at the top of the list will get displayed before lower ones.", AlignmentColumn, panel.WidgetsDebuffListLabel, 225) -- 210, 275, )	
-		panel.DebuffHelpTip:SetHeight(128)
-		panel.DebuffHelpTip:SetWidth(200)
-		panel.DebuffHelpTip.Text:SetJustifyV("TOP")
+	
 	
 	--Frame
 	------------------------------
-	panel.AdvancedLabel = CreateQuickHeadingLabel(nil, "Advanced", AlignmentColumn, panel.WidgetsDebuffTrackList, 0, 5)
+	panel.AdvancedLabel = CreateQuickHeadingLabel(nil, "Advanced", AlignmentColumn, panel.WidgetsRangeMode, 0, 5)
 	panel.AdvancedEnableUnitCache = CreateQuickCheckbutton(objectName.."AdvancedEnableUnitCache", "Enable Class & Title Caching ", AlignmentColumn, panel.AdvancedLabel)
 	panel.FrameVerticalPosition = CreateQuickSlider(objectName.."FrameVerticalPosition", "Vertical Position of Artwork: (May cause targeting problems)", AlignmentColumn, panel.AdvancedEnableUnitCache, 0, 4)
 	
 	-- [[
 	-- Blizz Button
-	local BlizzOptionsButton = CreateFrame("Button", objectName.."BlizzButton", AlignmentColumn, "UIPanelButtonTemplate2")
+	local BlizzOptionsButton = CreateFrame("Button", objectName.."BlizzButton", AlignmentColumn, "TidyPlatesPanelButtonTemplate")
 	BlizzOptionsButton:SetPoint("TOPLEFT", panel.FrameVerticalPosition, "BOTTOMLEFT",-6, -18)
 	BlizzOptionsButton:SetWidth(300)
 	BlizzOptionsButton:SetText("Blizzard Nameplate Motion & Visibility...")

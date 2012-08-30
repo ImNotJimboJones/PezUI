@@ -1,7 +1,7 @@
 ﻿local mod	= DBM:NewMod(188, "DBM-Party-Cataclysm", 10, 77)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7663 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7759 $"):sub(12, -3))
 mod:SetCreatureID(23578)
 mod:SetModelID(21633)
 mod:SetZone()
@@ -15,7 +15,7 @@ mod:RegisterEventsInCombat(
 	"CHAT_MSG_MONSTER_YELL"
 )
 
-local warnFlameCast		= mod:NewSpellAnnounce(97855, 2)
+local warnFlameCast		= mod:NewSpellAnnounce(43140, 2)
 local warnAdds			= mod:NewSpellAnnounce(43962, 4)
 local warnAddsSoon		= mod:NewSoonAnnounce(43962, 3)
 local warnFireBomb		= mod:NewSpellAnnounce(42630, 3)
@@ -47,7 +47,7 @@ function mod:SPELL_AURA_APPLIED(args)
 end
 
 function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(97855) then
+	if args:IsSpellID(43140, 97855) then -- unconfirmed in mop
 		warnFlameCast:Show()	-- Seems he doesn't target the person :(
 	end
 end

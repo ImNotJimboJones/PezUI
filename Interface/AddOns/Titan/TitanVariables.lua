@@ -1,12 +1,13 @@
---[[ Titan
-TitanVariables.lua
-This file contains the routines to initialize, get, and set the basic data structures used by Titan. 
+--[[ File
+NAME: TitanVariables.lua
+DESC: This file contains the routines to initialize, get, and set the basic data structures used by Titan. 
 It also sets the global variables and constants used by Titan.
 
 TitanSettings, TitanSkins, ServerTimeOffsets, ServerHourFormat are the structures saved to disk (listed in toc).
 TitanSettings: is the table that holds the Titan variables by character and the plugins used by that character.
 TitanSkins: is the table that holds the list of Titan and custom skins available to the user. It is assumed that the skins are in the proper folder on the hard drive. Blizzard does not allow addons to access the disk.
 ServerTimeOffsets and ServerHourFormat: are the tables that hold the user selected hour offset and display format per realm (server).
+:DESC
 --]]
 local L = LibStub("AceLocale-3.0"):GetLocale(TITAN_ID, true)
 local _G = getfenv(0);
@@ -81,6 +82,8 @@ TITAN_PANEL_BUTTONS_PLUGIN_CATEGORY =
 	{"Built-ins","General","Combat","Information","Interface","Profession"}
 
 --[[ Titan
+NAME: Titan bar overview
+DESC:
 -- 3 buttons are used to create a Titan bar: 
 -- the 'display' button, 
 -- the 'hider', 
@@ -88,15 +91,20 @@ TITAN_PANEL_BUTTONS_PLUGIN_CATEGORY =
 -- The display is where the plugins are displayed.
 -- The hider is used if auto hide is requested. This button will cause the display to show when the mouse is enters.
 -- The auto hide is the plugin that shows the auto hide 'pin'.
---
+:DESC
 --]]
 --[[ Titan
-TitanBarOrder table. The values must match the 'name' in the TitanBarData table!!!
+NAME: TitanBarOrder table
+DESC:
+The values must match the 'name' in the TitanBarData table!!!
 The values specify the order the options should be ordered in the options pulldown.
+:DESC
 --]]
 TitanBarOrder = {"Bar", "Bar2", "AuxBar2", "AuxBar"}
 --[[ Titan
-TitanBarData table. The index must match the 'button' names in the TitanPanel.xml!!!
+NAME: TitanBarData table. 
+DESC:
+The index must match the 'button' names in the TitanPanel.xml!!!
 The table holds:
  the name of each Titan bar (in the index)
  the short name of the bar 
@@ -106,7 +114,8 @@ The table holds:
  
 The short name is used to build names of the various saved variables, frames,
  and buttons used by Titan.
---]]
+:DESC
+-]]
 TitanBarData = {
 	[TITAN_PANEL_DISPLAY_PREFIX.."Bar"] = {
 		locale_name = L["TITAN_PANEL_MENU_TOP"],
@@ -166,11 +175,14 @@ TitanBarData = {
 -- Timers used within Titan
 TitanTimers = {}
 --[[ Titan
-AutoHideData table. The index must match the hider 'button' names in the TitanPanel.xml!!!
+NAME: AutoHideData table. 
+DESC:
+The index must match the hider 'button' names in the TitanPanel.xml!!!
 The table holds:
  the name of each hider bar (in the index)
  the short name of the hider bar 
  whether the hider bar is on top or bottom
+:DESC
 --]]
 AutoHideData = { -- This has to follow the convention for plugins...
 	[AUTOHIDE_PREFIX.."Bar"..AUTOHIDE_SUFFIX] = {name = "Bar", vert = TITAN_TOP},
@@ -316,9 +328,8 @@ end
 --[[ local
 NAME: TitanRegisterExtra
 DESC: Add the saved variable data of an unloaded plugin to the 'extra' list in case the user wants to delete the data via Tian Extras option.
-VARS: 
-- id - the name of the plugin (string)
-OUT : None
+VAR: id - the name of the plugin (string)
+OUT:  None
 --]]
 local function TitanRegisterExtra(id) 
 	TitanPluginExtrasNum = TitanPluginExtrasNum + 1
@@ -344,111 +355,12 @@ local function CleanupProfile ()
 	TitanPanelRightClickMenu_Close();
 end
 
-local function GetProfileToUse (profile)
-	local toon = profile
-	local current, playerName, serverName = TitanUtils_GetPlayer()
-	local found = false
-	
---TitanDebug ("GetProfileToUse: "..profile.." g: "..TitanAllGetVar("GlobalProfileName"))
-	-- if the user wants a global and it exists then use it
-	if TitanAllGetVar("GlobalProfileUse") then
-		if TitanSettings.Players[TitanAllGetVar("GlobalProfileName")] then
-			toon = TitanAllGetVar("GlobalProfileName")
---[[
-TitanPrint(
-	L["TITAN_PANEL_MENU_PROFILE"]
-	.." using :"..(toon or "?")
-	, "info")
---]]
-		else
-			-- safety - just in case...
-			TitanAllSetVar("GlobalProfileName", toon)
-		end
-	end
-
-	-- Find the profile in a case insensitive manner
-	toon = string.lower(toon)
-	for index, id in pairs(TitanSettings.Players) do
-		if toon == string.lower(index) then
-			toon = index
-			found = true
-		end
-	end
-	-- safety check so the .lower is *never* used to write the index
-	if found then
-		-- all is good
-	else
-		toon = current
-	end
-
---TitanDebug ("_UseSettings: "..toon)
-	return toon, current
-end
-
---[[ local
-NAME: TitanVariables_InitPlayerSettings
-DESC: Init the profile settings. It is assumed this is a wipe of the given profile.
-VARS: 
-- profile - string name of the profile
-OUT : None
-NOTE:
-- These will be saved on exit or reload.
---]]
-local function TitanVariables_InitPlayerSettings(profile, reset) 
-	-- TitanSettings should not be nil
-	TitanVariables_InitTitanSettings()
---[[
-	if (not TitanSettings) then
-		TitanSettings = {};
-	end
-	
-	-- Init TitanSettings.Players
-	if (not TitanSettings.Players ) then
-		TitanSettings.Players = {};
-	end
---]]	
-	CleanupProfile () -- we could have been called to use another profile
-	
---[[
-TitanPrint(
-	L["TITAN_PANEL_MENU_PROFILE"]..">"
-	.." : "..(TitanAllGetVar("GlobalProfileUse") and "T" or "F")
-	.." : "..(TitanAllGetVar("GlobalProfileName") or "?")
-	.." : "..(TitanSettings.Players[toon] and "T" or "F")
-	, "info")
---]]
-	-- Init TitanPlayerSettings
-	if (not TitanSettings.Players[profile]) or reset then
-		TitanSettings.Players[profile] = {}
-		TitanSettings.Players[profile].Plugins = {}
-		TitanSettings.Players[profile].Panel = {}
-		TitanSettings.Players[profile].Panel.Buttons = {}
-		TitanSettings.Players[profile].Panel.Location = {}
-		TitanPlayerSettings = {}
-		TitanPlayerSettings["Plugins"] = {}
-		TitanPlayerSettings["Panel"] = {}
-		TitanPlayerSettings["Register"] = {}
-	end	
-	
-	-- Set global variables
-	TitanPlayerSettings = TitanSettings.Players[profile];
-	TitanPluginSettings = TitanPlayerSettings["Plugins"];
-	TitanPanelSettings = TitanPlayerSettings["Panel"];
-	
-	-- for debug if a user needs to send in the Titan saved vars
-	TitanPlayerSettings["Register"] = {}
-	TitanPanelRegister = TitanPlayerSettings["Register"]
-	
-	TitanSettings.Profile = profile
-end
-
 --[[ local
 NAME: TitanVariables_SyncRegisterSavedVariables
 DESC: Helper routine to sync two sets of toon data - Titan settings and loaded plugins.
-VARS: 
-- registeredVariables - current loaded data (destination)
-- savedVariables - data to compare with (source)
-OUT : None
+VAR: registeredVariables - current loaded data (destination)
+VAR: savedVariables - data to compare with (source)
+OUT:  None
 --]]
 local function TitanVariables_SyncRegisterSavedVariables(registeredVariables, savedVariables)
 	if (registeredVariables and savedVariables) then
@@ -469,17 +381,26 @@ local function TitanVariables_SyncRegisterSavedVariables(registeredVariables, sa
 end
 
 --[[ local
-NAME: TitanVariables_PluginSettingsReset
+NAME: Plugin_settings
 DESC: Give the curent profile the default plugins - if they are registered. 
-VARS: None
-OUT : None
+VAR: reset - boolean
+OUT: None
 NOTE:
 - It is assumed this is a plugin wipe of the given profile.
-- These will be saved on exit or reload.
+- Use the default Titan plugin list to display on the given bar.
+- These will be saved on exit or reload in the given profile.
+:NOTE
 --]]
-local function TitanVariables_PluginSettingsReset() 
+local function Plugin_settings(reset)
+	local plugin_list = {}
+	if reset then -- use the default install list
+		plugin_list = Default_Plugins
+	else -- use the current profile
+		plugin_list = TitanPanelSettings.Buttons
+	end
+	
 	-- Init each and every default plugin
-	for idx, default_plugin in pairs(Default_Plugins) do
+	for idx, default_plugin in pairs(plugin_list) do
 		local id = default_plugin.id
 		local loc = default_plugin.loc
 		local plugin = TitanUtils_GetPlugin(id)
@@ -491,7 +412,7 @@ local function TitanVariables_PluginSettingsReset()
 			TitanVariables_SyncRegisterSavedVariables(
 				plugin.savedVariables, TitanPluginSettings[id])
 			TitanUtils_AddButtonOnBar(loc, id)
---			TitanPanelButton_UpdateButton(id)
+			TitanPanelButton_UpdateButton(id)
 		end
 	end
 end
@@ -499,49 +420,43 @@ end
 --[[ local
 NAME: TitanVariables_PluginSettingsInit
 DESC: Give the curent profile the default plugins - if they are registered. 
-VARS: None
-OUT : None
+VAR: None
+OUT: None
 NOTE:
-- It is assumed this is a plugin wipe of the given profile.
-- These will be saved on exit or reload.
+- The saved variables of the given profile will be used.
+- These will be saved on exit or reload in the given profile.
+- The saved display list will be used but only the registered plugins will be displayed.
+- The plugins that are not registered will NOT be removed from the saved list. This allows different a single saved display list to be used for toons that have different plugins enabled.
+:NOTE
 --]]
 local function TitanVariables_PluginSettingsInit() 
 	-- Loop through the user's displayed plugins and see what is
 	-- actually registered
-	local to_remove = {}
 	for idx, display_plugin in pairs(TitanPanelSettings.Buttons) do
 		local id = display_plugin
 		local plugin = TitanUtils_GetPlugin(id)
---TitanDebug("Plugin: "..(id or "?").." "..(plugin and "T" or "F"))
 		-- See if plugin is registered
 		if (plugin) then
---TitanDebug("__Plugin +: "..(id or "?").." "..(idx or "?"))
 			-- Synchronize registered and saved variables
 			TitanVariables_SyncRegisterSavedVariables(
 				plugin.savedVariables, TitanPluginSettings[id])
-			-- Update button - it is already added
---			TitanPanelButton_UpdateButton(id)
+			-- Button will be updated later
 		else
-			-- Remove the button
---			table.insert(to_remove, id)
+			-- Do not display this plugin.
+			-- Do NOT remove the button from the displayed list.
+			-- This is an old 'feature' that people like...
 		end
-	end
-
-	-- Now remove the buttons because doing it while parsing 
-	-- the same array is not a good idea...
-	for idx, id in pairs(to_remove) do
---TitanDebug("__Plugin -: "..(id or "?").." "..(idx or "?"))
-		TitanPanel_RemoveButton(id)
 	end
 end
 
 --[[ local
 NAME: TitanVariables_SyncSkins
 DESC: Routine to sync two sets of skins data - Titan defaults and Titan saved vars.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - It is assumed that the list in Titan defaults or as input from the user are in the Titan skins folder. Blizz does not allow LUA to read the hard drive directly.
+:NOTE
 --]]
 local function TitanVariables_SyncSkins()
 	if (TitanSkinsDefault and TitanSkins) then
@@ -556,6 +471,7 @@ local function TitanVariables_SyncSkins()
 		end
 
 		-- search through the saved vars and compare against the defaults
+		local found = nil
 		for index, value in pairs(TitanSkins) do
 			found = nil
 			-- See if the skin is a default one
@@ -584,23 +500,21 @@ local function TitanVariables_SyncSkins()
 end
 
 --[[ local
-NAME: TitanVariables_SyncPanelSettings
-DESC: Routine to sync Titan settings and Titan skins - defaults to saved vars.
-VARS: None
-OUT : None
+NAME: Sync_panel_settings
+DESC: Routine to sync TitanPanelSettings - defaults to saved vars.
+VAR: Setting - table to use as the default
+OUT: None
 --]]
-local function TitanVariables_SyncPanelSettings() 
+local function Sync_panel_settings(settings) 
 	-- Synchronize registered and saved variables
-	TitanVariables_SyncRegisterSavedVariables(TITAN_PANEL_SAVED_VARIABLES, TitanPanelSettings)
-	
-	TitanSkins = TitanVariables_SyncSkins()
+	TitanVariables_SyncRegisterSavedVariables(settings, TitanPanelSettings)
 end
 
 --[[ local
 NAME: Set_Timers
 DESC: Routine to reset / sync Titan settings.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 --]]
 local function Set_Timers(reset) 
 	-- Titan is loaded so set the timers we want to use
@@ -630,8 +544,8 @@ end
 --[[ Titan
 NAME: TitanVariables_SyncPluginSettings
 DESC: Routine to sync plugin datas - current loaded (lua file) to any plugin saved vars (last save to disk).
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 --]]
 function TitanVariables_SyncPluginSettings() -- one plugin uses this
 	-- Init each and every plugin
@@ -657,9 +571,10 @@ end
 --[[ Titan
 NAME: TitanVariables_ExtraPluginSettings
 DESC: Routine to mark plugin data that is not loaded (no lua file) but has plugin saved vars (last save to disk).
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE: This data is made available in case the user wants to delete the data via Tian Extras option.
+:NOTE
 --]]
 function TitanVariables_ExtraPluginSettings()
 	TitanPluginExtrasNum = 0
@@ -676,155 +591,137 @@ end
 --[[ Titan
 NAME: TitanVariables_InitTitanSettings
 DESC: Ensure TitanSettings (one of the saved vars in the toc) exists and set the Titan version.
-VARS: None
-OUT : None
+VAR:  None
+OUT:  None
 NOTE:
 - Called when Titan is loaded (ADDON_LOADED event)
+:NOTE
 --]]
 function TitanVariables_InitTitanSettings()
 	if (TitanSettings) then
-		-- check for player list per issue #745
-		if TitanSettings.Players then
-		else
-			-- Create the table so profile(s) can be added
-			TitanSettings.Players = {}
-		end
+		-- all is good
+	else
+		TitanSettings = {}
+	end
+	-- check for player list per issue #745
+	if TitanSettings.Players then
+		-- all is good
+	else
+		-- Create the table so profile(s) can be added
+		TitanSettings.Players = {}
+	end
 --[[
 TitanDumpPlayerList()
 --]]
-	else
-		TitanSettings = {}
-		TitanVariables_SyncPanelSettings()
---[[
-TitanDebug("_InitTitanSettings: init TitanSettings")
---]]
-	end
+	Sync_panel_settings(TITAN_PANEL_SAVED_VARIABLES)
 	
 	if (TitanAll) then
---[[
-TitanDebug("_InitTitanSettings: TitanAll "
-.."T_pew: "..(TitanAll.TimerPEW or 0).." "
-)
---]]
 	else
 		TitanAll = {};
-		TitanVariables_SyncRegisterSavedVariables(TITAN_ALL_SAVED_VARIABLES, TitanAll)
---[[
-TitanDebug("_InitTitanSettings: init TitanAll")
---]]
 	end
+	TitanVariables_SyncRegisterSavedVariables(TITAN_ALL_SAVED_VARIABLES, TitanAll)
 	
 	TitanSettings.Version = TITAN_VERSION;
---[[
-TitanDebug("_InitTitanSettings: v"
-..(TitanSettings.Version or "?")
-)
---]]
 end
 
 --[[ local
-NAME: Detailed_settings_reset
-DESC: Reset the Titan settings, the plugin settings, the 'extras' data, and the Titan timer table.
-VARS: 
-- profile - the toon to use (string)
-OUT : None
-NOTE:
-- Called when the user does a Titan reset or the profile does not exist.
---]]
-local function Detailed_settings_reset(profile)
---TitanDebug("DetailedSettings: Reset")
-	-- Synchronize Plugins/Panel settings
-	TitanVariables_InitPlayerSettings(profile, true);
-	TitanVariables_SyncPanelSettings();
-
-	if (TitanPlayerSettings) then
-		-- Synchronize plugin settings with plugins that were registered
-		TitanVariables_SyncPluginSettings()
-		-- Display the ones Titan selected AND are registered
-		TitanVariables_PluginSettingsReset();
-		TitanVariables_ExtraPluginSettings()
-	end
-	
-	Set_Timers(true)
-	
-	TitanUtils_SetGlobalProfile(false, TITAN_PROFILE_NONE)
-end
-
---[[ local
-NAME: Detailed_settings_init
-DESC: Init the Titan settings, the plugin settings, the 'extras' data, and the Titan timer table.
-VARS: 
-- profile - the toon to use (string)
-OUT : None
-NOTE:
-- Called at PLAYER_ENTERING_WORLD event after we know Titan has registered plugins.
---]]
-local function Detailed_settings_init(profile)
---TitanDebug("DetailedSettings: Init")
-	-- Synchronize Plugins/Panel settings
-	TitanVariables_InitPlayerSettings(profile, false)
-	TitanVariables_SyncPanelSettings();
-
-	if (TitanPlayerSettings) then
-		-- Synchronize plugin settings with plugins that were registered
-		TitanVariables_SyncPluginSettings()
-		-- Display the ones user selected AND are registered
-		TitanVariables_PluginSettingsInit();
-		TitanVariables_ExtraPluginSettings()
-	end
-	
-	Set_Timers(false)
-end
-
---[[ local
-NAME: TitanVariables_Detailed_settings_use
+NAME: Init_player_settings
 DESC: Use the Titan settings, the plugin settings, the 'extras' data of the given profile.
-VARS: 
-- profile - the toon to use (string)
-OUT : None
+VAR:  from_profile - nil or profile to switch from (string)
+VAR:  profile - the toon to use (string)
+VAR:  profile - the toon to use (string)
+OUT:  None
 NOTE:
 - Called at PLAYER_ENTERING_WORLD event after we know Titan has registered plugins.
+:NOTE
 --]]
-local function TitanVariables_Detailed_settings_use(profile)
---TitanDebug("DetailedSettings: Use")
-	-- copy the profile into this one
+local function Init_player_settings(from_profile, profile, action)
+	local old_player = {}
+	local old_panel = {}
+	local old_plugins = {}
+	local reset = (action == TITAN_PROFILE_RESET)
+
 	CleanupProfile () -- hide currently shown plugins
+	-- Ensure the requested profile is at least an empty stub
+	if (not TitanSettings.Players[profile]) or reset then
+		TitanSettings.Players[profile] = {}
+		TitanSettings.Players[profile].Plugins = {}
+		TitanSettings.Players[profile].Panel = {}
+		TitanSettings.Players[profile].Panel.Buttons = {}
+		TitanSettings.Players[profile].Panel.Location = {}
+		TitanPlayerSettings = {}
+		TitanPlayerSettings["Plugins"] = {}
+		TitanPlayerSettings["Panel"] = {}
+		TitanPlayerSettings["Register"] = {}
+	end	
+	-- Set global variables
+	TitanPlayerSettings = TitanSettings.Players[profile];
+	TitanPluginSettings = TitanPlayerSettings["Plugins"];
+	TitanPanelSettings = TitanPlayerSettings["Panel"];
+	Sync_panel_settings(TITAN_PANEL_SAVED_VARIABLES);
 	
-	TitanCopyPlayerSettings = TitanSettings.Players[profile];
-	TitanCopyPluginSettings = TitanCopyPlayerSettings["Plugins"];
-	TitanCopyPanelSettings = TitanCopyPlayerSettings["Panel"];
-
-	-- set the current profile to the new by copy from memory - NOT disk
-	for index, id in pairs(TitanCopyPanelSettings) do
-		TitanPanelSetVar(index, TitanCopyPanelSettings[index]);		
-	end
-
-	for index, id in pairs(TitanCopyPluginSettings) do
-		for var, id in pairs(TitanCopyPluginSettings[index]) do		
-			TitanSetVar(index, var, TitanCopyPluginSettings[index][var])
+	if action == TITAN_PROFILE_RESET then
+		-- default is global profile OFF
+		TitanAll = {}
+		TitanVariables_SyncRegisterSavedVariables(TITAN_ALL_SAVED_VARIABLES, TitanAll)
+	elseif action == TITAN_PROFILE_INIT then
+		--	
+	elseif action == TITAN_PROFILE_USE then
+		-- The requested profile at least exists so we can copy to it
+		-- Copy from the active profile - not anything in saved vars
+		if profile and TitanSettings.Players[profile] then
+			old_player = TitanSettings.Players[profile]
+		else
+		end
+		if old_player and old_player["Panel"] then
+			old_panel = old_player["Panel"]
+		end
+		if old_player and old_player["Plugins"] then
+			old_plugins = old_player["Plugins"]
+		end
+		-- Copy the panel settings
+		for index, id in pairs(old_panel) do
+			TitanPanelSetVar(index, old_panel[index]);		
+		end
+		-- Copy the plugin settings
+		for plugin, i in pairs(old_plugins) do
+			for var, id in pairs(old_plugins[plugin]) do		
+				TitanSetVar(plugin, var, old_plugins[plugin][var])
+			end
 		end
 	end
-	
+
 	if (TitanPlayerSettings) then
 		-- Synchronize plugin settings with plugins that were registered
 		TitanVariables_SyncPluginSettings()
-		-- Display the ones user selected AND are registered
-		TitanVariables_PluginSettingsInit();
+		-- Display the plugins the user selected AND are registered
+		if reset then
+			Plugin_settings(reset)
+		else
+			TitanVariables_PluginSettingsInit()
+		end
 		TitanVariables_ExtraPluginSettings()
 	end
 	
-	Set_Timers(false)
+	TitanSkins = TitanVariables_SyncSkins()
+
+	Set_Timers(reset)
+	-- for debug if a user needs to send in the Titan saved vars
+	TitanPlayerSettings["Register"] = {}
+	TitanPanelRegister = TitanPlayerSettings["Register"]
+	
+	TitanSettings.Profile = profile
 end
 
 --[[ API
 NAME: TitanGetVar
 DESC: Get the value of the requested plugin variable.
-VARS: 
-- id - the plugin name (string)
-- var - the name (string) of the variable
-OUT : None
+VAR: id - the plugin name (string)
+VAR: var - the name (string) of the variable
+OUT:  None
 NOTE:
 - 'var' is from the plugin <button>.registry.savedVariables table as created in the plugin lua.
+:NOTE
 --]]
 function TitanGetVar(id, var)
 	if (id and var and TitanPluginSettings and TitanPluginSettings[id]) then		
@@ -839,13 +736,13 @@ end
 --[[ API
 NAME: TitanVarExists
 DESC: Determine if requested plugin variable exists.
-VARS: 
-- id - the plugin name (string)
-- var - the name (string) of the variable
-OUT : None
+VAR: id - the plugin name (string)
+VAR: var - the name (string) of the variable
+OUT:  None
 NOTE:
 - 'var' is from the plugin <button>.registry.savedVariables table as created in the plugin lua.
 - This checks existence NOT false!
+:NOTE
 --]]
 function TitanVarExists(id, var)
 	-- We need to check for existance not true!
@@ -863,13 +760,13 @@ end
 --[[ API
 NAME: TitanSetVar
 DESC: Get the value of the requested plugin variable to the given value.
-VARS: 
-- id - the plugin name (string)
-- var - the name (string) of the variable
-- value - new value of var
-OUT : None
+VAR: id - the plugin name (string)
+VAR: var - the name (string) of the variable
+VAR: value - new value of var
+OUT:  None
 NOTE:
 - 'var' is from the plugin <button>.registry.savedVariables table as created in the plugin lua.
+:NOTE
 --]]
 function TitanSetVar(id, var, value)
 	if (id and var and TitanPluginSettings and TitanPluginSettings[id]) then		
@@ -880,12 +777,12 @@ end
 --[[ API
 NAME: TitanToggleVar
 DESC: Toggle the value of the requested plugin variable. This assumes var value represents a boolean
-VARS: 
-- id - the plugin name (string)
-- var - the name (string) of the variable
-OUT : None
+VAR: id - the plugin name (string)
+VAR: var - the name (string) of the variable
+OUT:  None
 NOTE:
 - Boolean in this case could be true / false or non zero / zero or nil.
+:NOTE
 --]]
 function TitanToggleVar(id, var)
 	if (id and var and TitanPluginSettings and TitanPluginSettings[id]) then
@@ -896,12 +793,11 @@ end
 --[[ API
 NAME: TitanPanelGetVar
 DESC: Get the value of the requested Titan variable.
-VARS: 
-- var - the name (string) of the variable
-OUT : 
-- value of the requested Titan variable
+VAR: var - the name (string) of the variable
+OUT: value of the requested Titan variable
 NOTE:
 - 'var' is from the TitanPanelSettings[var].
+:NOTE
 --]]
 function TitanPanelGetVar(var)
 	if (var and TitanPanelSettings) then		
@@ -917,12 +813,12 @@ end
 --[[ API
 NAME: TitanPanelSetVar
 DESC: Set the value of the requested Titan variable.
-VARS: 
-- var - the name (string) of the variable
-- value - new value of var
-OUT : None
+VAR: var - the name (string) of the variable
+VAR: value - new value of var
+OUT:  None
 NOTE:
 - 'var' is from the TitanPanelSettings[var].
+:NOTE
 --]]
 function TitanPanelSetVar(var, value)
 	if (var and TitanPanelSettings) then		
@@ -933,11 +829,11 @@ end
 --[[ API
 NAME: TitanPanelToggleVar
 DESC: Toggle the value of the requested Titan variable. This assumes var value represents a boolean
-VARS: 
-- var - the name (string) of the variable
-OUT : None
+VAR:  var - the name (string) of the variable
+OUT:  None
 NOTE:
 - Boolean in this case could be true / false or non zero / zero or nil.
+:NOTE
 --]]
 function TitanPanelToggleVar(var)
 	if (var and TitanPanelSettings) then
@@ -948,11 +844,11 @@ end
 --[[ API
 NAME: TitanAllGetVar
 DESC: Get the value of the requested Titan global variable.
-VARS: 
-- var - the name (string) of the variable
-OUT : None
+VAR: var - the name (string) of the variable
+OUT: None
 NOTE:
 - 'var' is from the TitanAll[var].
+:NOTE
 --]]
 function TitanAllGetVar(var)
 	if (var and TitanAll) then		
@@ -968,12 +864,12 @@ end
 --[[ API
 NAME: TitanAllSetVar
 DESC: Set the value of the requested Titan global variable.
-VARS: 
-- var - the name (string) of the variable
-- value - new value of var
-OUT : None
+VAR: var - the name (string) of the variable
+VAR: value - new value of var
+OUT:  None
 NOTE:
 - 'var' is from the TitanPanelSettings[var].
+:NOTE
 --]]
 function TitanAllSetVar(var, value)
 	if (var and TitanAll) then		
@@ -984,11 +880,11 @@ end
 --[[ API
 NAME: TitanAllToggleVar
 DESC: Toggle the value of the requested Titan global variable. This assumes var value represents a boolean
-VARS: 
-- var - the name (string) of the variable
-OUT : None
+VAR: var - the name (string) of the variable
+OUT: None
 NOTE:
 - Boolean in this case could be true / false or non zero / zero or nil.
+:NOTE
 --]]
 function TitanAllToggleVar(var)
 	if (var and TitanAll) then
@@ -999,11 +895,9 @@ end
 --[[ API
 NAME: TitanVariables_GetPanelStrata
 DESC: Return the strata and the next highest strata of the given value
-VARS: 
-- value - the name (string) of the strata to look up
-OUT : 
-- string - Next highest strata
-- string - passed in strata
+VAR: value - the name (string) of the strata to look up
+OUT: string - Next highest strata
+OUT: string - passed in strata
 --]]
 function TitanVariables_GetPanelStrata(value)
 	-- obligatory check
@@ -1027,9 +921,8 @@ end
 --[[ API
 NAME: TitanVariables_SetPanelStrata
 DESC: Set the Titan bars to the given strata and the plugins to the next highest strata.
-VARS: 
-- value - strata name (string)
-OUT : None
+VAR: value - strata name (string)
+OUT: None
 --]]
 function TitanVariables_SetPanelStrata(value)
 	local plugins, bars = TitanVariables_GetPanelStrata(value)
@@ -1049,27 +942,44 @@ end
 --[[ Titan
 NAME: TitanVariables_UseSettings
 DESC: Set the Titan variables and plugin variables to the passed in profile.
-VARS: 
-- profile - profile to use for this toon : <name>@<server>
-OUT : None
+VAR: profile - profile to use for this toon : <name>@<server>
+OUT: None
 NOTE:
 - Called from the Titan right click menu
 - profile is compared as 'lower' so the case of profile does not matter 
+:NOTE
 --]]
 function TitanVariables_UseSettings(profile, action)
---[[
-TitanDebug("Use 1: "
-..(profile or "?").." "
-..(action or "?").." "
-)
---]]
-	-- sanity check
-	if TitanSettings and TitanSettings.Players then
+	-- sanity checks to ensure the base tables are set
+	if (TitanSettings) then
 		-- all is good
 	else
-		TitanVariables_InitTitanSettings()
+		TitanSettings = {}
 	end
+	-- check for player list per issue #745
+	if TitanSettings.Players then
+		-- all is good
+	else
+		-- Create the table so profile(s) can be added
+		TitanSettings.Players = {}
+	end
+	if (TitanAll) then
+		-- all is good
+	else
+		TitanAll = {};
+	end
+	TitanVariables_SyncRegisterSavedVariables(TITAN_ALL_SAVED_VARIABLES, TitanAll)
+	
+	TitanSettings.Version = TITAN_VERSION;
+	
+	local from_profile = nil
+	if action == TITAN_PROFILE_USE then
+		-- Grab the old profile currently in use
+		from_profile = profile or nil
+	end
+	
 	if not profile then
+		local _ = nil
 		local glob, name, player, server = TitanUtils_GetGlobalProfile()
 		-- Get the profile according to the user settings
 		if glob then
@@ -1079,47 +989,23 @@ TitanDebug("Use 1: "
 		end
 	end
 
-	local index,id;
-	local TitanCopyPlayerSettings = nil;
-	local TitanCopyPluginSettings = nil;
-	local TitanCopyPanelSettings = nil;
-	local player_save = ""
-
---[[
-TitanDebug("Use 2: "
-..(profile or "?").." "
-..(action or "?").." "
-)
---]]
 	-- Find the profile in a case insensitive manner
+	local new_profile = ""
 	profile = string.lower(profile)
 	for index, id in pairs(TitanSettings.Players) do
 		if profile == string.lower(index) then
-			player_save = index
+			new_profile = index
 		end
 	end
-	if player_save == "" then
+	if new_profile == "" then
 		-- Assume we need the current player
-		player_save = TitanUtils_GetPlayer() --TitanSettings.Player
+		new_profile = TitanUtils_GetPlayer() --TitanSettings.Player
 		-- And it needs to be created
 		action = TITAN_PROFILE_RESET
 	end
 	
---[[
-TitanDebug("Use 3: "
-..(player_save or "?").." "
-..(action or "?").." "
-)
---]]
-	-- Now that we know what profile act on the data
-	if action == TITAN_PROFILE_RESET then
-		-- Create / init the profile
-		Detailed_settings_reset(player_save) 
-	elseif action == TITAN_PROFILE_INIT then
-		Detailed_settings_init(player_save) 
-	elseif action == TITAN_PROFILE_USE then
-		TitanVariables_Detailed_settings_use(player_save)
-	end
+	-- Now that we know what profile to use - act on the data
+	Init_player_settings(from_profile, new_profile, action)
 	
 	-- set strata in case it has changed
 	TitanVariables_SetPanelStrata(TitanPanelGetVar("FrameStrata"))

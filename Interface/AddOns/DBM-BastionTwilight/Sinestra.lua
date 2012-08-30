@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(168, "DBM-BastionTwilight", nil, 72)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7661 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7749 $"):sub(12, -3))
 mod:SetCreatureID(45213)
 mod:SetModelID(34335)
 mod:SetZone()
@@ -87,7 +87,7 @@ end
 local function showOrbWarning(source)
 	table.wipe(orbList)
 	mod:Unschedule(showOrbWarning)
-	for i = 1, GetNumRaidMembers() do
+	for i = 1, DBM:GetGroupMembers() do
 		-- do some checks for 25/10 man raid size so we don't warn for ppl who are not in the instance
 		if GetInstanceDifficulty() == 3 and i > 10 then return end
 		if GetInstanceDifficulty() == 4 and i > 25 then return end
