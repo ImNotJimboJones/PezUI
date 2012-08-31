@@ -370,7 +370,7 @@ local function Entry_OnMouseUp(frame, info, button)
 			local name = full_name..":"..presence_id
 			SetItemRef( "BNplayer:"..name, ("|HBNplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )          
 		else
-			SetItemRef( "player:"..full_name, ("|Hplayer:%1$s|h[%1$s]|h"):format(fill_name), "LeftButton" )
+			SetItemRef( "player:"..full_name, ("|Hplayer:%1$s|h[%1$s]|h"):format(full_name), "LeftButton" )
 		end
 	elseif button == "RightButton" then
 		-- Edit Guild Officer Notes
