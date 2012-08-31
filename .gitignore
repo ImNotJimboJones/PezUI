@@ -4,35 +4,20 @@
 *.app
 *.bak
 *.mpq
+*.dll
+*.dll.new
+*.exe
 WTF/Launcher.wtf
 WTF/Config.wtf
 Patch.html
 Battle.net Authenticator Serial.rtf
 WoW.mfil
 WoW.tfil
-BackgroundDownloader.exe
-Battle.net.dll
-Blizzard Updater.exe
-Launcher.exe
 Microsoft.VC80.CRT.manifest
-Repair.exe
-Scan.dll
-Wow.exe
-WowError.exe
-dbghelp.dll
-divxdecoder.dll
-msvcr80.dll
 .curseclient
 .agent.db
-Battle.net-64.dll
 Launcher.db
-MovieProxy.exe
-Scan-64.dll.new
-Scan.dll.new
 WoW.pfil
-World of Warcraft Launcher.exe
-Wow-64.exe
-WowError-64.exe
 
 # Folders #
 ###########
