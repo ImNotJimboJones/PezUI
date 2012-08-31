@@ -1,7 +1,0 @@
-
-MacaroonBoundSavedState = {
-	["macros"] = {
-	},
-	["spells"] = {
-	},
-}
