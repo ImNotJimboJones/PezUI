@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: |cffffe00a<|r|cffff7d0aPezUI|r|cffffe00a>|r |cff69ccf0LoginScripts|r
 ## Notes: Runs PezUI configuration scripts at Login and UI load.
 ## Version: 1.0
