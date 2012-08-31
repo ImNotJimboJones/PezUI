@@ -1,6 +1,3 @@
-VUHDO_FAST_ACCESS_ACTIONS = { };
-
-
 
 -- BURST CACHE ---------------------------------------------------
 
@@ -17,6 +14,7 @@ local VUHDO_buildFocusMacroText;
 local VUHDO_buildAssistMacroText;
 local VUHDO_replaceMacroTemplates;
 local VUHDO_isActionValid;
+local VUHDO_isSpellKnown;
 
 local GetMacroIndexByName = GetMacroIndexByName;
 local GetMacroInfo = GetMacroInfo;
@@ -48,6 +46,7 @@ function VUHDO_keySetupInitBurst()
 	VUHDO_buildAssistMacroText = VUHDO_GLOBAL["VUHDO_buildAssistMacroText"];
 	VUHDO_replaceMacroTemplates = VUHDO_GLOBAL["VUHDO_replaceMacroTemplates"];
 	VUHDO_isActionValid = VUHDO_GLOBAL["VUHDO_isActionValid"];
+	VUHDO_isSpellKnown = VUHDO_GLOBAL["VUHDO_isSpellKnown"];
 	sIsCliqueCompat = VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"];
 end
 ----------------------------------------------------
@@ -132,7 +131,12 @@ local function _VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, a
 
 		aButton["VUHDO_contextMenu"] = VUHDO_contextMenu;
 	else
-		if (GetSpellBookItemTexture(anAction) ~= nil or VUHDO_IN_COMBAT_RELOG) then -- Spells may not be initialized yet
+		--[[anAction = GetSpellBookItemInfo(anAction) ~= nil and anAction
+			or VUHDO_NAME_TO_SPELL[anAction] ~= nil and VUHDO_NAME_TO_SPELL[anAction]
+			or anAction;]]
+
+		if (VUHDO_isSpellKnown(anAction) or VUHDO_IN_COMBAT_RELOG) then -- Spells may not be initialized yet
+		--if (GetSpellBookItemTexture(anAction) ~= nil or VUHDO_IN_COMBAT_RELOG) then -- Spells may not be initialized yet
 			-- Dead players do not trigger "help/noharm" conditionals
 			if (VUHDO_REZ_SPELLS_NAMES[anAction] ~= nil) then
 				aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
@@ -151,16 +155,19 @@ local function _VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, a
 				aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId,
 					VUHDO_buildMacroText(anAction, false, tUnit));
 			end
-		else -- try to use item
+		else
 			tMacroId = GetMacroIndexByName(anAction);
-			if (tMacroId ~= 0) then
+			if (tMacroId ~= 0) then -- Macro?
 				_, _, tMacroText = GetMacroInfo(tMacroId);
 				tMacroText = VUHDO_replaceMacroTemplates(tMacroText, tUnit);
 				aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "macro");
 				aButton:SetAttribute(aModiKey .. "macrotext" .. aButtonId, tMacroText);
-			else
+			elseif (IsUsableItem(anAction)) then -- Item?
 				aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "item");
 				aButton:SetAttribute(aModiKey .. "item" .. aButtonId, anAction);
+			else -- we don't know
+				aButton:SetAttribute(aModiKey .. "type" .. aButtonId, "spell");
+				aButton:SetAttribute(aModiKey .. "spell" .. aButtonId, anAction);
 			end
 		end
 	end

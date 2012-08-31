@@ -1,8 +1,8 @@
 local gtt = GameTooltip;
-local GetTalentTabInfo = GetTalentTabInfo;
 
 -- Constants
-local TALENTS_PREFIX = TALENTS..":|cffffffff ";
+local TALENTS_PREFIX = TALENTS..":|cffffffff ";	-- MoP: Could be changed from TALENTS to SPECIALIZATION
+local NO_TALENTS = NO.." "..TALENTS;
 local CACHE_SIZE = 25;		-- Change cache size here (Default 25)
 local INSPECT_DELAY = 0.2;
 local INSPECT_FREQ = 2;
@@ -15,7 +15,7 @@ local current = {};
 -- Time of the last inspect reuqest. Init this to zero, just to make sure. This is a global so other addons could use this variable as well
 lastInspectRequest = 0;
 
--- Allow these to be accessed through other addons
+-- Allow these to be accessed externally from other addons
 ttt.cache = cache;
 ttt.current = current;
 
@@ -30,18 +30,16 @@ local function IsInspectFrameOpen() return (InspectFrame and InspectFrame:IsShow
 
 local function GatherTalents(isInspect)
 	-- MoP Note: Is it no longer possible to query the different talent spec groups anymore?
-	-- Inspect functions will always use the active spec when not inspecting
 --	local group = GetActiveTalentGroup and GetActiveTalentGroup(isInspect) or 1;	-- Az: replaced with GetActiveSpecGroup(), but that does not support inspect?
 	-- New MoP Code
 --	local spec = GetInspectSpecialization(current.unit,nil,group);	-- Az: didn't seem like this func supported pet & talent group index; added it anyway, just in case
-	local spec = GetInspectSpecialization(current.unit);
---	local spec = GetSpecialization(isInspect,nil,group);
+	local spec = isInspect and GetInspectSpecialization(current.unit) or GetSpecialization();
 	if (spec) and (spec > 0) then
 		local _, specName = GetSpecializationInfoByID(spec);
 		--local _, specName = GetSpecializationInfoForClassID(spec,current.classID);
 		current.format = specName or "n/a";
 	else
-		current.format = "No Talents";
+		current.format = NO_TALENTS;
 	end
 	-- Set the tips line output, for inspect, only update if the tip is still showing a unit!
 	if (not isInspect) then
@@ -93,11 +91,8 @@ ttt:SetScript("OnUpdate",function(self,elapsed)
 	if (self.nextUpdate <= 0) then
 		self:Hide();
 		-- Make sure the mouseover unit is still our unit
-		if (UnitGUID("mouseover") == current.guid) then
-			-- Az: debug text
-			if (IsInspectFrameOpen()) then
-				AzMsg("|2TipTacTalents:|r An inspect frame was open, inspect request aborted.");
-			end
+		-- Check IsInspectFrameOpen() again: Since if the user right-clicks a unit frame, and clicks inspect, it could cause TTT to schedule an inspect, while the inspection window is open
+		if (UnitGUID("mouseover") == current.guid) and (not IsInspectFrameOpen()) then
 			lastInspectRequest = GetTime();
 			self:RegisterEvent("INSPECT_READY");
 			NotifyInspect(current.unit);
@@ -150,7 +145,6 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 			if (current.name == entry.name) then
 				self:AddLine(TALENTS_PREFIX..entry.format);
 				current.format = entry.format;
-				current[1], current[2], current[3] = entry[1], entry[2], entry[3];
 				cacheLoaded = true;
 				break;
 			end

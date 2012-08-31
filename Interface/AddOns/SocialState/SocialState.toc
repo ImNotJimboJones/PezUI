@@ -5,7 +5,7 @@
 ## Author: CodeRedLin
 ## SavedVariables: SocialStateDB
 ## OptionalDeps: Ace3, LibQTip-1.0, LibStub, CallbackHandler-1.0
-## X-Curse-Packaged-Version: 5.0-Release1
+## X-Curse-Packaged-Version: 5.0-Release2
 ## X-Curse-Project-Name: SocialState
 ## X-Curse-Project-ID: broker_socialstate
 ## X-Curse-Repository-ID: wow/broker_socialstate/mainline

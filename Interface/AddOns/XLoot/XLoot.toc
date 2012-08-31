@@ -1,4 +1,4 @@
-﻿## Interface: 40300
+﻿## Interface: 50001
 ## Title: XLoot (Old plugin support)
 ## Notes: Enables use of XLoot Group, Monitor, and Master
 

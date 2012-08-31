@@ -253,8 +253,15 @@ local function VUHDO_isVersionCompatible(aUnitName)
 		tIsCompatible = false;
 	end
 
-	if (tonumber(VUHDO_VERSION) < tonumber(tVuhDoVersion)) then
-		VUHDO_Msg("Aborting: VuhDo version too low. Please update VuhDo to at least " .. tVuhDoVersion, 1, 0.4, 0.4);
+	local tMyVersion, tOtherVersion;
+	if (tonumber(VUHDO_VERSION) ~= nil and tonumber(tVuhDoVersion) ~= nil) then
+		tMyVersion, tOtherVersion = tonumber(VUHDO_VERSION), tonumber(tVuhDoVersion);
+	else
+		tMyVersion, tOtherVersion = tostring(VUHDO_VERSION), tostring(tVuhDoVersion);
+	end
+
+	if (tMyVersion < tOtherVersion) then
+		VUHDO_Msg("Aborting: VuhDo version too low. Please update VuhDo to at least " .. tOtherVersion, 1, 0.4, 0.4);
 		tIsCompatible = false;
 	end
 

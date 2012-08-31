@@ -204,7 +204,7 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 		for _, tCategBuff in ipairs(tCateg) do
 			local tBuffName = tCategBuff[1];
 
-			if (VUHDO_BUFFS[tBuffName] ~= nil and VUHDO_BUFFS[tBuffName]["present"]) then
+			if (VUHDO_BUFFS[tBuffName] ~= nil) then
 				tInfo = UIDropDownMenu_CreateInfo();
 				tInfo["text"] = tBuffName;
 				tInfo["keepShownOnClick"] = false;
@@ -369,7 +369,7 @@ function VUHDO_getAllUniqueSpells()
 
 	for tCategName, tCategBuffs in pairs(tAllBuffs) do
 		local tSpellName = tCategBuffs[1][1];
-		if (VUHDO_BUFFS[tSpellName] ~= nil and VUHDO_BUFFS[tSpellName]["present"] and VUHDO_BUFF_TARGET_UNIQUE == tCategBuffs[1][2]) then
+		if (VUHDO_BUFFS[tSpellName] ~= nil and VUHDO_BUFF_TARGET_UNIQUE == tCategBuffs[1][2]) then
 			tUniqueBuffs[#tUniqueBuffs + 1] = tSpellName;
 			tUniqueCategs[tSpellName] = strsub(tCategName, 3);
 		end
@@ -387,19 +387,27 @@ function VUHDO_initBuffsFromSpellBook()
 	local tBuffInfo;
 	local tSpellName, tSpellId, tIcon;
 
+	if ("HUNTER" == VUHDO_PLAYER_CLASS) then
+		VUHDO_BUFFS[VUHDO_SPELL_ID.BUFF_ASPECT_OF_THE_IRON_HAWK] = {
+			["icon"] = select(3, GetSpellInfo(109260)),
+			["id"] = 109260,
+		};
+
+		tinsert(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][VUHDO_I18N_BUFFC_ASPECT],
+			{ VUHDO_SPELL_ID.BUFF_ASPECT_OF_THE_IRON_HAWK, VUHDO_BUFF_TARGET_SELF }
+		);
+	end
+
 	for _, tCateg in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS] or {}) do
 		for _, tCategSpells in pairs(tCateg) do
 			tSpellName = tCategSpells[1];
 			_, tSpellId = GetSpellBookItemInfo(tSpellName);
 			if (tSpellId ~= nil) then
-					_, _, tIcon = GetSpellInfo(tSpellId);
-					VUHDO_BUFFS[tSpellName] = {
-						["present"] = true,
-						["icon"] = tIcon,
-						["id"] = tSpellId
-					};
-			else
-				VUHDO_BUFFS[tSpellName] = { ["present"] = false };
+				_, _, tIcon = GetSpellInfo(tSpellId);
+				VUHDO_BUFFS[tSpellName] = {
+					["icon"] = tIcon,
+					["id"] = tSpellId
+				};
 			end
 		end
 	end

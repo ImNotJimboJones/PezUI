@@ -1,4 +1,7 @@
-﻿Version 1.0.9
+﻿Version 1.0.9a
+- Latest version of LibTourist
+
+Version 1.0.9
 - Update TOC for 5.0.4
 - Update to work with WoW 5.0 (fix for Curse #165, #166)
 - Hack to LibTourist so that it doesn't break (temp fix for Curse #164)

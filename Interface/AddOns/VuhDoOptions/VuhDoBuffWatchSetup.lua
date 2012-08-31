@@ -181,7 +181,7 @@ end
 
 --
 local function VUHDO_buffNameAvail(aBuffName)
-	if (VUHDO_BUFFS[aBuffName] ~= nil and VUHDO_BUFFS[aBuffName]["present"]) then
+	if (VUHDO_BUFFS[aBuffName] ~= nil) then
 		return aBuffName;
 	else
 		return nil;
@@ -197,7 +197,7 @@ local function VUHDO_getAllBuffNamesAvail(someCategoryBuffs)
 	for _, tVariants in ipairs(someCategoryBuffs) do
 		local tMaxVariant = tVariants;
 		tName = tMaxVariant[1];
-		if (VUHDO_BUFFS[tName]["present"]) then
+		if (VUHDO_BUFFS[tName] ~= nil) then
 			table.insert(tBuffNames, tName);
 		end
 	end
@@ -289,8 +289,8 @@ local function VUHDO_buildBuffSetupGenericPanel(aCategoryName, someCategoryBuffs
 
 	tMaxVariant = someCategoryBuffs[1];
 	tSingleVariant = someCategoryBuffs[1];
-	tIsMaxPresent = VUHDO_BUFFS[tMaxVariant[1]]["present"];
-	tIsSinglePresent = VUHDO_BUFFS[tSingleVariant[1]]["present"];
+	tIsMaxPresent = VUHDO_BUFFS[tMaxVariant[1]] ~= nil;
+	tIsSinglePresent = VUHDO_BUFFS[tSingleVariant[1]] ~= nil;
 
 	if (tIsMaxPresent) then
 		tMaxTarget = tMaxVariant[2];

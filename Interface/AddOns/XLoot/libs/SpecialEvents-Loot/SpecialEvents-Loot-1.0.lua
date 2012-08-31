@@ -1,13 +1,13 @@
 ﻿--[[
 Name: SpecialEvents-Loot-1.0
-Revision: $Rev: 222 $
+Revision: $Rev: 221 $
 Author: Xuerian (sky.shell@gmail.com)
 Website: http://www.wowace.com/
 Description: Special events for players looting items.
 Dependencies: AceLibrary, AceEvent-2.0, Deformat
 ]]
 
-local vmajor, vminor = "SpecialEvents-Loot-1.0", 90000 + tonumber(("$Revision: 222 $"):match("(%d+)"))
+local vmajor, vminor = "SpecialEvents-Loot-1.0", 90000 + tonumber(("$Revision: 221 $"):match("(%d+)"))
 
 if not AceLibrary then error(vmajor .. " requires AceLibrary.") end
 if not AceLibrary:HasInstance("AceEvent-2.0") then error(vmajor .. " requires AceEvent-2.0.") end
@@ -57,7 +57,7 @@ local function Handler(text)
 	
 	-- Optimize by grouped/not and weight patterns by usage
 	-- Check group mode (1 corresponds to ungrouped, 2 to grouped)
-	local group = (GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0) and 2 or 1
+	local group = (GetNumSubgroupMembers() > 0 or GetNumGroupMembers() > 0) and 2 or 1
 	-- If we're not currently sorting for our current mode, or it's been too long since last sort, sort ourpatterns for efficiency
 	if not currentsort or currentsort ~= group or unsortedloot > 25 then
 		unsortedloot = 0
@@ -138,25 +138,25 @@ local function activate(self, oldLib, oldDeactivate)
 	local coin = function(who, str) self:TriggerEvent('SpecialEvents_CoinLooted', who, ParseCoinString(str), str) end
 	
 	-- Add item patterns
-	lhandler(LOOT_ITEM_MULTIPLE, loot)
 	lhandler(LOOT_ITEM, loot)
-	lhandler(LOOT_ITEM_PUSHED_SELF_MULTIPLE, function(what, num) loot(player, what, num) end)
+	lhandler(LOOT_ITEM_MULTIPLE, loot)
 	lhandler(LOOT_ITEM_PUSHED_SELF, function(what) loot(player, what) end)
-	lhandler(LOOT_ITEM_SELF_MULTIPLE, function(what, num) loot(player, what, num) end)
+	lhandler(LOOT_ITEM_PUSHED_SELF_MULTIPLE, function(what, num) loot(player, what, num) end)
 	lhandler(LOOT_ITEM_SELF, function(what) loot(player, what) end)
-	lhandler(LOOT_ITEM_CREATED_SELF_MULTIPLE, function(what, num) loot(player, what, num) end) -- 4.3
+	lhandler(LOOT_ITEM_SELF_MULTIPLE, function(what, num) loot(player, what, num) end)
 	lhandler(LOOT_ITEM_CREATED_SELF, function(what) loot(player, what) end) -- 4.3
-	lhandler(LOOT_ITEM_REFUND_MULTIPLE, function(what, num) loot(player, what, num) end) -- 4.3
+	lhandler(LOOT_ITEM_CREATED_SELF_MULTIPLE, function(what, num) loot(player, what, num) end) -- 4.3
 	lhandler(LOOT_ITEM_REFUND, function(what) loot(player, what) end) -- 4.3
+	lhandler(LOOT_ITEM_REFUND_MULTIPLE, function(what, num) loot(player, what, num) end) -- 4.3
 	
 	-- Add coin patterns
-	lhandler(YOU_LOOT_MONEY_GUILD, function(str, _) coin(player, str) end) -- 4.3
-	lhandler(ERR_AUTOLOOT_MONEY_S, function(str) coin(player, str) end) -- 4.3
-	lhandler(YOU_LOOT_MONEY, function(str) coin(player, str) end)
 	lhandler(LOOT_MONEY, function(who, str) coin(who, str) end)
+	lhandler(ERR_AUTOLOOT_MONEY_S, function(str) coin(player, str) end) -- 4.3
 	lhandler(LOOT_MONEY_REFUND, function(str) coin(player, str) end) -- 4.3
-	lhandler(LOOT_MONEY_SPLIT_GUILD, function(str, _) coin(player, str) end) -- 4.3
 	lhandler(LOOT_MONEY_SPLIT, function(str) coin(player, str) end)
+	lhandler(LOOT_MONEY_SPLIT_GUILD, function(str, _) coin(player, str) end) -- 4.3
+	lhandler(YOU_LOOT_MONEY, function(str) coin(player, str) end)
+	lhandler(YOU_LOOT_MONEY_GUILD, function(str, _) coin(player, str) end) -- 4.3
 
 	-- Generate group loot mode handlers
 	rollhandlers = { }
@@ -202,24 +202,24 @@ LOOT_ROLL_YOU_WON_NO_SPAM_GREED = "You won: %2$s |cff818181(Greed - %1$d)|r";
 LOOT_ROLL_YOU_WON_NO_SPAM_NEED = "You won: %2$s |cff818181(Need - %1$d)|r";
 ]]
 	-- Add handlers using construct functions, ordered specifically
-	selected(LOOT_ROLL_DISENCHANT_SELF, 'dis', true) -- patch 3.3
 	selected(LOOT_ROLL_DISENCHANT, 'dis') -- patch 3.3
-	selected(LOOT_ROLL_GREED_SELF, 'greed', true)
 	selected(LOOT_ROLL_GREED, 'greed')
-	selected(LOOT_ROLL_NEED_SELF, 'need', true)
 	selected(LOOT_ROLL_NEED, 'need')
-	selected(LOOT_ROLL_PASSED_SELF_AUTO, 'pass', true)
+	selected(LOOT_ROLL_DISENCHANT_SELF, 'dis', true) -- patch 3.3
+	selected(LOOT_ROLL_GREED_SELF, 'greed', true)
+	selected(LOOT_ROLL_NEED_SELF, 'need', true)
 	selected(LOOT_ROLL_PASSED_AUTO, 'pass')
 	selected(LOOT_ROLL_PASSED_AUTO_FEMALE, 'pass')
+	selected(LOOT_ROLL_PASSED_SELF_AUTO, 'pass', true)
 	handler(LOOT_ROLL_ALL_PASSED, function(item) self:TriggerEvent('SpecialEvents_RollAllPassed', item) end)
 	selected(LOOT_ROLL_PASSED_SELF, 'pass', true)
 	selected(LOOT_ROLL_PASSED, 'pass')
 	rolled(LOOT_ROLL_ROLLED_DE, 'dis') -- patch 3.3
 	rolled(LOOT_ROLL_ROLLED_GREED, 'greed')
-	rolled(LOOT_ROLL_ROLLED_NEED_ROLE_BONUS, 'need') -- patch 4.3	
 	rolled(LOOT_ROLL_ROLLED_NEED, 'need')
+	rolled(LOOT_ROLL_ROLLED_NEED_ROLE_BONUS, 'need') -- patch 4.3
+	handler(LOOT_ROLL_WON, function(who, item) self:TriggerEvent('SpecialEvents_RollWon', item, ncheck(own, who)) end)
 	handler(LOOT_ROLL_YOU_WON, function(item) self:TriggerEvent('SpecialEvents_RollWon', item, player) end) -- patch 4.3
-	handler(LOOT_ROLL_WON, function(who, item) self:TriggerEvent('SpecialEvents_RollWon', item, who) end)
 
 	-- Possibly deactivate a older version (We don't have a deactivate! Nya!)
 	if oldDeactivate then oldDeactivate(oldLib) end

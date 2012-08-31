@@ -8,7 +8,10 @@
 - Hot bars vertical
 - Rez-Spells DK, WL
 - Sehbehindertenmodus Optionen
-- Tooltip Gilde beschränken
+
+- Err: Blizz standard party frames hiding
+- Err: Eternal Flame, Purify Spririt...
+- Err: Sharing profiles
 
 1. Health     3
 2. Mana       1

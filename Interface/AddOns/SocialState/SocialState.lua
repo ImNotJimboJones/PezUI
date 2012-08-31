@@ -328,7 +328,9 @@ local function Entry_OnMouseUp(frame, info, button)
 		if IsAltKeyDown() then
 			if i_type == "realid" then
 				local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID = BNGetFriendInfo(BNGetFriendIndex(presence_id))
-				BNInviteFriend(toonID)
+				local _, toonName, client, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetFriendToonInfo(BNGetFriendIndex(presence_id), 1)
+
+				InviteUnit(toon_name.."-"..realmName)
 				return
 			else
 				InviteUnit(toon_name)
@@ -362,10 +364,14 @@ local function Entry_OnMouseUp(frame, info, button)
 				return
 			end
 		end
+
 		-- Send a tell to player
-			local edit_box = _G.ChatEdit_ChooseBoxForSend()
-			_G.ChatEdit_ActivateChat(edit_box)
-			edit_box:Insert("/w "..full_name.." ")
+		if i_type == "realid" then
+			local name = full_name..":"..presence_id
+			SetItemRef( "BNplayer:"..name, ("|HBNplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )          
+		else
+			SetItemRef( "player:"..full_name, ("|Hplayer:%1$s|h[%1$s]|h"):format(fill_name), "LeftButton" )
+		end
 	elseif button == "RightButton" then
 		-- Edit Guild Officer Notes
 		if IsControlKeyDown() then

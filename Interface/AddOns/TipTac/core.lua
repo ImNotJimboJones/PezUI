@@ -553,8 +553,9 @@ local function AddTargetedBy()
 	if (not numGroup) or (numGroup <= 1) then
 		return;
 	end
+	local inRaid = IsInRaid(); 
 	for i = 1, numGroup do
-		local unit = (IsInRaid() and "raid"..i or "party"..i);
+		local unit = (inRaid and "raid"..i or "party"..i);
 		if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
 			local _, class = UnitClass(unit);
 			targetedList[#targetedList + 1] = TT_ClassColors[class];
@@ -1219,12 +1220,12 @@ local function ApplyTipTacAppearance(first)
 		SetupHealthAndPowerBar();
 	end
 	UpdateHealthAndPowerBar();
-	-- Remove PVP Line, which makes the tip look a bit bad
+	-- Remove PVP Line, which makes the tip look a bit bad -- MoP: Now removes alliance and horde faction text as well
 	for i = 2, gtt:NumLines() do
 		local line = _G["GameTooltipTextLeft"..i];
-		if (line:GetText() == PVP_ENABLED) then
+		local text = line:GetText();
+		if (text == PVP_ENABLED) or (text == FACTION_ALLIANCE) or (text == FACTION_HORDE) then
 			line:SetText(nil);
-			break;
 		end
 	end
 	-- Show & Adjust Height

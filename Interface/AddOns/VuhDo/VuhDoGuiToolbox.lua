@@ -617,6 +617,10 @@ function VUHDO_initHideBlizzRaid()
 	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID_MGR"]) then
 		VUHDO_hideBlizzRaidMgr();
 	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"]) then
+		VUHDO_hideBlizzParty();
+	end
 end
 local VUHDO_initHideBlizzRaid = VUHDO_initHideBlizzRaid;
 
@@ -626,10 +630,6 @@ local VUHDO_initHideBlizzRaid = VUHDO_initHideBlizzRaid;
 function VUHDO_initHideBlizzFrames()
 	if (InCombatLockdown()) then
 		return;
-	end
-
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"]) then
-		VUHDO_hideBlizzParty();
 	end
 
 	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"]) then

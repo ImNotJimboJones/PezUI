@@ -16,7 +16,7 @@ function VUHDO_fixHotSettings()
 		if (not tHotCfg["" .. tCnt2]["mine"] and not tHotCfg["" .. tCnt2]["others"]) then
 			if (tHotSlots[tCnt2] ~= nil) then
 				tHotCfg["" .. tCnt2]["mine"] = true;
-				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]] ~= nil;
+				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]];
 			end
 		end
 	end

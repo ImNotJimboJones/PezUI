@@ -1,3 +1,9 @@
+TipTacTalents Changes | 2012 Sep 01
+-----------------------------------
+- Removed some remnant debug code.
+- Fixed a talent inspection issue that could occur, if the inspection window was opened from the unitframe's right click menu.
+- Localised the string used for when a person has no specialization.
+
 TipTacTalents Changes | 2012 Aug 30
 -----------------------------------
 - Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.

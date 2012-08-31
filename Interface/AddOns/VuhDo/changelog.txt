@@ -1,4 +1,52 @@
-Version 3.0.13 (MoP)
+Version 3.2.
+
+Bugfixes:
+-- Fixed use of custom macros
+
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.1.
+
+Bugfixes:
+-- Sharing profiles fixed
+-- Casting Purify Spirit, Eternal Flame fixed
+-- Eternal Flame available for HoT Icons
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.0.15 (MoP)
+
+Bugfixes:
+
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.0.14 (MoP)
 
 Bugfixes:
 -- Fixed some buff watch buffs (mainly Shaman)

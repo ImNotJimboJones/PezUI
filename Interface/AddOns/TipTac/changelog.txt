@@ -1,3 +1,7 @@
+TipTac Changes | 2012 Sep 01
+----------------------------
+- Now removes the Alliance and Horde faction text from the tooltip.
+
 TipTac Changes | 2012 Aug 30
 ----------------------------
 - Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.

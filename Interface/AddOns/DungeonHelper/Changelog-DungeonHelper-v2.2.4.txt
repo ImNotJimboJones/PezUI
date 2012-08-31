@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r80 | yess | 2012-09-01 03:33:27 +0000 (Sat, 01 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v2.2.4 (from /trunk:79)
+
+Tagging as v2.2.4
+------------------------------------------------------------------------
+r79 | yess | 2012-09-01 03:28:13 +0000 (Sat, 01 Sep 2012) | 6 lines
+Changed paths:
+   M /trunk/DungeonHelper.lua
+   M /trunk/DungeonHelper.toc
+
+.)Fixed errors with wow 5.0.4
+.)The broker plugin will show the raid finder queue if there is more than one queue. I will add an option to change this behavior later on. 
+.)Party welcome message does not work yet.
+.)Specific wait times for the different roles are currently not shown.
+.)Call to Arms not Tested. There was no call to arms on my server.
+
+------------------------------------------------------------------------
+r78 | yess | 2012-06-09 03:12:47 +0000 (Sat, 09 Jun 2012) | 1 line
+Changed paths:
+   M /trunk/DungeonHelper.lua
+   M /trunk/localization.lua
+
+Added RaidMenu on Shift-Click, ticket #16. 
+------------------------------------------------------------------------

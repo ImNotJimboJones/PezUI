@@ -30,184 +30,67 @@ local BOOKTYPE_SPELL = BOOKTYPE_SPELL;
 
 
 
--- All healing spells and their ranks we will take notice of
+--
 VUHDO_SPELLS = {
 	-- Paladin
-	[VUHDO_SPELL_ID.BUFF_BEACON_OF_LIGHT] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.SACRED_SHIELD] = {
-		["isHot"] = true,
-	},
+	[VUHDO_SPELL_ID.BUFF_BEACON_OF_LIGHT] = { ["isHot"] = true, },
+	[VUHDO_SPELL_ID.SACRED_SHIELD] = { ["isHot"] = true, },
+	[VUHDO_SPELL_ID.ETERNAL_FLAME] = { ["isHot"] = true, },
 
 	-- Priest
-	[VUHDO_SPELL_ID.BUFF_FEAR_WARD] = {
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.BUFF_LEVITATE] = {
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.BUFF_SHADOW_PROTECTION] = {
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.BUFF_POWER_WORD_FORTITUDE] = {
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.SPIRIT_SHELL] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.RENEW] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = {
-		["isHot"] = true,
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.PRAYER_OF_MENDING] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.DIVINE_AEGIS] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
-	[VUHDO_SPELL_ID.PAIN_SUPPRESSION] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-		["nostance"] = true,
-	},
-	[VUHDO_SPELL_ID.GRACE] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
-	[VUHDO_SPELL_ID.GUARDIAN_SPIRIT] = {
-		["isHot"] = true,
-		["nohelp"] = true,
-		["noselftarget"] = true,
-	},
-	[VUHDO_SPELL_ID.BLESSED_HEALING] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
-	[VUHDO_SPELL_ID.HOLY_WORD_CHASTISE] = {
-		["nohelp"] = true,
-	},
-	[VUHDO_SPELL_ID.HOLY_WORD_SANCTUARY] = {
-		["nohelp"] = true,
-	},
-	[VUHDO_SPELL_ID.HOLY_WORD_SERENITY] = {
-		["nohelp"] = true,
-	},
-	[VUHDO_SPELL_ID.ECHO_OF_LIGHT] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.SERENDIPITY] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
+	[VUHDO_SPELL_ID.BUFF_FEAR_WARD] = { ["nostance"] = true },
+	[VUHDO_SPELL_ID.BUFF_LEVITATE] = { ["nostance"] = true },
+	[VUHDO_SPELL_ID.BUFF_POWER_WORD_FORTITUDE] = { ["nostance"] = true },
+	[VUHDO_SPELL_ID.SPIRIT_SHELL] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.RENEW] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = { ["isHot"] = true, ["nostance"] = true },
+	[VUHDO_SPELL_ID.PRAYER_OF_MENDING] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.DIVINE_AEGIS] = { ["isHot"] = true, ["nodefault"] = true },
+	[VUHDO_SPELL_ID.PAIN_SUPPRESSION] = { ["isHot"] = true, ["nodefault"] = true, ["nostance"] = true },
+	[VUHDO_SPELL_ID.GRACE] = { ["isHot"] = true, ["nodefault"] = true },
+	[VUHDO_SPELL_ID.GUARDIAN_SPIRIT] = { ["isHot"] = true, ["nohelp"] = true, ["noselftarget"] = true	},
+	[VUHDO_SPELL_ID.ECHO_OF_LIGHT] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.SERENDIPITY] = { ["isHot"] = true, ["nodefault"] = true	},
 
 	-- Shaman
-	[VUHDO_SPELL_ID.RIPTIDE] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.BUFF_EARTHLIVING_WEAPON] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.GIFT_OF_THE_NAARU] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.BUFF_EARTH_SHIELD] = {
-		["isHot"] = true,
-		["target"] = VUHDO_BUFF_TARGET_UNIQUE,
-	},
-	[VUHDO_SPELL_ID.BUFF_WATER_SHIELD] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.TIDAL_WAVES] = {
-		["isHot"] = true,
-		["nodefault"] = true,
-	},
+	[VUHDO_SPELL_ID.RIPTIDE] = { ["isHot"] = true	},
+	[VUHDO_SPELL_ID.BUFF_EARTHLIVING_WEAPON] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.GIFT_OF_THE_NAARU] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.BUFF_EARTH_SHIELD] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.BUFF_WATER_SHIELD] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.TIDAL_WAVES] = { ["isHot"] = true, ["nodefault"] = true },
 
 	-- Druid
-	[VUHDO_SPELL_ID.REJUVENATION] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.REGROWTH] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.LIFEBLOOM] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.WILD_GROWTH] = {
-		["isHot"] = true,
-	},
+	[VUHDO_SPELL_ID.REJUVENATION] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.REGROWTH] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.LIFEBLOOM] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.WILD_GROWTH] = { ["isHot"] = true },
 
 	-- Hunter
-	[VUHDO_SPELL_ID.MEND_PET] = {
-		["isHot"] = true,
-	},
+	[VUHDO_SPELL_ID.MEND_PET] = { ["isHot"] = true },
 
 	-- Monk
-	[VUHDO_SPELL_ID.SOOTHING_MIST] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.ENVELOPING_MIST] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.RENEWING_MIST] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.ZEN_SPHERE] = {
-		["isHot"] = true,
-	},
-	[VUHDO_SPELL_ID.CHI_WAVE] = {
-		["isHot"] = true,
-	},
-
+	[VUHDO_SPELL_ID.SOOTHING_MIST] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.ENVELOPING_MIST] = {["isHot"] = true },
+	[VUHDO_SPELL_ID.RENEWING_MIST] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.ZEN_SPHERE] = { ["isHot"] = true },
 };
 local VUHDO_SPELLS = VUHDO_SPELLS;
 
 
 
--- Spells from talents only, not in spellbook
-local function VUHDO_addTalentHots(someHots)
-	if (VUHDO_PLAYER_CLASS == "PRIEST") then
-		someHots[VUHDO_SPELL_ID.GRACE] = true;
-		someHots[VUHDO_SPELL_ID.DIVINE_AEGIS] = true;
-		someHots[VUHDO_SPELL_ID.BLESSED_HEALING] = true;
-		someHots[VUHDO_SPELL_ID.ECHO_OF_LIGHT] = true;
-		someHots[VUHDO_SPELL_ID.SERENDIPITY] = true;
-	end
-end
-
-
-
 -- initializes some dynamic information into VUHDO_SPELLS
 function VUHDO_initFromSpellbook()
-	local tIndex;
 	local tSpellName;
-	local tPresentHots = { };
+	local someParams;
 	local tEmpty = {};
-	local tTabNum;
-	local tOffset, tNumSlots;
-	local tWasInitialized = false;
-
-	for tTabNum = 1, GetNumSpellTabs() do
-		_, _, tOffset, tNumSlots, _, _ = GetSpellTabInfo(tTabNum);
-		for tIndex = tOffset + 1, tOffset + tNumSlots do
-			tSpellName = GetSpellBookItemName(tIndex, BOOKTYPE_SPELL);
-			tWasInitialized = true;
-			if ((VUHDO_SPELLS[tSpellName] or tEmpty)["isHot"]) then
-				tPresentHots[tSpellName] = true;
-			end
-		end
-	end
-
-
-	VUHDO_addTalentHots(tPresentHots);
 
 	twipe(VUHDO_PLAYER_HOTS);
-	for tSpellName, _ in pairs(tPresentHots) do
-		VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = tSpellName;
+
+	for tSpellName, someParams in pairs(VUHDO_SPELLS) do
+		if (someParams["isHot"] and VUHDO_isSpellKnown(tSpellName)) then
+			VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = tSpellName;
+		end
 	end
 
 	twipe(VUHDO_ACTIVE_HOTS);
@@ -216,43 +99,37 @@ function VUHDO_initFromSpellbook()
 	local tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 	local tCnt;
 
-	if (tWasInitialized) then -- False if no spell infos yet loaded on early load
+	if (tHotSlots["firstFlood"]) then
+		tHotSlots["firstFlood"] = nil;
 
-		if (tHotSlots["firstFlood"]) then
-			tHotSlots["firstFlood"] = nil;
-
-			for tCnt = 1, #VUHDO_PLAYER_HOTS do
-				if (not (VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt]] or tEmpty)["nodefault"]) then
-					tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt]);
-					if (#tHotSlots == 10) then
-						break;
-					end
+		for tCnt = 1, #VUHDO_PLAYER_HOTS do
+			if (not (VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt]] or tEmpty)["nodefault"]) then
+				tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt]);
+				if (#tHotSlots == 10) then
+					break;
 				end
 			end
-			tHotSlots[10] = "BOUQUET_" .. VUHDO_I18N_DEF_AOE_ADVICE;
 		end
+		tHotSlots[10] = "BOUQUET_" .. VUHDO_I18N_DEF_AOE_ADVICE;
+	end
 
-		local tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
-		for tCnt = 1, 10 do
-			if (tHotCfg["firstFlood"] and tHotSlots[tCnt] ~= nil and tHotCfg["" .. tCnt] == nil) then
-				tHotCfg["" .. tCnt]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt]] ~= nil;
-			end
-			if (tHotCfg["" .. tCnt]["scale"] == nil) then
-				tHotCfg["" .. tCnt]["scale"] = 1;
-			end
+	local tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
+	if (tHotCfg["firstFlood"]) then
+		for tCnt = 1, #tHotSlots do
+				tHotCfg["" .. tCnt]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt]];
 		end
 		tHotCfg["firstFlood"] = nil;
+	end
 
-		local tHotName;
-		for tCnt, tHotName in pairs(tHotSlots) do
-			if (not VUHDO_strempty(tHotName)) then
-				VUHDO_ACTIVE_HOTS[tHotName] = true;
+	local tHotName;
+	for tCnt, tHotName in pairs(tHotSlots) do
+		if (not VUHDO_strempty(tHotName)) then
+			VUHDO_ACTIVE_HOTS[tHotName] = true;
 
-				if (tHotCfg["" .. tCnt]["others"]) then
-					VUHDO_ACTIVE_HOTS_OTHERS[tHotName] = true;
-				end
+			if (tHotCfg["" .. tCnt]["others"]) then
+				VUHDO_ACTIVE_HOTS_OTHERS[tHotName] = true;
 			end
 		end
-		VUHDO_setKnowsSwiftmend(VUHDO_isSpellKnown(VUHDO_SPELL_ID.SWIFTMEND));
 	end
+	VUHDO_setKnowsSwiftmend(VUHDO_isSpellKnown(VUHDO_SPELL_ID.SWIFTMEND));
 end

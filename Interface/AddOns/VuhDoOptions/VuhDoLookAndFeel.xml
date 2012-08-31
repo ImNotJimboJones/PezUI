@@ -2507,9 +2507,9 @@
 			self:SetStatusBarTexture("Interface\\AddOns\\VuhDoOptions\\Images\\blue_lt_square_16_16");
 			self:SetStatusBarColor(1, 1, 1, 1);
 			self["SetProgress"] = function(self, aValue, aMaxValue)
-				local tPercent = 100 * aValue / aMaxValue;
+				local tPercent = aValue / aMaxValue;
 				self:SetValue(tPercent);
-				_G[self:GetName() .. "Label"]:SetText(" " .. floor(tPercent) .. "%");
+				_G[self:GetName() .. "Label"]:SetText(" " .. floor(100 * tPercent) .. "%");
 			end
 		</OnLoad>
 	</Scripts>
