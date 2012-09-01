@@ -5,13 +5,16 @@ Broker_DualSpecDB = {
 	},
 	["profiles"] = {
 		["Pezzer - Burning Blade"] = {
-			["specname"] = false,
-			["gear"] = true,
-			["primary"] = "PvE",
-			["secondary"] = "PvP",
 			["minimap"] = {
 				["hide"] = true,
 			},
+			["primaryHelm"] = 1,
+			["secondaryCloak"] = 1,
+			["specname"] = true,
+			["secondaryHelm"] = 1,
+			["gear"] = true,
+			["points"] = false,
+			["primaryCloak"] = 1,
 		},
 	},
 }
