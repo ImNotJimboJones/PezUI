@@ -1,192 +1,168 @@
 
-SexyMapDB = {
-	["namespaces"] = {
-		["Ping"] = {
+SexyMap2DB = {
+	["global"] = {
+		["ping"] = {
+			["showPing"] = true,
+			["showAt"] = "map",
 		},
-		["Coordinates"] = {
+		["coordinates"] = {
+			["enabled"] = false,
+			["x"] = -4.849853515625,
+			["fontColor"] = {
+			},
+			["borderColor"] = {
+			},
+			["locked"] = false,
+			["backgroundColor"] = {
+			},
+			["y"] = 63.6373291015625,
 		},
-		["General"] = {
-			["profiles"] = {
-				["Default"] = {
-					["point"] = "BOTTOMRIGHT",
-					["relpoint"] = "BOTTOMRIGHT",
-					["y"] = 172.6491510989385,
-					["x"] = -33.81890142601755,
-					["scale"] = 0.72,
-					["rightClickToConfig"] = false,
-				},
+		["buttons"] = {
+			["radius"] = 0,
+			["lockDragging"] = false,
+			["allowDragging"] = true,
+			["visibilitySettings"] = {
+				["MiniMapChallengeMode"] = "always",
+				["MiniMapRecordingButton"] = "always",
+				["RA_MinimapButton"] = "never",
+				["QueueStatusMinimapButton"] = "always",
+				["MiniMapVoiceChatFrame"] = "always",
+				["MiniMapInstanceDifficulty"] = "always",
+				["MiniMapMailFrame"] = "always",
+				["GameTimeFrame"] = "never",
+				["TimeManagerClockButton"] = "never",
+				["MinimapZoomOut"] = "never",
+				["MiniMapWorldMapButton"] = "never",
+				["MinimapZoomIn"] = "never",
+				["DBMMinimapButton"] = "never",
+				["MiniMapTracking"] = "never",
+				["MinimapZoneTextButton"] = "hover",
+				["GuildInstanceDifficulty"] = "always",
+				["VuhDoMinimapButton"] = "never",
+			},
+			["dragPositions"] = {
+				["QueueStatusMinimapButton"] = 162.4948010612572,
+				["MiniMapMailFrame"] = 253.5973093807178,
+			},
+			["controlVisibility"] = true,
+		},
+		["hudmap"] = {
+			["useQuestHelper"] = true,
+			["useRoutes"] = true,
+			["useGatherMate"] = true,
+			["scale"] = 1.4,
+			["textColor"] = {
+				["a"] = 1,
+				["r"] = 0.5,
+				["g"] = 1,
+				["b"] = 0.5,
+			},
+			["alpha"] = 0.7,
+			["hudColor"] = {
 			},
 		},
-		["Buttons"] = {
-			["profiles"] = {
-				["Default"] = {
-					["radius"] = 3,
-					["lockDragging"] = true,
-					["visibilitySettings"] = {
-						["MiniMapRecordingButton"] = "hover",
-						["RA_MinimapButton"] = "never",
-						["AtlasButtonFrame"] = "never",
-						["MiniMapBattlefieldFrame"] = "always",
-						["MiniMapLFGFrame"] = "always",
-						["MiniMapInstanceDifficulty"] = "always",
-						["MinimapZoneTextButton"] = "hover",
-						["VuhDoMinimapButton"] = "never",
-						["GameTimeFrame"] = "never",
-						["RBSMinimapButton"] = "never",
-						["TimeManagerClockButton"] = "never",
-						["MacaroonMinimapButton"] = "never",
-						["FishingBuddyMinimapFrame"] = "never",
-						["DBMMinimapButton"] = "never",
-						["MiniMapTracking"] = "never",
-						["CritlineMinimapButton"] = "never",
-						["GuildInstanceDifficulty"] = "always",
-						["TenTonHammer_MinimapButton"] = "never",
+		["zonetext"] = {
+			["bgColor"] = {
+				["a"] = 1,
+				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
+			},
+			["fontColor"] = {
+			},
+			["borderColor"] = {
+				["a"] = 1,
+				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
+			},
+			["xOffset"] = 0,
+			["yOffset"] = -20,
+		},
+		["fader"] = {
+			["enabled"] = false,
+			["normalOpacity"] = 1,
+			["hoverOpacity"] = 0.25,
+		},
+		["clock"] = {
+			["bgColor"] = {
+				["a"] = 1,
+				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
+			},
+			["fontColor"] = {
+			},
+			["borderColor"] = {
+				["a"] = 1,
+				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
+			},
+			["xOffset"] = 0,
+			["yOffset"] = 0,
+		},
+		["borders"] = {
+			["applyPreset"] = false,
+			["borders"] = {
+				{
+					["a"] = 0.5,
+					["rotSpeed"] = 0,
+					["b"] = 1,
+					["scale"] = 1.48,
+					["g"] = 1,
+					["vNudge"] = -4,
+					["drawLayer"] = "OVERLAY",
+					["name"] = "RenaitreFadeGloss",
+					["r"] = 1,
+					["rotation"] = 225,
+					["disableRotation"] = true,
+					["texture"] = "Interface\\Addons\\SexyMap\\media\\RenaitreFadeGloss",
+				}, -- [1]
+			},
+			["backdrop"] = {
+				["show"] = false,
+				["textureColor"] = {
+				},
+				["settings"] = {
+					["bgFile"] = "Interface\\Tooltips\\UI-Tooltip-Background",
+					["edgeFile"] = "Interface\\Tooltips\\UI-Tooltip-Border",
+					["tile"] = false,
+					["edgeSize"] = 16,
+					["insets"] = {
+						["top"] = 4,
+						["right"] = 4,
+						["left"] = 4,
+						["bottom"] = 4,
 					},
-					["dragPositions"] = {
-						["MiniMapLFGFrame"] = 162.0154208416845,
-						["MiniMapMailFrame"] = 253.4972688983889,
-						["MiniMapBattlefieldFrame"] = 199.2490782806349,
-					},
 				},
+				["borderColor"] = {
+				},
+				["scale"] = 1,
 			},
+			["hideBlizzard"] = true,
 		},
-		["AutoZoom"] = {
-			["profiles"] = {
-				["Default"] = {
-					["autoZoom"] = 10,
-				},
-			},
+		["core"] = {
+			["clamp"] = true,
+			["point"] = "BOTTOMRIGHT",
+			["relpoint"] = "BOTTOMRIGHT",
+			["autoZoom"] = 5,
+			["northTag"] = false,
+			["y"] = 171.7005157470703,
+			["x"] = -34.34449768066406,
+			["lock"] = true,
+			["scale"] = 0.72,
+			["shape"] = "SPELLS\\T_VFX_BORDER",
+			["rightClickToConfig"] = false,
 		},
-		["Shapes"] = {
-			["profiles"] = {
-				["Default"] = {
-					["shape"] = "SPELLS\\T_VFX_BORDER",
-				},
-				["Burning Blade"] = {
-					["shape"] = "Textures\\MinimapMask",
-				},
+		["movers"] = {
+			["enabled"] = false,
+			["framePositions"] = {
 			},
-		},
-		["Fader"] = {
-		},
-		["Movers"] = {
-			["profiles"] = {
-				["Burning Blade"] = {
-					["enabled"] = true,
-				},
-			},
-		},
-		["Borders"] = {
-			["global"] = {
-				["userPresets"] = {
-					["Custom"] = {
-						["borders"] = {
-						},
-						["backdrop"] = {
-							["show"] = true,
-							["textureColor"] = {
-							},
-							["settings"] = {
-								["bgFile"] = "Interface\\None",
-								["edgeFile"] = "Interface\\Tooltips\\UI-Tooltip-Border",
-								["tile"] = false,
-								["edgeSize"] = 16,
-								["insets"] = {
-									["top"] = 4,
-									["right"] = 4,
-									["left"] = 4,
-									["bottom"] = 4,
-								},
-							},
-							["borderColor"] = {
-								["a"] = 1,
-								["r"] = 0.3882352941176471,
-								["g"] = 0.3882352941176471,
-								["b"] = 0.3882352941176471,
-							},
-							["scale"] = 1.07,
-						},
-						["shape"] = "SPELLS\\T_VFX_BORDER",
-					},
-				},
-			},
-			["profiles"] = {
-				["Default"] = {
-					["shape"] = "SPELLS\\T_VFX_BORDER",
-					["applyPreset"] = false,
-					["backdrop"] = {
-						["settings"] = {
-							["edgeSize"] = 17,
-						},
-						["scale"] = 1.07,
-					},
-				},
-				["Burning Blade"] = {
-					["applyPreset"] = false,
-					["borders"] = {
-						{
-							["a"] = 1,
-							["r"] = 0.3098039215686275,
-							["name"] = "Rune 1",
-							["b"] = 1,
-							["scale"] = 1.4,
-							["rotSpeed"] = -30,
-							["g"] = 0.4784313725490196,
-							["texture"] = "SPELLS\\AURARUNE256.BLP",
-						}, -- [1]
-						{
-							["a"] = 0.3799999952316284,
-							["r"] = 0.196078431372549,
-							["rotSpeed"] = 60,
-							["b"] = 1,
-							["scale"] = 2.1,
-							["name"] = "Rune 2",
-							["g"] = 0.2901960784313725,
-							["texture"] = "SPELLS\\AuraRune_A.blp",
-						}, -- [2]
-						{
-							["a"] = 0.3,
-							["name"] = "Fade",
-							["b"] = 1,
-							["scale"] = 1.6,
-							["r"] = 0,
-							["g"] = 0.2235294117647059,
-							["texture"] = "SPELLS\\T_VFX_HERO_CIRCLE.BLP",
-						}, -- [3]
-					},
-					["shape"] = "Textures\\MinimapMask",
-				},
-			},
-		},
-		["HudMap"] = {
-			["profiles"] = {
-				["Default"] = {
-					["setNewScale"] = true,
-					["scale"] = 1.4,
-				},
-			},
-		},
-		["ZoneText"] = {
-			["profiles"] = {
-				["Default"] = {
-					["bgColor"] = {
-						["a"] = 0.800000011920929,
-					},
-					["borderColor"] = {
-						["a"] = 0.5,
-					},
-					["yOffset"] = -18,
-				},
-			},
+			["lock"] = false,
 		},
 	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
+	["presets"] = {
 	},
-	["profiles"] = {
-		["Default"] = {
-		},
-		["Burning Blade"] = {
-		},
-	},
+	["Pezzer-Burning Blade"] = "global",
 }
