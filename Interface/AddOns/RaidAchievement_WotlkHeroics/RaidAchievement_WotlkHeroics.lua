@@ -9,7 +9,7 @@
 	whrahuntertime=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==2 and a2=="party" then
+if GetInstanceDifficulty()==3 and a2=="party" then
 	RaidAchievement_whra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_whra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_whra:RegisterEvent("PLAYER_ALIVE")
@@ -106,7 +106,7 @@ if event == "ZONE_CHANGED_NEW_AREA" then
 whrabossanet=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==2 and a2=="party" then
+if GetInstanceDifficulty()==3 and a2=="party" then
 	RaidAchievement_whra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_whra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_whra:RegisterEvent("PLAYER_ALIVE")
@@ -266,7 +266,7 @@ if id==36535 then
 		whratime1=whratime1-1
 		if whratime1==3 then
 			raplaysound(1,whraspisokach5[17])
-			if(wherereportpartyach=="sebe" or (GetNumPartyMembers()==0 and wherereportpartyach=="party"))then
+			if(wherereportpartyach=="sebe" or (GetNumGroupMembers()==0 and wherereportpartyach=="party"))then
 				DEFAULT_CHAT_FRAME:AddMessage("- "..whraaddkilled1.." "..achlinnk.." "..whraaddkilled2)
 			else
 				razapuskanonsa(wherereportpartyach, "RA: {rt8} "..whraaddkilled1.." "..achlinnk.." "..whraaddkilled2)

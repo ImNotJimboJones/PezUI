@@ -1,11 +1,11 @@
 ﻿## Interface: 50001
 ## Title: XLootGroup
 ## Notes: Smooth group roll frames
-## Version: z9-release
+## Version: z10-release
 ## Author: Xuerian
 ## X-Category: Interface Enhancements
 ## X-Credits: Tekkub's rewrite of XLootGroup
-## X-Curse-Packaged-Version: z9-release
+## X-Curse-Packaged-Version: z10-release
 ## X-Curse-Project-Name: XLootGroup
 ## X-Curse-Project-ID: xloot-group
 ## X-Curse-Repository-ID: wow/xloot-group/mainline

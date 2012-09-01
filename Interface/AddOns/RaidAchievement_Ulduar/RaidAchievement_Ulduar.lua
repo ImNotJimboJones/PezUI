@@ -146,7 +146,7 @@ end
 
 
 
-if GetNumRaidMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
+if GetNumGroupMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
 
 local arg1, arg2, argnew, arg3,arg4,arg5,argnew2,arg6,arg7,arg8,argnew3,arg9,arg10,arg11,arg12,arg13,arg14, arg15,arg16,arg17,arg18,arg19,arg20 = ...
 
@@ -208,10 +208,10 @@ if preaspisokon[7]=="yes" and raachdone2 then
 --pseaachcompl(7)
 raachdone2=nil
 
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 raplaysound(3,pseaspisokach10[7])
 end
-if GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4 then
+if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
 raplaysound(3,pseaspisokach25[7])
 end
 
@@ -243,22 +243,22 @@ end
 if preaspisokon[8]=="yes" and raachdone1 then
 if arg2=="SPELL_CAST_SUCCESS" and (arg9==62038 or arg9==62039) then
 thisraidtableea = {}
-for i = 1,GetNumRaidMembers() do local name,subgroup = GetRaidRosterInfo(i) if subgroup <= 5 then table.insert(thisraidtableea,(GetRaidRosterInfo(i))) end end
+for i = 1,GetNumGroupMembers() do local name,subgroup = GetRaidRosterInfo(i) if subgroup <= 5 then table.insert(thisraidtableea,(GetRaidRosterInfo(i))) end end
 pseahodirlook=true
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 pseaspellname1 = GetSpellInfo(62038)
 end
-if GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4 then
+if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
 pseaspellname1 = GetSpellInfo(62039)
 end
 end
 if arg2=="SPELL_DAMAGE" and arg9==62188 then
 pseahodirlook=true
 raachdone1=nil
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 pseaspellname1 = GetSpellInfo(62038)
 end
-if GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4 then
+if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
 pseaspellname1 = GetSpellInfo(62039)
 end
 end
@@ -430,7 +430,9 @@ f:SetHeight(24)
 
 if i==12 then
 local aaa1=0
-for q=1,10 do
+if GetAchievementNumCriteria(pseaspisokach10[i])>1 then
+local maxcrit=GetAchievementNumCriteria(pseaspisokach10[i])
+for q=1,maxcrit do
 	local a1,_,a3=GetAchievementCriteriaInfo(pseaspisokach10[i],q)
 	local a2,_,a4=GetAchievementCriteriaInfo(pseaspisokach25[i],q)
 	if a1==nil or a2==nil then
@@ -451,6 +453,7 @@ for q=1,10 do
 			Description=Description.." "..a2.." (25)"
 		end
 	end
+end
 end
 end
 

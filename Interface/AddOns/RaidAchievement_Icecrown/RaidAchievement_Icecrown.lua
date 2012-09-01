@@ -99,7 +99,7 @@ rsciccportalspawnwait=nil
 rsciccinportal={}
 table.wipe(rsciccinportal)
 thisraidtableea = {}
-for i = 1,GetNumRaidMembers() do local name,subgroup = GetRaidRosterInfo(i) if subgroup <= 5 then table.insert(thisraidtableea,(GetRaidRosterInfo(i))) end end
+for i = 1,GetNumGroupMembers() do local name,subgroup = GetRaidRosterInfo(i) if subgroup <= 5 then table.insert(thisraidtableea,(GetRaidRosterInfo(i))) end end
 end
 
 
@@ -137,7 +137,7 @@ end
 
 if rsciccinportal and icracurtime>rsciccportalopen+31 then
 local qport=8
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 qport=3
 end
 
@@ -188,7 +188,7 @@ if icratracktargets then
 		if GetRaidDifficulty()==2 or GetRaidDifficulty()==4 then
 			psgropcheck=5
 		end
-		for i = 1,GetNumRaidMembers() do
+		for i = 1,GetNumGroupMembers() do
 			if icraspisokon[9]=="yes" and raachdone2 then
 			local name, _, subgroup, _, _, _, _, online, isDead = GetRaidRosterInfo(i)
 			if (subgroup <= psgropcheck and online and isDead==nil and UnitIsDeadOrGhost(name)==nil) then
@@ -277,7 +277,7 @@ else
 
 if rsciccinportal and icracurtime>rsciccportalopen+26 then
 local qport=8
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 qport=3
 end
 
@@ -324,7 +324,7 @@ end
 
 
 
-if GetNumRaidMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
+if GetNumGroupMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
 
 local arg1, arg2, argnew, arg3,arg4,arg5,argnew2,arg6,arg7,arg8,argnew3,arg9,arg10,arg11,arg12,arg13,arg14, arg15,arg16,arg17 = ...
 
@@ -391,10 +391,10 @@ end
 if arg2=="SPELL_CAST_START" and arg9==72293 then
 if icraspisokon[2]=="yes" and raachdone1 then
 ratime1=ratime1+1
-if ratime1==3 and (GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3) then
+if ratime1==3 and (GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6) then
 icrafailnoreason(2)
 end
-if ratime1==5 and (GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4) then
+if ratime1==5 and (GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7) then
 icrafailnoreason(2)
 end
 end

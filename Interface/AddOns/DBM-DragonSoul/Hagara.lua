@@ -24,7 +24,7 @@ local warnShatteringIce		= mod:NewTargetAnnounce(105289, 3, nil, mod:IsHealer())
 local warnIceLance			= mod:NewTargetAnnounce(105269, 3)
 local warnFrostTombCast		= mod:NewAnnounce("warnFrostTombCast", 4, 104448)--Can't use a generic, cause it's an 8 second cast even though it says 1second in tooltip.
 local warnFrostTomb			= mod:NewTargetAnnounce(104451, 4)
-local warnTempest			= mod:NewSpellAnnounce(109552, 4)
+local warnTempest			= mod:NewSpellAnnounce(105256, 4)
 local warnLightningStorm	= mod:NewSpellAnnounce(105465, 4)
 local warnFrostflake		= mod:NewTargetAnnounce(109325, 3, nil, mod:IsHealer())--Spammy, only a dispeller really needs to know this, probably a healer assigned to managing it.
 local warnStormPillars		= mod:NewSpellAnnounce(109557, 3, nil, false)--Spammy, off by default (since we can't get a target anyways.
@@ -34,7 +34,7 @@ local specWarnAssault		= mod:NewSpecialWarningSpell(107851, mod:IsTank())
 local specWarnShattering	= mod:NewSpecialWarningYou(105289, false)
 local specWarnIceLance		= mod:NewSpecialWarningStack(105316, nil, 3)
 local specWarnFrostTombCast	= mod:NewSpecialWarningSpell(104448, nil, nil, nil, true)
-local specWarnTempest		= mod:NewSpecialWarningSpell(109552, nil, nil, nil, true)
+local specWarnTempest		= mod:NewSpecialWarningSpell(105256, nil, nil, nil, true)
 local specWarnLightingStorm	= mod:NewSpecialWarningSpell(105465, nil, nil, nil, true)
 local specWarnWatery		= mod:NewSpecialWarningMove(110317)
 local specWarnFrostflake	= mod:NewSpecialWarningYou(109325)
@@ -71,8 +71,8 @@ local firstPhase = true
 local iceFired = false
 local assaultCount = 0
 local pillarsRemaining = 4
-local currentPillar = "Unknown"--Temp arg, just to prevent nil error if announce happens but you missed getting an assigned value (ie you disconnect and reconnect and came back mid frost/lightning phase)
-local Hagara = EJ_GetEncounterInfo(317)
+local frostPillar = EJ_GetSectionInfo(4069)
+local lightningPillar = EJ_GetSectionInfo(3919)
 local CVAR = false
 local CVAR2 = false
 
@@ -104,7 +104,6 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
-	self:UnregisterShortTermEvents()
 	if self.Options.SetBubbles and not GetCVarBool("chatBubbles") and CVAR then--Only turn them back on if they are off now, but were on when we pulled
 		SetCVar("chatBubbles", 1)
 		CVAR = false
@@ -157,12 +156,6 @@ local function warnTombTargets()
 	table.wipe(tombTargets)
 end
 
-local function registerYell()
-	mod:RegisterShortTermEvents(
-		"CHAT_MSG_MONSTER_YELL"--We register on hide, because it also fires just before hide, every time and don't want to trigger "hide over" at same time as hide.
-	)
-end
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(104451) then
 		tombTargets[#tombTargets + 1] = args.destName
@@ -183,7 +176,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		else
 			self:Schedule(0.3, warnTombTargets)
 		end
-	elseif args:IsSpellID(107851, 110898, 110899, 110900) then
+	elseif args:IsSpellID(107851) then
 		assaultCount = assaultCount + 1
 		warnAssault:Show(assaultCount)
 		specWarnAssault:Show()
@@ -207,7 +200,7 @@ function mod:SPELL_AURA_APPLIED(args)
 end
 
 function mod:SPELL_AURA_APPLIED_DOSE(args)
-	if args:IsSpellID(105316, 107061, 107062, 107063) then
+	if args:IsSpellID(105316) then
 		if ((self:IsDifficulty("lfr25") and args.amount % 6 == 0) or (not self:IsDifficulty("lfr25") and args.amount % 3 == 0)) and args:IsPlayer() then--Warn every 3 stacks (6 stacks in LFR), don't want to spam TOO much.
 			specWarnIceLance:Show(args.amount)
 		end
@@ -217,7 +210,7 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(104451) and self.Options.SetIconOnFrostTomb then
 		self:SetIcon(args.destName, 0)
-	elseif args:IsSpellID(105256, 109552, 109553, 109554) then--Tempest
+	elseif args:IsSpellID(105256) then--Tempest
 		if self.Options.SetBubbles and GetCVarBool("chatBubbles") then
 			SetCVar("chatBubbles", 0)
 			CVAR = true
@@ -241,7 +234,13 @@ function mod:SPELL_AURA_REMOVED(args)
 		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
 			DBM.RangeCheck:Show(3)
 		end
-	elseif args:IsSpellID(105409, 109560, 109561, 109562) then--Water Shield
+	elseif args:IsSpellID(105311) then--Frost defeated.
+		pillarsRemaining = pillarsRemaining - 1
+		warnPillars:Show(frostPillar, pillarsRemaining)
+	elseif args:IsSpellID(105482) then--Lighting defeated.
+		pillarsRemaining = pillarsRemaining - 1
+		warnPillars:Show(lightningPillar, pillarsRemaining)
+	elseif args:IsSpellID(105409) then--Water Shield
 		if self.Options.SetBubbles and GetCVarBool("chatBubbles") then
 			SetCVar("chatBubbles", 0)
 			CVAR = true
@@ -273,7 +272,7 @@ function mod:SPELL_CAST_START(args)
 		warnFrostTombCast:Show(args.spellName)
 		specWarnFrostTombCast:Show()
 		timerFrostTomb:Start()
-	elseif args:IsSpellID(105256, 109552, 109553, 109554) then--Tempest
+	elseif args:IsSpellID(105256) then--Tempest
 		if self.Options.SetBubbles and not GetCVarBool("chatBubbles") and CVAR then--Only turn them back on if they are off now, but were on when we pulled
 			SetCVar("chatBubbles", 1)
 			CVAR = false
@@ -283,7 +282,6 @@ function mod:SPELL_CAST_START(args)
 			CVAR2 = false
 		end
 		pillarsRemaining = 4
-		currentPillar = EJ_GetSectionInfo(4069)
 		timerAssaultCD:Cancel()
 		timerIceLanceCD:Cancel()
 		timerShatteringCD:Cancel()
@@ -292,8 +290,7 @@ function mod:SPELL_CAST_START(args)
 		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
 			DBM.RangeCheck:Hide()
 		end
-		self:Schedule(1, registerYell) -- delay 1 sec to ignore phase start yell.
-	elseif args:IsSpellID(105409, 109560, 109561, 109562) then--Water Shield
+	elseif args:IsSpellID(105409) then--Water Shield
 		if self.Options.SetBubbles and not GetCVarBool("chatBubbles") and CVAR then--Only turn them back on if they are off now, but were on when we pulled
 			SetCVar("chatBubbles", 1)
 			CVAR = false
@@ -307,7 +304,6 @@ function mod:SPELL_CAST_START(args)
 		else
 			pillarsRemaining = 4
 		end
-		currentPillar = EJ_GetSectionInfo(3919)
 		timerAssaultCD:Cancel()
 		timerIceLanceCD:Cancel()
 		timerShatteringCD:Cancel()
@@ -316,8 +312,7 @@ function mod:SPELL_CAST_START(args)
 		if self.Options.RangeFrame and not self:IsDifficulty("lfr25") then
 			DBM.RangeCheck:Show(10)
 		end
-		self:Schedule(1, registerYell) -- delay 1 sec to ignore phase start yell.
-	elseif args:IsSpellID(105289, 108567, 110887, 110888) then
+	elseif args:IsSpellID(105289) then
 		self:ScheduleMethod(0.2, "ShatteredIceTarget")
 	end
 end
@@ -334,16 +329,5 @@ function mod:SPELL_SUMMON(args)
 		lanceTargets[#lanceTargets + 1] = args.sourceName
 		self:Unschedule(warnLanceTargets)
 		self:Schedule(0.5, warnLanceTargets)
-	end
-end
-
---Faster way to get remaining count then cast triggers that are like 5 seconds too slow.
-function mod:CHAT_MSG_MONSTER_YELL(msg, boss)
-	if boss == Hagara then
-		pillarsRemaining = pillarsRemaining - 1
-		warnPillars:Show(currentPillar, pillarsRemaining)
-		if pillarsRemaining == 0 then
-			self:UnregisterShortTermEvents()
-		end
 	end
 end

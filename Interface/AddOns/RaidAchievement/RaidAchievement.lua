@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.092
+	raversion=1.100
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -38,6 +38,7 @@ end
 	raachdone2=true
 	raachdone3=true
 	raachdone4=true
+	raachdone5=true
 	ratime1=0
 	ratime2=0
 	rabattlev=0
@@ -106,7 +107,7 @@ end
 
 
 --многократный анонс обнуление
-if ramanyachon and (raachdone1==false or raachdone2==false or raachdone3==false or raachdone4==false or whraachdone1==false or chraachdone1==false) and raquantrepeatach>=raquantrepdone and radelaybeforerezetach==nil and raquantrepeatachtm>0 then
+if ramanyachon and (raachdone1==false or raachdone2==false or raachdone3==false or raachdone4==false or raachdone5==false or whraachdone1==false or chraachdone1==false or phraachdone1==false or pzraachdone1==false) and raquantrepeatach>=raquantrepdone and radelaybeforerezetach==nil and raquantrepeatachtm>0 then
 radelaybeforerezetach=GetTime()+raquantrepeatachtm
 end
 
@@ -117,8 +118,11 @@ if raachdone1==false then raachdone1=true end
 if raachdone2==false then raachdone2=true end
 if raachdone3==false then raachdone3=true end
 if raachdone4==false then raachdone4=true end
+if raachdone5==false then raachdone5=true end
 if whraachdone1==false then whraachdone1=true end
 if chraachdone1==false then chraachdone1=true end
+if phraachdone1==false then phraachdone1=true end
+if pzraachdone1==false then pzraachdone1=true end
 end
 
 
@@ -355,6 +359,7 @@ radelaybeforezonech=GetTime()
 	raachdone2=true
 	raachdone3=true
 	raachdone4=true
+	raachdone5=true
 	ratime1=0
 	ratime2=0
 	raquantrepdone=1
@@ -440,6 +445,7 @@ else
 	raachdone2=true
 	raachdone3=true
 	raachdone4=true
+	raachdone5=true
 	ratime1=0
 	ratime2=0
 	raquantrepdone=1
@@ -494,6 +500,9 @@ if IsAddOnLoaded("RaidAchievement_CataHeroics") then chra_closeallpr() end
 if IsAddOnLoaded("RaidAchievement_Naxxramas") then nxra_closeallpr() end
 if IsAddOnLoaded("RaidAchievement_Icecrown") then icra_closeallpr() end
 if IsAddOnLoaded("RaidAchievement_CataRaids") then crra_closeallpr() end
+if IsAddOnLoaded("RaidAchievement_PandaRaids") then prra_closeallpr() end
+if IsAddOnLoaded("RaidAchievement_PandaHeroics") then phra_closeallpr() end
+if IsAddOnLoaded("RaidAchievement_PandaScenarios") then pzra_closeallpr() end
 PSFeamain3:Hide()
 PSFeamain10:Hide()
 PSFeamain11:Hide()
@@ -571,12 +580,13 @@ openmenureportchra12()
 PSFeamain3_tt1:SetText(pseareports.." ("..pseachatlist4..")")
 PSFeamain3_tt2:SetText(pseareports.." ("..pseachatlist1..")")
 
-	if IsAddOnLoaded("PhoenixStyle") and ralogocr==nil then
-ralogocr=1
-local t = PSFeamain3:CreateTexture(nil,"OVERLAY")
-t:SetTexture("Interface\\AddOns\\PhoenixStyle\\phoenix_addon")
-t:SetPoint("CENTER",0,0)
-	end
+--Текстуру убрал
+--	if IsAddOnLoaded("PhoenixStyle") and ralogocr==nil then
+--ralogocr=1
+--local t = PSFeamain3:CreateTexture(nil,"OVERLAY")
+--t:SetTexture("Interface\\AddOns\\PhoenixStyle\\phoenix_addon")
+--t:SetPoint("CENTER",0,0)
+--	end
 
 end
 
@@ -631,6 +641,8 @@ PSFea_closeallpr()
 PSFeamain3:Show()
 openrasound1()
 openrasound2()
+openmenureportchra11()
+openmenureportchra12()
 end
 
 function PSFea_buttonulda()
@@ -690,6 +702,44 @@ PSFeamain10:Show()
 end
 end
 
+function phra_button()
+PSFea_closeallpr()
+if(thisaddonworkea)then
+if IsAddOnLoaded("RaidAchievement_PandaHeroics")==nil then
+LoadAddOn("RaidAchievement_PandaHeroics")
+if IsAddOnLoaded("RaidAchievement_PandaHeroics") then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda.."!")
+end
+end
+if IsAddOnLoaded("RaidAchievement_PandaHeroics") then
+phra_button2()
+else
+PSFeamain12:Show()
+end
+else
+PSFeamain10:Show()
+end
+end
+
+function pzra_button()
+PSFea_closeallpr()
+if(thisaddonworkea)then
+if IsAddOnLoaded("RaidAchievement_PandaScenarios")==nil then
+LoadAddOn("RaidAchievement_PandaScenarios")
+if IsAddOnLoaded("RaidAchievement_PandaScenarios") then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda3.."!")
+end
+end
+if IsAddOnLoaded("RaidAchievement_PandaScenarios") then
+pzra_button2()
+else
+PSFeamain12:Show()
+end
+else
+PSFeamain10:Show()
+end
+end
+
 function nxra_button()
 PSFea_closeallpr()
 if(thisaddonworkea)then
@@ -739,6 +789,25 @@ end
 end
 if IsAddOnLoaded("RaidAchievement_CataRaids") then
 crra_button2()
+else
+PSFeamain12:Show()
+end
+else
+PSFeamain10:Show()
+end
+end
+
+function prra_button()
+PSFea_closeallpr()
+if(thisaddonworkea)then
+if IsAddOnLoaded("RaidAchievement_PandaRaids")==nil then
+LoadAddOn("RaidAchievement_PandaRaids")
+if IsAddOnLoaded("RaidAchievement_PandaRaids") then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda2.."!")
+end
+end
+if IsAddOnLoaded("RaidAchievement_PandaRaids") then
+prra_button2()
 else
 PSFeamain12:Show()
 end
@@ -910,6 +979,19 @@ end
 end
 end
 
+--рейды панды
+if GetCurrentMapAreaID()==897 or GetCurrentMapAreaID()==896 or GetCurrentMapAreaID()==886 then
+if IsAddOnLoaded("RaidAchievement_PandaRaids")==nil and wasprtryloadea==nil then
+wasprtryloadea=1
+local loaded, reason = LoadAddOn("RaidAchievement_PandaRaids")
+if loaded then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda2.."!")
+else
+print("|cff99ffffRaidAchievement|r - "..pseamodulenotload.." "..psealeftmenupanda2.."!")
+end
+end
+end
+
 --героики вотлк
 local idheroics={522,534,530,525,526,603,602,601,520,524,536,542,533}
 local buul=0
@@ -918,9 +1000,9 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==2 and buul==1 then
+if GetInstanceDifficulty()==3 and buul==1 then
 
-if GetNumPartyMembers()>1 then
+if GetNumGroupMembers()>1 then
 SendAddonMessage("RAother", "5"..raversion, "party")
 end
 if thisaddonwork then
@@ -946,9 +1028,9 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==2 and buul==1 then
+if GetInstanceDifficulty()==3 and buul==1 then
 
-if GetNumPartyMembers()>1 then
+if GetNumGroupMembers()>1 then
 SendAddonMessage("RAother", "5"..raversion, "party")
 end
 if thisaddonwork then
@@ -962,6 +1044,63 @@ if loaded then
 print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenucata.."!")
 else
 print("|cff99ffffRaidAchievement|r - "..pseamodulenotload.." "..psealeftmenucata.."!")
+end
+end
+end
+
+--героики панды
+local idheroics={867, 876, 877, 875, 885, 887, 898, 871, 874}
+local buul=0
+for i=1,#idheroics do
+	if idheroics[i]==GetCurrentMapAreaID() then
+		buul=1
+	end
+end
+if GetInstanceDifficulty()==3 and buul==1 then
+
+if GetNumGroupMembers()>1 then
+SendAddonMessage("RAother", "5"..raversion, "party")
+end
+if thisaddonwork then
+SendAddonMessage("PSaddon", "17"..psversion, "party")
+end
+
+if IsAddOnLoaded("RaidAchievement_PandaHeroics")==nil and wasphtryloadea==nil then
+wasphtryloadea=1
+local loaded, reason = LoadAddOn("RaidAchievement_PandaHeroics")
+if loaded then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda.."!")
+else
+print("|cff99ffffRaidAchievement|r - "..pseamodulenotload.." "..psealeftmenupanda.."!")
+end
+end
+end
+
+
+--сценарии панды
+local idheroics={878, 999, 884, 999, 999, 999, 882}
+local buul=0
+for i=1,#idheroics do
+	if idheroics[i]==GetCurrentMapAreaID() then
+		buul=1
+	end
+end
+if GetInstanceDifficulty()==2 and buul==1 then
+
+if GetNumGroupMembers()>1 then
+SendAddonMessage("RAother", "5"..raversion, "party")
+end
+if thisaddonwork then
+SendAddonMessage("PSaddon", "17"..psversion, "party")
+end
+
+if IsAddOnLoaded("RaidAchievement_PandaScenarios")==nil and waspztryloadea==nil then
+waspztryloadea=1
+local loaded, reason = LoadAddOn("RaidAchievement_PandaScenarios")
+if loaded then
+print("|cff99ffffRaidAchievement|r - "..pseamoduleload.." "..psealeftmenupanda3.."!")
+else
+print("|cff99ffffRaidAchievement|r - "..pseamodulenotload.." "..psealeftmenupanda3.."!")
 end
 end
 end
@@ -1064,7 +1203,7 @@ if pseashowfailreas==true then
 if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
@@ -1074,7 +1213,7 @@ end
 if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2..")."..ratemp)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
@@ -1084,7 +1223,7 @@ end
 if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2.." - "..qquant..")."..ratemp)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
@@ -1097,7 +1236,7 @@ else
 if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
@@ -1113,7 +1252,7 @@ function pseareportallok()
 if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." "..pseatreb2)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt1} "..achlinnk.." "..pseatreb2)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt1} "..achlinnk.." "..pseatreb2)
@@ -1151,7 +1290,7 @@ ramsgmychat=kudarep --мой чат в который идет аннонс
 ramsgupdate=1 --запуск онапдейт таймера
 ranamemsgsend=UnitName("player")
 if UnitName("player")=="Шуршик" or UnitName("player")=="Шурш" then ranamemsgsend="0"..ranamemsgsend end
-if IsRaidOfficer()==1 then ranamemsgsend="0"..ranamemsgsend end
+if UnitIsGroupAssistant("player") then ranamemsgsend="0"..ranamemsgsend end
 table.wipe(racanannouncetable)
 table.insert(racanannouncetable, ranamemsgsend)
 end
@@ -1647,6 +1786,15 @@ if IsAddOnLoaded("RaidAchievement_AchieveReminder") then
 		end
 		if j==3 then
 			PSFea_listachmanual() rallmanualch1=2 rallmanualch2=2 rallmanualch3=1 openmenullch1() openmenullch2() openmenullch3()
+		end
+		if j==4 then
+			PSFea_listachmanual() rallmanualch1=4 rallmanualch2=1 rallmanualch3=1 openmenullch1() openmenullch2() openmenullch3()
+		end
+		if j==5 then
+			PSFea_listachmanual() rallmanualch1=4 rallmanualch2=2 rallmanualch3=1 openmenullch1() openmenullch2() openmenullch3()
+		end
+		if j==6 then
+			PSFea_listachmanual() rallmanualch1=4 rallmanualch2=3 rallmanualch3=1 openmenullch1() openmenullch2() openmenullch3()
 		end
 	end
 else

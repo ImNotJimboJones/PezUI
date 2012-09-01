@@ -69,7 +69,7 @@ ramodulnotblock				= "tracking will not be blocked"
 psoldvertxt				= "(old version)"
 raminibuttset				= "Show minimap button"
 nrallbuttontak				= "Tactics"
-psealeftmenucata			= "Cata Heroic"
+psealeftmenucata			= "Cata Heroics"
 psealeftmenucata2			= "Cata Raids"
 pseasoundoptions1			= "Play sound on achievement fail"
 pseasoundoptions2			= "Play sound on requirements completed"
@@ -118,6 +118,15 @@ radatabrokervart  = "Click = Show | Hide"
 ramainbattleground  = "battleground"
 ramainbattlegroundopt = "Show achieve list in battleground too (if it is enabled for raids)"
 
+
+pseaoldmodules  = "Old modules"
+pseaoldmodules2 = "    Old modules"
+psealeftmenupanda = "Panda Heroics"
+psealeftmenupanda2  = "Panda Raids"
+psealeftmenupanda3  = "Panda Scenarios"
+phratitle				= "    Pandaria Heroics"
+prratitle       = "    Pandaria Raids"
+pzratitle       = "    Pandaria Scenarios"
 
 
 

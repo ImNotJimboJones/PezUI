@@ -6,7 +6,7 @@
 	chrahuntertime=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==2 and a2=="party" then
+if GetInstanceDifficulty()==3 and a2=="party" then
 	RaidAchievement_chra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_chra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_chra:RegisterEvent("CHAT_MSG_MONSTER_SAY")
@@ -127,7 +127,7 @@ if chracheckzonedelay and GetTime()>chracheckzonedelay then
 chracheckzonedelay=nil
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==2 and a2=="party" then
+if GetInstanceDifficulty()==3 and a2=="party" then
 	RaidAchievement_chra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_chra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_chra:RegisterEvent("CHAT_MSG_MONSTER_SAY")

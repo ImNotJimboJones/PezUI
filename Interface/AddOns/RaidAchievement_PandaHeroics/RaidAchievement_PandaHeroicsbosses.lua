@@ -1,44 +1,35 @@
 ﻿--общий для выполненого с 1 события
-function chraachcompl(chranrach)
-chraachdone1=nil
-raplaysound(2,chraspisokach5[chranrach])
-chrareportallok()
+function phraachcompl(phranrach)
+phraachdone1=nil
+raplaysound(2,phraspisokach5[phranrach])
+phrareportallok()
 end
 
 
 --выполн треб. для персонал. ачивки
-function chramyfailgood(chranrach,nn)
-chraachdone1=nil
-raplaysound(2,chraspisokach5[chranrach])
-if nn==1 then
-out(achlinnk.." "..charakillintime)
-elseif nn==2 then
-if(wherereportpartyach=="sebe" or (GetNumGroupMembers()==0 and wherereportpartyach=="party"))then
-out("- "..achlinnk.." "..charakillintime2)
-else
-razapuskanonsa(wherereportpartyach, "RA: {rt1} "..achlinnk.." "..charakillintime2)
-end
-end
+function phramyfailgood(phranrach,nn)
+phraachdone1=nil
+raplaysound(2,phraspisokach5[phranrach])
 end
 
 
 
 --общий для фейлов с 1 удара
-function chrafailnoreason(chranrach, prichina)
+function phrafailnoreason(phranrach, prichina)
 if ramanyachon and raquantrepeatachtm==0 and raquantrepeatach>=raquantrepdone then
 raquantrepdone=raquantrepdone+1
 else
-chraachdone1=false
+phraachdone1=false
 if raquantrepeatach==raquantrepdone-1 and raquantrepeatachtm==0 then
 raquantrepdone=raquantrepdone+1
 end
 end
-raplaysound(1,chraspisokach5[chranrach])
-chrareportfailnoreason(prichina)
+raplaysound(1,phraspisokach5[phranrach])
+phrareportfailnoreason(prichina)
 end
 
 --мой фейл
-function chramyfail(chranrach)
+function phramyfail(phranrach)
 local ratemp=""
 
 if ramanyachon and raquantrepeatachtm==0 and raquantrepdone>2 then
@@ -52,17 +43,17 @@ end
 if ramanyachon and raquantrepeatachtm==0 and raquantrepeatach>=raquantrepdone then
 raquantrepdone=raquantrepdone+1
 else
-chraachdone1=false
+phraachdone1=false
 if raquantrepeatach==raquantrepdone-1 and raquantrepeatachtm==0 then
 raquantrepdone=raquantrepdone+1
 end
 end
-raplaysound(1,chraspisokach5[chranrach])
+raplaysound(1,phraspisokach5[phranrach])
 out(achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 end
 
 
-function chrareportfailnoreason(prichina2)
+function phrareportfailnoreason(prichina2)
 local ratemp=""
 
 if ramanyachon and raquantrepeatachtm==0 and raquantrepdone>2 then
@@ -93,7 +84,7 @@ end
 
 end
 
-function chrareportallok()
+function phrareportallok()
 if(wherereportpartyach=="sebe" or (GetNumGroupMembers()==0 and wherereportpartyach=="party"))then
 out("- "..achlinnk.." "..pseatreb2)
 else

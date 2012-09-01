@@ -80,17 +80,21 @@
 
 
 
-<Button name="$parent_Button5" inherits="UIPanelButtonTemplate" text="psealeftmenucata">
+<Button name="$parent_Button5" inherits="UIPanelButtonTemplate" text="psealeftmenupanda">
 	<Size x="150" y="21"/><Anchors><Anchor point="TOP"><Offset x="0" y="-215"/></Anchor></Anchors>
-	<Scripts><OnClick>chra_button()</OnClick></Scripts>
+	<Scripts><OnClick>phra_button()</OnClick></Scripts>
 	</Button>
-<Button name="$parent_Button4" inherits="UIPanelButtonTemplate" text="psealeftmenucata2">
+	<Button name="$parent_Button5" inherits="UIPanelButtonTemplate" text="psealeftmenupanda3">
 	<Size x="150" y="21"/><Anchors><Anchor point="TOP"><Offset x="0" y="-240"/></Anchor></Anchors>
-	<Scripts><OnClick>crra_button()</OnClick></Scripts>
+	<Scripts><OnClick>pzra_button()</OnClick></Scripts>
+	</Button>
+<Button name="$parent_Button4" inherits="UIPanelButtonTemplate" text="psealeftmenupanda2">
+	<Size x="150" y="21"/><Anchors><Anchor point="TOP"><Offset x="0" y="-265"/></Anchor></Anchors>
+	<Scripts><OnClick>prra_button()</OnClick></Scripts>
 	</Button>
 
-<Button name="$parent_Buttonwotlk" inherits="UIPanelButtonTemplate" text="Wotlk">
-	<Size x="150" y="21"/><Anchors><Anchor point="TOP"><Offset x="0" y="-290"/></Anchor></Anchors>
+<Button name="$parent_Buttonwotlk" inherits="UIPanelButtonTemplate" text="pseaoldmodules">
+	<Size x="150" y="21"/><Anchors><Anchor point="TOP"><Offset x="0" y="-315"/></Anchor></Anchors>
 	<Scripts><OnClick>wotlkold_button()</OnClick></Scripts>
 	</Button>
 
@@ -110,7 +114,7 @@
 	</Anchors>
 	<Layers>
 	<Layer level="ARTWORK">
-<FontString name="$parent_Text" inherits="GameFontNormal" text="    Wotlk">
+<FontString name="$parent_Text" inherits="GameFontNormal" text="pseaoldmodules2">
 	<Anchors><Anchor point="LEFT" relativePoint="TOPLEFT"/></Anchors>
 	</FontString>
 	</Layer>
@@ -143,6 +147,17 @@
 	<Size x="120" y="21"/><Anchors><Anchor point="TOPLEFT"><Offset x="30" y="-105"/></Anchor></Anchors>
 	<Scripts><OnClick>icra_button()</OnClick></Scripts>
 	</Button>
+
+
+<Button name="$parent_Button7" inherits="UIPanelButtonTemplate" text="psealeftmenucata">
+	<Size x="150" y="21"/><Anchors><Anchor point="TOPLEFT"><Offset x="180" y="-30"/></Anchor></Anchors>
+	<Scripts><OnClick>chra_button()</OnClick></Scripts>
+	</Button>
+<Button name="$parent_Button8" inherits="UIPanelButtonTemplate" text="psealeftmenucata2">
+	<Size x="150" y="21"/><Anchors><Anchor point="TOPLEFT"><Offset x="180" y="-55"/></Anchor></Anchors>
+	<Scripts><OnClick>crra_button()</OnClick></Scripts>
+	</Button>
+
 </frames>
 	</Frame>
 

@@ -120,6 +120,15 @@ ramainbattleground  = "поле боя"
 ramainbattlegroundopt = "Отображать список достижений при входе на Поле Боя (если вкл отображение для рейдов)"
 
 
+pseaoldmodules  = "старые модули"
+pseaoldmodules2 = "    Старые модули"
+psealeftmenupanda = "Героики Пандарии"
+psealeftmenupanda2  = "Рейды Пандарии"
+psealeftmenupanda3  = "Сценарии Пандарии"
+phratitle				= "    Героики Пандарии"
+prratitle       = "    Рейды Пандарии"
+pzratitle       = "    Сценарии Пандарии"
+
 
 
 racredits1				= "Благодарности"

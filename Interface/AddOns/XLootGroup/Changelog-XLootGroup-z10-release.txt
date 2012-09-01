@@ -1,0 +1,13 @@
+tag z10-release
+bd3f9056fb88b24b1921584e62f5dbda32b93055
+dridzt <dridzt@mail.com>
+2012-09-02 04:39:57 +0300
+
+Tagging as z10-release
+
+
+--------------------
+
+dridzt:
+	- Expire group loot bars properly when using the new 'request roll' functionality as MasterLooter.
+	- Workaround for GetLootRollTimeLeft() bug when ML 'requests roll' repeatedly for same item.

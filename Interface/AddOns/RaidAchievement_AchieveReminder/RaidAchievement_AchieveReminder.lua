@@ -33,60 +33,61 @@ function icll_OnUpdate(icracurtime)
 
 if ralldelaycheckzone2 and icracurtime>ralldelaycheckzone2 then
 ralldelaycheckzone2=nil
+ralldelaycheckzone=GetTime()+0.5 --ыытест не работал инфо после релога, так заработал
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
-if UnitInRaid("player") or (a2=="pvp" or a2=="raid" or (a2=="party" and a3==2)) then
-SetMapToCurrentZone()
-end
-local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if IsPartyLFG() and IsInLFGDungeon() and instanceType == "raid" and maxPlayers == 25 then
+  if UnitInRaid("player") or a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
+  SetMapToCurrentZone()
+  end
+  local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
+if GetInstanceDifficulty()==8 then
 --no LFR
-elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) then
-local found=0
-for kj=1,#ralllocations do
-	if ralllocations[kj]==GetCurrentMapAreaID() then
-		found=found+1
-		rallcolonka=kj
-	end
-end
-if found>1 then
-	rallcolonka=0
-	for bv=1,#ralllocations do
-		if ralllocations[bv]==GetCurrentMapAreaID() then
-			if ralltip[bv]=="10" or ralltip[bv]=="25" then
-				if tonumber(ralltip[bv])==a5 then
-					rallcolonka=bv
-				end
-			else
-					rallcolonka=bv
-			end
-		end
-	end
-end
+elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
+  local found=0
+  for kj=1,#ralllocations do
+    if ralllocations[kj]==GetCurrentMapAreaID() then
+      found=found+1
+      rallcolonka=kj
+    end
+  end
+  if found>1 then
+    rallcolonka=0
+    for bv=1,#ralllocations do
+      if ralllocations[bv]==GetCurrentMapAreaID() then
+        if ralltip[bv]=="10" or ralltip[bv]=="25" then
+          if tonumber(ralltip[bv])==a5 then
+            rallcolonka=bv
+          end
+        else
+            rallcolonka=bv
+        end
+      end
+    end
+  end
 else
-rallcolonka=0
+  rallcolonka=0
 end
 
 end
 
 if ralldelaycheckzone and icracurtime>ralldelaycheckzone then
-ralldelaycheckzone=nil
-local vbil=0
-local a1, a2, a3, a4, a5 = GetInstanceInfo()
-if UnitInRaid("player") or ((a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2)) then
-SetMapToCurrentZone()
-end
-local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if IsPartyLFG() and IsInLFGDungeon() and instanceType == "raid" and maxPlayers == 25 then
+  ralldelaycheckzone=nil
+  local vbil=0
+  local a1, a2, a3, a4, a5 = GetInstanceInfo()
+  if UnitInRaid("player") or (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
+  SetMapToCurrentZone()
+  end
+  local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
+if GetInstanceDifficulty()==8 then
 --no LFR
 elseif GetRealZoneText() and ralllocationnames and ralllocations and GetCurrentMapAreaID() then
-for i=1,#ralllocations do
-	if ralllocations[i]==GetCurrentMapAreaID() then
-		ralllocationnames[i]=GetRealZoneText()
-		if a2~="pvp" then
-      vbil=1
+  for i=1,#ralllocations do
+    if ralllocations[i]==GetCurrentMapAreaID() then
+      ralllocationnames[i]=GetRealZoneText()
+      if a2~="pvp" then
+        vbil=1
+      end
     end
-	end
-end
+  end
 end
 
 
@@ -105,12 +106,12 @@ end
 
 local _, a2, a3, _, a5 = GetInstanceInfo()
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if IsPartyLFG() and IsInLFGDungeon() and instanceType == "raid" and maxPlayers == 25 then
+if GetInstanceDifficulty()==8 then
 --no LFR
 else
 	if ralloptions[1]==1 then
 		if #rallnomorereport[1]==0 then
-			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) then
+			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
 				icllcheckachieves(1)
 				if a2~="pvp" then
 				table.insert(rallnomorereport[1],GetCurrentMapAreaID())
@@ -129,7 +130,7 @@ else
 			end
 			if bil==0 then
 				icllcheckachieves(1)
-				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) then
+				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
           if a2~="pvp" then
 					table.insert(rallnomorereport[1],GetCurrentMapAreaID())
 					table.insert(rallnomorereport[2],a5)
@@ -479,13 +480,13 @@ function icll_button33()
 local bil=0
 SetMapToCurrentZone()
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if IsPartyLFG() and IsInLFGDungeon() and instanceType == "raid" and maxPlayers == 25 then
+if GetInstanceDifficulty()==8 then
 --no LFR
 else
 for i=1,#ralllocations do
 	if ralllocations[i]==GetCurrentMapAreaID() then
 		local a1, a2, a3, a4, a5 = GetInstanceInfo()
-		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) then
+		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
 			if ralltip[i]=="10" or ralltip[i]=="25" then
 				if tonumber(ralltip[i])==a5 then
 					bil=i
@@ -790,7 +791,7 @@ t:SetHeight(23)
 
 end
 
-rallmanualch1=3
+rallmanualch1=4
 rallmanualch2=1
 rallmanualch3=1
 
@@ -1187,14 +1188,14 @@ if ralloptions[1]==1 then
 
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
 SetMapToCurrentZone()
-if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) then
+if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==2 then
 
 
 --проверка по имени локации, если имя встречается дважды - проверяется цифра на сколько чел расчитано и с той колонкой работаем
 
 local found=0
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if IsPartyLFG() and IsInLFGDungeon() and instanceType == "raid" and maxPlayers == 25 then
+if GetInstanceDifficulty()==8 then
 --no LFR
 else
 for kj=1,#ralllocations do
@@ -1252,11 +1253,13 @@ if ralloptions[2]==1 then
 			table.insert(texttableout2,GetAchievementLink(rallachieve[rallcolonka][i]))
 
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[rallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			reportqu=reportqu+1
@@ -1314,11 +1317,13 @@ elseif ralloptions[3]==1 then
 			else
 			
           --критерия
+          if GetAchievementNumCriteria(rallachieve[rallcolonka][i])>1 then
           local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],1)
           local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],2)
           if b1 and b4 and b5 and c1==nil then
             texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
             texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+          end
           end
 
 					texttableout[#texttableout]=texttableout[#texttableout].." ("..rallachdonel2..")"
@@ -1367,11 +1372,13 @@ elseif ralloptions[4]==1 then
 			table.insert(texttableout2,GetAchievementLink(rallachieve[rallcolonka][i]))
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[rallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			reportqu=reportqu+1
@@ -1426,11 +1433,13 @@ elseif ralloptions[5]==1 then
 			else
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[rallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 					texttableout[#texttableout]=texttableout[#texttableout].." ("..rallachdonel2..")"
@@ -1477,11 +1486,13 @@ elseif ralloptions[6]==1 then
 			table.insert(texttableout2,GetAchievementLink(rallachieve[rallcolonka][i]))
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[rallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[rallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			reportqu=reportqu+1
@@ -2097,7 +2108,7 @@ local texttableout2={}
 
 
 --проверка что ачивка существует
-if GetAchievementLink(rallachieve[locrallcolonka][1]) then
+if rallachieve[locrallcolonka][1] and GetAchievementLink(rallachieve[locrallcolonka][1]) then
 
 if ralloptionsmanual[1]==1 then
 	for i=1,#rallachieve[locrallcolonka] do
@@ -2112,11 +2123,13 @@ if ralloptionsmanual[1]==1 then
 			table.insert(texttableout2,GetAchievementLink(rallachieve[locrallcolonka][i]))
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			if rallboss[locrallcolonka][i][1]==0 and ralltip[locrallcolonka]~=ramainbattleground then
@@ -2161,11 +2174,13 @@ elseif ralloptionsmanual[2]==1 then
 			else
 			
           --критерия
+          if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
           local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
           local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
           if b1 and b4 and b5 and c1==nil then
             texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
             texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+          end
           end
       
       
@@ -2208,11 +2223,13 @@ elseif ralloptionsmanual[3]==1 then
 
 
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			if rallboss[locrallcolonka][i][1]==0 and ralltip[locrallcolonka]~=ramainbattleground then
@@ -2259,11 +2276,13 @@ elseif ralloptionsmanual[4]==1 then
 			else
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 					texttableout[#texttableout]=texttableout[#texttableout].." ("..rallachdonel2..")"
@@ -2304,11 +2323,13 @@ elseif ralloptionsmanual[5]==1 then
 			table.insert(texttableout2,GetAchievementLink(rallachieve[locrallcolonka][i]))
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 			if rallboss[locrallcolonka][i][1]==0 and ralltip[locrallcolonka]~=ramainbattleground then
@@ -2353,11 +2374,13 @@ elseif ralloptionsmanual[6]==1 then
 			else
 			
 			--критерия
+			if GetAchievementNumCriteria(rallachieve[locrallcolonka][i])>1 then
 			local b1,_,_,b4,b5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],1)
 			local c1,_,_,c4,c5=GetAchievementCriteriaInfo(rallachieve[locrallcolonka][i],2)
 			if b1 and b4 and b5 and c1==nil then
         texttableout[#texttableout]=texttableout[#texttableout].." ("..b4.." / "..b5..")"
         texttableout2[#texttableout2]=texttableout2[#texttableout2].." ("..b4.." / "..b5..")"
+      end
       end
 
 					texttableout[#texttableout]=texttableout[#texttableout].." ("..rallachdonel2..")"
@@ -2447,7 +2470,7 @@ end
 DropDownMenullch1:ClearAllPoints()
 DropDownMenullch1:SetPoint("TOPLEFT", 20, -218)
 DropDownMenullch1:Show()
-local items = {"PVP","Wotlk","Cataclysm"}
+local items = {"PVP","Wotlk","Cataclysm","Pandaria"}
 local function OnClick(self)
 UIDropDownMenu_SetSelectedID(DropDownMenullch1, self:GetID())
 

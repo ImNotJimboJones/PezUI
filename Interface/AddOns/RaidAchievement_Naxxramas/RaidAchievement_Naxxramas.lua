@@ -48,10 +48,10 @@ function nxra_OnUpdate()
 
 if nxrafobiaend and GetTime()>nxrafobiaend then
 nxramexna=0
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 raplaysound(3,nxraspisokach10[1])
 end
-if GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4 then
+if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
 raplaysound(3,nxraspisokach25[1])
 end
 pseareportfailnoreason()
@@ -121,7 +121,7 @@ end
 end
 
 
-if GetNumRaidMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
+if GetNumGroupMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
 
 local arg1, arg2, argnew, arg3,arg4,arg5,argnew2,arg6,arg7,arg8,argnew3,arg9,arg10,arg11,arg12,arg13,arg14, arg15,arg16,arg17,arg18,arg19,arg20 = ...
 
@@ -204,9 +204,9 @@ end
 if (arg2=="SPELL_DAMAGE" or (arg2=="SPELL_MISSED" and arg12 and (arg12=="ABSORB" or arg12=="RESIST"))) and arg9==57591 and UnitName("player")==arg7 and rabattlev==1 then
 if nxraspisokon[6]=="yes" and raachdone1 then
 --проверка на ачивку у себя!
-if GetInstanceDifficulty()==1 or GetInstanceDifficulty()==3 then
+if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
 _, _, _, nxrasarto = GetAchievementInfo(2047)
-elseif GetInstanceDifficulty()==2 or GetInstanceDifficulty()==4 then
+elseif GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
 _, _, _, nxrasarto = GetAchievementInfo(2048)
 end
 if (nxrasarto) then else

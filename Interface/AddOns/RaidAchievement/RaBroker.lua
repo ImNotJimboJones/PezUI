@@ -4,7 +4,7 @@
 
   local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
 
-  local dataobj = ldb:NewDataObject("RaidAchievement",{
+  local dataobj = ldb:NewDataObject("RaidAchievement",{ 
     type = "launcher",
     text = "RA",
     --icon = "interface\\ICONS\\inv_misc_summerfest_brazierorange",

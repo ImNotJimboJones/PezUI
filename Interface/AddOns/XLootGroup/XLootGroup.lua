@@ -119,7 +119,7 @@ local types = {
 	pass = PASS
 }
 
-local rolls, canceled = { }, { }
+local rolls, canceled, completed, unknownid_to_rollid = { }, { }, { }, { }
 
 ---------------------------------------------------------------------------
 -- Frame creation
@@ -531,7 +531,7 @@ local function rollevent(event, chat_event, ...)
 				frame.rolls_player[who] = rtype
 				frame.rolls_type[rtype][who] = true
 
-				if canceled[frame.rollid] then
+				if canceled[frame.rollid] or completed[frame.rollid] then
 					UpdateRollStatus(frame)
 				else
 					frame[rtype]:SetText(count(frame.rolls_type[rtype]))
@@ -630,8 +630,15 @@ end
 ---------------------------------------------------------------------------
 -- Group events
 ---------------------------------------------------------------------------
-local function start(id, length, ongoing)
-	if id and canceled[id] then return end -- Failsafe?
+local function start(id, length, unknownid, ongoing)
+	if id and canceled[id] or completed[id] then return end -- Failsafe?
+	
+	--[[ MoP build16036: START_LOOT_ROLL has an arg3, it matches LOOT_ITEM_AVAILABLE:arg2 and LOOT_ROLLS_COMPLETE:arg1 
+		It's some kind of item identifier but I haven't found out what item attribute it relates to (it's not itemid).
+		In any case we need it so we can expire roll frames for items when LOOT_ROLLS_COMPLETE fires, so populate a reverse lookup table
+		and use it to expire rollid when LOOT_ROLLS_COMPLETE fires
+	]]
+	if unknownid then unknownid_to_rollid[unknownid]=id end
 	
 	local icon, name, count, quality, bop, need, greed, de = GetLootRollItemInfo(id)
 	local link = GetLootRollItemLink(id)
@@ -723,6 +730,30 @@ local function cancel(id)
 			break
 		end
 	end
+end
+
+local function complete(unknownid)
+	local rollid = unknownid_to_rollid[unknownid]
+	if rollid then
+		completed[rollid] = true
+		for k,v in pairs(anchor.children) do
+			if v.rollid == rollid then
+				local frame = v
+				if opt.track_all or 
+				(opt.track_player_roll and frame.rolls_player[me] and frame.rolls_player[me] ~= 'pass') or
+				(opt.track_by_threshold and frame.quality >= opt.track_threshold) then
+					UpdateRollStatus(frame)
+					frame.winner = true
+					frame.bar.expires = GetTime()
+					anchor:Expire(frame, opt.expire_lost)
+				else
+					anchor:Pop(frame)
+				end
+				break
+			end
+		end
+	end
+	unknownid_to_rollid[unknownid] = nil
 end
 
 -- To avoid a OnUpdate for every mouseoverable frame, use modifier events
@@ -829,13 +860,16 @@ function addon:OnLoad()
 	anchor:RegisterEvent('START_LOOT_ROLL')
 	anchor:RegisterEvent('CANCEL_LOOT_ROLL')
 	anchor:RegisterEvent('MODIFIER_STATE_CHANGED')
+	anchor:RegisterEvent('LOOT_ROLLS_COMPLETE')
 	anchor:SetScript('OnEvent', function(_, e, ...)
 		if e == 'MODIFIER_STATE_CHANGED' then
 			modifier(...)
 		elseif e == 'START_LOOT_ROLL' then
-			start(...)
+			start(...) -- rollid, timeremain, uknownid
 		elseif e == 'CANCEL_LOOT_ROLL' then
 			cancel(...)
+		elseif e == 'LOOT_ROLLS_COMPLETE' then
+			complete(...)
 		end
 	end)
 
@@ -862,8 +896,8 @@ function addon:OnLoad()
 	if (in_raid or in_party) and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
 		for i=1,300 do
 			local time = GetLootRollTimeLeft(i)
-			if time > 0 then
-				start(i, time, true)
+			if time > 0 and time < 300000 then -- MoP build 16030: if the masterlooter 'request roll' repeatedly for the same item GetLootRollTimeLeft() returns huge time for past rolls.
+				start(i, time, nil, true) -- MoP: START_LOOT_ROLL has 3 args no idea what arg3 is but it's type number
 			end
 		end
 	end

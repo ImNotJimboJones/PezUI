@@ -11,7 +11,7 @@ end
 	RaidAchievement_crra:RegisterEvent("ADDON_LOADED")
 	
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if IsPartyLFG() and IsInLFGDungeon() and difficulty == 2 and instanceType == "raid" and maxPlayers == 25 then
+	if GetInstanceDifficulty()==8 then
 		lfrenable=1
   else
     lfrenable=nil
@@ -70,7 +70,7 @@ if ratrackdistmor and crracurtime<ratrackdistmor then
 				local tab1={} --имена
 				local tab2={} --со сколькими рядом был
 				local tab3={} --с кем был рядом
-				for o=1,GetNumRaidMembers() do
+				for o=1,GetNumGroupMembers() do
 					if UnitAffectingCombat("raid"..o) then
 						local nam=UnitName("raid"..o)
 						table.insert(tab1,nam)
@@ -149,12 +149,12 @@ if ratrackdistmor and crracurtime<ratrackdistmor then
 				local i=1
 				local minr=6
 				local failn=""
-				while i<GetNumRaidMembers() do
+				while i<GetNumGroupMembers() do
 					local j=i+1
 					if UnitAffectingCombat("raid"..i) then
 						local x2,y2=GetPlayerMapPosition(UnitName("raid"..i))
 						if x2 and y2 and x2>0 then
-							while j<=GetNumRaidMembers() do
+							while j<=GetNumGroupMembers() do
 								if UnitAffectingCombat("raid"..j) then
 									local x,y=GetPlayerMapPosition(UnitName("raid"..j))
 									if x and y and x>0 then
@@ -386,7 +386,7 @@ rcradelayzonech=GetTime()+2
 racrcheckdeadth43296=nil
 
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if IsPartyLFG() and IsInLFGDungeon() and difficulty == 2 and instanceType == "raid" and maxPlayers == 25 then
+	if GetInstanceDifficulty()==8 then
 		lfrenable=1
   else
     lfrenable=nil
@@ -473,7 +473,7 @@ end
 
 
 
-if GetNumRaidMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
+if UnitInRaid("player") and event == "COMBAT_LOG_EVENT_UNFILTERED" then
 
 local arg1, arg2, arg3,arg4,arg5,arg6,argNEW1,arg7,arg8,arg9,argNEW2,arg10,arg11,arg12,arg13,arg14, arg15,arg16,arg17,arg18 = ...
 
@@ -909,7 +909,9 @@ f:SetHeight(24)
 
 
 if i==2 or i==7 or i==13 then
-for q=1,10 do
+if GetAchievementNumCriteria(crraspisokach25[i])>1 then
+local maxcrit=GetAchievementNumCriteria(crraspisokach25[i])
+for q=1,maxcrit do
 	local a1,_,a3=GetAchievementCriteriaInfo(crraspisokach25[i],q)
 	if a1==nil then
 		q=11
@@ -920,6 +922,7 @@ for q=1,10 do
 			Description=Description.."\n"..a1
 		end
 	end
+end
 end
 end
 

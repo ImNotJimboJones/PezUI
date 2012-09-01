@@ -1,4 +1,4 @@
-﻿## Interface: 40300
+﻿## Interface: 50001
 ## Title: Raid|cff7fff7fAchievement|r - Achieve Reminder
 ## Title-ruRU: Raid|cff7fff7fAchievement|r - Список достижений по локациям
 ## Author: Shurshik
