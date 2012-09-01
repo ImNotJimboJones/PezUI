@@ -809,9 +809,7 @@ do
 		-- This block makes the Blizz nameplate invisible
 		regions.threatglow:SetTexCoord( 0, 0, 0, 0 )
 		regions.healthborder:SetTexCoord( 0, 0, 0, 0 )
-		regions.healthborder:SetTexture(EMPTY_TEXTURE)
 		regions.castborder:SetTexCoord( 0, 0, 0, 0 )
-		regions.castborder:SetTexture(EMPTY_TEXTURE)
 		regions.castnostop:SetTexCoord( 0, 0, 0, 0 )
 		regions.skullicon:SetTexCoord( 0, 0, 0, 0 )
 		regions.eliteicon:SetTexCoord( 0, 0, 0, 0 )
@@ -891,23 +889,13 @@ do
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
 		local threat, border, highlight, name = frame:GetRegions()
-		--return borderRegion and borderRegion:GetObjectType() == "Texture" and borderRegion:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
-		
-		--[[
-		local frameName, splitName
-		frameName = frame:GetName()
-		if frameName then splitName = strsub(frameName, 1, 9) end
-		print(GetTime(), frame, frameName, splitName)
-		--]]
-		
-		return border and name and border:GetObjectType() == "Texture" and name:GetObjectType() == "FontString"
+		return border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates
 	local function OnWorldFrameChange(...)
 		for index = 1, select("#", ...) do
 			plate = select(index, ...)
-			
 			
 			IsFrameNameplate(plate)
 			

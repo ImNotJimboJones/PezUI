@@ -48,7 +48,7 @@ L["-->>|cffff0000Activate Threat Plates from the Tidy Plates options!|r<<--"] = 
 L["|cff89f559Threat Plates:|r Welcome back |cff"] = "|cff89f559Threat Plates:|r Willkommen zurück |cff"
 
 L["|cff89F559Threat Plates|r: Player spec change detected: |cff"] = "|cff89F559Threat Plates|r: Talentwechsel festgestellt: |cff"
-L[")|r, you are now in your |cff89F559"] = ")|r, Du bist jetzt in Deiner |cff89F559"
+L["|r, you are now in your |cff89F559"] = "|r, Du bist jetzt in Deiner |cff89F559"
 L["|r spec and are now in your "] = "|r -Skillung und nun in Deiner "
 L[" role."] = " -Rolle."
 

@@ -1,5 +1,15 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.7.2
+---------------------------
+- Aura Widget: Fixed error, where certain auras filtered by spellid were not being displayed.
+- Group Cache: Fixed updates for friendly group class colors (hopefully!)
+- Group & Unit Cache: Will not try to search the global unit cache for class information while you are in a dungeon (could slow things down, and it isn't needed)
+- Core: Reverted to earlier method of discriminating nameplates
+- Threat Line Widget: Added some code to prevent it from accidentally becoming REALLY long.
+
+Does anyone still use the Threat Line Widget?  Tank Threat is so high, now, that I wonder if this will/has become irrelevant.  Let me know;  http://wow.curseforge.com/addons/tidy-plates/forum/
+
 6.7.1
 ---------------------------
 - Fixed Range Widget bug

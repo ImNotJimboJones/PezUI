@@ -237,7 +237,7 @@ PitBull4.expect = _G.PitBull4_expect
 _G.PitBull4_expect = nil
 local expect = PitBull4.expect
 
-PitBull4.version = "v4.0.0-beta34"
+PitBull4.version = "v4.0.0-beta35"
 if PitBull4.version:match("@") then
 	PitBull4.version = "Development"
 end
@@ -1219,15 +1219,15 @@ function PitBull4:OnProfileChanged()
 		frame.classification_db = db.profile.units[frame.classification]
 	end
 	
-	for frame in PitBull4:IterateFrames(true) do
-		frame:RefreshLayout()
-	end
-
 	for header in PitBull4:IterateHeaders(true) do
 		if header.group_db then
 			header:RefreshGroup(true)
 		end
 		header:UpdateShownState()
+	end
+
+	for frame in PitBull4:IterateFrames(true) do
+		frame:RefreshLayout()
 	end
 
 	-- Make sure all frames and groups are made

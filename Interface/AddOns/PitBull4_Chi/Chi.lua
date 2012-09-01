@@ -36,7 +36,7 @@ PitBull4_Chi:SetDefaults({
 	position = 1,
 	vertical = false,
 	size = 1.5,
-	active_color = { 0.59, 1, 0, 1 },
+	active_color = { 1, 1, 1, 1 },
 	inactive_color = { 0.5, 0.5, 0.5, 0.5 },
 	background_color = { 0, 0, 0, 0.5 }
 })
@@ -124,8 +124,9 @@ function PitBull4_Chi:UpdateFrame(frame)
 		for i = 1, 5 do
 			local chi_icon = PitBull4.Controls.MakeChiIcon(container, i)
 			container[i] = chi_icon
-			chi_icon:UpdateTexture(db.active_color, db.inactive_color)
 			chi_icon:ClearAllPoints()
+			chi_icon:UpdateColors(db.active_color, db.inactive_color)
+			chi_icon:UpdateTexture()
 			if not vertical then
 				chi_icon:SetPoint("CENTER", container, "LEFT", BORDER_SIZE + (i - 1) * (SPACING + STANDARD_SIZE) + HALF_STANDARD_SIZE, 0)
 			else
@@ -148,6 +149,7 @@ function PitBull4_Chi:UpdateFrame(frame)
 	end
 	for i = 1, 5 do
 		local chi_icon = container[i]
+		chi_icon:UpdateColors(db.active_color, db.inactive_color)
 		if i > max_chi then
 			chi_icon:Hide()
 		elseif i <= num_chi then

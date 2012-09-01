@@ -8,6 +8,17 @@ local Active = function() return GetActiveSpecGroup() end
 local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
 
+StaticPopupDialogs["TPTP_ChangeLog"] = {
+	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n*Fixed issue with 'No outline, Monochrome' text flag.\n*Removed '()' from the spec swap verbose.", 
+	button1 = "Thanks for the info!",
+	timeout = 0,
+	whileDead = 1, 
+	hideOnEscape = 1, 
+	OnAccept = function() 
+		print("Type '/tptp' to review the options!")
+	end,
+}
+
 do
 	HEX_CLASS_COLORS = {};
 	for i=1,#CLASS_SORT_ORDER do
@@ -1431,16 +1442,11 @@ end
 ------------
 function TidyPlatesThreat:specInfo()
 	for i=1, GetNumSpecGroups() do
-		--for z=1, GetNumTalentTabs() do
-			--name, iconTexture, pointsSpent, background, previewPointsSpent = GetTalentTabInfo(z, false, false, i)
-			--local SpellID, name, desc, icon, pointsSpent = GetTalentTabInfo(z, false, false, i)
+		local id, name, description, icon, background = GetSpecializationInfo(i, nil, false);
+		local pointsSpent = GetSpecializationRole(i,nil, false)
 			
-			local id, name, description, icon, background = GetSpecializationInfo(i, nil, false);
-			local pointsSpent = GetSpecializationRole(i,nil, false)
-			
-			TidyPlatesThreat.db.char.specInfo[i].role = pointsSpent
-			TidyPlatesThreat.db.char.specInfo[i].name = name
-		--end
+		TidyPlatesThreat.db.char.specInfo[i].role = pointsSpent
+		TidyPlatesThreat.db.char.specInfo[i].name = name
 	end
 end
 
@@ -1522,40 +1528,7 @@ function TidyPlatesThreat:StartUp()
 				else
 					TidyPlatesThreat:setSpecDPS(i)
 				end
-			end--[[
-		elseif PlayerClass == "PALADIN" then
-			if t[2] > t[1] and t[2] > t[3] then -- Detects protection spec
-				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyTank) end
-			else
-				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS)	end
 			end
-			for i=1, GetNumSpecGroups() do
-				z = self.db.char.specInfo[i] 
-				if z[2] > z[1] and z[2] > z[3] then -- Detects protection spec
-					TidyPlatesThreat:setSpecTank(i)
-				else
-					TidyPlatesThreat:setSpecDPS(i)
-				end
-			end
-		elseif PlayerClass == "DRUID" then
-			if (t[2] > t[1]) and (t[2] > t[3]) then
-				if TidyPlatesThreat.db.profile.verbose then	print(Undetermined)	end
-			else
-				if TidyPlatesThreat.db.profile.verbose then	print(CurrentlyDPS)	end
-			end
-			for i=1, GetNumSpecGroups() do
-				z = self.db.char.specInfo[i] 
-				if z[2] > z[1] and z[2] > z[3] then -- Detects feral spec
-					TidyPlatesThreat:setSpecTank(i)
-				else
-					TidyPlatesThreat:setSpecDPS(i)
-				end
-			end
-		elseif PlayerClass == "DEATHKNIGHT"	then
-			if TidyPlatesThreat.db.profile.verbose then	print(Undetermined)	end
-		else
-			if TidyPlatesThreat.db.profile.verbose then	print(Welcome) end
-			]]--
 		end
 	end
 	if TidyPlatesThreat.db.profile.verbose then	print(Conclusion) end
@@ -1595,10 +1568,10 @@ function f:Events(self,event,...)
 			else
 				TidyPlates:DisableFadeIn()
 			end
-			if GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
-				--print("Version found to be different")
-				GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
+			if GlobDB.version and GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
+				StaticPopup_Show("TPTP_ChangeLog")
 			end
+			GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
 		end
 		f:UnregisterEvent("ADDON_LOADED")
 	elseif event == "PLAYER_ALIVE" then
@@ -1648,7 +1621,7 @@ function f:Events(self,event,...)
 		local t = CharDB.specInfo[Active()]
 		CharDB.threat.tanking = TidyPlatesThreat:currentRoleBool(Active())
 		if ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and ProfDB.verbose then
-			print(L["|cff89F559Threat Plates|r: Player spec change detected: |cff"]..HEX_CLASS_COLORS[PlayerClass]..TidyPlatesThreat:specName()..": ("..L[")|r, you are now in your |cff89F559"]..TidyPlatesThreat:dualSpec()..L["|r spec and are now in your "]..TidyPlatesThreat:roleText()..L[" role."])
+			print(L["|cff89F559Threat Plates|r: Player spec change detected: |cff"]..HEX_CLASS_COLORS[PlayerClass]..TidyPlatesThreat:specName()..L["|r, you are now in your |cff89F559"]..TidyPlatesThreat:dualSpec()..L["|r spec and are now in your "]..TidyPlatesThreat:roleText()..L[" role."])
 		end
 		TidyPlates:ForceUpdate()
 	elseif event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" then

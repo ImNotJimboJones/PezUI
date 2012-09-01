@@ -8,8 +8,7 @@ end
 
 local module_path = _G.debugstack():match("[d%.][d%.][O%.]ns\\(.-)\\[A-Za-z0-9]-%.lua")
 
-local ICON_TEXTURE = [[Interface\AddOns\]] .. module_path .. [[\Chi]]
-local SHINE_TEXTURE = [[Interface\AddOns\]] .. module_path .. [[\Shine]]
+local TEXTURE = [[Interface\PlayerFrame\MonkUI]]
 
 local STANDARD_SIZE = 15
 
@@ -26,20 +25,20 @@ local ChiIcon = {}
 local ChiIcon_scripts = {}
 
 local tmp_color = { 1, 1, 1, 1 }
-function ChiIcon:UpdateTexture(active_color, inactive_color)
-	self:SetNormalTexture(ICON_TEXTURE)
-	if active_color then
-		self.active_color = active_color
-		self.inactive_color = inactive_color
-	else
-		active_color = self.active_color
-		inactive_color = self.inactive_color
-	end
+function ChiIcon:UpdateColors(active_color, inactive_color)
+	self.active_color = active_color
+	self.inactive_color = inactive_color
+end
+
+function ChiIcon:UpdateTexture()
+	self:SetNormalTexture(TEXTURE)
 	local texture = self:GetNormalTexture()
 	if self.active then
-		texture:SetVertexColor(unpack(active_color or tmp_color))
+		texture:SetTexCoord(0.00390625, 0.08593750, 0.71093750, 0.87500000)
+		texture:SetVertexColor(unpack(self.active_color or tmp_color))
 	else
-		texture:SetVertexColor(unpack(inactive_color or tmp_color))
+		texture:SetTexCoord(0.09375000, 0.17578125, 0.71093750, 0.87500000)
+		texture:SetVertexColor(unpack(self.inactive_color or tmp_color))
 	end
 end
 
@@ -83,7 +82,8 @@ function ChiIcon:Shine()
 	if not shine then
 		shine = PitBull4.Controls.MakeTexture(self, "OVERLAY")
 		self.shine = shine
-		shine:SetTexture(SHINE_TEXTURE)
+		shine:SetTexture(TEXTURE)
+		shine:SetTexCoord(0.00390625, 0.08593750, 0.71093750, 0.87500000)
 		shine:SetBlendMode("ADD")
 		shine:SetAlpha(0)
 		shine:SetAllPoints(self)

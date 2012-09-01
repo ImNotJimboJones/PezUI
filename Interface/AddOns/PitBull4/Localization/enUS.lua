@@ -256,6 +256,7 @@ L["Disable"] = true
 L["Disable capturing clicks on aura icons allowing the clicks to fall through to the window underneath the aura."] = true
 L["Disabled in the Blizzard addon list."] = true
 L["Disabling PitBull4 config mode, entering combat."] = true
+L["Disabling PitBull4 config mode, entering pet battle."] = true
 L["Disconnected"] = true
 L["Disease"] = true
 L["Dispellable"] = true

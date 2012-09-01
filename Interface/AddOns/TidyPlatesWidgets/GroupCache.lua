@@ -16,6 +16,17 @@ local function IsUnitTank(unitId)
 end
 
 local function UpdateRoster(frame, event, ...)
+	-- Queue Update
+	TidyPlates:Update()
+	
+	-- Clear Cache
+	wipe(Group.Names)
+	wipe(Group.Tanks)
+	wipe(Group.Class)
+	wipe(Group.Role)
+	wipe(Group.UnitId)
+	wipe(Group.GUID)
+	
 	-- Check Group Type
 	local groupType, groupSize, unitId, unitName
 	if UnitInRaid("player") then 
@@ -23,18 +34,12 @@ local function UpdateRoster(frame, event, ...)
 		groupSize = TidyPlatesUtility.GetNumRaidMembers() - 1
 	elseif UnitInParty("player") then 
 		groupType = "party"
-		groupSize = TidyPlatesUtility.GetNumPartyMembers() 
+		groupSize = TidyPlatesUtility.GetNumPartyMembers() - 1 		--  Add a, '- 1'  ?
 	else 
-		groupType = "solo"
-		groupSize = 1
+		Group.Type = "solo"
+		Group.Size = 1
+		return
 	end
-	
-	wipe(Group.Names)
-	wipe(Group.Tanks)
-	wipe(Group.Class)
-	wipe(Group.Role)
-	wipe(Group.UnitId)
-	wipe(Group.GUID)
 
 	Group.Type = groupType
 	Group.Size = groupSize
@@ -51,17 +56,15 @@ local function UpdateRoster(frame, event, ...)
 				Group.Role[unitName] = UnitGroupRolesAssigned(unitId)
 				Group.UnitId[unitName] = unitId
 				Group.GUID[UnitGUID(unitId)] = unitId
+				print(unitId, UnitName(unitId), UnitClass(unitId))
 			end
 		end
 	end
-	
-	TidyPlates:Update()
 end
 
 local function Enable()
 	if not RosterMonitor then RosterMonitor = CreateFrame("Frame") end
-	RosterMonitor:RegisterEvent("RAID_ROSTER_UPDATE")
-	RosterMonitor:RegisterEvent("PARTY_MEMBERS_CHANGED")
+	RosterMonitor:RegisterEvent("GROUP_ROSTER_UPDATE")
 	RosterMonitor:RegisterEvent("PARTY_CONVERTED_TO_RAID")
 	RosterMonitor:RegisterEvent("PLAYER_ENTERING_WORLD")
 	RosterMonitor:SetScript("OnEvent", UpdateRoster)

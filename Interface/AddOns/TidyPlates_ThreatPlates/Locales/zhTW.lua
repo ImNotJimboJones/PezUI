@@ -48,7 +48,7 @@ L["-->>|cffff0000Activate Threat Plates from the Tidy Plates options!|r<<--"] = 
 L["|cff89f559Threat Plates:|r Welcome back |cff"] = "|cff89f559Threat Plates:|r歡迎回來 |cff"
 
 L["|cff89F559Threat Plates|r: Player spec change detected: |cff"] = "|cff89F559Threat Plates|r: 玩家天賦改變檢測： |cff"
-L[")|r, you are now in your |cff89F559"] = ")|r, 你現在啟用了你的 |cff89F559"
+L["|r, you are now in your |cff89F559"] = "|r, 你現在啟用了你的 |cff89F559"
 L["|r spec and are now in your "] = "|r 天賦並且角色類型為 "
 L[" role."] = " 角色。"
 

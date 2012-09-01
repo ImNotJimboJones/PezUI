@@ -48,7 +48,7 @@ L["-->>|cffff0000Activate Threat Plates from the Tidy Plates options!|r<<--"] = 
 L["|cff89f559Threat Plates:|r Welcome back |cff"] = true
 
 L["|cff89F559Threat Plates|r: Player spec change detected: |cff"] = true
-L[")|r, you are now in your |cff89F559"] = true
+L["|r, you are now in your |cff89F559"] = true
 L["|r spec and are now in your "] = true
 L[" role."] = true
 

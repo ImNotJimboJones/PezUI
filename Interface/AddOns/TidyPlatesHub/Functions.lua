@@ -140,7 +140,8 @@ end
 
 local function GetFriendlyClass(name)
 	local class = TidyPlatesUtility.GroupMembers.Class[name] 
-	if (not class) and LocalVars.AdvancedEnableUnitCache then 
+	
+	if (IsInInstance() == nil) and (not class) and LocalVars.AdvancedEnableUnitCache then 
 		class = CachedUnitClass(name) end	
 	return class
 end
@@ -591,7 +592,7 @@ local function SetNameColorDelegate(unit)
 	local color, colorMode
 		
 	if unit.reaction == "FRIENDLY" then
-		-- Party Aggro Coloring
+		-- Party Aggro Coloring -- Overrides the normal coloring
 		if LocalVars.ColorShowPartyAggro and LocalVars.ColorPartyAggroText then
 			if GetAggroCondition(unit.name) then color = LocalVars.ColorPartyAggro end
 		end
@@ -1068,7 +1069,7 @@ local DebuffFilterModes = {
 		["Debuff"] = 6,
 	} --]]
 		
-		
+	
 	-- My Debuffs	
 	function(aura) 
 		if aura.caster == UnitGUID("player") and aura.type > 1 then return true end
@@ -1110,6 +1111,7 @@ local function DebuffFilter(aura)
 	end
 	--]]
 	
+	--print(aura.name, aura.spellid)
 	-- Debuffs on Friendly Units
 	if aura.target == AURA_TARGET_FRIENDLY then  
 		-- return TidyPlatesWidgets.CanPlayerDispel(AURA_TYPE[aura.type or 0] or "")
@@ -1121,7 +1123,7 @@ local function DebuffFilter(aura)
 end
 
 local function Prefilter(spellid, spellname, auratype)
-	return (LocalVars.WidgetsDebuffLookup[tostring(spellid)] or LocalVars.WidgetsDebuffLookup[spellname] ~= nil)
+	return ((LocalVars.WidgetsDebuffLookup[tostring(spellid)] or LocalVars.WidgetsDebuffLookup[spellname]) ~= nil)
 end
 
 	

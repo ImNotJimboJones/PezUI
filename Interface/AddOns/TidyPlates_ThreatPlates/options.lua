@@ -14,7 +14,7 @@ local FontStyle = {
 	NONE = L["None"],
 	OUTLINE = L["Outline"],
 	THICKOUTLINE = L["Thick Outline"],
-	["NONE, MONOCHROME"] = L["No Outline, Monochrome"],
+	--["NONE, MONOCHROME"] = L["No Outline, Monochrome"],
 	["OUTLINE, MONOCHROME"] = L["Outline, Monochrome"],
 	["THICKOUTLINE, MONOCHROME"] = L["Thick Outline, Monochrome"]
 }
