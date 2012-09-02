@@ -190,13 +190,13 @@ if (wherereportraidach=="sebe") then
 out("- "..pseaotdamag.." "..achlinnk.." "..pseamimifailloc5.." ("..ktofail2..")."..ratemp)
 else
 	if pseashowfailreas==true then
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..pseaotdamag.." "..achlinnk.." "..pseamimifailloc5.." ("..ktofail2..")."..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..pseaotdamag.." "..achlinnk.." "..pseamimifailloc5.." ("..ktofail2..")."..ratemp)
 end
 	else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "RA: {rt8} "..pseaotdamag.." "..achlinnk.." "..pseamimifailloc5..ratemp)
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..pseaotdamag.." "..achlinnk.." "..pseamimifailloc5..ratemp)

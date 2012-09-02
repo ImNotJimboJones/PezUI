@@ -2,6 +2,9 @@
 
 FishingBuddy.WatchFrame = {};
 
+-- 5.0.4 has a problem with a global "_" (see some for loops below)
+local _
+
 local MAX_FISHINGWATCH_LINES = 1;
 local WATCHDRAGGER_SHOW_DELAY = 0.5;
 

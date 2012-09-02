@@ -4,6 +4,9 @@ if ( Outfitter and Outfitter.OnLoad ) then
 
 local FL = LibStub("LibFishing-1.0");
 
+-- 5.0.4 has a problem with a global "_" (see some for loops below)
+local _
+
 local function OutfitterSwitch(outfitName)
 	-- this uses a static string of "Fishing" *not* the translation
 	local vOut, vCat, _ = Outfitter:FindOutfitByName(Outfitter.cFishingOutfit);

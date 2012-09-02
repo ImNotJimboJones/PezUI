@@ -56,7 +56,6 @@ local function UpdateRoster(frame, event, ...)
 				Group.Role[unitName] = UnitGroupRolesAssigned(unitId)
 				Group.UnitId[unitName] = unitId
 				Group.GUID[UnitGUID(unitId)] = unitId
-				print(unitId, UnitName(unitId), UnitClass(unitId))
 			end
 		end
 	end

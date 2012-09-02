@@ -234,7 +234,7 @@ rarainbowtab1=nil
 if (wherereportraidach=="sebe") then
 DEFAULT_CHAT_FRAME:AddMessage("- "..achlinnk.." "..racolorcomb..": "..txt)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "{rt1} "..achlinnk.." "..racolorcomb..": "..txt)
 else
 razapuskanonsa(wherereportraidach, "{rt1} "..achlinnk.." "..racolorcomb..": "..txt)
@@ -668,7 +668,7 @@ if (arg2=="SPELL_AURA_APPLIED" or arg2=="SPELL_AURA_APPLIED_DOSE") and (arg10==1
 						if (wherereportraidach=="sebe") then
 							out("- "..achlinnk.." "..format(raragnaachtxt2,se))
 						else
-							if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+							if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
 								razapuskanonsa("raid", "RA: {rt1} "..achlinnk.." "..format(raragnaachtxt2,se))
 							else
 								razapuskanonsa(wherereportraidach, "RA: {rt1} "..achlinnk.." "..format(raragnaachtxt2,se))
@@ -802,7 +802,7 @@ if arg2=="SPELL_AURA_APPLIED" and (arg10==104897 or arg10==104894 or arg10==1049
 if (wherereportraidach=="sebe") then
 DEFAULT_CHAT_FRAME:AddMessage("- "..achlinnk.." "..racolorcomb..": "..txt)
 else
-if IsRaidOfficer()==nil and wherereportraidach=="raid_warning" then
+if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
 razapuskanonsa("raid", "{rt1} "..achlinnk.." "..racolorcomb..": "..txt)
 else
 razapuskanonsa(wherereportraidach, "{rt1} "..achlinnk.." "..racolorcomb..": "..txt)

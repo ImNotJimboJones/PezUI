@@ -1,5 +1,9 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.7.3
+---------------------------
+- Removed debug code from GroupCache.lua (Chat log spam)
+
 6.7.2
 ---------------------------
 - Aura Widget: Fixed error, where certain auras filtered by spellid were not being displayed.
