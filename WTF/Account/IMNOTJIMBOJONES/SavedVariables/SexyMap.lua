@@ -1,7 +1,5 @@
 
 SexyMap2DB = {
-	["presets"] = {
-	},
 	["global"] = {
 		["ping"] = {
 			["showPing"] = true,
@@ -34,49 +32,49 @@ SexyMap2DB = {
 				["GameTimeFrame"] = "never",
 				["TimeManagerClockButton"] = "never",
 				["MinimapZoomOut"] = "never",
-				["VuhDoMinimapButton"] = "never",
+				["MiniMapWorldMapButton"] = "never",
 				["MinimapZoomIn"] = "never",
 				["DBMMinimapButton"] = "never",
 				["MiniMapTracking"] = "never",
 				["MinimapZoneTextButton"] = "hover",
 				["GuildInstanceDifficulty"] = "always",
-				["MiniMapWorldMapButton"] = "never",
+				["VuhDoMinimapButton"] = "never",
 			},
 			["dragPositions"] = {
-				["MiniMapMailFrame"] = 253.5973093807178,
 				["QueueStatusMinimapButton"] = 162.4948010612572,
+				["MiniMapMailFrame"] = 253.5973093807178,
 			},
 			["controlVisibility"] = true,
 		},
 		["hudmap"] = {
 			["useQuestHelper"] = true,
 			["useRoutes"] = true,
-			["hudColor"] = {
-			},
+			["useGatherMate"] = true,
 			["scale"] = 1.4,
 			["textColor"] = {
 				["a"] = 1,
-				["b"] = 0.5,
-				["g"] = 1,
 				["r"] = 0.5,
+				["g"] = 1,
+				["b"] = 0.5,
 			},
 			["alpha"] = 0.7,
-			["useGatherMate"] = true,
+			["hudColor"] = {
+			},
 		},
 		["zonetext"] = {
 			["bgColor"] = {
 				["a"] = 1,
-				["b"] = 0,
-				["g"] = 0,
 				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
 			},
 			["fontColor"] = {
 			},
 			["borderColor"] = {
 				["a"] = 1,
-				["b"] = 0,
-				["g"] = 0,
 				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
 			},
 			["xOffset"] = 0,
 			["yOffset"] = -20,
@@ -89,17 +87,17 @@ SexyMap2DB = {
 		["clock"] = {
 			["bgColor"] = {
 				["a"] = 1,
-				["b"] = 0,
-				["g"] = 0,
 				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
 			},
 			["fontColor"] = {
 			},
 			["borderColor"] = {
 				["a"] = 1,
-				["b"] = 0,
-				["g"] = 0,
 				["r"] = 0,
+				["g"] = 0,
+				["b"] = 0,
 			},
 			["xOffset"] = 0,
 			["yOffset"] = 0,
@@ -107,20 +105,6 @@ SexyMap2DB = {
 		["borders"] = {
 			["applyPreset"] = false,
 			["borders"] = {
-				{
-					["a"] = 0.5,
-					["rotSpeed"] = 0,
-					["b"] = 1,
-					["scale"] = 1.48,
-					["g"] = 1,
-					["vNudge"] = -4,
-					["drawLayer"] = "OVERLAY",
-					["name"] = "RenaitreFadeGloss",
-					["r"] = 1,
-					["disableRotation"] = true,
-					["rotation"] = 225,
-					["texture"] = "Interface\\Addons\\SexyMap\\media\\RenaitreFadeGloss",
-				}, -- [1]
 			},
 			["backdrop"] = {
 				["show"] = false,
@@ -144,12 +128,6 @@ SexyMap2DB = {
 			},
 			["hideBlizzard"] = true,
 		},
-		["movers"] = {
-			["enabled"] = false,
-			["framePositions"] = {
-			},
-			["lock"] = false,
-		},
 		["core"] = {
 			["clamp"] = true,
 			["point"] = "BOTTOMRIGHT",
@@ -163,6 +141,14 @@ SexyMap2DB = {
 			["shape"] = "SPELLS\\T_VFX_BORDER",
 			["rightClickToConfig"] = false,
 		},
+		["movers"] = {
+			["enabled"] = false,
+			["framePositions"] = {
+			},
+			["lock"] = false,
+		},
+	},
+	["presets"] = {
 	},
 	["Pezzer-Burning Blade"] = "global",
 }
