@@ -447,7 +447,10 @@ function A:GetSpecInfos(group)
 	if ( not group ) then group = GetActiveSpecGroup(false); end
 
     local specId = GetSpecialization(false, false, group);
-    local _, spec, _, icon = GetSpecializationInfo(specId, false, false);
+
+    if ( specId ) then
+        _, spec, _, icon = GetSpecializationInfo(specId, false, false);
+    end
 
     for i=1,maxNumTalents do
         _, _, _, column, selected = GetTalentInfo(i, false, group);
@@ -634,7 +637,7 @@ function A:OnInitialize()
 					CloseDropDownMenus();
 					A.menuFrame.initialize = DropdownMenu;
 				end
-				ToggleDropDownMenu(1, nil, A.menuFrame, self:GetName(), 0, 0);
+                ToggleDropDownMenu(1, nil, A.menuFrame, self, 0, 0);
 				GameTooltip:Hide();
 			end
 		end,

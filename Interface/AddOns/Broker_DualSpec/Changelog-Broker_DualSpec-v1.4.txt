@@ -1,9 +1,22 @@
 ------------------------------------------------------------------------
-r26 | shenton | 2012-08-31 00:54:34 +0000 (Fri, 31 Aug 2012) | 1 line
+r29 | shenton | 2012-09-03 15:44:32 +0000 (Mon, 03 Sep 2012) | 1 line
 Changed paths:
-   A /tags/v1.3 (from /trunk:25)
+   A /tags/v1.4 (from /trunk:28)
 
-Tagging as v1.3
+Tagging as v1.4
+------------------------------------------------------------------------
+r28 | shenton | 2012-09-03 15:39:13 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Core.lua
+
+ToggleDropDownMenu anchor fix
+------------------------------------------------------------------------
+r27 | shenton | 2012-09-03 03:46:40 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix dual spec detection with no spec
 ------------------------------------------------------------------------
 r25 | shenton | 2012-08-31 00:48:20 +0000 (Fri, 31 Aug 2012) | 2 lines
 Changed paths:
