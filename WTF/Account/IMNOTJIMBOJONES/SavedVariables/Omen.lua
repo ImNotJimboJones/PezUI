@@ -6,10 +6,11 @@ Omen3DB = {
 	["profiles"] = {
 		["Default"] = {
 			["PositionW"] = 307.3305969238281,
-			["Scale"] = 1.05,
+			["Shown"] = true,
 			["PositionH"] = 82.98379516601563,
 			["VGrip2"] = 176.7151452445352,
 			["PositionY"] = 111.4880523681641,
+			["Locked"] = true,
 			["Background"] = {
 				["BorderTexture"] = "None",
 				["Color"] = {
@@ -35,7 +36,7 @@ Omen3DB = {
 					["sink20OutputSink"] = "Default",
 				},
 			},
-			["Shown"] = true,
+			["Scale"] = 1.05,
 			["TitleBar"] = {
 				["ShowTitleBar"] = false,
 			},
