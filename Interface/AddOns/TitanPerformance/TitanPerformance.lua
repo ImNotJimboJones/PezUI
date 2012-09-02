@@ -545,7 +545,7 @@ end
 -- NAME : Stats_UpdateAddonsList(self, watchingCPU)
 -- DESC : Execute garbage collection for Leftclick on button
 -- **************************************************************************
-function Stats_UpdateAddonsList(self, watchingCPU)
+local function Stats_UpdateAddonsList(self, watchingCPU)
 	if(watchingCPU) then
 		UpdateAddOnCPUUsage()
 	else

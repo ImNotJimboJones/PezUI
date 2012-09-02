@@ -253,6 +253,7 @@ end
 -- DESC : Update data on button
 -- **************************************************************************
 function TitanPanelLocationButton_UpdateZoneInfo(self)
+	local _ = nil
 	self.zoneText = GetZoneText();
 	self.subZoneText = GetSubZoneText();
 	--self.minimapZoneText = GetMinimapZoneText();

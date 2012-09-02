@@ -118,6 +118,7 @@ end
 function TitanPanelClockButton_GetButtonText()
 	local clocktime = "";	
 	local labeltext = "";
+	local _ = nil
 	if TitanGetVar(TITAN_CLOCK_ID, "TimeMode") == "Server" then
 		_,clocktime = TitanPanelClockButton_GetTime("Server", 0)
 		labeltext = TitanGetVar(TITAN_CLOCK_ID, "ShowLabelText") and TitanPanelClockButton_GetColored("(S) ")	or ""	

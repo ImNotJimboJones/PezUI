@@ -67,6 +67,10 @@ TITAN_PANEL_CONSTANTS = {
 	FONT_SIZE = 10,
 	FONT_NAME = "Friz Quadrata TT"
 }
+if (GetLocale() == "ruRU") then
+    -- Special fix for Russian - "Friz Quadrata TT" does not seem to work
+	TITAN_PANEL_CONSTANTS.FONT_NAME = "Arial Narrow"
+end
 local TPC = TITAN_PANEL_CONSTANTS -- shortcut
 
 TITAN_CUSTOM_PROFILE_POSTFIX = "TitanCustomProfile"
@@ -507,7 +511,9 @@ OUT: None
 --]]
 local function Sync_panel_settings(settings) 
 	-- Synchronize registered and saved variables
+--TitanDebug("Sync_1: "..(settings.FontName or "?"))
 	TitanVariables_SyncRegisterSavedVariables(settings, TitanPanelSettings)
+--TitanDebug("Sync_2: "..(TitanPanelSettings.FontName or "?"))
 end
 
 --[[ local

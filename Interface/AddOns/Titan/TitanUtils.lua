@@ -371,7 +371,7 @@ OUT: string - string with localized, estimated elapsed time using spaces and lea
 --]]
 function TitanUtils_GetEstTimeText(s)
 	local timeText = "";
-	days, hours, minutes, seconds = GetTimeParts(s)
+	local days, hours, minutes, seconds = GetTimeParts(s)
 	local fracdays = days + (hours/24);
 	local frachours = hours + (minutes/60);
 	if seconds == L["TITAN_NA"] then
@@ -397,7 +397,7 @@ VAR: s - a time value in seconds
 OUT: string - string with localized days, hours, minutes, and seconds using commas and including zeroes
 --]]
 function TitanUtils_GetFullTimeText(s)
-	days, hours, minutes, seconds = GetTimeParts(s)
+	local days, hours, minutes, seconds = GetTimeParts(s)
 	if seconds == L["TITAN_NA"] then
 		return L["TITAN_NA"];
 	else
@@ -417,7 +417,7 @@ OUT: string - string with localized days, hours, minutes, and seconds using spac
 --]]
 function TitanUtils_GetAbbrTimeText(s) -- Used by plugins
 	local timeText = "";
-	days, hours, minutes, seconds = GetTimeParts(s)
+	local days, hours, minutes, seconds = GetTimeParts(s)
 	if seconds == L["TITAN_NA"] then
 		timeText = L["TITAN_NA"];
 	else
@@ -1234,6 +1234,7 @@ local function TitanUtils_RegisterPluginProtected(plugin)
 	local issue = nil
 	local id = nil
 	local cat = nil
+	local ptype = nil
 	local notes = ""
 
 	local self = plugin.self

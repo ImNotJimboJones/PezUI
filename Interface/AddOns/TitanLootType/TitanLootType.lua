@@ -250,7 +250,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()
@@ -271,7 +271,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()
@@ -293,7 +293,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()
@@ -314,7 +314,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()
@@ -335,7 +335,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()
@@ -356,7 +356,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 		inParty = 1;
 	end
 	local isLeader = 0;
-	 if (IsPartyLeader() or IsRaidLeader()) then
+	 if (UnitIsGroupLeader("player")) then
 		isLeader = 1;
 	 end
 	local inInstance = IsInInstance()

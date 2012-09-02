@@ -31,6 +31,7 @@ local _G = getfenv(0);
 
  local function comma_value(amount)
   local formatted = amount
+  local k
   while true do  
     formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
     if (k==0) then
@@ -40,7 +41,7 @@ local _G = getfenv(0);
   return formatted
 end
 
-function NiceCash(value, show_zero, show_neg, show_labels)
+local function NiceCash(value, show_zero, show_neg, show_labels)
 --
 -- Take the 'amount' of gold and make it into a nice, colorful string
 -- of g s c (gold silver copper)
