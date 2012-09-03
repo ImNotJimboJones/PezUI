@@ -31,9 +31,9 @@ IonGDB = {
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1",
 			["snapToFrame"] = false,
-			["point"] = "TOPRIGHT",
 			["auracolor2"] = "1;0.1;0.1;1",
 			["showGrid"] = false,
+			["point"] = "TOPRIGHT",
 			["cdcolor1"] = "1;0.82;0;1",
 			["autoHide"] = false,
 		}, -- [1]
@@ -2473,18 +2473,19 @@ IonGDB = {
 				["debuffcolor"] = "0.8;0;0;1",
 				["bindText"] = true,
 				["upClicks"] = true,
+				["target"] = "none",
 				["countText"] = true,
-				["countColor"] = "1;1;1;1",
 				["cdText"] = false,
+				["countColor"] = "1;1;1;1",
+				["cdcolor2"] = "1;0.1;0.1;1",
 				["buffcolor"] = "0;0.8;0;1",
 				["alpha"] = 1,
 				["equipcolor"] = "0.1;1;0.1;1",
 				["rangecolor"] = "0.7;0.15;0.15;1",
-				["cdcolor2"] = "1;0.1;0.1;1",
-				["skincolor"] = "1;1;1;1",
-				["auraText"] = false,
-				["auracolor2"] = "1;0.1;0.1;1",
 				["scale"] = 1,
+				["auraText"] = false,
+				["skincolor"] = "1;1;1;1",
+				["auracolor2"] = "1;0.1;0.1;1",
 				["muteSFX"] = false,
 				["XOffset"] = 0,
 			},
@@ -2523,17 +2524,17 @@ IonGDB = {
 				["bindText"] = true,
 				["upClicks"] = true,
 				["countText"] = true,
-				["countColor"] = "1;1;1;1",
 				["cdText"] = false,
+				["countColor"] = "1;1;1;1",
+				["cdcolor2"] = "1;0.1;0.1;1",
 				["buffcolor"] = "0;0.8;0;1",
 				["alpha"] = 1,
 				["equipcolor"] = "0.1;1;0.1;1",
 				["rangecolor"] = "0.7;0.15;0.15;1",
-				["cdcolor2"] = "1;0.1;0.1;1",
-				["skincolor"] = "1;1;1;1",
-				["auraText"] = false,
-				["auracolor2"] = "1;0.1;0.1;1",
 				["scale"] = 1,
+				["auraText"] = false,
+				["skincolor"] = "1;1;1;1",
+				["auracolor2"] = "1;0.1;0.1;1",
 				["muteSFX"] = false,
 				["XOffset"] = 0,
 			},
@@ -4205,7 +4206,23 @@ IonGDB = {
 			},
 		}, -- [85]
 	},
-	["vehicle"] = false,
+	["xbtns"] = {
+		{
+			["keys"] = {
+				["hotKeyText"] = ":",
+				["hotKeyLock"] = false,
+				["hotKeys"] = ":",
+				["hotKeyPri"] = true,
+			},
+			["config"] = {
+				["stored"] = false,
+			},
+		}, -- [1]
+	},
+	["buttonLoc"] = {
+		-0.85, -- [1]
+		-111.45, -- [2]
+	},
 	["bars"] = {
 		{
 			["arcLength"] = 359,
@@ -4215,7 +4232,7 @@ IonGDB = {
 			["bindColor"] = "1;1;1;1",
 			["snapToPad"] = 0,
 			["hidestates"] = ":",
-			["y"] = 160,
+			["y"] = 202,
 			["x"] = 0,
 			["name"] = "Action Bar",
 			["padH"] = 1,
@@ -4223,7 +4240,7 @@ IonGDB = {
 			["shape"] = 1,
 			["auracolor1"] = "0;0.82;0;1",
 			["macroColor"] = "1;1;1;1",
-			["scale"] = 0.46,
+			["scale"] = 0.53,
 			["cdcolor2"] = "1;0.1;0.1;1",
 			["padV"] = 3,
 			["debuffcolor"] = "0.8;0;0;1",
@@ -4251,15 +4268,15 @@ IonGDB = {
 			["bindColor"] = "1;1;1;1",
 			["snapToPad"] = 0,
 			["hidestates"] = ":",
-			["y"] = 211.0000152587891,
-			["x"] = 211.3000030517578,
+			["y"] = 254.9998016357422,
+			["x"] = 236.0000457763672,
 			["name"] = "Action Bar (left)",
-			["padH"] = 3.5,
+			["padH"] = 4.2,
 			["barStrata"] = "MEDIUM",
 			["shape"] = 1,
 			["auracolor1"] = "0;0.82;0;1",
 			["macroColor"] = "1;1;1;1",
-			["scale"] = 0.6,
+			["scale"] = 0.76,
 			["cdcolor2"] = "1;0.1;0.1;1",
 			["padV"] = 0,
 			["debuffcolor"] = "0.8;0;0;1",
@@ -4271,7 +4288,7 @@ IonGDB = {
 			["alpha"] = 0.45,
 			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
-			["objectList"] = "13;14;15;16;17;18;19;20;21;22;23;24;49;50;51",
+			["objectList"] = "13;14;15;16;17;18;19;20;21;22;23;24;49",
 			["point"] = "BOTTOMLEFT",
 			["showGrid"] = false,
 			["auracolor2"] = "1;0.1;0.1;1",
@@ -4280,30 +4297,14 @@ IonGDB = {
 			["alphaUp"] = "Mouseover",
 		}, -- [2]
 	},
-	["xbtns"] = {
-		{
-			["keys"] = {
-				["hotKeyText"] = ":",
-				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
-				["hotKeyPri"] = true,
-			},
-			["config"] = {
-				["stored"] = false,
-			},
-		}, -- [1]
-	},
 	["buttonRadius"] = 87.5,
 	["snapToTol"] = 28,
 	["throttle"] = 0.2,
 	["mainbar"] = false,
 	["betaWarning"] = false,
 	["timerLimit"] = 4,
-	["buttonLoc"] = {
-		-0.85, -- [1]
-		-111.45, -- [2]
-	},
 	["xbarFirstRun"] = false,
+	["vehicle"] = false,
 	["firstRun"] = false,
 }
 IonItemCache = {
