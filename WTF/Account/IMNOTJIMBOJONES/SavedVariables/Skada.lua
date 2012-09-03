@@ -7,51 +7,54 @@ SkadaDB = {
 		["Default"] = {
 			["showtotals"] = true,
 			["modules"] = {
-				["ccannounce"] = true,
 				["ccignoremaintanks"] = true,
+				["ccannounce"] = true,
 			},
 			["windows"] = {
 				{
-					["barheight"] = 14,
+					["barheight"] = 16,
 					["classicons"] = false,
 					["barslocked"] = true,
 					["set"] = "total",
-					["y"] = 0.8365733041793972,
+					["y"] = 2.0002281665802,
 					["barfont"] = "Arial Narrow",
 					["title"] = {
 						["color"] = {
 							["a"] = 0,
-							["r"] = 0.1019607843137255,
-							["g"] = 0.1019607843137255,
 							["b"] = 0.3019607843137255,
+							["g"] = 0.1019607843137255,
+							["r"] = 0.1019607843137255,
 						},
 						["font"] = "Arial Narrow",
+						["fontsize"] = 12,
+						["height"] = 20,
 						["texture"] = "Minimalist",
 					},
+					["point"] = "BOTTOM",
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
-						["r"] = 0.3019607843137255,
-						["g"] = 0.3019607843137255,
 						["b"] = 0.3019607843137255,
+						["g"] = 0.3019607843137255,
+						["r"] = 0.3019607843137255,
 					},
+					["mode"] = "DPS",
+					["bartexture"] = "Minimalist",
+					["barwidth"] = 194.1307830810547,
+					["barspacing"] = 1,
+					["x"] = 383.2108764648438,
+					["barcolor"] = {
+						["b"] = 0.7490196078431373,
+						["g"] = 0.7490196078431373,
+						["r"] = 0.7490196078431373,
+					},
+					["barfontsize"] = 13,
 					["background"] = {
-						["height"] = 106.1333103916941,
 						["color"] = {
 							["a"] = 0,
 							["b"] = 0.5019607843137255,
 						},
+						["height"] = 136.1332244873047,
 					},
-					["bartexture"] = "Minimalist",
-					["barwidth"] = 188.1307090778795,
-					["barspacing"] = 1,
-					["point"] = "BOTTOM",
-					["barcolor"] = {
-						["r"] = 0.7490196078431373,
-						["g"] = 0.7490196078431373,
-						["b"] = 0.7490196078431373,
-					},
-					["mode"] = "Damage taken",
-					["x"] = 279.7109085374698,
 				}, -- [1]
 			},
 			["icon"] = {
