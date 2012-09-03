@@ -7,18 +7,18 @@ RecountDB = {
 		["Default"] = {
 			["GraphWindowY"] = 0,
 			["MainWindow"] = {
+				["Position"] = {
+					["y"] = -453.9116821289063,
+					["x"] = -383.9782104492188,
+					["w"] = 198.529541015625,
+					["h"] = 172.176513671875,
+				},
+				["ShowScrollbar"] = false,
 				["Buttons"] = {
 					["CloseButton"] = false,
 					["LeftButton"] = false,
 					["ConfigButton"] = false,
 					["RightButton"] = false,
-				},
-				["ShowScrollbar"] = false,
-				["Position"] = {
-					["y"] = -385.0397134700929,
-					["x"] = -279.649936852933,
-					["w"] = 225.000066540784,
-					["h"] = 153.0000025303279,
 				},
 				["HideTotalBar"] = false,
 				["BarText"] = {
@@ -28,14 +28,14 @@ RecountDB = {
 			},
 			["MainWindowMode"] = 2,
 			["MaxFights"] = 25,
-			["MainWindowHeight"] = 152.968472183251,
+			["MainWindowHeight"] = 172.176513671875,
 			["ClampToScreen"] = true,
 			["Colors"] = {
 				["Other Windows"] = {
 					["Title"] = {
-						["r"] = 0.392156862745098,
-						["g"] = 0.392156862745098,
 						["b"] = 0.392156862745098,
+						["g"] = 0.392156862745098,
+						["r"] = 0.392156862745098,
 					},
 				},
 				["Window"] = {
@@ -53,18 +53,17 @@ RecountDB = {
 					},
 					["Total Bar"] = {
 						["a"] = 1,
-						["r"] = 0.7490196078431373,
-						["g"] = 0.7490196078431373,
 						["b"] = 0.7490196078431373,
+						["g"] = 0.7490196078431373,
+						["r"] = 0.7490196078431373,
 					},
 				},
 			},
-			["DetailWindowY"] = -51.00000376129817,
-			["DetailWindowX"] = 8,
+			["DetailWindowY"] = -43.35002517700195,
+			["DetailWindowX"] = 6.799993991851807,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
-			["Scaling"] = 0.85,
-			["BarTextColorSwap"] = false,
+			["LastInstanceName"] = "Eye of the Storm",
 			["BarTexture"] = "Minimalist",
 			["RealtimeWindows"] = {
 				["Realtime_FPS_FPS"] = {
@@ -88,9 +87,9 @@ RecountDB = {
 					false, -- [8]
 				},
 			},
-			["CurDataSet"] = "LastFightData",
-			["LastInstanceName"] = "Ulduar",
-			["MainWindowWidth"] = 225.0157529322226,
+			["CurDataSet"] = "OverallData",
+			["BarTextColorSwap"] = false,
+			["MainWindowWidth"] = 198.529541015625,
 		},
 		["Pezzer - Burning Blade"] = {
 			["GraphWindowY"] = 0,
@@ -99,38 +98,31 @@ RecountDB = {
 				["BarText"] = {
 					["NumFormat"] = 3,
 				},
+				["Buttons"] = {
+					["ConfigButton"] = false,
+					["CloseButton"] = false,
+					["RightButton"] = false,
+					["LeftButton"] = false,
+				},
 				["Position"] = {
 					["y"] = -411.5000305175781,
 					["h"] = 137,
 					["w"] = 169,
 					["x"] = -311.9999694824219,
 				},
-				["Buttons"] = {
-					["CloseButton"] = false,
-					["ConfigButton"] = false,
-					["RightButton"] = false,
-					["LeftButton"] = false,
-				},
 			},
 			["DetailWindowX"] = 0,
 			["MaxFights"] = 25,
 			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
-			["DetailWindowY"] = 0,
+			["MainWindowHeight"] = 137,
 			["CurDataSet"] = "OverallData",
 			["Colors"] = {
 				["Window"] = {
 					["Title"] = {
-						["r"] = 0.392156862745098,
-						["g"] = 0.392156862745098,
 						["b"] = 0.392156862745098,
-					},
-				},
-				["Other Windows"] = {
-					["Title"] = {
-						["r"] = 0.392156862745098,
 						["g"] = 0.392156862745098,
-						["b"] = 0.392156862745098,
+						["r"] = 0.392156862745098,
 					},
 				},
 				["Bar"] = {
@@ -141,12 +133,19 @@ RecountDB = {
 						["a"] = 1,
 					},
 				},
+				["Other Windows"] = {
+					["Title"] = {
+						["b"] = 0.392156862745098,
+						["g"] = 0.392156862745098,
+						["r"] = 0.392156862745098,
+					},
+				},
 			},
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,
-			["MainWindowHeight"] = 137,
+			["GraphWindowX"] = 0,
 		},
 	},
 }
