@@ -132,29 +132,26 @@ MSBTProfiles_SavedVars = {
 				["INCOMING_BLOCK"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["NOTIFICATION_CHI_CHANGE"] = {
-					["disabled"] = true,
-				},
 				["PET_INCOMING_DODGE"] = {
 					["scrollArea"] = "Custom2",
-				},
-				["INCOMING_SPELL_DOT_CRIT"] = {
-					["scrollArea"] = "Custom2",
-				},
-				["NOTIFICATION_SHADOW_ORBS_FULL"] = {
-					["disabled"] = true,
 				},
 				["NOTIFICATION_DEBUFF"] = {
 					["disabled"] = true,
 				},
-				["NOTIFICATION_LOOT"] = {
+				["NOTIFICATION_SHADOW_ORBS_FULL"] = {
 					["disabled"] = true,
 				},
-				["NOTIFICATION_MONEY"] = {
+				["INCOMING_SPELL_DOT_CRIT"] = {
+					["scrollArea"] = "Custom2",
+				},
+				["NOTIFICATION_LOOT"] = {
 					["disabled"] = true,
 				},
 				["PET_INCOMING_DAMAGE_CRIT"] = {
 					["scrollArea"] = "Custom2",
+				},
+				["NOTIFICATION_MONEY"] = {
+					["disabled"] = true,
 				},
 				["PET_INCOMING_MISS"] = {
 					["scrollArea"] = "Custom2",
@@ -171,20 +168,20 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_BLOCK"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_DAMAGE"] = {
-					["scrollArea"] = "Custom2",
-				},
-				["PET_INCOMING_SPELL_ABSORB"] = {
-					["scrollArea"] = "Custom2",
-				},
 				["PET_INCOMING_SPELL_DEFLECT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["PET_INCOMING_DAMAGE"] = {
+				["INCOMING_DAMAGE"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_BUFF_STACK"] = {
 					["disabled"] = true,
+				},
+				["PET_INCOMING_DAMAGE"] = {
+					["scrollArea"] = "Custom2",
+				},
+				["PET_INCOMING_SPELL_ABSORB"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_BLOCK"] = {
 					["scrollArea"] = "Custom2",
@@ -204,21 +201,24 @@ MSBTProfiles_SavedVars = {
 				["PET_INCOMING_SPELL_RESIST"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["INCOMING_MISS"] = {
+				["PET_INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_DOT"] = {
 					["scrollArea"] = "Custom2",
 				},
-				["PET_INCOMING_SPELL_DAMAGE_SHIELD"] = {
+				["INCOMING_MISS"] = {
+					["scrollArea"] = "Custom2",
+				},
+				["INCOMING_SPELL_DAMAGE_SHIELD"] = {
 					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_HEAL_CRIT"] = {
 					["scrollArea"] = "Custom1",
 					["fontSize"] = false,
 				},
-				["INCOMING_SPELL_DAMAGE_SHIELD"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_CHI_CHANGE"] = {
+					["disabled"] = true,
 				},
 				["INCOMING_SPELL_INTERRUPT"] = {
 					["scrollArea"] = "Custom2",
@@ -286,21 +286,21 @@ MSBTProfiles_SavedVars = {
 			},
 			["scrollAreas"] = {
 				["Incoming"] = {
-					["scrollHeight"] = 90,
 					["stickyTextAlignIndex"] = 2,
 					["disabled"] = true,
 					["behavior"] = "MSBT_NORMAL",
-					["stickyDirection"] = "Up",
 					["scrollWidth"] = 100,
-					["offsetX"] = 526,
+					["stickyDirection"] = "Up",
+					["scrollHeight"] = 90,
+					["offsetX"] = 523,
 					["offsetY"] = -370,
 					["animationStyle"] = "Straight",
 				},
 				["Custom2"] = {
 					["name"] = "Incoming Damage",
-					["scrollWidth"] = 100,
-					["offsetX"] = 526,
 					["direction"] = "Down",
+					["offsetX"] = 523,
+					["scrollWidth"] = 100,
 					["stickyBehavior"] = "Jiggle",
 					["offsetY"] = -370,
 					["scrollHeight"] = 90,
@@ -308,12 +308,12 @@ MSBTProfiles_SavedVars = {
 				["Outgoing"] = {
 					["stickyTextAlignIndex"] = 3,
 					["behavior"] = "MSBT_NORMAL",
-					["animationStyle"] = "Straight",
+					["scrollWidth"] = 100,
 					["direction"] = "Up",
 					["stickyDirection"] = "Up",
 					["scrollHeight"] = 90,
 					["offsetX"] = 714,
-					["scrollWidth"] = 100,
+					["animationStyle"] = "Straight",
 					["iconAlign"] = "Left",
 					["offsetY"] = -370,
 					["textAlignIndex"] = 3,
@@ -324,12 +324,12 @@ MSBTProfiles_SavedVars = {
 				},
 				["Custom1"] = {
 					["direction"] = "Up",
-					["name"] = "Incoming Heals",
+					["offsetX"] = 313,
 					["stickyBehavior"] = "Jiggle",
 					["scrollWidth"] = 100,
 					["stickyDirection"] = "Up",
 					["scrollHeight"] = 90,
-					["offsetX"] = 318,
+					["name"] = "Incoming Heals",
 					["stickyTextAlignIndex"] = 1,
 					["offsetY"] = -370,
 					["textAlignIndex"] = 1,
