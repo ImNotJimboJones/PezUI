@@ -19,7 +19,6 @@ BazookaDB = {
 		["Default"] = {
 			["numBars"] = 3,
 			["adjustFrames"] = false,
-			["locked"] = true,
 			["plugins"] = {
 				["data source"] = {
 					["YssEquipmentBroker"] = {
@@ -287,10 +286,8 @@ BazookaDB = {
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
@@ -350,8 +347,10 @@ BazookaDB = {
 					["ElkExperience"] = {
 						["pos"] = 5,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["SN - Vengeance"] = {
 						["pos"] = 16,
@@ -517,18 +516,18 @@ BazookaDB = {
 					["bgEnabled"] = false,
 					["bgTexture"] = "None",
 					["centerSpacing"] = 8,
-					["y"] = 1.27897047996521,
+					["y"] = 1.278957605361939,
 					["relPoint"] = "BOTTOMRIGHT",
-					["frameWidth"] = 470,
+					["frameWidth"] = 486.9999389648438,
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMRIGHT",
 					["pluginOpacity"] = 0.75,
 					["iconSize"] = 14,
-					["frameHeight"] = 26,
+					["frameHeight"] = 26.00000190734863,
 					["attach"] = "none",
 					["rightSpacing"] = 4,
-					["x"] = -0.5021693110466003,
+					["x"] = -1.501980781555176,
 					["fadeInCombat"] = true,
 					["textColor"] = {
 						["a"] = 1,
@@ -536,17 +535,17 @@ BazookaDB = {
 				}, -- [2]
 				{
 					["bgEnabled"] = false,
-					["y"] = 1.302266597747803,
+					["y"] = 1.302251696586609,
 					["relPoint"] = "BOTTOMLEFT",
 					["leftSpacing"] = 15,
-					["frameWidth"] = 470,
+					["frameWidth"] = 487,
 					["pos"] = 0,
 					["fontSize"] = 10,
 					["point"] = "BOTTOMLEFT",
-					["x"] = 1.170600771903992,
+					["x"] = 2.17059063911438,
 					["pluginOpacity"] = 0.75,
 					["iconSize"] = 14,
-					["frameHeight"] = 26.00001335144043,
+					["frameHeight"] = 26.00001525878906,
 					["fadeInCombat"] = true,
 				}, -- [3]
 			},

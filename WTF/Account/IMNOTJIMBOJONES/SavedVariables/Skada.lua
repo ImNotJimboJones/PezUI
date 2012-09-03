@@ -16,8 +16,8 @@ SkadaDB = {
 					["classicons"] = false,
 					["barslocked"] = true,
 					["set"] = "total",
-					["y"] = 4.000177383422852,
-					["x"] = 384.7108154296875,
+					["y"] = 3.000383377075195,
+					["barfont"] = "Arial Narrow",
 					["title"] = {
 						["color"] = {
 							["a"] = 0,
@@ -38,10 +38,10 @@ SkadaDB = {
 						["b"] = 0.3019607843137255,
 					},
 					["bartexture"] = "Minimalist",
-					["barwidth"] = 194.1309051513672,
+					["barwidth"] = 210.1308898925781,
 					["barspacing"] = 1,
 					["background"] = {
-						["height"] = 136.1332244873047,
+						["height"] = 121.1332244873047,
 						["color"] = {
 							["a"] = 0,
 							["b"] = 0.5019607843137255,
@@ -54,7 +54,7 @@ SkadaDB = {
 					},
 					["barfontsize"] = 13,
 					["mode"] = "DPS",
-					["barfont"] = "Arial Narrow",
+					["x"] = 356.710693359375,
 				}, -- [1]
 			},
 			["icon"] = {
