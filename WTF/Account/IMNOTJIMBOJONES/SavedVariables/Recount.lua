@@ -7,18 +7,18 @@ RecountDB = {
 		["Default"] = {
 			["GraphWindowY"] = 0,
 			["MainWindow"] = {
-				["Position"] = {
-					["y"] = -453.9116821289063,
-					["x"] = -383.9782104492188,
-					["w"] = 198.529541015625,
-					["h"] = 172.176513671875,
-				},
-				["ShowScrollbar"] = false,
 				["Buttons"] = {
 					["CloseButton"] = false,
 					["LeftButton"] = false,
 					["ConfigButton"] = false,
 					["RightButton"] = false,
+				},
+				["ShowScrollbar"] = false,
+				["Position"] = {
+					["y"] = -452.499626159668,
+					["x"] = -384.0000610351563,
+					["w"] = 199.0001220703125,
+					["h"] = 168.9999847412109,
 				},
 				["HideTotalBar"] = false,
 				["BarText"] = {
@@ -26,16 +26,15 @@ RecountDB = {
 				},
 				["RowHeight"] = 16,
 			},
-			["MainWindowMode"] = 2,
 			["MaxFights"] = 25,
-			["MainWindowHeight"] = 172.176513671875,
+			["MainWindowHeight"] = 168.9999847412109,
 			["ClampToScreen"] = true,
 			["Colors"] = {
 				["Other Windows"] = {
 					["Title"] = {
-						["b"] = 0.392156862745098,
-						["g"] = 0.392156862745098,
 						["r"] = 0.392156862745098,
+						["g"] = 0.392156862745098,
+						["b"] = 0.392156862745098,
 					},
 				},
 				["Window"] = {
@@ -53,17 +52,17 @@ RecountDB = {
 					},
 					["Total Bar"] = {
 						["a"] = 1,
-						["b"] = 0.7490196078431373,
-						["g"] = 0.7490196078431373,
 						["r"] = 0.7490196078431373,
+						["g"] = 0.7490196078431373,
+						["b"] = 0.7490196078431373,
 					},
 				},
 			},
-			["DetailWindowY"] = -43.35002517700195,
-			["DetailWindowX"] = 6.799993991851807,
+			["DetailWindowY"] = -51.00000381469727,
+			["DetailWindowX"] = 8,
 			["GraphWindowX"] = 0,
 			["Locked"] = true,
-			["LastInstanceName"] = "Eye of the Storm",
+			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
 			["RealtimeWindows"] = {
 				["Realtime_FPS_FPS"] = {
@@ -88,8 +87,9 @@ RecountDB = {
 				},
 			},
 			["CurDataSet"] = "OverallData",
-			["BarTextColorSwap"] = false,
-			["MainWindowWidth"] = 198.529541015625,
+			["MainWindowMode"] = 2,
+			["LastInstanceName"] = "Eye of the Storm",
+			["MainWindowWidth"] = 199.0001220703125,
 		},
 		["Pezzer - Burning Blade"] = {
 			["GraphWindowY"] = 0,
@@ -98,31 +98,38 @@ RecountDB = {
 				["BarText"] = {
 					["NumFormat"] = 3,
 				},
-				["Buttons"] = {
-					["ConfigButton"] = false,
-					["CloseButton"] = false,
-					["RightButton"] = false,
-					["LeftButton"] = false,
-				},
 				["Position"] = {
 					["y"] = -411.5000305175781,
 					["h"] = 137,
 					["w"] = 169,
 					["x"] = -311.9999694824219,
 				},
+				["Buttons"] = {
+					["CloseButton"] = false,
+					["ConfigButton"] = false,
+					["RightButton"] = false,
+					["LeftButton"] = false,
+				},
 			},
 			["DetailWindowX"] = 0,
 			["MaxFights"] = 25,
 			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
-			["MainWindowHeight"] = 137,
+			["GraphWindowX"] = 0,
 			["CurDataSet"] = "OverallData",
 			["Colors"] = {
 				["Window"] = {
 					["Title"] = {
-						["b"] = 0.392156862745098,
-						["g"] = 0.392156862745098,
 						["r"] = 0.392156862745098,
+						["g"] = 0.392156862745098,
+						["b"] = 0.392156862745098,
+					},
+				},
+				["Other Windows"] = {
+					["Title"] = {
+						["r"] = 0.392156862745098,
+						["g"] = 0.392156862745098,
+						["b"] = 0.392156862745098,
 					},
 				},
 				["Bar"] = {
@@ -133,19 +140,12 @@ RecountDB = {
 						["a"] = 1,
 					},
 				},
-				["Other Windows"] = {
-					["Title"] = {
-						["b"] = 0.392156862745098,
-						["g"] = 0.392156862745098,
-						["r"] = 0.392156862745098,
-					},
-				},
 			},
 			["DetailWindowY"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,
-			["GraphWindowX"] = 0,
+			["MainWindowHeight"] = 137,
 		},
 	},
 }
