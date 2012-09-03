@@ -83,6 +83,14 @@ mog:AddURL("MMO-Champion",{
 	spell = "http://db.mmo-champion.com/s/%d/",
 });
 
+mog:AddURL("WOWDB",{
+	fav = "Interface\\AddOns\\MogIt\\Images\\fav_mmo",
+	item = "http://www.wowdb.com/items/%d",
+	set = "http://www.wowdb.com/item-sets/%d",
+	npc = "http://www.wowdb.com/npcs/%d",
+	spell = "http://www.wowdb.com/spells/%d",
+});
+
 mog:AddURL("Wowpedia",{
 	fav = "Interface\\AddOns\\MogIt\\Images\\fav_wp",
 	item = "http://www.wowpedia.org/index.php?search=\"{{elinks-item|%d}}\"",

@@ -1,0 +1,23 @@
+tag v4.0.0-beta36
+5101e0595eea64e686d052341a1a60794f6963d7
+Shefki <shefki@shefki.org>
+2012-09-03 16:57:12 -0700
+
+Tagging v4.0.0-beta36
+
+
+--------------------
+
+Shefki:
+	- Change the default color for the AltPowerBar to match what Blizzard uses in their raid frames.
+	- Update the logic for the AltPowerBar to avoid showing it when the game has flagged not to.
+	- Fix an error in the AlterPowerBar module that would make it show incorrect info for alternate powers where the minimum wasn't zero.
+	- Fix the typo in the AltPowerBar that someone I reverted again. Oops.
+	- Implement aura filters fully for Monk.
+	- Refix party and raid config mode after adding hiding of frames for pet battles.
+	When I yanked the old ForceShow code I forgot to leave it in place for
+	the Group frames.
+	- Handling hiding the frames during pet battles.
+	This also lays the ground work for user configured macro conditionals
+	for hiding/showing the frames.
+	- Prevent an error when the fader module starts trying to update before the layoutdb is loaded for the frame.

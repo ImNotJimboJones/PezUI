@@ -61,9 +61,11 @@ mod.options = {
 			name = ROTATE_MINIMAP,
 			desc = OPTION_TOOLTIP_ROTATE_MINIMAP,
 			get = function()
-				return GetCVar("rotateMinimap") == "1"
+				return InterfaceOptionsDisplayPanelRotateMinimap:GetValue() == "1" and true
 			end,
-			set = ToggleMiniMapRotation,
+			set = function()
+				InterfaceOptionsDisplayPanelRotateMinimap:Click()
+			end,
 		},
 		rightClickToConfig = {
 			order = 4,
@@ -176,8 +178,15 @@ mod.options = {
 			type = "toggle",
 			name = L["Use Global Profile"],
 			width = "full",
-			confirm = true,
-			confirmText = L["If no global profile exists, your current profile will be copied over and used.\n\nIf one already exists, your current profile will be erased and you'll be moved over to the global profile.\n\nThis will also reload your UI, are you sure?"],
+			confirm = function(info, v)
+				if v and SexyMap2DB.global then
+					return L["A global profile already exists. You will be switched over to it and your UI will be reloaded, are you sure?"]
+				elseif v and not SexyMap2DB.global then
+					return L["No global profile exists. Your current profile will be copied over and used as the global profile, are you sure? This will also reload your UI."]
+				elseif not v then
+					return L["Are you sure you want to switch back to using a character specific profile? This will reload your UI."]
+				end
+			end,
 			get = function()
 				local char = (UnitName("player").."-"..GetRealmName())
 				return type(SexyMap2DB[char]) == "string"
@@ -309,10 +318,17 @@ function mod:ADDON_LOADED(addon)
 				rightClickToConfig = true,
 				autoZoom = 5,
 				northTag = true,
-				shape = "Textures\\MinimapMask",
+				shape = "Interface\\AddOns\\SexyMap\\shapes\\circle.tga",
 			}
 		end
 		mod.db = dbToDispatch.core
+
+		-- XXX temp
+		if mod.db.shape == "Textures\\MinimapMask" then
+			mod.db.shape = "Interface\\AddOns\\SexyMap\\shapes\\circle.tga"
+		elseif mod.db.shape == "Interface\\AddOns\\SexyMap\\shapes\\squareFuzzy" then
+			mod.db.shape = "SPELLS\\T_VFX_BORDER"
+		end
 
 		mod.loadModules = {}
 		for k,v in pairs(sm) do
@@ -426,6 +442,7 @@ function mod:SetupMap()
 	MinimapBorderTop:Hide()
 	Minimap:RegisterForDrag("LeftButton")
 	Minimap:SetClampedToScreen(mod.db.clamp)
+	Minimap:SetFrameStrata("LOW")
 	Minimap:SetScale(mod.db.scale or 1)
 	Minimap:SetMovable(not mod.db.lock)
 
@@ -441,6 +458,7 @@ function mod:SetupMap()
 		Minimap:SetParent(UIParent)
 		Minimap:SetPoint(mod.db.point, UIParent, mod.db.relpoint, mod.db.x, mod.db.y)
 	end
+	self.SetupMap = nil
 end
 
 mod.frame:RegisterEvent("ADDON_LOADED")
@@ -481,6 +499,12 @@ do
 		-- Grab Icons
 		grabFrames(MinimapZoneTextButton, Minimap, MiniMapTrackingButton, TimeManagerClockButton, MinimapBackdrop:GetChildren())
 		grabFrames(MinimapCluster:GetChildren())
+		if FishingBuddyMinimapButton then -- XXX Let's try get the author to make a better icon
+			grabFrames(FishingBuddyMinimapButton)
+		end
+		if AtlasButton then -- XXX Let's try get the author to make a better icon
+			grabFrames(AtlasButton)
+		end
 		self.StartFrameGrab = nil
 	end
 end

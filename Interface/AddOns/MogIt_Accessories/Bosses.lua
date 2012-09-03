@@ -1,3 +1,3 @@
-local b=MogIt.AddMob
-b(9056,"Fineous Darkvire")
-b(11261,"Doctor Theolen Krastinov")
+local n=MogIt.base.AddNPC
+n(9056,"Fineous Darkvire")
+n(11261,"Doctor Theolen Krastinov")

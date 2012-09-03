@@ -1,30 +1,37 @@
-﻿## Interface: 40300
-## Author: Aelobin (The Maelstrom EU)
-## Version: 2.2.1
+﻿## Interface: 50001
+## Author: Aelobin (The Maelstrom EU) & Lombra (Shattered Hand EU)
+## Version: 3.0.0
 ## LoadOnDemand: 1
 ## RequiredDeps: MogIt
-## X-Curse-Packaged-Version: v2.3.0
+## X-MogItModuleVersion: 1
+## X-Curse-Packaged-Version: v3.0.2
 ## X-Curse-Project-Name: MogIt
 ## X-Curse-Project-ID: mogit
 ## X-Curse-Repository-ID: wow/mogit/mainline
 
 ## Title: MogIt_One-Hand
-## Title-deDE: MogIt_Einhändig
 ## Title-frFR: MogIt_A une main
+## Title-deDE: MogIt_Einhändig
 ## Title-esES: MogIt_Una Mano
+## Title-esMX: MogIt_Una Mano
 ## Title-ruRU: MogIt_Одноручное
 ## Title-koKR: MogIt_한손
-## Title-zhTW: MogIt_單手
 ## Title-zhCN: MogIt_单手
+## Title-zhTW: MogIt_單手
+## Title-ptBR: MogIt_Uma Mão
+## Title-itIT: MogIt_One-Hand
 
 ## Notes: MogIt Data
-## Notes-deDE: MogIt Daten
 ## Notes-frFR: MogIt Données
+## Notes-deDE: MogIt Daten
 ## Notes-esES: MogIt Datos
+## Notes-esMX: MogIt Datos
 ## Notes-ruRU: MogIt данные
 ## Notes-koKR: MogIt 데이터
-## Notes-zhTW: MogIt 的數據
 ## Notes-zhCN: MogIt 数据
+## Notes-zhTW: MogIt 的數據
+## Notes-ptBR: MogIt Dados
+## Notes-itIT: MogIt Dati
 
 Bosses.lua
 Colours.lua

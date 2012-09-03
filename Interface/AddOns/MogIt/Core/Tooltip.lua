@@ -5,6 +5,10 @@ local IsDressableItem = IsDressableItem;
 local GetScreenWidth = GetScreenWidth;
 local GetScreenHeight = GetScreenHeight;
 
+local class = L.classBits[select(2,UnitClass("PLAYER"))];
+
+
+--// Tooltip
 mog.tooltip = CreateFrame("Frame","MogItTooltip",UIParent);
 mog.tooltip:Hide();
 mog.tooltip:SetClampedToScreen(true);
@@ -17,58 +21,109 @@ mog.tooltip:SetBackdrop({
 });
 mog.tooltip:SetBackdropColor(0,0,0);
 
-mog.tooltip.slots = {
-	INVTYPE_HEAD = 0,
-	INVTYPE_SHOULDER = 0,
-	INVTYPE_CLOAK = 3.4,
-	INVTYPE_CHEST = 0,
-	INVTYPE_ROBE = 0,
-	INVTYPE_WRIST = 0,
-	INVTYPE_2HWEAPON = 1.6,
-	INVTYPE_WEAPON = 1.6,
-	INVTYPE_WEAPONMAINHAND = 1.6,
-	INVTYPE_WEAPONOFFHAND = -0.7,
-	INVTYPE_SHIELD = -0.7,
-	INVTYPE_HOLDABLE = -0.7,
-	INVTYPE_RANGED = 1.6,
-	INVTYPE_RANGEDRIGHT = 1.6,
-	INVTYPE_THROWN = 1.6,
-	INVTYPE_HAND = 0,
-	INVTYPE_WAIST = 0,
-	INVTYPE_LEGS = 0,
-	INVTYPE_FEET = 0,
-};
-mog.tooltip.mod = {
-	Shift = IsShiftKeyDown,
-	Ctrl = IsControlKeyDown,
-	Alt = IsAltKeyDown,
-};
-
-mog.tooltip.model = CreateFrame("DressUpModel",nil,mog.tooltip);
-mog.tooltip.model:SetPoint("TOPLEFT",mog.tooltip,"TOPLEFT",5,-5);
-mog.tooltip.model:SetPoint("BOTTOMRIGHT",mog.tooltip,"BOTTOMRIGHT",-5,5);
 mog.tooltip:SetScript("OnShow",function(self)
 	if mog.db.profile.tooltipMouse and not InCombatLockdown() then
 		SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELUP","MogIt_TooltipScrollUp");
 		SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELDOWN","MogIt_TooltipScrollDown");
 	end
 end);
+
 mog.tooltip:SetScript("OnHide",function(self)
 	if not InCombatLockdown() then
 		ClearOverrideBindings(mog.tooltip);
 	end
 end);
-mog.tooltip:RegisterEvent("PLAYER_REGEN_DISABLED");
-mog.tooltip:RegisterEvent("PLAYER_REGEN_ENABLED");
-mog.tooltip:SetScript("OnEvent", function(self, event)
-	if event == "PLAYER_REGEN_DISABLED" then
+
+mog.tooltip:SetScript("OnEvent", function(self, event, arg1)
+	if event == "PLAYER_LOGIN" then
+		mog.tooltip.model:SetUnit("PLAYER");
+	elseif event == "PLAYER_REGEN_DISABLED" then
 		ClearOverrideBindings(mog.tooltip);
-	elseif self:IsShown() and  mog.db.profile.tooltipMouse then
-		SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELUP","MogIt_TooltipScrollUp");
-		SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELDOWN","MogIt_TooltipScrollDown");
+	elseif event == "PLAYER_REGEN_ENABLED" then
+		if self:IsShown() and mog.db.profile.tooltipMouse then
+			SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELUP","MogIt_TooltipScrollUp");
+			SetOverrideBinding(mog.tooltip,true,"MOUSEWHEELDOWN","MogIt_TooltipScrollDown");
+		end
+	elseif event == "ADDON_LOADED" then
+		if arg1 == "AtlasLoot" then
+			mog.tooltip.hookAtlasLoot();
+		end
 	end
 end);
+mog.tooltip:RegisterEvent("PLAYER_LOGIN");
+mog.tooltip:RegisterEvent("PLAYER_REGEN_DISABLED");
+mog.tooltip:RegisterEvent("PLAYER_REGEN_ENABLED");
+mog.tooltip:RegisterEvent("ADDON_LOADED");
+--//
 
+
+--// Model
+mog.tooltip.model = CreateFrame("DressUpModel",nil,mog.tooltip);
+mog.tooltip.model:SetPoint("TOPLEFT",mog.tooltip,"TOPLEFT",5,-5);
+mog.tooltip.model:SetPoint("BOTTOMRIGHT",mog.tooltip,"BOTTOMRIGHT",-5,5);
+
+function mog.tooltip.ShowItem(self)
+	local _,itemLink = self:GetItem();
+	if not itemLink then
+		return;
+	end
+	local itemID = tonumber(itemLink:match("item:(%d+)"));
+	
+	local db = mog.db.profile
+	if db.tooltip and (not mog.tooltip.mod[db.tooltipMod] or mog.tooltip.mod[db.tooltipMod]()) then
+		if not self[mog] then
+			if mog.tooltip.item ~= itemLink then
+				mog.tooltip.item = itemLink;
+				local token = mog.tokens[itemID];
+				if token then
+					for item, classBit in pairs(token) do
+						if bit.band(class, classBit) > 0 then
+							itemLink = item;
+							break;
+						end
+					end
+				end
+				local slot = select(9,GetItemInfo(itemLink));
+				if (not db.tooltipMog or select(3, GetItemTransmogrifyInfo(itemLink))) and mog.tooltip.slots[slot] and IsDressableItem(itemLink) then
+					mog.tooltip.model:SetFacing(mog.tooltip.slots[slot]-(db.tooltipRotate and 0.5 or 0));
+					mog.tooltip:Show();
+					mog.tooltip.owner = self;
+					--if mog.global.tooltipAnchor then
+						mog.tooltip.repos:Show();
+					--else
+					--	mog.tooltip:ClearAllPoints();
+					--	mog.tooltip:SetPoint("BOTTOMRIGHT","UIParent","BOTTOMRIGHT",-CONTAINER_OFFSET_X - 13,CONTAINER_OFFSET_Y);
+					--end
+					if db.tooltipDress then
+						mog.tooltip.model:Dress();
+					else
+						mog.tooltip.model:Undress();
+					end
+					mog.tooltip.model:TryOn(itemLink);
+				else
+					mog.tooltip:Hide();
+				end
+			end
+		else
+			-- mog.tooltip:Hide();
+		end
+	end
+	
+	-- add wishlist info about this item
+	if not self[mog] and mog.wishlist:IsItemInWishlist(itemID) then
+		self:AddLine(" ");
+		self:AddLine(L["This item is on your wishlist."], 1, 1, 0);
+		self:AddTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcon_1");
+	end
+end
+
+function mog.tooltip.HideItem(self)
+	mog.tooltip.check:Show();
+end
+--//
+
+
+--// GameTooltip
 mog.tooltip.check = CreateFrame("Frame");
 mog.tooltip.check:Hide();
 mog.tooltip.check:SetScript("OnUpdate",function(self)
@@ -105,53 +160,52 @@ mog.tooltip.repos:SetScript("OnUpdate",function(self)
 	end
 end);
 
-function mog.tooltip.ShowItem(self)
-	if mog.db.profile.tooltip and (not mog.tooltip.mod[mog.db.profile.tooltipMod] or mog.tooltip.mod[mog.db.profile.tooltipMod]()) then
-		local _,itemLink = self:GetItem();
-		local owner = self:GetOwner();
-		if itemLink and owner then --and not (owner.MogItModel or owner.MogItSlot) then
-			if mog.tooltip.item ~= itemLink then
-				mog.tooltip.item = itemLink;
-				local _,_,quality,_,_,class,subclass,_,slot = GetItemInfo(itemLink);
-				if (not mog.db.profile.tooltipMog or select(3, GetItemTransmogrifyInfo(itemLink))) and mog.tooltip.slots[slot] and IsDressableItem(itemLink) then
-					mog.tooltip.model:SetFacing(mog.tooltip.slots[slot]-(mog.db.profile.tooltipRotate and 0.5 or 0));
-					mog.tooltip:Show();
-					mog.tooltip.owner = self;
-					--if mog.global.tooltipAnchor then
-						mog.tooltip.repos:Show();
-					--else
-					--	mog.tooltip:ClearAllPoints();
-					--	mog.tooltip:SetPoint("BOTTOMRIGHT","UIParent","BOTTOMRIGHT",-CONTAINER_OFFSET_X - 13,CONTAINER_OFFSET_Y);
-					--end
-					if mog.db.profile.tooltipDress then
-						mog.tooltip.model:Dress();
-					else
-						mog.tooltip.model:Undress();
-					end
-					mog.tooltip.model:TryOn(itemLink);
-				else
-					mog.tooltip:Hide();
-				end
-			end
-		else
-			mog.tooltip:Hide();
-		end
-	end
-end
+GameTooltip:HookScript("OnTooltipSetItem",mog.tooltip.ShowItem);
+GameTooltip:HookScript("OnHide",mog.tooltip.HideItem);
+--//
 
-function mog.tooltip.HideItem(self)
-	mog.tooltip.check:Show();
-end
 
+--// Auto-Rotate
 mog.tooltip.rotate = CreateFrame("Frame",nil,mog.tooltip);
 mog.tooltip.rotate:Hide();
 mog.tooltip.rotate:SetScript("OnUpdate",function(self,elapsed)
 	mog.tooltip.model:SetFacing(mog.tooltip.model:GetFacing() + elapsed);
 end);
+--//
 
-GameTooltip:HookScript("OnTooltipSetItem",mog.tooltip.ShowItem);
-GameTooltip:HookScript("OnHide",mog.tooltip.HideItem);
 
+--// Tables
+mog.tooltip.slots = {
+	INVTYPE_HEAD = 0,
+	INVTYPE_SHOULDER = 0,
+	INVTYPE_CLOAK = 3.4,
+	INVTYPE_CHEST = 0,
+	INVTYPE_ROBE = 0,
+	INVTYPE_WRIST = 0,
+	INVTYPE_2HWEAPON = 1.6,
+	INVTYPE_WEAPON = 1.6,
+	INVTYPE_WEAPONMAINHAND = 1.6,
+	INVTYPE_WEAPONOFFHAND = -0.7,
+	INVTYPE_SHIELD = -0.7,
+	INVTYPE_HOLDABLE = -0.7,
+	INVTYPE_RANGED = 1.6,
+	INVTYPE_RANGEDRIGHT = 1.6,
+	INVTYPE_THROWN = 1.6,
+	INVTYPE_HAND = 0,
+	INVTYPE_WAIST = 0,
+	INVTYPE_LEGS = 0,
+	INVTYPE_FEET = 0,
+};
+
+mog.tooltip.mod = {
+	Shift = IsShiftKeyDown,
+	Ctrl = IsControlKeyDown,
+	Alt = IsAltKeyDown,
+};
+--//
+
+
+--// AtlasLoot
 function mog.tooltip.hookAtlasLoot()
 	if AtlasLootTooltipTEMP then
 		AtlasLootTooltipTEMP:HookScript("OnTooltipSetItem",mog.tooltip.ShowItem);
@@ -159,3 +213,4 @@ function mog.tooltip.hookAtlasLoot()
 	end
 end
 mog.tooltip.hookAtlasLoot();
+--//

@@ -1,66 +1,201 @@
 local MogIt,mog = ...;
 local L = mog.L;
 
-mog.view = CreateFrame("Frame","MogItPreview",UIParent,"ButtonFrameTemplate");
-mog.view:SetPoint("CENTER",UIParent,"CENTER");
-mog.view:SetSize(335,385);
-mog.view:SetToplevel(true);
-mog.view:SetClampedToScreen(true);
-mog.view:EnableMouse(true);
-mog.view:SetMovable(true);
-mog.view:SetResizable(true);
-mog.view:SetUserPlaced(true);
-mog.view:SetScript("OnMouseDown",mog.view.StartMoving);
-mog.view:SetScript("OnMouseUp",mog.view.StopMovingOrSizing);
+
+mog.view = CreateFrame("Frame","MogItPreview",UIParent);
+mog.view:SetAllPoints(UIParent);
+mog.view:SetScript("OnShow",function(self)
+	if #mog.previews == 0 then
+		mog:CreatePreview();
+	end
+end);
 tinsert(UISpecialFrames,"MogItPreview");
+--ShowUIPanel(mog.view);
 
-MogItPreviewBg:SetVertexColor(0.8,0.3,0.8);
-MogItPreviewTitleText:SetText(L["Preview"]);
-mog.view.portraitFrame:Hide();
-mog.view.topLeftCorner:Show();
-mog.view.topBorderBar:SetPoint("TOPLEFT",mog.view.topLeftCorner,"TOPRIGHT",0,0);
-mog.view.leftBorderBar:SetPoint("TOPLEFT",mog.view.topLeftCorner,"BOTTOMLEFT",0,0);
 
-mog.view.resize = CreateFrame("Frame",nil,mog.view);
-mog.view.resize:SetSize(16,16);
-mog.view.resize:SetPoint("BOTTOMRIGHT",mog.view,"BOTTOMRIGHT",-4,3);
-mog.view.resize:EnableMouse(true);
-mog.view.resize:SetScript("OnMouseDown",function(self)
-	mog.view:SetMinResize(335,385);
-	mog.view:SetMaxResize(GetScreenWidth(),GetScreenHeight());
-	mog.view:StartSizing();
-end);
-mog.view.resize:SetScript("OnMouseUp",function(self)
-	mog.view:StopMovingOrSizing();
-end);
-mog.view.resize:SetScript("OnHide",mog.view.resize:GetScript("OnMouseUp"));
-mog.view.resize.texture = mog.view.resize:CreateTexture(nil,"OVERLAY");
-mog.view.resize.texture:SetTexture("Interface\\AddOns\\MogIt\\Images\\Resize");
-mog.view.resize.texture:SetAllPoints(mog.view.resize);
+function mog:ActivatePreview(preview)
+	mog.activePreview = preview;
+	_G["MogItPreview"..preview.id.."Bg"]:SetVertexColor(0.8,0.3,0.8);
+	preview.activate:Disable();
+	for k,v in ipairs(mog.previews) do
+		if v ~= preview then
+			_G["MogItPreview"..v.id.."Bg"]:SetVertexColor(1,1,1);
+			v.activate:Enable();
+		end
+	end
+	if mog.db.profile.gridDress == "preview" then
+		mog.scroll:update();
+	end
+end
 
-mog.view.model = mog.addModel(true);
-mog.view.model:SetPoint("TOPLEFT",mog.view.Inset,"TOPLEFT",49,-8);
-mog.view.model:SetPoint("BOTTOMRIGHT",mog.view.Inset,"BOTTOMRIGHT",-49,8);
-mog.view.model:EnableMouseWheel(true);
-mog.view.model:SetScript("OnMouseWheel",function(self,v)
-	mog.posZ = mog.posZ + ((v > 0 and 0.6) or -0.6);
-	mog.updateModels();
-end);
 
+--// Preview Functions
+local function resizeOnMouseDown(self)
+	local f = self:GetParent();
+	f:SetMinResize(335,385);
+	f:SetMaxResize(GetScreenWidth(),GetScreenHeight());
+	f:StartSizing();
+end
+
+local function resizeOnMouseUp(self)
+	local f = self:GetParent();
+	f:StopMovingOrSizing();
+end
+
+local function modelOnMouseWheel(self,v)
+	local delta = ((v > 0 and 0.6) or -0.6);
+	if mog.db.profile.sync then
+		mog.posZ = mog.posZ + delta;
+		for id,model in ipairs(mog.models) do
+			mog:PositionModel(model);
+		end
+		for id,preview in ipairs(mog.previews) do
+			mog:PositionModel(preview.model);
+		end
+	else
+		self.parent.data.posZ = (self.parent.data.posZ or mog.posZ or 0) + delta;
+		mog:PositionModel(self);
+	end
+end
+
+local function slotTexture(f,slot,texture)
+	SetItemButtonTexture(f.slots[slot],texture or select(2,GetInventorySlotInfo(slot)));
+end
+
+local function slotOnEnter(self)
+	if self.item then
+		mog.ShowItemTooltip(self, self.item);
+	else
+		GameTooltip:SetOwner(self,"ANCHOR_RIGHT");
+		GameTooltip:SetText(_G[strupper(self.slot)]);
+	end
+end
+
+local function slotOnLeave(self)
+	GameTooltip:Hide();
+end
+
+local function slotOnClick(self,btn)
+	if btn == "RightButton" and IsControlKeyDown() then
+		local preview = self:GetParent();
+		mog.view.DelItem(self.slot,preview);
+		if mog.db.profile.gridDress == "preview" and mog.activePreview == preview then
+			mog.scroll:update();
+		end
+		slotOnEnter(self);
+	else
+		mog.Item_OnClick(self,btn,self);
+	end
+end
+
+local function previewOnClose(self)
+	StaticPopup_Show("MOGIT_PREVIEW_CLOSE", nil, nil, self:GetParent());
+end
+
+local function previewActivate(self)
+	mog:ActivatePreview(self:GetParent());
+end
+--//
+
+
+--// Preview Menu
+local currentPreview;
+
+local function setDisplayModel(self, arg1)
+	currentPreview.data[arg1] = self.value;
+	local model = currentPreview.model;
+	model.model:SetPosition(0, 0, 0);
+	mog:BuildModel(model);
+	mog:DressModel(model);
+	mog:PositionModel(model);
+	CloseDropDownMenus(1);
+end
+
+local function clearOnClick(self,btn)
+	for k,v in pairs(currentPreview.slots) do
+		mog.view.DelItem(k,currentPreview);
+	end
+	if mog.activePreview == currentPreview and mog.db.profile.gridDress == "preview" then
+		mog.scroll:update();
+	end
+end
+
+local function addOnClick(self,btn)
+	StaticPopup_Show("MOGIT_PREVIEW_ADDITEM",nil,nil,currentPreview);
+end
+
+local function importOnClick(self,btn)
+	StaticPopup_Show("MOGIT_PREVIEW_IMPORT",nil,nil,currentPreview);
+end
+
+local function linkOnClick(self,btn)
+	local tbl = {};
+	for k,v in pairs(currentPreview.slots) do
+		if v.item then
+			table.insert(tbl,v.item);
+		end
+	end
+	ChatEdit_InsertLink(mog:SetToLink(tbl,currentPreview.data.displayRace,currentPreview.data.displayGender));
+	--ChatFrame_OpenChat(link);
+end
+
+local function previewInitialize(self, level)
+	if level == 1 then
+		currentPreview = self.parent;
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = RACE;
+		info.value = "race";
+		info.notCheckable = true;
+		info.hasArrow = true;
+		UIDropDownMenu_AddButton(info, level);
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = L["Gender"];
+		info.value = "gender";
+		info.notCheckable = true;
+		info.hasArrow = true;
+		UIDropDownMenu_AddButton(info, level);
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = L["Add Item"];
+		info.notCheckable = true;
+		info.func = addOnClick;
+		UIDropDownMenu_AddButton(info, level);
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = L["Chat Link"];
+		info.notCheckable = true;
+		info.func = linkOnClick;
+		UIDropDownMenu_AddButton(info, level);
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = L["Import / Export"];
+		info.notCheckable = true;
+		info.func = importOnClick;
+		UIDropDownMenu_AddButton(info, level);
+		
+		local info = UIDropDownMenu_CreateInfo();
+		info.text = L["Clear"];
+		info.notCheckable = true;
+		info.func = clearOnClick;
+		UIDropDownMenu_AddButton(info, level);
+	elseif self.tier[2] == "race" then
+		mog:CreateRaceMenu(level, setDisplayModel, self.parent.data.displayRace)
+	elseif self.tier[2] == "gender" then
+		mog:CreateGenderMenu(level, setDisplayModel, self.parent.data.displayGender)
+	end
+end
+--//
+
+
+--// Save Menu
 local newSet = {items = {}}
-
-mog.view.save = CreateFrame("Button","MogItFramePreviewSave",mog.view,"UIPanelButtonTemplate2");
-mog.view.save:SetPoint("TOPLEFT",10,-30);
-mog.view.save:SetWidth(100);
-mog.view.save:SetText(L["Save"]);
-mog.view.save:SetScript("OnClick",function(self,btn)
-	ToggleDropDownMenu(nil, nil, self.menu, self, 0, 0)
-end);
 
 local function onClick(self)
 	newSet.name = self.value
 	wipe(newSet.items)
-	for slot, v in pairs(mog.view.slots) do
+	for slot, v in pairs(currentPreview.slots) do
 		newSet.items[slot] = v.item
 	end
 	StaticPopup_Show("MOGIT_WISHLIST_OVERWRITE_SET", self.value, nil, newSet)
@@ -69,15 +204,15 @@ end
 local function newSetOnClick(self)
 	wipe(newSet.items)
 	newSet.name = "Set "..(#mog.wishlist:GetSets() + 1)
-	for slot, v in pairs(mog.view.slots) do
+	for slot, v in pairs(currentPreview.slots) do
 		newSet.items[slot] = v.item
 	end
 	StaticPopup_Show("MOGIT_WISHLIST_CREATE_SET", nil, nil, newSet)
 end
 
-local saveMenu = CreateFrame("Frame")
-saveMenu.displayMode = "MENU"
-saveMenu.initialize = function(self, level)
+local function saveInitialize(self, level)
+	currentPreview = self.parent;
+	
 	mog.wishlist:AddSetMenuItems(level, onClick)
 	
 	local info = UIDropDownMenu_CreateInfo()
@@ -87,29 +222,23 @@ saveMenu.initialize = function(self, level)
 	info.notCheckable = true
 	UIDropDownMenu_AddButton(info, level)
 end
-mog.view.save.menu = saveMenu
+--//
 
-mog.view.load = CreateFrame("Button","MogItFramePreviewLoad",mog.view,"UIPanelButtonTemplate2");
-mog.view.load:SetPoint("LEFT",mog.view.save,"RIGHT",8,0);
-mog.view.load:SetWidth(100);
-mog.view.load:SetText(L["Load"]);
-mog.view.load:SetScript("OnClick",function(self,btn)
-	ToggleDropDownMenu(nil, nil, self.menu, self, 0, 0)
-end);
 
+--// Load Menu
 local function onClick(self, profile)
-	for k, v in pairs(mog.view.slots) do
-		mog.view.delItem(k)
+	for k, v in pairs(currentPreview.slots) do
+		mog.view.DelItem(k,currentPreview)
 	end
 	for slot, itemID in pairs(mog.wishlist:GetSetItems(self.value, profile)) do
-		mog:AddToPreview(itemID)
+		mog:AddToPreview(itemID,currentPreview)
 	end
 	CloseDropDownMenus()
 end
 
-local loadMenu = CreateFrame("Frame")
-loadMenu.displayMode = "MENU"
-loadMenu.initialize = function(self, level)
+local function loadInitialize(self, level)
+	currentPreview = self.parent;
+	
 	if level == 1 then
 		mog.wishlist:AddSetMenuItems(level, onClick)
 		
@@ -132,195 +261,273 @@ loadMenu.initialize = function(self, level)
 	elseif level == 3 then
 		mog.wishlist:AddSetMenuItems(level, onClick, UIDROPDOWNMENU_MENU_VALUE, UIDROPDOWNMENU_MENU_VALUE)
 	end
+end;
+--//
+
+
+--// Toolbar
+local function helpOnEnter(self)
+	self.nt:SetTexture(1,0.82,0,1);
+	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
+	GameTooltip:AddLine(L["How to use"]);
+	GameTooltip:AddLine(" ");
+	GameTooltip:AddLine(L["Basic Controls"]);
+	GameTooltip:AddLine(L["Left click and drag horizontally to rotate"],1,1,1);
+	GameTooltip:AddLine(L["Left click and drag vertically to zoom"],1,1,1);
+	GameTooltip:AddLine(L["Right click and drag to move"],1,1,1);
+	GameTooltip:AddLine(L["Click the bottom right corner and drag to resize"],1,1,1);
+	GameTooltip:AddLine(L["Click the \"Activate\" button to set this as the active preview"],1,1,1);
+	GameTooltip:AddLine(" ");
+	GameTooltip:AddLine(L["Slot Controls"]);
+	GameTooltip:AddLine(L["Shift + Left click to link an item to chat"],1,1,1);
+	GameTooltip:AddLine(L["Ctrl + Left click to try on an item"],1,1,1);
+	GameTooltip:AddLine(L["Right click to show the item menu"],1,1,1);
+	GameTooltip:AddLine(L["Shift + Right click to show a URL for the item"],1,1,1);
+	GameTooltip:AddLine(L["Ctrl + Right click to remove the item from the preview"],1,1,1);
+	GameTooltip:Show();
 end
-mog.view.load.menu = loadMenu
 
-mog.view.clear = CreateFrame("Button","MogItFramePreviewClear",mog.view,"UIPanelButtonTemplate2");
-mog.view.clear:SetPoint("TOPRIGHT",mog.view,"TOPRIGHT",-10,-30);
-mog.view.clear:SetWidth(100);
-mog.view.clear:SetText(L["Clear"]);
-mog.view.clear:SetScript("OnClick",function(self,btn)
-	for k,v in pairs(mog.view.slots) do
-		mog.view.delItem(k);
+local function helpOnLeave(self)
+	GameTooltip:Hide();
+	self.nt:SetTexture(0,0,0,0);
+end
+
+local function createMenuBar(parent)
+	local menuBar = mog.CreateMenuBar(parent)
+	
+	menuBar.preview = menuBar:CreateMenu(L["Preview"], previewInitialize);
+	menuBar.preview:SetPoint("TOPLEFT", parent, 62, -31);
+
+	menuBar.load = menuBar:CreateMenu(L["Load"], loadInitialize);
+	menuBar.load:SetPoint("LEFT", menuBar.preview, "RIGHT", 5, 0);
+	
+	menuBar.save = menuBar:CreateMenu(L["Save"], saveInitialize);
+	menuBar.save:SetPoint("LEFT", menuBar.load, "RIGHT", 5, 0);
+	
+	menuBar.help = menuBar:CreateMenu(L["Help"]);
+	menuBar.help:SetPoint("LEFT", menuBar.save, "RIGHT", 5, 0);
+	menuBar.help:SetScript("OnEnter",helpOnEnter);
+	menuBar.help:SetScript("OnLeave",helpOnLeave);
+end
+--//
+
+
+--// Preview Frame
+mog.previews = {};
+mog.previewBin = {};
+mog.previewNum = 0;
+
+function mog:CreatePreview()
+	if mog.previewBin[1] then
+		local f = mog.previewBin[1];
+		f:Show();
+		mog:ActivatePreview(f);
+		tremove(mog.previewBin,1);
+		tinsert(mog.previews,f);
+		return f;
 	end
-	if mog.db.profile.gridDress then
-		mog.scroll:update();
+	
+	mog.previewNum = mog.previewNum + 1;
+	local f = CreateFrame("Frame","MogItPreview"..mog.previewNum,mog.view,"ButtonFrameTemplate");
+	f.id = mog.previewNum;
+	f.data = {
+		displayRace = mog.playerRace,
+		displayGender = mog.playerGender,
+	};
+	
+	f:SetPoint("CENTER",mog.view,"CENTER");
+	f:SetSize(335,385);
+	f:SetToplevel(true);
+	f:SetClampedToScreen(true);
+	f:EnableMouse(true);
+	f:SetMovable(true);
+	f:SetResizable(true);
+	f:Raise();
+
+	_G["MogItPreview"..f.id.."CloseButton"]:SetScript("OnClick",previewOnClose);
+	--_G["MogItPreview"..f.id.."Bg"]:SetVertexColor(0.8,0.3,0.8);
+	_G["MogItPreview"..f.id.."TitleText"]:SetText(L["Preview %d"]:format(f.id));
+	f.portraitFrame:Hide();
+	f.topLeftCorner:Show();
+	f.topBorderBar:SetPoint("TOPLEFT",f.topLeftCorner,"TOPRIGHT",0,0);
+	f.leftBorderBar:SetPoint("TOPLEFT",f.topLeftCorner,"BOTTOMLEFT",0,0);
+	
+	f.resize = CreateFrame("Frame",nil,f);
+	f.resize:SetSize(16,16);
+	f.resize:SetPoint("BOTTOMRIGHT",f,"BOTTOMRIGHT",-4,3);
+	f.resize:EnableMouse(true);
+	f.resize:SetScript("OnMouseDown",resizeOnMouseDown);
+	f.resize:SetScript("OnMouseUp",resizeOnMouseUp);
+	f.resize:SetScript("OnHide",resizeOnMouseUp);
+	f.resize.texture = f.resize:CreateTexture(nil,"OVERLAY");
+	f.resize.texture:SetTexture("Interface\\AddOns\\MogIt\\Images\\Resize");
+	f.resize.texture:SetAllPoints(f.resize);
+	
+	f.model = mog:CreateModelFrame(f);
+	f.model.type = "preview";
+	f.model:Show();
+	f.model:EnableMouseWheel(true);
+	f.model:SetScript("OnMouseWheel",modelOnMouseWheel);
+	f.model:SetPoint("TOPLEFT",f.Inset,"TOPLEFT",49,-8);
+	f.model:SetPoint("BOTTOMRIGHT",f.Inset,"BOTTOMRIGHT",-49,8);
+	
+	f.activate = CreateFrame("Button","MogItPreview"..f.id.."Activate",f,"MagicButtonTemplate");
+	f.activate:SetText(L["Activate"]);
+	f.activate:SetPoint("BOTTOMLEFT",f,"BOTTOMLEFT",5,5);
+	f.activate:SetWidth(100);
+	f.activate:SetScript("OnClick",previewActivate);
+	
+	f:SetScript("OnMouseDown",f.StartMoving);
+	f:SetScript("OnMouseUp",f.StopMovingOrSizing);
+	
+	f.slots = {};
+	for i=1,13 do
+		local slot = mog:GetSlot(i);
+		f.slots[slot] = CreateFrame("Button","MogItPreview"..f.id..slot,f,"ItemButtonTemplate");
+		f.slots[slot].slot = slot;
+		if i == 1 then
+			f.slots[slot]:SetPoint("TOPLEFT",f.Inset,"TOPLEFT",8,-8);
+		elseif i == 8 then
+			f.slots[slot]:SetPoint("TOPRIGHT",f.Inset,"TOPRIGHT",-7,-8);
+		elseif i == 12 then
+			f.slots[slot]:SetPoint("TOP",f.slots[mog:GetSlot(11)],"BOTTOM",0,-45);
+		else
+			f.slots[slot]:SetPoint("TOP",f.slots[mog:GetSlot(i-1)],"BOTTOM",0,-4);
+		end
+		slotTexture(f,slot);
+		f.slots[slot]:RegisterForClicks("AnyUp");
+		f.slots[slot]:SetScript("OnClick",slotOnClick);
+		f.slots[slot]:SetScript("OnEnter",slotOnEnter);
+		f.slots[slot]:SetScript("OnLeave",slotOnLeave);
+		f.slots[slot].OnEnter = slotOnEnter;
 	end
-end);
+	
+	createMenuBar(f);
+	mog:ActivatePreview(f);
+		
+	tinsert(mog.previews,f);
+	return f;
+end
 
-mog.view.add = CreateFrame("Button","MogItFramePreviewAddItem",mog.view,"MagicButtonTemplate");
-mog.view.add:SetPoint("BOTTOMLEFT",mog.view,"BOTTOMLEFT",5,5);
-mog.view.add:SetWidth(100);
-mog.view.add:SetText(L["Add Item"]);
-mog.view.add:SetScript("OnClick",function(self,btn)
-	StaticPopup_Show("MOGIT_PREVIEW_ADDITEM");
-end);
-
-mog.view.import = CreateFrame("Button","MogItFramePreviewImport",mog.view,"MagicButtonTemplate");
-mog.view.import:SetPoint("TOPLEFT",mog.view.add,"TOPRIGHT");
-mog.view.import:SetWidth(100);
-mog.view.import:SetText(L["Import"]);
-mog.view.import:SetScript("OnClick",function(self,btn)
-	StaticPopup_Show("MOGIT_PREVIEW_IMPORT");
-end);
-
-mog.view.link = CreateFrame("Button","MogItFramePreviewLink",mog.view,"MagicButtonTemplate");
-mog.view.link:SetPoint("TOPLEFT",mog.view.import,"TOPRIGHT");
-mog.view.link:SetWidth(100);
-mog.view.link:SetText(L["Chat Link"]);
-mog.view.link:SetScript("OnClick",function(self,btn)
-	local tbl = {};
-	for k,v in pairs(mog.view.slots) do
-		if v.item then
-			table.insert(tbl,v.item);
+function mog:DeletePreview(f)
+	f:Hide();
+	f:ClearAllPoints();
+	f:SetPoint("CENTER",mog.view,"CENTER");
+	for slot,data in pairs(f.slots) do
+		mog.view.DelItem(slot,f);
+	end
+	wipe(f.data);
+	tinsert(mog.previewBin,f);
+	for k,v in ipairs(mog.previews) do
+		if v == f then
+			tremove(mog.previews,k);
+			break;
 		end
 	end
-	ChatEdit_InsertLink(mog:SetToLink(tbl));
-end);
-
-function mog.view.setTexture(slot,texture)
-	SetItemButtonTexture(mog.view.slots[slot],texture or select(2,GetInventorySlotInfo(slot)));
-end
-
-local function slot_OnEnter(self)
-	if self.item then
-		mog.Item_OnEnter(self,self);
-	else
-		GameTooltip:SetOwner(self,"ANCHOR_RIGHT");
-		GameTooltip:SetText(_G[strupper(self.slot)]);
-	end
-	--GameTooltip:SetItemByID(self.item);
-end
-
-local function slot_OnLeave(self)
-	GameTooltip:Hide();
-end
-
-local function slot_OnClick(self,btn)
-	if btn == "RightButton" and IsControlKeyDown() then
-		mog.view.delItem(self.slot);
-		if mog.db.profile.gridDress then
+	if mog.activePreview == f then
+		mog.activePreview = nil;
+		if mog.db.profile.gridDress == "preview" then
 			mog.scroll:update();
 		end
-		slot_OnEnter(self);
-	else
-		mog.Item_OnClick(self,btn,self);
 	end
 end
 
-mog.view.slots = {};
-for k,v in ipairs(mog.itemSlots) do
-	mog.view.slots[v] = CreateFrame("Button","MogItPreview"..v,mog.view,"ItemButtonTemplate");
-	mog.view.slots[v].slot = v;
-	if k == 1 then
-		mog.view.slots[v]:SetPoint("TOPLEFT",mog.view.Inset,"TOPLEFT",8,-8);
-	elseif k == 8 then
-		mog.view.slots[v]:SetPoint("TOPRIGHT",mog.view.Inset,"TOPRIGHT",-7,-8);
-	else
-		mog.view.slots[v]:SetPoint("TOP",mog.view.slots[mog.itemSlots[k-1]],"BOTTOM",0,-4);
+mog.view.queue = {};
+mog.cacheFuncs.PreviewAddItem = function()
+	for i,action in ipairs(mog.view.queue) do
+		if GetItemInfo(action[1]) then
+			mog.view.AddItem(action[1],action[2]);
+		end
 	end
-	
-	local id,texture = GetInventorySlotInfo(v);
-	mog.view.setTexture(v);
-	
-	mog.view.slots[v]:RegisterForClicks("AnyUp");
-	mog.view.slots[v]:SetScript("OnClick",slot_OnClick);
-	mog.view.slots[v]:SetScript("OnEnter",slot_OnEnter);
-	mog.view.slots[v]:SetScript("OnLeave",slot_OnLeave);
+	wipe(mog.view.queue);
 end
 
---[[
-
-one handed weapons first go into main hand slot, then alternate between off and main hand, does not have to be same item
-
-equipping any non one handed weapon will cause the next one handed weapon to go into main hand
-
-equipping a right handed ranged weapon (gun, crossbow, thrown) will cause the next two one hand weapons to go into main hand (above rule still applies)
-
-]]
-
-mog.view.wait = {};
-function mog.view.addItem(item)
-	if not item then return end;
-	local slot,texture = select(9,GetItemInfo(item));
+mog.playerClass = select(2,UnitClass("PLAYER"));
+function mog.view.AddItem(item,preview)
+	if not (item and preview) then return end;
+	
+	local slot,texture = select(9,mog:GetItemInfo(item,"PreviewAddItem"));
 	if not slot then
-		mog.view.wait[item] = (mog.view.wait[item] or 0) + 1;
+		tinsert(mog.view.queue,{item,preview});
 		return;
 	end
-	if mog.invSlots[slot] then
+	
+	if mog:GetSlot(slot) then
 		if slot == "INVTYPE_2HWEAPON" then
-			if select(2,UnitClass("PLAYER")) == "WARRIOR" and (select(5,GetTalentInfo(2,20)) or 0) > 0 then
+			if mog.playerClass == "WARRIOR" and IsSpellKnown(46917) then
 				slot = "INVTYPE_WEAPON";
 			end
 		end
-		if slot == "INVTYPE_WEAPON" and not mog.view.twohand then
-			if mog.view.slots.MainHandSlot.item and ((not mog.view.slots.SecondaryHandSlot.item) or mog.view.slots.MainHandSlot.item == item) then
+			
+		if slot == "INVTYPE_WEAPON" then
+			if (not preview.slots.MainHandSlot.item) or preview.data.twohand then
+				slot = "INVTYPE_WEAPONMAINHAND";
+			elseif (not preview.slots.SecondaryHandSlot.item) then
+				slot = "INVTYPE_WEAPONOFFHAND";
+			elseif preview.data.mainhand then
+				slot = "INVTYPE_WEAPONMAINHAND";
+			else
 				slot = "INVTYPE_WEAPONOFFHAND";
 			end
-		end
 		
-		if slot == "INVTYPE_2HWEAPON" then
-			mog.view.delItem("SecondaryHandSlot");
-			mog.view.twohand = true;
-		elseif slot == "INVTYPE_WEAPONOFFHAND" then
-			if mog.view.twohand then
-				mog.view.delItem("MainHandSlot");
+			if slot == "INVTYPE_2HWEAPON" then
+				mog.view.DelItem("SecondaryHandSlot",preview);
+				preview.data.twohand = true;
+			elseif slot == "INVTYPE_WEAPONMAINHAND" or slot == "INVTYPE_WEAPON" then
+				preview.data.twohand = nil;
+				preview.data.mainhand = nil;
+			elseif slot == "INVTYPE_WEAPONOFFHAND" then
+				if preview.data.twohand then
+					mog.view.DelItem("MainHandSlot",preview);
+				end
+				preview.data.twohand = nil;
+				preview.data.mainhand = true;
 			end
-			mog.view.twohand = nil;
-		elseif slot == "INVTYPE_WEAPON" then
-			mog.view.twohand = nil;
-		elseif slot == "INVTYPE_WEAPONMAINHAND" then
-			mog.view.twohand = nil;
 		end
 		
-		mog.view.slots[mog.invSlots[slot]].item = item;
-		-- item history
-		mog.view.setTexture(mog.invSlots[slot],texture);
-		if mog.view:IsShown() then
-			mog.view.model.model:TryOn(item);
+		--> Undress/TryOn weapon slots if weapon changed?
+		preview.slots[mog:GetSlot(slot)].item = item;
+		slotTexture(preview,mog:GetSlot(slot),texture);
+		if preview:IsVisible() then
+			preview.model.model:TryOn(item);
 		end
 	end
 end
 
-function mog:AddToPreview(item)
+function mog.view.DelItem(slot,preview)
+	if not (preview and slot) then return end;
+	preview.slots[slot].item = nil;
+	slotTexture(preview,slot);
+	if preview:IsVisible() then
+		preview.model.model:UndressSlot(GetInventorySlotInfo(slot));
+	end
+end
+
+function mog:AddToPreview(item,preview)
 	if not item then return end;
+	preview = preview or mog.activePreview or mog:CreatePreview();
+	
 	if type(item) == "number" then
-		mog.view.addItem(item);
+		mog.view.AddItem(item,preview);
 	elseif type(item) == "string" then
-		mog.view.addItem(tonumber(item:match("item:(%d+)")));
+		mog.view.AddItem(tonumber(item:match("item:(%d+)")),preview);
 	elseif type(item) == "table" then
-		if mog.db.profile.clearOnPreviewSet then
-			for k,v in pairs(mog.view.slots) do
-				mog.view.delItem(k);
-			end
-		end
 		for k,v in pairs(item) do
-			mog.view.addItem(v);
+			mog.view.AddItem(v,preview);
 		end
 	end
+	
 	ShowUIPanel(mog.view);
-	if mog.db.profile.gridDress == "preview" then
+	if mog.db.profile.gridDress == "preview" and mog.activePreview == preview then
 		mog.scroll:update();
 	end
+	
+	return preview;
 end
+--//
 
-function mog.view.delItem(slot)
-	mog.view.slots[slot].item = nil;
-	mog.view.setTexture(slot);
-	mog.view.model.model:Undress(); -- needs cleanup
-	mog:DressModel(mog.view.model.model);
-end
 
-function mog:DressModel(model)
-	if mog.db.profile.gridDress == "preview" or (model == mog.view.model.model) then
-		for k,v in pairs(mog.view.slots) do
-			if v.item then
-				model:TryOn(v.item);
-			end
-		end
-	end
-end
-
+--// Hooks
 hooksecurefunc("HandleModifiedItemClick",function(link)
 	if link then
 		if (GetMouseButtonClicked() == "RightButton") and IsControlKeyDown() then
@@ -337,7 +544,7 @@ local function hookInspectUI()
 			end
 		end
 	end
-	for k,v in ipairs(mog.itemSlots) do
+	for k,v in ipairs(mog.slots) do
 		_G["Inspect"..v].slot = v;
 		_G["Inspect"..v]:RegisterForClicks("AnyUp");
 		_G["Inspect"..v]:HookScript("OnClick",inspect_OnClick);
@@ -379,16 +586,7 @@ function SetItemRef(link,text,btn,...)
 end
 
 mog.view:SetScript("OnEvent",function(self,event,arg1,...)
-	if event == "GET_ITEM_INFO_RECEIVED" then
-		for k,v in pairs(mog.view.wait) do
-			if select(9,GetItemInfo(k)) then
-				for i=1,v do
-					mog:AddToPreview(k);
-				end
-				mog.view.wait[k] = nil;
-			end
-		end
-	elseif event == "ADDON_LOADED" then
+	if event == "ADDON_LOADED" then
 		if arg1 == "Blizzard_InspectUI" then
 			hookInspectUI();
 		elseif arg1 == "Blizzard_GuildBankUI" then
@@ -397,8 +595,10 @@ mog.view:SetScript("OnEvent",function(self,event,arg1,...)
 	end
 end);
 mog.view:RegisterEvent("ADDON_LOADED");
-mog.view:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+--//
 
+
+--// Popups
 StaticPopupDialogs["MOGIT_PREVIEW_ADDITEM"] = {
 	text = L["Type the item ID or url in the text box below"],
 	button1 = ADD,
@@ -406,19 +606,16 @@ StaticPopupDialogs["MOGIT_PREVIEW_ADDITEM"] = {
 	hasEditBox = 1,
 	maxLetters = 512,
 	editBoxWidth = 260,
-	OnShow = function(self,item)
-		self.editBox:SetFocus();
-	end,
-	OnAccept = function(self)
+	OnAccept = function(self,preview)
 		local text = self.editBox:GetText();
 		text = text and text:match("(%d+).-$");
-		mog:AddToPreview(tonumber(text));
+		mog:AddToPreview(tonumber(text),preview);
 	end,
 	OnCancel = function(self) end,
-	EditBoxOnEnterPressed = function(self)
+	EditBoxOnEnterPressed = function(self,preview)
 		local text = self:GetText();
 		text = text and text:match("(%d+).-$");
-		mog:AddToPreview(tonumber(text));
+		mog:AddToPreview(tonumber(text),preview);
 		self:GetParent():Hide();
 	end,
 	EditBoxOnEscapePressed = function(self)
@@ -427,7 +624,6 @@ StaticPopupDialogs["MOGIT_PREVIEW_ADDITEM"] = {
 	timeout = 0,
 	exclusive = 1,
 	whileDead = 1,
-	hideOnEscape = 1
 };
 
 StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
@@ -437,9 +633,9 @@ StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
 	hasEditBox = 1,
 	maxLetters = 512,
 	editBoxWidth = 260,
-	OnShow = function(self,item)
+	OnShow = function(self,preview)
 		local str;
-		for k,v in pairs(mog.view.slots) do
+		for k,v in pairs(preview.slots) do
 			if v.item then
 				if str then
 					str = str..":"..v.item;
@@ -449,10 +645,9 @@ StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
 			end
 		end
 		self.editBox:SetText(str or "");
-		self.editBox:SetFocus();
 		self.editBox:HighlightText();
 	end,
-	OnAccept = function(self)
+	OnAccept = function(self,preview)
 		local items = self.editBox:GetText();
 		items = items and items:match("compare%?items=([^;#]+)");
 		if items then
@@ -461,11 +656,11 @@ StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
 				item = item:match("^(%d+)");
 				table.insert(tbl,tonumber(item));
 			end
-			mog:AddToPreview(tbl);
+			mog:AddToPreview(tbl,preview);
 		end
 	end,
 	OnCancel = function(self) end,
-	EditBoxOnEnterPressed = function(self)
+	EditBoxOnEnterPressed = function(self,preview)
 		self:GetParent():Hide();
 		local items = self:GetText();
 		items = items and items:match("compare%?items=([^;#]+)");
@@ -475,7 +670,7 @@ StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
 				item = item:match("^(%d+)");
 				table.insert(tbl,tonumber(item));
 			end
-			mog:AddToPreview(tbl);
+			mog:AddToPreview(tbl,preview);
 		end
 	end,
 	EditBoxOnEscapePressed = function(self)
@@ -484,5 +679,25 @@ StaticPopupDialogs["MOGIT_PREVIEW_IMPORT"] = {
 	timeout = 0,
 	exclusive = 1,
 	whileDead = 1,
-	hideOnEscape = 1
 };
+
+StaticPopupDialogs["MOGIT_PREVIEW_CLOSE"] = {
+	text = L["Are you sure you want to close this set?"],
+	button1 = YES,
+	button2 = NO,
+	OnAccept = function(self, frame)
+		mog:DeletePreview(frame);
+	end,
+	hideOnEscape = true,
+	whileDead = true,
+	timeout = 0,
+}
+--//
+
+
+--[[
+One-Handed Weapon Logic
+- First goes into main hand, then alternates
+- Equipping 2h weapon causes to next to go into main hand
+- Equipping a right handed ranged weapon (gun, crossbow, thrown) will cause the next two one hand weapons to go into main hand (above rule still applies)
+]]

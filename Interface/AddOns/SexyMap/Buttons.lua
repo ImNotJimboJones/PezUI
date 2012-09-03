@@ -38,6 +38,12 @@ local addonButtons = { -- For the rare addons that don't use LibDBIcon for some 
 	WIM3MinimapButton = "WIM (WoW Instant Messenger)",
 	VuhDoMinimapButton = "VuhDo",
 	AltoholicMinimapButton = "Altoholic",
+	DominosMinimapButton = "Dominos",
+	Gatherer_MinimapOptionsButton = "Gatherer",
+	FishingBuddyMinimapFrame = "Fishing Buddy", -- FishingBuddyMinimapButton = "Fishing Buddy", -- Button parented to a frame, parented to the minimap, facepalm
+	DroodFocusMinimapButton = "Drood Focus",
+	["FuBarPluginElkano's BuffBarsFrameMinimapButton"] = "EBB (Elkano's Buff Bars)",
+	AtlasButtonFrame = "Atlas", -- AtlasButton = "Atlas", -- Button parented to a frame, parented to the minimap, facepalm
 }
 
 local options = {
@@ -220,7 +226,7 @@ do
 	local OnFinished = function(anim)
 		-- Minimap or Minimap icons including nil checks to compensate for other addons
 		local f, focus = anim:GetParent(), GetMouseFocus()
-		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
+		if focus and ((focus:GetName() == "Minimap" or focus:GetName() == "AtlasButton") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			f:SetAlpha(1)
 		else
 			f:SetAlpha(0)
@@ -249,7 +255,7 @@ do
 	local OnLeave = function()
 		if not mod.db.controlVisibility or moving then return end
 		local focus = GetMouseFocus() -- Minimap or Minimap icons including nil checks to compensate for other addons
-		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
+		if focus and ((focus:GetName() == "Minimap" or focus:GetName() == "AtlasButton") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			fadeStop = true
 			return
 		end
@@ -260,7 +266,7 @@ do
 			if not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then
 				f.smAnimGroup:Stop()
 				f:SetAlpha(1)
-				f.smAlphaAnim:SetStartDelay(1)
+				f.smAlphaAnim:SetStartDelay(0.5)
 				f.smAlphaAnim:SetChange(-1)
 				f.smAnimGroup:Play()
 			end
@@ -284,6 +290,13 @@ do
 				self:ChangeFrameVisibility(f, mod.db.visibilitySettings[n] or "hover")
 			end
 
+			-- Some non-LibDBIcon addon buttons don't set the strata properly and can appear behind things
+			-- LibDBIcon sets the strata to MEDIUM and the frame level to 8, so we do the same to other buttons
+			if addonButtons[n] then
+				f:SetFrameStrata("MEDIUM")
+				f:SetFrameLevel(8)
+			end
+
 			-- Don't add config or moving capability to the Zone Text and Clock buttons, handled in their own modules
 			if n ~= "MinimapZoneTextButton" and n ~= "TimeManagerClockButton" then
 				self:AddButtonOptions(n, blizzButtons[n], dynamicButtons[n])
@@ -298,6 +311,10 @@ do
 				-- Configure dragging
 				if n == "MiniMapTracking" then
 					self:MakeMovable(MiniMapTrackingButton, f)
+				elseif n == "FishingBuddyMinimapFrame" then -- XXX Let's try get the author to make a better icon
+					self:MakeMovable(FishingBuddyMinimapButton, f)
+				elseif n == "AtlasButtonFrame" then -- XXX Let's try get the author to make a better icon
+					self:MakeMovable(AtlasButton, f)
 				else
 					self:MakeMovable(f)
 				end
@@ -370,21 +387,21 @@ do
 		ButtonFadeOut() -- Call the fade out function
 	end
 
-	function mod:MakeMovable(frame, tracking)
+	function mod:MakeMovable(frame, altFrame)
 		frame:EnableMouse(true)
 		frame:RegisterForDrag("LeftButton")
-		if tracking then
+		if altFrame then
 			frame:SetScript("OnDragStart", function()
 				if mod.db.lockDragging or not mod.db.allowDragging then return end
 
-				moving = tracking
+				moving = altFrame
 				dragFrame:SetScript("OnUpdate", updatePosition)
 			end)
 		else
 			frame:SetScript("OnDragStart", OnDragStart)
 		end
 		frame:SetScript("OnDragStop", OnDragStop)
-		self:UpdateDraggables(tracking or frame)
+		self:UpdateDraggables(altFrame or frame)
 	end
 
 	function mod:UpdateDraggables(frame)
@@ -398,10 +415,14 @@ do
 			end
 		else
 			for _,f in pairs(animFrames) do
-				local x, y = f:GetCenter()
-				local angle = mod.db.dragPositions[f:GetName()] or getCurrentAngle(f:GetParent(), x, y)
-				if angle then
-					setPosition(f, angle)
+				local n = f:GetName()
+				-- Don't move the Clock or Zone Text when changing shape/preset
+				if n ~= "MinimapZoneTextButton" and n ~= "TimeManagerClockButton" then
+					local x, y = f:GetCenter()
+					local angle = mod.db.dragPositions[n] or getCurrentAngle(f:GetParent(), x, y)
+					if angle then
+						setPosition(f, angle)
+					end
 				end
 			end
 		end

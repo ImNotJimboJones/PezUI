@@ -1,0 +1,28 @@
+tag v2.2
+f8b92a8980f509ef6cc1cf8baf53e3ea9c27ca14
+funkydude <none>
+2012-09-03 22:48:36 +0100
+
+Tagging as v2.2
+
+
+--------------------
+
+funkydude:
+	- Improve the description of the global profile confirmation.
+	- Movers: add some debug to track down an issue
+	- Buttons: Grab more buttons
+	- Borders: Fix border color display in the config
+	- BorderPresets: Add "Electric" preset, remove a lot of already-default variables from other presets.
+	- Borders: Fix width/height setting
+	- Buttons: Don't move the Clock or Zone text when changing shape/preset
+	- Shapes: fix a leaked global
+	- fix map strata
+	- Buttons/Fader: Reduce the fade delay.
+	- Borders: Add width/height settings.
+	- HudMap: Fix reference to Astrolabe in latest TomTom.
+	- Buttons: Some non-LibDBIcon addon buttons don't set the strata properly and can appear behind things, LibDBIcon sets the strata to MEDIUM and the frame level to 8, so we do the same to other buttons.
+	- Buttons: Fix a few more addon buttons.
+	- Borders: Tweak border strata to solve an issue with SunnArt viewport.
+	- Also change the default mask
+	- Shapes: Add our own less pixelated circular mask and remove a legacy non-existent mask.

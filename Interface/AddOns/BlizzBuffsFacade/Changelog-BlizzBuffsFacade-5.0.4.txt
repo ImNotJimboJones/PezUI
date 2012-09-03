@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r16 | cybeloras | 2012-09-03 22:07:01 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   A /tags/5.0.4 (from /trunk:15)
+
+Tagging as 5.0.4
+------------------------------------------------------------------------
+r15 | cybeloras | 2012-09-03 22:06:35 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/BlizzBuffsFacade.toc
+
+Version bump
+------------------------------------------------------------------------
+r14 | cybeloras | 2011-12-28 03:50:07 +0000 (Wed, 28 Dec 2011) | 1 line
+Changed paths:
+   M /trunk/BlizzBuffsFacade.toc
+
+Made Masque a required dep
+------------------------------------------------------------------------

@@ -2,9 +2,7 @@
 local L = mog.L;
 
 function mog.createOptions()
-	local about = LibStub("LibAboutPanel").new(nil,MogIt);
-	about:GetScript("OnShow")(about);
-	about:SetScript("OnShow",nil);
+	local about = LibStub("LibAddonInfo-1.0"):CreateFrame(MogIt,nil,"Interface\\AddOns\\Mogit\\Images");
 
 	local config = LibStub("AceConfig-3.0");
 	local dialog = LibStub("AceConfigDialog-3.0");
@@ -35,9 +33,7 @@ function mog.createOptions()
 					mog.tooltip.rotate:Hide();
 				end
 			elseif info.arg == "rows" or info.arg == "columns" then
-				mog.updateGUI();
-			elseif info.arg == "gridDress" then
-				mog.scroll:update();
+				mog:UpdateGUI();
 			end
 		end
 	end
@@ -62,13 +58,6 @@ function mog.createOptions()
 				width = "full",
 				arg = "minimap",
 			},
-			clearOnPreviewSet = {
-				type = "toggle",
-				order = 1.5,
-				name = L["Undress before previewing sets"],
-				width = "full",
-				arg = "clearOnPreviewSet",
-			},
 			catalogue = {
 				type = "group",
 				order = 2,
@@ -81,18 +70,6 @@ function mog.createOptions()
 						name = L["No animation"],
 						width = "double",
 						arg = "noAnim",
-					},
-					dress = {
-						type = "select",
-						order = 2,
-						name = L["Dress models"],
-						width = "double",
-						values = {
-							none = NONE,
-							preview = L["Preview"],
-							equipped = L["Equipped"],
-						};
-						arg = "gridDress",
 					},
 					url = {
 						type = "select",

@@ -1,5 +1,5 @@
 ## Interface: 50001
-## Version: 2.1
+## Version: 2.2
 ## Title: SexyMap
 ## Notes: Spice up your minimap with some sexy options.
 ## Notes-deDE: Spice up your minimap with some sexy options.
@@ -15,7 +15,7 @@
 ## Author: Antiarc, Funkydude
 ## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0, Blizzard_TimeManager, TomTom
 ## SavedVariables: SexyMap2DB
-## X-Curse-Packaged-Version: v2.1
+## X-Curse-Packaged-Version: v2.2
 ## X-Curse-Project-Name: SexyMap
 ## X-Curse-Project-ID: sexymap
 ## X-Curse-Repository-ID: wow/sexymap/mainline

@@ -348,7 +348,7 @@ local options = {
 											hasAlpha = true,
 											get = function()
 												local c = mod.db.backdrop.borderColor
-												local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
+												local r, g, b, a = c.r or 1, c.g or 1, c.b or 1, c.a or 1
 												return r, g, b, a
 											end,
 											set = function(info, r, g, b, a)
@@ -560,8 +560,8 @@ local borderOptions = {
 		set = function(info, v)
 			local tex = getTextureAndDB(info)
 			tex.settings.scale = v
-			tex:SetWidth(defaultSize * v)
-			tex:SetHeight(defaultSize * v)
+			tex:SetWidth((tex.settings.width or defaultSize) * v)
+			tex:SetHeight((tex.settings.height or defaultSize) * v)
 		end
 	},
 	rotation = {
@@ -700,6 +700,44 @@ local borderOptions = {
 			tex:ClearAllPoints()
 			tex.settings.vNudge = v
 			tex:SetPoint("CENTER", Minimap, "CENTER", tex.settings.hNudge or 0, tex.settings.vNudge or 0)
+		end
+	},
+	width = {
+		type = "range",
+		name = L["Width"],
+		min = 1,
+		max = 500,
+		step = 1,
+		bigStep = 1,
+		order = 151,
+		width = "full",
+		get = function(info)
+			local tex = getTextureAndDB(info)
+			return tex.settings.width or 180
+		end,
+		set = function(info, v)
+			local tex = getTextureAndDB(info)
+			tex.settings.width = v ~= 180 and v or nil
+			tex:SetWidth(v * (tex.settings.scale or 1))
+		end
+	},
+	height = {
+		type = "range",
+		name = L["Height"],
+		min = 1,
+		max = 500,
+		step = 1,
+		bigStep = 1,
+		order = 152,
+		width = "full",
+		get = function(info)
+			local tex = getTextureAndDB(info)
+			return tex.settings.height or 180
+		end,
+		set = function(info, v)
+			local tex = getTextureAndDB(info)
+			tex.settings.height = v ~= 180 and v or nil
+			tex:SetHeight(v * (tex.settings.scale or 1))
 		end
 	},
 	layer = {
@@ -844,7 +882,6 @@ function mod:OnEnable()
 
 	customBackdrop = CreateFrame("Frame", "SexyMapCustomBackdrop", Minimap)
 	customBackdrop:SetFrameStrata("BACKGROUND")
-	customBackdrop:SetFrameLevel(customBackdrop:GetFrameLevel() - 1)
 	customBackdrop:SetPoint("CENTER")
 	customBackdrop:SetWidth(Minimap:GetWidth())
 	customBackdrop:SetHeight(Minimap:GetHeight())
@@ -1031,7 +1068,6 @@ end
 function mod:UpdateBackdrop()
 	if mod.db.backdrop.show then
 		customBackdrop:Show()
-		customBackdrop:SetFrameStrata("BACKGROUND")
 		customBackdrop:SetScale(mod.db.backdrop.scale or 1)
 		customBackdrop:SetAlpha(mod.db.backdrop.alpha or 1)
 		customBackdrop:SetBackdrop(mod.db.backdrop.settings)
