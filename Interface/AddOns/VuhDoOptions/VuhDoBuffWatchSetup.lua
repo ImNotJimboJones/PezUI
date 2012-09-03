@@ -34,7 +34,7 @@ local function VUHDO_buffSetupOkayOnClick()
 	local tFound = false;
 
 	for tCategoryName, tCategoryBuffs in pairs(tCategories) do
-		local tNameStr = strsub(tCategoryName, 3);
+		local tNameStr = tCategoryName;
 		local tSettings = VUHDO_BUFF_SETTINGS[tNameStr];
 		tGenericPanel = VUHDO_getGenericPanel(tNameStr);
 
@@ -352,19 +352,12 @@ function VUHDO_buildAllBuffSetupGenerericPanel()
 		return;
 	end
 
-	for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
-		if (VUHDO_BUFF_ORDER[tCategoryName] == nil) then
-			local tNumber = tonumber(strsub(tCategoryName, 1, 2));
-			VUHDO_BUFF_ORDER[tCategoryName] = tNumber;
-		end
-	end
-
 	tIndex = 0;
 	for _, _ in pairs(tAllBuffs) do
 		for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
 			local tNumber = VUHDO_BUFF_ORDER[tCategoryName];
 
-			local tName = strsub(tCategoryName, 3);
+			local tName = tCategoryName;
 
 			if (tNumber == tIndex + 1) then
 				tIndex = tIndex + 1;

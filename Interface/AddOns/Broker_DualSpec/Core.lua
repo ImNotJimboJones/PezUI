@@ -7,7 +7,7 @@
 -- ********************************************************************************
 
 -- Ace libs (<3)
-local A = LibStub("AceAddon-3.0"):NewAddon("Broker_DualSpec", "AceConsole-3.0", "AceEvent-3.0");
+local A = LibStub("AceAddon-3.0"):NewAddon("Broker_DualSpec", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0");
 local L = LibStub("AceLocale-3.0"):GetLocale("Broker_DualSpec", false);
 
 -- Addon global
@@ -15,6 +15,10 @@ _G["BrokerDualSpecGlobal"] = A;
 
 -- LibDBIcon
 A.icon = LibStub("LibDBIcon-1.0");
+
+-- Lua globals
+local ipairs = ipairs;
+local ssub, sformat, sfind, smatch = string.sub, string.format, string.find, string.match;
 
 -- ********************************************************************************
 -- Variables
@@ -63,13 +67,23 @@ local function DropdownMenu(self, level)
 		info.disabled = nil;
 		info.isTitle = nil;
 
+        local group = GetActiveSpecGroup(false);
+
         -- Primary spec gear set
-        info.text = "   "..L["PRIMARY_SPEC"];
+        if ( group == 1 ) then
+            info.text = "   "..L["PRIMARY_SPEC"].." !";
+        else
+            info.text = "   "..L["PRIMARY_SPEC"];
+        end
         info.value = "PRIMARY";
         UIDropDownMenu_AddButton(info, level);
 
         -- Secondary spec gear set
-        info.text = "   "..L["SECONDARY_SPEC"];
+        if ( group == 2 ) then
+            info.text = "   "..L["SECONDARY_SPEC"].." !";
+        else
+            info.text = "   "..L["SECONDARY_SPEC"];
+        end
         info.value = "SECONDARY";
         UIDropDownMenu_AddButton(info, level);
 
@@ -123,7 +137,7 @@ local function DropdownMenu(self, level)
             info.text = spec.." ("..points..")";
             info.notCheckable = 1;
             info.icon = nil;
-            --info.keepShownOnClick = 1;
+            info.keepShownOnClick = 1;
             UIDropDownMenu_AddButton(info, level);
 
             info.text = L["CLOAK"];
@@ -131,7 +145,7 @@ local function DropdownMenu(self, level)
             info.disabled = nil;
             info.notCheckable = nil;
             info.checked = function()
-                if ( A.db.profile.primaryCloak == 0 ) then
+                if ( db.primaryCloak == 0 ) then
                     return nil;
                 else
                     return 1;
@@ -140,12 +154,12 @@ local function DropdownMenu(self, level)
             info.func = function()
                 local current = GetActiveSpecGroup(false);
 
-                if ( A.db.profile.primaryCloak == 0 ) then
-                    A.db.profile.primaryCloak = 1;
+                if ( db.primaryCloak == 0 ) then
+                    db.primaryCloak = 1;
 
                     if ( current == 1 ) then ShowCloak(1); end
                 else
-                    A.db.profile.primaryCloak = 0;
+                    db.primaryCloak = 0;
 
                     if ( current == 1 ) then ShowCloak(nil); end
                 end
@@ -154,7 +168,7 @@ local function DropdownMenu(self, level)
 
             info.text = L["HELM"];
             info.checked = function()
-                if ( A.db.profile.primaryHelm == 0 ) then
+                if ( db.primaryHelm == 0 ) then
                     return nil;
                 else
                     return 1;
@@ -163,12 +177,12 @@ local function DropdownMenu(self, level)
             info.func = function()
                 local current = GetActiveSpecGroup(false);
 
-                if ( A.db.profile.primaryHelm == 0 ) then
-                    A.db.profile.primaryHelm = 1;
+                if ( db.primaryHelm == 0 ) then
+                    db.primaryHelm = 1;
 
                     if ( current == 1 ) then ShowHelm(1); end
                 else
-                    A.db.profile.primaryHelm = 0;
+                    db.primaryHelm = 0;
 
                     if ( current == 1 ) then ShowHelm(nil); end
                 end
@@ -180,6 +194,7 @@ local function DropdownMenu(self, level)
                 info.text = nil;
                 info.disabled = 1;
                 info.notCheckable = 1;
+                info.keepShownOnClick = nil;
                 UIDropDownMenu_AddButton(info, level);
 
                 -- Options
@@ -207,7 +222,7 @@ local function DropdownMenu(self, level)
             info.text = spec.." ("..points..")";
             info.notCheckable = 1;
             info.icon = nil;
-            --info.keepShownOnClick = 1;
+            info.keepShownOnClick = 1;
             UIDropDownMenu_AddButton(info, level);
 
             info.text = L["CLOAK"];
@@ -215,7 +230,7 @@ local function DropdownMenu(self, level)
             info.disabled = nil;
             info.notCheckable = nil;
             info.checked = function()
-                if ( A.db.profile.secondaryCloak == 0 ) then
+                if ( db.secondaryCloak == 0 ) then
                     return nil;
                 else
                     return 1;
@@ -224,12 +239,12 @@ local function DropdownMenu(self, level)
             info.func = function()
                 local current = GetActiveSpecGroup(false);
 
-                if ( A.db.profile.secondaryCloak == 0 ) then
-                    A.db.profile.secondaryCloak = 1;
+                if ( db.secondaryCloak == 0 ) then
+                    db.secondaryCloak = 1;
 
                     if ( current == 2 ) then ShowCloak(1); end
                 else
-                    A.db.profile.secondaryCloak = 0;
+                    db.secondaryCloak = 0;
 
                     if ( current == 2 ) then ShowCloak(nil); end
                 end
@@ -238,7 +253,7 @@ local function DropdownMenu(self, level)
 
             info.text = L["HELM"];
             info.checked = function()
-                if ( A.db.profile.secondaryHelm == 0 ) then
+                if ( db.secondaryHelm == 0 ) then
                     return nil;
                 else
                     return 1;
@@ -247,12 +262,12 @@ local function DropdownMenu(self, level)
             info.func = function()
                 local current = GetActiveSpecGroup(false);
 
-                if ( A.db.profile.secondaryHelm == 0 ) then
-                    A.db.profile.secondaryHelm = 1;
+                if ( db.secondaryHelm == 0 ) then
+                    db.secondaryHelm = 1;
 
                     if ( current == 2 ) then ShowHelm(1); end
                 else
-                    A.db.profile.secondaryHelm = 0;
+                    db.secondaryHelm = 0;
 
                     if ( current == 2 ) then ShowHelm(nil); end
                 end
@@ -264,6 +279,7 @@ local function DropdownMenu(self, level)
                 info.text = nil;
                 info.disabled = 1;
                 info.notCheckable = 1;
+                info.keepShownOnClick = nil;
                 UIDropDownMenu_AddButton(info, level);
 
                 -- Options
@@ -318,10 +334,16 @@ local function DropdownMenu(self, level)
 			end;
 			UIDropDownMenu_AddButton(info, level);
 
-			-- Display spec points
+			-- Switch gear too
 			info.text = L["SWITCH_GEAR_TOO"];
 			info.checked = db.gear;
 			info.func = function() db.gear = not db.gear; end;
+			UIDropDownMenu_AddButton(info, level);
+
+            -- Hide spam
+			info.text = L["HIDE_SPAM"];
+			info.checked = db.chatFilter;
+			info.func = function() db.chatFilter = not db.chatFilter; end;
 			UIDropDownMenu_AddButton(info, level);
 
 			-- Show/hide minimap icon
@@ -334,6 +356,182 @@ local function DropdownMenu(self, level)
 			UIDropDownMenu_AddButton(info, level);
 		end
 	end
+end
+
+-- ********************************************************************************
+-- Chat filter (spec change spam)
+-- ********************************************************************************
+
+--- Build the strings filter table
+-- Basically removing format conversion characters from GlobalStrings
+function A:BuildFilterTable()
+    -- deDE
+    -- ERR_SPELL_UNLEARNED_S = "Ihr habt %s verlernt.";
+    -- ERR_LEARN_ABILITY_S = "Ihr habt eine neue Fahigkeit erlernt: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Ihr habt einen neuen passiven Effekt erlernt: %s.";
+    -- ERR_LEARN_SPELL_S = "Ihr habt einen neuen Zauber erlernt: %s.";
+
+    -- enUS
+    -- ERR_SPELL_UNLEARNED_S = "You have unlearned %s.";
+    -- ERR_LEARN_ABILITY_S = "You have learned a new ability: %s.";
+    -- ERR_LEARN_PASSIVE_S = "You have learned a new passive effect: %s.";
+    -- ERR_LEARN_SPELL_S = "You have learned a new spell: %s.";
+
+    -- esES
+    -- ERR_SPELL_UNLEARNED_S = "Has olvidado lo aprendido sobre %s.";
+    -- ERR_LEARN_ABILITY_S = "Has aprendido una nueva facultad: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Has aprendido un nuevo efecto pasivo: %s.";
+    -- ERR_LEARN_SPELL_S = "Has aprendido un nuevo hechizo: %s.";
+
+    -- esMX
+    -- ERR_SPELL_UNLEARNED_S = "Has olvidado lo aprendido sobre %s.";
+    -- ERR_LEARN_ABILITY_S = "Has aprendido una nueva facultad: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Has aprendido un nuevo efecto pasivo: %s.";
+    -- ERR_LEARN_SPELL_S = "Has aprendido un nuevo hechizo: %s.";
+
+    -- frFR
+    -- ERR_SPELL_UNLEARNED_S = "Vous avez oublie %s.";
+    -- ERR_LEARN_ABILITY_S = "Vous avez appris une nouvelle technique?: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Vous avez appris un nouvel effet passif?: %s.";
+    -- ERR_LEARN_SPELL_S = "Vous avez appris un nouveau sort?: %s.";
+
+    -- itIT
+    -- ERR_SPELL_UNLEARNED_S = "Hai scordato %s.";
+    -- ERR_LEARN_ABILITY_S = "Hai appreso una nuova abilita: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Hai appreso una nuova abilita passiva: %s.";
+    -- ERR_LEARN_SPELL_S = "Hai appreso un nuovo incantesimo: %s.";
+
+    -- koKR
+    -- ERR_SPELL_UNLEARNED_S = "%s ½ÀµæÀ» Ãë¼ÒÇß½À´Ï´Ù.";
+    -- ERR_LEARN_ABILITY_S = "»õ·Î¿î ´É·ÂÀ» ÀÍÇû½À´Ï´Ù: %s";
+    -- ERR_LEARN_PASSIVE_S = "»õ·Î¿î Áö¼ÓÈ¿°ú¸¦ ÀÍÇû½À´Ï´Ù: %s";
+    -- ERR_LEARN_SPELL_S = "»õ·Î¿î ÁÖ¹®À» ÀÍÇû½À´Ï´Ù: %s";
+
+    -- ptBR
+    -- ERR_SPELL_UNLEARNED_S = "Voce desaprendeu %s.";
+    -- ERR_LEARN_ABILITY_S = "Voce aprendeu uma nova habilidade: %s.";
+    -- ERR_LEARN_PASSIVE_S = "Voce aprendeu um novo efeito passivo: %s.";
+    -- ERR_LEARN_SPELL_S = "Voce aprendeu um feitico novo: %s.";
+
+    -- ruRU
+    -- ERR_SPELL_UNLEARNED_S = "¬£¬í ¬Ù¬Ñ¬Ò¬í¬Ý¬Ú %s.";
+    -- ERR_LEARN_ABILITY_S = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î: %s.";
+    -- ERR_LEARN_PASSIVE_S = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬á¬Ñ¬ã¬ã¬Ú¬Ó¬ß¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î: %s.";
+    -- ERR_LEARN_SPELL_S = "¬£¬í ¬Ó¬í¬å¬é¬Ú¬Ý¬Ú ¬ß¬à¬Ó¬à¬Ö ¬Ù¬Ñ¬Ü¬Ý¬Ú¬ß¬Ñ¬ß¬Ú¬Ö: %s.";
+
+    -- zhCN
+    -- ERR_SPELL_UNLEARNED_S = "?ØÎÊ¿Öõ%s";
+    -- ERR_LEARN_ABILITY_S = "???ãæîÜÐüÒö£º%s";
+    -- ERR_LEARN_PASSIVE_S = "???ÖõãæîÜù¬?üùÍý£º%s¡£";
+    -- ERR_LEARN_SPELL_S = "???ãæîÜÛö?£º%s";
+
+    -- zhTW
+    -- ERR_SPELL_UNLEARNED_S = "?ØÎ?Öõ%s¡£";
+    -- ERR_LEARN_ABILITY_S = "?ùÊüåãæîÜÐüÒö:%s¡£";
+    -- ERR_LEARN_PASSIVE_S = "?ùÊüåÖõãæîÜù¬ÔÑÐüÒö:%s¡£";
+    -- ERR_LEARN_SPELL_S = "?ùÊüåãæîÜÛöâú:%s¡£";
+
+    local locale = GetLocale();
+    A.filterTable = {};
+
+    if ( locale == "deDE" ) then
+        A.filterTable[1] = "verlernt.";
+        A.filterTable[2] = "Ihr habt eine neue F\195\164higkeit erlernt";
+        A.filterTable[3] = "Ihr habt einen neuen passiven Effekt erlernt";
+        A.filterTable[4] = "Ihr habt einen neuen Zauber erlernt";
+    elseif ( locale == "enUS" ) then
+        A.filterTable[1] = "You have unlearned";
+        A.filterTable[2] = "You have learned a new ability";
+        A.filterTable[3] = "You have learned a new passive effect";
+        A.filterTable[4] = "You have learned a new spell";
+    elseif ( locale == "esES" ) then
+        A.filterTable[1] = "Has olvidado lo aprendido sobre";
+        A.filterTable[2] = "Has aprendido una nueva facultad";
+        A.filterTable[3] = "Has aprendido un nuevo efecto pasivo";
+        A.filterTable[4] = "Has aprendido un nuevo hechizo";
+    elseif ( locale == "esMX" ) then
+        A.filterTable[1] = "Has olvidado lo aprendido sobre";
+        A.filterTable[2] = "Has aprendido una nueva facultad";
+        A.filterTable[3] = "Has aprendido un nuevo efecto pasivo";
+        A.filterTable[4] = "Has aprendido un nuevo hechizo";
+    elseif ( locale == "frFR" ) then
+        A.filterTable[1] = "Vous avez oubli\195\169";
+        A.filterTable[2] = "Vous avez appris une nouvelle technique";
+        A.filterTable[3] = "Vous avez appris un nouvel effet passif";
+        A.filterTable[4] = "Vous avez appris un nouveau sort";
+    elseif ( locale == "itIT" ) then
+        A.filterTable[1] = "Hai scordato";
+        A.filterTable[2] = "Hai appreso una nuova abilit\195\160";
+        A.filterTable[3] = "Hai appreso una nuova abilit\195\160 passiva";
+        A.filterTable[4] = "Hai appreso un nuovo incantesimo"
+    elseif ( locale == "koKR" ) then
+        A.filterTable[1] = "½ÀµæÀ» Ãë¼ÒÇß½À´Ï´Ù";
+        A.filterTable[2] = "»õ·Î¿î ´É·ÂÀ» ÀÍÇû½À´Ï´Ù";
+        A.filterTable[3] = "»õ·Î¿î Áö¼ÓÈ¿°ú¸¦ ÀÍÇû½À´Ï´Ù";
+        A.filterTable[4] = "»õ·Î¿î ÁÖ¹®À» ÀÍÇû½À´Ï´Ù";
+    elseif ( locale == "ptBR" ) then
+        A.filterTable[1] = "Voc\195\170 desaprendeu";
+        A.filterTable[2] = "Voc\195\170 aprendeu uma nova habilidade";
+        A.filterTable[3] = "Voc\195\170 aprendeu um novo efeito passivo";
+        A.filterTable[4] = "Voc\195\170 aprendeu um feiti\195\167o novo";
+    elseif ( locale == "ruRU" ) then
+        A.filterTable[1] = "¬£¬í ¬Ù¬Ñ¬Ò¬í¬Ý¬Ú";
+        A.filterTable[2] = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î";
+        A.filterTable[3] = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬á¬Ñ¬ã¬ã¬Ú¬Ó¬ß¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î";
+        A.filterTable[4] = "¬£¬í ¬Ó¬í¬å¬é¬Ú¬Ý¬Ú ¬ß¬à¬Ó¬à¬Ö ¬Ù¬Ñ¬Ü¬Ý¬Ú¬ß¬Ñ¬ß¬Ú¬Ö";
+    elseif ( locale == "zhCN" ) then
+        A.filterTable[1] = "?ØÎÊ¿Öõ";
+        A.filterTable[2] = "???ãæîÜÐüÒö";
+        A.filterTable[3] = "???ÖõãæîÜù¬?üùÍý";
+        A.filterTable[4] = "???ãæîÜÛö?";
+    elseif ( locale == "zhTW" ) then
+        A.filterTable[1] = "?ØÎ?Öõ";
+        A.filterTable[2] = "?ùÊüåãæîÜÐüÒö";
+        A.filterTable[3] = "?ùÊüåÖõãæîÜù¬ÔÑÐüÒö";
+        A.filterTable[4] = "?ùÊüåãæîÜÛöâú";
+    else
+        A.db.profile.chatFilter = nil;
+        A.chatFilterActive = nil;
+        A.filterTable = nil;
+        A:CancelTimer(A.chatFilterTimer, 1);
+        A:ChatFilterSetCallback();
+        A:Message(L["LOCAL_NOT_SUPPORTED"]:format(locale), 1);
+    end
+end
+
+--- Filter callback function
+-- Called by "ChatFrame_MessageEventHandler" from ChatFrame.lua
+A.ChatFilter = function(self, event, msg, ...)
+    if ( not A.chatFilterActive ) then return; end
+
+    if ( not A.filterTable ) then A:BuildFilterTable(); end
+
+    for _,v in ipairs(A.filterTable) do
+        if ( sfind(msg, v) ) then return 1; end
+    end
+
+    return nil;
+end
+
+--- Timer callback
+-- Chat is filtered 10 sec after spec change
+function A:ChatFilterTimer()
+    A.chatFilterActive = nil;
+end
+
+--- Set or unset the chat filter callback
+-- @param unset Force unsetting callback
+function A:ChatFilterSetCallback(unset)
+    if ( unset ) then
+        ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", A.ChatFilter);
+        return;
+    end
+
+    if ( A.db.profile.chatFilter ) then
+        ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", A.ChatFilter);
+    else
+        ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", A.ChatFilter);
+    end
 end
 
 -- ********************************************************************************
@@ -386,7 +584,7 @@ end
 --- Handle the slash command
 -- @param input The string returned after the command
 function A:SlashCommand(input)
-	local arg1, arg2 = string.match(input, "(%a*)%s?(.*)");
+	local arg1, arg2 = smatch(input, "(%a*)%s?(.*)");
 
 	if ( arg1 == "" ) then
 		A:SwitchSpec();
@@ -442,7 +640,7 @@ function A:GetSpecInfos(group)
 	local talents = "";
 	local spec = L["NOT_AVAILABLE"];
 	local icon = "Interface\\ICONS\\INV_Misc_QuestionMark";
-    local maxNumTalents, column, selected = 18, nil, nil;
+    local maxNumTalents, column, selected, _ = 18, nil, nil, nil;
 
 	if ( not group ) then group = GetActiveSpecGroup(false); end
 
@@ -498,6 +696,8 @@ function A:SwitchSpec()
 		return;
 	end
 
+    if ( UnitCastingInfo("player") ) then return; end
+
 	local current = GetActiveSpecGroup(false);
 
 	if ( current == 1 ) then
@@ -505,11 +705,17 @@ function A:SwitchSpec()
 	else
 		SetActiveSpecGroup(1);
 	end
+
+    if ( A.db.profile.chatFilter ) then
+        A.chatFilterActive = 1;
+        A:CancelTimer(A.chatFilterTimer, 1);
+        A.chatFilterTimer = A:ScheduleTimer("ChatFilterTimer", 15);
+    end
 end
 
 --- Set display options depending on config and spec
 -- @param spec 1 or 2
-function SetDisplayOptions(spec)
+function A:SetDisplayOptions(spec)
     if ( spec == 2 ) then
         if ( A.db.profile.secondaryCloak == 0 ) then
             ShowCloak(nil);
@@ -564,14 +770,14 @@ function A:ACTIVE_TALENT_GROUP_CHANGED()
 		if ( current == 1 ) then
 			if ( A.db.profile.primary ~= "" )then
 				UseEquipmentSet(A.db.profile.primary);
-                SetDisplayOptions(1);
+                A:SetDisplayOptions(1);
 			else
 				A:Message(L["NO_GEAR_DEFINED"], true);
 			end
 		else
 			if ( A.db.profile.secondary ~= "" )then
 				UseEquipmentSet(A.db.profile.secondary);
-                SetDisplayOptions(2);
+                A:SetDisplayOptions(2);
 			else
 				A:Message(L["NO_GEAR_DEFINED"], true);
 			end
@@ -600,6 +806,7 @@ local defaults =
 		specname = 1,
 		points = 1,
 		gear = 1,
+        chatFilter = 1,
         primaryCloak = nil,
         primaryHelm = nil,
         secondaryCloak = nil,
@@ -620,7 +827,11 @@ local defaults =
 function A:OnInitialize()
 	-- Config db
 	A.db = LibStub("AceDB-3.0"):New("Broker_DualSpecDB", defaults);
+end
 
+--- AceAddon callback
+-- Called during the PLAYER_LOGIN event
+function A:OnEnable()
 	-- LDB
 	A.ldb = LibStub("LibDataBroker-1.1"):NewDataObject("Broker_DualSpecObject",
 	{
@@ -642,7 +853,7 @@ function A:OnInitialize()
 			end
 		end,
 		OnTooltipShow = function(tooltip)
-			local spec, points, currentGroup, altGroup;
+			local spec, points, currentGroup, altGroup, display, _;
             local current = GetActiveSpecGroup(false);
 
             if ( current == 1 ) then
@@ -669,14 +880,48 @@ function A:OnInitialize()
 
 			if ( A.db.profile.gear ) then
 				if ( current == 1 ) then
+                    -- Gear set switch
 					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.secondary);
+
+                    -- Helm hidden/shown
+                    if ( A.db.profile.secondaryHelm == 0 ) then
+                        display = L["HIDDEN"];
+                    else
+                        display = L["SHOWN"];
+                    end
+                    tooltip:AddLine(L["HELM"]..": "..display);
+
+                    -- Cloak hidden/shown
+                    if ( A.db.profile.secondaryCloak == 0 ) then
+                        display = L["HIDDEN"];
+                    else
+                        display = L["SHOWN"];
+                    end
+                    tooltip:AddLine(L["CLOAK"]..": "..display);
 				else
+                    -- Gear set switch
 					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.primary);
+
+                    -- Helm hidden/shown
+                    if ( A.db.profile.primaryHelm == 0 ) then
+                        display = L["HIDDEN"];
+                    else
+                        display = L["SHOWN"];
+                    end
+                    tooltip:AddLine(L["HELM"]..": "..display);
+
+                    -- Cloak hidden/shown
+                    if ( A.db.profile.primaryCloak == 0 ) then
+                        display = L["HIDDEN"];
+                    else
+                        display = L["SHOWN"];
+                    end
+                    tooltip:AddLine(L["CLOAK"]..": "..display);
 				end
 			end
 
 			tooltip:AddLine(" ");
-			tooltip:AddLine(string.format(L["TOOLTIP_TIPS"], A.color["WARRIOR"], A.color["GREEN"], A.color["WARRIOR"], A.color["GREEN"]));
+			tooltip:AddLine(sformat(L["TOOLTIP_TIPS"], A.color["WARRIOR"], A.color["GREEN"], A.color["WARRIOR"], A.color["GREEN"]));
 		end,
 	});
 
@@ -720,4 +965,28 @@ function A:OnInitialize()
             A.db.profile.primaryHelm = 0;
         end
     end
+
+    -- Chat filter init
+    A:ChatFilterSetCallback();
+end
+
+--- AceAddon callback
+-- Called when the addon is manually disabled
+function A:OnDisable()
+    -- Chat filter unset callback
+    A:ChatFilterSetCallback(1);
+
+    -- Chat filter timer
+    A:CancelTimer(A.chatFilterTimer, 1);
+
+    -- Slash command
+	A:UnregisterChatCommand("brokerdualspec");
+	A:UnregisterChatCommand("bds");
+	A:UnregisterChatCommand("ds");
+
+    -- Events
+	A:UnregisterEvent("ZONE_CHANGED_NEW_AREA");
+	A:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+	A:UnregisterEvent("PLAYER_ENTERING_WORLD");
+    A:UnregisterEvent("CHARACTER_POINTS_CHANGED");
 end

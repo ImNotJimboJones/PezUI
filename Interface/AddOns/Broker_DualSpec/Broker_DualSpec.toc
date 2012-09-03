@@ -3,8 +3,8 @@
 ## Notes: A dual specialisation switch for Data Broker.
 ## Author: Shenton
 ## SavedVariables: Broker_DualSpecDB
-## Version: 1.4
-## X-Curse-Packaged-Version: v1.4
+## Version: 1.5
+## X-Curse-Packaged-Version: v1.5
 ## X-Curse-Project-Name: Data Broker Dual Specialisation
 ## X-Curse-Project-ID: broker-dualspec
 ## X-Curse-Repository-ID: wow/broker-dualspec/mainline
@@ -20,5 +20,6 @@ Localization\Locales-enUS.lua
 Localization\Locales-esES.lua
 Localization\Locales-frFR.lua
 Localization\Locales-zhCN.lua
+Localization\Locales-zhTW.lua
 
 Core.lua

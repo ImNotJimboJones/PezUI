@@ -1,0 +1,115 @@
+------------------------------------------------------------------------
+r35 | shenton | 2012-09-04 06:52:59 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v1.5 (from /trunk:34)
+
+Tagging as v1.5
+------------------------------------------------------------------------
+r34 | shenton | 2012-09-04 06:51:16 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   A /trunk/Localization/locales-zhTW.lua
+
+Added zhTW localization
+------------------------------------------------------------------------
+r33 | shenton | 2012-09-04 06:32:54 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Libs
+   D /trunk/Libs/AceAddon-3.0
+   D /trunk/Libs/AceConsole-3.0
+   D /trunk/Libs/AceDB-3.0
+   D /trunk/Libs/AceEvent-3.0
+   D /trunk/Libs/AceLocale-3.0
+   D /trunk/Libs/AceTimer-3.0
+   D /trunk/Libs/CallbackHandler-1.0
+   D /trunk/Libs/LibDBIcon-1.0
+   D /trunk/Libs/LibStub
+
+LDB removed from ignore (/me derp)
+------------------------------------------------------------------------
+r32 | shenton | 2012-09-04 06:30:38 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   A /trunk/Libs
+   A /trunk/Libs/AceAddon-3.0
+   A /trunk/Libs/AceAddon-3.0/AceAddon-3.0.lua
+   A /trunk/Libs/AceAddon-3.0/AceAddon-3.0.xml
+   A /trunk/Libs/AceConsole-3.0
+   A /trunk/Libs/AceConsole-3.0/AceConsole-3.0.lua
+   A /trunk/Libs/AceConsole-3.0/AceConsole-3.0.xml
+   A /trunk/Libs/AceDB-3.0
+   A /trunk/Libs/AceDB-3.0/AceDB-3.0.lua
+   A /trunk/Libs/AceDB-3.0/AceDB-3.0.xml
+   A /trunk/Libs/AceEvent-3.0
+   A /trunk/Libs/AceEvent-3.0/AceEvent-3.0.lua
+   A /trunk/Libs/AceEvent-3.0/AceEvent-3.0.xml
+   A /trunk/Libs/AceLocale-3.0
+   A /trunk/Libs/AceLocale-3.0/AceLocale-3.0.lua
+   A /trunk/Libs/AceLocale-3.0/AceLocale-3.0.xml
+   A /trunk/Libs/AceTimer-3.0
+   A /trunk/Libs/AceTimer-3.0/AceTimer-3.0.lua
+   A /trunk/Libs/AceTimer-3.0/AceTimer-3.0.xml
+   A /trunk/Libs/CallbackHandler-1.0
+   A /trunk/Libs/CallbackHandler-1.0/CallbackHandler-1.0.lua
+   A /trunk/Libs/CallbackHandler-1.0/CallbackHandler-1.0.xml
+   A /trunk/Libs/LibDBIcon-1.0
+   A /trunk/Libs/LibDBIcon-1.0/LibDBIcon-1.0.lua
+   A /trunk/Libs/LibDataBroker-1.1
+   A /trunk/Libs/LibDataBroker-1.1/LibDataBroker-1.1.lua
+   A /trunk/Libs/LibStub
+   A /trunk/Libs/LibStub/LibStub.lua
+
+test
+------------------------------------------------------------------------
+r31 | shenton | 2012-09-04 06:29:02 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk
+
+test
+------------------------------------------------------------------------
+r30 | shenton | 2012-09-04 05:57:32 +0000 (Tue, 04 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Core.lua
+   M /trunk/Embeds.xml
+   M /trunk/Localization/locales-enUS.lua
+   M /trunk/Localization/locales-frFR.lua
+
+Minor fixes
+Blizzard derping with dummy var
+Added a hide switch spec spam option
+------------------------------------------------------------------------
+r28 | shenton | 2012-09-03 15:39:13 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Core.lua
+
+ToggleDropDownMenu anchor fix
+------------------------------------------------------------------------
+r27 | shenton | 2012-09-03 03:46:40 +0000 (Mon, 03 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+
+Fix dual spec detection with no spec
+------------------------------------------------------------------------
+r25 | shenton | 2012-08-31 00:48:20 +0000 (Fri, 31 Aug 2012) | 2 lines
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Core.lua
+
+Missed some GetActiveTalentGroup
+Fixed dual spec informations gathering (global specID)
+------------------------------------------------------------------------
+r23 | shenton | 2012-08-30 21:58:30 +0000 (Thu, 30 Aug 2012) | 3 lines
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Core.lua
+   M /trunk/Localization/locales-enUS.lua
+   M /trunk/Localization/locales-esES.lua
+   M /trunk/Localization/locales-frFR.lua
+   M /trunk/Localization/locales-zhCN.lua
+
+MOP update
+Option to show/hide cloak and helm with spec change
+Localizations update
+------------------------------------------------------------------------

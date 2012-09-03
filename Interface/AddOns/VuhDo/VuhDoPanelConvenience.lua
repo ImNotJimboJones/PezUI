@@ -355,12 +355,11 @@ end
 
 
 --
-local tACategSpec, tAnotherCategSpec;
 local function VUHDO_buffWatchSorter(aSwatch, anotherSwatch)
-	tACategSpec = aSwatch:GetAttribute("buffname");
-	tAnotherCategSpec = anotherSwatch:GetAttribute("buffname");
-	return (VUHDO_BUFF_ORDER[tACategSpec] or 1000) < (VUHDO_BUFF_ORDER[tAnotherCategSpec] or 1000);
+	return VUHDO_BUFF_ORDER[aSwatch:GetAttribute("buffname")]
+		< VUHDO_BUFF_ORDER[anotherSwatch:GetAttribute("buffname")];
 end
+
 
 
 --

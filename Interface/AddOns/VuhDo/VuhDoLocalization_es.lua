@@ -109,30 +109,29 @@ VUHDO_I18N_BROADCAST_MTS = "Sincronizar MTS";
 -- @EXACT = false
 -- Priest
 -- Shaman
-VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Totem de fuego";
-VUHDO_I18N_BUFFC_AIR_TOTEM = "02Totem de aire";
-VUHDO_I18N_BUFFC_EARTH_TOTEM = "03Totem de tierra";
-VUHDO_I18N_BUFFC_WATER_TOTEM = "04Totem de agua";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Armas encantadas";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Armas encantadas 2";
-VUHDO_I18N_BUFFC_SHIELDS = "09Escudos";
+VUHDO_I18N_BUFFC_FIRE_TOTEM = "Totem de fuego";
+VUHDO_I18N_BUFFC_AIR_TOTEM = "Totem de aire";
+VUHDO_I18N_BUFFC_EARTH_TOTEM = "Totem de tierra";
+VUHDO_I18N_BUFFC_WATER_TOTEM = "Totem de agua";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "Armas encantadas";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "Armas encantadas 2";
+VUHDO_I18N_BUFFC_SHIELDS = "Escudos";
 -- Paladin
-VUHDO_I18N_BUFFC_BLESSING = "01Bendicion";
---VUHDO_I18N_BUFFC_AURA = "02Aura";
-VUHDO_I18N_BUFFC_SEAL = "02Sello";
+VUHDO_I18N_BUFFC_BLESSING = "Bendicion";
+VUHDO_I18N_BUFFC_SEAL = "Sello";
 -- Druids
 -- Warlock
-VUHDO_I18N_BUFFC_SKIN = "01Piel de demonio";
+VUHDO_I18N_BUFFC_SKIN = "Piel de demonio";
 -- Mage
-VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armadura";
+VUHDO_I18N_BUFFC_ARMOR_MAGE = "Armadura";
 -- Death Knight
-VUHDO_BUFFC_PRESENCE    = "03Presencia";
+VUHDO_BUFFC_PRESENCE    = "Presencia";
 -- Warrior
-VUHDO_I18N_BUFFC_SHOUT = "01Grito";
+VUHDO_I18N_BUFFC_SHOUT = "Grito";
 -- Hunter
-VUHDO_I18N_BUFFC_ASPECT = "02Aspecto";
+VUHDO_I18N_BUFFC_ASPECT = "Aspecto";
 -- Monk
-VUHDO_I18N_BUFFC_STANCE = "01Stance";
+VUHDO_I18N_BUFFC_STANCE = "Stance";
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo - Raid Frames";

@@ -110,30 +110,29 @@ VUHDO_I18N_BROADCAST_MTS = "Diffuser les MTs";
 -- @EXACT = false
 -- Priest
 -- Shaman
-VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Totem de feu";
-VUHDO_I18N_BUFFC_AIR_TOTEM = "02Totem d'air";
-VUHDO_I18N_BUFFC_EARTH_TOTEM = "03Totem de terre";
-VUHDO_I18N_BUFFC_WATER_TOTEM = "04Totem d'eau";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Enchantement d'arme";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Enchantement d'arme 2";
-VUHDO_I18N_BUFFC_SHIELDS = "09Boucliers";
+VUHDO_I18N_BUFFC_FIRE_TOTEM = "Totem de feu";
+VUHDO_I18N_BUFFC_AIR_TOTEM = "Totem d'air";
+VUHDO_I18N_BUFFC_EARTH_TOTEM = "Totem de terre";
+VUHDO_I18N_BUFFC_WATER_TOTEM = "Totem d'eau";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "Enchantement d'arme";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "Enchantement d'arme 2";
+VUHDO_I18N_BUFFC_SHIELDS = "Boucliers";
 -- Paladin
-VUHDO_I18N_BUFFC_BLESSING = "01B\195\169n\195\169diction";
---VUHDO_I18N_BUFFC_AURA = "02Aura";
-VUHDO_I18N_BUFFC_SEAL = "02Sceau";
+VUHDO_I18N_BUFFC_BLESSING = "B\195\169n\195\169diction";
+VUHDO_I18N_BUFFC_SEAL = "Sceau";
 -- Druids
 -- Warlock
-VUHDO_I18N_BUFFC_SKIN = "01Peau";
+VUHDO_I18N_BUFFC_SKIN = "Peau";
 -- Mage
-VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Armure";
+VUHDO_I18N_BUFFC_ARMOR_MAGE = "Armure";
 -- Death Knight
-VUHDO_BUFFC_PRESENCE    = "03Présence";
+VUHDO_BUFFC_PRESENCE    = "Présence";
 -- Warrior
-VUHDO_I18N_BUFFC_SHOUT = "01Cri";
+VUHDO_I18N_BUFFC_SHOUT = "Cri";
 -- Hunter
-VUHDO_I18N_BUFFC_ASPECT = "02Aspect";
+VUHDO_I18N_BUFFC_ASPECT = "Aspect";
 -- Monk
-VUHDO_I18N_BUFFC_STANCE = "01Stance";
+VUHDO_I18N_BUFFC_STANCE = "Stance";
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo - Raid Frames";

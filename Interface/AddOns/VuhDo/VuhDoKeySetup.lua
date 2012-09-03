@@ -131,9 +131,7 @@ local function _VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, a
 
 		aButton["VUHDO_contextMenu"] = VUHDO_contextMenu;
 	else
-		--[[anAction = GetSpellBookItemInfo(anAction) ~= nil and anAction
-			or VUHDO_NAME_TO_SPELL[anAction] ~= nil and VUHDO_NAME_TO_SPELL[anAction]
-			or anAction;]]
+		anAction = VUHDO_REPLACE_SPELL_NAME[anAction] or anAction;
 
 		if (VUHDO_isSpellKnown(anAction) or VUHDO_IN_COMBAT_RELOG) then -- Spells may not be initialized yet
 		--if (GetSpellBookItemTexture(anAction) ~= nil or VUHDO_IN_COMBAT_RELOG) then -- Spells may not be initialized yet

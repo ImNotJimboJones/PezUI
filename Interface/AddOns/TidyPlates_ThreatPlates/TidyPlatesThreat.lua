@@ -9,7 +9,7 @@ local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
 
 StaticPopupDialogs["TPTP_ChangeLog"] = {
-	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n*Fixed issue with 'No outline, Monochrome' text flag.\n*Removed '()' from the spec swap verbose.", 
+	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n*Fixed issue on spec information detection.", 
 	button1 = "Thanks for the info!",
 	timeout = 0,
 	whileDead = 1, 
@@ -1442,10 +1442,9 @@ end
 ------------
 function TidyPlatesThreat:specInfo()
 	for i=1, GetNumSpecGroups() do
-		local id, name, description, icon, background = GetSpecializationInfo(i, nil, false);
-		local pointsSpent = GetSpecializationRole(i,nil, false)
-			
-		TidyPlatesThreat.db.char.specInfo[i].role = pointsSpent
+		local specValue = GetSpecialization(false,false,i)
+		local id, name, description, icon, background,role = GetSpecializationInfo(specValue, nil, false);
+		TidyPlatesThreat.db.char.specInfo[i].role = role
 		TidyPlatesThreat.db.char.specInfo[i].name = name
 	end
 end
@@ -1569,6 +1568,7 @@ function f:Events(self,event,...)
 				TidyPlates:DisableFadeIn()
 			end
 			if GlobDB.version and GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
+				CharDB.welcome = false
 				StaticPopup_Show("TPTP_ChangeLog")
 			end
 			GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))

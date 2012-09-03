@@ -569,8 +569,8 @@ function LDBToTitan:TitanLDBCreateObject(_, name, obj)
 			issue = "Unsupported LDB type '"..obj.type.."'", 
 			notes = "", 
 			status = TITAN_REGISTER_FAILED,
-			category = nil,
-			plugin_type = obj.type,
+			category = "",
+			plugin_type = (obj.type or ""),
 			}
 		TitanUtils_PluginFail(plugin)
 		return -- get out, there is nothing more that can be done

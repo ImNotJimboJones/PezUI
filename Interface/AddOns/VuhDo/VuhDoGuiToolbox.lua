@@ -551,7 +551,7 @@ end
 --
 local function VUHDO_showBlizzFocus()
 	FocusFrame:RegisterAllEvents();
-	TargetFrame_OnLoad(FocusFrame, "focus", FocusFrameDropDown_Initialize);
+	--TargetFrame_OnLoad(FocusFrame, "focus", FocusFrameDropDown_Initialize);
 end
 
 
@@ -767,3 +767,98 @@ end
 function VUHDO_textColor(aColor)
 	return aColor["TR"], aColor["TG"], aColor["TB"], aColor["TO"];
 end
+
+
+
+
+
+----------------------------------------
+
+local VUHDO_FLASHFRAMES = { };
+
+
+--
+local tFrame;
+
+function VUHDO_UIFrameFlash(aFrame, aFadeInTime, aFadeOutTime, aFlashDuration, anIsShowWhenDone, aFlashInHoldTime, aFlashOutHoldTime)
+
+  -- If frame is already set to flash then return
+  for  _, tFrame in pairs(VUHDO_FLASHFRAMES) do
+    if (tFrame == aFrame) then
+    	return;
+    end
+  end
+
+  aFrame.fadeInTime = aFadeInTime;
+  aFrame.fadeOutTime = aFadeOutTime;
+  aFrame.flashDuration = aFlashDuration;
+  aFrame.showWhenDone = anIsShowWhenDone;
+  aFrame.flashTimer = 0;
+  aFrame.flashInHoldTime = aFlashInHoldTime;
+  aFrame.flashOutHoldTime = aFlashOutHoldTime;
+
+  VUHDO_FLASHFRAMES[#VUHDO_FLASHFRAMES + 1] = aFrame;
+end
+
+
+
+-- Called every frame to update flashing frames
+local tFrame;
+local tIndex;
+local tFlashTime;
+local tAlpha;
+
+function VUHDO_UIFrameFlash_OnUpdate(aTimeDelta)
+	tIndex = #VUHDO_FLASHFRAMES;
+
+	while (VUHDO_FLASHFRAMES[tIndex]) do
+	  tFrame = VUHDO_FLASHFRAMES[tIndex];
+	  tFrame.flashTimer = tFrame.flashTimer + aTimeDelta;
+
+	  if (tFrame.flashTimer > tFrame.flashDuration and tFrame.flashDuration ~= -1) then
+	    VUHDO_UIFrameFlashStop(tFrame);
+	  else
+	    tFlashTime = tFrame.flashTimer;
+
+	    tFlashTime = tFlashTime
+	    	% (tFrame.fadeInTime + tFrame.fadeOutTime + (tFrame.flashInHoldTime or 0) + (tFrame.flashOutHoldTime or 0));
+
+	    if (tFlashTime < tFrame.fadeInTime) then
+	    	tAlpha = tFlashTime / tFrame.fadeInTime;
+	    elseif (tFlashTime < tFrame.fadeInTime + (tFrame.flashInHoldTime or 0)) then
+	    	tAlpha = 1;
+	    elseif (tFlashTime < tFrame.fadeInTime + (tFrame.flashInHoldTime or 0) + tFrame.fadeOutTime) then
+	    	tAlpha = 1 - ((tFlashTime - tFrame.fadeInTime - (tFrame.flashInHoldTime or 0)) / tFrame.fadeOutTime);
+	    else
+	    	tAlpha = 0;
+	    end
+
+	    tFrame:SetAlpha(tAlpha);
+	    tFrame:Show();
+	  end
+
+	  -- Loop in reverse so that removing frames is safe
+	  tIndex = tIndex - 1;
+	end
+end
+
+
+
+--
+function VUHDO_UIFrameFlashStop(aFrame)
+	tDeleteItem(VUHDO_FLASHFRAMES, aFrame);
+	aFrame:SetAlpha(1.0);
+	aFrame.flashTimer = nil;
+	aFrame:SetShown(aFrame.showWhenDone);
+end
+
+
+
+
+
+
+
+
+
+
+

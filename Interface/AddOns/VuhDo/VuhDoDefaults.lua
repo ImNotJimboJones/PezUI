@@ -1602,7 +1602,7 @@ end
 
 
 local VUHDO_DEFAULT_BUFF_CONFIG = {
-  ["VERSION"] = 3,
+  ["VERSION"] = 4,
 	["SHOW"] = true,
 	["COMPACT"] = true,
 	["SHOW_LABEL"] = false,
@@ -1721,24 +1721,68 @@ end
 
 
 
+local function VUHDO_getFirstFreeBuffOrder()
+	local tCnt;
+	for tCnt = 1, 10000 do
+		if (VUHDO_tableGetKeyFromValue(VUHDO_BUFF_ORDER, tCnt) == nil) then
+			return tCnt;
+		end
+	end
+
+	return nil;
+end
+
+
+--
+local function VUHDO_fixBuffOrder()
+	local _, tPlayerClass = UnitClass("player");
+	local tAllBuffs = VUHDO_CLASS_BUFFS[tPlayerClass] or { };
+	local tCategName;
+	local tSortArray = {};
+
+	-- Order ohne buff?
+	for tCategName, _ in pairs(VUHDO_BUFF_ORDER) do
+		if (tAllBuffs[tCategName] == nil) then
+			VUHDO_BUFF_ORDER[tCategName] = nil;
+		end
+	end
+
+	-- Buffs ohne order?
+	for tCategName, _ in pairs(tAllBuffs) do
+		if (VUHDO_BUFF_ORDER[tCategName] == nil) then
+			VUHDO_BUFF_ORDER[tCategName] = VUHDO_getFirstFreeBuffOrder();
+		end
+
+		tinsert(tSortArray, tCategName);
+	end
+
+	table.sort(tSortArray, function(aCateg, anotherCateg) return VUHDO_BUFF_ORDER[aCateg] < VUHDO_BUFF_ORDER[anotherCateg] end);
+	table.wipe(VUHDO_BUFF_ORDER);
+	for tIndex, tCateg in ipairs(tSortArray) do
+		VUHDO_BUFF_ORDER[tCateg] = tIndex;
+	end
+
+end
+
+
+
 --
 function VUHDO_initBuffSettings()
 	if (VUHDO_BUFF_SETTINGS["CONFIG"] == nil) then
 		VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_decompressOrCopy(VUHDO_DEFAULT_BUFF_CONFIG);
 	end
+
 	VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_ensureSanity("VUHDO_BUFF_SETTINGS.CONFIG", VUHDO_BUFF_SETTINGS["CONFIG"], VUHDO_DEFAULT_BUFF_CONFIG);
 	VUHDO_DEFAULT_BUFF_CONFIG = VUHDO_compressTable(VUHDO_DEFAULT_BUFF_CONFIG);
 
 	local _, tPlayerClass = UnitClass("player");
 	local tAllClassBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];
-	local tCategSepc, tCategName;
+	local tCategSepc;
 	if (tAllClassBuffs ~= nil) then
 		for tCategSpec, _ in pairs(tAllClassBuffs) do
 
-			tCategName = strsub(tCategSpec, 3);
-
-			if (VUHDO_BUFF_SETTINGS[tCategName] == nil) then
-				VUHDO_BUFF_SETTINGS[tCategName] = {
+			if (VUHDO_BUFF_SETTINGS[tCategSpec] == nil) then
+				VUHDO_BUFF_SETTINGS[tCategSpec] = {
 					["enabled"] = false,
 					["missingColor"] = {
 						["show"] = false,
@@ -1749,46 +1793,11 @@ function VUHDO_initBuffSettings()
 				};
 			end
 
-			if (VUHDO_BUFF_SETTINGS[tCategName]["filter"] == nil) then
-				VUHDO_BUFF_SETTINGS[tCategName]["filter"] = { [VUHDO_ID_ALL] = true };
+			if (VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] == nil) then
+				VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] = { [VUHDO_ID_ALL] = true };
 			end
 		end
 	end
 
-	local tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
-	if (tAllBuffs ~= nil) then
-		local tCategoryName, tAllCategoryBuffs;
-		for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
-			if (VUHDO_BUFF_ORDER[tCategoryName] == nil) then
-				local tNumber = tonumber(strsub(tCategoryName, 1, 2));
-				VUHDO_BUFF_ORDER[tCategoryName] = tNumber;
-			end
-		end
-	end
-
+	VUHDO_fixBuffOrder();
 end
-
-
-
---
---[[function VUHDO_initCompressTables()
-
-	local tProfile, tLayout;
-	for _, tProfile in pairs(VUHDO_PROFILES) do
-		tProfile["CONFIG"] = VUHDO_compressTable(tProfile["CONFIG"]);
-		tProfile["PANEL_SETUP"] = VUHDO_compressTable(tProfile["PANEL_SETUP"]);
-		tProfile["POWER_TYPE_COLORS"] = VUHDO_compressTable(tProfile["POWER_TYPE_COLORS"]);
-		tProfile["SPELL_CONFIG"] = VUHDO_compressTable(tProfile["SPELL_CONFIG"]);
-		tProfile["BUFF_SETTINGS"] = VUHDO_compressTable(tProfile["BUFF_SETTINGS"]);
-		tProfile["BUFF_ORDER"] = VUHDO_compressTable(tProfile["BUFF_ORDER"]);
-		tProfile["INDICATOR_CONFIG"] = VUHDO_compressTable(tProfile["INDICATOR_CONFIG"]);
-	end
-
-	for _, tLayout in pairs(VUHDO_SPELL_LAYOUTS) do
-		tLayout["MOUSE"] = VUHDO_compressTable(tLayout["MOUSE"]);
-		tLayout["HOSTILE_MOUSE"] = VUHDO_compressTable(tLayout["HOSTILE_MOUSE"]);
-		tLayout["KEYS"] = VUHDO_compressTable(tLayout["KEYS"]);
-		tLayout["HOTS"] = VUHDO_compressTable(tLayout["HOTS"]);
-	end
-end
-]]

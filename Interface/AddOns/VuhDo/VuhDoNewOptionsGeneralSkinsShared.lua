@@ -1,5 +1,4 @@
 local GetNumGroupMembers = GetNumGroupMembers;
-local GetNumSubgroupMembers = GetNumSubgroupMembers;
 local twipe = table.wipe;
 local tonumber = tonumber;
 local pairs = pairs;
@@ -2010,15 +2009,15 @@ local tGroupSize, tProfile;
 function VUHDO_getAutoProfile()
 	if (VUHDO_DEBUG_AUTO_PROFILE ~= nil) then
 		tGroupSize = VUHDO_DEBUG_AUTO_PROFILE;
-	elseif (GetNumGroupMembers() > 0 or VUHDO_IS_CONFIG) then
+	elseif (UnitInRaid("player") or VUHDO_IS_CONFIG) then
 		tGroupSize = GetNumGroupMembers();
 
 		if (not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
 			VUHDO_IS_SHOWN_BY_GROUP = true;
 			VUHDO_timeReloadUI(0.1);
 		end
-	elseif (GetNumSubgroupMembers() > 0) then
-		tGroupSize = GetNumSubgroupMembers() + 1;
+	elseif (UnitExists("party1")) then
+		tGroupSize = GetNumGroupMembers() + 1;
 
 		if (not VUHDO_IS_SHOWN_BY_GROUP) then
 			if (not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then

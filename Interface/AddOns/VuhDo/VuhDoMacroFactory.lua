@@ -192,7 +192,7 @@ local function VUHDO_generateTargetMacroText(aTarget, aFriendlyAction, aHostileA
 		tFriendText = "/focus [noharm,@vuhdo]\n";
 	elseif ("assist" == tLowerFriendly) then
 		tFriendText = "/assist [noharm,@vuhdo]\n";
-	elseif (strlen(aFriendlyAction) > 0 and GetSpellBookItemTexture(aFriendlyAction) ~= nil) then
+	elseif (strlen(aFriendlyAction) > 0 and GetSpellInfo(aFriendlyAction) ~= nil) then
 		if ((VUHDO_SPELLS[aFriendlyAction] or sEmpty)["nohelp"]) then
 			tModiSpell = "[@vuhdo";
 			tIsNoHelp = true;
@@ -228,7 +228,7 @@ local function VUHDO_generateTargetMacroText(aTarget, aFriendlyAction, aHostileA
 		tEnemyText = "/focus [harm,@vuhdo]";
 	elseif ("assist" == tLowerHostile) then
 		tEnemyText = "/assist [harm,@vuhdo]";
-	elseif (strlen(aHostileAction) > 0 and GetSpellBookItemTexture(aHostileAction) ~= nil) then
+	elseif (strlen(aHostileAction) > 0 and GetSpellInfo(aHostileAction) ~= nil) then
 		tEnemyText = "/use [harm,@vuhdo] " .. aHostileAction;
 	else
 		tEnemyText = "";
@@ -309,6 +309,25 @@ local VUHDO_PROHIBIT_HELP = {
 
 
 --
+local tRezText;
+local function getAutoBattleRezText()
+
+	if (("DRUID" == VUHDO_PLAYER_CLASS or "PALADIN" == VUHDO_PLAYER_CLASS) and VUHDO_SPELL_CONFIG["autoBattleRez"]) then
+		tRezText = "/use [dead,combat,@mouseover";
+		if (VUHDO_SPELL_CONFIG["smartCastModi"] ~= "all") then
+			tRezText = tRezText .. ",mod:" .. VUHDO_SPELL_CONFIG["smartCastModi"];
+		end
+		tRezText = tRezText .. "] " .. VUHDO_SPELL_ID.REBIRTH .. "\n";
+	else
+		tRezText = "";
+	end
+
+	return tRezText;
+end
+
+
+
+--
 local tText;
 local tModiSpell;
 local tSpellPost;
@@ -329,26 +348,19 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		tModiSpell = "help,nodead,";
 	end
 
-	tSpellPost = "";
-	if (("DRUID" == VUHDO_PLAYER_CLASS or "PALADIN" == VUHDO_PLAYER_CLASS) and VUHDO_SPELL_CONFIG["autoBattleRez"]) then
-		tSpellPost = "/use [dead,novehicleui,combat,";
-		if (VUHDO_SPELL_CONFIG["smartCastModi"] ~= "all") then
-			tSpellPost = tSpellPost .. "mod:" .. VUHDO_SPELL_CONFIG["smartCastModi"] .. ",";
-		end
-		tSpellPost =  tSpellPost .. (anIsKeyboard and "@mouseover] " or "@vuhdo] ") .. VUHDO_SPELL_ID.REBIRTH .. "\n";
-	end
+	tSpellPost = getAutoBattleRezText();
 
 	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
 		and VUHDO_SPELLS[anAction] ~= nil and not VUHDO_SPELLS[anAction]["nostance"]) then
 
 		if ("DRUID" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1/3,";
-			tSpellPost = tSpellPost .. "/tar [form:1/3,novehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
+			tSpellPost = tSpellPost .. "/tar [form:1/3,nounithasvehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
 		end
 
 		if ("PRIEST" == VUHDO_PLAYER_CLASS) then
 			tModiSpell = tModiSpell .. "noform:1,";
-			tSpellPost = "/tar [form:1,novehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
+			tSpellPost = "/tar [form:1,nounithasvehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
 		end
 	end
 
@@ -357,14 +369,14 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		tText = tText .. tSpellPost;
 	else
 		if (aPet ~= nil and VUHDO_SPELL_ID.REBIRTH ~= anAction) then
-			tVehicleCond = "[nodead,help,novehicleui,@vdpet]";
+			tVehicleCond = "[nodead,help,@vdpet]";
 		else
 			tVehicleCond = "";
 		end
-		tText = tText .. "/use [" .. tModiSpell .. "novehicleui,@vuhdo]" .. tVehicleCond .. " " .. anAction .. "\n";
+		tText = tText .. "/use [" .. tModiSpell .. "nounithasvehicleui,@vuhdo]" .. tVehicleCond .. " " .. anAction .. "\n";
 		tText = tText .. tSpellPost;
 		if (aPet ~= nil) then
-			tText = tText .. "/tar [vehicleui,@vdpet]\n";
+			tText = tText .. "/tar [unithasvehicleui,@vdpet]\n";
 		end
 
 		if (VUHDO_SPELL_CONFIG["IS_AUTO_TARGET"]) then
@@ -373,7 +385,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 			tText = tText .. "/tar [harm,@vuhdo]\n";
 		end
 	end
-
+	--VUHDO_DEBUG[anAction] = tText;
 	return tText;
 end
 

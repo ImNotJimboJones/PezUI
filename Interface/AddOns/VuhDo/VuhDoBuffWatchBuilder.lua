@@ -89,7 +89,7 @@ end
 
 --
 local function VUHDO_addBuffPanel(aCategorySpec)
-	local tCategName = strsub(aCategorySpec, 3);
+	local tCategName = aCategorySpec;
 	local tSettings = VUHDO_BUFF_SETTINGS[tCategName];
 	local tCategBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][aCategorySpec];
 	local tSampleVariant = tCategBuffs[1];
@@ -201,11 +201,9 @@ local function VUHDO_addAllBuffPanels()
 
 	for _, _ in pairs(tAllClassBuffs) do
 		for tCategSpec, _ in pairs(tAllClassBuffs) do
-			tCategName = strsub(tCategSpec, 3);
+			tCategName = tCategSpec;
 
-			local tNumber = VUHDO_BUFF_ORDER[tCategSpec] == nil
-				and tonumber(strsub(tCategSpec, 1, 2))
-				or VUHDO_BUFF_ORDER[tCategSpec];
+			local tNumber = VUHDO_BUFF_ORDER[tCategSpec];
 
 			local tCategSettings = VUHDO_BUFF_SETTINGS[tCategName];
 			if (tNumber == tIndex + 1) then
@@ -329,7 +327,7 @@ end
 			for tSpellName, tSpellId in pairs(tCategSpells) do
 
 				if (tCurrentSpellId == tSpellId) then
-					local tCategName = strsub(tCategSpec, 3);
+					local tCategName = tCategSpec, 3;
 					if (VUHDO_BUFF_SETTINGS[tCategName]["buff"] ~= tSpellName) then -- wichtig, damit wir uns nicht selbst auslösen => Endlosschleife
 						VUHDO_BUFF_SETTINGS[tCategName]["buff"] = tSpellName;
 						VUHDO_reloadBuffPanel();

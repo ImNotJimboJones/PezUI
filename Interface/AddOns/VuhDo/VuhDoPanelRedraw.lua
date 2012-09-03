@@ -979,14 +979,14 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			and VuhDoNewOptionsPanelPanel ~= nil and VuhDoNewOptionsPanelPanel:IsVisible()) then
 			VUHDO_DESIGN_BACKDROP = VUHDO_deepCopyTable(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0, 1, 0, 1);
-			UIFrameFlash(tLabel, 0.6, 0.6, 10000, true, 0.7, 0);
+			VUHDO_UIFrameFlash(tLabel, 0.6, 0.6, 10000, true, 0.7, 0);
 
 			aPanel:SetBackdrop(VUHDO_DESIGN_BACKDROP);
 			aPanel:SetBackdropBorderColor(1, 1, 1, 1);
 		else
 			aPanel:SetBackdrop(VUHDO_STD_BACKDROP);
 			tLabel:SetTextColor(0.4,  0.4, 0.4, 1);
-			UIFrameFlashStop(tLabel);
+			VUHDO_UIFrameFlashStop(tLabel);
 			aPanel:SetBackdropBorderColor(VUHDO_backColor(tPanelColor["BORDER"]));
 		end
 

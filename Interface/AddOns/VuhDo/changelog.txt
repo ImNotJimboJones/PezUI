@@ -1,3 +1,23 @@
+Version 3.4.
+
+Bugfixes:
+-- Some rewrite of buff watch code to make it more robus
+-- Fixed glyph/talent taint bug
+-- Fixed a bug with resurrection announcement
+-- Fixed a bug with VuhDo not auto hiding in parties
+-- Hopefully fixed a bug with target/focus frame taint
+
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
 Version 3.2.
 
 Bugfixes:

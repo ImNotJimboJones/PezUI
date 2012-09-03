@@ -127,9 +127,9 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 		if (VUHDO_CONFIG["RES_IS_SHOW_TEXT"]) then
 			local tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName);
 
-			if (GetNumGroupMembers() > 0) then
+			if (UnitInRaid("player")) then
 				SendChatMessage(tText, "RAID", nil, nil);
-			elseif (GetNumSubgroupMembers() > 0) then
+			elseif (UnitExists("party1")) then
 				SendChatMessage(tText, "PARTY", nil, nil);
 			else
 				SendChatMessage(tText, "WHISPER", nil, aTargetName);

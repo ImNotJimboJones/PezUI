@@ -125,6 +125,19 @@ end
 
 
 
+--
+local tKey, tValue;
+function 	VUHDO_tableGetKeyFromValue(aTable, aValue)
+	for tKey, tValue in pairs(aTable) do
+		if (tValue == aValue) then
+			return tKey;
+		end
+	end
+
+	return nil;
+end
+
+
 ----------------------------------------------------
 local VUHDO_RAID_NAMES;
 local VUHDO_RAID;

@@ -29,6 +29,7 @@ local VUHDO_CLICKED_TARGET = nil;
 local VUHDO_IS_USED_SMART_BUFF;
 
 VUHDO_BUFF_ORDER = { };
+local sEmpty = { };
 
 
 
@@ -192,7 +193,7 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 	end
 
 	local tCategSpec = VUHDO_getBuffCategory(VUHDO_CLICKED_BUFF);
-	local tCategName = strsub(tCategSpec, 3);
+	local tCategName = tCategSpec;
 	local tCateg = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][tCategSpec];
 	local tSettings = VUHDO_BUFF_SETTINGS[tCategName];
 	local tTargetType = tCateg[1][2];
@@ -371,7 +372,7 @@ function VUHDO_getAllUniqueSpells()
 		local tSpellName = tCategBuffs[1][1];
 		if (VUHDO_BUFFS[tSpellName] ~= nil and VUHDO_BUFF_TARGET_UNIQUE == tCategBuffs[1][2]) then
 			tUniqueBuffs[#tUniqueBuffs + 1] = tSpellName;
-			tUniqueCategs[tSpellName] = strsub(tCategName, 3);
+			tUniqueCategs[tSpellName] = tCategName;
 		end
 	end
 
@@ -451,7 +452,7 @@ local function VUHDO_setUnitMissBuff(aUnit, aCategSpec, someVariants, aCategName
 
 	tInfo = VUHDO_RAID[aUnit];
 	tBuffOrder = VUHDO_BUFF_ORDER[aCategSpec];
-	if (tBuffOrder ~= nil and tInfo ~= nil) then
+	if (tInfo ~= nil) then
 		-- Don't show missing buffs on vehicles
 		if (tInfo["isPet"] and VUHDO_RAID[tInfo["ownerUnit"]] ~= nil
 			and VUHDO_RAID[tInfo["ownerUnit"]]["isVehicle"]) then
@@ -492,7 +493,7 @@ local tIsAvailable;
 local tIsNotInBattleground;
 local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 	tMaxVariant = someBuffVariants;
-	tCategName = strsub(aCategSpec, 3);
+	tCategName = aCategSpec;
 	twipe(tMissGroup);
 	twipe(tLowGroup);
 	twipe(tOkayGroup);
@@ -640,7 +641,7 @@ function VUHDO_updateBuffFilters()
 	tAllClassBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
 	if (tAllClassBuffs ~= nil) then
 		for tCategSpec, _ in pairs(tAllClassBuffs) do
-			VUHDO_updateFilter(strsub(tCategSpec, 3));
+			VUHDO_updateFilter(tCategSpec);
 		end
 	end
 end
@@ -683,7 +684,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 		tMaxTarget = someBuffVariants[2];
 
 		if (VUHDO_BUFF_TARGET_RAID == tMaxTarget or VUHDO_BUFF_TARGET_SINGLE == tMaxTarget) then
-			tCategName = strsub(aCategSpec, 3);
+			tCategName = aCategSpec;
 			if (VUHDO_BUFF_RAID_FILTERED[tCategName] ~= nil) then
 				tDestGroup = VUHDO_BUFF_RAID_FILTERED[tCategName];
 			else
@@ -697,22 +698,22 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 			for tCnt = 1, NUM_STANCE_SLOTS do
 				_, tStanceName, tIsActive = GetShapeshiftFormInfo(tCnt);
 				if (tIsActive and tStanceName == someBuffVariants[1]) then
-					return {}, {}, "player", 0, "player", { "player" }, { }, 0;
+					return sEmpty, sEmpty, "player", 0, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 				end
 			end
 
-			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, strsub(aCategSpec, 3));
-			return { "player" }, {}, "player", 0, "player", { }, { }, 0;
+			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
+			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
 
 		elseif (VUHDO_BUFF_TARGET_ENCHANT == tMaxTarget) then
 			tHasEnch1, tEnchDuration1, _, _, _, _ = GetWeaponEnchantInfo();
 
 			if (tHasEnch1) then
-				return {}, {}, "player", tEnchDuration1 * 0.001, "player", { "player" }, { }, 0;
+				return sEmpty, sEmpty, "player", tEnchDuration1 * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 			end
 
-			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, strsub(aCategSpec, 3));
-			return { "player" }, {}, "player", 0, "player", { }, { }, 0;
+			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
+			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
 		else
 			-- If self, totem or aura we only care if buff isn't on player
 			tDestGroup = VUHDO_PLAYER_GROUP;
@@ -838,7 +839,7 @@ function VUHDO_updateBuffSwatch(aSwatch)
 		end
 	else
 		if (VUHDO_BUFFS[tRefSpell]["wasOnCd"]	and VUHDO_BUFF_SETTINGS["CONFIG"]["HIGHLIGHT_COOLDOWN"]) then
-			UIFrameFlash(aSwatch, 0.3, 0.3, 5, true, 0, 0.3);
+			VUHDO_UIFrameFlash(aSwatch, 0.3, 0.3, 5, true, 0, 0.3);
 			VUHDO_BUFFS[tRefSpell]["wasOnCd"] = false;
 		end
 

@@ -11,7 +11,7 @@ local function VUHDO_placeReadyIcon(aButton)
 	if (tInfo == nil or tInfo["isPet"]) then
 		tIcon:Hide();
 	else
-		UIFrameFlashStop(tIcon);
+		VUHDO_UIFrameFlashStop(tIcon);
 		tIcon:SetTexture("Interface\\AddOns\\VuhDo\\Images\\icon_info");
 		tIcon:ClearAllPoints();
 		tIcon:SetPoint("LEFT", aButton:GetName(), "LEFT", -5, 0);
@@ -55,7 +55,7 @@ local function VUHDO_hideAllReadyIcons()
 
 		for _, tButton in pairs(tAllButtons) do
 			if (tButton:GetAttribute("unit") ~= nil) then
-				UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
+				VUHDO_UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
 			else
 				break;
 			end

@@ -48,7 +48,6 @@ local pairs = pairs;
 local twipe = table.wipe;
 local format = format;
 local _;
-local UIFrameFlash = UIFrameFlash;
 local sIsOverhealText;
 local sIsAggroText;
 local sIsInvertGrowth;
@@ -307,6 +306,7 @@ local tIsHideIrrel;
 local tIndex;
 local tTagText;
 local tIsLifeLeftOrRight;
+local tPanelNum;
 function VUHDO_customizeText(aButton, aMode, anIsTarget)
 	tUnit, tInfo = VUHDO_getDisplayUnit(aButton);
  	tHealthBar = VUHDO_getHealthBar(aButton, 1);
@@ -322,8 +322,8 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 		VUHDO_getLifeText(tHealthBar):SetText("");
 		return;
 	end
-
-  tSetup = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]];
+	tPanelNum = VUHDO_BUTTON_CACHE[aButton];
+  tSetup = VUHDO_PANEL_SETUP[tPanelNum];
   tLifeConfig = tSetup["LIFE_TEXT"];
 
 	tIsHideIrrel = tLifeConfig["hideIrrelevant"] and VUHDO_getUnitHealthPercent(tInfo) >= VUHDO_CONFIG["EMERGENCY_TRIGGER"];
@@ -343,7 +343,7 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 	if (tIsName) then
 
 	  tOwnerInfo = VUHDO_RAID[tInfo["ownerUnit"]];
-	  tIndex = tInfo["name"] .. (tInfo["ownerUnit"] or "");
+	  tIndex = tInfo["name"] .. (tInfo["ownerUnit"] or "") .. tPanelNum;
 		if (VUHDO_NAME_TEXTS[tIndex] == nil) then
 	  	if (tSetup["ID_TEXT"]["showName"]) then
 	  		tTextString = (tSetup["ID_TEXT"]["showClass"] and not tInfo["isPet"])
@@ -468,7 +468,7 @@ local function VUHDO_customizeDamageFlash(aButton, aLossPercent)
 	if (aLossPercent ~= nil) then
 		tScaling = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["SCALING"];
 		if (tScaling["isDamFlash"] and tScaling["damFlashFactor"] >= aLossPercent) then
-			UIFrameFlash(VUHDO_GLOBAL[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
+			VUHDO_UIFrameFlash(VUHDO_GLOBAL[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
 		end
 	end
 end

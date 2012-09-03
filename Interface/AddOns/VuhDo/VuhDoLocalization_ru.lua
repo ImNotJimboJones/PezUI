@@ -117,30 +117,29 @@ VUHDO_I18N_BROADCAST_MTS = "Передать Главных Танков";
 -- @EXACT = false
 -- Priest
 -- Shaman
-VUHDO_I18N_BUFFC_FIRE_TOTEM = "01Тотем огня";
-VUHDO_I18N_BUFFC_AIR_TOTEM = "02Тотем воздуха";
-VUHDO_I18N_BUFFC_EARTH_TOTEM = "03Тотем земли";
-VUHDO_I18N_BUFFC_WATER_TOTEM = "04Тотем воды";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "08Зачарование оружия";
-VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "13Зачарование оружия 2";
-VUHDO_I18N_BUFFC_SHIELDS = "09Щиты";
+VUHDO_I18N_BUFFC_FIRE_TOTEM = "Тотем огня";
+VUHDO_I18N_BUFFC_AIR_TOTEM = "Тотем воздуха";
+VUHDO_I18N_BUFFC_EARTH_TOTEM = "Тотем земли";
+VUHDO_I18N_BUFFC_WATER_TOTEM = "Тотем воды";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT = "Зачарование оружия";
+VUHDO_I18N_BUFFC_WEAPON_ENCHANT_2 = "Зачарование оружия 2";
+VUHDO_I18N_BUFFC_SHIELDS = "Щиты";
 -- Paladin
-VUHDO_I18N_BUFFC_BLESSING = "01Благословение";
---VUHDO_I18N_BUFFC_AURA = "02Аура";
-VUHDO_I18N_BUFFC_SEAL = "02Печать";
+VUHDO_I18N_BUFFC_BLESSING = "Благословение";
+VUHDO_I18N_BUFFC_SEAL = "Печать";
 -- Druids
 -- Warlock
-VUHDO_I18N_BUFFC_SKIN = "01Шкура";
+VUHDO_I18N_BUFFC_SKIN = "Шкура";
 -- Mage
-VUHDO_I18N_BUFFC_ARMOR_MAGE = "03Доспех";
+VUHDO_I18N_BUFFC_ARMOR_MAGE = "Доспех";
 -- Death Knight
-VUHDO_BUFFC_PRESENCE    = "03Власть";
+VUHDO_BUFFC_PRESENCE    = "Власть";
 -- Warrior
-VUHDO_I18N_BUFFC_SHOUT = "01Крик";
+VUHDO_I18N_BUFFC_SHOUT = "Крик";
 -- Hunter
-VUHDO_I18N_BUFFC_ASPECT = "02Дух";
+VUHDO_I18N_BUFFC_ASPECT = "Дух";
 -- Monk
-VUHDO_I18N_BUFFC_STANCE = "01Stance";
+VUHDO_I18N_BUFFC_STANCE = "Stance";
 -- Key Binding Headers/Names
 -- @EXACT = false
 BINDING_HEADER_VUHDO_TITLE = "VuhDo";

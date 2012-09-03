@@ -37,6 +37,7 @@ local VUHDO_getUnitZoneName;
 local VUHDO_updateClusterHighlights;
 local VUHDO_updateCustomDebuffTooltip;
 local VUHDO_getCurrentMouseOver;
+--local VUHDO_UIFrameFlash_OnUpdate;
 
 local GetTime = GetTime;
 local CheckInteractDistance = CheckInteractDistance;
@@ -96,6 +97,7 @@ local function VUHDO_eventHandlerInitBurst()
 	VUHDO_updateClusterHighlights = VUHDO_GLOBAL["VUHDO_updateClusterHighlights"];
 	VUHDO_updateCustomDebuffTooltip = VUHDO_GLOBAL["VUHDO_updateCustomDebuffTooltip"];
 	VUHDO_getCurrentMouseOver = VUHDO_GLOBAL["VUHDO_getCurrentMouseOver"];
+	--VUHDO_UIFrameFlash_OnUpdate = VUHDO_GLOBAL["VUHDO_UIFrameFlash_OnUpdate"];
 
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"] or "*foo*";
 	sIsHealerMode = not VUHDO_CONFIG["THREAT"]["IS_TANK_MODE"];
@@ -730,9 +732,11 @@ function VUHDO_slashCmd(aCommand)
 		VUHDO_Msg("Roles have been reset.");
 		table.wipe(VUHDO_MANUAL_ROLES);
 		VUHDO_reloadUI();
-	--[[elseif (tCommandWord == "test") then
+
+	elseif (tCommandWord == "test") then
 		table.wipe(VUHDO_DEBUG);
-	elseif (strfind(tCommandWord, "lfg1")) then
+		collectgarbage("collect");
+	--[[elseif (strfind(tCommandWord, "lfg1")) then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_SHOW");
 	elseif (strfind(tCommandWord, "lfg2")) then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_FAILED");
@@ -964,7 +968,7 @@ local tUnit, tInfo;
 local tIsInRange, tIsCharmed;
 local function VUHDO_updateAllRange()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		tInfo["baseRange"] = "player" == tUnit or UnitInRange(tUnit);
+		tInfo["baseRange"] = "player" == tUnit or "pet" == tUnit or UnitInRange(tUnit);
 		tInfo["visible"] = UnitIsVisible(tUnit);
 
 		-- Check if unit is charmed
@@ -1182,6 +1186,10 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 		VUHDO_updateDirectionFrame();
 	end
 
+  -- Own frame flash routines to avoid taints
+	VUHDO_UIFrameFlash_OnUpdate(aTimeDelta);
+
+
 	---------------------------------------------------------
 	-- From here 0.08 (80 msec) sec tick should be sufficient
 	---------------------------------------------------------
@@ -1297,7 +1305,7 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 			VUHDO_updateTooltip();
 		end
 	end
-
+--
 	-- Refresh custom debuff Tooltip
 	if (VUHDO_checkResetTimer("REFRESH_CUDE_TOOLTIP", 1)) then
 		VUHDO_updateCustomDebuffTooltip();
@@ -1324,7 +1332,6 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	if (VUHDO_CONFIG_SHOW_RAID) then
 		return;
 	end
-
 
 	-- refresh aggro?
 	if (VUHDO_checkResetTimer("UPDATE_AGGRO", sAggroRefreshSecs)) then

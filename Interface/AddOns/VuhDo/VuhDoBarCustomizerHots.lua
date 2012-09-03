@@ -225,7 +225,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 
 	if (aRest == nil) then
 		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-			UIFrameFlashStop(tIcon);
+			VUHDO_UIFrameFlashStop(tIcon);
 			VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
 		end
 		VUHDO_getBarIconFrame(aButton, anIndex):Hide();
@@ -257,7 +257,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 			tCounter:SetText(aTimes > 1 and aTimes or "");
 		else
 			if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-				UIFrameFlashStop(tIcon);
+				VUHDO_UIFrameFlashStop(tIcon);
 				VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
 			end
 
@@ -288,7 +288,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 
 		if (aRest > 5) then
 			if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-				UIFrameFlashStop(tIcon);
+				VUHDO_UIFrameFlashStop(tIcon);
 				VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
 			end
 			tTimer:SetTextColor(1, 1, 1, 1);
@@ -301,7 +301,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 				end
 				if (not VUHDO_FLASHING_ICONS[aButton][anIndex]) then
 					VUHDO_FLASHING_ICONS[aButton][anIndex] = true;
-					UIFrameFlash(tIcon, 0.2, 0.1, 5, true, 0, 0.1);
+					VUHDO_UIFrameFlash(tIcon, 0.2, 0.1, 5, true, 0, 0.1);
 				end
 			end
 		end
@@ -309,7 +309,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		tCounter:SetText(aTimes > 1 and aTimes or "");
 	else
 		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-			UIFrameFlashStop(tIcon);
+			VUHDO_UIFrameFlashStop(tIcon);
 			VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
 		end
 		tTimer:SetText("");
@@ -446,14 +446,14 @@ local tCnt;
 local function VUHDO_removeButtonHots(aButton)
 	for tCnt = 1, 5 do
 		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[tCnt]) then
-			UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
+			VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
 		end
 		VUHDO_getBarIconFrame(aButton, tCnt):Hide();
 	end
 
 	for tCnt = 9, 10 do
 		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[tCnt]) then
-			UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
+			VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
 		end
 		VUHDO_getBarIconFrame(aButton, tCnt):Hide();
 	end

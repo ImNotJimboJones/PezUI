@@ -1230,11 +1230,11 @@ NOTE:
 - If successful the plugin will be in TitanPlugins as a registered plugin and will be available for display on the Titan bars.
 --]]
 local function TitanUtils_RegisterPluginProtected(plugin)
-	local result = nil
-	local issue = nil
-	local id = nil
-	local cat = nil
-	local ptype = nil
+	local result = ""
+	local issue = ""
+	local id = ""
+	local cat = ""
+	local ptype = ""
 	local notes = ""
 
 	local self = plugin.self
@@ -1280,7 +1280,7 @@ local function TitanUtils_RegisterPluginProtected(plugin)
 						);
 					end
 				end
-				if issue then
+				if issue ~= "" then
 					result = TITAN_REGISTER_FAILED
 				else
 					-- We are almost done-
@@ -1847,9 +1847,8 @@ function TitanPrint(message, msg_type)
 		pre = ""
 	elseif msg_type == "header" then
 		local ver = TitanPanel_GetVersion()
-		local pos = strfind(ver," - ")
 		pre = TitanUtils_GetGoldText(L["TITAN_PANEL"])
-			..TitanUtils_GetGreenText(" v"..strsub(ver,1,pos-1))
+			..TitanUtils_GetGreenText(" ver")
 			..TitanUtils_GetGoldText(L["TITAN_PANEL_VERSION_INFO"]
 			)
 	end

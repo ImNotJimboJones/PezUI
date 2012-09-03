@@ -159,7 +159,7 @@ local tAssignButton = nil;
 --
 function VUHDO_spellsKeysLocalStopAssignment()
 	if (tAssignButton ~= nil) then
-		UIFrameFlashStop(tAssignButton);
+		VUHDO_UIFrameFlashStop(tAssignButton);
 	end
 	tIsAssignmentPending = false;
 	VuhDoNewOptionsSpellKeysLocalPanelClearBindingButton:SetAlpha(0.5);
@@ -180,7 +180,7 @@ function VUHDO_spellsKeysLocalStartAssignment(aButton)
 	tIsAssignmentPending = true;
 	tAssignButton = aButton;
 	tAssignIndex = aButton:GetParent():GetAttribute("list_index");
-	UIFrameFlash(aButton, 0.3, 0.3, 10000, true, 0.2, 0);
+	VUHDO_UIFrameFlash(aButton, 0.3, 0.3, 10000, true, 0.2, 0);
 	VuhDoNewOptionsSpellKeysLocalPanelClearBindingButton:SetAlpha(1);
 	VUHDO_setHint(VUHDO_I18N_LKA_PRESS_ASSIGN_KEY);
 end
