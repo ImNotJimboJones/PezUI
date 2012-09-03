@@ -24,21 +24,20 @@ IonBagGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 1,
 			["countColor"] = "1;1;1;1",
-			["alphaUp"] = "Off",
+			["autoHide"] = false,
 			["buffcolor"] = "0;0.8;0;1",
-			["alpha"] = 1,
-			["arcStart"] = 0,
+			["alphaUp"] = "Off",
+			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "5;4;3;2;1",
-			["snapToFrame"] = false,
-			["auracolor2"] = "1;0.1;0.1;1",
-			["showGrid"] = false,
 			["point"] = "BOTTOMRIGHT",
-			["cdcolor1"] = "1;0.82;0;1",
-			["autoHide"] = false,
+			["showGrid"] = false,
+			["auracolor2"] = "1;0.1;0.1;1",
+			["snapToFrame"] = false,
+			["arcStart"] = 0,
+			["alpha"] = 1,
 		}, -- [1]
 	},
-	["freeSlots"] = 16,
 	["bagbtns"] = {
 		{
 			["config"] = {
@@ -66,5 +65,6 @@ IonBagGDB = {
 			},
 		}, -- [5]
 	},
+	["freeSlots"] = 16,
 	["firstRun"] = false,
 }
