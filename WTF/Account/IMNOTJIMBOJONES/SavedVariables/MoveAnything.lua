@@ -9,16 +9,6 @@ MADB = {
 		["default"] = {
 			["name"] = "default",
 			["frames"] = {
-				["AchievementAlertFrame2"] = {
-					["name"] = "AchievementAlertFrame2",
-					["pos"] = {
-						"TOP", -- [1]
-						"UIParent", -- [2]
-						"TOP", -- [3]
-						-3.0517578125e-005, -- [4]
-						-128, -- [5]
-					},
-				},
 				["VehicleSeatIndicator"] = {
 					["name"] = "VehicleSeatIndicator",
 					["orgFrameStrata"] = "MEDIUM",
@@ -41,6 +31,16 @@ MADB = {
 						550, -- [5]
 					},
 				},
+				["AchievementAlertFrame2"] = {
+					["name"] = "AchievementAlertFrame2",
+					["pos"] = {
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-3.0517578125e-005, -- [4]
+						-128, -- [5]
+					},
+				},
 				["CompactRaidGroup5"] = {
 					["hidden"] = true,
 					["name"] = "CompactRaidGroup5",
@@ -55,6 +55,16 @@ MADB = {
 						450, -- [5]
 					},
 				},
+				["BNToastFrame"] = {
+					["name"] = "BNToastFrame",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"ChatFrame1ButtonFrame", -- [2]
+						"TOPLEFT", -- [3]
+						20, -- [4]
+						80, -- [5]
+					},
+				},
 				["Boss1TargetFrame"] = {
 					["name"] = "Boss1TargetFrame",
 					["forcedLock"] = true,
@@ -67,16 +77,6 @@ MADB = {
 						"BOTTOMLEFT", -- [3]
 						10000, -- [4]
 						1014.549987792969, -- [5]
-					},
-				},
-				["BNToastFrame"] = {
-					["name"] = "BNToastFrame",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"ChatFrame1ButtonFrame", -- [2]
-						"TOPLEFT", -- [3]
-						20, -- [4]
-						80, -- [5]
 					},
 				},
 				["Boss2TargetFrame"] = {
@@ -97,14 +97,14 @@ MADB = {
 					["name"] = "CompactRaidGroup1",
 				},
 				["BagsMover"] = {
-					["name"] = "BagsMover",
 					["scale"] = 0.7999999523162842,
+					["name"] = "BagsMover",
 					["pos"] = {
 						"BOTTOMRIGHT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMRIGHT", -- [3]
-						-25.0000073164904, -- [4]
-						355.0000305175781, -- [5]
+						-19.99999999999999, -- [4]
+						264.0000000000001, -- [5]
 					},
 				},
 				["GroupLootFrame4"] = {
