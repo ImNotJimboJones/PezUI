@@ -1,5 +1,7 @@
 
 SexyMap2DB = {
+	["presets"] = {
+	},
 	["global"] = {
 		["ping"] = {
 			["showPing"] = true,
@@ -25,57 +27,58 @@ SexyMap2DB = {
 				["MiniMapChallengeMode"] = "always",
 				["MiniMapRecordingButton"] = "always",
 				["RA_MinimapButton"] = "never",
+				["AtlasButtonFrame"] = "never",
 				["QueueStatusMinimapButton"] = "always",
 				["MiniMapVoiceChatFrame"] = "always",
 				["MiniMapInstanceDifficulty"] = "always",
 				["MiniMapMailFrame"] = "always",
 				["GameTimeFrame"] = "never",
+				["VuhDoMinimapButton"] = "never",
 				["MiniMapWorldMapButton"] = "never",
-				["TimeManagerClockButton"] = "never",
 				["MinimapZoomOut"] = "never",
 				["MinimapZoomIn"] = "never",
-				["DBMMinimapButton"] = "never",
-				["FishingBuddyMinimapFrame"] = "never",
-				["MiniMapTracking"] = "never",
 				["MinimapZoneTextButton"] = "hover",
+				["DBMMinimapButton"] = "never",
+				["MiniMapTracking"] = "never",
+				["FishingBuddyMinimapFrame"] = "never",
 				["GuildInstanceDifficulty"] = "always",
-				["VuhDoMinimapButton"] = "never",
+				["TimeManagerClockButton"] = "never",
 			},
 			["dragPositions"] = {
-				["QueueStatusMinimapButton"] = 164.3861819550428,
 				["MiniMapMailFrame"] = 242.128462599028,
+				["QueueStatusMinimapButton"] = 164.3861819550428,
 			},
 			["controlVisibility"] = true,
 		},
 		["hudmap"] = {
 			["useQuestHelper"] = true,
 			["useRoutes"] = true,
-			["useGatherMate"] = true,
+			["hudColor"] = {
+			},
 			["scale"] = 1.4,
 			["textColor"] = {
 				["a"] = 1,
-				["r"] = 0.5,
-				["g"] = 1,
 				["b"] = 0.5,
+				["g"] = 1,
+				["r"] = 0.5,
 			},
 			["alpha"] = 0.7,
-			["hudColor"] = {
-			},
+			["useGatherMate"] = true,
 		},
 		["zonetext"] = {
 			["bgColor"] = {
 				["a"] = 1,
-				["r"] = 0,
-				["g"] = 0,
 				["b"] = 0,
+				["g"] = 0,
+				["r"] = 0,
 			},
 			["fontColor"] = {
 			},
 			["borderColor"] = {
 				["a"] = 1,
-				["r"] = 0,
-				["g"] = 0,
 				["b"] = 0,
+				["g"] = 0,
+				["r"] = 0,
 			},
 			["xOffset"] = 0,
 			["yOffset"] = -25,
@@ -88,17 +91,17 @@ SexyMap2DB = {
 		["clock"] = {
 			["bgColor"] = {
 				["a"] = 1,
-				["r"] = 0,
-				["g"] = 0,
 				["b"] = 0,
+				["g"] = 0,
+				["r"] = 0,
 			},
 			["fontColor"] = {
 			},
 			["borderColor"] = {
 				["a"] = 1,
-				["r"] = 0,
-				["g"] = 0,
 				["b"] = 0,
+				["g"] = 0,
+				["r"] = 0,
 			},
 			["xOffset"] = 0,
 			["yOffset"] = 0,
@@ -129,6 +132,12 @@ SexyMap2DB = {
 			},
 			["hideBlizzard"] = true,
 		},
+		["movers"] = {
+			["enabled"] = false,
+			["framePositions"] = {
+			},
+			["lock"] = false,
+		},
 		["core"] = {
 			["clamp"] = true,
 			["point"] = "BOTTOMRIGHT",
@@ -142,14 +151,6 @@ SexyMap2DB = {
 			["shape"] = "SPELLS\\T_VFX_BORDER",
 			["rightClickToConfig"] = false,
 		},
-		["movers"] = {
-			["enabled"] = false,
-			["framePositions"] = {
-			},
-			["lock"] = false,
-		},
-	},
-	["presets"] = {
 	},
 	["Pezzer-Burning Blade"] = "global",
 }
