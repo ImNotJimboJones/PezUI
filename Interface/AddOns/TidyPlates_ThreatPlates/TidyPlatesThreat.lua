@@ -9,7 +9,7 @@ local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
 
 StaticPopupDialogs["TPTP_ChangeLog"] = {
-	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n*Fixed issue on spec information detection.", 
+	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n\n*Fixed issue on spec information detection for low level characters.", 
 	button1 = "Thanks for the info!",
 	timeout = 0,
 	whileDead = 1, 
@@ -1443,7 +1443,11 @@ end
 function TidyPlatesThreat:specInfo()
 	for i=1, GetNumSpecGroups() do
 		local specValue = GetSpecialization(false,false,i)
-		local id, name, description, icon, background,role = GetSpecializationInfo(specValue, nil, false);
+		if specValue then
+			local id, name, description, icon, background,role = GetSpecializationInfo(specValue, nil, false);
+		else
+			local role,name = "DAMAGER","Unknown"
+		end
 		TidyPlatesThreat.db.char.specInfo[i].role = role
 		TidyPlatesThreat.db.char.specInfo[i].name = name
 	end

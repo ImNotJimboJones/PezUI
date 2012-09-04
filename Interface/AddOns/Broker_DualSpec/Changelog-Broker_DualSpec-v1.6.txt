@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r35 | shenton | 2012-09-04 06:52:59 +0000 (Tue, 04 Sep 2012) | 1 line
+r37 | shenton | 2012-09-04 21:57:15 +0000 (Tue, 04 Sep 2012) | 1 line
 Changed paths:
-   A /tags/v1.5 (from /trunk:34)
+   A /tags/v1.6 (from /trunk:36)
 
-Tagging as v1.5
+Tagging as v1.6
+------------------------------------------------------------------------
+r36 | shenton | 2012-09-04 21:55:41 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Broker_DualSpec.toc
+   M /trunk/Embeds.xml
+
+Embeds.xml missed edit on a copy/paste (/me derp)
 ------------------------------------------------------------------------
 r34 | shenton | 2012-09-04 06:51:16 +0000 (Tue, 04 Sep 2012) | 1 line
 Changed paths:
