@@ -1,6 +1,6 @@
 --[[
 Name: LibBabble-Boss-3.0
-Revision: $Rev: 379 $
+Revision: $Rev: 381 $
 Maintainers: ckknight, nevcairiel, Ackis
 Website: http://www.wowace.com/projects/libbabble-boss-3-0/
 Dependencies: None
@@ -8,7 +8,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibBabble-Boss-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 379 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 381 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib = LibStub("LibBabble-3.0"):New(MAJOR_VERSION, MINOR_VERSION)
@@ -5909,8 +5909,8 @@ elseif GAME_LOCALE == "itIT" then
 	-- ["Ambassador Flamelash"] = "",
 	-- ["Ambassador Hellmaw"] = "",
 	-- Ammunae = "",
-	-- ["Amnennar the Coldbringer"] = "",
-	-- ["Ancient Stone Keeper"] = "",
+	["Amnennar the Coldbringer"] = "Amnennar il portatore di freddo", -- Needs review
+	["Ancient Stone Keeper"] = "Anziano custode di pietra", -- Needs review
 	-- Anetheron = "",
 	-- ["Anger'rel"] = "",
 	-- Anomalus = "",
@@ -5918,16 +5918,16 @@ elseif GAME_LOCALE == "itIT" then
 	-- Anshal = "",
 	-- ["Antu'sul"] = "",
 	-- ["Anub'arak"] = "",
-	-- ["Anubisath Defender"] = "",
-	-- ["Anubisath Guardian"] = "",
+	["Anubisath Defender"] = "Difensore di Anubisath", -- Needs review
+	["Anubisath Guardian"] = "Guardiano di Anubisath", -- Needs review
 	-- ["Anub'Rekhan"] = "",
 	-- ["Anub'shiah"] = "",
 	-- Anzu = "",
-	-- ["Arcane Watchman"] = "",
-	-- ["Arcanist Doan"] = "",
+	["Arcane Watchman"] = "Arcano Osservatore", -- Needs review
+	["Arcanist Doan"] = "Doan L'arcanista", -- Needs review
 	-- Arcanotron = "",
 	-- Archaedas = "",
-	-- ["Archavon the Stone Watcher"] = "",
+	["Archavon the Stone Watcher"] = "Archavon l'Osservatore di Pietra", -- Needs review
 	-- ["Archbishop Benedictus"] = "",
 	-- Archimonde = "",
 	-- ["Archivist Galford"] = "",

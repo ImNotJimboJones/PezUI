@@ -216,23 +216,47 @@ function mog.LoadSettings()
 	mog.scroll:update();
 end
 
+-- all slot IDs that can be transmogrified
+local mogSlots = {
+	[INVSLOT_HEAD] = true,
+	[INVSLOT_SHOULDER] = true,
+	[INVSLOT_CHEST] = true,
+	[INVSLOT_WAIST] = true,
+	[INVSLOT_LEGS] = true,
+	[INVSLOT_FEET] = true,
+	[INVSLOT_WRIST] = true,
+	[INVSLOT_HAND] = true,
+	[INVSLOT_BACK] = true,
+	[INVSLOT_MAINHAND] = true,
+	[INVSLOT_OFFHAND] = true,
+}
+
 mog.frame:SetScript("OnEvent",function(self,event,arg1,...)
 	if event == "PLAYER_LOGIN" then
 		mog:UpdateGUI();
+		self:SetScript("OnSizeChanged", function(self, width, height)
+			mog.db.profile.gridWidth = width;
+			mog.db.profile.gridHeight = height;
+			mog:UpdateGUI(true);
+		end)
 	elseif event == "GET_ITEM_INFO_RECEIVED" then
 		mog.cacheFrame:SetScript("OnUpdate", mog.ItemInfoReceived);
 	elseif event == "PLAYER_EQUIPMENT_CHANGED" then
-		if mog.db.profile.gridDress == "equipped" then
-			local slot, hasItem = arg1, ...;
+		local slot, hasItem = arg1, ...;
+		-- don't do anything if the slot is not visible (necklace, ring, trinket)
+		if mogSlots[slot] and mog.db.profile.gridDress == "equipped" then
 			for i, frame in ipairs(mog.models) do
-				if hasItem then
-					if (slot ~= GetInventorySlotInfo("HeadSlot") or ShowingHelm()) and (slot ~= GetInventorySlotInfo("BackSlot") or ShowingCloak()) then
-						frame.model:TryOn(select(6, GetTransmogrifySlotInfo(slot)));
+				local item = frame.data.item
+				if item then
+					if hasItem then
+						if (slot ~= INVSLOT_HEAD or ShowingHelm()) and (slot ~= INVSLOT_BACK or ShowingCloak()) then
+							frame.model:TryOn(select(6, GetTransmogrifySlotInfo(slot)));
+						end
+					else
+						frame.model:UndressSlot(slot);
 					end
-				else
-					frame.model:UndressSlot(slot);
+					frame.model:TryOn(item);
 				end
-				frame.model:TryOn(frame.data.item);
 			end
 		end
 	elseif event == "ADDON_LOADED" then
