@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 145 $
+Revision: $Rev: 146 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 145 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 146 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -1598,6 +1598,7 @@ local zoneTranslation = {
 		[571] = "Rasganorte",
 		[5416] = "La Vorágine",
 		[870] = "Pandaria",
+		["Azeroth"] = "Azeroth",
 
 		-- Transports
 		[72] = "El Portal Oscuro",
@@ -1638,6 +1639,7 @@ local zoneTranslation = {
 		[571] = "Rasganorte",
 		[5416] = "La Vorágine",
 		[870] = "Pandaria",
+		["Azeroth"] = "Azeroth",
 
 		-- Transports
 		[72] = "El Portal Oscuro",
@@ -1678,6 +1680,7 @@ local zoneTranslation = {
 		[571] = "Norfendre",
 		[5416] = "Le Maelström",
 		[870] = "Pandarie",
+		["Azeroth"] = "Azeroth",
 
 		-- Transports
 		[72] = "La porte des Ténèbres",
@@ -1718,6 +1721,7 @@ local zoneTranslation = {
 		[571] = "Nordania",
 		[5416] = "Maelstrom",
 		[870] = "Pandaria",
+		["Azeroth"] = "Azeroth",
 
 		-- Transports
 		[72] = "Portale Oscuro",
@@ -1758,6 +1762,7 @@ local zoneTranslation = {
 		[571] = "노스렌드",
 		[5416] = "혼돈의 소용돌이",
 		[870] = "판다리아",
+		["Azeroth"] = "아제로스",
 
 		-- Transports
 		[72] = "어둠의 문",
@@ -1798,6 +1803,7 @@ local zoneTranslation = {
 		[571] = "Nortúndria",
 		[5416] = "Voragem",
 		[870] = "Pandária",
+		["Azeroth"] = "Azeroth",
 
 		-- Transports
 		[72] = "Portal Negro",
@@ -1838,6 +1844,7 @@ local zoneTranslation = {
 		[571] = "Нордскол",
 		[5416] = "Водоворот",
 		[870] = "Пандария",
+		["Azeroth"] = "Азерот",
 
 		-- Transports
 		[72] = "Темный портал",
@@ -1878,6 +1885,7 @@ local zoneTranslation = {
 		[571] = "诺森德",
 		[5416] = "大漩涡",
 		[870] = "Pandaria",
+		["Azeroth"] = "艾泽拉斯",
 
 		-- Transports
 		[72] = "黑暗之门",
@@ -1918,6 +1926,7 @@ local zoneTranslation = {
 		[571] = "北裂境",
 		[5416] = "大漩渦",
 		[870] = "潘達利亞",
+		["Azeroth"] = "艾澤拉斯",
 
 		-- Transports
 		[72] = "黑暗之門",
@@ -5377,7 +5386,7 @@ do
 		low = 1,
 		high = 10,
 		continent = Pandaria,
-		fishing_min = 25,
+--		fishing_min = 25,
  		faction = "Sanctuary",  -- Not contested and not Alliance or Horde -> no PvP -> sanctuary
 	}
 
@@ -5392,7 +5401,7 @@ do
 			[BZ["Temple of the Jade Serpent"]] = true,
 			[BZ["Valley of the Four Winds"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 700,
 	}
 
 	zones[BZ["Valley of the Four Winds"]] = {
@@ -5408,7 +5417,7 @@ do
 			[BZ["Krasarang Wilds"]] = true,
 			[BZ["The Veiled Stair"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 700,
 	}
 
 	zones[BZ["Krasarang Wilds"]] = {
@@ -5418,7 +5427,7 @@ do
 		paths = {
 			[BZ["Valley of the Four Winds"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 700,
 	}
 
 	zones[BZ["Kun-Lai Summit"]] = {
@@ -5435,7 +5444,7 @@ do
 			[BZ["Vale of Eternal Blossoms"]] = true,
 			[BZ["The Veiled Stair"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 750,
 	}
 
 	zones[BZ["Townlong Steppes"]] = {
@@ -5449,7 +5458,7 @@ do
 			[BZ["Siege of Niuzao Temple"]] = true,
 			[BZ["Dread Wastes"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 725,
 	}
 
 	zones[BZ["Dread Wastes"]] = {
@@ -5465,7 +5474,7 @@ do
 			[BZ["Heart of Fear"]] = true,
 			[BZ["Townlong Steppes"]] = true
 		},
---		fishing_min = 25,
+		fishing_min = 700,
 	}
 
 	zones[BZ["Vale of Eternal Blossoms"]] = {
@@ -5479,7 +5488,7 @@ do
 			[BZ["Mogu'shan Palace"]] = true,
 			[BZ["Kun-Lai Summit"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 825,
 	}
 
 	zones[BZ["The Veiled Stair"]] = {
@@ -5494,7 +5503,7 @@ do
 			[BZ["Valley of the Four Winds"]] = true,
 			[BZ["Kun-Lai Summit"]] = true,
 		},
---		fishing_min = 25,
+		fishing_min = 750,
 	}
 
 

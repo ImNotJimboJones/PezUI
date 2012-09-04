@@ -370,7 +370,6 @@ local function BuildCurrentData(zone, subzone, zidx, sidx)
 end
 
 local function HandleZoneChange()
-FishingBuddy.Debug("HandleZoneChanged");
 	if ( not FishingBuddy.IsLoaded() ) then
 		return;
 	end
@@ -625,7 +624,6 @@ local function WatchUpdate()
 	local noshow = NoShow();
 
 	if ( noshow ) then
-FishingBuddy.Debug("Watcher: noshow");
 		if ( FishingWatchFrame:IsVisible() ) then
 			HideDraggerFrame();
 			FishingWatchFrame:Hide();

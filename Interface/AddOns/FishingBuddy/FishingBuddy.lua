@@ -264,6 +264,9 @@ local InvisibleOptions = {
 	["EnhanceSound_AmbienceVolume"] = {
 		["default"] = 0.0,
 	},
+	["EnhanceSound_MasterVolume"] = {
+		["default"] = 100,
+	},
 	["EnhanceMapWaterSounds"] = {
 		["default"] = 0,
 	},
@@ -302,6 +305,8 @@ local VolumeSlider =
 	["format"] = VOLUME.." - %d%%",
 	["min"] = 0,
 	["max"] = 100,
+	["step"] = 5,
+	["scale"] = 1,
 	["rightextra"] = 32,
 	["setting"] = "EnhanceSound_MasterVolume",
 };

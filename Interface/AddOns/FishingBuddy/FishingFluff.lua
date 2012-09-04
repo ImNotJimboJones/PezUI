@@ -6,6 +6,9 @@
 
 local FL = LibStub("LibFishing-1.0");
 
+-- 5.0.4 has a problem with a global "_" (see some for loops below)
+local _
+
 local PETSETTING = "FishingPetBuddies";
 local ALLZOMGPETS = "GreatAndSmall";
 
@@ -16,17 +19,16 @@ local PET_ALL = -3;
 local FLUFF_DISPLAYED_PETS = 14;
 local FLUFF_LINE_HEIGHT = 16;
 
--- the spell ids for the fishing pets
--- are these as unique as the critter ids? Should be...
+-- the creature ids for the fishing pets
 local FISHINGPETS = {};
-FISHINGPETS[33050] = -1; -- Magical Crawdad
-FISHINGPETS[46425] = -1; -- Snarly
-FISHINGPETS[46426] = -1; -- Chuck
-FISHINGPETS[43697] = -1; -- Toothy
-FISHINGPETS[43698] = -1; -- Muckbreath
-FISHINGPETS[59250] = -1; -- Giant Sewer Rat
-FISHINGPETS[62561] = -1; -- Strand Crawler
-FISHINGPETS[103588] = -1; -- Sea Pony
+FISHINGPETS[18839] = -1; -- Magical Crawdad
+FISHINGPETS[26050] = -1; -- Snarly
+FISHINGPETS[26056] = -1; -- Chuck
+FISHINGPETS[24388] = -1; -- Toothy
+FISHINGPETS[24389] = -1; -- Muckbreath
+FISHINGPETS[31575] = -1; -- Giant Sewer Rat
+FISHINGPETS[33226] = -1; -- Strand Crawler
+FISHINGPETS[55386] = -1; -- Sea Pony
 -- since we can't just do #FISHINGPETS
 local NUM_FISHINGPETS = FL:tablecount(FISHINGPETS);
 
@@ -55,23 +57,24 @@ local ourpets = {};
 local petmap = {};
 local chosenpets = {};
 local chosenmap = {};
+local chosenlist = {};
 local numchosen = 0;
 
-local function AddChosenPet(spellid)
-	chosenpets[spellid] = 1;
+local function AddChosenPet(cid, petid)
+	chosenpets[cid] = 1;
+	tinsert(chosenlist, petid)
 	numchosen = numchosen + 1;
-	chosenmap[numchosen] = spellid;
 end
 
-local function FindCurrentPet()
-	local n = GetNumCompanions("CRITTER");
+local function UpdateChosenPets()
+	local isWild = false;
 	local settingpets = GetSetting(PETSETTING);
-	local nowpet = 0;
+
 	ourpets = {};
 	petmap = {};
 	chosenpets = {};
 	numchosen = 0;
-	
+
 	local allpets = false;
 	if ( type(settingpets) ~= "table" ) then
 		settingpets = tonumber(settingpets);
@@ -79,29 +82,34 @@ local function FindCurrentPet()
 			allpets = true;
 		end
 	elseif ( type(settingpets) == "table" ) then
-		for _,sid in pairs(settingpets) do
-			AddChosenPet(sid);
+		for cid, petid in pairs(settingpets) do
+			AddChosenPet(cid, petid);
 		end
 	end
-	
-	for id=1,n do
-		local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
-		if ( here ) then
-			nowpet = cSpellID;
-		end
-		if ( FISHINGPETS[cSpellID] ) then
-			FISHINGPETS[cSpellID] = id;
-			if ( settingpets == PET_FISHING ) then
-				AddChosenPet(cSpellID);
+
+	C_PetJournal.ClearSearchFilter();
+	C_PetJournal.AddAllPetTypesFilter();
+	C_PetJournal.AddAllPetSourcesFilter();
+	local numPets, numOwned = C_PetJournal.GetNumPets(isWild);
+	for index=1,numPets do
+		local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, isWild);
+		if ( isOwned) then
+			if ( FISHINGPETS[creatureID] ) then
+				if ( settingpets == PET_FISHING ) then
+					AddChosenPet(creatureID, petID);
+				end
 			end
+			if (allpets) then
+				AddChosenPet(creatureID, petID);
+			end
+			if (customeName) then
+				name = customeName;
+			end
+			tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=(chosenpets[creatureID] == 1) });
+			petmap[creatureID] = petID;
 		end
-		if (allpets) then
-			AddChosenPet(cSpellID);
-		end
-		tinsert(ourpets, { spell=cSpellID, icon=icon, name=cName, id=id, checked=(chosenpets[cSpellID] == 1) });
-		petmap[cSpellID] = id;
 	end
-	return nowpet;
+	table.sort(ourpets, function(a, b) return a.name < b.name; end);
 end
 
 local FluffEvents = {};
@@ -129,21 +137,21 @@ FluffEvents[FBConstants.FISHING_ENABLED_EVT] = function()
 			end
 		end
 		if ( not (IsFlying() or IsMounted()) ) then
-			local nowpet = FindCurrentPet();
-			local pet = nowpet;
+			local nowpet = C_PetJournal.GetSummonedPetID();
+			local petid = nowpet;
 			if ( numchosen > 0 ) then
-				local start = -1;
+				local avail = false;
 				for ldx=1,5 do
-					if ( start < 0 ) then
+					if ( not avail ) then
 						local idx = random(1, numchosen);
-						pet = chosenmap[idx];
-						start, _, _ = GetSpellCooldown(petmap[pet]);
+						petid = chosenlist[idx];
+						avail = C_PetJournal.PetIsSummonable(petid)
 					end
 				end
 			end
-			if ( pet ~= nowpet and petmap[pet] ) then
+			if ( petid ~= nowpet ) then
 				resetPet = nowpet;
-				CallCompanion("CRITTER", petmap[pet]);
+				C_PetJournal.SummonPetByID(petid);
 			end
 		end
 	end
@@ -159,15 +167,11 @@ local function Untrack(yes)
 end
 
 local function DoPetReset(pet)
-	if ( pet ) then
-		local nowpet = FindCurrentPet();
-		if ( petmap[pet] ) then
-			if ( pet ~= nowpet ) then
-				CallCompanion("CRITTER", petmap[pet]);
-			end
-		elseif ( nowpet ) then
-			DismissCompanion("CRITTER");
-		end
+	local nowpet = C_PetJournal.GetSummonedPetID();
+	if ( pet and pet ~= nowpet ) then
+		C_PetJournal.SummonPetByID(petid);
+	elseif ( nowpet ) then
+		C_PetJournal.SummonPetByID(nowpet);
 	end
 end
 
@@ -211,9 +215,9 @@ function FishingPetsMenu_Update()
 		choice = menuchoices[idx];
 		if ( choice ) then
 			buttons[i].text:SetText(choice.name);
-			buttons[i].id = choice.id;
+			buttons[i].petID = choice.petID;
 			buttons[i].meta = choice.meta;
-			buttons[i].spell = choice.spell;
+			buttons[i].cID = choice.cID;
 			if ( choice.checked ) then
 				buttons[i].check:Show();
 			else
@@ -274,8 +278,8 @@ function FishingPets_UpdateMenu()
 	for _,info in pairs(ourpets) do
 		petnames[menuidx] = petnames[menuidx] or { };
 		petnames[menuidx].name = info.name;
-		petnames[menuidx].spell = info.spell;
-		petnames[menuidx].id = info.id;
+		petnames[menuidx].cID = info.cID;
+		petnames[menuidx].petID = info.petID;
 		petnames[menuidx].checked = info.checked;
 		fontstringText:SetText(info.name);
 		fontstringWidth = fontstringText:GetWidth();
@@ -292,17 +296,7 @@ function FishingPets_UpdateMenu()
 	end
 	FishingPetsMenu:SetWidth(maxWidth);
 	FishingPetsMenuScrollChild:SetWidth(maxWidth);
-	local lc = #ourpets + 3;
-	if ( lc <= FLUFF_DISPLAYED_PETS ) then 
-		FishingPetsMenu:SetHeight(lc * FLUFF_LINE_HEIGHT + 26);
-		-- adding 1 due to possible rounding errors in HybridScrollFrame
-		FishingPetsMenu:SetHeight(lc * FLUFF_LINE_HEIGHT + 1);
-	else				
-		FishingPetsMenu:SetHeight(FLUFF_LINE_HEIGHT * FLUFF_DISPLAYED_PETS + 26);
-		-- adding 1 due to possible rounding errors in HybridScrollFrame
-		FishingPetsMenu:SetHeight(FLUFF_LINE_HEIGHT * FLUFF_DISPLAYED_PETS + 1);
-	end
-	HybridScrollFrame_Update(FishingPetsMenu, lc * FLUFF_LINE_HEIGHT, FishingPetsMenu:GetHeight());		
+	HybridScrollFrame_Update(FishingPetsMenu, menuidx * FLUFF_LINE_HEIGHT, FishingPetsMenu:GetHeight());		
 	FishingPetsMenu_Update();
 	FishingPetsMenuHolder:SetSize(FishingPetsMenu:GetWidth() + 38, FishingPetsMenu:GetHeight() + 24);
 end
@@ -311,22 +305,22 @@ function FishingPetsButton_OnClick(self)
 	PlaySound("igMainMenuOptionCheckBoxOff");
 	if ( self.meta ) then
 		FishingBuddy.SetSetting(PETSETTING, self.id);	
-		FindCurrentPet();
+		UpdateChosenPets();
 		FishingPets_UpdateMenu();
 	else
 		local petnames = FishingPetFrame.pets;
 		-- toggle
-		if (chosenpets[self.spell] == 1) then
-			chosenpets[self.spell] = 0;
+		if (chosenpets[self.cID] == 1) then
+			chosenpets[self.cID] = 0;
 			petnames[self.idx].checked = false;
 		else
-			chosenpets[self.spell] = 1;
+			chosenpets[self.cID] = 1;
 			petnames[self.idx].checked = true;
 		end
 		local newpets = {};
-		for sid,val in pairs(chosenpets) do
-			if (val and val == 1) then
-				tinsert(newpets, sid);
+		for cid,petid in pairs(chosenpets) do
+			if (petid and petid > 0) then
+				tinsert(newpets, cid);
 			end
 		end
 		local petsetting;
@@ -335,8 +329,8 @@ function FishingPetsButton_OnClick(self)
 				petsetting = PET_ALL;
 			else
 				local count = 0;
-				for petid,spellid in pairs(FISHINGPETS) do
-					if ( chosenpets[petid] and chosenpets[petid] == 1 ) then
+				for _,cid in pairs(FISHINGPETS) do
+					if ( chosenpets[cid] and chosenpets[cid] == 1 ) then
 						count = count + 1;
 					end
 				end
@@ -350,7 +344,7 @@ function FishingPetsButton_OnClick(self)
 			petsetting = PET_NONE;
 		end
 		FishingBuddy.SetSetting(PETSETTING, petsetting);
-		FindCurrentPet();
+		UpdateChosenPets();
 		UpdateMenuText(petsetting);
 		for idx=1,3 do
 			petnames[idx].checked = (petnames[idx].id == petsetting);
@@ -399,13 +393,14 @@ local FluffOptions = {
 		["tooltip"] = FBConstants.CONFIG_FISHINGBUDDY_INFO,
 		["setup"] =
 			function()
-				FindCurrentPet();
+				UpdateChosenPets();
 				FishingPets_UpdateMenu();
 				FishingPetsMenuHolder:Hide();
 			end,
 		["visible"] =
 			function()
-				if (GetNumCompanions("CRITTER") > 0) then return 1; end;
+				local n = GetNumCompanions("CRITTER");
+				if (n > 0) then return 1; end;
 			end,
 		["button"] = "FishingPetFrame",
 		["margin"] = { 4, 4 },
@@ -436,7 +431,7 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetFrame:SetScript("OnHide", FishingPetFrame_OnHide);
 	FishingPetFrameButton:SetScript("OnClick", FishingPetsMenu_Toggle);
 	
-	FindCurrentPet();
+	UpdateChosenPets();
 	
 	local menuwidth = 0;
 	for _,text in pairs( { NONE, ALL, PET_FISHING, PET_PAPERDOLL } ) do
@@ -447,7 +442,7 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	end
 	
 	FishingPetsMenu:SetWidth(menuwidth + 8);
-	FishingPetsMenu:SetHeight(FLUFF_DISPLAYED_PETS * FLUFF_LINE_HEIGHT + 8);
+	FishingPetsMenu:SetHeight(FLUFF_DISPLAYED_PETS * FLUFF_LINE_HEIGHT + 1);
 	FishingPets_UpdateMenu();
 
 	FishingPetFrameLabel:SetText(PET_TYPE_PET..": ");
@@ -468,10 +463,14 @@ if ( FishingBuddy.Debugging ) then
 	FishingBuddy.Commands["pets"].func =
 		function(what)
 			local Debug = FishingBuddy.Debug;
-			Debug("chosenpets");
-			for spellid,_ in pairs(chosenpets) do
-				Debug("%d %d", spellid, chosenpets[spellid]);
+			local n = GetNumCompanions("CRITTER");
+			local pets = FishingPetFrame.pets;
+			Debug("chosenpets "..n.." "..#ourpets.." "..#pets);
+			for id=1,n do
+				local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
+				if ( FISHINGPETS[cSpellID] ) then
+					Debug(cID.." "..cName.." "..cSpellID.." "..icon);
+				end
 			end
-			return true;
-		end;
+		end
 end
