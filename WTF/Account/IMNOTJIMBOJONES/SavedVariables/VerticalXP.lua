@@ -7,9 +7,10 @@ VerticalXPDB = {
 		["Default"] = {
 			["barTexture"] = "Glaze",
 			["width"] = 15,
-			["positionY"] = 319.6342103335717,
-			["positionX"] = -5.856206665143455,
+			["positionY"] = 385,
+			["positionX"] = -5,
 			["borderTexture"] = "Blizzard Tooltip",
+			["height"] = 600,
 			["clamp"] = false,
 		},
 	},

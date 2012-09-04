@@ -5,12 +5,13 @@ VerticalRepDB = {
 	},
 	["profiles"] = {
 		["Default"] = {
-			["positionY"] = 319.4091736421081,
+			["positionY"] = 385,
 			["borderTexture"] = "Blizzard Tooltip",
 			["enabled"] = false,
 			["barTexture"] = "Glaze",
 			["width"] = 15,
-			["positionX"] = -5.584366841188622,
+			["positionX"] = -5,
+			["height"] = 600,
 			["clamp"] = false,
 		},
 	},
