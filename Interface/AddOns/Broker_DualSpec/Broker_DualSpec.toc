@@ -1,10 +1,10 @@
 ﻿## Interface: 50001
-## Title: Broker Dual Specialisation
-## Notes: A dual specialisation switch for Data Broker.
+## Title: Broker Dual Specialization
+## Notes: A dual specialization switch for Data Broker.
 ## Author: Shenton
 ## SavedVariables: Broker_DualSpecDB
-## Version: 1.6
-## X-Curse-Packaged-Version: v1.6
+## Version: 1.6.2
+## X-Curse-Packaged-Version: v1.6.2
 ## X-Curse-Project-Name: Data Broker Dual Specialisation
 ## X-Curse-Project-ID: broker-dualspec
 ## X-Curse-Repository-ID: wow/broker-dualspec/mainline

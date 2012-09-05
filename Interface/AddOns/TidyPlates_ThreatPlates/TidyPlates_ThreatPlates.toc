@@ -6,7 +6,7 @@
 ## Author: Suicidal Katt
 ## RequiredDeps: TidyPlates,TidyPlatesWidgets
 ## SavedVariables: ThreatPlatesDB
-## Version: 6.004
+## Version: 6.005
 ## OptionalDeps: Ace3, LibSharedMedia-3.0
 
 Libs\LibStub\LibStub.lua

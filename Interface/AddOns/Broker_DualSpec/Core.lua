@@ -1,6 +1,6 @@
 ï»¿-- ********************************************************************************
--- Data Broker Dual Specilisation (Broker_DualSpec)
--- A dual specialisation switch for Data Broker.
+-- Data Broker Dual Specialization (Broker_DualSpec)
+-- A dual specialization switch for Data Broker.
 -- By: Shenton
 --
 -- Core.lua
@@ -18,7 +18,7 @@ A.icon = LibStub("LibDBIcon-1.0");
 
 -- Lua globals
 local ipairs = ipairs;
-local ssub, sformat, sfind, smatch = string.sub, string.format, string.find, string.match;
+local sgsub, sformat, sfind, smatch = string.gsub, string.format, string.find, string.match;
 
 -- ********************************************************************************
 -- Variables
@@ -365,137 +365,21 @@ end
 --- Build the strings filter table
 -- Basically removing format conversion characters from GlobalStrings
 function A:BuildFilterTable()
-    -- deDE
-    -- ERR_SPELL_UNLEARNED_S = "Ihr habt %s verlernt.";
-    -- ERR_LEARN_ABILITY_S = "Ihr habt eine neue Fahigkeit erlernt: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Ihr habt einen neuen passiven Effekt erlernt: %s.";
-    -- ERR_LEARN_SPELL_S = "Ihr habt einen neuen Zauber erlernt: %s.";
+    local _, str;
+    local globalStrings =
+    {
+        ERR_SPELL_UNLEARNED_S,
+        ERR_LEARN_ABILITY_S,
+        ERR_LEARN_PASSIVE_S,
+        ERR_LEARN_SPELL_S,
+    };
 
-    -- enUS
-    -- ERR_SPELL_UNLEARNED_S = "You have unlearned %s.";
-    -- ERR_LEARN_ABILITY_S = "You have learned a new ability: %s.";
-    -- ERR_LEARN_PASSIVE_S = "You have learned a new passive effect: %s.";
-    -- ERR_LEARN_SPELL_S = "You have learned a new spell: %s.";
-
-    -- esES
-    -- ERR_SPELL_UNLEARNED_S = "Has olvidado lo aprendido sobre %s.";
-    -- ERR_LEARN_ABILITY_S = "Has aprendido una nueva facultad: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Has aprendido un nuevo efecto pasivo: %s.";
-    -- ERR_LEARN_SPELL_S = "Has aprendido un nuevo hechizo: %s.";
-
-    -- esMX
-    -- ERR_SPELL_UNLEARNED_S = "Has olvidado lo aprendido sobre %s.";
-    -- ERR_LEARN_ABILITY_S = "Has aprendido una nueva facultad: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Has aprendido un nuevo efecto pasivo: %s.";
-    -- ERR_LEARN_SPELL_S = "Has aprendido un nuevo hechizo: %s.";
-
-    -- frFR
-    -- ERR_SPELL_UNLEARNED_S = "Vous avez oublie %s.";
-    -- ERR_LEARN_ABILITY_S = "Vous avez appris une nouvelle technique?: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Vous avez appris un nouvel effet passif?: %s.";
-    -- ERR_LEARN_SPELL_S = "Vous avez appris un nouveau sort?: %s.";
-
-    -- itIT
-    -- ERR_SPELL_UNLEARNED_S = "Hai scordato %s.";
-    -- ERR_LEARN_ABILITY_S = "Hai appreso una nuova abilita: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Hai appreso una nuova abilita passiva: %s.";
-    -- ERR_LEARN_SPELL_S = "Hai appreso un nuovo incantesimo: %s.";
-
-    -- koKR
-    -- ERR_SPELL_UNLEARNED_S = "%s ½ÀµæÀ» Ãë¼ÒÇß½À´Ï´Ù.";
-    -- ERR_LEARN_ABILITY_S = "»õ·Î¿î ´É·ÂÀ» ÀÍÇû½À´Ï´Ù: %s";
-    -- ERR_LEARN_PASSIVE_S = "»õ·Î¿î Áö¼ÓÈ¿°ú¸¦ ÀÍÇû½À´Ï´Ù: %s";
-    -- ERR_LEARN_SPELL_S = "»õ·Î¿î ÁÖ¹®À» ÀÍÇû½À´Ï´Ù: %s";
-
-    -- ptBR
-    -- ERR_SPELL_UNLEARNED_S = "Voce desaprendeu %s.";
-    -- ERR_LEARN_ABILITY_S = "Voce aprendeu uma nova habilidade: %s.";
-    -- ERR_LEARN_PASSIVE_S = "Voce aprendeu um novo efeito passivo: %s.";
-    -- ERR_LEARN_SPELL_S = "Voce aprendeu um feitico novo: %s.";
-
-    -- ruRU
-    -- ERR_SPELL_UNLEARNED_S = "¬£¬í ¬Ù¬Ñ¬Ò¬í¬Ý¬Ú %s.";
-    -- ERR_LEARN_ABILITY_S = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î: %s.";
-    -- ERR_LEARN_PASSIVE_S = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬á¬Ñ¬ã¬ã¬Ú¬Ó¬ß¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î: %s.";
-    -- ERR_LEARN_SPELL_S = "¬£¬í ¬Ó¬í¬å¬é¬Ú¬Ý¬Ú ¬ß¬à¬Ó¬à¬Ö ¬Ù¬Ñ¬Ü¬Ý¬Ú¬ß¬Ñ¬ß¬Ú¬Ö: %s.";
-
-    -- zhCN
-    -- ERR_SPELL_UNLEARNED_S = "?ØÎÊ¿Öõ%s";
-    -- ERR_LEARN_ABILITY_S = "???ãæîÜÐüÒö£º%s";
-    -- ERR_LEARN_PASSIVE_S = "???ÖõãæîÜù¬?üùÍý£º%s¡£";
-    -- ERR_LEARN_SPELL_S = "???ãæîÜÛö?£º%s";
-
-    -- zhTW
-    -- ERR_SPELL_UNLEARNED_S = "?ØÎ?Öõ%s¡£";
-    -- ERR_LEARN_ABILITY_S = "?ùÊüåãæîÜÐüÒö:%s¡£";
-    -- ERR_LEARN_PASSIVE_S = "?ùÊüåÖõãæîÜù¬ÔÑÐüÒö:%s¡£";
-    -- ERR_LEARN_SPELL_S = "?ùÊüåãæîÜÛöâú:%s¡£";
-
-    local locale = GetLocale();
     A.filterTable = {};
 
-    if ( locale == "deDE" ) then
-        A.filterTable[1] = "verlernt.";
-        A.filterTable[2] = "Ihr habt eine neue F\195\164higkeit erlernt";
-        A.filterTable[3] = "Ihr habt einen neuen passiven Effekt erlernt";
-        A.filterTable[4] = "Ihr habt einen neuen Zauber erlernt";
-    elseif ( locale == "enUS" ) then
-        A.filterTable[1] = "You have unlearned";
-        A.filterTable[2] = "You have learned a new ability";
-        A.filterTable[3] = "You have learned a new passive effect";
-        A.filterTable[4] = "You have learned a new spell";
-    elseif ( locale == "esES" ) then
-        A.filterTable[1] = "Has olvidado lo aprendido sobre";
-        A.filterTable[2] = "Has aprendido una nueva facultad";
-        A.filterTable[3] = "Has aprendido un nuevo efecto pasivo";
-        A.filterTable[4] = "Has aprendido un nuevo hechizo";
-    elseif ( locale == "esMX" ) then
-        A.filterTable[1] = "Has olvidado lo aprendido sobre";
-        A.filterTable[2] = "Has aprendido una nueva facultad";
-        A.filterTable[3] = "Has aprendido un nuevo efecto pasivo";
-        A.filterTable[4] = "Has aprendido un nuevo hechizo";
-    elseif ( locale == "frFR" ) then
-        A.filterTable[1] = "Vous avez oubli\195\169";
-        A.filterTable[2] = "Vous avez appris une nouvelle technique";
-        A.filterTable[3] = "Vous avez appris un nouvel effet passif";
-        A.filterTable[4] = "Vous avez appris un nouveau sort";
-    elseif ( locale == "itIT" ) then
-        A.filterTable[1] = "Hai scordato";
-        A.filterTable[2] = "Hai appreso una nuova abilit\195\160";
-        A.filterTable[3] = "Hai appreso una nuova abilit\195\160 passiva";
-        A.filterTable[4] = "Hai appreso un nuovo incantesimo"
-    elseif ( locale == "koKR" ) then
-        A.filterTable[1] = "½ÀµæÀ» Ãë¼ÒÇß½À´Ï´Ù";
-        A.filterTable[2] = "»õ·Î¿î ´É·ÂÀ» ÀÍÇû½À´Ï´Ù";
-        A.filterTable[3] = "»õ·Î¿î Áö¼ÓÈ¿°ú¸¦ ÀÍÇû½À´Ï´Ù";
-        A.filterTable[4] = "»õ·Î¿î ÁÖ¹®À» ÀÍÇû½À´Ï´Ù";
-    elseif ( locale == "ptBR" ) then
-        A.filterTable[1] = "Voc\195\170 desaprendeu";
-        A.filterTable[2] = "Voc\195\170 aprendeu uma nova habilidade";
-        A.filterTable[3] = "Voc\195\170 aprendeu um novo efeito passivo";
-        A.filterTable[4] = "Voc\195\170 aprendeu um feiti\195\167o novo";
-    elseif ( locale == "ruRU" ) then
-        A.filterTable[1] = "¬£¬í ¬Ù¬Ñ¬Ò¬í¬Ý¬Ú";
-        A.filterTable[2] = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î";
-        A.filterTable[3] = "¬£¬í ¬á¬â¬Ú¬à¬Ò¬â¬Ö¬Ý¬Ú ¬ß¬à¬Ó¬å¬ð ¬á¬Ñ¬ã¬ã¬Ú¬Ó¬ß¬å¬ð ¬ã¬á¬à¬ã¬à¬Ò¬ß¬à¬ã¬ä¬î";
-        A.filterTable[4] = "¬£¬í ¬Ó¬í¬å¬é¬Ú¬Ý¬Ú ¬ß¬à¬Ó¬à¬Ö ¬Ù¬Ñ¬Ü¬Ý¬Ú¬ß¬Ñ¬ß¬Ú¬Ö";
-    elseif ( locale == "zhCN" ) then
-        A.filterTable[1] = "?ØÎÊ¿Öõ";
-        A.filterTable[2] = "???ãæîÜÐüÒö";
-        A.filterTable[3] = "???ÖõãæîÜù¬?üùÍý";
-        A.filterTable[4] = "???ãæîÜÛö?";
-    elseif ( locale == "zhTW" ) then
-        A.filterTable[1] = "?ØÎ?Öõ";
-        A.filterTable[2] = "?ùÊüåãæîÜÐüÒö";
-        A.filterTable[3] = "?ùÊüåÖõãæîÜù¬ÔÑÐüÒö";
-        A.filterTable[4] = "?ùÊüåãæîÜÛöâú";
-    else
-        A.db.profile.chatFilter = nil;
-        A.chatFilterActive = nil;
-        A.filterTable = nil;
-        A:CancelTimer(A.chatFilterTimer, 1);
-        A:ChatFilterSetCallback();
-        A:Message(L["LOCAL_NOT_SUPPORTED"]:format(locale), 1);
+    for _,v in ipairs(globalStrings) do
+        str = sgsub(v, "%.", "");
+        str = sgsub(str, "%%s", ".+");
+        A.filterTable[#A.filterTable+1] = str;
     end
 end
 

@@ -9,7 +9,7 @@ local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
 
 StaticPopupDialogs["TPTP_ChangeLog"] = {
-	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n\n*Fixed issue on spec information detection for low level characters.", 
+	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n\n*Fixed issue on spec information detection again, hopefully this is resolved.", 
 	button1 = "Thanks for the info!",
 	timeout = 0,
 	whileDead = 1, 
@@ -1442,11 +1442,11 @@ end
 ------------
 function TidyPlatesThreat:specInfo()
 	for i=1, GetNumSpecGroups() do
+		local _, name, _, _, _, role
 		local specValue = GetSpecialization(false,false,i)
-		if specValue then
-			local id, name, description, icon, background,role = GetSpecializationInfo(specValue, nil, false);
-		else
-			local role,name = "DAMAGER","Unknown"
+		_, name, _, _, _, role = GetSpecializationInfo(specValue, nil, false);
+		if not name or not role then
+			role, name = "DAMAGER","Unknown"
 		end
 		TidyPlatesThreat.db.char.specInfo[i].role = role
 		TidyPlatesThreat.db.char.specInfo[i].name = name
@@ -1572,10 +1572,8 @@ function f:Events(self,event,...)
 				TidyPlates:DisableFadeIn()
 			end
 			if GlobDB.version and GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
-				CharDB.welcome = false
-				StaticPopup_Show("TPTP_ChangeLog")
-			end
-			GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
+				GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
+			end			
 		end
 		f:UnregisterEvent("ADDON_LOADED")
 	elseif event == "PLAYER_ALIVE" then

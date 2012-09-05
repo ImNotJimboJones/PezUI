@@ -1,6 +1,6 @@
 ﻿-- ********************************************************************************
--- Data Broker Dual Specilisation (Broker_DualSpec)
--- A dual specialisation switch for Data Broker.
+-- Data Broker Dual Specialization (Broker_DualSpec)
+-- A dual specialization switch for Data Broker.
 -- By: Shenton
 --
 -- Locales-zhTW.lua
@@ -22,11 +22,11 @@ L["DISPLAY_SPEC_POINTS"] = "顯示天賦點數"
 L["GEAR_NOT_EXISTS"] = "此裝備套裝不存在，使用\"/ds list\"以觀看裝備管理列表"
 L["GEAR_SETS"] = "裝備套裝"
 L["HELM"] = "頭盔"
--- L["HIDDEN"] = ""
+L["HIDDEN"] = "隱藏"
 L["HIDE_MINIMAP"] = "小地圖按鈕是隱藏的，如果你想要顯示請用：\"/ds show\" (或 /bds /brokerdualspec)"
--- L["HIDE_SPAM"] = ""
+L["HIDE_SPAM"] = "隱藏垃圾訊息"
 L["IN_COMBAT"] = "你在戰鬥中，無法切換天賦"
--- L["LOCAL_NOT_SUPPORTED"] = ""
+L["LOCAL_NOT_SUPPORTED"] = "本地 %s 並不支援，請取消隱藏垃圾訊息選項。"
 L["NO_GEAR_DEFINED"] = "切換天賦同時換裝備是啟用的，但是沒有裝備套裝已綁定"
 L["NO_GEAR_SETS"] = "你沒有綁定的裝備套裝"
 L["NOT_AVAILABLE"] = "不可使用"
@@ -34,9 +34,11 @@ L["OPTIONS"] = "選項"
 L["PRIMARY_SPEC"] = "主天賦"
 L["SECONDARY_SPEC"] = "副天賦"
 L["SHOW_HIDE_MINIMAP"] = "顯示/隱藏小地圖按鈕"
--- L["SHOWN"] = ""
+L["SHOWN"] = "顯示"
 L["SWITCH_GEAR_TOO"] = "同時切換裝備"
 L["SWITCH_TO"] = "切換到"
-L["TOOLTIP_TIPS"] = "%s左鍵點擊:%s 同時切換你的天賦與套裝\n%s右鍵點擊:%s 顯示配置面板"
+L["TOOLTIP_TIPS"] = [=[%s左鍵點擊:%s 同時切換你的天賦與套裝
+%s右鍵點擊:%s 顯示配置面板]=]
 L["WITH_GEAR_SET"] = "同時切換套裝"
+
 end
