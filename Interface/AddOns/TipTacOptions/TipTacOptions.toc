@@ -1,5 +1,5 @@
 ## Interface: 50001
-## Version: 12.08.30
+## Version: 12.09.05
 ## Title: TipTacOptions
 ## Author: Aezay (Earthen Ring EU)
 ## Notes: Option Dialog for TipTac

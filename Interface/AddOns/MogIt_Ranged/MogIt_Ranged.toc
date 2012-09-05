@@ -4,7 +4,7 @@
 ## LoadOnDemand: 1
 ## RequiredDeps: MogIt
 ## X-MogItModuleVersion: 1
-## X-Curse-Packaged-Version: v3.0.3
+## X-Curse-Packaged-Version: v3.0.4
 ## X-Curse-Project-Name: MogIt
 ## X-Curse-Project-ID: mogit
 ## X-Curse-Repository-ID: wow/mogit/mainline

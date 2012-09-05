@@ -1,11 +1,14 @@
 local gtt = GameTooltip;
 
--- Constants
+-- String Constants
 local TALENTS_PREFIX = TALENTS..":|cffffffff ";	-- MoP: Could be changed from TALENTS to SPECIALIZATION
-local NO_TALENTS = NO.." "..TALENTS;
+local TALENTS_NA = NOT_APPLICABLE:lower();
+local TALENTS_NONE = NO.." "..TALENTS;
+
+-- Option Constants
 local CACHE_SIZE = 25;		-- Change cache size here (Default 25)
-local INSPECT_DELAY = 0.2;
-local INSPECT_FREQ = 2;
+local INSPECT_DELAY = 0.2;	-- The time delay for the scheduled inspection
+local INSPECT_FREQ = 2;		-- How often after an inspection are we allowed to inspect again?
 
 -- Variables
 local ttt = CreateFrame("Frame","TipTacTalents");
@@ -29,17 +32,19 @@ local function IsInspectFrameOpen() return (InspectFrame and InspectFrame:IsShow
 --------------------------------------------------------------------------------------------------------
 
 local function GatherTalents(isInspect)
-	-- MoP Note: Is it no longer possible to query the different talent spec groups anymore?
---	local group = GetActiveTalentGroup and GetActiveTalentGroup(isInspect) or 1;	-- Az: replaced with GetActiveSpecGroup(), but that does not support inspect?
 	-- New MoP Code
---	local spec = GetInspectSpecialization(current.unit,nil,group);	-- Az: didn't seem like this func supported pet & talent group index; added it anyway, just in case
 	local spec = isInspect and GetInspectSpecialization(current.unit) or GetSpecialization();
-	if (spec) and (spec > 0) then
+	if (not spec or spec == 0) then
+		current.format = TALENTS_NONE;
+	elseif (isInspect) then
 		local _, specName = GetSpecializationInfoByID(spec);
 		--local _, specName = GetSpecializationInfoForClassID(spec,current.classID);
-		current.format = specName or "n/a";
+		current.format = specName or TALENTS_NA;
 	else
-		current.format = NO_TALENTS;
+		-- MoP Note: Is it no longer possible to query the different talent spec groups anymore?
+--		local group = GetActiveSpecGroup(isInspect) or 1;	-- Az: replaced with GetActiveSpecGroup(), but that does not support inspect?
+		local _, specName = GetSpecializationInfo(spec);
+		current.format = specName or TALENTS_NA;
 	end
 	-- Set the tips line output, for inspect, only update if the tip is still showing a unit!
 	if (not isInspect) then
@@ -131,9 +136,6 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 		current.unit = unit;
 		current.name = UnitName(unit);
 		current.guid = UnitGUID(unit)
-		-- Az: Is classID needed for MoP inspect?
---		local _, _, classID = UnitClass(unit);
---		current.classID = classID;
 		-- No need for inspection on the player
 		if (UnitIsUnit(unit,"player")) then
 			GatherTalents();

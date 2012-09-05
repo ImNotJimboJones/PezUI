@@ -58,6 +58,7 @@ local options = {
 		{ type = "Slider", var = "gttScale", label = "GameTooltip Scale", min = 0.2, max = 4, step = 0.05 },
 		{ type = "Slider", var = "updateFreq", label = "Tip Update Frequency", min = 0, max = 5, step = 0.05, y = 24 },
 		{ type = "Check", var = "enableChatHoverTips", label = "Enable ChatFrame Hover Hyperlinks", tip = "When hovering the mouse over a link in the chatframe, show the tooltip without having to click on it" },
+		{ type = "Check", var = "hideFactionText", label = "Hide Faction Text", tip = "Strips the Alliance or Horde faction text from the tooltip", y = 16 },
  	},
 	-- Colors
 	{

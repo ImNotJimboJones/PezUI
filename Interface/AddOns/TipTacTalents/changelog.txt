@@ -1,3 +1,7 @@
+TipTacTalents Changes | 2012 Sep 05
+-----------------------------------
+- Now shows the talent spec even when the tooltip shows yourself.
+
 TipTacTalents Changes | 2012 Sep 01
 -----------------------------------
 - Removed some remnant debug code.

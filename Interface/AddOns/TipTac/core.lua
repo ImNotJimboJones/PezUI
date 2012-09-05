@@ -26,6 +26,7 @@ local TT_DefaultConfig = {
 	gttScale = 1,
 	updateFreq = 0.5,
 	enableChatHoverTips = false,
+	hideFactionText = false,
 
 	colorGuildByReaction = true,
 	colGuild = "|cff0080cc",
@@ -553,7 +554,7 @@ local function AddTargetedBy()
 	if (not numGroup) or (numGroup <= 1) then
 		return;
 	end
-	local inRaid = IsInRaid(); 
+	local inRaid = IsInRaid();
 	for i = 1, numGroup do
 		local unit = (inRaid and "raid"..i or "party"..i);
 		if (UnitIsUnit(unit.."target",u.token)) and (not UnitIsUnit(unit,"player")) then
@@ -1224,7 +1225,7 @@ local function ApplyTipTacAppearance(first)
 	for i = 2, gtt:NumLines() do
 		local line = _G["GameTooltipTextLeft"..i];
 		local text = line:GetText();
-		if (text == PVP_ENABLED) or (text == FACTION_ALLIANCE) or (text == FACTION_HORDE) then
+		if (text == PVP_ENABLED) or (cfg.hideFactionText and (text == FACTION_ALLIANCE or text == FACTION_HORDE)) then
 			line:SetText(nil);
 		end
 	end
