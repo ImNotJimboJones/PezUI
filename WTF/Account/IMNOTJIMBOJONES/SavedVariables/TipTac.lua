@@ -105,7 +105,7 @@ TipTac_Config = {
 	["showGuildRank"] = true,
 	["if_showQuestLevelAndId"] = false,
 	["showHiddenTipsOnShift"] = false,
-	["top"] = 303.3660583496094,
+	["top"] = 304.3659362792969,
 	["anchorFrameUnitType"] = "normal",
 	["optionsLeft"] = 103.7333450229921,
 }
