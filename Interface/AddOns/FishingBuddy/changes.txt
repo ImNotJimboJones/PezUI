@@ -1,4 +1,11 @@
-﻿Version 1.0.9b
+﻿Version 1.0.9d
+- Don't fail if there isn't a fishing pet list
+
+Version 1.0.9c
+- Fix Fishing Pet menu (I have duplicates of a lot more pets than I thought I did...)
+- Latest version of LibBabble-Zone (soon to be removed)
+
+Version 1.0.9b
 - Blizz apparently uses "_" as a global, so let's make sure we have our own
 - Latest version of LibTourist
 
