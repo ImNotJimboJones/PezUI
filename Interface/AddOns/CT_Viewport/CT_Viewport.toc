@@ -1,0 +1,7 @@
+## Interface: 50001
+## Version: 5.0002
+## Title: CT_Viewport
+## Notes: Allows you to change the rendered world's size
+## SavedVariablesPerCharacter: CT_Viewport_Saved
+CT_Library.lua
+CT_Viewport.xml
