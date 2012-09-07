@@ -217,8 +217,8 @@ MSBTProfiles_SavedVars = {
 					["scrollArea"] = "Custom1",
 					["fontSize"] = false,
 				},
-				["NOTIFICATION_CHI_CHANGE"] = {
-					["disabled"] = true,
+				["INCOMING_SPELL_DEFLECT"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["INCOMING_SPELL_INTERRUPT"] = {
 					["scrollArea"] = "Custom2",
@@ -226,8 +226,8 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_ITEM_COOLDOWN"] = {
 					["disabled"] = true,
 				},
-				["INCOMING_SPELL_DEFLECT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_CHI_CHANGE"] = {
+					["disabled"] = true,
 				},
 				["NOTIFICATION_DEBUFF_STACK"] = {
 					["disabled"] = true,
@@ -319,24 +319,25 @@ MSBTProfiles_SavedVars = {
 					["textAlignIndex"] = 3,
 				},
 				["Static"] = {
-					["offsetY"] = 0,
+					["offsetY"] = 50,
 					["disabled"] = true,
 				},
 				["Custom1"] = {
 					["stickyTextAlignIndex"] = 1,
-					["direction"] = "Up",
-					["stickyBehavior"] = "Jiggle",
-					["scrollWidth"] = 100,
-					["stickyDirection"] = "Up",
 					["scrollHeight"] = 90,
-					["offsetX"] = 315,
+					["stickyBehavior"] = "Jiggle",
+					["direction"] = "Up",
+					["stickyDirection"] = "Up",
+					["scrollWidth"] = 100,
 					["name"] = "Incoming Heals",
+					["offsetX"] = 315,
 					["offsetY"] = -382,
 					["textAlignIndex"] = 1,
 				},
 				["Notification"] = {
 					["normalFontAlpha"] = 100,
-					["offsetY"] = 100,
+					["offsetY"] = 150,
+					["normalFontSize"] = 12,
 				},
 			},
 			["normalFontAlpha"] = 70,
@@ -409,7 +410,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_MAELSTROM_WEAPON"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_PVP_TRINKET"] = {
+				["MSBT_TRIGGER_NIGHTFALL"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_KILL_SHOT"] = {
@@ -469,7 +470,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_REVENGE"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_NIGHTFALL"] = {
+				["MSBT_TRIGGER_PVP_TRINKET"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_BRAIN_FREEZE"] = {
