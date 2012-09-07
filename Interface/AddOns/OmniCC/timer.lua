@@ -363,8 +363,13 @@ local function cooldown_Init(self)
 	self.omnicc = true
 end
 
+local function cooldown_ParentAction(self)
+	local parent = self:GetParent()
+	return parent and parent:GetAttribute("action")
+end
+
 local function cooldown_HasCharges(self)
-	local action = self.omniccAction or self.action
+	local action = self.omniccAction or cooldown_ParentAction(self)
 	return action and GetActionCharges(action) ~= 0
 end
 
