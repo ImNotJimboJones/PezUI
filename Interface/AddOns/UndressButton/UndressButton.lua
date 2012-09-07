@@ -21,10 +21,11 @@ function UndressButton_Event(self,event,...)
 end
 
 function UndressButton_Reset()
-	SetPortraitTexture(DressUpFramePortrait, "player");
-	SetDressUpBackground();
-	DressUpModel:SetUnit("player");
-end
+    local race, fileName = UnitRace("player");
+    SetPortraitTexture(DressUpFramePortrait, "player");
+    SetDressUpBackground(DressUpFrame, fileName); -- 5.0.4 change; now needs frame
+    DressUpModel:SetUnit("player");
+end 
 
 function UndressButton_DressUpTarget(x)
 	if (not DressUpFrame:IsVisible()) then

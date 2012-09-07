@@ -78,13 +78,6 @@ local itemOptionsMenu = {
 		hasArrow = true,
 		menuList = function(level)
 			local info = UIDropDownMenu_CreateInfo()
-			info.text = L["New preview"]
-			info.value = UIDROPDOWNMENU_MENU_VALUE
-			info.func = previewOnClick
-			info.notCheckable = true
-			UIDropDownMenu_AddButton(info, level)
-			
-			local info = UIDropDownMenu_CreateInfo()
 			info.text = L["Active preview"]
 			info.value = UIDROPDOWNMENU_MENU_VALUE
 			info.func = previewOnClick
@@ -102,6 +95,13 @@ local itemOptionsMenu = {
 				info.arg1 = preview
 				UIDropDownMenu_AddButton(info, level)
 			end
+			
+			local info = UIDropDownMenu_CreateInfo()
+			info.text = L["New preview"]
+			info.value = UIDROPDOWNMENU_MENU_VALUE
+			info.func = previewOnClick
+			info.notCheckable = true
+			UIDropDownMenu_AddButton(info, level)
 		end,
 	},
 	{
@@ -190,7 +190,7 @@ local function createMenu(self, level, menuList)
 end
 
 function mog.Item_FrameUpdate(self, data)
-	mog:DressModel(self)
+	mog:ApplyDress(self)
 	self.model:TryOn(data.item)
 end
 

@@ -4,6 +4,7 @@ local L = mog.L;
 
 L["Add Item"] = "Item hinzufügen" -- Needs review
 L["Approximate Colour"] = "ungefähre Farbe" -- Needs review
+L["Are you sure you want to close this set?"] = "Bist Du sicher,  dieses Set zu schließen?" -- Needs review
 L["Auto rotate"] = "Automatisches Rotieren"
 L["Base Modules"] = "Grundmodule" -- Needs review
 L["Catalogue"] = "Katalog"
