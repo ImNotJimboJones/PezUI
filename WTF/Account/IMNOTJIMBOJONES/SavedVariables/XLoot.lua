@@ -28,8 +28,8 @@ XLootDB = {
 							["attach"] = {
 								["self"] = "TOPLEFT",
 								["x"] = 0,
-								["y"] = 0,
 								["target"] = "TOPLEFT",
+								["y"] = 0,
 							},
 							["scale"] = 0.9,
 							["pos"] = {
@@ -45,7 +45,7 @@ XLootDB = {
 		["XLootGroupDB"] = {
 			["profiles"] = {
 				["Default"] = {
-					["nametrunc"] = 30,
+					["faderows"] = false,
 					["AnchorsAway"] = {
 						["roll"] = {
 							["threshold"] = 10000,
@@ -55,8 +55,8 @@ XLootDB = {
 							["attach"] = {
 								["self"] = "TOPLEFT",
 								["x"] = 0,
-								["y"] = 0,
 								["target"] = "BOTTOMLEFT",
+								["y"] = 0,
 							},
 							["scale"] = 1.25,
 							["pos"] = {
@@ -65,7 +65,7 @@ XLootDB = {
 							},
 						},
 					},
-					["faderows"] = false,
+					["nametrunc"] = 30,
 				},
 			},
 		},
