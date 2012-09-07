@@ -882,7 +882,7 @@
 				self:RegisterEvent("PLAYER_ENTERING_WORLD")
 				self:RegisterEvent("PLAYER_REGEN_DISABLED")
 				self:RegisterEvent("PLAYER_REGEN_ENABLED")
-				self:RegisterEvent("RAID_ROSTER_UPDATE")
+				self:RegisterEvent("GROUP_ROSTER_UPDATE")
 				self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 				self:RegisterEvent("PLAYER_FOCUS_CHANGED")
 			</OnLoad>

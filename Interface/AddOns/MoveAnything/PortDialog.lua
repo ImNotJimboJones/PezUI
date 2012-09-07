@@ -1,5 +1,7 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
+local _G = _G
+local _ = _
 
 function MovAny:PortDialog(mode, fn)
 	if not self.portDlg then

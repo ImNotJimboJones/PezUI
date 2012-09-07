@@ -1,7 +1,7 @@
-## Interface: 40300
-## Title: MoveAnything
-## Notes: 12.2.3 by Wagthaa
-## Version: 12.2.3
+## Interface: 50001
+## Title: MoveAnything - MoP
+## Notes: 13.0.19b by Alea
+## Version: 13.0.19b
 ## Author: Wagthaa
 ## SavedVariables: MADB
 
@@ -24,7 +24,9 @@ Modules\Visibility.lua
 
 FrameList.lua
 
+
 MoveAnything.xml
 BlizzardOptions.xml
 
-UserMods.lua
+PetBattle.lua
+AutoHideFrame.lua

@@ -1,52 +1,11 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
-
 local curModule
 local curElement
-
---[[
-ListElement = {
-	name = "",
-	displayName = "",
-	hidden = nil|true,
-	disabled? = nil|true,
-	purge? = nil|true,
-	type = "Frame"|"Slider"|"Button"|"FontString"|"Texture"|etc,
-	requireSync = "" name of frame
-	vm = nil|true,
-	options = {
-		noPos
-		noScale
-		scaleWH
-		noAlpha
-		noHide
-		hideList
-	}
-	enable
-	disable
-}
-
-type
-	"Frame"|"FontString"|"Texture"
-	unregisterAllEvents
-	layers
-	scale
-]]
---[[
-ListCategory = {a
-	name = "",
-	displayName = "",
-	hidden = nil,
-	disabled? = nil,
-	purge? = nil,
-	options = {
-	
-	}
-}
-]]
-
 local elemMetaTable
 local catMetaTable
+local _G = _G
+local _ = _
 
 local m = {
 	customCat = nil,

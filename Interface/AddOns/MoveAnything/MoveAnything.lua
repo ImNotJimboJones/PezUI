@@ -4,7 +4,8 @@
 	Vanilla & TBC versions by: Skrag, Jason, Vincent
 ]]
 local MOVANY = _G.MOVANY
-
+local _G = _G
+local _ = _
 local MAOptions
 
 -- X: http://lua-users.org/wiki/CopyTable
@@ -96,15 +97,16 @@ local MovAny = {
 		"BagFrame3",
 		"BagFrame4",
 		"BagFrame5",
-		"KeyRingFrame",
 	},
 	lForcedLock = {
 		Boss1TargetFrame = "Boss1TargetFrame",
 		Boss2TargetFrame = "Boss2TargetFrame",
 		Boss3TargetFrame = "Boss3TargetFrame",
 		Boss4TargetFrame = "Boss4TargetFrame",
+		Boss5TargetFrame = "Boss5TargetFrame",
 		ActionButton1 = "ActionButton1",
-		BonusActionButton1 = "BonusActionButton1",
+		PetActionButtonsMover = "PetActionButtonsMover"
+	--	BonusActionButton1 = "BonusActionButton1",
 	},
 	lEnableMouse = {
 		WatchFrame,
@@ -124,6 +126,8 @@ local MovAny = {
 		EclipseBarFrame,
 		PaladinPowerBar,
 		ShardBarFrame,
+		PriestBarFrame,
+		MonkHarmonyBar,
 	},
 	lTranslate = {
 		minimap = "MinimapCluster",
@@ -140,7 +144,7 @@ local MovAny = {
 		buffs = "PlayerBuffsMover",
 		debuffs = "PlayerDebuffsMover",
 		GameTooltip = "TooltipMover",
-		ShapeshiftBarFrame = "ShapeshiftButtonsMover",
+		StanceBarFrame = "StanceButtonsMover",
 		TemporaryEnchantFrame = "PlayerBuffsMover",
 		TempEnchant1 = "PlayerBuffsMover",
 		ConsolidatedBuffs = "PlayerBuffsMover",
@@ -148,7 +152,7 @@ local MovAny = {
 		Minimap = "MinimapCluster",
 	},
 	lTranslateSec = {
-		ShapeshiftBarFrame = "ShapeshiftButtonsMover",
+		StanceBarFrame = "StanceButtonsMover",
 		BuffFrame = "PlayerBuffsMover",
 		ConsolidatedBuffFrame = "PlayerBuffsMover",
 		ChatFrame1EditBox = "ChatEditBoxesMover",
@@ -182,7 +186,7 @@ local MovAny = {
 		CompactRaidFrameManager = "RaidUnitFramesManagerMover",
 		TargetOfFocusDebuffsMover = "FocusFrameToTDebuffsMover",
 		PVPParentFrame = "PVPFrame",
-		LFDSearchStatus = "LFGSearchStatus",
+		LFGSearchStatus = "PVEFrame",
 	},
 	lDeleteFrameNames = {
 		BuffFrame = "BuffFrame",
@@ -252,16 +256,20 @@ local MovAny = {
 		PaladinPowerBar = "UIParent",
 		TotemFrame = "UIParent",
 		ShardBarFrame = "UIParent",
+		PriestBarFrame = "UIParent",
+		MonkHarmonyBar = "UIParent",
 	},
 	NoReparent = {
 		TargetFrameSpellBar = "TargetFrameSpellBar",
 		FocusFrameSpellBar = "FocusFrameSpellBar",
-		VehicleMenuBarHealthBar = "VehicleMenuBarHealthBar",
+	--[[	VehicleMenuBarHealthBar = "VehicleMenuBarHealthBar",
 		VehicleMenuBarLeaveButton = "VehicleMenuBarLeaveButton",
-		VehicleMenuBarPowerBar = "VehicleMenuBarPowerBar",
+		VehicleMenuBarPowerBar = "VehicleMenuBarPowerBar",]]
 		PaladinPowerBar = "PaladinPowerBar",
 		ShardBarFrame = "ShardBarFrame",
 		EclipseBarFrame = "EclipseBarFrame",
+		PriestBarFrame = "PriestBarFrame",
+		MonkHarmonyBar = "MonkHarmonyBar",
 	},
 	NoUnanchoring = {
 		BuffFrame = "BuffFrame",
@@ -281,6 +289,7 @@ local MovAny = {
 		TargetFrameToTDebuffsMover = "TargetFrameToTDebuffsMover",
 		TemporaryEnchantFrame = "TemporaryEnchantFrame",
 		AuctionDressUpFrame = "AuctionDressUpFrame",
+		MonkHarmonyBar = "MonkHarmonyBar"
 	},
 	lAllowedMAFrames = {
 		MAOptions = "MAOptions",
@@ -377,6 +386,14 @@ local MovAny = {
 		end
 		API:SyncElement(f:GetName())
 		return f
+	end,
+	
+	hStanceBar_Update = function()
+		API:SyncElement("StanceBarFrame")
+	end,
+	
+	hStanceBar_UpdateState = function()
+		API:SyncElement("StanceVarFrame")
 	end,
 }
 _G.MovAny = MovAny
@@ -531,6 +548,7 @@ function MovAny:Load()
 					for i, v in pairs(data.children) do
 						local child = type(v) == "string" and _G[v] or v
 						if child then
+					--	print(child)
 							if not self:IsModified(child:GetName()) then
 								child.MAParent = name
 							end
@@ -576,8 +594,8 @@ function MovAny:Boot()
 	if GameTooltip and GameTooltip.SetBagItem then
 		hooksecurefunc(GameTooltip, "SetBagItem", self.hGameTooltip_SetBagItem)
 	end
-	if updateContainerFrameAnchors then
-		hooksecurefunc("updateContainerFrameAnchors", self.hUpdateContainerFrameAnchors)
+	if UpdateContainerFrameAnchors then
+		hooksecurefunc("UpdateContainerFrameAnchors", self.hUpdateContainerFrameAnchors)
 	end
 	if ExtendedUI and ExtendedUI.CAPTUREPOINT then
 		self.oCaptureBar_Create = ExtendedUI.CAPTUREPOINT.create
@@ -2173,6 +2191,7 @@ function MovAny:OnMoveCheck(button)
 end
 
 function MovAny:OnHideCheck(button)
+--	print("Debug:"..tostring(self).." "..tostring(button).." ")
 	if not self:ToggleHide(API:GetItem(button:GetParent().idx).name) then
 		button:SetChecked(nil)
 		return
@@ -2238,6 +2257,7 @@ function MovAny:HideFrame(f, readOnly)
 	if e.hideList then
 		for hIndex, hideEntry in pairs(e.hideList) do
 			local val = _G[hideEntry[1]]
+		--	print(tostring(val:GetName()))
 			local hideType
 			for i = 2, table.getn(hideEntry) do
 				hideType = hideEntry[ i ]
@@ -2300,7 +2320,7 @@ function MovAny:ShowFrame(f, readOnly, dontHook)
 	if not self:IsValidObject(f) or (not dontHook and not self:HookFrame(e, f)) or self:ErrorNotInCombat(f) then
 		return
 	end
-	if opt.unit and f.SetAttribute then
+	if opt ~= nil and opt.unit and f.SetAttribute then
 		f:SetAttribute("unit", opt.unit)
 	end
 	if e.hideList then

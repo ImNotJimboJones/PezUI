@@ -1,5 +1,6 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
+local _ = _
 
 local m = {
 	vars = {"frameStrata","clampToScreen","enableMouse","movable","unregisterAllEvents"},

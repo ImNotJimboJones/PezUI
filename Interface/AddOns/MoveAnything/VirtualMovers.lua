@@ -1,5 +1,7 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
+local _G = _G
+local _ = _
 
 local genericFunctions
 genericFunctions = {
@@ -202,10 +204,19 @@ MovAny.lVirtualMovers = {
 		h = 37,
 		relPoint = {"BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 549, 2},
 		excludes = "MicroButtonsVerticalMover",
-		children = {"CharacterMicroButton", "SpellbookMicroButton",
-			"TalentMicroButton", "AchievementMicroButton", "QuestLogMicroButton",
-			"GuildMicroButton", "PVPMicroButton", "LFDMicroButton","EJMicroButton",
-			"RaidMicroButton","MainMenuMicroButton", "HelpMicroButton"},
+		children = {
+			"CharacterMicroButton", 
+			"SpellbookMicroButton",
+			"TalentMicroButton", 
+			"AchievementMicroButton", 
+			"QuestLogMicroButton",
+			"GuildMicroButton", 
+			"PVPMicroButton", 
+			"LFDMicroButton",
+			"CompanionsMicroButton",
+			"EJMicroButton", 
+			"MainMenuMicroButton", 
+			"HelpMicroButton"},
 		OnMAFoundChild = function(self, index, child)
 			if child == self.firstChild then
 				child:ClearAllPoints()
@@ -227,10 +238,18 @@ MovAny.lVirtualMovers = {
 		relPoint = {"BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 546, 2},
 		excludes = "MicroButtonsMover",
 		notMAParent = true,
-		children = {"CharacterMicroButton", "SpellbookMicroButton",
-			"TalentMicroButton", "AchievementMicroButton", "QuestLogMicroButton",
-			"GuildMicroButton", "PVPMicroButton", "LFDMicroButton","EJMicroButton",
-			"RaidMicroButton","MainMenuMicroButton", "HelpMicroButton"},
+		children = {"CharacterMicroButton", 
+			"SpellbookMicroButton",
+			"TalentMicroButton", 
+			"AchievementMicroButton", 
+			"QuestLogMicroButton",
+			"GuildMicroButton",
+			"PVPMicroButton", 
+			"LFDMicroButton",
+			"CompanionsMicroButton",
+			"EJMicroButton",
+			"MainMenuMicroButton", 
+			"HelpMicroButton"},
 		OnMAFoundChild = function(self, index, child)
 			child:ClearAllPoints()
 			if child == self.firstChild then
@@ -259,17 +278,19 @@ MovAny.lVirtualMovers = {
 		excludes = "BasicActionButtonsVerticalMover",
 		prefix = "ActionButton",
 		count = 12,
-		--[[
-		prefix1 = "BonusActionButton",
-		OnMAFoundChild = function(self, index, child, prefix)
+	--	prefix1 = "ActionButton",
+		OnMAFoundChild = function(self, index, child)
 			child:ClearAllPoints()
-			if prefix == 0 then
+			if prefix == nil then
+			--	print("test:"..tostring(child:GetName()).." "..tostring(prefix).." "..tostring(self))
 				if not self.lastChild then
 					child:SetPoint("LEFT", self, "LEFT")
 				else
 					child:SetPoint("LEFT", self.lastChild, "RIGHT", 6, 0)
 				end
 			else
+			--	print("test:"..tostring(child:GetName()).." "..tostring(prefix).." "..tostring(self))
+			--	table.foreach(self, print)
 				child:SetPoint("CENTER", self.prefix..index, "CENTER")
 			end
 		end,
@@ -281,7 +302,6 @@ MovAny.lVirtualMovers = {
 				child:SetPoint("BOTTOMLEFT", prefix, "BOTTOMRIGHT", -2, 0)
 			end
 		end,
-		]]
 		OnMAHook = function(self)
 			local b, bab
 			ActionButton1:ClearAllPoints()
@@ -290,29 +310,18 @@ MovAny.lVirtualMovers = {
 			else
 				ActionButton1:SetPoint("LEFT", self, "LEFT")
 			end
-			BonusActionButton1:ClearAllPoints()
-			if BonusActionButton1.MASetPoint then
-				BonusActionButton1:MASetPoint("LEFT", self, "LEFT")
-			else
-				BonusActionButton1:SetPoint("LEFT", self, "LEFT")
-			end
 			ActionBarUpButton:ClearAllPoints()
 			ActionBarUpButton:SetPoint("TOPLEFT", "ActionButton12", "TOPRIGHT", 0, 7)
 			ActionBarDownButton:ClearAllPoints()
 			ActionBarDownButton:SetPoint("BOTTOMLEFT", "ActionButton12", "BOTTOMRIGHT", 0, -9)
 			for i = 1, 12, 1 do
 				b = _G["ActionButton"..i]
-				bab = _G[ "BonusActionButton"..i ]
 				if i > 1 then
 					b:ClearAllPoints()
 					b:SetPoint("LEFT", "ActionButton"..(i-1), "RIGHT", 6, 0)
-					bab:ClearAllPoints()
-					bab:SetPoint("CENTER", b, "CENTER")
 				end
 				b.MAParent = self
-				bab.MAParent = self
-				--tinsert(self.attachedChildren, b)
-				tinsert(self.attachedChildren, bab)
+				tinsert(self.attachedChildren, b)
 			end
 			if not MovAny:IsModified("ActionBarUpButton") then
 				tinsert(self.attachedChildren, ActionBarUpButton)
@@ -320,22 +329,11 @@ MovAny.lVirtualMovers = {
 			if not MovAny:IsModified("ActionBarDownButton") then
 				tinsert(self.attachedChildren, ActionBarDownButton)
 			end
-			
 			MovAny:LockPoint(ActionButton1)
-			MovAny:LockPoint(BonusActionButton1)
 		end,
 		OnMAPostReset = function(self)
 			MovAny:UnlockPoint(ActionButton1)
-			MovAny:UnlockPoint(BonusActionButton1)
-			local b, pb = _G["ActionButton1"], bab
-			b:ClearAllPoints()
-			if b.MASetPoint then
-				b:MASetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
-			else
-				b:SetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
-			end
-			pb = b
-			b = _G["BonusActionButton1"]
+			local b = _G["ActionButton1"]
 			b:ClearAllPoints()
 			if b.MASetPoint then
 				b:MASetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
@@ -348,12 +346,8 @@ MovAny.lVirtualMovers = {
 			ActionBarDownButton:SetPoint("CENTER", "MainMenuBarArtFrame", "TOPLEFT", 522, -42)
 			for i = 2, 12, 1 do
 				b = _G[ "ActionButton"..i ]
-				bab = _G[ "BonusActionButton"..i ]
 				b:ClearAllPoints()
-				b:SetPoint("LEFT", pb, "RIGHT", 6, 0)
-				bab:ClearAllPoints()
-				bab:SetPoint("CENTER", b, "CENTER")
-				pb = b
+				b:SetPoint("LEFT", "ActionButton"..(i-1), "RIGHT", 6, 0)
 			end
 		end,
 	},
@@ -364,16 +358,8 @@ MovAny.lVirtualMovers = {
 		protected = true,
 		excludes = "BasicActionButtonsMover",
 		OnMAHook = function(self)
-			local b, pb
+			local b
 			b = _G["ActionButton1"]
-			b:ClearAllPoints()
-			if b.MASetPoint then
-				b:MASetPoint("TOP", self, "TOP")
-			else
-				b:SetPoint("TOP", self, "TOP")
-			end
-			pb = b
-			b = _G["BonusActionButton1"]
 			b:ClearAllPoints()
 			if b.MASetPoint then
 				b:MASetPoint("TOP", self, "TOP")
@@ -383,15 +369,11 @@ MovAny.lVirtualMovers = {
 			for i = 1, 12, 1 do
 				b = _G[ "ActionButton"..i ]
 				tinsert(self.attachedChildren, _G[ "ActionButton"..i ])
-				tinsert(self.attachedChildren, _G[ "BonusActionButton"..i ])
 				if i > 1 then
 					b:ClearAllPoints()
-					b:SetPoint("TOP", pb, "BOTTOM", 0, -2)
+					b:SetPoint("TOP", "ActionButton"..(i-1), "BOTTOM", 0, -2)
 				end
 				b.MAParent = self
-				pb = b
-				--_G[ "BonusActionButton"..i ]:ClearAllPoints()
-				--_G[ "BonusActionButton"..i ]:SetPoint("CENTER", b, "CENTER")
 			end
 			tinsert(self.attachedChildren, ActionBarUpButton)
 			tinsert(self.attachedChildren, ActionBarDownButton)
@@ -401,16 +383,8 @@ MovAny.lVirtualMovers = {
 			ActionBarDownButton:SetPoint("TOPRIGHT", "ActionButton12", "BOTTOMRIGHT", 8, 4)
 		end,
 		OnMAPostReset = function(self)
-			local b, pb
+			local b
 			b = _G["ActionButton1"]
-			b:ClearAllPoints()
-			if b.MASetPoint then
-				b:MASetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
-			else
-				b:SetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
-			end
-			pb = b
-			b = _G["BonusActionButton1"]
 			b:ClearAllPoints()
 			if b.MASetPoint then
 				b:MASetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 8, 4)
@@ -425,11 +399,7 @@ MovAny.lVirtualMovers = {
 				b = _G[ "ActionButton"..i ]
 				b.MAParent = BasicActionButtonsMover
 				b:ClearAllPoints()
-				b:SetPoint("LEFT", pb, "RIGHT", 6, 0)
-				--bab = _G[ "BonusActionButton"..i ]
-				--bab:ClearAllPoints()
-				--bab:SetPoint("CENTER", b, "CENTER")
-				pb = b
+				b:SetPoint("LEFT", "ActionButton"..(i-1), "RIGHT", 6, 0)
 			end
 		end,
 	},
@@ -452,7 +422,7 @@ MovAny.lVirtualMovers = {
 		OnMAReleaseChild = function(self, index, child)
 			child:ClearAllPoints()
 			if index == 1 then
-				child:SetPoint("BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 36, 1)
+				child:SetPoint("BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 8, 4)
 			else
 				child:SetPoint("LEFT", self.lastChild, "RIGHT", 8, 0)
 			end
@@ -486,17 +456,56 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 	},
-	ShapeshiftButtonsMover = {
+	ExtraActionBarFrameMover = {
+		w = 52,
+		h = 52,
+		point = {"BOTTOM", "MainMenuBar", 0, 160},
+		protected = true,
+		dontLock = true,
+		prefix = "ExtraActionButton",
+		count = 1,
+		OnMAHook = function(self)
+			local b = _G.ExtraActionBarFrame
+			b:DisableDrawLayer("BACKGROUND")
+			b:DisableDrawLayer("BORDER")
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMLEFT", ExtraActionBarFrameMover, "BOTTOMLEFT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPreReset = function(self)
+			local b = self.sbf
+			MovAny:UnlockPoint(b)
+			b:SetPoint("BOTTOM", _G.MainMenuBar, 0, 160)
+			b:EnableDrawLayer("BACKGROUND")
+			b:EnableDrawLayer("BORDER")
+			b.ignoreFramePositionManager = nil
+			b:SetUserPlaced(nil)
+			b:SetMovable(nil)
+		end,
+		OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self.sbf)
+			else
+				MovAny:UnlockVisibility(self.sbf)
+			end
+		end,
+	},
+	StanceButtonsMover = {
 		w = 225,
 		h = 37,
 		point = {"BOTTOMLEFT", "MainMenuBar", "TOPLEFT", 45, 30},
-		excludes = "ShapeshiftButtonsVerticalMover",
+		excludes = "StanceButtonsVerticalMover",
 		protected = true,
-		prefix = "ShapeshiftButton",
+		prefix = "StanceButton",
 		count = 10,
 		dontLock = true,
 		OnMAHook = function(self)
-			local b = _G.ShapeshiftBarFrame
+			local b = _G.StanceBarFrame
 			b:DisableDrawLayer("BACKGROUND")
 			b:DisableDrawLayer("BORDER")
 			MovAny:UnlockPoint(b)
@@ -526,17 +535,17 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 	},
-	ShapeshiftButtonsVerticalMover = {
+	StanceButtonsVerticalMover = {
 		w = 32,
 		h = 225,
-		point = {"BOTTOMLEFT", "ShapeshiftBarFrame", "BOTTOMLEFT", 11, 3},
-		excludes = "ShapeshiftButtonsMover",
+		point = {"BOTTOMLEFT", "MainMenuBar", "BOTTOMLEFT", 11, 3},
+		excludes = "StanceButtonsMover",
 		notMAParent = true,
 		protected = true,
-		prefix = "ShapeshiftButton",
+		prefix = "StanceButton",
 		count = 10,
 		OnMAHook = function(self)
-			local b = _G.ShapeshiftBarFrame
+			local b = _G.StanceBarFrame
 			b:DisableDrawLayer("BACKGROUND")
 			b:DisableDrawLayer("BORDER")
 			b.ignoreFramePositionManager = true
@@ -566,7 +575,7 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 		OnMAReleaseChild = function(self, index, child)
-			child.MAParent = "ShapeshiftButtonsMover"
+			child.MAParent = "StanceButtonsMover"
 			child:ClearAllPoints()
 			if child == self.firstChild then
 				child:SetPoint("BOTTOMLEFT", self.sbf, "BOTTOMLEFT", 11, 3)
@@ -575,12 +584,39 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 	},
+	MultiBarRightMover = {
+		w = 38,
+		h = 498,
+		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 285},
+		excludes = "MultiBarRightHorizontalMover",
+	--	notMAParent = true,
+		protected = true,
+		prefix = "MultiBarRightButton",
+		count = 12,
+		OnMAFoundChild = function(self, index, child)
+			child:ClearAllPoints()
+			if index == 1 then
+				child:SetPoint("TOPLEFT", self)
+			else
+				child:SetPoint("TOPLEFT", self.lastChild, "TOPLEFT", 0, -42)
+			end
+		end,
+		OnMAReleaseChild = function(self, index, child)
+			child:ClearAllPoints()
+			if index == 1 then
+				child:SetPoint("TOPRIGHT", "MultiBarRight")
+			else
+				child:SetPoint("TOP", self.lastChild, "BOTTOM", 0, -6)
+			end
+			child.MAParent = nil
+		end,
+	},
 	MultiBarRightHorizontalMover = {
 		w = 498,
 		h = 38,
 		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 250},
-		excludes = "MultiBarRight",
-		notMAParent = true,
+		excludes = "MultiBarRightMover",
+	--	notMAParent = true,
 		protected = true,
 		prefix = "MultiBarRightButton",
 		count = 12,
@@ -602,12 +638,39 @@ MovAny.lVirtualMovers = {
 			child.MAParent = nil
 		end,
 	},
+	MultiBarLeftMover = {
+		w = 38,
+		h = 498,
+		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 285},
+		excludes = "MultiBarLeftHorizontalMover",
+	--	notMAParent = true,
+		protected = true,
+		prefix = "MultiBarLeftButton",
+		count = 12,
+		OnMAFoundChild = function(self, index, child)
+			child:ClearAllPoints()
+			if index == 1 then
+				child:SetPoint("TOPLEFT", self)
+			else
+				child:SetPoint("TOPLEFT", self.lastChild, "TOPLEFT", 0, -42)
+			end
+		end,
+		OnMAReleaseChild = function(self, index, child)
+			child:ClearAllPoints()
+			if index == 1 then
+				child:SetPoint("TOPRIGHT", "MultiBarLeft")
+			else
+				child:SetPoint("TOP", self.lastChild, "BOTTOM", 0, -6)
+			end
+			child.MAParent = nil
+		end,
+	},
 	MultiBarLeftHorizontalMover = {
 		w = 498,
 		h = 38,
 		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 285},
-		excludes = "MultiBarLeft",
-		notMAParent = true,
+		excludes = "MultiBarLeftMover",
+	--	notMAParent = true,
 		protected = true,
 		prefix = "MultiBarLeftButton",
 		count = 12,
@@ -1188,7 +1251,7 @@ MovAny.lVirtualMovers = {
 			local bg
 			if self.con then
 				if alpha > 0.999 then
-					for i=1, GetNumRaidMembers(), 1 do
+					for i=1, GetNumGroupMembers(), 1 do
 						bg = _G["CompactRaidFrame"..i]
 						if bg then
 							bg:EnableDrawLayer("BACKGROUND")
@@ -1196,7 +1259,7 @@ MovAny.lVirtualMovers = {
 						end
 					end
 				else
-					for i=1, GetNumRaidMembers(), 1 do
+					for i=1, GetNumGroupMembers(), 1 do
 						bg = _G["CompactRaidFrame"..i]
 						if bg then
 							bg:DisableDrawLayer("BACKGROUND")
@@ -1240,7 +1303,7 @@ MovAny.lVirtualMovers = {
 			local b = CreateFrame("Button", "MACompactRaidFrameManagerToggleButton", UIParent, nil, "MADontHook")
 			b:SetSize(16, 64)
 			b:SetNormalTexture("Interface\\RaidFrame\\RaidPanel-Toggle")
-			if GetNumRaidMembers() < 1 then
+			if GetNumGroupMembers() < 1 then
 				b:Hide()
 			end
 			local tex = b:GetNormalTexture()
@@ -1285,7 +1348,7 @@ MovAny.lVirtualMovers = {
 				man:ClearAllPoints()
 				man:SetPoint("BOTTOMRIGHT", UIParent, "TOPLEFT", 0, 0)
 				MovAny:LockPoint(man)
-				if GetNumRaidMembers() > 0 then
+				if GetNumGroupMembers() > 0 then
 					b:Show()
 				end
 			end)
@@ -1299,7 +1362,7 @@ MovAny.lVirtualMovers = {
 					man:ClearAllPoints()
 					man:SetPoint("BOTTOMRIGHT", UIParent, "TOPLEFT", 0, 0)
 					MovAny:LockPoint(man)
-					if GetNumRaidMembers() > 0 then
+					if GetNumGroupMembers() > 0 then
 						self.button:Show()
 					end
 				else
@@ -1352,7 +1415,7 @@ MovAny.lVirtualMovers = {
 		end,
 		OnMAPostReset = function(self)
 			if not readOnly then
-				updateContainerFrameAnchors()
+				UpdateContainerFrameAnchors()
 			end
 		end,
 	},
