@@ -98,9 +98,21 @@ MADB = {
 						-139.9998779296875, -- [5]
 					},
 				},
+				["CompactRaidGroup5"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup5",
+				},
 				["CompactRaidGroup3"] = {
 					["hidden"] = true,
 					["name"] = "CompactRaidGroup3",
+				},
+				["CompactRaidGroup4"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup4",
+				},
+				["GuildBankFrame"] = {
+					["scale"] = 0.8999999761581421,
+					["name"] = "GuildBankFrame",
 				},
 				["BNToastFrame"] = {
 					["name"] = "BNToastFrame",
@@ -112,34 +124,22 @@ MADB = {
 						283, -- [5]
 					},
 				},
-				["CompactRaidGroup4"] = {
+				["CompactRaidGroup2"] = {
 					["hidden"] = true,
-					["name"] = "CompactRaidGroup4",
-				},
-				["GuildBankFrame"] = {
-					["scale"] = 0.8999999761581421,
-					["name"] = "GuildBankFrame",
+					["name"] = "CompactRaidGroup2",
 				},
 				["CompactRaidGroup6"] = {
 					["hidden"] = true,
 					["name"] = "CompactRaidGroup6",
 				},
-				["CompactRaidGroup2"] = {
-					["hidden"] = true,
-					["name"] = "CompactRaidGroup2",
-				},
-				["CompactRaidGroup5"] = {
-					["hidden"] = true,
-					["name"] = "CompactRaidGroup5",
-				},
 				["MACompactRaidFrameManagerToggleButton"] = {
 					["name"] = "MACompactRaidFrameManagerToggleButton",
 					["pos"] = {
 						"TOPLEFT", -- [1]
-						"UIParent", -- [2]
+						"RaidUnitFramesManagerMover", -- [2]
 						"TOPLEFT", -- [3]
-						-5, -- [4]
-						-256.0000610351563, -- [5]
+						0, -- [4]
+						-35, -- [5]
 					},
 				},
 				["CompactRaidGroup1"] = {
