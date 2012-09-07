@@ -11,11 +11,15 @@ ThreatPlatesDB = {
 					3, -- [1]
 					7, -- [2]
 					31, -- [3]
+					["name"] = "Survival",
+					["role"] = "DAMAGER",
 				}, -- [1]
 				{
 					33, -- [1]
 					2, -- [2]
 					6, -- [3]
+					["name"] = "Beast Mastery",
+					["role"] = "DAMAGER",
 				}, -- [2]
 			},
 			["specName"] = {
@@ -25,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
+	["global"] = {
+		["version"] = "6.005",
+	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
-	},
-	["global"] = {
-		["version"] = "6.004",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
+				["scale"] = {
+					["Normal"] = 0.7000000476837158,
+					["Boss"] = 1,
+					["Neutral"] = 0.7000000476837158,
+					["Elite"] = 0.800000011920929,
+				},
 				["toggle"] = {
 					["Totem"] = true,
-				},
-				["scale"] = {
-					["Elite"] = 0.9500000476837158,
-					["Boss"] = 1,
-					["Neutral"] = 0.800000011920929,
-					["Normal"] = 0.9000000357627869,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -149,20 +153,27 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
+				},
+				["normal"] = {
+					["threatcolor"] = {
+						["LOW"] = {
+							["a"] = 0,
+						},
+					},
 				},
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["healthborder"] = {
-					["texture"] = "TP_HealthBarOverlayThin",
-				},
 				["castbar"] = {
 					["texture"] = "Minimalist",
+				},
+				["healthborder"] = {
+					["texture"] = "TP_HealthBarOverlayThin",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -179,7 +190,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
