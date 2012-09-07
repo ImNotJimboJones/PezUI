@@ -17,7 +17,7 @@ SkadaDB = {
 					["barslocked"] = true,
 					["set"] = "total",
 					["y"] = 3.000383377075195,
-					["barfont"] = "Arial Narrow",
+					["x"] = 356.710693359375,
 					["title"] = {
 						["color"] = {
 							["a"] = 0,
@@ -53,8 +53,8 @@ SkadaDB = {
 						["b"] = 0.7490196078431373,
 					},
 					["barfontsize"] = 13,
-					["mode"] = "DPS",
-					["x"] = 356.710693359375,
+					["mode"] = "Healing",
+					["barfont"] = "Arial Narrow",
 				}, -- [1]
 			},
 			["icon"] = {

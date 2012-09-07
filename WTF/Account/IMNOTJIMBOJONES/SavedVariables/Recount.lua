@@ -5,7 +5,7 @@ RecountDB = {
 	},
 	["profiles"] = {
 		["Default"] = {
-			["GraphWindowY"] = 0,
+			["GraphWindowY"] = -34,
 			["MainWindow"] = {
 				["Buttons"] = {
 					["CloseButton"] = false,
@@ -15,7 +15,7 @@ RecountDB = {
 				},
 				["ShowScrollbar"] = false,
 				["Position"] = {
-					["y"] = -459.999397277832,
+					["y"] = -459.9993438720703,
 					["x"] = -357,
 					["w"] = 213.0000762939453,
 					["h"] = 154.0000305175781,
@@ -28,6 +28,7 @@ RecountDB = {
 			},
 			["MaxFights"] = 25,
 			["MainWindowHeight"] = 154,
+			["ClampToScreen"] = true,
 			["Colors"] = {
 				["Other Windows"] = {
 					["Title"] = {
@@ -57,9 +58,9 @@ RecountDB = {
 					},
 				},
 			},
-			["DetailWindowY"] = -51.00000381469727,
-			["DetailWindowX"] = 8,
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = -87,
+			["DetailWindowX"] = 18,
+			["GraphWindowX"] = 19.00000190734863,
 			["Locked"] = true,
 			["LastInstanceName"] = "Eye of the Storm",
 			["BarTexture"] = "Minimalist",
@@ -74,21 +75,30 @@ RecountDB = {
 					232.0000762939453, -- [7]
 					false, -- [8]
 				},
+				["Realtime_!RAID_DAMAGETAKEN"] = {
+					"!RAID", -- [1]
+					"DAMAGETAKEN", -- [2]
+					"Raid DTPS", -- [3]
+					0, -- [4]
+					0, -- [5]
+					199.9999084472656, -- [6]
+					232.0000305175781, -- [7]
+					false, -- [8]
+				},
 				["Realtime_!RAID_DAMAGE"] = {
 					"!RAID", -- [1]
 					"DAMAGE", -- [2]
 					"Raid DPS", -- [3]
 					0, -- [4]
 					0, -- [5]
-					200.0000457763672, -- [6]
-					232.0000762939453, -- [7]
+					199.9999084472656, -- [6]
+					232.0000305175781, -- [7]
 					false, -- [8]
 				},
 			},
-			["CurDataSet"] = "OverallData",
-			["ClampToScreen"] = true,
-			["BarTextColorSwap"] = false,
+			["CurDataSet"] = "LastFightData",
 			["MainWindowMode"] = 2,
+			["BarTextColorSwap"] = false,
 			["MainWindowWidth"] = 213.0000762939453,
 		},
 		["Pezzer - Burning Blade"] = {
@@ -115,7 +125,7 @@ RecountDB = {
 			["MaxFights"] = 25,
 			["BarTextColorSwap"] = false,
 			["BarTexture"] = "Minimalist",
-			["DetailWindowY"] = 0,
+			["GraphWindowX"] = 0,
 			["CurDataSet"] = "OverallData",
 			["Colors"] = {
 				["Window"] = {
@@ -141,7 +151,7 @@ RecountDB = {
 					},
 				},
 			},
-			["GraphWindowX"] = 0,
+			["DetailWindowY"] = 0,
 			["Locked"] = true,
 			["ClampToScreen"] = true,
 			["MainWindowWidth"] = 168.6666107177734,
