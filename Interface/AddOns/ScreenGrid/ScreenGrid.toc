@@ -1,6 +1,0 @@
-## Interface: 40300
-## Title: ScreenGrid
-## Author: Centella of Medivh-US
-## Notes: Creates a fullscreen grid to help align your interface.|n|cFF00FF00Author: |rCentella of Medivh-US
-## Version: v1.6
-ScreenGrid.lua
