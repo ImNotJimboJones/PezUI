@@ -132,22 +132,31 @@ local testMode = false
 
 -- Graphics Update
 local function UpdateThreatLine(frame, unitid)
-	local maxwidth = frame:GetWidth() / 2
-	local lineLength = 0
+	local maxwidth = frame.MaximumWidth
+	--local maxwidth = frame:GetWidth() / 2
+	local length = 0
+	local anchor = "RIGHT"
 	local leaderThreat, leaderThreatDelta, leaderThreatPct	
 	local leaderThreatMax, leaderThreatMin = frame.ThreatMax, frame.ThreatMin
+	
+	frame.Line:SetWidth(1)		-- Set initial length
+	
 	if testMode then 
 		leaderThreatPct, leaderUnitId =  180, "player"
 	else
 		leaderThreatPct, leaderUnitId, leaderThreatDelta  = GetRelativeThreat(unitid) 
-	end
+	end	
 	
-	
+	--print("Relative Threat Result:", leaderThreatPct, leaderUnitId, leaderThreatDelta)
 	
 	if not (leaderThreatPct) then frame:_Hide(); return end
 	if leaderThreatPct and leaderThreatPct > 0 then
 		
+		leaderThreat = leaderThreatPct
+		
+		--[[			--- I forget why I put this in here.
 		if frame.UseRawValues then
+			print(leaderThreatDelta,leaderThreatMin)
 			if leaderThreatDelta > 0 then
 				leaderThreat = min(leaderThreatDelta, leaderThreatMax)/leaderThreatMax
 			else
@@ -156,38 +165,35 @@ local function UpdateThreatLine(frame, unitid)
 		else
 			leaderThreat = leaderThreatPct
 		end
-		
-		 frame.Line:ClearAllPoints()
+		--]]
+		 
 		-- Get Positions and Size
-		if leaderThreat > 100 then
+		if leaderThreat >= 100 then
 			-- While tanking
-			lineLength = min(maxwidth, maxwidth * ((leaderThreat - 100)/100))
-			frame.Line:SetWidth( lineLength )
+			length = maxwidth * ((leaderThreat - 100)/100)
 			threatcolor = frame._HighColor
-			frame.Line:SetPoint("LEFT", frame, "CENTER")
-			--frame.TargetText:SetPoint("TOP",frame.Line,"RIGHT", 0)
+			anchor = "LEFT"
 		else 
 			-- While NOT tanking
-			lineLength = min(maxwidth, maxwidth * ((100 - leaderThreat)/100))
-			frame.Line:SetWidth( lineLength )
+			length = maxwidth * ((100 - leaderThreat)/100)
 			threatcolor = frame._LowColor
-			frame.Line:SetPoint("RIGHT", frame, "CENTER")
-			--frame.TargetText:SetPoint("CENTER",frame.Line,"LEFT", -3, 12)
 		end
 
+		frame.Line:ClearAllPoints()
+		frame.Line:SetWidth( min( maxwidth, (length or 1)))
+		frame.Line:SetPoint(anchor, frame, "CENTER")
+		
+		
 		if leaderUnitId and leaderUnitId ~= "player" then 
-			
 			
 			if UnitIsUnit(leaderUnitId, "pet")
 				or GetPartyAssignment("MAINTANK", leaderUnitId) 
 				or ("TANK" == UnitGroupRolesAssigned(leaderUnitId)) then
-					threatcolor = frame._TankedColor end
-			--if IsRaidTank(leaderUnitId) then threatcolor = frame._TankedColor end
-			
-			--if frame.ShowText then
-				frame.TargetText:SetText(UnitName(leaderUnitId))								-- TP 6.1
-				frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
-			--end
+					threatcolor = frame._TankedColor 
+			end
+					
+			frame.TargetText:SetText(UnitName(leaderUnitId))								-- TP 6.1
+			frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
 			
 		else frame.TargetText:SetText("") end
 		-- Set Colors
@@ -315,8 +321,8 @@ local function CreateWidgetFrame(parent)
 		frame.Line = frame:CreateTexture(nil, "OVERLAY")
 		frame.Line:SetTexture(art)
 		frame.Line:SetTexCoord(unpack(artCoordinates["Line"]))
-		--frame.Line:SetWidth(32)
 		frame.Line:SetHeight(32)
+		frame.MaximumWidth = 50
 		-- Left
 		frame.Left = frame:CreateTexture(nil, "OVERLAY")
 		frame.Left:SetTexture(art)

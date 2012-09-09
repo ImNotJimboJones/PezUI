@@ -1,7 +1,7 @@
 local tool, i
 tool = BrokerToolBox:NewTool("equipment",{
-	author="Sanori (/p3lim)",
-	version="1.3 13/02/12",
+	author="Sanori",
+	version="1.4 (10. Sep. 2012)",
 	defaultON=true,
 	ScanEquipment = function(self, name)		--Borrowed from p3lim's Broker_Equipment
 		for slot, location in pairs(GetEquipmentSetLocations(name)) do
@@ -30,7 +30,7 @@ tool = BrokerToolBox:NewTool("equipment",{
 				self.broker.icon = "Interface\\Icons\\INV_Misc_QuestionMark"
 			end
 		end
-	end,	
+	end,
 	--[[GetTextureIndex = function(self, texture)	-- Borrowed from tekkub's EquipSetUpdater
 		RefreshEquipmentSetIconInfo()
 		local numIcons = GetNumMacroIcons()
@@ -85,11 +85,11 @@ tool = BrokerToolBox:NewTool("equipment",{
 				end)
 				return
 			end
-			if (UnitLevel('player')>=10 and GetNumTalentGroups()==2) then
-				if (GetActiveTalentGroup()==1) then
-					SetActiveTalentGroup(2)
+			if (UnitLevel('player')>=10 and GetNumSpecGroups()==2) then
+				if (GetActiveSpecGroup()==1) then
+					SetActiveSpecGroup(2)
 				else
-					SetActiveTalentGroup(1)
+					SetActiveSpecGroup(1)
 				end
 			end
 		end,
@@ -108,18 +108,12 @@ tool = BrokerToolBox:NewTool("equipment",{
 			GameTooltip:AddLine(" ")
 			if (UnitLevel('player')>=10) then
 				GameTooltip:AddLine(TALENTS.." |cffffffff("..tool:L("Rightclick")..")|r")
-				for i=1, GetNumTalentGroups() do
-					local pointsSpent = {}
-					for j=1, GetNumTalentTabs() do
-						pointsSpent[j] = select(5,GetTalentTabInfo(j,nil,nil,i))
-					end
-					local name, icon = "???", "Interface\\Icons\\INV_Misc_QuestionMark"
-					if GetPrimaryTalentTree(nil,nil,i) then
-						_, name, _, icon = GetTalentTabInfo(GetPrimaryTalentTree(nil,nil,i),nil,nil,i)
-					end
+				for i=1, GetNumSpecGroups() do
+					local currentSpec = GetSpecialization(nil, nil, i)
+					local id, name, description, icon, background, role = GetSpecializationInfo(currentSpec)
 					local r, g, b = 1,1,1
-					if (GetActiveTalentGroup()==i) then r, g, b = 0,1,0 end
-					GameTooltip:AddDoubleLine("|T"..icon..":12:12:0:0|t "..i..". "..name,pointsSpent[1].."-"..pointsSpent[2].."-"..pointsSpent[3],r,g,b,r,g,b)
+					if (i==GetActiveSpecGroup()) then r, g, b = 0, 1, 0 end
+					GameTooltip:AddLine("|T"..icon..":12:12:0:0|t "..i..". "..name,r,g,b)
 				end
 				GameTooltip:AddLine(" ")
 			end

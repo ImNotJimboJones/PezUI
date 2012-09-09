@@ -10,8 +10,6 @@
 	<Script file="ThreatWheelWidget.lua"/>
 	<Script file="ThreatLineWidget.lua"/>
 	
-	<Script file="TankedWidget.lua"/>
-	
 	<Script file="AuraWidget.lua"/>
 	<Script file="RangeWidget.lua"/>
 	<Script file="TotemIconWidget.lua"/>

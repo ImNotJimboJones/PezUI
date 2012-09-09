@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("token",{
 	author="Sanori",									--author of this tool
-	version="1.4",										--tool version
+	version="1.5 (10. Sep. 2012)",				--tool version
 	defaultON=true,									--default active?
 	db={													--tool database
 		currency={},
@@ -9,6 +9,7 @@ tool = BrokerToolBox:NewTool("token",{
 	events={												--Game Events
 		["HONOR_CURRENCY_UPDATE"] = function(self) self:Update() end,
 		["CURRENCY_DISPLAY_UPDATE"] = function(self) self:Update() end,
+		["PLAYER_ENTERING_WORLD"] = function(self) self:Update() end,
 	},
 	broker = {											--Broker
 		type = "data source",
@@ -59,8 +60,8 @@ tool = BrokerToolBox:NewTool("token",{
 							found=true
 							name = "|TInterface\\Icons\\"..texture..":12:12:0:0|t "..name
 							--Workaround, because sometimes weeklyMax and totalMax have a factor of 100
-							if (totalMax>10000) then totalMax=totalMax/100 end
-							if (weeklyMax>10000) then weeklyMax=weeklyMax/100 end
+							if (totalMax>10000) then totalMax=floor(totalMax/100) end
+							if (weeklyMax>10000) then weeklyMax=floor(weeklyMax/100) end
 							--
 							if (totalMax>0) then amount=amount.."/"..totalMax end
 							if (weeklyMax>0) then amount=amount.." ("..earnedThisWeek.."/"..weeklyMax..")" end
@@ -81,9 +82,9 @@ tool = BrokerToolBox:NewTool("token",{
 	PreInit = function(self)	--Init Vars
 		self.currencyids={
 			{self:L("PVE"),396,395},
-			{self:L("PVP"),390,392,391},        --Archaeology
-			{self:L("PROFESSION"),402,361,61,81--[[,384,385,393,394,397,398,399,400,401]]},
-			{OTHER,416,241,515},
+			{self:L("PVP"),390,392,391},
+			{self:L("PROFESSION"),698,361,61,402,81},
+			{OTHER,697,515,416,241},
 		}
 		self.defaultxt=self.name
 	end,
@@ -101,8 +102,5 @@ tool = BrokerToolBox:NewTool("token",{
 				end
 			end
 		end
-	end,
-	PostInit = function(self)
-		self:Update()
 	end,
 })

@@ -1,10 +1,9 @@
 --------------------------------------------------------------------------------
 -- BrokerToolBox                                                              --
--- Author: Sanori/Pathur                                                      --
+-- Author: Sanori (Pathur) @ EU-Anetheron                                     --
 --------------------------------------------------------------------------------
-local _, me=...
-BrokerToolBox = me											--extern addons can use this, but functions NewL and NewTool must be called in ADDON_LOADED event
-me.version="1.3.5 (core: 1.3)"
+me = {}
+me.version="1.5.0 (core: 1.5)"
 
 me.broker = LibStub:GetLibrary("LibDataBroker-1.1")	--Data Broker
 me.dropdown = LibStub('ArkDewdrop-3.0')					--Dropdownmenu
@@ -35,6 +34,36 @@ function me:pairsByKeys(t, f)
 	return iter
 end
 
+--localization func
+function me:L(name, key)
+	if (me.locale[name.."_"..key]) then
+		return me.locale[name.."_"..key]
+	else
+		return "-["..key.."]-"
+	end
+end
+
+
+
+--Exported functions--
+BrokerToolBox = {}
+--localization
+function BrokerToolBox:NewL(language)
+	if (language and (language=="enUS" or language==GetLocale())) then return me.locale end
+end
+--adds a new tool
+function BrokerToolBox:NewTool(name, table)
+	me.tools[name] = table
+	me.tools[name].L = function(self, key)
+		return me:L(name, key)
+	end
+	me.tools[name].menu = me.menu
+	return me.tools[name]
+end
+BrokerToolBox.L = me.L
+--Table Alphabetical Sort Function (use this instead of "pairs" to sort alphabetical)
+BrokerToolBox.pairsByKeys = me.pairsByKeys
+
 
 
 --Events
@@ -55,9 +84,9 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 		--create list of tools
 		for name,data in pairs(me.tools) do
 			local toolname = data.name or name
-			if me.locale[name] and me.locale[name].name then toolname = me.locale[name].name end
+			if me.locale[name.."_name"] then toolname = me.locale[name.."_name"] end
 			local tooldesc = data.description
-			if me.locale[name] and me.locale[name].description then tooldesc = me.locale[name].description end
+			if me.locale[name.."_description"] then tooldesc = me.locale[name.."_description"] end
 			me.toollist[name]={
 				name=toolname,
 				desc=tooldesc,
@@ -73,7 +102,9 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 		for name,data in pairs(me.toollist) do
 			if ((not me.save.enabled[name]) or (data.requires  and (not IsAddOnLoaded(data.requires)))) then
 				me.tools[name] = nil
-				me.locale[name] = nil
+				for k,_ in pairs(me.locale) do
+					if (strfind(k,"^"..name.."_")) then me.locale[k]=nil end
+				end
 			else
 				me.tools[name].db=me.save.tools[name]
 			end
@@ -85,13 +116,13 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 			icon = "Interface\\Icons\\Trade_BlackSmithing",
 			OnTooltipShow = function(self)
 				GameTooltip:AddLine("BrokerToolBox")
-				GameTooltip:AddLine(me.locale.core.click)
+				GameTooltip:AddLine(me:L("core","click"))
 			end,
 			OnClick = function(self)
 				me.menu:Open(self, 'children', function(level, value)
 					GameTooltip:Hide()
 					me.menu:AddTitle("BrokerToolBox")
-					me.menu:AddTitle("|cffffffff"..me.locale.core.version..": "..me.version.."|r")
+					me.menu:AddTitle("|cffffffff"..me:L("core","version")..": "..me.version.."|r")
 					me.menu:AddLine()
 					for name,data in me:pairsByKeys(me.toollist) do
 						local icon="|TInterface\\Icons\\INV_Misc_QuestionMark:22:22:0:0|t "
@@ -101,21 +132,21 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 							icon="|T"..data.icon..":22:22:0:0|t "
 						end
 						if (data.requires and not IsAddOnLoaded(data.requires)) then data.name="|cffff0000"..data.name.."|r" end
-						me.menu:AddToggle(icon..data.name, me.save.enabled[name], function(var) me.save.enabled[name]=var; UIErrorsFrame:AddMessage(me.locale.core.reloadrequired,1.0,0,0,100,3); end, function()
+						me.menu:AddToggle(icon..data.name, me.save.enabled[name], function(var) me.save.enabled[name]=var; UIErrorsFrame:AddMessage(me:L("core","reloadrequired"),1.0,0,0,100,3); end, function()
 							if data.desc then GameTooltip:AddLine(data.desc) end
 							if data.requires then
 								if IsAddOnLoaded(data.requires) then
-									GameTooltip:AddLine(me.locale.core.requires..": "..data.requires,0,1,0)
+									GameTooltip:AddLine(me:L("core","requires")..data.requires,0,1,0)
 								else
-									GameTooltip:AddLine(me.locale.core.requires..": "..data.requires,1,0,0)
+									GameTooltip:AddLine(me:L("core","requires")..": "..data.requires,1,0,0)
 								end
 							end
-							if data.author then GameTooltip:AddLine(me.locale.core.author..": "..data.author,1,1,1) end
-							if data.version then GameTooltip:AddLine(me.locale.core.version..": "..data.version,1,1,1) end
+							if data.author then GameTooltip:AddLine(me:L("core","author")..": "..data.author,1,1,1) end
+							if data.version then GameTooltip:AddLine(me:L("core","version")..": "..data.version,1,1,1) end
 						end)
 					end
 					me.menu:AddLine()
-					me.menu:AddFunc(me.locale.core.reloadui, function() ReloadUI() end)
+					me.menu:AddFunc(me:L("core","reloadui"), function() ReloadUI() end)
 				end)
 			end,
 		})
@@ -142,11 +173,6 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 			end
 			if data.PostInit then data:PostInit(data) end
 		end
-	elseif event == "PLAYER_LEAVING_WORLD" then
-		for name,data in pairs(me.tools) do
-			if data.PlayerLeavingWorld then data:PlayerLeavingWorld(data) end
-			me.save.tools[name]=data.db
-		end
 	else
 		for name,data in pairs(me.tools) do
 			if (data.events and data.events[event]) then
@@ -155,36 +181,6 @@ me.frame:SetScript("OnEvent", function(self, event, ...)
 		end
 	end
 end)
-
-
-
---adds a new tool
-function me:NewTool(name, table)
-	me.tools[name] = table
-	me.tools[name].L = function(self, locale)
-		if (me.locale[name] and me.locale[name][locale]) then
-			return me.locale[name][locale]
-		else
-			return "["..locale.."]"
-		end
-	end
-	me.tools[name].menu = me.menu
-	return me.tools[name]
-end
---add new locale
-function me:AddLocalization(table, locale)
-	if (locale and locale~=GetLocale()) then return end
-	for k,v in pairs(table) do
-		local tool, _ = strsplit("_",k)
-		local index = strjoin("_",select(2,strsplit("_",k)))
-		if (not tool or tool=="" or not index or index=="") then return end
-		if not me.locale[tool] then me.locale[tool]={} end
-		if (locale or (not locale and not me.locale[tool][k])) then
-			me.locale[tool][index] = v
-		end
-	end
-	wipe(table)
-end
 
 
 

@@ -1,20 +1,21 @@
 local tool
 tool = BrokerToolBox:NewTool("freeBagSlots",{
 	author="Sanori",
-	version="1.0 18/02/12",
+	version="1.1 (10. Sep. 2012)",
 	defaultON=false,	
 	freeSlotCount=0,
 	slotCount=0,
-	events={
-		["BAG_UPDATE"] = function(self, slot)
-			self.freeSlotCount = 0
-			self.slotCount = 0
-			for i=0, NUM_BAG_SLOTS do
-				self.freeSlotCount = self.freeSlotCount+GetContainerNumFreeSlots(i)
-				self.slotCount = self.slotCount+GetContainerNumSlots(i)
-			end
-			self.broker.text = self.freeSlotCount
+	Update = function(self)
+		self.freeSlotCount = 0
+		self.slotCount = 0
+		for i=0, NUM_BAG_SLOTS do
+			self.freeSlotCount = self.freeSlotCount+GetContainerNumFreeSlots(i)
+			self.slotCount = self.slotCount+GetContainerNumSlots(i)
 		end
+		self.broker.text = self.freeSlotCount
+	end,
+	events={
+		["BAG_UPDATE"] = function(self, slot) self.Update(self) end
 	},
 	broker = {
 		type = "data source",
@@ -34,5 +35,8 @@ tool = BrokerToolBox:NewTool("freeBagSlots",{
 				GameTooltip:AddDoubleLine("|T"..texture..":12:12:0:0|t "..name,GetContainerNumFreeSlots(i).."|cffffffff ("..GetContainerNumSlots(i)..")|r",r,g,b)
 			end
 		end
-	}
+	},
+	PreInit = function(self)
+		self.Update(self)
+	end,
 })

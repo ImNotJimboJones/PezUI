@@ -796,6 +796,7 @@ do
 		platelevels = platelevels - 1; if platelevels < 1 then platelevels = 1 end
 		extended.frameLevel = platelevels
 		extended:SetFrameLevel(platelevels)
+		extended:SetFrameStrata("BACKGROUND")
 		extended.style, extended.unit, extended.unitcache, extended.stylecache, extended.widgets = {}, {}, {}, {}, {}
 		extended.regions, extended.bars, extended.visual = {}, {}, {}
 		regions = extended.regions
@@ -1035,6 +1036,7 @@ do
 	local PlateHandler = CreateFrame("Frame", nil, WorldFrame)
 	PlateHandler:SetFrameStrata("TOOLTIP") -- When parented to WorldFrame, causes OnUpdate handler to run close to last
 	PlateHandler:SetScript("OnEvent", EventHandler)
+	MinimapCluster:SetFrameStrata("LOW"); PlayerFrame:SetFrameStrata("LOW") ; TargetFrame:SetFrameStrata("LOW")
 	
 	-- Events
 	function events:PLAYER_ENTERING_WORLD() PlateHandler:SetScript("OnUpdate", OnUpdate); end

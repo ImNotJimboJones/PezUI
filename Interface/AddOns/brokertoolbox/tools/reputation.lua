@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("reputation",{
 	author="Sanori",									--author of this tool
-	version="1.0",										--tool version
+	version="1.1 (10. Sep. 2012)",				--tool version
 	defaultON=false,									--default active?
 	db = {
 		type = 1,
@@ -28,6 +28,7 @@ tool = BrokerToolBox:NewTool("reputation",{
 				end
 			end
 		end,
+		["PLAYER_ENTERING_WORLD"] = function(self) self.events.UPDATE_FACTION(self) end,
 	},
 	broker = {											--Broker
 		type = "data source",

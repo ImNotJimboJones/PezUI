@@ -537,6 +537,117 @@ MSQ:AddSkin("Renaitre: Fade", {
 	},
 }, true)
 
+-- Renaitre: Fade Circle
+MSQ:AddSkin("Renaitre: Fade Circle", {
+	Author = "Renaitre",
+	Version = "5.0.4",
+	Shape = "Circle",
+	Masque_Version = 40300,
+	Backdrop = {
+		Width = 44,
+		Height = 44,
+		Color = {0.3, 0.3, 0.3, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Backdrop]],
+	},
+	Icon = {
+		Width = 24,
+		Height = 24,
+		TexCoords = {0.08, 0.92, 0.08, 0.92},
+	},
+	Flash = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "ADD",
+		Color = {0.5, 0, 1, 0.6},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Flash]],
+	},
+	Cooldown = {
+		Width = 24,
+		Height = 24,
+	},
+	AutoCast = {
+		Width = 24,
+		Height = 24,
+		OffsetX = 1,
+		OffsetY = -1,
+		AboveNormal = true,
+	},
+	Normal = {
+		Width = 44,
+		Height = 44,
+		Color = {0, 0, 0, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Normal]],
+	},
+	Pushed = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "ADD",
+		Color = {0.5, 0, 1, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Highlight]],
+	},
+	Border = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "BLEND",
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Border]],
+	},
+	Disabled = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "BLEND",
+		Color = {1, 0, 0, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Border]],
+	},
+	Checked = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "BLEND",
+		Color = {0, 0.12, 1, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Border]],
+	},
+	AutoCastable = {
+		Width = 44,
+		Height = 44,
+		Texture = [[Interface\Buttons\UI-AutoCastableOverlay]],
+	},
+	Highlight = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "ADD",
+		Color = {0.5, 0, 1, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Highlight]],
+	},
+	Gloss = {
+		Width = 44,
+		Height = 44,
+		BlendMode = "ADD",
+		Color = {1, 1, 1, 1},
+		Texture = [[Interface\Addons\Masque_Renaitre\Textures\FadeCircle\Gloss]],
+	},
+	HotKey = {
+		Width = 44,
+		Height = 10,
+		JustifyH = "RIGHT",
+		JustifyV = "TOP",
+		OffsetX = -2,
+		OffsetY = -2,
+	},
+	Count = {
+		Width = 44,
+		Height = 10,
+		JustifyH = "RIGHT",
+		JustifyV = "BOTTOM",
+		OffsetY = 3,
+	},
+	Name = {
+		Width = 44,
+		Height = 12,
+		JustifyH = "CENTER",
+		JustifyV = "BOTTOM",
+		OffsetY = 4,
+	},
+}, true)
+
 -- Renaitre: Rounded
 MSQ:AddSkin("Renaitre: Rounded", {
 	Author = "Renaitre",

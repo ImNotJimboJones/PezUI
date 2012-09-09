@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("experience",{
 	author="Sanori",
-	version="1.1",
+	version="1.2 (10. Sep. 2012)",
 	defaultON=false,
 	db={
 		type = 1,
@@ -54,6 +54,7 @@ tool = BrokerToolBox:NewTool("experience",{
 		["PLAYER_GUILD_UPDATE"] = function(self) self:Update() end,
 		["GUILD_XP_UPDATE"]= function(self) self:Update() end,
 		["PLAYER_XP_UPDATE"] = function(self, UnitID) if UnitID=="player" then self:Update() end end,
+		["PLAYER_ENTERING_WORLD"] = function(self) self:Update() end,
 	},
 	broker = {
 		type = "data source",

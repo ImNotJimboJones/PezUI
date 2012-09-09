@@ -14,7 +14,7 @@ local function UpdateClassIconWidget(frame, unit)
 			frame.Icon:SetTexture(path..db.classWidget.theme.."\\"..class)
 			frame:Show()
 		elseif unit.guid and not db.cache[unit.name] and db.friendlyClassIcon then
-			_, engClass = GetPlayerInfoByGUID(unit.guid)
+			local _, engClass = GetPlayerInfoByGUID(unit.guid)
 			if engClass then
 				frame.Icon:SetTexture(path..db.classWidget.theme.."\\"..engClass)
 				frame:Show()

@@ -912,7 +912,8 @@ local function TitanUtils_GetNextButtonOnBar(bar, id, side)
 	for i, id in pairs(TitanPanelSettings.Buttons) do
 		if TitanUtils_GetWhichBar(id) == bar
 		and i > index
-		and TitanPanel_GetPluginSide(id) == side then
+		and TitanPanel_GetPluginSide(id) == side
+		and TitanUtils_IsPluginRegistered(id) then
 			return i;
 		end
 	end
@@ -938,7 +939,8 @@ local function TitanUtils_GetPrevButtonOnBar(bar, id, side)
 	for i, id in pairs(TitanPanelSettings.Buttons) do
 		if TitanUtils_GetWhichBar(id) == bar
 		and i < index
-		and TitanPanel_GetPluginSide(id) == side then
+		and TitanPanel_GetPluginSide(id) == side
+		and TitanUtils_IsPluginRegistered(id) then
 			prev_idx = i; -- this might be the previous button
 		end
 		if i == index then
@@ -997,7 +999,8 @@ function TitanUtils_GetFirstButtonOnBar(bar, side)
 	for i, id in pairs(TitanPanelSettings.Buttons) do
 		if TitanUtils_GetWhichBar(id) == bar
 		and i > index
-		and TitanPanel_GetPluginSide(id) == side then
+		and TitanPanel_GetPluginSide(id) == side 
+		and TitanUtils_IsPluginRegistered(id) then
 			return i;
 		end
 	end

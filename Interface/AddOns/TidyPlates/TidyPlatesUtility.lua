@@ -108,9 +108,15 @@ TidyPlatesUtility.updateTable = updatetable
 -- Threat Function
 ------------------------
 do
-	local function GetRelativeThreat(unit)
+	--[[
+		This function returns the relative threat of a unit, compared to their group members
+		
+		
+	--]]
+	local function GetRelativeThreat(unit)		-- 'unit' is some target
 		if not UnitExists(unit) then return end
 		local _, group, size, index, unitid
+		local first = 1
 		
 		local playerthreat, leaderThreat, tempthreat, petthreat, leaderUnitID  = 0,0,0,0, nil
 		local playerThreatVal, leaderThreatVal = 0, 0
@@ -126,29 +132,31 @@ do
 			leaderUnitID = "pet" 
 		end
 		-- Get Group Type
-		if UnitInRaid("player") then group = "raid"; size = TidyPlatesUtility:GetNumRaidMembers() - 1
+		if UnitInRaid("player") then group = "raid"; size = TidyPlatesUtility:GetNumRaidMembers(); first = 2
 		elseif UnitInParty("player") then group = "party"; size = TidyPlatesUtility:GetNumPartyMembers()
 		else group = nil end
+		
 		-- Cycle through Group, picking highest threat holder
 		if group then
-			for index = 1, size do
+			for index = first, size do
 				unitid = group..index
+				--print("Test", unitid)
 				_, _, tempthreat = UnitDetailedThreatSituation(unitid, unit)
 				if tempthreat and tempthreat > leaderThreat then 
 					leaderThreat = tempthreat 
 					leaderUnitID = unitid
-
 				end
 			end
 		end
-		
+		--print(size, leaderThreat, leaderUnitID, UnitName(leaderUnitID or ""))
+		-- 3, 100, raid1, binbwen, nil
 		if playerthreat and leaderThreat and leaderUnitID then
 			_, _, leaderThreatVal = UnitDetailedThreatSituation(leaderUnitID, unit)
 			leaderThreatVal = leaderThreatVal or 0
 			
-			if playerthreat == 100 then 
+			if playerthreat == 100 then -- This means that the unit is tanking, and there are no units higher than them
 				return playerthreat + (100-leaderThreat), nil, playerThreatVal - leaderThreatVal
-			else return playerthreat, leaderUnitID, -(leaderThreatVal - playerThreatVal) end
+			else return playerthreat, leaderUnitID, -(leaderThreatVal - playerThreatVal) end	-- This means that the unit is not attacking you, and will list WHO it is
 		else return end
 	end
 	

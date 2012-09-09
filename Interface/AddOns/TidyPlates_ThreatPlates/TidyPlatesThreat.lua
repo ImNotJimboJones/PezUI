@@ -1443,8 +1443,10 @@ end
 function TidyPlatesThreat:specInfo()
 	for i=1, GetNumSpecGroups() do
 		local _, name, _, _, _, role
-		local specValue = GetSpecialization(false,false,i)
-		_, name, _, _, _, role = GetSpecializationInfo(specValue, nil, false);
+		if UnitLevel("player") > 9 then
+			local specValue = GetSpecialization(false,false,i)
+			_, name, _, _, _, role = GetSpecializationInfo(specValue, nil, false);
+		end
 		if not name or not role then
 			role, name = "DAMAGER","Unknown"
 		end

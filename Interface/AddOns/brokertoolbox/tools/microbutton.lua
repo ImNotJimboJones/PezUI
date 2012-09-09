@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("microbutton",{
 	author="Sanori",									--author of this tool
-	version="1.3",										--tool version
+	version="1.4 (10. Sep. 2012)",				--tool version
 	defaultON=false,									--default active?
 	db = {
 		HideBlizzButton = false,
@@ -74,6 +74,7 @@ tool = BrokerToolBox:NewTool("microbutton",{
 				if IsInGuild() then
 					tool.menu:AddFunc(MicroButtonTooltipText(GUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, nil)
 				end
+				tool.menu:AddFunc(MicroButtonTooltipText(LOOKINGFORGUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, "Interface\\Buttons\\UI-MicroButton-Socials-Up");
 				tool.menu:AddFunc(MicroButtonTooltipText(PLAYER_V_PLAYER, "TOGGLECHARACTER4"), function() TogglePVPFrame() end, "Interface\\BattlefieldFrame\\Battleground-"..UnitFactionGroup("player"))
 				tool.menu:AddFunc(MicroButtonTooltipText(DUNGEONS_BUTTON, "TOGGLELFGPARENT"), function() ToggleLFDParentFrame() end, "Interface\\LFGFRAME\\LFG-Eye", nil, nil,
 					'iconCoordLeft', 0.0234375,
@@ -81,8 +82,8 @@ tool = BrokerToolBox:NewTool("microbutton",{
 					'iconCoordTop', 0.046875,
 					'iconCoordBottom', 0.19921875
 				)
-				tool.menu:AddFunc(MicroButtonTooltipText(RAID_FINDER, "TOGGLERAIDFINDER"),function() ToggleRaidFrame(); end);
-				tool.menu:AddFunc(MicroButtonTooltipText(ENCOUNTER_JOURNAL, "TOGGLEENCOUNTERJOURNAL"),function() ToggleFrame(EncounterJournal); end, "Interface\\EncounterJournal\\UI-EJ-PortraitIcon");
+				tool.menu:AddFunc(MicroButtonTooltipText(MOUNTS_AND_PETS, "TOGGLEPETJOURNAL"),function() TogglePetJournal(); end,"Interface\\Icons\\Ability_Mount_RidingHorse");
+				tool.menu:AddFunc(MicroButtonTooltipText(ENCOUNTER_JOURNAL, "TOGGLEENCOUNTERJOURNAL"),function() ToggleEncounterJournal(); end, "Interface\\EncounterJournal\\UI-EJ-PortraitIcon");
 				tool.menu:AddFunc(MicroButtonTooltipText(MAINMENU_BUTTON, "TOGGLEGAMEMENU"), function()
 					if ( not GameMenuFrame:IsShown() ) then
 						ShowUIPanel(GameMenuFrame)
@@ -92,7 +93,7 @@ tool = BrokerToolBox:NewTool("microbutton",{
 				end)
 				tool.menu:AddFunc(HELP_BUTTON, function() ToggleHelpFrame() end, "Interface\\Icons\\INV_Misc_QuestionMark")
 				tool.menu:AddLine()
-				tool.menu:AddFunc(BrokerToolBox.locale.core.reloadui, function() ReloadUI() end)
+				tool.menu:AddFunc(BrokerToolBox:L("core","reloadui"), function() ReloadUI() end)
 			end)
 		end,
 		OnTooltipShow = function(self) --after changing the tooltips line, pls also correct the OnUpdate function
@@ -149,9 +150,9 @@ tool = BrokerToolBox:NewTool("microbutton",{
 			PVPMicroButton:Hide()
 			LFDMicroButton:Hide()
 			EJMicroButton:Hide()
-			RaidMicroButton:Hide()
+			CompanionsMicroButton:Hide()
 			MainMenuMicroButton:Hide()
-			HelpMicroButton:Hide()
+			HelpMicroButton:Hide()            --NEWBIE_TOOLTIP_GUILDTAB
 		else
 			CharacterMicroButton:Show()
 			SpellbookMicroButton:Show()
@@ -162,7 +163,7 @@ tool = BrokerToolBox:NewTool("microbutton",{
 			PVPMicroButton:Show()
 			LFDMicroButton:Show()
 			EJMicroButton:Show()
-			RaidMicroButton:Show()
+			CompanionsMicroButton:Show()
 			MainMenuMicroButton:Show()
 			HelpMicroButton:Show()
 		end

@@ -330,6 +330,11 @@ _G[TITAN_PANEL_CONTROL]:RegisterEvent("UNIT_EXITED_VEHICLE");
 _G[TITAN_PANEL_CONTROL]:SetScript("OnEvent", function(_, event, ...)
 	_G[TITAN_PANEL_CONTROL][event](_G[TITAN_PANEL_CONTROL], ...)
 end)
+-- For the pet battle - for now we'll hide the Titan bars...
+-- Cannot seem to move the 'top' part of the frame.
+_G[TITAN_PANEL_CONTROL]:RegisterEvent("PET_BATTLE_OPENING_START");
+_G[TITAN_PANEL_CONTROL]:RegisterEvent("PET_BATTLE_CLOSE");
+
 	
 --[[ Titan
 NAME: TitanPanel_PlayerEnteringWorld
@@ -535,6 +540,17 @@ function TitanPanelBarButton:UNIT_ENTERED_VEHICLE(self, ...)
 end
 function TitanPanelBarButton:UNIT_EXITED_VEHICLE(self, ...)
 	TitanMovable_AdjustTimer("Vehicle")
+end
+--
+function TitanPanelBarButton:PET_BATTLE_OPENING_START()
+--	TitanDebug("Pet_battle start: ")
+	-- Hide all bars and hiders
+	TitanPanelBarButton_HideAllBars()
+end
+function TitanPanelBarButton:PET_BATTLE_CLOSE()
+--	TitanDebug("Pet_battle end: ")
+	-- Show the bars the user had selected
+	TitanPanelBarButton_DisplayBarsWanted()
 end
 --
 --
@@ -1134,6 +1150,40 @@ function TitanPanelBarButton_DisplayBarsWanted()
 	
 	-- Adjust other frames because the bars shown / hidden may have changed
 	TitanPanel_AdjustFrames(TITAN_PANEL_PLACE_BOTH, true)
+end
+
+--[[ Titan
+NAME: TitanPanelBarButton_HideAllBars
+DESC: This routine will hide all the Titan bars (and hiders) regardless of what the user has selected.  
+VAR:  None
+OUT:  None
+NOTE: 
+- For example when the pet battle is active. We cannot figure out how to move the pet battle frame so we are punting and hiding Titan...
+- We only need to hide the bars (and hiders) - not adjust frames
+:NOTE
+--]]
+function TitanPanelBarButton_HideAllBars()
+	-- Check all bars to see if the user has requested they be shown
+	for idx,v in pairs (TitanBarData) do
+		local bar = TitanBarData[idx].name
+		local hider = _G[TitanBarData[idx].hider]
+		local hide = TitanBarData[idx].hide
+--[[
+TitanDebug("_HideAllBars: "
+.."idx: "..(idx or "?").." "
+.."bar: "..(bar or "?").." "
+.."hider: "..(TitanBarData[idx].hider or "?").." "
+)
+--]]
+		-- Hide the Titan bar. The hider bar MAY be hidden as well
+		TitanPanelBarButton_Hide(idx)
+		-- In case the user selected auto hide for this bar we need to hide it as well
+		if (TitanPanelGetVar(bar.."_Show")) and (TitanPanelGetVar(bar.."_Hide")) then
+			hider:ClearAllPoints();
+			hider:SetPoint(hide.top.pt, hide.top.rel_fr, hide.top.rel_pt, hide.top.x, hide.top.y); 
+			hider:SetPoint(hide.bot.pt, hide.bot.rel_fr, hide.bot.rel_pt, hide.bot.x, hide.bot.y);
+		end
+	end
 end
 
 --[[ Titan

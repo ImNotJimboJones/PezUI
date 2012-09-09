@@ -414,6 +414,7 @@ L["TITAN_PANEL_MENU_PLUGIN_RESET_DESC"] = "Refresh plugin text and position";
 		  		Items = "Items",
 		  		Discounts = "Discounts",
 		  		Costs = "Costs",
+				CostTotal = "Total Cost",
 				TooltipOptions = "Tooltip",
 				CostBag = "Bag cost",
 				CostEquip = "Equip cost",

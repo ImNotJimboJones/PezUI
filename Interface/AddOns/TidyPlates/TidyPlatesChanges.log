@@ -1,8 +1,15 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.7.4
+---------------------------
+- Fixed giant threat bar issue (Corrected group size ranges in GetRelativeThreat() utility function)
+- Raised MinimapCluster, PlayerFrame, and TargetFrame to "LOW" framestrata to prevent nameplates from obscuring those UI elements.
+- Currently, there is no way to fix the brief 'flash' of the Blizzard nameplate art before it becomes active; It's a bug for the Blizz folks to solve.
+
 6.7.3
 ---------------------------
 - Removed debug code from GroupCache.lua (Chat log spam)
+
 
 6.7.2
 ---------------------------
@@ -11,8 +18,6 @@ Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 - Group & Unit Cache: Will not try to search the global unit cache for class information while you are in a dungeon (could slow things down, and it isn't needed)
 - Core: Reverted to earlier method of discriminating nameplates
 - Threat Line Widget: Added some code to prevent it from accidentally becoming REALLY long.
-
-Does anyone still use the Threat Line Widget?  Tank Threat is so high, now, that I wonder if this will/has become irrelevant.  Let me know;  http://wow.curseforge.com/addons/tidy-plates/forum/
 
 6.7.1
 ---------------------------

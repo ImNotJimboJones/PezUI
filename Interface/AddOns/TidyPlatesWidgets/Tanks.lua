@@ -94,11 +94,17 @@ local function IsTankedByAnotherTank(unit)
 end
 
 local TankAuras = {
-	["5487"] = true, 		-- Druid Bear Form
-	["25780"] = true, 		-- Paladin Righteous Fury
+	["5487"] = true, 		-- Druid: Bear Form
+	["25780"] = true, 		-- Paladin: Righteous Fury
 	-- ["71"] = true, 
-	["48263"] = true, 		-- Blood
-	["115069"] = true, 		-- Stance of the Sturdy Ox
+	["48263"] = true, 		-- DK: Blood
+	["115069"] = true, 		-- Monk: Stance of the Sturdy Ox
+}
+
+local TankStances = {
+	["18"] = true,			-- Warrior: Defensive Stance
+	--["23"] = true,		-- Monk: Defensive Stance				
+	--["5"] = true,			-- Druid: Bear Form
 }
 
 --TidyPlatesWidgets.IsTankingAuraActive = false

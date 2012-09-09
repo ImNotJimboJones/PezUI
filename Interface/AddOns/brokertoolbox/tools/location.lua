@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("location",{
 	author="Sanori",
-	version="1.0",
+	version="1.1 (10. Sep. 2012)",
 	defaultON=true,
 	db={
 		showsubzone=true,
@@ -12,6 +12,7 @@ tool = BrokerToolBox:NewTool("location",{
 		["ZONE_CHANGED"] = function(self) self:Update() end,
 		["ZONE_CHANGED_INDOORS"] = function(self) self:Update() end,
 		["ZONE_CHANGED_NEW_AREA"] = function(self) self:Update() end,
+		["PLAYER_ENTERING_WORLD"] = function(self) self:Update() end,
 		--["WORLD_MAP_UPDATE"] = function(self) SetMapToCurrentZone(); self:Update() end,
 	},
 	OnUpdate = function(self, elapsed)
@@ -90,8 +91,5 @@ tool = BrokerToolBox:NewTool("location",{
 	PreInit = function(self)
 		self.text = "???"
 		self.TimeSinceLastUpdate = 0
-	end,
-	PostInit = function(self)
-		self:Update()
 	end,
 })

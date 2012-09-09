@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("repair",{
 	author="Sanori",									--author of this tool
-	version="1.0",									--tool version
+	version="1.0 (31. Mar. 2011)",				--tool version
 	defaultON=true,									--default active?
 	db={													--tool database
 		autorepair=false,

@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("newMail",{
 	author="Sanori",
-	version="1.0 15/02/12",
+	version="1.0 (15. Feb. 2012)",
 	defaultON=false,	
 	events={
 		["UPDATE_PENDING_MAIL"] = function(self)
