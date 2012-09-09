@@ -1,0 +1,14 @@
+## Interface: 50001
+## Title: MountFilter
+## Notes: Adds filtering capability to the Mount Journal
+## Author: Pezzer
+## Version: 1.0
+## X-Curse-Packaged-Version: v1.2.1
+## X-Curse-Project-Name: MountFilter
+## X-Curse-Project-ID: mountfilter
+## X-Curse-Repository-ID: wow/mountfilter/mainline
+
+embeds.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+
+MountFilter.lua
