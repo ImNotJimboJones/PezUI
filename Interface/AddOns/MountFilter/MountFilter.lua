@@ -266,6 +266,9 @@ function MountFilter:UpdateMountJournal()
 	local totalHeight = MOUNT_BUTTON_HEIGHT * mountCount
 	HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
 	
+	-- Update mount count text
+	MountJournal.MountCount.Count:SetText(mountCount);
+	
 	-- Update selection
 	MountFilter:UpdateSelection()
 end

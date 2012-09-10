@@ -1,0 +1,12 @@
+tag v1.2.2
+05d1c53c354f20907715ad2a7214227191a7015c
+Spence DiNicolantonio <ImNotJimboJones@mac.com>
+2012-09-10 20:12:18 -0400
+
+Tagging as v1.2.2
+
+
+--------------------
+
+Spence DiNicolantonio:
+	- Now updating "total mounts" display to reflect filtered mount list
