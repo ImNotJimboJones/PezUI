@@ -284,3 +284,5 @@ DBM-Pandaria: enabled
 DBM-Party-MoP: enabled
 DBM-TerraceofEndlessSpring: enabled
 CT_Viewport: enabled
+Glamour: disabled
+MountFilter: enabled
