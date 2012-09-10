@@ -112,7 +112,21 @@ function MountFilter:CreateHooks()
 	
 	-- Override Blizzard's MountJournal_Select function to allow deselection
 	MountFilter:RawHook("MountJournal_Select", "Select", true)
+	
+	-- Hook to HybridScrollFrame's OnValueChanged so we can update the scrollFrame
+	-- frame buttons after the offset has changed
+	MountFilter:SecureHook("HybridScrollFrame_OnValueChanged", 
+		function(self, value)
+			if (self == MountJournal.ListScrollFrame) then
+				MountFilter:UpdateMountJournal()
+			end
+		end
+	)
 end
+
+--------------------------------------------------------------------------------
+-- Creates required function hooks
+--------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 -- Updates the list of mount indexes based on a given search string and updates
@@ -164,11 +178,13 @@ function MountFilter:UpdateMountJournal()
 	
 	-- If Mount Journal not available, call Bliz function
 	if (not MountJournal) then
+		MountFilter:Log("Mount Journal not available... calling MountJournal_UpdateMountList")
 		return self.hooks["MountJournal_UpdateMountList"]()
 	end
 	
 	-- If no mount list, call Bliz function
 	if (not mountList) then
+		MountFilter:Log("mountList not initialized... calling MountJournal_UpdateMountList")
 		return self.hooks["MountJournal_UpdateMountList"]()
 	end
 	

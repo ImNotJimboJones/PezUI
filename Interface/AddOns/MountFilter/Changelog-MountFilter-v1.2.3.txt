@@ -1,0 +1,12 @@
+tag v1.2.3
+73177da1274c0e30cb2cc4a288f4dc7d0b72425a
+Spence DiNicolantonio <ImNotJimboJones@mac.com>
+2012-09-10 22:48:00 -0400
+
+Tagging as v1.2.3
+
+
+--------------------
+
+Spence DiNicolantonio:
+	- Fixed a bug causing the mount list to revert when scrolling
