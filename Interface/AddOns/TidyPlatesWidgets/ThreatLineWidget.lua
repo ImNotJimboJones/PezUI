@@ -132,41 +132,22 @@ local testMode = false
 
 -- Graphics Update
 local function UpdateThreatLine(frame, unitid)
-	local maxwidth = frame.MaximumWidth
+	local maxwidth = 50
+	--local maxwidth = frame._MaximumWidth
 	--local maxwidth = frame:GetWidth() / 2
 	local length = 0
 	local anchor = "RIGHT"
-	local leaderThreat, leaderThreatDelta, leaderThreatPct	
 	local leaderThreatMax, leaderThreatMin = frame.ThreatMax, frame.ThreatMin
-	
-	frame.Line:SetWidth(1)		-- Set initial length
-	
-	if testMode then 
-		leaderThreatPct, leaderUnitId =  180, "player"
-	else
-		leaderThreatPct, leaderUnitId, leaderThreatDelta  = GetRelativeThreat(unitid) 
-	end	
-	
-	--print("Relative Threat Result:", leaderThreatPct, leaderUnitId, leaderThreatDelta)
-	
-	if not (leaderThreatPct) then frame:_Hide(); return end
-	if leaderThreatPct and leaderThreatPct > 0 then
+	local leaderThreat, leaderUnitId  = GetRelativeThreat(unitid) 
+	leaderThreat = tonumber(leaderThreat) or 0
 		
-		leaderThreat = leaderThreatPct
-		
-		--[[			--- I forget why I put this in here.
-		if frame.UseRawValues then
-			print(leaderThreatDelta,leaderThreatMin)
-			if leaderThreatDelta > 0 then
-				leaderThreat = min(leaderThreatDelta, leaderThreatMax)/leaderThreatMax
-			else
-				leaderThreat = (-(max(leaderThreatDelta,leaderThreatMin )))/leaderThreatMin
-			end
-		else
-			leaderThreat = leaderThreatPct
-		end
-		--]]
-		 
+	--if testMode then 
+	--	leaderThreat, leaderUnitId =  .00000000000000000000000000000000001, "player"
+	--end	
+	
+	if not (leaderThreat) then frame:_Hide(); return end
+	if leaderThreat and leaderThreat >= 0 then
+
 		-- Get Positions and Size
 		if leaderThreat >= 100 then
 			-- While tanking
@@ -180,12 +161,10 @@ local function UpdateThreatLine(frame, unitid)
 		end
 
 		frame.Line:ClearAllPoints()
-		frame.Line:SetWidth( min( maxwidth, (length or 1)))
+		frame.Line:SetWidth( max(1, min( maxwidth, length)))
 		frame.Line:SetPoint(anchor, frame, "CENTER")
 		
-		
-		if leaderUnitId and leaderUnitId ~= "player" then 
-			
+		if leaderUnitId and leaderUnitId ~= "player" then 	
 			if UnitIsUnit(leaderUnitId, "pet")
 				or GetPartyAssignment("MAINTANK", leaderUnitId) 
 				or ("TANK" == UnitGroupRolesAssigned(leaderUnitId)) then
@@ -194,8 +173,8 @@ local function UpdateThreatLine(frame, unitid)
 					
 			frame.TargetText:SetText(UnitName(leaderUnitId))								-- TP 6.1
 			frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
-			
 		else frame.TargetText:SetText("") end
+		
 		-- Set Colors
 		frame.Left:SetVertexColor(threatcolor.r, threatcolor.g, threatcolor.b)
 		frame.Line:SetVertexColor(threatcolor.r, threatcolor.g, threatcolor.b)
@@ -322,7 +301,8 @@ local function CreateWidgetFrame(parent)
 		frame.Line:SetTexture(art)
 		frame.Line:SetTexCoord(unpack(artCoordinates["Line"]))
 		frame.Line:SetHeight(32)
-		frame.MaximumWidth = 50
+		frame.Line:SetWidth(50)		-- Set initial length
+		frame._MaximumWidth = 50
 		-- Left
 		frame.Left = frame:CreateTexture(nil, "OVERLAY")
 		frame.Left:SetTexture(art)

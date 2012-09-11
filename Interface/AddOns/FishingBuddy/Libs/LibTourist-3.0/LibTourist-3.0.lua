@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 146 $
+Revision: $Rev: 150 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 146 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 150 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -233,23 +233,55 @@ function Tourist:GetLevelColor(zone)
 		end
 	end
 
+	local midBracket = (low + high) / 2
+
 	if low <= 0 and high <= 0 then
-		-- City or level unknown
+		-- City or level unknown -> White
 		return 1, 1, 1
 	elseif playerLevel == low and playerLevel == high then
+		-- Exact match, one-level bracket -> Yellow
 		return 1, 1, 0
 	elseif playerLevel <= low - 3 then
+		-- Player is three or more levels short of Low -> Red
 		return 1, 0, 0
-	elseif playerLevel <= low then
-		return 1, (playerLevel - low - 3) / -6, 0
-	elseif playerLevel <= (low + high) / 2 then
-		return 1, (playerLevel - low) / (high - low) + 0.5, 0
-	elseif playerLevel <= high then
-		return 2 * (playerLevel - high) / (low - high), 1, 0
-	elseif playerLevel <= high + 3 then
-		local num = (playerLevel - high) / 6
-		return num, 1 - num, num
+	elseif playerLevel < low then
+		-- Player is two or less levels short of Low -> sliding scale between Red and Orange
+		-- Green component goes from 0 to 0.5
+		local greenComponent = (playerLevel - low + 3) / 6
+		return 1, greenComponent, 0
+	elseif playerLevel == low then
+		-- Player is at low, at least two-level bracket -> Orange
+		return 1, 0.5, 0
+	elseif playerLevel < midBracket then
+		-- Player is between low and the middle of the bracket -> sliding scale between Orange and Yellow
+		-- Green component goes from 0.5 to 1
+		local halfBracketSize = (high - low) / 2
+		local posInBracketHalf = playerLevel - low
+		local greenComponent = 0.5 + (posInBracketHalf / halfBracketSize) * 0.5
+		return 1, greenComponent, 0
+	elseif playerLevel == midBracket then
+		-- Player is at the middle of the bracket -> Yellow
+		return 1, 1, 0
+	elseif playerLevel < high then
+		-- Player is between the middle of the bracket and High -> sliding scale between Yellow and Green
+		-- Red component goes from 1 to 0
+		local halfBracketSize = (high - low) / 2
+		local posInBracketHalf = playerLevel - midBracket
+		local redComponent = 1 - (posInBracketHalf / halfBracketSize)
+		return redComponent, 1, 0
+	elseif playerLevel == high then
+		-- Player is at High, at least two-level bracket -> Green
+		return 0, 1, 0
+	elseif playerLevel < high + 3 then
+		-- Player is up to three levels above High -> sliding scale between Green and Gray
+		-- Red and Blue components go from 0 to 0.5
+		-- Green component goes from 1 to 0.5
+		local pos = (playerLevel - high) / 3
+		local redAndBlueComponent = pos * 0.5
+		local greenComponent = 1 - redAndBlueComponent
+		return redAndBlueComponent, greenComponent, redAndBlueComponent
 	else
+		-- Player is at High + 3 or above -> Gray
 		return 0.5, 0.5, 0.5
 	end
 end
@@ -2689,7 +2721,6 @@ do
 		low = 1,
 		high = 10,
 		continent = Eastern_Kingdoms,
-		instances = BZ["The Stockade"],
 		paths = {
 			[BZ["Westfall"]] = true,
 			[BZ["Redridge Mountains"]] = true,
@@ -5401,7 +5432,7 @@ do
 			[BZ["Temple of the Jade Serpent"]] = true,
 			[BZ["Valley of the Four Winds"]] = true,
 		},
-		fishing_min = 700,
+		fishing_min = 650,
 	}
 
 	zones[BZ["Valley of the Four Winds"]] = {
@@ -5444,7 +5475,7 @@ do
 			[BZ["Vale of Eternal Blossoms"]] = true,
 			[BZ["The Veiled Stair"]] = true,
 		},
-		fishing_min = 750,
+		fishing_min = 625,
 	}
 
 	zones[BZ["Townlong Steppes"]] = {
@@ -5458,7 +5489,7 @@ do
 			[BZ["Siege of Niuzao Temple"]] = true,
 			[BZ["Dread Wastes"]] = true,
 		},
-		fishing_min = 725,
+		fishing_min = 700,
 	}
 
 	zones[BZ["Dread Wastes"]] = {
@@ -5474,7 +5505,7 @@ do
 			[BZ["Heart of Fear"]] = true,
 			[BZ["Townlong Steppes"]] = true
 		},
-		fishing_min = 700,
+		fishing_min = 625,
 	}
 
 	zones[BZ["Vale of Eternal Blossoms"]] = {
@@ -5488,7 +5519,7 @@ do
 			[BZ["Mogu'shan Palace"]] = true,
 			[BZ["Kun-Lai Summit"]] = true,
 		},
-		fishing_min = 825,
+		fishing_min = 700,
 	}
 
 	zones[BZ["The Veiled Stair"]] = {

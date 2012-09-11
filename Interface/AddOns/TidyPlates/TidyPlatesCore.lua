@@ -1036,7 +1036,6 @@ do
 	local PlateHandler = CreateFrame("Frame", nil, WorldFrame)
 	PlateHandler:SetFrameStrata("TOOLTIP") -- When parented to WorldFrame, causes OnUpdate handler to run close to last
 	PlateHandler:SetScript("OnEvent", EventHandler)
-	MinimapCluster:SetFrameStrata("LOW"); PlayerFrame:SetFrameStrata("LOW") ; TargetFrame:SetFrameStrata("LOW")
 	
 	-- Events
 	function events:PLAYER_ENTERING_WORLD() PlateHandler:SetScript("OnUpdate", OnUpdate); end

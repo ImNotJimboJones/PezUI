@@ -433,7 +433,7 @@ FishingInit.UpdateFishingDB = function()
 			for id=1,n do
 				local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
 				if ( pets[cSpellID] ) then
-					tinsert(newpets, cID);
+					newpets[cSpellID] = 1;
 				end
 			end
 			FishingBuddy_Player["FishingPetBuddies"] = newpets;

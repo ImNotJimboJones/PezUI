@@ -2,7 +2,6 @@
 ..\FrameXML\UI.xsd">
 	<Include file="LibStub\LibStub.lua" />
 	<Include file="LibCrayon-3.0\lib.xml" />
-	<Include file="LibBabble-Zone-3.0\lib.xml" />
 	<Include file="LibBabble-SubZone-3.0\lib.xml" />
 	<Include file="LibTourist-3.0\lib.xml" />
 	<Include file="LibFishing-1.0\lib.xml" />

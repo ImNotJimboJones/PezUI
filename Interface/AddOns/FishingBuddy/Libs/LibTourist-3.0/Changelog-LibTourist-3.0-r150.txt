@@ -1,4 +1,22 @@
 ------------------------------------------------------------------------
+r150 | Odica | 2012-09-08 12:12:38 +0000 (Sat, 08 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+The function GetLevelColor has been rewritten in a way one can understand what it's actually doing. This also resolved some issues :-)
+------------------------------------------------------------------------
+r149 | Odica | 2012-09-08 00:13:36 +0000 (Sat, 08 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+- corrected fishing skills for The Jade Forest, Kun-Lai Summit, Towlong Steppes, Dread Wastes and Vale of Eternal Blossom
+------------------------------------------------------------------------
+r147 | Odica | 2012-09-04 10:57:21 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+- Removed Stockades from Elwynn Forest.
+------------------------------------------------------------------------
 r146 | Odica | 2012-09-02 21:44:54 +0000 (Sun, 02 Sep 2012) | 2 lines
 Changed paths:
    M /trunk/LibTourist-3.0.lua
@@ -26,10 +44,4 @@ Changed paths:
 
 - function zoneIter: Complexes are no longer included
 - function IsZone: No longer returns True for Complexes
-------------------------------------------------------------------------
-r142 | Odica | 2012-06-13 20:23:49 +0000 (Wed, 13 Jun 2012) | 1 line
-Changed paths:
-   M /trunk/LibTourist-3.0.lua
-
-Added Twilight Highlands return portals to Orgrimmar and Stormwind City.
 ------------------------------------------------------------------------

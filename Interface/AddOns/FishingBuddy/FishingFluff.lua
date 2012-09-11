@@ -10,7 +10,6 @@ local FL = LibStub("LibFishing-1.0");
 local _
 
 local PETSETTING = "FishingPetBuddies";
-local ALLZOMGPETS = "GreatAndSmall";
 
 -- Pet menu constants
 local PET_NONE = -1;
@@ -66,26 +65,11 @@ local function AddChosenPet(cid, petid)
 	numchosen = numchosen + 1;
 end
 
-local function UpdateChosenPets()
+local function GetOurPets()
 	local isWild = false;
-	local settingpets = GetSetting(PETSETTING);
-
+	
 	ourpets = {};
 	petmap = {};
-	chosenpets = {};
-	numchosen = 0;
-
-	local allpets = false;
-	if ( type(settingpets) ~= "table" ) then
-		settingpets = tonumber(settingpets);
-		if ( settingpets == PET_ALL ) then
-			allpets = true;
-		end
-	elseif ( type(settingpets) == "table" ) then
-		for cid, petid in pairs(settingpets) do
-			AddChosenPet(cid, petid);
-		end
-	end
 
 	C_PetJournal.ClearSearchFilter();
 	C_PetJournal.AddAllPetTypesFilter();
@@ -94,14 +78,6 @@ local function UpdateChosenPets()
 	for index=1,numPets do
 		local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, isWild);
 		if ( isOwned) then
-			if ( FISHINGPETS[creatureID] ) then
-				if ( settingpets == PET_FISHING ) then
-					AddChosenPet(creatureID, petID);
-				end
-			end
-			if (allpets) then
-				AddChosenPet(creatureID, petID);
-			end
 			if (customeName) then
 				name = customeName;
 			end
@@ -110,6 +86,43 @@ local function UpdateChosenPets()
 		end
 	end
 	table.sort(ourpets, function(a, b) return a.name < b.name; end);
+end
+
+local function UpdateChosenPets()
+	local settingpets = GetSetting(PETSETTING);
+
+	if (#ourpets == 0) then
+		GetOurPets();
+	end
+	
+	chosenpets = {};
+	chosenlist = {};
+	numchosen = 0;
+
+	local allpets = false;
+	if ( type(settingpets) ~= "table" ) then
+		settingpets = tonumber(settingpets);
+		if ( settingpets == PET_ALL ) then
+			allpets = true;
+		end
+		
+		for idx=1,#ourpets do
+			local petID = ourpets[idx].petID;
+			local name = ourpets[idx].name;
+			local creatureID = ourpets[idx].cID;
+			if ( FISHINGPETS[creatureID] ) then
+				if ( settingpets == PET_FISHING ) then
+					AddChosenPet(creatureID, petID);
+				end
+			elseif (allpets) then
+				AddChosenPet(creatureID, petID);
+			end
+		end
+	elseif ( type(settingpets) == "table" ) then
+		for cid,_ in pairs(settingpets) do
+			AddChosenPet(cid, petmap[cid]);
+		end
+	end
 end
 
 local FluffEvents = {};
@@ -149,7 +162,7 @@ FluffEvents[FBConstants.FISHING_ENABLED_EVT] = function()
 					end
 				end
 			end
-			if ( petid ~= nowpet ) then
+			if ( petid ~= nowpet and petid > 0) then
 				resetPet = nowpet;
 				C_PetJournal.SummonPetByID(petid);
 			end
@@ -167,11 +180,13 @@ local function Untrack(yes)
 end
 
 local function DoPetReset(pet)
-	local nowpet = C_PetJournal.GetSummonedPetID();
-	if ( pet and pet ~= nowpet ) then
-		C_PetJournal.SummonPetByID(petid);
-	elseif ( nowpet ) then
-		C_PetJournal.SummonPetByID(nowpet);
+	if ( pet and pet > 0 ) then
+		C_PetJournal.SummonPetByID(pet);
+	else
+		local nowpet = C_PetJournal.GetSummonedPetID();
+		if ( nowpet and nowpet > 0 ) then
+			C_PetJournal.SummonPetByID(nowpet);
+		end
 	end
 end
 
@@ -260,17 +275,17 @@ function FishingPets_UpdateMenu()
 	petnames[1] = { };
 	-- Let's make "none" an easy choice
 	petnames[1].name = NONE;
-	petnames[1].id = PET_NONE;
+	petnames[1].cID = PET_NONE;
 	petnames[1].checked = (petsetting == PET_NONE);
 	petnames[1].meta = true;
 	petnames[2] = { };
 	petnames[2].name = PROFESSIONS_FISHING;
-	petnames[2].id = PET_FISHING;
+	petnames[2].cID = PET_FISHING;
 	petnames[2].checked = (petsetting == PET_FISHING);
 	petnames[2].meta = true;
 	petnames[3] = { };
 	petnames[3].name = ALL;
-	petnames[3].id = PET_ALL;
+	petnames[3].cID = PET_ALL;
 	petnames[3].checked = (petsetting == PET_ALL);
 	petnames[3].meta = true;
 
@@ -304,7 +319,7 @@ end
 function FishingPetsButton_OnClick(self)
 	PlaySound("igMainMenuOptionCheckBoxOff");
 	if ( self.meta ) then
-		FishingBuddy.SetSetting(PETSETTING, self.id);	
+		FishingBuddy.SetSetting(PETSETTING, self.cID);	
 		UpdateChosenPets();
 		FishingPets_UpdateMenu();
 	else
@@ -320,7 +335,7 @@ function FishingPetsButton_OnClick(self)
 		local newpets = {};
 		for cid,petid in pairs(chosenpets) do
 			if (petid and petid > 0) then
-				tinsert(newpets, cid);
+				newpets[cid] = 1;
 			end
 		end
 		local petsetting;
@@ -347,7 +362,7 @@ function FishingPetsButton_OnClick(self)
 		UpdateChosenPets();
 		UpdateMenuText(petsetting);
 		for idx=1,3 do
-			petnames[idx].checked = (petnames[idx].id == petsetting);
+			petnames[idx].checked = (petnames[idx].cID == petsetting);
 		end
 		FishingPetsMenu_Update();
 	end
@@ -382,14 +397,16 @@ local FluffOptions = {
 		["text"] = FBConstants.CONFIG_FISHINGFLUFF_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_FISHINGFLUFF_INFO,
 		["v"] = 1,
-		["default"] = 1 },
+		["default"] = 1
+	},
 	["FindFish"] = {
 		["text"] = FBConstants.CONFIG_FINDFISH_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_FINDFISH_INFO,
 		["v"] = 1,
 		["deps"] = { ["FishingFluff"] = "d" },
-		["default"] = 1 },
-	["FishingPetBuddies"] = {
+		["default"] = 1
+	},
+	[PETSETTING] = {
 		["tooltip"] = FBConstants.CONFIG_FISHINGBUDDY_INFO,
 		["setup"] =
 			function()
@@ -399,38 +416,32 @@ local FluffOptions = {
 			end,
 		["visible"] =
 			function()
-				local n = GetNumCompanions("CRITTER");
-				if (n > 0) then return 1; end;
+				local numPets, numOwned = C_PetJournal.GetNumPets(false);
+				if (numOwned > 0) then return 1; end;
 			end,
 		["button"] = "FishingPetFrame",
 		["margin"] = { 4, 4 },
-		["deps"] = { ["FishingFluff"] = "h" },
-		["default"] = PET_FISHING },
+		["deps"] = { ["FishingFluff"] = "h",
+		["default"] = PET_FISHING, },
+	},
 	["DrinkHeavily"] = {
 		["text"] = FBConstants.CONFIG_DRINKHEAVILY_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_DRINKHEAVILY_INFO,
 		["v"] = 1,
 		["m"] = 1,
 		["deps"] = { ["FishingFluff"] = "d" },
-		["default"] = 1 },
-};
-
-local InvisibleOptions = {
-	-- options not directly manipulatable from the UI
-	[PETSETTING] = {
-		["default"] = nil },
-	[ALLZOMGPETS] = {
-		["default"] = 0 },
+		["default"] = 1
+	},
 };
 
 FluffEvents["VARIABLES_LOADED"] = function(started)
 	local pet = FishingBuddy.GetSetting(PETSETTING);
 	FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, FluffOptions);
-	FishingBuddy.OptionsFrame.HandleOptions(nil, nil, InvisibleOptions);
 		
 	FishingPetFrame:SetScript("OnHide", FishingPetFrame_OnHide);
 	FishingPetFrameButton:SetScript("OnClick", FishingPetsMenu_Toggle);
 	
+	GetOurPets();
 	UpdateChosenPets();
 	
 	local menuwidth = 0;
@@ -456,6 +467,14 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetsMenuHolder:SetParent(FishingOptionsFrame);
 end
 
+FluffEvents["PET_STABLE_UPDATE"] = function()
+	GetOurPets();
+end
+
+FluffEvents["SPELLS_CHANGED"] = function()
+	GetOurPets();
+end
+
 FishingBuddy.API.RegisterHandlers(FluffEvents);
 
 if ( FishingBuddy.Debugging ) then
@@ -463,14 +482,12 @@ if ( FishingBuddy.Debugging ) then
 	FishingBuddy.Commands["pets"].func =
 		function(what)
 			local Debug = FishingBuddy.Debug;
-			local n = GetNumCompanions("CRITTER");
 			local pets = FishingPetFrame.pets;
+			local n = FL:tablecount(chosenpets);
 			Debug("chosenpets "..n.." "..#ourpets.." "..#pets);
-			for id=1,n do
-				local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
-				if ( FISHINGPETS[cSpellID] ) then
-					Debug(cID.." "..cName.." "..cSpellID.." "..icon);
-				end
+			for idx=1,#chosenlist do
+				Debug("petid "..chosenlist[idx])
 			end
+			return true;
 		end
 end

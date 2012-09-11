@@ -1,4 +1,10 @@
-﻿Version 1.0.9d
+﻿Version 1.0.9e
+- Remove references to LibBabble-Zone now that it is deprecated
+- Quest Items auto-loot again (CurseForge bug #172)
+- Fix pet menu (CurseForge bugs #167, #174, #176)
+- Updated German translation (Thanks DirtyHarryGermany!), closes #171, #173
+
+Version 1.0.9d
 - Don't fail if there isn't a fishing pet list
 
 Version 1.0.9c
@@ -6,7 +12,7 @@ Version 1.0.9c
 - Latest version of LibBabble-Zone (soon to be removed)
 
 Version 1.0.9b
-- Blizz apparently uses "_" as a global, so let's make sure we have our own
+- Blizz apparently uses "_" as a global, so let's make sure we have our own (#168)
 - Latest version of LibTourist
 
 Version 1.0.9a

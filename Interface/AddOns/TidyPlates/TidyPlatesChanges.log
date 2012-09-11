@@ -1,5 +1,11 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+
+6.7.5
+---------------------------
+- Removed framestrata code from, MinimapCluster, PlayerFrame, and TargetFrame
+- Threat Line Widget:  Shootin' from the hip, again.
+
 6.7.4
 ---------------------------
 - Fixed giant threat bar issue (Corrected group size ranges in GetRelativeThreat() utility function)

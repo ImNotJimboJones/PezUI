@@ -1,0 +1,39 @@
+------------------------------------------------------------------------
+r133 | arith | 2012-09-10 12:29:56 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   A /tags/5.0-release3 (from /trunk:132)
+
+Tagging as 5.0-release3
+Most of Italian strings now translated.
+------------------------------------------------------------------------
+r132 | arith | 2012-09-10 12:26:02 +0000 (Mon, 10 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+Italian translation added
+------------------------------------------------------------------------
+r131 | arith | 2012-09-10 11:45:12 +0000 (Mon, 10 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+to trigger database export, do not use this revision
+------------------------------------------------------------------------
+r129 | arith | 2012-09-10 11:05:28 +0000 (Mon, 10 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+fix in correct lib def
+------------------------------------------------------------------------
+r127 | arith | 2012-09-09 06:30:16 +0000 (Sun, 09 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+5.0-release1
+------------------------------------------------------------------------
+r126 | arith | 2012-09-09 06:11:30 +0000 (Sun, 09 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+   M /trunk/LibBabble-SubZone-3.0.toc
+
+WoW 5.0.5 translation added; TOC update to support 5.0.x; to trigger database export
+------------------------------------------------------------------------

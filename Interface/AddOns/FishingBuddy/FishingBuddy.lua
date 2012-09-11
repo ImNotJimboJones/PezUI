@@ -5,14 +5,6 @@
 local Crayon = LibStub("LibCrayon-3.0");
 local FL = LibStub("LibFishing-1.0");
 
-local BL = LibStub("LibBabble-Zone-3.0"):GetBaseLookupTable();
-local BZ = LibStub("LibBabble-Zone-3.0"):GetLookupTable()
-local BZR = LibStub("LibBabble-Zone-3.0"):GetReverseLookupTable();
-local LT = LibStub("LibTourist-3.0");
-local BSL = LibStub("LibBabble-SubZone-3.0"):GetBaseLookupTable();
-local BSZ = LibStub("LibBabble-SubZone-3.0"):GetLookupTable();
-local BSZR = LibStub("LibBabble-SubZone-3.0"):GetReverseLookupTable();
-
 -- Information for the stylin' fisherman
 local POLES = {
 	["Fishing Pole"] = "6256:0:0:0",
@@ -822,9 +814,8 @@ local function AddFishie(color, id, name, zone, subzone, texture, quantity, qual
 	if ( name and not FishingBuddy_Info["Fishies"][id][CurLoc] ) then
 		FishingBuddy_Info["Fishies"][id][CurLoc] = name;
 	end
-	-- Only quest items have matching itemType and subType values, but let's
-	-- can use the value that the AH instead
-	if ( it and it == questType) then
+	-- Only quest items have matching itemType and subType values, as well
+	if ( (it and it == questType) or QuestItems[id] ) then
 		-- subtype is Quest as well
 		FishingBuddy_Info["Fishies"][id].quest = true;
 		if ( FishingBuddy_Info["Fishies"][id].canopen == nil ) then
@@ -986,9 +977,6 @@ local function UpdateLure()
 		-- Is this a quest fish we should open up?
 		if ( OpenThisFishId and GSB("AutoOpen") and GetItemCount(OpenThisFishId) > 0 ) then
 			FL:InvokeLuring(OpenThisFishId);
-			if ( GetItemCount(OpenThisFishId) < 2 ) then
-				OpenThisFishId = nil;
-			end
 			return true;
 		end
 		
@@ -1070,7 +1058,13 @@ CaptureEvents["TRACKED_ACHIEVEMENT_UPDATE"] = function(id, criterion, actualtime
 end
 
 CaptureEvents["LOOT_OPENED"] = function()
-	if ( IsFishingLoot()) then
+	if (OpenThisFishId) then
+		if (GetItemCount(OpenThisFishId) == 0 ) then
+			OpenThisFishId = nil
+		end
+	end
+	
+	if ( IsFishingLoot() or OpenThisFishId ) then
 		local poolhint = nil;
 		-- How long ago did the achievement fire?
 		local elapsedtime = GetTime() - trackedtime;
@@ -1100,6 +1094,7 @@ CaptureEvents["LOOT_OPENED"] = function()
 				LootSlot(index);
 			end
 		end
+
 		ClearTooltipText();
 		FL:ExtendDoubleClick();
 		LureState = 0;
@@ -1828,6 +1823,18 @@ if ( FishingBuddy.Debugging ) then
 					FishingBuddy.Debug("		'"..it.."' '"..st.."'");
 				end
 			end
+			return true;
+		end
+
+	FishingBuddy.Commands["opens"] = {};
+	FishingBuddy.Commands["opens"].func =
+		function()
+			local id = 7973;
+			QuestItems[id] = { open = true, };
+			FishingBuddy_Info["Fishies"][id].canopen = nil;
+			local name, _, _, _, _, _, _, _,_, _ = GetItemInfo(id) ;
+			FishingBuddy.Debug("Make "..name.." openable ("..GetItemCount(id)..")");
+			OpenThisFishId = id;
 			return true;
 		end
 

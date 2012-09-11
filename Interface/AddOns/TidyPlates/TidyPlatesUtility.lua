@@ -155,7 +155,7 @@ do
 			leaderThreatVal = leaderThreatVal or 0
 			
 			if playerthreat == 100 then -- This means that the unit is tanking, and there are no units higher than them
-				return playerthreat + (100-leaderThreat), nil, playerThreatVal - leaderThreatVal
+				return playerthreat + (100-leaderThreat), "player", playerThreatVal - leaderThreatVal
 			else return playerthreat, leaderUnitID, -(leaderThreatVal - playerThreatVal) end	-- This means that the unit is not attacking you, and will list WHO it is
 		else return end
 	end

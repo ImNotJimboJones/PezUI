@@ -145,7 +145,6 @@ FishingTranslations["enUS"] = {
 	CONFIG_TURNOFFPVP_ONOFF	  = "Turn off PVP",
 	CONFIG_TURNOFFPVP_INFO	  = "If enabled, PVP will be turned off while a fishing pole is equipped.",
 
-
 	CONFIG_ENHANCESOUNDS_ONOFF	= "Enhance fishing sounds",
 	CONFIG_ENHANCESOUNDS_INFO	= "When enabled, maximize sound volume and minimize ambient volume to make the bobber noise more noticeable while fishing.",
 

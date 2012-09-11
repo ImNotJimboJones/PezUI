@@ -26,7 +26,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "Version 0.8.1d", },
 	["RustyXXL"] = { "Version 1.0.4 (CurseForge)", },
 	["Ithilrandir"] = { "Version 1.0.5 (CurseForge)", },
-	["DirtyHarryGermany"] = { "Version 1.0.7h (CurseForge)", },
+	["DirtyHarryGermany"] = { "Version 1.0.7h (CurseForge)", "Version 1.0.9e (CurseForge)", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_FRFR] = {
