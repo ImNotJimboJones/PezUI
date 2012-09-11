@@ -5,7 +5,7 @@
 ## Title-frFR: PitBull4 |r[|cffeda55fDemonic fury|r]
 ## Title-koKR: PitBull4 |r[|cffeda55fDemonic fury|r]
 ## Title-ruRU: PitBull4 |r[|cffeda55fDemonic fury|r]
-## Title-zhCN: PitBull4 |r[|cffeda55fDemonic fury|r]
+## Title-zhCN: PitBull4 |r[|cffeda55f恶魔之怒|r]
 ## Title-zhTW: PitBull4 |r[|cffeda55fDemonic fury|r]
 ## Notes: Show a bar for demonic fury for demonology warlocks.
 ## Notes-deDE: Show a bar for demonic fury for demonology warlocks.
@@ -13,15 +13,15 @@
 ## Notes-frFR: Show a bar for demonic fury for demonology warlocks.
 ## Notes-koKR: Show a bar for demonic fury for demonology warlocks.
 ## Notes-ruRU: Show a bar for demonic fury for demonology warlocks.
-## Notes-zhCN: Show a bar for demonic fury for demonology warlocks.
+## Notes-zhCN: 显示恶魔学识术士的恶魔之怒
 ## Notes-zhTW: Show a bar for demonic fury for demonology warlocks.
 ## Author: Shefki
 ## DefaultState: enabled
 ## LoadOnDemand: 1
 ## Dependencies: PitBull4
-## Version: v4.0.0-beta36
+## Version: v4.0.0-beta37
 ## X-PitBull4-Condition: return select(2, UnitClass("player")) == "WARLOCK" and select(4, GetBuildInfo()) >= 50000
-## X-Curse-Packaged-Version: v4.0.0-beta36
+## X-Curse-Packaged-Version: v4.0.0-beta37
 ## X-Curse-Project-Name: PitBull Unit Frames 4.0
 ## X-Curse-Project-ID: pitbull4
 ## X-Curse-Repository-ID: wow/pitbull4/mainline

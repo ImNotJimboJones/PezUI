@@ -5,7 +5,7 @@
 ## Title-frFR: PitBull4 |r[|cffeda55fShadow orbs|r]
 ## Title-koKR: PitBull4 |r[|cffeda55fShadow orbs|r]
 ## Title-ruRU: PitBull4 |r[|cffeda55fShadow orbs|r]
-## Title-zhCN: PitBull4 |r[|cffeda55fShadow orbs|r]
+## Title-zhCN: PitBull4 |r[|cffeda55f暗影宝珠|r]
 ## Title-zhTW: PitBull4 |r[|cffeda55fShadow orbs|r]
 ## Notes: Show Priest Shadow orbs.
 ## Notes-deDE: Zeige Priester Schattenkugeln
@@ -13,15 +13,15 @@
 ## Notes-frFR: Show Priest Shadow orbs.
 ## Notes-koKR: Show Priest Shadow orbs.
 ## Notes-ruRU: Show Priest Shadow orbs.
-## Notes-zhCN: Show Priest Shadow orbs.
+## Notes-zhCN: 显示牧师暗影宝珠
 ## Notes-zhTW: Show Priest Shadow orbs.
 ## Author: Shefki
 ## DefaultState: enabled
 ## LoadOnDemand: 1
 ## Dependencies: PitBull4
-## Version: v4.0.0-beta36
+## Version: v4.0.0-beta37
 ## X-PitBull4-Condition: return select(2, UnitClass("player")) == "PRIEST" and select(4, GetBuildInfo()) >= 50000
-## X-Curse-Packaged-Version: v4.0.0-beta36
+## X-Curse-Packaged-Version: v4.0.0-beta37
 ## X-Curse-Project-Name: PitBull Unit Frames 4.0
 ## X-Curse-Project-ID: pitbull4
 ## X-Curse-Repository-ID: wow/pitbull4/mainline

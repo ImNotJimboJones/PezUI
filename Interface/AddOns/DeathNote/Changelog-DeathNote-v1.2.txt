@@ -1,0 +1,16 @@
+------------------------------------------------------------------------
+r60 | slaren | 2012-09-11 09:20:12 +0000 (Tue, 11 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v1.2 (from /trunk:59)
+
+Tagging as v1.2
+------------------------------------------------------------------------
+r59 | slaren | 2012-09-11 09:19:29 +0000 (Tue, 11 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/DeathNote.toc
+   M /trunk/Format.lua
+   M /trunk/Output.lua
+   M /trunk/UI.lua
+
+- Fixed a few problems with chat reports and announces
+------------------------------------------------------------------------

@@ -9,7 +9,7 @@ local tankRole = L["|cff00ff00tanking|r"]
 local dpsRole = L["|cffff0000dpsing / healing|r"]
 
 StaticPopupDialogs["TPTP_ChangeLog"] = {
-	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n\n*Fixed issue on spec information detection again, hopefully this is resolved.", 
+	text = GetAddOnMetadata("TidyPlates_ThreatPlates", "title").." Change Log:\n\n*Fixed issue on spec information detection again, hopefully this is resolved.\n\nTalents should be updated dynamically instead of only on login.*", 
 	button1 = "Thanks for the info!",
 	timeout = 0,
 	whileDead = 1, 
@@ -1441,13 +1441,12 @@ end
 -- EVENTS --
 ------------
 function TidyPlatesThreat:specInfo()
-	for i=1, GetNumSpecGroups() do
+	for i=1,2 do -- Make sure we set variables for both spec's regardless of dual spec.
 		local _, name, _, _, _, role
-		if UnitLevel("player") > 9 then
-			local specValue = GetSpecialization(false,false,i)
-			_, name, _, _, _, role = GetSpecializationInfo(specValue, nil, false);
-		end
-		if not name or not role then
+		local specValue = GetSpecialization(false,false,i)
+		if UnitLevel("player") > 9 and specValue then
+			_, name, _, _, _, role = GetSpecializationInfo(specValue, nil, false);		
+		else
 			role, name = "DAMAGER","Unknown"
 		end
 		TidyPlatesThreat.db.char.specInfo[i].role = role
@@ -1575,6 +1574,9 @@ function f:Events(self,event,...)
 			end
 			if GlobDB.version and GlobDB.version ~= tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version")) then
 				GlobDB.version = tostring(GetAddOnMetadata("TidyPlates_ThreatPlates", "version"))
+				if ProfDB.verbose then
+					StaticPopup_Show("TPTP_ChangeLog")
+				end
 			end			
 		end
 		f:UnregisterEvent("ADDON_LOADED")
@@ -1622,6 +1624,7 @@ function f:Events(self,event,...)
 	elseif event == "PLAYER_LEAVING_WORLD" then
 		self:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
+		TidyPlatesThreat:specInfo()
 		local t = CharDB.specInfo[Active()]
 		CharDB.threat.tanking = TidyPlatesThreat:currentRoleBool(Active())
 		if ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and ProfDB.verbose then
@@ -1636,6 +1639,8 @@ function f:Events(self,event,...)
 		end
 	elseif event == "PLAYER_LOGOUT" then
 		ProfDB.cache = {}
+	elseif event == "PLAYER_TALENT_UPDATE" then
+		TidyPlatesThreat:specInfo()
 	elseif event == "RAID_TARGET_UPDATE" then
 		TidyPlates:Update()
 	elseif event == "UPDATE_SHAPESHIFT_FORM" then -- Set tanking per Stances / Shapeshifts
@@ -1651,6 +1656,7 @@ f:RegisterEvent("PLAYER_LOGOUT")
 f:RegisterEvent("PLAYER_REGEN_DISABLED")
 f:RegisterEvent("PLAYER_REGEN_ENABLED")
 f:RegisterEvent("RAID_TARGET_UPDATE")
+f:RegisterEvent("PLAYER_TALENT_UPDATE")
 f:SetScript("OnEvent", function(self,event,...)
 	f:Events(self,event,...)
 end)
