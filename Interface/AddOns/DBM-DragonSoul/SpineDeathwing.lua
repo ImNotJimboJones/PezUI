@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(318, "DBM-DragonSoul", nil, 187)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 22 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 27 $"):sub(12, -3))
 mod:SetCreatureID(53879)
 mod:SetModelID(35268)
 mod:SetModelSound("sound\\CREATURE\\Deathwing\\VO_DS_DEATHWING_BACKEVENT_01.OGG", "sound\\CREATURE\\Deathwing\\VO_DS_DEATHWING_BACKSLAY_01.OGG")
@@ -92,8 +92,8 @@ local function checkOozeResurrect(GUID)
 	if diedOozeGUIDS[GUID] and GetTime() - diedOozeGUIDS[GUID] > 5 then
 		residueNum = residueNum - 1
 		diedOozeGUIDS[GUID] = nil
-		self:Unschedule(warningResidue)
-		self:Schedule(1.25, warningResidue)
+		mod:Unschedule(warningResidue)
+		mod:Schedule(1.25, warningResidue)
 		if residueDebug then print("revived", residueNum) end
 	end
 end
