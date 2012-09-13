@@ -1,11 +1,12 @@
 ## Interface: 50001
 ## Title: MoveAnything - MoP
-## Notes: 13.0.19b by Alea
-## Version: 13.0.19b
+## Notes: 13.1.1 by Alea
+## Version: 13.1.1
 ## Author: Wagthaa
 ## SavedVariables: MADB
 
 Localization.en.lua
+
 MoveAnything.lua
 Profile.lua
 API.lua

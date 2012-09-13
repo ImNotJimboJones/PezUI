@@ -204,6 +204,7 @@ MovAny.lVirtualMovers = {
 		h = 37,
 		relPoint = {"BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 549, 2},
 		excludes = "MicroButtonsVerticalMover",
+	--	excludes2 = "MicroButtonsVehicleMover",
 		children = {
 			"CharacterMicroButton", 
 			"SpellbookMicroButton",
@@ -225,18 +226,67 @@ MovAny.lVirtualMovers = {
 		end,
 		OnMAReleaseChild = function(self, index, child)
 			if child == self.firstChild then
+				child:SetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 546, 2)
+			else
+				child:SetPoint("BOTTOMLEFT", self.lastChild, "BOTTOMRIGHT", -2, 0)
+			end
+		end,
+		OnMAScale = genericFunctions.OnMAScaleChildren,
+		OnMAPreReset = genericFunctions.OnMAResetChildrenScale,
+	},
+--[[	MicroButtonsVehicleMover = {
+		w = 166,
+		h = 75,
+		relPoint = {"BOTTOMLEFT", "UIParent", "BOTTOMLEFT", 635, 150},
+		excludes = "MicroButtonsVerticalMover",
+	--	excludes2 = "MicroButtonsMover",
+		children = {
+			"CharacterMicroButton", 
+			"SpellbookMicroButton",
+			"TalentMicroButton", 
+			"AchievementMicroButton", 
+			"QuestLogMicroButton",
+			"GuildMicroButton", 
+			"PVPMicroButton", 
+			"LFDMicroButton",
+			"CompanionsMicroButton",
+			"EJMicroButton", 
+			"MainMenuMicroButton", 
+			"HelpMicroButton",
+			},
+		OnMAFoundChild = function(self, index, child)
+			child:ClearAllPoints()
+			if child == self.firstChild then
+				macount = 1
+				print("if",child:GetName(), macount)
+				child:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 24)
+			else
+				macount = macount+1
+				print("else",child:GetName(), macount)
+				if macount > 1 and macount < 7 then
+					child:SetPoint("BOTTOMLEFT", self.lastChild, "BOTTOMLEFT", 24, 0)
+				elseif macount == 7 then 
+					child:SetPoint("BOTTOMLEFT", self.lastChild, "BOTTOMLEFT", -120, -36)
+				elseif macount > 7 and macount < 13 then
+					child:SetPoint("BOTTOMLEFT", self.lastChild, "BOTTOMLEFT", 24, 0)
+				end
+			end
+		end,
+		OnMAReleaseChild = function(self, index, child)
+			if child == self.firstChild then
 				child:ClearAllPoints()
 				child:SetPoint("BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 548, 2)
 			end
 		end,
 		OnMAScale = genericFunctions.OnMAScaleChildren,
 		OnMAPreReset = genericFunctions.OnMAResetChildrenScale,
-	},
+	},]]
 	MicroButtonsVerticalMover = {
 		w = 28,
 		h = 405,
 		relPoint = {"BOTTOMLEFT", "MainMenuBarArtFrame", "BOTTOMLEFT", 546, 2},
 		excludes = "MicroButtonsMover",
+	--	excludes2 = "MicroButtonsVehicleMover",
 		notMAParent = true,
 		children = {"CharacterMicroButton", 
 			"SpellbookMicroButton",
@@ -351,6 +401,73 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 	},
+	
+	OverrideActionButtonsMover = {
+		w = 340,
+		h = 54,
+		relPoint = {"BOTTOM", "OverrideActionBar", "BOTTOM", -128, 17},
+		protected = true,
+		prefix = "OverrideActionBarButton",
+		count = 6,
+	--	prefix1 = "ActionButton",
+		OnMAFoundChild = function(self, index, child)
+			child:ClearAllPoints()
+			if prefix == nil then
+			--	print("test:"..tostring(child:GetName()).." "..tostring(prefix).." "..tostring(self))
+				if not self.lastChild then
+					child:SetPoint("LEFT", self, "LEFT")
+				else
+					child:SetPoint("LEFT", self.lastChild, "RIGHT", 6, 0)
+				end
+			else
+			--	print("test:"..tostring(child:GetName()).." "..tostring(prefix).." "..tostring(self))
+			--	table.foreach(self, print)
+				child:SetPoint("CENTER", self.prefix..index, "CENTER")
+			end
+		end,
+		OnMAReleaseChild = function(self, index, child, prefix)
+			child:ClearAllPoints()
+			if child == self.firstChild then
+				child:SetPoint("BOTTOMLEFT", "OverrideActionBar", "BOTTOMLEFT", 546, 2)
+			else
+				child:SetPoint("BOTTOMLEFT", prefix, "BOTTOMRIGHT", -2, 0)
+			end
+		end,
+		OnMAHook = function(self)
+			local b, bab
+			OverrideActionBarButton1:ClearAllPoints()
+			if OverrideActionBarButton1.MASetPoint then
+				OverrideActionBarButton1:MASetPoint("LEFT", self, "LEFT")
+			else
+				OverrideActionBarButton1:SetPoint("LEFT", self, "LEFT")
+			end
+			for i = 1, 6, 1 do
+				b = _G["OverrideActionBarButton"..i]
+				if i > 1 then
+					b:ClearAllPoints()
+					b:SetPoint("LEFT", "OverrideActionBarButton"..(i-1), "RIGHT", 7, 0)
+				end
+				b.MAParent = self
+			end
+			MovAny:LockPoint(OverrideActionBarButton1)
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(OverrideActionBarButton1)
+			local b = OverrideActionBarButton1
+			b:ClearAllPoints()
+			if b.MASetPoint then
+				b:MASetPoint("BOTTOM", "OverrideActionBar", "BOTTOM", 277, 17)
+			else
+				b:SetPoint("BOTTOM", "OverrideActionBar", "BOTTOM", -277, 17)
+			end
+			for i = 2, 6, 1 do
+				b = _G[ "OverrideActionBarButton"..i ]
+				b:ClearAllPoints()
+				b:SetPoint("LEFT", "OverrideActionBarButton"..(i-1), "RIGHT", 6, 0)
+			end
+		end,
+	},
+	
 	BasicActionButtonsVerticalMover = {
 		w = 38,
 		h = 475,
@@ -404,9 +521,9 @@ MovAny.lVirtualMovers = {
 		end,
 	},
 	PetActionButtonsMover = {
-		w = 370,
-		h = 32,
-		point = {"BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 370, 32},
+		w = 375,
+		h = 36,
+		point = {"BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 8, 2},
 		excludes = "PetActionButtonsVerticalMover",
 		protected = true,
 		prefix = "PetActionButton",
@@ -416,21 +533,21 @@ MovAny.lVirtualMovers = {
 			if index == 1 then
 				child:SetPoint("LEFT", self, "LEFT", 0, 0)
 			else
-				child:SetPoint("LEFT", self.lastChild, "RIGHT", 4, 0)
+				child:SetPoint("LEFT", self.lastChild, "RIGHT", 8, 0)
 			end
 		end,
 		OnMAReleaseChild = function(self, index, child)
 			child:ClearAllPoints()
 			if index == 1 then
-				child:SetPoint("BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 8, 4)
+				child:SetPoint("BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 8, 2)
 			else
 				child:SetPoint("LEFT", self.lastChild, "RIGHT", 8, 0)
 			end
 		end,
 	},
 	PetActionButtonsVerticalMover = {
-		w = 43,
-		h = 370,
+		w = 36,
+		h = 375,
 		point = {"BOTTOMLEFT", "PetActionBarFrame", "BOTTOMLEFT", 36, 1},
 		excludes = "PetActionButtonsMover",
 		notMAParent = true,
@@ -443,7 +560,7 @@ MovAny.lVirtualMovers = {
 			if index == 1 then
 				child:SetPoint("TOP", self, "TOP", 0, 0)
 			else
-				child:SetPoint("TOP", self.lastChild, "BOTTOM", 0, -3)
+				child:SetPoint("TOP", self.lastChild, "BOTTOM", 0, -8)
 			end
 		end,
 		OnMAReleaseChild = function(self, index, child)
@@ -503,7 +620,7 @@ MovAny.lVirtualMovers = {
 		protected = true,
 		prefix = "StanceButton",
 		count = 10,
-		dontLock = true,
+	--	dontLock = true,
 		OnMAHook = function(self)
 			local b = _G.StanceBarFrame
 			b:DisableDrawLayer("BACKGROUND")
@@ -530,17 +647,19 @@ MovAny.lVirtualMovers = {
 		OnMAHide = function(self, hidden)
 			if hidden then
 				MovAny:LockVisibility(self.sbf)
+				RegisterStateDriver(StanceBarFrame, "visibility", "hide");
 			else
 				MovAny:UnlockVisibility(self.sbf)
+				RegisterStateDriver(StanceBarFrame, "visibility", "show");
 			end
 		end,
 	},
 	StanceButtonsVerticalMover = {
 		w = 32,
 		h = 225,
-		point = {"BOTTOMLEFT", "MainMenuBar", "BOTTOMLEFT", 11, 3},
+		point = {"BOTTOMLEFT", "MainMenuBar", "TOPLEFT", 45, 30},
 		excludes = "StanceButtonsMover",
-		notMAParent = true,
+	--	notMAParent = true,
 		protected = true,
 		prefix = "StanceButton",
 		count = 10,
@@ -583,11 +702,20 @@ MovAny.lVirtualMovers = {
 				child:SetPoint("LEFT", self.lastChild, "RIGHT", 8, 0)
 			end
 		end,
+		OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self.sbf)
+				RegisterStateDriver(StanceBarFrame, "visibility", "hide");
+			else
+				MovAny:UnlockVisibility(self.sbf)
+				RegisterStateDriver(StanceBarFrame, "visibility", "show");
+			end
+		end,
 	},
 	MultiBarRightMover = {
 		w = 38,
 		h = 498,
-		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 285},
+		point = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", 0, 98},
 		excludes = "MultiBarRightHorizontalMover",
 	--	notMAParent = true,
 		protected = true,
@@ -610,6 +738,15 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
+	--[[	OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self)
+				RegisterStateDriver(MultiBarRightMover, "visibility", "hide");
+			else
+				MovAny:UnlockVisibility(self)
+				RegisterStateDriver(MultiBarRightMover, "visibility", "show");
+			end
+		end]]
 	},
 	MultiBarRightHorizontalMover = {
 		w = 498,
@@ -637,11 +774,20 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
+	--[[	OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self)
+				RegisterStateDriver(MultiBarRightHorizontalMover, "visibility", "hide");
+			else
+				MovAny:UnlockVisibility(self)
+				RegisterStateDriver(MultiBarRightHorizontalMover, "visibility", "show");
+			end
+		end]]
 	},
 	MultiBarLeftMover = {
 		w = 38,
 		h = 498,
-		point = {"BOTTOM", "UIParent", "BOTTOM", 0, 285},
+		point = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -38, 98},
 		excludes = "MultiBarLeftHorizontalMover",
 	--	notMAParent = true,
 		protected = true,
@@ -664,6 +810,15 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
+	--[[	OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self)
+				RegisterStateDriver(MultiBarLeftMover, "visibility", "hide");
+			else
+				MovAny:UnlockVisibility(self)
+				RegisterStateDriver(MultiBarLeftMover, "visibility", "show");
+			end
+		end]]
 	},
 	MultiBarLeftHorizontalMover = {
 		w = 498,
@@ -691,6 +846,15 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
+	--[[	OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self)
+				RegisterStateDriver(MultiBarLeftHorizontalMover, "visibility", "hide");
+			else
+				MovAny:UnlockVisibility(self)
+				RegisterStateDriver(MultiBarLeftHorizontalMover, "visibility", "show");
+			end
+		end]]
 	},
 	PartyMember1DebuffsMover = {
 		w = 66,
@@ -1020,10 +1184,10 @@ MovAny.lVirtualMovers = {
 						end
 						MovAny:UnlockPoint(vm.tef)
 						vm.tef:ClearAllPoints()
-						if BuffFrame.numConsolidated == 0 then
-							vm.tef:SetPoint("TOPRIGHT", "ConsolidatedBuffs", "TOPRIGHT", 0, 0)
+						if IsInGroup() and GetCVarBool("consolidateBuffs") then
+							vm.tef:SetPoint("TOPRIGHT", ConsolidatedBuffs, "TOPLEFT", -6, 0)
 						else
-							vm.tef:SetPoint("TOPRIGHT", "ConsolidatedBuffs", "TOPLEFT", -7, 0)
+							vm.tef:SetPoint("TOPRIGHT", ConsolidatedBuffs, "TOPRIGHT", 0, 0)
 						end
 						
 						MovAny:LockPoint(vm.tef)

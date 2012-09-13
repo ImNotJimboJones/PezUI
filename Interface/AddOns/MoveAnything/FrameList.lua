@@ -152,12 +152,12 @@ m = {
 		API:AddElement({name = "BankBagFrame5", displayName = "Bank Bag 5", refuseSync = MOVANY.FRAME_ONLY_WHEN_BANK_IS_OPEN}, c)
 		API:AddElement({name = "BankBagFrame6", displayName = "Bank Bag 6", refuseSync = MOVANY.FRAME_ONLY_WHEN_BANK_IS_OPEN}, c)
 		API:AddElement({name = "BankBagFrame7", displayName = "Bank Bag 7", refuseSync = MOVANY.FRAME_ONLY_WHEN_BANK_IS_OPEN}, c)
-		API:AddElement({name = "VoidStorageFrame", displayName = "Void Storage"}, c)
+		API:AddElement({name = "VoidStorageFrame", displayName = "Void Storage"}, c) --refuseSync = MOVANY.FRAME_ONLY_WHEN_VOIDSTORAGE_IS_OPEN
 
 		c = API:GetCategory("Blizzard Bottom Bar")
 		API:AddElement({name = "MainMenuBar", displayName = "Main Bar", run = function ()
 			if not MovAny:IsModified(VehicleMenuBar, pos) then
-				local v = _G["VehicleMenuBar"]
+				local v = _G["OverrideActionBar"]
 				v:ClearAllPoints()
 				v:SetPoint(BOTTOMLEFT, UIParent, BOTTOMLEFT, UIParentGetWidth()/2 - vGetWidth()/2, 0)
 			end
@@ -233,8 +233,8 @@ m = {
 		API:AddElement({name = "EclipseBarFrame", displayName = "Druid Eclipse Bar"}, c)
 		API:AddElement({name = "PaladinPowerBar", displayName = "Paladin Holy Power Bar"}, c)
 		API:AddElement({name = "MultiCastActionBarFrame", displayName = "Shaman Totem bar"}, c)
-		API:AddElement({name = "TotemFrame", displayName = "Shaman Totem Timers"}, c)
-		API:AddElement({name = "ShardBarFrame", displayName = "Warlock Soul Shards"}, c)
+		API:AddElement({name = "TotemFrame", displayName = "Non-combat pet Timers"}, c)
+		API:AddElement({name = "WarlockPowerFrame", displayName = "Warlock Power Frame"}, c)
 		API:AddElement({name = "PriestBarFrame", displayName = "Shadow Priest Orbs"}, c)
 		API:AddElement({name = "MonkHarmonyBar", displayName = "Monk Chi Frame", noScale = 1}, c)
 		
@@ -244,9 +244,9 @@ m = {
 	--	API:AddElement({name = "LFGSearchStatus", displayName = "Dungeon/Raid Finder Queue Status"}, c)
 		API:AddElement({name = "DungeonCompletionAlertFrame1", displayName = "Dungeon Completion Alert"}, c)
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button"}, c)
-		API:AddElement({name = "LFDDungeonReadyDialog", displayName = "Dungeon Ready Dialog"}, c)
-		API:AddElement({name = "LFDDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
-		API:AddElement({name = "LFDDungeonReadyStatus", displayName = "Dungeon Ready Status"}, c)
+		API:AddElement({name = "LFGDungeonReadyDialog", displayName = "Dungeon Ready Dialog"}, c)
+		API:AddElement({name = "LFGDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
+		API:AddElement({name = "LFGDungeonReadyStatus", displayName = "Dungeon Ready Status"}, c)
 		API:AddElement({name = "LFDRoleCheckPopup", displayName = "Dungeon Role Check Popup"}, c)
 		local rbab = API:AddElement({name = "PlayerPowerBarAlt", displayName = "Raid Boss Alternative Bar"}, c)
 		API:AddElement({name = "RaidBossEmoteFrame", displayName = "Raid Boss Emote Display"}, c)
@@ -334,6 +334,7 @@ m = {
 		API:AddElement({name = "OpenMailFrame", displayName = "Open Mail"}, c)
 		API:AddElement({name = "PetStableFrame", displayName = "Pet Stable"}, c)
 		API:AddElement({name = "FriendsFrame", displayName = "Social - Friends / Who / Guild / Chat / Raid"}, c)
+		API:AddElement({name = "TransmogrifyFrame", displayName = "Transmogrification"}, c)
 		pvpf:AddCategory(c)
 		qldf:AddCategory(c)
 		qlf:AddCategory(c)
@@ -349,11 +350,11 @@ m = {
 		c = API:GetCategory("Loot")
 		API:AddElement({name = "LootFrame", displayName = "Loot"}, c)
 		API:AddElement({name = "GroupLootContainer", displayName = "All Loot Roll Frame", create = "GroupLootFrameTemplate", noScale = 1}, c)
-		API:AddElement({name = "LootWonAlertFrame1", displayName = "Loot Won Alert Frame"}, c)
-		API:AddElement({name = "BonusRollFrame", displayName = "Bonus Roll Framee"}, c)
-		API:AddElement({name = "BonusRollLootWonFrame", displayName = "Bonus Roll Loot Won Frame"}, c)
-		API:AddElement({name = "BonusRollMoneyWonFrame", displayName = "Bonus Roll Money Won Frame"}, c)
-		API:AddElement({name = "MissingLootFrame", displayName = "Missing Loot"}, c)
+	--	API:AddElement({name = "LootWonAlertFrame1", displayName = "Loot Won Alert Frame"}, c)
+		API:AddElement({name = "BonusRollFrame", displayName = "Legendary Quest Iten Won Frame", create = "BonusRollFrameTemplate"}, c)
+		API:AddElement({name = "BonusRollLootWonFrame", displayName = "Loot Won Frame", create = "LootWonAlertFrameTemplate"}, c)
+		API:AddElement({name = "BonusRollMoneyWonFrame", displayName = "Bonus Roll Money Won Frame", create = "MoneyWonAlertFrameTemplate"}, c)
+		API:AddElement({name = "MissingLootFrame", displayName = "Missing Loot Frame"}, c)
 		API:AddElement({name = "GroupLootFrame1", displayName = "Loot Roll 1", create = "GroupLootFrameTemplate"}, c)
 		API:AddElement({name = "GroupLootFrame2", displayName = "Loot Roll 2", create = "GroupLootFrameTemplate"}, c)
 		API:AddElement({name = "GroupLootFrame3", displayName = "Loot Roll 3", create = "GroupLootFrameTemplate"}, c)
@@ -489,19 +490,21 @@ m = {
 		API:AddElement({name = "TargetFrameToTDebuffsMover", displayName = "Target of Target Debuffs"}, c)
 
 		c = API:GetCategory("Vehicle")
-	--[[	API:AddElement({name = "VehicleMenuBar", displayName = "Vehicle Bar",
+		API:AddElement({name = "OverrideActionBar", displayName = "Vehicle Bar",
 			hideList = {
-				{"VehicleMenuBar", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
-				{"VehicleMenuBarArtFrame", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
-				{"VehicleMenuBarActionButtonFrame", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
+				{"OverrideActionBar", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
+				{"OverrideActionBarLeaveFrame", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
+			--	{"OverrideActionBarArtFrame", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
+			--	{"OverrideActionBarButtonFrame", "ARTWORK","BACKGROUND","BORDER","OVERLAY"},
 			}
-		}, c)]]
-	--[[	API:AddElement({name = "VehicleMenuBarActionButtonFrame", displayName = "Vehicle Action Bar", runOnce = function()
-			VehicleMenuBarActionButtonFrame:SetSize((VehicleMenuBarActionButton1:GetWidth() + 2) * VEHICLE_MAX_ACTIONBUTTONS, VehicleMenuBarActionButton1:GetHeight() + 2)
-		 end}, c)]]
-	--	API:AddElement({name = "VehicleMenuBarHealthBar", displayName = "Vehicle Health Bar", onlyOnceCreated = 1}, c)
-	--	API:AddElement({name = "VehicleMenuBarPowerBar", displayName = "Vehicle Power Bar", onlyOnceCreated = 1}, c)
-		API:AddElement({name = "VehicleMenuBarLeaveButton", displayName = "Vehicle Leave Button"}, c)
+		}, c)
+		API:AddElement({name = "OverrideActionButtonsMover", displayName = "Vehicle Action Bar", runOnce = function()
+			OverrideActionBarButtonFrame:SetSize((OverrideActionBarButton1:GetWidth() + 2) * VEHICLE_MAX_ACTIONBUTTONS, VOverrideActionBarButton1:GetHeight() + 2)
+		 end}, c)
+		API:AddElement({name = "OverrideActionBarHealthBar", displayName = "Vehicle Health Bar", onlyOnceCreated = 1}, c)
+		API:AddElement({name = "OverrideActionBarPowerBar", displayName = "Vehicle Power Bar", onlyOnceCreated = 1}, c)
+		API:AddElement({name = "OverrideActionBarLeaveFrame", displayName = "Vehicle Leave Frame"}, c)
+	--	API:AddElement({name = "MicroButtonsVehicleMover", displayName = "Vehicle Micro Bar"}, c)
 		API:AddElement({name = "VehicleSeatIndicator", displayName = "Vehicle Seat Indicator"}, c)
 		
 		

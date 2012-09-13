@@ -1,4 +1,4 @@
-﻿local PlayerInNotComb = true
+﻿--[[local PlayerInNotComb = true
 local profileName = tostring(GetRealmName().." "..UnitName("player"))
 
 local function CheckFrameStat(arg1) --
@@ -16,6 +16,7 @@ local function CheckFrameStat(arg1) --
 			if arg1 ~= nil or arg1 ~= nil then
 				StanceBarFrame:SetParent(arg1)
 				StanceBarFrame:Show()
+				arg1:Hide()
 			end
 		end
 	else
@@ -27,6 +28,7 @@ local function CheckFrameStat(arg1) --
 			if arg1 ~= nil or arg1 ~= nil then
 				StanceBarFrame:SetParent(arg1)
 				StanceBarFrame:Show()
+				arg1:Hide()
 			end
 		end
 	end
@@ -80,4 +82,4 @@ hooksecurefunc("StanceBar_Update", function()
 		CheckFrameStat(StanceButtonsMover)
 		CheckFrameStat(StanceButtonsVerticalMover)
 	end
-end)
+end)]]

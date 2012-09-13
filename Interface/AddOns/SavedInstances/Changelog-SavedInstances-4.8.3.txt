@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r173 | oscarucb | 2012-08-30 11:36:53 +0000 (Thu, 30 Aug 2012) | 1 line
+r175 | oscarucb | 2012-09-13 18:17:28 +0000 (Thu, 13 Sep 2012) | 1 line
 Changed paths:
-   A /tags/4.8.2 (from /trunk:172)
+   A /tags/4.8.3 (from /trunk:174)
 
-Tagging as 4.8.2
+Tagging as 4.8.3
+------------------------------------------------------------------------
+r174 | oscarucb | 2012-09-13 18:16:56 +0000 (Thu, 13 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix ticket 93: lua errors when "Show Expired" option is enabled
+
 ------------------------------------------------------------------------
 r172 | oscarucb | 2012-08-30 10:58:54 +0000 (Thu, 30 Aug 2012) | 2 lines
 Changed paths:

@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 172 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 174 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -1780,7 +1780,7 @@ function core:ShowTooltip(anchorframe)
 				if inst.Show ~= "never" or showall then
 				    for toon, t in cpairs(vars.db.Toons) do
 					for diff = 1, maxdiff do
-					        if inst[toon] and inst[toon][diff] and (inst[toon][diff].Expires > 0 or showall) then
+					        if inst[toon] and inst[toon][diff] and (inst[toon][diff].Expires > 0 or showexpired) then
 							instancerow[instance] = instancerow[instance] or tooltip:AddLine()
 							addColumns(columns, toon, tooltip)
 						end

@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r62 | slaren | 2012-09-13 10:39:56 +0000 (Thu, 13 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v1.2b (from /trunk:61)
+
+Tagging as v1.2b
+------------------------------------------------------------------------
+r61 | slaren | 2012-09-13 10:37:21 +0000 (Thu, 13 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/Data.lua
+   M /trunk/Format.lua
+   M /trunk/UI.lua
+
+- New: Death reasons are now shown in the list of deaths
+- Fixed problems with environmental damage
+- Death reasons should be shown correctly again for priests with Spirit of Redemption
+------------------------------------------------------------------------
+r59 | slaren | 2012-09-11 09:19:29 +0000 (Tue, 11 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/DeathNote.toc
+   M /trunk/Format.lua
+   M /trunk/Output.lua
+   M /trunk/UI.lua
+
+- Fixed a few problems with chat reports and announces
+------------------------------------------------------------------------

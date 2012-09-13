@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Jaraxxus", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 4483 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7 $"):sub(12, -3))
 mod:SetCreatureID(34780)
 mod:SetModelID(29615)
 mod:SetMinCombatTime(30)
@@ -148,7 +148,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self.Options.LegionFlameIcon then
 			self:SetIcon(args.destName, 7, 8)
 		end
-		if IsRaidLeader() and self.Options.LegionFlameWhisper then
+		if DBM:GetRaidRank() > 0 and self.Options.LegionFlameWhisper then
 			self:SendWhisper(L.WhisperFlame, targetname)
 		end
 	elseif args:IsSpellID(66334, 67905, 67906, 67907) and args:IsPlayer() then

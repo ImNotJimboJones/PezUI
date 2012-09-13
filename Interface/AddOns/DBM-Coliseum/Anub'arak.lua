@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 4685 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7 $"):sub(12, -3))
 mod:SetCreatureID(34564)
 mod:SetModelID(29268) 
 
@@ -101,18 +101,16 @@ do
 		return DBM:GetRaidSubgroup(DBM:GetUnitFullName(v1)) < DBM:GetRaidSubgroup(DBM:GetUnitFullName(v2))
 	end
 	function mod:SetPcoldIcons()
-		if DBM:GetRaidRank() > 0 then
-			table.sort(PColdTargets, sort_by_group)
-			local PColdIcon = 7
-			for i, v in ipairs(PColdTargets) do
-				if self.Options.AnnouncePColdIcons and IsRaidLeader() then
-					SendChatMessage(L.PcoldIconSet:format(PColdIcon, DBM:GetUnitFullName(v)), "RAID")
-				end
-				self:SetIcon(v, PColdIcon)
-				PColdIcon = PColdIcon - 1
+		table.sort(PColdTargets, sort_by_group)
+		local PColdIcon = 7
+		for i, v in ipairs(PColdTargets) do
+			if self.Options.AnnouncePColdIcons and DBM:GetRaidRank() > 0 then
+				SendChatMessage(L.PcoldIconSet:format(PColdIcon, DBM:GetUnitFullName(v)), "RAID")
 			end
-			self:Schedule(5, ClearPcoldTargets)
+			self:SetIcon(v, PColdIcon)
+			PColdIcon = PColdIcon - 1
 		end
+		self:Schedule(5, ClearPcoldTargets)
 	end
 end
 

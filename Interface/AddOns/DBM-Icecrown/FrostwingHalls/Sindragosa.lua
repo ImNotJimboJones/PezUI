@@ -1,12 +1,14 @@
 local mod	= DBM:NewMod("Sindragosa", "DBM-Icecrown", 4)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 4685 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7 $"):sub(12, -3))
 mod:SetCreatureID(36853)
 --mod:SetModelID(30362)--Does not scale correctly
-mod:RegisterCombat("combat")
-mod:SetMinSyncRevision(3712)
 mod:SetUsedIcons(3, 4, 5, 6, 7, 8)
+--mod:SetMinSyncRevision(3712)
+mod:SetMinSyncRevision(7)--Could break if someone is running out of date version with higher revision
+
+mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"SPELL_CAST_START",
@@ -85,18 +87,16 @@ do
 		return DBM:GetRaidSubgroup(DBM:GetUnitFullName(v1)) < DBM:GetRaidSubgroup(DBM:GetUnitFullName(v2))
 	end
 	function mod:SetBeaconIcons()
-		if DBM:GetRaidRank() > 0 then
-			table.sort(beaconIconTargets, sort_by_group)
-			local beaconIcons = 8
-			for i, v in ipairs(beaconIconTargets) do
-				if self.Options.AnnounceFrostBeaconIcons and IsRaidLeader() then
-					SendChatMessage(L.BeaconIconSet:format(beaconIcons, DBM:GetUnitFullName(v)), "RAID")
-				end
-				self:SetIcon(v, beaconIcons)
-				beaconIcons = beaconIcons - 1
+		table.sort(beaconIconTargets, sort_by_group)
+		local beaconIcons = 8
+		for i, v in ipairs(beaconIconTargets) do
+			if self.Options.AnnounceFrostBeaconIcons and DBM:GetRaidRank() > 0 then
+				SendChatMessage(L.BeaconIconSet:format(beaconIcons, DBM:GetUnitFullName(v)), "RAID")
 			end
-			self:Schedule(8, ClearBeaconTargets)
+			self:SetIcon(v, beaconIcons)
+			beaconIcons = beaconIcons - 1
 		end
+		self:Schedule(8, ClearBeaconTargets)
 	end
 end
 

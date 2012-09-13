@@ -1,11 +1,12 @@
 local mod	= DBM:NewMod("Halion", "DBM-ChamberOfAspects", 2)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 4657 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 7 $"):sub(12, -3))
 mod:SetCreatureID(39863)--40142 (twilight form)
 mod:SetModelID(31952)
-mod:SetMinSyncRevision(4358)
 mod:SetUsedIcons(7, 8)
+--mod:SetMinSyncRevision(4358)
+mod:SetMinSyncRevision(7)--Could break if someone is running out of date version with higher revision
 
 mod:RegisterCombat("combat")
 --mod:RegisterKill("yell", L.Kill)
@@ -121,7 +122,7 @@ function mod:SPELL_AURA_APPLIED(args)--We don't use spell cast success for actua
 		end
 		if not self.Options.AnnounceAlternatePhase then
 			warningShadowConsumption:Show(args.destName)
-			if IsRaidLeader() and self.Options.WhisperOnConsumption then
+			if DBM:GetRaidRank() > 0 and self.Options.WhisperOnConsumption then
 				self:SendWhisper(L.WhisperConsumption, args.destName)
 			end
 		end
@@ -141,7 +142,7 @@ function mod:SPELL_AURA_APPLIED(args)--We don't use spell cast success for actua
 		end
 		if not self.Options.AnnounceAlternatePhase then
 			warningFieryConsumption:Show(args.destName)
-			if IsRaidLeader() and self.Options.WhisperOnConsumption then
+			if DBM:GetRaidRank() > 0 and self.Options.WhisperOnConsumption then
 				self:SendWhisper(L.WhisperCombustion, args.destName)
 			end
 		end

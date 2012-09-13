@@ -1,9 +1,9 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
-local _G = _G
-local _ = _
+local _
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_RESET_CONFIRM"] = {
+	preferredIndex = 3,
 	text = MOVANY.PROFILE_RESET_CONFIRM,
 	button1 = TEXT(YES),
 	button2 = TEXT(NO),
@@ -14,10 +14,11 @@ StaticPopupDialogs["MOVEANYTHING_PROFILE_RESET_CONFIRM"] = {
 	exclusive = 0,
 	showAlert = 1,
 	whileDead = 1,
-	hideOnEscape = 1
+	hideOnEscape = 1,
 }
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_ADD"] = {
+	preferredIndex = 3,
 	text = MOVANY.PROFILE_ADD_TEXT,
 	button1 = TEXT(MOVANY.ADD),
 	button2 = TEXT(CANCEL),
@@ -41,10 +42,11 @@ StaticPopupDialogs["MOVEANYTHING_PROFILE_ADD"] = {
 	exclusive = 0,
 	showAlert = 1,
 	whileDead = 1,
-	hideOnEscape = 1
+	hideOnEscape = 1,
 }
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_RENAME"] = {
+	preferredIndex = 3,
 	text = MOVANY.PROFILE_RENAME_TEXT,
 	button1 = TEXT(MOVANY.RENAME),
 	button2 = TEXT(CANCEL),
@@ -69,10 +71,11 @@ StaticPopupDialogs["MOVEANYTHING_PROFILE_RENAME"] = {
 	exclusive = 0,
 	showAlert = 1,
 	whileDead = 1,
-	hideOnEscape = 1
+	hideOnEscape = 1,
 }
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_SAVE_AS"] = {
+	preferredIndex = 3,
 	text = MOVANY.PROFILE_SAVE_AS_TEXT,
 	button1 = TEXT(MOVANY.SAVE),
 	button2 = TEXT(CANCEL),
@@ -97,10 +100,11 @@ StaticPopupDialogs["MOVEANYTHING_PROFILE_SAVE_AS"] = {
 	exclusive = 0,
 	showAlert = 1,
 	whileDead = 1,
-	hideOnEscape = 1
+	hideOnEscape = 1,
 }
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_DELETE"] = {
+	preferredIndex = 3,
 	text = MOVANY.PROFILE_DELETE_TEXT,
 	button1 = TEXT(MOVANY.DELETE),
 	button2 = TEXT(CANCEL),

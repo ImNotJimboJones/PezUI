@@ -4,8 +4,7 @@
 	Vanilla & TBC versions by: Skrag, Jason, Vincent
 ]]
 local MOVANY = _G.MOVANY
-local _G = _G
-local _ = _
+local _
 local MAOptions
 
 -- X: http://lua-users.org/wiki/CopyTable
@@ -105,8 +104,11 @@ local MovAny = {
 		Boss4TargetFrame = "Boss4TargetFrame",
 		Boss5TargetFrame = "Boss5TargetFrame",
 		ActionButton1 = "ActionButton1",
-		PetActionButtonsMover = "PetActionButtonsMover"
-	--	BonusActionButton1 = "BonusActionButton1",
+		PetActionButtonsMover = "PetActionButtonsMover",
+		PetActionButtonsVerticalMover = "PetActionButtonsVerticalMover",
+		StanceButtonsMover = "StanceButtonsMover",
+		StanceButtonsVerticalMover = "StanceButtonsVerticalMover"
+		--	BonusActionButton1 = "BonusActionButton1",
 	},
 	lEnableMouse = {
 		WatchFrame,
@@ -128,6 +130,7 @@ local MovAny = {
 		ShardBarFrame,
 		PriestBarFrame,
 		MonkHarmonyBar,
+		VoidStorageFrame,
 	},
 	lTranslate = {
 		minimap = "MinimapCluster",
@@ -152,7 +155,6 @@ local MovAny = {
 		Minimap = "MinimapCluster",
 	},
 	lTranslateSec = {
-		StanceBarFrame = "StanceButtonsMover",
 		BuffFrame = "PlayerBuffsMover",
 		ConsolidatedBuffFrame = "PlayerBuffsMover",
 		ChatFrame1EditBox = "ChatEditBoxesMover",
@@ -185,8 +187,6 @@ local MovAny = {
 		CompactRaidFrameContainer = "RaidUnitFramesMover",
 		CompactRaidFrameManager = "RaidUnitFramesManagerMover",
 		TargetOfFocusDebuffsMover = "FocusFrameToTDebuffsMover",
-		PVPParentFrame = "PVPFrame",
-		LFGSearchStatus = "PVEFrame",
 	},
 	lDeleteFrameNames = {
 		BuffFrame = "BuffFrame",
@@ -347,14 +347,14 @@ local MovAny = {
 		end
 	end,
 
-	hBlizzard_TalentUI = function(self)
+--[[	hBlizzard_TalentUI = function(self)
 		if PlayerTalentFrame_Toggle then
 			hooksecurefunc("PlayerTalentFrame_Toggle", function()
 				API:SyncElement("PlayerTalentFrame", true)
 			end)
 			MovAny.hBlizzard_TalentUI = nil
 		end
-	end,
+	end,]]
 	
 	hReputationWatchBar_Update = function()
 		API:SyncElement("ReputationWatchBar")
@@ -390,17 +390,44 @@ local MovAny = {
 	
 	hStanceBar_Update = function()
 		API:SyncElement("StanceBarFrame")
+		API:SyncElement("StanceButtonsMover")
+		API:SyncElement("StanceButtonsVerticalMover")
 	end,
 	
 	hStanceBar_UpdateState = function()
-		API:SyncElement("StanceVarFrame")
+		API:SyncElement("StanceBarFrame")
+		API:SyncElement("StanceButtonsMover")
+		API:SyncElement("StanceButtonsVerticalMover")
 	end,
+	
+	hPetActionBar_Update = function()
+	--	print('hPetActionBar_Update')
+		API:SyncElement("PetActionBarFrame")
+		API:SyncElement("PetActionButtonsMover")
+		API:SyncElement("PetActionButtonsVerticalMover")
+	end,
+	
+	hPetActionBarFrame_OnUpdate = function()
+	--	print('hPetActionBar_Update')
+		API:SyncElement("PetActionBarFrame")
+	end,
+	
+	hUIParent_ManageFramePositions = function()
+		API:SyncElement("StanceBarFrame")
+		API:SyncElement("PetActionBarFrame")
+		API:SyncElement("StanceButtonsMover")
+		API:SyncElement("StanceButtonsVerticalMover")
+	end,
+	
+--[[	hUpdateMicroButtonsParent = function(self, ...)
+	end,]]
 }
 _G.MovAny = MovAny
 
 BINDING_HEADER_MOVEANYTHING = "MoveAnything"
 
 StaticPopupDialogs["MOVEANYTHING_RESET_ALL_CONFIRM"] = {
+	preferredIndex = 3,
 	text = MOVANY.RESET_ALL_CONFIRM,
 	button1 = TEXT(YES),
 	button2 = TEXT(NO),
@@ -411,7 +438,7 @@ StaticPopupDialogs["MOVEANYTHING_RESET_ALL_CONFIRM"] = {
 	exclusive = 0,
 	showAlert = 1,
 	whileDead = 1,
-	hideOnEscape = 1
+	hideOnEscape = 1,
 }
 
 function MovAny:Load()
@@ -591,12 +618,32 @@ function MovAny:Boot()
 	if GameTooltip_SetDefaultAnchor then
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", self.hGameTooltip_SetDefaultAnchor)
 	end
+	if StanceBar_Update then
+		hooksecurefunc("StanceBar_Update", self.hStanceBar_Update)
+	end
+	if StanceBar_UpdateState then
+		hooksecurefunc("StanceBar_UpdateState", self.hStanceBar_UpdateState)
+	end
+	if UIParent_ManageFramePositions then
+		hooksecurefunc("UIParent_ManageFramePositions", self.hUIParent_ManageFramePositions)
+	end
+	if PetActionBar_Update then
+		hooksecurefunc("PetActionBar_Update", self.hPetActionBar_Update)
+	end
 	if GameTooltip and GameTooltip.SetBagItem then
 		hooksecurefunc(GameTooltip, "SetBagItem", self.hGameTooltip_SetBagItem)
 	end
 	if UpdateContainerFrameAnchors then
 		hooksecurefunc("UpdateContainerFrameAnchors", self.hUpdateContainerFrameAnchors)
 	end
+--[[	if UpdateMicroButtonsParent then
+		hooksecurefunc("UpdateMicroButtonsParent", self.hUpdateMicroButtonsParent)
+	end]]
+--[[	if RemoveTalent then
+		hooksecurefunc("RemoveTalent", function(self, ...)
+			print(select(1, ...) , "Done")
+		end)
+	end]]
 	if ExtendedUI and ExtendedUI.CAPTUREPOINT then
 		self.oCaptureBar_Create = ExtendedUI.CAPTUREPOINT.create
 		ExtendedUI.CAPTUREPOINT.create = self.hCaptureBar_Create
@@ -612,9 +659,9 @@ function MovAny:Boot()
 	
 	self.inited = true
 	
-	if IsAddOnLoaded("Blizzard_TalentUI") and self.hBlizzard_TalentUI then
+--[[	if IsAddOnLoaded("Blizzard_TalentUI") and self.hBlizzard_TalentUI then
 		self:hBlizzard_TalentUI()
-	end
+	end]]
 end
 
 function MovAny:OnPlayerLogout()
@@ -5324,6 +5371,7 @@ function MovAny:CreateVM(name)
 		end
 		if self.MAHidden and not child.MAHidden then
 			MovAny:LockVisibility(child)
+		--	print("Hide")
 		end
 		self.attachedChildren[index] = child
 		self.lastChild = child
@@ -5582,6 +5630,10 @@ function MovAny:CreateVM(name)
 			MovAny:ResetFrame(data.excludes)
 			MovAny:UpdateGUIIfShown(true)
 		end
+	--[[	if data.excludes2 and MovAny:IsModified(data.excludes2) then
+			MovAny:ResetFrame(data.excludes2)
+			MovAny:UpdateGUIIfShown(true)
+		end]]
 		if self.attachedChildren then
 			table.wipe(self.attachedChildren)
 		else
