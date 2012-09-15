@@ -709,21 +709,25 @@ local tEditText;
 function VUHDO_bouquetNewButtonClicked(aPanel)
 	tName = VUHDO_getCurrentBouquetName();
 	tEditBox = VUHDO_GLOBAL[aPanel:GetName() .. "BouquetNameEditBox"];
-	tEditText = tEditBox:GetText();
-	if (VUHDO_BOUQUETS["STORED"][tEditText] == nil and tEditText ~= nil and strlen(tEditText) > 0) then
-		VUHDO_BOUQUETS["STORED"][tEditText] = { };
-		VUHDO_BOUQUETS["SELECTED"] = tEditText;
-		VUHDO_bouquetsComboValueChanged(aPanel, tEditText);
-		VUHDO_initBouquetComboModel();
-		aPanel:Hide();
-		aPanel:Show();
-		VUHDO_rebuildAllBouquetItems(nil, 0);
-		VUHDO_Msg(VUHDO_I18N_CREATED_NEW_BOUQUET .. tEditText);
-	elseif (tEditText ~= nil and strlen(tEditText) > 0) then
-		VUHDO_Msg(tName .. VUHDO_I18N_BOUQUET_ALREADY_EXISTS);
-	else
+	tEditText = tEditBox:GetText() or "";
+	tEditText = string.gsub(tEditText, "[.#]", " ");
+	if (VUHDO_strempty(tEditText)) then
 		VUHDO_Msg(VUHDO_I18N_SELECT_STORE_BOUQUET_FIRST);
+	else
+		if (VUHDO_BOUQUETS["STORED"][tEditText] == nil) then
+			VUHDO_BOUQUETS["STORED"][tEditText] = { };
+			VUHDO_BOUQUETS["SELECTED"] = tEditText;
+			VUHDO_bouquetsComboValueChanged(aPanel, tEditText);
+			VUHDO_initBouquetComboModel();
+			aPanel:Hide();
+			aPanel:Show();
+			VUHDO_rebuildAllBouquetItems(nil, 0);
+			VUHDO_Msg(VUHDO_I18N_CREATED_NEW_BOUQUET .. tEditText);
+		else
+			VUHDO_Msg(tName .. VUHDO_I18N_BOUQUET_ALREADY_EXISTS);
+		end
 	end
+
 end
 
 

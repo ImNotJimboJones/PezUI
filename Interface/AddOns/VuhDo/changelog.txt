@@ -1,3 +1,28 @@
+Version 3.5.
+
+Bugfixes:
+-- All characters "." and "#" will be removed from bouquet names
+   to avoid crashes
+-- Switched shield absorb estimation to spell ids instead of spell names
+-- Aggro indicator marks working again
+-- Minor bugfixes
+
+Improvements:
+-- Improved range checking for hostile targets
+-- Added default bouquet "Raid Cooldowns" (Thank you, Zohar)
+-- Added Spirit Shell to "Pump Aegis" feature
+-- Updated libSharedMedia
+-- Minor optimizations
+
+
+Changes:
+
+
+Features:
+-- Added default bouquet "Raid CDs" (Thanks to Zohar)
+
+
+--------------------------------------------------------------
 Version 3.4.
 
 Bugfixes:

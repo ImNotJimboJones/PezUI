@@ -1,15 +1,23 @@
 local _;
+local select = select;
+local type = type;
 
 local VUHDO_SHIELDS = {
-	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = 15,
-	[VUHDO_SPELL_ID.DIVINE_AEGIS] = 15,
-	[VUHDO_SPELL_ID.ILLUMINATED_HEALING] = 5,
-	[VUHDO_SPELL_ID.ICE_BARRIER] = 60,
-	[VUHDO_SPELL_ID.MANA_SHIELD] = 60,
-	[VUHDO_SPELL_ID.SACRIFICE] = 30,
-	[VUHDO_SPELL_ID.SACRED_SHIELD] = 15,
-	[VUHDO_SPELL_ID.SPIRIT_SHELL] = 15,
-};
+	[17] = 15, -- VUHDO_SPELL_ID.POWERWORD_SHIELD -- ok
+	[47753] = 15, -- VUHDO_SPELL_ID.DIVINE_AEGIS -- ok
+	[86273] = 15, -- VUHDO_SPELL_ID.ILLUMINATED_HEALING (buff) ok
+	[11426] = 60, -- VUHDO_SPELL_ID.ICE_BARRIER -- ok
+	[65148] = 15, -- VUHDO_SPELL_ID.SACRED_SHIELD (Buff) -- ok
+	[114908] = 15, -- VUHDO_SPELL_ID.SPIRIT_SHELL (Buff) -- ok
+}
+
+
+--
+local VUHDO_PUMP_SHIELDS = {
+	[VUHDO_SPELL_ID.DIVINE_AEGIS] = 0.4,
+	[VUHDO_SPELL_ID.SPIRIT_SHELL] = 0.6,
+}
+
 
 
 local VUHDO_ABSORB_DEBUFFS = {
@@ -50,6 +58,7 @@ local ceil = ceil;
 local GetTime = GetTime;
 local select = select;
 local UnitAura = UnitAura;
+local GetSpellInfo = GetSpellInfo;
 
 
 
@@ -75,8 +84,8 @@ local function VUHDO_initShieldValue(aUnit, aShieldName, anAmount, aDuration)
 
 	VUHDO_SHIELD_LEFT[aUnit][aShieldName] = anAmount;
 
-	if (sIsPumpAegis and VUHDO_SPELL_ID.DIVINE_AEGIS == aShieldName) then
-		VUHDO_SHIELD_SIZE[aUnit][aShieldName] = VUHDO_RAID["player"]["healthmax"] * 0.4;
+	if (sIsPumpAegis and VUHDO_PUMP_SHIELDS[aShieldName] ~= nil) then
+		VUHDO_SHIELD_SIZE[aUnit][aShieldName] = VUHDO_RAID["player"]["healthmax"] * VUHDO_PUMP_SHIELDS[aShieldName];
 	else
 		VUHDO_SHIELD_SIZE[aUnit][aShieldName] = anAmount;
 	end
@@ -107,7 +116,7 @@ local function VUHDO_updateShieldValue(aUnit, aShieldName, anAmount, aDuration)
 	end
 
 	VUHDO_SHIELD_LEFT[aUnit][aShieldName] = anAmount;
---	VUHDO_xMsg("Updated shield " .. aShieldName .. " on " .. aUnit .. " to " .. anAmount, aDuration);
+  --VUHDO_xMsg("Updated shield " .. aShieldName .. " on " .. aUnit .. " to " .. anAmount, aDuration);
 end
 
 
@@ -160,16 +169,16 @@ end
 
 --
 local tRemain;
-local tShieldName;
+local tSpellId;
 local function VUHDO_updateShields(aUnit)
-	for tShieldName, _ in pairs(VUHDO_SHIELDS) do
-		tRemain = select(14, UnitAura(aUnit, tShieldName));
+	for tSpellId, _ in pairs(VUHDO_SHIELDS) do
+		tRemain = select(14, UnitAura(aUnit, select(1, GetSpellInfo(tSpellId))));
 
 		if (tRemain ~= nil and "number" == type(tRemain)) then
 			if (tRemain > 0) then
-				VUHDO_updateShieldValue(aUnit, tShieldName, tRemain, nil);
+				VUHDO_updateShieldValue(aUnit, tSpellId, tRemain, nil);
 			else
-				VUHDO_removeShield(aUnit, tShieldName);
+				VUHDO_removeShield(aUnit, tSpellId);
 			end
 		end
 	end
@@ -214,15 +223,17 @@ function VUHDO_parseCombatLogShieldAbsorb(aMessage, aSrcGuid, aDstGuid, aShieldN
 		return;
 	end
 
+	--VUHDO_Msg(aSpellId);
+
 	--[[if ("SPELL_AURA_APPLIED" == aMessage) then
-		VUHDO_xMsg(aShieldName, aSpellId);
+	VUHDO_xMsg(aShieldName, aSpellId);
 	end]]
 
-	if (VUHDO_PLAYER_GUID == aSrcGuid and VUHDO_SHIELDS[aShieldName] ~= nil) then
+	if (VUHDO_PLAYER_GUID == aSrcGuid and VUHDO_SHIELDS[aSpellId] ~= nil) then
 		if ("SPELL_AURA_REFRESH" == aMessage) then
-			VUHDO_updateShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aShieldName]);
+			VUHDO_updateShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aSpellId]);
 		elseif ("SPELL_AURA_APPLIED" == aMessage) then
-			VUHDO_initShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aShieldName]);
+			VUHDO_initShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aSpellId]);
 		elseif ("SPELL_AURA_REMOVED" == aMessage
 			or "SPELL_AURA_BROKEN" == aMessage
 			or "SPELL_AURA_BROKEN_SPELL" == aMessage) then

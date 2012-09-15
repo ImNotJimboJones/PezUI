@@ -1,6 +1,6 @@
 --[[
 Name: LibGroupTalents-1.0
-Revision: $Rev: 70 $
+Revision: $Rev: 73 $
 Author: Zek
 Documentation: http://wowace.com/wiki/LibGroupTalents-1.0
 SVN: svn://svn.wowace.com/wow/libgrouptalents-1-0/mainline/trunk
@@ -72,7 +72,7 @@ Events:
 
 local TalentQuery = LibStub("LibTalentQuery-1.0")
 
-local MAJOR, MINOR = "LibGroupTalents-1.0", tonumber(("$Rev: 70 $"):match("(%d+)"))
+local MAJOR, MINOR = "LibGroupTalents-1.0", tonumber(("$Rev: 73 $"):match("(%d+)"))
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -342,9 +342,9 @@ function lib:OnRaidRosterUpdate()
 	if (instanceType == "pvp" or instanceType == "arena") then
 		self.distribution = "BATTLEGROUND"
 	else
-		if (GetNumRaidMembers() > 0) then
+		if (GetNumGroupMembers() > 5) then
 			self.distribution = "RAID"
-		elseif (GetNumPartyMembers() > 0) then
+		elseif (GetNumGroupMembers() > 1) then
 			self.distribution = "PARTY"
 		else
 			self.distribution = nil
@@ -1110,7 +1110,7 @@ function lib:RefreshPlayerGlyphs()
 
 	local glyphs = new()
 	local any
-	for talentGroup = 1,GetNumTalentGroups() do
+	for talentGroup = 1,GetNumSpecGroups() do
 		local list = new()
 		for i = 1,GetNumGlyphSockets() do
 			local enabled, glyphType, glyphTooltipIndex, glyphSpell, icon = GetGlyphSocketInfo(i, talentGroup)
@@ -1666,7 +1666,7 @@ end
 -- GetNumTalentGroups
 function lib:GetNumTalentGroups(unit)
 	if (UnitIsUnit(unit, "player")) then
-		return GetNumTalentGroups()
+		return GetNumSpecGroups()
 	else
 		local guid = unit and UnitGUID(unit)
 		local r = guid and self.roster[guid]
@@ -1906,14 +1906,14 @@ do
 	-- IterateRoster
 	function lib:IterateRoster()
 		local t = new()
-		if (GetNumRaidMembers() > 0) then
+		if (GetNumGroupMembers() > 5) then
 			t.mode = "raid"
 			t.id = 1
-			t.r = GetNumRaidMembers()
+			t.r = GetNumGroupMembers()
 		else
 			t.mode = "party"
 			t.id = 0
-			t.p = GetNumPartyMembers()
+			t.p = GetNumGroupMembers()
 		end
 		return iter, t
 	end

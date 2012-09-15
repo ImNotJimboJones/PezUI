@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 174 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 176 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -586,6 +586,8 @@ local function DifficultyString(instance, diff, toon, expired)
 		local inst = vars.db.Instances[instance]
 		if inst.Expansion == 0 and inst.Raid then
 		  setting = "R0"
+		elseif inst.Raid and diff <= 2 then -- ticket 94: temporary hack for old 4.8.1 data
+		  setting = "R"..diff
 		elseif inst.Raid then
 		  setting = "R"..(diff-2)
 		else

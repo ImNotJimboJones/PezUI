@@ -48,6 +48,7 @@ local UnitIsCharmed = UnitIsCharmed;
 local UnitCanAttack = UnitCanAttack;
 local UnitName = UnitName;
 local UnitIsEnemy = UnitIsEnemy;
+local UnitIsTrivial = UnitIsTrivial;
 local GetSpellCooldown = GetSpellCooldown;
 local HasFullControl = HasFullControl;
 local pairs = pairs;
@@ -367,6 +368,9 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 			VUHDO_parseCombatLogEvent(anArg2, anArg8, anArg11, anArg13, anArg15);
 			if (sShowShieldAbsorb) then
 				VUHDO_parseCombatLogShieldAbsorb(anArg2, anArg4, anArg8, anArg13, anArg16, anArg12, anArg17);
+				--[[if ("SPELL_AURA_REFRESH" == anArg2) then
+					VUHDO_xMsg(anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16, anArg17);
+				end]]
 			end
 		end
 	elseif ("UNIT_AURA" == anEvent) then
@@ -409,6 +413,12 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 	if (VUHDO_VARIABLES_LOADED) then
 		VUHDO_updateThreat(anArg1);
 	end
+	elseif ("PLAYER_REGEN_ENABLED" == anEvent) then
+			if (VUHDO_VARIABLES_LOADED) then
+				for tUnit, _ in pairs(VUHDO_RAID) do
+					VUHDO_updateThreat(tUnit);
+				end
+			end
 
 	elseif ("UNIT_MAXHEALTH" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
@@ -985,13 +995,15 @@ local function VUHDO_updateAllRange()
 				 and (1 == IsSpellInRange(sRangeSpell, tUnit)
 							or ((tInfo["dead"] or tInfo["charmed"]) and tInfo["baseRange"])
 							or "player" == tUnit
-							or ((tUnit == "focus" or tUnit == "target") and CheckInteractDistance(tUnit, 1))
+							or ((tUnit == "focus" or tUnit == "target")
+								and UnitIsTrivial("target") and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
 						 );
 		else
 			tIsInRange
 				= tInfo["connected"]
 				 and (tInfo["baseRange"]
-							or ((tUnit == "focus" or tUnit == "target") and CheckInteractDistance(tUnit, 1))
+							or ((tUnit == "focus" or tUnit == "target")
+								and UnitIsTrivial("target") and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
 						 );
 		end
 
@@ -1004,8 +1016,8 @@ local function VUHDO_updateAllRange()
 				VUHDO_updateDirectionFrame();
 			end
 		end
-
 	end
+
 end
 
 
@@ -1449,7 +1461,8 @@ local VUHDO_ALL_EVENTS = {
 	--"UPDATE_MACROS",
 	"UNIT_FACTION",
 	"INCOMING_RESURRECT_CHANGED",
-	"PET_BATTLE_CLOSE", "PET_BATTLE_OPENING_START"
+	"PET_BATTLE_CLOSE", "PET_BATTLE_OPENING_START",
+	"PLAYER_REGEN_ENABLED"
 };
 
 

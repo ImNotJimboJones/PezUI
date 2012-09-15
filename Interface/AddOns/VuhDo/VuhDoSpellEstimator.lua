@@ -36,6 +36,7 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.BUFF_BEACON_OF_LIGHT] = { ["isHot"] = true, },
 	[VUHDO_SPELL_ID.SACRED_SHIELD] = { ["isHot"] = true, },
 	[VUHDO_SPELL_ID.ETERNAL_FLAME] = { ["isHot"] = true, },
+	[VUHDO_SPELL_ID.ILLUMINATED_HEALING] = { ["isHot"] = true, },
 
 	-- Priest
 	[VUHDO_SPELL_ID.BUFF_FEAR_WARD] = { ["nostance"] = true },
@@ -74,6 +75,9 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.ENVELOPING_MIST] = {["isHot"] = true },
 	[VUHDO_SPELL_ID.RENEWING_MIST] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.ZEN_SPHERE] = { ["isHot"] = true },
+
+	-- Mage
+	[VUHDO_SPELL_ID.ICE_BARRIER] = { ["isHot"] = true },
 };
 local VUHDO_SPELLS = VUHDO_SPELLS;
 

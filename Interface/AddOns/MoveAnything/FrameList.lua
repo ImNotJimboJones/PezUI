@@ -54,6 +54,8 @@ m = {
 		API:AddElement({name = "AchievementFrame", displayName = "Achievements"}, c)
 		API:AddElement({name = "AchievementAlertFrame1", displayName = "Achievement Alert 1", runOnce = AchievementFrame_LoadUI, create = "AchievementAlertFrameTemplate"}, c)
 		API:AddElement({name = "AchievementAlertFrame2", displayName = "Achievement Alert 2", runOnce = AchievementFrame_LoadUI, create = "AchievementAlertFrameTemplate"}, c)
+		API:AddElement({name = "CriteriaAlertFrame1", displayName = "Criteria Alert 1", create = "CriteriaAlertFrameTemplate"}, c)
+		API:AddElement({name = "CriteriaAlertFrame2", displayName = "Criteria Alert 2", create = "CriteriaAlertFrameTemplate"}, c)
 		local gcaf = API:AddElement({name = "GuildChallengeAlertFrame", displayName = "Guild Challenge Achievement Alert"}, c)
 		API:AddElement({name = "WatchFrame", displayName = "Tracker", scaleWH = 1}, c)
 		local qldf = API:AddElement({name = "QuestLogDetailFrame", displayName = "Quest Details", runOnce = function()
@@ -98,7 +100,10 @@ m = {
 	--	API:AddElement({name = "BattlefieldFrame", displayName = "Battleground Queue"}, c)
 		API:AddElement({name = "WorldStateScoreFrame", displayName = "Battleground Score"}, c)
 		API:AddElement({name = "WorldStateCaptureBar1", displayName = "Flag Capture Timer Bar", onlyOnceCreated = 1}, c)
-
+		API:AddElement({name = "WorldStateAlwaysUpFrame", displayName = "AlwaysUp Parent"}, c)
+		API:AddElement({name = "AlwaysUpFrame1", displayName = "AlwaysUp Frame 1", create = "WorldStateAlwaysUpTemplate", onlyOnceCreated = 1}, c)
+		API:AddElement({name = "AlwaysUpFrame2", displayName = "AlwaysUp Frame 2", create = "WorldStateAlwaysUpTemplate", onlyOnceCreated = 1}, c)
+		
 		c = API:GetCategory("Blizzard Bags")
 		API:AddElement({name = "BagsMover", displayName = "All Bags", noHide = 1}, c)
 		API:AddElement({name = "BagButtonsMover", displayName = "Bag Buttons"}, c)
@@ -339,7 +344,10 @@ m = {
 		qldf:AddCategory(c)
 		qlf:AddCategory(c)
 		qf:AddCategory(c)
+		
 		API:AddElement({name = "SpellBookFrame", displayName = "Spellbook / Professions"}, c)
+		
+		
 		API:AddElement({name = "PetJournalParent", displayName = "Mounts / Pets"}, c)
 		API:AddElement({name = "TabardFrame", displayName = "Tabard Design"}, c)
 		API:AddElement({name = "PlayerTalentFrame", displayName = "Talents / Glyphs", refuseSync = MOVANY.FRAME_ONLY_ONCE_OPENED}, c)
@@ -355,10 +363,22 @@ m = {
 		API:AddElement({name = "BonusRollLootWonFrame", displayName = "Loot Won Frame", create = "LootWonAlertFrameTemplate"}, c)
 		API:AddElement({name = "BonusRollMoneyWonFrame", displayName = "Bonus Roll Money Won Frame", create = "MoneyWonAlertFrameTemplate"}, c)
 		API:AddElement({name = "MissingLootFrame", displayName = "Missing Loot Frame"}, c)
-		API:AddElement({name = "GroupLootFrame1", displayName = "Loot Roll 1", create = "GroupLootFrameTemplate"}, c)
-		API:AddElement({name = "GroupLootFrame2", displayName = "Loot Roll 2", create = "GroupLootFrameTemplate"}, c)
-		API:AddElement({name = "GroupLootFrame3", displayName = "Loot Roll 3", create = "GroupLootFrameTemplate"}, c)
-		API:AddElement({name = "GroupLootFrame4", displayName = "Loot Roll 4", create = "GroupLootFrameTemplate"}, c)
+		API:AddElement({name = "GroupLootFrame1", displayName = "Loot Roll 1", create = "GroupLootFrameTemplate", runOnce = function()
+			local f = _G.GroupLootFrame1
+			f.rollID = 1
+			end}, c)
+		API:AddElement({name = "GroupLootFrame2", displayName = "Loot Roll 2", create = "GroupLootFrameTemplate", runOnce = function()
+			local f = _G.GroupLootFrame2
+			f.rollID = 2
+			end}, c)
+		API:AddElement({name = "GroupLootFrame3", displayName = "Loot Roll 3", create = "GroupLootFrameTemplate", runOnce = function()
+			local f = _G.GroupLootFrame3
+			f.rollID = 3
+			end}, c)
+		API:AddElement({name = "GroupLootFrame4", displayName = "Loot Roll 4", create = "GroupLootFrameTemplate", runOnce = function()
+			local f = _G.GroupLootFrame4
+			f.rollID = 4
+			end}, c)
 
 		c = API:GetCategory("Minimap")
 		API:AddElement({name = "MinimapCluster", displayName = "MiniMap"}, c)

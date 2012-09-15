@@ -1,5 +1,6 @@
-local L = LibStub('AceLocale-3.0'):GetLocale('RaidBuffStatus')
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 473 $", ".* (.*) .*"))
+local addonName, vars = ...
+local L = vars.L
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 530 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -310,16 +311,6 @@ local options = {
 							RaidBuffStatus:CancelTimer(RaidBuffStatus.timer)
 							RaidBuffStatus.timer = RaidBuffStatus:ScheduleRepeatingTimer(RaidBuffStatus.DoReport, RaidBuffStatus.db.profile.HowOften)
 						end
-					end,
-				},
-				shortmissingblessing = {
-					type = 'toggle',
-					name = L["Short missing blessing"],
-					desc = L["When showing the names of the missing Paladin blessings, show them in short form"],
-					order = 11,
-					get = function(info) return RaidBuffStatus.db.profile.ShortMissingBlessing end,
-					set = function(info, v)
-						RaidBuffStatus.db.profile.ShortMissingBlessing = v
 					end,
 				},
 				whisperonlyone = {
@@ -966,6 +957,7 @@ local options = {
 				},
 			},
 		},
+		--[[
 		tanklist = {
 			type = 'group',
 			name = L["Tank list"],
@@ -983,6 +975,7 @@ local options = {
 				},
 			},
 		},
+		--]]
 		tankwarnings = {
 			type = 'group',
 			name = L["Tank warnings"],

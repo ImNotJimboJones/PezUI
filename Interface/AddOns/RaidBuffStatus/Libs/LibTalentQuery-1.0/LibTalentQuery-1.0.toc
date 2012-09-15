@@ -8,7 +8,7 @@
 ## X-ReleaseDate: $Date: 2010-10-17 04:35:37 +0000 (Sun, 17 Oct 2010) $
 ## X-Website: http://wowace.com/wiki/LibTalentQuery-1.0
 ## X-License: LGPL v2.1
-## X-Curse-Packaged-Version: r87
+## X-Curse-Packaged-Version: r89
 ## X-Curse-Project-Name: LibTalentQuery-1.0
 ## X-Curse-Project-ID: libtalentquery-1-0
 ## X-Curse-Repository-ID: wow/libtalentquery-1-0/mainline

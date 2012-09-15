@@ -147,15 +147,15 @@ local VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = {
 		["1"] = {"", "1", VUHDO_SPELL_ID.FLASH_OF_LIGHT},
 		["2"] = {"", "2", VUHDO_SPELL_ID.PALA_CLEANSE},
 		["3"] = {"", "3", "menu"},
-		--["4"] = {"", "4", VUHDO_SPELL_ID.DIVINE_FAVOR}, -- MOP
-		["5"] = {"", "5", VUHDO_SPELL_ID.DIVINE_ILLUMINATION},
+		["4"] = {"", "4", VUHDO_SPELL_ID.LIGHT_OF_DAWN},
+		["5"] = {"", "5", VUHDO_SPELL_ID.SACRED_SHIELD},
 
 		["alt1"] = {"alt-", "1", "target"},
 
 		["ctrl1"] = {"ctrl-", "1", VUHDO_SPELL_ID.HOLY_LIGHT},
-		["ctrl2"] = {"ctrl-", "2", VUHDO_SPELL_ID.HOLY_LIGHT},
+		["ctrl2"] = {"ctrl-", "2", VUHDO_SPELL_ID.HOLY_SHOCK},
 
-		["shift1"] = {"shift-", "1", VUHDO_SPELL_ID.HOLY_SHOCK},
+		["shift1"] = {"shift-", "1", VUHDO_SPELL_ID.HOLY_RADIANCE},
 		["shift2"] = {"shift-", "2", VUHDO_SPELL_ID.LAY_ON_HANDS},
 	},
 
@@ -367,9 +367,7 @@ end
 
 --
 local function VUHDO_assignDefaultSpells()
-	local tClass;
-
-	_, tClass = UnitClass("player");
+	local _, tClass = UnitClass("player");
 
 	if ((VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT or {})[tClass] ~= nil) then
 		VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass]);

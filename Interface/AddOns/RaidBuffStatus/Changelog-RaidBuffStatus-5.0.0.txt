@@ -1,0 +1,219 @@
+------------------------------------------------------------------------
+r539 | oscarucb | 2012-09-14 18:35:51 +0000 (Fri, 14 Sep 2012) | 1 line
+Changed paths:
+   A /tags/5.0.0 (from /trunk:538)
+
+Tagging as 5.0.0
+------------------------------------------------------------------------
+r537 | oscarucb | 2012-09-13 15:31:47 +0000 (Thu, 13 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+remove outdated TBC zone flask code and related locale strings
+
+------------------------------------------------------------------------
+r536 | oscarucb | 2012-09-13 03:19:42 +0000 (Thu, 13 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+more factorization
+
+------------------------------------------------------------------------
+r535 | oscarucb | 2012-09-13 02:06:21 +0000 (Thu, 13 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/.pkgmeta
+   D /trunk/license.txt
+
+update license
+
+------------------------------------------------------------------------
+r534 | oscarucb | 2012-09-13 00:52:33 +0000 (Thu, 13 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+lots of factorization cleanup of buffs
+
+------------------------------------------------------------------------
+r533 | oscarucb | 2012-09-12 23:28:02 +0000 (Wed, 12 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+tweak raid buffing to work when targetting a friendly NPC
+
+------------------------------------------------------------------------
+r532 | oscarucb | 2012-09-12 21:22:33 +0000 (Wed, 12 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+add framework to help in buff factorization
+extend levitate to include slow fall
+
+------------------------------------------------------------------------
+r531 | oscarucb | 2012-09-12 19:35:39 +0000 (Wed, 12 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+add monks to a few places
+
+------------------------------------------------------------------------
+r530 | oscarucb | 2012-09-12 15:10:47 +0000 (Wed, 12 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+clean up and remove obsolete locale strings
+
+------------------------------------------------------------------------
+r528 | oscarucb | 2012-09-11 22:25:26 +0000 (Tue, 11 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/RaidBuffStatus.toc
+   M /trunk/locale.lua
+
+fix ticket 358: handle subnamespace localization
+toc updates
+
+------------------------------------------------------------------------
+r527 | oscarucb | 2012-09-11 22:09:44 +0000 (Tue, 11 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/locale.lua
+
+try again
+
+------------------------------------------------------------------------
+r526 | oscarucb | 2012-09-11 22:05:43 +0000 (Tue, 11 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/locale.lua
+
+possible fix for ticket 358
+
+------------------------------------------------------------------------
+r524 | oscarucb | 2012-09-11 09:58:41 +0000 (Tue, 11 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+improve role detection- use blizzard roles when available, otherwise fall back to talent info once we have it
+
+------------------------------------------------------------------------
+r523 | oscarucb | 2012-09-11 09:05:18 +0000 (Tue, 11 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+tweak wepbuff
+
+------------------------------------------------------------------------
+r522 | oscarucb | 2012-09-11 08:20:17 +0000 (Tue, 11 Sep 2012) | 4 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+first crack at primary buffs: add statbuff, masterybuff, critbuff
+remove dead code
+fix group autoaccept
+
+------------------------------------------------------------------------
+r521 | oscarucb | 2012-09-11 06:38:40 +0000 (Tue, 11 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+cleanup some init code
+
+------------------------------------------------------------------------
+r520 | oscarucb | 2012-09-10 23:23:59 +0000 (Mon, 10 Sep 2012) | 4 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+merge dark intent and intel into spbuff
+add some spellids
+other misc cleanups
+
+------------------------------------------------------------------------
+r519 | oscarucb | 2012-09-10 22:21:15 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/embeds.xml
+
+stub out LibGroupTalents for now
+
+------------------------------------------------------------------------
+r518 | oscarucb | 2012-09-10 22:10:38 +0000 (Mon, 10 Sep 2012) | 3 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+fix rogue weapon buffs
+shaman weapon buff detection will remain broken for awhile
+
+------------------------------------------------------------------------
+r517 | oscarucb | 2012-09-10 21:00:50 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+minor fix to last
+
+------------------------------------------------------------------------
+r516 | oscarucb | 2012-09-10 20:53:04 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+more random updates
+
+------------------------------------------------------------------------
+r515 | oscarucb | 2012-09-10 09:08:11 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+fix runescrolls
+
+------------------------------------------------------------------------
+r514 | oscarucb | 2012-09-10 08:55:56 +0000 (Mon, 10 Sep 2012) | 4 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+remove a large number of talents and spells that either no longer exist,
+have changed to be short combat cds, or have become static auras and therefore need not be checked
+update a few spellids
+
+------------------------------------------------------------------------
+r513 | oscarucb | 2012-09-10 08:28:29 +0000 (Mon, 10 Sep 2012) | 4 lines
+Changed paths:
+   M /trunk
+   M /trunk/.pkgmeta
+   M /trunk/Buffs.lua
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+   D /trunk/Localization
+   M /trunk/MiniMap.lua
+   M /trunk/RaidBuffStatus.toc
+   D /trunk/ReadMe.txt
+   M /trunk/ToolScanner.lua
+   M /trunk/embeds.xml
+   A /trunk/locale.lua
+   M /trunk/oRAEvent.lua
+
+replace AceLocale with my streamlined locale.lua, adding itIT support
+remove outdated readme
+misc high-level cleanups
+
+------------------------------------------------------------------------
+r512 | oscarucb | 2012-09-10 00:25:27 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/RaidBuffStatus.toc
+
+toc fixes
+
+------------------------------------------------------------------------
+r511 | oscarucb | 2012-09-10 00:22:54 +0000 (Mon, 10 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+first set of 5.x API changes, still far from working
+
+------------------------------------------------------------------------

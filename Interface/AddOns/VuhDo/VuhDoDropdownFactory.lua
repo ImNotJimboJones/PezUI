@@ -142,7 +142,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 		local tBuffName;
 
 		for _, tBuffName in pairs(tUniqueBuffs) do
-			local tCategory = strsub(VUHDO_getBuffCategory(tBuffName), 3);
+			local tCategory = VUHDO_getBuffCategory(tBuffName);
 			tInfo = UIDropDownMenu_CreateInfo();
 			tInfo["text"] = tBuffName;
 			tInfo["arg1"] = tName;

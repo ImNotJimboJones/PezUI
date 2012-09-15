@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r175 | oscarucb | 2012-09-13 18:17:28 +0000 (Thu, 13 Sep 2012) | 1 line
+r177 | oscarucb | 2012-09-15 13:19:39 +0000 (Sat, 15 Sep 2012) | 1 line
 Changed paths:
-   A /tags/4.8.3 (from /trunk:174)
+   A /tags/4.8.4 (from /trunk:176)
 
-Tagging as 4.8.3
+Tagging as 4.8.4
+------------------------------------------------------------------------
+r176 | oscarucb | 2012-09-15 13:18:57 +0000 (Sat, 15 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 94: temporary hack for old 4.8.1 data
+
 ------------------------------------------------------------------------
 r174 | oscarucb | 2012-09-13 18:16:56 +0000 (Thu, 13 Sep 2012) | 2 lines
 Changed paths:

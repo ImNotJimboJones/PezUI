@@ -2,7 +2,7 @@
 -- Based on the Bongos minimap button
 
 local RBSMinimapButton = CreateFrame('Button', 'RBSMinimapButton', Minimap)
-RBS_svnrev["MiniMap.lua"] = select(3,string.find("$Revision: 388 $", ".* (.*) .*"))
+RBS_svnrev["MiniMap.lua"] = select(3,string.find("$Revision: 513 $", ".* (.*) .*"))
 
 function RBSMinimapButton:Load()
 	self:SetWidth(31); self:SetHeight(31)

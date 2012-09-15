@@ -1,10 +1,11 @@
-local L = LibStub('AceLocale-3.0'):GetLocale('RaidBuffStatus')
-local longtoshortblessing = RaidBuffStatus.longtoshortblessing
+local addonName, vars = ...
+local L = vars.L
+local addon = RaidBuffStatus
 local SP = RaidBuffStatus.SP
 local GT = RaidBuffStatus.GT
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 509 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 537 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -271,7 +272,10 @@ for _,v in ipairs (catagelixirs) do
 	table.insert(lessoldgelixirs,v)
 end
 
-
+local allclasses = {}
+for _,c in pairs(CLASS_SORT_ORDER) do
+  allclasses[c] = true
+end
 
 local foods = {
 	SpellName(35272), -- Well Fed
@@ -288,40 +292,49 @@ local allfoods = {
 }
 
 local fortitude = {
-	SpellName(21562), -- Prayer of Fortitude
-	SpellName(6307), -- Blood Pact
+	SpellName(21562), 	-- Prayer of Fortitude
+	SpellName(6307),	-- Blood Pact
+	SpellName(469),     	-- Commanding Shout
+        SpellName(90364),   	-- Qiraji Fortitude
 }
 
-local wild = {
-	SpellName(1126), -- Mark of the Wild
-	SpellName(20217), -- Blessing of Kings
+local statbuff = {
+	SpellName(1126), 	-- Mark of the Wild
+	SpellName(20217), 	-- Blessing of Kings
+        SpellName(117666), 	-- Legacy of the Emperor
+        SpellName(90363),   	-- Embrace of the Shale Spider
 }
 
-local intellect = {
-	SpellName(1459), -- Arcane Intellect
-	SpellName(61316), -- Dalaran Brilliance
+local masterybuff = { 
+        SpellName(19740),           -- Blessing of Might
+        SpellName(116956),          -- Grace of Air
+        SpellName(93435),           -- Roar of Courage
+        SpellName(128997),          -- Spirit Beast Blessing        
+} 
+
+local spbuff = { 
+	SpellName(1459), 	-- Arcane Intellect
+	SpellName(61316), 	-- Dalaran Brilliance
+        SpellName(109773), 	-- Dark Intent
+        SpellName(77747), 	-- Burning Wrath
+        SpellName(126309), 	-- Still Water
 }
 
-local spirit = {
-	SpellName(14752), -- Divine Spirit
-	SpellName(27681), -- Prayer of Spirit
-}
-
-local shadow = {
-	SpellName(27683), -- Prayer of Shadow Protection
-}
-
-local auras = {
-	SpellName(32223), -- Crusader Aura
-	SpellName(465), -- Devotion Aura
-	SpellName(7294), -- Retribution Aura
-	SpellName(19746), -- Concentration Aura
-	SpellName(19726), -- Resistance Aura
+local critbuff = {
+        SpellName(116781),	-- Legacy of the White Tiger
+        SpellName(17007), 	-- Leader of the Pack
+        SpellName(1459), 	-- Arcane Brilliance
+        SpellName(61316),	-- Dalaran Brilliance
+        SpellName(24604), 	-- Furious Howl
+        SpellName(90309), 	-- Terrifying Roar
+        SpellName(97229), 	-- Bellowing Roar
+        SpellName(126373),	-- Fearless Roar
+        SpellName(126309),	-- Still Water        
 }
 
 local aspects = {
 	SpellName(13165), -- Aspect of the Hawk
-	SpellName(20043), -- Aspect of the Wild
+	SpellName(109260), -- Aspect of the Iron Hawk
 	SpellName(5118), -- Aspect of the Cheetah
 	SpellName(13159), -- Aspect of the Pack
 	SpellName(82661),  -- Aspect of the Fox	
@@ -351,21 +364,6 @@ local seals = {
 	SpellName(20154), -- Seal of Righteousness	
 }
 
-local blessingofforgottenkings = {
-	BS[69378], -- Blessing of Forgotten Kings
-	BS[20217], -- Blessing of Kings
-}
-
-
---local allblessings = {}
---table.insert(allblessings, blessingofkings)
---table.insert(allblessings, blessingofmight)
-
---local nametoblessinglist = {}
---nametoblessinglist[BS[20217]] = blessingofkings -- Blessing of Kings
---nametoblessinglist[BS[19740]] = blessingofmight -- Blessing of Might
---RaidBuffStatus.nametoblessinglist = nametoblessinglist
-
 local scrollofagility = {
 	BS[8115], -- Agility
 }
@@ -390,51 +388,10 @@ local scrollofprotection = {
 scrollofprotection.name = BS[42206] -- Protection
 scrollofprotection.shortname = L["Prot"]
 
-local scrollofspirit = {
-	BS[8112], -- Spirit
-}
-scrollofspirit.name = BS[8112] -- Spirit
-scrollofspirit.shortname = L["Spi"]
-
---local flaskzones = {
---	gruul = {
---		zones = {
---			L["Gruul's Lair"],
---		},
---		flasks = {
---			SpellName(40567), -- 40567 Unstable Flask of the Bandit
---			SpellName(40568), -- 40568 Unstable Flask of the Elder
---			SpellName(40572), -- 40572 Unstable Flask of the Beast
---			SpellName(40573), -- 40573 Unstable Flask of the Physician
---			SpellName(40575), -- 40575 Unstable Flask of the Soldier
---			SpellName(40576), -- 40576 Unstable Flask of the Sorcerer
---		},
---	},
---	shattrath = {
---		zones = {
---			L["Tempest Keep"],
---			L["Serpentshrine Cavern"],
---			L["Black Temple"],
---			L["Sunwell Plateau"],
---			L["Hyjal Summit"],
---		},
---		flasks = {
---			SpellName(41608), -- 41608 Relentless Assault of Shattrath
---			SpellName(41609), -- 41609 Fortification of Shattrath
---			SpellName(41610), -- 41610 Mighty Restoration of Shattrath
---			SpellName(41611), -- 41611 Sureme Power of Shattrath
---			SpellName(46837), -- 46837 Pure Death of Shattrath
---			SpellName(46839), -- 46839 Blinding Light of Shattrath
---		},
---	},
---}
-
 local roguewepbuffs = {
-	-- L["( Poison ?[IVX]*)"], -- Anesthetic Poison, Deadly Poison [IVX]*, Crippling Poison [IVX]*, Wound Poison [IVX]*, Instant Poison [IVX]*, Mind-numbing Poison [IVX]*
-	BS[8680],  -- Instant
 	BS[2818],  -- Deadly
 	BS[3409],  -- Crippling
-	BS[13218], -- Wound 
+	BS[8679],  -- Wound 
 	BS[5760],  -- Mind-numbing
 }
 
@@ -446,6 +403,96 @@ local shamanwepbuffs = {
 	L["(Windfury)"], -- Shaman self buff
 }
 
+local function getbuffinfo(buffinfo_or_checkname)
+  local r = buffinfo_or_checkname
+  if r and type(r) == "string" then
+    local check = RaidBuffStatus.BF[r]
+    if not check then
+      geterrorhandler()("Bad checkname specified for buffinfo: "..r)
+    end
+    r = check.buffinfo
+  end
+  if not r then
+     geterrorhandler()("missing buffinfo")
+  end
+  return r
+end
+
+local function player_spell(buffinfo)
+  local _, class = UnitClass("player")
+  for _,info in ipairs(getbuffinfo(buffinfo)) do
+    if info[1] == class then
+       return BS[info[2]]
+    end
+  end
+  return nil
+end
+
+local function generic_buffers(buffinfo)
+  local ret = {}
+  for _,info in ipairs(getbuffinfo(buffinfo)) do
+    for name,unit in pairs(raid.classes[info[1]]) do
+       table.insert(ret, name)
+    end
+  end
+  return ret
+end
+
+local function generic_whispertobuff(reportl, prefix, buffinfo, buffers, buffname)
+  local targets
+  if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
+    targets = L["MANY!"]
+  else
+    targets = table.concat(reportl, ", ")
+  end
+
+  if buffers then
+    for _, name in ipairs(buffers) do
+      name = string.sub(name, 1, name:find("%(") - 1)
+      local unit = RaidBuffStatus:GetUnitFromName(name)
+      if unit and RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead then
+         RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, name)
+         if RaidBuffStatus.db.profile.whisperonlyone then
+            return
+         end
+      end
+    end
+    return
+  end
+
+  local priority 
+  for _,info in ipairs(getbuffinfo(buffinfo)) do -- for each class
+    if priority and (info[3] ~= priority) then
+        return -- already whispered a higher priority class
+    end
+    for name,unit in pairs(raid.classes[info[1]]) do  -- foreach unit of that class
+        if RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead then
+	   buffname = buffname or BS[info[2]]
+           RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, name)
+           if RaidBuffStatus.db.profile.whisperonlyone then
+              return
+           else
+              priority = info[3]
+           end
+        end
+     end
+  end
+end
+
+function RaidBuffStatus:ValidateSpellIDs()
+  for checkname, info in pairs(RaidBuffStatus.BF) do
+    local buffinfo = info.buffinfo
+    if buffinfo then
+      for _, info in ipairs(buffinfo) do
+        if not info[1] or not allclasses[info[1]] or 
+	   (info[3] and type(info[3]) ~= "number") then
+	  geterrorhandler()("bad buffinfo entry in check: "..checkname)
+	end
+	local spell = BS[info[2]] -- this throws error if spellid is bad
+      end
+    end
+  end
+end
 
 local BF = {
 	pvp = {											-- button name
@@ -486,99 +533,7 @@ local BF = {
 		raidbuff = nil,
 		other = true,
 	},
-	crusader = {
-		order = 990,
-		list = "crusaderlist",
-		check = "checkcrusader",
-		default = true,
-		defaultbuff = false,
-		defaultwarning = true,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		timer = false,
-		class = { PALADIN = true, },
-		chat = BS[32223], -- Crusader Aura
-		pre = function(self, raid, report)
-			report.whoescrusader = {}
-		end,
-		main = function(self, name, class, unit, raid, report)
-			if class == "PALADIN" then
-				report.checking.crusader = true
-				if unit.hasbuff[BS[32223]] then -- Crusader Aura
-					local _, _, _, _, _, _, _, caster = UnitBuff(unit.unitid, BS[32223]) -- Crusader Aura
-					if caster then
-						report.whoescrusader[RaidBuffStatus:UnitNameRealm(caster)] = true
-					end
-				end
-			end
-		end,
-		post = function(self, raid, report)
-			for name, _ in pairs(report.whoescrusader) do
-				table.insert(report.crusaderlist, name)
-			end
-		end,
-		icon = BSI[32223], -- Crusader Aura
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.crusaderlist, RaidBuffStatus.db.profile.checkcrusader, report.checking.crusader or false, report.crusaderlist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "crusader", RaidBuffStatus:SelectPalaAura())
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Paladin has Crusader Aura"], report.crusaderlist)
-		end,
-		whispertobuff = nil,
-		singlebuff = nil,
-		partybuff = nil,
-		raidbuff = nil,
-		raidwidebuff = true,
-	},
 
---	shadows = {
---		order = 980,
---		list = "shadowslist",
---		check = "checkshadows",
---		default = false,
---		defaultbuff = false,
---		defaultwarning = true,
---		defaultdash = false,
---		defaultdashcombat = false,
---		defaultboss = true,
---		defaulttrash = true,
---		checkzonedout = false,
---		selfbuff = true,
---		timer = false,
---		chat = L["Shadow Resistance Aura AND Shadow Protection"],
---		main = function(self, name, class, unit, raid, report)
---			if raid.ClassNumbers.PRIEST > 0 then
---				if class == "PALADIN" then
---					report.checking.shadows = true
---					if unit.hasbuff[BS[19891]] then -- Resistance Aura
---						table.insert(report.shadowslist, name)
---					end
---				end
---			end
---		end,
---		post = nil,
---		icon = BSI[27683], -- Shadow Protection
---		update = function(self)
---			RaidBuffStatus:DefaultButtonUpdate(self, report.shadowslist, RaidBuffStatus.db.profile.checkshadows, report.checking.shadows or false, nil)
---		end,
---		click = function(self, button, down)
---			RaidBuffStatus:ButtonClick(self, button, down, "shadows", RaidBuffStatus:SelectPalaAura())
---		end,
---		tip = function(self)
---			RaidBuffStatus:Tooltip(self, L["Paladin has Shadow Resistance Aura AND Shadow Protection"], report.shadowslist)
---		end,
---		whispertobuff = nil,
---		singlebuff = nil,
---		partybuff = nil,
---		raidbuff = nil,
---	},
 	health = {
 		order = 970,
 		list = "healthlist",
@@ -593,7 +548,7 @@ local BF = {
 		checkzonedout = false,
 		selfbuff = true,
 		timer = false,
-		class = { WARRIOR = true, ROGUE = true, PRIEST = true, DRUID = true, PALADIN = true, HUNTER = true, MAGE = true, WARLOCK = true, SHAMAN = true, DEATHKNIGHT = true, },
+		class = allclasses,
 		chat = L["Health less than 80%"],
 		main = function(self, name, class, unit, raid, report)
 			if not unit.isdead then
@@ -634,7 +589,7 @@ local BF = {
 		checkzonedout = false,
 		selfbuff = true,
 		timer = false,
-		class = { PRIEST = true, DRUID = true, PALADIN = true, MAGE = true, WARLOCK = true, SHAMAN = true, },
+		class = { PRIEST = true, DRUID = true, PALADIN = true, MAGE = true, WARLOCK = true, SHAMAN = true, MONK = true },
 		chat = L["Mana less than 80%"],
 		main = function(self, name, class, unit, raid, report)
 			if unit.isdead then
@@ -809,7 +764,8 @@ local BF = {
 		checkzonedout = true,
 		selfbuff = false,
 		timer = true,
-		class = { PRIEST = true, DRUID = true, PALADIN = true, SHAMAN = true, },
+		class = allclasses,
+		buffinfo = { { "PRIEST", 2006 }, { "DRUID", 50769 }, { "PALADIN", 7328 }, { "SHAMAN", 2008 }, { "MONK", 115178 } },
 		chat = L["Dead"],
 		main = function(self, name, class, unit, raid, report)
 			if unit.isdead then
@@ -819,44 +775,22 @@ local BF = {
 		post = nil,
 		icon = "Interface\\Icons\\Spell_Holy_SenseUndead",
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.deadlist, RaidBuffStatus.db.profile.checkdead, true, RaidBuffStatus.BF.dead:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.deadlist, RaidBuffStatus.db.profile.checkdead, true, generic_buffers("dead"))
 		end,
 		click = function(self, button, down)
-			local rezspell = RaidBuffStatus:SelectRezSpell()
+			local rezspell
+			if not InCombatLockdown() then
+			  rezspell = player_spell("dead") or BS[83968] -- mass resurrection
+			end
 			RaidBuffStatus:ButtonClick(self, button, down, "dead", rezspell, nil, nil, true)
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Player is Dead"], report.deadlist, raid.BuffTimers.deadtimerlist, RaidBuffStatus.BF.dead:buffers())
+			RaidBuffStatus:Tooltip(self, L["Player is Dead"], report.deadlist, raid.BuffTimers.deadtimerlist, generic_buffers("dead"))
 		end,
 		singlebuff = true,
 		partybuff = false,
 		raidbuff = false,
-		whispertobuff = function(reportl, prefix)
-			local therezers = RaidBuffStatus.BF.dead:buffers()
-			for _,name in ipairs(therezers) do
-				if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-					RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.dead.chat .. ">: " .. L["MANY!"], name)
-				else
-					RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.dead.chat .. ">: " .. table.concat(reportl, ", "), name)
-				end
-			end
-		end,
-		buffers = function()
-			local therezers = {}
-			for name,_ in pairs(raid.classes.DRUID) do
-				table.insert(therezers, name)
-			end
-			for name,_ in pairs(raid.classes.PALADIN) do
-				table.insert(therezers, name)
-			end
-			for name,_ in pairs(raid.classes.SHAMAN) do
-				table.insert(therezers, name)
-			end
-			for name,_ in pairs(raid.classes.PRIEST) do
-				table.insert(therezers, name)
-			end
-			return therezers
-		end,
+		whispertobuff = function (reportl, prefix) generic_whispertobuff(reportl, prefix, "dead", nil, L["Dead"]) end,
 		other = true,
 	},
 	durability = {
@@ -1091,7 +1025,7 @@ local BF = {
 	},
 
 	righteousfury = {
-		order = 890,
+		order = 310,
 		list = "righteousfurylist",
 		check = "checkrighteousfury",
 		default = true,
@@ -1133,93 +1067,6 @@ local BF = {
 		singlebuff = nil,
 		partybuff = nil,
 		raidbuff = nil,
-	},
-
-
-	vigilancebuff = {
-		order = 876,
-		list = "vigilancebufflist",
-		check = "checkvigilancebuff",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = false,
-		checkzonedout = false,
-		selfbuff = false,
-		timer = false,
-		class = { WARRIOR = true, },
-		chat = function(report, raid, prefix, channel)
-			prefix = prefix or ""
-			if report.checking.vigilancebuff then
-				if #report.peoplegotvigilance < #raid.VigilanceTalent then
-					RaidBuffStatus:Say(prefix .. "<" .. L["Missing Vigilance"] .. ">: " .. L["Got"] .. " " .. #report.peoplegotvigilance .. " " .. L["expecting"] .. " " .. #raid.VigilanceTalent, nil, nil, channel)
-					RaidBuffStatus:Say(L["Slackers: "] .. table.concat(report.vigilanceslackers, ", "))
-				end
-			end
-		end,
-		pre = function(self, raid, report)
-			report.peoplegotvigilance = {}
-			report.havevigilance = {}
-			report.vigilanceslackers = {}
-		end,
-		main = function(self, name, class, unit, raid, report)
-			if # raid.VigilanceTalent < 1 then
-				return
-			end
-			report.checking.vigilancebuff = true
-			if unit.hasbuff[BS[50725]] then  -- Vigilance
-				table.insert(report.peoplegotvigilance , name)
-				report.havevigilance[name] = unit.hasbuff[BS[50725]].caster  -- Vigilance
-			end
-		end,
-		post = function(self, raid, report)
-			local missing = #raid.VigilanceTalent - #report.peoplegotvigilance
-			if missing > 0 then
-				report.vigilancebufflist = {}
-				for _, name in ipairs(raid.VigilanceTalent) do
-					local found = false
-					for _, caster in pairs(report.havevigilance) do
-						if caster == name then
-							found = true
-							break
-						end
-					end
-					if not found then
-						table.insert(report.vigilancebufflist, "raid")
-						table.insert(report.vigilanceslackers, name)
-					end
-				end
-			end
-		end,
-		icon = BSI[50725],  -- Vigilance
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.vigilancebufflist, RaidBuffStatus.db.profile.checkvigilancebuff, report.checking.vigilancebuff or false)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "vigilancebuff")
-		end,
-		tip = function(self)
-			if not report.peoplegotvigilance then  -- fixes error when tip being called from option window when not in a party/raid
-				RaidBuffStatus:Tooltip(self, L["Missing Vigilance"])
-			else
-				RaidBuffStatus:Tooltip(self, L["Missing Vigilance"], {L["Got"] .. " " .. #report.peoplegotvigilance, " " .. L["expecting"] .. " " .. #raid.VigilanceTalent}, nil, raid.VigilanceTalent, report.vigilanceslackers, nil, nil, nil, nil, nil, report.havevigilance)
-			end
-		end,
-		singlebuff = true,
-		partybuff = false,
-		raidbuff = false,
-		whispertobuff = function(reportl, prefix)
-			for _,name in pairs(report.vigilanceslackers) do
-				RaidBuffStatus:Say(prefix .. "<" .. L["Missing Vigilance"] .. "> " .. L["Got"] .. " " .. #report.peoplegotvigilance .. " " .. L["expecting"] .. " " .. #raid.VigilanceTalent, name)
-			end
-		end,
-		buffers = function()
-			return raid.VigilanceTalent
-		end,
-		singletarget = true,
 	},
 
 
@@ -1327,212 +1174,6 @@ local BF = {
 		singletarget = true,
 	},
 
-	focusmagic = {
-		order = 874,
-		list = "focusmagiclist",
-		check = "checkfocusmagic",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = false,
-		checkzonedout = false,
-		selfbuff = false,
-		timer = false,
-		class = { MAGE = true, },
-		chat = function(report, raid, prefix, channel)
-			prefix = prefix or ""
-			if report.checking.focusmagic then
-				if # report.focusmagiclist > 0 then
-					RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[54646] .. ">: " .. #report.focusmagiclist, nil, nil, channel)  -- Focus Magic
-					RaidBuffStatus:Say(L["Slackers: "] .. table.concat(report.focusmagicslackers, ", "))
-				end
-			end
-		end,
-		pre = function(self, raid, report)
-			report.peoplegotfocusmagic = {}
-			report.havefocusmagic = {}
-			report.magewithfocusmagic = {}
-			report.focusmagicslackers = {}
-		end,
-		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.MAGE < 1 then
-				return
-			end
-			if class == "MAGE" then
-				if raid.classes.MAGE[name].specialisations.focusmagic then
-					report.checking.focusmagic = true
-					table.insert(report.magewithfocusmagic, name)
-				end
-			end
-			if unit.hasbuff[BS[54646]] then  -- Focus Magic
-				table.insert(report.peoplegotfocusmagic, name)
-				report.havefocusmagic[name] = unit.hasbuff[BS[54646]].caster  -- Focus Magic
-			end  -- todo make it not allow non-magics to have it
-		end,
-		post = function(self, raid, report)
-			local missing = #report.magewithfocusmagic - #report.peoplegotfocusmagic
-			if missing > 0 then
-				report.focusmagiclist = {}
-				for _, name in ipairs(report.magewithfocusmagic) do
-					local found = false
-					for _, caster in pairs(report.havefocusmagic) do
-						if caster == name then
-							found = true
-							break
-						end
-					end
-					if not found then
-						table.insert(report.focusmagiclist, "raid")
-						table.insert(report.focusmagicslackers, name)
-					end
-				end
-			end
-		end,
-		icon = BSI[54646], -- Focus Magic
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.focusmagiclist, RaidBuffStatus.db.profile.checkfocusmagic, report.checking.focusmagic or false, RaidBuffStatus.BF.focusmagic:buffers())
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "focusmagic", BS[54646], nil, nil, true) -- Focus Magic
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[54646] .. ": " .. #report.focusmagiclist, nil, nil, RaidBuffStatus.BF.focusmagic:buffers(), report.focusmagicslackers, nil, nil, nil, nil, nil, report.havefocusmagic)
-		end,
-		singlebuff = true,
-		partybuff = false,
-		raidbuff = false,
-		whispertobuff = function(reportl, prefix)
-			prefix = prefix or ""
-			local themages = report.focusmagicslackers
-			for _,name in pairs(themages) do
-				if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-					RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[54646] .. ">: " .. L["MANY!"], name)
-				else
-					RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[54646] .. ">: " .. table.concat(reportl, ", "), name)
-				end
-			end
-		end,
-		buffers = function()
-			local themages = {}
-			for name,rcn in pairs(raid.classes.MAGE) do
-				if rcn.specialisations.focusmagic then
-					table.insert(themages, name)
-				end
-			end
-			return themages
-		end,
-		singletarget = true,
-	},
-
-	darkintent = {
-		order = 865,
-		list = "darkintentlist",
-		check = "checkdarkintent",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = false,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = false,
-		timer = false,
-		class = { WARLOCK = true, },
-		chat = function(report, raid, prefix, channel)
-			prefix = prefix or ""
-			if report.checking.darkintent then
-				local thelocks = RaidBuffStatus.BF.darkintent.buffers()
-				if #report.peoplegotdarkintent < #thelocks then
-					RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[80398] .. ">: " .. L["Got"] .. " " .. #report.peoplegotdarkintent .. " " .. L["expecting"] .. " " .. #thelocks, nil, nil, channel) -- Dark Intent
-					RaidBuffStatus:Say(L["Slackers: "] .. table.concat(report.darkintentslackers, ", "))
-				end
-			end
-		end,
-		pre = function(self, raid, report)
-			report.peoplegotdarkintent = {}
-			report.havedarkintent = {}
-			report.darkintentslackers = {}
-		end,
-		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.WARLOCK < 1 or #RaidBuffStatus.BF.darkintent.buffers() < 1 then
-				return
-			end
-			report.checking.darkintent = true
-			local hasbuff = unit.hasbuff[BS[80398]]  -- Dark Intent
-			if hasbuff then
-				if hasbuff.casterlist then
-					for i, caster in ipairs(hasbuff.casterlist) do
-						if caster ~= name then  -- don't count the Warlock's buff on themselves
-							table.insert(report.peoplegotdarkintent, name)
-							report.havedarkintent[name .. "-" .. i] = caster
-						end
-					end
-				elseif hasbuff.caster then
-					if hasbuff.caster ~= name then  -- don't count the Warlock's buff on themselves
-						table.insert(report.peoplegotdarkintent, name)
-						report.havedarkintent[name] = hasbuff.caster
-					end
-				end
-			end
-		end,
-		post = function(self, raid, report)
-			local thelocks = RaidBuffStatus.BF.darkintent.buffers()
-			local missing = #thelocks - #report.peoplegotdarkintent
-			if missing > 0 then
-				report.darkintentlist = {}
-				for _, name in ipairs(thelocks) do
-					local found = false
-					for _, caster in pairs(report.havedarkintent) do
-						if caster == name then
-							found = true
-							break
-						end
-					end
-					if not found then
-						table.insert(report.darkintentlist, "raid")
-						table.insert(report.darkintentslackers, name)
-					end
-				end
-			end
-		end,
-		icon = BSI[80398],  -- Dark Intent
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.darkintentlist, RaidBuffStatus.db.profile.checkdarkintent, report.checking.darkintent or false)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "darkintent")
-		end,
-		tip = function(self)
-			if not report.peoplegotdarkintent then  -- fixes error when tip being called from option window when not in a party/raid
-				RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[80398]) -- Dark Intent
-			else
-				RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[80398], {L["Got"] .. " " .. #report.peoplegotdarkintent, " " .. L["expecting"] .. " " .. #RaidBuffStatus.BF.darkintent.buffers()}, nil, RaidBuffStatus.BF.darkintent.buffers(), report.darkintentslackers, nil, nil, nil, nil, nil, report.havedarkintent)  -- Dark Intent
-			end
-		end,
-		singlebuff = true,
-		partybuff = false,
-		raidbuff = false,
-		whispertobuff = function(reportl, prefix)
-			thelocks = RaidBuffStatus.BF.darkintent.buffers()
-			for _,name in pairs(report.darkintentslackers) do
-				RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[80398] .. "> " .. L["Got"] .. " " .. #report.peoplegotdarkintent .. " " .. L["expecting"] .. " " .. #thelocks, name)  -- Dark Intent
-			end
-		end,
-		buffers = function()
-			local thelocks = {}
-			for name,_ in pairs(raid.classes.WARLOCK) do
-				table.insert(thelocks, name) -- should I check zone? maybe not
-			end
-			return thelocks
-		end,
-		singletarget = true,
-	},
-	
-	
 	soulstone = {
 		order = 860,
 		list = "nosoulstonelist",
@@ -1880,7 +1521,7 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		core = true,
-		class = { WARRIOR = true, ROGUE = true, PRIEST = true, DRUID = true, PALADIN = true, HUNTER = true, MAGE = true, WARLOCK = true, SHAMAN = true, DEATHKNIGHT = true, },
+		class = allclasses,
 		chat = BS[35272], -- Well Fed
 		main = function(self, name, class, unit, raid, report)
 			local missingbuff = true
@@ -1939,12 +1580,11 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		core = true,
-		class = { WARRIOR = true, ROGUE = true, PRIEST = true, DRUID = true, PALADIN = true, HUNTER = true, MAGE = true, WARLOCK = true, SHAMAN = true, DEATHKNIGHT = true, },
+		class = allclasses,
 		chat = L["Flask or two Elixirs"],
 		pre = function(self, raid, report)
 			report.belixirlist = {}
 			report.gelixirlist = {}
---			report.flaskzonelist = {}
 		end,
 		main = function(self, name, class, unit, raid, report)
 			report.checking.flaskir = true
@@ -1960,30 +1600,6 @@ local BF = {
 			for _, v in ipairs(cflasks) do
 				if unit.hasbuff[v] then
 					missingbuff = false
-					-- has flask now check the zone
---					if raid.israid then
---						local thiszone = GetRealZoneText()
---						local flaskmatched = false
---						for _, types in pairs (flaskzones) do
---							for _, flask in ipairs(types.flasks) do
---								if flask == v then
---									flaskmatched = true
---									local zonematched = false
---									for _, zone in ipairs(types.zones) do
---										if thiszone == zone then
---											zonematched = true
---											break
---										end
---									end
---									if not zonematched then
---										table.insert(report.flaskzonelist, name .. "(" .. v .. ")")
---									end
---								break
---								end
---							end
---							if flaskmatched then break end
---						end
---					end
 					break
 				end
 			end
@@ -2043,7 +1659,7 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		core = true,
-		class = { WARRIOR = true, ROGUE = true, PRIEST = true, DRUID = true, PALADIN = true, HUNTER = true, MAGE = true, WARLOCK = true, SHAMAN = true, DEATHKNIGHT = true, },
+		class = allclasses,
 		chat = L["Battle Elixir"],
 		pre = nil,
 		main = nil,
@@ -2077,7 +1693,7 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		core = true,
-		class = { WARRIOR = true, ROGUE = true, PRIEST = true, DRUID = true, PALADIN = true, HUNTER = true, MAGE = true, WARLOCK = true, SHAMAN = true, DEATHKNIGHT = true, },
+		class = allclasses,
 		chat = L["Guardian Elixir"],
 		pre = nil,
 		main = nil,
@@ -2096,39 +1712,8 @@ local BF = {
 		consumable = true,
 	},
 
---	flaskzone = {
---		order = 465,
---		list = "flaskzonelist",
---		check = "checkflaskzone",
---		default = false,
---		defaultbuff = false,
---		defaultwarning = true,
---		defaultdash = false,
---		defaultdashcombat = false,
---		defaultboss = false,
---		defaulttrash = false,
---		checkzonedout = false,
---		selfbuff = true,
---		timer = false,
---		chat = L["Wrong flask for this zone"],
---		pre = nil,
---		main = nil,
---		post = nil,
---		icon = "Interface\\Icons\\INV_Potion_35",
---		update = function(self)
---			RaidBuffStatus:DefaultButtonUpdate(self, report.flaskzonelist, RaidBuffStatus.db.profile.flaskzone, report.checking.flaskir or false, report.flaskzonelist)
---		end,
---		click = function(self, button, down)
---			RaidBuffStatus:ButtonClick(self, button, down, "flaskzone")
---		end,
---		tip = function(self)
---			RaidBuffStatus:Tooltip(self, L["Wrong flask for this zone"], report.flaskzonelist)
---		end,
---		partybuff = nil,
---	},
-	
 	wepbuff = {
-		order = 464,
+		order = 410,
 		list = "wepbufflist",
 		check = "checkwepbuff",
 		default = true,
@@ -2137,7 +1722,7 @@ local BF = {
 		defaultdash = true,
 		defaultdashcombat = false,
 		defaultboss = true,
-		defaulttrash = false,
+		defaulttrash = true,
 		checkzonedout = false,
 		selfbuff = true,
 		timer = false,
@@ -2145,18 +1730,29 @@ local BF = {
 		chat = L["Weapon buff"],
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
+			if class == "ROGUE" then
+                                report.checking.wepbuff = true
+                                local missingbuff = true
+                                for _, v in ipairs(roguewepbuffs) do
+                                        if unit.hasbuff[v] then
+                                                missingbuff = false
+                                                break
+                                        end
+                                end
+                                if missingbuff then
+                                        table.insert(report.wepbufflist, name)
+                                end
+				return
+			elseif class ~= "SHAMAN" then
+ 				return
+                        elseif not UnitIsUnit(unit.unitid, "player") then
+				return -- XXX
+			end
 			local bufflist = false
 			local dualw = false
-			if class == "SHAMAN" then
-				bufflist = shamanwepbuffs
-				if raid.classes.SHAMAN[name].specialisations.dualwield then
-					dualw = true
-				end
-			elseif class == "ROGUE" then
-				bufflist = roguewepbuffs
+			bufflist = shamanwepbuffs
+			if raid.classes.SHAMAN[name].specialisations.dualwield then
 				dualw = true
-			else
-				return
 			end
 			if _G.InspectFrame and _G.InspectFrame:IsShown() then
 				return -- can't inspect at same time as UI
@@ -2192,6 +1788,10 @@ local BF = {
 				end
 				RBSToolScanner:ClearLines()
 				RBSToolScanner:SetInventoryItem(unit.unitid, 16)
+				if RBSToolScanner:NumLines() < 1 then
+					RaidBuffStatus:Debug("NotifyInspect failed")
+					return
+				end
 			end
 			for _,buff in ipairs(bufflist) do
 				if RBSToolScanner:Find(buff) then
@@ -2228,75 +1828,40 @@ local BF = {
 		end,
 		click = function(self, button, down)
 			local class = select(2, UnitClass("player"))
-			local guid = UnitGUID("player")        
 			local buffspell = nil
-			local hasMainHandEnchant, mainHandExpiration, mainHandCharges, hasOffHandEnchant, offHandExpiration, offHandCharges = GetWeaponEnchantInfo()
 			local itemslot = nil
-			local bagitem = nil
-			if not hasMainHandEnchant or mainHandExpiration < 15*60*1000 then
-				itemslot = GetInventorySlotInfo("MainHandSlot")
-			elseif not hasOffHandEnchant or offHandExpiration < 15*60*1000 then
+			if class == "ROGUE" then
+			  buffspell = BS[2823]
+			elseif class == "SHAMAN" then
+			  local spec = GetSpecialization()
+			  if spec == 1 then -- elemental 
+			    buffspell = BS[8024]
+                          elseif spec == 2 then -- resto
+			    buffspell = BS[51730]
+			  elseif spec == 3 then -- enh
+			    buffspell = BS[8024]
+			    local hasMainHandEnchant, mainHandExpiration, mainHandCharges, 
+                                  hasOffHandEnchant, offHandExpiration, offHandCharges = GetWeaponEnchantInfo()
+			    if not hasMainHandEnchant or mainHandExpiration < 15*60*1000 then
+			  	itemslot = GetInventorySlotInfo("MainHandSlot")
+			    elseif not hasOffHandEnchant or offHandExpiration < 15*60*1000 then
 				itemslot = GetInventorySlotInfo("SecondaryHandSlot")
+			    end
+                          end
 			end
-			if class == "SHAMAN" then
-				if GT:GUIDHasTalent(guid, BS[974]) then -- Earth Shield
-					buffspell = BS[51730] -- earthliving weapon
-				elseif GT:GUIDHasTalent(guid, BS[16166]) then -- Elemental Mastery
-					buffspell = BS[8024] -- flametongue weapon
-			elseif GT:GUIDHasTalent(guid, BS[17364]) then -- Storm Strike
-				if GT:GUIDHasTalent(guid, BS[60103]) and itemslot == GetInventorySlotInfo("SecondaryHandSlot") then -- Lava Lash
-					buffspell = BS[8024] -- flametongue weapon for off hand    
-				else    
-					buffspell = BS[8232] -- windfury weapon  for main hand
-				end
-			else -- dunno
-				buffspell = nil      
-			end              
-			elseif class == "ROGUE" then
-				local deadlypoison = { 43233, 43232, 22054, 22053, 20844, 8985, 8984, 2893, 2892 }
-				local instantpoison = { 43231, 43230, 21927, 8928, 8927, 8926, 6950, 6949, 6947 }  
-				local woundpoison = { 43235, 43234, 22055, 10922, 10921, 10920, 10918 }  
-				local anestheticpoison = { 43237, 21835 }  
-				local cripplingpoison = { 3775 }      
-				local mindnumbingpoison = { 5237 }         
-				local poisontype
-				local MHspeed, OHspeed = UnitAttackSpeed("player")
-				MHspeed = MHspeed or 100
-				OHspeed = OHspeed or 50
-				local MHpoison, OHpoison
-				if (MHspeed > OHspeed) then -- could possibly have an option to customize poison types (eg for pvp)
-					MHpoison = instantpoison
-					OHpoison = deadlypoison 
-				else
-					MHpoison = deadlypoison
-					OHpoison = instantpoison
-				end
-				if itemslot == GetInventorySlotInfo("MainHandSlot") then -- main-hand poison
-					poisontype = MHpoison
-				else -- off-hand poison
-					poisontype = OHpoison
-				end
-				for _,sid in ipairs(poisontype) do
-					local _, _, _, _, reqLevel = GetItemInfo(sid)          
-					if (IsUsableItem(sid) and reqLevel <= UnitLevel("player")) then
-						bagitem = ITN[sid]
-						break
-					end
-				end
-			end
-			RaidBuffStatus:ButtonClick(self, button, down, "wepbuff", buffspell, nil, nil, nil, bagitem, itemslot)
-			end,
-			tip = function(self)
+			RaidBuffStatus:ButtonClick(self, button, down, "wepbuff", buffspell, nil, nil, nil, nil, itemslot)
+                end,
+		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing a temporary weapon buff"], report.wepbufflist)
 		end,
 		partybuff = nil,
 		consumable = true,
 	},
 
-	intellect = {
-		order = 450,
-		list = "intellectlist",
-		check = "checkintellect",
+	spbuff = {
+		order = 430,
+		list = "spbufflist",
+		check = "checkspbuff",
 		default = true,
 		defaultbuff = true,
 		defaultwarning = false,
@@ -2308,15 +1873,16 @@ local BF = {
 		selfbuff = false,
 		timer = false,
 		core = true,
-		class = { MAGE = true, },
-		chat = BS[1459], -- Arcane Intellect
+		class = { MAGE = true, WARLOCK = true },
+		chat = L["Spellpower Buff"],
 		pre = nil,
+		buffinfo = { { "MAGE", 1459, 1 }, { "WARLOCK", 109773, 2 } },
 		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.MAGE > 0 then
-				report.checking.intellect = true
+			if raid.ClassNumbers.MAGE > 0 or  raid.ClassNumbers.WARLOCK > 0 then
+				report.checking.spbuff = true
 				if class ~= "ROGUE" and class ~= "WARRIOR" and class ~= "DEATHKNIGHT" and class ~= "HUNTER" then
 					local missingbuff = true
-					for _, v in ipairs(intellect) do
+					for _, v in ipairs(spbuff) do
 						if unit.hasbuff[v] then
 							missingbuff = false
 							break
@@ -2324,58 +1890,38 @@ local BF = {
 					end
 					if missingbuff then
 						if RaidBuffStatus.db.profile.ShowGroupNumber then
-							table.insert(report.intellectlist, name .. "(" .. unit.group .. ")" )
+							table.insert(report.spbufflist, name .. "(" .. unit.group .. ")" )
 						else
-							table.insert(report.intellectlist, name)
+							table.insert(report.spbufflist, name)
 						end
 					end
 				end
 			end
 		end,
 		post = function(self, raid, report)
-			RaidBuffStatus:SortNameBySuffix(report.intellectlist)
+			RaidBuffStatus:SortNameBySuffix(report.spbufflist)
 		end,
-		icon = BSI[1459], -- Arcane Intellect
+		icon = BSI[109773], -- Dark Intent
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.intellectlist, RaidBuffStatus.db.profile.checkintellect, report.checking.intellect or false, RaidBuffStatus.BF.intellect:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.spbufflist, RaidBuffStatus.db.profile.checkspbuff, report.checking.spbuff or false, generic_buffers("spbuff"))
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "intellect", BS[1459]) -- Arcane Intellect
+			RaidBuffStatus:ButtonClick(self, button, down, "spbuff", player_spell("spbuff"))
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[1459], report.intellectlist, nil, RaidBuffStatus.BF.intellect:buffers())
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. L["Spellpower Buff"], report.spbufflist, nil, generic_buffers("spbuff"))
 		end,
 		singlebuff = false,
 		partybuff = false,
 		raidbuff = true,
 		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			for name,_ in pairs(raid.classes.MAGE) do
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.intellect.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.intellect.chat .. ">: " .. table.concat(reportl, ", "), name)
-					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
-					end
-				end
-			end
-		end,
-		buffers = function()
-			local themages = {}
-			for name,_ in pairs(raid.classes.MAGE) do
-				table.insert(themages, name)
-			end
-			return themages
-		end,
+		whispertobuff = generic_whispertobuff,
 	},
 
-	wild = {
-		order = 440,
-		list = "wildlist",
-		check = "checkwild",
+	statbuff = {
+		order = 450,
+		list = "statbufflist",
+		check = "checkstatbuff",
 		default = true,
 		defaultbuff = true,
 		defaultwarning = false,
@@ -2387,14 +1933,17 @@ local BF = {
 		selfbuff = false,
 		timer = false,
 		core = true,
-		class = { DRUID = true, },
-		chat = BS[1126], -- Mark of the Wild
+		class = { DRUID = true, PALADIN = true, MONK = true },
+		buffinfo = { { "DRUID", 1126, 1 }, { "MONK", 117666, 1 }, { "PALADIN", 20217, 2 } },
+		chat = L["Stat Buff"], 
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.DRUID > 0 then
-				report.checking.wild = true
+			if raid.ClassNumbers.DRUID > 0 or 
+			   raid.ClassNumbers.MONK > 0 or
+			   raid.ClassNumbers.PALADIN > 0 then
+				report.checking.statbuff = true
 				local missingbuff = true
-				for _, v in ipairs(wild) do
+				for _, v in ipairs(statbuff) do
 					if unit.hasbuff[v] then
 						missingbuff = false
 						break
@@ -2402,57 +1951,96 @@ local BF = {
 				end
 				if missingbuff then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
-						table.insert(report.wildlist, name .. "(" .. unit.group .. ")" )
+						table.insert(report.statbufflist, name .. "(" .. unit.group .. ")" )
 					else
-						table.insert(report.wildlist, name)
+						table.insert(report.statbufflist, name)
 					end
 				end
 			end
 		end,
 		post = function(self, raid, report)
-			RaidBuffStatus:SortNameBySuffix(report.wildlist)
+			RaidBuffStatus:SortNameBySuffix(report.statbufflist)
 		end,
 		icon = BSI[1126], -- Mark of the Wild
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.wildlist, RaidBuffStatus.db.profile.checkwild, report.checking.wild or false, RaidBuffStatus.BF.wild:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.statbufflist, RaidBuffStatus.db.profile.checkstatbuff, report.checking.statbuff or false, generic_buffers("statbuff"))
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "wild", BS[1126]) -- Mark of the Wild
+			RaidBuffStatus:ButtonClick(self, button, down, "statbuff", player_spell("statbuff"))
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[1126], report.wildlist, nil, RaidBuffStatus.BF.wild:buffers())
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. L["Stat Buff"], report.statbufflist, nil, generic_buffers("statbuff"))
 		end,
 		singlebuff = false,
 		partybuff = false,
 		raidbuff = true,
 		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			local thedruids = RaidBuffStatus.BF.wild:buffers()
-			for _,name in ipairs(thedruids) do
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.wild.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.wild.chat .. ">: " .. table.concat(reportl, ", "), name)
+		whispertobuff = generic_whispertobuff,
+	},
+	
+	masterybuff = {
+		order = 435,
+		list = "masterybufflist",
+		check = "checkmasterybuff",
+		default = true,
+		defaultbuff = true,
+		defaultwarning = false,
+		defaultdash = true,
+		defaultdashcombat = false,
+		defaultboss = true,
+		defaulttrash = true,
+		checkzonedout = false,
+		selfbuff = false,
+		timer = false,
+		core = true,
+		class = { PALADIN = true },
+		buffinfo = { { "PALADIN", 19740 } },
+		chat = L["Mastery Buff"], 
+		pre = nil,
+		main = function(self, name, class, unit, raid, report)
+			if raid.ClassNumbers.PALADIN > 1 or
+                           (raid.ClassNumbers.PALADIN == 1 and
+                            (raid.ClassNumbers.DRUID > 0 or raid.ClassNumbers.MONK > 0))
+                        then
+				report.checking.masterybuff = true
+				local missingbuff = true
+				for _, v in ipairs(masterybuff) do
+					if unit.hasbuff[v] then
+						missingbuff = false
+						break
 					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
+				end
+				if missingbuff then
+					if RaidBuffStatus.db.profile.ShowGroupNumber then
+						table.insert(report.masterybufflist, name .. "(" .. unit.group .. ")" )
+					else
+						table.insert(report.masterybufflist, name)
 					end
 				end
 			end
 		end,
-		buffers = function()
-			local thedruids = {}
-			for name,rcn in pairs(raid.classes.DRUID) do
-			     table.insert(thedruids, name)
-			end
-			return thedruids
+		post = function(self, raid, report)
+			RaidBuffStatus:SortNameBySuffix(report.masterybufflist)
 		end,
+		icon = BSI[19740], -- Blessing of Might
+		update = function(self)
+			RaidBuffStatus:DefaultButtonUpdate(self, report.masterybufflist, RaidBuffStatus.db.profile.checkmasterybuff, report.checking.masterybuff or false, generic_buffers("masterybuff"))
+		end,
+		click = function(self, button, down)
+			RaidBuffStatus:ButtonClick(self, button, down, "masterybuff", player_spell("masterybuff"))
+		end,
+		tip = function(self)
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. L["Mastery Buff"], report.masterybufflist, nil, generic_buffers("masterybuff"))
+		end,
+		singlebuff = false,
+		partybuff = false,
+		raidbuff = true,
+		raidwidebuff = true,
+		whispertobuff = generic_whispertobuff,
 	},
 	
-
 	fortitude = {
-		order = 430,
+		order = 440,
 		list = "fortitudelist",
 		check = "checkfortitude",
 		default = true,
@@ -2465,6 +2053,7 @@ local BF = {
 		checkzonedout = false,
 		core = true,
 		class = { PRIEST = true, },
+		buffinfo = { { "PRIEST", 21562 } },
 		chat = BS[21562], -- Prayer of Fortitude
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
@@ -2491,41 +2080,78 @@ local BF = {
 		end,
 		icon = BSI[21562], -- Prayer of Fortitude
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.fortitudelist, RaidBuffStatus.db.profile.checkfortitude, report.checking.fortitude or false, RaidBuffStatus.BF.fortitude:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.fortitudelist, RaidBuffStatus.db.profile.checkfortitude, report.checking.fortitude or false, generic_buffers("fortitude"))
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "fortitude", BS[21562]) -- Prayer of Fortitude 
+			RaidBuffStatus:ButtonClick(self, button, down, "fortitude", player_spell("fortitude"))
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[21562], report.fortitudelist, nil, RaidBuffStatus.BF.fortitude:buffers()) -- Prayer of Fortitude
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[21562], report.fortitudelist, nil, generic_buffers("fortitude")) -- Prayer of Fortitude
 		end,
 		singlebuff = false,
 		partybuff = false,
 		raidbuff = true,
 		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			local thepriests = RaidBuffStatus.BF.fortitude:buffers()
-			for _,name in ipairs(thepriests) do
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.fortitude.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.fortitude.chat .. ">: " .. table.concat(reportl, ", "), name)
+		whispertobuff = generic_whispertobuff,
+	},
+
+	critbuff = {
+		order = 420,
+		list = "critbufflist",
+		check = "checkcritbuff",
+		default = true,
+		defaultbuff = true,
+		defaultwarning = false,
+		defaultdash = true,
+		defaultdashcombat = false,
+		defaultboss = true,
+		defaulttrash = true,
+		checkzonedout = false,
+		selfbuff = false,
+		timer = false,
+		core = true,
+		buffinfo = { { "MAGE", 1459 }, { "MONK", 116781 } },
+		class = { MAGE = true, MONK = true },
+		chat = L["Crit Buff"], 
+		pre = nil,
+		main = function(self, name, class, unit, raid, report)
+			if raid.ClassNumbers.MAGE > 0 or 
+			   raid.ClassNumbers.MONK > 0 then
+				report.checking.critbuff = true
+				local missingbuff = true
+				for _, v in ipairs(critbuff) do
+					if unit.hasbuff[v] then
+						missingbuff = false
+						break
 					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
+				end
+				if missingbuff then
+					if RaidBuffStatus.db.profile.ShowGroupNumber then
+						table.insert(report.critbufflist, name .. "(" .. unit.group .. ")" )
+					else
+						table.insert(report.critbufflist, name)
 					end
 				end
 			end
 		end,
-		buffers = function()
-			local thepriests = {}
-			local maxpoints = 0
-			for name,rcn in pairs(raid.classes.PRIEST) do
-  			        table.insert(thepriests, name)
-  		        end
-			return thepriests
+		post = function(self, raid, report)
+			RaidBuffStatus:SortNameBySuffix(report.critbufflist)
 		end,
+		icon = BSI[116781], -- Legacy of the White Tiger
+		update = function(self)
+			RaidBuffStatus:DefaultButtonUpdate(self, report.critbufflist, RaidBuffStatus.db.profile.checkcritbuff, report.checking.critbuff or false, generic_buffers("critbuff"))
+		end,
+		click = function(self, button, down)
+			RaidBuffStatus:ButtonClick(self, button, down, "critbuff", player_spell("critbuff"))
+		end,
+		tip = function(self)
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. L["Crit Buff"], report.critbufflist, nil, generic_buffers("critbuff"))
+		end,
+		singlebuff = false,
+		partybuff = false,
+		raidbuff = true,
+		raidwidebuff = true,
+		whispertobuff = generic_whispertobuff,
 	},
 
 	runescrollfortitude = {
@@ -2543,7 +2169,7 @@ local BF = {
 		chat = BS[69377], -- Fortitude
 		iconfix = function(self) -- to handle when server is slow to get the icon
 			if RaidBuffStatus.BF.runescrollfortitude.icon == "Interface\\Icons\\INV_Misc_QuestionMark" then
-				RaidBuffStatus.BF.runescrollfortitude.icon = ITT[49632] -- Runescroll of Fortitude
+				RaidBuffStatus.BF.runescrollfortitude.icon = ITT[79257] -- Runescroll of Fortitude
 				if RaidBuffStatus.BF.runescrollfortitude.icon == "Interface\\Icons\\INV_Misc_QuestionMark" then
 					return true
 				end
@@ -2560,7 +2186,7 @@ local BF = {
 				RaidBuffStatus.itemcheck.runescrollfortitude.list = "runescrollfortitudelist"
 				RaidBuffStatus.itemcheck.runescrollfortitude.check = "runescrollfortitude"
 				RaidBuffStatus.itemcheck.runescrollfortitude.next = 0
-				RaidBuffStatus.itemcheck.runescrollfortitude.item = "49632" -- Runescroll of Fortitude
+				RaidBuffStatus.itemcheck.runescrollfortitude.item = "79257" -- Runescroll of Fortitude
 				RaidBuffStatus.itemcheck.runescrollfortitude.min = 0
 				RaidBuffStatus.itemcheck.runescrollfortitude.frequency = 60 * 5
 				RaidBuffStatus.itemcheck.runescrollfortitude.frequencymissing = 60 * 5
@@ -2571,21 +2197,32 @@ local BF = {
 				return
 			end
 			report.checking.runescrollfortitude = true
-			if not unit.hasbuff[BS[69377]] and  -- Fortitude
-			   not unit.hasbuff[BS[79105]] and  -- Power Word: Fortitude
-			   not unit.hasbuff[BS[90364]] and  -- Qiraji Fortitude
-			   not unit.hasbuff[BS[469]]   and  -- Commanding Shout
-			   not unit.hasbuff[BS[6307]]  then -- Blood Pact
+			local missing = true
+			for _,f in pairs(fortitude) do
+			  if unit.hasbuff[f] then
+			    missing = false
+			    break
+			  end
+			end
+			if unit.hasbuff[BS[111922]] or    -- Fortitude III
+			   unit.hasbuff[BS[86507]]  or    -- Fortitude II
+			   unit.hasbuff[BS[69377]]  then  -- Fortitude I
+		 	  missing = false 
+			end
+			if missing then
 				table.insert(report.runescrollfortitudelist, name)
 			end
 		end,
 		post = nil,
-		icon = ITT[49632], -- Runescroll of Fortitude
+		icon = ITT[79257], -- Runescroll of Fortitude
 		update = function(self)
 			RaidBuffStatus:DefaultButtonUpdate(self, report.runescrollfortitudelist, RaidBuffStatus.db.profile.checkrunescrollfortitude, report.checking.runescrollfortitude or false, RaidBuffStatus.BF.runescrollfortitude:buffers())
 		end,
 		click = function(self, button, down)
-			local scroll = ITN[62251] -- Runescroll of Fortitude II 
+			local scroll = ITN[79297] -- Runescroll of Fortitude III
+			if not RaidBuffStatus:GotReagent(scroll) then -- use the best available
+			  scroll = ITN[62251] -- Runescroll of Fortitude II
+			end
 			if not RaidBuffStatus:GotReagent(scroll) then -- use the best available
 			  scroll = ITN[49632] -- Runescroll of Fortitude
 			end
@@ -2600,21 +2237,8 @@ local BF = {
 		raidwidebuff = true,
 		whispertobuff = function(reportl, prefix)
 			local thebuffers = RaidBuffStatus.BF.runescrollfortitude:buffers()
-			if not thebuffers then
-				return
-			end
-			for _,name in ipairs(thebuffers) do
-				name = string.sub(name, 1, name:find("%(") - 1)
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.runescrollfortitude.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.runescrollfortitude.chat .. ">: " .. table.concat(reportl, ", "), name)
-					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
-					end
-				end
+			if thebuffers then
+			   generic_whispertobuff(reportl, prefix, nil, thebuffers, ITN[49632])
 			end
 		end,
 		buffers = function()
@@ -2635,85 +2259,8 @@ local BF = {
 		consumable = true,
 	},
 
-	shadow = {
-		order = 420,
-		list = "shadowlist",
-		check = "checkshadow",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = false,
-		timer = false,
-		core = true,
-		class = { PRIEST = true, },
-		chat = BS[27683], -- Shadow Protection
-		pre = nil,
-		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.PRIEST > 0 then
-				report.checking.shadow = true
-				local missingbuff = true
-				for _, v in ipairs(shadow) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
-					if RaidBuffStatus.db.profile.ShowGroupNumber then
-						table.insert(report.shadowlist, name .. "(" .. unit.group .. ")" )
-					else
-						table.insert(report.shadowlist, name)
-					end
-				end
-			end
-		end,
-		post = function(self, raid, report)
-			RaidBuffStatus:SortNameBySuffix(report.shadowlist)
-		end,
-		icon = BSI[27683], -- Shadow Protection
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.shadowlist, RaidBuffStatus.db.profile.checkshadow, report.checking.shadow or false, RaidBuffStatus.BF.shadow:buffers())
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "shadow", BS[27683]) -- Shadow Protection 
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[27683], report.shadowlist, nil, RaidBuffStatus.BF.shadow:buffers())
-		end,
-		singlebuff = false,
-		partybuff = false,
-		raidbuff = true,
-		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			for name,_ in pairs(raid.classes.PRIEST) do
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.shadow.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.shadow.chat .. ">: " .. table.concat(reportl, ", "), name)
-					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
-					end
-				end
-			end
-		end,
-		buffers = function()
-			local thepriests = {}
-			for name,_ in pairs(raid.classes.PRIEST) do
-				table.insert(thepriests, name)
-			end
-			return thepriests
-		end,
-	},
-
 	levitate = {
-		order = 425,
+		order = 320,
 		list = "levitatelist",
 		check = "checklevitate",
 		default = false,
@@ -2727,13 +2274,14 @@ local BF = {
 		selfbuff = false,
 		timer = false,
 		core = true,
-		class = { PRIEST = true, },
+		buffinfo = { { "PRIEST", 1706, 1 }, { "MAGE", 130, 2 } },
+		class = { PRIEST = true, MAGE = true },
 		chat = BS[1706], -- Levitate
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.PRIEST > 0 then
+			if raid.ClassNumbers.PRIEST > 0 or raid.ClassNumbers.MAGE > 0 then
 				report.checking.levitate = true
-				if not unit.hasbuff[BS[1706]] then
+				if not unit.hasbuff[BS[1706]] and not unit.hasbuff[BS[130]] then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
 						table.insert(report.levitatelist, name .. "(" .. unit.group .. ")" )
 					else
@@ -2747,98 +2295,20 @@ local BF = {
 		end,
 		icon = BSI[1706], -- Levitate
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.levitatelist, RaidBuffStatus.db.profile.checklevitate, report.checking.levitate or false, RaidBuffStatus.BF.levitate:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.levitatelist, RaidBuffStatus.db.profile.checklevitate, report.checking.levitate or false, generic_buffers("levitate"))
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "levitate", BS[1706], nil, nil, true) -- Levitate
+			RaidBuffStatus:ButtonClick(self, button, down, "levitate", player_spell("levitate"), nil, nil, true)
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[1706], report.levitatelist, nil, RaidBuffStatus.BF.levitate:buffers())
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[1706], report.levitatelist, nil, generic_buffers("levitate"))
 		end,
 		singlebuff = false,
 		partybuff = false,
 		raidbuff = true,
 		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			for name,_ in pairs(raid.classes.PRIEST) do
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.levitate.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.levitate.chat .. ">: " .. table.concat(reportl, ", "), name)
-					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
-					end
-				end
-			end
-		end,
-		buffers = function()
-			local thepriests = {}
-			for name,_ in pairs(raid.classes.PRIEST) do
-				table.insert(thepriests, name)
-			end
-			return thepriests
-		end,
+		whispertobuff = generic_whispertobuff,
 		singletarget = true,
-	},
-
-	noaura = {
-		order = 410,
-		list = "noauralist",
-		check = "checknoaura",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		timer = false,
-		class = { PALADIN = true, },
-		chat = L["Paladin Aura"],
-		pre = nil,
-		main = function(self, name, class, unit, raid, report)
-			if class == "PALADIN" then
-				report.checking.noaura = true
-				local missingbuff = true
-				for _, v in ipairs(auras) do
-					if unit.hasbuff[v] then
-						if raid.ClassNumbers.PALADIN <= 2 then
-							local _, _, _, _, _, _, _, caster = UnitBuff(unit.unitid, v)
-							if caster then
---								RaidBuffStatus:Debug(name .. " has " .. v .. " from " .. caster)
-								if RaidBuffStatus:UnitNameRealm(caster) == name then
-									missingbuff = false
-									break
-								end
-							end
-						else
-							missingbuff = false  -- when many palas auras will start getting overwritten
-							break
-						end
-					end
-				end
-				if missingbuff then
-					table.insert(report.noauralist, name)
-				end
-			end
-		end,
-		post = nil,
-		icon = BSI[465], -- Devotion Aura
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.noauralist, RaidBuffStatus.db.profile.checknoaura, report.checking.noaura or false, report.noauralist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "noaura", RaidBuffStatus:SelectPalaAura())
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Paladin has no Aura at all"], report.noauralist)
-		end,
-		partybuff = nil,
-		raidwidebuff = true,
 	},
 
 	noaspect = {
@@ -2886,47 +2356,6 @@ local BF = {
 			RaidBuffStatus:Tooltip(self, L["Hunter has no aspect at all"], report.noaspectlist)
 		end,
 		partybuff = nil,
-	},
-
-	trueshotaura = {
-		order = 395,
-		list = "trueshotauralist",
-		check = "checktrueshotaura",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		timer = false,
-		class = { HUNTER = true, },
-		chat = BS[19506], -- Trueshot Aura
-		main = function(self, name, class, unit, raid, report)
-			if class == "HUNTER" then
-				if GT:GUIDHasTalent(raid.classes.HUNTER[name].guid, BS[19506]) then -- Trueshot Aura
-					report.checking.trueshotaura = true
-					if not unit.hasbuff[BS[19506]] and (raid.maxabominationsmightpoints >= 2 and not unit.hasbuff[BS[53137]]) and (raid.maxunleashedragepoints >= 3 and not unit.hasbuff[BS[30802]]) then -- Trueshot Aura + Abomination's Might + Unleashed Rage
-						table.insert(report.trueshotauralist, name)
-					end
-				end
-			end
-		end,
-		post = nil,
-		icon = BSI[19506], -- Trueshot Aura
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.trueshotauralist, RaidBuffStatus.db.profile.checktrueshotaura, report.checking.trueshotaura or false, report.trueshotauralist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "trueshotaura", BS[19506]) -- Trueshot Aura
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[19506], report.trueshotauralist)
-		end,
-		partybuff = nil,
-		raidwidebuff = true,
 	},
 
 	dkpresence = {
@@ -3057,47 +2486,6 @@ local BF = {
 		partybuff = nil,
 	},
 
-	vampiricembrace = {
-		order = 386,
-		list = "vampiricembracelist",
-		check = "checkvampiricembrace",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		selfonlybuff = true,
-		timer = false,
-		class = { PRIEST = true, },
-		chat = BS[15286], -- Vampiric Embrace
-		main = function(self, name, class, unit, raid, report)
-			if class == "PRIEST" then
-				if raid.classes.PRIEST[name].specialisations.vampiricembrace then -- Vampiric Embrace
-					report.checking.vampiricembrace = true
-					if not unit.hasbuff[BS[15286]] then -- Vampiric Embrace
-						table.insert(report.vampiricembracelist, name)
-					end
-				end
-			end
-		end,
-		post = nil,
-		icon = BSI[15286], -- Vampiric Embrace
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.vampiricembracelist, RaidBuffStatus.db.profile.vampiricembraceform, report.checking.vampiricembrace or false, report.vampiricembracelist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "vampiricembrace", BS[15286]) -- Vampiric Embrace
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[15286], report.vampiricembracelist) -- Vampiric Embrace
-		end,
-		partybuff = nil,
-	},
-
 	boneshield = {
 		order = 385,
 		list = "boneshieldlist",
@@ -3139,81 +2527,42 @@ local BF = {
 		partybuff = nil,
 	},
 
-	felarmor = {
-		order = 380,
-		list = "felarmorlist",
-		check = "checkfelarmor",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		selfonlybuff = true,
-		timer = false,
-		class = { WARLOCK = true, },
-		chat = BS[28176], -- Fel Armor
-		main = function(self, name, class, unit, raid, report)
-			if class == "WARLOCK" then
-				report.checking.felarmor = true
-				if not unit.hasbuff[BS[28176]] then -- Fel Armor
-					table.insert(report.felarmorlist, name)
-				end
-			end
-		end,
-		post = nil,
-		icon = BSI[28176], -- Fel Armor
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.felarmorlist, RaidBuffStatus.db.profile.checkfelarmor, report.checking.felarmor or false, report.felarmorlist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "felarmor", BS[28176]) -- Fel Armor
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[28176], report.felarmorlist)
-		end,
-		partybuff = nil,
-	},
-
 	soullink = {
 		order = 375,
 		list = "soullinklist",
 		check = "checksoullink",
-		default = true,
+		default = false,
 		defaultbuff = true,
 		defaultwarning = false,
-		defaultdash = true,
+		defaultdash = false,
 		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
+		defaultboss = false,
+		defaulttrash = false,
 		checkzonedout = false,
 		selfbuff = true,
 		selfonlybuff = true,
 		timer = false,
 		class = { WARLOCK = true, },
-		chat = BS[19028], -- Soul Link
+		chat = BS[108415], -- Soul Link
 		main = function(self, name, class, unit, raid, report)
 			if class ~= "WARLOCK" then
 				return
 			end
 			report.checking.soullink = true
-			if not unit.hasbuff[BS[19028]] then -- Soul Link
+			if not unit.hasbuff[BS[108415]] then -- Soul Link
 				table.insert(report.soullinklist, name)
 			end
 		end,
 		post = nil,
-		icon = BSI[19028], -- Soul Link
+		icon = BSI[108415], -- Soul Link
 		update = function(self)
 			RaidBuffStatus:DefaultButtonUpdate(self, report.soullinklist, RaidBuffStatus.db.profile.checksoullink, report.checking.soullink or false, report.soullinklist)
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "soullink", BS[19028]) -- Soul Link
+			RaidBuffStatus:ButtonClick(self, button, down, "soullink", BS[108415]) -- Soul Link
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[19028], report.soullinklist) -- Soul Link
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[108415], report.soullinklist) -- Soul Link
 		end,
 		partybuff = nil,
 	},
@@ -3257,11 +2606,10 @@ local BF = {
 		end,
 		click = function(self, button, down)
                         local name = UnitName("player")
-                        if name and raid.classes.MAGE[name] and
-                           GT:GUIDHasTalent(raid.classes.MAGE[name].guid, BS[63934]) then -- Arcane Barrage
+                        if name and raid.classes.MAGE[name] then -- XXX: autoselect
 			   RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[6117]) -- Mage Armor
-                        else
-			   RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[34913]) -- Molten Armor
+			   --RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[30482]) -- Molten Armor
+			   --RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[7302]) -- Frost Armor
                         end
 		end,
 		tip = function(self)
@@ -3295,13 +2643,8 @@ local BF = {
 			local missing = true
 			if unit.hasbuff[BS[52127]] then -- Water Shield
 				missing = false
-			else
-				if GT:GUIDHasTalent(raid.classes.SHAMAN[name].guid, BS[51525]) or   -- Static Shock talent
-				   GT:GUIDHasTalent(raid.classes.SHAMAN[name].guid, BS[88766]) then -- Fulmination talent
-				   if unit.hasbuff[BS[324]] then -- Lightning Shield
-						missing = false
-					end
-				end
+			elseif unit.hasbuff[BS[324]] then -- Lightning Shield
+				missing = false
 			end
 			if missing then
 				table.insert(report.shamanshieldlist, name)
@@ -3314,9 +2657,7 @@ local BF = {
 		end,
 		click = function(self, button, down)
 			local name = UnitName("player")
-			if name and raid.classes.SHAMAN[name] and 
-			   ( GT:GUIDHasTalent(raid.classes.SHAMAN[name].guid, BS[51525]) or -- Static Shock talent
-			     GT:GUIDHasTalent(raid.classes.SHAMAN[name].guid, BS[88766])) then -- Fulmination talent
+			if name and raid.classes.SHAMAN[name] and true then -- XXX
 				RaidBuffStatus:ButtonClick(self, button, down, "shamanshield", BS[324]) -- Lightning Shield
 			else
 				RaidBuffStatus:ButtonClick(self, button, down, "shamanshield", BS[52127]) -- Water Shield 
@@ -3327,222 +2668,6 @@ local BF = {
 		end,
 		partybuff = nil,
 		singletarget = true,
-	},
-	seal = {
-		order = 352,
-		list = "seallist",
-		check = "checkseal",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = true,
-		selfonlybuff = true,
-		timer = false,
-		class = { PALADIN = true, },
-		chat = L["Seal"],
-		main = function(self, name, class, unit, raid, report)
-			if class == "PALADIN" then
-				report.checking.seal = true
-				local missingbuff = true
-				for _, v in ipairs(seals) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
-					table.insert(report.seallist, name)
-				end
-			end
-		end,
-		post = nil,
-		icon = BSI[20165], -- Seal of Insight
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.seallist, RaidBuffStatus.db.profile.checkseal, report.checking.seal or false, report.seallist)
-		end,
-		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "seal", RaidBuffStatus:SelectSeal())
-		end,
-		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Paladin missing Seal"], report.seallist)
-		end,
-		whispertobuff = nil,
-		singlebuff = nil,
-		partybuff = nil,
-		raidbuff = nil,
-	},
-
-	missingblessing = {
-		order = 350,
-		list = "missingblessinglist",
-		check = "checkmissingblessing",
-		default = true,
-		defaultbuff = true,
-		defaultwarning = false,
-		defaultdash = true,
-		defaultdashcombat = false,
-		defaultboss = true,
-		defaulttrash = true,
-		checkzonedout = false,
-		selfbuff = false,
-		timer = false,
-		core = true,
-		class = { PALADIN = true, },
-		chat = function(report, raid, prefix, channel)
-			prefix = prefix or ""
-			local tosay
-			if RaidBuffStatus.db.profile.ShowMany and #report.missingblessinglist >= RaidBuffStatus.db.profile.HowMany then
-				tosay = L["MANY!"]
-			else
-				tosay = table.concat(report.missingblessinglist, ", ")
-			end
-			if report.kingsneeded then
-				RaidBuffStatus:Say(prefix .. "<" .. L["Paladin blessing"] .. ">: " .. tosay, nil, nil, channel)
-			else
-				RaidBuffStatus:Say(prefix .. "<" .. BS[19740] .. ">: " .. tosay, nil, nil, channel) -- Blessing of Might
-			end
-			if #report.slackingpaladins > 0 then
-				RaidBuffStatus:Say("<" .. L["Slacking Paladins"] .. ">: " .. table.concat(report.slackingpaladins, ", ", nil, nil, channel))
-			end
-		end,
-		pre = function(self, raid, report)
-			if raid.ClassNumbers.PALADIN < 1 then
-				return
-			end
-			report.slackingpaladins = {}
-			report.castkings = ""
-			report.castmight = ""
-			report.pallyblessingsmessagelist = {}
-			report.kingsneeded = true
-			report.kingsmissing = false
-			report.mightmissing = false
-			report.usedrumskings = RaidBuffStatus:UseDrumsKings(raid)
-			if raid.ClassNumbers.DRUID > 0 then
-				report.kingsneeded = false
-				report.pallyblessingsmessagelist[L["Blessing of Kings is not needed because you are grouped with a Druid."]] = true
-			end
-			if report.usedrumskings then
-				report.pallyblessingsmessagelist[L["Blessing of Kings, with this raid configuration, is better provided by Drums of the Forgotten Kings thus allowing Blessing of Might to be used."]] = true
-			end
-			-- if a druid then might
-			-- if no druid and a pala then kings or might and forgotten kings
-			-- if 2 pala and no druid then might and kings
-		end,
-		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.PALADIN < 1 then
-				return
-			end
-			report.checking.missingblessing = true
-			local kingsmissing = false
-			local mightmissing = false
-			if not unit.hasbuff[BS[20217]] then -- Blessing of Kings
-				if report.kingsneeded then
-					kingsmissing = true
-				end
-			else
-				report.castkings = unit.hasbuff[BS[20217]].caster -- Blessing of Kings
-			end
-			if not unit.hasbuff[BS[19740]] then  -- Blessing of Might
-				mightmissing = true
-			else
-				report.castmight = unit.hasbuff[BS[19740]].caster  -- Blessing of Might
-			end
-			local missinglist = {}
-			if (raid.ClassNumbers.PALADIN == 1 and kingsmissing and mightmissing) or (raid.ClassNumbers.PALADIN == 1 and not report.kingsneeded and mightmissing) or (raid.ClassNumbers.PALADIN > 1 and (kingsmissing or mightmissing)) then
-				if RaidBuffStatus.db.profile.ShortMissingBlessing then
-					if kingsmissing then
-						table.insert(missinglist, L["BoK"])
-						report.kingsmissing = true
-					end
-					if mightmissing then
-						table.insert(missinglist, L["BoM"])
-						report.mightmissing = true
-					end
-				else
-					if kingsmissing then
-						table.insert(missinglist, BS[20217]) -- Blessing of Kings
-						report.kingsmissing = true
-					end
-					if mightmissing then
-						table.insert(missinglist, BS[19740])  -- Blessing of Might
-						report.mightmissing = true
-					end
-				end
-				table.insert(report.missingblessinglist, name .. "(" .. table.concat(missinglist, ", ") .. ")")
-			end
-		end,
-		post = function(self, raid, report)
-			if report.kingsmissing or report.mightmissing then
-				for name,rcn in pairs(raid.classes.PALADIN) do
-					if report.kingsneeded and not report.kingsmissing and name == report.castkings then
-					-- not a slacker
-					elseif not report.mightmissing and name == report.castmight then
-					-- not a slacker
-					else
-						table.insert(report.slackingpaladins, name)
-					end
-				end
-			end
-		end,
-		icon = BSI[79102], -- Blessing of Might
-		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.missingblessinglist, RaidBuffStatus.db.profile.checkmissingblessing, report.checking.missingblessing or false, report.slackingpaladins)
-		end,
-		click = function(self, button, down)
-			local spell
-			if report.kingsmissing then
-				spell = BS[20217] -- Blessing of Kings
-			elseif report.mightmissing then
-				spell = BS[19740]  -- Blessing of Might
-			end
-			RaidBuffStatus:ButtonClick(self, button, down, "missingblessing", spell)
-		end,
-		tip = function(self)
-			if not report.slackingpaladins then  -- fixes error when tip being called from option window when not in a party/raid and when no paladins
-				RaidBuffStatus:Tooltip(self, L["Player is missing at least one Paladin blessing"])
-			else
-				RaidBuffStatus:Tooltip(self, L["Player is missing at least one Paladin blessing"], report.missingblessinglist, nil, RaidBuffStatus.BF.missingblessing:buffers(), report.slackingpaladins, report.pallyblessingsmessagelist, nil, nil, report.castkings, report.castmight)
-			end
-		end,
-		singlebuff = false,
-		partybuff = false,
-		raidbuff = true,
-		raidwidebuff = true,
-		whispertobuff = function(reportl, prefix)
-			local b
-			if #report.slackingpaladins > 0 then
-				b = report.slackingpaladins
-			else
-				b = RaidBuffStatus.BF.missingblessing:buffers()
-			end
-			for _,name in ipairs(b) do
-				if RaidBuffStatus:InMyZone(name) then
-					local tosay
-					if RaidBuffStatus.db.profile.ShowMany and #report.missingblessinglist >= RaidBuffStatus.db.profile.HowMany then
-						tosay = L["MANY!"]
-					else
-						tosay = table.concat(report.missingblessinglist, ", ")
-					end
-					if report.kingsneeded then
-						RaidBuffStatus:Say(prefix .. "<" .. L["Paladin blessing"] .. ">: " .. tosay, name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. BS[19740] .. ">: " .. tosay, name) -- Blessing of Might
-					end
-				end
-			end
-		end,
-		buffers = function()
-			local b = {}
-			for name,rcn in pairs(raid.classes.PALADIN) do
-				table.insert(b, name)
-			end
-			return b
-		end,
 	},
 
 	drumskings = {
@@ -3588,8 +2713,8 @@ local BF = {
 				return
 			end
 			report.checking.drumskings = true
-			local missingbuff = true
-			for _, v in ipairs(blessingofforgottenkings) do
+			local missingbuff = not unit.hasbuff[BS[69378]] -- forgotten kings
+			for _, v in ipairs(statbuff) do
 				if unit.hasbuff[v] then
 					missingbuff = false
 					break
@@ -3608,7 +2733,7 @@ local BF = {
 			RaidBuffStatus:ButtonClick(self, button, down, "drumskings", nil, nil, nil, nil, ITN[49633]) -- Drums of Forgotten Kings
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[69378] .. "/" .. BS[20217], report.drumskingslist, nil, RaidBuffStatus.BF.drumskings:buffers()) -- Blessing of Forgotten Kings, Blessing of Kings
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[69378], report.drumskingslist, nil, RaidBuffStatus.BF.drumskings:buffers()) -- Blessing of Forgotten Kings, Blessing of Kings
 		end,
 		singlebuff = false,
 		partybuff = false,
@@ -3616,21 +2741,8 @@ local BF = {
 		raidwidebuff = true,
 		whispertobuff = function(reportl, prefix)
 			local thebuffers = RaidBuffStatus.BF.drumskings:buffers()
-			if not thebuffers then
-				return
-			end
-			for _,name in ipairs(thebuffers) do
-				name = string.sub(name, 1, name:find("%(") - 1)
-				if RaidBuffStatus:InMyZone(name) then
-					if RaidBuffStatus.db.profile.WhisperMany and #reportl >= RaidBuffStatus.db.profile.HowMany then
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.drumskings.chat .. ">: " .. L["MANY!"], name)
-					else
-						RaidBuffStatus:Say(prefix .. "<" .. RaidBuffStatus.BF.drumskings.chat .. ">: " .. table.concat(reportl, ", "), name)
-					end
-					if RaidBuffStatus.db.profile.whisperonlyone then
-						return
-					end
-				end
+			if thebuffers then
+			   generic_whispertobuff(reportl, prefix, nil, thebuffers, BS[69378])
 			end
 		end,
 		buffers = function()
@@ -3674,7 +2786,7 @@ local BF = {
 			if class == "HUNTER" then
 			needspet = true
 			elseif class == "WARLOCK" then
-				needspet = true			
+				needspet = not unit.hasbuff[BS[108503]] -- Grimoire of Sacrifice
 			elseif class == "DEATHKNIGHT" then
 				if GT:GUIDHasTalent(raid.classes.DEATHKNIGHT[name].guid, BS[52143]) then -- Master of Ghouls talent
 					needspet = true

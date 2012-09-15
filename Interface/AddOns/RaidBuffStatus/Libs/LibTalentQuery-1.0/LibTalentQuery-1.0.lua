@@ -1,6 +1,6 @@
 --[[
 Name: LibTalentQuery-1.0
-Revision: $Rev: 86 $
+Revision: $Rev: 89 $
 Author: Rich Martel (richmartel@gmail.com)
 Documentation: http://wowace.com/wiki/LibTalentQuery-1.0
 SVN: svn://svn.wowace.com/wow/libtalentquery-1-0/mainline/trunk
@@ -27,7 +27,7 @@ Example Usage:
 	end
 ]]
 
-local MAJOR, MINOR = "LibTalentQuery-1.0", 90000 + tonumber(("$Rev: 86 $"):match("(%d+)"))
+local MAJOR, MINOR = "LibTalentQuery-1.0", 90000 + tonumber(("$Rev: 89 $"):match("(%d+)"))
 
 local lib = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
@@ -77,8 +77,8 @@ local UnitIsPlayer = _G.UnitIsPlayer
 local UnitName = _G.UnitName
 local UnitExists = _G.UnitExists
 local UnitGUID = _G.UnitGUID
-local GetNumRaidMembers = _G.GetNumRaidMembers
-local GetNumPartyMembers = _G.GetNumPartyMembers
+local GetNumGroupMembers = _G.GetNumGroupMembers
+local GetNumSubgroupMembers = _G.GetNumSubgroupMembers
 local UnitIsVisible = _G.UnitIsVisible
 local UnitIsConnected = _G.UnitIsConnected
 local UnitCanAttack = _G.UnitCanAttack
@@ -92,9 +92,11 @@ end
 
 -- GuidToUnitID
 local function GuidToUnitID(guid)
-	local prefix, min, max = "raid", 1, GetNumRaidMembers()
-	if max == 0 then
-		prefix, min, max = "party", 0, GetNumPartyMembers()
+	local prefix, min, max
+	if IsInRaid() then
+		prefix, min, max = "raid", 1, GetNumGroupMembers()
+	else
+		prefix, min, max = "party", 0, GetNumSubgroupMembers()
 	end
 
 	-- Prioritise getting direct units first because other players targets
@@ -248,11 +250,8 @@ function lib:INSPECT_READY(guid)
 	if unit and name then
 		local shortname, realm = UnitName(unit)
 		local isnotplayer = not UnitIsUnit("player", unit)
-		local group = GetActiveTalentGroup(isnotplayer)
-		local _, _, _, _, spent1 = GetTalentTabInfo(1, isnotplayer, nil, group)
-		local _, _, _, _, spent2 = GetTalentTabInfo(2, isnotplayer, nil, group)
-		local _, _, _, _, spent3 = GetTalentTabInfo(3, isnotplayer, nil, group)
-		if ((spent1 or 0) + (spent2 or 0) + (spent3 or 0) > 0) then
+		local specId = GetInspectSpecialization(unit)
+		if specId then
 			if inspectQueue[name] then
 				inspectQueue[name] = nil
 				self.lastQueuedInspectReceived = GetTime()

@@ -765,6 +765,12 @@ VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET = {
 }
 
 
+VUHDO_DEFAULT_RAID_CDS_BOUQUET = {
+	[VUHDO_I18N_DEF_RAID_CDS] = {
+	},
+}
+
+
 
 --
 VUHDO_DEFAULT_GRID_BOUQUETS = {
@@ -1445,6 +1451,96 @@ function VUHDO_loadDefaultBouquets()
 	end
 	VUHDO_DEFAULT_CHI_BOUQUET = nil;
 	VUHDO_DEFAULT_HOLY_POWER_BOUQUET = nil;
+
+	if (VUHDO_BOUQUETS["VERSION"] < 12) then
+		VUHDO_BOUQUETS["VERSION"] = 12;
+		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_RAID_CDS_BOUQUET);
+
+		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_RAID_CDS,
+			-- Pally
+			642, -- Divine Shield
+			498, -- Divine Protection
+			1022, -- Hand of Protection
+			6940, -- Hand of Sacrifice
+			31850, -- Ardent Defender
+			86659, -- Guardian of Ancient Kings
+			31821, -- Devotion Aura
+			114039, -- Hand of Purity
+
+			--  Warrior
+			871, -- Shield Wall
+			97462, -- Rallying Cry
+			114203, -- Demoralizing Banner
+			118038, -- Die by the Sword
+			12975, -- Last Stand
+			114028, -- Mass Spell Reflect
+			114030, -- Vigilance
+			55694, -- Enraged Regeneration
+			105914, -- Shield Fortress
+
+			-- Druid
+			22812, -- Barkskin
+			106922, -- Might of Ursoc
+			740, -- Tranquility
+			110309, -- Symbiosis
+			102342, -- Ironbark
+			61336, -- Survival Instincts
+			105739, -- Mass Regeneration
+
+			-- DK
+			48792, -- Icebound Fortitude
+			48707, -- Anti-Magic Shell
+			49222, -- Bone Shield
+			49028, -- Dancing Rune Weapon
+			55233, -- Vampiric Blood
+			81164, -- Will of the Necropolis
+			51052, -- Anti-Magic Zone
+			116888, -- Shroud of Purgatory
+
+			-- WL
+			104773, -- Unending Resolve
+			119899, -- Cauterize Master
+			755, -- Health Funnel
+			110913, -- Dark Bargain
+			108359, -- Dark Regeneration
+			108503, -- Grimmoire of Sacrifice
+
+			-- Priest
+			108968, -- Void Shift
+			47585, -- Dispersion
+			64843, -- Divine Hymn
+			47788, -- Guardian Spirit
+			33206, -- Pain Suppression
+			62618, -- Power Word: Barrier
+			108945, -- Angelic Bulwark
+			64901, -- Hymn of Hope
+
+			-- Shaman
+			30823, -- Shamanistic Rage
+			98008, -- Spirit Link Totem
+			16190, -- Mana Tide Totem
+			108280, -- Healing Tide Totem
+			108271, -- Astral Shift
+
+			-- Rogue
+			5277, -- Evasion
+			73651, -- Recuperate
+			1966, -- Feint
+			31224, -- Cloak of Shadows
+			114018, -- Shroud of Concealment
+			76577, -- Smoke Bomb
+
+			-- Mage,
+			45438, -- Ice Block
+			86949, -- Cauterize
+			110959, -- Greater Invisibility
+
+			-- Hunter
+			19263, -- Deterrence
+			90361 -- Spirit Mend
+		);
+
+	end
 
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_buildGenericTargetHealthBouquet();

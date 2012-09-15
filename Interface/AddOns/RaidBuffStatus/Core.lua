@@ -1,10 +1,15 @@
+local addonName, vars = ...
+local L = vars.L
 local AceConfig = LibStub('AceConfigDialog-3.0')
-local L = LibStub('AceLocale-3.0'):GetLocale('RaidBuffStatus')
-local GT = LibStub("LibGroupTalents-1.0")
+--local GT = LibStub("LibGroupTalents-1.0")
+local GT = {} -- XXX
+for _,f in pairs({"GUIDHasTalent","GetGUIDTalentSpec","PurgeAndRescanTalents","GetTreeNames","GetTreeIcons","RegisterCallback"}) do
+  GT[f] = function() return nil end
+end
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 508 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 537 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GT = GT
@@ -15,7 +20,6 @@ local band = _G.bit.band
 local buttons = {}
 local optionsbuttons = {}
 local optionsiconbuttons = {}
-local incombat = false
 local incombat = false
 local dashwasdisplayed = true
 local tankList = '|'
@@ -123,19 +127,24 @@ for _, spell in ipairs(workaroundbugccspells) do
 end
 
 local rezspells = {
-	BS[20484], -- Rebirth
-	BS[7328], -- Redemption
-	BS[2006], -- Resurrection
-	BS[2008], -- Ancestral Spirit
-	BS[50769], -- Revive
+	BS[20484], -- Rebirth (Druid brez)
+	BS[61999], -- Raise Ally (DK)
+	BS[20707], -- Soulstone (Warlock)
+	BS[7328], -- Redemption (Paladin)
+	BS[2006], -- Resurrection (Priest)
+	BS[2008], -- Ancestral Spirit (Shaman)
+	BS[50769], -- Revive (Druid)
+	BS[115178], -- Resuscitate (Monk)
 	BS[8342], -- Defibrillate (Goblin Jumper Cables)
 	BS[22999], -- Defibrillate (Goblin Jumper Cables XL)
 	BS[54732], -- Defribillate (Gnomish Army Knife)
+	BS[83968], -- Mass Resurrection
 }
 local rezspellshash = {}
 for _, spell in ipairs(rezspells) do
 	rezspellshash[spell] = true
 end
+local rezclasses = { DRUID=true, PALADIN=true, PRIEST=true, SHAMAN=true, MONK=true }
 
 local taunts = {
 	-- Death Knights
@@ -156,12 +165,6 @@ local taunts = {
 	20736, -- Distracting Shot
 }
 
-local longtoshortblessing = {
-	[BS[20217]] = L["BoK"], -- Blessing of Kings
-	[BS[19740]] = L["BoM"], -- Blessing of Might
-}
-RaidBuffStatus.longtoshortblessing = longtoshortblessing
-
 local feasttoannounce = {
 	Fish = (L["prepares a %s!"]):format(BS[57426]), -- Fish Feast
 	Dragon = (L["prepares a %s!"]):format(BS[87643]), -- Broiled Dragon Feast
@@ -177,111 +180,63 @@ local feasttoannounce = {
 	BigCauldronExpiring = (L["%s about to expire!"]):format(BS[92712]), -- Big Cauldron of Battle
 }
 
-local classes = {
-	"WARRIOR",
-	"ROGUE",
-	"PRIEST",
-	"DRUID",
-	"PALADIN",
-	"HUNTER",
-	"MAGE",
-	"WARLOCK",
-	"SHAMAN",
-	"DEATHKNIGHT",
-}
+local classes = CLASS_SORT_ORDER
 
-local raid = {
-	classes = {
-		PRIEST = {},
-		DRUID = {},
-		PALADIN = {},
-		ROGUE = {},
-		MAGE = {},
-		WARLOCK = {},
-		SHAMAN = {},
-		WARRIOR = {},
-		HUNTER = {},
-		DEATHKNIGHT = {},
-	},
-	maxunleashedragepoints = 0,
-	maxabominationsmightpoints = 0,
-	VigilanceTalent = {},
-	ClassNumbers = {},
-	BuffTimers = {},
-	TankList = {},
-	ManaList = {},
-	DPSList = {},
-	HealerList = {},
-	israid = false,
-	isparty = false,
-	isbattle = false,
-	readid = 0,
-	size = 1,
-	guilds = {},
-	pug = false,
-	LastDeath = {},
-	leadername = "",
-}
+local raid = { }
 RaidBuffStatus.raid = raid
 raid.reset = function()
-	raid.classes = {}
-	raid.classes.PRIEST = {}
-	raid.classes.DRUID = {}
-	raid.classes.PALADIN = {}
-	raid.classes.ROGUE = {}
-	raid.classes.MAGE = {}
-	raid.classes.WARLOCK = {}
-	raid.classes.SHAMAN = {}
-	raid.classes.WARRIOR = {}
-	raid.classes.HUNTER = {}
-	raid.classes.DEATHKNIGHT = {}
-	raid.VigilanceTalent = {}
+	raid.classes = raid.classes or {}
+	for _,cl in ipairs(classes) do
+	  raid.classes[cl] = raid.classes[cl] or {}
+	  wipe(raid.classes[cl])
+	end
 	raid.maxunleashedragepoints = 0
 	raid.maxabominationsmightpoints = 0
-	raid.ClassNumbers = {}
-	raid.BuffTimers = {}
-	raid.TankList = {}
-	raid.ManaList = {}
-	raid.DPSList = {}
-	raid.HealerList = {}
+	raid.ClassNumbers = raid.ClassNumbers or {}; wipe(raid.ClassNumbers)
+	raid.BuffTimers = raid.BuffTimers or {}; wipe(raid.BuffTimers)
+	raid.TankList = raid.TankList or {}; wipe(raid.TankList)
+	raid.ManaList = raid.ManaList or {}; wipe(raid.ManaList)
+	raid.DPSList = raid.DPSList or {}; wipe(raid.DPSList)
+	raid.HealerList = raid.HealerList or {}; wipe(raid.HealerList)
+	raid.guilds = raid.guilds or {}; wipe(raid.guilds)
+	raid.LastDeath = raid.LastDeath or {}; wipe(raid.LastDeath)
 	raid.israid = false
 	raid.isparty = false
 	raid.isbattle = false
 	raid.readid = 0
 	raid.size = 1
-	raid.guilds = {}
 	raid.pug = false
-	raid.LastDeath = {}
 	raid.leadername = ""
-	RaidBuffStatus:CleanLockSoulStone()
+	for _,class in ipairs(classes) do
+	  raid.ClassNumbers[class] = 0
+	end
+	if RaidBuffStatus.CleanLockSoulStone then
+	   RaidBuffStatus:CleanLockSoulStone()
+	end
 end
 RaidBuffStatus.raid = raid
+raid.reset()
 
+local unknownicon = "Interface\\Icons\\INV_Misc_QuestionMark"
 local specicons = {
-	UNKNOWN = "Interface\\Icons\\INV_Misc_QuestionMark",
+	UNKNOWN = unknownicon,
 	Hybrid = "Interface\\Icons\\Spell_Nature_ElementalAbsorption",
 }
 
-local classicons = {
-	PALADIN = "Interface\\Icons\\Ability_ThunderBolt",
-	PRIEST = "Interface\\Icons\\INV_Staff_30",
-	DRUID = "Interface\\Icons\\Ability_Druid_Maul",
-	MAGE = "Interface\\Icons\\INV_Staff_13",
-	ROGUE = "Interface\\Icons\\INV_ThrowingKnife_04",
-	WARLOCK = "Interface\\Icons\\Spell_Nature_FaerieFire",
-	SHAMAN = "Interface\\Icons\\Spell_Nature_BloodLust",
-	WARRIOR = "Interface\\Icons\\INV_Sword_27",
-	HUNTER = "Interface\\Icons\\INV_Weapon_Bow_07",
-	DEATHKNIGHT = "Interface\\Icons\\Spell_Deathknight_ClassIcon",
-	UNKNOWN = "Interface\\Icons\\INV_Misc_QuestionMark",
-}
+local classicons = {}
+for _,cl in ipairs(classes) do
+  local m = cl:gsub("^(.)(.+)$",function(p,s) return p..s:lower() end) -- mixed case
+  m = m:gsub("knight","Knight")
+  classicons[cl] = "Interface\\Icons\\ClassIcon_"..m
+end
+classicons.UNKNOWN = unknownicon
 
 local roleicons = {
 	MeleeDPS = "Interface\\Icons\\INV_ThrowingKnife_03",
 	RangedDPS = "Interface\\Icons\\INV_Staff_13",
 	Tank = "Interface\\Icons\\INV_Shield_06",
 	Healer = "Interface\\Icons\\Spell_Holy_FlashHeal",
-	UNKNOWN = "Interface\\Icons\\INV_Misc_QuestionMark",
+	UNKNOWN = unknownicon,
 }
 
 
@@ -341,64 +296,6 @@ local function GUIDHasTalent(guid, talentName)
 end
 
 local SP = {
-	heroicpresence = {
-		order = 1020,
-		icon = BSI[28878], -- Heroic Presence
-		tip = BS[28878], -- Heroic Presence
-		callalways = true,
-		code = function()
-			raid.draenei = {}
-			for class,_ in pairs(raid.classes) do
-				for name,rcn in pairs(raid.classes[class]) do
-					if rcn.raceEn == "Draenei" then
-						table.insert(raid.draenei, name)
-						rcn.specialisations.heroicpresence = true
-					end
-				end
-			end
-		end,
-	},
-	vigilancetalent = {
-		order = 1010,
-		icon = BSI[50720], -- Vigilance
-		tip = BS[50720], -- Vigilance
-		callalways = true,
-		code = function()
-			raid.VigilanceTalent = {}
-			for name,rcn in pairs(raid.classes.WARRIOR) do
-				if GUIDHasTalent(rcn.guid, BS[50720]) > 0 then -- Vigilance
-					table.insert(raid.VigilanceTalent, name)
-					rcn.specialisations.vigilancetalent = true
-				end
-			end
-		end,
-	},
-	improvedblizzardone = {
-		order = 1000,
-		icon = BSI[11185], -- Improved Blizzard
-		tip = BS[11185] .. " +1", -- Improved Blizzard
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.MAGE) do
-				if GUIDHasTalent(rcn.guid, BS[11185]) >= 1 then -- Improved Blizzard
-					rcn.specialisations.improvedblizzardone = true
-				end
-			end
-		end,
-	},
-	improvedblizzardtwo = {
-		order = 990,
-		icon = BSI[11185], -- Improved Blizzard
-		tip = BS[11185] .. " +2", -- Improved Blizzard
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.MAGE) do
-				if GUIDHasTalent(rcn.guid, BS[11185]) >= 2 then -- Improved Blizzard
-					rcn.specialisations.improvedblizzardtwo = true
-				end
-			end
-		end,
-	},
 	spiritofredemption = {
 		order = 916,
 		icon = BSI[27827], -- Spirit of Redemption
@@ -451,32 +348,6 @@ local SP = {
 			end
 		end,
 	},
-	vampiricembrace = {
-		order = 883,
-		icon = BSI[15286], -- Shadowform
-		tip = BS[15286], -- Shadowform
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.PRIEST) do
-				if GUIDHasTalent(rcn.guid, BS[15286]) >= 1 then -- Vampiric Embrace
-					rcn.specialisations.vampiricembrace = true
-				end
-			end
-		end,
-	},
-	auramastery = {
-		order = 815,
-		icon = "Interface\\Icons\\Spell_Holy_AuraMastery",
-		tip = L["Has Aura Mastery"],
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.PALADIN) do
-				if GUIDHasTalent(rcn.guid, BS[31821]) >= 1 then -- Aura Mastery
-					rcn.specialisations.auramastery = true
-				end
-			end
-		end,
-	},
 	sacredcleansing = {
 		order = 790,
 		icon = BSI[53551], -- Sacred Cleansing
@@ -486,38 +357,6 @@ local SP = {
 			for name,rcn in pairs(raid.classes.PALADIN) do
 				if GUIDHasTalent(rcn.guid, BS[53551]) >= 1 then -- Sacred Cleansing
 					rcn.specialisations.sacredcleansing = true
-				end
-			end
-		end,
-	},
-	unleashedrageone = {
-		order = 689,
-		icon = BSI[30802], -- Unleashed Rage
-		tip = BS[30802], -- Unleashed Rage
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[30802]) >= 1 then -- Unleashed Rage
-					rcn.specialisations.unleashedrageone = true
-					if raid.maxunleashedragepoints < 1 then
-						raid.maxunleashedragepoints = 1
-					end
-				end
-			end
-		end,
-	},
-	unleashedragetwo = {
-		order = 688,
-		icon = BSI[30802], -- Unleashed Rage
-		tip = BS[30802] .. "+1", -- Unleashed Rage
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[30802]) >= 2 then -- Unleashed Rage
-					rcn.specialisations.unleashedragetwo = true
-					if raid.maxunleashedragepoints < 2 then
-						raid.maxunleashedragepoints = 2
-					end
 				end
 			end
 		end,
@@ -548,19 +387,6 @@ local SP = {
 			end
 		end,
 	},
-	focusmagic = {
-		order = 780,
-		icon = BSI[54646], -- Focus Magic
-		tip = BS[54646], -- Focus Magic
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.MAGE) do
-				if GUIDHasTalent(rcn.guid, BS[54646]) >= 1 then -- Focus Magic
-					rcn.specialisations.focusmagic = true
-				end
-			end
-		end,
-	},
 	boneshield = {
 		order = 730,
 		icon = BSI[49222], -- Bone Shield
@@ -583,275 +409,6 @@ local SP = {
 			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
 				if GUIDHasTalent(rcn.guid, BS[51052]) >= 1 then -- Anti-Magic Zone
 					rcn.specialisations.antimagiczone = true
-				end
-			end
-		end,
-	},
-	ebonplaguebringerone = {
-		order = 710,
-		icon = BSI[51099], -- Ebon Plaguebringer
-		tip = BS[51099], -- Ebon Plaguebringer
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[51099]) >= 1 then -- Ebon Plaguebringer
-					rcn.specialisations.ebonplaguebringerone = true
-				end
-			end
-		end,
-	},
-	ebonplaguebringertwo = {
-		order = 700,
-		icon = BSI[51099], -- Ebon Plaguebringer
-		tip = BS[51099] .. " +1", -- Ebon Plaguebringer
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[51099]) >= 2 then -- Ebon Plaguebringer
-					rcn.specialisations.ebonplaguebringertwo = true
-				end
-			end
-		end,
-	},
-	abominationsmightone = {
-		order = 686,
-		icon = BSI[53137], -- Abomination's Might
-		tip = BS[53137], -- Abomination's Might
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[53137]) >= 1 then -- Abomination's Might
-					rcn.specialisations.abominationsmightone = true
-					if raid.maxabominationsmightpoints < 1 then
-						raid.maxabominationsmightpoints = 1
-					end
-				end
-			end
-		end,
-	},
-	abominationsmighttwo = {
-		order = 685,
-		icon = BSI[53137], -- Abomination's Might
-		tip = BS[53137] .. " +1", -- Abomination's Might
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[53137]) >= 2 then -- Abomination's Might
-					rcn.specialisations.abominationsmighttwo = true
-					if raid.maxabominationsmightpoints < 2 then
-						raid.maxabominationsmightpoints = 2
-					end
-				end
-			end
-		end,
-	},
-	improvedfaeriefireone = {
-		order = 680,
-		icon = BSI[770], -- Faerie Fire
-		tip = BS[770] .. " +1", -- Faerie Fire
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[33600]) >= 1 then -- Improved Faerie Fire
-					rcn.specialisations.improvedfaeriefireone = true
-				end
-			end
-		end,
-	},
-	improvedfaeriefiretwo = {
-		order = 670,
-		icon = BSI[770], -- Faerie Fire
-		tip = BS[770] .. " +2", -- Faerie Fire
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[33600]) >= 2 then -- Improved Faerie Fire
-					rcn.specialisations.improvedfaeriefiretwo = true
-				end
-			end
-		end,
-	},
-	improvedfaeriefirethree = {
-		order = 660,
-		icon = BSI[770], -- Faerie Fire
-		tip = BS[770] .. " +3", -- Faerie Fire
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[33600]) >= 3 then -- Improved Faerie Fire
-					rcn.specialisations.improvedfaeriefirethree = true
-				end
-			end
-		end,
-	},
-	earthandmoonone = {
-		order = 650,
-		icon = BSI[48506], -- Earth and Moon
-		tip = BS[48506], -- Earth and Moon
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[48506]) >= 1 then -- Earth and Moon
-					rcn.specialisations.earthandmoonone = true
-				end
-			end
-		end,
-	},
-	earthandmoontwo = {
-		order = 640,
-		icon = BSI[48506], -- Earth and Moon
-		tip = BS[48506] .. " +1", -- Earth and Moon
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[48506]) >= 2 then -- Earth and Moon
-					rcn.specialisations.earthandmoontwo = true
-				end
-			end
-		end,
-	},
-	earthandmoonthree = {
-		order = 630,
-		icon = BSI[48506], -- Earth and Moon
-		tip = BS[48506] .. " +2", -- Earth and Moon
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DRUID) do
-				if GUIDHasTalent(rcn.guid, BS[48506]) >= 3 then -- Earth and Moon
-					rcn.specialisations.earthandmoonethree = true
-				end
-			end
-		end,
-	},
-	demonicpactone = {
-		order = 620,
-		icon = BSI[53646], -- Demonic Pact
-		tip = BS[53646], -- Demonic Pact
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.WARLOCK) do
-				if GUIDHasTalent(rcn.guid, BS[53646]) >= 1 then -- Demonic Pact
-					rcn.specialisations.demonicpactone = true
-				end
-			end
-		end,
-	},
-	demonicpacttwo = {
-		order = 610,
-		icon = BSI[53646], -- Demonic Pact
-		tip = BS[53646] .. " +1", -- Demonic Pact
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.WARLOCK) do
-				if GUIDHasTalent(rcn.guid, BS[53646]) >= 2 then -- Demonic Pact
-					rcn.specialisations.demonicpacttwo = true
-				end
-			end
-		end,
-	},
-	demonicpactthree = {
-		order = 600,
-		icon = BSI[53646], -- Demonic Pact
-		tip = BS[53646] .. " +2", -- Demonic Pact
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.WARLOCK) do
-				if GUIDHasTalent(rcn.guid, BS[53646]) >= 3 then -- Demonic Pact
-					rcn.specialisations.demonicpactthree = true
-				end
-			end
-		end,
-	},
-	demonicpactfour = {
-		order = 590,
-		icon = BSI[53646], -- Demonic Pact
-		tip = BS[53646] .. " +3", -- Demonic Pact
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.WARLOCK) do
-				if GUIDHasTalent(rcn.guid, BS[53646]) >= 4 then -- Demonic Pact
-					rcn.specialisations.demonicpactfour = true
-				end
-			end
-		end,
-	},
-	demonicpactfive = {
-		order = 580,
-		icon = BSI[53646], -- Demonic Pact
-		tip = BS[53646] .. " +4", -- Demonic Pact
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.WARLOCK) do
-				if GUIDHasTalent(rcn.guid, BS[53646]) >= 5 then -- Demonic Pact
-					rcn.specialisations.demonicpactfive = true
-				end
-			end
-		end,
-	},
-	bladebarrier = {
-		order = 570,
-		icon = BSI[49182], -- Blade Barrier
-		tip = BS[49182], -- Blade Barrier
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[49182]) >= 1 then -- Blade Barrier
-					rcn.specialisations.bladebarrier = true
-				end
-			end
-		end,
-	},
-	toughness = {
-		order = 560,
-		icon = BSI[49042], -- Toughness
-		tip = BS[49042], -- Toughness
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[49042]) >= 1 then -- Toughness
-					rcn.specialisations.toughness = true
-				end
-			end
-		end,
-	},
-	restorativetotemsone = {
-		order = 530,
-		icon = BSI[16187], -- Restorative Totems
-		tip = BS[16187] .. " +1", -- Restorative Totems
-		callalways = true,
-		code = function()
-			if raid.ClassNumbers.SHAMAN < 1 then
-				return
-			end
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[16187]) >= 1 then -- Restorative Totems
-					rcn.specialisations.restorativetotemsone = true
-				end
-			end
-		end,
-	},
-	restorativetotemstwo = {
-		order = 520,
-		icon = BSI[16187], -- Restorative Totems
-		tip = BS[16187] .. " +2", -- Restorative Totems
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[16187]) >= 2 then -- Restorative Totems
-					rcn.specialisations.restorativetotemstwo = true
-				end
-			end
-		end,
-	},
-	restorativetotemsthree = {
-		order = 510,
-		icon = BSI[16187], -- Restorative Totems
-		tip = BS[16187] .. " +3", -- Restorative Totems
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[16187]) >= 3 then -- Restorative Totems
-					rcn.specialisations.restorativetotemstwo = true
 				end
 			end
 		end,
@@ -917,7 +474,6 @@ function RaidBuffStatus:OnInitialize()
 		WotLKFlasksElixirs = false,
 		ShowGroupNumber = false,
 --		ShowMissingBlessing = true,
-		ShortMissingBlessing = true,
 		whisperonlyone = true,
 		abouttorunout = 3,
 		LockWindow = false,
@@ -1706,7 +1262,7 @@ function RaidBuffStatus:ReportToChat(boss, channel)
 	local BF = RaidBuffStatus.BF
 	local warnings = 0
 	local buffs = 0
-	local canspeak = IsRaidLeader() or IsRaidOfficer() or raid.pug
+	local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") or raid.pug
 	if not canspeak and RaidBuffStatus.db.profile.ReportChat and raid.israid then
 		RaidBuffStatus:OfficerWarning()
 	end
@@ -1816,42 +1372,35 @@ function RaidBuffStatus:ReadRaid()
 	for _,class in ipairs(classes) do
 		raid.ClassNumbers[class] = 0
 	end
-	local raidnum = GetNumRaidMembers()
-	local partynum = GetNumPartyMembers()
 --	RaidBuffStatus:Debug("tankList:" .. tankList)
 	local it = select(2, IsInInstance())
 	raid.isbattle = (it == "pvp") or (it == "arena") or 
 	                (GetRealZoneText() == L["Wintergrasp"]) or
 	                (GetRealZoneText() == L["Tol Barad"])
-	if raidnum < 2 then
-		if partynum < 1 then
-			raid.reset()
-			return
-		else
-			raid.isparty = true
-			raid.israid = false
-			raid.size = partynum + 1
-			for i = 1, partynum do
-				RaidBuffStatus:ReadUnit("party" .. i, i)
-			end
-			RaidBuffStatus:ReadUnit("player", partynum + 1)
+	local groupnum = GetNumGroupMembers()
+	raid.size = groupnum
+	if groupnum == 0 then -- not grouped
+		raid.reset()
+		return
+	elseif not IsInRaid() then -- party group
+		raid.isparty = true
+		raid.israid = false
+		for i = 1, (groupnum-1) do
+			RaidBuffStatus:ReadUnit("party" .. i, i)
 		end
-	else
+		RaidBuffStatus:ReadUnit("player", groupnum)
+	else -- raid group
 		if raid.isparty then -- Party has converted to Raid!
 			if RaidBuffStatus.db.profile.AutoShowDashRaid then
 				RaidBuffStatus:ShowReportFrame()
 			end
 			RaidBuffStatus:TriggerXPerlTankUpdate()
 			raid.reset()
-			for _,class in ipairs(classes) do
-				raid.ClassNumbers[class] = 0
-			end
 		end
 		raid.isparty = false
 		raid.israid = true
-		raid.size = raidnum
 
-		for i = 1, raidnum do
+		for i = 1, groupnum do
 			RaidBuffStatus:ReadUnit("raid" .. i, i)
 		end
 	end
@@ -1862,7 +1411,7 @@ function RaidBuffStatus:ReadRaid()
 		end
 	end
 	if raid.israid then
-		local minguildies = 0.75 * raidnum
+		local minguildies = 0.75 * groupnum
 		raid.pug = true
 		for _,v in pairs(raid.guilds) do
 			if v > minguildies then
@@ -1873,6 +1422,19 @@ function RaidBuffStatus:ReadRaid()
 	end
 end
 
+local spec_role = {
+  MAGE          = "RDPS",
+  WARLOCK       = "RDPS",
+  HUNTER        = "RDPS",
+  ROGUE         = "MDPS",
+  PRIEST        = { [1] = "HEALER", [2] = "HEALER", [3] = "RDPS" },
+  DEATHKNIGHT   = { [1] = "TANK",   [2] = "MDPS", [3] = "MDPS" },
+  PALADIN       = { [1] = "HEALER", [2] = "TANK",   [3] = "MDPS" },
+  WARRIOR       = { [1] = "MDPS", [2] = "MDPS", [3] = "TANK" },
+  SHAMAN        = { [1] = "RDPS", [2] = "MDPS", [3] = "HEALER" },
+  DRUID         = { [1] = "RDPS", [2] = "MDPS", [3] = "TANK", [4] = "HEALER" },
+  MONK          = { [1] = "TANK", [2] = "HEALER", [3] = "MDPS" },
+}
 
 -- raid = { classes = { CLASS = { NAME = { readid, unitid, guid, group, zone, online, isdead, istank, hasmana, isdps, ishealer, class, talents = {spec, tree = { talent = {}}}, hasbuff = {}
 function RaidBuffStatus:ReadUnit(unitid, unitindex)
@@ -1891,9 +1453,8 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		local rank = 0
 		local subgroup = 1
 		local online = UnitIsConnected(unitid)
-		local role = ""
+		local role = UnitGroupRolesAssigned(unitid)
 		local zone = "UNKNOWN"
-		local nametwo = name
 		local isML = false
 		local istank = false
 		local hasmana = false
@@ -1901,9 +1462,11 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		local ismeleedps = false
 		local israngeddps = false
 		local ishealer = false
+		local specidx = nil
 		local level = UnitLevel(unitid)
 		local hasbuff = {}
 		local _, raceEn = UnitRace(unitid)
+		specidx = raid.classes[class][name] and raid.classes[class][name].specidx
 		local guild = GetGuildInfo(unitid)
 		if guild then
 			if not raid.guilds[guild] then
@@ -1912,14 +1475,15 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 				raid.guilds[guild] = raid.guilds[guild] + 1
 			end
 		end
-		if raid.israid then
-			nametwo, rank, subgroup, _, _, _, zone, _, _, role, isML = GetRaidRosterInfo(unitindex)
-			if rank == 2 then
-				raid.leadername = name
-			end
-		elseif raid.isparty then
-			if UnitIsPartyLeader(unitid) then
-				raid.leadername = name
+		if UnitIsGroupLeader(unitid) then
+			raid.leadername = name
+		end
+		if GetNumGroupMembers() > 0 then
+		        local _,rrole
+			_, rank, subgroup, _, _, _, zone, _, _, rrole, isML = GetRaidRosterInfo(unitindex)
+			if (not role or role == "NONE") and 
+			   (rrole == "MAINTANK" or string.find(tankList, '|' .. name .. '|')) then
+			  role = "TANK"
 			end
 		end
 		if RaidBuffStatus.db.profile.IgnoreLastThreeGroups then
@@ -1979,135 +1543,41 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 				break
 			end
 		end
-		if raid.israid and (tankList ~= '|' or role == "MAINTANK") then
-			if (string.find(tankList, '|' .. name .. '|')) or role == "MAINTANK" then
-				if class ~= "PRIEST" and class ~= "ROGUE" then
-					if not RaidBuffStatus.db.profile.onlyusetanklist then
-						if class == "PALADIN" then
-							if hasbuff[BS[25780]] then -- Righteous Fury
-								istank = true
-							elseif raid.classes.PALADIN[name].spec == L["Protection"] then
-								istank = true
-							end
-						elseif class == "WARRIOR" then
-							if raid.classes.WARRIOR[name].spec == L["Protection"] then
-								istank = true
-							end
-						elseif class == "DRUID" then
-							local powerType = UnitPowerType(unitid) or -1
-							if powerType == 1 then -- bear form
-								istank = true
-							elseif GUIDHasTalent(raid.classes.DRUID[name].guid, BS[57878]) >= 2 and GUIDHasTalent(raid.classes.DRUID[name].guid, BS[16929]) >= 3 then -- Natural Reaction AND Thick Hide
-								istank = true
-							end
-						elseif class == "DEATHKNIGHT" then
-							if raid.classes.DEATHKNIGHT[name].specialisations.bladebarrier and raid.classes.DEATHKNIGHT[name].specialisations.toughness then
-								istank = true
-							end
-						else
-							istank = true
-						end
-					else
-						istank = true
-					end
-				end
-			end
-		else
-			if class == "PALADIN" then
-				if hasbuff[BS[25780]] and not raid.classes.PALADIN[name].spec == L["Holy"] then -- Righteous Fury
-					istank = true
-				elseif raid.classes.PALADIN[name].spec == L["Protection"] then
-					istank = true
-				end
-			elseif class == "WARRIOR" then
-				if raid.classes.WARRIOR[name].spec == L["Protection"] then
-					istank = true
-				end
-			elseif class == "DRUID" then
-				local powerType = UnitPowerType(unitid) or -1
-				if powerType == 1 then -- bear form
-					istank = true
-				elseif GUIDHasTalent(raid.classes.DRUID[name].guid, BS[57878]) >= 2 and GUIDHasTalent(raid.classes.DRUID[name].guid, BS[16929]) >= 3 then -- Natural Reaction AND Thick Hide
-					istank = true
-				end
-			elseif class == "DEATHKNIGHT" then
-				if raid.classes.DEATHKNIGHT[name].specialisations.bladebarrier and raid.classes.DEATHKNIGHT[name].specialisations.toughness then
-					istank = true
-				end
-			end
+		local specrole = "NONE"
+		if type(spec_role[class]) == "string" then
+		  specrole = spec_role[class]
+		elseif specidx then
+		  specrole = spec_role[class][specidx]
+		end
+		if class == "PALADIN" and specrole == "NONE" and hasbuff[BS[25780]] then -- Righteous Fury
+		  specrole = "TANK"
+                end
+		if (not role or role == "NONE") then
+		  if specrole == "MDPS" or specrole == "RDPS" then
+		    role = "DAMAGER"
+		  else
+                    role = specrole
+ 		  end
+		end
+		if specrole == "MDPS" then
+		  ismeleedps = true
+		elseif specrole == "RDPS" then
+		  israngeddps = true
+		end
+		if role == "DAMAGER" then
+		  isdps = true
+		elseif role == "TANK" then
+		  istank = true
+		elseif role == "HEALER" then
+		  ishealer = true
 		end
 
 		if class == "PRIEST" or class == "PALADIN" or class == "MAGE" or class == "WARLOCK" or class == "SHAMAN" then
 			hasmana = true
-		elseif class == "DRUID" then
-			if raid.classes.DRUID[name].spec ~= L["Feral Combat"] then
-				hasmana = true
-			end
-		end
-		if class == "PRIEST" then
-			if raid.classes.PRIEST[name].spec ~= L["Shadow"] then
-				ishealer = true
-			end
-		elseif class == "PALADIN" then
-			if raid.classes.PALADIN[name].spec == L["Holy"] then
-				ishealer = true
-			end
-		elseif class == "DRUID" then
-			if raid.classes.DRUID[name].spec == L["Restoration"] then
-				ishealer = true
-			end
-		elseif class == "SHAMAN" then
-			if raid.classes.SHAMAN[name].spec == L["Restoration"] then
-				ishealer = true
-			end
-		end
-
-		if class == "HUNTER" or class == "MAGE" or class == "WARLOCK" then
-			isdps = true
-			israngeddps = true
-		elseif class == "ROGUE" then
-			isdps = true
-			ismeleedps = true
-		elseif class == "DRUID" then
-			if not ishealer and not istank and raid.classes.DRUID[name].talents then
-				isdps = true
-				if raid.classes.DRUID[name].spec == L["Feral Combat"] then
-					ismeleedps = true
-				else
-					israngeddps = true
-				end
-			end
-		elseif class == "PALADIN" then
-			if not ishealer and not istank and raid.classes.PALADIN[name].talents then
-				isdps = true
-				ismeleedps = true
-			end
-		elseif class == "SHAMAN" then
-			if not ishealer then
-				if raid.classes.SHAMAN[name].talents then
-					isdps = true
-					if raid.classes.SHAMAN[name].spec == L["Enhancement"] then
-						ismeleedps = true
-					else
-						israngeddps = true
-					end
-				end
-			end
-		elseif class == "PRIEST" then
-			if not ishealer and raid.classes.PRIEST[name].talents then
-				isdps = true
-				israngeddps = true
-			end
-		elseif class == "DEATHKNIGHT" then
-			if not istank and raid.classes.DEATHKNIGHT[name].talents then
-				isdps = true
-				ismeleedps = true
-			end
-		elseif class == "WARRIOR" then
-			if not istank and raid.classes.WARRIOR[name].talents then
-				isdps = true
-				ismeleedps = true
-			end
+		elseif class == "DRUID" and (specidx == 1 or specidx == 4) then
+			hasmana = true
+		elseif class == "MONK" and specidx == 2 then
+			hasmana = true
 		end
 
 		if istank then
@@ -2168,7 +1638,7 @@ function RaidBuffStatus:Say(msg, player, prepend, channel)
 		pre = "RBS::"
 	end
 	local str = pre
-	local canspeak = IsRaidLeader() or IsRaidOfficer() or raid.pug
+	local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") or raid.pug
 	for _,s in pairs({strsplit(" ", msg)}) do
 		if #str + #s >= 150 then
 			if player then
@@ -2332,7 +1802,7 @@ function RaidBuffStatus:SetupFrames()
 	RaidBuffStatus.button:SetWidth(22)
 	RaidBuffStatus.button:SetPoint("BOTTOM", RaidBuffStatus.frame, "BOTTOM", 0, 5)
 	RaidBuffStatus.button:SetScript("OnClick", function()
-		if IsRaidLeader() or IsRaidOfficer() then
+		if UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") then
 			DoReadyCheck()
 		else
 			RaidBuffStatus:OfficerWarning()
@@ -3144,14 +2614,14 @@ end
 
 function RaidBuffStatus:DelayedEnable()
 	RaidBuffStatus.delayedenablecalled = true
+	RaidBuffStatus:ValidateSpellIDs()
 	RaidBuffStatus:SetupFrames()
 	RaidBuffStatus:ScheduleTimer(function()
 		RaidBuffStatus:IconFix()
 	end, 15) -- to handle icons not being downloaded from the server yet HORRIBLE CODING!!
 	RaidBuffStatus:JoinedPartyRaidChanged()
 	RaidBuffStatus:UpdateMiniMapButton()
-	RaidBuffStatus:RegisterEvent("RAID_ROSTER_UPDATE", "JoinedPartyRaidChanged")
-	RaidBuffStatus:RegisterEvent("PARTY_MEMBERS_CHANGED", "JoinedPartyRaidChanged")
+	RaidBuffStatus:RegisterEvent("GROUP_ROSTER_UPDATE", "JoinedPartyRaidChanged")
 	RaidBuffStatus:RegisterEvent("PLAYER_ENTERING_WORLD", "JoinedPartyRaidChanged")
 	RaidBuffStatus:RegisterEvent("PLAYER_REGEN_DISABLED", "EnteringCombat")
 	RaidBuffStatus:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "COMBAT_LOG_EVENT_UNFILTERED")
@@ -3435,9 +2905,11 @@ function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, r
 				else
 					self:SetAttribute("spell", cheapspell)
 					self:SetAttribute("target-slot", itemslot)
+					self:SetAttribute("unit", "player") -- buff self to hit group, in case we're targetting a friendly NPC
 					self:SetScript("PostClick", function(self)
 						self:SetAttribute("spell", nil)
 						self:SetAttribute("target-slot", nil)
+					        self:SetAttribute("unit", nil)
 						self:SetScript("PostClick", nil)
 					end)					
 				end
@@ -3463,7 +2935,7 @@ function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, r
 			end
 		elseif action == "report" then
 			RaidBuffStatus:DoReport(true)
-			local canspeak = IsRaidLeader() or IsRaidOfficer() or raid.pug
+	                local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") or raid.pug
 			if not canspeak and RaidBuffStatus.db.profile.ReportChat and raid.israid then
 				RaidBuffStatus:OfficerWarning()
 			end
@@ -3515,7 +2987,7 @@ function RaidBuffStatus:WhisperBuff(buff, report, raid, prefix)
 		end
 	elseif buff.whispertobuff then
 		if #report[buff.list] > 0 then
-			buff.whispertobuff(report[buff.list], prefix)
+			buff.whispertobuff(report[buff.list], prefix, buff.buffinfo)
 		end
 	end
 end
@@ -3615,28 +3087,10 @@ function RaidBuffStatus:RaidBuff(list, cheapspell) -- raid-wide buffs
 		if foundb then
 			return true
 		end
-		if a.name == "Danielbarron" then -- kek! rez me me me me first!
+		if rezclasses[a.class] and not rezclasses[b.class] then
 			return true
 		end
-		if b.name == "Danielbarron" then -- kek! rez me me me me first!
-			return false
-		end
-		if a.name == "Gingerminx" then -- kek! rez me me me me first!
-			return true
-		end
-		if b.name == "Gingerminx" then -- kek! rez me me me me first!
-			return false
-		end
-		if a.class == "PRIEST" and a.spec == L["Shadow"] then  -- Shadow priests can get mana fast to rez
-			return true
-		end
-		if b.class == "PRIEST" and b.spec == L["Shadow"] then  -- Shadow priests can get mana fast to rez
-			return false
-		end
-		if (a.class == "PALADIN" or a.class == "DRUID" or a.class == "PRIEST" or a.class == "SHAMAN") and b.class ~= "PALADIN" and b.class ~= "DRUID" and b.class ~= "PRIEST" and b.class ~= "SHAMAN" then
-			return true
-		end
-		if b.class == "PALADIN" or b.class == "DRUID" or b.class == "PRIEST" or b.class == "SHAMAN" then
+		if rezclasses[b.class] then
 			return false
 		end
 		if raid.israid  then
@@ -3656,7 +3110,7 @@ function RaidBuffStatus:RaidBuff(list, cheapspell) -- raid-wide buffs
 	end)
 --	RaidBuffStatus:Debug("finished sort")
 	for _, v in ipairs(pb) do
-		if IsSpellInRange(cheapspell, v.unitid) == 1 then
+		if IsSpellInRange(cheapspell, v.unitid) == 1 or rezspellshash[cheapspell] then
 			RaidBuffStatus.lasttobuf = v.unitid
 --			if #pb >= RaidBuffStatus.db.profile.HowMany and reagentspell then
 --				if RaidBuffStatus:GotReagent(reagent) then
@@ -4074,7 +3528,7 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 end
 
 function RaidBuffStatus:TauntSay(msg, typeoftaunt)
-	local canspeak = IsRaidLeader() or IsRaidOfficer()
+        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if typeoftaunt == "taunt" then
 		if RaidBuffStatus.db.profile.tauntself then
 			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
@@ -4234,7 +3688,7 @@ end
 
 
 function RaidBuffStatus:CCBreakSay(msg, typeoftaunt)
-	local canspeak = IsRaidLeader() or IsRaidOfficer()
+        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if typeoftaunt == "ccwarntank" then
 		if RaidBuffStatus.db.profile.ccwarntankself then
 			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
@@ -4592,7 +4046,7 @@ function RaidBuffStatus:Announces(message, who, callback)
 
 --	RaidBuffStatus:Debug(":" .. who .. ":" .. message .. ":")
 	local msg = ""
-	local canspeak = IsRaidLeader() or IsRaidOfficer()
+        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if RaidBuffStatus.db.profile.feasts then
 		if (message == "Fish" and RaidBuffStatus.db.profile.foodquality >= 2)
 			or ((message == "Dragon" or message == "BBQ") and RaidBuffStatus.db.profile.foodquality >= 1)
@@ -4791,9 +4245,9 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 end
 
 function RaidBuffStatus:calcdelay()
-	if IsRaidLeader() or not RaidBuffStatus.db.profile.antispam then
+	if UnitIsGroupLeader("player") or not RaidBuffStatus.db.profile.antispam then
 		return 0.5 -- don't wait when leader
-	elseif IsRaidOfficer() then
+	elseif UnitIsGroupAssistant("player") then
 		local unit = RaidBuffStatus:GetUnitFromName(playername)
 		if unit then
 			local guidlist = {}
@@ -4896,21 +4350,6 @@ function RaidBuffStatus:SayMe(msg)
 	UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
 end
 
-function RaidBuffStatus:SelectPalaAura()
-	if not raid.classes.PALADIN[playername] then
-		return nil
-	end
-	local auraspell = SpellName(465) -- Devotion Aura
-	if raid.classes.PALADIN[playername].talents then
-		if raid.classes.PALADIN[playername].spec == L["Retribution"] then
-			auraspell = SpellName(7294) -- Retribution Aura
-		elseif raid.classes.PALADIN[playername].spec == L["Holy"] then
-			auraspell = SpellName(19746) -- Concentration Aura
-		end
-	end
-	return auraspell
-end
-
 function RaidBuffStatus:SelectPriestInner()
 	if not raid.classes.PRIEST[playername] then
 		return nil
@@ -4955,7 +4394,7 @@ end
 
 
 function RaidBuffStatus:DeathSay(msg, typeofdeath)
-	local canspeak = IsRaidLeader() or IsRaidOfficer()
+        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if typeofdeath == "tank" then
 		if RaidBuffStatus.db.profile.tankdeathself then
 			UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
@@ -5053,21 +4492,6 @@ function RaidBuffStatus:SelectSeal()
 	return BS[31801] -- Seal of Truth
 end
 
-function RaidBuffStatus:SelectRezSpell()
-	if incombat then
-		return nil
-	end
-	if raid.classes.PALADIN[playername] then
-		return BS[7328] -- Redemption
-	elseif raid.classes.PRIEST[playername] then
-		return BS[2006] -- Resurrection
-	elseif raid.classes.SHAMAN[playername] then
-		return BS[2008] -- Ancestral Spirit
-	elseif raid.classes.DRUID[playername] then
-		return BS[50769] -- Revive
-	end
-end
-
 function RaidBuffStatus:LibGroupTalents_Update(e, guid, unit, spec, c1, c2, c3)
 	local rcn = raid.classes[select(2, UnitClass(unit))][RaidBuffStatus:UnitNameRealm(unit)]
 	if rcn == nil then
@@ -5105,10 +4529,13 @@ function RaidBuffStatus:UseDrumsKings(raid)
 	if not RaidBuffStatus.db.profile.checkdrumskings then
 		return false
 	end
-	if raid.ClassNumbers.DRUID > 0 then
+	if raid.ClassNumbers.DRUID > 0 or raid.ClassNumbers.MONK > 0 then -- these classes always bring stats
 		return false
 	end
-	if raid.ClassNumbers.PALADIN > 1 then
+	if raid.ClassNumbers.PALADIN > 1 then -- two pallies, can get might and kings
+		return false
+	end
+	if raid.ClassNumbers.PALADIN == 1 and raid.ClassNumbers.SHAMAN > 0 then -- shaman brings might, pally should buff kings
 		return false
 	end
 	return true
@@ -5260,6 +4687,7 @@ function RaidBuffStatus:GetLockSoulStone(lock)
 end
 
 function RaidBuffStatus:CleanLockSoulStone()
+        if not RaidBuffStatus.db.profile.cooldowns then return end
 	local timenow = time()
 	for lock,t in pairs(RaidBuffStatus.db.profile.cooldowns.soulstone) do
 		if timenow > t then
@@ -5351,20 +4779,29 @@ function RaidBuffStatus:CHAT_MSG_BN_WHISPER(event, msg, sender,...)
   local pid = select(11,...)
   RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, pid)
 end  
+function RaidBuffStatus:CanAutoInvite(whom)
+	if RaidBuffStatus:IsInBGQueue() then
+		RaidBuffStatus:Say(L["Sorry, I am queued for a battlefield."], whom, true)
+		return false
+	end
+	local queued = nil
+	for c,n in pairs(LFG_CATEGORY_NAMES) do
+	  local s = select(3,GetLFGInfoServer(c))
+	  if s then queued = n; break end
+	end
+	if queued then
+		RaidBuffStatus:Say(L["Sorry, I am queued for"].." "..queued, whom, true)
+		return false
+	end
+	return true
+end
+
 function RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, whom)
 	RaidBuffStatus:Debug(":" .. msg .. ":" .. whom .. ":")
 	if msg:lower() ~= (L["invite"]):lower() or not whom then
 		return
 	end
-	local _, _, queued = GetLFGInfoServer()
-	if queued then
-		RaidBuffStatus:Say(L["Sorry, I am queued for a dungeon."], whom, true)
-		return
-	end
-	if RaidBuffStatus:IsInBGQueue() then
-		RaidBuffStatus:Say(L["Sorry, I am queued for a battlefield."], whom, true)
-		return
-	end
+	if not RaidBuffStatus:CanAutoInvite(whom) then return end
 	if RaidBuffStatus.db.profile.aiwguildmembers and IsInGuild() then
 		for i=1, GetNumGuildMembers() do
 			name = GetGuildRosterInfo(i)
@@ -5400,7 +4837,7 @@ function RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, whom)
 end
 
 function RaidBuffStatus:SendInvite(whom)
-	if not ( IsRaidLeader() or IsRaidOfficer() or IsPartyLeader() or not (raid.isparty or raid.israid or raid.isbattle) ) then
+	if not ( UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") or not (raid.isparty or raid.israid or raid.isbattle) ) then
 		RaidBuffStatus:Say(L["You need to whisper the leader instead: "] .. raid.leadername, whom, true)
 		return
 	end
@@ -5423,15 +4860,7 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 	if not whom then
 		return
 	end
-	local _, _, queued = GetLFGInfoServer()
-	if queued then
-		RaidBuffStatus:Say(L["I am queued for a dungeon."], whom, true)
-		return
-	end
-	if RaidBuffStatus:IsInBGQueue() then
-		RaidBuffStatus:Say(L["Sorry, I am queued for a battlefield."], whom, true)
-		return
-	end
+	if not RaidBuffStatus:CanAutoInvite(whom) then return end
 	if RaidBuffStatus.db.profile.guildmembers and IsInGuild() then
 		for i=1, GetNumGuildMembers() do
 			name = GetGuildRosterInfo(i)
@@ -5469,15 +4898,13 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 end
 
 function RaidBuffStatus:AcceptInvite()
-	AcceptGroup()
 	for i=1, STATICPOPUP_NUMDIALOGS do
 		local d = _G["StaticPopup"..i]
-		if d.which == "PARTY_INVITE" then
-			d.inviteAccepted = 1
+		if d:IsShown() and d.which == "PARTY_INVITE" then
+		        _G["StaticPopup"..i.."Button1"]:Click()
 			break
 		end
 	end
-	StaticPopup_Hide("PARTY_INVITE")
 end
 
 function RaidBuffStatus:IsInRaid(whom)

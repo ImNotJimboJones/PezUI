@@ -9,9 +9,11 @@
 - Rez-Spells DK, WL
 - Sehbehindertenmodus Optionen
 
-- Err: Blizz standard party frames hiding
-- Err: Eternal Flame, Purify Spririt...
-- Err: Sharing profiles
+- Direction arrow bei hoher frame strata?
+- Minimap an/aus button speichert nicht?
+- Änderung Roster gruppen kein update?
+- Raid/Party über IsInRaid=>IsInParty
+
 
 1. Health     3
 2. Mana       1

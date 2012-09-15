@@ -1,5 +1,5 @@
 -- RBS mini Tooltip scanner
-RBS_svnrev["ToolScanner.lua"] = select(3,string.find("$Revision: 509 $", ".* (.*) .*"))
+RBS_svnrev["ToolScanner.lua"] = select(3,string.find("$Revision: 513 $", ".* (.*) .*"))
 
 local RBSToolScanner = CreateFrame('GameTooltip', 'RBSToolScanner', WorldFrame, 'GameTooltipTemplate')
 

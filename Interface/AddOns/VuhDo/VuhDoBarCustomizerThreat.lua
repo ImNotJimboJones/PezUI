@@ -15,7 +15,7 @@ function VUHDO_threatIndicatorsBouquetCallback(aUnit, anIsActive, anIcon, aTimer
 			if (anIsActive) then
 				tTexture:SetVertexColor(VUHDO_backColor(aColor));
 				tTexture:Show();
-				VUHDO_UIFrameFlashStop(tTexture, 0.2, 0.5, 3.2, true, 0, 0);
+				VUHDO_UIFrameFlash(tTexture, 0.2, 0.5, 3.2, true, 0, 0);
 			else
 				VUHDO_UIFrameFlashStop(tTexture);
 				tTexture:Hide();

@@ -1,6 +1,6 @@
 -- oRA2 Event handler compatability layer to work with Ace2
 -- Thanks to PRAT author for inspiration
-RBS_svnrev["oRAEvent.lua"] = select(3,string.find("$Revision: 388 $", ".* (.*) .*"))
+RBS_svnrev["oRAEvent.lua"] = select(3,string.find("$Revision: 513 $", ".* (.*) .*"))
 
 RaidBuffStatus.oRAEvent = {}
 function RaidBuffStatus.oRAEvent:RegisterForTankEvent(func)

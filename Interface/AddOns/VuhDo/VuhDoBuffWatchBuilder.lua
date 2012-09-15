@@ -29,11 +29,6 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 	end
 
 	tBuffName = aBuffInfo[1];
-
-	--[[if (VUHDO_MULTICAST_BUFFS[aCategSpec] ~= nil and VUHDO_MULTICAST_BUFFS[aCategSpec][tBuffName] ~= nil) then
-		SetMultiCastSpell(VUHDO_MULTICAST_BUFFS[aCategSpec]["SLOT"], VUHDO_MULTICAST_BUFFS[aCategSpec][tBuffName]);
-	end]]
-
 	tPostfix = tBuffName .. (aBuffTarget or "");
 
 	tSwatch = VUHDO_getOrCreateBuffSwatch("VuhDoBuffSwatch_" .. tPostfix, aBuffPanel);
@@ -307,38 +302,3 @@ function VUHDO_reloadBuffPanel()
 
 	VUHDO_REFRESH_BUFFS_TIMER = VUHDO_BUFF_SETTINGS["CONFIG"]["REFRESH_SECS"];
 end
-
-
-
---
---[[function VUHDO_setTotemSlotTo(aSlotNum)
-	local tType, tCurrentSpellId, _ = GetActionInfo(aSlotNum);
-
-	if ("spell" ~= tType) then
-		return;
-	end
-
-	local tCategSpec, tCategSpells;
-	local tSpellName, tSpellId;
-
-	for tCategSpec, tCategSpells in pairs(VUHDO_MULTICAST_BUFFS) do
-
-		if (tCategSpells["SLOT"] == aSlotNum) then
-			for tSpellName, tSpellId in pairs(tCategSpells) do
-
-				if (tCurrentSpellId == tSpellId) then
-					local tCategName = tCategSpec, 3;
-					if (VUHDO_BUFF_SETTINGS[tCategName]["buff"] ~= tSpellName) then -- wichtig, damit wir uns nicht selbst auslösen => Endlosschleife
-						VUHDO_BUFF_SETTINGS[tCategName]["buff"] = tSpellName;
-						VUHDO_reloadBuffPanel();
-					end
-					return;
-				end
-
-			end
-			--VUHDO_xMsg("Error unknown totem id:", tCurrentSpellId, " for slot:", aSlotNum);
-		end
-
-	end
-end
-]]

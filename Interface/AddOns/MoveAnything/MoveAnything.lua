@@ -1,6 +1,6 @@
 --[[ 
   MoveAnything by Wagthaa @ Earthen Ring EU
-
+	FanUpdate by Alea @ Gordynni EU
 	Vanilla & TBC versions by: Skrag, Jason, Vincent
 ]]
 local MOVANY = _G.MOVANY
@@ -97,6 +97,10 @@ local MovAny = {
 		"BagFrame4",
 		"BagFrame5",
 	},
+	lForceProtected = {
+		ArenaPrepFrames = true,
+		ArenaEnemyFrames = true,
+	},
 	lForcedLock = {
 		Boss1TargetFrame = "Boss1TargetFrame",
 		Boss2TargetFrame = "Boss2TargetFrame",
@@ -107,7 +111,9 @@ local MovAny = {
 		PetActionButtonsMover = "PetActionButtonsMover",
 		PetActionButtonsVerticalMover = "PetActionButtonsVerticalMover",
 		StanceButtonsMover = "StanceButtonsMover",
-		StanceButtonsVerticalMover = "StanceButtonsVerticalMover"
+		StanceButtonsVerticalMover = "StanceButtonsVerticalMover",
+		ArenaPrepFrames = "ArenaPrepFrames",
+		ArenaEnemyFrames = "ArenaEnemyFrames",
 		--	BonusActionButton1 = "BonusActionButton1",
 	},
 	lEnableMouse = {
@@ -636,6 +642,18 @@ function MovAny:Boot()
 	if UpdateContainerFrameAnchors then
 		hooksecurefunc("UpdateContainerFrameAnchors", self.hUpdateContainerFrameAnchors)
 	end
+	if SpellBookFrame_Update then
+		hooksecurefunc("SpellBookFrame_Update", function()
+	--	if SpellBookProfessionFrame:IsShown() then
+		--	sbp1:SetTexture("Interface\\Spellbook\\Professions-Book-Left")
+			SpellBookPage1:SetPoint("LEFT", SpellBookFrame)
+	--	else
+	--		local sbp1 = _G.SpellBookPage1
+		--	sbp1:SetTexture("Interface\\Spellbook\\Spellbook-Page-1")
+	--		sbp1:SetPoint("CENTER", SpellBookFrame)
+	--	end
+		end)
+	end
 --[[	if UpdateMicroButtonsParent then
 		hooksecurefunc("UpdateMicroButtonsParent", self.hUpdateMicroButtonsParent)
 	end]]
@@ -999,7 +1017,7 @@ function MovAny.SyncErrorHandler(msg, frame, stack,  ...)
 end
 
 function MovAny:IsProtected(f)
-	return f:IsProtected() or f.MAProtected
+	return f:IsProtected() or f.MAProtected or MovAny.lForceProtected[f:GetName()]
 end
 
 function MovAny:GetCharacterIndex()
