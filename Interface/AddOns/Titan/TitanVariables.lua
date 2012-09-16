@@ -632,36 +632,52 @@ end
 
 --[[ local
 NAME: Init_player_settings
-DESC: Use the Titan settings, the plugin settings, the 'extras' data of the given profile.
+DESC: Use the Titan settings, the plugin settings, the 'extras' data of the given profile. Create the "to" profile if it does not exist.
 VAR:  from_profile - nil or profile to switch from (string)
-VAR:  profile - the toon to use (string)
-VAR:  profile - the toon to use (string)
+VAR:  to_profile - the toon to use (string)
 OUT:  None
 NOTE:
 - Called at PLAYER_ENTERING_WORLD event after we know Titan has registered plugins.
+- There are 3 actions: USE, RESET, and INIT
+- USE:
+ From: the user chosen profile
+ To: Player or Global profile
+- RESET:
+ From: Titan defaults
+ To: Player or Global profile
+- INIT:
+ From: saved variables of that profile
+ To: Player or Global profile
 :NOTE
 --]]
-local function Init_player_settings(from_profile, profile, action)
+local function Init_player_settings(from_profile, to_profile, action)
 	local old_player = {}
 	local old_panel = {}
 	local old_plugins = {}
 	local reset = (action == TITAN_PROFILE_RESET)
+--[[
+TitanDebug("_UseSettings "
+.."from: "..(from_profile or "?").." "
+.."to_profile: "..(to_profile or "?").." "
+.."action: "..action.." "
+)
+--]]
 
 	CleanupProfile () -- hide currently shown plugins
 	-- Ensure the requested profile is at least an empty stub
-	if (not TitanSettings.Players[profile]) or reset then
-		TitanSettings.Players[profile] = {}
-		TitanSettings.Players[profile].Plugins = {}
-		TitanSettings.Players[profile].Panel = {}
-		TitanSettings.Players[profile].Panel.Buttons = {}
-		TitanSettings.Players[profile].Panel.Location = {}
+	if (not TitanSettings.Players[to_profile]) or reset then
+		TitanSettings.Players[to_profile] = {}
+		TitanSettings.Players[to_profile].Plugins = {}
+		TitanSettings.Players[to_profile].Panel = {}
+		TitanSettings.Players[to_profile].Panel.Buttons = {}
+		TitanSettings.Players[to_profile].Panel.Location = {}
 		TitanPlayerSettings = {}
 		TitanPlayerSettings["Plugins"] = {}
 		TitanPlayerSettings["Panel"] = {}
 		TitanPlayerSettings["Register"] = {}
 	end	
 	-- Set global variables
-	TitanPlayerSettings = TitanSettings.Players[profile];
+	TitanPlayerSettings = TitanSettings.Players[to_profile];
 	TitanPluginSettings = TitanPlayerSettings["Plugins"];
 	TitanPanelSettings = TitanPlayerSettings["Panel"];
 	Sync_panel_settings(TITAN_PANEL_SAVED_VARIABLES);
@@ -674,9 +690,9 @@ local function Init_player_settings(from_profile, profile, action)
 		--	
 	elseif action == TITAN_PROFILE_USE then
 		-- The requested profile at least exists so we can copy to it
-		-- Copy from the active profile - not anything in saved vars
-		if profile and TitanSettings.Players[profile] then
-			old_player = TitanSettings.Players[profile]
+		-- Copy from the from_profile to profile - not anything in saved vars
+		if from_profile and TitanSettings.Players[from_profile] then
+			old_player = TitanSettings.Players[from_profile]
 		else
 		end
 		if old_player and old_player["Panel"] then
@@ -716,7 +732,7 @@ local function Init_player_settings(from_profile, profile, action)
 	TitanPlayerSettings["Register"] = {}
 	TitanPanelRegister = TitanPlayerSettings["Register"]
 	
-	TitanSettings.Profile = profile
+	TitanSettings.Profile = to_profile
 end
 
 --[[ API
@@ -956,6 +972,12 @@ NOTE:
 :NOTE
 --]]
 function TitanVariables_UseSettings(profile, action)
+--[[
+TitanDebug("_UseSettings "
+.."profile: "..(profile or "?").." "
+.."action: "..action.." "
+)
+--]]
 	-- sanity checks to ensure the base tables are set
 	if (TitanSettings) then
 		-- all is good
@@ -984,15 +1006,13 @@ function TitanVariables_UseSettings(profile, action)
 		from_profile = profile or nil
 	end
 	
-	if not profile then
-		local _ = nil
-		local glob, name, player, server = TitanUtils_GetGlobalProfile()
-		-- Get the profile according to the user settings
-		if glob then
-			profile = name -- Use global toon
-		else
-			profile, _, _ = TitanUtils_GetPlayer() -- Use current toon
-		end
+	local _ = nil
+	local glob, name, player, server = TitanUtils_GetGlobalProfile()
+	-- Get the profile according to the user settings
+	if glob then
+		profile = name -- Use global toon
+	else
+		profile, _, _ = TitanUtils_GetPlayer() -- Use current toon
 	end
 
 	-- Find the profile in a case insensitive manner

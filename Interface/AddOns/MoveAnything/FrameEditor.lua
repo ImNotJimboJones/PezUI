@@ -1,7 +1,6 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
-local _G = _G
-local _ = _
+local _
 
 function MovAny:ToggleFrameEditors(show)
 	show = show ~= nil and show or MAOptionsToggleFrameEditors:GetChecked()

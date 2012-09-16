@@ -525,6 +525,8 @@ L["TITAN_GOLD_COIN_LABELS"] = "Показать метки денег";
 L["TITAN_GOLD_COIN_ICONS"] = "Показать иконки";
 L["TITAN_GOLD_ONLY"] = "Показать только золото";
 L["TITAN_GOLD_COLORS"] = "Показать окраску золота";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "Контроль звука";

@@ -1,4 +1,4 @@
-local PetBattleEv = CreateFrame("Frame", "PetBattleEvents", UIParent)
+--[[local PetBattleEv = CreateFrame("Frame", "PetBattleEvents", UIParent)
 	PetBattleEv:RegisterEvent("PET_BATTLE_OPENING_START")
 	PetBattleEv:RegisterEvent("PET_BATTLE_OPENING_DONE")
 	PetBattleEv:RegisterEvent("PET_BATTLE_CLOSE")
@@ -6,7 +6,7 @@ local PetBattleEv = CreateFrame("Frame", "PetBattleEvents", UIParent)
 	PetBattleEv:RegisterEvent("PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE")
 	PetBattleEv:RegisterEvent("PET_BATTLE_TURN_STARTED")
 	PetBattleEv:SetScript("OnEvent", function(self, event, ...)
-		if event == "PET_BATTLE_OPENING_START" or event == "PET_BATTLE_OPENING_DONE" then
+	if event == "PET_BATTLE_OPENING_START" or event == "PET_BATTLE_OPENING_DONE" then
 			if MultiBarBottomRight ~= nil and MultiBarBottomRight:IsShown() then
 				MultiBarBottomRight:Hide()
 			end
@@ -45,4 +45,4 @@ local PetBattleEv = CreateFrame("Frame", "PetBattleEvents", UIParent)
 				MultiBarRightHorizontalMover:Show()
 			end
 		end
-	end)
+	end)]]

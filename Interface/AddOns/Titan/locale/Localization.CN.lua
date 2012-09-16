@@ -414,7 +414,6 @@ L["TITAN_PANEL_MENU_PLUGIN_RESET_DESC"] = "Refresh plugin text and position";
 		  		Items = "Items",
 		  		Discounts = "Discounts",
 		  		Costs = "Costs",
-				CostTotal = "Total Cost",
 				TooltipOptions = "Tooltip",
 				CostBag = "Bag cost",
 				CostEquip = "Equip cost",
@@ -463,6 +462,8 @@ L["TITAN_GOLD_COPPER"] = "c";
   L["TITAN_GOLD_FACTION_PLAYER_ALLY"] = "联盟";
   L["TITAN_GOLD_FACTION_PLAYER_HORDE"] = "部落";
   L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."警告: "..FONT_COLOR_CODE_CLOSE.."这会清空金币助手的数据库，取消操作请按取消.";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "音量信息";

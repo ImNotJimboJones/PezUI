@@ -213,6 +213,124 @@ function TitanPanelPerformanceButton_GetButtonText(id)
 end
 
 -- **************************************************************************
+-- NAME : Stats_UpdateAddonsList(self, watchingCPU)
+-- DESC : Execute garbage collection for Leftclick on button
+-- **************************************************************************
+local function Stats_UpdateAddonsList(self, watchingCPU)
+	if(watchingCPU) then
+		UpdateAddOnCPUUsage()
+	else
+		UpdateAddOnMemoryUsage()
+	end
+
+	local total = 0
+	local i,j,k;
+	local showAddonRate = TitanGetVar(TITAN_PERFORMANCE_ID, "ShowAddonIncRate");
+	for i=1, GetNumAddOns() do
+		local value = (watchingCPU and GetAddOnCPUUsage(i)) or GetAddOnMemoryUsage(i)
+		local name = GetAddOnInfo(i)
+		total = total + value
+
+		for j,addon in ipairs(topAddOns) do
+			if(value > addon.value) then                                                                                                                                                                                                                                         
+				for k = counter, 1, -1 do
+					if(k == j) then
+						topAddOns[k].value = value
+						topAddOns[k].name = GetAddOnInfo(i)
+						break
+					elseif(k ~= 1) then
+						topAddOns[k].value = topAddOns[k-1].value
+						topAddOns[k].name = topAddOns[k-1].name
+					end
+				end
+				break
+			end
+		end
+	end
+	
+	GameTooltip:AddLine(' ')
+
+	if (total > 0) then
+		if(watchingCPU) then
+			GameTooltip:AddLine('|cffffffff'..L["TITAN_PERFORMANCE_ADDON_CPU_USAGE_LABEL"])
+		else
+			GameTooltip:AddLine('|cffffffff'..L["TITAN_PERFORMANCE_ADDON_MEM_USAGE_LABEL"])
+		end
+                
+		if not watchingCPU then
+			if (showAddonRate == 1) then
+				GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"].."/"..L["TITAN_PERFORMANCE_ADDON_RATE_LABEL"]..":")
+			else
+				GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"]..":")
+			end
+		end
+		
+		if watchingCPU then
+		   GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"]..":")
+		end
+                                   
+		for _,addon in ipairs(topAddOns) do
+			if(watchingCPU) then
+			  local diff = addon.value/total * 100;
+			  local incrate = "";
+			    incrate = format("(%.2f%%)", diff);
+			    if (showAddonRate == 1) then 
+			    GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format("%.3f",addon.value)..L["TITAN_MILLISECOND"].." "..GREEN_FONT_COLOR_CODE..incrate);
+			    else
+				  GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format("%.3f",addon.value)..L["TITAN_MILLISECOND"]);
+				  end
+			else
+				local diff = addon.value - (memUsageSinceGC[addon.name])
+				if diff < 0 or memUsageSinceGC[addon.name]== 0 then
+					memUsageSinceGC[addon.name] = addon.value;
+				end
+				local incrate = "";
+				if diff > 0 then
+					incrate = format("(+%.2f) "..L["TITAN_KILOBYTES_PER_SECOND"], diff);
+				end 
+				if (showAddonRate == 1) then                    
+					if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then                       
+					GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000).." "..GREEN_FONT_COLOR_CODE..incrate)
+					else
+						if addon.value > 1000 then
+							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000).." "..GREEN_FONT_COLOR_CODE..incrate)
+						else
+							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT_KB"], addon.value).." "..GREEN_FONT_COLOR_CODE..incrate)
+						end
+					end
+				else
+					if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then
+					GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000))
+					else
+						if addon.value > 1000 then
+							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000))
+						else
+							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT_KB"], addon.value))
+						end
+					end
+				end
+			end
+		end
+		
+		GameTooltip:AddLine(' ')
+		
+		if(watchingCPU) then
+			GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_CPU_USAGE_LABEL"], format("%.3f",total)..L["TITAN_MILLISECOND"])
+		else
+			if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then
+			GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"],format(L["TITAN_MEMORY_FORMAT"], total/1000))
+			else
+				if total > 1000 then
+					GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"], format(L["TITAN_MEMORY_FORMAT"], total/1000))
+				else
+					GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"], format(L["TITAN_MEMORY_FORMAT_KB"], total))
+				end
+			end
+		end
+	end
+end
+
+-- **************************************************************************
 -- NAME : TitanPanelPerformanceButton_SetTooltip()
 -- DESC : Display tooltip text
 -- **************************************************************************
@@ -540,125 +658,6 @@ end
      --button.initialMemory = button.memory;
      --button.startSessionTime = time();
 --end
-
--- **************************************************************************
--- NAME : Stats_UpdateAddonsList(self, watchingCPU)
--- DESC : Execute garbage collection for Leftclick on button
--- **************************************************************************
-local function Stats_UpdateAddonsList(self, watchingCPU)
-	if(watchingCPU) then
-		UpdateAddOnCPUUsage()
-	else
-		UpdateAddOnMemoryUsage()
-	end
-
-	local total = 0
-	local i,j,k;
-	local showAddonRate = TitanGetVar(TITAN_PERFORMANCE_ID, "ShowAddonIncRate");
-	for i=1, GetNumAddOns() do
-		local value = (watchingCPU and GetAddOnCPUUsage(i)) or GetAddOnMemoryUsage(i)
-		local name = GetAddOnInfo(i)
-		total = total + value
-
-		for j,addon in ipairs(topAddOns) do
-			if(value > addon.value) then                                                                                                                                                                                                                                         
-				for k = counter, 1, -1 do
-					if(k == j) then
-						topAddOns[k].value = value
-						topAddOns[k].name = GetAddOnInfo(i)
-						break
-					elseif(k ~= 1) then
-						topAddOns[k].value = topAddOns[k-1].value
-						topAddOns[k].name = topAddOns[k-1].name
-					end
-				end
-				break
-			end
-		end
-	end
-	
-	GameTooltip:AddLine(' ')
-
-	if (total > 0) then
-		if(watchingCPU) then
-			GameTooltip:AddLine('|cffffffff'..L["TITAN_PERFORMANCE_ADDON_CPU_USAGE_LABEL"])
-		else
-			GameTooltip:AddLine('|cffffffff'..L["TITAN_PERFORMANCE_ADDON_MEM_USAGE_LABEL"])
-		end
-                
-		if not watchingCPU then
-			if (showAddonRate == 1) then
-				GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"].."/"..L["TITAN_PERFORMANCE_ADDON_RATE_LABEL"]..":")
-			else
-				GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"]..":")
-			end
-		end
-		
-		if watchingCPU then
-		   GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"],LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"]..":")
-		end
-                                   
-		for _,addon in ipairs(topAddOns) do
-			if(watchingCPU) then
-			  local diff = addon.value/total * 100;
-			  local incrate = "";
-			    incrate = format("(%.2f%%)", diff);
-			    if (showAddonRate == 1) then 
-			    GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format("%.3f",addon.value)..L["TITAN_MILLISECOND"].." "..GREEN_FONT_COLOR_CODE..incrate);
-			    else
-				  GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format("%.3f",addon.value)..L["TITAN_MILLISECOND"]);
-				  end
-			else
-				local diff = addon.value - (memUsageSinceGC[addon.name])
-				if diff < 0 or memUsageSinceGC[addon.name]== 0 then
-					memUsageSinceGC[addon.name] = addon.value;
-				end
-				local incrate = "";
-				if diff > 0 then
-					incrate = format("(+%.2f) "..L["TITAN_KILOBYTES_PER_SECOND"], diff);
-				end 
-				if (showAddonRate == 1) then                    
-					if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then                       
-					GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000).." "..GREEN_FONT_COLOR_CODE..incrate)
-					else
-						if addon.value > 1000 then
-							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000).." "..GREEN_FONT_COLOR_CODE..incrate)
-						else
-							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT_KB"], addon.value).." "..GREEN_FONT_COLOR_CODE..incrate)
-						end
-					end
-				else
-					if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then
-					GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000))
-					else
-						if addon.value > 1000 then
-							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT"], addon.value/1000))
-						else
-							GameTooltip:AddDoubleLine(NORMAL_FONT_COLOR_CODE..addon.name," |cffffffff"..format(L["TITAN_MEMORY_FORMAT_KB"], addon.value))
-						end
-					end
-				end
-			end
-		end
-		
-		GameTooltip:AddLine(' ')
-		
-		if(watchingCPU) then
-			GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_CPU_USAGE_LABEL"], format("%.3f",total)..L["TITAN_MILLISECOND"])
-		else
-			if TitanGetVar(TITAN_PERFORMANCE_ID, "AddonMemoryType") == 1 then
-			GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"],format(L["TITAN_MEMORY_FORMAT"], total/1000))
-			else
-				if total > 1000 then
-					GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"], format(L["TITAN_MEMORY_FORMAT"], total/1000))
-				else
-					GameTooltip:AddDoubleLine(LIGHTYELLOW_FONT_COLOR_CODE..L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"], format(L["TITAN_MEMORY_FORMAT_KB"], total))
-				end
-			end
-		end
-	end
-	
-end
 
 
 -- **************************************************************************

@@ -4,8 +4,7 @@ local curModule
 local curElement
 local elemMetaTable
 local catMetaTable
-local _G = _G
-local _ = _
+local _
 
 local m = {
 	customCat = nil,

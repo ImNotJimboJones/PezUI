@@ -1,0 +1,38 @@
+------------------------------------------------------------------------
+r33 | andymon | 2012-09-16 20:40:59 +0000 (Sun, 16 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v1.00-5.0.5 (from /trunk:32)
+
+Tagging as v1.00-5.0.5
+------------------------------------------------------------------------
+r32 | andymon | 2012-09-16 20:31:27 +0000 (Sun, 16 Sep 2012) | 10 lines
+Changed paths:
+   M /trunk/AtlasMajorCities.lua
+   M /trunk/AtlasMajorCitiesEnhanced.toc
+   M /trunk/AtlasMajorCities_db.lua
+   M /trunk/AtlasMajorCities_edit.lua
+   M /trunk/AtlasMajorCities_zones.lua
+   A /trunk/Images/SSS3.blp
+   A /trunk/Images/SSS4.blp
+   A /trunk/Images/STM1.blp
+   A /trunk/Images/STM2.blp
+   M /trunk/Locale/AtlasMajorCities_deDE.lua
+   M /trunk/Locale/AtlasMajorCities_enUS.lua
+   M /trunk/Locale/AtlasMajorCities_esES.lua
+   M /trunk/Locale/AtlasMajorCities_frFR.lua
+   M /trunk/Locale/AtlasMajorCities_ruRU.lua
+   M /trunk/Locale/AtlasMajorCities_zhCN.lua
+   M /trunk/Locale/AtlasMajorCities_zhTW.lua
+   M /trunk/ReadMe.txt
+
+* Includes new MoP cities and updated locale for enUS, deDE, esES, frFR, ruRU, and zhTW
+* Locale files other than enUS include now only localized entries
+* Added entries for the new cities
+* Added database for the map image locations
+* Some small fixes
+* Get the map name for the new cities as micro map entry
+* Show a message if AMCE register with Atlas (at "reload" or "revert" commands)
+* Separate function to get the NPC id (edit mode)
+* Extended function to identify NPC descriptions at the tooltip (edit mode)
+* NPC descriptions are now enclose in "<>" for zhTW and zhCN (edit mode)
+------------------------------------------------------------------------

@@ -89,6 +89,8 @@ local MovAny = {
 		UIParent = "UIParent",
 		WorldFrame = "WorldFrame",
 		CinematicFrame = "CinematicFrame",
+		ArenaPrepFrames = "ArenaPrepFrames",
+		ArenaEnemyFrames = "ArenaEnemyFrames",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -98,8 +100,8 @@ local MovAny = {
 		"BagFrame5",
 	},
 	lForceProtected = {
-		ArenaPrepFrames = true,
-		ArenaEnemyFrames = true,
+		ArenaPrepFrames = false,
+		ArenaEnemyFrames = false,
 	},
 	lForcedLock = {
 		Boss1TargetFrame = "Boss1TargetFrame",
@@ -108,13 +110,6 @@ local MovAny = {
 		Boss4TargetFrame = "Boss4TargetFrame",
 		Boss5TargetFrame = "Boss5TargetFrame",
 		ActionButton1 = "ActionButton1",
-		PetActionButtonsMover = "PetActionButtonsMover",
-		PetActionButtonsVerticalMover = "PetActionButtonsVerticalMover",
-		StanceButtonsMover = "StanceButtonsMover",
-		StanceButtonsVerticalMover = "StanceButtonsVerticalMover",
-		ArenaPrepFrames = "ArenaPrepFrames",
-		ArenaEnemyFrames = "ArenaEnemyFrames",
-		--	BonusActionButton1 = "BonusActionButton1",
 	},
 	lEnableMouse = {
 		WatchFrame,
@@ -345,7 +340,7 @@ local MovAny = {
 	end,
 	
 	hCreateFrame = function(frameType, name, parent, inherit, dontHook)
-		if name then
+		if name and not MovAny.lForceProtected[name] then
 			if dontHook == "MADontHook" then
 				return
 			end
@@ -421,8 +416,27 @@ local MovAny = {
 	hUIParent_ManageFramePositions = function()
 		API:SyncElement("StanceBarFrame")
 		API:SyncElement("PetActionBarFrame")
+		API:SyncElement("PetActionButtonsVerticalMover")
 		API:SyncElement("StanceButtonsMover")
 		API:SyncElement("StanceButtonsVerticalMover")
+	end,
+	
+	hAddFrameLock = function()
+		if API:GetElement("MultiBarBottomLeft").f == nil  then
+			MultiBarBottomLeft:Hide()
+		end
+		if API:GetElement("MultiBarBottomRight").f == nil then
+			MultiBarBottomRight:Hide()
+		end
+	end,
+	
+	hRemoveFrameLock = function()
+		if API:GetElement("MultiBarBottomLeft").f == nil then
+			MultiBarBottomLeft:Show()
+		end
+		if API:GetElement("MultiBarBottomRight").f == nil then
+			MultiBarBottomRight:Show()
+		end
 	end,
 	
 --[[	hUpdateMicroButtonsParent = function(self, ...)
@@ -639,6 +653,13 @@ function MovAny:Boot()
 	if GameTooltip and GameTooltip.SetBagItem then
 		hooksecurefunc(GameTooltip, "SetBagItem", self.hGameTooltip_SetBagItem)
 	end
+	if AddFrameLock then
+		hooksecurefunc("AddFrameLock", self.hAddFrameLock)
+	end
+	if RemoveFrameLock then
+		hooksecurefunc("RemoveFrameLock", self.hRemoveFrameLock)
+	end
+		
 	if UpdateContainerFrameAnchors then
 		hooksecurefunc("UpdateContainerFrameAnchors", self.hUpdateContainerFrameAnchors)
 	end

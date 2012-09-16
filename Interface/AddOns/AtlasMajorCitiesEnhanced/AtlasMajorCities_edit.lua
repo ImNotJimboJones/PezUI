@@ -1,19 +1,23 @@
-if ( AtlasMajorCities_EditMode ) then
+﻿if ( AtlasMajorCities_EditMode ) then
 
 -- define the shop size in % of map size (this influences the shop-ID and sign-ID)
 local AMC_ShopSize = {
-	["TheExodar"]      = 2.0,
-	["Darnassus"]      = 1.4,
-	["Ironforge"]      = 1.6,
-	["StormwindCity"]  = 1.0,
-	["SilvermoonCity"] = 3.0,
-	["Undercity"]      = 1.6,
-	["ThunderBluff"]   = 1.4,
-	["Orgrimmar1_"]    = 1.2,
-	["Orgrimmar2_"]    = 5.0,
-	["ShattrathCity"]  = 1.4,
-	["Dalaran1_"]      = 2.0,
-	["Dalaran2_"]      = 3.0,
+	["TheExodar"]            = 2.0,
+	["Darnassus"]            = 1.4,
+	["Ironforge"]            = 1.6,
+	["StormwindCity"]        = 1.0,
+	["SilvermoonCity"]       = 3.0,
+	["Undercity"]            = 1.6,
+	["ThunderBluff"]         = 1.4,
+	["Orgrimmar1_"]          = 1.2,
+	["Orgrimmar2_"]          = 5.0,
+	["ShattrathCity"]        = 1.4,
+	["Dalaran1_"]            = 2.0,
+	["Dalaran2_"]            = 3.0,
+	["ShrineofTwoMoons1_"]   = 1.5,
+	["ShrineofTwoMoons2_"]   = 2.0,
+	["ShrineofSevenStars3_"] = 1.5,
+	["ShrineofSevenStars4_"] = 2.0,
 }
 
 -- sub-commands
@@ -45,9 +49,23 @@ local AMC_NPCComment = "";
 -- scan mode switch
 local AMC_ScanMode = 0;
 
+
 -- ******************************************
 -- *** Definition of some basic functions ***
 -- ******************************************
+
+-- extract the NPCs ID (first number is the type)
+local function FAMC_GetNpcID()
+	local guid = UnitGUID("target");
+	local type = tonumber(guid:sub(5,5), 16) % 8;
+	-- check the type of target
+	if ( type == 3 or type == 5 ) then
+		-- get the NPC ID
+		local npcid = tonumber(string.sub(guid,6,10), 16);
+		local npcid0 = "NPC"..tostring(npcid);
+		return npcid, npcid0;
+	end
+end
 
 -- check that the displayed tooltip is originating from a sign at the world frame
 function AtlasMajorCities_CheckSignToolTip()
@@ -70,7 +88,9 @@ local function FAMC_GetMapInfos()
 	SetMapToCurrentZone();
 
 	-- get the map name
-	AMC_MapName = GetMapInfo();
+	local MapName, _, _, isMicro, MicroMap = GetMapInfo();
+	if ( isMicro ) then MapName = MicroMap; end
+	AMC_MapName = MapName;
 	local dungeonLevel = GetCurrentMapDungeonLevel();
 	if ( dungeonLevel > 0 ) then
 		AMC_MapName = AMC_MapName..dungeonLevel.."_";
@@ -113,18 +133,28 @@ end
 
 -- extract the NPC name and title from the tooltip
 local function FAMC_GetNPCtext()
+	local c1, c2 = ", ", "";
+	if ( (GetLocale() == "zhTW") or (GetLocale() == "zhCN") ) then c1, c2 = " <", ">"; end
+
 	local text1 = getglobal("GameTooltipTextLeft1"):GetText();
-	local text2 = ", "..getglobal("GameTooltipTextLeft2"):GetText();
+	local text2 = c1..getglobal("GameTooltipTextLeft2"):GetText();
 	local text3 = "";
-	if ( string.find(text2,LEVEL) == 3 ) then
+	local level_string = string.gsub(LEVEL_GAINED,"%%d","");
+	local tt_string = string.gsub(TOOLTIP_UNIT_LEVEL_CLASS,"%%[12]$s","");
+	local isLevel = string.find(text2,level_string);
+	if ( not isLevel ) then isLevel = string.find(text2,tt_string); end
+	if ( not isLevel ) then isLevel = string.find(text2,LEVEL); end
+	if ( isLevel ) then
 		text2 = "";
+		c2 = "";
 	else
 		text3 = " "..getglobal("GameTooltipTextLeft3"):GetText();
-		if ( string.find(text3,LEVEL) == 2 ) then
-			text3 = "";
-		end
+		isLevel = string.find(text3,level_string);
+		if ( not isLevel ) then isLevel = string.find(text3,tt_string); end
+		if ( not isLevel ) then isLevel = string.find(text3,LEVEL); end
+		if ( isLevel ) then text3 = ""; end
 	end
-	return text1..text2..text3;
+	return text1..text2..text3..c2;
 end
 
 -- delete a shop from the user DB
@@ -464,6 +494,9 @@ StaticPopupDialogs["AtlasMajorCities_CommentManually"] = {
 	hasEditBox = 1,
 	maxLetters = 100,
 	OnShow = function(self)
+		if ( (not AMC_NPCComment or (AMC_NPCComment == "")) and GameTooltip:IsVisible() ) then
+			AMC_NPCComment = getglobal("GameTooltipTextLeft1"):GetText();
+		end
 		self.editBox:SetText(AMC_NPCComment);
 		self.editBox:SetFocus();
 	end,
@@ -1201,14 +1234,9 @@ function AtlasMajorCities_SetComment(msg)
 	AMC_NPCComment = "";
 	local exist;
 	if ( TargetFrame:IsVisible() ) then
-		-- check the type of target
-		local guid = UnitGUID("target");
-		local typ = tonumber(guid:sub(5,5), 16) % 8;
-		if ( typ == 3 or typ == 5 ) then
-			-- get the NPC ID
-			local npcid = tonumber(string.sub(guid,7,10), 16);
-			local npcid0 = "NPC"..tostring(npcid);
-
+		-- get npcid
+		local _, npcid0 = FAMC_GetNpcID();
+		if ( npcid0 ) then
 			-- get old NPC-comment
 			if ( AtlasMajorCities_Comment[npcid0] ) then
 				AMC_NPCComment = AtlasMajorCities_Comment[npcid0];
@@ -1245,11 +1273,7 @@ function AtlasMajorCities_SetCommentDB(msg)
 	if ( AMC_NPCComment and (AMC_NPCComment == "") ) then AMC_NPCComment = nil; end
 
 	-- get npcid
-	local guid = UnitGUID("target");
-	local typ = tonumber(guid:sub(5,5), 16) % 8;
-	if ( typ ~= 3 and typ ~= 5 ) then return; end
-	local npcid = tonumber(string.sub(guid,7,10), 16);
-	local npcid0 = "NPC"..tostring(npcid);
+	local _, npcid0 = FAMC_GetNpcID();
 
 	-- add comment to NPC name
 	if ( not AMC_NPCComment ) then
@@ -1454,16 +1478,13 @@ function AtlasMajorCities_Edit_OnUpdate(self, elapsed)
 
 	-- scan NPC
 	if ( TargetFrame:IsVisible() and MouseIsOver(TargetFrame) and GameTooltip:IsVisible() ) then
-		-- check the type of target
-		local guid = UnitGUID("target");
-		local typ = tonumber(guid:sub(5,5), 16) % 8;
-		if ( (typ == 3 or typ == 5) and (GameTooltip:NumLines() >= 2) ) then
+		-- get npcid
+		local npcid = FAMC_GetNpcID();
+		if ( npcid and (GameTooltip:NumLines() >= 2) ) then
 			-- get NPC name and title from tooltip of NPC target
 			local text = FAMC_GetNPCtext();
 			if ( text ~= AMC_ToolTipText ) then
 				AMC_ToolTipText = text;
-				-- get the NPC ID
-				local npcid = tonumber(string.sub(guid,7,10), 16);
 				-- add NPC to shop list
 				FAMC_SetNPC(text, npcid);
 			end

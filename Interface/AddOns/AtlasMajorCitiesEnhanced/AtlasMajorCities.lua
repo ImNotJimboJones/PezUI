@@ -19,22 +19,45 @@ AtlasMajorCities_Shop = {};
 AtlasMajorCities_Title = {};
 AtlasMajorCities_NPC = {};
 AtlasMajorCities_Comment = {};
-AtlasMajorCities_Adds = {};
+AtlasMajorCities_Adds = nil;
 
 -- assign internal city names to image keys (there a empty image with this name is needed in subfolder images)
 local AMC_myDataKeys = {
-	["TheExodar"]      = "EX",
-	["Darnassus"]      = "DN",
-	["Ironforge"]      = "IF",
-	["StormwindCity"]  = "SW",
-	["SilvermoonCity"] = "SM",
-	["Undercity"]      = "UC",
-	["ThunderBluff"]   = "TB",
-	["Orgrimmar1_"]    = "OG",
-	["Orgrimmar2_"]    = "OGC",
-	["ShattrathCity"]  = "SR",
-	["Dalaran1_"]      = "DL",
-	["Dalaran2_"]      = "DLS",
+	["TheExodar"]            = "EX",
+	["Darnassus"]            = "DN",
+	["Ironforge"]            = "IF",
+	["StormwindCity"]        = "SW",
+	["SilvermoonCity"]       = "SM",
+	["Undercity"]            = "UC",
+	["ThunderBluff"]         = "TB",
+	["Orgrimmar1_"]          = "OG",
+	["Orgrimmar2_"]          = "OGC",
+	["ShattrathCity"]        = "SR",
+	["Dalaran1_"]            = "DL",
+	["Dalaran2_"]            = "DLS",
+	["ShrineofTwoMoons1_"]   = "STM1",
+	["ShrineofTwoMoons2_"]   = "STM2",
+	["ShrineofSevenStars3_"] = "SSS3",
+	["ShrineofSevenStars4_"] = "SSS4",
+}
+
+local AMC_cityMapPath = {
+	["TheExodar"]            = "Interface\\WorldMap\\TheExodar\\TheExodar",
+	["Darnassus"]            = "Interface\\WorldMap\\Darnassus\\Darnassus",
+	["Ironforge"]            = "Interface\\WorldMap\\Ironforge\\Ironforge",
+	["StormwindCity"]        = "Interface\\WorldMap\\StormwindCity\\StormwindCity",
+	["SilvermoonCity"]       = "Interface\\WorldMap\\SilvermoonCity\\SilvermoonCity",
+	["Undercity"]            = "Interface\\WorldMap\\Undercity\\Undercity",
+	["ThunderBluff"]         = "Interface\\WorldMap\\ThunderBluff\\ThunderBluff",
+	["Orgrimmar1_"]          = "Interface\\WorldMap\\Orgrimmar\\Orgrimmar",
+	["Orgrimmar2_"]          = "Interface\\WorldMap\\Orgrimmar\\Orgrimmar1_",
+	["ShattrathCity"]        = "Interface\\WorldMap\\ShattrathCity\\ShattrathCity",
+	["Dalaran1_"]            = "Interface\\WorldMap\\Dalaran\\Dalaran1_",
+	["Dalaran2_"]            = "Interface\\WorldMap\\Dalaran\\Dalaran2_",
+	["ShrineofTwoMoons1_"]   = "Interface\\WorldMap\\MicroDungeon\\ValeOfEternalBlossoms\\ShrineofTwoMoons\\ShrineofTwoMoons1_",
+	["ShrineofTwoMoons2_"]   = "Interface\\WorldMap\\MicroDungeon\\ValeOfEternalBlossoms\\ShrineofTwoMoons\\ShrineofTwoMoons2_",
+	["ShrineofSevenStars3_"] = "Interface\\WorldMap\\MicroDungeon\\ValeOfEternalBlossoms\\ShrineofSevenStars\\ShrineofSevenStars3_",
+	["ShrineofSevenStars4_"] = "Interface\\WorldMap\\MicroDungeon\\ValeOfEternalBlossoms\\ShrineofSevenStars\\ShrineofSevenStars4_",
 }
 
 -- the left and right skip together must be 33.4
@@ -63,6 +86,14 @@ AtlasMajorCities_XMapCoordSkip = {
 	["Dalaran1_2"] = 21.0,
 	["Dalaran2_1"] = 10.4,
 	["Dalaran2_2"] = 23.0,
+	["ShrineofTwoMoons1_1"] = 17.0,
+	["ShrineofTwoMoons1_2"] = 16.4,
+	["ShrineofTwoMoons2_1"] = 15.2,
+	["ShrineofTwoMoons2_2"] = 18.2,
+	["ShrineofSevenStars3_1"] = 19.0,
+	["ShrineofSevenStars3_2"] = 14.4,
+	["ShrineofSevenStars4_1"] = 21.4,
+	["ShrineofSevenStars4_2"] = 12.0,
 }
 
 -- set after addon load
@@ -187,22 +218,27 @@ function AtlasMajorCities_GetNPCText(sval)
 	if ( comment ) then comment = " ("..comment..")"; else comment = ""; end
 	if ( AMC_Pnpc and AMC_Pnpc[nkey] ) then npc =  AMC_Pnpc[nkey]; end
 	if ( not npc )                     then npc = AMC_DBnpc[nkey]; end
-	return npc..comment;
+	if ( npc ) then return npc..comment; end
 end
 
 -- get the actual map name
 local function FAMC_GetActualMapName()
 	SetMapToCurrentZone();
-	local MapName = GetMapInfo();
-	local dungeonLevel = GetCurrentMapDungeonLevel();
+
+	local MapName, _, _, isMicro, MicroMap = GetMapInfo();
+	if ( isMicro ) then MapName = MicroMap; end
+	dungeonLevel = GetCurrentMapDungeonLevel();
 	if ( dungeonLevel > 0 ) then
 		MapName = MapName..dungeonLevel.."_";
 	else
 		if ( MapName == "Dalaran" ) then MapName = "Dalaran1_"; end
 		if ( MapName == "Orgrimmar" ) then MapName = "Orgrimmar1_"; end
 	end
+
 	-- check if the city is included in the AMC city list
-	if ( not AMC_DBcity[MapName] ) then MapName = nil; end
+	if ( AMC_Pcity and not AMC_Pcity[MapName] and not AMC_DBcity[MapName] ) then MapName = nil;
+	elseif ( not AMC_Pcity and not AMC_DBcity[MapName] ) then MapName = nil; end
+
 	return MapName;
 end
 
@@ -279,7 +315,8 @@ local function FAMC_OnLoad(self)
 
 	-- check if the user-DB is used
 	local index = next(AtlasMajorCities_DB);
-	if ( index or AtlasMajorCities_Adds ) then AtlasMajorCities_UserDB = true; end
+	if ( not index ) then AtlasMajorCities_Adds = {}; end
+	if ( index and AtlasMajorCities_EditMode ) then AtlasMajorCities_UserDB = true; end
 
 	-- Register AMC with Atlas (put city names and city keys)
 	AtlasMajorCities_RegisterWithAtlas("init");
@@ -314,8 +351,9 @@ function AtlasMajorCities_RegisterWithAtlas(init)
 			city_list.AMCName = city;
 
 			if ( AMC_Pcity and AMC_Pcity[city] )                then city_list.ZoneName = {  AMC_Pcity[city] }; end
-			if ( not city_list.ZoneName )                       then city_list.ZoneName = { AMC_DBcity[city] }; end
+			if ( not city_list.ZoneName and AMC_DBcity[city] )  then city_list.ZoneName = { AMC_DBcity[city] }; end
 			if ( AMC_Pcity and (AMC_Pcity[city] == "deleted") ) then city_list.ZoneName = { city }; end
+			if ( not city_list.ZoneName )                       then city_list.ZoneName = { city }; end
 
 			if ( AMC_Pcontinent and AMC_Pcontinent[city] )              then city_list.Location = {  AMC_Pcontinent[city] }; end
 			if ( not city_list.Location )                               then city_list.Location = { AMC_DBcontinent[city] }; end
@@ -365,6 +403,10 @@ function AtlasMajorCities_RegisterWithAtlas(init)
 
 	Atlas_PopulateDropdowns();
 	Atlas_Refresh();
+
+	if ( AtlasMajorCities_EditMode and not init ) then
+		DEFAULT_CHAT_FRAME:AddMessage("New registered with Atlas", .9, .0, .9);
+	end
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -575,15 +617,7 @@ local function FAMC_InsertCityMap(city)
 		tex:SetTexCoord(xstart, xend, 0.0, yend);
 
 		-- insert image
-		city0 = city;
-		city1 = city;
-		local length = string.len(city);
-		if ( string.sub(city,length) == "_" ) then
-			city0 = string.sub(city,1,length-2);
-			if ( city == "Orgrimmar1_" ) then city1 = "Orgrimmar"; end
-			if ( city == "Orgrimmar2_" ) then city1 = "Orgrimmar1_"; end
-		end
-		tex:SetTexture("Interface\\WorldMap\\"..city0.."\\"..city1..idx);
+		tex:SetTexture(AMC_cityMapPath[city]..idx);
 	end
 end
 
@@ -1005,7 +1039,7 @@ local function FAMC_AddOutputLines(shopEntry, labelData, labelName, search_text,
 	local labelSpace = FAMC_GetEmptyLabelString(labelText);
 
 	-- wrap text of the label entry in the Atlas list
-	while ( dataText ~= "" ) do
+	while ( dataText and dataText ~= "" ) do
 		-- get max. length of label text (dataShow) to fit in the Atlas list
 		local dataShow = FAMC_CutTextAtFrameLength(labelText, dataText);
 

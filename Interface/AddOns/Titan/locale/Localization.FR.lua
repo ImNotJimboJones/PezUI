@@ -524,6 +524,8 @@ L["TITAN_GOLD_COIN_NONE"] = "Ne rien afficher";
 L["TITAN_GOLD_COIN_LABELS"] = "Afficher le texte des pièces";
 L["TITAN_GOLD_COIN_ICONS"] = "Afficher les images des pièces";
 L["TITAN_GOLD_ONLY"] = "Afficher uniquement les pièces d'or";
+L["TITAN_USE_COMMA"] = "Utiliser une virgule pour le séparateur de milliers";
+L["TITAN_USE_PERIOD"] = "Utiliser un point pour le séparateur de milliers";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "Contrôle du volume";

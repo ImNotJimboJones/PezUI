@@ -1,6 +1,6 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
-local _ = _
+local _
 
 local m = {
 	vars = {"disableLayerArtwork", "disableLayerBackground", "disableLayerBorder", "disableLayerHighlight", "disableLayerOverlay"},

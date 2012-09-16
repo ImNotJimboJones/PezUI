@@ -29,16 +29,18 @@ local GoldTimer = nil;
 local _G = getfenv(0);
 -- ******************************** Functions *******************************
 
- local function comma_value(amount)
-  local formatted = amount
-  local k
-  while true do  
-    formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-    if (k==0) then
-      break
-    end
-  end
-  return formatted
+local function comma_value(amount)
+	local formatted = amount
+	local k
+	local sep = (TitanGetVar(TITAN_GOLD_ID, "UseSeperatorComma") and "UseComma" or "UsePeriod")
+	while true do
+		if sep == "UseComma" then formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2') end
+		if sep == "UsePeriod" then formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1.%2') end
+		if (k==0) then
+			break
+		end
+	end
+	return formatted
 end
 
 local function NiceCash(value, show_zero, show_neg, show_labels)
@@ -173,6 +175,8 @@ function TitanPanelGoldButton_OnLoad(self)
 			ShowIcon = true,
 			ShowLabelText = false,
 			ShowColoredText = true, 
+			UseSeperatorComma = true, 
+			UseSeperatorPeriod = false, 
 
 			gold = { total = "112233", neg = false },
 		}
@@ -239,6 +243,8 @@ function TitanPanelGoldButton_GetTooltipText()
 	GoldSave[GOLD_INDEX].gold = GetMoney("player")
 	local currentMoneyRichText = ""; -- initialize the variable to hold the array
 	local coin_str = ""
+	local show_labels = (TitanGetVar(TITAN_GOLD_ID, "ShowCoinLabels")
+		or TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons"))
 
 	-- This next section will sort the array based on user preference 
 	-- either by name, or by gold amount decending.
@@ -264,7 +270,7 @@ function TitanPanelGoldButton_GetTooltipText()
 		if (character) then
 			if (charserver == server) then
 				if (GoldSave[GoldSaveSorted[i]].show) then
-					coin_str = NiceCash(GoldSave[GoldSaveSorted[i]].gold, false, false)
+					coin_str = NiceCash(GoldSave[GoldSaveSorted[i]].gold, false, false, show_labels)
 					currentMoneyRichText = currentMoneyRichText.."\n"..character.."\t"..coin_str
 --						..TitanUtils_GetHighlightText(format(L["TITAN_MONEY_FORMAT"],
 --							TitanPanelGold_BreakMoney(GoldSave[GoldSaveSorted[i]].gold)))
@@ -273,7 +279,7 @@ function TitanPanelGoldButton_GetTooltipText()
 		end
 	end
 
-	coin_str = NiceCash(TitanPanelGoldButton_TotalGold(), false, false)
+	coin_str = NiceCash(TitanPanelGoldButton_TotalGold(), false, false, show_labels)
 	currentMoneyRichText = currentMoneyRichText.."\n"
 		..TITAN_GOLD_SPACERBAR.."\n"
 		..L["TITAN_GOLD_TTL_GOLD"].."\t"..coin_str
@@ -296,7 +302,7 @@ function TitanPanelGoldButton_GetTooltipText()
 	local sesslength = GetTime() - GOLD_SESSIONSTART;
 	local perhour = math.floor(sesstotal / sesslength * 3600);
 
-	coin_str = NiceCash(GOLD_STARTINGGOLD, false, false)
+	coin_str = NiceCash(GOLD_STARTINGGOLD, false, false, show_labels)
 	local sessionMoneyRichText = "\n\n"..TitanUtils_GetHighlightText(L["TITAN_GOLD_STATS_TITLE"])
 		.."\n"..L["TITAN_GOLD_START_GOLD"].."\t"..coin_str.."\n"
 --		..TitanUtils_GetColoredText(format(L["TITAN_MONEY_FORMAT"], TitanPanelGold_BreakMoney(GOLD_STARTINGGOLD)),TITAN_GOLD_BLUE).."\n";
@@ -311,13 +317,13 @@ function TitanPanelGoldButton_GetTooltipText()
 		GOLD_PERHOUR_STATUS = L["TITAN_GOLD_PERHOUR_EARNED"];
 	end     
 
-	coin_str = NiceCash(sesstotal, true, true)
+	coin_str = NiceCash(sesstotal, true, true, show_labels)
 	sessionMoneyRichText = sessionMoneyRichText
 		..TitanUtils_GetColoredText(GOLD_SESS_STATUS,GOLD_COLOR)
 		.."\t"..coin_str.."\n";
 
 	if TitanGetVar(TITAN_GOLD_ID, "DisplayGoldPerHour") then
-		coin_str = NiceCash(perhour, true, true)
+		coin_str = NiceCash(perhour, true, true, show_labels)
 		sessionMoneyRichText = sessionMoneyRichText
 			..TitanUtils_GetColoredText(GOLD_PERHOUR_STATUS,GOLD_COLOR)
 			.."\t"..coin_str.."\n";
@@ -468,6 +474,21 @@ local function ShowProperLabels(chosen)
 	TitanPanelButton_UpdateButton(TITAN_GOLD_ID);
 end
 
+local function Seperator(chosen)
+TitanDebug("Sep: "
+..(chosen or "?").." "
+)
+	if chosen == "UseSeperatorComma" then
+		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorComma", true);
+		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorPeriod", false);
+	end
+	if chosen == "UseSeperatorPeriod" then
+		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorComma", false);
+		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorPeriod", true);
+	end
+	TitanPanelButton_UpdateButton(TITAN_GOLD_ID);
+end
+
 -- *******************************************************************************************
 -- NAME: TitanPanelRightClickMenu_PrepareGoldMenu
 -- DESC: Builds the right click config menu
@@ -520,6 +541,23 @@ function TitanPanelRightClickMenu_PrepareGoldMenu()
 		info.checked = TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons");
 		info.func = function()
 			ShowProperLabels("ShowCoinIcons")
+		end
+		UIDropDownMenu_AddButton(info, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+		  
+		TitanPanelRightClickMenu_AddSpacer();
+		
+		local info = {};
+		info.text = L["TITAN_USE_COMMA"];
+		info.checked = TitanGetVar(TITAN_GOLD_ID, "UseSeperatorComma");
+		info.func = function()
+			Seperator("UseSeperatorComma")
+		end
+		UIDropDownMenu_AddButton(info, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+		local info = {};
+		info.text = L["TITAN_USE_PERIOD"];
+		info.checked = TitanGetVar(TITAN_GOLD_ID, "UseSeperatorPeriod");
+		info.func = function()
+			Seperator("UseSeperatorPeriod")
 		end
 		UIDropDownMenu_AddButton(info, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 		  

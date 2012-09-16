@@ -1,7 +1,6 @@
 local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
-local _G = _G
-local _ = _
+local _
 
 local genericFunctions
 genericFunctions = {
@@ -72,6 +71,183 @@ MovAny.lVirtualMovers = {
 			f.MAHidden = nil
 		end,
 	},
+	
+	
+	PetBattleMover1 = {
+		w = 270,
+		h = 80,
+		point = {"TOPLEFT", "UIParent", "TOPLEFT", 380, -5},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.ActiveAlly
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMLEFT", PetBattleMover1, "BOTTOMLEFT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.ActiveAlly)
+			local b = PetBattleFrame.ActiveAlly
+			b:ClearAllPoints()
+			b:SetPoint("TOPLEFT", PetBattleFrame.TopArtLeft, "TOPLEFT", 115, -5)
+		end,
+	},
+	
+	PetBattleMover2 = {
+		w = 270,
+		h = 80,
+		point = {"TOPRIGHT", "UIParent", "TOPRIGHT", -370, -5},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.ActiveEnemy
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMRIGHT", PetBattleMover2, "BOTTOMRIGHT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.ActiveEnemy)
+			local b = PetBattleFrame.ActiveEnemy
+			b:ClearAllPoints()
+			b:SetPoint("TOPRIGHT", PetBattleFrame.TopArtRight, "TOPRIGHT", -115, -5)
+		end,
+	},
+	
+	PetBattleMover3 = {
+		w = 170,
+		h = 40,
+		point = {"TOPLEFT", "UIParent", "TOP", -70, -60},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.WeatherFrame
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMRIGHT", PetBattleMover3, "BOTTOMRIGHT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.WeatherFrame)
+			local b = PetBattleFrame.WeatherFrame
+			b:ClearAllPoints()
+			b:SetPoint("TOPLEFT", PetBattleFrame, "TOP", -70, -60)
+		end,
+	},
+	
+	PetBattleMover4 = {
+		w = 140,
+		h = 27,
+		point = {"CENTER", "UIParent", "BOTTOM", 0, 100},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.BottomFrame.TurnTimer
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMRIGHT", PetBattleMover4, "BOTTOMRIGHT", 173, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.BottomFrame.TurnTimer)
+			local b = PetBattleFrame.BottomFrame.TurnTimer
+			b:ClearAllPoints()
+			b:SetPoint("CENTER", PetBattleFrame.BottomFrame, "TOP", 0, -5)
+		end,
+	},
+	
+	PetBattleMover5 = {
+		w = 644,
+		h = 320,
+		point = {"CENTER", "UIParent", "BOTTOM", 0, 200},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.BottomFrame.PetSelectionFrame
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMLEFT", PetBattleMover5, "BOTTOMLEFT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.BottomFrame.PetSelectionFrame)
+			local b = PetBattleFrame.BottomFrame.PetSelectionFrame
+			b:ClearAllPoints()
+			b:SetPoint("CENTER", "UIParent", "BOTTOM", 0, 200)
+		end,
+	},
+	
+	PetBattleMover7 = {
+		w = 0,
+		h = 0,
+		inherits = PetBattleFrame.TopArtRight,
+		point = {"CENTER", "UIParent", "TOP", 0, -70},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.TopArtRight
+			self.sbf = b
+		end,
+		OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self.sbf)
+			else
+				MovAny:UnlockVisibility(self.sbf)
+			end
+		end,
+	},
+	PetBattleMover8 = {
+		w = 0,
+		h = 0,
+		inherits = PetBattleFrame.TopArtLeft,
+		point = {"CENTER", "UIParent", "TOP", 0, -70},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.TopArtLeft
+			self.sbf = b
+		end,
+		OnMAHide = function(self, hidden)
+			if hidden then
+				MovAny:LockVisibility(self.sbf)
+			else
+				MovAny:UnlockVisibility(self.sbf)
+			end
+		end,
+	},
+	
+	
+	PetBattleMover6 = {
+		w = 650,
+		h = 120,
+		point = {"CENTER", "UIParent", "BOTTOM", 0, 70},
+		OnMAHook = function(self)
+			local b = PetBattleFrame.BottomFrame
+			MovAny:UnlockPoint(b)
+			b:ClearAllPoints()
+			b:SetPoint("BOTTOMLEFT", PetBattleMover6, "BOTTOMLEFT", 0, 0)
+			MovAny:LockPoint(b)
+			b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(PetBattleFrame.BottomFrame)
+			local b = PetBattleFrame.BottomFrame
+			b:ClearAllPoints()
+			b:SetPoint("CENTER", "UIParent", "BOTTOM", 0, 50)
+		end,
+	},
+	
+	
 	BagItemTooltipMover = {
 		frameStrata = "TOOLTIP",
 		w = 150,

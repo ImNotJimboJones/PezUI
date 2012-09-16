@@ -1851,7 +1851,7 @@ function TitanPrint(message, msg_type)
 	elseif msg_type == "header" then
 		local ver = TitanPanel_GetVersion()
 		pre = TitanUtils_GetGoldText(L["TITAN_PANEL"])
-			..TitanUtils_GetGreenText(" ver")
+			..TitanUtils_GetGreenText(" "..ver)
 			..TitanUtils_GetGoldText(L["TITAN_PANEL_VERSION_INFO"]
 			)
 	end

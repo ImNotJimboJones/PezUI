@@ -500,6 +500,8 @@ L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."경고: "
 .." 삭제하려면 확인을 취소하려면 취소 또는 ESC 키를 누르세요.";
 L["TITAN_GOLD_COIN_LABELS"] = "동전 이름 표시";
 L["TITAN_GOLD_ONLY"] = "소지금만 표시";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "음량 정보";

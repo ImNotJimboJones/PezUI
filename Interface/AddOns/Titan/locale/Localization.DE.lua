@@ -463,6 +463,8 @@ L["TITAN_GOLD_COPPER"] = "c";
 	L["TITAN_GOLD_FACTION_PLAYER_ALLY"] = "Alliance";
 	L["TITAN_GOLD_FACTION_PLAYER_HORDE"] = "Horde";
 	L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."Warning: "..FONT_COLOR_CODE_CLOSE.."This setting will wipe your Titan Gold database. If you wish to continue with this operation, push 'Accept', otherwise push 'Cancel' or the 'Escape' key.";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 	
 
 L["TITAN_VOLUME_TOOLTIP"] = "Lautst\195\164rke einstellen";

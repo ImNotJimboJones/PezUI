@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Revision: $Rev: 137 $
 ## Title: Broker_Currencyflow
 ## Notes: LDB data source for currency flow
@@ -7,7 +7,7 @@
 ## SavedVariables: Currencyflow_DB
 ##
 ## OptionalDeps: Ace3, LibQTip-1.0, LibDataBroker-1.1
-## X-Curse-Packaged-Version: v1.1
+## X-Curse-Packaged-Version: v1.2
 ## X-Curse-Project-Name: Broker_Currencyflow
 ## X-Curse-Project-ID: broker_currencyflow
 ## X-Curse-Repository-ID: wow/broker_currencyflow/mainline

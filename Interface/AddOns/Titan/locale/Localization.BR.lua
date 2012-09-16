@@ -505,6 +505,8 @@ L["TITAN_GOLD_COIN_LABELS"] = "Exibir Rótulo de Texto";
 L["TITAN_GOLD_COIN_ICONS"] = "Exibir Rótulo de Ícones";
 L["TITAN_GOLD_ONLY"] = "Exibir Somente Ouro";
 L["TITAN_GOLD_COLORS"] = "Exibir Gold Colors";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "Informação de Volume";
