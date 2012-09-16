@@ -29,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
-	["global"] = {
-		["version"] = "6.005",
-	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
+	},
+	["global"] = {
+		["version"] = "6.007",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["scale"] = {
-					["Normal"] = 0.7000000476837158,
-					["Boss"] = 1,
-					["Neutral"] = 0.7000000476837158,
-					["Elite"] = 0.800000011920929,
-				},
 				["toggle"] = {
 					["Totem"] = true,
+				},
+				["scale"] = {
+					["Elite"] = 0.800000011920929,
+					["Boss"] = 1,
+					["Neutral"] = 0.7000000476837158,
+					["Normal"] = 0.7000000476837158,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -153,10 +153,10 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["normal"] = {
@@ -169,11 +169,11 @@ ThreatPlatesDB = {
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["castbar"] = {
-					["texture"] = "Minimalist",
-				},
 				["healthborder"] = {
 					["texture"] = "TP_HealthBarOverlayThin",
+				},
+				["castbar"] = {
+					["texture"] = "Minimalist",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -190,7 +190,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
