@@ -1389,7 +1389,7 @@ function LightHeaded:HijackQuestNPCModel()
     -- Check and see if the QuestNPCModel has been shown or not
     local npc = QuestNPCModel
 
-    if npc:IsShown() and npc:GetParent() == QuestLogFrame and current:IsVisible() and self.db.profile.fixmodel and not npcpoints then
+    if npc:IsShown() and npc:GetParent() == QuestLogFrame and current:IsVisible() and self.db.profile.fixmodel then
         -- hide all the elements of the model and move it into our frame
         for idx, name in ipairs(npcelems) do
             local elem = _G[name]
@@ -1407,8 +1407,11 @@ function LightHeaded:HijackQuestNPCModel()
         QuestNPCModel:ClearAllPoints()
         QuestNPCModel:SetPoint("BOTTOMLEFT", LightHeadedFrame, "BOTTOMLEFT", 40, 0)
         QuestNPCModel:SetAlpha(0.35)
+		self.npcWasMouseEnabled = QuestNPCModel:IsMouseEnabled()
+		QuestNPCModel:EnableMouse(false)
     else
         self:ReleaseNPCModel()
+		QuestNPCModel:EnableMouse(self.npcWasMouseEnabled)
     end
 end
 
