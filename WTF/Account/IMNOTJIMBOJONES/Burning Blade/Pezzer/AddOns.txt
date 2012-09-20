@@ -63,10 +63,6 @@ LightHeaded_Data_E: enabled
 LightHeaded_Data_NPC: enabled
 LightHeaded_Data_QIDDesc: enabled
 LightHeaded_Data_QIDNames: enabled
-Macaroon: enabled
-MacaroonXtras: enabled
-MacaroonProfiles: enabled
-MacaroonBound: enabled
 Masque: enabled
 BlizzBuffsFacade: enabled
 PitBull4Facade: enabled
@@ -164,7 +160,6 @@ RaidAchievement_Naxxramas: enabled
 RaidAchievement_Ulduar: enabled
 RaidAchievement_WotlkHeroics: enabled
 Recount: enabled
-Reflux: enabled
 ReforgeLite: enabled
 SavedInstances: enabled
 ScreenGrid: enabled
@@ -188,7 +183,7 @@ SocialState: enabled
 SpeedyLoad: enabled
 SpeedyGonzales: enabled
 Stubby: enabled
-!Swatter: enabled
+!Swatter: disabled
 TidyPlates: enabled
 TidyPlatesHub: disabled
 TidyPlatesWidgets: enabled
@@ -286,3 +281,5 @@ DBM-TerraceofEndlessSpring: enabled
 CT_Viewport: enabled
 Glamour: disabled
 MountFilter: enabled
+BugSack: enabled
+!BugGrabber: enabled
