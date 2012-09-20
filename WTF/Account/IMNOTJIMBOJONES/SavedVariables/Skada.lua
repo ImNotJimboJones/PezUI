@@ -7,8 +7,8 @@ SkadaDB = {
 		["Default"] = {
 			["showtotals"] = true,
 			["modules"] = {
-				["ccannounce"] = true,
 				["ccignoremaintanks"] = true,
+				["ccannounce"] = true,
 			},
 			["windows"] = {
 				{
@@ -21,9 +21,9 @@ SkadaDB = {
 					["title"] = {
 						["color"] = {
 							["a"] = 0,
-							["r"] = 0.1019607843137255,
-							["g"] = 0.1019607843137255,
 							["b"] = 0.3019607843137255,
+							["g"] = 0.1019607843137255,
+							["r"] = 0.1019607843137255,
 						},
 						["font"] = "Arial Narrow",
 						["fontsize"] = 12,
@@ -33,28 +33,28 @@ SkadaDB = {
 					["point"] = "BOTTOM",
 					["barbgcolor"] = {
 						["a"] = 0.6000000238418579,
-						["r"] = 0.3019607843137255,
-						["g"] = 0.3019607843137255,
 						["b"] = 0.3019607843137255,
+						["g"] = 0.3019607843137255,
+						["r"] = 0.3019607843137255,
 					},
+					["mode"] = "Healing",
 					["bartexture"] = "Minimalist",
 					["barwidth"] = 210.1308898925781,
 					["barspacing"] = 1,
+					["barfont"] = "Arial Narrow",
+					["barcolor"] = {
+						["b"] = 0.7490196078431373,
+						["g"] = 0.7490196078431373,
+						["r"] = 0.7490196078431373,
+					},
+					["barfontsize"] = 13,
 					["background"] = {
-						["height"] = 121.1332244873047,
 						["color"] = {
 							["a"] = 0,
 							["b"] = 0.5019607843137255,
 						},
+						["height"] = 121.1332244873047,
 					},
-					["barcolor"] = {
-						["r"] = 0.7490196078431373,
-						["g"] = 0.7490196078431373,
-						["b"] = 0.7490196078431373,
-					},
-					["barfontsize"] = 13,
-					["mode"] = "Healing",
-					["barfont"] = "Arial Narrow",
 				}, -- [1]
 			},
 			["icon"] = {
@@ -66,6 +66,9 @@ SkadaDB = {
 			},
 			["hidedisables"] = false,
 			["tooltippos"] = "topleft",
+			["reset"] = {
+				["join"] = 1,
+			},
 		},
 	},
 }
