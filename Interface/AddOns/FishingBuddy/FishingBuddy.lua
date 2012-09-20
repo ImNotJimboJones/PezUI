@@ -449,11 +449,7 @@ local function RegisterHandlers(handlers)
 			fake = IsFakeEvent(evt);
 		else
 			func = info.func;
-			if ( IsFakeEvent(evt) ) then
-				fake = true;
-			else
-				fake = info.fake;
-			end
+			fake = IsFakeEvent(evt) or info.fake;
 		end
 		tinsert(event_handlers[evt], func);
 		if ( not fake ) then
@@ -758,8 +754,18 @@ QuestItems[69914] = {
 	["enUS"] = "Giant Catfish",
 	open = true,
 };
-
 FishingBuddy.QuestItems = QuestItems;
+
+local QuestLures = {};
+QuestLures[58788] = {
+	["enUS"] = "Overgrown Earthworm",	-- Diggin' for Worms
+	spell = 80534,
+};
+QuestLures[58949] = {
+	["enUS"] = "Stag Eye",				-- A Staggering Effor
+	spell = 80868,
+};
+FishingBuddy.QuestLures = QuestLures;
 
 local function SetFishingLevel(skillcheck, zone, subzone, fishid)
 	if ( not zone ) then
@@ -980,16 +986,19 @@ local function UpdateLure()
 			return true;
 		end
 		
-		-- do we have an overgrown earthworm in our possession?
-		if ( GetItemCount(58788) > 0 ) then
-			local worms, _, _, _, _, _, _, _, _ = GetSpellInfo(80534);
-			if ( not FL:HasBuff(worms) ) then
-				FL:InvokeLuring(58788);
-				return true;
+		-- look for quest lures
+		for itemid, spellid in pairs(QuestLures) do
+			if ( GetItemCount(itemid) > 0 ) then
+				local buff = GetSpellInfo(spellid);
+				if ( not FL:HasBuff(buff) ) then
+					FL:InvokeLuring(itemid);
+					return true;
+				end
 			end
 		end
-		-- we can drop through and add our normal lure, because the overgrown
-		-- earthworm buff is on the player, not the pole...
+		
+		-- we can drop through and add our normal lure, because the quest buff is on
+		-- the player, not the pole...
 		local skill, _, _, _ = FL:GetCurrentSkill();
 		
 		if (skill > 0) then

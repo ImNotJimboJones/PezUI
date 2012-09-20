@@ -1,4 +1,9 @@
-﻿Version 1.0.9e
+﻿Version 1.0.9f
+- Remove ancient custom minimap button code and use LibDBIcon instead
+- Fix pet menu (again)
+- Add Nat's Hat
+
+Version 1.0.9e
 - Remove references to LibBabble-Zone now that it is deprecated
 - Quest Items auto-loot again (CurseForge bug #172)
 - Fix pet menu (CurseForge bugs #167, #174, #176)

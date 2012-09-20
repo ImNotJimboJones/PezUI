@@ -28,7 +28,17 @@ addon.config = {
 					'roll_width',
 					'roll_button_size',
 					'text_outline',
-					'text_time'
+					'text_time',
+					'anchor_pretty'
+				},
+				{
+					'alerts',
+					'alert_direction',
+					'alert_offset',
+					'alert_alpha',
+					'alert_scale',
+					'alert_skin',
+
 				}
 			},
 			right = {
@@ -40,13 +50,17 @@ addon.config = {
 					'track_threshold',
 					'role_icon',
 					'win_icon',
-					'show_undecided',
 				},
 				{
 					'expiration',
 					'expire_won',
 					'expire_lost',
-				}
+				},
+				{
+					'tooltip',
+					--'show_decided',
+					'show_undecided',
+				},
 			}
 		}
 	},
@@ -57,14 +71,56 @@ addon.config = {
 		text_time = {
 			type = 'toggle',
 		},
+		anchor_pretty = {
+			type = 'toggle',
+		},
 		role_icon = {
 			type = 'toggle'
 		},
 		win_icon = {
 			type = 'toggle'
 		},
+		show_decided = {
+			type = 'toggle'
+		},
 		show_undecided = {
 			type = 'toggle'
+		},
+		alert_skin = {
+			type = 'toggle'
+		},
+		alert_alpha = {
+			type = 'range',
+			min = 0.1,
+			max = 1.0,
+			step = 0.1,
+			text = L.alpha,
+			text_low = L.alpha_low,
+			text_high = L.alpha_high
+		},
+		alert_scale = {
+			type = 'range',
+			min = 0.1,
+			max = 2.0,
+			step = 0.1,
+			text = L.scale,
+			text_low = L.small,
+			text_high = L.large
+		},
+		alert_offset = {
+			type = 'range',
+			min = 0,
+			max = 40,
+			step = 1,
+			text_low = L.small,
+			text_high = L.large
+		},
+		alert_direction = {
+			type = 'select',
+			items = directions,
+			key = 'alert_anchor',
+			subkey = 'direction',
+			text = L.direction
 		},
 		roll_scale = {
 			type = 'range',
@@ -105,9 +161,13 @@ addon.config = {
 		},
 		track_player_roll = {
 			type = 'toggle',
+			requires = 'track_all',
+			requires_inverse = true
 		},
 		track_by_threshold = {
 			type = 'toggle',
+			requires = 'track_all',
+			requires_inverse = true
 		},
 		track_threshold = {
 			type = 'select',

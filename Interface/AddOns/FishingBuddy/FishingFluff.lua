@@ -78,8 +78,8 @@ local function GetOurPets()
 	for index=1,numPets do
 		local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, isWild);
 		if ( isOwned) then
-			if (customeName) then
-				name = customeName;
+			if (customName) then
+				name = customName;
 			end
 			tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=(chosenpets[creatureID] == 1) });
 			petmap[creatureID] = petID;
@@ -113,15 +113,18 @@ local function UpdateChosenPets()
 			if ( FISHINGPETS[creatureID] ) then
 				if ( settingpets == PET_FISHING ) then
 					AddChosenPet(creatureID, petID);
+					ourpets[idx].checked = true;
 				end
 			elseif (allpets) then
 				AddChosenPet(creatureID, petID);
+				ourpets[idx].checked = true;
 			end
 		end
 	elseif ( type(settingpets) == "table" ) then
 		for cid,_ in pairs(settingpets) do
 			AddChosenPet(cid, petmap[cid]);
 		end
+		GetOurPets();
 	end
 end
 
@@ -149,22 +152,24 @@ FluffEvents[FBConstants.FISHING_ENABLED_EVT] = function()
 				SetPVP(0);
 			end
 		end
-		if ( not (IsFlying() or IsMounted()) ) then
-			local nowpet = C_PetJournal.GetSummonedPetID();
-			local petid = nowpet;
-			if ( numchosen > 0 ) then
-				local avail = false;
-				for ldx=1,5 do
-					if ( not avail ) then
-						local idx = random(1, numchosen);
-						petid = chosenlist[idx];
-						avail = C_PetJournal.PetIsSummonable(petid)
+		if (FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE) then
+			if ( not (IsFlying() or IsMounted()) ) then
+				local nowpet = C_PetJournal.GetSummonedPetID();
+				local petid = nowpet;
+				if ( numchosen > 0 ) then
+					local avail = false;
+					for ldx=1,5 do
+						if ( not avail ) then
+							local idx = random(1, numchosen);
+							petid = chosenlist[idx];
+							avail = C_PetJournal.PetIsSummonable(petid)
+						end
 					end
 				end
-			end
-			if ( petid ~= nowpet and petid > 0) then
-				resetPet = nowpet;
-				C_PetJournal.SummonPetByID(petid);
+				if ( petid ~= nowpet and petid > 0) then
+					resetPet = nowpet;
+					C_PetJournal.SummonPetByID(petid);
+				end
 			end
 		end
 	end
@@ -182,7 +187,7 @@ end
 local function DoPetReset(pet)
 	if ( pet and pet > 0 ) then
 		C_PetJournal.SummonPetByID(pet);
-	else
+	elseif (FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE) then
 		local nowpet = C_PetJournal.GetSummonedPetID();
 		if ( nowpet and nowpet > 0 ) then
 			C_PetJournal.SummonPetByID(nowpet);

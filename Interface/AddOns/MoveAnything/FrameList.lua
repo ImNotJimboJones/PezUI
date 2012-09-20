@@ -57,7 +57,7 @@ m = {
 		API:AddElement({name = "CriteriaAlertFrame1", displayName = "Criteria Alert 1", create = "CriteriaAlertFrameTemplate"}, c)
 		API:AddElement({name = "CriteriaAlertFrame2", displayName = "Criteria Alert 2", create = "CriteriaAlertFrameTemplate"}, c)
 		local gcaf = API:AddElement({name = "GuildChallengeAlertFrame", displayName = "Guild Challenge Achievement Alert"}, c)
-		API:AddElement({name = "WatchFrame", displayName = "Tracker", scaleWH = 1}, c)
+		API:AddElement({name = "WatchFrameMover", displayName = "Quest Log Tracker", scaleWH = 1, linkedScaling = {"WatchFrame"}}, c) --, noScale = 1
 		local qldf = API:AddElement({name = "QuestLogDetailFrame", displayName = "Quest Details", runOnce = function()
 			if not QuestLogDetailFrame:IsShown() then
 				ShowUIPanel(QuestLogDetailFrame)
@@ -77,8 +77,8 @@ m = {
 		API:AddElement({name = "QuestTimerFrame", displayName = "Quest Timer"}, c)
 		
 		c = API:GetCategory("Arena")
-		API:AddElement({name = "ArenaEnemyFrames", displayName = "ArenaEnemyFrames", noScale = 1}, c)
-		API:AddElement({name = "ArenaPrepFrames", displayName = "ArenaPrepFrames", noScale = 1}, c)
+	--	API:AddElement({name = "ArenaEnemyFrames", displayName = "ArenaEnemyFrames", noScale = 1}, c)
+	--	API:AddElement({name = "ArenaPrepFrames", displayName = "ArenaPrepFrames", noScale = 1}, c)
 		API:AddElement({name = "ArenaEnemyFrame1", displayName = "Arena Enemy 1", runOnce = Arena_LoadUI}, c)
 		API:AddElement({name = "ArenaEnemyFrame2", displayName = "Arena Enemy 2", runOnce = Arena_LoadUI}, c)
 		API:AddElement({name = "ArenaEnemyFrame3", displayName = "Arena Enemy 3", runOnce = Arena_LoadUI}, c)

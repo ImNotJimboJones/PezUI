@@ -222,7 +222,30 @@ MovAny.lVirtualMovers = {
 			end
 		end,
 	},
-	
+	WatchFrameMover = {
+		w = 150,
+		h = 30,
+		point = {"CENTER", "UIParent", "RIGHT", -80, 315},
+	--	inherits = WatchFrame,
+		OnMAHook = function(self)
+			local b = WatchFrame
+		--	MovAny:UnlockPoint(b)
+			b:ClearAllPoints(WatchFrameMover)
+			b:SetPoint("TOP", WatchFrameMover, "TOP")
+			MovAny:LockPoint(b)
+		--	b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+		--	b:SetHeight(GetScreenHeight() / 2)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(WatchFrame)
+			local b = WatchFrame
+			b:ClearAllPoints()
+			b:SetPoint("TOPRIGHT", "MinimapCluster", "BOTTOMRIGHT", 0, 0)
+		end,
+	},
 	
 	PetBattleMover6 = {
 		w = 650,
@@ -1777,6 +1800,7 @@ MovAny.lVirtualMovers = {
 			child:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
 			child:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
 			MovAny:LockPoint(child)
+		--	print(child:GetName())
 		end,
 		OnMAReleaseChild = function(self, index, child)
 			child:SetParent(child.MAOrgParent)

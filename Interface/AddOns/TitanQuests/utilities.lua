@@ -166,7 +166,7 @@ function getQuestCompleteText(isComplete)
 end
 
 function getQuestPartyMembers(questID)
-	local numPartyMembers = GetNumPartyMembers()
+	local numPartyMembers = GetNumSubgroupMembers()
 	local membersOnQuest = ""
 
 	for i = 1, numPartyMembers do

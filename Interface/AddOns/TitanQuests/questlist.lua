@@ -77,6 +77,8 @@ QuestList[i] = {
 --------------------------------------------------------------------------------
 -- Declarations                                                               --
 --------------------------------------------------------------------------------
+-- to prevent tainting the glypth UI
+local _
 -- public functions
 local flagDirty
 local getNumQuests

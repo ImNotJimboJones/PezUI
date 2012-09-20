@@ -1,9 +1,23 @@
 ------------------------------------------------------------------------
-r177 | oscarucb | 2012-09-15 13:19:39 +0000 (Sat, 15 Sep 2012) | 1 line
+r180 | oscarucb | 2012-09-20 03:54:57 +0000 (Thu, 20 Sep 2012) | 1 line
 Changed paths:
-   A /tags/4.8.4 (from /trunk:176)
+   A /tags/4.8.5 (from /trunk:179)
 
-Tagging as 4.8.4
+Tagging as 4.8.5
+------------------------------------------------------------------------
+r179 | oscarucb | 2012-09-19 23:34:31 +0000 (Wed, 19 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix a lua error in scenarios
+
+------------------------------------------------------------------------
+r178 | oscarucb | 2012-09-16 15:56:58 +0000 (Sun, 16 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix a Zul'Aman instance detection failure in frFR
+
 ------------------------------------------------------------------------
 r176 | oscarucb | 2012-09-15 13:18:57 +0000 (Sat, 15 Sep 2012) | 2 lines
 Changed paths:

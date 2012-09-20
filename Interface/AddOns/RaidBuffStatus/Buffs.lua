@@ -1,11 +1,9 @@
 local addonName, vars = ...
 local L = vars.L
 local addon = RaidBuffStatus
-local SP = RaidBuffStatus.SP
-local GT = RaidBuffStatus.GT
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 537 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 546 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -592,17 +590,8 @@ local BF = {
 		class = { PRIEST = true, DRUID = true, PALADIN = true, MAGE = true, WARLOCK = true, SHAMAN = true, MONK = true },
 		chat = L["Mana less than 80%"],
 		main = function(self, name, class, unit, raid, report)
-			if unit.isdead then
-				return
-			end
-			if class == "WARRIOR" or class == "ROGUE" or class == "DEATHKNIGHT" or class == "HUNTER" then
-				return
-			end
-			if class == "DRUID" then
-				if raid.classes.DRUID[name].spec == L["Feral Combat"] then
-					return
-				end
-			end
+			if unit.isdead then return end
+			if not unit.hasmana then return end
 			if UnitMana(unit.unitid)/UnitManaMax(unit.unitid) < 0.8 then
 				table.insert(report.manalist, name)
 			end
@@ -782,7 +771,7 @@ local BF = {
 			if not InCombatLockdown() then
 			  rezspell = player_spell("dead") or BS[83968] -- mass resurrection
 			end
-			RaidBuffStatus:ButtonClick(self, button, down, "dead", rezspell, nil, nil, true)
+			RaidBuffStatus:ButtonClick(self, button, down, "dead", rezspell, true)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Player is Dead"], report.deadlist, raid.BuffTimers.deadtimerlist, generic_buffers("dead"))
@@ -1043,13 +1032,11 @@ local BF = {
 		class = { PALADIN = true, },
 		chat = BS[25780], -- Righteous Fury
 		main = function(self, name, class, unit, raid, report)
-			if class == "PALADIN" then
-				if raid.classes.PALADIN[name].spec == L["Protection"] then
+			if class == "PALADIN" and raid.classes.PALADIN[name].spec == 2 then
 					report.checking.righteousfury = true
 					if not unit.hasbuff[BS[25780]] then -- Righteous Fury
 						table.insert(report.righteousfurylist, name)
 					end
-				end
 			end
 		end,
 		post = nil,
@@ -1107,7 +1094,7 @@ local BF = {
 				return
 			end
 			if class == "SHAMAN" then
-				if raid.classes.SHAMAN[name].specialisations.earthshield then
+				if raid.classes.SHAMAN[name].spec == 3 then
 					table.insert(report.shamanwithearthshield, name)
 				end
 			elseif unit.istank then
@@ -1149,7 +1136,7 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.earthshieldlist, RaidBuffStatus.db.profile.checkearthshield, report.checking.earthshield or false, RaidBuffStatus.BF.earthshield:buffers())
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "earthshield", BS[974], nil, nil, true)  -- Earth Shield
+			RaidBuffStatus:ButtonClick(self, button, down, "earthshield", BS[974], true)  -- Earth Shield
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Tank missing Earth Shield"], report.earthshieldlist, nil, RaidBuffStatus.BF.earthshield:buffers(), report.earthshieldslackers, nil, nil, nil, nil, nil, report.haveearthshield)
@@ -1165,7 +1152,7 @@ local BF = {
 		buffers = function()
 			local theshamans = {}
 			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if rcn.specialisations.earthshield then
+				if rcn.spec == 3 then
 					table.insert(theshamans, name)
 				end
 			end
@@ -1751,7 +1738,7 @@ local BF = {
 			local bufflist = false
 			local dualw = false
 			bufflist = shamanwepbuffs
-			if raid.classes.SHAMAN[name].specialisations.dualwield then
+			if raid.classes.SHAMAN[name].spec == 2 then
 				dualw = true
 			end
 			if _G.InspectFrame and _G.InspectFrame:IsShown() then
@@ -1839,17 +1826,18 @@ local BF = {
                           elseif spec == 2 then -- resto
 			    buffspell = BS[51730]
 			  elseif spec == 3 then -- enh
-			    buffspell = BS[8024]
 			    local hasMainHandEnchant, mainHandExpiration, mainHandCharges, 
                                   hasOffHandEnchant, offHandExpiration, offHandCharges = GetWeaponEnchantInfo()
 			    if not hasMainHandEnchant or mainHandExpiration < 15*60*1000 then
 			  	itemslot = GetInventorySlotInfo("MainHandSlot")
+			        buffspell = BS[8232]
 			    elseif not hasOffHandEnchant or offHandExpiration < 15*60*1000 then
 				itemslot = GetInventorySlotInfo("SecondaryHandSlot")
+			        buffspell = BS[8024]
 			    end
                           end
 			end
-			RaidBuffStatus:ButtonClick(self, button, down, "wepbuff", buffspell, nil, nil, nil, nil, itemslot)
+			RaidBuffStatus:ButtonClick(self, button, down, "wepbuff", buffspell, nil, nil, itemslot)
                 end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing a temporary weapon buff"], report.wepbufflist)
@@ -2226,7 +2214,7 @@ local BF = {
 			if not RaidBuffStatus:GotReagent(scroll) then -- use the best available
 			  scroll = ITN[49632] -- Runescroll of Fortitude
 			end
-			RaidBuffStatus:ButtonClick(self, button, down, "runescrollfortitude", nil, nil, nil, nil, scroll)
+			RaidBuffStatus:ButtonClick(self, button, down, "runescrollfortitude", nil, nil, scroll)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. ITN[49632], report.runescrollfortitudelist, nil, RaidBuffStatus.BF.runescrollfortitude:buffers()) -- Runescroll of Fortitude
@@ -2298,7 +2286,7 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.levitatelist, RaidBuffStatus.db.profile.checklevitate, report.checking.levitate or false, generic_buffers("levitate"))
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "levitate", player_spell("levitate"), nil, nil, true)
+			RaidBuffStatus:ButtonClick(self, button, down, "levitate", player_spell("levitate"), true)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[1706], report.levitatelist, nil, generic_buffers("levitate"))
@@ -2437,7 +2425,13 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.innerfirelist, RaidBuffStatus.db.profile.checkinnerfire, report.checking.innerfire or false, report.innerfirelist)
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "innerfire", RaidBuffStatus:SelectPriestInner()) -- Inner Fire
+			local buffspell = BS[588]  -- Inner Fire
+                        local name = UnitName("player")
+                        local spec = raid.classes.PRIEST[name] and raid.classes.PRIEST[name].spec
+                        if spec == 1 then  -- disc
+                           buffspell = BS[73413] -- Inner Will
+                        end
+			RaidBuffStatus:ButtonClick(self, button, down, "innerfire", buffspell)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[588] .. "/" .. BS[73413], report.innerfirelist) -- Inner Fire/Inner Will
@@ -2464,7 +2458,7 @@ local BF = {
 		chat = BS[15473], -- Shadowform
 		main = function(self, name, class, unit, raid, report)
 			if class == "PRIEST" then
-				if raid.classes.PRIEST[name].specialisations.shadowform then -- Shadowform
+				if raid.classes.PRIEST[name].spec == 3 then -- Shadowform
 					report.checking.shadowform = true
 					if not unit.hasbuff[BS[15473]] then -- Shadowform
 						table.insert(report.shadowformlist, name)
@@ -2505,7 +2499,7 @@ local BF = {
 		chat = BS[49222], -- Bone Shield
 		main = function(self, name, class, unit, raid, report)
 			if class == "DEATHKNIGHT" then
-				if raid.classes.DEATHKNIGHT[name].specialisations.boneshield then
+				if raid.classes.DEATHKNIGHT[name].spec == 1 then
 					report.checking.boneshield = true
 					if not unit.hasbuff[BS[49222]] then -- Bone Shield
 						table.insert(report.boneshieldlist, name)
@@ -2605,12 +2599,19 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.magearmorlist, RaidBuffStatus.db.profile.checkmagearmor, report.checking.magearmor or false, report.magearmorlist)
 		end,
 		click = function(self, button, down)
+		        local buffspell
                         local name = UnitName("player")
-                        if name and raid.classes.MAGE[name] then -- XXX: autoselect
-			   RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[6117]) -- Mage Armor
-			   --RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[30482]) -- Molten Armor
-			   --RaidBuffStatus:ButtonClick(self, button, down, "magearmor", BS[7302]) -- Frost Armor
-                        end
+			local spec = raid.classes.MAGE[name] and raid.classes.MAGE[name].spec
+                        if spec == 1 then  -- arcane
+			   buffspell = BS[6117] -- Mage Armor
+                        elseif spec == 2 then  -- fire
+			   buffspell = BS[30482] -- Molten Armor
+			elseif spec == 3 then
+			   buffspell = BS[7302] -- Frost Armor
+			else -- no spec, favor lowest lvl spell
+			   buffspell = BS[30482] -- Molten Armor
+			end
+			RaidBuffStatus:ButtonClick(self, button, down, "magearmor", buffspell)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Mage is missing a Mage Armor"], report.magearmorlist)
@@ -2656,12 +2657,15 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.shamanshieldlist, RaidBuffStatus.db.profile.checkshamanshield, report.checking.shamanshield or false, report.shamanshieldlist)
 		end,
 		click = function(self, button, down)
+			local buffspell
 			local name = UnitName("player")
-			if name and raid.classes.SHAMAN[name] and true then -- XXX
-				RaidBuffStatus:ButtonClick(self, button, down, "shamanshield", BS[324]) -- Lightning Shield
-			else
-				RaidBuffStatus:ButtonClick(self, button, down, "shamanshield", BS[52127]) -- Water Shield 
+			local spec = raid.classes.SHAMAN[name] and raid.classes.SHAMAN[name].spec
+			if spec == 1 or spec == 2 then
+			  buffspell = 324 -- Lightning Shield
+			elseif spec == 3 then
+			  buffspell = 52127 -- Water Shield
 			end
+			RaidBuffStatus:ButtonClick(self, button, down, "shamanshield", buffspell)
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[52127] .. "/" .. BS[324], report.shamanshieldlist) -- Water Shield/Lightning Shield
@@ -2730,7 +2734,7 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.drumskingslist, RaidBuffStatus.db.profile.checkdrumskings, report.checking.drumskings or false, RaidBuffStatus.BF.drumskings:buffers())
 		end,
 		click = function(self, button, down)
-			RaidBuffStatus:ButtonClick(self, button, down, "drumskings", nil, nil, nil, nil, ITN[49633]) -- Drums of Forgotten Kings
+			RaidBuffStatus:ButtonClick(self, button, down, "drumskings", nil, nil, ITN[49633]) -- Drums of Forgotten Kings
 		end,
 		tip = function(self)
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[69378], report.drumskingslist, nil, RaidBuffStatus.BF.drumskings:buffers()) -- Blessing of Forgotten Kings, Blessing of Kings
@@ -2788,13 +2792,13 @@ local BF = {
 			elseif class == "WARLOCK" then
 				needspet = not unit.hasbuff[BS[108503]] -- Grimoire of Sacrifice
 			elseif class == "DEATHKNIGHT" then
-				if GT:GUIDHasTalent(raid.classes.DEATHKNIGHT[name].guid, BS[52143]) then -- Master of Ghouls talent
+				if raid.classes.DEATHKNIGHT[name].spec == 3 then -- unholy
 					needspet = true
 				else
 					needspet = false
 				end
 			elseif class == "MAGE" then
-				if GT:GUIDHasTalent(raid.classes.MAGE[name].guid, BS[31687]) then -- summon water elemental talent
+				if raid.classes.MAGE[name].spec == 3 then -- frost
 					needspet = true
 				else
 					needspet = false
@@ -2840,18 +2844,15 @@ local BF = {
 				summonspell = tonumber(summonspell)
 				summonspell = BS[summonspell] 
 			elseif class == "WARLOCK" then
-				local guid = UnitGUID("player")
-				local glyphs = RaidBuffStatus:PlayerActiveGlyphs()
-				if GT:GUIDHasTalent(guid, BS[30146]) then -- Summon Felguard
+				local spec = raid.classes.WARLOCK[UnitName("player")].spec
+				if spec == 2 then -- Demo
 					summonspell = BS[30146] -- Summon Felguard
-				elseif GT:GUIDHasTalent(guid, BS[47220]) then -- Empowered Imp
+				elseif spec == 3 then -- Destro
 					summonspell = BS[688] -- Summon Imp
-				elseif glyphs[70947] then -- Glyph of Lash of Pain
-					summonspell = BS[712] -- Summon Succubus	      
-				elseif glyphs[56248] then -- Glyph of Imp
-					summonspell = BS[688] -- Summon Imp
-	      		else -- shrug?
+				elseif spec == 1 then -- Affliction
 					summonspell = BS[691] -- Summon Felhunter
+	      			else -- shrug?
+					summonspell = BS[712] -- Summon Succubus	      
 				end	        
 			elseif class == "DEATHKNIGHT" then
 				summonspell = BS[46584] -- Raise Dead

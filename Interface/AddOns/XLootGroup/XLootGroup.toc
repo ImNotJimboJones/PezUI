@@ -1,16 +1,16 @@
 ﻿## Interface: 50001
 ## Title: XLootGroup
 ## Notes: Smooth group roll frames
-## Version: z10-release
+## Version: z14-release
 ## Author: Xuerian
 ## X-Category: Interface Enhancements
 ## X-Credits: Tekkub's rewrite of XLootGroup
-## X-Curse-Packaged-Version: z10-release
+## X-Curse-Packaged-Version: z14-release
 ## X-Curse-Project-Name: XLootGroup
 ## X-Curse-Project-ID: xloot-group
 ## X-Curse-Repository-ID: wow/xloot-group/mainline
 
-## OptionalDeps: ButtonFacade, Masque, LibStub, LibXTools, LibLootEvents, XLoot1.0
+## OptionalDeps: ButtonFacade, Masque, LibStub, LibXTools, XLoot1.0
 ## SavedVariables: XLootGroup_Options
 
 # Libraries
@@ -20,7 +20,6 @@ Libs\LibXUI\LibXUI.lua
 Libs\LibXProfile\LibXProfile.lua
 Libs\LibXConfig\LibXConfig.lua
 Libs\LibXStack\LibXStack.lua
-Libs\LibLootEvents\LibLootEvents.lua
 
 # Locales
 localization.lua

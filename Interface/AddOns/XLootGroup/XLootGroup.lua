@@ -6,16 +6,25 @@ local L = addon.L
 local me = UnitName('player')
 
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or _G.RAID_CLASS_COLORS
-local opt, anchor
-local GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print =
-	GetLootRollItemInfo, GetLootRollItemLink, RollOnLoot, UnitGroupRolesAssigned, print
+local opt, anchor, alert_anchor
+local GetLootRollItemInfo, GetLootRollItemLink, GetLootRollTimeLeft, RollOnLoot, UnitGroupRolesAssigned, print
+	= GetLootRollItemInfo, GetLootRollItemLink, GetLootRollTimeLeft, RollOnLoot, UnitGroupRolesAssigned, print
+local HistoryGetItem, HistoryGetPlayerInfo, HistoryGetNumItems
+	= C_LootHistory.GetItem, C_LootHistory.GetPlayerInfo, C_LootHistory.GetNumItems
 
 addon.defaults = {
 	text_outline = true,
 	text_time = false,
+	anchor_pretty = false,
 	role_icon = true,
 	win_icon = false,
+	show_decided = true,
 	show_undecided = false,
+
+	alert_skin = true,
+	alert_alpha = 1,
+	alert_scale = 1,
+	alert_offset = 4,
 
 	roll_button_size = 28,
 	roll_width = 325,
@@ -26,6 +35,13 @@ addon.defaults = {
 		scale = 1.0,
 		x = UIParent:GetWidth() * .85,
 		y = UIParent:GetHeight() * .6
+	},
+
+	alert_anchor = {
+		visible = true,
+		direction = 'up',
+		x = AlertFrame:GetLeft(),
+		y = AlertFrame:GetTop()
 	},
 
 	track_all = true,
@@ -44,7 +60,10 @@ local Skinner = {}
 LibStub('X-Skin'):SetupSkins(Skinner, {
 	row = {},
 	item = {},
-	anchor = {}
+	anchor = {},
+	anchor_pretty = {},
+	alert = {},
+	alert_item = {}
 })
 local skin
 local skin_default = {
@@ -56,9 +75,12 @@ local skin_default = {
 	padding = 1,
 }
 local skins_base = {
-	anchor = { r = .6, g = .6, b = .6, a = .8 },
+	anchor = { r = .4, g = .4, b = .4, a = .6, gradient = false },
+	anchor_pretty = { r = .6, g = .6, b = .6, a = .8 },
 	row = { gradient = false },
-	item = { backdrop = false }
+	item = { backdrop = false },
+	alert = { gradient = false },
+	alert_item = { gradient = false, backdrop = false }
 }
 addon.skin_default = skin_default
 
@@ -86,15 +108,6 @@ addon.bars = {}
 ---------------------------------------------------------------------------
 -- Helpers
 ---------------------------------------------------------------------------
--- Since # doesn't work for non-contiguous tables
-local function count(table)
-	local i = 0
-	for k,v in pairs(table) do
-		i = i + 1
-	end
-	return i
-end
-
 -- Tack role icon on to player name and return class colors
 local white = { r = 1, g = 1, b = 1 }
 local dimensions = {
@@ -103,8 +116,8 @@ local dimensions = {
 	TANK = '32:48'
 }
 local string_format = string.format
-local function FancyPlayerName(name)
-	local c = RAID_CLASS_COLORS[select(2, UnitClass(name))] or white
+local function FancyPlayerName(name, class)
+	local c = RAID_CLASS_COLORS[class] or white
 	local role = UnitGroupRolesAssigned(name)
 	if role ~= 'NONE' and opt.role_icon then
 		name = string_format('\124TInterface\\LFGFRAME\\LFGROLE:12:12:-1:0:64:16:%s:0:16\124t%s', dimensions[role], name)
@@ -112,30 +125,30 @@ local function FancyPlayerName(name)
 	return name, c.r, c.g, c.b
 end
 
-local types = {
+local type_strings = {
 	need = NEED,
 	greed = GREED,
 	disenchant = ROLL_DISENCHANT,
 	pass = PASS
 }
-
-local rolls, canceled, completed, unknownid_to_rollid = { }, { }, { }, { }
+local rtypes = { [0] = 'pass', 'need', 'greed', 'disenchant' } -- Tekkub. Writing smaller addons than me since ever.
 
 ---------------------------------------------------------------------------
 -- Frame creation
 ---------------------------------------------------------------------------
+local rolls = {}
 local mouse_focus, CreateRollFrame
 do
+	local sf = string.format
 	-- Add a specific roll type to the tooltip
-	local function RollLines(players)
-		local me = UnitName('player')
-		local sf = string.format
-		for player, roll in pairs(players) do
-			local text, r, g, b, color = FancyPlayerName(player)
-			if roll ~= true then
-				if mouse_focus.winner == player then
+	local function RollLines(list, hid)
+		for _,pid in pairs(list) do
+			local name, class, rtype, roll, is_winner, is_me = HistoryGetPlayerInfo(hid, pid)
+			local text, r, g, b, color = FancyPlayerName(name, class)
+			if roll ~= nil then
+				if is_winner then
 					color = '44ff22'
-				elseif player == me then
+				elseif is_me then
 					color = 'ff2244'
 				else
 					color = 'CCCCCC'
@@ -148,62 +161,74 @@ do
 	end
 
 	-- Add roll status or summary to tooltip
-	local plist = {}
-	local function AddTooltipLines(self, clean, full)
-		local rolls_player = self.rolls_player
-		if next(rolls_player) then
-			local list
-			if clean then
-				GameTooltip:AddLine('.', 0, 0, 0)
-				-- Players who haven't rolled yet
-				-- Only shown when "clean", or showing on frame mouseover
-				if opt.show_undecided then
-					list = wipe(plist)
-					local in_raid,num_raid,num_party = IsInRaid(),GetNumGroupMembers(),GetNumSubgroupMembers() 
-					if in_raid then
-						for i = 1, num_raid do
-							local name = UnitName('raid'..i)
-							if not rolls_player[name] then
-								list[name] = true
-							end
-						end
-					else
-						for i = 1, num_party do
-							local name = UnitName('party'..i)
-							if not rolls_player[name] then
-								list[name] = true
-							end
-						end
-					end
-					if not rolls_player[me] then
-						list[me] = true
-					end
-				end
+	local tneed, tgreed, tpass, trolls, tnone, ti, ts
+		= {}, {}, {}, {}, {}, table.insert, table.sort
+	local function rsort(a, b)
+		a, b = trolls[a] or 0, trolls[b] or 0
+		return a > b and true or false
+	end
+
+	local function AddTooltipLines(self, show_all, show)
+		-- Locate history item
+		local rollid, hid = self.rollid, 1
+		local hrollid, link, players, done
+		while true do
+			hrollid, link, players, done = HistoryGetItem(hid)
+			if not hrollid then
+				return
+			elseif hrollid == rollid then
+				break
 			end
-			local rolls_type = self.rolls_type
-			if count(rolls_type.need) > 0 then
-				GameTooltip:AddLine(NEED, .2, 1, .1)
-				RollLines(rolls_type.need)
-			end
-			if count(rolls_type.greed) > 0 then
-				GameTooltip:AddLine(GREED, .1, .2, 1)
-				RollLines(rolls_type.greed)
-			end
-			if count(rolls_type.disenchant) > 0 then
-				GameTooltip:AddLine(ROLL_DISENCHANT, 1, .2, 1)
-				RollLines(rolls_type.disenchant)
-			end
-			if count(rolls_type.pass) > 0 then
-				GameTooltip:AddLine(PASS, .7, .7, .7)
-				RollLines(rolls_type.pass)
-			end
-			if list and next(list) then
-				GameTooltip:AddLine(L.undecided, .7, .3, .2)
-				RollLines(list)
-			end
-			GameTooltip:Show()
-			return true
+			hid = hid+1
 		end
+
+		-- Generate player lists
+		local tneed, tgreed, tpass, tnone, trolls
+			= wipe(tneed), wipe(tgreed), wipe(tpass), wipe(tnone), wipe(trolls)
+		for pid=1, players do
+			local _, _, rtype = HistoryGetPlayerInfo(hid, pid)
+			if rtype then
+				if rtype == 0 then
+					ti(tpass, pid)
+				elseif rtype == 1 then
+					ti(tneed, pid)
+				elseif rtype == 2 or rtype == 3 then
+					ti(tgreed, pid)
+				end
+				trolls[pid] = roll
+			else
+				ti(tnone, pid)
+			end
+		end
+
+		ts(tneed, rsort)
+		ts(tgreed, rsort)
+		ts(tpass, rsort)
+
+		-- Generate tooltip
+		if show_all then
+			GameTooltip:AddLine('.', 0, 0, 0)
+		end
+		if next(tneed) and (show_all or show == 1) then
+			GameTooltip:AddLine(NEED, .2, 1, .1)
+			RollLines(tneed, hid)
+		end
+		if next(tgreed) and (show_all or (show == 2 or show == 3)) then
+			GameTooltip:AddLine(GREED, .1, .2, 1)
+			RollLines(tgreed, hid)
+		end
+		if next(tpass) and (show_all or show == 0) then
+			GameTooltip:AddLine(PASS, .7, .7, .7)
+			RollLines(tpass, hid)
+		end
+		if show_all and opt.show_undecided then
+			GameTooltip:AddLine(L.undecided, .7, .3, .2)
+			RollLines(tnone, hid)
+		end
+
+		-- Force tooltip to refresh
+		GameTooltip:Show()
+		return true
 	end
 
 	---------------------------------------------------------------------------
@@ -229,7 +254,7 @@ do
 		local function OnEnter(self)
 			mouse_focus = self
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT')
-			if not AddTooltipLines(self.parent) and self:IsEnabled() ~= 0 then
+			if not AddTooltipLines(self.parent, false, self.type) and self:IsEnabled() ~= 0 then
 				GameTooltip:SetText(self.label)
 				GameTooltip:Show()
 			end
@@ -267,7 +292,7 @@ do
 
 			local text = b:CreateFontString(nil, 'OVERLAY')
 			text:SetFont([[Fonts\FRIZQT__.TTF]], 12, 'THICKOUTLINE')
-			text:SetPoint("CENTER", -x + 1, -y)
+			text:SetPoint("CENTER", -x + 1, tex == 'DE' and -y +2 or -y)
 			b.text = text
 
 			b:SetScript('OnEnter', OnEnter)
@@ -292,7 +317,9 @@ do
 		mouse_focus = self
 		GameTooltip:SetOwner(self.icon_frame, 'ANCHOR_TOPLEFT', 28, 0)
 		GameTooltip:SetHyperlink(self.link)
-		AddTooltipLines(self, true)
+		if opt.show_decided or opt.show_undecided then
+			AddTooltipLines(self, true)
+		end
 		if IsShiftKeyDown() then
 			GameTooltip_ShowCompareItem()
 		end
@@ -317,16 +344,17 @@ do
 	end
 
 	-- Status bar update
-	local max, sf = math.max, string.format
+	local max = math.max
 	local function BarUpdate(self)
 		local parent = self.parent
-		if parent.winner then
+		if parent.over then
 			self.spark:Hide()
 			self:SetValue(0)
+			parent.text_time:SetText()
 			return
 		end
 		local time = GetTime()
-		if not parent.fake and GetLootRollTimeLeft(parent.rollid) == 0 then
+		if GetLootRollTimeLeft(parent.rollid) == 0 then
 			local ended = parent.rollended
 			if ended then
 				if time - ended > 10 then
@@ -345,7 +373,12 @@ do
 			self:SetValue(now)
 			self.spark:Show()
 			if opt.text_time then
-				parent.text_time:SetText(sf('%.0f', remaining))
+				if remaining >= 0 then
+					parent.text_time:SetText(sf('%.0f', max(0, remaining)))
+					parent.text_time:Show()
+				else
+					parent.text_time:Hide()
+				end
 			end
 		end
 	end
@@ -458,188 +491,14 @@ do
 		frame.icon_frame = icon_frame
 		frame.Update = UpdateRow
 
-		-- Roll data
-		frame.rolls_player = {}
-		frame.rolls_type = {
-			need = {},
-			greed = {},
-			disenchant = {},
-			pass = {}
-		}
-
 		return frame
-	end
-end
-
-local string_format = string.format
-local function UpdateRollStatus(frame)
-	if frame.winner then return end
-	local r, rt = frame.rolls_player, frame.rolls_type
-
-	local n, g, d, p, num, rtype = count(rt.need), count(rt.greed), count(rt.disenchant), count(rt.pass), 0
-
-	if n > 0 then
-		num = n
-		rtype = 'need'
-	elseif g > 0 or d > 0 then
-		num = g + d
-		rtype = 'greed'
-	elseif p > 0 then
-		num = p
-		rtype = 'pass'
-	end
-
-	if not rtype then
-		return
-	end
-
-	local r, g, b, mytype = .7, .7, .7, r[me]
-	if mytype == rtype or (mytype == 'disenchant' and rtype == 'greed') then
-		r, g, b = .2, 1, .1
-	elseif mytype and mytype ~= 'pass' then
-		r, g, b = 1, .2, .1
-	end
-	frame.text_status:SetText(string_format('%s: %s', types[rtype], num))
-	frame.text_status:SetTextColor(r, g, b)
-end
-
----------------------------------------------------------------------------
--- Roll tracking
----------------------------------------------------------------------------
-local math_max = math.max
-local function winroll(t)
-	local win = 0
-	for k,v in pairs(t) do
-		win = math_max(win, type(v) == 'number' and v or 0)
-	end
-	return win
-end
-
-local string_format = string.format
-local function rollevent(event, chat_event, ...)
-	local link = ...
-	local name = GetItemInfo(link)
-
-	-- Roll type selected (First frame without selection by player)
-	local frame
-	if event == 'selected' then
-		local item, who, rtype = ...
-		-- Update roll data
-		for k,v in pairs(rolls) do
-			if v.link == item and not v.rolls_player[who] then
-				frame = v
-				frame.rolls_player[who] = rtype
-				frame.rolls_type[rtype][who] = true
-
-				if canceled[frame.rollid] or completed[frame.rollid] then
-					UpdateRollStatus(frame)
-				else
-					frame[rtype]:SetText(count(frame.rolls_type[rtype]))
-				end
-				if mouse_focus == frame[rtype] then
-					frame[rtype]:OnEnter()
-				end
-				break
-			end
-		end
-
-	-- All pass (First frame without any selections but pass)
-	elseif event == 'allpass' then
-		local item = ...
-		for k,v in pairs(rolls) do
-			if v.link == item and count(v.rolls_type.need) == 0 and count(v.rolls_type.greed) == 0 and count(v.rolls_type.disenchant) == 0 then
-				frame = v
-				frame.winner = true
-				frame.text_status:SetText(string_format('%s: %s', PASS, ALL))
-				frame.text_status:SetTextColor(.7, .7, .7)
-				frame.bar.expires = GetTime()
-				anchor:Expire(frame, opt.expire_lost)
-				break
-			end
-		end
-
-	-- Rolled (Only store roll)
-	elseif event == 'rolled' then
-		local item, who, rtype, roll = ...
-		for k,v in pairs(rolls) do
-			if v.link == item and v.rolls_player[who] == rtype then
-				frame = v
-				frame.rolls_type[rtype][who] = roll
-				break
-			end
-		end
-
-	-- Won (frame with matching winner roll)
-	elseif event == 'won' then
-		local item, who = ...
-		-- Sigh
-		local ftemp
-		for k,v in pairs(rolls) do
-			if v.link == item then
-				ftemp = v
-				local rtype = v.rolls_player[who]
-				if rtype and rtype ~= 'pass' then
-					local rt = v.rolls_type
-					local roll = rt[rtype][who]
-					local n, g, d = winroll(rt.need), winroll(rt.greed) or winroll(rt.disenchant)
-					if rtype == 'need' then
-						if winroll(rt.need) == roll then
-							frame = v
-							break
-						end
-					else
-						if winroll(rt.greed) == roll or winroll(rt.disenchant) == roll then
-							frame = v
-							break
-						end
-					end
-				end
-			end
-		end
-		-- Roll that we didn't catch any events for but matched
-		if ftemp and not frame then
-			frame = ftemp
-			frame.rolls_player[who] = true
-			frame.rolls_type.pass[who] = 0
-		end
-		if frame then
-			frame.winner = who
-			local player, r, g, b = FancyPlayerName(who)
-			if opt.win_icon then
-				local win_type = frame.rolls_player[who]
-				if win_type == 'need' then
-					player = [[|TInterface\Buttons\UI-GroupLoot-Dice-Up:16:16:-1:-1|t]]..player
-				elseif win_type == 'greed' then
-					player = [[|TInterface\Buttons\UI-GroupLoot-Coin-Up:16:16:-1:-2|t]]..player
-				elseif win_type == 'disenchant' then
-					player = [[|TInterface\Buttons\UI-GroupLoot-DE-Up:16:16:-1:-1|t]]..player
-				end
-			end
-			frame.text_status:SetText(player)
-			frame.text_status:SetTextColor(r, g, b)
-			frame.bar.expires = GetTime()
-			anchor:Expire(frame, who == me and opt.expire_won or opt.expire_lost)
-		end
-	end
-	-- Refresh tooltip
-	if frame and mouse_focus == frame then
-		frame:OnEnter()
 	end
 end
 
 ---------------------------------------------------------------------------
 -- Group events
 ---------------------------------------------------------------------------
-local function start(id, length, unknownid, ongoing)
-	if id and canceled[id] or completed[id] then return end -- Failsafe?
-	
-	--[[ MoP build16036: START_LOOT_ROLL has an arg3, it matches LOOT_ITEM_AVAILABLE:arg2 and LOOT_ROLLS_COMPLETE:arg1 
-		It's some kind of item identifier but I haven't found out what item attribute it relates to (it's not itemid).
-		In any case we need it so we can expire roll frames for items when LOOT_ROLLS_COMPLETE fires, so populate a reverse lookup table
-		and use it to expire rollid when LOOT_ROLLS_COMPLETE fires
-	]]
-	if unknownid then unknownid_to_rollid[unknownid]=id end
-	
+local function start(id, length, uid, ongoing)
 	local icon, name, count, quality, bop, need, greed, de = GetLootRollItemInfo(id)
 	local link = GetLootRollItemLink(id)
 	local r, g, b = GetItemQualityColor(quality)
@@ -687,11 +546,9 @@ local function start(id, length, unknownid, ongoing)
 	frame.rollended = nil
 	frame.quality = quality
 	frame.expires = bar.expires
-	frame.winner = nil
-	wipe(frame.rolls_player)
-	for k,v in pairs(frame.rolls_type) do
-		wipe(v)
-	end
+	frame.over = nil
+	frame.have_rolled = false
+	frame.lead_type = 'pass'
 
 	frame.text_bind:SetText(bop and '|cffff4422BoP' or '')
 	frame.text_loot:SetText(name)
@@ -709,57 +566,208 @@ local function start(id, length, unknownid, ongoing)
 	return frame
 end
 
-local function cancel(id)
-	canceled[id] = true
+local rweights = { need = 3, greed = 2, disenchant = 2, pass = 1 }
+local function changed(hid, pid)
+	-- Acquire roll information and frame
+	local rollid, link, players, done = HistoryGetItem(hid)
+	local frame = rolls[rollid]
+	if not frame or frame.rollid ~= rollid or not frame:IsShown() then
+		return nil
+	end
+	
+	-- Acquire player information
+	local name, class, rtypeid, roll, winner, is_me = HistoryGetPlayerInfo(hid, pid)
+	local rtype = rtypes[rtypeid]
 
-	for k,v in pairs(anchor.children) do
-		if v.rollid == id then
-			local frame = v
-			if opt.track_all or 
-			(opt.track_player_roll and frame.rolls_player[me] and frame.rolls_player[me] ~= 'pass') or
-			(opt.track_by_threshold and frame.quality >= opt.track_threshold) then
-				frame.need:Hide()
-				frame.greed:Hide()
-				frame.disenchant:Hide()
-				frame.pass:Hide()
-				frame.text_status:Show()
-				UpdateRollStatus(frame)
-			else
-				anchor:Pop(frame)
-			end
-			break
+	-- Transition or expire frame on player roll
+	if is_me then
+		if 	opt.track_all
+			or (opt.track_player_roll and rtype ~= 'pass')
+			or (opt.track_by_threshold and frame.quality >= opt.track_threshold) then
+			frame.need:Hide()
+			frame.greed:Hide()
+			frame.disenchant:Hide()
+			frame.pass:Hide()
+			frame.text_status:Show()
+			frame.have_rolled = true
+		else
+			anchor:Pop(frame)
+			return
 		end
+	end
+
+	-- Update post-player-roll status text
+	if frame.have_rolled then
+		local rtype = rtype == 'disenchant' and 'greed' or rtype
+		-- Roll of leading type or higher
+		if rweights[rtype] >= rweights[frame.lead_type] then
+			frame.lead_type = rtype
+			local bracket, mtype = 0, nil
+			for i=1, players do
+				local _, _, ptype, _, _, is_me = HistoryGetPlayerInfo(hid, i)
+				local ptype = rtypes[ptype == 3 and 2 or ptype]
+				if ptype == rtype then
+					bracket = bracket + 1
+				end
+				if is_me then
+					mtype = ptype
+				end
+			end
+
+			local r, g, b = .7, .7, .7
+			if mtype == rtype then
+				r, g, b = .2, 1, .1
+			elseif mtype and mtype ~= 0 then
+				r, g, b = 1, .2, .1
+			end
+			frame.text_status:SetText(string_format('%s: %s', type_strings[rtype], bracket))
+			frame.text_status:SetTextColor(r, g, b)
+		end
+
+	-- Update roll button counters
+	else
+		local bracket = 0
+		for i=1, players do
+			local _, _, thistype = HistoryGetPlayerInfo(hid, i)
+			if thistype == rtypeid then
+				bracket = bracket + 1
+			end
+		end
+		frame[rtype]:SetText(bracket)
+	end
+
+	-- Refresh tooltip
+	if frame and mouse_focus == frame then
+		frame:OnEnter()
 	end
 end
 
-local function complete(unknownid)
-	local rollid = unknownid_to_rollid[unknownid]
-	if rollid then
-		completed[rollid] = true
-		for k,v in pairs(anchor.children) do
-			if v.rollid == rollid then
-				local frame = v
-				if opt.track_all or 
-				(opt.track_player_roll and frame.rolls_player[me] and frame.rolls_player[me] ~= 'pass') or
-				(opt.track_by_threshold and frame.quality >= opt.track_threshold) then
-					UpdateRollStatus(frame)
-					frame.winner = true
-					frame.bar.expires = GetTime()
-					anchor:Expire(frame, opt.expire_lost)
-				else
-					anchor:Pop(frame)
-				end
-				break
-			end
+-- Blizzard. What part of only using 0 for userdata do you not understand? =|
+local tidx = { [0] = 1, [3] = 2, [2] = 2, [1] = 3 }
+local function complete()
+	-- Locate history item
+	local hid, frame, rollid, players, done = 1
+	while true do
+		rollid, _, players, done = HistoryGetItem(hid)
+		if not rollid or (rolls[rollid] and rolls[rollid].over) then
+			return
+		elseif done and rolls[rollid] then
+			frame = rolls[rollid]
+			break
+		end
+		hid = hid+1
+	end
+
+	-- Active frame found
+	frame.over = true
+	local top_type, top_roll, top_pid = 0, 0
+	for j=1, players do
+		local name, class, rtype, roll, is_winner, is_me = HistoryGetPlayerInfo(hid, j)
+		-- roll = roll and roll or true
+		if is_winner then
+			top_pid = j
+			break
+		elseif rtype ~= 0 and tidx[rtype] >= tidx[top_type] and (not roll or roll > top_roll) then
+			top_type = rtype
+			top_roll = roll
+			top_pid = j
 		end
 	end
-	unknownid_to_rollid[unknownid] = nil
+
+	-- Winner or lead
+	if top_pid then
+		local name, class = HistoryGetPlayerInfo(hid, top_pid)
+		local player, r, g, b = FancyPlayerName(name, class)
+		if opt.win_icon then
+			if rtype == 'need' then
+				player = [[|TInterface\Buttons\UI-GroupLoot-Dice-Up:16:16:-1:-1|t]]..player
+			elseif rtype == 'greed' then
+				player = [[|TInterface\Buttons\UI-GroupLoot-Coin-Up:16:16:-1:-2|t]]..player
+			elseif rtype == 'disenchant' then
+				player = [[|TInterface\Buttons\UI-GroupLoot-DE-Up:16:16:-1:-1|t]]..player
+			end
+		end
+		frame.text_status:SetText(player)
+		frame.text_status:SetTextColor(r, g, b)
+		frame.bar.expires = GetTime()
+		anchor:Expire(frame, is_me and opt.expire_won or opt.expire_lost)
+	else
+	-- No winner/lead
+		frame.text_status:SetText(string_format('%s: %s', PASS, ALL))
+		frame.text_status:SetTextColor(.7, .7, .7)
+		frame.bar.expires = GetTime()
+		anchor:Expire(frame, opt.expire_lost)
+	end
+	-- Refresh tooltip
+	if frame and mouse_focus == frame then
+		frame:OnEnter()
+	end
 end
 
 -- To avoid a OnUpdate for every mouseoverable frame, use modifier events
 local function modifier(self, modifier, state)
 	if mouse_focus and MouseIsOver(mouse_focus) and mouse_focus.OnEnter then
 		mouse_focus:OnEnter()
+	end
+end
+
+local function AlertFrameHook(alert, link)
+	-- Reskin toast
+	if not alert._xskinned then
+		alert._xskinned = true
+
+		if opt.alert_skin then
+			alert.Background:Hide()
+			alert.IconBorder:Hide()
+			alert.ItemName:SetPoint('BOTTOMRIGHT', -25, 27)
+
+			local overlay = CreateFrame('Frame', nil, alert)
+			overlay:SetPoint('TOPLEFT', 11, -11)
+			overlay:SetPoint('BOTTOMRIGHT', -11, 11)
+			overlay:SetFrameLevel(alert:GetFrameLevel())
+			alert._overlay = overlay
+			Skinner:Skin(overlay, 'alert')
+			-- overlay:SetGradientColor(.5, .5, .5, .4)
+
+			local icon_frame = CreateFrame('Frame', nil, alert)
+			icon_frame:SetPoint('CENTER', alert.Icon, 'CENTER', 0, 0)
+			icon_frame:SetWidth(52)
+			icon_frame:SetHeight(54)
+			alert._icon_frame = icon_frame
+			Skinner:Skin(icon_frame, 'alert_item')
+			-- icon_frame:SetGradientColor(.5, .5, .5, .4)
+		end
+
+		alert:SetAlpha(opt.alert_alpha)
+		alert:SetScale(opt.alert_scale)
+	end
+
+	-- Update toast
+	if opt.alert_skin then
+		local _, _, rarity = GetItemInfo(link)
+		local c = ITEM_QUALITY_COLORS[rarity];
+		alert._overlay:SetBorderColor(c.r, c.g, c.b)
+		alert._icon_frame:SetBorderColor(c.r, c.g, c.b)
+	end
+end
+
+local function AlertFrameAnchorHook()
+	local anchor = addon.alert_anchor
+	local up, first, x, y = opt.alert_anchor.direction == 'up', true, 44, -10
+	for i=1, #LOOT_WON_ALERT_FRAMES do
+		local frame = LOOT_WON_ALERT_FRAMES[i]
+		if frame:IsShown() then
+			frame:ClearAllPoints()
+			if up then
+				frame:SetPoint("BOTTOM", anchor, "TOP", x, y)
+			else
+				frame:SetPoint("TOP", anchor, "BOTTOM", x, -y)
+			end
+			anchor = frame
+			if first then
+				first, x, y = false, 0, opt.alert_offset - 24
+			end
+		end
 	end
 end
 
@@ -825,6 +833,11 @@ function addon:OnLoad()
 	anchor:Scale(opt.roll_anchor.scale)
 	addon.anchor = anchor
 
+	-- Create alert anchor
+	alert_anchor = XStack:CreateAnchor(addon.L.alert_anchor, opt.alert_anchor)
+	alert_anchor:SetFrameLevel(7)
+	addon.alert_anchor = alert_anchor
+
 	-- Expire rolls
 	local pip_frame = CreateFrame('Frame')
 	local timer = 0
@@ -844,7 +857,7 @@ function addon:OnLoad()
 					table.remove(anchor.expiring, i)
 				end
 			end
-			if count(anchor.expiring) == 0 then
+			if not next(anchor.expiring) then
 				self:Hide()
 			end
 		end
@@ -858,25 +871,26 @@ function addon:OnLoad()
 	
 	-- Register events
 	anchor:RegisterEvent('START_LOOT_ROLL')
-	anchor:RegisterEvent('CANCEL_LOOT_ROLL')
-	anchor:RegisterEvent('MODIFIER_STATE_CHANGED')
+	anchor:RegisterEvent('LOOT_HISTORY_ROLL_CHANGED')
+	anchor:RegisterEvent('LOOT_HISTORY_ROLL_COMPLETE')
 	anchor:RegisterEvent('LOOT_ROLLS_COMPLETE')
+	anchor:RegisterEvent('MODIFIER_STATE_CHANGED')
 	anchor:SetScript('OnEvent', function(_, e, ...)
 		if e == 'MODIFIER_STATE_CHANGED' then
 			modifier(...)
 		elseif e == 'START_LOOT_ROLL' then
-			start(...) -- rollid, timeremain, uknownid
-		elseif e == 'CANCEL_LOOT_ROLL' then
-			cancel(...)
-		elseif e == 'LOOT_ROLLS_COMPLETE' then
+			start(...)
+		elseif e == 'LOOT_HISTORY_ROLL_CHANGED' then
+			changed(...)
+		elseif e == 'LOOT_HISTORY_ROLL_COMPLETE' or e == 'LOOT_ROLLS_COMPLETE' then
 			complete(...)
+		else
 		end
 	end)
 
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
 
-	LibStub('LootEvents'):RegisterGroupCallback(rollevent)
 	LibStub('X-Config'):Setup(addon, 'XLootGroupOptionPanel')
 	
 	-- Register as XLoot plugin for skin callback
@@ -888,33 +902,38 @@ function addon:OnLoad()
 	CompileSkins()
 
 	-- Skin anchor
-	Skinner:Skin(anchor, 'row')
-	anchor:SetBorderColor(.4, .4, .4)
+	Skinner:Skin(anchor, opt.anchor_pretty and 'anchor_pretty' or 'anchor')
+	Skinner:Skin(alert_anchor, opt.anchor_pretty and 'anchor_pretty' or 'anchor')
 
 	-- Find and show active rolls
-	local in_raid,in_party = IsInRaid(),IsInGroup()
-	if (in_raid or in_party) and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
+	if GetNumGroupMembers() > 0 and (GetLootMethod() == 'group' or GetLootMethod() == 'needbeforegreed') then
 		for i=1,300 do
 			local time = GetLootRollTimeLeft(i)
-			if time > 0 and time < 300000 then -- MoP build 16030: if the masterlooter 'request roll' repeatedly for the same item GetLootRollTimeLeft() returns huge time for past rolls.
-				start(i, time, nil, true) -- MoP: START_LOOT_ROLL has 3 args no idea what arg3 is but it's type number
+			if time > 0 and time <  300000 then
+				start(i, time, true)
 			end
 		end
 	end
+
+	hooksecurefunc('LootWonAlertFrame_SetUp', AlertFrameHook)
+	hooksecurefunc('AlertFrame_SetLootWonAnchors', AlertFrameAnchorHook)
 end
 
 -- Slash command for toggling anchors
 local function option_handler(msg)
 	if msg == 'reset' then
 		addon:ResetProfile()
-		addon.anchor:Position()
+		anchor:Position()
+		alert_anchor:Position()
 	elseif msg == 'opt' or msg == 'options' then
 		addon:ShowOptions()
 	else
 		if anchor:IsShown() then
 			anchor:Hide()
+			alert_anchor:Hide()
 		else
 			anchor:Show()
+			alert_anchor:Show()
 		end
 	end
 end

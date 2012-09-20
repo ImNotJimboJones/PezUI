@@ -89,8 +89,6 @@ local MovAny = {
 		UIParent = "UIParent",
 		WorldFrame = "WorldFrame",
 		CinematicFrame = "CinematicFrame",
-		ArenaPrepFrames = "ArenaPrepFrames",
-		ArenaEnemyFrames = "ArenaEnemyFrames",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -100,8 +98,8 @@ local MovAny = {
 		"BagFrame5",
 	},
 	lForceProtected = {
-		ArenaPrepFrames = false,
-		ArenaEnemyFrames = false,
+	--	ArenaPrepFrames = false,
+	--	ArenaEnemyFrames = false,
 	},
 	lForcedLock = {
 		Boss1TargetFrame = "Boss1TargetFrame",
@@ -182,7 +180,7 @@ local MovAny = {
 		ContainerFrame10 = "BankBagFrame5",
 		ContainerFrame11 = "BankBagFrame6",
 		ContainerFrame12 = "BankBagFrame7",
-		ContainerFrame13 = "KeyRingFrame",
+	--	ContainerFrame13 = "KeyRingFrame",
 	},
 	lFrameNameRewrites = {
 		CompactRaidFrameContainer = "RaidUnitFramesMover",
@@ -259,6 +257,16 @@ local MovAny = {
 		ShardBarFrame = "UIParent",
 		PriestBarFrame = "UIParent",
 		MonkHarmonyBar = "UIParent",
+		ArenaEnemyFrame1 = "UIParent",
+		ArenaEnemyFrame2 = "UIParent",
+		ArenaEnemyFrame3 = "UIParent",
+		ArenaEnemyFrame4 = "UIParent",
+		ArenaEnemyFrame5 = "UIParent",
+		ArenaEnemyFrame1PetFrame = "ArenaEnemyFrame1",
+		ArenaEnemyFrame2PetFrame = "ArenaEnemyFrame2",
+		ArenaEnemyFrame3PetFrame = "ArenaEnemyFrame3",
+		ArenaEnemyFrame4PetFrame = "ArenaEnemyFrame4",
+		ArenaEnemyFrame5PetFrame = "ArenaEnemyFrame5",
 	},
 	NoReparent = {
 		TargetFrameSpellBar = "TargetFrameSpellBar",
@@ -348,14 +356,14 @@ local MovAny = {
 		end
 	end,
 
---[[	hBlizzard_TalentUI = function(self)
+	hBlizzard_TalentUI = function(self)
 		if PlayerTalentFrame_Toggle then
 			hooksecurefunc("PlayerTalentFrame_Toggle", function()
 				API:SyncElement("PlayerTalentFrame", true)
 			end)
 			MovAny.hBlizzard_TalentUI = nil
 		end
-	end,]]
+	end,
 	
 	hReputationWatchBar_Update = function()
 		API:SyncElement("ReputationWatchBar")
@@ -683,6 +691,14 @@ function MovAny:Boot()
 			print(select(1, ...) , "Done")
 		end)
 	end]]
+	
+--[[	hooksecurefunc(WatchFrame,"SetPoint",function(_,_,parent)
+		if parent ~= WatchFrameMover then
+			WatchFrame:ClearAllPoints()
+			WatchFrame:SetPoint('TOP', WatchFrameMover, 'TOP')
+		end
+	end)]]
+	
 	if ExtendedUI and ExtendedUI.CAPTUREPOINT then
 		self.oCaptureBar_Create = ExtendedUI.CAPTUREPOINT.create
 		ExtendedUI.CAPTUREPOINT.create = self.hCaptureBar_Create
@@ -5263,7 +5279,7 @@ function MovAny_OnEvent(self, event, arg1)
 			MovAny:hBlizzard_TalentUI()
 		end
 		MovAny:SyncFrames()
-	elseif event == "RAID_ROSTER_UPDATE" then
+	elseif event == "GROUP_ROSTER_UPDATE" then
 		local f = _G["CompactRaidFrameManager"]
 		if f then
 			f.MAParent = "RaidUnitFramesManagerMover"

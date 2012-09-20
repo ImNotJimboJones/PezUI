@@ -483,10 +483,12 @@ if arg2=="SPELL_AURA_APPLIED_DOSE" and (arg9==73787 or arg9==73785 or arg9==7378
 	end
 end
 
-if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==73787 or arg9==73785 or arg9==73786 or arg9==70338) and arg12 then
+
+--тест не по ид а под сложности
+if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==70338 or arg9==73785 or arg9==73786 or arg9==73787) and arg12 then
 	if icraspisokon[9]=="yes" and raachdone2 then
 	local stack=0
-	if arg9==73787 then
+	if GetInstanceDifficulty()==6 then
 		local risult=arg12/162000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -499,7 +501,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==73787 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if arg9==73785 then
+	if GetInstanceDifficulty()==4 then
 		local risult=arg12/108000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -512,7 +514,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==73787 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if arg9==73786 then
+	if GetInstanceDifficulty()==5 then
 		local risult=arg12/81000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -525,7 +527,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==73787 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if arg9==70338 then
+	if GetInstanceDifficulty()==3 then
 		local risult=arg12/54000
 		if math.ceil(risult)==risult then
 			stack=risult

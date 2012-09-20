@@ -1,18 +1,14 @@
 local addonName, vars = ...
 local L = vars.L
 local AceConfig = LibStub('AceConfigDialog-3.0')
---local GT = LibStub("LibGroupTalents-1.0")
-local GT = {} -- XXX
-for _,f in pairs({"GUIDHasTalent","GetGUIDTalentSpec","PurgeAndRescanTalents","GetTreeNames","GetTreeIcons","RegisterCallback"}) do
-  GT[f] = function() return nil end
-end
+local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 537 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 546 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
-RaidBuffStatus.GT = GT
+RaidBuffStatus.GI = GI
 RaidBuffStatus.bars = {}
 
 local band = _G.bit.band
@@ -105,6 +101,7 @@ local ccspells = {
 	BS[1513], -- Scare Beast
 	BS[10326], -- Turn Evil
 	BS[19386], -- Wyvern Sting
+	BS[115078], -- Paralysis (Monk)
 }
 local ccspellshash = {} -- much faster matching than a loop
 for _, spell in ipairs(ccspells) do
@@ -161,6 +158,8 @@ local taunts = {
 	-- Paladin
 	31790, -- Righteous Defense
 	62124, -- Hand of Reckoning
+	-- Monk
+	116189, -- Provoke 
 	-- Hunter
 	20736, -- Distracting Shot
 }
@@ -220,7 +219,6 @@ raid.reset()
 local unknownicon = "Interface\\Icons\\INV_Misc_QuestionMark"
 local specicons = {
 	UNKNOWN = unknownicon,
-	Hybrid = "Interface\\Icons\\Spell_Nature_ElementalAbsorption",
 }
 
 local classicons = {}
@@ -231,14 +229,14 @@ for _,cl in ipairs(classes) do
 end
 classicons.UNKNOWN = unknownicon
 
+local role_tex_file = "Interface\\LFGFrame\\UI-LFG-ICON-PORTRAITROLES"
 local roleicons = {
-	MeleeDPS = "Interface\\Icons\\INV_ThrowingKnife_03",
-	RangedDPS = "Interface\\Icons\\INV_Staff_13",
-	Tank = "Interface\\Icons\\INV_Shield_06",
-	Healer = "Interface\\Icons\\Spell_Holy_FlashHeal",
-	UNKNOWN = unknownicon,
+	MeleeDPS =  "Interface\\Icons\\INV_Sword_04",
+	RangedDPS = "Interface\\Icons\\ability_marksmanship",
+	Tank =      { file = role_tex_file, coords = {0,19/64,22/64,41/64} },
+	Healer =    { file = role_tex_file, coords = {20/64,39/64,1/64,20/64} },
+	UNKNOWN =   unknownicon,
 }
-
 
 local tfi = {
 	namewidth = 210,
@@ -290,131 +288,6 @@ local MinimapSize = {
 		[5] = 133 + 1/3, -- 3.5
 	},
 }
-
-local function GUIDHasTalent(guid, talentName)
-	return GT:GUIDHasTalent(guid, talentName) or 0
-end
-
-local SP = {
-	spiritofredemption = {
-		order = 916,
-		icon = BSI[27827], -- Spirit of Redemption
-		tip = BS[27827], -- Spirit of Redemption
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.PRIEST) do
-				if GUIDHasTalent(rcn.guid, BS[27827]) >= 1 then -- Spirit of Redemption
-					rcn.specialisations.spiritofredemption = true
-				end
-			end
-		end,
-	},
-	circleofhealing = {
-		order = 915,
-		icon = BSI[34861], -- Circle of Healing
-		tip = BS[34861], -- Circle of Healing
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.PRIEST) do
-				if GUIDHasTalent(rcn.guid, BS[34861]) >= 1 then -- Circle of Healing
-					rcn.specialisations.circleofhealing = true
-				end
-			end
-		end,
-	},
-	lightwell = {
-		order = 910,
-		icon = BSI[724], -- Lightwell
-		tip = BS[724], -- Lightwell
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.PRIEST) do
-				if GUIDHasTalent(rcn.guid, BS[724]) >= 1 then -- Lightwell
-					rcn.specialisations.lightwell = true
-				end
-			end
-		end,
-	},
-	shadowform = {
-		order = 885,
-		icon = BSI[15473], -- Shadowform
-		tip = BS[15473], -- Shadowform
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.PRIEST) do
-				if GUIDHasTalent(rcn.guid, BS[15473]) >= 1 then -- Shadowform
-					rcn.specialisations.shadowform = true
-				end
-			end
-		end,
-	},
-	sacredcleansing = {
-		order = 790,
-		icon = BSI[53551], -- Sacred Cleansing
-		tip = BS[53551], -- Sacred Cleansing
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.PALADIN) do
-				if GUIDHasTalent(rcn.guid, BS[53551]) >= 1 then -- Sacred Cleansing
-					rcn.specialisations.sacredcleansing = true
-				end
-			end
-		end,
-	},
-	earthshield = {
-		order = 785,
-		icon = BSI[974], -- Earth Shield
-		tip = BS[974], -- Earth Shield
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[974]) >= 1 then -- Earth Shield
-					rcn.specialisations.earthshield = true
-				end
-			end
-		end,
-	},
-	dualwield = {
-		order = 781,
-		icon = "Interface\\Icons\\Ability_DualWield",
-		tip = L["Dual wield"],
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.SHAMAN) do
-				if GUIDHasTalent(rcn.guid, BS[30798]) >= 1 then -- Dual Wield
-					rcn.specialisations.dualwield = true
-				end
-			end
-		end,
-	},
-	boneshield = {
-		order = 730,
-		icon = BSI[49222], -- Bone Shield
-		tip = BS[49222], -- Bone Shield
-		callalways = true,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[49222]) >= 1 then -- Bone Shield
-					rcn.specialisations.boneshield = true
-				end
-			end
-		end,
-	},
-	antimagiczone = {
-		order = 720,
-		icon = BSI[51052], -- Anti-Magic Zone
-		tip = BS[51052], -- Anti-Magic Zone
-		callalways = false,
-		code = function()
-			for name,rcn in pairs(raid.classes.DEATHKNIGHT) do
-				if GUIDHasTalent(rcn.guid, BS[51052]) >= 1 then -- Anti-Magic Zone
-					rcn.specialisations.antimagiczone = true
-				end
-			end
-		end,
-	},
-}
-RaidBuffStatus.SP = SP
 
 local report = {
 	checking = {},
@@ -650,7 +523,7 @@ function RaidBuffStatus:OnInitialize()
 	self.db.RegisterCallback(self, "OnProfileChanged", "OnProfileChanged")
 	self.db.RegisterCallback(self, "OnProfileCopied", "OnProfileChanged")
 	self.db.RegisterCallback(self, "OnProfileReset", "OnProfileChanged")
-	GT.RegisterCallback(self, "LibGroupTalents_Update")
+	GI.RegisterCallback(self, "GroupInSpecT_Update")
 --	RaidBuffStatus:Debug('Init, init?')
 end
 
@@ -747,9 +620,6 @@ function RaidBuffStatus:UpdateTalentsFrame()
 	if not raid.israid and not raid.isparty then
 		return
 	end
-	for speccheck, _ in pairs(SP) do
-		SP[speccheck].code()
-	end
 	RaidBuffStatus:GetTalentRowData()
 	RaidBuffStatus:SortTalentRowData(tfi.sort, tfi.sortorder)
 	RaidBuffStatus:CopyTalentRowDataToRowFrames()
@@ -758,8 +628,14 @@ function RaidBuffStatus:UpdateTalentsFrame()
 	end
 end
 
+local function sortby_name_localized(a,b)
+  return a.name_localized < b.name_localized
+end
+
 function RaidBuffStatus:GetTalentRowData()
 	tfi.rowdata = {}
+	local majortmp = {}
+	local minortmp = {}
 	local row = 1
 	for class,_ in pairs(raid.classes) do
 		for name,_ in pairs(raid.classes[class]) do
@@ -785,18 +661,34 @@ function RaidBuffStatus:GetTalentRowData()
 			tfi.rowdata[row].role = role
 			tfi.rowdata[row].roleicon = roleicon
 			tfi.rowdata[row].specialisations = {}
-			tfi.rowdata[row].spec = unit.spec
+			tfi.rowdata[row].spec = unit.specname
 			tfi.rowdata[row].specicon = unit.specicon
-			if unit.talents then
-				for speccheck, _ in pairs(SP) do
-					if unit.specialisations[speccheck] then
-						table.insert(tfi.rowdata[row].specialisations, speccheck)
-					end
-				end
+			if unit.talents and unit.tinfo and unit.tinfo.talents then
+			  -- positions 1-6 are talents in descending tier order
+			  for spellid, info in pairs(unit.tinfo.talents) do
+			    local pos = 7-info.tier
+			    tfi.rowdata[row].specialisations[pos] = info
+			  end
 			end
-			table.sort(tfi.rowdata[row].specialisations, function (a,b)
-				return(SP[a].order > SP[b].order)
-			end)
+			-- position 7 is a spacer between talents and glyphs
+			-- position 8-10 are major glyphs, 11-13 are minor glyphs
+			wipe(majortmp)
+			wipe(minortmp)
+			if unit.talents and unit.tinfo and unit.tinfo.glyphs then
+			  for spellid, info in pairs(unit.tinfo.glyphs) do
+			    if info.glyph_type == GLYPH_TYPE_MAJOR then
+			      table.insert(majortmp, info)
+			    else
+			      table.insert(minortmp, info)
+			    end
+			  end
+			end
+			table.sort(majortmp, sortby_name_localized)
+			table.sort(minortmp, sortby_name_localized)
+			for j = 1,3 do
+			  tfi.rowdata[row].specialisations[7+j] = majortmp[j]
+			  tfi.rowdata[row].specialisations[10+j] = minortmp[j]
+			end
 			row = row + 1
 		end
 	end
@@ -812,20 +704,20 @@ function RaidBuffStatus:SortTalentRowData(sort, sortorder)
 	elseif sort == "class" then
 		table.sort(tfi.rowdata, function (a,b)
 			if a.class == b.class then
-				if a.spec == b.spec then
+				if a.specname == b.specname then
 					return (RaidBuffStatus:Compare(a.name, b.name, sortorder))
 				end
-				return (RaidBuffStatus:Compare(a.spec, b.spec, sortorder))
+				return (RaidBuffStatus:Compare(a.specname, b.specname, sortorder))
 			else
 				return (RaidBuffStatus:Compare(a.class, b.class, sortorder))
 			end
 		end)
 	elseif sort == "spec" then
 		table.sort(tfi.rowdata, function (a,b)
-			if a.spec == b.spec then
+			if a.specname == b.specname then
 				return (RaidBuffStatus:Compare(a.class, b.class, sortorder))
 			else
-				return (RaidBuffStatus:Compare(a.spec, b.spec, sortorder))
+				return (RaidBuffStatus:Compare(a.specname, b.specname, sortorder))
 			end
 		end)
 	elseif sort == "role" then
@@ -854,6 +746,34 @@ function RaidBuffStatus:Compare(a, b, sortorder)
 	end
 end
 
+local function TalentButton_OnEnter(self)
+     if self.spellid then
+	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+	GameTooltip:SetSpellByID(self.spellid)
+	GameTooltip:Show()
+     end
+end
+local function TalentButton_OnLeave(self)
+     GameTooltip:Hide()
+end
+
+local function TalentButton_OnClick(self)
+     if self.spellid then
+        local link = GetSpellLink(self.spellid)
+        if not link or #link == 0 then -- some glyphs cannot be linked as a spell
+          return
+          --local name = GetSpellInfo(self.spellid)
+	  --link = "\124Hspell:"..self.spellid.."\124h["..(name or "unknown").."]\124h"
+        end
+        local activeEditBox = ChatEdit_GetActiveWindow();
+        if activeEditBox then
+           ChatEdit_InsertLink(link)
+        else
+          ChatFrame_OpenChat(link, DEFAULT_CHAT_FRAME)
+        end
+     end
+end
+
 function RaidBuffStatus:CopyTalentRowDataToRowFrames()
 	for i, _ in ipairs(tfi.rowdata) do
 		local class = tfi.rowdata[i].class
@@ -872,27 +792,29 @@ function RaidBuffStatus:CopyTalentRowDataToRowFrames()
 		tfi.rowframes[i].class:SetScript("OnLeave", function()
 			GameTooltip:Hide()
 		end)
-		tfi.rowframes[i].role:SetNormalTexture(roleicon)
-		tfi.rowframes[i].role:SetScript("OnEnter", function() 
-			RaidBuffStatus:Tooltip(tfi.rowframes[i].role, role, nil)
-		end )
-		tfi.rowframes[i].role:SetScript("OnLeave", function()
-			GameTooltip:Hide()
-		end)
+		local f = tfi.rowframes[i].role
+		f.tex = f.tex or f:CreateTexture()
+		f.tex:SetAllPoints()
+		if type(roleicon) == "table" then
+		  f.tex:SetTexture(roleicon.file)
+		  f.tex:SetTexCoord(unpack(roleicon.coords))
+		else
+		  f.tex:SetTexture(roleicon)
+		  f.tex:SetTexCoord(0,1,0,1)
+		end
+		f:SetNormalTexture(f.tex)
+		f:SetScript("OnEnter", function() RaidBuffStatus:Tooltip(f, role, nil) end)
+		f:SetScript("OnLeave", function() GameTooltip:Hide() end)
 		if raid.classes[class][name].talents then
-			local spec = raid.classes[class][name].spec
+			local specname = raid.classes[class][name].specname
 			local specicon = raid.classes[class][name].specicon
 			tfi.rowframes[i].spec:SetScript("OnEnter", function()
-				RaidBuffStatus:Tooltip(tfi.rowframes[i].spec, spec)
+				RaidBuffStatus:Tooltip(tfi.rowframes[i].spec, specname)
 			end )
 			tfi.rowframes[i].spec:SetScript("OnLeave", function()
 				GameTooltip:Hide()
 			end)
-			if spec == "Hybrid" then
-				tfi.rowframes[i].spec:SetNormalTexture(specicons.Hybrid)
-			else
-				tfi.rowframes[i].spec:SetNormalTexture(specicon or specicons.UNKNOWN)
-			end
+			tfi.rowframes[i].spec:SetNormalTexture(specicon or specicons.UNKNOWN)
 		else
 			tfi.rowframes[i].spec:SetNormalTexture(specicons.UNKNOWN)
 			tfi.rowframes[i].spec:SetScript("OnEnter", function()
@@ -904,15 +826,15 @@ function RaidBuffStatus:CopyTalentRowDataToRowFrames()
 		end
 		for j, v in ipairs (tfi.rowframes[i].specialisations) do
 			v:Hide()
-			local speccheck = tfi.rowdata[i].specialisations[j]
-			if speccheck then
-				v:SetNormalTexture(SP[speccheck].icon)
-				v:SetScript("OnEnter", function()
-					RaidBuffStatus:Tooltip(v, SP[speccheck].tip)
-				end )
-				v:SetScript("OnLeave", function()
-					GameTooltip:Hide()
-				end)
+			v.spellid = nil
+			local info = tfi.rowdata[i].specialisations[j]
+			if info then
+			        v.spellid = info.spell_id
+				v:SetNormalTexture(info.icon)
+
+				v:SetScript("OnEnter", TalentButton_OnEnter)
+				v:SetScript("OnClick", TalentButton_OnClick)
+				v:SetScript("OnLeave", TalentButton_OnLeave)
 				v:Show()
 			end
 		end
@@ -1405,11 +1327,6 @@ function RaidBuffStatus:ReadRaid()
 		end
 	end
 	RaidBuffStatus:DeleteOldUnits()
-	for speccheck, _ in pairs(SP) do
-		if SP[speccheck].callalways then
-			SP[speccheck].code()
-		end
-	end
 	if raid.israid then
 		local minguildies = 0.75 * groupnum
 		raid.pug = true
@@ -1436,7 +1353,8 @@ local spec_role = {
   MONK          = { [1] = "TANK", [2] = "HEALER", [3] = "MDPS" },
 }
 
--- raid = { classes = { CLASS = { NAME = { readid, unitid, guid, group, zone, online, isdead, istank, hasmana, isdps, ishealer, class, talents = {spec, tree = { talent = {}}}, hasbuff = {}
+-- raid = { classes = { CLASS = { NAME = { readid, unitid, guid, group, zone, online, isdead, istank, hasmana, isdps, ishealer, class, 
+--                                         hasbuff = {}, talents (boolean), spec (index), specname (localized name), specicon, tinfo = (library info) 
 function RaidBuffStatus:ReadUnit(unitid, unitindex)
 	if not UnitExists(unitid) then
 		return
@@ -1448,11 +1366,8 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 			name = name .. "-" .. realm
 		end
 		local class = select(2, UnitClass(unitid))
-		local guid = UnitGUID(unitid) or 0
-		local isDead = UnitIsDeadOrGhost(unitid) or false
 		local rank = 0
 		local subgroup = 1
-		local online = UnitIsConnected(unitid)
 		local role = UnitGroupRolesAssigned(unitid)
 		local zone = "UNKNOWN"
 		local isML = false
@@ -1462,11 +1377,8 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		local ismeleedps = false
 		local israngeddps = false
 		local ishealer = false
-		local specidx = nil
-		local level = UnitLevel(unitid)
+		local spec = nil
 		local hasbuff = {}
-		local _, raceEn = UnitRace(unitid)
-		specidx = raid.classes[class][name] and raid.classes[class][name].specidx
 		local guild = GetGuildInfo(unitid)
 		if guild then
 			if not raid.guilds[guild] then
@@ -1497,10 +1409,18 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		end
 		raid.ClassNumbers[class] = raid.ClassNumbers[class] + 1
 		local rcn = raid.classes[class][name]
-		if not rcn.specialisations then
-			rcn.specialisations = {}
-		end
-		RaidBuffStatus:UpdateSpec(rcn, GT:GetGUIDTalentSpec(guid))
+		rcn.unitid = unitid
+		rcn.guid = UnitGUID(unitid) or 0
+		rcn.group = subgroup
+		rcn.isdead = UnitIsDeadOrGhost(unitid) or false
+		rcn.class = class
+		rcn.level = UnitLevel(unitid)
+		rcn.raceEn = select(2,UnitRace(unitid))
+		rcn.online = UnitIsConnected(unitid)
+		rcn.rank = rank
+		rcn.guild = guild
+		RaidBuffStatus:UpdateSpec(rcn)
+		spec = raid.classes[class][name] and raid.classes[class][name].spec
 		local mintimeleft = RaidBuffStatus.db.profile.abouttorunout * 60
 		local thetime = GetTime()
 		for b = 1, 32 do
@@ -1546,8 +1466,8 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		local specrole = "NONE"
 		if type(spec_role[class]) == "string" then
 		  specrole = spec_role[class]
-		elseif specidx then
-		  specrole = spec_role[class][specidx]
+		elseif spec and spec > 0 then
+		  specrole = spec_role[class][spec]
 		end
 		if class == "PALADIN" and specrole == "NONE" and hasbuff[BS[25780]] then -- Righteous Fury
 		  specrole = "TANK"
@@ -1574,9 +1494,9 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 
 		if class == "PRIEST" or class == "PALADIN" or class == "MAGE" or class == "WARLOCK" or class == "SHAMAN" then
 			hasmana = true
-		elseif class == "DRUID" and (specidx == 1 or specidx == 4) then
+		elseif class == "DRUID" and (spec == 1 or spec == 4) then
 			hasmana = true
-		elseif class == "MONK" and specidx == 2 then
+		elseif class == "MONK" and spec == 2 then
 			hasmana = true
 		end
 
@@ -1594,25 +1514,15 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		end
 		
 		rcn.readid = raid.readid
-		rcn.unitid = unitid
-		rcn.guid = guid
-		rcn.group = subgroup
 		rcn.zone = zone
-		rcn.online = online
-		rcn.isdead = isDead
 		rcn.role = role
-		rcn.rank = rank
 		rcn.istank = istank
 		rcn.hasmana = hasmana
 		rcn.isdps = isdps
 		rcn.ismeleedps = ismeleedps
 		rcn.israngeddps = israngeddps
 		rcn.ishealer = ishealer
-		rcn.class = class
-		rcn.level = level
 		rcn.hasbuff = hasbuff
-		rcn.raceEn = raceEn
-		rcn.guild = guild
 		rcn.realm = realm
 		rcn.name = name
 	end
@@ -1714,29 +1624,31 @@ function RaidBuffStatus:SetFrameColours()
 end
 
 function RaidBuffStatus:SetupFrames()
+	local frame, button, fs -- temps used below
 	-- main frame
-	RaidBuffStatus.frame = CreateFrame("Frame", "RBSFrame", UIParent)
-	RaidBuffStatus.frame:Hide()
-	RaidBuffStatus.frame:EnableMouse(true)
-	RaidBuffStatus.frame:SetFrameStrata("MEDIUM")
-	RaidBuffStatus.frame:SetMovable(true)
-	RaidBuffStatus.frame:SetToplevel(true)
-	RaidBuffStatus.frame:SetWidth(128)
-	RaidBuffStatus.frame:SetHeight(190)
-	RaidBuffStatus.frame:SetScale(RaidBuffStatus.db.profile.dashscale)
-	RaidBuffStatus.rbsfs = RaidBuffStatus.frame:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText("RBS " .. RaidBuffStatus.version)
-	RaidBuffStatus.rbsfs:SetPoint("TOP",0,-5)
-	RaidBuffStatus.rbsfs:SetTextColor(.9,0,0)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.frame:SetBackdrop( { 
+	frame = CreateFrame("Frame", "RBSFrame", UIParent)
+	RaidBuffStatus.frame = frame
+	frame:Hide()
+	frame:EnableMouse(true)
+	frame:SetFrameStrata("MEDIUM")
+	frame:SetMovable(true)
+	frame:SetToplevel(true)
+	frame:SetWidth(128)
+	frame:SetHeight(190)
+	frame:SetScale(RaidBuffStatus.db.profile.dashscale)
+	fs = frame:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText("RBS " .. RaidBuffStatus.version)
+	fs:SetPoint("TOP",0,-5)
+	fs:SetTextColor(.9,0,0)
+	fs:Show()
+	frame:SetBackdrop( { 
 		bgFile = "Interface\\Buttons\\WHITE8X8",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", tile = true, tileSize = 16, edgeSize = 16, 
 		insets = { left = 5, right = 5, top = 5, bottom = 5 }
 	})
-	RaidBuffStatus.frame:ClearAllPoints()
-	RaidBuffStatus.frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	RaidBuffStatus.frame:SetScript("OnMouseDown",function(self, button)
+	frame:ClearAllPoints()
+	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	frame:SetScript("OnMouseDown",function(self, button)
 		if ( button == "LeftButton" ) then
 			if not RaidBuffStatus.db.profile.LockWindow then
 				if not RaidBuffStatus.db.profile.movewithaltclick or (RaidBuffStatus.db.profile.movewithaltclick and IsAltKeyDown()) then
@@ -1745,21 +1657,23 @@ function RaidBuffStatus:SetupFrames()
 			end
 		end
 	end)
-	RaidBuffStatus.frame:SetScript("OnMouseUp",function(self, button)
+	frame:SetScript("OnMouseUp",function(self, button)
 		if ( button == "LeftButton" ) then
 			self:StopMovingOrSizing()
 			RaidBuffStatus:SaveFramePosition()
 		end
 	end)
-	RaidBuffStatus.frame:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
-	RaidBuffStatus.frame:SetClampedToScreen(true)
+	frame:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
+	frame:SetClampedToScreen(true)
 	RaidBuffStatus:LoadFramePosition()
 
-	RaidBuffStatus.bossbutton = CreateFrame("Button", "", RaidBuffStatus.frame, "OptionsButtonTemplate")
-	RaidBuffStatus.bossbutton:SetText(L["Boss"])
-	RaidBuffStatus.bossbutton:SetWidth(45)
-	RaidBuffStatus.bossbutton:SetPoint("BOTTOMLEFT", RaidBuffStatus.frame, "BOTTOMLEFT", 7, 5)
-	RaidBuffStatus.bossbutton:SetScript("OnClick", function()
+        
+	button = CreateFrame("Button", "$parentBossButton", RaidBuffStatus.frame, "OptionsButtonTemplate")
+	RaidBuffStatus.bossbutton = button
+	button:SetText(L["Boss"])
+	button:SetWidth(45)
+	button:SetPoint("BOTTOMLEFT", RaidBuffStatus.frame, "BOTTOMLEFT", 7, 5)
+	button:SetScript("OnClick", function()
 		if RaidBuffStatus.db.profile.abouttorunoutdash then
 			RaidBuffStatus.db.profile.checkabouttorunout = true
 		end
@@ -1775,13 +1689,14 @@ function RaidBuffStatus:SetupFrames()
 			end
 		end
 	end)
-	RaidBuffStatus.bossbutton:Show()
+	button:Show()
 
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.frame, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Trash"])
-	RaidBuffStatus.button:SetWidth(45)
-	RaidBuffStatus.button:SetPoint("BOTTOMRIGHT", RaidBuffStatus.frame, "BOTTOMRIGHT", -7, 5)
-	RaidBuffStatus.button:SetScript("OnClick", function()
+	button = CreateFrame("Button", "$parentTrashButton", RaidBuffStatus.frame, "OptionsButtonTemplate")
+	RaidBuffStatus.trashbutton = button
+	button:SetText(L["Trash"])
+	button:SetWidth(45)
+	button:SetPoint("BOTTOMRIGHT", RaidBuffStatus.frame, "BOTTOMRIGHT", -7, 5)
+	button:SetScript("OnClick", function()
 		RaidBuffStatus.db.profile.checkabouttorunout = false
 		RaidBuffStatus:DoReport(true)
 		RaidBuffStatus:UpdateButtons()
@@ -1795,302 +1710,300 @@ function RaidBuffStatus:SetupFrames()
 			end
 		end
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.trashbutton = RaidBuffStatus.button
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.frame, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["R"])
-	RaidBuffStatus.button:SetWidth(22)
-	RaidBuffStatus.button:SetPoint("BOTTOM", RaidBuffStatus.frame, "BOTTOM", 0, 5)
-	RaidBuffStatus.button:SetScript("OnClick", function()
+	button:Show()
+
+	button = CreateFrame("Button", "$parentReadyCheckButton", RaidBuffStatus.frame, "OptionsButtonTemplate")
+	RaidBuffStatus.readybutton = button
+	button:SetText(L["R"])
+	button:SetWidth(22)
+	button:SetPoint("BOTTOM", RaidBuffStatus.frame, "BOTTOM", 0, 5)
+	button:SetScript("OnClick", function()
 		if UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") then
 			DoReadyCheck()
 		else
 			RaidBuffStatus:OfficerWarning()
 		end
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.readybutton = RaidBuffStatus.button
+	button:Show()
 
-	RaidBuffStatus.talentsbutton = CreateFrame("Button", "talentsbutton", RaidBuffStatus.frame, "SecureActionButtonTemplate")
-	RaidBuffStatus.talentsbutton:SetWidth(20)
-	RaidBuffStatus.talentsbutton:SetHeight(20)
-	RaidBuffStatus.talentsbutton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
-	RaidBuffStatus.talentsbutton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down") 
-	RaidBuffStatus.talentsbutton:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-	RaidBuffStatus.talentsbutton:ClearAllPoints()
-	RaidBuffStatus.talentsbutton:SetPoint("TOPLEFT", RaidBuffStatus.frame, "TOPLEFT", 5, -5)
-	RaidBuffStatus.talentsbutton:SetScript("OnClick", function()
+	button = CreateFrame("Button", "$parentTalentsButton", RaidBuffStatus.frame, "SecureActionButtonTemplate")
+	RaidBuffStatus.talentsbutton = button
+	button:SetWidth(20)
+	button:SetHeight(20)
+	button:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+	button:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down") 
+	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+	button:ClearAllPoints()
+	button:SetPoint("TOPLEFT", RaidBuffStatus.frame, "TOPLEFT", 5, -5)
+	button:SetScript("OnClick", function()
 		RaidBuffStatus:ToggleTalentsFrame()
 	end
 	)
-	RaidBuffStatus.talentsbutton:Show()
+	button:Show()
 
-	RaidBuffStatus.optionsbutton = CreateFrame("Button", "optionsbutton", RaidBuffStatus.frame, "SecureActionButtonTemplate")
-	RaidBuffStatus.optionsbutton:SetWidth(20)
-	RaidBuffStatus.optionsbutton:SetHeight(20)
-	RaidBuffStatus.optionsbutton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
-	RaidBuffStatus.optionsbutton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down") 
-	RaidBuffStatus.optionsbutton:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-	RaidBuffStatus.optionsbutton:ClearAllPoints()
-	RaidBuffStatus.optionsbutton:SetPoint("TOPRIGHT", RaidBuffStatus.frame, "TOPRIGHT", -5, -5)
-	RaidBuffStatus.optionsbutton:SetScript("OnClick", function()
-		RaidBuffStatus:ToggleOptionsFrame()
-	end
-	)
-	RaidBuffStatus.optionsbutton:Show()
+	button = CreateFrame("Button", "$parentOptionsButton", RaidBuffStatus.frame, "SecureActionButtonTemplate")
+	RaidBuffStatus.optionsbutton = button
+	button:SetWidth(20)
+	button:SetHeight(20)
+	button:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
+	button:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down") 
+	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+	button:ClearAllPoints()
+	button:SetPoint("TOPRIGHT", RaidBuffStatus.frame, "TOPRIGHT", -5, -5)
+	button:SetScript("OnClick", function() RaidBuffStatus:ToggleOptionsFrame() end)
+	button:Show()
 
 	-- Dashboard scan button
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.frame, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Scan"])
-	RaidBuffStatus.button:SetWidth(55)
-	RaidBuffStatus.button:SetHeight(15)
-	RaidBuffStatus.button:SetPoint("TOP", RaidBuffStatus.frame, "TOP", 0, -18)
-	RaidBuffStatus.button:SetScript("OnClick", function()
+	button = CreateFrame("Button", "$parentScanButton", RaidBuffStatus.frame, "OptionsButtonTemplate")
+	RaidBuffStatus.scanbutton = button
+	button:SetText(L["Scan"])
+	button:SetWidth(55)
+	button:SetHeight(15)
+	button:SetPoint("TOP", RaidBuffStatus.frame, "TOP", 0, -18)
+	button:SetScript("OnClick", function()
 		RaidBuffStatus:DoReport(true)
 		RaidBuffStatus:Debug("Scan button")
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.scanbutton = RaidBuffStatus.button
+	button:Show()
 
 	RaidBuffStatus:AddBuffButtons()
 
 	-- talents window frame
 
-	RaidBuffStatus.talentframe = CreateFrame("Frame", "RBSTalentsFrame", UIParent, "DialogBoxFrame")
-	RaidBuffStatus.talentframe:Hide()
-	RaidBuffStatus.talentframe:EnableMouse(true)
-	RaidBuffStatus.talentframe:SetFrameStrata("MEDIUM")
-	RaidBuffStatus.talentframe:SetMovable(true)
-	RaidBuffStatus.talentframe:SetToplevel(true)
-	RaidBuffStatus.talentframe:SetWidth(tfi.framewidth)
-	RaidBuffStatus.talentframe:SetHeight(190)
-	RaidBuffStatus.rbsfs = RaidBuffStatus.talentframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText("RBS " .. RaidBuffStatus.version .. " - " .. L["Talent Specialisations"])
-	RaidBuffStatus.rbsfs:SetPoint("TOP",0,-5)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.talentframe:SetBackdrop( { 
+	local talentframe = CreateFrame("Frame", "RBSTalentsFrame", UIParent, "DialogBoxFrame")
+	RaidBuffStatus.talentframe = talentframe
+	talentframe:Hide()
+	talentframe:EnableMouse(true)
+	talentframe:SetFrameStrata("MEDIUM")
+	talentframe:SetMovable(true)
+	talentframe:SetToplevel(true)
+	talentframe:SetWidth(tfi.framewidth)
+	talentframe:SetHeight(190)
+	fs = talentframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText("RBS " .. RaidBuffStatus.version .. " - " .. L["Talent Specialisations"])
+	fs:SetPoint("TOP",0,-5)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	talentframe:SetBackdrop( { 
 		bgFile = "Interface\\Buttons\\WHITE8X8", 
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", tile = true, tileSize = 16, edgeSize = 16, 
 		insets = { left = 5, right = 5, top = 5, bottom = 5 }
 	})
-	RaidBuffStatus.talentframe:ClearAllPoints()
-	RaidBuffStatus.talentframe:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	RaidBuffStatus.talentframe:SetScript("OnMouseDown",function(self, button)
+	talentframe:ClearAllPoints()
+	talentframe:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	talentframe:SetScript("OnMouseDown",function(self, button)
 		if ( button == "LeftButton" ) then
 			if not RaidBuffStatus.db.profile.LockWindow then
 				self:StartMoving()
 			end
 		end
 	end)
-	RaidBuffStatus.talentframe:SetScript("OnMouseUp",function(self, button)
+	talentframe:SetScript("OnMouseUp",function(self, button)
 		if ( button == "LeftButton" ) then
 			self:StopMovingOrSizing()
 			RaidBuffStatus:SaveFramePosition()
 		end
 	end)
-	RaidBuffStatus.talentframe:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Name"])
-	RaidBuffStatus.button:SetWidth(tfi.namewidth)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.namex, -20)
-	RaidBuffStatus.button:SetScript("OnClick", function()
+	talentframe:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
+        -- button: sort by name
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Name"])
+	button:SetWidth(tfi.namewidth)
+	button:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.namex, -20)
+	button:SetScript("OnClick", function()
 		tfi.sort = "name"
 		tfi.sortorder = 0 - tfi.sortorder
 		RaidBuffStatus:ShowTalentsFrame()
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Class"])
-	RaidBuffStatus.button:SetWidth(tfi.classwidth)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.classx, -20)
-		RaidBuffStatus.button:SetScript("OnClick", function()
+	button:Show()
+        -- button: sort by class
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Class"])
+	button:SetWidth(tfi.classwidth)
+	button:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.classx, -20)
+	button:SetScript("OnClick", function()
 		tfi.sort = "class"
 		tfi.sortorder = 0 - tfi.sortorder
 		RaidBuffStatus:ShowTalentsFrame()
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Spec"])
-	RaidBuffStatus.button:SetWidth(tfi.specwidth)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.specx, -20)
-		RaidBuffStatus.button:SetScript("OnClick", function()
+        -- button: sort by spec
+	button:Show()
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Spec"])
+	button:SetWidth(tfi.specwidth)
+	button:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.specx, -20)
+	button:SetScript("OnClick", function()
 		tfi.sort = "spec"
 		tfi.sortorder = 0 - tfi.sortorder
 		RaidBuffStatus:ShowTalentsFrame()
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Role"])
-	RaidBuffStatus.button:SetWidth(tfi.specwidth)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.rolex, -20)
-		RaidBuffStatus.button:SetScript("OnClick", function()
+	button:Show()
+        -- button: sort by role
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Role"])
+	button:SetWidth(tfi.specwidth)
+	button:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.rolex, -20)
+	button:SetScript("OnClick", function()
 		tfi.sort = "role"
 		tfi.sortorder = 0 - tfi.sortorder
 		RaidBuffStatus:ShowTalentsFrame()
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Specialisations"])
-	RaidBuffStatus.button:SetWidth(tfi.specialisationswidth)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.specialisationsx, -20)
-		RaidBuffStatus.button:SetScript("OnClick", function()
+	button:Show()
+        -- button: sort by talents
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Specialisations"])
+	button:SetWidth(tfi.specialisationswidth)
+	button:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.specialisationsx, -20)
+	button:SetScript("OnClick", function()
 		tfi.sort = "specialisations"
 		tfi.sortorder = 0 - tfi.sortorder
 		RaidBuffStatus:ShowTalentsFrame()
 	end)
-	RaidBuffStatus.button:Show()
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.talentframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Refresh"])
-	RaidBuffStatus.button:SetWidth(90)
-	RaidBuffStatus.button:SetPoint("BOTTOMRIGHT", RaidBuffStatus.talentframe, "BOTTOMRIGHT", -5, 5)
-	RaidBuffStatus.button:SetScript("OnClick", function()
-		RaidBuffStatus:RefreshTalents()
-	end)
-	RaidBuffStatus.button:Show()
+	button:Show()
+        -- button: refresh
+	button = CreateFrame("Button", nil, talentframe, "OptionsButtonTemplate")
+	button:SetText(L["Refresh"])
+	button:SetWidth(90)
+	button:SetPoint("BOTTOMRIGHT", RaidBuffStatus.talentframe, "BOTTOMRIGHT", -5, 5)
+	button:SetScript("OnClick", function() RaidBuffStatus:RefreshTalents() end)
+	button:Show()
 
 	rowy = 0 - tfi.topedge
 	for i = 1, tfi.maxrows do
 		tfi.rowframes[i] = {}
-		RaidBuffStatus.rowframe = CreateFrame("Frame", "", RaidBuffStatus.talentframe)
-		tfi.rowframes[i].rowframe = RaidBuffStatus.rowframe
-		RaidBuffStatus.rowframe:SetWidth(tfi.rowwidth)
-		RaidBuffStatus.rowframe:SetHeight(tfi.rowheight)
-		RaidBuffStatus.rowframe:ClearAllPoints()
-		RaidBuffStatus.rowframe:SetPoint("TOPLEFT", RaidBuffStatus.talentframe, "TOPLEFT", tfi.edge + tfi.inset, rowy)
-		RaidBuffStatus.rbsfs = RaidBuffStatus.rowframe:CreateFontString(nil,"ARTWORK","GameFontNormal")
-		tfi.rowframes[i].name = RaidBuffStatus.rbsfs
-		RaidBuffStatus.rbsfs:SetText("Must be in a party/raid")
-		RaidBuffStatus.rbsfs:SetPoint("TOPLEFT", RaidBuffStatus.rowframe, "TOPLEFT", 0, -2)
-		RaidBuffStatus.rbsfs:SetTextColor(.9,0,0)
-		RaidBuffStatus.rbsfs:Show()
-
-		RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.rowframe)
-		tfi.rowframes[i].class = RaidBuffStatus.button
-		RaidBuffStatus.button:SetWidth(tfi.buttonsize)
-		RaidBuffStatus.button:SetHeight(tfi.buttonsize)
-		RaidBuffStatus.button:SetNormalTexture("Interface\\Icons\\INV_ValentinesCandy")
-		RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-		RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.rowframe, "TOPLEFT", tfi.classx + ((tfi.classwidth - 30) / 2), 0)
-		RaidBuffStatus.button:Show()
-
-		RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.rowframe)
-		tfi.rowframes[i].role = RaidBuffStatus.button
-		RaidBuffStatus.button:SetWidth(tfi.buttonsize)
-		RaidBuffStatus.button:SetHeight(tfi.buttonsize)
-		RaidBuffStatus.button:SetNormalTexture("Interface\\Icons\\INV_ValentinesCandy")
-		RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-		RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.rowframe, "TOPLEFT", tfi.rolex + ((tfi.rolewidth - 30) / 2), 0)
-		RaidBuffStatus.button:Show()
-
-		RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.rowframe)
-		tfi.rowframes[i].spec = RaidBuffStatus.button
-		RaidBuffStatus.button:SetWidth(tfi.buttonsize)
-		RaidBuffStatus.button:SetHeight(tfi.buttonsize)
-		RaidBuffStatus.button:SetNormalTexture("Interface\\Icons\\Ability_ThunderBolt")
-		RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-		RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.rowframe, "TOPLEFT", tfi.specx + ((tfi.specwidth - 30) / 2), 0)
-		RaidBuffStatus.button:Show()
-		
+		local rowframe = CreateFrame("Frame", nil, talentframe)
+		tfi.rowframes[i].rowframe = rowframe
+		rowframe:SetWidth(tfi.rowwidth)
+		rowframe:SetHeight(tfi.rowheight)
+		rowframe:ClearAllPoints()
+		rowframe:SetPoint("TOPLEFT", talentframe, "TOPLEFT", tfi.edge + tfi.inset, rowy)
+		fs = rowframe:CreateFontString(nil,"ARTWORK","GameFontNormal")
+		tfi.rowframes[i].name = fs
+		fs:SetText("Must be in a party/raid")
+		fs:SetPoint("TOPLEFT", rowframe, "TOPLEFT", 0, -2)
+		fs:SetTextColor(.9,0,0)
+		fs:Show()
+		-- button: class
+		button = CreateFrame("Button", nil, rowframe)
+		tfi.rowframes[i].class = button
+		button:SetWidth(tfi.buttonsize)
+		button:SetHeight(tfi.buttonsize)
+		button:SetNormalTexture("Interface\\Icons\\INV_ValentinesCandy")
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+		button:SetPoint("TOPLEFT", rowframe, "TOPLEFT", tfi.classx + ((tfi.classwidth - 30) / 2), 0)
+		button:Show()
+		-- button: role
+		button = CreateFrame("Button", nil, rowframe)
+		tfi.rowframes[i].role = button
+		button:SetWidth(tfi.buttonsize)
+		button:SetHeight(tfi.buttonsize)
+		button:SetNormalTexture("Interface\\Icons\\INV_ValentinesCandy")
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+		button:SetPoint("TOPLEFT", rowframe, "TOPLEFT", tfi.rolex + ((tfi.rolewidth - 30) / 2), 0)
+		button:Show()
+		-- button: spec
+		button = CreateFrame("Button", nil, rowframe)
+		tfi.rowframes[i].spec = button
+		button:SetWidth(tfi.buttonsize)
+		button:SetHeight(tfi.buttonsize)
+		button:SetNormalTexture("Interface\\Icons\\Ability_ThunderBolt")
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+		button:SetPoint("TOPLEFT", rowframe, "TOPLEFT", tfi.specx + ((tfi.specwidth - 30) / 2), 0)
+		button:Show()
+		-- talent buttons, numbered ascending left-to-right, right-anchored
 		tfi.rowframes[i].specialisations = {}
-		RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.rowframe)
-		tfi.rowframes[i].specialisations[1] = RaidBuffStatus.button
-		RaidBuffStatus.button:SetWidth(tfi.buttonsize)
-		RaidBuffStatus.button:SetHeight(tfi.buttonsize)
-		RaidBuffStatus.button:SetNormalTexture("Interface\\Icons\\Ability_ThunderBolt")
-		RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-		RaidBuffStatus.button:SetPoint("TOPRIGHT", RaidBuffStatus.rowframe, "TOPRIGHT", 0 - tfi.inset, 0)
-		RaidBuffStatus.button:Show()
-		
-		for j = 2, 10 do
-			RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.rowframe)
-			tfi.rowframes[i].specialisations[j] = RaidBuffStatus.button
-			RaidBuffStatus.button:SetWidth(tfi.buttonsize)
-			RaidBuffStatus.button:SetHeight(tfi.buttonsize)
-			RaidBuffStatus.button:SetNormalTexture("Interface\\Icons\\Ability_ThunderBolt")
-			RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-			RaidBuffStatus.button:SetPoint("TOPRIGHT", tfi.rowframes[i].specialisations[j - 1], "TOPLEFT", 0, 0)
-			RaidBuffStatus.button:Show()
+		for j = 13, 1, -1 do
+			button = CreateFrame("Button", nil, rowframe)
+			tfi.rowframes[i].specialisations[j] = button
+			button:SetWidth(tfi.buttonsize)
+			button:SetHeight(tfi.buttonsize)
+			button:SetNormalTexture("Interface\\Icons\\Ability_ThunderBolt")
+			button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+			if j == 13 then
+			  button:SetPoint("TOPRIGHT", rowframe, "TOPRIGHT", 0 - tfi.inset, 0)
+			else
+			  button:SetPoint("TOPRIGHT", tfi.rowframes[i].specialisations[j + 1], "TOPLEFT", 0, 0)
+			end
+			button:Show()
 		end
 		rowy = rowy - tfi.rowheight - tfi.rowgap
 	end
 
 
 	-- options window frame
-	RaidBuffStatus.optionsframe = CreateFrame("Frame", "RBSOptionsFrame", UIParent, "DialogBoxFrame")
-	RaidBuffStatus.optionsframe:Hide()
-	RaidBuffStatus.optionsframe:EnableMouse(true)
-	RaidBuffStatus.optionsframe:SetFrameStrata("MEDIUM")
-	RaidBuffStatus.optionsframe:SetMovable(true)
-	RaidBuffStatus.optionsframe:SetToplevel(true)
-	RaidBuffStatus.optionsframe:SetWidth(300)
-	RaidBuffStatus.optionsframe:SetHeight(228)
-	RaidBuffStatus.optionsframe:SetScale(RaidBuffStatus.db.profile.optionsscale)
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText("RBS " .. RaidBuffStatus.version .. " - " .. L["Buff Options"])
-	RaidBuffStatus.rbsfs:SetPoint("TOP",0,-5)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.optionsframe:SetBackdrop( { 
+	local optionsframe = CreateFrame("Frame", "RBSOptionsFrame", UIParent, "DialogBoxFrame")
+	RaidBuffStatus.optionsframe = optionsframe
+	optionsframe:Hide()
+	optionsframe:EnableMouse(true)
+	optionsframe:SetFrameStrata("MEDIUM")
+	optionsframe:SetMovable(true)
+	optionsframe:SetToplevel(true)
+	optionsframe:SetWidth(300)
+	optionsframe:SetHeight(228)
+	optionsframe:SetScale(RaidBuffStatus.db.profile.optionsscale)
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText("RBS " .. RaidBuffStatus.version .. " - " .. L["Buff Options"])
+	fs:SetPoint("TOP",0,-5)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	optionsframe:SetBackdrop( { 
 		bgFile = "Interface\\Buttons\\WHITE8X8", 
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", tile = true, tileSize = 16, edgeSize = 16, 
 		insets = { left = 5, right = 5, top = 5, bottom = 5 }
 	})
-	RaidBuffStatus.optionsframe:ClearAllPoints()
-	RaidBuffStatus.optionsframe:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	RaidBuffStatus.optionsframe:SetScript("OnMouseDown",function(self, button)
+	optionsframe:ClearAllPoints()
+	optionsframe:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	optionsframe:SetScript("OnMouseDown",function(self, button)
 		if ( button == "LeftButton" ) then
 			if not RaidBuffStatus.db.profile.LockWindow then
 				self:StartMoving()
 			end
 		end
 	end)
-	RaidBuffStatus.optionsframe:SetScript("OnMouseUp",function(self, button)
+	optionsframe:SetScript("OnMouseUp",function(self, button)
 		if ( button == "LeftButton" ) then
 			self:StopMovingOrSizing()
 			RaidBuffStatus:SaveFramePosition()
 		end
 	end)
-	RaidBuffStatus.optionsframe:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
+	optionsframe:SetScript("OnHide",function(self) self:StopMovingOrSizing() end)
 
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Is a warning"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-53)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Is a buff"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-73)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Show on dashboard"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-93)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Show/Report in combat"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-113)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Report on Trash"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-133)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
-	RaidBuffStatus.rbsfs = RaidBuffStatus.optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
-	RaidBuffStatus.rbsfs:SetText(L["Report on Boss"] .. ":")
-	RaidBuffStatus.rbsfs:SetPoint("TOPLEFT",10,-153)
-	RaidBuffStatus.rbsfs:SetTextColor(1,1,1)
-	RaidBuffStatus.rbsfs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Is a warning"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-53)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Is a buff"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-73)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Show on dashboard"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-93)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Show/Report in combat"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-113)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Report on Trash"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-133)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
+	fs = optionsframe:CreateFontString("$parentTitle","ARTWORK","GameFontNormal")
+	fs:SetText(L["Report on Boss"] .. ":")
+	fs:SetPoint("TOPLEFT",10,-153)
+	fs:SetTextColor(1,1,1)
+	fs:Show()
 
-	RaidBuffStatus.button = CreateFrame("Button", "", RaidBuffStatus.optionsframe, "OptionsButtonTemplate")
-	RaidBuffStatus.button:SetText(L["Buff Wizard"])
-	RaidBuffStatus.button:SetPoint("BOTTOMLEFT", RaidBuffStatus.optionsframe, "BOTTOMLEFT", 10, 25)
-	RaidBuffStatus.button:SetScript("OnClick", function()
-		RaidBuffStatus:OpenBlizzAddonOptions()
-	end)
-	RaidBuffStatus.button:Show()
+	button = CreateFrame("Button", nil, optionsframe, "OptionsButtonTemplate")
+	button:SetText(L["Buff Wizard"])
+	button:SetPoint("BOTTOMLEFT", optionsframe, "BOTTOMLEFT", 10, 25)
+	button:SetScript("OnClick", function() RaidBuffStatus:OpenBlizzAddonOptions() end)
+	button:Show()
 
 	local bufflist = {}
 	local BF = RaidBuffStatus.BF
@@ -2137,7 +2050,7 @@ function RaidBuffStatus:SetupFrames()
 		RaidBuffStatus:AddOptionsBuffRadioButton(buffcheck .. "boss", currentx, -150, saveradio, "Check")
 		currentx = currentx + 22
 	end
-	RaidBuffStatus.optionsframe:SetWidth(currentx + 9)
+	optionsframe:SetWidth(currentx + 9)
 	RaidBuffStatus:SetFrameColours()
 end
 
@@ -2373,96 +2286,96 @@ end
 
 
 function RaidBuffStatus:AddBuffButton(name, x, y, icon, update, click, tooltip)
-	RaidBuffStatus.button = nil
+	local button = nil
 	for _, v in ipairs(buttons) do
 		if v.free then
-			RaidBuffStatus.button = v
-			RaidBuffStatus.button.update = nil
-			RaidBuffStatus.button:SetScript("PreClick", nil)
-			RaidBuffStatus.button:SetScript("PostClick", nil)
-			RaidBuffStatus.button:SetScript("OnEnter", nil)
-			RaidBuffStatus.button:SetScript("OnLeave", nil)
-			RaidBuffStatus.button:SetAttribute("type", nil)
-			RaidBuffStatus.button:SetAttribute("spell", nil)
-			RaidBuffStatus.button:SetAttribute("unit", nil)
-			RaidBuffStatus.button:SetAttribute("name", nil)
-			RaidBuffStatus.button:SetAttribute("item", nil)
-			RaidBuffStatus.button.count:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-			RaidBuffStatus.button.count:SetText("")
+			button = v
+			button.update = nil
+			button:SetScript("PreClick", nil)
+			button:SetScript("PostClick", nil)
+			button:SetScript("OnEnter", nil)
+			button:SetScript("OnLeave", nil)
+			button:SetAttribute("type", nil)
+			button:SetAttribute("spell", nil)
+			button:SetAttribute("unit", nil)
+			button:SetAttribute("name", nil)
+			button:SetAttribute("item", nil)
+			button.count:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+			button.count:SetText("")
 			break
 		end
 	end
-	if not RaidBuffStatus.button then
-		RaidBuffStatus.button = CreateFrame("Button", nil, RaidBuffStatus.frame, "SecureActionButtonTemplate")
-		RaidBuffStatus.button:RegisterForClicks("LeftButtonUp","RightButtonUp")
-		table.insert(buttons, RaidBuffStatus.button)
-		RaidBuffStatus.button:Hide()
-		RaidBuffStatus.button:SetWidth(20)
-		RaidBuffStatus.button:SetHeight(20)
-		RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-		RaidBuffStatus.button:SetAlpha(1)
-		RaidBuffStatus.count = RaidBuffStatus.button:CreateFontString(nil, "ARTWORK","GameFontNormalSmall")
-		RaidBuffStatus.button.count = RaidBuffStatus.count
-		RaidBuffStatus.count:SetWidth(20)
-		RaidBuffStatus.count:SetHeight(20)
-		RaidBuffStatus.count:SetFont(RaidBuffStatus.count:GetFont(),11,"OUTLINE")
-		RaidBuffStatus.count:SetPoint("CENTER", self.button, "CENTER", 0, 0)
-		RaidBuffStatus.count:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-		RaidBuffStatus.count:SetText("X")
-		RaidBuffStatus.count:Show()
+	if not button then
+		button = CreateFrame("Button", nil, RaidBuffStatus.frame, "SecureActionButtonTemplate")
+		button:RegisterForClicks("LeftButtonUp","RightButtonUp")
+		table.insert(buttons, button)
+		button:Hide()
+		button:SetWidth(20)
+		button:SetHeight(20)
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+		button:SetAlpha(1)
+		local count = button:CreateFontString(nil, "ARTWORK","GameFontNormalSmall")
+		button.count = count
+		count:SetWidth(20)
+		count:SetHeight(20)
+		count:SetFont(count:GetFont(),11,"OUTLINE")
+		count:SetPoint("CENTER", button, "CENTER", 0, 0)
+		count:SetTextColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+		count:SetText("X")
+		count:Show()
 	end
-	RaidBuffStatus.button.free = false
-	RaidBuffStatus.button:SetNormalTexture(icon)
-	RaidBuffStatus.button:SetPoint("BOTTOMLEFT", RaidBuffStatus.frame, "BOTTOMLEFT", x, y)
+	button.free = false
+	button:SetNormalTexture(icon)
+	button:SetPoint("BOTTOMLEFT", RaidBuffStatus.frame, "BOTTOMLEFT", x, y)
 	if click then
-		RaidBuffStatus.button:SetScript("PreClick", click)
+		button:SetScript("PreClick", click)
 	end
 	if update then
-		RaidBuffStatus.button.update = update
+		button.update = update
 	end
 	if tooltip then
-		RaidBuffStatus.button:SetScript("OnEnter", function (self)
+		button:SetScript("OnEnter", function (self)
 			tooltip(self)
 			RaidBuffStatus.tooltipupdate = function ()
 				tooltip(self)
 			end
 		end)
-		RaidBuffStatus.button:SetScript("OnLeave", function()
+		button:SetScript("OnLeave", function()
 			RaidBuffStatus.tooltipupdate = nil
 			GameTooltip:Hide()
 		end)
 	end
-	RaidBuffStatus.button:Show()
+	button:Show()
 end
 
 function RaidBuffStatus:AddOptionsBuffButton(name, x, y, icon, tooltip)
-	RaidBuffStatus.button = CreateFrame("Button", name, RaidBuffStatus.optionsframe, "SecureActionButtonTemplate")
-	table.insert(optionsiconbuttons, RaidBuffStatus.button)
-	RaidBuffStatus.button:Hide()
-	RaidBuffStatus.button:SetWidth(20)
-	RaidBuffStatus.button:SetHeight(20)
-	RaidBuffStatus.button:SetNormalTexture(icon)
-	RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.optionsframe, "TOPLEFT", x, y)
+	local button = CreateFrame("Button", name, RaidBuffStatus.optionsframe, "SecureActionButtonTemplate")
+	table.insert(optionsiconbuttons, button)
+	button:Hide()
+	button:SetWidth(20)
+	button:SetHeight(20)
+	button:SetNormalTexture(icon)
+	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+	button:SetPoint("TOPLEFT", RaidBuffStatus.optionsframe, "TOPLEFT", x, y)
 	if tooltip then
-		RaidBuffStatus.button:SetScript("OnEnter", tooltip)
-		RaidBuffStatus.button:SetScript("OnLeave", function() GameTooltip:Hide() end)
+		button:SetScript("OnEnter", tooltip)
+		button:SetScript("OnLeave", function() GameTooltip:Hide() end)
 	end
-	RaidBuffStatus.button:Show()
+	button:Show()
 end
 
 function RaidBuffStatus:AddOptionsBuffRadioButton(name, x, y, click, type)
-	RaidBuffStatus.button = CreateFrame("CheckButton", name, RaidBuffStatus.optionsframe, "UI" .. type .. "ButtonTemplate")
-	table.insert(optionsbuttons, RaidBuffStatus.button)
-	RaidBuffStatus.button:Hide()
-	RaidBuffStatus.button:SetWidth(20)
-	RaidBuffStatus.button:SetHeight(20)
-	RaidBuffStatus.button:SetPoint("TOPLEFT", RaidBuffStatus.optionsframe, "TOPLEFT", x, y)
-	RaidBuffStatus.button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
+	local button = CreateFrame("CheckButton", name, RaidBuffStatus.optionsframe, "UI" .. type .. "ButtonTemplate")
+	table.insert(optionsbuttons, button)
+	button:Hide()
+	button:SetWidth(20)
+	button:SetHeight(20)
+	button:SetPoint("TOPLEFT", RaidBuffStatus.optionsframe, "TOPLEFT", x, y)
+	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
 	if click then
-		RaidBuffStatus.button:SetScript("OnClick", click)
+		button:SetScript("OnClick", click)
 	end
-	RaidBuffStatus.button:Show()
+	button:Show()
 end
 
 
@@ -2835,7 +2748,7 @@ function RaidBuffStatus:DefaultButtonUpdate(self, thosemissing, profile, checkin
 end
 
 
-function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, reagentspellunused, reagentunused, nonselfbuff, bagitem, itemslot)
+function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, nonselfbuff, bagitem, itemslot)
 	local BF = RaidBuffStatus.BF
 	local check = BF[buffcheck].check
 	local prefix
@@ -3204,7 +3117,7 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 		if not unit then
 			return
 		end
-		if subevent == "UNIT_DIED" and unit.specialisations.spiritofredemption then
+		if subevent == "UNIT_DIED" and unit.spec == 2 then -- Holy
 			RaidBuffStatus:Debug("was a priest with spirit of redemption")
 			return
 		end
@@ -4023,11 +3936,11 @@ function RaidBuffStatus:AmIListed(list)
 end
 
 function RaidBuffStatus:RefreshTalents()
-	GT:PurgeAndRescanTalents()
+	GI:Rescan()
 	for class,_ in pairs(raid.classes) do
 		for name,rcn in pairs(raid.classes[class]) do
 			rcn.talents = nil
-			rcn.spec = "UNKNOWN"
+			rcn.specname = "UNKNOWN"
 			rcn.specicon = "UNKNOWN"
 		end
 	end
@@ -4350,19 +4263,6 @@ function RaidBuffStatus:SayMe(msg)
 	UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
 end
 
-function RaidBuffStatus:SelectPriestInner()
-	if not raid.classes.PRIEST[playername] then
-		return nil
-	end
-	local spell = SpellName(588) -- Inner Fire
-	if raid.classes.PRIEST[playername].level >= 83 and raid.classes.PRIEST[playername].talents
-		and raid.classes.PRIEST[playername].spec == L["Discipline"] then
-		spell = SpellName(73413) -- Inner Will
-	end
-	return spell
-end
-
-
 function RaidBuffStatus:SomebodyDied(unit)
 	RaidBuffStatus:Debug("SomebodyDied")
 	if raid.isbattle then
@@ -4492,35 +4392,31 @@ function RaidBuffStatus:SelectSeal()
 	return BS[31801] -- Seal of Truth
 end
 
-function RaidBuffStatus:LibGroupTalents_Update(e, guid, unit, spec, c1, c2, c3)
-	local rcn = raid.classes[select(2, UnitClass(unit))][RaidBuffStatus:UnitNameRealm(unit)]
-	if rcn == nil then
-		return
-	end
-	rcn.specialisations = {}
-	RaidBuffStatus:UpdateSpec(rcn, spec, c1, c2, c3)
+function RaidBuffStatus:GroupInSpecT_Update(e, guid, unit, info)
+        local class = select(2, UnitClass(unit))
+	local name = RaidBuffStatus:UnitNameRealm(unit)
+	local rcn = class and name and raid.classes[class][name]
+	if not rcn then return end
+	rcn.tinfo = info
+	RaidBuffStatus:UpdateSpec(rcn)
 	if RaidBuffStatus.talentframe:IsVisible() then
 		RaidBuffStatus:UpdateTalentsFrame()
 	end
 end
 
-function RaidBuffStatus:UpdateSpec(rcn, spec, c1, c2, c3)
-	if spec == nil then
+function RaidBuffStatus:UpdateSpec(rcn)
+        local info = rcn.guid and GI:GetCachedInfo(rcn.guid)
+	rcn.tinfo = info or rcn.tinfo
+        local spec = rcn.tinfo and rcn.tinfo.spec_index
+	if not spec or spec < 1 then
 		rcn.talents = nil
-		rcn.spec = "UNKNOWN"
+		rcn.spec = 0
+		rcn.specname = "UNKNOWN"
 		rcn.specicon = "UNKNOWN"
 	else
-		local t = 0
-		if c1 > c2 and c1 > c3 then t = 1 end
-		if c2 > c1 and c2 > c3 then t = 2 end
-		if c3 > c1 and c3 > c2 then t = 3 end
-		if t ~= 0 then
-			rcn.spec = select(t, GT:GetTreeNames(rcn.class))
-			rcn.specicon = select(t, GT:GetTreeIcons(rcn.class))
-		else
-			rcn.spec = "Hybrid"
-			rcn.specicon = "UNKNOWN"
-		end
+		rcn.spec = spec
+		rcn.specname = rcn.tinfo.spec_name_localized or "UNKNOWN"
+		rcn.specicon = rcn.tinfo.spec_icon or "UNKNOWN"
 		rcn.talents = true
 	end
 end
@@ -4760,19 +4656,6 @@ function RaidBuffStatus:UnitIsMounted(unitid)
       end
     end
   end
-end
-
-function RaidBuffStatus:PlayerActiveGlyphs()
-  local t = {}
-  for i=1, GetNumGlyphSockets() do
-    local enabled, glyphType, glyphTooltipIndex, glyphSpell, icon = GetGlyphSocketInfo(i, nil) 
-    if enabled and glyphSpell then
-      local entry = { glyphSpell, glyphType, glyphTooltipIndex, icon }
-      t[i] = entry
-      t[glyphSpell] = entry
-    end
-  end
-  return t
 end
 
 function RaidBuffStatus:CHAT_MSG_BN_WHISPER(event, msg, sender,...)

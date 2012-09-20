@@ -19,10 +19,20 @@ legend:
 * = changed feature (bugfixes, changed behavior, etc.)
 - = removed feature
 
-version 3.0.6 (09-12-2011 19:52 UTC)
+version 3.0.7 (09-18-2011 20:22 UTC)
+* corrected timestamps for previous releases in changelog
+
+version 3.0.7 - beta 2 (09-04-2012 04:34 UTC)
+* fixed Lua error on trying to set a glyph via the Glyph UI
+
+version 3.0.7 - beta 1 (09-02-2012 21:20 UTC)
+* fixed incompatibility issues with WoW 5.0.x
+* updated toc for WoW 5.0.x
+
+version 3.0.6 (12-09-2011 19:52 UTC)
 * updated readme file
 
-version 3.0.6 - beta 1 (01-12-2011 09:02 UTC)
+version 3.0.6 - beta 1 (12-01-2011 09:02 UTC)
 * updated toc for WoW 4.3.x
 * updated AceLocale lib from 3.0-2 to 3.0-6
 

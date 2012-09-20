@@ -1,0 +1,33 @@
+tag z14-release
+6a5dc076156d244abfd887b3cf3da00c0045a374
+Xuerian <sky.shell@gmail.com>
+2012-09-19 23:30:17 -0400
+
+Tagging z14 as release
+
+
+--------------------
+
+Xuerian:
+	- Options tweaks
+	- Fix alert stacking and add alert offset option
+	- Fix time text
+	- Add alerts anchor/reanchoring
+	- Add "Pretty" option for anchors
+	- Add alert popup skinning/appearance options
+	- Hide non-functional show_decided option
+	- Add missing localization
+	- Fix roll status text coloring
+	- Fix undecided players
+	- Fix completion for non-winner scenarios/masterlooter - TODO: Cache results, as they are replaced on rerolls
+	- NOT_SURE_IF_BROKE_OR_NOT_FIXED
+	- Cherrypick raid colors and start() uid change from dridzt's commits. (Which I forgot about, oops.) Not sure about the uid yet.
+	- Debugging cleanup
+	- Rest of changes, let the gods sort them out
+	- Refactoring, rtypes reference
+	- Chance FancyPlayerName to expect class
+	- Update locals
+	- Show decided/undecided toggle config options
+	- Bump toc, remove dependencies
+	- Cleanup
+	- Remove LibLootEvents deps

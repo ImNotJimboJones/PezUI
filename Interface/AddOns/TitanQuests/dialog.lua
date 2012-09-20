@@ -68,7 +68,7 @@ function addQuestItem(rewardItem)
 	local _, _, _, hex = GetItemQualityColor(rewardItem.quality)
 
 	-- itemname
-	local text = hex..rewardItem.name..FONT_COLOR_CODE_CLOSE
+	local text = "|c"..hex..rewardItem.name..FONT_COLOR_CODE_CLOSE
 
 	-- itemcount
 	if rewardItem.numItems > 1 then

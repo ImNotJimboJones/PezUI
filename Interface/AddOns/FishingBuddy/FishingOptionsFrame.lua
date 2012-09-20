@@ -262,7 +262,10 @@ end
 -- rightextra -- extra room needed, if any
 -- setting -- what this slider changes
 local function Slider_Create(info)
-	local s = CreateFrame("Slider", info.name, nil, "OptionsSliderTemplate");
+	local s = getglobal(info.name);
+	if (not s) then
+		s = CreateFrame("Slider", info.name, nil, "OptionsSliderTemplate");
+	end
 	Slider_OnLoad(s, info);
 	s:SetScript("OnShow", Slider_OnShow);
 	s:SetScript("OnValueChanged", Slider_OnValueChanged);
