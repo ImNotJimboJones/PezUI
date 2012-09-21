@@ -1,19 +1,30 @@
--- initialize AceAddon-3.0 object
-MountFilter = LibStub("AceAddon-3.0"):NewAddon(
+
+--============================================================================--
+-- Addon Initialization
+--============================================================================--
+
+-- initialize AceAddon object
+local MF = LibStub("AceAddon-3.0"):NewAddon(
 	"MountFilter", 
 	"AceConsole-3.0", 
 	"AceEvent-3.0",
-	"AceHook-3.0"
+	"AceHook-3.0",
+	"AceTimer-3.0"
 );
 
--- Load additional Ace3 libs
-local AceConfig = LibStub("AceConfig-3.0");
-local AceConfigDialog = LibStub("AceConfigDialog-3.0");
-local AceDB = LibStub("AceDB-3.0");
+-- Set default state to disabled
+MF:SetDefaultModuleState(false);
+
 
 --============================================================================--
--- Constants
+-- Private Fields
 --============================================================================--
+
+-- Slash commands
+local SLASH_COMMANDS = {
+	"mountfilter",
+	"mf"
+};
 
 -- Name of the Blizzard Mount Journal addon
 local MOUNT_JOURNAL_ADDON = "Blizzard_PetJournal";
@@ -22,89 +33,198 @@ local MOUNT_JOURNAL_ADDON = "Blizzard_PetJournal";
 local MOUNT_BUTTON_HEIGHT = 46;
 
 -- Lowest level required by a player to ride a mount
-local PLAYER_MOUNT_LEVEL = 20;
+local MINIMUM_MOUNT_LEVEL = 20;
 
+
+-- Name of Blizzard's function to update the mount journal's mount list
+local JOURNAL_UPDATE_FUNC = "MountJournal_UpdateMountList";
+
+-- Name of Blizzard's function to select a mount in the mount journal
+local MOUNT_SELECT_FUNC = "MountJournal_Select";
+
+-- Name of Blizzard's function to update the mount display in the mount journal
+local UPDATE_MOUNT_DISPLAY_FUNC = "MountJournal_UpdateMountDisplay";
+
+-- Name of Blizzard's callback called when a scroll frame has been scrolled
+local ON_SCROLL_FRAME_VALUE_CHANGED_FUNC = "HybridScrollFrame_OnValueChanged";
+
+
+-- Width of the mount journal's mount count frame
+local MOUNT_COUNT_WIDTH = 130;
+
+
+-- Margin between widgets placed on the mount journal
+local WIDGET_MARGIN = 5;
+
+-- Horizontal offset of next widget placed on the mount journal
+local widgetOffset = 20;
+
+
+-- Delay between automatic mount list updates
+local UPDATE_TIMER_DELAY = 2;
+
+-- Timer used to update the mount journal
+local updateTimer = nil;
+
+
+-- List of filtered mount indexes
+local mountList = nil;
+
+-- List of mount filter functions
+local filters = {};
+
+
+-- Number of times the mount list has been updated (for debugging)
+local updateCount = 0;
 
 --============================================================================--
--- Fields
+-- Public Fields
 --============================================================================--
 
--- The search box used to filter mounts
-local searchBox;
+-- Options database
+MF.db = nil;
 
--- A list of mount indexes
-local mountList;
-
--- Options
-local db;
-local defaults = {
+-- Default options
+MF.defaults = {
 	global = {
-		debug = false;
-		mountOnEnter = true;
-		resetOnClose = false;
+		debug = false,
+		mountOnEnter = true,
+		resetSearchOnClose = false,
+		resetFilterOnClose = false,
+		mountCountStyle = 1
 	}
-}
+};
+
+
+--============================================================================--
+-- Accessors
+--============================================================================--
+
+------------------------------------------------------------
+-- Returns the addon's slash commands.
+-- return: the slash commands 
+------------------------------------------------------------
+function MF:GetSlashCommands()
+	return SLASH_COMMANDS;
+end
+
+------------------------------------------------------------
+-- Returns a reference to the Mount Journal.
+-- return: 	the Mount Journal; nil if the Mount Journal 
+-- 			isn't available
+------------------------------------------------------------
+function MF:GetMountJournal()
+	return MountJournal;
+end
 
 
 --============================================================================--
 -- Methods
 --============================================================================--
 
---------------------------------------------------------------------------------
--- Initializes the search box in the Mount Journal. If the Mount Journal isn't
--- available or the search box already exists, this method will throw an error.
---------------------------------------------------------------------------------
-function MountFilter:CreateSearchBox()
-	-- Search box already exists?
-	if (searchBox) then
-		MountFilter:Log("Search box exists... Throwing error");
-		error("Search box already exists");
-	end
-	
-	-- No Mount Journal?
+------------------------------------------------------------
+-- Adds a mount filter widget to the mount journal. If the
+-- mount journal isn't available, an error will be thrown.
+-- widget:	the widget
+------------------------------------------------------------
+function MF:AddWidgetToJournal(widget)
+	-- No mount journal?
 	if (not MountJournal) then
-		MountFilter:Log("Mount Journal not available... Throwing error");
-		error("Mount Journal not available");
+		error("Mount journal not available");
 	end
 	
-	-- Create search box
-	MountFilter:Log("Creating MountFilter search box...");
-	searchBox = CreateFrame("EditBox", "MountFilterSearchBox", MountJournal, "SearchBoxTemplate");
-	searchBox:SetPoint("TOPRIGHT", MountJournal, "TOPRIGHT", -20, -35);
-	searchBox:SetSize(150, 20);
+	-- No widget?
+	if (not widget) then
+		return
+	end
 	
-	-- Set callbacks for search box
-	searchBox:SetScript("OnTextChanged", 
-		function(self, userInput) 
-			MountFilter:FilterMounts(self:GetText());
-		end
-	);
-	searchBox:SetScript("OnEnterPressed", 
-		function() 
-			if (db.global.mountOnEnter and MountFilter:SummonMount()) then
-				searchBox:ClearFocus();
-				PetJournalParentCloseButton:Click();
-			end
-		end
-	);
 	
-	-- Set callback for MountJournal close
-	MountJournal:SetScript("OnHide",
-		function()
-			if (db.global.resetOnClose) then
-				MountFilter:Log("Resetting search box");
-				searchBox:SetText("");
-			end
-		end
-	);
+	-- Set widget parent
+	widget:SetParent(MountJournal);
+	
+	-- Set widget point
+	local vOffset = 21.5 + (widget:GetHeight() / 2);
+	local hOffset = widgetOffset;
+	widget:SetPoint("TOPRIGHT", MountJournal, "TOPRIGHT", -hOffset, -vOffset);
+	
+	-- Update widget offset
+	widgetOffset = widgetOffset + widget:GetWidth() + WIDGET_MARGIN;
+	MF:Log("Added ".. tostring(widget:GetName()) .." to mount journal");
 end
 
---------------------------------------------------------------------------------
--- Summons the selected mount. If no mount is selected, or the selected mount
--- is already active, this method will simply short-circuit
--- return: true if the mount was summoned; false if the mount is already active
---------------------------------------------------------------------------------
-function MountFilter:SummonMount()
+------------------------------------------------------------
+-- Determines whether a mount filter function has been
+-- registered with a given name.
+-- name:	the name
+------------------------------------------------------------
+function MF:IsFilterRegistered(name)
+	return filters[name];
+end
+
+------------------------------------------------------------
+-- Registers a mount filter function.
+-- name:	a name with which the function will be registered
+-- filter: 	the filter function
+------------------------------------------------------------
+function MF:RegisterFilter(name, filter)
+	-- Verify name is string
+	if (type(name) ~= "string") then
+		error("Expected string for argument: name");
+	end
+	
+	-- Verify filter is a function
+	if (type(filter) ~= "function") then
+		error("Expected function for argument: filter");
+	end
+	
+	-- Filter already registered for given name?
+	if (self:IsFilterRegistered(name)) then
+		error("Filter already registered for given name: "..name);
+	end
+	
+	-- Add the filter to the filter registry
+	filters[name] = filter;
+	MF:Log("Registered filter: "..name);
+end
+
+------------------------------------------------------------
+-- Removes a registered filter function.
+-- name:	the name with which the filter function was
+-- 			registered
+------------------------------------------------------------
+function MF:UnregisterFilter(name)
+	-- Verify name is string
+	if (type(name) ~= "string") then
+		error("Expected string for argument: name");
+	end
+	
+	-- If no filter registered with given name, do nothing
+	if (not filters[name]) then
+		return;
+	end
+		
+	-- Remove filter from registry
+	filters[name] = nil;
+	MF:Log("Unregistered filter: "..name);
+end
+
+------------------------------------------------------------
+-- Closes the Mount Journal. If the Mount Journal is not
+-- visible, this method will do nothing.
+------------------------------------------------------------
+function MF:CloseMountJournal()
+	if (MountJournal and MountJournal:IsVisible()) then
+		PetJournalParentCloseButton:Click();
+	end
+end
+
+------------------------------------------------------------
+-- Summons the selected mount. If no mount is selected, or 
+-- the selected mount is already active, this method will 
+-- simply short-circuit return: true if the mount was 
+-- summoned; false if the mount is already active
+------------------------------------------------------------
+function MF:SummonMount()
 	-- Get selected mount index
 	local mountIndex = MountJournal_FindSelectedIndex();
 	
@@ -114,109 +234,210 @@ function MountFilter:SummonMount()
 	end
 	
 	-- Get mount info
-	local creatureID, creatureName, spellID, icon, active = GetCompanionInfo("MOUNT", mountIndex)
+	local creatureID, creatureName, spellID, icon, active = GetCompanionInfo("MOUNT", mountIndex);
+
+	-- Selected mount already active?
+	if (active) then
+		return false;
+	end
 
 	-- Summon mount
-	if (not active) then
-		MountFilter:Log("Summoning "..creatureName);
-		CallCompanion("MOUNT", mountIndex);
-		return true;
-	end
+	MF:Log("Summoning "..creatureName);
+	CallCompanion("MOUNT", mountIndex);
+	return true;
 end
 
---------------------------------------------------------------------------------
--- Creates required function hooks
---------------------------------------------------------------------------------
-function MountFilter:CreateHooks()
-	-- When mount list updated by Bliz, update it our way
-	MountFilter:RawHook("MountJournal_UpdateMountList", "UpdateMountJournal", true);
+------------------------------------------------------------
+-- Updates the filtered list of mounts.
+------------------------------------------------------------
+function MF:UpdateMountList()
+	MF:Log("Updating mount list...");
 	
-	-- Override Blizzard's MountJournal_Select function to allow deselection
-	MountFilter:RawHook("MountJournal_Select", "Select", true);
+	-- Increment counter
+	updateCount = updateCount + 1;
 	
-	-- Hook to HybridScrollFrame's OnValueChanged so we can update the scrollFrame
-	-- frame buttons after the offset has changed
-	MountFilter:SecureHook("HybridScrollFrame_OnValueChanged", 
-		function(self, value)
-			if (self == MountJournal.ListScrollFrame) then
-				MountFilter:UpdateMountJournal();
-			end
-		end
-	);
-	
-	-- Hook to MountJournal_UpdateMountDisplay so we 
-	-- can hide the "no mount" message if needed
-	MountFilter:SecureHook("MountJournal_UpdateMountDisplay", 
-		function()
-			if  (UnitLevel("player") >= PLAYER_MOUNT_LEVEL) then
-				MountJournal.MountDisplay.NoMounts:Hide();
-			end
-		end
-	);
-end
-
---------------------------------------------------------------------------------
--- Creates required function hooks
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
--- Updates the list of mount indexes based on a given search string and updates
--- the Mount Journal.
--- searchString: search string used to filter mount list
---------------------------------------------------------------------------------
-function MountFilter:FilterMounts(searchString)
-	-- Cope with "Search" text in empty search box
-	if (searchString == SEARCH) then 
-		searchString = "";
-	end
-	
-	MountFilter:Log("Updating mount list with search string: '"..searchString.."'");
-	
-	-- Initialize mount list
-	mountList = {};
-	
-	-- Get number of mounts in list
+	-- Get total number of mounts
 	local mountTotal = GetNumCompanions("MOUNT");
 	
-	-- For each mount in the parent list...
+	-- Initialize new mount list
+	local newMountList = {};
+	
+	-- For every mount...
 	for mountIndex=1, mountTotal do
+	
+		-- For every filter...
+		local keep = true;
+		for filterName, filter in pairs(filters) do
 		
-		-- Get mount info
-		local creatureID, creatureName, spellID, icon, active = GetCompanionInfo("MOUNT", mountIndex);
+			-- Apply filter
+			local result = filter(mountIndex);
+			
+			-- If failed, break out of loop
+			if (not result) then
+				keep = false;
+				break;
+			end
+		end
 		
-		-- Check for string match
-		if (string.find(strlower(creatureName), strlower(searchString))) then
-			-- Add mount index to mount list
-			table.insert(mountList, mountIndex);
-			MountFilter:Log("Match: "..creatureName);
+		-- Add to new mount list?
+		if (keep) then
+			table.insert(newMountList, mountIndex);
+		end
+		
+	end
+	
+	-- Replace old mount list with new
+	mountList = newMountList;
+	MF:Log("Mount list updated("..updateCount.."): "..#mountList.."/"..mountTotal.." mounts");
+	
+	-- Update mount journal
+	self:UpdateMountJournal();
+end
+
+------------------------------------------------------------
+-- Determines if a mount is in the filtered mount list.
+-- mountIndex: index of the mount to search for
+-- return: 	true if the mount was found in the mount list; 
+-- 			false otherwise
+------------------------------------------------------------
+function MF:InMountList(mountIndex)
+	-- Look at every mount index in the mount list until we find our mount
+	for i=1, #mountList do
+		if (mountList[i] == mountIndex) then
+			return true;
 		end
 	end
 	
-	MountFilter:Log("Mount listed updated: "..#mountList.."/"..mountTotal.." mounts")
-
-	-- Update Mount Journal
-	MountFilter:UpdateMountJournal();
+	-- No mount found
+	return false;
 end
 
---------------------------------------------------------------------------------
--- Updates the Mount Journal's buttons to reflect the filtered mount list. This
--- method is meant to override MountJournal_UpdateMountList. When called, if the 
--- Mount Journal is not available, or the mount list has not been initialized, 
--- Blizzard's default function will be called.
---------------------------------------------------------------------------------
-function MountFilter:UpdateMountJournal()
-	MountFilter:Log("Updating Mount Journal...");
+------------------------------------------------------------
+-- Creates required function hooks.
+------------------------------------------------------------
+function MF:CreateHooks()
+	MF:Log("Creating hooks...");
+	-- When Bliz tries to update the mount journal, update it our way
+	self:RawHook(JOURNAL_UPDATE_FUNC, MF.UpdateMountJournal, true);
+	
+	-- Override Blizzard's mount button select function to allow deselection
+	self:RawHook(MOUNT_SELECT_FUNC, function(mountIndex) self:Select(mountIndex) end, true);
+	
+	-- Hook to HybridScrollFrame's OnValueChanged function so we can update the 
+	-- scroll frame's buttons after the offset has changed
+	self:SecureHook(ON_SCROLL_FRAME_VALUE_CHANGED_FUNC, MF.OnScrollFrameValueChanged);
+	
+	-- Hook to Blizzard's mount display update function
+	-- so we can hide the "no mount" message if needed
+	self:SecureHook(UPDATE_MOUNT_DISPLAY_FUNC, MF.OnUpdateMountDisplay);
+	
+	-- Hook to the mount journal's show/hide events
+	MountJournal:HookScript("OnShow", MF.OnMountJournalShow);
+	MountJournal:HookScript("OnHide", MF.OnMountJournalHide);
+end
+
+------------------------------------------------------------
+-- Sends a log message to the console, if debug mode is 
+-- enabled.
+-- msg:	debug message
+------------------------------------------------------------
+function MF:Log(msg)
+	if (self.db and self.db.global.debug) then
+		self:Print("|cffffe00a<|r|cffff7d0aDebug|r|cffffe00a>|r "..tostring(msg));
+	end
+end
+
+
+--============================================================================--
+-- Callbacks
+--============================================================================--
+
+------------------------------------------------------------
+-- Called when the addon is first initialized.
+------------------------------------------------------------
+function MF:OnInitialize()
+	-- Load options
+	local AceDB = LibStub("AceDB-3.0");
+	self.db = AceDB:New("MountFilterDB", self.defaults, true);
+	MF:Log("MountFilter DB Initialized");
+end
+
+------------------------------------------------------------
+-- Called when the addon is enabled.
+------------------------------------------------------------
+function MF:OnEnable()
+	-- If mount journal addon hasn't been loaded, register an event callback to
+	-- call this function when it does load.
+	if (not IsAddOnLoaded(MOUNT_JOURNAL_ADDON)) then
+		MF:Log("Registering event to call OnEnable() after mount journal has loaded");
+		self:RegisterEvent("ADDON_LOADED", 
+			function(eventName, addonName)
+				if (addonName == MOUNT_JOURNAL_ADDON) then
+					MF:Log("Mount journal Loaded");
+					self:UnregisterEvent("ADDON_LOADED");
+					self:OnEnable();
+				end
+			end
+		);
+		return;
+	end
+	
+	MF:Log("Addon Enabled");
+
+
+	-- Create hooks
+	self:CreateHooks();
+	
+	-- Enable modules
+	MF:Log("Enabling modules...");
+	local modules = self.orderedModules;
+	for i, module in pairs(self.orderedModules) do
+		module:Enable();
+	end
+	
+	-- Update mount list
+	self:UpdateMountList();
+end
+
+------------------------------------------------------------
+-- Called when the addon is disabled
+------------------------------------------------------------
+function MF:OnDisable()
+	-- Disable modules
+	local modules = self.orderedModules;
+	for i, module in pairs(self.orderedModules) do
+		module:Enable();
+	end
+
+	-- Remove all hooks
+	self:UnhookAll();
+end
+
+
+--============================================================================--
+-- Hooks and Overrides
+--============================================================================--
+
+------------------------------------------------------------
+-- Updates the Mount Journal's buttons to reflect the 
+-- filtered mount list. This method is meant to override 
+-- MountJournal_UpdateMountList. When called, if the mount
+-- journal isn't available Blizzard's default function will
+-- be called.
+------------------------------------------------------------
+function MF:UpdateMountJournal()
+	MF:Log("Updating Mount Journal...");
 	
 	-- If Mount Journal not available, call Bliz function
 	if (not MountJournal) then
-		MountFilter:Log("Mount Journal not available... calling MountJournal_UpdateMountList");
-		return self.hooks["MountJournal_UpdateMountList"]();
+		MF:Log("Mount Journal not available... calling "..JOURNAL_UPDATE_FUNC);
+		return MF.hooks[JOURNAL_UPDATE_FUNC]();
 	end
 	
 	-- If no mount list, call Bliz function
 	if (not mountList) then
-		MountFilter:Log("mountList not initialized... calling MountJournal_UpdateMountList");
-		return self.hooks["MountJournal_UpdateMountList"]();
+		MF:Log("mountList not initialized... calling "..JOURNAL_UPDATE_FUNC);
+		return MF.hooks[JOURNAL_UPDATE_FUNC]();
 	end
 	
 	
@@ -234,9 +455,10 @@ function MountFilter:UpdateMountJournal()
 		
 		-- If theres a mount for the button...
 		if (mountIndex) then
+		
 			-- Get mount info
 			local creatureID, creatureName, spellID, icon, active = GetCompanionInfo("MOUNT", mountIndex);
-			MountFilter:Log(buttonIndex..": "..creatureName);
+			--MF:Log(buttonIndex..": "..creatureName);
 			
 			-- Set button attributes
 			button.name:SetText(creatureName);
@@ -246,8 +468,8 @@ function MountFilter:UpdateMountJournal()
 			button.active = active;
 			button:SetEnabled(true);
 			
-			-- If mount active, show active texture
-			if (active and playerLevel >= PLAYER_MOUNT_LEVEL) then
+			-- If ridable and active, show active texture
+			if (active and playerLevel >= MINIMUM_MOUNT_LEVEL) then
 				button.DragButton.ActiveTexture:Show();
 			else
 				button.DragButton.ActiveTexture:Hide();
@@ -263,7 +485,7 @@ function MountFilter:UpdateMountJournal()
 			end
 			
 			-- Ridable...
-			if (playerLevel >= PLAYER_MOUNT_LEVEL) then
+			if (playerLevel >= MINIMUM_MOUNT_LEVEL) then
 				button.DragButton:SetEnabled(true);
 				button.additionalText = nil;
 				button.icon:SetDesaturated(false);
@@ -278,6 +500,7 @@ function MountFilter:UpdateMountJournal()
 				button.icon:SetAlpha(0.5);
 				button.name:SetFontObject("GameFontDisable");
 			end
+			
 			
 			-- Show button
 			button:Show();
@@ -314,68 +537,91 @@ function MountFilter:UpdateMountJournal()
 	HybridScrollFrame_Update(scrollFrame, totalHeight, scrollFrame:GetHeight());
 	
 	-- Update mount count text
-	MountJournal.MountCount.Count:SetText(mountCount);
+	MF:UpdateMountCount();
 	
 	-- Update selection
-	MountFilter:UpdateSelection();
+	MF:UpdateSelection();
+	
+	MF:Log("Mount Journal Updated");
 end
 
---------------------------------------------------------------------------------
--- Updates the selection in the Mount Journal. If the previous selection is no
--- longer available (filtered out), or there was no previous selection, the first 
--- mount in the list will be selected. If there are no mounts available, the
--- selection will be cleared.
---------------------------------------------------------------------------------
-function MountFilter:UpdateSelection()
-	MountFilter:Log("Updating Selection...");
+------------------------------------------------------------
+-- Updates the mount total listed in the mount journal.
+------------------------------------------------------------
+function MF:UpdateMountCount()
+	-- Get display style
+	local displayStyle = self.db.global.mountCountStyle or 1;
+
+	-- Get total number of mounts
+	local totalMounts = GetNumCompanions("MOUNT");
 	
+	if (displayStyle == 1) then
+		MountJournal.MountCount:SetWidth(MOUNT_COUNT_WIDTH);
+		MountJournal.MountCount.Count:SetText(#mountList);
+		
+	elseif (displayStyle == 2) then
+		MountJournal.MountCount:SetWidth(MOUNT_COUNT_WIDTH + 25);
+		MountJournal.MountCount.Count:SetText(#mountList.."/"..totalMounts);
+	
+	elseif (displayStyle == 3) then
+		MountJournal.MountCount:SetWidth(MOUNT_COUNT_WIDTH);
+		MountJournal.MountCount.Count:SetText(totalMounts);
+	end
+	
+	MF:Log("Mount count updated (style "..displayStyle..")");
+end
+
+------------------------------------------------------------
+-- Updates the selection in the mount journal. If the 
+-- previous selection is no longer available (filtered out), 
+-- or there was no previous selection, the first mount in 
+-- the list will be selected. If there are no mounts 
+-- available, the selection will be cleared.
+------------------------------------------------------------
+function MF:UpdateSelection()
 	-- Get selected mount index
 	local selectedMountIndex = MountJournal_FindSelectedIndex();
 	
 	-- If no previous selection...
 	if (not selectedMountIndex) then
 	
-		-- Mount list empty...
+		-- If mount list empty, do nothing
 		if (#mountList < 1) then
-			-- Do nothing
-			MountFilter:Log("No update");
 			return;
 		end
 		
 		-- Select first mount
-		MountFilter:Log("None -> "..mountList[1]);
-		return MountJournal_Select(mountList[1]);
+		self:Select(mountList[1]);
+		return
 	end
 	
 	-- If previously selected mount no longer available...
-	if (not MountFilter:InMountList(selectedMountIndex)) then
+	if (not self:InMountList(selectedMountIndex)) then
 		
 		-- If mount list contains a mount, select first
 		if (mountList[1]) then
-			MountFilter:Log(selectedMountIndex.." -> "..mountList[1]);
-			MountJournal_Select(mountList[1]);
+			self:Select(mountList[1]);
 		
 		-- Otherwise, clear selection
 		else
-			MountFilter:Log(selectedMountIndex.." -> None");
-			MountJournal_Select(0);
+			self:Select(0);
 		end
 	end
-	
-	MountFilter:Log("No update");
 end
 
---------------------------------------------------------------------------------
--- Sets the selected mount in the Mount Journal. This method is meant to override 
--- MountJournal_Select in order to add deselection support.
--- mountIndex: index of the mount to select; false to deselect
---------------------------------------------------------------------------------
-function MountFilter:Select(mountIndex)
-	MountFilter:Log("Selecting "..tostring(mountIndex).."...");
+------------------------------------------------------------
+-- Selects a specified mount in the mount journal. This 
+-- method is meant to override MountJournal_Select in order 
+-- to add deselection support. 
+-- self:		the scroll frame
+-- mountIndex:	index of the mount to select; false to deselect
+------------------------------------------------------------
+function MF:Select(mountIndex)
+	MF:Log("Selecting "..tostring(mountIndex).."...");
 	
 	-- Valid selection?
 	if (mountIndex and mountIndex >= 1) then
-		self.hooks["MountJournal_Select"](mountIndex);
+		self.hooks[MOUNT_SELECT_FUNC](mountIndex);
 	else
 		MountJournal.selectedSpellID = 0;
 		MountJournal_UpdateMountList();
@@ -383,176 +629,70 @@ function MountFilter:Select(mountIndex)
 	end
 end
 
---------------------------------------------------------------------------------
--- Determines if a mount is in the filtered mount list.
--- mountIndex: index of the mount to search for
--- return: true if the mount was found in the mount list; false otherwise
---------------------------------------------------------------------------------
-function MountFilter:InMountList(mountIndex)
-	MountFilter:Log("Checking mount list for "..tostring(mountIndex).."...");
-	-- If mount list not initialized (no filter applied), return true
-	if (not mountList) then
-		MountFilter:Log("Mount list not initialized... returning true");
-		return true;
-	end
-	
-	-- Look at ever mount index in the mount list until we find our mount
-	for i=1, #mountList do
-		if (mountList[i] == mountIndex) then
-			MountFilter:Log("Found");
-			return true;
-		end
-	end
-	
-	-- No mount found
-	MountFilter:Log("Not Found");
-	return false;
-end
-
---------------------------------------------------------------------------------
--- Sends a log message to the console, if debug mode is enabled.
--- msg: debug message
---------------------------------------------------------------------------------
-function MountFilter:Log(msg)
-	if (db.global.debug) then
-		MountFilter:Print("|cffffe00a<|r|cffff7d0aDebug|r|cffffe00a>|r "..tostring(msg));
+------------------------------------------------------------
+-- Hides the "no mounts" message in the mount display. This 
+-- method is meant to be called after the the mount 
+-- journal's mount display has been updated.
+------------------------------------------------------------
+function MF.OnUpdateMountDisplay()
+	MF:Log("Bliz updated mount display");
+	if  (UnitLevel("player") >= MINIMUM_MOUNT_LEVEL) then
+		MountJournal.MountDisplay.NoMounts:Hide();
 	end
 end
 
-
---============================================================================--
--- Options, Accessors, and Mutators
---============================================================================--
-
---------------------------------------------------------------------------------
--- Creates the interface options frame.
---------------------------------------------------------------------------------
-function MountFilter:CreateOptionsFrame()
-	-- Define options table
-	local options = {
-    	type = "group",
-    	args = {
-			description = {
-				order = 0,
-				type = "description",
-				name = "MountFilter is a simple addon that adds filtering capabilies to the Mount Journal. Hopefully, more robust features will be available in the near future, but for now, you'll just have to stick to text search!\n\n",
-			},
-			optionsHeader = {
-				order = 1,
-				type = "header",
-				name = "Options"
-			},
-			resetOnClose = {
-				order = 2,
-				type = "toggle",
-				name = "Reset Search on Close",
-				desc = "The search box will be cleared when the Mount Journal is closed",
-				get = function() return db.global.resetOnClose; end,
-				set = function(info, enabled) db.global.resetOnClose = enabled; end
-			},
-			newLine = {
-				order = 3,
-				type = "description",
-				name = ""
-			},
-			mountOnEnter = {
-				order = 4,
-				type = "toggle",
-				name = "Mount on 'Enter'",
-				desc = "Pressing 'Enter' in the search box will summon the selected mount and close the Mount Journal",
-				get = function() return db.global.mountOnEnter; end,
-				set = function(info, enabled) db.global.mountOnEnter = enabled; end
-			},
-			newLine2 = {
-				order = 5,
-				type = "description",
-				name = "\n"
-			},
-			debugHeader = {
-				order = 6,
-				type = "header",
-				name = "Debug"
-			},
-			debug = {
-				order = 7,
-				type = "toggle",
-				name = "Debug Mode",
-				desc = "Enables debug spam",
-				get = function() return db.global.debug; end,
-				set = function(info, enabled) db.global.debug = enabled; end
-			}
-		}
-	}
-	
-	-- Register options table and add it to bliz interface options
-	AceConfig:RegisterOptionsTable("MountFilter", options, {"mountfilter", "mf"});
-	AceConfigDialog:AddToBlizOptions("MountFilter");
-end
-
-
---============================================================================--
--- Ace functions
---============================================================================--
-
---------------------------------------------------------------------------------
--- Called when the addon is first loaded by the game client
---------------------------------------------------------------------------------
-function MountFilter:OnInitialize()
-	-- Create options frame
-	MountFilter:CreateOptionsFrame();
-	
-	-- Load options
-	db = AceDB:New("MountFilterDB", defaults, true);
-	
-	MountFilter:Log("Initialized");
-end
-
---------------------------------------------------------------------------------
--- Called when the addon is enabled
---------------------------------------------------------------------------------
-function MountFilter:OnEnable()
-	MountFilter:Log("Enabled");
-	
-	-- If Mount Journal addon hasn't been loaded, register an event callback to
-	-- call this function when it does load.
-	if (not IsAddOnLoaded(MOUNT_JOURNAL_ADDON)) then
-		MountFilter:Log("Registering event to call OnEnable() after Mount Journal has loaded");
-		MountFilter:RegisterEvent("ADDON_LOADED", 
-			function(eventName, addonName)
-				if (addonName == MOUNT_JOURNAL_ADDON) then
-					MountFilter:Log("Mount Journal Loaded");
-					MountFilter:Log("Unregistering ADDON_LOADED callback");
-					MountFilter:UnregisterEvent("ADDON_LOADED");
-					MountFilter:OnEnable();
-				end
-			end
-		);
+------------------------------------------------------------
+-- Ensures that the mount journal is updated (our way)
+-- whenever the mount journal's scroll frame is scrolled.
+-- self:	the scroll frame
+-- value:	scroll value
+------------------------------------------------------------
+function MF.OnScrollFrameValueChanged(self, value)
+	-- if self isn't the mount journal's scroll frame, do nothing
+	if (self ~= MountJournal.ListScrollFrame) then
 		return;
 	end
+
+	MF:Log("Mount journal's scroll frame value changed");
 	
-	-- Create the search box (if needed)
-	if (not searchBox) then
-		MountFilter:CreateSearchBox();
-	end
-	
-	-- Show search box
-	searchBox:Show();
-	
-	-- Create hooks
-	MountFilter:CreateHooks();
+	-- Update mount journal
+	MF:UpdateMountJournal();
 end
 
---------------------------------------------------------------------------------
--- Called when the addon is disabled
---------------------------------------------------------------------------------
-function MountFilter:OnDisable()
-	MountFilter:Log("Disabled");
+------------------------------------------------------------
+-- Ensures that the mount journal is updated (our way)
+-- whenever the mount journal is loaded, and creates a timer
+-- to continue updating it periodically.
+------------------------------------------------------------
+function MF.OnMountJournalShow()
+	MF:Log("Mount journal opened");
 	
-	-- Remove all hooks
-	MountJournal:UnhookAll();
+	-- Update mount list
+	MF:UpdateMountList();
+
+	-- Schedule timer to periodically update the mount list 
+	updateTimer = MF:ScheduleRepeatingTimer(
+		function()
+			MF:Log("Auto-update timer fired");
+			MF:UpdateMountList();
+		end,
+		UPDATE_TIMER_DELAY
+	);
+	MF:Log("Auto-update timer registered");
+end
+
+------------------------------------------------------------
+-- Removes the mount list update timer.
+------------------------------------------------------------
+function MF.OnMountJournalHide()
+	MF:Log("Mount journal opened");
 	
-	-- Hide search box
-	if (searchBox) then
-		searchBox:Hide();
+	-- Cancel mount list update timer
+	local timerCanceled = MF:CancelTimer(updateTimer, true);
+	if (timerCanceled) then
+		MF:Log("Auto-update timer canceled");
+	else
+		MF:CancelAllTimers();
+		error("Failed to cancel auto-update timer (all timers canceled as result)");
 	end
 end

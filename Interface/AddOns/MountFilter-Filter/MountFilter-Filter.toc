@@ -1,14 +1,13 @@
 ## Interface: 50001
-## Title: MountFilter
-## Notes: Provides core functionality for adding filtering capabilities to the Mount Journal
+## Title: MountFilter-Filter
+## Notes: Adds a filter menu to the Mount Journal 
 ## Author: Pezzer
 ## Version: 1.4
-## SavedVariables: MountFilterDB
+## SavedVariables: MountFilter_FilterDB
+## Dependencies: MountFilter
 ## X-Curse-Packaged-Version: v1.4.2
 ## X-Curse-Project-Name: MountFilter
 ## X-Curse-Project-ID: mountfilter
 ## X-Curse-Repository-ID: wow/mountfilter/mainline
 
-includes.xml
-
-MountFilter.lua
+MountFilter-Filter.lua

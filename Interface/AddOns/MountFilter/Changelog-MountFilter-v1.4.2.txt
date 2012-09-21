@@ -1,0 +1,13 @@
+tag v1.4.2
+f10553c4f83ba0b18dd025d89f83525eba5b0bfd
+Pezzer <ImNotJimboJones@mac.com>
+2012-09-22 13:39:11 -0400
+
+Tagging as v1.4.2
+
+
+--------------------
+
+Pezzer:
+	- No longer hard-embedding Ace3 libs
+	- Rearanged file structure and added .pkgmeta file
