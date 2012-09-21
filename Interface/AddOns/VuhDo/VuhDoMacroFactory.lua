@@ -310,10 +310,10 @@ local VUHDO_PROHIBIT_HELP = {
 
 --
 local tRezText;
-local function getAutoBattleRezText()
+local function getAutoBattleRezText(anIsKeyboard)
 
 	if (("DRUID" == VUHDO_PLAYER_CLASS or "PALADIN" == VUHDO_PLAYER_CLASS) and VUHDO_SPELL_CONFIG["autoBattleRez"]) then
-		tRezText = "/use [dead,combat,@mouseover";
+		tRezText = "/use [dead,combat,@" .. (anIsKeyboard and "mouseover" or "vdname");
 		if (VUHDO_SPELL_CONFIG["smartCastModi"] ~= "all") then
 			tRezText = tRezText .. ",mod:" .. VUHDO_SPELL_CONFIG["smartCastModi"];
 		end
@@ -348,7 +348,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 		tModiSpell = "help,nodead,";
 	end
 
-	tSpellPost = getAutoBattleRezText();
+	tSpellPost = getAutoBattleRezText(anIsKeyboard);
 
 	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
 		and VUHDO_SPELLS[anAction] ~= nil and not VUHDO_SPELLS[anAction]["nostance"]) then
@@ -385,7 +385,6 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 			tText = tText .. "/tar [harm,@vuhdo]\n";
 		end
 	end
-	--VUHDO_DEBUG[anAction] = tText;
 	return tText;
 end
 
@@ -409,6 +408,7 @@ function VUHDO_buildMacroText(anAction, anIsKeyboard, aTarget)
 	end
 
 	tText = VUHDO_replaceMacroTemplates(VUHDO_RAID_MACRO_CACHE[tIndex], aTarget);
+	--VUHDO_DEBUG[tIndex] = tText;
 	if (anIsKeyboard and strlen(tText) > 256) then
 		VUHDO_Msg(VUHDO_I18N_MACRO_KEY_ERR_1 .. anAction .. " (" .. strlen(tText) .. VUHDO_I18N_MACRO_KEY_ERR_2, 1, 0.3, 0.3);
 	end

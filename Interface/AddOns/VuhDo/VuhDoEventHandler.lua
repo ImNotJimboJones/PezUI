@@ -728,7 +728,7 @@ function VUHDO_slashCmd(aCommand)
 		end]]
 	elseif (strfind(tCommandWord, "mm")
 		or strfind(tCommandWord, "map")) then
-
+		VUHDO_CONFIG["SHOW_MINIMAP"] = VUHDO_forceBooleanValue(VUHDO_CONFIG["SHOW_MINIMAP"]);
 		VUHDO_CONFIG["SHOW_MINIMAP"] = not VUHDO_CONFIG["SHOW_MINIMAP"];
 		VUHDO_initShowMinimap();
 		if (VUHDO_CONFIG["SHOW_MINIMAP"]) then
@@ -1003,7 +1003,7 @@ local function VUHDO_updateAllRange()
 				= tInfo["connected"]
 				 and (tInfo["baseRange"]
 							or ((tUnit == "focus" or tUnit == "target")
-								and UnitIsTrivial("target") and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
+								and CheckInteractDistance(tUnit, 1))
 						 );
 		end
 

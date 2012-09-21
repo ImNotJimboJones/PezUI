@@ -17,31 +17,31 @@ function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 
 	sPanel:Hide();
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "TitleLabelLabel"];
+	tComponent = _G[sPanelName .. "TitleLabelLabel"];
 	tComponent:SetText(VUHDO_I18N_ICON_TEXT_SETTINGS .. " |c00000099" .. (aName or "?") .. "|r");
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "AnchorTextureTopLeftRadioButton"];
+	tComponent = _G[sPanelName .. "AnchorTextureTopLeftRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "TOPLEFT");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "AnchorTextureTopRightRadioButton"];
+	tComponent = _G[sPanelName .. "AnchorTextureTopRightRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "TOPRIGHT");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "AnchorTextureBottomLeftRadioButton"];
+	tComponent = _G[sPanelName .. "AnchorTextureBottomLeftRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "BOTTOMLEFT");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "AnchorTextureBottomRightRadioButton"];
+	tComponent = _G[sPanelName .. "AnchorTextureBottomRightRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "BOTTOMRIGHT");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "AnchorTextureCenterRadioButton"];
+	tComponent = _G[sPanelName .. "AnchorTextureCenterRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "CENTER");
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "XAdjustSlider"];
+	tComponent = _G[sPanelName .. "XAdjustSlider"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".X_ADJUST");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "YAdjustSlider"];
+	tComponent = _G[sPanelName .. "YAdjustSlider"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".Y_ADJUST");
-	tComponent = VUHDO_GLOBAL[sPanelName .. "ScaleSlider"];
+	tComponent = _G[sPanelName .. "ScaleSlider"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".SCALE");
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "FontCombo"];
+	tComponent = _G[sPanelName .. "FontCombo"];
 	VUHDO_setComboModel(tComponent, aModel .. ".FONT", VUHDO_FONTS);
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "ColorTexture"];
+	tComponent = _G[sPanelName .. "ColorTexture"];
 	if (tTable["COLOR"] ~= nil) then
 		VUHDO_lnfSetModel(tComponent, aModel .. ".COLOR");
 		tComponent:Show();
@@ -50,13 +50,13 @@ function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 		tComponent:Hide();
 	end
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "MonoCheckButton"];
+	tComponent = _G[sPanelName .. "MonoCheckButton"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".USE_MONO");
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "ShadowCheckButton"];
+	tComponent = _G[sPanelName .. "ShadowCheckButton"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".USE_SHADOW");
 
-	tComponent = VUHDO_GLOBAL[sPanelName .. "OutlineCheckButton"];
+	tComponent = _G[sPanelName .. "OutlineCheckButton"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".USE_OUTLINE");
 
 	sPanel:ClearAllPoints();
@@ -74,8 +74,8 @@ local tShadowAlpha, tOutlineText;
 local tLastTime = -1;
 local tEmpty = { };
 function VUHDO_lnfStandardFontUpdateDemoText()
-	tLabel = VUHDO_GLOBAL[sPanelName .."AnchorTextureTitleString"];
-	tTexture = VUHDO_GLOBAL[sPanelName .."AnchorTexture"];
+	tLabel = _G[sPanelName .."AnchorTextureTitleString"];
+	tTexture = _G[sPanelName .."AnchorTexture"];
 
 	if (tLastTime + 1 < GetTime()) then
 		tLastTime = GetTime();

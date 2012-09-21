@@ -27,27 +27,26 @@ end
 
 
 --
-local function VUHDO_buffSetupOkayOnClick()
+local function VUHDO_buffSetupStoreSettings()
 	local tCategories = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
 	local tCategoryName, tCategoryBuffs;
 	local tGenericPanel;
 	local tFound = false;
 
 	for tCategoryName, tCategoryBuffs in pairs(tCategories) do
-		local tNameStr = tCategoryName;
-		local tSettings = VUHDO_BUFF_SETTINGS[tNameStr];
-		tGenericPanel = VUHDO_getGenericPanel(tNameStr);
+		local tSettings = VUHDO_BUFF_SETTINGS[tCategoryName];
+		tGenericPanel = VUHDO_getGenericPanel(tCategoryName);
 
-		if (VUHDO_getBuffPanelCheckBox(tNameStr) ~= nil) then
+		if (VUHDO_getBuffPanelCheckBox(tCategoryName) ~= nil) then
 			tFound = true;
 
 			if (tSettings ~= nil) then
-				tSettings["enabled"] = VUHDO_forceBooleanValue(VUHDO_getBuffPanelCheckBox(tNameStr):GetChecked());
+				tSettings["enabled"] = VUHDO_forceBooleanValue(VUHDO_getBuffPanelCheckBox(tCategoryName):GetChecked());
 			end
 
 			if (tGenericPanel ~= nil) then
-				local tMaxVariant = tCategoryBuffs[1];
-				local tBuffTarget = tMaxVariant[2];
+				local tVariant = tCategoryBuffs[1];
+				local tBuffTarget = tVariant[2];
 
 				if (VUHDO_BUFF_TARGET_UNIQUE == tBuffTarget) then
 					local tEditBox = VUHDO_GLOBAL[tGenericPanel:GetName() .. "PlayerNameEditBox"];
@@ -90,8 +89,7 @@ end
 
 --
 function VUHDO_buffChanged(aComponent)
-	--VUHDO_buildAllBuffSetupGenerericPanel();
-	VUHDO_buffSetupOkayOnClick();
+	VUHDO_buffSetupStoreSettings();
 end
 
 
@@ -122,13 +120,11 @@ local function VUHDO_addGenericBuffFrame(aBuffVariant, aFrameTemplateName, aCate
 		if (tGenericFrame == nil) then
 			tGenericFrame = CreateFrame("Frame", "$parentGenericPanel", tBuffPanel, aFrameTemplateName);
 		end
-		--tGenericFrame:ClearAllPoints();
 		tGenericFrame:SetPoint("TOPLEFT", tBuffPanel:GetName(), "TOPLEFT", 0, -tInFrameY);
 		tInFrameY = tInFrameY + tGenericFrame:GetHeight() + 5;
 	end
 
 	VUHDO_buffSetupNewRowCheck(tBuffPanel:GetWidth(), tInFrameY);
-	--tBuffPanel:ClearAllPoints();
 	tBuffPanel:SetPoint("TOPLEFT", "VuhDoNewOptionsBuffsGeneric", "TOPLEFT", VUHDO_BUFF_PANEL_X, -VUHDO_BUFF_PANEL_Y);
 	tBuffPanel:SetHeight(tInFrameY);
 	tBuffPanel:Show();
@@ -181,24 +177,20 @@ end
 
 --
 local function VUHDO_buffNameAvail(aBuffName)
-	if (VUHDO_BUFFS[aBuffName] ~= nil) then
-		return aBuffName;
-	else
-		return nil;
-	end
+	return VUHDO_BUFFS[aBuffName] ~= nil and aBuffName or nil;
 end
+
 
 
 --
 local function VUHDO_getAllBuffNamesAvail(someCategoryBuffs)
 	local tBuffNames = { };
-	local tVariants, tMaxVariant, tName;
+	local tVariant, tName;
 
-	for _, tVariants in ipairs(someCategoryBuffs) do
-		local tMaxVariant = tVariants;
-		tName = tMaxVariant[1];
+	for _, tVariant in ipairs(someCategoryBuffs) do
+		tName = tVariant[1];
 		if (VUHDO_BUFFS[tName] ~= nil) then
-			table.insert(tBuffNames, tName);
+			tinsert(tBuffNames, tName);
 		end
 	end
 
@@ -208,9 +200,9 @@ end
 
 
 --
-local function VUHDO_setBuffBoxIcon(aGenericPanel, aTexture)
-	local tTexture = VUHDO_GLOBAL[aGenericPanel:GetParent():GetName() .. "BuffTextureTexture"];
-	tTexture:SetTexture((VUHDO_BUFFS[aTexture] or {})["icon"]);
+local function VUHDO_setBuffBoxIcon(aGenericPanel, aBuffName)
+	VUHDO_GLOBAL[aGenericPanel:GetParent():GetName() .. "BuffTextureTexture"]
+		:SetTexture((VUHDO_BUFFS[aBuffName] or {})["icon"]);
 end
 
 
@@ -225,8 +217,7 @@ local function VUHDO_addBuffsToCombo(aComboBox, someBuffNames, aSelectedValue, t
 	end
 
 	for _, tBuffName in ipairs(someBuffNames) do
-		local tEntry = { tBuffName, tBuffName };
-		tinsert(tEntryTable, tEntry);
+		tinsert(tEntryTable, { tBuffName, tBuffName });
 	end
 
 	aComboBox:SetAttribute("combo_table", tEntryTable);
@@ -277,38 +268,40 @@ end
 
 --
 local function VUHDO_buildBuffSetupGenericPanel(aCategoryName, someCategoryBuffs)
-	local tAllVariants;
-	local tMaxVariant;
-	local tSingleVariant;
-	local tMaxTarget;
-	local tBuffPanel
+	local tTargetType;
+	local tVariant;
+	local tBuffPanel;
 	local tGenericPanel;
 	local tPanelTemplate;
-	local tIsMaxPresent;
-	local tIsSinglePresent;
+	local tIsPresent;
 
-	tMaxVariant = someCategoryBuffs[1];
-	tSingleVariant = someCategoryBuffs[1];
-	tIsMaxPresent = VUHDO_BUFFS[tMaxVariant[1]] ~= nil;
-	tIsSinglePresent = VUHDO_BUFFS[tSingleVariant[1]] ~= nil;
+	local tKnownVariants = VUHDO_getAllBuffNamesAvail(someCategoryBuffs);
 
-	if (tIsMaxPresent) then
-		tMaxTarget = tMaxVariant[2];
+	local tVariant = nil;
+	if (#tKnownVariants > 0) then
+		tVariant = VUHDO_getBuffInfoForName(tKnownVariants[1]);
+		tIsPresent = true;
 	else
-		tMaxTarget = tSingleVariant[2];
+		tIsPresent = false;
 	end
 
-	if (VUHDO_BUFF_TARGET_UNIQUE == tMaxTarget) then
+	if (tVariant == nil) then
+		tVariant = someCategoryBuffs[1];
+	end
+
+	tTargetType = tVariant[2];
+
+	if (VUHDO_BUFF_TARGET_UNIQUE == tTargetType) then
 		-- add player name panel
 		tPanelTemplate = "VuhDoBuffSetupUniqueSingleTargetPanelTemplate";
-	elseif (VUHDO_BUFF_TARGET_RAID == tMaxTarget or VUHDO_BUFF_TARGET_SINGLE == tMaxTarget) then
+	elseif (VUHDO_BUFF_TARGET_RAID == tTargetType or VUHDO_BUFF_TARGET_SINGLE == tTargetType) then
 		if (#someCategoryBuffs > 1) then
 			-- add Combo-Box having all spells
 			tPanelTemplate = "VuhDoBuffSetupDedicatedPanelTemplate";
 		else
 			tPanelTemplate = "VuhDoBuffSetupFilterTemplate";
 		end
-	else -- Aura, Totem, own group, self
+	else -- Totem, own group, self
 		-- If more than one mutual exclusive
 		if (#someCategoryBuffs > 1) then
 			-- add Combo-Box having all spells
@@ -319,15 +312,9 @@ local function VUHDO_buildBuffSetupGenericPanel(aCategoryName, someCategoryBuffs
 		end
 	end
 
-	if (tIsMaxPresent) then
-		tBuffPanel, tGenericPanel = VUHDO_addGenericBuffFrame(tMaxVariant, tPanelTemplate, aCategoryName, tIsMaxPresent);
-		VUHDO_setupStaticBuffPanel(aCategoryName, tBuffPanel, tIsMaxPresent);
-		VUHDO_setupGenericBuffPanel(tMaxVariant, tGenericPanel, someCategoryBuffs, aCategoryName);
-	else
-		tBuffPanel, tGenericPanel = VUHDO_addGenericBuffFrame(tSingleVariant, tPanelTemplate, aCategoryName, tIsSinglePresent);
-		VUHDO_setupStaticBuffPanel(aCategoryName, tBuffPanel, tIsSinglePresent);
-		VUHDO_setupGenericBuffPanel(tSingleVariant, tGenericPanel, someCategoryBuffs, aCategoryName);
-	end
+	tBuffPanel, tGenericPanel = VUHDO_addGenericBuffFrame(tVariant, tPanelTemplate, aCategoryName, tIsPresent);
+	VUHDO_setupStaticBuffPanel(aCategoryName, tBuffPanel, tIsPresent);
+	VUHDO_setupGenericBuffPanel(tVariant, tGenericPanel, someCategoryBuffs, aCategoryName);
 
 	return tBuffPanel, tGenericPanel;
 end
@@ -341,7 +328,6 @@ function VUHDO_buildAllBuffSetupGenerericPanel()
 	local tBuffPanel = nil;
 	local tCurPanel;
 	local tIndex;
-	local tCategSpec;
 
 	VUHDO_BUFF_PANEL_X = VUHDO_PANEL_INSET_X;
 	VUHDO_BUFF_PANEL_Y = VUHDO_PANEL_INSET_Y;
@@ -356,12 +342,9 @@ function VUHDO_buildAllBuffSetupGenerericPanel()
 	for _, _ in pairs(tAllBuffs) do
 		for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
 			local tNumber = VUHDO_BUFF_ORDER[tCategoryName];
-
-			local tName = tCategoryName;
-
 			if (tNumber == tIndex + 1) then
 				tIndex = tIndex + 1;
-				tCurPanel, _ = VUHDO_buildBuffSetupGenericPanel(tName, tAllCategoryBuffs);
+				tCurPanel, _ = VUHDO_buildBuffSetupGenericPanel(tCategoryName, tAllCategoryBuffs);
 				if (tBuffPanel == nil) then
 					tBuffPanel = tCurPanel;
 				end
@@ -451,7 +434,7 @@ function VUHDO_buffUpButtonClicked(aButton)
 	end
 
 	VUHDO_buildAllBuffSetupGenerericPanel();
-	VUHDO_buffSetupOkayOnClick();
+	VUHDO_buffSetupStoreSettings();
 end
 
 
@@ -487,6 +470,6 @@ function VUHDO_buffDownButtonClicked(aButton)
 	end
 
 	VUHDO_buildAllBuffSetupGenerericPanel();
-	VUHDO_buffSetupOkayOnClick();
+	VUHDO_buffSetupStoreSettings();
 end
 

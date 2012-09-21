@@ -10,8 +10,8 @@ local strsplit = strsplit;
 local strbyte = strbyte;
 local floor = floor;
 local tonumber = tonumber;
-local UnitInRaid = UnitInRaid;
-local UnitExists = UnitExists;
+local IsInRaid = IsInRaid;
+local IsInGroup = IsInGroup;
 local UnitInRange = UnitInRange;
 local GetRaidRosterInfo = GetRaidRosterInfo;
 local IsInInstance = IsInInstance;
@@ -127,7 +127,7 @@ end
 
 --
 local tKey, tValue;
-function 	VUHDO_tableGetKeyFromValue(aTable, aValue)
+function VUHDO_tableGetKeyFromValue(aTable, aValue)
 	for tKey, tValue in pairs(aTable) do
 		if (tValue == aValue) then
 			return tKey;
@@ -239,12 +239,25 @@ end
 
 
 
+--
+function VUHDO_getCurrentGroupType()
+	if (IsInRaid()) then
+		return 2; -- VUHDO_GROUP_TYPE_RAID
+	elseif (IsInGroup()) then
+		return 1; -- VUHDO_GROUP_TYPE_PARTY
+	else
+		return 0; -- VUHDO_GROUP_TYPE_SOLO
+	end
+end
+local VUHDO_getCurrentGroupType = VUHDO_getCurrentGroupType;
+
+
 
 -- returns unit-prefix, pet-prefix and maximum number of players in a party
 function VUHDO_getUnitIds()
-	if (UnitInRaid("player")) then
+	if (IsInRaid()) then
 		return "raid", "raidpet";
-	elseif (UnitExists("party1")) then
+	elseif (IsInGroup()) then
 		return "party", "partypet";
 	else
 		return "player", "pet";
@@ -276,8 +289,8 @@ local tGroupNo;
 function VUHDO_getUnitGroup(aUnit, anIsPet)
 	if (anIsPet or aUnit == nil or aUnit == "focus" or aUnit == "target") then
 		return 0;
-	elseif (UnitInRaid("player")) then
-		_, _, tGroupNo, _, _, _, _, _ = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
+	elseif (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
+		_, _, tGroupNo = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
 		return tGroupNo or 1;
 	else
 		return 1;
@@ -303,41 +316,13 @@ end
 
 -- Parses a aString line into an array of arguments
 function VUHDO_textParse(aString)
-	local tOutStrings = { "Err" };
-
-	if (aString == nil) then
-		return tOutStrings;
-	end
-
 	aString = strtrim(aString);
 
 	while (strfind(aString, "  ", 1, true)) do
 		aString = gsub(aString, "  ", " ");
 	end
 
-	if (strlen(aString) == 0) then
-		return tOutStrings;
-	end
-
-	local tTextNum = 1;
-	local tStartIdx = 1;
-	local tStopIdx;
-	local tNextSpaceIdx;
-
-	while (tStartIdx <= strlen(aString)) do
-		tNextSpaceIdx = strfind(aString, " ", tStartIdx, true);
-		if (tNextSpaceIdx ~= nil) then
-			tStopIdx = tNextSpaceIdx - 1;
-		else
-			tStopIdx = strlen(aString);
-		end
-
-		tOutStrings[tTextNum] = strsub(aString, tStartIdx, tStopIdx);
-		tTextNum = tTextNum + 1;
-		tStartIdx = tStopIdx + 2;
-	end
-
-	return tOutStrings;
+	return VUHDO_splitString(aString, " ");
 end
 
 
@@ -382,7 +367,7 @@ local VUHDO_isInBattleground = VUHDO_isInBattleground;
 function VUHDO_getAddOnDistribution()
 	if (VUHDO_isInBattleground()) then
 		return "BATTLEGROUND";
-	elseif(UnitInRaid("player")) then
+	elseif(VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		return "RAID";
 	else
 		return "PARTY";
@@ -393,12 +378,13 @@ end
 
 -- returns the units rank in a raid which is 0 = raid member, 1 = assist, 2 = leader
 -- returns 2 if not in raid
-local tRank, tIsMl;
+local tRank, tIsMl, tGroupType;
 function VUHDO_getUnitRank(aUnit)
-	if (UnitInRaid("player")) then
+	tGroupType = VUHDO_getCurrentGroupType();
+	if (VUHDO_GROUP_TYPE_RAID == tGroupType) then
 		_, tRank, _, _, _, _, _, _, _, _, tIsMl = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
 		return tRank, tIsMl;
-	elseif (UnitExists("party1")) then
+	elseif (VUHDO_GROUP_TYPE_PARTY == tGroupType) then
 		if (UnitIsGroupLeader(aUnit)) then
 			return 2, true;
 		else
@@ -422,7 +408,7 @@ end
 -- returns the raid unit of player eg. "raid13" or "party4"
 local tCnt, tRaidUnit;
 function VUHDO_getPlayerRaidUnit()
-	if (UnitInRaid("player")) then
+	if (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		for tCnt = 1, 40 do
 			tRaidUnit = format("raid%d", tCnt);
 			if (UnitIsUnit("player", tRaidUnit)) then
@@ -453,7 +439,7 @@ function VUHDO_getUnitZoneName(aUnit)
 
 	if ("player" == aUnit or tInfo["visible"]) then
 		tZone = GetRealZoneText();
-	elseif (UnitInRaid("player")) then
+	elseif (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		tIndex = (VUHDO_RAID[aUnit] or sEmpty)["number"] or 1;
 		_, _, _, _, _, _, tZone, _, _ = GetRaidRosterInfo(tIndex);
 	else
@@ -780,10 +766,10 @@ end
 
 
 
--- @noncritical
+--
 function VUHDO_isGlyphed(aGlyphId)
 	local tCnt, tGlyphId;
-	for tCnt = 1, 9 do
+	for tCnt = 1, GetNumGlyphs() do
 		_, _, _, tGlyphId = GetGlyphSocketInfo(tCnt);
 		if (tGlyphId == aGlyphId) then
 			return true;
@@ -846,3 +832,17 @@ function VUHDO_isInConeInFrontOf(aUnit, aDegrees)
 
 	return aDegrees * 0.5 >= 180 - abs(180 - tConeFactor * tDirection);
 end
+
+
+
+--
+function VUHDO_forceBooleanValue(aRawValue)
+	if (aRawValue == nil or aRawValue == 0 or aRawValue == false) then
+		return false;
+	else
+		return true;
+	end
+end
+
+
+

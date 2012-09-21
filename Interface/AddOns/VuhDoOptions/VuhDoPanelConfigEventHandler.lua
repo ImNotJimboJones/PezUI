@@ -1,7 +1,8 @@
-VUHDO_GROUP_ORDER_IS_DRAGGING = false;
+local _;
+
 VUHDO_DRAG_PANEL = nil;
 DESIGN_MISC_PANEL_NUM = nil;
-local VUHDO_CURRENT_GROUPS_COMBO;
+local sCurrentGroupsCombo;
 local VUHDO_CURRENT_GROUP_ID;
 
 
@@ -17,9 +18,7 @@ local VUHDO_ID_TYPE_NAMES = {
 
 --
 function VUHDO_panelSetupRemoveGroupOnClick(aPanel)
-	local tPanelNum, tModelNum;
-
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aPanel)
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aPanel)
 	VUHDO_removeFromModel(tPanelNum, tModelNum);
 	VUHDO_PANEL_MODEL_GUESSED[tPanelNum] = { };
 	VUHDO_redrawAllPanels();
@@ -29,9 +28,8 @@ end
 
 --
 function VUHDO_panelSetupChooseGroupOnClick(aButton)
-	local tPanelNum, tModelNum;
 	local tGroupOrderPanel = aButton:GetParent();
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tGroupOrderPanel);
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tGroupOrderPanel);
 	local tGroupSelectPanel = VUHDO_getGroupSelectPanel(tPanelNum, tModelNum);
 
 	tGroupOrderPanel:Hide();
@@ -42,9 +40,8 @@ end
 
 --
 function VUHDO_groupSelectOkayOnClick(aButton)
-	local tPanelNum, tModelNum;
 	local tGroupSelectPanel = aButton:GetParent();
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tGroupSelectPanel);
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tGroupSelectPanel);
 	local tGroupOrderPanel = VUHDO_getGroupOrderPanel(tPanelNum, tModelNum);
 
 	tGroupSelectPanel:Hide();
@@ -68,9 +65,7 @@ end
 
 --
 function VUHDO_groupSelectTypeComboOnShow(aComboBox)
-	local tPanelNum, tModelNum;
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aComboBox:GetParent());
-
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aComboBox:GetParent());
 	local tModelId = VUHDO_PANEL_MODELS[tPanelNum][tModelNum];
 	local tOkayButton = VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "OkayButton"];
 
@@ -83,9 +78,7 @@ function VUHDO_groupSelectTypeComboOnShow(aComboBox)
 	local tType = VUHDO_getModelType(tModelId);
 	UIDropDownMenu_SetSelectedValue(aComboBox, tType);
 	VUHDO_configFillGroupsCombo(aComboBox:GetParent(), tModelId);
-
-	local tName = VUHDO_ID_TYPE_NAMES[tType];
-	VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(tName);
+	VUHDO_GLOBAL[aComboBox:GetName() .. "Text"]:SetText(VUHDO_ID_TYPE_NAMES[tType]);
 end
 
 
@@ -94,13 +87,12 @@ end
 function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 	local tText = VUHDO_ID_TYPE_NAMES[anEntry.value];
 	local tPanel = anEntry.owner:GetParent();
-	local tPanelNum, tModelNum;
 
 	UIDropDownMenu_SetSelectedValue(anEntry.owner, anEntry.value, true);
 
 	VUHDO_GLOBAL[anEntry.owner:GetName() .. "Text"]:SetText(tText);
 
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tPanel);
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tPanel);
 
 	local tModelId;
 	if (anEntry.value == VUHDO_ID_TYPE_GROUP) then
@@ -113,25 +105,20 @@ function VUHDO_groupSelectTypeOnSelectionChanged(anEntry)
 
 	VUHDO_PANEL_MODELS[tPanelNum][tModelNum] = tModelId;
 	VUHDO_configFillGroupsCombo(tPanel, tModelId);
-
-	local tOkayButton = VUHDO_GLOBAL[tPanel:GetName() .. "OkayButton"];
-	tOkayButton:Enable();
+	VUHDO_GLOBAL[tPanel:GetName() .. "OkayButton"]:Enable();
 end
 
 
 
 --
 function VUHDO_configGroupSelectButtonOnMouseDown(aButton)
-	local tPanelNum, tModelNum;
-
 	local tComboBox = aButton:GetParent();
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tComboBox:GetParent());
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(tComboBox:GetParent());
 
 	local tModelId = VUHDO_PANEL_MODELS[tPanelNum][tModelNum];
 	local tType = VUHDO_getModelType(tModelId);
 
-	VUHDO_CURRENT_GROUPS_COMBO = tComboBox;
-	VUHDO_CURRENT_GROUP_TYPE_ID = tType;
+	sCurrentGroupsCombo = tComboBox;
 end
 
 
@@ -150,48 +137,42 @@ end
 
 
 --
-local function VUHDO_createComboBoxInfo(aComboBox, aText, aValue, aCheckedValue)
-	local tInfo = { };
-
-	tInfo.text = aText;
-	tInfo.value = aValue;
-	tInfo.func = nil;
-	tInfo.owner = aComboBox;
-	if (aValue == aCheckedValue) then
-		tInfo.checked = true;
-	else
-		tInfo.checked = nil;
-	end
-	tInfo.icon = nil;
-
-	return tInfo;
+local function VUHDO_createComboBoxInfo(aComboBox, aText, aValue, aCheckedValue, aFunction)
+	return {
+		["text"] = aText,
+		["value"] = aValue,
+		["owner"] = aComboBox,
+		["checked"] = aValue == aCheckedValue and true or nil,
+		["func"] = aFunction
+	};
 end
 
 
 
 --
 function VUHDO_configInitGroupsCombo()
-	local tIndex, tId;
-	local tName;
-	local tInfo;
+	local tId;
 	local tType = VUHDO_getModelType(VUHDO_CURRENT_GROUP_ID);
 
-	for tIndex, tId in ipairs(VUHDO_ID_TYPE_MEMBERS[tType]) do
-		tName = VUHDO_HEADER_TEXTS[tId];
-		local tInfo = VUHDO_createComboBoxInfo(VUHDO_CURRENT_GROUPS_COMBO, tName, tId, VUHDO_CURRENT_GROUP_ID);
-		tInfo.func = function() VUHDO_groupSelectGroupOnSelectionChanged(tInfo) end
-		UIDropDownMenu_AddButton(tInfo);
+	for _, tId in ipairs(VUHDO_ID_TYPE_MEMBERS[tType]) do
+		UIDropDownMenu_AddButton(
+			VUHDO_createComboBoxInfo(sCurrentGroupsCombo,
+				VUHDO_HEADER_TEXTS[tId], tId, VUHDO_CURRENT_GROUP_ID,
+				VUHDO_groupSelectGroupOnSelectionChanged
+			)
+		);
 	end
 
-	local tText = VUHDO_HEADER_TEXTS[VUHDO_CURRENT_GROUP_ID];
-	VUHDO_GLOBAL[VUHDO_CURRENT_GROUPS_COMBO:GetName() .. "Text"]:SetText(tText);
+	VUHDO_GLOBAL[sCurrentGroupsCombo:GetName() .. "Text"]:SetText(
+		VUHDO_HEADER_TEXTS[VUHDO_CURRENT_GROUP_ID]
+	);
 end
 
 
 
 --
 function VUHDO_refreshGroupsCombo(aGroupsCombo, aModelId)
-	VUHDO_CURRENT_GROUPS_COMBO = aGroupsCombo;
+	sCurrentGroupsCombo = aGroupsCombo;
 	VUHDO_CURRENT_GROUP_ID = aModelId;
 
 	UIDropDownMenu_Initialize(aGroupsCombo, VUHDO_configInitGroupsCombo);
@@ -228,14 +209,11 @@ end
 
 --
 function VUHDO_PanelSetupGroupOrderSetDragging(aPanel)
-	local tText;
-	local tPanelNum, tModelNum;
-
 	aPanel:SetBackdropColor(0, 0, 0, 1);
 	aPanel:SetBackdropBorderColor(1, 0, 0, 1);
 	aPanel:SetToplevel(true);
-	tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aPanel);
-	tText = VUHDO_getHeaderText(VUHDO_PANEL_MODELS[tPanelNum][tModelNum]);
+	local tPanelNum, tModelNum = VUHDO_getComponentPanelNumModelNum(aPanel);
+	local tText = VUHDO_getHeaderText(VUHDO_PANEL_MODELS[tPanelNum][tModelNum]);
 
 	VUHDO_getGroupOrderLabel2(aPanel):SetText(tText);
 end
@@ -248,7 +226,6 @@ function VUHDO_panelSetupGroupDragOnMouseDown(aDragArea)
 
 	VUHDO_PanelSetupGroupOrderSetDragging(tGroupPanel);
 	tGroupPanel:StartMoving();
-	VUHDO_GROUP_ORDER_IS_DRAGGING = true;
 	VUHDO_DRAG_PANEL = tGroupPanel;
 end
 
@@ -258,7 +235,6 @@ end
 function VUHDO_panelSetupGroupDragOnMouseUp(aDragArea)
 	local tGroupPanel = aDragArea:GetParent();
 	tGroupPanel:StopMovingOrSizing();
-	VUHDO_GROUP_ORDER_IS_DRAGGING = false;
 	VUHDO_DRAG_PANEL = nil;
 	VUHDO_PanelSetupGroupOrderSetStandard(tGroupPanel);
 	VUHDO_reorderGroupsAfterDragged(tGroupPanel);

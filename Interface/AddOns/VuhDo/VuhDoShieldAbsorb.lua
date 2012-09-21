@@ -169,16 +169,17 @@ end
 
 --
 local tRemain;
-local tSpellId;
+local tSpellId, tSpellName;
 local function VUHDO_updateShields(aUnit)
 	for tSpellId, _ in pairs(VUHDO_SHIELDS) do
-		tRemain = select(14, UnitAura(aUnit, select(1, GetSpellInfo(tSpellId))));
+		tSpellName = select(1, GetSpellInfo(tSpellId));
+		tRemain = select(14, UnitAura(aUnit, tSpellName));
 
 		if (tRemain ~= nil and "number" == type(tRemain)) then
 			if (tRemain > 0) then
-				VUHDO_updateShieldValue(aUnit, tSpellId, tRemain, nil);
+				VUHDO_updateShieldValue(aUnit, tSpellName, tRemain, nil);
 			else
-				VUHDO_removeShield(aUnit, tSpellId);
+				VUHDO_removeShield(aUnit, tSpellName);
 			end
 		end
 	end

@@ -151,24 +151,24 @@ function VUHDO_initSharedMedia()
 	local tIndex, tValue;
 
 	-- fonts
-	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List('font')) do
-		VUHDO_FONTS[tIndex] = { VUHDO_LibSharedMedia:Fetch('font', tValue), tValue };
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("font")) do
+		VUHDO_FONTS[tIndex] = { VUHDO_LibSharedMedia:Fetch("font", tValue), tValue };
 	end
 
 	-- status bars
-	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List('statusbar')) do
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("statusbar")) do
 		VUHDO_STATUS_BARS[tIndex] = { tValue, tValue };
 	end
 
 	-- sounds
-	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List('sound')) do
-		VUHDO_SOUNDS[tIndex] = { VUHDO_LibSharedMedia:Fetch('sound', tValue), tValue };
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("sound")) do
+		VUHDO_SOUNDS[tIndex] = { VUHDO_LibSharedMedia:Fetch("sound", tValue), tValue };
 	end
 	tinsert(VUHDO_SOUNDS, 1, { nil, "-- " .. VUHDO_I18N_OFF .. " --" } );
 
 	-- borders
-	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List('border')) do
-		VUHDO_BORDERS[tIndex] = { VUHDO_LibSharedMedia:Fetch('border', tValue), tValue };
+	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("border")) do
+		VUHDO_BORDERS[tIndex] = { VUHDO_LibSharedMedia:Fetch("border", tValue) or "", tValue };
 	end
 end
 
@@ -215,7 +215,6 @@ function VUHDO_initButtonFacade(anInstance)
 	end
 
 	if (VUHDO_LibButtonFacade ~= nil) then
-		--VUHDO_LibButtonFacade:RegisterSkinCallback("VuhDo", VuhDo["VUHDO_buttonFacadeCallback"], anInstance);
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_BUFF_WATCH);
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_HOTS);
 	end

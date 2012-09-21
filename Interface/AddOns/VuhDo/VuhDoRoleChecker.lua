@@ -353,11 +353,6 @@ function VUHDO_determineRole(aUnit)
 				VUHDO_FIX_ROLES[tName] = 62; -- VUHDO_ID_RANGED_DAMAGE
 				return 62; -- VUHDO_ID_RANGED_DAMAGE
 			else
-				--[[_, _, tBuffExist = UnitBuff(aUnit, VUHDO_SPELL_ID.TREE_OF_LIFE);
-				if (tBuffExist) then
-					VUHDO_FIX_ROLES[tName] = 63; -- VUHDO_ID_RANGED_HEAL
-				end]]
-
 				return 63; -- VUHDO_ID_RANGED_HEAL
 			end
 		elseif (VUHDO_UNIT_POWER_RAGE == tPowerType) then

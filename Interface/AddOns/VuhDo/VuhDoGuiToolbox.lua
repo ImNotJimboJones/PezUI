@@ -23,13 +23,13 @@ local VUHDO_getActionPanel;
 local VUHDO_getPanelButtons;
 
 -----------------------------------------------------------------------
-local VUHDO_getNumbersFromString;
+--local VUHDO_getNumbersFromString;
 
 local VUHDO_CONFIG = { };
 local VUHDO_PANEL_SETUP = { };
 local VUHDO_USER_CLASS_COLORS = { };
 function VUHDO_guiToolboxInitBurst()
-	VUHDO_getNumbersFromString = VUHDO_GLOBAL["VUHDO_getNumbersFromString"];
+	--VUHDO_getNumbersFromString = VUHDO_GLOBAL["VUHDO_getNumbersFromString"];
 
 	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
 	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
@@ -354,7 +354,7 @@ end
 local function VUHDO_showBlizzRaid()
 	if (CompactRaidFrameContainer ~= nil) then
 		CompactRaidFrameContainer:RegisterAllEvents();
-		if (not UnitExists("party1") and not UnitInRaid("player")) then
+		if (VUHDO_GROUP_TYPE_SOLO  == VUHDO_getCurrentGroupType()) then
 			return;
 		end
 		CompactRaidFrameContainer:Show();
@@ -376,7 +376,7 @@ end
 local function VUHDO_showBlizzRaidMgr()
 	if (CompactRaidFrameManager ~= nil) then
 		CompactRaidFrameManager:RegisterAllEvents();
-		if (not UnitExists("party1") and not UnitInRaid("player")) then
+		if (VUHDO_GROUP_TYPE_SOLO  == VUHDO_getCurrentGroupType()) then
 			return;
 		end
 		CompactRaidFrameManager:Show();
@@ -429,7 +429,7 @@ end
 
 --
 local function VUHDO_showBlizzParty()
-	if (not UnitExists("party1")) then
+	if (VUHDO_GROUP_TYPE_PARTY ~= VUHDO_getCurrentGroupType()) then
 		return;
 	end
 

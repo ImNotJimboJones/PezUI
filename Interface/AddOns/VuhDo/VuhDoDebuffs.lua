@@ -31,9 +31,9 @@ VUHDO_DEBUFF_BLACKLIST = {
 
 
 
-local VUHDO_CUSTOM_BUFF_BLACKLIST = {
+--[[local VUHDO_CUSTOM_BUFF_BLACKLIST = {
 	--[GetSpellInfo(67847)] = true -- MOP
-}
+}]]
 
 
 
@@ -372,12 +372,12 @@ function VUHDO_determineDebuff(aUnit)
 				break;
 			end
 
-			if (not VUHDO_CUSTOM_BUFF_BLACKLIST[tName]) then
+			--if (not VUHDO_CUSTOM_BUFF_BLACKLIST[tName]) then
 				tCustomDebuff = VUHDO_CUSTOM_DEBUFF_LIST[tName] or VUHDO_CUSTOM_DEBUFF_LIST[tostring(tSpellId or -1)] or tEmptyCustomDebuf;
 				tSetColor, tSetIcon = tCustomDebuff[1], tCustomDebuff[2];
-			else
+			--[[else
 				tSetColor, tSetIcon = false, false;
-			end
+			end]]
 
 			if (tSetColor) then
 				tChosen = 6; --VUHDO_DEBUFF_TYPE_CUSTOM

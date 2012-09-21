@@ -40,7 +40,7 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 
 	tSwatch:SetPoint("TOPLEFT", aBuffPanel:GetName(), "TOPLEFT", VUHDO_BUFF_PANEL_BASE_WIDTH, -VUHDO_BUFF_PANEL_BASE_HEIGHT);
 	tColor = VUHDO_BUFF_SETTINGS["CONFIG"]["SWATCH_BORDER_COLOR"];
-	tSwatch:SetBackdropBorderColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
+	tSwatch:SetBackdropBorderColor(VUHDO_backColor(tColor));
 	tSwatch:Show();
 
 	tButton = VUHDO_GLOBAL[tSwatch:GetName() .. "GlassButton"];
@@ -68,7 +68,7 @@ end
 
 --
 local tCategBuffs, tBuffInfo;
-local function VUHDO_getBuffInfoForName(aBuffName)
+function VUHDO_getBuffInfoForName(aBuffName)
 	for _, tCategBuffs in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS]) do
 		for _, tBuffInfo in pairs(tCategBuffs) do
 			if (aBuffName == tBuffInfo[1]) then
@@ -285,10 +285,8 @@ function VUHDO_reloadBuffPanel()
 	VuhDoBuffWatchMainFrame:SetHeight(VUHDO_PANEL_HEIGHT + VUHDO_BUFF_PANEL_GAP_TOP);
 
 
-	local tColor = VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_BG_COLOR"];
-	VuhDoBuffWatchMainFrame:SetBackdropColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
-	tColor = VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_BORDER_COLOR"];
-	VuhDoBuffWatchMainFrame:SetBackdropBorderColor(tColor["R"], tColor["G"], tColor["B"], tColor["O"]);
+	VuhDoBuffWatchMainFrame:SetBackdropColor(VUHDO_backColor(VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_BG_COLOR"]));
+	VuhDoBuffWatchMainFrame:SetBackdropBorderColor(VUHDO_backColor(VUHDO_BUFF_SETTINGS["CONFIG"]["PANEL_BORDER_COLOR"]));
 	VuhDoBuffWatchMainFrame:SetScale(VUHDO_BUFF_SETTINGS["CONFIG"]["SCALE"]);
 
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW"]) then

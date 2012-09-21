@@ -1,7 +1,7 @@
 local VUHDO_COLOR_SWATCH;
 local VUHDO_COLOR;
 local VUHDO_PROHIBIT;
-local VUHDO_isTextEdit;
+local sIsTextEdit;
 local VUHDO_origColor;
 local VUHDO_copyPasteColor = { };
 
@@ -20,22 +20,24 @@ end
 
 
 --
-function VUHDO_setPickerColor(aPanel)
-	if (VUHDO_isTextEdit) then
-		aPanel:SetColorRGB(VUHDO_COLOR.TR, VUHDO_COLOR.TG, VUHDO_COLOR.TB);
-		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.TR, VUHDO_COLOR.TG, VUHDO_COLOR.TB);
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:SetShown(VUHDO_COLOR.TO ~= nil and not strfind(VUHDO_PROHIBIT, "O"));
+local function VUHDO_backOrTextColor(aColor, anIsText)
+	if (anIsText) then
+		return VUHDO_textColor(aColor);
 	else
-		aPanel:SetColorRGB(VUHDO_COLOR.R, VUHDO_COLOR.G, VUHDO_COLOR.B);
-		VuhDoColorPickerColorSwatchOld:SetTexture(VUHDO_COLOR.R, VUHDO_COLOR.G, VUHDO_COLOR.B);
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrame"]:SetShown(VUHDO_COLOR.O ~= nil and not strfind(VUHDO_PROHIBIT, "O"));
+		return VUHDO_backColor(aColor);
 	end
+end
 
-	if (VUHDO_isTextEdit) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.TO * 100));
-	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(VUHDO_COLOR.O * 100));
-	end
+
+
+--
+function VUHDO_setPickerColor(aPanel)
+	local tR, tG, TB, tO = VUHDO_backOrTextColor(VUHDO_COLOR, sIsTextEdit);
+
+	aPanel:SetColorRGB(tR, tG, TB);
+	VuhDoColorPickerColorSwatchOld:SetTexture(tR, tG, TB);
+	_G[aPanel:GetName() .. "OpacitySliderFrame"]:SetShown(tO ~= nil and not strfind(VUHDO_PROHIBIT, "O"));
+	_G[aPanel:GetName() .. "OpacitySliderFrameSlider"]:SetValue(floor(tO * 100));
 end
 
 
@@ -62,21 +64,21 @@ function VUHDO_newColorPickerOnShow(aPanel)
 	end
 
 	if (tDescription ~= nil) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Select " .. tDescription .. " [Drag here]");
+		_G[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Select " .. tDescription .. " [Drag here]");
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Color Select [Drag here]");
+		_G[aPanel:GetName() .. "TitleLabelLabel"]:SetText("Color Select [Drag here]");
 	end
 
 	if (VUHDO_mayEditBackground() and VUHDO_mayEditText()) then
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:SetChecked(true);
-		VUHDO_lnfRadioButtonClicked(VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]);
-		VUHDO_GLOBAL[aPanel:GetName() .. "TextRadioButton"]:Show();
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:Show();
-		VUHDO_isTextEdit = false;
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:SetChecked(true);
+		VUHDO_lnfRadioButtonClicked(_G[aPanel:GetName() .. "BackgroundRadioButton"]);
+		_G[aPanel:GetName() .. "TextRadioButton"]:Show();
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:Show();
+		sIsTextEdit = false;
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "TextRadioButton"]:Hide();
-		VUHDO_GLOBAL[aPanel:GetName() .. "BackgroundRadioButton"]:Hide();
-		VUHDO_isTextEdit = VUHDO_mayEditText();
+		_G[aPanel:GetName() .. "TextRadioButton"]:Hide();
+		_G[aPanel:GetName() .. "BackgroundRadioButton"]:Hide();
+		sIsTextEdit = VUHDO_mayEditText();
 	end
 
 	VUHDO_setPickerColor(aPanel);
@@ -86,7 +88,7 @@ end
 
 --
 function VUHDO_colorPickerOnColorSelect(anR, anG, anB)
-	if (VUHDO_isTextEdit) then
+	if (sIsTextEdit) then
 		VUHDO_COLOR.TR = anR;
 		VUHDO_COLOR.TG = anG;
 		VUHDO_COLOR.TB = anB;
@@ -119,7 +121,7 @@ end
 
 --
 function VUHDO_colorPickerBackgroundClicked(aPanel)
-	VUHDO_isTextEdit = false;
+	sIsTextEdit = false;
 	VUHDO_setPickerColor(aPanel);
 end
 
@@ -127,7 +129,7 @@ end
 
 --
 function VUHDO_colorPickerTextClicked(aPanel)
-	VUHDO_isTextEdit = true;
+	sIsTextEdit = true;
 	VUHDO_setPickerColor(aPanel);
 end
 
@@ -137,8 +139,8 @@ end
 function VUHDO_colorPickerOpacityValueChanged(aSlider)
 	local tValue;
 	if (VUHDO_COLOR ~= nil) then
-		tValue = VUHDO_GLOBAL[aSlider:GetName() .. "Slider"]:GetValue() * 0.01;
-		if (VUHDO_isTextEdit) then
+		tValue = _G[aSlider:GetName() .. "Slider"]:GetValue() * 0.01;
+		if (sIsTextEdit) then
 			VUHDO_COLOR.TO = tValue;
 		else
 			VUHDO_COLOR.O = tValue;

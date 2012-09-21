@@ -30,7 +30,9 @@ local MyQueueStatusFrame, MyQueueStatusFrameTitle, MyQueueStatusFrameDamage1, My
 local valorDungeonID = 341
 local valorDungeonString, MyQueueStatusFrameString
 
+local LE_LFG_CATEGORY_SCENARIO, LE_LFG_CATEGORY_LFD, LE_LFG_CATEGORY_RF = LE_LFG_CATEGORY_SCENARIO, LE_LFG_CATEGORY_LFD, LE_LFG_CATEGORY_RF
 local category = LE_LFG_CATEGORY_LFD
+
 
 valorDungeonID = 434
 valorDungeonString = L["Twilight"]
@@ -626,11 +628,23 @@ function frame:UpdateText()
 					dpsText = dpsText..texDpsGrey
 				end
 			end
-			text = prefix..tmpTank..tmpHeal..dpsText
+			if category == LE_LFG_CATEGORY_SCENARIO then
+				text = prefix..dpsText
+			else
+				text = prefix..tmpTank..tmpHeal..dpsText
+			end
 		elseif db.display == "short" then
-			text = string.format("%s%s%s|r/%s%s|r/%s%s %i|r",prefix, tankColor,L["T"], healerColor,L["H"], damageColor,L["D"], dpshas)
+			if category == LE_LFG_CATEGORY_SCENARIO then
+				text = string.format("%s %i/3",prefix, dpshas)
+			else
+				text = string.format("%s%s%s|r/%s%s|r/%s%s %i|r",prefix, tankColor,L["T"], healerColor,L["H"], damageColor,L["D"], dpshas)
+			end
 		else
-			text = string.format("%s%s%s|r/%s%s|r/%s%s %i|r",prefix, tankColor,L["Tank"], healerColor,L["Healer"], damageColor,L["DPS"], dpshas)
+			if category == LE_LFG_CATEGORY_SCENARIO then
+				text = string.format("%s %i/3",prefix, dpshas)
+			else
+				text = string.format("%s%s%s|r/%s%s|r/%s%s %i|r",prefix, tankColor,L["Tank"], healerColor,L["Healer"], damageColor,L["DPS"], dpshas)
+			end
 		end
 		
 		if db.showTime then
@@ -760,8 +774,10 @@ local function OnEvent(self, event, ...)
 	--if table.getn(LFGQueuedForList[LE_LFG_CATEGORY_RF]) > 0 then	 
 	if GetLFGMode(LE_LFG_CATEGORY_RF) then
 		category = LE_LFG_CATEGORY_RF
-	else
+	elseif GetLFGMode(LE_LFG_CATEGORY_LFD) then
 		category = LE_LFG_CATEGORY_LFD
+	else
+		category = LE_LFG_CATEGORY_SCENARIO
 	end
 	
 	hasData,  leaderNeeds, tankNeeds, healerNeeds, dpsNeeds, totalTanks, totalHealers, totalDPS, instanceType, instanceSubType, instanceName, averageWait, tankWait, healerWait, damageWait, myWait, queuedTime = GetLFGQueueStats(category);
@@ -832,7 +848,7 @@ local function OnEvent(self, event, ...)
 			endTime = 0
 		end
 		frame:SetScript("OnUpdate", OnUpdate)
-		Debug("NumPartyMembers=",_G.GetNumPartyMembers(),"starttime=",GetTimeString(db.startTime))
+		Debug("NumPartyMembers=",_G.GetNumGroupMembers(),"starttime=",GetTimeString(db.startTime))
 	elseif event == "LFG_COMPLETION_REWARD" then
 		-- dungeon done (random only)
 		--frame:SetScript("OnUpdate", nil)
@@ -857,11 +873,11 @@ local function OnEvent(self, event, ...)
 		if hasResponded then
 			acetimer:CancelTimer(invitationAlertTimer, true)
 		end
-	elseif event == "PARTY_MEMBERS_CHANGED" then
+	elseif event == "GROUP_ROSTER_UPDATE" then
 		if not _G.UnitInRaid("player") then 
-			--Debug("PARTY_MEMBERS_CHANGED:",_G.GetNumPartyMembers())
+			--Debug("GROUP_ROSTER_UPDATE:",_G.GetNumGroupMembers())
 			--leave party
-			if _G.GetNumPartyMembers() < 1 then
+			if _G.GetNumGroupMembers() < 1 then
 				dungeonInProgress = false
 				endTime = GetTime() - db.startTime
 				Debug("NumPartyMembers() < 1, starttime = 0, endTime=", GetTimeString(endTime))
@@ -971,4 +987,4 @@ frame:RegisterEvent("LFG_ROLE_UPDATE")
 frame:RegisterEvent("LFG_UPDATE_RANDOM_INFO")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("LFG_COMPLETION_REWARD")
-frame:RegisterEvent("PARTY_MEMBERS_CHANGED")
+frame:RegisterEvent("GROUP_ROSTER_UPDATE")

@@ -1,3 +1,5 @@
+local _;
+
 local VUHDO_IS_SMART_CAST = false;
 
 local IsAltKeyDown = IsAltKeyDown;
@@ -11,7 +13,6 @@ local pairs = pairs;
 local GameTooltip = GameTooltip;
 
 local sMouseoverUnit = nil;
-local _;
 
 
 
@@ -103,7 +104,7 @@ local tIsMasterLooter;
 function VUHDO_getUnitGroupPrivileges(aUnit)
 	tIsLeader, tIsAssist, tIsMasterLooter = false, false, false;
 
-	if (UnitInRaid(aUnit)) then
+	if (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		tUnitNo = VUHDO_getUnitNo(aUnit);
 		if (tUnitNo ~= nil) then
 			_, tRank, _, _, _, _, _, _, _, _, tIsMasterLooter = GetRaidRosterInfo(tUnitNo);

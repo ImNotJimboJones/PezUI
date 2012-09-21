@@ -1,4 +1,8 @@
 
+VUHDO_STANDARD_ICON = "interface\\characterframe\\temporaryportrait-female-draenei";
+
+
+
 -- Group Model Header Texts
 VUHDO_HEADER_TEXTS = {
 	[VUHDO_ID_UNDEFINED] = "",
@@ -47,12 +51,8 @@ VUHDO_HEADER_TEXTS = {
 
 -- For initializing the minimap
 VUHDO_MM_LAYOUT = {
-	icon = "interface\\characterframe\\temporaryportrait-female-draenei",
 	drag = "CIRCLE",
-	left = nil,
-	right = nil,
-	tooltip = VUHDO_I18N_MM_TOOLTIP,
-	enabled = true
+	position = 0,
 };
 
 

@@ -349,26 +349,26 @@
 					UIDropDownMenu_SetWidth(self, 100);
 					self:SetScale(0.7);
 					local cb_init_fn = function()
-						local info1 = {};
-						info1.text = "" .. VUHDO_I18N_CLASS;
-						info1.value = 1;
-						info1.owner = self;
-						info1.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info1) end
-						UIDropDownMenu_AddButton(info1);
-						local info2 = {};
-						info2.text = "" .. VUHDO_I18N_GROUP;
-						info2.value = 2;
-						info2.owner = self;
-						info2.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info2) end
-						UIDropDownMenu_AddButton(info2);
-						local info3 = {};
-						info3.text = "" .. VUHDO_I18N_SPECIAL;
-						info3.value = 3;
-						info3.owner = self;
-						info3.func = function() VUHDO_groupSelectTypeOnSelectionChanged(info3) end
-						UIDropDownMenu_AddButton(info3);
+						UIDropDownMenu_AddButton({
+							text = VUHDO_I18N_CLASS;
+							value = 1;
+							owner = self;
+							func = VUHDO_groupSelectTypeOnSelectionChanged;
+						});
+						UIDropDownMenu_AddButton({
+							text = VUHDO_I18N_GROUP;
+							value = 2;
+							owner = self;
+							func = VUHDO_groupSelectTypeOnSelectionChanged;
+						});
+						UIDropDownMenu_AddButton({
+							text = VUHDO_I18N_SPECIAL;
+							value = 3;
+							owner = self;
+							func = VUHDO_groupSelectTypeOnSelectionChanged;
+						});
 					end
-					UIDropDownMenu_Initialize(self, cb_init_fn)
+					UIDropDownMenu_Initialize(self, cb_init_fn);
 					</OnLoad>
 					<OnHide>CloseDropDownMenus();</OnHide>
 					<OnShow>VUHDO_groupSelectTypeComboOnShow(self)</OnShow>

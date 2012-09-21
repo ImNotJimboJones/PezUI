@@ -116,6 +116,7 @@ end
 function VUHDO_readyCheckEnds()
 	if (sIsChecking) then -- Client send READY_CHECK_ENDS on startup
 		VUHDO_hideAllReadyIcons();
+		VUHDO_initAllEventBouquets();
 		sIsChecking = false;
 	end
 end

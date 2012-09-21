@@ -7,7 +7,6 @@ local VUHDO_DRAG_MAX_DISTANCE = 60;
 VUHDO_PANEL_MODEL_GUESSED = { };
 
 
-local sqrt = sqrt;
 
 --
 function VUHDO_setGuessedModel(aPanelNum, aSlotNum, aValue)
@@ -22,44 +21,36 @@ end
 
 --
 local function VUHDO_getGuessedModel(aPanelNum, aSlotNum)
-	if (VUHDO_PANEL_MODEL_GUESSED[aPanelNum] == nil) then
+	if ((VUHDO_PANEL_MODEL_GUESSED[aPanelNum] or {})[aSlotNum] == nil) then
 		return false;
 	end
-
-	if (VUHDO_PANEL_MODEL_GUESSED[aPanelNum][aSlotNum] == nil) then
-		return false;
-	end
-
 	return VUHDO_PANEL_MODEL_GUESSED[aPanelNum][aSlotNum];
 end
 
 
 
 --
-local tCnt;
-local tXPos, tYPos;
-local tPanel;
-local tModel;
-local tIsShowOrder;
-local tAnzModels;
-local tModelArray;
-local tScale;
-local tParentPanel;
-local tButton;
 function VUHDO_positionAllGroupConfigPanels(aPanelNum)
+	local tCnt;
+	local tButton;
+	local tIsShowOrder;
+	local tModel;
+	local tXPos, tYPos;
+	local tPanel;
+
 	for _, tButton in pairs(VUHDO_getPanelButtons(aPanelNum)) do
 		tButton:Hide();
 	end
 
-	tModelArray = VUHDO_PANEL_MODELS[aPanelNum];
-	tScale =  VUHDO_getHealButtonWidth(aPanelNum) / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
+	local tModelArray = VUHDO_PANEL_MODELS[aPanelNum];
+	local tScale =  VUHDO_getHealButtonWidth(aPanelNum) / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
 
 	if (tModelArray == nil) then
 		return;
 	end
 
-	tParentPanel = VUHDO_getActionPanel(aPanelNum);
-	tAnzModels = #tModelArray;
+	local tParentPanel = VUHDO_getActionPanel(aPanelNum);
+	local tAnzModels = #tModelArray;
 
 	for tCnt = 1, tAnzModels do
 		VUHDO_getOrCreateGroupOrderPanel(aPanelNum, tCnt):SetScale(tScale);
@@ -67,32 +58,32 @@ function VUHDO_positionAllGroupConfigPanels(aPanelNum)
 
 		tXPos, tYPos = VUHDO_getHealButtonPos(tCnt, 1, aPanelNum);
 
-		 tModel = VUHDO_PANEL_MODELS[aPanelNum][tCnt];
-		 tIsShowOrder = (tModel ~= VUHDO_ID_UNDEFINED)
+		tModel = VUHDO_PANEL_MODELS[aPanelNum][tCnt];
+		tIsShowOrder = (tModel ~= VUHDO_ID_UNDEFINED)
 			and not VUHDO_getGuessedModel(aPanelNum, tCnt);
 
-		 tPanel = VUHDO_getGroupOrderPanel(aPanelNum, tCnt);
-		 tPanel:ClearAllPoints();
-		 tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
-		 if (tIsShowOrder) then
-			 tPanel:Hide();
-			 tPanel:Show();
-		 else
-			 tPanel:Hide();
-		 end
+		tPanel = VUHDO_getGroupOrderPanel(aPanelNum, tCnt);
+		tPanel:ClearAllPoints();
+		tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
+		if (tIsShowOrder) then
+			tPanel:Hide();
+			tPanel:Show();
+		else
+			tPanel:Hide();
+		end
 
-		 tPanel = VUHDO_getGroupSelectPanel(aPanelNum, tCnt);
-		 tPanel:ClearAllPoints();
-		 tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
-		 if (not tIsShowOrder) then
-			 tPanel:Hide();
-			 tPanel:Show();
-		 else
-			 tPanel:Hide();
-		 end
+		tPanel = VUHDO_getGroupSelectPanel(aPanelNum, tCnt);
+		tPanel:ClearAllPoints();
+		tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
+		if (not tIsShowOrder) then
+			tPanel:Hide();
+			tPanel:Show();
+		else
+			tPanel:Hide();
+		end
 
-		 VUHDO_getConfigOrderBarLeft(aPanelNum, tCnt):Hide();
-		 VUHDO_getConfigOrderBarRight(aPanelNum, tCnt):Hide();
+		VUHDO_getConfigOrderBarLeft(aPanelNum, tCnt):Hide();
+		VUHDO_getConfigOrderBarRight(aPanelNum, tCnt):Hide();
 	end
 
 	for tCnt = tAnzModels + 1, 15 do -- VUHDO_MAX_GROUPS_PER_PANEL
@@ -108,14 +99,10 @@ end
 
 --
 local tDeltaX, tDeltaY;
-local tDistance;
 local function VUHDO_determineDistance(aXPos, aYPos, anotherXPos, anotherYPos)
 	tDeltaX = aXPos - anotherXPos;
 	tDeltaY = aYPos - anotherYPos;
-
-	tDistance = sqrt(tDeltaX * tDeltaX + tDeltaY * tDeltaY); -- (<-- Pythagoras, woot!, I'm sophisticated)
-
-	return tDistance;
+	return sqrt(tDeltaX * tDeltaX + tDeltaY * tDeltaY);
 end
 
 
@@ -141,7 +128,6 @@ end
 --
 local tDragSweetX, tDragSweetY;
 local tTargetSweetX, tTargetSweetY;
-local tDistance;
 local function VUHDO_determineDragDistance(aDraggedPanel, aDragTargetPanel, anIsLeftOf)
 
 	tDragSweetX = aDraggedPanel:GetLeft() * aDraggedPanel:GetScale() + (aDraggedPanel:GetWidth() * aDraggedPanel:GetScale() * 0.5);
@@ -154,9 +140,7 @@ local function VUHDO_determineDragDistance(aDraggedPanel, aDragTargetPanel, anIs
 	end
 
 	tTargetSweetY = VUHDO_GetDragTargetSweetY(aDraggedPanel, aDragTargetPanel);
-
-	tDistance = VUHDO_determineDistance(tDragSweetX, tDragSweetY, tTargetSweetX, tTargetSweetY);
-	return tDistance;
+	return VUHDO_determineDistance(tDragSweetX, tDragSweetY, tTargetSweetX, tTargetSweetY);
 end
 
 
@@ -233,7 +217,7 @@ local tDragX;
 local tDragY;
 function VUHDO_determineDragTarget(aDraggedPanel)
 
-	tLowestDistance = 999999;
+	tLowestDistance = math.huge;
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
 		tPanel = VUHDO_getActionPanel(tPanelNum);
 		if (tPanel:IsVisible()) then
@@ -365,10 +349,9 @@ local tModelType;
 local tTupel;
 local tIndex;
 local tGuessId;
-local tTypeCount = { };
+local tTypeCount;
 function VUHDO_guessUndefinedEntries(aPanelNum)
 
-	table.wipe(tTypeCount);
 	tTypeCount = {
 		[VUHDO_ID_TYPE_GROUP] = { VUHDO_ID_TYPE_GROUP, 0 },
 		[VUHDO_ID_TYPE_CLASS] = { VUHDO_ID_TYPE_CLASS, 0 },

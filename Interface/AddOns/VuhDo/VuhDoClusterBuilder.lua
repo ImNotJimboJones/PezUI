@@ -1,3 +1,6 @@
+local _;
+
+
 -- for saving once learnt yards in saved variables
 local VUHDO_STORED_ZONES = { };
 local VUHDO_CLUSTER_BLACKLIST = { };
@@ -18,7 +21,6 @@ local GetSpellCooldown = GetSpellCooldown;
 local twipe = table.wipe;
 local tsort = table.sort;
 local VUHDO_setMapToCurrentZone;
-local _;
 
 local VUHDO_COORD_DELTAS = { };
 local VUHDO_MAP_WIDTH = 0;
@@ -321,10 +323,6 @@ function VUHDO_updateAllClusters()
 		end
 
 		tInfo = VUHDO_CLUSTER_BASE_RAID[tIndex];
-		--[[if (tInfo == nil) then
-			break;
-		end]]
-
 		tUnit = tInfo["unit"];
 
 		if (VUHDO_COORD_DELTAS[tUnit] == nil) then
@@ -334,9 +332,6 @@ function VUHDO_updateAllClusters()
 		if (VUHDO_isValidClusterUnit(tInfo)) then
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
-				--[[if (tAnotherInfo == nil) then
-					break;
-				end]]
 
 				if (VUHDO_isValidClusterUnit(tAnotherInfo)) then
 					tAnotherUnit = tAnotherInfo["unit"];

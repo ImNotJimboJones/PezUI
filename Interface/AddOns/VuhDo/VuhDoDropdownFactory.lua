@@ -142,7 +142,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 		local tBuffName;
 
 		for _, tBuffName in pairs(tUniqueBuffs) do
-			local tCategory = VUHDO_getBuffCategory(tBuffName);
+			local tCategory = VUHDO_getBuffCategoryName(tBuffName);
 			tInfo = UIDropDownMenu_CreateInfo();
 			tInfo["text"] = tBuffName;
 			tInfo["arg1"] = tName;
@@ -417,9 +417,7 @@ end
 
 --
 function VUHDO_initMinimap()
-	MyMinimapButton:Create("VuhDo", VUHDO_MM_SETTINGS, VUHDO_MM_LAYOUT);
-	MyMinimapButton:SetLeftClick("VuhDo", function() VUHDO_slashCmd("opt") end);
-	MyMinimapButton:SetRightClick("VuhDo", function() ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, "VuhDoMinimapButton", 0, -5) end);
+	VuhDoMinimap:Create(VUHDO_MM_SETTINGS, VUHDO_MM_LAYOUT);
 	VUHDO_initShowMinimap();
 end
 

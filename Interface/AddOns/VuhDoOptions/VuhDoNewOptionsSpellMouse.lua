@@ -2,18 +2,19 @@ local _;
 VUHDO_CURR_SPELL_MODIFIER = "";
 
 
-local tComponents = { };
-local tNum;
-local tModel;
-local tPanel, tBox, tComp;
 function VUHDO_newOptionsSpellSetModifier(aModifier)
+	local tComponents = { };
+	local tNum;
+	local tModel;
+	local tPanel, tBox, tComp;
+
 	VUHDO_CURR_SPELL_MODIFIER = aModifier;
 
 	table.wipe(tComponents);
 	tComponents = { VuhDoNewOptionsSpellMouseKeyPanelScrollPanelChild:GetChildren() };
 
 	for _, tPanel in pairs(tComponents) do
-		local tNum = VUHDO_getNumbersFromString(tPanel:GetName(), 1)[1];
+		tNum = VUHDO_getNumbersFromString(tPanel:GetName(), 1)[1];
 		if (tNum ~= nil) then
 			tBox = VUHDO_GLOBAL[tPanel:GetName() .. "EditBox"];
 			tModel = "VUHDO_SPELL_ASSIGNMENTS." .. aModifier .. tNum .. ".##3";
@@ -41,10 +42,9 @@ end
 
 
 --
-local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckSpell(anEditBox, anIsCustom)
-	tText, tR, tG, tB = VUHDO_isActionValid(anEditBox:GetText(), anIsCustom);
-	tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
+	local tText, tR, tG, tB = VUHDO_isActionValid(anEditBox:GetText(), anIsCustom);
+	local tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
 	if (tText ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 		tLabel:SetText(tText);

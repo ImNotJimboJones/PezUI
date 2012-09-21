@@ -10,12 +10,12 @@ VUHDO_GCD_SPELLS = {
 	["WARRIOR"] = GetSpellInfo(78), -- Heroic Strike
 	["ROGUE"] = GetSpellInfo(1752), -- Sinister Strike
 	["HUNTER"] = GetSpellInfo(1494), -- Track beasts
-	["PALADIN"] = VUHDO_SPELL_ID.HOLY_LIGHT, -- Holy Light
+	["PALADIN"] = VUHDO_SPELL_ID.FLASH_OF_LIGHT,
 	["MAGE"] = GetSpellInfo(133), -- Fire Ball
 	["WARLOCK"] = GetSpellInfo(686), -- Shadow Bolt
-	["SHAMAN"] = VUHDO_SPELL_ID.HEALING_WAVE, --  Healing Wave
-	["DRUID"] = VUHDO_SPELL_ID.REGROWTH, -- Regrowth
-	["PRIEST"] = VUHDO_SPELL_ID.HEAL, -- Heal
+	["SHAMAN"] = GetSpellInfo(8004), --  Healing Surge
+	["DRUID"] = VUHDO_SPELL_ID.REJUVENATION, -- Regrowth
+	["PRIEST"] = VUHDO_SPELL_ID.RENEW, -- mopok
 	["DEATHKNIGHT"] = GetSpellInfo(48266), -- Blood Presence
 }
 
@@ -66,6 +66,7 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.REGROWTH] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.LIFEBLOOM] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.WILD_GROWTH] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.CENARION_WARD] = { ["isHot"] = true },
 
 	-- Hunter
 	[VUHDO_SPELL_ID.MEND_PET] = { ["isHot"] = true },
@@ -75,6 +76,7 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.ENVELOPING_MIST] = {["isHot"] = true },
 	[VUHDO_SPELL_ID.RENEWING_MIST] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.ZEN_SPHERE] = { ["isHot"] = true },
+	[VUHDO_SPELL_ID.SERPENTS_ZEAL] = { ["isHot"] = true },
 
 	-- Mage
 	[VUHDO_SPELL_ID.ICE_BARRIER] = { ["isHot"] = true },

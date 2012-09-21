@@ -192,9 +192,8 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 		return;
 	end
 
-	local tCategSpec = VUHDO_getBuffCategory(VUHDO_CLICKED_BUFF);
-	local tCategName = tCategSpec;
-	local tCateg = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][tCategSpec];
+	local tCategName = VUHDO_getBuffCategoryName(VUHDO_CLICKED_BUFF);
+	local tCateg = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][tCategName];
 	local tSettings = VUHDO_BUFF_SETTINGS[tCategName];
 	local tTargetType = tCateg[1][2];
 
@@ -425,12 +424,11 @@ end
 
 
 --
-local tCategBuffs, tBuffVariants, tCategName;
-function VUHDO_getBuffCategory(aBuffName)
-
+local tCategBuffs, tBuffVariant, tCategName;
+function VUHDO_getBuffCategoryName(aBuffName)
 	for tCategName, tCategBuffs in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS]) do
-		for _, tBuffVariants in pairs(tCategBuffs) do
-			if (aBuffName == tBuffVariants[1]) then
+		for _, tBuffVariant in pairs(tCategBuffs) do
+			if (aBuffName == tBuffVariant[1]) then
 				return tCategName;
 			end
 		end

@@ -1,14 +1,9 @@
-local tAktPanel;
 local function VUHDO_wizardInitMainPanelGrouped(aPanelNum)
-	tAktPanel = VUHDO_PANEL_SETUP[aPanelNum];
+	local tAktPanel = VUHDO_PANEL_SETUP[aPanelNum];
 
 	tAktPanel["MODEL"].ordering = VUHDO_ORDERING_STRICT;
+
 	tAktPanel["MODEL"].sort = VUHDO_SORT_RAID_NAME;
-
---	tAktPanel["SCALING"].showManaBars = true;
---	tAktPanel["SCALING"].showRageBars = false;
---	tAktPanel["SCALING"].manaBarHeight = 3;
-
 	tAktPanel["SCALING"].showHeaders = true;
 
 	tAktPanel["SCALING"].maxColumnsWhenStructured = 8;
@@ -29,16 +24,11 @@ end
 
 
 --
-local tAktPanel;
 local function VUHDO_wizardInitMainPanelLoose(aPanelNum)
-	tAktPanel = VUHDO_PANEL_SETUP[aPanelNum];
+	local tAktPanel = VUHDO_PANEL_SETUP[aPanelNum];
 
 	tAktPanel["MODEL"].ordering = VUHDO_ORDERING_LOOSE;
 	tAktPanel["MODEL"].sort = VUHDO_SORT_RAID_NAME;
-
---	tAktPanel["SCALING"].showManaBars = true;
---	tAktPanel["SCALING"].showRageBars = false;
---	tAktPanel["SCALING"].manaBarHeight = 3;
 
 	tAktPanel["SCALING"].showHeaders = true;
 
@@ -99,10 +89,6 @@ function VUHDO_panelWizardInitVarsMainTanks(aPanelNum)
 	tAktPanel["MODEL"].ordering = VUHDO_ORDERING_STRICT;
 	tAktPanel["MODEL"].sort = VUHDO_SORT_RAID_NAME;
 
---	tAktPanel["SCALING"].showManaBars = false;
---	tAktPanel["SCALING"].showRageBars = false;
---	tAktPanel["SCALING"].manaBarHeight = 0;
-
 	tAktPanel["SCALING"].showHeaders = true;
 
 	tAktPanel["SCALING"].maxColumnsWhenStructured = 8;
@@ -129,11 +115,6 @@ function VUHDO_panelWizardInitVarsPlayerTargets(aPanelNum)
 
 	tAktPanel["MODEL"].ordering = VUHDO_ORDERING_STRICT;
 	tAktPanel["MODEL"].sort = VUHDO_SORT_RAID_NAME;
-
-
---	tAktPanel["SCALING"].showManaBars = false;
---	tAktPanel["SCALING"].showRageBars = false;
---	tAktPanel["SCALING"].manaBarHeight = 0;
 
 	tAktPanel["SCALING"].showHeaders = true;
 
@@ -243,8 +224,7 @@ end
 
 
 --
-local tCnt;
-function VUHDO_panelWizardApplyCallback(aDecision)
+local function VUHDO_panelWizardApplyCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
 		tNumPanels = 0;
 
@@ -279,6 +259,7 @@ function VUHDO_panelWizardApplyCallback(aDecision)
 			VUHDO_PANEL_SETUP[tNumPanels]["MODEL"].groups = nil;
 		end
 
+		local tCnt;
 		for tCnt = tNumPanels + 1, VUHDO_MAX_PANELS do
 			VUHDO_PANEL_SETUP[tCnt]["MODEL"].groups = nil;
 		end

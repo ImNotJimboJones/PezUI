@@ -29,8 +29,6 @@ function VUHDO_importBlizzClassColors(aButton)
 						tVuhDoColor["TO"] = 1;
 					end
 				end
-				--VUHDO_lnfUpdateAllModelControls(aButton);
-
 			end
 		end
 	);

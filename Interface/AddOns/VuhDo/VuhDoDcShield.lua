@@ -1,7 +1,6 @@
 
 -----------------------------------------------------------------------------------
 local twipe = table.wipe;
-local UnitInRaid = UnitInRaid;
 local CreateMacro = CreateMacro;
 local EditMacro = EditMacro;
 local strsub = strsub;
@@ -128,7 +127,7 @@ function VUHDO_mirrorToMacro()
 
 		return;
 	end
-	tMacroString = UnitInRaid("player") and "R" or "P";
+	tMacroString = VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType() and "R" or "P";
 	tMacroNames = "N"; -- Filler
 
 	VUHDO_buildSnippetArray();
@@ -145,10 +144,10 @@ function VUHDO_mirrorToMacro()
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
-			CreateMacro(VUHDO_MACRO_NAME_GROUPS, 130, tMacroString, 1, 1);
+			CreateMacro(VUHDO_MACRO_NAME_GROUPS, "Ability_Repair", tMacroString, 1, 1);
 		end
 	else
-		EditMacro(tIndexGroups, VUHDO_MACRO_NAME_GROUPS, 130, tMacroString, 1, 1);
+		EditMacro(tIndexGroups, VUHDO_MACRO_NAME_GROUPS, "Ability_Repair", tMacroString, 1, 1);
 	end
 
 	if ((tIndexNames or 0) == 0) then
@@ -157,10 +156,10 @@ function VUHDO_mirrorToMacro()
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
-			CreateMacro(VUHDO_MACRO_NAME_NAMES, 130, tMacroNames, 1, 1);
+			CreateMacro(VUHDO_MACRO_NAME_NAMES, "Ability_Repair", tMacroNames, 1, 1);
 		end
 	else
-		EditMacro(tIndexNames, VUHDO_MACRO_NAME_NAMES, 130, tMacroNames, 1, 1);
+		EditMacro(tIndexNames, VUHDO_MACRO_NAME_NAMES, "Ability_Repair", tMacroNames, 1, 1);
 	end
 end
 
