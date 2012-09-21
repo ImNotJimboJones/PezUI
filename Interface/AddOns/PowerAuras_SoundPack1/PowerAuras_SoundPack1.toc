@@ -1,8 +1,0 @@
-## Interface: 40300
-## Title: Power Auras Classic - SP1 (Mortal Kombat)
-## Author: Killerpet
-## Notes: Power Auras Classic - Sound Pack 1 (Mortal Kombat)
-## Dependencies: PowerAuras
-
-PowerAuras_SoundPack_SoundFileInfo.lua
-PowerAuras_SoundPack_Main.lua
