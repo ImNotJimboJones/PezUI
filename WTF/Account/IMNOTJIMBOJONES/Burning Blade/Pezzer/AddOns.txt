@@ -144,9 +144,7 @@ PitBull4_VisualHeal: enabled
 PitBull4_VoiceIcon: disabled
 GearScore: disabled
 Postal: enabled
-PowerAuras: disabled
-PowerAuras_ImagePack1: disabled
-PowerAuras_SoundPack1: disabled
+PowerAuras: enabled
 Prat-3.0: enabled
 Prat-3.0_Libraries: enabled
 Quartz: enabled
@@ -162,7 +160,6 @@ RaidAchievement_WotlkHeroics: enabled
 Recount: enabled
 ReforgeLite: enabled
 SavedInstances: enabled
-ScreenGrid: enabled
 SexyMap: enabled
 SharedMedia: enabled
 Skada: enabled
