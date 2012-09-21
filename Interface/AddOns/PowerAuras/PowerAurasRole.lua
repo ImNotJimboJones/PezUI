@@ -1,6 +1,4 @@
 
-local UnitLevel = PowaAuras.UnsafeFunctions.UnitLevel;
-
 -- Reset if spec changed or slash command
 function PowaAuras:ResetTalentScan(unit)
 	if (unit == nil) then
@@ -122,66 +120,26 @@ function PowaAuras:InspectUnit(unit)
 
 	--self:Message("InspectRole: ",unitInfo.Name, " (", unit,")");
 
-	local activeTree = GetActiveTalentGroup(isInspect);
-	local _, _, points1 = GetTalentTabInfo(1, isInspect, false, activeTree);
-	local _, _, points2 = GetTalentTabInfo(2, isInspect, false, activeTree);
-	local _, _, points3 = GetTalentTabInfo(3, isInspect, false, activeTree);
-	
+	local activeTree = GetInspectSpecialization(unit);
+	local null, null, null, null, roleType = GetSpecializationInfoByID(activeTree);
+
 	local role;
-
-	if (unitInfo.Class=="PRIEST") then
-		-- 1 = Disc, 2 = Holy, 3 = Shadow
-		if (points1 > points3 or points2 > points3)	 then
-			role = "RoleHealer";
+	if (roleType=="DAMAGER") then
+		if (unitInfo.Class=="DRUID" and activeTree==103) then
+			role = "RoleMeleDps"; -- Feral
+		elseif (unitInfo.Class=="SHAMAN" and activeTree==263) then
+			role = "RoleMeleDps"; -- Enhancement
+		elseif (unitInfo.Class=="WARRIOR" or unitInfo.Class=="MONK" or unitInfo.Class=="PALADIN") then
+			role = "RoleMeleDps";
 		else
 			role = "RoleRangeDps";
 		end
-
-	elseif (unitInfo.Class=="WARRIOR") then
-		-- Waffen, Furor, Schutz
-		if (points1 > points3
-		or points2 > points3)	 then
-			role = "RoleMeleDps";
-		else
-			role = "RoleTank";
-		end
-
-	elseif (unitInfo.Class=="DRUID") then
-		-- 1 = Gleichgewicht, 2 = Wilder Kampf, 3 = Wiederherstellung
-		if (points1 > points2 and points1 > points3) then
-			role = "RoleRangeDps";
-		elseif(points3 > points2) then
-			role = "RoleHealer";
-		else
-			-- "Natürliche Reaktion" geskillt => Wahrsch. Tank?
-			local _, _, _, _, rank = GetTalentInfo(2, 16, isInspect, false, activeTree);
-			if (rank > 0) then
-				role = "RoleTank";
-			else
-				role = "RoleMeleDps";
-			end
-		end
-
-	elseif (unitInfo.Class=="PALADIN") then
-		-- 1 = Heilig, 2 = Schutz, 3 = Vergeltung
-		if (points1 > points2 and points1 > points3) then
-			role = "RoleHealer";
-		elseif (points2 > points3) then
-			role = "RoleTank";
-		else
-			role = "RoleMeleDps";
-		end
-
-	elseif (unitInfo.Class=="SHAMAN") then
-	  -- 1 = Elementar, 2 = Verstärker, 3 = Wiederherstellung
-		if (points1 > points2 and points1 > points3) then
-			role = "RoleRangeDps";
-		elseif (points2 > points3) then
-			role = "RoleMeleDps";
-		else
-			role = "RoleHealer";
-		end
+	elseif (roleType=="HEALER") then
+		role = "RoleHealer";
+	elseif (roleType=="TANK") then
+		role = "RoleTank";
 	end
+	
 	self.InspectedRoles[unitInfo.Name] = role;
 	return role;
 end
@@ -190,7 +148,7 @@ end
 
 function PowaAuras:DetermineRole(unit)
 	if (unit==nil) then return; end
-	local _, class = UnitClass(unit);
+	local null, class = UnitClass(unit);
 
 	if (class=="ROGUE") then
 		return "RoleMeleDps", "Preset";
@@ -212,7 +170,7 @@ function PowaAuras:DetermineRole(unit)
 	end
 
 	if (class=="DEATHKNIGHT") then
-		local _, _, buffExist = UnitBuff(unit, self.Spells.BUFF_FROST_PRESENCE);
+		local null, null, buffExist = UnitBuff(unit, self.Spells.BUFF_BLOOD_PRESENCE);
 		if (buffExist) then
 			self.FixRoles[unitName] = "RoleTank";
 		else
@@ -220,7 +178,7 @@ function PowaAuras:DetermineRole(unit)
 		end
 		return self.FixRoles[unitName], "Guess";
 	elseif (class=="PRIEST") then
-		local _, _, buffExist = UnitBuff(unit, self.Spells.SHADOWFORM);
+		local null, null, buffExist = UnitBuff(unit, self.Spells.SHADOWFORM);
 		if (buffExist) then
 			self.FixRoles[unitName] = "RoleRangeDps";
 			return "RoleRangeDps", "Guess";
@@ -236,18 +194,13 @@ function PowaAuras:DetermineRole(unit)
 		return "RoleMeleDps", "Guess";
 
 	elseif (class=="DRUID") then
-		local _, powerType = UnitPowerType(unit);
+		local null, powerType = UnitPowerType(unit);
 		if (powerType == "MANA") then
-			_, _, tBuffExist = UnitBuff(unit, self.Spells.MOONKIN_FORM);
+			null, null, tBuffExist = UnitBuff(unit, self.Spells.MOONKIN_FORM);
 			if (tBuffExist) then
 				self.FixRoles[unitName] = "RoleRangeDps";
 				return "RoleRangeDps", "Guess";
 			else
-				local _, _, tBuffExist = UnitBuff(unit, self.Spells.TREE_OF_LIFE);
-				if (tBuffExist) then
-					self.FixRoles[unitName] = "RoleHealer";
-				end
-
 				return "RoleHealer", "Guess";
 			end
 		elseif (powerType == "RAGE") then

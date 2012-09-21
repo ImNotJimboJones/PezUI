@@ -250,7 +250,7 @@ ACCEPT_LOCK
 Handler for lock accepts. Will begin transmitting a multipart message.
 ------------------------------------------------------------------------------------------------------------------------
 --]]
-PowaComms:AddHandler("ACCEPT_LOCK", function(self, _, from)
+PowaComms:AddHandler("ACCEPT_LOCK", function(self, null, from)
 	-- Verify lock ownership.
 	if(not self.SenderLock or self.SenderLock ~= from) then return; end
 	-- Start transmitting data.
@@ -268,7 +268,7 @@ MULTIPART_SUCCESS
 Called when the receiver has told us that all segments have been received, closes our sender lock.
 ------------------------------------------------------------------------------------------------------------------------
 --]]
-PowaComms:AddHandler("MULTIPART_SUCCESS", function(self, _, from)
+PowaComms:AddHandler("MULTIPART_SUCCESS", function(self, null, from)
 	-- Verify lock ownership.
 	if(not self.SenderLock or self.SenderLock ~= from) then return; end
 	self:ResetSenderLock();
@@ -280,7 +280,7 @@ REJECT_LOCK
 Called if the receiver is busy and cannot service our request. Resets our lock.
 ------------------------------------------------------------------------------------------------------------------------
 --]]
-PowaComms:AddHandler("REJECT_LOCK", function(self, _, from)
+PowaComms:AddHandler("REJECT_LOCK", function(self, null, from)
 	-- Verify lock ownership.
 	if(not self.SenderLock or self.SenderLock ~= from) then return; end
 	-- Close any locks we had with this user.
@@ -293,7 +293,7 @@ TIMEOUT_LOCK
 Called if the receiver or us had a transmission fault which left us with an open lock. Will reset our sender lock.
 ------------------------------------------------------------------------------------------------------------------------
 --]]
-PowaComms:AddHandler("TIMEOUT_LOCK", function(self, _, from)
+PowaComms:AddHandler("TIMEOUT_LOCK", function(self, null, from)
 	-- Verify lock ownership.
 	if(not self.SenderLock or self.SenderLock ~= from) then return; end
 	-- Close any locks we had with this user.
@@ -314,7 +314,7 @@ Sends our PowerAuras version to the requesting party. Mostly just here for testi
 VERSION_RESPONSE header.
 ------------------------------------------------------------------------------------------------------------------------
 --]]
-PowaComms:AddHandler("VERSION_REQUEST", function(self, _, from)
+PowaComms:AddHandler("VERSION_REQUEST", function(self, null, from)
 	-- Give them our version.
 	self:SendAddonMessage("VERSION_RESPONSE", PowaAuras.Version, from);
 end);

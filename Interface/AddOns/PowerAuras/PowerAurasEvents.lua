@@ -24,9 +24,9 @@ function PowaAuras:ADDON_LOADED(addon)
 		self.MaxTextures = PowaAuras.TextureCount;
 	end
 	
-	local _, _, major, minor = string.find(self.Version, self.VersionPattern);
+	local null, null, major, minor = string.find(self.Version, self.VersionPattern);
 	self.VersionParts = {Major=tonumber(major), Minor=tonumber(minor), Build=0, Revision=""};
-	 _, _, major, minor = string.find(PowaMisc.Version, self.VersionPattern);
+	 null, null, major, minor = string.find(PowaMisc.Version, self.VersionPattern);
 	self.PreviousVersionParts = {Major=tonumber(major), Minor=tonumber(minor), Build=0, Revision=""};
 	
 	self.VersionUpgraded = self:VersionGreater(self.VersionParts, self.PreviousVersionParts);
@@ -40,7 +40,7 @@ function PowaAuras:ADDON_LOADED(addon)
 		PowaState = {};
 	end
 	
-	_, self.playerclass = UnitClass("player");
+	null, self.playerclass = UnitClass("player");
 
 	self:LoadAuras();
 
@@ -92,15 +92,15 @@ function PowaAuras:Setup()
 	self.PvPFlagSet = UnitIsPVP("player");
 	self:DetermineRole("player");
 
-	self.WeAreInRaid = (GetNumRaidMembers() > 0);
-	self.WeAreInParty = (GetNumPartyMembers() > 0);
+	self.WeAreInRaid = IsInRaid();
+	self.WeAreInParty = IsInGroup();
 
 	self.WeAreMounted = (IsMounted() == 1 and true or self:IsDruidTravelForm());
 	self.WeAreInVehicle = (UnitInVehicle("player")~=nil);
 	
 	self.Comms:Register();
 
-	self.ActiveTalentGroup = GetActiveTalentGroup();
+	self.ActiveTalentGroup = GetActiveSpecGroup();
 	
 	self.Instance = self:GetInstanceType();
 	
@@ -116,7 +116,7 @@ function PowaAuras:Setup()
 end
 
 function PowaAuras:GetInstanceType()
-	local _, instanceType = IsInInstance();
+	local null, instanceType = IsInInstance();
 	if (instanceType=="pvp") then
 		instanceType = "Bg";
 	elseif (instanceType=="arena") then
@@ -153,7 +153,7 @@ end
 
 		
 function PowaAuras:ACTIVE_TALENT_GROUP_CHANGED(...)
-	self.ActiveTalentGroup = GetActiveTalentGroup();
+	self.ActiveTalentGroup = GetActiveSpecGroup();
 	if (self.ModTest == false) then
 		self.PendingRescan = GetTime() + 1;
 	end
@@ -171,22 +171,7 @@ function PowaAuras:PLAYER_UPDATE_RESTING(...)
 	end
 end
 
-function PowaAuras:PARTY_MEMBERS_CHANGED(...)	  
-	if (self.ModTest == false) then
-		self.DoCheck.PartyBuffs = true;
-		self.DoCheck.GroupOrSelfBuffs = true;
-		self.DoCheck.PartyHealth = true;
-		self.DoCheck.PartyMana = true;
-		self.DoCheck.UnitMatch = true;
-		self.DoCheck.CheckIt = true;
-	end
-	local partyCount = GetNumPartyMembers();
-	self.WeAreInParty = (partyCount > 0);
-	if (GetNumRaidMembers()>0) then return; end
-	self:FillGroup("party", partyCount);
-end
-		
-function PowaAuras:RAID_ROSTER_UPDATE(...)
+function PowaAuras:GROUP_ROSTER_UPDATE(...)	  
 	if (self.ModTest == false) then
 		self.DoCheck.RaidBuffs = true;
 		self.DoCheck.GroupOrSelfBuffs = true;
@@ -195,11 +180,27 @@ function PowaAuras:RAID_ROSTER_UPDATE(...)
 		self.DoCheck.UnitMatch = true;
 		self.DoCheck.CheckIt = true;
 	end
-	local raidCount = GetNumRaidMembers();
-	self.WeAreInRaid = (raidCount > 0);
+	local raidCount = GetNumGroupMembers();
+	if (not IsInRaid()) then
+		raidCount = 0;
+	end
+	self.WeAreInRaid = IsInRaid();
 	self:FillGroup("raid", raidCount);
-end
 
+	if (self.ModTest == false) then
+		self.DoCheck.PartyBuffs = true;
+		self.DoCheck.GroupOrSelfBuffs = true;
+		self.DoCheck.PartyHealth = true;
+		self.DoCheck.PartyMana = true;
+		self.DoCheck.UnitMatch = true;
+		self.DoCheck.CheckIt = true;
+	end
+	local partyCount = GetNumSubgroupMembers();
+	self.WeAreInParty = (partyCount > 0);
+	if (GetNumGroupMembers()>0) then return; end
+	self:FillGroup("party", partyCount);
+end
+		
 function PowaAuras:FillGroup(group, count)
 	wipe(self.GroupUnits);
 	wipe(self.GroupNames);
@@ -329,7 +330,7 @@ function PowaAuras:UNIT_SPELLCAST_SUCCEEDED(...)
 				self.DoCheck.Power = true;
 				self.DoCheck.CheckIt = true;
 			end			
-			for _, auraId in pairs(self.AurasByType.SpellCooldowns) do	
+			for null, auraId in pairs(self.AurasByType.SpellCooldowns) do	
 				--self:ShowText("Pending set for SpellCooldowns ", auraId);
 				self.DoCheck.SpellCooldowns = true;
 				self.DoCheck.CheckIt = true;
@@ -582,7 +583,7 @@ function PowaAuras:PLAYER_TOTEM_UPDATE(...)
 			self:DisplayText("PLAYER_TOTEM_UPDATE slot=", slot, " class=", self.playerclass);
 		end
 		if (self.playerclass=="SHAMAN" or self.playerclass=="DRUID") then
-			self.DoCheck.Totems = true;
+			self.DoCheck.All = true;
 		elseif (self.playerclass=="DEATHKNIGHT" and not self.MasterOfGhouls) then
 			if (self.DebugEvents) then
 				self:DisplayText("Ghoul (temp version)");
@@ -643,13 +644,13 @@ function PowaAuras:FlagsChanged(unit)
 			self.DoCheck.TargetPvP = true;
 		end
 
-		for i=1,GetNumPartyMembers() do
+		for i=1,GetNumSubgroupMembers() do
 			if (unit == "party"..i) then
 				self.DoCheck.PartyPvP = true;
 				break;
 			end
 		end
-		for i=1, GetNumRaidMembers() do
+		for i=1, GetNumGroupMembers() do
 			if (unit == "raid"..i) then
 				self.DoCheck.RaidPvP = true;
 				break;
@@ -674,7 +675,7 @@ function PowaAuras:COMBAT_LOG_EVENT_UNFILTERED(...)
 	local timestamp, event, casterHidden, 
 		sourceGUID, sourceName, sourceFlags, sourceFlags2,
 		destGUID, destName, destFlags, destFlags2, 
-		spellId, spellName, _, spellType = ...;
+		spellId, spellName, null, spellType = ...;
 	if (not spellName) then return end
 	--self:ShowText("CLEU: ", event, " by me=", sourceGUID==UnitGUID("player"), " on me=", destGUID==UnitGUID("player"), " ", spellName);
 	--self:ShowText("Player=", UnitGUID("player"), " sourceGUID=", sourceGUID, " destGUID=", destGUID);
@@ -813,7 +814,7 @@ function PowaAuras:UNIT_INVENTORY_CHANGED(...)
 			end
 			self.DoCheck.Items = true;
 			self.DoCheck.Slots = true;
-			for _, auraId in pairs(self.AurasByType.Enchants) do
+			for null, auraId in pairs(self.AurasByType.Enchants) do
 				if (self.DebugEvents) then
 					self:DisplayText("Pending set for Enchants ", auraId);
 				end

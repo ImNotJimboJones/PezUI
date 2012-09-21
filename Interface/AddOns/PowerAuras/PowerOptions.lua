@@ -499,13 +499,13 @@ function PowaAuras:ImportAura(aurastring, auraId, offset)
 	--self:Message("hasTypePrefix=", hasTypePrefix);
 
 	if (hasTypePrefix) then
-		for _, val in ipairs(settings) do
+		for null, val in ipairs(settings) do
 			local key, var = strsplit(":", val);
 			--self:Message("key ",key,"=", var);
 			local varType = string.sub(var,1,2);
 			var = string.sub(var,3);
 			if (key=="Version") then
-				local _, _, major, minor = string.find(var, self.VersionPattern);
+				local null, null, major, minor = string.find(var, self.VersionPattern);
 				if (self:VersionGreater({Major=tonumber(major), Minor=tonumber(minor), Build=0, Revision=""},
 										{Major=3, Minor=0, Build=0, Revision="J"})) then
 					oldSpellAlertLogic = false;
@@ -528,7 +528,7 @@ function PowaAuras:ImportAura(aurastring, auraId, offset)
 			end
 		end
 	else
-		for _, val in ipairs(settings) do
+		for null, val in ipairs(settings) do
 			local key, var = strsplit(":", val);
 			oldSpellAlertLogic = false;
 			--self:Message("val=", val);
@@ -689,7 +689,7 @@ function PowaAuras:CreateNewAuraSetFromImport(importString)
 			setName = v;		
 		else
 			if (not offset) then
-				local _, _, oldAuraId = string.find(k, "(%d+)");
+				local null, null, oldAuraId = string.find(k, "(%d+)");
 				--self:ShowText("oldAuraId=", oldAuraId);
 				if (self:IsNumeric(oldAuraId)) then
 					offset = min - oldAuraId;
@@ -951,7 +951,7 @@ function PowaAuras:ExportDialogInit(self)
 		StaticPopupSpecial_Hide(self);
 	end
 	-- Handles rejection well.
-	PowaComms:AddHandler("EXPORT_REJECT", function(_, data, from)
+	PowaComms:AddHandler("EXPORT_REJECT", function(null, data, from)
 		-- Were we sending to this person?
 		if(PowaAuraExportDialog.sendTo == from) then
 			if(PowaMisc.debug) then PowaAuras:ShowText("Comms: EXPORT_REJECT from " .. from); end
@@ -962,7 +962,7 @@ function PowaAuras:ExportDialogInit(self)
 	end);
 
 	-- Is optimistic about this connection.
-	PowaComms:AddHandler("EXPORT_ACCEPT", function(_, _, from)
+	PowaComms:AddHandler("EXPORT_ACCEPT", function(null, null, from)
 		-- Were we sending to this person?
 		if(PowaAuraExportDialog.sendTo == from) then
 			if(PowaMisc.debug) then PowaAuras:ShowText("Comms: EXPORT_ACCEPT from " .. from); end
@@ -1123,7 +1123,7 @@ function PowaAuras:PlayerImportDialogInit(self)
 		StaticPopupSpecial_Hide(self);
 	end
 	-- This bit mostly consists of handlers.
-	PowaComms:AddHandler("EXPORT_REQUEST", function(_, data, from)
+	PowaComms:AddHandler("EXPORT_REQUEST", function(null, data, from)
 		-- If we're busy, reject. If we're in combat, reject. If we're autoblocking, reject.
 		if(PowaAuraPlayerImportDialog.receiveFrom) then
 			if(PowaMisc.debug) then PowaAuras:ShowText("Comms: Rejected EXPORT_REQUEST - Busy."); end
@@ -1149,7 +1149,7 @@ function PowaAuras:PlayerImportDialogInit(self)
 		-- Show.
 		StaticPopupSpecial_Show(PowaAuraPlayerImportDialog);
 	end);
-	PowaComms:AddHandler("EXPORT_DATA", function(_, data, from)
+	PowaComms:AddHandler("EXPORT_DATA", function(null, data, from)
 		-- Were we receiving from this person?
 		if(PowaAuraPlayerImportDialog.receiveFrom == from) then
 			if(PowaMisc.debug) then PowaAuras:ShowText("Comms: Receiving EXPORT_DATA"); end
@@ -2515,7 +2515,7 @@ function PowaAuras.DropDownMenu_Initialize(owner)
 		UIDropDownMenu_SetSelectedValue(PowaDropDownBuffType, aura.bufftype);
 	elseif (owner:GetName() == "PowaBuffTimerRelativeButton" or owner:GetName() == "PowaBuffTimerRelative") then
 		info = {func = PowaAuras.DropDownMenu_OnClickTimerRelative, owner = owner};
-		for _,v in pairs({"NONE", "TOPLEFT", "TOP", "TOPRIGHT", "RIGHT", "BOTTOMRIGHT", "BOTTOM", "BOTTOMLEFT", "LEFT", "CENTER"}) do
+		for null,v in pairs({"NONE", "TOPLEFT", "TOP", "TOPRIGHT", "RIGHT", "BOTTOMRIGHT", "BOTTOM", "BOTTOMLEFT", "LEFT", "CENTER"}) do
 			info.text = PowaAuras.Text.Relative[v];
 			info.value = v;
 			UIDropDownMenu_AddButton(info);
@@ -2525,7 +2525,7 @@ function PowaAuras.DropDownMenu_Initialize(owner)
 	elseif (owner:GetName() == "PowaBuffStacksRelativeButton" or owner:GetName() == "PowaBuffStacksRelative") then
 
 		info = {func = PowaAuras.DropDownMenu_OnClickStacksRelative, owner = owner};
-		for _,v in pairs({"NONE", "TOPLEFT", "TOP", "TOPRIGHT", "RIGHT", "BOTTOMRIGHT", "BOTTOM", "BOTTOMLEFT", "LEFT", "TOPLEFT", "CENTER"}) do
+		for null,v in pairs({"NONE", "TOPLEFT", "TOP", "TOPRIGHT", "RIGHT", "BOTTOMRIGHT", "BOTTOM", "BOTTOMLEFT", "LEFT", "TOPLEFT", "CENTER"}) do
 			info.text = PowaAuras.Text.Relative[v];
 			info.value = v;
 			UIDropDownMenu_AddButton(info);
@@ -2541,7 +2541,7 @@ function PowaAuras:FillDropdownSorted(t, info)
 	table.sort(names);
 	--for k,v in ipairs(names) do PowaAuras:Message(k, " ", v, " ", auraReverse[v]) end
 
-	for _,name in pairs(names) do
+	for null,name in pairs(names) do
 		info.text = name;
 		info.value = values[name];
 		UIDropDownMenu_AddButton(info);
@@ -3197,11 +3197,11 @@ function PowaAuras:ShowAurasOnUnit(display, auraType)
 		unit = "target";
 	end
 	PowaAuras:Message(display.." on "..unit);
-	local Name, _, _, Applications, Type, Duration, Expires, Source, Stealable, shouldConsolidate, spellId = UnitAura(unit, index, auraType);
+	local Name, null, null, Applications, Type, Duration, Expires, Source, Stealable, shouldConsolidate, spellId = UnitAura(unit, index, auraType);
 	while (Name~=nil) do
 		PowaAuras:Message(index..": "..Name.." (SpellID="..spellId..")");
 		index = index + 1;
-		Name, _, _, Applications, Type, Duration, Expires, Source, Stealable, shouldConsolidate, spellId = UnitAura(unit, index, auraType);
+		Name, null, null, Applications, Type, Duration, Expires, Source, Stealable, shouldConsolidate, spellId = UnitAura(unit, index, auraType);
 	end
 end
 
@@ -3592,7 +3592,7 @@ function PowaAuras:RedisplayAura(auraId) ---Re-show aura after options changed
 end
 
 function PowaAuras:ResetSlotsToEmpty()
-	for _, child in ipairs({ PowaEquipmentSlotsFrame:GetChildren() }) do
+	for null, child in ipairs({ PowaEquipmentSlotsFrame:GetChildren() }) do
 		--self:Message(child:GetName(), " ", child:GetObjectType());
 		if (child:IsObjectType("Button")) then
 			local slotName = string.gsub(child:GetName(), "Powa", "");
@@ -3659,7 +3659,7 @@ function PowaAuras:EquipmentSlot_OnClick(slotButton)
 	end
 	aura.buffname = "";
 	local sep = "";
-	for _, child in ipairs({ PowaEquipmentSlotsFrame:GetChildren() }) do
+	for null, child in ipairs({ PowaEquipmentSlotsFrame:GetChildren() }) do
 		--self:Message(child:GetName(), " ", child:GetObjectType());
 		if (child:IsObjectType("Button")) then
 			local slotName = string.gsub(child:GetName(), "Powa", "");

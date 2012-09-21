@@ -1,5 +1,4 @@
 local strsplit = strsplit;
-local UnitHealthMax, UnitPowerMax = PowaAuras.UnsafeFunctions.UnitHealthMax, PowaAuras.UnsafeFunctions.UnitPowerMax;
 --=========cPowaAura=========
 --   cPowaAura is the base class and is not instanced directly, the other classes inherit properties and methods from it
 --===========================
@@ -427,7 +426,7 @@ function cPowaAura:IsPlayerAura()
 		and (not self.targetfriend)
 		and (not self.party)
 		and (not self.raid) 
-		and (not (self.groupOrSelf and (GetNumPartyMembers()>0 or GetNumRaidMembers()>0))) 
+		and (not (self.groupOrSelf and (GetNumGroupMembers()>0))) 
 		and (not self.focus)
 		and (not self.optunitn);
 end
@@ -532,7 +531,7 @@ function cPowaAura:CheckState(giveReason)
 	end
 	
 	--- party
-	if (self.party and not ((GetNumPartyMembers() > 0) or (GetNumRaidMembers() > 0))) then --- partycheck yes, but not in party
+	if (self.party and not ((GetNumGroupMembers() > 0))) then --- partycheck yes, but not in party
 		if (not giveReason) then return false; end
 		return false, PowaAuras.Text.nomReasonNotInParty;
 	end
@@ -544,8 +543,8 @@ function cPowaAura:CheckState(giveReason)
 	end
         
     --- unit
-	if (self.optunitn and not ((GetNumPartyMembers() > 0 and UnitInParty(self.unitn))
-							or (GetNumRaidMembers() > 0 and UnitInRaid(self.unitn))
+	if (self.optunitn and not ((GetNumSubgroupMembers() > 0 and UnitInParty(self.unitn))
+							or (IsInRaid() and UnitInRaid(self.unitn))
 							or UnitIsUnit("pet", self.unitn)
 							or UnitIsUnit("player", self.unitn))) then --- Unitn yes, but not in party/raid or with pet
 		if (not giveReason) then return false; end
@@ -781,7 +780,7 @@ function cPowaAura:SetTexture(texture)
 end
 
 function cPowaAura:GetSpellFromMatch(spellMatch)
-	local _, _,spellId = string.find(spellMatch, "%[(%d+)%]");
+	local null, null,spellId = string.find(spellMatch, "%[(%d+)%]");
 	if (spellId) then
 		spellId = tonumber(spellId);
 		local spellName, rank, spellIcon = GetSpellInfo(spellId);
@@ -794,7 +793,7 @@ function cPowaAura:GetSpellFromMatch(spellMatch)
 end
 
 function cPowaAura:SetStacks(text)
-	local _, _,curStacksLower, curOperator, curStacks = string.find(text, "(%d*)(%D+)(%d*)")
+	local null, null,curStacksLower, curOperator, curStacks = string.find(text, "(%d*)(%D+)(%d*)")
 
 	if (curStacks == nil or curStacks == "") then curStacks = "0"; end
 	local stacks = tonumber(curStacks);
@@ -849,7 +848,7 @@ function cPowaAura:MatchSpell(spellName, spellTexture, spellId, matchString)
 			local spellIdMatch;
 			local matchName;
 			if string.find(pword, "_") then
-				 _, _,textToSearch = string.find(spellTexture, "([%w_]*)$")
+				 null, null,textToSearch = string.find(spellTexture, "([%w_]*)$")
 				 matchName = pword;
 			else
 				textToSearch = spellName;
@@ -1004,8 +1003,11 @@ function cPowaAura:CheckAllUnits(giveReason)
 	if (self.Debug) then
 		PowaAuras:DisplayText("on unit "..unit..postfix);
 	end
-	local numpm = GetNumPartyMembers();
-	local numrm = GetNumRaidMembers();
+	local numpm = GetNumSubgroupMembers();
+	local numrm = GetNumGroupMembers();
+	if (not IsInRaid()) then
+		numrm = 0;
+	end
 	
 	--PowaAuras:UnitTestDebug("CheckAllUnits on unit "..unit.."-"..postfix," numpm=",numpm," numrm=",numrm);
 	local result;
@@ -1259,9 +1261,9 @@ function cPowaBuffBase:IsPresent(unit, s, giveReason, textToCheck)
 	local auraName, auraTexture, count, expirationTime, caster, auraId;
 	if (self.exact) then
 		-- TODO - exact check should be moved to CheckAllAuraSlots()
-		auraName, _, auraTexture, count, _, _, expirationTime, caster, _, _, auraId = UnitAura(unit, textToCheck, nil, self.buffAuraType);
+		auraName, null, auraTexture, count, null, null, expirationTime, caster, null, null, auraId = UnitAura(unit, textToCheck, nil, self.buffAuraType);
 	else
-		auraName, _, auraTexture, count, _, _, expirationTime, caster, _, _, auraId = UnitAura(unit, s, self.buffAuraType);
+		auraName, null, auraTexture, count, null, null, expirationTime, caster, null, null, auraId = UnitAura(unit, s, self.buffAuraType);
 	end
 
 	if (auraName == nil) then return nil; end -- no more buffs
@@ -1556,8 +1558,11 @@ function cPowaBuffBase:CheckIfShouldShow(giveReason)
 		--PowaAuras:UnitTestDebug("on unit "..self.unitn);
 		return self:CheckAllAuraSlots(self.unitn, giveReason);
 	end		
-	local numpm = GetNumPartyMembers();
-	local numrm = GetNumRaidMembers();
+	local numpm = GetNumSubgroupMembers();
+	local numrm = GetNumGroupMembers();
+	if (not IsInRaid()) then
+		numrm = 0;
+	end
 	--- raid buff
 	if self.raid then
 		if (self.Debug) then
@@ -1689,7 +1694,7 @@ function cPowaTypeDebuff:IsPresent(target, z)
 	if (self.mine) then
 		removeable = 1;
 	end
-	local name, _, texture, count, typeDebuff, _, expirationTime = UnitDebuff(target, z, removeable);
+	local name, null, texture, count, typeDebuff, null, expirationTime = UnitDebuff(target, z, removeable);
 	if (not name) then
 		return nil;
 	end
@@ -1778,7 +1783,7 @@ function cPowaTypeBuff:IsPresent(target, z)
 	if (self.mine) then
 		removeable = 1;
 	end
-	local name, _, texture, count, typeBuff, _, expirationTime = UnitBuff(target, z, removeable);
+	local name, null, texture, count, typeBuff, null, expirationTime = UnitBuff(target, z, removeable);
 	if (not name) then
 		return nil;
 	end
@@ -1884,7 +1889,10 @@ function cPowaSpecialSpellBase:CheckIfShouldShow(giveReason)
 	end
 
 	--- Scan all raid targets
-	local numrm = GetNumRaidMembers();
+	local numrm = GetNumGroupMembers();
+	if (not IsInRaid()) then
+		numrm = 0;
+	end
 	if numrm > 0 then
 		for i=1, numrm do
 			if (self:CheckUnit("raid"..i.."target", "raid"..i)) then
@@ -1899,7 +1907,7 @@ function cPowaSpecialSpellBase:CheckIfShouldShow(giveReason)
 		end
 
 	    -- Scan party targets
-		local numpm = GetNumPartyMembers();
+		local numpm = GetNumSubgroupMembers();
 		if numpm > 0 then
 			for i=1, numpm do
 				if (self:CheckUnit("party"..i.."target", "party"..i)) then
@@ -1953,7 +1961,7 @@ function cPowaStealableSpell:CheckUnit(unit, targetOf)
 		end	
 		for i = 1, 40 do
 		
-			local auraName, _, auraTexture, count, typeDebuff, _, expirationTime, _, isStealable, _, auraId = UnitAura(unit, i);
+			local auraName, null, auraTexture, count, typeDebuff, null, expirationTime, null, isStealable, null, auraId = UnitAura(unit, i);
 
 			if (self.Debug) then
 				PowaAuras:Message("Slot=", i, " auraName=", auraName, " (", auraId, ")" );
@@ -2016,7 +2024,7 @@ function cPowaPurgeableSpell:CheckUnit(unit, targetOf)
 		end	
 		for i = 1, 40 do
 		
-			local auraName, _, auraTexture, count, typeDebuff, _, expirationTime, _, _, _, auraId = UnitAura(unit, i, "HELPFUL");
+			local auraName, null, auraTexture, count, typeDebuff, null, expirationTime, null, null, null, auraId = UnitAura(unit, i, "HELPFUL");
 			
 			if (self.Debug) then
 				PowaAuras:Message("Slot=", i, " auraName=", auraName, " typeDebuff=", typeDebuff, " (", auraId, ")" );
@@ -2302,7 +2310,7 @@ function cPowaActionReady:CheckIfShouldShow(giveReason)
 		return false, PowaAuras.Text.nomReasonActionNotFound; 
 	end
 	
-	local cdstart, cdduration, enabled = GetActionCooldown(self.slot);
+	local cdstart, cdduration, enabled, charges, maxCharges = GetActionCooldown(self.slot);
 	-- PowaAuras:ShowText("cdstart= ",cdstart," duration= ",cdduration," enabled= ",enabled);
 	if (not enabled) then
 		if (self.Timer) then
@@ -2340,7 +2348,7 @@ function cPowaActionReady:CheckIfShouldShow(giveReason)
 		return -1, PowaAuras:InsertText(PowaAuras.Text.nomReasonGlobalCooldown, spellName);
 	end
 	
-	if (cdstart == 0 or self.CooldownOver) then
+	if (cdstart == 0 or self.CooldownOver or charges > 0) then
 		-- Aight, good to go.
 		if (self.Debug) then
 			-- PowaAuras:Message("SHOW!!"); --OK
@@ -2421,7 +2429,7 @@ function cPowaSpellCooldown:CheckIfShouldShow(giveReason)
 		end
 		if (self:IconIsRequired()) then
 			if (not spellIcon) then
-				_, _, spellIcon = GetSpellInfo(spellName);
+				null, null, spellIcon = GetSpellInfo(spellName);
 			end
 			self:SetIcon(spellIcon);
 		end
@@ -2737,8 +2745,11 @@ end
 function cPowaPowerType:IsCorrectPowerType(unit)
 	-- Check for correct secondary resource
 	if (self.PowerType==SPELL_POWER_HOLY_POWER  and PowaAuras.playerclass == "PALADIN")
+	or (self.PowerType==SPELL_POWER_ALTERNATE_POWER) 
 	or (self.PowerType==SPELL_POWER_RUNIC_POWER and PowaAuras.playerclass == "DEATHKNIGHT") 
-	or (self.PowerType==SPELL_POWER_SOUL_SHARDS and PowaAuras.playerclass == "WARLOCK") 
+	or (self.PowerType==SPELL_POWER_LIGHT_FORCE and PowaAuras.playerclass == "MONK") 
+	or (self.PowerType==SPELL_POWER_SHADOW_ORBS and PowaAuras.playerclass == "PRIEST") 
+	or ((self.PowerType==SPELL_POWER_SOUL_SHARDS or self.PowerType==SPELL_POWER_BURNING_EMBERS or self.PowerType==SPELL_POWER_DEMONIC_FURY) and PowaAuras.playerclass == "WARLOCK") 
 	or ((self.PowerType==SPELL_POWER_LUNAR_ECLIPSE or self.PowerType==SPELL_POWER_SOLAR_ECLIPSE)     and PowaAuras.playerclass == "DRUID") then return true; end
 	
 	local unitPowerType = UnitPowerType(unit);
@@ -2959,9 +2970,9 @@ function cPowaSpellAlert:CheckSpellName(unit, spellname, spellicon, endtime, spe
 		end
 		if (spellicon==nil) then
 			if (spellId~=nil) then
-				_, _, spellicon = GetSpellInfo(spellId);				
+				null, null, spellicon = GetSpellInfo(spellId);				
 			else
-				_, _, spellicon = GetSpellInfo(spellname);
+				null, null, spellicon = GetSpellInfo(spellname);
 			end
 		end
 		self:SetIcon(spellicon);
@@ -3009,9 +3020,9 @@ function cPowaSpellAlert:CheckUnit(unit)
 	if (PowaAuras.ExtraUnitEvent[unit]) then
 		spellname = PowaAuras.ExtraUnitEvent[unit];
 	else
-		spellname, _, _, spellicon, _, endtime, _, _, notInterruptible = UnitCastingInfo(unit);
+		spellname, null, null, spellicon, null, endtime, null, null, notInterruptible = UnitCastingInfo(unit);
 		if not spellname then
-			spellname, _, _, spellicon, _, endtime, _, notInterruptible = UnitChannelInfo(unit);
+			spellname, null, null, spellicon, null, endtime, null, notInterruptible = UnitChannelInfo(unit);
 		end
 	end
 
@@ -3216,7 +3227,7 @@ function cPowaTotems:CheckIfShouldShow(giveReason)
 
 				if (self:IconIsRequired()) then
 					--PowaAuras:Message("  Icon Required");
-					local _, _, spellIcon = GetSpellInfo(totemName);
+					local null, null, spellIcon = GetSpellInfo(totemName);
 					self:SetIcon(spellIcon);
 				end
 				if (self.Timer) then
@@ -3236,7 +3247,7 @@ function cPowaTotems:CheckIfShouldShow(giveReason)
 				local haveTotem, totemName, startTime, duration = GetTotemInfo(slot);
 				if (self:MatchText(totemName, pword)) then
 					if (self:IconIsRequired()) then
-						local _, _, spellIcon = GetSpellInfo(totemName);
+						local null, null, spellIcon = GetSpellInfo(totemName);
 						self:SetIcon(spellIcon);
 					end
 					if (self.Timer) then
@@ -3267,9 +3278,7 @@ cPowaPet.TooltipOptions = {r=0.4, g=1.0, b=0.4};
 function cPowaPet:Init()
 	self:SetFixedIcon();
 	if (PowaAuras.playerclass == "DEATHKNIGHT") then
-		local name, iconPath, _, _, currentRank = GetTalentInfo(3, 20); -- Master of Ghouls
-		--PowaAuras:Message(name, "? currentRank=",currentRank);
-		PowaAuras.MasterOfGhouls = (currentRank>0);
+		PowaAuras.MasterOfGhouls = (GetSpecialization() == 3);
 		self.CanHaveTimerOnInverse=true;
 		if (not PowaAuras.MasterOfGhouls) then
 			self.CanHaveTimer=true;
@@ -3746,7 +3755,7 @@ function cPowaItems:CheckIfShouldShow(giveReason)
 		pword = self:Trim(pword);
 		if (string.len(pword)>0) then
 			local item;
-			local _, _,itemId = string.find(pword, "%[(%d+)%]")
+			local null, null,itemId = string.find(pword, "%[(%d+)%]")
 			if (itemId) then		
 				item = tonumber(itemId);
 			else
@@ -3755,7 +3764,7 @@ function cPowaItems:CheckIfShouldShow(giveReason)
 			if (self.Debug) then
 				PowaAuras:Message("Looking for item=",item); --OK
 			end
-			local itemName, itemLink, _, _, _, _, _, _, _, itemTexture = GetItemInfo(item);
+			local itemName, itemLink, null, null, null, null, null, null, null, itemTexture = GetItemInfo(item);
 			if (self.Debug) then
 				PowaAuras:Message("itemName=",itemName," itemStackCount=",itemStackCount," itemTexture=",itemTexture); --OK
 			end
@@ -3807,7 +3816,7 @@ function cPowaItems:CheckIfShouldShow(giveReason)
 					return false, PowaAuras:InsertText(PowaAuras.Text.nomReasonItemNotOnPlayer, itemName);
 				end
 			
-				local _, _, itemId = string.find(itemLink,"item:(%d+):(%d+):(%d+):(%d+)");
+				local null, null, itemId = string.find(itemLink,"item:(%d+):(%d+):(%d+):(%d+)");
 				if (self.Debug) then
 					PowaAuras:Message("itemLink= ",itemLink," itemName= ",itemName," itemId= ",itemId); --OK
 				end
@@ -3891,7 +3900,7 @@ function cPowaTracking:CheckIfShouldShow(giveReason)
 	local name, texture, active;
 	for i=1,count do
 		if (active) then
-			_, texture, _ = GetTrackingInfo(i);
+			null, texture, _ = GetTrackingInfo(i);
 		else
 			name, texture, active = GetTrackingInfo(i);
 		end
@@ -4031,7 +4040,7 @@ function cPowaPetStance:CheckIfShouldShow(giveReason)
 	-- Check all indexes on the pet action bar, you can move them around so...
 	for i=1, NUM_PET_ACTION_SLOTS do
 		-- Check the name and token state.
-		local name, _, _, isToken, isActive = GetPetActionInfo(i);
+		local name, null, null, isToken, isActive = GetPetActionInfo(i);
 		if(isToken and isActive) then
 			-- Check token.
 			if(name == "PET_MODE_ASSIST") then

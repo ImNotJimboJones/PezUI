@@ -42,7 +42,7 @@ function PowaAuras:Dump_Safe()
 	-- CurrentMapContinent
 	PowaState["CurrentMapContinent"] = GetCurrentMapContinent();
 	--ActiveTalentGroup
-	PowaState["ActiveTalentGroup"] = GetActiveTalentGroup()
+	PowaState["ActiveTalentGroup"] = GetActiveSpecGroup()
 	-- IsInInstance
 	PowaState["IsInInstance"] = IsInInstance();
 	-- IsMounted
@@ -171,7 +171,7 @@ function PowaAuras:Dump_Safe()
 	PowaState.SpellInfo = {}
 	for id, aura in pairs(PowaAuras.Auras) do
 		for pword in string.gmatch(aura.buffname, "[^/]+") do
-			local _, _,spellId = string.find(pword, "%[(%d+)%]")
+			local null, null,spellId = string.find(pword, "%[(%d+)%]")
 			if (spellId) then		
 				--self:DisplayText(id, " ", aura);	
 				--self:DisplayText(" ", pword, "  ", spellId);	
@@ -256,12 +256,14 @@ function PowaAuras:Dump_Safe()
 	end
 	
 	--Groups
-	PowaState["RaidLeader"] = IsRaidLeader();
-	PowaState["PartyLeader"] = IsPartyLeader();
-	PowaState["PartyLeaderIndex"] = GetPartyLeaderIndex();
+	PowaState["RaidLeader"] = UnitIsGroupLeader();
+	PowaState["PartyLeader"] = UnitIsGroupLeader();
 	
-	local numpm = GetNumPartyMembers();
-	local numrm = GetNumRaidMembers();
+	local numpm = GetNumSubgroupMembers();
+	local numrm = GetNumGroupMembers();
+	if (not IsInRaid()) then
+		numrm = 0;
+	end
 	--Raid
 	if (numrm>0) then
 		PowaState.Raid = {Count=numrm};

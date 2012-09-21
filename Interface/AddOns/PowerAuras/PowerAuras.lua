@@ -147,6 +147,7 @@ function PowaAuras:LoadAuras()
 		self.Auras[self.DebugAura].Debug = true;
 	end
 	
+	self:DiscoverLinkedAuras();
 
 	--self:Message("backwards combatiblity");
 	--self.Auras[0] = cPowaAura(0, {off=true});
@@ -154,7 +155,6 @@ function PowaAuras:LoadAuras()
 		self:UpdateOldAuras();
 	end
 	
-	self:DiscoverLinkedAuras();
 	self:CalculateAuraSequence();
 	--self:ShowText(#self.AuraSequence," Auras loaded");
 
@@ -176,8 +176,8 @@ function PowaAuras:CalculateAuraSequence()
 end
 
 function PowaAuras:DiscoverLinkedAuras()
-	for _, aura in pairs(self.Auras) do
-		self:DiscoverLinksForAura(aura, true);
+	for i = 1, #self.AuraSequence do
+		self:DiscoverLinksForAura(self.AuraSequence[i], true);
 	end
 	--for id in pairs(self.UsedInMultis) do
 	--	self:ShowText("UsedInMultis ",id);
@@ -336,13 +336,13 @@ end
 -->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EVENTS
 function PowaAuras:FindAllChildren()
 	--self:ShowText("FindAllChildren");
-	for _, aura in pairs(self.Auras) do
+	for null, aura in pairs(self.Auras) do
 		aura.Children = nil;
 	end
-	for _, aura in pairs(self.Auras) do
+	for null, aura in pairs(self.Auras) do
 		self:FindChildren(aura);
 	end
-	--for _, aura in pairs(self.Auras) do
+	--for null, aura in pairs(self.Auras) do
 	--	if (aura.Children) then
 	--		self:ShowText("Aura "..aura.id.." Children:");
 	--		for childId in pairs(aura.Children) do
@@ -486,7 +486,7 @@ function PowaAuras:CreateEffectLists()
 end
 
 function PowaAuras:InitialiseAllAuras()
-	for _, aura in pairs(self.Auras) do
+	for null, aura in pairs(self.Auras) do
 		aura:Init();
 	end 
 end
@@ -504,7 +504,7 @@ function PowaAuras:MemorizeActions(actionIndex)
 		imin = 1;
 		imax = 120;
 		--- reset all action positions
-		for _, v in pairs(self.AurasByType.Actions) do
+		for null, v in pairs(self.AurasByType.Actions) do
 			self.Auras[v].slot = nil;
 		end
 		
@@ -740,7 +740,7 @@ function PowaAuras:OnUpdate(elapsed)
 		end
 	end	
 
-	for _, aura in pairs(self.SecondaryAuras) do
+	for null, aura in pairs(self.SecondaryAuras) do
 		self:UpdateAura(aura, elapsed);
 	end	
 	

@@ -44,8 +44,8 @@
 		<ButtonText name="$parentText"/>
 		<NormalFont style="GameFontNormalSmall"/>
 		<HighlightFont style="GameFontHighlightSmall"/>
-		<NormalTexture file=""/>
-		<PushedTexture file=""/>
+		<NormalTexture file="Interface\FrameGeneral\UI-Background-Marble"/>
+		<PushedTexture file="Interface\FrameGeneral\UI-Background-Marble"/>
 	    <Layers>
 		  <Layer>
 			<Texture name="$parentGlow" file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD" hidden="true">
@@ -383,7 +383,9 @@
 		        <AbsValue val="14" />
 			  </FontHeight>
 	        </FontString>
-			<FontString name="PowaAuthorText" inherits="GameFontDisable" text="Created by -Sinsthar-        [Ziya / Tiven, on Kirin Tor (FR)]">
+			<!-- Removed author text due to UI changes that made this text appear strangely...sorry! :( -->
+			<!-- It said "Created by -Sinsthar-        [Ziya / Tiven, on Kirin Tor (FR)]" -->
+			<FontString name="PowaAuthorText" inherits="GameFontDisable" text="">
 			  <Size>
 				<AbsDimension x="180" y="30" />
 			  </Size>

@@ -50,7 +50,7 @@ PowaAuras = {
 	DebugCycle = false; 	
 	ResetTargetTimers = false;
 	
-	ActiveTalentGroup = GetActiveTalentGroup();
+	ActiveTalentGroup = GetActiveSpecGroup();
 
 	WeAreInCombat = false;
 	WeAreInRaid = false;
@@ -119,7 +119,6 @@ PowaAuras = {
 		ACTIVE_TALENT_GROUP_CHANGED = true,	
 		CHAT_MSG_ADDON = true,
 		INSPECT_TALENT_READY = true,	
-		PARTY_MEMBERS_CHANGED = true,	
 		PLAYER_ALIVE = true,
 		PLAYER_DEAD = true,	
 		PLAYER_REGEN_DISABLED = true,
@@ -127,12 +126,11 @@ PowaAuras = {
 		PLAYER_TALENT_UPDATE = true,	
 		PLAYER_UNGHOST = true,
 		PLAYER_UPDATE_RESTING = true,	
-		RAID_ROSTER_UPDATE = true,		
+		GROUP_ROSTER_UPDATE = true,		
 		UNIT_ENTERED_VEHICLE = true,
 		UNIT_EXITED_VEHICLE = true,	
 		UNIT_FACTION = true,
 		UNIT_SPELLCAST_SUCCEEDED = true,
-		UPDATE_SHAPESHIFT_FORMS = true,
 		ZONE_CHANGED_NEW_AREA = true,
 	};
 
@@ -651,16 +649,17 @@ PowaAuras:RegisterAuraType('GTFOFriendlyFire');
 
 -- Use these spells to detect GCD, ideally these should be spells classes have from the beginning
 PowaAuras.GCDSpells = {
-		PALADIN = 635,       -- Holy Light
+		PALADIN = 35395,     -- Crusader Strike
 		PRIEST = 585,        -- Smite
 		SHAMAN = 403,        -- Lightning Bolt
-		WARRIOR = 88161,     -- Strike
+		WARRIOR = 34428,     -- Victory Rush
 		DRUID = 5176,        -- Wrath
 		MAGE = 133,          -- Fireball
 		WARLOCK = 686,       -- Shadow Bolt
 		ROGUE = 1752,        -- Sinister Strike
 		HUNTER = 982,        -- Revive Pet
 		DEATHKNIGHT = 45902, -- Blood Strike
+		MONK = 100780,       -- Jab
 	};
 
 -- Invented so we can distinquish them two types
@@ -679,7 +678,13 @@ PowaAuras.PowerRanges = {
 	[SPELL_POWER_SOUL_SHARDS] = 3,
 	[SPELL_POWER_LUNAR_ECLIPSE] = 100,
 	[SPELL_POWER_SOLAR_ECLIPSE] = 100,
-	[SPELL_POWER_HOLY_POWER] = 3,
+	[SPELL_POWER_HOLY_POWER] = 5,
+	[SPELL_POWER_ALTERNATE_POWER] = 100,
+	[SPELL_POWER_DARK_FORCE] = 5,
+	[SPELL_POWER_LIGHT_FORCE] = 5,
+	[SPELL_POWER_SHADOW_ORBS] = 3,
+	[SPELL_POWER_BURNING_EMBERS] = 4,
+	[SPELL_POWER_DEMONIC_FURY] = 1000
 };
 
 PowaAuras.RangeType = {
@@ -694,6 +699,12 @@ PowaAuras.RangeType = {
 	[SPELL_POWER_LUNAR_ECLIPSE] = "%",
 	[SPELL_POWER_SOLAR_ECLIPSE] = "%",
 	[SPELL_POWER_HOLY_POWER] = "",
+	[SPELL_POWER_ALTERNATE_POWER] = "",
+	[SPELL_POWER_DARK_FORCE] = "",
+	[SPELL_POWER_LIGHT_FORCE] = "",
+	[SPELL_POWER_SHADOW_ORBS] = "",
+	[SPELL_POWER_BURNING_EMBERS] = "",
+	[SPELL_POWER_DEMONIC_FURY] = ""
 };
 
 
@@ -709,6 +720,12 @@ PowaAuras.PowerTypeIcon = {
 	[SPELL_POWER_LUNAR_ECLIPSE] = "ability_druid_eclipse",
 	[SPELL_POWER_SOLAR_ECLIPSE] = "ability_druid_eclipseorange",
 	[SPELL_POWER_HOLY_POWER] = "spell_holy_lightsgrace",
+	[SPELL_POWER_ALTERNATE_POWER] = "inv_battery_02",
+	[SPELL_POWER_DARK_FORCE] = "spell_arcane_arcanetorrent",
+	[SPELL_POWER_LIGHT_FORCE] = "class_monk",
+	[SPELL_POWER_SHADOW_ORBS] = "spell_priest_shadoworbs",
+	[SPELL_POWER_BURNING_EMBERS] = "ability_warlock_burningembers",
+	[SPELL_POWER_DEMONIC_FURY] = "ability_warlock_eradication"
 };
 
 
@@ -731,18 +748,16 @@ PowaAuras.DebuffTypeSpellIds={
 	[50434] = PowaAuras.DebuffCatType.Snare,	-- Chillblains - I
 	[50435] = PowaAuras.DebuffCatType.Snare,	-- Chillblains - II
 	[96294] = PowaAuras.DebuffCatType.Root,     -- Chains of Ice (Root effect caused by Chillblains talent, guessed spell ID!)
-	[91797] = PowaAuras.DebuffCatType.Stun,		-- Monstrous Blow (for unholy DK ghouls under Dark Transformation)
-	[91802] = PowaAuras.DebuffCatType.Root,		-- Shambling Rush (for unholy DK ghouls under Dark Transformation)
+	[91797] = PowaAuras.DebuffCatType.Stun,    -- Monstrous Blow (for unholy DK ghouls under Dark Transformation)
+	[91802] = PowaAuras.DebuffCatType.Root,	-- Shambling Rush (for unholy DK ghouls under Dark Transformation)
 	-- Druid
 	[5211]  = PowaAuras.DebuffCatType.Stun,		-- Bash (also Shaman Spirit Wolf ability)
 	[33786] = PowaAuras.DebuffCatType.CC,		-- Cyclone
 	[2637]  = PowaAuras.DebuffCatType.CC,		-- Hibernate (works against Druids in most forms and Shamans using Ghost Wolf)
 	[22570] = PowaAuras.DebuffCatType.Stun,		-- Maim
 	[9005]  = PowaAuras.DebuffCatType.Stun,		-- Pounce
-	[16979] = PowaAuras.DebuffCatType.Root,	    -- Feral Charge Effect Bear. Immobilize.
+	[19679] = PowaAuras.DebuffCatType.Root,	    -- Feral Charge Effect Bear. Immobilize.
 	[49376] = PowaAuras.DebuffCatType.Snare,	-- Feral Charge Effect Cat. Daze.	
-	[45334] = PowaAuras.DebuffCatType.Root,	    -- Feral Charge Effect
-
 	[78675] = PowaAuras.DebuffCatType.Silence,	-- Solar Beam (no duration unless glyphed, but the glyph mods the original spell)
 	[339]   = PowaAuras.DebuffCatType.Root,		-- Entangling Roots
 	[58179] = PowaAuras.DebuffCatType.Snare,	-- Infected Wounds - I
@@ -776,7 +791,7 @@ PowaAuras.DebuffTypeSpellIds={
 	[61685] = PowaAuras.DebuffCatType.Root,	    -- Charge (Various animals)
 	[96201] = PowaAuras.DebuffCatType.Stun,	    -- Web Wrap (Shale Spider)
 	[35346] = PowaAuras.DebuffCatType.Snare,	-- Time Warp (Warp Stalker)
-	[56626] = PowaAuras.DebuffCatType.Stun,	    -- Sting (Wasp)
+	[35346] = PowaAuras.DebuffCatType.Stun,	    -- Sting (Wasp)
 	[52825] = PowaAuras.DebuffCatType.Root,	    -- Swoop (Various)
 	[90337] = PowaAuras.DebuffCatType.CC,	    -- Bad Manner (Monkey)
 	-- Mage
@@ -804,7 +819,7 @@ PowaAuras.DebuffTypeSpellIds={
 	[12486] = PowaAuras.DebuffCatType.Snare,	-- Likely unused, but would presumably be Ice Shards III, 50% snare.	
 	[120]   = PowaAuras.DebuffCatType.Snare,	-- Cone of Cold
 	[116]   = PowaAuras.DebuffCatType.Snare,	-- Frostbolt
-	[44614] = PowaAuras.DebuffCatType.Snare,	-- Frostfire Bolt
+	[47614] = PowaAuras.DebuffCatType.Snare,	-- Frostfire Bolt
 	[31589] = PowaAuras.DebuffCatType.Snare,	-- Slow
 	[84721] = PowaAuras.DebuffCatType.Snare,    -- Frostfire Orb
 	[83046] = PowaAuras.DebuffCatType.Stun,	    -- Improved Polymorph I
@@ -829,8 +844,6 @@ PowaAuras.DebuffTypeSpellIds={
 	-- [64058] = PowaAuras.DebuffCatType.Disarm,	-- Psychic Horror
 	[15407] = PowaAuras.DebuffCatType.Snare,	-- Mind Flay
 	[88625] = PowaAuras.DebuffCatType.CC,	    -- Holy Word: Chastise
-	[87193] = PowaAuras.DebuffCatType.Root,     -- Paralysis I
-	[87194] = PowaAuras.DebuffCatType.Root,     -- Paralysis II
 	-- Rogue
 	[2094]  = PowaAuras.DebuffCatType.CC,		-- Blind
 	[1833]  = PowaAuras.DebuffCatType.Stun,		-- Cheap Shot
@@ -872,7 +885,6 @@ PowaAuras.DebuffTypeSpellIds={
 	[89766] = PowaAuras.DebuffCatType.Stun,	    -- Axe Toss (from a felguard)
 	[93975] = PowaAuras.DebuffCatType.Stun,	    -- Aura of Foreboding I (stun effect)
 	[93974] = PowaAuras.DebuffCatType.Snare,	-- Aura of Foreboding I (root effect)
-	[22703] = PowaAuras.DebuffCatType.Stun,     -- Infernal Awakening
 	[93986] = PowaAuras.DebuffCatType.Stun,	    -- Aura of Foreboding II (stun effect)
 	[93987] = PowaAuras.DebuffCatType.Snare,	-- Aura of Foreboding II (root effect)
 	[63311] = PowaAuras.DebuffCatType.Snare,    -- Shadowsnare
@@ -1036,7 +1048,6 @@ function PowaAuras:CopyTable(t, lookup_table, original)
 			end
 		end
 	end
-
 	return copy
 end
 
@@ -1113,25 +1124,6 @@ function PowaAuras:GetSettingForExport(prefix, k, v, default)
 	end
 	return setting.."; ";
 end
-
---- Wraps an unsafe function that may return <= 0 on the 4.3 client with another function which prevents a 0 from being
--- returned.
-function PowaAuras:WrapUnsafeFunction(func, result)
-	return function(...)
-		local unsafeResult = func(...);
-		if unsafeResult <= 0 then
-			return result;
-		else
-			return unsafeResult;
-		end
-	end 
-end
-
-PowaAuras.UnsafeFunctions = {
-	["UnitLevel"] = PowaAuras:WrapUnsafeFunction(UnitLevel, 1), -- Used by PowerAurasRole for division.
-	["UnitHealthMax"] = PowaAuras:WrapUnsafeFunction(UnitHealthMax, 1),
-	["UnitPowerMax"] = PowaAuras:WrapUnsafeFunction(UnitPowerMax, 1),
-};
 
 -- PowaAura Classes
 -- Compatible with Lua 5.1 (not 5.0).
