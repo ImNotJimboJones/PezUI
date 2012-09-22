@@ -251,6 +251,12 @@ m = {
 		API:AddElement({name = "EncounterJournal", displayName = "Dungeon Journal"}, c)
 	--	API:AddElement({name = "LFGSearchStatus", displayName = "Dungeon/Raid Finder Queue Status"}, c)
 		API:AddElement({name = "DungeonCompletionAlertFrame1", displayName = "Dungeon Completion Alert"}, c)
+		
+		API:AddElement({name = "ScenarioAlertFrame1", displayName = "Scenario Completion Alert 1"}, c)
+		API:AddElement({name = "ScenarioAlertFrame2", displayName = "Scenario Completion Alert 2"}, c)
+		
+		API:AddElement({name = "LevelUpDisplay", displayName = "LevelUpDisplay"}, c)
+		
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button"}, c)
 		API:AddElement({name = "LFGDungeonReadyDialog", displayName = "Dungeon Ready Dialog"}, c)
 		API:AddElement({name = "LFGDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
@@ -431,7 +437,7 @@ m = {
 		API:AddElement({name = "CalendarViewEventFrame", displayName = "Calendar Event"}, c)
 		API:AddElement({name = "ChannelPullout", displayName = "Channel Pullout"}, c)
 		API:AddElement({name = "ChatConfigFrame", displayName = "Chat Channel Configuration"}, c)
-		API:AddElement({name = "ChatEditBoxesMover", displayName = "Chat Edit Box"}, c)
+		API:AddElement({name = "ChatEditBoxesMover", displayName = "Chat Edit Box", scaleWH = 1}, c)
 		API:AddElement({name = "ColorPickerFrame", displayName = "Color Picker"}, c)
 		API:AddElement({name = "TokenFramePopup", displayName = "Currency Options"}, c)
 		API:AddElement({name = "ItemRefTooltip", displayName = "Chat Popup Tooltip"}, c)

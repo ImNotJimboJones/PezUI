@@ -1783,17 +1783,26 @@ MovAny.lVirtualMovers = {
 		end,
 	},
 	ChatEditBoxesMover = {
+	--	h = 18,
+	--	w = 200,
 		relPoint = {"TOPLEFT", "ChatFrame1", "BOTTOMLEFT", -5, -2},
 		prefix = "ChatFrame",
 		postfix = "EditBox",
 		count = 10,
 		--dontLock = 1,
 		OnMAHook = function(self)
-			self:SetSize(ChatFrame1:GetWidth(), ChatFrame1EditBox:GetHeight())
+			self:SetSize(ChatFrame1:GetWidth(), 20)
+		--	print("1:"..ChatFrame1:GetWidth())
+		--	print("2:"..ChatFrame1EditBox:GetHeight())
+			local b = ChatFrame1EditBox
+			if MovAny:IsModified(b) then
+				b:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+				b:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
+			end
 		end,
 		OnMAFoundChild = function(self, index, child)
 			MovAny.Position:StoreOrgPoints(child, child)
-			child:SetWidth(self:GetWidth())
+		--	child:SetWidth(self:GetWidth())
 			child.MAOrgParent = child:GetParent()
 			child:SetParent(self)
 			child:ClearAllPoints()
@@ -1809,12 +1818,12 @@ MovAny.lVirtualMovers = {
 			MovAny.Position:RestoreOrgPoints(child, child, true)
 		end,
 	},
-	MA_FEMover = {
+--[[	MA_FEMover = {
 		frameStrata = "DIALOG",
 		point = {"CENTER", "UIParent", "CENTER", 0, 0},
 		w = 650,
 		h = 490,
 		prefix = "MA_FE",
 		count = 1000000,
-	},
+	},]]
 }

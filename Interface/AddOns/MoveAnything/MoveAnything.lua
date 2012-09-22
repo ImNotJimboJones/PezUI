@@ -368,7 +368,19 @@ local MovAny = {
 	hReputationWatchBar_Update = function()
 		API:SyncElement("ReputationWatchBar")
 	end,
-
+	
+	hChatFrame_OnUpdate = function()
+		print("Woooo")
+		local b = arg1
+			if MovAny:IsModified(b) then
+			--	b:SetWidth(10)
+			--	b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
+				b:SetWidth(200)
+				b:SetPoint("TOPLEFT", ChatEditBoxesMover, "TOPLEFT", 0, 0)
+				b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
+			end
+	end,
+	
 	hCaptureBar_Create = function(id)
 		local f = MovAny.oCaptureBar_Create(id)
 		local e = API:GetElement("WorldStateCaptureBar1")
@@ -421,13 +433,13 @@ local MovAny = {
 		API:SyncElement("PetActionBarFrame")
 	end,
 	
-	hUIParent_ManageFramePositions = function()
+--[[	hUIParent_ManageFramePositions = function()
 		API:SyncElement("StanceBarFrame")
 		API:SyncElement("PetActionBarFrame")
 		API:SyncElement("PetActionButtonsVerticalMover")
 		API:SyncElement("StanceButtonsMover")
 		API:SyncElement("StanceButtonsVerticalMover")
-	end,
+	end,]]
 	
 	hAddFrameLock = function()
 		if API:GetElement("MultiBarBottomLeft").f == nil  then
@@ -652,9 +664,9 @@ function MovAny:Boot()
 	if StanceBar_UpdateState then
 		hooksecurefunc("StanceBar_UpdateState", self.hStanceBar_UpdateState)
 	end
-	if UIParent_ManageFramePositions then
+--[[	if UIParent_ManageFramePositions then
 		hooksecurefunc("UIParent_ManageFramePositions", self.hUIParent_ManageFramePositions)
-	end
+	end]]
 	if PetActionBar_Update then
 		hooksecurefunc("PetActionBar_Update", self.hPetActionBar_Update)
 	end
@@ -692,12 +704,36 @@ function MovAny:Boot()
 		end)
 	end]]
 	
---[[	hooksecurefunc(WatchFrame,"SetPoint",function(_,_,parent)
-		if parent ~= WatchFrameMover then
-			WatchFrame:ClearAllPoints()
-			WatchFrame:SetPoint('TOP', WatchFrameMover, 'TOP')
-		end
-	end)]]
+	hooksecurefunc("ChatEdit_UpdateHeader",function(arg1, arg2)
+	--	print(arg1:GetName())
+	--	if arg2 then
+		--	print(arg2:GetName().."EditBox")
+			local b = arg1
+			if MovAny:IsModified(b) then
+			--	b:SetWidth(10)
+			--	b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
+			--	b:SetWidth(200)
+				b:SetPoint("TOPLEFT", ChatEditBoxesMover, "TOPLEFT", 0, 0)
+				b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
+			end
+		--	API:SyncElement(_G[arg2:GetName().."EditBox"])
+		--	API:SyncElement(ChatEditBoxesMover)
+			
+	--	end
+	end)
+	
+--	if ChatFrame_OnLoad then
+	--[[	hooksecurefunc("ChatFrame_OnLoad", function()
+			print("WooonLoad")
+		end)
+		
+		hooksecurefunc("ChatFrame_OnEvent", function()
+			print("WooonEvent")
+		end)]]
+		
+	--	hooksecurefunc("ChatFrame_OnUpdate", self.hChatFrame_OnUpdate)
+	--		print("WooonUpdate")
+--	end
 	
 	if ExtendedUI and ExtendedUI.CAPTUREPOINT then
 		self.oCaptureBar_Create = ExtendedUI.CAPTUREPOINT.create

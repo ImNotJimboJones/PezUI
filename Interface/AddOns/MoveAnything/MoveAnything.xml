@@ -630,7 +630,7 @@
 						if InterfaceOptionsFrame:IsVisible() and MoveAnythingOptions:IsVisible() then
 							HideUIPanel(InterfaceOptionsFrame)
 						else
-							InterfaceOptionsFrame_OpenToCategory("MoveAnything")
+							InterfaceOptionsFrame_OpenToCategory("MoveAnything - MoP")
 						end
 					</OnClick>
 				</Scripts>
