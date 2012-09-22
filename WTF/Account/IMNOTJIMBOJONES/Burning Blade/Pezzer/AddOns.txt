@@ -280,3 +280,5 @@ Glamour: disabled
 MountFilter: enabled
 BugSack: enabled
 !BugGrabber: enabled
+_NPCScan: enabled
+_NPCScan.Overlay: enabled
