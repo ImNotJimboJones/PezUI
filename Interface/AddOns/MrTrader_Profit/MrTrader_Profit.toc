@@ -1,0 +1,18 @@
+## Interface: 50001
+## Title: MrTrader |cff7fff7f (Profit Plugin)|r
+## Notes: Plugin for MrTrader. Provides a Profit Estimation report.
+## Author: user@zedonline.net
+## Version: 1.0
+## Dependencies: MrTrader MrTrader_SkillWindow
+## OptionalDeps: Ace3
+## SavedVariables: MrTrader_ProfitDB
+## X-Category: Professions
+## X-Curse-Packaged-Version: v0.6.8.1
+## X-Curse-Project-Name: MrTrader
+## X-Curse-Project-ID: mrtrader
+## X-Curse-Repository-ID: wow/mrtrader/mainline
+
+embeds.xml
+
+MRTProfit.lua
+

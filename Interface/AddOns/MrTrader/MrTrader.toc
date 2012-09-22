@@ -1,0 +1,33 @@
+## Interface: 50001
+## Title: MrTrader
+## Notes: A lightweight addon that does something.
+## Author: user@zedonline.net
+## Version: 1.0
+## OptionalDeps: Ace3
+## SavedVariables: MrTraderDB
+## X-Category: Professions
+## X-Curse-Packaged-Version: v0.6.8.1
+## X-Curse-Project-Name: MrTrader
+## X-Curse-Project-ID: mrtrader
+## X-Curse-Repository-ID: wow/mrtrader/mainline
+
+embeds.xml
+Libs\AceLibrary\AceLibrary.lua
+
+Locale\enUS.lua
+Locale\deDE.lua
+Locale\esES.lua
+Locale\esMX.lua
+Locale\frFR.lua
+Locale\koKR.lua
+Locale\ruRU.lua
+Locale\zhCN.lua
+Locale\zhTW.lua
+
+MrTrader.lua
+TradeskillDB.lua
+TradeskillMenu.lua
+
+MRTHooks.lua
+MRTUtils.lua
+MRTAPI.lua

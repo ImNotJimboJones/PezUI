@@ -1,0 +1,566 @@
+<?xml version="1.0"?>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/  ..\..\FrameXML\UI.xsd">
+	<Font name="MRTReagentFont" font="Fonts\ARIALN.TTF" outline="NORMAL" virtual="true">
+		<FontHeight>
+			<AbsValue val="11"/>
+		</FontHeight>
+	</Font>
+
+	<Button name="MRTSkillGuildCrafterButtonTemplate" hidden="false" virtual="true">
+		<Size>
+			<AbsDimension x="152" y="16"/>
+		</Size>
+		<ButtonText name="$parentText">
+			<Size x="0" y="16"/>
+			<Anchors>
+				<Anchor point="LEFT" x="4" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<Scripts>
+			<OnClick>
+				ChatFrame_SendTell(self.name);
+			</OnClick>
+		</Scripts>
+		<NormalFont style="GameFontHighlightLeft"/>
+		<HighlightFont style="GameFontHighlightLeft"/>
+		<DisabledFont style="GameFontDisableLeft"/>
+		<HighlightTexture file="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar-Blue" setAllPoints="true" alphaMode="ADD"/>
+	</Button>	
+	
+	<Font name="MRTReagentFontSmall" font="Fonts\ARIALN.TTF" outline="NORMAL" virtual="true">
+		<FontHeight>
+			<AbsValue val="10"/>
+		</FontHeight>
+	</Font>
+
+	<Button name="MRTBadgeButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="16" y="16"/>
+		</Size>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("AnyDown");
+			</OnLoad>
+			<OnClick>
+				<!-- Do Something here -->
+			</OnClick>
+		</Scripts>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentCount" inherits="GameFontNormalRight">
+					<Color r="1.0" g="1.0" b="1.0" />
+					<Size x="0" y="13"/>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parentIcon" relativePoint="LEFT">
+							<Offset x="0" y="2"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Button>
+	
+	<Button name="MRTFilterButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="140" y="20"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentIconTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="4" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<CheckButton name="$parentCheckbox" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset>
+							<AbsDimension x="4" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("AnyDown");
+					</OnLoad>
+					<OnClick>
+						if(button == "LeftButton") then
+						MRTSkillWindow_OnFilterClick(self:GetParent(), button);
+						elseif(button == "RightButton") then
+						MRTSkillContext:DisplayFilterContext(MRTSkillItemDropDown, self:GetParent().filterRef);
+						end
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("AnyDown");
+			</OnLoad>
+			<OnClick>
+				if(button == "LeftButton") then
+				local checkbox = _G[self:GetName() .. "Checkbox"];
+				checkbox:SetChecked(not checkbox:GetChecked());
+				MRTSkillWindow_OnFilterClick(self, button);
+				elseif(button == "RightButton" and self:GetHighlightTexture()) then
+				MRTSkillContext:DisplayFilterContext(MRTSkillItemDropDown, self.filterRef);
+				end
+			</OnClick>
+		</Scripts>
+		<NormalTexture name="$parentNormalTexture" file="Interface\AuctionFrame\UI-AuctionFrame-FilterBg">
+			<TexCoords left="0" right="0.53125" top="0" bottom="0.625"/>
+		</NormalTexture>
+		<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD"/>
+		<ButtonText name="$parentNormalText">
+			<Size>
+				<AbsDimension x="115" y="8"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT" relativeTo="$parentCheckbox" relativePoint="RIGHT">
+					<Offset>
+						<AbsDimension x="1" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontNormalSmallLeft"/>
+		<HighlightFont style="GameFontHighlightSmallLeft"/>
+	</Button>
+	
+	<Button name="MRTSkillDetailTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="464" y="44"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<!-- Skill Information: Name, Info Line 1, Info Line 2 -->
+				<FontString name="$parentNameText" inherits="GameFontNormal" text="Skill Name" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="0" y="0"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="44" y="-5"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentInfoLine1" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentNameText" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentInfoLine2" inherits="GameFontHighlightSmall">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentInfoLine1" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- Background Border Texture -->
+			<Frame name="$parentBorder" frameStrata="OVERLAY">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" >
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+			<Button name="$parentIcon">
+				<Size>
+					<AbsDimension x="38" y="38"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="2" y="-3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentCount" inherits="NumberFontNormal" justifyH="RIGHT" hidden="false">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT">
+									<Offset>
+										<AbsDimension x="-1" y="1"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+				<Frames>
+					<Frame name="$parentBorder" frameStrata="OVERLAY">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="-3" y="3" />
+								</Offset>
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT" >
+								<Offset>
+									<AbsDimension x="3" y="-3" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+							<EdgeSize>
+								<AbsValue val="16"/>
+							</EdgeSize>
+						</Backdrop>
+					</Frame>
+				</Frames>
+				<Scripts>
+					<OnClick>
+						HandleModifiedItemClick(GetTradeSkillItemLink(self:GetParent():GetID()));
+					</OnClick>
+					<OnEnter function="MRTSkillWindow_OnEnterSkillIcon"/>
+					<OnLeave function="GameTooltip_HideResetCursor"/>
+					<OnUpdate>
+						if ( GameTooltip:IsOwned(self) ) then
+							MRTSkillWindow_OnEnterSkillIcon(self);
+						end
+						CursorOnUpdate(self);
+					</OnUpdate>
+				</Scripts>
+			</Button>
+			
+			<!-- Large Reagent Buttons -->
+			<Button name="$parentReagentLrg4" inherits="MRTReagentLargeTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentLrg3" inherits="MRTReagentLargeTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentLrg4" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentLrg2" inherits="MRTReagentLargeTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentLrg3" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentLrg1" inherits="MRTReagentLargeTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentLrg2" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			
+			<!-- Small Reagent Buttons -->
+			<Button name="$parentReagentSml4" inherits="MRTReagentSmallTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml3" inherits="MRTReagentSmallTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml4" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml2" inherits="MRTReagentSmallTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml3" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml1" inherits="MRTReagentSmallTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml2" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml8" inherits="MRTReagentSmallTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml4" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-1"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml7" inherits="MRTReagentSmallTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml8" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml6" inherits="MRTReagentSmallTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml7" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentReagentSml5" inherits="MRTReagentSmallTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentSml6" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-2" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			
+			<!-- Badge Buttons -->
+			<Button name="$parentBadge1" inherits="MRTBadgeButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentReagentLrg1" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0" />
+							<!--><AbsDimension x="-128" y="-5"/>-->
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentBadge2" inherits="MRTBadgeButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentBadge1" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentBadge3" inherits="MRTBadgeButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parentBadge1" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnClick function="MRTSkillWindow_OnSkillClick"/>
+			<OnLoad>
+				self:RegisterForClicks("AnyDown");
+			</OnLoad>
+			<OnEnter>
+				MRTSkillWindow_OnEnterSkillIcon(self);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+	
+	<Button name="MRTReagentSmallTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="36" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentIconTexture">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="18" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentCount" inherits="MRTReagentFont" justifyH="RIGHT">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parentIconTexture" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				HandleModifiedItemClick(GetTradeSkillReagentItemLink(self:GetParent():GetID(), self:GetID()));
+			</OnClick>
+			<OnEnter function="MRTSkillWindow_OnEnterSkillIcon"/>
+			<OnLeave function="GameTooltip_HideResetCursor"/>
+			<OnUpdate>
+				if ( GameTooltip:IsOwned(self) ) then
+					MRTSkillWindow_OnEnterSkillIcon(self);
+				end
+				CursorOnUpdate(self);
+			</OnUpdate>
+		</Scripts>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+	</Button>
+	
+	<Button name="MRTReagentLargeTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentIconTexture">
+					<Size>
+						<AbsDimension x="30" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="1" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentCount" inherits="MRTReagentFont" justifyH="RIGHT">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativeTo="$parentIconTexture">
+							<Offset>
+								<AbsDimension x="-1" y="1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentBorder" frameStrata="OVERLAY">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="-1" y="1" />
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" >
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+					<EdgeSize>
+						<AbsValue val="10"/>
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				HandleModifiedItemClick(GetTradeSkillReagentItemLink(self:GetParent():GetID(), self:GetID()));
+			</OnClick>
+			<OnEnter function="MRTSkillWindow_OnEnterSkillIcon"/>
+			<OnLeave function="GameTooltip_HideResetCursor"/>
+			<OnUpdate>
+				if ( GameTooltip:IsOwned(self) ) then
+					MRTSkillWindow_OnEnterSkillIcon(self);
+				end
+				CursorOnUpdate(self);
+			</OnUpdate>
+		</Scripts>
+		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
+	</Button>
+	
+	<Button name="MRTReagentTemplate" inherits="QuestItemTemplate" virtual="true">
+		<Scripts>
+			<OnEnter>
+				GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT");
+				GameTooltip:SetTradeSkillItem(MRTSkillWindow.selectedSkill, self:GetID());
+				CursorUpdate(self);
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+				ResetCursor();
+			</OnLeave>
+			<OnUpdate>
+				CursorOnUpdate(self, elapsed);
+			</OnUpdate>
+			<OnClick>
+				HandleModifiedItemClick(GetTradeSkillReagentItemLink(MRTSkillWindow.selectedSkill, self:GetID()));
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>

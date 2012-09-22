@@ -201,7 +201,6 @@ TitanLocation: disabled
 TitanLootType: enabled
 TitanMicrobuttons: enabled
 TitanPerformance: disabled
-TitanProfessions: enabled
 TitanQuests: enabled
 TitanRepair: disabled
 TitanVolume: disabled
@@ -283,3 +282,6 @@ BugSack: enabled
 _NPCScan: enabled
 _NPCScan.Overlay: enabled
 Healers-Have-To-Die: enabled
+MrTrader: enabled
+MrTrader_Profit: enabled
+MrTrader_SkillWindow: enabled
