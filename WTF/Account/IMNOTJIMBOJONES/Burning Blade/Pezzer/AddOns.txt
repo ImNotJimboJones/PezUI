@@ -282,3 +282,4 @@ BugSack: enabled
 !BugGrabber: enabled
 _NPCScan: enabled
 _NPCScan.Overlay: enabled
+Healers-Have-To-Die: enabled
