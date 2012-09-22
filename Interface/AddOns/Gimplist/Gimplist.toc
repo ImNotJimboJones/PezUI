@@ -1,0 +1,43 @@
+## Interface: 50001
+## Title: Gimplist
+## Notes: Keeps track of Gimps and warns you if you end up grouping with them.
+## Author: DrKazza
+## Version: 1.14 release
+## SavedVariables: GLDB
+## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibDataBroker-1.1
+## X-Curse-Packaged-Version: 1.14 release
+## X-Curse-Project-Name: Gimplist
+## X-Curse-Project-ID: gimplist
+## X-Curse-Repository-ID: wow/gimplist/mainline
+
+
+
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\Acecomm-3.0\AceComm-3.0.xml
+Libs\AceSerializer-3.0\AceSerializer-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceHook-3.0\AceHook-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibBabble-Zone-3.0\lib.xml
+Libs\LibDBIcon-1.0\LibDBIcon-1.0\LibDBIcon-1.0.lua
+#@end-no-lib-strip@
+
+Locales\Localization.enUS.lua
+Locales\Localization.deDE.lua
+Locales\Localization.esES.lua
+Locales\Localization.esMX.lua
+Locales\Localization.frFR.lua
+Locales\Localization.koKR.lua
+Locales\Localization.ruRU.lua
+Locales\Localization.zhCN.lua
+Locales\Localization.zhTW.lua
+
+Gimplist.lua
