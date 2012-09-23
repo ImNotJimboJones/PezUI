@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation-esMX.lua 1581 2011-12-02 14:11:58Z arithmandar $
+-- $Id: Atlas_Transportation-esMX.lua 1687 2012-09-23 11:54:31Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -60,5 +60,4 @@ if AL then
 	AL["Wind Rider"] = "Jinete del viento";
 	AL["Won't be available once Thassarian departed"] = "No estará disponible una vez se marche Thassarian"; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "Aeropuertos Zepelín";		
-
 end

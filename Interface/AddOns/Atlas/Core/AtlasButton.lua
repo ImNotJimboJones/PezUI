@@ -1,4 +1,4 @@
--- $Id: AtlasButton.lua 1519 2011-11-07 02:58:07Z arithmandar $
+-- $Id: AtlasButton.lua 1668 2012-09-19 18:26:51Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,8 +26,63 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, Deadca7
+-- Maintainers: Arith, Dynaletik, dubcat
 
+local AL = LibStub("AceLocale-3.0"):GetLocale("Atlas");
+
+-- Minimap button with LibDBIcon-1.0
+local addon = LibStub("AceAddon-3.0"):NewAddon("Atlas", "AceConsole-3.0")
+local AtlasMiniMapLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Atlas", {
+	type = "launcher",
+	text = AL["ATLAS_TITLE"],
+	icon = "Interface\\WorldMap\\WorldMap-Icon",
+	OnClick = function(_, msg)
+		if msg == "LeftButton" then
+			Atlas_Toggle();
+		elseif msg == "RightButton" then
+			AtlasOptions_Toggle();
+		end
+	end,
+	OnTooltipShow = function(tooltip)
+		if not tooltip or not tooltip.AddLine then return end
+		tooltip:AddLine("|cffffffff"..ATLAS_TITLE)
+		tooltip:AddLine(ATLAS_MINIMAPLDB_HINT)
+	end,
+})
+
+
+local AtlasMiniMapIcon = LibStub("LibDBIcon-1.0")
+
+function addon:OnInitialize()
+	-- Obviously you'll need a ## SavedVariables: BunniesDB line in your TOC, duh!
+	self.db = LibStub("AceDB-3.0"):New("AtlasDB", {
+		profile = {
+			minimap = {
+				hide = false,
+			},
+		},
+	})
+	AtlasMiniMapIcon:Register("Atlas", AtlasMiniMapLDB, self.db.profile.minimap);
+	self:RegisterChatCommand("atlasbutton", AtlasButton_Toggle)
+	if ( AtlasOptions == nil ) then
+		Atlas_FreshOptions();
+	end
+end
+
+function addon:Toggle()
+	self.db.profile.minimap.hide = not self.db.profile.minimap.hide
+	if self.db.profile.minimap.hide then
+		AtlasMiniMapIcon:Hide("Atlas")
+	else
+		AtlasMiniMapIcon:Show("Atlas")
+	end
+end
+
+function AtlasButton_Toggle()
+	addon:Toggle()
+end
+
+--[[
 function AtlasButton_OnClick()
 	Atlas_Toggle();
 end
@@ -87,9 +142,10 @@ function AtlasButton_SetPosition(v)
 end
 
 function AtlasButton_OnEnter(self)
-    GameTooltip:SetOwner(self, "ANCHOR_LEFT");
-    GameTooltip:SetText(ATLAS_BUTTON_TOOLTIP_TITLE);
+	GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	GameTooltip:SetText(ATLAS_BUTTON_TOOLTIP_TITLE);
 	GameTooltipTextLeft1:SetTextColor(1, 1, 1);
-    GameTooltip:AddLine(ATLAS_BUTTON_TOOLTIP_HINT);
-    GameTooltip:Show();
+	GameTooltip:AddLine(ATLAS_BUTTON_TOOLTIP_HINT);
+	GameTooltip:Show();
 end
+]]

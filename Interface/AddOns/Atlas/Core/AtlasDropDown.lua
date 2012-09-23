@@ -1,4 +1,4 @@
--- $Id: AtlasDropDown.lua 1536 2011-11-12 03:37:18Z arithmandar $
+-- $Id: AtlasDropDown.lua 1676 2012-09-21 16:23:12Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, Deadca7
+-- Maintainers: Arith, Dynaletik, dubcat
 
 Atlas_DropDownLayouts_Order = {
 	[1] = ATLAS_DDL_CONTINENT;
@@ -41,6 +41,7 @@ Atlas_DropDownLayouts_Order = {
 		[4] = ATLAS_DDL_CONTINENT_OUTLAND;
 		[5] = ATLAS_DDL_CONTINENT_NORTHREND;
 		[6] = ATLAS_DDL_CONTINENT_DEEPHOLM;
+		[7] = ATLAS_DDL_CONTINENT_PANDARIA;
 	};
 	[ATLAS_DDL_LEVEL] = {
 		[1] = ATLAS_DDL_LEVEL_UNDER45;
@@ -48,7 +49,8 @@ Atlas_DropDownLayouts_Order = {
 		[3] = ATLAS_DDL_LEVEL_60TO70;
 		[4] = ATLAS_DDL_LEVEL_70TO80;
 		[5] = ATLAS_DDL_LEVEL_80TO85;
-		[6] = ATLAS_DDL_LEVEL_85PLUS;
+		[6] = ATLAS_DDL_LEVEL_85TO90;
+		[7] = ATLAS_DDL_LEVEL_90PLUS;
 	};
 	[ATLAS_DDL_PARTYSIZE] = {
 		[1] = ATLAS_DDL_PARTYSIZE_5_AE;
@@ -64,6 +66,7 @@ Atlas_DropDownLayouts_Order = {
 		[3] = ATLAS_DDL_EXPANSION_BC;
 		[4] = ATLAS_DDL_EXPANSION_WOTLK;
 		[5] = ATLAS_DDL_EXPANSION_CATA;
+		[6] = ATLAS_DDL_EXPANSION_MOP;
 	};
 	[ATLAS_DDL_TYPE] = {
 		[1] = ATLAS_DDL_TYPE_INSTANCE_AC;
@@ -96,11 +99,9 @@ Atlas_DropDownLayouts = {
 		[ATLAS_DDL_CONTINENT_EASTERN2] = {
 			"Scholomance",
 			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
 			"ScarletMonasteryEnt",
-			"SMGraveyard",
-			"SMLibrary",
+			"ScarletHalls",
+			"ScarletMonastery",
 			"StratholmeCrusader",
 			"StratholmeGauntlet",
 			"SunwellPlateau",
@@ -214,6 +215,19 @@ Atlas_DropDownLayouts = {
 		[ATLAS_DDL_CONTINENT_DEEPHOLM] = {
 			"TheStonecore",
 		},
+		[ATLAS_DDL_CONTINENT_PANDARIA] = {
+			"GateoftheSettingSun",
+			"HeartofFear",
+			"MogushanPalace",
+			"MogushanVaults",
+			"ShadoPanMonasteryA",
+			"ShadoPanMonasteryB",
+			"SiegeofNiuzaoTempleA",
+			"SiegeofNiuzaoTempleB",
+			"StormstoutBrewery",
+			"TempleoftheJadeSerpent",
+			"TerraceofEndlessSpring",
+		},
 	},
 	[ATLAS_DDL_LEVEL] = {
 		[ATLAS_DDL_LEVEL_UNDER45] = {
@@ -225,11 +239,9 @@ Atlas_DropDownLayouts = {
 			"RazorfenDowns",
 			"RazorfenKraul",
 			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
 			"ScarletMonasteryEnt",
-			"SMGraveyard",
-			"SMLibrary",
+			"ScarletHalls",
+			"ScarletMonastery",
 			"TheDeadmines",
 			"TheDeadminesEnt",
 			"TheStockade",
@@ -346,7 +358,7 @@ Atlas_DropDownLayouts = {
 			"UlduarE",
 			"VaultOfArchavon",
 		},
-		[ATLAS_DDL_LEVEL_85PLUS] = {
+		[ATLAS_DDL_LEVEL_85TO90] = {
 			"BaradinHold",
 			"BlackrockMountainEnt",
 			"BlackwingDescent",
@@ -358,10 +370,28 @@ Atlas_DropDownLayouts = {
 			"CoTHourOfTwilight",
 			"CoTWellOfEternity",
 			"Firelands",
+			"GateoftheSettingSun",
+			"MogushanPalace",
+			"Scholomance",
+			"ShadoPanMonasteryA",
+			"ShadoPanMonasteryB",
+			"SiegeofNiuzaoTempleA",
+			"SiegeofNiuzaoTempleB",
+			"ScarletMonasteryEnt",
+			"ScarletHalls",
+			"ScarletMonastery",
+			"StormstoutBrewery",
+			"TempleoftheJadeSerpent",
+			"TerraceofEndlessSpring",
 			"TheBastionOfTwilight",
 			"ThroneOfTheFourWinds",
 			"ZulAman",
 			"ZulGurub",
+		},
+		[ATLAS_DDL_LEVEL_90PLUS] = {
+			"HeartofFear",
+			"MogushanVaults",
+			"TerraceofEndlessSpring",
 		},
 	},
 	[ATLAS_DDL_PARTYSIZE] = {
@@ -402,6 +432,7 @@ Atlas_DropDownLayouts = {
 			"FHHallsOfReflection",
 			"FHTheForgeOfSouls",
 			"FHPitOfSaron",
+			"GateoftheSettingSun",
 			"Gnomeregan",
 			"GnomereganEnt",
 			"GrimBatol",
@@ -416,16 +447,20 @@ Atlas_DropDownLayouts = {
 			"MagistersTerrace",
 			"Maraudon",
 			"MaraudonEnt",
+			"MogushanPalace",
 			"RagefireChasm",
 			"RazorfenDowns",
 			"RazorfenKraul",
 			"Scholomance",
+			"ShadoPanMonasteryA",
+			"ShadoPanMonasteryB",
 			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
+			"SiegeofNiuzaoTempleA",
+			"SiegeofNiuzaoTempleB",
 			"ScarletMonasteryEnt",
-			"SMGraveyard",
-			"SMLibrary",
+			"ScarletHalls",
+			"ScarletMonastery",
+			"StormstoutBrewery",
 			"StratholmeCrusader",
 			"StratholmeGauntlet",
 		},
@@ -434,6 +469,7 @@ Atlas_DropDownLayouts = {
 			"TempestKeepArcatraz",
 			"TempestKeepBotanica",
 			"TempestKeepMechanar",
+			"TempleoftheJadeSerpent",
 			"TheDeadmines",
 			"TheDeadminesEnt",
 			"TheNexus",
@@ -467,6 +503,7 @@ Atlas_DropDownLayouts = {
 			"CoTDragonSoulB",
 			"CoTDragonSoulC",
 			"Firelands",
+			"HeartofFear",
 			"IcecrownCitadelA",
 			"IcecrownCitadelB",
 			"IcecrownCitadelC",
@@ -474,12 +511,14 @@ Atlas_DropDownLayouts = {
 			"KarazhanEnd",
 			"KarazhanEnt",
 			"KarazhanStart",
+			"MogushanVaults",
 			"Naxxramas",
 		},
 		[ATLAS_DDL_PARTYSIZE_10_OZ] = {
 			"ObsidianSanctum",
 			"OnyxiasLair",
 			"RubySanctum",
+			"TerraceofEndlessSpring",
 			"TheBastionOfTwilight",
 			"TheRuinsofAhnQiraj",
 			"TrialOfTheCrusader",
@@ -512,10 +551,12 @@ Atlas_DropDownLayouts = {
 			"Firelands",
 			"GruulsLair",
 			"HCMagtheridonsLair",
+			"HeartofFear",
 			"IcecrownCitadelA",
 			"IcecrownCitadelB",
 			"IcecrownCitadelC",
 			"IcecrownEnt",
+			"MogushanVaults",
 			"MoltenCore",
 			"Naxxramas",
 			"ObsidianSanctum",
@@ -525,6 +566,7 @@ Atlas_DropDownLayouts = {
 			"SunwellPlateau",
 			"TempestKeepEnt",
 			"TempestKeepTheEye",
+			"TerraceofEndlessSpring",
 			"TheEyeOfEternity",
 			"TheTempleofAhnQiraj",
 			"ThroneOfTheFourWinds",
@@ -566,11 +608,9 @@ Atlas_DropDownLayouts = {
 			"RazorfenKraul",
 			"Scholomance",
 			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
 			"ScarletMonasteryEnt",
-			"SMGraveyard",
-			"SMLibrary",
+			"ScarletHalls",
+			"ScarletMonastery",
 			"StratholmeCrusader",
 			"StratholmeGauntlet",
 			"TheStockade",
@@ -680,6 +720,23 @@ Atlas_DropDownLayouts = {
 			"ZulAman",
 			"ZulGurub",
 		},
+		[ATLAS_DDL_EXPANSION_MOP] = {
+			"GateoftheSettingSun",
+			"HeartofFear",
+			"MogushanPalace",
+			"MogushanVaults",
+			"Scholomance",
+			"ShadoPanMonasteryA",
+			"ShadoPanMonasteryB",
+			"SiegeofNiuzaoTempleA",
+			"SiegeofNiuzaoTempleB",
+			"ScarletMonasteryEnt",
+			"ScarletHalls",
+			"ScarletMonastery",
+			"StormstoutBrewery",
+			"TempleoftheJadeSerpent",
+			"TerraceofEndlessSpring",
+		},
 	},
 	[ATLAS_DDL_TYPE] = {
 		[ATLAS_DDL_TYPE_INSTANCE_AC] = {
@@ -732,6 +789,7 @@ Atlas_DropDownLayouts = {
 			"FHHallsOfReflection",
 			"FHTheForgeOfSouls",
 			"FHPitOfSaron",
+			"GateoftheSettingSun",
 			"Gnomeregan",
 			"GrimBatol",
 			"GruulsLair",
@@ -741,6 +799,7 @@ Atlas_DropDownLayouts = {
 			"HCHellfireRamparts",
 			"HCMagtheridonsLair",
 			"HCTheShatteredHalls",
+			"HeartofFear",
 			"IcecrownCitadelA",
 			"IcecrownCitadelB",
 			"IcecrownCitadelC",
@@ -749,6 +808,8 @@ Atlas_DropDownLayouts = {
 			"LostCityOfTolvir",
 			"MagistersTerrace",
 			"Maraudon",
+			"MogushanPalace",
+			"MogushanVaults",
 			"Naxxramas",
 			"OnyxiasLair",
 			"RagefireChasm",
@@ -761,11 +822,14 @@ Atlas_DropDownLayouts = {
 			"ObsidianSanctum",
 			"RubySanctum",
 			"Scholomance",
+			"ShadoPanMonasteryA",
+			"ShadoPanMonasteryB",
 			"ShadowfangKeep",
-			"SMArmory",
-			"SMCathedral",
-			"SMGraveyard",
-			"SMLibrary",
+			"SiegeofNiuzaoTempleA",
+			"SiegeofNiuzaoTempleB",
+			"ScarletHalls",
+			"ScarletMonastery",
+			"StormstoutBrewery",
 			"StratholmeCrusader",
 			"StratholmeGauntlet",
 			"SunwellPlateau",
@@ -773,6 +837,8 @@ Atlas_DropDownLayouts = {
 			"TempestKeepBotanica",
 			"TempestKeepMechanar",
 			"TempestKeepTheEye",
+			"TempleoftheJadeSerpent",
+			"TerraceofEndlessSpring",
 			"TheBastionOfTwilight",
 			"TheStockade",
 			"TheStonecore",

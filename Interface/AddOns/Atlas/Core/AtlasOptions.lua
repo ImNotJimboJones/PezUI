@@ -1,4 +1,4 @@
--- $Id: AtlasOptions.lua 1563 2011-11-25 14:18:35Z arithmandar $
+-- $Id: AtlasOptions.lua 1661 2012-09-18 13:41:12Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,8 +26,9 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, Deadca7
+-- Maintainers: Arith, Dynaletik, dubcat
 
+--[[
 function AtlasOptions_ResetPosition()
 	AtlasFrame:ClearAllPoints();
 	AtlasFrame:SetPoint("TOPLEFT", 0, -104);
@@ -37,7 +38,7 @@ function AtlasOptions_ResetPosition()
 	AtlasOptions.AtlasScale = 1.0;
 	AtlasOptions_Init();
 end
-
+]]
 
 function AtlasOptions_Toggle()
 	if InterfaceOptionsFrame:IsVisible() then
@@ -138,7 +139,7 @@ end
 
 function AtlasOptions_Reset()
 	Atlas_FreshOptions();
-	AtlasOptions_ResetPosition(); --also calls AtlasOptions_Init()
+	--AtlasOptions_ResetPosition(); --also calls AtlasOptions_Init()
 	Reset_Dropdowns(); --also calls Atlas_Refresh()
 	AtlasButton_Init();
 	Atlas_UpdateLock();
@@ -164,8 +165,8 @@ function AtlasOptions_Init()
 	AtlasOptionsFrameCtrl:SetChecked(AtlasOptions.AtlasCtrl);
 	AtlasOptionsFrameLock:SetChecked(AtlasOptions.AtlasLocked);
 	AtlasOptionsFrameBossDesc:SetChecked(AtlasOptions.AtlasBossDesc);
-	AtlasOptionsFrameSliderButtonPos:SetValue(AtlasOptions.AtlasButtonPosition);
-	AtlasOptionsFrameSliderButtonRad:SetValue(AtlasOptions.AtlasButtonRadius);
+--	AtlasOptionsFrameSliderButtonPos:SetValue(AtlasOptions.AtlasButtonPosition);
+--	AtlasOptionsFrameSliderButtonRad:SetValue(AtlasOptions.AtlasButtonRadius);
 	AtlasOptionsFrameSliderAlpha:SetValue(AtlasOptions.AtlasAlpha);
 	AtlasOptionsFrameSliderScale:SetValue(AtlasOptions.AtlasScale);
 	AtlasOptionsFrameSliderBossDescScale:SetValue(AtlasOptions.AtlasBossDescScale);

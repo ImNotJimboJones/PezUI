@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation-zhCN.lua 1438 2011-08-23 07:14:32Z ananhaid@gmail.com $
+-- $Id: Atlas_Transportation-zhCN.lua 1687 2012-09-23 11:54:31Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -55,5 +55,4 @@ if AL then
 	AL["Wind Rider"] = "驭风者";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "“安多哈尔之战”任务链完成之前不可使用。"; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "飞艇塔";
-
 end

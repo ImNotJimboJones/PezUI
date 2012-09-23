@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation-ruRU.lua 1419 2011-07-12 17:20:37Z arithmandar $
+-- $Id: Atlas_Transportation-ruRU.lua 1687 2012-09-23 11:54:31Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,7 +28,7 @@
 -- Atlas Localization Data (Russian)
 -- Translated by Nitrogen (Exorsus Guild)
 -- Свежеватель Душ
--- Last Update : $Date: 2011-07-13 01:20:37 +0800 (Wed, 13 Jul 2011) $
+-- Last Update : $Date: 2012-09-23 19:54:31 +0800 (Sun, 23 Sep 2012) $
 --]]
 
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
@@ -59,5 +59,4 @@ if AL then
 	AL["Wind Rider"] = "Укротитель ветрокрылов";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "Не будет доступна пока не завершена серия Битвы за Андорал."; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "Башни Цеппелинов";
-
 end

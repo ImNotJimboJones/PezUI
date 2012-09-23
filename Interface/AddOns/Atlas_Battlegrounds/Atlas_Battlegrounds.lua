@@ -1,4 +1,4 @@
--- $Id: Atlas_Battlegrounds.lua 1419 2011-07-12 17:20:37Z arithmandar $
+-- $Id: Atlas_Battlegrounds.lua 1677 2012-09-21 16:26:23Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, loglow@gmail.com
--- Maintainers: Lothaer, Dynaletik, Arith, Deadca7
+-- Maintainers: Lothaer, Dynaletik, Arith, dubcat
 
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0");
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
@@ -365,6 +365,20 @@ local myData = {
 		{ BLUE.."B) "..AL["Dragonmaw Clan Compound"].." ("..BF["Horde"]..")" };
 		{ ORNG.."1) "..AL["Alliance Graveyard"] };
 		{ ORNG.."2) "..AL["Horde Graveyard"] };
+	};
+	TempleofKotmogu = {
+		ZoneName = { BZ["Temple of Kotmogu"] };
+		--Location = { };
+		--LevelRange = "85+";
+		--MinLevel = "85";
+		--{ };
+	};
+	SilvershardMines = {
+		ZoneName = { BZ["Silvershard Mines"] };
+		--Location = { };
+		--LevelRange = "85+";
+		--MinLevel = "85";
+		--{ };
 	};
 };
 

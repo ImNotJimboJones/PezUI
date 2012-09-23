@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 1585 2011-12-05 11:40:26Z arithmandar $
+-- $Id: Atlas.lua 1715 2012-09-24 19:18:18Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, Deadca7
+-- Maintainers: Arith, Dynaletik, dubcat
 
 local AL = LibStub("AceLocale-3.0"):GetLocale("Atlas");
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
@@ -60,22 +60,23 @@ ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.18.2";
 
 local DefaultAtlasOptions = {
 	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS;
-	["AtlasAlpha"] = 1.0;		-- Atlas frame's transparency
-	["AtlasLocked"] = false;	-- lock Atlas frame position
-	["AtlasAutoSelect"] = false;	-- auto select map
-	["AtlasButtonPosition"] = 26;	-- minimap button position
-	["AtlasButtonRadius"] = 78;	-- minimap button radius
-	["AtlasButtonShown"] = true;	-- show / hide Atlas button
-	["AtlasRightClick"] = false;	-- right click to open world map
-	["AtlasType"] = 1;		-- default or last selected map type (category)
-	["AtlasZone"] = 1;		-- default or last selected map / zone
-	["AtlasAcronyms"] = true;	-- show dungeon's acronyms
-	["AtlasScale"] = 1.0;		-- Atlas frame scale
-	["AtlasClamped"] = true;	-- clamp to WoW window
-	["AtlasSortBy"] = 1;		-- maps' sorting type, 1: CONTINENT; 2: LEVEL; 3: PARTYSIZE; 4: EXPANSION; 5: TYPE
-	["AtlasCtrl"] = false;		-- press ctrl and mouse over to show full description text
-	["AtlasBossDesc"] = true;	-- toggle to show boss description or not
-	["AtlasBossDescScale"] = 0.9;	-- the boss description GameToolTip scale
+	["AtlasAlpha"] = 1.0;			-- Atlas frame's transparency
+	["AtlasLocked"] = false;		-- lock Atlas frame position
+	["AtlasAutoSelect"] = false;		-- auto select map
+	["AtlasButtonPosition"] = 26;		-- minimap button position
+	["AtlasButtonRadius"] = 78;		-- minimap button radius
+	["AtlasButtonShown"] = true;		-- show / hide Atlas button
+	["AtlasRightClick"] = false;		-- right click to open world map
+	["AtlasType"] = 1;			-- default or last selected map type (category)
+	["AtlasZone"] = 1;			-- default or last selected map / zone
+	["AtlasAcronyms"] = true;		-- show dungeon's acronyms
+	["AtlasScale"] = 1.0;			-- Atlas frame scale
+	["AtlasClamped"] = true;		-- clamp to WoW window
+	["AtlasSortBy"] = 1;			-- maps' sorting type, 1: CONTINENT; 2: LEVEL; 3: PARTYSIZE; 4: EXPANSION; 5: TYPE
+	["AtlasCtrl"] = false;			-- press ctrl and mouse over to show full description text
+	["AtlasBossDesc"] = true;		-- toggle to show boss description or not
+	["AtlasBossDescScale"] = 0.9;		-- the boss description GameToolTip scale
+	["AtlasDontShowInfo"] = false;		-- Atlas latest information
 };
 
 --Code by Grayhoof (SCT)
@@ -162,17 +163,18 @@ local function Process_Deprecated()
 	--non-nil version mean ONLY IT OR NEWER versions will be loaded!
 	local Deprecated_List = {
 		--most recent (working) versions of known modules at time of release
-		{ "Atlas_Battlegrounds", "1.21.1" },
-		{ "Atlas_DungeonLocs", "1.21.0" },
-		{ "Atlas_OutdoorRaids", "1.21.0" },
-		{ "Atlas_Transportation", "1.21.1" },
-		{ "Atlas_BurningCrusade", "1.21.0" },
-		{ "Atlas_ClassicWoW", "1.21.0" },
-		{ "Atlas_WrathoftheLichKing", "1.21.0" },
+		{ "Atlas_Battlegrounds", "1.22.0" },
+		{ "Atlas_DungeonLocs", "1.22.0" },
+		{ "Atlas_OutdoorRaids", "1.22.0" },
+		{ "Atlas_Transportation", "1.22.0" },
+		{ "Atlas_BurningCrusade", "1.22.0" },
+		{ "Atlas_Cataclysm", "1.22.0" },
+		{ "Atlas_ClassicWoW", "1.22.0" },
+		{ "Atlas_WrathoftheLichKing", "1.22.0" },
 --		{ "AtlasWorld", "3.3.5.25" }, -- updated July 14, 2010 -- comment out because this plugin is no longer maintained
 		{ "AtlasQuest", "4.6.7" }, -- updated Dec. 01, 2011
 --		{ "AtlasMajorCities", "v1.5.3" }, -- updated November 15, 2010; -- comment out because this plugin is no longer maintained
-		{ "AtlasLoot", "6.05.01" }, -- updated Dec. 06, 2011
+		{ "AtlasLoot", "7.01.00" }, -- updated Sep. 24, 2012
 		{ "Atlas_Arena", "1.3.4" }, -- updated June, 28, 2011
 		{ "Atlas_WorldEvents", "2.4" }, -- updated Dec. 05, 2011
 	};
@@ -304,9 +306,51 @@ function Atlas_PopulateDropdowns()
 	end
 end
 
+-- function to pop up a window to show the latest addon information
+local function Atlas_ShowInfo()
+	if (AtlasOptions["AtlasDontShowInfo"] == true) then
+		return;
+	else
+		AtlasInfoFrame:Show();
+		AtlasInfoFrameToggleButton:SetChecked(AtlasOptions.AtlasDontShowInfo);
+	end
+end
+
+function Atlas_ShowInfo_Toggle()
+	if (AtlasOptions["AtlasDontShowInfo"]) then
+		AtlasOptions["AtlasDontShowInfo"] = false;
+	else
+		AtlasOptions["AtlasDontShowInfo"] = true;
+	end
+	AtlasInfoFrameToggleButton:SetChecked(AtlasOptions.AtlasDontShowInfo);
+end
 
 ATLAS_OLD_TYPE = false;
 ATLAS_OLD_ZONE = false;
+
+function Atlas_InitOptions()
+	--init saved vars for a new install
+	if ( AtlasOptions == nil ) then
+		Atlas_FreshOptions();
+	end
+	--init the newly added "AtlasBossDescScale" and don't bother user to reset everything
+	--can be removed after 1.21.0 release
+	if (AtlasOptions["AtlasBossDescScale"] == nil) then
+		AtlasOptions["AtlasBossDescScale"] = 0.9;
+	end
+	if (AtlasOptions["AtlasBossDesc"] == nil) then
+		AtlasOptions["AtlasBossDesc"] = true;
+	end
+
+	if (AtlasOptions["AtlasDontShowInfo"] == nil) then
+		AtlasOptions["AtlasDontShowInfo"] = false;
+	end
+	
+	--saved options version check
+	if ( AtlasOptions["AtlasVersion"] ~= ATLAS_OLDEST_VERSION_SAME_SETTINGS ) then
+		Atlas_FreshOptions();
+	end
+end
 
 --Initializes everything relating to saved variables and data in other lua files
 --This should be called ONLY when we're sure our variables are in memory
@@ -324,25 +368,8 @@ function Atlas_Init()
 	--make the Atlas window go all the way to the edge of the screen, exactly
 	AtlasFrame:SetClampRectInsets(12, 0, -12, 0);
 
-	--init saved vars for a new install
-	if ( AtlasOptions == nil ) then
-		Atlas_FreshOptions();
-	end
-	--init the newly added "AtlasBossDescScale" and don't bother user to reset everything
-	--can be removed after 1.21.0 release
-	
-	if (AtlasOptions["AtlasBossDescScale"] == nil) then
-		AtlasOptions["AtlasBossDescScale"] = 0.9;
-	end
-	if (AtlasOptions["AtlasBossDesc"] == nil) then
-		AtlasOptions["AtlasBossDesc"] = true;
-	end
-	
-	--saved options version check
-	if ( AtlasOptions["AtlasVersion"] ~= ATLAS_OLDEST_VERSION_SAME_SETTINGS ) then
-		Atlas_FreshOptions();
-	end
-	
+	Atlas_InitOptions();
+
 	--populate the dropdown lists...yeeeah this is so much nicer!
 	Atlas_PopulateDropdowns();
 	
@@ -358,7 +385,7 @@ function Atlas_Init()
 	Atlas_UpdateLock();
 	Atlas_UpdateAlpha();
 	AtlasFrame:SetClampedToScreen(AtlasOptions.AtlasClamped);
-	AtlasButton_UpdatePosition();
+--	AtlasButton_UpdatePosition();
 	AtlasOptions_Init();
 	
 	--Make an LDB object
@@ -380,6 +407,7 @@ function Atlas_Init()
 		end,
 	})
 	
+	Atlas_ShowInfo();
 end
 
 --Simple function to toggle the Atlas frame's lock status and update it's appearance
@@ -554,7 +582,7 @@ function Atlas_MapRefresh()
 
 	-- Player Limit
 	local tPL = "";
-	if ( base.DungeonID ) then 
+	if ( base.DungeonID and maxPlayers ~= 0) then 
 		tPL = ATLAS_STRING_PLAYERLIMIT..AL["Colon"]..maxPlayers;
 		if ( base.DungeonHeroicID and maxPlayers ~= maxPlayersH) then
 			tPL = tPL.." / "..maxPlayersH;
@@ -641,8 +669,8 @@ function Atlas_MapRefresh()
 				AtlasMap_NPC_Text_Frame:SetWidth(15);
 				AtlasMap_NPC_Text_Frame:SetHeight(15);
 				AtlasMap_NPC_Text_Frame:SetID(NPC_Table[AtlasMap_NPC_Text_Frame_Num][2]);
-				AtlasMap_NPC_Text_Frame:SetScript("OnEnter", AtlasMaps_NPC_Text_OnUpdate)
-				AtlasMap_NPC_Text_Frame:SetScript("OnLeave", GameTooltip_Hide)
+				AtlasMap_NPC_Text_Frame:SetScript("OnEnter", AtlasMaps_NPC_Text_OnUpdate);
+				AtlasMap_NPC_Text_Frame:SetScript("OnLeave", GameTooltip_Hide);
 
 				local AtlasMap_NPC_Text = AtlasMap_NPC_Text_Frame:CreateFontString("AtlasMapNPCText"..AtlasMap_NPC_Text_Frame_Num, "MEDIUM", "GameFontHighlightLarge");
 				AtlasMap_NPC_Text:SetPoint("CENTER", AtlasMap_NPC_Text_Frame, "CENTER", 0, 0);
@@ -992,20 +1020,6 @@ function Atlas_OnShow()
 	AtlasFrameDropDown_OnShow();
 end
 
---Code provided by tyroney
---Bugfix code by Cold
---Runs when the Atlas frame is clicked on
---RightButton closes Atlas and open the World Map if the RightClick option is turned on
---[[ We don't need below function as to call it inside Atlas.xml will be more straight forward - Arith
-function Atlas_OnClick()
-	if ( arg1 == "RightButton" ) then
-		if (AtlasOptions.AtlasRightClick) then
-			Atlas_Toggle();
-			ToggleFrame(WorldMapFrame);
-		end
-	end
-end
-]]
 
 function AtlasScrollBar_Update()
 	GameTooltip:Hide();

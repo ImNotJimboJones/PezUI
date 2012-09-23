@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-esES.lua 1561 2011-11-25 13:50:34Z arithmandar $
+﻿-- $Id: Atlas-esES.lua 1670 2012-09-20 15:47:50Z maqjav@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,7 +30,7 @@ local AL = AceLocale:NewLocale("Atlas", "esES", false);
 -- Atlas Spanish Localization
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@gmail.com
--- Última Actualización (last update): 22/11/2011
+-- Última Actualización (last update): 20/09/2012
 
 -- Atlas Spanish Localization
 if ( GetLocale() == "esES" ) then
@@ -94,10 +94,13 @@ if AL then
 	AL["ATLAS_OPTIONS_CLAMPED_TIP"] = "Fija la ventana de Atlas. Desactiva el poder mover la ventana de Atlas fuera de la pantalla del juego.";
 	AL["ATLAS_OPTIONS_CTRL"] = "Pulsar control para ver las herramientas";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "Activa mostrar ventanas emergentes de texto mientras pulsas Ctrl y pasas el ratón por encima de la información del mapa. Es util cuando el texto es demasiado largo y no se puede mostrar en la ventana.";
+	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "No mostrar la misma información de nuevo.";
 
+	AL["ATLAS_BUTTON_CLOSE"] = "Cerrar";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
 	AL["ATLAS_BUTTON_TOOLTIP_HINT"] = "Click izquierdo para abrir Atlas.\nClick central para opciones.\nClick derecho y arrastrar para mover el icono.";
 	AL["ATLAS_LDB_HINT"] = "Click izquierdo para abrir Atlas.\nClick central para opciones.\nClick derecho para mostrar el menú.";
+	AL["ATLAS_MINIMAPLDB_HINT"] = "Click izquierdo para abrir Atlas.\nClick derecho para mostrar las opciones.\nClick derecho y arrastrar para mover este botón.";
 
 	AL["ATLAS_OPTIONS_CATDD"] = "Ordenar los mapas de mazmorra por:";
 	AL["ATLAS_DDL_CONTINENT"] = "Continente";
@@ -106,13 +109,15 @@ if AL then
 	AL["ATLAS_DDL_CONTINENT_OUTLAND"] = "Mazmorras de Terrallende";
 	AL["ATLAS_DDL_CONTINENT_NORTHREND"] = "Mazmorras de Rasganorte";
 	AL["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "Mazmorras de Infralar";
+	AL["ATLAS_DDL_CONTINENT_PANDARIA"] = "Mazmorras de Pandaria";
 	AL["ATLAS_DDL_LEVEL"] = "Nivel";
 	AL["ATLAS_DDL_LEVEL_UNDER45"] = "Mazmorras de nivel inferior a 45";
 	AL["ATLAS_DDL_LEVEL_45TO60"] = "Mazmorras de nivel 45-60";
 	AL["ATLAS_DDL_LEVEL_60TO70"] = "Mazmorras de nivel 60-70";
 	AL["ATLAS_DDL_LEVEL_70TO80"] = "Mazmorras de nivel 70-80";
 	AL["ATLAS_DDL_LEVEL_80TO85"] = "Mazmorras de nivel 80-85";
-	AL["ATLAS_DDL_LEVEL_85PLUS"] = "Mazmorras de nivel 85+";
+	AL["ATLAS_DDL_LEVEL_85TO90"] = "Mazmorras de nivel 85-90";
+	AL["ATLAS_DDL_LEVEL_90PLUS"] = "Mazmorras de nivel 90+";
 	AL["ATLAS_DDL_PARTYSIZE"] = "Tamaño del grupo";
 	AL["ATLAS_DDL_PARTYSIZE_5_AE"] = "Mazmorras para 5 jugadores A-E";
 	AL["ATLAS_DDL_PARTYSIZE_5_FS"] = "Mazmorras para 5 jugadores F-S";
@@ -126,6 +131,7 @@ if AL then
 	AL["ATLAS_DDL_EXPANSION_BC"] = "Mazmorras de Burning Crusade";
 	AL["ATLAS_DDL_EXPANSION_WOTLK"] = "Mazmorras Wrath of the Lich King";
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "Mazmorras de Cataclysm";
+	AL["ATLAS_DDL_EXPANSION_MOP"] = "Mazmorras de Mists of Pandaria";
 	AL["ATLAS_DDL_TYPE"] = "Tipo";
 	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "Mazmorras A-C";
 	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "Mazmorras D-R";
@@ -140,8 +146,11 @@ if AL then
 	AL["ATLAS_DEP_MSG2"] = "Se han sido desactivados para este personaje.";
 	AL["ATLAS_DEP_MSG3"] = "Borralos de tu directorio AddOns.";
 	AL["ATLAS_DEP_OK"] = "Vale";
+	
+	AL["ATLAS_INFO"] = "Información de Atlas";
+	AL["ATLAS_INFO_SPTACK"] = "Aviso importante:\n\nDebido a motivos de aumento en el tamaño de los archivos del accesorio, hemos \nextraido parte de nuestros mapas de mazmorras y otros accesorios internos \nen módulos separados.\n\nLos usuarios que descarguen nuestro accesorio desde famosas páginas web \ndeberían de obtener únicamente el núcleo del accesorio, el cual solo contiene \nla función del núcleo y los mapas de mazmorras de Cataclysm.\n\nLos usuarios que también quieran descargar todos los mapas de \nlas mazmorras antiguas y los mapas de todos los \nplug-ins de Atlas hechos por nosotros, tendrán que descargarselos por separado.\n\nPara mas información puedes leer debajo el topic del foro :\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
 
---************************************************
+	--************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************
 
@@ -238,17 +247,14 @@ if AL then
 	AL["AQ"] = "AQ"; -- Ahn'Qiraj
 	AL["AQ20"] = "AQ20"; -- Ruins of Ahn'Qiraj
 	AL["AQ40"] = "AQ40"; -- Temple of Ahn'Qiraj
-	AL["Armory"] = "Armería"; -- Armory
 	AL["BFD"] = "CB"; -- Blackfathom Deeps, Cavernas de Brazanegra
 	AL["BRD"] = "PRN"; -- Blackrock Depths, Profundidades de Roca Negra
 	AL["BRM"] = "MRN"; -- Blackrock Mountain, Montaña Roca Negra"
 	AL["BWL"] = "GAN"; -- Blackwing Lair, Guarida Alanegra
-	AL["Cath"] = "Cated"; --Catedral
 	AL["DM"] = "LM"; -- Dire Maul, La Masacre	
-	AL["Gnome"] = "Gnome"; -- Gnomeregan
-	AL["GY"] = "Cemen"; -- Graveyard, Cementerio
+AL["Gnome"] = "Gnome"; -- Gnomeregan
+	AL["Halls"] = "Salones"; -- Scarlet Halls
 	AL["LBRS"] = "CRNI"; -- Lower Blackrock Spire
-	AL["Lib"] = "Lib"; -- Library
 	AL["Mara"] = "Mara"; -- Maraudon
 	AL["MC"] = "MC";-- Molten Core, Núcleo de Magma
 	AL["RFC"] = "SI"; -- Ragefire Chasm, Sima Ignea
@@ -286,7 +292,7 @@ if AL then
 	AL["Mech"] = "Mech"; --El Mechanar
 	AL["MT"] = "TM"; --Tumbas de Maná
 	AL["Ramp"] = "Murallas"; --Murallas del Fuego Infernal
-	AL["SC"] = "CSS"; --Caverna Santuario Serpiente
+	AL["SSC"] = "CSS"; --Caverna Santuario Serpiente
 	AL["Seth"] = "Seth"; --Salas Sethekk
 	AL["SH"] = "SA"; --Las Salas Arrasadas
 	AL["SL"] = "LS"; --Laberinto de las sombras
@@ -349,26 +355,31 @@ if AL then
 	AL["ZA"] = "ZA"; -- Zul'Aman
 	AL["ZG"] = "ZG"; --Zul'Gurub
 
+	--MoP Acronyms
+	AL["GSS"] = "GSS"; --Gate of the Setting Sun
+	AL["HoF"] = "HoF"; --Heart of Fear
+	AL["MP"] = "MP"; --Mogu'shan Palace
+	AL["MV"] = "MV"; --Mogu'shan Vaults
+	AL["SPM"] = "SPM"; --Shado-Pan Monastery
+	AL["SNT"] = "SNT"; --Siege of Niuzao Temple
+	AL["SB"] = "SB"; --Stormstout Brewery
+	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
+	AL["TES"] = "TES"; --Terrace of Endless Spring
 --************************************************
 -- Instance Entrance Maps
 --************************************************
 
 	--Auchindoun (Entrance)
-	AL["Ha'Lei"] = "Ha'Lei";
-	AL["Greatfather Aldrimus"] = "Abuelo Aldrimus";
 	AL["Clarissa"] = "Clarissa";
-	AL["Ramdor the Mad"] = "Ramdor el Loco";
+	AL["Greatfather Aldrimus"] = "Abuelo Aldrimus";
+	AL["Ha'lei"] = "Ha'Lei";
 	AL["Horvon the Armorer <Armorsmith>"] = "Horvon el Armero <Forjador de armaduras>";
+	AL["Ramdor the Mad"] = "Ramdor el Loco";
 	AL["Nexus-Prince Haramad"] = "Príncipe-nexo Haramad";
-	AL["Artificer Morphalius"] = "Artificiero Morphalius";
-	AL["Mamdy the \"Ologist\""] = "Mamdy el  \"Todólogo\"";
 	AL["\"Slim\" <Shady Dealer>"] = "\"Flaco\" <Vendedor sospechoso>";
 	AL["\"Captain\" Kaftiz"] = "\"Capitán\" Kaftiz";
-	AL["Isfar"] = "Isfar";
-	AL["Field Commander Mahfuun"] = "Comandante de campo Mahfuun";
-	AL["Spy Grik'tha"] = "Espía Grik'tha";
-	AL["Provisioner Tsaalt"] = "Proveedor Tsaalt";
 	AL["Dealer Tariq <Shady Dealer>"] = "Tratante Tariq <Vendedor sospechoso>";
+	AL["Provisioner Tsaalt"] = "Proveedor Tsaalt";
 
 	--Blackfathom Deeps (Entrance)
 
@@ -398,7 +409,6 @@ if AL then
 	AL["Tydormu <Keeper of Lost Artifacts>"] = "Tydormu <Vigilante de artefactos perdidos>";
 
 	--Coilfang Reservoir (Entrance)
-	AL["Watcher Jhang"] = "Vigía Jhang";
 	AL["Mortog Steamhead"] = "Mortog Testavapor";
 
 	--Dire Maul (Entrance)
@@ -427,6 +437,8 @@ if AL then
 
 	--Maraudon (Entrance)
 	AL["The Nameless Prophet"] = "El profeta sin nombre";
+	AL["Cursed Centaur"] = "Centauro maldito";
+	AL["Kherrah"] = "Kherrah";
 
 	--Scarlet Monastery (Entrance)
 
@@ -494,8 +506,8 @@ if AL then
 	AL["Elder Splitrock"] = "Ancestro Parterroca";
 
 	--Ragefire Chasm
-	AL["Bovaal Whitehorn"] = "Bovaal Cuernoblanco";
-	AL["Stone Guard Kurjack"] = "Guardia de piedra Kurjack";
+	AL["Commander Bagran"] = "Comandante Bagran"; --Check
+	AL["Invoker Xorenth"] = "Invocador Xorenth"; --Check
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "Koristrasza";
@@ -541,7 +553,7 @@ if AL then
 	AL["Elder Wildmane"] = "Ancestro Barvacrín";
 
 --****************************
--- Eastern Kingdoms Instances
+-- Eastern Kingdoms Instances (Classic)
 --****************************
 
 	--Blackrock Depths
@@ -555,7 +567,6 @@ if AL then
 	AL["Schematic: Field Repair Bot 74A"] = "Esquema: robot de reparación de campo 74A";
 	AL["Private Rocknot"] = "Soldado Sinroca";
 	AL["Mistress Nagmara"] = "Coima Nagmara";
-	AL["Summoner's Tomb"] = "Tumba de los invocadores"; --Check
 	AL["Jalinda Sprig <Morgan's Militia>"] = "Jalinda Espiga <Milicia de Morgan>";
 	AL["Oralius <Morgan's Militia>"] = "Oralius <Milicia de Morgan>";
 	AL["Thal'trak Proudtusk <Kargath Expeditionary Force>"] = "Thal'trak Colmillo Orgulloso <Fuerza Expedicionaria de Kargath>";
@@ -609,17 +620,10 @@ if AL then
 	--Molten Core
 
 	--Scholomance
-	AL["Blood of Innocents"] = "Sangre de los Inocentes";	
-	AL["Divination Scryer"] = "Cristal de adivinación";
-	AL["Alexi Barov <House of Barov>"] = "Alexi Barov <Casa Barov>";
-	AL["Weldon Barov <House of Barov>"] = "Weldon Barov <Casa Barov>";
-	AL["Eva Sarkhoff"] = "Eva Sarkhoff";
-	AL["Lucien Sarkhoff"] = "Lucien Sarkhoff";
-	AL["The Deed to Caer Darrow"] = "Las escrituras de Castel Darrow";
-	AL["The Deed to Southshore"] = "Las escrituras de Costasur";
-	AL["Torch Lever"] = "Antocha palanca";
-	AL["The Deed to Tarren Mill"] = "Las escrituras de Molino Tarren";
-	AL["The Deed to Brill"] = "Las escrituras de Rémol";
+	AL["Instructor Chillheart's Phylactery"] = "Filacteria del Instructor Corazón de hielo"; --Check
+	AL["Coffer of Forgotten Souls"] = "Cofre de las almas olvidadas"; --Check
+	AL["Professor Slate"] = "Profesor Slate"; 
+	AL["Polyformic Acid Potion"] = "Poción ácida multiforma"; --Check
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Trío de boticarios ";
@@ -631,23 +635,11 @@ if AL then
 	AL["Haunted Stable Hand"] = "Mozo de cuadra encantado";
 	AL["Investigator Fezzen Brasstacks"] = "Investigator Fezzen Brasstacks"; --FALTA		
 
-	--SM: Armory
-	AL["Joseph the Crazed"] = "Joseph el Enloquecido";
-	AL["Dark Ranger Velonara"] = "Forestal oscura Velonara";
-	AL["Dominic"] = "Dominic";
-
 	--SM: Cathedral
-	AL["Cathedral"] = "Catedral"; -- Subzone of Scarlet Monastery
-	AL["Joseph the Insane <Scarlet Champion>"] = "Joseph el Loco <Campeón Escarlata>";
 
-	--SM: Graveyard
-	AL["Vorrel Sengutz"] = "Vorrel Sengutz";
-	AL["Pumpkin Shrine"] = "Calabaza Santuario";
-	AL["Joseph the Awakened"] = "Joseph el Despierto";
-
-	--SM: Library
-	AL["Library"] = "Librería";
-	AL["Compendium of the Fallen"] = "Compendio de los Caídos";
+	--SM: Halls
+	AL["Hunter Commander"] = "Comandante cazador"; --Check
+	AL["Reinforced Archery Target"] = "Diana de arquero reforzada"; --Check
 
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Comandante de Cruzada Eligor Albar <Hermandad de la Luz>";
@@ -700,21 +692,29 @@ if AL then
 --*******************
 
 	--Auch: Auchenai Crypts
+	AL["Draenei Spirit"] = "Espíritu draenei";
 	AL["Avatar of the Martyred"] = "Avatar de los Martirizados";
 	AL["D'ore"] = "D'ore";
+	AL["Tormented Soulpriest"] = "Sacerdote de almas atormentado";
 
 	--Auch: Mana-Tombs
 	AL["The Eye of Haramad"] = "El ojo de Haramad";
+	AL["Artificer Morphalius"] = "Artificiero Morphalius";
+	AL["Mamdy the \"Ologist\""] = "Mamdy el \"Todólogo\"";
 	AL["Shadow Lord Xiraxis"] = "Señor de las Sombras Xiraxis";
 	AL["Ambassador Pax'ivi"] = "Embajador Pax'ivi";
 	AL["Cryo-Engineer Sha'heen"] = "Crioingeniero Sha'heen";
 	AL["Ethereal Transporter Control Panel"] = "Panel de control del transportador etéreo";
 
 	--Auch: Sethekk Halls
+	AL["Isfar"] = "Isfar";
+	AL["Dealer Vijaad"] = "Tratante Vijaad";
 	AL["Lakka"] = "Lakka";
 	AL["The Saga of Terokk"] = "Esbirro de Terokk";
 
 	--Auch: Shadow Labyrinth
+	AL["Field Commander Mahfuun"] = "Comandante de campo Mahfuun";
+	AL["Spy Grik'tha"] = "Espía Grik'tha";
 	AL["The Codex of Blood"] = "El Códice de Sangre";
 	AL["First Fragment Guardian"] = "Guardián del Primer Fragmento";
 	AL["Spy To'gun"] = "Espía To'gun";
@@ -733,19 +733,23 @@ if AL then
 
 	--Black Temple (Top)
 
-	--CR: Serpentshrine Cavern
+	--CFR: Serpentshrine Cavern
 	AL["Seer Olum"] = "Profeta Olum";
 
-	--CR: The Slave Pens
+	--CFR: The Slave Pens
+	AL["Nahuud"] = "Nahuud";
+	AL["Watcher Jhang"] = "Vigía Jhang";
 	AL["Weeder Greenthumb"] = "Desherbador Pulgaverde";
 	AL["Skar'this the Heretic"] = "Skar'this el Herético";
 	AL["Naturalist Bite"] = "Naturalista Mordisco";
 
-	--CR: The Steamvault
+	--CFR: The Steamvault
+	AL["Windcaller Claw"] = "Clamavientos Zarpa";
 	AL["Main Chambers Access Panel"] = "Panel de acceso de la cámara principal";
 	AL["Second Fragment Guardian"] = "Guardián del Segundo Fragmento";
 
-	--CR: The Underbog
+	--CFR: The Underbog
+	AL["T'shu"] = "T'shu";
 	AL["The Underspore"] = "La Sotoespora";
 	AL["Earthbinder Rayge"] = "Lingaterra Rayge";
 
@@ -811,8 +815,12 @@ if AL then
 	--Gruul's Lair
 
 	--HFC: The Blood Furnace
+	AL["Gunny"] = "Pistolete";
+	AL["Caza'rez"] = "Caza'rez";
 
 	--HFC: Hellfire Ramparts
+	AL["Advance Scout Chadwick"] = "Explorador táctico Chadwick";
+	AL["Stone Guard Stok'ton"] = "Guardia de piedra Stok'ton";
 	AL["Reinforced Fel Iron Chest"] = "Cofre de hierro vil reforzado";
 
 	--HFC: Magtheridon's Lair
@@ -865,6 +873,7 @@ if AL then
 	AL["Echo of Medivh"] = "Eco de Medivh";
 
 	--Magisters Terrace
+	AL["Exarch Larethor"] = "Exarca Larethor";
 	AL["Fel Crystals"] = "Cristales Viles";
 	AL["Apoko"] = "Apoko";
 	AL["Eramas Brightblaze"] = "Eramas Llamarada Brillante";
@@ -895,13 +904,15 @@ if AL then
 	--TK: The Eye
 
 --*****************
--- WotLK Instances
+-- Wrath of the Lich King Instances
 --*****************
 
 	--Azjol-Nerub: Ahn'kahet: The Old Kingdom
+	AL["Seer Ixit"] = "Seer Ixit"; --Check
 	AL["Ahn'kahet Brazier"] = "Blandón Ahn'kahet"; --Check
 
 	--Azjol-Nerub: Azjol-Nerub
+	AL["Reclaimer A'zak"] = "Reivindicador A'zak";
 	AL["Watcher Gashra"] = "Vigía Gashra";
 	AL["Watcher Narjil"] = "Vigía Narjil";
 	AL["Watcher Silthik"] = "Vigía Silthik";
@@ -914,13 +925,13 @@ if AL then
 	AL["Chromie"] = "Cromi";
 
 	--Drak'Tharon Keep
+	AL["Image of Drakuru"] = "Imagen de Drakuru";
 	AL["Kurzel"] = "Kurzel";
 	AL["Elder Kilias"] = "Ancestro Kilias";
 	AL["Drakuru's Brazier"] = "El blandón de Drakuru"; --Check
 
 	--The Frozen Halls: Halls of Reflection
 	--3 beginning NPCs omitted, see The Forge of Souls
-	AL["Wrath of the Lich King"] = "El Rey Exánime";
 	AL["The Captain's Chest"] = "El cofre del Capitán";
 
 	--The Frozen Halls: Pit of Saron
@@ -938,6 +949,8 @@ if AL then
 	AL["Dark Ranger Kalira"] = "Forestal oscura Kalira";
 
 	--Gundrak
+	AL["Chronicler Bah'Kini"] = "Cronista Bah'Kini";
+	AL["Tol'mar"] = "Tol'mar";
 	AL["Elder Ohanzee"] = "Ancestro Ohanzee";
 
 	--Icecrown Citadel
@@ -967,21 +980,23 @@ if AL then
 	--The Nexus: The Eye of Eternity
 
 	--The Nexus: The Nexus
+	AL["Warmage Kaitlyn"] = "Maga de guerra Kaitlyn";
 	AL["Berinand's Research"] = "Investigación de Berinand";
 	AL["Elder Igasho"] = "Ancestro Igasho";
 
 	--The Nexus: The Oculus
+	AL["Belgaristrasz"] = "Belgaristrasz";
+	AL["Eternos"] = "Eternos";
+	AL["Verdisa"] = "Verdisa";
 	AL["Centrifuge Construct"] = "Ensamblaje de centrifugadora";
 	AL["Cache of Eregos"] = "Alijo de Eregos";
 
 	--Trial of the Champion
-	AL["Champions of the Alliance"] = "Campeones de la Alianza";
 	AL["Marshal Jacob Alerius"] = "Mariscal Jacob Alerius";
 	AL["Ambrose Boltspark"] = "Ambrose Chisparrayo";
 	AL["Colosos"] = "Colosos";
 	AL["Jaelyne Evensong"] = "Jaelyne Unicanto";
 	AL["Lana Stouthammer"] = "Lana Martillotenaz";
-	AL["Champions of the Horde"] = "Campeones de la Horda";
 
 	--Trial of the Crusader
 	AL["Heroic: Trial of the Grand Crusader"] = "Heróica: Prueba del Gran Cruzado";
@@ -1009,23 +1024,28 @@ if AL then
 	--Ulduar E
 
 	--Ulduar: Halls of Lightning
+	AL["Stormherald Eljrrin"] = "Heraldo de tormenta Eljrrin";
 
 	--Ulduar: Halls of Stone
+	AL["Kaldir Ironbane"] = "Kaldir Temeferro";
 	AL["Tribunal Chest"] = "Cofre del tribunal";
 	AL["Elder Yurauk"] = "Ancestro Yurauk";
 	AL["Brann Bronzebeard"] = "Brann Barbabronce";
 
 	--Utgarde Keep: Utgarde Keep
+	AL["Defender Mordun"] = "Defensor Mordun";
 	AL["Dark Ranger Marrah"] = "Forestal oscura Marrah";
 	AL["Elder Jarten"] = "Ancestro Jarten";
 
 	--Utgarde Keep: Utgarde Pinnacle
 	AL["Brigg Smallshanks"] = "Brigg Espinillas";
+	AL["Image of Argent Confessor Paletress"] = "Imagen de la Confesora Argenta Cabelloclaro"; --Check
 	AL["Elder Chogan'gada"] = "Ancestro Chogan'gada";
 
 	--Vault of Archavon
 
 	--The Violet Hold
+	AL["Lieutenant Sinclari"] = "Teniente Sinclari";
 
 --*********************
 -- Cataclysm Instances
@@ -1038,8 +1058,12 @@ if AL then
 	--Blackwing Descent
 
 	--Caverns of Time: Dragon Soul
+	AL["Dasnurimi <Geologist & Conservator>"] = "Dasnurimi <Geóloga y conservadora>";
+	AL["Lord Afrasastrasz"] = "Lord Afrasastrasz";
 
 	--Caverns of Time: End Time
+	AL["Alurmi"] = "Alurmi";
+	AL["Nozdormu"] = "Nozdormu";
 
 	--Caverns of Time: Hour of Twilight
 
@@ -1134,5 +1158,31 @@ if AL then
 	AL["Mortaxx <The Tolling Bell>"] = "Mortaxx <La campana que dobla>";
 	AL["Tiki Lord Zim'wae"] = "Señor Tiki Zim'wae";
 	AL["Zanzil's Cauldron of Burning Blood"] = "Caldero de sangre ardiente de Zanzil";
+--*********************
+-- Mists of Pandaria Instances
+--*********************
+
+	--Gate of the Setting Sun
+
+	--Heart of Fear
+
+	--Mogu'shan Palace
+
+	--Mogu'shan Vaults
+
+	--Shado-Pan Monastery
+	
+	--Scarlet Halls
+	AL["Hooded Crusader"] = "Cruzada encapuchada";
+	AL["Bucket of Meaty Dog Food"] = "Cubo de comida de perro"; --CHECK
+
+	--Siege of Niuzao Temple
+
+	--Stormstout Brewery
+
+	--Temple of the Jade Serpent
+
+	--Terrace of Endless Spring
+
 
 end

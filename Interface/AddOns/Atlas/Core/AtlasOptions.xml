@@ -1,4 +1,4 @@
-<!-- $Id: AtlasOptions.xml 1541 2011-11-21 17:23:05Z arithmandar $ -->
+<!-- $Id: AtlasOptions.xml 1661 2012-09-18 13:41:12Z arithmandar $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -234,6 +234,7 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
+<!--
 			<Slider name="$ParentSliderButtonPos" inherits="OptionsSliderTemplate">
 				<Size>
 					<AbsDimension x="360" y="16"/>
@@ -278,6 +279,7 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
+-->
 			<Slider name="$ParentSliderAlpha" inherits="OptionsSliderTemplate">
 				<Size>
 					<AbsDimension x="360" y="16"/>
@@ -370,7 +372,8 @@
 					</OnShow>
 				</Scripts>
 			</Button>
-			<Button name="$ParentResetPosition" inherits="UIPanelButtonTemplate2" text="ATLAS_OPTIONS_RESETPOS">
+<!--
+			<Button name="$ParentResetPosition" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_RESETPOS">
 				<Size>
 					<AbsDimension x="160" y="32"/>
 				</Size>
@@ -387,6 +390,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
+-->
 		</Frames>
 		<Scripts>
 			<OnLoad>

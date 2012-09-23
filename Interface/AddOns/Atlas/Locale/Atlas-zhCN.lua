@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-zhCN.lua 1580 2011-12-02 13:35:35Z arithmandar $
+﻿-- $Id: Atlas-zhCN.lua 1685 2012-09-22 16:27:46Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -90,10 +90,13 @@ if AL then
 	AL["ATLAS_OPTIONS_CLAMPED_TIP"] = "使 Atlas 窗口被拖曳时不会超出游戏主画面的边界, 关闭此选项则可将 Atlas 窗口拖曳并超出游戏画面边界。";
 	AL["ATLAS_OPTIONS_CTRL"] = "按下 Ctrl 显示弹出工具说明";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "勾选后当鼠标移到地图信息字段时，按下 Ctrl 控制键，则会将信息的完整信息以提示型态显示。当信息过长而被截断时很有用。";
+	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "不再显示相同信息。";
 
+	AL["ATLAS_BUTTON_CLOSE"] = "关闭";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
 	AL["ATLAS_BUTTON_TOOLTIP_HINT"] = "单击打开 Atlas。\n中键单击打开 Atlas 选项。\n右击可移动这个按钮。";
 	AL["ATLAS_LDB_HINT"] = "单击打开 Atlas。\n右击打开 Atlas 选项。";
+	AL["ATLAS_MINIMAPLDB_HINT"] = "单击打开 Atlas。\n右击打开 Atlas 选项。\n右击並拖拉可移动这个按钮。";
 
 	AL["ATLAS_OPTIONS_CATDD"] = "副本地图排序方式：";
 	AL["ATLAS_DDL_CONTINENT"] = "所属大陆";
@@ -102,13 +105,15 @@ if AL then
 	AL["ATLAS_DDL_CONTINENT_OUTLAND"] = "外域副本";
 	AL["ATLAS_DDL_CONTINENT_NORTHREND"] = "诺森德副本";
 	AL["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "深岩之洲副本";
+	AL["ATLAS_DDL_CONTINENT_PANDARIA"] = "潘达利亚副本";
 	AL["ATLAS_DDL_LEVEL"] = "等级";
 	AL["ATLAS_DDL_LEVEL_UNDER45"] = "45 级以下副本";
 	AL["ATLAS_DDL_LEVEL_45TO60"] = "45-60 级副本";
 	AL["ATLAS_DDL_LEVEL_60TO70"] = "60-70 级副本";
 	AL["ATLAS_DDL_LEVEL_70TO80"] = "70-80 级副本";
 	AL["ATLAS_DDL_LEVEL_80TO85"] = "80-85 级副本";
-	AL["ATLAS_DDL_LEVEL_85PLUS"] = "85 级以上副本";
+	AL["ATLAS_DDL_LEVEL_85TO90"] = "85-90 级以副本";
+	AL["ATLAS_DDL_LEVEL_90PLUS"] = "90 级以上副本";
 	AL["ATLAS_DDL_PARTYSIZE"] = "副本规模";
 	AL["ATLAS_DDL_PARTYSIZE_5_AE"] = "5 人副本 (第一页)";
 	AL["ATLAS_DDL_PARTYSIZE_5_FS"] = "5 人副本 (第二页)";
@@ -116,12 +121,13 @@ if AL then
 	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "10 人副本 (第一页)";
 	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "10 人副本 (第二页)";
 	AL["ATLAS_DDL_PARTYSIZE_20TO40"] = "20-40 人副本";
-	AL["ATLAS_DDL_EXPANSION"] = "资料片";
+	AL["ATLAS_DDL_EXPANSION"] = "资料片";	-- Sort Instance Maps by: Expansion
 	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "旧世界副本 (第一页)";
 	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "旧世界副本 (第二页)";
 	AL["ATLAS_DDL_EXPANSION_BC"] = "《燃烧的远征》副本";
 	AL["ATLAS_DDL_EXPANSION_WOTLK"] = "《巫妖王之怒》副本";
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "《大地的裂变》副本";
+	AL["ATLAS_DDL_EXPANSION_MOP"] = "《熊猫人之谜》副本";
 	AL["ATLAS_DDL_TYPE"] = "类型";
 	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "副本 (第一页)";
 	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "副本 (第二页)";
@@ -136,6 +142,9 @@ if AL then
 	AL["ATLAS_DEP_MSG2"] = "这些插件已经被禁用。";
 	AL["ATLAS_DEP_MSG3"] = "请从插件目录（AddOns）中将其删除。";
 	AL["ATLAS_DEP_OK"] = "确定";
+
+	AL["ATLAS_INFO"] = "Atlas 信息";
+	AL["ATLAS_INFO_SPTACK"] = "重要提示：\n\n由于增加插件文件大小的关注，我们移出\n部分地下城地图和内置插件到单独模块。\n\n用户可以从各大知名的游戏站点下载我们\n的插件可能只包含了 Atlas 核心功能以及\n大灾变地图。\n\n用户如果想下载全部旧地下城地图和全部\n我们制作的 Atlas 其他模块需要单独下载。\n\n阅读更多信息在下面的论坛主题：\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -234,17 +243,14 @@ if AL then
 	AL["AQ"] = "AQ"; -- Ahn'Qiraj
 	AL["AQ20"] = "AQ20"; -- Ruins of Ahn'Qiraj
 	AL["AQ40"] = "AQ40"; -- Temple of Ahn'Qiraj
-	AL["Armory"] = "Armory"; -- Armory
 	AL["BFD"] = "BFD"; -- Blackfathom Deeps
 	AL["BRD"] = "BRD"; -- Blackrock Depths
 	AL["BRM"] = "BRM"; -- Blackrock Mountain
 	AL["BWL"] = "BWL"; -- Blackwing Lair
-	AL["Cath"] = "Cath"; -- Cathedral
 	AL["DM"] = "DM"; -- Dire Maul
 	AL["Gnome"] = "Gnome"; -- Gnomeregan
-	AL["GY"] = "GY"; -- Graveyard
+	AL["Halls"] = "Halls"; -- Scarlet Halls
 	AL["LBRS"] = "LBRS"; -- Lower Blackrock Spire
-	AL["Lib"] = "Lib"; -- Library
 	AL["Mara"] = "Mara"; -- Maraudon
 	AL["MC"] = "MC"; -- Molten Core
 	AL["RFC"] = "RFC"; -- Ragefire Chasm
@@ -282,7 +288,7 @@ if AL then
 	AL["Mech"] = "Mech"; -- The Mechanar
 	AL["MT"] = "MT"; -- Mana-Tombs
 	AL["Ramp"] = "Ramp"; -- Hellfire Ramparts
-	AL["SC"] = "SC"; -- Serpentshrine Cavern
+	AL["SSC"] = "SSC"; -- Serpentshrine Cavern
 	AL["Seth"] = "Seth"; -- Sethekk Halls
 	AL["SH"] = "SH"; -- The Shattered Halls
 	AL["SL"] = "SL"; -- Shadow Labyrinth
@@ -345,26 +351,31 @@ if AL then
 	AL["ZA"] = "ZA"; -- Zul'Aman
 	AL["ZG"] = "ZG"; --Zul'Gurub
 
+	--MoP Acronyms
+	AL["GSS"] = "GSS"; --Gate of the Setting Sun
+	AL["HoF"] = "HoF"; --Heart of Fear
+	AL["MP"] = "MP"; --Mogu'shan Palace
+	AL["MV"] = "MV"; --Mogu'shan Vaults
+	AL["SPM"] = "SPM"; --Shado-Pan Monastery
+	AL["SNT"] = "SNT"; --Siege of Niuzao Temple
+	AL["SB"] = "SB"; --Stormstout Brewery
+	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
+	AL["TES"] = "TES"; --Terrace of Endless Spring
 --************************************************
 -- Instance Entrance Maps
 --************************************************
 
 	--Auchindoun (Entrance)
-	AL["Ha'Lei"] = "哈雷";
-	AL["Greatfather Aldrimus"] = "奥德里姆斯宗父";
 	AL["Clarissa"] = "克拉里萨";
-	AL["Ramdor the Mad"] = "疯狂的拉姆杜尔";
+	AL["Greatfather Aldrimus"] = "奥德里姆斯宗父";
+	AL["Ha'lei"] = "哈雷";
 	AL["Horvon the Armorer <Armorsmith>"] = "铸甲匠霍尔冯 <护甲锻造师>";
+	AL["Ramdor the Mad"] = "疯狂的拉姆杜尔";
 	AL["Nexus-Prince Haramad"] = "节点亲王哈拉迈德";
-	AL["Artificer Morphalius"] = "工匠莫法鲁斯";
-	AL["Mamdy the \"Ologist\""] = "“杂学家”玛姆迪";
 	AL["\"Slim\" <Shady Dealer>"] = "“瘦子” <毒药商>";
 	AL["\"Captain\" Kaftiz"] = "“上尉”卡弗提兹";
-	AL["Isfar"] = "伊斯法尔";
-	AL["Field Commander Mahfuun"] = "战地指挥官玛弗恩";
-	AL["Spy Grik'tha"] = "间谍格利克萨";
-	AL["Provisioner Tsaalt"] = "补给官塔萨尔特";
 	AL["Dealer Tariq <Shady Dealer>"] = "商人塔利基 <毒药商>";
+	AL["Provisioner Tsaalt"] = "补给官塔萨尔特";
 
 	--Blackfathom Deeps (Entrance)
 
@@ -394,7 +405,6 @@ if AL then
 	AL["Tydormu <Keeper of Lost Artifacts>"] = "泰多姆 <失落神器的保管者>";
 
 	--Coilfang Reservoir (Entrance)
-	AL["Watcher Jhang"] = "观察者杰哈恩";
 	AL["Mortog Steamhead"] = "莫尔托格";
 
 	--Dire Maul (Entrance)
@@ -423,6 +433,8 @@ if AL then
 
 	--Maraudon (Entrance)
 	AL["The Nameless Prophet"] = "无名预言者";
+	AL["Cursed Centaur"] = "被诅咒的半人马";
+	AL["Kherrah"] = "柯尔拉";
 
 	--Scarlet Monastery (Entrance)
 
@@ -490,8 +502,8 @@ if AL then
 	AL["Elder Splitrock"] = "碎石长者";
 
 	--Ragefire Chasm
-	AL["Bovaal Whitehorn"] = "波瓦·白角";
-	AL["Stone Guard Kurjack"] = "石头守卫库尔加克";
+	AL["Commander Bagran"] = "指挥官巴格兰";
+	AL["Invoker Xorenth"] = "祈求者克索伦斯";
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "克莉丝塔萨";
@@ -551,7 +563,6 @@ if AL then
 	AL["Schematic: Field Repair Bot 74A"] = "结构图：战地修理机器人74A型";
 	AL["Private Rocknot"] = "罗克诺特下士";
 	AL["Mistress Nagmara"] = "娜玛拉小姐";
-	AL["Summoner's Tomb"] = "召唤者之墓";
 	AL["Jalinda Sprig <Morgan's Militia>"] = "加琳达 <摩根民兵团>";
 	AL["Oralius <Morgan's Militia>"] = "奥拉留斯 <摩根民兵团>";
 	AL["Thal'trak Proudtusk <Kargath Expeditionary Force>"] = "萨特拉克 <卡加斯远征军>";
@@ -605,17 +616,10 @@ if AL then
 	--Molten Core
 
 	--Scholomance
-	AL["Blood of Innocents"] = "无辜者之血";
-	AL["Divination Scryer"] = "预言水晶球";
-	AL["Alexi Barov <House of Barov>"] = "阿莱克斯·巴罗夫 <巴罗夫家族>";
-	AL["Weldon Barov <House of Barov>"] = "维尔顿·巴罗夫 <巴罗夫家族>";
-	AL["Eva Sarkhoff"] = "艾瓦·萨克霍夫";
-	AL["Lucien Sarkhoff"] = "卢森·萨克霍夫";
-	AL["The Deed to Caer Darrow"] = "凯尔达隆地契";
-	AL["The Deed to Southshore"] = "南海镇地契";
-	AL["Torch Lever"] = "火炬";
-	AL["The Deed to Tarren Mill"] = "塔伦米尔地契";
-	AL["The Deed to Brill"] = "布瑞尔地契";
+	AL["Instructor Chillheart's Phylactery"] = "指导者寒心的护命匣";
+	AL["Coffer of Forgotten Souls"] = "失落灵魂容器";
+	AL["Professor Slate"] = "斯雷特教授";
+	AL["Polyformic Acid Potion"] = "蚁酸药水";
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "药剂师三人组";
@@ -627,23 +631,11 @@ if AL then
 	AL["Haunted Stable Hand"] = "鬼怪马夫";
 	AL["Investigator Fezzen Brasstacks"] = "调查员费岑·布莱斯塔克";
 
-	--SM: Armory
-	AL["Joseph the Crazed"] = "发疯的约瑟夫";
-	AL["Dark Ranger Velonara"] = "黑暗游侠维罗娜拉";
-	AL["Dominic"] = "多米尼克";
-
 	--SM: Cathedral
-	AL["Cathedral"] = "大教堂"; -- Subzone of Scarlet Monastery
-	AL["Joseph the Insane <Scarlet Champion>"] = "癫狂的约瑟夫 <血色勇士>";
 
-	--SM: Graveyard
-	AL["Vorrel Sengutz"] = "沃瑞尔·森加斯";
-	AL["Pumpkin Shrine"] = "南瓜神龛";
-	AL["Joseph the Awakened"] = "醒悟的约瑟夫";
-
-	--SM: Library
-	AL["Library"] = "图书馆";
-	AL["Compendium of the Fallen"] = "堕落者纲要";
+	--SM: Halls
+	AL["Hunter Commander"] = "指挥官林顿";
+	AL["Reinforced Archery Target"] = "强固箭靶";
 
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "十字军指挥官埃里戈尔·黎明使者 <圣光兄弟会>";
@@ -696,21 +688,29 @@ if AL then
 --*******************
 
 	--Auch: Auchenai Crypts
+	AL["Draenei Spirit"] = "德莱尼灵魂";
 	AL["Avatar of the Martyred"] = "殉难者的化身";
 	AL["D'ore"] = "德欧里";
+	AL["Tormented Soulpriest"] = "受折磨的灵魂牧师";
 
 	--Auch: Mana-Tombs
 	AL["The Eye of Haramad"] = "哈拉迈德之眼";
+	AL["Artificer Morphalius"] = "工匠莫法鲁斯";
+	AL["Mamdy the \"Ologist\""] = "“杂学家”玛姆迪";
 	AL["Shadow Lord Xiraxis"] = "暗影领主希拉卡希斯";
 	AL["Ambassador Pax'ivi"] = "帕克希维大使";
 	AL["Cryo-Engineer Sha'heen"] = "低温工程师沙赫恩";
 	AL["Ethereal Transporter Control Panel"] = "虚灵传送器控制台";
 
 	--Auch: Sethekk Halls
+	AL["Isfar"] = "伊斯法尔";
+	AL["Dealer Vijaad"] = "商人维嘉德";
 	AL["Lakka"] = "拉卡";
 	AL["The Saga of Terokk"] = "泰罗克的传说";
 
 	--Auch: Shadow Labyrinth
+	AL["Field Commander Mahfuun"] = "战地指挥官玛弗恩";
+	AL["Spy Grik'tha"] = "间谍格利克萨";
 	AL["The Codex of Blood"] = "鲜血法典";
 	AL["First Fragment Guardian"] = "第一块碎片的守护者";
 	AL["Spy To'gun"] = "间谍托古恩";
@@ -733,15 +733,19 @@ if AL then
 	AL["Seer Olum"] = "先知奥鲁姆";
 
 	--CFR: The Slave Pens
+	AL["Nahuud"] = "纳霍德";
+	AL["Watcher Jhang"] = "观察者杰哈恩";
 	AL["Weeder Greenthumb"] = "除草者格林萨姆";
 	AL["Skar'this the Heretic"] = "异教徒斯卡希斯";
 	AL["Naturalist Bite"] = "博学者拜特";
 
 	--CFR: The Steamvault
+	AL["Windcaller Claw"] = "唤风者克劳恩";
 	AL["Main Chambers Access Panel"] = "主厅控制面板";
 	AL["Second Fragment Guardian"] = "第二块碎片的守护者";
 
 	--CFR: The Underbog
+	AL["T'shu"] = "塔苏";
 	AL["The Underspore"] = "幽暗孢子";
 	AL["Earthbinder Rayge"] = "缚地者雷葛";
 
@@ -807,8 +811,12 @@ if AL then
 	--Gruul's Lair
 
 	--HFC: The Blood Furnace
+	AL["Gunny"] = "冈尼";
+	AL["Caza'rez"] = "卡萨雷兹";
 
 	--HFC: Hellfire Ramparts
+	AL["Advance Scout Chadwick"] = "高级斥候卡德维克";
+	AL["Stone Guard Stok'ton"] = "石头守卫斯托克顿";
 	AL["Reinforced Fel Iron Chest"] = "强化魔铁箱";
 
 	--HFC: Magtheridon's Lair
@@ -861,6 +869,7 @@ if AL then
 	AL["Echo of Medivh"] = "麦迪文的回音";
 
 	--Magisters Terrace
+	AL["Exarch Larethor"] = "主教拉雷索尔";
 	AL["Fel Crystals"] = "邪能水晶";
 	AL["Apoko"] = "埃波克";
 	AL["Eramas Brightblaze"] = "埃拉玛斯·炽光";
@@ -891,13 +900,15 @@ if AL then
 	--TK: The Eye
 
 --*****************
--- WotLK Instances
+-- Wrath of the Lich King Instances
 --*****************
 
 	--Azjol-Nerub: Ahn'kahet: The Old Kingdom
+	AL["Seer Ixit"] = "先知伊克塞特";
 	AL["Ahn'kahet Brazier"] = "安卡赫特火盆";
 
 	--Azjol-Nerub: Azjol-Nerub
+	AL["Reclaimer A'zak"] = "复国者阿扎克";
 	AL["Watcher Gashra"] = "看守者加什拉";
 	AL["Watcher Narjil"] = "看守者纳尔伊";
 	AL["Watcher Silthik"] = "看守者希尔希克";
@@ -910,13 +921,13 @@ if AL then
 	AL["Chromie"] = "克罗米";
 
 	--Drak'Tharon Keep
+	AL["Image of Drakuru"] = "达库鲁的影像";
 	AL["Kurzel"] = "库塞尔";
 	AL["Elder Kilias"] = "长者基里亚斯";
 	AL["Drakuru's Brazier"] = "达库鲁的火盆";
 
 	--The Frozen Halls: Halls of Reflection
 	--3 beginning NPCs omitted, see The Forge of Souls
-	AL["Wrath of the Lich King"] = "巫妖王之怒";
 	AL["The Captain's Chest"] = "队长的箱子";
 
 	--The Frozen Halls: Pit of Saron
@@ -934,6 +945,8 @@ if AL then
 	AL["Dark Ranger Kalira"] = "黑暗游侠卡丽拉";
 
 	--Gundrak
+	AL["Chronicler Bah'Kini"] = "记载者拜基妮";
+	AL["Tol'mar"] = "托玛尔";
 	AL["Elder Ohanzee"] = "长者奥哈齐";
 
 	--Icecrown Citadel
@@ -963,21 +976,23 @@ if AL then
 	--The Nexus: The Eye of Eternity
 
 	--The Nexus: The Nexus
+	AL["Warmage Kaitlyn"] = "战斗法师凯特琳";
 	AL["Berinand's Research"] = "伯林纳德的研究笔记";
 	AL["Elder Igasho"] = "长者伊加苏";
 
 	--The Nexus: The Oculus
+	AL["Belgaristrasz"] = "贝加里斯";
+	AL["Eternos"] = "伊特努斯";
+	AL["Verdisa"] = "沃尔蒂萨";
 	AL["Centrifuge Construct"] = "离心构造体";
 	AL["Cache of Eregos"] = "埃雷苟斯的宝箱";
 
 	--Trial of the Champion
-	AL["Champions of the Alliance"] = "联盟冠军";
 	AL["Marshal Jacob Alerius"] = "雅克布·奥勒留斯元帅";
 	AL["Ambrose Boltspark"] = "安布罗斯·雷钉";
 	AL["Colosos"] = "克罗索斯";
 	AL["Jaelyne Evensong"] = "娅琳·永歌";
 	AL["Lana Stouthammer"] = "拉娜·硬锤";
-	AL["Champions of the Horde"] = "部落冠军";
 
 	--Trial of the Crusader
 	AL["Heroic: Trial of the Grand Crusader"] = "英雄: 大十字军的试炼";
@@ -1005,23 +1020,28 @@ if AL then
 	--Ulduar E
 
 	--Ulduar: Halls of Lightning
+	AL["Stormherald Eljrrin"] = "风暴先驱埃尔林";
 
 	--Ulduar: Halls of Stone
+	AL["Kaldir Ironbane"] = "卡迪尔·斩铁";
 	AL["Tribunal Chest"] = "远古法庭宝箱";
 	AL["Elder Yurauk"] = "长者尤拉克";
 	AL["Brann Bronzebeard"] = "布莱恩·铜须";
 
 	--Utgarde Keep: Utgarde Keep
+	AL["Defender Mordun"] = "防御者墨尔顿";
 	AL["Dark Ranger Marrah"] = "黑暗游侠玛尔拉";
 	AL["Elder Jarten"] = "长者亚尔特恩";
 
 	--Utgarde Keep: Utgarde Pinnacle
 	AL["Brigg Smallshanks"] = "布雷格";
+	AL["Image of Argent Confessor Paletress"] = "银色神官帕尔崔丝的影像";
 	AL["Elder Chogan'gada"] = "长者库甘达加";
 
 	--Vault of Archavon
 
 	--The Violet Hold
+	AL["Lieutenant Sinclari"] = "辛克莱尔中尉";
 
 --*********************
 -- Cataclysm Instances
@@ -1034,8 +1054,12 @@ if AL then
 	--Blackwing Descent
 
 	--Caverns of Time: Dragon Soul
+	AL["Dasnurimi <Geologist & Conservator>"] = "达丝诺瑞米 <地质学家和保护人>";
+	AL["Lord Afrasastrasz"] = "阿弗拉沙斯塔兹";
 
 	--Caverns of Time: End Time
+	AL["Alurmi"] = "艾鲁尔米";
+	AL["Nozdormu"] = "诺兹多姆";
 
 	--Caverns of Time: Hour of Twilight
 
@@ -1130,5 +1154,31 @@ if AL then
 	AL["Mortaxx <The Tolling Bell>"] = "莫尔塔克斯 <死亡丧钟>";
 	AL["Tiki Lord Zim'wae"] = "蒂基面具之王泽姆维";
 	AL["Zanzil's Cauldron of Burning Blood"] = "赞吉尔的燃烧之血坩埚";
+
+--*********************
+-- Mists of Pandaria Instances
+--*********************
+
+	--Gate of the Setting Sun
+
+	--Heart of Fear
+
+	--Mogu'shan Palace
+
+	--Mogu'shan Vaults
+
+	--Shado-Pan Monastery
+	
+	--Scarlet Halls
+	AL["Hooded Crusader"] = "蒙面的十字军战士";
+	AL["Bucket of Meaty Dog Food"] = "一桶多肉狗食"; --
+
+	--Siege of Niuzao Temple
+
+	--Stormstout Brewery
+
+	--Temple of the Jade Serpent
+
+	--Terrace of Endless Spring
 
 end
