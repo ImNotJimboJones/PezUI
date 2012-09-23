@@ -1,0 +1,12 @@
+## Interface: 50001
+## Title: TipTacMogIt
+## Notes: Applies TipTac style to the MogIt tooltip frame
+## Author: Pezzer
+## Version: 1.0
+## Dependencies: TipTac, MogIt
+## X-Curse-Packaged-Version: v1.0
+## X-Curse-Project-Name: TipTacMogIt
+## X-Curse-Project-ID: tip-tac-mogit
+## X-Curse-Repository-ID: wow/tip-tac-mogit/mainline
+
+TipTacMogIt.lua

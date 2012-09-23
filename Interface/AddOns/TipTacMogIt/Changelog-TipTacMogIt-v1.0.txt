@@ -1,0 +1,12 @@
+tag v1.0
+67a6f7dca297ab4a2c2c72b28ed27a6774a2c28b
+Pezzer <ImNotJimboJones@mac.com>
+2012-09-24 04:21:03 -0400
+
+Tagging as v1.0
+
+
+--------------------
+
+Pezzer:
+	- Initial commit of toc and source
