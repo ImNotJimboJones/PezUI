@@ -9,7 +9,7 @@ pez = {};
 -- PezUI Core Options
 ------------------------------------------------------
 pez.options = {
-	DEBUG = true
+	DEBUG = false
 };
 
 
