@@ -1,7 +1,8 @@
-local font = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
+local font = TidyPlatesHubLocalizedFont or "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
+
 local PanelHelpers = TidyPlatesUtility.PanelHelpers 		-- PanelTools
 local DropdownFrame = CreateFrame("Frame", "TidyPlatesHubCategoryFrame", UIParent, "UIDropDownMenuTemplate" )
-
+local L = TidyPlatesHub_GetLocalizedString
 --[[
 The basic concept of RapidPanel is that each UI widget will get attached to a 'rail' or alignment column.  This rail
 provides access to a common update function.  Each widget gets attached as a stack, with widget definition tagging
@@ -23,7 +24,7 @@ end
 
 local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, yOffset)
 		local columnFrame = ...
-		local frame = PanelHelpers:CreateSliderFrame(name, columnFrame, label, .5, 0, 1, .1)	
+		local frame = PanelHelpers:CreateSliderFrame(name, columnFrame, L(label), .5, 0, 1, .1)	
 		frame:SetWidth(250)	
 		-- Margins	-- Bottom/Left are negative
 		frame.Margins = { Left = 12, Right = 8, Top = 20, Bottom = 13,}		
@@ -39,7 +40,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 	
 	local function CreateQuickCheckbutton(name, label, ...)
 		local columnFrame = ...
-		local frame = PanelHelpers:CreateCheckButton(name, columnFrame, label)
+		local frame = PanelHelpers:CreateCheckButton(name, columnFrame, L(label))
 		-- Margins	-- Bottom/Left are supposed to be negative
 		frame.Margins = { Left = 2, Right = 100, Top = 0, Bottom = 0,}
 		QuickSetPoints(frame, ...)	
@@ -112,7 +113,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 	
 	local function CreateQuickColorbox(name, label, ...)
 		local columnFrame = ...
-		local frame = PanelHelpers:CreateColorBox(name, columnFrame, label, 0, .5, 1, 1)
+		local frame = PanelHelpers:CreateColorBox(name, columnFrame, L(label), 0, .5, 1, 1)
 		-- Margins	-- Bottom/Left are supposed to be negative
 		frame.Margins = { Left = 5, Right = 100, Top = 3, Bottom = 2,}
 		-- Set Positions
@@ -125,7 +126,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 	
 	local function CreateQuickDropdown(name, label, dropdownTable, initialValue, ...)
 		local columnFrame = ...
-		local frame = PanelHelpers:CreateDropdownFrame(name, columnFrame, dropdownTable, initialValue, label)
+		local frame = PanelHelpers:CreateDropdownFrame(name, columnFrame, dropdownTable, initialValue, L(label))
 		-- Margins	-- Bottom/Left are supposed to be negative
 		frame.Margins = { Left = -12, Right = 2, Top = 22, Bottom = 0,}
 		-- Set Positions
@@ -140,17 +141,17 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		local columnFrame = ...
 		local frame = CreateFrame("Frame", name, columnFrame)
 		-- Heading Appearance
-		frame:SetHeight(20)
+		frame:SetHeight(26)
 		frame:SetWidth(500)
 		frame.Text = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-		frame.Text:SetFont(font, 22)
+		frame.Text:SetFont(font, 26)
 		frame.Text:SetTextColor(255/255, 105/255, 6/255)
 		frame.Text:SetAllPoints()
-		frame.Text:SetText(label)
+		frame.Text:SetText(L(label))
 		frame.Text:SetJustifyH("LEFT")
 		frame.Text:SetJustifyV("BOTTOM")
 		-- Margins
-		frame.Margins = { Left = 6, Right = 2, Top = 2, Bottom = 2,}
+		frame.Margins = { Left = 6, Right = 2, Top = 12, Bottom = 2,}
 		-- Set Positions
 		QuickSetPoints(frame, ...)
 		-- Bookmark
@@ -178,7 +179,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		--frame.Text:SetTextColor(1, .7, 0)
 		--frame.Text:SetTextColor(55/255, 173/255, 255/255)
 		frame.Text:SetAllPoints()
-		frame.Text:SetText(label)
+		frame.Text:SetText(L(label))
 		frame.Text:SetJustifyH("LEFT")
 		frame.Text:SetJustifyV("BOTTOM")
 		-- Margins	-- Bottom/Left are supposed to be negative
@@ -374,14 +375,22 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	------------------------------
 	local panel = CreateFrame( "Frame", objectName.."_InterfaceOptionsPanel", UIParent);
 	panel.objectName = objectName
-	panel:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", insets = { left = 2, right = 2, top = 2, bottom = 2 },})
-	panel:SetBackdropColor(0.06, 0.06, 0.06, .5)
+	panel:SetBackdrop({	bgFile = "Interface/FrameGeneral/UI-Background-Marble", 
+						edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
+						edgeSize = 16, 
+						insets = { left = 4, right = 4, top = 4, bottom = 4 },})	
+		
+	--panel:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", insets = { left = 2, right = 2, top = 2, bottom = 2 },})
+	panel:SetBackdropColor(1, 1, 1, .6)
+	panel:SetBackdropBorderColor(0.2, 0.2, 0.2, 1)
+	--panel:SetBackdropColor(0.06, 0.06, 0.06, .5)
 	if parentTitle then panel.parent = parentTitle end
 	panel.name = panelTitle
 	
 	-- Heading
 	------------------------------
-	panel.MainLabel = CreateQuickHeadingLabel(nil, panelTitle, panel, nil, 16, 16)	
+	--panel.MainLabel = CreateQuickHeadingLabel(nil, panelTitle, panel, nil, 16, 16)	
+	panel.MainLabel = CreateQuickHeadingLabel(nil, panelTitle, panel, nil, 16, 8)	
 	
 	-- Main Scrolled Frame
 	------------------------------
@@ -536,10 +545,11 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 		panel:SetParent(UIParent)
 		panel:ClearAllPoints()
 		panel:SetHeight(height - 40)
-		panel:SetWidth(width - 90)
+		panel:SetWidth(width - 60)
 		panel:SetPoint("CENTER")
 		panel:SetScale(.95)
 		
+		--[[
 		panel:SetBackdrop({ bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
 											edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
 											--edgeFile = "Interface/DialogFrame/UI-DialogBox-Gold-Border", 
@@ -547,9 +557,11 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 											edgeSize = 16, 
 											insets = { left = 4, right = 4, top = 4, bottom = 4 }
 											});
+											
 		--panel:SetBackdropColor(0.05, 0.05, 0.05, .8)
 		panel:SetBackdropColor(0.06, 0.06, 0.06, 1)
 		panel:SetBackdropBorderColor(0.2, 0.2, 0.2, 1)
+		--]]
 		
 		panel:SetClampedToScreen(true)
 		panel:RegisterForDrag("LeftButton")

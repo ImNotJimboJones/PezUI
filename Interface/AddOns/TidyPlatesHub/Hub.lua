@@ -1,6 +1,4 @@
 
---local Panel
-
 -- Rapid Panel Functions
 local CreateQuickSlider = TidyPlatesHubRapidPanel.CreateQuickSlider
 local CreateQuickCheckbutton = TidyPlatesHubRapidPanel.CreateQuickCheckbutton
@@ -30,7 +28,6 @@ local TextPlateFieldModes = TidyPlatesHubModes.TextPlateFieldModes
 local ArtStyles = TidyPlatesHubModes.ArtStyles
 local ArtModes = TidyPlatesHubModes.ArtModes
 
-
 ------------------------------------------------------------------
 -- Generate Panel
 ------------------------------------------------------------------
@@ -45,15 +42,22 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.StyleEnemyMode =  CreateQuickDropdown(objectName.."StyleEnemyMode", "Enemy Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleLabel, 0, 2)
 	panel.StyleFriendlyMode =  CreateQuickDropdown(objectName.."StyleFriendlyMode", "Friendly Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleEnemyMode)
 
-	-- Headline View
+	--[[ Headline View
 	------------------------------
 	panel.HeadlineLabel = CreateQuickHeadingLabel(nil, "Headline Mode", AlignmentColumn, nil, OffsetColumnB, 5)
 	panel.TextPlateNameColorMode =  CreateQuickDropdown(objectName.."TextPlateNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.HeadlineLabel, OffsetColumnB)	-- |cffee9900Text-Only Style 
 	panel.TextPlateFieldMode =  CreateQuickDropdown(objectName.."TextPlateFieldMode", "Optional Text Field:", TextPlateFieldModes, 1, AlignmentColumn, panel.TextPlateNameColorMode, OffsetColumnB)	-- |cffee9900Text-Only Style
+	--]]
+	
+	-- Headline View
+	------------------------------
+	panel.HeadlineLabel = CreateQuickHeadingLabel(nil, "Headline Mode", AlignmentColumn, panel.StyleFriendlyMode, 0, 5)
+	panel.TextPlateNameColorMode =  CreateQuickDropdown(objectName.."TextPlateNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.HeadlineLabel)	-- |cffee9900Text-Only Style 
+	panel.TextPlateFieldMode =  CreateQuickDropdown(objectName.."TextPlateFieldMode", "Optional Text Field:", TextPlateFieldModes, 1, AlignmentColumn, panel.TextPlateNameColorMode)	-- |cffee9900Text-Only Style
 	
 	-- Color & Text
 	------------------------------
-	panel.ColorLabel = CreateQuickHeadingLabel(nil, "Health Bar Mode", AlignmentColumn, panel.StyleFriendlyMode, 0, 5)
+	panel.ColorLabel = CreateQuickHeadingLabel(nil, "Health Bar Mode", AlignmentColumn, panel.TextPlateFieldMode, 0, 5)
 	--panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Health Bar Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel)	-- 6.x Multi-Theme First stage
 	panel.ColorHealthBarMode =  CreateQuickDropdown(objectName.."ColorHealthBarMode", "Health Bar Color:", HealthColorModes, 1, AlignmentColumn, panel.ColorLabel)
 	panel.ColorDangerGlowMode =  CreateQuickDropdown(objectName.."ColorDangerGlowMode", "Warning Border/Glow:", WarningGlowModes, 1, AlignmentColumn, panel.ColorHealthBarMode)
@@ -112,10 +116,8 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ColorAttackingOthers = CreateQuickColorbox(objectName.."ColorAttackingOthers", "Safe", AlignmentColumn, panel.ColorAggroTransition, 16)
 	panel.ColorAttackingOtherTank = CreateQuickColorbox(objectName.."ColorAttackingOtherTank", "Attacking Tank", AlignmentColumn, panel.ColorAttackingOthers , 16)
 	
-	-- Tank by Another, Alternate tank, 
-	
 	panel.ColorPartyAggro = CreateQuickColorbox(objectName.."ColorPartyAggro", "Group Member Aggro", AlignmentColumn, panel.ColorAttackingOtherTank , 16)
-	panel.ColorShowPartyAggro = CreateQuickCheckbutton(objectName.."ColorShowPartyAggro", "Highlight Group Members with Aggro", AlignmentColumn, panel.ColorPartyAggro)
+	panel.ColorShowPartyAggro = CreateQuickCheckbutton(objectName.."ColorShowPartyAggro", "Highlight Group Members who have Aggro", AlignmentColumn, panel.ColorPartyAggro)
 	panel.ColorPartyAggroBar = CreateQuickCheckbutton(objectName.."ColorPartyAggroBar", "Health Bar Color", AlignmentColumn, panel.ColorShowPartyAggro, 16)
 	panel.ColorPartyAggroGlow = CreateQuickCheckbutton(objectName.."ColorPartyAggroGlow", "Border/Warning Glow", AlignmentColumn, panel.ColorPartyAggroBar, 16)
 	panel.ColorPartyAggroText = CreateQuickCheckbutton(objectName.."ColorPartyAggroText", "Name Text Color", AlignmentColumn, panel.ColorPartyAggroGlow, 16)
@@ -209,14 +211,27 @@ local function CreateInterfacePanelWidgets(panel)
 	SetSliderMechanics(panel.LowHealthThreshold, .3, 0, .5, .01)	
 end
 
--- Create Instances of Panels
-local TankPanel = CreateInterfacePanel( "HubPanelSettingsTank", "Tidy Plates Hub: |cFF3782D1Tank", nil ) 
-CreateInterfacePanelWidgets(TankPanel)
-function ShowTidyPlatesHubTankPanel() InterfaceOptionsFrame_OpenToCategory(TankPanel) end
+--local function OnLogin()
+	-- Init 
+	--InitializeTidyPlatesHubModes()
+	
+	-- Create Instances of Panels
+	local TankPanel = CreateInterfacePanel( "HubPanelSettingsTank", "Tidy Plates Hub: |cFF3782D1Tank", nil ) 
+	CreateInterfacePanelWidgets(TankPanel)
+	function ShowTidyPlatesHubTankPanel() InterfaceOptionsFrame_OpenToCategory(TankPanel) end
 
-local DamagePanel = CreateInterfacePanel( "HubPanelSettingsDamage", "Tidy Plates Hub: |cFFFF1100Damage", nil ) 
-CreateInterfacePanelWidgets(DamagePanel)
-function ShowTidyPlatesHubDamagePanel() InterfaceOptionsFrame_OpenToCategory(DamagePanel) end
+	local DamagePanel = CreateInterfacePanel( "HubPanelSettingsDamage", "Tidy Plates Hub: |cFFFF1100Damage", nil ) 
+	CreateInterfacePanelWidgets(DamagePanel)
+	function ShowTidyPlatesHubDamagePanel() InterfaceOptionsFrame_OpenToCategory(DamagePanel) end
+--end
+	
+--local HubHandler = CreateFrame("Frame")
+--HubHandler:SetScript("OnEvent", OnLogin)
+--HubHandler:RegisterEvent("PLAYER_LOGIN")
+
+	
+	
+
 
 --[[
 local GladiatorPanel = CreateInterfacePanel( "HubPanelSettingsGladiator", "Tidy Plates Hub: |cFFAA6600Gladiator", nil ) 

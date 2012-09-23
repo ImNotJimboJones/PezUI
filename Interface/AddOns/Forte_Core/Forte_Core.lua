@@ -1,4 +1,4 @@
---ForteXorcist v1.980.6 by Xus 13-09-2012 for 5.0
+--ForteXorcist v1.980.7 by Xus 25-09-2012 for 5.0
 
 --## X-Curse-Packaged-Version: r9\r\n## X-Curse-Project-Name: ForteXorcist\r\n## X-Curse-Project-ID: fortexorcist\r\n## X-Curse-Repository-ID: wow/fortexorcist/mainline
 

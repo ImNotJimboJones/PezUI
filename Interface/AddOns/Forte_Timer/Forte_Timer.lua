@@ -1,4 +1,4 @@
---ForteXorcist v1.980.6 by Xus 13-09-2012 for 5.0
+--ForteXorcist v1.980.7 by Xus 25-09-2012 for 5.0
 
 local FW = FW;
 local FWL = FW.L;
@@ -894,6 +894,8 @@ function ST:AddNewTimer(expire,total,targetname,spell,targettype,id,icon,guid,ha
 		local extratime = 0;
 		while i<=st.rows do 
 			if st[i][14] <= REMOVE then -- only if this isnt a resist
+				
+				-- REMOVE OTHER ACTIVE UNIQUE OR SHARED SPELLS
 				if st[i][8] == spell and st[i][11] == guid then -- spell match on same unit
 					if abs(st[i][1]-expire)<maxlag then -- exact match, just correct time
 						st[i][1] = expire;
@@ -926,6 +928,7 @@ function ST:AddNewTimer(expire,total,targetname,spell,targettype,id,icon,guid,ha
 				else
 					i=i+1;
 				end
+				
 			else
 				i=i+1;
 			end
@@ -1096,7 +1099,7 @@ local function ST_ScanForMissing(unit,guid,filter)
 	while true do
 		local spell,rank,texture,stacks,_,total,expire,caster = UnitAura(unit,i,filter);
 		if spell then
-			if isMine[caster] then
+			if isMine[caster] and (Track[spell] and Track[spell][7] or 0) == (filter == "HELPFUL" and 1 or 0) then
 				if Track[spell] and Track[spell][1] == 0 then
 					local index = st:find2(spell,8,guid,11)
 					if not index or st[index][14] >= FADING_INSTANT then -- don't add when i already have this added
@@ -1144,70 +1147,73 @@ local function ST_CorrectionScan(unit)
 		-- remove or correct timers already on the spelltimer
 		local i=1;
 		while i<=st.rows do -- spelltimer part
-			local t8,friendly = st[i][8],st[i][23];
-			if st[i][14]<=NORMAL then
-				if st[i][11] == "" then -- uncertain cast, attempt to correct
-					local expire = UnitHasYourAura(unit,t8,friendly == 1 and "HELPFUL" or "HARMFUL");
-					-- does this unit maybe have this debuff on my timer?
-					if expire then
-						if st[i][6] == DRAIN then -- drains are special cases, and never added by debuff/buff scans
-							if abs( expire-st[i][1] )<maxlag then
-								st[i][9] = CA:Unique(unit);
-								st[i][11] = guid;
-								st[i][13] = CA:GiveID(guid);
-								st[i][19] = GetRaidTargetIndex(unit) or 0;
-								rebuildLinks(); -- IMPORTANT
-							end
-						else
-							if abs( expire-st[i][1] )<maxlag or Tick[t8] and ((expire > st[i][1] - maxlag) and (expire - Tick[t8]*st[i][22] - maxlag < st[i][1])) then --if it's found for correction, it will be added anyway, so can remove this now
-								st:remove(i);
-								i=i-1;
-							end
-						end
-						--FW:Debug("correct uncertain");
-					end	
-					
-				elseif st[i][11] == guid then
-				
-					local t6 = st[i][6];
-					if t6==DEFAULT then -- only check the 'normal' buff/debuff types
-						local expire,index,stacks,total,rank = UnitHasYourAura(unit,t8,friendly == 1 and "HELPFUL" or "HARMFUL");
-						
-						if st[i][10] == 0 then -- makes early (de)buff removing faster and hopefully bug free
-							if expire then -- no need to match for duration here because i already have a fixed id
-								st[i][10] = 1;-- i have already seen this debuff
-								if expire > st[i][1] or abs(st[i][1]-expire)<maxlag then st[i][1] = expire;st[i][16] = stacks or 0; end
-								--st[i][1] = expire;
-							elseif (st[i][3]-st[i][1]+t) >= BuffDelay then
-								st[i][10] = 1;-- it should have been on already at this time
-							end						
-						end
-
-						-- do the other 'normal' stuff
+			local spell_type = st[i][6];
+			if spell_type == DEFAULT or spell_type == DRAIN then
+				local spell_name,friendly = st[i][8],st[i][23];
+				if st[i][14]<=NORMAL then
+					if st[i][11] == "" then -- uncertain cast, attempt to correct
+						local expire = UnitHasYourAura(unit,spell_name,friendly == 1 and "HELPFUL" or "HARMFUL");
+						-- does this unit maybe have this debuff on my timer?
 						if expire then
-							if Track[t8] and Track[t8][10] == 1 then
-								local haste = CA:HasteFactor(t8);
-								if st[i][22] ~= haste and expire-st[i][1] > maxlag then
-									st[i][22] = haste;
+							if st[i][6] == DRAIN then -- drains are special cases, and never added by debuff/buff scans
+								if abs( expire-st[i][1] )<maxlag then
+									st[i][9] = CA:Unique(unit);
+									st[i][11] = guid;
+									st[i][13] = CA:GiveID(guid);
+									st[i][19] = GetRaidTargetIndex(unit) or 0;
+									rebuildLinks(); -- IMPORTANT
+								end
+							else
+								if abs( expire-st[i][1] )<maxlag or Tick[spell_name] and ((expire > st[i][1] - maxlag) and (expire - Tick[spell_name]*st[i][22] - maxlag < st[i][1])) then --if it's found for correction, it will be added anyway, so can remove this now
+									st:remove(i);
+									i=i-1;
 								end
 							end
-							st[i][1] = expire;
-							st[i][16] = (Stacks[t8] ~= 0 and stacks) or 0;
-							st[i][3] = total;
+							FW:Debug("correct uncertain");
+						end	
+						
+					elseif st[i][11] == guid then
+					
+						local t6 = st[i][6];
+						if spell_type == DEFAULT then -- only check the 'normal' buff/debuff types
+							local expire,index,stacks,total,rank = UnitHasYourAura(unit,spell_name,friendly == 1 and "HELPFUL" or "HARMFUL");
 							
-							st[i][19] = GetRaidTargetIndex(unit) or 0;
-							st[i][27] = unit;
-							st[i][28] = index;
-							
-						elseif st[i][10] == 1 and (st[i][1]==0 or st[i][1]-t>maxlag) then -- dont remove if only maxlag left
-							if not UnitIsDead(unit) then
-								ST_BreakMessages(st[i][4],st[i][19],t8);
+							if st[i][10] == 0 then -- makes early (de)buff removing faster and hopefully bug free
+								if expire then -- no need to match for duration here because i already have a fixed id
+									st[i][10] = 1;-- i have already seen this debuff
+									if expire > st[i][1] or abs(st[i][1]-expire)<maxlag then st[i][1] = expire;st[i][16] = stacks or 0; end
+									--st[i][1] = expire;
+								elseif (st[i][3]-st[i][1]+t) >= BuffDelay then
+									st[i][10] = 1;-- it should have been on already at this time
+								end						
 							end
-							ST:Fade(i,REMOVE);
-							--FW:Debug("remove");
+
+							-- do the other 'normal' stuff
+							if expire then
+								if Track[spell_name] and Track[spell_name][10] == 1 then
+									local haste = CA:HasteFactor(spell_name);
+									if st[i][22] ~= haste and expire-st[i][1] > maxlag then
+										st[i][22] = haste;
+									end
+								end
+								st[i][1] = expire;
+								st[i][16] = (Stacks[spell_name] ~= 0 and stacks) or 0;
+								st[i][3] = total;
+								
+								st[i][19] = GetRaidTargetIndex(unit) or 0;
+								st[i][27] = unit;
+								st[i][28] = index;
+								
+							elseif st[i][10] == 1 and (st[i][1]==0 or st[i][1]-t>maxlag) then -- dont remove if only maxlag left
+								if not UnitIsDead(unit) then
+									ST_BreakMessages(st[i][4],st[i][19],spell_name);
+								end
+								ST:Fade(i,REMOVE);
+								--FW:Debug("remove");
+							end
 						end
-					end
-				end	
+					end	
+				end
 			end
 			i=i+1;
 		end

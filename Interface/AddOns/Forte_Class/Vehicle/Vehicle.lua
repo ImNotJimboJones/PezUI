@@ -1,4 +1,4 @@
---ForteXorcist v1.980.6 by Xus 13-09-2012 for 5.0
+--ForteXorcist v1.980.7 by Xus 25-09-2012 for 5.0
 
 local FW = FW;
 local ST = FW:Module("Timer");

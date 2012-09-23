@@ -1,4 +1,4 @@
---ForteXorcist v1.980.6 by Xus 13-09-2012 for 5.0
+--ForteXorcist v1.980.7 by Xus 25-09-2012 for 5.0
 
 if FW.CLASS == "ROGUE" then
 	local FW = FW;
@@ -19,30 +19,30 @@ if FW.CLASS == "ROGUE" then
 		:AddSpell(  408, 000,"Crowd",	F.UNIQUE) -- Kidney Shot
 		:AddSpell( 2094, 000,"Crowd",	F.UNIQUE) -- Blind
 		:AddSpell( 6770, 000,"Crowd",	F.UNIQUE) -- Sap
-		:AddSpell(18425, 000,"Crowd",	F.UNIQUE) -- Kick silence
 		:AddSpell(32748, 000,"Crowd",	F.UNIQUE) -- Deadly Throw interrupt
 		:AddSpell( 1330, 000,"Crowd",	F.UNIQUE) -- Garrote silence	
-		:AddSpell( 1833, 000,"Crowd",	F.UNIQUE) -- Cheap Shot
+		:AddSpell( 1833, 004,"Crowd",	F.UNIQUE) -- Cheap Shot
 		:AddSpell( 1776, 000,"Crowd",	F.UNIQUE) -- Gouge
 		:AddSpell(51722, 000,"Crowd",	F.UNIQUE) -- Dismantle
+		:AddSpell(79140, 020,"Crowd",	F.UNIQUE) -- Vendetta
 
 		:AddSpell(84617, 000,"Crowd",	F.UNIQUE) -- Revealing Strike
-		:AddSpell(31126, 000,"Crowd",	F.UNIQUE) -- Blade Twisting
 		:AddSpell(  703, 000,"Default",	F.TICKS) -- Garrote
 		:AddSpell( 1943, 000,"Default",	F.TICKS):SetTickSpeed(2) -- Rupture
 		--:AddSpell(16511, 000,"Default",F.TICKS) -- Hemorrhage, target debuff in Forte_Timer
 		:AddSpell(89775, 000,"Default",	F.TICKS) -- Hemorrhage (Glyph), dot
+		
+		:AddSpell(121411, 12,"Default",	F.TICKS):SetTickSpeed(2) -- Crimson Tempest
 				
 		-- Poisons
-		:AddSpell(30981, 000,"Crowd",	F.UNIQUE) -- Crippling Poison
-		:AddSpell( 5760, 000,"Crowd",	F.UNIQUE) -- Mind-numbing Poison
-		:AddSpell(13218, 000,"Crowd",	F.UNIQUE) -- Wound Poison
+		:AddSpell(30981, 000,"Crowd") -- Crippling Poison
+		:AddSpell( 5760, 000,"Crowd") -- Mind-numbing Poison
+		:AddSpell( 8679, 000,"Crowd") -- Wound Poison
 		:AddSpell( 2818, 000,"Default",	F.TICKS) -- Deadly Poison
 	
 		-- Self buffs
 		:AddBuff(13750) -- Adrenaline Rush
 		:AddBuff(13877) -- Blade Flurry
-		:AddBuff(14177) -- Cold Blood
 		:AddBuff(5277) -- Evasion
 		:AddBuff(2983) -- Sprint
 		:AddBuff(31224) -- Cloak of Shadows
@@ -57,6 +57,12 @@ if FW.CLASS == "ROGUE" then
 		:AddBuff(84745) -- Shallow Insight
 		:AddBuff(84746) -- Moderate Insight
 		:AddBuff(84747) -- Deep Insight
+		
+		-- Poisons
+		:AddBuff(30981) -- Crippling Poison
+		:AddBuff( 5760) -- Mind-numbing Poison
+		:AddBuff( 8679) -- Wound Poison
+		:AddBuff( 2818) -- Deadly Poison
 		
 		:AddMeleeBuffs()
 

@@ -1,4 +1,4 @@
---ForteXorcist v1.980.6 by Xus 13-09-2012 for 5.0
+--ForteXorcist v1.980.7 by Xus 25-09-2012 for 5.0
 
 if FW.CLASS == "WARLOCK" then
 	local FW = FW;
@@ -41,7 +41,7 @@ if FW.CLASS == "WARLOCK" then
 
 		:AddSpell(80240,  15,"Bane") -- Havoc THIS IS NOW ALSO A SELF BUFF WITH 3 STACKS
 		:AddSpell(  980,  24,"Bane",	F.TICKS):SetTickSpeed(2):SetSpellModGlph(56241,4) -- Agony
-		:AddSpell(  603,  60,"Bane",	F.TICKS):SetTickSpeed(15):SetHasted(0) -- Doom
+		:AddSpell(  603,  60,"Bane",	F.TICKS):SetTickSpeed(15) -- Doom
 		
 		:AddSpell( 1490, 300,"Curse",	F.SHARED) -- Curse of the Elements
 		:AddSpell(109466, 30,"Curse",	F.SHARED) -- Curse of Enfeeblement

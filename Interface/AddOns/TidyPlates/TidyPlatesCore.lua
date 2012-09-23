@@ -73,7 +73,7 @@ end
 -- SetTextureGroupObject
 local function SetTextureGroupObject(object, objectstyle)
 	if objectstyle then
-		SetObjectTexture(object, objectstyle.texture or EMPTY_TEXTURE)
+		if objectstyle.texture then SetObjectTexture(object, objectstyle.texture or EMPTY_TEXTURE) end
 		object:SetTexCoord(objectstyle.left or 0, objectstyle.right or 1, objectstyle.top or 0, objectstyle.bottom or 1)
 	end
 end
@@ -112,7 +112,8 @@ do
 						"name",  "spelltext", "customtext", "level",
 						"customart", "spellicon", "raidicon", "skullicon", "eliteicon", "target"}		
 	local bargroup = {"castbar", "healthbar"}
-	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon", "skullicon", "highlight", "target", "customart" }
+	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon", 
+						"skullicon", "highlight", "target", "customart", "spellicon", }
 	-- UpdateStyle: 
 	function UpdateStyle()
 		-- Frame
@@ -348,9 +349,8 @@ do
 				unit.guid = UnitGUID("target") 
 				if unit.guid then GUID[unit.guid] = plate end
 			end
-			extended:SetFrameLevel(127)
 		else
-			extended:SetFrameLevel(extended.frameLevel)
+			extended:SetFrameLevel(0)
 		end
 		
 		UpdateIndicator_Target()
@@ -392,7 +392,6 @@ do
 			unit.raidIcon = RaidIconCoordinate[ux][uy]
 		else unit.raidIcon = nil end
 		
-		--pollQueue[nameplate] = GetTime() + 1
 	end
 	
 	--------------------------------
@@ -758,6 +757,9 @@ do
 		bars.castbar = CreateTidyPlatesStatusbar(extended) 
 		health, cast, healthbar, castbar = bars.health, bars.cast, bars.healthbar, bars.castbar
 
+		healthbar:SetFrameStrata("BACKGROUND")
+		castbar:SetFrameStrata("BACKGROUND")
+		
 		-- Textures
 		visual = extended.visual
 		visual.customart = extended:CreateTexture(nil, "OVERLAY")
@@ -795,7 +797,7 @@ do
 		local extended = plate.extended
 		platelevels = platelevels - 1; if platelevels < 1 then platelevels = 1 end
 		extended.frameLevel = platelevels
-		extended:SetFrameLevel(platelevels)
+		--extended:SetFrameLevel(platelevels)
 		extended:SetFrameStrata("BACKGROUND")
 		extended.style, extended.unit, extended.unitcache, extended.stylecache, extended.widgets = {}, {}, {}, {}, {}
 		extended.regions, extended.bars, extended.visual = {}, {}, {}
@@ -827,10 +829,12 @@ do
 
 		-- Visible Bars
 		health, cast, healthbar, castbar = bars.health, bars.cast, bars.healthbar, bars.castbar
-		healthbar:SetFrameLevel(platelevels-1)
 		castbar:Hide()
-		castbar:SetFrameLevel(platelevels)
 		castbar:SetStatusBarColor(1,.8,0)
+
+		healthbar:SetFrameLevel(0)
+		extended:SetFrameLevel(0)
+		castbar:SetFrameLevel(0)
 		
 		extended.parentPlate = plate
 		health.parentPlate = plate
@@ -889,8 +893,10 @@ do
 	
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
-		local threat, border, highlight, name = frame:GetRegions()
-		return border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
+		return (string.find(frame:GetName() or "", "NamePlate")) ~= nil
+		
+		--local threat, border, highlight, name = frame:GetRegions()
+		--return border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates
@@ -898,7 +904,7 @@ do
 		for index = 1, select("#", ...) do
 			plate = select(index, ...)
 			
-			IsFrameNameplate(plate)
+			--IsFrameNameplate(plate)
 			
 			if not Plates[plate] and IsFrameNameplate(plate) then
 				ApplyPlateExtension(plate)

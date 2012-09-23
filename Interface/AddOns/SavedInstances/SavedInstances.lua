@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 179 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 183 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -923,6 +923,9 @@ local function SI_GetQuestReward()
                    ["isDaily"] = isDaily, 
 		   ["Expires"] = expires,
 		   ["Zone"] = GetRealZoneText() }
+  if isDaily then
+    t.DailyCount = GetDailyQuestsCompleted()
+  end
 end
 hooksecurefunc("GetQuestReward", SI_GetQuestReward)
 
@@ -1386,7 +1389,7 @@ addon.histReapTime = 60*60 -- 1 hour
 addon.histLimit = 5 -- instances per hour
 function addon:histZoneKey()
   local instname, insttype, diff, diffname, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-  if insttype == "none" or insttype == "arena" or insttype == "pvp" then -- pvp doesnt count
+  if insttype == nil or insttype == "none" or insttype == "arena" or insttype == "pvp" then -- pvp doesnt count
     return nil
   end
   if IsInLFGDungeon() or IsInScenarioGroup() then -- LFG instances don't count

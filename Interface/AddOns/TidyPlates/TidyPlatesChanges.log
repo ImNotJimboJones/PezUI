@@ -1,6 +1,17 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
 
+
+6.7.6
+---------------------------
+- Added code to verify healthmax values.
+- Sets framelevel to 0.  Targetted plates are raised to 1, which still does obscure the chatbox and minimap.  This also occurs with the standard Blizz nameplates, and cannot be corrected without raising the strata or level of those other frames.  
+- Added a rudimentary localization framework.  To use: Create an addon named, "TidyPlatesHubXX" where the XX is the last two letters of the localization code.  Ex. "TidyPlatesHubDE".  Within the code for that addon, create a table called, 'TidyPlatesHubLocalization', and add the translations.  For example:
+TidyPlatesHubLocalization["Style"] = "Translation of STYLE".   See TidyPlatesHub\Lists.lua for an example.  Future versions will add a "Dump" mode for outputting all the text that needs translating.
+- Changed the background, anchoring, and font sizes in the Hub, for readability.
+
+
+
 6.7.5
 ---------------------------
 - Removed framestrata code from, MinimapCluster, PlayerFrame, and TargetFrame

@@ -116,7 +116,7 @@ StyleDefault.name = {
 	align = "CENTER",
 	anchor = "CENTER",
 	vertical = "CENTER",
-	--flags = "",
+	flags = "NONE",
 	shadow = true,
 	show = true,
 }
@@ -169,6 +169,7 @@ StyleDefault.spellicon = {
 
 StyleDefault.eliteicon = {
 	show = false,
+	texture = EmptyTexture,
 }
 
 StyleDefault.raidicon = {

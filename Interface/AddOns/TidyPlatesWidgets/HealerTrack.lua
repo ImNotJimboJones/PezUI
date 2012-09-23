@@ -108,14 +108,13 @@ local function UpdateRolesViaScoreboard()
 	if NumScores > 0 then
 		for i = 1, NumScores do
 			local name, _, _, _, _, faction, _, class, _, _, _, _, _, _, _, talentSpec = GetBattlefieldScore(i)
-			if name and class and talentSpec then
+			if name and class and ClassRoles[class] and talentSpec then
 				local Role = ClassRoles[class][talentSpec]
-				
+
 				if RoleList[name] ~= Role then
 					RoleList[name] = Role
 					--if Role == "Healer" then print(name, Role, faction) end
 					UpdateIsNeeded = true
-					
 				end 
 			end
 		end

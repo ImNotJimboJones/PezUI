@@ -3,11 +3,12 @@
 ## Notes: Provides a common configuration panel for supported themes.
 ## Author: Daniel/Binbwen
 ## Dependencies: TidyPlates, TidyPlatesWidgets
+## OptionalDeps: TidyPlatesHubDE, TidyPlatesHubES, TidyPlatesHubMX, TidyPlatesHubFR, TidyPlatesHubKR, TidyPlatesHubRU, TidyPlatesHubCN, TidyPlatesHubTW
 ## SavedVariables: TidyPlatesHubCache
 ## SavedVariablesPerCharacter: TidyPlatesHubSettings
 
 
-ModeLists.lua
+Lists.lua
 Defaults.lua
 Helpers.lua
 Templates.lua

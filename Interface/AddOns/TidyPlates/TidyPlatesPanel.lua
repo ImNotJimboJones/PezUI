@@ -97,9 +97,9 @@ local function LoadTheme(incomingtheme)
 		currentThemeName = incomingtheme
 		return theme
 	else
-		TidyPlatesOptions[activespec] = "No Theme"
-		currentThemeName = "No Theme"
-		TidyPlates:ActivateTheme(TidyPlatesThemeList["No Theme"])
+		TidyPlatesOptions[activespec] = TidyPlatesDefaultThemeName
+		currentThemeName = TidyPlatesDefaultThemeName
+		TidyPlates:ActivateTheme(TidyPlatesThemeList[TidyPlatesDefaultThemeName])
 		return nil
 	end
 
@@ -201,7 +201,7 @@ local function ActivateInterfacePanel()
 	-- Primary Spec
 	----------------------
 	--  Dropdown
-	panel.PrimarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown", panel, ThemeDropdownMenuItems, "No Theme", nil, true)
+	panel.PrimarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown", panel, ThemeDropdownMenuItems, TidyPlatesDefaultThemeName, nil, true)
 	panel.PrimarySpecTheme:SetPoint("TOPLEFT", 16, -108)
 	
 	-- [[	Prim. Edit Button
@@ -229,7 +229,7 @@ local function ActivateInterfacePanel()
 	-- Secondary Spec
 	----------------------
 	-- Dropdown
-	panel.SecondarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown2", panel, ThemeDropdownMenuItems, "No Theme", nil, true)
+	panel.SecondarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown2", panel, ThemeDropdownMenuItems, TidyPlatesDefaultThemeName, nil, true)
 	panel.SecondarySpecTheme:SetPoint("TOPLEFT",panel.PrimarySpecTheme, "TOPRIGHT", 45, 0)
 
 	-- [[	Sec. Edit Button
@@ -383,21 +383,25 @@ end
 
 TidyPlatesInterfacePanel = panel
 
+local function RaiseBlizzardFrames(enable)
+	if enable then
+		--	MinimapCluster, PlayerFrame, and TargetFrame
+	end
+end
+
 local function ApplyAutomationSettings()
 	SetSpellCastWatcher(TidyPlatesOptions.EnableCastWatcher)
-
-	-- Spell Casting
-	if	TidyPlatesOptions.EnableCastWatcher then TidyPlates:StartSpellCastWatcher()
-	else TidyPlates:StopSpellCastWatcher()	end
+	RaiseBlizzardFrames(TidyPlatesOptions.RaiseBlizzFrames)
 	
 	-- Minimap Icon
 	--if TidyPlatesOptions.EnableMinimapButton then TidyPlatesUtility:ShowMinimapButton()
-	--else TidyPlatesUtility:HideMinimapButton() end
+	--else TidyPlatesUtility:HideMinimapButton() end	
+	-- /run TidyPlatesOptions._EnableMiniButton = true; ReloadUI()
+	
 	if TidyPlatesOptions._EnableMiniButton then 
 		TidyPlatesUtility:CreateMinimapButton()
 		TidyPlatesUtility:ShowMinimapButton() 
 	end
-	-- /run TidyPlatesOptions._EnableMiniButton = true; ReloadUI()
 	
 	TidyPlates:ForceUpdate()
 end
@@ -451,7 +455,7 @@ local function ShowWarnings()
 	end
 	
 	--[[ Warn user if no theme is selected
-	if currentThemeName == "No Theme" and not warned[activespec] then
+	if currentThemeName == TidyPlatesDefaultThemeName and not warned[activespec] then
 		print("|cFF77FF00Use |cFFFFFF00/tidyplates|cFF77FF00 to bring up the Theme Selection Window")
 		warned[activespec] = true
 	end
@@ -507,7 +511,7 @@ function panelevents:PLAYER_LOGIN()
 	UpdateThemeNames()
 	ActivateInterfacePanel()
 	ShowWelcome()
-	LoadTheme("No Theme")
+	LoadTheme(TidyPlatesDefaultThemeName)
 	ApplyAutomationSettings()
 	SetCVar("repositionfrequency", 0)
 end
