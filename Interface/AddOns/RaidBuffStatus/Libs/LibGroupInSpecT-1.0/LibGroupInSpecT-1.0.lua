@@ -69,15 +69,13 @@
 --     Returns an array with the set of unit ids for the current group.
 --]]
 
-local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("39"):match ("(%d+)") or 0)
+local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("42"):match ("(%d+)") or 0)
 
 if not LibStub then error(MAJOR.." requires LibStub") end
 local lib = LibStub:NewLibrary (MAJOR, MINOR)
 if not lib then return end
 
--- if lib.state then return end -- ticket #4: Oscarucb library upgrade fails
-
-lib.events = LibStub ("CallbackHandler-1.0"):New (lib)
+lib.events = lib.events or LibStub ("CallbackHandler-1.0"):New (lib)
 if not lib.events then error(MAJOR.." requires CallbackHandler") end
 
 
@@ -91,7 +89,6 @@ local COMMS_DELIM = "\a"
 local INSPECT_DELAY = 1.5
 local INSPECT_STALE_DELAY = 5
 local INSPECT_TIMEOUT = 10 -- If we get no notification within 10s, give up on unit
-local MAX_VALID_SPEC_ID = 500
 
 
 local function debug (...)
@@ -102,18 +99,19 @@ end
 
 
 -- Frame for events
-local frame = _G[MAJOR .. "_Frame"] or CreateFrame ("Frame", MAJOR .. "_Frame") -- ticket #4
+local frame = _G[MAJOR .. "_Frame"] or CreateFrame ("Frame", MAJOR .. "_Frame")
 lib.frame = frame
 frame:Hide()
 frame:UnregisterAllEvents ()
 frame:RegisterEvent ("PLAYER_LOGIN")
 frame:RegisterEvent ("PLAYER_LOGOUT")
-if not frame.OnEvent then  -- ticket #4
+if not frame.OnEvent then
   frame.OnEvent = function(this, event, ...)
     return lib[event] and lib[event] (lib, ...)
   end
   frame:SetScript ("OnEvent", frame.OnEvent)
 end
+
 
 -- Hide our run-state in an easy-to-dump object
 lib.state = {
@@ -229,6 +227,7 @@ function lib:CacheGameData ()
   tip:SetOwner (UIParent, "ANCHOR_NONE")
 
   local gspecs = self.static_cache.global_specs
+  gspecs[0] = {} -- Handle no-specialization case
   for class_id = 1, GetNumClasses () do
     for idx = 1, GetNumSpecializationsForClassID (class_id) do
       local gspec_id, name, description, icon, background = GetSpecializationInfoForClassID (class_id, idx)
@@ -361,10 +360,14 @@ function lib:ProcessQueues ()
 end
 
 
-hooksecurefunc("NotifyInspect", function (...) return lib:NotifyInspect (...) end)
+if not lib.hooked then
+  hooksecurefunc("NotifyInspect", function (...) return lib:NotifyInspect (...) end)
+  lib.hooked = true
+end
 function lib:NotifyInspect(unit)
 	self.state.last_inspect = GetTime()
 end
+
 
 function lib:UpdatePlayerInfo (guid, unit, info)
   info.class_localized, info.class, info.race_localized, info.race, info.gender, info.name, info.realm = GetPlayerInfoByGUID (guid)
@@ -372,6 +375,7 @@ function lib:UpdatePlayerInfo (guid, unit, info)
   info.class_id = info.class and self.static_cache.class_to_class_id[info.class]
   info.lku = unit
 end
+
 
 function lib:BuildInfo (unit)
   local guid = UnitGUID (unit)
@@ -386,7 +390,7 @@ function lib:BuildInfo (unit)
   -- On a cold login, GetPlayerInfoByGUID() doesn't seem to be usable, so mark as stale
   if not info.class then
     self.state.staleq[guid] = guid
-    frame:Show ()
+    self.frame:Show ()
   end
 
   local is_inspect = not UnitIsUnit("player", unit)
@@ -440,6 +444,7 @@ function lib:BuildInfo (unit)
   
   return info
 end
+
 
 function lib:INSPECT_READY (guid)
 	local unit = self:GuidToUnit (guid)
@@ -495,11 +500,13 @@ function lib:GROUP_ROSTER_UPDATE ()
   end
 end
 
+
 function lib:DoPlayerUpdate ()
   self:Query ("player")
   self.state.debounce_send_update = 2.5 -- Hold off 2.5sec before sending update
-  frame:Show ()
+  self.frame:Show ()
 end
+
 
 function lib:SendLatestSpecData () 
   local guid = UnitGUID ("player")
@@ -572,7 +579,7 @@ function lib:CHAT_MSG_ADDON (prefix, datastr, scope, sender)
   if UnitIsUnit( unit, "player" ) then return end -- we're already up-to-date, comment out for solo debugging
 
   self.state.throttle = self.state.throttle + 1
-  frame:Show () -- Ensure we're unthrottling
+  self.frame:Show () -- Ensure we're unthrottling
   if self.state.throttle > 40 then return end -- If we ever hit this, someone's being "funny"
 
   info.class_localized, info.class, info.race_localized, info.race, info.gender, info.name, info.realm = GetPlayerInfoByGUID (guid)
@@ -626,7 +633,7 @@ function lib:CHAT_MSG_ADDON (prefix, datastr, scope, sender)
   end
 
   if unit and guid then
-    debug ("Firing LGIST update event for unit "..(unit or "nil")..", GUID "..guid)
+    debug ("Firing LGIST update event for unit "..unit..", GUID "..guid)
     self.events:Fire (UPDATE_EVENT, guid, unit, info)
   end
 end
@@ -641,9 +648,11 @@ function lib:UNIT_LEVEL (unit)
   end
 end
 
+
 function lib:PLAYER_TALENT_UPDATE ()
   self:DoPlayerUpdate ()
 end
+
 
 function lib:PLAYER_SPECIALIZATION_CHANGED (unit)
 --  This event seems to fire a lot, and for no particular reason *sigh*
@@ -655,13 +664,16 @@ function lib:PLAYER_SPECIALIZATION_CHANGED (unit)
   end
 end
 
+
 function lib:GLYPH_ADDED ()
   self:DoPlayerUpdate ()
 end
 
+
 function lib:GLYPH_REMOVED ()
   self:DoPlayerUpdate ()
 end
+
 
 function lib:UNIT_NAME_UPDATE (unit)
   local group = self.cache
@@ -674,6 +686,7 @@ function lib:UNIT_NAME_UPDATE (unit)
     end
   end
 end
+
 
 local dual_spec_spells = {}
 for i, spellid in ipairs (TALENT_ACTIVATION_SPELLS) do dual_spec_spells[spellid] = true end
@@ -694,6 +707,7 @@ function lib:QueuedInspections ()
   return q
 end
 
+
 function lib:StaleInspections ()
   local q = {}
   for guid,_ in pairs (self.state.staleq) do
@@ -702,10 +716,12 @@ function lib:StaleInspections ()
   return q
 end
 
+
 function lib:GetCachedInfo (guid)
   local group = self.cache
   return guid and group[guid]
 end
+
 
 function lib:Rescan ()
   local q = self.state.mainq
@@ -729,6 +745,7 @@ local unitstrings = {
 }
 for i = 1,40 do table.insert (unitstrings.raid, "raid"..i) end
 for i = 1,4  do table.insert (unitstrings.party, "party"..i) end
+
 
 -- Returns an array with the set of unit ids for the current group
 function lib:GroupUnits ()

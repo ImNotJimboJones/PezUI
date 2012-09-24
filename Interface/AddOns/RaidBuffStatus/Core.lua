@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 546 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -341,10 +341,8 @@ function RaidBuffStatus:OnInitialize()
 		WhisperMany = true,
 		HowMany = 4,
 		HowOften = 3,
---		GoodTBC = true,
---		GoodFoodOnly = true,
-		foodquality = 0,
-		WotLKFlasksElixirs = false,
+		foodlevel = 250,
+		OldFlasksElixirs = false,
 		ShowGroupNumber = false,
 --		ShowMissingBlessing = true,
 		whisperonlyone = true,

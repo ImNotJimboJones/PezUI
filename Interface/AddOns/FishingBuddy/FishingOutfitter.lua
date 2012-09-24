@@ -15,7 +15,7 @@ local function OutfitterSwitch(outfitName)
 		vOut, vCat, _ = Outfitter:FindOutfitByName(sname);
 	end
 	if ( vOut ) then
-		local wasPole = FL:IsFishingPole();
+		local wasPole = FL:IsFishingGear();
 		if ( wasPole ) then
 			Outfitter:RemoveOutfit(vOut);
 		else
@@ -133,7 +133,7 @@ Outfitter.ShowOutfitTooltip = Patch_ShowOutfitTooltip;
 local wasfishing = false;
 local OutfitterEvents = {};
 OutfitterEvents["PLAYER_REGEN_DISABLE"] = function()
-	if ( FL:IsFishingPole() ) then
+	if ( FL:IsFishingGear() ) then
 		local vOut,_,_ = Outfitter:FindOutfitByStatID("FISHING");
 		Outfitter:RemoveOutfit(vOut);
 	end

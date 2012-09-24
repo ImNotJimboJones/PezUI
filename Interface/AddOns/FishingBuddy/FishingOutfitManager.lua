@@ -69,7 +69,7 @@ local PoleCheck = nil;
 -- update the watcher when we're done switching outfits
 FishingBuddy.OutfitManager.WaitForUpdate =
 	function(self)
-		local hasPole = FL:IsFishingPole();
+		local hasPole = FL:IsFishingGear();
 		if ( hasPole == PoleCheck ) then
 			FishingOutfitUpdateFrame:Hide();
 			FishingBuddy.API.FishingMode("OutfitManager");

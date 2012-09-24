@@ -1,0 +1,37 @@
+tag v4.0.0-beta38
+bede2867b1a0b8702c9fd04018c0bc078707ada7
+Shefki <shefki@shefki.org>
+2012-09-24 23:43:29 -0700
+
+Tag as v4.0.0-beta38
+
+
+--------------------
+
+Shefki:
+	- Fix Ticket #1005, Leader Icon does not hide after leaving a group.
+	- LuaTexts: DruidForm(): Fix Moonkin and Flight Form detection.
+	- Fix a typo
+	- Flip some if then elseif blocks around so the most common conditions come first.
+	- The model frame alpha bug applies to the dress up model frame as well.
+	- Fix Ticket #600: Performance issue with pirate day easter egg.
+	I just disabled the dress up model usage in combat.  It seems to avoid
+	the problem with lag due to the use of that model since the lag is
+	caused by the creation of new models.  If you're raiding or doing a
+	dungeon your group is still going to show as pirates since their
+	portrait will get drawn out of combat generally.
+	- Fix flickering Portraits on some frames.
+	The original fix that I'd made for the issue that happened after a scale
+	or shape change was wrong.  The real problem was in our anchor code.  So
+	I've reverted that change here.  That hack was ultimately causing the
+	flashing since the effective scale code was triggering on some frames
+	everytime.
+	
+	The real problem behind the scale/shape change was that the layout code
+	assumed that GetHeight/Width returned the value passed to
+	SetHeight/Width after a ClearAllPoints, which it does not if the
+	previous anchors changed the size of the frame.  The fix for this is to
+	set a temporary bogus anchor to allow access to these values.  I'm not
+	100% thrilled with the solution to this, but I think the alternatives
+	get even more ugly.  The layout code does run in combat, so I'll likely
+	review this change again.

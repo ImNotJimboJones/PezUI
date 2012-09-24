@@ -1,0 +1,12 @@
+tag v1.2.2
+b799faccb849eb17e1c832ad9693316e5448b3d6
+m42i <mfourtytwoi@gmail.com>
+2012-09-25 07:35:50 +0200
+
+Various localization updates.
+
+
+--------------------
+
+m42i:
+	- Add missing Ironpaw Token localization and replace Dalaran Cooking Award with Epicurean's Award.

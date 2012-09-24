@@ -397,7 +397,10 @@ local function Setup(options, nomap)
 		button:ClearAllPoints();
 		if (button.checkbox) then
 			button:SetHitRectInsets(0, -100, 0, 0);
+			button:SetScript("OnShow", nil);
+			button:SetScript("OnClick", nil);
 		end
+		button.checkbox = nil;
 		button.custom = nil;
 		button:Hide();
 	end

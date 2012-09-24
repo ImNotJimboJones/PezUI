@@ -1,6 +1,12 @@
-﻿Version 1.0.9f
+﻿Version 1.1
+- Italian translation, thanks Impaler (and bER92)!
+- Add support for "Fish without a pole" feature. Cast when any fishing gear is worn or
+  a modifier key is held down while right-clicking
+- Remove Astrolabe since it causes problems with MoP (and it doesn't work well)
+
+Version 1.0.9f
 - Remove ancient custom minimap button code and use LibDBIcon instead
-- Fix pet menu (again)
+- Fix pet menu (again), bug #177
 - Add Nat's Hat
 
 Version 1.0.9e

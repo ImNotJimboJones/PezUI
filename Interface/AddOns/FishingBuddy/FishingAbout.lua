@@ -13,6 +13,11 @@ credits[FBConstants.ROLE_TRANSLATE_ZHTW] = {
 	["zhTW"] = { "Version 1.0.9e (CurseForge)", },
 };
 
+credits[FBConstants.ROLE_TRANSLATE_ITIT] = {
+	["bER92"] = { "Version 1.0.9f (CurseForge)" },
+	["Impaler"] = { "Version 1.0.9f (CurseForge)" },
+};
+
 credits[FBConstants.ROLE_TRANSLATE_ZHCN] = {
 	["biAji"] = { "Version 0.9.3d" },
 	["wowuicon"] = { "Version 0.9.9e4 (CurseForge)", "Version 1.0.2 (CurseForge)", },

@@ -140,7 +140,7 @@ local function GetCurrentOutfit()
 end
 
 local function GearManagerSwitch(outfitName)
-	if ( FL:IsFishingPole() ) then
+	if ( FL:IsFishingGear() ) then
 		local name = FishingBuddy_Info["LastGearSet"];
 		if ( not name ) then
 			name, _, _ = GetEquipmentSetInfo(1);

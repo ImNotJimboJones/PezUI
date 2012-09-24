@@ -376,7 +376,7 @@ local function HandleZoneChange()
 	fishsort = nil
 	fishdata = nil;
 	FishingBuddy.WatchUpdate();
-	if ( FL:IsFishingPole() and TotalTimeFishing ) then
+	if ( FL:IsFishingGear() and TotalTimeFishing ) then
 		TotalTimeFishing = TotalTimeFishing + ZoneFishingTime;
 		ZoneFishingTime = 0;
 		FishingBuddy.SetSetting("TotalTimeFishing", TotalTimeFishing);
@@ -499,7 +499,7 @@ end
 -- Fish watcher functions
 local function NoShow()
 	local GSB = FishingBuddy.GetSettingBool;
-	return (not GSB("WatchFishies") or (GSB("WatchOnlyWhenFishing") and not FL:IsFishingPole()));
+	return (not GSB("WatchFishies") or (GSB("WatchOnlyWhenFishing") and not FL:IsFishingGear()));
 end
 
 local function UpdateTimerLine()

@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 530 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -147,51 +147,30 @@ local options = {
 			desc = L["Options for setting the quality requirements of consumables"],
 			order = 2,
 			args = {
-				wotlkflaskselixirs = {
+				oldflaskselixirs = {
 					type = 'toggle',
-					name = L["WotLK flasks and elixirs"],
-					desc = L["Allow raiders to use level 80 WotLK flasks and elixirs"],
+					name = L["Old flasks and elixirs"],
+					desc = L["Allow raiders to use flasks and elixirs from last expansion"],
 					order = 1,
-					get = function(info) return RaidBuffStatus.db.profile.WotLKFlasksElixirs end,
+					get = function(info) return RaidBuffStatus.db.profile.OldFlasksElixirs end,
 					set = function(info, v)
-						RaidBuffStatus.db.profile.WotLKFlasksElixirs = v
+						RaidBuffStatus.db.profile.OldFlasksElixirs = v
 					end,
 				},
-				foodquality = {
-					type = 'select',
+				foodlevel = {
+					type = 'range',
 					order = 2,
 					name = L["Required food quality"],
 					desc = L["Select which level of food quality you require for the raiders to be considered 'Well Fed'"],
-					values = {
-						[0] = (L["Best - %s stamina"]):format(90),
-						[1] = (L["Good - %s stamina"]):format(60),
-						[2] = L["Poor - any food"],
-					},
-					get = function(info) return RaidBuffStatus.db.profile.foodquality end,
+					min = 0,
+					max = 300,
+					step = 1,
+					bigStep = 25,
+					get = function(info) return RaidBuffStatus.db.profile.foodlevel end,
 					set = function(info, v)
-						RaidBuffStatus.db.profile.foodquality = v
+						RaidBuffStatus.db.profile.foodlevel = v
 					end,
 				}
---				goodtbc = {
---					type = 'toggle',
---					name = L["Good TBC"],
---					desc = L["Allow raiders to use level 70 TBC flasks and elixirs that are just as good as WotLK flasks and elixirs"] .. " (" .. table.concat(RaidBuffStatus.wotlkgoodtbcflixirs, ", ") .. ")",
---					order = 2,
---					get = function(info) return RaidBuffStatus.db.profile.GoodTBC end,
---					set = function(info, v)
---						RaidBuffStatus.db.profile.GoodTBC = v
---					end,
---				},
---				goodfoodonly = {
---					type = 'toggle',
---					name = L["Good food only"],
---					desc = L["Only allow food that is 90 Stamina and other stats.  I.e. only allow the top quality food with highest stats"],
---					order = 3,
---					get = function(info) return RaidBuffStatus.db.profile.GoodFoodOnly end,
---					set = function(info, v)
---						RaidBuffStatus.db.profile.GoodFoodOnly = v
---					end,
---				},
 			},
 		},
 		reporting = {

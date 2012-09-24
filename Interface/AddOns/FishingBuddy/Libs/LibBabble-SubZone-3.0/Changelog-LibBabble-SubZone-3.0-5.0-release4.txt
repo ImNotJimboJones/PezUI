@@ -1,10 +1,15 @@
 ------------------------------------------------------------------------
-r133 | arith | 2012-09-10 12:29:56 +0000 (Mon, 10 Sep 2012) | 2 lines
+r135 | arith | 2012-09-24 16:32:12 +0000 (Mon, 24 Sep 2012) | 1 line
 Changed paths:
-   A /tags/5.0-release3 (from /trunk:132)
+   A /tags/5.0-release4 (from /trunk:134)
 
-Tagging as 5.0-release3
-Most of Italian strings now translated.
+Tagging as 5.0-release4
+------------------------------------------------------------------------
+r134 | arith | 2012-09-24 15:16:01 +0000 (Mon, 24 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+zhCN and itIT translation update
 ------------------------------------------------------------------------
 r132 | arith | 2012-09-10 12:26:02 +0000 (Mon, 10 Sep 2012) | 1 line
 Changed paths:

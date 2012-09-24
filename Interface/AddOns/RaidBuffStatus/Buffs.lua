@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 546 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -107,6 +107,14 @@ local cataflasks = {
 	SpellName(94160), -- Flask of Flowing Water
 }
 
+local mopflasks = {
+	SpellName(105689), -- Flask of Spring Blossoms
+	SpellName(105691), -- Flask of the Warm Sun
+	SpellName(105693), -- Flask of Falling Leaves
+	SpellName(105694), -- Flask of the Earth
+	SpellName(105696), -- Flask of Winter\'s Bite
+} 
+
 local tbcbelixirs = {
 	SpellName(11390),-- Arcane Elixir
 	SpellName(17538),-- Elixir of the Mongoose
@@ -179,95 +187,69 @@ local catagelixirs = {
 	SpellName(79631), -- Prismatic Elixir
 }
 
---local wotlkgoodtbcflasks = {}
---local wotlkgoodtbcbelixirs = {}
---local wotlkgoodtbcgelixirs = {}
+local mopbelixirs = {
+	SpellName(105682), -- Mad Hozen Elixir
+	SpellName(105683), -- Elixir of Weaponry
+	SpellName(105684), -- Elixir of the Rapids
+	SpellName(105685), -- Elixir of Peace
+	SpellName(105686), -- Elixir of Perfection
+	SpellName(105688), -- Monk\'s Elixir
+}
 
---table.insert(wotlkgoodtbcflasks,SpellName(17627)) -- [Flask of] Distilled Wisdom
+local mopgelixirs = {
+	SpellName(105681), -- Mantid Elixir
+	SpellName(105687), -- Elixir of Mirrors
+}
 
---table.insert(wotlkgoodtbcbelixirs,SpellName(33721)) -- Spellpower Elixir
---table.insert(wotlkgoodtbcbelixirs,SpellName(28491))-- Healing Power
---table.insert(wotlkgoodtbcbelixirs,SpellName(54494))-- Major Agility
---table.insert(wotlkgoodtbcbelixirs,SpellName(28503))-- Major Shadow Power
-
---table.insert(wotlkgoodtbcgelixirs,SpellName(39627))-- Elixir of Draenic Wisdom
-
---RaidBuffStatus.wotlkgoodtbcflixirs = {}
---for _,v in ipairs (wotlkgoodtbcflasks) do
---	table.insert(RaidBuffStatus.wotlkgoodtbcflixirs,v)
---end
---for _,v in ipairs (wotlkgoodtbcbelixirs) do
---	table.insert(RaidBuffStatus.wotlkgoodtbcflixirs,v)
---end
---for _,v in ipairs (wotlkgoodtbcgelixirs) do
---	table.insert(RaidBuffStatus.wotlkgoodtbcflixirs,v)
---end
-
---for _,v in ipairs (wotlkgelixirs) do
---	table.insert(wotlkgoodtbcgelixirs,v)
---end
---for _,v in ipairs (wotlkbelixirs) do
---	table.insert(wotlkgoodtbcbelixirs,v)
---end
---for _,v in ipairs (wotlkflasks) do
---	table.insert(wotlkgoodtbcflasks,v)
---end
-
---for _,v in ipairs (catagelixirs) do
---	table.insert(wotlkgoodtbcgelixirs,v)
---end
---for _,v in ipairs (catabelixirs) do
---	table.insert(wotlkgoodtbcbelixirs,v)
---end
---for _,v in ipairs (cataflasks) do
---	table.insert(wotlkgoodtbcflasks,v)
---end
-
-
+-- all old flixirs
 local oldflasks = {}
 local oldbelixirs = {}
 local oldgelixirs = {}
-for _,v in ipairs (tbcflasks) do
+for _,t in pairs({tbcflasks,wotlkflasks,cataflasks}) do
+   for _,v in ipairs (t) do
 	table.insert(oldflasks,v)
+   end
 end
-for _,v in ipairs (wotlkflasks) do
-	table.insert(oldflasks,v)
-end
-for _,v in ipairs (tbcbelixirs) do
+for _,t in pairs({tbcbelixirs,wotlkbelixirs,catabelixirs}) do
+   for _,v in ipairs (t) do
 	table.insert(oldbelixirs,v)
+   end
 end
-for _,v in ipairs (wotlkbelixirs) do
-	table.insert(oldbelixirs,v)
-end
-for _,v in ipairs (tbcgelixirs) do
+for _,t in pairs({tbcgelixirs,wotlkgelixirs,catagelixirs}) do
+   for _,v in ipairs (t) do
 	table.insert(oldgelixirs,v)
-end
-for _,v in ipairs (wotlkgelixirs) do
-	table.insert(oldgelixirs,v)
+   end
 end
 
+-- last expansion flixirs
+local lastflasks   = cataflasks
+local lastbelixirs = catabelixirs
+local lastgelixirs = catagelixirs
 
-local lessoldflasks = {}
-local lessoldbelixirs = {}
-local lessoldgelixirs = {}
+-- current expansion flixirs
+local currflasks   = mopflasks
+local currbelixirs = mopbelixirs
+local currgelixirs = mopgelixirs
 
-for _,v in ipairs (wotlkflasks) do
-	table.insert(lessoldflasks,v)
+-- current and last expansion
+local recentflasks   = {}
+local recentbelixirs = {}
+local recentgelixirs = {}
+
+for _,t in pairs({lastflasks, currflasks}) do
+  for _,v in ipairs (t) do
+	table.insert(recentflasks,v)
+  end
 end
-for _,v in ipairs (cataflasks) do
-	table.insert(lessoldflasks,v)
+for _,t in pairs({lastbelixirs, currbelixirs}) do
+  for _,v in ipairs (t) do
+	table.insert(recentbelixirs,v)
+  end
 end
-for _,v in ipairs (wotlkbelixirs) do
-	table.insert(lessoldbelixirs,v)
-end
-for _,v in ipairs (catabelixirs) do
-	table.insert(lessoldbelixirs,v)
-end
-for _,v in ipairs (wotlkgelixirs) do
-	table.insert(lessoldgelixirs,v)
-end
-for _,v in ipairs (catagelixirs) do
-	table.insert(lessoldgelixirs,v)
+for _,t in pairs({lastgelixirs, currgelixirs}) do
+  for _,v in ipairs (t) do
+	table.insert(recentgelixirs,v)
+  end
 end
 
 local allclasses = {}
@@ -277,7 +259,6 @@ end
 
 local foods = {
 	SpellName(35272), -- Well Fed
-	SpellName(44106), -- "Well Fed" from Brewfest
 }
 
 local allfoods = {
@@ -912,34 +893,7 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		chat = L["Flasked or Elixired but slacking"],
-		main = function(self, name, class, unit, raid, report)
-			local blist = oldbelixirs
-			local glist = oldgelixirs
-			local flist = oldflasks
-			if RaidBuffStatus.db.profile.WotLKFlasksElixirs then
-				blist = tbcbelixirs
-				glist = tbcgelixirs
-				flist = tbcflasks
-			end
-			for _, v in ipairs(flist) do
-				if unit.hasbuff[v] then
-					table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
-					return
-				end
-			end
-			for _, v in ipairs(blist) do
-				if unit.hasbuff[v] then
-					table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
-					break
-				end
-			end
-			for _, v in ipairs(glist) do
-				if unit.hasbuff[v] then
-					table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
-					return
-				end
-			end
-		end,
+		main = nil, -- set in flask check
 		post = nil,
 		icon = "Interface\\Icons\\INV_Potion_91",
 		update = function(self)
@@ -973,31 +927,7 @@ local BF = {
 		selfbuff = true,
 		timer = false,
 		chat = L["Well Fed but slacking"],
-		main = function(self, name, class, unit, raid, report)
-			local hasfood = false
-			local slacking = false
-			for _, v in ipairs(allfoods) do
-				if unit.hasbuff[v] then
-					hasfood = true
-					break
-				end
-			end
-			if hasfood then
-			        local foodz = unit.hasbuff["foodz"]
-			        foodz = foodz and foodz:lower()
-				slacking = true
-				if foodz and (
-			   	   foodz:find(L["Stamina increased by 90"]:lower()) or 
-				   (RaidBuffStatus.db.profile.foodquality >= 1 and 
-				            (foodz:find(L["Stamina increased by 60"]:lower()) or 
-					     select(11,UnitBuff(unit.unitid, foods[1])) == 66623))) then -- bountiful feast
-						slacking = false
-				end
-			end
-			if slacking then
-				table.insert(report.slackingfoodlist, name)
-			end
-		end,
+		main = nil, -- handled in food check
 		post = nil,
 		icon = "Interface\\Icons\\INV_Misc_Food_67",
 		update = function(self)
@@ -1513,26 +1443,27 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			local missingbuff = true
 			local foodz = unit.hasbuff["foodz"]
-			foodz = foodz and foodz:lower()
-			if RaidBuffStatus.db.profile.foodquality == 0 then
-				if foodz and foodz:find(L["Stamina increased by 90"]:lower()) then
-					missingbuff = false
-				end
-			elseif RaidBuffStatus.db.profile.foodquality == 1 then
-				if foodz and 
-				  ( foodz:find(L["Stamina increased by 60"]:lower()) or 
-				    foodz:find(L["Stamina increased by 90"]:lower()) or
-				    select(11,UnitBuff(unit.unitid, foods[1])) == 66623) then -- bountiful feast
-						missingbuff = false
-				end
-			else
+			if foodz then
+			   local statval = 0
+			   for v in string.gmatch(foodz, "%d+") do  -- assume largest number in tooltip is the statval
+			      statval = math.max(statval,tonumber(v))
+			   end
+			   if statval >= RaidBuffStatus.db.profile.foodlevel or
+			      select(11,UnitBuff(unit.unitid, foods[1])) == 66623 then -- bountiful feast
+			      missingbuff = false
+			   end
+			end
+                        
+			if missingbuff then
 				for _, v in ipairs(foods) do
 					if unit.hasbuff[v] then
 						missingbuff = false
+			                        table.insert(report.slackingfoodlist, name)
 						break
 					end
 				end
 			end
+
 			if missingbuff then
 				table.insert(report.foodlist, name)
 			end
@@ -1575,13 +1506,13 @@ local BF = {
 		end,
 		main = function(self, name, class, unit, raid, report)
 			report.checking.flaskir = true
-			local cflasks = cataflasks
-			local cbelixirs = catabelixirs
-			local cgelixirs = catagelixirs
-			if RaidBuffStatus.db.profile.WotLKFlasksElixirs then
-				cflasks = lessoldflasks
-				cbelixirs = lessoldbelixirs
-				cgelixirs = lessoldgelixirs
+			local cflasks = currflasks
+			local cbelixirs = currbelixirs
+			local cgelixirs = currgelixirs
+			if RaidBuffStatus.db.profile.OldFlasksElixirs then
+				cflasks = recentflasks
+				cbelixirs = recentbelixirs
+				cgelixirs = recentgelixirs
 			end
 			local missingbuff = true
 			for _, v in ipairs(cflasks) do
@@ -1591,6 +1522,12 @@ local BF = {
 				end
 			end
 			if missingbuff then
+			  	for _, v in ipairs(oldflasks) do
+					if unit.hasbuff[v] then -- slacking flask
+						table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
+						break
+					end
+			  	end
 				local numbbelixir = 0
 				local numbgelixir = 0
 				for _, v in ipairs(cbelixirs) do
@@ -1599,12 +1536,28 @@ local BF = {
 						break
 					end
 				end
+				if numbbelixir == 0 then
+			  	  for _, v in ipairs(oldbelixirs) do
+					if unit.hasbuff[v] then -- slacking elixir
+						table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
+						break
+					end
+				  end
+			  	end
 				for _, v in ipairs(cgelixirs) do
 					if unit.hasbuff[v] then
 						numbgelixir = 1
 						break
 					end
 				end
+				if numbgelixir == 0 then
+			  	  for _, v in ipairs(oldgelixirs) do
+					if unit.hasbuff[v] then -- slacking elixir
+						table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
+						break
+					end
+				  end
+			  	end
 				local totalelixir = numbbelixir + numbgelixir
 				if totalelixir == 0 then
 					table.insert(report.flasklist, name) -- no flask or elixir

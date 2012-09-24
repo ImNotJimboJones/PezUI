@@ -115,7 +115,17 @@ local function model_OnUpdate(self, elapsed)
 	local style = frame.Portrait.style
 	local full_body = PitBull4_Portrait:GetLayoutDB(frame).full_body
 
-	if style == "pirate" then
+	if style == "three_dimensional" then
+		if not frame.Portrait.falling_back then
+			self:SetUnit(frame.unit)
+			self:SetPortraitZoom(full_body and 0 or 1)
+			self:SetPosition(0, 0, 0)
+		else
+			self:SetModelScale(4.25)
+			self:SetPosition(0, 0, -1.5)
+			self:SetModel([[Interface\Buttons\talktomequestionmark.mdx]])
+		end
+	else -- style == "pirate"
 		self:SetUnit(frame.unit)
 		self:Undress()
 		self:TryOn(9636)
@@ -126,24 +136,14 @@ local function model_OnUpdate(self, elapsed)
 		self:TryOn(3935)
 		self:SetPosition(0, 0, 0)
 		self:SetPortraitZoom(full_body and 0 or 1)
-	elseif style == "three_dimensional" then
-		if not frame.Portrait.falling_back then
-			self:SetUnit(frame.unit)
-			self:SetPortraitZoom(full_body and 0 or 1)
-			self:SetPosition(0, 0, 0)
-		else
-			self:SetModelScale(4.25)
-			self:SetPosition(0, 0, -1.5)
-			self:SetModel([[Interface\Buttons\talktomequestionmark.mdx]])
-		end
-
-		-- work around a Blizzard bug that causes model frames not to
-		-- adjust their alpha realtive to their parent frames alpha after
-		-- the model is updated.  So we nudge the alpha down a bit and 
-		-- then back up to get it to update.
-		self:SetAlpha(0.9999999)
-		self:SetAlpha(1)
 	end
+
+	-- work around a Blizzard bug that causes model frames not to
+	-- adjust their alpha realtive to their parent frames alpha after
+	-- the model is updated.  So we nudge the alpha down a bit and 
+	-- then back up to get it to update.
+	self:SetAlpha(0.9999999)
+	self:SetAlpha(1)
 	
 	if type(self:GetModel()) == "string" then
 		-- the portrait was set properly, we can stop trying to set the portrait 
@@ -165,8 +165,7 @@ end
 function PitBull4_Portrait:UpdateFrame(frame)
 	local layout_db = self:GetLayoutDB(frame)
 	local style = layout_db.style
-	local side = layout_db.side
-	local pirate = pirate_day and self.db.profile.global.pirate
+	local pirate = pirate_day and self.db.profile.global.pirate and not InCombatLockdown()
 	local falling_back = false
 	
 	local unit = frame.unit
@@ -193,11 +192,7 @@ function PitBull4_Portrait:UpdateFrame(frame)
 	
 	local portrait = frame.Portrait
 	
-	-- rebuild the portrait if:
-	-- the style changes - model frame will be a different type
-	-- the effective scale cahnges - work around blizzard bug not updating zoom when scale changes.
-	-- the side changes - work around similar blizzard bug not updating zoom when frame changes shape.
-	if portrait and (portrait.style ~= style or portrait.effective_scale ~= portrait:GetEffectiveScale() or portrait.side ~= side) then
+	if portrait and portrait.style ~= style then
 		self:ClearFrame(frame)
 		portrait = nil
 	end
@@ -211,15 +206,14 @@ function PitBull4_Portrait:UpdateFrame(frame)
 		portrait:SetHeight(60)
 		portrait.height = 4
 		portrait.style = style
-		portrait.side = side
 	
-		if style == "pirate" then
-			local model = PitBull4.Controls.MakeDressUpModel(frame)
+		if style == "three_dimensional" then
+			local model = PitBull4.Controls.MakePlayerModel(frame)
 			model:SetFrameLevel(frame:GetFrameLevel() + 5)
 			portrait.model = model
 			model:SetAllPoints(portrait)
-		elseif style == "three_dimensional" then
-			local model = PitBull4.Controls.MakePlayerModel(frame)
+		elseif style == "pirate" then
+			local model = PitBull4.Controls.MakeDressUpModel(frame)
 			model:SetFrameLevel(frame:GetFrameLevel() + 5)
 			portrait.model = model
 			model:SetAllPoints(portrait)
@@ -233,8 +227,6 @@ function PitBull4_Portrait:UpdateFrame(frame)
 		portrait.bg = bg
 		bg:SetAllPoints(portrait)
 		bg:SetTexture(unpack(layout_db.color))
-		
-		portrait.effective_scale = portrait:GetEffectiveScale()
 	end
 	
 	if portrait.guid == frame.guid and guid_demanding_update ~= frame.guid then

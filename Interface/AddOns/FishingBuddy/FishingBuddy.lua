@@ -160,7 +160,7 @@ local CastingOptions = {
 		["default"] = 0 },
 	["AutoOpen"] = {
 		["text"] = FBConstants.CONFIG_AUTOOPEN_ONOFF,
-		["tooltip"] = FBConstants.CONFIG_AUTOPEN_INFO,
+		["tooltip"] = FBConstants.CONFIG_AUTOOPEN_INFO,
 		["v"] = 1,
 		["m"] = 1,
 		["deps"] = { ["EasyCast"] = "d" },
@@ -206,23 +206,21 @@ local CastingOptions = {
 		["primary"] = "ContestSupport",
 		["deps"] = { ["ContestSupport"] = "d", ["EasyCast"] = "d" }
 	},
-	["ShowPools"] = {
-		["text"] = FBConstants.CONFIG_SHOWPOOLS_ONOFF,
-		["tooltip"] = FBConstants.CONFIG_SHOWPOOLS_INFO,
-		["v"] = 1,
-		["default"] = 1,
-		["primary"] = "ContestSupport",
-		["deps"] = { ["ContestSupport"] = "d" }
-	},
 	["EasyCastKeys"] = {
 		["default"] = FBConstants.KEYS_NONE,
 		["button"] = "FishingBuddyOption_EasyCastKeys",
+		["tooltipd"] = FBConstants.CONFIG_EASYCASTKEYS_INFO,
 		["margin"] = { 16, 0 },
 		["deps"] = { ["EasyCast"] = "h" },
 		["setup"] =
-			function()
+			function(button)
 				local gs = FishingBuddy.GetSetting;
 				FishingBuddyOption_EasyCastKeys:SetKeyValue("EasyCastKeys", gs("EasyCastKeys"));
+				button.overlay:ClearAllPoints();
+				button.overlay:SetPoint("TOPLEFT", button.label, "TOPLEFT");
+				button.overlay:SetSize(button:GetWidth(), button:GetHeight());
+				button.overlay:SetFrameLevel(button:GetFrameLevel()+2);
+				button.overlay:Show();
 			end,
 	},
 };
@@ -536,7 +534,7 @@ end
 
 -- handle option keys for enabling casting
 local key_actions = {
-	[FBConstants.KEYS_NONE] = function() return true; end,
+	[FBConstants.KEYS_NONE] = function() return false; end,
 	[FBConstants.KEYS_SHIFT] = function() return IsShiftKeyDown(); end,
 	[FBConstants.KEYS_CTRL] = function() return IsControlKeyDown(); end,
 	[FBConstants.KEYS_ALT] = function() return IsAltKeyDown(); end,
@@ -981,22 +979,29 @@ local function UpdateLure()
 
 	if ( GSB("EasyLures") ) then
 		-- Is this a quest fish we should open up?
-		if ( OpenThisFishId and GSB("AutoOpen") and GetItemCount(OpenThisFishId) > 0 ) then
-			FL:InvokeLuring(OpenThisFishId);
-			return true;
-		end
-		
-		-- look for quest lures
-		for itemid, spellid in pairs(QuestLures) do
-			if ( GetItemCount(itemid) > 0 ) then
-				local buff = GetSpellInfo(spellid);
-				if ( not FL:HasBuff(buff) ) then
-					FL:InvokeLuring(itemid);
-					return true;
+		if ( GSB("AutoOpen") ) then
+			if ( OpenThisFishId and GetItemCount(OpenThisFishId) > 0 ) then
+				FL:InvokeLuring(OpenThisFishId);
+				return true;
+			end
+			
+			-- look for quest lures
+			for itemid, spellid in pairs(QuestLures) do
+				if ( GetItemCount(itemid) > 0 ) then
+					local buff = GetSpellInfo(spellid);
+					if ( not FL:HasBuff(buff) ) then
+						FL:InvokeLuring(itemid);
+						return true;
+					end
 				end
 			end
 		end
-		
+
+		-- only apply a lure if we're actually fishing with a "real" pole
+		if (not FL:IsFishingPole()) then
+			return false;
+		end
+		 
 		-- we can drop through and add our normal lure, because the quest buff is on
 		-- the player, not the pole...
 		local skill, _, _, _ = FL:GetCurrentSkill();
@@ -1138,7 +1143,7 @@ local function NormalHijackCheck()
 	if ( not AddingLure and
 		 not InCombatLockdown() and (not IsMounted() or GSB("MountedCast")) and
 		 not IsFishingAceEnabled() and
-		 GSB("EasyCast") and CastingKeys() and FL:IsFishingPole() ) then
+		 GSB("EasyCast") and (CastingKeys() or FL:IsFishingGear()) ) then
 		return true;
 	end
 end
@@ -1317,7 +1322,7 @@ local function StopFishingMode(logout)
 end
 
 local function FishingMode()
-	if ( FL:IsFishingPole() ) then
+	if ( FL:IsFishingGear() ) then
 		StartFishingMode();
 	else
 		StopFishingMode();

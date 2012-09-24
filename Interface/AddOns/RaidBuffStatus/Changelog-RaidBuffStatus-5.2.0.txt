@@ -1,9 +1,20 @@
 ------------------------------------------------------------------------
-r548 | oscarucb | 2012-09-20 18:20:37 +0000 (Thu, 20 Sep 2012) | 1 line
+r550 | oscarucb | 2012-09-25 05:48:27 +0000 (Tue, 25 Sep 2012) | 3 lines
 Changed paths:
-   A /tags/5.1.0 (from /trunk:547)
+   A /tags/5.2.0 (from /trunk:549)
 
-Tagging as 5.1.0
+Tagging as 5.2.0
+
+Activate MoP consumables as the default.
+------------------------------------------------------------------------
+r549 | oscarucb | 2012-09-22 20:37:29 +0000 (Sat, 22 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+add MoP consumables
+
 ------------------------------------------------------------------------
 r546 | oscarucb | 2012-09-19 19:56:16 +0000 (Wed, 19 Sep 2012) | 4 lines
 Changed paths:
