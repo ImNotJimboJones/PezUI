@@ -300,3 +300,6 @@ MountFilter-Config: enabled
 MountFilter-Filter: enabled
 MountFilter-Search: enabled
 TipTacMogIt: enabled
+Overachiever: enabled
+Overachiever_Tabs: enabled
+Overachiever_Trade: enabled
