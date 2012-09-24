@@ -15,12 +15,12 @@
 		AutoStartCrusaderAura_Long = "Aktiviert automatisch die Aura des Kreuzfahrers, wenn GoGoMount zum Aufsteigen verwendet wird.", -- Needs review
 		Clear = "Löschen",
 		ClearGlobalFavoriteMounts = "Lösche global favorisierte Mounts",
-		CurrentZone = "Aktuelle Zone", -- Needs review
+		CurrentZone = "Aktuelle Zone",
 		CurrentZoneDescription = "Reittiere, die hier als Zonenfavoriten markiert sind, sind die einzigen, die von GoGoMount in dieser Zone verwendet werden. Alle anderen Reittiere und Gestaltwandlungen werden ignoriert. Wird diese Liste geleert, kann GoGoMount wieder alle Reittiere verwenden (oder die globalen Favoriten, falls festgelegt).", -- Needs review
 		CurrentZoneExclusions = "Aktuelle Zonen Ausnahmen", -- Needs review
 		CurrentZoneFavorites = "Favoriten der aktuellen Zone",
 		DisableFlyingFromWater = "Verhindere Fliegen vom Wasser",
-		DisableInCombat = "GoGoMount-Buttons während des Kampfes deaktivieren", -- Needs review
+		DisableInCombat = "GoGoMount-Buttons während des Kampfes deaktivieren",
 		DisableInCombat_Long = "Diese Einstellung deaktiviert die GoGoMount-Buttons während des Kampfes. Nützlich für Druiden, die in Bärform Tanken und versehentlich den GoGoMount-Button klicken. Muss vor dem Kampf aktiviert oder deaktiviert sein.", -- Needs review
 		DisableUnknownMountNotices = "Mitteilungen über unbekannte Reittiere ausschalten",
 		DisableUpdateNotices = "Aktualisierungsnachrichten ausschalten",
@@ -76,7 +76,7 @@
 		TempleOfBethekk = "Tempel von Bethekk", -- Needs review
 		TempleOfEarth = "Tempel der Erde",
 		TenebrousCavern = "Tenebrous Cavern", -- Requires localization
-		ThalassianPass = "Thalassischer Pass", -- Needs review
+		ThalassianPass = "Thalassischer Pass",
 		ThalassianRange = "Thalassian Range", -- Requires localization
 		TheCerebrillum = "The Cerebrillum", -- Requires localization
 		TheExodar = "Die Exodar",
