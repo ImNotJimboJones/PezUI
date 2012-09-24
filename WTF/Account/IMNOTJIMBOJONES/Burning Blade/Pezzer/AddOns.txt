@@ -286,3 +286,17 @@ MrTrader: enabled
 MrTrader_Profit: enabled
 MrTrader_SkillWindow: enabled
 Gimplist: enabled
+AtlasLoot_MistsofPandaria: enabled
+Forte_Core: enabled
+Forte_Casting: enabled
+Forte_Class: enabled
+Forte_Cooldown: enabled
+Forte_Timer: enabled
+Forte_Talent: enabled
+Forte_Healthstone: disabled
+Forte_Soulstone: disabled
+Forte_Summon: disabled
+MountFilter-Config: enabled
+MountFilter-Filter: enabled
+MountFilter-Search: enabled
+TipTacMogIt: enabled
