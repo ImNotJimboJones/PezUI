@@ -1,14 +1,15 @@
 
 TidyPlatesWidgetData = {
-	["UnitClass"] = {
-		["Pezzer"] = "HUNTER",
-	},
-	["CachedAuraDurations"] = {
+	["UnitGuild"] = {
+		["Pezzer"] = "Denial of Service",
 	},
 	["UnitDescriptions"] = {
 		["Wild Mature Swine"] = "|cff8080809  |cffffffffBeast",
 	},
-	["UnitGuild"] = {
-		["Pezzer"] = "Denial of Service",
+	["CachedAuraDurations"] = {
+		[48719] = 600,
+	},
+	["UnitClass"] = {
+		["Pezzer"] = "HUNTER",
 	},
 }

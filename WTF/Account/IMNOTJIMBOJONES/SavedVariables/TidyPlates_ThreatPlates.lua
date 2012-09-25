@@ -29,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["version"] = "6.007",
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
+				["scale"] = {
+					["Normal"] = 0.7000000476837158,
+					["Boss"] = 1,
+					["Neutral"] = 0.6000000238418579,
+					["Elite"] = 0.7000000476837158,
+				},
 				["toggle"] = {
 					["Totem"] = true,
-				},
-				["scale"] = {
-					["Elite"] = 0.800000011920929,
-					["Boss"] = 1,
-					["Neutral"] = 0.7000000476837158,
-					["Normal"] = 0.7000000476837158,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -129,10 +129,13 @@ ThreatPlatesDB = {
 					["scale"] = {
 						["MEDIUM"] = 1.1,
 						["LOW"] = 1,
+						["HIGH"] = 1.5,
 					},
 				},
+				["useType"] = false,
 				["tank"] = {
 					["scale"] = {
+						["LOW"] = 1.5,
 						["MEDIUM"] = 1.1,
 						["HIGH"] = 1,
 					},
@@ -153,10 +156,10 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
 				},
 				["normal"] = {
@@ -169,11 +172,11 @@ ThreatPlatesDB = {
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["healthborder"] = {
-					["texture"] = "TP_HealthBarOverlayThin",
-				},
 				["castbar"] = {
 					["texture"] = "Minimalist",
+				},
+				["healthborder"] = {
+					["texture"] = "TP_HealthBarOverlayThin",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -190,7 +193,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
