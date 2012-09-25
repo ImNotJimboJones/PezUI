@@ -6,18 +6,18 @@ Quartz3DB = {
 				["Default"] = {
 					["swingposition"] = "free",
 					["y"] = 287,
-					["durationtext"] = false,
-					["remainingtext"] = false,
 					["x"] = 688,
+					["remainingtext"] = false,
+					["durationtext"] = false,
 					["swingheight"] = 2,
 				},
 				["HUNTER"] = {
 					["y"] = 305,
 					["x"] = 645,
 					["remainingtext"] = false,
-					["swingposition"] = "free",
-					["durationtext"] = false,
 					["swingheight"] = 2,
+					["durationtext"] = false,
+					["swingposition"] = "free",
 				},
 			},
 		},
@@ -66,8 +66,6 @@ Quartz3DB = {
 				},
 			},
 		},
-		["EnemyCasts"] = {
-		},
 		["Player"] = {
 			["profiles"] = {
 				["Default"] = {
@@ -75,8 +73,8 @@ Quartz3DB = {
 					["w"] = 280,
 					["y"] = 470,
 					["x"] = 815,
-					["hidetimetext"] = true,
 					["texture"] = "Steel",
+					["hidetimetext"] = true,
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -87,6 +85,8 @@ Quartz3DB = {
 					["hidetimetext"] = true,
 				},
 			},
+		},
+		["EnemyCasts"] = {
 		},
 		["GCD"] = {
 			["profiles"] = {
@@ -116,16 +116,16 @@ Quartz3DB = {
 					["w"] = 250,
 					["y"] = 415,
 					["x"] = 430,
-					["texture"] = "Runes",
 					["hidetimetext"] = true,
+					["texture"] = "Runes",
 				},
 				["HUNTER"] = {
 					["y"] = 314,
 					["x"] = 413,
-					["hidetimetext"] = true,
+					["iconposition"] = "right",
 					["hideicon"] = true,
 					["w"] = 180,
-					["iconposition"] = "right",
+					["hidetimetext"] = true,
 				},
 			},
 		},
@@ -136,9 +136,9 @@ Quartz3DB = {
 					["w"] = 250,
 					["y"] = 415,
 					["iconposition"] = "left",
-					["texture"] = "Runes",
-					["x"] = 1230,
 					["hidetimetext"] = true,
+					["x"] = 1230,
+					["texture"] = "Runes",
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -149,12 +149,11 @@ Quartz3DB = {
 				},
 			},
 		},
-		["Range"] = {
-		},
 		["Mirror"] = {
 			["profiles"] = {
 				["Default"] = {
-					["mirroroffset"] = 0,
+					["mirroroffset"] = 35,
+					["mirrorgap"] = 35,
 					["mirrortextcolor"] = {
 						nil, -- [1]
 						nil, -- [2]
@@ -162,14 +161,16 @@ Quartz3DB = {
 						1, -- [4]
 					},
 					["mirrortexture"] = "Steel",
-					["mirrorgap"] = 35,
 					["mirrorwidth"] = 150,
 					["mirrorposition"] = "top",
+					["mirrorfontsize"] = 10,
 				},
 				["HUNTER"] = {
 					["mirrorposition"] = "top",
 				},
 			},
+		},
+		["Range"] = {
 		},
 		["Latency"] = {
 			["profiles"] = {
@@ -202,6 +203,7 @@ Quartz3DB = {
 	["profiles"] = {
 		["Default"] = {
 			["borderalpha"] = 0.5,
+			["backgroundalpha"] = 0.75,
 			["bordercolor"] = {
 				nil, -- [1]
 				nil, -- [2]
@@ -214,7 +216,6 @@ Quartz3DB = {
 				nil, -- [3]
 				1, -- [4]
 			},
-			["backgroundalpha"] = 0.75,
 			["modules"] = {
 				["Swing"] = false,
 				["GCD"] = false,
@@ -236,14 +237,14 @@ Quartz3DB = {
 				["Swing"] = false,
 				["Buff"] = false,
 			},
+			["borderalpha"] = 0.5,
+			["backgroundalpha"] = 0.75,
 			["failcolor"] = {
 				nil, -- [1]
 				nil, -- [2]
 				nil, -- [3]
 				1, -- [4]
 			},
-			["backgroundalpha"] = 0.75,
-			["borderalpha"] = 0.5,
 		},
 	},
 }
