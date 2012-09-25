@@ -1,7 +1,7 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: PlayerScore / GearScore
 ## Author: Arxkanite
-## Version: 4.11.00.00
+## Version: 5.00.00.00
 ## Notes: GearScore is now PlayerScore! 
 ## eMail: kevin@tentonhammer.com
 ## URL: http://www.playerscore.com

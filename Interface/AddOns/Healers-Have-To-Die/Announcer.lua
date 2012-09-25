@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.1
+Version 2.0.2
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -34,7 +34,7 @@ local HHTD = T.Healers_Have_To_Die;
 local L = HHTD.Localized_Text;
 
 -- Create module
-HHTD.Announcer = HHTD:NewModule("Announcer", "AceConsole-3.0"); --, "AceTimer-3.0");
+HHTD.Announcer = HHTD:NewModule("Announcer", "AceConsole-3.0");
 local Announcer = HHTD.Announcer;
 
 -- Up Values

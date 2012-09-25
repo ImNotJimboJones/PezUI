@@ -6,63 +6,6 @@ GearScore™, PlayerScore™, and "Ten Ton Hammer™" are Trademarks of Master G
 ]]
 
 
---[[
--- Change Log --
-
---4.11.02--
-	* Ooops -> Forgot to add Dragon Soul to experience tab, it should work fine now!
-
---4.11.01--
-	* Removed "HELP" button from quest acceptance frame.
-	* Raiding Difficulty chart updated to include Dragon Soul / Heroic Dragon Soul.
-	* Fixed a bug where ilvl compatibility was stuck on, despite settings.
-	* RaidScore will now correctly incude Dragon Soul bosses in calculations.
-	* Added "Online Lookup" feature. At anytime you can rightclick the playerscore minimap icon and mouse over "Online Lookup" to lookup relevent information on the PlayerScore database.
-	  Depending on what you're doing, the options of this feature will change. You can look up:
-	  		*Player - Look up yourself at any time, or any player you have targeted.
-	  		*NPC - Look up an NPC when you have one targeted.
-	  		*Quest - Open your quest log and select a quest, using the online lookup you can get a direct link to that quest for help, comments, and questions!
-	  		*Rewards - If your quest offers a reward youc an look up those items. This is great for getting feedback on which reward you should select.
-	  		*Zone - You can look up information and quests in the current zone you're in.
-	  		*More to come!
-	* Fixed a bug that was causing chatlog spam to occur in massive walls. (Thanks Gresyth)
-	
-	
-
---4.11.00--
-	* Transitional Version *
-	* Unofficial support for online lookup feature.
-	* Several bug fixes.
-
-
---4.10.02--
-	* Added Support for TTH Quest Helper (Check your Options Menu)
-	* Fixed a bug that was preventing ratings from being uploaded.
-
---4.10.01--
-	* Corrected a bug related to uploading of Ratings.
-	* Added Database Collector support.
-
-
---4.10.00--
-	* Completely new RaidScore calculations. RaidScore now reflects more accurately you're expereince in raiding.
-
-
---4.9.01--
-	* Fixed a bug where the Database Buttons would overlap the main interface buttons.
-	* Improved Raid Score Calculation Functionality (Performance Increase) To prepare for updated Raid Score Calcs.
-
-
---4.9.00 --
-	* Group tab replaced by Database Tab.
-	* Database Tab! This beautiful Tab will allow you to view you're whole database!
-		* Database Structure requires an update to function propertly.
-		* Class and Spec data are now saved as int in the local database.
-		* PlayerScore Updater will now download this modified format.
-		* Communcations mode has been updated to support the new format.
-
-]]
-
 BINDING_HEADER_PLAYERSCORE_INSPECT = "PlayerScore";
 
 local AceLocale = LibStub("AceLocale-3.0");
@@ -91,7 +34,7 @@ f.PlayerName = UnitName("player");
 f.ScanQue = {};
 f.AIL_Info = {};
 f.data = {
-	["Version"] = 41102,
+	["Version"] = 50000,
 	["Beta"] = false,
 	["TemplateVersion"] = 100,
 	["EquipmentOrder"] = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18},
@@ -192,6 +135,24 @@ f.data = {
 			["filter"] = 1,
 		};
 	["DungeonList"] = {
+		[L["Mists of Pandaria"]] = {
+			[15164] = {                                     
+				-- Mogu'shan Vaults
+				[16] = "LFR Mogu'shan Vaults",
+				[17] = "Normal Mogu'shan Vaults",
+				[18] = "Heroic Mogu'shan Vaults",
+				
+				-- Heart of Fear
+				[34] = "LFR Heart of Fear",
+				[35] = "Normal Heart of Fear",
+				[36] = "Heroic Heart of Fear",
+				
+				-- Terrace of the Endless Spring
+				[52] = "LFR Terrace of Endless Spring",
+				[53] = "Normal Terrace of Endless Spring",
+				[54] = "Heroic Terrace of Endless Spring",
+			},
+		},
 		[L["Cataclysm"]]  = {
 			[15096] = {
 				[20] = "Blackwing Descent",
@@ -212,22 +173,6 @@ f.data = {
 				[68] = "Heroic Ruby Sanctum 10 player",
 				[69] = "Ruby Sanctum 25 player",
 				[70] = "Heroic Ruby Sanctum 25 player",
-			},
-			[15021] = {
-				[17] = "Trial of the Crusader 10 player",
-				[18] = "Trial of the Grand Crusader 10 player",
-				[19] = "Trial of the Crusader 25 player",
-				[20] = "Trial of the Grand Crusader 25 player",
-			},
-			[14963] = {
-				[20] = "Ulduar 25 player",
-				[1] = "Ulduar 10 player",
-			},
-			[14823] = {
-				[30] = "Naxxramas 10 player",
-				[41] = "Naxxramas 25 player",
-				[60] = "Wintergrasp 10 player",
-				[61] = "Wintergrasp 25 player",
 			},
 		},
 	},
@@ -391,10 +336,127 @@ f.data = {
 		[16] = {1088,5556,5558,5560,5562,5563,5566,5553,5568,5570,5571,5573,5574,5577,5964,5966,5970,5968,5972,5974,5976},
 		[17] = {5965,5967,5971,5969,5973,5975,5977,6153,6156,6157,6159,6161,6163,6165,6167},
 		[18] = {6154,6156,6158,6160,6162,6164,6166,6168},
+		[19] = {6789, 6791, 6793, 6797, 6799},
+		[20] = {6790, 6792, 6794, 6798, 6800, 6813, 6815, 6817, 6819},
+		[21] = {6814, 6816, 6818, 6820, 6801, 6803, 6805, 6807, 6809, 6811},
+		[22] = {6802, 6804, 6806, 6808, 6810, 6812},
 		[22] = {1087},
 		[26] = {1090},
 		[29] = {1083},
 		[35] = {1089},
+	},
+	["SpecializationRoles"] = {
+	    [250] = 1,
+	    [251] = 2,
+	    [252] = 2,
+	     
+	      -- Druid
+		[102] = 5,
+		[103] = 2,
+		[104] = 1,
+		[105] = 6,
+		
+		-- Hunter
+		[253] = 2,
+		[254] = 2,
+		[255] = 2,
+		
+		-- Mage
+		[62] = 5,
+		[63] = 5,
+		[64] = 5,
+		
+		-- Monk
+		[268] = 1,
+		[269] = 6,
+		[270] = 2,
+		
+		-- Paladin
+		[65] = 6,
+		[66] = 1,
+		[67] = 2,
+		
+		-- Priest
+		[256] = 6,
+		[257] = 6,
+		[258] = 5,
+		
+		-- Rogue
+		[259] = 2,
+		[260] = 2,
+		[261] = 2,
+		
+		-- Shaman
+		[262] = 5,
+		[263] = 2,
+		[264] = 6,
+		
+		-- Warlock
+		[265] = 5,
+		[266] = 5,
+		[267] = 5,
+		
+		-- Warrior
+		[71] = 2,
+		[72] = 2,
+		[73] = 1,
+	},
+	["SpecializationID"] = {
+		-- Death Knight
+		[250] = L["Blood"],
+		[251] = L["Frost"],
+		[252] = L["Unholy"],
+		
+		-- Druid
+		[102] = L["Balance"],
+		[103] = L["Feral"],
+		[104] = L["Guardian"],
+		[105] = L["Restoration"],
+		
+		-- Hunter
+		[253] = L["Beast Mastery"],
+		[254] = L["Marksmanship"],
+		[255] = L["Survival"],
+		
+		-- Mage
+		[62] = L["Arcane"],
+		[63] = L["Fire"],
+		[64] = L["Frost"],
+		
+		-- Monk
+		[268] = L["Brewmaster"],
+		[269] = L["Mistweaver"],
+		[270] = L["Windwalker"],
+		
+		-- Paladin
+		[65] = L["Holy"],
+		[66] = L["Protection"],
+		[67] = L["Retribution"],
+		
+		-- Priest
+		[256] = L["Discipline"],
+		[257] = L["Holy"],
+		[258] = L["Shadow"],
+		
+		-- Rogue
+		[259] = L["Assassination"],
+		[260] = L["Combat"],
+		[261] = L["Subtlety"],
+		
+		-- Shaman
+		[262] = L["Elemental"],
+		[263] = L["Enhancement"],
+		[264] = L["Restoration"],
+		
+		-- Warlock
+		[265] = L["Affliction"],
+		[266] = L["Demonology"],
+		[267] = L["Destruction"],
+		
+		-- Warrior
+		[71] = L["Arms"],
+		[72] = L["Fury"],
+		[73] = L["Protection"]
 	},
 	["ClassRoles"] = {
 		["SHAMAN"] = {
@@ -838,7 +900,7 @@ function f:ADDON_LOADED(EventName, AddonName)
 		if ( TenTonHammer_Settings["addonMode"] == 0 ) then TenTonHammer_PopupFrame2:Show(); end;
 		--------------
 			--print("|cffff0000PlayerScore:|r You can now claim your characters on PlayerScore.com |cffff8000('/claim')");
-		if ( TenTonHammer_Settings["addonMode"] == 1 ) then print("|cffff0000PlayerScore:|r RaidScore now reflects new calculations and Cataclysm Bosses."); end;
+		if ( TenTonHammer_Settings["addonMode"] == 1 ) then print("|cffff0000PlayerScore:|r Updated for Mists of Pandaria (Spec Tab will be back shortly!)."); end;
 		--------------
 		--TTHD_Debug();
 	end;
@@ -1198,8 +1260,28 @@ function f:GetEnchantInfo(itemLink)
 end;
 
 function f:GetLiteSpec(unit)
-	local ActiveTalentGroup = GetActiveTalentGroup(true);
-	local TalentInfo = { 0, "", "", L["This player has no specialization for their class."], 0,0,0,0,0,0 };
+	--GetActiveTalentGroup Expired
+	--local ActiveTalentGroup = GetActiveTalentGroup(true);
+	
+	local talentRole;
+	local specID = GetInspectSpecialization(unit);
+	if ( specID and GetSpecializationRoleByID(specID) ) then
+		--print("Spec ID", specID);
+		talentRole = GetSpecializationRoleByID(specID);
+		local roleID = f.data["SpecializationRoles"][specID];
+		local roleName = f.data["SpecializationID"][specID];
+		
+		--print(roleID, roleName);
+	
+		local TalentInfo = { roleID, roleName, "", "", 0, 0, 0, 0, 0, 0 };
+		if ( true ) then return unpack(TalentInfo); end;
+	else
+		local TalentInfo = { 0, "", "", L["This player has no specialization for their class."], 0,0,0,0,0,0 };
+		return unpack(TalentInfo);
+	end;
+	
+	
+	--if ( true ) then return unpack(TalentInfo); end;
 	local Talents = {};
 	local MissingTalents = 0;
 	local PlayerLevel = UnitLevel(unit);
@@ -1210,50 +1292,13 @@ function f:GetLiteSpec(unit)
 	if ( PlayerLevel < 10 ) then
 		return unpack(TalentInfo);
 	else
-		for i = 1, GetNumTalentTabs(true) do
-			local TabID, TabName, TabDescription, TabIcon, TabPoints, TabBackground, TabPreviewPoints, TabIsUnlocked = GetTalentTabInfo(i, true, false, ActiveTalentGroup);
-			if (TabPoints >= 31) or (( PlayerLevel < 71 ) and ( TabPoints > 0 ))  then
-				TalentInfo = { TabID, TabName, TabIcon, TabDescription };
-				PlayerSpec = TabID;
-				for j = 1,GetNumTalents(i, true, false, ActiveTalentGroup) do
-					local TalentName, TalentIconTexture, TalentTier, TalentColumn, TalentRank, TalentMaxRank = GetTalentInfo(i, j, true, false, ActiveTalentGroup);
-					if ( TalentRank > 0 ) then
-						if ( PlayerSpec ) and ( TenTonHammer_Elite[PlayerSpec] ) and ( TenTonHammer_Elite[PlayerSpec]["TALENTS"][TalentName] ) then
-							if ( TenTonHammer_Elite[PlayerSpec]["TALENTS"][TalentName] == 1 ) then
-								PositiveTalentCount = PositiveTalentCount + TalentRank;
-							elseif ( TenTonHammer_Elite[PlayerSpec]["TALENTS"][TalentName] == 2 ) then
-								NegativeTalentCount = NegativeTalentCount + TalentRank;
-							end;
-						end;
-						InfoIndex = InfoIndex+1;
-					end;
-				end;
-				Talents[i] = TabPoints;
-				MissingTalents = MissingTalents + TabPoints;
-			end;
-			if ( PlayerLevel > 9 ) then
-				if ( PlayerLevel > 10 ) and ( PlayerLevel < 81 ) then
-					local TalentLevel = PlayerLevel - 9;
-					MissingTalents = MissingTalents - (floor((TalentLevel - (mod(TalentLevel, 2) -1))/2) + 1);
-				else
-					MissingTalents = MissingTalents - 36 - ( PlayerLevel - 80 );
-				end;
-			end;
-			for i = 1,3 do
-				TalentInfo[4+i] = abs(Talents[i] or 0);
-			end;
-			TalentInfo[8] = abs(MissingTalents);
-			TalentInfo[9] = NegativeTalentCount;
-			TalentInfo[10] = PositiveTalentCount;
-		end;
-
 		return unpack(TalentInfo);
 	end;
 end;
 
 function f:GetSpec(unit)
 
-	local ActiveTalentGroup = GetActiveTalentGroup(true);
+	--[[MOP]]--local ActiveTalentGroup = GetActiveTalentGroup(true);
 	local TalentInfo = { 0, "", "", L["This player has no specialization for their class."], 0,0,0,0,0,0 };
 	--if ( unit ) then return TalentInfo; end; --Debug Code ONly
 	local Talents = {};
@@ -1265,6 +1310,7 @@ function f:GetSpec(unit)
 	local PositiveTalentCount = 0;
 	local PlayerSpec;
 
+    if ( true ) then	return unpack(TalentInfo); end;
 
 	if ( PlayerLevel < 10 ) or ( currentPlayerLevel < 10 ) then
 		return unpack(TalentInfo);
@@ -1302,7 +1348,7 @@ function f:GetSpec(unit)
 					self.OriginalScript(self, button);
 				end;
 			end;
-		for i = 1, GetNumTalentTabs(true) do
+		for i = 1, GetNumSpecializations(true) do
 
 			local Name = "PlayerTalentFramePanel"..i;
 			local InspectFrame = _G[Name];
@@ -1442,17 +1488,17 @@ function f:QuickScan(unit)
 	-- Rapid Scan for GearScore Lite Mode --
 	if ( f:Inspect(unit ) ) then
 		-- Preload Items from Player --
-		local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
-		for i = 1,17 do
+		local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
+		for i = 1,16 do
 			local index = Order[i];
 			local ItemLink = GetInventoryItemLink(unit, index);
 			f.data["TempItemList"][index] = ItemLink;
 		end;
-		f.Callback["INSPECT_ACHIEVEMENT_READY"] = function(...)
+		f.Callback["INSPECT_ACHIEVEMENT_READY"] = function(...)    
 			f.ScanCount = ( f.ScanCount or 0 ) + 1;
 			local TimeDelay = 1;
 			local BandwidthIn, BandwidthOut, Latency = GetNetStats();
-			TimeDelay = TimeDelay + ( Latency / 500 );
+			TimeDelay = TimeDelay + ( Latency / 500 );         
 			f.LiteScanTarget = UnitName(unit) or "";
 			if ( UnitIsUnit("mouseover", unit ) ) then
 				GameTooltip:SetUnit(unit);
@@ -1465,10 +1511,11 @@ function f:QuickScan(unit)
 				local pvpGearScore = 0;
 				local AverageItemLevel = 0;
 				local SpecID, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount, IncorrectItems;
-				SpecID, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount = f:GetLiteSpec(unit);
+				PlayerRole, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount = f:GetLiteSpec(unit);
 				local ClassLocal, Class = UnitClass(unit);
 				local PlayerLevel = UnitLevel(unit);
-				local PlayerRole = f.data.ClassRoles[Class][SpecID or 0] or 0;
+				local PlayerRole = PlayerRole or 0;
+				--local PlayerRole = f.data.ClassRoles[Class][SpecID or 0] or 0;
 				local NegativeArray, PositiveArray = {}, {};
 				--*f.CurrentPlayerRole = PlayerRole;
 				--[[
@@ -1498,7 +1545,7 @@ function f:QuickScan(unit)
 				--PVEScore = 0;
 				--f:GetPVEScore() or 0;
 				PVPScore = f:GetPVPScore() or 0;
-				local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
+				local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
 				local TotalStats = {};
 				local ItemCount = 0;
 				local WeaponScore = 0;
@@ -1510,7 +1557,7 @@ function f:QuickScan(unit)
 				local TotalMissingEnchants = 0;
 				local IncorrectItems = {};
 				local BeltBuckle = true;
-				for i = 1,17 do
+				for i = 1,16 do
 					local index = Order[i];
 					local ItemLink = GetInventoryItemLink(unit, index);
 					if ( ItemLink ) then
@@ -1577,7 +1624,7 @@ function f:QuickScan(unit)
 					-- Warrior AIL Bug? --
 					AverageItemLevel = floor(AverageItemLevel - ( 2 * AIL_Weapon / WeaponValue ));
 				end;
-				AverageItemLevel = floor((AverageItemLevel / 17)+0.5);
+				AverageItemLevel = floor((AverageItemLevel / 16)+0.5);
 				f.AIL_Info = { PlayerName, AverageItemLevel };
 				PVEScore = pvpGearScore;
 				--print("Quick-Scan", GearScore, AverageItemLevel);
@@ -1610,7 +1657,7 @@ function f:QuickScan(unit)
 					tinsert(NegativeArray, {string.format(L["%d %s items equipped"], v, i), L["These items are not appropriate for this player's spec. These items will reduce this player's potential performance in PVE Combat."]});
 				end;
 
-				if ( ItemCount < 17 ) then
+				if ( ItemCount < 16 ) then
 					tinsert(NegativeArray, {string.format(L["%s empty equipment slot(s)"], 17 - ItemCount), L["This player is missing equipment and which will drastically reduce performance."]});
 				end;
 				if ( TotalMissingEnchants > 0 ) then
@@ -1674,8 +1721,8 @@ end;
 function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 	if ( f:Inspect(unit) ) then
 		--TempItemList
-		local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
-		for i = 1,17 do
+		local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
+		for i = 1,16 do
 			local index = Order[i];
 			local ItemLink = GetInventoryItemLink(unit, index);
 			f.data["TempItemList"][index] = ItemLink;
@@ -1728,7 +1775,8 @@ function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 				if ( litemode ) and ( not f:IsVisible() ) then
 					SpecID, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount = f:GetLiteSpec(unit);
 				else
-					SpecID, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount = f:GetSpec(unit);
+					-- MOP: Use Lite Mode Get Spec
+					SpecID, SpecName, SpecIcon, SpecDescription, Talents1, Talents2, Talents3, MissingTalents, NegativeTalentCount, PositiveTalentCount = f:GetLiteSpec(unit);
 				end;
 				if ( (PositiveTalentCount or 0) > 0 ) then tinsert(PositiveArray, {string.format(L["%d Positive talent(s)."], PositiveTalentCount), L["This player has talents that you have marked as positive."]}); end;
 				if ( (NegativeTalentCount or 0) > 0 ) then tinsert(NegativeArray, {string.format(L["%d Negative talent(s)."], NegativeTalentCount), L["This player has talents that you have marked as negative."]}); end;
@@ -1800,7 +1848,7 @@ function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 				PVPScore = f:GetPVPScore() or 0;
 				f:BuildPVPTab();
 				name = fName.."_Frame2";
-				local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
+				local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
 				local TotalStats = {};
 				local ItemCount = 0;
 				local WeaponScore = 0;
@@ -1808,7 +1856,7 @@ function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 				local WeaponValue = 0;
 				local AIL_Weapon = 0;
 				local BeltBuckle = true;
-					for i = 1,17 do
+					for i = 1,16 do
 						local index = Order[i];
 						local ItemLink = GetInventoryItemLink(unit, index);
 
@@ -1966,8 +2014,8 @@ function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 						tinsert(NegativeArray, {string.format(L["%d Negative gems."], NegativeGems), L["This player is using gems which you have marked as negative for their spec."]});
 					end;
 
-					if ( ItemCount < 17 ) then
-						tinsert(NegativeArray, {string.format(L["%s empty equipment slot(s)"], 17 - ItemCount), L["This player is missing equipment and which will drastically reduce performance."]});
+					if ( ItemCount < 16 ) then
+						tinsert(NegativeArray, {string.format(L["%s empty equipment slot(s)"], 16 - ItemCount), L["This player is missing equipment and which will drastically reduce performance."]});
 					end;
 					if ( TotalMissingEnchants > 0 ) then
 						tinsert(NegativeArray, {format(L["%d Unenchanted Item(s)"], TotalMissingEnchants), L["This player is missing enchantments and will not be able to perform at their maximum."]});
@@ -2140,6 +2188,8 @@ function f:Scan(unit, shouldtargetplayer, hidewait, litemode)
 				end
 			);
 			if ( shouldtargetplayer ) then gg:TimerCallback(); end;
+			f:CalculateNewPvPScore();
+			
 		end;
 		f.InspectReady = true;
 		--print(GetFunctionCPUUsage(f.Scan, true));
@@ -2222,9 +2272,9 @@ function f:WipeStatus()
 end;
 function f:Wipe()
 
-	local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
+	local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
 	local name = f:GetName().."_Frame2";
-	for i = 1,17 do
+	for i = 1,16 do
 		local index = Order[i];
 		local NameString = _G[name.."_NameString"..index];
 		local ItemIcon = _G[name.."_ItemIcon"..index];
@@ -2280,16 +2330,6 @@ function f:SetRaidChart(Level)
 	if not ( Level ) or ( Level == 0 ) then Level = 1; end;
 	local Results = {};
 	local RaidChart = {
-		{ L["Level 80 Heroics"], 2712, },
-		{ L["Naxxramas 10"], 2896 },
-		{ L["Naxxramas 25"], 3353 },
-		{ L["Ulduar 10"], 3563 },
-		{ L["Ulduar 25"], 3809 },
-		{ L["Crusader 10"], 4019 },
-		{ L["Crusader 25"], 4475 },
-		{ L["Icecrown 10"], 4686 },
-		{ L["Icecrown 25"], 5142 },
-		{ L["Heroic Icecrown 25"], 5598 },
 		{ L["Level 85 Heroics"], 8019},
 		{ L["Tier 11 Raids"], 8475 },
 		{ L["Tier 11 Heroic Raids"], 8932 },
@@ -2297,7 +2337,12 @@ function f:SetRaidChart(Level)
 		{ L["Lady Sinestra"], 9177 },
 		{ L["Heroic Firelands"], 9598 },
 		{ L["Dragon Soul"], 9809 },
-		{ L["Heroic Dragon Soul"], 10265 }
+		{ L["Heroic Dragon Soul"], 10265 },
+		
+		{ L["Level 90 Dungeons"], 11177},
+		{ L["Mogu'shan Vaults"], 12581}, 
+		{ L["Terrace of the Endless Spring"], 13493},
+		{ L["Heart of Fear"], 13949},
 	};
 
 	local Difficulty = {
@@ -2421,12 +2466,14 @@ function f:GetItemScore(ItemLink, PlayerRole, PlayerClass, IncorrectItems)
 
 	if ( PlayerClass == "HUNTER" ) then
 		if ( ItemEquipSlot == "INVTYPE_RANGED" or ItemEquipSlot == "INVTYPE_RANGEDRIGHT" ) then
-			ItemScore = floor(ItemScore * 5.3224);
-			pvpItemScore = floor(pvpItemScore * 5.3224);
+			--ItemScore = floor(ItemScore * 5.3224);
+			ItemScore = floor(ItemScore * 1);
+			pvpItemScore = floor(pvpItemScore * 1);
 		end;
 		if ( f.data.ItemTypes[ItemEquipSlot]["Weapon"] > 0 ) then
-			ItemScore = floor(ItemScore * .3164);
-			pvpItemScore = floor(pvpItemScore * .3164);
+			--ItemScore = floor(ItemScore * .3164);
+			ItemScore = floor(ItemScore * 0);
+			pvpItemScore = floor(pvpItemScore * 0);
 		end;
 	end;
 
@@ -2445,20 +2492,38 @@ end;
 
 function f:BuildRaidList()
 
+	-- KEVIN FIX THIS
+
 	for Expansion, data1 in pairs(f.data.DungeonList) do
 		for Category, data2 in pairs(data1) do
 			for  id, name in pairs(data2) do
 				local AchievementID, AchievementName = GetAchievementInfo(Category, id);
-				local AchievementString = {};
+				--f ( AchievementName ) then
+				
+					local AchievementString = {};
 
-				for v in string.gmatch(AchievementName, "[^\(*\)]+") do tinsert(AchievementString, v); end;
-				L[name] = AchievementString[2];
-				--print(AchievementID, AchievementString[2], Category, id)
+					for v in string.gmatch(AchievementName or "", "[^\(*\)]+") do tinsert(AchievementString, v); end;
+					L[name] = AchievementString[2];
+					--print(AchievementID, AchievementString[2], Category, id)
+				--end;
 			end;
 		end;
 	end;
 
 	f.data["RaidOrder"] = {
+		[L["Mists of Pandaria"]] = {
+			L["LFR Mogu'shan Vaults"],
+			L["Normal Mogu'shan Vaults"],
+			L["Heroic Mogu'shan Vaults"],
+		
+			L["LFR Heart of Fear"],
+			L["Normal Heart of Fear"],
+			L["Heroic Heart of Fear"],
+						
+			L["LFR Terrace of Endless Spring"],
+			L["Normal Terrace of Endless Spring"],
+			L["Heroic Terrace of Endless Spring"],
+		},
 		[L["Cataclysm"]] = {
 			L["Dragon Soul"], 
 			L["Firelands"],
@@ -2476,18 +2541,6 @@ function f:BuildRaidList()
 			L["Heroic Icecrown 10 player"],
 			L["Icecrown 25 player"],
 			L["Icecrown 10 player"],
-			L["Trial of the Grand Crusader 25 player"],
-			L["Trial of the Grand Crusader 10 player"],
-			L["Trial of the Crusader 25 player"],
-			L["Trial of the Crusader 10 player"],
-			L["Ulduar 25 player"],
-			L["Ulduar 10 player"],
-			L["Malygos 25 player"],
-			L["Malygos 10 player"],
-			L["Naxxramas 25 player"],
-			L["Naxxramas 10 player"],
-			L["Wintergrasp 25 player"],
-			L["Wintergrasp 10 player"],
 		},
 	};
 
@@ -2500,12 +2553,14 @@ function f:BuildExperience()
 		f:BuildRaidList();
 	end;
 	local ExpansionList = {
+		L["Mists of Pandaria"],
 		L["Cataclysm"],
 		L["Wrath of the Lich King"],
 	};
 	local index = 1;
 	local AchievementData = {};
 	local CategoryList = {
+		[L["Mists of Pandaria"]] = {15164},
 		--[L["Cataclysm"]]  =  {15096},
 		[L["Cataclysm"]]  =  { 15096, },
 		[L["Wrath of the Lich King"]] = { 14823, 14963, 15021, 15062 },
@@ -3026,6 +3081,9 @@ function f:CheckReforge(ItemLink)
 end;
 
 function f:GetPlayerInfo()
+
+	--Kevin Read This!
+
 	local GearScore, PVEScore, PVPScore, RaidScore, SpecID, SpecName, PlayerRole, ThumbsUp, ThumbsDown, AltSpecID, AltSpecName, PreviousVote;
 	local pvpGearScore = 0;
 	local ClassLocale, Class = UnitClass("player");
@@ -3041,29 +3099,29 @@ function f:GetPlayerInfo()
 	local WeaponValue = 0;
 	local WeaponScore = 0;
 	local pvpWeaponScore = 0;
-	local ActiveTalentGroup = GetActiveTalentGroup();
+	local ActiveTalentGroup = GetActiveSpecGroup();
 	local PassiveTalentGroup = 1;
 	if ( ActiveTalentGroup == 1 ) then PassiveTalentGroup = 2; end;
-	for i = 1, GetNumTalentTabs(false) do
-		local TabID, TabName, TabDescription, TabIcon, TabPoints, TabBackground, TabPreviewPoints, TabIsUnlocked = GetTalentTabInfo(i, false, false, ActiveTalentGroup);
-		if (TabPoints >= 31) or (( PlayerLevel < 71 ) and ( TabPoints > 0 ))  then
-			SpecID = TabID;
-			SpecName = TabName;
+	
+	    -- Get the # for the spec id, if yoru a shaman spec 1 = elemental, spec 2 = enhanc, spec 3 = restoration
+	    local specializationID = GetSpecialization(false, false, ActiveTalentGroup);
+	    local altspecializationID = GetSpecialization(false, false, PassiveTalentGroup);
+	
+	    -- ACtually gets the global spec id for your specs.
+		local TabID, TabName, TabDescription, TabIcon, TabBackground;
+		SpecID, SpecName = GetSpecializationInfo(specializationID);
+		if ( altspecializationID ) then
+			AltSpecID, AltSpecName = GetSpecializationInfo(altspecializationID);
 		end;
-	end;
-	for i = 1, GetNumTalentTabs(false) do
-		local TabID, TabName, TabDescription, TabIcon, TabPoints, TabBackground, TabPreviewPoints, TabIsUnlocked = GetTalentTabInfo(i, false, false, PassiveTalentGroup);
-		if (TabPoints >= 31) or (( PlayerLevel < 71 ) and ( TabPoints > 0 ))  then
-			AltSpecID = TabID;
-			AltSpecName = TabName;
-		end;
-	end;
+	
 	local PlayerRole = f.data.ClassRoles[Class][SpecID] or 0;
 	local AltPlayerRole = f.data.ClassRoles[Class][AltSpecID] or 0;
+	
+	
 	local AverageItemLevel = 0;
 	local ItemCount = 0;
 	local IncorrectItems = {};
-	local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
+	local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17};
 	for i = 1,17 do
 		local index = Order[i];
 		local ItemLink = GetInventoryItemLink("player", index);
@@ -3912,6 +3970,10 @@ function CommandRate()
 	end;
 end;
 
+function CommandDebug()
+	f:PlayerScoreDebug();
+end;
+
 SlashCmdList["GEARSCORE"] = f.CommandControl;
 SLASH_GEARSCORE1 = "/gs";
 SLASH_GEARSCORE2 = "/ps";
@@ -3924,6 +3986,9 @@ SlashCmdList["GS_RESET"] = CommandReset;
 SLASH_GS_RESET1 = "/psreset";
 SlashCmdList["GS_RATE"] = CommandRate;
 SLASH_GS_RATE1 = "/psrate";
+SlashCmdList["GS_DEBUG"] = CommandDebug;
+SLASH_GS_DEBUG1 = "/psdebug";
+
 
 
 
@@ -4338,13 +4403,13 @@ function f:displayDatabase(group, page)
 		elseif ( group == "group" ) then
 			for i = 1,25 do
 				local Temp = "party"..i;
-				if ( ( "party"..i == "party"..(GetNumPartyMembers() + 1) ) and not ( UnitName("raid"..i) ) ) then
+				if ( ( "party"..i == "party"..(GetNumSubgroupMembers() + 1) ) and not ( UnitName("raid"..i) ) ) then
 					Temp = "player";
 				end;
 				if ( UnitName("raid"..i) or UnitName(Temp) ) then
 					local Target = "raid"..i;
 					if not ( UnitName(Target) ) then Target = "party"..i; end;
-					if ( Target == "party"..(GetNumPartyMembers() + 1) ) then
+					if ( Target == "party"..(GetNumSubgroupMembers() + 1) ) then
 						Target = "player";
 					end;
 					local PlayerName, PlayerRealm = UnitName(Target);
@@ -4464,8 +4529,8 @@ end;
 
 function f:GetRaidScore(debug)
 	killValues = {[0] = 0.00,[1] = 0.25,[2] = 1.25,[3] = 2.75,[4] = 4.00,[5] = 5.00};
-	exponentialRate = 1.3610
-	globalPointScale = 0.468061
+	exponentialRate = 1.3610;
+	globalPointScale = 0.439012;
 	excessKillRate = 0.05;
 	SetAchievementComparisonUnit("player");
 	local raidScore = 0;
@@ -4636,4 +4701,157 @@ function f:ContextMenu()
 	end;
 	return contextMenu;
 end;
+
+function f:PlayerScoreDebug()
+	
+	local playerName = UnitName("player");
+	local debugString;
+
+	
+	if not ( f.PartyData[playerName] ) then 
+		f:Scan("player");
+		print("Error: Data not present. Please try the debug after the scan is completed.");
+		return;
+	end;
+	
+	local partyData = f.PartyData[playerName];
+	local class = partyData["Class"];
+	local playerRole = partyData["PlayerRole"];
+	local gearScore = partyData["GearScore"];
+	local pvpScore = partyData["PVEScore"];
+	
+
+	debugString = strjoin("|", playerName, class, f.Realm,  f.Region, gearScore, pvpScore);
+	
+	for i = 1, 19 do
+		local link = GetInventoryItemLink("player", i);
+		if ( link ) then
+			local itemScore, __, __, pvpItemScore = f:GetItemScore(link, playerRole, class, {});
+		    local __, __, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4, Suffix, Unique, LinkLvl, Name = string.find(link, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
+			debugString = debugString.."|"..strjoin(":", i, Id, Enchant, Gem1, Gem2, Gem3, Gem4, itemScore, pvpItemScore);
+			--print(a, b, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4, Suffix, Unique, LinkLvl, Name);
+		else
+			debugString = debugString.."|"..i..":0:0:0:0:0:0:0:0";
+		end;
+	
+	end;
+	
+	--print(debugString);
+	TenTonHammer_PopupFrame:Popup(debugString);
+	print("Please copy the text in the popup and paste to our forums or bug submission form.");
+	--GetItemScore(ItemLink, PlayerRole, PlayerClass, IncorrectItems)
+	--return ItemScore, IncorrectItems, hex, pvpItemScore;
+end;
+
+
+
+
+function f:CalculateNewPvPScore()
+	-- Setup Variables
+	local Max2v2Score = 2500;
+	local Max3v3Score = 2500;
+	local Max5v5Score = 2500;
+	local BattleGroundScoreRatio = 0.8;
+	local ArenaScoreRatio = 3;
+	local PvPScore, Score2, Score3, Score5, BattleGroundScore = 0, 0, 0, 0, 0;
+	local AVWins, AVPlays, AVScore, ABWins, ABPlays, ABScore, GilneasWins, GilneasPlays, GilneasScore, EotsWins, EotsPlays, EotsScore, SotaWins, SotaPlays, SotaScore, TwinWins, TwinPlays, TwinScore, WarsongWins, WarsongPlays, WarsongScore, IsleWins, IslePlays, IsleScore = 0;
+	
+	
+	--print("-- NEW PVP SCORE --");
+	
+	-- Set Ratios for teamsizes
+	for i = 1,3 do 
+		local teamName, teamSize, teamRating, teamPlayed, teamWins, playerPlayed, playerRating = GetInspectArenaTeamData(i);
+		if ( teamName ) then 
+			if ( teamSize == 2 ) then
+				Score2 = ( 2 * playerRating + teamRating / 3) * 0.8;
+				print("2v2 Score: ", Score2);
+				--Score2 = 0.25 + (max(teamRating, 0) / max2v2Score ); 
+			elseif ( teamSize == 3 ) then
+				Score3 = ( 2 * playerRating + teamRating / 3) * 0.9;
+				print("3v3 Score: ", Score3);
+				--Score3 = 0.25 + (max(teamRating, 0) / max3v3Score ); 
+			elseif ( teamSize == 5 ) then
+				Score5 = ( 2 * playerRating + teamRating / 3) * 1;
+				print("5v5 Score: ", Score5);
+				--Score5 = 0.25 + (max(teamRating, 0) / max3v3Score ); 
+			end;
+		end;
+	end;
+	
+	-- Am I using Hacking Math? Basically the highest Score should be worth 100%, 2nd highest worth 25%, and 3rd highest worth 6.25%. Total should be multiplied by 3.
+	local ArenaScore = ArenaScoreRatio * (max(Score2, Score3, Score5) + ( min(Score2, Score3, Score5) * 0.0625 ) + (((Score2 + Score3 + Score5) - min(Score2, Score3, Score5) - max(Score2, Score3, Score5)) * 0.25 ));
+	
+	--Alternative method
+	--[[
+	local highArenaScore = max(Score2, Score3, Score5);
+	local lowArenaScore = min(Score2, Score3, Score5) * 0.0625;
+	local middleArenaScore = (Score2 + Score3 + Score5 - lowArenaScore - highArenaScore) * 0.25;
+	local ArenaScore = ArenaScoreRatio * ( highArenaScore + lowArenaScore + middleArenaScore );
+	]]
+	
+	-- Lets get some battleground scores
+	AVWins = tonumber(GetComparisonStatistic(49));
+	AVPlays = tonumber(GetComparisonStatistic(53)); 
+	AVScore = min(AVWins, 100) * 3 + min(AVPlays, 200) * 1 + ( max(0, AVWins - 100) * 3 + max(0, AVPlays - 200) * 1 ) / 20;
+	AVScore = 0; -- AVScore must be nilled because Blizzard doesn't support it on the armory feed.
+	
+	ABWins = tonumber(GetComparisonStatistic(51));
+	ABPlays = tonumber(GetComparisonStatistic(55));
+	ABScore = min(ABWins, 100) * 3 + min(ABPlays, 200) * 1 + ( max(0, ABWins - 100) * 3 + max(0, ABPlays - 200) * 1 ) / 20;
+	                                           
+	GilneasWins = tonumber(GetComparisonStatistic(5237));
+	GilneasPlays = tonumber(GetComparisonStatistic(5236));
+	GilneasScore = min(GilneasWins, 100) * 3 + min(GilneasPlays, 200) * 1 + ( max(0, GilneasWins - 100) * 3 + max(0, GilneasPlays - 200) * 1 ) / 20;
+	
+	EotsWins = tonumber(GetComparisonStatistic(50));
+	EotsPlays = tonumber(GetComparisonStatistic(54));
+	EotsScore = min(EotsWins, 100) * 3 + min(EotsPlays, 200) * 1 + ( max(0, EotsWins - 100) * 3 + max(0, EotsPlays - 200) * 1 ) / 20;
+	
+	SotaWins = tonumber(GetComparisonStatistic(1550));
+	SotaPlays = tonumber(GetComparisonStatistic(1549));
+	SotaScore = min(SotaWins, 100) * 3 + min(SotaPlays, 200) * 1 + ( max(0, SotaWins - 100) * 3 + max(0, SotaPlays - 200) * 1 ) / 20;
+	
+	TwinWins = tonumber(GetComparisonStatistic(5233));
+	TwinPlays = tonumber(GetComparisonStatistic(5232));
+	TwinScore = min(TwinWins, 100) * 3 + min(TwinPlays, 200) * 1 + ( max(0, TwinWins - 100) * 3 + max(0, TwinPlays - 200) * 1 ) / 20;
+	
+	WarsongWins = tonumber(GetComparisonStatistic(105));
+	WarsongPlays = tonumber(GetComparisonStatistic(52));
+	WarsongScore = min(WarsongWins, 100) * 3 + min(WarsongPlays, 200) * 1 + ( max(0, WarsongWins - 100) * 3 + max(0, WarsongPlays - 200) * 1 ) / 20;
+	
+	IsleWins = tonumber(GetComparisonStatistic(4097));
+	IslePlays = tonumber(GetComparisonStatistic(4096));
+	IsleScore = min(IsleWins, 100) * 3 + min(IslePlays, 200) * 1 + ( max(0, IsleWins - 100) * 3 + max(0, IslePlays - 200) * 1 ) / 20;
+	IsleScore = 0; -- Same as AV.
+	
+	BattleGroundScore = (AVScore + ABScore + GilneasScore + EotsScore + SotaScore + TwinScore + WarsongScore + IsleScore) * BattleGroundScoreRatio;
+	--PvPScore = floor((( BattleGroundScore * Score2 * 2 ) + ( BattleGroundScore * Score3 * 3 ) + ( BattleGroundScore * Score5 * 5 ) ) / 10  * PvPScoreRatio);
+	
+	--print(PvPScore, BattleGroundScore, AVScore, ABScore, GilneasScore, EotsScore, SotaScore, TwinScore, WarsongScore, IsleScore);
+	--print(PvPScore, Score2, Score3, Score5);
+	PvPScore = floor(BattleGroundScore + ArenaScore);
+	
+	--print(PvPScore, BattleGroundScore, ArenaScore);
+	
+	
+end;
+
+
+--/run for i = 2,1000 do local a, b = GetAchievementInfo(i); if ( string.find(b, "Alterac") ) then print(GetAchievementInfo(i)); end; end;
+--/run for i = 2,1000 do local c = GetAchievementLink(i); if ( c ) then a, b = GetAchievementInfo(i); if ( string.find(b, "Alterac") ) then print(GetAchievementInfo(i)); end; end; end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

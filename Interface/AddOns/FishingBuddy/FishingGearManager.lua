@@ -1,5 +1,8 @@
 -- Interface with the Blizz Equipment Manager
 
+-- 5.0.4 has a problem with a global "_" (see some for loops below)
+local _
+
 local FL = LibStub("LibFishing-1.0");
 
 local lastOutfit;

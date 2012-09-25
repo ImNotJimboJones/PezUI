@@ -1,4 +1,7 @@
-﻿Version 1.1
+﻿Version 1.1a
+- Yet another '_' global issue (the last one, I think, after going through all the code)
+
+Version 1.1
 - Italian translation, thanks Impaler (and bER92)!
 - Add support for "Fish without a pole" feature. Cast when any fishing gear is worn or
   a modifier key is held down while right-clicking

@@ -1,5 +1,5 @@
 ## Interface: 50001
-## X-Curse-Packaged-Version: 2.0.1
+## X-Curse-Packaged-Version: 2.0.2
 ## X-Curse-Project-Name: Healers have to die
 ## X-Curse-Project-ID: healers-have-to-die
 ## X-Curse-Repository-ID: wow/healers-have-to-die/mainline
@@ -19,7 +19,7 @@
 
 
 ## Author: John Wellesz
-## Version: 2.0.1
+## Version: 2.0.2
 
 ## LoadManagers: AddonLoader
 
@@ -33,10 +33,10 @@
 
 ## X-License: All Rights Reserved
 
-## OptionalDeps: Ace3, LibNameplate-1.0
-## X-Embeds: Ace3, LibNameplate-1.0
+## OptionalDeps: Ace3, LibNameplate-1.0, LibShefkiTimer-1.0
+## X-Embeds: Ace3, LibNameplate-1.0, LibShefkiTimer-1.0
 
-## X-ReleaseDate: "2012-09-01T06:31:16Z"
+## X-ReleaseDate: "2012-09-25T21:05:49Z"
 ## X-Category: PvP
 ## X-eMail: archarodim@teaser.fr
 ## X-Website: http://www.2072productions.com/to/healers-have-to-die.php

@@ -2,6 +2,9 @@
 --
 -- Everything you wanted support for in your fishing endeavors
 
+-- 5.0.4 has a problem with a global "_" (see some for loops below)
+local _
+
 local Crayon = LibStub("LibCrayon-3.0");
 local FL = LibStub("LibFishing-1.0");
 

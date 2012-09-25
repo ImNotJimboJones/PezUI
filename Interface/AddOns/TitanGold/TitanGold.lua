@@ -29,6 +29,9 @@ local GoldTimer = nil;
 local _G = getfenv(0);
 -- ******************************** Functions *******************************
 
+--[[
+Add commas or period in the value given as needed
+--]]
 local function comma_value(amount)
 	local formatted = amount
 	local k
@@ -43,11 +46,10 @@ local function comma_value(amount)
 	return formatted
 end
 
-local function NiceCash(value, show_zero, show_neg, show_labels)
---
--- Take the 'amount' of gold and make it into a nice, colorful string
--- of g s c (gold silver copper)
---
+--[[
+Take the 'amount' of gold and make it into a nice, colorful string of g s c (gold silver copper)
+--]]
+local function NiceCash(value, show_zero, show_neg)
 	local neg1 = ""
 	local neg2 = ""
 	local agold = 10000;
@@ -64,10 +66,20 @@ local function NiceCash(value, show_zero, show_neg, show_labels)
 	local cc = "|cFFFF6600"
 	local amount = (value or 0)
 	local cash = (amount or 0)
-	local c_lab = show_labels and L["TITAN_GOLD_COPPER"] or ""
-	local s_lab = show_labels and L["TITAN_GOLD_SILVER"] or ""
-	local g_lab = show_labels and L["TITAN_GOLD_GOLD"] or ""
+	local font_size = TitanPanelGetVar("FontSize")
+	local icon_pre = "|TInterface\\MoneyFrame\\"
+	local icon_post = ":"..font_size..":"..font_size..":2:0|t"
+	local g_icon = icon_pre.."UI-GoldIcon"..icon_post
+	local s_icon = icon_pre.."UI-SilverIcon"..icon_post
+	local c_icon = icon_pre.."UI-CopperIcon"..icon_post
+	-- build the coin label strings based on the user selections
+	local show_labels = TitanGetVar(TITAN_GOLD_ID, "ShowCoinLabels")
+	local show_icons = TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons")
+	local c_lab = (show_labels and L["TITAN_GOLD_COPPER"]) or (show_icons and c_icon) or ""
+	local s_lab = (show_labels and L["TITAN_GOLD_SILVER"]) or (show_icons and s_icon) or ""
+	local g_lab = (show_labels and L["TITAN_GOLD_GOLD"]) or (show_icons and g_icon) or ""
 
+	-- show the money in highlight or coin color based on user selection
 	if TitanGetVar(TITAN_GOLD_ID, "ShowColoredText") then
 		gc = "|cFFFFFF00"
 		sc = "|cFFCCCCCC"
@@ -100,7 +112,7 @@ local function NiceCash(value, show_zero, show_neg, show_labels)
 		amount = amount - (gold * agold);
 		silver = (math.floor(amount / asilver) or 0)
 		copper = amount - (silver * asilver)
-		-- now make them line up in a column
+		-- now make the coin strings
 		if gold > 0 then
 			gold_str = gc..(comma_value(gold) or "?")..g_lab.." "..FONT_COLOR_CODE_CLOSE
 			silver_str = sc..(string.format("%02d", silver) or "?")..s_lab.." "..FONT_COLOR_CODE_CLOSE
@@ -123,6 +135,7 @@ local function NiceCash(value, show_zero, show_neg, show_labels)
 			end
 		end
 	end
+
 	-- build the return string
 	outstr = outstr
 		..neg1
@@ -230,7 +243,7 @@ function TitanGold_OnEvent(self, event, ...)
 		return;
 	end
 end
- 
+
 -- *******************************************************************************************
 -- NAME: TitanPanelGoldButton_GetTooltipText()
 -- DESC: Gets our tool-tip text, what appears when we hover over our item on the Titan bar.
@@ -243,6 +256,8 @@ function TitanPanelGoldButton_GetTooltipText()
 	GoldSave[GOLD_INDEX].gold = GetMoney("player")
 	local currentMoneyRichText = ""; -- initialize the variable to hold the array
 	local coin_str = ""
+	local character, charserver = "", ""
+	local ttlgold = 0
 	local show_labels = (TitanGetVar(TITAN_GOLD_ID, "ShowCoinLabels")
 		or TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons"))
 
@@ -251,7 +266,7 @@ function TitanPanelGoldButton_GetTooltipText()
 
 	local GoldSaveSorted = {};
 	for index, money in pairs(GoldSave) do
-		local character, charserver = string.match(index, '(.*)_(.*)');
+		character, charserver = string.match(index, '(.*)_(.*)');
 		if (character) then
 			if (charserver == server) then
 				table.insert(GoldSaveSorted, index); -- insert all keys from hash into the array
@@ -266,25 +281,22 @@ function TitanPanelGoldButton_GetTooltipText()
 	end
 
 	for i = 1, getn(GoldSaveSorted) do 
-		local character, charserver = string.match(GoldSaveSorted[i], '(.*)_(.*)');
+		character, charserver = string.match(GoldSaveSorted[i], '(.*)_(.*)');
 		if (character) then
 			if (charserver == server) then
 				if (GoldSave[GoldSaveSorted[i]].show) then
-					coin_str = NiceCash(GoldSave[GoldSaveSorted[i]].gold, false, false, show_labels)
+					coin_str = NiceCash(GoldSave[GoldSaveSorted[i]].gold, false, false)
+
 					currentMoneyRichText = currentMoneyRichText.."\n"..character.."\t"..coin_str
---						..TitanUtils_GetHighlightText(format(L["TITAN_MONEY_FORMAT"],
---							TitanPanelGold_BreakMoney(GoldSave[GoldSaveSorted[i]].gold)))
 				end
 			end
 		end
 	end
 
-	coin_str = NiceCash(TitanPanelGoldButton_TotalGold(), false, false, show_labels)
+	coin_str = NiceCash(TitanPanelGoldButton_TotalGold(), false, false)
 	currentMoneyRichText = currentMoneyRichText.."\n"
 		..TITAN_GOLD_SPACERBAR.."\n"
 		..L["TITAN_GOLD_TTL_GOLD"].."\t"..coin_str
---		..TitanUtils_GetHighlightText(format(L["TITAN_MONEY_FORMAT"], 
---			TitanPanelGold_BreakMoney(TitanPanelGoldButton_TotalGold())));
 
 	-- find session earnings and earning per hour
 	local sesstotal = GetMoney("player") - GOLD_STARTINGGOLD;
@@ -293,19 +305,13 @@ function TitanPanelGoldButton_GetTooltipText()
 		sesstotal = math.abs(sesstotal);
 		negative = true;
 	end
---[[
-	DEFAULT_CHAT_FRAME:AddMessage("Gold "
-.."p: "..GetMoney("player")
-.."g: "..GOLD_STARTINGGOLD
- );
---]]
+
 	local sesslength = GetTime() - GOLD_SESSIONSTART;
 	local perhour = math.floor(sesstotal / sesslength * 3600);
 
-	coin_str = NiceCash(GOLD_STARTINGGOLD, false, false, show_labels)
+	coin_str = NiceCash(GOLD_STARTINGGOLD, false, false)
 	local sessionMoneyRichText = "\n\n"..TitanUtils_GetHighlightText(L["TITAN_GOLD_STATS_TITLE"])
 		.."\n"..L["TITAN_GOLD_START_GOLD"].."\t"..coin_str.."\n"
---		..TitanUtils_GetColoredText(format(L["TITAN_MONEY_FORMAT"], TitanPanelGold_BreakMoney(GOLD_STARTINGGOLD)),TITAN_GOLD_BLUE).."\n";
 
 	if (negative) then
 		GOLD_COLOR = TITAN_GOLD_RED;
@@ -317,13 +323,13 @@ function TitanPanelGoldButton_GetTooltipText()
 		GOLD_PERHOUR_STATUS = L["TITAN_GOLD_PERHOUR_EARNED"];
 	end     
 
-	coin_str = NiceCash(sesstotal, true, true, show_labels)
+	coin_str = NiceCash(sesstotal, true, true)
 	sessionMoneyRichText = sessionMoneyRichText
 		..TitanUtils_GetColoredText(GOLD_SESS_STATUS,GOLD_COLOR)
 		.."\t"..coin_str.."\n";
 
 	if TitanGetVar(TITAN_GOLD_ID, "DisplayGoldPerHour") then
-		coin_str = NiceCash(perhour, true, true, show_labels)
+		coin_str = NiceCash(perhour, true, true)
 		sessionMoneyRichText = sessionMoneyRichText
 			..TitanUtils_GetColoredText(GOLD_PERHOUR_STATUS,GOLD_COLOR)
 			.."\t"..coin_str.."\n";
@@ -337,7 +343,7 @@ function TitanPanelGoldButton_GetTooltipText()
 		GOLD_COLOR = TITAN_GOLD_RED;
 	end     
 
-	return ""..TitanUtils_GetColoredText(final_tooltip,GOLD_COLOR)
+	return ""..TitanUtils_GetColoredText(final_tooltip,GOLD_COLOR)..FONT_COLOR_CODE_CLOSE
 		..currentMoneyRichText
 		..sessionMoneyRichText
 --		.."\n\nName: "..(TitanGetVar(TITAN_GOLD_ID, "SortByName") and "T" or "F")     
@@ -364,10 +370,13 @@ function TitanPanelGoldButton_FindGold()
 		ttlgold = TitanPanelGoldButton_TotalGold()
 	else
 		ttlgold = GetMoney("player");
-	end     
+	end   
 
+	ret_str = NiceCash(TitanPanelGoldButton_TotalGold(), true, false)
+	
+--[[
 	if TitanGetVar(TITAN_GOLD_ID, "ShowCoinLabels") then
-		ret_str = NiceCash(ttlgold, true, false, true)
+		ret_str = NiceCash(ttlgold, true, false)
 	elseif TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons") then
 		if TitanGetVar(TITAN_GOLD_ID, "ShowGoldOnly") then
 			ttlgold = math.floor(ttlgold/10000)*10000
@@ -376,15 +385,15 @@ function TitanPanelGoldButton_FindGold()
 			..GetCoinTextureString (ttlgold, TitanPanelGetVar("FontSize"))
 			..FONT_COLOR_CODE_CLOSE
 	else -- no labels
-		ret_str = NiceCash(ttlgold, true, false, false)
+		ret_str = NiceCash(ttlgold, true, false)
 	end
-
+--]]
 	return L["TITAN_GOLD_MENU_TEXT"]..": "..FONT_COLOR_CODE_CLOSE, ret_str
 end
 
 -- *******************************************************************************************
 -- NAME: TitanPanelGoldButton_TotalGold()
--- DESC: Calculates total gold for display
+-- DESC: Calculates total gold for display per user selections
 -- *******************************************************************************************
 function TitanPanelGoldButton_TotalGold()
 	local server = GetCVar("realmName").."::"..UnitFactionGroup("Player");
@@ -475,9 +484,11 @@ local function ShowProperLabels(chosen)
 end
 
 local function Seperator(chosen)
+--[[
 TitanDebug("Sep: "
 ..(chosen or "?").." "
 )
+--]]
 	if chosen == "UseSeperatorComma" then
 		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorComma", true);
 		TitanSetVar(TITAN_GOLD_ID, "UseSeperatorPeriod", false);
@@ -607,11 +618,7 @@ function TitanPanelRightClickMenu_PrepareGoldMenu()
 		TitanPanelRightClickMenu_AddSpacer();     
 		TitanPanelRightClickMenu_AddToggleIcon(TITAN_GOLD_ID);
 		TitanPanelRightClickMenu_AddToggleLabelText(TITAN_GOLD_ID);
-		if TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons") then
-			-- colored text will not change text & icons
-		else
-			TitanPanelRightClickMenu_AddToggleColoredText(TITAN_GOLD_ID);
-		end
+		TitanPanelRightClickMenu_AddToggleColoredText(TITAN_GOLD_ID);
 		TitanPanelRightClickMenu_AddSpacer();     
 
 		-- Generic function to toggle and hide
@@ -733,20 +740,6 @@ function TitanPanelGoldButton_ResetSession()
 	DEFAULT_CHAT_FRAME:AddMessage(TitanUtils_GetGreenText(L["TITAN_GOLD_SESSION_RESET"]));
 end
      
--- *******************************************************************************************
--- NAME: TitanPanelGold_BreakMoney(money)
--- DESC: This routine was borrowed from TitanPanel [Money] - breaks down gold into denominations
--- *******************************************************************************************
-function TitanPanelGold_BreakMoney(money)
-	-- Non-negative money only
-	if (money >= 0) then
-		local gold = floor(money / (COPPER_PER_SILVER * SILVER_PER_GOLD));
-		local silver = floor((money - (gold * COPPER_PER_SILVER * SILVER_PER_GOLD)) / COPPER_PER_SILVER);
-		local copper = mod(money, COPPER_PER_SILVER);
-		return gold, silver, copper;
-	end
-end     
-
 function TitanGold_ClearDB()
 	StaticPopupDialogs["TITANGOLD_CLEAR_DATABASE"] = {
 		text = TitanUtils_GetNormalText(L["TITAN_PANEL_MENU_TITLE"].." "

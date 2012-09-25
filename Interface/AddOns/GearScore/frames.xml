@@ -1283,17 +1283,17 @@
 				<Scripts>
 					<OnLoad>
 						<![CDATA[
-							local Textures = { "Head", "Neck", "Shoulder", "Chest", "Chest", "Waist", "Legs", "Feet", "Wrists", "Hands", "RFinger", "Finger", "Trinket", "Trinket", "Chest", "MainHand", "SecondaryHand", "Ranged" };
+							local Textures = { "Head", "Neck", "Shoulder", "Chest", "Chest", "Waist", "Legs", "Feet", "Wrists", "Hands", "RFinger", "Finger", "Trinket", "Trinket", "Chest", "MainHand", "SecondaryHand", "" };
 							local Order = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18};
 							-- Create Equipment Slot Frames --
-							for i = 1, 17 do
+							for i = 1, 16 do
 								local frame = CreateFrame("Frame", self:GetName().."_EquipSlot"..Order[i], self, "TenTonHammer_EquipSlotTemplate");
 								if ( i <= 7 ) then frame:SetPoint("TOP", self, "TOP", 0, i*-40 - 20);
 									frame:SetPoint("TOP", self, "TOP", 0, i*-40 -20);
 								elseif ( i > 7 ) and ( i <= 14 ) then
 									frame:SetPoint("TOP", self, "TOP", 240, i*-40 +260);
 								elseif ( i > 14 ) then 
-									frame:SetPoint("TOP", self, "TOP", 40 + (i-14) * 40, 14*-40 +230);
+									frame:SetPoint("TOP", self, "TOP", 65 + (i-14) * 40, 14*-40 +230);
 								end;
 								frame:SetID(i);
 								frame.defaultTexture = "Interface\\PaperDoll\\UI-PaperDoll-Slot-"..Textures[i];
@@ -1756,6 +1756,8 @@
 				<Scripts>
 					<OnLoad>
 						<![CDATA[
+							if ( true ) then return; end;
+						
 							--[[
 							--Load Localization--
 							local AceLocale = LibStub("AceLocale-3.0");
@@ -1844,10 +1846,13 @@
 						]]>
 					</OnLoad>
 					<OnHide>
+						if ( true ) then return; end;
 						self:ResetTalents();
 					</OnHide>
 					<OnShow>
 						<![CDATA[
+							if ( true ) then return; end;
+						
 							-- Attach The Equipment Frame to this Frame --
 							local EquipFrame = _G[self:GetParent():GetName().."_EquipmentFrame"];
 							--EquipFrame:SetParent(self);

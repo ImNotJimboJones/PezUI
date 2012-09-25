@@ -434,3 +434,87 @@ L["PlayerScore Quest Helper"] = true;
 --4.11.x
 L["Dragon Soul"] = true;
 L["Heroic Dragon Soul"] = true;
+
+
+--5.00.x
+	L["Blood"] = true;
+	L["Frost"] = true;
+	L["Unholy"] = true;
+		
+	-- Druid
+	L["Balance"] = true;
+	L["Feral"] = true;         
+	L["Guardian"] = true;
+	L["Restoration"] = true;
+	
+	-- Hunter
+	L["Beast Mastery"] = true;
+	L["Marksmanship"] = true;
+	L["Survival"] = true;
+	
+	-- Mage
+	L["Arcane"] = true;
+	L["Fire"] = true;
+	L["Frost"] = true;
+	
+	-- Monk
+	L["Brewmaster"] = true;
+	L["Mistweaver"] = true;
+	L["Windwalker"] = true;
+	
+	-- Paladin
+	L["Holy"] = true;
+	L["Protection"] = true;
+	L["Retribution"] = true;
+	
+	-- Priest
+	L["Discipline"] = true;
+	L["Holy"] = true;
+	L["Shadow"] = true;
+	
+	-- Rogue
+	L["Assassination"] = true;
+	L["Combat"] = true;
+	L["Subtlety"] = true;
+	
+	-- Shaman
+	L["Elemental"] = true;
+	L["Enhancement"] = true;
+	L["Restoration"] = true;
+	
+	-- Warlock
+	L["Affliction"] = true;
+	L["Demonology"] = true;
+	L["Destruction"] = true;
+	
+	-- Warrior
+	L["Arms"] = true;
+	L["Fury"] = true;
+	L["Protection"] = true;
+
+
+	L["Type '/psreset' to re-enable full mode. (Reloads your UI). Additional options comming soon."] = true;
+	L["Heroic Ruby Sanctum 25 player"] = true;
+	L["Heroic Ruby Sanctum 25 player"] = true;
+	L["Mists of Pandaria"] = true;
+	
+
+	
+	-- Mists of Panda Instances
+	L["LFR Mogu'shan Vaults"] = true;
+	L["Normal Mogu'shan Vaults"] = true;
+	L["Heroic Mogu'shan Vaults"] = true;
+
+	L["LFR Heart of Fear"] = true;
+	L["Normal Heart of Fear"] = true;
+	L["Heroic Heart of Fear"] = true;
+				
+	-- Terrace of the Endless Spring
+	L["LFR Terrace of Endless Spring"] = true;
+	L["Normal Terrace of Endless Spring"] = true;
+	L["Heroic Terrace of Endless Spring"] = true;
+	
+	L["Level 90 Dungeons"] = true;
+	L["Mogu'shan Vaults"] = true;
+	L["Terrace of the Endless Spring"] = true;
+	L["Heart of Fear"] = true;

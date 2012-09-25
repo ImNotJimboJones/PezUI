@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.1
+Version 2.0.2
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -45,7 +45,7 @@ local _, _, _, tocversion = GetBuildInfo();
 T._tocversion = tocversion;
 
 -- === Add-on basics and variable declarations {{{
-T.Healers_Have_To_Die = LibStub("AceAddon-3.0"):NewAddon("Healers Have To Die", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0");
+T.Healers_Have_To_Die = LibStub("AceAddon-3.0"):NewAddon("Healers Have To Die", "AceConsole-3.0", "AceEvent-3.0", "LibShefkiTimer-1.0");
 local HHTD = T.Healers_Have_To_Die;
 
 --[===[@debug@
@@ -403,7 +403,7 @@ do
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.0.1,', L["RELEASE_DATE"], '2012-09-01T06:31:16Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.0.2,', L["RELEASE_DATE"], '2012-09-25T21:05:49Z') end,
                 order = -5,
             },
             core = {
@@ -413,7 +413,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.0.1 -- ' .. L["RELEASE_DATE"] .. ' 2012-09-01T06:31:16Z',
+                        name = L["VERSION"] .. ' 2.0.2 -- ' .. L["RELEASE_DATE"] .. ' 2012-09-25T21:05:49Z',
                         order = 1,
                     },
                     Pve = {
@@ -886,7 +886,7 @@ do
         if not Private_registry_by_GUID[isFriend][guid] then
 
             if sourceName then
-                name = str_match(sourceName, "^[^-]+");
+                name = isHuman and str_match(sourceName, "^[^-]+") or sourceName; -- Remove the server's name (plates don't include it)
             else
                 -- XXX fatal error out
                 HHTD:Debug(WARNING, "RegisterHealer(): sourceName is missing and healer is new", guid);
