@@ -24,27 +24,28 @@ IonPetGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["autoHide"] = false,
+			["alphaUp"] = "Combat+Mouseover",
 			["buffcolor"] = "0;0.8;0;1",
 			["alpha"] = 0.45,
-			["cdcolor1"] = "1;0.82;0;1",
+			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1;2;3;4;5;6;7;8;9;10",
-			["point"] = "BOTTOMRIGHT",
-			["showGrid"] = false,
-			["auracolor2"] = "1;0.1;0.1;1",
 			["snapToFrame"] = false,
-			["arcStart"] = 0,
-			["alphaUp"] = "Combat+Mouseover",
+			["auracolor2"] = "1;0.1;0.1;1",
+			["showGrid"] = false,
+			["point"] = "BOTTOMRIGHT",
+			["cdcolor1"] = "1;0.82;0;1",
+			["autoHide"] = false,
 		}, -- [1]
 	},
+	["firstRun"] = false,
 	["petbtns"] = {
 		{
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -54,8 +55,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -65,8 +66,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -76,8 +77,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -87,8 +88,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -98,8 +99,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -109,8 +110,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -120,8 +121,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -131,8 +132,8 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
@@ -142,13 +143,12 @@ IonPetGDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["config"] = {
 				["stored"] = false,
 			},
 		}, -- [10]
 	},
-	["firstRun"] = false,
 }
