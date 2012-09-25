@@ -133,7 +133,7 @@ PitBull4_RaidTargetIcon: enabled
 PitBull4_RangeFader: disabled
 PitBull4_ReadyCheckIcon: disabled
 PitBull4_ReputationBar: disabled
-PitBull4_RestIcon: disabled
+PitBull4_RestIcon: enabled
 PitBull4_RoleIcon: enabled
 PitBull4_Runes: enabled
 PitBull4_SoulShards: enabled
