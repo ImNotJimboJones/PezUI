@@ -154,6 +154,7 @@ Quartz3DB = {
 		["Mirror"] = {
 			["profiles"] = {
 				["Default"] = {
+					["mirroroffset"] = 0,
 					["mirrortextcolor"] = {
 						nil, -- [1]
 						nil, -- [2]
@@ -161,6 +162,7 @@ Quartz3DB = {
 						1, -- [4]
 					},
 					["mirrortexture"] = "Steel",
+					["mirrorgap"] = 35,
 					["mirrorwidth"] = 150,
 					["mirrorposition"] = "top",
 				},
@@ -200,6 +202,12 @@ Quartz3DB = {
 	["profiles"] = {
 		["Default"] = {
 			["borderalpha"] = 0.5,
+			["bordercolor"] = {
+				nil, -- [1]
+				nil, -- [2]
+				nil, -- [3]
+				1, -- [4]
+			},
 			["failcolor"] = {
 				nil, -- [1]
 				nil, -- [2]
@@ -209,6 +217,7 @@ Quartz3DB = {
 			["backgroundalpha"] = 0.75,
 			["modules"] = {
 				["Swing"] = false,
+				["GCD"] = false,
 				["Buff"] = false,
 				["Timer"] = false,
 				["Pet"] = false,
