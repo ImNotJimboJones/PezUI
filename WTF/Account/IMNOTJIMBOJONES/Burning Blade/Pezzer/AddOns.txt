@@ -142,7 +142,7 @@ PitBull4_ThreatBar: disabled
 PitBull4_Totems: enabled
 PitBull4_VisualHeal: enabled
 PitBull4_VoiceIcon: disabled
-GearScore: disabled
+GearScore: enabled
 Postal: enabled
 PowerAuras: enabled
 Prat-3.0: enabled
