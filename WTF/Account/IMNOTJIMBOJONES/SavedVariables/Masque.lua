@@ -13,8 +13,8 @@ MasqueDB = {
 				["Ion_Shortcuts (left)"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
-					["SkinID"] = "Renaitre: Circle Pro",
 					["Backdrop"] = true,
+					["SkinID"] = "Renaitre: Circle Pro",
 				},
 				["BetterExtraActionButton"] = {
 					["Inherit"] = false,
@@ -101,102 +101,20 @@ MasqueDB = {
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
+				["Ion_Action Bar 3"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Ion_Action Bar 2"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
 				["Macaroon_Shortcuts - Left"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
 					["Gloss"] = 1,
 					["Inherit"] = false,
-				},
-				["Macaroon_Keybinds"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-					["Inherit"] = false,
-				},
-				["Ion_Shortcuts (right)"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Renaitre: Circle Pro",
-					["Backdrop"] = true,
-				},
-				["Blizzard Buffs_Buffs"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
-					["Inherit"] = false,
-				},
-				["Ion_Shortcuts (top)"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Renaitre: Circle Pro",
-					["Backdrop"] = true,
-				},
-				["VuhDo_Buff Watch"] = {
-					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Bison_buff"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-				},
-				["Macaroon_ScreenGrid"] = {
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-					["Inherit"] = false,
-				},
-				["Bison_combo"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-				},
-				["Bison"] = {
-					["Disabled"] = true,
-					["SkinID"] = "Sleek",
-					["Gloss"] = 0.15,
-				},
-				["Ion_Pet Bar 1"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Blizzard Buffs"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
-					["Inherit"] = false,
-				},
-				["Macaroon_Vehicle / Possession Bar"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["PitBull4_Focus"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
-				},
-				["Macaroon_Vehicle Bar"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Macaroon_Possess Bar"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Macaroon_Bar 7"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["VuhDo_HoTs"] = {
-					["Disabled"] = true,
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["PitBull4_Player"] = {
-					["SkinID"] = "Renaitre: Fade",
-					["Gloss"] = 0.8,
 				},
 				["Macaroon_Shortcuts"] = {
 					["Colors"] = {
@@ -217,41 +135,149 @@ MasqueDB = {
 					["Gloss"] = 0.8,
 					["SkinID"] = "Renaitre: Circle Pro",
 				},
-				["Masque"] = {
-					["SkinID"] = "Sleek",
+				["Ion_Shortcuts"] = {
+					["Inherit"] = false,
 					["Gloss"] = 0.15,
-				},
-				["Macaroon_Shortcuts - Top"] = {
 					["SkinID"] = "Renaitre: Circle Pro",
-					["Gloss"] = 1,
-					["Inherit"] = false,
+					["Backdrop"] = true,
 				},
-				["Macaroon_Flyout Bar for Button 91"] = {
-					["Inherit"] = false,
-					["Gloss"] = 0.15,
-					["SkinID"] = "Sleek",
-				},
-				["Ion_Action Bar (left)"] = {
+				["Ion_Action Bar 1"] = {
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
 				},
-				["Bison_debuff"] = {
-					["Disabled"] = true,
+				["Macaroon_Keybinds"] = {
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
-				},
-				["PitBull4_Target"] = {
 					["Inherit"] = false,
-					["Gloss"] = 0.8,
+				},
+				["Ion_Action Bar"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Blizzard Buffs_Buffs"] = {
 					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+					["Inherit"] = false,
 				},
 				["Bison_weapon"] = {
 					["Disabled"] = true,
 					["SkinID"] = "Sleek",
 					["Gloss"] = 0.15,
 				},
-				["Ion_Action Bar"] = {
+				["Ion_Shortcuts (right)"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["Backdrop"] = true,
+					["SkinID"] = "Renaitre: Circle Pro",
+				},
+				["Bison_debuff"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
+				["Macaroon_ScreenGrid"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+					["Inherit"] = false,
+				},
+				["Bison_combo"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
+				["Bison"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
+				["Ion_Action Bar (left)"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["PitBull4_Focus"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+				},
+				["Macaroon_Vehicle / Possession Bar"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Macaroon_Shortcuts - Top"] = {
+					["SkinID"] = "Renaitre: Circle Pro",
+					["Gloss"] = 1,
+					["Inherit"] = false,
+				},
+				["Macaroon_Vehicle Bar"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Masque"] = {
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
+				["Ion_Action Bar (Alternate)"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["VuhDo_HoTs"] = {
+					["Disabled"] = true,
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["PitBull4_Player"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+				},
+				["Ion_Shortcuts (top)"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["Backdrop"] = true,
+					["SkinID"] = "Renaitre: Circle Pro",
+				},
+				["Macaroon_Bar 7"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Macaroon_Possess Bar"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Macaroon_Flyout Bar for Button 91"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["Blizzard Buffs"] = {
+					["SkinID"] = "Renaitre: Fade",
+					["Gloss"] = 0.8,
+					["Inherit"] = false,
+				},
+				["Ion_Pet Bar 1"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.15,
+					["SkinID"] = "Sleek",
+				},
+				["PitBull4_Target"] = {
+					["Inherit"] = false,
+					["Gloss"] = 0.8,
+					["SkinID"] = "Renaitre: Fade",
+				},
+				["Bison_buff"] = {
+					["Disabled"] = true,
+					["SkinID"] = "Sleek",
+					["Gloss"] = 0.15,
+				},
+				["VuhDo_Buff Watch"] = {
+					["Disabled"] = true,
 					["Inherit"] = false,
 					["Gloss"] = 0.15,
 					["SkinID"] = "Sleek",
