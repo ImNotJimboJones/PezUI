@@ -29,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
-	["global"] = {
-		["version"] = "6.007",
-	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
+	},
+	["global"] = {
+		["version"] = "6.007",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["scale"] = {
-					["Normal"] = 0.7000000476837158,
-					["Boss"] = 1,
-					["Neutral"] = 0.6000000238418579,
-					["Elite"] = 0.7000000476837158,
-				},
 				["toggle"] = {
 					["Totem"] = true,
+				},
+				["scale"] = {
+					["Elite"] = 0.7000000476837158,
+					["Boss"] = 0.7000000476837158,
+					["Neutral"] = 0.7000000476837158,
+					["Normal"] = 0.7000000476837158,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -125,19 +125,21 @@ ThreatPlatesDB = {
 				},
 			},
 			["threat"] = {
+				["scaleType"] = {
+					["Normal"] = 0,
+					["Boss"] = 0,
+				},
 				["dps"] = {
 					["scale"] = {
-						["MEDIUM"] = 1.1,
-						["LOW"] = 1,
-						["HIGH"] = 1.5,
+						["LOW"] = 1.1,
+						["HIGH"] = 1.1,
 					},
 				},
 				["useType"] = false,
 				["tank"] = {
 					["scale"] = {
-						["LOW"] = 1.5,
-						["MEDIUM"] = 1.1,
-						["HIGH"] = 1,
+						["LOW"] = 1.1,
+						["HIGH"] = 0.7000000000000001,
 					},
 				},
 				["useHPColor"] = false,
@@ -148,6 +150,13 @@ ThreatPlatesDB = {
 			["cache"] = {
 			},
 			["settings"] = {
+				["tank"] = {
+					["threatcolor"] = {
+						["HIGH"] = {
+							["a"] = 0,
+						},
+					},
+				},
 				["eliteicon"] = {
 					["scale"] = 16,
 				},
@@ -156,10 +165,10 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["normal"] = {
@@ -172,11 +181,18 @@ ThreatPlatesDB = {
 				["healthbar"] = {
 					["texture"] = "Minimalist",
 				},
-				["castbar"] = {
-					["texture"] = "Minimalist",
-				},
 				["healthborder"] = {
 					["texture"] = "TP_HealthBarOverlayThin",
+				},
+				["dps"] = {
+					["threatcolor"] = {
+						["LOW"] = {
+							["a"] = 0,
+						},
+					},
+				},
+				["castbar"] = {
+					["texture"] = "Minimalist",
 				},
 			},
 			["friendlyClassIcon"] = true,
@@ -193,7 +209,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
