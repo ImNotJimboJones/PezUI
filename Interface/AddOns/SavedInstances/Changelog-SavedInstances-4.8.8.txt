@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r184 | oscarucb | 2012-09-24 02:02:54 +0000 (Mon, 24 Sep 2012) | 1 line
+r186 | oscarucb | 2012-09-27 00:22:01 +0000 (Thu, 27 Sep 2012) | 1 line
 Changed paths:
-   A /tags/4.8.7 (from /trunk:183)
+   A /tags/4.8.8 (from /trunk:185)
 
-Tagging as 4.8.7
+Tagging as 4.8.8
+------------------------------------------------------------------------
+r185 | oscarucb | 2012-09-27 00:20:55 +0000 (Thu, 27 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+re-fix ticket 96: daily count not updating
+
 ------------------------------------------------------------------------
 r183 | oscarucb | 2012-09-24 02:02:29 +0000 (Mon, 24 Sep 2012) | 2 lines
 Changed paths:
@@ -98,13 +105,5 @@ Changed paths:
    M /trunk/SavedInstances.lua
 
 more 5.x fixes
-
-------------------------------------------------------------------------
-r160 | oscarucb | 2012-08-25 20:17:55 +0000 (Sat, 25 Aug 2012) | 2 lines
-Changed paths:
-   M /trunk/SavedInstances.lua
-   M /trunk/SavedInstances.toc
-
-5.x updates
 
 ------------------------------------------------------------------------

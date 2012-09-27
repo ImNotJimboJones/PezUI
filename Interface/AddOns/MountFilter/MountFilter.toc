@@ -4,7 +4,7 @@
 ## Author: Pezzer
 ## Version: 1.4
 ## SavedVariables: MountFilterDB
-## X-Curse-Packaged-Version: v1.4.2
+## X-Curse-Packaged-Version: v1.4.3
 ## X-Curse-Project-Name: MountFilter
 ## X-Curse-Project-ID: mountfilter
 ## X-Curse-Repository-ID: wow/mountfilter/mainline

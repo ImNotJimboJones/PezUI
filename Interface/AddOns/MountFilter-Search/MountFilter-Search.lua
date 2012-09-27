@@ -17,6 +17,9 @@ local Search = MF:NewModule("Search");
 -- Name of the search box frame
 local SEARCH_BOX_NAME = MF:GetName() .. "SearchBox";
 
+-- Mount journal widget order
+local WIDGET_ORDER = 2;
+
 
 --============================================================================--
 -- Public Fields
@@ -85,10 +88,7 @@ function Search:OnEnable()
 	end
 	
 	-- Add search box to the mount journal
-	MF:AddWidgetToJournal(self.searchBox);
-	
-	-- Show search box
-	self.searchBox:Show();
+	MF:AddWidgetToJournal(self.searchBox, WIDGET_ORDER);
 	
 	-- Register filter function
 	MF:RegisterFilter("Search", self.MountFilter);
@@ -100,10 +100,8 @@ end
 function Search:OnDisable()
 	MF:Log("Search module disabled");
 	
-	-- Hide search box
-	if (self.searchBox) then
-		self.searchBox:Hide();
-	end
+	-- Remove search box from the mount journal
+	MF:RemoveWidgetFromJournal(self.searchBox);
 	
 	-- Unregister filter function
 	MF:UnregisterFilter("Search");

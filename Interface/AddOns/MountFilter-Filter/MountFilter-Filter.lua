@@ -14,6 +14,10 @@ local Filter = MF:NewModule("Filter");
 -- Private Fields
 --============================================================================--
 
+-- Mount journal widget order
+local WIDGET_ORDER = 1;
+
+
 -- Name of the filter button frame
 local FILTER_BUTTON_NAME = MF:GetName() .. "FilterButton";
 
@@ -153,15 +157,12 @@ function Filter:OnEnable()
 	
 	-- Create the filter menu, if needed
 	if (not filterMenu) then
-		filterButton, filterMenu = self:CreateFilterMenu();
+		self.filterButton, self.filterMenu = self:CreateFilterMenu();
 		MF:Log("Filter menu created");
 	end
 	
-	-- Add the filter button/menu to the mount journal
-	MF:AddWidgetToJournal(filterButton);
-	
-	-- Show filter button/menu
-	filterButton:Show();
+	-- Add filter button/menu to the mount journal
+	MF:AddWidgetToJournal(self.filterButton, WIDGET_ORDER);
 	
 	-- Register filter function
 	MF:RegisterFilter("Filter", self.MountFilter);
@@ -173,10 +174,8 @@ end
 function Filter:OnDisable()
 	MF:Log("Filter module disabled");
 	
-	-- Hide filter button/menu
-	if (filterButton) then
-		filterButton:Hide();
-	end
+	-- Remove filter button/menu from the mount journal
+	MF:RemoveWidgetFromJournal(self.filterButton);
 	
 	-- Unregister filter function
 	MF:UnregisterFilter("Filter");

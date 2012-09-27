@@ -56,8 +56,9 @@ local MOUNT_COUNT_WIDTH = 130;
 -- Margin between widgets placed on the mount journal
 local WIDGET_MARGIN = 5;
 
--- Horizontal offset of next widget placed on the mount journal
-local widgetOffset = 20;
+-- Initial x/y-offset value used when placing mount journal widgets
+local WIDGET_START_X_OFFSET = 20;
+local WIDGET_START_Y_OFFSET = 20;
 
 
 -- Delay between automatic mount list updates
@@ -72,6 +73,9 @@ local mountList = nil;
 
 -- List of mount filter functions
 local filters = {};
+
+-- List of widgets added to the mount journal (widget -> order)
+local journalWidgets = {};
 
 
 -- Number of times the mount list has been updated (for debugging)
@@ -94,6 +98,30 @@ MF.defaults = {
 		mountCountStyle = 1
 	}
 };
+
+
+--============================================================================--
+-- Functions
+--============================================================================--
+
+------------------------------------------------------------
+-- Returns three values: an iterator function used to
+-- iterate through a table in key order.
+-- t:	the table
+------------------------------------------------------------
+local function pairsByKeys (t, f)
+	local a = {}
+	for n in pairs(t) do table.insert(a, n) end
+		table.sort(a, f)
+		local i = 0					-- iterator variable
+		local iter = function ()	-- iterator function
+		i = i + 1
+		if a[i] == nil then return nil
+		else return a[i], t[a[i]]
+		end
+	end
+	return iter
+end
 
 
 --============================================================================--
@@ -126,8 +154,11 @@ end
 -- Adds a mount filter widget to the mount journal. If the
 -- mount journal isn't available, an error will be thrown.
 -- widget:	the widget
+-- order:	optional order number for position prioritization.
+-- 			widgets will be placed such that those with lower
+--			order numbers are placed to the right.
 ------------------------------------------------------------
-function MF:AddWidgetToJournal(widget)
+function MF:AddWidgetToJournal(widget, order)
 	-- No mount journal?
 	if (not MountJournal) then
 		error("Mount journal not available");
@@ -138,18 +169,94 @@ function MF:AddWidgetToJournal(widget)
 		return
 	end
 	
+	-- Default order to 9999 if none given
+	order = order or 9999;
 	
-	-- Set widget parent
-	widget:SetParent(MountJournal);
 	
-	-- Set widget point
-	local vOffset = 21.5 + (widget:GetHeight() / 2);
-	local hOffset = widgetOffset;
-	widget:SetPoint("TOPRIGHT", MountJournal, "TOPRIGHT", -hOffset, -vOffset);
-	
-	-- Update widget offset
-	widgetOffset = widgetOffset + widget:GetWidth() + WIDGET_MARGIN;
+	-- Add widget to mount journal widget list
+	journalWidgets[widget] = order;
 	MF:Log("Added ".. tostring(widget:GetName()) .." to mount journal");
+	
+	-- Update mount journal widget layout
+	MF:UpdateMountJournalWidgets();
+end
+
+------------------------------------------------------------
+-- Removes a mount filter widget to the mount journal. All
+-- of the widget's points will be cleared, and the widget 
+-- will be hidden.
+-- widget:	the widget
+------------------------------------------------------------
+function MF:RemoveWidgetFromJournal(widget)
+	-- No widget?
+	if (not widget) then
+		return
+	end
+	
+	-- Widget not in mount journal?
+	if (not journalWidgets[widget]) then
+		return
+	end
+	
+	
+	-- Remove the widget from the mount journal
+	widget:ClearAllPoints();
+	widget:Hide();
+	
+	-- Remove widget from mount journal widget list
+	journalWidgets[widget] = nil;
+	MF:Log("Removed ".. tostring(widget:GetName()) .." from mount journal");
+	
+	-- Update mount journal widget layout
+	MF:UpdateMountJournalWidgets();
+end
+
+
+------------------------------------------------------------
+-- Updates the widgets mount journal widgets.
+-- widget:	the widget
+------------------------------------------------------------
+function MF:UpdateMountJournalWidgets()
+	MF:Log("Updating mount journal widgets...");
+	
+	-- Create ordered list
+	local widgetsByOrder = {}
+	for widget, order in pairs(journalWidgets) do
+	
+		-- Create entry for order number if one doesn't exist already
+		if (not widgetsByOrder[order]) then
+			widgetsByOrder[order] = {};
+		end
+		
+		-- Add widget to list
+		table.insert(widgetsByOrder[order], widget);
+	end
+	
+	
+	-- Initialize offset values
+	local xOffset = WIDGET_START_X_OFFSET;
+	local yOffset = WIDGET_START_Y_OFFSET;
+	
+	-- For every order number...
+	for order, orderWidgets in pairsByKeys(widgetsByOrder) do
+	
+		-- Update each widget
+		for i, widget in pairs(orderWidgets) do
+			MF:Log(order .. " -> " .. tostring(widget:GetName()))
+			-- Set widget parent and point
+			widget:SetParent("MountJournal");
+			widget:ClearAllPoints();
+			yOffset = yOffset + (widget:GetHeight() / 2);
+			widget:SetPoint("TOPRIGHT", MountJournal, "TOPRIGHT", -xOffset, -yOffset);
+			
+			-- Update offset values
+			xOffset = xOffset + widget:GetWidth() + WIDGET_MARGIN;
+			yOffset = WIDGET_START_Y_OFFSET;
+			
+			-- Show widget
+			widget:Show();
+		end
+	end
 end
 
 ------------------------------------------------------------
@@ -369,13 +476,14 @@ function MF:OnEnable()
 	-- If mount journal addon hasn't been loaded, register an event callback to
 	-- call this function when it does load.
 	if (not IsAddOnLoaded(MOUNT_JOURNAL_ADDON)) then
-		MF:Log("Registering event to call OnEnable() after mount journal has loaded");
+		self:Disable();
+		MF:Log("Registering event to enable addon after mount journal has loaded");
 		self:RegisterEvent("ADDON_LOADED", 
 			function(eventName, addonName)
 				if (addonName == MOUNT_JOURNAL_ADDON) then
 					MF:Log("Mount journal Loaded");
 					self:UnregisterEvent("ADDON_LOADED");
-					self:OnEnable();
+					self:Enable();
 				end
 			end
 		);
@@ -384,6 +492,8 @@ function MF:OnEnable()
 	
 	MF:Log("Addon Enabled");
 
+	-- Reset widget offset value
+	widgetOffset = WIDGET_OFFSET_START;
 
 	-- Create hooks
 	self:CreateHooks();
@@ -406,7 +516,7 @@ function MF:OnDisable()
 	-- Disable modules
 	local modules = self.orderedModules;
 	for i, module in pairs(self.orderedModules) do
-		module:Enable();
+		module:Disable();
 	end
 
 	-- Remove all hooks

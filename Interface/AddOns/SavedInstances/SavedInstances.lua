@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 183 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 185 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -924,7 +924,14 @@ local function SI_GetQuestReward()
 		   ["Expires"] = expires,
 		   ["Zone"] = GetRealZoneText() }
   if isDaily then
-    t.DailyCount = GetDailyQuestsCompleted()
+    local c = 0 -- ticket 96: GetDailyQuestsCompleted() unreliable
+    for _,info in pairs(t.Quests) do
+      if info.isDaily then 
+        c = c + 1
+      end
+    end
+    debug("DailyCount: "..t.DailyCount.." => "..c)
+    t.DailyCount = c
   end
 end
 hooksecurefunc("GetQuestReward", SI_GetQuestReward)
