@@ -518,3 +518,10 @@ L["Heroic Dragon Soul"] = true;
 	L["Mogu'shan Vaults"] = true;
 	L["Terrace of the Endless Spring"] = true;
 	L["Heart of Fear"] = true;
+	
+	
+	
+	
+	L["Brewmaster"] = true;
+	L["Mistweaver"] = true;
+	L["Windwalker"] = true;

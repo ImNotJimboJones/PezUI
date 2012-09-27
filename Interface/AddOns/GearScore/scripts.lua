@@ -1,8 +1,17 @@
-
 --[[
 All materials contained in this "Addon" including, but not limited to, any electronic files, code, audio, themes, or images, are the copyrighted property of Master Games International Inc.
 Unauthorized usage is strictly prohibited. In addition, this addon is only authorized for distribution on "playerscore.com", "gearscoreaddon.com", "curse.com", and "wowinterface.com".
 GearScore™, PlayerScore™, and "Ten Ton Hammer™" are Trademarks of Master Games International Inc.
+]]
+
+
+--[[ CHANGE LOG
+
+Version 5.0.01
+	* Hunter Weapons should now count as two handed weapons.
+	* This addon will no longer explode whenever a panda comes near.
+	* Pandaran classes fully supported.
+
 ]]
 
 
@@ -34,7 +43,7 @@ f.PlayerName = UnitName("player");
 f.ScanQue = {};
 f.AIL_Info = {};
 f.data = {
-	["Version"] = 50000,
+	["Version"] = 50001,
 	["Beta"] = false,
 	["TemplateVersion"] = 100,
 	["EquipmentOrder"] = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18},
@@ -228,9 +237,9 @@ f.data = {
 		["INVTYPE_2HWEAPON"] = { ["SlotMOD"] = 2, ["ItemSlot"] = 16, ["Enchantable"] = 1, ["Weapon"] = 2  },
 		["INVTYPE_WEAPONMAINHAND"] = { ["SlotMOD"] = 1, ["ItemSlot"] = 16, ["Enchantable"] = 1, ["Weapon"] = 1  },
 		["INVTYPE_WEAPONOFFHAND"] = { ["SlotMOD"] = 1, ["ItemSlot"] = 17, ["Enchantable"] = 1, ["Weapon"] = 1  },
-		["INVTYPE_RANGED"] = { ["SlotMOD"] = .3164, ["ItemSlot"] = 18, ["Enchantable"] = 1, ["Weapon"] = 0  },
+		["INVTYPE_RANGED"] = { ["SlotMOD"] = 2, ["ItemSlot"] = 18, ["Enchantable"] = 1, ["Weapon"] = 2  },
 		["INVTYPE_THROWN"] = { ["SlotMOD"] = .3164, ["ItemSlot"] = 18, ["Enchantable"] = 0, ["Weapon"] = 0  },
-		["INVTYPE_RANGEDRIGHT"] = { ["SlotMOD"] = .3164, ["ItemSlot"] = 18, ["Enchantable"] = 2, ["Weapon"] = 0  },
+		["INVTYPE_RANGEDRIGHT"] = { ["SlotMOD"] = 2, ["ItemSlot"] = 18, ["Enchantable"] = 2, ["Weapon"] = 2  },
 		["INVTYPE_SHIELD"] = { ["SlotMOD"] = 1, ["ItemSlot"] = 17, ["Enchantable"] = 1, ["Weapon"] = 1  },
 		["INVTYPE_WEAPON"] = { ["SlotMOD"] = 1, ["ItemSlot"] = 36, ["Enchantable"] = 1, ["Weapon"] = 1  },
 		["INVTYPE_HOLDABLE"] = { ["SlotMOD"] = 1, ["ItemSlot"] = 17, ["Enchantable"] = 0, ["Weapon"] = 1  },
@@ -267,6 +276,7 @@ f.data = {
 		["MAGE"] = 8,
 		["WARLOCK"] = 9,
 		["DRUID"] = 11,
+		["MONK"] = 12,
 		[0] = "???",
 		[1] = "WARRIOR",
 		[2] = "PALADIN",
@@ -278,6 +288,7 @@ f.data = {
 		[8] = "MAGE",
 		[9] = "WARLOCK",
 		[11] = "DRUID",
+		[12] = "MONK"
 	},
 	["RoleStats"] = {
 		[0] = {
@@ -400,6 +411,11 @@ f.data = {
 		[71] = 2,
 		[72] = 2,
 		[73] = 1,
+		
+		-- Monk
+ 		[268] = 1,
+		[270] = 5,
+		[269] = 2,
 	},
 	["SpecializationID"] = {
 		-- Death Knight
@@ -456,7 +472,12 @@ f.data = {
 		-- Warrior
 		[71] = L["Arms"],
 		[72] = L["Fury"],
-		[73] = L["Protection"]
+		[73] = L["Protection"],
+		
+		-- MONK
+		[268] = L["Brewmaster"],
+		[270] = L["Mistweaver"],
+		[269] = L["Windwalker"],
 	},
 	["ClassRoles"] = {
 		["SHAMAN"] = {
@@ -519,6 +540,12 @@ f.data = {
 			[855] = 2,
 			[0] = 0,
 		},
+		["MONK"] = {
+		   [268] = 1,
+		   [270] = 5,
+		   [269] = 2,
+		   [0] = 2,
+		},
 	},
 }
 f.Help = {
@@ -549,7 +576,8 @@ f.Help = {
 LK_DUNGEONS={ ["5 Man"]={ ["T7"]={ ["N"]={ 1232, 1235, 1236, 1233, 1242, 1231, 1240, 1239, 1238, 1241, 1237, 1234, }, ["S"]={ 1506, 1509, 1510, 1507, 1504, 1505, 1514, 1513, 1512, 1515, 1511, 1508, }, ["T"]={ 2136, }, }, ["T9"]={ ["N"]={ 4026, }, ["S"]={ 4027, }, ["T"]={ }, }, ["T10"]={ ["N"]={ 4714, 4723, 4719, 4725, }, ["S"]={ 4716, 4727, }, ["T"]={ 4728, 4519, 4520, 4521, }, }, }, ["10 Man"]={ ["N"]={ ["N"]={ 1361, 2860, 2868, 4028, 4648, 3917, 4645, 4646, 4036, 2856, 1372, 1366, 1362, 1371, 4644, 1369, 2858, 1374, 2861, 4643, 4032, 4639, 1365, 1364, 2867, 4647, 4044, 4040, 4649, 2859, }, ["S"]={ 4651, 2864, 2862, 1370, 1363, 2865, 4650, 4652, 1373, 1375, 2863, }, ["T"]={ 2867, 2903, 2870, 4532, 2866, 1377, 4074, 1391, 4396, 1376, 1392, 576, 2894, 2051, 2187, 4016, 2869, 1874, }, }, ["H"]={ ["N"]={ 4030, 4671, 4662, 4037, 4665, 4659, 4654, 4653, 4033, 4640, 4668, 4045, 4041, 4674, }, ["S"]={ 4680, 3056, 4677, 4684, }, ["T"]={ 4080, 3810, 3809, 3159, 3918, 4636, 3180, 3004, 3058, 2941, 3181, 3179, 4868, 3158, 4567, }, }, }, ["25 Man"]={ ["N"]={ ["N"]={ 1368, 2885, 2882, 4031, 4672, 4663, 4038, 4666, 2872, 1383, 1378, 1379, 1380, 1381, 4660, 2874, 1384, 2875, 4655, 4043, 4641, 1387, 1367, 2873, 4669, 2884, 4042, 4675, }, ["S"]={ 1754, 4681, 3258, 3256, 1385, 1386, 2879, 4678, 1388, 3257, 4046, }, ["T"]={ 2881, 3916, 2904, 4017, 3236, 4608, 2880, 1390, 4075, 4687, 1394, 4397, 1389, 1393, 577, 2895, 2186, 2054, 4658, 2883, 1875, }, }, ["H"]={ ["N"]={ 4029, 4673, 4664, 4667, 4039, 4661, 4656, 4035, 4642, 4670, 4043, 4676, }, ["S"]={ 4682, 3057, 4679, 4047, }, ["T"]={ 3819, 3818, 3164, 3812, 4637, 3189, 3005, 3059, 2944, 3188, 3187, 4688, 3163, 4685, }, }, }, };
 f.PassiveBonuses = {
 	{ pattern = string.gsub(ITEM_MOD_DEFENSE_SKILL_RATING, "%%d", "(%%d+)%%"), effect = "DEFENSE" },
- 	{ pattern = string.gsub(ITEM_MOD_RESILIENCE_RATING, "%%d", "(%%d+)%%"), effect = "RESILIENCE" }	,
+ 	{ pattern = string.gsub(ITEM_MOD_RESILIENCE_RATING, "%%d", "(%%d+)%%"), effect = "RESILIENCE" },
+ 	{ pattern = string.gsub(ITEM_MOD_PVP_POWER, "%%d", "(%%d+)%%"), effect = "RESILIENCE" },
   	{ pattern = string.gsub(ITEM_MOD_EXPERTISE_RATING, "%%d", "(%%d+)%%"), effect = "EXPERTISE" },
 	{ pattern = string.gsub(ITEM_MOD_BLOCK_RATING, "%%d", "(%%d+)%%"), effect = "BLOCK" },
 	{ pattern = string.gsub(ITEM_MOD_DODGE_RATING, "%%d", "(%%d+)%%"), effect = "DODGE" },
@@ -581,6 +609,8 @@ f.GenericBonuses = {
 	[COMBAT_RATING_NAME5]				= "BLOCK",
 	[COMBAT_RATING_NAME6]				= "TOHIT",
 	[RESILIENCE]						= "RESILIENCE",
+	[STAT_PVP_POWER]					= "RESILIENCE",
+	--[ITEM_MOD_RESILIENCE_RATING]		= "RESILIENCE",
 };
 local BONUSSCANNER_PATTERN_SETNAME = "^(.*) %(%d/%d%)$";
 local BONUSSCANNER_PATTERN_GENERIC_PREFIX = "^%+?(%d+)%%?(.*)$";
