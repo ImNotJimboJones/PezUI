@@ -1,8 +1,9 @@
 
 MADB = {
-	["frameListRows"] = 18,
+	["modifiedFramesOnly"] = true,
 	["characters"] = {
 	},
+	["frameListRows"] = 18,
 	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
@@ -15,7 +16,7 @@ MADB = {
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
 						20, -- [4]
-						283, -- [5]
+						309, -- [5]
 					},
 				},
 				["GroupLootFrame2"] = {
@@ -24,8 +25,8 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						525, -- [5]
+						250, -- [4]
+						575, -- [5]
 					},
 				},
 				["CompactRaidGroup7"] = {
@@ -48,13 +49,13 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						450, -- [5]
+						250, -- [4]
+						500, -- [5]
 					},
 				},
-				["CompactRaidGroup1"] = {
+				["CompactRaidGroup5"] = {
 					["hidden"] = true,
-					["name"] = "CompactRaidGroup1",
+					["name"] = "CompactRaidGroup5",
 				},
 				["PlayerDebuffsMover"] = {
 					["hidden"] = true,
@@ -84,7 +85,7 @@ MADB = {
 						"UIParent", -- [2]
 						"BOTTOMRIGHT", -- [3]
 						-19.9998935646529, -- [4]
-						283.0000047100912, -- [5]
+						309, -- [5]
 					},
 				},
 				["GroupLootFrame4"] = {
@@ -93,17 +94,17 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						675, -- [5]
+						250, -- [4]
+						725, -- [5]
 					},
 				},
 				["CompactRaidGroup8"] = {
 					["hidden"] = true,
 					["name"] = "CompactRaidGroup8",
 				},
-				["CompactRaidGroup5"] = {
+				["CompactRaidGroup1"] = {
 					["hidden"] = true,
-					["name"] = "CompactRaidGroup5",
+					["name"] = "CompactRaidGroup1",
 				},
 				["Boss3TargetFrame"] = {
 					["name"] = "Boss3TargetFrame",
@@ -134,8 +135,8 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						30, -- [4]
-						217.6923370361328, -- [5]
+						36, -- [4]
+						237, -- [5]
 					},
 				},
 				["RaidUnitFramesManagerMover"] = {
@@ -155,7 +156,7 @@ MADB = {
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
 						20, -- [4]
-						283, -- [5]
+						309, -- [5]
 					},
 				},
 				["Boss1TargetFrame"] = {
@@ -176,8 +177,8 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						200, -- [4]
-						600, -- [5]
+						250, -- [4]
+						650, -- [5]
 					},
 				},
 				["CompactRaidGroup4"] = {
@@ -194,8 +195,8 @@ MADB = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						170, -- [4]
-						450, -- [5]
+						220, -- [4]
+						500, -- [5]
 					},
 				},
 				["CompactRaidGroup2"] = {

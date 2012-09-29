@@ -26,7 +26,7 @@ IonGDB = {
 			["countColor"] = "1;1;1;1",
 			["autoHide"] = false,
 			["buffcolor"] = "0;0.8;0;1",
-			["alpha"] = 1,
+			["alphaUp"] = "Off",
 			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1",
@@ -35,7 +35,7 @@ IonGDB = {
 			["auracolor2"] = "1;0.1;0.1;1",
 			["snapToFrame"] = false,
 			["arcStart"] = 0,
-			["alphaUp"] = "Off",
+			["alpha"] = 1,
 		}, -- [1]
 	},
 	["buttons"] = {
@@ -3503,17 +3503,17 @@ IonGDB = {
 				["bindText"] = true,
 				["upClicks"] = true,
 				["XOffset"] = 0,
-				["countColor"] = "1;1;1;1",
 				["muteSFX"] = false,
+				["countColor"] = "1;1;1;1",
+				["scale"] = 1,
 				["buffcolor"] = "0;0.8;0;1",
 				["alpha"] = 1,
 				["equipcolor"] = "0.1;1;0.1;1",
 				["rangecolor"] = "0.7;0.15;0.15;1",
-				["scale"] = 1,
-				["skincolor"] = "1;1;1;1",
-				["auraText"] = false,
-				["auracolor2"] = "1;0.1;0.1;1",
 				["cdcolor2"] = "1;0.1;0.1;1",
+				["auraText"] = false,
+				["skincolor"] = "1;1;1;1",
+				["auracolor2"] = "1;0.1;0.1;1",
 				["cdText"] = false,
 				["countText"] = true,
 			},
@@ -4646,23 +4646,7 @@ IonGDB = {
 			},
 		}, -- [94]
 	},
-	["xbtns"] = {
-		{
-			["keys"] = {
-				["hotKeyText"] = ":",
-				["hotKeyLock"] = false,
-				["hotKeyPri"] = true,
-				["hotKeys"] = ":",
-			},
-			["config"] = {
-				["stored"] = false,
-			},
-		}, -- [1]
-	},
-	["buttonLoc"] = {
-		-0.85, -- [1]
-		-111.45, -- [2]
-	},
+	["vehicle"] = false,
 	["bars"] = {
 		{
 			["arcLength"] = 359,
@@ -4687,9 +4671,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.45,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Combat+Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.45,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1;2;3;4;5;6;7;8;9;10;11;12",
@@ -4708,7 +4692,7 @@ IonGDB = {
 			["bindColor"] = "1;1;1;1",
 			["snapToPad"] = 0,
 			["hidestates"] = ":",
-			["y"] = 241.5000152587891,
+			["y"] = 267.5000305175781,
 			["x"] = 244.9999847412109,
 			["name"] = "Action Bar (left)",
 			["padH"] = 0.5,
@@ -4723,9 +4707,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = false,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.3,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.3,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "13;14;15;16;17;18;19;20;21;22;23;24;49",
@@ -4744,8 +4728,8 @@ IonGDB = {
 			["bindColor"] = "1;1;1;1",
 			["snapToPad"] = 0,
 			["hidestates"] = ":",
-			["y"] = 286,
-			["x"] = -0.0001220703125,
+			["y"] = 285,
+			["x"] = -0.00018310546875,
 			["name"] = "Shortcuts",
 			["padH"] = 3.5,
 			["barStrata"] = "MEDIUM",
@@ -4761,7 +4745,7 @@ IonGDB = {
 			["countColor"] = "1;1;1;1",
 			["autoHide"] = false,
 			["buffcolor"] = "0;0.8;0;1",
-			["alpha"] = 0.45,
+			["alphaUp"] = "Combat+Mouseover",
 			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "50;51;52;53;54;55;56;57;58",
@@ -4770,7 +4754,7 @@ IonGDB = {
 			["auracolor2"] = "1;0.1;0.1;1",
 			["snapToFrame"] = false,
 			["arcStart"] = 0,
-			["alphaUp"] = "Combat+Mouseover",
+			["alpha"] = 0.45,
 		}, -- [3]
 		{
 			["arcLength"] = 359,
@@ -4795,9 +4779,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.45,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Combat+Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.45,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "59;60;61;62;63;64;65;66;67;68;69;70",
@@ -4832,9 +4816,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alphaUp"] = "Combat+Mouseover",
-			["buffcolor"] = "0;0.8;0;1",
 			["alpha"] = 0.45,
+			["buffcolor"] = "0;0.8;0;1",
+			["alphaUp"] = "Combat+Mouseover",
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "25;26;27;28;29;30;31;32;33;34;35;36",
@@ -4868,9 +4852,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alphaUp"] = "Combat+Mouseover",
-			["buffcolor"] = "0;0.8;0;1",
 			["alpha"] = 0.45,
+			["buffcolor"] = "0;0.8;0;1",
+			["alphaUp"] = "Combat+Mouseover",
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "37;38;39;40;41;42;43;44;45;46;47;48",
@@ -4882,14 +4866,30 @@ IonGDB = {
 			["autoHide"] = false,
 		}, -- [7]
 	},
-	["throttle"] = 0.2,
-	["snapToTol"] = 28,
+	["xbtns"] = {
+		{
+			["keys"] = {
+				["hotKeyText"] = ":",
+				["hotKeyLock"] = false,
+				["hotKeyPri"] = true,
+				["hotKeys"] = ":",
+			},
+			["config"] = {
+				["stored"] = false,
+			},
+		}, -- [1]
+	},
 	["timerLimit"] = 4,
+	["snapToTol"] = 28,
+	["throttle"] = 0.2,
 	["mainbar"] = false,
 	["betaWarning"] = false,
 	["buttonRadius"] = 87.5,
+	["buttonLoc"] = {
+		-0.85, -- [1]
+		-111.45, -- [2]
+	},
 	["xbarFirstRun"] = false,
-	["vehicle"] = false,
 	["firstRun"] = false,
 }
 IonItemCache = {

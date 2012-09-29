@@ -217,8 +217,8 @@ MSBTProfiles_SavedVars = {
 					["scrollArea"] = "Custom1",
 					["fontSize"] = false,
 				},
-				["INCOMING_SPELL_DEFLECT"] = {
-					["scrollArea"] = "Custom2",
+				["NOTIFICATION_CHI_CHANGE"] = {
+					["disabled"] = true,
 				},
 				["INCOMING_SPELL_INTERRUPT"] = {
 					["scrollArea"] = "Custom2",
@@ -226,8 +226,8 @@ MSBTProfiles_SavedVars = {
 				["NOTIFICATION_ITEM_COOLDOWN"] = {
 					["disabled"] = true,
 				},
-				["NOTIFICATION_CHI_CHANGE"] = {
-					["disabled"] = true,
+				["INCOMING_SPELL_DEFLECT"] = {
+					["scrollArea"] = "Custom2",
 				},
 				["NOTIFICATION_DEBUFF_STACK"] = {
 					["disabled"] = true,
@@ -289,54 +289,54 @@ MSBTProfiles_SavedVars = {
 					["stickyTextAlignIndex"] = 2,
 					["disabled"] = true,
 					["behavior"] = "MSBT_NORMAL",
-					["scrollWidth"] = 100,
 					["stickyDirection"] = "Up",
-					["scrollHeight"] = 90,
+					["scrollHeight"] = 115,
 					["offsetX"] = 524,
 					["offsetY"] = -382,
 					["animationStyle"] = "Straight",
+					["scrollWidth"] = 100,
 				},
 				["Custom2"] = {
-					["name"] = "Incoming Damage",
-					["direction"] = "Down",
-					["offsetX"] = 524,
 					["scrollWidth"] = 100,
+					["name"] = "Incoming Damage",
+					["scrollHeight"] = 115,
 					["stickyBehavior"] = "Jiggle",
 					["offsetY"] = -382,
-					["scrollHeight"] = 90,
+					["direction"] = "Down",
+					["offsetX"] = 524,
 				},
 				["Outgoing"] = {
-					["direction"] = "Up",
 					["stickyTextAlignIndex"] = 3,
 					["behavior"] = "MSBT_NORMAL",
 					["animationStyle"] = "Straight",
 					["stickyDirection"] = "Up",
 					["scrollWidth"] = 100,
-					["offsetX"] = 714,
-					["scrollHeight"] = 90,
+					["offsetX"] = 682,
+					["scrollHeight"] = 115,
 					["iconAlign"] = "Left",
 					["offsetY"] = -382,
 					["textAlignIndex"] = 3,
+					["direction"] = "Up",
 				},
 				["Static"] = {
-					["offsetY"] = 50,
 					["disabled"] = true,
+					["offsetY"] = 75,
 				},
 				["Custom1"] = {
-					["stickyTextAlignIndex"] = 1,
-					["scrollHeight"] = 90,
-					["stickyBehavior"] = "Jiggle",
 					["direction"] = "Up",
+					["stickyBehavior"] = "Jiggle",
 					["stickyDirection"] = "Up",
-					["scrollWidth"] = 100,
+					["scrollHeight"] = 115,
+					["offsetX"] = 341,
 					["name"] = "Incoming Heals",
-					["offsetX"] = 315,
+					["stickyTextAlignIndex"] = 1,
 					["offsetY"] = -382,
 					["textAlignIndex"] = 1,
+					["scrollWidth"] = 100,
 				},
 				["Notification"] = {
 					["normalFontAlpha"] = 100,
-					["offsetY"] = 150,
+					["offsetY"] = 175,
 					["normalFontSize"] = 12,
 				},
 			},
@@ -410,7 +410,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_MAELSTROM_WEAPON"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_NIGHTFALL"] = {
+				["MSBT_TRIGGER_PVP_TRINKET"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_KILL_SHOT"] = {
@@ -470,7 +470,7 @@ MSBTProfiles_SavedVars = {
 				["MSBT_TRIGGER_REVENGE"] = {
 					["disabled"] = true,
 				},
-				["MSBT_TRIGGER_PVP_TRINKET"] = {
+				["MSBT_TRIGGER_NIGHTFALL"] = {
 					["disabled"] = true,
 				},
 				["MSBT_TRIGGER_BRAIN_FREEZE"] = {
