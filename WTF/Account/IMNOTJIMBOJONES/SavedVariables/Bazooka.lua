@@ -53,6 +53,8 @@ BazookaDB = {
 						["pos"] = 8,
 					},
 					["Broker_WhisperWhisper"] = {
+						["disableTooltipInCombat"] = false,
+						["enabled"] = false,
 						["pos"] = 2,
 						["bar"] = 3,
 					},
@@ -71,8 +73,9 @@ BazookaDB = {
 					},
 					["BrokerToolBox - Repair"] = {
 						["area"] = "left",
-						["bar"] = 3,
 						["pos"] = 3,
+						["disableTooltipInCombat"] = false,
+						["bar"] = 3,
 					},
 					["SN - Melee Mastery"] = {
 						["pos"] = 12,
@@ -83,14 +86,15 @@ BazookaDB = {
 					},
 					["Currencyflow"] = {
 						["area"] = "left",
-						["pos"] = 1,
 						["bar"] = 2,
+						["disableTooltipInCombat"] = false,
+						["pos"] = 1,
 					},
 					["SpeedyGonzales"] = {
-						["showValue"] = false,
 						["area"] = "left",
+						["disableTooltipInCombat"] = false,
+						["showValue"] = false,
 						["stripColors"] = false,
-						["disableMouseInCombat"] = true,
 						["pos"] = 7,
 					},
 					["BrokerToolBox - Position"] = {
@@ -144,10 +148,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showupdates"] = "",
-						["enabled"] = false,
 						["showValue"] = false,
+						["enabled"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -218,24 +222,26 @@ BazookaDB = {
 					},
 					["BrokerToolBox - Token"] = {
 						["area"] = "center",
-						["bar"] = 2,
 						["pos"] = 1,
+						["disableTooltipInCombat"] = false,
+						["bar"] = 2,
 					},
 					["Broker_DualSpecObject"] = {
 						["area"] = "left",
-						["bar"] = 3,
 						["pos"] = 2,
+						["disableTooltipInCombat"] = false,
+						["bar"] = 3,
 					},
 					["Aanye_XP"] = {
 						["pos"] = 6,
 					},
 					["Broker_uClock"] = {
-						["showupdates"] = "",
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
-						["showValue"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 9,
 					},
 					["SN - Expertise"] = {
@@ -255,24 +261,24 @@ BazookaDB = {
 					["SN - Spell Hit"] = {
 						["pos"] = 17,
 					},
-					["SN - Ranged Mastery"] = {
-						["pos"] = 9,
-					},
 					["LDB_Guild"] = {
 						["pos"] = 6,
+					},
+					["SN - Ranged Mastery"] = {
+						["pos"] = 9,
 					},
 					["Skada"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 3,
 					},
-					["BugSack"] = {
-						["enabled"] = false,
-						["pos"] = 1,
-					},
 					["Broker_wDurability"] = {
 						["enabled"] = false,
 						["pos"] = 9,
+					},
+					["BugSack"] = {
+						["enabled"] = false,
+						["pos"] = 1,
 					},
 					["shFps"] = {
 						["manualTooltip"] = false,
@@ -291,30 +297,33 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 23,
 					},
-					["Broker_Wallet"] = {
+					["MailMinder"] = {
 						["enabled"] = false,
-						["pos"] = 18,
+						["stripColors"] = false,
+						["pos"] = 3,
 					},
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
 						["showIcon"] = false,
 						["area"] = "left",
-						["pos"] = 4,
 						["bar"] = 3,
+						["disableTooltipInCombat"] = false,
+						["pos"] = 4,
 					},
 					["SN - Spell Crit"] = {
 						["pos"] = 23,
 					},
-					["MailMinder"] = {
+					["Broker_Wallet"] = {
 						["enabled"] = false,
-						["stripColors"] = false,
-						["pos"] = 3,
+						["pos"] = 18,
 					},
 					["SN - Dmg Reduction"] = {
 						["pos"] = 20,
@@ -324,15 +333,16 @@ BazookaDB = {
 						["pos"] = 1,
 					},
 					["YssDrop"] = {
-						["stripColors"] = false,
-						["area"] = "left",
-						["alignment"] = "LEFT",
-						["showText"] = false,
 						["showValue"] = false,
+						["area"] = "left",
+						["stripColors"] = false,
+						["showText"] = false,
+						["disableTooltipInCombat"] = false,
+						["alignment"] = "LEFT",
 						["pos"] = 1,
 					},
-					["SN - Melee Attack Power"] = {
-						["pos"] = 14,
+					["SN - Melee Crit"] = {
+						["pos"] = 29,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -342,24 +352,22 @@ BazookaDB = {
 						["pos"] = 10,
 						["bar"] = 2,
 					},
+					["SN - Melee Attack Power"] = {
+						["pos"] = 14,
+					},
 					["BrokerToolBox - Money"] = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["pos"] = 2,
 						["showSuffix"] = false,
 						["bar"] = 2,
-						["pos"] = 2,
-					},
-					["SN - Melee Crit"] = {
-						["pos"] = 29,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["ElkExperience"] = {
 						["pos"] = 5,
@@ -376,6 +384,7 @@ BazookaDB = {
 					["AllPlayed"] = {
 						["area"] = "left",
 						["showText"] = false,
+						["disableTooltipInCombat"] = false,
 						["pos"] = 5,
 					},
 					["LDB_Friends"] = {
@@ -436,6 +445,7 @@ BazookaDB = {
 						["pos"] = 9,
 					},
 					["SavedInstances"] = {
+						["disableTooltipInCombat"] = false,
 						["pos"] = 6,
 					},
 					["kgPanels"] = {
@@ -519,10 +529,10 @@ BazookaDB = {
 					["bgColor"] = {
 						["a"] = 0.6000000238418579,
 					},
+					["relPoint"] = "TOPLEFT",
 					["iconSize"] = 10,
 					["frameHeight"] = 15.0000467300415,
 					["attach"] = "none",
-					["relPoint"] = "TOPLEFT",
 					["textColor"] = {
 						["a"] = 1,
 						["g"] = 0.8196078431372549,
@@ -536,13 +546,13 @@ BazookaDB = {
 					["relPoint"] = "BOTTOMRIGHT",
 					["frameWidth"] = 486.9999389648438,
 					["pos"] = 0,
-					["fontSize"] = 10,
 					["point"] = "BOTTOMRIGHT",
 					["pluginOpacity"] = 0.75,
 					["iconSize"] = 14,
 					["frameHeight"] = 26.00000190734863,
 					["attach"] = "none",
 					["rightSpacing"] = 4,
+					["fontSize"] = 10,
 					["x"] = -1.501980781555176,
 					["fadeInCombat"] = true,
 					["textColor"] = {
@@ -556,12 +566,12 @@ BazookaDB = {
 					["leftSpacing"] = 50,
 					["frameWidth"] = 487,
 					["pos"] = 0,
-					["fontSize"] = 10,
 					["point"] = "BOTTOMLEFT",
 					["x"] = 2.17059063911438,
 					["pluginOpacity"] = 0.75,
-					["iconSize"] = 14,
 					["frameHeight"] = 26.00001525878906,
+					["fontSize"] = 10,
+					["iconSize"] = 14,
 					["fadeInCombat"] = true,
 				}, -- [3]
 			},
