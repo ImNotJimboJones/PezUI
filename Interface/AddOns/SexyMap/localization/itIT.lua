@@ -53,7 +53,6 @@ L["Font"] = "Carattere" -- Needs review
 L["Font Color"] = "Colore del Carattere" -- Needs review
 L["Font Size"] = "Dimensione del Carattere" -- Needs review
 L["Force a square texture. Fixed distortion on square textures."] = "Imponi una trama quadrata. Distorsione sistemata con trame quadrate. " -- Needs review
-L["GatherMate is a resource gathering helper mod. Installing it allows you to have resource pins on your HudMap."] = "GatherMate è un mod che ti aiuta nella raccolta delle risorse. Installandolo ti consente di avere vedere le puntine delle risorse sulla tua mappa HUD" -- Needs review
 L["Heart"] = "Cuore" -- Needs review
 L["Hexagon"] = "Esagono" -- Needs review
 L["Hide default border"] = "Nascondi il margine di fabbrica" -- Needs review
@@ -62,6 +61,5 @@ L["Horizontal Nudge"] = "Colpetto orizzontale" -- Needs review
 L["Horizontal Position"] = "Posizione orizzontale" -- Needs review
 L["Hover Opacity"] = "Opacità al passaggio del mouse" -- Needs review
 L["HUD Color"] = "Colore HUD" -- Needs review
-L["If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"] = "Se usi lo zoom sulla mappa, questa funzione ristabilirà lo zoom automaticamente dopo il periodo di tempo selezionato (in secondi)" -- Needs review
 
 

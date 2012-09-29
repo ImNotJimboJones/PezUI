@@ -223,19 +223,20 @@ MovAny.lVirtualMovers = {
 		end,
 	},
 	WatchFrameMover = {
-		w = 150,
-		h = 30,
-		point = {"CENTER", "UIParent", "RIGHT", -80, 315},
+		w = 200,
+		h = 450,
+		point = {"TOPRIGHT", "MinimapCluster", "BOTTOMRIGHT", 0, 0},
 	--	inherits = WatchFrame,
 		OnMAHook = function(self)
 			local b = WatchFrame
+			local bbb = WatchFrame:GetHeight()
 		--	MovAny:UnlockPoint(b)
 			b:ClearAllPoints(WatchFrameMover)
 			b:SetPoint("TOP", WatchFrameMover, "TOP")
 			MovAny:LockPoint(b)
 		--	b.ignoreFramePositionManager = true
 			b:SetMovable(true)
-		--	b:SetHeight(GetScreenHeight() / 2)
+			b:SetHeight(GetScreenHeight() / 2)
 			b:SetUserPlaced(true)
 			self.sbf = b
 		end,

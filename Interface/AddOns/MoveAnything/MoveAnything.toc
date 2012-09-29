@@ -1,7 +1,7 @@
 ## Interface: 50001
 ## Title: MoveAnything - MoP
-## Notes: 13.1.9 by Alea
-## Version: 13.1.9
+## Notes: 13.1.10 by Alea
+## Version: 13.1.10
 ## Author: Wagthaa
 ## SavedVariables: MADB
 

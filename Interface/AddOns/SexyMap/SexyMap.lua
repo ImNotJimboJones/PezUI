@@ -120,7 +120,7 @@ mod.options = {
 			order = 7,
 			type = "range",
 			name = L["Auto Zoom-Out Delay"],
-			desc = L["If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds)"],
+			desc = L["If you zoom into the map, this feature will automatically zoom out after the selected period of time (seconds). Using a value of 0 will disable Auto Zoom-Out."],
 			width = "double",
 			min = 0,
 			max = 30,
@@ -387,6 +387,10 @@ MinimapBackdrop:SetParent(Minimap)
 MinimapBackdrop:SetPoint("CENTER", Minimap, "CENTER", -8, -23)
 
 function mod:SetupMap()
+	if FRAMELOCK_STATES and FRAMELOCK_STATES.PETBATTLES then -- XXX mop temp
+		FRAMELOCK_STATES.PETBATTLES.Minimap = "hidden" -- Hide the Minimap during a pet battle
+	end
+
 	local Minimap = Minimap
 
 	--[[ Auto Zoom Out ]]--
@@ -499,12 +503,7 @@ do
 		-- Grab Icons
 		grabFrames(MinimapZoneTextButton, Minimap, MiniMapTrackingButton, TimeManagerClockButton, MinimapBackdrop:GetChildren())
 		grabFrames(MinimapCluster:GetChildren())
-		if FishingBuddyMinimapButton then -- XXX Let's try get the author to make a better icon
-			grabFrames(FishingBuddyMinimapButton)
-		end
-		if AtlasButton then -- XXX Let's try get the author to make a better icon
-			grabFrames(AtlasButton)
-		end
+
 		self.StartFrameGrab = nil
 	end
 end

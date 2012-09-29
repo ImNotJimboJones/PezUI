@@ -5,7 +5,7 @@ sm.buttons = {}
 local mod = sm.buttons
 local L = sm.L
 
-local Shape, moving, ButtonFadeOut
+local moving, ButtonFadeOut
 
 local animFrames = {}
 local blizzButtons = {
@@ -40,10 +40,16 @@ local addonButtons = { -- For the rare addons that don't use LibDBIcon for some 
 	AltoholicMinimapButton = "Altoholic",
 	DominosMinimapButton = "Dominos",
 	Gatherer_MinimapOptionsButton = "Gatherer",
-	FishingBuddyMinimapFrame = "Fishing Buddy", -- FishingBuddyMinimapButton = "Fishing Buddy", -- Button parented to a frame, parented to the minimap, facepalm
 	DroodFocusMinimapButton = "Drood Focus",
 	["FuBarPluginElkano's BuffBarsFrameMinimapButton"] = "EBB (Elkano's Buff Bars)",
-	AtlasButtonFrame = "Atlas", -- AtlasButton = "Atlas", -- Button parented to a frame, parented to the minimap, facepalm
+	D32MiniMapButton = "Mistra's Diablo Orbs",
+	DKPBidderMapIcon = "DKP-Bidder",
+	HealiumMiniMap = "Healium",
+	HealBot_MMButton = "HealBot",
+	IonMinimapButton = "Ion",
+	OutfitterMinimapButton = "Outfitter",
+	FlightMapEnhancedMinimapButton = "Flight Map Enhanced",
+	NXMiniMapBut = "Carbonite",
 }
 
 local options = {
@@ -174,11 +180,11 @@ do
 		mod:ChangeFrameVisibility(_G[name], v)
 	end
 
-	function mod:AddButtonOptions(name, blizzIcon, dynamic)
+	function mod:AddButtonOptions(name)
 		local p
-		if blizzIcon then
+		if blizzButtons[name] then
 			p = options.args.stock.args -- Blizz icon = stock section
-		elseif dynamic then
+		elseif dynamicButtons[name] then
 			p = options.args.dynamic.args -- Blizz dynamic (off by default) icon = dynamic section
 		else
 			p = options.args.custom.args -- Addon icon = custom section
@@ -211,10 +217,60 @@ function mod:OnInitialize(profile)
 			controlVisibility = true
 		}
 	end
+
+	if profile.buttons.dragPositions.AtlasButtonFrame then
+		profile.buttons.dragPositions.AtlasButtonFrame = nil -- XXX temp
+	end
+	if profile.buttons.visibilitySettings.AtlasButtonFrame then
+		profile.buttons.visibilitySettings.AtlasButtonFrame = nil -- XXX temp
+	end
+
+	if profile.buttons.dragPositions.FishingBuddyMinimapFrame then
+		profile.buttons.dragPositions.FishingBuddyMinimapFrame = nil -- XXX temp
+	end
+	if profile.buttons.visibilitySettings.FishingBuddyMinimapFrame then
+		profile.buttons.visibilitySettings.FishingBuddyMinimapFrame = nil -- XXX temp
+	end
+
+	if profile.buttons.dragPositions.HealBot_ButtonFrame then
+		profile.buttons.dragPositions.HealBot_ButtonFrame = nil -- XXX temp
+	end
+	if profile.buttons.visibilitySettings.HealBot_ButtonFrame then
+		profile.buttons.visibilitySettings.HealBot_ButtonFrame = nil -- XXX temp
+	end
+
 	self.db = profile.buttons
 end
 
 function mod:OnEnable()
+	-- Customize the world map: Defaults!
+	-- Interface\\minimap\\UI-Minimap-WorldMapSquare
+	-- MiniMapWorldMapButton:GetRegions():SetTexCoord(0,0,0,0.5,1,0,1,0.5) -- Normal
+	-- MiniMapWorldMapButton:GetRegions():SetTexCoord(0,0.5,0,1,1,0.5,1,1) -- Pushed
+
+	local overlay = MiniMapWorldMapButton:CreateTexture(nil, "OVERLAY")
+	overlay:SetSize(53,53)
+	overlay:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
+	overlay:SetPoint("TOPLEFT")
+	local background = MiniMapWorldMapButton:CreateTexture(nil, "BACKGROUND")
+	background:SetSize(25,25)
+	background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
+	background:SetPoint("TOPLEFT", MiniMapWorldMapButton, "TOPLEFT", 4, -2)
+
+	local icon, pushedIcon, highlight = MiniMapWorldMapButton:GetRegions()
+	icon:SetTexCoord(0.32,0,0.32,0.5,1,0,1,0.5)
+	icon:ClearAllPoints()
+	icon:SetPoint("BOTTOMRIGHT", MiniMapWorldMapButton, "BOTTOMRIGHT", -4, 2)
+	icon:SetSize(20,30)
+	pushedIcon:SetTexCoord(0.32,0.5,0.32,1,1,0.5,1,1)
+	pushedIcon:ClearAllPoints()
+	pushedIcon:SetPoint("BOTTOMRIGHT", MiniMapWorldMapButton, "BOTTOMRIGHT", -4, 2)
+	pushedIcon:SetSize(20,30)
+
+	MiniMapWorldMapButton:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
+	highlight:ClearAllPoints()
+	highlight:SetPoint("TOPLEFT", MiniMapWorldMapButton, "TOPLEFT", 2, -2)
+
 	sm.core:RegisterModuleOptions("Buttons", options, L["Buttons"])
 end
 
@@ -226,7 +282,7 @@ do
 	local OnFinished = function(anim)
 		-- Minimap or Minimap icons including nil checks to compensate for other addons
 		local f, focus = anim:GetParent(), GetMouseFocus()
-		if focus and ((focus:GetName() == "Minimap" or focus:GetName() == "AtlasButton") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
+		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			f:SetAlpha(1)
 		else
 			f:SetAlpha(0)
@@ -255,7 +311,7 @@ do
 	local OnLeave = function()
 		if not mod.db.controlVisibility or moving then return end
 		local focus = GetMouseFocus() -- Minimap or Minimap icons including nil checks to compensate for other addons
-		if focus and ((focus:GetName() == "Minimap" or focus:GetName() == "AtlasButton") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
+		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			fadeStop = true
 			return
 		end
@@ -275,7 +331,7 @@ do
 
 	function mod:NewFrame(f)
 		local n = f:GetName()
-		-- Always allow Blizz frames, skip ignored frames, dynamically try to skip frames that may not be minimap buttons by checking size
+		-- Only add Blizz buttons, addon buttons & LibDBIcon buttons
 		if blizzButtons[n] or dynamicButtons[n] or addonButtons[n] or n:find("LibDBIcon") then
 			-- Create the animations
 			f.smAnimGroup = f:CreateAnimationGroup()
@@ -299,7 +355,7 @@ do
 
 			-- Don't add config or moving capability to the Zone Text and Clock buttons, handled in their own modules
 			if n ~= "MinimapZoneTextButton" and n ~= "TimeManagerClockButton" then
-				self:AddButtonOptions(n, blizzButtons[n], dynamicButtons[n])
+				self:AddButtonOptions(n)
 
 				-- These two frames are parented to MinimapCluster, if the map scale is changed they won't drag properly, so we parent to Minimap
 				if n == "MiniMapInstanceDifficulty" or n == "GuildInstanceDifficulty" then
@@ -311,10 +367,6 @@ do
 				-- Configure dragging
 				if n == "MiniMapTracking" then
 					self:MakeMovable(MiniMapTrackingButton, f)
-				elseif n == "FishingBuddyMinimapFrame" then -- XXX Let's try get the author to make a better icon
-					self:MakeMovable(FishingBuddyMinimapButton, f)
-				elseif n == "AtlasButtonFrame" then -- XXX Let's try get the author to make a better icon
-					self:MakeMovable(AtlasButton, f)
 				else
 					self:MakeMovable(f)
 				end
