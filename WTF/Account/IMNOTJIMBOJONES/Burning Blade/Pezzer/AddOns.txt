@@ -214,11 +214,6 @@ Volumizer: enabled
 VuhDo: enabled
 VuhDoOptions: enabled
 WhisperWhisper: enabled
-XLoot1.0: enabled
-XLoot: enabled
-XLootMaster: enabled
-XLootMonitor: enabled
-XLootGroup: enabled
 YssDrop: enabled
 shPerformance: enabled
 DETrackingBroker: enabled
