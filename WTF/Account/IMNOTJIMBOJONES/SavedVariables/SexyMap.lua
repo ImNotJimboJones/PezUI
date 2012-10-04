@@ -84,7 +84,7 @@ SexyMap2DB = {
 			},
 			["xOffset"] = 0,
 			["fontsize"] = 10,
-			["yOffset"] = -25,
+			["yOffset"] = -20,
 		},
 		["fader"] = {
 			["enabled"] = false,
