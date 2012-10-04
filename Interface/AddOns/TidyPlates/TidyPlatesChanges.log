@@ -1,6 +1,16 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.7.8
+---------------------------
+- Corrected a typo in the spell cast watcher; "StartCastAnimation" is now properly, "StartCastAnimationOnNameplate".  Arena fans rejoice!
 
+6.7.7
+---------------------------
+- Fixed: Monk Tank mode (Stance of the Sturdy Ox stance added to the shapeshift list)
+- Corrected various threat values coming into the threat line widget 
+- Core: extended plate verification process
+- Removed many unneeded local variables
+- Combed files for any "_" that could be global
 
 6.7.6
 ---------------------------
@@ -9,7 +19,7 @@ Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 - Added a rudimentary localization framework.  To use: Create an addon named, "TidyPlatesHubXX" where the XX is the last two letters of the localization code.  Ex. "TidyPlatesHubDE".  Within the code for that addon, create a table called, 'TidyPlatesHubLocalization', and add the translations.  For example:
 TidyPlatesHubLocalization["Style"] = "Translation of STYLE".   See TidyPlatesHub\Lists.lua for an example.  Future versions will add a "Dump" mode for outputting all the text that needs translating.
 - Changed the background, anchoring, and font sizes in the Hub, for readability.
-
+- Changed the core template, and added a 'default' style, which looks like the Blizzard nameplates.  (will be useful in a future version)
 
 
 6.7.5

@@ -110,7 +110,7 @@ local TankStances = {
 --TidyPlatesWidgets.IsTankingAuraActive = false
 
 local function CheckPlayerAuras()
-	local spellID, _, name
+	local spellID, name, _
 	local tankAura = false
 	-- Check Auras
 	for i = 1, 40 do
@@ -120,7 +120,11 @@ local function CheckPlayerAuras()
 		end
 	end
 	-- Check Stances
-	if GetShapeshiftFormID() == 18 then -- Defensive Stance
+	if GetShapeshiftFormID() == 18 then -- Defensive Stance (Warrior)
+		tankAura = true
+	end
+	
+	if GetShapeshiftFormID() == 23 then -- Stance of the Sturdy Ox (Monk)
 		tankAura = true
 	end
 	

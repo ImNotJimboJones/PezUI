@@ -134,44 +134,37 @@ local testMode = false
 local function UpdateThreatLine(frame, unitid)
 	local maxwidth = 50
 	--local maxwidth = frame._MaximumWidth
-	--local maxwidth = frame:GetWidth() / 2
 	local length = 0
 	local anchor = "RIGHT"
-	local leaderThreatMax, leaderThreatMin = frame.ThreatMax, frame.ThreatMin
-	local leaderThreat, leaderUnitId  = GetRelativeThreat(unitid) 
-	leaderThreat = tonumber(leaderThreat) or 0
-		
-	--if testMode then 
-	--	leaderThreat, leaderUnitId =  .00000000000000000000000000000000001, "player"
-	--end	
+	local threat, targetOf  = GetRelativeThreat(unitid) -- ;if testMode then threat, targetOf =  .00000000000000000000000000000000001, "player" end	
 	
-	if not (leaderThreat) then frame:_Hide(); return end
-	if leaderThreat and leaderThreat >= 0 then
+	if not(threat and targetOf) then frame:_Hide(); return end
+	
+	if threat >= 0 then
 
 		-- Get Positions and Size
-		if leaderThreat >= 100 then
-			-- While tanking
-			length = maxwidth * ((leaderThreat - 100)/100)
+		if threat >= 100 then						-- While tanking
+			length = maxwidth * ((threat - 100)/100)
 			threatcolor = frame._HighColor
 			anchor = "LEFT"
-		else 
-			-- While NOT tanking
-			length = maxwidth * ((100 - leaderThreat)/100)
+		else 										-- While NOT tanking
+			length = maxwidth * ((100 - threat)/150)
 			threatcolor = frame._LowColor
 		end
+
 
 		frame.Line:ClearAllPoints()
 		frame.Line:SetWidth( max(1, min( maxwidth, length)))
 		frame.Line:SetPoint(anchor, frame, "CENTER")
 		
-		if leaderUnitId and leaderUnitId ~= "player" then 	
-			if UnitIsUnit(leaderUnitId, "pet")
-				or GetPartyAssignment("MAINTANK", leaderUnitId) 
-				or ("TANK" == UnitGroupRolesAssigned(leaderUnitId)) then
+		if targetOf and targetOf ~= "player" then 	
+			if UnitIsUnit(targetOf, "pet")
+				or GetPartyAssignment("MAINTANK", targetOf) 
+				or ("TANK" == UnitGroupRolesAssigned(targetOf)) then
 					threatcolor = frame._TankedColor 
 			end
 					
-			frame.TargetText:SetText(UnitName(leaderUnitId))								-- TP 6.1
+			frame.TargetText:SetText(UnitName(targetOf))								-- TP 6.1
 			frame.TargetText:SetTextColor(threatcolor.r, threatcolor.g, threatcolor.b)		-- TP 6.1
 		else frame.TargetText:SetText("") end
 		

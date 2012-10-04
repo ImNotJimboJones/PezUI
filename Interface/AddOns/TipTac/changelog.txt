@@ -1,3 +1,8 @@
+TipTac Changes | 2012 Sep 29
+----------------------------
+- Fixed a Lua error that could occur, if another addon used TipTac's AddModifiedTip() function before the saved variables had been loaded.
+- Added support for the new classification "minus" used for certain units.
+
 TipTac Changes | 2012 Sep 05
 ----------------------------
 - Added an option for the removal of the Alliance and Horde faction text from the tooltip. It can currently be found under the Special category. Turned off by default.

@@ -79,7 +79,7 @@ local function OnSpellCast(...)
 	local FoundPlate = nil
 	
 	-- Gather Spell Info
-	local spell, displayName, icon, castTime
+	local spell, displayName, icon, castTime, _
 	spell, displayName, icon, _, _, _, castTime, _, _ = GetSpellInfo(spellid)
 	
 	
@@ -198,7 +198,7 @@ function GameEvents.UNIT_SPELLCAST_START(...)
 	if plate then
 		local spell, _, name, icon, start, finish, _, spellid, nonInt = UnitCastingInfo(unitid)
 		
-		if spell then StartCastAnimation(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, false) 
+		if spell then StartCastAnimationOnNameplate(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, false) 
 		else StopCastAnimation(plate) end
 	end
 end
@@ -211,7 +211,7 @@ function GameEvents.UNIT_SPELLCAST_CHANNEL_START(...)
 	if plate then
 		local spell, _, name, icon, start, finish, spellid, nonInt = UnitChannelInfo("target")	
 		
-		if spell then StartCastAnimation(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, true) 
+		if spell then StartCastAnimationOnNameplate(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, true) 
 		else StopCastAnimation(plate) end
 	end
 end

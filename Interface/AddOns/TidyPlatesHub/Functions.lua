@@ -618,7 +618,7 @@ end
 local function HealthAndMana(unit) 
 	if unit.isTarget then
 		local power = ceil((UnitPower("target") / UnitPowerMax("target"))*100)
-		local _, powername = UnitPowerType("target")
+		local powername = select(2, UnitPowerType("target"))
 		if power and power > 0 then	return power.."% "..powername end
 	end
 end

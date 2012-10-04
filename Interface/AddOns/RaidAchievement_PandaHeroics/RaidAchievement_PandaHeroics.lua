@@ -189,6 +189,7 @@ razombiidtable=nil
 rarezurecttable=nil
 radebufcrazy=nil
 racheckhpannounce=nil
+rablockuntilreset=nil
 
 
 end
@@ -229,11 +230,12 @@ end
 --achieves tracker:
 --Scarlet Halls
 if GetCurrentMapAreaID()==871 then
-if arg2=="UNIT_DIED" and phbosskilled==nil then
+if arg2=="UNIT_DIED" and phbosskilled==nil and rablockuntilreset==nil then
   if phraspisokon[1]==1 and phraachdone1 then
   local id=tonumber(string.sub(arg7,-12,-9),16)
-  if id==59309 then
+  if id==59309 or id==58674 then
     phrafailnoreason(1)
+    rablockuntilreset=1
   end
   end
 end
@@ -271,6 +273,11 @@ if arg2=="SPELL_AURA_APPLIED" and arg10==112955 and arg4 then
       end
     end
   end
+end
+
+--резет таблицы ид, так как считаем только за 1 захват
+if arg2=="SPELL_CAST_START" and arg10==111216 then
+  ratableofnoobs=nil
 end
 
 

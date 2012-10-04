@@ -70,6 +70,7 @@ local TT_DefaultConfig = {
 	fontFlags = "",
 	fontSizeDelta = 2,
 
+	classification_minus = "-%s ",		-- New classification in MoP; Unsure what it's used for, but apparently the units have no mana. Example of use: The "Sha Haunts" early in the Horde's quests in Thunder Hold.
 	classification_trivial = "~%s ",
 	classification_normal = "%s ",
 	classification_elite = "+%s ",
@@ -241,7 +242,7 @@ local bars = {};
 local tipIcon;
 
 --------------------------------------------------------------------------------------------------------
---                                       TipTac Anchor Creation                                       --
+--                                   TipTac Anchor Creation & Events                                  --
 --------------------------------------------------------------------------------------------------------
 
 tt:SetWidth(114);
@@ -1186,7 +1187,10 @@ function tt:AddModifiedTip(tip,noHooks)
 		if (not noHooks) then
 			tip:HookScript("OnHide",TipHook_OnHide);
 		end
-		self:ApplySettings();
+		-- Only apply settings if "cfg" has been initialised, meaning after VARIABLES_LOADED. If AddModifiedTip() is called before, settings will be applied for all tips once VARIABLES_LOADED is fired anyway.
+		if (cfg) then
+			self:ApplySettings();
+		end
 	end
 end
 

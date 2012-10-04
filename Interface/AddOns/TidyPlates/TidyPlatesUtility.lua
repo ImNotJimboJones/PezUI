@@ -107,57 +107,66 @@ TidyPlatesUtility.updateTable = updatetable
 ------------------------
 -- Threat Function
 ------------------------
+
 do
-	--[[
-		This function returns the relative threat of a unit, compared to their group members
+
+	local function GetRelativeThreat(enemyUnitid)		-- 'enemyUnitid' is a target/enemy
+		if not UnitExists(enemyUnitid) then return end
+
+		local allyUnitid, allyThreat = nil, 0
+		local playerIsTanking, playerSituation, playerThreat = UnitDetailedThreatSituation("player", enemyUnitid)
+		if not playerThreat then return end
 		
-		
-	--]]
-	local function GetRelativeThreat(unit)		-- 'unit' is some target
-		if not UnitExists(unit) then return end
-		local _, group, size, index, unitid
-		local first = 1
-		
-		local playerthreat, leaderThreat, tempthreat, petthreat, leaderUnitID  = 0,0,0,0, nil
-		local playerThreatVal, leaderThreatVal = 0, 0
-		
-		local leader = nil
-		
-		-- Request Player Threat
-		_, _,  playerthreat, _, playerThreatVal = UnitDetailedThreatSituation("player", unit)
-		-- Request Pet Threat
-		if HasPetUI() then 
-			_, _,  petthreat = UnitDetailedThreatSituation("pet", unit)
-			leaderThreat = petthreat or 0
-			leaderUnitID = "pet" 
-		end
 		-- Get Group Type
-		if UnitInRaid("player") then group = "raid"; size = TidyPlatesUtility:GetNumRaidMembers(); first = 2
-		elseif UnitInParty("player") then group = "party"; size = TidyPlatesUtility:GetNumPartyMembers()
-		else group = nil end
+		local evalUnitid, evalIndex, evalThreat
+		local groupType, size, startAt = nil, nil, 1
+		if UnitInRaid("player") then 
+			groupType = "raid"
+			groupSize = TidyPlatesUtility:GetNumRaidMembers()
+			startAt = 2
+		elseif UnitInParty("player") then 
+			groupType = "party"
+			groupSize = TidyPlatesUtility:GetNumPartyMembers()
+		else groupType = nil end
 		
 		-- Cycle through Group, picking highest threat holder
-		if group then
-			for index = first, size do
-				unitid = group..index
-				--print("Test", unitid)
-				_, _, tempthreat = UnitDetailedThreatSituation(unitid, unit)
-				if tempthreat and tempthreat > leaderThreat then 
-					leaderThreat = tempthreat 
-					leaderUnitID = unitid
+		if groupType then
+			for allyIndex = startAt, groupSize do
+				evalUnitid = groupType..allyIndex
+				evalThreat = select(3, UnitDetailedThreatSituation(evalUnitid, enemyUnitid))
+				if evalThreat and evalThreat > allyThreat then 
+					allyThreat = evalThreat 
+					allyUnitid = evalUnitid
 				end
 			end
 		end
-		--print(size, leaderThreat, leaderUnitID, UnitName(leaderUnitID or ""))
-		-- 3, 100, raid1, binbwen, nil
-		if playerthreat and leaderThreat and leaderUnitID then
-			_, _, leaderThreatVal = UnitDetailedThreatSituation(leaderUnitID, unit)
-			leaderThreatVal = leaderThreatVal or 0
-			
-			if playerthreat == 100 then -- This means that the unit is tanking, and there are no units higher than them
-				return playerthreat + (100-leaderThreat), "player", playerThreatVal - leaderThreatVal
-			else return playerthreat, leaderUnitID, -(leaderThreatVal - playerThreatVal) end	-- This means that the unit is not attacking you, and will list WHO it is
-		else return end
+		
+		-- Request Pet Threat (if possible)
+		if HasPetUI() and UnitExists("pet") then 
+			evalThreat = select(3, UnitDetailedThreatSituation("pet", enemyUnitid)) or 0
+			if evalThreat > allyThreat then
+				allyThreat = evalThreat
+				allyUnitid = "pet" 
+			end
+		end
+
+		--[[
+		if playerIsTanking and allyThreat then
+			return 100 - tonumber(allyThreat or 0), true
+		elseif allyThreat and allyUnitid then
+			return 100 - playerThreat, false
+		end
+		--]]
+		-- [[
+		-- Return the appropriate value
+		if playerThreat and allyThreat and allyUnitid then
+			if playerThreat >= 100 then 	-- The enemy is attacking you. You are tanking. 	Returns: 1. Your threat, plus your lead over the next highest person, 2. Your Unitid (since you're tanking)
+				return tonumber(playerThreat + (100-allyThreat)), "player"
+			else 	-- The enemy is not attacking you.  Returns: 1. Your scaled threat percent, 2. Who is On Top
+				return tonumber(playerThreat), allyUnitid 
+			end
+		end
+		--]]
 	end
 	
 	TidyPlatesUtility.GetRelativeThreat = GetRelativeThreat
@@ -201,7 +210,8 @@ end
 --]]
 local function CreateCheckButton(self, reference, parent, label)
 	local checkbutton = CreateFrame( "CheckButton", reference, parent, "InterfaceOptionsCheckButtonTemplate" )
-	_G[reference.."Text"]:SetText(label)
+	checkbutton.Label = _G[reference.."Text"]
+	checkbutton.Label:SetText(label)
 	checkbutton.GetValue = function() if checkbutton:GetChecked() then return true else return false end end
 	checkbutton.SetValue = checkbutton.SetChecked
 

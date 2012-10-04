@@ -247,7 +247,29 @@ MovAny.lVirtualMovers = {
 			b:SetPoint("TOPRIGHT", "MinimapCluster", "BOTTOMRIGHT", 0, 0)
 		end,
 	},
-	
+	PlayerPowerBarAltMover = {
+		w = 200,
+		h = 150,
+		point = {"CENTER", "UIParent", "CENTER", 0, 0},
+	--	inherits = WatchFrame,
+		OnMAHook = function(self)
+			local b = PlayerPowerBarAlt
+		--	MovAny:UnlockPoint(b)
+			b:ClearAllPoints(PlayerPowerBarAltMover)
+			b:SetPoint("TOP", PlayerPowerBarAltMover, "TOP")
+			MovAny:LockPoint(b)
+		--	b.ignoreFramePositionManager = true
+			b:SetMovable(true)
+			b:SetUserPlaced(true)
+			self.sbf = b
+		end,
+		OnMAPostReset = function(self)
+			MovAny:UnlockPoint(WatchFrame)
+			local b = PlayerPowerBarAlt
+			b:ClearAllPoints()
+			b:SetPoint("TOPRIGHT", "UIParent", "BOTTOMRIGHT", 0, 0)
+		end,
+	},
 	PetBattleMover6 = {
 		w = 650,
 		h = 120,
@@ -1758,7 +1780,7 @@ MovAny.lVirtualMovers = {
 			if MovAny:IsModified(MovAny.lTransContainerToBag[child:GetName()]) then
 				return
 			end
-			child:SetParent(self)
+		--	child:SetParent(self)
 			MovAny:UnlockScale(child)
 			child:SetScale(1)
 			MovAny:LockScale(child)

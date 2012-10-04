@@ -1,0 +1,26 @@
+------------------------------------------------------------------------
+r44 | papsol | 2012-10-02 07:53:14 +0000 (Tue, 02 Oct 2012) | 6 lines
+Changed paths:
+   A /tags/Release v3.7.7 (from /trunk:43)
+
+Tagging as Release v3.7.7
+
+## ChangeLog Release 3.7.7
+## ChangeLog	- Factions Headers which are also Repuations should now work for all old and future expansions. (i.e. Horde Expedition, Alliance Vanguard, The Tillers, etc...)
+## ChangeLog	- Introduced basic localization checking in an effort to make the addon function on all locales even if it's not translated for those locales. 
+## ChangeLog
+------------------------------------------------------------------------
+r43 | papsol | 2012-10-02 07:51:50 +0000 (Tue, 02 Oct 2012) | 1 line
+Changed paths:
+   M /trunk/TitanReputation.lua
+   M /trunk/TitanReputation.toc
+
+v3.7.7
+------------------------------------------------------------------------
+r41 | papsol | 2012-09-09 20:00:14 +0000 (Sun, 09 Sep 2012) | 2 lines
+Changed paths:
+   M /trunk/TitanReputation.toc
+
+toc bump
+
+------------------------------------------------------------------------

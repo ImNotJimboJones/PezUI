@@ -17,7 +17,7 @@ local HealerListByGUID = {}
 local HealerListByName = {}
 
 local function ParseName(identifier)
-	local _, _, name, server = strfind(identifier, "([^-]+)-?(.*)")
+	local name, server = select( 3, strfind(identifier, "([^-]+)-?(.*)"))
 	return name, server
 end
 

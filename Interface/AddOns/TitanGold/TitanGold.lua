@@ -15,7 +15,7 @@ local TITAN_GOLD_BLUE = {r=0.4,b=1,g=0.4};
 local TITAN_GOLD_RED = {r=1,b=0,g=0};
 local TITAN_GOLD_GREEN = {r=0,b=0,g=1};
 local updateTable = {TITAN_GOLD_ID, TITAN_PANEL_UPDATE_TOOLTIP };
--- ******************************** Variables *******************************
+-- ******************************** Variables ******************************* 
 local GOLD_INITIALIZED = false;
 local GOLD_INDEX = "";
 local GOLD_COLOR;
@@ -372,22 +372,8 @@ function TitanPanelGoldButton_FindGold()
 		ttlgold = GetMoney("player");
 	end   
 
-	ret_str = NiceCash(TitanPanelGoldButton_TotalGold(), true, false)
+	ret_str = NiceCash(ttlgold, true, false)
 	
---[[
-	if TitanGetVar(TITAN_GOLD_ID, "ShowCoinLabels") then
-		ret_str = NiceCash(ttlgold, true, false)
-	elseif TitanGetVar(TITAN_GOLD_ID, "ShowCoinIcons") then
-		if TitanGetVar(TITAN_GOLD_ID, "ShowGoldOnly") then
-			ttlgold = math.floor(ttlgold/10000)*10000
-		end
-		ret_str = _G["HIGHLIGHT_FONT_COLOR_CODE"]
-			..GetCoinTextureString (ttlgold, TitanPanelGetVar("FontSize"))
-			..FONT_COLOR_CODE_CLOSE
-	else -- no labels
-		ret_str = NiceCash(ttlgold, true, false)
-	end
---]]
 	return L["TITAN_GOLD_MENU_TEXT"]..": "..FONT_COLOR_CODE_CLOSE, ret_str
 end
 

@@ -262,7 +262,7 @@ m = {
 		API:AddElement({name = "LFGDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
 		API:AddElement({name = "LFGDungeonReadyStatus", displayName = "Dungeon Ready Status"}, c)
 		API:AddElement({name = "LFDRoleCheckPopup", displayName = "Dungeon Role Check Popup"}, c)
-		local rbab = API:AddElement({name = "PlayerPowerBarAlt", displayName = "Raid Boss Alternative Bar"}, c)
+		local rbab = API:AddElement({name = "PlayerPowerBarAltMover", displayName = "Raid Boss Alternative Bar"}, c)
 		API:AddElement({name = "RaidBossEmoteFrame", displayName = "Raid Boss Emote Display"}, c)
 		API:AddElement({name = "Boss1TargetFrame", displayName = "Raid Boss Health Bar 1"}, c)
 		API:AddElement({name = "Boss1TargetFramePowerBarArt", displayName = "Raid Boss Power Bar 1"}, c)

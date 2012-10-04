@@ -5,6 +5,21 @@ TITANREP_TITLE = GetAddOnMetadata("TitanReputation", "Title") or "UnKnown Title"
 TITANREP_BUTTON_ICON = "Interface\\AddOns\\TitanReputation\\TitanReputation";
 TITANREP_EventTime = GetTime();
 TITANREP_RTS = {};
+
+
+local locale = GetLocale();
+if locale == "deDE" then TITANREP_GUILDLOCAL = "Gilde"; end
+if locale == "enGB" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "enUS" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "esES" then TITANREP_GUILDLOCAL = "Hermandad"; end
+if locale == "esMX" then TITANREP_GUILDLOCAL = "Hermandad"; end
+if locale == "frFR" then TITANREP_GUILDLOCAL = "Guilde"; end
+if locale == "koKR" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "ruRU" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "zhCN" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "zhTW" then TITANREP_GUILDLOCAL = "Guild"; end
+if locale == "ptBR" then TITANREP_GUILDLOCAL = "Guilda"; end
+
 --check Glamour version
 --
 
@@ -256,7 +271,7 @@ function TitanReputationSetColor()
 end
 
 -- this method adds a line to the tooltip text
-function TitanPanelReputation_BuildToolTipText(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
+function TitanPanelReputation_BuildToolTipText(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
 	local showrep = 0;
 	if(standingId == 8) then
 		TOTAL_EXALTED = TOTAL_EXALTED + 1;
@@ -275,7 +290,7 @@ function TitanPanelReputation_BuildToolTipText(name, parentName, standingId, top
 	if(isHeader) then
 		LAST_HEADER = {name, 0};
 
-		if(name == "Horde Expedition" or name == "Alliance Vanguard") then
+		if(isHeader and hasRep) then
 			showrep = 1;
 		else
 			showrep = 0;
@@ -296,7 +311,7 @@ function TitanPanelReputation_BuildToolTipText(name, parentName, standingId, top
 
 		if(showrep == 1) then
 			if(LAST_HEADER[2] == 0) then 
-				if(LAST_HEADER[1] == "Guild") then
+				if(LAST_HEADER[1] == TITANREP_GUILDLOCAL) then
 					TITANREP_TOOLTIP_TEXT = TITANREP_TOOLTIP_TEXT.."\n"..TitanUtils_GetHighlightText(LAST_HEADER[1]); 
 				else
 					TITANREP_TOOLTIP_TEXT = TITANREP_TOOLTIP_TEXT.."\n"..TitanUtils_GetHighlightText(LAST_HEADER[1]).."\n"; 
@@ -512,7 +527,7 @@ function TitanReputationHeaderFactionToggle(name)
 end
 
 -- this method adds a line to the right-click menu (to build up faction headers)
-function TitanPanelReputation_BuildRightClickMenu(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
+function TitanPanelReputation_BuildRightClickMenu(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
 	if(not isInactive) then
 		if(isHeader and not isCollapsed) then
 			command = {}
@@ -531,8 +546,8 @@ function TitanPanelReputation_BuildRightClickMenu(name, parentName, standingId, 
 end
 
 -- this method adds a line to the level2 right-click menu (to build up factions for parent header)
-function TitanPanelReputation_BuildFactionSubMenu(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
-	if(parentName == UIDROPDOWNMENU_MENU_VALUE and (not isHeader or (name == "Horde Expedition" or name == "Alliance Vanguard"))) then
+function TitanPanelReputation_BuildFactionSubMenu(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
+	if(parentName == UIDROPDOWNMENU_MENU_VALUE and (not isHeader or (isHeader and hasRep))) then
 		command = {}
 		if(MYBARCOLORS) then
 			command.text = name.."  -  "..TitanUtils_GetColoredText(getglobal("FACTION_STANDING_LABEL"..standingId),MYBARCOLORS[standingId]);
@@ -564,9 +579,9 @@ function TitanPanelReputation_Refresh()
 end
 
 -- This method sets the text of the button according to selected faction's data
-function TitanPanelReputation_BuildButtonText(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
+function TitanPanelReputation_BuildButtonText(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
 	TitanReputationSetColor();
-	if((not isHeader or (name == "Horde Expedition" or name == "Alliance Vanguard")) and (TitanGetVar(TITANREP_ID, "TITANREP_WATCHED_FACTION")==name)) then
+	if((not isHeader or (isHeader and hasRep)) and (TitanGetVar(TITANREP_ID, "TITANREP_WATCHED_FACTION")==name)) then
 		TITANREP_BUTTON_TEXT = "";
 		local COLOR = nil;
 		if(MYBARCOLORS) then
@@ -630,10 +645,10 @@ function TitanPanelReputation_BuildButtonText(name, parentName, standingId, topV
 end
 
 -- saves all reputation value, so we can monitor what is changed
-function TitanPanelReputation_GatherValues(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
+function TitanPanelReputation_GatherValues(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
 --	print("name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive");
---	print(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive);
-	if((not isHeader and name) or (name == "Horde Expedition" or name == "Alliance Vanguard")) then
+--	print(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild);
+	if((not isHeader and name) or (isHeader and hasRep)) then
 		TITANREP_TABLE[name] = {};
 		TITANREP_TABLE[name].standingId = standingId;
 		TITANREP_TABLE[name].earnedValue = earnedValue;
@@ -642,9 +657,9 @@ function TitanPanelReputation_GatherValues(name, parentName, standingId, topValu
 end
 
 -- gets the faction name where reputation changed
-function TitanPanelReputation_GetChangedName(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive)
+function TitanPanelReputation_GetChangedName(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, isInactive, hasRep, isChild)
 	local earnedAmount = 0;
-	if(not (name == "Guild") and TITANREP_TABLE[name]) then
+	if(not (name == TITANREP_GUILDLOCAL) and TITANREP_TABLE[name]) then
 		if((TITANREP_TABLE[name].standingId < standingId) or (TITANREP_TABLE[name].earnedValue ~= earnedValue)) then
 			local msg = "";
 			local dsc = "You have obtained ";
@@ -754,7 +769,7 @@ function TitanPanelReputation_GatherFactions(method)
 		local parentName = "";
 		while(not done)do
 			local name, description, standingId, bottomValue, topValue, earnedValue, atWarWith,
-			canToggleAtWar, isHeader, isCollapsed, isWatched = GetFactionInfo(index);
+			canToggleAtWar, isHeader, isCollapsed, hasRep, isWatched, isChild = GetFactionInfo(index);
 			local value;
 			-- Normalize values
 			topValue = topValue - bottomValue;
@@ -763,7 +778,7 @@ function TitanPanelReputation_GatherFactions(method)
 			percent = format("%.2f",(earnedValue/topValue)*100);
 			if(percent:len()<5) then percent = "0"..percent; end;
 			if(isHeader) then parentName = name; end;
-			method(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, IsFactionInactive(index));
+			method(name, parentName, standingId, topValue, earnedValue, percent, isHeader, isCollapsed, IsFactionInactive(index), hasRep, isChild);
 			index = index+1;
 			if(index>count) then done = true; end;
 		end		

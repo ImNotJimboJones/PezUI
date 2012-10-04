@@ -219,9 +219,12 @@ function TitanSetPanelFont(fontname, fontsize)
 		local childbuttons = {button:GetChildren()};
 		for _, child in ipairs(childbuttons) do
 			if child then
-				local childbuttonText = _G[child:GetName()..TITAN_PANEL_TEXT];
-				if childbuttonText then
-					childbuttonText:SetFont(newfont, fontsize);
+				local bname = _G[child:GetName()]
+				if bname then
+					local childbuttonText = _G[child:GetName()..TITAN_PANEL_TEXT];
+					if childbuttonText then
+						childbuttonText:SetFont(newfont, fontsize);
+					end
 				end
 			end
 		end
@@ -287,31 +290,6 @@ local function TitanPanel_CreateABar(frame)
 			-- for now show it
 			container:Show()
 		end
-	end
-end
-
---[[ local
-NAME: TitanPanel_DeleteABar
-DESC: Helper to nuke the Titan bar passed in.
-VAR: frame - The frame name (string) of the Titan bar to remove
-OUT: None
-NOTE:
-- This also removes the hider bar.
-:NOTE
---]]
-local function TitanPanel_DeleteABar(frame)
-	if not frame then return end
-	local hide_name = TitanBarData[frame].hider
-
-	if _G[frame] and _G[frame].Hide then
-		-- Hide it then nuke it
-		_G[frame]:Hide()
---		_G[frame] = {}
-	end
-	if _G[hide_name] and _G[hide_name].Hide then
-		-- Hide it then nuke it
-		_G[hide_name]:Hide()
---		_G[hide_name] = {}
 	end
 end
 
@@ -432,6 +410,7 @@ function TitanPanel_PlayerEnteringWorld()
 	-- then Blizz will adjust putting the action buttons over / under Titan
 	-- if the user has aux 1/2 shown.
 	TitanMovable_AdjustTimer("EnterWorld")
+	
 end
 
 --------------------------------------------------------------
@@ -481,10 +460,8 @@ function TitanPanelBarButton:PLAYER_ENTERING_WORLD()
 		-- Hide the bars. At times they are there but at 0% transparency.
 		-- They can be over the Blizz action bars creating havoc.
 		TitanPrint("-- Hiding Titan bars...", "warning")
-		for idx, v in pairs (TitanBarData) do
-			TitanPanel_DeleteABar(idx)
-		end
-		
+		TitanPanelBarButton_HideAllBars()
+
 		-- Remove the options pages
 		TitanUpdateConfig("nuke")
 		-- What else to clean up???

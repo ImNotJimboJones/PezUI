@@ -1,5 +1,4 @@
--- Tidy Plates - Dedicated to the loves-of-my-life..
--- Tidy Plates - Dedicated to the loves-of-my-life..
+-- Tidy Plates - SMILE! :-D
 --------------------------------------------------------------------------------------------------------------
 -- I. Variables and Functions
 --------------------------------------------------------------------------------------------------------------
@@ -373,7 +372,7 @@ do
 		end
 		
 		unit.health = bars.health:GetValue() or 0
-		_, unit.healthmax = bars.health:GetMinMaxValues()
+		unit.healthmax = select(2, bars.health:GetMinMaxValues())
 		
 		if InCombat then
 			unit.threatSituation, unit.threatValue = GetUnitAggroStatus(regions.threatglow) 
@@ -633,7 +632,7 @@ do
 		if not IsPlateShown(plate) then return end
 		UpdateReferences(plate)
 		unit.health = bars.health:GetValue() or 0
-		_, unit.healthmax = bars.health:GetMinMaxValues()
+		unit.healthmax = select(2,bars.health:GetMinMaxValues())
 		UpdateIndicator_HealthBar()
 		UpdateIndicator_CustomAlpha()
 		UpdateIndicator_CustomScaleText()
@@ -788,7 +787,7 @@ do
 		regions.threatglow, regions.healthborder, regions.highlight, regions.name, regions.level, 
 			regions.skullicon, regions.raidicon, regions.eliteicon = plate:GetRegions()
 		
-		_, regions.castborder, regions.castnostop, regions.spellicon = cast:GetRegions()
+		regions.castborder, regions.castnostop, regions.spellicon = select(2, cast:GetRegions())
 	end
 	
 	function ApplyPlateExtension(plate)
@@ -893,10 +892,8 @@ do
 	
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
-		return (string.find(frame:GetName() or "", "NamePlate")) ~= nil
-		
-		--local threat, border, highlight, name = frame:GetRegions()
-		--return border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
+		local threat, border, highlight, name = frame:GetRegions()
+		return ((string.find(frame:GetName() or "", "NamePlate")) ~= nil) and border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates

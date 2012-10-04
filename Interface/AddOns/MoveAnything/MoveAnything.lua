@@ -80,7 +80,7 @@ local MovAny = {
 		MessageFrame = "MessageFrame",
 		PlayerModel = "PlayerModel",
 		ColorSelect = "ColorSelect",
-		EditBox = "EbitBox",
+		EditBox = "EditBox",
 		ScrollingMessageFrame = "ScrollingMessageFrame",
 		Slider = "Slider",
 		Minimap = "Minimap",
@@ -180,7 +180,7 @@ local MovAny = {
 		ContainerFrame10 = "BankBagFrame5",
 		ContainerFrame11 = "BankBagFrame6",
 		ContainerFrame12 = "BankBagFrame7",
-	--	ContainerFrame13 = "KeyRingFrame",
+		ContainerFrame13 = "KeyRingFrame",
 	},
 	lFrameNameRewrites = {
 		CompactRaidFrameContainer = "RaidUnitFramesMover",
@@ -442,21 +442,24 @@ local MovAny = {
 	end,]]
 	
 	hAddFrameLock = function()
-		if API:GetElement("MultiBarBottomLeft").f == nil  then
+	--	if API:GetElement("MultiBarBottomLeft").f == nil  then
 			MultiBarBottomLeft:Hide()
-		end
-		if API:GetElement("MultiBarBottomRight").f == nil then
+	--	end
+	--	if API:GetElement("MultiBarBottomRight").f == nil then
 			MultiBarBottomRight:Hide()
-		end
+	--	end
 	end,
 	
 	hRemoveFrameLock = function()
-		if API:GetElement("MultiBarBottomLeft").f == nil then
+	--	if API:GetElement("MultiBarBottomLeft").f == nil then
 			MultiBarBottomLeft:Show()
-		end
-		if API:GetElement("MultiBarBottomRight").f == nil then
+		--	for k, v in pairs(MultiBarBottomLeft) do
+		--		print(k,v)
+		--	end
+	--	end
+	--	if API:GetElement("MultiBarBottomRight").f == nil then
 			MultiBarBottomRight:Show()
-		end
+	--	end
 	end,
 	
 --[[	hUpdateMicroButtonsParent = function(self, ...)

@@ -120,6 +120,7 @@ local options = {
 	-- Classify
 	{
 		[0] = "Classify",
+		{ type = "Text", var = "classification_minus", label = "Minus" },
 		{ type = "Text", var = "classification_trivial", label = "Trivial" },
 		{ type = "Text", var = "classification_normal", label = "Normal" },
 		{ type = "Text", var = "classification_elite", label = "Elite" },

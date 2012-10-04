@@ -84,8 +84,8 @@ local function ConvertDebuffListTable(source, target, order)
 	for index = 1, #temp do
 		local str = temp[index]
 		local item
-		local _, prefix, suffix
-		_, _, prefix, suffix = string.find( str, "(%w+)[%s%p]*(.*)");
+		local prefix, suffix
+		prefix, suffix = select(3, string.find( str, "(%w+)[%s%p]*(.*)"))
 		--print(prefix, index, suffix)
 		if prefix then
 			if PrefixList[prefix] then

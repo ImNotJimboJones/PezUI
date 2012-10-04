@@ -109,7 +109,7 @@ end
 
 
 function UnitCacheMonitorEvents.PLAYER_ENTERING_WORLD()
-	local _, itype = GetInstanceInfo()
+	local itype = select(2, GetInstanceInfo())
 	if itype and itype ~= "none" then inInstance = true else inInstance = false end		
 end
 
@@ -118,7 +118,7 @@ function UnitCacheMonitorEvents.UPDATE_MOUSEOVER_UNIT(self, ...)
 	if inInstance then return end
 	
 	-- Vars
-	local name, class, level, realm, description, _, unitadded
+	local name, class, realm, description, unitadded
 	
 	-- Player
 	------------------------------------
@@ -129,7 +129,7 @@ function UnitCacheMonitorEvents.UPDATE_MOUSEOVER_UNIT(self, ...)
 		
 		name = UnitName("mouseover")
 		description = GetGuildInfo("mouseover")
-		_, class = UnitClass("mouseover")
+		class = select(2, UnitClass("mouseover"))
 		
 		-- Check for alterations
 		if TidyPlatesWidgetData.UnitGuild[name] ~= description or TidyPlatesWidgetData.UnitClass[name] ~= class then 
@@ -155,10 +155,8 @@ function UnitCacheMonitorEvents.UPDATE_MOUSEOVER_UNIT(self, ...)
 		if ReputationStringList[description] then description = descriptionAlt end
 		
 		if description then
-			_, level = strsplit( " ", description )
-			if tonumber(level) or level == "??" then
-				description = nil
-			end
+			local level = select(2, strsplit( " ", description ))
+			if tonumber(level) or level == "??" then description = nil end		-- If the description is a level, don't store it
 		end
 		
 		if TidyPlatesWidgetData.UnitDescriptions[name] ~= description then 
@@ -217,6 +215,7 @@ end
 local function InstanceStatus()
 	return inInstance
 end
+
 local function CachedUnitDescription(name)
 	if inInstance then return nil else return TidyPlatesWidgetData.UnitDescriptions[name] end
 end

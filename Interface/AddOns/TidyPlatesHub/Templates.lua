@@ -26,6 +26,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		local columnFrame = ...
 		local frame = PanelHelpers:CreateSliderFrame(name, columnFrame, L(label), .5, 0, 1, .1)	
 		frame:SetWidth(250)	
+		--frame.Label:SetFont("FONTS/ARIALN.TTF", 14)
 		-- Margins	-- Bottom/Left are negative
 		frame.Margins = { Left = 12, Right = 8, Top = 20, Bottom = 13,}		
 		QuickSetPoints(frame, ...)
@@ -41,6 +42,7 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 	local function CreateQuickCheckbutton(name, label, ...)
 		local columnFrame = ...
 		local frame = PanelHelpers:CreateCheckButton(name, columnFrame, L(label))
+		--frame.Label:SetFont("FONTS/ARIALN.TTF", 14)
 		-- Margins	-- Bottom/Left are supposed to be negative
 		frame.Margins = { Left = 2, Right = 100, Top = 0, Bottom = 0,}
 		QuickSetPoints(frame, ...)	
