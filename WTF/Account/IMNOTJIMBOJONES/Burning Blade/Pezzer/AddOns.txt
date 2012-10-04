@@ -83,7 +83,7 @@ MogIt_Plate: enabled
 MogIt_Ranged: enabled
 MogIt_Sets: enabled
 MogIt_TwoHanded: enabled
-MoncaiQuestTracker: disabled
+MoncaiQuestTracker: enabled
 MoveAnything: enabled
 MSBTOptions: enabled
 Omen: enabled
