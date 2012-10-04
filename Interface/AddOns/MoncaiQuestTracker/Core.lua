@@ -2,7 +2,7 @@
 -- Moncaí's Quest Tracker
 -- Author: Moncaí
 -- Copyright (C) 2006-2010 moncai AT mgtx DOT net, all rights reserved.
--- Date: $Date: 2011-11-29 12:09:29 +0000 (Tue, 29 Nov 2011) $, $Rev: 50 $
+-- Date: $Date: 2012-09-04 10:05:34 +0000 (Tue, 04 Sep 2012) $, $Rev: 54 $
 --------------------------------------------------------------------------------------------------------
 local MQT = LibStub("AceAddon-3.0"):NewAddon("MoncaiQuestTracker", "AceConsole-3.0");
 _G["MQT"] = MQT;
@@ -292,7 +292,7 @@ MQT.BuddyList = BuddyList
 -- }
 
 function MQT.Sense(destination)
-	return (destination == "PARTY" and GetRealNumPartyMembers() > 0) or (destination == "RAID" and GetRealNumRaidMembers() > 0)
+	return (GetNumSubgroupMembers() > 0)
 end
 
 function MQT.SafeAddonMessage(mtype, prefix, message, destination)
@@ -348,7 +348,7 @@ function MQT.Update(self, elapsed)
 		--Print("Comm channel open...");
 		tick = 0;
 		speedup = false;
-		if (GetNumPartyMembers() > 0 or MQT.db.profile.debug) then -- 0 DEBUG!!
+		if (GetNumSubgroupMembers() > 0 or MQT.db.profile.debug) then -- 0 DEBUG!!
 			MQT.Communicate();
 		end
 	end
@@ -436,7 +436,7 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 		
 	elseif ( event == "PLAYER_ENTERING_WORLD" ) then
 		BuddyList:buddyCheck()
-		if GetNumPartyMembers() > 1 then
+		if GetNumSubgroupMembers() > 1 then
 			if MQT.db.profile.verbosebuddy then Print(L["Let's Party!"]) end
 			MQT.Notify()
 		end
@@ -834,8 +834,8 @@ function fun.RemoveQuestWatch(questIndex)
 	MQT.hooks.global.originals["RemoveQuestWatch"](questIndex);
 	
 	local title, _, questID
-	title, _, _, _, _, _, _, _, questID, _ = GetQuestLogTitle(questIndex);
-	--local title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID, displayQuestID = GetQuestLogTitle(questIndex)
+	title, _, _, _, _, _, _, _, questID, _, _ = GetQuestLogTitle(questIndex);
+	--local title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID, displayQuestID, startEvent = GetQuestLogTitle(questIndex)
 	--Print(string.format("Really removing %d:%d:%s now", questIndex or -1, questID or -1, title or "nil"));
 
 	if not questID then return; end

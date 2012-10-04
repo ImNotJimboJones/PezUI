@@ -1,0 +1,15 @@
+------------------------------------------------------------------------
+r55 | moncai | 2012-09-04 10:15:12 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   A /tags/v5.4.0-beta (from /trunk:54)
+
+Tagging as 5.4.0-beta
+------------------------------------------------------------------------
+r54 | moncai | 2012-09-04 10:05:34 +0000 (Tue, 04 Sep 2012) | 1 line
+Changed paths:
+   M /trunk/Core.lua
+   M /trunk/MoncaiQuestTracker.toc
+   M /trunk/QuestLogFrame.lua
+
+* Fix GetNumSubgroupMembers() replaces old party functions
+------------------------------------------------------------------------

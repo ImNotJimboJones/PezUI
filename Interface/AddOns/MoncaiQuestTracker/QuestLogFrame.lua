@@ -172,7 +172,7 @@ function fun.QuestLog_Update()
 	end
 
 	-- update the group timer
-	local haveGroup = GetNumPartyMembers() > 0 or GetNumRaidMembers() > 1;
+	local haveGroup = GetNumSubgroupMembers() > 0 ; --or GetNumRaidMembers() > 1;
 	if ( haveGroup ) then
 		QuestLogFrame.groupUpdateTimer = 0;
 	else
@@ -189,7 +189,7 @@ function fun.QuestLog_Update()
 	local buttonHeight = buttons[1]:GetHeight();
 	local displayedHeight = 0;
 
-	local numPartyMembers = GetNumPartyMembers();
+	local numPartyMembers = GetNumSubgroupMembers();
 	local questIndex, questLogTitle, questTitleTag, questNumGroupMates, questNormalText, questCheck;
 	local title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID, displayQuestID;
 	local color;
