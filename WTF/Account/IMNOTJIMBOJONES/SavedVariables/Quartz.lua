@@ -6,18 +6,18 @@ Quartz3DB = {
 				["Default"] = {
 					["swingposition"] = "free",
 					["y"] = 287,
-					["durationtext"] = false,
-					["remainingtext"] = false,
 					["x"] = 688,
+					["remainingtext"] = false,
+					["durationtext"] = false,
 					["swingheight"] = 2,
 				},
 				["HUNTER"] = {
 					["y"] = 305,
 					["x"] = 645,
 					["remainingtext"] = false,
-					["swingposition"] = "free",
-					["durationtext"] = false,
 					["swingheight"] = 2,
+					["durationtext"] = false,
+					["swingposition"] = "free",
 				},
 			},
 		},
@@ -66,8 +66,6 @@ Quartz3DB = {
 				},
 			},
 		},
-		["EnemyCasts"] = {
-		},
 		["Player"] = {
 			["profiles"] = {
 				["Default"] = {
@@ -75,8 +73,8 @@ Quartz3DB = {
 					["w"] = 280,
 					["y"] = 490,
 					["x"] = 815,
-					["hidetimetext"] = true,
 					["texture"] = "Steel",
+					["hidetimetext"] = true,
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -87,6 +85,8 @@ Quartz3DB = {
 					["hidetimetext"] = true,
 				},
 			},
+		},
+		["EnemyCasts"] = {
 		},
 		["GCD"] = {
 			["profiles"] = {
@@ -114,18 +114,18 @@ Quartz3DB = {
 				["Default"] = {
 					["h"] = 15,
 					["w"] = 250,
-					["y"] = 431,
+					["y"] = 440,
 					["x"] = 430,
-					["texture"] = "Runes",
 					["hidetimetext"] = true,
+					["texture"] = "Runes",
 				},
 				["HUNTER"] = {
 					["y"] = 314,
 					["x"] = 413,
-					["hidetimetext"] = true,
+					["iconposition"] = "right",
 					["hideicon"] = true,
 					["w"] = 180,
-					["iconposition"] = "right",
+					["hidetimetext"] = true,
 				},
 			},
 		},
@@ -134,11 +134,11 @@ Quartz3DB = {
 				["Default"] = {
 					["h"] = 15,
 					["w"] = 250,
-					["y"] = 431,
+					["y"] = 440,
 					["iconposition"] = "left",
-					["texture"] = "Runes",
-					["x"] = 1230,
 					["hidetimetext"] = true,
+					["x"] = 1230,
+					["texture"] = "Runes",
 				},
 				["HUNTER"] = {
 					["hideicon"] = true,
@@ -148,8 +148,6 @@ Quartz3DB = {
 					["hidetimetext"] = true,
 				},
 			},
-		},
-		["Range"] = {
 		},
 		["Mirror"] = {
 			["profiles"] = {
@@ -171,6 +169,8 @@ Quartz3DB = {
 					["mirrorposition"] = "top",
 				},
 			},
+		},
+		["Range"] = {
 		},
 		["Latency"] = {
 			["profiles"] = {
@@ -237,14 +237,14 @@ Quartz3DB = {
 				["Swing"] = false,
 				["Buff"] = false,
 			},
+			["borderalpha"] = 0.5,
+			["backgroundalpha"] = 0.75,
 			["failcolor"] = {
 				nil, -- [1]
 				nil, -- [2]
 				nil, -- [3]
 				1, -- [4]
 			},
-			["backgroundalpha"] = 0.75,
-			["borderalpha"] = 0.5,
 		},
 	},
 }
