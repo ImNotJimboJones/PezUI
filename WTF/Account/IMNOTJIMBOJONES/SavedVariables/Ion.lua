@@ -26,7 +26,7 @@ IonGDB = {
 			["countColor"] = "1;1;1;1",
 			["autoHide"] = false,
 			["buffcolor"] = "0;0.8;0;1",
-			["alpha"] = 1,
+			["alphaUp"] = "Off",
 			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1",
@@ -35,7 +35,7 @@ IonGDB = {
 			["auracolor2"] = "1;0.1;0.1;1",
 			["snapToFrame"] = false,
 			["arcStart"] = 0,
-			["alphaUp"] = "Off",
+			["alpha"] = 1,
 		}, -- [1]
 	},
 	["buttons"] = {
@@ -4646,7 +4646,18 @@ IonGDB = {
 			},
 		}, -- [94]
 	},
+	["buttonLoc"] = {
+		-0.85, -- [1]
+		-111.45, -- [2]
+	},
+	["vehicle"] = false,
 	["xbarFirstRun"] = false,
+	["timerLimit"] = 4,
+	["snapToTol"] = 28,
+	["throttle"] = 0.2,
+	["mainbar"] = false,
+	["betaWarning"] = false,
+	["buttonRadius"] = 87.5,
 	["xbtns"] = {
 		{
 			["keys"] = {
@@ -4660,13 +4671,6 @@ IonGDB = {
 			},
 		}, -- [1]
 	},
-	["vehicle"] = false,
-	["throttle"] = 0.2,
-	["snapToTol"] = 28,
-	["timerLimit"] = 4,
-	["mainbar"] = false,
-	["betaWarning"] = false,
-	["buttonRadius"] = 87.5,
 	["bars"] = {
 		{
 			["arcLength"] = 359,
@@ -4691,9 +4695,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.45,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Combat+Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.45,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "1;2;3;4;5;6;7;8;9;10;11;12",
@@ -4727,9 +4731,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = false,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.3,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.3,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "13;14;15;16;17;18;19;20;21;22;23;24;49",
@@ -4765,7 +4769,7 @@ IonGDB = {
 			["countColor"] = "1;1;1;1",
 			["autoHide"] = false,
 			["buffcolor"] = "0;0.8;0;1",
-			["alpha"] = 0.45,
+			["alphaUp"] = "Combat+Mouseover",
 			["cdcolor1"] = "1;0.82;0;1",
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "50;51;52;53;54;55;56;57;58;71",
@@ -4774,7 +4778,7 @@ IonGDB = {
 			["auracolor2"] = "1;0.1;0.1;1",
 			["snapToFrame"] = false,
 			["arcStart"] = 0,
-			["alphaUp"] = "Combat+Mouseover",
+			["alpha"] = 0.45,
 		}, -- [3]
 		{
 			["arcLength"] = 359,
@@ -4799,9 +4803,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alpha"] = 0.45,
-			["buffcolor"] = "0;0.8;0;1",
 			["alphaUp"] = "Combat+Mouseover",
+			["buffcolor"] = "0;0.8;0;1",
+			["alpha"] = 0.45,
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "59;60;61;62;63;64;65;66;67;68;69;70",
@@ -4836,9 +4840,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alphaUp"] = "Combat+Mouseover",
-			["buffcolor"] = "0;0.8;0;1",
 			["alpha"] = 0.45,
+			["buffcolor"] = "0;0.8;0;1",
+			["alphaUp"] = "Combat+Mouseover",
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "25;26;27;28;29;30;31;32;33;34;35;36",
@@ -4872,9 +4876,9 @@ IonGDB = {
 			["fadeSpeed"] = 0.5,
 			["columns"] = 3,
 			["countColor"] = "1;1;1;1",
-			["alphaUp"] = "Combat+Mouseover",
-			["buffcolor"] = "0;0.8;0;1",
 			["alpha"] = 0.45,
+			["buffcolor"] = "0;0.8;0;1",
+			["alphaUp"] = "Combat+Mouseover",
 			["arcStart"] = 0,
 			["rangecolor"] = "0.7;0.15;0.15;1",
 			["objectList"] = "37;38;39;40;41;42;43;44;45;46;47;48",
@@ -4886,15 +4890,13 @@ IonGDB = {
 			["autoHide"] = false,
 		}, -- [7]
 	},
-	["buttonLoc"] = {
-		-0.85, -- [1]
-		-111.45, -- [2]
-	},
 	["firstRun"] = false,
 }
 IonItemCache = {
-	["Heavy Windwool Bandage"] = "72986",
 	["|cff0070dd|Hitem:77530:0:4903:4901:4904:0:0:1113305984:89:0:0|h[Ghost Iron Dragonling]|h|r"] = "77530",
+	["Hearthstone"] = "6948",
+	["|cff0070dd|Hitem:81265:0:0:0:0:0:0:945467456:90:0:0|h[Flashing Steel Talisman]|h|r"] = "81265",
+	["Heavy Windwool Bandage"] = "72986",
 	["Windwool Bandage"] = "72985",
 	["|cff1eff00|Hitem:88583:0:0:0:0:0:0:1200754304:89:0:0|h[Ban's Bag of Bombs]|h|r"] = "88583",
 }
