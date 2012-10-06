@@ -34,16 +34,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
-			["auraInd"] = false,
-			["barLockCtrl"] = false,
-			["bindText"] = true,
-			["possess"] = false,
+			["ctrl"] = false,
+			["stealth"] = false,
+			["spellGlowAlt"] = false,
+			["custom"] = false,
 			["remap"] = false,
 			["reaction"] = false,
-			["custom"] = false,
-			["spellGlowAlt"] = false,
-			["stealth"] = false,
-			["ctrl"] = false,
+			["possess"] = false,
+			["bindText"] = true,
+			["barLockCtrl"] = false,
+			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [1]
 	},
@@ -60,8 +60,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Serpent Sting()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -73,15 +73,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [1]
 		{
@@ -94,8 +94,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Arcane Shot()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -107,15 +107,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [2]
 		{
@@ -128,8 +128,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Cobra Shot()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -141,15 +141,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [3]
 		{
@@ -162,8 +162,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Widow Venom()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -175,15 +175,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [4]
 		{
@@ -196,8 +196,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Deterrence()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -209,15 +209,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [5]
 		{
@@ -230,8 +230,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Multi-Shot()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -243,15 +243,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [6]
 		{
@@ -264,8 +264,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -277,15 +277,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [7]
 		{
@@ -298,8 +298,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Master's Call()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -311,15 +311,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [8]
 		{
@@ -332,8 +332,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -345,15 +345,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [9]
 		{
@@ -366,8 +366,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Tranquilizing Shot()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -379,15 +379,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [10]
 		{
@@ -400,8 +400,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Scare Beast()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -413,15 +413,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [11]
 		{
@@ -434,8 +434,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Disengage()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 				["vehicle1"] = {
 					["macro_Auto"] = false,
@@ -445,8 +445,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -458,15 +458,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [12]
 		{
@@ -479,8 +479,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/use Hearthstone",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -492,15 +492,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [13]
 		{
@@ -513,8 +513,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Mass Resurrection(Guild Perk)",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -526,15 +526,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [14]
 		{
@@ -547,8 +547,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Mobile Banking(Guild Perk)",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -560,15 +560,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [15]
 		{
@@ -581,8 +581,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -594,15 +594,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [16]
 		{
@@ -615,8 +615,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -628,15 +628,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [17]
 		{
@@ -649,8 +649,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Eagle Eye()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -662,15 +662,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [18]
 		{
@@ -683,8 +683,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Beast Lore()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -696,15 +696,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [19]
 		{
@@ -717,8 +717,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Tame Beast()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -730,15 +730,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [20]
 		{
@@ -751,8 +751,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -764,15 +764,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [21]
 		{
@@ -785,8 +785,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -798,15 +798,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [22]
 		{
@@ -819,8 +819,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Dismiss Pet()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -832,15 +832,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [23]
 		{
@@ -853,8 +853,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Revive Pet()",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [1]
 			{
@@ -866,15 +866,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
+					["macro_UseNote"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 		}, -- [24]
 		{
@@ -887,8 +887,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Scatter Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -900,15 +900,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [25]
 		{
@@ -921,8 +921,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Concussive Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -934,15 +934,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [26]
 		{
@@ -955,8 +955,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Binding Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -968,15 +968,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [27]
 		{
@@ -989,8 +989,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#show Freezing Trap\n/cast !Trap Launcher\n/cast Freezing Trap",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1002,15 +1002,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [28]
 		{
@@ -1023,8 +1023,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#show Ice Trap\n/cast !Trap Launcher\n/cast Ice Trap",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1036,15 +1036,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [29]
 		{
@@ -1057,8 +1057,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#show Explosive Trap\n/cast !Trap Launcher\n/cast Explosive Trap",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1070,15 +1070,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [30]
 		{
@@ -1091,8 +1091,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Flare()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1104,15 +1104,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [31]
 		{
@@ -1125,8 +1125,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#show Snake Trap\n/cast !Trap Launcher\n/cast Snake Trap",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1138,15 +1138,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [32]
 		{
@@ -1159,8 +1159,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1172,15 +1172,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [33]
 		{
@@ -1193,8 +1193,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast [nopet] Call Pet 1; [pet, dead] Revive Pet; Mend Pet;",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1206,15 +1206,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [34]
 		{
@@ -1227,8 +1227,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Distracting Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1240,15 +1240,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [35]
 		{
@@ -1261,8 +1261,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Kill Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1274,15 +1274,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [36]
 		{
@@ -1295,8 +1295,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Explosive Shot()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1308,15 +1308,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [37]
 		{
@@ -1329,8 +1329,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Black Arrow()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1342,15 +1342,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [38]
 		{
@@ -1363,8 +1363,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Dire Beast()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1376,29 +1376,29 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [39]
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = "Rapid Fire;",
+					["macro_Auto"] = "A Murder of Crows;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "#autowrite\n/cast Rapid Fire()",
+					["macro_Text"] = "#autowrite\n/cast A Murder of Crows()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1410,15 +1410,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [40]
 		{
@@ -1431,8 +1431,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Stampede()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1444,15 +1444,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [41]
 		{
@@ -1465,8 +1465,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Glaive Toss()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1478,29 +1478,29 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [42]
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = "A Murder of Crows;",
+					["macro_Auto"] = false,
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "#autowrite\n/cast A Murder of Crows()",
+					["macro_Text"] = "/use 13",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1512,29 +1512,29 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [43]
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Rapid Fire;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = "INTERFACE\\ICONS\\SPELL_FROST_FROSTWARD",
-					["macro_Text"] = "/click ExtraActionButton1",
+					["macro_Icon"] = false,
+					["macro_Text"] = "#autowrite\n/cast Rapid Fire()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1546,15 +1546,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [44]
 		{
@@ -1565,10 +1565,10 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use 14",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1580,15 +1580,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [45]
 		{
@@ -1601,8 +1601,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast [@focus, exists, help, nodead] [@pet] Misdirection()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1614,15 +1614,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [46]
 		{
@@ -1635,8 +1635,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Readiness()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1648,29 +1648,29 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [47]
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Misdirection;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "/use 13\n/use 14",
+					["macro_Text"] = "#autowrite\n/cast Misdirection()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1682,15 +1682,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [48]
 		{
@@ -1703,8 +1703,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#showtooltip Call Pet 3()\n/cast [nobtn:2] Call Pet 3()\n/stopmacro [nobtn:2]\n/flyout blizz:9:l:b:t:1:c",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1716,15 +1716,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [49]
 		{
@@ -1737,8 +1737,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1750,15 +1750,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [50]
 		{
@@ -1771,8 +1771,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1784,15 +1784,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [51]
 		{
@@ -1805,8 +1805,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1818,15 +1818,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [52]
 		{
@@ -1839,8 +1839,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1852,15 +1852,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [53]
 		{
@@ -1873,8 +1873,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/use Heavy Windwool Bandage",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1886,15 +1886,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [54]
 		{
@@ -1907,8 +1907,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1920,15 +1920,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [55]
 		{
@@ -1941,8 +1941,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1954,15 +1954,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [56]
 		{
@@ -1975,8 +1975,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -1988,15 +1988,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [57]
 		{
@@ -2009,8 +2009,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2022,15 +2022,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [58]
 		{
@@ -2043,8 +2043,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast !Aspect of the Hawk",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2056,15 +2056,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [59]
 		{
@@ -2077,8 +2077,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast !Aspect of the Fox()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2090,15 +2090,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [60]
 		{
@@ -2111,8 +2111,8 @@ IonCDB = {
 					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_MOUNT_MAMMOTH_WHITE",
 					["macro_Text"] = "/click GoGoButton",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2124,15 +2124,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [61]
 		{
@@ -2145,8 +2145,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast !Aspect of the Cheetah()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2158,15 +2158,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [62]
 		{
@@ -2179,8 +2179,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "/cast !Aspect of the Pack()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2192,15 +2192,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [63]
 		{
@@ -2213,8 +2213,8 @@ IonCDB = {
 					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_SPY",
 					["macro_Text"] = "/run ToggleFrame(WorldMapFrame)",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2226,15 +2226,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [64]
 		{
@@ -2247,8 +2247,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2260,15 +2260,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [65]
 		{
@@ -2278,11 +2278,11 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\SPELL_FROST_FROSTWARD",
+					["macro_Text"] = "/click ExtraActionButton1",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2294,15 +2294,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [66]
 		{
@@ -2315,8 +2315,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Survey()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2328,15 +2328,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [67]
 		{
@@ -2349,8 +2349,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Feign Death()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2362,15 +2362,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [68]
 		{
@@ -2383,8 +2383,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Camouflage()",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2396,15 +2396,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [69]
 		{
@@ -2417,8 +2417,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "#autowrite\n/cast Rocket Jump(Racial)",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2430,15 +2430,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [70]
 		{
@@ -2451,8 +2451,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2464,15 +2464,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [71]
 		{
@@ -2485,8 +2485,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2498,15 +2498,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [72]
 		{
@@ -2519,8 +2519,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2532,15 +2532,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [73]
 		{
@@ -2553,8 +2553,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2566,15 +2566,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [74]
 		{
@@ -2587,8 +2587,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2600,15 +2600,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [75]
 		{
@@ -2621,8 +2621,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2634,15 +2634,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [76]
 		{
@@ -2655,8 +2655,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2668,15 +2668,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [77]
 		{
@@ -2689,8 +2689,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2702,15 +2702,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [78]
 		{
@@ -2723,8 +2723,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2736,15 +2736,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [79]
 		{
@@ -2757,8 +2757,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2770,15 +2770,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [80]
 		{
@@ -2791,8 +2791,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2804,15 +2804,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [81]
 		{
@@ -2825,8 +2825,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2838,15 +2838,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [82]
 		{
@@ -2859,8 +2859,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2872,15 +2872,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [83]
 		{
@@ -2893,8 +2893,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2906,15 +2906,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [84]
 		{
@@ -2927,8 +2927,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2940,15 +2940,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [85]
 		{
@@ -2961,8 +2961,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -2974,15 +2974,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [86]
 		{
@@ -2995,8 +2995,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3008,15 +3008,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [87]
 		{
@@ -3029,8 +3029,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3042,15 +3042,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [88]
 		{
@@ -3063,8 +3063,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3076,15 +3076,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [89]
 		{
@@ -3097,8 +3097,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3110,15 +3110,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [90]
 		{
@@ -3131,8 +3131,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3144,15 +3144,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [91]
 		{
@@ -3165,8 +3165,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3178,15 +3178,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [92]
 		{
@@ -3199,8 +3199,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3212,15 +3212,15 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [93]
 		{
@@ -3233,8 +3233,8 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [1]
 			{
@@ -3246,21 +3246,22 @@ IonCDB = {
 					["macro_Icon"] = false,
 					["macro_Text"] = "",
 					["macro_Note"] = "",
-					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
+					["macro_Watch"] = false,
 				},
 			}, -- [2]
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = false,
+				["hotKeys"] = ":",
 			},
 		}, -- [94]
 	},
 	["layOut"] = 1,
 	["focusCast"] = false,
 	["selfCast"] = false,
+	["fix07312012"] = true,
 	["bars"] = {
 		{
 			["prowl"] = false,
@@ -3295,16 +3296,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = false,
+			["possess"] = true,
 			["spellGlowAlt"] = false,
+			["reaction"] = false,
+			["custom"] = false,
+			["ctrl"] = false,
 			["stealth"] = false,
 			["remap"] = false,
-			["reaction"] = false,
-			["ctrl"] = false,
-			["custom"] = false,
-			["possess"] = true,
-			["bindText"] = false,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [1]
 		{
@@ -3340,16 +3341,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = true,
+			["possess"] = false,
 			["spellGlowAlt"] = false,
+			["reaction"] = false,
+			["custom"] = false,
+			["ctrl"] = false,
 			["stealth"] = false,
 			["remap"] = false,
-			["reaction"] = false,
-			["ctrl"] = false,
-			["custom"] = false,
-			["possess"] = false,
-			["bindText"] = true,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [2]
 		{
@@ -3385,16 +3386,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
-			["auraInd"] = false,
-			["barLockCtrl"] = false,
-			["bindText"] = true,
-			["possess"] = false,
+			["ctrl"] = false,
+			["stealth"] = false,
+			["spellGlowAlt"] = false,
+			["custom"] = false,
 			["remap"] = false,
 			["reaction"] = false,
-			["custom"] = false,
-			["spellGlowAlt"] = false,
-			["stealth"] = false,
-			["ctrl"] = false,
+			["possess"] = false,
+			["bindText"] = true,
+			["barLockCtrl"] = false,
+			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [3]
 		{
@@ -3430,16 +3431,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = false,
+			["possess"] = false,
 			["spellGlowAlt"] = false,
+			["reaction"] = false,
+			["custom"] = false,
+			["ctrl"] = false,
 			["stealth"] = false,
 			["remap"] = false,
-			["reaction"] = false,
-			["ctrl"] = false,
-			["custom"] = false,
-			["possess"] = false,
-			["bindText"] = false,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [4]
 		nil, -- [5]
@@ -3476,16 +3477,16 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = false,
+			["possess"] = true,
 			["remap"] = false,
+			["custom"] = false,
+			["reaction"] = false,
+			["spellGlowAlt"] = false,
 			["stealth"] = false,
 			["ctrl"] = false,
-			["custom"] = false,
-			["spellGlowAlt"] = false,
-			["reaction"] = false,
-			["possess"] = true,
-			["bindText"] = false,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [6]
 		{
@@ -3521,27 +3522,26 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = false,
+			["possess"] = true,
 			["remap"] = false,
+			["custom"] = false,
+			["reaction"] = false,
+			["spellGlowAlt"] = false,
 			["stealth"] = false,
 			["ctrl"] = false,
-			["custom"] = false,
-			["spellGlowAlt"] = false,
-			["reaction"] = false,
-			["possess"] = true,
-			["bindText"] = false,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [7]
 	},
-	["fix07312012"] = true,
 	["xbtns"] = {
 		{
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeys"] = ":",
 				["hotKeyPri"] = true,
+				["hotKeys"] = ":",
 			},
 			["data"] = {
 			},
