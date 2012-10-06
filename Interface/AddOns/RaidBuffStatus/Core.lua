@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 551 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -320,7 +320,7 @@ report.reset = function()
 		if type(report[reportname]) == "number" then
 			report[reportname] = 0
 		elseif type(report[reportname]) == "table" then
-			report[reportname] = {}
+			wipe(report[reportname])
 		end
 	end
 end

@@ -1,11 +1,18 @@
 ------------------------------------------------------------------------
-r550 | oscarucb | 2012-09-25 05:48:27 +0000 (Tue, 25 Sep 2012) | 3 lines
+r552 | oscarucb | 2012-10-05 05:34:53 +0000 (Fri, 05 Oct 2012) | 1 line
 Changed paths:
-   A /tags/5.2.0 (from /trunk:549)
+   A /tags/5.2.1 (from /trunk:551)
 
-Tagging as 5.2.0
+Tagging as 5.2.1
+------------------------------------------------------------------------
+r551 | oscarucb | 2012-10-05 05:11:54 +0000 (Fri, 05 Oct 2012) | 3 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
 
-Activate MoP consumables as the default.
+fix check for Legacy of the White Tiger
+only available to windwalker monks
+
 ------------------------------------------------------------------------
 r549 | oscarucb | 2012-09-22 20:37:29 +0000 (Sat, 22 Sep 2012) | 2 lines
 Changed paths:

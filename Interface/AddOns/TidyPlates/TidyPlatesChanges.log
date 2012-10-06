@@ -1,5 +1,9 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.7.9
+---------------------------
+- Corrected another error in the spell cast watcher; "StopCastAnimationOnNameplate" is now properly referenced.  This only affects arena matches.  I don't do arenas, so this was never properly tested.  Let me know if more errors pop up.
+
 6.7.8
 ---------------------------
 - Corrected a typo in the spell cast watcher; "StartCastAnimation" is now properly, "StartCastAnimationOnNameplate".  Arena fans rejoice!

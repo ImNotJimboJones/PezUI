@@ -22,11 +22,7 @@ local MinimapOptions = {
 		["text"] = FBConstants.CONFIG_MINIMAPBUTTON_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_MINIMAPBUTTON_INFO,
 		["v"] = 1,
-		["default"] = 1,
-		["setup"] = function(button)
-						local info = icon:GetMinimapButton(FBConstants.NAME);
-						FishingBuddy.SetSetting("MinimapButtonVisible", info.hide and 1 or 0);
-					end,
+		["default"] = false,
 	},
 	["MinimapClickToSwitch"] = {
 		["text"] = FBConstants.CLICKTOSWITCH_ONOFF,
@@ -37,13 +33,31 @@ local MinimapOptions = {
 	},
 };
 
+local function setter(setting, value)
+	if (setting == "MinimapButtonVisible") then
+		FishingBuddy_Player["MinimapData"].hide = (value == 0);
+	else
+		FishingBuddy.BaseSetSetting(setting, value);
+	end
+end
+
+local function getter(setting)
+	if (setting == "MinimapButtonVisible") then
+		return (not FishingBuddy_Player["MinimapData"].hide) and 1 or 0;
+	else
+		return FishingBuddy.BaseGetSetting(setting);
+	end
+end
+
 local MinimapEvents = {};
 MinimapEvents[FBConstants.OPT_UPDATE_EVT] = function()
 	if (icon:IsRegistered(FBConstants.NAME)) then
 		if (GSB("MinimapButtonVisible")) then
 			icon:Show(FBConstants.NAME);
+			FishingBuddy_Player["MinimapData"].hide = false;
 		else
 			icon:Hide(FBConstants.NAME);
+			FishingBuddy_Player["MinimapData"].hide = true;
 		end
 	end
 end
@@ -51,8 +65,9 @@ end
 MinimapEvents["VARIABLES_LOADED"] = function()
 	local _, info;
 	
-	local hide = not GSB("MinimapButtonVisible");
-	FishingBuddy_Player["MinimapData"] = FishingBuddy_Player["MinimapData"] or { hide=hide };
+	if ( not FishingBuddy_Player["MinimapData"] ) then
+		FishingBuddy_Player["MinimapData"] = { hide=false };
+	end
 
 	if ( not icon:IsRegistered(FBConstants.NAME) ) then
 		local data = {
@@ -64,5 +79,5 @@ MinimapEvents["VARIABLES_LOADED"] = function()
 	end
 end
 
-FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, MinimapOptions);
+FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, MinimapOptions, setter, getter);
 FishingBuddy.API.RegisterHandlers(MinimapEvents);

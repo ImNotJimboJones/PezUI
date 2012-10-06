@@ -33,6 +33,7 @@ end
 local CombatCastEventWatcher
 local CombatLogEventHandlers = {}
 local StartCastAnimationOnNameplate = TidyPlates.StartCastAnimationOnNameplate		-- If you don't define this as a local reference, the 'Tidy Plates' table will get passed to the function if you use ':' to call the function.
+local StopCastAnimationOnNameplate = TidyPlates.StopCastAnimationOnNameplate
 
 local function SearchNameplateByGUID(SearchFor)
 	local VisiblePlate, UnitGUID
@@ -192,14 +193,14 @@ end
 
 function GameEvents.UNIT_SPELLCAST_START(...)
 	local unitid = ...
-	if UnitIsFriend("player", unitid) then return end	
+	if UnitIsFriend("player", unitid)  then return end	
 	local plate = SearchNameplateByName(UnitName(unitid))
 	
 	if plate then
 		local spell, _, name, icon, start, finish, _, spellid, nonInt = UnitCastingInfo(unitid)
-		
+		--if testmode then print(UnitCastingInfo(unitid)) end
 		if spell then StartCastAnimationOnNameplate(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, false) 
-		else StopCastAnimation(plate) end
+		else StopCastAnimationOnNameplate(plate) end
 	end
 end
 
@@ -212,7 +213,7 @@ function GameEvents.UNIT_SPELLCAST_CHANNEL_START(...)
 		local spell, _, name, icon, start, finish, spellid, nonInt = UnitChannelInfo("target")	
 		
 		if spell then StartCastAnimationOnNameplate(plate, spell, spellid, icon, start/1000, finish/1000, nonInt, true) 
-		else StopCastAnimation(plate) end
+		else StopCastAnimationOnNameplate(plate) end
 	end
 end
 

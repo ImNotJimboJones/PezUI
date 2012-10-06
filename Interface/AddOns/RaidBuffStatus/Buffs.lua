@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 551 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -407,11 +407,15 @@ local function player_spell(buffinfo)
   return nil
 end
 
+-- generic buffinfo struct: 1=CLASSNAME, 2=spellid, [ 3=priority, [ 4=spec ] ]
+
 local function generic_buffers(buffinfo)
   local ret = {}
   for _,info in ipairs(getbuffinfo(buffinfo)) do
     for name,unit in pairs(raid.classes[info[1]]) do
-       table.insert(ret, name)
+       if (info[4] == nil) or (info[4] == unit.spec) then  -- spec-specific buff
+         table.insert(ret, name)
+       end
     end
   end
   return ret
@@ -445,7 +449,8 @@ local function generic_whispertobuff(reportl, prefix, buffinfo, buffers, buffnam
         return -- already whispered a higher priority class
     end
     for name,unit in pairs(raid.classes[info[1]]) do  -- foreach unit of that class
-        if RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead then
+        if RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead 
+	   and ((info[4] == nil) or (info[4] == unit.spec)) then
 	   buffname = buffname or BS[info[2]]
            RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, name)
            if RaidBuffStatus.db.profile.whisperonlyone then
@@ -2051,14 +2056,16 @@ local BF = {
 		selfbuff = false,
 		timer = false,
 		core = true,
-		buffinfo = { { "MAGE", 1459 }, { "MONK", 116781 } },
+		buffinfo = { { "MAGE", 1459 }, { "MONK", 116781, nil, 3 } }, -- monk buff is windwalker only
 		class = { MAGE = true, MONK = true },
 		chat = L["Crit Buff"], 
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.MAGE > 0 or 
-			   raid.ClassNumbers.MONK > 0 then
-				report.checking.critbuff = true
+			if report.checking.critbuff == nil then -- only scan once per report
+			  local buffers = generic_buffers("critbuff")
+			  report.checking.critbuff = ((next(buffers) and true) or false)
+			end
+			if report.checking.critbuff then
 				local missingbuff = true
 				for _, v in ipairs(critbuff) do
 					if unit.hasbuff[v] then

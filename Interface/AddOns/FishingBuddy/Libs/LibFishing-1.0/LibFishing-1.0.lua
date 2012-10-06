@@ -1249,7 +1249,7 @@ function FishLib:GetOutfitBonus()
 end
 
 -- return a list of the best items we have for a fishing outfit
-function FishLib:GetFishingOutfitItems(wearing)
+function FishLib:GetFishingOutfitItems(wearing, usepole)
 	local ibp = function(link) return self:FishingBonusPoints(link); end;
 	-- find fishing gear
 	-- no affinity, check all bags
@@ -1257,39 +1257,41 @@ function FishLib:GetFishingOutfitItems(wearing)
 	local itemtable = {};
 	for invslot=1,17,1 do
 		local slotid = slotinfo[invslot].id;
-		local slotname = slotinfo[invslot].name;
-		local maxb = nil;
-		local link;
-		-- should we include what we're already wearing?
-		if ( wearing ) then
-			link = GetInventoryItemLink("player", slotid);
-			if ( link ) then
-				maxb = self:FishingBonusPoints(link);
-				outfit = outfit or {};
-				if (maxb > 0) then
-					outfit[invslot] = { link=link, slot=slotid };
+		if ( not nopole or slotid ~= main ) then
+			local slotname = slotinfo[invslot].name;
+			local maxb = nil;
+			local link;
+			-- should we include what we're already wearing?
+			if ( wearing ) then
+				link = GetInventoryItemLink("player", slotid);
+				if ( link ) then
+					maxb = self:FishingBonusPoints(link);
+					outfit = outfit or {};
+					if (maxb > 0) then
+						outfit[invslot] = { link=link, slot=slotid };
+					end
 				end
 			end
-		end
-
-		-- this only gets items in bags, hence the check above for slots
-		wipe(itemtable);
-		itemtable = GetInventoryItemsForSlot(slotid, itemtable);
-
-		for location,id in pairs(itemtable) do
-			local player, bank, bags, slot, bag = EquipmentManager_UnpackLocation(location);
-			if ( bags ) then
-				link = GetContainerItemLink(bag, slot);
-			else
-				link = nil;
-			end
-			if ( link ) then
-				local b = self:FishingBonusPoints(link);
-				if (b > 0) then
-					if ( not maxb or b > maxb ) then
-						maxb = b;
-						outfit = outfit or {};
-						outfit[slotid] = { link=link, bag=bag, slot=slot, slotname=slotname };
+	
+			-- this only gets items in bags, hence the check above for slots
+			wipe(itemtable);
+			itemtable = GetInventoryItemsForSlot(slotid, itemtable);
+	
+			for location,id in pairs(itemtable) do
+				local player, bank, bags, slot, bag = EquipmentManager_UnpackLocation(location);
+				if ( bags ) then
+					link = GetContainerItemLink(bag, slot);
+				else
+					link = nil;
+				end
+				if ( link ) then
+					local b = self:FishingBonusPoints(link);
+					if (b > 0) then
+						if ( not maxb or b > maxb ) then
+							maxb = b;
+							outfit = outfit or {};
+							outfit[slotid] = { link=link, bag=bag, slot=slot, slotname=slotname };
+						end
 					end
 				end
 			end

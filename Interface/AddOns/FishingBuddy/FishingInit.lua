@@ -424,20 +424,8 @@ FishingInit.UpdateFishingDB = function()
 		end
 	end
 
-	-- Update the pet settings
-	if ( version < 10001 ) then
-		local pets = FishingBuddy_Player["FishingPetBuddies"];
-		if (pets) then
-			local newpets = {};
-			local n = GetNumCompanions("CRITTER");
-			for id=1,n do
-				local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
-				if ( pets[cSpellID] ) then
-					newpets[cSpellID] = 1;
-				end
-			end
-			FishingBuddy_Player["FishingPetBuddies"] = newpets;
-		end
+	if ( version < 10002 ) then
+		FishingBuddy_Player["MinimapButtonVisible"] = nil;
 	end
 	
 	if ( not FishingBuddy_Info["Locales"] or #FishingBuddy_Info["Locales"] == 0 ) then
@@ -583,10 +571,6 @@ FishingInit.RegisterMyAddOn = function()
 end
 
 FishingInit.RegisterFunctionTraps = function()
-	temp = ToggleMinimap;
-	if ( FishingInit.HookFunction("ToggleMinimap", "FishingBuddy_ToggleMinimap") ) then
-		FishingBuddy.SavedToggleMinimap = temp;
-	end
 	FishingBuddy.TrapWorldMouse();
 end
 

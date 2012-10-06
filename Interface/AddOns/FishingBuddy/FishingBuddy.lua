@@ -334,8 +334,6 @@ end
 FishingBuddy.ByFishie = nil;
 FishingBuddy.SortedFishies = nil;
 
-FishingBuddy.SavedToggleMinimap = nil;
-
 FishingBuddy.StartedFishing = nil;
 
 local CastingNow = false;

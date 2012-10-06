@@ -81,11 +81,17 @@ local function GetOurPets()
 			if (customName) then
 				name = customName;
 			end
-			tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=(chosenpets[creatureID] == 1) });
+			tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=false });
 			petmap[creatureID] = petID;
 		end
 	end
 	table.sort(ourpets, function(a, b) return a.name < b.name; end);
+end
+
+local function CheckedOurPets()
+	for index=1,#ourpets do
+		ourpets[index].checked = (chosenpets[ourpets[index].cID] == 1);
+	end
 end
 
 local function UpdateChosenPets()
@@ -107,25 +113,21 @@ local function UpdateChosenPets()
 		end
 		
 		for idx=1,#ourpets do
-			local petID = ourpets[idx].petID;
-			local name = ourpets[idx].name;
-			local creatureID = ourpets[idx].cID;
-			if ( FISHINGPETS[creatureID] ) then
+			local cid = ourpets[idx].cID;
+			if ( FISHINGPETS[cid] ) then
 				if ( settingpets == PET_FISHING ) then
-					AddChosenPet(creatureID, petID);
-					ourpets[idx].checked = true;
+					AddChosenPet(cid, petmap[cid]);
 				end
 			elseif (allpets) then
-				AddChosenPet(creatureID, petID);
-				ourpets[idx].checked = true;
+				AddChosenPet(cid, petmap[cid]);
 			end
 		end
 	elseif ( type(settingpets) == "table" ) then
 		for cid,_ in pairs(settingpets) do
 			AddChosenPet(cid, petmap[cid]);
 		end
-		GetOurPets();
 	end
+	CheckedOurPets();
 end
 
 local FluffEvents = {};
@@ -226,16 +228,15 @@ end
 
 function FishingPetsMenu_Update()
 	local buttons = FishingPetsMenu.buttons;
-	local menuchoices = FishingPetFrame.pets;
+	local petnames = FishingPetFrame.petnames;
 	local numButtons = #buttons;
 	local scrollOffset = HybridScrollFrame_GetOffset(FishingPetsMenu); 
 	local choice;
 	for i = 1, numButtons do
 		local idx = i + scrollOffset;
-		choice = menuchoices[idx];
+		choice = petnames[idx];
 		if ( choice ) then
 			buttons[i].text:SetText(choice.name);
-			buttons[i].petID = choice.petID;
 			buttons[i].meta = choice.meta;
 			buttons[i].cID = choice.cID;
 			if ( choice.checked ) then
@@ -265,16 +266,14 @@ local function UpdateMenuText(petsetting)
 end
 
 function FishingPets_UpdateMenu()
-	HybridScrollFrame_CreateButtons(FishingPetsMenu, "FishingPetButtonTemplate");
-
 	local buttons = FishingPetsMenu.buttons;
 	local fontstringText = buttons[1].text;
 	local fontstringWidth;			
 	local maxWidth = 0;
 	
 	local petsetting = GetSetting(PETSETTING);
-	if ( type(petsetting) ~= "table" ) then
-		petsetting = tonumber(petsetting);
+	if ( not petsetting or type(petsetting) ~= "table" ) then
+		petsetting = tonumber(petsetting) or PET_FISHING;
 	end
 	local petnames = {};
 	petnames[1] = { };
@@ -299,7 +298,6 @@ function FishingPets_UpdateMenu()
 		petnames[menuidx] = petnames[menuidx] or { };
 		petnames[menuidx].name = info.name;
 		petnames[menuidx].cID = info.cID;
-		petnames[menuidx].petID = info.petID;
 		petnames[menuidx].checked = info.checked;
 		fontstringText:SetText(info.name);
 		fontstringWidth = fontstringText:GetWidth();
@@ -308,7 +306,7 @@ function FishingPets_UpdateMenu()
 		end
 		menuidx = menuidx + 1;
 	end
-	FishingPetFrame.pets = petnames; 
+	FishingPetFrame.petnames = petnames; 
 	UpdateMenuText(petsetting);
 	maxWidth = maxWidth + 10;				
 	for i = 1, #buttons do
@@ -326,9 +324,9 @@ function FishingPetsButton_OnClick(self)
 	if ( self.meta ) then
 		FishingBuddy.SetSetting(PETSETTING, self.cID);	
 		UpdateChosenPets();
-		FishingPets_UpdateMenu();
+		FishingPetsMenu_Update();
 	else
-		local petnames = FishingPetFrame.pets;
+		local petnames = FishingPetFrame.petnames;
 		-- toggle
 		if (chosenpets[self.cID] == 1) then
 			chosenpets[self.cID] = 0;
@@ -338,23 +336,24 @@ function FishingPetsButton_OnClick(self)
 			petnames[self.idx].checked = true;
 		end
 		local newpets = {};
-		for cid,petid in pairs(chosenpets) do
-			if (petid and petid > 0) then
+		for cid,val in pairs(chosenpets) do
+			if (val and val > 0) then
 				newpets[cid] = 1;
 			end
 		end
 		local petsetting;
-		if ( #newpets ) then
-			if ( #newpets == #ourpets ) then
+		local newcount = FL:tablecount(newpets);
+		if ( newcount > 0 ) then
+			if ( newcount == #ourpets ) then
 				petsetting = PET_ALL;
 			else
 				local count = 0;
-				for _,cid in pairs(FISHINGPETS) do
+				for cid,_ in pairs(FISHINGPETS) do
 					if ( chosenpets[cid] and chosenpets[cid] == 1 ) then
 						count = count + 1;
 					end
 				end
-				if ( count == #newpets and count == NUM_FISHINGPETS ) then
+				if ( count == newcount and count == NUM_FISHINGPETS ) then
 					petsetting = PET_FISHING;
 				else
 					petsetting = newpets;
@@ -363,12 +362,12 @@ function FishingPetsButton_OnClick(self)
 		else
 			petsetting = PET_NONE;
 		end
-		FishingBuddy.SetSetting(PETSETTING, petsetting);
-		UpdateChosenPets();
-		UpdateMenuText(petsetting);
 		for idx=1,3 do
 			petnames[idx].checked = (petnames[idx].cID == petsetting);
 		end
+		FishingBuddy.SetSetting(PETSETTING, petsetting);
+		UpdateChosenPets();
+		UpdateMenuText(petsetting);
 		FishingPetsMenu_Update();
 	end
 end
@@ -446,8 +445,8 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetFrame:SetScript("OnHide", FishingPetFrame_OnHide);
 	FishingPetFrameButton:SetScript("OnClick", FishingPetsMenu_Toggle);
 	
-	GetOurPets();
 	UpdateChosenPets();
+	CheckedOurPets();
 	
 	local menuwidth = 0;
 	for _,text in pairs( { NONE, ALL, PET_FISHING, PET_PAPERDOLL } ) do
@@ -459,6 +458,7 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	
 	FishingPetsMenu:SetWidth(menuwidth + 8);
 	FishingPetsMenu:SetHeight(FLUFF_DISPLAYED_PETS * FLUFF_LINE_HEIGHT + 1);
+	HybridScrollFrame_CreateButtons(FishingPetsMenu, "FishingPetButtonTemplate");
 	FishingPets_UpdateMenu();
 
 	FishingPetFrameLabel:SetText(PET_TYPE_PET..": ");
@@ -474,10 +474,12 @@ end
 
 FluffEvents["PET_STABLE_UPDATE"] = function()
 	GetOurPets();
+	CheckedOurPets();
 end
 
 FluffEvents["SPELLS_CHANGED"] = function()
 	GetOurPets();
+	CheckedOurPets();
 end
 
 FishingBuddy.API.RegisterHandlers(FluffEvents);
@@ -487,7 +489,7 @@ if ( FishingBuddy.Debugging ) then
 	FishingBuddy.Commands["pets"].func =
 		function(what)
 			local Debug = FishingBuddy.Debug;
-			local pets = FishingPetFrame.pets;
+			local pets = FishingPetFrame.petnames;
 			local n = FL:tablecount(chosenpets);
 			Debug("chosenpets "..n.." "..#ourpets.." "..#pets);
 			for idx=1,#chosenlist do
@@ -495,4 +497,22 @@ if ( FishingBuddy.Debugging ) then
 			end
 			return true;
 		end
+end
+
+function fixthis()
+	-- Update the pet settings
+	if ( version < 10001 ) then
+		local pets = FishingBuddy_Player["FishingPetBuddies"];
+		if (pets) then
+			local newpets = {};
+			local n = GetNumCompanions("CRITTER");
+			for id=1,n do
+				local cID, cName, cSpellID, icon, here = GetCompanionInfo("CRITTER", id);
+				if ( pets[cSpellID] ) then
+					newpets[cID] = 1;
+				end
+			end
+			FishingBuddy_Player["FishingPetBuddies"] = newpets;
+		end
+	end
 end

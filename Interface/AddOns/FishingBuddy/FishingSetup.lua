@@ -6,7 +6,7 @@ local Crayon = LibStub("LibCrayon-3.0");
 
 FBConstants = {};
 
-FBConstants.CURRENTVERSION = 10001;
+FBConstants.CURRENTVERSION = 10002;
 FBConstants.DEFAULT_MINIMAP_POSITION = 256;
 FBConstants.DEFAULT_MINIMAP_RADIUS = 80;
 

@@ -1,4 +1,10 @@
-﻿Version 1.1a
+﻿Version 1.1b
+- Fix option stickiness bug (CurseForge #184)
+- Include LibDataBroker explicitly (CurseForge #186)
+- FIx minimap button display issues (CurseForge #185, #183, #180, #178)
+- Fix meta pet menu issues
+
+Version 1.1a
 - Yet another '_' global issue (the last one, I think, after going through all the code)
 
 Version 1.1
