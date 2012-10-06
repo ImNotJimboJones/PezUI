@@ -290,3 +290,4 @@ Overachiever: enabled
 Overachiever_Tabs: enabled
 Overachiever_Trade: enabled
 NeedToKnow: enabled
+ZygorGuidesViewer: enabled
