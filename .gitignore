@@ -8,6 +8,7 @@
 *.dll.new
 *.exe
 *cache.md5
+*.bat
 WTF/Launcher.wtf
 WTF/Config.wtf
 Patch.html
