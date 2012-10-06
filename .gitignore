@@ -9,6 +9,7 @@
 *.exe
 *cache.md5
 *.bat
+*.lnk
 WTF/Launcher.wtf
 WTF/Config.wtf
 Patch.html
