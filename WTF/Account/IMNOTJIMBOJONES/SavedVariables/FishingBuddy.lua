@@ -17,7 +17,7 @@ FishingBuddy_Info = {
 			[6291] = 1,
 		},
 	},
-	["Version"] = 9907,
+	["Version"] = 10002,
 	["FishInfo2"] = 0,
 	["ZoneIndex"] = {
 		"Orgrimmar", -- [1]
