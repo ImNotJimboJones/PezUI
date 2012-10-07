@@ -22,8 +22,6 @@ MQTdb = {
 	},
 	["profiles"] = {
 		["Default"] = {
-			["colortitle"] = false,
-			["itemleft"] = true,
 			["verbosechat"] = false,
 			["floatfixed"] = true,
 			["float"] = true,
