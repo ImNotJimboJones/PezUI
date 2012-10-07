@@ -6,16 +6,16 @@ local sTable = nil;
 function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 	local tTable = VUHDO_lnfGetValueFrom(aModel);
 	local tComponent;
-	local sPanel = VuhDoLnfIconTextDialog;
+	local tPanel = VuhDoLnfIconTextDialog;
 
-	if (sPanel:IsShown() and aName == sLastName) then
-		sPanel:Hide();
+	if (tPanel:IsShown() and aName == sLastName) then
+		tPanel:Hide();
 		return;
 	end
 	sLastName = aName;
 	sTable = tTable;
 
-	sPanel:Hide();
+	tPanel:Hide();
 
 	tComponent = _G[sPanelName .. "TitleLabelLabel"];
 	tComponent:SetText(VUHDO_I18N_ICON_TEXT_SETTINGS .. " |c00000099" .. (aName or "?") .. "|r");
@@ -59,9 +59,9 @@ function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 	tComponent = _G[sPanelName .. "OutlineCheckButton"];
 	VUHDO_lnfSetModel(tComponent, aModel .. ".USE_OUTLINE");
 
-	sPanel:ClearAllPoints();
-	sPanel:SetPoint("CENTER", "UIParent", "CENTER", 0, 0);
-	sPanel:Show();
+	tPanel:ClearAllPoints();
+	tPanel:SetPoint("CENTER", "UIParent", "CENTER", 0, 0);
+	tPanel:Show();
 end
 
 
@@ -112,7 +112,7 @@ function VUHDO_lnfStandardFontUpdateDemoText()
 	tLabel:SetShadowOffset(1, -1);
 
 	if (sTable["COLOR"] ~= nil) then
-		tLabel:SetTextColor(sTable["COLOR"]["TR"], sTable["COLOR"]["TG"], sTable["COLOR"]["TB"], sTable["COLOR"]["TO"]);
+		tLabel:SetTextColor(VUHDO_textColor(sTable["COLOR"]));
 	else
 		tLabel:SetTextColor(1, 1, 1, 1);
 	end

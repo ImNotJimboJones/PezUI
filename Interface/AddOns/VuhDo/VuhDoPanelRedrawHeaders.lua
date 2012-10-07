@@ -13,15 +13,15 @@ local VUHDO_customizeHeader;
 
 --
 function VUHDO_panelRedrawHeadersInitBurst()
-	VUHDO_getHeader = VUHDO_GLOBAL["VUHDO_getHeader"];
-	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
-	VUHDO_LibSharedMedia = VUHDO_GLOBAL["VUHDO_LibSharedMedia"];
-	VUHDO_getFont = VUHDO_GLOBAL["VUHDO_getFont"];
-	VUHDO_getHeaderTextId = VUHDO_GLOBAL["VUHDO_getHeaderTextId"];
-	VUHDO_getHeaderWidth = VUHDO_GLOBAL["VUHDO_getHeaderWidth"];
-	VUHDO_getHeaderHeight = VUHDO_GLOBAL["VUHDO_getHeaderHeight"];
-	VUHDO_getHeaderPos = VUHDO_GLOBAL["VUHDO_getHeaderPos"];
-	VUHDO_customizeHeader = VUHDO_GLOBAL["VUHDO_customizeHeader"];
+	VUHDO_getHeader = _G["VUHDO_getHeader"];
+	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
+	VUHDO_LibSharedMedia = _G["VUHDO_LibSharedMedia"];
+	VUHDO_getFont = _G["VUHDO_getFont"];
+	VUHDO_getHeaderTextId = _G["VUHDO_getHeaderTextId"];
+	VUHDO_getHeaderWidth = _G["VUHDO_getHeaderWidth"];
+	VUHDO_getHeaderHeight = _G["VUHDO_getHeaderHeight"];
+	VUHDO_getHeaderPos = _G["VUHDO_getHeaderPos"];
+	VUHDO_customizeHeader = _G["VUHDO_customizeHeader"];
 end
 
 
@@ -46,7 +46,6 @@ local sHeaderColSetup;
 
 
 
-local tCnt;
 local tHeader;
 local tX, tY
 local tHealthBar;

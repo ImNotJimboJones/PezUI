@@ -34,8 +34,8 @@ local format = format;
 local VUHDO_getClassColorByModelId;
 local VUHDO_strempty;
 function VUHDO_tooltipInitBurst()
-	VUHDO_getClassColorByModelId = VUHDO_GLOBAL["VUHDO_getClassColorByModelId"];
-	VUHDO_strempty = VUHDO_GLOBAL["VUHDO_strempty"];
+	VUHDO_getClassColorByModelId = _G["VUHDO_getClassColorByModelId"];
+	VUHDO_strempty = _G["VUHDO_strempty"];
 end
 --
 
@@ -44,19 +44,6 @@ end
 local VUHDO_TOOLTIP_POS_CUSTOM = 1;
 local VUHDO_TOOLTIP_POS_STANDARD = 2;
 local VUHDO_TOOLTIP_POS_MOUSE = 3;
-local VUHDO_TOOLTIP_POS_LEFT = 50;
-local VUHDO_TOOLTIP_POS_LEFT_UP = 51;
-local VUHDO_TOOLTIP_POS_LEFT_DOWN = 52;
-local VUHDO_TOOLTIP_POS_RIGHT = 60;
-local VUHDO_TOOLTIP_POS_RIGHT_UP = 61;
-local VUHDO_TOOLTIP_POS_RIGHT_DOWN = 62;
-local VUHDO_TOOLTIP_POS_UP = 70;
-local VUHDO_TOOLTIP_POS_UP_LEFT = 71;
-local VUHDO_TOOLTIP_POS_UP_RIGHT = 72;
-local VUHDO_TOOLTIP_POS_DOWN = 80;
-local VUHDO_TOOLTIP_POS_DOWN_LEFT = 81;
-local VUHDO_TOOLTIP_POS_DOWN_RIGHT = 82;
-
 
 local sMaxLinesRight = 8;
 local sMaxLinesLeft = 16;
@@ -81,8 +68,8 @@ local VUHDO_VALUE_COLOR = {	["TR"] = 1,	["TG"] = 0.898,	["TB"] = 0.4, ["TO"] = 1
 local tLabel;
 local function VUHDO_setTooltipLine(aText, anIsLeft, aLineNum, aColor, aTextSize)
 	tLabel = anIsLeft
-	  and VUHDO_GLOBAL[format("VuhDoTooltipTextL%d", aLineNum)]
-		or  VUHDO_GLOBAL[format("VuhDoTooltipTextR%d", aLineNum)];
+	  and _G[format("VuhDoTooltipTextL%d", aLineNum)]
+		or  _G[format("VuhDoTooltipTextR%d", aLineNum)];
 
 	tLabel:SetText(aText);
 
@@ -131,18 +118,18 @@ end
 
 --
 local VUHDO_TT_FIX_POINTS = {
-	[VUHDO_TOOLTIP_POS_LEFT] = { "RIGHT", "LEFT" },
-	[VUHDO_TOOLTIP_POS_LEFT_UP] = { "TOPRIGHT", "TOPLEFT" },
-	[VUHDO_TOOLTIP_POS_LEFT_DOWN] = { "BOTTOMRIGHT" , "BOTTOMLEFT" },
-	[VUHDO_TOOLTIP_POS_RIGHT] = { "LEFT", "RIGHT" },
-	[VUHDO_TOOLTIP_POS_RIGHT_UP] = { "TOPLEFT", "TOPRIGHT" },
-	[VUHDO_TOOLTIP_POS_RIGHT_DOWN] = { "BOTTOMLEFT", "BOTTOMRIGHT" },
-	[VUHDO_TOOLTIP_POS_UP] = { "BOTTOM", "TOP" },
-	[VUHDO_TOOLTIP_POS_UP_LEFT] = { "BOTTOMLEFT", "TOPLEFT" },
-	[VUHDO_TOOLTIP_POS_UP_RIGHT] = { "BOTTOMRIGHT", "TOPRIGHT" },
-	[VUHDO_TOOLTIP_POS_DOWN] = { "TOP", "BOTTOM" },
-	[VUHDO_TOOLTIP_POS_DOWN_LEFT] = { "TOPLEFT", "BOTTOMLEFT" },
-	[VUHDO_TOOLTIP_POS_DOWN_RIGHT] = { "TOPRIGHT", "BOTTOMRIGHT" },
+	[50] = { "RIGHT", "LEFT" }, -- VUHDO_TOOLTIP_POS_LEFT
+ 	[51] = { "TOPRIGHT", "TOPLEFT" }, -- VUHDO_TOOLTIP_POS_LEFT_UP
+	[52] = { "BOTTOMRIGHT" , "BOTTOMLEFT" }, -- VUHDO_TOOLTIP_POS_LEFT_DOWN
+	[60] = { "LEFT", "RIGHT" }, -- VUHDO_TOOLTIP_POS_RIGHT
+	[61] = { "TOPLEFT", "TOPRIGHT" }, -- VUHDO_TOOLTIP_POS_RIGHT_UP
+	[62] = { "BOTTOMLEFT", "BOTTOMRIGHT" }, -- VUHDO_TOOLTIP_POS_RIGHT_DOWN
+	[70] = { "BOTTOM", "TOP" }, -- VUHDO_TOOLTIP_POS_UP
+	[71] = { "BOTTOMLEFT", "TOPLEFT" }, -- VUHDO_TOOLTIP_POS_UP_LEFT
+	[72] = { "BOTTOMRIGHT", "TOPRIGHT" }, -- VUHDO_TOOLTIP_POS_UP_RIGHT
+	[80] = { "TOP", "BOTTOM" }, -- VUHDO_TOOLTIP_POS_DOWN
+	[81] = { "TOPLEFT", "BOTTOMLEFT" }, -- VUHDO_TOOLTIP_POS_DOWN_LEFT
+	[82] = { "TOPRIGHT", "BOTTOMRIGHT" }, -- VUHDO_TOOLTIP_POS_DOWN_RIGHT
 };
 
 
@@ -207,13 +194,12 @@ end
 
 --
 local tHeight;
-local tTextHeight;
 local function VUHDO_finishTooltip()
 	for tCnt = sAktLineLeft, sMaxLinesLeft do
-		VUHDO_GLOBAL[format("VuhDoTooltipTextL%d", tCnt)]:SetText("");
+		_G[format("VuhDoTooltipTextL%d", tCnt)]:SetText("");
 	end
 	for tCnt = sAktLineRight, sMaxLinesRight do
-		VUHDO_GLOBAL[format("VuhDoTooltipTextR%d", tCnt)]:SetText("");
+		_G[format("VuhDoTooltipTextR%d", tCnt)]:SetText("");
 	end
 
 	tHeight = 28;
@@ -235,24 +221,24 @@ local function VUHDO_getSpellTooltip(aModifier, aButtonNum, aUnit)
 	if (not UnitIsFriend("player", aUnit)) then
 		if (aButtonNum < 6) then
 			tButtonId = format("%s%d", aModifier, aButtonNum);
-			if (VUHDO_SPELL_ASSIGNMENTS[tButtonId][3] ~= nil) then
+			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[tButtonId][3];
 			end
 		else
 			tButtonId = format("%s%d", aModifier, aButtonNum - 5);
-			if (VUHDO_SPELL_ASSIGNMENTS[tButtonId][3] ~= nil) then
+			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_SPELLS_KEYBOARD["HOSTILE_WHEEL"][tButtonId][3];
 			end
 		end
 	else
 		if (aButtonNum < 6) then
 			tButtonId = format("%s%d", aModifier, aButtonNum);
-			if (VUHDO_SPELL_ASSIGNMENTS[tButtonId][3] ~= nil) then
+			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_SPELL_ASSIGNMENTS[tButtonId][3];
 			end
 		else
 			tButtonId = format("%s%d", aModifier, aButtonNum - 5);
-			if (VUHDO_SPELL_ASSIGNMENTS[tButtonId][3] ~= nil) then
+			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_SPELLS_KEYBOARD["WHEEL"][tButtonId][3];
 			end
 		end
@@ -280,7 +266,7 @@ local tRightText;
 local tModifier;
 local tGuildName, tGuildRank;
 local tGuild;
-local tIndex, tButtonName, tBinding;
+local tBinding;
 local tClassName, tClassNameLoc;
 local tEmpty = {};
 function VUHDO_updateTooltip()

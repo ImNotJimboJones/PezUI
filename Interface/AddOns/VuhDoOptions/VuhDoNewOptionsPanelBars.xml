@@ -46,16 +46,6 @@
 					</Button>
 
 					<Frame name="$parentTextureLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="142" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_BAR_TEXTURE" inherits="VuDoDefaultTitleFontTemplate">
@@ -117,16 +107,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="185" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_CUSTOM_SETTINGS" inherits="VuDoDefaultTitleFontTemplate">
@@ -250,16 +230,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="185" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MISC" inherits="VuDoDefaultTitleFontTemplate">
@@ -323,16 +293,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="185" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_BAR_COLOR" inherits="VuDoDefaultTitleFontTemplate">

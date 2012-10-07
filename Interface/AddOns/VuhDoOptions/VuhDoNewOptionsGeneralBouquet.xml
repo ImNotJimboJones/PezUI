@@ -34,7 +34,7 @@
 				<Anchors>
 					<Anchor point="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="10" y="5" />
+							<AbsDimension x="10" y="-10" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -261,16 +261,6 @@
 				</Anchors>
 				<Frames>
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="200" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_BOUQUET_DETAILS" inherits="VuDoDefaultTitleFontTemplate">
@@ -443,7 +433,7 @@
 				</Frames>
 				<Scripts>
 					<OnShow>
-						VUHDO_bouquetItemsOnShow(VUHDO_GLOBAL[self:GetName() .. "ScrollPanelChild"]);
+						VUHDO_bouquetItemsOnShow(_G[self:GetName() .. "ScrollPanelChild"]);
 					</OnShow>
 				</Scripts>
 			</Frame>
@@ -1033,7 +1023,7 @@
 			</OnLoad>
 			<OnShow>
 				VUHDO_bouquetsUpdateDefaultColors();
-				VUHDO_GLOBAL[self:GetName() .. "BackButton"]:SetShown(VUHDO_MENU_RETURN_TARGET ~= nil or VUHDO_MENU_RETURN_TARGET_MAIN ~= nil);
+				_G[self:GetName() .. "BackButton"]:SetShown(VUHDO_MENU_RETURN_TARGET ~= nil or VUHDO_MENU_RETURN_TARGET_MAIN ~= nil);
 			</OnShow>
 			<OnHide>
 				VUHDO_trimAllBouquetItems();

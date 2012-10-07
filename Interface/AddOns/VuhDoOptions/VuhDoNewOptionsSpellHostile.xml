@@ -39,16 +39,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="210" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MOUSE_KEY" inherits="VuDoDefaultTitleFontTemplate">
@@ -322,16 +312,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="210" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MOUSE_WHEEL" inherits="VuDoDefaultTitleFontTemplate">
@@ -571,16 +551,6 @@
 					</CheckButton>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="223" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_KEY_MODIFIES" inherits="VuDoDefaultTitleFontTemplate">

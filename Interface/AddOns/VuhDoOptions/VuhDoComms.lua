@@ -175,7 +175,6 @@ end
 --
 local function VUHDO_buildMessage(aCommand, ...)
 	local tData = aCommand .. sCommandSeparator;
-	local tCnt;
 
 	for tCnt = 1, select('#', ...) do
 		tData = tData .. select(tCnt, ...) .. (tCnt < select('#', ...) and sFieldSeparator or "");
@@ -383,11 +382,6 @@ local function VUHDO_handleCommandReceived(aSenderName, aCommand)
 		VuhDoYesNoFrame:Hide();
 		VUHDO_Msg("Transaction aborted by " .. aSenderName);
 	else
-		-- @TODO @UGLY
-		--[[if (VUHDO_getReplyData(aSenderName, sCmdUserYesNoReply) == nil) then
-			return;
-		end]]
-
 		if(sCmdProfileDataChunk == tCommandType) then
 			VUHDO_addReplyData(aSenderName, sCmdProfileDataChunk, tData);
 			if (sNumChunks % 20 == 0) then

@@ -12,7 +12,7 @@ local twipe = table.wipe;
 local _;
 local huge = math.huge;
 
-local VUHDO_GLOBAL = getfenv();
+local _G = getfenv();
 
 local VUHDO_getUnitButtons;
 local VUHDO_getBarIconTimer
@@ -31,15 +31,15 @@ local sEmpty = { };
 
 function VUHDO_customDebuffIconsInitBurst()
 	-- functions
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
-	VUHDO_getBarIconFrame = VUHDO_GLOBAL["VUHDO_getBarIconFrame"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconName = VUHDO_GLOBAL["VUHDO_getBarIconName"];
-	VUHDO_getShieldPerc = VUHDO_GLOBAL["VUHDO_getShieldPerc"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_getBarIconCounter = _G["VUHDO_getBarIconCounter"];
+	VUHDO_getBarIconFrame = _G["VUHDO_getBarIconFrame"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconName = _G["VUHDO_getBarIconName"];
+	VUHDO_getShieldPerc = _G["VUHDO_getShieldPerc"];
 
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	sCuDeStoredSettings = VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"];
 	sMaxIcons = VUHDO_CONFIG["CUSTOM_DEBUFF"]["max_num"];
 	if (sMaxIcons < 1) then -- Damit das Bouquet item "Letzter Debuff" funktioniert
@@ -132,15 +132,12 @@ end
 
 
 --
-local tUnit, tAllDebuffInfos;
-local tIndex, tDebuffInfo;
-local tAllButtons, tButton;
+local tAllButtons;
 local tNow;
 function VUHDO_updateAllDebuffIcons(anIsFrequent)
 	tNow = GetTime();
 
 	for tUnit, tAllDebuffInfos in pairs(VUHDO_DEBUFF_ICONS) do
-
 		tAllButtons = VUHDO_getUnitButtons(tUnit);
 		if (tAllButtons ~= nil) then
 
@@ -153,18 +150,16 @@ function VUHDO_updateAllDebuffIcons(anIsFrequent)
 			end
 
 		end
-
 	end
 end
 
 
 
 -- 1 = icon, 2 = timestamp, 3 = name, 4 = expiration time, 5 = stacks, 6 = Duration, 7 = Start time
-local tCnt;
 local tSlot;
 local tOldest;
 local tTimestamp;
-local tAllButtons, tButton, tFrame, tIconInfo;
+local tAllButtons, tFrame, tIconInfo;
 function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration, anIsBuff)
 	if (VUHDO_DEBUFF_ICONS[aUnit] == nil) then
 		VUHDO_DEBUFF_ICONS[aUnit] = { };
@@ -203,7 +198,7 @@ end
 
 
 --
-local tCnt, tIconInfo;
+local tIconInfo;
 function VUHDO_updateDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration)
 	if (VUHDO_DEBUFF_ICONS[aUnit] == nil) then
 		VUHDO_DEBUFF_ICONS[aUnit] = { };
@@ -221,7 +216,7 @@ end
 
 
 --
-local tAllButtons2, tCnt2, tButton2;
+local tAllButtons2;
 local tFrame;
 function VUHDO_removeDebuffIcon(aUnit, aName)
 	tAllButtons2 = VUHDO_getUnitButtons(aUnit);
@@ -247,7 +242,7 @@ end
 
 
 --
-local tAllButtons3, tCnt3, tButton3;
+local tAllButtons3;
 local tFrame;
 function VUHDO_removeAllDebuffIcons(aUnit)
 	tAllButtons3 = VUHDO_getUnitButtons(aUnit);
@@ -274,7 +269,6 @@ end
 
 --
 local tDebuffInfo;
-local tCnt;
 local tCurrInfo;
 function VUHDO_getLatestCustomDebuff(aUnit)
 	tDebuffInfo = sEmpty;

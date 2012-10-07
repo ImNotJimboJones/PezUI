@@ -9,7 +9,6 @@ local ceil = ceil;
 local pairs = pairs;
 local _;
 
-local sCnt;
 local sConfiguredModels = {};
 local sRemoveUnitFromRaidGroupsCache = {};
 
@@ -23,11 +22,11 @@ local VUHDO_ID_MEMBER_TYPES;
 
 local VUHDO_getGroupMembers;
 function VUHDO_modelToolsInitBurst()
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_GROUPS = VUHDO_GLOBAL["VUHDO_GROUPS"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_ID_MEMBER_TYPES = VUHDO_GLOBAL["VUHDO_ID_MEMBER_TYPES"];
-	VUHDO_getGroupMembers = VUHDO_GLOBAL["VUHDO_getGroupMembers"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_GROUPS = _G["VUHDO_GROUPS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_ID_MEMBER_TYPES = _G["VUHDO_ID_MEMBER_TYPES"];
+	VUHDO_getGroupMembers = _G["VUHDO_getGroupMembers"];
 
 	twipe(sRemoveUnitFromRaidGroupsCache);
 end
@@ -35,12 +34,11 @@ end
 
 
 --
-local tModelArray, tKey;
 function VUHDO_clearUndefinedModelEntries()
 	for _, tModelArray in pairs(VUHDO_PANEL_MODELS) do
-		for sCnt = 20, 1, -1 do -- VUHDO_MAX_GROUPS_PER_PANEL
-			if (tModelArray[sCnt] == 0) then -- VUHDO_ID_UNDEFINED
-				tremove(tModelArray, sCnt);
+		for tCnt = 20, 1, -1 do -- VUHDO_MAX_GROUPS_PER_PANEL
+			if (tModelArray[tCnt] == 0) then -- VUHDO_ID_UNDEFINED
+				tremove(tModelArray, tCnt);
 			end
 		end
 	end
@@ -55,14 +53,13 @@ end
 
 
 --
-local tModel;
 function VUHDO_initPanelModels()
 	twipe(sConfiguredModels);
 
-	for sCnt = 1, 10 do -- VUHDO_MAX_PANELS
-		VUHDO_PANEL_MODELS[sCnt] = VUHDO_PANEL_SETUP[sCnt]["MODEL"]["groups"];
+	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
+		VUHDO_PANEL_MODELS[tCnt] = VUHDO_PANEL_SETUP[tCnt]["MODEL"]["groups"];
 
-		for _, tModel in pairs(VUHDO_PANEL_MODELS[sCnt] or {}) do
+		for _, tModel in pairs(VUHDO_PANEL_MODELS[tCnt] or {}) do
 			sConfiguredModels[tModel] = true;
 		end
 	end
@@ -74,10 +71,7 @@ end
 --
 local tIsShowModel;
 local tIsOmitEmpty;
-local tPanelNum, tModelArray;
-local tModelId;
 local tMaxRows, tNumModels, tRepeatModels;
-local tCnt;
 function VUHDO_initDynamicPanelModels()
 	if (VUHDO_isConfigPanelShowing()) then
 		VUHDO_PANEL_DYN_MODELS = VUHDO_deepCopyTable(VUHDO_PANEL_MODELS);
@@ -131,7 +125,6 @@ end
 
 --
 local tGroup;
-local tUnit;
 local tEmptyGroup = {};
 function VUHDO_isUnitInModelIterative(aUnit, aModelId)
 	tGroup = VUHDO_GROUPS[aModelId] or tEmptyGroup;
@@ -167,7 +160,6 @@ local VUHDO_isUnitInModel = VUHDO_isUnitInModel;
 
 --
 local tEmpty = { };
-local tModelId;
 function VUHDO_isModelInPanel(aPanelNum, aModelId)
 	for _, tModelId in pairs(VUHDO_PANEL_DYN_MODELS[aPanelNum] or tEmpty) do
 		if (tModelId == aModelId) then
@@ -206,7 +198,6 @@ end
 
 
 --
-local tModelId;
 local tModelType;
 function VUHDO_isUnitInPanel(aPanelNum, aUnit)
 

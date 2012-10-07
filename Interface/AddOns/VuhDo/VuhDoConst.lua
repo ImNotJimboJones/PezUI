@@ -360,17 +360,29 @@ VUHDO_BOOLEAN_CONSTRAINTS = 3;
 
 VUHDO_NUM_MOUSE_BUTTONS = 16;
 VUHDO_NUM_KEYBOARD_KEYS = 16;
-VUHDO_MODIFIER_KEYS_LOW = {
+
+VUHDO_MODIFIER_KEYS = {
 	[""] = "",
-	["alt"] = "alt-",
-	["ctrl"] = "ctrl-",
-	["shift"] = "shift-",
-	["altctrl"] = "alt-ctrl-",
-	["altshift"] = "alt-shift-",
-	["ctrlshift"] = "ctrl-shift-",
-	["altctrlshift"] = "alt-ctrl-shift-",
+	["alt"] = "ALT-",
+	["ctrl"] = "CTRL-",
+	["shift"] = "SHIFT-",
+	["altctrl"] = "ALT-CTRL-",
+	["altshift"] = "ALT-SHIFT-",
+	["ctrlshift"] = "CTRL-SHIFT-",
+	["altctrlshift"] = "ALT-CTRL-SHIFT-",
 };
 
+
+VUHDO_KEYS_MODIFIER = {
+	[""] = "",
+	["ALT-"] = "alt",
+	["CTRL-"] = "ctrl",
+	["SHIFT-"] = "shift",
+	["ALT-CTRL-"] = "altctrl",
+	["ALT-SHIFT-"] = "altshift",
+	["CTRL-SHIFT-"] = "ctrlshift",
+	["ALT-CTRL-SHIFT-"] = "altctrlshift",
+};
 
 
 VUHDO_MOUSE_BUTTONS = {

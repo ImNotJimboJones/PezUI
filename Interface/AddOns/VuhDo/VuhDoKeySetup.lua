@@ -1,5 +1,4 @@
-
--- BURST CACHE ---------------------------------------------------
+local _;
 
 local VUHDO_RAID_NAMES;
 local VUHDO_RAID;
@@ -26,30 +25,29 @@ local GetCursorInfo = GetCursorInfo;
 local GetShapeshiftForm = GetShapeshiftForm;
 local InCombatLockdown = InCombatLockdown;
 local pairs = pairs;
-local _;
 local strlen = strlen;
 local strlower = strlower;
+local format = format;
 
 local sIsCliqueCompat;
 
 function VUHDO_keySetupInitBurst()
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_BUFF_REMOVAL_SPELLS = VUHDO_GLOBAL["VUHDO_BUFF_REMOVAL_SPELLS"];
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_GLOBAL["VUHDO_SPELL_ASSIGNMENTS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_BUFF_REMOVAL_SPELLS = _G["VUHDO_BUFF_REMOVAL_SPELLS"];
+	VUHDO_SPELL_ASSIGNMENTS = _G["VUHDO_SPELL_ASSIGNMENTS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 
-	VUHDO_buildMacroText = VUHDO_GLOBAL["VUHDO_buildMacroText"];
-	VUHDO_buildTargetButtonMacroText = VUHDO_GLOBAL["VUHDO_buildTargetButtonMacroText"];
-	VUHDO_buildTargetMacroText = VUHDO_GLOBAL["VUHDO_buildTargetMacroText"];
-	VUHDO_buildFocusMacroText = VUHDO_GLOBAL["VUHDO_buildFocusMacroText"];
-	VUHDO_buildAssistMacroText = VUHDO_GLOBAL["VUHDO_buildAssistMacroText"];
-	VUHDO_replaceMacroTemplates = VUHDO_GLOBAL["VUHDO_replaceMacroTemplates"];
-	VUHDO_isActionValid = VUHDO_GLOBAL["VUHDO_isActionValid"];
-	VUHDO_isSpellKnown = VUHDO_GLOBAL["VUHDO_isSpellKnown"];
+	VUHDO_buildMacroText = _G["VUHDO_buildMacroText"];
+	VUHDO_buildTargetButtonMacroText = _G["VUHDO_buildTargetButtonMacroText"];
+	VUHDO_buildTargetMacroText = _G["VUHDO_buildTargetMacroText"];
+	VUHDO_buildFocusMacroText = _G["VUHDO_buildFocusMacroText"];
+	VUHDO_buildAssistMacroText = _G["VUHDO_buildAssistMacroText"];
+	VUHDO_replaceMacroTemplates = _G["VUHDO_replaceMacroTemplates"];
+	VUHDO_isActionValid = _G["VUHDO_isActionValid"];
+	VUHDO_isSpellKnown = _G["VUHDO_isSpellKnown"];
 	sIsCliqueCompat = VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"];
 end
-----------------------------------------------------
 
 
 
@@ -111,7 +109,7 @@ local function _VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, a
 
 				if (tInfo ~= nil) then
 					if ((VUHDO_RAID["player"] or tInvalidGroup)["group"] == tInfo["group"]) then
-						sDropdown = VUHDO_GLOBAL['PartyMemberFrame' .. tInfo["number"] .. 'DropDown']
+						sDropdown = _G['PartyMemberFrame' .. tInfo["number"] .. 'DropDown']
 					else
 						tIdent = tInfo["number"];
 						FriendsDropDown["name"] = tInfo["name"];
@@ -175,13 +173,15 @@ end
 --
 local tUnit;
 local tHostSpell;
+local tSpellInfo;
 local function VUHDO_setupHealButtonAttributes(aModiKey, aButtonId, anAction, aButton, anIsTgButton, anIndex)
 
 	tUnit = aButton["raidid"];
 
 	if (anIsTgButton or tUnit == "focus" or (tUnit == "target" and "dropdown" ~= anAction)) then
 		if (anIndex == nil) then
-			tHostSpell = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[gsub(aModiKey, "-", "") .. aButtonId][3];
+			tSpellInfo = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[VUHDO_KEYS_MODIFIER[aModiKey] .. aButtonId];
+			tHostSpell = tSpellInfo ~= nil and tSpellInfo[3] or "";
 		else
 			tHostSpell = VUHDO_SPELLS_KEYBOARD["HOSTILE_WHEEL"][anIndex][3];
 		end
@@ -225,7 +225,6 @@ end
 
 --
 local tString;
-local tIndex, tEntries;
 local function VUHDO_getInternalKeyString()
 	tString = "";
 	for tIndex, tEntries in pairs(VUHDO_SPELLS_KEYBOARD["INTERNAL"]) do
@@ -239,14 +238,12 @@ end
 -- Parse and interpret action-type
 local tPreAction;
 local tTarget;
-local tIndex;
-local tSpellDescr;
 local tIsWheel;
 local tHostSpell;
 local tWheelDefString;
-local tEntries;
 local tCnt;
 local tFrame;
+local tBinding;
 function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceTarget, anIsTgButton, anIsIcButton)
 
 	if (aUnit ~= nil) then
@@ -270,22 +267,15 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		return;
 	end
 
-	if (anIsDisable) then
-		tPreAction = "";
-	elseif (aForceTarget) then
-		tPreAction = "target";
-	else
-		tPreAction = nil;
-	end
+	tPreAction = anIsDisable and "" or aForceTarget and "target" or nil;
 
-	if (tPreAction ~= nil) then
-		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
-			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tPreAction, aButton, anIsTgButton);
-		end
-
-	else
-		for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
-			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], tSpellDescr[3], aButton, anIsTgButton);
+	for tNoMinus, tWithMinus in pairs(VUHDO_MODIFIER_KEYS) do
+		for tCnt = 1, 16 do -- VUHDO_NUM_MOUSE_BUTTONS
+			tBinding = VUHDO_SPELL_ASSIGNMENTS[format("%s%d", tNoMinus, tCnt)];
+			VUHDO_setupHealButtonAttributes(tWithMinus, tCnt,
+				tPreAction or tBinding ~= nil and tBinding[3] or "",
+				aButton, anIsTgButton
+			);
 		end
 	end
 
@@ -307,7 +297,6 @@ function VUHDO_setupAllHealButtonAttributes(aButton, aUnit, anIsDisable, aForceT
 		end
 	end
 
-	-- Tooltips and stuff for raid members only (not: target buttons)
 	if (VUHDO_BUTTON_CACHE[aButton] or VUHDO_BUTTON_CACHE[aButton:GetParent():GetParent():GetParent():GetParent()] ~= nil) then
 		tWheelDefString = "self:ClearBindings();";
 
@@ -336,12 +325,16 @@ local tProhibitSmartCastOn = {
 	["dropdown"] = true,
 	["tell"] = true,
 };
-
-local tSpellDescr;
+-- Setup for smart cast
+local tKey;
 local function VUHDO_setupAllButtonsTo(aButton, aSpellName)
-	for _, tSpellDescr in pairs(VUHDO_SPELL_ASSIGNMENTS) do
-		if (not tProhibitSmartCastOn[tSpellDescr[3]]) then
-			VUHDO_setupHealButtonAttributes(tSpellDescr[1], tSpellDescr[2], aSpellName, aButton, false);
+	for tNoMinus, tWithMinus in pairs(VUHDO_MODIFIER_KEYS) do
+		for tCnt = 1, VUHDO_NUM_MOUSE_BUTTONS do
+			tKey = tNoMinus .. tCnt;
+			if (VUHDO_SPELL_ASSIGNMENTS[tKey] == nil
+				or not tProhibitSmartCastOn[VUHDO_SPELL_ASSIGNMENTS[tKey][3]]) then
+				VUHDO_setupHealButtonAttributes(tWithMinus, tCnt, aSpellName, aButton, false);
+			end
 		end
 	end
 end
@@ -374,15 +367,6 @@ end
 
 
 --
-local tIsShadowFrom;
-local function VUHDO_isShadowForm()
-	_, _, tIsShadowFrom = UnitBuff("player", VUHDO_SPELL_ID.SHADOWFORM);
-	return tIsShadowFrom;
-end
-
-
-
---
 local tCursorItemType;
 local tAbilities;
 local tUnit;
@@ -390,7 +374,9 @@ local tInfo;
 local tBuff;
 function VUHDO_setupSmartCast(aButton)
 	if (InCombatLockdown() or UnitIsDeadOrGhost("player")
-		or (VUHDO_PLAYER_CLASS == "PRIEST" and GetShapeshiftForm() ~= 0 and not VUHDO_isShadowForm())) then -- Engelchen?
+		or (VUHDO_PLAYER_CLASS == "PRIEST" -- Engelchen?
+			and GetShapeshiftForm() ~= 0
+			and not select(3, UnitBuff("player", VUHDO_SPELL_ID.SHADOWFORM)))) then
 		return false;
 	end
 

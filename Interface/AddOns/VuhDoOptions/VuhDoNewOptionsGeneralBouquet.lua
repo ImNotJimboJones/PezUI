@@ -114,7 +114,6 @@ end
 
 
 --
-local tName, tInfo, tIndex;
 function VUHDO_initBouquetComboModel()
 	table.wipe(VUHDO_BOUQET_COMBO_MODEL);
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
@@ -501,8 +500,7 @@ end
 
 --
 local tPanel;
-local tIndex, tName, tBouquet;
-local tBuffInfo;
+local tName, tBouquet;
 local tParent;
 function VUHDO_rebuildAllBouquetItems(aParent, aCursorPos)
 	-- Erstmal alles verstecken
@@ -796,8 +794,8 @@ function VUHDO_generalBouquetBackButtonClicked(aPanel)
 	end
 
 	if (VUHDO_MENU_RETURN_TARGET ~= nil) then
-		VUHDO_lnfRadioButtonClicked(VUHDO_MENU_RETURN_TARGET);
-		VUHDO_MENU_RETURN_FUNC(VUHDO_MENU_RETURN_TARGET);
+		--VUHDO_lnfRadioButtonClicked(VUHDO_MENU_RETURN_TARGET);
+		VUHDO_lnfTabRadioButtonClicked(VUHDO_MENU_RETURN_TARGET);
 		VUHDO_MENU_RETURN_TARGET = nil;
 	end
 end

@@ -1,3 +1,6 @@
+local _;
+local _G = _G;
+
 local VUHDO_HIGLIGHT_CLUSTER = { };
 local VUHDO_HIGLIGHT_NUM = 0;
 local VUHDO_ICON_CLUSTER = { };
@@ -6,13 +9,11 @@ local VUHDO_ACTIVE_HOTS = { };
 local sClusterConfig;
 
 local VUHDO_CLUSTER_UNIT = nil;
-local _;
 
 --
 local twipe = table.wipe;
 local pairs = pairs;
 
-local VUHDO_GLOBAL = getfenv();
 
 local VUHDO_RAID = { };
 
@@ -41,21 +42,20 @@ local sClusterSlot;
 local sCdSpell;
 local sCone;
 local sJumpRangePow;
-local tIndex, tHotName
 function VUHDO_customClustersInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_ACTIVE_HOTS = _G["VUHDO_ACTIVE_HOTS"];
 
-	VUHDO_getUnitsInRadialClusterWith = VUHDO_GLOBAL["VUHDO_getUnitsInRadialClusterWith"];
-	VUHDO_getUnitsInChainClusterWith = VUHDO_GLOBAL["VUHDO_getUnitsInChainClusterWith"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getClusterBorderFrame = VUHDO_GLOBAL["VUHDO_getClusterBorderFrame"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_isInConeInFrontOf = VUHDO_GLOBAL["VUHDO_isInConeInFrontOf"];
-	VUHDO_backColor = VUHDO_GLOBAL["VUHDO_backColor"];
+	VUHDO_getUnitsInRadialClusterWith = _G["VUHDO_getUnitsInRadialClusterWith"];
+	VUHDO_getUnitsInChainClusterWith = _G["VUHDO_getUnitsInChainClusterWith"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getClusterBorderFrame = _G["VUHDO_getClusterBorderFrame"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_isInConeInFrontOf = _G["VUHDO_isInConeInFrontOf"];
+	VUHDO_backColor = _G["VUHDO_backColor"];
 
 	sClusterConfig = VUHDO_CONFIG["CLUSTER"];
 	sHealthLimit = sClusterConfig["BELOW_HEALTH_PERC"] * 0.01;
@@ -134,7 +134,7 @@ end
 
 --
 local tNumLow;
-local tAllButtons, tButton;
+local tAllButtons;
 function VUHDO_updateAllClusterIcons(aUnit, anInfo)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons == nil) then
@@ -168,8 +168,6 @@ end
 
 
 --
-local tUnit;
-local tAllButtons, tButton;
 function VUHDO_removeAllClusterHighlights()
 	for _, tUnit in pairs(VUHDO_HIGLIGHT_CLUSTER) do
 		VUHDO_updateBouquetsForEvent(tUnit, 18); -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
@@ -182,8 +180,6 @@ local VUHDO_removeAllClusterHighlights = VUHDO_removeAllClusterHighlights;
 
 
 --
-local tUnit, tAllButtons, tButton;
-local tClusterBorder;
 function VUHDO_highlightClusterFor(aUnit)
 	VUHDO_CLUSTER_UNIT = aUnit;
 	if (VUHDO_HIGLIGHT_NUM ~= 0) then
@@ -235,7 +231,7 @@ end
 
 
 --
-local tAllButtons, tButton, tBorder;
+local tAllButtons, tBorder;
 function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons =  VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then

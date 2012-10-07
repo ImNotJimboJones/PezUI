@@ -59,16 +59,6 @@
 					</CheckButton>
 
 					<Frame name="$parentOrderingLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="152" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_ORDERING" justifyH="LEFT" inherits="VuDoDefaultTitleFontTemplate">
@@ -291,16 +281,6 @@
 					</Frame>
 
 					<Frame name="$parentAnchorLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="158" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="10" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_ANCHOR" justifyH="LEFT" inherits="VuDoDefaultTitleFontTemplate">
@@ -438,16 +418,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="139" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_SORT_BY" justifyH="LEFT" inherits="VuDoDefaultTitleFontTemplate">
@@ -522,16 +492,6 @@
 				<Frames>
 
 					<Frame name="$parentBackgroundLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="185" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_BUFF_PANEL_BG" inherits="VuDoDefaultTitleFontTemplate">

@@ -65,16 +65,6 @@
 					</CheckButton>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="75" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_LOCK_PANELS" inherits="VuDoDefaultTitleFontTemplate">
@@ -99,16 +89,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="75" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_HIDE_PANELS" inherits="VuDoDefaultTitleFontTemplate">
@@ -341,16 +321,6 @@
 					</CheckButton>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="75" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_FILTER" inherits="VuDoDefaultTitleFontTemplate">
@@ -358,6 +328,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
+
 				</Frames>
 			</Frame>
 
@@ -443,16 +414,6 @@
 					</Frame>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="160" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_OPERATION_MODE" inherits="VuDoDefaultTitleFontTemplate">

@@ -7,7 +7,7 @@ VUHDO_GLOBAL_CONFIG = {
 
 
 --
-local tHotCfg, tHotSlots, tCnt2;
+local tHotCfg, tHotSlots;
 function VUHDO_fixHotSettings()
 	tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
@@ -52,7 +52,6 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	if (aSaneValue ~= nil) then
 		if (type(aSaneValue) == "table") then
 			if (aValue ~= nil and type(aValue) == "table") then
-				local tIndex;
 				for tIndex, _ in pairs(aSaneValue) do
 					aValue[tIndex] = _VUHDO_ensureSanity(aName, aValue[tIndex], aSaneValue[tIndex]);
 				end
@@ -75,7 +74,6 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 						tRepaired = tRepaired + 1;
 					else
 						tCreated = tCreated + 1;
-						--VUHDO_xMsg("+Flat:", aValue, aSaneValue);
 					end
 
 					return aSaneValue;
@@ -97,8 +95,8 @@ end
 --
 local tRepairedArray;
 function VUHDO_ensureSanity(aName, aValue, aSaneValue)
-	tCreated = 0;
-	tRepaired = 0;
+	tCreated, tRepaired = 0, 0;
+
 	local tSaneValue = VUHDO_decompressIfCompressed(aSaneValue);
 	tRepairedArray = _VUHDO_ensureSanity(aName, aValue, tSaneValue);
 
@@ -121,24 +119,18 @@ local VUHDO_DEFAULT_MODELS = {
 
 
 local VUHDO_DEFAULT_RANGE_SPELLS = {
---	["WARRIOR"] = nil,
---	["ROGUE"] = nil,
---	["HUNTER"] = nil,
-	["PALADIN"] = VUHDO_SPELL_ID.HOLY_LIGHT,
---	["MAGE"] = nil,
---	["WARLOCK"] = nil,
+	["PALADIN"] = VUHDO_SPELL_ID.FLASH_OF_LIGHT,
 	["SHAMAN"] = VUHDO_SPELL_ID.HEALING_WAVE,
 	["DRUID"] = VUHDO_SPELL_ID.REJUVENATION,
 	["PRIEST"] = VUHDO_SPELL_ID.HEAL,
---	["DEATHKNIGHT"] = nil,
 	["MONK"] = VUHDO_SPELL_ID.DETOX,
 }
 
 
 
-local VUHDO_DEFAULT_SPELL_ASSIGNMENT = nil;
-local VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT = nil;
-local VUHDO_DEFAULT_SPELLS_KEYBOARD = nil;
+--local VUHDO_DEFAULT_SPELL_ASSIGNMENT = { };
+--local VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT = {};
+local VUHDO_DEFAULT_SPELLS_KEYBOARD = {};
 
 
 
@@ -276,91 +268,62 @@ VUHDO_DEFAULT_SPELL_CONFIG = {
 }
 
 
+local tDefaultWheelAssignments = {
+	["1"] = {"", "-w1", ""},
+	["2"] = {"", "-w2", ""},
+
+	["alt1"] = {"ALT-", "-w3", ""},
+	["alt2"] = {"ALT-", "-w4", ""},
+
+	["ctrl1"] = {"CTRL-", "-w5", ""},
+	["ctrl2"] = {"CTRL-", "-w6", ""},
+
+	["shift1"] = {"SHIFT-", "-w7", ""},
+	["shift2"] = {"SHIFT-", "-w8", ""},
+
+	["altctrl1"] = {"ALT-CTRL-", "-w9", ""},
+	["altctrl2"] = {"ALT-CTRL-", "-w10", ""},
+
+	["altshift1"] = {"ALT-SHIFT-", "-w11", ""},
+	["altshift2"] = {"ALT-SHIFT-", "-w12", ""},
+
+	["ctrlshift1"] = {"CTRL-SHIFT-", "-w13", ""},
+	["ctrlshift2"] = {"CTRL-SHIFT-", "-w14", ""},
+
+	["altctrlshift1"] = {"ALT-CTRL-SHIFT-", "-w15", ""},
+	["altctrlshift2"] = {"ALT-CTRL-SHIFT-", "-w16", ""},
+};
+
+
 
 --
-local function VUHDO_initDefaultSpellAssignments()
-	local tNoMinus, tWithMinus;
-	local tCnt;
-	local tKey, tValue;
-
-	VUHDO_DEFAULT_SPELL_ASSIGNMENT = {};
-	VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT = {};
-	for tNoMinus, tWithMinus in pairs(VUHDO_MODIFIER_KEYS_LOW) do
-		for tCnt = 1, VUHDO_NUM_MOUSE_BUTTONS do
-			tKey = tNoMinus .. tCnt;
-
-			if (VUHDO_GLOBAL_DEFAULT_SPELL_ASSIGNMENT[tKey] ~= nil) then
-				tValue = VUHDO_GLOBAL_DEFAULT_SPELL_ASSIGNMENT[tKey];
-			else
-				tValue = { tWithMinus, tostring(tCnt), "" };
-			end
-			VUHDO_DEFAULT_SPELL_ASSIGNMENT[tKey] = tValue;
-			VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT[tKey] = { tWithMinus, tostring(tCnt), "" };
-		end
-	end
-
-	VUHDO_DEFAULT_SPELLS_KEYBOARD = { ["version"] = 2 };
+local function VUHDO_initDefaultKeySpellAssignments()
+	VUHDO_DEFAULT_SPELLS_KEYBOARD = { };
 
 	for tCnt = 1, VUHDO_NUM_KEYBOARD_KEYS do
 		VUHDO_DEFAULT_SPELLS_KEYBOARD["SPELL" .. tCnt] = "";
 	end
 
-	VUHDO_DEFAULT_SPELLS_KEYBOARD["INTERNAL"] = {
-	};
+	VUHDO_DEFAULT_SPELLS_KEYBOARD["INTERNAL"] = {	};
+	VUHDO_DEFAULT_SPELLS_KEYBOARD["WHEEL"] = VUHDO_deepCopyTable(tDefaultWheelAssignments);
+	VUHDO_DEFAULT_SPELLS_KEYBOARD["HOSTILE_WHEEL"] = VUHDO_deepCopyTable(tDefaultWheelAssignments);
+end
 
-	VUHDO_DEFAULT_SPELLS_KEYBOARD["WHEEL"] = {
 
-		["1"] = {"", "-w1", ""},
-		["2"] = {"", "-w2", ""},
 
-		["alt1"] = {"ALT-", "-w3", ""},
-		["alt2"] = {"ALT-", "-w4", ""},
+--
+function VUHDO_trimSpellAssignments(anArray)
+	local tRemove = { };
 
-		["ctrl1"] = {"CTRL-", "-w5", ""},
-		["ctrl2"] = {"CTRL-", "-w6", ""},
+	for tKey, tValue in pairs(anArray) do
+		if (VUHDO_strempty(tValue[3])) then
+			tinsert(tRemove, tKey);
+		end
+	end
 
-		["shift1"] = {"SHIFT-", "-w7", ""},
-		["shift2"] = {"SHIFT-", "-w8", ""},
-
-		["altctrl1"] = {"ALT-CTRL-", "-w9", ""},
-		["altctrl2"] = {"ALT-CTRL-", "-w10", ""},
-
-		["altshift1"] = {"ALT-SHIFT-", "-w11", ""},
-		["altshift2"] = {"ALT-SHIFT-", "-w12", ""},
-
-		["ctrlshift1"] = {"CTRL-SHIFT-", "-w13", ""},
-		["ctrlshift2"] = {"CTRL-SHIFT-", "-w14", ""},
-
-		["altctrlshift1"] = {"ALT-CTRL-SHIFT-", "-w15", ""},
-		["altctrlshift2"] = {"ALT-CTRL-SHIFT-", "-w16", ""},
-	};
-
-	VUHDO_DEFAULT_SPELLS_KEYBOARD["HOSTILE_WHEEL"] = {
-		["1"] = {"", "-w1", ""},
-		["2"] = {"", "-w2", ""},
-
-		["alt1"] = {"ALT-", "-w3", ""},
-		["alt2"] = {"ALT-", "-w4", ""},
-
-		["ctrl1"] = {"CTRL-", "-w5", ""},
-		["ctrl2"] = {"CTRL-", "-w6", ""},
-
-		["shift1"] = {"SHIFT-", "-w7", ""},
-		["shift2"] = {"SHIFT-", "-w8", ""},
-
-		["altctrl1"] = {"ALT-CTRL-", "-w9", ""},
-		["altctrl2"] = {"ALT-CTRL-", "-w10", ""},
-
-		["altshift1"] = {"ALT-SHIFT-", "-w11", ""},
-		["altshift2"] = {"ALT-SHIFT-", "-w12", ""},
-
-		["ctrlshift1"] = {"CTRL-SHIFT-", "-w13", ""},
-		["ctrlshift2"] = {"CTRL-SHIFT-", "-w14", ""},
-
-		["altctrlshift1"] = {"ALT-CTRL-SHIFT-", "-w15", ""},
-		["altctrlshift2"] = {"ALT-CTRL-SHIFT-", "-w16", ""},
-	};
-
+	for _, tKey in pairs(tRemove) do
+		anArray[tKey] = nil;
+	end
 end
 
 
@@ -369,43 +332,39 @@ end
 local function VUHDO_assignDefaultSpells()
 	local _, tClass = UnitClass("player");
 
-	if ((VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT or {})[tClass] ~= nil) then
-		VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass]);
-		local tKey, tValue;
-
-		for tKey, tValue in pairs(VUHDO_DEFAULT_SPELL_ASSIGNMENT) do
-			if (VUHDO_SPELL_ASSIGNMENTS[tKey] == nil) then
-				VUHDO_SPELL_ASSIGNMENTS[tKey] = tValue;
-			end
-		end
-	else
-		VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_ASSIGNMENT);
-	end
+	VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass] ~= nil
+		and VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT[tClass] or VUHDO_GLOBAL_DEFAULT_SPELL_ASSIGNMENT);
 
 	VUHDO_CLASS_DEFAULT_SPELL_ASSIGNMENT = nil;
+	VUHDO_GLOBAL_DEFAULT_SPELL_ASSIGNMENT = nil;
 end
 
 
 
 --
 function VUHDO_loadSpellArray()
-	VUHDO_initDefaultSpellAssignments();
 	-- Maus freundlich
 	if (VUHDO_SPELL_ASSIGNMENTS == nil) then
 		VUHDO_assignDefaultSpells();
 	end
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_SPELL_ASSIGNMENTS", VUHDO_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_SPELL_ASSIGNMENT);
+	VUHDO_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_SPELL_ASSIGNMENTS", VUHDO_SPELL_ASSIGNMENTS, {});
+	VUHDO_trimSpellAssignments(VUHDO_SPELL_ASSIGNMENTS);
 
 	-- Maus gegnerisch
 	if (VUHDO_HOSTILE_SPELL_ASSIGNMENTS == nil) then
-		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT);
+		VUHDO_HOSTILE_SPELL_ASSIGNMENTS = { };
 	end
-	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS", VUHDO_HOSTILE_SPELL_ASSIGNMENTS, VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT);
+	VUHDO_HOSTILE_SPELL_ASSIGNMENTS = VUHDO_ensureSanity("VUHDO_HOSTILE_SPELL_ASSIGNMENTS", VUHDO_HOSTILE_SPELL_ASSIGNMENTS, {});
+	VUHDO_trimSpellAssignments(VUHDO_HOSTILE_SPELL_ASSIGNMENTS);
+
 	-- Tastatur
+	VUHDO_initDefaultKeySpellAssignments();
 	if (VUHDO_SPELLS_KEYBOARD == nil) then
 		VUHDO_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELLS_KEYBOARD);
 	end
 	VUHDO_SPELLS_KEYBOARD = VUHDO_ensureSanity("VUHDO_SPELLS_KEYBOARD", VUHDO_SPELLS_KEYBOARD, VUHDO_DEFAULT_SPELLS_KEYBOARD);
+	VUHDO_DEFAULT_SPELLS_KEYBOARD = nil;
+
 	-- Konfiguration
 	if (VUHDO_SPELL_CONFIG == nil) then
 		VUHDO_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_DEFAULT_SPELL_CONFIG);
@@ -424,10 +383,30 @@ function VUHDO_loadSpellArray()
 		}
 	end
 
-	VUHDO_DEFAULT_SPELL_ASSIGNMENT = nil;
-	VUHDO_DEFAULT_HOSTILE_SPELL_ASSIGNMENT = nil;
-	VUHDO_DEFAULT_SPELLS_KEYBOARD = nil;
+	VUHDO_DEFAULT_SPELL_CONFIG = nil;
 end
+
+
+
+--
+local function VUHDO_makeFullColorWoOpacity(...)
+	local tColor = VUHDO_makeFullColor(...);
+	tColor["useOpacity"] = false;
+	return tColor;
+end
+
+
+
+--
+local function VUHDO_makeHotColor(...)
+	local tColor = VUHDO_makeFullColor(...);
+	tColor["isFullDuration"] = false;
+	tColor["isClock"] = false;
+	tColor["countdownMode"] = 1;
+	tColor["useOpacity"] = false;
+	return tColor;
+end
+
 
 
 
@@ -456,11 +435,8 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isColor"]) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] = nil;
 	elseif (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] == nil) then
-		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"] = {
-			["R"] = 0.6, ["G"] = 0.3, ["B"] = 0, ["O"] = 1,
-			["TR"] = 0.8,	["TG"] = 0.5,	["TB"] = 0,	["TO"] = 1,
-			["useText"] = true,	["useBackground"] = true,  ["useOpacity"] = true,
-		};
+		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["color"]
+			= VUHDO_makeFullColor(0.6, 0.3, 0, 1,   0.8, 0.5, 0, 1);
 	end
 end
 
@@ -471,7 +447,6 @@ local function VUHDO_addCustomSpellIds(aVersion, ...)
 	if ((VUHDO_CONFIG["CUSTOM_DEBUFF"].version or 0) < aVersion) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"].version = aVersion;
 
-		local tCnt;
 		local tArg;
 
 		for tCnt = 1, select("#", ...) do
@@ -531,13 +506,13 @@ local VUHDO_DEFAULT_CONFIG = {
 	["OMIT_TARGET"] = false,
 	["OMIT_SELF"] = false,
 	["OMIT_DFT_MTS"] = false,
-	["BLIZZ_UI_HIDE_PLAYER"] = false,
-	["BLIZZ_UI_HIDE_PARTY"] = false,
-	["BLIZZ_UI_HIDE_TARGET"] = false,
-	["BLIZZ_UI_HIDE_PET"] = false,
-	["BLIZZ_UI_HIDE_FOCUS"] = false,
-	["BLIZZ_UI_HIDE_RAID"] = false,
-	["BLIZZ_UI_HIDE_RAID_MGR"] = false,
+	["BLIZZ_UI_HIDE_PLAYER"] = 2,
+	["BLIZZ_UI_HIDE_PARTY"] = 2,
+	["BLIZZ_UI_HIDE_TARGET"] = 2,
+	["BLIZZ_UI_HIDE_PET"] = 2,
+	["BLIZZ_UI_HIDE_FOCUS"] = 2,
+	["BLIZZ_UI_HIDE_RAID"] = 2,
+	["BLIZZ_UI_HIDE_RAID_MGR"] = 2,
 
 	["CURRENT_PROFILE"] = "",
 	["IS_ALWAYS_OVERWRITE_PROFILE"] = false,
@@ -547,31 +522,7 @@ local VUHDO_DEFAULT_CONFIG = {
 	["STANDARD_TOOLTIP"] = false,
 	["DEBUFF_TOOLTIP"] = true,
 
-	["AUTO_PROFILES"] = {
-		["1"] = nil,
-		["5"] = nil,
-		["10"] = nil,
-		["15"] = nil,
-		["25"] = nil,
-		["40"] = nil,
-
-		["SPEC_1"] = nil,
-		["SPEC_2"] = nil,
-
-		["SPEC_1_1"] = nil,
-		["SPEC_1_5"] = nil,
-		["SPEC_1_10"] = nil,
-		["SPEC_1_15"] = nil,
-		["SPEC_1_25"] = nil,
-		["SPEC_1_40"] = nil,
-
-		["SPEC_2_1"] = nil,
-		["SPEC_2_5"] = nil,
-		["SPEC_2_10"] = nil,
-		["SPEC_2_15"] = nil,
-		["SPEC_2_25"] = nil,
-		["SPEC_2_40"] = nil,
-	},
+	["AUTO_PROFILES"] = {	},
 
 	["RES_ANNOUNCE_TEXT"] = VUHDO_I18N_DEFAULT_RES_ANNOUNCE,
 	["RES_IS_SHOW_TEXT"] = false,
@@ -597,11 +548,7 @@ local VUHDO_DEFAULT_CONFIG = {
 			["Y_ADJUST"] = 26,
 			["SCALE"] = 85,
 			["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
-			["COLOR"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-			},
+			["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   1, 1, 1, 1),
 			["USE_SHADOW"] = true,
 			["USE_OUTLINE"] = false,
 			["USE_MONO"] = false,
@@ -613,11 +560,7 @@ local VUHDO_DEFAULT_CONFIG = {
 			["Y_ADJUST"] = -15,
 			["SCALE"] = 70,
 			["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
-			["COLOR"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 0, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-			},
+			["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   0, 1, 0, 1),
 			["USE_SHADOW"] = true,
 			["USE_OUTLINE"] = false,
 			["USE_MONO"] = false,
@@ -653,11 +596,7 @@ local VUHDO_DEFAULT_CONFIG = {
 			["Y_ADJUST"] = 22,
 			["SCALE"] = 85,
 			["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
-			["COLOR"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-			},
+			["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   1, 1, 1, 1),
 			["USE_SHADOW"] = false,
 			["USE_OUTLINE"] = true,
 			["USE_MONO"] = false,
@@ -715,14 +654,10 @@ local VUHDO_DEFAULT_CONFIG = {
 				["enable"] = true,
 				["thresh"] = 8000,
 			},
-			--[[ ["ef"] = {
-				["enable"] = true,
-				["thresh"] = 8000,
-			}, ]] -- MOP
 			["hr"] = {
 				["enable"] = false,
 				["thresh"] = 10000,
-			}, -- MOP
+			},
 		},
 
 	},
@@ -763,13 +698,27 @@ local VUHDO_DEFAULT_CU_DE_STORED_SETTINGS = {
 
 
 VUHDO_DEFAULT_POWER_TYPE_COLORS = {
-	[VUHDO_UNIT_POWER_MANA] = { ["R"] = 0, ["G"] = 0, ["B"] = 1, ["O"] = 1, ["TR"] = 0, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1, ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true },
-	[VUHDO_UNIT_POWER_RAGE] = { ["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1, ["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1, ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true  },
-	[VUHDO_UNIT_POWER_FOCUS] = { ["R"] = 1, ["G"] = 0.5, ["B"] = 0.25, ["O"] = 1, ["TR"] = 1, ["TG"] = 0.5, ["TB"] = 0.25, ["TO"] = 1, ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true  },
-	[VUHDO_UNIT_POWER_ENERGY] = { ["R"] = 1, ["G"] = 1, ["B"] = 0, ["O"] = 1,["TR"] = 1, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,  ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true  },
-	[VUHDO_UNIT_POWER_HAPPINESS] = { ["R"] = 0, ["G"] = 1, ["B"] = 1, ["O"] = 1, ["TR"] = 0, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1, ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true  },
-	[VUHDO_UNIT_POWER_RUNES] = { ["R"] = 0.5, ["G"] = 0.5, ["B"] = 0.5, ["O"] = 1, ["TR"] = 0.5, ["TG"] = 0.5, ["TB"] = 0.5, ["TO"] = 1, ["useBackground"] = true, ["useOpacity"] = true, ["useText"] = true  },
+	[VUHDO_UNIT_POWER_MANA]      = VUHDO_makeFullColor(0,   0,   1,    1,   0,   0,   1,    1),
+	[VUHDO_UNIT_POWER_RAGE]      = VUHDO_makeFullColor(1,   0,   0,    1,   1,   0,   0,    1),
+	[VUHDO_UNIT_POWER_FOCUS]     = VUHDO_makeFullColor(1,   0.5, 0.25, 1,   1,   0.5, 0.25, 1),
+	[VUHDO_UNIT_POWER_ENERGY]    = VUHDO_makeFullColor(1,   1,   0,    1,   1,   1,   0,    1),
+	[VUHDO_UNIT_POWER_HAPPINESS] = VUHDO_makeFullColor(0,   1,   1,    1,   0,   1,   1,    1),
+	[VUHDO_UNIT_POWER_RUNES]     = VUHDO_makeFullColor(0.5, 0.5, 0.5,  1,   0.5, 0.5, 0.5,  1),
 };
+
+
+
+--
+local function VUHDO_convertToTristate(aBoolean, aTrueVal, aFalseVal)
+	if (aBoolean == nil or aBoolean == false) then
+		return aFalseVal;
+	elseif (aBoolean == true) then
+		return aTrueVal;
+	else
+		return aBoolean;
+	end
+end
+
 
 
 --
@@ -786,6 +735,14 @@ function VUHDO_loadDefaultConfig()
 		end
 	end
 
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_TARGET"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_TARGET"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_PET"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_PET"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_FOCUS"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_FOCUS"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID"], 3, 2);
+	VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID_MGR"] = VUHDO_convertToTristate(VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID_MGR"], 3, 2);
+
 	VUHDO_CONFIG = VUHDO_ensureSanity("VUHDO_CONFIG", VUHDO_CONFIG, VUHDO_DEFAULT_CONFIG);
 	VUHDO_DEFAULT_CONFIG = VUHDO_compressTable(VUHDO_DEFAULT_CONFIG);
 
@@ -793,87 +750,6 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["IS_SHARE"] = true;
 		VUHDO_CONFIG["VERSION"] = 4;
 	end
-
-	--[[VUHDO_addCustomSpellIds(14,
-		-- 4.1 raid
-		95173, -- Consuming Darkness
-		91911, -- Constricting Chains
-		94679, -- Parasitic Infection
-		94617, -- Mangle
-		79835, -- Poison Soaked Shell
-		91433, -- Lightning Conductor
-		91521, -- Incineration Security Measure
-		77699, -- Flash Freeze
-		77760, -- Biting Chill
-		92423, -- Searing Flame
-		92485, -- Roaring Flame
-		92407, -- Sonic Breath
-		82881, -- Break
-		89084, -- Low Health
-		92878, -- Blackout
-		86840, -- Devouring Flames
-		95639, -- Engulfing Magic
-		39171, -- Malevolent Strikes
-		92511, -- Hydro Lance
-		82762, -- Waterlogged
-		92505, -- Frozen
-		92518, -- Flame Torrent
-		83099, -- Lightning Rod
-		92075, -- Gravity Core
-		92488, -- Gravity Crush
-		86028, -- Cho's Blast
-		86029, -- Gall's Blast
-		93131, -- Ice Patch
-		86206, -- Soothing Breeze
-		93122, -- Toxic Spores
-		93058, -- Slicing Gale
-		93260, -- Ice Storm
-		93295,  -- Lightning Rod
-		81836 -- Corruption: Accelerated
-	);
-
-
-	VUHDO_addCustomSpellIds(16,
-		-----
-		-- ZA
-		-----
-		--Akilzon:
-		43648, -- Electrical Storm
-		97318, -- Plucked?
-		--Daakara
-		97639, -- Throw?
-		--Halazzi
-		97490, -- Shock?
-		--Janalai
-		43140, -- Flame Breath
-		--Malacrass
-		43501, -- Siphon Soul
-		--Nalorak
-		--?
-		-----
-		-- ZG
-		-----
-		-- Jindo
-		97198, -- Body Slam?
-		-- Kilnara
-		96958, -- Lash?
-		96592, -- Ravage?
-		-- Mandokir
-		96684, -- Decapitate?
-		96776, -- Bloodletting?
-		--Venoxis
-		96466, -- Whisper Hetiss?
-		96477, -- Toxic Link?
-		--Zanzil
-		96342  -- Gaze?
-	);
-
-
-	VUHDO_addCustomSpellIds(17,
-		96328, -- Toxic Torment
-		96326, -- Burning Blood
-		96325  -- Frostburn Formula
-	);]]
 
 
 	VUHDO_addCustomSpellIds(18,
@@ -940,12 +816,9 @@ function VUHDO_loadDefaultConfig()
 		105841, -- Degenerative bite
 		105445, -- Blistering heat
 		109603  -- Tetanus
-		--109632, -- Impale
-		--109592, -- Corrupted blood
 	);
 
 
-	local tName;
 	for _, tName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
 		VUHDO_customDebuffsAddDefaultSettings(tName);
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] = VUHDO_ensureSanity(
@@ -1049,8 +922,8 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["TR"] = 1,	["TG"] = 1,	["TB"] = 1,	["TO"] = 1,
 			["R"] = 0,	["G"] = 1,	["B"] = 0,	["O"] = 1,
 			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-			["modeText"] = 2; -- 1=enemy, 2=solid, 3=class color, 4=gradient
-			["modeBack"] = 1;
+			["modeText"] = 2, -- 1=enemy, 2=solid, 3=class color, 4=gradient
+			["modeBack"] = 1
 		},
 
 		["IRRELEVANT"] =  {
@@ -1058,106 +931,34 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["TR"] = 1, ["TG"] = 0.82, ["TB"] = 0, ["TO"] = 1,
 			["useText"] = false, ["useBackground"] = false, ["useOpacity"] = true,
 		},
-
 		["INCOMING"] = {
 			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.33,
 			["TR"] = 1, ["TG"] = 0.82, ["TB"] = 0, ["TO"] = 1,
 			["useText"] = false, ["useBackground"] = false,	["useOpacity"] = true,
 		},
-
-		["EMERGENCY"] = {
-			["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0.82, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["NO_EMERGENCY"] = {
-			["R"] = 0, ["G"] = 0, ["B"] = 0.4, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0.82, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["OFFLINE"] = {
-			["R"] = 0.298, ["G"] = 0.298, ["B"] = 0.298, ["O"] = 0.21,
-			["TR"] = 0.576, ["TG"] = 0.576, ["TB"] = 0.576,
-			["TO"] = 0.58, ["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["DEAD"] = {
-			["R"] = 0.3, ["G"] = 0.3, ["B"] = 0.3, ["O"] = 0.5,
-			["TR"] = 0.5, ["TG"] = 0.5, ["TB"] = 0.5, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
+		["EMERGENCY"] = VUHDO_makeFullColor(1, 0, 0, 1,   1, 0.82, 0, 1),
+		["NO_EMERGENCY"] = VUHDO_makeFullColor(0, 0, 0.4, 1,   1, 0.82, 0, 1),
+		["OFFLINE"] = VUHDO_makeFullColor(0.298, 0.298, 0.298, 0.21,   0.576, 0.576, 0.576, 0.58),
+		["DEAD"] = VUHDO_makeFullColor(0.3, 0.3, 0.3, 0.5,   0.5, 0.5, 0.5, 1),
 		["OUTRANGED"] = {
 			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.25,
 			["TR"] = 0, ["TG"] = 0, ["TB"] = 0, ["TO"] = 0.5,
 			["useText"] = false, ["useBackground"] = false, ["useOpacity"] = true,
 		},
-
-		["TAPPED"] = {
-			["R"] = 0.4, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
-			["TR"] = 0.4, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["TARGET_FRIEND"] = {
-			["R"] = 0, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-			["TR"] = 0, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["TARGET_NEUTRAL"] = {
-			["R"] = 1, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["TARGET_ENEMY"] = {
-			["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
+		["TAPPED"] = VUHDO_makeFullColor(0.4, 0.4, 0.4, 1,   0.4, 0.4, 0.4, 1),
+		["TARGET_FRIEND"] = VUHDO_makeFullColor(0, 1, 0, 1,   0, 1, 0, 1),
+		["TARGET_NEUTRAL"] = VUHDO_makeFullColor(1, 1, 0, 1,   1, 1, 0, 1),
+		["TARGET_ENEMY"] = VUHDO_makeFullColor(1, 0, 0, 1,   1, 0, 0, 1),
 
 		["DEBUFF" .. VUHDO_DEBUFF_TYPE_NONE] =  {
 			["useText"] = false, ["useBackground"] = false, ["useOpacity"] = false,
 		},
-
-		["DEBUFF" .. VUHDO_DEBUFF_TYPE_POISON] = {
-			["R"] = 0, ["G"] = 0.592, ["B"] = 0.8, ["O"] = 1,
-			["TR"] = 0, ["TG"] = 1, ["TB"] = 0.686, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["DEBUFF" .. VUHDO_DEBUFF_TYPE_DISEASE] = {
-			["R"] = 0.8, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["DEBUFF" .. VUHDO_DEBUFF_TYPE_CURSE] = {
-			["R"] = 0.7, ["G"] = 0, ["B"] = 0.7, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["DEBUFF" .. VUHDO_DEBUFF_TYPE_MAGIC] = {
-			["R"] = 0.4, ["G"] = 0.4, ["B"] = 0.8, ["O"] = 1,
-			["TR"] = 0.329, ["TG"] = 0.957, ["TB"] = 1, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM] = {
-			["R"] = 0.6, ["G"] = 0.3, ["B"] = 0, ["O"] = 1,
-			["TR"] = 0.8, ["TG"] = 0.5, ["TB"] = 0, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
-
-		["CHARMED"] = {
-			["R"] = 0.51, ["G"] = 0.082, ["B"] = 0.263, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0.31, ["TB"] = 0.31, ["TO"] = 1,
-			["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-		},
+		["DEBUFF" .. VUHDO_DEBUFF_TYPE_POISON] = VUHDO_makeFullColor(0, 0.592, 0.8, 1,   0, 1, 0.686, 1),
+		["DEBUFF" .. VUHDO_DEBUFF_TYPE_DISEASE] = VUHDO_makeFullColor(0.8, 0.4, 0.4, 1,   1, 0, 0, 1),
+		["DEBUFF" .. VUHDO_DEBUFF_TYPE_CURSE] = VUHDO_makeFullColor(0.7, 0, 0.7, 1,   1, 0, 1, 1),
+		["DEBUFF" .. VUHDO_DEBUFF_TYPE_MAGIC] = VUHDO_makeFullColor(0.4, 0.4, 0.8, 1,   0.329, 0.957, 1, 1),
+		["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM] = VUHDO_makeFullColor(0.6, 0.3, 0, 1,   0.8, 0.5, 0, 1),
+		["CHARMED"] = VUHDO_makeFullColor(0.51, 0.082, 0.263, 1,   1, 0.31, 0.31, 1),
 
 		["BAR_FRAMES"] = {
 			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
@@ -1184,40 +985,11 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			},
 		},
 
-		["HOT1"] = {
-			["R"] = 1, ["G"] = 0.3, ["B"] = 0.3, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0.6, ["TB"] = 0.6, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false, ["countdownMode"] = 1,
-		},
-
-		["HOT2"] = {
-			["R"] = 1, ["G"] = 1, ["B"] = 0.3, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false,	["countdownMode"] = 1,
-		},
-
-		["HOT3"] = {
-			["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false, ["countdownMode"] = 1,
-		},
-
-		["HOT4"] = {
-			["R"] = 0.3, ["G"] = 0.3, ["B"] = 1, ["O"] = 1,
-			["TR"] = 0.6, ["TG"] = 0.6, ["TB"] = 1, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false, ["countdownMode"] = 1,
-		},
-
-		["HOT5"] = {
-			["R"] = 1, ["G"] = 0.3, ["B"] = 1, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 0.6, ["TB"] = 1, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false, ["countdownMode"] = 1,
-		},
+		["HOT1"] = VUHDO_makeHotColor(1, 0.3, 0.3, 1,   1, 0.6, 0.6, 1),
+		["HOT2"] = VUHDO_makeHotColor(1, 1, 0.3, 1,   1, 1, 0.6, 1),
+		["HOT3"] = VUHDO_makeHotColor(1, 1, 1, 1,   1, 1, 1, 1),
+		["HOT4"] = VUHDO_makeHotColor(0.3, 0.3, 1, 1,   0.6, 0.6, 1, 1),
+		["HOT5"] = VUHDO_makeHotColor(1, 0.3, 1, 1,   1, 0.6, 1, 1),
 
 		["HOT6"] = {
 			["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 0.75,
@@ -1234,37 +1006,12 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["useBackground"] = true,
 		},
 
-		["HOT9"] = {
-			["R"] = 0.3, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-			["TR"] = 0.6, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-			["useBackground"] = true,	["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false,	["countdownMode"] = 1,
-		},
+		["HOT9"] = VUHDO_makeHotColor(0.3, 1, 1, 1,   0.6, 1, 1, 1),
+		["HOT10"] = VUHDO_makeHotColor(0.3, 1, 0.3, 1,   0.6, 1, 0.3, 1),
 
-		["HOT10"] = {
-			["R"] = 0.3, ["G"] = 1, ["B"] = 0.3, ["O"] = 1,
-			["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.3, ["TO"] = 1,
-			["useBackground"] = true,	["useText"] = true,
-			["isFullDuration"] = false, ["isClock"] = false,	["countdownMode"] = 1,
-		},
-
-		["HOT_CHARGE_2"] = {
-			["R"] = 1, ["G"] = 1, ["B"] = 0.3, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-		},
-
-		["HOT_CHARGE_3"] = {
-			["R"] = 0.3, ["G"] = 1, ["B"] = 0.3, ["O"] = 1,
-			["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-		},
-
-		["HOT_CHARGE_4"] = {
-			["R"] = 0.8, ["G"] = 0.8, ["B"] = 0.8, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-		},
+		["HOT_CHARGE_2"] = VUHDO_makeFullColorWoOpacity(1, 1, 0.3, 1,   1, 1, 0.6, 1),
+		["HOT_CHARGE_3"] = VUHDO_makeFullColorWoOpacity(0.3, 1, 0.3, 1,   0.6, 1, 0.6, 1),
+		["HOT_CHARGE_4"] = VUHDO_makeFullColorWoOpacity(0.8, 0.8, 0.8, 1,   1, 1, 1, 1),
 
 		["useDebuffIcon"] = false,
 		["useDebuffIconBossOnly"] = true,
@@ -1273,59 +1020,18 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["enable"] = false,
 			["filterOnly"] = false,
 
-			["1"] = {
-				["R"] = 1, ["G"] = 0.976,	["B"] = 0.305, ["O"] = 1,
-				["TR"] = 0.980,	["TG"] = 1,	["TB"] = 0.607,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["2"] = {
-				["R"] = 1, ["G"] = 0.513,	["B"] = 0.039, ["O"] = 1,
-				["TR"] = 1,	["TG"] = 0.827,	["TB"] = 0.419,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["3"] = {
-				["R"] = 0.788, ["G"] = 0.290,	["B"] = 0.8, ["O"] = 1,
-				["TR"] = 1,	["TG"] = 0.674,	["TB"] = 0.921,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["4"] = {
-				["R"] = 0, ["G"] = 0.8,	["B"] = 0.015, ["O"] = 1,
-				["TR"] = 0.698,	["TG"] = 1,	["TB"] = 0.698,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["5"] = {
-				["R"] = 0.466, ["G"] = 0.717,	["B"] = 0.8, ["O"] = 1,
-				["TR"] = 0.725,	["TG"] = 0.870,	["TB"] = 1,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["6"] = {
-				["R"] = 0.121, ["G"] = 0.690,	["B"] = 0.972, ["O"] = 1,
-				["TR"] = 0.662,	["TG"] = 0.831,	["TB"] = 1,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["7"] = {
-				["R"] = 0.8, ["G"] = 0.184,	["B"] = 0.129, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0.627,	["TB"] = 0.619,	["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
-			["8"] = {
-				["R"] = 0.847, ["G"] = 0.866,	["B"] = 0.890, ["O"] = 1,
-				["TR"] = 0.231,	["TG"] = 0.231,	["TB"] = 0.231, ["TO"] = 1,
-				["useBackground"] = true,	["useText"] = true,
-			},
+			["1"] = VUHDO_makeFullColorWoOpacity(1, 0.976, 0.305, 1,   0.980,	1, 0.607, 1),
+			["2"] = VUHDO_makeFullColorWoOpacity(1, 0.513, 0.039, 1,   1, 0.827, 0.419, 1),
+			["3"] = VUHDO_makeFullColorWoOpacity(0.788, 0.290, 0.8, 1,   1, 0.674, 0.921, 1),
+			["4"] = VUHDO_makeFullColorWoOpacity(0, 0.8, 0.015, 1,   0.698, 1, 0.698, 1),
+			["5"] = VUHDO_makeFullColorWoOpacity(0.466, 0.717, 0.8, 1,   0.725, 0.870, 1, 1),
+			["6"] = VUHDO_makeFullColorWoOpacity(0.121, 0.690, 0.972, 1,   0.662, 0.831, 1, 1),
+			["7"] = VUHDO_makeFullColorWoOpacity(0.8, 0.184, 0.129, 1,   1, 0.627, 0.619, 1),
+			["8"] = VUHDO_makeFullColorWoOpacity(0.847, 0.866, 0.890, 1,   0.231, 0.231, 0.231, 1),
 		},
 
-		["CLUSTER_FAIR"] = {
-			["R"] = 0.8, ["G"] = 0.8, ["B"] = 0, ["O"] = 1,
-			["TR"] = 1, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-		},
-
-		["CLUSTER_GOOD"] = {
-			["R"] = 0, ["G"] = 0.8, ["B"] = 0, ["O"] = 1,
-			["TR"] = 0, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-			["useBackground"] = true, ["useText"] = true,
-		},
+		["CLUSTER_FAIR"] = VUHDO_makeFullColorWoOpacity(0.8, 0.8, 0, 1,   1, 1, 0, 1),
+		["CLUSTER_GOOD"] = VUHDO_makeFullColorWoOpacity(0, 0.8, 0, 1,   0, 1, 0, 1),
 
 		["GCD_BAR"] = {
 			["R"] = 0.4, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 0.5,
@@ -1362,6 +1068,7 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 
 
 
+--
 local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 	["HOTS"] = {
 		["size"] = 76,
@@ -1521,13 +1228,12 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 	},
 
 	["frameStrata"] = "MEDIUM",
-}
+};
 
 
 
 --
 function VUHDO_loadDefaultPanelSetup()
-	local tPanelNum;
 	local tAktPanel;
 
 	if (VUHDO_PANEL_SETUP == nil) then
@@ -1619,90 +1325,46 @@ local VUHDO_DEFAULT_BUFF_CONFIG = {
 	["PANEL_MAX_BUFFS"] = 5,
 	["PANEL_BG_COLOR"] = {
 		["R"] = 0, ["G"] = 0,	["B"] = 0, ["O"] = 0.5,
-		["useText"] = false, ["useBackground"] = true, ["useOpacity"] = false,
+		["useBackground"] = true,
 	},
 	["PANEL_BORDER_COLOR"] = {
 		["R"] = 0, ["G"] = 0,	["B"] = 0, ["O"] = 0.5,
-		["useText"] = false, ["useBackground"] = true, ["useOpacity"] = false,
+		["useBackground"] = true,
 	},
 	["SWATCH_BG_COLOR"] = {
 		["R"] = 0, ["G"] = 0,	["B"] = 0, ["O"] = 1,
-		["useText"] = false, ["useBackground"] = true, ["useOpacity"] = false,
+		["useBackground"] = true,
 	},
 	["SWATCH_BORDER_COLOR"] = {
 		["R"] = 0.8, ["G"] = 0.8,	["B"] = 0.8, ["O"] = 0,
-		["useText"] = false, ["useBackground"] = true, ["useOpacity"] = false,
+		["useBackground"] = true,
 	},
 	["REBUFF_AT_PERCENT"] = 25,
 	["REBUFF_MIN_MINUTES"] = 3,
 	["HIGHLIGHT_COOLDOWN"] = true,
 	["WHEEL_SMART_BUFF"] = false,
 
-	["SWATCH_COLOR_BUFF_OKAY"] = {
-		["R"] = 0, ["G"] = 0,	["B"] = 0,
-		["TR"] = 0, ["TG"] = 0.8,	["TB"] = 0,
-		["O"] = 1, ["TO"] = 1,
-		["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-	},
-	["SWATCH_COLOR_BUFF_LOW"] = {
-		["R"] = 0, ["G"] = 0,	["B"] = 0,
-		["TR"] = 1.0, ["TG"] = 0.7,	["TB"] = 0,
-		["O"] = 1, ["TO"] = 1,
-		["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-	},
-	["SWATCH_COLOR_BUFF_OUT"] = {
-		["R"] = 0, ["G"] = 0,	["B"] = 0,
-		["TR"] = 0.8, ["TG"] = 0,	["TB"] = 0,
-		["O"] = 1, ["TO"] = 1,
-		["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-	},
-	["SWATCH_COLOR_BUFF_COOLDOWN"] = {
-		["R"] = 0.3, ["G"] = 0.3,	["B"] = 0.3,
-		["TR"] = 0.6, ["TG"] = 0.6,	["TB"] = 0.6,
-		["O"] = 1, ["TO"] = 1,
-		["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-	},
+	["SWATCH_COLOR_BUFF_OKAY"]     = VUHDO_makeFullColor(0,   0,   0,   1,   0,   0.8, 0,   1),
+	["SWATCH_COLOR_BUFF_LOW"]      = VUHDO_makeFullColor(0,   0,   0,   1,   1,   0.7, 0,   1),
+	["SWATCH_COLOR_BUFF_OUT"]      = VUHDO_makeFullColor(0,   0,   0,   1,   0.8, 0,   0,   1),
+	["SWATCH_COLOR_BUFF_COOLDOWN"] = VUHDO_makeFullColor(0.3, 0.3, 0.3, 1,   0.6, 0.6, 0.6, 1),
 }
 
 
 
 VUHDO_DEFAULT_USER_CLASS_COLORS = {
-	[VUHDO_ID_DRUIDS] =       { ["R"]  = 1,    ["G"]  = 0.49, ["B"]  = 0.04, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 1,    ["TG"] = 0.6,  ["TB"] = 0.04, ["TO"] = 1, ["useText"] = true },
-
-	[VUHDO_ID_HUNTERS] =      { ["R"]  = 0.67, ["G"]  = 0.83, ["B"]  = 0.45, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.77, ["TG"] = 0.93, ["TB"] = 0.55, ["TO"] = 1, ["useText"] = true 	},
-
-	[VUHDO_ID_MAGES] =        { ["R"]  = 0.41, ["G"]  = 0.8,  ["B"]  = 0.94, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.51, ["TG"] = 0.9,  ["TB"] = 1,    ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_PALADINS] =     { ["R"]  = 0.96, ["G"]  = 0.55, ["B"]  = 0.73, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 1   , ["TG"] = 0.65, ["TB"] = 0.83, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_PRIESTS] =      { ["R"]  = 0.9,  ["G"]  = 0.9,  ["B"]  = 0.9,  ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 1,    ["TG"] = 1,    ["TB"] = 1,    ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_ROGUES] =       { ["R"]  = 1,    ["G"]  = 0.96, ["B"]  = 0.41, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 1,    ["TG"] = 1,    ["TB"] = 0.51, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_SHAMANS] =      { ["R"]  = 0.14, ["G"]  = 0.35, ["B"]  = 1,    ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.24, ["TG"] = 0.45, ["TB"] = 1,    ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_WARLOCKS] =     { ["R"]  = 0.58, ["G"]  = 0.51, ["B"]  = 0.79, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.68, ["TG"] = 0.61, ["TB"] = 0.89, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_WARRIORS] =     { ["R"]  = 0.78, ["G"]  = 0.61, ["B"]  = 0.43, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.88, ["TG"] = 0.71, ["TB"] = 0.53, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_DEATH_KNIGHT] = { ["R"]  = 0.77, ["G"]  = 0.12, ["B"]  = 0.23, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.87, ["TG"] = 0.22, ["TB"] = 0.33, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_MONKS] =        { ["R"]  = 0,    ["G"]  = 1,    ["B"]  = 0.59, ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0,    ["TG"] = 1,    ["TB"] = 0.69, ["TO"] = 1, ["useText"] = true  },
-
-	[VUHDO_ID_PETS] =         { ["R"]  = 0.4,  ["G"]  = 0.6,  ["B"]  = 0.4,    ["O"] = 1, ["useBackground"] = true, ["useOpacity"] = true,
-															["TR"] = 0.5,    ["TG"] = 0.9,    ["TB"] = 0.5,    ["TO"] = 1, ["useText"] = true  },
-
+	[VUHDO_ID_DRUIDS]       = VUHDO_makeFullColor(1,    0.49, 0.04, 1,   1,    0.6,  0.04, 1),
+	[VUHDO_ID_HUNTERS]      = VUHDO_makeFullColor(0.67, 0.83, 0.45, 1,   0.77, 0.93, 0.55, 1),
+	[VUHDO_ID_MAGES]        = VUHDO_makeFullColor(0.41, 0.8,  0.94, 1,   0.51, 0.9,  1,    1),
+	[VUHDO_ID_PALADINS]     = VUHDO_makeFullColor(0.96, 0.55, 0.73, 1,   1,    0.65, 0.83, 1),
+	[VUHDO_ID_PRIESTS]      = VUHDO_makeFullColor(0.9,  0.9,  0.9,  1,   1,    1,    1,    1),
+	[VUHDO_ID_ROGUES]       = VUHDO_makeFullColor(1,    0.96, 0.41, 1,   1,    1,    0.51, 1),
+	[VUHDO_ID_SHAMANS]      = VUHDO_makeFullColor(0.14, 0.35, 1,    1,   0.24, 0.45, 1,    1),
+	[VUHDO_ID_WARLOCKS]     = VUHDO_makeFullColor(0.58, 0.51, 0.79, 1,   0.68, 0.61, 0.89, 1),
+	[VUHDO_ID_WARRIORS]     = VUHDO_makeFullColor(0.78, 0.61, 0.43, 1,   0.88, 0.71, 0.53, 1),
+	[VUHDO_ID_DEATH_KNIGHT] = VUHDO_makeFullColor(0.77, 0.12, 0.23, 1,   0.87, 0.22, 0.33, 1),
+	[VUHDO_ID_MONKS]        = VUHDO_makeFullColor(0,    1,    0.59, 1,   0,    1,    0.69, 1),
+	[VUHDO_ID_PETS]         = VUHDO_makeFullColor(0.4,  0.6,  0.4,  1,   0.5,  0.9,  0.5,  1),
 	["petClassColor"] = false,
 }
 
@@ -1719,8 +1381,8 @@ end
 
 
 
+--
 local function VUHDO_getFirstFreeBuffOrder()
-	local tCnt;
 	for tCnt = 1, 10000 do
 		if (VUHDO_tableGetKeyFromValue(VUHDO_BUFF_ORDER, tCnt) == nil) then
 			return tCnt;
@@ -1731,11 +1393,11 @@ local function VUHDO_getFirstFreeBuffOrder()
 end
 
 
+
 --
 local function VUHDO_fixBuffOrder()
 	local _, tPlayerClass = UnitClass("player");
 	local tAllBuffs = VUHDO_CLASS_BUFFS[tPlayerClass] or { };
-	local tCategName;
 	local tSortArray = {};
 
 	-- Order ohne buff?
@@ -1775,7 +1437,6 @@ function VUHDO_initBuffSettings()
 
 	local _, tPlayerClass = UnitClass("player");
 	local tAllClassBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];
-	local tCategSepc;
 	if (tAllClassBuffs ~= nil) then
 		for tCategSpec, _ in pairs(tAllClassBuffs) do
 

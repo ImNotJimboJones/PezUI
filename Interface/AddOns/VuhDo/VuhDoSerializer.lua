@@ -68,7 +68,7 @@ local VUHDO_ABBREV_TO_KEY = {
 
 
 --
-local tKey, tValue, tScale, tLength, tStrValue; -- Mustn't be reused after recursion finished
+local tStrValue; -- Mustn't be reused after recursion finished
 function VUHDO_serializeTable(aTable)
 	local tString = "";
 

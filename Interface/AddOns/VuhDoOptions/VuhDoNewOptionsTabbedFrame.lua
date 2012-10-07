@@ -1,3 +1,7 @@
+VUHDO_MENU_RETURN_TARGET = nil;
+VUHDO_MENU_RETURN_TARGET_MAIN = nil;
+
+
 local _;
 local VUHDO_B_CONFIG = nil;
 local VUHDO_B_INDICATOR_CONFIG = nil;
@@ -26,20 +30,8 @@ end
 
 
 --
-local function VUHDO_getMainPanel(aComponent)
-	while (aComponent:GetParent():GetName() ~= "UIParent") do
-		aComponent = aComponent:GetParent();
-	end
-
-	return aComponent;
-end
-
-
-
---
 local function VUHDO_countTableDiffs(aTable, anotherTable)
 	local tCount = 0;
-	local tKey, tValue;
 
 	if (aTable == nil or anotherTable == nil) then
 		return 0;
@@ -71,7 +63,7 @@ end
 
 --
 function VUHDO_tabbedPanelOkayClicked(aButton)
-	VUHDO_getMainPanel(aButton):Hide();
+	VuhDoNewOptionsTabbedFrame:Hide();
 
 	VUHDO_B_CONFIG = nil;
 	VUHDO_B_INDICATOR_CONFIG = nil;
@@ -105,6 +97,8 @@ function VUHDO_tabbedPanelOkayClicked(aButton)
 	end
 
 	VUHDO_initAllBurstCaches();
+	VUHDO_trimSpellAssignments(VUHDO_SPELL_ASSIGNMENTS);
+	VUHDO_trimSpellAssignments(VUHDO_HOSTILE_SPELL_ASSIGNMENTS);
 	VUHDO_reloadUI();
 
 	VUHDO_MAY_DEBUFF_ANIM = true;
@@ -121,43 +115,24 @@ end
 
 
 
---
-local function VUHDO_newOptionsHideAllTabPanels()
-	VuhDoNewOptionsGeneral:Hide();
-	VuhDoNewOptionsPanelPanel:Hide();
-	VuhDoNewOptionsSpell:Hide();
-	VuhDoNewOptionsColors:Hide();
-	VuhDoNewOptionsMove:Hide();
-	VuhDoNewOptionsBuffs:Hide();
-	VuhDoNewOptionsDebuffs:Hide();
-	VuhDoNewOptionsTools:Hide();
-end
-
+local tAllPanels = {
+	{ "VuhDoNewOptionsGeneral", "General" },
+	{ "VuhDoNewOptionsSpell", "Spell" },
+	{ "VuhDoNewOptionsPanelPanel", "Panels" },
+	{ "VuhDoNewOptionsColors", "Colors" },
+	{ "VuhDoNewOptionsMove", "Move" },
+	{ "VuhDoNewOptionsBuffs", "Buffs" },
+	{ "VuhDoNewOptionsDebuffs", "Debuffs" },
+	{ "VuhDoNewOptionsTools", "Tools" },
+}
 
 
 --
-local tName;
 function VUHDO_newOptionsTabbedClickedClicked(aTabRadio)
-	tName = aTabRadio:GetName();
+	local tName = aTabRadio:GetName();
 
-	VUHDO_newOptionsHideAllTabPanels();
-
-	if (strfind(tName, "General")) then
-		VuhDoNewOptionsGeneral:Show();
-	elseif(strfind(tName, "Spell")) then
-		VuhDoNewOptionsSpell:Show();
-	elseif(strfind(tName, "Panels")) then
-		VuhDoNewOptionsPanelPanel:Show();
-	elseif(strfind(tName, "Colors")) then
-		VuhDoNewOptionsColors:Show();
-	elseif(strfind(tName, "Move")) then
-		VuhDoNewOptionsMove:Show();
-	elseif(strfind(tName, "Buffs")) then
-		VuhDoNewOptionsBuffs:Show();
-	elseif(strfind(tName, "Debuffs")) then
-		VuhDoNewOptionsDebuffs:Show();
-	elseif(strfind(tName, "Tools")) then
-		VuhDoNewOptionsTools:Show();
+	for _, tPanelInfo in pairs(tAllPanels) do
+		_G[tPanelInfo[1]]:SetShown(strfind(tName, tPanelInfo[2]));
 	end
 end
 
@@ -233,16 +208,11 @@ end
 
 
 
-
-
-local VUHDO_INIT_OPTIONS_SETTINGS = {
-	["scale"] = 1;
-}
-
-
 --
 function VUHDO_initOptionsSettings()
 	if (VUHDO_OPTIONS_SETTINGS == nil) then
-		VUHDO_OPTIONS_SETTINGS = VUHDO_deepCopyTable(VUHDO_INIT_OPTIONS_SETTINGS);
+		VUHDO_OPTIONS_SETTINGS = {
+			["scale"] = 1;
+		};
 	end
 end

@@ -18,13 +18,13 @@ local sIconRadio;
 
 --
 function VUHDO_panelRedrawHotsInitBurst()
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
-	VUHDO_getBarIconCharge = VUHDO_GLOBAL["VUHDO_getBarIconCharge"];
-	VUHDO_getOrCreateCooldown = VUHDO_GLOBAL["VUHDO_getOrCreateCooldown"];
-	VUHDO_strempty = VUHDO_GLOBAL["VUHDO_strempty"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_getBarIconCounter = _G["VUHDO_getBarIconCounter"];
+	VUHDO_getBarIconCharge = _G["VUHDO_getBarIconCharge"];
+	VUHDO_getOrCreateCooldown = _G["VUHDO_getOrCreateCooldown"];
+	VUHDO_strempty = _G["VUHDO_strempty"];
 
 	sHotConfig = VUHDO_PANEL_SETUP["HOTS"];
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
@@ -66,7 +66,6 @@ end
 --
 local tHotBar;
 local tHotBarColor;
-local tCnt;
 local tHotName;
 function VUHDO_initHotBars()
 	for tCnt = 6, 8 do
@@ -346,7 +345,6 @@ end
 
 
 --
-local tCnt;
 local tPosFunction;
 function VUHDO_initAllHotIcons()
 	if (sHotPos == 20) then

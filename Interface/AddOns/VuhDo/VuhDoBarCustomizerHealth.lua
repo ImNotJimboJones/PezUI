@@ -1,3 +1,4 @@
+local _;
 
 local VUHDO_NAME_TEXTS = { };
 
@@ -47,7 +48,6 @@ local UnitIsUnit = UnitIsUnit;
 local pairs = pairs;
 local twipe = table.wipe;
 local format = format;
-local _;
 local sIsOverhealText;
 local sIsAggroText;
 local sIsInvertGrowth;
@@ -55,38 +55,38 @@ local sLifeColor;
 
 
 function VUHDO_customHealthInitBurst()
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_BUTTON_CACHE = VUHDO_GLOBAL["VUHDO_BUTTON_CACHE"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_INDICATOR_CONFIG = VUHDO_GLOBAL["VUHDO_INDICATOR_CONFIG"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_BUTTON_CACHE = _G["VUHDO_BUTTON_CACHE"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_INDICATOR_CONFIG = _G["VUHDO_INDICATOR_CONFIG"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
  	VUHDO_BAR_COLOR = VUHDO_PANEL_SETUP["BAR_COLORS"];
  	VUHDO_THREAT_CFG = VUHDO_CONFIG["THREAT"];
- 	VUHDO_IN_RAID_TARGET_BUTTONS = VUHDO_GLOBAL["VUHDO_IN_RAID_TARGET_BUTTONS"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
+ 	VUHDO_IN_RAID_TARGET_BUTTONS = _G["VUHDO_IN_RAID_TARGET_BUTTONS"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
 
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getBarText = VUHDO_GLOBAL["VUHDO_getBarText"];
-	VUHDO_getIncHealOnUnit = VUHDO_GLOBAL["VUHDO_getIncHealOnUnit"];
-	VUHDO_getDiffColor = VUHDO_GLOBAL["VUHDO_getDiffColor"];
-	VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
-	VUHDO_updateManaBars = VUHDO_GLOBAL["VUHDO_updateManaBars"];
-	VUHDO_removeAllHots = VUHDO_GLOBAL["VUHDO_removeAllHots"];
-	VUHDO_updateAllHoTs = VUHDO_GLOBAL["VUHDO_updateAllHoTs"];
-	VUHDO_getUnitHealthPercent = VUHDO_GLOBAL["VUHDO_getUnitHealthPercent"];
-	VUHDO_getPanelButtons = VUHDO_GLOBAL["VUHDO_getPanelButtons"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_utf8Cut = VUHDO_GLOBAL["VUHDO_utf8Cut"];
-	VUHDO_resolveVehicleUnit = VUHDO_GLOBAL["VUHDO_resolveVehicleUnit"];
-	VUHDO_getOverhealPanel = VUHDO_GLOBAL["VUHDO_getOverhealPanel"];
-	VUHDO_getOverhealText = VUHDO_GLOBAL["VUHDO_getOverhealText"];
-	VUHDO_getBarRoleIcon = VUHDO_GLOBAL["VUHDO_getBarRoleIcon"];
-	VUHDO_getBarIconFrame = VUHDO_GLOBAL["VUHDO_getBarIconFrame"];
-  VUHDO_updateClusterHighlights = VUHDO_GLOBAL["VUHDO_updateClusterHighlights"];
-	VUHDO_customizeTargetBar = VUHDO_GLOBAL["VUHDO_customizeTargetBar"];
-	VUHDO_getColoredString = VUHDO_GLOBAL["VUHDO_getColoredString"];
-	VUHDO_textColor = VUHDO_GLOBAL["VUHDO_textColor"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getBarText = _G["VUHDO_getBarText"];
+	VUHDO_getIncHealOnUnit = _G["VUHDO_getIncHealOnUnit"];
+	VUHDO_getDiffColor = _G["VUHDO_getDiffColor"];
+	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
+	VUHDO_updateManaBars = _G["VUHDO_updateManaBars"];
+	VUHDO_removeAllHots = _G["VUHDO_removeAllHots"];
+	VUHDO_updateAllHoTs = _G["VUHDO_updateAllHoTs"];
+	VUHDO_getUnitHealthPercent = _G["VUHDO_getUnitHealthPercent"];
+	VUHDO_getPanelButtons = _G["VUHDO_getPanelButtons"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_utf8Cut = _G["VUHDO_utf8Cut"];
+	VUHDO_resolveVehicleUnit = _G["VUHDO_resolveVehicleUnit"];
+	VUHDO_getOverhealPanel = _G["VUHDO_getOverhealPanel"];
+	VUHDO_getOverhealText = _G["VUHDO_getOverhealText"];
+	VUHDO_getBarRoleIcon = _G["VUHDO_getBarRoleIcon"];
+	VUHDO_getBarIconFrame = _G["VUHDO_getBarIconFrame"];
+  VUHDO_updateClusterHighlights = _G["VUHDO_updateClusterHighlights"];
+	VUHDO_customizeTargetBar = _G["VUHDO_customizeTargetBar"];
+	VUHDO_getColoredString = _G["VUHDO_getColoredString"];
+	VUHDO_textColor = _G["VUHDO_textColor"];
 
 	sIsOverhealText = VUHDO_CONFIG["SHOW_TEXT_OVERHEAL"]
 	sIsAggroText = VUHDO_CONFIG["THREAT"]["AGGRO_USE_TEXT"];
@@ -147,7 +147,6 @@ local tRatio;
 local tAllButtons;
 local tHealthPlusInc;
 local tIncBar;
-local tButton;
 local tAmountInc;
 local tInfo;
 local tOverhealSetup;
@@ -343,7 +342,8 @@ function VUHDO_customizeText(aButton, aMode, anIsTarget)
 	if (tIsName) then
 
 	  tOwnerInfo = VUHDO_RAID[tInfo["ownerUnit"]];
-	  tIndex = tInfo["name"] .. (tInfo["ownerUnit"] or "") .. tPanelNum;
+	  tIndex = format("%s%s%d", tInfo["name"], tInfo["ownerUnit"] or "", tPanelNum);
+	  --tIndex = tInfo["name"] .. (tInfo["ownerUnit"] or "") .. tPanelNum;
 		if (VUHDO_NAME_TEXTS[tIndex] == nil) then
 	  	if (tSetup["ID_TEXT"]["showName"]) then
 	  		tTextString = (tSetup["ID_TEXT"]["showClass"] and not tInfo["isPet"])
@@ -468,7 +468,7 @@ local function VUHDO_customizeDamageFlash(aButton, aLossPercent)
 	if (aLossPercent ~= nil) then
 		tScaling = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["SCALING"];
 		if (tScaling["isDamFlash"] and tScaling["damFlashFactor"] >= aLossPercent) then
-			VUHDO_UIFrameFlash(VUHDO_GLOBAL[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
+			VUHDO_UIFrameFlash(_G[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
 		end
 	end
 end
@@ -476,7 +476,7 @@ end
 
 
 --
-local tAllButtons, tButton, tHealthBar, tQuota, tInfo;
+local tAllButtons, tHealthBar, tQuota, tInfo;
 function VUHDO_healthBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName, aLevel, aCurrValue2)
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
@@ -528,6 +528,7 @@ end
 
 
 --
+local tAllButtons, tHealthBar, tQuota;
 function VUHDO_healthBarBouquetCallbackCustom(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
@@ -562,7 +563,7 @@ end
 
 
 --
-local tAllButtons, tButton, tAggroBar;
+local tAllButtons, tAggroBar;
 function VUHDO_aggroBarBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
@@ -581,7 +582,7 @@ end
 
 
 --
-local tAllButtons, tButton, tBar, tQuota;
+local tAllButtons, tBar, tQuota;
 function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	aMaxValue = aMaxValue or 0;
 
@@ -627,7 +628,7 @@ local VUHDO_customizeHealButton = VUHDO_customizeHealButton;
 
 
 --
-local tInfo, tCnt, tAlpha, tIcon;
+local tInfo, tAlpha, tIcon;
 local function VUHDO_customizeDebuffIconsRange(aButton)
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
 
@@ -648,7 +649,6 @@ end
 --
 local tInfo;
 local tAllButtons;
-local tButton;
 function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 	VUHDO_updateBouquetsForEvent(aUnit, anUpdateMode);
 
@@ -737,8 +737,6 @@ end
 
 --
 local VUHDO_getHealButton = VUHDO_getHealButton;
-local tButton;
-local tUnit;
 local tPanelButtons;
 function VUHDO_updateAllPanelBars(aPanelNum)
 	tPanelButtons = VUHDO_getPanelButtons(aPanelNum);
@@ -760,7 +758,6 @@ local VUHDO_updateAllPanelBars = VUHDO_updateAllPanelBars;
 
 
 --
-local tCnt;
 VUHDO_REMOVE_HOTS = true;
 function VUHDO_updateAllRaidBars()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS

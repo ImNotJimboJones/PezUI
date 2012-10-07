@@ -3,7 +3,6 @@ VUHDO_HOT_MODELS = { };
 VUHDO_HOT_BAR_MODELS = { };
 
 --
-local tCnt, tName, tIndex, tModel;
 local tSortTable = { };
 function VUHDO_initHotComboModels()
 	table.wipe(VUHDO_HOT_MODELS);
@@ -66,7 +65,7 @@ end
 function VUHDO_squareDemoOnShow(aTexture)
 	local tNum;
 	tNum = VUHDO_getNumbersFromString(aTexture:GetName(), 1);
-	VUHDO_GLOBAL[aTexture:GetName() .. "Label"]:SetText("" .. tNum[1]);
+	_G[aTexture:GetName() .. "Label"]:SetText("" .. tNum[1]);
 end
 
 
@@ -76,9 +75,9 @@ function VUHDO_notifyHotSelect(aComboBox, aValue)
 	local tMineBox, tOthersBox, tEditButton;
 	local tComboName = aComboBox:GetParent():GetName();
 
-	tMineBox = VUHDO_GLOBAL[tComboName .. "MineCheckBox"];
-	tOthersBox = VUHDO_GLOBAL[tComboName .. "OthersCheckBox"];
-	tEditButton = VUHDO_GLOBAL[tComboName .. "EditButton"];
+	tMineBox = _G[tComboName .. "MineCheckBox"];
+	tOthersBox = _G[tComboName .. "OthersCheckBox"];
+	tEditButton = _G[tComboName .. "EditButton"];
 	if (aValue == nil or aValue == "CLUSTER" or aValue == "OTHER" or strsub(aValue, 1, 8) == "BOUQUET_") then
 		tMineBox:Hide();
 		tOthersBox:Hide();
@@ -106,18 +105,16 @@ end
 
 --
 function VUHDO_panelsHotsEditButtonClicked(aButton)
-	local tCombo = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SelectComboBox"];
+	local tCombo = _G[aButton:GetParent():GetName() .. "SelectComboBox"];
 	VUHDO_BOUQUETS["SELECTED"] = strsub(VUHDO_lnfGetValueFromModel(tCombo), 9);
 
-	VUHDO_MENU_RETURN_FUNC = nil;
 	VUHDO_MENU_RETURN_TARGET = nil;
 	VUHDO_MENU_RETURN_TARGET_MAIN = VuhDoNewOptionsTabbedFrameTabsPanelPanelsRadioButton;
 
 	VUHDO_newOptionsTabbedClickedClicked(VuhDoNewOptionsTabbedFrameTabsPanelGeneralRadioButton);
 	VUHDO_lnfRadioButtonClicked(VuhDoNewOptionsTabbedFrameTabsPanelGeneralRadioButton);
 
-	VUHDO_newOptionsGeneralBouquetClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
-	VUHDO_lnfRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
+	VUHDO_lnfTabRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
 end
 
 
@@ -133,16 +130,16 @@ function VUHDO_hotSlotContainerOnLoad(aContainer)
 	local tHotSlotNum = VUHDO_getNumbersFromString(tContainerName, 1)[1];
 	local tContainerNum = VUHDO_SLOT_NO_FROM_HOT_NO[tHotSlotNum] or "";
 
-	local tLabel = VUHDO_GLOBAL[tContainerName .. "TitleLabelLabel"];
+	local tLabel = _G[tContainerName .. "TitleLabelLabel"];
 	tLabel:SetText(VUHDO_I18N_SLOT .. " " .. tContainerNum);
 
-	local tCombo = VUHDO_GLOBAL[tContainerName .. "SelectComboBox"];
+	local tCombo = _G[tContainerName .. "SelectComboBox"];
 	VUHDO_setComboModel(tCombo, "VUHDO_PANEL_SETUP.HOTS.SLOTS.##" .. tHotSlotNum, VUHDO_HOT_MODELS);
 
-	local tMineBox = VUHDO_GLOBAL[tContainerName .. "MineCheckBox"];
+	local tMineBox = _G[tContainerName .. "MineCheckBox"];
 	VUHDO_lnfSetModel(tMineBox, "VUHDO_PANEL_SETUP.HOTS.SLOTCFG." .. tHotSlotNum .. ".mine");
 
-	local tOthersBox = VUHDO_GLOBAL[tContainerName .. "OthersCheckBox"];
+	local tOthersBox = _G[tContainerName .. "OthersCheckBox"];
 	VUHDO_lnfSetModel(tOthersBox, "VUHDO_PANEL_SETUP.HOTS.SLOTCFG." .. tHotSlotNum .. ".others");
 end
 
@@ -154,10 +151,10 @@ function VUHDO_hotMoreSlotContainerOnLoad(aContainer)
 	local tHotSlotNum = VUHDO_getNumbersFromString(tContainerName, 1)[1];
 	local tContainerNum = VUHDO_SLOT_NO_FROM_HOT_NO[tHotSlotNum] or "";
 
-	local tLabel = VUHDO_GLOBAL[tContainerName .. "TitleLabelLabel"];
+	local tLabel = _G[tContainerName .. "TitleLabelLabel"];
 	tLabel:SetText(VUHDO_I18N_SLOT .. " " .. tContainerNum);
 
-	local tSlider = VUHDO_GLOBAL[tContainerName .. "ScaleSlider"];
+	local tSlider = _G[tContainerName .. "ScaleSlider"];
 	VUHDO_lnfSetModel(tSlider, "VUHDO_PANEL_SETUP.HOTS.SLOTCFG." .. tHotSlotNum .. ".scale");
 	VUHDO_lnfSliderOnLoad(tSlider, "", 0.5, 2, "", 0.05);
 	VUHDO_lnfSetTooltip(tSlider, VUHDO_I18N_TT.K545);
@@ -167,8 +164,8 @@ end
 
 --
 function VUHDO_optionsHotsToggleMorePanel(aPanel)
-	local tBasicPanel = VUHDO_GLOBAL[aPanel:GetParent():GetName() .. "HotOrderPanel"];
-	local tMorePanel = VUHDO_GLOBAL[aPanel:GetParent():GetName() .. "MoreHotOrderPanel"];
+	local tBasicPanel = _G[aPanel:GetParent():GetName() .. "HotOrderPanel"];
+	local tMorePanel = _G[aPanel:GetParent():GetName() .. "MoreHotOrderPanel"];
 
 	if (tBasicPanel:IsShown()) then
 		tBasicPanel:Hide();

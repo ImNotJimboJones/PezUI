@@ -33,7 +33,7 @@ function	VUHDO_colorsHotsSetSwatchHotName(aTexture, aHotNum)
 	tHotName = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][aHotNum] or "";
 
 	if (strlen(tHotName) > 0) then
-		VUHDO_GLOBAL[aTexture:GetName() .. "TitleString"]:SetText(tHotName);
+		_G[aTexture:GetName() .. "TitleString"]:SetText(tHotName);
 	end
 end
 

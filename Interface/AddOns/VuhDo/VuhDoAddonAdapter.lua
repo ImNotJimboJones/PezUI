@@ -8,6 +8,7 @@ VUHDO_LibButtonFacade = nil;
 
 VUHDO_LibSharedMedia:Register("font", "Arial Black", "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf");
 VUHDO_LibSharedMedia:Register("font", "Emblem",	"Interface\\AddOns\\VuhDo\\Fonts\\Emblem.ttf");
+VUHDO_LibSharedMedia:Register("font", "Vixar",	"Interface\\AddOns\\VuhDo\\Fonts\\vixar.ttf");
 
 local function VUHDO_registerLsmBar(aName, aBarNum)
 	VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - " .. aName, "Interface\\AddOns\\VuhDo\\Images\\bar" .. aBarNum .. ".tga");
@@ -46,6 +47,7 @@ LoadAddOn("FuBarPlugin-3.0");
 
 
 
+--
 function VUHDO_initAddonMessages()
 	if (not IsAddonMessagePrefixRegistered("CTRA")) then
 		RegisterAddonMessagePrefix("CTRA");
@@ -57,6 +59,7 @@ function VUHDO_initAddonMessages()
 
 	--VUHDO_xMsg(unpack(GetRegisteredAddonMessagePrefixes()));
 end
+
 
 
 --
@@ -74,7 +77,6 @@ function VUHDO_parseAddonMessage(aPrefix, aMessage, aUnitName)
 	elseif ("CTRA" == aPrefix) then
 		if (strfind(aMessage, "#")) then
 			local tFragments = VUHDO_splitString(aMessage, "#");
-			local tCommand;
 			for _, tCommand in pairs(tFragments) do
 				VUHDO_parseCtraMessage(aUnitName, tCommand);
 			end
@@ -148,8 +150,6 @@ end
 
 --
 function VUHDO_initSharedMedia()
-	local tIndex, tValue;
-
 	-- fonts
 	for tIndex, tValue in ipairs(VUHDO_LibSharedMedia:List("font")) do
 		VUHDO_FONTS[tIndex] = { VUHDO_LibSharedMedia:Fetch("font", tValue), tValue };
@@ -186,18 +186,17 @@ function VUHDO_initCliqueSupport()
 
 	ClickCastFrames = ClickCastFrames or {};
 
-	local tPanelNum, tButtonNum, tIconNum;
 	local tBtnName;
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
 		for tButtonNum = 1, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 			tBtnName = format("Vd%dH%d", tPanelNum, tButtonNum);
-			if (VUHDO_GLOBAL[tBtnName] ~= nil) then
-				ClickCastFrames[VUHDO_GLOBAL[tBtnName]] = true;
-				ClickCastFrames[VUHDO_GLOBAL[tBtnName .. "Tg"]] = true;
-				ClickCastFrames[VUHDO_GLOBAL[tBtnName .. "Tot"]] = true;
+			if (_G[tBtnName] ~= nil) then
+				ClickCastFrames[_G[tBtnName]] = true;
+				ClickCastFrames[_G[tBtnName .. "Tg"]] = true;
+				ClickCastFrames[_G[tBtnName .. "Tot"]] = true;
 				for tIconNum = 40, 44 do
-					ClickCastFrames[VUHDO_GLOBAL[format("%sBgBarIcBarHlBarIc%d", tBtnName, tIconNum)]] = true;
+					ClickCastFrames[_G[format("%sBgBarIcBarHlBarIc%d", tBtnName, tIconNum)]] = true;
 				end
 			end
 		end
@@ -229,7 +228,6 @@ end
 
 --
 --[[function VUHDO_checkForTroublesomeAddons()
-	local tName, tReason;
 	for tName, tReason in pairs(VUHDO_TROUBLE_ADDONS) do
 		if (IsAddOnLoaded(tName)) then
 			VUHDO_Msg(format(VUHDO_I18N_ADDON_WARNING, tName, tReason), 1, 0.4, 0.4);

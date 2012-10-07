@@ -1,6 +1,6 @@
 
 -- BURST CACHE ---------------------------------------------------
-
+local _G = _G;
 local table = table;
 local floor = floor;
 local ipairs = ipairs;
@@ -39,34 +39,34 @@ local sLastDebuffIcon;
 local sShowPanels;
 
 function VUHDO_panelRefreshInitBurst()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 
-	VUHDO_getHeader = VUHDO_GLOBAL["VUHDO_getHeader"];
-	VUHDO_getHeaderPos = VUHDO_GLOBAL["VUHDO_getHeaderPos"];
-	VUHDO_customizeHeader = VUHDO_GLOBAL["VUHDO_customizeHeader"];
-	VUHDO_getDynamicModelArray = VUHDO_GLOBAL["VUHDO_getDynamicModelArray"];
-	VUHDO_getGroupMembersSorted = VUHDO_GLOBAL["VUHDO_getGroupMembersSorted"];
-	VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
-	VUHDO_getHealButtonPos = VUHDO_GLOBAL["VUHDO_getHealButtonPos"];
-	VUHDO_setupAllHealButtonAttributes = VUHDO_GLOBAL["VUHDO_setupAllHealButtonAttributes"];
-	VUHDO_isDifferentButtonPoint = VUHDO_GLOBAL["VUHDO_isDifferentButtonPoint"];
-	VUHDO_addUnitButton = VUHDO_GLOBAL["VUHDO_addUnitButton"];
-	VUHDO_getTargetButton = VUHDO_GLOBAL["VUHDO_getTargetButton"];
-	VUHDO_getTotButton = VUHDO_GLOBAL["VUHDO_getTotButton"];
-	VUHDO_getOrCreateHealButton = VUHDO_GLOBAL["VUHDO_getOrCreateHealButton"];
-	VUHDO_updateAllCustomDebuffs = VUHDO_GLOBAL["VUHDO_updateAllCustomDebuffs"];
-	VUHDO_getHeaderWidth = VUHDO_GLOBAL["VUHDO_getHeaderWidth"];
-	VUHDO_initAllEventBouquets = VUHDO_GLOBAL["VUHDO_initAllEventBouquets"];
-	VUHDO_getActionPanel = VUHDO_GLOBAL["VUHDO_getActionPanel"];
-	VUHDO_isPanelPopulated = VUHDO_GLOBAL["VUHDO_isPanelPopulated"];
-	VUHDO_updateAllRaidBars = VUHDO_GLOBAL["VUHDO_updateAllRaidBars"];
-	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
-	VUHDO_fixFrameLevels = VUHDO_GLOBAL["VUHDO_fixFrameLevels"];
-	VUHDO_resetNameTextCache = VUHDO_GLOBAL["VUHDO_resetNameTextCache"];
-	VUHDO_reloadRaidMembers = VUHDO_GLOBAL["VUHDO_reloadRaidMembers"];
-	VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
+	VUHDO_getHeader = _G["VUHDO_getHeader"];
+	VUHDO_getHeaderPos = _G["VUHDO_getHeaderPos"];
+	VUHDO_customizeHeader = _G["VUHDO_customizeHeader"];
+	VUHDO_getDynamicModelArray = _G["VUHDO_getDynamicModelArray"];
+	VUHDO_getGroupMembersSorted = _G["VUHDO_getGroupMembersSorted"];
+	VUHDO_getHealButton = _G["VUHDO_getHealButton"];
+	VUHDO_getHealButtonPos = _G["VUHDO_getHealButtonPos"];
+	VUHDO_setupAllHealButtonAttributes = _G["VUHDO_setupAllHealButtonAttributes"];
+	VUHDO_isDifferentButtonPoint = _G["VUHDO_isDifferentButtonPoint"];
+	VUHDO_addUnitButton = _G["VUHDO_addUnitButton"];
+	VUHDO_getTargetButton = _G["VUHDO_getTargetButton"];
+	VUHDO_getTotButton = _G["VUHDO_getTotButton"];
+	VUHDO_getOrCreateHealButton = _G["VUHDO_getOrCreateHealButton"];
+	VUHDO_updateAllCustomDebuffs = _G["VUHDO_updateAllCustomDebuffs"];
+	VUHDO_getHeaderWidth = _G["VUHDO_getHeaderWidth"];
+	VUHDO_initAllEventBouquets = _G["VUHDO_initAllEventBouquets"];
+	VUHDO_getActionPanel = _G["VUHDO_getActionPanel"];
+	VUHDO_isPanelPopulated = _G["VUHDO_isPanelPopulated"];
+	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
+	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
+	VUHDO_fixFrameLevels = _G["VUHDO_fixFrameLevels"];
+	VUHDO_resetNameTextCache = _G["VUHDO_resetNameTextCache"];
+	VUHDO_reloadRaidMembers = _G["VUHDO_reloadRaidMembers"];
+	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
 	if (VUHDO_CONFIG["DEBUFF_TOOLTIP"]) then
 		sLastDebuffIcon = VUHDO_CONFIG["CUSTOM_DEBUFF"]["max_num"] + 39;
 	else
@@ -90,7 +90,6 @@ end
 
 
 --
-local tCnt;
 local tHeader;
 local tX, tY;
 local tIndent;
@@ -135,9 +134,6 @@ end
 
 
 --
-local tModelIndex;
-local tCnt;
-local tGroupIdx;
 local tColIdx;
 local tButtonIdx;
 local tModels;
@@ -146,9 +142,7 @@ local tPanelName;
 local tSetup;
 local tX, tY;
 local tButton;
-local tUnit;
 local tGroupArray;
-local tModelId;
 local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 	tSetup = VUHDO_PANEL_SETUP[aPanelNum];
 	tModels = VUHDO_getDynamicModelArray(aPanelNum);
@@ -243,8 +237,6 @@ end
 
 
 --
-local tCnt;
-local tPanel;
 local function VUHDO_refreshAllPanels()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		if (VUHDO_isPanelVisible(tCnt)) then

@@ -74,12 +74,12 @@ local sStdDebuffSound;
 local sAllDebuffSettings;
 
 function VUHDO_debuffsInitBurst()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_DEBUFF_BLACKLIST = VUHDO_GLOBAL["VUHDO_DEBUFF_BLACKLIST"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_DEBUFF_BLACKLIST = _G["VUHDO_DEBUFF_BLACKLIST"];
 
-	VUHDO_shouldScanUnit = VUHDO_GLOBAL["VUHDO_shouldScanUnit"];
+	VUHDO_shouldScanUnit = _G["VUHDO_shouldScanUnit"];
 
 	sIsRemoveableOnly = VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY"];
 	sIsUseDebuffIcon = VUHDO_PANEL_SETUP["BAR_COLORS"]["useDebuffIcon"];
@@ -244,13 +244,11 @@ end
 --
 local tSetColor, tSetIcon;
 local tIconsSet = { };
-local tDebuffInfo;
 local tInfo;
 local tDebuffName, tSoundDebuff;
 local tSound;
 local tIsStandardDebuff;
 local tChosenInfo;
-local tCnt;
 local tRemaining;
 local tSchool, tAllSchools;
 local tEmptyCustomDebuf = { };
@@ -451,7 +449,6 @@ local VUHDO_determineDebuff = VUHDO_determineDebuff;
 
 
 --
-local tUnit, tInfo;
 function VUHDO_updateAllCustomDebuffs(anIsEnableAnim)
 	twipe(VUHDO_UNIT_CUSTOM_DEBUFFS);
 	VUHDO_MAY_DEBUFF_ANIM = false;
@@ -466,10 +463,7 @@ end
 
 -- Remove debuffing abilities individually not known to the player
 function VUHDO_initDebuffs()
-	local tDebuffType;
-	local tDebuffName;
-	local tAbilities, tAbility;
-	local tCnt;
+	local tAbility;
 
 	local _, tClass = UnitClass("player");
 	twipe(VUHDO_PLAYER_ABILITIES);
@@ -489,7 +483,7 @@ function VUHDO_initDebuffs()
 
 	twipe(VUHDO_CUSTOM_DEBUFF_LIST);
 	if (VUHDO_CONFIG == nil) then
-		VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+		VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	end
 	for _, tDebuffName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
 		VUHDO_CUSTOM_DEBUFF_LIST[tDebuffName] = {

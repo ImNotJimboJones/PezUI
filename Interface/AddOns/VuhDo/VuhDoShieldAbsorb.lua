@@ -137,8 +137,6 @@ end
 
 --
 local tNow;
-local tUnit, tAllShields;
-local tShieldName, tExpiry;
 function VUHDO_removeObsoleteShields()
 	tNow = GetTime();
 	for tUnit, tAllShields in pairs(VUHDO_SHIELD_EXPIRY) do
@@ -169,7 +167,7 @@ end
 
 --
 local tRemain;
-local tSpellId, tSpellName;
+local tSpellName;
 local function VUHDO_updateShields(aUnit)
 	for tSpellId, _ in pairs(VUHDO_SHIELDS) do
 		tSpellName = select(1, GetSpellInfo(tSpellId));

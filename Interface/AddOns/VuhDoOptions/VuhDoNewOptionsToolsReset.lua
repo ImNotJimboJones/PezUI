@@ -2,10 +2,7 @@ local _;
 
 -- Returns a "deep" copy of a table, not deleting existent elements in aDestTable
 -- which means containing tables will be copies value-wise, not by reference
-local tIsBool;
-function VUHDO_deepCopyTableTo(aTable, aDestTable)
-	local tKey, tValue;
-
+local function VUHDO_deepCopyTableTo(aTable, aDestTable)
 	if (aDestTable == nil) then
 		aDestTable = { };
 	end
@@ -19,7 +16,7 @@ function VUHDO_deepCopyTableTo(aTable, aDestTable)
 	end
 
 	for tKey, tValue in pairs(aDestTable) do
-		tIsBool = "boolean" == type(tValue) or ("number" == type(tValue) and (tValue == 0 or tValue == 1));
+		local tIsBool = "boolean" == type(tValue) or ("number" == type(tValue) and (tValue == 0 or tValue == 1));
 
 		if (tIsBool and not aTable[tKey]) then
 			aDestTable[tKey] = aTable[tKey];
@@ -118,7 +115,6 @@ end
 
 
 --
-local tName;
 function VUHDO_newOptionsToolsResetDefaultBouquetsClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_DEFAULT_BOUQUETS);
 	VuhDoYesNoFrame:SetAttribute("callback",
@@ -243,7 +239,6 @@ end
 
 
 --
-local tPanelNum;
 function VUHDO_newOptionsToolsResetPerPanelClicked()
 	VuhDoYesNoFrameText:SetText(VUHDO_I18N_RESET_PER_PANEL_SETTINGS);
 	VuhDoYesNoFrame:SetAttribute("callback",

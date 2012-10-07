@@ -259,7 +259,6 @@ local function VUHDO_panelWizardApplyCallback(aDecision)
 			VUHDO_PANEL_SETUP[tNumPanels]["MODEL"].groups = nil;
 		end
 
-		local tCnt;
 		for tCnt = tNumPanels + 1, VUHDO_MAX_PANELS do
 			VUHDO_PANEL_SETUP[tCnt]["MODEL"].groups = nil;
 		end

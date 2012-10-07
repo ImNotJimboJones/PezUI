@@ -235,8 +235,6 @@ local VUHDO_TEST_USERS_LEFT = { };
 
 --
 local function VUHDO_getNextFreeModelInRange(aFirstModel, aLastModel)
-	local tCnt;
-
 	for tCnt = aFirstModel, aLastModel do
 		if (VUHDO_TEST_USERS_LEFT[tCnt] > 0) then
 			VUHDO_TEST_USERS_LEFT[tCnt] = VUHDO_TEST_USERS_LEFT[tCnt] - 1;
@@ -384,7 +382,6 @@ end
 
 
 --
-local tCnt;
 function VUHDO_reloadRaidDemoUsers()
 	if (tHasLoaded) then
 		return;

@@ -2,12 +2,12 @@
 
 
 --locations
-ralllocations={604,604,543,543,529,529,535,535,527,527,718,718,532,532,531,531,609,609,522,533,521,542,534,530,603,602,601,520,528,536,525,526,523,524,756,764,767,753,768,769,757,759,747,752,754,758,773,781,793,800,820,819,816,824,443,461,401,482,512,540,736,626,871,874,898,876,867,885,877,875,887,897,896,886,878,999,884,999,999,999,882}
+ralllocations={604,604,543,543,529,529,535,535,527,527,718,718,532,532,531,531,609,609,522,533,521,542,534,530,603,602,601,520,528,536,525,526,523,524,756,764,767,753,768,769,757,759,747,752,754,758,773,781,793,800,820,819,816,824,443,461,401,482,512,540,736,626,871,874,898,876,867,885,877,875,887,897,896,886,878,899,884,900,880,906,882,856}
 
-ralllocationnamesdef={"Icecrown Citadel","Icecrown Citadel","Trial of the Crusader", "Trial of the Crusader", "Ulduar", "Ulduar", "Naxxramas","Naxxramas","The Eye of Eternity","The Eye of Eternity","Onyxia's Lair","Onyxia's Lair","Vault of Archavon","Vault of Archavon","The Obsidian Sanctum","The Obsidian Sanctum","The Ruby Sanctum","The Ruby Sanctum","Ahn'kahet: The Old Kingdom","Azjol-Nerub","The Culling of Stratholme","Trial of the Champion","Drak'Tharon Keep","Gundrak","Halls of Reflection","Pit of Saron","The Forge of Souls","The Nexus","The Oculus","The Violet Hold","Halls of Lightning","Halls of Stone","Utgarde Keep","Utgarde Pinnacle", "The Deadmines","Shadowfang Keep","Throne of the Tides","Blackrock Caverns","The Stonecore","The Vortex Pinnacle","Grim Batol","Halls of Origination","Lost City of the Tol'vir","Baradin Hold","Blackwing Descent","The Bastion of Twilight","Throne of the Four Winds","Zul'Aman","Zul'Gurub", "Firelands","End Time","Hour of Twilight","Well of Eternity","Dragon Soul","Warsong Gulch","Arathi Basin","Alterac Valley","Eye of the Storm","Strand of the Ancients","Isle of Conquest","The Battle for Gilneas","Twin Peaks","Scarlet Halls","Scarlet Monastery","Scholomance","Stormstout Brewery","Temple of the Jade Serpent","Mogu'shan Palace","Shado-Pan Monastery","Gate of the Setting Sun","Siege of Niuzao Temple","Heart of Fear","Mogu'shan Vaults","Terrace of Endless Spring","A Brewing Storm", "Arena of Annihilation","Brewmoon Festval","Crypt of Forgotten Kings","Greenstone Village","Theramore's Fall","Unga Ingoo"}
-rallcontent={2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,3,3,3,3,3,3, 3,3,3,3,3,3,3,3,3,3, 3,3,3,3,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}
+ralllocationnamesdef={"Icecrown Citadel","Icecrown Citadel","Trial of the Crusader", "Trial of the Crusader", "Ulduar", "Ulduar", "Naxxramas","Naxxramas","The Eye of Eternity","The Eye of Eternity","Onyxia's Lair","Onyxia's Lair","Vault of Archavon","Vault of Archavon","The Obsidian Sanctum","The Obsidian Sanctum","The Ruby Sanctum","The Ruby Sanctum","Ahn'kahet: The Old Kingdom","Azjol-Nerub","The Culling of Stratholme","Trial of the Champion","Drak'Tharon Keep","Gundrak","Halls of Reflection","Pit of Saron","The Forge of Souls","The Nexus","The Oculus","The Violet Hold","Halls of Lightning","Halls of Stone","Utgarde Keep","Utgarde Pinnacle", "The Deadmines","Shadowfang Keep","Throne of the Tides","Blackrock Caverns","The Stonecore","The Vortex Pinnacle","Grim Batol","Halls of Origination","Lost City of the Tol'vir","Baradin Hold","Blackwing Descent","The Bastion of Twilight","Throne of the Four Winds","Zul'Aman","Zul'Gurub", "Firelands","End Time","Hour of Twilight","Well of Eternity","Dragon Soul","Warsong Gulch","Arathi Basin","Alterac Valley","Eye of the Storm","Strand of the Ancients","Isle of Conquest","The Battle for Gilneas","Twin Peaks","Scarlet Halls","Scarlet Monastery","Scholomance","Stormstout Brewery","Temple of the Jade Serpent","Mogu'shan Palace","Shado-Pan Monastery","Gate of the Setting Sun","Siege of Niuzao Temple","Heart of Fear","Mogu'shan Vaults","Terrace of Endless Spring","A Brewing Storm", "Arena of Annihilation","Brewmoon Festval","Crypt of Forgotten Kings","Greenstone Village","Theramore's Fall","Unga Ingoo","Temple of Kotmogu"}
+rallcontent={2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,3,3,3,3,3,3, 3,3,3,3,3,3,3,3,3,3, 3,3,3,3,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1}
 
-ralltip={"10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5",ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifraid,ralldifparty,ralldifparty,ralldifraid,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario}
+ralltip={"10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5",ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifraid,ralldifparty,ralldifparty,ralldifraid,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ramainbattleground}
 
 rallachieve={
 {4534,4535,4536,4537,4577,4538,4578,4582,4539,4579,4580,4601,4581,4531,4628,4528,4629,4529,4630,4527,4631,4530,4583,4532,4636},--icc10
@@ -85,12 +85,13 @@ rallachieve={
 {6823,6674,7056,6687,6686,6455,6458,6844,6719,6720,6721,6722,6723,6724},--Mogu'shan Vaults
 {6717,6933,6824,6825,6689,6731,6732,6733,6734},--Terrace of Endless Spring
 {7261,7258,7257,7252},--A Brewing Storm
-{},--Arena of Annihilation
+{7273,7272,7271},--Arena of Annihilation
 {6931,6930,6923},--Brewmoon Festval
-{},--Crypt of Forgotten Kings
-{},--Greenstone Village
-{},--Theramore's Fall
-{7231,7232,7248,7249},--Unga Ingoo
+{7275,7276,7522},--Crypt of Forgotten Kings
+{7267,7266,7265},--Greenstone Village
+{7529,7530,7524},--Theramore's Fall
+{7231,7232,7248,7239,7249},--Unga Ingoo
+{6947,6970,6980,6971,6950,6973,6972,6981,6740,6882},--Temple of Kotmogu
 }
 
 
@@ -104,6 +105,7 @@ rallachieve[59]={2191,1766,2189,1763,1757,2190,1764,2193,1762,1765,1310,1309,176
 rallachieve[60]={3848,3849,3853,3854,3852,3856,3847,3855,3845,3777,3776,3851,3850,3846,3857}
 --no difference for gilneas
 rallachieve[62]={5226,5231,5229,5221,5219,5216,5213,5211,5230,5215,5209,5210,5208,5223}
+rallachieve[80]={7526,7527,7523}
 end
 
 
@@ -170,12 +172,12 @@ rallboss={
 {{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0}},--Isle of Conquest
 {{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0}},--The Battle for Gilneas
 {{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0}},--Twin Peaks
-{{59303},{58632},{59150}},--Scarlet Halls
+{{59303,59309,58674,58876},{58632},{59150}},--Scarlet Halls
 {{59789},{59223},{3977},{3977}},--Scarlet Monastery
 {{10503},{59153},{59368},{1853,59100},{1853}},--Scholomance
 {{0},{0},{0},{56637},{59479}},--Stormstout Brewery
 {{56787},{56439},{56439},{56439}},--Temple of the Jade Serpent
-{{0},{61243},{61398},{61398}},--Mogu'shan Palace
+{{0},{61243,61399},{61398},{61398}},--Mogu'shan Palace
 {{0,65407,56395},{56719},{56884},{56884}},--Shado-Pan Monastery
 {{0},{56906},{56877},{56877}},--Gate of the Setting Sun
 {{61634},{61485},{62205},{62205}},--Siege of Niuzao Temple
@@ -183,12 +185,13 @@ rallboss={
 {{60051,60043,59915,60047},{60009},{60143},{60701,60708,60709,60710},{60410},{60399,60400},{60051,60043,59915,60047,60009,60143},{60701,60708,60709,60710,60399,60400},{60051,60043,59915,60047,60410},{60009},{60143},{60701,60708,60709,60710},{60410},{60399,60400}},--Mogu'shan Vaults
 {{60583},{62442},{63099},{60999},{60583,62442,63099,60999},{60583},{62442},{63099},{60999}},--Terrace of Endless Spring
 {{0},{0,64381,59779},{58739},{58739}},--A Brewing Storm
-{},--Arena of Annihilation
+{{63313},{63316,64280,64281},{0}},--Arena of Annihilation
 {{0},{0},{63528}},--Brewmoon Festval
-{},--Crypt of Forgotten Kings
-{},--Greenstone Village
-{},--Theramore's Fall
-{{0},{0},{0},{62465}},--Unga Ingoo
+{{0},{61709},{0}},--Crypt of Forgotten Kings
+{{62682},{0},{0}},--Greenstone Village
+{{64900},{64479},{0}},--Theramore's Fall
+{{0},{0},{0},{62465},{62465}},--Unga Ingoo
+{{0},{0},{0},{0},{0},{0},{0},{0},{0},{0}},--Temple of Kotmogu
 }
 
 
@@ -256,7 +259,7 @@ ralltrack  ={
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},--The Battle for Gilneas
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0},--Twin Peaks
 {1,1,0},--Scarlet Halls
-{1,1,1,0},--Scarlet Monastery
+{1,0,1,0},--Scarlet Monastery
 {0,1,1,0,0},--Scholomance
 {0,0,0,1,0},--Stormstout Brewery
 {1,0,0,0},--Temple of the Jade Serpent
@@ -267,13 +270,14 @@ ralltrack  ={
 {},--Heart of Fear 
 {},--Mogu'shan Vaults
 {},--Terrace of Endless Spring
-{},--A Brewing Storm
-{},--Arena of Annihilation
-{},--Brewmoon Festval
-{},--Crypt of Forgotten Kings
-{},--Greenstone Village
-{},--Theramore's Fall
-{},--Unga Ingoo
+{1,1,0,0},--A Brewing Storm
+{1,0,0},--Arena of Annihilation
+{0,0,0},--Brewmoon Festval
+{0,1,0},--Crypt of Forgotten Kings
+{1,1,0},--Greenstone Village
+{1,1,0},--Theramore's Fall
+{1,0,0,0,0},--Unga Ingoo
+{0,0,0,0,0,0,0,0,0,0},--Temple of Kotmogu
 }--1 если трекерится
 
 
@@ -352,13 +356,14 @@ rallmeta   ={
 {1,1,1,1,1,1,0,0,1,1,1,1,1,1},--Heart of Fear 
 {1,1,1,1,1,1,0,0,1,1,1,1,1,1},--Mogu'shan Vaults
 {1,1,1,1,0,1,1,1,1},--Terrace of Endless Spring
-{1,1,1,0},--A Brewing Storm
-{},--Arena of Annihilation
-{1,1,0},--Brewmoon Festval
-{},--Crypt of Forgotten Kings
-{},--Greenstone Village
-{},--Theramore's Fall
-{1,1,1,0},--Unga Ingoo
+{0,0,0,0},--A Brewing Storm
+{0,0,0},--Arena of Annihilation
+{0,0,0},--Brewmoon Festval
+{0,0,0},--Crypt of Forgotten Kings
+{0,0,0},--Greenstone Village
+{0,0,0},--Theramore's Fall
+{0,0,0,0,0},--Unga Ingoo
+{1,1,1,1,1,1,1,0,0,0},--Temple of Kotmogu
 }--1 если на мету
 
 
@@ -438,12 +443,13 @@ rallfullver={
 {0,0,0,0,0,0,1,1,1,1,1,1,1,1},--Mogu'shan Vaults
 {0,0,0,0,1,1,1,1,1},--Terrace of Endless Spring
 {0,0,0,1},--A Brewing Storm
-{},--Arena of Annihilation
+{0,0,1},--Arena of Annihilation
 {0,0,1},--Brewmoon Festval
-{},--Crypt of Forgotten Kings
-{},--Greenstone Village
-{},--Theramore's Fall
-{0,0,0,1},--Unga Ingoo
+{0,0,1},--Crypt of Forgotten Kings
+{0,0,1},--Greenstone Village
+{0,0,1},--Theramore's Fall
+{0,0,0,0,1},--Unga Ingoo
+{0,0,0,0,0,0,0,1,1,1},--Temple of Kotmogu
 }--1 это только для фулл версии ачивка
 
 

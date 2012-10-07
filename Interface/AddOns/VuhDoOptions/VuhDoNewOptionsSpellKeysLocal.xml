@@ -79,7 +79,7 @@
 				<Scripts>
 					<OnClick>
 						VUHDO_newOptionsKeyLocalSelectItem(self:GetParent(), true);
-						VUHDO_GLOBAL[self:GetParent():GetName() .. "EditBox"]:ClearFocus();
+						_G[self:GetParent():GetName() .. "EditBox"]:ClearFocus();
 						VUHDO_spellsKeysLocalStartAssignment(self);
 					</OnClick>
 				</Scripts>
@@ -108,16 +108,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="410" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_LOCAL_KEY_ASSIGNMENTS" inherits="VuDoDefaultTitleFontTemplate">
@@ -194,7 +184,7 @@
 						</ScrollChild>
 						<Scripts>
 							<OnShow>
-								VUHDO_keyboardlocalSpellsScrollPanelOnShow(VUHDO_GLOBAL[self:GetName() .. "Child"]);
+								VUHDO_keyboardlocalSpellsScrollPanelOnShow(_G[self:GetName() .. "Child"]);
 							</OnShow>
 						</Scripts>
 					</ScrollFrame>
@@ -300,16 +290,6 @@
 				<Frames>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="410" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MACRO_EDITOR" inherits="VuDoDefaultTitleFontTemplate">

@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.103
+	raversion=1.105
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -1078,7 +1078,7 @@ end
 
 
 --сценарии панды
-local idheroics={878, 999, 884, 999, 999, 999, 882}
+local idheroics={878, 899, 884, 900, 880, 906, 882}
 local buul=0
 for i=1,#idheroics do
 	if idheroics[i]==GetCurrentMapAreaID() then

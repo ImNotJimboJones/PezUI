@@ -12,11 +12,11 @@ local sColSpacing, sRowSpacing;
 local sIsTooltipCache = { };
 
 function VUHDO_panelRedrawCustomDebuffsInitBurst()
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
-	VUHDO_getBarIconName = VUHDO_GLOBAL["VUHDO_getBarIconName"];
-	VUHDO_customizeIconText = VUHDO_GLOBAL["VUHDO_customizeIconText"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_getBarIconCounter = _G["VUHDO_getBarIconCounter"];
+	VUHDO_getBarIconName = _G["VUHDO_getBarIconName"];
+	VUHDO_customizeIconText = _G["VUHDO_customizeIconText"];
 
 	sDebuffConfig = VUHDO_CONFIG["CUSTOM_DEBUFF"];
 
@@ -84,7 +84,6 @@ end
 --
 local tFrame;
 local tIcon, tCounter, tName, tTimer;
-local tCnt;
 local tIconIdx;
 local tIconName;
 local tButton;

@@ -226,16 +226,9 @@
 				<Size>
 					<AbsDimension x="24" y="24" />
 				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="3" y="-3" />
-						</Offset>
-					</Anchor>
-				</Anchors>
 				<Layers>
 					<Layer>
-						<Texture name="$parentTexture" setAllPoints="true" file="interface\icons\spell_holy_prayerofspirit">
+						<Texture name="$parentTexture" setAllPoints="true">
 							<TexCoords left="0" right="1" top="0" bottom="1" />
 						</Texture>
 					</Layer>

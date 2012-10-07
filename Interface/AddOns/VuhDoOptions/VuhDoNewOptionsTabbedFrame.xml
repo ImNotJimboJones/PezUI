@@ -33,18 +33,18 @@
 					</Layer>
 				</Layers>
 				<Scripts>
-					<OnShow>VUHDO_GLOBAL[self:GetName() .. "Label"]:SetText(VUHDO_I18N_VUHDO_OPTIONS .. " " .. VUHDO_VERSION)</OnShow>
+					<OnShow>_G[self:GetName() .. "Label"]:SetText(VUHDO_I18N_VUHDO_OPTIONS .. " " .. VUHDO_VERSION)</OnShow>
 				</Scripts>
 			</Frame>
 
 			<Frame name="$parentPanelNumLabel" inherits="VuhDoLabelFrameTemplate">
 				<Size>
-					<AbsDimension x="120" y="18" />
+					<AbsDimension x="140" y="17" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOPRIGHT">
+					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="5" y="17" />
+							<AbsDimension x="120" y="17" />
 						</Offset>
 					</Anchor>
 				</Anchors>

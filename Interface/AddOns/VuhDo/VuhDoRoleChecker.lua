@@ -32,10 +32,10 @@ local VUHDO_RAID_NAMES;
 local VUHDO_RAID;
 
 function VUHDO_roleCheckerInitBurst()
-	VUHDO_MANUAL_ROLES = VUHDO_GLOBAL["VUHDO_MANUAL_ROLES"];
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_isUnitInModel = VUHDO_GLOBAL["VUHDO_isUnitInModel"];
+	VUHDO_MANUAL_ROLES = _G["VUHDO_MANUAL_ROLES"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_isUnitInModel = _G["VUHDO_isUnitInModel"];
 end
 --------------------------------------------------------------
 
@@ -59,8 +59,6 @@ end
 
 --
 function VUHDO_trimInspected()
-	local tName;
-
 	for tName, _ in pairs(VUHDO_INSPECTED_ROLES) do
 		if (VUHDO_RAID_NAMES[tName] == nil) then
 			VUHDO_INSPECTED_ROLES[tName] = nil;
@@ -123,7 +121,6 @@ end
 
 
 --
-local tUnit;
 function VUHDO_tryInspectNext()
 	for tUnit, _ in pairs(VUHDO_RAID) do
 		if (VUHDO_shouldBeInspected(tUnit)) then

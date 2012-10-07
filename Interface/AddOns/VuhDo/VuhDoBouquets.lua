@@ -29,15 +29,15 @@ local VUHDO_CUSTOM_BOUQUETS = {
 
 
 function VUHDO_bouquetsInitBurst()
-	VUHDO_MY_AND_OTHERS_HOTS = VUHDO_GLOBAL["VUHDO_MY_AND_OTHERS_HOTS"];
-	VUHDO_MY_HOTS = VUHDO_GLOBAL["VUHDO_MY_HOTS"];
-	VUHDO_OTHER_HOTS = VUHDO_GLOBAL["VUHDO_OTHER_HOTS"];
-	VUHDO_BOUQUETS = VUHDO_GLOBAL["VUHDO_BOUQUETS"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_CUSTOM_ICONS = VUHDO_GLOBAL["VUHDO_CUSTOM_ICONS"];
-	VUHDO_BOUQUET_BUFFS_SPECIAL = VUHDO_GLOBAL["VUHDO_BOUQUET_BUFFS_SPECIAL"];
-	VUHDO_CUSTOM_INFO = VUHDO_GLOBAL["VUHDO_CUSTOM_INFO"];
+	VUHDO_MY_AND_OTHERS_HOTS = _G["VUHDO_MY_AND_OTHERS_HOTS"];
+	VUHDO_MY_HOTS = _G["VUHDO_MY_HOTS"];
+	VUHDO_OTHER_HOTS = _G["VUHDO_OTHER_HOTS"];
+	VUHDO_BOUQUETS = _G["VUHDO_BOUQUETS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_CUSTOM_ICONS = _G["VUHDO_CUSTOM_ICONS"];
+	VUHDO_BOUQUET_BUFFS_SPECIAL = _G["VUHDO_BOUQUET_BUFFS_SPECIAL"];
+	VUHDO_CUSTOM_INFO = _G["VUHDO_CUSTOM_INFO"];
 	sPlayerArray["player"] = VUHDO_RAID["player"];
 end
 
@@ -46,9 +46,7 @@ end
 
 
 --
---local tHash;
 local function VUHDO_getColorHash(aColor)
-	--tHash =
 		return
 			(aColor["R"] or 0) * 0.0001
 		+ (aColor["G"] or 0) * 0.001
@@ -58,18 +56,6 @@ local function VUHDO_getColorHash(aColor)
 		+ (aColor["TG"] or 0) * 10
 		+ (aColor["TB"] or 0) * 100
 		+ (aColor["TO"] or 0) * 1000;
-
-	--[[if aColor["useText"] then
-		tHash = tHash + 10000;
-	end
-	if aColor["useBackground"] then
-		tHash = tHash + 20000;
-	end
-	if aColor["useOpacity"] then
-		tHash = tHash + 40000;
-	end
-
-	return tHash;]]
 end
 
 
@@ -208,7 +194,7 @@ local tColor;
 local tTimer2
 local tClipL, tClipR, tClipT, tClipB;
 local tType, tBuffTimer, tBuffDuration, tBuffIsActive;
-local tCnt, tAnzInfos;
+local tAnzInfos;
 local tColor, tIcon;
 local tEmpty = { };
 local txIcon;
@@ -409,7 +395,6 @@ end
 
 --
 local tBouquet;
-local tInfos;
 local tName;
 local function VUHDO_activateBuffsInScanner(aBouquetName)
 	tBouquet = VUHDO_BOUQUETS["STORED"][aBouquetName];
@@ -429,7 +414,6 @@ end
 
 
 --
-local tUnit;
 local function VUHDO_registerForBouquet(aBouquetName, anOwnerName, aFunction)
 	if ((aBouquetName or "") == "") then
 		return;
@@ -457,8 +441,9 @@ end
 
 
 --
-local tCnt, tHotName, tHotSlots, tIndex, tBouquetName;
+local tHotSlots;
 local tAlreadyRegistered = { };
+local tBouquetName;
 function VUHDO_registerAllBouquets(aDoCompress)
 	VUHDO_unregisterAllBouquetListeners();
 
@@ -525,7 +510,7 @@ end
 
 --
 local VUHDO_EVENT_BOUQUETS = { };
-local tItem, tName, tInterest;
+local tName;
 local function VUHDO_isBouquetInterestedInEvent(aBouquetName, anEventType)
 	if (VUHDO_EVENT_BOUQUETS[aBouquetName] == nil) then
 		VUHDO_EVENT_BOUQUETS[aBouquetName] = { };
@@ -555,7 +540,6 @@ end
 
 
 --
-local tDelegate;
 local tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tBuffName, tHasChanged, tImpact, tTimer2;
 local tClipL, tClipR, tClipT, tClipB;
 local function VUHDO_updateEventBouquet(aUnit, aBouquetName)
@@ -618,7 +602,6 @@ end
 
 
 --
-local tName;
 local function VUHDO_isAnyBouquetInterstedIn(anUpdateMode)
 	for tName, _ in pairs(VUHDO_REGISTERED_BOUQUETS) do
 		if (VUHDO_isBouquetInterestedInEvent(tName, anUpdateMode)) then
@@ -633,8 +616,6 @@ end
 
 --
 local tInfo;
-local tDelegate;
-local tName;
 function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 	tInfo = VUHDO_RAID[aUnit];
 
@@ -655,7 +636,6 @@ local VUHDO_updateBouquetsForEvent = VUHDO_updateBouquetsForEvent;
 
 
 -- Bei Panel-Redraw aufzurufen
-local tUnit;
 function VUHDO_initAllEventBouquets()
 	twipe(VUHDO_LAST_EVALUATED_BOUQUETS);
 	for tUnit, _ in pairs(VUHDO_RAID) do
@@ -670,7 +650,7 @@ end
 
 --
 local VUHDO_CYCLIC_BOUQUETS = { };
-local tItem, tName;
+local tName;
 local function VUHDO_hasCyclic(aBouquetName)
 	if (VUHDO_CYCLIC_BOUQUETS[aBouquetName] == nil) then
 		VUHDO_CYCLIC_BOUQUETS[aBouquetName] = 0;
@@ -691,11 +671,10 @@ end
 
 
 --
-local tAllListeners, tUnit, tDelegate;
-local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffName, tInfo, tHasChanged, tImpact;
+local tAllListeners;
+local tIsActive, tIcon, tTimer, tCounter, tDuration, tBuffName, tHasChanged, tImpact;
 local tClipL, tClipR, tClipT, tClipB;
 local tDestArray;
-local tBouquetName;
 function VUHDO_updateAllCyclicBouquets(anIsPlayerOnly)
 	tDestArray = anIsPlayerOnly and sPlayerArray or VUHDO_RAID;
 
@@ -752,7 +731,6 @@ end
 
 
 --
-local tSlotNum;
 local function VUHDO_isInAnyHotSlot(aHotName)
 	for tSlotNum = 1, 10 do
 		if (VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][tSlotNum] == aHotName) then
@@ -766,7 +744,6 @@ end
 
 
 --
-local tCnt;
 function VUHDO_isAnyoneInterstedIn(anUpdateMode)
 
 	if (VUHDO_isAnyBouquetInterstedIn(anUpdateMode)) then

@@ -14,7 +14,7 @@ local format = format;
 
 local VUHDO_RAID;
 function VUHDO_dcShieldInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 end
 -----------------------------------------------------------------------------------
 
@@ -80,7 +80,6 @@ local VUHDO_NAME_SNIPPETS = { };
 
 --
 local tMacroIndex;
-local tUnit, tInfo;
 local function VUHDO_buildSnippetArray()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		tMacroIndex = ("player" == tUnit or "pet" == tUnit) and 41 or tInfo["number"];
@@ -105,7 +104,6 @@ end
 
 --
 local tMacroString, tMacroNames;
-local tCnt;
 local tIndexGroups, tIndexNames;
 local tNumMacros;
 function VUHDO_mirrorToMacro()
@@ -220,7 +218,6 @@ function VUHDO_buildRaidFromMacro()
 	local tIndexNames;
 	local tMacroGroups;
 	local tMacroNames;
-	local tCnt;
 	local tStrIdx;
 	local tSnippet;
 	local tPrefix;
@@ -277,10 +274,9 @@ function VUHDO_buildSafeParty()
 		return;
 	end
 
-	--local proposalExists, id, typeID, subtypeID, name, texture, role, hasResponded, totalEncounters, completedEncounters, numMembers, isLeader = GetLFGProposal();
 	local _, _, _, tSubtypeID = GetLFGProposal();
 	if (LFG_SUBTYPEID_RAID == tSubtypeID) then
-		local tCnt, tUnit, tGroup;
+		local tUnit, tGroup;
 		for tCnt = 0, 25 do
 			tGroup = floor(tCnt / 5) + 1;
 			tUnit = tCnt == 0 and "player" or "raid" .. tCnt;
@@ -292,7 +288,6 @@ function VUHDO_buildSafeParty()
 			end
 
 			tinsert(VUHDO_GROUPS[tGroup], tUnit);
-			--VUHDO_xMsg(tGroup, tUnit);
 		end
 	else
 		VUHDO_GROUPS[1] = VUHDO_deepCopyTable(VUHDO_SAFE_PARTY);

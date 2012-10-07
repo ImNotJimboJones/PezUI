@@ -87,8 +87,6 @@ local VUHDO_SPELLS = VUHDO_SPELLS;
 
 -- initializes some dynamic information into VUHDO_SPELLS
 function VUHDO_initFromSpellbook()
-	local tSpellName;
-	local someParams;
 	local tEmpty = {};
 
 	twipe(VUHDO_PLAYER_HOTS);
@@ -103,7 +101,6 @@ function VUHDO_initFromSpellbook()
 	twipe(VUHDO_ACTIVE_HOTS_OTHERS);
 
 	local tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
-	local tCnt;
 
 	if (tHotSlots["firstFlood"]) then
 		tHotSlots["firstFlood"] = nil;
@@ -122,12 +119,11 @@ function VUHDO_initFromSpellbook()
 	local tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
 	if (tHotCfg["firstFlood"]) then
 		for tCnt = 1, #tHotSlots do
-				tHotCfg["" .. tCnt]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt]];
+			tHotCfg["" .. tCnt]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt]];
 		end
 		tHotCfg["firstFlood"] = nil;
 	end
 
-	local tHotName;
 	for tCnt, tHotName in pairs(tHotSlots) do
 		if (not VUHDO_strempty(tHotName)) then
 			VUHDO_ACTIVE_HOTS[tHotName] = true;

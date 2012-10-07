@@ -31,7 +31,7 @@ phraspisokach5={
 6427,
 
 6946,
-6928,
+--6928, нет лога
 6929,
 
 6394,
@@ -72,8 +72,8 @@ if racheckhpannounce and GetTime()>racheckhpannounce then
   if UnitHealth("boss1") and UnitHealthMax("boss1") then
     local percboss=(UnitHealth("boss1")/UnitHealthMax("boss1"))*100
     if percboss<=15 then
-      if phraspisokon[12]==1 and phraachdone1 then
-        phraachcompl(12)
+      if phraspisokon[11]==1 and phraachdone1 then
+        phraachcompl(11)
       end
       racheckhpannounce=nil
     end
@@ -233,7 +233,7 @@ if GetCurrentMapAreaID()==871 then
 if arg2=="UNIT_DIED" and phbosskilled==nil and rablockuntilreset==nil then
   if phraspisokon[1]==1 and phraachdone1 then
   local id=tonumber(string.sub(arg7,-12,-9),16)
-  if id==59309 or id==58674 then
+  if id==59309 or id==58674 or id==58876 then
     phrafailnoreason(1)
     rablockuntilreset=1
   end
@@ -336,7 +336,7 @@ if arg2=="SPELL_DAMAGE" and arg10==113766 and arg8=="Unknown" then --ыытес�
     table.insert(ratablefordummy,arg7)
     if #razombiidtable==6 then
       if phraspisokon[4]==1 and phraachdone1 then
-        phraachcompl(4)
+        --phraachcompl(4)
       end
     end
   end
@@ -354,8 +354,8 @@ if arg2=="UNIT_DIED" and rarezurecttable then
   if id==58605 then
     rarezurecttable=rarezurecttable+1
     if rarezurecttable==13 then
-      if phraspisokon[5]==1 and phraachdone1 then
-        phraachcompl(5)
+      if phraspisokon[4]==1 and phraachdone1 then
+        phraachcompl(4)
       end
     end
   end
@@ -372,14 +372,14 @@ if GetCurrentMapAreaID()==898 then
 
 
 if arg2=="SPELL_AURA_APPLIED_DOSE" and arg10==113765 and arg14>5 then
-  if phraspisokon[6]==1 and phraachdone1 then
-    phrafailnoreason(6)
+  if phraspisokon[5]==1 and phraachdone1 then
+    phrafailnoreason(5)
   end
 end
 
 if arg2=="SPELL_AURA_APPLIED_DOSE" and arg10==114141 and arg14>98 then
-  if phraspisokon[7]==1 and phraachdone1 then
-    phraachcompl(7)
+  if phraspisokon[6]==1 and phraachdone1 then
+    phraachcompl(6)
   end
 end
 
@@ -390,18 +390,18 @@ end
 --Siege of Niuzao Temple
 if GetCurrentMapAreaID()==887 then
 if arg2=="UNIT_DIED" then
-  if phraspisokon[8]==1 and phraachdone1 then
+  if phraspisokon[7]==1 and phraachdone1 then
   local id=tonumber(string.sub(arg7,-12,-9),16)
   if id==61699 then
-    phraachcompl(8)
+    phraachcompl(7)
   end
   end
 end
 
 
 if arg2=="SPELL_AURA_APPLIED_DOSE" and arg10==119395 and arg14==20 then
-  if phraspisokon[9]==1 then
-    phraachcompl(9)
+  if phraspisokon[8]==1 then
+    phraachcompl(8)
   end
 end
 
@@ -417,8 +417,8 @@ if GetCurrentMapAreaID()==876 then
 if arg2=="SPELL_DAMAGE" and arg10==106784 then
   phracounter1=phracounter1+1
   if phracounter1==20 then
-    if phraspisokon[10]==1 then
-      phraachcompl(10)
+    if phraspisokon[9]==1 then
+      phraachcompl(9)
     end
   end
 end
@@ -434,8 +434,8 @@ end
 if GetCurrentMapAreaID()==867 then
 
 if arg2=="SPELL_DAMAGE" and (arg10==115167 or arg10==106105 or arg10==106334) and UnitName("player")==arg8 then
-  if phraspisokon[11]==1 and phraachdone1 then
-    phramyfail(11)
+  if phraspisokon[10]==1 and phraachdone1 then
+    phramyfail(10)
   end
 end
 
@@ -488,10 +488,10 @@ end
 if GetCurrentMapAreaID()==875 then
 
 if arg2=="UNIT_DIED" and UnitName("boss1") then
-  if phraspisokon[13]==1 and phraachdone1 then
+  if phraspisokon[12]==1 and phraachdone1 then
   local id=tonumber(string.sub(arg7,-12,-9),16)
   if id==56929 or id==56912 or id==56930 then
-    phrafailnoreason(13)
+    phrafailnoreason(12)
   end
   end
 end

@@ -129,7 +129,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						local tMorePanel = VUHDO_GLOBAL[self:GetParent():GetName() .. "MorePanel"];
+						local tMorePanel = _G[self:GetParent():GetName() .. "MorePanel"];
 						if (tMorePanel:IsShown()) then
 							tMorePanel:Hide();
 						else
@@ -164,7 +164,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								local tMorePanel = VUHDO_GLOBAL[self:GetParent():GetName()];
+								local tMorePanel = _G[self:GetParent():GetName()];
 								if (tMorePanel:IsShown()) then
 									tMorePanel:Hide();
 								else

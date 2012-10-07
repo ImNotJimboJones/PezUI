@@ -14,16 +14,6 @@
 			<Frame name="$parentRootPane" setallpoints="true" inherits="VuhDoPanelTemplate">
 				<Frames>
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="300" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="" inherits="VuDoDefaultTitleFontTemplate">

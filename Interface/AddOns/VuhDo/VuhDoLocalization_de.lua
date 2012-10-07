@@ -384,7 +384,7 @@ VUHDO_I18N_DEF_VUHDO_ESQUE = "Vuhdo'esque";
 
 
 VUHDO_I18N_DEF_ROLE_COLOR = "Rollen-Farbe";
-VUHDO_I18N_BOUQUET_ROLE_TANK = "Flag: Rolle Krieger";
+VUHDO_I18N_BOUQUET_ROLE_TANK = "Flag: Rolle Tank";
 VUHDO_I18N_BOUQUET_ROLE_DAMAGE = "Flag: Rolle Damage-Dealer";
 VUHDO_I18N_BOUQUET_ROLE_HEALER = "Flag: Rolle Heiler";
 

@@ -22,29 +22,28 @@ local VUHDO_getPlayerTargetFrame;
 
 --
 function VUHDO_playerTargetEventHandlerInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
 
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_clParserSetCurrentTarget = VUHDO_GLOBAL["VUHDO_clParserSetCurrentTarget"];
-	VUHDO_setHealth = VUHDO_GLOBAL["VUHDO_setHealth"];
-	VUHDO_removeHots = VUHDO_GLOBAL["VUHDO_removeHots"];
-	VUHDO_removeAllDebuffIcons = VUHDO_GLOBAL["VUHDO_removeAllDebuffIcons"];
-	VUHDO_updateTargetBars = VUHDO_GLOBAL["VUHDO_updateTargetBars"];
-	VUHDO_updateHealthBarsFor = VUHDO_GLOBAL["VUHDO_updateHealthBarsFor"];
-	VUHDO_updateAllRaidBars = VUHDO_GLOBAL["VUHDO_updateAllRaidBars"];
-	VUHDO_initAllEventBouquets = VUHDO_GLOBAL["VUHDO_initAllEventBouquets"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getPlayerTargetFrame = VUHDO_GLOBAL["VUHDO_getPlayerTargetFrame"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_clParserSetCurrentTarget = _G["VUHDO_clParserSetCurrentTarget"];
+	VUHDO_setHealth = _G["VUHDO_setHealth"];
+	VUHDO_removeHots = _G["VUHDO_removeHots"];
+	VUHDO_removeAllDebuffIcons = _G["VUHDO_removeAllDebuffIcons"];
+	VUHDO_updateTargetBars = _G["VUHDO_updateTargetBars"];
+	VUHDO_updateHealthBarsFor = _G["VUHDO_updateHealthBarsFor"];
+	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
+	VUHDO_initAllEventBouquets = _G["VUHDO_initAllEventBouquets"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getPlayerTargetFrame = _G["VUHDO_getPlayerTargetFrame"];
 end
 
 
 
 --
 local VUHDO_CURR_PLAYER_TARGET = nil;
-local tTargetUnit, tUnit;
+local tTargetUnit;
 local tOldTarget;
-local tInfo;
 local tEmptyInfo = { };
 function VUHDO_updatePlayerTarget()
 	tTargetUnit = nil;
@@ -90,7 +89,7 @@ end
 
 
 --
-local tAllButtons, tButton, tBorder;
+local tAllButtons, tBorder;
 function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact)
 	tAllButtons =  VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
@@ -98,7 +97,7 @@ function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCoun
 			tBorder = VUHDO_getPlayerTargetFrame(tButton);
 			if (aColor ~= nil) then
 				tBorder:SetFrameLevel(tButton:GetFrameLevel() + (anImpact or 0) + 2);
-				tBorder:SetBackdropBorderColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+				tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
 				tBorder:Show();
 			else
 				tBorder:Hide();

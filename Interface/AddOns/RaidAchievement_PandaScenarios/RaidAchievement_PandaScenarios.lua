@@ -33,9 +33,21 @@ pzraspisokach5={
 
 7231,
 
+7276,
 
+7267,
+7266,
+
+7273,
+
+7529,
+7530,
 }
 
+if UnitFactionGroup("player")=="Alliance" then
+pzraspisokach5[9]=7526
+pzraspisokach5[10]=7527
+end
 
 
 if (pzraspisokon==nil) then
@@ -145,6 +157,8 @@ pzracounter1=0
 
 rabrewstillonetime=nil
 pszraonetimeonlylight=nil
+rascbochka=nil
+rascbochka2=nil
 
 
 end
@@ -239,9 +253,104 @@ end
 
 
 
+--гробницы забытых королей
+if GetCurrentMapAreaID()==900 then
+
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and arg10==120742 then
+  if pzraspisokon[5]==1 and pzraachdone1 then
+    raunitisplayer(arg7,arg8)
+    if raunitplayertrue then
+      pzrafailnoreason(5,arg8)
+    end
+  end
+end
 
 
 end
+--
+
+
+--деревня зеленой скалы
+if GetCurrentMapAreaID()==880 then
+
+if arg2=="UNIT_DIED" and rascbochka==nil then
+  if pzraspisokon[6]==1 then
+  local id=tonumber(string.sub(arg7,-12,-9),16)
+  if id==62682 then
+      pzrafailnoreason(6)
+      rascbochka=1
+    end
+  end
+end
+
+if arg2=="SPELL_CAST_SUCCESS" and arg10==119090 and rascbochka2==nil then
+  if pzraspisokon[7]==1 then
+    pzrafailnoreason(7,arg5)
+    rascbochka2=1
+  end
+end
+
+end
+--
+
+--арена
+if GetCurrentMapAreaID()==899 then
+
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and arg10==123965 then
+  if pzraspisokon[8]==1 and pzraachdone1 then
+    raunitisplayer(arg7,arg8)
+    if raunitplayertrue then
+      pzrafailnoreason(8,arg8)
+    end
+  end
+end
+
+
+end
+--
+
+
+--терамор
+if GetCurrentMapAreaID()==906 then
+
+if arg2=="UNIT_DIED" then
+  local id=tonumber(string.sub(arg7,-12,-9),16)
+  if id==64956 then
+    if pzraspisokon[9]==1 and pzraachdone1 then
+      pzrafailnoreason(9)
+    end
+  end
+end
+
+
+--метка
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and arg10==125915 then
+  if pzraspisokon[10]==1 and pzraachdone1 then
+--    raunitisplayer(arg7,arg8)
+--    if raunitplayertrue then
+      pzrafailnoreason(10,arg8)
+--    end
+  end
+end
+--свинг удар от вратолома
+if arg2=="SWING_DAMAGE" then
+  if pzraspisokon[10]==1 and pzraachdone1 then
+    local id=tonumber(string.sub(arg4,-12,-9),16)
+    if id==64479 then
+      pzrafailnoreason(10,arg8)
+    end
+  end
+end
+
+
+end
+--
+
+
+
+end
+
+
 
 end --КОНЕЦ ОНЕВЕНТ
 

@@ -67,16 +67,8 @@ local VUHDO_lnfCheckButtonClicked = VUHDO_lnfCheckButtonClicked;
 
 
 --
-local tButton;
-local tAllButtons = { };
-local tPanel;
 function VUHDO_lnfRadioButtonClicked(aCheckButton)
-
-	tPanel = aCheckButton:GetParent();
-	table.wipe(tAllButtons);
-	tAllButtons = { tPanel:GetChildren() };
-
-	for _, tButton in pairs(tAllButtons) do
+	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
 			tButton:SetChecked(aCheckButton == tButton);
 			VUHDO_lnfCheckButtonClicked(tButton);
@@ -87,15 +79,25 @@ end
 
 
 --
-local tPanel;
-local tAllButtons = { };
-local tButton;
-function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
-	tPanel = aCheckButton:GetParent();
-	table.wipe(tAllButtons);
-	tAllButtons = { tPanel:GetChildren() };
+function VUHDO_lnfTabRadioButtonClicked(aCheckButton)
+	VUHDO_lnfRadioButtonClicked(aCheckButton);
 
-	for _, tButton in pairs(tAllButtons) do
+	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
+		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
+			if (tButton["tabPanel"] ~= nil) then
+				 _G[tButton["tabPanel"]]:SetShown(tButton["tabPanel"] == aCheckButton["tabPanel"]);
+			end
+		end
+	end
+
+	collectgarbage('collect');
+end
+
+
+
+--
+function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
+	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
 			if (aCheckButton == tButton) then
 				tButton:SetChecked(true);
@@ -113,9 +115,8 @@ end
 
 
 --
-local tName;
 function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
-	tName = aCheckButton:GetName();
+	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Show();
 
 	if (_G[tName .. "Label"] ~= nil) then
@@ -130,9 +131,8 @@ end
 
 
 --
-local tName;
 function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
-	tName = aCheckButton:GetName();
+	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (_G[tName .. "Label"] ~= nil) then
@@ -161,9 +161,8 @@ end
 
 
 --
-local tName;
 function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
-	tName = aCheckButton:GetName();
+	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Show();
 
 	if (aCheckButton:GetChecked()) then
@@ -176,9 +175,8 @@ end
 
 
 --
-local tName;
 function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
-	tName = aCheckButton:GetName();
+	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Hide();
 
 	if (aCheckButton:GetChecked()) then
@@ -197,7 +195,7 @@ function VUHDO_lnfSliderOnValueChanged(aSlider)
 	if (_G[aSlider:GetName() .. "SliderValue"] ~= nil) then
 		tText = "" .. floor((_G[aSlider:GetName() .. "Slider"]:GetValue() + 0.005) * 100) * 0.01;
 		tUnit = aSlider:GetAttribute("unit");
-		if (tUnit ~= nil) then
+		if (not VUHDO_strempty(tUnit)) then
 			tText = tText .. tUnit;
 		end
 
@@ -279,12 +277,11 @@ end
 
 
 
+--
 local function VUHDO_hideAllComponentExtensions(aComponent)
 	local tRootPane = aComponent:GetParent():GetParent();
 	local tAllSubPanes = { tRootPane:GetChildren() };
-	local tSubPanel;
 	local tAllComponents;
-	local tComponent;
 	local tSelectPanel;
 
 	for _, tSubPanel in pairs(tAllSubPanes) do
@@ -304,6 +301,7 @@ local function VUHDO_hideAllComponentExtensions(aComponent)
 		end
 	end
 end
+
 
 
 --
@@ -380,7 +378,6 @@ local VUHDO_lnfOnUpdate = false;
 local tCurrModel;
 local tPanel;
 local tAllComps = { };
-local tComp;
 local tModel;
 local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 	tCurrModel = aComponent:GetAttribute("model");
@@ -395,7 +392,6 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 
 	VUHDO_lnfOnUpdate = true;
 
-	table.wipe(tAllComps);
 	tAllComps = { tPanel:GetChildren() };
 
 	for _, tComp in pairs(tAllComps) do
@@ -418,7 +414,6 @@ local tPanelNum;
 local tTableIndices;
 local tGlobal;
 local tLastField;
-local tCnt;
 local tIndex;
 local tLastIndex;
 local tEnd;
@@ -519,7 +514,6 @@ local VUHDO_lnfUpdateVarFromModel = VUHDO_lnfUpdateVarFromModel;
 local tTableIndices;
 local tGlobal;
 local tLastField;
-local tCnt;
 local tIndex;
 local tLastIndex;
 function VUHDO_lnfGetValueFrom(aModel)
@@ -597,7 +591,6 @@ end
 --
 local tValue;
 local tModel;
-local tIndex, tInfo;
 function VUHDO_lnfSliderInitFromModel(aSlider)
 	tValue = VUHDO_lnfGetValueFromModel(aSlider:GetParent());
 	tModel = aSlider:GetParent():GetAttribute("model");
@@ -652,6 +645,50 @@ end
 
 
 
+--
+local function VUHDO_triStateSetSelected(aCheckButton)
+	local tValue = VUHDO_lnfGetValueFromModel(aCheckButton);
+	local tTexture = _G[aCheckButton:GetName() .. "TextureCheckMark"];
+	local tLabel = _G[aCheckButton:GetName() .. "Label2"];
+
+	tTexture:ClearAllPoints();
+	if (3 == tValue) then
+		tTexture:SetPoint("BOTTOMLEFT", aCheckButton:GetName(), "BOTTOMLEFT", 5, 0);
+		_G[tTexture:GetName() .. "Texture"]:SetVertexColor(1, 0.4, 0.4, 1);
+		tLabel:SetTextColor(0.6, 0, 0, 1);
+	elseif (2 == tValue) then
+		tTexture:SetPoint("LEFT", aCheckButton:GetName(), "LEFT", 5, 0);
+		_G[tTexture:GetName() .. "Texture"]:SetVertexColor(1, 1, 0.4, 1);
+		tLabel:SetTextColor(0, 0, 0.6, 1);
+	else
+		tTexture:SetPoint("TOPLEFT", aCheckButton:GetName(), "TOPLEFT", 5, 0);
+		_G[tTexture:GetName() .. "Texture"]:SetVertexColor(0.4, 1, 0.4, 1);
+		tLabel:SetTextColor(0, 0.6, 0, 1);
+	end
+
+	tLabel:SetText(aCheckButton:GetAttribute("radio_value")[tValue]);
+end
+
+
+
+--
+function VUHDO_lnfTriStateCheckButtonUpdateModel(aCheckButton)
+	local tValue = VUHDO_lnfGetValueFromModel(aCheckButton);
+	tValue = (tValue % 3) + 1;
+	VUHDO_lnfUpdateVarFromModel(aCheckButton, tValue);
+	VUHDO_triStateSetSelected(aCheckButton);
+end
+
+
+
+--
+function VUHDO_lnfTriStateCheckButtonInitFromModel(aCheckButton)
+	VUHDO_lnfCheckButtonOnLoad(aCheckButton);
+	VUHDO_triStateSetSelected(aCheckButton);
+end
+
+
+
 -- Radio Button
 --
 function VUHDO_lnfRadioButtonUpdateModel(aRadioButton)
@@ -682,7 +719,6 @@ end
 -- Edit Box
 --
 local tTable;
-local tValues;
 local tFunction;
 function VUHDO_lnfEditBoxUpdateModel(anEditBox)
 	tTable = anEditBox:GetParent():GetAttribute("combo_table");
@@ -731,7 +767,7 @@ local VUHDO_COMBO_ITEMS_PER_COL;
 
 local tTable;
 local tItemName;
-local tIndex, tCnt, tCnt2, tInfo;
+local tCnt;
 local tItemPanel;
 local tDropdownBox, tItemContainer;
 local tXIdx;
@@ -866,7 +902,6 @@ end
 
 
 --
-local tIndex, tInfo;
 local tTexture;
 local tTable;
 local tFunction;

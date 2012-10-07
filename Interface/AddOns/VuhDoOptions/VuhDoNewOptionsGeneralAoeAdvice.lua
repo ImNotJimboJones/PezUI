@@ -2,7 +2,6 @@
 
 
 function VUHDO_newOptionsAoeAdvicePopulate(aParent)
-	local tName, tSettings;
 	local tFrameName, tFrame, tComponent;
 	local tX, tY;
 	local tIndex = 0;
@@ -10,11 +9,11 @@ function VUHDO_newOptionsAoeAdvicePopulate(aParent)
 	for tName, tSettings in pairs(VUHDO_CONFIG["AOE_ADVISOR"]["config"]) do
 		if (VUHDO_AOE_SPELLS[tName] ~= nil) then
 			tFrameName = aParent:GetName() .. tName;
-			if (VUHDO_GLOBAL[tFrameName] == nil) then
+			if (_G[tFrameName] == nil) then
 				CreateFrame("Frame", tFrameName, aParent, "VuhDoAoeItemTemplate");
 			end
 
-			tFrame = VUHDO_GLOBAL[tFrameName];
+			tFrame = _G[tFrameName];
 
 			tX = floor(tIndex * 0.2) * (tFrame:GetWidth() + 10) + 20;
 			tY = (tIndex % 5) * (tFrame:GetHeight() + 6) + 150;
@@ -22,18 +21,18 @@ function VUHDO_newOptionsAoeAdvicePopulate(aParent)
 
 			tFrame:Hide();
 
-			tComponent = VUHDO_GLOBAL[tFrameName .. "EnableCheckButton"];
+			tComponent = _G[tFrameName .. "EnableCheckButton"];
 			VUHDO_lnfSetModel(tComponent, "VUHDO_CONFIG.AOE_ADVISOR.config." .. tName .. ".enable");
 			VUHDO_lnfCheckButtonInitFromModel(tComponent);
 
-			tComponent = VUHDO_GLOBAL[tFrameName .. "HealedSlider"];
+			tComponent = _G[tFrameName .. "HealedSlider"];
 			VUHDO_lnfSetModel(tComponent, "VUHDO_CONFIG.AOE_ADVISOR.config." .. tName .. ".thresh");
 			VUHDO_lnfSliderInitFromModel(tComponent);
 
-			tComponent = VUHDO_GLOBAL[tFrameName .. "SpellTextureTexture"];
+			tComponent = _G[tFrameName .. "SpellTextureTexture"];
 			tComponent:SetTexture(VUHDO_AOE_SPELLS[tName]["icon"]);
 
-			tComponent = VUHDO_GLOBAL[tFrameName .. "SpellNameLabelLabel"];
+			tComponent = _G[tFrameName .. "SpellNameLabelLabel"];
 			tComponent:SetText(VUHDO_AOE_SPELLS[tName]["name"]);
 
 			tFrame:SetPoint("TOPLEFT", aParent:GetName(), "TOPLEFT", tX, -tY);

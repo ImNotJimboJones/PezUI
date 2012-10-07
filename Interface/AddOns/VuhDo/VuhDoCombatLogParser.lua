@@ -13,10 +13,10 @@ local sCurrentFocus = nil;
 
 --
 function VUHDO_combatLogInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_RAID_GUIDS = VUHDO_GLOBAL["VUHDO_RAID_GUIDS"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
-	VUHDO_updateHealth = VUHDO_GLOBAL["VUHDO_updateHealth"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_RAID_GUIDS = _G["VUHDO_RAID_GUIDS"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
+	VUHDO_updateHealth = _G["VUHDO_updateHealth"];
 end
 
 
@@ -84,12 +84,10 @@ end
 --
 function VUHDO_clParserSetCurrentFocus()
 	sCurrentFocus = nil;
-	local tUnit, tInfo;
-	local tEmptyInfo = { };
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		if (UnitIsUnit("focus", tUnit) and tUnit ~= "focus" and tUnit ~= "target") then
-			if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
+			if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or {})["isVehicle"]) then
 				sCurrentFocus = tInfo["ownerUnit"];
 			else
 				sCurrentFocus = tUnit;

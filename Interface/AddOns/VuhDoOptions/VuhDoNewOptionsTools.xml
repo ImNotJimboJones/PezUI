@@ -1,7 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<Script file="VuhDoNewOptionsTools.lua" />
-
 	<Frame name="VuhDoNewOptionsToolsTemplate" virtual="true">
 		<Frames>
 			<Frame name="$parentRadioPanel">
@@ -36,7 +34,7 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentProfilesRadioButton" checked="true" text="VUHDO_I18N_PROFILES" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentProfilesRadioButton" checked="true" text="VUHDO_I18N_PROFILES" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -45,18 +43,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsSkinsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsSkins";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K164);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentKeyLayoutsRadioButton" text="VUHDO_I18N_KEY_LAYOUTS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentKeyLayoutsRadioButton" text="VUHDO_I18N_KEY_LAYOUTS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -65,18 +60,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsKeyLayoutsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsKeyLayouts";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K525);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentExportRadioButton" text="VUHDO_I18N_EXPORT" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentExportRadioButton" text="VUHDO_I18N_EXPORT" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -85,18 +77,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsExportClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsExport";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K526);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentShareRadioButton" text="Share" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentShareRadioButton" text="Share" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -105,11 +94,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsShareClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsShare";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, "Setup sharing / communication properties for transmitting data from other VuhDo users.");
 							</OnLoad>
@@ -135,7 +121,7 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentWizardRadioButton" text="VUHDO_I18N_PANEL_WIZARD" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentWizardRadioButton" text="VUHDO_I18N_PANEL_WIZARD" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -144,18 +130,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsWizardClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsWizard";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K265);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentResetRadioButton" text="VUHDO_I18N_RESET" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentResetRadioButton" text="VUHDO_I18N_RESET" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -164,11 +147,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsToolsResetClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsToolsReset";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K477);
 							</OnLoad>

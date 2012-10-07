@@ -36,23 +36,23 @@ local VUHDO_CONFIG;
 local VUHDO_INTERNAL_TOGGLES;
 local VUHDO_RAID;
 function VUHDO_actionEventHandlerInitBurst()
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VUHDO_highlightClusterFor = VUHDO_GLOBAL["VUHDO_highlightClusterFor"];
-	VUHDO_showTooltip = VUHDO_GLOBAL["VUHDO_showTooltip"];
-	VUHDO_hideTooltip = VUHDO_GLOBAL["VUHDO_hideTooltip"];
-	VUHDO_resetClusterUnit = VUHDO_GLOBAL["VUHDO_resetClusterUnit"];
-	VUHDO_removeAllClusterHighlights = VUHDO_GLOBAL["VUHDO_removeAllClusterHighlights"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_setupSmartCast = VUHDO_GLOBAL["VUHDO_setupSmartCast"];
-	VUHDO_updateDirectionFrame = VUHDO_GLOBAL["VUHDO_updateDirectionFrame"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_highlightClusterFor = _G["VUHDO_highlightClusterFor"];
+	VUHDO_showTooltip = _G["VUHDO_showTooltip"];
+	VUHDO_hideTooltip = _G["VUHDO_hideTooltip"];
+	VUHDO_resetClusterUnit = _G["VUHDO_resetClusterUnit"];
+	VUHDO_removeAllClusterHighlights = _G["VUHDO_removeAllClusterHighlights"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_setupSmartCast = _G["VUHDO_setupSmartCast"];
+	VUHDO_updateDirectionFrame = _G["VUHDO_updateDirectionFrame"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
 
-	VUHDO_SPELL_CONFIG = VUHDO_GLOBAL["VUHDO_SPELL_CONFIG"];
-	VUHDO_SPELL_ASSIGNMENTS = VUHDO_GLOBAL["VUHDO_SPELL_ASSIGNMENTS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_INTERNAL_TOGGLES = VUHDO_GLOBAL["VUHDO_INTERNAL_TOGGLES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_getPanelButtons = VUHDO_GLOBAL["VUHDO_getPanelButtons"];
+	VUHDO_SPELL_CONFIG = _G["VUHDO_SPELL_CONFIG"];
+	VUHDO_SPELL_ASSIGNMENTS = _G["VUHDO_SPELL_ASSIGNMENTS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_getPanelButtons = _G["VUHDO_getPanelButtons"];
 end
 
 
@@ -195,10 +195,7 @@ end
 
 
 --
-local tPanelNum;
 local tAllButtons;
-local tButton;
-local tCnt;
 function VUHDO_hideAllPlayerIcons()
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
@@ -226,7 +223,6 @@ local function VUHDO_showAllPlayerIcons(aPanel)
 	local tPanelNum = VUHDO_getPanelNum(aPanel);
 
 	local tAllButtons = VUHDO_getPanelButtons(tPanelNum);
-	local tButton;
 
 	for _, tButton in pairs(tAllButtons) do
 		if (tButton:IsShown()) then
@@ -239,7 +235,6 @@ end
 
 --
 local tAllUnits;
-local tUnit;
 local tInfo;
 local tOldMouseover;
 function VuhDoActionOnEnter(aButton)
@@ -289,7 +284,6 @@ end
 --
 local tOldMouseover;
 local tAllUnits;
-local tUnit;
 local tInfo;
 function VuhDoActionOnLeave(aButton)
 
@@ -326,7 +320,7 @@ end
 
 
 --
-local tAllButtons, tButton, tQuota, tHighlightBar;
+local tAllButtons, tQuota, tHighlightBar;
 function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (anIsActive or (aMaxValue or 0) > 1)	and 1 or 0;
 
@@ -368,10 +362,10 @@ function VuhDoActionPreClick(aButton, aMouseButton)
 	if (tKey ~= nil and strlower(tKey[3]) == "menu") then
 		if (not InCombatLockdown()) then
 			VUHDO_disableActions(aButton);
+			VUHDO_IS_SMART_CAST = true;
 		end
 		VUHDO_setMenuUnit(aButton);
 		ToggleDropDownMenu(1, nil, VuhDoPlayerTargetDropDown, aButton:GetName(), 0, -5);
-		VUHDO_IS_SMART_CAST = true;
 	elseif (tKey ~= nil and strlower(tKey[3]) == "tell") then
 		ChatFrame_SendTell(VUHDO_RAID[aButton:GetAttribute("unit")]["name"]);
 	else

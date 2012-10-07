@@ -23,13 +23,13 @@ local sStopTargetText = "/click VDSTB\n";
 
 
 function VUHDO_macroFactoryInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_SPELL_CONFIG = VUHDO_GLOBAL["VUHDO_SPELL_CONFIG"];
-	VUHDO_SPELLS = VUHDO_GLOBAL["VUHDO_SPELLS"];
-	VUHDO_SPELL_CONFIG = VUHDO_GLOBAL["VUHDO_SPELL_CONFIG"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_SPELL_CONFIG = _G["VUHDO_SPELL_CONFIG"];
+	VUHDO_SPELLS = _G["VUHDO_SPELLS"];
+	VUHDO_SPELL_CONFIG = _G["VUHDO_SPELL_CONFIG"];
 
-	VUHDO_replaceMacroTemplates = VUHDO_GLOBAL["VUHDO_replaceMacroTemplates"];
+	VUHDO_replaceMacroTemplates = _G["VUHDO_replaceMacroTemplates"];
 end
 
 
@@ -457,9 +457,9 @@ local function VUHDO_createOrUpdateMacro(aMacroNum, aMacroText, aSpell)
 			VUHDO_Msg(VUHDO_I18N_MACRO_NUM_ERR .. aSpell, 1, 0.4, 0.4);
 			return nil;
 		end
-		return CreateMacro(tName, 1, aMacroText, true, nil);
+		return CreateMacro(tName, "Spell_Holy_GreaterHeal", aMacroText, true, nil);
 	else
-		return EditMacro(tIndex, tName, 1, aMacroText, true, nil)
+		return EditMacro(tIndex, tName, "Spell_Holy_GreaterHeal", aMacroText, true, nil)
 	end
 end
 
@@ -470,7 +470,6 @@ function VUHDO_initKeyboardMacros()
 	local tBindingName;
 	local tMacroId;
 	local tSpell;
-	local tCnt;
 	local tBody;
 	local tKey1, tKey2;
 	local tBindPrefix = "VUHDO_KEY_ASSIGN_";
@@ -496,7 +495,7 @@ function VUHDO_initKeyboardMacros()
 			end
 		end
 
-		VUHDO_GLOBAL[format("BINDING_NAME_%s%d", tBindPrefix, tCnt)] = tBindingName;
+		_G[format("BINDING_NAME_%s%d", tBindPrefix, tCnt)] = tBindingName;
 
 		tKey1, tKey2 = GetBindingKey(tBindPrefix .. tCnt);
 		if (strlen(tSpell or "") > 0 and (tKey1 ~= nil or tKey2 ~= nil)) then

@@ -30,16 +30,16 @@ local sEmpty = { };
 
 --
 function VUHDO_panelInitBurst()
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_HEADER_TEXTS = VUHDO_GLOBAL["VUHDO_HEADER_TEXTS"];
-	VUHDO_GROUPS = VUHDO_GLOBAL["VUHDO_GROUPS"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_HEADER_TEXTS = _G["VUHDO_HEADER_TEXTS"];
+	VUHDO_GROUPS = _G["VUHDO_GROUPS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 
-	VUHDO_getHeaderTextId = VUHDO_GLOBAL["VUHDO_getHeaderTextId"];
-	VUHDO_getClassColorByModelId = VUHDO_GLOBAL["VUHDO_getClassColorByModelId"];
-	VUHDO_getHeaderBar = VUHDO_GLOBAL["VUHDO_getHeaderBar"];
-	VUHDO_getModelType = VUHDO_GLOBAL["VUHDO_getModelType"];
-	VUHDO_isUnitInModel = VUHDO_GLOBAL["VUHDO_isUnitInModel"];
+	VUHDO_getHeaderTextId = _G["VUHDO_getHeaderTextId"];
+	VUHDO_getClassColorByModelId = _G["VUHDO_getClassColorByModelId"];
+	VUHDO_getHeaderBar = _G["VUHDO_getHeaderBar"];
+	VUHDO_getModelType = _G["VUHDO_getModelType"];
+	VUHDO_isUnitInModel = _G["VUHDO_isUnitInModel"];
 end
 -- BURST CACHE ---------------------------------------------------
 
@@ -96,7 +96,6 @@ end
 
 --
 local tSubTable = { };
-local tSubCount;
 local function VUHDO_getSubTable(aTable, anIndex, aCount)
 	twipe(tSubTable);
 
@@ -117,7 +116,6 @@ end
 local tOccurrence;
 local tDynModel;
 local tMaxRows;
-local tModelNo;
 local function VUHDO_cutSubGroup(anIdentifier, aPanelNum, aModelIndex)
 	tDynModel = VUHDO_getDynamicModelArray(aPanelNum);
 	tOccurrence = 0;
@@ -151,7 +149,6 @@ local VUHDO_getGroupMembers = VUHDO_getGroupMembers;
 
 
 --
-local tIndex, tModelId;
 local function VUHDO_getPanelUnitFirstModel(aPanelNum, aUnit)
 	for tIndex, tModelId in ipairs(VUHDO_PANEL_MODELS[aPanelNum]) do
 		if (VUHDO_isUnitInModel(aUnit, tModelId)) then
@@ -363,10 +360,8 @@ local VUHDO_RAID_SORTERS = {
 --
 local tSorted = { };
 local tMembers;
-local tUnit;
 local tNoExists;
 local tWasTarget, tWasFocus;
-local tCnt;
 function VUHDO_getGroupMembersSorted(anIdentifier, aSortCriterion, aPanelNum, aModelIndex)
 	tMembers = VUHDO_getGroupMembers(anIdentifier, aPanelNum, aModelIndex);
 	sIsPlayerFirst = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["isPlayerOnTop"];

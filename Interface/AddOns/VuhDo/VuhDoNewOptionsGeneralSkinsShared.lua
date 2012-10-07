@@ -346,7 +346,7 @@ local VUHDO_DEFAULT_PROFILES = {
 			},
 			["HOTS"] = {
 				["SLOTS"] = {
-					[10] = "BOUQUET_Hinweis Gruppenheilung",
+					[10] = "BOUQUET_" .. VUHDO_I18N_DEF_AOE_ADVICE,
 				},
 				["BARS"] = {
 					["radioValue"] = 1,
@@ -1931,8 +1931,21 @@ local VUHDO_DEFAULT_PROFILES = {
 
 
 --
+local function VUHDO_compressAllProfileParts(aProfile)
+	aProfile["CONFIG"] = VUHDO_compressTable(aProfile["CONFIG"]);
+	aProfile["PANEL_SETUP"] = VUHDO_compressTable(aProfile["PANEL_SETUP"]);
+	aProfile["POWER_TYPE_COLORS"] = VUHDO_compressTable(aProfile["POWER_TYPE_COLORS"]);
+	aProfile["SPELL_CONFIG"] = VUHDO_compressTable(aProfile["SPELL_CONFIG"]);
+	aProfile["BUFF_SETTINGS"] = VUHDO_compressTable(aProfile["BUFF_SETTINGS"]);
+	aProfile["BUFF_ORDER"] = VUHDO_compressTable(aProfile["BUFF_ORDER"]);
+	aProfile["INDICATOR_CONFIG"] = VUHDO_compressTable(aProfile["INDICATOR_CONFIG"]);
+end
+
+
+
+--
 local tAutoProfileIndices = { "1", "5", "10", "15", "25", "40" };
-local tIndex, tKey;
+local tKey;
 local function VUHDO_getBestProfileForSpecAndSize(aSpec, aSize)
 	for _, tIndex in ipairs(tAutoProfileIndices) do
 		tKey = "SPEC_" .. aSpec .. "_" .. tIndex;
@@ -2075,7 +2088,6 @@ VUHDO_PROFILE_MODEL_MATCH_NEVER = 99;
 
 --
 function VUHDO_getProfileNamedCompressed(aName)
-	local tIndex, tValue;
 	for tIndex, tValue in pairs(VUHDO_PROFILES) do
 		if (tValue["NAME"] == aName) then
 			return tIndex, tValue;
@@ -2088,7 +2100,6 @@ end
 
 --
 function VUHDO_getProfileNamed(aName)
-	local tIndex, tValue;
 	for tIndex, tValue in pairs(VUHDO_PROFILES) do
 		if (tValue["NAME"] == aName) then
 			local tNewValue = {
@@ -2118,29 +2129,29 @@ end
 --
 local function VUHDO_createNewProfile(aName)
 	local _, tProfile = VUHDO_getProfileNamedCompressed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-	local tCnt;
 
 	local tPanelPositions = { };
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		tPanelPositions[tCnt] = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP[tCnt]["POSITION"]);
 	end
 
-	return {
+	local tProfile = {
 		["NAME"] = aName,
 		["LOCKED"] = tProfile ~= nil and tProfile["LOCKED"],
 		["HARDLOCKED"] = false,
 		["ORIGINATOR_CLASS"] = VUHDO_PLAYER_CLASS,
 		["ORIGINATOR_TOON"] = VUHDO_PLAYER_NAME,
-		["CONFIG"] = VUHDO_compressTable(VUHDO_CONFIG),
-		["PANEL_SETUP"] = VUHDO_compressTable(VUHDO_PANEL_SETUP),
-		["POWER_TYPE_COLORS"] = VUHDO_compressTable(VUHDO_POWER_TYPE_COLORS),
-		["SPELL_CONFIG"] = VUHDO_compressTable(VUHDO_SPELL_CONFIG),
-		["BUFF_SETTINGS"] = VUHDO_compressTable(VUHDO_BUFF_SETTINGS),
-		["BUFF_ORDER"] = VUHDO_compressTable(VUHDO_BUFF_ORDER),
-		["INDICATOR_CONFIG"] = VUHDO_compressTable(VUHDO_INDICATOR_CONFIG),
+		["CONFIG"] = VUHDO_CONFIG,
+		["PANEL_SETUP"] = VUHDO_PANEL_SETUP,
+		["POWER_TYPE_COLORS"] = VUHDO_POWER_TYPE_COLORS,
+		["SPELL_CONFIG"] = VUHDO_SPELL_CONFIG,
+		["BUFF_SETTINGS"] = VUHDO_BUFF_SETTINGS,
+		["BUFF_ORDER"] = VUHDO_BUFF_ORDER,
+		["INDICATOR_CONFIG"] = VUHDO_INDICATOR_CONFIG,
 		["PANEL_POSITIONS"] = tPanelPositions;
 	};
-
+	VUHDO_compressAllProfileParts(tProfile);
+	return tProfile;
 end
 
 
@@ -2373,7 +2384,6 @@ local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileMode
 	end
 
 	local tSourceValue;
-	local tKey, tDestValue;
 	for tKey, tDestValue in pairs(aDestArray) do
 
 		tSourceValue = aSourceArray[tKey];
@@ -2405,8 +2415,6 @@ end
 
 --
 local function VUHDO_fixDominantProfileSettings(aProfile)
-	local tCnt;
-
 	for tCnt = 1, VUHDO_MAX_PANELS do
 		if (aProfile["PANEL_SETUP"][tCnt] ~= nil) then
 			if (aProfile["PANEL_SETUP"][tCnt]["MODEL"].groups == nil) then
@@ -2425,7 +2433,7 @@ end
 --
 function VUHDO_loadProfileNoInit(aName)
 	local tIndex, tProfile = VUHDO_getProfileNamed(aName);
-	local tCnt, tPanelPositions;
+	local tPanelPositions;
 	if (tIndex == nil) then
 		VUHDO_Msg(VUHDO_I18N_ERROR_NO_PROFILE .. "\"" .. aName .. "\" !", 1, 0.4, 0.4);
 		return;
@@ -2486,22 +2494,12 @@ end
 
 --
 function VUHDO_initDefaultProfiles()
-	if ((VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] or 1) < 2) then
-		VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] = 2;
-		local tProfile;
+	if ((VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] or 1) < 3) then
+		VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] = 3;
 		for _, tProfile in ipairs(VUHDO_DEFAULT_PROFILES) do
+			VUHDO_compressAllProfileParts(tProfile);
 			tinsert(VUHDO_PROFILES, tProfile);
 		end
 	end
-
 	VUHDO_DEFAULT_PROFILES = nil;
-
-	if ((VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] or 1) < 3) then
-		VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] = 3;
-		local _, tProfile = VUHDO_getProfileNamed(VUHDO_I18N_DEF_BIT_O_GRID);
-		if (tProfile ~= nil) then
-			tProfile["PANEL_SETUP"]["HOTS"]["SLOTS"][10] = "BOUQUET_" .. VUHDO_I18N_DEF_AOE_ADVICE;
-		end
-	end
-
 end

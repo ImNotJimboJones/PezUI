@@ -35,10 +35,10 @@ local VUHDO_MAX_ITERATIONS = 120; -- For a 40 man raid there is a total of +800 
 --
 local VUHDO_CLUSTER_BASE_RAID = { };
 function VUHDO_clusterBuilderInitBurst()
-	VUHDO_CLUSTER_BASE_RAID = VUHDO_GLOBAL["VUHDO_CLUSTER_BASE_RAID"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_CLUSTER_BASE_RAID = _G["VUHDO_CLUSTER_BASE_RAID"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 
-	VUHDO_setMapToCurrentZone = VUHDO_GLOBAL["VUHDO_setMapToCurrentZone"];
+	VUHDO_setMapToCurrentZone = _G["VUHDO_setMapToCurrentZone"];
 end
 
 
@@ -48,104 +48,6 @@ local VUHDO_MAP_FIX_WIDTH = {
 	["AlteracValley"] = {
 		[1] = 4237.49987792969,
 	},
-
-	-- Cataclysm
-	--[[["BlackrockCaverns"] = {
-		[1] = 1019.50793457031,
-		[2] = 1019.50793457031,
-	},
-
-	["ThroneofTides"] = {
-		[1] = 998.171936035156,
-		[2] = 998.171936035156,
-	},
-
-	["MoltenFront"] = {
-			[1] = 1189.58331298828,
-	},
-
-	["TheStonecore"] = {
-		[1] = 1317.12899780273,
-	},
-
-	["HallsofOrigination"] = {
-		[1] = 1531.7509765625,
-		[2] = 1272.75503540039,
-		[3] = 1128.76898193359,
-	},
-
-	["GrimBatol"] = {
-		[1] = 869.047431945801,
-	},
-
-	["TheNexusLegendary"] = {
-		[1] = 1101.2841796875,
-	},
-
-	["TheBastionofTwilight"] = {
-		[1] = 1078.33402252197,
-		[2] = 778.343017578125,
-		[3] = 1042.34202575684,
-	},
-
-	["BlackwingDescent"] = {
-		[1] = 849.69401550293,
-		[2] = 999.692977905273,
-	},
-
-	["Firelands"] = {
-		[1] = 1587.49993896484,
-		[2] = 375.0,
-		[3] = 1440.0,
-	},
-
-	["ThroneoftheFourWinds"] = {
-		[1] = 1500.0,
-	},
-
-	["BaradinHold"] = {
-		[1] = 585.0,
-	},
-
-	["Uldum"] = {
-		[1] = 6193.74975585938,
-	},
-
-	["ZulGurub"] = {
-		[1] = 2120.83325195312,
-	},
-
-	["ZulAman"] = {
-		[1] = 1268.74993896484,
-	},]]
-
-	--[[["EndTime"] = {
-			[1] = 3295.8331298829,
-			[2] = 562.5,
-			[3] = 865.62054443357,
-			[4] = 475,316.6665039063,
-			[5] = 696.884765625,
-			[6] = 453.13500976562,
-	},
-
-	["WellofEternity"] = {
-			[1] = 1252.0830078125,
-	},
-
-	["HourofTwilight"] = {
-			[1] = 3043.7498779297,
-			--[2] = 0,
-	},
-
-	["DragonSoul"] = {
-			[1] = 3106.7084960938,
-			[2] = 223.75,
-			[3] = 1352,
-			[4] = 185.19921875,
-			--[5] = 1.5,
-			--[6] = 1.5,
-			[7] = 1108.3515625,
-	},]]
 };
 
 
@@ -179,7 +81,7 @@ end
 
 
 --
-local tCnt, tDistance;
+local tDistance;
 local tEmptyUnit = { };
 local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
 	tDistance = sqrt((aDeltaX * aDeltaX)  + ((aDeltaY * 0.6666666666666) ^ 2));
@@ -209,7 +111,6 @@ end
 
 
 --
-local tIndex, tNormFactor;
 local tCurrWorldSize, tMinWorldSize, tUpperBoundary;
 local function VUHDO_getHeuristicMapWidth()
 	tMinWorldSize = VUHDO_MAP_LIMIT_YARDS;
@@ -279,9 +180,9 @@ end
 
 
 --
-local tUnit, tInfo, tCnt;
+local tUnit, tInfo;
 local tAnotherUnit, tAnotherInfo;
-local tX, tY, tDeltaX, tDeltaY, tDeltas;
+local tX, tY, tDeltaX, tDeltaY;
 local tMaxX, tMaxY;
 local tMapFileName, tDungeonLevels, tCurrLevel;
 local tCurrentZone;
@@ -431,7 +332,7 @@ end
 
 
 --
-local tDeltas, tDistance, tNumber, tOtherUnit, tInfo;
+local tDistance, tNumber, tInfo;
 local tStart, tDuration;
 function VUHDO_getUnitsInRadialClusterWith(aUnit, aYardsPow, anArray, aCdSpell)
 	twipe(anArray);
@@ -471,7 +372,7 @@ local VUHDO_getUnitsInRadialClusterWith = VUHDO_getUnitsInRadialClusterWith;
 
 
 --
-local tUnit, tWinnerUnit, tInfo, tWinnerMissLife;
+local tWinnerUnit, tInfo, tWinnerMissLife;
 local tCurrMissLife;
 local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 	tWinnerUnit = nil;
@@ -495,7 +396,6 @@ end
 local tNextJumps = { };
 local tExcludeList = { };
 local tNumJumps = 0;
-local tCnt;
 function VUHDO_getUnitsInChainClusterWith(aUnit, aYardsPow, anArray, aMaxTargets, aCdSpell)
 	twipe(anArray);
 	twipe(tExcludeList)

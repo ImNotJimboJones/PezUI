@@ -6,7 +6,6 @@ VUHDO_CURR_LAYOUT = "";
 
 --
 function VUHDO_initKeyLayoutComboModel()
-	local tName;
 	table.wipe(VUHDO_KEY_LAYOUT_COMBO_MODEL);
 
 	for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
@@ -26,22 +25,23 @@ end
 
 --
 function VUHDO_keyLayoutComboChanged(aComboBox, aValue)
-	VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["1"]);
-	VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["2"]);
-	VUHDO_lnfCheckButtonClicked(VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec1CheckButton"]);
-	VUHDO_lnfCheckButtonClicked(VUHDO_GLOBAL[aComboBox:GetParent():GetName() .. "Spec2CheckButton"]);
+	local tParentName = aComboBox:GetParent():GetName();
+
+	local tSpec1CheckButton = _G[tParentName .. "Spec1CheckButton"];
+	tSpec1CheckButton:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["1"]);
+	VUHDO_lnfCheckButtonClicked(tSpec1CheckButton);
+
+	local tSpec2CheckButton =  _G[tParentName .. "Spec2CheckButton"];
+	tSpec2CheckButton:SetChecked(aValue == VUHDO_SPEC_LAYOUTS["2"]);
+	VUHDO_lnfCheckButtonClicked(tSpec2CheckButton);
 end
 
 
 
 --
 function VUHDO_keyLayoutSpecOnClick(aCheckButton, aSpecId)
-	if (VUHDO_CURR_LAYOUT ~= nil and VUHDO_CURR_LAYOUT ~= "") then
-		if (aCheckButton:GetChecked()) then
-			VUHDO_SPEC_LAYOUTS[aSpecId] = VUHDO_CURR_LAYOUT;
-		else
-			VUHDO_SPEC_LAYOUTS[aSpecId] = "";
-		end
+	if (not VUHDO_strempty(VUHDO_CURR_LAYOUT)) then
+		VUHDO_SPEC_LAYOUTS[aSpecId] = aCheckButton:GetChecked() and VUHDO_CURR_LAYOUT or "";
 	else
 		VUHDO_Msg(VUHDO_I18N_SELECT_KEY_LAYOUT_FIRST, 1, 0.4, 0.4);
 	end
@@ -107,20 +107,22 @@ end
 --
 function VUHDO_saveKeyLayoutCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] = { };
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["MOUSE"] = VUHDO_compressTable(VUHDO_SPELL_ASSIGNMENTS);
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["HOSTILE_MOUSE"] = VUHDO_compressTable(VUHDO_HOSTILE_SPELL_ASSIGNMENTS);
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["KEYS"] = VUHDO_compressTable(VUHDO_SPELLS_KEYBOARD);
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"] = { };
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["T1"] = VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_1"];
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["T2"] = VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_2"];
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["I1"] = VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"];
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["I2"] = VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"];
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["I1N"] = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"];
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["I2N"] = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"];
-	  VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["FIRE"]["T3"] = VUHDO_SPELL_CONFIG["IS_FIRE_GLOVES"];
+		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT] = {
+			["MOUSE"] = VUHDO_compressTable(VUHDO_SPELL_ASSIGNMENTS),
+			["HOSTILE_MOUSE"] = VUHDO_compressTable(VUHDO_HOSTILE_SPELL_ASSIGNMENTS),
+			["KEYS"] = VUHDO_compressTable(VUHDO_SPELLS_KEYBOARD),
+			["FIRE"] = {
+				["T1"] = VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_1"],
+				["T2"] = VUHDO_SPELL_CONFIG["IS_FIRE_TRINKET_2"],
+				["I1"] = VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_1"],
+				["I2"] = VUHDO_SPELL_CONFIG["IS_FIRE_CUSTOM_2"],
+				["I1N"] = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_1_SPELL"],
+				["I2N"] = VUHDO_SPELL_CONFIG["FIRE_CUSTOM_2_SPELL"],
+				["T3"] = VUHDO_SPELL_CONFIG["IS_FIRE_GLOVES"],
+			},
+			["HOTS"] = VUHDO_compressTable(VUHDO_PANEL_SETUP["HOTS"]),
+		};
 
-		VUHDO_SPELL_LAYOUTS[VUHDO_CURR_LAYOUT]["HOTS"] = VUHDO_compressTable(VUHDO_PANEL_SETUP["HOTS"]);
 		VUHDO_SPEC_LAYOUTS["selected"] = VUHDO_CURR_LAYOUT;
 
 		VUHDO_Msg(format(VUHDO_I18N_KEY_LAYOUT_SAVED, VUHDO_CURR_LAYOUT));
@@ -132,9 +134,8 @@ end
 
 
 --
-local tEditBox;
 function VUHDO_saveKeyLayoutOnClick(aButton)
-	tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "SaveAsEditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "SaveAsEditBox"];
 	VUHDO_CURR_LAYOUT = strtrim(tEditBox:GetText());
 
 	if (strlen(VUHDO_CURR_LAYOUT) == 0) then

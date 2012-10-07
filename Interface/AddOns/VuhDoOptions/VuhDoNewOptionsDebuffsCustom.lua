@@ -66,20 +66,6 @@ VUHDO_SOUND_MODEL = nil;
 
 
 --
-local tIdx, tValue;
-local function VUHDO_getTableIndex(aTable, aValue)
-	for tIdx, tValue in pairs(aTable) do
-		if (tValue == aValue) then
-			return tIdx;
-		end
-	end
-
-	return nil;
-end
-
-
-
---
 local tValue;
 local tIndex;
 local tPanelName;
@@ -89,34 +75,34 @@ local tColorSwatch;
 
 function VUHDO_customDebuffUpdateEditBox(anEditBox)
 	tValue = anEditBox:GetText();
-	tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
+	tIndex = VUHDO_tableGetKeyFromValue(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 
 	if (tIndex ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 
 		tPanelName = anEditBox:GetParent():GetName();
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "IconCheckButton"];
+		tCheckButton = _G[tPanelName .. "IconCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".isIcon");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "ColorCheckButton"];
+		tCheckButton = _G[tPanelName .. "ColorCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".isColor");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "AnimateCheckButton"];
+		tCheckButton = _G[tPanelName .. "AnimateCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".animate");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "TimerCheckButton"];
+		tCheckButton = _G[tPanelName .. "TimerCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".timer");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "StacksCheckButton"];
+		tCheckButton = _G[tPanelName .. "StacksCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".isStacks");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tComboBox = VUHDO_GLOBAL[tPanelName .. "SoundCombo"];
+		tComboBox = _G[tPanelName .. "SoundCombo"];
 		VUHDO_setComboModel(tComboBox, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".SOUND", VUHDO_SOUNDS);
 		VUHDO_lnfComboBoxInitFromModel(tComboBox);
 
@@ -129,16 +115,16 @@ function VUHDO_customDebuffUpdateEditBox(anEditBox)
 			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].color = nil;
 		end
 
-		tColorSwatch = VUHDO_GLOBAL[tPanelName .. "ColorTexture"];
+		tColorSwatch = _G[tPanelName .. "ColorTexture"];
 		VUHDO_lnfSetModel(tColorSwatch, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".color");
 		VUHDO_lnfInitColorSwatch(tColorSwatch, VUHDO_I18N_COLOR, VUHDO_I18N_COLOR);
 		VUHDO_lnfColorSwatchInitFromModel(tColorSwatch);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "AliveTimeCheckButton"];
+		tCheckButton = _G[tPanelName .. "AliveTimeCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".isAliveTime");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "FullDurationCheckButton"];
+		tCheckButton = _G[tPanelName .. "FullDurationCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_CONFIG.CUSTOM_DEBUFF.STORED_SETTINGS." .. tValue .. ".isFullDuration");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 	else
@@ -156,40 +142,40 @@ function VUHDO_customDebuffUpdateEditBox(anEditBox)
 		VUHDO_COLOR_SWATCH_MODEL = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP.BAR_COLORS["DEBUFF" .. VUHDO_DEBUFF_TYPE_CUSTOM]);
 		VUHDO_SOUND_MODEL = VUHDO_CONFIG.CUSTOM_DEBUFF.SOUND;
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "IconCheckButton"];
+		tCheckButton = _G[tPanelName .. "IconCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_ICON_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "ColorCheckButton"];
+		tCheckButton = _G[tPanelName .. "ColorCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_COLOR_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "AnimateCheckButton"];
+		tCheckButton = _G[tPanelName .. "AnimateCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_ANIMATE_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "TimerCheckButton"];
+		tCheckButton = _G[tPanelName .. "TimerCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_TIMER_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "StacksCheckButton"];
+		tCheckButton = _G[tPanelName .. "StacksCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_STACKS_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tComboBox = VUHDO_GLOBAL[tPanelName .. "SoundCombo"];
+		tComboBox = _G[tPanelName .. "SoundCombo"];
 		VUHDO_setComboModel(tComboBox, "VUHDO_SOUND_MODEL", VUHDO_SOUNDS);
 		VUHDO_lnfComboBoxInitFromModel(tComboBox);
 
-		tColorSwatch = VUHDO_GLOBAL[tPanelName .. "ColorTexture"];
+		tColorSwatch = _G[tPanelName .. "ColorTexture"];
 		VUHDO_lnfSetModel(tColorSwatch, "VUHDO_COLOR_SWATCH_MODEL");
 		VUHDO_lnfInitColorSwatch(tColorSwatch, VUHDO_I18N_COLOR, VUHDO_I18N_COLOR);
 		VUHDO_lnfColorSwatchInitFromModel(tColorSwatch);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "AliveTimeCheckButton"];
+		tCheckButton = _G[tPanelName .. "AliveTimeCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_ALIVE_TIME_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 
-		tCheckButton = VUHDO_GLOBAL[tPanelName .. "FullDurationCheckButton"];
+		tCheckButton = _G[tPanelName .. "FullDurationCheckButton"];
 		VUHDO_lnfSetModel(tCheckButton, "VUHDO_FULL_DURATION_MODEL");
 		VUHDO_lnfCheckButtonInitFromModel(tCheckButton);
 	end
@@ -217,9 +203,9 @@ end
 
 --
 function VUHDO_saveCustomDebuffOnClick(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "EditBox"];
 	local tValue = strtrim(tEditBox:GetText());
-	local tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
+	local tIndex = VUHDO_tableGetKeyFromValue(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 
 	if (tIndex == nil and strlen(tValue) > 0) then
 		tinsert(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
@@ -233,33 +219,33 @@ function VUHDO_saveCustomDebuffOnClick(aButton)
 
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue] = { };
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "IconCheckButton"];
+	tCheckButton = _G[tPanelName .. "IconCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isIcon = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "ColorCheckButton"];
+	tCheckButton = _G[tPanelName .. "ColorCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isColor = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "AnimateCheckButton"];
+	tCheckButton = _G[tPanelName .. "AnimateCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].animate = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "TimerCheckButton"];
+	tCheckButton = _G[tPanelName .. "TimerCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].timer = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "StacksCheckButton"];
+	tCheckButton = _G[tPanelName .. "StacksCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isStacks = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "AliveTimeCheckButton"];
+	tCheckButton = _G[tPanelName .. "AliveTimeCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isAliveTime = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tCheckButton = VUHDO_GLOBAL[tPanelName .. "FullDurationCheckButton"];
+	tCheckButton = _G[tPanelName .. "FullDurationCheckButton"];
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].isFullDuration = VUHDO_forceBooleanValue(tCheckButton:GetChecked());
 
-	tComboBox = VUHDO_GLOBAL[tPanelName .. "SoundCombo"];
-	local tSoundName = VUHDO_GLOBAL[tComboBox:GetName() .. "Text"]:GetText();
+	tComboBox = _G[tPanelName .. "SoundCombo"];
+	local tSoundName = _G[tComboBox:GetName() .. "Text"]:GetText();
 	VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].SOUND = VUHDO_LibSharedMedia:Fetch("sound", tSoundName);
 	VUHDO_lnfComboBoxInitFromModel(tComboBox);
 
-	tColorSwatch = VUHDO_GLOBAL[tPanelName .. "ColorTexture"];
+	tColorSwatch = _G[tPanelName .. "ColorTexture"];
 
 	if (VUHDO_COLOR_SWATCH_MODEL == nil) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tValue].color
@@ -280,9 +266,9 @@ end
 
 --
 function VUHDO_deleteCustomDebuffOnClick(aButton)
-	local tEditBox = VUHDO_GLOBAL[aButton:GetParent():GetName() .. "EditBox"];
+	local tEditBox = _G[aButton:GetParent():GetName() .. "EditBox"];
 	local tValue = strtrim(tEditBox:GetText());
-	local tIndex = VUHDO_getTableIndex(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
+	local tIndex = VUHDO_tableGetKeyFromValue(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tValue);
 
 	if (tIndex ~= nil and strlen(tValue) > 0) then
 		tremove(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"], tIndex);
@@ -303,8 +289,6 @@ end
 
 --
 function VUHDO_applyToAllCustomDebuffOnClick()
-	local tName, tSettings;
-
 	for tName, tSettings in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]) do
 		tSettings["isIcon"] = VUHDO_CONFIG.CUSTOM_DEBUFF.isIcon;
 		tSettings["isColor"] = VUHDO_CONFIG.CUSTOM_DEBUFF.isColor;

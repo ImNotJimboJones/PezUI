@@ -178,16 +178,6 @@
 					</CheckButton>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="223" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MANAGE_KEYS" inherits="VuDoDefaultTitleFontTemplate">
@@ -195,6 +185,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
+
 				</Frames>
 			</Frame>
 			<Frame name="$parentSharePanel" inherits="VuhDoPanelTemplate">
@@ -210,16 +201,6 @@
 				</Anchors>
 				<Frames>
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="143" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="12" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="Send Layout" inherits="VuDoDefaultTitleFontTemplate">

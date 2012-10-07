@@ -139,8 +139,6 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	local tUniqueBuffs, _ = VUHDO_getAllUniqueSpells();
 
 	if (aLevel > 1) then
-		local tBuffName;
-
 		for _, tBuffName in pairs(tUniqueBuffs) do
 			local tCategory = VUHDO_getBuffCategoryName(tBuffName);
 			tInfo = UIDropDownMenu_CreateInfo();
@@ -197,7 +195,6 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	VUHDO_playerTargetAddTitle();
 
 	-- Main Tanks
-	local tCnt;
 	for tCnt = 1, 8 do -- VUHDO_MAX_MTS
 		local tText, tColor;
 
@@ -288,12 +285,9 @@ function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 	end
 
 	local tInfo;
-	local tName;
 
 	if (aLevel > 1) then
 		if ("S" == UIDROPDOWNMENU_MENU_VALUE) then
-			local tSetup;
-
 			for _, tSetup in ipairs(VUHDO_PROFILES) do
 				tInfo = UIDropDownMenu_CreateInfo();
 				tInfo["text"] = tSetup["NAME"];

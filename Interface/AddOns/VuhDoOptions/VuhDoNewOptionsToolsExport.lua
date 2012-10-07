@@ -7,8 +7,7 @@ VUHDO_EXPORT_CUDE_TO_RADIO_VALUE = 3;
 
 --
 local function VUHDO_broadcastCustomDebuffsToProfile(aDestProfile, anIsReplace)
-	local tIndex, tProfile, tOrigProfile;
-	local tDebuffName;
+	local tIndex, tProfile;
 
 	if (VUHDO_CONFIG["CURRENT_PROFILE"] == aDestProfile) then
 		return;
@@ -17,6 +16,11 @@ local function VUHDO_broadcastCustomDebuffsToProfile(aDestProfile, anIsReplace)
 	tIndex, tProfile = VUHDO_getProfileNamed(aDestProfile);
 	if (tIndex == nil) then
 		VUHDO_Msg(format(VUHDO_I18N_PROFILE_NOT_EXISTS, aDestProfile or VUHDO_I18N_NOT_SELECTED));
+		return;
+	end
+
+	if (tProfile["LOCKED"] or tProfile["HARDLOCKED"]) then
+		VUHDO_Msg("Profile " .. aDestProfile .. " is locked/hardlocked, skipping.");
 		return;
 	end
 
@@ -47,8 +51,6 @@ end
 
 --
 local function VUHDO_broadcastCustomDebuffsToAllProfiles(anIsSameToonOnly, anIsReplace)
-	local tProfile;
-
 	for _, tProfile in pairs(VUHDO_PROFILES) do
 		if (VUHDO_PLAYER_NAME == tProfile["ORIGINATOR_TOON"] or not anIsSameToonOnly) then
 			VUHDO_broadcastCustomDebuffsToProfile(tProfile["NAME"], anIsReplace);

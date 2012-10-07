@@ -13,9 +13,8 @@ local sHotSlotCfgs;
 local sIsChargesIcon;
 local sClipL, sClipR, sClipT, sClipB = 0, 1, 0, 1;
 
-local VUHDO_KNOWS_SWIFTMEND = false;
-local VUHDO_SWIFTMEND_UNITS = { };
-local VUHDO_FLASHING_ICONS = { };
+local sIsPlayerKnowsSwiftmend = false;
+local sSwiftmendUnits = { };
 
 VUHDO_MY_HOTS = { };
 local VUHDO_MY_HOTS = VUHDO_MY_HOTS;
@@ -76,7 +75,7 @@ local pairs = pairs;
 local twipe = table.wipe;
 local tostring = tostring;
 
-local VUHDO_GLOBAL = getfenv();
+local _G = _G;
 
 local VUHDO_getHealthBar;
 local VUHDO_getBarRoleIcon;
@@ -94,6 +93,8 @@ local VUHDO_getBarIconCharge;
 local VUHDO_getBarIconClockOrStub;
 local VUHDO_backColor;
 local VUHDO_textColor;
+local VUHDO_UIFrameFlash;
+local VUHDO_UIFrameFlashStop;
 
 local VUHDO_PANEL_SETUP;
 local VUHDO_CAST_ICON_DIFF;
@@ -101,40 +102,40 @@ local VUHDO_HEALING_HOTS;
 local VUHDO_RAID;
 local sIsClusterIcons;
 local sIsOthersHots;
-local sIsFlash;
 
-
-local tCnt;
 function VUHDO_customHotsInitBurst()
 	-- variables
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_CAST_ICON_DIFF = VUHDO_GLOBAL["VUHDO_CAST_ICON_DIFF"];
-	VUHDO_HEALING_HOTS = VUHDO_GLOBAL["VUHDO_HEALING_HOTS"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
-	VUHDO_ACTIVE_HOTS_OTHERS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS_OTHERS"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_CAST_ICON_DIFF = _G["VUHDO_CAST_ICON_DIFF"];
+	VUHDO_HEALING_HOTS = _G["VUHDO_HEALING_HOTS"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_ACTIVE_HOTS = _G["VUHDO_ACTIVE_HOTS"];
+	VUHDO_ACTIVE_HOTS_OTHERS = _G["VUHDO_ACTIVE_HOTS_OTHERS"];
 	-- functions
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_getBarRoleIcon = VUHDO_GLOBAL["VUHDO_getBarRoleIcon"];
-	VUHDO_updateAllClusterIcons = VUHDO_GLOBAL["VUHDO_updateAllClusterIcons"];
-	VUHDO_shouldScanUnit = VUHDO_GLOBAL["VUHDO_shouldScanUnit"];
-	VUHDO_getShieldLeftCount = VUHDO_GLOBAL["VUHDO_getShieldLeftCount"];
-	VUHDO_resolveVehicleUnit = VUHDO_GLOBAL["VUHDO_resolveVehicleUnit"];
-	VUHDO_isPanelVisible = VUHDO_GLOBAL["VUHDO_isPanelVisible"];
-	VUHDO_getHealButton = VUHDO_GLOBAL["VUHDO_getHealButton"];
-	VUHDO_getBarIcon = VUHDO_GLOBAL["VUHDO_getBarIcon"];
-	VUHDO_getBarIconTimer = VUHDO_GLOBAL["VUHDO_getBarIconTimer"];
-	VUHDO_getBarIconCounter = VUHDO_GLOBAL["VUHDO_getBarIconCounter"];
-	VUHDO_getBarIconCharge = VUHDO_GLOBAL["VUHDO_getBarIconCharge"];
-	VUHDO_getBarIconClockOrStub = VUHDO_GLOBAL["VUHDO_getBarIconClockOrStub"];
-	VUHDO_backColor = VUHDO_GLOBAL["VUHDO_backColor"];
-	VUHDO_textColor = VUHDO_GLOBAL["VUHDO_textColor"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_getBarRoleIcon = _G["VUHDO_getBarRoleIcon"];
+	VUHDO_updateAllClusterIcons = _G["VUHDO_updateAllClusterIcons"];
+	VUHDO_shouldScanUnit = _G["VUHDO_shouldScanUnit"];
+	VUHDO_getShieldLeftCount = _G["VUHDO_getShieldLeftCount"];
+	VUHDO_resolveVehicleUnit = _G["VUHDO_resolveVehicleUnit"];
+	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
+	VUHDO_getHealButton = _G["VUHDO_getHealButton"];
+	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
+	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
+	VUHDO_getBarIconCounter = _G["VUHDO_getBarIconCounter"];
+	VUHDO_getBarIconCharge = _G["VUHDO_getBarIconCharge"];
+	VUHDO_getBarIconClockOrStub = _G["VUHDO_getBarIconClockOrStub"];
+	VUHDO_backColor = _G["VUHDO_backColor"];
+	VUHDO_textColor = _G["VUHDO_textColor"];
 
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
 	sHotCols = sBarColors["HOTS"];
 	sIsFade = sHotCols["isFadeOut"];
-	sIsFlash = sHotCols["isFlashWhenLow"];
+
+	VUHDO_UIFrameFlash = sHotCols["isFlashWhenLow"] and _G["VUHDO_UIFrameFlash"] or function() end;
+	VUHDO_UIFrameFlashStop = sHotCols["isFlashWhenLow"] and _G["VUHDO_UIFrameFlashStop"] or function() end;
+
 	sIsWarnColor = sHotCols["WARNING"]["enabled"];
 	sHotSetup = VUHDO_PANEL_SETUP["HOTS"];
 	sHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
@@ -170,7 +171,7 @@ end
 
 --
 function VUHDO_setKnowsSwiftmend(aKnowsSwiftmend)
-	VUHDO_KNOWS_SWIFTMEND = aKnowsSwiftmend;
+	sIsPlayerKnowsSwiftmend = aKnowsSwiftmend;
 end
 
 
@@ -224,10 +225,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	tIcon = VUHDO_getBarIcon(aButton, anIndex);
 
 	if (aRest == nil) then
-		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-			VUHDO_UIFrameFlashStop(tIcon);
-			VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
-		end
+		VUHDO_UIFrameFlashStop(tIcon);
 		VUHDO_getBarIconFrame(aButton, anIndex):Hide();
 		return;
 	else
@@ -256,11 +254,7 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 			tIcon:SetAlpha(tHotCfg["O"]);
 			tCounter:SetText(aTimes > 1 and aTimes or "");
 		else
-			if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-				VUHDO_UIFrameFlashStop(tIcon);
-				VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
-			end
-
+			VUHDO_UIFrameFlashStop(tIcon);
 			tIcon:SetAlpha(0);
 			tCounter:SetText("");
 		end
@@ -287,31 +281,17 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 		tIcon:SetAlpha((sIsFade and aRest < 10) and tHotCfg["O"] * aRest * 0.1 or tHotCfg["O"]);
 
 		if (aRest > 5) then
-			if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-				VUHDO_UIFrameFlashStop(tIcon);
-				VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
-			end
+			VUHDO_UIFrameFlashStop(tIcon);
 			tTimer:SetTextColor(1, 1, 1, 1);
 		else
 			tDuration2 = aRest * 0.2;
 			tTimer:SetTextColor(1, tDuration2, tDuration2, 1);
-			if (sIsFlash) then
-				if (VUHDO_FLASHING_ICONS[aButton] == nil) then
-					VUHDO_FLASHING_ICONS[aButton] = { };
-				end
-				if (not VUHDO_FLASHING_ICONS[aButton][anIndex]) then
-					VUHDO_FLASHING_ICONS[aButton][anIndex] = true;
-					VUHDO_UIFrameFlash(tIcon, 0.2, 0.1, 5, true, 0, 0.1);
-				end
-			end
+			VUHDO_UIFrameFlash(tIcon, 0.2, 0.1, 5, true, 0, 0.1);
 		end
 
 		tCounter:SetText(aTimes > 1 and aTimes or "");
 	else
-		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[anIndex]) then
-			VUHDO_UIFrameFlashStop(tIcon);
-			VUHDO_FLASHING_ICONS[aButton][anIndex] = nil;
-		end
+		VUHDO_UIFrameFlashStop(tIcon);
 		tTimer:SetText("");
 		tClock:SetAlpha(0);
 		tIcon:SetAlpha(tHotCfg["O"]);
@@ -399,10 +379,8 @@ end
 
 --
 local tAllButtons;
-local tButton;
 local tShieldCharges;
 local tIsMatch;
-local tIndex, tHotName;
 local tIsMine, tIsOthers;
 local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDuration, aMode, aColor, aHotSpellName, aClipL, aClipR, aClipT, aClipB)
 	tAllButtons = VUHDO_getUnitButtons(VUHDO_resolveVehicleUnit(aUnit));
@@ -442,33 +420,28 @@ end
 
 
 
-local tCnt;
+--
 local function VUHDO_removeButtonHots(aButton)
 	for tCnt = 1, 5 do
-		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[tCnt]) then
-			VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
-		end
+		VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
 		VUHDO_getBarIconFrame(aButton, tCnt):Hide();
 	end
 
 	for tCnt = 9, 10 do
-		if (sIsFlash and (VUHDO_FLASHING_ICONS[aButton] or {})[tCnt]) then
-			VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
-		end
+		VUHDO_UIFrameFlashStop(VUHDO_getBarIcon(aButton, tCnt));
 		VUHDO_getBarIconFrame(aButton, tCnt):Hide();
 	end
 
 	for tCnt = 9, 11 do
 		VUHDO_getHealthBar(aButton, tCnt):SetValue(0);
 	end
-	VUHDO_FLASHING_ICONS[aButton] = nil;
 	VUHDO_getBarRoleIcon(aButton, 51):Hide(); -- Swiftmend indicator
 end
 
 
 
 --
-local tButton, tAllButtons;
+local tAllButtons;
 function VUHDO_removeHots(aUnit)
 	tAllButtons = VUHDO_getUnitButtons(aUnit) or {};
 
@@ -547,7 +520,6 @@ end
 
 
 --
-local tHotCmpName;
 local tOtherHotCnt;
 local tIconFound;
 local tOtherIcon;
@@ -555,7 +527,6 @@ local tBuffIcon;
 local tExpiry;
 local tRest;
 local tStacks;
-local tCnt;
 local tCaster;
 local tBuffName;
 local tStart, tEnabled;
@@ -564,7 +535,6 @@ local tDiffIcon;
 local tHotFromBuff;
 local tIsCastByPlayer;
 local tDuration;
-local tHotInfo;
 local tSpellId, tDebuffOffset;
 local tNow;
 local tFilter;
@@ -630,7 +600,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 				end
 			end
 
-			if (VUHDO_KNOWS_SWIFTMEND and not sIsSwiftmend) then
+			if (sIsPlayerKnowsSwiftmend and not sIsSwiftmend) then
 				if (VUHDO_SPELL_ID.REGROWTH == tBuffName or VUHDO_SPELL_ID.REJUVENATION == tBuffName) then
 					tStart, tSmDuration, tEnabled = GetSpellCooldown(VUHDO_SPELL_ID.SWIFTMEND);
 					if (tEnabled ~= 0 and (tStart == nil or tSmDuration == nil or tStart <= 0 or tSmDuration <= 1.6)) then
@@ -689,8 +659,8 @@ local function VUHDO_updateHots(aUnit, anInfo)
 			VUHDO_updateAllClusterIcons(aUnit, anInfo);
 		end
 
-		if (VUHDO_KNOWS_SWIFTMEND) then
-			VUHDO_SWIFTMEND_UNITS[aUnit] = sIsSwiftmend;
+		if (sIsPlayerKnowsSwiftmend) then
+			sSwiftmendUnits[aUnit] = sIsSwiftmend;
 		end
 
 	end -- Should scan unit
@@ -725,7 +695,7 @@ end
 
 
 --
-local tAllButtons, tButton, tIcon;
+local tAllButtons, tIcon;
 function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact, aTimer2, aClipL, aClipR, aClipT, aClipB)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
 	if (tAllButtons ~= nil) then
@@ -754,13 +724,12 @@ end
 
 
 --
-local tUnit, tInfo;
 function VUHDO_updateAllHoTs()
 	if (sIsSuspended) then
 		return;
 	end
 
-	twipe(VUHDO_SWIFTMEND_UNITS);
+	twipe(sSwiftmendUnits);
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		VUHDO_updateHots(tUnit, tInfo);
@@ -771,8 +740,6 @@ end
 
 --
 function VUHDO_removeAllHots()
-	local tCnt;
-	local tCnt2;
 	local tButton;
 
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
@@ -789,7 +756,6 @@ function VUHDO_removeAllHots()
 		end
 	end
 
-	twipe(VUHDO_FLASHING_ICONS);
 	VUHDO_updatePlayerTarget();
 end
 
@@ -803,5 +769,5 @@ end
 
 
 function VUHDO_isUnitSwiftmendable(aUnit)
-	return VUHDO_SWIFTMEND_UNITS[aUnit];
+	return sSwiftmendUnits[aUnit];
 end

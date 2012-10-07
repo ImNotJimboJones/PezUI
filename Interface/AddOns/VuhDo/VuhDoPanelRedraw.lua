@@ -1,4 +1,4 @@
-local VUHDO_GLOBAL = getfenv();
+local _G = _G;
 
 local VUHDO_STD_BACKDROP = nil;
 local VUHDO_DESIGN_BACKDROP = nil;
@@ -45,12 +45,12 @@ function VUHDO_panelRedrawInitBurst()
 	VUHDO_panelRedrawHeadersInitBurst();
 	VUHDO_panelRedrawHotsInitBurst();
 
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_INDICATOR_CONFIG = VUHDO_GLOBAL["VUHDO_INDICATOR_CONFIG"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_INDICATOR_CONFIG = _G["VUHDO_INDICATOR_CONFIG"];
 	sIsManaBouquet = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] ~= "";
 
-	VUHDO_getFont = VUHDO_GLOBAL["VUHDO_getFont"];
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
+	VUHDO_getFont = _G["VUHDO_getFont"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
 end
 
 
@@ -126,7 +126,6 @@ local VUHDO_isPanelPopulated = VUHDO_isPanelPopulated;
 --
 --
 local tModelArray;
-local tModelIndex, tModelId;
 local tMemberNum;
 local function VUHDO_getNumButtonsPanel(aPanelNum)
 	tModelArray = VUHDO_getDynamicModelArray(aPanelNum);
@@ -244,7 +243,6 @@ end
 
 
 --
-local tCnt;
 local tLeft, tRight, tTop, tBottom;
 local function VUHDO_initButtonButtonFacade(aButton)
 	for tCnt = 1, 5 do
@@ -260,18 +258,14 @@ end
 
 
 --
-local tModelIndex;
 local tBorderCol;
 local tXPos,  tYPos;
 local tHealButton;
-local tUnit;
 local tGroupArray;
-local tModelId;
 local tGroupIndex, tColIdx, tBtnIdx;
 local tBorderCol;
 local tModelArray;
 local tPanelName;
-local tCnt;
 local function VUHDO_positionAllHealButtons(aPanel, aPanelNum)
 	tModelArray = VUHDO_getDynamicModelArray(aPanelNum);
 	tPanelName  = aPanel:GetName();
@@ -658,7 +652,7 @@ end
 --
 local tFlashBar;
 local function VUHDO_initFlashBar()
-	tFlashBar = VUHDO_GLOBAL[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
+	tFlashBar = _G[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
 	tFlashBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
 	tFlashBar:SetStatusBarColor(1, 0.8, 0.8, 1);
 	tFlashBar:Hide();
@@ -764,8 +758,7 @@ end
 
 
 --
-local tCnt;
-local tHealthBar, tIsInverted, tOrientation, tIconNum;
+local tHealthBar, tIsInverted, tOrientation;
 local tClickPar;
 function VUHDO_initHealButton(aButton, aPanelNum)
 	tClickPar = VUHDO_CONFIG["ON_MOUSE_UP"] and "AnyUp" or "AnyDown";
@@ -848,10 +841,10 @@ function VUHDO_initHealButton(aButton, aPanelNum)
 	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		ClickCastFrames = ClickCastFrames or {};
 		ClickCastFrames[aButton] = true;
-		ClickCastFrames[VUHDO_GLOBAL[aButton:GetName() .. "Tg"]] = true;
-		ClickCastFrames[VUHDO_GLOBAL[aButton:GetName() .. "Tot"]] = true;
+		ClickCastFrames[_G[aButton:GetName() .. "Tg"]] = true;
+		ClickCastFrames[_G[aButton:GetName() .. "Tot"]] = true;
 		for tIconNum = 40, 44 do
-			ClickCastFrames[VUHDO_GLOBAL[format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), tIconNum)]] = true;
+			ClickCastFrames[_G[format("%sBgBarIcBarHlBarIc%d", aButton:GetName(), tIconNum)]] = true;
 		end
 	end
 
@@ -863,7 +856,6 @@ local VUHDO_initHealButton = VUHDO_initHealButton;
 
 --
 local tHealButton,  tGroupPanel;
-local tCnt;
 local tNumButtons;
 local function VUHDO_initAllHealButtons(aPanel, aPanelNum)
 	tNumButtons = VUHDO_getNumButtonsPanel(aPanelNum);
@@ -997,11 +989,11 @@ local function VUHDO_initPanel(aPanel, aPanelNum)
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:Hide();
 		end
 
-		VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
-		VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
+		_G[aPanel:GetName() .. "NewTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
+		_G[aPanel:GetName() .. "ClrTxu"]:SetShown(not VUHDO_CONFIG_SHOW_RAID);
 	else
-		VUHDO_GLOBAL[aPanel:GetName() .. "NewTxu"]:Hide();
-		VUHDO_GLOBAL[aPanel:GetName() .. "ClrTxu"]:Hide();
+		_G[aPanel:GetName() .. "NewTxu"]:Hide();
+		_G[aPanel:GetName() .. "ClrTxu"]:Hide();
 		tLabel:GetParent():Hide();
 		if (VuhDoNewOptionsTabbedFrame ~= nil) then
 			VuhDoNewOptionsTabbedFramePanelNumLabelLabel:Hide();
@@ -1050,7 +1042,7 @@ local VUHDO_redrawPanel = VUHDO_redrawPanel;
 
 
 --
-local tCnt, tGcdCol;
+local tGcdCol;
 function VUHDO_redrawAllPanels()
 	VUHDO_resetMacroCaches();
 	resetSizeCalcCaches();

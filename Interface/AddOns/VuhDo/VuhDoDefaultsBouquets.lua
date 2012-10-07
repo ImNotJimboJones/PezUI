@@ -1,3 +1,24 @@
+--
+function VUHDO_makeFullColor(...)
+	return {
+		["R"] = select(1, ...), ["G"] = select(2, ...), ["B"] = select(3, ...), ["O"] = select(4, ...),
+		["TR"] = select(5, ...), ["TG"] = select(6, ...), ["TB"] = select(7, ...), ["TO"] = select(8, ...),
+		["useBackground"] = true, ["useText"] = true, ["useOpacity"] = true
+	};
+end
+
+
+
+--
+local function VUHDO_makeFullColorForBouquet(...)
+	local tColor = VUHDO_makeFullColor(...);
+	tColor["isManuallySet"] = true;
+	return tColor;
+end
+
+
+
+
 VUHDO_DEFAULT_BOUQUETS = {
 	["VERSION"] = 1,
 	["SELECTED"] = VUHDO_I18N_DEF_BOUQUET_TANK_COOLDOWNS,
@@ -6,45 +27,25 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = GetSpellInfo(12975), -- "Last Stand",
 				["mine"] = true, ["others"] = true,	["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1,	["bright"] = 1.0 },
 			},
 			{
 				["name"] = GetSpellInfo(871), -- "Shield Wall",
 				["mine"] = true, ["others"] = true,	["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = GetSpellInfo(61336), -- "Survival Instincts",
 				["mine"] = true, ["others"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = GetSpellInfo(22842), -- "Frenzied Regeneration",
 				["mine"] = true, ["others"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1,	["bright"] = 1.0 },
 			},
 		},
@@ -54,23 +55,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = GetSpellInfo(17), -- "Powerword: Shield",
 				["mine"] = true, ["icon"] = 8,
-				["color"] = {
-					["R"] = 0.074, ["G"] = 0.749, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0.074, 0.749, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = GetSpellInfo(6788), -- "Weakened Soul",
 				["mine"] = true, ["others"] = true,	["icon"] = 9,
-				["color"] = {
-					["R"] = 1, ["G"] = 0.623, ["B"] = 0.305, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0.623, 0.305, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -80,45 +71,25 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "AGGRO", -- "Aggro",
 				["mine"] = false, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = "PLAYER_TARGET", -- "Player Target",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0.9, ["G"] = 0.9, ["B"] = 0.9, ["O"] = 1,
-					["TR"] = 0.7, ["TG"] = 0.7, ["TB"] = 0.7, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0.9, 0.9, 0.9, 1,   0.7, 0.7, 0.7, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "MOUSE_TARGET", -- "Mouse Target",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0.635, ["G"] = 0.470, ["B"] = 0.113, ["O"] = 1,
-					["TR"] = 0.4, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0.635, 0.470, 0.113, 1,   0.4, 0.4, 0.4, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "ALWAYS",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
-					["TR"] = 0.1, ["TG"] = 0.1, ["TB"] = 0.1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -127,34 +98,19 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "PLAYER_TARGET", -- "Player Target",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0.9, ["G"] = 0.9, ["B"] = 0.9, ["O"] = 1,
-					["TR"] = 0.7, ["TG"] = 0.7, ["TB"] = 0.7, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0.9, 0.9, 0.9, 1,   0.7, 0.7, 0.7, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "MOUSE_TARGET", -- "Mouse Target",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0.635, ["G"] = 0.470, ["B"] = 0.113, ["O"] = 1,
-					["TR"] = 0.4, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0.635, 0.470, 0.113, 1,   0.4, 0.4, 0.4, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = "ALWAYS", -- "Always",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
-					["TR"] = 0.1, ["TG"] = 0.1, ["TB"] = 0.1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -164,12 +120,7 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "ALWAYS", -- "Always",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
-					["TR"] = 0.1, ["TG"] = 0.1, ["TB"] = 0.1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -179,23 +130,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "STATUS_ACTIVE",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "SWIFTMEND",
 				["mine"] = true, ["icon"] = 6,
-				["color"] = {
-					["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -205,12 +146,7 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "MOUSE_TARGET",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 0.7,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 0.75,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 0.7,   1, 1, 1, 0.75),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -220,23 +156,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "MOUSE_TARGET",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 0.75,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 0.75,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 0.75,   1, 1, 1, 0.75),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = "MOUSE_GROUP",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 0.6,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 0.25,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 0.6,   1, 1, 1, 0.25),
 				["custom"] = { [1] = 1, ["radio"] = 1,	["bright"] = 1.0 },
 			},
 		},
@@ -246,12 +172,7 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "AGGRO",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -261,23 +182,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "STATUS_ACTIVE",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "MOUSE_CLUSTER",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0.5, ["B"] = 0, ["O"] = 0.8,
-					["TR"] = 1, ["TG"] = 0.5, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0.5, 0, 0.8,   1, 0.5, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -287,34 +198,19 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "STATUS_ACTIVE",
 				["mine"] = true, ["icon"] = 1,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "THREAT_LEVEL_HIGH",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0.5, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0.5, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 			{
 				["name"] = "THREAT_LEVEL_MEDIUM",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0.5, ["B"] = 0, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0.5, ["TB"] = 0, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0.5, 0, 1,   1, 0.5, 0, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 		},
@@ -335,23 +231,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "STATUS_MANA",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0, ["G"] = 0, ["B"] = 1, ["O"] = 1,
-					["TR"] = 0, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 0, 1, 1,   0, 0, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = "STATUS_OTHER_POWERS",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -372,12 +258,7 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "STATUS_MANA",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0, ["G"] = 0, ["B"] = 1, ["O"] = 1,
-					["TR"] = 0, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 0, 1, 1,   0, 0, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -387,23 +268,13 @@ VUHDO_DEFAULT_BOUQUETS = {
 			{
 				["name"] = "THREAT_ABOVE",
 				["mine"] = true, ["others"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 1, ["G"] = 0, ["B"] = 1, ["O"] = 1,
-					["TR"] = 1, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(1, 0, 1, 1,   1, 0, 1, 1),
 				["custom"] = { [1] = 85, ["radio"] = 1, ["bright"] = 1.0 },
 			},
 			{
 				["name"] = "STATUS_THREAT",
 				["mine"] = true, ["icon"] = 2,
-				["color"] = {
-					["R"] = 0, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-					["TR"] = 0, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					["isManuallySet"] = true,
-				},
+				["color"] = VUHDO_makeFullColorForBouquet(0, 1, 1, 1,   0, 1, 1, 1),
 				["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0	},
 			},
 		},
@@ -417,12 +288,7 @@ VUHDO_DEFAULT_BACKGROUND_BOUQUETS = {
 		{
 			["name"] = "DISCONNECTED",
 			["mine"] = true, ["icon"] = 2,
-			["color"] = {
-				["R"] = 0.298, ["G"] = 0.298, ["B"] = 0.298, ["O"] = 0.21,
-				["TR"] = 0.576, ["TG"] = 0.576, ["TB"] = 0.576,
-				["TO"] = 0.58, ["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0.298, 0.298, 0.298, 0.21,   0.576, 0.576, 0.576, 0.58),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 		},
 		{
@@ -439,23 +305,13 @@ VUHDO_DEFAULT_BACKGROUND_BOUQUETS = {
 		{
 			["name"] = "DEBUFF_BAR_COLOR",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 0.4 },
 		},
 		{
 			["name"] = "ALWAYS",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
-				["TR"] = 0.1, ["TG"] = 0.1, ["TB"] = 0.1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 		},
 	},
@@ -465,12 +321,7 @@ VUHDO_DEFAULT_BACKGROUND_BOUQUETS = {
 		{
 			["name"] = "DISCONNECTED",
 			["mine"] = true, ["icon"] = 2,
-			["color"] = {
-				["R"] = 0.298, ["G"] = 0.298, ["B"] = 0.298, ["O"] = 0.21,
-				["TR"] = 0.576, ["TG"] = 0.576, ["TB"] = 0.576,
-				["TO"] = 0.58, ["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0.298, 0.298, 0.298, 0.21,   0.576, 0.576, 0.576, 0.58),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 		},
 		{
@@ -487,27 +338,17 @@ VUHDO_DEFAULT_BACKGROUND_BOUQUETS = {
 		{
 			["name"] = "DEBUFF_BAR_COLOR",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1.0 },
 		},
 		{
 			["name"] = "CLASS_COLOR",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.7,
-				["TR"] = 0.1, ["TG"] = 0.1, ["TB"] = 0.1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 0.4 },
 		},
 	},
-}
+};
 
 
 VUHDO_DEFAULT_ALTERNATE_POWERS_BOUQUET = {
@@ -515,38 +356,23 @@ VUHDO_DEFAULT_ALTERNATE_POWERS_BOUQUET = {
 		{
 			["name"] = "ALTERNATE_POWERS_ABOVE",
 			["mine"] = true, ["icon"] = 2,
-			["color"] = {
-				["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0, 0, 1),
 			["custom"] = { [1] = 80, ["radio"] = 2, ["bright"] = 1 },
 		},
 		{
 			["name"] = "ALTERNATE_POWERS_ABOVE",
 			["mine"] = true, ["icon"] = 2,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 0, 1,   1, 1, 0, 1),
 			["custom"] = { [1] = 50, ["radio"] = 2, ["bright"] = 1 },
 		},
 		{
 			["name"] = "STATUS_ALTERNATE_POWERS",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 0, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-				["TR"] = 0, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0, 1, 0, 1,   0, 1, 0, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1	},
 		},
 	},
-}
+};
 
 
 
@@ -555,60 +381,35 @@ VUHDO_DEFAULT_HOLY_POWER_BOUQUET = {
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 14,
-			["color"] = {
-				["R"] = 0.6, ["G"] = 1, ["B"] = 0.6, ["O"] = 1,
-				["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0.6, 1, 0.6, 1,   0.6, 1, 0.6, 1),
 			["custom"] = { [1] = 5, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 13,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 0.4, 1,   1, 1, 0.4, 1),
 			["custom"] = { [1] = 4, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 12,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 0.4, 1,   1, 1, 0.4, 1),
 			["custom"] = { [1] = 3, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 11,
-			["color"] = {
-				["R"] = 1, ["G"] = 0.75, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0.75, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0.75, 0.4, 1,   1, 0.75, 0.4, 1),
 			["custom"] = { [1] = 2, ["radio"] = 1, ["bright"] = 1	},
 		},
 		{
 			["name"] = "OWN_HOLY_POWER_EQUALS",
 			["mine"] = true, ["icon"] = 10,
-			["color"] = {
-				["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0.4, 0.4, 1,   1, 0.4, 0.4, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1	},
 		},
 	},
-}
+};
 
 
 
@@ -617,49 +418,29 @@ VUHDO_DEFAULT_CHI_BOUQUET = {
 		{
 			["name"] = "OWN_CHI_EQUALS",
 			["mine"] = true, ["icon"] = 13,
-			["color"] = {
-				["R"] = 0.6, ["G"] = 1, ["B"] = 0.6, ["O"] = 1,
-				["TR"] = 0.6, ["TG"] = 1, ["TB"] = 0.6, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0.6, 1, 0.6, 1,   0.6, 1, 0.6, 1),
 			["custom"] = { [1] = 4, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "OWN_CHI_EQUALS",
 			["mine"] = true, ["icon"] = 12,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 0.4, 1,   1, 1, 0.4, 1),
 			["custom"] = { [1] = 3, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "OWN_CHI_EQUALS",
 			["mine"] = true, ["icon"] = 11,
-			["color"] = {
-				["R"] = 1, ["G"] = 0.75, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0.75, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0.75, 0.4, 1,   1, 0.75, 0.4, 1),
 			["custom"] = { [1] = 2, ["radio"] = 1, ["bright"] = 1	},
 		},
 		{
 			["name"] = "OWN_CHI_EQUALS",
 			["mine"] = true, ["icon"] = 10,
-			["color"] = {
-				["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0.4, ["TB"] = 0.4, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0.4, 0.4, 1,   1, 0.4, 0.4, 1),
 			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1	},
 		},
 	},
-}
+};
 
 
 
@@ -668,16 +449,11 @@ VUHDO_DEFAULT_ROLE_ICON_BOUQUET = {
 		{
 			["name"] = "ROLE_ICON",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 			["custom"] = { [1] = 3, ["radio"] = 2, ["bright"] = 1 },
 		},
 	},
-}
+};
 
 
 
@@ -686,16 +462,11 @@ VUHDO_DEFAULT_AOE_ADVICE_BOUQUET = {
 		{
 			["name"] = "AOE_ADVICE",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 			["custom"] = { [1] = 3, ["radio"] = 2, ["bright"] = 1 },
 		},
 	},
-}
+};
 
 
 
@@ -704,16 +475,11 @@ VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET = {
 		{
 			["name"] = "DIRECTION",
 			["mine"] = true, ["icon"] = 1,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 1, 1, 1,   1, 1, 1, 1),
 			["custom"] = { [1] = 3, ["radio"] = 2, ["bright"] = 1 },
 		},
 	},
-}
+};
 
 
 
@@ -762,119 +528,56 @@ VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET = {
 VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET = {
 	[VUHDO_I18N_DEF_TANK_CDS_EXTENDED] = {
 	},
-}
+};
 
 
 VUHDO_DEFAULT_RAID_CDS_BOUQUET = {
 	[VUHDO_I18N_DEF_RAID_CDS] = {
 	},
-}
+};
 
 
 
 --
 VUHDO_DEFAULT_GRID_BOUQUETS = {
-		[VUHDO_I18N_GRID_MOUSEOVER_SINGLE] = {
-			{
-				["name"] = "MOUSE_TARGET",
-				["color"] = {
-					["TG"] = 1,
-					["R"] = 0.6196078431372549,
-					["TB"] = 1,
-					["G"] = 0.5411764705882353,
-					["TR"] = 1,
-					["isManuallySet"] = true,
-					["TO"] = 0.75,
-					["B"] = 0.1843137254901961,
-					["useBackground"] = true,
-					["useText"] = true,
-					["O"] = 0.6,
-					["useOpacity"] = true,
-				},
-				["custom"] = {
-					1, -- [1]
-					["bright"] = 1,
-					["radio"] = 1,
-				},
-				["icon"] = 2,
-				["mine"] = true,
-			}, -- [1]
+	[VUHDO_I18N_GRID_MOUSEOVER_SINGLE] = {
+		{
+			["name"] = "MOUSE_TARGET",
+			["mine"] = true, ["icon"] = 2,
+			["color"] = VUHDO_makeFullColorForBouquet(0.619, 0.541, 0.184, 0.6,   1, 1, 1, 0.75),
+			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1 },
 		},
-		[VUHDO_I18N_GRID_BACKGROUND_BAR] = {
-			{
-				["name"] = "DISCONNECTED",
-				["color"] = {
-					["TG"] = 0.576,
-					["R"] = 0.298,
-					["TB"] = 0.576,
-					["G"] = 0.298,
-					["TR"] = 0.576,
-					["isManuallySet"] = true,
-					["TO"] = 0.58,
-					["B"] = 0.298,
-					["useBackground"] = true,
-					["useText"] = true,
-					["O"] = 0.21,
-					["useOpacity"] = true,
-				},
-				["custom"] = {
-					1, -- [1]
-					["bright"] = 1,
-					["radio"] = 1,
-				},
-				["icon"] = 2,
-				["mine"] = true,
-			}, -- [1]
-			{
-				["name"] = "NO_RANGE",
-				["color"] = {
-					["TG"] = 0,
-					["R"] = 0,
-					["TB"] = 0,
-					["G"] = 0,
-					["TR"] = 0,
-					["isManuallySet"] = true,
-					["TO"] = 0.25,
-					["B"] = 0,
-					["useBackground"] = false,
-					["useText"] = false,
-					["O"] = 0.25,
-					["useOpacity"] = true,
-				},
-				["custom"] = {
-					1, -- [1]
-					["bright"] = 1,
-					["radio"] = 1,
-				},
-				["icon"] = 1,
-				["mine"] = true,
-			}, -- [2]
-			{
-				["name"] = "CLASS_COLOR",
-				["color"] = {
-					["TG"] = 0.1,
-					["R"] = 0,
-					["TB"] = 0.1,
-					["G"] = 0,
-					["TR"] = 0.1,
-					["isManuallySet"] = true,
-					["TO"] = 1,
-					["B"] = 0,
-					["useBackground"] = true,
-					["useText"] = true,
-					["O"] = 0.7,
-					["useOpacity"] = true,
-				},
-				["custom"] = {
-					1, -- [1]
-					["bright"] = 0.2000000029802322,
-					["radio"] = 1,
-				},
-				["icon"] = 1,
-				["mine"] = true,
-			}, -- [3]
+	},
+
+	[VUHDO_I18N_GRID_BACKGROUND_BAR] = {
+		{
+			["name"] = "DISCONNECTED",
+			["mine"] = true, ["icon"] = 2,
+			["color"] = VUHDO_makeFullColorForBouquet(0.298, 0.298, 0.298, 0.21,   0.576, 0.576, 0.576, 0.58),
+			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1 },
 		},
-}
+
+		{
+			["name"] = "NO_RANGE",
+			["mine"] = true, ["icon"] = 1,
+			["color"] = {
+				["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.25,
+				["TR"] = 0, ["TG"] = 0, ["TB"] = 0, ["TO"] = 0.25,
+				["isManuallySet"] = true, ["useBackground"] = false, ["useText"] = false, ["useOpacity"] = true,
+			},
+			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 1 },
+
+		},
+
+		{
+			["name"] = "CLASS_COLOR",
+			["mine"] = true, ["icon"] = 1,
+			["color"] = VUHDO_makeFullColorForBouquet(0, 0, 0, 0.7,   0.1, 0.1, 0.1, 1),
+			["custom"] = { [1] = 1, ["radio"] = 1, ["bright"] = 0.2 },
+
+		},
+	},
+};
 
 
 
@@ -884,34 +587,19 @@ VUHDO_DEFAULT_ROLE_COLOR_BOUQUET = {
 		{
 			["name"] = "ROLE_TANK",
 			["icon"] = 6,
-			["color"] = {
-				["R"] = 0, ["G"] = 0, ["B"] = 1, ["O"] = 1,
-				["TR"] = 0, ["TG"] = 0, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0, 0, 1, 1,   0, 0, 1, 1),
 			["custom"] = { [1] = 0, ["radio"] = 1, ["bright"] = 1 },
 		},
 		{
 			["name"] = "ROLE_DAMAGE",
 			["icon"] = 6,
-			["color"] = {
-				["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(1, 0, 0, 1,   1, 0, 0, 1),
 			["custom"] = { [1] = 0, ["radio"] = 1, ["bright"] = 1	},
 		},
 		{
 			["name"] = "ROLE_HEALER",
 			["icon"] = 6,
-			["color"] = {
-				["R"] = 0, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-				["TR"] = 0, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
+			["color"] = VUHDO_makeFullColorForBouquet(0, 1, 0, 1,   0, 1, 0, 1),
 			["custom"] = { [1] = 0, ["radio"] = 1, ["bright"] = 1	},
 		},
 	},
@@ -1028,7 +716,6 @@ VUHDO_SANE_BOUQUET_ITEM = {
 local pairs = pairs;
 
 --
-local tKey, tValue;
 local function VUHDO_addDefaultBouquet(aName)
 	if (aName == nil) then
 		return;
@@ -1273,7 +960,6 @@ end
 
 --
 local function VUHDO_AddSpellBouquetItem(aBouquetName, ...)
-	local tCnt;
 	local tId, tNewItem;
 	for tCnt = 1, select("#", ...) do
 		tId = select(tCnt, ...);
@@ -1334,7 +1020,6 @@ end
 
 
 --
-local tName, tAllInfos, tIndex, tInfo;
 function VUHDO_ensureAllBouquetItemsSanity()
 	VUHDO_decompressAllBouquets();
 
@@ -1357,6 +1042,121 @@ end
 
 
 
+local tTankCdsExtended = {
+	49222, --Bone Shield
+	48792, --Icebound Fortitude
+	55233, --Vampiric Blood
+	48707, --Anti-Magic Shell
+	50461, --Anti-Magic Zone
+
+	642, --Divine Shield
+	498, --Divine Protection
+	31850, --Ardent Defender
+	1022, --Hand of Protection
+	6940, --Hand of Sacrifice
+	70940, --Divine Guardian
+	64205, --Divine Sacrifine
+	86659, --Ancient Guardian
+
+	871, --Shield Wall
+	2565, --Shield Block
+	12975, --Last Stand
+	3411, --Intervene
+	55694, --Enraged Regeneration
+
+	22812, --Barkskin
+	61336, --Survival Instincts
+	22842 --Frenzied Regeneration
+};
+
+
+
+local tRaidCds = {
+	-- Pally
+	642, -- Divine Shield
+	498, -- Divine Protection
+	1022, -- Hand of Protection
+	6940, -- Hand of Sacrifice
+	31850, -- Ardent Defender
+	86659, -- Guardian of Ancient Kings
+	31821, -- Devotion Aura
+	114039, -- Hand of Purity
+
+	--  Warrior
+	871, -- Shield Wall
+	97462, -- Rallying Cry
+	114203, -- Demoralizing Banner
+	118038, -- Die by the Sword
+	12975, -- Last Stand
+	114028, -- Mass Spell Reflect
+	114030, -- Vigilance
+	55694, -- Enraged Regeneration
+	105914, -- Shield Fortress
+
+	-- Druid
+	22812, -- Barkskin
+	106922, -- Might of Ursoc
+	740, -- Tranquility
+	110309, -- Symbiosis
+	102342, -- Ironbark
+	61336, -- Survival Instincts
+	105739, -- Mass Regeneration
+
+	-- DK
+	48792, -- Icebound Fortitude
+	48707, -- Anti-Magic Shell
+	49222, -- Bone Shield
+	49028, -- Dancing Rune Weapon
+	55233, -- Vampiric Blood
+	81164, -- Will of the Necropolis
+	51052, -- Anti-Magic Zone
+	116888, -- Shroud of Purgatory
+
+	-- WL
+	104773, -- Unending Resolve
+	119899, -- Cauterize Master
+	755, -- Health Funnel
+	110913, -- Dark Bargain
+	108359, -- Dark Regeneration
+	108503, -- Grimmoire of Sacrifice
+
+	-- Priest
+	108968, -- Void Shift
+	47585, -- Dispersion
+	64843, -- Divine Hymn
+	47788, -- Guardian Spirit
+	33206, -- Pain Suppression
+	62618, -- Power Word: Barrier
+	108945, -- Angelic Bulwark
+	64901, -- Hymn of Hope
+
+	-- Shaman
+	30823, -- Shamanistic Rage
+	98008, -- Spirit Link Totem
+	16190, -- Mana Tide Totem
+	108280, -- Healing Tide Totem
+	108271, -- Astral Shift
+
+	-- Rogue
+	5277, -- Evasion
+	73651, -- Recuperate
+	1966, -- Feint
+	31224, -- Cloak of Shadows
+	114018, -- Shroud of Concealment
+	76577, -- Smoke Bomb
+
+	-- Mage,
+	45438, -- Ice Block
+	86949, -- Cauterize
+	110959, -- Greater Invisibility
+
+	-- Hunter
+	19263, -- Deterrence
+	90361 -- Spirit Mend
+};
+
+
+
 --
 function VUHDO_loadDefaultBouquets()
 	if (VUHDO_BOUQUETS == nil) then
@@ -1376,38 +1176,14 @@ function VUHDO_loadDefaultBouquets()
 	end
 	VUHDO_DEFAULT_ALTERNATE_POWERS_BOUQUET = nil;
 
+
 	if (VUHDO_BOUQUETS["VERSION"] < 4) then
 		VUHDO_BOUQUETS["VERSION"] = 4;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET);
-
-		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_TANK_CDS_EXTENDED,
-			49222, --Bone Shield
-			48792, --Icebound Fortitude
-			55233, --Vampiric Blood
-			48707, --Anti-Magic Shell
-			50461, --Anti-Magic Zone
-
-			642, --Divine Shield
-			498, --Divine Protection
-			31850, --Ardent Defender
-			1022, --Hand of Protection
-			6940, --Hand of Sacrifice
-			70940, --Divine Guardian
-			64205, --Divine Sacrifine
-			86659, --Ancient Guardian
-
-			871, --Shield Wall
-			2565, --Shield Block
-			12975, --Last Stand
-			3411, --Intervene
-			55694, --Enraged Regeneration
-
-			22812, --Barkskin
-			61336, --Survival Instincts
-			22842 --Frenzied Regeneration
-		);
-
+		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_TANK_CDS_EXTENDED, unpack(tTankCdsExtended));
 	end
+	tTankCdsExtended = nil;
+
 	if (VUHDO_BOUQUETS["VERSION"] < 5) then
 		VUHDO_BOUQUETS["VERSION"] = 5;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ROLE_ICON_BOUQUET);
@@ -1455,92 +1231,9 @@ function VUHDO_loadDefaultBouquets()
 	if (VUHDO_BOUQUETS["VERSION"] < 12) then
 		VUHDO_BOUQUETS["VERSION"] = 12;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_RAID_CDS_BOUQUET);
-
-		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_RAID_CDS,
-			-- Pally
-			642, -- Divine Shield
-			498, -- Divine Protection
-			1022, -- Hand of Protection
-			6940, -- Hand of Sacrifice
-			31850, -- Ardent Defender
-			86659, -- Guardian of Ancient Kings
-			31821, -- Devotion Aura
-			114039, -- Hand of Purity
-
-			--  Warrior
-			871, -- Shield Wall
-			97462, -- Rallying Cry
-			114203, -- Demoralizing Banner
-			118038, -- Die by the Sword
-			12975, -- Last Stand
-			114028, -- Mass Spell Reflect
-			114030, -- Vigilance
-			55694, -- Enraged Regeneration
-			105914, -- Shield Fortress
-
-			-- Druid
-			22812, -- Barkskin
-			106922, -- Might of Ursoc
-			740, -- Tranquility
-			110309, -- Symbiosis
-			102342, -- Ironbark
-			61336, -- Survival Instincts
-			105739, -- Mass Regeneration
-
-			-- DK
-			48792, -- Icebound Fortitude
-			48707, -- Anti-Magic Shell
-			49222, -- Bone Shield
-			49028, -- Dancing Rune Weapon
-			55233, -- Vampiric Blood
-			81164, -- Will of the Necropolis
-			51052, -- Anti-Magic Zone
-			116888, -- Shroud of Purgatory
-
-			-- WL
-			104773, -- Unending Resolve
-			119899, -- Cauterize Master
-			755, -- Health Funnel
-			110913, -- Dark Bargain
-			108359, -- Dark Regeneration
-			108503, -- Grimmoire of Sacrifice
-
-			-- Priest
-			108968, -- Void Shift
-			47585, -- Dispersion
-			64843, -- Divine Hymn
-			47788, -- Guardian Spirit
-			33206, -- Pain Suppression
-			62618, -- Power Word: Barrier
-			108945, -- Angelic Bulwark
-			64901, -- Hymn of Hope
-
-			-- Shaman
-			30823, -- Shamanistic Rage
-			98008, -- Spirit Link Totem
-			16190, -- Mana Tide Totem
-			108280, -- Healing Tide Totem
-			108271, -- Astral Shift
-
-			-- Rogue
-			5277, -- Evasion
-			73651, -- Recuperate
-			1966, -- Feint
-			31224, -- Cloak of Shadows
-			114018, -- Shroud of Concealment
-			76577, -- Smoke Bomb
-
-			-- Mage,
-			45438, -- Ice Block
-			86949, -- Cauterize
-			110959, -- Greater Invisibility
-
-			-- Hunter
-			19263, -- Deterrence
-			90361 -- Spirit Mend
-		);
-
+		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_RAID_CDS, unpack(tRaidCds));
 	end
+	tRaidCds = nil;
 
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_buildGenericTargetHealthBouquet();
@@ -1548,11 +1241,8 @@ function VUHDO_loadDefaultBouquets()
 	if (VUHDO_INDICATOR_CONFIG == nil) then
 		VUHDO_INDICATOR_CONFIG = VUHDO_decompressOrCopy(VUHDO_DEFAULT_INDICATOR_CONFIG);
 
-		if ("DRUID" == VUHDO_PLAYER_CLASS) then
-			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = VUHDO_I18N_DEF_BOUQUET_SWIFTMENDABLE;
-		else
-			VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"] = VUHDO_I18N_DEF_ROLE_ICON;
-		end
+		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"]
+			= "DRUID" == VUHDO_PLAYER_CLASS and VUHDO_I18N_DEF_BOUQUET_SWIFTMENDABLE or VUHDO_I18N_DEF_ROLE_ICON;
 	end
 
 	VUHDO_ensureSanity("VUHDO_INDICATOR_CONFIG", VUHDO_INDICATOR_CONFIG, VUHDO_DEFAULT_INDICATOR_CONFIG);

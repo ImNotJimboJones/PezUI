@@ -80,16 +80,6 @@
 					</EditBox>
 
 					<Frame name="$parentKeyBindingLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="223" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" inherits="VuDoDefaultTitleFontTemplate" text="VUHDO_I18N_KEY_BINDINGS">

@@ -1,4 +1,4 @@
-local _;
+--local _;
 
 
 --
@@ -10,7 +10,6 @@ end
 
 -- return the ordinality of aUnits main tank entry, returns nil if unit is no main tank
 local function VUHDO_getMainTankNumber(aUnit)
-	local tMTNumber, tMTName;
 	for tMTNumber, tMTName in pairs(VUHDO_MAINTANK_NAMES) do
 		if (tMTName == VUHDO_RAID[aUnit]["name"])	then
 			return tMTNumber;
@@ -24,7 +23,7 @@ end
 
 --
 function VUHDO_ctraBroadCastMaintanks()
-	local tUnit, tInfo, tMtNumber;
+	local tMtNumber;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		tMtNumber = VUHDO_getMainTankNumber(tUnit);
 
@@ -38,13 +37,12 @@ end
 
 
 --
-function VUHDO_parseCtraMessage(aNick, aMessage)
+function VUHDO_parseCtraMessage(_, aMessage)
 
 	-- Setting main tanks
 	if ("SET " == strsub(aMessage, 1, 4)) then
 		local _, _, tNum, tName = strfind(aMessage, "^SET (%d+) (.+)$");
 		if (tNum ~= nil and tName ~= nil) then
-			local tKey;
 			for tKey, _ in pairs(VUHDO_MAINTANK_NAMES) do
 				if (VUHDO_MAINTANK_NAMES[tKey] == tName) then
 					VUHDO_MAINTANK_NAMES[tKey] = nil;
@@ -57,7 +55,6 @@ function VUHDO_parseCtraMessage(aNick, aMessage)
 	elseif("R " == strsub(aMessage, 1, 2)) then
 		local _, _, tName = strfind(aMessage, "^R (.+)$");
 		if (tName ~= nil) then
-			local tKey;
 			for tKey, _ in pairs(VUHDO_MAINTANK_NAMES) do
 				if (VUHDO_MAINTANK_NAMES[tKey] == tName) then
 					VUHDO_MAINTANK_NAMES[tKey] = nil;

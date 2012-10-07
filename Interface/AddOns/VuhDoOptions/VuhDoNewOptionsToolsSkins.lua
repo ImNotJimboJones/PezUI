@@ -1,12 +1,10 @@
 local _;
-VUHDO_CURRENT_PROFILE = "";
 
+VUHDO_CURRENT_PROFILE = "";
 VUHDO_PROFILE_TABLE_MODEL = { };
 
 --
 function VUHDO_initProfileTableModels(aButton)
-	local tIndex, tValue;
-
 	table.wipe(VUHDO_PROFILE_TABLE_MODEL);
 	VUHDO_PROFILE_TABLE_MODEL[1] = { "", "-- " .. VUHDO_I18N_EMPTY_HOTS .. " --" };
 	for tIndex, tValue in ipairs(VUHDO_PROFILES) do
@@ -14,30 +12,29 @@ function VUHDO_initProfileTableModels(aButton)
 	end
 
 	table.sort(VUHDO_PROFILE_TABLE_MODEL,
-	function(anInfo, anotherInfo)
-		return anInfo[1] < anotherInfo[1];
-	end
+		function(anInfo, anotherInfo)
+			return anInfo[1] < anotherInfo[1];
+		end
 	);
-
 end
 
 
 
-local VUHDO_PROFILE_COMBO = nil;
-local VUHDO_PROFILE_EDIT = nil;
+local sProfileCombo = nil;
+local sProfileEditBox = nil;
 
 
 
 --
 function VUHDO_setProfileCombo(aComboBox)
-	VUHDO_PROFILE_COMBO = aComboBox;
+	sProfileCombo = aComboBox;
 end
 
 
 
 --
 function VUHDO_setProfileEditBox(anEditBox)
-	VUHDO_PROFILE_EDIT = anEditBox;
+	sProfileEditBox = anEditBox;
 end
 
 
@@ -45,8 +42,8 @@ end
 --
 function VUHDO_updateProfileSelectCombo()
 	VUHDO_initProfileTableModels();
-	VUHDO_lnfComboBoxInitFromModel(VUHDO_PROFILE_COMBO);
-	VUHDO_lnfEditBoxInitFromModel(VUHDO_PROFILE_EDIT);
+	VUHDO_lnfComboBoxInitFromModel(sProfileCombo);
+	VUHDO_lnfEditBoxInitFromModel(sProfileEditBox);
 end
 
 
@@ -55,14 +52,12 @@ end
 local function VUHDO_clearProfileIfInSlot(aProfileName, aSlot)
 	if (VUHDO_CONFIG["AUTO_PROFILES"][aSlot] == aProfileName) then
 		VUHDO_CONFIG["AUTO_PROFILES"][aSlot] = nil;
-		--VUHDO_Msg("Removing " .. aProfileName .. " from " .. aSlot);
 	end
 end
 
 
 
 --
-local tCnt;
 local function VUHDO_deleteAutoProfile(aName)
 	for tCnt = 1, 40 do
 		VUHDO_clearProfileIfInSlot(aName, "" .. tCnt);
@@ -77,7 +72,6 @@ end
 
 
 --
-local tCnt;
 local function VUHDO_isAutoProfileButtonEnabled(aButtonIndex)
 	if (VUHDO_CONFIG["AUTO_PROFILES"][aButtonIndex] == VUHDO_CURRENT_PROFILE) then
 		return true;
@@ -108,11 +102,7 @@ end
 function VUHDO_skinsLockCheckButtonClicked(aButton)
 	local tIndex, tProfile = VUHDO_getProfileNamedCompressed(VUHDO_CURRENT_PROFILE);
 	if (tIndex ~= nil) then
-		if (aButton:GetChecked()) then -- Achtung GetChecked liefert 1<->nil => Problem mit model consistency checker
-			tProfile["LOCKED"] = true;
-		else
-			tProfile["LOCKED"] = false;
-		end
+		tProfile["LOCKED"] = VUHDO_forceBooleanValue(aButton:GetChecked());
 	end
 end
 
@@ -128,30 +118,24 @@ end
 
 
 --
-local tCnt;
 local tButton;
 local function VUHDO_updateAllAutoProfiles(aPanel)
 	for tCnt = 1, 40 do
-		tButton = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
+		tButton = _G[aPanel:GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
 		if (tButton ~= nil) then
 			VUHDO_skinsInitAutoCheckButton(tButton, "" .. tCnt);
 		end
 	end
 
-	tButton = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanelSpec1CheckButton"];
-	VUHDO_skinsInitAutoCheckButton(tButton, "SPEC_1");
-
-	tButton = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanelSpec2CheckButton"];
-	VUHDO_skinsInitAutoCheckButton(tButton, "SPEC_2");
-
-	tButton = VUHDO_GLOBAL[aPanel:GetName() .. "SettingsPanelLockCheckButton"];
-	VUHDO_skinsInitLockCheckButton(tButton);
+	VUHDO_skinsInitAutoCheckButton(_G[aPanel:GetName() .. "AutoEnablePanelSpec1CheckButton"], "SPEC_1");
+	VUHDO_skinsInitAutoCheckButton(_G[aPanel:GetName() .. "AutoEnablePanelSpec2CheckButton"], "SPEC_2");
+	VUHDO_skinsInitLockCheckButton(_G[aPanel:GetName() .. "SettingsPanelLockCheckButton"]);
 end
 
 
 
 --
-local tCnt, tGroupSize, tPrefix;
+local tPrefix;
 local function VUHDO_clearProfileFromPrefix(aProfileName, ...)
 	for tCnt = 1, select('#', ...) do
 		tPrefix = select(tCnt, ...);
@@ -177,8 +161,8 @@ function VUHDO_skinsSaveAutoProfileButtonEnablement(aPanel, aProfileName)
 		return;
 	end
 
-	tIsSpec1 = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanelSpec1CheckButton"]:GetChecked();
-	tIsSpec2 = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanelSpec2CheckButton"]:GetChecked();
+	tIsSpec1 = _G[aPanel:GetName() .. "AutoEnablePanelSpec1CheckButton"]:GetChecked();
+	tIsSpec2 = _G[aPanel:GetName() .. "AutoEnablePanelSpec2CheckButton"]:GetChecked();
 
 	if (tIsSpec1 and not tIsSpec2) then
 		tPrefix = "SPEC_1_";
@@ -193,7 +177,7 @@ function VUHDO_skinsSaveAutoProfileButtonEnablement(aPanel, aProfileName)
 
 	tIsGroupFound = false;
 	for tCnt = 1, 40 do
-		tButton = VUHDO_GLOBAL[aPanel:GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
+		tButton = _G[aPanel:GetName() .. "AutoEnablePanel" .. tCnt .. "CheckButton"];
 		if (tButton ~= nil) then
 			if (tButton:GetChecked()) then
 				VUHDO_CONFIG["AUTO_PROFILES"][tPrefix .. tCnt] = aProfileName;
@@ -247,12 +231,6 @@ function VUHDO_skinsAutoCheckButtonClicked(aButton, anIndex)
 		VUHDO_lnfCheckButtonClicked(aButton);
 		return;
 	end
-
-	--[[if (aButton:GetChecked()) then
-		VUHDO_CONFIG["AUTO_PROFILES"][anIndex] = VUHDO_CURRENT_PROFILE;
-	else
-		VUHDO_CONFIG["AUTO_PROFILES"][anIndex] = nil;
-	end]]
 end
 
 

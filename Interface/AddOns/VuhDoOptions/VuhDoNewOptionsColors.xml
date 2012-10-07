@@ -1,7 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<Script file="VuhDoNewOptionsColors.lua" />
-
 	<Frame name="VuhDoNewOptionsColorsTemplate" virtual="true">
 		<Frames>
 			<Frame name="$parentRadioPanel">
@@ -16,7 +14,7 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
-					<CheckButton name="$parentStatesRadioButton" checked="true" text="VUHDO_I18N_STATES" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentStatesRadioButton" checked="true" text="VUHDO_I18N_STATES" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -25,18 +23,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsStatesClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsStates";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K028);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentModesRadioButton" text="VUHDO_I18N_MODES" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentModesRadioButton" text="VUHDO_I18N_MODES" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -45,18 +40,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsModesClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsModes";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K029);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentPowersRadioButton" text="VUHDO_I18N_POWERS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentPowersRadioButton" text="VUHDO_I18N_POWERS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -65,18 +57,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsPowersClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsPowers";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K157);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentHotsRadioButton" text="VUHDO_I18N_HOTS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentHotsRadioButton" text="VUHDO_I18N_HOTS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -85,18 +74,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsHotsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsHots";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K224);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentHot2RadioButton" text="VUHDO_I18N_HOTS_2" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentHot2RadioButton" text="VUHDO_I18N_HOTS_2" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -105,18 +91,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsHotChargesClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsHotCharges";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K225);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentClassesRadioButton" text="VUHDO_I18N_CLASSES" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentClassesRadioButton" text="VUHDO_I18N_CLASSES" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -125,18 +108,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsClassesClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsClasses";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K226);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentRaidIconsRadioButton" text="VUHDO_I18N_RAID_ICON" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentRaidIconsRadioButton" text="VUHDO_I18N_RAID_ICON" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -145,18 +125,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsRaidIconsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsRaidIcons";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K411);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentTargetsRadioButton" text="VUHDO_I18N_TARGET" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentTargetsRadioButton" text="VUHDO_I18N_TARGET" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -165,11 +142,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsColorsTargetsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self)
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsColorsTargets";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K537);
 							</OnLoad>

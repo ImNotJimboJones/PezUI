@@ -1,7 +1,4 @@
-local _;
-
 local sAllButtons;
-local sButton;
 
 
 

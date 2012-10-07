@@ -15,7 +15,12 @@ function VUHDO_newOptionsSpellSetModifierHostile(aModifier)
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
 			tNum = VUHDO_getComponentPanelNum(tComp);
-			tModel = "VUHDO_HOSTILE_SPELL_ASSIGNMENTS." .. aModifier .. tNum .. ".##3";
+			tIndex = aModifier .. tNum;
+			if (VUHDO_HOSTILE_SPELL_ASSIGNMENTS[tIndex] == nil) then
+				VUHDO_HOSTILE_SPELL_ASSIGNMENTS[tIndex] = { VUHDO_MODIFIER_KEYS[aModifier], tostring(tNum), "" };
+			end
+
+			tModel = "VUHDO_HOSTILE_SPELL_ASSIGNMENTS." .. tIndex .. ".##3";
 			tComp:SetAttribute("model", tModel);
 			tComp:Hide();
 			tComp:Show();
@@ -72,7 +77,7 @@ end
 local tText, tLabel, tR, tG, tB;
 function VUHDO_newOptionsSpellEditBoxCheckHostileSpell(anEditBox)
 	tText, tR, tG, tB = VUHDO_isHostileActionValid(anEditBox:GetText());
-	tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
+	tLabel = _G[anEditBox:GetName() .. "Hint"];
 	if (tText ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 		tLabel:SetText(tText);

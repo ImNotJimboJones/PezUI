@@ -68,37 +68,36 @@ local sAoeRefreshSecs = 1.3;
 local sBuffsRefreshSecs;
 local VuhDoDirectionFrame;
 
-
 local function VUHDO_eventHandlerInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 
-	VUHDO_updateHealth = VUHDO_GLOBAL["VUHDO_updateHealth"];
-	VUHDO_updateManaBars = VUHDO_GLOBAL["VUHDO_updateManaBars"];
-	VUHDO_updateTargetBars = VUHDO_GLOBAL["VUHDO_updateTargetBars"];
-	VUHDO_updateAllRaidBars = VUHDO_GLOBAL["VUHDO_updateAllRaidBars"];
-	VUHDO_updateAllOutRaidTargetButtons = VUHDO_GLOBAL["VUHDO_updateAllOutRaidTargetButtons"];
-	VUHDO_parseAddonMessage = VUHDO_GLOBAL["VUHDO_parseAddonMessage"];
-	VUHDO_spellcastFailed = VUHDO_GLOBAL["VUHDO_spellcastFailed"];
-	VUHDO_spellcastSucceeded = VUHDO_GLOBAL["VUHDO_spellcastSucceeded"];
-	VUHDO_spellcastSent = VUHDO_GLOBAL["VUHDO_spellcastSent"];
-	VUHDO_parseCombatLogEvent = VUHDO_GLOBAL["VUHDO_parseCombatLogEvent"];
-	VUHDO_updateHealthBarsFor = VUHDO_GLOBAL["VUHDO_updateHealthBarsFor"];
-	VUHDO_updateAllHoTs = VUHDO_GLOBAL["VUHDO_updateAllHoTs"];
-	VUHDO_updateAllCyclicBouquets = VUHDO_GLOBAL["VUHDO_updateAllCyclicBouquets"];
-	VUHDO_updateAllDebuffIcons = VUHDO_GLOBAL["VUHDO_updateAllDebuffIcons"];
-	VUHDO_updateAllRaidTargetIndices = VUHDO_GLOBAL["VUHDO_updateAllRaidTargetIndices"];
-	VUHDO_updateAllClusters = VUHDO_GLOBAL["VUHDO_updateAllClusters"];
-	VUHDO_aoeUpdateAll = VUHDO_GLOBAL["VUHDO_aoeUpdateAll"];
-	--VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
-	VuhDoGcdStatusBar = VUHDO_GLOBAL["VuhDoGcdStatusBar"];
-	VuhDoDirectionFrame = VUHDO_GLOBAL["VuhDoDirectionFrame"];
-	VUHDO_updateDirectionFrame = VUHDO_GLOBAL["VUHDO_updateDirectionFrame"];
-	VUHDO_getUnitZoneName = VUHDO_GLOBAL["VUHDO_getUnitZoneName"];
-	VUHDO_updateClusterHighlights = VUHDO_GLOBAL["VUHDO_updateClusterHighlights"];
-	VUHDO_updateCustomDebuffTooltip = VUHDO_GLOBAL["VUHDO_updateCustomDebuffTooltip"];
-	VUHDO_getCurrentMouseOver = VUHDO_GLOBAL["VUHDO_getCurrentMouseOver"];
-	--VUHDO_UIFrameFlash_OnUpdate = VUHDO_GLOBAL["VUHDO_UIFrameFlash_OnUpdate"];
+	VUHDO_updateHealth = _G["VUHDO_updateHealth"];
+	VUHDO_updateManaBars = _G["VUHDO_updateManaBars"];
+	VUHDO_updateTargetBars = _G["VUHDO_updateTargetBars"];
+	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
+	VUHDO_updateAllOutRaidTargetButtons = _G["VUHDO_updateAllOutRaidTargetButtons"];
+	VUHDO_parseAddonMessage = _G["VUHDO_parseAddonMessage"];
+	VUHDO_spellcastFailed = _G["VUHDO_spellcastFailed"];
+	VUHDO_spellcastSucceeded = _G["VUHDO_spellcastSucceeded"];
+	VUHDO_spellcastSent = _G["VUHDO_spellcastSent"];
+	VUHDO_parseCombatLogEvent = _G["VUHDO_parseCombatLogEvent"];
+	VUHDO_updateHealthBarsFor = _G["VUHDO_updateHealthBarsFor"];
+	VUHDO_updateAllHoTs = _G["VUHDO_updateAllHoTs"];
+	VUHDO_updateAllCyclicBouquets = _G["VUHDO_updateAllCyclicBouquets"];
+	VUHDO_updateAllDebuffIcons = _G["VUHDO_updateAllDebuffIcons"];
+	VUHDO_updateAllRaidTargetIndices = _G["VUHDO_updateAllRaidTargetIndices"];
+	VUHDO_updateAllClusters = _G["VUHDO_updateAllClusters"];
+	VUHDO_aoeUpdateAll = _G["VUHDO_aoeUpdateAll"];
+	--VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VuhDoGcdStatusBar = _G["VuhDoGcdStatusBar"];
+	VuhDoDirectionFrame = _G["VuhDoDirectionFrame"];
+	VUHDO_updateDirectionFrame = _G["VUHDO_updateDirectionFrame"];
+	VUHDO_getUnitZoneName = _G["VUHDO_getUnitZoneName"];
+	VUHDO_updateClusterHighlights = _G["VUHDO_updateClusterHighlights"];
+	VUHDO_updateCustomDebuffTooltip = _G["VUHDO_updateCustomDebuffTooltip"];
+	VUHDO_getCurrentMouseOver = _G["VUHDO_getCurrentMouseOver"];
+	--VUHDO_UIFrameFlash_OnUpdate = _G["VUHDO_UIFrameFlash_OnUpdate"];
 
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"] or "*foo*";
 	sIsHealerMode = not VUHDO_CONFIG["THREAT"]["IS_TANK_MODE"];
@@ -337,7 +336,7 @@ local function VUHDO_init()
 	VUHDO_initFuBar();
 	VUHDO_initButtonFacade(VUHDO_INSTANCE);
 	--VUHDO_checkForTroublesomeAddons();
-	VUHDO_initHideBlizzFrames();
+	VUHDO_initBlizzFrames();
 	if (not InCombatLockdown()) then
 		VUHDO_initKeyboardMacros();
 	end
@@ -350,7 +349,6 @@ end
 
 --VUHDO_EVENT_TIMES = { };
 --
-local tUnit;
 local tEmptyRaid = { };
 function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16, anArg17)
 
@@ -384,6 +382,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 	elseif ("UNIT_HEAL_PREDICTION" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then -- auch target, focus
 			VUHDO_updateHealth(anArg1, 9); -- VUHDO_UPDATE_INC
+			VUHDO_updateBouquetsForEvent(anArg1, 9); -- VUHDO_UPDATE_ALT_POWER
 		end
 	elseif ("UNIT_POWER" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
@@ -409,16 +408,18 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		if (VUHDO_VARIABLES_LOADED) then
 			VUHDO_spellcastSent(anArg1, anArg2, anArg3, anArg4);
 		end
+
 	elseif ("UNIT_THREAT_SITUATION_UPDATE" == anEvent) then
-	if (VUHDO_VARIABLES_LOADED) then
-		VUHDO_updateThreat(anArg1);
-	end
+		if (VUHDO_VARIABLES_LOADED) then
+			VUHDO_updateThreat(anArg1);
+		end
+
 	elseif ("PLAYER_REGEN_ENABLED" == anEvent) then
-			if (VUHDO_VARIABLES_LOADED) then
-				for tUnit, _ in pairs(VUHDO_RAID) do
-					VUHDO_updateThreat(tUnit);
-				end
+		if (VUHDO_VARIABLES_LOADED) then
+			for tUnit, _ in pairs(VUHDO_RAID) do
+				VUHDO_updateThreat(tUnit);
 			end
+		end
 
 	elseif ("UNIT_MAXHEALTH" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
@@ -634,8 +635,6 @@ function VUHDO_slashCmd(aCommand)
 			VUHDO_Msg(VUHDO_I18N_OPTIONS_NOT_LOADED, 1, 0.4, 0.4);
 		end
 	elseif (tCommandWord == "pt") then
-		local tUnit, tName;
-
 		if (tParsedTexts[2] ~= nil) then
 			local tTokens = VUHDO_splitString(tParsedTexts[2], ",");
 			if ("clear" == tTokens[1]) then
@@ -651,8 +650,8 @@ function VUHDO_slashCmd(aCommand)
 				VUHDO_quickRaidReload();
 			end
 		else
-			tUnit = VUHDO_RAID_NAMES[UnitName("target")];
-			tName = (VUHDO_RAID[tUnit] or {})["name"];
+			local tUnit = VUHDO_RAID_NAMES[UnitName("target")];
+			local tName = (VUHDO_RAID[tUnit] or {})["name"];
 			if (not InCombatLockdown() and tName ~= nil) then
 				if (VUHDO_PLAYER_TARGETS[tName] ~= nil) then
 					VUHDO_PLAYER_TARGETS[tName] = nil;
@@ -677,7 +676,6 @@ function VUHDO_slashCmd(aCommand)
 			VUHDO_loadProfile(strtrim(tTokens[1]));
 		end
 	elseif (strfind(tCommandWord, "res")) then
-		local tPanelNum;
 		for tPanelNum = 1, VUHDO_MAX_PANELS do
 			VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] = nil;
 		end
@@ -719,13 +717,13 @@ function VUHDO_slashCmd(aCommand)
 	elseif (tCommandWord == "proff") then
 		SetCVar("scriptProfile", "0");
 		ReloadUI();
-	--[[elseif (strfind(tCommandWord, "chkvars")) then
+	elseif (strfind(tCommandWord, "chkvars")) then
 		table.wipe(VUHDO_DEBUG);
-		for tFName, tData in pairs(VUHDO_GLOBAL) do
+		for tFName, tData in pairs(_G) do
 			if(strsub(tFName, 1, 1) == "t" or strsub(tFName, 1, 1) == "s") then
 				VUHDO_Msg("Emerging local variable " .. tFName);
 			end
-		end]]
+		end
 	elseif (strfind(tCommandWord, "mm")
 		or strfind(tCommandWord, "map")) then
 		VUHDO_CONFIG["SHOW_MINIMAP"] = VUHDO_forceBooleanValue(VUHDO_CONFIG["SHOW_MINIMAP"]);
@@ -756,7 +754,6 @@ function VUHDO_slashCmd(aCommand)
 		VUHDO_DEBUG_AUTO_PROFILE = tonumber(tParsedTexts[2]);]]
 	--elseif (strfind(tCommandWord, "test")) then
 	--[[ elseif (tCommandWord == "find") then
-		local tCnt;
 		local tName = gsub(tParsedTexts[2], "_", " ");
 		for tCnt = 1, 100000 do
 			if (GetSpellInfo(tCnt) == tName) then
@@ -768,7 +765,6 @@ function VUHDO_slashCmd(aCommand)
 		or strfind(tCommandWord, "help")
 		or aCommand == "") then
 		local tLines = VUHDO_splitString(VUHDO_I18N_COMMAND_LIST, "§");
-		local tCurLine;
 		for _, tCurLine in ipairs(tLines) do
 			VUHDO_MsgC(tCurLine);
 		end
@@ -920,7 +916,6 @@ local tOldThreat = { };
 local tTarget;
 local tAggroUnit;
 local tThreatPerc;
-local tUnit, tInfo;
 function VUHDO_updateAllAggro()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		tOldAggro[tUnit] = tInfo["aggro"];
@@ -974,7 +969,6 @@ local VUHDO_updateAllAggro = VUHDO_updateAllAggro;
 
 
 --
-local tUnit, tInfo;
 local tIsInRange, tIsCharmed;
 local function VUHDO_updateAllRange()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
@@ -996,7 +990,7 @@ local function VUHDO_updateAllRange()
 							or ((tInfo["dead"] or tInfo["charmed"]) and tInfo["baseRange"])
 							or "player" == tUnit
 							or ((tUnit == "focus" or tUnit == "target")
-								and UnitIsTrivial("target") and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
+								and UnitIsTrivial(tUnit) and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
 						 );
 		else
 			tIsInRange
@@ -1005,6 +999,11 @@ local function VUHDO_updateAllRange()
 							or ((tUnit == "focus" or tUnit == "target")
 								and CheckInteractDistance(tUnit, 1))
 						 );
+		end
+
+		-- 3.9 Namen nach roster change manchmal nicht aktuell?
+		if (tInfo["name"] ~= UnitName(tUnit) and not VUHDO_isReloadPending()) then
+			VUHDO_quickRaidReload();
 		end
 
 		if (tInfo["range"] ~= tIsInRange) then
@@ -1048,6 +1047,7 @@ function VUHDO_lateRaidReload()
 		VUHDO_TIMERS["RELOAD_RAID"] = 5;
 	end
 end
+
 
 
 --
@@ -1118,7 +1118,7 @@ local function VUHDO_doReloadRoster(anIsQuick)
 					VUHDO_IS_RELOAD_BUFFS = false;
 				end
 
-				VUHDO_initHideBlizzRaid(); -- Scheint bei betreten eines Raids von aussen getriggert zu werden.
+				VUHDO_initBlizzRaid(); -- Scheint bei betreten eines Raids von aussen getriggert zu werden.
 			end
 		end
 
@@ -1168,7 +1168,6 @@ end
 local tTimeDelta = 0;
 local tSlowDelta = 0;
 local tAutoProfile;
-local tUnit, tInfo;
 local tGcdStart, tGcdDuration;
 local tHotDebuffToggle = 1;
 function VUHDO_OnUpdate(_, aTimeDelta)
@@ -1478,7 +1477,6 @@ function VUHDO_OnLoad(anInstance)
 
 	VUHDO_INSTANCE = anInstance;
 
-	local tEvent;
 	for _, tEvent in pairs(VUHDO_ALL_EVENTS) do
 		anInstance:RegisterEvent(tEvent);
 	end

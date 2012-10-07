@@ -26,8 +26,6 @@ end
 
 --
 function VUHDO_rewritePanelModels()
-	local tCnt;
-
 	for tCnt = 1, VUHDO_MAX_PANELS do
 		VUHDO_PANEL_SETUP[tCnt]["MODEL"]["groups"] = VUHDO_PANEL_MODELS[tCnt];
 	end
@@ -141,7 +139,6 @@ end
 --
 local VUHDO_USED_BUFFS = { };
 function VUHDO_updateGlobalIconList()
-	local tName, tItems, tItem, tValue;
 	table.wipe(VUHDO_USED_BUFFS);
 
 	-- Add custom debuffs
@@ -196,7 +193,6 @@ end
 
 
 --
-local tValue, _;
 local function VUHDO_tableContains(aTable, aValue)
 	for _, tValue in pairs(aTable) do
 		if tValue == aValue then
@@ -211,7 +207,6 @@ end
 
 --
 local tStep = 50;
-local tCnt;
 local tRef;
 local tName, _, tIcon;
 local function VUHDO_scanNextGlobalIcons()

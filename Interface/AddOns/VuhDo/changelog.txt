@@ -1,3 +1,43 @@
+Version 3.10.
+
+Bugfixes:
+-- Fixed a bug in player group determination
+
+Improvements:
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.9.
+
+Bugfixes:
+-- Minor bugfix with range detection for enemy targets
+-- Minor bugfix with overheal higlight not reseting properly
+-- Other minor bugfixes
+
+Improvements:
+-- Reduced memory consumption
+-- Major options code rework, reduces memory usage, increased
+   flexibility for future extensions
+-- Added Sacred Shield to trackable buffs
+
+Changes:
+-- Added "Vixar" to default libSharedMedia fonts
+
+
+Features:
+-- On popular demand: Options=>General=>Misc "Hide Blizz xyz" is
+   tri-state now. So you can "leave alone/show/hide blizz" frames.
+   May need to overwrite existing profiles in order to have Blizz
+   UI elements shown when hidden from another addon
+   Defaults to: Leave alone
+
+
+--------------------------------------------------------------
 Version 3.7.
 
 Bugfixes:
@@ -118,180 +158,3 @@ Changes:
 
 
 Features:
-
-
---------------------------------------------------------------
-Version 3.0.15 (MoP)
-
-Bugfixes:
-
-
-Improvements:
-
-
-Changes:
-
-
-Features:
-
-
---------------------------------------------------------------
-Version 3.0.14 (MoP)
-
-Bugfixes:
--- Fixed some buff watch buffs (mainly Shaman)
--- Minor bugfixes
-
-
-Improvements:
--- Minor optimizations
-
-
-Changes:
-
-
-Features:
-
-
---------------------------------------------------------------
-Version 3.0.13 (MoP)
-
-Bugfixes:
--- Fixed some HoTs (Sacred Shield, Weakened Soul)
--- Fixed shield absorb handling (Sacred Shield)
-
-
-Improvements:
--- Performance optimizations
-
-
-Changes:
-
-
-Features:
-
-
---------------------------------------------------------------
-
-Version 3.0.12 (MoP)
-
-Bugfixes:
--- Minor bugfixes
--- Better handling for Chakra, Monk stance, Pally Seal in BuffWatch
-
-
-
-Improvements:
--- Some code cleanup
-
-
-Changes:
-
-
-Features:
--- Added bouquet item type "Icon: Target's Raid Symbol" which
-   will show the raid target icon of the unit's current target
-
-
---------------------------------------------------------------
-Version 3.0.11 (MoP)
-
-Bugfixes:
--- Rune frame will now be hidden along with player frame
--- Minor bugfixes
-
-Improvements:
-
-
-Changes:
-
-
-Features:
--- Tooltip now also showing for enemy units
-
-
---------------------------------------------------------------
-Version 3.0.8 (MoP)
-
-Bugfixes:
--- Hopefully fixed GlyphUI taint bug
-
-
-Improvements:
-
-
-Changes:
-
-
-Features:
-
-
---------------------------------------------------------------
-Version 3.0.7 (MoP)
-
-Bugfixes:
--- Fixed bug with cooldown clocks
-
-Improvements:
--- Minor optimizations
-
-Changes:
--- Removed monochrome text setting for now, seems to crash
-   beta client
-
-
-Features:
-
-
---------------------------------------------------------------
-Version 3.0.6 (MoP alpha)
-
-Bugfixes:
--- Pallies with Symbiosis on them should be able to B-rez now.
-
-Improvements:
-
-
-Changes:
-
-
-Features:
-- You may now hide VuhDo panels in pet battles
-  (Options=>General=>General)
-
-
---------------------------------------------------------------
-Version 3.0.5 (MoP alpha)
-
-Bugfixes:
--- Minor bugfixes
-
-Improvements:
--- Custom debuffs overlapping neighbour health bar too much
-   will no longer trigger heals on left health bar (but also
-   no longer show custom debuff tooltips either)
--- Minor improvements
-
-Changes:
-
-
-Features:
-
-
---------------------------------------------------------------
-Version 3.0.4 (MoP alpha)
-
-Bugfixes:
-
-Improvements:
-
-Changes:
--- Several MoP API changes
--- Added Monk class, spells buffs
--- Added color swatch for class color monk
--- Added Boquet items for "Chi =="
--- Added Default bouquet "Player Chi"
--- Pala holy power set to 5
-
-Features:
-

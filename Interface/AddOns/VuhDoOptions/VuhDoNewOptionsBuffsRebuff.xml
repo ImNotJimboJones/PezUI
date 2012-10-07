@@ -52,16 +52,6 @@
 					</Frame>
 
 					<Frame name="$parentTimersLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="110" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_TIMERS" inherits="VuDoDefaultTitleFontTemplate">
@@ -124,16 +114,6 @@
 				</Anchors>
 				<Frames>
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="134" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MOUSE_WHEEL"  inherits="VuDoDefaultTitleFontTemplate">

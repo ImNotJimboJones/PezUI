@@ -321,12 +321,11 @@ function VUHDO_generalIndicatorsEditButtonClicked(aButton)
 	tCombo = _G[aButton:GetParent():GetName() .. "SelectComboBox"];
 	VUHDO_BOUQUETS["SELECTED"] = VUHDO_lnfGetValueFromModel(tCombo);
 
-	VUHDO_MENU_RETURN_FUNC = VUHDO_newOptionsGeneralIndicatorsClicked;
 	VUHDO_MENU_RETURN_TARGET = VuhDoNewOptionsGeneralRadioPanelIndicatorsRadioButton;
 	VUHDO_MENU_RETURN_TARGET_MAIN = nil;
 
-	VUHDO_newOptionsGeneralBouquetClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
-	VUHDO_lnfRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
+	VUHDO_lnfTabRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
+	--VUHDO_lnfRadioButtonClicked(VuhDoNewOptionsGeneralRadioPanelBouquetRadioButton);
 end
 
 

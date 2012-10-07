@@ -19,13 +19,13 @@ local VUHDO_AOE_FOR_UNIT = { };
 local VUHDO_getCustomDestCluster;
 local VUHDO_RAID;
 function VUHDO_aoeAdvisorInitBurst()
-	VUHDO_getCustomDestCluster = VUHDO_GLOBAL["VUHDO_getCustomDestCluster"];
+	VUHDO_getCustomDestCluster = _G["VUHDO_getCustomDestCluster"];
 	sIsIncoming = VUHDO_CONFIG["AOE_ADVISOR"]["subInc"];
 	sIsCooldown = VUHDO_CONFIG["AOE_ADVISOR"]["isCooldown"];
 	sIsIncCastTimeOnly = VUHDO_CONFIG["AOE_ADVISOR"]["subIncOnlyCastTime"];
 	sIsPerGroup = VUHDO_CONFIG["AOE_ADVISOR"]["isGroupWise"];
 
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
 end
 
 
@@ -35,8 +35,6 @@ local VUHDO_SPELL_ID_POH = 596; -- MOPok
 local VUHDO_SPELL_ID_CH = 1064; -- MOPok
 local VUHDO_SPELL_ID_WG = 48438; -- MOPok
 local VUHDO_SPELL_ID_TQ = 740; -- MOPok
---local VUHDO_SPELL_ID_EF = 81275;
---local VUHDO_SPELL_ID_SM = 18562; -- MOPok
 local VUHDO_SPELL_ID_LOD = 85222; -- MOPok
 local VUHDO_SPELL_ID_HR = 82327; -- MOPok
 
@@ -44,7 +42,7 @@ VUHDO_AOE_SPELLS = {
 
 	-- Circle of Healing
 	["coh"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_COH,
 		["base"] = (4599 + 5082) * 0.5, -- MOPok
 		["divisor"] = 9345,
@@ -55,7 +53,7 @@ VUHDO_AOE_SPELLS = {
 		["degress"] = 1,
 		["rangePow"] = 30 * 30, -- MOPok
 		["isRadial"] = true,
-		["isSourcePlayer"] = false,
+		--["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
 		["thresh"] = 15000,
 		["cone"] = 360,
@@ -65,7 +63,7 @@ VUHDO_AOE_SPELLS = {
 
 	-- Prayer of Healing
 	["poh"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_POH,
 		["base"] = (6766 + 7148) * 0.5, -- MOP
 		["divisor"] = 9345,
@@ -76,17 +74,17 @@ VUHDO_AOE_SPELLS = {
 		["degress"] = 1,
 		["rangePow"] = 30 * 30,
 		["isRadial"] = true,
-		["isSourcePlayer"] = false,
-		["isDestRaid"] = false,
+		--["isSourcePlayer"] = false,
+		--["isDestRaid"] = false,
 		["thresh"] = 20000,
 		["cone"] = 360,
-		["checkCd"] = false,
+		--["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_POH)) or 0,
 	},
 
 	-- Chain Heal
 	["ch"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_CH,
 		["base"] = (5135  + 5865) * 0.5, -- MOP
 		["divisor"] = 10035,
@@ -97,18 +95,18 @@ VUHDO_AOE_SPELLS = {
 		["degress"] = 0.66,
 		["rangePow"] = 40 * 40,
 		["jumpRangePow"] = 11 * 11,
-		["isRadial"] = false,
-		["isSourcePlayer"] = false,
+		--["isRadial"] = false,
+		--["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
 		["thresh"] = 15000,
 		["cone"] = 360,
-		["checkCd"] = false,
+		--["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_CH)) or 0,
 	},
 
 	-- Wild Growth
 	["wg"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_WG,
 		["base"] = 6930,
 		["divisor"] = 9345, -- MOP
@@ -129,7 +127,7 @@ VUHDO_AOE_SPELLS = {
 
 	-- Tranqulity
 	["tq"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_TQ,
 		["base"] = 9037, -- MOP
 		["divisor"] = 9345,
@@ -148,31 +146,9 @@ VUHDO_AOE_SPELLS = {
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_TQ)) or 0,
 	},
 
-	-- Efflorescence
-	--[[["ef"] = {
-		["present"] = false,
-		["id"] = VUHDO_SPELL_ID_EF,
-		["base"] = 5229,
- 		["divisor"] = 9345,
-		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_EF)),
-		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_EF)),
-		["avg"] = 0,
-		["max_targets"] = 3,
-		["degress"] = 1,
-		["rangePow"] = 8 * 8,
-		["isRadial"] = true,
-		["isSourcePlayer"] = false,
-		["isDestRaid"] = true,
-		["thresh"] = 5000,
-		["cone"] = 360,
-		["checkCd"] = true,
-		["evaluator"] = VUHDO_isUnitSwiftmendable,
-		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_SM)) or 0,
-	},]] -- MOP
-
 	-- Light of Dawn
 	["lod"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_LOD,
 		["base"] = (2027 + 2257) * 3 * 0.5, -- MOP
 		["divisor"] = 4859,
@@ -187,13 +163,13 @@ VUHDO_AOE_SPELLS = {
 		["isDestRaid"] = true,
 		["thresh"] = 8000,
 		["cone"] = 180,
-		["checkCd"] = false,
+		--["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_LOD)) or 0,
 	},
 
 	-- Holy Radiance
 	["hr"] = {
-		["present"] = false,
+		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_HR,
 		["base"] = (683 + 683) * 0.5,
 		["divisor"] = 4859,
@@ -204,11 +180,11 @@ VUHDO_AOE_SPELLS = {
 		["degress"] = 1,
 		["rangePow"] = 10 * 10,
 		["isRadial"] = true,
-		["isSourcePlayer"] = false,
+		--["isSourcePlayer"] = false,
 		["isDestRaid"] = true,
 		["thresh"] = 10000,
 		["cone"] = 360,
-		["checkCd"] = false,
+		--["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_HR)) or 0,
 	}, -- MOP
 };
@@ -234,31 +210,13 @@ end
 
 
 --
-local function VUHDO_getTalentModifiers()
-	return 1;
-end
-
-
-
---
-local tPoints;
-local function VUHDO_getSpellTalentModifiers(anAoeInfo)
-	return 1;
-end
-
-
-
---
 function VUHDO_aoeUpdateSpellAverages()
-	local tName, tInfo;
-	local tTalentModi = VUHDO_getTalentModifiers();
 	local tBonus = GetSpellBonusHealing();
 	local tSpellModi;
 
 	for tName, tInfo in pairs(VUHDO_AOE_SPELLS) do
 		tSpellModi = tInfo["base"] / tInfo["divisor"];
-		tInfo["avg"] = floor((tInfo["base"] + tBonus * tSpellModi) * tTalentModi + 0.5);
-		tInfo["avg"] = tInfo["avg"] * VUHDO_getSpellTalentModifiers(tInfo);
+		tInfo["avg"] = floor((tInfo["base"] + tBonus * tSpellModi) + 0.5);
 		tInfo["thresh"] = VUHDO_CONFIG["AOE_ADVISOR"]["config"][tName]["thresh"];
 	end
 end
@@ -269,13 +227,11 @@ end
 local function VUHDO_isAoeSpellEnabled(aSpell)
 	if (not VUHDO_CONFIG["AOE_ADVISOR"]["config"][aSpell]["enable"]) then
 		return false;
-	end
-
-	if (not VUHDO_CONFIG["AOE_ADVISOR"]["knownOnly"]) then
+	elseif (not VUHDO_CONFIG["AOE_ADVISOR"]["knownOnly"]) then
 		return true;
+	else
+		return VUHDO_isSpellKnown(VUHDO_AOE_SPELLS[aSpell]["name"]);
 	end
-
-	return VUHDO_isSpellKnown(VUHDO_AOE_SPELLS[aSpell]["name"]);
 end
 
 
@@ -288,40 +244,27 @@ end
 
 --
 function VUHDO_aoeUpdateTalents()
-	local tName, tInfo;
-	local tSpell;
-
 	for tName, tInfo in pairs(VUHDO_AOE_SPELLS) do
 		tInfo["present"] = VUHDO_isAoeSpellEnabled(tName);
 	end
 
 	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_isGlyphed(42396)) then -- Glyph of CoH -- MOPok
-			VUHDO_AOE_SPELLS["coh"]["max_targets"] = 6;
-		else
-			VUHDO_AOE_SPELLS["coh"]["max_targets"] = 5;
-		end
+		VUHDO_AOE_SPELLS["coh"]["max_targets"] = VUHDO_isGlyphed(42396) and 6 or 5; -- Glyph of CoH -- MOPok
 
 	elseif ("SHAMAN" == VUHDO_PLAYER_CLASS) then
-		tSpell = VUHDO_AOE_SPELLS["ch"];
-		if (VUHDO_isGlyphed(41552)) then -- Kettenbildung -- MOPok
-			tSpell["jumpRangePow"] = 22 * 22;
-		else
-			tSpell["jumpRangePow"] = 11 * 11;
-		end
+		VUHDO_AOE_SPELLS["ch"]["jumpRangePow"] = VUHDO_isGlyphed(41552) and 22 * 22 or 11 * 11; -- Kettenbildung -- MOPok
+
 	elseif ("DRUID" == VUHDO_PLAYER_CLASS) then
-		if (VUHDO_isGlyphed(45602)) then -- Glyph of WG -- MOPok
-			VUHDO_AOE_SPELLS["wg"]["max_targets"] = 6;
-		else
-			VUHDO_AOE_SPELLS["wg"]["max_targets"] = 5;
-		end
+		VUHDO_AOE_SPELLS["wg"]["max_targets"] = VUHDO_isGlyphed(45602) and 6 or 5; -- Glyph of WG -- MOPok
+
 	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
+		local tSpell = VUHDO_AOE_SPELLS["lod"];
 		if (VUHDO_isGlyphed(41109)) then -- Glyph of LoD -- MOPok
-			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 4;
-			VUHDO_AOE_SPELLS["lod"]["base"] = (4599 + 5082) * 0.75; -- MOPok
+			tSpell["max_targets"] = 4;
+			tSpell["base"] = (4599 + 5082) * 0.75; -- MOPok
 		else
-			VUHDO_AOE_SPELLS["lod"]["max_targets"] = 6;
-			VUHDO_AOE_SPELLS["lod"]["base"] = (4599 + 5082) * 0.5; -- MOPok
+			tSpell["max_targets"] = 6;
+			tSpell["base"] = (4599 + 5082) * 0.5; -- MOPok
 		end
 	end
 
@@ -344,7 +287,6 @@ end
 --
 local tTotal;
 local tDeficit;
-local tCnt;
 local tUnit;
 local tInfo;
 local function VUHDO_sumClusterHealing(aCluster, aMaxAmount, aDegression, aCastTime)
@@ -376,7 +318,6 @@ local tBestUnit, tBestTotal;
 local tCurrTotal;
 local tCluster = { };
 local tInfo;
-local tCnt;
 
 local tEvaluator;
 local tIsSourcePlayer;
@@ -438,7 +379,6 @@ local tGroupUnit = {
 	[1] = { }, [2] = { }, [3] = { }, [4] = { }, [5] = { }, [6] = { }, [7] = { }, [8] = { }
 };
 
-local tCnt;
 local function VUHDO_getBestUnitsForAoe(anAoeInfo, aPlayerModi)
 	tEvaluator = anAoeInfo["evaluator"];
 	tIsSourcePlayer = anAoeInfo["isSourcePlayer"];
@@ -470,8 +410,6 @@ end
 
 --
 local tUnitForAoe = { [0] = {}, [1] = {}, [2] = {}, [3] = {}, [4] = {}, [5] = {}, [6] = {}, [7] = {}, [8] = {} };
-local tCnt;
-local tUnit;
 local function VUHDO_abgleichVorherBesserInGruppen(anAoeName, aGroupNum, aUnit, anAoeHealed, ...)
 	for tCnt = 1, select('#', ...) do
 		if ((tUnitForAoe[select(tCnt, ...)][aUnit] or 0) >= anAoeHealed) then
@@ -486,15 +424,11 @@ end
 
 
 --
-local tName, tInfo;
 local tUnit;
-local tWarBesser;
-local tPlayerModi, tWasBetterBefore;
+local tPlayerModi;
 local tBestUnits;
-local tCnt;
 local tOldAoeForUnit = {};
 local tAoeChangedForUnit = { };
-local tAoeSpell;
 function VUHDO_aoeUpdateAll()
 	if (not VUHDO_INTERNAL_TOGGLES[32]) then -- VUHDO_UPDATE_AOE_ADVICE
 		return;

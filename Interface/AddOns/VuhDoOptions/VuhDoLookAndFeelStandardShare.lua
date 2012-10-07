@@ -11,7 +11,6 @@ local function VUHDO_addBuddyNameToComboModel(aName)
 		return;
 	end
 
-	local tInfo;
 	for _, tInfo in pairs(VUHDO_BUDDY_NAME_MODEL) do
 		if (tInfo[2] == aName) then
 			return;
@@ -27,13 +26,12 @@ end
 function VUHDO_initBuddyNameModel()
 	table.wipe(VUHDO_BUDDY_NAME_MODEL);
 
-	-- target
+	-- Target
 	if (UnitIsFriend("player", "target") and UnitIsPlayer("target")) then
 		VUHDO_addBuddyNameToComboModel(UnitName("target"));
 	end
 
 	-- Raid/Party
-	local tUnit, tInfo;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		if (not tInfo["isPet"] and tInfo["connected"] and UnitIsPlayer(tUnit)) then
 			VUHDO_addBuddyNameToComboModel(tInfo["name"]);
@@ -41,7 +39,6 @@ function VUHDO_initBuddyNameModel()
 	end
 
 	-- Friends
-	local tCnt;
 	local tNumFriends =	GetNumFriends();
 	local tIsOnline;
 	local tName;
@@ -85,7 +82,7 @@ end
 
 --
 function VUHDO_optionsExecShare(aPanel)
-	local tSelection = VUHDO_GLOBAL[aPanel:GetAttribute("model")[2]];
+	local tSelection = _G[aPanel:GetAttribute("model")[2]];
 	if (VUHDO_strempty(tSelection)) then
 		VUHDO_Msg("You must select an item to share.", 1, 0.4, 0.4);
 		return false;
@@ -103,6 +100,6 @@ function VUHDO_optionsExecShare(aPanel)
 	end
 
 
-	VUHDO_GLOBAL[aPanel:GetAttribute("model")[1]](VUHDO_SELECTED_COMBO_BUDDY, tSelection);
+	_G[aPanel:GetAttribute("model")[1]](VUHDO_SELECTED_COMBO_BUDDY, tSelection);
 	return true;
 end

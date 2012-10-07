@@ -7,14 +7,8 @@ function VUHDO_importBlizzClassColors(aButton)
 	VuhDoYesNoFrame:SetAttribute("callback",
 		function(aDecision)
 			if (VUHDO_YES == aDecision) then
-
-				if (RAID_CLASS_COLORS == nil) then
-					return;
-				end
-
-				local tClassId, tVuhDoColor, tClassName;
 				for tClassId, tVuhDoColor in pairs(VUHDO_USER_CLASS_COLORS) do
-					tClassName = VUHDO_ID_CLASSES[tClassId];
+					local tClassName = VUHDO_ID_CLASSES[tClassId];
 
 					if (RAID_CLASS_COLORS[tClassName] ~= nil) then
 						tVuhDoColor["R"] = RAID_CLASS_COLORS[tClassName]["r"] or 0;

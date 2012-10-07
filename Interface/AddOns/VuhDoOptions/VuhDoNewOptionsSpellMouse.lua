@@ -3,30 +3,31 @@ VUHDO_CURR_SPELL_MODIFIER = "";
 
 
 function VUHDO_newOptionsSpellSetModifier(aModifier)
-	local tComponents = { };
+	local tComponents;
 	local tNum;
 	local tModel;
-	local tPanel, tBox, tComp;
+	local tBox;
+	local tIndex;
 
 	VUHDO_CURR_SPELL_MODIFIER = aModifier;
 
-	table.wipe(tComponents);
 	tComponents = { VuhDoNewOptionsSpellMouseKeyPanelScrollPanelChild:GetChildren() };
-
 	for _, tPanel in pairs(tComponents) do
 		tNum = VUHDO_getNumbersFromString(tPanel:GetName(), 1)[1];
 		if (tNum ~= nil) then
-			tBox = VUHDO_GLOBAL[tPanel:GetName() .. "EditBox"];
-			tModel = "VUHDO_SPELL_ASSIGNMENTS." .. aModifier .. tNum .. ".##3";
+			tBox = _G[tPanel:GetName() .. "EditBox"];
+			tIndex = aModifier .. tNum;
+			if (VUHDO_SPELL_ASSIGNMENTS[tIndex] == nil) then
+				VUHDO_SPELL_ASSIGNMENTS[tIndex] = { VUHDO_MODIFIER_KEYS[tIndex], tostring(tNum), "" };
+			end
+			tModel = "VUHDO_SPELL_ASSIGNMENTS." .. tIndex .. ".##3";
 			tBox:SetAttribute("model", tModel);
 			tBox:Hide();
 			tBox:Show();
 		end
 	end
 
-	table.wipe(tComponents);
 	tComponents = { VuhDoNewOptionsSpellMouseWheelPanel:GetChildren() };
-
 	for _, tComp in pairs(tComponents) do
 		if (tComp:IsObjectType("EditBox")) then
 			tNum = VUHDO_getComponentPanelNum(tComp);
@@ -44,7 +45,7 @@ end
 --
 function VUHDO_newOptionsSpellEditBoxCheckSpell(anEditBox, anIsCustom)
 	local tText, tR, tG, tB = VUHDO_isActionValid(anEditBox:GetText(), anIsCustom);
-	local tLabel = VUHDO_GLOBAL[anEditBox:GetName() .. "Hint"];
+	local tLabel = _G[anEditBox:GetName() .. "Hint"];
 	if (tText ~= nil) then
 		anEditBox:SetTextColor(1, 1, 1, 1);
 		tLabel:SetText(tText);
@@ -58,23 +59,12 @@ end
 
 
 --
-local VUHDO_BUTTON_TEXTS = {
+local sButtonTitles = {
 	VUHDO_I18N_LEFT_BUTTON,
 	VUHDO_I18N_RIGHT_BUTTON,
 	VUHDO_I18N_MIDDLE_BUTTON,
 	VUHDO_I18N_BUTTON_4,
 	VUHDO_I18N_BUTTON_5,
-	VUHDO_I18N_BUTTON_6,
-	VUHDO_I18N_BUTTON_7,
-	VUHDO_I18N_BUTTON_8,
-	VUHDO_I18N_BUTTON_9,
-	VUHDO_I18N_BUTTON_10,
-	VUHDO_I18N_BUTTON_11,
-	VUHDO_I18N_BUTTON_12,
-	VUHDO_I18N_BUTTON_13,
-	VUHDO_I18N_BUTTON_14,
-	VUHDO_I18N_BUTTON_15,
-	VUHDO_I18N_BUTTON_16,
 }
 
 
@@ -83,7 +73,7 @@ local VUHDO_BUTTON_TEXTS = {
 local function VUHDO_addSpellEditBox(aScrollPanel, anIndex)
 	local tFrame = CreateFrame("Frame", aScrollPanel:GetName() .. "E" .. anIndex, aScrollPanel, "VuhDoNewOptionsSpellMouseEditBoxTemplate");
 	tFrame:SetPoint("TOPLEFT", aScrollPanel:GetName(), "TOPLEFT", 23, -(anIndex - 1) * tFrame:GetHeight() - 7);
-	VUHDO_GLOBAL[tFrame:GetName() .. "LabelLabel"]:SetText(VUHDO_BUTTON_TEXTS[anIndex] or "");
+	_G[tFrame:GetName() .. "LabelLabel"]:SetText(sButtonTitles[anIndex] or (VUHDO_I18N_BUTTON .. " " .. anIndex));
 	return tFrame;
 end
 
@@ -91,7 +81,6 @@ end
 
 --
 function VUHDO_newOptionsSpellMouseScrollPanelOnLoad(aScrollPanel)
-	local tCnt;
 	local tFrame;
 	for tCnt = 1, VUHDO_NUM_MOUSE_BUTTONS do
 		tFrame = VUHDO_addSpellEditBox(aScrollPanel, tCnt);

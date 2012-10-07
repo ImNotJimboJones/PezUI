@@ -1,7 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<Script file="VuhDoNewOptionsGeneral.lua" />
-
 	<Frame name="VuhDoNewOptionsGeneralTemplate" virtual="true">
 		<Frames>
 
@@ -37,7 +35,7 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentGeneralRadioButton" checked="true" text="VUHDO_I18N_GENERAL" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentGeneralRadioButton" checked="true" text="VUHDO_I18N_GENERAL" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -46,18 +44,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralBasicClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralBasic";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K044);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentScannersRadioButton" text="VUHDO_I18N_SCANNERS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentScannersRadioButton" text="VUHDO_I18N_SCANNERS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -66,18 +61,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralScannersClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralScan";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K045);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentThreatRadioButton" text="VUHDO_I18N_THREAT" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentThreatRadioButton" text="VUHDO_I18N_THREAT" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -86,18 +78,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralThreatClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralThreat";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K162);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentAoeAdviceRadioButton" text="VUHDO_I18N_AOE_ADVICE" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentAoeAdviceRadioButton" text="VUHDO_I18N_AOE_ADVICE" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -106,18 +95,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralAoeAdviceClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralAoeAdvice";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K543);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentMiscRadioButton" text="VUHDO_I18N_MISC" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentMiscRadioButton" text="VUHDO_I18N_MISC" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -126,11 +112,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralMiscClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralMisc";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K163);
 							</OnLoad>
@@ -156,7 +139,7 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentIndicatorsRadioButton" text="VUHDO_I18N_INDICATORS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentIndicatorsRadioButton" text="VUHDO_I18N_INDICATORS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -166,17 +149,19 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								VUHDO_newOptionsGeneralIndicatorsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
+								VUHDO_MENU_RETURN_TARGET = nil;
+								VUHDO_MENU_RETURN_TARGET_MAIN = nil;
+								VUHDO_lnfTabRadioButtonClicked(self);
 							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralIndicators";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K456);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentClusterRadioButton" text="VUHDO_I18N_CLUSTERS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentClusterRadioButton" text="VUHDO_I18N_CLUSTERS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -185,11 +170,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralClusterClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralCluster";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K448);
 							</OnLoad>
@@ -215,7 +197,7 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentBouquetRadioButton" text="VUHDO_I18N_BOUQUETS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentBouquetRadioButton" text="VUHDO_I18N_BOUQUETS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -224,11 +206,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsGeneralBouquetClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsGeneralBouquet";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K457);
 							</OnLoad>

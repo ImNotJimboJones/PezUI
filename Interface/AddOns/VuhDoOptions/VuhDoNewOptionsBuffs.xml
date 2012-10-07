@@ -1,7 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<Script file="VuhDoNewOptionsBuffs.lua" />
-
 	<Frame name="VuhDoNewOptionsBuffsTemplate" virtual="true">
 		<Frames>
 
@@ -18,7 +16,7 @@
 				</Anchors>
 				<Frames>
 
-					<CheckButton name="$parentConfigRadioButton" checked="true" text="VUHDO_I18N_CONFIG" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentConfigRadioButton" checked="true" text="VUHDO_I18N_CONFIG" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -27,18 +25,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsBuffsConfigClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsBuffsGeneric";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K001);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentOptionsGeneralRadioButton" text="VUHDO_I18N_GENERAL" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentOptionsGeneralRadioButton" text="VUHDO_I18N_GENERAL" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -47,18 +42,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsBuffsGeneralClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsBuffsAppearance";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K002);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentOptionsColorsRadioButton" text="VUHDO_I18N_COLORS" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentOptionsColorsRadioButton" text="VUHDO_I18N_COLORS" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -67,18 +59,15 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsBuffsColorsClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsBuffsColors";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K003);
 							</OnLoad>
 						</Scripts>
 					</CheckButton>
 
-					<CheckButton name="$parentOptionsRebuffRadioButton" text="VUHDO_I18N_REBUFF" inherits="VuhDoRadioButtonTemplate">
+					<CheckButton name="$parentOptionsRebuffRadioButton" text="VUHDO_I18N_REBUFF" inherits="VuhDoTabRadioButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
@@ -87,11 +76,8 @@
 							</Anchor>
 						</Anchors>
 						<Scripts>
-							<OnClick>
-								VUHDO_newOptionsBuffsRebuffClicked(self);
-								VUHDO_lnfRadioButtonClicked(self);
-							</OnClick>
 							<OnLoad>
+								self.tabPanel = "VuhDoNewOptionsBuffsRebuff";
 								VUHDO_lnfCheckButtonOnLoad(self);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K004);
 							</OnLoad>

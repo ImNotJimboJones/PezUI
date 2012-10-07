@@ -1,7 +1,8 @@
 local VUHDO_1_DIV_2_PI_MUL_108 = 108 / math.pi / 2;
 local UnitIsUnit = UnitIsUnit;
 local floor = floor;
-local tOldButton, tOldDistance;
+local sOldButton;
+local sOldDistance;
 local sIsDeadOnly;
 local sIsAlways;
 local sIsDistanceText;
@@ -15,19 +16,21 @@ local VUHDO_getUnitDirection;
 
 local VUHDO_RAID = { };
 function VUHDO_directionsInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+
 	sIsDeadOnly = VUHDO_CONFIG["DIRECTION"]["isDeadOnly"];
 	sIsAlways = VUHDO_CONFIG["DIRECTION"]["isAlways"];
 	sIsDistanceText = VUHDO_CONFIG["DIRECTION"]["isDistanceText"];
 	sScale = VUHDO_CONFIG["DIRECTION"]["scale"] * 0.01;
-	VuhDoDirectionFrame = VUHDO_GLOBAL["VuhDoDirectionFrame"];
-	VuhDoDirectionFrameArrow = VUHDO_GLOBAL["VuhDoDirectionFrameArrow"];
-	VuhDoDirectionFrameText = VUHDO_GLOBAL["VuhDoDirectionFrameText"];
-	VUHDO_setMapToCurrentZone = VUHDO_GLOBAL["VUHDO_setMapToCurrentZone"];
-	VUHDO_getDistanceBetween = VUHDO_GLOBAL["VUHDO_getDistanceBetween"];
-	VUHDO_getUnitDirection = VUHDO_GLOBAL["VUHDO_getUnitDirection"];
-	tOldButton = nil;
-	tOldDistance = nil;
+	sOldButton = nil;
+	sOldDistance = nil;
+
+	VuhDoDirectionFrame = _G["VuhDoDirectionFrame"];
+	VuhDoDirectionFrameArrow = _G["VuhDoDirectionFrameArrow"];
+	VuhDoDirectionFrameText = _G["VuhDoDirectionFrameText"];
+	VUHDO_setMapToCurrentZone = _G["VUHDO_setMapToCurrentZone"];
+	VUHDO_getDistanceBetween = _G["VUHDO_getDistanceBetween"];
+	VUHDO_getUnitDirection = _G["VUHDO_getUnitDirection"];
 end
 
 
@@ -136,8 +139,8 @@ function VUHDO_updateDirectionFrame(aButton)
 		if ((tDistance or 0) > 0) then
 			tDistance = floor(tDistance + 0.5);
 
-			if (tDistance ~= tOldDistance) then
-				tOldDistance = tDistance;
+			if (tDistance ~= sOldDistance) then
+				sOldDistance = tDistance;
 
 				VuhDoDirectionFrameText:SetText(tDistance);
 
@@ -150,8 +153,8 @@ function VUHDO_updateDirectionFrame(aButton)
 		end
 	end
 
-	if (tOldButton ~= tButton) then
-		tOldButton = tButton;
+	if (sOldButton ~= tButton) then
+		sOldButton = tButton;
 		tHeight = tButton:GetHeight() * sScale * tButton:GetEffectiveScale();
 		VuhDoDirectionFrame:SetPoint("CENTER", tButton:GetName(), "CENTER", 0, 0);
 		VuhDoDirectionFrame:SetWidth(tHeight);

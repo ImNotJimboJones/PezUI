@@ -66,17 +66,7 @@
 						</Scripts>
 					</CheckButton>
 
-					<Frame name="$parentIgnoreLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="225" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-69" />
-								</Offset>
-							</Anchor>
-						</Anchors>
+					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_IGNORE_IRRELEVANT" inherits="VuDoDefaultTitleFontTemplate">
@@ -117,24 +107,6 @@
 						</Scripts>
 					</CheckButton>
 
-					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="225" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
-						<Layers>
-							<Layer>
-								<FontString name="$parentLabel" text="VUHDO_I18N_DEBUFFS" inherits="VuDoDefaultTitleFontTemplate">
-								</FontString>
-							</Layer>
-						</Layers>
-					</Frame>
 				</Frames>
 			</Frame>
 
@@ -185,16 +157,6 @@
 					</CheckButton>
 
 					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="225" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_ICONS" inherits="VuDoDefaultTitleFontTemplate">
@@ -317,16 +279,6 @@
 					</Button>
 
 					<Frame name="$parentSoundLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="142" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_DEBUFF_SOUND" inherits="VuDoDefaultTitleFontTemplate">

@@ -18,18 +18,17 @@ local sFirstRes, sSecondRes;
 
 
 function VUHDO_spellEventHandlerInitBurst()
-	VUHDO_updateAllHoTs = VUHDO_GLOBAL["VUHDO_updateAllHoTs"];
-	VUHDO_updateAllCyclicBouquets = VUHDO_GLOBAL["VUHDO_updateAllCyclicBouquets"];
-	VUHDO_initGcd = VUHDO_GLOBAL["VUHDO_initGcd"];
+	VUHDO_updateAllHoTs = _G["VUHDO_updateAllHoTs"];
+	VUHDO_updateAllCyclicBouquets = _G["VUHDO_updateAllCyclicBouquets"];
+	VUHDO_initGcd = _G["VUHDO_initGcd"];
 
-	VUHDO_ACTIVE_HOTS = VUHDO_GLOBAL["VUHDO_ACTIVE_HOTS"];
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
+	VUHDO_ACTIVE_HOTS = _G["VUHDO_ACTIVE_HOTS"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 
 	sIsShowGcd = VUHDO_CONFIG["IS_SHOW_GCD"];
 
 	table.wipe(sUniqueSpells);
-	local tSpellName;
 	local tUnique, tUniqueCategs = VUHDO_getAllUniqueSpells();
 	for _, tSpellName in pairs(tUnique) do
 		sUniqueSpells[tSpellName] = tUniqueCategs[tSpellName];

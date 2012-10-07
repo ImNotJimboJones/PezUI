@@ -113,9 +113,12 @@ else
 		if #rallnomorereport[1]==0 then
 			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
 				icllcheckachieves(1)
-				if a2~="pvp" then
-				table.insert(rallnomorereport[1],GetCurrentMapAreaID())
-				table.insert(rallnomorereport[2],a5)
+				local a1, a2, a3, a4, a5 = GetInstanceInfo()
+        if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
+          if GetInstanceDifficulty()~=2 and a2~=nil then
+            table.insert(rallnomorereport[1],GetCurrentMapAreaID())
+            table.insert(rallnomorereport[2],a5)
+          end
 				end
 			end
 		else
@@ -131,9 +134,12 @@ else
 			if bil==0 then
 				icllcheckachieves(1)
 				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
-          if a2~="pvp" then
-					table.insert(rallnomorereport[1],GetCurrentMapAreaID())
-					table.insert(rallnomorereport[2],a5)
+          local a1, a2, a3, a4, a5 = GetInstanceInfo()
+          if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
+            if GetInstanceDifficulty()~=2 and a2~=nil then
+              table.insert(rallnomorereport[1],GetCurrentMapAreaID())
+              table.insert(rallnomorereport[2],a5)
+            end
 					end
 				else
 					rallcolonka=0
@@ -1853,7 +1859,6 @@ table.insert(rallnomorereport[4],ai5)
 end
 
 
-
 rallreportbossachfound(a2,UnitName("target"),showme)
 else
 local vbil=0
@@ -2030,7 +2035,6 @@ end
 
 --сохранение ачивок
 if #achlist>0 then
-
 
 table.insert(ralltooltipready[1],id)
 local _, _, _, _, ai5 = GetInstanceInfo()

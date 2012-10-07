@@ -99,16 +99,6 @@
 					</CheckButton>
 
 					<Frame name="$parentAdditionalLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="220" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_ADDITIONAL_PANELS" inherits="VuDoDefaultTitleFontTemplate">
@@ -198,16 +188,6 @@
 					</CheckButton>
 
 					<Frame name="$parentMainPanelLabel" inherits="VuhDoLabelFrameTemplate">
-						<Size>
-							<AbsDimension x="220" y="18" />
-						</Size>
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-7" />
-								</Offset>
-							</Anchor>
-						</Anchors>
 						<Layers>
 							<Layer>
 								<FontString name="$parentLabel" text="VUHDO_I18N_MAIN_PANEL" inherits="VuDoDefaultTitleFontTemplate">

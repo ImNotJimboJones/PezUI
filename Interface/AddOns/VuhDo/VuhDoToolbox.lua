@@ -10,6 +10,7 @@ local strsplit = strsplit;
 local strbyte = strbyte;
 local floor = floor;
 local tonumber = tonumber;
+local select = select;
 local IsInRaid = IsInRaid;
 local IsInGroup = IsInGroup;
 local UnitInRange = UnitInRange;
@@ -27,6 +28,9 @@ local GetMouseFocus = GetMouseFocus;
 local GetPlayerFacing = GetPlayerFacing;
 local GetPlayerMapPosition = GetPlayerMapPosition;
 local GetSpellBookItemInfo = GetSpellBookItemInfo;
+local CheckInteractDistance = CheckInteractDistance;
+local UnitIsTrivial = UnitIsTrivial;
+local UnitIsUnit = UnitIsUnit;
 local VUHDO_atan2 = math.atan2;
 local VUHDO_PI, VUHDO_2_PI = math.pi, math.pi * 2;
 local pairs = pairs;
@@ -37,7 +41,6 @@ local sEmpty = { };
 
 
 -- returns an array of numbers sequentially found in a string
-local tCnt;
 local tNumbers = { };
 local tIndex;
 local tDigit;
@@ -98,7 +101,6 @@ end]]
 
 
 --
-local tValue;
 function VUHDO_tableUniqueAdd(aTable, aValue)
 	for _, tValue in pairs(aTable) do
 		if (tValue == aValue) then
@@ -113,7 +115,6 @@ end
 
 
 --
-local tIndex;
 function VUHDO_tableRemoveValue(aTable, aValue)
 	for tIndex, tValue in pairs(aTable) do
 		if (tValue == aValue) then
@@ -126,7 +127,6 @@ end
 
 
 --
-local tKey, tValue;
 function VUHDO_tableGetKeyFromValue(aTable, aValue)
 	for tKey, tValue in pairs(aTable) do
 		if (tValue == aValue) then
@@ -153,12 +153,12 @@ local sZeroRange = "";
 --
 local VUHDO_updateBouquetsForEvent;
 function VUHDO_toolboxInitBurst()
-	VUHDO_RAID_NAMES = VUHDO_GLOBAL["VUHDO_RAID_NAMES"];
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_UNIT_BUTTONS = VUHDO_GLOBAL["VUHDO_UNIT_BUTTONS"];
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_GROUPS_BUFFS = VUHDO_GLOBAL["VUHDO_GROUPS_BUFFS"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
+	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_UNIT_BUTTONS = _G["VUHDO_UNIT_BUTTONS"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_GROUPS_BUFFS = _G["VUHDO_GROUPS_BUFFS"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
 	sScanRange = tonumber(VUHDO_CONFIG["SCAN_RANGE"]);
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"];
 	sIsGuessRange = VUHDO_CONFIG["RANGE_PESSIMISTIC"] or GetSpellInfo(VUHDO_CONFIG["RANGE_SPELL"]) == nil;
@@ -202,11 +202,7 @@ local function VUHDO_arg2Text(anArg)
 	elseif ("table" == type(anArg)) then
 		return "<table>";
 	elseif ("boolean" == type(anArg)) then
-		if (anArg) then
-			return "<true>";
-		else
-			return "<false>";
-		end
+		return anArg and "<true>" or  "<false>";
 	elseif (anArg == "") then
 		return " ";
 	else
@@ -226,7 +222,6 @@ end
 --
 function VUHDO_xMsg(...)
 	local tText;
-	local tCnt;
 	local tFrag;
 
 	tText = "";
@@ -241,13 +236,7 @@ end
 
 --
 function VUHDO_getCurrentGroupType()
-	if (IsInRaid()) then
-		return 2; -- VUHDO_GROUP_TYPE_RAID
-	elseif (IsInGroup()) then
-		return 1; -- VUHDO_GROUP_TYPE_PARTY
-	else
-		return 0; -- VUHDO_GROUP_TYPE_SOLO
-	end
+	return IsInRaid() and 2 or IsInGroup() and 1 or 0;
 end
 local VUHDO_getCurrentGroupType = VUHDO_getCurrentGroupType;
 
@@ -285,17 +274,23 @@ local VUHDO_getUnitNo = VUHDO_getUnitNo;
 
 
 -- returns the units subgroup number, or 0 for pets/focus
-local tGroupNo;
 function VUHDO_getUnitGroup(aUnit, anIsPet)
 	if (anIsPet or aUnit == nil or aUnit == "focus" or aUnit == "target") then
 		return 0;
 	elseif (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
-		_, _, tGroupNo = GetRaidRosterInfo(VUHDO_getUnitNo(aUnit));
-		return tGroupNo or 1;
+		return select(3, GetRaidRosterInfo(VUHDO_getUnitNo(aUnit))) or 1;
 	else
 		return 1;
 	end
 end
+
+
+
+--
+function VUHDO_isTargetInRange(aUnit)
+	return UnitIsUnit("player", aUnit) or UnitIsTrivial(aUnit) and CheckInteractDistance(aUnit, 1) or UnitInRange(aUnit);
+end
+local VUHDO_isTargetInRange = VUHDO_isTargetInRange;
 
 
 
@@ -304,7 +299,7 @@ function VUHDO_isInRange(aUnit)
 	if ("player" == aUnit) then
 		return true;
 	elseif ("focus" == aUnit or "target" == aUnit) then
-		return CheckInteractDistance(aUnit, 1);
+		return VUHDO_isTargetInRange(aUnit);
 	elseif (sIsGuessRange) then
 		return UnitInRange(aUnit);
 	else
@@ -331,7 +326,6 @@ end
 -- which means containing tables will be copies value-wise, not by reference
 function VUHDO_deepCopyTable(aTable)
 	local tDestTable = { };
-	local tKey, tValue;
 
 	for tKey, tValue in pairs(aTable) do
 		if ("table" == type(tValue)) then
@@ -365,13 +359,9 @@ local VUHDO_isInBattleground = VUHDO_isInBattleground;
 
 -- returns the appropriate addon message channel for player
 function VUHDO_getAddOnDistribution()
-	if (VUHDO_isInBattleground()) then
-		return "BATTLEGROUND";
-	elseif(VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
-		return "RAID";
-	else
-		return "PARTY";
-	end
+	return VUHDO_isInBattleground() and "BATTLEGROUND"
+		or VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType() and "RAID"
+		or "PARTY";
 end
 
 
@@ -406,7 +396,7 @@ end
 
 
 -- returns the raid unit of player eg. "raid13" or "party4"
-local tCnt, tRaidUnit;
+local tRaidUnit;
 function VUHDO_getPlayerRaidUnit()
 	if (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		for tCnt = 1, 40 do
@@ -441,11 +431,9 @@ function VUHDO_getUnitZoneName(aUnit)
 		tZone = GetRealZoneText();
 	elseif (VUHDO_GROUP_TYPE_RAID == VUHDO_getCurrentGroupType()) then
 		tIndex = (VUHDO_RAID[aUnit] or sEmpty)["number"] or 1;
-		_, _, _, _, _, _, tZone, _, _ = GetRaidRosterInfo(tIndex);
+		_, _, _, _, _, _, tZone = GetRaidRosterInfo(tIndex);
 	else
-		if (not VuhDoScanTooltip:IsOwned(VuhDo)) then
-			VuhDoScanTooltip:SetOwner(VuhDo, "ANCHOR_NONE");
-		end
+		VuhDoScanTooltip:SetOwner(VuhDo, "ANCHOR_NONE");
 		VuhDoScanTooltip:ClearLines();
 		VuhDoScanTooltip:SetUnit(aUnit)
 		tZone = VuhDoScanTooltipTextLeft3:GetText();
@@ -454,7 +442,7 @@ function VUHDO_getUnitZoneName(aUnit)
 		end
 	end
 
-	tMap, _, _ = GetMapInfo();
+	tMap = GetMapInfo();
 	return tZone or tMap or VUHDO_I18N_UNKNOWN, tMap;
 end
 
@@ -602,7 +590,6 @@ end
 
 
 --
-local tCnt;
 function VUHDO_strempty(aString)
 	if (aString ~= nil) then
 		for tCnt = 1, strlen(aString) do
@@ -748,7 +735,6 @@ end
 
 --
 function VUHDO_compressAllBouquets()
-	local tName;
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
 		VUHDO_BOUQUETS["STORED"][tName] = VUHDO_compressTable(VUHDO_BOUQUETS["STORED"][tName]);
 	end
@@ -758,7 +744,6 @@ end
 
 --
 function VUHDO_decompressAllBouquets()
-	local tName;
 	for tName, _ in pairs(VUHDO_BOUQUETS["STORED"]) do
 		VUHDO_BOUQUETS["STORED"][tName] = VUHDO_decompressIfCompressed(VUHDO_BOUQUETS["STORED"][tName]);
 	end
@@ -768,10 +753,9 @@ end
 
 --
 function VUHDO_isGlyphed(aGlyphId)
-	local tCnt, tGlyphId;
+	local tGlyphId;
 	for tCnt = 1, GetNumGlyphs() do
-		_, _, _, tGlyphId = GetGlyphSocketInfo(tCnt);
-		if (tGlyphId == aGlyphId) then
+		if (select(4, GetGlyphSocketInfo(tCnt)) == aGlyphId) then
 			return true;
 		end
 	end

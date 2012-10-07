@@ -16,15 +16,15 @@ local strfind = strfind;
 local ipairs = ipairs;
 
 function VUHDO_sizeCalculatorInitBurstVer()
-	VUHDO_CONFIG = VUHDO_GLOBAL["VUHDO_CONFIG"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
+	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 
-	VUHDO_splitString = VUHDO_GLOBAL["VUHDO_splitString"];
-	VUHDO_isTableHeadersShowing = VUHDO_GLOBAL["VUHDO_isTableHeadersShowing"];
-	VUHDO_isTableFootersShowing = VUHDO_GLOBAL["VUHDO_isTableFootersShowing"];
-	VUHDO_isLooseOrderingShowing = VUHDO_GLOBAL["VUHDO_isLooseOrderingShowing"];
-	VUHDO_isConfigPanelShowing = VUHDO_GLOBAL["VUHDO_isConfigPanelShowing"];
-	VUHDO_isTableHeaderOrFooter = VUHDO_GLOBAL["VUHDO_isTableHeaderOrFooter"];
+	VUHDO_splitString = _G["VUHDO_splitString"];
+	VUHDO_isTableHeadersShowing = _G["VUHDO_isTableHeadersShowing"];
+	VUHDO_isTableFootersShowing = _G["VUHDO_isTableFootersShowing"];
+	VUHDO_isLooseOrderingShowing = _G["VUHDO_isLooseOrderingShowing"];
+	VUHDO_isConfigPanelShowing = _G["VUHDO_isConfigPanelShowing"];
+	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
 end
 
 -- BURST CACHE ---------------------------------------------------
@@ -208,12 +208,10 @@ end
 
 
 -- returns the number of buttons that the biggest model has in a given row
-local tModelId;
 local tRow;
 local tGroup;
 local tAktBars, tMaxBars;
 local tPlaceNo;
-local tModelIdx;
 local tPanelModel;
 local function VUHDO_determineGridRowMaxBars(aRowNum, aPanelNum)
 	tPanelModel = VUHDO_PANEL_DYN_MODELS[aPanelNum];
@@ -289,7 +287,6 @@ end
 -- Returns the pixel Y-offset of a given model slot
 local tRowY;
 local tRowNum;
-local tCnt;
 local function VUHDO_getRowPos(aPlaceNum, aPanelNum)
 	tRowY = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["borderGapY"];
 

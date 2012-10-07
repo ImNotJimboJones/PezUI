@@ -26,7 +26,6 @@ end
 
 
 --
-local tCnt;
 function VUHDO_newOptionsAddPanelOnclick()
 	for tCnt = 1, VUHDO_MAX_PANELS do
 		if (VUHDO_PANEL_MODELS[tCnt] == nil) then
@@ -41,11 +40,8 @@ end
 
 
 --
-local tDesignPanel;
-local tPanelNum;
 function VUHDO_newOptionsAddModelOnClick(aButton)
-	tDesignPanel = aButton:GetParent();
-	tPanelNum = VUHDO_getComponentPanelNum(tDesignPanel);
+	local tPanelNum = VUHDO_getComponentPanelNum(aButton:GetParent());
 
 	if (#VUHDO_PANEL_MODELS[tPanelNum] >= 15) then -- VUHDO_MAX_GROUPS_PER_PANEL
 		return;
@@ -53,7 +49,7 @@ function VUHDO_newOptionsAddModelOnClick(aButton)
 
 	VUHDO_CONFIG_SHOW_RAID = false;
 	VUHDO_initDynamicPanelModels();
-	table.insert(VUHDO_PANEL_MODELS[tPanelNum], VUHDO_ID_UNDEFINED);
+	tinsert(VUHDO_PANEL_MODELS[tPanelNum], VUHDO_ID_UNDEFINED);
 	VUHDO_guessUndefinedEntries(tPanelNum);
 	VUHDO_redrawAllPanels();
 end
@@ -61,11 +57,9 @@ end
 
 
 --
-local tDesignPanel;
-local tPanelNum;
 function VUHDO_newOptionsDeleteModelOnClick(aButton)
-	tDesignPanel = aButton:GetParent();
-	tPanelNum = VUHDO_getComponentPanelNum(tDesignPanel);
+	local tDesignPanel = aButton:GetParent();
+	local tPanelNum = VUHDO_getComponentPanelNum(tDesignPanel);
 
 	if (#VUHDO_PANEL_MODELS[tPanelNum] > 0) then
 		DESIGN_MISC_PANEL_NUM = VUHDO_getComponentPanelNum(tDesignPanel);

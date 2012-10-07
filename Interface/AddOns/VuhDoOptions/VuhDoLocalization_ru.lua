@@ -995,17 +995,7 @@ VUHDO_I18N_DEBUFF_LIST = "Список (де)баффов";
 VUHDO_I18N_DEBUFF_EDIT_BOX = "Введите название (де)баффа";
 
 -- #+1.233
-VUHDO_I18N_BUTTON_6 = "Кнопка 6";
-VUHDO_I18N_BUTTON_7 = "Кнопка 7";
-VUHDO_I18N_BUTTON_8 = "Кнопка 8";
-VUHDO_I18N_BUTTON_9 = "Кнопка 9";
-VUHDO_I18N_BUTTON_10 = "Кнопка 10";
-VUHDO_I18N_BUTTON_11 = "Кнопка 11";
-VUHDO_I18N_BUTTON_12 = "Кнопка 12";
-VUHDO_I18N_BUTTON_13 = "Кнопка 13";
-VUHDO_I18N_BUTTON_14 = "Кнопка 14";
-VUHDO_I18N_BUTTON_15 = "Кнопка 15";
-VUHDO_I18N_BUTTON_16 = "Кнопка 16";
+VUHDO_I18N_BUTTON = "Кнопка";
 VUHDO_I18N_TANK_MODE = "Режим\nтанка";
 
 -- #+1.237

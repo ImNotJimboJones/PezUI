@@ -19,15 +19,15 @@ local VUHDO_isConfigDemoUsers;
 local VUHDO_updateBouquetsForEvent;
 local sIsInverted;
 function VUHDO_customManaInitBurst()
-	VUHDO_RAID = VUHDO_GLOBAL["VUHDO_RAID"];
-	VUHDO_getUnitButtons = VUHDO_GLOBAL["VUHDO_getUnitButtons"];
-	VUHDO_IN_RAID_TARGET_BUTTONS = VUHDO_GLOBAL["VUHDO_IN_RAID_TARGET_BUTTONS"];
-	VUHDO_PANEL_SETUP = VUHDO_GLOBAL["VUHDO_PANEL_SETUP"];
-	VUHDO_BUTTON_CACHE = VUHDO_GLOBAL["VUHDO_BUTTON_CACHE"];
+	VUHDO_RAID = _G["VUHDO_RAID"];
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_IN_RAID_TARGET_BUTTONS = _G["VUHDO_IN_RAID_TARGET_BUTTONS"];
+	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
+	VUHDO_BUTTON_CACHE = _G["VUHDO_BUTTON_CACHE"];
 
-	VUHDO_getHealthBar = VUHDO_GLOBAL["VUHDO_getHealthBar"];
-	VUHDO_isConfigDemoUsers = VUHDO_GLOBAL["VUHDO_isConfigDemoUsers"];
-	VUHDO_updateBouquetsForEvent = VUHDO_GLOBAL["VUHDO_updateBouquetsForEvent"];
+	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
+	VUHDO_isConfigDemoUsers = _G["VUHDO_isConfigDemoUsers"];
+	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
 	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["invertGrowth"];
 end
 
@@ -83,7 +83,7 @@ end
 
 
 --
-local tAllButtons, tButton, tManaBar, tHealthBar, tQuota;
+local tAllButtons, tManaBar, tHealthBar, tQuota;
 local tManaBarHeight;
 local tRegularHeight;
 function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
@@ -164,7 +164,7 @@ end
 
 
 --
-local tQuota, tAllButtons, tBar, tButton;
+local tQuota, tAllButtons, tBar;
 function VUHDO_sideBarLeftBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
 		or (aMaxValue or 0) > 1 and aCurrValue / aMaxValue
@@ -187,7 +187,7 @@ end
 
 
 --
-local tQuota, tAllButtons, tBar, tButton;
+local tQuota, tAllButtons, tBar;
 function VUHDO_sideBarRightBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
 		or (aMaxValue or 0) > 1 and aCurrValue / aMaxValue

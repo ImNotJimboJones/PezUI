@@ -25,9 +25,7 @@ end
 
 --
 local function VUHDO_placeAllReadyIcons()
-	local tPanelNum;
 	local tAllButtons;
-	local tButton;
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
 		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
@@ -46,9 +44,7 @@ end
 
 --
 local function VUHDO_hideAllReadyIcons()
-	local tPanelNum;
 	local tAllButtons;
-	local tButton;
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
 		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
@@ -82,7 +78,6 @@ local function VUHDO_updateReadyIcon(aUnit, anIsReady)
 		and "Interface\\AddOns\\VuhDo\\Images\\icon_check_2"
 		or "Interface\\AddOns\\VuhDo\\Images\\icon_cancel_1";
 
-	local tButton;
 	for _, tButton in pairs(tAllButtons) do
 		VUHDO_getBarRoleIcon(tButton, 20):SetTexture(tTexture);
 	end

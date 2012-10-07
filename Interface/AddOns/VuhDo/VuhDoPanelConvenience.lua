@@ -1,4 +1,4 @@
-local _G = getfenv();
+local _G = _G;
 local pairs = pairs;
 local format = format;
 local CreateFrame = CreateFrame;
@@ -334,8 +334,6 @@ end
 
 --
 function VUHDO_resetAllBuffPanels()
-	local tPanel;
-
 	for _, tPanel in pairs(VUHDO_BUFF_SWATCHES) do
 		tPanel:Hide();
 	end
@@ -367,7 +365,6 @@ local tOrderedSwatches = { };
 function VUHDO_getAllBuffSwatchesOrdered()
 	table.wipe(tOrderedSwatches);
 
-	local tSwatch;
 	for _, tSwatch in pairs(VUHDO_BUFF_SWATCHES) do
 		tinsert(tOrderedSwatches, tSwatch);
 	end
@@ -661,7 +658,6 @@ local function VUHDO_fastCacheInitButton(aPanelNum, aButtonNum)
 	VUHDO_BAR_ICON_NAMES[tButton] = { };
 
 	-- HoTs
-	local tCnt;
 	for tCnt = 1, 5 do
 		VUHDO_initIconCounterTimerStacksHoT(tButton, tCnt);
 	end
@@ -704,7 +700,6 @@ end
 
 --
 function VUHDO_initButtonCache()
-	local tCnt;
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		VUHDO_HEAL_BUTTON[tCnt] = { };
 	end
