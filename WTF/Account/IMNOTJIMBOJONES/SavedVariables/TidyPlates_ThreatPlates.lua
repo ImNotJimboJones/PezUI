@@ -42,10 +42,10 @@ ThreatPlatesDB = {
 					["Totem"] = true,
 				},
 				["scale"] = {
-					["Elite"] = 0.7000000476837158,
-					["Boss"] = 0.7000000476837158,
-					["Neutral"] = 0.7000000476837158,
-					["Normal"] = 0.7000000476837158,
+					["Elite"] = 0.75,
+					["Boss"] = 0.75,
+					["Neutral"] = 0.75,
+					["Normal"] = 0.75,
 				},
 			},
 			["comboWidget"] = {
@@ -131,15 +131,17 @@ ThreatPlatesDB = {
 				},
 				["dps"] = {
 					["scale"] = {
-						["LOW"] = 1.1,
-						["HIGH"] = 1.1,
+						["MEDIUM"] = 0.9500000000000001,
+						["LOW"] = 0.75,
+						["HIGH"] = 1.15,
 					},
 				},
 				["useType"] = false,
 				["tank"] = {
 					["scale"] = {
-						["LOW"] = 1.1,
-						["HIGH"] = 0.7000000000000001,
+						["MEDIUM"] = 0.9500000000000001,
+						["LOW"] = 1.15,
+						["HIGH"] = 0.75,
 					},
 				},
 				["useHPColor"] = false,
@@ -150,13 +152,6 @@ ThreatPlatesDB = {
 			["cache"] = {
 			},
 			["settings"] = {
-				["tank"] = {
-					["threatcolor"] = {
-						["HIGH"] = {
-							["a"] = 0,
-						},
-					},
-				},
 				["eliteicon"] = {
 					["scale"] = 16,
 				},
@@ -175,6 +170,9 @@ ThreatPlatesDB = {
 					["threatcolor"] = {
 						["LOW"] = {
 							["a"] = 0,
+							["r"] = 0,
+							["g"] = 0,
+							["b"] = 0,
 						},
 					},
 				},
@@ -187,6 +185,13 @@ ThreatPlatesDB = {
 				["dps"] = {
 					["threatcolor"] = {
 						["LOW"] = {
+							["a"] = 0,
+						},
+					},
+				},
+				["tank"] = {
+					["threatcolor"] = {
+						["HIGH"] = {
 							["a"] = 0,
 						},
 					},

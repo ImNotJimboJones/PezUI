@@ -28,7 +28,7 @@ Auc-Stat-Simple: disabled
 Auc-Stat-StdDev: disabled
 Auc-Util-FixAH: enabled
 Bazooka: enabled
-Bazooka_Options: enabled
+Bazooka_Options: disabled
 BeanCounter: disabled
 BetterExtraActionButton: enabled
 BetterPowerBarAlt: enabled
@@ -52,7 +52,7 @@ GreedyQuester: enabled
 Informant: enabled
 KeyBindingSearch: enabled
 kgPanels: enabled
-kgPanelsConfig: enabled
+kgPanelsConfig: disabled
 LibRangeCheck-2.0: enabled
 LightHeaded: enabled
 LightHeaded_Data_A: enabled
@@ -85,10 +85,10 @@ MogIt_Sets: enabled
 MogIt_TwoHanded: enabled
 MoncaiQuestTracker: enabled
 MoveAnything: enabled
-MSBTOptions: enabled
+MSBTOptions: disabled
 Omen: enabled
 OmniCC: enabled
-OmniCC_Config: enabled
+OmniCC_Config: disabled
 PitBull4: enabled
 PitBull4_AuraBar: enabled
 PitBull4_Aggro: enabled
@@ -191,7 +191,7 @@ TidyPlates_Quatre: disabled
 TidyPlates_ThreatPlates: enabled
 TipTac: enabled
 TipTacItemRef: enabled
-TipTacOptions: enabled
+TipTacOptions: disabled
 TipTacTalents: enabled
 TitanReputation: enabled
 TitanBag: disabled
@@ -212,13 +212,13 @@ VerticalRep: enabled
 VerticalXP: enabled
 Volumizer: enabled
 VuhDo: enabled
-VuhDoOptions: enabled
+VuhDoOptions: disabled
 WhisperWhisper: enabled
 YssDrop: enabled
 shPerformance: enabled
 DETrackingBroker: enabled
 DBM-Core: enabled
-DBM-GUI: enabled
+DBM-GUI: disabled
 DBM-BaradinHold: enabled
 DBM-BastionTwilight: enabled
 DBM-BlackTemple: enabled
@@ -282,7 +282,7 @@ MrTrader_Profit: enabled
 MrTrader_SkillWindow: enabled
 Gimplist: enabled
 AtlasLoot_MistsofPandaria: enabled
-MountFilter-Config: enabled
+MountFilter-Config: disabled
 MountFilter-Filter: enabled
 MountFilter-Search: enabled
 TipTacMogIt: enabled
@@ -290,4 +290,4 @@ Overachiever: enabled
 Overachiever_Tabs: enabled
 Overachiever_Trade: enabled
 NeedToKnow: enabled
-ZygorGuidesViewer: enabled
+ZygorGuidesViewer: disabled
