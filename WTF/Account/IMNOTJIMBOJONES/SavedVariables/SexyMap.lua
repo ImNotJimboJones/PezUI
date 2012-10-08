@@ -45,8 +45,8 @@ SexyMap2DB = {
 				["VuhDoMinimapButton"] = "never",
 			},
 			["dragPositions"] = {
-				["MiniMapMailFrame"] = 242.128462599028,
-				["GameTimeFrame"] = -64.97835812452492,
+				["MiniMapMailFrame"] = 247.9883862463845,
+				["GameTimeFrame"] = -88.09350046440254,
 				["QueueStatusMinimapButton"] = 164.3861819550428,
 			},
 			["controlVisibility"] = true,
