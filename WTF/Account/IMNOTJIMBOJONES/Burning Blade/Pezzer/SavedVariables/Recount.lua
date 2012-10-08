@@ -28,12 +28,12 @@ RecountPerCharDB = {
 			},
 			["Owner"] = false,
 			["enClass"] = "UNGROUPED",
-			["LastAbility"] = 797862.282,
+			["LastAbility"] = 88850.97900000001,
 			["Name"] = "Plagueburger",
+			["UnitLockout"] = 1349382214,
 			["Pet"] = {
 				"Storm Scarab <Plagueburger>", -- [1]
 			},
-			["UnitLockout"] = 1349382214,
 			["level"] = 1,
 			["Fights"] = {
 			},
