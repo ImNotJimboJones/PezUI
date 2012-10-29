@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r128 | mitch0 | 2012-10-24 18:35:14 +0000 (Wed, 24 Oct 2012) | 1 line
+Changed paths:
+   A /tags/v3.7.1 (from /trunk:127)
+
+Tagging as v3.7.1
+------------------------------------------------------------------------
+r127 | mitch0 | 2012-10-24 18:28:55 +0000 (Wed, 24 Oct 2012) | 1 line
+Changed paths:
+   M /trunk/LibRangeCheck-2.0/LibRangeCheck-2.0.lua
+
+Use Goblin Rocket Launcher instead of Wrangling Rope for 45yd HarmItem, Wrangling Rope seems to be bugged for some mobs
+------------------------------------------------------------------------

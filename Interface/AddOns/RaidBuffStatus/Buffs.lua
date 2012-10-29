@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 551 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 556 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -2167,7 +2167,7 @@ local BF = {
 			RaidBuffStatus:DefaultButtonUpdate(self, report.runescrollfortitudelist, RaidBuffStatus.db.profile.checkrunescrollfortitude, report.checking.runescrollfortitude or false, RaidBuffStatus.BF.runescrollfortitude:buffers())
 		end,
 		click = function(self, button, down)
-			local scroll = ITN[79297] -- Runescroll of Fortitude III
+			local scroll = ITN[79257] -- Runescroll of Fortitude III
 			if not RaidBuffStatus:GotReagent(scroll) then -- use the best available
 			  scroll = ITN[62251] -- Runescroll of Fortitude II
 			end
@@ -2353,6 +2353,45 @@ local BF = {
 		partybuff = nil,
 	},
 
+
+	symbiosis = {
+		order = 392,
+		list = "symbiosislist",
+		check = "checksymbiosis",
+		default = true,
+		defaultbuff = true,
+		defaultwarning = false,
+		defaultdash = true,
+		defaultdashcombat = false,
+		defaultboss = true,
+		defaulttrash = true,
+		checkzonedout = false,
+		selfbuff = true,
+		selfonlybuff = true,
+		timer = false,
+		class = { DRUID = true, },
+		chat = BS[110309], -- Symbiosis
+		main = function(self, name, class, unit, raid, report)
+			if class == "DRUID" then
+				report.checking.symbiosis = true
+				if not unit.hasbuff[BS[110309]] then -- symbiosis
+					table.insert(report.symbiosislist, name)
+				end
+			end
+		end,
+		post = nil,
+		icon = BSI[110309], -- Symbiosis
+		update = function(self)
+			RaidBuffStatus:DefaultButtonUpdate(self, report.symbiosislist, RaidBuffStatus.db.profile.checksymbiosis, report.checking.symbiosis or false, report.symbiosislist)
+		end,
+		click = function(self, button, down)
+			RaidBuffStatus:ButtonClick(self, button, down, "symbiosis")
+		end,
+		tip = function(self)
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[110309], report.symbiosislist) -- Symbiosis
+		end,
+		partybuff = nil,
+	},
 
 	innerfire = {
 		order = 390,

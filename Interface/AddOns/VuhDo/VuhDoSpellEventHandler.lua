@@ -26,7 +26,7 @@ function VUHDO_spellEventHandlerInitBurst()
 	VUHDO_RAID_NAMES = _G["VUHDO_RAID_NAMES"];
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 
-	sIsShowGcd = VUHDO_CONFIG["IS_SHOW_GCD"];
+	sIsShowGcd = VUHDO_isShowGcd();
 
 	table.wipe(sUniqueSpells);
 	local tUnique, tUniqueCategs = VUHDO_getAllUniqueSpells();

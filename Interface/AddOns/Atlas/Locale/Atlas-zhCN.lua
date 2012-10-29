@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-zhCN.lua 1685 2012-09-22 16:27:46Z ananhaid $
+﻿-- $Id: Atlas-zhCN.lua 1813 2012-10-10 10:59:24Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -91,6 +91,8 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "按下 Ctrl 显示弹出工具说明";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "勾选后当鼠标移到地图信息字段时，按下 Ctrl 控制键，则会将信息的完整信息以提示型态显示。当信息过长而被截断时很有用。";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "不再显示相同信息。";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "提醒我是否有遗失的模块或插件";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "勾选以在每次登入 WoW 时检查是否有遗失的 Atlas 模块或插件。";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "关闭";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
@@ -144,7 +146,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "确定";
 
 	AL["ATLAS_INFO"] = "Atlas 信息";
-	AL["ATLAS_INFO_SPTACK"] = "重要提示：\n\n由于增加插件文件大小的关注，我们移出\n部分地下城地图和内置插件到单独模块。\n\n用户可以从各大知名的游戏站点下载我们\n的插件可能只包含了 Atlas 核心功能以及\n大灾变地图。\n\n用户如果想下载全部旧地下城地图和全部\n我们制作的 Atlas 其他模块需要单独下载。\n\n阅读更多信息在下面的论坛主题：\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12200"] = "重要提示：\n\n由于增加插件文件大小的关注，我们移出\n部分地下城地图和内置插件到单独模块。\n\n用户可以从各大知名的游戏站点下载我们\n的插件可能只包含了 Atlas 核心功能以及\n大灾变地图。\n\n用户如果想下载全部旧地下城地图和全部\n我们制作的 Atlas 其他模块需要单独下载。\n\n阅读更多信息在下面的论坛主题：\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12201"] = "我们最近新增了一个新的 Atlas 插件 - |cff6666ffAtlas 情景战役|cffffffff，用以提供 WoW 5.0 \n起新增的情景战役的地图。\n\n请详见我们的网站以取得更详细的信息，并请记得分别下载并安装此插件。\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+
+	AL["ATLAS_MISSING_MODULE"] = "Atlas 已侦测到遗失的模块/插件：";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -500,10 +505,12 @@ if AL then
 
 	--Maraudon	
 	AL["Elder Splitrock"] = "碎石长者";
+	AL["Celebras the Redeemed"] = "赎罪的塞雷布拉斯";
 
 	--Ragefire Chasm
 	AL["Commander Bagran"] = "指挥官巴格兰";
 	AL["Invoker Xorenth"] = "祈求者克索伦斯";
+	AL["Scout Cage"] = "斥候牢笼";
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "克莉丝塔萨";
@@ -615,11 +622,24 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Commander Lindon"] = "指挥官林顿";
+	AL["Hooded Crusader"] = "蒙面的十字军战士";
+	AL["Bucket of Meaty Dog Food"] = "一桶多肉狗食";
+	AL["Reinforced Archery Target"] = "强固箭靶";
+
+	--Scarlet Monastery
+
 	--Scholomance
 	AL["Instructor Chillheart's Phylactery"] = "指导者寒心的护命匣";
-	AL["Coffer of Forgotten Souls"] = "失落灵魂容器";
 	AL["Professor Slate"] = "斯雷特教授";
 	AL["Polyformic Acid Potion"] = "蚁酸药水";
+	AL["Talking Skull"] = "缚魂魔袋";
+	AL["In the Shadow of the Light"] = "光明下的阴影";
+	AL["Kel'Thuzad's Deep Knowledge"] = "克尔苏加德的深层知识";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "禁忌咒文及其他死灵仪式";
+	AL["Coffer of Forgotten Souls"] = "失落灵魂容器";
+	AL["The Dark Grimoire"] = "黑暗法典";
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "药剂师三人组";
@@ -631,12 +651,6 @@ if AL then
 	AL["Haunted Stable Hand"] = "鬼怪马夫";
 	AL["Investigator Fezzen Brasstacks"] = "调查员费岑·布莱斯塔克";
 
-	--SM: Cathedral
-
-	--SM: Halls
-	AL["Hunter Commander"] = "指挥官林顿";
-	AL["Reinforced Archery Target"] = "强固箭靶";
-
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "十字军指挥官埃里戈尔·黎明使者 <圣光兄弟会>";
 	AL["Master Craftsman Wilhelm <Brotherhood of the Light>"] = "工匠大师威尔海姆 <圣光兄弟会>";
@@ -647,7 +661,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "节日小道邮箱";
 	AL["Elder Farwhisper"] = "远风长者";
 	AL["Market Row Postbox"] = "市场邮箱";
-	AL["Crusaders' Square Postbox"] = "十字军广场邮箱";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "长者广场邮箱";
@@ -1160,24 +1173,28 @@ if AL then
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "女射手李琪薇 <守卫队长>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "梦想家思南";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
-	
-	--Scarlet Halls
-	AL["Hooded Crusader"] = "蒙面的十字军战士";
-	AL["Bucket of Meaty Dog Food"] = "一桶多肉狗食"; --
+	AL["Ban Bearheart"] = "班·熊心";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "影踪大师楚秋";
 
 	--Stormstout Brewery
+	AL["Auntie Stormstout"] = "风暴烈酒大婶";
+	AL["Chen Stormstout"] = "陈·风暴烈酒";
 
 	--Temple of the Jade Serpent
+	AL["Master Windstrong"] = "风涌大师";
+	AL["Priestess Summerpetal"] = "女牧师夏蕊";
 
 	--Terrace of Endless Spring
 

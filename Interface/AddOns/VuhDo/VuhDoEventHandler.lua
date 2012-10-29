@@ -37,7 +37,7 @@ local VUHDO_getUnitZoneName;
 local VUHDO_updateClusterHighlights;
 local VUHDO_updateCustomDebuffTooltip;
 local VUHDO_getCurrentMouseOver;
---local VUHDO_UIFrameFlash_OnUpdate;
+local VUHDO_UIFrameFlash_OnUpdate = function() end;
 
 local GetTime = GetTime;
 local CheckInteractDistance = CheckInteractDistance;
@@ -97,12 +97,12 @@ local function VUHDO_eventHandlerInitBurst()
 	VUHDO_updateClusterHighlights = _G["VUHDO_updateClusterHighlights"];
 	VUHDO_updateCustomDebuffTooltip = _G["VUHDO_updateCustomDebuffTooltip"];
 	VUHDO_getCurrentMouseOver = _G["VUHDO_getCurrentMouseOver"];
-	--VUHDO_UIFrameFlash_OnUpdate = _G["VUHDO_UIFrameFlash_OnUpdate"];
+	VUHDO_UIFrameFlash_OnUpdate = _G["VUHDO_UIFrameFlash_OnUpdate"];
 
 	sRangeSpell = VUHDO_CONFIG["RANGE_SPELL"] or "*foo*";
 	sIsHealerMode = not VUHDO_CONFIG["THREAT"]["IS_TANK_MODE"];
 	sIsRangeKnown = not VUHDO_CONFIG["RANGE_PESSIMISTIC"] and GetSpellInfo(sRangeSpell) ~= nil;
-	sIsDirectionArrow = VUHDO_CONFIG["DIRECTION"]["enable"];
+	sIsDirectionArrow = VUHDO_isShowDirectionArrow();
 	sShowShieldAbsorb = VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["showShieldAbsorb"];
 
 	sHotToggleUpdateSecs = VUHDO_CONFIG["UPDATE_HOTS_MS"] * 0.00033;
@@ -200,13 +200,13 @@ local tEmpty = {};
 local function VUHDO_updateThreat(aUnit)
 	tInfo = (VUHDO_RAID or tEmpty)[aUnit];
 	if (tInfo ~= nil) then
-		tInfo["threat"] = UnitThreatSituation(aUnit);
+		tInfo["threat"] = UnitThreatSituation(aUnit) or 0;
 
 		if (VUHDO_INTERNAL_TOGGLES[17]) then -- VUHDO_UPDATE_THREAT_LEVEL
 			VUHDO_updateBouquetsForEvent(aUnit, 17); -- VUHDO_UPDATE_THREAT_LEVEL
 		end
 
-		tIsAggroed = VUHDO_INTERNAL_TOGGLES[7] and (tInfo["threat"] or 0) >= 2; -- VUHDO_UPDATE_AGGRO
+		tIsAggroed = VUHDO_INTERNAL_TOGGLES[7] and tInfo["threat"] >= 2; -- VUHDO_UPDATE_AGGRO
 
 		if (tIsAggroed ~= tInfo["aggro"]) then
 			tInfo["aggro"] = tIsAggroed;
@@ -336,7 +336,7 @@ local function VUHDO_init()
 	VUHDO_initFuBar();
 	VUHDO_initButtonFacade(VUHDO_INSTANCE);
 	--VUHDO_checkForTroublesomeAddons();
-	VUHDO_initBlizzFrames();
+	VUHDO_initHideBlizzFrames();
 	if (not InCombatLockdown()) then
 		VUHDO_initKeyboardMacros();
 	end
@@ -362,13 +362,9 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 
 	if ("COMBAT_LOG_EVENT_UNFILTERED" == anEvent) then
 		if (VUHDO_VARIABLES_LOADED) then
-			--VUHDO_traceCombatLog(anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg15);
 			VUHDO_parseCombatLogEvent(anArg2, anArg8, anArg11, anArg13, anArg15);
 			if (sShowShieldAbsorb) then
 				VUHDO_parseCombatLogShieldAbsorb(anArg2, anArg4, anArg8, anArg13, anArg16, anArg12, anArg17);
-				--[[if ("SPELL_AURA_REFRESH" == anArg2) then
-					VUHDO_xMsg(anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16, anArg17);
-				end]]
 			end
 		end
 	elseif ("UNIT_AURA" == anEvent) then
@@ -384,7 +380,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 			VUHDO_updateHealth(anArg1, 9); -- VUHDO_UPDATE_INC
 			VUHDO_updateBouquetsForEvent(anArg1, 9); -- VUHDO_UPDATE_ALT_POWER
 		end
-	elseif ("UNIT_POWER" == anEvent) then
+	elseif ("UNIT_POWER" == anEvent or "UNIT_POWER_FREQUENT" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			if ("LIGHT_FORCE" == anArg2 or "DARK_FORCE" == anArg2) then
 				if ("player" == anArg1) then
@@ -454,7 +450,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 
 	elseif ("UNIT_ENTERED_VEHICLE" == anEvent
 		or "UNIT_EXITED_VEHICLE" == anEvent
-		or "UNIT_EXITING_VEHICLE" == anEvent ) then
+		or "UNIT_EXITING_VEHICLE" == anEvent) then
 		VUHDO_REMOVE_HOTS = false;
 		VUHDO_normalRaidReload();
 	elseif ("RAID_TARGET_UPDATE" == anEvent) then
@@ -509,12 +505,14 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 			VUHDO_initKeyboardMacros();
 		end
 	elseif ("PLAYER_TARGET_CHANGED" == anEvent) then
-		VUHDO_updatePlayerTarget();
-		VUHDO_updateTargetBars("player");
-		VUHDO_updateBouquetsForEvent("player", 22); -- VUHDO_UPDATE_UNIT_TARGET
-		VUHDO_updateTargetBars("target");
-		VUHDO_updateBouquetsForEvent("target", 22); -- VUHDO_UPDATE_UNIT_TARGET
-		VUHDO_updatePanelVisibility();
+		if (VUHDO_VARIABLES_LOADED) then
+			VUHDO_updatePlayerTarget();
+			VUHDO_updateTargetBars("player");
+			VUHDO_updateBouquetsForEvent("player", 22); -- VUHDO_UPDATE_UNIT_TARGET
+			VUHDO_updateTargetBars("target");
+			VUHDO_updateBouquetsForEvent("target", 22); -- VUHDO_UPDATE_UNIT_TARGET
+			VUHDO_updatePanelVisibility();
+		end
 	elseif ("CHAT_MSG_ADDON" == anEvent) then
 		if (VUHDO_VARIABLES_LOADED) then
 			VUHDO_parseAddonMessage(anArg1, anArg2, anArg4);
@@ -550,10 +548,6 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		if (VuhDoTooltip:IsShown()) then
 			VUHDO_updateTooltip();
 		end
-	--[[elseif("ACTIONBAR_SLOT_CHANGED" == anEvent) then
-		if ((anArg1 or 0) >= 133 and anArg1 <= 136 and "SHAMAN" == VUHDO_PLAYER_CLASS) then
-			VUHDO_setTotemSlotTo(anArg1);
-		end]]
 	elseif("PLAYER_LOGOUT" == anEvent) then
 		VUHDO_compressAllBouquets();
 	elseif("UNIT_NAME_UPDATE" == anEvent) then
@@ -603,11 +597,7 @@ end
 local function VUHDO_setPanelsVisible(anIsVisible)
 	if (not InCombatLockdown()) then
 		VUHDO_CONFIG["SHOW_PANELS"] = anIsVisible;
-		if (anIsVisible) then
-			VUHDO_Msg(VUHDO_I18N_PANELS_SHOWN);
-		else
-			VUHDO_Msg(VUHDO_I18N_PANELS_HIDDEN);
-		end
+		VUHDO_Msg(anIsVisible and VUHDO_I18N_PANELS_SHOWN or VUHDO_I18N_PANELS_HIDDEN);
 		VUHDO_redrawAllPanels();
 		VUHDO_saveCurrentProfile();
 	else
@@ -680,10 +670,7 @@ function VUHDO_slashCmd(aCommand)
 			VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] = nil;
 		end
 		VUHDO_BUFF_SETTINGS["CONFIG"]["POSITION"] = {
-			["x"] = 100,
-			["y"] = -100,
-			["point"] = "TOPLEFT",
-			["relativePoint"] = "TOPLEFT",
+			["x"] = 100, ["y"] = -100, ["point"] = "TOPLEFT", ["relativePoint"] = "TOPLEFT",
 		};
 		VUHDO_loadDefaultPanelSetup();
 		VUHDO_reloadUI();
@@ -776,26 +763,44 @@ end
 
 
 --
+local function VUHDO_UnRegisterEvent(aCondition, ...)
+	local tEvent;
+	for tCnt = 1, select("#", ...) do
+		tEvent = select(tCnt, ...);
+
+		if ("UNIT_POWER_FREQUENT" == tEvent and aCondition) then
+			VUHDO_INSTANCE:RegisterUnitEvent(tEvent, "player");
+		else
+			if (aCondition) then
+				VUHDO_INSTANCE:RegisterEvent(tEvent);
+			else
+				VUHDO_INSTANCE:UnregisterEvent(tEvent);
+			end
+		end
+	end
+end
+
+
+
+--
 function VUHDO_updateGlobalToggles()
 	if (VUHDO_INSTANCE == nil) then
 		return;
 	end
 
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_LEVEL] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_THREAT_LEVEL);
-	if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_LEVEL] or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_AGGRO)) then
-		VUHDO_INSTANCE:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE");
-	else
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_THREAT_SITUATION_UPDATE");
-	end
+
+	VUHDO_UnRegisterEvent(VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_LEVEL]
+		or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_AGGRO),
+		"UNIT_THREAT_SITUATION_UPDATE"
+	);
 
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_PERC] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_THREAT_PERC);
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AGGRO] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_AGGRO);
 
-	if (not VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_PERC] and not VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AGGRO]) then
-		VUHDO_TIMERS["UPDATE_AGGRO"] = -1;
-	else
-		VUHDO_TIMERS["UPDATE_AGGRO"] = 1;
-	end
+	VUHDO_TIMERS["UPDATE_AGGRO"] =
+		 (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_THREAT_PERC] or VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AGGRO])
+		 and 1 or -1;
 
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_NUM_CLUSTER] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_NUM_CLUSTER);
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER_CLUSTER] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MOUSEOVER_CLUSTER);
@@ -804,14 +809,9 @@ function VUHDO_updateGlobalToggles()
 	if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_NUM_CLUSTER]
 	 or VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER_CLUSTER]
 	 or VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE]
-	 or (VUHDO_CONFIG["DIRECTION"]["enable"] and VUHDO_CONFIG["DIRECTION"]["isDistanceText"])) then
+	 or (VUHDO_isShowDirectionArrow() and VUHDO_CONFIG["DIRECTION"]["isDistanceText"])) then
 		VUHDO_TIMERS["UPDATE_CLUSTERS"] = 1;
-
-		if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE]) then
-			VUHDO_TIMERS["UPDATE_AOE"] = 1;
-		else
-			VUHDO_TIMERS["UPDATE_AOE"] = -1;
-		end
+		VUHDO_TIMERS["UPDATE_AOE"] = VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE] and 1 or -1;
 	else
 		VUHDO_TIMERS["UPDATE_CLUSTERS"] = -1;
 		VUHDO_TIMERS["UPDATE_AOE"] = -1;
@@ -820,17 +820,14 @@ function VUHDO_updateGlobalToggles()
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MOUSEOVER);
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER_GROUP] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MOUSEOVER_GROUP);
 
-	if (VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MANA)
-	 or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_OTHER_POWERS)
-	 or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ALT_POWER)) then
-		VUHDO_INSTANCE:RegisterEvent("UNIT_DISPLAYPOWER");
-		VUHDO_INSTANCE:RegisterEvent("UNIT_MAXPOWER");
-		VUHDO_INSTANCE:RegisterEvent("UNIT_POWER");
-	else
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_DISPLAYPOWER");
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_MAXPOWER");
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_POWER");
-	end
+	VUHDO_UnRegisterEvent(
+		VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MANA)
+	 	or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_OTHER_POWERS)
+	 	or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ALT_POWER)
+	 	or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_OWN_HOLY_POWER)
+	 	or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_CHI),
+		"UNIT_DISPLAYPOWER", "UNIT_MAXPOWER", "UNIT_POWER", "UNIT_POWER_FREQUENT"
+	);
 
 	if (VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_UNIT_TARGET)) then
 		VUHDO_INSTANCE:RegisterEvent("UNIT_TARGET");
@@ -842,52 +839,24 @@ function VUHDO_updateGlobalToggles()
 		VUHDO_TIMERS["REFRESH_TARGETS"] = -1;
 	end
 
-	if (VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ALT_POWER)) then
-		VUHDO_INSTANCE:RegisterEvent("UNIT_POWER_BAR_SHOW");
-		VUHDO_INSTANCE:RegisterEvent("UNIT_POWER_BAR_HIDE");
-	else
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_POWER_BAR_SHOW");
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_POWER_BAR_HIDE");
-	end
+	VUHDO_UnRegisterEvent(VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_ALT_POWER),
+		"UNIT_POWER_BAR_SHOW", "UNIT_POWER_BAR_HIDE");
 
-	if (VUHDO_CONFIG["IS_SCAN_TALENTS"]) then
-		VUHDO_TIMERS["REFRESH_INSPECT"] = 1;
-	else
-		VUHDO_TIMERS["REFRESH_INSPECT"] = -1;
-	end
+	VUHDO_TIMERS["REFRESH_INSPECT"] = VUHDO_CONFIG["IS_SCAN_TALENTS"] and 1 or -1
 
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PETS]
 		= VUHDO_isModelConfigured(VUHDO_ID_PETS)
 		or VUHDO_isModelConfigured(VUHDO_ID_SELF_PET); -- Event nicht deregistrieren => Problem mit manchen Vehikeln
 
-	if (VUHDO_isModelConfigured(VUHDO_ID_PRIVATE_TANKS) and not VUHDO_CONFIG["OMIT_TARGET"]) then
-		VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PLAYER_TARGET] = true;
-	else
-		VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PLAYER_TARGET] = false;
-	end
+	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PLAYER_TARGET]
+		= VUHDO_isModelConfigured(VUHDO_ID_PRIVATE_TANKS) and not VUHDO_CONFIG["OMIT_TARGET"]
 
-	if (VUHDO_CONFIG["SHOW_INCOMING"] or VUHDO_CONFIG["SHOW_OWN_INCOMING"]) then
-		VUHDO_INSTANCE:RegisterEvent("UNIT_HEAL_PREDICTION");
-	else
-		VUHDO_INSTANCE:UnregisterEvent("UNIT_HEAL_PREDICTION");
-	end
+	VUHDO_UnRegisterEvent(VUHDO_CONFIG["SHOW_INCOMING"] or VUHDO_CONFIG["SHOW_OWN_INCOMING"],
+		"UNIT_HEAL_PREDICTION");
+	VUHDO_UnRegisterEvent(VUHDO_CONFIG["PARSE_COMBAT_LOG"], "COMBAT_LOG_EVENT_UNFILTERED");
 
-	if (VUHDO_CONFIG["PARSE_COMBAT_LOG"]) then
-		VUHDO_INSTANCE:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
-	else
-		VUHDO_INSTANCE:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
-	end
-
-	if (VUHDO_CONFIG["IS_READY_CHECK_DISABLED"]) then
-		VUHDO_INSTANCE:UnregisterEvent("READY_CHECK");
-		VUHDO_INSTANCE:UnregisterEvent("READY_CHECK_CONFIRM");
-		VUHDO_INSTANCE:UnregisterEvent("READY_CHECK_FINISHED");
-	else
-		VUHDO_INSTANCE:RegisterEvent("READY_CHECK");
-		VUHDO_INSTANCE:RegisterEvent("READY_CHECK_CONFIRM");
-		VUHDO_INSTANCE:RegisterEvent("READY_CHECK_FINISHED");
-	end
-
+	VUHDO_UnRegisterEvent(not VUHDO_CONFIG["IS_READY_CHECK_DISABLED"],
+		"READY_CHECK", "READY_CHECK_CONFIRM", "READY_CHECK_FINISHED");
 end
 
 
@@ -989,8 +958,7 @@ local function VUHDO_updateAllRange()
 				 and (1 == IsSpellInRange(sRangeSpell, tUnit)
 							or ((tInfo["dead"] or tInfo["charmed"]) and tInfo["baseRange"])
 							or "player" == tUnit
-							or ((tUnit == "focus" or tUnit == "target")
-								and UnitIsTrivial(tUnit) and CheckInteractDistance(tUnit, 1) or tInfo["baseRange"])
+							or ((tUnit == "focus" or tUnit == "target")	and CheckInteractDistance(tUnit, 1))
 						 );
 		else
 			tIsInRange
@@ -1001,10 +969,10 @@ local function VUHDO_updateAllRange()
 						 );
 		end
 
-		-- 3.9 Namen nach roster change manchmal nicht aktuell?
-		if (tInfo["name"] ~= UnitName(tUnit) and not VUHDO_isReloadPending()) then
+		-- 3.9 Namen nach roster change manchmal nicht aktuell? 3.17: Rausgenommen, scheint manchmal periodisch zu zünden
+		--[[[if (UnitExists(tUnit) and tInfo["name"] ~= UnitName(tUnit) and not VUHDO_isReloadPending()) then
 			VUHDO_quickRaidReload();
-		end
+		end]]
 
 		if (tInfo["range"] ~= tIsInRange) then
 			tInfo["range"] = tIsInRange;
@@ -1101,8 +1069,9 @@ local function VUHDO_doReloadRoster(anIsQuick)
 				VUHDO_RELOAD_AFTER_BATTLE = true;
 
 				VUHDO_IS_RELOADING = true;
-				VUHDO_updateAllRaidBars();
-				VUHDO_initAllEventBouquets();
+
+				--VUHDO_updateAllRaidBars(); -- RefreshRaid Members behält nicht existierende Units
+				--VUHDO_initAllEventBouquets();
 
 				VUHDO_refreshRaidMembers();
 
@@ -1118,7 +1087,7 @@ local function VUHDO_doReloadRoster(anIsQuick)
 					VUHDO_IS_RELOAD_BUFFS = false;
 				end
 
-				VUHDO_initBlizzRaid(); -- Scheint bei betreten eines Raids von aussen getriggert zu werden.
+				VUHDO_initHideBlizzRaid(); -- Scheint bei betreten eines Raids von aussen getriggert zu werden.
 			end
 		end
 
@@ -1240,7 +1209,6 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 			VUHDO_updateAllPanelBars(VUHDO_RELOAD_PANEL_NUM);
 			VUHDO_buildGenericHealthBarBouquet();
 			VUHDO_buildGenericTargetHealthBouquet();
-			collectgarbage('collect');
 			VUHDO_registerAllBouquets(false);
 			VUHDO_initAllEventBouquets();
 			VUHDO_PROHIBIT_REPOS = false;
@@ -1453,7 +1421,6 @@ local VUHDO_ALL_EVENTS = {
 	"MODIFIER_STATE_CHANGED",
 	"UNIT_CONNECTION",
 	"UNIT_HEAL_PREDICTION",
-	--"ACTIONBAR_SLOT_CHANGED",
 	"UNIT_POWER_BAR_SHOW","UNIT_POWER_BAR_HIDE",
 	"UNIT_NAME_UPDATE",
 	"LFG_PROPOSAL_SHOW", "LFG_PROPOSAL_FAILED", "LFG_PROPOSAL_SUCCEEDED",
@@ -1480,6 +1447,8 @@ function VUHDO_OnLoad(anInstance)
 	for _, tEvent in pairs(VUHDO_ALL_EVENTS) do
 		anInstance:RegisterEvent(tEvent);
 	end
+	--anInstance:RegisterUnitEvent("UNIT_POWER_FREQUENT", "player");
+
 	VUHDO_ALL_EVENTS = nil;
 
 	SLASH_VUHDO1 = "/vuhdo";

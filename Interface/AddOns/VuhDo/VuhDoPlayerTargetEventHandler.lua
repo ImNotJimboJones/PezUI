@@ -76,6 +76,7 @@ function VUHDO_updatePlayerTarget()
 			VUHDO_removeHots("target");
 			VUHDO_removeAllDebuffIcons("target");
 			VUHDO_updateTargetBars("target");
+			table.wipe(VUHDO_RAID["target"] or tEmptyInfo);
 			VUHDO_RAID["target"] = nil;
 		end
 

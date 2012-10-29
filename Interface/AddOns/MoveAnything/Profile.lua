@@ -2,6 +2,15 @@ local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
 local _
 
+local DeleteThatFrameOpt = {
+	["GroupLootFrame1"]    = true,
+	["GroupLootFrame2"]    = true,
+	["GroupLootFrame3"]    = true,
+	["GroupLootFrame4"]    = true,
+	["WatchFrame"]		   = true,
+	["LootWonAlertFrame1"] = true,
+}
+
 StaticPopupDialogs["MOVEANYTHING_PROFILE_RESET_CONFIRM"] = {
 	preferredIndex = 3,
 	text = MOVANY.PROFILE_RESET_CONFIRM,
@@ -259,6 +268,14 @@ function MovAny:UpdateProfile()
 	end
 	self:SyncAllFrames(true)
 	self:UpdateGUIIfShown(true)
+end
+
+function MovAny:RemoveUnavalibleFrames()
+	for k, v in pairs(MADB.profiles[self:GetProfileName()].frames) do
+		if DeleteThatFrameOpt[k] then
+			wipe(MADB.profiles[self:GetProfileName()].frames[k]) -- = nil
+		end
+	end
 end
 
 function MovAny:ChangeProfile(profile)

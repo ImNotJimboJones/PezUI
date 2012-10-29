@@ -89,6 +89,9 @@ local MovAny = {
 		UIParent = "UIParent",
 		WorldFrame = "WorldFrame",
 		CinematicFrame = "CinematicFrame",
+		PlayerTalentFrame = "PlayerTalentFrame",
+		PetBattleFrame = "PetBattleFrame",
+		WatchFrame = "WatchFrame",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -152,6 +155,7 @@ local MovAny = {
 		ConsolidatedBuffs = "PlayerBuffsMover",
 		BuffFrame = "PlayerBuffsMover",
 		Minimap = "MinimapCluster",
+		Boss = "PlayerPowerBarAltMover",
 	},
 	lTranslateSec = {
 		BuffFrame = "PlayerBuffsMover",
@@ -166,6 +170,8 @@ local MovAny = {
 		ChatFrame8EditBox = "ChatEditBoxesMover",
 		ChatFrame9EditBox = "ChatEditBoxesMover",
 		ChatFrame10EditBox = "ChatEditBoxesMover",
+		WatchFrame = "WatchFrameMover",
+	--	LootWonAlertFrame1 = "LootWonAlertMover1",
 	},
 	lTransContainerToBag = {
 		ContainerFrame1 = "BagFrame1",
@@ -237,9 +243,9 @@ local MovAny = {
 		ReputationWatchBar = "UIParent",
 		MainMenuExpBar = "UIParent",
 		TimeManagerClockButton = "UIParent",
-		--[[VehicleMenuBarHealthBar = "UIParent",
-		VehicleMenuBarLeaveButton = "UIParent",
-		VehicleMenuBarPowerBar = "UIParent",]]
+		OverrideMenuBarHealthBar = "UIParent",
+		OverrideMenuBarLeaveButton = "UIParent",
+		OverrideMenuBarPowerBar = "UIParent",
 		MultiCastActionBarFrame = "UIParent",
 		MainMenuBarRightEndCap = "UIParent",
 		MainMenuBarMaxLevelBar = "UIParent",
@@ -267,18 +273,23 @@ local MovAny = {
 		ArenaEnemyFrame3PetFrame = "ArenaEnemyFrame3",
 		ArenaEnemyFrame4PetFrame = "ArenaEnemyFrame4",
 		ArenaEnemyFrame5PetFrame = "ArenaEnemyFrame5",
+		LootWonAlertFrame1 = "LootWonAlertMover1"
 	},
 	NoReparent = {
 		TargetFrameSpellBar = "TargetFrameSpellBar",
 		FocusFrameSpellBar = "FocusFrameSpellBar",
-	--[[	VehicleMenuBarHealthBar = "VehicleMenuBarHealthBar",
-		VehicleMenuBarLeaveButton = "VehicleMenuBarLeaveButton",
-		VehicleMenuBarPowerBar = "VehicleMenuBarPowerBar",]]
+		OverrideMenuBarHealthBar = "OverrideMenuBarHealthBar",
+		OverrideMenuBarLeaveButton = "OverrideMenuBarLeaveButton",
+		OverrideMenuBarPowerBar = "OverrideMenuBarPowerBar",
 		PaladinPowerBar = "PaladinPowerBar",
 		ShardBarFrame = "ShardBarFrame",
 		EclipseBarFrame = "EclipseBarFrame",
 		PriestBarFrame = "PriestBarFrame",
 		MonkHarmonyBar = "MonkHarmonyBar",
+	--	GroupLootFrame1 = "GroupLootFrame1",
+	--	GroupLootFrame2 = "GroupLootFrame2",
+	--	GroupLootFrame3 = "GroupLootFrame3",
+	--	GroupLootFrame4 = "GroupLootFrame4",
 	},
 	NoUnanchoring = {
 		BuffFrame = "BuffFrame",
@@ -298,8 +309,12 @@ local MovAny = {
 		TargetFrameToTDebuffsMover = "TargetFrameToTDebuffsMover",
 		TemporaryEnchantFrame = "TemporaryEnchantFrame",
 		AuctionDressUpFrame = "AuctionDressUpFrame",
-		MonkHarmonyBar = "MonkHarmonyBar"
-	},
+		MonkHarmonyBar = "MonkHarmonyBar",
+	--	GroupLootFrame1 = "GroupLootFrame1",
+	--	GroupLootFrame2 = "GroupLootFrame2",
+	--	GroupLootFrame3 = "GroupLootFrame3",
+	--	GroupLootFrame4 = "GroupLootFrame4",
+		},
 	lAllowedMAFrames = {
 		MAOptions = "MAOptions",
 		MANudger = "MANudger",
@@ -370,8 +385,9 @@ local MovAny = {
 	end,
 	
 	hChatFrame_OnUpdate = function()
-		print("Woooo")
+	--	print("Woooo")
 		local b = arg1
+	--	print(b, arg1)
 			if MovAny:IsModified(b) then
 			--	b:SetWidth(10)
 			--	b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
@@ -422,48 +438,35 @@ local MovAny = {
 	end,
 	
 	hPetActionBar_Update = function()
-	--	print('hPetActionBar_Update')
 		API:SyncElement("PetActionBarFrame")
 		API:SyncElement("PetActionButtonsMover")
 		API:SyncElement("PetActionButtonsVerticalMover")
 	end,
 	
 	hPetActionBarFrame_OnUpdate = function()
-	--	print('hPetActionBar_Update')
 		API:SyncElement("PetActionBarFrame")
-	end,
-	
---[[	hUIParent_ManageFramePositions = function()
-		API:SyncElement("StanceBarFrame")
-		API:SyncElement("PetActionBarFrame")
+		API:SyncElement("PetActionButtonsMover")
 		API:SyncElement("PetActionButtonsVerticalMover")
-		API:SyncElement("StanceButtonsMover")
-		API:SyncElement("StanceButtonsVerticalMover")
-	end,]]
-	
+	end,
 	hAddFrameLock = function()
-	--	if API:GetElement("MultiBarBottomLeft").f == nil  then
-			MultiBarBottomLeft:Hide()
-	--	end
-	--	if API:GetElement("MultiBarBottomRight").f == nil then
-			MultiBarBottomRight:Hide()
-	--	end
+	--	print("hAddFrameLock", SHOW_MULTI_ACTIONBAR_1, SHOW_MULTI_ACTIONBAR_2)
+		MultiBarBottomLeft:Hide()
+		MultiBarBottomRight:Hide()
 	end,
 	
 	hRemoveFrameLock = function()
-	--	if API:GetElement("MultiBarBottomLeft").f == nil then
+	--	print("hRemoveFrameLock", SHOW_MULTI_ACTIONBAR_1, SHOW_MULTI_ACTIONBAR_2)
+		if ( SHOW_MULTI_ACTIONBAR_1 ) then
 			MultiBarBottomLeft:Show()
-		--	for k, v in pairs(MultiBarBottomLeft) do
-		--		print(k,v)
-		--	end
-	--	end
-	--	if API:GetElement("MultiBarBottomRight").f == nil then
+		elseif (MovAny:IsModified(MultiBarBottomLeft) and not MovAny:IsModified(MultiBarBottomLeft, opt, hidden)) then
+			MultiBarBottomLeft:Show()
+		end
+		if ( SHOW_MULTI_ACTIONBAR_2 ) then
 			MultiBarBottomRight:Show()
-	--	end
+		elseif (MovAny:IsModified(MultiBarBottomRight) and not MovAny:IsModified(MultiBarBottomRight, opt, hidden)) then
+			MultiBarBottomRight:Show()
+		end
 	end,
-	
---[[	hUpdateMicroButtonsParent = function(self, ...)
-	end,]]
 }
 _G.MovAny = MovAny
 
@@ -667,9 +670,6 @@ function MovAny:Boot()
 	if StanceBar_UpdateState then
 		hooksecurefunc("StanceBar_UpdateState", self.hStanceBar_UpdateState)
 	end
---[[	if UIParent_ManageFramePositions then
-		hooksecurefunc("UIParent_ManageFramePositions", self.hUIParent_ManageFramePositions)
-	end]]
 	if PetActionBar_Update then
 		hooksecurefunc("PetActionBar_Update", self.hPetActionBar_Update)
 	end
@@ -688,55 +688,31 @@ function MovAny:Boot()
 	end
 	if SpellBookFrame_Update then
 		hooksecurefunc("SpellBookFrame_Update", function()
-	--	if SpellBookProfessionFrame:IsShown() then
-		--	sbp1:SetTexture("Interface\\Spellbook\\Professions-Book-Left")
 			SpellBookPage1:SetPoint("LEFT", SpellBookFrame)
-	--	else
-	--		local sbp1 = _G.SpellBookPage1
-		--	sbp1:SetTexture("Interface\\Spellbook\\Spellbook-Page-1")
-	--		sbp1:SetPoint("CENTER", SpellBookFrame)
-	--	end
 		end)
 	end
---[[	if UpdateMicroButtonsParent then
-		hooksecurefunc("UpdateMicroButtonsParent", self.hUpdateMicroButtonsParent)
-	end]]
---[[	if RemoveTalent then
-		hooksecurefunc("RemoveTalent", function(self, ...)
-			print(select(1, ...) , "Done")
-		end)
-	end]]
+	
+--[[	hooksecurefunc("PetActionBar_UpdatePositionValues", function()
+				if MovAny:IsModified(PetActionButtonsVerticalMover) or MovAny:IsModified(PetActionButtonsMover) then
+				--	print("PetActionBar_UpdatePositionValues()", MovAny:IsModified(PetActionButtonsVerticalMover), MovAny:IsModified(PetActionButtonsMover))
+					PetActionBarFrame:SetPoint("TOPLEFT", PetActionBarFrame:GetParent(), "BOTTOMLEFT", 500, 0)
+				end
+			end)
+	hooksecurefunc("ShowPetActionBar", function()
+				if MovAny:IsModified(PetActionButtonsVerticalMover) or MovAny:IsModified(PetActionButtonsMover) then
+				--	print("ShowPetActionBar()", MovAny:IsModified(PetActionButtonsVerticalMover), MovAny:IsModified(PetActionButtonsMover))
+					PetActionBarFrame:SetPoint("TOPLEFT", PetActionBarFrame:GetParent(), "BOTTOMLEFT", 500, 0)
+				end
+			end)]]
 	
 	hooksecurefunc("ChatEdit_UpdateHeader",function(arg1, arg2)
-	--	print(arg1:GetName())
-	--	if arg2 then
-		--	print(arg2:GetName().."EditBox")
-			local b = arg1
-			if MovAny:IsModified(b) then
-			--	b:SetWidth(10)
-			--	b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
-			--	b:SetWidth(200)
-				b:SetPoint("TOPLEFT", ChatEditBoxesMover, "TOPLEFT", 0, 0)
-				b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
-			end
-		--	API:SyncElement(_G[arg2:GetName().."EditBox"])
-		--	API:SyncElement(ChatEditBoxesMover)
-			
-	--	end
+		local b = arg1
+		if MovAny:IsModified(b) then
+			b:SetWidth(ChatFrame1:GetWidth())
+			b:SetPoint("TOPLEFT", ChatEditBoxesMover, "TOPLEFT", 0, 0)
+			b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
+		end
 	end)
-	
---	if ChatFrame_OnLoad then
-	--[[	hooksecurefunc("ChatFrame_OnLoad", function()
-			print("WooonLoad")
-		end)
-		
-		hooksecurefunc("ChatFrame_OnEvent", function()
-			print("WooonEvent")
-		end)]]
-		
-	--	hooksecurefunc("ChatFrame_OnUpdate", self.hChatFrame_OnUpdate)
-	--		print("WooonUpdate")
---	end
 	
 	if ExtendedUI and ExtendedUI.CAPTUREPOINT then
 		self.oCaptureBar_Create = ExtendedUI.CAPTUREPOINT.create
@@ -751,11 +727,55 @@ function MovAny:Boot()
 		AchievementAlertFrame_GetAlertFrame = self.hAchievementAlertFrame_GetAlertFrame
 	end
 	
+	if LootWonAlertFrame_SetUp then
+		hooksecurefunc("LootWonAlertFrame_SetUp", function(self, arg1, ...)
+		--	print("TestDone", self, arg1, select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...))
+			if self == LOOT_WON_ALERT_FRAMES[1] and MovAny:IsModified(LootWonAlertMover1) then
+			--	print("LootWonAlert1 - Find")
+				LOOT_WON_ALERT_FRAMES[1]:SetPoint("BOTTOMLEFT", LootWonAlertMover1, "BOTTOMLEFT", 0, 0)
+			end
+			if self == LOOT_WON_ALERT_FRAMES[2] and MovAny:IsModified(LootWonAlertMover2) then
+			--	print("LootWonAlert2 - Find")
+				LOOT_WON_ALERT_FRAMES[2]:SetPoint("BOTTOMLEFT", LootWonAlertMover2, "BOTTOMLEFT", 0, 0)
+			end
+			if self == LOOT_WON_ALERT_FRAMES[3] and MovAny:IsModified(LootWonAlertMover3) then
+			--	print("LootWonAlert3 - Find")
+				LOOT_WON_ALERT_FRAMES[3]:SetPoint("BOTTOMLEFT", LootWonAlertMover3, "BOTTOMLEFT", 0, 0)
+			end
+			if self == LOOT_WON_ALERT_FRAMES[4] and MovAny:IsModified(LootWonAlertMover4) then
+			--	print("LootWonAlert4 - Find")
+				LOOT_WON_ALERT_FRAMES[4]:SetPoint("BOTTOMLEFT", LootWonAlertMover4, "BOTTOMLEFT", 0, 0)
+			end
+			if self == LOOT_WON_ALERT_FRAMES[5] and MovAny:IsModified(LootWonAlertMover5) then
+			--	print("LootWonAlert5 - Find")
+				LOOT_WON_ALERT_FRAMES[5]:SetPoint("BOTTOMLEFT", LootWonAlertMover5, "BOTTOMLEFT", 0, 0)
+			end
+		end)
+	end
+	
+--[[	if GroupLootContainer_AddFrame then
+		hooksecurefunc("GroupLootContainer_AddFrame", function(self, ...)
+			print(self, select(1, ...), select(2, ...))
+			if MovAny:IsModified(GroupLootFrameMover1) then
+				GroupLootFrame1:SetPoint("BOTTOMLEFT", GroupLootFrameMover1, "BOTTOMLEFT", 0, 0)
+			end
+			if MovAny:IsModified(GroupLootFrameMover2) then
+				GroupLootFrame2:SetPoint("BOTTOMLEFT", GroupLootFrameMover2, "BOTTOMLEFT", 0, 0)
+			end
+			if MovAny:IsModified(GroupLootFrameMover3) then
+				GroupLootFrame1:SetPoint("BOTTOMLEFT", GroupLootFrameMover3, "BOTTOMLEFT", 0, 0)
+			end
+			if MovAny:IsModified(GroupLootFrameMover4) then
+				GroupLootFrame4:SetPoint("BOTTOMLEFT", GroupLootFrameMover4, "BOTTOMLEFT", 0, 0)
+			end
+		end)
+	end]]
+	
 	self.inited = true
 	
---[[	if IsAddOnLoaded("Blizzard_TalentUI") and self.hBlizzard_TalentUI then
+	if IsAddOnLoaded("Blizzard_TalentUI") and self.hBlizzard_TalentUI then
 		self:hBlizzard_TalentUI()
-	end]]
+	end
 end
 
 function MovAny:OnPlayerLogout()
@@ -5310,10 +5330,12 @@ function MovAny_OnEvent(self, event, arg1)
 		end
 	elseif event == "ADDON_LOADED" then
 		if arg1 == "MoveAnything" then
+		--	MovAny:RemoveUnavalibleFrames()
+			
 			if MovAny.Load ~= nil then
 				MovAny:Load()
 				MovAny.Load = nil
-			end
+			end			
 		elseif arg1 == "Blizzard_TalentUI" and MovAny.hBlizzard_TalentUI then
 			MovAny:hBlizzard_TalentUI()
 		end

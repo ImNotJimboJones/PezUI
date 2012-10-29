@@ -23,6 +23,7 @@
 	<Script file="VuhDoDebuffConst.lua" />
 	<Script file="VuhDoDefaultsBouquets.lua" />
 	<Script file="VuhDoDefaults.lua" />
+	<Script file="VuhDoConfigConvenience.lua" />
 	<Script file="VuhDoGuiToolbox.lua" />
 	<Script file="VuhDoModelTools.lua" />
 	<Script file="VuhDoPanelConvenience.lua" />

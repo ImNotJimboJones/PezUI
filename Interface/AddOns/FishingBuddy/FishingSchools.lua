@@ -15,10 +15,10 @@ local CLOSEENOUGH = 15; -- fifteen yards
 -- FishingBuddy_Info["Schools"][ZONE]
 -- Store everything to two digits?
 
-local function AddFishingSchool(kind, fishid, zidx, x, y)
+local function AddFishingSchool(kind, fishid, zidx, sidx, x, y)
 	local entry = {};
 	if ( not zidx ) then
-		zidx, _ = FishingBuddy.GetZoneIndex();
+		zidx, sidx = FishingBuddy.GetZoneIndex();
 	elseif ( type(zidx) == "string" ) then
 		zidx = FishingBuddy.GetZoneIndex(zidx);
 	end
@@ -55,9 +55,11 @@ local function AddFishingSchool(kind, fishid, zidx, x, y)
 		-- if we're in an instance, don't do math
 		if ( C ) then
 			for _,hole in pairs(FishingBuddy_Info["FishSchools"][zidx]) do
-				local d,_,_ = LT:GetYardDistance(Z, x, y, Z, hole.x, hole.y);
-FishingBuddy.Debug("d "..FL:printable(d).." "..CLOSEENOUGH);
+				local d,_,_ = LT:GetYardDistance(Z, x, y, Z, hole.x or x, hole.y or y);
 				if ( d and d < CLOSEENOUGH ) then
+					hole.x = x;
+					hole.y = y;
+					hole.sidx = hole.sidx or sidx;
 					if ( fishid ) then
 						if ( hole.count ) then
 							hole.count = hole.count + 1;
@@ -65,11 +67,9 @@ FishingBuddy.Debug("d "..FL:printable(d).." "..CLOSEENOUGH);
 							hole.count = 1;
 						end
 						if ( hole.fish ) then
-							for f,count in pairs(hole.fish) do
-								if ( f == fishid ) then
-									hole.fish[f] = count + 1;
-									return;
-								end
+							if ( hole.fish[f] ) then
+								hole.fish[f] = hole.fish[f] + 1;
+								return;
 							end
 						else
 							hole.fish = {};
@@ -84,6 +84,7 @@ FishingBuddy.Debug("d "..FL:printable(d).." "..CLOSEENOUGH);
 	entry.kind = kind;
 	entry.x = x;
 	entry.y = y;
+	entry.sidx = sidx;
 	entry.count = 1;
 	if ( fishid ) then
 		entry.fish = {};
@@ -91,7 +92,7 @@ FishingBuddy.Debug("d "..FL:printable(d).." "..CLOSEENOUGH);
 	end
 	tinsert(FishingBuddy_Info["FishSchools"][zidx], entry);
 
-	FishingBuddy.RunHandlers(FBConstants.ADD_SCHOOL_EVT, kind, fishid, zidx, x, y);
+	FishingBuddy.RunHandlers(FBConstants.ADD_SCHOOL_EVT, kind, fishid, zidx, sidx, x, y);
 
 	return true;
 end
@@ -139,11 +140,11 @@ local function CollapseHoles()
 				if ( hole.fish ) then
 					for f,c in pairs(hole.fish) do
 						for i in pairs(1,c) do
-							AddFishingSchool(hole.kind, f, zidx, hole.x, hole.y);
+							AddFishingSchool(hole.kind, f, zidx, nil, hole.x, hole.y);
 						end
 					end
 				else
-					AddFishingSchool(hole.kind, nil, zidx, hole.x, hole.y);
+					AddFishingSchool(hole.kind, nil, zidx, nil, hole.x, hole.y);
 				end
 			end
 		end

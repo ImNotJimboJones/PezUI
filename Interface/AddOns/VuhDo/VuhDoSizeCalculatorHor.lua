@@ -11,7 +11,6 @@ local VUHDO_isTableHeaderOrFooter;
 
 local ceil = ceil;
 local floor = floor;
-local twipe = table.wipe;
 local strfind = strfind;
 local ipairs = ipairs;
 
@@ -31,68 +30,9 @@ end
 
 
 
-local sTopHeightCache = { };
-local sBottomHeightCache = { };
 local sHeaderTotalHeightCache = { };
 function VUHDO_resetSizeCalcCachesHor()
-	twipe(sTopHeightCache);
-	twipe(sBottomHeightCache);
-	twipe(sHeaderTotalHeightCache);
-end
-
-
-
--- Returns the total height of optional threat bars
-local function VUHDO_getAdditionalTopHeight(aPanelNum)
-	if (sTopHeightCache[aPanelNum] == nil) then
-		local tTopSpace;
-
-		if (VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"] ~= "") then
-			tTopSpace = VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"]["HEIGHT"];
-		else
-			tTopSpace = 0;
-		end
-
-		local tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
-		if (strfind(tNamePos[1], "BOTTOM", 1, true) and strfind(tNamePos[2], "TOP", 1, true)) then
-			local tNameHeight = VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["_spacing"];
-			if (tNameHeight ~= nil and tNameHeight > tTopSpace) then
-				tTopSpace = tNameHeight;
-			end
-		end
-		sTopHeightCache[aPanelNum] = tTopSpace;
-	end
-
-	return sTopHeightCache[aPanelNum];
-end
-
-
-
---
-local function VUHDO_getAdditionalBottomHeight(aPanelNum)
-	if (sBottomHeightCache[aPanelNum] == nil) then
-		-- HoT icons
-		local tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
-		local tBottomSpace;
-
-		if  (tHotCfg["radioValue"] == 7 or tHotCfg["radioValue"] == 8) then
-			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
-		else
-			tBottomSpace = 0;
-		end
-
-		local tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
-		if (strfind(tNamePos[1], "TOP", 1, true) and strfind(tNamePos[2], "BOTTOM", 1, true)) then
-			local tNameHeight = VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["_spacing"];
-			if (tNameHeight ~= nil and tNameHeight > tBottomSpace) then
-				tBottomSpace = tNameHeight;
-			end
-		end
-
-		sBottomHeightCache[aPanelNum] = tBottomSpace;
-	end
-
-	return sBottomHeightCache[aPanelNum];
+	table.wipe(sHeaderTotalHeightCache);
 end
 
 

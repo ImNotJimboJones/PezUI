@@ -1,14 +1,182 @@
-Version 3.10.
+Version 3.18.
+
 
 Bugfixes:
--- Fixed a bug in player group determination
+-- Changed Dark Intent to raid wide buff for BuffWatch
+-- Minor bugfixes
+
 
 Improvements:
+-- Added improved version of PW:S to shield absorb tracking
+
 
 Changes:
 
 
+
 Features:
+-- Added bouquet item for counter "Counter: All shields absorb #k"
+   showing the remaining shield absorption of all shields on the
+   target
+
+
+
+--------------------------------------------------------------
+Version 3.17.
+
+
+Bugfixes:
+-- Added missing GCD reference spell for monks
+-- Possible fix for flashing hots
+-- Possible fix for bouquets after profile loading
+
+
+Improvements:
+
+
+
+Changes:
+
+
+
+Features:
+
+
+
+--------------------------------------------------------------
+Version 3.16.
+
+
+Bugfixes:
+-- Fixed a serious cpu resource hog introduced with 3.9
+
+
+Improvements:
+-- Increased performance after raid roster changes
+
+
+Changes:
+
+
+
+Features:
+
+
+
+--------------------------------------------------------------
+Version 3.15.
+
+
+Bugfixes:
+-- Minor bugfix in tooltips
+-- Bugfix (hopefully) for totem cooldowns not displaying properly
+
+
+Improvements:
+-- Added a lot of mop default custom debuffs
+
+
+Changes:
+
+
+
+Features:
+
+
+
+--------------------------------------------------------------
+Version 3.14.
+
+
+Bugfixes:
+-- Fixed repeated ready-check not showing properly
+-- Fixed some HoTs not updating properly when changing profiles
+
+
+Improvements:
+
+
+
+Changes:
+
+
+
+Features:
+-- Added bouquet item "flag: class color if active"
+   This enables you to apply class color to any active
+   icon
+
+
+
+--------------------------------------------------------------
+Version 3.13.
+
+
+Bugfixes:
+-- Fixed a range detection bug in PT panel
+-- Fixed party panel hiding bug
+-- Fixed a bug with options not showing active panel sometimes
+-- Minor bugfixes
+
+
+Improvements:
+-- Inreased hitbox for custom debuff tooltips
+
+
+Changes:
+
+
+
+Features:
+
+
+
+--------------------------------------------------------------
+Version 3.12.
+
+
+Bugfixes:
+-- Minor bugfixes
+
+
+Improvements:
+-- Improved registering of events when force show blizz frames
+   is enabled in options=>general=>miscs
+
+
+Changes:
+
+
+
+Features:
+
+
+
+--------------------------------------------------------------
+Version 3.11.
+
+
+Bugfixes:
+-- Fixed a bug in player group determination
+-- Fixed several possible taint problems
+-- Soulstone, Enveloping Mist and Surging Mist
+   should now work as intended if Soothing mist
+   is channeling
+-- Fixed coincidence with other addons hiding Blizz UI elements
+-- Fixed bug in range detecton
+
+
+Improvements:
+-- Player powers will be updated more frequently
+-- Minor optimizations
+
+
+Changes:
+
+
+
+Features:
+
 
 
 --------------------------------------------------------------

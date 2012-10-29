@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-ruRU.lua 1669 2012-09-19 20:29:49Z StingerSoft@gmail.com $
+﻿-- $Id: Atlas-ruRU.lua 1817 2012-10-10 14:21:40Z StingerSoft@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -30,8 +30,8 @@ local AL = AceLocale:NewLocale("Atlas", "ruRU", false);
 -- Atlas Russian Localization
 -- Compiled by Eugene Filatov, bigoblin, StingerSoft
 -- Last Update: 23.01.2011
--- $Date: 2012-09-20 04:29:49 +0800 (Thu, 20 Sep 2012) $
--- $Revision: 1669 $
+-- $Date: 2012-10-03 22:56:00 +0800 (Wed, 03 Oct 2012) $
+-- $Revision: 1771 $
 
 if ( GetLocale() == "ruRU" ) then
 -- Define the leading strings to be ignored while sorting
@@ -95,6 +95,8 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "Удерживайте клавишу [CTRL] для сравнений";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "Включить/отключить отображение подсказки при удерживании клавиши CTRL и наведении курсора мышки на информационной карте. Полезно тогда, когда текст слишком длинный, для отображения в окне.";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Не отображать одинаковую информацию снова.";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "Напоминать о недостоющих модулях / плагинах.";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Выполнение проверки после загрузки WoW, на наличие недостающих модулей / плагинов Atlas'а.";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "Закрыть";	
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Атлас";
@@ -103,14 +105,14 @@ if AL then
 	AL["ATLAS_MINIMAPLDB_HINT"] = "[ЛКМ] - открывает Атлас.\n[ПКМ] + открывает настройки Атласа.\n[ПКМ] + [перемещение] - изменяет позицию кнопки.";
 
 	AL["ATLAS_OPTIONS_CATDD"] = "Сортировать подземелья по:";
-	AL["ATLAS_DDL_CONTINENT"] = "Контитенту";
+	AL["ATLAS_DDL_CONTINENT"] = "Континенту";
 	AL["ATLAS_DDL_CONTINENT_EASTERN"] = "Подземелья Восточных королевств";
 	AL["ATLAS_DDL_CONTINENT_KALIMDOR"] = "Подземелья Калимдора";
 	AL["ATLAS_DDL_CONTINENT_OUTLAND"] = "Подземелья Запределья";
 	AL["ATLAS_DDL_CONTINENT_NORTHREND"] = "Подземелья Нордскола";
 	AL["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "Подземелья Подземья";
 	AL["ATLAS_DDL_CONTINENT_PANDARIA"] = "Подземелья Пандории";
-	AL["ATLAS_DDL_LEVEL"] = "Уровня";
+	AL["ATLAS_DDL_LEVEL"] = "Уровню";
 	AL["ATLAS_DDL_LEVEL_UNDER45"] = "Подземелья уровня ниже 45";
 	AL["ATLAS_DDL_LEVEL_45TO60"] = "Подземелья уровня 45-60";
 	AL["ATLAS_DDL_LEVEL_60TO70"] = "Подземелья уровня 60-70";
@@ -148,7 +150,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "Ok";
 
 	AL["ATLAS_INFO"] = "Atlas информация";
-	AL["ATLAS_INFO_SPTACK"] = "Важное уведомление:\n\nВ связи с проблемой увеличение размеров файлов модификации, мы разделили\n модификацию на отдельные модули подземелий.\n\nПользователи, которые скачивают нашу модификацию с известных веб-сайтов,\n в основном получают только основное ядро, которое включает в себя все\n функции ядра Атласа и карты подземелий Cataclysm'а.\n\nПользователи, которые хотят загрузить все старые карты подземелий и все\n модули Атласа, сделанные нами, могут их скачать по отдельности.\n\nДля получения дополнительной информации прочтите следующий топик:\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n\nИли посетите наш сайт, чтобы узнать где скачать:\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	AL["ATLAS_INFO_12200"] = "Важное уведомление:\n\nВ связи с проблемой увеличение размеров файлов модификации, мы разделили\n модификацию на отдельные модули подземелий.\n\nПользователи, которые скачивают нашу модификацию с известных веб-сайтов,\n в основном получают только основное ядро, которое включает в себя все\n функции ядра Атласа и карты подземелий Cataclysm'а.\n\nПользователи, которые хотят загрузить все старые карты подземелий и все\n модули Атласа, сделанные нами, могут их скачать по отдельности.\n\nДля получения дополнительной информации прочтите следующий топик:\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n\nИли посетите наш сайт, чтобы узнать где скачать:\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	AL["ATLAS_INFO_12201"] = "Обратите внимание, что мы создали новый плагин - |cff6666ffAtlas Сценарии|cffffffff, который \nобеспечивает совершенно новыми картыми сценарий, введенных в 5.0. \n\nДля более подробной информации посетите наш веб-сайт, и не забудьте скачать / \nустановить его отдельно.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+
+	AL["ATLAS_MISSING_MODULE"] = "Atlas обнаружил недостоющие модули / плагины: ";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -503,11 +508,13 @@ if AL then
 	AL["Shen'dralar Provisioner"] = "Шен'драларский поставщик";
 
 	--Maraudon	
-	AL["Elder Splitrock"] = "Старейшина Камнепад ";
+	AL["Elder Splitrock"] = "Старейшина Камнепад";
+	AL["Celebras the Redeemed"] = "Келебрас Освобожденный";
 
 	--Ragefire Chasm
-	AL["Commander Bagran"] = "Commander Bagran"; --need check
-	AL["Invoker Xorenth"] = "Invoker Xorenth"; --need check
+	AL["Commander Bagran"] = "Командир Багран";
+	AL["Invoker Xorenth"] = "Заклинатель Ксорент";
+	AL["Scout Cage"] = "Scout Cage"; --need check
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "Користраза";
@@ -579,7 +586,7 @@ if AL then
 	AL["Lexlort <Kargath Expeditionary Force>"] = "Лекслорт <Каргатский экспедиционный корпус>";
 	AL["Prospector Seymour <Morgan's Militia>"] = "Геолог Сеймур <Отряд Морганы>";
 	AL["Razal'blade <Kargath Expeditionary Force>"] = "Разал'меч <Каргатский экспедиционный корпус>";
-	AL["The Shadowforge Lock"] = "Замок Тенегорна"; --need check
+	AL["The Shadowforge Lock"] = "Замок Тенегорна";
 	AL["Mayara Brightwing <Morgan's Militia>"] = "Майра Светлое Крыло <Отряд Морганы>";
 	AL["Hierophant Theodora Mulvadania <Kargath Expeditionary Force>"] = "Верховная Жрица Теодора Мальвадания";
 	AL["Lokhtos Darkbargainer <The Thorium Brotherhood>"] = "Локтос Зловещий Торговец";
@@ -619,11 +626,24 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Commander Lindon"] = "Командир Линдон";
+	AL["Hooded Crusader"] = "Рыцарь в капюшоне";
+	AL["Bucket of Meaty Dog Food"] = "Ведро с собачьим кормом";
+	AL["Reinforced Archery Target"] = "Укрепленная мишень";
+
+	--Scarlet Monastery
+
 	--Scholomance
-	AL["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery"; --need check
-	AL["Coffer of Forgotten Souls"] = "Сундук забытых душ";
-	AL["Professor Slate"] = "Professor Slate"; --need check
+	AL["Instructor Chillheart's Phylactery"] = "Филактерия инструктора Ледяное Сердце";
+	AL["Professor Slate"] = "Профессор Слейт";
 	AL["Polyformic Acid Potion"] = "Наука о кислоте";
+	AL["Talking Skull"] = "Говорящий череп";
+	AL["In the Shadow of the Light"] = "В тени света";
+	AL["Kel'Thuzad's Deep Knowledge"] = "Сокровенное знание Кел'Тузада";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "Запретные обряды и иные ритуалы некромантов";
+	AL["Coffer of Forgotten Souls"] = "Сундук забытых душ";
+	AL["The Dark Grimoire"] = "Гримуар Тьмы";
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Трио аптекарей"; --
@@ -635,12 +655,6 @@ if AL then
 	AL["Haunted Stable Hand"] = "Дух помощника смотрителя стойл";
 	AL["Investigator Fezzen Brasstacks"] = "Испытатель Феззен Клейстр";
 
-	--SM: Cathedral
-
-	--SM: Halls
-	AL["Hunter Commander"] = "Hunter Commander"; --need check
-	AL["Reinforced Archery Target"] = "Reinforced Archery Target"; --need check
-
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Командир Элигор Вестник Рассвета <Братство Света>";
 	AL["Master Craftsman Wilhelm <Brotherhood of the Light>"] = "Мастер-ремесленник Вильгельм <Братство Света>";
@@ -651,7 +665,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "Ключ от почтового ящика на Праздничной улице";
 	AL["Elder Farwhisper"] = "Старейшина Тихий Шепот";
 	AL["Market Row Postbox"] = "Ключ от почтового ящика в торговом ряду";
-	AL["Crusaders' Square Postbox"] = "Ключ от почтового ящика на Площади рыцарей";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "Ключ от почтового ящика на Площади старейшины";
@@ -1164,24 +1177,28 @@ if AL then
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "Лучница Ли <Капитан стражи>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "Сынань Мечтательница";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
-	
-	--Scarlet Halls
-	AL["Hooded Crusader"] = "Hooded Crusader"; --need check
-	AL["Bucket of Meaty Dog Food"] = "Bucket of Meaty Dog Food"; --need check
+	AL["Ban Bearheart"] = "Бань Медвежье Сердце";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "Шадо-мастер Чум Киу";
 
 	--Stormstout Brewery
+	AL["Auntie Stormstout"] = "Тетушка Буйный Портер";
+	AL["Chen Stormstout"] = "Чэнь Буйный Портер";
 
 	--Temple of the Jade Serpent
+	AL["Master Windstrong"] = "Мастер Порывистый Ветер";
+	AL["Priestess Summerpetal"] = "Жрица Летний Лепесток";
 
 	--Terrace of Endless Spring
 

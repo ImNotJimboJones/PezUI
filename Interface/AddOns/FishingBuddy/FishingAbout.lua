@@ -11,6 +11,7 @@ credits[FBConstants.ROLE_TRANSLATE_ZHTW] = {
 	["smartdavislin"] = { "Version 1.0.2 (CurseForge)", },
 	["Andyca"] = { "Version 1.0.7a (CurseForge)" },
 	["zhTW"] = { "Version 1.0.9e (CurseForge)", },
+	["titanium0107"] = { "Version 1.1e (CurseForge)", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_ITIT] = {
@@ -32,7 +33,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "Version 0.8.1d", },
 	["RustyXXL"] = { "Version 1.0.4 (CurseForge)", },
 	["Ithilrandir"] = { "Version 1.0.5 (CurseForge)", },
-	["DirtyHarryGermany"] = { "Version 1.0.7h (CurseForge)", "Version 1.0.9e (CurseForge)", },
+	["DirtyHarryGermany"] = { "Version 1.0.7h (CurseForge)", "Version 1.0.9e (CurseForge)", "Version 1.1e (CurseForge)", },
 	["Freydis88"] = { "Version 1.0.9e (CurseForge)", },
 	["Frontiii"] = { "Version 1.0.9e (CurseForge)", },
 };
@@ -60,10 +61,11 @@ credits[FBConstants.ROLE_TRANSLATE_KOKR] = {
 credits[FBConstants.ROLE_TRANSLATE_RURU] = {
 	["StingerSoft"] = { "Version 0.9.8l", "Version 0.9.9e4 (CurseForge)" },
 	["hellquister"] = { "Version 0.9.9e4 (CurseForge)" },
-	["D_Angel"] = { "Version 0.9.9e4 (CurseForge)", "Version 1.0.2 (CurseForge)" },
+	["D_Angel"] = { "Version 0.9.9e4 (CurseForge)", "Version 1.0.2 (CurseForge)", "Version 1.1c (CurseForge)" },
 	["AlenaM"] = { "Version 1.0 (CurseForge)" },
 	["KVVV"] = { "Version 1.0 (CurseForge)" },
 	["frodo10"] = { "Version 1.0 (CurseForge)" },
+	["DVK"] = { "Version 1.1f (CurseForge)" },
 	["Ant1dotE"] = { "Version 1.0.1 (CurseForge)", "Version 1.0.2 (CurseForge)", "Version 1.0.4 (CurseForge)" },
 };
 
@@ -159,13 +161,15 @@ local AboutOptions = {
 	},
 };
 
+local CREDITSKIP = 7;
+
 local function UpdateCreditPanel(self, elapsed)
 	if ( not self.started ) then
 		self.started = true;
 		self.fadestate = 5;
 		self.fadevalue = 0;
 		self.whatidx = 1;
-		self.currenttime = 0.1 + elapsed + math.random()*2.0;
+		self.currenttime = math.random()*2.5 + elapsed + 0.5;
 	end
 	self.currenttime = self.currenttime - elapsed;
 	if (self.currenttime > 0) then
@@ -189,7 +193,7 @@ local function UpdateCreditPanel(self, elapsed)
 			self.currenttime = 0.1
 		else
 			self.fadestate = 1
-			self.currenttime = 5.0
+			self.currenttime = 5.0 + math.random()*1.0;
 			self.fadevalue = 1.0
 		end
 	elseif (self.fadestate == 1) then
@@ -199,9 +203,9 @@ local function UpdateCreditPanel(self, elapsed)
 		if ( self.data.what[self.whatidx] ) then
 			self.fadestate = 2
 		else
-			self.idx = self.idx + 5
+			self.idx = self.idx + CREDITSKIP
 			if ( self.idx > #self.credits ) then
-				self.idx = self.idx % 5
+				self.idx = self.idx % CREDITSKIP
 			end
 			if ( self.idx == 0 ) then
 				self.idx = 1
@@ -217,7 +221,6 @@ local function UpdateCreditPanel(self, elapsed)
 			self.currenttime = 0.1
 		else
 			self.fadestate = 3
-			self.currenttime = 2.5
 			self.fadevalue = 0.0
 		end
 	elseif (self.fadestate == 3) then
@@ -229,7 +232,7 @@ local function UpdateCreditPanel(self, elapsed)
 			self.currenttime = 0.1
 		else
 			self.fadestate = 1
-			self.currenttime = 5.0
+			self.currenttime = 5.0 + math.random()*1.0;
 			self.fadevalue = 1.0
 		end
 	elseif (self.fadestate == 4) then
@@ -242,14 +245,15 @@ local function UpdateCreditPanel(self, elapsed)
 			self.currenttime = 0.1
 		else
 			self.fadestate = 5
-			self.currenttime = 2.5
 			self.fadevalue = 0.0
 		end
 	elseif (self.fadestate == 5) then
 		-- Pause after fading out
 		self.fadestate = 0
-		self.currenttime = 2.5 - math.random()*0.5;
+		self.currenttime = math.random()*0.15;
 	end
+	-- all the reset times are offset
+	self.currenttime = self.currenttime + elapsed;
 end
 
 local function MakeCreditPanel(parent, alignment, offset)

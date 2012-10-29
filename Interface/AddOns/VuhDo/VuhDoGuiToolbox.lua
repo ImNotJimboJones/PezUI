@@ -1,3 +1,5 @@
+local _;
+
 VUHDO_COMBO_MAX_ENTRIES = 10000;
 
 local floor = floor;
@@ -16,7 +18,6 @@ local sIsSideBarRight;
 local sShowPanels;
 local sHideEmptyAndClickThrough;
 local sEmpty = { };
-local _;
 
 local VUHDO_LibSharedMedia;
 local VUHDO_getActionPanel;
@@ -305,6 +306,179 @@ end
 
 
 --
+local VUHDO_BLIZZ_EVENTS = {
+	"CVAR_UPDATE",
+	"DISPLAY_SIZE_CHANGED",
+	"GROUP_ROSTER_UPDATE",
+	"IGNORELIST_UPDATE",
+	"INCOMING_RESURRECT_CHANGED",
+	"INSTANCE_ENCOUNTER_ENGAGE_UNIT",
+	"MUTELIST_UPDATE",
+	"PARTY_LEADER_CHANGED",
+	"PARTY_LFG_RESTRICTED",
+	"PARTY_LOOT_METHOD_CHANGED",
+	"PARTY_MEMBER_DISABLE",
+	"PARTY_MEMBER_ENABLE",
+	"PLAYER_ENTER_COMBAT",
+	"PLAYER_LEAVE_COMBAT",
+	"PLAYER_ENTERING_WORLD",
+	"PLAYER_FLAGS_CHANGED",
+	"PLAYER_FOCUS_CHANGED",
+	"PLAYER_LOGIN",
+	"PLAYER_ROLES_ASSIGNED",
+	"PLAYER_TARGET_CHANGED",
+	"PLAYER_UPDATE_RESTING",
+	"PLAYTIME_CHANGED",
+	"RAID_TARGET_UPDATE",
+	"READY_CHECK",
+	"READY_CHECK_CONFIRM",
+	"READY_CHECK_FINISHED",
+	"RUNE_POWER_UPDATE",
+	"RUNE_TYPE_UPDATE",
+	"UI_SCALE_CHANGED",
+	"UNIT_AURA",
+	"UNIT_CLASSIFICATION_CHANGED",
+	"UNIT_CONNECTION",
+	"UNIT_COMBAT",
+	"UNIT_COMBO_POINTS",
+	"UNIT_DISPLAYPOWER",
+	"UNIT_ENTERED_VEHICLE",
+	"UNIT_ENTERING_VEHICLE",
+	"UNIT_EXITED_VEHICLE",
+	"UNIT_EXITING_VEHICLE",
+	"UNIT_FACTION",
+	"UNIT_FLAGS",
+	"UNIT_HEAL_PREDICTION",
+	"UNIT_HEALTH",
+	"UNIT_HEALTH_FREQUENT",
+	"UNIT_LEVEL",
+	"UNIT_MAXHEALTH",
+	"UNIT_MAXPOWER",
+	"UNIT_NAME_UPDATE",
+	"UNIT_OTHER_PARTY_CHANGED",
+	"UNIT_PET",
+	"UNIT_PHASE",
+	"UNIT_PORTRAIT_UPDATE",
+	"UNIT_POWER",
+	"UNIT_POWER_BAR_HIDE",
+	"UNIT_POWER_BAR_SHOW",
+	"UNIT_POWER_FREQUENT",
+	"UNIT_TARGETABLE_CHANGED",
+	"UNIT_THREAT_SITUATION_UPDATE",
+	"UPDATE_INSTANCE_INFO",
+	"UPDATE_SHAPESHIFT_FORM",
+	"UPDATE_STEALTH",
+	"VARIABLES_LOADED",
+	"VOICE_START",
+	"VOICE_STATUS_UPDATE",
+	"VOICE_STOP",
+};
+
+
+
+--
+local VUHDO_FIX_EVENTS = {
+	"UNIT_AURA",
+	"UNIT_COMBAT",
+	"UNIT_HEAL_PREDICTION",
+	"UNIT_HEALTH",
+	"UNIT_HEALTH_FREQUENT",
+	"UNIT_MAXHEALTH",
+	"UNIT_MAXPOWER",
+	"UNIT_PET",
+	"UNIT_POWER",
+	"UNIT_POWER_FREQUENT",
+	"UNIT_THREAT_SITUATION_UPDATE",
+};
+
+
+
+--
+local VUHDO_BLIZZ_FRAMES = {
+	"CompactRaidFrameContainer",
+	"CompactRaidFrameManager",
+	"CompactPartyFrame", --
+	"PartyMemberFrame1", --
+	"PartyMemberFrame2", --
+	"PartyMemberFrame3", --
+	"PartyMemberFrame4", --
+	"PartyMemberFrame1HealthBar", --
+	"PartyMemberFrame2HealthBar", --
+	"PartyMemberFrame3HealthBar", --
+	"PartyMemberFrame4HealthBar", --
+	"PartyMemberFrame1ManaBar",
+	"PartyMemberFrame2ManaBar",
+	"PartyMemberFrame3ManaBar",
+	"PartyMemberFrame4ManaBar",
+	"PlayerFrame",
+	"PlayerFrameHealthBar",
+	"PlayerFrameManaBar",
+	"RuneFrame",
+	"TargetFrame",
+	"TargetFrameHealthBar",
+	"TargetFrameManaBar",
+	"TargetFrameToT",
+	"FocusFrameToT",
+	"PetFrame",
+	"FocusFrame",
+};
+
+
+
+
+local sEventsPerFrame = {};
+
+
+
+--
+local function VUHDO_initEventsPerFrame()
+
+	local tFrame;
+	for _, tFrameName in pairs(VUHDO_BLIZZ_FRAMES) do
+		tFrame = _G[tFrameName];
+
+		if (tFrame ~= nil and sEventsPerFrame[tFrameName] == nil) then
+			sEventsPerFrame[tFrameName] = { };
+
+			if (tFrame ~= nil) then
+				for tIndex, tEvent in pairs(VUHDO_BLIZZ_EVENTS) do
+					if (tFrame:IsEventRegistered(tEvent)) then
+						tinsert(sEventsPerFrame[tFrameName], tIndex);
+						--VUHDO_Msg("I: Register " .. tFrameName .. ": " .. tEvent);
+					end
+				end
+			else
+				--VUHDO_Msg("I: Frame not found: " .. tFrameName)
+			end
+		end
+	end
+end
+
+
+
+--
+local function VUHDO_registerOriginalEvents(aFrame)
+	local tFrameName = aFrame:GetName();
+
+	if (sEventsPerFrame[tFrameName] ~= nil) then
+		for _, tIndex in pairs(sEventsPerFrame[tFrameName]) do
+			aFrame:RegisterEvent(VUHDO_BLIZZ_EVENTS[tIndex]);
+			--VUHDO_Msg("R: Registering for " .. tFrameName .. ": " .. VUHDO_BLIZZ_EVENTS[tIndex]);
+		end
+
+		for _, tEvent in pairs(VUHDO_FIX_EVENTS) do
+			aFrame:RegisterEvent(tEvent);
+			--VUHDO_Msg("RF: Registering for " .. tFrameName .. ": " .. tEvent);
+		end
+	else
+		aFrame:RegisterAllEvents();
+		--VUHDO_Msg("R: Frame not found: " .. tFrameName)
+	end
+end
+
+
+
+--
 local function VUHDO_hideBlizzRaid()
 	if (CompactRaidFrameContainer ~= nil) then
 		CompactRaidFrameContainer:UnregisterAllEvents();
@@ -317,7 +491,7 @@ end
 --
 local function VUHDO_showBlizzRaid()
 	if (CompactRaidFrameContainer ~= nil) then
-		CompactRaidFrameContainer:RegisterAllEvents();
+		VUHDO_registerOriginalEvents(CompactRaidFrameContainer);
 		if (VUHDO_GROUP_TYPE_SOLO  == VUHDO_getCurrentGroupType()) then
 			return;
 		end
@@ -339,7 +513,7 @@ end
 --
 local function VUHDO_showBlizzRaidMgr()
 	if (CompactRaidFrameManager ~= nil) then
-		CompactRaidFrameManager:RegisterAllEvents();
+		VUHDO_registerOriginalEvents(CompactRaidFrameManager);
 		if (VUHDO_GROUP_TYPE_SOLO  == VUHDO_getCurrentGroupType()) then
 			return;
 		end
@@ -351,7 +525,7 @@ end
 
 --
 function VUHDO_hideBlizzCompactPartyFrame()
-	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"] and not InCombatLockdown() and CompactPartyFrame ~= nil and CompactPartyFrame:IsVisible()) then
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"] == 3 and not InCombatLockdown() and CompactPartyFrame ~= nil and CompactPartyFrame:IsVisible()) then
 		CompactPartyFrame:UnregisterAllEvents();
 		CompactPartyFrame:Hide();
 	end
@@ -383,8 +557,8 @@ local function VUHDO_hideBlizzParty()
 	end
 
 	if (CompactPartyFrame ~= nil and CompactPartyFrame:IsVisible()) then
-		RunScript("CompactPartyFrame:UnregisterAllEvents()");
-		RunScript("CompactPartyFrame:Hide()");
+		CompactPartyFrame:UnregisterAllEvents();
+		CompactPartyFrame:Hide();
 	end
 end
 
@@ -416,14 +590,14 @@ local function VUHDO_showBlizzParty()
 				tPartyFrame:Show();
 			end
 
-			tPartyFrame:RegisterAllEvents();
-			_G["PartyMemberFrame" .. tCnt .. "HealthBar"]:RegisterAllEvents();
-			_G["PartyMemberFrame" .. tCnt .. "ManaBar"]:RegisterAllEvents();
+			VUHDO_registerOriginalEvents(tPartyFrame);
+			VUHDO_registerOriginalEvents(_G["PartyMemberFrame" .. tCnt .. "HealthBar"]);
+			VUHDO_registerOriginalEvents(_G["PartyMemberFrame" .. tCnt .. "ManaBar"]);
 		end
 	else
 		if (CompactPartyFrame ~= nil) then
-			RunScript("CompactPartyFrame:Show()");
-			RunScript("CompactPartyFrame:RegisterAllEvents()");
+			CompactPartyFrame:Show();
+			VUHDO_registerOriginalEvents(CompactPartyFrame);
 		end
 	end
 end
@@ -444,12 +618,12 @@ end
 
 --
 local function VUHDO_showBlizzPlayer()
-	PlayerFrame:RegisterAllEvents();
-	PlayerFrameHealthBar:RegisterAllEvents();
-	PlayerFrameManaBar:RegisterAllEvents();
+	VUHDO_registerOriginalEvents(PlayerFrame);
+	VUHDO_registerOriginalEvents(PlayerFrameHealthBar);
+	VUHDO_registerOriginalEvents(PlayerFrameManaBar);
 	PlayerFrame:Show();
 	if ("DEATHKNIGHT" == VUHDO_PLAYER_CLASS) then
-		RuneFrame:RegisterAllEvents();
+		VUHDO_registerOriginalEvents(RuneFrame);
 		RuneFrame:Show();
 	end
 end
@@ -476,12 +650,12 @@ end
 
 --
 local function VUHDO_showBlizzTarget()
-	TargetFrame:RegisterAllEvents();
-	TargetFrameHealthBar:RegisterAllEvents();
-	TargetFrameManaBar:RegisterAllEvents();
+	VUHDO_registerOriginalEvents(TargetFrame);
+	VUHDO_registerOriginalEvents(TargetFrameHealthBar);
+	VUHDO_registerOriginalEvents(TargetFrameManaBar);
 
-	TargetFrameToT:RegisterAllEvents();
-	FocusFrameToT:RegisterAllEvents();
+	VUHDO_registerOriginalEvents(TargetFrameToT);
+	VUHDO_registerOriginalEvents(FocusFrameToT);
 	ComboFrame:SetPoint("TOPRIGHT", "TargetFrame", "TOPRIGHT", -44, -9);
 end
 
@@ -497,7 +671,7 @@ end
 
 --
 local function VUHDO_showBlizzPet()
-	PetFrame:RegisterAllEvents();
+	VUHDO_registerOriginalEvents(PetFrame);
 	PetFrame:Show();
 end
 
@@ -512,7 +686,7 @@ end
 
 --
 local function VUHDO_showBlizzFocus()
-	FocusFrame:RegisterAllEvents();
+	VUHDO_registerOriginalEvents(FocusFrame);
 	--TargetFrame_OnLoad(FocusFrame, "focus", FocusFrameDropDown_Initialize);
 end
 
@@ -539,6 +713,22 @@ function VUHDO_initBlizzRaid()
 	end
 end
 
+
+
+--
+function VUHDO_initHideBlizzRaid()
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID"] == 3) then
+		VUHDO_hideBlizzRaid();
+	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_RAID_MGR"] == 3) then
+		VUHDO_hideBlizzRaidMgr();
+	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PARTY"] == 3) then
+		VUHDO_hideBlizzParty();
+	end
+end
 
 
 --
@@ -572,6 +762,34 @@ function VUHDO_initBlizzFrames()
 	end
 
 	VUHDO_initBlizzRaid();
+end
+
+
+
+function VUHDO_initHideBlizzFrames()
+	if (InCombatLockdown()) then
+		return;
+	end
+
+	VUHDO_initEventsPerFrame();
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PLAYER"] == 3) then
+		VUHDO_hideBlizzPlayer();
+	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_TARGET"] == 3) then
+		VUHDO_hideBlizzTarget();
+	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_PET"] == 3) then
+		VUHDO_hideBlizzPet();
+	end
+
+	if (VUHDO_CONFIG["BLIZZ_UI_HIDE_FOCUS"] == 3) then
+		VUHDO_hideBlizzFocus();
+	end
+
+	VUHDO_initHideBlizzRaid();
 end
 
 
@@ -755,7 +973,7 @@ function VUHDO_UIFrameFlash_OnUpdate(aTimeDelta)
 	    end
 
 	    tFrame:SetAlpha(tAlpha);
-	    tFrame:Show();
+	    --tFrame:Show();
 	  end
 
 	  tIndex = tIndex - 1;
@@ -768,9 +986,9 @@ end
 function VUHDO_UIFrameFlashStop(aFrame)
 	if (sIsFlashFrame[aFrame]) then
 		tDeleteItem(sFlashFrames, aFrame);
-		aFrame:SetAlpha(1);
+		aFrame:SetAlpha(aFrame.showWhenDone and 1 or 0);
 		aFrame.flashTimer = nil;
-		aFrame:SetShown(aFrame.showWhenDone);
+		--aFrame:SetShown(aFrame.showWhenDone);
 		sIsFlashFrame[aFrame] = nil;
 	end
 end

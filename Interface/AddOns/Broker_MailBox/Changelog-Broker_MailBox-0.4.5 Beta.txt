@@ -1,0 +1,24 @@
+------------------------------------------------------------------------
+r33 | computerpunk | 2012-10-21 13:00:43 +0000 (Sun, 21 Oct 2012) | 2 lines
+Changed paths:
+   A /tags/0.4.5 Beta (from /trunk:32)
+
+Changes:
+*Report any issues you have in the ticket system.
+------------------------------------------------------------------------
+r32 | computerpunk | 2012-10-21 12:58:39 +0000 (Sun, 21 Oct 2012) | 3 lines
+Changed paths:
+   M /trunk
+   M /trunk/.pkgmeta
+
+Changes:
+*svnprops
+*pkgmeta
+------------------------------------------------------------------------
+r31 | computerpunk | 2012-10-21 12:52:50 +0000 (Sun, 21 Oct 2012) | 2 lines
+Changed paths:
+   M /trunk/Broker_MailBox.toc
+
+Changes:
+*.toc update.
+------------------------------------------------------------------------

@@ -1,10 +1,10 @@
--- $Id: AtlasOptions.lua 1661 2012-09-18 13:41:12Z arithmandar $
+-- $Id: AtlasOptions.lua 1812 2012-10-10 10:56:39Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -127,6 +127,17 @@ function AtlasOptions_ToggleBossDesc()
 end
 
 
+function AtlasOptions_ToggleCheckModule()
+	if(AtlasOptions.AtlasCheckModule) then
+		AtlasOptions.AtlasCheckModule = false;
+	else
+		AtlasOptions.AtlasCheckModule = true;
+	end
+	AtlasOptions_Init();
+	Atlas_Refresh();
+end
+
+
 local function Reset_Dropdowns()
 	AtlasOptions.AtlasZone = 1;
 	AtlasOptions.AtlasType = 1;
@@ -165,6 +176,7 @@ function AtlasOptions_Init()
 	AtlasOptionsFrameCtrl:SetChecked(AtlasOptions.AtlasCtrl);
 	AtlasOptionsFrameLock:SetChecked(AtlasOptions.AtlasLocked);
 	AtlasOptionsFrameBossDesc:SetChecked(AtlasOptions.AtlasBossDesc);
+	AtlasOptionsFrameCheckModule:SetChecked(AtlasOptions.AtlasCheckModule);
 --	AtlasOptionsFrameSliderButtonPos:SetValue(AtlasOptions.AtlasButtonPosition);
 --	AtlasOptionsFrameSliderButtonRad:SetValue(AtlasOptions.AtlasButtonRadius);
 	AtlasOptionsFrameSliderAlpha:SetValue(AtlasOptions.AtlasAlpha);

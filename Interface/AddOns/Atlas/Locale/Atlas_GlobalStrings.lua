@@ -1,10 +1,10 @@
--- $Id$
+-- $Id: Atlas_GlobalStrings.lua 1811 2012-10-10 10:54:01Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -84,6 +84,8 @@ ATLAS_OPTIONS_CLAMPED_TIP	= AL["ATLAS_OPTIONS_CLAMPED_TIP"];
 ATLAS_OPTIONS_CTRL		= AL["ATLAS_OPTIONS_CTRL"];
 ATLAS_OPTIONS_CTRL_TIP		= AL["ATLAS_OPTIONS_CTRL_TIP"];
 ATLAS_OPTIONS_DONTSHOWAGAIN 	= AL["ATLAS_OPTIONS_DONTSHOWAGAIN"];
+ATLAS_OPTIONS_CHECKMODULE	= AL["ATLAS_OPTIONS_CHECKMODULE"];
+ATLAS_OPTIONS_CHECKMODULE_TIP	= AL["ATLAS_OPTIONS_CHECKMODULE_TIP"];
 
 ATLAS_BUTTON_CLOSE		= AL["ATLAS_BUTTON_CLOSE"];
 ATLAS_BUTTON_TOOLTIP_TITLE	= AL["ATLAS_BUTTON_TOOLTIP_TITLE"];
@@ -139,4 +141,4 @@ ATLAS_DEP_MSG3			= AL["ATLAS_DEP_MSG3"];
 ATLAS_DEP_OK			= AL["ATLAS_DEP_OK"];
 
 ATLAS_INFO			= AL["ATLAS_INFO"];
-ATLAS_INFO_SPTACK		= AL["ATLAS_INFO_SPTACK"];
+ATLAS_INFO_MSG			= AL["ATLAS_INFO"].." - v1.22.01\n\n"..AL["ATLAS_INFO_12201"];

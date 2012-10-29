@@ -352,7 +352,7 @@ function VUHDO_setHealth(aUnit, aMode)
 			tInfo["dead"] = tIsDead;
 			tInfo["afk"] = tIsAfk;
 			tInfo["connected"] = tIsConnected;
-			tInfo["threat"] = UnitThreatSituation(aUnit);
+			tInfo["threat"] = UnitThreatSituation(aUnit) or 0;
 			tInfo["threatPerc"] = 0;
 			tInfo["isVehicle"] = UnitHasVehicleUI(aUnit);
 			tInfo["className"] = tLocalClass or "";
@@ -867,6 +867,7 @@ local tInfo;
 local tIsDcChange;
 local tName, tRealm;
 local tOldUnitType;
+local tPet;
 function VUHDO_refreshRaidMembers()
 	VUHDO_IS_SUSPICIOUS_ROSTER = false;
 
@@ -926,6 +927,12 @@ function VUHDO_refreshRaidMembers()
 				end
 
 				VUHDO_setHealthSafe(format("%s%d", tPetUnitType, i), 1); -- VUHDO_UPDATE_ALL
+			elseif (VUHDO_RAID[tPlayer] ~= nil) then
+				VUHDO_RAID[tPlayer]["connected"] = false;
+				tPet = VUHDO_RAID[tPlayer]["petUnit"];
+				if (VUHDO_RAID[tPet] ~= nil) then
+					VUHDO_RAID[tPet]["connected"] = false;
+				end
 			end
 
 			VUHDO_TIMERS["MIRROR_TO_MACRO"] = 8;

@@ -82,14 +82,18 @@ end
 function VUHDO_lnfTabRadioButtonClicked(aCheckButton)
 	VUHDO_lnfRadioButtonClicked(aCheckButton);
 
+  -- Achtung: Zuerst verstecken dann erst anzeigen, damit OnShow/OnHide in der richtigen Reihenfolge kommt
 	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
-		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
-			if (tButton["tabPanel"] ~= nil) then
-				 _G[tButton["tabPanel"]]:SetShown(tButton["tabPanel"] == aCheckButton["tabPanel"]);
-			end
+
+		if (tButton:IsObjectType("CheckButton")
+			and strfind(tButton:GetName(), "Radio", 1, true)
+			and tButton["tabPanel"] ~= nil
+			and tButton["tabPanel"] ~= aCheckButton["tabPanel"]) then
+				 	_G[tButton["tabPanel"]]:Hide();
 		end
 	end
 
+	_G[aCheckButton["tabPanel"]]:Show();
 	collectgarbage('collect');
 end
 

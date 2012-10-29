@@ -66,14 +66,12 @@ end
 --
 local tHotBar;
 local tHotBarColor;
-local tHotName;
 function VUHDO_initHotBars()
 	for tCnt = 6, 8 do
 		tHotBar = VUHDO_getHealthBar(sButton, tCnt + 3);
 		tHotBar:ClearAllPoints();
 
-		tHotName = sHotConfig["SLOTS"][tCnt];
-		if (VUHDO_strempty(tHotName)) then
+		if (VUHDO_strempty(sHotConfig["SLOTS"][tCnt])) then
 			tHotBar:Hide();
 		else
 			tHotBar:SetWidth(sBarWidth);
@@ -180,15 +178,11 @@ local function VUHDO_initHotIcon(anIndex)
 			tCounter:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"]);
 			tCounter:Show();
 		else
-			tTimer:SetTextColor(tHotColor["TR"], tHotColor["TG"], tHotColor["TB"], tHotColor["TO"]);
+			tTimer:SetTextColor(VUHDO_textColor(tHotColor));
 			tCounter:Hide();
 		end
 
-		if (tHotColor["countdownMode"] == 0) then
-			tTimer:Hide();
-		else
-			tTimer:Show();
-		end
+		tTimer:SetShown(tHotColor["countdownMode"] ~= 0);
 
 		tChargeIcon:SetWidth(tHotIcon:GetWidth() + 4);
 		tChargeIcon:SetHeight(tHotIcon:GetHeight() + 4);
@@ -198,7 +192,6 @@ local function VUHDO_initHotIcon(anIndex)
 		if (tHotColor["isClock"]) then
 			local tCd = VUHDO_getOrCreateCooldown(VUHDO_getBarIconFrame(sButton, anIndex), sButton, anIndex);
 			tCd:SetAllPoints(tHotIcon);
-			--tCd:SetDrawEdge(true);
 			tCd:SetReverse(true);
 			tCd:SetCooldown(GetTime(), 0);
 			tCd:SetAlpha(0);

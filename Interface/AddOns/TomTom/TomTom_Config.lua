@@ -186,6 +186,7 @@ local function createconfig()
 				type = "toggle",
 				name = L["Lock waypoint arrow"],
 				desc = L["Locks the waypoint arrow, so it can't be moved accidentally"],
+				width = "double",
 				arg = "arrow.lock",
 			},
 			rightclick = {
@@ -226,6 +227,7 @@ local function createconfig()
 				name = L["\"Arrival Distance\""],
 				desc = L["This setting will control the distance at which the waypoint arrow switches to a downwards arrow, indicating you have arrived at your destination"],
 				min = 0, max = 150, step = 5,
+				width = "double",
 				arg = "arrow.arrival",
 			},
             enablePing = {
@@ -244,10 +246,18 @@ local function createconfig()
 				width = "double",
 				arg = "arrow.hideDuringPetBattles",
 			},
+			stickyCorpse = {
+				order = 14,
+				type = "toggle",
+				name = L["Allow the corpse arrow to override other waypoints"],
+				desc = L["When the player is dead and has a waypoint towards their corpse, it will prevent other waypoints from changing the crazy arrow"],
+				width = "double",
+				arg = "arrow.stickycorpse",
+			},
 			display = {
 				type = "group",
 				name = L["Arrow display"],
-				order = 14,
+				order = 15,
 				inline = true,
 				args = {
 					help = {
@@ -649,6 +659,7 @@ local function createconfig()
 				name = L["Clear waypoint distance"],
 				desc = L["Waypoints can be automatically cleared when you reach them.  This slider allows you to customize the distance in yards that signals your \"arrival\" at the waypoint.  A setting of 0 turns off the auto-clearing feature\n\nChanging this setting only takes effect after reloading your interface."],
 				min = 0, max = 150, step = 1,
+				width = "double",
 				arg = "persistence.cleardistance",
 			},
 			corpse_arrow = {
@@ -658,6 +669,17 @@ local function createconfig()
 				desc = L["TomTom can automatically set a waypoint when you die, guiding you back to your corpse"],
 				width = "double",
 				arg = "general.corpse_arrow",
+			},
+			reset_waypoint_options = {
+				type = "execute",
+				order = 7,
+				name = L["Reset waypoint display options to current"],
+				desc = L["If you have changed the waypoint display settings (minimap, world), this will re-set all waypoints to the current options."],
+				func = function()
+					TomTom:ResetWaypointOptions()
+					TomTom:ReloadWaypoints()
+				end,
+				width = "double",
 			},
 		},
 	}

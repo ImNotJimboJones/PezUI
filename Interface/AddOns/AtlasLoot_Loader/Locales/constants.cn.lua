@@ -1,4 +1,4 @@
-﻿-- $Id: constants.cn.lua 3826 2012-10-03 08:56:09Z ananhaid $
+﻿-- $Id: constants.cn.lua 3877 2012-10-11 13:08:18Z ananhaid $
 --[[
 constants.cn.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -48,11 +48,11 @@ if AL then
 
 	-- Stats short
 	AL["iLvl"] = "等级";	-- Item lvl
-	AL["str"] = "力";	-- Strength
-	AL["agi"] = "敏";	-- Agility
-	AL["sta"] = "耐";	-- Stamina
-	AL["int"] = "智";	-- Intellect
-	AL["spi"] = "精";	-- Spirit
+	AL["str"] = "力量";	-- Strength
+	AL["agi"] = "敏捷";	-- Agility
+	AL["sta"] = "耐力";	-- Stamina
+	AL["int"] = "智力";	-- Intellect
+	AL["spi"] = "精神";	-- Spirit
 	AL["Crit"] = "暴击";	-- Crit Rating
 	AL["Dodge"] = "躲闪";	-- Dodge Rating
 	AL["Exp"] = "精准";	-- Expertise Rating
@@ -72,7 +72,7 @@ if AL then
 	AL["Load AtlasLoot"] = "加载 AtlasLoot";
 	AL["Module \"%s\" is disabled."] = "\"%s\"模块已禁用。";
 	AL["Module \"%s\" is missing."] = "\"%s\"模组缺失。";
-	
+
 	-- MiniMap-Button
 	AL["|cffFF0000Click: |cffFFFFFFOpen AtlasLoot\n|cffFF0000Shift+Click: |cffFFFFFFOpen AtlasLoot-Options "] = "|cffFF0000点击：|cffFFFFFF打开 AtlasLoot\n|cffFF0000Shift+点击：|cffFFFFFF打开 AtlasLoot 选项";
 
@@ -253,6 +253,8 @@ if AL then
 	AL["ilvl 245"] = "等级245";
 	AL["ilvl 264"] = "等级264";
 	AL["ilvl 397"] = "等级397";
+	AL["ilvl 470"] = "等级470";
+	AL["ilvl 490"] = "等级490";
 	AL["Gladiator"] = "角斗士";
 	AL["Vengeful"] = "复仇";
 	AL["Merciless"] = "残酷";
@@ -343,6 +345,7 @@ if AL then
 	AL["Crafted Epic Weapons"] = "制造的史诗武器";
 	AL["Dragon's Eye"] = "龙眼石";
 	AL["Chimera's Eye"] = "奇美拉之眼";
+	AL["Serpent's Eye"] = "蛟眼石";
 
 	-- Sets/Collections Menu
 	AL["Sets"] = "套装";
@@ -467,6 +470,15 @@ if AL then
 	AL["Armor Enhancements"] = "护甲强化";
 	AL["Weapon Enhancements"] = "武器强化";
 
+	-- Cooking
+	AL["Banquets/Feasts"] = "盛宴/大餐";
+	AL["Way of the Brew"] = "酿造之道";
+	AL["Way of the Grill"] = "烧烤之道";
+	AL["Way of the Oven"] = "烘焙之道";
+	AL["Way of the Pot"] = "炖煮之道";
+	AL["Way of the Steamer"] = "蒸烧之道";
+	AL["Way of the Wok"] = "烹炒之道";
+
 	-- Enchanting
 	AL["Enchant Boots"] = "附魔脚部";
 	AL["Enchant Bracer"] = "附魔护腕";
@@ -483,15 +495,12 @@ if AL then
 	AL["Tinker"] = "工程学专属";
 
 	-- Inscription
-	AL["Glyph"] = "雕文";
-	AL["Prime Glyph"] = "主要雕纹";
 	AL["Major Glyph"] = "大型雕文";
 	AL["Minor Glyph"] = "小型雕文";
 	AL["Runescrolls"] = "符文卷轴";
 	AL["Recall"] = "召回";
 	AL["Scrolls"] = "卷轴";
 	AL["Off-Hand Items"] = "副手物品";
-	AL["Staves/Shoulder Enchants"] = "法杖/肩膀附魔";
 	AL["Shoulder Enchants"] = "肩膀附魔";
 	AL["Reagents"] = "材料";
 	AL["Book of Glyph Mastery"] = "雕文精通之书";
@@ -605,6 +614,7 @@ if AL then
 	AL["Raid Finder"] = "团队查找器";
 	AL["Pandaria World Bosses"] = "潘达利亚世界首领";
 	AL["Elite"] = "精锐";
+	AL["Vegetables"] = "蔬菜";
 
 	-- Loot Table Names
 	AL["Level 30-39"] = "等级30-39";
@@ -618,17 +628,16 @@ if AL then
 	-- Profession descriptions
 	AL["Buff"] = "增益";
 	AL["Agility"] = "敏捷";
+	AL["Attributes"] = "属性";
 	AL["Intellect"] = "智力";
 	AL["Strength"] = "力量";
 	AL["Spirit"] = "精神";
 	AL["Stamina"] = "耐力";
-	AL["Agility, Intellect, Strength"] = "敏捷，智力，力量";
 	AL["Spell Power"] = "法术能量";
 	AL["Attack Power"] = "攻击强度";
 	AL["Spell/Attack Power"] = "法术能量/攻击强度";
 	AL["Hit Rating"] = "命中等级";
 	AL["Crit Rating"] = "暴击等级";
-	AL["Crit/Hit Rating"] = "暴击/命中等级";
 	AL["Haste Rating"] = "急速等级";
 	AL["Dodge Rating"] = "闪躲等级";
 	AL["Expertise Rating"] = "专精等级";
@@ -680,14 +689,9 @@ if AL then
 	AL["Tribute Run"] = "贡品";
 	AL["Dire Maul Books"] = "厄运之槌书籍";
 	AL["Random Boss Loot"] = "首领随机掉落";
-	AL["BT Patterns/Plans"] = "黑暗神殿图样/设计图";
-	AL["Hyjal Summit Designs"] = "海加尔峰图纸";
-	AL["SP Patterns/Plans"] = "太阳之井高地图样/设计图";
-	AL["Ulduar Formula/Patterns/Plans"] = "奥杜尔公式/图样/设计图";
-	AL["Trial of the Crusader Patterns/Plans"] = "十字军的试炼图样/设计图";
+	AL["Formula/Patterns/Plans"] = "公式/图样/设计图";
 	AL["BRD Blacksmithing Plans"] = "黑石深渊锻造设计图";
-	AL["Firelands Patterns/Plans"] = "火焰之地图样/设计图";
-	AL["Dragon Soul Patterns/Plans"] = "巨龙之魂图样/设计图";
+	AL["Patterns/Plans"] = "图样/设计图";
 
 	-- General titles
 	AL["Achievement"] = "成就";
@@ -746,11 +750,8 @@ if AL then
 	-- Darkmoon Faire
 	AL["Darkmoon Faire Rewards"] = "暗月马戏团奖励";
 	AL["Low Level Decks"] = "低级卡片";
-	AL["Level 60 Trinkets"] = "等级60饰品";
-	AL["Level 70 Trinkets"] = "等级70饰品";
 	AL["Level 60 & 70 Trinkets"] = "等级60/70饰品";
-	AL["Level 80 Trinkets"] = "等级80饰品";
-	AL["Level 85 Trinkets"] = "等级85饰品";
+	AL["Trinkets"] = "饰品";
 
 	-- Card Game Decks and descriptions
 	AL["Loot Card Items"] = "集换卡物品";
@@ -943,6 +944,7 @@ if AL then
 	-- Specs
 	AL["Balance"] = "平衡";
 	AL["Feral"] = "野性战斗";
+	AL["Guardian"] = "守护";
 	AL["Restoration"] = "回复";
 	AL["Holy"] = "神圣";
 	AL["Discipline"] = "戒律";
@@ -952,13 +954,13 @@ if AL then
 	AL["Elemental"] = "元素";
 	AL["Enhancement"] = "增强";
 	AL["Fury"] = "狂怒";
-	AL["Demonology"] = "恶魔";
+	AL["Demonology"] = "恶魔学识";
 	AL["Destruction"] = "毁灭";
 	AL["Tanking"] = "坦克";
 	AL["DPS"] = "DPS";
 	AL["Mistweaver"] = "织雾";
-	AL["Brewmaster"] = "酿酒";
-	AL["Windwalker"] = "风行";
+	AL["Brewmaster"] = "酒仙";
+	AL["Windwalker"] = "踏风";
 
 	-- NPCs missing from BabbleBoss
 	AL["Trash Mobs"] = "普通怪物";
@@ -1149,6 +1151,7 @@ if AL then
 	AL["Stolen Present"] = "被窃的礼物";
 	AL["Oozing Bag"] = "沾满淤泥的袋子";
 	AL["Ominous Seed"] = "不祥之种";
+	AL["Treasures of the Vale"] = "锦绣谷宝藏";
 
 	-- Blizzard Promotions
 	AL["Annual Pass"] = "年卡";

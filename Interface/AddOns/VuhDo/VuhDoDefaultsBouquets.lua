@@ -1097,7 +1097,7 @@ local tRaidCds = {
 	22812, -- Barkskin
 	106922, -- Might of Ursoc
 	740, -- Tranquility
-	110309, -- Symbiosis
+	--110309, -- Symbiosis
 	102342, -- Ironbark
 	61336, -- Survival Instincts
 	105739, -- Mass Regeneration

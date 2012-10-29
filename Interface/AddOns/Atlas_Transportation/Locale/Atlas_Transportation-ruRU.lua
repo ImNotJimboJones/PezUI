@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-ruRU.lua 1687 2012-09-23 11:54:31Z ananhaid $
+-- $Id: Atlas_Transportation-ruRU.lua 1830 2012-10-15 04:00:34Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -28,7 +28,7 @@
 -- Atlas Localization Data (Russian)
 -- Translated by Nitrogen (Exorsus Guild)
 -- Свежеватель Душ
--- Last Update : $Date: 2012-09-23 19:54:31 +0800 (Sun, 23 Sep 2012) $
+-- Last Update : $Date: 2012-10-15 12:00:34 +0800 (Mon, 15 Oct 2012) $
 --]]
 
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
@@ -59,4 +59,9 @@ if AL then
 	AL["Wind Rider"] = "Укротитель ветрокрылов";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "Не будет доступна пока не завершена серия Битвы за Андорал."; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "Башни Цеппелинов";
+	AL["Climbing Rope"] = "Канат";
+	AL["Rappelling Rope"] = "Канат для спуска";
+	AL["Abandoned Kite"] = "Брошенный воздушный змей";
+--	AL["From sea level to ground level"] = "From sea level to ground level";
+	AL["Whispercloud's Balloon"] = "Воздушный шар Шепота Облака";
 end

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-deDE.lua 1644 2012-09-17 05:43:46Z arithmandar $
+﻿-- $Id: Atlas-deDE.lua 1815 2012-10-10 11:59:47Z dynaletik@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -31,7 +31,7 @@ local AL = AceLocale:NewLocale("Atlas", "deDE", false);
 -- Deutsche Lokalisierung (German, deDE)
 -- Dynaletik (ICQ: 176-289-585)
 -- Nihlo (ICQ: 260-869-930)
--- Letztes Update: 23.11.2011
+-- Letztes Update: 03.10.2012
 
 if ( GetLocale() == "deDE" ) then
 -- Define the leading strings to be ignored while sorting
@@ -99,11 +99,14 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "Steuerung drücken, um Tooltips anzuzeigen";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "Aktivieren, um die Kartendetails beim Drücken der Strg-Taste und Überfahren eines Eintrages anzuzeigen. Nützlich, falls der dargestellte Text länger als das Fenster groß ist.";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Diese Information nicht erneut anzeigen.";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "Über fehlende Module / Plugins benachrichtigen.";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Aktivieren Sie diese Option, um nach dem Starten von WoW zu prüfen, ob Module / Plugins fehlen.";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "Schließen";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
 	AL["ATLAS_BUTTON_TOOLTIP_HINT"] = "Linke Maustaste drücken, um Atlas zu öffnen.\nMittlere Maustaste drücken, um Atlas Optionen anzuzeigen.\nRechte Maustaste gedrückt halten, um diesen Schalter zu verschieben.";
 	AL["ATLAS_LDB_HINT"] = "Linke Maustaste drücken, um Atlas zu öffnen.\nRechte Maustaste drücken, um die Atlas Optionen anzuzeigen.";
+	AL["ATLAS_MINIMAPLDB_HINT"] = "Linke Maustaste drücken, um Atlas zu öffnen.\nRechte Maustaste drücken, um die Atlas Optionen anzuzeigen.\nRechte Maustaste gedrückt halten, um diesen Schalter zu verschieben.";
 
 	AL["ATLAS_OPTIONS_CATDD"] = "Sortierung der Karten nach:";
 	AL["ATLAS_DDL_CONTINENT"] = "Kontinent";
@@ -151,7 +154,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "OK";
 
 	AL["ATLAS_INFO"] = "Atlas Information";
-	AL["ATLAS_INFO_SPTACK"] = "Wichtiger Hinweis:\n\nDa die Addondatei stets größer wird, wurde ein Teil \nder Instanzkarten in getrennte Module verschoben.\n\nBeim Download des Addons von den bekannten Webseiten \nerhält man daher nun lediglich das Haupt-Addon mit den Kernfunktionen \nund den Instanzkarten von Cataclysm.\n\nWer alle alten Instanzkarten und alle Atlas Plugins benötigt, \nmuss diese seperat herunterladen.\n\nMehr Infos dazu gibt es im Forum:\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12200"] = "Wichtiger Hinweis:\n\nDa die Addondatei stets größer wird, wurde ein Teil \nder Instanzkarten in getrennte Module verschoben.\n\nBeim Download des Addons von den bekannten Webseiten \nerhält man daher nun lediglich das Haupt-Addon mit den Kernfunktionen \nund den Instanzkarten von Cataclysm.\n\nWer alle alten Instanzkarten und alle Atlas Plugins benötigt, \nmuss diese seperat herunterladen.\n\nMehr Infos dazu gibt es im Forum:\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12201"] = "Bitte beachten Sie, dass ein neues Plugin |cff6666ffAtlas Scenarios|cffffffff mit den Karten der neuen Szenarien erstellt wurde. \n\nBesuchen Sie für weitere Details unsere Webseite und vergessen Sie nicht,\ndas Plugin separat zu installieren.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+
+	AL["ATLAS_MISSING_MODULE"] = "Atlas hat fehlende Module / Plugins erkannt: ";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -507,10 +513,12 @@ if AL then
 
 	--Maraudon	
 	AL["Elder Splitrock"] = "Urahne Splitterfels";
+	AL["Celebras the Redeemed"] = "Celebras der Erlöste";
 
 	--Ragefire Chasm
 	AL["Commander Bagran"] = "Kommandant Bagran";
 	AL["Invoker Xorenth"] = "Herbeirufer Xorenth";
+	AL["Scout Cage"] = "Späherkäfig";
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "Koristrasza";
@@ -622,11 +630,24 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Commander Lindon"] = "Kommandant Lindon";
+	AL["Hooded Crusader"] = "Vermummte Kreuzfahrerin";
+	AL["Bucket of Meaty Dog Food"] = "Eimer mit fleischigem Hundefutter";
+	AL["Reinforced Archery Target"] = "Verstärkte Zielscheibe";
+
+	--Scarlet Monastery
+
 	--Scholomance
-	AL["Instructor Chillheart's Phylactery"] = "Instrukteur Kaltherz' Phylakterium";
-	AL["Coffer of Forgotten Souls"] = "Truhe vergessener Seelen";
+	AL["Instructor Chillheart's Phylactery"] = "Ausbilderin Kaltherz' Phylakterium";
 	AL["Professor Slate"] = "Professor Schiefer";
 	AL["Polyformic Acid Potion"] = "Polyformgift";
+	AL["Talking Skull"] = "Sprechender Schädel";
+	AL["In the Shadow of the Light"] = "Im Schatten des Lichts";
+	AL["Kel'Thuzad's Deep Knowledge"] = "Kel'Thuzads tiefgründiges Wissen";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "Verbotene Riten und andere nekromantische Rituale";
+	AL["Coffer of Forgotten Souls"] = "Truhe der vergessenen Seelen";
+	AL["The Dark Grimoire"] = "Der dunkle Zauberfoliant";
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Apotheker-Trio";
@@ -638,12 +659,6 @@ if AL then
 	AL["Haunted Stable Hand"] = "Geisterhafter Stallknecht";
 	AL["Investigator Fezzen Brasstacks"] = "Ermittler Fezzen Kupferstapel";
 
-	--SM: Cathedral
-
-	--SM: Halls
-	AL["Hunter Commander"] = "Jägerkommandant";
-	AL["Reinforced Archery Target"] = "Verstärkte Zielscheibe";
-
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Kreuzzugskommandant Eligor Morgenbringer <Bruderschaft des Lichts>";
 	AL["Master Craftsman Wilhelm <Brotherhood of the Light>"] = "Meisterhandwerker Wilhelm <Bruderschaft des Lichts>";
@@ -654,7 +669,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "Briefkasten in der Feststraße";
 	AL["Elder Farwhisper"] = "Urahne Fernwisper";
 	AL["Market Row Postbox"] = "Briefkasten in der Marktgasse";
-	AL["Crusaders' Square Postbox"] = "Briefkasten am Kreuzzüglerplatz";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "Briefkasten am Ältestenplatz";
@@ -1167,20 +1181,28 @@ if AL then
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "Bogenmeisterin Li <Wachoffizierin>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "Sinan die Träumerin";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
+	AL["Ban Bearheart"] = "Ban Bärenherz";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "Shado-Meister Chum-Kiu";
 
 	--Stormstout Brewery
+	AL["Auntie Stormstout"] = "Tantchen Sturmbräu";
+	AL["Chen Stormstout"] = "Chen Sturmbräu";
 
 	--Temple of the Jade Serpent
+	AL["Master Windstrong"] = "Meister Windstark";
+	AL["Priestess Summerpetal"] = "Priesterin Sommerblatt";
 
 	--Terrace of Endless Spring
 

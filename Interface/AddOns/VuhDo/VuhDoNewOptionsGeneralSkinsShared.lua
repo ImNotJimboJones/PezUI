@@ -2485,6 +2485,7 @@ function VUHDO_loadProfile(aName)
 	VUHDO_reloadUI();
 	VUHDO_resetTooltip();
 	VUHDO_initBlizzFrames();
+	VUHDO_bouqetsChanged();
 	if (VUHDO_initCustomDebuffComboModel ~= nil) then
 		VUHDO_initCustomDebuffComboModel();
 	end

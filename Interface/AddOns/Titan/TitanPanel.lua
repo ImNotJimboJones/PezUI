@@ -1453,6 +1453,11 @@ function TitanPanelButton_Justify()
 	if ( not TITAN_PANEL_BUTTONS_INIT_FLAG or not TitanPanelSettings ) then
 		return;
 	end
+	if InCombatLockdown() then
+--TitanDebug("_Justify during combat!!!")
+		return;
+		-- Issue 856 where some taint is caused if the plugin size is updated during combat. Seems since Mists was released...
+	end
 
 	local bar
 	local vert

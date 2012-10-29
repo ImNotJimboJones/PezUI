@@ -1042,7 +1042,6 @@ local VUHDO_redrawPanel = VUHDO_redrawPanel;
 
 
 --
-local tGcdCol;
 function VUHDO_redrawAllPanels()
 	VUHDO_resetMacroCaches();
 	resetSizeCalcCaches();
@@ -1061,11 +1060,13 @@ function VUHDO_redrawAllPanels()
 	VUHDO_updateAllRaidBars();
 
 	-- GCD bar
-	tGcdCol = VUHDO_PANEL_SETUP["BAR_COLORS"]["GCD_BAR"];
-	VuhDoGcdStatusBar:SetVuhDoColor(tGcdCol);
-	VuhDoGcdStatusBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
-	VuhDoGcdStatusBar:SetValue(0);
-	VuhDoGcdStatusBar:SetFrameStrata("TOOLTIP");
+	if (VUHDO_isShowGcd()) then
+		local tGcdCol = VUHDO_PANEL_SETUP["BAR_COLORS"]["GCD_BAR"];
+		VuhDoGcdStatusBar:SetVuhDoColor(tGcdCol);
+		VuhDoGcdStatusBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
+		VuhDoGcdStatusBar:SetValue(0);
+		VuhDoGcdStatusBar:SetFrameStrata("TOOLTIP");
+	end
 	VuhDoGcdStatusBar:Hide();
 
 	-- Direction arrow

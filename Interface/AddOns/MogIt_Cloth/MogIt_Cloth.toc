@@ -1,10 +1,10 @@
 ## Interface: 50001
 ## Author: Aelobin (The Maelstrom EU) & Lombra (Shattered Hand EU)
-## Version: 3.0.0
+## Version: 3.0.6
 ## LoadOnDemand: 1
 ## RequiredDeps: MogIt
 ## X-MogItModuleVersion: 1
-## X-Curse-Packaged-Version: v3.0.5
+## X-Curse-Packaged-Version: v3.0.6
 ## X-Curse-Project-Name: MogIt
 ## X-Curse-Project-ID: mogit
 ## X-Curse-Repository-ID: wow/mogit/mainline

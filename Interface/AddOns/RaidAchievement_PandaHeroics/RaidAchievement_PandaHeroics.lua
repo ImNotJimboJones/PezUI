@@ -433,7 +433,7 @@ end
 --Temple of the Jade Serpent
 if GetCurrentMapAreaID()==867 then
 
-if arg2=="SPELL_DAMAGE" and (arg10==115167 or arg10==106105 or arg10==106334) and UnitName("player")==arg8 then
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and (arg10==115167 or arg10==106105 or arg10==106334) and UnitName("player")==arg8 then
   if phraspisokon[10]==1 and phraachdone1 then
     phramyfail(10)
   end

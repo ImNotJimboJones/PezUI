@@ -118,7 +118,7 @@ local function Patch_ShowOutfitTooltip(self, pOutfit, pOwner, pMissingItems, pBa
 		end
 		vDescription = string.format(FBConstants.CONFIG_OUTFITTER_TEXT, bp, sp)..pstring;
 		if (self:GetOutfitDescription(pOutfit)) then
-			GameTooltip:AddLine(vDescription, "", 1, 1, 1)
+			GameTooltip:AddLine(vDescription, 1, 1, 1)
 		else
 			GameTooltip:SetOwner(pOwner, pTooltipAnchor or "ANCHOR_LEFT")
 			GameTooltip:AddLine(pOutfit:GetName())

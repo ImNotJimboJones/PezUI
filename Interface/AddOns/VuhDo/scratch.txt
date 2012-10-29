@@ -2,15 +2,17 @@
 
 - Option je Bouquet Stacks aufaddieren
 - Keine Balkenfarbe custom debuffs per spellID
-- Sound für auslaufende Buffs BuffWatch
 - Zweite Waffenverz. Schamanen, Erkennung welche Waffenverz.
 - Gifte Schurke
 - Sehbehindertenmodus Optionen
 
 - Direction arrow bei hoher frame strata?
 - Share Bouquets
-- Buff-Config in Scroll-Panel (Totems einzeln?)
-- Range detection spell for hostile targets
+- Target-Farbe bei Gesinnungswechsel
+- Rollen-Icons verschwinden?
+- Summe shield absorbs als eine zahl
+- Uplift Mönch als AOE-Advice
+
 
 1. Health     3
 2. Mana       1

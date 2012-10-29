@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-enUS.lua 1713 2012-09-24 18:50:05Z arithmandar $
+﻿-- $Id: Atlas-enUS.lua 1811 2012-10-10 10:54:01Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -92,6 +92,8 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "Hold down Control for tooltips";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "Enable to show tooltips text while hold down control key and mouse over the map info. Useful when the text is too long to be displayed in the window.";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Don't show the same information again.";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "Remind me for missing module(s) / plug-in(s).";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Enable to perform checking if any missing Atlas module / plug-in after WoW loaded.";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "Close";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
@@ -145,7 +147,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "Ok";
 
 	AL["ATLAS_INFO"] = "Atlas Information";
-	AL["ATLAS_INFO_SPTACK"] = "Important Notice:\n\nDue to the concern of increasing addon file size, we have moved out \npart of our dungeon maps and built-in plug-ins into separated addon package.\n\nUsers who download our addons from some of the famous game web sites \nmay only get our core addon which only include the Atlas core function \nand the latest WoW expansion maps.\n\nIf you also want to see all the old expansions' maps, and also want all those \nAtlas plug-ins made by us, you have to download and install them separately.\n\nRead below forum topic for more information:\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n\nOr visit our website to see where to download:\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	AL["ATLAS_INFO_12200"] = "Important Notice:\n\nDue to the concern of increasing addon file size, we have moved out \npart of our dungeon maps and built-in plug-ins into separated addon package.\n\nUsers who download our addons from some of the famous game web sites \nmay only get our core addon which only include the Atlas core function \nand the latest WoW expansion maps.\n\nIf you also want to see all the old expansions' maps, and also want all those \nAtlas plug-ins made by us, you have to download and install them separately.\n\nRead below forum topic for more information:\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n\nOr visit our website to see where to download:\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	AL["ATLAS_INFO_12201"] = "Please be advised that we have created a new plug-in - |cff6666ffAtlas Scenarios|cffffffff, to \nprovide the brand-new Scenarios maps introduced in WoW 5.0. \n\nCheck out our web site for more details, and don't forget to download / \ninstall it separately.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+
+	AL["ATLAS_MISSING_MODULE"] = "Atlas has detected missing module(s) / plugin(s): ";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -501,10 +506,12 @@ if AL then
 
 	--Maraudon	
 	AL["Elder Splitrock"] = "Elder Splitrock";
+	AL["Celebras the Redeemed"] = "Celebras the Redeemed";
 
 	--Ragefire Chasm
 	AL["Commander Bagran"] = "Commander Bagran";
 	AL["Invoker Xorenth"] = "Invoker Xorenth";
+	AL["Scout Cage"] = "Scout Cage";
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "Koristrasza";
@@ -616,6 +623,25 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Commander Lindon"] = "Commander Lindon";
+	AL["Hooded Crusader"] = "Hooded Crusader";
+	AL["Bucket of Meaty Dog Food"] = "Bucket of Meaty Dog Food";
+	AL["Reinforced Archery Target"] = "Reinforced Archery Target";
+
+	--Scarlet Monastery
+
+	--Scholomance
+	AL["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery";
+	AL["Professor Slate"] = "Professor Slate";
+	AL["Polyformic Acid Potion"] = "Polyformic Acid Potion";
+	AL["Talking Skull"] = "Talking Skull";
+	AL["In the Shadow of the Light"] = "In the Shadow of the Light";
+	AL["Kel'Thuzad's Deep Knowledge"] = "Kel'Thuzad's Deep Knowledge";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "Forbidden Rites and other Rituals Necromantic";
+	AL["Coffer of Forgotten Souls"] = "Coffer of Forgotten Souls";
+	AL["The Dark Grimoire"] = "The Dark Grimoire";
+
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Apothecary Trio";
 	AL["Apothecary Hummel <Crown Chemical Co.>"] = "Apothecary Hummel <Crown Chemical Co.>";
@@ -625,12 +651,6 @@ if AL then
 	AL["Deathstalker Commander Belmont"] = "Deathstalker Commander Belmont";
 	AL["Haunted Stable Hand"] = "Haunted Stable Hand";
 	AL["Investigator Fezzen Brasstacks"] = "Investigator Fezzen Brasstacks";
-
-	--SM: Cathedral
-
-	--SM: Halls
-	AL["Hunter Commander"] = "Hunter Commander";
-	AL["Reinforced Archery Target"] = "Reinforced Archery Target";
 
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>";
@@ -642,7 +662,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "Festival Lane Postbox";
 	AL["Elder Farwhisper"] = "Elder Farwhisper";
 	AL["Market Row Postbox"] = "Market Row Postbox";
-	AL["Crusaders' Square Postbox"] = "Crusaders' Square Postbox";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "Elders' Square Postbox";
@@ -1155,35 +1174,28 @@ if AL then
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "Bowmistress Li <Guard Captain>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "Sinan the Dreamer";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
-	
-	--Scarlet Halls
-	AL["Hooded Crusader"] = "Hooded Crusader";
-	AL["Bucket of Meaty Dog Food"] = "Bucket of Meaty Dog Food";
-
-	--Scholomance
-	AL["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery";
-	AL["Coffer of Forgotten Souls"] = "Coffer of Forgotten Souls";
-	AL["Professor Slate"] = "Professor Slate";
-	AL["Polyformic Acid Potion"] = "Polyformic Acid Potion";
-
-	AL["Talking Skull"] = "Talking Skull";
-	AL["In the Shadow of the Light"] = "In the Shadow of the Light";
-	AL["Kel'Thuzad's Deep Knowledge"] = "Kel'Thuzad's Deep Knowledge";
-	AL["The Dark Grimoire"] = "The Dark Grimoire";
+	AL["Ban Bearheart"] = "Ban Bearheart";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "Shado-Master Chum Kiu";
 
 	--Stormstout Brewery
+	AL["Auntie Stormstout"] = "Auntie Stormstout";
+	AL["Chen Stormstout"] = "Chen Stormstout";
 
 	--Temple of the Jade Serpent
+	AL["Master Windstrong"] = "Master Windstrong";
+	AL["Priestess Summerpetal"] = "Priestess Summerpetal";
 
 	--Terrace of Endless Spring
 

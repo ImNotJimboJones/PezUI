@@ -144,7 +144,7 @@ FishingTranslations["enUS"] = {
 	CONFIG_ONLYMINE_ONOFF	  = "Outfit Pole Only",
 	CONFIG_ONLYMINE_INFO      = "If enabled, easy cast will only check for your outfit's fishing pole (i.e. it won't search all possible poles for a match).",
 	CONFIG_TURNOFFPVP_ONOFF	  = "Turn off PVP",
-	CONFIG_TURNOFFPVP_INFO	  = "If enabled, PVP will be turned off while a fishing pole is equipped.",
+	CONFIG_TURNOFFPVP_INFO	  = "If enabled, PVP will be turned off when a fishing pole is equipped.",
 
 	CONFIG_ENHANCESOUNDS_ONOFF	= "Enhance fishing sounds",
 	CONFIG_ENHANCESOUNDS_INFO	= "When enabled, maximize sound volume and minimize ambient volume to make the bobber noise more noticeable while fishing.",

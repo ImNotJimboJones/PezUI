@@ -5,6 +5,29 @@
 	<Frame name="VuhDoNewOptionsToolsSkinsTemplate" virtual="true">
 		<Frames>
 
+			<Frame name="$parentAdviceLabel" inherits="VuhDoLabelFrameTemplate">
+				<Size>
+					<AbsDimension x="230" y="36" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="250" y="-200" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" inherits="VuDoDefaultFontTemplate" text="NOTE: Spell assignments won't be saved into profiles. Use Tools=>Key Layouts instead.">
+							<Anchors>
+								<Anchor point="TOPLEFT" />
+								<Anchor point="BOTTOMRIGHT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
 			<Frame name="$parentLoadSavePanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="230" y="215" />

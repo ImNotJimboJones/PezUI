@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Transportation-deDE.lua 1419 2011-07-12 17:20:37Z arithmandar $
+﻿-- $Id: Atlas_Transportation-deDE.lua 1830 2012-10-15 04:00:34Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -52,4 +52,9 @@ if AL then
 	AL["Wind Rider"] = "Windreiter";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "Nicht mehr verfügbar, wenn die Schlacht um Andorhal abgeschlossen ist.";
 	AL["Zeppelin Towers"] = "Zeppelintürme";
+	AL["Climbing Rope"] = "Kletterseil";
+	AL["Rappelling Rope"] = "Abseilstrick";
+	AL["Abandoned Kite"] = "Herrenloser Drachen";
+	AL["From sea level to ground level"] = "Von Meereshöhe auf Grundhöhe";
+	AL["Whispercloud's Balloon"] = "Flüsterwolkes Ballon";
 end

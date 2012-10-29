@@ -193,7 +193,7 @@ local function VUHDO_buildInfoFromSnippet(aUnit, aSnippet, aName)
 	tInfo["aggro"] = false;
 	tInfo["group"] = tonumber(strsub(aSnippet, 1, 1) or "1") or 1;
 	tInfo["afk"] = false;
-	tInfo["threat"] = false;
+	tInfo["threat"] = 0;
 	tInfo["threatPerc"] = 0;
 	tInfo["isVehicle"] = false;
 	tInfo["ownerUnit"] = VUHDO_PET_2_OWNER[aUnit];

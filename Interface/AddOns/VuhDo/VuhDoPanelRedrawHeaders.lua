@@ -60,6 +60,7 @@ function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 	sHeight = VUHDO_getHeaderHeight(aPanelNum);
 
 	sHasHeaders = VUHDO_isTableHeaderOrFooter(aPanelNum);
+	sBarWidth = sBarScaling["headerWidth"] * 0.01;
 
 	if (sHasHeaders) then
 		sAnzCols = #(sModel or tEmpty);
@@ -67,13 +68,7 @@ function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 		if (sAnzCols > 20) then -- VUHDO_MAX_HEADERS_PER_PANEL
 			sAnzCols = 20; -- VUHDO_MAX_HEADERS_PER_PANEL
 		end
-	else
-		sAnzCols = 0;
-	end
 
-	sBarWidth = sBarScaling["headerWidth"] * 0.01;
-
-	if (sHasHeaders) then
 		sHeaderColSetup = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
 		sStatusFile = VUHDO_LibSharedMedia:Fetch('statusbar', sHeaderColSetup["barTexture"]);
 		sFont = VUHDO_getFont(sHeaderColSetup["font"]);
@@ -96,6 +91,9 @@ function VUHDO_positionTableHeaders(aPanel, aPanelNum)
 			tHeaderText = VUHDO_getHeaderTextId(tHeader);
 			tHeaderText:SetFont(sFont, sTextSize, "OUTLINE");
 		end
+
+	else
+		sAnzCols = 0;
 	end
 
 	tPanelName = aPanel:GetName();

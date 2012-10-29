@@ -1,0 +1,23 @@
+tag v50001-1.3.0
+b69045954cb029a20c73c17966edd2e47c1ecdde
+James Whitehead II <jnwhiteh@gmail.com>
+2012-10-28 17:57:18 +0100
+
+Tagging v50001-1.3.0
+
+
+--------------------
+
+James Whitehead II:
+	- Add an option to reset options on waypoints
+	If you change the minimap display or world display options, they will
+	not take affect for any waypoints that are already set. This button
+	under 'General Options' will re-set these options on all of the
+	currently set waypoints.
+	- Fix a bug with distance callbacks
+	If the player is within the distance callback circle when the waypoint
+	is first set, the last parameter of the callback should be nil. This
+	enables the callbacks to ignore the initial trigger of the callback.
+	
+	Practically, this stops /wayb from being immediately cleared.
+	- Updated zhTW locale thanks to BNSSNB

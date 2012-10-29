@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-zhTW.lua 1671 2012-09-20 17:16:10Z arithmandar $
+﻿-- $Id: Atlas-zhTW.lua 1813 2012-10-10 10:59:24Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -90,6 +90,8 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "按住 Ctrl 鍵以顯示工具提示";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "勾選後, 當滑鼠移到地圖資訊欄位時, 按下 Ctrl 控制鍵, 則會將資訊的完整資訊以提示型態顯示. 當資訊過長而被截斷時很有用.";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "不再顯示相同訊息。";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "提醒我是否有遺失的模組或插件";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "勾選以在每次登入 WoW 時檢查是否有遺失的 Atlas 模組或插件。";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "關閉";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas 副本地圖";
@@ -143,7 +145,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "OK";
 
 	AL["ATLAS_INFO"] = "Atlas 訊息";
-	AL["ATLAS_INFO_SPTACK"] = "重要提示：\n\n由於副本插件檔案大小日益增加，我們已獨立出部分副本地圖和內建插件\n到單獨的模組。\n\n您從各大遊戲插件網站所下載的 Atlas 插件，可能只包含了主要的核心功能\n與最新資料片裡的副本地圖。\n\n若您想要取得包含舊的資料片的所有地圖，以及 Atlas 團隊所開發的其他\n模組，您必須分別下載這些獨立模組的壓縮檔並分別進行安裝。\n\n請詳讀我們論壇的這個討論串以了解更多詳情：\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522\n或造訪我們的首頁：\nhttp://www.atlasmod.com/";
+	AL["ATLAS_INFO_12200"] = "重要提示：\n\n由於副本插件檔案大小日益增加，我們已獨立出部分副本地圖和內建插件\n到單獨的模組。\n\n您從各大遊戲插件網站所下載的 Atlas 插件，可能只包含了主要的核心功能\n與最新資料片裡的副本地圖。\n\n若您想要取得包含舊的資料片的所有地圖，以及 Atlas 團隊所開發的其他\n模組，您必須分別下載這些獨立模組的壓縮檔並分別進行安裝。\n\n請詳讀我們論壇的這個討論串以了解更多詳情：\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n或造訪我們的首頁：\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	AL["ATLAS_INFO_12201"] = "我們最近新增了一個新的 Atlas 插件 - |cff6666ffAtlas 情境地圖|cffffffff，用以提供 WoW 5.0 \n起新增的情境事件的地圖。\n\n請參見我們的網站以取得更詳細的資訊，並請記得分別下載並安裝此插件。\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+	
+	AL["ATLAS_MISSING_MODULE"] = "Atlas 已偵測到遺失的模組/插件：";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -432,8 +437,8 @@ if AL then
 
 	--Maraudon (Entrance)
 	AL["The Nameless Prophet"] = "無名預言者";
---	AL["Cursed Centaur"] = "Cursed Centaur";
---	AL["Kherrah"] = "Kherrah";
+	AL["Cursed Centaur"] = "被詛咒的半人馬";
+	AL["Kherrah"] = "凱拉";
 
 	--Scarlet Monastery (Entrance)
 
@@ -499,10 +504,12 @@ if AL then
 
 	--Maraudon	
 	AL["Elder Splitrock"] = "劈石長者";
+	AL["Celebras the Redeemed"] = "贖罪的塞雷布拉斯";
 
 	--Ragefire Chasm
---	AL["Commander Bagran"] = "Commander Bagran";
---	AL["Invoker Xorenth"] = "Invoker Xorenth";
+	AL["Commander Bagran"] = "指揮官巴格仁";
+	AL["Invoker Xorenth"] = "塑能師索倫斯";
+	AL["Scout Cage"] = "斥侯牢籠";
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "柯莉史卓莎";
@@ -614,11 +621,24 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Commander Lindon"] = "指揮官林敦";
+	AL["Hooded Crusader"] = "戴頭罩的十字軍";
+	AL["Bucket of Meaty Dog Food"] = "一桶豐盛狗食";
+	AL["Reinforced Archery Target"] = "強化箭靶";
+
+	--Scarlet Monastery
+
 	--Scholomance
---	AL["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery";
---	AL["Coffer of Forgotten Souls"] = "Coffer of Forgotten Souls";
---	AL["Professor Slate"] = "Professor Slate";
---	AL["Polyformic Acid Potion"] = "Polyformic Acid Potion";
+	AL["Instructor Chillheart's Phylactery"] = "講師冷心的骨匣";
+	AL["Professor Slate"] = "史雷特教授";
+	AL["Polyformic Acid Potion"] = "變體蟻酸藥水";
+	AL["Talking Skull"] = "說話的骨頭";
+	AL["In the Shadow of the Light"] = "在聖光的陰影之中";
+	AL["Kel'Thuzad's Deep Knowledge"] = "科爾蘇加德的深層知識";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "禁忌儀式與其他死靈儀式";
+	AL["Coffer of Forgotten Souls"] = "遺忘靈魂的法櫃";
+	AL["The Dark Grimoire"] = "闇黑魔典";
 
 	--Shadowfang Keep 影牙城堡
 	AL["Apothecary Trio"] = "藥劑師三人組";
@@ -630,12 +650,6 @@ if AL then
 	AL["Haunted Stable Hand"] = "鬼怪獸欄僕人";
 	AL["Investigator Fezzen Brasstacks"] = "調查員菲贊·銅釘";
 
-	--SM: Cathedral
-
-	--SM: Halls
---	AL["Hunter Commander"] = "Hunter Commander";
---	AL["Reinforced Archery Target"] = "Reinforced Archery Target";
-
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "指揮官艾利格·黎明使者 <聖光兄弟會>";
 	AL["Master Craftsman Wilhelm <Brotherhood of the Light>"] = "工匠大師維爾海姆 <聖光兄弟會>";
@@ -646,7 +660,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "節日小道郵箱";
 	AL["Elder Farwhisper"] = "遙語長者";
 	AL["Market Row Postbox"] = "市場郵箱";
-	AL["Crusaders' Square Postbox"] = "十字軍廣場郵箱";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "長者廣場郵箱";
@@ -687,29 +700,29 @@ if AL then
 --*******************
 
 	--Auch: Auchenai Crypts
---	AL["Draenei Spirit"] = "Draenei Spirit";
+	AL["Draenei Spirit"] = "德萊尼靈魂";
 	AL["Avatar of the Martyred"] = "馬丁瑞德的化身";
 	AL["D'ore"] = "迪歐瑞";
---	AL["Tormented Soulpriest"] = "Tormented Soulpriest";
+	AL["Tormented Soulpriest"] = "受折磨的靈魂牧師";
 
 	--Auch: Mana-Tombs
 	AL["The Eye of Haramad"] = "哈拉瑪德之眼";
---	AL["Artificer Morphalius"] = "Artificer Morphalius";
---	AL["Mamdy the \"Ologist\""] = "Mamdy the \"Ologist\"";
+	AL["Artificer Morphalius"] = "工匠莫法利厄司";
+	AL["Mamdy the \"Ologist\""] = "『學家』瑪姆迪";
 	AL["Shadow Lord Xiraxis"] = "暗影領主希瑞西斯";
 	AL["Ambassador Pax'ivi"] = "帕克西維大使";
 	AL["Cryo-Engineer Sha'heen"] = "工程師薩希恩";
 	AL["Ethereal Transporter Control Panel"] = "虛空傳送者控制面板";
 
 	--Auch: Sethekk Halls
---	AL["Isfar"] = "Isfar";
---	AL["Dealer Vijaad"] = "Dealer Vijaad";
+	AL["Isfar"] = "伊斯法";
+	AL["Dealer Vijaad"] = "商人維傑";
 	AL["Lakka"] = "拉卡";
 	AL["The Saga of Terokk"] = "泰洛克的傳說";
 
 	--Auch: Shadow Labyrinth
---	AL["Field Commander Mahfuun"] = "Field Commander Mahfuun";
---	AL["Spy Grik'tha"] = "Spy Grik'tha";
+	AL["Field Commander Mahfuun"] = "戰場元帥瑪赫范";
+	AL["Spy Grik'tha"] = "間諜葛瑞克莎";
 	AL["The Codex of Blood"] = "血之聖典";
 	AL["First Fragment Guardian"] = "第一碎片守衛者";
 	AL["Spy To'gun"] = "間諜·吐剛";
@@ -732,19 +745,19 @@ if AL then
 	AL["Seer Olum"] = "先知歐蘭";
 
 	--CFR: The Slave Pens
---	AL["Nahuud"] = "Nahuud";
---	AL["Watcher Jhang"] = "Watcher Jhang";
+	AL["Nahuud"] = "納霍德";
+	AL["Watcher Jhang"] = "看守者詹汗格";
 	AL["Weeder Greenthumb"] = "威德·綠指";
 	AL["Skar'this the Heretic"] = "異教徒司卡利斯";
-	AL["Naturalist Bite"] = "博物學家·拜特";
+	AL["Naturalist Bite"] = "自然學家拜特";
 
 	--CFR: The Steamvault
---	AL["Windcaller Claw"] = "Windcaller Claw";
+	AL["Windcaller Claw"] = "喚風者卡勞";
 	AL["Main Chambers Access Panel"] = "主房間通道面板";
 	AL["Second Fragment Guardian"] = "第二碎片守衛者";
 
 	--CFR: The Underbog
---	AL["T'shu"] = "T'shu";
+	AL["T'shu"] = "塔蘇";
 	AL["The Underspore"] = "地孢";
 	AL["Earthbinder Rayge"] = "縛地者瑞吉";
 
@@ -810,12 +823,12 @@ if AL then
 	--Gruul's Lair
 
 	--HFC: The Blood Furnace
---	AL["Gunny"] = "Gunny";
---	AL["Caza'rez"] = "Caza'rez";
+	AL["Gunny"] = "甘尼";
+	AL["Caza'rez"] = "卡沙瑞斯";
 
 	--HFC: Hellfire Ramparts
---	AL["Advance Scout Chadwick"] = "Advance Scout Chadwick";
---	AL["Stone Guard Stok'ton"] = "Stone Guard Stok'ton";
+	AL["Advance Scout Chadwick"] = "先遣斥候查德威克";
+	AL["Stone Guard Stok'ton"] = "石衛士史托克頓";
 	AL["Reinforced Fel Iron Chest"] = "強化惡魔鐵箱";
 
 	--HFC: Magtheridon's Lair
@@ -1159,24 +1172,28 @@ if AL then
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "女弓手李 <守衛隊長>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "『夢旅者』司南";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
-
-	--Scarlet Halls
---	AL["Hooded Crusader"] = "Hooded Crusader";
---	AL["Bucket of Meaty Dog Food"] = "Bucket of Meaty Dog Food";
+	AL["Ban Bearheart"] = "班·熊心";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "影潘宗師成樵";
 
 	--Stormstout Brewery
+	AL["Auntie Stormstout"] = "風暴烈酒姑媽";
+	AL["Chen Stormstout"] = "老陳·風暴烈酒";
 
 	--Temple of the Jade Serpent
+	AL["Master Windstrong"] = "風強大師";
+	AL["Priestess Summerpetal"] = "女司祭夏瓣";
 
 	--Terrace of Endless Spring
 

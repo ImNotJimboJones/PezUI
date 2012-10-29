@@ -45,13 +45,10 @@ end
 
 --
 local function VUHDO_playerTargetAddTitle(aTitleText)
-	local tInfo;
-
-	tInfo = UIDropDownMenu_CreateInfo();
+	local tInfo = UIDropDownMenu_CreateInfo();
 	tInfo["text"] = aTitleText or "";
 	tInfo["isTitle"] = true;
 	tInfo["notCheckable"] = true;
-
 	UIDropDownMenu_AddButton(tInfo);
 end
 
@@ -59,9 +56,7 @@ end
 
 --
 local function VUHDO_playerTargetAddSetting(aText, anIsChecked, anArg1, anArg2, aFunction, anIsNotCheckable, anIsDisable, aColorCode)
-	local tInfo;
-
-	tInfo = UIDropDownMenu_CreateInfo();
+	local tInfo = UIDropDownMenu_CreateInfo();
 	tInfo["text"] = aText;
 	tInfo["checked"] = anIsChecked;
 	tInfo["arg1"] = anArg1;

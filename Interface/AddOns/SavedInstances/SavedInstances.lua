@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 185 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 189 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -78,6 +78,11 @@ local currency = {
 addon.LFRInstances = { 
   [416] = { total=4, base=1 }, -- The Siege of Wyrmrest Temple
   [417] = { total=4, base=5 }, -- Fall of Deathwing
+  [527] = { total=3, base=1 }, -- Guardians of Mogu'shan
+  [528] = { total=3, base=4 }, -- The Vault of Mysteries
+  [529] = { total=3, base=1 }, -- The Dread Approach
+  [530] = { total=3, base=4 }, -- Nightmare of Shek'zeer
+  [536] = { total=4, base=1 }, -- Terrace of Endless Spring
 }
 
 addon.showopts = {
@@ -388,6 +393,7 @@ addon.transInstance = {
   [509] = 160, 	-- Ruins of Ahn'Qiraj
   [557] = 179,  -- Auchindoun: Mana-Tombs : ticket 72 zhTW
   [568] = 340,  -- Zul'Aman: frFR 
+  [1004] = 474, -- Scarlet Monastary: deDE
 }
 
 -- some instances (like sethekk halls) are named differently by GetSavedInstanceInfo() and LFGGetDungeonInfoByID()

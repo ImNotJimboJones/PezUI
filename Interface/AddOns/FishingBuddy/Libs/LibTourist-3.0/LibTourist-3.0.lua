@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 150 $
+Revision: $Rev: 152 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 150 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 152 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -2712,16 +2712,41 @@ do
 			[BZ["Gnomeregan"]] = true,
 			[BZ["Ironforge"]] = true,
 			[BZ["Loch Modan"]] = true,
+			[BZ["Coldridge Valley"]] = true,
+			[BZ["New Tinkertown"]] = true,
 		},
 		faction = "Alliance",
 		fishing_min = 25,
 	}
 
+	zones[BZ["Coldridge Valley"]] = {
+		low = 1,
+		high = 6,
+		continent = Eastern_Kingdoms,
+		paths = {
+			[BZ["Dun Morogh"]] = true,
+		},
+		faction = "Alliance",
+		fishing_min = 25,
+	}
+	
+	zones[BZ["New Tinkertown"]] = {
+		low = 1,
+		high = 6,
+		continent = Eastern_Kingdoms,
+		paths = {
+			[BZ["Dun Morogh"]] = true,
+		},
+		faction = "Alliance",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Elwynn Forest"]] = {
 		low = 1,
 		high = 10,
 		continent = Eastern_Kingdoms,
 		paths = {
+			[BZ["Northshire"]] = true,
 			[BZ["Westfall"]] = true,
 			[BZ["Redridge Mountains"]] = true,
 			[BZ["Stormwind City"]] = true,
@@ -2733,6 +2758,17 @@ do
 		fishing_min = 25,
 	}
 
+	zones[BZ["Northshire"]] = {
+		low = 1,
+		high = 6,
+		continent = Eastern_Kingdoms,
+		paths = {
+			[BZ["Elwynn Forest"]] = true,
+		},
+		faction = "Alliance",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Eversong Woods"]] = {
 		low = 1,
 		high = 10,
@@ -2740,20 +2776,28 @@ do
 		paths = {
 			[BZ["Silvermoon City"]] = true,
 			[BZ["Ghostlands"]] = true,
+			[BZ["Sunstrider Isle"]] = true,
 		},
 		faction = "Horde",
 		fishing_min = 25,
 	}
 
+	zones[BZ["Sunstrider Isle"]] = {
+		low = 1,
+		high = 6,
+		continent = Eastern_Kingdoms,
+		paths = {
+			[BZ["Eversong Woods"]] = true,
+		},
+		faction = "Horde",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Tirisfal Glades"]] = {
 		low = 1,
 		high = 10,
 		continent = Eastern_Kingdoms,
 		instances = {
---			[BZ["Armory"]] = true,
---			[BZ["Library"]] = true,
---			[BZ["Graveyard"]] = true,
---			[BZ["Cathedral"]] = true,
 			[BZ["Scarlet Monastery"]] = true,
 			[BZ["Scarlet Halls"]] = true,
 		},
@@ -2766,14 +2810,26 @@ do
 			[ORGRIMMAR_UNDERCITY_ZEPPELIN] = true,
 			[UNDERCITY_HOWLINGFJORD_ZEPPELIN] = true,
 			[BZ["Silverpine Forest"]] = true,
+			[BZ["Deathknell"]] = true,
 		},
 --		complexes = {
---			[BZ["Scarlet Monastery"]] = true,
+--			[BZ["Scarlet Monastery"]] = true,   -- Duplicate name with instance (thanks, Blizz)
 --		},
 		faction = "Horde",
 		fishing_min = 25,
 	}
 
+	zones[BZ["Deathknell"]] = {
+		low = 1,
+		high = 6,
+		continent = Eastern_Kingdoms,
+		paths = {
+			[BZ["Tirisfal Glades"]] = true,
+		},
+		faction = "Horde",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Amani Pass"]] = {
 		continent = Eastern_Kingdoms,
 	}
@@ -3454,6 +3510,7 @@ do
 		continent = Kalimdor,
 		paths = {
 			[BZ["The Exodar"]] = true,
+			[BZ["Ammen Vale"]] = true,
 			[BZ["Bloodmyst Isle"]] = true,
 			[TELDRASSIL_AZUREMYST_BOAT] = true,
 		},
@@ -3461,6 +3518,17 @@ do
 		fishing_min = 25,
 	}
 
+	zones[BZ["Ammen Vale"]] = {
+		low = 1,
+		high = 6,
+		continent = Kalimdor,
+		paths = {
+			[BZ["Azuremyst Isle"]] = true,
+		},
+		faction = "Alliance",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Durotar"]] = {
 		low = 1,
 		high = 10,
@@ -3469,6 +3537,30 @@ do
 		paths = {
 			[BZ["Northern Barrens"]] = true,
 			[BZ["Orgrimmar"]] = true,
+			[BZ["Valley of Trials"]] = true,
+			[BZ["Echo Isles"]] = true,
+		},
+		faction = "Horde",
+		fishing_min = 25,
+	}
+
+	zones[BZ["Valley of Trials"]] = {
+		low = 1,
+		high = 6,
+		continent = Kalimdor,
+		paths = {
+			[BZ["Durotar"]] = true,
+		},
+		faction = "Horde",
+		fishing_min = 25,
+	}
+	
+	zones[BZ["Echo Isles"]] = {
+		low = 1,
+		high = 6,
+		continent = Kalimdor,
+		paths = {
+			[BZ["Durotar"]] = true,
 		},
 		faction = "Horde",
 		fishing_min = 25,
@@ -3487,12 +3579,24 @@ do
 		fishing_min = 25,
 	}
 
+	zones[BZ["Camp Narache"]] = {
+		low = 1,
+		high = 6,
+		continent = Kalimdor,
+		paths = {
+			[BZ["Mulgore"]] = true,
+		},
+		faction = "Horde",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Teldrassil"]] = {
 		low = 1,
 		high = 10,
 		continent = Kalimdor,
 		paths = {
 			[BZ["Darnassus"]] = true,
+			[BZ["Shadowglen"]] = true,
 			[TELDRASSIL_AZUREMYST_BOAT] = true,
 			[TELDRASSIL_STORMWIND_BOAT] = true,
 		},
@@ -3500,6 +3604,17 @@ do
 		fishing_min = 25,
 	}
 
+	zones[BZ["Shadowglen"]] = {
+		low = 1,
+		high = 6,
+		continent = Kalimdor,
+		paths = {
+			[BZ["Teldrassil"]] = true,
+		},
+		faction = "Alliance",
+		fishing_min = 25,
+	}
+	
 	zones[BZ["Bloodmyst Isle"]] = {
 		low = 10,
 		high = 20,
@@ -5537,7 +5652,26 @@ do
 		fishing_min = 750,
 	}
 
+--	Mists of Pandaria (MoP) cities
+	
+	zones[BZ["Shrine of Seven Stars"]] = {
+		continent = Pandaria,
+		paths = {
+			[BZ["Vale of Eternal Blossoms"]] = true,
+		},
+		faction = "Alliance",
+		type = "City",
+	}
 
+	zones[BZ["Shrine of Two Moons"]] = {
+		continent = Pandaria,
+		paths = {
+			[BZ["Vale of Eternal Blossoms"]] = true,
+		},
+		faction = "Horde",
+		type = "City",
+	}
+	
 --	Mists of Pandaria (MoP) instances
 
 	zones[BZ["Temple of the Jade Serpent"]] = {
@@ -5650,13 +5784,43 @@ do
 	searchMaps[BZ["Abyssal Depths"]] = BZ["Vashj'ir"]
 	searchMaps[BZ["Kelp'thar Forest"]] = BZ["Vashj'ir"]
 	searchMaps[BZ["Shimmering Expanse"]] = BZ["Vashj'ir"]
+	searchMaps[BZ["Ammen Vale"]] = BZ["Azuremyst Isle"]
+	searchMaps[BZ["Camp Narache"]] = BZ["Mulgore"]
+	searchMaps[BZ["Echo Isles"]] = BZ["Durotar"]
+	searchMaps[BZ["Valley of Trials"]] = BZ["Durotar"]
+	searchMaps[BZ["Shadowglen"]] = BZ["Teldrassil"]
+	searchMaps[BZ["Coldridge Valley"]] = BZ["Dun Morogh"]
+	searchMaps[BZ["New Tinkertown"]] = BZ["Dun Morogh"]	
+	searchMaps[BZ["Deathknell"]] = BZ["Tirisfal Glades"]	
+	searchMaps[BZ["Northshire"]] = BZ["Elwynn Forest"]	
+	searchMaps[BZ["Sunstrider Isle"]] = BZ["Eversong Woods"]	
+	
+--	searchMaps[BZ["Stormwind City"]] = BZ["Elwynn Forest"]	
+--	searchMaps[BZ["Darnassus"]] = BZ["Teldrassil"]
+--	searchMaps[BZ["Orgrimmar"]] = BZ["Durotar"]
+--	searchMaps[BZ["Ruins of Gilneas City"]] = BZ["Ruins of Gilneas"]	
 
-	-- The submaps have different sizes than the continent maps -> use (measured) value
-	-- in order to get a porpoer yards value for the zone maps.
+--	searchMaps[BZ["Shrine of Two Moons"]] = BZ["Vale of Eternal Blossoms"]	
+--	searchMaps[BZ["Shrine of Seven Stars"]] = BZ["Vale of Eternal Blossoms"]		
+	
+	-- The submaps have different sizes than the continent maps -> use submap size as 'continent size'
 	local submapContinentYards = {}
-	submapContinentYards[BZ["Stranglethorn Vale"]] = 6600
-	submapContinentYards[BZ["Vashj'ir"]] = 6975
-
+	submapContinentYards[BZ["Stranglethorn Vale"]] = 6552.1
+	submapContinentYards[BZ["Vashj'ir"]] = 6945.8
+	submapContinentYards[BZ["Azuremyst Isle"]] = 4070.9
+	submapContinentYards[BZ["Mulgore"]] = 5450.1
+	submapContinentYards[BZ["Durotar"]] = 5287.6
+	submapContinentYards[BZ["Teldrassil"]] = 5875.1
+	submapContinentYards[BZ["Dun Morogh"]] = 4897.9
+	submapContinentYards[BZ["Tirisfal Glades"]] = 4518.7
+	submapContinentYards[BZ["Elwynn Forest"]] = 3470.8
+	submapContinentYards[BZ["Eversong Woods"]] = 4925.0
+		
+--	submapContinentYards[BZ["Ruins of Gilneas"]] = 3145.8
+--	submapContinentYards[BZ["Vale of Eternal Blossoms"]] = 0  -- ?
+		
+		
+		
 	-- Hack:
 	-- For the zones below, UpdateMapHighlight() does not return name and map data for the city icon on the continent map
 	-- Use hardcoded values as default; will be overwritten once the UpdateMapHighlight bug has been fixed - if ever
@@ -5745,7 +5909,6 @@ do
 					SetMapZoom(continentID, zoneID)
 					-- Get searchMap 'continent' size
 					continentYards = submapContinentYards[searchMap]
-					--trace( "continentYards for "..tostring(searchMap).." = "..tostring(continentYards) )
 				end
 			end
 

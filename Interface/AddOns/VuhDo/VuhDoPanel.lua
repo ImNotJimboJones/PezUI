@@ -81,7 +81,7 @@ function VUHDO_customizeHeader(aHeader, aPanelNum, aModelId)
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
 	end
-	tHeaderText:SetTextColor(tColor["TR"], tColor["TG"], tColor["TB"], tColor["TO"]);
+	tHeaderText:SetTextColor(VUHDO_textColor(tColor));
 
 	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsBackHeader"]
 		and 1 == VUHDO_getModelType(aModelId)) then -- VUHDO_ID_TYPE_CLASS

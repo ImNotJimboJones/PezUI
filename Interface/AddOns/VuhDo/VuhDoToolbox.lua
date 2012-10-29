@@ -29,7 +29,7 @@ local GetPlayerFacing = GetPlayerFacing;
 local GetPlayerMapPosition = GetPlayerMapPosition;
 local GetSpellBookItemInfo = GetSpellBookItemInfo;
 local CheckInteractDistance = CheckInteractDistance;
-local UnitIsTrivial = UnitIsTrivial;
+--local UnitIsTrivial = UnitIsTrivial;
 local UnitIsUnit = UnitIsUnit;
 local VUHDO_atan2 = math.atan2;
 local VUHDO_PI, VUHDO_2_PI = math.pi, math.pi * 2;
@@ -288,7 +288,8 @@ end
 
 --
 function VUHDO_isTargetInRange(aUnit)
-	return UnitIsUnit("player", aUnit) or UnitIsTrivial(aUnit) and CheckInteractDistance(aUnit, 1) or UnitInRange(aUnit);
+	--return UnitIsUnit("player", aUnit) or (UnitIsTrivial(aUnit) and CheckInteractDistance(aUnit, 1)) or UnitInRange(aUnit);
+	return UnitIsUnit("player", aUnit) or CheckInteractDistance(aUnit, 1);
 end
 local VUHDO_isTargetInRange = VUHDO_isTargetInRange;
 

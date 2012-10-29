@@ -1,10 +1,10 @@
--- $Id: AtlasMapsAssociation.lua 1646 2012-09-17 06:48:22Z arithmandar $
+-- $Id: AtlasMapsAssociation.lua 1800 2012-10-09 21:29:04Z dynaletik@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -52,6 +52,8 @@ Atlas_AssocDefaults = {
 	[BZ["Dragon Soul"]] =			"CoTDragonSoulA";
 	[BZ["Icecrown Citadel"]] =		"IcecrownCitadelA";
 	[BZ["Karazhan"]] =			"KarazhanStart";
+	[BZ["Shado-Pan Monastery"]] =		"ShadoPanMonasteryA";
+	[BZ["Siege of Niuzao Temple"]] =	"SiegeofNiuzaoTempleA";
 	[BZ["Stratholme"]] =			"StratholmeGauntlet";
 	[BZ["Throne of Tides"]] = 		"ThroneOfTheTides";
 	[BZ["The Wailing Caverns"]] = 		"WailingCavernsEnt";
@@ -222,6 +224,31 @@ Atlas_SubZoneData = {
 			BZ["Netherspace"],
 		},
 	},
+	-- Shado-Pan Monastery
+	[BZ["Shado-Pan Monastery"]] = {
+		--Shado-Pan Monastery A
+		["ShadoPanMonasteryA"] = {
+			BZ["Cloudstrike Dojo"],
+			BZ["Grove of Falling Blossoms"],
+		},
+		--Shado-Pan Monastery B
+		["ShadoPanMonasteryB"] = {
+			BZ["Snowdrift Dojo"],
+			BZ["Sealed Chambers"],
+		},
+	},
+	-- Siege of Niuzao Temple
+	[BZ["Siege of Niuzao Temple"]] = {
+		--Siege of Niuzao Temple A
+		["SiegeofNiuzaoTempleA"] = {
+			BZ["Hollowed Out Tree"],
+		},
+		--Siege of Niuzao Temple B
+		["SiegeofNiuzaoTempleB"] = {
+			BZ["Rear Staging Area"],
+			BZ["Forward Assault Camp"],
+		},
+	},
 	-- Stratholme
 	[BZ["Stratholme"]] = {
 		--Stratholme - Crusader's Square
@@ -321,15 +348,18 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Shadowmoon Valley"]] = 		"BlackTempleStart";
 	[BZ["Tanaris"]] = 			"CavernsOfTimeEnt";
 	[BZ["Zangarmarsh"]] = 			"CoilfangReservoirEnt";
-	[BZ["Feralas"]] = 			"DireMaulEnt";
 	[BZ["The Dragon Wastes"]] = 		"CoTDragonSoulA";
-	[BZ["Dun Morogh"]] = 			"GnomereganEnt";
+	[BZ["Feralas"]] = 			"DireMaulEnt";
 	[BZ["Mount Hyjal"]] = 			"Firelands";
+	[BZ["Dun Morogh"]] = 			"GnomereganEnt";
 	[BZ["Blade's Edge Mountains"]] = 	"GruulsLair";
+	[BZ["Dread Wastes"]] =			"HeartofFear";
 	[BZ["Hellfire Peninsula"]] = 		"HellfireCitadelEnt";
 	[BZ["Icecrown"]] = 			"IcecrownEnt";
 	[BZ["Deadwind Pass"]] = 		"KarazhanEnt";
 	[BZ["Desolace"]] = 			"MaraudonEnt";
+	[BZ["Vale of Eternal Blossoms"]] = 	"MoguShanPalace";
+	[BZ["Kun-Lai Summit"]] = 		"MoguShanVaults";
 	[BZ["Dustwallow Marsh"]] = 		"OnyxiasLair";
 	[BZ["Orgrimmar"]] = 			"RagefireChasm";
 	[BZ["Thousand Needles"]] = 		"RazorfenDowns";
@@ -338,9 +368,13 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Tirisfal Glades"]] = 		"ScarletMonasteryEnt";
 	[BZ["Western Plaguelands"]] = 		"Scholomance";
 	[BZ["Silverpine Forest"]] = 		"ShadowfangKeep";
+	[BZ["Townlong Steppes"]] = 		"SiegeofNiuzaoTempleA";
+	[BZ["Valley of the Four Winds"]] = 	"StormstoutBrewery";
 	[BZ["Eastern Plaguelands"]] = 		"StratholmeGauntlet";
 	[BZ["Isle of Quel'Danas"]] = 		"SunwellPlateau";
 	[BZ["Netherstorm"]] = 			"TempestKeepEnt";
+	[BZ["The Jade Forest"]] = 		"TempleOfTheJadeSerpent";
+	[BZ["The Veiled Stair"]] = 		"TerraceofEndlessSpring";
 	[BZ["Twilight Highlands"]] = 		"TheBastionOfTwilight";
 	[BZ["Westfall"]] = 			"TheDeadminesEnt";
 	[BZ["Borean Tundra"]] = 		"TheEyeOfEternity";
@@ -451,19 +485,30 @@ Atlas_InstToEntMatches = {
 
 --Links maps together that are part of the same instance
 Atlas_SubZoneAssoc = {
+	["BlackrockSpireLower"] =		BZ["Blackrock Spire"];
+	["BlackrockSpireUpper"] =		BZ["Blackrock Spire"];
+	["BlackrockMountainEnt"] =		BZ["Blackrock Spire"];
 	["BlackTempleStart"] =			BZ["Black Temple"];
 	["BlackTempleBasement"] =		BZ["Black Temple"];
 	["BlackTempleTop"] =			BZ["Black Temple"];
-	["KarazhanStart"] =			BZ["Karazhan"];
-	["KarazhanEnd"] =			BZ["Karazhan"];
-	["KarazhanEnt"] =			BZ["Karazhan"];
+	["CoTDragonSoulA"] =			BZ["Dragon Soul"];
+	["CoTDragonSoulB"] =			BZ["Dragon Soul"];
+	["CoTDragonSoulC"] =			BZ["Dragon Soul"];
 	["DireMaulNorth"] =			BZ["Dire Maul"];
 	["DireMaulEast"] =			BZ["Dire Maul"];
 	["DireMaulWest"] =			BZ["Dire Maul"];
 	["DireMaulEnt"] =			BZ["Dire Maul"];
-	["BlackrockSpireLower"] =		BZ["Blackrock Spire"];
-	["BlackrockSpireUpper"] =		BZ["Blackrock Spire"];
-	["BlackrockMountainEnt"] =		BZ["Blackrock Spire"];
+	["IcecrownCitadelA"] =			BZ["Icecrown Citadel"];
+	["IcecrownCitadelB"] =			BZ["Icecrown Citadel"];
+	["IcecrownCitadelC"] =			BZ["Icecrown Citadel"];
+	["IcecrownEnt"] =			BZ["Icecrown Citadel"];
+	["KarazhanStart"] =			BZ["Karazhan"];
+	["KarazhanEnd"] =			BZ["Karazhan"];
+	["KarazhanEnt"] =			BZ["Karazhan"];
+	["ShadoPanMonasteryA"] =		BZ["Shado-Pan Monastery"];
+	["ShadoPanMonasteryB"] =		BZ["Shado-Pan Monastery"];
+	["SiegeofNiuzaoTempleA"] =		BZ["Siege of Niuzao Temple"];
+	["SiegeofNiuzaoTempleB"] =		BZ["Siege of Niuzao Temple"];
 	["StratholmeCrusader"] =		BZ["Stratholme"];
 	["StratholmeGauntlet"] =		BZ["Stratholme"];
 	["UlduarA"] =				BZ["Ulduar"];
@@ -471,11 +516,4 @@ Atlas_SubZoneAssoc = {
 	["UlduarC"] =				BZ["Ulduar"];
 	["UlduarD"] =				BZ["Ulduar"];
 	["UlduarE"] =				BZ["Ulduar"];
-	["IcecrownCitadelA"] =			BZ["Icecrown Citadel"];
-	["IcecrownCitadelB"] =			BZ["Icecrown Citadel"];
-	["IcecrownCitadelC"] =			BZ["Icecrown Citadel"];
-	["IcecrownEnt"] =			BZ["Icecrown Citadel"];
-	["CoTDragonSoulA"] =			BZ["Dragon Soul"];
-	["CoTDragonSoulB"] =			BZ["Dragon Soul"];
-	["CoTDragonSoulC"] =			BZ["Dragon Soul"];
 };

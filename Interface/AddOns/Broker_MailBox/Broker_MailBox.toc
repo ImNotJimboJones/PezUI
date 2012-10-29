@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: Broker: MailBox
 ## Notes: LDB Display for Mail.
 ## Author: Computerpunk
@@ -6,7 +6,7 @@
 ## X-Category: Mail
 ## OptionalDeps: Ace3
 ## SavedVariables: Broker_MailBoxDB
-## X-Curse-Packaged-Version: 0.4.4 Beta
+## X-Curse-Packaged-Version: 0.4.5 Beta
 ## X-Curse-Project-Name: Broker_MailBox
 ## X-Curse-Project-ID: broker_mailbox
 ## X-Curse-Repository-ID: wow/broker_mailbox/mainline

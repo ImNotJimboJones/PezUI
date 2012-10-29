@@ -17,6 +17,7 @@ local function VUHDO_placeReadyIcon(aButton)
 		tIcon:SetPoint("LEFT", aButton:GetName(), "LEFT", -5, 0);
 		tIcon:SetWidth(16);
 		tIcon:SetHeight(16);
+		tIcon:SetAlpha(1);
 		tIcon:Show();
 	end
 end

@@ -69,7 +69,7 @@
 --     Returns an array with the set of unit ids for the current group.
 --]]
 
-local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("42"):match ("(%d+)") or 0)
+local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("45"):match ("(%d+)") or 0)
 
 if not LibStub then error(MAJOR.." requires LibStub") end
 local lib = LibStub:NewLibrary (MAJOR, MINOR)
@@ -90,6 +90,7 @@ local INSPECT_DELAY = 1.5
 local INSPECT_STALE_DELAY = 5
 local INSPECT_TIMEOUT = 10 -- If we get no notification within 10s, give up on unit
 
+local MAX_ATTEMPTS = 3
 
 local function debug (...)
 --[===[@debug@
@@ -125,6 +126,16 @@ lib.state = {
 }
 lib.cache = {}
 lib.static_cache = {}
+
+
+-- Note: hook before we cache the NotifyInspect reference!
+if not lib.hooked then
+  hooksecurefunc("NotifyInspect", function (...) return lib:NotifyInspect (...) end)
+  lib.hooked = true
+end
+function lib:NotifyInspect(unit)
+	self.state.last_inspect = GetTime()
+end
 
 
 -- Get local handles on the key API functions
@@ -312,9 +323,13 @@ function lib:Refresh (unit)
 end
 
 
+-- Convenience table to keep queue handling readable in ProcessQueues
+local noq = {}
+
 function lib:ProcessQueues ()
   if not self.state.logged_in then return end
   if InCombatLockdown () then return end -- Never inspect while in combat
+  if UnitIsDead ("player") then return end -- You can't inspect while dead, so don't even try
 
   -- Don't mess with the UI's inspections
 	if InspectFrame and InspectFrame:IsShown () then
@@ -328,26 +343,42 @@ function lib:ProcessQueues ()
   if not next (q) then q = staleq end
 
   if (self.state.last_inspect + INSPECT_TIMEOUT) < GetTime () then
-    -- If there was an inspect going, it's timed out so kick it out of the queue
+    -- If there was an inspect going, it's timed out, so either retry or (re)move it
     local guid = self.state.current_guid
     if guid then
       debug ("Inspect timed out for "..guid)
+
+      local curq, nextq = noq, noq
+      if mainq[guid] then
+        curq, nextq = mainq, staleq
+      elseif staleq[guid] then
+        curq, nextq = staleq, noq
+      end
+
+      local count = curq and curq[guid] or (MAX_ATTEMPTS + 1)
       if not self:GuidToUnit (guid) then
-        debug ("No longer applicable, removing from queue")
+        debug ("No longer applicable, removing from queues")
         mainq[guid], staleq[guid] = nil, nil
+      elseif count > MAX_ATTEMPTS then
+        debug ("Excessive retries, dropping to next queue")
+        curq[guid], nextq[guid] = nil, 1
+      else
+        curq[guid] = count + 1
       end
       self.state.current_guid = nil
     end
+    wipe (noq) -- Things relegated to the no-queue are discarded
   end
 
   if self.state.current_guid then return end -- Still waiting on our inspect data
 
-	for guid,_ in pairs (q) do
+	for guid,count in pairs (q) do
 		local unit = self:GuidToUnit (guid)
 		if not unit or not CanInspect (unit) or not UnitIsConnected (unit) then
 			q[guid] = nil
 		else
       debug ("Inspecting "..unit..", aka ".. (UnitName(unit) or "nil"))
+      q[guid] = count + 1
       self.state.current_guid = guid
 		  NotifyInspect (unit)
       break
@@ -357,15 +388,6 @@ function lib:ProcessQueues ()
   if not next (self.state.mainq) and not next (self.state.staleq) and self.state.throttle == 0 and self.state.debounce_send_update <= 0 then
     frame:Hide() -- Cancel timer, nothing queued and no unthrottling to be done
   end
-end
-
-
-if not lib.hooked then
-  hooksecurefunc("NotifyInspect", function (...) return lib:NotifyInspect (...) end)
-  lib.hooked = true
-end
-function lib:NotifyInspect(unit)
-	self.state.last_inspect = GetTime()
 end
 
 

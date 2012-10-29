@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-frFR.lua 1667 2012-09-19 17:46:46Z mr.kevin.fischer@gmail.com $
+﻿-- $Id: Atlas-frFR.lua 1802 2012-10-10 07:55:55Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -32,8 +32,8 @@ local AL = AceLocale:NewLocale("Atlas", "frFR", false);
 -- Atlas French Localization
 -- Sur un travail de Wysiwyg, Khiria, Trasher en 2007 / 2012
 -- Many thanks to all contributors!
--- $Date: 2012-09-20 01:46:46 +0800 (Thu, 20 Sep 2012) $
--- $Revision: 1667 $
+-- $Date: 2012-10-03 22:56:00 +0800 (Wed, 03 Oct 2012) $
+-- $Revision: 1771 $
 
 if ( GetLocale() == "frFR" ) then
 -- Define the leading strings to be ignored while sorting
@@ -105,7 +105,7 @@ if AL then
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
 	AL["ATLAS_BUTTON_TOOLTIP_HINT"] = "Clic-Gauche pour ouvrir Atlas.\nClic-Milieu pour les options d'Atlas.\nClic-Droit pour déplacer ce bouton.";
 	AL["ATLAS_LDB_HINT"] = "Clic-Gauche pour ouvrir Atlas.\nClic-Milieu pour les options d'Atlas.\nClic-Droit pour le menu d'affichage.";
-	AL["ATLAS_MINIMAPLDB_HINT"] = "Clic-Gauche pour ouvrir Atlas.\nClic-Droit pour les options d'Atlas.\nClic-Droit et glisser pour déplacer ce bouton.";
+	AL["ATLAS_MINIMAPLDB_HINT"] = "Clic-Gauche pour ouvrir Atlas.\nClic-Droit pour les options d'Atlas.\nClic-Droit et glisser pour déplacer ce bouton.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
 
 	AL["ATLAS_OPTIONS_CATDD"] = "Trier les instances par :";
 	AL["ATLAS_DDL_CONTINENT"] = "Continent";
@@ -153,7 +153,8 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "Ok";
 
 	AL["ATLAS_INFO"] = "Atlas Information";
-	AL["ATLAS_INFO_SPTACK"] = "Information importante : \n\nSuite à l'augmentation de la taille des fichiers de l'addon, nous avons déplacé \nune partie de nos cartes des donjons et créé des modules séparés avec. \n\nLes utilisateurs qui téléchargent nos addons à partir de fameux sites tiers \npourraient n'avoir que l'addon principal qui ne contient que les fonctions de \nbase et les cartes de la dernière extension de WoW. \n\nSi vous souhaitez également voir les cartes des vieilles extensions, et donc \navoir tous ces modules Atlas que nous avons fait, vous devez les télécharger \net les installer séparément. \n\nPour plus d'information, lire le sujet suivant sur notre forum : \n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff \n\nOu visiter notre site web pour voir où les télécharger. \n|cff6666ffhttp://www.atlasmod.com/|cfffffff";
+	AL["ATLAS_INFO_12200"] = "Information importante : \n\nSuite à l'augmentation de la taille des fichiers de l'addon, nous avons déplacé \nune partie de nos cartes des donjons et créé des modules séparés avec. \n\nLes utilisateurs qui téléchargent nos addons à partir de fameux sites tiers \npourraient n'avoir que l'addon principal qui ne contient que les fonctions de \nbase et les cartes de la dernière extension de WoW. \n\nSi vous souhaitez également voir les cartes des vieilles extensions, et donc \navoir tous ces modules Atlas que nous avons fait, vous devez les télécharger \net les installer séparément. \n\nPour plus d'information, lire le sujet suivant sur notre forum : \n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff \n\nOu visiter notre site web pour voir où les télécharger. \n|cff6666ffhttp://www.atlasmod.com/|cfffffff";
+	AL["ATLAS_INFO_12201"] = "Veuillez noter que nous avons créé un nouveau plug-in - |cff6666ffAtlas Scenarios|cffffffff, \nafin de fournir les cartes des scénarios introduits dans WoW 5.0. \n\nVisitez notre site web pour plus de détail, et n'oubliez pas de le \ntélécharger/installer séparément.";
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -510,10 +511,12 @@ if AL then
 
 	--Maraudon	
 	AL["Elder Splitrock"] = "Ancien Pierre-fendue";
+	AL["Celebras the Redeemed"] = "Celebras le Racheté";
 
 	--Ragefire Chasm
 	AL["Bovaal Whitehorn"] = "Bovaal Corne-blanche";
 	AL["Stone Guard Kurjack"] = "Garde de pierre Kurjack";
+AL["Scout Cage"] = "Scout Cage"; -- translation needed
 
 	--Razorfen Downs
 	AL["Koristrasza"] = "Koristrasza";
@@ -624,12 +627,6 @@ if AL then
 	AL["Hann Ibal <S.A.F.E.>"] = "Hann Ibal <IMUN>";
 
 	--Molten Core
-
-	--Scholomance
-AL["Instructor Chillheart's Phylactery"] = "Phylactère Instructor Chillheart's Phylactery"; -- Translation needed
-	AL["Coffer of Forgotten Souls"] = "Coffre des âmes oubliées";
-AL["Professor Slate"] = "Professor Slate"; -- Translation needed
-AL["Polyformic Acid Potion"] = "Polyformic Acid Potion"; -- Translation needed
 
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Trio d'apothicaires";
@@ -825,8 +822,8 @@ AL["Tormented Soulpriest"] = "Tormented Soulpriest"; -- Translation needed
 	AL["Caza'rez"] = "Caza'rez";
 
 	--HFC: Hellfire Ramparts
-AL["Advance Scout Chadwick"] = "Advance Scout Chadwick"; -- Translation needed
-AL["Stone Guard Stok'ton"] = "Stone Guard Stok'ton"; -- Translation needed
+	AL["Advance Scout Chadwick"] = "Eclaireur avancé Chadwick";
+	AL["Stone Guard Stok'ton"] = "Garde de pierre Stok'ton";
 	AL["Reinforced Fel Iron Chest"] = "Coffre en gangrefer renforcé";
 
 	--HFC: Magtheridon's Lair
@@ -917,7 +914,7 @@ AL["Stone Guard Stok'ton"] = "Stone Guard Stok'ton"; -- Translation needed
 	AL["Seer Ixit"] = "Voyant Ixit";
 	AL["Ahn'kahet Brazier"] = "Brasero d'Ahn'kahet";
 
-	--Azjol-Nerub
+	--Azjol-Nerub: Azjol-Nerub
 	AL["Reclaimer A'zak"] = "Récupérateur A'zak";
 	AL["Watcher Gashra"] = "Gardien Gashra";
 	AL["Watcher Narjil"] = "Gardien Narjil";
@@ -986,7 +983,7 @@ AL["Stone Guard Stok'ton"] = "Stone Guard Stok'ton"; -- Translation needed
 	--The Nexus: The Eye of Eternity
 
 	--The Nexus: The Nexus
-AL["Warmage Kaitlyn"] = "Warmage Kaitlyn"; -- Translation needed
+	AL["Warmage Kaitlyn"] = "Mage de guerre Kaitlyn";
 	AL["Berinand's Research"] = "Recherches de Bérinand";
 	AL["Elder Igasho"] = "Ancien Igasho";
 
@@ -1170,24 +1167,43 @@ AL["Warmage Kaitlyn"] = "Warmage Kaitlyn"; -- Translation needed
 --*********************
 
 	--Gate of the Setting Sun
+	AL["Bowmistress Li <Guard Captain>"] = "Maître-archer Li <Capitaine de la Garde>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
+	AL["Sinan the Dreamer"] = "Sinan la Rêveuse";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
+	AL["Ban Bearheart"] = "Ban Cœur d’Ours";
 	
 	--Scarlet Halls
-AL["Hooded Crusader"] = "Hooded Crusader"; -- Translation needed
-AL["Bucket of Meaty Dog Food"] = "Bucket of Meaty Dog Food"; -- Translation needed
+	AL["Hooded Crusader"] = "Croisée capuchonnée";
+	AL["Bucket of Meaty Dog Food"] = "Seau de pâtée pour chien riche en viande";
+
+	--Scholomance
+	AL["Instructor Chillheart's Phylactery"] = "Phylactère de l'Instructrice Froidecœur";
+	AL["Coffer of Forgotten Souls"] = "Coffre des âmes oubliées";
+	AL["Professor Slate"] = "Professeur Alambic";
+	AL["Polyformic Acid Potion"] = "Potion d'acide polyformique";
+	AL["The Dark Grimoire"] = "Le grimoire noir";
+
+	AL["Talking Skull"] = "Crâne parlant";
+	AL["In the Shadow of the Light"] = "À l’ombre de la Lumière";
+	AL["Kel'Thuzad's Deep Knowledge"] = "Connaissances approfondies de Kel’Thuzad";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "Rites interdits et autres rituels nécromantiques";
 
 	--Siege of Niuzao Temple
+	AL["Shado-Master Chum Kiu"] = "Maître-pandashan Chum Kiu";
 
 	--Stormstout Brewery
+AL["Auntie Stormstout"] = "Auntie Brune d’Orage"; -- Translation needed
+	AL["Chen Stormstout"] = "Chen Brune d’Orage";
 
-	--Temple of the Jade Serpent
+AL["Master Windstrong"] = "Master Windstrong"; -- Translation needed
+AL["Priestess Summerpetal"] = "Priestess Summerpetal"; -- Translation needed
 
 	--Terrace of Endless Spring
 

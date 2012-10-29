@@ -112,7 +112,7 @@ end
 
 if event == "CHAT_MSG_RAID_BOSS_EMOTE" then
 
-if string.find(arg1, nxraonyemote) or (nxraonyemote22 and string.find(arg1, nxraonyemote22) then
+if string.find(arg1, nxraonyemote) or (nxraonyemote22 and string.find(arg1, nxraonyemote22)) then
   if arg2==nxraonyxiab then
     ratime1=GetTime()
   end

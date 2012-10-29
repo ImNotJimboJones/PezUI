@@ -17,6 +17,7 @@ VUHDO_GCD_SPELLS = {
 	["DRUID"] = VUHDO_SPELL_ID.REJUVENATION, -- Regrowth
 	["PRIEST"] = VUHDO_SPELL_ID.RENEW, -- mopok
 	["DEATHKNIGHT"] = GetSpellInfo(48266), -- Blood Presence
+	["MONK"] = GetSpellInfo(100780) -- Jab
 }
 
 

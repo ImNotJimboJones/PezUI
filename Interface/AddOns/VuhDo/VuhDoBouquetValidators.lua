@@ -677,7 +677,11 @@ end
 
 --
 local function VUHDO_classIconValidator(anInfo, _)
-	return true, "Interface\\TargetingFrame\\UI-Classes-Circles", -1, -1, -1, nil, nil, unpack(CLASS_ICON_TCOORDS[anInfo["class"]]);
+	if (CLASS_ICON_TCOORDS[anInfo["class"]] ~= nil) then
+		return true, "Interface\\TargetingFrame\\UI-Classes-Circles", -1, -1, -1, nil, nil, unpack(CLASS_ICON_TCOORDS[anInfo["class"]]);
+	else
+		return false, nil, -1, -1, -1;
+	end
 end
 
 
@@ -858,6 +862,18 @@ end
 
 
 --
+local function VUHDO_classColorIfActiveValidator(anInfo, _)
+	if (VUHDO_getIsCurrentBouquetActive()) then
+		return true, nil, -1, -1, -1,
+			VUHDO_copyColor(VUHDO_USER_CLASS_COLORS[anInfo["classId"]]);
+	else
+		return false, nil, -1, -1, -1;
+	end
+end
+
+
+
+--
 local function VUHDO_classColorValidator(anInfo, _)
 	return true, nil, -1, -1, -1,
 		VUHDO_copyColor(VUHDO_USER_CLASS_COLORS[anInfo["classId"]]);
@@ -894,6 +910,26 @@ local function VUHDO_enemyStateValidator(anInfo, _)
 		return true, nil, -1, -1, -1,
 			VUHDO_copyColor(sBarColors["TARGET_NEUTRAL"]);
 	end
+end
+
+-- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tTimer2, clipLeft, clipRight, clipTop, clipBottom
+
+
+
+--
+--[[local tShieldLeft, tShieldSize;
+local function VUHDO_shieldPercentValidator(anInfo, _)
+	tShieldLeft, tShieldSize = getUnitOverallShieldRemain(anInfo["unit"]);
+	return tShieldLeft > 0, nil, tShieldLeft, -1, tShieldSize;
+end]]
+
+
+
+--
+local tShieldLeft;
+local function VUHDO_shieldCountValidator(anInfo, _)
+	tShieldLeft = getUnitOverallShieldRemain(anInfo["unit"]);
+	return tShieldLeft >= 1000, nil, -1, floor(tShieldLeft * 0.001 + 0.5), -1;
 end
 
 
@@ -1220,6 +1256,14 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 		["interests"] = { },
 	},
 
+	["STATUS_CC_ACTIVE"] = {
+		["displayName"] = VUHDO_I18N_BOUQUET_STATUS_CLASS_COLOR_IF_ACTIVE,
+		["validator"] = VUHDO_classColorIfActiveValidator,
+		["custom_type"] = VUHDO_BOUQUET_CUSTOM_TYPE_BRIGHTNESS,
+		["no_color"] = true,
+		["interests"] = { },
+	},
+
 	["STACKS_COLOR"] = {
 		["displayName"] = VUHDO_I18N_BOUQUET_STACKS_COLOR,
 		["validator"] = VUHDO_stacksColorValidator,
@@ -1240,7 +1284,7 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 		["displayName"] = VUHDO_I18N_BOUQUET_CLASS_ICON,
 		["validator"] = VUHDO_classIconValidator,
 		["no_color"] = true,
-		["interests"] = { },
+		["interests"] = { VUHDO_UPDATE_DC, VUHDO_UPDATE_RESURRECTION, VUHDO_UPDATE_MINOR_FLAGS },
 	},
 
 	["RAID_ICON"] = {
@@ -1341,6 +1385,18 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 		["displayName"] = VUHDO_I18N_DEF_PVP_STATUS,
 		["validator"] = VUHDO_pvpIconValidator,
 		["interests"] = { VUHDO_UPDATE_MINOR_FLAGS },
+	},
+
+	--[[["STATUS_SHIELDS"] = {
+		["displayName"] = "Statusbar: All Shield Absorb %",
+		["validator"] = VUHDO_shieldPercentValidator,
+		["interests"] = { VUHDO_UPDATE_SHIELD },
+	},]]
+
+	["SHIELDS_COUNTER"] = {
+		["displayName"] = "Counter: All Shield Absorb #k",
+		["validator"] = VUHDO_shieldCountValidator,
+		["interests"] = { VUHDO_UPDATE_SHIELD },
 	},
 
 	["CLASS_COLOR"] = {

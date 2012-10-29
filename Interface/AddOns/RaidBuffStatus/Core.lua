@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 551 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 558 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -97,6 +97,7 @@ local ccspells = {
 --	BS[61780], -- Polymorph (Turkey) (needs workaround)
 	BS[76780], -- Bind Elemental
 	BS[6358], -- Seduction
+	BS[115268], -- Mesmerize
 --	BS[339], -- Entangling Roots (needs workaround)
 	BS[1513], -- Scare Beast
 	BS[10326], -- Turn Evil
@@ -164,20 +165,32 @@ local taunts = {
 	20736, -- Distracting Shot
 }
 
-local feasttoannounce = {
-	Fish = (L["prepares a %s!"]):format(BS[57426]), -- Fish Feast
-	Dragon = (L["prepares a %s!"]):format(BS[87643]), -- Broiled Dragon Feast
-	BBQ = (L["prepares a %s!"]):format(BS[87915]), -- Goblin Barbecue Feast
-	Sea = (L["prepares a %s!"]):format(BS[87644]), -- Seafood Magnifique Feast
-	Cauldron = (L["prepares a %s!"]):format(BS[92649]), -- Cauldron of Battle
-	BigCauldron = (L["prepares a %s!"]):format(BS[92712]), -- Big Cauldron of Battle
-	FishExpiring = (L["%s about to expire!"]):format(BS[57426]), -- Fish Feast
-	DragonExpiring = (L["%s about to expire!"]):format(BS[87643]), -- Broiled Dragon Feast
-	BBQExpiring = (L["%s about to expire!"]):format(BS[87915]), -- Goblin Barbecue Feast
-	SeaExpiring = (L["%s about to expire!"]):format(BS[87644]), -- Seafood Magnifique Feast
-	CauldronExpiring = (L["%s about to expire!"]):format(BS[92649]), -- Cauldron of Battle
-	BigCauldronExpiring = (L["%s about to expire!"]):format(BS[92712]), -- Big Cauldron of Battle
+local feasts = {
+	-- cata
+	[57426]=true, -- Fish Feast
+	[87643]=true, -- Broiled Dragon Feast
+	[87915]=true, -- Goblin Barbecue Feast
+	[87644]=true, -- Seafood Magnifique Feast
+
+	-- mop
+	[126503] = true,   -- Banquet of the Brew
+	[126492] = true,   -- Banquet of the Grill
+	[126501] = true,   -- Banquet of the Oven
+	[126497] = true,   -- Banquet of the Pot
+	[126499] = true,   -- Banquet of the Steamer
+	[126495] = true,   -- Banquet of the Wok
+	[126504] = true,   -- Great Banquet of the Brew
+	[126494] = true,   -- Great Banquet of the Grill
+	[126502] = true,   -- Great Banquet of the Oven
+	[126498] = true,   -- Great Banquet of the Pot
+	[126500] = true,   -- Great Banquet of the Steamer
+	[126496] = true,   -- Great Banquet of the Wok
+	[105193] = true,   -- Great Pandaren Banquet
+	[104958] = true,   -- Pandaren Banquet
 }
+for id,_ in pairs(feasts) do
+	feasts[id] = BS[id]
+end
 
 local classes = CLASS_SORT_ORDER
 
@@ -2747,6 +2760,12 @@ end
 
 
 function RaidBuffStatus:ButtonClick(self, button, down, buffcheck, cheapspell, nonselfbuff, bagitem, itemslot)
+        RaidBuffStatus:Debug("button="..(button or "nil")..
+	                     " buffcheck="..(buffcheck or "nil")..
+	                     " cheapspell="..(cheapspell or "nil")..
+	                     " nonselfbuff="..(nonselfbuff and "true" or "false")..
+	                     " bagitem="..(bagitem or "nil")..
+	                     " itemslot="..(itemslot or "nil"))
 	local BF = RaidBuffStatus.BF
 	local check = BF[buffcheck].check
 	local prefix
@@ -3166,32 +3185,20 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 				RaidBuffStatus.rezerrezee[srcname] = nil
 			end
 			if subevent == "SPELL_CAST_START" then
-				if spellID == 57426 then -- Fish Feast
-					RaidBuffStatus:Announces("Fish", srcname)
-					return
-				elseif spellID == 87643 then -- Broiled Dragon Feast
-					RaidBuffStatus:Announces("Dragon", srcname)
-					return
-				elseif spellID == 87915 then -- Goblin Barbecue Feast
-					RaidBuffStatus:Announces("BBQ", srcname)
-					return
-				elseif spellID == 87644 then -- Seafood Magnifique Feast
-					RaidBuffStatus:Announces("Sea", srcname)
-					return
-				elseif spellID == 92649 then -- Cauldron of Battle
-					RaidBuffStatus:Announces("Cauldron", srcname)
-				elseif spellID == 92712 then -- Big Cauldron of Battle
-					RaidBuffStatus:Announces("BigCauldron", srcname)
+				if feasts[spellID] then
+					RaidBuffStatus:Announces("Feast", srcname, nil, spellID)
+				elseif spellID == 92649 or spellID == 92712 then -- (Big) Cauldron of Battle
+					RaidBuffStatus:Announces("Cauldron", srcname, nil, spellID)
 				end
 				return
 			elseif subevent == "SPELL_CAST_SUCCESS" then
 				if spellID == 43987 then -- Ritual of Refreshment 
-					RaidBuffStatus:Announces("Table", srcname)
+					RaidBuffStatus:Announces("Table", srcname, nil, spellID)
 				elseif spellID == 29893 then -- Ritual of Souls 
-					RaidBuffStatus:Announces("Soul", srcname)
+					RaidBuffStatus:Announces("Soul", srcname, nil, spellID)
 					RaidBuffStatus.soulwelllastseen = GetTime() + 180
 				elseif spellID == 67826 or spellID == 22700 or spellID == 44389 or spellID == 54711 then -- Jeeves, Field Repair Bot 74A, Field Repair Bot 110G, Scrapbot
-					RaidBuffStatus:Announces("Repair", srcname)
+					RaidBuffStatus:Announces("Repair", srcname, nil, spellID)
 				end
 			end
 		return
@@ -3945,7 +3952,7 @@ function RaidBuffStatus:RefreshTalents()
 	RaidBuffStatus:UpdateTalentsFrame()
 end
 
-function RaidBuffStatus:Announces(message, who, callback)
+function RaidBuffStatus:Announces(message, who, callback, spellID)
 	if not message or not who then
 		return
 	end
@@ -3953,41 +3960,36 @@ function RaidBuffStatus:Announces(message, who, callback)
 		RaidBuffStatus:Debug("battle")
 		return
 	end
+	if not callback or callback ~= "callback" then -- delay to ensure single announce
+	  RaidBuffStatus:ScheduleTimer(function()
+	      RaidBuffStatus:Announces(message, who, "callback", spellID)
+	    end, RaidBuffStatus:calcdelay())
+          return
+	end
 	local isdead = UnitIsDeadOrGhost("player") or false
 
 --	RaidBuffStatus:Debug(":" .. who .. ":" .. message .. ":")
 	local msg = ""
         local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if RaidBuffStatus.db.profile.feasts then
-		if (message == "Fish" and RaidBuffStatus.db.profile.foodquality >= 2)
-			or ((message == "Dragon" or message == "BBQ") and RaidBuffStatus.db.profile.foodquality >= 1)
-			or (message == "Sea" and RaidBuffStatus.db.profile.foodquality >= 0) then
-			if not callback or callback ~= "callback" then
-				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message, who, "callback")
-				end, RaidBuffStatus:calcdelay())
-				return
-			end
+		if message == "Feast" then
 			if GetTime() > nextfeastannounce and RaidBuffStatus:GetUnitFromName(who) then
-				msg = who .. " " .. feasttoannounce[message]
+				local fname = (spellID and feasts[spellID]) or "Feast"
+				msg = who .. " " .. (L["prepares a %s!"]):format(fname)
 				nextfeastannounce = GetTime() + 15
 				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message .. "Expiring", who)
+					RaidBuffStatus:Announces(message .. "Expiring", who, nil, spellID)
 				end, 130)
 			end
 			RaidBuffStatus:PingMinimap(who)
 			
-		elseif (message == "FishExpiring" and RaidBuffStatus.db.profile.foodquality >= 2)
-			or ((message == "DragonExpiring" or message == "BBQExpiring") and RaidBuffStatus.db.profile.foodquality >= 1)
-			or (message == "SeaExpiring" and RaidBuffStatus.db.profile.foodquality >= 0)
-			and not incombat and not isdead then
+		elseif message == "FeastExpiring" and not incombat and not isdead then
+			local fname = (spellID and feasts[spellID]) or "Feast"
+			msg = (L["%s about to expire!"]):format(fname)
 			if report.foodlist then
-				if #report.foodlist == 1 then
-					msg = feasttoannounce[message] .. " " .. report.foodlist[1]
-				elseif #report.foodlist > 1 then
-					msg = feasttoannounce[message]
-				end
-				if canspeak and RaidBuffStatus.db.profile.feastautowhisper and #report.foodlist > 0 then
+				if #report.foodlist == 0 then
+				  	msg = nil -- all buffed
+				elseif canspeak and RaidBuffStatus.db.profile.feastautowhisper then
 					RaidBuffStatus:DoReport()
 					if report.foodlist and #report.foodlist > 0 then
 						for _,name in ipairs(report.foodlist) do
@@ -3995,35 +3997,27 @@ function RaidBuffStatus:Announces(message, who, callback)
 						end
 					end
 				end
-			else
-				msg = feasttoannounce[message]
 			end
 		end
 	end
 	if RaidBuffStatus.db.profile.cauldrons then
-		if message == "Cauldron" or message == "BigCauldron" then
-			if not callback or callback ~= "callback" then
-				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message, who, "callback")
-				end, RaidBuffStatus:calcdelay())
-				return
-			end
+		if message == "Cauldron" then
 			if GetTime() > nextcauldronannounce and RaidBuffStatus:GetUnitFromName(who) then
-				msg = who .. " " .. feasttoannounce[message]
+				local cname = (spellID and BS[spellID]) or "Cauldron"
+				msg = who .. " " .. (L["prepares a %s!"]):format(cname)
 				nextcauldronannounce = GetTime() + 15
 				RaidBuffStatus:ScheduleTimer(function()
 					RaidBuffStatus:Announces(message .. "Expiring", who)
 				end, 500)
 			end
 			RaidBuffStatus:PingMinimap(who)
-		elseif message == "CauldronExpiring" or message == "BigCauldronExpiring" and not incombat and not isdead then
+		elseif message == "CauldronExpiring" and not incombat and not isdead then
+			local cname = (spellID and BS[spellID]) or "Cauldron"
+			msg = (L["%s about to expire!"]):format(cname)
 			if report.flasklist then
-				if #report.flasklist == 1 then
-					msg = feasttoannounce[message] .. " " .. report.flasklist[1]
-				elseif #report.flasklist > 1 then
-					msg = feasttoannounce[message]
-				end
-				if canspeak and RaidBuffStatus.db.profile.cauldronautowhisper and #report.flasklist > 0 then
+				if #report.flasklist == 0 then
+				  	msg = nil -- all buffed
+				elseif canspeak and RaidBuffStatus.db.profile.cauldronautowhisper then
 					RaidBuffStatus:DoReport()
 					if report.flasklist and #report.flasklist > 0 then
 						for _,name in ipairs(report.flasklist) do
@@ -4031,20 +4025,11 @@ function RaidBuffStatus:Announces(message, who, callback)
 						end
 					end
 				end
-			else
-				msg = feasttoannounce[message]
 			end
 		end
 	end
 	if RaidBuffStatus.db.profile.refreshmenttable then
 		if message == "Table" then
-			if not callback or callback ~= "callback" then
-				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message, who, "callback")
-				end, RaidBuffStatus:calcdelay())
---				RaidBuffStatus:Debug("Table callback")
-				return
-			end
 			if GetTime() > nexttableannounce and RaidBuffStatus:GetUnitFromName(who) then
 				msg = who .. L[" has set us up a Refreshment Table"]
 				nexttableannounce = GetTime() + 15
@@ -4059,12 +4044,6 @@ function RaidBuffStatus:Announces(message, who, callback)
 	end
 	if RaidBuffStatus.db.profile.soulwell then
 		if message == "Soul" then
-			if not callback or callback ~= "callback" then
-				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message, who, "callback")
-				end, RaidBuffStatus:calcdelay())
-				return
-			end
 			local unit = RaidBuffStatus:GetUnitFromName(who)
 			if GetTime() > nextsoulannounce and unit then
 				msg = who .. L[" has set us up a Soul Well"]
@@ -4096,12 +4075,6 @@ function RaidBuffStatus:Announces(message, who, callback)
 	end
 	if RaidBuffStatus.db.profile.repair then
 		if message == "Repair" then
-			if not callback or callback ~= "callback" then
-				RaidBuffStatus:ScheduleTimer(function()
-					RaidBuffStatus:Announces(message, who, "callback")
-				end, RaidBuffStatus:calcdelay())
-				return
-			end
 			if GetTime() > nextrepairannounce and RaidBuffStatus:GetUnitFromName(who) then
 				msg = who .. L[" has set us up a Repair Bot"]
 				nextrepairannounce = GetTime() + 15
@@ -4118,7 +4091,7 @@ function RaidBuffStatus:Announces(message, who, callback)
 			end
 		end
 	end
-	if msg == "" then
+	if not msg or msg == "" then
 		return
 	end
 	if raid.isparty then
@@ -4139,11 +4112,6 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 	end
 	if message:find(L[" has set us up a Refreshment Table"]) then
 		nexttableannounce = GetTime() + 15
-	elseif message:find((L["prepares a %s!"]):format(BS[57426])) -- Fish Feast
-		or message:find((L["prepares a %s!"]):format(BS[87643])) -- Broiled Dragon Feast
-		or message:find((L["prepares a %s!"]):format(BS[87915])) -- Goblin Barbecue Feast
-		or message:find((L["prepares a %s!"]):format(BS[87644])) then -- Seafood Magnifique Feast
-		nextfeastannounce = GetTime() + 15
 	elseif message:find((L["prepares a %s!"]):format(BS[92649])) -- Cauldron of Battle
 		or message:find((L["prepares a %s!"]):format(BS[92712])) then -- Big Cauldron of Battle
 		nextcauldronannounce = GetTime() + 15
@@ -4152,6 +4120,13 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 	elseif message:find(L[" has set us up a Repair Bot"]) then
 		RaidBuffStatus:Debug("Bot warning detected.")
 		nextrepairannounce = GetTime() + 15
+	else
+		for _,name in pairs(feasts) do
+		  if message:find((L["prepares a %s!"]):format(name)) then
+		     nextfeastannounce = GetTime() + 15
+		     break
+		  end
+		end
 	end
 end
 

@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-esES.lua 1687 2012-09-23 11:54:31Z ananhaid $
+-- $Id: Atlas_Transportation-esES.lua 1830 2012-10-15 04:00:34Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -60,4 +60,9 @@ if AL then
 	AL["Wind Rider"] = "Jinete del viento";
 	AL["Won't be available once Thassarian departed"] = "No estará disponible una vez se marche Thassarian"; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "Aeropuertos Zepelín";		
+	AL["Climbing Rope"] = "Cuerda de escalar";
+	AL["Rappelling Rope"] = "Soga de rápel";
+--	AL["Abandoned Kite"] = "Abandoned Kite";
+--	AL["From sea level to ground level"] = "From sea level to ground level";
+--	AL["Whispercloud's Balloon"] = "Whispercloud's Balloon";
 end

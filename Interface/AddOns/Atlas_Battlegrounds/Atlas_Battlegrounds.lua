@@ -1,10 +1,10 @@
--- $Id: Atlas_Battlegrounds.lua 1677 2012-09-21 16:26:23Z arithmandar $
+-- $Id: Atlas_Battlegrounds.lua 1772 2012-10-03 15:12:26Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -368,17 +368,23 @@ local myData = {
 	};
 	TempleofKotmogu = {
 		ZoneName = { BZ["Temple of Kotmogu"] };
-		--Location = { };
-		--LevelRange = "85+";
-		--MinLevel = "85";
-		--{ };
+		Location = { BZ["Vale of Eternal Blossoms"]..", "..BZ["Pandaria"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "10";
+		{ BLUE.." A) "..AL["Start"].." - "..BF["Alliance"] };
+		{ BLUE.." B) "..AL["Start"].." - "..BF["Horde"] };
+		{ ORNG.." 1) "..AL["Scoring Point"] };
 	};
 	SilvershardMines = {
 		ZoneName = { BZ["Silvershard Mines"] };
-		--Location = { };
-		--LevelRange = "85+";
-		--MinLevel = "85";
-		--{ };
+		Location = { BZ["Stranglethorn Vale"]..", "..BZ["Eastern Kingdoms"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "10";
+		{ BLUE.." A) "..AL["Start"].." - "..BF["Alliance"] };
+		{ BLUE.." B) "..AL["Start"].." - "..BF["Horde"] };
+		{ GREN.."1-4) "..AL["Capture Point"] };
 	};
 };
 

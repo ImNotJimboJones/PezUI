@@ -101,6 +101,7 @@ m = {
 	--	API:AddElement({name = "BattlefieldMinimap", displayName = "Battlefield Mini Map"}, c)
 	--	API:AddElement({name = "MiniMapBattlefieldFrame", displayName = "Battleground Minimap Button"}, c)
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "Battleground Minimap Button"}, c)
+		API:AddElement({name = "QueueStatusMinimapButton", displayName = "Battleground Minimap Button Tooltip"}, c)
 	--	API:AddElement({name = "BattlefieldFrame", displayName = "Battleground Queue"}, c)
 		API:AddElement({name = "WorldStateScoreFrame", displayName = "Battleground Score"}, c)
 		API:AddElement({name = "WorldStateCaptureBar1", displayName = "Flag Capture Timer Bar", onlyOnceCreated = 1}, c)
@@ -244,7 +245,7 @@ m = {
 		API:AddElement({name = "TotemFrame", displayName = "Non-combat pet Timers"}, c)
 		API:AddElement({name = "WarlockPowerFrame", displayName = "Warlock Power Frame"}, c)
 		API:AddElement({name = "PriestBarFrame", displayName = "Shadow Priest Orbs"}, c)
-		API:AddElement({name = "MonkHarmonyBar", displayName = "Monk Chi Frame", noScale = 1}, c)
+		API:AddElement({name = "MonkHarmonyBarMover", displayName = "Monk Chi Frame"}, c)
 		
 		c = API:GetCategory("Dungeons & Raids")
 		API:AddElement({name = "PVEFrame", displayName = "PVE Finder Frame"}, c)
@@ -258,6 +259,7 @@ m = {
 		API:AddElement({name = "LevelUpDisplay", displayName = "LevelUpDisplay"}, c)
 		
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button"}, c)
+		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button Tooltip"}, c)
 		API:AddElement({name = "LFGDungeonReadyDialog", displayName = "Dungeon Ready Dialog"}, c)
 		API:AddElement({name = "LFGDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
 		API:AddElement({name = "LFGDungeonReadyStatus", displayName = "Dungeon Ready Status"}, c)
@@ -371,28 +373,29 @@ m = {
 
 		c = API:GetCategory("Loot")
 		API:AddElement({name = "LootFrame", displayName = "Loot"}, c)
+		
 		API:AddElement({name = "GroupLootContainer", displayName = "All Loot Roll Frame", create = "GroupLootFrameTemplate", noScale = 1}, c)
-		API:AddElement({name = "LootWonAlertFrame1", displayName = "Loot Won Alert Frame"}, c)
-		API:AddElement({name = "BonusRollFrame", displayName = "Legendary Quest Iten Won Frame", create = "BonusRollFrameTemplate"}, c)
-		API:AddElement({name = "BonusRollLootWonFrame", displayName = "Loot Won Frame", create = "LootWonAlertFrameTemplate"}, c)
-		API:AddElement({name = "BonusRollMoneyWonFrame", displayName = "Bonus Roll Money Won Frame", create = "MoneyWonAlertFrameTemplate"}, c)
+		
+		API:AddElement({name = "LootWonAlertMover1", displayName = "Loot Won Alert Frame1"}, c)
+		API:AddElement({name = "LootWonAlertMover2", displayName = "Loot Won Alert Frame2"}, c)
+		API:AddElement({name = "LootWonAlertMover3", displayName = "Loot Won Alert Frame3"}, c)
+		API:AddElement({name = "LootWonAlertMover4", displayName = "Loot Won Alert Frame4"}, c)
+		API:AddElement({name = "LootWonAlertMover5", displayName = "Loot Won Alert Frame5"}, c)
+		
+		API:AddElement({name = "BonusRollFrame", displayName = "Bonus Roll Frame", create = "BonusRollFrameTemplate"}, c)
+		API:AddElement({name = "BonusRollLootWonFrame", displayName = "BonusRoll Item Won", create = "LootWonAlertFrameTemplate"}, c)
+		API:AddElement({name = "BonusRollMoneyWonFrame", displayName = "BonusRoll Money Won", create = "MoneyWonAlertFrameTemplate"}, c)
+		
+		API:AddElement({name = "MoneyWonAlertMover1", displayName = "Money Won Frame1"}, c)
+		API:AddElement({name = "MoneyWonAlertMover2", displayName = "Money Won Frame2"}, c)
+		API:AddElement({name = "MoneyWonAlertMover3", displayName = "Money Won Frame3"}, c)
+		
 		API:AddElement({name = "MissingLootFrame", displayName = "Missing Loot Frame"}, c)
-		API:AddElement({name = "GroupLootFrame1", displayName = "Loot Roll 1", create = "GroupLootFrameTemplate", runOnce = function()
-			local f = _G.GroupLootFrame1
-			f.rollID = 1
-			end}, c)
-		API:AddElement({name = "GroupLootFrame2", displayName = "Loot Roll 2", create = "GroupLootFrameTemplate", runOnce = function()
-			local f = _G.GroupLootFrame2
-			f.rollID = 2
-			end}, c)
-		API:AddElement({name = "GroupLootFrame3", displayName = "Loot Roll 3", create = "GroupLootFrameTemplate", runOnce = function()
-			local f = _G.GroupLootFrame3
-			f.rollID = 3
-			end}, c)
-		API:AddElement({name = "GroupLootFrame4", displayName = "Loot Roll 4", create = "GroupLootFrameTemplate", runOnce = function()
-			local f = _G.GroupLootFrame4
-			f.rollID = 4
-			end}, c)
+		
+		API:AddElement({name = "GroupLootFrame1", displayName = "Loot Roll 1", create = "GroupLootFrameTemplate"}, c)
+		API:AddElement({name = "GroupLootFrame2", displayName = "Loot Roll 2", create = "GroupLootFrameTemplate"}, c)
+		API:AddElement({name = "GroupLootFrame3", displayName = "Loot Roll 3", create = "GroupLootFrameTemplate"}, c)
+		API:AddElement({name = "GroupLootFrame4", displayName = "Loot Roll 4", create = "GroupLootFrameTemplate"}, c)
 
 		c = API:GetCategory("Minimap")
 		API:AddElement({name = "MinimapCluster", displayName = "MiniMap"}, c)
@@ -417,6 +420,7 @@ m = {
 		
 		c = API:GetCategory("Miscellaneous")
 		API:AddElement({name = "TimeManagerFrame", displayName = "Alarm Clock"}, c)
+		API:AddElement({name = "BlackMarketFrame", displayName = "Black Market Auction", runOnce = BlackMarketFrame_Show}, c)
 		API:AddElement({name = "AuctionFrame", displayName = "Auction House", runOnce = function()
 			local af = _G.AuctionFrame
 			if not af then
@@ -542,47 +546,22 @@ m = {
 		API:AddElement({name = "VehicleSeatIndicator", displayName = "Vehicle Seat Indicator"}, c)
 		
 		c = API:GetCategory("PetBattle")
-	--	API:AddElement({name = PetBattleFrame.PetBattleUnitFrame, displayName = "PetBattleUnitFrame"}, c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleAuraTemplate, displayName = "PetBattleAuraTemplate"}, c)
-	--	API:AddElement({name = "PetBattleFrameXPBar", displayName = "PetBattleFrameXPBar"}, c) --work
-	--	API:AddElement({name = PetBattleFrame.PetBattlePetSelectionButtonTemplate,displayName = "PetBattlePetSelectionButtonTemplate"}, c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleMiniUnitFrameAlly, displayName = "PetBattleMiniUnitFrameAlly"}, c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleMiniUnitFrameEnemy, displayName = "PetBattleMiniUnitFrameEnemy"},c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleUnitTooltipTemplate, displayName = "PetBattleUnitTooltipTemplate"},c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleActionButtonTemplate, displayName = "PetBattleActionButtonTemplate"},c)
-	--	API:AddElement({name = PetBattleFrame.PetBattleAbilityButtonTemplate, displayName = "PetBattleAbilityButtonTemplate"},c)
-	--	API:AddElement({name = "PetBattleFrame", displayName = "PetBattleFrame"},c) -- work
-		API:AddElement({name = "PetBattleMover7", displayName = "Top Right Art"},c) --work
-		API:AddElement({name = "PetBattleMover8", displayName = "Top Left Art"},c) --work
-		
-		API:AddElement({name = "PetBattleMover3", displayName = "Weather"},c) --work
-		
-	--	API:AddElement({name = PetBattleFrame.EnemyPadBuffFrame, displayName = "EnemyPadBuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.EnemyPadDebuffFrame, displayName = "EnemyPadDebuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.AllyPadBuffFrame, displayName = "AllyPadBuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.AllyPadDebuffFrame, displayName = "AllyPadDebuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.EnemyBuffFrame, displayName = "EnemyBuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.EnemyDebuffFrame, displayName = "EnemyDebuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.AllyBuffFrame, displayName = "AllyBuffFrame"},c)
-	--	API:AddElement({name = PetBattleFrame.AllyDebuffFrame, displayName = "AllyDebuffFrame"},c)
-		API:AddElement({name = "PetBattleMover1", displayName = "Player Pet Frame"},c) --work
-		API:AddElement({name = "PetBattleMover2", displayName = "Enemy Pet Frame"},c) --work
-		
-		API:AddElement({name = "PetBattleMover6", displayName = "Bottom Frame", noHide = 1},c) --work
-		API:AddElement({name = "PetBattleMover5", displayName = "Pet Selection Frame"},c) --work
-		
-		API:AddElement({name = "PetBattleMover4", displayName = "Pass Button"},c) --work Pass Button
-	
-	--	API:AddElement({name = "PetBattleFrame.BottomFrame.FlowFrame", displayName = "FlowFrame"},c) --texture 
-		
-		API:AddElement({name = "PetBattleFrame.BottomFrame.SwitchPetButton", displayName = "(NYI)SwitchPetButton"},c) --work
-		API:AddElement({name = "PetBattleFrame.BottomFrame.CatchButton", displayName = "(NYI)CatchButton"},c) --work
-		API:AddElement({name = "PetBattleFrame.BottomFrame.ForfeitButton", displayName = "(NYI)ForfeitButton"},c) --work
-		
-		API:AddElement({name = "PetBattleFrame.BottomFrame.Delimiter", displayName = "(NYI)Delimiter"},c) --texture
-		
+		API:AddElement({name = "PetBattleMover7", displayName = "Top Right Art"},c)
+		API:AddElement({name = "PetBattleMover8", displayName = "Top Left Art"},c)		
+		API:AddElement({name = "PetBattleMover3", displayName = "Weather"},c)
+		API:AddElement({name = "PetBattleMover1", displayName = "Player Pet Frame"},c)
+		API:AddElement({name = "PetBattleMover2", displayName = "Enemy Pet Frame"},c)		
+		API:AddElement({name = "PetBattleMover6", displayName = "Bottom Frame", noHide = 1},c)
+		API:AddElement({name = "PetBattleMover5", displayName = "Pet Selection Frame"},c)		
+		API:AddElement({name = "PetBattleMover4", displayName = "Pass Button"},c)
+		API:AddElement({name = "PetBattleMover11", displayName = "Ally Pets"}, c)
+		API:AddElement({name = "PetBattleMover22", displayName = "Enemy Pets"}, c)
+		API:AddElement({name = "PetBattlePrimaryAbilityTooltip", displayName = "PetBattle Primary Ability Tooltip"}, c)
+		API:AddElement({name = "PetBattlePrimaryUnitTooltip", displayName = "PetBattle Primary Unit Tooltip"}, c)
+		API:AddElement({name = "BattlePetTooltip", displayName = "BattlePetTooltip"}, c)
+		API:AddElement({name = "FloatingBattlePetTooltip", displayName = "FloatingBattlePetTooltip"}, c)
+		API:AddElement({name = "FloatingPetBattleAbilityTooltip", displayName = "FloatingPetBattleAbilityTooltip"}, c)
 		API:AddElement({name = "StartSplash", displayName = "StartSplash"},c)
-		API:AddElement({name = "PetBattleUnitFrameDropDown", displayName = "PetBattleUnitFrameDropDown"},c)
 		
 		c = API:AddCategory({name = "MA Internal Elements"})
 		API:AddElement({name = "AlwaysUpFrame1", hidden = 1, onlyOnceCreated = 1}, c)

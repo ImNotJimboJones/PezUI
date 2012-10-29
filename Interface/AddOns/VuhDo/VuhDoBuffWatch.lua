@@ -29,6 +29,7 @@ local VUHDO_IS_USED_SMART_BUFF;
 
 VUHDO_BUFF_ORDER = { };
 local sEmpty = { };
+local sCooldownAliases = { };
 
 
 
@@ -321,7 +322,7 @@ function VuhDoBuffPreClick(aButton, aMouseButton)
 	local tTarget = VUHDO_IS_USED_SMART_BUFF
 		and tSwatch:GetAttribute("lowtarget") or tSwatch:GetAttribute("goodtarget");
 
-		VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget);
+	VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget);
 
 
 	if (tTarget == nil and aMouseButton ~= "RightButton") then
@@ -503,29 +504,12 @@ local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 			tInRange = (IsSpellInRange(tMaxVariant[1], tUnit) == 1) or tInfo["baseRange"];
 			tIsAvailable = tInfo["connected"] and not tInfo["dead"];
 
-			if (7 == tMaxVariant[2]) then -- VUHDO_BUFF_TARGET_TOTEM
-				tRest = 0;
-				for tTotemNum = 1, 4 do
-					_, _, tStart, tDuration, tTexture = GetTotemInfo(tTotemNum);
-					if (tTexture == VUHDO_BUFFS[tMaxVariant[1]]["icon"]) then
-						tRest = tDuration - (tNow - tStart);
-						if (tRest < 0) then
-							tRest = 0;
-						end
-						break;
-					else
-						tTexture = nil;
-					end
+			_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[1]);
+			for tCnt = 3, 5 do
+				if (tMaxVariant[tCnt] == nil or tTexture ~= nil) then
+					break;
 				end
-
-			else
-				_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[1]);
-				for tCnt = 3, 5 do
-					if (tMaxVariant[tCnt] == nil or tTexture ~= nil) then
-						break;
-					end
-					_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[tCnt]);
-				end
+				_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[tCnt]);
 			end
 
 			if (tTexture ~= nil) then
@@ -644,7 +628,8 @@ local tHasEnch1, tHasEnch2;
 local tCategName;
 local tEmpty = { };
 local tNameGroup = { };
-local tStanceName, tIsActive;
+local tIsActive;
+local tRest, tName, tTotemNum, tTexture;
 local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCategSpec)
 
 	if ("N" == strsub(aTargetCode, 1, 1)) then
@@ -666,8 +651,8 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 
 		elseif (VUHDO_BUFF_TARGET_STANCE == tMaxTarget) then
 			for tCnt = 1, NUM_STANCE_SLOTS do
-				_, tStanceName, tIsActive = GetShapeshiftFormInfo(tCnt);
-				if (tIsActive and tStanceName == someBuffVariants[1]) then
+				_, tName, tIsActive = GetShapeshiftFormInfo(tCnt);
+				if (tIsActive and tName == someBuffVariants[1]) then
 					return sEmpty, sEmpty, "player", 0, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 				end
 			end
@@ -684,8 +669,27 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 
 			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
 			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
+
+		elseif (VUHDO_BUFF_TARGET_TOTEM == tMaxTarget) then
+			for tTotemNum = 1, 4 do
+				_, tName, tStart, tDuration, tTexture = GetTotemInfo(tTotemNum);
+				if (tTexture == VUHDO_BUFFS[someBuffVariants[1]]["icon"]) then
+					if (tName ~= someBuffVariants[1]) then
+						sCooldownAliases[someBuffVariants[1]] = tName;
+					end
+					tRest = tDuration - (GetTime() - tStart);
+					if (tRest < 0) then
+						tRest = 0;
+					end
+
+					return sEmpty, sEmpty, "player", tRest, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
+				end
+			end
+
+			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
+			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
 		else
-			-- If self, totem or aura we only care if buff isn't on player
+			-- If self we only care if buff isn't on player
 			tDestGroup = VUHDO_PLAYER_GROUP;
 		end
 	end
@@ -752,7 +756,12 @@ end
 --
 local tStart, tDuration;
 local function VUHDO_getSpellCooldown(aSpellName)
-	tStart, tDuration = GetSpellCooldown(VUHDO_BUFFS[aSpellName]["id"]);
+	if (sCooldownAliases[aSpellName] ~= nil) then
+		tStart, tDuration = GetSpellCooldown(sCooldownAliases[aSpellName], BOOKTYPE_SPELL);
+	else
+		tStart, tDuration = GetSpellCooldown(VUHDO_BUFFS[aSpellName]["id"]);
+	end
+
 	if ((tDuration or 0) == 0) then
 		return 0, 0;
 	else

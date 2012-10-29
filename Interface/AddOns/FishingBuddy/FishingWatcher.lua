@@ -384,8 +384,6 @@ local function HandleZoneChange()
 end
 
 -- keep track of what's going on
-local lastSkillCheck = 0;
-local lastSkillMax = 0;
 local WatchEvents = {};
 
 WatchEvents["SKILL_LINES_CHANGED"] = function()
@@ -430,7 +428,6 @@ end
 
 WatchEvents["VARIABLES_LOADED"] = function()
 	ZoneFishingTime = 0;
-	lastSkillCheck, _, lastSkillMax = FL:GetCurrentSkill();
 
 	-- Make everything draw at least once
 	ShowDraggerFrame();
@@ -453,8 +450,8 @@ WatchEvents[FBConstants.FISHING_DISABLED_EVT] = function(started)
 		TotalTimeFishing = TotalTimeFishing + ZoneFishingTime;
 		ZoneFishingTime = 0;
 		FishingBuddy.SetSetting("TotalTimeFishing", TotalTimeFishing);
-		FishingBuddy.SetSetting("CaughtSoFar", FL:GetCaughtSoFar());
 	end
+	FishingBuddy.SetSetting("CaughtSoFar", FL:GetCaughtSoFar());
 end
 
 -- Handle display elapsed time in some reasonable fashion
@@ -499,7 +496,7 @@ end
 -- Fish watcher functions
 local function NoShow()
 	local GSB = FishingBuddy.GetSettingBool;
-	return (not GSB("WatchFishies") or (GSB("WatchOnlyWhenFishing") and not FL:IsFishingGear()));
+	return (not GSB("WatchFishies") or (GSB("WatchOnlyWhenFishing") and not FishingBuddy.AreWeFishing()));
 end
 
 local function UpdateTimerLine()
@@ -530,11 +527,9 @@ function UpdateTotalsLine(index)
 		end
 		local GSB = FishingBuddy.GetSettingBool;
 		if ( GSB("WatchCurrentSkill") ) then
-			local _, playerskill = FL:GetFishingSkillLine(false, true);
+			local _, playerskill = FL:GetFishingSkillLine(false, true, true);
 			line = line..Crayon:White(" | ")..CHAT_MSG_SKILL..": "..playerskill;
-			local needed;
-			local caughtSoFar;
-			lastSkillCheck, caughtSoFar, needed = FL:GetSkillUpInfo(lastSkillCheck);
+			local caughtSoFar, needed = FL:GetSkillUpInfo();
 			if ( needed ) then
 				line = line.." ("..caughtSoFar.."/~"..needed..")";
 			end

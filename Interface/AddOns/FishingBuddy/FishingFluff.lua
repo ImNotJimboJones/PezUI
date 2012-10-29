@@ -28,6 +28,7 @@ FISHINGPETS[24389] = -1; -- Muckbreath
 FISHINGPETS[31575] = -1; -- Giant Sewer Rat
 FISHINGPETS[33226] = -1; -- Strand Crawler
 FISHINGPETS[55386] = -1; -- Sea Pony
+FISHINGPETS[63559] = -1; -- Tiny Goldfish
 -- since we can't just do #FISHINGPETS
 local NUM_FISHINGPETS = FL:tablecount(FISHINGPETS);
 
@@ -92,6 +93,13 @@ local function CheckedOurPets()
 	for index=1,#ourpets do
 		ourpets[index].checked = (chosenpets[ourpets[index].cID] == 1);
 	end
+	
+	if (FishingPetFrame.petnames) then
+		local petnames = FishingPetFrame.petnames;
+		for index=4,#petnames do
+			petnames[index].checked = (chosenpets[petnames[index].cID] == 1);
+		end
+	end
 end
 
 local function UpdateChosenPets()
@@ -114,10 +122,8 @@ local function UpdateChosenPets()
 		
 		for idx=1,#ourpets do
 			local cid = ourpets[idx].cID;
-			if ( FISHINGPETS[cid] ) then
-				if ( settingpets == PET_FISHING ) then
-					AddChosenPet(cid, petmap[cid]);
-				end
+			if ( FISHINGPETS[cid] and settingpets == PET_FISHING ) then
+				AddChosenPet(cid, petmap[cid]);
 			elseif (allpets) then
 				AddChosenPet(cid, petmap[cid]);
 			end
@@ -154,7 +160,9 @@ FluffEvents[FBConstants.FISHING_ENABLED_EVT] = function()
 				SetPVP(0);
 			end
 		end
-		if (FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE) then
+		-- only do the fluff stuff if we're actually wearing any fishing gear
+		-- we don't do this stuff if we're "no pole equipped" fishing
+		if ( FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE and FL:IsFishingGear() ) then
 			if ( not (IsFlying() or IsMounted()) ) then
 				local nowpet = C_PetJournal.GetSummonedPetID();
 				local petid = nowpet;
@@ -321,12 +329,15 @@ end
 
 function FishingPetsButton_OnClick(self)
 	PlaySound("igMainMenuOptionCheckBoxOff");
+	local petnames = FishingPetFrame.petnames;
 	if ( self.meta ) then
 		FishingBuddy.SetSetting(PETSETTING, self.cID);	
 		UpdateChosenPets();
+		for idx=1,3 do
+			petnames[idx].checked = (petnames[idx].cID == self.cID);
+		end
 		FishingPetsMenu_Update();
 	else
-		local petnames = FishingPetFrame.petnames;
 		-- toggle
 		if (chosenpets[self.cID] == 1) then
 			chosenpets[self.cID] = 0;

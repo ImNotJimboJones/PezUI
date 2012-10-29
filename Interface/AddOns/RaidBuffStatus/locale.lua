@@ -5195,7 +5195,7 @@ La.Messages = {
 }
 La.Options = {
 	Alive = "Vivo",
-	["Allow raiders to use flasks and elixirs from last expansion"] = "Permitir raiders usarem frasco e elixir nivel 80 WotLK", -- Needs review
+	["Allow raiders to use flasks and elixirs from last expansion"] = "Permitir raiders usarem frasco e elixir nivel 80 WotLK",
 	["Alt-left click"] = "Alt-clique esquerdo",
 	["Alt-right click"] = "Alt-clique direito",
 	["Always hide the Boss R Trash buttons"] = "Sempre esconder botões de Chefes TP? Trash",
@@ -5310,7 +5310,7 @@ La.Options = {
 	["NON-TANK Tanagra taunted my target (The Lich King) with Growl"] = "NÃO-TANQUE Tanagra provocou meu alvo (Lich Rei) com Rugido",
 	["Non-tank taunts my target"] = "Não-tanque provocou meu alvo",
 	["Number of columns to display on the dashboard"] = "Número de colunas para mostrar no menu",
-	["Old flasks and elixirs"] = "Frascos e elixir WotLK", -- Needs review
+	["Old flasks and elixirs"] = "Frascos e elixir WotLK",
 	["One big group"] = "Um grande grupo",
 	["One group down"] = "Um grupo em baixo",
 	["Only allow food that is 90 Stamina and other stats.  I.e. only allow the top quality food with highest stats"] = "Permitir somente comida que tenha 90 de vigor e outros status. I.e. somente permitir comida de melhor qualidade com status maiores",

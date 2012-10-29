@@ -1,10 +1,10 @@
--- $Id: AtlasMaps_NPC_DB.lua 1712 2012-09-24 18:49:12Z arithmandar $
+-- $Id: AtlasMaps_NPC_DB.lua 1772 2012-10-03 15:12:26Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -47,7 +47,7 @@ Syntax:
 		{ 4, 447, 416, 359 }; -- Old Serra'kis
 		{ 5, 437, 244, 447 }; -- Twilight Lord Kelris
 		{ 6, 444, 459, 465 }; -- Aku'mai
-	};                
+	};
 	DireMaulEast = {
 		{ 1, 404, 212, 109 }; -- Lethtendris
 		{ 2, 403, 352, 401 }; -- Hydrospawn
@@ -646,12 +646,12 @@ Syntax:
 		{ 4, 737, 287, 357 }; -- Amber-Shaper Un'sok
 		{ 5, 743, 67, 358 }; -- Grand Empress Shek'zeer
 	};
-	MogushanPalace = {
+	MoguShanPalace = {
 		{ 1, 708, 203, 454 }; -- Trial of the King
 		{ 2, 690, 83, 247 }; -- Gekkan
 		{ 3, 698, 379, 309 }; -- Xin the Weaponmaster
 	};
-	MogushanVaults = {
+	MoguShanVaults = {
 		{ 1, 679, 364, 315 }; -- The Stone Guard
 		{ 2, 689, 316, 240 }; -- Feng the Accursed
 		{ 3, 682, 318, 116 }; -- Gara'jal the Spiritbinder
@@ -697,7 +697,7 @@ Syntax:
 		{ 2, 669, 334, 280 }; -- Hoptallus
 		{ 3, 670, 430, 400 }; -- Yan-Zhu the Uncasked
 	};
-	TempleoftheJadeSerpent = {
+	TempleOfTheJadeSerpent = {
 		{ 1, 672, 218, 68 }; -- Wise Mari
 		{ 2, 664, 65, 380 }; -- Lorewalker Stonestep
 		{ 3, 658, 243, 259 }; -- Liu Flameheart

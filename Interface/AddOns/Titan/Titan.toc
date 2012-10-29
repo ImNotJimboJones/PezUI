@@ -1,10 +1,10 @@
 ## Interface: 50001
-## Title: Titan Panel |cff00aa005.1.7.50001|r
+## Title: Titan Panel |cff00aa005.1.8.50001|r
 ## Notes: Adds a display bar on the top and/or bottom of the screen. Allows users to show and control information/launcher plugins.
 ## Author: Titan Development Team
 ## SavedVariables: TitanAll, TitanSettings, TitanSkins, ServerTimeOffsets, ServerHourFormat
 ## Dependencies:
-## Version: 5.1.7.50001
+## Version: 5.1.8.50001
 ## OptionalDeps: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0
 ## X-Embeds: Ace3, AceGUI-3.0-SharedMediaWidgets, LibSharedMedia-3.0
 ## X-Credits: TitanMod, Dark Imakuni, Adsertor, Titan Dev Team
@@ -20,11 +20,12 @@ LibDataBroker-1.1.lua
 
 locale\Localization.lua
 locale\Localization.BR.lua
-locale\Localization.DE.lua
-locale\Localization.FR.lua
-locale\Localization.ES.lua
-locale\Localization.RU.lua
 locale\Localization.CN.lua
+locale\Localization.DE.lua
+locale\Localization.ES.lua
+locale\Localization.FR.lua
+locale\Locatization.KR.lua
+locale\Localization.RU.lua
 locale\Localization.TW.lua
 
 TitanUtils.lua

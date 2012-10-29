@@ -247,11 +247,11 @@ function VuhDoActionOnEnter(aButton)
 		VUHDO_updateBouquetsForEvent(sMouseoverUnit, 15); -- VUHDO_UPDATE_MOUSEOVER
 	end
 
-	if (VUHDO_CONFIG["DIRECTION"]["enable"]) then
+	if (VUHDO_isShowDirectionArrow()) then
 		VUHDO_updateDirectionFrame(aButton);
 	end
 
-	if (VUHDO_CONFIG["IS_SHOW_GCD"]) then
+	if (VUHDO_isShowGcd()) then
 		VuhDoGcdStatusBar:ClearAllPoints();
 		VuhDoGcdStatusBar:SetAllPoints(aButton);
 		VuhDoGcdStatusBar:SetValue(0);

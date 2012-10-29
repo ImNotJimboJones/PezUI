@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Battlegrounds-zhCN.lua 1580 2011-12-02 13:35:35Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-zhCN.lua 1772 2012-10-03 15:12:26Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -196,4 +196,10 @@ if AL then
 	-- Twin Peaks
 	AL["Wildhammer Longhouse"] = "蛮锤要塞";
 	AL["Dragonmaw Clan Compound"] = "龙喉要塞";
+
+	-- Silvershard Mines
+	AL["Capture Point"] = "争夺点"; -- the area where the carts spwan and you need to capture them
+
+	-- Temple of Kotmogu
+	AL["Scoring Point"] = "得分点";
 end

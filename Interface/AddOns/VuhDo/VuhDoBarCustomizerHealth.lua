@@ -608,6 +608,7 @@ local tTexture;
 local tIcon;
 local tUnit;
 function VUHDO_customizeHealButton(aButton)
+
 	VUHDO_customizeText(aButton, 1, false); -- VUHDO_UPDATE_ALL
 
 	tUnit, _ = VUHDO_getDisplayUnit(aButton);
@@ -736,9 +737,7 @@ end
 
 
 --
-local VUHDO_getHealButton = VUHDO_getHealButton;
-local tPanelButtons;
-function VUHDO_updateAllPanelBars(aPanelNum)
+local function VUHDO_internalUpdateAllPanelBars(aPanelNum)
 	tPanelButtons = VUHDO_getPanelButtons(aPanelNum);
 	for _, tButton in pairs(tPanelButtons) do
 		if (tButton:GetAttribute("unit") == nil) then
@@ -746,6 +745,14 @@ function VUHDO_updateAllPanelBars(aPanelNum)
 		end
 		VUHDO_customizeHealButton(tButton);
 	end
+end
+
+
+
+--
+local tPanelButtons;
+function VUHDO_updateAllPanelBars(aPanelNum)
+	VUHDO_internalUpdateAllPanelBars(aPanelNum);
 
 	for tUnit, _ in pairs(VUHDO_RAID) do
 		VUHDO_updateIncHeal(tUnit); -- Trotzdem wichtig um Balken zu verstecken bei neuen Units
@@ -753,7 +760,6 @@ function VUHDO_updateAllPanelBars(aPanelNum)
 		VUHDO_manaBarBouquetCallback(tUnit, false, nil, nil, nil, nil, nil, nil, nil);
 	end
 end
-local VUHDO_updateAllPanelBars = VUHDO_updateAllPanelBars;
 
 
 
@@ -762,8 +768,14 @@ VUHDO_REMOVE_HOTS = true;
 function VUHDO_updateAllRaidBars()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		if (VUHDO_isPanelVisible(tCnt)) then
-			VUHDO_updateAllPanelBars(tCnt);
+			VUHDO_internalUpdateAllPanelBars(tCnt);
 		end
+	end
+
+	for tUnit, _ in pairs(VUHDO_RAID) do
+		VUHDO_updateIncHeal(tUnit); -- Trotzdem wichtig um Balken zu verstecken bei neuen Units
+		VUHDO_updateManaBars(tUnit, 3);
+		VUHDO_manaBarBouquetCallback(tUnit, false, nil, nil, nil, nil, nil, nil, nil);
 	end
 
 	if (VUHDO_REMOVE_HOTS) then

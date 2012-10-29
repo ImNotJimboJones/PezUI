@@ -1,9 +1,10 @@
-﻿--[[
+﻿-- $Id: Atlas_Battlegrounds-frFR.lua 1772 2012-10-03 15:12:26Z arithmandar $
+--[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -192,4 +193,10 @@ if AL then
 	-- Twin Peaks
 	AL["Wildhammer Longhouse"] = "Bastion des Marteaux-hardis";
 	AL["Dragonmaw Clan Compound"] = "Forge des Gueules-de-Dragon";
+	
+	-- Temple of Kotmogu
+AL["Scoring Point"] = "Scoring Point"; -- Translation needed
+
+	-- Silvershard Mines
+	AL["Capture Point"] = "Point de capture";
 end

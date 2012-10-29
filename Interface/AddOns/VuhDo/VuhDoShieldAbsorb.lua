@@ -4,11 +4,13 @@ local type = type;
 
 local VUHDO_SHIELDS = {
 	[17] = 15, -- VUHDO_SPELL_ID.POWERWORD_SHIELD -- ok
+	[123258] = 15, -- Power Word: Shield (Improved)
 	[47753] = 15, -- VUHDO_SPELL_ID.DIVINE_AEGIS -- ok
 	[86273] = 15, -- VUHDO_SPELL_ID.ILLUMINATED_HEALING (buff) ok
 	[11426] = 60, -- VUHDO_SPELL_ID.ICE_BARRIER -- ok
 	[65148] = 15, -- VUHDO_SPELL_ID.SACRED_SHIELD (Buff) -- ok
 	[114908] = 15, -- VUHDO_SPELL_ID.SPIRIT_SHELL (Buff) -- ok
+	[116849] = 12, -- Life Cocoon
 }
 
 
@@ -208,6 +210,20 @@ end
 
 
 --
+local tSummeLeft;
+function getUnitOverallShieldRemain(aUnit)
+	tSummeLeft = 0;
+
+	for tShield, tLeft in pairs(VUHDO_SHIELD_LEFT[aUnit] or sEmpty) do
+		tSummeLeft = tSummeLeft + tLeft;
+	end
+
+	return tSummeLeft;
+end
+
+
+
+--
 local tUnit;
 local VUHDO_DEBUFF_SHIELDS = { };
 local tDelta, tShieldName;
@@ -262,4 +278,6 @@ function VUHDO_parseCombatLogShieldAbsorb(aMessage, aSrcGuid, aDstGuid, aShieldN
 		VUHDO_SHIELD_EXPIRY[tUnit] = nil;
 		VUHDO_DEBUFF_SHIELDS[tUnit] = nil;
 	end
+
+	VUHDO_updateBouquetsForEvent(tUnit, 36); -- VUHDO_UPDATE_SHIELD
 end

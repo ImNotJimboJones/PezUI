@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-zhTW.lua 1687 2012-09-23 11:54:31Z ananhaid $
+-- $Id: Atlas_Transportation-zhTW.lua 1830 2012-10-15 04:00:34Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -52,4 +52,9 @@ if AL then
 	AL["Wind Rider"] = "雙足飛龍";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "安多哈爾任務線完成後飛行點將會消失"; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "飛船空塔";
+	AL["Climbing Rope"] = "登山繩";
+	AL["Rappelling Rope"] = "垂降繩";
+	AL["Abandoned Kite"] = "被遺棄的鳶";
+	AL["From sea level to ground level"] = "從海平面到地面";
+	AL["Whispercloud's Balloon"] = "雲語的氣球";
 end

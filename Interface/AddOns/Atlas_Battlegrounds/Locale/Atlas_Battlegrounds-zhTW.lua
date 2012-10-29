@@ -1,9 +1,10 @@
-﻿--[[
+﻿-- $Id: Atlas_Battlegrounds-zhTW.lua 1772 2012-10-03 15:12:26Z arithmandar $
+--[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -22,8 +23,7 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 --]]
--- $Date: 2011-07-13 01:20:37 +0800 (Wed, 13 Jul 2011) $
--- $Revision: 1419 $
+
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "zhTW", false);
 -- Localize file must set above to false, for example:
@@ -193,4 +193,10 @@ if AL then
 	-- Twin Peaks
 	AL["Wildhammer Longhouse"] = "蠻錘長屋";
 	AL["Dragonmaw Clan Compound"] = "龍喉氏族營地";
+
+	-- Silvershard Mines
+	AL["Capture Point"] = "資源獲取點"; -- the area where the carts spwan and you need to capture them
+
+	-- Temple of Kotmogu
+	AL["Scoring Point"] = "得分點";
 end

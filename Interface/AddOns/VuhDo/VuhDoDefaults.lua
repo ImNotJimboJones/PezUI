@@ -111,9 +111,8 @@ end
 
 local VUHDO_DEFAULT_MODELS = {
 	{ VUHDO_ID_GROUP_1, VUHDO_ID_GROUP_2, VUHDO_ID_GROUP_3, VUHDO_ID_GROUP_4, VUHDO_ID_GROUP_5, VUHDO_ID_GROUP_6, VUHDO_ID_GROUP_7, VUHDO_ID_GROUP_8 },
-	{ VUHDO_ID_MAINTANKS },
 	{ VUHDO_ID_PETS },
-	{ VUHDO_ID_PRIVATE_TANKS },
+	{ VUHDO_ID_PRIVATE_TANKS, VUHDO_ID_MAINTANKS },
 };
 
 
@@ -819,6 +818,132 @@ function VUHDO_loadDefaultConfig()
 	);
 
 
+	-- 5.x - MoP
+	VUHDO_addCustomSpellIds(20,
+
+		--[[ Heart of Fear ]]
+
+		--Imperial Vizier Zor'lok
+		122760, --Exhale
+		123812, --Pheromones of Zeal
+		122740, --Convert
+		122706, --Noise Cancelling
+		--Blade Lord Ta'yak
+		122949, --Unseen Strike
+		123474, --Overwhelming Assault
+		124783, --Storm Unleashed
+		--Garalon
+		122835, --Pheromones
+		123081, --Pungency
+		123120, --Pheromone Trail
+		--Wind Lord Mel'jarak
+		121881, --Amber Prison
+		122055, --Residue
+		122064, --Corrosive Resin
+		--Amber-Shaper Un'sok
+		121949, --Parasitic Growth
+		122784, --Reshape Life
+		122064, --Corrosive Resin
+		122504, --Burning Amber
+		--Grand Empress Shek'zeer
+		125390, --Fixate
+		123707, --Eyes of the Empress
+		123788, --Cry of Terror
+		124097, --Sticky Resin
+		125824, --Trapped!
+		124777, --Poison Bomb
+		124821, --Poison-Drenched Armor
+		124827, --Poison Fumes
+		124849, --Consuming Terror
+		124863, --Visions of Demise
+		123845, --Heart of Fear
+
+		--[[ Mogushan Vaults ]]
+
+		-- Trash
+		118562, --Petrified
+		116596, --Smoke Bomb
+		--The Stone Guard
+		130395, --Jasper Chains
+		130774, --Amethyst Pool
+		116038, --Jasper Petrification
+		115861, --Cobalt Petrification
+		116060, --Amethyst Petrification
+		116281, --Cobalt Mine Blast
+		125206, --Rend Flesh
+		116008, --Jade Petrification
+		--Feng The Accursed
+		131788, --Lightning Lash
+		116040, --Epicenter
+		116942, --Flaming Spear
+		116784, --Wildfire Spark
+		102464, --Arcane Shock
+		116417, --Arcane Resonance
+		116364, --Arcane Velocity
+		116374, --Lightning Charge
+		131792, --Shadowburn
+		--Gara'jal the Spiritbinder
+		122151, --Voodoo doll
+		117723, --Frail Soul
+		116260, --Crossed Over
+		--The Spirit Kings
+		118303, --Fixate
+		118048, --Pillaged
+		118135, --Pinned Down
+		118047, --Pillage: Target
+		118163, --Robbed Blind
+		--Elegon
+		117878, --Overcharged
+		117949, --Closed circuit
+		117945, --Arcing Energy
+		--Will of the Emperor
+		116525, --Focused Assault
+		116778, --Focused Defense
+		117485, --Impeding Thrust
+		116550, --Energizing Smash
+		116829, --Focused Energy
+
+		--[[ Sha of Anger ]]
+
+		119626, --Aggressive Behavior
+		119488, --Unleashed Wrath
+		119610, --Bitter Thoughts
+
+		--[[ Terrace of Endless Spring ]]
+
+		--Protector Kaolan
+		117519, --Touch of Sha
+		111850, --Lightning Prison: Targeted
+		117436, --Lightning Prison: Stunned
+		118191, --Corrupted Essence
+		117986, --Defiled Ground: Stacks
+
+		--Tsulong
+		122768, --Dread Shadows
+		122777, --Nightmares
+		122752, --Shadow Breath
+		122789, --Sunbeam
+		123012, --Terrorize
+		123036, --Fright
+		122858, --Bathed in Light
+
+		--Lei Shi
+		123121, --Spray
+		123705, --Scary Fog
+
+		--Sha of Fear
+		119414, --Breath of Fear
+		129147, --Onimous Cackle
+		119983, --Dread Spray
+		120669, --Naked and Afraid
+		75683, --Waterspout
+		120629, --Huddle in Terror
+		120394, --Eternal Darkness
+		129189, --Sha Globe
+		119086, --Penetrating Bolt
+		119775  --Reaching Attack
+	);
+
 	for _, tName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
 		VUHDO_customDebuffsAddDefaultSettings(tName);
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] = VUHDO_ensureSanity(
@@ -1111,7 +1236,7 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 
 		["maxColumnsWhenStructured"] = 8,
 		["maxRowsWhenLoose"] = 6,
-		["ommitEmptyWhenStructured"] = false,
+		["ommitEmptyWhenStructured"] = true,
 		["isPlayerOnTop"] = true,
 
 		["showTarget"] = false,
@@ -1247,18 +1372,9 @@ function VUHDO_loadDefaultPanelSetup()
 			tAktPanel = VUHDO_PANEL_SETUP[tPanelNum];
 			tAktPanel["MODEL"]["groups"] = VUHDO_DEFAULT_MODELS[tPanelNum];
 
-			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-				tAktPanel["SCALING"]["barWidth"] = 100;
-				tAktPanel["SCALING"]["barHeight"] = 26;
+			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
 				tAktPanel["SCALING"]["showTarget"] = true;
-			else
-				if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PETS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-					tAktPanel["MODEL"]["ordering"] = VUHDO_ORDERING_LOOSE;
-				elseif (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
-					tAktPanel["SCALING"]["showTarget"] = true;
-				else
-					tAktPanel["SCALING"]["ommitEmptyWhenStructured"] = true;
-				end
+				tAktPanel["SCALING"]["ommitEmptyWhenStructured"] = false;
 			end
 
 			if (GetLocale() == "zhCN" or GetLocale() == "zhTW" or GetLocale() == "koKR") then

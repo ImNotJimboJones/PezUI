@@ -221,12 +221,12 @@ local function VUHDO_getSpellTooltip(aModifier, aButtonNum, aUnit)
 	if (not UnitIsFriend("player", aUnit)) then
 		if (aButtonNum < 6) then
 			tButtonId = format("%s%d", aModifier, aButtonNum);
-			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
+			if ((VUHDO_HOSTILE_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_HOSTILE_SPELL_ASSIGNMENTS[tButtonId][3];
 			end
 		else
 			tButtonId = format("%s%d", aModifier, aButtonNum - 5);
-			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
+			if ((VUHDO_SPELLS_KEYBOARD["HOSTILE_WHEEL"][tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_SPELLS_KEYBOARD["HOSTILE_WHEEL"][tButtonId][3];
 			end
 		end
@@ -238,7 +238,7 @@ local function VUHDO_getSpellTooltip(aModifier, aButtonNum, aUnit)
 			end
 		else
 			tButtonId = format("%s%d", aModifier, aButtonNum - 5);
-			if ((VUHDO_SPELL_ASSIGNMENTS[tButtonId] or { })[3] ~= nil) then
+			if ((VUHDO_SPELLS_KEYBOARD["WHEEL"][tButtonId] or { })[3] ~= nil) then
 				tSpellName = VUHDO_SPELLS_KEYBOARD["WHEEL"][tButtonId][3];
 			end
 		end
@@ -265,7 +265,6 @@ local tLeftText;
 local tRightText;
 local tModifier;
 local tGuildName, tGuildRank;
-local tGuild;
 local tBinding;
 local tClassName, tClassNameLoc;
 local tEmpty = {};
@@ -299,9 +298,9 @@ function VUHDO_updateTooltip()
 	VUHDO_addTooltipLineRight(UnitRace(tUnit) or UnitCreatureType(tUnit) or " ", tClassColor, 9);
 
 	-- Guild
-	tGuildName, tGuildRank, _ = GetGuildInfo(tUnit);
-	tGuild = tGuildName ~= nil and format("%s %s <%s>", tGuildRank or " ", VUHDO_I18N_TT_OF, tGuildName) or " ";
-	VUHDO_addTooltipLineLeft(tGuild, tClassColor, 9);
+	tGuildName, tGuildRank = GetGuildInfo(tUnit);
+	tLeftText = tGuildName ~= nil and format("%s %s <%s>", tGuildRank or " ", VUHDO_I18N_TT_OF, tGuildName) or " ";
+	VUHDO_addTooltipLineLeft(tLeftText, tClassColor, 9);
 	VUHDO_addTooltipLineRight(" ", tClassColor, 9);
 
 	-- Distance

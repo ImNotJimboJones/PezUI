@@ -8,7 +8,9 @@ local VUHDO_customizeIconText;
 local sSign;
 local sMaxNum;
 local sPoint;
-local sColSpacing, sRowSpacing;
+local sColSpacing;
+local sTopSpacing;
+local sBottomSpacing;
 local sIsTooltipCache = { };
 
 function VUHDO_panelRedrawCustomDebuffsInitBurst()
@@ -44,7 +46,9 @@ function VUHDO_panelRedrwawCustomDebuffsInitLocalVars(aPanelNum)
 	sHeight = sBarScaling["barHeight"];
 	sStep = sSign * sHeight;
 	table.wipe(sIsTooltipCache);
-	sColSpacing, sRowSpacing = sBarScaling["columnSpacing"], sBarScaling["rowSpacing"];
+	sColSpacing = sBarScaling["columnSpacing"];
+	sTopSpacing = sBarScaling["rowSpacing"] + VUHDO_getAdditionalTopHeight(aPanelNum);
+	sBottomSpacing = sBarScaling["rowSpacing"] + VUHDO_getAdditionalBottomHeight(aPanelNum);
 end
 
 
@@ -58,7 +62,7 @@ end
 
 
 --
-local tMaxDiff, tMaxDiffX, tMaxDiffY, tRScale, tPScale;
+local tMaxDiff, tMaxDiffTop, tMaxDiffBottom, tMaxDiffX, tRScale, tPScale;
 local function VUHDO_isMostlyInBounds(aRegion, aParent, aMaxDiffFactor)
 
 	if (aRegion:GetTop() == nil or aParent:GetTop() == nil) then
@@ -69,14 +73,16 @@ local function VUHDO_isMostlyInBounds(aRegion, aParent, aMaxDiffFactor)
 
 	tMaxDiff = (aRegion:GetWidth() or 0) * aMaxDiffFactor * tRScale;
 	tMaxDiffX = tMaxDiff + sColSpacing * tPScale;
-	tMaxDiffY = tMaxDiff + sRowSpacing * tPScale;
+	--tMaxDiffY = tMaxDiff + sRowSpacing * tPScale;
+	tMaxDiffTop = tMaxDiff + sTopSpacing * tPScale
+	tMaxDiffBottom = tMaxDiff + sBottomSpacing * tPScale;
 
 	--VUHDO_xMsg(floor(tMaxDiffX + 0.5), floor(tMaxDiffY + 0.5));
 
 	return ((aRegion:GetLeft()   or 0) * tRScale >= (aParent:GetLeft()   or 0) * tPScale - tMaxDiffX
-		  and (aRegion:GetTop()    or 0) * tRScale <= (aParent:GetTop()    or 0) * tPScale + tMaxDiffY
+		  and (aRegion:GetTop()    or 0) * tRScale <= (aParent:GetTop()    or 0) * tPScale + tMaxDiffTop
 		  and (aRegion:GetRight()  or 0) * tRScale <= (aParent:GetRight()  or 0) * tPScale + tMaxDiffX
-		  and (aRegion:GetBottom() or 0) * tRScale >= (aParent:GetBottom() or 0) * tPScale - tMaxDiffY) and 1 or 0;
+		  and (aRegion:GetBottom() or 0) * tRScale >= (aParent:GetBottom() or 0) * tPScale - tMaxDiffBottom) and 1 or 0;
 
 end
 
