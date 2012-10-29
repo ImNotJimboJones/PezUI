@@ -1282,6 +1282,7 @@ function PowaAuras:MainOptionShow()
 	if (PowaOptionsFrame:IsVisible()) then
 		self:MainOptionClose();
 	else
+		PowaAuras_InitalizeOnMenuOpen();
 		self:OptionHideAll();
 		self.ModTest = true;
 		self:UpdateMainOption();
@@ -3188,6 +3189,49 @@ function PowaAuras_CommanLine(msg)
 	else
 		PowaAuras:MainOptionShow();
 	end
+end
+
+function PowaAuras_InitalizeOnMenuOpen()
+	-- Initalize dropdown menu buttons on menu open
+	-- PowaDropDownBuffType
+	PowaDropDownBuffTypeLabel:SetText(PowaAuras.Text.nomActivationBy); 
+	UIDropDownMenu_SetWidth(PowaDropDownBuffType, 150);
+	UIDropDownMenu_Initialize(PowaDropDownBuffType, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownPowerType
+	PowaDropDownPowerTypeLabel:SetText(PowaAuras.Text.nomPowerType); 
+	UIDropDownMenu_Initialize(PowaDropDownPowerType, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownStance
+	PowaDropDownStanceLabel:SetText(PowaAuras.Text.nomStance); 
+	UIDropDownMenu_Initialize(PowaDropDownStance, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownGTFO
+	PowaDropDownGTFOLabel:SetText(PowaAuras.Text.nomGTFO); 
+	UIDropDownMenu_Initialize(PowaDropDownGTFO, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownAnimBegin
+	PowaDropDownAnimBeginLabel:SetText(PowaAuras.Text.nomBegin); 
+	UIDropDownMenu_Initialize(PowaDropDownAnimBegin, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownAnimEnd
+	PowaDropDownAnimEndLabel:SetText(PowaAuras.Text.nomEnd); 
+	UIDropDownMenu_Initialize(PowaDropDownAnimEnd, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownAnim1
+	PowaDropDownAnim1Label:SetText(PowaAuras.Text.nomAnim1); 
+	UIDropDownMenu_Initialize(PowaDropDownAnim1, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownAnim2
+	PowaDropDownAnim2Label:SetText(PowaAuras.Text.nomAnim2); 
+	UIDropDownMenu_Initialize(PowaDropDownAnim2, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownSound
+	PowaDropDownSoundLabel:SetText(PowaAuras.Text.nomSound); 
+	PowaStartSoundText:SetText(PowaAuras.Text.nomSoundStarting); 
+	UIDropDownMenu_Initialize(PowaDropDownSound, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownSound2
+	PowaDropDownSound2Label:SetText(PowaAuras.Text.nomSound2); 
+	UIDropDownMenu_Initialize(PowaDropDownSound2, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownSoundEnd
+	PowaDropDownSoundEndLabel:SetText(PowaAuras.Text.nomSoundEnd); 
+	PowaEndSoundText:SetText(PowaAuras.Text.nomSoundEnding); 
+	UIDropDownMenu_Initialize(PowaDropDownSoundEnd, PowaAuras.DropDownMenu_Initialize);
+	-- PowaDropDownSound2End
+	PowaDropDownSound2EndLabel:SetText(PowaAuras.Text.nomSound2End); 
+	UIDropDownMenu_Initialize(PowaDropDownSound2End, PowaAuras.DropDownMenu_Initialize);
 end
 
 function PowaAuras:ShowAurasOnUnit(display, auraType)

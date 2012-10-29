@@ -1297,11 +1297,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownBuffTypeLabel:SetText(PowaAuras.Text.nomActivationBy); 
-					UIDropDownMenu_SetWidth(self, 150);
-                 	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT");</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
                 </Scripts>
@@ -1339,10 +1334,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownPowerTypeLabel:SetText(PowaAuras.Text.nomPowerType); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aidePowerType, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -1381,10 +1372,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownStanceLabel:SetText(PowaAuras.Text.nomStance); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideStance, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -1424,10 +1411,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownGTFOLabel:SetText(PowaAuras.Text.nomGTFO); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideGTFO, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2413,10 +2396,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownAnimBeginLabel:SetText(PowaAuras.Text.nomBegin); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                 </Scripts>
               </Frame>
@@ -2453,10 +2432,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownAnimEndLabel:SetText(PowaAuras.Text.nomEnd); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                 </Scripts>
               </Frame>
@@ -2520,10 +2495,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownAnim1Label:SetText(PowaAuras.Text.nomAnim1); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideAnim1, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2563,10 +2534,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownAnim2Label:SetText(PowaAuras.Text.nomAnim2); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideAnim2, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2757,11 +2724,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownSoundLabel:SetText(PowaAuras.Text.nomSound); 
-                  	PowaStartSoundText:SetText(PowaAuras.Text.nomSoundStarting); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideSound, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2801,10 +2763,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownSound2Label:SetText(PowaAuras.Text.nomSound2); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideSound2, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2930,11 +2888,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownSoundEndLabel:SetText(PowaAuras.Text.nomSoundEnd); 
-                 	PowaEndSoundText:SetText(PowaAuras.Text.nomSoundEnding); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideSoundEnd, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -2974,10 +2927,6 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                   </Layer>
                 </Layers>
                 <Scripts>
-                  <OnLoad>
-                  	PowaDropDownSound2EndLabel:SetText(PowaAuras.Text.nomSound2End); 
-                  	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
-                  </OnLoad>
                   <OnShow>UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);</OnShow>
                   <OnEnter>GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetText(PowaAuras.Text.aideSound2End, nil, nil, nil, nil, 1);</OnEnter>
                   <OnLeave>GameTooltip:Hide();</OnLeave>
@@ -3489,7 +3438,7 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                 </Layers>
                 <Scripts>
                   <OnLoad>
-                  	getglobal(self:GetName().."Label"):SetText(PowaAuras.Text.nomTimerTexture); 
+                  	getglobal(self:GetName().."Label"):SetText(PowaAuras.Text.nomTimerTexture);
                   </OnLoad>
                   <OnShow>
                    	UIDropDownMenu_Initialize(self, PowaAuras.DropDownTimerMenu_Initialize);
@@ -3975,7 +3924,7 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
                 </Layers>
                 <Scripts>
                   <OnLoad>
-                  	getglobal(self:GetName().."Label"):SetText(PowaAuras.Text.nomRelative); 
+                  	getglobal(self:GetName().."Label"):SetText(PowaAuras.Text.nomRelative);
                   </OnLoad>
                   <OnShow>
                    	UIDropDownMenu_Initialize(self, PowaAuras.DropDownMenu_Initialize);
@@ -4424,5 +4373,4 @@ Revert PowaBarSliderTemplate to inherit from OptionsSliderTemplate if it's fixed
     	</Frame>
     </Frames>
   </Frame>
- 
 </Ui>
