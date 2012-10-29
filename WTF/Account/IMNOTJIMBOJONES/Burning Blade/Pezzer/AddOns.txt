@@ -296,3 +296,4 @@ Atlas_Cataclysm: enabled
 Atlas_Scenarios: enabled
 Atlas_OutdoorRaids: enabled
 Atlas_WorldEvents: enabled
+DBM-Scenario-MoP: enabled
