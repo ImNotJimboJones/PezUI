@@ -1,0 +1,12 @@
+tag v1.0
+346b9ef2ca632d4705330481b78dcc1ae82337ad
+Spence DiNicolantonio <ImNotJimboJones@mac.com>
+2012-10-29 16:56:52 -0400
+
+Tagging as v1.0
+
+
+--------------------
+
+Spence DiNicolantonio:
+	- Initial commit of source and toc
