@@ -29,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
-	["profileKeys"] = {
-		["Pezzer - Burning Blade"] = "Default",
-	},
 	["global"] = {
 		["version"] = "6.007",
+	},
+	["profileKeys"] = {
+		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["toggle"] = {
-					["Totem"] = true,
-				},
 				["scale"] = {
-					["Elite"] = 0.75,
+					["Normal"] = 0.75,
 					["Boss"] = 0.75,
 					["Neutral"] = 0.75,
-					["Normal"] = 0.75,
+					["Elite"] = 0.75,
+				},
+				["toggle"] = {
+					["Totem"] = true,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["friendlyClass"] = true,
+			["allowClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -125,24 +125,24 @@ ThreatPlatesDB = {
 				},
 			},
 			["threat"] = {
-				["scaleType"] = {
-					["Normal"] = 0,
-					["Boss"] = 0,
+				["tank"] = {
+					["scale"] = {
+						["LOW"] = 1.15,
+						["MEDIUM"] = 0.9500000000000001,
+						["HIGH"] = 0.75,
+					},
 				},
 				["dps"] = {
 					["scale"] = {
-						["MEDIUM"] = 0.9500000000000001,
 						["LOW"] = 0.75,
+						["MEDIUM"] = 0.9500000000000001,
 						["HIGH"] = 1.15,
 					},
 				},
 				["useType"] = false,
-				["tank"] = {
-					["scale"] = {
-						["MEDIUM"] = 0.9500000000000001,
-						["LOW"] = 1.15,
-						["HIGH"] = 0.75,
-					},
+				["scaleType"] = {
+					["Normal"] = 0,
+					["Boss"] = 0,
 				},
 				["useHPColor"] = false,
 			},
@@ -160,19 +160,19 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["show"] = false,
-					["x"] = 49,
 					["y"] = 1,
 					["vertical"] = "CENTER",
+					["show"] = false,
+					["x"] = 49,
 					["size"] = 11,
 				},
 				["normal"] = {
 					["threatcolor"] = {
 						["LOW"] = {
 							["a"] = 0,
-							["r"] = 0,
-							["g"] = 0,
 							["b"] = 0,
+							["g"] = 0,
+							["r"] = 0,
 						},
 					},
 				},
@@ -206,6 +206,9 @@ ThreatPlatesDB = {
 			},
 			["tidyplatesFade"] = true,
 			["cacheClass"] = true,
+			["blizzFade"] = {
+				["amount"] = 0,
+			},
 			["castbarColor"] = {
 				["r"] = 0.6705882352941176,
 				["g"] = 0.8274509803921568,
@@ -214,7 +217,7 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["text"] = {
 				["amount"] = false,
 			},
