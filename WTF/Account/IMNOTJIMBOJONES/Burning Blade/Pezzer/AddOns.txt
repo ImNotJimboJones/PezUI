@@ -291,3 +291,8 @@ Overachiever_Tabs: enabled
 Overachiever_Trade: enabled
 NeedToKnow: enabled
 ZygorGuidesViewer: disabled
+Atlas_Arena: enabled
+Atlas_Cataclysm: enabled
+Atlas_Scenarios: enabled
+Atlas_OutdoorRaids: enabled
+Atlas_WorldEvents: enabled
