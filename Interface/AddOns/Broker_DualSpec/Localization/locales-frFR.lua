@@ -10,6 +10,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("Broker_DualSpec", "frFR");
 
 if L then
 L["ADDON_NAME"] = "DualSpec"
+L["BINDINGS_HEADER"] = "Data Broker Dual Specialization"
 L["CLOAK"] = "Cape"
 L["CLOSE"] = "Fermer"
 L["COMMAND_USAGE_1"] = "Utilisation de la commande, \"/ds\", \"/bds\", \"/brokerdualspec\""
@@ -32,10 +33,13 @@ L["NO_GEAR_SETS"] = "Vous n'avez aucun jeu d'équipement de défini"
 L["NOT_AVAILABLE"] = "Indisponible"
 L["OPTIONS"] = "Options"
 L["PRIMARY_SPEC"] = "Spé pincipale"
+L["PRIMARY_SPEC_BIND"] = "Spécialisation principale"
 L["SECONDARY_SPEC"] = "Spé secondaire"
+L["SECONDARY_SPEC_BIND"] = "Spécialisation secondaire"
 L["SHOW_HIDE_MINIMAP"] = "Afficher/Masquer l'icone de la minimap"
 L["SHOWN"] = "Afficher"
 L["SWITCH_GEAR_TOO"] = "Changer aussi l'équipement"
+L["SWITCH_SPECIALIZATION"] = "Changer de spécialisation"
 L["SWITCH_TO"] = "Changer pour"
 L["TOOLTIP_TIPS"] = [=[%sClique-Gauche:%s Change votre spécialisation et votre jeu d'équipement si activé
 %sClique-Droit:%s Affiche le menu de configuration]=]

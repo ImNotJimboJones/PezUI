@@ -158,8 +158,7 @@ local CastingOptions = {
 					end,
 		["v"] = 1,
 		["m"] = 1,
-		["deps"] = { ["EasyCast"] = "d",
-						 ["EasyCast"] = IsWardenEnabled },
+		["deps"] = { ["EasyCast"] = "d", ["EasyCast"] = IsWardenEnabled },
 		["default"] = 0 },
 	["AutoOpen"] = {
 		["text"] = FBConstants.CONFIG_AUTOOPEN_ONOFF,
@@ -175,6 +174,13 @@ local CastingOptions = {
 		["m"] = 1,
 		["deps"] = { ["EasyCast"] = "d" },
 		["default"] = 0 },
+	["PartialGear"] = {
+		["text"] = FBConstants.CONFIG_PARTIALGEAR_ONOFF,
+		["tooltip"] = FBConstants.CONFIG_PARTIALGEAR_INFO,
+		["v"] = 1,
+		["m"] = 1,
+		["deps"] = { ["EasyCast"] = "d" },
+		["default"] = 1 },
 	["WatchBobber"] = {
 		["text"] = FBConstants.CONFIG_WATCHBOBBER_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_WATCHBOBBER_INFO,
@@ -256,9 +262,6 @@ local InvisibleOptions = {
 	},
 	["EnhanceSound_AmbienceVolume"] = {
 		["default"] = 0.0,
-	},
-	["EnhanceSound_MasterVolume"] = {
-		["default"] = 100,
 	},
 	["EnhanceMapWaterSounds"] = {
 		["default"] = 0,
@@ -348,50 +351,6 @@ local LastLure = nil;
 local LastUsed = nil;
 local OpenThisFishId = nil;
 
-local function GetKey()
-	local key = FishingBuddy_Info["FishingBuddyKey"];
-	if ( not key ) then
-		-- This was removed in 3.1, lets just assume we have enough randomness already
-		-- math.randomseed(time());
-		-- generate a random key to identify this instance of the plugin
-		local n = 16 + random(4) + random(4);
-		key = "";
-		for idx=1,n do
-			key = key .. string.char(64+math.random(26));
-		end
-		FishingBuddy_Info["FishingBuddyKey"] = key;
-	end
-	return key;
-end
-FishingBuddy.API.GetKey = GetKey;
-
-local function CheckForeignKey(foreignKey, foreignDate, saveKey)
-	if ( not FishingBuddy_Info["ForeignKeys"] ) then
-		FishingBuddy_Info["ForeignKeys"] = {};
-	end
-	if ( saveKey ) then
-		FishingBuddy_Info["ForeignKeys"][foreignKey] = foreignDate;
-		return;
-	end
-	if ( not FishingBuddy_Info["ForeignKeys"][foreignKey] ) then
-		FishingBuddy_Info["ForeignKeys"][foreignKey] = foreignDate;
-		return true;
-	end
-	return ( FishingBuddy_Info["ForeignKeys"][foreignKey] < foreignDate );
-end
-FishingBuddy.API.CheckForeignKey = CheckForeignKey;
-
-local function ResetKey()
-	FishingBuddy_Info["FishingBuddyKey"] = nil;
-	local key = GetKey();
-	if (FB_MergeDatabase) then
-		FB_MergeDatabase.key = key;
-	end
-	FishingBuddy.Message("Key reset.");
-	return key;
-end
-FishingBuddy.ResetKey = ResetKey;
-
 -- handle zone markers
 local function zmto(zidx, sidx)
 	if ( not zidx ) then
@@ -472,8 +431,9 @@ local function RegisterHandlers(handlers)
 		end
 	end
 end
-FishingBuddy.API.RegisterHandlers = RegisterHandlers;
-FishingBuddy.API.GetHandlers = function(what) return event_handlers[what]; end;
+-- these should be internal use only, FBAPI has "constant" interfaces
+FishingBuddy.RegisterHandlers = RegisterHandlers;
+FishingBuddy.GetHandlers = function(what) return event_handlers[what]; end;
 
 local function RunHandlers(what, ...)
 	local eh = event_handlers[what];
@@ -754,6 +714,18 @@ QuestItems[69914] = {
 	["enUS"] = "Giant Catfish",
 	open = true,
 };
+QuestItems[79046] = {
+	["enUS"] = "Sugar Minnow",
+};
+QuestItems[81122] = {
+	["enUS"] = "Wolf Pirahna",
+};
+QuestItems[80830] = {
+	["enUS"] = "Rusty Shipwreck Debris",
+};
+QuestItems[80260] = {
+	["enUS"] = "Dojani Eel",
+};
 FishingBuddy.QuestItems = QuestItems;
 
 local QuestLures = {};
@@ -764,18 +736,6 @@ QuestLures[58788] = {
 QuestLures[58949] = {
 	["enUS"] = "Stag Eye",				-- A Staggering Effort
 	spell = 80868,
-};
-FishingBuddy.QuestLures = QuestLures;
-
-local FishingItems = {};
-FishingItems[85973] = {
-	["enUS"] = "Ancient Pandaren Fishing Charm",
-	spell = 125167,
-	usable = function()
-			-- only usable in Pandoria
-			local C,_,_,_ = FL:GetCurrentPlayerPosition();
-			return (C == 6);
-		end,
 };
 
 local function SetFishingLevel(skillcheck, zone, subzone, fishid)
@@ -927,9 +887,9 @@ local function IsQuestFish(id)
 	end
 	-- return nil;
 end
-FishingBuddy.API.IsQuestFish = IsQuestFish;
+FishingBuddy.IsQuestFish = IsQuestFish;
 
-FishingBuddy.API.IsCountedFish = function(id)
+FishingBuddy.IsCountedFish = function(id)
 	id = tonumber(id);
 	if ( IsQuestFish(id) or IsRareFish(id) or FL:IsMissedFish(id) ) then
 		return false;
@@ -971,8 +931,9 @@ local function HideAwayAll(self, button, down)
 end
 
 local function UseFishingItem(itemtable)
+	local GSB = FishingBuddy.GetSettingBool;
 	for itemid, info in pairs(itemtable) do
-		if ( GetItemCount(itemid) > 0 ) then
+		if ( GetItemCount(itemid) > 0 and (not info.setting or GSB(info.setting)) ) then
 			if ( not info.usable or info.usable() ) then
 				local buff = GetSpellInfo(info.spell);
 				if ( not FL:HasBuff(buff) ) then
@@ -1020,7 +981,7 @@ local function UpdateLure()
 		end
 
 		-- look for bonus items, like the Ancient Pandaren Fishing Charm
-		if ( UseFishingItem(FishingItems) ) then
+		if ( FishingBuddy.FishingItems and UseFishingItem(FishingBuddy.FishingItems) ) then
 			return true;
 		end
 
@@ -1133,12 +1094,21 @@ StatusEvents["UNIT_AURA"] = function(arg1)
 	end
 end
 
+local function ReadyForFishing()
+	if ( FishingBuddy.GetSettingBool("PartialGear") ) then
+		return FL:IsFishingGear();
+	else
+		return FL:IsFishingPole();
+	end
+end
+FishingBuddy.ReadyForFishing = ReadyForFishing;
+
 local function NormalHijackCheck()
 	local GSB = FishingBuddy.GetSettingBool;
 	if ( not AddingLure and
 		 not InCombatLockdown() and (not IsMounted() or GSB("MountedCast")) and
 		 not IsFishingAceEnabled() and
-		 GSB("EasyCast") and (CastingKeys() or FL:IsFishingGear()) ) then
+		 GSB("EasyCast") and (CastingKeys() or ReadyForFishing()) ) then
 		return true;
 	end
 end
@@ -1321,16 +1291,16 @@ local function StopFishingMode(logout)
 end
 
 local function FishingMode()
-	if ( FL:IsFishingGear() ) then
+	if ( ReadyForFishing() ) then
 		StartFishingMode();
 	else
 		StopFishingMode();
 	end
 end
-FishingBuddy.API.FishingMode = FishingMode;
+FishingBuddy.FishingMode = FishingMode;
 
 local function AutoPoleCheck(self, ...)
-	if ( not LastCastTime or InCombatLockdown() or FL:IsFishingGear() ) then
+	if ( not LastCastTime or InCombatLockdown() or ReadyForFishing() ) then
 		self:Hide();
 		LastCastTime = nil;
 		return;
@@ -1346,10 +1316,6 @@ autopoleframe:SetScript("OnUpdate", AutoPoleCheck);
 
 FishingBuddy.AreWeFishing = function()
 	return (FishingBuddy.StartedFishing ~= nil);
-end
-
--- figure out some way for the broker to change with autopole fishing
-FishingBuddy.API.RegisterFishingChange = function(changefunc)
 end
 
 FishingBuddy.IsSwitchClick = function(setting)
@@ -1662,10 +1628,11 @@ FishingBuddy.OnEvent = function(self, event, ...)
 		local _, name = FL:GetFishingSkillInfo();
 		FishingBuddy.Initialize();
 		FishingBuddy.Slider_Create(VolumeSlider);
-		FishingBuddy.OptionsFrame.HandleOptions(GENERAL, "Interface\\Icons\\SPELL_MAGE_ALTERTIME", GeneralOptions);
+		FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, GeneralOptions);
 		FishingBuddy.OptionsFrame.HandleOptions(name, "Interface\\Icons\\INV_Fishingpole_02", CastingOptions);
 		FishingBuddy.OptionsFrame.HandleOptions(nil, nil, InvisibleOptions);
 		FishingBuddy.OptionsUpdate();
+		FishingBuddy.AddSchoolFish();
 		self:UnregisterEvent("VARIABLES_LOADED");
 		-- tell all the listeners about this one
 		RunHandlers(event, ...);

@@ -11,7 +11,7 @@ credits[FBConstants.ROLE_TRANSLATE_ZHTW] = {
 	["smartdavislin"] = { "Version 1.0.2 (CurseForge)", },
 	["Andyca"] = { "Version 1.0.7a (CurseForge)" },
 	["zhTW"] = { "Version 1.0.9e (CurseForge)", },
-	["titanium0107"] = { "Version 1.1e (CurseForge)", },
+	["titanium0107"] = { "Version 1.1e (CurseForge)", "Version 1.2 (CurseForge)", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_ITIT] = {

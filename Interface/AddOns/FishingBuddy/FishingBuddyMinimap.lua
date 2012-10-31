@@ -80,4 +80,4 @@ MinimapEvents["VARIABLES_LOADED"] = function()
 end
 
 FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, MinimapOptions, setter, getter);
-FishingBuddy.API.RegisterHandlers(MinimapEvents);
+FishingBuddy.RegisterHandlers(MinimapEvents);

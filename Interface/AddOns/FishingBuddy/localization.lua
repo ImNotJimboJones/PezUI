@@ -127,6 +127,8 @@ FishingTranslations["enUS"] = {
 	CONFIG_USEACTION_INFO	 = "If enabled, #NAME# will look for an action bar button to use for casting.",
 	CONFIG_MOUNTEDCAST_ONOFF = "Mounted",
 	CONFIG_MOUNTEDCAST_INFO  = "If enabled, allow casting while mounted.",
+	CONFIG_PARTIALGEAR_ONOFF = "Partial Outfit",
+	CONFIG_PARTIALGEAR_INFO  = "If enabled, cast when wearing any fishing gear at all, even if a pole is not equipped.",
 	
 	CONFIG_EASYLURES_ONOFF	 = "Easy Lures",
 	CONFIG_EASYLURES_INFO	 = "If enabled, a lure will applied to your fishing pole before you start fishing, whenever you need one.",
@@ -164,7 +166,7 @@ FishingTranslations["enUS"] = {
 	CONFIG_FISHINGFLUFF_ONOFF = "Fishing Fun",
 	CONFIG_FISHINGFLUFF_INFO  = "Enable all sorts of fun while you fish.",
 	CONFIG_FINDFISH_ONOFF	  = "Find Fish",
-	CONFIG_FINDFISH_INFO		  = "Turn on the 'Find Fish' ability when dressed to fish.",
+	CONFIG_FINDFISH_INFO	  = "Turn on the 'Find Fish' ability when dressed to fish.",
 	CONFIG_DRINKHEAVILY_ONOFF = "Drink Lager",
 	CONFIG_DRINKHEAVILY_INFO  = "If enabled, drink #LAGER# whenever you're fishing and 'dry'.",
 	CONFIG_FISHINGBUDDY_ONOFF = "Fishing Buddy",

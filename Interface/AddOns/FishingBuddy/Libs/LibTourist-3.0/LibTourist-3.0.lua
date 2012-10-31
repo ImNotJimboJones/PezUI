@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 152 $
+Revision: $Rev: 153 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 152 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 153 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -2085,6 +2085,10 @@ do
 	local HELLFIRE_STORMWIND_PORTAL = string.format(X_Y_PORTAL, BZ["Hellfire Peninsula"], BZ["Stormwind City"])
 	local DALARAN_ORGRIMMAR_PORTAL = string.format(X_Y_PORTAL, BZ["Dalaran"], BZ["Orgrimmar"])
 	local DALARAN_STORMWIND_PORTAL = string.format(X_Y_PORTAL, BZ["Dalaran"], BZ["Stormwind City"])
+	local ORGRIMMAR_JADEFOREST_PORTAL = string.format(X_Y_PORTAL, BZ["Orgrimmar"], BZ["The Jade Forest"])
+	local JADEFOREST_ORGRIMMAR_PORTAL = string.format(X_Y_PORTAL, BZ["The Jade Forest"], BZ["Orgrimmar"])
+	local STORMWIND_JADEFOREST_PORTAL = string.format(X_Y_PORTAL, BZ["Stormwind City"], BZ["The Jade Forest"])
+	local JADEFOREST_STORMWIND_PORTAL = string.format(X_Y_PORTAL, BZ["The Jade Forest"], BZ["Stormwind City"])
 
 	local DARKMOON_MULGORE_PORTAL = string.format(X_Y_PORTAL, BZ["Darkmoon Island"], BZ["Mulgore"])
 	local DARKMOON_ELWYNNFOREST_PORTAL = string.format(X_Y_PORTAL, BZ["Darkmoon Island"], BZ["Elwynn Forest"])
@@ -2610,7 +2614,41 @@ do
 		type = "Transport",
 	}
 
+	
+	zones[ORGRIMMAR_JADEFOREST_PORTAL] = {
+		paths = {
+			[BZ["The Jade Forest"]] = true,
+		},
+		faction = "Horde",
+		type = "Transport",
+	}
+	
+	zones[JADEFOREST_ORGRIMMAR_PORTAL] = {
+		paths = {
+			[BZ["Orgrimmar"]] = true,
+		},
+		faction = "Horde",
+		type = "Transport",
+	}
 
+	zones[STORMWIND_JADEFOREST_PORTAL] = {
+		paths = {
+			[BZ["The Jade Forest"]] = true,
+		},
+		faction = "Alliance",
+		type = "Transport",
+	}
+	
+	zones[JADEFOREST_STORMWIND_PORTAL] = {
+		paths = {
+			[BZ["Stormwind City"]] = true,
+		},
+		faction = "Alliance",
+		type = "Transport",
+	}	
+	
+	
+	
 	-- ZONES, INSTANCES AND COMPLEXES ---------------------------------------------------------
 
 	zones[BZ["Alterac Valley"]] = {
@@ -2683,6 +2721,7 @@ do
 			[STORMWIND_ULDUM_PORTAL] = true,
 			[STORMWIND_VASHJIR_PORTAL] = true,
 			[STORMWIND_TOLBARAD_PORTAL] = true,
+			[STORMWIND_JADEFOREST_PORTAL] = true,
 		},
 		faction = "Alliance",
 		type = "City",
@@ -3475,6 +3514,7 @@ do
 			[ORGRIMMAR_ULDUM_PORTAL] = true,
 			[ORGRIMMAR_VASHJIR_PORTAL] = true,
 			[ORGRIMMAR_TOLBARAD_PORTAL] = true,
+			[ORGRIMMAR_JADEFOREST_PORTAL] = true,
 		},
 		faction = "Horde",
 		type = "City",
@@ -5546,6 +5586,8 @@ do
 		paths = {
 			[BZ["Temple of the Jade Serpent"]] = true,
 			[BZ["Valley of the Four Winds"]] = true,
+			[JADEFOREST_ORGRIMMAR_PORTAL] = true,
+			[JADEFOREST_STORMWIND_PORTAL] = true,
 		},
 		fishing_min = 650,
 	}
@@ -5634,7 +5676,7 @@ do
 			[BZ["Mogu'shan Palace"]] = true,
 			[BZ["Kun-Lai Summit"]] = true,
 		},
-		fishing_min = 700,
+		fishing_min = 825,
 	}
 
 	zones[BZ["The Veiled Stair"]] = {

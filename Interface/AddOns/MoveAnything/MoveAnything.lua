@@ -92,6 +92,7 @@ local MovAny = {
 		PlayerTalentFrame = "PlayerTalentFrame",
 		PetBattleFrame = "PetBattleFrame",
 		WatchFrame = "WatchFrame",
+		GroupLootContainer = "GroupLootContainer",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -273,7 +274,6 @@ local MovAny = {
 		ArenaEnemyFrame3PetFrame = "ArenaEnemyFrame3",
 		ArenaEnemyFrame4PetFrame = "ArenaEnemyFrame4",
 		ArenaEnemyFrame5PetFrame = "ArenaEnemyFrame5",
-		LootWonAlertFrame1 = "LootWonAlertMover1"
 	},
 	NoReparent = {
 		TargetFrameSpellBar = "TargetFrameSpellBar",
@@ -286,10 +286,10 @@ local MovAny = {
 		EclipseBarFrame = "EclipseBarFrame",
 		PriestBarFrame = "PriestBarFrame",
 		MonkHarmonyBar = "MonkHarmonyBar",
-	--	GroupLootFrame1 = "GroupLootFrame1",
-	--	GroupLootFrame2 = "GroupLootFrame2",
-	--	GroupLootFrame3 = "GroupLootFrame3",
-	--	GroupLootFrame4 = "GroupLootFrame4",
+		GroupLootFrame1 = "GroupLootFrame1",
+		GroupLootFrame2 = "GroupLootFrame2",
+		GroupLootFrame3 = "GroupLootFrame3",
+		GroupLootFrame4 = "GroupLootFrame4",
 	},
 	NoUnanchoring = {
 		BuffFrame = "BuffFrame",
@@ -310,10 +310,10 @@ local MovAny = {
 		TemporaryEnchantFrame = "TemporaryEnchantFrame",
 		AuctionDressUpFrame = "AuctionDressUpFrame",
 		MonkHarmonyBar = "MonkHarmonyBar",
-	--	GroupLootFrame1 = "GroupLootFrame1",
-	--	GroupLootFrame2 = "GroupLootFrame2",
-	--	GroupLootFrame3 = "GroupLootFrame3",
-	--	GroupLootFrame4 = "GroupLootFrame4",
+		GroupLootFrame1 = "GroupLootFrame1",
+		GroupLootFrame2 = "GroupLootFrame2",
+		GroupLootFrame3 = "GroupLootFrame3",
+		GroupLootFrame4 = "GroupLootFrame4",
 		},
 	lAllowedMAFrames = {
 		MAOptions = "MAOptions",

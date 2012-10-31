@@ -38,12 +38,12 @@ f.Callback = {};
 f.Realm = GetRealmName() or "";
 f.Region = string.sub(GetCVar("realmList"),1,2);
 f.PartyData = {};
-f.DatabaseVersion = 4400;
+f.DatabaseVersion = 4500;
 f.PlayerName = UnitName("player");
 f.ScanQue = {};
 f.AIL_Info = {};
 f.data = {
-	["Version"] = 50001,
+	["Version"] = 50003,
 	["Beta"] = false,
 	["TemplateVersion"] = 100,
 	["EquipmentOrder"] = {1,2,3,15,5,9,10,6,7,8,11,12,13,14,16,17,18},
@@ -778,8 +778,12 @@ f:SetScript("OnEvent",
 	function (null, eventName, ... )
 		f[eventName](null, eventName, ... );
 		if ( f.Callback[eventName] ) then
-			f.Callback[eventName](null, eventName, ...);
-			f.Callback[eventName] = nil;
+		
+			-- Break Infinite Loops?
+		
+			local SafeCallback = f.Callback[eventName];
+		    f.Callback[eventName] = nil;
+		    SafeCallback(null, eventName, ...);
 		end;
 	end
 );
@@ -832,6 +836,7 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", GearScoreChatAdd)
 --ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", GearScoreChatAdd)
 
 function f:PLAYER_ENTERING_WORLD()
+
 	if not ( f.Active ) then
 		f.Active = true;
 		if ( TenTonHammer_Settings["database"] == 0 ) then
@@ -930,7 +935,7 @@ function f:ADDON_LOADED(EventName, AddonName)
 		if ( TenTonHammer_Settings["addonMode"] == 0 ) then TenTonHammer_PopupFrame2:Show(); end;
 		--------------
 			--print("|cffff0000PlayerScore:|r You can now claim your characters on PlayerScore.com |cffff8000('/claim')");
-		if ( TenTonHammer_Settings["addonMode"] == 1 ) then print("|cffff0000PlayerScore:|r Updated for Mists of Pandaria (Spec Tab will be back shortly!)."); end;
+		if ( TenTonHammer_Settings["addonMode"] == 1 ) then print("|cffff0000PlayerScore:|r On some versions of the wow client PlayerScore may not work or cause large amounts of lag. If this happens, type /pscore reset and choose lite mode."); end;
 		--------------
 		--TTHD_Debug();
 	end;
@@ -3112,8 +3117,6 @@ end;
 
 function f:GetPlayerInfo()
 
-	--Kevin Read This!
-
 	local GearScore, PVEScore, PVPScore, RaidScore, SpecID, SpecName, PlayerRole, ThumbsUp, ThumbsDown, AltSpecID, AltSpecName, PreviousVote;
 	local pvpGearScore = 0;
 	local ClassLocale, Class = UnitClass("player");
@@ -3126,6 +3129,8 @@ function f:GetPlayerInfo()
 	RaidScore = f:GetRaidScore();
 	PVPScore = f:GetPVPScore();
 	GearScore = 0;
+	
+	
 	local WeaponValue = 0;
 	local WeaponScore = 0;
 	local pvpWeaponScore = 0;
@@ -3139,9 +3144,11 @@ function f:GetPlayerInfo()
 	
 	    -- ACtually gets the global spec id for your specs.
 		local TabID, TabName, TabDescription, TabIcon, TabBackground;
-		SpecID, SpecName = GetSpecializationInfo(specializationID);
+		if ( specializationID ) then
+			SpecID, SpecName = GetSpecializationInfo(specializationID or 1, false, false);
+		end;
 		if ( altspecializationID ) then
-			AltSpecID, AltSpecName = GetSpecializationInfo(altspecializationID);
+			AltSpecID, AltSpecName = GetSpecializationInfo(altspecializationID or 1, false, false);
 		end;
 	
 	local PlayerRole = f.data.ClassRoles[Class][SpecID] or 0;

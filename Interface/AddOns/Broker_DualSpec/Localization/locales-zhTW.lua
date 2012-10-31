@@ -10,6 +10,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("Broker_DualSpec", "zhTW");
 
 if L then
 L["ADDON_NAME"] = "雙天賦"
+-- L["BINDINGS_HEADER"] = ""
 L["CLOAK"] = "披風"
 L["CLOSE"] = "關閉"
 L["COMMAND_USAGE_1"] = "指令使用， \"/ds\", \"/bds\", \"/brokerdualspec\""
@@ -32,10 +33,13 @@ L["NO_GEAR_SETS"] = "你沒有綁定的裝備套裝"
 L["NOT_AVAILABLE"] = "不可使用"
 L["OPTIONS"] = "選項"
 L["PRIMARY_SPEC"] = "主天賦"
+-- L["PRIMARY_SPEC_BIND"] = ""
 L["SECONDARY_SPEC"] = "副天賦"
+-- L["SECONDARY_SPEC_BIND"] = ""
 L["SHOW_HIDE_MINIMAP"] = "顯示/隱藏小地圖按鈕"
 L["SHOWN"] = "顯示"
 L["SWITCH_GEAR_TOO"] = "同時切換裝備"
+-- L["SWITCH_SPECIALIZATION"] = ""
 L["SWITCH_TO"] = "切換到"
 L["TOOLTIP_TIPS"] = [=[%s左鍵點擊:%s 同時切換你的天賦與套裝
 %s右鍵點擊:%s 顯示配置面板]=]

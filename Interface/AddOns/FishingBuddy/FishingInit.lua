@@ -526,15 +526,23 @@ end
 
 FishingInit.SetupSchoolCounts = function()
 	local counts = {};
+	local zmto = FishingBuddy.ZoneMarkerTo;
 	if ( FishingBuddy_Info["FishSchools"] ) then
 		for zidx,holes in pairs(FishingBuddy_Info["FishSchools"]) do
 			for _,hole in pairs(holes) do
 				local sidx = hole.sidx;
-				if ( sidx and hole.fish ) then
-					counts[sidx] = counts[sidx] or {};
-					for fishid,count in pairs(hole.fish) do
-						counts[sidx][fishid] = counts[sidx][fishid] or 0;
-						counts[sidx][fishid] = counts[sidx][fishid] + count;
+				if ( sidx ) then
+					-- Fix bad data
+					if ( sidx < 1000 ) then
+						sidx = zmto(zidx, sidx);
+						hole.sidx = sidx;
+					end
+					if ( hole.fish ) then
+						counts[sidx] = counts[sidx] or {};
+						for fishid,count in pairs(hole.fish) do
+							counts[sidx][fishid] = counts[sidx][fishid] or 0;
+							counts[sidx][fishid] = counts[sidx][fishid] + count;
+						end
 					end
 				end
 			end

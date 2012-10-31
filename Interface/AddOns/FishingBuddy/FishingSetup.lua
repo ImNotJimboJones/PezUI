@@ -13,7 +13,6 @@ FBConstants.DEFAULT_MINIMAP_RADIUS = 80;
 -- don't override debugging code, if it loaded
 if ( not FishingBuddy ) then
 	FishingBuddy = {};
-	FishingBuddy.API = {};
 	FishingBuddy.Commands = {};
 
 	FishingBuddy.printable = function(foo)
@@ -47,9 +46,9 @@ end
 FishingBuddy.Output = function(msg, r, g, b)
 	if ( DEFAULT_CHAT_FRAME ) then
 		if ( not r ) then
-	 DEFAULT_CHAT_FRAME:AddMessage(msg);
+			DEFAULT_CHAT_FRAME:AddMessage(msg);
 		else
-	 DEFAULT_CHAT_FRAME:AddMessage(msg, r, g, b);
+			DEFAULT_CHAT_FRAME:AddMessage(msg, r, g, b);
 		end
 	end
 end

@@ -1,4 +1,13 @@
-﻿Version 1.1f
+﻿Version 1.2
+- Add "Partial Gear" option for casting. If enabled, wearing any item that has a fishing bonus will let you double click cast.
+- Add support for the Angler's Raft (still figuring out what to do about the spear)
+- Fishing volume slider works now
+- Updated Traditional Chinese (zhTW) translation (thanks titanium0107!)
+- Don't include pool catches in counts (works for first time fishing in a subzone)
+- Try harder to notice that we're fishing from a pool
+- Fix for pet menu timeout (CurseForge #190, #198)
+
+Version 1.1f
 - Fix a startup bug for brand-new toons (or never fished from a pool)
 - Updated Russian translation (thanks DVK!)
 

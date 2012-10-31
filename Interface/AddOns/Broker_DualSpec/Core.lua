@@ -17,8 +17,14 @@ _G["BrokerDualSpecGlobal"] = A;
 A.icon = LibStub("LibDBIcon-1.0");
 
 -- Lua globals
-local ipairs = ipairs;
+local ipairs, strtrim = ipairs, strtrim;
 local sgsub, sformat, sfind, smatch = string.gsub, string.format, string.find, string.match;
+
+-- Bindings locales
+BINDING_HEADER_BROKERDUALSPEC = L["BINDINGS_HEADER"];
+BINDING_NAME_BROKERDUALSPECSWITCH = L["SWITCH_SPECIALIZATION"];
+BINDING_NAME_BROKERDUALSPEC1 = L["PRIMARY_SPEC_BIND"];
+BINDING_NAME_BROKERDUALSPEC2 = L["SECONDARY_SPEC_BIND"];
 
 -- ********************************************************************************
 -- Variables
@@ -28,15 +34,14 @@ local sgsub, sformat, sfind, smatch = string.gsub, string.format, string.find, s
 A.version = GetAddOnMetadata("Broker_DualSpec", "Version");
 
 -- Text colors
-A.color = {};
-A.color["RED"] = "|cFFFF3333";
-A.color["GREEN"] = "|cFF33FF99";
-A.color["WHITE"] = "|cFFFFFFFF";
-A.color["WARRIOR"] = "|cFFC79C6E";
-A.color["RESET"] = "|r";
-
--- Loading trick
-A.isLoading = false;
+A.color =
+{
+    RED = "|cffff3333";
+    GREEN = "|cff33ff99";
+    WHITE = "|cffffffff";
+    WARRIOR = "|cffc79c6e";
+    RESET = "|r";
+};
 
 -- ********************************************************************************
 -- Dropdown Menu
@@ -47,25 +52,25 @@ A.isLoading = false;
 -- @param self Frame object
 -- @param level Nesting level
 local function DropdownMenu(self, level)
-	if ( not level ) then return; end
+    if ( not level ) then return; end
 
-	local info = self.info;
-	local db = A.db.profile;
-	local sets = A:GetGearSets();
+    local info = self.info;
+    local db = A.db.profile;
+    local sets = A:GetGearSets();
 
-	if ( level == 1 ) then
-		-- Menu title
-		info.isTitle = 1;
-		info.text = L["ADDON_NAME"];
-		info.notCheckable = 1;
+    if ( level == 1 ) then
+        -- Menu title
+        info.isTitle = 1;
+        info.text = L["ADDON_NAME"];
+        info.notCheckable = 1;
         info.icon = nil;
-		UIDropDownMenu_AddButton(info, level);
+        UIDropDownMenu_AddButton(info, level);
 
-		-- Set options
-		info.keepShownOnClick = 1;
-		info.hasArrow = 1;
-		info.disabled = nil;
-		info.isTitle = nil;
+        -- Set options
+        info.keepShownOnClick = 1;
+        info.hasArrow = 1;
+        info.disabled = nil;
+        info.isTitle = nil;
 
         local group = GetActiveSpecGroup(false);
 
@@ -98,39 +103,39 @@ local function DropdownMenu(self, level)
         -- Set options
         info.disabled = nil;
 
-		-- Gear set switch
-		info.text = "   "..L["GEAR_SETS"];
-		info.value = "GEARSETS";
-		info.hasArrow = 1;
-		UIDropDownMenu_AddButton(info, level);
+        -- Gear set switch
+        info.text = "   "..L["GEAR_SETS"];
+        info.value = "GEARSETS";
+        info.hasArrow = 1;
+        UIDropDownMenu_AddButton(info, level);
 
-		-- Blank separator
+        -- Blank separator
         info.text = nil;
         info.value = nil;
         info.hasArrow = nil;
-		info.disabled = 1;
-		info.notCheckable = 1;
-		UIDropDownMenu_AddButton(info, level);
+        info.disabled = 1;
+        info.notCheckable = 1;
+        UIDropDownMenu_AddButton(info, level);
 
-		-- Set options
-		info.disabled = nil;
-		
-		-- Options
-		info.text = "   "..L["OPTIONS"];
-		info.value = "OPTIONS";
-		info.hasArrow = 1;
-		UIDropDownMenu_AddButton(info, level);
+        -- Set options
+        info.disabled = nil;
 
-		-- Set options
-		info.keepShownOnClick = nil;
+        -- Options
+        info.text = "   "..L["OPTIONS"];
+        info.value = "OPTIONS";
+        info.hasArrow = 1;
+        UIDropDownMenu_AddButton(info, level);
+
+        -- Set options
+        info.keepShownOnClick = nil;
         info.hasArrow = nil;
 
-		-- Close
-		info.text = L["CLOSE"];
-		info.func = function() CloseDropDownMenus(); end;
-		UIDropDownMenu_AddButton(info, level);
-	elseif ( level == 2 ) then
-		if ( UIDROPDOWNMENU_MENU_VALUE == "PRIMARY" ) then -- Primary spec gear set
+        -- Close
+        info.text = L["CLOSE"];
+        info.func = function() CloseDropDownMenus(); end;
+        UIDropDownMenu_AddButton(info, level);
+    elseif ( level == 2 ) then
+        if ( UIDROPDOWNMENU_MENU_VALUE == "PRIMARY" ) then -- Primary spec gear set
             local spec,_, points = A:GetSpecInfos(1);
 
             info.isTitle = 1;
@@ -189,7 +194,7 @@ local function DropdownMenu(self, level)
             end;
             UIDropDownMenu_AddButton(info, level);
 
-			if ( sets ) then
+            if ( sets ) then
                 -- Blank separator
                 info.text = nil;
                 info.disabled = 1;
@@ -201,21 +206,21 @@ local function DropdownMenu(self, level)
                 info.disabled = nil;
                 info.notCheckable = nil;
 
-				for _,t in ipairs(sets) do
-					info.text = t.name;
-					info.icon = t.icon;
-					info.checked = function()
-						if ( t.name == db.primary ) then
-							return 1;
-						else
-							return nil;
-						end
-					end;
-					info.func = function() db.primary = t.name; end;
-					UIDropDownMenu_AddButton(info, level);
-				end
-			end
-		elseif ( UIDROPDOWNMENU_MENU_VALUE == "SECONDARY" ) then -- Secondary spec gear set
+                for _,t in ipairs(sets) do
+                    info.text = t.name;
+                    info.icon = t.icon;
+                    info.checked = function()
+                        if ( t.name == db.primary ) then
+                            return 1;
+                        else
+                            return nil;
+                        end
+                    end;
+                    info.func = function() db.primary = t.name; end;
+                    UIDropDownMenu_AddButton(info, level);
+                end
+            end
+        elseif ( UIDROPDOWNMENU_MENU_VALUE == "SECONDARY" ) then -- Secondary spec gear set
             local spec,_, points = A:GetSpecInfos(2);
 
             info.isTitle = 1;
@@ -274,7 +279,7 @@ local function DropdownMenu(self, level)
             end;
             UIDropDownMenu_AddButton(info, level);
 
-			if ( sets ) then
+            if ( sets ) then
                 -- Blank separator
                 info.text = nil;
                 info.disabled = 1;
@@ -286,76 +291,76 @@ local function DropdownMenu(self, level)
                 info.disabled = nil;
                 info.notCheckable = nil;
 
-				for _,t in ipairs(sets) do
-					info.text = t.name;
-					info.icon = t.icon;
-					info.checked = function()
-						if ( t.name == db.secondary ) then
-							return 1;
-						else
-							return nil;
-						end
-					end;
-					info.func = function() db.secondary = t.name; end;
-					UIDropDownMenu_AddButton(info, level);
-				end
-			end
-		elseif ( UIDROPDOWNMENU_MENU_VALUE == "GEARSETS" ) then -- Gear sets switch
-			if ( sets ) then
-				for _,t in ipairs(sets) do
-					info.text = "   "..t.name;
-					info.icon = t.icon;
-					info.notCheckable = 1;
-					info.func = function() UseEquipmentSet(t.name); end;
-					UIDropDownMenu_AddButton(info, level);
-				end
-			end
-		elseif ( UIDROPDOWNMENU_MENU_VALUE == "OPTIONS" ) then -- Options
-			-- Set options
-			info.keepShownOnClick = 1;
+                for _,t in ipairs(sets) do
+                    info.text = t.name;
+                    info.icon = t.icon;
+                    info.checked = function()
+                        if ( t.name == db.secondary ) then
+                            return 1;
+                        else
+                            return nil;
+                        end
+                    end;
+                    info.func = function() db.secondary = t.name; end;
+                    UIDropDownMenu_AddButton(info, level);
+                end
+            end
+        elseif ( UIDROPDOWNMENU_MENU_VALUE == "GEARSETS" ) then -- Gear sets switch
+            if ( sets ) then
+                for _,t in ipairs(sets) do
+                    info.text = "   "..t.name;
+                    info.icon = t.icon;
+                    info.notCheckable = 1;
+                    info.func = function() UseEquipmentSet(t.name); end;
+                    UIDropDownMenu_AddButton(info, level);
+                end
+            end
+        elseif ( UIDROPDOWNMENU_MENU_VALUE == "OPTIONS" ) then -- Options
+            -- Set options
+            info.keepShownOnClick = 1;
             info.notCheckable = nil;
             info.icon = nil;
 
-			-- Display spec name
-			info.text = L["DISPLAY_SPEC_NAME"];
-			info.checked = db.specname;
-			info.func = function()
-				db.specname = not db.specname;
-				A:UpdateBroker()
-			end;
-			UIDropDownMenu_AddButton(info, level);
+            -- Display spec name
+            info.text = L["DISPLAY_SPEC_NAME"];
+            info.checked = db.specname;
+            info.func = function()
+                db.specname = not db.specname;
+                A:UpdateBroker()
+            end;
+            UIDropDownMenu_AddButton(info, level);
 
-			-- Display spec points
-			info.text = L["DISPLAY_SPEC_POINTS"];
-			info.checked = db.points;
-			info.func = function()
-				db.points = not db.points;
-				A:UpdateBroker()
-			end;
-			UIDropDownMenu_AddButton(info, level);
+            -- Display spec points
+            info.text = L["DISPLAY_SPEC_POINTS"];
+            info.checked = db.points;
+            info.func = function()
+                db.points = not db.points;
+                A:UpdateBroker()
+            end;
+            UIDropDownMenu_AddButton(info, level);
 
-			-- Switch gear too
-			info.text = L["SWITCH_GEAR_TOO"];
-			info.checked = db.gear;
-			info.func = function() db.gear = not db.gear; end;
-			UIDropDownMenu_AddButton(info, level);
+            -- Switch gear too
+            info.text = L["SWITCH_GEAR_TOO"];
+            info.checked = db.gear;
+            info.func = function() db.gear = not db.gear; end;
+            UIDropDownMenu_AddButton(info, level);
 
             -- Hide spam
-			info.text = L["HIDE_SPAM"];
-			info.checked = db.chatFilter;
-			info.func = function() db.chatFilter = not db.chatFilter; end;
-			UIDropDownMenu_AddButton(info, level);
+            info.text = L["HIDE_SPAM"];
+            info.checked = db.chatFilter;
+            info.func = function() db.chatFilter = not db.chatFilter; end;
+            UIDropDownMenu_AddButton(info, level);
 
-			-- Show/hide minimap icon
-			info.text = L["SHOW_HIDE_MINIMAP"];
-			info.checked = not db.minimap.hide;
-			info.func = function()
-				db.minimap.hide = not db.minimap.hide;
-				A:ShowHideMinimap();
-			end;
-			UIDropDownMenu_AddButton(info, level);
-		end
-	end
+            -- Show/hide minimap icon
+            info.text = L["SHOW_HIDE_MINIMAP"];
+            info.checked = not db.minimap.hide;
+            info.func = function()
+                db.minimap.hide = not db.minimap.hide;
+                A:ShowHideMinimap();
+            end;
+            UIDropDownMenu_AddButton(info, level);
+        end
+    end
 end
 
 -- ********************************************************************************
@@ -397,12 +402,6 @@ A.ChatFilter = function(self, event, msg, ...)
     return nil;
 end
 
---- Timer callback
--- Chat is filtered 10 sec after spec change
-function A:ChatFilterTimer()
-    A.chatFilterActive = nil;
-end
-
 --- Set or unset the chat filter callback
 -- @param unset Force unsetting callback
 function A:ChatFilterSetCallback(unset)
@@ -418,6 +417,22 @@ function A:ChatFilterSetCallback(unset)
     end
 end
 
+-- Hook Blizzard switch spec function
+-- Used to set chat filter state var
+hooksecurefunc("SetActiveSpecGroup", function()
+    if ( A.db.profile.chatFilter ) then
+        A.chatFilterActive = 1;
+        A:CancelTimer(A.chatFilterTimer, 1);
+        A.chatFilterTimer = A:ScheduleTimer("ChatFilterTimer", 15);
+    end
+end);
+
+--- Timer callback
+-- Chat is filtered for 10 sec after spec change
+function A:ChatFilterTimer()
+    A.chatFilterActive = nil;
+end
+
 -- ********************************************************************************
 -- Functions
 -- ********************************************************************************
@@ -426,18 +441,18 @@ end
 -- @param text The message to display
 -- @param color Bool, if true will color in red
 function A:Message(text, color)
-	if ( color ) then
-		color = A.color["RED"];
-	else
-		color = A.color["GREEN"]
-	end
+    if ( color ) then
+        color = A.color["RED"];
+    else
+        color = A.color["GREEN"]
+    end
 
-	DEFAULT_CHAT_FRAME:AddMessage(color..L["ADDON_NAME"]..": "..A.color["RESET"]..text);
+    DEFAULT_CHAT_FRAME:AddMessage(color..L["ADDON_NAME"]..": "..A.color["RESET"]..text);
 end
 
 --- Update the button and icon
 function A:UpdateBroker()
-	local spec, icon, talents = A:GetSpecInfos();
+    local spec, icon, talents = A:GetSpecInfos();
 
     if ( spec and icon and talents ) then
         if ( A.db.profile.specname and A.db.profile.points ) then
@@ -457,76 +472,76 @@ end
 
 --- Show or hide the minimap icon
 function A:ShowHideMinimap()
-	if ( A.db.profile.minimap.hide ) then
-		A:Message(L["HIDE_MINIMAP"], true);
-		A.icon:Hide("Broker_DualSpecObject");
-	else
-		A.icon:Show("Broker_DualSpecObject");
-	end
+    if ( A.db.profile.minimap.hide ) then
+        A:Message(L["HIDE_MINIMAP"], true);
+        A.icon:Hide("Broker_DualSpecObject");
+    else
+        A.icon:Show("Broker_DualSpecObject");
+    end
 end
 
 --- Handle the slash command
 -- @param input The string returned after the command
 function A:SlashCommand(input)
-	local arg1, arg2 = smatch(input, "(%a*)%s?(.*)");
+    local arg1, arg2 = smatch(input, "(%a*)%s?(.*)");
 
-	if ( arg1 == "" ) then
-		A:SwitchSpec();
-	elseif ( arg1 == "show" ) then
-		A.db.profile.minimap.hide = false;
-		A:ShowHideMinimap();
-	elseif ( arg1 == "list" ) then
-		local sets = A:GetGearSets();
+    if ( arg1 == "" ) then
+        A:SwitchSpec();
+    elseif ( arg1 == "show" ) then
+        A.db.profile.minimap.hide = false;
+        A:ShowHideMinimap();
+    elseif ( arg1 == "list" ) then
+        local sets = A:GetGearSets();
 
-		if ( sets ) then
-			local out = "";
+        if ( sets ) then
+            local out = "";
 
-			for _,t in ipairs(sets) do
-				out = out..", "..out;
-			end
-			out = strtrim(out, " ,");
-			A:Message(out);
-		else
-			A:Message(L["NO_GEAR_SETS"], true);
-		end
-	elseif ( arg1 == "primary" ) then
-		if ( arg2 ) then
-			local exists,_ = GetEquipmentSetInfoByName(arg2);
+            for _,t in ipairs(sets) do
+                out = out..", "..out;
+            end
+            out = strtrim(out, " ,");
+            A:Message(out);
+        else
+            A:Message(L["NO_GEAR_SETS"], true);
+        end
+    elseif ( arg1 == "primary" ) then
+        if ( arg2 ) then
+            local exists,_ = GetEquipmentSetInfoByName(arg2);
 
-			if ( exists ) then
-				A.db.profile.primary = arg2;
-			else
-				A:Message(L["GEAR_NOT_EXISTS"], true);
-			end
-		end
-	elseif ( arg1 == "secondary" ) then
-		if ( arg2 ) then
-			local exists,_ = GetEquipmentSetInfoByName(arg2);
+            if ( exists ) then
+                A.db.profile.primary = arg2;
+            else
+                A:Message(L["GEAR_NOT_EXISTS"], true);
+            end
+        end
+    elseif ( arg1 == "secondary" ) then
+        if ( arg2 ) then
+            local exists,_ = GetEquipmentSetInfoByName(arg2);
 
-			if ( exists ) then
-				A.db.profile.secondary = arg2;
-			else
-				A:Message(L["GEAR_NOT_EXISTS"], true);
-			end
-		end
-	else
-		A:Message(L["COMMAND_USAGE_1"]);
-		A:Message(L["COMMAND_USAGE_2"]);
-		A:Message(L["COMMAND_USAGE_3"]);
-		A:Message(L["COMMAND_USAGE_4"]);
-	end
+            if ( exists ) then
+                A.db.profile.secondary = arg2;
+            else
+                A:Message(L["GEAR_NOT_EXISTS"], true);
+            end
+        end
+    else
+        A:Message(L["COMMAND_USAGE_1"]);
+        A:Message(L["COMMAND_USAGE_2"]);
+        A:Message(L["COMMAND_USAGE_3"]);
+        A:Message(L["COMMAND_USAGE_4"]);
+    end
 end
 
 --- Get informations about the given spec
 -- @param group The spec group number (1 or 2)
 -- @return The spec name, the spec icon, the points spent
 function A:GetSpecInfos(group)
-	local talents = "";
-	local spec = L["NOT_AVAILABLE"];
-	local icon = "Interface\\ICONS\\INV_Misc_QuestionMark";
+    local talents = "";
+    local spec = L["NOT_AVAILABLE"];
+    local icon = "Interface\\ICONS\\INV_Misc_QuestionMark";
     local maxNumTalents, column, selected, _ = 18, nil, nil, nil;
 
-	if ( not group ) then group = GetActiveSpecGroup(false); end
+    if ( not group ) then group = GetActiveSpecGroup(false); end
 
     local specId = GetSpecialization(false, false, group);
 
@@ -548,52 +563,46 @@ function A:GetSpecInfos(group)
         talents = strtrim(talents, "/");
     end
 
-	return spec, icon, talents;
+    return spec, icon, talents;
 end
 
 --- Get gear sets names and icons
 -- @return A table with gear sets and icons
 function A:GetGearSets()
-	local num = GetNumEquipmentSets();
+    local num = GetNumEquipmentSets();
 
-	if ( num == 0 ) then
-		return false;
-	else
-		local sets = {};
+    if ( num == 0 ) then
+        return false;
+    else
+        local sets = {};
 
-		for i=1,GetNumEquipmentSets() do
-			local name, icon,_ = GetEquipmentSetInfo(i);
+        for i=1,GetNumEquipmentSets() do
+            local name, icon,_ = GetEquipmentSetInfo(i);
 
-			sets[i] = {};
-			sets[i]["name"] = name;
-			sets[i]["icon"] = icon;
-		end
+            sets[i] = {};
+            sets[i]["name"] = name;
+            sets[i]["icon"] = icon;
+        end
 
-		return sets;
-	end
+        return sets;
+    end
 end
 
 --- Switch between spec
 function A:SwitchSpec()
-	if ( UnitAffectingCombat("player") ) then
-		A:Message(L["IN_COMBAT"], true);
-		return;
-	end
+    if ( UnitAffectingCombat("player") ) then
+        A:Message(L["IN_COMBAT"], true);
+        return;
+    end
 
     if ( UnitCastingInfo("player") ) then return; end
 
-	local current = GetActiveSpecGroup(false);
+    local current = GetActiveSpecGroup(false);
 
-	if ( current == 1 ) then
-		SetActiveSpecGroup(2);
-	else
-		SetActiveSpecGroup(1);
-	end
-
-    if ( A.db.profile.chatFilter ) then
-        A.chatFilterActive = 1;
-        A:CancelTimer(A.chatFilterTimer, 1);
-        A.chatFilterTimer = A:ScheduleTimer("ChatFilterTimer", 15);
+    if ( current == 1 ) then
+        SetActiveSpecGroup(2);
+    else
+        SetActiveSpecGroup(1);
     end
 end
 
@@ -627,13 +636,15 @@ function A:SetDisplayOptions(spec)
     end
 end
 
+-- ********************************************************************************
+-- Callbacks
+-- ********************************************************************************
+
 --- Callback function for event ZONE_CHANGED_NEW_AREA
 -- Used to update icon and text on login
 function A:ZONE_CHANGED_NEW_AREA()
-	if ( A.isLoading ) then
-		A.isLoading = false;
-		A:UpdateBroker();
-	end
+    A:UpdateBroker();
+    A:UnregisterEvent("ZONE_CHANGED_NEW_AREA");
 end
 
 --- Callback function for event PLAYER_ENTERING_WORLD
@@ -641,34 +652,33 @@ end
 -- but too soon so we use ZONE_CHANGED_NEW_AREA
 -- Added update function here in case of reloadui
 function A:PLAYER_ENTERING_WORLD()
-	A.isLoading = true;
-	A:UpdateBroker();
+    A:UpdateBroker();
 end
 
 --- Callback function for event ACTIVE_TALENT_GROUP_CHANGED
 -- Set the gear set attached to the given spec
 function A:ACTIVE_TALENT_GROUP_CHANGED()
-	if ( A.db.profile.gear ) then
-		local current = GetActiveSpecGroup(false);
+    if ( A.db.profile.gear ) then
+        local current = GetActiveSpecGroup(false);
 
-		if ( current == 1 ) then
-			if ( A.db.profile.primary ~= "" )then
-				UseEquipmentSet(A.db.profile.primary);
+        if ( current == 1 ) then
+            if ( A.db.profile.primary ~= "" )then
+                UseEquipmentSet(A.db.profile.primary);
                 A:SetDisplayOptions(1);
-			else
-				A:Message(L["NO_GEAR_DEFINED"], true);
-			end
-		else
-			if ( A.db.profile.secondary ~= "" )then
-				UseEquipmentSet(A.db.profile.secondary);
+            else
+                A:Message(L["NO_GEAR_DEFINED"], true);
+            end
+        else
+            if ( A.db.profile.secondary ~= "" )then
+                UseEquipmentSet(A.db.profile.secondary);
                 A:SetDisplayOptions(2);
-			else
-				A:Message(L["NO_GEAR_DEFINED"], true);
-			end
-		end
-	end
+            else
+                A:Message(L["NO_GEAR_DEFINED"], true);
+            end
+        end
+    end
 
-	A:UpdateBroker();
+    A:UpdateBroker();
 end
 
 --- Callback function for event CHARACTER_POINTS_CHANGED
@@ -683,23 +693,23 @@ end
 --- Default configuration table for AceDB
 local defaults =
 {
-	profile =
-	{
-		primary = "",
-		secondary = "",
-		specname = 1,
-		points = 1,
-		gear = 1,
+    profile =
+    {
+        primary = "",
+        secondary = "",
+        specname = 1,
+        points = 1,
+        gear = 1,
         chatFilter = 1,
         primaryCloak = nil,
         primaryHelm = nil,
         secondaryCloak = nil,
         secondaryHelm = nil,
-		minimap =
-		{
-			hide = false
-		}
-	}
+        minimap =
+        {
+            hide = false
+        }
+    }
 };
 
 -- ********************************************************************************
@@ -709,35 +719,35 @@ local defaults =
 --- AceAddon callback
 -- Called after the addon is fully loaded
 function A:OnInitialize()
-	-- Config db
-	A.db = LibStub("AceDB-3.0"):New("Broker_DualSpecDB", defaults);
+    -- Config db
+    A.db = LibStub("AceDB-3.0"):New("Broker_DualSpecDB", defaults);
 end
 
 --- AceAddon callback
 -- Called during the PLAYER_LOGIN event
 function A:OnEnable()
-	-- LDB
-	A.ldb = LibStub("LibDataBroker-1.1"):NewDataObject("Broker_DualSpecObject",
-	{
-		type = "data source",
-		text = L["NOT_AVAILABLE"],
-		label = L["ADDON_NAME"],
-		icon = "Interface\\ICONS\\INV_Misc_QuestionMark",
-		tocname = "Broker_DualSpec",
-		OnClick = function(self, button)
-			if (button == "LeftButton") then
-				A:SwitchSpec();
-			elseif ( button == "RightButton" ) then
-				if ( A.menuFrame.initialize ~= DropdownMenu ) then
-					CloseDropDownMenus();
-					A.menuFrame.initialize = DropdownMenu;
-				end
+    -- LDB
+    A.ldb = LibStub("LibDataBroker-1.1"):NewDataObject("Broker_DualSpecObject",
+    {
+        type = "data source",
+        text = L["NOT_AVAILABLE"],
+        label = L["ADDON_NAME"],
+        icon = "Interface\\ICONS\\INV_Misc_QuestionMark",
+        tocname = "Broker_DualSpec",
+        OnClick = function(self, button)
+            if (button == "LeftButton") then
+                A:SwitchSpec();
+            elseif ( button == "RightButton" ) then
+                if ( A.menuFrame.initialize ~= DropdownMenu ) then
+                    CloseDropDownMenus();
+                    A.menuFrame.initialize = DropdownMenu;
+                end
                 ToggleDropDownMenu(1, nil, A.menuFrame, self, 0, 0);
-				GameTooltip:Hide();
-			end
-		end,
-		OnTooltipShow = function(tooltip)
-			local spec, points, currentGroup, altGroup, display, _;
+                GameTooltip:Hide();
+            end
+        end,
+        OnTooltipShow = function(tooltip)
+            local spec, points, currentGroup, altGroup, display, _;
             local current = GetActiveSpecGroup(false);
 
             if ( current == 1 ) then
@@ -748,24 +758,24 @@ function A:OnEnable()
                 currentGroup = L["SECONDARY_SPEC"];
             end
 
-			tooltip:AddDoubleLine(A.color["WHITE"]..L["ADDON_NAME"], A.color["GREEN"].." v"..A.version);
-			tooltip:AddLine(" ");
+            tooltip:AddDoubleLine(A.color["WHITE"]..L["ADDON_NAME"], A.color["GREEN"].." v"..A.version);
+            tooltip:AddLine(" ");
 
-			spec,_, points = A:GetSpecInfos();
-			tooltip:AddLine(L["CURRENT_SPEC"]..": "..spec.." ("..points..") ("..currentGroup..")");
-			tooltip:AddLine(" ");
+            spec,_, points = A:GetSpecInfos();
+            tooltip:AddLine(L["CURRENT_SPEC"]..": "..spec.." ("..points..") ("..currentGroup..")");
+            tooltip:AddLine(" ");
 
-			if ( current == 1 ) then
-				spec,_, points = A:GetSpecInfos(2);
-			else
-				spec,_, points = A:GetSpecInfos(1);
-			end
-			tooltip:AddLine(L["SWITCH_TO"]..": "..spec.." ("..points..") ("..altGroup..")");
+            if ( current == 1 ) then
+                spec,_, points = A:GetSpecInfos(2);
+            else
+                spec,_, points = A:GetSpecInfos(1);
+            end
+            tooltip:AddLine(L["SWITCH_TO"]..": "..spec.." ("..points..") ("..altGroup..")");
 
-			if ( A.db.profile.gear ) then
-				if ( current == 1 ) then
+            if ( A.db.profile.gear ) then
+                if ( current == 1 ) then
                     -- Gear set switch
-					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.secondary);
+                    tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.secondary);
 
                     -- Helm hidden/shown
                     if ( A.db.profile.secondaryHelm == 0 ) then
@@ -782,9 +792,9 @@ function A:OnEnable()
                         display = L["SHOWN"];
                     end
                     tooltip:AddLine(L["CLOAK"]..": "..display);
-				else
+                else
                     -- Gear set switch
-					tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.primary);
+                    tooltip:AddLine(L["WITH_GEAR_SET"]..": "..A.db.profile.primary);
 
                     -- Helm hidden/shown
                     if ( A.db.profile.primaryHelm == 0 ) then
@@ -801,37 +811,38 @@ function A:OnEnable()
                         display = L["SHOWN"];
                     end
                     tooltip:AddLine(L["CLOAK"]..": "..display);
-				end
-			end
+                end
+            end
 
-			tooltip:AddLine(" ");
-			tooltip:AddLine(sformat(L["TOOLTIP_TIPS"], A.color["WARRIOR"], A.color["GREEN"], A.color["WARRIOR"], A.color["GREEN"]));
-		end,
-	});
+            tooltip:AddLine(" ");
+            tooltip:AddLine(sformat(L["TOOLTIP_TIPS"], A.color["WARRIOR"], A.color["GREEN"], A.color["WARRIOR"], A.color["GREEN"]));
+        end,
+    });
 
-	-- LDBIcon
-	A.icon:Register("Broker_DualSpecObject", A.ldb, A.db.profile.minimap);
-	A.icon:IconCallback("ZONE_CHANGED_NEW_AREA", "Broker_DualSpecObject", nil, nil, A.ldb);
-	A.icon:IconCallback("ACTIVE_TALENT_GROUP_CHANGED", "Broker_DualSpecObject", nil, nil, A.ldb);
-	A.icon:IconCallback("PLAYER_ENTERING_WORLD", "Broker_DualSpecObject", nil, nil, A.ldb);
+    -- LDBIcon
+    A.icon:Register("Broker_DualSpecObject", A.ldb, A.db.profile.minimap);
+    A.icon:IconCallback("ZONE_CHANGED_NEW_AREA", "Broker_DualSpecObject", nil, nil, A.ldb);
+    A.icon:IconCallback("ACTIVE_TALENT_GROUP_CHANGED", "Broker_DualSpecObject", nil, nil, A.ldb);
+    A.icon:IconCallback("PLAYER_ENTERING_WORLD", "Broker_DualSpecObject", nil, nil, A.ldb);
     A.icon:IconCallback("CHARACTER_POINTS_CHANGED", "Broker_DualSpecObject", nil, nil, A.ldb);
 
-	-- Menu frame & table
-	A.menuFrame = CreateFrame("Frame", "Broker_DualSpecMenuFrame");
-	A.menuFrame.displayMode = "MENU";
-	A.menuFrame.info = {};
+    -- Menu frame & table
+    A.menuFrame = CreateFrame("Frame", "Broker_DualSpecMenuFrame");
+    A.menuFrame.displayMode = "MENU";
+    A.menuFrame.info = {};
 
-	-- Events
-	A:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	A:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
-	A:RegisterEvent("PLAYER_ENTERING_WORLD");
+    -- Events
+    A:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+    A:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+    A:RegisterEvent("PLAYER_ENTERING_WORLD");
     A:RegisterEvent("CHARACTER_POINTS_CHANGED");
 
-	-- Slash command
-	A:RegisterChatCommand("brokerdualspec", "SlashCommand");
-	A:RegisterChatCommand("bds", "SlashCommand");
-	A:RegisterChatCommand("ds", "SlashCommand");
+    -- Slash command
+    A:RegisterChatCommand("brokerdualspec", "SlashCommand");
+    A:RegisterChatCommand("bds", "SlashCommand");
+    A:RegisterChatCommand("ds", "SlashCommand");
 
+    -- DB update for older version
     if ( not A.db.profile.secondaryCloak and not A.db.profile.secondaryHelm and not A.db.profile.primaryCloak and not A.db.profile.primaryHelm ) then
         if ( ShowingCloak() ) then
             A.db.profile.secondaryCloak = 1;
@@ -864,13 +875,13 @@ function A:OnDisable()
     A:CancelTimer(A.chatFilterTimer, 1);
 
     -- Slash command
-	A:UnregisterChatCommand("brokerdualspec");
-	A:UnregisterChatCommand("bds");
-	A:UnregisterChatCommand("ds");
+    A:UnregisterChatCommand("brokerdualspec");
+    A:UnregisterChatCommand("bds");
+    A:UnregisterChatCommand("ds");
 
     -- Events
-	A:UnregisterEvent("ZONE_CHANGED_NEW_AREA");
-	A:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
-	A:UnregisterEvent("PLAYER_ENTERING_WORLD");
+    A:UnregisterEvent("ZONE_CHANGED_NEW_AREA");
+    A:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+    A:UnregisterEvent("PLAYER_ENTERING_WORLD");
     A:UnregisterEvent("CHARACTER_POINTS_CHANGED");
 end

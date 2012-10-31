@@ -1964,7 +1964,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(LOOT_WON_ALERT_FRAMES)
@@ -2011,7 +2013,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(LOOT_WON_ALERT_FRAMES)
@@ -2058,7 +2062,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(LOOT_WON_ALERT_FRAMES)
@@ -2098,7 +2104,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAHide = function(self, hidden)
 			if hidden then
@@ -2152,7 +2160,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(LOOT_WON_ALERT_FRAMES)
@@ -2200,7 +2210,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(MONEY_WON_ALERT_FRAMES)
@@ -2247,7 +2259,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(MONEY_WON_ALERT_FRAMES)
@@ -2294,7 +2308,9 @@ MovAny.lVirtualMovers = {
 			if type(scale) ~= "number" then
 				return
 			end
-			b:SetScale(scale)
+			if b then
+				b:SetScale(scale)
+			end
 		end,
 		OnMAPostReset = function(self)
 			wipe(MONEY_WON_ALERT_FRAMES)
