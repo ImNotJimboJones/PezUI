@@ -48,7 +48,6 @@ Enchantrix: disabled
 Enchantrix-Barker: disabled
 FishingBuddy: enabled
 GoGoMount: enabled
-GreedyQuester: enabled
 Informant: enabled
 KeyBindingSearch: enabled
 kgPanels: enabled
@@ -142,7 +141,6 @@ PitBull4_ThreatBar: disabled
 PitBull4_Totems: enabled
 PitBull4_VisualHeal: enabled
 PitBull4_VoiceIcon: disabled
-GearScore: enabled
 Postal: enabled
 PowerAuras: enabled
 Prat-3.0: enabled
