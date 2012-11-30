@@ -3,8 +3,7 @@
 -- by Kitjan, lieandswell
 -- ----------------------
 
-
-if not trace then trace = print end
+local trace = print
 --function maybe_trace(...)
   --local so_far = ""
   --local p = _G
@@ -48,11 +47,13 @@ local m_last_guid, m_last_cast, m_last_sent, m_last_cast_head, m_last_cast_tail
 local m_bInCombat, m_bCombatWithBoss
 
 local mfn_Bar_AuraCheck
+local mfn_EnergyBar_OnUpdate
 local mfn_AuraCheck_Single
 local mfn_AuraCheck_TOTEM
 local mfn_AuraCheck_BUFFCD
 local mfn_AuraCheck_USABLE
 local mfn_AuraCheck_EQUIPSLOT
+local mfn_AuraCheck_POWER
 local mfn_AuraCheck_CASTCD
 local mfn_AuraCheck_Weapon
 local mfn_AuraCheck_AllStacks
@@ -109,7 +110,7 @@ m_scratch.bar_entry =
     }
 -- NEEDTOKNOW = {} is defined in the localization file, which must be loaded before this file
 
-NEEDTOKNOW.VERSION = "4.0.09"
+NEEDTOKNOW.VERSION = "4.0.10"
 local c_UPDATE_INTERVAL = 0.05
 local c_MAXBARS = 20
 
@@ -492,10 +493,11 @@ function NeedToKnow.ExecutiveFrame_PLAYER_LOGIN()
     local _, player_CLASS = UnitClass("player")
     if player_CLASS == "DEATHKNIGHT" then
         NeedToKnow.is_DK = 1
-    end
-    if player_CLASS == "DRUID" then
+    elseif player_CLASS == "DRUID" then
         NeedToKnow.is_Druid = 1
     end
+
+    NeedToKnowLoader.SetPowerTypeList(player_CLASS)
 
     NeedToKnow_ExecutiveFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
     NeedToKnow_ExecutiveFrame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
@@ -1048,6 +1050,122 @@ function NeedToKnowLoader.SafeUpgrade()
 end
 
 
+function NeedToKnowLoader.SetPowerTypeList(player_CLASS)
+    if player_CLASS == "DRUID" or 
+        player_CLASS == "MONK" 
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = "4", MenuText = NEEDTOKNOW.POWER_TYPES[4] } ) 
+    end
+
+    -- 0 - Mana
+    if player_CLASS == "DRUID" or 
+        player_CLASS == "MAGE" or
+        player_CLASS == "PALADIN" or
+        player_CLASS == "PRIEST" or
+        player_CLASS == "SHAMAN" or
+        player_CLASS == "WARLOCK" 
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+        { Setting = tostring(SPELL_POWER_MANA), MenuText = MANA } )
+    end
+
+    -- 1 - Rage
+    if player_CLASS == "DRUID" or 
+        player_CLASS == "WARRIOR" 
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_RAGE), MenuText = RAGE } )
+    end
+
+    -- 2 - Focus
+    if player_CLASS == "HUNTER" 
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_FOCUS), MenuText = FOCUS } )
+    end
+
+    -- 3 - Energy
+    if player_CLASS == "DRUID"  or 
+        player_CLASS == "MONK" or 
+        player_CLASS == "ROGUE"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_ENERGY), MenuText = ENERGY } )
+    end
+
+    -- 4 - HAPPINESS no longer used
+
+    -- 5 - Runes These don't make sense as a bar, and UnitPower returns 0 anyway
+    -- if player_CLASS == "DEATHKNIGHT"
+    -- then
+    --  table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+    --    { Setting = tostring(SPELL_POWER_RUNES), MenuText = RUNES } )
+    --end
+
+    -- 6 - Runic Power
+    if player_CLASS == "DEATHKNIGHT"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_RUNIC_POWER), MenuText = RUNIC_POWER } )
+    end
+
+    -- 7 - Soul Shards for affliction
+    if player_CLASS == "WARLOCK"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_SOUL_SHARDS), MenuText = SOUL_SHARDS } )
+    end
+
+    -- 8 - Eclipse for balance druids
+    if player_CLASS == "DRUID"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_ECLIPSE), MenuText = ECLIPSE } )
+    end
+
+    -- 9 - Holy Power
+    if player_CLASS == "PALADIN"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_HOLY_POWER), MenuText = HOLY_POWER } )
+    end
+
+    -- 10 - "Alternate" power, for various boss fights, useful for everybody
+    table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+        { Setting = "10", MenuText = NEEDTOKNOW.ALTERNATE_POWER } )
+
+    -- 11 - Dark Force, currently unused
+
+    -- 12 - Monk Chi
+    if player_CLASS == "MONK"
+    then
+    table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+        { Setting = tostring(SPELL_POWER_LIGHT_FORCE), MenuText = LIGHT_FORCE } )
+    end
+
+    -- 13 - Shadow Orbs for shadow priest
+    if player_CLASS == "PRIEST"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_SHADOW_ORBS), MenuText = SHADOW_ORBS } )
+    end
+	
+    -- 14 - Burning Embers for Destruction warlocks
+    if player_CLASS == "WARLOCK"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_BURNING_EMBERS), MenuText = BURNING_EMBERS } )
+    end
+
+    -- 15 - Demonic Fury for demonology
+    if player_CLASS == "WARLOCK"
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+            { Setting = tostring(SPELL_POWER_DEMONIC_FURY), MenuText = DEMONIC_FURY } )
+    end
+end
+
 
 function NeedToKnow.DeepCopy(object)
     if type(object) ~= "table" then
@@ -1397,6 +1515,8 @@ function NeedToKnow.Bar_Update(groupID, barID)
             end
 
             barSettings.bAutoShot = nil
+			bar.is_counter = nil
+			bar.ticker = NeedToKnow.Bar_OnUpdate
             
             -- Determine which helper functions to use
             if     "BUFFCD" == barSettings.BuffOrDebuff then
@@ -1407,6 +1527,11 @@ function NeedToKnow.Bar_Update(groupID, barID)
                 bar.fnCheck = mfn_AuraCheck_USABLE
             elseif "EQUIPSLOT" == barSettings.BuffOrDebuff then
                 bar.fnCheck = mfn_AuraCheck_EQUIPSLOT
+            elseif "POWER" == barSettings.BuffOrDebuff then
+                bar.fnCheck = mfn_AuraCheck_POWER
+                bar.is_counter = true
+				bar.ticker = nil
+				bar.ticking = false
             elseif "CASTCD" == barSettings.BuffOrDebuff then
                 bar.fnCheck = mfn_AuraCheck_CASTCD
                 for idx, entry in ipairs(bar.spells) do
@@ -1506,7 +1631,10 @@ end
 
 function NeedToKnow.SetScripts(bar)
     bar:SetScript("OnEvent", NeedToKnow.Bar_OnEvent)
-    bar:SetScript("OnUpdate", NeedToKnow.Bar_OnUpdate)
+ 
+    if ( bar.ticker ) then
+        bar:SetScript("OnUpdate", bar.ticker)
+    end
     if ( "TOTEM" == bar.settings.BuffOrDebuff ) then
         bar:RegisterEvent("PLAYER_TOTEM_UPDATE")
     elseif ( "CASTCD" == bar.settings.BuffOrDebuff ) then
@@ -1518,6 +1646,9 @@ function NeedToKnow.SetScripts(bar)
         bar:RegisterEvent("SPELL_UPDATE_COOLDOWN")
     elseif ( "EQUIPSLOT" == bar.settings.BuffOrDebuff ) then
         bar:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
+    elseif ( "POWER" == bar.settings.BuffOrDebuff ) then
+        bar:RegisterEvent("UNIT_POWER")
+        bar:RegisterEvent("UNIT_DISPLAYPOWER")
     elseif ( "USABLE" == bar.settings.BuffOrDebuff ) then
         bar:RegisterEvent("SPELL_UPDATE_USABLE")
     elseif ( "mhand" == bar.settings.Unit or "ohand" == bar.settings.Unit ) then
@@ -1582,6 +1713,8 @@ function NeedToKnow.ClearScripts(bar)
     bar:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     bar:UnregisterEvent("PLAYER_TOTEM_UPDATE")
     bar:UnregisterEvent("UNIT_AURA")
+    bar:UnregisterEvent("UNIT_POWER")
+    bar:UnregisterEvent("UNIT_DISPLAYPOWER")
     bar:UnregisterEvent("UNIT_INVENTORY_CHANGED")
     bar:UnregisterEvent("UNIT_TARGET")
     bar:UnregisterEvent("START_AUTOREPEAT_SPELL")
@@ -1642,6 +1775,8 @@ function NeedToKnow.Bar_OnEvent(self, event, unit, ...)
     then
         mfn_Bar_AuraCheck(self)
     elseif ( event == "UNIT_AURA" ) and ( unit == self.unit ) then
+        mfn_Bar_AuraCheck(self)
+    elseif ( (event == "UNIT_POWER") or (event == "UNIT_DISPLAYPOWER") ) and ( unit == self.unit ) then
         mfn_Bar_AuraCheck(self)
     elseif ( event == "UNIT_INVENTORY_CHANGED" and unit == "player" ) then
         NeedToKnow.UpdateWeaponEnchants()
@@ -1788,6 +1923,10 @@ function NeedToKnow.PrettyName(barSettings)
         local idx = tonumber(barSettings.AuraName)
         if idx then return NEEDTOKNOW.ITEM_NAMES[idx] end
         return ""
+    elseif ( barSettings.BuffOrDebuff == "POWER" ) then
+        local idx = tonumber(barSettings.AuraName)
+        if idx then return NEEDTOKNOW.POWER_TYPES[idx] end
+        return ""
     else
         return barSettings.AuraName
     end
@@ -1853,7 +1992,7 @@ function NeedToKnow.ConfigureVisibleBar(bar, count, extended, buff_stacks)
         
     -- Is this an aura with a finite duration?
     local vct_width = 0
-    if ( bar.duration > 0 ) then
+    if ( not bar.is_counter and bar.duration > 0 ) then
         -- Configure the main status bar
         local duration = bar.fixedDuration or bar.duration
         bar.max_value = duration
@@ -1871,9 +2010,22 @@ function NeedToKnow.ConfigureVisibleBar(bar, count, extended, buff_stacks)
         end
 
         bar.time:Show()
-    else
+    elseif bar.is_counter then
+        bar.max_value = 1
+		local pct = buff_stacks.total_ttn[1] / buff_stacks.total_ttn[2]
+        mfn_SetStatusBarValue(bar,bar.bar1,pct)
+        if bar.bar2 then mfn_SetStatusBarValue(bar,bar.bar2,pct) end
+
+        bar.time:Hide()
+        bar.spark:Hide()
+
+        if ( bar.vct ) then
+            bar.vct:Hide()
+        end
+	else
         -- Hide the time text and spark for auras with "infinite" duration
         bar.max_value = 1
+
         mfn_SetStatusBarValue(bar,bar.bar1,1)
         if bar.bar2 then mfn_SetStatusBarValue(bar,bar.bar2,1) end
 
@@ -2286,6 +2438,64 @@ end
 
 
 
+-- Bar_AuraCheck helper for tracking usable gear based on the slot its in
+-- rather than the equipment name
+mfn_AuraCheck_POWER = function (bar, bar_entry, all_stacks)
+    local spellName, spellRank, spellIconPath
+    local cpt = UnitPowerType(bar.unit)
+    local pt = bar_entry.id
+    if ( pt ) then
+        if pt == 4 then pt = cpt end
+
+        local curPower = UnitPower(bar.unit, pt)
+        local maxPower = UnitPowerMax(bar.unit, pt)
+        if ( maxPower and maxPower > 0 and
+             (not bar.settings.power_sole or pt == cpt) ) 
+        then
+            local bTick = false
+            if pt == 3 then
+                if (pt == cpt) then
+                    bar.power_regen = GetPowerRegen()
+                end
+                if (bar.power_regen and bar.power_regen > 0) then
+                    bTick = true
+                end
+            end
+            if bTick then
+                if not bar.ticking then
+                    bar.ticker = mfn_EnergyBar_OnUpdate
+                    bar:SetScript("OnUpdate", bar.ticker)
+                    bar.ticking = true
+                end
+            elseif bar.ticking then
+                bar:SetScript("OnUpdate", nil)
+                bar.ticking = false
+            end
+
+            if bar.ticking then                
+                local now = g_GetTime()
+                if not bar.tPower or now - bar.tPower > 2 or bar.last_power ~= curPower then
+                    bar.tPower = now
+                    bar.last_power = curPower
+                    bar.last_power_max = maxPower
+                end
+            end
+
+            mfn_AddInstanceToStacks(all_stacks, bar_entry, 
+                   0,                                          -- duration
+                   NEEDTOKNOW.POWER_TYPES[pt],                   -- name
+                   1,                                          -- count
+                   0,                                            -- expiration time
+                   nil,                                        -- icon path
+                   bar.unit,                                   -- caster
+                   curPower,                                   -- tooltip #1
+                   maxPower )                                  -- tooltip #2
+        end
+    end
+end
+
+
+
 -- Bar_AuraCheck helper that checks the bar.weapon_enchants 
 -- (computed by UpdateWeaponEnchants) for the given spell.
 -- FIXME: this is the only bar type that does not work with spell ids.
@@ -2449,6 +2659,7 @@ local function UnitAuraWrapper(a,b,c,d)
         id,
         _, -- uao.canCast -- The player's class/spec can cast this spell
         _, -- A boss applied this
+        _, -- Unknown boolean
         v1,
         v2,
         v3,
@@ -2456,8 +2667,8 @@ local function UnitAuraWrapper(a,b,c,d)
     = UnitAura(a,b,c,d)
     if name then
         -- There is a boolean at the end of the list whos purpose is unknown
-	-- It can be either true or false, so we must test against nil explicitly
-	-- Between the boss boolean and this end boolean will be 0-3 integers
+    -- It can be either true or false, so we must test against nil explicitly
+    -- Between the boss boolean and this end boolean will be 0-3 integers
         if nil == bEnd then
             -- some or all tooltip values are missing
             if nil == v3 then
@@ -2839,3 +3050,29 @@ function NeedToKnow.Bar_OnUpdate(self, elapsed)
         end
     end
 end 
+
+
+mfn_EnergyBar_OnUpdate = function(bar, elapsed)
+    local now = g_GetTime()
+    if ( now > bar.nextUpdate ) then
+        bar.nextUpdate = now + c_UPDATE_INTERVAL
+        local delta = now - bar.tPower
+        local predicted = bar.last_power + bar.power_regen * delta
+        local bCapped = false
+        if predicted >= bar.last_power_max then
+            predicted = bar.last_power_max
+            bCapped = true
+        elseif predicted <= 0 then
+            predicted = 0
+            bCapped = true
+        end
+
+        bar.max_value = bar.last_power_max
+        mfn_SetStatusBarValue(bar, bar.bar1, predicted);
+
+        if bCapped then
+            bar.ticking = false
+            bar:SetScript("OnUpdate", nil)
+        end
+    end
+end

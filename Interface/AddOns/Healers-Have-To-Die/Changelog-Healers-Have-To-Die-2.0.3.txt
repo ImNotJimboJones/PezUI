@@ -1,0 +1,15 @@
+tag 2.0.3
+65a5fb4833382674d09da28a2d04abad9db5e427
+Archarodim <archarodim@teaser.fr>
+2012-11-28 02:07:07 +0100
+
+Tagging as  2.0.3
+
+
+--------------------
+
+Archarodim:
+	- - TOC to 50100 - Removed options from Blizzard UI panel due to the massive taint issue happening since WoW 5.0. - Preparations for 2.0.3 release
+	- Fixed the Lua error mentioned in the previous commit (it happen if LibNamePlate mistakes a foe for a friend)
+	- Added some asserts to pinpoint a very rare and "impossible" infamous "attempt to index field "?" (a nil value)" Lua exception....
+	- Removed commented lib in embeds.xml that would break parsing when using no-lib-strip

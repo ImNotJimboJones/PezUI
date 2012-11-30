@@ -4,7 +4,6 @@
 function psealocale()
 
 
-	PSFeaserver = "ru-Gordunni"
 	charakillintime = "Voraussetzungen erfuellt! Toete den Boss mit 3 Stacks Blitzladung (30 Sekunden uebrig)!"
 	charakillintime2 = "Voraussetzung erfuellt! Toetet den Boss wenn er den Buff hat (20 Sek uebrig)!"
 	-- chhrbrannyell = ""
@@ -14,12 +13,16 @@ function psealocale()
 	crraraidpartachloc3 = "Arkaner Annihilator!"
 	crraraidpartachloc4 = "Flammenwerfer!"
 	crratitle = "    Cataclysm Raids"
+	-- icratitle = ""
 	icravalitriayell1 = "Ich habe ein Portal in den Traum geöffnet. Darin liegt Eure Erlösung, Helden..."
 	icravalitriayell2 = "ICH BIN GEHEILT! Ysera, erlaubt mir diese üblen Kreaturen zu beseitigen!"
 	nrallbuttonmaint = "Zonenliste"
 	nrallbuttontak = "Taktiken"
-	-- nxraonyemote = ""
-	-- nxraonyxiab = ""
+	nxraonyemote = "atmet tief ein" -- Needs review
+	nxraonyxiab = "Onyxia" -- Needs review
+	-- nxratitle = ""
+	-- phratitle = ""
+	-- prratitle = ""
 	psbuttonoff = "Stop"
 	psbuttonon = "Start"
 	pseaaddonmy = "AddOn"
@@ -47,9 +50,18 @@ function psealocale()
 	psealeftmenu6 = "Eiskronenzitadelle"
 	psealeftmenucata = "Cata Heroisch"
 	psealeftmenucata2 = "Cata Raids"
+	-- psealeftmenupanda = ""
+	-- psealeftmenupanda2 = ""
+	-- psealeftmenupanda3 = ""
 	pseamanyachtitle = "    Erfolg nach einem Fehlschlag weiterhin beobachten"
+	-- pseamimifailloc1 = ""
+	-- pseamimifailloc2 = ""
+	-- pseamimifailloc3 = ""
+	-- pseamimifailloc5 = ""
 	pseamoduleload = "Geladene Module:"
 	pseamodulenotload = "Fehler beim Laden der Module:"
+	pseaoldmodules = "Alte Module" -- Needs review
+	pseaoldmodules2 = "   Alte Module" -- Needs review
 	pseapartfailedloc = "Teil ist fehlgeschlagen!"
 	pseapsaddonanet = "Fehler! Das Addon 'PhoenixStyle' ist nicht installiert."
 	pseapsaddonanet2 = "Sie koennen es auf www.ps-addon.com runterladen."
@@ -67,36 +79,42 @@ function psealocale()
 	pseauierroraddonoff = "Fehler! Das Addon ist deaktiviert - dieses Modul ist nicht verfuegbar!"
 	pseauinomodule1 = "    Fehler! Modul ist nicht installiert!"
 	pseauinomodule2 = "Fehler! Ausgewaehltes Modul ist nicht installiert!"
+	-- pseaulduarkolf1 = ""
+	-- pseaulduarkolf2 = ""
+	-- pseaulduartitle = ""
+	PSFeaserver = "ru-Gordunni"
 	psmoduletxtoff = "Modul ist deaktiviert"
 	psmoduletxton = "Modul ist aktiviert"
 	psoldvertxt = "(veraltet)"
+	-- pzratitle = ""
 	racolor1 = "rot" -- Needs review
 	racolor2 = "schwarz" -- Needs review
 	racolor3 = "gelb" -- Needs review
 	racolor5 = "gruen" -- Needs review
 	racolor6 = "lila" -- Needs review
-	-- racolorcomb = ""
-	-- radeathwingemote1 = ""
-	-- radeathwingemote2 = ""
-	raiccof = "von"
-	raiccused = "betreten"
 	ramaintrackingtitle = "Verfolgung"
 	ramanyachtitinfo = "Wenn ein Erfolg fehlschlaegt ist seine beobachtung bist zum Kampfende gesperrt. Dieses Modul setzt die Sperre zurueck. Dies erfolgt in"
 	ramanyachtitinfo2 = "nach der Benachrichtigung. Lege die Anzahl der Zuruecksetzungen pro Kampf fest und druecke auf 'Start'. Dieses Modul wird nach dem Logout automatisch deaktiviert."
 	ramanyachtitinfoq = "Zuruecksetzung erfolgt "
 	ramanyachtitinfoq2 = "mal in diesem Kampf. Du kannst das hier aendern:"
+	-- ramanyplayers = ""
 	raminibuttset = "Minimap Button anzeigen"
 	ramodulnotblock = "die Ueberpruefung wird nicht geblockt"
 	ranewversfound = "|cff00ff00Achtung!|r Es wurde eine neuere Version des Addons |cff00ff00'RaidAchievement'|r gefunden. Es wird empfohlen das Addon ueber www.ps-addon.com zu aktualisieren."
+	-- ranotsure = ""
+	-- raragnaachtxt1 = ""
+	raragnaachtxt2 = "Anforderungen erfuellt! Du hast %s Sek. um den Boss zu toeten! Pruefe deine Timer in deinem BossMod." -- Needs review
 	rasec = "sek."
+	-- raspectext = ""
 	ravalitnottrack = "keine Verfolgung im heroischen Modus durch das Addon"
-	ut_3 = "Hauptoptionen" -- Needs review
+	-- rayard = ""
 	whraaddkilled1 = "Mob wurde getoetet!"
 	whraaddkilled2 = "wird nicht erfuellt, wenn der Boss jetzt getoetet wird!"
 	whrabrann = "Brann Bronzebart"
 	-- whrabrannemo = ""
 	-- whrabrannemo2 = ""
 	-- whragundemo = ""
+	-- whratitle = ""
 
 
 

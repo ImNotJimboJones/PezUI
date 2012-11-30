@@ -382,7 +382,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		end
 	elseif ("UNIT_POWER" == anEvent or "UNIT_POWER_FREQUENT" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
-			if ("LIGHT_FORCE" == anArg2 or "DARK_FORCE" == anArg2) then
+			if ("CHI" == anArg2) then
 				if ("player" == anArg1) then
 					VUHDO_updateBouquetsForEvent("player", 35); -- VUHDO_UPDATE_CHI
 				end
@@ -445,7 +445,11 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 	elseif ("UNIT_PET" == anEvent) then
 		if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PETS] or not InCombatLockdown()) then
 			VUHDO_REMOVE_HOTS = false;
-			VUHDO_normalRaidReload();
+			if ("player" == anArg1) then
+				VUHDO_quickRaidReload();
+			else
+				VUHDO_normalRaidReload();
+			end
 		end
 
 	elseif ("UNIT_ENTERED_VEHICLE" == anEvent
@@ -1447,7 +1451,6 @@ function VUHDO_OnLoad(anInstance)
 	for _, tEvent in pairs(VUHDO_ALL_EVENTS) do
 		anInstance:RegisterEvent(tEvent);
 	end
-	--anInstance:RegisterUnitEvent("UNIT_POWER_FREQUENT", "player");
 
 	VUHDO_ALL_EVENTS = nil;
 
@@ -1459,6 +1462,5 @@ function VUHDO_OnLoad(anInstance)
 
 	anInstance:SetScript("OnEvent", VUHDO_OnEvent);
 	anInstance:SetScript("OnUpdate", VUHDO_OnUpdate);
-
 	VUHDO_Msg("VuhDo |cffffe566['vu:du:]|r v".. VUHDO_VERSION .. ". by Iza(ak)@Gilneas, dedicated to Vuh (use /vd)");
 end

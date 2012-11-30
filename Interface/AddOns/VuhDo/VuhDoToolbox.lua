@@ -11,6 +11,7 @@ local strbyte = strbyte;
 local floor = floor;
 local tonumber = tonumber;
 local select = select;
+local strmatch = strmatch;
 local IsInRaid = IsInRaid;
 local IsInGroup = IsInGroup;
 local UnitInRange = UnitInRange;
@@ -288,7 +289,6 @@ end
 
 --
 function VUHDO_isTargetInRange(aUnit)
-	--return UnitIsUnit("player", aUnit) or (UnitIsTrivial(aUnit) and CheckInteractDistance(aUnit, 1)) or UnitInRange(aUnit);
 	return UnitIsUnit("player", aUnit) or CheckInteractDistance(aUnit, 1);
 end
 local VUHDO_isTargetInRange = VUHDO_isTargetInRange;
@@ -445,6 +445,25 @@ function VUHDO_getUnitZoneName(aUnit)
 
 	tMap = GetMapInfo();
 	return tZone or tMap or VUHDO_I18N_UNKNOWN, tMap;
+end
+
+
+
+--
+local tName, tEnchant;
+function VUHDO_getWeaponEnchantName(aSlot)
+	VuhDoScanTooltip:SetOwner(VuhDo, "ANCHOR_NONE");
+	VuhDoScanTooltip:ClearLines();
+	VuhDoScanTooltip:SetInventoryItem("player", aSlot);
+	for tCnt = 1, VuhDoScanTooltip:NumLines() do
+		tName = strmatch(_G["VuhDoScanTooltipTextLeft" .. tCnt]:GetText(), "^.+ %(%d+%s+.+%)$");
+		if (tName ~= nil) then
+			tEnchant = gsub(tName, " %(.+%)", "");
+			return tEnchant;
+		end
+	end
+
+	return "*";
 end
 
 

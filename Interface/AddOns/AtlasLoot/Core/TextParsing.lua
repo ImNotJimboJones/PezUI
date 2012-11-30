@@ -1,4 +1,4 @@
--- $Id: TextParsing.lua 3842 2012-10-05 12:03:41Z Dynaletik $
+-- $Id: TextParsing.lua 4002 2012-11-24 18:37:48Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleFaction = AtlasLoot_GetLocaleLibBabble("LibBabble-Faction-3.0")
@@ -48,6 +48,8 @@ AtlasLoot_TextParsing = {
 	{ "#p24#", GetSpellInfo(63275) },	-- Fishing
 	{ "#p25#", GetSpellInfo(78670) },	-- Archaeology
 	{ "#p26#", GetSpellInfo(45357) },	-- Inscription
+	{ "#p27#", GetSpellInfo(2366) },	-- Herbalism
+	{ "#p28#", GetSpellInfo(921) },		-- Pick Pocket
 	
 	-- Reputation
 	{ "#r1#", BabbleFaction["Neutral"] },
@@ -809,7 +811,6 @@ AtlasLoot_TextParsing = {
 	{ "#winterfinclam#", "|TInterface\\Icons\\INV_Misc_Shell_03:0|t" },
 
 	-- Currency Icons - Crafting Recipes
-	{ "#spiritofharmony#", "|TInterface\\Icons\\inv_elemental_spiritofharmony_2:0|t"},		-- Spirit of Harmony (SmithingMoPVendor)
 	{ "#elementiumbar#", "|TInterface\\Icons\\inv_misc_pyriumbar:0|t"},						-- Elementium Bar (SmithingCataVendor)
 	{ "#hardenedelementiumbar#", "|TInterface\\Icons\\inv_misc_ebonsteelbar:0|t"},			-- Hardened Elementium Bar (SmithingCataVendor)
 	{ "#pyriumbar#", "|TInterface\\Icons\\inv_misc_pyriumbar_02:0|t"},						-- Pyrium Bar (SmithingCataVendor)

@@ -1,4 +1,4 @@
--- $Id: CraftingMenus.lua 3865 2012-10-09 04:47:11Z Dynaletik $
+-- $Id: CraftingMenus.lua 3980 2012-11-21 09:32:09Z celellach $
 -- Invoke libraries
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
@@ -59,6 +59,7 @@ local SPELLFIRE = GetSpellInfo(26797);
 				{ 12, "ARCHAEOLOGYMENU", "trade_archaeology", "=ds="..GetSpellInfo(78670), ""};
 				{ 13, "COOKINGMENU", "INV_Misc_Food_15", "=ds="..GetSpellInfo(2550), ""};
 				{ 14, "FirstAid", "Spell_Holy_SealOfSacrifice", "=ds="..GetSpellInfo(3273), ""};
+				{ 15, "FISHINGMENU", "trade_fishing", "=ds="..GetSpellInfo(63275), ""};
 				{ 17, "CRAFTSET", "INV_Box_01", AL["Crafted Sets"], ""};
 				{ 18, "CraftedWeapons", "INV_Sword_1H_Blacksmithing_02", AL["Crafted Epic Weapons"], ""};
 				{ 20, "COOKINGDAILYMENU", "INV_Misc_Food_15", AL["Cooking Daily"], ""};
@@ -239,7 +240,8 @@ local SPELLFIRE = GetSpellInfo(26797);
 				{ 6, "LeatherLeatherArmorOld", "INV_Misc_ArmorKit_17", "=ds="..AL["Leather Armor"], "=q5="..AL["Classic WoW"] };
 				{ 8, "LeatherCloaks", "inv_misc_cape_05", "=ds="..AL["Cloaks"], "" };
 				{ 9, "LeatherDrumsBagsMisc", "inv_misc_drum_03", "=ds="..AL["Drums, Bags and Misc."], "" };
-				{ 11, "LeatherworkingCataVendor", "inv_scroll_03", "=ds="..AL["Cataclysm Vendor Sold Plans"], "=q5="..AtlasLoot:GetMapNameByID(700)};
+				{ 11, "LeatherLeather", "inv_misc_leatherscrap_10", "=ds="..BabbleInventory["Leather"], "" };
+				{ 13, "LeatherworkingMoPVendor", "inv_scroll_04", "=ds="..AL["Mists of Pandaria Vendor Sold Patterns"], "=q5="..AtlasLoot:GetMapNameByID(811)};
 				{ 17, "LeatherMailArmorMoP", "INV_Misc_ArmorKit_17", "=ds="..AL["Mail Armor"], "=q5="..AL["Mists of Pandaria"] };
 				{ 18, "LeatherMailArmorCata", "INV_Misc_ArmorKit_17", "=ds="..AL["Mail Armor"], "=q5="..AL["Cataclysm"] };
 				{ 19, "LeatherMailArmorWrath", "INV_Misc_ArmorKit_17", "=ds="..AL["Mail Armor"], "=q5="..AL["Wrath of the Lich King"] };
@@ -247,7 +249,7 @@ local SPELLFIRE = GetSpellInfo(26797);
 				{ 21, "LeatherMailArmorOld", "INV_Misc_ArmorKit_17", "=ds="..AL["Mail Armor"], "=q5="..AL["Classic WoW"] };
 				{ 23, "LeatherItemEnhancement", "inv_misc_armorkit_18", "=ds="..AL["Item Enhancements"], "" };
 				{ 24, "LeatherSpecializations", "INV_Misc_ArmorKit_17", "=ds="..AL["Specializations"], "" };
-				{ 26, "LeatherLeather", "inv_misc_leatherscrap_10", "=ds="..BabbleInventory["Leather"], "" };
+				{ 28, "LeatherworkingCataVendor", "inv_scroll_03", "=ds="..AL["Cataclysm Vendor Sold Patterns"], "=q5="..AtlasLoot:GetMapNameByID(700)};
 			};
 		};
 		info = {
@@ -266,13 +268,14 @@ local SPELLFIRE = GetSpellInfo(26797);
 				{ 6, "TailoringArmorOld", "Trade_Tailoring", "=ds="..AL["Cloth Armor"], "=q5="..AL["Classic WoW"] };
 				{ 8, "Mooncloth", "Trade_Tailoring", "=ds="..GetSpellInfo(26798), "" };
 				{ 9, "Shadoweave", "Trade_Tailoring", "=ds="..GetSpellInfo(26801), "" };
-				{ 11, "TailoringCataVendor", "inv_scroll_05", "=ds="..AL["Cataclysm Vendor Sold Plans"], "=q5="..AtlasLoot:GetMapNameByID(700)};
+				{ 11, "TailoringMoPVendor", "inv_scroll_04", "=ds="..AL["Mists of Pandaria Vendor Sold Patterns"], "=q5="..AtlasLoot:GetMapNameByID(811)};
 				{ 17, "TailoringItemEnhancement", "inv_misc_thread_01", "=ds="..AL["Item Enhancements"], "" };
 				{ 18, "TailoringBags", "inv_misc_bag_enchantedrunecloth", "=ds="..AL["Bags"], "" };
 				{ 19, "TailoringMisc", "ability_mount_magnificentflyingcarpet", "=ds="..BabbleInventory["Miscellaneous"], "" };
 				{ 20, "TailoringShirts", "inv_shirt_white_01", "=ds="..AL["Shirts"], "" };
 				{ 21, "TailoringCloth", "inv_fabric_netherweave_bolt", "=ds="..BabbleInventory["Cloth"], "" };
 				{ 23, "Spellfire", "Trade_Tailoring", "=ds="..GetSpellInfo(26797), "" };
+				{ 26, "TailoringCataVendor", "inv_scroll_05", "=ds="..AL["Cataclysm Vendor Sold Plans"], "=q5="..AtlasLoot:GetMapNameByID(700)};
 			};
 		};
 		info = {
@@ -316,19 +319,34 @@ local SPELLFIRE = GetSpellInfo(26797);
 	AtlasLoot_Data["COOKINGMENU"] = {
 		["Normal"] = {
 			{
-				{ 2, "CookingAttributes", "inv_misc_food_cooked_mogufishstew", "=ds="..AL["Attributes"], "" };
-				{ 3, "CookingRatings", "inv_misc_food_vendor_poundedricecakes", "=ds="..AL["Ratings"], "" };
-				{ 4, "CookingBuff", "inv_misc_food_68", "=ds="..AL["Standard Buffs"], "" };
+				{ 2, "CookingAttributes", "inv_misc_food_cooked_mogufishstew", "=ds="..AL["Attributes"], ""};
+				{ 3, "CookingRatings", "inv_misc_food_vendor_poundedricecakes", "=ds="..AL["Ratings"], ""};
+				{ 4, "CookingBuff", "inv_misc_food_68", "=ds="..AL["Standard Buffs"], ""};
 				{ 6, "CookingSpecial", "inv_valentineschocolate01", "=ds="..AL["Special"], ""};
-				{ 8, "CookingBanquetFeast", "inv_misc_food_cooked_greatpabanquet_grill", "=ds="..AL["Banquets/Feasts"], "" };
-				{ 17, "CookingAPSP", "inv_misc_cauldron_frost", "=ds="..AL["Spell/Attack Power"], "" };
-				{ 19, "CookingOtherBuffs", "inv_misc_food_87_sporelingsnack", "=ds="..AL["Other Buffs"], "" };
+				{ 8, "CookingBanquetFeast", "inv_misc_food_cooked_greatpabanquet_grill", "=ds="..AL["Banquets/Feasts"], ""};
+				{ 17, "CookingAPSP", "inv_misc_cauldron_frost", "=ds="..AL["Spell/Attack Power"], ""};
+				{ 19, "CookingOtherBuffs", "inv_misc_food_87_sporelingsnack", "=ds="..AL["Other Buffs"], ""};
 				{ 21, "CookingStandard", "inv_drink_15", "=ds="..AL["Food without Buffs"], ""};
 				{ 23, "s88019", "62649", "=q1=Fortune Cookie", "=ds=#sr# 525", "=ds="..AL["Cooking Daily"]};
 			};
 		};
 		info = {
 			name = COOKING,
+			menu = "CRAFTINGMENU",
+		};
+	}
+
+	AtlasLoot_Data["FISHINGMENU"] = {
+		["Normal"] = {
+			{
+				{ 2, "FishingPoles", "inv_fishingpole_01", "=ds="..BabbleInventory["Fishing Poles"], ""};
+				{ 3, "FishingGear", "inv_helmet_50", "=ds="..AL["Fishing Gear"], ""};
+				{ 17, "FishingLuresLines", "inv_misc_gem_variety_02", "=ds="..BabbleInventory["Fishing Lure"].." / "..AL["Fishing Lines"], ""};
+				{ 18, "FishingFishWeapons", "inv_misc_fish_35", "=ds="..AL["Fish Weapons"], ""};
+			};
+		};
+		info = {
+			name = FISHING,
 			menu = "CRAFTINGMENU",
 		};
 	}

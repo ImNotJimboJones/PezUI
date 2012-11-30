@@ -22,7 +22,7 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 	end
 
 	local tBuffName = aBuffInfo[1];
-	local tPostfix = tBuffName .. (aBuffTarget or "");
+	local tPostfix = tBuffName .. aBuffInfo[2] .. (aBuffTarget or "");
 
 	local tSwatch = VUHDO_getOrCreateBuffSwatch("VuhDoBuffSwatch_" .. tPostfix, aBuffPanel);
 	tSwatch:SetAttribute("buff", aBuffInfo);
@@ -37,7 +37,7 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 
 	local tButton = _G[tSwatch:GetName() .. "GlassButton"];
 	if (tButton:GetAttribute("unit") == nil) then
-		VUHDO_setupAllBuffButtonsTo(tButton, tBuffName, "player");
+		VUHDO_setupAllBuffButtonsTo(tButton, tBuffName, "player", aBuffInfo[2]);
 	end
 
 	VUHDO_IN_PANEL_HEIGHT = VUHDO_BUFF_PANEL_BASE_HEIGHT + tSwatch:GetHeight();
@@ -46,7 +46,7 @@ local function VUHDO_addBuffSwatch(aBuffPanel, aGroupName, aBuffInfo, aBuffTarge
 	local tIsSingle = VUHDO_isUseSingleBuff(tSwatch);
 	if (tIsSingle ~= 2) then
 		if (tIsSingle) then
-			VUHDO_setupAllBuffButtonsTo(tButton, tBuffName, tSwatch:GetAttribute("lowtarget"));
+			VUHDO_setupAllBuffButtonsTo(tButton, tBuffName, tSwatch:GetAttribute("lowtarget"), aBuffInfo[2]);
 		else
 			VUHDO_setupAllBuffButtonUnits(tButton, tSwatch:GetAttribute("goodtarget"));
 		end
@@ -58,12 +58,10 @@ end
 
 
 --
-function VUHDO_getBuffInfoForName(aBuffName)
-	for _, tCategBuffs in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS]) do
-		for _, tBuffInfo in pairs(tCategBuffs) do
-			if (aBuffName == tBuffInfo[1]) then
-				return tBuffInfo;
-			end
+function VUHDO_getBuffInfoForName(aBuffName, aCategoryName)
+	for _, tBuffInfo in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][aCategoryName]) do
+		if (aBuffName == tBuffInfo[1]) then
+			return tBuffInfo;
 		end
 	end
 
@@ -92,7 +90,7 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 
 	tTargetType = tSampleVariant[2];
 	tLabelText = VUHDO_BUFF_SETTINGS[tCategName]["buff"] or tSampleVariant[1];
-	tBuffPanel = VUHDO_getOrCreateBuffPanel("VuhDoBuffPanel" .. tLabelText);
+	tBuffPanel = VUHDO_getOrCreateBuffPanel("VuhDoBuffPanel" .. tLabelText .. tTargetType);
 
 	if (VUHDO_BUFF_SETTINGS["CONFIG"]["COMPACT"]) then
 		VUHDO_BUFF_PANEL_BASE_WIDTH = 24;
@@ -136,7 +134,7 @@ local function VUHDO_addBuffPanel(aCategorySpec)
 		end
 		tSwatch = VUHDO_addBuffSwatch(tBuffPanel, tSettings["name"], tCategBuffs[1], "N" .. tSettings["name"], aCategorySpec);
 	else
-		local tVariants = VUHDO_getBuffInfoForName(tSettings["buff"]) or VUHDO_getBuffInfoForName(tSampleVariant[1]);
+		local tVariants = VUHDO_getBuffInfoForName(tSettings["buff"], aCategorySpec) or VUHDO_getBuffInfoForName(tSampleVariant[1], aCategorySpec);
 		if (tVariants ~= nil) then
 			tSwatch = VUHDO_addBuffSwatch(tBuffPanel, VUHDO_I18N_PLAYER, tVariants, "S", aCategorySpec);
 		end

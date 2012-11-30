@@ -1613,6 +1613,10 @@ end
 
 function rallreportinchat(texttableout,chat,whisp)
 
+if chat and (chat=="party" or chat=="raid" or chat=="raid_warning") and GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) then
+chat="Instance_CHAT"
+end
+
 for i=1,#texttableout do
 if string.len(texttableout[i])>1 then
 
@@ -1634,7 +1638,9 @@ local bililine=0
 for i,cc in ipairs(rabigmenuchatlisten) do 
 if cc == chat then bililine=1
 end end
-
+if chat=="Instance_CHAT" then
+bililine=1
+end
 
 	if bililine==1 then
 

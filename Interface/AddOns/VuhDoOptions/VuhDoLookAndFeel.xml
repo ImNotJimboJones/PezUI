@@ -842,8 +842,6 @@
 		</Frame>
 
 	</Frames>
-	<NormalTexture file="" />
-	<PushedTexture file="" />
 	<Scripts>
 		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
 		<OnClick>
@@ -1086,8 +1084,6 @@
 		</Frame>
 
 	</Frames>
-	<NormalTexture file="" />
-	<PushedTexture file="" />
 	<Scripts>
 		<OnLoad>VUHDO_lnfCheckButtonOnLoad(self)</OnLoad>
 		<OnShow>VUHDO_lnfRadioButtonInitFromModel(self);</OnShow>

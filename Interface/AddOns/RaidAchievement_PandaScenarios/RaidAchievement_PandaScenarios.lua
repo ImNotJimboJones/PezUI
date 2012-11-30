@@ -1,4 +1,5 @@
-﻿function pzraonload()
+﻿local _
+function pzraonload()
 	pzraachdone1=true
 	pzracounter1=0
 	_, pzraenglishclass = UnitClass("player")
@@ -42,6 +43,8 @@ pzraspisokach5={
 
 7529,
 7530,
+
+8017,
 }
 
 if UnitFactionGroup("player")=="Alliance" then
@@ -346,6 +349,21 @@ end
 end
 --
 
+
+--Zan'vess
+if GetCurrentMapAreaID()==883 then
+
+if arg2=="UNIT_DIED" then
+  local id=tonumber(string.sub(arg7,-12,-9),16)
+  if id==2351 then
+    if pzraspisokon[11]==1 and pzraachdone1 then
+      pzrafailnoreason(11)
+    end
+  end
+end
+
+end
+--
 
 
 end

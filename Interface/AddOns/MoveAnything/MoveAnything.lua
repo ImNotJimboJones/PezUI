@@ -93,6 +93,14 @@ local MovAny = {
 		PetBattleFrame = "PetBattleFrame",
 		WatchFrame = "WatchFrame",
 		GroupLootContainer = "GroupLootContainer",
+		LootWonAlertMover1 = "LootWonAlertMover1",
+		LootWonAlertMover2 = "LootWonAlertMover2",
+		LootWonAlertMover3 = "LootWonAlertMover3",
+		LootWonAlertMover4 = "LootWonAlertMover4",
+		LootWonAlertMover5 = "LootWonAlertMover5",
+		MoneyWonAlertMover1 = "MoneyWonAlertMover1",
+		MoneyWonAlertMover2 = "MoneyWonAlertMover2",
+		MoneyWonAlertMover3 = "MoneyWonAlertMover3",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -274,6 +282,11 @@ local MovAny = {
 		ArenaEnemyFrame3PetFrame = "ArenaEnemyFrame3",
 		ArenaEnemyFrame4PetFrame = "ArenaEnemyFrame4",
 		ArenaEnemyFrame5PetFrame = "ArenaEnemyFrame5",
+		Boss1TargetFrame = "UIParent",
+		Boss2TargetFrame = "UIParent",
+		Boss3TargetFrame = "UIParent",
+		Boss4TargetFrame = "UIParent",
+		Boss5TargetFrame = "UIParent",
 	},
 	NoReparent = {
 		TargetFrameSpellBar = "TargetFrameSpellBar",
@@ -286,10 +299,6 @@ local MovAny = {
 		EclipseBarFrame = "EclipseBarFrame",
 		PriestBarFrame = "PriestBarFrame",
 		MonkHarmonyBar = "MonkHarmonyBar",
-		GroupLootFrame1 = "GroupLootFrame1",
-		GroupLootFrame2 = "GroupLootFrame2",
-		GroupLootFrame3 = "GroupLootFrame3",
-		GroupLootFrame4 = "GroupLootFrame4",
 	},
 	NoUnanchoring = {
 		BuffFrame = "BuffFrame",
@@ -310,10 +319,6 @@ local MovAny = {
 		TemporaryEnchantFrame = "TemporaryEnchantFrame",
 		AuctionDressUpFrame = "AuctionDressUpFrame",
 		MonkHarmonyBar = "MonkHarmonyBar",
-		GroupLootFrame1 = "GroupLootFrame1",
-		GroupLootFrame2 = "GroupLootFrame2",
-		GroupLootFrame3 = "GroupLootFrame3",
-		GroupLootFrame4 = "GroupLootFrame4",
 		},
 	lAllowedMAFrames = {
 		MAOptions = "MAOptions",
@@ -385,12 +390,8 @@ local MovAny = {
 	end,
 	
 	hChatFrame_OnUpdate = function()
-	--	print("Woooo")
 		local b = arg1
-	--	print(b, arg1)
 			if MovAny:IsModified(b) then
-			--	b:SetWidth(10)
-			--	b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
 				b:SetWidth(200)
 				b:SetPoint("TOPLEFT", ChatEditBoxesMover, "TOPLEFT", 0, 0)
 				b:SetPoint("BOTTOMRIGHT", ChatEditBoxesMover, "BOTTOMRIGHT", 0, 0)
@@ -426,25 +427,21 @@ local MovAny = {
 	end,
 	
 	hStanceBar_Update = function()
-		API:SyncElement("StanceBarFrame")
 		API:SyncElement("StanceButtonsMover")
 		API:SyncElement("StanceButtonsVerticalMover")
 	end,
 	
 	hStanceBar_UpdateState = function()
-		API:SyncElement("StanceBarFrame")
 		API:SyncElement("StanceButtonsMover")
 		API:SyncElement("StanceButtonsVerticalMover")
 	end,
 	
 	hPetActionBar_Update = function()
-		API:SyncElement("PetActionBarFrame")
 		API:SyncElement("PetActionButtonsMover")
 		API:SyncElement("PetActionButtonsVerticalMover")
 	end,
 	
 	hPetActionBarFrame_OnUpdate = function()
-		API:SyncElement("PetActionBarFrame")
 		API:SyncElement("PetActionButtonsMover")
 		API:SyncElement("PetActionButtonsVerticalMover")
 	end,
@@ -727,31 +724,31 @@ function MovAny:Boot()
 		AchievementAlertFrame_GetAlertFrame = self.hAchievementAlertFrame_GetAlertFrame
 	end
 	
-	if LootWonAlertFrame_SetUp then
+--[[	if LootWonAlertFrame_SetUp then
 		hooksecurefunc("LootWonAlertFrame_SetUp", function(self, arg1, ...)
-		--	print("TestDone", self, arg1, select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...))
+			print("TestDone", self, arg1, select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...))
 			if self == LOOT_WON_ALERT_FRAMES[1] and MovAny:IsModified(LootWonAlertMover1) then
-			--	print("LootWonAlert1 - Find")
+				print("LootWonAlert1 - Find")
 				LOOT_WON_ALERT_FRAMES[1]:SetPoint("BOTTOMLEFT", LootWonAlertMover1, "BOTTOMLEFT", 0, 0)
 			end
 			if self == LOOT_WON_ALERT_FRAMES[2] and MovAny:IsModified(LootWonAlertMover2) then
-			--	print("LootWonAlert2 - Find")
+				print("LootWonAlert2 - Find")
 				LOOT_WON_ALERT_FRAMES[2]:SetPoint("BOTTOMLEFT", LootWonAlertMover2, "BOTTOMLEFT", 0, 0)
 			end
 			if self == LOOT_WON_ALERT_FRAMES[3] and MovAny:IsModified(LootWonAlertMover3) then
-			--	print("LootWonAlert3 - Find")
+				print("LootWonAlert3 - Find")
 				LOOT_WON_ALERT_FRAMES[3]:SetPoint("BOTTOMLEFT", LootWonAlertMover3, "BOTTOMLEFT", 0, 0)
 			end
 			if self == LOOT_WON_ALERT_FRAMES[4] and MovAny:IsModified(LootWonAlertMover4) then
-			--	print("LootWonAlert4 - Find")
+				print("LootWonAlert4 - Find")
 				LOOT_WON_ALERT_FRAMES[4]:SetPoint("BOTTOMLEFT", LootWonAlertMover4, "BOTTOMLEFT", 0, 0)
 			end
 			if self == LOOT_WON_ALERT_FRAMES[5] and MovAny:IsModified(LootWonAlertMover5) then
-			--	print("LootWonAlert5 - Find")
+				print("LootWonAlert5 - Find")
 				LOOT_WON_ALERT_FRAMES[5]:SetPoint("BOTTOMLEFT", LootWonAlertMover5, "BOTTOMLEFT", 0, 0)
 			end
 		end)
-	end
+	end]]
 	
 --[[	if GroupLootContainer_AddFrame then
 		hooksecurefunc("GroupLootContainer_AddFrame", function(self, ...)
@@ -5329,9 +5326,7 @@ function MovAny_OnEvent(self, event, arg1)
 			MovAny:SyncFrames()
 		end
 	elseif event == "ADDON_LOADED" then
-		if arg1 == "MoveAnything" then
-		--	MovAny:RemoveUnavalibleFrames()
-			
+		if arg1 == "MoveAnything" then		
 			if MovAny.Load ~= nil then
 				MovAny:Load()
 				MovAny.Load = nil

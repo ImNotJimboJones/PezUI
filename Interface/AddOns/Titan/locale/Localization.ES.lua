@@ -553,8 +553,8 @@ L["TITAN_GOLD_COIN_LABELS"] = "Mostrar etiquetas en texto";
 L["TITAN_GOLD_COIN_ICONS"] = "Mostrar etiquetas en texto";
 L["TITAN_GOLD_ONLY"] = "Mostrar sólo oro";
 L["TITAN_GOLD_COLORS"] = "Mostrar colores en el oro";
-L["TITAN_USE_COMMA"] = "Usar coma";
-L["TITAN_USE_PERIOD"] = "Use punto";
+L["TITAN_USE_COMMA"] = "Usar coma como separador numérico";
+L["TITAN_USE_PERIOD"] = "Use punto como separador numérico";
 
 
 L["TITAN_VOLUME_TOOLTIP"] = "Control de Volumen";

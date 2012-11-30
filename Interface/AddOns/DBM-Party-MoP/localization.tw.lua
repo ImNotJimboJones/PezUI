@@ -19,7 +19,7 @@ L:SetOptionLocalization({
 L= DBM:GetModLocalization(664)
 
 L:SetWarningLocalization({
-	SpecWarnIntensity	= "%s在%s(%d)"
+	SpecWarnIntensity	= "%s在%s有(%d)層"
 })
 
 L:SetOptionLocalization({
@@ -94,6 +94,10 @@ L:SetMiscLocalization({
 -- Sha of Violence --
 -----------------------
 L= DBM:GetModLocalization(685)
+
+L:SetMiscLocalization({
+	Kill			= "只要你們心中還存有暴力，我就..會回來...",
+})
 
 -----------------------
 -- Taran Zhu --
@@ -175,7 +179,7 @@ L= DBM:GetModLocalization(693)
 L= DBM:GetModLocalization(738)
 
 L:SetTimerLocalization({
-	TimerWave	= "開始進攻:%s"
+	TimerWave	= "進攻:%s"
 })
 
 L:SetOptionLocalization({

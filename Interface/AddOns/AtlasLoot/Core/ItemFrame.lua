@@ -1,9 +1,6 @@
--- $Id: ItemFrame.lua 3757 2012-09-17 12:37:34Z lag123 $
+-- $Id: ItemFrame.lua 4007 2012-11-25 17:27:44Z lag123 $
 local _
 local AtlasLoot = LibStub("AceAddon-3.0"):GetAddon("AtlasLoot")
-
--- Player faction
-local englishFaction = UnitFactionGroup("player")
 
 --- Clears the itemtable
 -- @usage AtlasLoot:ClearLootPage()
@@ -88,6 +85,7 @@ function AtlasLoot:SetItemTable(tab)
 					self.ItemFrame.ItemButtons[itemButtonNum]:SetLink(v[3])
 				end
 				if v.type then self.ItemFrame.ItemButtons[itemButtonNum]:SetItemType(v.type) end
+				if v.amount then self.ItemFrame.ItemButtons[itemButtonNum]:SetAmount(v.amount) end
 			end
 		end
 	end

@@ -1,8 +1,8 @@
 local mod	= DBM:NewMod(745, "DBM-HeartofFear", nil, 330)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 7834 $"):sub(12, -3))
-mod:SetCreatureID(62980)
+mod:SetRevision(("$Revision: 8158 $"):sub(12, -3))
+mod:SetCreatureID(62980)--63554 (Special invisible Vizier that casts the direction based spellid versions of attenuation)
 mod:SetModelID(42807)
 mod:SetZone()
 
@@ -15,40 +15,45 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START",
 --	"SPELL_CAST_SUCCESS",
-	"RAID_BOSS_EMOTE"
+	"RAID_BOSS_EMOTE",
+	"UNIT_SPELLCAST_SUCCEEDED"
 )
 
 --[[WoL Reg expression
 (spellid = 123791 or spellid = 122713) and fulltype = SPELL_CAST_START or (spell = "Inhale" or spell = "Exhale") and (fulltype = SPELL_AURA_APPLIED or fulltype = SPELL_AURA_APPLIED_DOSE or fulltype = SPELL_AURA_REMOVED) or spellid = 127834 or spell = "Convert" or spellid = 124018
+(spellid = 123791 or spellid = 122713 or spellid = 122740 or spellid = 127834) and fulltype = SPELL_CAST_START or spellid = 124018
 --]]
 --Notes: Currently, his phase 2 chi blast abiliteis are not detectable via traditional combat log. maybe with transcriptor.
 local warnInhale			= mod:NewStackAnnounce(122852, 2)
 local warnExhale			= mod:NewTargetAnnounce(122761, 3)
-local warnForceandVerve		= mod:NewSpellAnnounce(122713, 4)
-local warnAttenuation		= mod:NewSpellAnnounce(127834, 4)
+local warnForceandVerve		= mod:NewCastAnnounce(122713, 4, 4)
+local warnAttenuation		= mod:NewTargetAnnounce(127834, 4)
 local warnConvert			= mod:NewTargetAnnounce(122740, 4)
 
 local specwarnPlatform		= mod:NewSpecialWarning("specwarnPlatform")
 local specwarnForce			= mod:NewSpecialWarningSpell(122713)
 local specwarnConvert		= mod:NewSpecialWarningSwitch(122740, not mod:IsHealer())
 local specwarnExhale		= mod:NewSpecialWarningTarget(122761, mod:IsHealer() or mod:IsTank())
-local specwarnAttenuation	= mod:NewSpecialWarningSpell(127834, nil, nil, nil, true)
+local specwarnAttenuation	= mod:NewSpecialWarningTarget(127834, nil, nil, nil, true)
 
 --Timers aren't worth a crap, at all, this is a timerless fight and will probably stay that way unless blizz redesigns it.
+--http://us.battle.net/wow/en/forum/topic/7004456927 for more info on lack of timers.
 --local timerExhaleCD			= mod:NewCDTimer(41, 122761)
 local timerExhale				= mod:NewTargetTimer(6, 122761)
 --local timerForceCD			= mod:NewCDTimer(48, 122713)--Phase 1, every 41 seconds since exhale keeps resetting it, phase 2, 48 seconds or as wildly high as 76 seconds if exhale resets it late in it's natural CD
+local timerForceCast			= mod:NewCastTimer(4, 122713)
 local timerForce				= mod:NewBuffActiveTimer(12.5, 122713)
 --local timerAttenuationCD		= mod:NewCDTimer(34, 127834)--34-41 second variations, when not triggered off exhale. It's ALWAYS 11 seconds after exhale.
 local timerAttenuation			= mod:NewBuffActiveTimer(14, 127834)
 --local timerConvertCD			= mod:NewCDTimer(41, 122740)--totally don't know this CD, but it's probably 41 like other specials in phase 1.
 
+local berserkTimer				= mod:NewBerserkTimer(660)
+
 mod:AddBoolOption("MindControlIcon", true)
+mod:AddBoolOption("ArrowOnAttenuation", true)
 
 local MCTargets = {}
 local MCIcon = 8
---local recentPlatformChange = false
---local platform = 0
 
 local function showMCWarning()
 	warnConvert:Show(table.concat(MCTargets, "<, >"))
@@ -57,9 +62,14 @@ local function showMCWarning()
 end
 
 function mod:OnCombatStart(delay)
---	recentPlatformChange = false
---	platform = 0
 	table.wipe(MCTargets)
+	berserkTimer:Start(-delay)
+end
+
+function mod:OnCombatEnd()
+	if self.Options.ArrowOnAttenuation then
+		DBM.Arrow:Hide()
+	end
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -92,30 +102,35 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(127834) then
-		warnAttenuation:Show()
-		specwarnAttenuation:Show()
-		timerAttenuation:Start()
-	elseif args:IsSpellID(122713) then
-		warnForceandVerve:Show()
-		specwarnForce:Show()
+	if args:IsSpellID(122713) then
 		timerForce:Start()
---[[	elseif args:IsSpellID(123791) and recentPlatformChange then--No one is in melee range of boss, he's aoeing. (i.e., he's arrived at new platform)
-		recentPlatformChange = false--we want to ignore when this happens as a result of players doing fight wrong. Only interested in platform changes.--]]
+	elseif args:IsSpellID(122474, 122496, 123721) then
+		warnAttenuation:Show(args.sourceName)
+		specwarnAttenuation:Show(args.sourceName)
+		timerAttenuation:Start()
+		if self.Options.ArrowOnAttenuation then
+			DBM.Arrow:ShowStatic(90, 12)
+		end
+	elseif args:IsSpellID(122479, 122497, 123722) then
+		warnAttenuation:Show(args.sourceName)
+		specwarnAttenuation:Show(args.sourceName)
+		timerAttenuation:Start()
+		if self.Options.ArrowOnAttenuation then
+			DBM.Arrow:ShowStatic(270, 12)
+		end
 	end
 end
-
---[[
-function mod:SPELL_CAST_SUCCESS(args)
-	if args:IsSpellID(124018) then
-		platform = 4--He moved to middle, it's phase 2, although platform "4" is better then adding an extra variable.
-	end
-end--]]
 
 function mod:RAID_BOSS_EMOTE(msg)
 	if msg == L.Platform or msg:find(L.Platform) then
 		specwarnPlatform:Show()
---		platform = platform + 1
---		recentPlatformChange = true
+	end
+end
+
+function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
+	if spellId == 122933 and self:AntiSpam(2, 1) then--Clear Throat (4 seconds before force and verve)
+		warnForceandVerve:Show()
+		specwarnForce:Show()
+		timerForceCast:Start()
 	end
 end

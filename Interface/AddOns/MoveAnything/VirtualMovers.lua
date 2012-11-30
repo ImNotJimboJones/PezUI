@@ -1891,8 +1891,8 @@ MovAny.lVirtualMovers = {
 		OnMAHook = function(self)
 			self:SetWidth(ChatFrame1:GetWidth())
 			self:SetHeight(20)
-			print("1:"..ChatFrame1:GetWidth())
-			print("2:"..ChatFrame1EditBox:GetHeight())
+		--	print("1:"..ChatFrame1:GetWidth())
+		--	print("2:"..ChatFrame1EditBox:GetHeight())
 			local b = ChatFrame1EditBox
 			if MovAny:IsModified(b) then
 				b:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
@@ -1923,28 +1923,27 @@ MovAny.lVirtualMovers = {
 		end,
 	},
 	
-	LootWonAlertMover1 = {
+--[[	LootWonAlertMover1 = {
 		w = 270,
 		h = 80,
 		point = {"CENTER", "UIParent", "CENTER", 0, 0},
 		OnMAHook = function(self)
 			if LOOT_WON_ALERT_FRAMES[1] then
 				local b = LOOT_WON_ALERT_FRAMES[1]
-				MovAny:UnlockPoint(b)
-				b:ClearAllPoints()
-				b:SetPoint("BOTTOMLEFT", LootWonAlertMover1, "BOTTOMLEFT", 0, 0)
-				MovAny:LockPoint(b)
-				b.ignoreFramePositionManager = true
-				b:SetMovable(true)
-				b:SetUserPlaced(true)
-				self.sbf = b
+				MovAny:UnlockPoint(LOOT_WON_ALERT_FRAMES[1])
+				LOOT_WON_ALERT_FRAMES[1]:ClearAllPoints()
+				LOOT_WON_ALERT_FRAMES[1]:SetPoint("BOTTOMLEFT", "LootWonAlertMover1", "BOTTOMLEFT", 0, 0)
+				MovAny:LockPoint(LOOT_WON_ALERT_FRAMES[1])
+				LOOT_WON_ALERT_FRAMES[1].ignoreFramePositionManager = true
+				LOOT_WON_ALERT_FRAMES[1]:SetMovable(true)
+				LOOT_WON_ALERT_FRAMES[1]:SetUserPlaced(true)
+				self.sbf = LOOT_WON_ALERT_FRAMES[1]
 			else
-				local frame = CreateFrame("Button", nil, UIParent, "LootWonAlertFrameTemplate");
-				LOOT_WON_ALERT_FRAMES[1] = frame
+				LOOT_WON_ALERT_FRAMES[1] = CreateFrame("Button", nil, UIParent, "LootWonAlertFrameTemplate")
 				local b = LOOT_WON_ALERT_FRAMES[1]
 				MovAny:UnlockPoint(b)
 				b:ClearAllPoints()
-				b:SetPoint("BOTTOMLEFT", LootWonAlertMover1, "BOTTOMLEFT", 0, 0)
+				b:SetPoint("BOTTOMLEFT", "LootWonAlertMover1", "BOTTOMLEFT", 0, 0)
 				MovAny:LockPoint(b)
 				b.ignoreFramePositionManager = true
 				b:SetMovable(true)
@@ -2273,27 +2272,26 @@ MovAny.lVirtualMovers = {
 		point = {"CENTER", "UIParent", "CENTER", 0, 0},
 		OnMAHook = function(self)
 			if MONEY_WON_ALERT_FRAMES[3] then
-				local b = MONEY_WON_ALERT_FRAMES[3]
-				MovAny:UnlockPoint(b)
-				b:ClearAllPoints()
-				b:SetPoint("BOTTOMLEFT", MoneyWonAlertMover3, "BOTTOMLEFT", 0, 0)
-				MovAny:LockPoint(b)
-				b.ignoreFramePositionManager = true
-				b:SetMovable(true)
-				b:SetUserPlaced(true)
-				self.sbf = b
+			--	local b = MONEY_WON_ALERT_FRAMES[3]
+				MovAny:UnlockPoint(MONEY_WON_ALERT_FRAMES[3])
+				MONEY_WON_ALERT_FRAMES[3]:ClearAllPoints()
+				MONEY_WON_ALERT_FRAMES[3]:SetPoint("BOTTOMLEFT", "MoneyWonAlertMover3", "BOTTOMLEFT", 0, 0)
+				MovAny:LockPoint(MONEY_WON_ALERT_FRAMES[3])
+				MONEY_WON_ALERT_FRAMES[3].ignoreFramePositionManager = true
+				MONEY_WON_ALERT_FRAMES[3]:SetMovable(true)
+				MONEY_WON_ALERT_FRAMES[3]:SetUserPlaced(true)
+				self.sbf = MONEY_WON_ALERT_FRAMES[3]
 			else
-				local frame = CreateFrame("Button", nil, UIParent, "MoneyWonAlertFrameTemplate");
-				MONEY_WON_ALERT_FRAMES[3] = frame
-				local b = MONEY_WON_ALERT_FRAMES[3]
-				MovAny:UnlockPoint(b)
-				b:ClearAllPoints()
-				b:SetPoint("BOTTOMLEFT", MoneyWonAlertMover3, "BOTTOMLEFT", 0, 0)
+				MONEY_WON_ALERT_FRAMES[3] = CreateFrame("Button", nil, UIParent, "MoneyWonAlertFrameTemplate")
+			--	local b = MONEY_WON_ALERT_FRAMES[3]
+				MovAny:UnlockPoint(MONEY_WON_ALERT_FRAMES[3])
+				MONEY_WON_ALERT_FRAMES[3]:ClearAllPoints()
+				MONEY_WON_ALERT_FRAMES[3]:SetPoint("BOTTOMLEFT", "MoneyWonAlertMover3", "BOTTOMLEFT", 0, 0)
 				MovAny:LockPoint(b)
-				b.ignoreFramePositionManager = true
-				b:SetMovable(true)
-				b:SetUserPlaced(true)
-				self.sbf = b
+				MONEY_WON_ALERT_FRAMES[3].ignoreFramePositionManager = true
+				MONEY_WON_ALERT_FRAMES[3]:SetMovable(true)
+				MONEY_WON_ALERT_FRAMES[3]b:SetUserPlaced(true)
+				self.sbf = MONEY_WON_ALERT_FRAMES[3]
 			end
 		end,
 		OnMAHide = function(self, hidden)
@@ -2315,7 +2313,7 @@ MovAny.lVirtualMovers = {
 		OnMAPostReset = function(self)
 			wipe(MONEY_WON_ALERT_FRAMES)
 		end,
-	},
+	},]]
 --[[	GroupLootFrameMover1 = {
 		w = 270,
 		h = 80,

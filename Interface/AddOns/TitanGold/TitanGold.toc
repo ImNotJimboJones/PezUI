@@ -1,11 +1,11 @@
 ## Interface: 50001
-## Title: Titan Panel [|cffeda55fGold|r] |cff00aa005.1.5.50001|r
+## Title: Titan Panel [|cffeda55fGold|r] |cff00aa005.1.9.50001|r
 ## Notes: Keeps track of all gold held by a player's toons on a per server/faction basis.
 ## Author: Titan Development Team (http://www.titanpanel.org)
 ## SavedVariables: GoldSave
 ## OptionalDeps: 
 ## Dependencies: Titan
-## Version: 5.1.5.50001
+## Version: 5.1.9.50001
 ## X-Child-Of: Titan
 
 TitanGold.xml

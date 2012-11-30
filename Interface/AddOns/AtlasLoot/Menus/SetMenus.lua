@@ -1,20 +1,21 @@
--- $Id: SetMenus.lua 3875 2012-10-11 01:46:41Z Dynaletik $
+-- $Id: SetMenus.lua 4001 2012-11-24 15:35:24Z lag123 $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleFaction = AtlasLoot_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
 local BabbleItemSet = AtlasLoot_GetLocaleLibBabble("LibBabble-ItemSet-3.0")
+local BabbleRare = AtlasLoot_GetLocaleLibBabble("LibBabble-Rare-3.0")
 local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
-
 
 	AtlasLoot_Data["SETMENU"] = {
 		["Normal"] = {
 			{
 				{ 1, "VPMOPMENU", "pvecurrency-valor", "=ds="..AL["Valor Points"].." "..AL["Rewards"], "=q5="..AL["Mists of Pandaria"]};
-				{ 2, "JPMOPMENU", "inv_glove_mail_reputation_c_01", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Mists of Pandaria"]};
-				{ 4, "JPCATAMENU", "inv_misc_necklacea10", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Cataclysm"]};
-				{ 5, "WOTLKEMBLEMMENU", "inv_misc_frostemblem_01", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Wrath of the Lich King"]};
-				{ 6, "70TOKENMENU", "inv_valentineperfumebottle", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Burning Crusade"]};
+				{ 2, "JPMOPMENU", "pvecurrency-justice", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Mists of Pandaria"]};
+				{ 3, "JUSTICEPOINTSMENU", "pvecurrency-justice", "=ds="..AL["Justice Points"].." "..AL["Rewards"], ""};
+				{ 4, "SpiritOfHarmony", "inv_elemental_spiritofharmony_2", "=ds="..AtlasLoot_IngameLocales["Spirit of Harmony"].." "..AL["Rewards"], "=q5="..AL["Mists of Pandaria"]};
+				{ 5, "MoltenFront", "inv_misc_markoftheworldtree", "=ds="..BabbleZone["Molten Front"].." "..AL["Rewards"], "=q5="..AL["Cataclysm"]};
+				{ 7, "RAREMENU", "expansionicon_mistsofpandaria", "=ds="..AL["Rare Mobs"], "=q5="..AL["Mists of Pandaria"]};
 				{ 8, "WORLDEPICS", "INV_Sword_76", "=ds="..AL["BoE World Epics"], ""};
 				{ 9, "Legendaries", "inv_hammer_unique_sulfuras", "=ds="..AL["Legendary Items"], ""};
 				{ 10, "MOUNTMENU", "ability_hunter_pet_dragonhawk", "=ds="..BabbleInventory["Mounts"], ""};
@@ -22,10 +23,9 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 12, "TABARDMENU", "inv_chest_cloth_30", "=ds="..BabbleInventory["Tabards"], ""};
 				{ 13, "TRANSFORMATIONMENU", "inv_misc_orb_03", "=ds="..AL["Transformation Items"], ""};
 				{ 14, "CardGame", "inv_misc_ogrepinata", "=ds="..AL["TCG Items"], ""};
-				{ 16, "MoltenFront", "inv_neck_hyjaldaily_04", "=ds="..BabbleZone["Molten Front"].." "..AL["Rewards"], ""};
-				{ 17, "SETSMISCMENU", "inv_misc_monsterscales_15", "=ds="..AL["Misc Sets"], ""};
-				{ 19, "Heirloom", "INV_Sword_43", "=ds="..AL["Heirloom"], "=q5="..AL["Level 80"]};
-				{ 20, "Heirloom#3", "inv_helmet_04", "=ds="..AL["Heirloom"], "=q5="..AL["Level 85"]};
+				{ 16, "HEIRLOOMMENU", "INV_Sword_43", "=ds="..AL["Heirloom"].." & "..AL["Bind on Account"], ""};
+				{ 17, "CHALLENGEMODESET", "inv_neck_hyjaldaily_04", "=ds="..AL["Challenge Mode Armor Sets"], "=q5="..AL["Mists of Pandaria"]};
+				{ 20, "SETSMISCMENU", "inv_misc_monsterscales_15", "=ds="..AL["Misc Sets"], ""};
 				{ 22, "T1T2T3SET", "INV_Pants_Mail_03", "=ds="..AL["Tier 1/2/3 Set"], "=q5="..AL["Classic WoW"]};
 				{ 23, "T456SET", "INV_Gauntlets_63", "=ds="..AL["Tier 4/5/6 Set"], "=q5="..AL["Burning Crusade"]};
 				{ 24, "T7T8SET", "INV_Chest_Chain_15", "=ds="..AL["Tier 7/8 Set"], "=q5="..AL["Wrath of the Lich King"]};
@@ -73,6 +73,50 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 	}
 
+	AtlasLoot_Data["SpiritOfHarmony"] = {
+		["Normal"] = {
+			{
+				{ 2, "SmithingMoPVendor", "inv_scroll_04", "=ds="..AL["Mists of Pandaria Vendor Sold Plans"], "=q5="..AtlasLoot:GetMapNameByID(811)};
+				{ 3, "TailoringMoPVendor", "inv_scroll_04", "=ds="..AL["Mists of Pandaria Vendor Sold Patterns"], "=q5="..AtlasLoot:GetMapNameByID(811)};
+				{ 17, "LeatherworkingMoPVendor", "inv_scroll_04", "=ds="..AL["Mists of Pandaria Vendor Sold Patterns"], "=q5="..AtlasLoot:GetMapNameByID(811)};
+				{ 20, 72238, "", "=q2=Golden Lotus", "=ds=", "#SPIRITOFHARMONY:1#", amount = 3};
+				{ 21, 89610, "", "=q1=Pandaria Herbs", "=ds=", "#SPIRITOFHARMONY:1#"};
+				{ 23, 74247, "", "=q3=Ethereal Shard", "=ds=", "#SPIRITOFHARMONY:1#"};
+				{ 24, 74250, "", "=q2=Mysterious Essence", "=ds=", "#SPIRITOFHARMONY:1#", amount = 5};
+				{ 25, 74249, "", "=q1=Spirit Dust", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+				{ 27, 72120, "", "=q1=Exotic Leather", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+				{ 28, 79101, "", "=q1=Prismatic Scale", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+				{ 5, 76734, "", "=q3=Serpent's Eye", "=ds=", "#SPIRITOFHARMONY:1#"};
+				{ 6, 0, "inv_relics_idolofferocity", "=q1=Ironpaw Token", "=ds=#p3# #m17#", "#SPIRITOFHARMONY:1#"};
+				{ 7, 87399, "", "=q1=Restored Artifact", "=ds=", "#SPIRITOFHARMONY:1#"};
+				{ 8, 79255, "", "=q2=Starlight Ink", "=ds=", "#SPIRITOFHARMONY:1#"};
+				{ 9, 72988, "", "=q1=Windwool Cloth", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+				{ 11, 72094, "", "=q2=Black Trillium Ore", "=ds=", "#SPIRITOFHARMONY:1#", amount = 5};
+				{ 12, 72103, "", "=q2=White Trillium Ore", "=ds=", "#SPIRITOFHARMONY:1#", amount = 5};
+				{ 13, 72092, "", "=q1=Ghost Iron Ore", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+				{ 14, 72093, "", "=q1=Kyparite", "=ds=", "#SPIRITOFHARMONY:1#", amount = 20};
+			};
+		};
+		info = {
+			name = AtlasLoot_IngameLocales["Spirit of Harmony"].." "..AL["Rewards"],
+			menu = "SETMENU",
+		};
+	}
+
+	AtlasLoot_Data["JUSTICEPOINTSMENU"] = {
+		["Normal"] = {
+			{
+				{ 2, "JPCATAMENU", "inv_misc_necklacea10", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Cataclysm"]};
+				{ 3, "70TOKENMENU", "inv_valentineperfumebottle", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Burning Crusade"]};
+				{ 17, "JPWRATHMENU", "inv_misc_frostemblem_01", "=ds="..AL["Justice Points"].." "..AL["Rewards"], "=q5="..AL["Wrath of the Lich King"]};
+			};
+		};
+		info = {
+			name = AL["Justice Points"].." "..AL["Rewards"],
+			menu = "SETMENU",
+		};
+	}
+
 	AtlasLoot_Data["JPCATAMENU"] = {
 		["Normal"] = {
 			{
@@ -94,11 +138,11 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Justice Points"].." "..AL["Rewards"],
-			menu = "SETMENU",
+			menu = "JUSTICEPOINTSMENU",
 		};
 	}
 
-	AtlasLoot_Data["WOTLKEMBLEMMENU"] = {
+	AtlasLoot_Data["JPWRATHMENU"] = {
 		["Normal"] = {
 			{
 				{ 2, "EmblemofFrost", "inv_misc_frostemblem_01", "=ds="..AL["ilvl 264"], "=q5="..BabbleInventory["Armor"].." & "..AL["Weapons"]};
@@ -118,7 +162,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Justice Points"].." "..AL["Rewards"],
-			menu = "SETMENU",
+			menu = "JUSTICEPOINTSMENU",
 		};
 	}
 
@@ -138,7 +182,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Justice Points"].." "..AL["Rewards"],
-			menu = "SETMENU",
+			menu = "JUSTICEPOINTSMENU",
 		};
 	}
 
@@ -173,7 +217,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 10, "MountsCraftQuest", "ability_mount_gyrocoptorelite", "=ds="..BabbleInventory["Quest"].." / "..AL["Crafted Mounts"], ""};
 				{ 11, "MountsEvent", "achievement_halloween_witch_01", "=ds="..AL["World Events"], ""};
 				{ 12, "MountsPromotional", "inv_misc_reforgedarchstone_01", "=ds="..AL["Promotional Mounts"], ""};
-				{ 13, "MountsNEW", "inv_pandarenserpentmount_green", "=ds="..AL["New Mounts"], ""};
+				{ 13, "MountsNEW", "inv_pandarenserpentmount_green", "=ds="..AL["New Mounts"], "=q5="..AL["Mists of Pandaria"]};
 				{ 17, "MountsHorde", "achievement_pvp_h_16", "=ds="..BabbleFaction["Orgrimmar"].." / "..BabbleFaction["Silvermoon City"], "=ec1="..BabbleFaction["Horde"]};
 				{ 18, "MountsHorde#2", "achievement_pvp_h_16", "=ds="..BabbleFaction["Darkspear Trolls"].." / "..BabbleFaction["Thunder Bluff"].." / "..BabbleFaction["Undercity"], "=ec1="..BabbleFaction["Horde"]};
 				{ 19, "MountsHorde#3", "achievement_pvp_h_16", "=ds="..BabbleFaction["Huojin Pandaren"].." / "..BabbleFaction["Bilgewater Cartel"], "=ec1="..BabbleFaction["Horde"]};
@@ -184,6 +228,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 25, "MountsAchievement", "inv_mount_allianceliong", "=ds="..AL["Achievement Reward"], ""};
 				{ 26, "MountsCardGame", "ability_mount_bigblizzardbear", "=ds="..AL["Card Game Mounts"], ""};
 				{ 27, "MountsRemoved", "INV_Misc_QirajiCrystal_05", "=ds="..AL["Unobtainable Mounts"], ""};
+				{ 28, "MountsNEW2", "inv_pandarenserpentmount_green", "=ds="..AL["New Mounts"], "=q5=Patch 5.1"};
 			};
 		};
 		info = {
@@ -201,13 +246,14 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 5, "PetsFaction", "ability_hunter_pet_sporebat", "=ds="..AL["Faction Companions"], ""};
 				{ 6, "PetsEvent", "inv_pet_egbert", "=ds="..AL["World Events"], ""};
 				{ 7, "PetsRemoved", "inv_pet_babyblizzardbear", "=ds="..AL["Unobtainable Companions"], ""};
-				{ 8, "PetsNEW", "inv_pet_babycloudserpent", "=ds="..AL["New Companions"], ""};
+				{ 8, "PetsNEW", "inv_pet_babycloudserpent", "=ds="..AL["New Companions"], "=q5="..AL["Mists of Pandaria"]};
 				{ 17, "PetsQuest", "inv_drink_19", "=ds="..AL["Quest Reward Companions"], ""};
 				{ 18, "PetsAchievement", "inv_misc_darkphoenixpet_01", "=ds="..AL["Achievement Reward"], ""};
 				{ 19, "PetsPromotional", "inv_netherwhelp", "=ds="..AL["Promotional Companions"], ""};
 				{ 20, "PetsCardGame", "inv_misc_fish_34", "=ds="..AL["Card Game Companions"], ""};
 				{ 21, "PetsPetStore", "INV_Misc_Coin_01", "=ds="..AL["Blizzard Store"], ""};
 				{ 22, "PetsAccessories", "inv_misc_petbiscuit_01", "=ds="..AL["Companion Accessories"], ""};
+				{ 23, "PetsNEW2", "inv_pet_babycloudserpent", "=ds="..AL["New Companions"], "=q5=Patch 5.1"};
 			};
 		};
 		info = {
@@ -259,7 +305,78 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 			menu = "SETMENU",
 		};
 	}	
-	
+
+	AtlasLoot_Data["HEIRLOOMMENU"] = {
+		["Normal"] = {
+			{
+				{ 2, "Heirloom", "inv_helmet_24", "=ds="..BabbleInventory["Back"].." / "..BabbleInventory["Cloth"].." / "..BabbleInventory["Leather"], ""};
+				{ 3, "Heirloom#4", "inv_sword_17", "=ds="..AL["PvP Heirlooms"], ""};
+				{ 5, 86559, "", "=q7=Frying Pan", "=ds=#h1#", "#IRONPAW:50#"};
+				{ 6, 86558, "", "=q7=Rolling Pin", "=ds=#s15#", "#IRONPAW:50#"};
+				{ 7, 86468, "", "=q7=Apron", "=ds=#s7#", "#IRONPAW:50#"};
+				{ 9, 88563, "", "=q7=Nat's Fishing Journal", "=ds=#m2#", "1,000 #gold#"};
+				{ 11, "HeirloomBoAArmor", "trade_archaeology_ancientorcshamanheaddress", "=ds="..AL["Bind on Account Armor"], ""};
+				{ 12, "HeirloomBoAMisc", "trade_archaeology_pendant of the aqir", "=ds="..AL["Misc"], ""};
+				{ 17, "Heirloom#2", "inv_chest_plate03", "=ds="..BabbleInventory["Mail"].." / "..BabbleInventory["Plate"], ""};
+				{ 18, "Heirloom#3", "INV_Helmet_01", "=ds="..AL["Accessories"].." / "..AL["Weapons"], ""};
+				{ 20, 44133, "", "=q7=Greater Inscription of the Axe", "=ds=#s3# #e17#", "100 #gold#"};
+				{ 21, 44134, "", "=q7=Greater Inscription of the Crag", "=ds=#s3# #e17#", "100 #gold#"};
+				{ 22, 44136, "", "=q7=Greater Inscription of the Pinnacle", "=ds=#s3# #e17#", "100 #gold#"};
+				{ 23, 44135, "", "=q7=Greater Inscription of the Storm ", "=ds=#s3# #e17#", "100 #gold#"};
+				{ 26, "HeirloomBoAWeapons", "inv_mace_46", "=ds="..AL["Bind on Account Weapons"], ""};
+			};
+		};
+		info = {
+			name = AL["Heirloom"].." & "..AL["Bind on Account"],
+			menu = "SETMENU",
+		};
+	}
+
+	AtlasLoot_Data["CHALLENGEMODESET"] = {
+		["Normal"] = {
+			{
+				{ 2, "ChallengeModeDeathKnight", "spell_deathknight_frostpresence", "=ds="..LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"], ""};
+				{ 3, "ChallengeModeDruid", "ability_druid_catform", "=ds="..LOCALIZED_CLASS_NAMES_MALE["DRUID"], ""};
+				{ 4, "ChallengeModeHunter", "inv_weapon_bow_07", "=ds="..LOCALIZED_CLASS_NAMES_MALE["HUNTER"], ""};
+				{ 5, "ChallengeModeMage", "inv_staff_13", "=ds="..LOCALIZED_CLASS_NAMES_MALE["MAGE"], ""};
+				{ 6, "ChallengeModeMonk", "spell_monk_windwalker_spec", "=ds="..LOCALIZED_CLASS_NAMES_MALE["MONK"], ""};
+				{ 7, "ChallengeModePaladin", "Spell_Holy_HolyBolt", "=ds="..LOCALIZED_CLASS_NAMES_MALE["PALADIN"], ""};
+				{ 17, "ChallengeModePriest", "spell_holy_guardianspirit", "=ds="..LOCALIZED_CLASS_NAMES_MALE["PRIEST"], ""};
+				{ 18, "ChallengeModeRogue", "inv_throwingknife_04", "=ds="..LOCALIZED_CLASS_NAMES_MALE["ROGUE"], ""};
+				{ 19, "ChallengeModeShaman", "Spell_Nature_Lightning", "=ds="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], ""};
+				{ 20, "ChallengeModeWarlock", "spell_nature_drowsy", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARLOCK"], ""};
+				{ 21, "ChallengeModeWarrior", "ability_warrior_innerrage", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"], ""};
+			};
+		};
+		info = {
+			name = AL["Challenge Mode Armor Sets"],
+			menu = "SETMENU",
+		};
+	}
+
+	AtlasLoot_Data["RAREMENU"] = {
+		["Normal"] = {
+			{
+				{ 2, "RaresMOPMobsJadeForest", "achievement_zone_jadeforest", "=ds="..AtlasLoot:GetMapNameByID(806), "#ACHIEVEMENTID:7439#"};
+				{ 3, "RaresMOPMobsKrasarangWilds", "achievement_zone_krasarangwilds", "=ds="..AtlasLoot:GetMapNameByID(857), "#ACHIEVEMENTID:7439#"};
+				{ 4, "RaresMOPMobsTownlongSteppes", "achievement_zone_townlongsteppes", "=ds="..AtlasLoot:GetMapNameByID(810), "#ACHIEVEMENTID:7439#"};
+				{ 5, "RaresMOPMobsValeOfEternalBlossoms", "achievement_zone_valeofeternalblossoms", "=ds="..AtlasLoot:GetMapNameByID(811), "#ACHIEVEMENTID:7439#"};
+				{ 7, "RaresMOPMobsMisc", "inv_pandarenserpentmount_lightning", "=ds="..AL["Misc"], ""};
+				{ 9, "RaresMOPItemsJadeForestValleyoftheFourWinds", "achievement_zone_jadeforest", "=ds="..AtlasLoot:GetMapNameByID(806).." / "..AtlasLoot:GetMapNameByID(807), "#ACHIEVEMENTID:7284#"};
+				{ 10, "RaresMOPItemsTownlongSteppesDreadWastes", "achievement_zone_krasarangwilds", "=ds="..AtlasLoot:GetMapNameByID(810).." / "..AtlasLoot:GetMapNameByID(858), "#ACHIEVEMENTID:7284#"};
+				{ 17, "RaresMOPMobsValleyFourWinds", "achievement_zone_valleyoffourwinds", "=ds="..AtlasLoot:GetMapNameByID(807), "#ACHIEVEMENTID:7439#"};
+				{ 18, "RaresMOPMobsKunLaiSummit", "achievement_zone_kunlaisummit", "=ds="..AtlasLoot:GetMapNameByID(809), "#ACHIEVEMENTID:7439#"};
+				{ 19, "RaresMOPMobsDreadWastes", "achievement_zone_dreadwastes", "=ds="..AtlasLoot:GetMapNameByID(858), "#ACHIEVEMENTID:7439#"};
+				{ 22, "RaresMOPMobsClawlord", "inv_misc_birdbeck_02", "=ds="..BabbleRare["Clawlord Kril'mandar"], ""};
+				{ 24, "RaresMOPItemsKrasarangWildsKunLaiSummit", "achievement_zone_valleyoffourwinds", "=ds="..AtlasLoot:GetMapNameByID(857).." / "..AtlasLoot:GetMapNameByID(809), "#ACHIEVEMENTID:7284#"};
+			};
+		};
+		info = {
+			name = AL["Rare Mobs"],
+			menu = "SETMENU",
+		};
+	}
+
 	AtlasLoot_Data["SETSMISCMENU"] = {
 		["Normal"] = {
 			{
@@ -381,7 +498,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 1/2/3 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -409,7 +526,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 4/5/6 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -439,7 +556,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 7/8 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -469,7 +586,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 9 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -499,7 +616,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 10 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -529,7 +646,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 11/12 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -559,7 +676,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 13 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -593,7 +710,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 		};
 		info = {
 			name = AL["Tier 14 Set"],
-			menu = "SETMENU",
+			menu = "SETMENU", instance = "TierSetsMenus",
 		};
 	}
 
@@ -784,13 +901,13 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 9, "ShaofAnger#8", "inv_bracer_robe_pvpmage_e_01", "=ds="..AL["PvP Non-Set Epics"], "=q5="..BabbleInventory["Cloth"].." / "..BabbleInventory["Leather"]};
 				{ 10, "ShaofAnger#10", "inv_misc_pvp_ringc2", "=ds="..AL["PvP Accessories"], "=q5="..AL["Level 90"]};
 				{ 12, 87771, "", "=q4=Reins of the Heavenly Onyx Cloud Serpent", "=ds=#e27#" },
-				{ 13, 89317, "", "=q4=Claw of Anger", "=ds=#m2#", "", "100%" },
 				{ 17, "ShaofAnger#5", "inv_staff_30", "=ds="..LOCALIZED_CLASS_NAMES_MALE["PRIEST"], ""};
 				{ 18, "ShaofAnger#2", "inv_throwingknife_04", "=ds="..LOCALIZED_CLASS_NAMES_MALE["ROGUE"], ""};
 				{ 19, "ShaofAnger#6", "spell_nature_bloodlust", "=ds="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], ""};
 				{ 20, "ShaofAnger#2", "spell_nature_drowsy", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARLOCK"], ""};
 				{ 21, "ShaofAnger#7", "inv_sword_27", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"], ""};
 				{ 24, "ShaofAnger#9", "inv_bracer_plate_pvppaladin_e_01", "=ds="..AL["PvP Non-Set Epics"], "=q5="..BabbleInventory["Mail"].." / "..BabbleInventory["Plate"]};
+				{ 25, "ShaofAnger#11", "inv_hand_1h_shaclaw", "=ds="..AL["Quest Reward"], ""};
 				{ 27, 90839, "", "=q4=Cache of Sha-Touched Gold", "=ds=#m20#"  },
 			};
 		};

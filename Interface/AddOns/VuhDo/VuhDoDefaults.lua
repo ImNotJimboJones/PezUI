@@ -425,10 +425,10 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 		}
 
 		-- Wrack
-		if (select(1, GetSpellInfo(92956)) == aBuffName) then
+		--[[if (select(1, GetSpellInfo(92956)) == aBuffName) then
 			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isAliveTime"] = true;
 			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isFullDuration"] = true;
-		end
+		end]]
 	end
 
 	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isColor"]) then
@@ -751,7 +751,7 @@ function VUHDO_loadDefaultConfig()
 	end
 
 
-	VUHDO_addCustomSpellIds(18,
+	--[[VUHDO_addCustomSpellIds(18,
 		92956, -- Sinestra: Wrack
 
 		-- Firelands
@@ -815,7 +815,7 @@ function VUHDO_loadDefaultConfig()
 		105841, -- Degenerative bite
 		105445, -- Blistering heat
 		109603  -- Tetanus
-	);
+	);]]
 
 
 	-- 5.x - MoP
@@ -1226,7 +1226,7 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 		["barHeight"] = 25,
 
 		["showHeaders"] = true,
-		["headerHeight"] = 16,
+		["headerHeight"] = 12,
 		["headerWidth"] = 100,
 		["headerSpacing"] = 5,
 

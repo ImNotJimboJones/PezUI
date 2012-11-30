@@ -1,0 +1,25 @@
+tag v4.0.0-beta41
+ae7aaa7f36cf01f00782c23632677eb6778c3d86
+Shefki <shefki@shefki.org>
+2012-11-27 15:11:58 -0800
+
+Tagging as v4.0.0-beta41
+
+
+--------------------
+
+Shefki:
+	- Add Tooth and Claw to Druid Self Buff Aura Filter in 5.1.x
+	- Put LibDualSpec back to latest tag rather than alpha/beta release since it has a 5.x stable release now.
+	- TOC bump for 5.1.x
+	- Backwards compatability for 5.0.x in Chi module.
+	- Remove Aspect of the Fox with WoW 5.1 from the Aura Filters.
+Benjamin Staneck:
+	- SPELL_POWER_CHI is the new SPELL_POWER_LIGHT_FORCE, no backwards compat, have fun Shefki :D
+Shefki:
+	- Give the Rage of Anger a red power bar.
+	Specifically map POWER_TYPE_RED_POWER to RAGE since they both translate
+	to Rage.
+	- Change the default to not hide Blizzard's AltPowerBar.
+	If you want it hidden you'll have to toggle it back hidden by doing:
+	/pb, Modules, Hide Blizzard, check Alternate power.

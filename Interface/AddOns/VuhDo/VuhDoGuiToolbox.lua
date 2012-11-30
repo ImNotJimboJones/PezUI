@@ -444,11 +444,8 @@ local function VUHDO_initEventsPerFrame()
 				for tIndex, tEvent in pairs(VUHDO_BLIZZ_EVENTS) do
 					if (tFrame:IsEventRegistered(tEvent)) then
 						tinsert(sEventsPerFrame[tFrameName], tIndex);
-						--VUHDO_Msg("I: Register " .. tFrameName .. ": " .. tEvent);
 					end
 				end
-			else
-				--VUHDO_Msg("I: Frame not found: " .. tFrameName)
 			end
 		end
 	end
@@ -463,16 +460,13 @@ local function VUHDO_registerOriginalEvents(aFrame)
 	if (sEventsPerFrame[tFrameName] ~= nil) then
 		for _, tIndex in pairs(sEventsPerFrame[tFrameName]) do
 			aFrame:RegisterEvent(VUHDO_BLIZZ_EVENTS[tIndex]);
-			--VUHDO_Msg("R: Registering for " .. tFrameName .. ": " .. VUHDO_BLIZZ_EVENTS[tIndex]);
 		end
 
 		for _, tEvent in pairs(VUHDO_FIX_EVENTS) do
 			aFrame:RegisterEvent(tEvent);
-			--VUHDO_Msg("RF: Registering for " .. tFrameName .. ": " .. tEvent);
 		end
 	else
 		aFrame:RegisterAllEvents();
-		--VUHDO_Msg("R: Frame not found: " .. tFrameName)
 	end
 end
 
@@ -687,7 +681,6 @@ end
 --
 local function VUHDO_showBlizzFocus()
 	VUHDO_registerOriginalEvents(FocusFrame);
-	--TargetFrame_OnLoad(FocusFrame, "focus", FocusFrameDropDown_Initialize);
 end
 
 
@@ -973,7 +966,6 @@ function VUHDO_UIFrameFlash_OnUpdate(aTimeDelta)
 	    end
 
 	    tFrame:SetAlpha(tAlpha);
-	    --tFrame:Show();
 	  end
 
 	  tIndex = tIndex - 1;
@@ -988,7 +980,6 @@ function VUHDO_UIFrameFlashStop(aFrame)
 		tDeleteItem(sFlashFrames, aFrame);
 		aFrame:SetAlpha(aFrame.showWhenDone and 1 or 0);
 		aFrame.flashTimer = nil;
-		--aFrame:SetShown(aFrame.showWhenDone);
 		sIsFlashFrame[aFrame] = nil;
 	end
 end

@@ -95,6 +95,10 @@ L:SetMiscLocalization({
 -----------------------
 L= DBM:GetModLocalization(685)
 
+L:SetMiscLocalization({
+	Kill		= "So lange die Gewalt in Euren Herzen wohnt... werde ich... zurückkehren...",
+})
+
 -----------------------
 -- Taran Zhu --
 -----------------------
@@ -183,7 +187,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	WaveStart	= "Fools! Attacking the might of the mantid head on?  Your deaths will be swift." --translate (trigger)
+	WaveStart	= "Narren! Ein Frontalangriff auf die Macht der Mantis? Ich werde Euch einen schnellen Tod bereiten!"
 })
 
 -----------------------
@@ -233,7 +237,7 @@ L:SetMiscLocalization({
 L= DBM:GetModLocalization(666)
 
 L:SetMiscLocalization({
-	Kill	= "What?!"
+	Kill	= "STERBT, NEKROMANT!"
 })
 
 -----------------------
@@ -255,7 +259,7 @@ L= DBM:GetModLocalization(660)
 L= DBM:GetModLocalization(654)
 
 L:SetMiscLocalization({
-	Call		= "Armsmaster Harlan calls on two of his allies to join the fight!" --translate (trigger)
+	Call		= "Waffenmeister Harlan ruft zwei seiner Verbündeten, die sich am Kampf beteiligen!"
 })
 
 -----------------------

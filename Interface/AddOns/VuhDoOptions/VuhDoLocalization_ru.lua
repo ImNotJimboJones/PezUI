@@ -1250,3 +1250,7 @@ VUHDO_I18N_DEGREES = "Град.";
 VUHDO_I18N_RAID_MANAGER = "Управ.\nРейдом";
 VUHDO_I18N_CAST_TIME_ONLY = "Только\nДолгие";
 VUHDO_I18N_EMPTY_BUTTONS = "Пустые\nКнопки";
+VUHDO_I18N_HEALTH_COLOR = "Health\nColor";
+
+VUHDO_I18N_HIDE = "Hide";
+VUHDO_I18N_LEAVE_ALONE = "Leave alone";

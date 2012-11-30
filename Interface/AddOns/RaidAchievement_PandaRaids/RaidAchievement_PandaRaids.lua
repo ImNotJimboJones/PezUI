@@ -20,20 +20,14 @@ end
 
 prraspisokach25={
 --HoF
---6937,
---6936,
---6553,
---6683,
---6518,
+
 
 --MV
---6687,
---6455,
+6553,
 
 --ToES
---6933,
---6824,
---6825,
+6933,
+6825,
 
 }
 
@@ -119,7 +113,7 @@ end
 
 
 
-if GetNumGroupMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" then
+if GetNumGroupMembers() > 0 and event == "COMBAT_LOG_EVENT_UNFILTERED" and lfrenable==nil then
 
 local arg1, arg2, arg3,arg4,arg5,arg6,argNEW1,arg7,arg8,arg9,argNEW2,arg10,arg11,arg12,arg13,arg14, arg15,arg16,arg17,arg18 = ...
 
@@ -130,7 +124,11 @@ local arg1, arg2, arg3,arg4,arg5,arg6,argNEW1,arg7,arg8,arg9,argNEW2,arg10,arg11
 --Heart of Fear
 if GetCurrentMapAreaID()==897 then
 
-
+if arg2=="SPELL_CAST_SUCCESS" and arg10==122786 then
+	if prraspisokon[1]==1 and raachdone1 then
+		prrafailnoreason(1) --arg8
+	end
+end
 
 
 end
@@ -152,6 +150,26 @@ end
 if GetCurrentMapAreaID()==886 then
 
 
+if arg2=="SPELL_DAMAGE" and arg13 and arg13>0 then
+	if prraspisokon[2]==1 and raachdone1 then
+    local id=tonumber(string.sub(arg7,-12,-9),16)
+    if id==64443 then
+      prrafailnoreason(2) --arg8
+    end
+	end
+end
+
+
+
+
+if arg2=="SPELL_AURA_APPLIED" and (arg10==119985 or arg10==119414) then
+	if prraspisokon[3]==1 and raachdone1 then
+		raunitisplayer(arg7,arg8)
+		if raunitplayertrue then
+      prrafailnoreason(3,arg8) --arg8
+    end
+	end
+end
 
 
 end
@@ -208,23 +226,6 @@ f:SetWidth(248)
 f:SetHeight(24)
 
 
-if i==6 then
-if GetAchievementNumCriteria(prraspisokach25[i])>1 then
-local maxcrit=GetAchievementNumCriteria(prraspisokach25[i])
-for q=1,maxcrit do
-	local a1,_,a3=GetAchievementCriteriaInfo(prraspisokach25[i],q)
-	if a1==nil then
-		q=11
-	else
-		if a3 then
-			Description=Description.."\n|cff00ff00"..a1.."|r"
-		else
-			Description=Description.."\n"..a1
-		end
-	end
-end
-end
-end
 
 
 f:SetScript("OnEnter", function(self) Raiccshowtxt(self,Description) end )
@@ -240,8 +241,12 @@ t:SetPoint("TOPLEFT",0,0)
 
 local t = f:CreateFontString()
 t:SetFont(GameFontNormal:GetFont(), rafontsset[2])
-t:SetWidth(248)
-t:SetText(prraName)
+t:SetWidth(548)
+if i==3 then
+  t:SetText(prraName.." - |cffff0000"..raspectext.."|r")
+else
+  t:SetText(prraName)
+end
 t:SetJustifyH("LEFT")
 t:SetPoint("LEFT",27,0)
 

@@ -9,6 +9,7 @@ Thanks a bunch!
 NEEDTOKNOW = {};
 
 -- Seems like this should already exist somewhere
+-- Strings come from the chart on http://www.wowwiki.com/WoW_constants
 NEEDTOKNOW.ITEM_NAMES = 
 {
     HEADSLOT,
@@ -32,7 +33,9 @@ NEEDTOKNOW.ITEM_NAMES =
     TABARDSLOT
 };
 
+
 -- Define defaults in enUS
+    NEEDTOKNOW.ALTERNATE_POWER = "Alternate Power";
     NEEDTOKNOW.BAR_TOOLTIP1 = "NeedToKnow";
     NEEDTOKNOW.BAR_TOOLTIP2 = "Right click bars to configure. More options in the Blizzard interface options menu. Type /needtoknow to lock and enable.";
 
@@ -41,6 +44,7 @@ NEEDTOKNOW.ITEM_NAMES =
     NEEDTOKNOW.BARMENU_ENABLE = "Enable bar";
     NEEDTOKNOW.BARMENU_CHOOSENAME = "Choose buff/debuff to time...";
     NEEDTOKNOW.BARMENU_CHOOSESLOT = "Choose Equipment Slot...";
+    NEEDTOKNOW.BARMENU_CHOOSEPOWER = "Choose Power Type...";
     NEEDTOKNOW.CHOOSENAME_DIALOG = "Enter the name of the buff or debuff to time with this bar"
     NEEDTOKNOW.IMPORTEXPORT_DIALOG = "The current settings for the bar appear below.  To copy these settings to the clipboard, press Ctrl+C. To paste the last settings you copied (such as from another bar), press Ctrl+V. Clear this text to reset the bar to the defaults.";
     NEEDTOKNOW.CHOOSE_OVERRIDE_TEXT = "Normally, the name of the aura/item/spell that activated the bar is displayed.  By entering text here, you can override that text with something else.  Leave this blank to use the default behavior."
@@ -59,6 +63,7 @@ NEEDTOKNOW.ITEM_NAMES =
     NEEDTOKNOW.BARMENU_ONLYMINE = "Only show if cast by self";
     NEEDTOKNOW.BARMENU_BARCOLOR = "Bar color";
     NEEDTOKNOW.BARMENU_CLEARSETTINGS = "Clear settings";
+    NEEDTOKNOW.BARMENU_POWER_PRIMARY = "Primary";
     NEEDTOKNOW.BARMENU_SHOW = "Show";
     NEEDTOKNOW.BARMENU_SHOW_ICON = "Icon";
     NEEDTOKNOW.BARMENU_SHOW_TEXT = "Aura Name";
@@ -121,6 +126,7 @@ NEEDTOKNOW.ITEM_NAMES =
     NEEDTOKNOW.BARMENU_BUFFCD = "Internal Cooldown";
     NEEDTOKNOW.BARMENU_USABLE = "Conditional Spell";
     NEEDTOKNOW.BARMENU_EQUIPSLOT = "Equipment Slot";
+    NEEDTOKNOW.BARMENU_POWER = "Power (experimental)";
     NEEDTOKNOW.CMD_HIDE = "hide";
     NEEDTOKNOW.CMD_PROFILE = "profile";
     NEEDTOKNOW.CMD_SHOW = "show";
@@ -332,4 +338,24 @@ elseif ( GetLocale() == "zhTW" ) then
     NEEDTOKNOW.CMD_RESET = "重置";
 
 end
+
+NEEDTOKNOW.POWER_TYPES = 
+{
+    RAGE,
+    FOCUS,
+    ENERGY,
+    NEEDTOKNOW.BARMENU_POWER_PRIMARY, -- LOCME
+    RUNES,
+    RUNIC_POWER,
+    SOUL_SHARDS,
+    ECLIPSE,
+    HOLY_POWER,
+    NEEDTOKNOW.ALTERNATE_POWER, -- index 10
+    "Dark Force", -- Currently unused according to wowpedia
+    LIGHT_FORCE, -- Chi
+    SHADOW_ORBS,
+    BURNING_EMBERS,
+    DEMONIC_FURY
+};
+NEEDTOKNOW.POWER_TYPES[0] = MANA
 

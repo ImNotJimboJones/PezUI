@@ -33,7 +33,7 @@ racolor3               = "желтый"
 racolor6               = "фиолетовый"
 radeathwingemote1			= " наклоняется влево!"
 radeathwingemote2			= " наклоняется вправо!"
-
+raspectext            = "Слишком большая зона боя. Требуется установить аддон всем!"
 
 
 psealeftmenu1				= "Аддон"

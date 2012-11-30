@@ -130,6 +130,9 @@ FishingTranslations["enUS"] = {
 	CONFIG_PARTIALGEAR_ONOFF = "Partial Outfit",
 	CONFIG_PARTIALGEAR_INFO  = "If enabled, cast when wearing any fishing gear at all, even if a pole is not equipped.",
 	
+	CONFIG_MAINTAINRAFT_ONOFF = "Maintain only",
+	CONFIG_MAINTAINRAFT_INFO  = "If enabled, do not use the raft item, only maintain it if it is already being used.",
+	
 	CONFIG_EASYLURES_ONOFF	 = "Easy Lures",
 	CONFIG_EASYLURES_INFO	 = "If enabled, a lure will applied to your fishing pole before you start fishing, whenever you need one.",
 	CONFIG_ALWAYSLURE_ONOFF	  = "Always Lure",
@@ -159,7 +162,9 @@ FishingTranslations["enUS"] = {
 	CONFIG_MAXSOUND_INFO      = "If enabled, set the sound volume to the maximum while fishing.",
 	CONFIG_TURNONSOUND_ONOFF  = "Force sound",
 	CONFIG_TURNONSOUND_INFO   = "If enabled, always turn on sounds while fishing.",
-
+	CONFIG_DINGQUESTFISH_ONOFF = "Fish Ringer",
+	CONFIG_DINGQUESTFISH_INFO = "If enabled, the quest added sound will play when a Nat Pagle reputation fish is caught.",
+	
 	CONFIG_AUTOOPEN_ONOFF	  = "Open quest items",
 	CONFIG_AUTOOPEN_INFO	  = "If enabled, use a double-click to open up fishing quest items.",
 
@@ -269,7 +274,7 @@ FishingTranslations["enUS"] = {
 	ROLE_TRANSLATE_FRFR = "French translation",
 	ROLE_TRANSLATE_ESES = "Spanish translation",
 	ROLE_TRANSLATE_KOKR = "Korean translation",
-	ROLE_TRANSLATE_RURU = "Russion translation",
+	ROLE_TRANSLATE_RURU = "Russian translation",
 	ROLE_TRANSLATE_PTBR = "Brazilian Portuguese translation",
 	ROLE_HELP_BUGS = "Bug fixes and coding help",
 	ROLE_HELP_SUGGESTIONS = "Feature suggestions",

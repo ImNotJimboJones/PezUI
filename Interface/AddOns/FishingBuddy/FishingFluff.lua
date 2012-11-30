@@ -98,6 +98,9 @@ local function GetPetsUpdate(self, ...)
 		table.sort(ourpets, function(a, b) return a.name < b.name; end);
 		self.ready = true;
 		self:Hide();
+		if (getpetsframe.callme) then
+			getpetsframe.callme();
+		end
 	else
 		self.index = finish + 1;
 	end
@@ -105,7 +108,7 @@ end
 
 getpetsframe:SetScript("OnUpdate", GetPetsUpdate);
 
-local function GetOurPets()
+local function GetOurPets(CallWhenDone)
 	if (getpetsframe.ready) then
 		local isWild = false;
 		
@@ -121,6 +124,7 @@ local function GetOurPets()
 		getpetsframe.index = 1;
 		getpetsframe.numPets = numPets;
 		getpetsframe.ready = false;
+		getpetsframe.callme = CallWhenDone;
 		getpetsframe:Show();
 	end	
 end
@@ -138,13 +142,7 @@ local function CheckedOurPets()
 	end
 end
 
-local function UpdateChosenPets()
-	local settingpets = GetSetting(PETSETTING);
-
-	if (#ourpets == 0) then
-		GetOurPets();
-	end
-	
+local function DoUpdateChosenPets()
 	chosenpets = {};
 	chosenlist = {};
 	numchosen = 0;
@@ -170,6 +168,17 @@ local function UpdateChosenPets()
 		end
 	end
 	CheckedOurPets();
+	FishingPets_UpdateMenu();
+end
+
+local function UpdateChosenPets()
+	local settingpets = GetSetting(PETSETTING);
+
+	if (#ourpets == 0) then
+		GetOurPets(DoUpdateChosenPets);
+	else
+		DoUpdateChosenPets()
+	end
 end
 
 local FluffEvents = {};
@@ -372,7 +381,6 @@ function FishingPetsButton_OnClick(self)
 		for idx=1,3 do
 			petnames[idx].checked = (petnames[idx].cID == self.cID);
 		end
-		FishingPetsMenu_Update();
 	else
 		-- toggle
 		if (chosenpets[self.cID] == 1) then
@@ -413,9 +421,8 @@ function FishingPetsButton_OnClick(self)
 			petnames[idx].checked = (petnames[idx].cID == petsetting);
 		end
 		FishingBuddy.SetSetting(PETSETTING, petsetting);
-		UpdateChosenPets();
 		UpdateMenuText(petsetting);
-		FishingPetsMenu_Update();
+		UpdateChosenPets();
 	end
 end
 
@@ -478,6 +485,14 @@ FishingItems[85500] = {
 			return ( not IsMounted() and 
 				not FL:HasBuff(GetSpellInfo(116032)) and
 				not FL:HasBuff(GetSpellInfo(119700)));
+		end,
+	check = function(buff)
+			local name, _, _, _, _, _, et, _, _, _, _ = UnitBuff("player", buff);
+			et = (et or 0) - GetTime();
+			if (not name or et <= 60) then
+				return true;
+			end
+			--return nil;
 		end
 };
 FishingItems[88535] = {
@@ -546,8 +561,6 @@ local FluffOptions = {
 		["setup"] =
 			function()
 				UpdateChosenPets();
-				FishingPets_UpdateMenu();
-				FishingPetsMenuHolder:Hide();
 			end,
 		["visible"] =
 			function()
@@ -588,9 +601,6 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetFrame:SetScript("OnHide", FishingPetFrame_OnHide);
 	FishingPetFrameButton:SetScript("OnClick", FishingPetsMenu_Toggle);
 	
-	UpdateChosenPets();
-	CheckedOurPets();
-	
 	local menuwidth = 0;
 	for _,text in pairs( { NONE, ALL, PET_FISHING, PET_PAPERDOLL } ) do
 		FishingPetFrameText:SetText(text);
@@ -602,7 +612,8 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetsMenu:SetWidth(menuwidth + 8);
 	FishingPetsMenu:SetHeight(FLUFF_DISPLAYED_PETS * FLUFF_LINE_HEIGHT + 1);
 	HybridScrollFrame_CreateButtons(FishingPetsMenu, "FishingPetButtonTemplate");
-	FishingPets_UpdateMenu();
+	
+	UpdateChosenPets();
 
 	FishingPetFrameLabel:SetText(PET_TYPE_PET..": ");
 	
@@ -612,17 +623,15 @@ FluffEvents["VARIABLES_LOADED"] = function(started)
 	FishingPetsMenu:SetWidth(210);
 	FishingPetsMenuHolder:ClearAllPoints();
 	FishingPetsMenuHolder:SetPoint("TOPLEFT", FishingPetFrameButton, "BOTTOMLEFT", 0, 8);
-	FishingPetsMenuHolder:SetParent(FishingOptionsFrame);
+	FishingPetsMenuHolder:Hide();
 end
 
 FluffEvents["PET_STABLE_UPDATE"] = function()
-	GetOurPets();
-	CheckedOurPets();
+	ourpets = {};
 end
 
 FluffEvents["SPELLS_CHANGED"] = function()
-	GetOurPets();
-	CheckedOurPets();
+	ourpets = {};
 end
 
 FishingBuddy.RegisterHandlers(FluffEvents);

@@ -1,4 +1,4 @@
--- $Id: wrathofthelichking.lua 3875 2012-10-11 01:46:41Z Dynaletik $
+-- $Id: wrathofthelichking.lua 3993 2012-11-22 08:39:14Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
@@ -49,6 +49,7 @@ local moduleName = "AtlasLootWotLK"
 ---- Alliance Vanguard
 ---- Argent Crusade
 ---- Argent Tournament Factions
+---- Explorers' League / Warsong Offensive
 ---- Frenzyheart Tribe
 ---- Horde Expedition
 ---- Kirin Tor
@@ -62,7 +63,7 @@ local moduleName = "AtlasLootWotLK"
 --- PvP
 ---- Armor Sets
 ---- Level 80 Epic Non-Sets
----- Level 80 PVP Weapons
+---- Level 80 PvP Weapons
 ---- World PvP - Wintergrasp
 ---- World PvP - Grizzly Hills: Venture Bay
 --- Sets & Collections
@@ -92,7 +93,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35572, "", "=q3=Reinforced Velvet Helm", "=ds=#s1#, #a1#", "", "28%"};
 				{ 3, 35571, "", "=q3=Dragon Stabler's Gauntlets", "=ds=#s9#, #a3#", "", "31%"};
 				{ 4, 35570, "", "=q3=Keleseth's Blade of Evocation", "=ds=#h3#, #w4#", "", "28%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1919#"};
 				{ 17, 37180, "", "=q3=Battlemap Hide Helm", "=ds=#s1#, #a2#", "", "21%"};
 				{ 18, 37178, "", "=q3=Strategist's Belt", "=ds=#s10#, #a4#", "", "22%"};
 				{ 19, 37179, "", "=q3=Infantry Assault Blade", "=ds=#h1#, #w10#", "", "21%"};
@@ -200,7 +201,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35599, "", "=q3=Gauntlets of Serpent Scales", "=ds=#s9#, #a3#", "", "31%"};
 				{ 3, 35600, "", "=q3=Cleated Ice Boots", "=ds=#s12#, #a3#", "", "29%" };
 				{ 4, 35598, "", "=q3=Tome of the Lore Keepers", "=ds=#s15#", "", "29%" };
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2037#"};
 				{ 17, 37149, "", "=q3=Helm of Anomalus", "=ds=#s1#, #a2#", "", "21%"};
 				{ 18, 37144, "", "=q3=Hauberk of the Arcane Wraith", "=ds=#s5#, #a3#", "", "22%"};
 				{ 19, 37150, "", "=q3=Rift Striders", "=ds=#s12#, #a4#", "", "22%"};
@@ -220,7 +221,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35605, "", "=q3=Belt of Draconic Runes", "=ds=#s10#, #a2#", "", "29%" };
 				{ 3, 35604, "", "=q3=Insulating Bindings", "=ds=#s8#, #a4#", "", "29%" };
 				{ 4, 35617, "", "=q3=Wand of Shimmering Scales", "=ds=#w12#", "", "28%" };
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2150#"};
 				{ 17, 37139, "", "=q3=Spaulders of the Careless Thief", "=ds=#s3#, #a2#", "", "21%"};
 				{ 18, 37138, "", "=q3=Bands of Channeled Energy", "=ds=#s8#, #a3#", "", "21%" };
 				{ 19, 37135, "", "=q3=Arcane-Shielded Helm", "=ds=#s1#, #a4#", "", "21%" };
@@ -255,7 +256,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35596, "", "=q3=Attuned Crystalline Boots", "=ds=#s12#, #a1#", "", "29%"};
 				{ 3, 35595, "", "=q3=Glacier Sharpened Vileblade", "=ds=#h1#, #w4#", "", "30%"};
 				{ 4, 35597, "", "=q3=Band of Glittering Permafrost", "=ds=#s13#", "", "30%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2036#"};
 				{ 17, 37172, "", "=q4=Gloves of Glistening Runes", "=ds=#s9#, #a1#", "", "19%"};
 				{ 18, 37170, "", "=q4=Interwoven Scale Bracers", "=ds=#s8#, #a3#", "", "20%"};
 				{ 19, 37171, "", "=q4=Flame-Bathed Steel Girdle", "=ds=#s10#, #a4#", "", "19%"};
@@ -285,7 +286,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 35656, "", "=q3=Aura Focused Gauntlets", "=ds=#s9#, #a4#", "", "32%"};
 				{ 4, 35655, "", "=q3=Cobweb Machete", "=ds=#h1#, #w4#", "", "30%"};
 				{ 6, 74616, "", "=q1=The Gatewatcher's Talisman", "=ds=#m3#", "", "100%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1296#"};
 				{ 17, 37218, "", "=q3=Stone-Worn Footwraps", "=ds=#s12#, #a1#", "", "21%"};
 				{ 18, 37219, "", "=q3=Custodian's Chestpiece", "=ds=#s5#, #a2#", "", "21%"};
 				{ 19, 37217, "", "=q3=Golden Limb Bands", "=ds=#s8#, #a4#", "", "22%"};
@@ -305,7 +306,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35660, "", "=q3=Spinneret Epaulets", "=ds=#s3#, #a2#", "", "30%"};
 				{ 3, 35659, "", "=q3=Treads of Aspiring Heights", "=ds=#s12#, #a2#", "", "30%"};
 				{ 4, 35658, "", "=q3=Life-Staff of the Web Lair", "=ds=#w9#", "", "29%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1297#"};
 				{ 17, 37222, "", "=q3=Egg Sac Robes", "=ds=#s5#, #a1#", "", "21%"};
 				{ 18, 37230, "", "=q3=Grotto Mist Gloves", "=ds=#s9#, #a2#", "", "21%"};
 				{ 19, 37221, "", "=q3=Hollowed Mandible Legplates", "=ds=#s11#, #a3#", "", "20%"};
@@ -326,7 +327,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 35662, "", "=q3=Wing Cover Girdle", "=ds=#s10#, #a3#", "", "29%"};
 				{ 4, 35661, "", "=q3=Signet of Arachnathid Command", "=ds=#s13#", "", "28%"};
 				{ 6, 43411, "", "=q1=Anub'arak's Broken Husk", "=ds=#m3#"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1860#"};
 				{ 17, 37242, "", "=q4=Sash of the Servant", "=ds=#s10#, #a1#", "", "19%"};
 				{ 18, 37240, "", "=q4=Flamebeard's Bracers", "=ds=#s8#, #a4#", "", "19%"};
 				{ 19, 37241, "", "=q4=Ancient Aligned Girdle", "=ds=#s10#, #a4#", "", "19%"};
@@ -370,7 +371,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35607, "", "=q3=Ahn'kahar Handwraps", "=ds=#s9#, #a2#", "", "30%"};
 				{ 3, 35608, "", "=q3=Crawler-Emblem Belt", "=ds=#s10#, #a4#", "", "29%"};
 				{ 4, 35606, "", "=q3=Blade of Nadox", "=ds=#h1#, #w4#", "", "31%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2038#"};
 				{ 17, 37594, "", "=q3=Elder Headpiece", "=ds=#s1#, #a1#", "", "22%"};
 				{ 18, 37593, "", "=q3=Sprinting Shoulderpads", "=ds=#s3#, #a2#", "", "23%"};
 				{ 19, 37592, "", "=q3=Brood Plague Helmet", "=ds=#s1#, #a3#", "", "22%"};
@@ -425,7 +426,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 43278, "", "=q3=Cloak of the Darkcaster", "=ds=#s4#", "", "30%"};
 				{ 3, 43279, "", "=q3=Battlechest of the Twilight Cult", "=ds=#s5#, #a4#", "", "29%"};
 				{ 4, 43277, "", "=q3=Jedoga's Greatring", "=ds=#s13#", "", "28%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2056#"};
 				{ 17, 43283, "", "=q3=Subterranean Waterfall Shroud", "=ds=#s4#", "", "21%"};
 				{ 18, 43280, "", "=q3=Faceguard of the Hammer Clan", "=ds=#s1#, #a4#", "", "21%"};
 				{ 19, 43282, "", "=q3=Shadowseeker's Pendant", "=ds=#s2#", "", "22%"};
@@ -445,7 +446,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35612, "", "=q3=Mantle of Echoing Bats", "=ds=#s3#, #a1#", "", "29%"};
 				{ 3, 35613, "", "=q3=Pyramid Embossed Belt", "=ds=#s10#, #a2#", "", "31%"};
 				{ 4, 35614, "", "=q3=Volazj's Sabatons", "=ds=#s12#, #a4#", "", "31%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1862#"};
 				{ 17, 37622, "", "=q4=Skirt of the Old Kingdom", "=ds=#s11#, #a1#", "", "19%"};
 				{ 18, 37623, "", "=q4=Fiery Obelisk Handguards", "=ds=#s9#, #a3#", "", "19%"};
 				{ 19, 37620, "", "=q4=Bracers of the Herald", "=ds=#s8#, #a4#", "", "18%"};
@@ -492,7 +493,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35620, "", "=q3=Berserker's Horns", "=ds=#s1#, #a2#", "", "33%"};
 				{ 3, 35619, "", "=q3=Infection Resistant Legguards", "=ds=#s11#, #a3#", "", "28%"};
 				{ 4, 35618, "", "=q3=Troll Butcherer", "=ds=#h2#, #w10#", "", "30%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2151#"};
 				{ 17, 37715, "", "=q3=Cowl of the Dire Troll", "=ds=#s1#, #a1#", "", "21%"};
 				{ 18, 37714, "", "=q3=Batrider's Cord", "=ds=#s10#, #a2#", "", "22%"};
 				{ 19, 37717, "", "=q3=Legs of Physical Regeneration", "=ds=#s11#, #a4#", "", "22%"};
@@ -512,7 +513,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35632, "", "=q3=Robes of Novos", "=ds=#s5#, #a1#", "", "32%"};
 				{ 3, 35631, "", "=q3=Crystal Pendant of Warding", "=ds=#s2#", "", "28%"};
 				{ 4, 35630, "", "=q3=Summoner's Stone Gavel", "=ds=#h1#, #w6#", "", "30%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2057#"};
 				{ 17, 37722, "", "=q3=Breastplate of Undeath", "=ds=#s5#, #a4#", "", "22%"};
 				{ 18, 37718, "", "=q3=Temple Crystal Fragment", "=ds=#s15#", "", "21%"};
 				{ 19, 37721, "", "=q3=Cursed Lich Blade", "=ds=#h3#, #w10#", "", "22%"};
@@ -532,7 +533,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 35634, "", "=q3=Scabrous-Hide Helm", "=ds=#s1#, #a2#", "", "28%"};
 				{ 4, 35633, "", "=q3=Staff of the Great Reptile", "=ds=#w9#", "", "31%"};
 				{ 6, 35633, "", "=q1=King Dred's Tooth", "=ds=#m3#", "", "100%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2039#"};
 				{ 17, 37725, "", "=q3=Savage Wound Wrap", "=ds=#s8#, #a1#", "", "21%"};
 				{ 18, 37724, "", "=q3=Handler's Arm Strap", "=ds=#s8#, #a2#", "", "21%"};
 				{ 19, 37726, "", "=q3=King Dred's Helm", "=ds=#s1#, #a3#", "", "21%"};
@@ -618,7 +619,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 1, 0, "INV_Box_01", "=q6=#j1#", ""};
 				{ 2, 43353, "", "=q3=Void Sentry Legplates", "=ds=#s11#, #a4#", "", "44%"};
 				{ 3, 43358, "", "=q3=Pendant of Shadow Beams", "=ds=#s2#", "", "41%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2153#"};
 				{ 17, 43403, "", "=q3=Shroud of Darkness", "=ds=#s1#, #a2#", "", "28%"};
 				{ 18, 43402, "", "=q3=The Obliterator Greaves", "=ds=#s12#, #a4#", "", "28%"};
 				{ 19, 43404, "", "=q3=Zuramat's Necklace", "=ds=#s2#", "", "28%"};
@@ -654,7 +655,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 1, 0, "INV_Box_01", "=q6=#j1#", ""};
 				{ 2, 35647, "", "=q3=Handguards of Rapid Pursuit", "=ds=#s9#, #a2#", "", "44%"};
 				{ 3, 35643, "", "=q3=Spaulders of Ichoron", "=ds=#s3#, #a4#", "", "40%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2041#"};
 				{ 17, 43401, "", "=q3=Water-Drenched Robe", "=ds=#s5#, #a1#", "", "28%"};
 				{ 18, 37862, "", "=q3=Gauntlets of the Water Revenant", "=ds=#s9#, #a4#", "", "28%"};
 				{ 19, 37869, "", "=q3=Globule Signet", "=ds=#s13#", "", "28%"};
@@ -709,7 +710,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35650, "", "=q3=Boots of the Portal Guardian", "=ds=#s12#, #a3#", "", "31%"};
 				{ 3, 35651, "", "=q3=Plate Claws of the Dragon", "=ds=#s9#, #a4#", "", "31%"};
 				{ 4, 35649, "", "=q3=Jailer's Baton", "=ds=#w9#", "", "31%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1816#"};
 				{ 17, 37884, "", "=q4=Azure Cloth Bindings", "=ds=#s8#, #a1#", "", "20%"};
 				{ 18, 37886, "", "=q4=Handgrips of the Savage Emissary", "=ds=#s9#, #a3#", "", "21%"};
 				{ 19, 43500, "", "=q4=Bolstered Legplates", "=ds=#s11#, #a4#", "", "20%"};
@@ -761,7 +762,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35584, "", "=q3=Embroidered Gown of Zul'Drak", "=ds=#s5#, #a1#", "", "28%"};
 				{ 3, 35585, "", "=q3=Cannibal's Legguards", "=ds=#s11#, #a3#", "", "29%"};
 				{ 4, 35583, "", "=q3=Witch Doctor's Wildstaff", "=ds=#w9#", "", "28%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2058#"};
 				{ 17, 37629, "", "=q3=Slithering Slippers", "=ds=#s12#, #a1#", "", "21%"};
 				{ 18, 37628, "", "=q3=Slad'ran's Coiled Cord", "=ds=#s10#, #a3#", "", "20%"};
 				{ 19, 37627, "", "=q3=Snake Den Spaulders", "=ds=#s3#, #a4#", "", "20%"};
@@ -802,7 +803,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35588, "", "=q3=Forlorn Breastplate of War", "=ds=#s5#, #a4#", "", "29%"};
 				{ 3, 35589, "", "=q3=Arcane Focal Signet", "=ds=#s13#", "", "29%"};
 				{ 4, 35587, "", "=q3=Frozen Scepter of Necromancy", "=ds=#h3#, #w6#", "", "30%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2040#"};
 				{ 17, 37630, "", "=q3=Shroud of Moorabi", "=ds=#s4#", "", "21%"};
 				{ 18, 37633, "", "=q3=Ground Tremor Helm", "=ds=#s1#, #a4#", "", "22%"};
 				{ 19, 37632, "", "=q3=Mojo Frenzy Greaves", "=ds=#s12#, #a4#", "", "22%"};
@@ -837,7 +838,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 43305, "", "=q3=Shroud of Akali", "=ds=#s4#", "", "28%"};
 				{ 3, 43309, "", "=q3=Amulet of the Stampede", "=ds=#s2#", "", "31%"};
 				{ 4, 43306, "", "=q3=Gal'darah's Signet", "=ds=#s13#", "", "30%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2152#"};
 				{ 17, 37643, "", "=q4=Sash of Blood Removal", "=ds=#s10#, #a2#", "", "19%"};
 				{ 18, 37644, "", "=q4=Gored Hide Legguards", "=ds=#s11#, #a2#", "", "19%"};
 				{ 19, 37645, "", "=q4=Horn-Tipped Gauntlets", "=ds=#s9#, #a4#", "", "19%"};
@@ -885,7 +886,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 38613, "", "=q3=Chain of Fiery Orbs", "=ds=#s2#", "", "29%"};
 				{ 4, 38611, "", "=q3=Ringlet of Repose", "=ds=#s13#", "", "29%"};
 				{ 6, 74830, "", "=q1=Crystal Tear of Grief", "=ds=#m3#", "", "100%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1866#"};
 				{ 17, 38616, "", "=q3=Maiden's Girdle", "=ds=#s10#, #a2#", "", "21%"};
 				{ 18, 38615, "", "=q3=Lightning-Charged Gloves", "=ds=#s9#, #a3#", "", "21%"};
 				{ 19, 38617, "", "=q3=Woeful Band", "=ds=#s13#", "", "22%"};
@@ -924,7 +925,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35677, "", "=q3=Cosmos Vestments", "=ds=#s5#, #a2#", "", "25%"};
 				{ 3, 35676, "", "=q3=Constellation Leggings", "=ds=#s11#, #a2#", "", "26%"};
 				{ 4, 35675, "", "=q3=Linked Armor of the Sphere", "=ds=#s5#, #a3#", "", "24%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2154#"};
 				{ 17, 37655, "", "=q3=Mantle of the Tribunal", "=ds=#s3#, #a1#", "", "16%"};
 				{ 18, 37656, "", "=q3=Raging Construct Bands", "=ds=#s8#, #a3#", "", "16%"};
 				{ 19, 37654, "", "=q3=Sabatons of the Ages", "=ds=#s12#, #a3#", "", "14%"};
@@ -944,7 +945,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 35679, "", "=q3=Static Cowl", "=ds=#s1#, #a1#", "", "28%"};
 				{ 3, 35678, "", "=q3=Ironshaper's Legplates", "=ds=#s11#, #a4#", "", "28%"};
 				{ 4, 35680, "", "=q3=Amulet of Wills", "=ds=#s2#", "", "29%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2155#"};
 				{ 17, 37669, "", "=q4=Leggings of the Stone Halls", "=ds=#s11#, #a3#", "", "18%"};
 				{ 18, 37668, "", "=q4=Bands of the Stoneforge", "=ds=#s8#, #a4#", "", "18%"};
 				{ 19, 37670, "", "=q4=Sjonnir's Girdle", "=ds=#s10#, #a4#", "", "18%"};
@@ -992,7 +993,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 2, 36982, "", "=q3=Mantle of Electrical Charges", "=ds=#s3#, #a1#", "", "22%"};
 				{ 3, 36979, "", "=q3=Bjarngrim Family Signet", "=ds=#s13#", "", "22%"};
 				{ 4, 36980, "", "=q3=Hewn Sparring Quarterstaff", "=ds=#w9#", "", "22%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1834#"};
 				{ 17, 37825, "", "=q3=Traditionally Dyed Handguards", "=ds=#s9#, #a1#", "", "21%"};
 				{ 18, 37818, "", "=q3=Patroller's War-Kilt", "=ds=#s11#, #a3#", "", "21%"};
 				{ 19, 37814, "", "=q3=Iron Dwarf Smith Pauldrons", "=ds=#s3#, #a4#", "", "21%"};
@@ -1013,7 +1014,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 36985, "", "=q3=Volkhan's Hood", "=ds=#s1#, #a1#", "", "23%"};
 				{ 4, 36986, "", "=q3=Kilt of Molten Golems", "=ds=#s11#, #a3#", "", "22%"};
 				{ 5, 36984, "", "=q3=Eternally Folded Blade", "=ds=#h1#, #w10#", "", "22%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2042#"};
 				{ 17, 37840, "", "=q3=Shroud of Reverberation", "=ds=#s4#", "", "21%"};
 				{ 18, 37843, "", "=q3=Giant-Hair Woven Gloves", "=ds=#s9#, #a1#", "", "21%"};
 				{ 19, 37842, "", "=q3=Belt of Vivacity", "=ds=#s10#, #a2#", "", "21%"};
@@ -1061,7 +1062,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 9, 36989, "", "=q3=Ancient Measuring Rod", "=ds=#w12#", "", "21%"};
 				{ 10, 41799, "", "=q3=Design: Eternal Earthsiege Diamond", "=ds=#p12# (420)", "", "11%"};
 				{ 12, 43151, "", "=q1=Loken's Tongue", "=ds=#m3#"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1867#"};
 				{ 17, 37854, "", "=q4=Woven Bracae Leggings", "=ds=#s11#, #a1#", "", "18%"};
 				{ 18, 37853, "", "=q4=Advanced Tooled-Leather Bands", "=ds=#s8#, #a2#", "", "18%"};
 				{ 19, 37855, "", "=q4=Mail Girdle of the Audient Earth", "=ds=#s10#, #a3#", "", "19%"};
@@ -1225,7 +1226,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 37040, "", "=q3=Svala's Bloodied Shackles", "=ds=#s8#, #a4#", "", "23%"};
 				{ 4, 37037, "", "=q3=Ritualistic Athame", "=ds=#h1#, #w4#", "", "22%"};
 				{ 5, 37038, "", "=q3=Brazier Igniter", "=ds=#w12#", "", "21%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2043#"};
 				{ 17, 37370, "", "=q3=Cuffs of the Trussed Hall", "=ds=#s8#, #a1#", "", "21%"};
 				{ 18, 37369, "", "=q3=Sorrowgrave's Breeches", "=ds=#s11#, #a1#", "", "22%"};
 				{ 19, 37368, "", "=q3=Silent Spectator Shoulderpads", "=ds=#s3#, #a2#", "", "22%"};
@@ -1267,7 +1268,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 37057, "", "=q3=Drake Rider's Tunic", "=ds=#s5#, #a2#", "", "23%"};
 				{ 4, 37056, "", "=q3=Harpooner's Striders", "=ds=#s12#, #a4#", "", "22%"};
 				{ 5, 37053, "", "=q3=Amulet of Deflected Blows", "=ds=#s2#", "", "20%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1873# / #ACHIEVEMENTID:2156#"}; ---2nd achievement won't show.
 				{ 17, 44151, "", "=q4=Reins of the Blue Proto-Drake", "=ds=#e27#", "", "1%"};
 				{ 18, 37389, "", "=q3=Crenelation Leggings", "=ds=#s11#, #a2#", "", "21%"};
 				{ 19, 37379, "", "=q3=Skadi's Iron Belt", "=ds=#s10#, #a4#", "", "22%"};
@@ -1294,7 +1295,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 8, 37065, "", "=q3=Ymiron's Blade", "=ds=#h1#, #w10#", "", "20%"};
 				{ 9, 37061, "", "=q3=Tor's Crest", "=ds=#w8#", "", "23%"};
 				{ 10, 41797, "", "=q3=Design: Austere Earthsiege Diamond", "=ds=#p12# (420)", "", "10%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:2157#"};
 				{ 17, 37408, "", "=q4=Girdle of Bane", "=ds=#s10#, #a1#", "", "19%"};
 				{ 18, 37409, "", "=q4=Gilt-Edged Leather Gauntlets", "=ds=#s9#, #a2#", "", "19%"};
 				{ 19, 37407, "", "=q4=Sovereign's Belt", "=ds=#s10#, #a3#", "", "20%"};
@@ -1411,7 +1412,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 8, 36962, "", "=q3=Wyrmclaw Battleaxe", "=ds=#h2#, #w1#", "", "17%"};
 				{ 9, 36975, "", "=q3=Malygos's Favor", "=ds=#w9#", "", "17%"};
 				{ 10, 41798, "", "=q3=Design: Bracing Earthsiege Diamond", "=ds=#p12# (420)", "", "7%"};
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:1868#"};
 				{ 17, 37361, "", "=q4=Cuffs of Winged Levitation", "=ds=#s8#, #a1#", "", "14%"};
 				{ 18, 37363, "", "=q4=Gauntlets of Dragon Wrath", "=ds=#s9#, #a4#", "", "13%"};
 				{ 19, 37362, "", "=q4=Leggings of Protective Auras", "=ds=#s11#, #a4#", "", "13%"};
@@ -3351,6 +3352,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 22, 39281, "", "=q4=Infection Repulser", "=ds=#h3#, #w6#", "", "19%"};
 				{ 23, 39344, "", "=q4=Slayer of the Lifeless", "=ds=#h1#, #w10#", "", "10%"};
 				{ 24, 39394, "", "=q4=Charmed Cierge", "=ds=#w9#", "", "0.44%"};
+				{ 26, 93029, "", "=q3=Gluth's Bone", "=ds=#e13#", ""};
 			};
 			{
 				{ 1, 40622, "", "=q4=Spaulders of the Lost Conqueror", "=ds=#e15#", "", "29%"};
@@ -3405,6 +3407,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 9, 39716, "", "=q4=Shield of Assimilation", "=ds=#w8#", "", "24%"};
 				{ 10, 40265, "", "=q4=Arrowsong", "=ds=#w2#", "", "19%"};
 				{ 11, 40346, "", "=q4=Final Voyage", "=ds=#w3#", "", "1%"};
+				{ 13, 93029, "", "=q3=Gluth's Bone", "=ds=#e13#", ""};
 				{ 16, 40637, "", "=q4=Mantle of the Lost Conqueror", "=ds=#e15#", "", "57%"};
 				{ 17, 40638, "", "=q4=Mantle of the Lost Protector", "=ds=#e15#", "", "58%"};
 				{ 18, 40639, "", "=q4=Mantle of the Lost Vanquisher", "=ds=#e15#", "", "76%"};
@@ -3567,6 +3570,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 6, 39232, "", "=q4=Pendant of Lost Vocations", "=ds=#s2#", "", "10%"};
 				{ 7, 39231, "", "=q4=Timeworn Silken Band", "=ds=#s13#", "", "10%"};
 				{ 8, 39229, "", "=q4=Embrace of the Spider", "=ds=#s14#", "", "11%"};
+				{ 10, 93030, "", "=q3=Dusty Clutch of Eggs", "=ds=#e13#", ""};
 				{ 16, 39226, "", "=q4=Maexxna's Femur", "=ds=#h1#, #w6#", "", "10%"};
 				{ 17, 39221, "", "=q4=Wraith Spear", "=ds=#w7#", "", "10%"};
 				{ 18, 39233, "", "=q4=Aegis of Damnation", "=ds=#w8#", "", "10%"};
@@ -3596,8 +3600,9 @@ local moduleName = "AtlasLootWotLK"
 				{ 21, 40258, "", "=q4=Forethought Talisman", "=ds=#s14#", "", "11%"};
 				{ 22, 40256, "", "=q4=Grim Toll", "=ds=#s14#", "", "11%"};
 				{ 23, 39766, "", "=q4=Matriarch's Spawn", "=ds=#s15#", "", "19%"};
-				{ 25, 39763, "", "=q4=Wraith Strike", "=ds=#h3#, #w13#", "", "9%"};
+				{ 25, 39763, "", "=q4=Wraith Strike", "=ds=#h1#, #w13#", "", "9%"};
 				{ 26, 39758, "", "=q4=The Jawbone", "=ds=#h2#, #w6#", "", "9%"};
+				{ 28, 93030, "", "=q3=Dusty Clutch of Eggs", "=ds=#e13#", ""};
 			};
 		};
 		info = {
@@ -3722,8 +3727,8 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 40352, "", "=q4=Leggings of Voracious Shadows", "=ds=#s11#, #a3#", "", "10%"};
 				{ 4, 40347, "", "=q4=Zeliek's Gauntlets", "=ds=#s9#, #a4#", "", "8%"};
 				{ 6, 40345, "", "=q4=Broken Promise", "=ds=#h1#, #w10#", "", "10%"};
-				{ 8, 40343, "", "=q4=Armageddon", "=ds=#h2#, #w10#", "", "9%"};
-				{ 7, 40348, "", "=q4=Damnation", "=ds=#w9#", "", "10%"};
+				{ 7, 40343, "", "=q4=Armageddon", "=ds=#h2#, #w10#", "", "9%"};
+				{ 8, 40348, "", "=q4=Damnation", "=ds=#w9#", "", "10%"};
 				{ 9, 40346, "", "=q4=Final Voyage", "=ds=#w3#", "", "10%"};
 				{ 16, 40350, "", "=q4=Urn of Lost Memories", "=ds=#s15#", "", "10%"};
 				{ 18, 40625, "", "=q4=Breastplate of the Lost Conqueror", "=ds=#e15#", "", "30%"};
@@ -3843,6 +3848,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 3, 39258, "", "=q4=Legplates of Inescapable Death", "=ds=#s11#, #a4#", "", "10%"};
 				{ 4, 39257, "", "=q4=Loatheb's Shadow", "=ds=#s14#", "", "10%"};
 				{ 5, 39256, "", "=q4=Sulfur Stave", "=ds=#w9#", "", "10%"};
+				{ 7, 93032, "", "=q3=Blighted Spore", "=ds=#e13#", ""};
 				{ 16, 40622, "", "=q4=Spaulders of the Lost Conqueror", "=ds=#e15#", "", "29%"};
 				{ 17, 40623, "", "=q4=Spaulders of the Lost Protector", "=ds=#e15#", "", "30%"};
 				{ 18, 40624, "", "=q4=Spaulders of the Lost Vanquisher", "=ds=#e15#", "", "38%"};
@@ -3857,6 +3863,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 5, 40242, "", "=q4=Grotesque Handgrips", "=ds=#s9#, #a3#", "", "19%"};
 				{ 6, 40241, "", "=q4=Girdle of Unity", "=ds=#s10#, #a4#", "", "10%"};
 				{ 7, 40240, "", "=q4=Greaves of Turbulence", "=ds=#s11#, #a4#", "", "9%"};
+				{ 9, 93032, "", "=q3=Blighted Spore", "=ds=#e13#", ""};
 				{ 16, 40244, "", "=q4=The Impossible Dream", "=ds=#h3#, #w6#", "", "10%"};
 				{ 17, 40239, "", "=q4=The Hand of Nerub", "=ds=#h4#, #w13#", "", "19%"};
 				{ 18, 40245, "", "=q4=Fading Glow", "=ds=#w12#", "", "10%"};
@@ -3925,7 +3932,7 @@ local moduleName = "AtlasLootWotLK"
 			{
 				{ 1, 39425, "", "=q4=Cloak of the Dying", "=ds=#s4#", "", "19%"};
 				{ 2, 39421, "", "=q4=Gem of Imprisoned Vassals", "=ds=#s2#", "", "19%"};
-				{ 3, 39416, "", "=q4=Kel'Thuzad's Reach", "=ds=#h3#, #w13#", "", "18%"};
+				{ 3, 39416, "", "=q4=Kel'Thuzad's Reach", "=ds=#h1#, #w13#", "", "18%"};
 				{ 4, 39424, "", "=q4=The Soulblade", "=ds=#h3#, #w4#", "", "19%"};
 				{ 5, 39420, "", "=q4=Anarchy", "=ds=#h1#, #w4#", "", "18%"};
 				{ 6, 39417, "", "=q4=Death's Bite", "=ds=#h2#, #w1#", "", "18%"};
@@ -3943,10 +3950,10 @@ local moduleName = "AtlasLootWotLK"
 				{ 1, 40405, "", "=q4=Cape of the Unworthy Wizard", "=ds=#s4#", "", "18%"};
 				{ 2, 40403, "", "=q4=Drape of the Deadly Foe", "=ds=#s4#", "", "18%"};
 				{ 3, 40398, "", "=q4=Leggings of Mortal Arrogance", "=ds=#s11#, #a1#", "", "18%"};
-				{ 5, 40383, "", "=q4=Calamity's Grasp", "=ds=#h3#, #w13#", "", "18%"};
-				{ 6, 40396, "", "=q4=The Turning Tide", "=ds=#h3#, #w10#", "", "18%"};
-				{ 7, 40395, "", "=q4=Torch of Holy Fire", "=ds=#h3#, #w6#", "", "18%"};
-				{ 8, 40386, "", "=q4=Sinister Revenge", "=ds=#h1#, #w4#", "", "17%"};
+				{ 5, 40383, "", "=q4=Calamity's Grasp", "=ds=#h1#, #w13#", "", "18%"};
+				{ 6, 40386, "", "=q4=Sinister Revenge", "=ds=#h1#, #w4#", "", "17%"};
+				{ 7, 40396, "", "=q4=The Turning Tide", "=ds=#h3#, #w10#", "", "18%"};
+				{ 8, 40395, "", "=q4=Torch of Holy Fire", "=ds=#h3#, #w6#", "", "18%"};
 				{ 9, 40402, "", "=q4=Last Laugh", "=ds=#h1#, #w1#", "", "18%"};
 				{ 10, 40384, "", "=q4=Betrayer of Humanity", "=ds=#h2#, #w1#", "", "17%"};
 				{ 11, 40388, "", "=q4=Journey's End", "=ds=#w9#", "", "18%"};
@@ -7437,6 +7444,26 @@ local moduleName = "AtlasLootWotLK"
 		};
 	}
 
+		---------------------------------------------
+		--- Explorers' League / Warsong Offensive ---
+		---------------------------------------------
+
+	AtlasLoot_Data["ExplorersLeagueWarsongOffensive"] = {
+		["Normal"] = {
+			{
+				{ 2, 43462, "", "=q1=Airy Pale Ale", "=ds=#e18#", "#RELICULDUAR:10#"};
+				{ 3, 43473, "", "=q1=Drakefire Chile Ale", "=ds=#e18#", "#RELICULDUAR:2#"};
+				{ 4, 43499, "", "=q1=Iron Boot Flask", "=ds=#e25#", "#RELICULDUAR:10#"};
+				{ 5, 43472, "", "=q1=Snowfall Lager", "=ds=#e18#", "#RELICULDUAR:2#"};
+				{ 6, 43470, "", "=q1=Worg Tooth Oatmeal Stout", "=ds=#e18#", "#RELICULDUAR:10#"};
+			};
+		};
+		info = {
+			name = BabbleFaction["Explorers' League"].." / "..BabbleFaction["Warsong Offensive"],
+			module = moduleName, menu = "REPMENU_WOTLK",
+		};
+	}
+
 		-------------------------
 		--- Frenzyheart Tribe ---
 		-------------------------
@@ -7459,7 +7486,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 14, 44717, "", "=q1=Disgusting Jar", "=ds="};
 				{ 16, 0, "INV_Misc_Rune_14", "=q6=#r5#", ""};
 				{ 17, 44073, "", "=q1=Frenzyheart Insignia of Fury", "=ds=#s14#"};
-				{ 19, 0, "INV_Potion_139", "=q6="..AL["Ripe Disgusting Jar"], ""};
+				{ 19, 0, "INV_Potion_139", "=q6="..AtlasLoot_IngameLocales["Ripe Disgusting Jar"], ""};
 				{ 20, 44719, "", "=q3=Frenzyheart Brew", "=ds=#e25#", ""};
 				{ 21, 39671, "", "=q1=Resurgent Healing Potion", "=ds=#e2#", ""};
 				{ 22, 40067, "", "=q1=Icy Mana Potion", "=ds=#e2#", ""};
@@ -7687,7 +7714,7 @@ local moduleName = "AtlasLootWotLK"
 				{ 17, 44071, "", "=q1=Slow-Roasted Eel", "=ds=#e3#"};
 				{ 19, 0, "INV_Helmet_138", "=q6=#r5#", ""};
 				{ 20, 44074, "", "=q4=Oracle Talisman of Ablution", "=ds=#s14#"};
-				{ 22, 0, "INV_Egg_02", "=q6="..AL["Cracked Egg"], ""};
+				{ 22, 0, "INV_Egg_02", "=q6="..AtlasLoot_IngameLocales["Cracked Egg"], ""};
 				{ 23, 44707, "", "=q4=Reins of the Green Proto-Drake", "=ds=#e27#", ""};
 				{ 24, 39898, "", "=q1=Cobra Hatchling", "=ds=#e13#", ""};
 				{ 25, 44721, "", "=q1=Proto-Drake Whelp", "=ds=#e13#", ""};
@@ -8652,7 +8679,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["PvP Accessories"],
-			module = moduleName, menu = "PVPMENU",
+			module = moduleName, menu = "PVPMENU3",
 		};
 	}
 
@@ -8743,19 +8770,19 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["PvP Non-Set Epics"],
-			module = moduleName, menu = "PVPMENU",
+			module = moduleName, menu = "PVPMENU3",
 		};
 	}
 
-		------------------------
-		--- Level 80 Weapons ---
-		------------------------
+		----------------------------
+		--- Level 80 PvP Weapons ---
+		----------------------------
 
 	AtlasLoot_Data["PVP80Weapons"] = {
 		["Normal"] = {
 			{
-				{ 1, 51530, "", "=q4=Wrathful Gladiator's Left Render", "=ds=#h4#, #w13#", "#HONOR:760#"};
-				{ 2, 51523, "", "=q4=Wrathful Gladiator's Right Ripper", "=ds=#h3#, #w13#", "#HONOR:1785#"};
+				{ 1, 51523, "", "=q4=Wrathful Gladiator's Right Ripper", "=ds=#h1#, #w13#", "#HONOR:1785#"};
+				{ 2, 51530, "", "=q4=Wrathful Gladiator's Left Render", "=ds=#h4#, #w13#", "#HONOR:760#"};
 				{ 3, 51443, "", "=q4=Wrathful Gladiator's Left Ripper", "=ds=#h4#, #w13#", "#HONOR:760#"};
 				{ 5, 51406, "", "=q4=Wrathful Gladiator's Blade of Alacrity", "=ds=#h3#, #w4#", "#HONOR:1830#"};
 				{ 6, 51397, "", "=q4=Wrathful Gladiator's Spellblade", "=ds=#h3#, #w4#", "#HONOR:1830#"};
@@ -8798,8 +8825,8 @@ local moduleName = "AtlasLootWotLK"
 			};
 		};
 		info = {
-			name = AL["PvP Weapons"], "=q5="..AL["Level 80"],
-			module = moduleName, menu = "PVPMENU",
+			name = AL["PvP Weapons"].." "..AL["Level 80"].." - "..AL["Wrathful"],
+			module = moduleName, menu = "PVPMENU3",
 		};
 	}
 
@@ -8921,10 +8948,8 @@ local moduleName = "AtlasLootWotLK"
 				{ 7, 44087, "", "=q3=Persistent Earthshatter Diamond", "=ds=#e7#", "#HONOR:24#"};
 				{ 8, 44088, "", "=q3=Powerful Earthshatter Diamond", "=ds=#e7#", "#HONOR:24#"};
 				{ 9, 44089, "", "=q3=Trenchant Earthshatter Diamond", "=ds=#e7#", "#HONOR:24#"};
-				{ 11, 44075, "", "=q3=Arcanum of Dominance", "=ds=#s1# #e17#", "#HONOR:65#"};
-				{ 12, 44069, "", "=q3=Arcanum of Triumph", "=ds=#s1# #e17#", "#HONOR:65#"};
-				{ 13, 44068, "", "=q3=Inscription of Dominance", "=ds=#s3# #e17#", "#HONOR:50#"};
-				{ 14, 44067, "", "=q3=Inscription of Triumph", "=ds=#s3# #e17#", "#HONOR:50#"};
+				{ 11, 44068, "", "=q3=Inscription of Dominance", "=ds=#s3# #e17#", "#HONOR:50#"};
+				{ 12, 44067, "", "=q3=Inscription of Triumph", "=ds=#s3# #e17#", "#HONOR:50#"};
 				{ 16, 41733, "", "=q3=Design: Lucent Monarch Topaz", "=ds=#p12# (390)", "#HONOR:19#"};
 				{ 17, 41730, "", "=q3=Design: Willful Monarch Topaz", "=ds=#p12# (390)", "#HONOR:19#"};
 				{ 18, 41735, "", "=q3=Design: Shattered Forest Emerald", "=ds=#p12# (390)", "#HONOR:19#"};
@@ -11206,10 +11231,11 @@ local moduleName = "AtlasLootWotLK"
 				{ 4, 37835, "", "=q4=Je'Tze's Bell", "=ds=#s14#"};
 				{ 5, 37254, "", "=q4=Super Simian Sphere", "=ds=#s14#"};
 				{ 16, 44310, "", "=q4=Namlak's Supernumerary Sticker", "=ds=#h1#, #w4#"};
-				{ 17, 43613, "", "=q4=The Dusk Blade", "=ds=#h1#, #w4#"};
-				{ 18, 44311, "", "=q4=Avool's Sword of Jin", "=ds=#h1#, #w10#"};
-				{ 19, 43611, "", "=q4=Krol Cleaver", "=ds=#h1#, #w10#"};
-				{ 20, 44313, "", "=q4=Zom's Crackling Bulwark", "=ds=#w8#"};
+				{ 17, 44311, "", "=q4=Avool's Sword of Jin", "=ds=#h1#, #w10#"};
+				{ 18, 44313, "", "=q4=Zom's Crackling Bulwark", "=ds=#w8#"};
+				{ 20, 0, "inv_box_03", "=q6="..AtlasLoot_IngameLocales["Reinforced Junkbox"], "=q1=#p28#"};
+				{ 21, 43613, "", "=q4=The Dusk Blade", "=ds=#h1#, #w4#"};
+				{ 22, 43611, "", "=q4=Krol Cleaver", "=ds=#h1#, #w10#"};
 			};
 		};
 		info = {
@@ -11270,7 +11296,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 200"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU",
+			module = moduleName, menu = "JPWRATHMENU",
 		};
 	}
 
@@ -11319,7 +11345,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 213"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU",
+			module = moduleName, menu = "JPWRATHMENU",
 		};
 	}
 
@@ -11372,7 +11398,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 226"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU",
+			module = moduleName, menu = "JPWRATHMENU",
 		};
 	}
 
@@ -11427,7 +11453,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 245"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU", instance = "EmblemofTriumph",
+			module = moduleName, menu = "JPWRATHMENU", instance = "EmblemofTriumph",
 		};
 	}
 	
@@ -11449,7 +11475,7 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 245"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU", instance = "EmblemofTriumph",
+			module = moduleName, menu = "JPWRATHMENU", instance = "EmblemofTriumph",
 		};
 	}
 
@@ -11503,6 +11529,6 @@ local moduleName = "AtlasLootWotLK"
 		};
 		info = {
 			name = AL["ilvl 264"].." - "..AL["Rewards"],
-			module = moduleName, menu = "WOTLKEMBLEMMENU",
+			module = moduleName, menu = "JPWRATHMENU",
 		};
 	}

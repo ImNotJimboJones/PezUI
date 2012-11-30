@@ -117,18 +117,17 @@ end
 function VUHDO_deserializeTable(aString)
 	local tTable = { };
 	local tIndex = 1;
-	local tKeyType, tValueType;
+	local tValueType;
 	local tGleichPos;
 	local tKey, tValue;
 
 	while (tIndex <= strlen(aString)) do
-		tKeyType = strbyte(aString, tIndex);
 		tGleichPos = strfind(aString, "=", tIndex + 1, true);
 
 		if (tGleichPos ~= nil) then
 			tKey = strsub(aString, tIndex + 1, tGleichPos - 1);
 
-			if (78 == tKeyType) then -- N
+			if (78 == strbyte(aString, tIndex)) then -- N
 				tKey = tonumber(tKey);
 			else -- S
 				tKey = VUHDO_ABBREV_TO_KEY[tKey] or tKey;

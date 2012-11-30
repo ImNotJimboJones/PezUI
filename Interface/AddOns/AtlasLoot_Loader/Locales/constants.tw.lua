@@ -1,4 +1,4 @@
-﻿-- $Id: constants.tw.lua 3877 2012-10-11 13:08:18Z ananhaid $
+﻿-- $Id: constants.tw.lua 3996 2012-11-22 16:55:38Z ananhaid $
 --[[
 constants.tw.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -255,10 +255,13 @@ if AL then
 	AL["ilvl 397"] = "等級 397";
 	AL["ilvl 470"] = "等級 470";
 	AL["ilvl 490"] = "等級 490";
+	AL["Grand Marshal"] = "總元帥";
 	AL["Gladiator"] = "鬥士";
 	AL["Vengeful"] = "復仇";
 	AL["Merciless"] = "殘忍";
 	AL["Brutal"] = "野蠻";
+	AL["Wrathful"] = "憤怒";
+	AL["Cataclysmic"] = "絕命";
 
 	-- #######################################
 	-- UI things END
@@ -355,6 +358,7 @@ if AL then
 	AL["BoE World Epics"] = "裝綁世界掉落紫裝";
 	AL["Legendary Items"] = "傳說物品";
 	AL["Misc Sets"] = "其他套裝";
+	AL["Tier Sets"] = "T 套装";
 	AL["Tier 1/2 Set"] = "T1/T2 套裝";
 	AL["Tier 1/2/3 Set"] = "T1/T2/T3 套裝";
 	AL["Tier 3 Set"] = "T3 套裝";
@@ -365,7 +369,8 @@ if AL then
 	AL["Tier 11/12 Set"] = "T11/T12 套裝";
 	AL["Tier 13 Set"] = "T13 套裝";
 	AL["Tier 14 Set"] = "T14 套裝";
-	AL["TCG Items"] = "卡片遊戲物品"; -- Trading Card Game Items
+	AL["TCG Items"] = "卡片遊戲物品";
+	AL["Rare Mobs"] = "稀有怪物";
 
 	-- PvP Menu
 	AL["Arathi Basin Sets"] = "阿拉希盆地套裝";
@@ -399,6 +404,15 @@ if AL then
 	AL["Stranglethorn Fishing Extravaganza"] = "荊棘谷釣魚大賽";
 	AL["Kalu'ak Fishing Derby"] = "卡魯耶克釣魚大賽";
 	AL["Fishing Contests"] = "釣魚大賽";
+
+	-- World Events	Menu Names
+	AL["Special Rewards"] = "特殊獎勵";					-- Brewfest, Feast of Winter Veil
+	AL["Brew of the Month Club"] = "每月啤酒俱樂部";		-- Brewfest
+	AL["Food and Drinks"] = "食物和飲料";				-- Brewfest
+	AL["Gifts & Presents"] = "禮物";					-- Feast of Winter Veil
+	AL["Playable Race Masks"] = "種族面具玩具"; 		-- Hallow's End
+	AL["Non-Playable Race Masks"] = "非種族面具玩具"; 	-- Hallow's End
+	AL["Schematics & Patterns"] = "設計圖/圖樣";			-- Lunar Festival
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = "|cff1eff00左鍵|r 瀏覽物品掉落表";
@@ -465,10 +479,10 @@ if AL then
 	AL["Guild"] = "公會";
 
 	-- Blacksmithing
-	AL["Mists of Pandaria Vendor Sold Plans"] = "潘達利亞之謎供應商出售設計圖";
-	AL["Cataclysm Vendor Sold Plans"] = "浩劫與重生供應商出售設計圖";
 	AL["Armor Enhancements"] = "護甲附魔";
 	AL["Weapon Enhancements"] = "武器附魔";
+	AL["Cataclysm Vendor Sold Plans"] = "浩劫與重生供應商販售設計圖";
+	AL["Mists of Pandaria Vendor Sold Plans"] = "潘達利亞之謎供應商販售設計圖";
 
 	-- Cooking
 	AL["Banquets/Feasts"] = "盛宴/大餐";
@@ -489,10 +503,15 @@ if AL then
 	AL["Enchant Shield & Off-Hand"] = "附魔盾牌/副手";
 	AL["Enchant 2H Weapon"] = "附魔雙手武器";
 	AL["Enchant Weapon"] = "附魔武器";
-	AL["Cataclysm Vendor Sold Formulas"] = "浩劫與重生供應商出售公式";
+	AL["Cataclysm Vendor Sold Formulas"] = "浩劫與重生供應商販售公式";
 
 	-- Engineering
 	AL["Tinker"] = "工程師專屬";
+
+	-- Fishing
+	AL["Fish Weapons"] = "釣魚武器";
+	AL["Fishing Gear"] = "釣魚裝備";
+	AL["Fishing Lines"] = "魚線";
 
 	-- Inscription
 	AL["Major Glyph"] = "極效雕紋";
@@ -516,7 +535,8 @@ if AL then
 	AL["Cloth Armor"] = "護甲";
 	AL["Shirts"] = "襯衣";
 	AL["Bags"] = "容器";
-	AL["Cataclysm Vendor Sold Patterns"] = "浩劫與重生商人販售的圖樣";
+	AL["Cataclysm Vendor Sold Patterns"] = "浩劫與重生供應商販售的圖樣";
+	AL["Mists of Pandaria Vendor Sold Patterns"] = "潘達利亞之謎供應商販售的圖樣";
 
 	-- Labels for loot descriptions
 	AL["Classes:"] = "職業：";
@@ -525,7 +545,6 @@ if AL then
 	AL["Old Quest Item"] = "舊任務物品";
 	AL["Quest Reward"] = "任務獎勵";
 	AL["Old Quest Reward"] = "舊任務獎勵";
-	AL["Pet Battle Quests"] = "寵物戰鬥任務";
 	AL["Shared"] = "共享";
 	AL["Right Half"] = "右半部份";
 	AL["Left Half"] = "左半部份";
@@ -540,7 +559,8 @@ if AL then
 	AL["Collector's Edition"] = "典藏版";
 	AL["Daily Reward"] = "每日獎勵";
 	AL["No Longer Available"] = "已不存在.";
-	AL["Shared Boss Loot"] = "共享首領掉落列表";
+	AL["Shared Boss Loot"] = "首領共享掉落";
+	AL["Shared Zone Loot"] = "區域共享掉落";
 
 	-- Minor Labels for loot table descriptions
 	AL["Classic WoW"] = "原始的魔獸世界";
@@ -569,6 +589,7 @@ if AL then
 	AL["Tier 12"] = "T12";
 	AL["Tier 13"] = "T13";
 	AL["Tier 14"] = "T14";
+	AL["Challenge Mode Armor Sets"] = "挑戰模式護甲套裝";
 	AL["10 Man"] = "10 人";
 	AL["10/25 Man"] = "10/25 人";
 	AL["Epic Set"] = "PvP 史詩套裝";
@@ -595,7 +616,6 @@ if AL then
 	AL["Additional Heroic Loot"] = "更多的英雄物品";
 	AL["Heroic Mode"] = "英雄模式";
 	AL["Normal Mode"] = "普通模式";
-	AL["Raid"] = "團隊";
 	AL["Hard Mode"] = "困難模式";
 	AL["Bonus Loot"] = "額外獎勵";
 	AL["Arena Reward"] = "競技場獎勵";
@@ -606,7 +626,6 @@ if AL then
 	AL["First Prize"] = "頭獎";
 	AL["Rare Fish Rewards"] = "稀有釣魚獎勵";
 	AL["Rare Fish"] = "稀有魚類";
-	AL["Heirloom"] = "家傳物品";
 	AL["Weapons"] = "武器";
 	AL["Accessories"] = "配件";
 	AL["Rare"] = "稀有";
@@ -620,10 +639,11 @@ if AL then
 	AL["Level 30-39"] = "等級 30～39";
 	AL["Level 40-49"] = "等級 40～49";
 	AL["Level 50-60"] = "等級 50～60";
+	AL["Level 60-69"] = "等級 60～69";
+	AL["Level 70-79"] = "等級 70～79";
+	AL["Level 85-89"] = "等級 85～89";
 	AL["Summon"] = "召喚";
 	AL["Random"] = "隨機";
-	AL["Brew of the Month Club"] = "每月啤酒俱樂部";
-	AL["Food and Drinks"] = "食物和飲料";
 
 	-- Profession descriptions
 	AL["Buff"] = "增益";
@@ -661,7 +681,7 @@ if AL then
 	AL["Special"] = "特殊";
 	AL["Feasts"] = "宴類";
 	AL["Speed"] = "速度";
-	AL["Oil"] = "油類"; -- Used in categorizing Enchating Misc, ex: Superior Wizard Oil, Wizard Oil
+	AL["Oil"] = "附魔油";
 	AL["Culture"] = "文化";
 	AL["Description"] = "描述";
 	AL["Dwarf"] = "矮人";
@@ -697,6 +717,9 @@ if AL then
 	AL["Achievement"] = "成就";
 	AL["Dungeon"] = "副本";
 	AL["Outdoor"] = "野外";
+	AL["Promotional"] = "促銷";
+	AL["PvP"] = "PvP";
+	AL["Raid"] = "團隊";
 
 	-- Companions
 	AL["Achievement Companions"] = "成就夥伴";
@@ -714,6 +737,11 @@ if AL then
 	AL["Rare Companions"] = "稀有夥伴";
 	AL["Unobtainable Companions"] = "無法取得的夥伴";
 	AL["New Companions"] = "新的夥伴";
+	--- Drop Locations
+	AL["Bogflare Needler"] = "泥沼閃光釘刺者";
+	AL["Deviate Ravager/Deviate Guardian"] = "變異劫毀者/變異守護者";
+	AL["Gundrak Raptor"] = "剛德拉克迅猛龍";
+	AL["Noxious Whelp"] = "劇毒幼龍";
 
 	-- Mounts
 	AL["Alliance Mounts"] = "聯盟坐騎";
@@ -731,6 +759,7 @@ if AL then
 	AL["Rare Mounts"] = "稀有坐騎";
 	AL["Unobtainable Mounts"] = "無法取得的坐騎";
 	AL["New Mounts"] = "新的坐騎";
+	AL["Mount Collecting"] = "坐騎收集";
 
 	-- Tabards
 	AL["Achievement & Quest Reward Tabards"] = "成就/任務獎勵外袍";
@@ -747,6 +776,13 @@ if AL then
 	AL["Consumable Transformation Items"] = "消耗性變形物品";
 	AL["Non-consumed Transformation Items"] = "非消耗性變形物品";
 
+	-- Heirloom and BoA Items
+	AL["Heirloom"] = "家傳物品";
+	AL["PvP Heirlooms"] = "PvP 家傳物品";
+	AL["Bind on Account"] = "帳號綁定";
+	AL["Bind on Account Armor"] = "帳號綁定護甲";
+	AL["Bind on Account Weapons"] = "帳號綁定武器";
+
 	-- Darkmoon Faire
 	AL["Darkmoon Faire Rewards"] = "暗月馬戲團獎勵";
 	AL["Low Level Decks"] = "低階套牌";
@@ -759,21 +795,21 @@ if AL then
 
 	-- First set
 	AL["Heroes of Azeroth"] = "艾澤拉斯的英雄";
-	AL["Landro Longshot"] = "藍卓·長射"; -- confirmed
-	AL["Thunderhead Hippogryph"] = "雷首角鷹獸"; -- confirmed
-	AL["Saltwater Snapjaw"] = "海水鉗嘴龜"; -- confirmed
+	AL["Landro Longshot"] = "藍卓·長射";
+	AL["Thunderhead Hippogryph"] = "雷首角鷹獸";
+	AL["Saltwater Snapjaw"] = "海水鉗嘴龜";
 
 	-- Second set
 	AL["Through The Dark Portal"] = "通過黑暗之門";
-	AL["King Mukla"] = "穆克拉"; -- confirmed
-	AL["Rest and Relaxation"] = "休息與放鬆"; -- confirmed
+	AL["King Mukla"] = "穆克拉";
+	AL["Rest and Relaxation"] = "休息與放鬆";
 	AL["Fortune Telling"] = "算命";
 
 	-- Third set
 	AL["Fires of Outland"] = "外域之火";
-	AL["Spectral Tiger"] = "鬼靈之虎"; -- confirmed
-	AL["Gone Fishin'"] = "去釣魚"; -- confirmed
-	AL["Goblin Gumbo"] = "哥布林燴肉"; -- confirmed
+	AL["Spectral Tiger"] = "鬼靈之虎";
+	AL["Gone Fishin'"] = "去釣魚";
+	AL["Goblin Gumbo"] = "哥布林燴肉";
 
 	-- Fourth set
 	AL["March of the Legion"] = "燃燒軍團的進軍";
@@ -801,33 +837,33 @@ if AL then
 
 	-- Eighth set
 	AL["Blood of Gladiators"] = "鬥士之血";
-	AL["Sandbox Tiger"] = "沙池虎"; -- confirmed
+	AL["Sandbox Tiger"] = "沙池虎";
 	--AL["Center of Attention"] = "";
-	AL["Foam Sword Rack"] = "泡沫之劍架"; -- confirmed
+	AL["Foam Sword Rack"] = "泡沫之劍架";
 
 	-- Ninth set
 	AL["Fields of Honor"] = "榮譽原野";
-	AL["Path of Cenarius"] = "塞納留斯之徑"; -- confirmed
-	AL["Pinata"] = "巨魔糖果玩偶"; -- confirmed
+	AL["Path of Cenarius"] = "塞納留斯之徑";
+	AL["Pinata"] = "巨魔糖果玩偶";
 	AL["El Pollo Grande"] = "艾伯格蘭德";
 
 	-- Tenth set
 	AL["Scourgewar"] = "天譴戰爭";
-	AL["Tiny"] = "迷你坐騎"; -- confirmed
-	AL["Tuskarr Kite"] = "巨牙海民風箏"; -- confirmed
+	AL["Tiny"] = "迷你坐騎";
+	AL["Tuskarr Kite"] = "巨牙海民風箏";
 	AL["Spectral Kitten"] = "鬼靈貓";
 
 	-- Eleventh set
 	AL["Wrathgate"] = "憤怒之門";
-	AL["Statue Generator"] = "速成雕像"; -- confirmed
-	AL["Landro's Gift"] = "藍卓的禮物盒"; -- confirmed
-	AL["Blazing Hippogryph"] = "熾熱的角鷹獸"; -- confirmed
+	AL["Statue Generator"] = "速成雕像";
+	AL["Landro's Gift"] = "藍卓的禮物盒";
+	AL["Blazing Hippogryph"] = "熾熱的角鷹獸";
 
 	-- Twelvth set
 	AL["Icecrown"] = "寒冰皇冠";
-	AL["Wooly White Rhino"] = "蓬毛犀牛坐騎"; -- confirmed
-	AL["Ethereal Portal"] = "傳送門之石"; -- confirmed
-	AL["Paint Bomb"] = "漆彈"; -- confirmed
+	AL["Wooly White Rhino"] = "蓬毛犀牛坐騎";
+	AL["Ethereal Portal"] = "傳送門之石";
+	AL["Paint Bomb"] = "漆彈";
 
 	-- Thirtheenth set
 	AL["Worldbreaker"] = "碎界者";
@@ -920,12 +956,13 @@ if AL then
 	AL["Carapace of the Old God"] = "上古之神的甲殼";
 
 	-- Recipe origin strings
-	AL["Trainer"] = "訓練師";
-	AL["Discovery"] = "探索";
-	AL["World Drop"] = "世界掉落";
-	AL["Drop"] = "掉落";
-	AL["Vendor"] = "商人販售";
 	AL["Crafted"] = "製作";
+	AL["Discovery"] = "探索";
+	AL["Drop"] = "掉落";
+	AL["Fished From"] = "釣魚從";
+	AL["Trainer"] = "訓練師";
+	AL["Vendor"] = "供應商販售";
+	AL["World Drop"] = "世界掉落";
 
 	-- Months
 	AL["January"] = "一月";
@@ -964,35 +1001,24 @@ if AL then
 
 	-- NPCs missing from BabbleBoss
 	AL["Trash Mobs"] = "小怪";
+	--- Classic WoW
 	AL["Dungeon Set 2 Summonable"] = "T0.5 召喚王";
 	AL["Theldren"] = "瑟爾倫";
 	AL["Sothos and Jarien"] = "索索斯及賈林";
 	AL["Druid of the Fang"] = "尖牙德魯伊";
 	AL["Defias Strip Miner"] = "迪菲亞赤膊礦工";
 	AL["Defias Overseer/Taskmaster"] = "迪菲亞監工/工頭";
-	AL["Scarlet Defender/Myrmidon"] = "血色防禦者/血色僕從";
-	AL["Scarlet Champion"] = "血色勇士";
-	AL["Scarlet Centurion"] = "血色百夫長";
 	AL["Scarlet Trainee"] = "血色預備兵";
-	AL["Herod/Mograine"] = "赫洛德/莫格萊尼";
-	AL["Scarlet Protector/Guardsman"] = "血色保衛者/血色衛兵";
 	AL["Shadowforge Flame Keeper"] = "暗爐持火者";
-	AL["Avatar of the Martyred"] = "馬丁瑞德的化身";
-	AL["Nexus Stalker"] = "奈薩斯捕獵者";
-	AL["Auchenai Monk"] = "奧奇奈僧侶";
-	AL["Cabal Fanatic"] = "卡巴狂熱者";
-	AL["Unchained Doombringer"] = "無束縛的摧毀者";
 	AL["Crimson Sorcerer"] = "紅衣法術師";
 	AL["Thuzadin Shadowcaster"] = "圖薩丁暗影施法者";
 	AL["Crimson Inquisitor"] = "紅衣審查者";
 	AL["Crimson Battle Mage"] = "紅衣戰鬥法師";
 	AL["Ghoul Ravener"] = "食屍搶奪者";
 	AL["Spectral Citizen"] = "鬼魂市民";
-	AL["Spectral Researcher"] = "鬼靈研究員";
 	AL["Scholomance Adept"] = "通靈學院專家";
 	AL["Scholomance Dark Summoner"] = "通靈學院黑暗召喚師";
 	AL["Blackhand Elite"] = "黑手精英";
-	AL["Blackhand Assassin"] = "黑手刺客";
 	AL["Firebrand Pyromancer"] = "火印炎術師";
 	AL["Firebrand Invoker"] = "火印塑能師";
 	AL["Firebrand Grunt"] = "火印步兵";
@@ -1005,7 +1031,27 @@ if AL then
 	AL["Weapon Technician"] = "武器技師";
 	AL["Doomforge Craftsman"] = "末日之爐工匠";
 	AL["Murk Worm"] = "黑暗蟲";
-	AL["Atal'ai Witch Doctor"] = "阿塔萊巫醫";
+	AL["Scarshield Quartermaster"] = "裂盾軍需官";
+	AL["Knot Thimblejack"] = "諾特·希姆加克";
+	AL["Shen'dralar Provisioner"] = "辛德拉聖職者";
+	AL["The Nameles Prophet"] = "無名預言者";
+	AL["Rajaxx's Captains"] = "拉賈克斯的上尉們";
+	AL["Razorfen Spearhide"] = "剃刀沼澤刺鬃守衛";
+	AL["Felsteed"] = "惡魔戰馬";
+	AL["Master Elemental Shaper Krixix"] = "大元素師克里希克";
+	AL["Rotted One"] = "腐爛者";
+	AL["Tex Vortacoil"]  = "苔克斯·電捲";
+	AL["Sprinkle Noggenfogger"]  = "斯普琳科·諾格弗格";
+	--- Burning Crusade
+	AL["Avatar of the Martyred"] = "馬丁瑞德的化身";
+	AL["Nexus Stalker"] = "奈薩斯捕獵者";
+	AL["Auchenai Monk"] = "奧奇奈僧侶";
+	AL["Cabal Fanatic"] = "卡巴狂熱者";
+	AL["Unchained Doombringer"] = "無束縛的摧毀者";
+	AL["Aether-tech Assistant"] = "蒼穹技師助手";
+	AL["Aether-tech Adept"] = "蒼穹技師專家";
+	AL["Aether-tech Master"] = "蒼穹技師大師";
+	AL["Thomas Yance"] = "湯瑪斯·陽斯";
 	AL["Raging Skeleton"] = "狂怒的骸骨";
 	AL["Ethereal Priest"] = "伊斯利牧師";
 	AL["Sethekk Ravenguard"] = "塞司克烏鴉護衛";
@@ -1020,6 +1066,25 @@ if AL then
 	AL["Sunseeker Astromage"] = "尋日星法師";
 	AL["Durnholde Rifleman"] = "敦霍爾德槍手";
 	AL["Rift Keeper/Rift Lord"] = "裂縫看守者 / 裂縫領主";
+	AL["Don Carlos"] = "卡洛斯大爺";
+	AL["Aged Dalaran Wizard"] = "年邁的達拉然巫師";
+	AL["Shattered Hand Executioner"] = "破碎之手劊子手";
+	AL["Servant's Quarter Animal Bosses"] = "伺從區";
+	AL["Wyrmcult Provisioner"]  = "巨龍教團補給官";
+	--- Wrath of the Lich King
+	AL["Olut Alegut"]  = "歐拉特·酒膽";
+	AL["Rork Sharpchin"]  = "洛克·銳頦";
+	--- Cataclysm
+	AL["Zen'Vorka"] = "贊沃卡";
+	AL["Ayla Shadowstorm"] = "埃拉·暗影風暴";
+	AL["Damek Bloombeard"] = "達密克·濃鬚";
+	AL["Varlan Highbough"] = "瓦蘭·高枝";
+	AL["Firestone Vendor"] = "火石供應商";
+	AL["Baradin Fox"]  = "巴拉丁狐狸";
+	--- Mists of Pandaria
+	AL["Uncle Bigpocket"] = "大包公";
+	AL["Auntie Stormstout"] = "風暴烈酒姑媽";
+	--- World Events
 	AL["Crimson Templar"] = "赤紅聖殿騎士";
 	AL["Azure Templar"] = "碧藍聖殿騎士";
 	AL["Hoary Templar"] = "蒼白聖殿騎士";
@@ -1028,63 +1093,13 @@ if AL then
 	AL["The Duke of Fathoms"] = "深淵公爵";
 	AL["The Duke of Zephyrs"] = "微風公爵";
 	AL["The Duke of Shards"] = "碎石公爵";
-	AL["Aether-tech Assistant"] = "蒼穹技師助手";
-	AL["Aether-tech Adept"] = "蒼穹技師專家";
-	AL["Aether-tech Master"] = "蒼穹技師大師";
-	AL["Trelopades"] = "特羅費茲";
-	AL["King Dorfbruiser"] = "國王多爾福布利薩";
-	AL["Gorgolon the All-seeing"] = "全知者戈爾多隆";
-	AL["Matron Li-sahar"] = "女侍衛長利薩哈爾";
-	AL["Solus the Eternal"] = "智者索勒斯";
-	AL["Smokywood Pastures Vendor"] = "燻木牧場商人";
-	AL["Darkscreecher Akkarai"] = "黑暗尖叫者阿卡萊";
-	AL["Karrog"] = "凱羅格";
-	AL["Gezzarak the Huntress"] = "女獵人吉札拉";
-	AL["Vakkiz the Windrager"] = "風怒者瓦奇茲";
-	AL["Terokk"] = "泰洛克";
-	AL["Armbreaker Huffaz"] = "斷臂者霍法茲";
-	AL["Fel Tinkerer Zortan"] = "惡魔工匠祖坦";
-	AL["Forgosh"] = "弗古斯";
-	AL["Gul'bor"] = "古柏爾";
-	AL["Malevus the Mad"] = "狂怒者馬拉弗斯";
-	AL["Porfus the Gem Gorger"] = "寶石吞噬者波弗斯";
-	AL["Wrathbringer Laz-tarash"] = "憤怒使者拉茲泰拉西";
-	AL["Bash'ir Landing Stasis Chambers"] = "貝許爾的靜止密室";
 	AL["Templars"] = "聖殿騎士";
 	AL["Dukes"] = "公爵";
 	AL["High Council"] = "高階議會";
-	AL["Scarshield Quartermaster"] = "裂盾軍需官";
-	AL["Father Flame"] = "烈焰之父";
-	AL["Thomas Yance"] = "湯瑪斯·陽斯";
-	AL["Knot Thimblejack"] = "諾特·希姆加克";
-	AL["Shen'dralar Provisioner"] = "辛德拉聖職者";
-	AL["The Nameles Prophet"] = "無名預言者";
-	AL["Rajaxx's Captains"] = "拉賈克斯的上尉們";
-	AL["Razorfen Spearhide"] = "剃刀沼澤刺鬃守衛";
-	AL["Magregan Deepshadow"] = "馬格雷甘·深影";
-	AL["Don Carlos"] = "卡洛斯先生龍舌蘭酒";
-	AL["Thomas Yance"] = "湯瑪斯·陽斯";
-	AL["Aged Dalaran Wizard"] = "年邁的達拉然巫師";
-	AL["Felsteed"] = "惡魔戰馬";
-	AL["Shattered Hand Executioner"] = "破碎之手劊子手";
-	AL["Time-Lost Proto Drake"] = "時光流逝元龍";
-	AL["Razzashi Raptor"] = "拉札希迅猛龍";
-	AL["Deviate Ravager/Deviate Guardian"] = "變異劫毀者/變異守護者";
-	AL["Servant's Quarter Animal Bosses"] = "伺從區";
-	AL["Jadefang"] = "翡翠牙";
-	AL["Aeonaxx"] = "艾歐納克斯";
-	AL["Prince Sarsarun"] = "薩爾撒倫王子";
-	AL["Dormus the Camel-Hoarder"] = "『駱駝囤積者』多姆斯";
-	AL["The Behemoth"] = "貝希摩斯";
-	AL["Master Elemental Shaper Krixix"] = "大元素師克里希克";
-	AL["Zen'Vorka"] = "贊沃卡";
-	AL["Ayla Shadowstorm"] = "埃拉·暗影風暴";
-	AL["Damek Bloombeard"] = "達密克·濃鬚";
-	AL["Varlan Highbough"] = "瓦蘭·高枝";
-	AL["Firestone Vendor"] = "火石商人";
-	AL["Poseidus"] = "波賽達斯";
-	AL["Burgy Blackheart"] = "伯吉·黑心";
+	AL["Smokywood Pastures Vendor"] = "燻木牧場商人";
+	AL["Bash'ir Landing Stasis Chambers"] = "貝許爾的靜止密室";
 	AL["Battle Pet Trainer"] = "寵物戰鬥訓練師";
+	AL["Apothecary Hummel"] = "藥劑師胡默爾";
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = "大十字軍試煉";
@@ -1093,9 +1108,10 @@ if AL then
 	AL["Halfhill Farm"] = "半山農場";
 
 	-- Shortcuts for Bossname files
-	AL["Avatar"] = "馬丁瑞德的化身";  -- Avatar of the Martyred
+	AL["Avatar"] = "馬丁瑞德的化身";
 
 	-- Chests, etc
+	AL["Father Flame"] = "烈焰之父";
 	AL["The Grim Guzzler"] = "黑鐵酒吧";
 	AL["The Secret Safe"] = "隱密的保險箱";
 	AL["The Vault"] = "寶窟";
@@ -1105,22 +1121,8 @@ if AL then
 	AL["Lorgalis Manuscript"] = "洛迦里斯手稿";
 	AL["Fathom Core"] = "深淵之核";
 	AL["Gift of Adoration"] = "愛慕之禮";
-	AL["Box of Chocolates"] = "巧克力盒";
 	AL["Treat Bag"] = "糖果包";
-	AL["Gaily Wrapped Present"] = "精心包裝的禮物";
-	AL["Festive Gift"] = "節慶禮物";
-	AL["Ticking Present"] = "滴答作響的禮物";
-	AL["Gently Shaken Gift"] = "輕輕搖晃過的禮物";
-	AL["Carefully Wrapped Present"] = "仔細包裝的禮物";
-	AL["Winter Veil Gift"] = "冬幕節禮物";
-	AL["Smokywood Pastures Extra-Special Gift"] = "燻木牧場的超特別禮物";
-	AL["Brightly Colored Egg"] = "彩蛋";
-	AL["Lunar Festival Fireworks Pack"] = "新年煙火包";
-	AL["Lucky Red Envelope"] = "幸運紅包袋";
-	AL["Small Rocket Recipes"] = "小型煙火配方";
-	AL["Large Rocket Recipes"] = "大型煙火配方";
-	AL["Cluster Rocket Recipes"] = "煙花束配方";
-	AL["Large Cluster Rocket Recipes"] = "大型煙花束設計圖";
+	AL["The Cache of Madness"] = "瘋狂之緣";
 	AL["Timed Reward Chest"] = "限時任務獎勵箱子";
 	AL["Timed Reward Chest 1"] = "限時任務獎勵箱子 1";
 	AL["Timed Reward Chest 2"] = "限時任務獎勵箱子 2";
@@ -1135,23 +1137,8 @@ if AL then
 	AL["Second Fragment Guardian"] = "第二碎片守衛者";
 	AL["Third Fragment Guardian"] = "第三碎片守衛者";
 	AL["Overcharged Manacell"] = "滿溢的法力容器";
-	AL["Mysterious Egg"] = "詭秘的蛋";
-	AL["Hyldnir Spoils"] = "海迪尼爾戰利品";
-	AL["Ripe Disgusting Jar"] = "熟成的噁心罐子";
-	AL["Cracked Egg"] = "破損的蛋";
-	AL["Small Spice Bag"] = "小香料包";
-	AL["Handful of Treats"] = "一把糖果";
-	AL["Consumable Wands & Masks"] = "可消耗的魔杖與面具";
-	AL["Permanent Masks"] = "永久的面具";
-	AL["Lovely Dress Box"] = "可愛的裙裝盒";
-	AL["Dinner Suit Box"] = "晚宴套裝盒";
-	AL["Bag of Heart Candies"] = "心願糖果袋";
-	AL["Hidden Stash"] = "隱密藏匿物";
-	AL["The Cache of Madness"] = "瘋狂之緣";
-	AL["Stolen Present"] = "失竊的禮物";
-	AL["Oozing Bag"] = "沾滿淤泥的袋子";
-	AL["Ominous Seed"] = "不祥種子";
-	AL["Treasures of the Vale"] = "谷之寶藏";
+	AL["Shellfish Trap"] = "貝殼陷阱";
+	AL["Fishing Pools"] = "魚群";
 
 	-- Blizzard Promotions
 	AL["Annual Pass"] = "年卡";
@@ -1198,7 +1185,7 @@ if AL then
 	-- Old Atlas Detected
 	AL["It has been detected that your version of Atlas does not match the version that Atlasloot is tuned for ("] = "您現在的 Atlas 插件版本並不完全支援此版本的 Atlasloot, Atlas 的最新版本為 (";
 	AL[").  Depending on changes, there may be the occasional error, so please visit http://www.atlasmod.com as soon as possible to update."] = "). 依 Atlas 版本的變化, AtlasLoot 也許會出現偶然的錯誤, 請儘快前往 http://www.atlasmod.com 更新";
-	AL["OK"] = "OK";
+	AL["OK"] = "確定";
 	AL["Incompatible Atlas Detected"] = "偵測到不相容的 Atlas 版本";
 
 	-- Unsafe item tooltip

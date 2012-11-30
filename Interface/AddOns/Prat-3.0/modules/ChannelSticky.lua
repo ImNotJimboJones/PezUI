@@ -259,11 +259,11 @@ Prat:SetModuleOptions(module, {
 --                desc = L["Toggle remembering the chat type last used per chat frame."],
 --                type = "toggle",
 --            },
-			smartgroup = {
-				name = L["smartgroup_name"],
-				desc = L["smartgroup_desc"],
-				type = "toggle",
-			}
+--			smartgroup = {
+--				name = L["smartgroup_name"],
+--				desc = L["smartgroup_desc"],
+--				type = "toggle",
+--			}
         }
     }
 )
@@ -297,11 +297,11 @@ function module:OnModuleEnable()
     
     --self:StickyFrameChan(prof.perframe)
     
-    Prat.RegisterChatEvent(self, "Prat_OutboundChat")
-    
-    if prof.smartgroup then 
-        self:RegisterSmartGroup()
-    end
+--    Prat.RegisterChatEvent(self, "Prat_OutboundChat")
+--    
+--    if prof.smartgroup then 
+--        self:RegisterSmartGroup()
+--    end
 end
 
 function module:OnModuleDisable()
@@ -322,7 +322,7 @@ function module:OnModuleDisable()
     -- unregister events
     self:UnregisterAllEvents()
 
-	Prat.UnregisterAllChatEvents(self)
+	--Prat.UnregisterAllChatEvents(self)
 end
 
 --[[------------------------------------------------
@@ -398,7 +398,10 @@ end
 --end
 
 function module:Stickum(channel, stickied)
-	ChatTypeInfo[channel:upper()].sticky = stickied and 1 or 0
+	local cti = ChatTypeInfo[channel:upper()]
+    if cti then
+		cti.sticky = stickied and 1 or 0
+	end
 end
 
 --[[------------------------------------------------
@@ -451,42 +454,42 @@ end
 
 
 
-function module:RegisterSmartGroup()
-    if not self.smart_group then
-    	self:SecureHook("ChatEdit_SendText", function(this) if self.groupsay then this:SetAttribute("chatType", "GROUPSAY") self.groupsay=nil end end)
+--function module:RegisterSmartGroup()
+--    if not self.smart_group then
+--    	self:SecureHook("ChatEdit_SendText", function(this) if self.groupsay then this:SetAttribute("chatType", "GROUPSAY") self.groupsay=nil end end)
+--
+--	    self.smart_group = true
+--
+--
+--		SLASH_GROUPSAY1 = "/gr"
+--		SLASH_GROUPSAY2 = "/group"
+--		ChatTypeInfo["GROUPSAY"] = { r=0.5, g=0.9, b=0.9, sticky = 1 }
+--		CHAT_GROUPSAY_SEND = "SmartGroup:\32 "
+--		CHAT_GROUPSAY_GET = "SmartGroup: %1\32 "
+--    end
+--end
 
-	    self.smart_group = true
 
-
-		SLASH_GROUPSAY1 = "/gr"
-		SLASH_GROUPSAY2 = "/group"
-		ChatTypeInfo["GROUPSAY"] = { r=0.5, g=0.9, b=0.9, sticky = 1 }
-		CHAT_GROUPSAY_SEND = "SmartGroup:\32 "
-		CHAT_GROUPSAY_GET = "SmartGroup: %1\32 "
-    end
-end
-
-
-function module:SmartGroupChatType()
-     local _,pvp = IsInInstance()   
-
-     if pvp == "pvp" then   
-        return "BATTLEGROUND"  
-     elseif GetNumRaidMembers() > 0 then   
-         return "RAID"
-     elseif GetNumPartyMembers() > 0 then   
-         return "PARTY"
-     end 
-     
-    return "SAY"
-end  
-
-function module:Prat_OutboundChat(arg, m)
-	if m.CTYPE == "GROUPSAY" then
-		self.groupsay = true
-		m.CTYPE = self:SmartGroupChatType()
-	end
-end
+--function module:SmartGroupChatType()
+--     local _,pvp = IsInInstance()   
+--
+--     if pvp == "pvp" then   
+--        return "BATTLEGROUND"  
+--     elseif GetNumRaidMembers() > 0 then   
+--         return "RAID"
+--     elseif GetNumPartyMembers() > 0 then   
+--         return "PARTY"
+--     end 
+--     
+--    return "SAY"
+--end  
+--
+--function module:Prat_OutboundChat(arg, m)
+--	if m.CTYPE == "GROUPSAY" then
+--		self.groupsay = true
+--		m.CTYPE = self:SmartGroupChatType()
+--	end
+--end
 
   return
 end ) -- Prat:AddModuleToLoad

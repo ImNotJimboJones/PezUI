@@ -1,7 +1,7 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: VuhDo ['vu:du:] - Options
 ## Author: Iza@Gilneas
-## Version: 3.18
+## Version: 3.20
 ## Notes: VuhDo Options
 ## SavedVariables: VUHDO_OPTIONS_SETTINGS
 ## SavedVariablesPerCharacter: VUHDO_GLOBAL_ICONS, VUHDO_GI_SCAN_IDX

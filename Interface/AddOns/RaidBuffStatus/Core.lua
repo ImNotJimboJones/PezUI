@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 558 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 569 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -165,30 +165,31 @@ local taunts = {
 	20736, -- Distracting Shot
 }
 
-local feasts = {
+local feastsz = {
 	-- cata
-	[57426]=true, -- Fish Feast
-	[87643]=true, -- Broiled Dragon Feast
-	[87915]=true, -- Goblin Barbecue Feast
-	[87644]=true, -- Seafood Magnifique Feast
+	[57426] = 50, -- Fish Feast
+	[87643] = 50, -- Broiled Dragon Feast
+	[87915] = 50, -- Goblin Barbecue Feast
+	[87644] = 50, -- Seafood Magnifique Feast
 
 	-- mop
-	[126503] = true,   -- Banquet of the Brew
-	[126492] = true,   -- Banquet of the Grill
-	[126501] = true,   -- Banquet of the Oven
-	[126497] = true,   -- Banquet of the Pot
-	[126499] = true,   -- Banquet of the Steamer
-	[126495] = true,   -- Banquet of the Wok
-	[126504] = true,   -- Great Banquet of the Brew
-	[126494] = true,   -- Great Banquet of the Grill
-	[126502] = true,   -- Great Banquet of the Oven
-	[126498] = true,   -- Great Banquet of the Pot
-	[126500] = true,   -- Great Banquet of the Steamer
-	[126496] = true,   -- Great Banquet of the Wok
-	[105193] = true,   -- Great Pandaren Banquet
-	[104958] = true,   -- Pandaren Banquet
+	[126503] = 10,   -- Banquet of the Brew
+	[126492] = 10,   -- Banquet of the Grill
+	[126501] = 10,   -- Banquet of the Oven
+	[126497] = 10,   -- Banquet of the Pot
+	[126499] = 10,   -- Banquet of the Steamer
+	[126495] = 10,   -- Banquet of the Wok
+	[126504] = 25,   -- Great Banquet of the Brew
+	[126494] = 25,   -- Great Banquet of the Grill
+	[126502] = 25,   -- Great Banquet of the Oven
+	[126498] = 25,   -- Great Banquet of the Pot
+	[126500] = 25,   -- Great Banquet of the Steamer
+	[126496] = 25,   -- Great Banquet of the Wok
+	[105193] = 25,   -- Great Pandaren Banquet
+	[104958] = 10,   -- Pandaren Banquet
 }
-for id,_ in pairs(feasts) do
+local feasts = {}
+for id,_ in pairs(feastsz) do
 	feasts[id] = BS[id]
 end
 
@@ -485,6 +486,7 @@ function RaidBuffStatus:OnInitialize()
 		soulwell = true,
 		repair = true,
 		antispam = true,
+		nonleadspeak = false,
 		feastautowhisper = true,
 		cauldrons = true,
 		cauldronsautowhisper = false,
@@ -3189,15 +3191,15 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 					RaidBuffStatus:Announces("Feast", srcname, nil, spellID)
 				elseif spellID == 92649 or spellID == 92712 then -- (Big) Cauldron of Battle
 					RaidBuffStatus:Announces("Cauldron", srcname, nil, spellID)
-				end
-				return
-			elseif subevent == "SPELL_CAST_SUCCESS" then
-				if spellID == 43987 then -- Ritual of Refreshment 
+				elseif spellID == 43987 then -- Ritual of Refreshment 
 					RaidBuffStatus:Announces("Table", srcname, nil, spellID)
 				elseif spellID == 29893 then -- Ritual of Souls 
 					RaidBuffStatus:Announces("Soul", srcname, nil, spellID)
 					RaidBuffStatus.soulwelllastseen = GetTime() + 180
-				elseif spellID == 67826 or spellID == 22700 or spellID == 44389 or spellID == 54711 then -- Jeeves, Field Repair Bot 74A, Field Repair Bot 110G, Scrapbot
+				end
+				return
+			elseif subevent == "SPELL_CAST_SUCCESS" then
+				if spellID == 67826 or spellID == 22700 or spellID == 44389 or spellID == 54711 then -- Jeeves, Field Repair Bot 74A, Field Repair Bot 110G, Scrapbot
 					RaidBuffStatus:Announces("Repair", srcname, nil, spellID)
 				end
 			end
@@ -3984,7 +3986,12 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 			RaidBuffStatus:PingMinimap(who)
 			
 		elseif message == "FeastExpiring" and not incombat and not isdead then
+	        	local players = tonumber(RaidBuffStatus.report.AliveCount) or raid.size
+			local feeds = feastsz[spellID] or 40
 			local fname = (spellID and feasts[spellID]) or "Feast"
+			if players > feeds then -- dont announce expiration if there's not enough for everyone
+			  return
+			end
 			msg = (L["%s about to expire!"]):format(fname)
 			if report.foodlist then
 				if #report.foodlist == 0 then
@@ -4094,15 +4101,18 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 	if not msg or msg == "" then
 		return
 	end
+
+	UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
+	--RaidBuffStatus:Print(msg)
+	if not canspeak and not RaidBuffStatus.db.profile.nonleadspeak then
+	   return 
+	end
 	if raid.isparty then
 		SendChatMessage(msg, "PARTY")
-		UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-		RaidBuffStatus:Print(msg)
 	elseif canspeak then
 		SendChatMessage(msg, "RAID_WARNING")
 	else
-		UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-		RaidBuffStatus:Print(msg)
+		SendChatMessage(msg, "RAID")
 	end
 end
 
@@ -4130,31 +4140,36 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 	end
 end
 
+local unitlist = {}
+local function unitsort(u1, u2)
+  if UnitIsGroupLeader(u1.unitid) or UnitIsGroupLeader(u2.unitid) then
+  	return UnitIsGroupLeader(u1.unitid)
+  elseif UnitIsGroupAssistant(u1.unitid) ~= UnitIsGroupAssistant(u2.unitid) then
+  	return UnitIsGroupAssistant(u1.unitid)
+  else
+  	return u1.guid < u2.guid
+  end
+end
 function RaidBuffStatus:calcdelay()
 	if UnitIsGroupLeader("player") or not RaidBuffStatus.db.profile.antispam then
 		return 0.5 -- don't wait when leader
-	elseif UnitIsGroupAssistant("player") then
-		local unit = RaidBuffStatus:GetUnitFromName(playername)
-		if unit then
-			local guidlist = {}
-			for class,_ in pairs(raid.classes) do
-				for name,_ in pairs(raid.classes[class]) do
-					table.insert(guidlist, raid.classes[class][name].guid)
-				end
+	else
+		wipe(unitlist)
+		for class,_ in pairs(raid.classes) do
+			for name,_ in pairs(raid.classes[class]) do
+				table.insert(unitlist, raid.classes[class][name])
 			end
-			table.sort(guidlist)
-			local pos = 40
-			for i, g in ipairs(guidlist) do
-				if g == playerid then
-					pos = i
-					break
-				end
-			end
-			local delay = pos * 0.5 + 0.6
-			return delay
 		end
+		table.sort(unitlist, unitsort)
+		local pos = 40
+		for i, u in ipairs(unitlist) do
+			if u.guid == playerid then
+				pos = i
+				break
+			end
+		end
+		return pos * 0.5 + 0.6
 	end
-	return 10
 end
 
 function RaidBuffStatus:PingMinimap(whom)
@@ -4678,7 +4693,7 @@ function RaidBuffStatus:CHAT_MSG_WHISPER(event, msg, whom)
 	end
 	if RaidBuffStatus.db.profile.aiwbnfriends and BNFeaturesEnabledAndConnected() then
 		for i=1, BNGetNumFriends() do
-			local pID,fName,lName,toonname,_,client,isOnline = BNGetFriendInfo(i)
+			local pID,pName,battletag,isBT,toonname,_,client,isOnline = BNGetFriendInfo(i)
 			if (client == "WoW" and isOnline) then
 				if whom == toonname then
 					RaidBuffStatus:SendInvite(whom)
@@ -4740,10 +4755,10 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 	if RaidBuffStatus.db.profile.bnfriends and BNFeaturesEnabledAndConnected() then
 		local myrealm = GetRealmName()
 		for i=1, BNGetNumFriends() do
-			pID,_,_,_,_,client,isOnline = BNGetFriendInfo(i)
+			local pID,_,_,_,_,_,client,isOnline = BNGetFriendInfo(i)
 			if (client == "WoW" and isOnline) then
-				_,name,_,realm = BNGetToonInfo(pID)
-				if realm == myrealm and name == whom then
+				local _,name,_,realm = BNGetToonInfo(pID)
+				if name == whom then
 					RaidBuffStatus:Print((L["Invite auto-accepted from battle.net friend %s."]):format(whom))
 					RaidBuffStatus:AcceptInvite()
 					return

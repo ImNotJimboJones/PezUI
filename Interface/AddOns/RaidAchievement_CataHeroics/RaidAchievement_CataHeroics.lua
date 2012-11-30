@@ -1,4 +1,5 @@
-﻿function chraonload()
+﻿local _
+function chraonload()
 
 	chraachdone1=true
 	chracounter1=0

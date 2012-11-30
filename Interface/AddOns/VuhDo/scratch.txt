@@ -2,15 +2,11 @@
 
 - Option je Bouquet Stacks aufaddieren
 - Keine Balkenfarbe custom debuffs per spellID
-- Zweite Waffenverz. Schamanen, Erkennung welche Waffenverz.
-- Gifte Schurke
 - Sehbehindertenmodus Optionen
 
 - Direction arrow bei hoher frame strata?
 - Share Bouquets
 - Target-Farbe bei Gesinnungswechsel
-- Rollen-Icons verschwinden?
-- Summe shield absorbs als eine zahl
 - Uplift Mönch als AOE-Advice
 
 

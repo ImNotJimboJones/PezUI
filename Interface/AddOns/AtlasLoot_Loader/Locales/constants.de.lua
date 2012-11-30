@@ -1,4 +1,4 @@
-﻿-- $Id: constants.de.lua 3875 2012-10-11 01:46:41Z Dynaletik $
+﻿-- $Id: constants.de.lua 3993 2012-11-22 08:39:14Z celellach $
 --[[
 constants.de.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -247,18 +247,21 @@ if AL then
 	AL["Show Price"] = "Preis anzeigen";
 	AL["Skill"] = "Fertigkeit";
 	AL["Location"] = "Quelle";
-	AL["ilvl 200"] = "Gegenstandsstufe 200";
-	AL["ilvl 213"] = "Gegenstandsstufe 213";
-	AL["ilvl 226"] = "Gegenstandsstufe 226";
-	AL["ilvl 245"] = "Gegenstandsstufe 245";
-	AL["ilvl 264"] = "Gegenstandsstufe 264";
-	AL["ilvl 397"] = "Gegenstandsstufe 397";
-	AL["ilvl 470"] = "Gegenstandsstufe 470";
-	AL["ilvl 490"] = "Gegenstandsstufe 490";
+	-- AL["ilvl 200"] = "Gegenstandsstufe 200";
+	-- AL["ilvl 213"] = "Gegenstandsstufe 213";
+	-- AL["ilvl 226"] = "Gegenstandsstufe 226";
+	-- AL["ilvl 245"] = "Gegenstandsstufe 245";
+	-- AL["ilvl 264"] = "Gegenstandsstufe 264";
+	-- AL["ilvl 397"] = "Gegenstandsstufe 397";
+	-- AL["ilvl 470"] = "Gegenstandsstufe 470";
+	-- AL["ilvl 490"] = "Gegenstandsstufe 490";
+	AL["Grand Marshal"] = "Großmarschall";
 	-- AL["Gladiator"] = true;
 	AL["Vengeful"] = "Rachsüchtig";
 	AL["Merciless"] = "Erbarmungslos";
 	-- AL["Brutal"] = true;
+	AL["Wrathful"] = "Zornerfüllt";
+	AL["Cataclysmic"] = "Kataklysmisch";
 
 	-- #######################################
 	-- UI things END
@@ -327,8 +330,8 @@ if AL then
 	AL["Panel"] = "AtlasLoot-Leiste";
 
 	-- Slash commands
-	AL["reset"] = "Zurücksetzen";
-	AL["options"] = "Optionen";
+	-- AL["reset"] = true;
+	-- AL["options"] = true;
 	AL["Reset complete!"] = "AtlasLoot wurde erfolgreich zurückgesetzt!";
 
 	-- AtlasLoot Panel - Search
@@ -355,6 +358,7 @@ if AL then
 	AL["BoE World Epics"] = "Epische Weltdrops (BoE)";
 	AL["Legendary Items"] = "Legendäre Gegenstände";
 	AL["Misc Sets"] = "Sets (Sonstige)";
+	-- AL["Tier Sets"] = true;
 	-- AL["Tier 1/2 Set"] = true;
 	-- AL["Tier 1/2/3 Set"] = true;
 	-- AL["Tier 3 Set"] = true;
@@ -399,6 +403,15 @@ if AL then
 	AL["Stranglethorn Fishing Extravaganza"] = "Anglerwettbewerb im Schlingendorntal";
 	AL["Kalu'ak Fishing Derby"] = "Angelwettstreit der Kalu'ak";
 	AL["Fishing Contests"] = "Angelwettbewerbe";
+
+	-- World Events	Menu Names
+	AL["Special Rewards"] = "Spezielle Belohnungen";
+	AL["Brew of the Month Club"] = "Bier des Monats e.V.";
+	AL["Food and Drinks"] = "Speisen und Getränke";
+	AL["Gifts & Presents"] = "Geschenke";
+	AL["Playable Race Masks"] = "Masken spielbarer Völker";
+	AL["Non-Playable Race Masks"] = "Masken nicht spielbarer Völker";
+	AL["Schematics & Patterns"] = "Baupläne & Muster";
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = "|cff1eff00Linksklick|r Beuteverzeichnis durchsuchen";
@@ -494,6 +507,11 @@ if AL then
 	-- Engineering
 	AL["Tinker"] = "Basteln";
 
+	-- Fishing
+	AL["Fish Weapons"] = "Fisch-Waffen";
+	AL["Fishing Gear"] = "Angelausrüstung";
+	AL["Fishing Lines"] = "Angelschnüre";
+
 	-- Inscription
 	AL["Major Glyph"] = "Erhebliche Glyphe";
 	AL["Minor Glyph"] = "Geringe Glyphe";
@@ -525,7 +543,6 @@ if AL then
 	AL["Old Quest Item"] = "Alter Questgegenstand";
 	AL["Quest Reward"] = "Questbelohnung";
 	AL["Old Quest Reward"] = "Alte Questbelohnung";
-	AL["Pet Battle Quests"] = "Haustierkampf-Quest";
 	AL["Shared"] = "geteilter Loot";
 	AL["Right Half"] = "Rechte Hälfte";
 	AL["Left Half"] = "Linke Hälfte";
@@ -569,6 +586,7 @@ if AL then
 	-- AL["Tier 12"] = true;
 	-- AL["Tier 13"] = true;
 	-- AL["Tier 14"] = true;
+	AL["Challenge Mode Armor Sets"] = "Herausforderungsmodus Rüstungssets";
 	AL["10 Man"] = "10 Spieler";
 	AL["10/25 Man"] = "10/25 Spieler";
 	AL["Epic Set"] = "Episches Set";
@@ -598,7 +616,7 @@ if AL then
 	AL["Raid"] = "Schlachtzug";
 	-- AL["Hard Mode"] = true;
 	AL["Bonus Loot"] = "Zusatzbeute";
-    	AL["Arena Reward"] = "Arena Belohnung";
+	AL["Arena Reward"] = "Arena Belohnung";
 	AL["Achievement Reward"] = "Erfolgsbelohnung";
 	-- AL["Phase 1"] = true;
 	-- AL["Phase 2"] = true;
@@ -607,6 +625,7 @@ if AL then
 	AL["Rare Fish Rewards"] = "Besonderer Fisch - Belohnungen";
 	AL["Rare Fish"] = "Besondere Fische";
 	AL["Heirloom"] = "Erbstücke";
+	AL["PvP Heirlooms"] = "PvP Erbstücke";
 	AL["Weapons"] = "Waffen";
 	AL["Accessories"] = "Zubehör";
 	AL["Rare"] = "Selten";
@@ -622,8 +641,6 @@ if AL then
 	AL["Level 50-60"] = "Stufe 50-60";
 	AL["Summon"] = "Beschwörbar";
 	AL["Random"] = "Zufällig";
-	AL["Brew of the Month Club"] = "Bier des Monats e.V.";
-	AL["Food and Drinks"] = "Speisen und Getränke";
 
 	-- Profession descriptions
 	-- AL["Buff"] = true;
@@ -920,12 +937,13 @@ if AL then
 	AL["Carapace of the Old God"] = "Knochenpanzer des Gottes";
 
 	-- Recipe origin strings
-	AL["Trainer"] = "Lehrer";
-	AL["Discovery"] = "Entdeckung";
-	AL["World Drop"] = "Weltdrop";
-	-- AL["Drop"] = true;
-	AL["Vendor"] = "Händler";
 	AL["Crafted"] = "Hergestellt";
+	AL["Discovery"] = "Entdeckung";
+	-- AL["Drop"] = true;
+	AL["Fished From"] = "Geangelt aus";
+	AL["Trainer"] = "Lehrer";
+	AL["Vendor"] = "Händler";
+	AL["World Drop"] = "Weltdrop";
 
 	-- Months
 	AL["January"] = "Januar";
@@ -936,7 +954,7 @@ if AL then
 	AL["June"] = "Juni";
 	AL["July"] = "Juli";
 	-- AL["August"] = true;
-	-- AL["September"] = "true;
+	-- AL["September"] = true;
 	AL["October"] = "Oktober";
 	-- AL["November"] = true;
 	AL["December"] = "Dezember";
@@ -956,7 +974,7 @@ if AL then
 	AL["Fury"] = "Furor";
 	AL["Demonology"] = "Dämonologie";
 	AL["Destruction"] = "Zerstörung";
-    	AL["Tanking"] = "Schutz";
+	AL["Tanking"] = "Schutz";
 	AL["DPS"] = "Schaden";
 	AL["Mistweaver"] = "Nebelwirker";
 	AL["Brewmaster"] = "Braumeister";
@@ -970,12 +988,7 @@ if AL then
 	AL["Druid of the Fang"] = "Druiden des Giftzahns";
 	AL["Defias Strip Miner"] = "Akkordminenarbeiter der Defias";
 	AL["Defias Overseer/Taskmaster"] = "Vorarbeiter/Zuchtmeister der Defias";
-	AL["Scarlet Defender/Myrmidon"] = "Scharlachroter Myrmidone/Verteidiger";
-	AL["Scarlet Champion"] = "Scharlachroter Held";
-	AL["Scarlet Centurion"] = "Scharlachroter Zenturio";
 	AL["Scarlet Trainee"] = "Scharlachroter Lehrling";
-	-- AL["Herod/Mograine"] = true;
-	AL["Scarlet Protector/Guardsman"] = "Scharlachroter Beschützer/Gardist";
 	AL["Shadowforge Flame Keeper"] = "Flammenbewahrer der Schattenschmiede";
 	AL["Avatar of the Martyred"] = "Avatar des Gemarterten";
 	AL["Nexus Stalker"] = "Nexuswandler";
@@ -992,7 +1005,6 @@ if AL then
 	AL["Scholomance Adept"] = "Adept aus Scholomance";
 	AL["Scholomance Dark Summoner"] = "Dunkler Beschwörer aus Scholomance";
 	AL["Blackhand Elite"] = "Elitesoldat der Schwarzfaustlegion";
-	AL["Blackhand Assassin"] = "Auftragsmörder der Schwarzfaustlegion";
 	AL["Firebrand Pyromancer"] = "Pyromant der Feuerbrand";
 	AL["Firebrand Invoker"] = "Herbeirufer der Feuerbrand";
 	AL["Firebrand Grunt"] = "Grunzer der Feuerbrand";
@@ -1005,7 +1017,6 @@ if AL then
 	AL["Weapon Technician"] = "Waffentechniker";
 	AL["Doomforge Craftsman"] = "Schicksalsträchtiger Handwerker";
 	AL["Murk Worm"] = "Düsterwurm";
-	AL["Atal'ai Witch Doctor"] = "Hexendoktor der Atal'ai";
 	AL["Raging Skeleton"] = "Tobendes Skelett";
 	AL["Ethereal Priest"] = "Astraler Priester";
 	AL["Sethekk Ravenguard"] = "Rabenwächter der Sethekk";
@@ -1031,24 +1042,7 @@ if AL then
 	AL["Aether-tech Assistant"] = "Äthertechnikerassistent";
 	AL["Aether-tech Adept"] = "Äthertechnikeradept";
 	AL["Aether-tech Master"] = "Meisteräthertechniker";
-	-- AL["Trelopades"] = true;
-	AL["King Dorfbruiser"] = "König Dorfelberster";
-	AL["Gorgolon the All-seeing"] = "Gorgolon der Allessehende";
-	-- AL["Matron Li-sahar"] = true;
-	AL["Solus the Eternal"] = "Solus der Ewige";
 	AL["Smokywood Pastures Vendor"] = "Kokelwälder Händler";
-	AL["Darkscreecher Akkarai"] = "Dunkelkreischer Akkarai";
-	-- AL["Karrog"] = true;
-	AL["Gezzarak the Huntress"] = "Gezzarak die Jägerin";
-	AL["Vakkiz the Windrager"] = "Vakkiz der Windzürner";
-	-- AL["Terokk"] = true;
-	AL["Armbreaker Huffaz"] = "Armbrecher Huffaz";
-	AL["Fel Tinkerer Zortan"] = "Teufelstüftler Zortan";
-	-- AL["Forgosh"] = true;
-	-- AL["Gul'bor"] = true;
-	AL["Malevus the Mad"] = "Malevus die Verrückte";
-	AL["Porfus the Gem Gorger"] = "Porfus der Edelsteinschlinger";
-	AL["Wrathbringer Laz-tarash"] = "Zornschaffer Laz-tarash";
 	AL["Bash'ir Landing Stasis Chambers"] = "Stasiskammer des Landeplatz von Bash'ir";
 	AL["Templars"] = "Templer";
 	AL["Dukes"] = "Fürsten";
@@ -1063,28 +1057,28 @@ if AL then
 	AL["Razorfen Spearhide"] = "Speerträger der Klingenhauer";
 	AL["Magregan Deepshadow"] = "Magregan Grubenschatten";
 	-- AL["Don Carlos"] = true;
-	-- AL["Thomas Yance"] = true;
 	AL["Aged Dalaran Wizard"] = "Gealterter Hexer von Dalaran";
 	AL["Felsteed"] = "Teufelsross";
 	AL["Shattered Hand Executioner"] = "Henker der Zerschmetterten Hand";
-	AL["Time-Lost Proto Drake"] = "Zeitverlorener Protodrache";
-	AL["Razzashi Raptor"] = "Razzashiraptor";
 	AL["Deviate Ravager/Deviate Guardian"] = "Deviatverheerer/Deviatwächter";
 	AL["Servant's Quarter Animal Bosses"] = "Bosse im Quartier der Diener";
-	AL["Jadefang"] = "Jadezahn";
-	-- AL["Aeonaxx"] = true;
-	AL["Prince Sarsarun"] = "Prinz Sarsarun";
-	AL["Dormus the Camel-Hoarder"] = "Dormus der Kameltreiber";
-	AL["The Behemoth"] = "Das Ungetüm";
 	AL["Master Elemental Shaper Krixix"] = "Meisterelementarformer Krixix";
 	-- AL["Zen'Vorka"] = true;
 	AL["Ayla Shadowstorm"] = "Ayla Schattensturm";
 	AL["Damek Bloombeard"] = "Damek Blühbart";
 	AL["Varlan Highbough"] = "Varlan Hochblatt";
 	AL["Firestone Vendor"] = "Händler für Feuersteine";
-	-- AL["Poseidus"] = true;
-	AL["Burgy Blackheart"] = "Bürgi Schwarzherz";
 	AL["Battle Pet Trainer"] = "Kampfhaustiertrainer";
+	AL["Rotted One"] = "Verfaulter";
+	AL["Uncle Bigpocket"] = "Onkel Dickehose";
+	AL["Baradin Fox"] = "Baradinfuchs";
+	AL["Tex Vortacoil"] = "Tex Vortaspul";
+	AL["Olut Alegut"] = "Olut Bierbauch";
+	AL["Rork Sharpchin"] = "Rork Spitzkinn";
+	AL["Sprinkle Noggenfogger"] = "Sprinkel Noggenfogger";
+	AL["Wyrmcult Provisioner"] = "Versorger des Wyrmkults";
+	AL["Apothecary Hummel"] = "Apotheker Hummel";
+	AL["Auntie Stormstout"] = "Tantchen Sturmbräu";
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = "Prüfung des Obersten Kreuzfahrers";
@@ -1093,7 +1087,7 @@ if AL then
 	AL["Halfhill Farm"] = "Halbhügel Farm";
 
 	-- Shortcuts for Bossname files
-	-- AL["Avatar"] = true; Avatar of the Martyred
+	-- AL["Avatar"] = true; -- Avatar of the Martyred
 
 	-- Chests, etc
 	AL["The Grim Guzzler"] = "Zum Grimmigen Säufer";
@@ -1105,22 +1099,7 @@ if AL then
 	AL["Lorgalis Manuscript"] = "Manuskript von Lorgalis";
 	AL["Fathom Core"] = "Tiefenkern";
 	AL["Gift of Adoration"] = "Geschenke der Verehrung";
-	AL["Box of Chocolates"] = "Schokoladenschachtel";
 	AL["Treat Bag"] = "Schlotterbeutel";
-	AL["Gaily Wrapped Present"] = "Fröhlich verpacktes Geschenk";
-	AL["Festive Gift"] = "Festtagsgeschenk";
-	AL["Ticking Present"] = "Tickendes Geschenk";
-	AL["Gently Shaken Gift"] = "Leicht geschütteltes Geschenk";
-	AL["Carefully Wrapped Present"] = "Sorgfältig verpacktes Geschenk";
-	AL["Winter Veil Gift"] = "Winterhauchgeschenk";
-	AL["Smokywood Pastures Extra-Special Gift"] = "Kokelwälder Extraspezialgeschenk";
-	AL["Brightly Colored Egg"] = "Osterei";
-	AL["Lunar Festival Fireworks Pack"] = "Feuerwerkspaket des Mondfests";
-	AL["Lucky Red Envelope"] = "Roter Glücksumschlag";
-	AL["Small Rocket Recipes"] = "Rezepte für kleine Raketen";
-	AL["Large Rocket Recipes"] = "Rezepte für große Raketen";
-	AL["Cluster Rocket Recipes"] = "Rezepte für Raketenbündel";
-	AL["Large Cluster Rocket Recipes"] = "Rezepte für große Raketenbündel";
 	-- AL["Timed Reward Chest"] = true;
 	-- AL["Timed Reward Chest 1"] = true;
 	-- AL["Timed Reward Chest 2"] = true;
@@ -1135,23 +1114,9 @@ if AL then
 	AL["Second Fragment Guardian"] = "Wächter des zweiten Teils";
 	AL["Third Fragment Guardian"] = "Wächter des dritten Teils";
 	AL["Overcharged Manacell"] = "Überladene Manazelle";
-	AL["Mysterious Egg"] = "Mysteriöses Ei";
-	AL["Hyldnir Spoils"] = "Hyldnirbeute";
-	AL["Ripe Disgusting Jar"] = "Reife eklige Flasche";
-	AL["Cracked Egg"] = "Zerbrochene Eierschale";
-	AL["Small Spice Bag"] = "Kleines Gewürzsäckchen";
-	AL["Handful of Treats"] = "Eine Handvoll Süßigkeiten";
-	AL["Consumable Wands & Masks"] = "Verbrauchbare Stäbe & Masken";
-	AL["Permanent Masks"] = "Dauerhafte Masken";
-	AL["Lovely Dress Box"] = "Karton 'Reizendes Kleid'";
-	AL["Dinner Suit Box"] = "Karton 'Abendanzug'";
-	AL["Bag of Heart Candies"] = "Tüte mit Zuckerherzen";
-	AL["Hidden Stash"] = "Gebunkerte Güter";
 	AL["The Cache of Madness"] = "Der Hort des Wahnsinns";
-	AL["Stolen Present"] = "Gestohlenes Geschenk";
-	AL["Oozing Bag"] = "Schlammiger Beutel";
-	AL["Ominous Seed"] = "Ominöser Samen";
-	AL["Treasures of the Vale"] = "Schätze des Tals";
+	AL["Shellfish Trap"] = "Schalentierfalle";
+	AL["Fishing Pools"] = "Fischschwärme";
 
 	-- Blizzard Promotions
 	AL["Annual Pass"] = "Jahrespass";

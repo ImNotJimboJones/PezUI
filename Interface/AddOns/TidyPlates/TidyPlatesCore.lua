@@ -498,10 +498,12 @@ do
 	end
 	-- OnNewNameplate: When a new nameplate is generated, this function hooks the appropriate functions
 	function OnNewNameplate(plate)
-		local health, cast = plate:GetChildren()
+		--local health, cast = plate:GetChildren()
 		UpdateReferences(plate)
 		PrepareNameplate(plate)
 		GatherData_BasicInfo()
+		
+		local health, cast = bars.health, bars.cast
 		
 		-- Alternative to reduce initial CPU load
 		CheckNameplateStyle()
@@ -783,13 +785,6 @@ do
 		visual.spelltext = castbar:CreateFontString(nil, "OVERLAY")
 	end
 
-	local function GetNameplateRegions(plate, regions, cast)
-		regions.threatglow, regions.healthborder, regions.highlight, regions.name, regions.level, 
-			regions.skullicon, regions.raidicon, regions.eliteicon = plate:GetRegions()
-		
-		regions.castborder, regions.castnostop, regions.spellicon = select(2, cast:GetRegions())
-	end
-	
 	function ApplyPlateExtension(plate)
 		Plates[plate] = true
 		plate.extended = CreateFrame("Frame", nil, plate)
@@ -800,13 +795,22 @@ do
 		extended:SetFrameStrata("BACKGROUND")
 		extended.style, extended.unit, extended.unitcache, extended.stylecache, extended.widgets = {}, {}, {}, {}, {}
 		extended.regions, extended.bars, extended.visual = {}, {}, {}
+		extended.stylename = ""
 		regions = extended.regions
 		bars = extended.bars
-		bars.health, bars.cast = plate:GetChildren()
-		extended.stylename = ""
+		
 
-		-- Set Frame Levels and Parent
-		GetNameplateRegions(plate, regions, bars.cast)
+		-- Bars
+		local b, n = plate:GetChildren()
+		bars.health, bars.cast = b:GetChildren()
+		health, cast = bars.health, bars.cast		-- Blizzard bars
+
+		-- Regions
+		regions.threatglow, regions.healthborder, regions.highlight, regions.level, regions.skullicon, regions.raidicon, regions.eliteicon = b:GetRegions()
+		regions.name = n:GetRegions()
+
+		regions.castborder, regions.castnostop, regions.spellicon =  select(2, cast:GetRegions())
+
 		
 		-- This block makes the Blizz nameplate invisible
 		regions.threatglow:SetTexCoord( 0, 0, 0, 0 )
@@ -825,9 +829,9 @@ do
 		bars.cast:SetStatusBarTexture(EMPTY_TEXTURE) 
 		
 		CreateGraphicalElements(extended)
-
+		healthbar, castbar = bars.healthbar, bars.castbar	-- Tidy Plates bars
+		
 		-- Visible Bars
-		health, cast, healthbar, castbar = bars.health, bars.cast, bars.healthbar, bars.castbar
 		castbar:Hide()
 		castbar:SetStatusBarColor(1,.8,0)
 
@@ -890,10 +894,50 @@ do
 	local plate, curChildren
 	local WorldGetNumChildren, WorldGetChildren = WorldFrame.GetNumChildren, WorldFrame.GetChildren
 	
+	-- if ((string.find(frame:GetName() or "", "NamePlate")) ~= nil) then ListChildren(frame, "") end
+	local ListChildren
+	function ListChildren(frame, prefix)
+		if frame then
+			print(prefix, frame, frame:GetName(), frame:GetObjectType(), "-->")
+			--if frame:GetObjectType() == "Frame" then
+			if frame:IsObjectType("Frame") then
+				
+				-- Regions
+				local regions = frame:GetNumRegions()
+				if regions and regions > 0 then
+					print(prefix.."  ", "Regions of", frame, ":")
+					for i = 1, regions do
+						local r = select(i, frame:GetRegions())
+						print(prefix.."  ", r:GetObjectType(), r.GetTexture and r:GetTexture()) 
+						
+					end
+				end
+				
+				-- Children
+				local children = frame:GetNumChildren() 
+				if children and children > 0 then
+					print(prefix.."  ", "Children of", frame, ":")
+					for i = 1, children do
+						ListChildren(select(i, frame:GetChildren()), "    "..prefix) 
+					end
+				end
+				
+				
+				
+			end
+		end
+	end
+	
 	-- IsFrameNameplate: Checks to see if the frame is a Blizz nameplate
 	local function IsFrameNameplate(frame)
-		local threat, border, highlight, name = frame:GetRegions()
-		return ((string.find(frame:GetName() or "", "NamePlate")) ~= nil) and border and border:GetObjectType() == "Texture" and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border" 
+		--if ((string.find(frame:GetName() or "", "NamePlate")) ~= nil) then ListChildren(frame, "") end
+		
+		local bars, name = frame:GetChildren()
+		if bars then 
+			local border = select(2, bars:GetRegions() )
+			--print(frame:GetName(), border.GetTexture and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border")
+			return border and border.GetTexture and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border"
+		end
 	end
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates

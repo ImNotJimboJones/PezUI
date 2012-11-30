@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 549 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 566 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -13,6 +13,15 @@ local buttonoptions = {
 local options = { 
 	type='group',
 	args = {
+		config = {
+			type = 'execute',
+			name = L["Show configuration options"],
+			desc = L["Show configuration options"],
+			func = function()
+				RaidBuffStatus:OpenBlizzAddonOptions()
+			end,
+			guiHidden = true,
+		},
 		show = {
 			type = 'execute',
 			name = L["Show the buff report dashboard."],
@@ -2133,6 +2142,16 @@ local options = {
 					get = function(info) return RaidBuffStatus.db.profile.antispam end,
 					set = function(info, v)
 						RaidBuffStatus.db.profile.antispam = v
+					end,
+				},
+				nonleadspeak = {
+					type = 'toggle',
+					name = L["Announce without lead"],
+					desc = L["Announce even when you don't have assist or lead"],
+					order = 10,
+					get = function(info) return RaidBuffStatus.db.profile.nonleadspeak end,
+					set = function(info, v)
+						RaidBuffStatus.db.profile.nonleadspeak = v
 					end,
 				},
 			},

@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2011 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.2
+Version 2.0.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -52,7 +52,7 @@ L["CHAT_POST_NO_HEALERS"] = "No healers on either sides :/ (yet)"
 L["DESCRIPTION"] = "Spot those bloody healers instantly and help them accomplish their destiny! (PVP and PVE)"
 L["DISABLED"] = [=[hhtd has been disabled!
 Type '/hhtd on' to re-enable it.]=]
-L["ENABLED"] = "enabled! Type /hhtd for a list of options"
+L["ENABLED"] = "enabled! Type /HHTDG to open its option panel"
 L["HEALER_UNDER_ATTACK"] = "Healer friend %s is being attacked by %s"
 L["HUMAN"] = "Human"
 L["IDLE"] = "Idle"
@@ -172,7 +172,7 @@ L["CHAT_POST_NO_HEALERS"] = "Aucun soigneur d'un coté ou de l'autre :/ (pour l'
 L["DESCRIPTION"] = "Débusquez ces maudits soigneurs instantanément et aider-les à accomplir leur destinée ! (JCJ et JCE)"
 L["DISABLED"] = [=[hhtd a été désactivé !
 Taper '/hhtd on' pour le réactiver]=]
-L["ENABLED"] = "activé ! Taper /hhtd pour voir la liste des options"
+L["ENABLED"] = "activé ! Taper /HHTDG pour accéder aux options"
 L["HEALER_UNDER_ATTACK"] = "Le soigneur ami %s est attaqué par %s"
 L["HUMAN"] = "Humain"
 L["IDLE"] = "Dormant"
@@ -288,7 +288,7 @@ L["Announcer_DESC"] = "Dieses Modul erlaubt dir Chat-Warnungen und Alarmtöne ei
 L["DESCRIPTION"] = "Entdecke auf der Stelle diese verdammten Heiler und sorge dafür daß sie Ihr Schicksal ereilt! (PVE und PVP)"
 L["DISABLED"] = [=[hhtd wurde deaktiviert!
 Gib /hhtd ein, um es wieder zu aktivieren.]=] -- Needs review
-L["ENABLED"] = "aktiviert! Für eine Optionsliste gib /hhtd ein."
+L["ENABLED"] = "aktiviert! Für eine Optionsliste gib /HHTDG ein." -- Needs review
 -- L["HEALER_UNDER_ATTACK"] = ""
 -- L["HUMAN"] = ""
 -- L["IDLE"] = ""
@@ -395,7 +395,7 @@ L["CHAT_POST_NO_HEALERS"] = "No hay sanadores en ninguno de los bandos :/ (aún)
 L["DESCRIPTION"] = "¡Descubre a esos sanadores sangrientos instantáneamente y ayúdales a cumplir su destino! (JcE y JcJ)" -- Needs review
 L["DISABLED"] = [=[hhtd ha sido desactivado!
 Escribe /hhtd enable para reactivarlo.]=] -- Needs review
-L["ENABLED"] = "¡Activado! Escribe /hhtd para una lista de opciones."
+L["ENABLED"] = "¡Activado! Escribe /HHTDG para una lista de opciones." -- Needs review
 L["HEALER_UNDER_ATTACK"] = "El sanador amigo %s esta siendo atacado por %s" -- Needs review
 -- L["HUMAN"] = ""
 L["IDLE"] = "Inactivo" -- Needs review
@@ -613,7 +613,7 @@ L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "잠깐! 기다리세요. (알림 속도
 L["CHAT_POST_NO_HEALERS"] = "아직 양쪽 힐러를 알 수 없음."
 -- L["DESCRIPTION"] = ""
 L["DISABLED"] = "hhtd가 중지 되었습니다! '/hhtd on'를 치면 다시 사용할 수 있습니다."
-L["ENABLED"] = "사용! 옵션 목록을 보려면 /hhtd를 치세요."
+L["ENABLED"] = "사용! 옵션 목록을 보려면 /HHTDG 를 치세요." -- Needs review
 L["HEALER_UNDER_ATTACK"] = "힐러 %s|1이;가; %s의 공격을 받고 있습니다."
 L["HUMAN"] = "인간"
 L["IDLE"] = "놀고 있음"
@@ -721,7 +721,7 @@ L["CHAT_POST_NO_HEALERS"] = "哇靠，当前双方都没有治疗！" -- Needs r
 L["DESCRIPTION"] = "立刻曝光那些该死的治疗并帮助他们走完自己的使命！（PvP 和 PvE）" -- Needs review
 L["DISABLED"] = [=[hhtd 已被禁用！
 输入“/hhtd on”来重新启用。]=] -- Needs review
-L["ENABLED"] = "已启用！输入 /hhtd 打开选项列表" -- Needs review
+L["ENABLED"] = "已启用！输入 /HHTDG 打开选项列表" -- Needs review
 L["HEALER_UNDER_ATTACK"] = "友方治疗者%s被%s攻击" -- Needs review
 L["HUMAN"] = "人类" -- Needs review
 L["IDLE"] = "发呆" -- Needs review
@@ -830,7 +830,7 @@ L["Announcer_DESC"] = "此模組允許你管理聊天與音效警告" -- Needs r
 -- L["DESCRIPTION"] = ""
 L["DISABLED"] = [=[hhtd 已經被停用了!
 輸入 '/hhtd on' 來重新啟用它。]=]
-L["ENABLED"] = "已啟用! 輸入 /hhtd 開啟選單"
+L["ENABLED"] = "已啟用! 輸入 /HHTDG 開啟選單" -- Needs review
 -- L["HEALER_UNDER_ATTACK"] = ""
 -- L["HUMAN"] = ""
 -- L["IDLE"] = ""
@@ -938,7 +938,7 @@ L["DESCRIPTION"] = "Мгновенно обнаружить этих черто�
 L["DISABLED"] = [=[HHTD выключен.
 Введите "/hhtd on" для включения.]=]
 L["ENABLED"] = [=[HHTD включен!
-Для просмотра возможных параметров введите команду /hhtd]=]
+Для просмотра возможных параметров введите команду /HHTDG]=] -- Needs review
 L["HEALER_UNDER_ATTACK"] = "наш лекарь %s атакован %s"
 L["HUMAN"] = "Человек"
 L["IDLE"] = "Находится в режиме ожидания"

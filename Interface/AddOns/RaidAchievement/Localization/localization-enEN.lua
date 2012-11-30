@@ -33,6 +33,7 @@ racolor3               = "yellow"
 racolor6               = "purple"
 radeathwingemote1			= " rolls left!"
 radeathwingemote2			= " rolls right!"
+raspectext            = "Too big fight zone. Requests more addons in the raid!"
 
 
 psealeftmenu1				= "AddOn"

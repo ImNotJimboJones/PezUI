@@ -1,4 +1,3 @@
-local _;
 VUHDO_ACTIVE_HOTS = { };
 VUHDO_ACTIVE_HOTS_OTHERS = { };
 VUHDO_PLAYER_HOTS = { };
@@ -18,7 +17,7 @@ VUHDO_GCD_SPELLS = {
 	["PRIEST"] = VUHDO_SPELL_ID.RENEW, -- mopok
 	["DEATHKNIGHT"] = GetSpellInfo(48266), -- Blood Presence
 	["MONK"] = GetSpellInfo(100780) -- Jab
-}
+};
 
 
 

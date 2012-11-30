@@ -47,6 +47,12 @@ local GeneralOptions = {
 		["v"] = 1,
 		["m"] = 1,
 		["default"] = 1 },
+	["DingQuestFish"] = {
+		["text"] = FBConstants.CONFIG_DINGQUESTFISH_ONOFF,
+		["tooltip"] = FBConstants.CONFIG_DINGQUESTFISH_INFO,
+		["v"] = 1,
+		["m"] = 1,
+		["default"] = 1, },
 	["EnhanceFishingSounds"] = {
 		["text"] = FBConstants.CONFIG_ENHANCESOUNDS_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_ENHANCESOUNDS_INFO,
@@ -284,9 +290,6 @@ local InvisibleOptions = {
 	["MinimapButtonRadius"] = {
 		["default"] = FBConstants.DEFAULT_MINIMAP_RADIUS,
 	},
-	["CaughtSoFar"] = {
-		["default"] = 0,
-	},
 	["TotalTimeFishing"] = {
 		["default"] = 1,
 	},
@@ -342,7 +345,7 @@ FishingBuddy.StartedFishing = nil;
 local CastingNow = false;
 
 -- Let's wait at least five seconds before we attempt to lure again
-local RELURE_DELAY = 5.0;
+local RELURE_DELAY = 8.0;
 
 local AddingLure = false;
 local DoEscaped = nil;
@@ -728,6 +731,18 @@ QuestItems[80260] = {
 };
 FishingBuddy.QuestItems = QuestItems;
 
+-- Nat Pagle fish
+local PagleFish = {};
+PagleFish[86545] = {
+	["enUS"] = "Mimic Octopus",
+};
+PagleFish[86544] = {
+	["enUS"] = "Spinefish Alpha",
+};
+PagleFish[86542] = {
+	["enUS"] = "Flying Tiger Gourami",
+};
+
 local QuestLures = {};
 QuestLures[58788] = {
 	["enUS"] = "Overgrown Earthworm",	-- Diggin' for Worms
@@ -771,6 +786,7 @@ local questIndex = select('#', GetAuctionItemClasses());
 local questType = select(questIndex, GetAuctionItemClasses());
 local CurLoc = GetLocale();
 local function AddFishie(color, id, name, zone, subzone, texture, quantity, quality, level, it, st, poolhint)
+	local GSB = FishingBuddy.GetSettingBool;
 	if ( id and not FishingBuddy_Info["Fishies"][id] ) then
 		if ( not color ) then
 			local _,_,_,hex = GetItemQualityColor(quality);
@@ -813,6 +829,11 @@ local function AddFishie(color, id, name, zone, subzone, texture, quantity, qual
 		end
 	end
 
+	-- Play a sound on Nat Pagle rep
+	if ( PagleFish[id] and GSB("DingQuestFish") ) then
+		PlaySound("igQuestListComplete", "master");
+	end
+	
 	if ( not zone ) then
 		zone = UNKNOWN;
 	end
@@ -841,7 +862,7 @@ local function AddFishie(color, id, name, zone, subzone, texture, quantity, qual
 	end
 	if ( not fh[idx][id] ) then
 		fh[idx][id] = quantity;
-		if ( FishingBuddy.GetSettingBool("ShowNewFishies") ) then
+		if ( GSB("ShowNewFishies") ) then
 			FishingBuddy.Print(FBConstants.ADDFISHIEMSG, name or UNKNOWN, subzone or zone);
 		end
 	else
@@ -934,9 +955,9 @@ local function UseFishingItem(itemtable)
 	local GSB = FishingBuddy.GetSettingBool;
 	for itemid, info in pairs(itemtable) do
 		if ( GetItemCount(itemid) > 0 and (not info.setting or GSB(info.setting)) ) then
-			if ( not info.usable or info.usable() ) then
+			if ( not info.usable or info.usable(info) ) then
 				local buff = GetSpellInfo(info.spell);
-				if ( not FL:HasBuff(buff) ) then
+				if ( (info.check and info.check(buff)) or not FL:HasBuff(buff) ) then
 					FL:InvokeLuring(itemid);
 					return true;
 				end
@@ -991,7 +1012,7 @@ local function UpdateLure()
 		end
 		
 		-- Let's wait a bit so that the enchant can show up before we lure again
-		if ( LastLure and LastLure.time and ((GetTime() - LastLure.time) < RELURE_DELAY) ) then
+		if ( LastLure and LastLure.time and ((LastLure.time - GetTime()) > 0) ) then
 			return false;
 		end
 		
@@ -1043,7 +1064,7 @@ local function UpdateLure()
 					LastLure = DoLure;
 					LureState = NextState;
 					FL:InvokeLuring(DoLure.id);
-					LastLure.time = GetTime();
+					LastLure.time = GetTime() + RELURE_DELAY;
 					DoLure = nil;
 					return true;
 				else
@@ -1095,11 +1116,7 @@ StatusEvents["UNIT_AURA"] = function(arg1)
 end
 
 local function ReadyForFishing()
-	if ( FishingBuddy.GetSettingBool("PartialGear") ) then
-		return FL:IsFishingGear();
-	else
-		return FL:IsFishingPole();
-	end
+	return FL:IsFishingReady(FishingBuddy.GetSettingBool("PartialGear"));
 end
 FishingBuddy.ReadyForFishing = ReadyForFishing;
 

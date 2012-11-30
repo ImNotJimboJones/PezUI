@@ -1,4 +1,23 @@
-﻿Version 1.2
+﻿Version 1.2c
+- Updated German translation (thanks DirtyHarryGermany!)
+- Updated Traditional Chinese translation (thanks titanium0107!)
+- Update the raft buff before it expires, if we can (reworking this for the next version)
+- Handle Nat's Hat correctly
+- Lots of small code improvements
+
+Version 1.2b
+- Add option to play the quest completed sound when you catch Nat Pagle rep fish (#203)
+- More work on the pet menu to try and address the "script too long" bug some people
+  are seeing
+
+Version 1.2a
+- New French translation (thanks Matisk!)
+- Updated Traditional Chinese translation (thanks titanium0107!)
+- New German translation (thanks DirtyHarryGermany!)
+- Add Nat's Hat (duh)
+- Updated the About box to thank all the translators! (I always do, calling it out :-)
+
+Version 1.2
 - Add "Partial Gear" option for casting. If enabled, wearing any item that has a fishing bonus will let you double click cast.
 - Add support for the Angler's Raft (still figuring out what to do about the spear)
 - Fishing volume slider works now
@@ -6,6 +25,7 @@
 - Don't include pool catches in counts (works for first time fishing in a subzone)
 - Try harder to notice that we're fishing from a pool
 - Fix for pet menu timeout (CurseForge #190, #198)
+- Miscellaneous bug fixes (CurseForge #201, forum)
 
 Version 1.1f
 - Fix a startup bug for brand-new toons (or never fished from a pool)

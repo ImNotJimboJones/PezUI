@@ -1,6 +1,6 @@
-﻿-- $Id: constants.fr.lua 3876 2012-10-11 07:16:17Z TrAsHeR $
+﻿-- $Id: constants.fr.lua 3997 2012-11-23 05:10:16Z TrAsHeR $
 --[[
-constants.fr.lua --- Traduction frFR par TrAsHeR (Tchoupie @ Nerz'hul-EU). Merci à KKram pour les premières traductions & Pettigrow pour ses quelques traductions.
+constants.fr.lua --- Traduction frFR par TrAsHeR (Tchoupie @ Ysondre-EU). Merci à KKram pour les premières traductions & Pettigrow pour ses quelques traductions.
 This file defines an AceLocale table for all the various text strings needed
 by AtlasLoot.  In this implementation, if a translation is missing, it will fall
 back to the English translation.
@@ -73,6 +73,7 @@ if AL then
 	AL["Module \"%s\" is disabled."] = "Le module \"%s\" est désactivé.";
 	AL["Module \"%s\" is missing."] = "Le module \"%s\" est manquant.";
 
+	-- MiniMap-Button
 	AL["|cffFF0000Click: |cffFFFFFFOpen AtlasLoot\n|cffFF0000Shift+Click: |cffFFFFFFOpen AtlasLoot-Options "] = "|cffFF0000Clic: |cffFFFFFFOuvrir AtlasLoot\n|cffFF0000Maj+Clic: |cffFFFFFFOuvrir les options d'AtlasLoot";
 
 	-- AtlasLootFu 
@@ -254,10 +255,13 @@ if AL then
 	--AL["ilvl 397"] = true;
 	--AL["ilvl 470"] = true;
 	--AL["ilvl 490"] = true;
+	AL["Grand Marshal"] = "Connétable";
 	AL["Gladiator"] = "Gladiateur";
 	AL["Vengeful"] = "Vengeur";
 	AL["Merciless"] = "Impitoyable";
 	AL["Brutal"] = "Brutale";
+	AL["Wrathful"] = "Courroucé";
+	AL["Cataclysmic"] = "Cataclysmique";
 
 	-- #######################################
 	-- UI things END
@@ -344,6 +348,7 @@ if AL then
 	AL["Crafted Epic Weapons"] = "Armes d'artisanat épiques";
 	AL["Dragon's Eye"] = "Oeil de dragon";
 	AL["Chimera's Eye"] = "Oeil de chimère";
+	AL["Serpent's Eye"] = "Oeil de serpent";
 
 	-- Sets/Collections Menu
 	--AL["Sets"] = true;
@@ -353,6 +358,7 @@ if AL then
 	AL["BoE World Epics"] = "LqÉ Épiques mondial";
 	AL["Legendary Items"] = "Objets légendaires";
 	AL["Misc Sets"] = "Sets divers";
+	AL["Tier Sets"] = "Sets de palier";
 	--AL["Tier 1/2 Set"] = true;
 	--AL["Tier 1/2/3 Set"] = true;
 	--AL["Tier 3 Set"] = true;
@@ -364,6 +370,7 @@ if AL then
 	--AL["Tier 13 Set"] = true;
 	--AL["Tier 14 Set"] = true;
 	AL["TCG Items"] = "Objets des cartes à jouer"; -- Trading Card Game Items
+	AL["Rare Mobs"] = "Monstres rares";
 
 	-- PvP Menu
 	AL["Arathi Basin Sets"] = "Sets du Bassin d'Arathi";
@@ -397,6 +404,15 @@ if AL then
 	AL["Stranglethorn Fishing Extravaganza"] = "Concours de pêche de Strangleronce";
 	AL["Kalu'ak Fishing Derby"] = "Tournoi de pêche kalu'ak";
 	AL["Fishing Contests"] = "Concours de pêche";
+
+	-- World Events	Menu Names
+	AL["Special Rewards"] = "Récompenses spéciales"; 				-- Brewfest, Feast of Winter Veil
+	AL["Brew of the Month Club"] = "Le club de la Bière du mois";	-- Brewfest
+	AL["Food and Drinks"] = "Nourritures et boissons";			-- Brewfest
+	AL["Gifts & Presents"] = "Cadeaux";						-- Feast of Winter Veil
+	AL["Playable Race Masks"] = "Masques de race jouable";			-- Hallow's End
+	AL["Non-Playable Race Masks"] = "Masques de race non-jouable";	-- Hallow's End
+	AL["Schematics & Patterns"] = "Schémas et patrons";			-- Lunar Festival
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = "|cff1eff00Clic-Gauche|r Parcours des Listes d'Objets";
@@ -463,10 +479,10 @@ if AL then
 	AL["Guild"] = "Guilde";
 
 	-- Blacksmithing
-	AL["Mists of Pandaria Vendor Sold Plans"] = "Vendeur de plans à Mist of Pandoria";
-	AL["Cataclysm Vendor Sold Plans"] = "Vendeur de plans à Cataclysme"
 	AL["Armor Enhancements"] = "Améliorations d'armure";
 	AL["Weapon Enhancements"] = "Améliorations d'arme";
+	AL["Cataclysm Vendor Sold Plans"] = "Vendeur de plans à Cataclysme"
+	AL["Mists of Pandaria Vendor Sold Plans"] = "Vendeur de plans à Mist of Pandoria";
 
 	-- Cooking
 	AL["Banquets/Feasts"] = "Banquets / Festins";
@@ -492,6 +508,11 @@ if AL then
 	-- Engineering
 	AL["Tinker"] = "Objets bricolés";
 
+	-- Fishing
+	AL["Fish Weapons"] = "Armes en poisson";
+	AL["Fishing Gear"] = "Équipements de pêche";
+	AL["Fishing Lines"] = "Ligne de pêche";
+
 	-- Inscription
 	AL["Major Glyph"] = "Glyphe majeur";
 	AL["Minor Glyph"] = "Glyphe mineur";
@@ -515,6 +536,7 @@ if AL then
 	AL["Shirts"] = "Chemises";
 	AL["Bags"] = "Sacs";
 	AL["Cataclysm Vendor Sold Patterns"] = "Vendeur de patrons à Cataclysme";
+	AL["Mists of Pandaria Vendor Sold Patterns"] = "Vendeur de patrons à Mist of Pandoria";
 
 	-- Labels for loot descriptions
 	AL["Classes:"] = "Classes :";
@@ -523,7 +545,6 @@ if AL then
 	AL["Old Quest Item"] = "Ancien objet de quête";
 	AL["Quest Reward"] = "Récompense de quête";
 	AL["Old Quest Reward"] = "Ancienne récompense de quête";
-	AL["Pet Battle Quests"] = "Mascottes de combat des quêtes";
 	AL["Shared"] = "Partagé";
 	AL["Right Half"] = "Moitié droite";
 	AL["Left Half"] = "Moitié gauche";
@@ -538,7 +559,8 @@ if AL then
 	AL["Collector's Edition"] = "Edition Collector";
 	AL["Daily Reward"] = "Récompense journalière";
 	AL["No Longer Available"] = "N'est plus disponible";
-	AL["Shared Boss Loot"] = "Loots partager sur les boss";
+	AL["Shared Boss Loot"] = "Objets partager sur les boss";
+	--AL["Shared Zone Loot"] = "Objets des différentes zone"; -- à traduire
 
 	-- Minor Labels for loot table descriptions
 	AL["Classic WoW"] = "WoW classique";
@@ -566,6 +588,8 @@ if AL then
 	--AL["Tier 11"] = true;
 	--AL["Tier 12"] = true;
 	--AL["Tier 13"] = true;
+	--AL["Tier 14"] = true;
+	AL["Challenge Mode Armor Sets"] = "Sets d'armure du mode défi";
 	AL["10 Man"] = "10 Joueurs";
 	AL["10/25 Man"] = "10 / 25 Joueurs";
 	AL["Epic Set"] = "Set épique";
@@ -592,7 +616,6 @@ if AL then
 	AL["Additional Heroic Loot"] = "Loot héroïque additionnel";
 	AL["Heroic Mode"] = "Mode héroïque";
 	AL["Normal Mode"] = "Mode normal";
-	--AL["Raid"] = true;
 	AL["Hard Mode"] = "Mode difficile";
 	AL["Bonus Loot"] = "Bonus de loot";
 	AL["Arena Reward"] = "Récompense d'arène";
@@ -603,7 +626,6 @@ if AL then
 	AL["First Prize"] = "1er prix";
 	AL["Rare Fish Rewards"] = "Récompenses des poissons rares";
 	AL["Rare Fish"] = "Poissons rares";
-	AL["Heirloom"] = "Héritage";
 	AL["Weapons"] = "Armes";
 	AL["Accessories"] = "Accessoires";
 	--AL["Rare"] = true;
@@ -617,10 +639,11 @@ if AL then
 	AL["Level 30-39"] = "Niveau 30-39";
 	AL["Level 40-49"] = "Niveau 40-49";
 	AL["Level 50-60"] = "Niveau 50-60";
+	AL["Level 60-69"] = "Niveau 60-69";
+	AL["Level 70-79"] = "Niveau 70-79";
+	AL["Level 85-89"] = "Niveau 85-89";
 	AL["Summon"] = "Invocation";
 	AL["Random"] = "Aléatoire";
-	AL["Brew of the Month Club"] = "Le club de la Bière du mois";
-	AL["Food and Drinks"] = "Nourriture et boissons";
 
 	-- Profession descriptions
 	--AL["Buff"] = true;
@@ -694,6 +717,9 @@ if AL then
 	AL["Achievement"] = "Haut fait";
 	AL["Dungeon"] = "Donjon";
 	AL["Outdoor"] = "Plein air";
+	AL["Promotional"] = "Promotionnel";
+	AL["PvP"] = "JcJ";
+	--AL["Raid"] = true;
 
 	-- Companions
 	AL["Achievement Companions"] = "Mascottes des hauts faits";
@@ -711,6 +737,11 @@ if AL then
 	AL["Rare Companions"] = "Mascottes rares";
 	AL["Unobtainable Companions"] = "Mascottes impossibles à obtenir";
 	AL["New Companions"] = "Nouvelles mascottes";
+	--- Drop Locations
+	AL["Bogflare Needler"] = "Piqueur Tourbembrase";
+	AL["Deviate Ravager/Deviate Guardian"] = "Ravageur déviant/Gardien déviant";
+	AL["Gundrak Raptor"] = "Raptor de Gundrak";
+	AL["Noxious Whelp"] = "Dragonnet nocif";
 
 	-- Mounts
 	AL["Alliance Mounts"] = "Montures de l'Alliance";
@@ -728,6 +759,7 @@ if AL then
 	AL["Rare Mounts"] = "Montures rares";
 	AL["Unobtainable Mounts"] = "Montures impossibles à obtenir";
 	AL["New Mounts"] = "Nouvelles montures";
+	AL["Mount Collecting"] = "Collection de monture";
 
 	-- Tabards
 	AL["Achievement & Quest Reward Tabards"] = "Tabards des hauts faits & récompenses de quêtes";
@@ -743,6 +775,13 @@ if AL then
 	AL["Additional Effects Transformation Items"] = "Effets supplémentaires pour les objets de transformation";
 	AL["Consumable Transformation Items"] = "Objets consommables de transformation";
 	AL["Non-consumed Transformation Items"] = "Objets non-consommables de transformation";
+
+	-- Heirloom and BoA Items
+	AL["Heirloom"] = "Héritage";
+	AL["PvP Heirlooms"] = "Héritages JcJ";
+	AL["Bind on Account"] = "Lié au compte";
+	AL["Bind on Account Armor"] = "Armures liées au compte";
+	AL["Bind on Account Weapons"] = "Armes liées au compte";
 
 	-- Darkmoon Faire
 	AL["Darkmoon Faire Rewards"] = "Récompenses Foire de Sombrelune";
@@ -917,12 +956,13 @@ if AL then
 	AL["Carapace of the Old God"] = "Carapace du Dieu très ancien";
 
 	-- Recipe origin strings
-	AL["Trainer"] = "Entraineur";
+	AL["Crafted"] = "Fabriqué";
 	AL["Discovery"] = "Découverte";
-	AL["World Drop"] = "Drop mondial";
 	--AL["Drop"] = true;
-	AL["Vendor"] = "Vendeur";
-	AL["Crafted"] = "Créer";
+	AL["Fished From"] = "Pêché de";
+	AL["Trainer"] = "Entraineur";
+	AL["Vendor"] = "Vendeur";	
+	AL["World Drop"] = "Drop mondial";
 
 	-- Months
 	AL["January"] = "Janvier";
@@ -961,35 +1001,24 @@ if AL then
 
 	-- NPCs missing from BabbleBoss
 	--AL["Trash Mobs"] = true,
+	--- Classic WoW
 	AL["Dungeon Set 2 Summonable"] = "Invocation Set Donjon 2";
 	--AL["Theldren"] = true,
 	AL["Sothos and Jarien"] = "Sothos et Jarien";
 	AL["Druid of the Fang"] = "Druide du Croc";
 	AL["Defias Strip Miner"] = "Carrier défias";
 	AL["Defias Overseer/Taskmaster"] = "Sous-chef/Surveillant défias";
-	AL["Scarlet Defender/Myrmidon"] = "Défenseur/Myrmidon écarlate";
-	AL["Scarlet Champion"] = "Champion écarlate";
-	AL["Scarlet Centurion"] = "Centurion écarlate";
-	AL["Scarlet Trainee"] = "Jeune recrue écarlate";
-	--AL["Herod/Mograine"] = true,
-	AL["Scarlet Protector/Guardsman"] = "Protecteur/Gardien écarlate";
+	AL["Scarlet Trainee"] = "Jeune recrue écarlate"; --- mob removed from game
 	AL["Shadowforge Flame Keeper"] = "Gardien des flammes Ombreforge";
-	AL["Avatar of the Martyred"] = "Avatar des martyrs";
-	AL["Nexus Stalker"] = "Traqueur du nexus";
-	AL["Auchenai Monk"] = "Moine auchenaï";
-	AL["Cabal Fanatic"] = "Fanatique de la Cabale";
-	AL["Unchained Doombringer"] = "Porte-destin sans chaîne";
-	AL["Crimson Sorcerer"] = "Ensorceleur cramoisi";
+	AL["Crimson Sorcerer"] = "Ensorceleur cramoisi";--- mob removed from game. Formula: Enchant 2H Weapon - Major Intellect drops now from Risen Sorcerer
 	AL["Thuzadin Shadowcaster"] = "Exhalombre Thuzadin";
-	AL["Crimson Inquisitor"] = "Inquisiteur cramoisi";
-	AL["Crimson Battle Mage"] = "Mage de bataille cramoisi";
+	AL["Crimson Inquisitor"] = "Inquisiteur cramoisi"; --- mob removed from game. Schematic: Voice Amplification Modulator and Schematic: Ultra-Flash Shadow Reflector drops now from Risen Inquisitor
+	AL["Crimson Battle Mage"] = "Mage de bataille cramoisi"; --- mob removed from game?
 	AL["Ghoul Ravener"] = "Goule vorace";
 	AL["Spectral Citizen"] = "Citoyen spectral";
-	AL["Spectral Researcher"] = "Chercheur spectral";
-	AL["Scholomance Adept"] = "Adepte de la Scholomance";
-	AL["Scholomance Dark Summoner"] = "Invocateur des ténèbres de la Scholomance";
+	AL["Scholomance Adept"] = "Adepte de la Scholomance"; --- Drops Formula: Enchant 2H Weapon - Major Spirit along with Scholomance Acolyte and needs to be added back to trash loot of Scholomance.
+	AL["Scholomance Dark Summoner"] = "Invocateur des ténèbres de la Scholomance"; --- mob might have been removed. No idea where we used this.
 	AL["Blackhand Elite"] = "Elite Main-noire";
-	AL["Blackhand Assassin"] = "Assassin Main-noire";
 	AL["Firebrand Pyromancer"] = "Pyromancien de Brandefeu";
 	AL["Firebrand Invoker"] = "Invocateur de Brandefeu";
 	AL["Firebrand Grunt"] = "Grunt de Brandefeu";
@@ -1001,8 +1030,28 @@ if AL then
 	AL["Doomforge Arcanasmith"] = "Forgeron des arcanes Forge-ruine";
 	AL["Weapon Technician"] = "Ingénieur de siège";
 	AL["Doomforge Craftsman"] = "Artisan Forge-ruine";
-	AL["Murk Worm"] = "Ver des boues";
-	AL["Atal'ai Witch Doctor"] = "Sorcier-docteur atal'ai";
+	AL["Murk Worm"] = "Ver des boues";  --- mob removed from game
+	AL["Scarshield Quartermaster"] = "Intendant du Bouclier balafré";
+	AL["Knot Thimblejack"] = "Noué Dédodevie"; --- Might not give any items anymore, needs to be checked.
+	AL["Shen'dralar Provisioner"] = "Approvisionneur Shen'dralar";
+	AL["The Nameles Prophet"] = "Le Prophète sans nom";
+	AL["Rajaxx's Captains"] = "Les Capitaines de Rajaxx";
+	AL["Razorfen Spearhide"] = "Lanceur de Tranchebauge";
+	AL["Felsteed"] = "Palefroi corrompu"; --- NPC name is Fel Steed. Drops Eerie Stable Lantern in SFK.
+	AL["Master Elemental Shaper Krixix"] = "Maître élémentaire Krixix le Sculpteur"; --- Needs to be added to BabbleBoss
+	AL["Rotted One"] = "Pourri";
+	AL["Tex Vortacoil"] = "Tex Vortabobine";
+	AL["Sprinkle Noggenfogger"] = "Saupoudr Brouillecaboche";
+	--- Burning Crusade
+	AL["Avatar of the Martyred"] = "Avatar des martyrs"; --- Needs to be moved to BabbleBoss
+	AL["Nexus Stalker"] = "Traqueur du nexus";
+	AL["Auchenai Monk"] = "Moine auchenaï";
+	AL["Cabal Fanatic"] = "Fanatique de la Cabale";
+	AL["Unchained Doombringer"] = "Porte-destin sans chaîne";
+	AL["Aether-tech Assistant"] = "Techno-éther assistant";
+	AL["Aether-tech Adept"] = "Techno-éther adepte";
+	AL["Aether-tech Master"] = "Techno-éther apprenti";
+	--AL["Thomas Yance"] = true,
 	AL["Raging Skeleton"] = "Squelette déchaîné";
 	AL["Ethereal Priest"] = "Prêtre éthérien";
 	AL["Sethekk Ravenguard"] = "Garde-corbeau Sethekk";
@@ -1017,71 +1066,40 @@ if AL then
 	AL["Sunseeker Astromage"] = "Astromage Cherche-soleil";
 	AL["Durnholde Rifleman"] = "Fusilier de Fort-de-Durn";
 	AL["Rift Keeper/Rift Lord"] = "Gardien des failles/Seigneur des failles";
-	AL["Crimson Templar"] = "Templier cramoisi";
-	AL["Azure Templar"] = "Templier d'azur";
-	AL["Hoary Templar"] = "Templier chenu";
-	AL["Earthen Templar"] = "Templier terrestre";
-	AL["The Duke of Cynders"] = "Le duc des Cendres";
-	AL["The Duke of Fathoms"] = "Le duc des Profondeurs";
-	AL["The Duke of Zephyrs"] = "Le duc des Zéphyrs";
-	AL["The Duke of Shards"] = "Le duc des Eclats";
-	AL["Aether-tech Assistant"] = "Techno-éther assistant";
-	AL["Aether-tech Adept"] = "Techno-éther adepte";
-	AL["Aether-tech Master"] = "Techno-éther apprenti";
-	AL["Trelopades"] = "Trelopades";
-	AL["King Dorfbruiser"] = "Roi Cognenabot";
-	AL["Gorgolon the All-seeing"] = "Gorgolon l'Omnivoyant";
-	AL["Matron Li-sahar"] = "Matrone Li-sahar";
-	AL["Solus the Eternal"] = "Solus l'Éternel";
-	AL["Smokywood Pastures Vendor"] = "Vendeurs de Gourmandises Fumebois";
-	AL["Darkscreecher Akkarai"] = "Akkarai le Hurle-sombre";
-	--AL["Karrog"] = true,
-	AL["Gezzarak the Huntress"] = "Gezzarak la Chasseresse";
-	AL["Vakkiz the Windrager"] = "Vakkiz le Ragevent";
-	--AL["Terokk"] = true,
-	AL["Armbreaker Huffaz"] = "Casse-bras Huffaz";
-	AL["Fel Tinkerer Zortan"] = "Bricoleur gangrené Zortan";
-	--AL["Forgosh"] = true,
-	--AL["Gul'bor"] = true,
-	AL["Malevus the Mad"] = "Malevus le Fol";
-	AL["Porfus the Gem Gorger"] = "Porfus le Goinfre-gemmes";
-	AL["Wrathbringer Laz-tarash"] = "Porte-courroux Laz-tarash";
-	AL["Bash'ir Landing Stasis Chambers"] = "Chambre de stase alpha du point d'ancrage de Bash'ir";
-	AL["Templars"] = "Templiers";
-	AL["Dukes"] = "Ducs";
-	AL["High Council"] = "Princes";
-	AL["Scarshield Quartermaster"] = "Intendant du Bouclier balafré";
-	AL["Father Flame"] = "Père des flammes";
-	--AL["Thomas Yance"] = true,
-	AL["Knot Thimblejack"] = "Noué Dédodevie";
-	AL["Shen'dralar Provisioner"] = "Approvisionneur Shen'dralar";
-	AL["The Nameles Prophet"] = "Le Prophète sans nom";
-	AL["Rajaxx's Captains"] = "Les Capitaines de Rajaxx";
-	AL["Razorfen Spearhide"] = "Lanceur de Tranchebauge";
-	AL["Magregan Deepshadow"] = "Magregan Fondombre";
-	--AL["Don Carlos"] = true,
-	--AL["Thomas Yance"] = true;
+	--AL["Don Carlos"] = true, --- Needs to be moved to BabbleBoss
 	AL["Aged Dalaran Wizard"] = "Sorcier de Dalaran âgé";
-	AL["Felsteed"] = "Palefroi corrompu";
 	AL["Shattered Hand Executioner"] = "Bourreau de la Main brisée";
-	AL["Time-Lost Proto Drake"] = "Rênes de proto-drake perdu dans le temps";
-	AL["Razzashi Raptor"] = "Raptor Razzashi";
-	AL["Deviate Ravager/Deviate Guardian"] = "Ravageur déviant/Gardien déviant";
 	AL["Servant's Quarter Animal Bosses"] = "Quartiers des serviteurs (Boss animal)";
-	AL["Jadefang"] = "Jadecroc";
-	--AL["Aeonaxx"] = true;
-	--AL["Prince Sarsarun"] = true;
-	AL["Dormus the Camel-Hoarder"] = "Dormus le Collectionneur de dromadaires";
-	AL["The Behemoth"] = "Le Béhémoth";
-	AL["Master Elemental Shaper Krixix"] = "Maître élémentaire Krixix le Sculpteur";
+	AL["Wyrmcult Provisioner"] = "Approvisionneur du culte du Ver";
+	--- Wrath of the Lich King
+	--AL["Olut Alegut"] = true;
+	AL["Rork Sharpchin"] = "Rork Menton-pointu";
+	--- Cataclysm
 	--AL["Zen'Vorka"] = true;
 	AL["Ayla Shadowstorm"] = "Ayla Ombretempête";
 	AL["Damek Bloombeard"] = "Damek Barbe-en-Fleur";
 	AL["Varlan Highbough"] = "Varlan Hautebranche";
 	AL["Firestone Vendor"] = "Vendeur des Terres de Feu";
-	AL["Poseidus"] = "Poséidus";
-	AL["Burgy Blackheart"] = "Burgy Cœur-Noir";
+	AL["Baradin Fox"] = "Renard de Baradin";
+	--- Mists of Pandaria
+	AL["Uncle Bigpocket"] = "Oncle Poche Profonde";
+	AL["Auntie Stormstout"] = "Tatie Brune d’Orage";
+	--- World Events
+	AL["Crimson Templar"] = "Templier cramoisi";  --- mob removed from game?
+	AL["Azure Templar"] = "Templier d'azur";  --- mob removed from game?
+	AL["Hoary Templar"] = "Templier chenu";  --- mob removed from game?
+	AL["Earthen Templar"] = "Templier terrestre";  --- mob removed from game?
+	AL["The Duke of Cynders"] = "Le duc des Cendres";  --- mob removed from game?
+	AL["The Duke of Fathoms"] = "Le duc des Profondeurs";  --- mob removed from game?
+	AL["The Duke of Zephyrs"] = "Le duc des Zéphyrs";  --- mob removed from game?
+	AL["The Duke of Shards"] = "Le duc des Eclats";  --- mob removed from game?
+	AL["Templars"] = "Templiers";  --- mob removed from game?
+	AL["Dukes"] = "Ducs";  --- mob removed from game?
+	AL["High Council"] = "Princes";  --- mob removed from game?
+	AL["Smokywood Pastures Vendor"] = "Vendeurs de Gourmandises Fumebois";
+	AL["Bash'ir Landing Stasis Chambers"] = "Chambre de stase alpha du point d'ancrage de Bash'ir";
 	AL["Battle Pet Trainer"] = "Dresseur de mascottes de combat";
+	AL["Apothecary Hummel"] = "Apothicaire Hummel"; --Will be removed soon once its added to BabbleBoss
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = "L'épreuve du grand croisé";
@@ -1093,31 +1111,18 @@ if AL then
 	--AL["Avatar"] = true; -- Avatar of the Martyred
 
 	-- Chests, etc
+	AL["Father Flame"] = "Père des flammes"; --- If still in game, should be used in IngameLocales
 	AL["The Grim Guzzler"] = "Le Sinistre écluseur";
 	AL["The Secret Safe"] = "Coffre à relique";
 	AL["The Vault"] = "La Chambre forte";
 	AL["Ogre Tannin Basket"] = "Panier Ogre de tannin";
 	AL["Unfinished Painting"] = "Toile inachevée";
-	AL["Felvine Shard"] = "Fragment de la Gangrevigne";
-	AL["Lorgalis Manuscript"] = "Manuscrit de Lorgalis";
-	AL["Fathom Core"] = "Noyau de la Brasse";
-	AL["Gift of Adoration"] = "Cadeau d'adoration";
-	AL["Box of Chocolates"] = "Boîte de chocolats";
-	AL["Treat Bag"] = "Sac de friandises";
-	AL["Gaily Wrapped Present"] = "Cadeau à l'emballage multicolore";
-	AL["Festive Gift"] = "Cadeau de fête";
-	AL["Ticking Present"] = "Cadeau tic-taquant";
-	AL["Gently Shaken Gift"] = "Cadeau secoué doucement";
-	AL["Carefully Wrapped Present"] = "Biscuit du Voile d'hiver";
-	AL["Winter Veil Gift"] = "Rob-fusée mécanique";
-	AL["Smokywood Pastures Extra-Special Gift"] = "Cadeau extra-spécial des Gourmandises Fumebois";
-	AL["Brightly Colored Egg"] = "Oeuf brillamment coloré";
-	AL["Lunar Festival Fireworks Pack"] = "Sac de feux d'artifice de la fête lunaire";
-	AL["Lucky Red Envelope"] = "Enveloppe rouge porte-bonheur";
-	AL["Small Rocket Recipes"] = "Recettes des petites comètes";
-	AL["Large Rocket Recipes"] = "Recettes de grandes comètes";
-	AL["Cluster Rocket Recipes"] = "Recettes de chapelet de comètes";
-	AL["Large Cluster Rocket Recipes"] = "Recettes de chapelet de grandes comètes";
+	AL["Felvine Shard"] = "Fragment de la Gangrevigne"; --- If still in game, should be used in IngameLocales
+	AL["Lorgalis Manuscript"] = "Manuscrit de Lorgalis"; --- If still in game, should be used in IngameLocales
+	AL["Fathom Core"] = "Noyau de la Brasse"; --- If still in game, should be used in IngameLocales
+	AL["Gift of Adoration"] = "Cadeau d'adoration"; --- If still in game, should be used in IngameLocales
+	AL["Treat Bag"] = "Sac de friandises"; --- If still in game, should be used in IngameLocales
+	AL["The Cache of Madness"] = "L'antre de la Folie";
 	AL["Timed Reward Chest"] = "Coffre du parcours rapide";
 	AL["Timed Reward Chest 1"] = "Coffre du parcours rapide 1";
 	AL["Timed Reward Chest 2"] = "Coffre du parcours rapide 2";
@@ -1127,27 +1132,13 @@ if AL then
 	AL["Garrett Family Chest"] = "Coffre de la famille Garrett";
 	AL["Reinforced Fel Iron Chest"] = "Coffre en gangrefer renforcé";
 	AL["DM North Tribute Chest"] = "Coffre du Roi (HT Nord)";
-	AL["The Saga of Terokk"] = "La Saga de Terokk";
+	AL["The Saga of Terokk"] = "La Saga de Terokk"; --- If still in game, should be used in IngameLocales
 	AL["First Fragment Guardian"] = "Gardien du premier fragment";
 	AL["Second Fragment Guardian"] = "Gardien du second fragment";
 	AL["Third Fragment Guardian"] = "Gardien du troisième fragment";
-	AL["Overcharged Manacell"] = "Cellule de mana surchargée";
-	AL["Mysterious Egg"] = "Oeuf mystérieux";
-	AL["Hyldnir Spoils"] = "Butin hyldnir";
-	AL["Ripe Disgusting Jar"] = "Jarre dégoûtante mûre";
-	AL["Cracked Egg"] = "Oeuf brisé";
-	AL["Small Spice Bag"] = "Petit sac d'épices";
-	AL["Handful of Treats"] = "Poignée de sucreries";
-	AL["Consumable Wands & Masks"] = "Baguettes et masques";
-	AL["Permanent Masks"] = "Masques permanent";
-	AL["Lovely Dress Box"] = "Boîte de robe ravissante";
-	AL["Dinner Suit Box"] = "Boîte d'habit de soirée";
-	AL["Bag of Heart Candies"] = "Sachet de bonbons en forme de cœur";
-	AL["Hidden Stash"] = "Fortune cachée";
-	AL["The Cache of Madness"] = "L'antre de la Folie";
-	AL["Stolen Present"] = "Cadeau volé";
-	AL["Oozing Bag"] = "Sac vaseux";
-	AL["Ominous Seed"] = "Graine inquiétante";
+	AL["Overcharged Manacell"] = "Cellule de mana surchargée"; --- If still in game, should be used in IngameLocales
+	AL["Shellfish Trap"] = "Casier à crustacés";
+	AL["Fishing Pools"] = "Bancs de poissons";
 
 	-- Blizzard Promotions
 	AL["Annual Pass"] = "Pass annuel";

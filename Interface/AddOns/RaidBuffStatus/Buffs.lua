@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 556 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 573 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -316,7 +316,6 @@ local aspects = {
 	SpellName(109260), -- Aspect of the Iron Hawk
 	SpellName(5118), -- Aspect of the Cheetah
 	SpellName(13159), -- Aspect of the Pack
-	SpellName(82661),  -- Aspect of the Fox	
 }
 
 local badaspects = {
@@ -1452,6 +1451,12 @@ local BF = {
 			   local statval = 0
 			   for v in string.gmatch(foodz, "%d+") do  -- assume largest number in tooltip is the statval
 			      statval = math.max(statval,tonumber(v))
+			   end
+			   if select(2,UnitRace(unit.unitid)) == "Pandaren" then -- normalize for Epicurean racial
+			      statval = statval / 2
+			   end
+			   if statval >= 100 and string.find(foodz, ITEM_MOD_STAMINA_SHORT) then -- normalize for MoP stam bonus
+			      statval = statval * 300 / 450
 			   end
 			   if statval >= RaidBuffStatus.db.profile.foodlevel or
 			      select(11,UnitBuff(unit.unitid, foods[1])) == 66623 then -- bountiful feast

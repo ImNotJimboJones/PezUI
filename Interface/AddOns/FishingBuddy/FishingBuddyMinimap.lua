@@ -22,7 +22,7 @@ local MinimapOptions = {
 		["text"] = FBConstants.CONFIG_MINIMAPBUTTON_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_MINIMAPBUTTON_INFO,
 		["v"] = 1,
-		["default"] = false,
+		["default"] = 0,
 	},
 	["MinimapClickToSwitch"] = {
 		["text"] = FBConstants.CLICKTOSWITCH_ONOFF,

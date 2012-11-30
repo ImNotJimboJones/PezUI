@@ -9,7 +9,7 @@ local Config = LibStub("AceConfig-3.0")
 
 local db
 
-addon.svnrev["config.lua"] = tonumber(("$Revision: 172 $"):match("%d+"))
+addon.svnrev["config.lua"] = tonumber(("$Revision: 199 $"):match("%d+"))
 
 -- local (optimal) references to Blizzard's strings
 local COLOR = COLOR -- "Color"
@@ -47,7 +47,9 @@ BINDING_HEADER_SAVEDINSTANCES = "SavedInstances"
 -- general helper functions
 
 function addon:idtext(instance,diff,info)
-  if info.ID < 0 then 
+  if instance.WorldBoss then
+    return L["World Boss"]
+  elseif info.ID < 0 then 
     return RAID_FINDER
   elseif instance.Raid and instance.Expansion == 0 then
     return EXPANSION_NAME0 .. " " .. LFG_TYPE_RAID
@@ -204,6 +206,11 @@ core.Options = {
 					type = "toggle",
 					name = L["Sort by server"],
 					order = 6,
+				},
+				SelfAlways = {
+					type = "toggle",
+					name = L["Show self always"],
+					order = 6.5,
 				},
 				SelfFirst = {
 					type = "toggle",

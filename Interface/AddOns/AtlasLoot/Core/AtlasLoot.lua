@@ -1,4 +1,4 @@
--- $Id: AtlasLoot.lua 3878 2012-10-11 16:19:50Z hegarol $
+-- $Id: AtlasLoot.lua 4010 2012-11-25 19:45:29Z hegarol $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -13,8 +13,8 @@ local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 
 --Establish version number and compatible version of Atlas
 local VERSION_MAJOR = "7";
-local VERSION_MINOR = "03";
-local VERSION_BOSSES = "01";
+local VERSION_MINOR = "04";
+local VERSION_BOSSES = "00";
 ATLASLOOT_VERSION = "|cffFF8400AtlasLoot Enhanced v"..VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES.."|r";
 ATLASLOOT_VERSION_NUM = VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES
 
@@ -31,9 +31,6 @@ ATLASLOOT_INDENT = "   ";
 
 --Variable to cap debug spam
 ATLASLOOT_DEBUGSHOWN = false;
-
--- Player faction
-local englishFaction = UnitFactionGroup("player")
 
 -- Colours stored for code readability
 local GREY = "|cff999999";
@@ -297,6 +294,9 @@ do
 				AtlasLootDefaultFrame:Show()
 			elseif AtlasFrame then
 				AtlasFrame:Show()
+			end
+			if msg == "secret" then
+				AtlasLoot:ShowSecretPage()
 			end
 		end
 	end
@@ -683,7 +683,7 @@ do
 		end
 		local lootTableType = self.db.profile.LootTableType
 		local factionAdd = ""
-		if englishFaction == "Horde" then
+		if AtlasLoot:GetEnglishFaction() == "Horde" then
 			factionAdd = "_H"
 		else
 			factionAdd = "_A"
@@ -841,13 +841,13 @@ function AtlasLoot:GetLootPageFromDataID(dataID)
 	lootTable = AtlasLoot_Data[dataID][lootTableType][instancePage]
 	for k,v in ipairs(lootTable) do
 		if type(v[1]) == "table" or type(v[2]) == "table" then
-			if englishFaction == "Horde" then
+			if AtlasLoot:GetEnglishFaction() == "Horde" then
 				if v[1] then
 					lootTable[k] = v[1]
 				else
 					lootTable[k] = nil
 				end
-			elseif englishFaction == "Alliance" then
+			elseif AtlasLoot:GetEnglishFaction() == "Alliance" then
 				if v[2] then
 					lootTable[k] = v[2]
 				else
@@ -1429,12 +1429,51 @@ function AtlasLoot:GetMapNameByID(id)
 	else
 		return "No MapName found for ID "..id
 	end
-end 
+end
 
-
-
-
-
-
-
-
+--- Pandas are bad in start zones :/
+-- Returns Alliance if no faction is found or the char is Neutral
+function AtlasLoot:GetEnglishFaction()
+	local englishFaction = UnitFactionGroup("player")
+	return not englishFaction or englishFaction == "Neutral" and "Alliance" or englishFaction
+end
+-- Hihi :)
+function AtlasLoot:ShowSecretPage()
+	if not AtlasLoot_Data["SECRET_PAGE"] then 
+		AtlasLoot_Data["SECRET_PAGE"] = {
+			["Normal"] = {
+				{
+					{ 1, 0, "INV_Box_01", "=q6=GM", ""};
+					{ 2, 12064};
+					{ 3, 2586};
+					{ 4, 11508};
+					{ 6, 0, "INV_Box_01", "=q6=Artifact", ""};
+					{ 7, 36942};
+					{ 8, 33475};
+					{ 9, 18582};
+					{ 10, 18583};
+					{ 11, 18584};
+					{ 12, 12947};
+					{ 13, 32824};
+					{ 14, 80237};
+					{ 15, 32824};
+					{ 16, 0, "INV_Box_01", "=q6=Legendary", ""};
+					{ 17, 80211};
+					{ 18, 43651};
+					{ 19, 22736};
+					{ 20, 25596};
+					{ 21, 17142};
+					{ 22, 77497};
+					{ 23, 13262};
+					{ 24, 81418};
+				};
+			};
+			info = {
+				name = "Secret",
+				module = "NON"
+			};
+		}
+	end
+	
+	AtlasLoot:ShowLootPage("SECRET_PAGE")
+end

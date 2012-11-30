@@ -135,7 +135,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 
 	if (aLevel > 1) then
 		for _, tBuffName in pairs(tUniqueBuffs) do
-			local tCategory = VUHDO_getBuffCategoryName(tBuffName);
+			local tCategory = VUHDO_getBuffCategoryName(tBuffName, VUHDO_BUFF_TARGET_UNIQUE);
 			tInfo = UIDropDownMenu_CreateInfo();
 			tInfo["text"] = tBuffName;
 			tInfo["arg1"] = tName;

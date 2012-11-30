@@ -1,7 +1,9 @@
--- $Id: worldevents.lua 3856 2012-10-07 02:17:53Z Dynaletik $
+-- $Id: worldevents.lua 4004 2012-11-25 13:14:52Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
+local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
 local BabbleFaction = AtlasLoot_GetLocaleLibBabble("LibBabble-Faction-3.0")
+local BabbleRare = AtlasLoot_GetLocaleLibBabble("LibBabble-Rare-3.0")
 local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 local moduleName = "AtlasLoot_WorldEvents"
 
@@ -24,7 +26,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 ---- Bash'ir Landing Skyguard Raid
 ---- Darkmoon Faire
 ---- Gurubashi Arena Booty Run
----- Stranglethorn Fishing Extravaganza
+---- Stranglethorn Fishing Extravaganza / Kalu'ak Fishing Derby
 --- One-Time Events
 --- Triggered Events
 ---- Abyssal Council
@@ -174,24 +176,27 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 3, 42952, "", "=q7=Stained Shadowcraft Spaulders", "=ds=#s3#, #a2#", "#CHAMPSEAL:60#"};
 				{ 4, 42950, "", "=q7=Champion Herod's Shoulder", "=ds=#s3#, #a3#", "#CHAMPSEAL:60#"};
 				{ 5, 42951, "", "=q7=Mystical Pauldrons of Elements", "=ds=#s3#, #a3#", "#CHAMPSEAL:60#"};
-				{ 6, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#CHAMPSEAL:60#"};
-				{ 8, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#CHAMPSEAL:60#"};
-				{ 9, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#CHAMPSEAL:60#"};
-				{ 10, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#CHAMPSEAL:60#"};
-				{ 11, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#CHAMPSEAL:60#"};
-				{ 12, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#CHAMPSEAL:60#"};
-				{ 13, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#CHAMPSEAL:60#"};
+				{ 6, 69890, "", "=q7=Burnished Pauldrons of Might", "=ds=#s3#, #a4#", "#CHAMPSEAL:60#"};
+				{ 7, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#CHAMPSEAL:60#"};
+				{ 9, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#CHAMPSEAL:60#"};
+				{ 10, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#CHAMPSEAL:60#"};
+				{ 11, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#CHAMPSEAL:60#"};
+				{ 12, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#CHAMPSEAL:60#"};
+				{ 13, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#CHAMPSEAL:60#"};
+				{ 14, 69889, "", "=q7=Burnished Breastplate of Might", "=ds=#s5#, #a4#", "#CHAMPSEAL:60#"};
+				{ 15, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#CHAMPSEAL:60#"};
 				{ 16, 42992, "", "=q7=Discerning Eye of the Beast", "=ds=#s14#", "#CHAMPSEAL:75#"};
 				{ 17, 42991, "", "=q7=Swift Hand of Justice", "=ds=#s14#", "#CHAMPSEAL:75#"};
 				{ 19, 42944, "", "=q7=Balanced Heartseeker", "=ds=#h1#, #w4#", "#CHAMPSEAL:60#"};
 				{ 20, 69893, "", "=q7=Bloodsoaked Skullforge Reaver", "=ds=#h3#, #w10#", "#CHAMPSEAL:60#"};
 				{ 21, 42945, "", "=q7=Venerable Dal'Rend's Sacred Charge", "=ds=#h3#, #w10#", "#CHAMPSEAL:60#"};
 				{ 22, 42943, "", "=q7=Bloodied Arcanite Reaper", "=ds=#h2#, #w1#", "#CHAMPSEAL:95#"};
-				{ 23, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#CHAMPSEAL:75#"};
-				{ 24, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#CHAMPSEAL:75#"};
+				{ 23, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#CHAMPSEAL:60#"};
+				{ 24, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#CHAMPSEAL:60#"};
 				{ 25, 48718, "", "=q7=Repurposed Lava Dredger", "=ds=#h2#, #w6#", "#CHAMPSEAL:95#"};
-				{ 26, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#CHAMPSEAL:95#"};
-				{ 27, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#CHAMPSEAL:95#"};
+				{ 26, 79131, "", "=q7=Burnished Warden Staff", "=ds=#w9#", "#CHAMPSEAL:95#"};
+				{ 27, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#CHAMPSEAL:95#"};
+				{ 28, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#CHAMPSEAL:95#"};
 			};
 		};
 		info = {
@@ -320,18 +325,18 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["ChildrensWeek"] = {
 		["Normal"] = {
 			{
-				{ 1, 0, "INV_Box_01", "=q6="..BabbleZone["Azeroth"], "=q5="..BabbleZone["Stormwind"].." / "..BabbleZone["Orgrimmar"]};
+				{ 1, 0, "INV_Box_01", "=q6="..BabbleZone["Azeroth"], "=q5="..AtlasLoot:GetMapNameByID(301).." / "..AtlasLoot:GetMapNameByID(321)};
 				{ 2, 23007, "", "=q1=Piglet's Collar", "=ds=#e13#"};
 				{ 3, 23015, "", "=q1=Rat Cage", "=ds=#e13#"};
 				{ 4, 66073, "", "=q1=Snail Shell", "=ds=#e13#"};
 				{ 5, 23002, "", "=q1=Turtle Box", "=ds=#e13#"};
 				{ 6, 23022, "", "=q1=Curmudgeon's Payoff", "=ds="};
-				{ 8, 0, "INV_Box_01", "=q6="..BabbleZone["Outland"], "=q5="..BabbleZone["Shattrath"]};
+				{ 8, 0, "INV_Box_01", "=q6="..BabbleZone["Outland"], "=q5="..AtlasLoot:GetMapNameByID(481)};
 				{ 9, 32616, "", "=q3=Egbert's Egg", "=ds=#e13#"};
 				{ 10, 32622, "", "=q3=Elekk Training Collar", "=ds=#e13#"};
 				{ 11, 69648, "", "=q3=Legs", "=ds=#e13#"};
 				{ 12, 32617, "", "=q3=Sleepy Willy", "=ds=#e13#"};
-				{ 16, 0, "INV_Box_01", "=q6="..BabbleZone["Northrend"], "=q5="..BabbleZone["Dalaran"]};
+				{ 16, 0, "INV_Box_01", "=q6="..BabbleZone["Northrend"], "=q5="..AtlasLoot:GetMapNameByID(504)};
 				{ 17, 46545, "", "=q3=Curious Oracle Hatchling", "=ds=#e13#"};
 				{ 18, 46544, "", "=q3=Curious Wolvar Pup", "=ds=#e13#"};
 			};
@@ -350,12 +355,12 @@ local moduleName = "AtlasLoot_WorldEvents"
 		["Normal"] = {
 			{
 				{ 1, 46831, "", "=q1=Macabre Marionette", "=q1=#m4#: =ds=#m20#"};
-				{ 3, 46860, "", "=q1=Whimsical Skull Mask", "=ds=#s1#, 5 #copper#"};
-				{ 4, 46861, "", "=q1=Bouquet of Orange Marigolds", "=ds=#s15#, 1 #gold#"};
-				{ 5, 46690, "", "=q1=Candy Skull", "=ds=#m20#, 5 #copper#"};
-				{ 6, 46711, "", "=q1=Spirit Candle", "=ds=#m20#, 30 #copper#"};
-				{ 7, 46718, "", "=q1=Orange Marigold", "=ds=#m20#, 10 #copper#"};
-				{ 16, 46710, "", "=q1=Recipe: Bread of the Dead", "=ds=#p3# (1), 20 #silver#"};
+				{ 3, 46860, "", "=q1=Whimsical Skull Mask", "=ds=#s1#", "=ds=5 #copper#"};
+				{ 4, 46861, "", "=q1=Bouquet of Orange Marigolds", "=ds=#s15#", "=ds=1 #gold#"};
+				{ 5, 46690, "", "=q1=Candy Skull", "=ds=#m20#", "=ds=5 #copper#"};
+				{ 6, 46711, "", "=q1=Spirit Candle", "=ds=#m20#", "=ds=30 #copper#"};
+				{ 7, 46718, "", "=q1=Orange Marigold", "=ds=#m20#", "=ds=10 #copper#"};
+				{ 16, 46710, "", "=q1=Recipe: Bread of the Dead", "=ds=#p3# (1)", "=ds=20 #silver#"};
 				{ 17, 46691, "", "=q1=Bread of the Dead", "=ds=#e3#"};
 			};
 		};
@@ -372,80 +377,78 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["Winterveil"] = {
 		["Normal"] = {
 			{
-				{ 1, 21525, "", "=q2=Green Winter Hat", "=ds=#s1# =q2="..AL["Various Locations"]};
-				{ 2, 21524, "", "=q2=Red Winter Hat", "=ds=#s1# =q2="..AL["Various Locations"]};
-				{ 3, 17712, "", "=q1=Winter Veil Disguise Kit", "=q1=#m4#: =ds=#m20#"};
-				{ 4, 17202, "", "=q1=Snowball", "=ds=#m20#"};
-				{ 5, 34191, "", "=q1=Handful of Snowflakes", "=ds=#m20#"};
-				{ 6, 21212, "", "=q1=Fresh Holly", "=ds=#m20#"};
-				{ 7, 21519, "", "=q1=Mistletoe", "=ds=#m20#"};
-				{ 9, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Smokywood Pastures Vendor"], ""};
-				{ 10, 34262, "", "=q2=Pattern: Winter Boots", "=ds=#p7# (285)"};
-				{ 11, 34319, "", "=q2=Pattern: Red Winter Clothes", "=ds=#p8# (250)"};
-				{ 12, 34261, "", "=q2=Pattern: Green Winter Clothes", "=ds=#p8# (250)"};
-				{ 13, 34413, "", "=q1=Recipe: Hot Apple Cider", "#p3# (325)"};
-				{ 14, 17201, "", "=q1=Recipe: Egg Nog", "=ds=#p3# (35)"};
-				{ 15, 17200, "", "=q1=Recipe: Gingerbread Cookie", "=ds=#p3# (1)"};
-				{ 16, 17344, "", "=q1=Candy Cane", "=ds=#e3#"};
-				{ 17, 17406, "", "=q1=Holiday Cheesewheel", "=ds=#e3#"};
-				{ 18, 17407, "", "=q1=Graccu's Homemade Meat Pie", "=ds=#e3#"};
-				{ 19, 17408, "", "=q1=Spicy Beefstick", "=ds=#e3#"};
-				{ 20, 34410, "", "=q1=Honeyed Holiday Ham", "=ds=#e3#"};
-				{ 21, 17404, "", "=q1=Blended Bean Brew", "=ds=#e4#"};
-				{ 22, 17405, "", "=q1=Green Garden Tea", "=ds=#e4#"};
-				{ 23, 34412, "", "=q1=Sparkling Apple Cider", "=ds=#e4#"};
-				{ 24, 17196, "", "=q1=Holiday Spirits", "=ds=#e4#"};
-				{ 25, 17403, "", "=q1=Steamwheedle Fizzy Spirits", "=ds=#e4#"};
-				{ 26, 17402, "", "=q1=Greatfather's Winter Ale", "=ds=#e4#"};
-				{ 27, 17194, "", "=q1=Holiday Spices", "=ds=#e6#"};
-				{ 28, 17303, "", "=q1=Blue Ribboned Wrapping Paper", "=ds=#e6#"};
-				{ 29, 17304, "", "=q1=Green Ribboned Wrapping Paper", "=ds=#e6#"};
-				{ 30, 17307, "", "=q1=Purple Ribboned Wrapping Paper", "=ds=#e6#"};
+				{ 1, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Smokywood Pastures Vendor"], ""};
+				{ 2, 34262, "", "=q2=Pattern: Winter Boots", "=ds=#p7# (285)", "50 #silver#"};
+				{ 3, 34319, "", "=q2=Pattern: Red Winter Clothes", "=ds=#p8# (250)", "50 #silver#"};
+				{ 4, 34261, "", "=q2=Pattern: Green Winter Clothes", "=ds=#p8# (250)", "50 #silver#"};
+				{ 5, 34413, "", "=q1=Recipe: Hot Apple Cider", "#p3# (325)", "1 #gold#"};
+				{ 6, 17201, "", "=q1=Recipe: Egg Nog", "=ds=#p3# (35)", "2 #silver# 40 #copper#"};
+				{ 7, 17200, "", "=q1=Recipe: Gingerbread Cookie", "=ds=#p3# (1)", "25 #copper#"};
+				{ 8, 17344, "", "=q1=Candy Cane", "=ds=#e3#", "25 #copper#"};
+				{ 9, 17406, "", "=q1=Holiday Cheesewheel", "=ds=#e3#", "1 #silver# 25 #copper#"};
+				{ 10, 17407, "", "=q1=Graccu's Homemade Meat Pie", "=ds=#e3#", "10 #silver#"};
+				{ 11, 17408, "", "=q1=Spicy Beefstick", "=ds=#e3#", "20 #silver#"};
+				{ 12, 34410, "", "=q1=Honeyed Holiday Ham", "=ds=#e3#", "40 #silver#"};
+				{ 13, 17404, "", "=q1=Blended Bean Brew", "=ds=#e4#", "1 #silver# 25 #copper#"};
+				{ 14, 17405, "", "=q1=Green Garden Tea", "=ds=#e4#", "10 #silver#"};
+				{ 15, 34412, "", "=q1=Sparkling Apple Cider", "=ds=#e4#", "10 #silver#"};
+				{ 16, 17196, "", "=q1=Holiday Spirits", "=ds=#e4#", "50 #copper#"};
+				{ 17, 17403, "", "=q1=Steamwheedle Fizzy Spirits", "=ds=#e4#", "1 #silver# 50 #copper#"};
+				{ 18, 17402, "", "=q1=Greatfather's Winter Ale", "=ds=#e4#", "20 #silver#"};
+				{ 19, 17194, "", "=q1=Holiday Spices", "=ds=#e8#", "10 #copper#"};
+				{ 20, 17303, "", "=q1=Blue Ribboned Wrapping Paper", "=ds=#e6#", "10 #copper#"};
+				{ 21, 17304, "", "=q1=Green Ribboned Wrapping Paper", "=ds=#e6#", "10 #copper#"};
+				{ 22, 17307, "", "=q1=Purple Ribboned Wrapping Paper", "=ds=#e6#", "10 #copper#"};
+				{ 23, 17202, "", "=q1=Snowball", "=ds=#m20#", "10 #copper#"};
+				extraText = ": "..AL["Vendor"];
 			};
 			{
-				{ 1, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Stolen Present"], "#QUESTID:7043#"};
-				{ 2, 66450, "", "=q4=Miniature Winter Veil Tree", "=ds=#h1#, #w4#"};
-				{ 3, 34425, "", "=q3=Clockwork Rocket Bot", "#ACHIEVEMENTID:1705#"};
-				{ 4, 73797, "", "=q3=Lump of Coal", "=ds=#e13#"};
-				{ 5, 46709, "", "=q3=MiniZep Controller", ""};
-				{ 6, 46725, "", "=q2=Red Rider Air Rifle", ""};
-				{ 7, 37710, "", "=q3=Crashin' Thrashin' Racer Controller", ""};
-				{ 9, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Winter Veil Gift"], ""};
-				{ 10, 70923, "", "=q2=Gaudy Winter Veil Sweater", "#ACHIEVEMENTID:6061#"};
-				{ 11, 46709, "", "=q3=MiniZep Controller", "#ACHIEVEMENTID:6060#"};
-				{ 12, 46725, "", "=q2=Red Rider Air Rifle", "#ACHIEVEMENTID:6059#"};
-				{ 13, 37710, "", "=q3=Crashin' Thrashin' Racer Controller", "#ACHIEVEMENTID:1706#"};
-				{ 14, 34425, "", "=q3=Clockwork Rocket Bot", "#ACHIEVEMENTID:1705#"};
-				{ 16, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Gaily Wrapped Present"], ""};
+				{ 1, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Ticking Present"], ""};
+				{ 2, 21325, "", "=q2=Mechanical Greench", "=ds=#e22#"};
+				{ 3, 21213, "", "=q2=Preserved Holly", "=ds=#m20#"};
+				{ 4, 17706, "", "=q2=Plans: Edge of Winter", "=ds=#p2# (190)"};
+				{ 5, 17725, "", "=q2=Formula: Enchant Weapon - Winter's Might", "=ds=#p4# (190)"};
+				{ 6, 17720, "", "=q2=Schematic: Snowmaster 9000", "=ds=#p5# (190)"};
+				{ 7, 17722, "", "=q2=Pattern: Gloves of the Greatfather", "=ds=#p7# (190)"};
+				{ 8, 17709, "", "=q1=Recipe: Elixir of Frost Power", "=ds=#p1# (190)"};
+				{ 9, 17724, "", "=q1=Pattern: Green Holiday Shirt", "=ds=#p8# (190)"};
+				{ 11, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Festive Gift"], ""};
+				{ 12, 21328, "", "=q1=Wand of Holiday Cheer", "=ds=#m20#"};
+				{ 16, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Gaily Wrapped Present"], ""};
 				{ 17, 21301, "", "=q1=Green Helper Box", "=ds=#e13#"};
 				{ 18, 21308, "", "=q1=Jingling Bell", "=ds=#e13#"};
 				{ 19, 21305, "", "=q1=Red Helper Box", "=ds=#e13#"};
 				{ 20, 21309, "", "=q1=Snowman Kit", "=ds=#e13#"};
-				{ 22, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Ticking Present"], ""};
-				{ 23, 21325, "", "=q2=Mechanical Greench", "=ds=#e22#"};
-				{ 24, 21213, "", "=q2=Preserved Holly", "=ds=#m20#"};
-				{ 25, 17706, "", "=q2=Plans: Edge of Winter", "=ds=#p2# (190)"};
-				{ 26, 17725, "", "=q2=Formula: Enchant Weapon - Winter's Might", "=ds=#p4# (190)"};
-				{ 27, 17720, "", "=q2=Schematic: Snowmaster 9000", "=ds=#p5# (190)"};
-				{ 28, 17722, "", "=q2=Pattern: Gloves of the Greatfather", "=ds=#p7# (190)"};
-				{ 29, 17709, "", "=q1=Recipe: Elixir of Frost Power", "=ds=#p1# (190)"};
-				{ 30, 17724, "", "=q1=Pattern: Green Holiday Shirt", "=ds=#p8# (190)"};
+				{ 22, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Gently Shaken Gift"], ""};
+				{ 23, 21235, "", "=q1=Winter Veil Roast", "=ds=#e3#"};
+				{ 24, 21241, "", "=q1=Winter Veil Eggnog", "=ds=#e4#"};
+				{ 26, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Carefully Wrapped Present"], ""};
+				{ 27, 21254, "", "=q1=Winter Veil Cookie", "=ds=#e3#"};
+				{ 29, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Smokywood Pastures Extra-Special Gift"], ""};
+				{ 30, 21215, "", "=q1=Graccu's Mince Meat Fruitcake", "=ds=#e3#"};
+				extraText = ": "..AL["Gifts & Presents"];
 			};
 			{
-				{ 1, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Festive Gift"], ""};
-				{ 2, 21328, "", "=q1=Wand of Holiday Cheer", "=ds=#m20#"};
-				{ 4, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Gently Shaken Gift"], ""};
-				{ 5, 21235, "", "=q1=Winter Veil Roast", "=ds=#e3#"};
-				{ 6, 21241, "", "=q1=Winter Veil Eggnog", "=ds=#e4#"};
-				{ 16, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Carefully Wrapped Present"], ""};
-				{ 17, 21254, "", "=q1=Winter Veil Cookie", "=ds=#e3#"};
-				{ 19, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AL["Smokywood Pastures Extra-Special Gift"], ""};
-				{ 20, 21215, "", "=q1=Graccu's Mince Meat Fruitcake", "=ds=#e3#"};
+				{ 1, 0, "INV_Holiday_Christmas_Present_01", "=q6="..AtlasLoot_IngameLocales["Stolen Present"], "#QUESTID:7043#"};
+				{ 2, 66450, "", "=q4=Miniature Winter Veil Tree", "=ds=#h1#, #w4#"};
+				{ 3, 54436, "", "=q3=Blue Clockwork Rocket Bot", "=ds=#e13#"};
+				{ 4, 73797, "", "=q3=Lump of Coal", "=ds=#e13#"};
+				{ 5, 44606, "", "=q3=Toy Train Set", "=ds=#m20#"};
+				{ 6, 45057, "", "=q3=Wind-Up Train Wrecker", "=ds=#m20#"};
+				{ 7, 46725, "", "=q2=Red Rider Air Rifle", "=ds=#m20#"};
+				{ 8, 54438, "", "=q2=Tiny Blue Ragdoll", "=ds=#m20#"};
+				{ 9, 54437, "", "=q2=Tiny Green Ragdoll", "=ds=#m20#"};
+				{ 10, 44481, "", "=q1=Grindgear Toy Gorilla", "=ds=#m20#"};
+				{ 11, 44601, "", "=q3=Heavy Copper Racer", "=ds=#m20#"};
+				{ 12, 34498, "", "=q3=Paper Zeppelin Kit", "=ds=#m20#"};
+				{ 13, 44482, "", "=q3=Trusty Copper Racer", "=ds=#m20#"};
+				{ 14, 44599, "", "=q3=Zippy Copper Racer", "=ds=#m20#"};
+				extraText = ": "..AtlasLoot_IngameLocales["Stolen Present"];
 			};
 		};
 		info = {
 			name = AL["Feast of Winter Veil"],
-			module = moduleName, menu = "WORLDEVENTMENU",
+			module = moduleName, menu = "WINTERVIELMENU",
 		};
 	};
 
@@ -456,22 +459,36 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["Halloween"] = {
 		["Normal"] = {
 			{
+				{ 2, 33292, "", "=q3=Hallowed Helm", "=ds=#s1#, #a1#", "#HALLOWSEND:150#"};
+				{ 3, 37011, "", "=q3=Magic Broom", "=ds=#e12#", "#HALLOWSEND:150#"};
+				{ 4, 33154, "", "=q3=Sinister Squashling", "=ds=#e13#", "#HALLOWSEND:150#"};
+				{ 5, 70722, "", "=q3=Little Wickerman", "=ds=#m20#", "#HALLOWSEND:150#"};
+				{ 6, 70908, "", "=q1=Feline Familiar", "=ds=#e13#", "#HALLOWSEND:150#"};
+				{ 7, 37604, "", "=q1=Tooth Pick", "=ds=#m20#", "#HALLOWSEND:2#", amount = 10};
+				{ 8, 37585, "", "=q1=Chewy Fel Taffy", "=ds=#m20#", "#HALLOWSEND:2#", amount = 5};
+				{ 9, 37583, "", "=q1=G.N.E.R.D.S.", "=ds=#m20#", "#HALLOWSEND:2#", amount = 5};
+				{ 10, 37582, "", "=q1=Pyroblast Cinnamon Ball", "=ds=#m20#", "#HALLOWSEND:2#", amount = 5};
+				{ 11, 37584, "", "=q1=Soothing Spearmint Candy", "=ds=#m20#", "#HALLOWSEND:2#", amount = 5};
+				extraText = ": "..AL["Vendor"];
+			};
+			{
 				{ 2, 69188, "", "=q1=Murloc Male Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 3, 69190, "", "=q1=Naga Male Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 4, 69193, "", "=q1=Ogre Male Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 5, 69195, "", "=q1=Vrykul Male Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
-				{ 7, 20410, "", "=q1=Hallowed Wand - Bat", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 8, 20409, "", "=q1=Hallowed Wand - Ghost", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 9, 20399, "", "=q1=Hallowed Wand - Leper Gnome", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 10, 20398, "", "=q1=Hallowed Wand - Ninja", "=ds=#m20#", "#HALLOWSEND:2#"};
+				{ 7, 20410, "", "=q1=Hallowed Wand - Bat", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 8, 20409, "", "=q1=Hallowed Wand - Ghost", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 9, 20399, "", "=q1=Hallowed Wand - Leper Gnome", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 10, 20398, "", "=q1=Hallowed Wand - Ninja", "=ds=#e25#", "#HALLOWSEND:2#"};
 				{ 17, 69187, "", "=q1=Murloc Female Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 18, 69189, "", "=q1=Naga Female Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 19, 69192, "", "=q1=Ogre Female Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
 				{ 20, 69194, "", "=q1=Vrykul Female Mask", "=ds=#m20#", "#HALLOWSEND:5#"};
-				{ 22, 20397, "", "=q1=Hallowed Wand - Pirate", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 23, 20413, "", "=q1=Hallowed Wand - Random", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 24, 20411, "", "=q1=Hallowed Wand - Skeleton", "=ds=#m20#", "#HALLOWSEND:2#"};
-				{ 25, 20414, "", "=q1=Hallowed Wand - Wisp", "=ds=#m20#", "#HALLOWSEND:2#"};
+				{ 22, 20397, "", "=q1=Hallowed Wand - Pirate", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 23, 20413, "", "=q1=Hallowed Wand - Random", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 24, 20411, "", "=q1=Hallowed Wand - Skeleton", "=ds=#e25#", "#HALLOWSEND:2#"};
+				{ 25, 20414, "", "=q1=Hallowed Wand - Wisp", "=ds=#e25#", "#HALLOWSEND:2#"};
+				extraText = ": "..AL["Non-Playable Race Masks"].." / "..BabbleInventory["Wands"];
 			};
 			{
 				{ 2, 34003, "", "=q1=Draenei Male Mask", "=ds=#s1#", "#HALLOWSEND:2#"};
@@ -498,6 +515,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 26, 20567, "", "=q1=Troll Female Mask", "=ds=#s1#", "#HALLOWSEND:2#"};
 				{ 27, 20574, "", "=q1=Undead Female Mask", "=ds=#s1#", "#HALLOWSEND:2#"};
 				{ 28, 49215, "", "=q1=Worgen Female Mask", "=ds=#s1#", "#HALLOWSEND:2#"};
+				extraText = ": "..AL["Playable Race Masks"];
 			};
 		};
 		info = {
@@ -542,8 +560,8 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 4, 19994, "", "=q1=Harvest Fruit", "=ds=#e3#"};
 				{ 5, 19997, "", "=q1=Harvest Nectar", "=ds=#e4#"};
 				{ 17, 19697, "", "=q1=Bounty of the Harvest", "=q1=#m4#: =ds=#m20#"};
-				{ 18, 20009, "", "=q1=For the Light!", "=q1=#m4#: =ds=#e10# =ec1=#m7#"};
-				{ 19, 20010, "", "=q1=The Horde's Hellscream", "=q1=#m4#: =ds=#e10# =ec1=#m6#"};
+				{ 18, 20009, "", "=q1=For the Light!", "=ds=#e10# =ec1=#m7#", "=q1=#m4#: #QUESTID:8149#"};
+				{ 19, 20010, "", "=q1=The Horde's Hellscream", "=ds=#e10# =ec1=#m6#", "=q1=#m4#: #QUESTID:8150#"};
 			};
 		};
 		info = {
@@ -555,47 +573,47 @@ local moduleName = "AtlasLoot_WorldEvents"
 		--------------------------
 		--- Love is in the Air ---
 		--------------------------
-		
+
 	AtlasLoot_Data["Valentineday"] = {
 		["Normal"] = {
 			{
 				{ 1, 72146, "", "=q4=Swift Lovebird", "=ds=#e26#", "#VALENTINEDAY:270#"};
 				{ 2, 34480, "", "=q3=Romantic Picnic Basket", "=ds=#m20#", "#VALENTINEDAY:10#"};
-				{ 3, 21815, "", "=q1=Love Token", "=ds=#m20#", "1 #valentineday2#"};
-				{ 4, 50163, "", "=q1=Lovely Rose", "=ds=#m20#", "#VALENTINEDAY:5#"};
-				{ 5, 22218, "", "=q1=Handful of Rose Petals", "=ds=#m20#", "#VALENTINEDAY:2#"};
-				{ 6, 22200, "", "=q1=Silver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:5#"};
-				{ 7, 22235, "", "=q1=Truesilver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:40#"};
-				{ 8, 21813, "", "=q1=Bag of Heart Candies", "=ds=#m20#", "#VALENTINEDAY:2#"};
-				{ 9, 21812, "", "=q1=Box of Chocolates", "=ds=#m20#", "#VALENTINEDAY:10#"};
-				{ 10, 50160, "", "=q1=Lovely Dress Box", "=ds=#m20#", "#VALENTINEDAY:20#"};
-				{ 11, 50161, "", "=q1=Dinner Suit Box", "=ds=#m20#", "#VALENTINEDAY:20#"};
-				{ 12, 34258, "", "=q1=Love Rocket", "=ds=#e23#", "#VALENTINEDAY:5#"};
-				{ 13, 22261, "", "=q1=Love Fool", "=ds=#e22#", "#VALENTINEDAY:10#"};
-				{ 16, 49859, "", "=q1=\"Bravado\" Cologne", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 17, 49861, "", "=q1=\"STALWART\" Cologne", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 18, 49860, "", "=q1=\"Wizardry\" Cologne", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 19, 49856, "", "=q1=\"VICTORY\" Perfume", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 20, 49858, "", "=q1=\"Forever\" Perfume", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 21, 49857, "", "=q1=\"Enchantress\" Perfume", "=ds=#m20#", "#VALENTINEDAY:1#"};
-				{ 24, 49916, "", "=q1=Lovely Charm Bracelet", "=ds=#m17#"};
+				{ 3, 22235, "", "=q1=Truesilver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:40#"};
+				{ 4, 22200, "", "=q1=Silver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:5#", amount = 5};
+				{ 5, 50161, "", "=q1=Dinner Suit Box", "=ds=#m20#", "#VALENTINEDAY:20#"};
+				{ 6, 50160, "", "=q1=Lovely Dress Box", "=ds=#m20#", "#VALENTINEDAY:20#"};
+				{ 7, 22261, "", "=q1=Love Fool", "=ds=#e22#", "#VALENTINEDAY:10#"};
+				{ 8, 34258, "", "=q1=Love Rocket", "=ds=#e23#", "#VALENTINEDAY:5#", amount = 5};
+				{ 9, 50163, "", "=q1=Lovely Rose", "=ds=#m20#", "#VALENTINEDAY:5#", amount = 5};
+				{ 10, 22218, "", "=q1=Handful of Rose Petals", "=ds=#m20#", "#VALENTINEDAY:2#", amount = 5};
+				{ 11, 21813, "", "=q1=Bag of Heart Candies", "=ds=#m20#", "#VALENTINEDAY:2#"};
+				{ 12, 21812, "", "=q1=Box of Chocolates", "=ds=#m20#", "#VALENTINEDAY:10#"};
+				{ 13, 21815, "", "=q1=Love Token", "=ds=#m17#", "1 #valentineday2#"};
+				{ 16, 49859, "", "=q1=\"Bravado\" Cologne", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				{ 17, 49861, "", "=q1=\"STALWART\" Cologne", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				{ 18, 49860, "", "=q1=\"Wizardry\" Cologne", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				{ 19, 49858, "", "=q1=\"Forever\" Perfume", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				{ 20, 49857, "", "=q1=\"Enchantress\" Perfume", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				{ 21, 49856, "", "=q1=\"VICTORY\" Perfume", "=ds=#e2#", "#VALENTINEDAY:1#", amount = 5};
+				extraText = ": "..AL["Vendor"];
 			};
 			{
-				{ 1, 0, "INV_Box_02", "=q6="..AL["Lovely Dress Box"], "#ACHIEVEMENTID:1694#"};
+				{ 1, 0, "INV_Box_02", "=q6="..AtlasLoot_IngameLocales["Lovely Dress Box"], "#ACHIEVEMENTID:1694#"};
 				{ 2, 22279, "", "=q1=Lovely Black Dress", "=ds=#s5#"};
 				{ 3, 22276, "", "=q1=Lovely Red Dress", "=ds=#s5#"};
 				{ 4, 22278, "", "=q1=Lovely Blue Dress", "=ds=#s5#"};
 				{ 5, 22280, "", "=q1=Lovely Purple Dress", "=ds=#s5#"};	
-				{ 7, 0, "INV_Box_01", "=q6="..AL["Dinner Suit Box"], ""};
-				{ 8, 22277, "", "=q1=Red Dinner Suit", "=q1=#m4#: =ds=#s5#"};
-				{ 9, 22281, "", "=q1=Blue Dinner Suit", "=q1=#m4#: =ds=#s5#"};
-				{ 10, 22282, "", "=q1=Purple Dinner Suit", "=q1=#m4#: =ds=#s5#"};	
-				{ 16, 0, "INV_ValentinesBoxOfChocolates02", "=q6="..AL["Box of Chocolates"], "#ACHIEVEMENTID:1702#"};
+				{ 7, 0, "INV_Box_01", "=q6="..AtlasLoot_IngameLocales["Dinner Suit Box"], ""};
+				{ 8, 22277, "", "=q1=Red Dinner Suit", "=ds=#s5#"};
+				{ 9, 22281, "", "=q1=Blue Dinner Suit", "=ds=#s5#"};
+				{ 10, 22282, "", "=q1=Purple Dinner Suit", "=ds=#s5#"};	
+				{ 16, 0, "INV_ValentinesBoxOfChocolates02", "=q6="..AtlasLoot_IngameLocales["Box of Chocolates"], "#ACHIEVEMENTID:1702#"};
 				{ 17, 22237, "", "=q1=Dark Desire", "=ds=#e3#"};
 				{ 18, 22238, "", "=q1=Very Berry Cream", "=ds=#e3#"};
 				{ 19, 22236, "", "=q1=Buttermilk Delight", "=ds=#e3#"};
-				{ 20, 22239, "", "=q1=Sweet Surprise ", "=ds=#e3#"};		
-				{ 22, 0, "inv_valentinescandysack", "=q6="..AL["Bag of Heart Candies"], "#ACHIEVEMENTID:1701#"};
+				{ 20, 22239, "", "=q1=Sweet Surprise ", "=ds=#e3#"};
+				{ 22, 0, "inv_valentinescandysack", "=q6="..AtlasLoot_IngameLocales["Bag of Heart Candies"], "#ACHIEVEMENTID:1701#"};
 				{ 23, 21816, "", "=q1=Heart Candy", "=ds=#m20#"};
 				{ 24, 21817, "", "=q1=Heart Candy", "=ds=#m20#"};
 				{ 25, 21818, "", "=q1=Heart Candy", "=ds=#m20#"};
@@ -604,13 +622,23 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 28, 21821, "", "=q1=Heart Candy", "=ds=#m20#"};
 				{ 29, 21822, "", "=q1=Heart Candy", "=ds=#m20#"};
 				{ 30, 21823, "", "=q1=Heart Candy", "=ds=#m20#"};
+				extraText = ": "..AL["Misc"];
 			};
+		};
+		info = {
+			name = AL["Love is in the Air"],
+			module = moduleName, menu = "LOEVISINTHEAIRMENU", 
+		};
+	};
+
+	AtlasLoot_Data["ApothecaryHummel"] = {
+		["Normal"] = {
 			{
-				{ 1, 68175, "", "=q3=Winking Eye of Love", "=ds=#s2#"};
-				{ 2, 68176, "", "=q3=Heartbreak Charm", "=ds=#s2#"};
-				{ 3, 68172, "", "=q3=Shard of Pirouetting Happiness", "=ds=#s2#"};
-				{ 4, 68174, "", "=q3=Sweet Perfume Broach", "=ds=#s2#"};
-				{ 5, 68173, "", "=q3=Choker of the Pure Heart", "=ds=#s2#"};
+				{ 1, 93394, "", "=q4=Choker of the Pure Heart", "=ds=#s2#"};
+				{ 2, 93391, "", "=q4=Heartbreak Charm", "=ds=#s2#"};
+				{ 3, 93395, "", "=q4=Shard of Pirouetting Happiness", "=ds=#s2#"};
+				{ 4, 93393, "", "=q4=Sweet Perfume Broach", "=ds=#s2#"};
+				{ 5, 93392, "", "=q4=Winking Eye of Love", "=ds=#s2#"};
 				{ 16, 54537, "", "=q3=Heart-Shaped Box", "=q5="..AL["Daily Reward"]};
 				{ 17, 50250, "", "=q4=Big Love Rocket", "=ds=#e12#"};
 				{ 18, 50446, "", "=q3=Toxic Wasteling", "=ds=#e13#"};
@@ -620,8 +648,8 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Love is in the Air"],
-			module = moduleName, menu = "WORLDEVENTMENU", 
+			name = AL["Apothecary Hummel"],
+			module = moduleName, menu = "LOEVISINTHEAIRMENU",
 		};
 	};
 
@@ -632,57 +660,64 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["LunarFestival"] = {
 		["Normal"] = {
 			{
-				{ 1, 21540, "", "=q2=Elune's Lantern", "=q1=#m4#: =ds=#m20#"};
-				{ 3, 21157, "", "=q1=Festive Green Dress", "=ds=#s5#"};
-				{ 4, 21538, "", "=q1=Festive Pink Dress", "=ds=#s5#"};
-				{ 5, 21539, "", "=q1=Festive Purple Dress", "=ds=#s5#"};
-				{ 7, 21541, "", "=q1=Festive Black Pant Suit", "=ds=#s5#"};
-				{ 8, 21544, "", "=q1=Festive Blue Pant Suit", "=ds=#s5#"};
-				{ 9, 21543, "", "=q1=Festive Teal Pant Suit", "=ds=#s5#"};
-				{ 11, 21537, "", "=q1=Festival Dumplings", "=ds=#e3#"};
-				{ 13, 21713, "", "=q1=Elune's Candle", "=ds=#m20#"};
-				{ 15, 21100, "", "=q1=Coin of Ancestry", "=ds=#m17#"};
-				{ 16, 0, "INV_Box_02", "=q6="..AL["Lunar Festival Fireworks Pack"], "=ds=#e23#"};
-				{ 17, 21558, "", "=q1=Small Blue Rocket", "=ds=#e23#"};
-				{ 18, 21559, "", "=q1=Small Green Rocket", "=ds=#e23#"};
-				{ 19, 21557, "", "=q1=Small Red Rocket", "=ds=#e23#"};
-				{ 20, 21561, "", "=q1=Small White Rocket", "=ds=#e23#"};
-				{ 21, 21562, "", "=q1=Small Yellow Rocket", "=ds=#e23#"};
-				{ 22, 21589, "", "=q1=Large Blue Rocket", "=ds=#e23#"};
-				{ 23, 21590, "", "=q1=Large Green Rocket", "=ds=#e23#"};
-				{ 24, 21592, "", "=q1=Large Red Rocket", "=ds=#e23#"};
-				{ 25, 21593, "", "=q1=Large White Rocket", "=ds=#e23#"};
-				{ 26, 21595, "", "=q1=Large Yellow Rocket", "=ds=#e23#"};
-				{ 28, 0, "INV_Misc_LuckyMoneyEnvelope", "=q6="..AL["Lucky Red Envelope"], ""};
-				{ 29, 21744, "", "=q1=Lucky Rocket Cluster", "=ds=#e23#"};
-				{ 30, 21745, "", "=q1=Elder's Moonstone", "=ds=#m20#"};
+				{ 1, 74611, "", "=q3=Festival Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
+				{ 2, 74610, "", "=q3=Lunar Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
+				{ 3, 21157, "", "=q1=Festive Green Dress", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 4, 21538, "", "=q1=Festive Pink Dress", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 5, 21539, "", "=q1=Festive Purple Dress", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 6, 21541, "", "=q1=Festive Black Pant Suit", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 7, 21544, "", "=q1=Festive Blue Pant Suit", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 8, 21543, "", "=q1=Festive Teal Pant Suit", "=ds=#s5#", "#LUNARFESTIVAL:5#"};
+				{ 9, 21537, "", "=q1=Festival Dumplings", "=ds=#e3#", "#LUNARFESTIVAL:1#"};
+				{ 10, 21721, "", "=q1=Moonglow", "=ds=#e4#", "15 #copper#"};
+				{ 11, 21713, "", "=q1=Elune's Candle", "=ds=#m20#", "10 #silver#"};
+				{ 12, 21558, "", "=q1=Small Blue Rocket", "=ds=#e23#", "25 #copper#"};
+				{ 13, 21559, "", "=q1=Small Green Rocket", "=ds=#e23#", "25 #copper#"};
+				{ 14, 21557, "", "=q1=Small Red Rocket", "=ds=#e23#", "25 #copper#"};
+				{ 15, 21571, "", "=q1=Blue Rocket Cluster", "=ds=#e23#", "1 #silver#"};
+				{ 16, 21574, "", "=q1=Green Rocket Cluster", "=ds=#e23#", "1 #silver#"};
+				{ 17, 21576, "", "=q1=Red Rocket Cluster", "=ds=#e23#", "1 #silver#"};
+				{ 18, 21747, "", "=q1=Festival Firecracker", "=ds=#e23#", "1 #silver#"};
+				{ 20, 21640, "", "=q1=Lunar Festival Fireworks Pack", "=ds=#e23#", "#LUNARFESTIVAL:5#"};
+				{ 21, 21558, "", "=q1=Small Blue Rocket", "=ds=#e23#"};
+				{ 22, 21559, "", "=q1=Small Green Rocket", "=ds=#e23#"};
+				{ 23, 21557, "", "=q1=Small Red Rocket", "=ds=#e23#"};
+				{ 24, 21561, "", "=q1=Small White Rocket", "=ds=#e23#"};
+				{ 25, 21562, "", "=q1=Small Yellow Rocket", "=ds=#e23#"};
+				{ 26, 21589, "", "=q1=Large Blue Rocket", "=ds=#e23#"};
+				{ 27, 21590, "", "=q1=Large Green Rocket", "=ds=#e23#"};
+				{ 28, 21592, "", "=q1=Large Red Rocket", "=ds=#e23#"};
+				{ 29, 21593, "", "=q1=Large White Rocket", "=ds=#e23#"};
+				{ 30, 21595, "", "=q1=Large Yellow Rocket", "=ds=#e23#"};
+				extraText = ": "..AL["Vendor"];
 			};
 			{
-				{ 1, 21738, "", "=q2=Schematic: Firework Launcher ", "=ds=#p5# (225)"};
-				{ 3, 0, "INV_Scroll_03", "=q6="..AL["Small Rocket Recipes"], ""};
+				{ 1, 21738, "", "=q2=Schematic: Firework Launcher ", "=ds=#p5# (225)", "#LUNARFESTIVAL:5#"};
+				{ 3, 21740, "", "=q1=Small Rocket Recipes", "=ds=#p5# (125)", "#LUNARFESTIVAL:5#"};
 				{ 4, 21724, "", "=q2=Schematic: Small Blue Rocket", "=ds=#p5# (125)"};
 				{ 5, 21725, "", "=q2=Schematic: Small Green Rocket", "=ds=#p5# (125)"};
 				{ 6, 21726, "", "=q2=Schematic: Small Red Rocket", "=ds=#p5# (125)"};
-				{ 8, 0, "INV_Scroll_04", "=q6="..AL["Large Rocket Recipes"], ""};
+				{ 8, 21742, "", "=q1=Large Rocket Recipes", "=ds=#p5# (175)", "#LUNARFESTIVAL:5#"};
 				{ 9, 21727, "", "=q2=Schematic: Large Blue Rocket", "=ds=#p5# (175)"};
 				{ 10, 21728, "", "=q2=Schematic: Large Green Rocket", "=ds=#p5# (175)"};
 				{ 11, 21729, "", "=q2=Schematic: Large Red Rocket", "=ds=#p5# (175)"};
-				{ 13, 44916, "", "=q2=Pattern: Festival Dress", "=ds=#p8# (250)"};
+				{ 13, 44916, "", "=q2=Pattern: Festival Dress", "=ds=#p8# (250)", "#LUNARFESTIVAL:5#"};
 				{ 16, 21737, "", "=q2=Schematic: Cluster Launcher", "=ds=#p5# (275)"};
-				{ 18, 0, "INV_Scroll_05", "=q6="..AL["Cluster Rocket Recipes"], ""};
+				{ 18, 21741, "", "=q1=Cluster Rocket Recipes", "=ds=#p5# (225)", "#LUNARFESTIVAL:5#"};
 				{ 19, 21730, "", "=q2=Schematic: Blue Rocket Cluster", "=ds=#p5# (225)"};
 				{ 20, 21731, "", "=q2=Schematic: Green Rocket Cluster", "=ds=#p5# (225)"};
 				{ 21, 21732, "", "=q2=Schematic: Red Rocket Cluster", "=ds=#p5# (225)"};
-				{ 23, 0, "INV_Scroll_06", "=q6="..AL["Large Cluster Rocket Recipes"], ""};
+				{ 23, 21743, "", "=q1=Large Cluster Rocket Recipes", "=ds=#p5# (275)", "#LUNARFESTIVAL:5#"};
 				{ 24, 21733, "", "=q2=Schematic: Large Blue Rocket Cluster", "=ds=#p5# (275)"};
 				{ 25, 21734, "", "=q2=Schematic: Large Green Rocket Cluster", "=ds=#p5# (275)"};
 				{ 26, 21735, "", "=q2=Schematic: Large Red Rocket Cluster", "=ds=#p5# (275)"};
-				{ 28, 44917, "", "=q2=Pattern: Festival Suit", "=ds=#p8# (250)"};
+				{ 28, 44917, "", "=q2=Pattern: Festival Suit", "=ds=#p8# (250)", "#LUNARFESTIVAL:5#"};
+				extraText = ": "..AL["Schematics & Patterns"];
 			};
 		};
 		info = {
 			name = AL["Lunar Festival"],
-			module = moduleName, menu = "WORLDEVENTMENU", 
+			module = moduleName, menu = "LUNARFESTIVALMENU", 
 		};
 	};
 
@@ -697,13 +732,13 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 2, 23083, "", "=q3=Captured Flame", "=ds=#e13#", "#MIDSUMMER:350#"};
 				{ 4, 23379, "", "=q2=Cinder Bracers", "=ds=#e22#"};
 				{ 6, 23246, "", "=q1=Fiery Festival Brew", "", "#MIDSUMMER:2#"};
-				{ 7, 23435, "", "=q1=Elderberry Pie", "", "#MIDSUMMER:5#"};
-				{ 8, 23327, "", "=q1=Fire-Toasted Bun", "", "#MIDSUMMER:5#"};
-				{ 9, 23326, "", "=q1=Midsummer Sausage", "", "#MIDSUMMER:5#"};
-				{ 10, 23211, "", "=q1=Toasted Smorc", "", "#MIDSUMMER:5#"};
+				{ 7, 23435, "", "=q1=Elderberry Pie", "", "#MIDSUMMER:5#", amount = 5};
+				{ 8, 23327, "", "=q1=Fire-Toasted Bun", "", "#MIDSUMMER:5#", amount = 5};
+				{ 9, 23326, "", "=q1=Midsummer Sausage", "", "#MIDSUMMER:5#", amount = 5};
+				{ 10, 23211, "", "=q1=Toasted Smorc", "", "#MIDSUMMER:5#", amount = 5};
 				{ 11, 34684, "", "=q1=Handful of Summer Petals", "", "#MIDSUMMER:2#"};
-				{ 12, 23215, "", "=q1=Bag of Smorc Ingredients", "", "#MIDSUMMER:5#"};
-				{ 13, 34599, "", "=q1=Juggling Torch", "", "#MIDSUMMER:5#"};
+				{ 12, 23215, "", "=q1=Bag of Smorc Ingredients", "", "#MIDSUMMER:5#", amount = 5};
+				{ 13, 34599, "", "=q1=Juggling Torch", "", "#MIDSUMMER:5#", amount = 5};
 				{ 15, 23247, "", "=q1=Burning Blossom", "=ds=#m17#"};
 				{ 16, 23323, "", "=q1=Crown of the Fire Festival", "=ds=#s1#, #a1#, #m4#"};
 				{ 17, 74278, "", "=q1=Helm of the Fire Festival", "=ds=#s1#"};
@@ -752,7 +787,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 3, 44793, "", "=q3=Tome of Polymorph: Rabbit", "=ds=#e10#", "#NOBLEGARDEN:100#"};
 				{ 4, 44794, "", "=q3=Spring Rabbit's Foot", "=ds=#e13#", "#NOBLEGARDEN:100#"};
 				{ 5, 45073, "", "=q1=Spring Flowers", "=ds=#h1#", "#NOBLEGARDEN:50#"};
-				{ 6, 44792, "", "=q1=Blossoming Branch", "=ds=", "#NOBLEGARDEN:10#"};
+				{ 6, 44792, "", "=q1=Blossoming Branch", "=ds=#e25#", "#NOBLEGARDEN:10#"};
 				{ 7, 44818, "", "=q1=Noblegarden Egg", "=ds=", "#NOBLEGARDEN:5#"};
 				{ 9, 45067, "", "=q1=Egg Basket", "=q1=#m4#: =ds=#s15#"};
 				{ 10, 44791, "", "=q1=Noblegarden Chocolate", "=ds=#e3#"};
@@ -778,50 +813,50 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["PilgrimsBounty"] = {
 		["Normal_A"] = {
 			{
-				{ 1, 46809, "", "=q2=Bountiful Cookbook", "=ds=#p3# #e10# (1)"};
-				{ 2, 44860, "", "=q1=Recipe: Spice Bread Stuffing", "=ds=#p3# (1)"};
-				{ 3, 44862, "", "=q1=Recipe: Pumpkin Pie", "=ds=#p3# (100)"};
-				{ 4, 44858, "", "=q1=Recipe: Cranberry Chutney", "=ds=#p3# (160)"};
-				{ 5, 44859, "", "=q1=Recipe: Candied Sweet Potato", "=ds=#p3# (220)"};
-				{ 6, 44861, "", "=q1=Recipe: Slow-Roasted Turkey", "=ds=#p3# (280)"};
-				{ 7, 46888, "", "=q1=Bountiful Basket", "=ds=#e3#, #p3# (350)"};
-				{ 8, 44855, "", "=q1=Teldrassil Sweet Potato", "=ds=#e3#"};
-				{ 9, 44854, "", "=q1=Tangy Wetland Cranberries", "=ds=#e3#"};
-				{ 10, 46784, "", "=q1=Ripe Elwynn Pumpkin", "=ds=#e3#"};
-				{ 11, 44835, "", "=q1=Autumnal Herbs", "=ds=#e6#"};
-				{ 12, 44853, "", "=q1=Honey", "=ds=#e6#"};
-				{ 16, 44810, "", "=q3=Turkey Cage", "=q1=#m32#: =ds=#e13#"};
-				{ 17, 46723, "", "=q1=Pilgrim's Hat", "=q1=#m4#: =ds=#s1#"};
-				{ 18, 46800, "", "=q1=Pilgrim's Attire", "=q1=#m4#: =ds=#s5#"};
-				{ 19, 44785, "", "=q1=Pilgrim's Dress", "=q1=#m4#: =ds=#s5#"};
-				{ 20, 46824, "", "=q1=Pilgrim's Robe", "=q1=#m4#: =ds=#s5#"};
-				{ 21, 44788, "", "=q1=Pilgrim's Boots", "=q1=#m4#: =ds=#s12#"};
-				{ 22, 44844, "", "=q1=Turkey Caller", "=q1=#m4#: =ds="};
-				{ 23, 44812, "", "=q1=Turkey Shooter", "=q1=#m4#: =ds="};
+				{ 1, 44810, "", "=q3=Turkey Cage", "=ds=#e13#", "#ACHIEVEMENTID:1694#"};
+				{ 3, 46809, "", "=q2=Bountiful Cookbook", "=ds=#p3# #e10# (1)", "=ds=10 #silver#"};
+				{ 4, 44860, "", "=q1=Recipe: Spice Bread Stuffing", "=ds=#p3# (1)"};
+				{ 5, 44862, "", "=q1=Recipe: Pumpkin Pie", "=ds=#p3# (100)"};
+				{ 6, 44858, "", "=q1=Recipe: Cranberry Chutney", "=ds=#p3# (160)"};
+				{ 7, 44859, "", "=q1=Recipe: Candied Sweet Potato", "=ds=#p3# (220)"};
+				{ 8, 44861, "", "=q1=Recipe: Slow-Roasted Turkey", "=ds=#p3# (280)"};
+				{ 10, 46888, "", "=q1=Bountiful Basket", "=ds=#e3#, #p3# (350)", "=ds=20 #silver#"};
+				{ 11, 44855, "", "=q1=Teldrassil Sweet Potato", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 12, 44854, "", "=q1=Tangy Wetland Cranberries", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 13, 46784, "", "=q1=Ripe Elwynn Pumpkin", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 14, 44835, "", "=q1=Autumnal Herbs", "=ds=#e6#", "=ds=10 #copper#", amount = 5};
+				{ 15, 44853, "", "=q1=Honey", "=ds=#e6#", "=ds=25 #copper#", amount = 5};
+				{ 16, 44844, "", "=q1=Turkey Caller", "=ds=", "=q1=#m4#: #QUESTID:14035#"};
+				{ 18, 46723, "", "=q1=Pilgrim's Hat", "=ds=#s1#", "=ds="..AL["Daily Reward"]};
+				{ 19, 46800, "", "=q1=Pilgrim's Attire", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 20, 44785, "", "=q1=Pilgrim's Dress", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 21, 46824, "", "=q1=Pilgrim's Robe", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 22, 44788, "", "=q1=Pilgrim's Boots", "=ds=#s12#", "=ds="..AL["Daily Reward"]};
+				{ 23, 44812, "", "=q1=Turkey Shooter", "=ds=", "=ds="..AL["Daily Reward"]};
 			};
 		};
 		["Normal_H"] = {
 			{
-				{ 1, 46810, "", "=q2=Bountiful Cookbook", "=ds=#p3# #e10# (1)"};
-				{ 2, 46803, "", "=q1=Recipe: Spice Bread Stuffing", "=ds=#p3# (1)"};
-				{ 3, 46804, "", "=q1=Recipe: Pumpkin Pie", "=ds=#p3# (100)"};
-				{ 4, 46805, "", "=q1=Recipe: Cranberry Chutney", "=ds=#p3# (160)"};
-				{ 5, 46806, "", "=q1=Recipe: Candied Sweet Potato", "=ds=#p3# (220)"};
-				{ 6, 46807, "", "=q1=Recipe: Slow-Roasted Turkey", "=ds=#p3# (280)"};
-				{ 7, 46888, "", "=q1=Bountiful Basket", "=ds=#e3#, #p3# (350)"};
-				{ 8, 46797, "", "=q1=Mulgore Sweet Potato", "=ds=#e3#"};
-				{ 9, 46793, "", "=q1=Tangy Southfury Cranberries ", "=ds=#e3#"};
-				{ 10, 46796, "", "=q1=Ripe Tirisfal Pumpkin ", "=ds=#e3#"};
-				{ 11, 44835, "", "=q1=Autumnal Herbs", "=ds=#e6#"};
-				{ 12, 44853, "", "=q1=Honey", "=ds=#e6#"};
-				{ 16, 44810, "", "=q3=Turkey Cage", "=q1=#m32#: =ds=#e13#"};
-				{ 17, 46723, "", "=q1=Pilgrim's Hat", "=q1=#m4#: =ds=#s1#"};
-				{ 18, 46800, "", "=q1=Pilgrim's Attire", "=q1=#m4#: =ds=#s5#"};
-				{ 19, 44785, "", "=q1=Pilgrim's Dress", "=q1=#m4#: =ds=#s5#"};
-				{ 20, 46824, "", "=q1=Pilgrim's Robe", "=q1=#m4#: =ds=#s5#"};
-				{ 21, 44788, "", "=q1=Pilgrim's Boots", "=q1=#m4#: =ds=#s12#"};
-				{ 22, 44844, "", "=q1=Turkey Caller", "=q1=#m4#"};
-				{ 23, 44812, "", "=q1=Turkey Shooter", "=q1=#m4#"};
+				{ 1, 44810, "", "=q3=Turkey Cage", "=q1=#m32#: =ds=#e13#", "#ACHIEVEMENTID:1694#"};
+				{ 3, 46810, "", "=q2=Bountiful Cookbook", "=ds=#p3# #e10# (1)", "=ds=10 #silver#"};
+				{ 4, 46803, "", "=q1=Recipe: Spice Bread Stuffing", "=ds=#p3# (1)"};
+				{ 5, 46804, "", "=q1=Recipe: Pumpkin Pie", "=ds=#p3# (100)"};
+				{ 6, 46805, "", "=q1=Recipe: Cranberry Chutney", "=ds=#p3# (160)"};
+				{ 7, 46806, "", "=q1=Recipe: Candied Sweet Potato", "=ds=#p3# (220)"};
+				{ 8, 46807, "", "=q1=Recipe: Slow-Roasted Turkey", "=ds=#p3# (280)"};
+				{ 10, 46888, "", "=q1=Bountiful Basket", "=ds=#e3#, #p3# (350)", "=ds=20 #silver#"};
+				{ 11, 46797, "", "=q1=Mulgore Sweet Potato", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 12, 46793, "", "=q1=Tangy Southfury Cranberries ", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 13, 46796, "", "=q1=Ripe Tirisfal Pumpkin ", "=ds=#e3#", "=ds=25 #copper#", amount = 5};
+				{ 14, 44835, "", "=q1=Autumnal Herbs", "=ds=#e6#", "=ds=10 #copper#", amount = 5};
+				{ 15, 44853, "", "=q1=Honey", "=ds=#e6#", "=ds=25 #copper#", amount = 5};		
+				{ 16, 44844, "", "=q1=Turkey Caller", "=q1=#m4#: #QUESTID:14047#"};
+				{ 18, 46723, "", "=q1=Pilgrim's Hat", "=ds=#s1#", "=ds="..AL["Daily Reward"]};
+				{ 19, 46800, "", "=q1=Pilgrim's Attire", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 20, 44785, "", "=q1=Pilgrim's Dress", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 21, 46824, "", "=q1=Pilgrim's Robe", "=ds=#s5#", "=ds="..AL["Daily Reward"]};
+				{ 22, 44788, "", "=q1=Pilgrim's Boots", "=ds=#s12#", "=ds="..AL["Daily Reward"]};
+				{ 23, 44812, "", "=q1=Turkey Shooter", "=ds=", "=ds="..AL["Daily Reward"]};
 			};
 		};
 		info = {
@@ -888,15 +923,20 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 8, 73762, "", "=q3=Darkmoon Balloon", "=ds=#e13#", "#DARKMOON:90#"};
 				{ 9, 73903, "", "=q3=Darkmoon Tonk", "=ds=#e13#", "#DARKMOON:90#"};
 				{ 10, 73905, "", "=q3=Darkmoon Zeppelin", "=ds=#e13#", "#DARKMOON:90#"};
-				{ 11, 11026, "", "=q1=Tree Frog Box", "=ds=#e13#"};
-				{ 12, 11027, "", "=q1=Wood Frog Box", "=ds=#e13#"};
-				{ 13, 19450, "", "=q1=A Jubling's Tiny Home", "=q1=#m4#: =ds=#e13#"};
-				{ 17, 77158, "", "=q2=Darkmoon 'Tiger'", "=ds=#m20#" },
-				{ 18, 78340, "", "=q1=Cloak of the Darkmoon Faire", "=ds=#s4#, #a1#" },
-				{ 19, 19295, "", "=q1=Darkmoon Flower", "=ds=#s15#" },
-				{ 20, 77256, "", "=q1=Darkmoon 'Sword'", "=ds=#h2#, #w10#" },
-				{ 21, 78341, "", "=q1=Darkmoon Hammer", "=ds=#h2#, #w6#" },
-				{ 22, 19291, "", "=q1=Darkmoon Storage Box", "=ds=#e1#" },
+				{ 11, 11026, "", "=q1=Tree Frog Box", "=ds=#e13#", "1 #gold#"};
+				{ 12, 11027, "", "=q1=Wood Frog Box", "=ds=#e13#", "1 #gold#"};
+				{ 13, 19450, "", "=q1=A Jubling's Tiny Home", "=ds=#e13#", "=q1=#m4#: =ds=#e13#"};
+				{ 17, 77158, "", "=q2=Darkmoon \"Tiger\"", "=ds=#m20#", "#DARKMOON:1#"},
+				{ 18, 78340, "", "=q1=Cloak of the Darkmoon Faire", "=ds=#s4#", "#DARKMOON:90#"},
+				{ 19, 19295, "", "=q1=Darkmoon Flower", "=ds=#s15#", "#DARKMOON:1#"},
+				{ 20, 77256, "", "=q1=Darkmoon \"Sword\"", "=ds=#h2#", "#DARKMOON:20#"},
+				{ 21, 78341, "", "=q1=Darkmoon Hammer", "=ds=#h2#, #w6#", "#DARKMOON:160#"},
+				{ 22, 19291, "", "=q1=Darkmoon Storage Box", "=ds=#e1#", "#DARKMOON:1#"},
+				{ 23, 75040, "", "=q1=Flimsy Darkmoon Balloon", "=ds=#e13#", "10 #silver#"},
+				{ 24, 75041, "", "=q1=Flimsy Green Balloon", "=ds=#e13#", "10 #silver#"},
+				{ 25, 75042, "", "=q1=Flimsy Yellow Balloon", "=ds=#e13#", "10 #silver#"},
+				{ 26, 18662, "", "=q1=Heavy Leather Ball", "=ds=#m20#", "20 #copper#"},
+				extraText = ": "..BabbleInventory["Mounts"].." & "..BabbleInventory["Companions"];
 			};
 			{
 				{ 2, 19223, "", "=q1=Darkmoon Dog", "=ds=#e3#"};
@@ -917,6 +957,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 22, 33236, "", "=q1=Fizzy Faire Drink 'Classic'", "=ds=#e4#"};
 				{ 23, 44941, "", "=q1=Fresh-Squeezed Limeade", "=ds=#e4#"};
 				{ 24, 74822, "", "=q1=Sasparilla Sinker", "=ds=#e4#"};
+				extraText = ": "..AL["Food and Drinks"];
 			};
 			{
 				{ 1, 42985, "", "=q7=Tattered Dreadmist Mantle", "=ds=#s3#, #a1#",  "#DARKMOON:110#"};
@@ -924,23 +965,28 @@ local moduleName = "AtlasLoot_WorldEvents"
 				{ 3, 42952, "", "=q7=Stained Shadowcraft Spaulders", "=ds=#s3#, #a2#", "#DARKMOON:110#"};
 				{ 4, 42950, "", "=q7=Champion Herod's Shoulder", "=ds=#s3#, #a3#", "#DARKMOON:110#"};
 				{ 5, 42951, "", "=q7=Mystical Pauldrons of Elements", "=ds=#s3#, #a3#", "#DARKMOON:110#"};
-				{ 6, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#DARKMOON:110#"};
-				{ 8, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#DARKMOON:110#"};
-				{ 9, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#DARKMOON:110#"};
-				{ 10, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#DARKMOON:110#"};
-				{ 11, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#DARKMOON:110#"};
-				{ 12, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#DARKMOON:110#"};
-				{ 13, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#DARKMOON:110#"};
+				{ 6, 69890, "", "=q7=Burnished Pauldrons of Might", "=ds=#s3#, #a4#", "#DARKMOON:110#"};
+				{ 7, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#DARKMOON:110#"};
+				{ 9, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#DARKMOON:110#"};
+				{ 10, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#DARKMOON:110#"};
+				{ 11, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#DARKMOON:110#"};
+				{ 12, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#DARKMOON:110#"};
+				{ 13, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#DARKMOON:110#"};
+				{ 14, 69889, "", "=q7=Burnished Breastplate of Might", "=ds=#s5#, #a4#", "#DARKMOON:110#"};
+				{ 15, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#DARKMOON:110#"};
 				{ 16, 42992, "", "=q7=Discerning Eye of the Beast", "=ds=#s14#", "#DARKMOON:130#"};
 				{ 17, 42991, "", "=q7=Swift Hand of Justice", "=ds=#s14#", "#DARKMOON:130#"};
 				{ 19, 42944, "", "=q7=Balanced Heartseeker", "=ds=#h1#, #w4#", "#DARKMOON:110#"};
+				{ 22, 69893, "", "=q7=Bloodsoaked Skullforge Reaver", "=ds=#h3#, #w10#", "#DARKMOON:110#"};
 				{ 20, 42945, "", "=q7=Venerable Dal'Rend's Sacred Charge", "=ds=#h3#, #w10#", "#DARKMOON:110#"};
 				{ 21, 42943, "", "=q7=Bloodied Arcanite Reaper", "=ds=#h2#, #w1#", "#DARKMOON:160#"};
-				{ 22, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#DARKMOON:130#"};
-				{ 23, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#DARKMOON:130#"};
+				{ 22, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#DARKMOON:110#"};
+				{ 23, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#DARKMOON:110#"};
 				{ 24, 48718, "", "=q7=Repurposed Lava Dredger", "=ds=#h2#, #w6#", "#DARKMOON:160#"};
-				{ 25, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#DARKMOON:160#"};
-				{ 26, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#DARKMOON:160#"};
+				{ 25, 79131, "", "=q7=Burnished Warden Staff", "=ds=#w9#", "#DARKMOON:160#"};
+				{ 26, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#DARKMOON:160#"};
+				{ 27, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#DARKMOON:160#"};
+				extraText = ": "..AL["Heirloom"];
 			};
 		};
 		info = {
@@ -1140,25 +1186,6 @@ local moduleName = "AtlasLoot_WorldEvents"
 
 	AtlasLoot_Data["DarkmoonDeck"] = {
 		["Normal"] = {
-			--[[{
-				{ 1, 19491, "", "=q4=Amulet of the Darkmoon", "=ds=#s2#", "1200 #darkmoon#", ""};
-				{ 2, 19426, "", "=q4=Orb of the Darkmoon", "=ds=#s2#", "1200 #darkmoon#", ""};
-				{ 3, 19296, "", "=q2=Greater Darkmoon Prize", "40 #darkmoon#"};
-				{ 4, 19297, "", "=q2=Lesser Darkmoon Prize", "12 #darkmoon#"};
-				{ 5, 19298, "", "=q2=Minor Darkmoon Prize", "5 #darkmoon#"};
-				{ 6, 19291, "", "=q1=Darkmoon Storage Box", "50 #darkmoon#"};
-				{ 7, 19293, "", "=q1=Last Year's Mutton", "=ds=#h1#, #w6#", "50 #darkmoon#", ""};
-				{ 8, 22729, "", "=q1=Schematic: Steam Tonk Controller", "=ds=#p5# (275)", "40 #darkmoon#", ""};
-				{ 9, 19292, "", "=q1=Last Month's Mutton", "=ds=#h1#, #w6#", "10 #darkmoon#", ""};
-				{ 10, 19295, "", "=q1=Darkmoon Flower", "=ds=#s15#", "5 #darkmoon#", ""};
-				{ 12, 19182, "", "=q1=Darkmoon Faire Prize Ticket", "=ds=#m17#"};
-				{ 16, 19302, "", "=q3=Darkmoon Ring", "=ds=#s13#"};
-				{ 17, 19303, "", "=q2=Darkmoon Necklace", "=ds=#s2#"};
-				{ 19, 11026, "", "=q1=Tree Frog Box", "=ds=#e13#"};
-				{ 20, 11027, "", "=q1=Wood Frog Box", "=ds=#e13#"};
-				{ 21, 19450, "", "=q1=A Jubling's Tiny Home", "=q1=#m4#: =ds=#e13#"};
-				extraText = ": "..AL["Darkmoon Faire Rewards"];
-			};]]--
 			{
 				{ 2, 79325, "", "=q4=Crane Deck", "=ds=#m2#"};
 				{ 3, 79330, "", "=q4=Relic of Chi Ji", "=q1=#m4#: =ds=#s14#"};
@@ -1264,9 +1291,9 @@ local moduleName = "AtlasLoot_WorldEvents"
 		};
 	};
 
-		------------------------------------------
-		--- Stranglethorn Fishing Extravaganza ---
-		------------------------------------------
+		------------------------------------------------------------------
+		--- Stranglethorn Fishing Extravaganza / Kalu'ak Fishing Derby ---
+		------------------------------------------------------------------
 
 	AtlasLoot_Data["FishingExtravaganza"] = {
 		["Normal"] = {
@@ -1391,7 +1418,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Armbreaker Huffaz"],
+			name = BabbleRare["Armbreaker Huffaz"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1414,7 +1441,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Fel Tinkerer Zortan"],
+			name = BabbleRare["Fel Tinkerer Zortan"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1437,7 +1464,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Forgosh"],
+			name = BabbleRare["Forgosh"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1460,7 +1487,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Gul'bor"],
+			name = BabbleRare["Gul'bor"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1483,7 +1510,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Malevus the Mad"],
+			name = BabbleRare["Malevus the Mad"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1506,7 +1533,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Porfus the Gem Gorger"],
+			name = BabbleRare["Porfus the Gem Gorger"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1529,7 +1556,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Wrathbringer Laz-tarash"],
+			name = BabbleRare["Wrathbringer Laz-tarash"],
 			module = moduleName, menu = "ETHEREUMMENU"
 		};
 	};
@@ -1537,19 +1564,19 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["BashirStasisChambers"] = {
 		["Normal"] = {
 			{
-				{ 1, 0, "INV_Box_01", "=q6="..AL["Trelopades"], ""};
+				{ 1, 0, "INV_Box_01", "=q6="..BabbleRare["Trelopades"], ""};
 				{ 2, 32522, "", "=q3=Demonic Bulwark", "=ds=#w8#", "", ""};
 				{ 3, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
-				{ 5, 0, "INV_Box_01", "=q6="..AL["King Dorfbruiser"], ""};
+				{ 5, 0, "INV_Box_01", "=q6="..BabbleRare["King Dorfbruiser"], ""};
 				{ 6, 31577, "", "=q3=Slatesteel Shoulders", "=ds=#s3#, #a4#", "", ""};
 				{ 7, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
-				{ 9, 0, "INV_Box_01", "=q6="..AL["Gorgolon the All-seeing"], ""};
+				{ 9, 0, "INV_Box_01", "=q6="..BabbleRare["Gorgolon the All-seeing"], ""};
 				{ 10, 31569, "", "=q3=Mistshroud Shoulders", "=ds=#s3#, #a3#", "", ""};
 				{ 11, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
-				{ 16, 0, "INV_Box_01", "=q6="..AL["Matron Li-sahar"], ""};
+				{ 16, 0, "INV_Box_01", "=q6="..BabbleRare["Matron Li-sahar"], ""};
 				{ 17, 31553, "", "=q3=Windchanneller's Mantle", "=ds=#s3#, #a1#", "", ""};
 				{ 18, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
-				{ 20, 0, "INV_Box_01", "=q6="..AL["Solus the Eternal"], ""};
+				{ 20, 0, "INV_Box_01", "=q6="..BabbleRare["Solus the Eternal"], ""};
 				{ 21, 31561, "", "=q3=Skystalker's Shoulders", "=ds=#s3#, #a2#", "", ""};
 				{ 22, 31941, "", "=q2=Mark of the Nexus-King", "=ds=#m3#", "", ""};
 			};
@@ -1567,21 +1594,21 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["DarkscreecherAkkarai"] = {
 		["Normal"] = {
 			{
-				{ 1, 32529, "", "=q3=Heretic's Gauntlets", "=ds=#s9#, #a4#", "", "17.3%"};
-				{ 2, 32715, "", "=q2=Akkarai's Talons", "=ds=#m3#", "", "100%"};
-				{ 4, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.3%"};
-				{ 5, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "4.3%"};
-				{ 6, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "6.8%"};
-				{ 7, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "6.2%"};
-				{ 8, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "4.1%"};
-				{ 9, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "4.5%"};
-				{ 10, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "6.7%"};
-				{ 11, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "5.5%"};
-				{ 12, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "31.5%"};
+				{ 2, 32529, "", "=q3=Heretic's Gauntlets", "=ds=#s9#, #a4#", "", "17.3%"};
+				{ 3, 32715, "", "=q2=Akkarai's Talons", "=ds=#m3#", "", "100%"};
+				{ 17, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.3%"};
+				{ 18, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "4.3%"};
+				{ 19, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "6.8%"};
+				{ 20, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "6.2%"};
+				{ 21, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "4.1%"};
+				{ 22, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "4.5%"};
+				{ 23, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "6.7%"};
+				{ 24, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "5.5%"};
+				{ 25, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "31.5%"};
 			};
 		};
 		info = {
-			name = AL["Darkscreecher Akkarai"],
+			name = BabbleRare["Darkscreecher Akkarai"],
 			module = moduleName, menu = "SKETTISMENU"
 		};
 	};
@@ -1589,21 +1616,21 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["Karrog"] = {
 		["Normal"] = {
 			{
-				{ 1, 32533, "", "=q3=Karrog's Shard", "=ds=#s15#", "", "15.0%"};
-				{ 2, 32717, "", "=q2=Karrog's Spine", "=ds=#m3#", "", "100%"};
-				{ 4, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.6%"};
-				{ 5, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "6.8%"};
-				{ 6, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "6.0%"};
-				{ 7, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "8.0%"};
-				{ 8, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.6%"};
-				{ 9, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "3.6%"};
-				{ 10, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "4.3%"};
-				{ 11, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "5.3%"};
-				{ 12, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "24.9%"};
+				{ 2, 32533, "", "=q3=Karrog's Shard", "=ds=#s15#", "", "15.0%"};
+				{ 3, 32717, "", "=q2=Karrog's Spine", "=ds=#m3#", "", "100%"};
+				{ 17, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.6%"};
+				{ 18, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "6.8%"};
+				{ 19, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "6.0%"};
+				{ 20, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "8.0%"};
+				{ 21, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.6%"};
+				{ 22, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "3.6%"};
+				{ 23, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "4.3%"};
+				{ 24, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "5.3%"};
+				{ 25, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "24.9%"};
 			};
 		};
 		info = {
-			name = AL["Karrog"],
+			name = BabbleRare["Karrog"],
 			module = moduleName, menu = "SKETTISMENU"
 		};
 	};
@@ -1611,21 +1638,21 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["GezzaraktheHuntress"] = {
 		["Normal"] = {
 			{
-				{ 1, 32531, "", "=q3=Gezzarak's Fang", "=ds=#s2#", "", "16.9%"};
-				{ 2, 32716, "", "=q2=Gezzarak's Claws", "=ds=#m3#", "", "100%"};
-				{ 4, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.2%"};
-				{ 5, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "6.9%"};
-				{ 6, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "5.2%"};
-				{ 7, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "4.9%"};
-				{ 8, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.8%"};
-				{ 9, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "5.4%"};
-				{ 10, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "6.2%"};
-				{ 11, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "4.6%"};
-				{ 12, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "25.7%"};
+				{ 2, 32531, "", "=q3=Gezzarak's Fang", "=ds=#s2#", "", "16.9%"};
+				{ 3, 32716, "", "=q2=Gezzarak's Claws", "=ds=#m3#", "", "100%"};
+				{ 17, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.2%"};
+				{ 18, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "6.9%"};
+				{ 19, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "5.2%"};
+				{ 20, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "4.9%"};
+				{ 21, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.8%"};
+				{ 22, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "5.4%"};
+				{ 23, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "6.2%"};
+				{ 24, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "4.6%"};
+				{ 25, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "25.7%"};
 			};
 		};
 		info = {
-			name = AL["Gezzarak the Huntress"],
+			name = BabbleRare["Gezzarak the Huntress"],
 			module = moduleName, menu = "SKETTISMENU"
 		};
 	};
@@ -1633,21 +1660,21 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["VakkiztheWindrager"] = {
 		["Normal"] = {
 			{
-				{ 1, 32532, "", "=q3=Windrager's Coils", "=ds=#s8#, #a3#", "", "18.1%"};
-				{ 2, 32718, "", "=q2=Vakkiz's Scale", "=ds=#m3#", "", "100%"};
-				{ 4, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.0%"};
-				{ 5, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "4.4%"};
-				{ 6, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "4.1%"};
-				{ 7, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "3.9%"};
-				{ 8, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.7%"};
-				{ 9, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "6.3%"};
-				{ 10, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "5.8%"};
-				{ 11, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "2.7%"};
-				{ 12, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "28.7%"};
+				{ 2, 32532, "", "=q3=Windrager's Coils", "=ds=#s8#, #a3#", "", "18.1%"};
+				{ 3, 32718, "", "=q2=Vakkiz's Scale", "=ds=#m3#", "", "100%"};
+				{ 17, 31558, "", "=q3=Windchanneller's Bindings", "=ds=#s8#, #a1#", "", "5.0%"};
+				{ 18, 31555, "", "=q3=Windchanneller's Ceinture", "=ds=#s10#, #a1#", "", "4.4%"};
+				{ 19, 31566, "", "=q3=Skystalker's Bracers", "=ds=#s8#, #a2#", "", "4.1%"};
+				{ 20, 31563, "", "=q3=Skystalker's Cord", "=ds=#s10#, #a2#", "", "3.9%"};
+				{ 21, 31574, "", "=q3=Mistshroud Bracers", "=ds=#s8#, #a3#", "", "5.7%"};
+				{ 22, 31571, "", "=q3=Mistshroud Belt", "=ds=#s10#, #a3#", "", "6.3%"};
+				{ 23, 31582, "", "=q3=Slatesteel Bracers", "=ds=#s8#, #a4#", "", "5.8%"};
+				{ 24, 31579, "", "=q3=Slatesteel Girdle", "=ds=#s10#, #a4#", "", "2.7%"};
+				{ 25, 32514, "", "=q3=Skettis Band", "=ds=#s13#", "", "28.7%"};
 			};
 		};
 		info = {
-			name = AL["Vakkiz the Windrager"],
+			name = BabbleRare["Vakkiz the Windrager"],
 			module = moduleName, menu = "SKETTISMENU"
 		};
 	};
@@ -1655,21 +1682,21 @@ local moduleName = "AtlasLoot_WorldEvents"
 	AtlasLoot_Data["Terokk"] = {
 		["Normal"] = {
 			{
-				{ 1, 32540, "", "=q4=Terokk's Might", "=ds=#s4#", "", "4.6%"};
-				{ 2, 32541, "", "=q4=Terokk's Wisdom", "=ds=#s4#", "", "4.6%"};
-				{ 3, 31556, "", "=q3=Windchanneller's Leggings", "=ds=#s11#, #a1#", "", "14.3%"};
-				{ 4, 31564, "", "=q3=Skystalker's Leggings", "=ds=#s11#, #a2#", "", "13.9%"};
-				{ 5, 31572, "", "=q3=Mistshroud Pants", "=ds=#s11#, #a3#", "", "10.7%"};
-				{ 6, 31580, "", "=q3=Slatesteel Leggings", "=ds=#s11#, #a4#", "", "11.6%"};
-				{ 7, 32535, "", "=q3=Gift of the Talonpriests", "=ds=#s13#", "", "7.9%"};
-				{ 8, 32534, "", "=q3=Brooch of the Immortal King", "=ds=#s14#", "", "11.2%"};
-				{ 9, 32782, "", "=q3=Time-Lost Figurine", "=ds=#s14#", "", ""};
-				{ 10, 32536, "", "=q3=Terokk's Gavel", "=ds=#h1#, #w6#", "", "6.7%"};
-				{ 11, 32537, "", "=q3=Terokk's Gavel", "=ds=#h1#, #w6#", "", "7.9%"};
+				{ 2, 32540, "", "=q4=Terokk's Might", "=ds=#s4#", "", "4.6%"};
+				{ 3, 32541, "", "=q4=Terokk's Wisdom", "=ds=#s4#", "", "4.6%"};
+				{ 4, 31556, "", "=q3=Windchanneller's Leggings", "=ds=#s11#, #a1#", "", "14.3%"};
+				{ 5, 31564, "", "=q3=Skystalker's Leggings", "=ds=#s11#, #a2#", "", "13.9%"};
+				{ 6, 31572, "", "=q3=Mistshroud Pants", "=ds=#s11#, #a3#", "", "10.7%"};
+				{ 7, 31580, "", "=q3=Slatesteel Leggings", "=ds=#s11#, #a4#", "", "11.6%"};
+				{ 8, 32535, "", "=q3=Gift of the Talonpriests", "=ds=#s13#", "", "7.9%"};
+				{ 9, 32534, "", "=q3=Brooch of the Immortal King", "=ds=#s14#", "", "11.2%"};
+				{ 10, 32782, "", "=q3=Time-Lost Figurine", "=ds=#s14#", "", ""};
+				{ 11, 32537, "", "=q3=Terokk's Gavel", "=ds=#h3#, #w6#", "", "7.9%"};
+				{ 12, 32536, "", "=q3=Terokk's Gavel", "=ds=#h1#, #w6#", "", "6.7%"};
 			};
 		};
 		info = {
-			name = AL["Terokk"],
+			name = BabbleRare["Terokk"],
 			module = moduleName, menu = "SKETTISMENU"
 		};
 	};

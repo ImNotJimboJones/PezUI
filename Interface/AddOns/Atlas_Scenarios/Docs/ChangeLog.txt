@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 1805 2012-10-10 08:01:18Z arithmandar $
+$Id: ChangeLog.txt 1865 2012-10-31 08:47:37Z arithmandar $
 
 Atlas, a World of Warcraft instance map browser
 Copyright 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
@@ -6,6 +6,12 @@ Copyright 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 ==============
 = Change Log =
 ==============
+
+v1.22.2 (Nov. 01, 2012)
+- All Maps and legend information updated
+- Map added: 
+    - Arena of Annihilation
+    - Crypt of Forgotten Kings
 
 v1.22.1 (Oct. 10, 2012)
 -----------------------

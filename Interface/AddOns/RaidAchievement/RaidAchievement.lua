@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.106
+	raversion=1.109
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -63,6 +63,7 @@ end
 
 	RaidAchievementframe:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	RaidAchievementframe:RegisterEvent("CHAT_MSG_ADDON")
+	RaidAchievementframe:RegisterEvent("CHAT_MSG_INSTANCE_CHAT")
 	RaidAchievementframe:RegisterEvent("PLAYER_ALIVE")
 	RaidAchievementframe:RegisterEvent("PLAYER_REGEN_DISABLED")
 	RaidAchievementframe:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -77,6 +78,11 @@ end
 function ramain_OnUpdate()
 
 local racurrenttime = GetTime()
+
+if radelaysec20 and racurrenttime>radelaysec20 then
+  radelaysec20=nil
+  raaddonloadedcheckspam()
+end
 
 if racheckbossincombat and racurrenttime>racheckbossincombat+1 then
 racheckbossincombat=racurrenttime
@@ -132,7 +138,11 @@ end
 if ramsgtimestart>0 and racurrenttime>ramsgtimestart+0.4 then
 ramsgtimestart=0
 --тут отправда в аддон канал инфы
-SendAddonMessage("RaidAc", "myname:"..ranamemsgsend.."++mychat:"..ramsgmychat.."++", "RAID")
+  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  SendAddonMessage("RaidAc", "myname:"..ranamemsgsend.."++mychat:"..ramsgmychat.."++", "Instance_CHAT")
+  else
+  SendAddonMessage("RaidAc", "myname:"..ranamemsgsend.."++mychat:"..ramsgmychat.."++", "RAID")
+  end
 end
 
 if ramsgwaiting>0 and racurrenttime>ramsgwaiting+1.5 then
@@ -144,6 +154,9 @@ if ramsgwaiting>0 and racurrenttime>ramsgwaiting+1.5 then
   for i,cc in ipairs(rabigmenuchatlisten) do 
     if string.lower(cc) == string.lower(ramsgmychat) then bililine=1
     end
+  end
+  if ramsgmychat=="Instance_CHAT" then
+    bililine=1
   end
 
   if racanannouncetable[1]==ranamemsgsend then
@@ -178,6 +191,7 @@ end
 
 function PhoenixStyleEA_OnEvent(self,event,...)
 local arg1, arg2, arg3,arg4,arg5,arg6 = ...
+
 
 if event == "PLAYER_ALIVE" then
 rabilresnut=GetTime()
@@ -354,6 +368,7 @@ end
 
 if event == "ZONE_CHANGED_NEW_AREA" then
 
+
 radelaybeforezonech=GetTime()
 	raachdone1=true
 	raachdone2=true
@@ -369,7 +384,11 @@ raverschech1=1
 if (UnitInRaid("player")) then
 local inInstance, instanceType = IsInInstance()
 if instanceType~="pvp" then
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+SendAddonMessage("RAother", "5"..raversion, "Instance_CHAT")
+else
 SendAddonMessage("RAother", "5"..raversion, "raid")
+end
 end
 end
 
@@ -383,6 +402,8 @@ end
 if event == "ADDON_LOADED" then
 if arg1=="RaidAchievement" then
 
+radelaysec20=GetTime()+25
+
 --font size from PS
 rafontsset={11,12}
 if psfontsset then
@@ -392,12 +413,94 @@ end
 
 local rarcstxt2 = PSFeamain3:CreateFontString()
 rarcstxt2:SetWidth(480)
-rarcstxt2:SetHeight(55)
+rarcstxt2:SetHeight(45)
 rarcstxt2:SetFont(GameFontNormal:GetFont(), 20)
-rarcstxt2:SetPoint("CENTER",0,-170)
-rarcstxt2:SetJustifyH("CENTER")
+rarcstxt2:SetPoint("BOTTOMRIGHT",-110,-10)
+rarcstxt2:SetJustifyH("RIGHT")
 rarcstxt2:SetJustifyV("TOP")
-rarcstxt2:SetText("www.phoenixstyle.com")
+--rarcstxt2:SetText("www.phoenixstyle.com") --временно убрано
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local t4 = PSFeamain3:CreateFontString()
+t4:SetWidth(690)
+t4:SetHeight(180)
+t4:SetFont(GameFontNormal:GetFont(), 14)
+t4:SetPoint("TOPLEFT",30,-207)
+
+local atext="|cffff0000Important!|r\n\nLearn how |cffff0000not to fail|r your |cff00ff00[RaidAchievement help]|r achievement on site\n\n|cff00ff00Click  Ctrl+C  to copy|r"
+  if GetLocale()=="ruRU" then
+    atext="|cffff0000Важно!|r\n\nУзнай как |cffff0000не провалить|r достижение |cff00ff00[RaidAchievement help]|r на сайте\n\n|cff00ff00Нажмите  Ctrl+C  чтобы скопировать|r"
+  end
+  if GetLocale()=="itIT" then
+    atext="|cff00ff00Messaggio importante!|r\n\nIl progetto |cff00ff00RaidAchievement|r forse sarà |cffff0000chiuso|r, per sappere cosa si può fare visita il sito\n\n|cff00ff00Clicca  Ctrl+C  per copiare|r"
+  end
+
+  
+radfdfdpsdonatefr2 = CreateFrame("ScrollFrame", "radfdfdpsdonatefr2", PSFeamain3, "UIPanelScrollFrameTemplate")
+radfdfdpsdonatefr2:SetPoint("TOPLEFT", PSFeamain3, "TOPLEFT", 275, -405)
+radfdfdpsdonatefr2:SetHeight(40)
+radfdfdpsdonatefr2:SetWidth(220)
+  
+
+radfsdfsdfjy4 = CreateFrame("EditBox", "radfsdfsdfjy4", radfdfdpsdonatefr2)
+radfsdfsdfjy4:SetPoint("TOPRIGHT", radfdfdpsdonatefr2, "TOPRIGHT", 0, 0)
+radfsdfsdfjy4:SetPoint("TOPLEFT", radfdfdpsdonatefr2, "TOPLEFT", 0, 0)
+radfsdfsdfjy4:SetPoint("BOTTOMRIGHT", radfdfdpsdonatefr2, "BOTTOMRIGHT", 0, 0)
+radfsdfsdfjy4:SetPoint("BOTTOMLEFT", radfdfdpsdonatefr2, "BOTTOMLEFT", 0, 0)
+radfsdfsdfjy4:SetScript("onescapepressed", function(self) radfsdfsdfjy4:ClearFocus() end)
+radfsdfsdfjy4:SetFont(GameFontNormal:GetFont(), 13)
+radfsdfsdfjy4:SetMultiLine()
+radfsdfsdfjy4:SetAutoFocus(false)
+radfsdfsdfjy4:SetHeight(150)
+radfsdfsdfjy4:SetWidth(225)
+radfsdfsdfjy4:Show()
+radfsdfsdfjy4:SetScript("OnTextChanged", function(self) radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help") radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText())) end )
+
+radfdfdpsdonatefr2:SetScrollChild(radfsdfsdfjy4)
+radfdfdpsdonatefr2:Show()
+
+t4:SetText(atext)
+t4:SetJustifyH("CENTER")
+t4:SetJustifyV("BOTTOM")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if rasoundtoplay[6]==nil and rasoundtoplay then
 rasoundtoplay[6]=0
@@ -487,6 +590,12 @@ PSFea_closeallpr()
 PSFeamain1:Show()
 PSFeamain2:Show()
 PSFeamain3:Show()
+
+--донейт текст показывать
+radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
+radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
+radfsdfsdfjy4:SetFocus()
+
 openrasound1()
 openrasound2()
 
@@ -639,6 +748,12 @@ end
 function PSFea_buttonaddon()
 PSFea_closeallpr()
 PSFeamain3:Show()
+
+--донейт текст показывать
+radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
+radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
+radfsdfsdfjy4:SetFocus()
+
 openrasound1()
 openrasound2()
 openmenureportchra11()
@@ -1002,11 +1117,16 @@ for i=1,#idheroics do
 end
 if GetInstanceDifficulty()==3 and buul==1 then
 
+local chattt="party"
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  chattt="Instance_CHAT"
+end
+
 if GetNumGroupMembers()>1 then
-SendAddonMessage("RAother", "5"..raversion, "party")
+SendAddonMessage("RAother", "5"..raversion, chattt)
 end
 if thisaddonwork then
-SendAddonMessage("PSaddon", "17"..psversion, "party")
+SendAddonMessage("PSaddon", "17"..psversion, chattt)
 end
 
 if IsAddOnLoaded("RaidAchievement_WotlkHeroics")==nil and waswhtryloadea==nil then
@@ -1030,11 +1150,16 @@ for i=1,#idheroics do
 end
 if GetInstanceDifficulty()==3 and buul==1 then
 
+local chattt="party"
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  chattt="Instance_CHAT"
+end
+
 if GetNumGroupMembers()>1 then
-SendAddonMessage("RAother", "5"..raversion, "party")
+SendAddonMessage("RAother", "5"..raversion, chattt)
 end
 if thisaddonwork then
-SendAddonMessage("PSaddon", "17"..psversion, "party")
+SendAddonMessage("PSaddon", "17"..psversion, chattt)
 end
 
 if IsAddOnLoaded("RaidAchievement_CataHeroics")==nil and waschtryloadea==nil then
@@ -1058,11 +1183,16 @@ for i=1,#idheroics do
 end
 if GetInstanceDifficulty()==3 and buul==1 then
 
+local chattt="party"
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  chattt="Instance_CHAT"
+end
+
 if GetNumGroupMembers()>1 then
-SendAddonMessage("RAother", "5"..raversion, "party")
+SendAddonMessage("RAother", "5"..raversion, chattt)
 end
 if thisaddonwork then
-SendAddonMessage("PSaddon", "17"..psversion, "party")
+SendAddonMessage("PSaddon", "17"..psversion, chattt)
 end
 
 if IsAddOnLoaded("RaidAchievement_PandaHeroics")==nil and wasphtryloadea==nil then
@@ -1078,7 +1208,7 @@ end
 
 
 --сценарии панды
-local idheroics={878, 899, 884, 900, 880, 906, 882}
+local idheroics={878, 899, 884, 900, 880, 906, 882,911,912,883}
 local buul=0
 for i=1,#idheroics do
 	if idheroics[i]==GetCurrentMapAreaID() then
@@ -1087,11 +1217,16 @@ for i=1,#idheroics do
 end
 if GetInstanceDifficulty()==2 and buul==1 then
 
+local chattt="party"
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  chattt="Instance_CHAT"
+end
+
 if GetNumGroupMembers()>1 then
-SendAddonMessage("RAother", "5"..raversion, "party")
+SendAddonMessage("RAother", "5"..raversion, chattt)
 end
 if thisaddonwork then
-SendAddonMessage("PSaddon", "17"..psversion, "party")
+SendAddonMessage("PSaddon", "17"..psversion, chattt)
 end
 
 if IsAddOnLoaded("RaidAchievement_PandaScenarios")==nil and waspztryloadea==nil then
@@ -1128,6 +1263,15 @@ PSF_closeallpr()
 PSFmain1:Show()
 PSFmain2:Show()
 PSFmain3:Show()
+
+if dfsdfsdfjy4 then
+--донейт текст показывать
+dfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
+dfsdfsdfjy4:HighlightText(0,string.len(dfsdfsdfjy4:GetText()))
+dfsdfsdfjy4:SetFocus()
+end
+
+
 PSFmain2_Button3:SetAlpha(0.3)
 end
 end
@@ -1178,7 +1322,11 @@ end
 if pseashowfailreas then ratmp1="1-"..rasoundtoplay[1]..rasoundtoplay[2]..rasoundtoplay[3]..rasoundtoplay[4]..rasoundtoplay[5]..rasoundtoplay[6] end
 print ("RA "..UnitName("player").." v."..raversion.." "..ratmp1.." "..ratmp2.." "..wherereportraidach..wherereportpartyach.." "..psa6.." installed: "..raaddoninstalledsins)
 if cchat==nil then
+if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+SendAddonMessage("RAother", "3info", "Instance_CHAT")
+else
 SendAddonMessage("RAother", "3info", "raid")
+end
 else
 SendAddonMessage("RAother", "3info", cchat)
 end
@@ -1204,7 +1352,11 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  else
+  razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  end
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
 end
@@ -1214,7 +1366,11 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2..")."..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
+  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
+  else
+  razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
+  end
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
 end
@@ -1224,7 +1380,11 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2.." - "..qquant..")."..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
+  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
+  else
+  razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
+  end
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
 end
@@ -1237,7 +1397,11 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  else
+  razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
+  end
 else
 razapuskanonsa(wherereportraidach, "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
 end
@@ -1264,6 +1428,12 @@ end
 function razapuskanonsa(kudarep, chtorep)
 if kudarep and chtorep then
 
+
+if (kudarep=="party" or kudarep=="raid" or kudarep=="raid_warning") and (GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO)) then
+kudarep="Instance_CHAT"
+end
+
+
 if kudarep=="sebe" then
 out("- "..chtorep)
 else
@@ -1272,6 +1442,9 @@ local bililine=0
 for i,cc in ipairs(rabigmenuchatlisten) do 
 if cc == kudarep then bililine=1
 end end
+if kudarep=="Instance_CHAT" then
+bililine=1
+end
 
 if bililine==0 then
 if GetChannelName(kudarep)==0 then
@@ -1571,6 +1744,12 @@ PSFea_closeallpr()
 PSFeamain1:Show()
 PSFeamain2:Show()
 PSFeamain3:Show()
+
+--донейт текст показывать
+radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
+radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
+radfsdfsdfjy4:SetFocus()
+
 openrasound1()
 openrasound2()
 	end
@@ -1811,7 +1990,7 @@ CreateFrame("Frame", "DropDownMenureportchra11", PSFeamain3, "UIDropDownMenuTemp
 end
 
 DropDownMenureportchra11:ClearAllPoints()
-DropDownMenureportchra11:SetPoint("TOPLEFT", 5, -250)
+DropDownMenureportchra11:SetPoint("TOPLEFT", 5, -235)
 DropDownMenureportchra11:Show()
 
 local items = lowmenuchatlistea
@@ -1854,7 +2033,7 @@ CreateFrame("Frame", "DropDownMenureportchra12", PSFeamain3, "UIDropDownMenuTemp
 end
 
 DropDownMenureportchra12:ClearAllPoints()
-DropDownMenureportchra12:SetPoint("TOPLEFT", 5, -280)
+DropDownMenureportchra12:SetPoint("TOPLEFT", 5, -265)
 DropDownMenureportchra12:Show()
 
 local items = bigmenuchatlistea
@@ -1944,5 +2123,39 @@ psdonateeb22:SetText("http://www.phoenixstyle.com")
 psdonateeb22:HighlightText(0,string.len(psdonateeb22:GetText()))
 psdonateeb22:SetFocus()
 
+
+end
+
+function raaddonloadedcheckspam()
+
+local int=GetBuildInfo()
+local _, month, day, year = CalendarGetDate()
+
+if psnotproched==nil and (psdonaspanvar==nil or (psdonaspanvar and psdonaspanvar==1 and ((month==12 and day>20) or (month==1 and day<30)))) then
+local a1=math.random(1,4)
+if a1==4 and UnitInRaid("player")==nil and UnitInParty("player")==nil then
+  --сообщение
+  local text="Learn how |cffff0000not to fail|r your |cff00ff00[RaidAchievement help]|r achievement on site http://www.phoenixstyle.com/help.php"
+  if GetLocale()=="ruRU" then
+    text="Узнай как |cffff0000не провалить|r достижение |cff00ff00[RaidAchievement help]|r на сайте (http://phoenixstyle.com/help.php)"
+  end
+  if GetLocale()=="itIT" then
+    text="|cff00ff00Messaggio importante|r. Il progetto |cff00ff00RaidAchievement|r forse sarà |cffff0000chiuso|r, per sappere cosa si può fare - http://www.phoenixstyle.com/help.php"
+  end
+  
+  --PlaySoundFile("Interface\\AddOns\\RaidAchievement\\Sounds\\"..rasoundtrack[13], "Master")
+  PlaySound(rasoundtrack[16], "Master")
+  out(text)
+  
+  if psdonaspanvar==nil then
+    psdonaspanvar=1
+  elseif psdonaspanvar and psdonaspanvar==1 then
+    psdonaspanvar=2 --2ка используется для аннонса РА после 20 декабря и после 1 января, только если 1 ВКЛ! иначе же РА сразу прыгает с 1 до 3
+  end
+else
+  psnotproched=1
+end
+
+end
 
 end

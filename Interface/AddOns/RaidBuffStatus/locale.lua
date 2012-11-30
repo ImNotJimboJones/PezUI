@@ -22,8 +22,11 @@ vars.L = setmetatable({},{
     end
 })
 
+Ld["Announce even when you don't have assist or lead"] = "Announce even when you don't have assist or lead"
+Ld["Announce without lead"] = "Announce without lead"
 Ld["Crit Buff"] = "Crit Buff"
 Ld["Mastery Buff"] = "Mastery Buff"
+Ld["Show configuration options"] = "Show configuration options"
 Ld["Spellpower Buff"] = "Spellpower Buff"
 Ld["Stat Buff"] = "Stat Buff"
 Ld.BuffOptionsWindow = {
@@ -579,8 +582,11 @@ Ld.TankTauntWarnings = {
 
 
 if locale == "frFR" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 La["Crit Buff"] = "Buff Coup critique"
 La["Mastery Buff"] = "Buff Maîtrise"
+-- La["Show configuration options"] = ""
 La["Spellpower Buff"] = "Buff Puissance des sorts"
 La["Stat Buff"] = "Buff Carac."
 La.BuffOptionsWindow = {
@@ -1137,8 +1143,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "deDE" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 La["Crit Buff"] = "Kritischer Treffer Buff"
 La["Mastery Buff"] = "Meisterschaft Buff"
+-- La["Show configuration options"] = ""
 La["Spellpower Buff"] = "Zaubermacht Buff"
 La["Stat Buff"] = "Werte Buff"
 La.BuffOptionsWindow = {
@@ -1693,8 +1702,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "koKR" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 La["Crit Buff"] = "치명타 버프"
 La["Mastery Buff"] = "특화도 버프"
+-- La["Show configuration options"] = ""
 La["Spellpower Buff"] = "주문력 버프"
 La["Stat Buff"] = "능력치 버프"
 La.BuffOptionsWindow = {
@@ -2249,8 +2261,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "esMX" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
+-- La["Show configuration options"] = ""
 -- La["Spellpower Buff"] = ""
 -- La["Stat Buff"] = ""
 La.BuffOptionsWindow = {
@@ -2805,8 +2820,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "ruRU" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 La["Crit Buff"] = "Бафф на шанс крита"
 La["Mastery Buff"] = "Бафф на искусность"
+-- La["Show configuration options"] = ""
 La["Spellpower Buff"] = "Бафф на спд"
 La["Stat Buff"] = "Бафф на статы"
 La.BuffOptionsWindow = {
@@ -3361,8 +3379,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "zhCN" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
+-- La["Show configuration options"] = ""
 -- La["Spellpower Buff"] = ""
 -- La["Stat Buff"] = ""
 La.BuffOptionsWindow = {
@@ -3917,8 +3938,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "esES" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
+-- La["Show configuration options"] = ""
 -- La["Spellpower Buff"] = ""
 -- La["Stat Buff"] = ""
 La.BuffOptionsWindow = {
@@ -4474,8 +4498,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "zhTW" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
+-- La["Show configuration options"] = ""
 -- La["Spellpower Buff"] = ""
 -- La["Stat Buff"] = ""
 La.BuffOptionsWindow = {
@@ -5030,8 +5057,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "ptBR" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 La["Crit Buff"] = "Bônus de crítico"
 La["Mastery Buff"] = "Bônus de maestria"
+-- La["Show configuration options"] = ""
 La["Spellpower Buff"] = "Bônus de poder mágico"
 La["Stat Buff"] = "Bônus de status"
 La.BuffOptionsWindow = {
@@ -5586,8 +5616,11 @@ La.TankTauntWarnings = {
 }
 
 elseif locale == "itIT" then do end
+-- La["Announce even when you don't have assist or lead"] = ""
+-- La["Announce without lead"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
+-- La["Show configuration options"] = ""
 -- La["Spellpower Buff"] = ""
 -- La["Stat Buff"] = ""
 La.BuffOptionsWindow = {

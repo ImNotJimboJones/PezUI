@@ -1,4 +1,5 @@
-﻿function nxraonload()
+﻿local _
+function nxraonload()
 
 
 	nxramexna=0

@@ -1,4 +1,4 @@
-VUHDO_DID_DC_RESTORE = false;
+local sIsRestoredAfterDc = false;
 
 VUHDO_IN_COMBAT_RELOG = false;
 
@@ -96,7 +96,6 @@ local UnitGUID = UnitGUID;
 local tinsert = tinsert;
 local tremove = tremove;
 local strfind = strfind;
-local gsub = gsub;
 --local VUHDO_PANEL_MODELS;
 local GetTime = GetTime;
 local pairs = pairs;
@@ -484,16 +483,14 @@ end
 
 -- Add to groups 1-8
 local function VUHDO_addUnitToGroup(aUnit, aGroupNum)
-	if ("player" == aUnit and VUHDO_CONFIG["OMIT_SELF"]) then
-		return;
-	end
+	if ("player" ~= aUnit or not VUHDO_CONFIG["OMIT_SELF"]) then
+		if (not VUHDO_CONFIG["OMIT_OWN_GROUP"] or aGroupNum ~= VUHDO_PLAYER_GROUP) then
+			tinsert(VUHDO_GROUPS[aGroupNum] or {}, aUnit);
+		end
 
-	if (not VUHDO_CONFIG["OMIT_OWN_GROUP"] or aGroupNum ~= VUHDO_PLAYER_GROUP) then
-		tinsert(VUHDO_GROUPS[aGroupNum] or {}, aUnit);
-	end
-
-	if (VUHDO_PLAYER_GROUP == aGroupNum) then
-		tinsert(VUHDO_GROUPS[10], aUnit); -- VUHDO_ID_GROUP_OWN
+		if (VUHDO_PLAYER_GROUP == aGroupNum) then
+			tinsert(VUHDO_GROUPS[10], aUnit); -- VUHDO_ID_GROUP_OWN
+		end
 	end
 end
 
@@ -501,11 +498,9 @@ end
 
 --
 local function VUHDO_addUnitToClass(aUnit, aClassId)
-	if (("player" == aUnit and VUHDO_CONFIG["OMIT_SELF"]) or aClassId == nil) then
-		return;
+	if (("player" ~= aUnit or not VUHDO_CONFIG["OMIT_SELF"]) and aClassId ~= nil) then
+		tinsert(VUHDO_GROUPS[aClassId], aUnit);
 	end
-
-	tinsert(VUHDO_GROUPS[aClassId], aUnit);
 end
 
 
@@ -793,14 +788,14 @@ function VUHDO_reloadRaidMembers()
 
 	VUHDO_IS_SUSPICIOUS_ROSTER = false;
 
-	if (GetNumGroupMembers() == 0 and not UnitExists("party1") and not VUHDO_DID_DC_RESTORE) then
+	if (GetNumGroupMembers() == 0 and not UnitExists("party1") and not sIsRestoredAfterDc) then
 		VUHDO_IN_COMBAT_RELOG = true;
 		tWasRestored = VUHDO_buildRaidFromMacro();
 		VUHDO_updateAllRaidNames();
 		if (tWasRestored) then
 			VUHDO_normalRaidReload(true);
 		end
-		VUHDO_DID_DC_RESTORE = true;
+		sIsRestoredAfterDc = true;
 	elseif (VUHDO_isConfigDemoUsers()) then
 		VUHDO_demoSetupResetUsers();
 		VUHDO_reloadRaidDemoUsers();
@@ -808,7 +803,7 @@ function VUHDO_reloadRaidMembers()
 	else
 		VUHDO_PLAYER_RAID_ID = VUHDO_getPlayerRaidUnit();
 		VUHDO_IN_COMBAT_RELOG = false;
-		VUHDO_DID_DC_RESTORE = true;
+		sIsRestoredAfterDc = true;
 		tUnit, tPetUnit = VUHDO_getUnitIds();
 
 		tMaxMembers = ("raid" == tUnit) and GetNumGroupMembers() or ("party" == tUnit) and 4 or 0;

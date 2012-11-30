@@ -1,4 +1,4 @@
--- $Id: BossTooltip.lua 3719 2012-03-22 20:49:46Z Bahnak $
+-- $Id: BossTooltip.lua 3962 2012-11-16 12:58:56Z lag123 $
 function AtlasLoot_hook(tooltip)
 	if not ALtooltipName then
 		ALtooltipName = tooltip:GetUnit()

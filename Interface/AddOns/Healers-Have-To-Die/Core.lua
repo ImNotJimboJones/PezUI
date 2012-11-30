@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.2
+Version 2.0.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -403,7 +403,7 @@ do
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.0.2,', L["RELEASE_DATE"], '2012-09-25T21:05:49Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.0.3,', L["RELEASE_DATE"], '2012-11-28T01:06:12Z') end,
                 order = -5,
             },
             core = {
@@ -413,7 +413,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.0.2 -- ' .. L["RELEASE_DATE"] .. ' 2012-09-25T21:05:49Z',
+                        name = L["VERSION"] .. ' 2.0.3 -- ' .. L["RELEASE_DATE"] .. ' 2012-11-28T01:06:12Z',
                         order = 1,
                     },
                     Pve = {
@@ -648,7 +648,7 @@ function HHTD:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("Healers_Have_To_Die", DEFAULT__CONFIGURATION);
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable(tostring(self), self.GetOptions, {"HealersHaveToDie", "hhtd"});
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(tostring(self));
+    --LibStub("AceConfigDialog-3.0"):AddToBlizOptions(tostring(self));
     
     self:RegisterChatCommand('hhtdg', function() LibStub("AceConfigDialog-3.0"):Open(tostring(self)) end, true);
 

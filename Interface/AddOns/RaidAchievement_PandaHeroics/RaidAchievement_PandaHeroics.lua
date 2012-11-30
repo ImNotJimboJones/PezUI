@@ -1,4 +1,5 @@
-﻿function phraonload()
+﻿local _
+function phraonload()
 	phraachdone1=true
 	phracounter1=0
 	_, phraenglishclass = UnitClass("player")
@@ -320,7 +321,7 @@ if arg2=="UNIT_DIED" then
   end
 end
 
-if arg2=="SPELL_DAMAGE" and arg10==113766 and arg8=="Unknown" then --ыытест не сменял ли лог и работает ли ВРЕМЕННО НЕ РАБОТАЕТ!!!
+if arg2=="SPELL_DAMAGE" and arg10==113766 and arg8=="Unknown" and fsdgsdfgfgdfgdfgdfg then --ыытест не сменял ли лог и работает ли ВРЕМЕННО НЕ РАБОТАЕТ!!! --//////////////// and fsdgsdfgfgdfgdfgdfg чтобы не работала часть!
   if ratablefordummy==nil then
     ratablefordummy={}
   end
@@ -334,7 +335,7 @@ if arg2=="SPELL_DAMAGE" and arg10==113766 and arg8=="Unknown" then --ыытес�
   end
   if bil==0 then
     table.insert(ratablefordummy,arg7)
-    if #razombiidtable==6 then
+    if #ratablefordummy==6 then
       if phraspisokon[4]==1 and phraachdone1 then
         --phraachcompl(4)
       end

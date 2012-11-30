@@ -436,9 +436,9 @@ end
 --
 local function VUHDO_chiEqualsValidator(anInfo, someCustom)
 	if (anInfo["connected"] and not anInfo["dead"]) then
-		tPower = UnitPower(anInfo["unit"], SPELL_POWER_LIGHT_FORCE);
+		tPower = UnitPower(anInfo["unit"], SPELL_POWER_CHI);
 		if (tPower == someCustom["custom"][1]) then
-			return true, nil, tPower, -1, UnitPowerMax(anInfo["unit"], SPELL_POWER_LIGHT_FORCE);
+			return true, nil, tPower, -1, UnitPowerMax(anInfo["unit"], SPELL_POWER_CHI);
 		else
 			return false, nil, -1, -1, -1;
 		end
@@ -917,15 +917,6 @@ end
 
 
 --
---[[local tShieldLeft, tShieldSize;
-local function VUHDO_shieldPercentValidator(anInfo, _)
-	tShieldLeft, tShieldSize = getUnitOverallShieldRemain(anInfo["unit"]);
-	return tShieldLeft > 0, nil, tShieldLeft, -1, tShieldSize;
-end]]
-
-
-
---
 local tShieldLeft;
 local function VUHDO_shieldCountValidator(anInfo, _)
 	tShieldLeft = getUnitOverallShieldRemain(anInfo["unit"]);
@@ -1284,7 +1275,7 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 		["displayName"] = VUHDO_I18N_BOUQUET_CLASS_ICON,
 		["validator"] = VUHDO_classIconValidator,
 		["no_color"] = true,
-		["interests"] = { VUHDO_UPDATE_DC, VUHDO_UPDATE_RESURRECTION, VUHDO_UPDATE_MINOR_FLAGS },
+		["interests"] = { },
 	},
 
 	["RAID_ICON"] = {
@@ -1387,14 +1378,8 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 		["interests"] = { VUHDO_UPDATE_MINOR_FLAGS },
 	},
 
-	--[[["STATUS_SHIELDS"] = {
-		["displayName"] = "Statusbar: All Shield Absorb %",
-		["validator"] = VUHDO_shieldPercentValidator,
-		["interests"] = { VUHDO_UPDATE_SHIELD },
-	},]]
-
 	["SHIELDS_COUNTER"] = {
-		["displayName"] = "Counter: All Shield Absorb #k",
+		["displayName"] = VUHDO_I18N_DEF_COUNTER_SHIELD_ABSORB,
 		["validator"] = VUHDO_shieldCountValidator,
 		["interests"] = { VUHDO_UPDATE_SHIELD },
 	},

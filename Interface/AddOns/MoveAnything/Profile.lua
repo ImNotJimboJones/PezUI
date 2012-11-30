@@ -3,12 +3,13 @@ local MOVANY = _G.MOVANY
 local _
 
 local DeleteThatFrameOpt = {
-	["GroupLootFrame1"]    = true,
-	["GroupLootFrame2"]    = true,
-	["GroupLootFrame3"]    = true,
-	["GroupLootFrame4"]    = true,
+	["LootWonAlerFramemover1"] = true,
+	["LootWonAlerFramemover2"] = true,
+	["LootWonAlerFramemover3"] = true,
+	["LootWonAlerFramemover4"] = true,
+	["LootWonAlerFramemover5"] = true,
+	["LootWonAlerFramemover6"] = true,
 	["WatchFrame"]		   = true,
-	["LootWonAlertFrame1"] = true,
 }
 
 StaticPopupDialogs["MOVEANYTHING_PROFILE_RESET_CONFIRM"] = {

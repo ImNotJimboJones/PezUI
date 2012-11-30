@@ -1,8 +1,9 @@
--- $Id: mistsofpandaria.lua 3878 2012-10-11 16:19:50Z hegarol $
+-- $Id: mistsofpandaria.lua 4008 2012-11-25 17:34:00Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleFaction = AtlasLoot_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
+local BabbleRare = AtlasLoot_GetLocaleLibBabble("LibBabble-Rare-3.0")
 local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 local moduleName = "AtlasLootMoP"
 
@@ -21,6 +22,23 @@ local moduleName = "AtlasLootMoP"
 ---- Mogu'Shan Vaults
 ---- Pandaria World Bosses
 ---- Terrace of Endless Spring
+--- Rare Mobs
+---- The Jade Forest
+---- Valley of the Four Winds
+---- Krasarang Wilds
+---- Kun-Lai Summit
+---- Townlong Steppes
+---- Dread Wastes
+---- Vale of Eternal Blossoms
+---- Misc
+---- Clawlord Kril'mandar
+--- Rare Items
+---- The Jade Forest
+---- Valley of the Four Winds
+---- Krasarang Wilds
+---- Kun-Lai Summit
+---- Townlong Steppes
+---- Dread Wastes
 --- Factions
 ---- The Anglers
 ---- The August Celestials
@@ -32,13 +50,18 @@ local moduleName = "AtlasLootMoP"
 ---- The Tillers
 --- PvP
 ---- PvP Armor Sets
+---- Level 90 - Accessories
+---- Level 90 - Non Set Epics
+---- Level 90 - Weapons
 --- Sets & Collections
+---- Challenge Mode Armor Sets
 ---- Tier 14 Sets (T14)
 ---- Trading Card Game Items
 ---- Companions
 ---- Mounts
 ---- Tabards
 ---- Transformation Items
+---- Legendaries
 ---- Heirloom Items
 ---- BoE World Epics
 ---- Justice Points Items
@@ -59,7 +82,7 @@ local moduleName = "AtlasLootMoP"
 				{ 2, 80862, "", "=q3=Treads of Corrupted Water", "=ds=#s12#, #a2#" },
 				{ 3, 80860, "", "=q3=Waterburst Helm", "=ds=#s1#, #a3#" },
 				{ 4, 80861, "", "=q3=Riverbed Chestguard", "=ds=#s5#, #a4#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6460#"};
 				{ 17, 81123, "", "=q3=Wind-Soaked Drape", "=ds=#s4#" },
 				{ 18, 81072, "", "=q3=Treads of Corrupted Water", "=ds=#s12#, #a2#" },
 				{ 19, 81075, "", "=q3=Waterburst Helm", "=ds=#s1#, #a3#" },
@@ -125,7 +148,7 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 80869, "", "=q3=Hopecrusher Gauntlets", "=ds=#s9#, #a3#" },
 				{ 6, 80873, "", "=q3=Dubious Handaxe", "=ds=#h1#, #w1#" },
 				{ 7, 80874, "", "=q3=Staff of Trembling Will", "=ds=#w9#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6475# / #ACHIEVEMENTID:6671#"}; --- 2nd achievemnt isn't showing up..
 				{ 17, 87544, "", "=q4=Je'lyu, Spirit of the Serpent", "=ds=#h3#, #w6#" },
 				{ 18, 81129, "", "=q3=Cloak of Failing Will", "=ds=#s4#" },
 				{ 19, 81132, "", "=q3=Paralyzing Gloves", "=ds=#s9#, #a1#" },
@@ -257,7 +280,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 85180, "", "=q3=Glintrok Sollerets", "=ds=#s12#, #a4#" },
 				{ 5, 85181, "", "=q3=Iron Protector Talisman", "=ds=#s14#" },
 				{ 6, 85183, "", "=q3=Claws of Gekkan", "=ds=#h1#, #w13#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6478#"};
 				{ 17, 81244, "", "=q3=Cloak of Cleansing Flame", "=ds=#s4#" },
 				{ 18, 81246, "", "=q3=Hexxer's Lethargic Gloves", "=ds=#s9#, #a3#" },
 				{ 19, 81242, "", "=q3=Glintrok Sollerets", "=ds=#s12#, #a4#" },
@@ -285,17 +308,18 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 85188, "", "=q3=Blade Trap Signet", "=ds=#s13#" },
 				{ 10, 85190, "", "=q3=Firescribe Dagger", "=ds=#h3#, #w4#" },
 				{ 11, 85185, "", "=q3=Ghostheart", "=ds=#w7#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
-				{ 17, 81257, "", "=q3=Regal Silk Shoulderpads", "=ds=#s3#, #a1#" },
-				{ 18, 81255, "", "=q3=Soulbinder Treads", "=ds=#s12#, #a1#" },
-				{ 19, 81249, "", "=q3=Boots of Plummeting Death", "=ds=#s12#, #a2#" },
-				{ 20, 81252, "", "=q3=Groundshaker Bracers", "=ds=#s8#, #a3#" },
-				{ 21, 81256, "", "=q3=Mind's Eye Breastplate", "=ds=#s5#, #a4#" },
-				{ 22, 81248, "", "=q3=Axebreaker Gauntlets", "=ds=#s9#, #a4#" },
-				{ 23, 81254, "", "=q3=Mindcapture Pendant", "=ds=#s2#" },
-				{ 24, 81251, "", "=q3=Blade Trap Signet", "=ds=#s13#" },
-				{ 25, 81253, "", "=q3=Firescribe Dagger", "=ds=#h3#, #w4#" },
-				{ 26, 81247, "", "=q3=Ghostheart", "=ds=#w7#" },
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6736#"};
+				{ 17, 87542, "", "=q4=Mogu'Dar, Blade of the Thousand Slaves", "=ds=#h2#, #w10#" },
+				{ 18, 81257, "", "=q3=Regal Silk Shoulderpads", "=ds=#s3#, #a1#" },
+				{ 19, 81255, "", "=q3=Soulbinder Treads", "=ds=#s12#, #a1#" },
+				{ 20, 81249, "", "=q3=Boots of Plummeting Death", "=ds=#s12#, #a2#" },
+				{ 21, 81252, "", "=q3=Groundshaker Bracers", "=ds=#s8#, #a3#" },
+				{ 22, 81256, "", "=q3=Mind's Eye Breastplate", "=ds=#s5#, #a4#" },
+				{ 23, 81248, "", "=q3=Axebreaker Gauntlets", "=ds=#s9#, #a4#" },
+				{ 24, 81254, "", "=q3=Mindcapture Pendant", "=ds=#s2#" },
+				{ 25, 81251, "", "=q3=Blade Trap Signet", "=ds=#s13#" },
+				{ 26, 81253, "", "=q3=Firescribe Dagger", "=ds=#h3#, #w4#" },
+				{ 27, 81247, "", "=q3=Ghostheart", "=ds=#w7#" },
 			}
 		};
 		info = {
@@ -336,7 +360,7 @@ local moduleName = "AtlasLootMoP"
 				{ 2, 80912, "", "=q3=Gauntlets of Resolute Fury", "=ds=#s9#, #a4#" },
 				{ 3, 80911, "", "=q3=Quivering Heart Girdle", "=ds=#s10#, #a4#" },
 				{ 4, 80937, "", "=q3=Snowdrift's Bladed Staff", "=ds=#w9#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6477#"};
 				{ 17, 81101, "", "=q3=Gauntlets of Resolute Fury", "=ds=#s9#, #a4#" },
 				{ 18, 81087, "", "=q3=Quivering Heart Girdle", "=ds=#s10#, #a4#" },
 				{ 19, 81182, "", "=q3=Eye of the Tornado", "=ds=#s13#" },
@@ -357,7 +381,7 @@ local moduleName = "AtlasLootMoP"
 				{ 2, 80913, "", "=q3=Gloves of Enraged Slaughter", "=ds=#s9#, #a1#" },
 				{ 3, 80915, "", "=q3=Spike-Soled Stompers", "=ds=#s12#, #a4#" },
 				{ 4, 80883, "", "=q3=Crescent of Ichor", "=ds=#h1#, #w1#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6472#"};
 				{ 17, 81102, "", "=q3=Gloves of Enraged Slaughter", "=ds=#s9#, #a1#" },
 				{ 18, 81185, "", "=q3=Bladed Smoke Bracers", "=ds=#s8#, #a3#" },
 				{ 19, 81113, "", "=q3=Spike-Soled Stompers", "=ds=#s12#, #a4#" },
@@ -381,7 +405,7 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 80918, "", "=q3=Mindbinder Plate Gloves", "=ds=#s9#, #a4#" },
 				{ 6, 80936, "", "=q3=Warmace of Taran Zhu", "=ds=#h2#, #w6#" },
 				{ 7, 80935, "", "=q3=Shield of Blind Hate", "=ds=#w8#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6471#"};
 				{ 17, 87543, "", "=q4=Ka'eng, Breath of the Shadow", "=ds=#h1#, #w13#" },
 				{ 18, 81188, "", "=q3=Robes of Fevered Dreams", "=ds=#s5#, #a1#" },
 				{ 19, 81093, "", "=q3=Darkbinder Leggings", "=ds=#s11#, #a2#" },
@@ -585,7 +609,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88347, "", "=q3=Ghostwoven Legguards", "=ds=#s11#, #a2#" },
 				{ 5, 88348, "", "=q3=Wraithplate Treads", "=ds=#s12#, #a4#" },
 				{ 6, 88346, "", "=q3=Metanoia Shield", "=ds=#w8#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6531#"};
 				{ 17, 82850, "", "=q3=Phantasmal Drape", "=ds=#s4#" },
 				{ 18, 82848, "", "=q3=Barovian Ritual Hood", "=ds=#s1#, #a1#" },
 				{ 19, 82851, "", "=q3=Ghostwoven Legguards", "=ds=#s11#, #a2#" },
@@ -608,7 +632,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88343, "", "=q3=Bone Golem Boots", "=ds=#s12#, #a3#" },
 				{ 5, 88344, "", "=q3=Goresoaked Headreaper", "=ds=#h2#, #w1#" },
 				{ 6, 88341, "", "=q3=Necromantic Wand", "=ds=#w12#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6394#"};
 				{ 17, 82825, "", "=q3=Deadwalker Bracers", "=ds=#s8#, #a1#" },
 				{ 18, 82827, "", "=q3=Rattling Gloves", "=ds=#s9#, #a2#" },
 				{ 19, 82828, "", "=q3=Bone Golem Boots", "=ds=#s12#, #a3#" },
@@ -657,7 +681,7 @@ local moduleName = "AtlasLootMoP"
 				{ 7, 88358, "", "=q3=Lessons of the Darkmaster", "=ds=#s14#" },
 				{ 8, 88360, "", "=q3=Price of Progress", "=ds=#s14#" },
 				{ 9, 88355, "", "=q3=Searing Words", "=ds=#s14#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6821#"};
 				{ 17, 82859, "", "=q4=Headmaster's Will", "=ds=#w9#" },
 				{ 18, 82861, "", "=q3=Incineration Belt", "=ds=#s10#, #a1#" },
 				{ 19, 82858, "", "=q3=Tombstone Gauntlets", "=ds=#s9#, #a2#" },
@@ -688,7 +712,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88267, "", "=q3=Commanding Bracers", "=ds=#s8#, #a4#" },
 				{ 5, 88265, "", "=q3=Beastbinder Ring", "=ds=#s13#" },
 				{ 6, 88264, "", "=q3=Houndmaster's Compound Crossbow", "=ds=#w3#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6684#"};
 				{ 17, 81695, "", "=q3=Hound Trainer's Gloves", "=ds=#s9#, #a2#" },
 				{ 18, 81696, "", "=q3=Canine Commander's Breastplate", "=ds=#s5#, #a4#" },
 				{ 19, 81694, "", "=q3=Commanding Bracers", "=ds=#s8#, #a4#" },
@@ -711,30 +735,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88271, "", "=q3=Harlan's Shoulders", "=ds=#s3#, #a3#" },
 				{ 5, 88273, "", "=q3=Armsmaster's Sealed Locket", "=ds=#s2#" },
 				{ 6, 88272, "", "=q3=The Gleaming Ravager", "=ds=#h2#, #w1#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
-				{ 17, 81699, "", "=q3=Scarlet Sandals", "=ds=#s12#, #a1#" },
-				{ 18, 81700, "", "=q3=Lightblade Bracer", "=ds=#s8#, #a2#" },
-				{ 19, 81698, "", "=q3=Harlan's Shoulders", "=ds=#s3#, #a3#" },
-				{ 20, 81568, "", "=q3=Armsmaster's Sealed Locket", "=ds=#s2#" },
-				{ 21, 81697, "", "=q3=The Gleaming Ravager", "=ds=#h2#, #w1#" },
-			};
-		};
-		info = {
-			name = AtlasLoot:EJ_GetBossName("Armsmaster Harlan", 654),
-			module = moduleName, instance = "ScarletHalls",
-		};
-	};
-
-	AtlasLoot_Data["SHHarlan"] = {
-		["Normal"] = {
-			{
-				{ 1, 0, "INV_Box_01", "=q6=#j1#", ""};
-				{ 2, 88269, "", "=q3=Scarlet Sandals", "=ds=#s12#, #a1#" },
-				{ 3, 88270, "", "=q3=Lightblade Bracer", "=ds=#s8#, #a2#" },
-				{ 4, 88271, "", "=q3=Harlan's Shoulders", "=ds=#s3#, #a3#" },
-				{ 5, 88273, "", "=q3=Armsmaster's Sealed Locket", "=ds=#s2#" },
-				{ 6, 88272, "", "=q3=The Gleaming Ravager", "=ds=#h2#, #w1#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6427#"};
 				{ 17, 81699, "", "=q3=Scarlet Sandals", "=ds=#s12#, #a1#" },
 				{ 18, 81700, "", "=q3=Lightblade Bracer", "=ds=#s8#, #a2#" },
 				{ 19, 81698, "", "=q3=Harlan's Shoulders", "=ds=#s3#, #a3#" },
@@ -795,7 +796,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88286, "", "=q3=Legguards of the Crimson Magus", "=ds=#s11#, #a3#" },
 				{ 5, 88287, "", "=q3=Bracers of the Fallen Crusader", "=ds=#s8#, #a4#" },
 				{ 6, 88285, "", "=q3=Signet of the Hidden Door", "=ds=#s13#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6946#"};
 				{ 17, 81571, "", "=q3=Soulrender Greatcloak", "=ds=#s4#" },
 				{ 18, 81569, "", "=q3=Forgotten Bloodmage Mantle", "=ds=#s3#, #a1#" },
 				{ 19, 81570, "", "=q3=Legguards of the Crimson Magus", "=ds=#s11#, #a3#" },
@@ -818,7 +819,7 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 88292, "", "=q3=Helm of Rising Flame", "=ds=#s1#, #a4#" },
 				{ 5, 88293, "", "=q3=Firefinger Ring", "=ds=#s13#" },
 				{ 6, 88289, "", "=q3=Firestorm Greatstaff", "=ds=#w9#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6928#"};
 				{ 17, 81575, "", "=q3=Scorched Earth Cloak", "=ds=#s4#" },
 				{ 18, 81573, "", "=q3=Korloff's Raiment", "=ds=#s5#, #a2#" },
 				{ 19, 81574, "", "=q3=Helm of Rising Flame", "=ds=#s1#, #a4#" },
@@ -846,7 +847,7 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 88294, "", "=q3=Flashing Steel Talisman", "=ds=#s14#" },
 				{ 10, 88297, "", "=q3=Lightbreaker Greatsword", "=ds=#h2#, #w10#" },
 				{ 11, 88301, "", "=q3=Greatstaff of Righteousness", "=ds=#w9#" },
-				{ 16, 0, "inv_box_04", "=q6=#j3#", ""};
+				{ 16, 0, "inv_box_04", "=q6=#j3#", "#ACHIEVEMENTID:6929#"};
 				{ 17, 87551, "", "=q4=Helios, Durand's Soul of Purity", "=ds=#s2#" },
 				{ 18, 81692, "", "=q3=Whitemane's Embroidered Chapeau", "=ds=#s1#, #a1#" },
 				{ 19, 81689, "", "=q3=Leggings of Hallowed Fire", "=ds=#s11#, #a1#" },
@@ -881,9 +882,11 @@ local moduleName = "AtlasLootMoP"
 				{ 6, 86818, "", "=q4=Mail of Screaming Secrets", "=ds=#s5#, #a3#" },
 				{ 7, 87823, "", "=q4=Zor'lok's Fizzing Chestguard", "=ds=#s5#, #a3#" },
 				{ 8, 86816, "", "=q4=Chestplate of the Forbidden Tower", "=ds=#s5#, #a4#" },
-				{ 9, 86854, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
+				{ 9, 89954, "", "=q4=Warbelt of Sealed Pods", "=ds=#s10#, #a4#" },
+				{ 10, 86854, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 86814, "", "=q4=Fragment of Fear Made Flesh", "=ds=#s13#" },
 				{ 17, 86813, "", "=q4=Vizier's Ruby Signet", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -896,9 +899,11 @@ local moduleName = "AtlasLootMoP"
 				{ 6, 86160, "", "=q4=Mail of Screaming Secrets", "=ds=#s5#, #a3#" },
 				{ 7, 87824, "", "=q4=Zor'lok's Fizzing Chestguard", "=ds=#s5#, #a3#" },
 				{ 8, 86158, "", "=q4=Chestplate of the Forbidden Tower", "=ds=#s5#, #a4#" },
-				{ 9, 86203, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
+				{ 9, 89826, "", "=q4=Warbelt of Sealed Pods", "=ds=#s10#, #a4#" },
+				{ 10, 86203, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 86156, "", "=q4=Fragment of Fear Made Flesh", "=ds=#s13#" },
 				{ 17, 86155, "", "=q4=Vizier's Ruby Signet", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -911,9 +916,11 @@ local moduleName = "AtlasLootMoP"
 				{ 6, 86951, "", "=q4=Mail of Screaming Secrets", "=ds=#s5#, #a3#" },
 				{ 7, 87822, "", "=q4=Zor'lok's Fizzing Chestguard", "=ds=#s5#, #a3#" },
 				{ 8, 86952, "", "=q4=Chestplate of the Forbidden Tower", "=ds=#s5#, #a4#" },
-				{ 9, 86944, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
+				{ 9, 89919, "", "=q4=Warbelt of Sealed Pods", "=ds=#s10#, #a4#" },
+				{ 10, 86944, "", "=q4=Articulated Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 86949, "", "=q4=Fragment of Fear Made Flesh", "=ds=#s13#" },
 				{ 17, 86946, "", "=q4=Vizier's Ruby Signet", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -931,11 +938,13 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 86821, "", "=q4=Bracers of Unseen Strikes", "=ds=#s8#, #a2#" },
 				{ 5, 86826, "", "=q4=Bracers of Tempestuous Fury", "=ds=#s8#, #a3#" },
 				{ 6, 90739, "", "=q4=Kaz'tik's Stormseizer Gauntlets", "=ds=#s9#, #a3#" },
-				{ 7, 86823, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
-				{ 8, 86822, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
+				{ 7, 89955, "", "=q4=Sword Dancer's Leggings", "=ds=#s11#, #a3#" },
+				{ 8, 86823, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
+				{ 9, 86822, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
 				{ 16, 86824, "", "=q4=Choker of the Unleashed Storm", "=ds=#s2#" },
 				{ 17, 86820, "", "=q4=Ring of the Bladed Tempest", "=ds=#s13#" },
 				{ 19, 86829, "", "=q4=Tornado-Summoning Censer", "=ds=#s15#" },
+				{ 21, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -946,11 +955,13 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 86163, "", "=q4=Bracers of Unseen Strikes", "=ds=#s8#, #a2#" },
 				{ 5, 86168, "", "=q4=Bracers of Tempestuous Fury", "=ds=#s8#, #a3#" },
 				{ 6, 90738, "", "=q4=Kaz'tik's Stormseizer Gauntlets", "=ds=#s9#, #a3#" },
-				{ 7, 86165, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
-				{ 8, 86164, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
+				{ 7, 89830, "", "=q4=Sword Dancer's Leggings", "=ds=#s11#, #a3#" },
+				{ 8, 86165, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
+				{ 9, 86164, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
 				{ 16, 86166, "", "=q4=Choker of the Unleashed Storm", "=ds=#s2#" },
 				{ 17, 86162, "", "=q4=Ring of the Bladed Tempest", "=ds=#s13#" },
 				{ 19, 86171, "", "=q4=Tornado-Summoning Censer", "=ds=#s15#" },
+				{ 21, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -961,11 +972,13 @@ local moduleName = "AtlasLootMoP"
 				{ 4, 86954, "", "=q4=Bracers of Unseen Strikes", "=ds=#s8#, #a2#" },
 				{ 5, 86962, "", "=q4=Bracers of Tempestuous Fury", "=ds=#s8#, #a3#" },
 				{ 6, 90740, "", "=q4=Kaz'tik's Stormseizer Gauntlets", "=ds=#s9#, #a3#" },
-				{ 7, 86956, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
-				{ 8, 86955, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
+				{ 7, 89920, "", "=q4=Sword Dancer's Leggings", "=ds=#s11#, #a3#" },
+				{ 8, 86956, "", "=q4=Windblade Talons", "=ds=#s9#, #a4#" },
+				{ 9, 86955, "", "=q4=Waistplate of Overwhelming Assault", "=ds=#s10#, #a4#" },
 				{ 16, 86953, "", "=q4=Choker of the Unleashed Storm", "=ds=#s2#" },
 				{ 17, 86957, "", "=q4=Ring of the Bladed Tempest", "=ds=#s13#" },
 				{ 19, 86960, "", "=q4=Tornado-Summoning Censer", "=ds=#s15#" },
+				{ 21, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -988,6 +1001,7 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 86837, "", "=q4=Grasps of Panic", "=ds=#s9#, #a4#" },
 				{ 16, 86835, "", "=q4=Necklace of Congealed Weaknesses", "=ds=#s2#" },
 				{ 17, 86830, "", "=q4=Ring of the Shattered Shell", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1003,6 +1017,7 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 86179, "", "=q4=Grasps of Panic", "=ds=#s9#, #a4#" },
 				{ 16, 86177, "", "=q4=Necklace of Congealed Weaknesses", "=ds=#s2#" },
 				{ 17, 86172, "", "=q4=Ring of the Shattered Shell", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1018,6 +1033,7 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 86973, "", "=q4=Grasps of Panic", "=ds=#s9#, #a4#" },
 				{ 16, 86967, "", "=q4=Necklace of Congealed Weaknesses", "=ds=#s2#" },
 				{ 17, 86968, "", "=q4=Ring of the Shattered Shell", "=ds=#s13#" },
+				{ 19, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1039,6 +1055,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89270, "", "=q4=Gauntlets of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86856, "", "=q4=Korven's Amber-Sealed Beetle", "=ds=#s2#" },
 				{ 21, 86851, "", "=q4=Painful Thorned Ring", "=ds=#s13#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1053,6 +1070,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89242, "", "=q4=Gauntlets of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86205, "", "=q4=Korven's Amber-Sealed Beetle", "=ds=#s2#" },
 				{ 21, 86200, "", "=q4=Painful Thorned Ring", "=ds=#s13#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1067,6 +1085,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89255, "", "=q4=Gauntlets of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86976, "", "=q4=Korven's Amber-Sealed Beetle", "=ds=#s2#" },
 				{ 21, 86974, "", "=q4=Painful Thorned Ring", "=ds=#s13#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1088,6 +1107,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89267, "", "=q4=Leggings of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86862, "", "=q4=Un'sok's Amber Scalpel", "=ds=#h3#, #w4#" },
 				{ 21, 86863, "", "=q4=Scimitar of Seven Stars", "=ds=#h1#, #w10#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1102,6 +1122,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89245, "", "=q4=Leggings of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86217, "", "=q4=Un'sok's Amber Scalpel", "=ds=#h3#, #w4#" },
 				{ 21, 86219, "", "=q4=Scimitar of Seven Stars", "=ds=#h1#, #w10#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1116,6 +1137,7 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 89252, "", "=q4=Leggings of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
 				{ 20, 86983, "", "=q4=Un'sok's Amber Scalpel", "=ds=#h3#, #w4#" },
 				{ 21, 86987, "", "=q4=Scimitar of Seven Stars", "=ds=#h1#, #w10#" },
+				{ 23, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1128,38 +1150,71 @@ local moduleName = "AtlasLootMoP"
 		["RaidFinder"] = {
 			{
 				{ 1, 86867, "", "=q4=Leggings of Shadow Infestation", "=ds=#s11#, #a1#" },
-				{ 2, 86866, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
-				{ 4, 86865, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
-				{ 5, 86864, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 2, 89961, "", "=q4=Shadow Heart Spaulders", "=ds=#s3#, #a2#" },
+				{ 3, 86866, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
+				{ 4, 89962, "", "=q4=Hood of Dark Dreams", "=ds=#s1#, #a3#" },
+				{ 5, 89963, "", "=q4=Legplates of Regal Reinforcement", "=ds=#s11#, #a4#" },
+				{ 7, 86864, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 8, 86865, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
 				{ 16, 89265, "", "=q4=Chest of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89266, "", "=q4=Chest of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89264, "", "=q4=Chest of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
+				{ 20, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
 			{
 				{ 1, 86229, "", "=q4=Leggings of Shadow Infestation", "=ds=#s11#, #a1#" },
-				{ 2, 86228, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
-				{ 4, 86227, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
-				{ 5, 86226, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 2, 89836, "", "=q4=Shadow Heart Spaulders", "=ds=#s3#, #a2#" },
+				{ 3, 86228, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
+				{ 4, 89835, "", "=q4=Hood of Dark Dreams", "=ds=#s1#, #a3#" },
+				{ 5, 89837, "", "=q4=Legplates of Regal Reinforcement", "=ds=#s11#, #a4#" },
+				{ 7, 86226, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 8, 86227, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
 				{ 16, 89237, "", "=q4=Chest of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89238, "", "=q4=Chest of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89239, "", "=q4=Chest of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
+				{ 20, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
 			{
 				{ 1, 86989, "", "=q4=Leggings of Shadow Infestation", "=ds=#s11#, #a1#" },
-				{ 2, 86991, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
-				{ 4, 86990, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
-				{ 5, 86988, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 2, 89926, "", "=q4=Shadow Heart Spaulders", "=ds=#s3#, #a2#" },
+				{ 3, 86991, "", "=q4=Crown of the Doomed Empress", "=ds=#s1#, #a3#" },
+				{ 4, 89927, "", "=q4=Hood of Dark Dreams", "=ds=#s1#, #a3#" },
+				{ 5, 89928, "", "=q4=Legplates of Regal Reinforcement", "=ds=#s11#, #a4#" },
+				{ 7, 86988, "", "=q4=Claws of Shek'zeer", "=ds=#h1#, #w13#" },
+				{ 8, 86990, "", "=q4=Kri'tak, Imperial Scepter of the Swarm", "=ds=#h3#, #w6#" },
 				{ 16, 89250, "", "=q4=Chest of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89251, "", "=q4=Chest of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89249, "", "=q4=Chest of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
+				{ 20, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
 			name = AtlasLoot:EJ_GetBossName("Grand Empress Shek'zeer", 743),
+			module = moduleName, instance = "HeartofFear",
+		};
+	};
+
+	AtlasLoot_Data["HoFTrash"] = {
+		["Normal"] = {
+			{
+				{ 1, 86192, "", "=q4=Darting Damselfly Cuffs", "=ds=#s8#, #a1#" },
+				{ 2, 86186, "", "=q4=Gleaming Moth Cuffs", "=ds=#s8#, #a1#" },
+				{ 3, 86183, "", "=q4=Shining Cicada Bracers", "=ds=#s8#, #a1#" },
+				{ 4, 86187, "", "=q4=Pearlescent Butterfly Wristbands", "=ds=#s8#, #a2#" },
+				{ 5, 86185, "", "=q4=Smooth Beetle Wristbands", "=ds=#s8#, #a2#" },
+				{ 6, 86189, "", "=q4=Jagged Hornet Bracers", "=ds=#s8#, #a3#" },
+				{ 7, 86184, "", "=q4=Luminescent Firefly Wristguards", "=ds=#s8#, #a3#" },
+				{ 8, 86188, "", "=q4=Inlaid Cricket Bracers", "=ds=#s8#, #a4#" },
+				{ 9, 86191, "", "=q4=Plated Locust Bracers", "=ds=#s8#, #a4#" },
+				{ 10, 86190, "", "=q4=Serrated Wasp Bracers", "=ds=#s8#, #a4#" },
+			};
+		};
+		info = {
+			name = "trash",
 			module = moduleName, instance = "HeartofFear",
 		};
 	};
@@ -1185,13 +1240,13 @@ local moduleName = "AtlasLootMoP"
 				{ 12, 86742, "", "=q4=Jasper Clawfeet", "=ds=#s12#, #a4#" },
 				{ 16, 86739, "", "=q4=Beads of the Mogu'shi", "=ds=#s2#" },
 				{ 18, 86741, "", "=q4=Dagger of the Seven Stars", "=ds=#h1#, #w4#" },
+				{ 20, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
 			{
 				{ 1, 85979, "", "=q4=Cape of Three Lanterns", "=ds=#s4#" },
 				{ 2, 89768, "", "=q4=Claws of Amethyst", "=ds=#s9#, #a1#" },
-
 				{ 3, 89767, "", "=q4=Ruby-Linked Girdle", "=ds=#s10#, #a1#" },
 				{ 4, 85978, "", "=q4=Jade Dust Leggings", "=ds=#s11#, #a1#" },
 				{ 5, 85977, "", "=q4=Stonebound Cinch", "=ds=#s10#, #a2#" },
@@ -1204,6 +1259,7 @@ local moduleName = "AtlasLootMoP"
 				{ 12, 85925, "", "=q4=Jasper Clawfeet", "=ds=#s12#, #a4#" },
 				{ 16, 85922, "", "=q4=Beads of the Mogu'shi", "=ds=#s2#" },
 				{ 18, 85924, "", "=q4=Dagger of the Seven Stars", "=ds=#h1#, #w4#" },
+				{ 20, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1222,6 +1278,7 @@ local moduleName = "AtlasLootMoP"
 				{ 12, 87015, "", "=q4=Jasper Clawfeet", "=ds=#s12#, #a4#" },
 				{ 16, 87016, "", "=q4=Beads of the Mogu'shi", "=ds=#s2#" },
 				{ 18, 87012, "", "=q4=Dagger of the Seven Stars", "=ds=#h1#, #w4#" },
+				{ 20, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1245,9 +1302,9 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 86756, "", "=q4=Legplates of Sagacious Shadows", "=ds=#s11#, #a4#" },
 				{ 16, 86754, "", "=q4=Amulet of Seven Curses", "=ds=#s2#" },
 				{ 17, 89968, "", "=q4=Feng's Ring of Dreams", "=ds=#s13#" },
-
 				{ 18, 89967, "", "=q4=Feng's Seal of Binding", "=ds=#s13#" },
 				{ 20, 89426, "", "=q4=Fan of Fiery Winds", "=ds=#s15#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1264,9 +1321,9 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 85988, "", "=q4=Legplates of Sagacious Shadows", "=ds=#s11#, #a4#" },
 				{ 16, 85986, "", "=q4=Amulet of Seven Curses", "=ds=#s2#" },
 				{ 17, 89803, "", "=q4=Feng's Ring of Dreams", "=ds=#s13#" },
-
 				{ 18, 89802, "", "=q4=Feng's Seal of Binding", "=ds=#s13#" },
 				{ 20, 89424, "", "=q4=Fan of Fiery Winds", "=ds=#s15#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1282,7 +1339,10 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 87025, "", "=q4=Bracers of Six Oxen", "=ds=#s8#, #a4#" },
 				{ 10, 87031, "", "=q4=Legplates of Sagacious Shadows", "=ds=#s11#, #a4#" },
 				{ 16, 87028, "", "=q4=Amulet of Seven Curses", "=ds=#s2#" },
-				{ 18, 89425, "", "=q4=Fan of Fiery Winds", "=ds=#s15#" },
+				{ 17, 89933, "", "=q4=Feng's Ring of Dreams", "=ds=#s13#" },
+				{ 18, 89932, "", "=q4=Feng's Seal of Binding", "=ds=#s13#" },
+				{ 20, 89425, "", "=q4=Fan of Fiery Winds", "=ds=#s15#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1301,12 +1361,13 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 86761, "", "=q4=Fetters of Death", "=ds=#s10#, #a3#" },
 				{ 6, 86769, "", "=q4=Leggings of Imprisoned Will", "=ds=#s11#, #a3#" },
 				{ 7, 86766, "", "=q4=Bindings of Ancient Spirits", "=ds=#s8#, #a4#" },
-				{ 9, 89969, "", "=q4=Bonded Soul Bracers", "=ds=#s8#, #a4#" },
-				{ 10, 86760, "", "=q4=Sollerets of Spirit Splitting", "=ds=#s12#, #a4#" },
+				{ 8, 89969, "", "=q4=Bonded Soul Bracers", "=ds=#s8#, #a4#" },
+				{ 9, 86760, "", "=q4=Sollerets of Spirit Splitting", "=ds=#s12#, #a4#" },
 				{ 16, 86759, "", "=q4=Soulgrasp Choker", "=ds=#s2#" },
 				{ 17, 86767, "", "=q4=Circuit of the Frail Soul", "=ds=#s13#" },
 				{ 19, 86762, "", "=q4=Gara'kal, Fist of the Spiritbinder", "=ds=#h1#, #w13#" },
 				{ 20, 86764, "", "=q4=Eye of the Ancient Spirit", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1324,6 +1385,7 @@ local moduleName = "AtlasLootMoP"
 				{ 17, 86038, "", "=q4=Circuit of the Frail Soul", "=ds=#s13#" },
 				{ 19, 85994, "", "=q4=Gara'kal, Fist of the Spiritbinder", "=ds=#h1#, #w13#" },
 				{ 20, 85996, "", "=q4=Eye of the Ancient Spirit", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1341,6 +1403,7 @@ local moduleName = "AtlasLootMoP"
 				{ 17, 87040, "", "=q4=Circuit of the Frail Soul", "=ds=#s13#" },
 				{ 19, 87032, "", "=q4=Gara'kal, Fist of the Spiritbinder", "=ds=#h1#, #w13#" },
 				{ 20, 87039, "", "=q4=Eye of the Ancient Spirit", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1367,13 +1430,13 @@ local moduleName = "AtlasLootMoP"
 				{ 17, 86783, "", "=q4=Zian's Choker of Coalesced Shadow", "=ds=#s2#" },
 				{ 19, 86777, "", "=q4=Screaming Tiger, Qiang's Unbreakable Polearm", "=ds=#w7#" },
 				{ 20, 86778, "", "=q4=Steelskin, Qiang's Impervious Shield", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
 			{
 				{ 1, 86082, "", "=q4=Arrow Breaking Windcloak", "=ds=#s4#" },
 				{ 2, 89819, "", "=q4=Mindshard Drape", "=ds=#s4#" },
-
 				{ 3, 86129, "", "=q4=Hood of Blind Eyes", "=ds=#s1#, #a1#" },
 				{ 4, 86128, "", "=q4=Undying Shadow Grips", "=ds=#s9#, #a1#" },
 				{ 5, 86127, "", "=q4=Bracers of Dark Thoughts", "=ds=#s8#, #a2#" },
@@ -1387,6 +1450,7 @@ local moduleName = "AtlasLootMoP"
 				{ 17, 86083, "", "=q4=Zian's Choker of Coalesced Shadow", "=ds=#s2#" },
 				{ 19, 86071, "", "=q4=Screaming Tiger, Qiang's Unbreakable Polearm", "=ds=#w7#" },
 				{ 20, 86075, "", "=q4=Steelskin, Qiang's Impervious Shield", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1396,15 +1460,17 @@ local moduleName = "AtlasLootMoP"
 				{ 3, 87051, "", "=q4=Hood of Blind Eyes", "=ds=#s1#, #a1#" },
 				{ 4, 87052, "", "=q4=Undying Shadow Grips", "=ds=#s9#, #a1#" },
 				{ 5, 87054, "", "=q4=Bracers of Dark Thoughts", "=ds=#s8#, #a2#" },
-				{ 6, 87047, "", "=q4=Subetai's Pillaging Leggings", "=ds=#s11#, #a3#" },
-				{ 7, 87055, "", "=q4=Meng's Treads of Insanity", "=ds=#s12#, #a3#" },
-				{ 8, 87049, "", "=q4=Shoulderguards of the Unflanked", "=ds=#s3#, #a4#" },
-				{ 9, 87048, "", "=q4=Breastplate of the Kings' Guard", "=ds=#s5#, #a4#" },
-				{ 10, 87056, "", "=q4=Girdle of Delirious Visions", "=ds=#s10#, #a4#" },
+				{ 6, 89935, "", "=q4=Bracers of Violent Meditation", "=ds=#s8#, #a2#" },
+				{ 7, 87047, "", "=q4=Subetai's Pillaging Leggings", "=ds=#s11#, #a3#" },
+				{ 8, 87055, "", "=q4=Meng's Treads of Insanity", "=ds=#s12#, #a3#" },
+				{ 9, 87049, "", "=q4=Shoulderguards of the Unflanked", "=ds=#s3#, #a4#" },
+				{ 10, 87048, "", "=q4=Breastplate of the Kings' Guard", "=ds=#s5#, #a4#" },
+				{ 11, 87056, "", "=q4=Girdle of Delirious Visions", "=ds=#s10#, #a4#" },
 				{ 16, 87045, "", "=q4=Amulet of the Hidden Kings", "=ds=#s2#" },
 				{ 17, 87053, "", "=q4=Zian's Choker of Coalesced Shadow", "=ds=#s2#" },
 				{ 19, 87046, "", "=q4=Screaming Tiger, Qiang's Unbreakable Polearm", "=ds=#w7#" },
 				{ 20, 87050, "", "=q4=Steelskin, Qiang's Impervious Shield", "=ds=#w8#" },
+				{ 22, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -1423,6 +1489,7 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 86800, "", "=q4=Shoulders of Empyreal Focus", "=ds=#s3#, #a3#" },
 				{ 6, 89974, "", "=q4=Crown of Keening Stars", "=ds=#s1#, #a4#" },
 				{ 7, 86794, "", "=q4=Starcrusher Gauntlets", "=ds=#s9#, #a4#" },
+				{ 9, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 				{ 16, 89972, "", "=q4=Band of Bursting Novas", "=ds=#s13#" },
 				{ 17, 86791, "", "=q4=Bottle of Infinite Stars", "=ds=#s14#" },
 				{ 18, 86792, "", "=q4=Light of the Cosmos", "=ds=#s14#" },
@@ -1441,6 +1508,8 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 86141, "", "=q4=Shoulders of Empyreal Focus", "=ds=#s3#, #a3#" },
 				{ 6, 89821, "", "=q4=Crown of Keening Stars", "=ds=#s1#, #a4#" },
 				{ 7, 86135, "", "=q4=Starcrusher Gauntlets", "=ds=#s9#, #a4#" },
+				{ 9, 87777, "", "=q4=Reins of the Astral Cloud Serpent", "=ds=#e27#", ""};
+				{ 11, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 				{ 16, 89824, "", "=q4=Band of Bursting Novas", "=ds=#s13#" },
 				{ 17, 86132, "", "=q4=Bottle of Infinite Stars", "=ds=#s14#" },
 				{ 18, 86133, "", "=q4=Light of the Cosmos", "=ds=#s14#" },
@@ -1459,6 +1528,8 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 87068, "", "=q4=Shoulders of Empyreal Focus", "=ds=#s3#, #a3#" },
 				{ 6, 89939, "", "=q4=Crown of Keening Stars", "=ds=#s1#, #a4#" },
 				{ 7, 87059, "", "=q4=Starcrusher Gauntlets", "=ds=#s9#, #a4#" },
+				{ 9, 87777, "", "=q4=Reins of the Astral Cloud Serpent", "=ds=#e27#", ""};
+				{ 11, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 				{ 16, 89937, "", "=q4=Band of Bursting Novas", "=ds=#s13#" },
 				{ 17, 87057, "", "=q4=Bottle of Infinite Stars", "=ds=#s14#" },
 				{ 18, 87065, "", "=q4=Light of the Cosmos", "=ds=#s14#" },
@@ -1480,15 +1551,18 @@ local moduleName = "AtlasLootMoP"
 				{ 1, 86809, "", "=q4=Hood of Focused Energy", "=ds=#s1#, #a1#" },
 				{ 2, 86804, "", "=q4=Crown of Opportunistic Strikes", "=ds=#s1#, #a2#" },
 				{ 3, 86808, "", "=q4=Magnetized Leggings", "=ds=#s11#, #a2#" },
-				{ 4, 87826, "", "=q4=Grips of Terra Cotta", "=ds=#s9#, #a3#" },
+				{ 4, 89975, "", "=q4=Dreadeye Gaze", "=ds=#s1#, #a3#" },
 				{ 5, 89977, "", "=q4=Enameled Grips of Solemnity", "=ds=#s9#, #a3#" },
-				{ 5, 86807, "", "=q4=Spaulders of the Emperor's Rage", "=ds=#s3#, #a4#" },
-				{ 6, 86803, "", "=q4=Jang-xi's Devastating Legplates", "=ds=#s11#, #a4#" },
+				{ 6, 87826, "", "=q4=Grips of Terra Cotta", "=ds=#s9#, #a3#" },
+				{ 7, 86807, "", "=q4=Spaulders of the Emperor's Rage", "=ds=#s3#, #a4#" },
+				{ 8, 89976, "", "=q4=Chestguard of Eternal Vigilance", "=ds=#s5#, #a4#" },
+				{ 9, 86803, "", "=q4=Jang-xi's Devastating Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 86810, "", "=q4=Worldwaker Cachabon", "=ds=#s2#" },
 				{ 17, 86802, "", "=q4=Lei Shin's Final Orders", "=ds=#s14#" },
 				{ 18, 86805, "", "=q4=Qin-xi's Polarizing Seal", "=ds=#s14#" },
 				{ 20, 86806, "", "=q4=Tihan, Scepter of the Sleeping Emperor", "=ds=#h3#, #w6#" },
 				{ 21, 86801, "", "=q4=Fang Kung, Spark of Titans", "=ds=#w2#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1501,13 +1575,13 @@ local moduleName = "AtlasLootMoP"
 				{ 6, 87827, "", "=q4=Grips of Terra Cotta", "=ds=#s9#, #a3#" },
 				{ 7, 86149, "", "=q4=Spaulders of the Emperor's Rage", "=ds=#s3#, #a4#" },
 				{ 8, 89823, "", "=q4=Chestguard of Eternal Vigilance", "=ds=#s5#, #a4#" },
-
 				{ 9, 86145, "", "=q4=Jang-xi's Devastating Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 86152, "", "=q4=Worldwaker Cachabon", "=ds=#s2#" },
 				{ 17, 86144, "", "=q4=Lei Shin's Final Orders", "=ds=#s14#" },
 				{ 18, 86147, "", "=q4=Qin-xi's Polarizing Seal", "=ds=#s14#" },
 				{ 20, 86148, "", "=q4=Tihan, Scepter of the Sleeping Emperor", "=ds=#h3#, #w6#" },
 				{ 21, 86142, "", "=q4=Fang Kung, Spark of Titans", "=ds=#w2#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1515,18 +1589,38 @@ local moduleName = "AtlasLootMoP"
 				{ 1, 87073, "", "=q4=Hood of Focused Energy", "=ds=#s1#, #a1#" },
 				{ 2, 87070, "", "=q4=Crown of Opportunistic Strikes", "=ds=#s1#, #a2#" },
 				{ 3, 87077, "", "=q4=Magnetized Leggings", "=ds=#s11#, #a2#" },
-				{ 4, 87825, "", "=q4=Grips of Terra Cotta", "=ds=#s9#, #a3#" },
-				{ 5, 87078, "", "=q4=Spaulders of the Emperor's Rage", "=ds=#s3#, #a4#" },
-				{ 6, 87071, "", "=q4=Jang-xi's Devastating Legplates", "=ds=#s11#, #a4#" },
+				{ 4, 89940, "", "=q4=Dreadeye Gaze", "=ds=#s1#, #a3#" },
+				{ 5, 89942, "", "=q4=Enameled Grips of Solemnity", "=ds=#s9#, #a3#" },
+				{ 6, 87825, "", "=q4=Grips of Terra Cotta", "=ds=#s9#, #a3#" },
+				{ 7, 87078, "", "=q4=Spaulders of the Emperor's Rage", "=ds=#s3#, #a4#" },
+				{ 8, 89941, "", "=q4=Chestguard of Eternal Vigilance", "=ds=#s5#, #a4#" },
+				{ 9, 87071, "", "=q4=Jang-xi's Devastating Legplates", "=ds=#s11#, #a4#" },
 				{ 16, 87076, "", "=q4=Worldwaker Cachabon", "=ds=#s2#" },
 				{ 17, 87072, "", "=q4=Lei Shin's Final Orders", "=ds=#s14#" },
 				{ 18, 87075, "", "=q4=Qin-xi's Polarizing Seal", "=ds=#s14#" },
 				{ 20, 87074, "", "=q4=Tihan, Scepter of the Sleeping Emperor", "=ds=#h3#, #w6#" },
 				{ 21, 87069, "", "=q4=Fang Kung, Spark of Titans", "=ds=#w2#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
 			};
 		};
 		info = {
 			name = AtlasLoot:EJ_GetBossName("Will of the Emperor", 677),
+			module = moduleName, instance = "MoguShanVaults",
+		};
+	};
+
+	AtlasLoot_Data["MoguShanVaultsTrash"] = {
+		["Normal"] = {
+			{
+				{ 1, 86043, "", "=q4=Jade Bandit Figurine", "=ds=#s14#" },
+				{ 2, 86042, "", "=q4=Jade Charioteer Figurine", "=ds=#s14#" },
+				{ 3, 86045, "", "=q4=Jade Courtesan Figurine", "=ds=#s14#" },
+				{ 4, 86044, "", "=q4=Jade Magistrate Figurine", "=ds=#s14#" },
+				{ 5, 86046, "", "=q4=Jade Warlord Figurine", "=ds=#s14#" },
+			};
+		};
+		info = {
+			name = "trash",
 			module = moduleName, instance = "MoguShanVaults",
 		};
 	};
@@ -1580,11 +1674,12 @@ local moduleName = "AtlasLootMoP"
 				{ 14, 85380, "", "=q4=Eternal Blossom Handguards", "=ds=#s9#, #a2#"};
 				{ 15, 85382, "", "=q4=Eternal Blossom Breeches", "=ds=#s11#, #a2#"};
 				{ 16, 0, "spell_nature_starfall", "=q6="..LOCALIZED_CLASS_NAMES_MALE["DRUID"], "=q5="..AL["Balance"]};
-				{ 17, 84843, "", "=q4=Malevolent Gladiator's Wyrmhide Gloves", "=ds="};
+				{ 17, 84843, "", "=q4=Malevolent Gladiator's Wyrmhide Gloves", "=ds=#s9#, #a2#"};
 				{ 20, 0, "ability_druid_catform", "=q6="..LOCALIZED_CLASS_NAMES_MALE["DRUID"], "=q5="..AL["Feral"]};
-				{ 21, 84832, "", "=q4=Malevolent Gladiator's Dragonhide Gloves", "=ds="};
+				{ 21, 84832, "", "=q4=Malevolent Gladiator's Dragonhide Gloves", "=ds=#s9#, #a2#"};
 				{ 24, 0, "spell_nature_healingtouch", "=q6="..LOCALIZED_CLASS_NAMES_MALE["DRUID"], "=q5="..AL["Restoration"]};
-				{ 25, 84833, "", "=q4=Malevolent Gladiator's Kodohide Gloves", "=ds="};
+				{ 25, 84833, "", "=q4=Malevolent Gladiator's Kodohide Gloves", "=ds=#s9#, #a2#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["DRUID"];
 			};
 			{
 				{ 1, 0, "inv_weapon_bow_07", "=q6="..LOCALIZED_CLASS_NAMES_MALE["HUNTER"], ""};
@@ -1600,13 +1695,14 @@ local moduleName = "AtlasLootMoP"
 				{ 14, 85369, "", "=q4=Sha-Skin Gloves", "=ds=#s9#, #a1#"};
 				{ 15, 85371, "", "=q4=Sha-Skin Leggings", "=ds=#s11#, #a1#"};
 				{ 16, 0, "inv_weapon_bow_07", "=q6="..LOCALIZED_CLASS_NAMES_MALE["HUNTER"], ""};
-				{ 17, 84841, "", "=q4=Malevolent Gladiator's Chain Gauntlets", "=ds="};
+				{ 17, 84841, "", "=q4=Malevolent Gladiator's Chain Gauntlets", "=ds=#s9#, #a3#"};
 				{ 20, 0, "inv_staff_13", "=q6="..LOCALIZED_CLASS_NAMES_MALE["MAGE"], ""};
-				{ 21, 84837, "", "=q4=Malevolent Gladiator's Silk Handguards", "=ds="};
+				{ 21, 84837, "", "=q4=Malevolent Gladiator's Silk Handguards", "=ds=#s9#, #a1#"};
 				{ 24, 0, "inv_throwingknife_04", "=q6="..LOCALIZED_CLASS_NAMES_MALE["ROGUE"], ""};
-				{ 25, 84830, "", "=q4=Malevolent Gladiator's Leather Gloves", "=ds="};
+				{ 25, 84830, "", "=q4=Malevolent Gladiator's Leather Gloves", "=ds=#s9#, #a2#"};
 				{ 28, 0, "spell_nature_drowsy", "=q6="..LOCALIZED_CLASS_NAMES_MALE["WARLOCK"], ""};
-				{ 29, 84842, "", "=q4=Malevolent Gladiator's Felweave Handguards", "=ds="};
+				{ 29, 84842, "", "=q4=Malevolent Gladiator's Felweave Handguards", "=ds=#s9#, #a1#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["HUNTER"].." / "..LOCALIZED_CLASS_NAMES_MALE["MAGE"].." / "..LOCALIZED_CLASS_NAMES_MALE["ROGUE"].." / "..LOCALIZED_CLASS_NAMES_MALE["WARLOCK"];
 			};
 			{
 				{ 1, 0, "spell_monk_brewmaster_spec", "=q6="..LOCALIZED_CLASS_NAMES_MALE["MONK"], "=q5="..AL["Brewmaster"]};
@@ -1619,9 +1715,10 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 85395, "", "=q4=Red Crane Grips", "=ds=#s9#, #a2#"};
 				{ 11, 85397, "", "=q4=Red Crane Leggings", "=ds=#s11#, #a2#"};
 				{ 20, 0, "spell_monk_mistweaver_spec", "=q6="..LOCALIZED_CLASS_NAMES_MALE["MONK"], "=q5="..AL["Mistweaver"]};
-				{ 21, 84836, "", "=q4=Malevolent Gladiator's Copperskin Gloves", "=ds="};
+				{ 21, 84836, "", "=q4=Malevolent Gladiator's Copperskin Gloves", "=ds=#s9#, #a2#"};
 				{ 24, 0, "spell_monk_windwalker_spec", "=q6="..LOCALIZED_CLASS_NAMES_MALE["MONK"], "=q5="..AL["Windwalker"]};
-				{ 25, 84839, "", "=q4=Malevolent Gladiator's Ironskin Gloves", "=ds="};
+				{ 25, 84839, "", "=q4=Malevolent Gladiator's Ironskin Gloves", "=ds=#s9#, #a2#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["MONK"];
 			};
 			{
 				{ 1, 0, "Spell_Holy_HolyBolt", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PALADIN"], "=q5="..AL["Holy"]};
@@ -1634,9 +1731,10 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 85322, "", "=q4=White Tiger Handguards", "=ds=#s9#, #a4#"};
 				{ 11, 85320, "", "=q4=White Tiger Legguards", "=ds=#s11#, #a4#"};
 				{ 16, 0, "Spell_Holy_HolyBolt", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PALADIN"], "=q5="..AL["Holy"]};
-				{ 17, 84831, "", "=q4=Malevolent Gladiator's Ornamented Gloves", "=ds="};
+				{ 17, 84831, "", "=q4=Malevolent Gladiator's Ornamented Gloves", "=ds=#s9#, #a4#"};
 				{ 20, 0, "Spell_Holy_AuraOfLight", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PALADIN"], "=q5="..AL["Retribution"]};
-				{ 21, 84834, "", "=q4=Malevolent Gladiator's Scaled Gauntlets", "=ds="};
+				{ 21, 84834, "", "=q4=Malevolent Gladiator's Scaled Gauntlets", "=ds=#s9#, #a4#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["PALADIN"];
 			};
 			{
 				{ 1, 0, "spell_holy_guardianspirit", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PRIEST"], "=q5="..AL["Holy"]};
@@ -1646,9 +1744,10 @@ local moduleName = "AtlasLootMoP"
 				{ 6, 85364, "", "=q4=Guardian Serpent Gloves", "=ds=#s9#, #a1#"};
 				{ 7, 85366, "", "=q4=Guardian Serpent Leggings", "=ds=#s11#, #a1#"};
 				{ 16, 0, "spell_holy_guardianspirit", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PRIEST"], "=q5="..AL["Holy"]};
-				{ 17, 84846, "", "=q4=Malevolent Gladiator's Mooncloth Gloves", "=ds="};
+				{ 17, 84846, "", "=q4=Malevolent Gladiator's Mooncloth Gloves", "=ds=#s9#, #a1#"};
 				{ 20, 0, "spell_shadow_shadowwordpain", "=q6="..LOCALIZED_CLASS_NAMES_MALE["PRIEST"], "=q5="..AL["Shadow"]};
-				{ 21, 84838, "", "=q4=Malevolent Gladiator's Satin Gloves", "=ds="};
+				{ 21, 84838, "", "=q4=Malevolent Gladiator's Satin Gloves", "=ds=#s9#, #a1#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["PRIEST"];
 			};
 			{
 				{ 1, 0, "Spell_Nature_Lightning", "=q6="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], "=q5="..AL["Elemental"]};
@@ -1661,11 +1760,12 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 85352, "", "=q4=Firebird's Handwraps", "=ds=#s9#, #a3#"};
 				{ 11, 85350, "", "=q4=Firebird's Legwraps", "=ds=#s11#, #a3#"};
 				{ 16, 0, "Spell_Nature_Lightning", "=q6="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], "=q5="..AL["Elemental"]};
-				{ 17, 84845, "", "=q4=Malevolent Gladiator's Mail Gauntlets", "=ds="};
+				{ 17, 84845, "", "=q4=Malevolent Gladiator's Mail Gauntlets", "=ds=#s9#, #a3#"};
 				{ 20, 0, "spell_nature_lightningshield", "=q6="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], "=q5="..AL["Enhancement"]};
-				{ 21, 84844, "", "=q4=Malevolent Gladiator's Linked Gauntlets", "=ds="};
+				{ 21, 84844, "", "=q4=Malevolent Gladiator's Linked Gauntlets", "=ds=#s9#, #a3#"};
 				{ 24, 0, "spell_nature_magicimmunity", "=q6="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], "=q5="..AL["Restoration"]};
-				{ 25, 84847, "", "=q4=Malevolent Gladiator's Ringmail Gauntlets", "=ds="};
+				{ 25, 84847, "", "=q4=Malevolent Gladiator's Ringmail Gauntlets", "=ds=#s9#, #a3#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"];
 			};
 			{
 				{ 1, 0, "spell_deathknight_frostpresence", "=q6="..LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"], "=q5="..AL["DPS"]};
@@ -1681,9 +1781,10 @@ local moduleName = "AtlasLootMoP"
 				{ 14, 85327, "", "=q4=Handguards of Resounding Rings", "=ds=#s9#, #a4#"};
 				{ 15, 85325, "", "=q4=Legguards of Resounding Rings", "=ds=#s11#, #a4#"};
 				{ 16, 0, "spell_deathknight_classicon", "=q6="..LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"]};
-				{ 17, 84835, "", "s=q4=Malevolent Gladiator's Dreadplate Gauntlets", "=ds="};
+				{ 17, 84835, "", "s=q4=Malevolent Gladiator's Dreadplate Gauntlets", "=ds=#s9#, #a4#"};
 				{ 24, 0, "inv_sword_27", "=q6="..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"]};
-				{ 25, 84840, "", "=q4=Malevolent Gladiator's Plate Gauntlets", "=ds="};
+				{ 25, 84840, "", "=q4=Malevolent Gladiator's Plate Gauntlets", "=ds=#s9#, #a4#"};
+				extraText = ": "..LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"].." / "..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"];
 			};
 			{
 				{ 1, 84977, "", "=q4=Malevolent Gladiator's Cuffs of Accuracy", "=ds="};
@@ -1707,6 +1808,7 @@ local moduleName = "AtlasLootMoP"
 				{ 28, 84976, "", "=q4=Malevolent Gladiator's Bindings of Meditation", "=ds="};
 				{ 29, 84953, "", "=q4=Malevolent Gladiator's Belt of Meditation", "=ds="};
 				{ 30, 84813, "", "=q4=Malevolent Gladiator's Footguards of Alacrity", "=ds="};
+				extraText = ": "..AL["PvP Non-Set Epics"].." - "..BabbleInventory["Cloth"].." / "..BabbleInventory["Leather"];
 			};
 			{
 				{ 1, 84984, "", "=q4=Malevolent Gladiator's Armbands of Meditation", "=ds="};
@@ -1730,9 +1832,10 @@ local moduleName = "AtlasLootMoP"
 				{ 24, 84974, "", "=q4=Malevolent Gladiator's Bracers of Prowess", "=ds="};
 				{ 25, 84951, "", "=q4=Malevolent Gladiator's Clasp of Cruelty", "=ds="};
 				{ 26, 84811, "", "=q4=Malevolent Gladiator's Greaves of Alacrity", "=ds="};
-				{ 28, 84986, "", "=q4=Malevolent Gladiator's Armplates of Alacrity", "=ds="};	
+				{ 28, 84986, "", "=q4=Malevolent Gladiator's Armplates of Alacrity", "=ds="};
 				{ 29, 84950, "", "=q4=Malevolent Gladiator's Girdle of Prowess", "=ds="};
 				{ 30, 84822, "", "=q4=Malevolent Gladiator's Warboots of Alacrity", "=ds="};
+				extraText = ": "..AL["PvP Non-Set Epics"].." - "..BabbleInventory["Mail"].." / "..BabbleInventory["Plate"];
 			};
 			{
 				{ 1, 84804, "", "=q4=Malevolent Gladiator's Cape of Cruelty", "=ds=#s4#" },
@@ -1756,6 +1859,20 @@ local moduleName = "AtlasLootMoP"
 				{ 20, 84886, "", "=q4=Malevolent Gladiator's Pendant of Alacrity", "=ds=#s2#" },
 				{ 21, 84887, "", "=q4=Malevolent Gladiator's Pendant of Cruelty", "=ds=#s2#" },
 				{ 22, 84888, "", "=q4=Malevolent Gladiator's Pendant of Meditation", "=ds=#s2#" },
+				extraText = ": "..AL["PvP Accessories"];
+			};
+			{
+				{ 1, 89317, "", "=q4=Claw of Anger", "=ds=#m2#: #QUESTID:31809#", "", "100%" },
+				{ 3, 90911, "", "=q4=Furyheart Treads", "=ds=#s12#, #a1#" },
+				{ 4, 90914, "", "=q4=Boots of Raging Haze", "=ds=#s12#, #a2#" },
+				{ 5, 90907, "", "=q4=Boots of Unbreakable Umbrage", "=ds=#s12#, #a3#" },
+				{ 6, 90912, "", "=q4=Angerforged Stompers", "=ds=#s12#, #a4#"},
+				{ 7, 90910, "", "=q4=Mindfire Sollerets", "=ds=#s12#, #a4#"},
+				{ 18, 90913, "", "=q4=Sandals of the Shadow", "=ds=#s12#, #a1#" },
+				{ 19, 90908, "", "=q4=Crushing Treads of Anger", "=ds=#s12#, #a2#" },
+				{ 20, 90906, "", "=q4=Treads of Ardent Antagonism", "=ds=#s12#, #a3#" };
+				{ 21, 90909, "", "=q4=Intemperate Greatboots", "=ds=#s12#, #a4#" };
+				extraText = ": "..AL["Quest Reward"];
 			};
 		};
 		info = {
@@ -1839,6 +1956,8 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 86876, "", "=q4=Casque of Expelled Corruption", "=ds=#s1#, #a4#" },
 				{ 6, 86868, "", "=q4=Bracers of Defiled Earth", "=ds=#s8#, #a4#" },
 				{ 7, 86870, "", "=q4=Deepwater Greatboots", "=ds=#s12#, #a4#" },
+				{ 9, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 10, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 86872, "", "=q4=Kaolan's Withering Necklace", "=ds=#s2#" },
 				{ 17, 86871, "", "=q4=Shackle of Eversparks", "=ds=#s2#" },
 				{ 18, 86869, "", "=q4=Regail's Band of the Endless", "=ds=#s13#" },
@@ -1860,6 +1979,8 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 86231, "", "=q4=Regail's Band of the Endless", "=ds=#s13#" },
 				{ 11, 86315, "", "=q4=Watersoul Signet", "=ds=#s13#" },
 				{ 12, 86390, "", "=q4=Regail's Crackling Dagger", "=ds=#h3#, #w4#" },
+				{ 14, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 15, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 0, "inv_box_04", "=q6="..AL["Elite"], ""};
 				{ 17, 90526, "", "=q4=Cloak of Overwhelming Corruption", "=ds=#s4#" },
 				{ 18, 90524, "", "=q4=Cuffs of the Corrupted Waters", "=ds=#s8#, #a1#" },
@@ -1891,6 +2012,8 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 87144, "", "=q4=Regail's Band of the Endless", "=ds=#s13#" },
 				{ 11, 87151, "", "=q4=Watersoul Signet", "=ds=#s13#" },
 				{ 12, 87152, "", "=q4=Regail's Crackling Dagger", "=ds=#h3#, #w4#" },
+				{ 14, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 15, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 0, "inv_box_04", "=q6="..AL["Elite"], ""};
 				{ 17, 90512, "", "=q4=Cloak of Overwhelming Corruption", "=ds=#s4#" },
 				{ 18, 90510, "", "=q4=Cuffs of the Corrupted Waters", "=ds=#s8#, #a1#" },
@@ -1937,6 +2060,8 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 86881, "", "=q4=Stuff of Nightmares", "=ds=#s14#" },
 				{ 20, 86886, "", "=q4=Loshan, Terror Incarnate", "=ds=#h1#, #w10#" },
 				{ 21, 86879, "", "=q4=Gao-Rei, Staff of the Legendary Protector", "=ds=#w9#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 24, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Normal"] = {
@@ -1961,6 +2086,8 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 86323, "", "=q4=Stuff of Nightmares", "=ds=#s14#" },
 				{ 20, 86328, "", "=q4=Loshan, Terror Incarnate", "=ds=#h1#, #w10#" },
 				{ 21, 86321, "", "=q4=Gao-Rei, Staff of the Legendary Protector", "=ds=#w9#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 24, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		["Heroic"] = {
@@ -1985,6 +2112,8 @@ local moduleName = "AtlasLootMoP"
 				{ 18, 87160, "", "=q4=Stuff of Nightmares", "=ds=#s14#" },
 				{ 20, 87164, "", "=q4=Loshan, Terror Incarnate", "=ds=#h1#, #w10#" },
 				{ 21, 87156, "", "=q4=Gao-Rei, Staff of the Legendary Protector", "=ds=#w9#" },
+				{ 23, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 24, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 			};
 		};
 		info = {
@@ -2008,6 +2137,8 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 86902, "", "=q4=Mender's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 11, 86904, "", "=q4=Patroller's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 12, 86903, "", "=q4=Protector's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
+				{ 14, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 15, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89277, "", "=q4=Shoulders of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89278, "", "=q4=Shoulders of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89276, "", "=q4=Shoulders of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2032,6 +2163,8 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 86383, "", "=q4=Mender's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 11, 86385, "", "=q4=Patroller's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 12, 86384, "", "=q4=Protector's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
+				{ 14, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 15, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89246, "", "=q4=Shoulders of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89247, "", "=q4=Shoulders of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89248, "", "=q4=Shoulders of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2056,6 +2189,8 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 87184, "", "=q4=Mender's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 11, 87186, "", "=q4=Patroller's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
 				{ 12, 87185, "", "=q4=Protector's Girdle of Endless Spring", "=ds=#s10#, #a4#" },
+				{ 14, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 15, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89262, "", "=q4=Shoulders of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89263, "", "=q4=Shoulders of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89261, "", "=q4=Shoulders of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2075,10 +2210,16 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["ToESShaofFear"] = {
 		["RaidFinder"] = {
 			{
-				{ 1, 86908, "", "=q4=Dreadwoven Leggings of Failure", "=ds=#s11#, #a1#" },
-				{ 3, 86907, "", "=q4=Essence of Terror", "=ds=#s14#" },
-				{ 5, 86906, "", "=q4=Kilrak, Jaws of Terror", "=ds=#h1#, #w10#" },
-				{ 6, 86905, "", "=q4=Shin'ka, Execution of Dominion", "=ds=#h2#, #w1#" },
+				{ 1, 89984, "", "=q4=Robes of Pinioned Eyes", "=ds=#s5#, #a1#" },
+				{ 2, 86908, "", "=q4=Dreadwoven Leggings of Failure", "=ds=#s11#, #a1#" },
+				{ 3, 89985, "", "=q4=Wrap of Instant Petrification", "=ds=#s5#, #a2#" },
+				{ 4, 89986, "", "=q4=Shadowgrip Girdle", "=ds=#s10#, #a3#" },
+				{ 5, 86907, "", "=q4=Essence of Terror", "=ds=#s14#" },
+				{ 7, 86906, "", "=q4=Kilrak, Jaws of Terror", "=ds=#h1#, #w10#" },
+				{ 8, 86905, "", "=q4=Shin'ka, Execution of Dominion", "=ds=#h2#, #w1#" },
+				{ 10, 87210, "", "=q5=Chimera of Fear", "=ds=#m3#" },
+				{ 11, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 12, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89274, "", "=q4=Helm of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89275, "", "=q4=Helm of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89273, "", "=q4=Helm of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2086,10 +2227,16 @@ local moduleName = "AtlasLootMoP"
 		};
 		["Normal"] = {
 			{
-				{ 1, 86389, "", "=q4=Dreadwoven Leggings of Failure", "=ds=#s11#, #a1#" },
-				{ 3, 86388, "", "=q4=Essence of Terror", "=ds=#s14#" },
-				{ 5, 86387, "", "=q4=Kilrak, Jaws of Terror", "=ds=#h1#, #w10#" },
-				{ 6, 86386, "", "=q4=Shin'ka, Execution of Dominion", "=ds=#h2#, #w1#" },
+				{ 1, 89887, "", "=q4=Robes of Pinioned Eyes", "=ds=#s5#, #a1#" },
+				{ 2, 86389, "", "=q4=Dreadwoven Leggings of Failure", "=ds=#s11#, #a1#" },
+				{ 3, 89886, "", "=q4=Wrap of Instant Petrification", "=ds=#s5#, #a2#" },
+				{ 4, 89839, "", "=q4=Shadowgrip Girdle", "=ds=#s10#, #a3#" },
+				{ 5, 86388, "", "=q4=Essence of Terror", "=ds=#s14#" },
+				{ 7, 86387, "", "=q4=Kilrak, Jaws of Terror", "=ds=#h1#, #w10#" },
+				{ 8, 86386, "", "=q4=Shin'ka, Execution of Dominion", "=ds=#h2#, #w1#" },
+				{ 10, 87210, "", "=q5=Chimera of Fear", "=ds=#m3#" },
+				{ 11, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 12, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89235, "", "=q4=Helm of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89236, "", "=q4=Helm of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89234, "", "=q4=Helm of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2097,10 +2244,16 @@ local moduleName = "AtlasLootMoP"
 		};
 		["Heroic"] = {
 			{
+				--{ 1, 0, "", "=q4=Robes of Pinioned Eyes", "=ds=#s5#, #a1#" },
 				{ 1, 87174, "", "=q4=Dreadwoven Leggings of Failure", "=ds=#s11#, #a1#" },
+				--{ 3, 0, "", "=q4=Wrap of Instant Petrification", "=ds=#s5#, #a2#" },
+				--{ 4, 0, "", "=q4=Shadowgrip Girdle", "=ds=#s10#, #a3#" },
 				{ 3, 87175, "", "=q4=Essence of Terror", "=ds=#s14#" },
 				{ 5, 87173, "", "=q4=Kilrak, Jaws of Terror", "=ds=#h1#, #w10#" },
 				{ 6, 87176, "", "=q4=Shin'ka, Execution of Dominion", "=ds=#h2#, #w1#" },
+				{ 10, 87210, "", "=q5=Chimera of Fear", "=ds=#m3#" },
+				{ 11, 87208, "", "=q5=Sigil of Power", "=ds=#m3#" },
+				{ 12, 87209, "", "=q5=Sigil of Wisdom", "=ds=#m3#" },
 				{ 16, 89259, "", "=q4=Helm of the Shadowy Conqueror", "=ds=#e15#, #m40#"};
 				{ 17, 89260, "", "=q4=Helm of the Shadowy Protector", "=ds=#e15#, #m40#"};
 				{ 18, 89258, "", "=q4=Helm of the Shadowy Vanquisher", "=ds=#e15#, #m40#"};
@@ -2111,6 +2264,480 @@ local moduleName = "AtlasLootMoP"
 			module = moduleName, instance = "TerraceofEndlessSpring",
 		};
 	};
+
+	-----------------
+	--- Rare Mobs ---
+	-----------------
+
+		-----------------------
+		--- The Jade Forest ---
+		-----------------------
+
+	AtlasLoot_Data["RaresMOPMobsJadeForest"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Aethis"], ""};
+				{ 3, 87649, "", "=q4=Pool-Stirrer", "=ds=#h1#, #w6#"};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ferdinand"], ""};
+				{ 6, 87652, "", "=q4=Ook-Breaker Mace", "=ds=#h1#, #w6#"};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Kor'nas Nightsavage"], ""};
+				{ 9, 87642, "", "=q4=Darkstaff of Annihilation", "=ds=#w9#"};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Krax'ik"], ""};
+				{ 12, 87646, "", "=q4=Needlefang Throatripper", "=ds=#h1#, #w1#"};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Mister Ferocious"], ""};
+				{ 18, 87652, "", "=q4=Ook-Breaker Mace", "=ds=#h1#, #w6#"};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Morgrinn Crackfang"], ""};
+				{ 21, 87643, "", "=q4=Fangcracker Battlemace", "=ds=#h2#, #w6#"};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Sarnak"], ""};
+				{ 24, 87650, "", "=q4=Fishsticker Crossbow", "=ds=#w3#"};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Urobi the Walker"], ""};
+				{ 27, 87651, "", "=q4=Pathwalker Greatstaff", "=ds=#w9#"};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87586, "", "=q3=Forest Trickster's Leggings", "=ds=#s11#, #a1#"};
+				{ 4, 87590, "", "=q3=Jade Heart Leggings", "=ds=#s11#, #a1#"};
+				{ 5, 87587, "", "=q3=Orchard Tender's Leggings", "=ds=#s11#, #a2#"};
+				{ 6, 87591, "", "=q3=Tian Trainee Leggings", "=ds=#s11#, #a2#"};
+				{ 7, 87592, "", "=q3=Grookin' Grookin' Trousers", "=ds=#s11#, #a3#"};
+				{ 8, 87588, "", "=q3=Leggings of Spiritsong Melody", "=ds=#s11#, #a3#"};
+				{ 9, 87593, "", "=q3=Gan Shi Warlord Legguards", "=ds=#s11#, #a4#"};
+				{ 10, 87594, "", "=q3=Leggings of Forgotten War", "=ds=#s11#, #a4#"};
+				{ 11, 87589, "", "=q3=Leggings of Fractured Reflection", "=ds=#s11#, #a4#"};
+				{ 12, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(806),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}	
+
+		--------------------------------
+		--- Valley of the Four Winds ---
+		--------------------------------
+
+	AtlasLoot_Data["RaresMOPMobsValleyFourWinds"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Blackhoof"], ""};
+				{ 3, 86565, "", "=q3=Battle Horn", "=ds="};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Bonobos"], ""};
+				{ 6, 86591, "", "=q3=Magic Banana", "=ds="};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Jonn-Dar"], ""};
+				{ 9, 86572, "", "=q3=Terracotta Fragment", "=ds=#s14#"};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Nal'lak the Ripper"], ""};
+				{ 12, 86576, "", "=q3=Dynasty of Steel", "=ds=#s14#"};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Nasra Spothide"], ""};
+				{ 18, 86587, "", "=q3=Seed of Tranquil Growth", "=ds=#s14#"};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Salyin Warscout"], ""};
+				{ 21, 86583, "", "=q3=Salyin Battle Banner", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Sele'na"], ""};
+				{ 24, 86580, "", "=q3=Overgrown Lilypad", "=ds="};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Sulik'shor"], ""};
+				{ 27, 86569, "", "=q3=Crystal of Insanity", "=ds="};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87597, "", "=q3=Gloves of Congealed Mist", "=ds=#s9#, #a1#"};
+				{ 4, 87598, "", "=q3=Monstrous Silk Gloves", "=ds=#s9#, #a1#"};
+				{ 5, 87595, "", "=q3=Gloves of Burrow Spelunking", "=ds=#s9#, #a2#"};
+				{ 6, 87599, "", "=q3=Grower's Gloves", "=ds=#s9#, #a2#"};
+				{ 7, 87600, "", "=q3=Marshsong Gloves", "=ds=#s9#, #a3#"};
+				{ 8, 87596, "", "=q3=Mudmug's Mitts", "=ds=#s9#, #a3#"};
+				{ 9, 87602, "", "=q3=Grain Warden's Gauntlets", "=ds=#s9#, #a4#"};
+				{ 10, 87603, "", "=q3=Thunderfall Gauntlets", "=ds=#s9#, #a4#"};
+				{ 11, 87601, "", "=q3=Plough Driving Grips", "=ds=#s9#, #a4#"};
+				{ 12, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(807),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		-----------------------
+		--- Krasarang Wilds ---
+		-----------------------
+
+	AtlasLoot_Data["RaresMOPMobsKrasarangWilds"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Arness the Scale"], ""};
+				{ 3, 90723, "", "=q4=Arness's Scaled Leggings", "=ds=#s11#, #a3#"};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Cournith Waterstrider"], ""};
+				{ 6, 90721, "", "=q4=Courinth Waterstrider's Silken Finery", "=ds=#s11#, #a1#"};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Gaarn the Toxic"], ""};
+				{ 9, 90725, "", "=q4=Gaarn's Leggings of Infestation", "=ds=#s11#, #a1#"};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Go-Kan"], ""};
+				{ 12, 90719, "", "=q4=Go-Kan's Golden Trousers", "=ds=#s11#, #a3#"};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Qu'nas"], ""};
+				{ 18, 90717, "", "=q4=Qu'nas' Apocryphal Legplates", "=ds=#s11#, #a4#"};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ruun Ghostpaw"], ""};
+				{ 21, 90720, "", "=q4=Silent Leggings of the Ghostpaw", "=ds=#s11#, #a2#"};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Spriggin"], ""};
+				{ 24, 90724, "", "=q4=Spriggin's Sproggin' Leggin'", "=ds=#s11#, #a2#"};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Torik-Ethis"], ""};
+				{ 27, 90718, "", "=q4=Torik-Ethis' Bloodied Legguards", "=ds=#s11#, #a4#"};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87604, "", "=q3=Beachcomber's Hat", "=ds=#s1#, #a1#"};
+				{ 4, 87608, "", "=q3=Korjan Mystic's Hood", "=ds=#s1#, #a1#"};
+				{ 5, 87609, "", "=q3=Brushstalker Helm", "=ds=#s1#, #a2#"};
+				{ 6, 87605, "", "=q3=Crest of the Red Crane", "=ds=#s1#, #a2#"};
+				{ 7, 87610, "", "=q3=Deepwild Hunting Helm", "=ds=#s1#, #a3#"};
+				{ 8, 87606, "", "=q3=Tidehunter Helm", "=ds=#s1#, #a3#"};
+				{ 9, 87612, "", "=q3=Ancient Krasari Helm", "=ds=#s1#, #a4#"};
+				{ 10, 87611, "", "=q3=Shen-zin Shell Headguard", "=ds=#s1#, #a4#"};
+				{ 11, 87607, "", "=q3=Unearthed Dojani Headcover", "=ds=#s1#, #a4#"};
+				{ 12, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(857),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		----------------------
+		--- Kun-Lai Summit ---
+		----------------------
+
+	AtlasLoot_Data["RaresMOPMobsKunLaiSummit"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ahone the Wanderer"], ""};
+				{ 3, 86588, "", "=q3=Pandaren Firework Launcher", "=ds="};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Borginn Darkfist"], ""};
+				{ 6, 86570, "", "=q3=Crate of Kidnapped Puppies", "=ds=#s14#"};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Havak"], ""};
+				{ 9, 86573, "", "=q3=Shard of Archstone", "=ds=#e25#"};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Korda Torros"], ""};
+				{ 12, 86566, "", "=q3=Forager's Gloves", "=ds=#s9#, #a1#"};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Nessos the Oracle"], ""};
+				{ 18, 86584, "", "=q3=Hardened Shell", "=ds="};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Norlaxx the Outcast"], ""};
+				{ 21, 86581, "", "=q3=Farwater Conch", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Scritch"], ""};
+				{ 24, 86592, "", "=q3=Hozen Peace Pipe", "=ds="};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ski'thik"], ""};
+				{ 27, 86577, "", "=q3=Rod of Ambershaping", "=ds="};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87616, "", "=q3=Mountain Trailblazer's Cuffs", "=ds=#s8#, #a1#"};
+				{ 4, 87615, "", "=q3=Yakwasher's Bracers", "=ds=#s8#, #a1#"};
+				{ 5, 87617, "", "=q3=Bracers of the Serene Mountaintop", "=ds=#s8#, #a2#"};
+				{ 6, 87613, "", "=q3=Frozen Zandalari Bracer", "=ds=#s8#, #a2#"};
+				{ 7, 87618, "", "=q3=Ice Encrusted Bracer", "=ds=#s8#, #a3#"};
+				{ 8, 87614, "", "=q3=Kafa Picker's Bracers", "=ds=#s8#, #a3#"};
+				{ 9, 87620, "", "=q3=Bracers of the Frozen Summit", "=ds=#s8#, #a4#"};
+				{ 10, 87619, "", "=q3=Terracotta Guardian's Bracer", "=ds=#s8#, #a4#"};
+				{ 11, 87621, "", "=q3=Wristguards of Great Fortune", "=ds=#s8#, #a4#"};
+				{ 12, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(809),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		------------------------
+		--- Townlong Steppes ---
+		------------------------
+
+	AtlasLoot_Data["RaresMOPMobsTownlongSteppes"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Eshelon"], ""};
+				{ 3, 87222, "", "=q3=Big Bag of Linens", "=ds="};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Kah'tir"], ""};
+				{ 6, 87218, "", "=q4=Big Bag of Arms", "=ds="};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Lith'ik the Stalker"], ""};
+				{ 9, 87221, "", "=q3=Big Bag of Jewels", "=ds="};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Lon the Bull"], ""};
+				{ 12, 87219, "", "=q3=Big Bag of Herbs", "=ds="};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Norlaxx"], ""};
+				{ 18, 87220, "", "=q3=Big Bag of Mysteries", "=ds="};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Siltriss the Sharpener"], ""};
+				{ 21, 87223, "", "=q3=Big Bag of Skins", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["The Yowler"], ""};
+				{ 24, 87225, "", "=q3=Big Bag of Food", "=ds="};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Yul Wildpaw"], ""};
+				{ 27, 87224, "", "=q3=Big Bag of Wonders", "=ds="};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87625, "", "=q3=Congealed Mist Amulet", "=ds=#s2#"};
+				{ 4, 87623, "", "=q3=Razor-Sharp Chitin Choker", "=ds=#s2#"};
+				{ 5, 87626, "", "=q3=Suna's Shattered Locket", "=ds=#s2#"};
+				{ 6, 87624, "", "=q3=Yaungol Mist-Shaman's Amulet", "=ds=#s2#"};
+				{ 7, 87622, "", "=q3=Yoke of Niuzao", "=ds=#s2#"};
+				{ 8, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(810),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		--------------------
+		--- Dread Wastes ---
+		--------------------
+
+	AtlasLoot_Data["RaresMOPMobsDreadWastes"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ai-Li Skymirror"], ""};
+				{ 3, 86589, "", "=q3=Ai-Li's Skymirror", "=ds=#e25#"};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Dak the Breaker"], ""};
+				{ 6, 86567, "", "=q3=Yaungol Wind Chime", "=ds=#s14#"};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Gar'lok"], ""};
+				{ 9, 86578, "", "=q3=Eternal Warrior's Sigil", "=ds="};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ik-Ik the Nimble"], ""};
+				{ 12, 86593, "", "=q3=Hozen Beach Ball", "=ds=#e25#"};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Karr the Darkener"], ""};
+				{ 18, 86564, "", "=q3=Imbued Jade Fragment", "=ds=#e13#"};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Krol the Blade"], ""};
+				{ 21, 86574, "", "=q3=Elixir of Ancient Knowledge", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Nalash Verdantis"], ""};
+				{ 24, 86563, "", "=q3=Hollow Reed", "=ds=#e13#"};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Omnis Grinlok"], ""};
+				{ 27, 86585, "", "=q3=Golden Fleece", "=ds=#s14#"};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87635, "", "=q3=Amber-Starched Robes", "=ds=#s5#, #a1#"};
+				{ 4, 87634, "", "=q3=Mazu's Robe", "=ds=#s5#, #a1#"};
+				{ 5, 87631, "", "=q3=Jiao-Skin Tunic", "=ds=#s5#, #a2#"};
+				{ 6, 87630, "", "=q3=Chestpiece of Twinkling Stars", "=ds=#s5#, #a3#"};
+				{ 7, 87632, "", "=q3=Fearsworn Chestpiece", "=ds=#s5#, #a3#"};
+				{ 8, 87629, "", "=q3=Chestplate of Manifest Dread", "=ds=#s5#, #a4#"};
+				{ 9, 87627, "", "=q3=Kunchong Carapace Chestguard", "=ds=#s5#, #a4#"};
+				{ 10, 87628, "", "=q3=Spinebreaker Chestpiece", "=ds=#s5#, #a4#"};
+				{ 11, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(858),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		--------------------------------
+		--- Vale of Eternal Blossoms ---
+		--------------------------------
+
+	AtlasLoot_Data["RaresMOPMobsValeOfEternalBlossoms"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Ai-Ran the Shifting Cloud"], ""};
+				{ 3, 86590, "", "=q3=Essence of the Breeze", "=ds="};
+				{ 5, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Kal'tik the Blight"], ""};
+				{ 6, 86579, "", "=q3=Bottled Tornado", "=ds=#s14#"};
+				{ 8, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Kang the Soul Thief"], ""};
+				{ 9, 86571, "", "=q3=Kang's Bindstone", "=ds="};
+				{ 11, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Major Nanners"], ""};
+				{ 12, 86594, "", "=q3=Helpful Wikky's Whistle", "=ds="};
+				{ 17, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Moldo One-Eye"], ""};
+				{ 18, 86586, "", "=q3=Panflute of Pandaria", "=ds="};
+				{ 20, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Sahn Tidehunter"], ""};
+				{ 21, 86582, "", "=q3=Aqua Jewel", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Urgolax"], ""};
+				{ 24, 86575, "", "=q3=Chalice of Secrets", "=ds="};
+				{ 26, 0, "inv_box_04", "=q6="..AtlasLoot_IngameLocales["Yorik Sharpeye"], ""};
+				{ 27, 86568, "", "=q3=Mr. Smite's Brass Compass", "=ds=#e25#"};
+			};
+			{
+				{ 2, 0, "inv_box_04", "=q6="..AL["Shared Zone Loot"], ""};
+				{ 3, 87638, "", "=q3=Cloak of Tranquil Clouds", "=ds=#s4#"};
+				{ 4, 87636, "", "=q3=Cloak of the Forgotten Emperor", "=ds=#s4#"};
+				{ 5, 87637, "", "=q3=Jade Harbinger's Cloak", "=ds=#s4#"};
+				{ 6, 87640, "", "=q3=Softfoot's Drape", "=ds=#s4#"};
+				{ 7, 87639, "", "=q3=Tattered Guo-Lai Dynasty Cloak", "=ds=#s4#"};
+				{ 8, 87217, "", "=q2=Small Bag of Goods", "=ds="};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(811),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		---------------------
+		--- Miscellaneous ---
+		---------------------
+
+	AtlasLoot_Data["RaresMOPMobsMisc"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..BabbleRare["Fixxul Lonelyheart"], "=q2="..AtlasLoot:GetMapNameByID(806)};
+				{ 3, 90078, "", "=q2=Cracked Talisman", "=ds="};
+				{ 5, 0, "inv_box_04", "=q6="..BabbleRare["Lorbu Sadsummon"], "=q2="..AtlasLoot:GetMapNameByID(806)};
+				{ 6, 90078, "", "=q2=Cracked Talisman", "=ds="};
+				{ 8, 0, "inv_box_04", "=q6="..BabbleRare["Martar the Not-So-Smart"], "=q2="..AtlasLoot:GetMapNameByID(806)};
+				{ 9, 87780, "", "=q3=Martar's Magnifying Glass", "=ds=#s14#"};
+				{ 11, 0, "inv_box_04", "=q6="..BabbleRare["Huggalon the Heart Watcher"], "=q2="..AtlasLoot:GetMapNameByID(810)};
+				{ 12, 90067, "", "=q3=B. F. F. Necklace", "=ds="};
+				{ 14, 0, "inv_box_04", "=q6="..BabbleRare["Scotty"], "=q2="..AtlasLoot:GetMapNameByID(810)};
+				{ 15, 89373, "", "=q2=Scotty's Lucky Coin", "=ds=#e25#"};
+				{ 17, 0, "inv_box_04", "=q6="..BabbleRare["Alani"], "=q2="..AtlasLoot:GetMapNameByID(811)};
+				{ 18, 90655, "", "=q4=Reins of the Thundering Ruby Cloud Serpent", "=ds=#e12#"};
+				{ 20, 0, "inv_box_04", "=q6="..BabbleRare["Sungraze Behemoth"], "=q2="..AtlasLoot:GetMapNameByID(807)};
+				{ 21, 89682, "", "=q2=Oddly-Shaped Horn", "=ds=#e12#"};
+				{ 23, 0, "inv_box_04", "=q6="..BabbleRare["Zhing"], "=q2="..AtlasLoot:GetMapNameByID(809)};
+				{ 24, 89697, "", "=q2=Bag of Kafa Beans", "=ds=#e12#"};
+				{ 26, 0, "inv_box_04", "=q6="..BabbleRare["Pengsong"], "=q2="..AtlasLoot:GetMapNameByID(858)};
+				{ 27, 89770, "", "=q2=Tuft of Yak Fur", "=ds=#e12#"};
+
+			};
+		};
+		info = {
+			name = AL["Misc"],
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		----------------------------
+		--- Clawlord Kril'mandar ---
+		----------------------------
+
+	AtlasLoot_Data["RaresMOPMobsClawlord"] = {
+		["Normal"] = {
+			{
+				{ 2, 0, "inv_box_04", "=q6="..BabbleRare["Clawlord Kril'mandar"], "=q2="..AtlasLoot:GetMapNameByID(857)};
+				{ 3, 90087, "", "=q3=Lobstmourne", "=ds=#h1#, #w13#"};
+				{ 5, 0, "inv_box_04", "=q6="..BabbleRare["Akkalou"], "=q2="..AtlasLoot:GetMapNameByID(806)};
+				{ 6, 90166, "", "=q2=Akkalou's Clamshell", "=ds="};
+				{ 8, 0, "inv_box_04", "=q6="..BabbleRare["Akkalar"], "=q2="..AtlasLoot:GetMapNameByID(806)};
+				{ 9, 90167, "", "=q2=Akkalar's Clamshell", "=ds="};
+				{ 11, 0, "inv_box_04", "=q6="..BabbleRare["Damlak"], "=q2="..AtlasLoot:GetMapNameByID(857)};
+				{ 12, 90169, "", "=q2=Damlak's Clamshell", "=ds="};
+				{ 18, 90172, "", "=q2=Clamshell Band", "=ds=#m27#"};
+				{ 20, 0, "inv_box_04", "=q6="..BabbleRare["Clamstok"], "=q2="..AtlasLoot:GetMapNameByID(858)};
+				{ 21, 90170, "", "=q2=Clamstok's Clamshell", "=ds="};
+				{ 23, 0, "inv_box_04", "=q6="..BabbleRare["Kishak"], "=q2="..AtlasLoot:GetMapNameByID(809)};
+				{ 24, 90168, "", "=q2=Kishak's Clamshell", "=ds="};
+				{ 26, 0, "inv_box_04", "=q6="..BabbleRare["Odd'nirok"], "=q2="..AtlasLoot:GetMapNameByID(810)};
+				{ 27, 90171, "", "=q2=Odd'nirok's Clamshell", "=ds="};
+			};
+		};
+		info = {
+			name = BabbleRare["Clawlord Kril'mandar"],
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+	------------------
+	--- Rare Items ---
+	------------------
+
+		--------------------------------------------------
+		--- The Jade Forest / Valley of the Four Winds ---
+		--------------------------------------------------
+
+	AtlasLoot_Data["RaresMOPItemsJadeForestValleyoftheFourWinds"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(806), "=ds="};
+				{ 2, 86196, "", "=q3=Ancient Jinyu Staff", "=ds=#w9#"};
+				{ 3, 85777, "", "=q3=Ancient Pandaren Mining Pick", "=ds=#h1#, #w1#"};
+				{ 4, 86198, "", "=q3=Hammer of Ten Thunders", "=ds=#h2#, #w6#"};
+				{ 5, 85776, "", "=q3=Wodin's Mantid Shanker", "=ds=#h1#, #w4#"};
+				{ 7, 0, "inv_box_04", "=q6="..BabbleRare["Jade Warrior Statue"], "=ds="};
+				{ 8, 86199, "", "=q3=Jade Infused Blade", "=ds=#h1#, #w10#"};
+				{ 16, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(807), "=ds="};
+				{ 17, 86218, "", "=q3=Staff of the Hidden Master", "=ds=#w9#"};
+				{ 19, 0, "inv_box_04", "=q6="..BabbleRare["Ghostly Pandaren Craftsman"], "=ds="};
+				{ 20, 85973, "", "=q3=Ancient Pandaren Fishing Charm", "=ds="};
+				{ 22, 0, "inv_box_04", "=q6="..BabbleRare["Ghostly Pandaren Fisherman"], "=ds="};
+				{ 23, 86079, "", "=q0=Ancient Pandaren Woodcutter", "=ds=#h3#, #w1#"};
+				{ 25, 0, "inv_box_04", "=q6="..BabbleRare["Cache of Pilfered Goods"], "=ds="};
+				{ 26, 86113, "", "=q3=Stolen Amulet of Might", "=ds=#s2#"};
+				{ 27, 86112, "", "=q3=Stolen Amulet of Wisdom", "=ds=#s2#"};
+				{ 28, 86111, "", "=q3=Stolen Necklace of Accuracy", "=ds=#s2#"};
+				{ 29, 86114, "", "=q3=Stolen Necklace of Fortitude", "=ds=#s2#"};
+				{ 30, 86110, "", "=q3=Stolen Necklace of Precision", "=ds=#s2#"};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(806).." / "..AtlasLoot:GetMapNameByID(807),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		----------------------------------------
+		--- Krasarang Wilds / Kun-Lai Summit ---
+		----------------------------------------
+
+	AtlasLoot_Data["RaresMOPItemsKrasarangWildsKunLaiSummit"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(857), "=ds="};
+				{ 2, 86124, "", "=q3=Pandaren Fishing Spear", "=ds=#w7#"};
+				{ 4, 0, "inv_box_04", "=q6="..BabbleRare["Barrel of Banana Infused Rum"], "=ds="};
+				{ 5, 87266, "", "=q1=Recipe: Banana Infused Rum", "=ds=#p3#"};
+				{ 7, 0, "inv_box_04", "=q6="..BabbleRare["Equipment Locker"], "=ds="};
+				{ 8, 86117, "", "=q3=Seafarer's Treads of Precision", "=ds=#s12#, #a1#"};
+				{ 9, 86118, "", "=q3=Seafaring Advisor's Slippers", "=ds=#s12#, #a1#"};
+				{ 10, 86119, "", "=q3=Seafarer's Boots of Meditation", "=ds=#s12#, #a2#"};
+				{ 11, 86115, "", "=q3=Swashbuckling Boots", "=ds=#s12#, #a2#"};
+				{ 12, 86116, "", "=q3=Agile Seafarer's Jackboots", "=ds=#s12#, #a3#"};
+				{ 13, 86120, "", "=q3=Seafaring Sabatons of Meditation", "=ds=#s12#, #a3#"};
+				{ 14, 86122, "", "=q3=Plankwalking Greaves", "=ds=#s12#, #a4#"};
+				{ 15, 86123, "", "=q3=Seafarer's Sturdy Boots", "=ds=#s12#, #a4#"};
+				{ 16, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(809), "=ds="};
+				{ 17, 86394, "", "=q3=Hozen Warrior Spear", "=ds=#w7#"};
+				{ 18, 88723, "", "=q3=Sturdy Yaungol Spear", "=ds=#w7#"};
+				{ 19, 86393, "", "=q1=Tablet of Ren Yun", "=ds=#p3#"};
+				{ 21, 0, "inv_box_04", "=q6="..BabbleRare["Frozen Trail Packer"], "=ds="};
+				{ 22, 86125, "", "=q3=Kafa Press", "=ds="};
+				{ 24, 0, "inv_box_04", "=q6="..BabbleRare["Sprite's Cloth Chest"], "=ds="};
+				{ 25, 86223, "", "=q3=Agile Sprite Cloak", "=ds=#s4#"};
+				{ 26, 86222, "", "=q3=Precise Sprite Cloak", "=ds=#s4#"};
+				{ 27, 86224, "", "=q3=Steadfast Sprite Cape", "=ds=#s4#"};
+				{ 28, 86225, "", "=q3=Strong Sprite Cloak", "=ds=#s4#"};
+				{ 29, 86221, "", "=q3=Wise Sprite Cloak", "=ds=#s4#"};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(857).." / "..AtlasLoot:GetMapNameByID(809),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
+
+		---------------------------------------
+		--- Townlong Steppes / Dread Wastes ---
+		---------------------------------------
+
+	AtlasLoot_Data["RaresMOPItemsTownlongSteppesDreadWastes"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(810), "=ds="};
+				{ 2, 86518, "", "=q3=Yaungol Fire Carrier", "=ds=#h1#, #w6#"};
+				{ 16, 0, "inv_box_04", "=q6="..AtlasLoot:GetMapNameByID(858), "=ds="};
+				{ 17, 86527, "", "=q3=Blade of the Poisoned Mind", "=ds=#h3#, #w10#"};
+				{ 18, 86522, "", "=q3=Blade of the Prime", "=ds=#h1#, #w10#"};
+				{ 19, 86525, "", "=q3=Bloodsoaked Chitin Fragment", "=ds=#s14#"};
+				{ 20, 86524, "", "=q3=Dissector's Staff of Mutation", "=ds=#w9#"};
+				{ 21, 86521, "", "=q3=Lucid Amulet of the Agile Mind", "=ds=#s2#"};
+				{ 22, 86520, "", "=q3=Malik's Stalwart Spear", "=ds=#w7#"};
+				{ 23, 86523, "", "=q3=Swarming Cleaver of Ka'roz", "=ds=#h2#, #w10#"};
+				{ 24, 86526, "", "=q3=Swarmkeeper's Medallion", "=ds=#s2#"};
+				{ 25, 86519, "", "=q3=Wind-Reaver's Dagger of Quick Strikes", "=ds=#h1#, #w4#"};
+				{ 27, 0, "inv_box_04", "=q6="..BabbleRare["Glinting Rapana Whelk"], "=ds="};
+				{ 28, 86529, "", "=q3=Manipulator's Talisman", "=ds=#s14#"};
+			};
+		};
+		info = {
+			name = AtlasLoot:GetMapNameByID(810).." / "..AtlasLoot:GetMapNameByID(858),
+			module = moduleName, menu = "RAREMENU",
+		};
+	}
 
 	----------------
 	--- Factions ---
@@ -2124,25 +2751,24 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_anglers", "=q6=#r2#", ""};
-				{ 2, 85505, "", "=q2=Recipe: Krasarang Fritters", "=ds=#p3# (525)"};
-				{ 3, 85502, "", "=q2=Recipe: Viseclaw Soup", "=ds=#p3# (525)"};
+				{ 2, 85505, "", "=q2=Recipe: Krasarang Fritters", "=ds=#p3# (525)", "=ds=5 #gold#"};
+				{ 3, 85502, "", "=q2=Recipe: Viseclaw Soup", "=ds=#p3# (525)", "=ds=5 #gold#"};
 				{ 5, 0, "achievement_faction_anglers", "=q6=#r3#", ""};
-				{ 6, 85447, "", "=q3=Tiny Goldfish", "=ds=#e13#"};
-				{ 7, 84660, "", "=q2=Pandaren Fishing Pole", "=ds=#e20#"};
+				{ 6, 85447, "", "=q3=Tiny Goldfish", "=ds=#e13#", "=ds=250 #gold#"};
+				{ 7, 84660, "", "=q2=Pandaren Fishing Pole", "=ds=#e20#", "=ds=25 #gold#"};
 				{ 9, 0, "achievement_faction_anglers", "=q6=#r4#", ""};
-				{ 10, 85500, "", "=q3=Anglers Fishing Raft", "=ds=#p24# (525)"};
-				{ 11, 84661, "", "=q3=Dragon Fishing Pole", "=ds=#e20#"};
-				{ 12, 88535, "", "=q3=Sharpened Tuskarr Spear", "=ds=#h3#"};
+				{ 10, 85500, "", "=q3=Anglers Fishing Raft", "=ds=#p24# (525)", "=ds=1,000 #gold#"};
+				{ 11, 84661, "", "=q3=Dragon Fishing Pole", "=ds=#e20#", "=ds=500 #gold#"};
+				{ 12, 88535, "", "=q3=Sharpened Tuskarr Spear", "=ds=#h3#", "=ds=1,500 #gold#"};
 				{ 16, 0, "achievement_faction_anglers", "=q6=#r5#", ""};
-				{ 17, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e12#"};
-				{ 18, 87791, "", "=q4=Reins of the Crimson Water Strider", "=ds=#e12#"};
-				{ 19, 87794, "", "=q4=Reins of the Golden Water Strider", "=ds=#e12#"};
-				{ 20, 87793, "", "=q4=Reins of the Jade Water Strider", "=ds=#e12#"};
-				{ 21, 87792, "", "=q4=Reins of the Orange Water Strider", "=ds=#e12#"};
-				{ 22, 89401, "", "=q3=Anglers Tabard", "=ds=#s7#"};
-				{ 24, 0, "inv_box_04", "=q6=Nat Pagle", ""};
-				{ 25, 88563, "", "=q7=Nat's Fishing Journal", "=ds=#r4#"};
-				{ 26, 88710, "", "=q4=Nat's Hat", "=ds=#r5#"};
+				{ 17, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e12#", "=ds=5,000 #gold#"};
+				{ 18, 89401, "", "=q3=Anglers Tabard", "=ds=#s7#", "=ds=10 #gold#"};
+				{ 20, 0, "inv_fishingpole_01", "=q6="..BabbleFaction["Nat Pagle"], "=q5=#r4#"};
+				{ 21, 88563, "", "=q7=Nat's Fishing Journal", "=ds=#m2#", "=ds=1,000 #gold#"};
+				{ 23, 0, "inv_fishingpole_01", "=q6="..BabbleFaction["Nat Pagle"], "=q5=#r5#"};
+				{ 24, 88710, "", "=q4=Nat's Hat", "=ds=#s1#", "=ds=250 #gold#"};
+				{ 26, 0, "inv_fishingpole_01", "=q6="..BabbleFaction["Nat Pagle"], "=q5="..BabbleFaction["Best Friend"]};
+				{ 27, 86596, "", "=q3=Nat's Fishing Chair", "=ds="};
 			};
 		};
 		info = {
@@ -2159,16 +2785,15 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_celestials", "=q6=#r3#", ""};
-				{ 2, 89124, "", "=q2=Celestial Offering", "=ds=#m20#"};
+				{ 2, 89124, "", "=q2=Celestial Offering", "=ds=#m20#", "=ds=100 #gold#"};
 				{ 4, 0, "achievement_faction_celestials", "=q6=#r4#", ""};
-				{ 5, 84561, "", "=q3=Formula: Enchant Bracer - Exceptional Strength", "=ds=#p4# (600)"};
-				{ 6, 84557, "", "=q3=Formula: Enchant Bracer - Greater Agility", "=ds=#p4# (600)"};
-				{ 7, 84559, "", "=q3=Formula: Enchant Bracer - Super Intellect", "=ds=#p4# (600)"};
-				{ 9, 0, "achievement_faction_celestials", "=q6=#r5#", ""};
-				{ 10, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#"};
-				{ 11, 90655, "", "=q4=Reins of the Thundering Ruby Cloud Serpent", "=ds=#e27#"};
-				{ 12, 89799, "", "=q3=August Celestials Tabard", "=ds=#s7#"};
-				{ 13, 86377, "", "=q1=Pattern: Royal Satchel", "=ds=#p8# (600)"};
+				{ 5, 84561, "", "=q3=Formula: Enchant Bracer - Exceptional Strength", "=ds=#p4# (600)", "=ds=40 #gold#"};
+				{ 6, 84557, "", "=q3=Formula: Enchant Bracer - Greater Agility", "=ds=#p4# (600)", "=ds=40 #gold#"};
+				{ 7, 84559, "", "=q3=Formula: Enchant Bracer - Super Intellect", "=ds=#p4# (600)", "=ds=40 #gold#"};
+				{ 16, 0, "achievement_faction_celestials", "=q6=#r5#", ""};
+				{ 17, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#", "=ds=10,000 #gold#"};
+				{ 18, 89799, "", "=q3=August Celestials Tabard", "=ds=#s7#", "=ds=10 #gold#"};
+				{ 19, 86377, "", "=q1=Pattern: Royal Satchel", "=ds=#p8# (600)", "=ds=50 #gold#"};
 			};
 		};
 		info = {
@@ -2185,28 +2810,50 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_goldenlotus", "=q6=#r3#", ""};
-				{ 2, 86235, "", "=q1=Pattern: Angerhide Leg Armor", "=ds=#p7# (575)"};
-				{ 3, 86276, "", "=q1=Pattern: Ironscale Leg Armor", "=ds=#p7# (575)"};
-				{ 4, 86295, "", "=q1=Pattern: Shadowleather Leg Armor", "=ds=#p7# (575)"};
-				{ 5, 86274, "", "=q1=Pattern: Greyshadow Chestguard", "=ds=#p7# (600)"};
-				{ 6, 86309, "", "=q1=Pattern: Wildblood Vest", "=ds=#p7# (600)"};
-				{ 7, 86275, "", "=q1=Pattern: Greyshadow Gloves", "=ds=#p7# (600)"};
-				{ 8, 86308, "", "=q1=Pattern: Wildblood Gloves", "=ds=#p7# (600)"};
-				{ 9, 86237, "", "=q1=Pattern: Chestguard of Earthen Harmony", "=ds=#p7# (600)"};
-				{ 10, 86278, "", "=q1=Pattern: Lifekeeper's Robe", "=ds=#p7# (600)"};
-				{ 11, 86273, "", "=q1=Pattern: Gloves of Earthen Harmony", "=ds=#p7# (600)"};
-				{ 12, 86277, "", "=q1=Pattern: Lifekeeper's Gloves", "=ds=#p7# (600)"};
-				{ 13, 86376, "", "=q1=Pattern: Greater Cerulean Spellthread", "=ds=#p8# (575)"};
-				{ 14, 86375, "", "=q1=Pattern: Greater Pearlescent Spellthread", "=ds=#p8# (575)"};
-				{ 15, 86370, "", "=q1=Pattern: Robes of Creation", "=ds=#p8# (600)"};
-				{ 17, 86368, "", "=q1=Pattern: Spelltwister's Grand Robe", "=ds=#p8# (600)"};
-				{ 18, 86371, "", "=q1=Pattern: Gloves of Creation", "=ds=#p8# (600)"};
-				{ 19, 86369, "", "=q1=Pattern: Spelltwister's Gloves", "=ds=#p8# (600)"};
-				{ 21, 0, "achievement_faction_goldenlotus", "=q6=#r5#", ""};
-				{ 22, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#"};
-				{ 23, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#"};
-				{ 24, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#"};
-				{ 25, 89797, "", "=q3=Golden Lotus Tabard", "=ds=#s7#"};
+				{ 2, 90615, "", "=q3=Burning Mark of the Golden Lotus", "=ds=#s13#", "=q1=#m4#: #QUESTID:30639#"};
+				{ 3, 90614, "", "=q3=Delicate Mark of the Golden Lotus", "=ds=#s13#", "=q1=#m4#: #QUESTID:30639#"};
+				{ 4, 90618, "", "=q3=Durable Mark of the Golden Lotus", "=ds=#s13#", "=q1=#m4#: #QUESTID:30639#"};
+				{ 5, 90617, "", "=q3=Ferocious Mark of the Golden Lotus", "=ds=#s13#", "=q1=#m4#: #QUESTID:30639#"};
+				{ 6, 90616, "", "=q3=Mending Mark of the Golden Lotus", "=ds=#s13#", "=q1=#m4#: #QUESTID:30639#"};
+				{ 7, 86235, "", "=q1=Pattern: Angerhide Leg Armor", "=ds=#p7# (575)", "=ds=25 #gold#"};
+				{ 8, 86276, "", "=q1=Pattern: Ironscale Leg Armor", "=ds=#p7# (575)", "=ds=25 #gold#"};
+				{ 9, 86295, "", "=q1=Pattern: Shadowleather Leg Armor", "=ds=#p7# (575)", "=ds=25 #gold#"};
+				{ 10, 86237, "", "=q1=Pattern: Chestguard of Earthen Harmony", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 11, 86273, "", "=q1=Pattern: Gloves of Earthen Harmony", "=ds=#p7# (600)", "=ds=50 #gold#"};	
+				{ 12, 86274, "", "=q1=Pattern: Greyshadow Chestguard", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 13, 86275, "", "=q1=Pattern: Greyshadow Gloves", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 14, 86278, "", "=q1=Pattern: Lifekeeper's Robe", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 15, 86277, "", "=q1=Pattern: Lifekeeper's Gloves", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 16, 86309, "", "=q1=Pattern: Wildblood Vest", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 17, 86308, "", "=q1=Pattern: Wildblood Gloves", "=ds=#p7# (600)", "=ds=50 #gold#"};
+				{ 18, 86376, "", "=q1=Pattern: Greater Cerulean Spellthread", "=ds=#p8# (575)", "=ds=25 #gold#"};
+				{ 19, 86375, "", "=q1=Pattern: Greater Pearlescent Spellthread", "=ds=#p8# (575)", "=ds=25 #gold#"};
+				{ 20, 86370, "", "=q1=Pattern: Robes of Creation", "=ds=#p8# (600)", "=ds=50 #gold#"};
+				{ 21, 86371, "", "=q1=Pattern: Gloves of Creation", "=ds=#p8# (600)", "=ds=50 #gold#"};
+				{ 22, 86368, "", "=q1=Pattern: Spelltwister's Grand Robe", "=ds=#p8# (600)", "=ds=50 #gold#"};
+				{ 23, 86369, "", "=q1=Pattern: Spelltwister's Gloves", "=ds=#p8# (600)", "=ds=50 #gold#"};
+			};
+			{
+				{ 1, 0, "achievement_faction_goldenlotus", "=q6=#r4#", ""};
+				{ 2, 90607, "", "=q3=Burning Robes of the Golden Lotus", "=ds=#s5#, #a1#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 3, 90609, "", "=q3=Mending Robes of the Golden Lotus", "=ds=#s5#, #a1#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 4, 90597, "", "=q3=Delicate Chestguard of the Golden Lotus", "=ds=#s5#, #a2#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 5, 90599, "", "=q3=Warming Chestguard of the Golden Lotus", "=ds=#s5#, #a2#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 6, 90598, "", "=q3=Crackling Chain of the Golden Lotus", "=ds=#s5#, #a3#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 7, 90602, "", "=q3=Deadeye Chain of the Golden Lotus", "=ds=#s5#, #a3#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 8, 90601, "", "=q3=Bonded Plate of the Golden Lotus", "=ds=#s5#, #a4#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 9, 90603, "", "=q3=Durable Plate of the Golden Lotus", "=ds=#s5#, #a4#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 10, 90600, "", "=q3=Ferocious Plate of the Golden Lotus", "=ds=#s5#, #a4#", "=q1=#m4#: #QUESTID:30642#"};
+				{ 16, 0, "achievement_faction_goldenlotus", "=q6=#r5#", ""};
+				{ 17, 90596, "", "=q4=Burning Necklace of the Golden Lotus", "=ds=#s2#", "=q1=#m4#: #QUESTID:30646#"};
+				{ 18, 90593, "", "=q4=Delicate Necklace of the Golden Lotus", "=ds=#s2#", "=q1=#m4#: #QUESTID:30646#"};
+				{ 19, 90594, "", "=q4=Durable Necklace of the Golden Lotus", "=ds=#s2#", "=q1=#m4#: #QUESTID:30646#"};
+				{ 20, 90592, "", "=q4=Ferocious Necklace of the Golden Lotus", "=ds=#s2#", "=q1=#m4#: #QUESTID:30646#"};
+				{ 21, 90595, "", "=q4=Mending Necklace of the Golden Lotus", "=ds=#s2#", "=q1=#m4#: #QUESTID:30646#"};
+				{ 22, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 23, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#", "=ds=2,500 #gold#"};
+				{ 24, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#", "=ds=1,500 #gold#"};
+				{ 25, 89797, "", "=q3=Golden Lotus Tabard", "=ds=#s7#", "=ds=10 #gold#"};
 			};
 		};
 		info = {
@@ -2223,33 +2870,40 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_klaxxi", "=q6=#r3#", ""};
-				{ 2, 89230, "", "=q1=Restorative Amber", "=ds=#e18#", "10 #gold#"};
-				{ 3, 90531, "", "=q1=Plans: Ghost Iron Shield Spike", "=ds=#p2# (540)", "20 #kyparite#"};
-				{ 4, 90532, "", "=q1=Plans: Living Steel Weapon Chain", "=ds=#p2# (540)", "20 #kyparite#"};
-				{ 5, 84197, "", "=q1=Plans: Masterwork Forgewire Axe", "=ds=#p2# (575)", "20 #kyparite#"};
-				{ 6, 84198, "", "=q1=Plans: Masterwork Ghost Shard", "=ds=#p2# (575)", "20 #kyparite#"};
-				{ 7, 84200, "", "=q1=Plans: Masterwork Ghost-Forged Blade", "=ds=#p2# (575)", "20 #kyparite#"};
-				{ 8, 84217, "", "=q1=Plans: Masterwork Phantasmal Hammer", "=ds=#p2# (575)", "20 #kyparite#"};
-				{ 9, 84218, "", "=q1=Plans: Masterwork Spiritblade Decimator", "=ds=#p2# (575)", "20 #kyparite#"};
-				{ 10, 83791, "", "=q1=Plans: Breastplate of Ancient Steel", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 11, 83792, "", "=q1=Plans: Gauntlets of Ancient Steel", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 12, 83787, "", "=q1=Plans: Ghost Reaver's Breastplate", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 13, 83788, "", "=q1=Plans: Ghost Reaver's Gauntlets", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 14, 84196, "", "=q1=Plans: Living Steel Belt Buckle", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 15, 83789, "", "=q1=Plans: Living Steel Breastplate", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 16, 83790, "", "=q1=Plans: Living Steel Gauntlets", "=ds=#p2# (600)", "20 #kyparite#"};
-				{ 18, 0, "achievement_faction_klaxxi", "=q6=#r5#", ""};
-				{ 19, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#", "10,000 #gold#"};
-				{ 20, 89393, "", "=q3=Amber Slicer of Klaxxi-vess", "=ds=#h1#, #w4#", "169 #gold# 8 #silver# 72 #copper#"};
-				{ 21, 89392, "", "=q3=Amber Spine of Klaxxi-vess", "=ds=#h1#, #w4#", "168 #gold# 47 #silver# 70 #copper#"};
-				{ 22, 89396, "", "=q3=Amber Espada of Klaxxi-vess", "=ds=#h1#, #w10#", "170 #gold# 90 #silver# 16 #copper#"};
-				{ 23, 89397, "", "=q3=Amber Saber of Klaxxi-vess", "=ds=#h1#, #w10#", "159 #gold# 37 #silver# 18 #copper#"};
-				{ 24, 89398, "", "=q3=Amber Flammard of Klaxxi-vess", "=ds=#h2#, #w10#", "199 #gold# 97 #silver# 76 #copper#"};
-				{ 25, 89400, "", "=q3=Amber Sledge of Klaxxi-vess", "=ds=#h1#, #w6#", "161 #gold# 18 #silver# 62 #copper#"};
-				{ 26, 89394, "", "=q3=Amber Spear of Klaxxi-vess", "=ds=#w7#", "212 #gold# 12 #silver# 20 #copper#"};
-				{ 27, 89395, "", "=q3=Amber Scythe of Klaxxi-vess", "=ds=#w9#", "212 #gold# 88 #silver# 48 #copper#"};
-				{ 28, 89399, "", "=q3=Amber Sprayer of Klaxxi-vess", "=ds=#w5#", "120 #gold# 44 #silver# 43 #copper#"};
-				{ 29, 89798, "", "=q3=Klaxxi Tabard", "=ds=#s7#", "10 #gold#"};
+				{ 2, 89230, "", "=q1=Restorative Amber", "=ds=#e18#", "=ds=10 #gold#"};
+				{ 3, 90531, "", "=q1=Plans: Ghost Iron Shield Spike", "=ds=#p2# (540)", "=ds=20 #kyparite#"};
+				{ 4, 90532, "", "=q1=Plans: Living Steel Weapon Chain", "=ds=#p2# (540)", "=ds=20 #kyparite#"};
+				{ 5, 84197, "", "=q1=Plans: Masterwork Forgewire Axe", "=ds=#p2# (575)", "=ds=20 #kyparite#"};
+				{ 6, 84198, "", "=q1=Plans: Masterwork Ghost Shard", "=ds=#p2# (575)", "=ds=20 #kyparite#"};
+				{ 7, 84200, "", "=q1=Plans: Masterwork Ghost-Forged Blade", "=ds=#p2# (575)", "=ds=20 #kyparite#"};
+				{ 8, 84217, "", "=q1=Plans: Masterwork Phantasmal Hammer", "=ds=#p2# (575)", "=ds=20 #kyparite#"};
+				{ 9, 84218, "", "=q1=Plans: Masterwork Spiritblade Decimator", "=ds=#p2# (575)", "=ds=20 #kyparite#"};
+				{ 10, 83791, "", "=q1=Plans: Breastplate of Ancient Steel", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 11, 83792, "", "=q1=Plans: Gauntlets of Ancient Steel", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 12, 83787, "", "=q1=Plans: Ghost Reaver's Breastplate", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 13, 83788, "", "=q1=Plans: Ghost Reaver's Gauntlets", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 14, 84196, "", "=q1=Plans: Living Steel Belt Buckle", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 15, 83789, "", "=q1=Plans: Living Steel Breastplate", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+				{ 16, 83790, "", "=q1=Plans: Living Steel Gauntlets", "=ds=#p2# (600)", "=ds=20 #kyparite#"};
+			};
+			{
+				{ 1, 0, "achievement_faction_klaxxi", "=q6=#r5#", ""};
+				{ 2, 90862, "", "=q4=Seal of the Bloodseeker", "=ds=#s13#", "=q1=#m4#: #QUESTID:31612#"};
+				{ 3, 90859, "", "=q4=Seal of the Lucid", "=ds=#s13#", "=q1=#m4#: #QUESTID:31612#"};
+				{ 4, 90858, "", "=q4=Seal of the Prime", "=ds=#s13#", "=q1=#m4#: #QUESTID:31612#"};
+				{ 5, 90860, "", "=q4=Seal of the Unscathed", "=ds=#s13#", "=q1=#m4#: #QUESTID:31612#"};
+				{ 6, 90861, "", "=q4=Seal of the Windreaver", "=ds=#s13#", "=q1=#m4#: #QUESTID:31612#"};
+				{ 7, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#", "=ds=10,000 #gold#"};
+				{ 8, 89393, "", "=q3=Amber Slicer of Klaxxi-vess", "=ds=#h1#, #w4#", "=ds=169 #gold# 8 #silver# 72 #copper#"};
+				{ 9, 89392, "", "=q3=Amber Spine of Klaxxi-vess", "=ds=#h1#, #w4#", "=ds=168 #gold# 47 #silver# 70 #copper#"};
+				{ 10, 89396, "", "=q3=Amber Espada of Klaxxi-vess", "=ds=#h1#, #w10#", "=ds=170 #gold# 90 #silver# 16 #copper#"};
+				{ 11, 89397, "", "=q3=Amber Saber of Klaxxi-vess", "=ds=#h1#, #w10#", "=ds=159 #gold# 37 #silver# 18 #copper#"};
+				{ 12, 89398, "", "=q3=Amber Flammard of Klaxxi-vess", "=ds=#h2#, #w10#", "=ds=199 #gold# 97 #silver# 76 #copper#"};
+				{ 13, 89400, "", "=q3=Amber Sledge of Klaxxi-vess", "=ds=#h1#, #w6#", "=ds=161 #gold# 18 #silver# 62 #copper#"};
+				{ 14, 89394, "", "=q3=Amber Spear of Klaxxi-vess", "=ds=#w7#", "=ds=212 #gold# 12 #silver# 20 #copper#"};
+				{ 15, 89395, "", "=q3=Amber Scythe of Klaxxi-vess", "=ds=#w9#", "=ds=212 #gold# 88 #silver# 48 #copper#"};
+				{ 16, 89399, "", "=q3=Amber Sprayer of Klaxxi-vess", "=ds=#w5#", "=ds=120 #gold# 44 #silver# 43 #copper#"};
+				{ 17, 89798, "", "=q3=Klaxxi Tabard", "=ds=#s7#", "=ds=10 #gold#"};
 			};
 		};
 		info = {
@@ -2266,8 +2920,8 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_lorewalkers", "=q6=#r5#", ""};
-				{ 2, 89363, "", "=q3=Disc of the Red Flying Cloud", "=ds=#e27#"};
-				{ 3, 89795, "", "=q3=Lorewalkers Tabard", "=ds=#s7#"};
+				{ 2, 89363, "", "=q3=Disc of the Red Flying Cloud", "=ds=#e27#", "=ds=600 #gold#"};
+				{ 3, 89795, "", "=q3=Lorewalkers Tabard", "=ds=#s7#", "=ds=10 #gold#"};
 				{ 4, 87548, "", "=q2=Lorewalker's Lodestone", "=ds=#m20#"};
 				{ 5, 87549, "", "=q2=Lorewalker's Map", "=ds=#m20#"};
 			};
@@ -2286,22 +2940,22 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_serpentriders", "=q6=#r3#", ""};
-				{ 2, 83845, "", "=q1=Design: Jade Panther", "=ds=#p12# (600)"};
-				{ 3, 83830, "", "=q1=Design: Sunstone Panther", "=ds=#p12# (600)"};
+				{ 2, 83845, "", "=q1=Design: Jade Panther", "=ds=#p12# (600)", "=ds=200 #gold#"};
+				{ 3, 83830, "", "=q1=Design: Sunstone Panther", "=ds=#p12# (600)", "=ds=200 #gold#"};
 				{ 5, 0, "achievement_faction_serpentriders", "=q6=#r4#", ""};
-				{ 6, 83931, "", "=q1=Design: Ruby Panther", "=ds=#p12# (600)"};
-				{ 7, 83932, "", "=q1=Design: Sapphire Panther", "=ds=#p12# (600)"};
-				{ 8, 89222, "", "=q1=Cloud Ring", "=ds=#m20#"};
-				{ 9, 89225, "", "=q1=Finish Line", "=ds=#m20#"};
-				{ 10, 89227, "", "=q1=Floating Finish Line", "=ds=#m20#"};
-				{ 11, 89224, "", "=q1=Floating Racing Flag", "=ds=#m20#"};
-				{ 12, 89223, "", "=q1=Racing Flag", "=ds=#m20#"};
+				{ 6, 83931, "", "=q1=Design: Ruby Panther", "=ds=#p12# (600)", "=ds=200 #gold#"};
+				{ 7, 83932, "", "=q1=Design: Sapphire Panther", "=ds=#p12# (600)", "=ds=200 #gold#"};
+				{ 8, 89222, "", "=q1=Cloud Ring", "=ds=#m20#", "=ds=1,000 #gold#"};
+				{ 9, 89225, "", "=q1=Finish Line", "=ds=#m20#", "=ds=100 #gold#"};
+				{ 10, 89227, "", "=q1=Floating Finish Line", "=ds=#m20#", "=ds=100 #gold#"};
+				{ 11, 89224, "", "=q1=Floating Racing Flag", "=ds=#m20#", "=ds=25 #gold#"};
+				{ 12, 89223, "", "=q1=Racing Flag", "=ds=#m20#", "=ds=25 #gold#"};
 				{ 16, 0, "achievement_faction_serpentriders", "=q6=#r5#", ""};
-				{ 17, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#"};
-				{ 18, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#"};
-				{ 19, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#"};
-				{ 20, 89796, "", "=q3=Order of the Cloud Serpent Tabard", "=ds=#s7#"};
-				{ 21, 83877, "", "=q1=Design: Jeweled Onyx Panther", "=ds=#p12# (600)"};
+				{ 17, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 18, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 19, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 20, 89796, "", "=q3=Order of the Cloud Serpent Tabard", "=ds=#s7#", "=ds=10 #gold#"};
+				{ 21, 83877, "", "=q1=Design: Jeweled Onyx Panther", "=ds=#p12# (600)", "=ds=200 #gold#"};
 			};
 		};
 		info = {
@@ -2318,22 +2972,23 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "achievement_faction_shadopan", "=q6=#r3#", ""};
-				{ 2, 89302, "", "=q1=Stack of Bamboo", "=ds=#e18#"};
-				{ 3, 89303, "", "=q1=Stack of Stone Blocks", "=ds=#e18#"};
-				{ 4, 89301, "", "=q1=Stack of Wooden Boards", "=ds=#e18#"};
+				{ 2, 89302, "", "=q1=Stack of Bamboo", "=ds=#e18#", "=ds=25 #gold#"};
+				{ 3, 89303, "", "=q1=Stack of Stone Blocks", "=ds=#e18#", "=ds=40 #gold#"};
+				{ 4, 89301, "", "=q1=Stack of Wooden Boards", "=ds=#e18#", "=ds=10 #gold#"};
 				{ 6, 0, "achievement_faction_shadopan", "=q6=#r4#", ""};
-				{ 7, 84584, "", "=q3=Formula: Enchant Weapon - Dancing Steel", "=ds=#p4# (600)"};
-				{ 8, 84583, "", "=q3=Formula: Enchant Weapon - Jade Spirit", "=ds=#p4# (600)"};
-				{ 9, 84580, "", "=q3=Formula: Enchant Weapon - River's Song", "=ds=#p4# (600)"};
+				{ 7, 84584, "", "=q3=Formula: Enchant Weapon - Dancing Steel", "=ds=#p4# (600)", "=ds=40 #gold#"};
+				{ 8, 84583, "", "=q3=Formula: Enchant Weapon - Jade Spirit", "=ds=#p4# (600)", "=ds=40 #gold#"};
+				{ 9, 84580, "", "=q3=Formula: Enchant Weapon - River's Song", "=ds=#p4# (600)", "=ds=40 #gold#"};
 				{ 16, 0, "achievement_faction_shadopan", "=q6=#r5#", ""};
-				{ 17, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 18, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 19, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 20, 89801, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a1#"};
-				{ 21, 90844, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a2#"};
-				{ 22, 90845, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a3#"};
-				{ 23, 90846, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a4#"};
-				{ 24, 89800, "", "=q3=Shado-Pan Tabard", "=ds=#s7#"};
+				{ 17, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 18, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=1,500 #gold#"};
+				{ 19, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=2,500 #gold#"};
+				{ 20, 87768, "", "=q4=Reins of the Onyx Cloud Serpent", "=ds=#e27#", "=q1=#m4#: #QUESTID:31277#"};
+				{ 21, 89801, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a1#", "=ds=18 #gold# 69 #silver# 42 #copper#"};
+				{ 22, 90844, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a2#", "=ds=17 #gold# 73 #silver# 80 #copper#"};
+				{ 23, 90845, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a3#", "=ds=17 #gold# 80 #silver# 64 #copper#"};
+				{ 24, 90846, "", "=q3=Replica Shado-Pan Helmet", "=ds=#s1#, #a4#", "=ds=17 #gold# 87 #silver# 30 #copper#"};
+				{ 25, 89800, "", "=q3=Shado-Pan Tabard", "=ds=#s7#", "=ds=10 #gold#"};
 			};
 		};
 		info = {
@@ -2349,25 +3004,50 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["Tillers"] = {
 		["Normal"] = {
 			{
-				{ 1, 0, "achievement_faction_tillers", "=q6=#r4#", ""};
-				{ 2, 89869, "", "=q3=Pandaren Scarecrow", "=ds="};
-				{ 3, 85268, "", "=q2=Spring Blossom Sapling", "=ds="};
-				{ 4, 85216, "", "=q1=Enigma Seed", "=ds="};
-				{ 5, 85217, "", "=q1=Magebulb Seed", "=ds="};
-				{ 6, 89202, "", "=q1=Raptorleaf Seed", "=ds="};
-				{ 7, 85215, "", "=q1=Snakeroot Seed", "=ds="};
-				{ 8, 89233, "", "=q1=Songbell Seed", "=ds="};
-				{ 9, 89197, "", "=q1=Windshear Cactus Seed", "=ds="};
-				{ 16, 0, "achievement_faction_tillers", "=q6=#r5#", ""};
-				{ 17, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#"};
-				{ 18, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#"};
-				{ 19, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#"};
-				{ 20, 90175, "", "=q3=Gin-Ji Knife Set", "=ds=#m20#"};
-				{ 21, 80914, "", "=q3=Mourning Glory", "=ds=#m20#"};
-				{ 22, 89784, "", "=q3=Tillers Tabard", "=ds=#s7#"};
-				{ 23, 74657, "", "=q2=Recipe: Spicy Salmon", "=ds=#p3# (500)"};
-				{ 24, 74658, "", "=q2=Recipe: Spicy Vegetable Chips", "=ds=#p3# (500)"};
-				{ 25, 85269, "", "=q2=Winter Blossom Sapling", "=ds="};
+				{ 1, 0, "achievement_faction_tillers", "=q6=#r2#", ""};
+				{ 2, 79102, "", "=q1=Green Cabbage Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 3, 89328, "", "=q1=Jade Squash Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 4, 80590, "", "=q1=Juicycrunch Carrot Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 5, 80592, "", "=q1=Mogu Pumpkin Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 6, 80594, "", "=q1=Pink Turnip Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 7, 80593, "", "=q1=Red Blossom Leek Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 8, 80591, "", "=q1=Scallion Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 9, 89329, "", "=q1=Striped Melon Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 10, 80595, "", "=q1=White Turnip Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 11, 89326, "", "=q1=Witchberry Seeds", "=ds=", "=ds=15 #silver#"};
+				{ 13, 0, "achievement_faction_tillers", "=q6=#r3#", ""};
+				{ 14, 85267, "", "=q2=Autumn Blossom Sapling", "=ds=", "=ds=10 #silver#"};
+				{ 15, 89812, "", "=q1=\"Jinyu Princess\" Irrigation System", "=ds=#m2#", "=ds=94 #gold# 44 #silver# 44 #copper#"};
+				{ 16, 0, "achievement_faction_tillers", "=q6=#r4#", ""};
+				{ 17, 89869, "", "=q3=Pandaren Scarecrow", "=ds=", "=ds=236 #gold# 11 #silver# 11 #copper#"};
+				{ 18, 85268, "", "=q2=Spring Blossom Sapling", "=ds=", "=ds=10 #silver#"};
+				{ 19, 85216, "", "=q1=Enigma Seed", "=ds=", "=ds=1 #gold#"};
+				{ 20, 85217, "", "=q1=Magebulb Seed", "=ds=", "=ds=1 #gold#"};
+				{ 21, 89202, "", "=q1=Raptorleaf Seed", "=ds=", "=ds=1 #gold#"};
+				{ 22, 85215, "", "=q1=Snakeroot Seed", "=ds=", "=ds=1 #gold#"};
+				{ 23, 89233, "", "=q1=Songbell Seed", "=ds=", "=ds=1 #gold#"};
+				{ 24, 89197, "", "=q1=Windshear Cactus Seed", "=ds=", "=ds=1 #gold#"};
+				{ 25, 89813, "", "=q1=\"Thunder King\" Pest Repellers", "=ds=#m2#", "=ds=94 #gold# 44 #silver# 44 #copper#"};
+			};
+			{
+				{ 1, 0, "achievement_faction_tillers", "=q6=#r5#", ""};
+				{ 2, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#", "=ds=1416 #gold# 66 #silver# 66 #copper#"};
+				{ 3, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#", "=ds=472 #gold# 22 #silver# 22 #copper#"};
+				{ 4, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#", "=ds=3069 #gold# 44 #silver# 44 #copper#"};
+				{ 5, 90175, "", "=q3=Gin-Ji Knife Set", "=ds=#m20#", "=ds=236 #gold# 11 #silver# 11 #copper#"};
+				{ 6, 80914, "", "=q3=Mourning Glory", "=ds=#m20#", "=ds=118 #gold# 5 #silver# 55 #copper#"};
+				{ 7, 89784, "", "=q3=Tillers Tabard", "=ds=#s7#", "=ds=9 #gold# 44 #silver# 44 #copper#"};
+				{ 8, 74657, "", "=q2=Recipe: Spicy Salmon", "=ds=#p3# (500)", "=ds=94 #silver# 44 #copper#"};
+				{ 9, 74658, "", "=q2=Recipe: Spicy Vegetable Chips", "=ds=#p3# (500)", "=ds=94 #silver# 44 #copper#"};
+				{ 10, 85269, "", "=q2=Winter Blossom Sapling", "=ds=", "=ds=10 #silver#"};
+				{ 11, 89814, "", "=q1=\"Earth-Slasher\" Master Plow", "=ds=#m2#", "=ds=94 #gold# 44 #silver# 44 #copper#"};
+				{ 16, 0, "achievement_faction_tillers", "=q6="..BabbleFaction["Old Hillpaw"], "=q5="..BabbleFaction["Best Friend"]};
+				{ 17, 90893, "", "=q1=Straw Hat", "=ds=#s1#, #a1#", ""};
+				{ 18, 90894, "", "=q1=Straw Hat", "=ds=#s1#, #a2#", ""};
+				{ 19, 90895, "", "=q1=Straw Hat", "=ds=#s1#, #a3#", ""};
+				{ 20, 90896, "", "=q1=Straw Hat", "=ds=#s1#, #a4#", ""};
+				{ 22, 0, "achievement_faction_tillers", "=q6="..BabbleFaction["Sho"], "=q5="..BabbleFaction["Best Friend"]};
+				{ 23, 85222, "", "=q3=Red Cricket", "=ds=#e13#", ""};
 			};
 		};
 		info = {
@@ -3087,17 +3767,17 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PVP90Weapons"] = {
 		["Normal"] = {
 			{
-				{ 1, 84963, "", "=q4=Malevolent Gladiator's Render", "=ds=#w13#", "#CONQUEST:2500#" },
-				{ 2, 84962, "", "=q4=Malevolent Gladiator's Ripper", "=ds=#w13#", "#CONQUEST:2500#" },
-				{ 4, 84895, "", "=q4=Malevolent Gladiator's Shiv", "=ds=#h4#, #w4#", "#CONQUEST:1000#" },
+				{ 1, 84963, "", "=q4=Malevolent Gladiator's Render", "=ds=#h1#, #w13#", "#CONQUEST:2500#" },
+				{ 2, 84962, "", "=q4=Malevolent Gladiator's Ripper", "=ds=#h1#, #w13#", "#CONQUEST:2500#" },
+				{ 4, 84961, "", "=q4=Malevolent Gladiator's Spellblade", "=ds=#h3#, #w4#", "#CONQUEST:2500#" },
 				{ 5, 84967, "", "=q4=Malevolent Gladiator's Shanker", "=ds=#h1#, #w4#", "#CONQUEST:2500#" },
-				{ 6, 84961, "", "=q4=Malevolent Gladiator's Spellblade", "=ds=#h3#, #w4#", "#CONQUEST:2500#" },
+				{ 6, 84895, "", "=q4=Malevolent Gladiator's Shiv", "=ds=#h4#, #w4#", "#CONQUEST:1000#" },
 				{ 8, 84969, "", "=q4=Malevolent Gladiator's Quickblade", "=ds=#h1#, #w10#", "#CONQUEST:2500#" },
 				{ 9, 84968, "", "=q4=Malevolent Gladiator's Slicer", "=ds=#h1#, #w10#", "#CONQUEST:2500#" },
 				{ 11, 84965, "", "=q4=Malevolent Gladiator's Cleaver", "=ds=#h1#, #w1#", "#CONQUEST:2500#" },
 				{ 12, 84966, "", "=q4=Malevolent Gladiator's Hacker", "=ds=#h1#, #w1#", "#CONQUEST:2500#" },
-				{ 17, 84971, "", "=q4=Malevolent Gladiator's Gavel", "=ds=#h3#, #w6#", "#CONQUEST:2500#" },
 				{ 16, 84970, "", "=q4=Malevolent Gladiator's Bonecracker", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
+				{ 17, 84971, "", "=q4=Malevolent Gladiator's Gavel", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
 				{ 18, 84964, "", "=q4=Malevolent Gladiator's Pummeler", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
 				{ 20, 84790, "", "=q4=Malevolent Gladiator's Greatsword", "=ds=#h2#, #w10#", "#CONQUEST:3400#" },
 				{ 21, 84791, "", "=q4=Malevolent Gladiator's Decapitator", "=ds=#h2#, #w1#", "#CONQUEST:3400#" },
@@ -3129,17 +3809,18 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PVP90Weapons2"] = {
 		["Normal"] = {
 			{
-				{ 1, 85129, "", "=q4=Malevolent Gladiator's Render", "=ds=#w13#", "#CONQUEST:2500#" },
-				{ 2, 85128, "", "=q4=Malevolent Gladiator's Ripper", "=ds=#w13#", "#CONQUEST:2500#" },
-				{ 6, 85127, "", "=q4=Malevolent Gladiator's Spellblade", "=ds=#h3#, #w4#", "#CONQUEST:2500#" },
+				{ 1, 85129, "", "=q4=Malevolent Gladiator's Render", "=ds=#h1#, #w13#", "#CONQUEST:2500#" },
+				{ 2, 85128, "", "=q4=Malevolent Gladiator's Ripper", "=ds=#h1#, #w13#", "#CONQUEST:2500#" },
+				{ 4, 85127, "", "=q4=Malevolent Gladiator's Spellblade", "=ds=#h3#, #w4#", "#CONQUEST:2500#" },
 				{ 5, 85133, "", "=q4=Malevolent Gladiator's Shanker", "=ds=#h1#, #w4#", "#CONQUEST:2500#" },
-				{ 4, 85118, "", "=q4=Malevolent Gladiator's Shiv", "=ds=#h4#, #w4#", "#CONQUEST:1000#" },
+				{ 6, 85118, "", "=q4=Malevolent Gladiator's Shiv", "=ds=#h4#, #w4#", "#CONQUEST:1000#" },
 				{ 8, 85135, "", "=q4=Malevolent Gladiator's Quickblade", "=ds=#h1#, #w10#", "#CONQUEST:2500#" },
 				{ 9, 85134, "", "=q4=Malevolent Gladiator's Slicer", "=ds=#h1#, #w10#", "#CONQUEST:2500#" },
 				{ 11, 85131, "", "=q4=Malevolent Gladiator's Cleaver", "=ds=#h1#, #w1#", "#CONQUEST:2500#" },
 				{ 12, 85132, "", "=q4=Malevolent Gladiator's Hacker", "=ds=#h1#, #w1#", "#CONQUEST:2500#" },
-				{ 17, 85137, "", "=q4=Malevolent Gladiator's Gavel", "=ds=#h3#, #w6#", "#CONQUEST:2500#" },
-				{ 16, 85136, "", "=q4=Malevolent Gladiator's Bonecracker", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
+				{ 16, 85137, "", "=q4=Malevolent Gladiator's Gavel", "=ds=#h3#, #w6#", "#CONQUEST:2500#" },
+				{ 17, 85136, "", "=q4=Malevolent Gladiator's Bonecracker", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
+				{ 17, 85136, "", "=q4=Malevolent Gladiator's Bonecracker", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
 				{ 18, 85130, "", "=q4=Malevolent Gladiator's Pummeler", "=ds=#h1#, #w6#", "#CONQUEST:2500#" },
 				{ 20, 85112, "", "=q4=Malevolent Gladiator's Greatsword", "=ds=#h2#, #w10#", "#CONQUEST:3400#" },
 				{ 21, 85113, "", "=q4=Malevolent Gladiator's Decapitator", "=ds=#h2#, #w1#", "#CONQUEST:3400#" },
@@ -3171,6 +3852,230 @@ local moduleName = "AtlasLootMoP"
 	--------------------------
 	--- Sets & Collections ---
 	--------------------------
+
+		---------------------------------
+		--- Challenge Mode Armor Sets ---
+		---------------------------------
+
+	AtlasLoot_Data["ChallengeModeDeathKnight"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "spell_deathknight_frostpresence", "=q6=", "=q5="};
+				{ 2, 90053, "", "=q4=Crown of the Lich Lord", "=ds=#s1#, #a4#", ""};
+				{ 3, 90055, "", "=q4=Shoulderguards of the Lich Lord", "=ds=#s3#, #a4#", ""};
+				{ 4, 90051, "", "=q4=Chestguard of the Lich Lord", "=ds=#s5#, #a4#", ""};
+				{ 5, 90056, "", "=q4=Bracers of the Lich Lord", "=ds=#s8#, #a4#", ""};
+				{ 6, 90052, "", "=q4=Grasps of the Lich Lord", "=ds=#s9#, #a4#", ""};				
+				{ 7, 90049, "", "=q4=Girdle of the Lich Lord", "=ds=#s10#, #a4#", ""};
+				{ 8, 90054, "", "=q4=Legplates of the Lich Lord", "=ds=#s11#, #a4#", ""};
+				{ 9, 90050, "", "=q4=Treads of the Lich Lord", "=ds=#s12#, #a4#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["DEATHKNIGHT"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeDruid"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "ability_druid_catform", "=q6=", "=q5="};
+				{ 2, 90062, "", "=q4=Hood of the Cycle", "=ds=#s1#, #a2#", ""};
+				{ 3, 90065, "", "=q4=Branches of the Cycle", "=ds=#s3#, #a2#", ""};
+				{ 4, 90064, "", "=q4=Robes of the Cycle", "=ds=#s5#, #a2#", ""};
+				{ 5, 90066, "", "=q4=Bracers of the Cycle", "=ds=#s8#, #a2#", ""};
+				{ 6, 90061, "", "=q4=Gloves of the Cycle", "=ds=#s9#, #a2#", ""};
+				{ 7, 90059, "", "=q4=Waistguard of the Cycle", "=ds=#s10#, #a2#", ""};
+				{ 8, 90063, "", "=q4=Leggings of the Cycle", "=ds=#s11#, #a2#", ""};
+				{ 9, 90060, "", "=q4=Sandals of the Cycle", "=ds=#s12#, #a2#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["DRUID"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeHunter"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_weapon_bow_07", "=q6=", "=q5="};
+				{ 2, 90072, "", "=q4=Helm of the Howling Beast", "=ds=#s1#, #a3#", ""};
+				{ 3, 90074, "", "=q4=Shoulderguards of the Howling Beast", "=ds=#s3#, #a3#", ""};
+				{ 4, 90070, "", "=q4=Chestguard of the Howling Beast", "=ds=#s5#, #a3#", ""};
+				{ 5, 90075, "", "=q4=Wristwraps of the Howling Beast", "=ds=#s8#, #a3#", ""};
+				{ 6, 90071, "", "=q4=Grips of the Howling Beast", "=ds=#s9#, #a3#", ""};
+				{ 7, 90068, "", "=q4=Cinch of the Howling Beast", "=ds=#s10#, #a3#", ""};
+				{ 8, 90073, "", "=q4=Legguards of the Howling Beast", "=ds=#s11#, #a3#", ""};
+				{ 9, 90069, "", "=q4=Boots of the Howling Beast", "=ds=#s12#, #a3#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["HUNTER"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeMage"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_staff_13", "=q6=", "=q5="};
+				{ 2, 90082, "", "=q4=Hood of the Elemental Triad", "=ds=#s1#, #a1#", ""};
+				{ 3, 90085, "", "=q4=Spaulders of the Elemental Triad", "=ds=#s3#, #a1#", ""};
+				{ 4, 90084, "", "=q4=Robes of the Elemental Triad", "=ds=#s5#, #a1#", ""};
+				{ 5, 90086, "", "=q4=Bracers of the Elemental Triad", "=ds=#s8#, #a1#", ""};
+				{ 6, 90081, "", "=q4=Gloves of the Elemental Triad", "=ds=#s9#, #a1#", ""};
+				{ 7, 90079, "", "=q4=Girdle of the Elemental Triad", "=ds=#s10#, #a1#", ""};
+				{ 8, 90083, "", "=q4=Leggings of the Elemental Triad", "=ds=#s11#, #a1#", ""};
+				{ 9, 90080, "", "=q4=Boots of the Elemental Triad", "=ds=#s12#, #a1#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["MAGE"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeMonk"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "spell_monk_windwalker_spec", "=q6=", "=q5="};
+				{ 2, 90092, "", "=q4=Crown of the Regal Lord", "=ds=#s1#, #a2#", ""};
+				{ 3, 90094, "", "=q4=Shoulderguards of the Regal Lord", "=ds=#s3#, #a2#", ""};
+				{ 4, 90090, "", "=q4=Chestwrap of the Regal Lord", "=ds=#s5#, #a2#", ""};
+				{ 5, 90095, "", "=q4=Bracers of the Regal Lord", "=ds=#s8#, #a2#", ""};
+				{ 6, 90091, "", "=q4=Handwraps of the Regal Lord", "=ds=#s9#, #a2#", ""};
+				{ 7, 90088, "", "=q4=Greatbelt of the Regal Lord", "=ds=#s10#, #a2#", ""};
+				{ 8, 90093, "", "=q4=Legwraps of the Regal Lord", "=ds=#s11#, #a2#", ""};
+				{ 9, 90089, "", "=q4=Treads of the Regal Lord", "=ds=#s12#, #a2#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["MONK"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModePaladin"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "Spell_Holy_HolyBolt", "=q6=", "=q5="};
+				{ 2, 90100, "", "=q4=Greathelm of the Holy Warrior", "=ds=#s1#, #a4#", ""};
+				{ 3, 90102, "", "=q4=Shoulderplate of the Holy Warrior", "=ds=#s3#, #a4#", ""};
+				{ 4, 90098, "", "=q4=Chestplate of the Holy Warrior", "=ds=#s5#, #a4#", ""};
+				{ 5, 90103, "", "=q4=Wristguards of the Holy Warrior", "=ds=#s8#, #a4#", ""};
+				{ 6, 90099, "", "=q4=Gauntlets of the Holy Warrior", "=ds=#s9#, #a4#", ""};
+				{ 7, 90096, "", "=q4=Girdle of the Holy Warrior", "=ds=#s10#, #a4#", ""};
+				{ 8, 90101, "", "=q4=Legplates of the Holy Warrior", "=ds=#s11#, #a4#", ""};
+				{ 9, 90097, "", "=q4=Greatboots of the Holy Warrior", "=ds=#s12#, #a4#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["PALADIN"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModePriest"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "spell_holy_guardianspirit", "=q6=", "=q5="};
+				{ 2, 90116, "", "=q4=Cowl of the Light", "=ds=#s1#, #a1#", ""};
+				{ 3, 90113, "", "=q4=Pauldrons of the Light", "=ds=#s3#, #a1#", ""};
+				{ 4, 90114, "", "=q4=Robes of the Light", "=ds=#s5#, #a1#", ""};
+				{ 5, 90112, "", "=q4=Bracers of the Light", "=ds=#s8#, #a1#", ""};
+				{ 6, 90115, "", "=q4=Hands of the Light", "=ds=#s9#, #a1#", ""};
+				{ 7, 90110, "", "=q4=Cord of the Light", "=ds=#s10#, #a1#", ""};
+				{ 8, 90117, "", "=q4=Leggings of the Light", "=ds=#s11#, #a1#", ""};
+				{ 9, 90111, "", "=q4=Steps of the Light", "=ds=#s12#, #a1#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["PRIEST"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeRogue"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "inv_throwingknife_04", "=q6=", "=q5="};
+				{ 2, 90120, "", "=q4=Hood of the Silent Assassin", "=ds=#s1#, #a2#", ""};
+				{ 3, 90125, "", "=q4=Spaulders of the Silent Assassin", "=ds=#s3#, #a2#", ""};
+				{ 4, 90122, "", "=q4=Shadowwrap of the Silent Assassin", "=ds=#s5#, #a2#", ""};
+				{ 5, 90126, "", "=q4=Bracers of the Silent Assassin", "=ds=#s8#, #a2#", ""};
+				{ 6, 90123, "", "=q4=Gloves of the Silent Assassin", "=ds=#s9#, #a2#", ""};
+				{ 7, 90119, "", "=q4=Girdle of the Silent Assassin", "=ds=#s10#, #a2#", ""};
+				{ 8, 90124, "", "=q4=Leggings of the Silent Assassin", "=ds=#s11#, #a2#", ""};
+				{ 9, 90121, "", "=q4=Tabi of the Silent Assassin", "=ds=#s12#, #a2#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["ROGUE"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeShaman"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "Spell_Nature_Lightning", "=q6=", "=q5="};
+				{ 2, 90132, "", "=q4=Windfury Mask", "=ds=#s1#, #a3#", ""};
+				{ 3, 90134, "", "=q4=Windfury Spirit Guides", "=ds=#s3#, #a3#", ""};
+				{ 4, 90130, "", "=q4=Windfury Harness", "=ds=#s5#, #a3#", ""};
+				{ 5, 90127, "", "=q4=Windfury Bracers", "=ds=#s8#, #a3#", ""};
+				{ 6, 90131, "", "=q4=Windfury Crushers", "=ds=#s9#, #a3#", ""};
+				{ 7, 90128, "", "=q4=Windfury Belt", "=ds=#s10#, #a3#", ""};
+				{ 8, 90133, "", "=q4=Windfury Legguards", "=ds=#s11#, #a3#", ""};
+				{ 9, 90129, "", "=q4=Windfury Sandals", "=ds=#s12#, #a3#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["SHAMAN"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeWarlock"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "spell_nature_drowsy", "=q6=", "=q5="};
+				{ 2, 90142, "", "=q4=Horns of the Betrayer", "=ds=#s1#, #a1#", ""};
+				{ 3, 90138, "", "=q4=Amice of the Betrayer", "=ds=#s3#, #a1#", ""};
+				{ 4, 90140, "", "=q4=Robes of the Betrayer", "=ds=#s5#, #a1#", ""};
+				{ 5, 90139, "", "=q4=Bracers of the Betrayer", "=ds=#s8#, #a1#", ""};
+				{ 6, 90141, "", "=q4=Handguards of the Betrayer", "=ds=#s9#, #a1#", ""};
+				{ 7, 90136, "", "=q4=Belt of the Betrayer", "=ds=#s10#, #a1#", ""};
+				{ 8, 90143, "", "=q4=Leggings of the Betrayer", "=ds=#s11#, #a1#", ""};
+				{ 9, 90137, "", "=q4=Boots of the Betrayer", "=ds=#s12#, #a1#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["WARLOCK"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
+
+	AtlasLoot_Data["ChallengeModeWarrior"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "ability_warrior_innerrage", "=q6=", "=q5="};
+				{ 2, 90151, "", "=q4=Crown of the Golden King", "=ds=#s1#, #a4#", ""};
+				{ 3, 90153, "", "=q4=Mantle of the Golden King", "=ds=#s3#, #a4#", ""};
+				{ 4, 90149, "", "=q4=Chestplate of the Golden King", "=ds=#s5#, #a4#", ""};
+				{ 5, 90154, "", "=q4=Bracers of the Golden King", "=ds=#s8#, #a4#", ""};
+				{ 6, 90150, "", "=q4=Reach of the Golden King", "=ds=#s9#, #a4#", ""};
+				{ 7, 90147, "", "=q4=Girdle of the Golden King", "=ds=#s10#, #a4#", ""};
+				{ 8, 90152, "", "=q4=Greaves of the Golden King", "=ds=#s11#, #a4#", ""};
+				{ 9, 90148, "", "=q4=Greatboots of the Golden King", "=ds=#s12#, #a4#", ""};
+			};
+		};
+		info = {
+			name = LOCALIZED_CLASS_NAMES_MALE["WARRIOR"],
+			module = moduleName, menu = "CHALLENGEMODESET",
+		};
+	}
 
 		--------------------------
 		--- Tier 14 Sets (T14) ---
@@ -3962,54 +4867,54 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{
-					{ 1, 54436, "", "=q3=Blue Clockwork Rocket Bot", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
-					{ 1, 54436, "", "=q3=Blue Clockwork Rocket Bot", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
+					{ 1, 54436, "", "=q3=Blue Clockwork Rocket Bot", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
+					{ 1, 54436, "", "=q3=Blue Clockwork Rocket Bot", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
 				};
-				{ 2, 70160, "", "=q3=Crimson Lasher", "=ds="..AtlasLoot:GetMapNameByID(795)},
-				{ 3, 39973, "", "=q3=Ghostly Skull", "=ds="..AtlasLoot:GetMapNameByID(504)};
-				{ 4, 70140, "", "=q3=Hyjal Bear Cub", "=ds="..AtlasLoot:GetMapNameByID(795)},
-				{ 5, 34955, "", "=q3=Scorched Stone", "=ds="..AtlasLoot:GetMapNameByID(795)};
-				{ 6, 44822, "", "=q1=Albino Snake", "=ds="..AtlasLoot:GetMapNameByID(504)};
-				{ 7, 11023, "", "=q1=Ancona Chicken", "=ds="..AtlasLoot:GetMapNameByID(61)};
-				{ 8, 10360, "", "=q1=Black Kingsnake", "=ds="..AtlasLoot:GetMapNameByID(321)};
-				{ 9, 29958, "", "=q1=Blue Dragonhawk Hatchling", "=ds="..AtlasLoot:GetMapNameByID(479)};
-				{ 10, 29901, "", "=q1=Blue Moth Egg", "=ds="..AtlasLoot:GetMapNameByID(471)};
-				{ 11, 29364, "", "=q1=Brown Rabbit Crate", "=ds="..AtlasLoot:GetMapNameByID(479)};
-				{ 12, 10361, "", "=q1=Brown Snake", "=ds="..AtlasLoot:GetMapNameByID(321)};
-				{ 13, 8485, "", "=q1=Cat Carrier (Bombay)", "=ds="..AtlasLoot:GetMapNameByID(30)};
-				{ 14, 46398, "", "=q1=Cat Carrier (Calico Cat)", "=ds="..AtlasLoot:GetMapNameByID(504)};
-				{ 15, 8486, "", "=q1=Cat Carrier (Cornish Rex)", "=ds="..AtlasLoot:GetMapNameByID(30)};
-				{ 16, 8487, "", "=q1=Cat Carrier (Orange Tabby)", "=ds="..AtlasLoot:GetMapNameByID(30)};
-				{ 17, 8490, "", "=q1=Cat Carrier (Siamese)", "=ds="..AtlasLoot:GetMapNameByID(479)};
-				{ 18, 8488, "", "=q1=Cat Carrier (Silver Tabby)", "=ds="..AtlasLoot:GetMapNameByID(30)};
-				{ 19, 8489, "", "=q1=Cat Carrier (White Kitten)", "=ds="..AtlasLoot:GetMapNameByID(301)};
-				{ 20, 10392, "", "=q1=Crimson Snake", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..AtlasLoot:GetMapNameByID(321)};
-				{ 21, "s123214", "", "=q1=Gilnean Raven", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m7#"};
-				{ 22, 29953, "", "=q1=Golden Dragonhawk Hatchling", "=ds="..AtlasLoot:GetMapNameByID(462)};
-				{ 23, 8500, "", "=q1=Great Horned Owl", "=ds="..AtlasLoot:GetMapNameByID(381)};
-				{ 24, 8501, "", "=q1=Hawk Owl", "=ds="..AtlasLoot:GetMapNameByID(381)};
-				{ 25, 88148, "", "=q1=Jade Crane Chick", "=ds="..AL["Battle Pet Trainer"]};
-				{ 26, 29363, "", "=q1=Mana Wyrmling", "=ds="..AtlasLoot:GetMapNameByID(479)};
-				{ 27, 48120, "", "=q1=Obsidian Hatchling", "=ds="..AtlasLoot:GetMapNameByID(504)};
-				{ 28, 8496, "", "=q1=Parrot Cage (Cockatiel)", "=ds="..BabbleZone["Booty Bay"]};
-				{ 29, 8492, "", "=q1=Parrot Cage (Green Wing Macaw)", "=ds="..AtlasLoot:GetMapNameByID(756)};
-				{ 30, 8495, "", "=q1=Parrot Cage (Senegal)", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..BabbleZone["Booty Bay"]};
+				{ 2, 70160, "", "=q3=Crimson Lasher", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(795)},
+				{ 3, 39973, "", "=q3=Ghostly Skull", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504)};
+				{ 4, 70140, "", "=q3=Hyjal Bear Cub", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(795)},
+				{ 5, 34955, "", "=q3=Scorched Stone", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(795)};
+				{ 6, 44822, "", "=q1=Albino Snake", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504)};
+				{ 7, 11023, "", "=q1=Ancona Chicken", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(61)};
+				{ 8, 10360, "", "=q1=Black Kingsnake", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(321)};
+				{ 9, 29958, "", "=q1=Blue Dragonhawk Hatchling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479)};
+				{ 10, 29901, "", "=q1=Blue Moth Egg", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(471)};
+				{ 11, 29364, "", "=q1=Brown Rabbit Crate", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479)};
+				{ 12, 10361, "", "=q1=Brown Snake", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(321)};
+				{ 13, 8485, "", "=q1=Cat Carrier (Bombay)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(30)};
+				{ 14, 46398, "", "=q1=Cat Carrier (Calico Cat)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504)};
+				{ 15, 8486, "", "=q1=Cat Carrier (Cornish Rex)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(30)};
+				{ 16, 8487, "", "=q1=Cat Carrier (Orange Tabby)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(30)};
+				{ 17, 8490, "", "=q1=Cat Carrier (Siamese)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479)};
+				{ 18, 8488, "", "=q1=Cat Carrier (Silver Tabby)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(30)};
+				{ 19, 8489, "", "=q1=Cat Carrier (White Kitten)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(301)};
+				{ 20, 10392, "", "=q1=Crimson Snake", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..AtlasLoot:GetMapNameByID(321)};
+				{ 21, "s123214", "", "=q1=Gilnean Raven", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m7#"};
+				{ 22, 29953, "", "=q1=Golden Dragonhawk Hatchling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(462)};
+				{ 23, 8500, "", "=q1=Great Horned Owl", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(381)};
+				{ 24, 8501, "", "=q1=Hawk Owl", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(381)};
+				{ 25, 88148, "", "=q1=Jade Crane Chick", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"]};
+				{ 26, 29363, "", "=q1=Mana Wyrmling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479)};
+				{ 27, 48120, "", "=q1=Obsidian Hatchling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504)};
+				{ 28, 8496, "", "=q1=Parrot Cage (Cockatiel)", "=ds=#e13#", "=ds="..BabbleZone["Booty Bay"]};
+				{ 29, 8492, "", "=q1=Parrot Cage (Green Wing Macaw)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(756)};
+				{ 30, 8495, "", "=q1=Parrot Cage (Senegal)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..BabbleZone["Booty Bay"]};
 			};
 			{
-				{ 1, 10394, "", "=q1=Prairie Dog Whistle", "=ds="..AtlasLoot:GetMapNameByID(362)};
-				{ 2, 8497, "", "=q1=Rabbit Crate (Snowshoe)", "=ds="..AtlasLoot:GetMapNameByID(27)};
-				{ 3, 29956, "", "=q1=Red Dragonhawk Hatchling", "=ds="..AtlasLoot:GetMapNameByID(480)};
-				{ 4, 29902, "", "=q1=Red Moth Egg", "=ds="..AtlasLoot:GetMapNameByID(479)};
-				{ 5, "s123212", "", "=q1=Shore Crawler", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m6#"};
-				{ 6, 29957, "", "=q1=Silver Dragonhawk Hatchling", "=ds="..AtlasLoot:GetMapNameByID(480)};
-				{ 7, 10393, "", "=q1=Undercity Cockroach", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..AtlasLoot:GetMapNameByID(382)};
+				{ 1, 10394, "", "=q1=Prairie Dog Whistle", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(362)};
+				{ 2, 8497, "", "=q1=Rabbit Crate (Snowshoe)", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(27)};
+				{ 3, 29956, "", "=q1=Red Dragonhawk Hatchling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(480)};
+				{ 4, 29902, "", "=q1=Red Moth Egg", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479)};
+				{ 5, "s123212", "", "=q1=Shore Crawler", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m6#"};
+				{ 6, 29957, "", "=q1=Silver Dragonhawk Hatchling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(480)};
+				{ 7, 10393, "", "=q1=Undercity Cockroach", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(479).." / "..AtlasLoot:GetMapNameByID(382)};
 				{
-					{ 8, 46767, "", "=q1=Warbot Ignition Key", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
-					{ 8, 46767, "", "=q1=Warbot Ignition Key", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
+					{ 8, 46767, "", "=q1=Warbot Ignition Key", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
+					{ 8, 46767, "", "=q1=Warbot Ignition Key", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
 				};
-				{ 9, 29904, "", "=q1=White Moth Egg", "=ds="..AtlasLoot:GetMapNameByID(471)};
-				{ 10, 69239, "", "=q1=Winterspring Cub", "=ds="..AtlasLoot:GetMapNameByID(281)};
-				{ 11, 29903, "", "=q1=Yellow Moth Egg", "=ds="..AtlasLoot:GetMapNameByID(471)};
+				{ 9, 29904, "", "=q1=White Moth Egg", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(471)};
+				{ 10, 69239, "", "=q1=Winterspring Cub", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(281)};
+				{ 11, 29903, "", "=q1=Yellow Moth Egg", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(471)};
 			};
 		};
 		info = {
@@ -4021,27 +4926,32 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PetsQuest"] = {
 		["Normal"] = {
 			{
-				{ 2, 35350, "", "=q3=Chuck's Bucket", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
-				{ 3, 33818, "", "=q3=Muckbreath's Bucket", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
-				{ 4, 89587, "", "=q3=Porcupette", "=ds="..AL["Pet Battle Quests"]};
-				{ 5, 35349, "", "=q3=Snarly's Bucket", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
-				{ 6, 44983, "", "=q3=Strand Crawler", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(504)};
-				{ 7, 33816, "", "=q3=Toothy's Bucket", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
+				{ 2, 35350, "", "=q3=Chuck's Bucket", "=ds=#e13#", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
+				{ 3, 33818, "", "=q3=Muckbreath's Bucket", "=ds=#e13#", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
+				{ 4, 92799, "", "=q3=Pandaren Air Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 5, 92800, "", "=q3=Pandaren Earth Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 6, 92798, "", "=q3=Pandaren Fire Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 7, 90173, "", "=q3=Pandaren Water Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 8, 89587, "", "=q3=Porcupette", "=ds=#e13#", "=ds="..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 9, 35349, "", "=q3=Snarly's Bucket", "=ds=#e13#", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
+				{ 10, 44983, "", "=q3=Strand Crawler", "=ds=#e13#", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(504)};
+				{ 11, 33816, "", "=q3=Toothy's Bucket", "=ds=#e13#", "=q1="..AL["Fishing Daily Reward"]..": "..AtlasLoot:GetMapNameByID(478)};
+				{ 12, 72042, "", "=q1=Alliance Balloon", "=ds=#e13#", "=q1=#m4#: #QUESTID:29412# =ec1=#m7#"};
+				{ 13, 65661, "", "=q1=Blue Mini Jouster", "=ds=#e13#", "=q1=#m4#: #QUESTID:25560#"};
+				{ 14, 66067, "", "=q1=Brazie's Sunflower Seeds", "=ds=#e13#", "=q1=#m4#: #QUESTID:28748#"};
+				{ 15, 11110, "", "=q1=Chicken Egg", "=ds=#e13#", "=q1=#m4#: #QUESTID:3861#"};
 				{
-					{ 8, 72045, "", "=q1=Horde Balloon", "=q1=#m4#: #QUESTID:29401#"};
-					{ 8, 72042, "", "=q1=Alliance Balloon", "=q1=#m4#: #QUESTID:29412#"};
+					{ 17, 84105, "", "=q1=Fishy", "=ds=#e13#", "=q1=#m4#: #QUESTID:31239#"};
+					{ 17, 84105, "", "=q1=Fishy", "=ds=#e13#", "=q1=#m4#: #QUESTID:29905#"};
 				};
-				{ 9, 65661, "", "=q1=Blue Mini Jouster", "=q1=#m4#: #QUESTID:25560#"};
-				{ 10, 66067, "", "=q1=Brazie's Sunflower Seeds", "=q1=#m4#: #QUESTID:28748#"};
-				{ 11, 11110, "", "=q1=Chicken Egg", "=q1=#m4#: #QUESTID:3861#"};
-				{ 12, 65662, "", "=q1=Gold Mini Jouster", "=q1=#m4#: #QUESTID:25560#"};
-				{ 13, 84105, "", "=q1=Fishy", "=q1=#m4#: #QUESTID:29905#" };
-				{ 14, 69251, "", "=q1=Lashtail Hatchling", "=q1=#m4#: #QUESTID:29208#"};
-				{ 15, 10398, "", "=q1=Mechanical Chicken", "=q1=#m4#: #QUESTID:3721#"};
-				{ 17, 31760, "", "=q1=Miniwing", "=q1=#m4#: #QUESTID:10898#"};
-				{ 18, 68833, "", "=q1=Panther Cub", "=q1=#m4#: #QUESTID:29267#"};
-				{ 19, 66080, "", "=q1=Tiny Flamefly", "=q1=#m4#: #QUESTID:28415#"};
-				{ 20, 46325, "", "=q1=Withers", "=q1=#m4#: #QUESTID:13570#"};
+				{ 18, 65662, "", "=q1=Gold Mini Jouster", "=ds=#e13#", "=q1=#m4#: #QUESTID:25560#"};
+				{ 19, 72045, "", "=q1=Horde Balloon", "=ds=#e13#", "=q1=#m4#: #QUESTID:29401# =ec1=#m6#"};				
+				{ 20, 69251, "", "=q1=Lashtail Hatchling", "=ds=#e13#", "=q1=#m4#: #QUESTID:29208#"};
+				{ 21, 10398, "", "=q1=Mechanical Chicken", "=ds=#e13#", "=q1=#m4#: #QUESTID:3721#"};
+				{ 22, 31760, "", "=q1=Miniwing", "=ds=#e13#", "=q1=#m4#: #QUESTID:10898#"};
+				{ 23, 68833, "", "=q1=Panther Cub", "=ds=#e13#", "=q1=#m4#: #QUESTID:29267#"};
+				{ 24, 66080, "", "=q1=Tiny Flamefly", "=ds=#e13#", "=q1=#m4#: #QUESTID:28415#"};
+				{ 25, 46325, "", "=q1=Withers", "=ds=#e13#", "=q1=#m4#: #QUESTID:13570#"};
 			};
 		};
 		info = {
@@ -4053,26 +4963,28 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PetsCrafted"] = {
 		["Normal"] = {
 			{
-				{ 2, 60847, "", "=q4=Crawling Claw", "=q2=#p25#"};
-				{ 3, 64372, "", "=q3=Clockwork Gnome", "=q2=#p25#"};
-				{ 4, 60216, "", "=q3=De-Weaponized Mechanical Companion", "=q2=#p5#"};
-				{ 5, 67282, "", "=q3=Elementium Geode", "=q2=#p23#"};
-				{ 6, 67274, "", "=q3=Enchanted Lantern", "=q2=#p4#"};
-				{ 7, 60955, "", "=q3=Fossilized Hatchling", "=q2=#p25#"};
-				{ 8, 82774, "", "=q3=Jade Owl", "=q2=#p12#"};
-				{ 9, 67275, "", "=q3=Magic Lamp", "=q2=#p4#"};
-				{ 10, 87526, "", "=q3=Mechanical Pandaren Dragonling", "=q2=#p5#" };
-				{ 11, 59597, "", "=q3=Personal World Destroyer", "=q2=#p5#"};
-				{ 12, 69821, "", "=q3=Pterrordax Hatchling", "=q2=#p25#"};
-				{ 13, 82775, "", "=q3=Sapphire Cub", "=q2=#p12#"};
-				{ 14, 69824, "", "=q3=Voodoo Figurine", "=q2=#p25#"};
-				{ 17, 89368, "", "=q1=Chi-ji Kite", "=q2=#p26#"};
-				{ 18, 15996, "", "=q1=Lifelike Mechanical Toad", "=q2=#p5#"};
-				{ 19, 11826, "", "=q1=Lil' Smoky", "=q2=#p5#"};
-				{ 20, 4401, "", "=q1=Mechanical Squirrel Box", "=q2=#p5#"};
-				{ 21, 11825, "", "=q1=Pet Bombling", "=q2=#p5#"};
-				{ 22, 21277, "", "=q1=Tranquil Mechanical Yeti", "=q2=#p5#"};
-				{ 23, 89367, "", "=q1=Yu'lon Kite", "=q2=#p26#"};
+				{ 2, 60847, "", "=q4=Crawling Claw", "=ds=#e13#", "=q2=#p25#"};
+				{ 3, 64372, "", "=q3=Clockwork Gnome", "=ds=#e13#", "=q2=#p25#"};
+				{ 4, 60216, "", "=q3=De-Weaponized Mechanical Companion", "=ds=#e13#", "=q2=#p5#"};
+				{ 5, 67282, "", "=q3=Elementium Geode", "=ds=#e13#", "=q2=#p23#"};
+				{ 6, 67274, "", "=q3=Enchanted Lantern", "=ds=#e13#", "=q2=#p4#"};
+				{ 7, 60955, "", "=q3=Fossilized Hatchling", "=ds=#e13#", "=q2=#p25#"};
+				{ 8, 90900, "", "=q3=Imperial Moth", "=ds=#e13#", "=q2=#p8#"};
+				{ 9, 82774, "", "=q3=Jade Owl", "=ds=#e13#", "=q2=#p12#"};
+				{ 10, 67275, "", "=q3=Magic Lamp", "=ds=#e13#", "=q2=#p4#"};
+				{ 11, 87526, "", "=q3=Mechanical Pandaren Dragonling", "=ds=#e13#", "=q2=#p5#" };
+				{ 12, 59597, "", "=q3=Personal World Destroyer", "=ds=#e13#", "=q2=#p5#"};
+				{ 13, 69821, "", "=q3=Pterrordax Hatchling", "=ds=#e13#", "=q2=#p25#"};
+				{ 14, 82775, "", "=q3=Sapphire Cub", "=ds=#e13#", "=q2=#p12#"};
+				{ 17, 69824, "", "=q3=Voodoo Figurine", "=ds=#e13#", "=q2=#p25#"};
+				{ 18, 90902, "", "=q2=Imperial Silkworm", "=ds=#e13#", "=q2=#p8#"};
+				{ 19, 89368, "", "=q1=Chi-ji Kite", "=ds=#e13#", "=q2=#p26#"};
+				{ 20, 15996, "", "=q1=Lifelike Mechanical Toad", "=ds=#e13#", "=q2=#p5#"};
+				{ 21, 11826, "", "=q1=Lil' Smoky", "=ds=#e13#", "=q2=#p5#"};
+				{ 22, 4401, "", "=q1=Mechanical Squirrel Box", "=ds=#e13#", "=q2=#p5#"};
+				{ 23, 11825, "", "=q1=Pet Bombling", "=ds=#e13#", "=q2=#p5#"};
+				{ 24, 21277, "", "=q1=Tranquil Mechanical Yeti", "=ds=#e13#", "=q2=#p5#"};
+				{ 25, 89367, "", "=q1=Yu'lon Kite", "=ds=#e13#", "=q2=#p26#"};
 			};
 		};
 		info = {
@@ -4084,38 +4996,40 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PetsAchievement"] = {
 		["Normal"] = {
 			{
-				{ 2, 63398, "", "=q3=Armadillo Pup", "#ACHIEVEMENTID:5144#"};
-				{ 3, 71387, "", "=q3=Brilliant Kaliri", "#ACHIEVEMENTID:5877#" },
-				{ 4, 54810, "", "=q3=Celestial Dragon", "#ACHIEVEMENTID:5875#" },
+				{ 2, 63398, "", "=q3=Armadillo Pup", "=ds=#e13#", "#ACHIEVEMENTID:5144#"};
+				{ 3, 71387, "", "=q3=Brilliant Kaliri", "=ds=#e13#", "#ACHIEVEMENTID:5877#" },
+				{ 4, 54810, "", "=q3=Celestial Dragon", "=ds=#e13#", "#ACHIEVEMENTID:5875#" },
 				{
-					{ 5, 63138, "", "=q3=Dark Phoenix Hatchling", "#ACHIEVEMENTID:5892#, =ec1=#m6#"};
-					{ 5, 63138, "", "=q3=Dark Phoenix Hatchling", "#ACHIEVEMENTID:5812#, =ec1=#m7#"};
+					{ 5, 63138, "", "=q3=Dark Phoenix Hatchling", "=ds=#e13#", "#ACHIEVEMENTID:5892#, =ec1=#m6#"};
+					{ 5, 63138, "", "=q3=Dark Phoenix Hatchling", "=ds=#e13#", "#ACHIEVEMENTID:5812#, =ec1=#m7#"};
 				};
 				{
-					{ 6, 65364, "", "=q3=Guild Herald", "#ACHIEVEMENTID:5201#, =ec1=#m6#"};
-					{ 6, 65363, "", "=q3=Guild Herald", "#ACHIEVEMENTID:5201#, =ec1=#m7#"};
+					{ 6, 65364, "", "=q3=Guild Herald", "=ds=#e13#", "#ACHIEVEMENTID:5201#, =ec1=#m6#"};
+					{ 6, 65363, "", "=q3=Guild Herald", "=ds=#e13#", "#ACHIEVEMENTID:5201#, =ec1=#m7#"};
 				};
 				{
-					{ 7, 65362, "", "=q3=Guild Page", "#ACHIEVEMENTID:5179#, =ec1=#m6#"};
-					{ 7, 65361, "", "=q3=Guild Page", "#ACHIEVEMENTID:5031#, =ec1=#m7#"};
+					{ 7, 65362, "", "=q3=Guild Page", "=ds=#e13#", "#ACHIEVEMENTID:5179#, =ec1=#m6#"};
+					{ 7, 65361, "", "=q3=Guild Page", "=ds=#e13#", "#ACHIEVEMENTID:5031#, =ec1=#m7#"};
 				};
-				{ 8, 85578, "", "=q3=Feral Vermling", "#ACHIEVEMENTID:7500#"};
-				{ 9, 86562, "", "=q3=Hopling", "#ACHIEVEMENTID:6402#"};
-				{ 10, 89686, "", "=q3=Jade Tentacle", "#ACHIEVEMENTID:7521#"};
-				{ 11, 44738, "", "=q3=Kirin Tor Familiar", "#ACHIEVEMENTID:1956#"};
-				{ 12, 44841, "", "=q3=Little Fawn's Salt Lick", "#ACHIEVEMENTID:2516#"};
-				{ 13, 71140, "", "=q3=Nuts' Acorn", "#ACHIEVEMENTID:5876#" },
-				{ 14, 49912, "", "=q3=Perky Pug", "#ACHIEVEMENTID:4478#"};
-				{ 15, 88147, "", "=q3=Singing Cricket Cage", "#ACHIEVEMENTID:6582#"};
-				{ 17, 40653, "", "=q3=Reeking Pet Carrier", "#ACHIEVEMENTID:1250#"};
-				{ 18, 85513, "", "=q3=Thundering Serpent Hatchling", "#ACHIEVEMENTID:6634#"};
+				{ 8, 85578, "", "=q3=Feral Vermling", "=ds=#e13#", "#ACHIEVEMENTID:7500#"};
+				{ 9, 86562, "", "=q3=Hopling", "=ds=#e13#", "#ACHIEVEMENTID:6402#"};
+				{ 10, 89686, "", "=q3=Jade Tentacle", "=ds=#e13#", "#ACHIEVEMENTID:7521#"};
+				{ 11, 44738, "", "=q3=Kirin Tor Familiar", "=ds=#e13#", "#ACHIEVEMENTID:1956#"};
+				{ 12, 44841, "", "=q3=Little Fawn's Salt Lick", "=ds=#e13#", "#ACHIEVEMENTID:2516#"};
+				{ 13, 93031, "", "=q3=Mr. Bigglesworth's Frigid Collar", "=ds=#e13#", "#ACHIEVEMENTID:7934#"};
+				{ 14, 71140, "", "=q3=Nuts' Acorn", "=ds=#e13#", "#ACHIEVEMENTID:5876#" },
+				{ 15, 49912, "", "=q3=Perky Pug", "=ds=#e13#", "#ACHIEVEMENTID:4478#"};
+				{ 17, 88147, "", "=q3=Singing Cricket Cage", "=ds=#e13#", "#ACHIEVEMENTID:6582#"};
+				{ 18, 0, "", "=q3=Red Panda Cub", "=ds=#e13#", "#ACHIEVEMENTID:7906#"};
+				{ 19, 40653, "", "=q3=Reeking Pet Carrier", "=ds=#e13#", "#ACHIEVEMENTID:1250#"};
+				{ 20, 85513, "", "=q3=Thundering Serpent Hatchling", "=ds=#e13#", "#ACHIEVEMENTID:6634#"};
 				{
-					{ 19, 44810, "", "=q3=Turkey Cage", "#ACHIEVEMENTID:3656#, =ec1=#m6#"};
-					{ 19, 44810, "", "=q3=Turkey Cage", "#ACHIEVEMENTID:3478#, =ec1=#m7#"};
+					{ 21, 44810, "", "=q3=Turkey Cage", "=ds=#e13#", "#ACHIEVEMENTID:3656#, =ec1=#m6#"};
+					{ 21, 44810, "", "=q3=Turkey Cage", "=ds=#e13#", "#ACHIEVEMENTID:3478#, =ec1=#m7#"};
 				};
-				{ 20, 89736, "", "=q3=Venus", "#ACHIEVEMENTID:7501#"};
-				{ 21, 71033, "", "=q1=Lil' Tarecgosa", "#ACHIEVEMENTID:5840#" },
-				{ 22, 60869, "", "=q1=Pebble", "#ACHIEVEMENTID:5449#"};
+				{ 22, 89736, "", "=q3=Venus", "=ds=#e13#", "#ACHIEVEMENTID:7501#"};
+				{ 23, 71033, "", "=q1=Lil' Tarecgosa", "=ds=#e13#", "#ACHIEVEMENTID:5840#" },
+				{ 24, 60869, "", "=q1=Pebble", "=ds=#e13#", "#ACHIEVEMENTID:5449#"};
 			};
 		};
 		info = {
@@ -4128,26 +5042,26 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{
-					{ 2, 90898, "", "=q3=Fox Kit", "=ds="..BabbleFaction["Hellscream's Reach"].."  =ec1=#m6#"};
-					{ 2, 90897, "", "=q3=Fox Kit", "=ds="..BabbleFaction["Baradin's Wardens"].."  =ec1=#m7#"};
+					{ 2, 90898, "", "=q3=Fox Kit", "=ds=#e13#", "=ds="..BabbleFaction["Hellscream's Reach"].."  =ec1=#m6#"};
+					{ 2, 90897, "", "=q3=Fox Kit", "=ds=#e13#", "=ds="..BabbleFaction["Baradin's Wardens"].."  =ec1=#m7#"};
 				};
-				{ 3, 38628, "", "=q3=Nether Ray Fry", "=ds="..BabbleFaction["Sha'tari Skyguard"]};
-				{ 4, 44723, "", "=q3=Nurtured Penguin Egg", "=ds="..BabbleFaction["The Kalu'ak"]};
-				{ 5, 85222, "", "=q3=Red Cricket", "=ds="..BabbleFaction["Sho"]};
+				{ 3, 38628, "", "=q3=Nether Ray Fry", "=ds=#e13#", "=ds="..BabbleFaction["Sha'tari Skyguard"]};
+				{ 4, 44723, "", "=q3=Nurtured Penguin Egg", "=ds=#e13#", "=ds="..BabbleFaction["The Kalu'ak"]};
+				{ 5, 85222, "", "=q3=Red Cricket", "=ds=#e13#", "=ds="..BabbleFaction["Sho"].." - "..BabbleFaction["Best Friend"]};
 				{
-					{ 6, 64996, "", "=q3=Rustberg Gull", "=ds="..BabbleFaction["Hellscream's Reach"].."  =ec1=#m6#"};
-					{ 6, 63355, "", "=q3=Rustberg Gull", "=ds="..BabbleFaction["Baradin's Wardens"].."  =ec1=#m7#"};
+					{ 6, 64996, "", "=q3=Rustberg Gull", "=ds=#e13#", "=ds="..BabbleFaction["Hellscream's Reach"].."  =ec1=#m6#"};
+					{ 6, 63355, "", "=q3=Rustberg Gull", "=ds=#e13#", "=ds="..BabbleFaction["Baradin's Wardens"].."  =ec1=#m7#"};
 				};
 				{
-					{ 7, 46821, "", "=q3=Shimmering Wyrmling", "=ds="..BabbleFaction["The Sunreavers"].."  =ec1=#m6#"};
-					{ 7, 46820, "", "=q3=Shimmering Wyrmling", "=ds="..BabbleFaction["The Silver Covenant"].."  =ec1=#m7#"};
+					{ 7, 46821, "", "=q3=Shimmering Wyrmling", "=ds=#e13#", "=ds="..BabbleFaction["The Sunreavers"].."  =ec1=#m6#"};
+					{ 7, 46820, "", "=q3=Shimmering Wyrmling", "=ds=#e13#", "=ds="..BabbleFaction["The Silver Covenant"].."  =ec1=#m7#"};
 				};
-				{ 8, 85447, "", "=q3=Tiny Goldfish", "=ds="..BabbleFaction["The Anglers"]};
-				{ 9, 34478, "", "=q3=Tiny Sporebat", "=ds="..BabbleFaction["Sporeggar"]};
-				{ 10, 39898, "", "=q1=Cobra Hatchling", "=ds="..BabbleFaction["The Oracles"]};
-				{ 11, 44721, "", "=q1=Proto-Drake Whelp", "=ds="..BabbleFaction["The Oracles"]};
-				{ 12, 39896, "", "=q1=Tickbird Hatchling", "=ds="..BabbleFaction["The Oracles"]};
-				{ 13, 39899, "", "=q1=White Tickbird Hatchling", "=ds="..BabbleFaction["The Oracles"]};
+				{ 8, 85447, "", "=q3=Tiny Goldfish", "=ds=#e13#", "=ds="..BabbleFaction["The Anglers"]};
+				{ 9, 34478, "", "=q3=Tiny Sporebat", "=ds=#e13#", "=ds="..BabbleFaction["Sporeggar"]};
+				{ 10, 39898, "", "=q1=Cobra Hatchling", "=ds=#e13#", "=ds="..BabbleFaction["The Oracles"].." - =q2="..AtlasLoot_IngameLocales["Mysterious Egg"]};
+				{ 11, 44721, "", "=q1=Proto-Drake Whelp", "=ds=#e13#", "=ds="..BabbleFaction["The Oracles"].." - =q2="..AtlasLoot_IngameLocales["Mysterious Egg"]};
+				{ 12, 39896, "", "=q1=Tickbird Hatchling", "=ds=#e13#", "=ds="..BabbleFaction["The Oracles"].." - =q2="..AtlasLoot_IngameLocales["Mysterious Egg"]};
+				{ 13, 39899, "", "=q1=White Tickbird Hatchling", "=ds=#e13#", "=ds="..BabbleFaction["The Oracles"].." - =q2="..AtlasLoot_IngameLocales["Mysterious Egg"]};
 			};
 		};
 		info = {
@@ -4160,38 +5074,51 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["World Drop"], ""};
-				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "#ACHIEVEMENTID:6332#"};
-				{ 3, 8494, "", "=q4=Parrot Cage (Hyacinth Macaw)", "=ds="..AtlasLoot:GetMapNameByID(689)};
-				{ 4, 43698, "", "=q3=Giant Sewer Rat", "#ACHIEVEMENTID:1958#, =q1="..AtlasLoot:GetMapNameByID(504)};
-				{ 5, 86564, "", "=q3=Imbued Jade Fragment", "=q2=Karr the Darkener, =q1="..AtlasLoot:GetMapNameByID(858)};
-				{ 6, 86563, "", "=q3=Hollow Reed", "=q2=Nalash Verdantis, =q1="..AtlasLoot:GetMapNameByID(858)};
-				{ 7, 73953, "", "=q3=Sea Pony", "=q2=#p24#, =q1="..BabbleZone["Darkmoon Island"]};
-				{ 8, 85220, "", "=q3=Terrible Turnip", "=q2="..AL["Ominous Seed"]..", =q1="..AL["Halfhill Farm"]};
-				{ 9, 34535, "", "=q1=Azure Whelpling", "=ds="..AtlasLoot:GetMapNameByID(281)};
-				{ 10, 29960, "", "=q1=Captured Firefly", "=ds="..AtlasLoot:GetMapNameByID(467)};
-				{ 11, 8491, "", "=q1=Cat Carrier (Black Tabby)", "=ds="..AtlasLoot:GetMapNameByID(21)};
-				{ 12, 10822, "", "=q1=Dark Whelpling", "=ds="..AtlasLoot:GetMapNameByID(40).." / "..AtlasLoot:GetMapNameByID(17).." / "..AtlasLoot:GetMapNameByID(29)};
-				{ 13, 48112, "", "=q1=Darting Hatchling", "=ds="..AtlasLoot:GetMapNameByID(141)};
-				{ 14, 20769, "", "=q1=Disgusting Oozeling", "=ds="..AL["Oozing Bag"]..", =q1="..AL["Various Locations"]};
-				{ 15, 48116, "", "=q1=Gundrak Hatchling", "=ds="..AtlasLoot:GetMapNameByID(496)};
-				{ 16, 48118, "", "=q1=Leaping Hatchling", "=ds="..AtlasLoot:GetMapNameByID(11)};
-				{ 17, 27445, "", "=q1=Magical Crawdad Box", "=ds="..AtlasLoot:GetMapNameByID(478)};
-				{ 18, 66076, "", "=q1=Mr. Grubbs", "=q2="..AL["Hidden Stash"]..", =q1="..AtlasLoot:GetMapNameByID(23)};
-				{ 19, 48122, "", "=q1=Ravasaur Hatchling", "=ds="..AtlasLoot:GetMapNameByID(201)};
-				{ 20, 48124, "", "=q1=Razormaw Hatchling", "=ds="..AtlasLoot:GetMapNameByID(40)};
-				{ 21, 48126, "", "=q1=Razzashi Hatchling", "=ds="..AtlasLoot:GetMapNameByID(690)};
-				{ 22, 11474, "", "=q1=Sprite Darter Egg", "=ds="..AtlasLoot:GetMapNameByID(121)};
-				{ 23, 8499, "", "=q1=Tiny Crimson Whelpling", "=ds="..AtlasLoot:GetMapNameByID(40)};
-				{ 24, 8498, "", "=q1=Tiny Emerald Whelpling", "=ds="..AtlasLoot:GetMapNameByID(121)};
-				{ 25, 64494, "", "=q1=Tiny Shale Spider", "=q2="..AL["Jadefang"]..", =q1="..AtlasLoot:GetMapNameByID(640)};	
+				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "=ds=#e13#", "#ACHIEVEMENTID:6332#"};
+				{ 3, 8494, "", "=q4=Parrot Cage (Hyacinth Macaw)", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(689)};
+				{ 4, 64403, "", "=q3=Fox Kit", "=ds=#e13#", "=q2="..AL["Baradin Fox"]..", =q1="..AtlasLoot:GetMapNameByID(709)};
+				{ 5, 43698, "", "=q3=Giant Sewer Rat", "=ds=#e13#", "#ACHIEVEMENTID:1958#, =q1="..AtlasLoot:GetMapNameByID(504)};
+				{ 6, 86564, "", "=q3=Imbued Jade Fragment", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Karr the Darkener"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 7, 86563, "", "=q3=Hollow Reed", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Nalash Verdantis"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 8, 73953, "", "=q3=Sea Pony", "=ds=#e13#", "=q2=#p24#, =q1="..BabbleZone["Darkmoon Island"]};
+				{ 9, 85220, "", "=q3=Terrible Turnip", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Ominous Seed"]..", =q1="..AL["Halfhill Farm"]};
+				{ 10, 34535, "", "=q1=Azure Whelpling", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(281)};
+				{ 11, 29960, "", "=q1=Captured Firefly", "=ds=#e13#", "=q2="..AL["Bogflare Needler"]..", =q1="..AtlasLoot:GetMapNameByID(467)};
+				{ 12, 8491, "", "=q1=Cat Carrier (Black Tabby)", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(24)};
+				{ 13, 10822, "", "=q1=Dark Whelpling", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(40).." / "..AtlasLoot:GetMapNameByID(17).." / "..AtlasLoot:GetMapNameByID(29)};
+				{ 14, 48112, "", "=q1=Darting Hatchling", "=ds=#e13#", "=q2="..BabbleRare["Dart's Nest"]..", =q1="..AtlasLoot:GetMapNameByID(141)};
+				{ 15, 20769, "", "=q1=Disgusting Oozeling", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Oozing Bag"]..", =q1="..AL["Various Locations"]};
+				{ 16, 48116, "", "=q1=Gundrak Hatchling", "=ds=#e13#", "=q2="..AL["Gundrak Raptor"]..", =q1="..AtlasLoot:GetMapNameByID(496)};
+				{ 17, 48118, "", "=q1=Leaping Hatchling", "=ds=#e13#", "=q2="..BabbleRare["Takk's Nest"]..", =q1="..AtlasLoot:GetMapNameByID(11)};
+				{ 18, 27445, "", "=q1=Magical Crawdad Box", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(478)};
+				{ 19, 66076, "", "=q1=Mr. Grubbs", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Hidden Stash"]..", =q1="..AtlasLoot:GetMapNameByID(23)};
+				{ 20, 48122, "", "=q1=Ravasaur Hatchling", "=ds=#e13#", "=q2="..BabbleRare["Ravasaur Matriarch's Nest"]..", =q1="..AtlasLoot:GetMapNameByID(201)};
+				{ 21, 48124, "", "=q1=Razormaw Hatchling", "=ds=#e13#", "=q2="..BabbleRare["Razormaw Matriarch's Nest"]..", =q1="..AtlasLoot:GetMapNameByID(40)};
+				{ 22, 48126, "", "=q1=Razzashi Hatchling", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(689)};
+				{ 23, 11474, "", "=q1=Sprite Darter Egg", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(121)};
+				{ 24, 8499, "", "=q1=Tiny Crimson Whelpling", "=ds=#e13#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(40)};
+				{ 25, 8498, "", "=q1=Tiny Emerald Whelpling", "=ds=#e13#", "=q2="..AL["Noxious Whelp"]..", =q1="..AtlasLoot:GetMapNameByID(121)};
+				{ 26, 64494, "", "=q1=Tiny Shale Spider", "=ds=#e13#", "=q2="..BabbleRare["Jadefang"]..", =q1="..AtlasLoot:GetMapNameByID(640)};	
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["Dungeon/Raid"], ""};
-				{ 2, 33993, "", "=q3=Mojo", "=q1="..AtlasLoot:GetMapNameByID(781)};
-				{ 3, 35504, "", "=q3=Phoenix Hatchling", "=q2="..AtlasLoot:EJ_GetBossName("Kael'thas Sunstrider", 533)..", =q1="..AtlasLoot:GetMapNameByID(798)};
-				{ 4, 68673, "", "=q3=Smolderweb Egg", "=q2="..AtlasLoot:EJ_GetBossName("Mother Smolderweb", 391)..", =q1="..BabbleZone["Lower Blackrock Spire"]};
-				{ 5, 12264, "", "=q3=Worg Carrier", "=q2="..AtlasLoot:EJ_GetBossName("Quartermaster Zigris", 393)..", =q1="..BabbleZone["Lower Blackrock Spire"]};
-				{ 6, 48114, "", "=q1=Deviate Hatchling", "=q2="..AL["Deviate Ravager/Deviate Guardian"]..", =q1="..AtlasLoot:GetMapNameByID(749)};
+				{ 2, 93040, "", "=q3=Anubisath Idol", "=ds=#e13#", "=q2="..BabbleBoss["Emperor Vek'lor"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 3, 93037, "", "=q3=Blackwing Banner", "=ds=#e13#", "=q2="..BabbleBoss["Broodlord Lashlayer"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 4, 93034, "", "=q3=Blazing Rune", "=ds=#e13#", "=q2="..BabbleBoss["Magmadar"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 5, 93032, "", "=q3=Blighted Spore", "=ds=#e13#", "=q2="..BabbleBoss["Loatheb"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 6, 93035, "", "=q3=Core of Hardened Ash", "=ds=#e13#", "=q2="..BabbleBoss["Golemagg the Incinerator"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 7, 93030, "", "=q3=Dusty Clutch of Eggs", "=ds=#e13#", "=q2="..BabbleBoss["Maexxna"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 8, 93029, "", "=q3=Gluth's Bone", "=ds=#e13#", "=q2="..BabbleBoss["Gluth"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 9, 93041, "", "=q3=Jewel of Maddening Whispers", "=ds=#e13#", "=q2="..BabbleBoss["The Prophet Skeram"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 10, 93033, "", "=q3=Mark of Flame", "=ds=#e13#", "=q2="..BabbleBoss["Sulfuron Harbinger"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 11, 33993, "", "=q3=Mojo", "=ds=#e13#", "=q1="..AtlasLoot:GetMapNameByID(781)};
+				{ 12, 35504, "", "=q3=Phoenix Hatchling", "=ds=#e13#", "=q2="..AtlasLoot:EJ_GetBossName("Kael'thas Sunstrider", 533)..", =q1="..AtlasLoot:GetMapNameByID(798)};
+				{ 13, 68673, "", "=q3=Smolderweb Egg", "=ds=#e13#", "=q2="..AtlasLoot:EJ_GetBossName("Mother Smolderweb", 391)..", =q1="..BabbleZone["Lower Blackrock Spire"]};
+				{ 14, 93036, "", "=q3=Unscathed Egg", "=ds=#e13#", "=q2="..BabbleBoss["Razorgore the Untamed"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 15, 93039, "", "=q3=Viscidus Globule", "=ds=#e13#", "=q2="..BabbleBoss["Viscidus"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 16, 93038, "", "=q3=Whistle of Chromatic Bone", "=ds=#e13#", "=q2="..BabbleBoss["Chromaggus"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 17, 12264, "", "=q3=Worg Carrier", "=ds=#e13#", "=q2="..AtlasLoot:EJ_GetBossName("Quartermaster Zigris", 393)..", =q1="..BabbleZone["Lower Blackrock Spire"]};
+				{ 18, 48114, "", "=q1=Deviate Hatchling", "=ds=#e13#", "=q2="..AL["Deviate Ravager/Deviate Guardian"]..", =q1="..AtlasLoot:GetMapNameByID(749)};
 			};
 		};
 		info = {
@@ -4203,87 +5130,61 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PetsEvent"] = {
 		["Normal"] = {
 			{
-				{ 1, 0, "INV_Box_01", "=q6="..AL["Brewfest"], ""};
-				{ 2, 46707, "", "=q3=Pint-Sized Pink Pachyderm", "=ds=#e13#", "#BREWFEST:100#"};
-				{ 3, 32233, "", "=q3=Wolpertinger's Tankard", "=ds=#e13#", "40 #silver#"};
-				{ 5, 0, "INV_Box_01", "=q6="..AL["Children's Week"], ""};
-				{ 6, 46545, "", "=q3=Curious Oracle Hatchling", "=q1=#m4#: #QUESTID:13959#"};
-				{ 7, 46544, "", "=q3=Curious Wolvar Pup", "=q1=#m4#: #QUESTID:13960#"};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Argent Tournament"], ""};
+				{ 2, 45022, "", "=q3=Argent Gruntling", "=ds=#e13#", "=ds=#m4#, =ec1=#m6#"};
+				{ 3, 44998, "", "=q3=Argent Squire", "=ds=#e13#", "=ds=#m4#, =ec1=#m7#"};
+				{ 4, 44984, "", "=q3=Ammen Vale Lashling", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 5, 44970, "", "=q3=Dun Morogh Cub", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 6, 44973, "", "=q3=Durotar Scorpion", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 7, 44974, "", "=q3=Elwynn Lamb", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 8, 44982, "", "=q3=Enchanted Broom", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 9, 45002, "", "=q3=Mechanopeep", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 10, 44980, "", "=q3=Mulgore Hatchling", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 11, 45606, "", "=q3=Sen'jin Fetish", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 12, 44965, "", "=q3=Teldrassil Sproutling", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 13, 44971, "", "=q3=Tirisfal Batling", "=ds=#e13#", "#CHAMPSEAL:40#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Brewfest"], ""};
+				{ 17, 46707, "", "=q3=Pint-Sized Pink Pachyderm", "=ds=#e13#", "#BREWFEST:100#"};
+				{ 18, 32233, "", "=q3=Wolpertinger's Tankard", "=ds=#e13#", "40 #silver#"};
+				{ 20, 0, "INV_Box_01", "=q6="..AL["Children's Week"], ""};
+				{ 21, 46545, "", "=q3=Curious Oracle Hatchling", "=ds=#e13#", "=q1=#m4#: #QUESTID:13959#"};
+				{ 22, 46544, "", "=q3=Curious Wolvar Pup", "=ds=#e13#", "=q1=#m4#: #QUESTID:13960#"};
 				{
-					{ 8, 32616, "", "=q3=Egbert's Egg", "=q1=#m4#: #QUESTID:10967#"};
-					{ 8, 32616, "", "=q3=Egbert's Egg", "=q1=#m4#: #QUESTID:10966#"};
+					{ 23, 32616, "", "=q3=Egbert's Egg", "=ds=#e13#", "=q1=#m4#: #QUESTID:10967#"};
+					{ 23, 32616, "", "=q3=Egbert's Egg", "=ds=#e13#", "=q1=#m4#: #QUESTID:10966#"};
 				};
 				{
-					{ 9, 32622, "", "=q3=Elekk Training Collar", "=q1=#m4#: #QUESTID:10967#"};
-					{ 9, 32622, "", "=q3=Elekk Training Collar", "=q1=#m4#: #QUESTID:10966#"};
+					{ 24, 32622, "", "=q3=Elekk Training Collar", "=ds=#e13#", "=q1=#m4#: #QUESTID:10967#"};
+					{ 24, 32622, "", "=q3=Elekk Training Collar", "=ds=#e13#", "=q1=#m4#: #QUESTID:10966#"};
 				};
 				{
-					{ 10, 69648, "", "=q3=Legs", "=q1=#m4#: #QUESTID:10967#"};
-					{ 10, 69648, "", "=q3=Legs", "=q1=#m4#: #QUESTID:10966#"};
+					{ 25, 69648, "", "=q3=Legs", "=ds=#e13#", "=q1=#m4#: #QUESTID:10967#"};
+					{ 25, 69648, "", "=q3=Legs", "=ds=#e13#", "=q1=#m4#: #QUESTID:10966#"};
 				};
 				{
-					{ 11, 32617, "", "=q3=Sleepy Willy", "=q1=#m4#: #QUESTID:10967#"};
-					{ 11, 32617, "", "=q3=Sleepy Willy", "=q1=#m4#: #QUESTID:10966#"};
+					{ 26, 32617, "", "=q3=Sleepy Willy", "=ds=#e13#", "=q1=#m4#: #QUESTID:10967#"};
+					{ 26, 32617, "", "=q3=Sleepy Willy", "=ds=#e13#", "=q1=#m4#: #QUESTID:10966#"};
 				};
 				{
-					{ 12, 23007, "", "=q1=Piglet's Collar", "=q1=#m4#: #QUESTID:171#"};
-					{ 12, 23007, "", "=q1=Piglet's Collar", "=q1=#m4#: #QUESTID:171#"};
+					{ 27, 23007, "", "=q1=Piglet's Collar", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
+					{ 27, 23007, "", "=q1=Piglet's Collar", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
 				};
 				{
-					{ 13, 23015, "", "=q1=Rat Cage", "=q1=#m4#: #QUESTID:171#"};
-					{ 13, 23015, "", "=q1=Rat Cage", "=q1=#m4#: #QUESTID:171#"};
+					{ 28, 23015, "", "=q1=Rat Cage", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
+					{ 28, 23015, "", "=q1=Rat Cage", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
 				};
 				{
-					{ 14, 66073, "", "=q1=Snail Shell", "=q1=#m4#: #QUESTID:171#"};
-					{ 14, 66073, "", "=q1=Snail Shell", "=q1=#m4#: #QUESTID:171#"};
+					{ 29, 66073, "", "=q1=Snail Shell", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
+					{ 29, 66073, "", "=q1=Snail Shell", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
 				};
 				{
-					{ 15, 23002, "", "=q1=Turtle Box", "=q1=#m4#: #QUESTID:171#"};
-					{ 15, 23002, "", "=q1=Turtle Box", "=q1=#m4#: #QUESTID:171#"};
+					{ 30, 23002, "", "=q1=Turtle Box", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
+					{ 30, 23002, "", "=q1=Turtle Box", "=ds=#e13#", "=q1=#m4#: #QUESTID:171#"};
 				};
-				{ 16, 0, "INV_Box_01", "=q6="..AL["Noblegarden"], ""};
-				{ 17, 44794, "", "=q3=Spring Rabbit's Foot", "=ds=#e13#", "#NOBLEGARDEN:100#"};
-				{ 19, 0, "INV_Box_01", "=q6="..AL["Feast of Winter Veil"], ""};
-				{ 20, 73797, "", "=q3=Lump of Coal", "=ds=#e13#"};
-				{ 21, 21301, "", "=q1=Green Helper Box", "=ds=#e13#"};
-				{ 22, 21308, "", "=q1=Jingling Bell", "=ds=#e13#"};
-				{ 23, 21305, "", "=q1=Red Helper Box", "=ds=#e13#"};
-				{ 24, 21309, "", "=q1=Snowman Kit", "=ds=#e13#"};
-				{ 26, 0, "INV_Box_01", "=q6="..AL["Love is in the Air"], ""};
-				{ 27, 50446, "", "=q3=Toxic Wasteling", "=ds="..AL["Daily Reward"]};
-				{ 28, 22235, "", "=q1=Truesilver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:40#"};
-			};
-			{
-				{ 1, 0, "INV_Box_01", "=q6="..AL["Midsummer Fire Festival"], ""};
-				{ 2, 23083, "", "=q3=Captured Flame", "=ds=#e13#", "#MIDSUMMER:350#"};
-				{ 3, 53641, "", "=q3=Ice Chip", "=ds="..AL["Daily Reward"]};
-				{ 5, 0, "INV_Box_01", "=q6="..AL["Hallow's End"], ""};
-				{ 6, 33154, "", "=q3=Sinister Squashling", "=ds=#e13#", "#HALLOWSEND:150# / =ds="..AL["Daily Reward"]};
-				{
-					{ 7, 71076, "", "=q1=Creepy Crate", "=q1=#m4#: #QUESTID:29429#"};
-					{ 7, 71076, "", "=q1=Creepy Crate", "=q1=#m4#: #QUESTID:29413#"};
-				};
-				{ 8, 70908, "", "=q1=Feline Familiar", "=ds=#e13#", "#HALLOWSEND:150#"};
-				{ 10, 0, "INV_Box_01", "=q6="..AL["Lunar Festival"], ""};
-				{ 11, 74611, "", "=q3=Festival Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
-				{ 12, 74610, "", "=q3=Lunar Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
-				{ 16, 0, "INV_Box_01", "=q6="..AL["Argent Tournament"], ""};
-				{ 17, 45022, "", "=q3=Argent Gruntling", "=ds=#e13#", "=ds=#m4#, =ec1=#m6#"};
-				{ 18, 44998, "", "=q3=Argent Squire", "=ds=#e13#", "=ds=#m4#, =ec1=#m7#"};
-				{ 19, 44984, "", "=q3=Ammen Vale Lashling", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 20, 44970, "", "=q3=Dun Morogh Cub", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 21, 44973, "", "=q3=Durotar Scorpion", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 22, 44974, "", "=q3=Elwynn Lamb", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 23, 44982, "", "=q3=Enchanted Broom", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 24, 45002, "", "=q3=Mechanopeep", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 25, 44980, "", "=q3=Mulgore Hatchling", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 26, 45606, "", "=q3=Sen'jin Fetish", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 27, 44965, "", "=q3=Teldrassil Sproutling", "=ds=#e13#", "#CHAMPSEAL:40#"};
-				{ 28, 44971, "", "=q3=Tirisfal Batling", "=ds=#e13#", "#CHAMPSEAL:40#"};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["Darkmoon Faire"], ""};
-				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "#ACHIEVEMENTID:6332#"};
+				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "=ds=#e13#", "#ACHIEVEMENTID:6332#"};
 				{ 3, 73762, "", "=q3=Darkmoon Balloon", "=ds=#e13#", "#DARKMOON:90#"};
 				{ 4, 74981, "", "=q3=Darkmoon Cub", "=ds=#e13#", "#DARKMOON:90#"};
 				{ 5, 73764, "", "=q3=Darkmoon Monkey", "=ds=#e13#", "#DARKMOON:90#"};
@@ -4293,6 +5194,37 @@ local moduleName = "AtlasLootMoP"
 				{ 9, 19450, "", "=q1=A Jubling's Tiny Home", "=ds=#e13#", "=q1=#m4#: #QUESTID:7946#"};
 				{ 10, 11026, "", "=q1=Tree Frog Box", "=ds=#e13#", "1 #gold#"};
 				{ 11, 11027, "", "=q1=Wood Frog Box", "=ds=#e13#", "1 #gold#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Feast of Winter Veil"], ""};
+				{ 17, 73797, "", "=q3=Lump of Coal", "=ds=#e13#", "=ds=#e13#"};
+				{ 18, 21301, "", "=q1=Green Helper Box", "=ds=#e13#", "=ds=#e13#"};
+				{ 19, 21308, "", "=q1=Jingling Bell", "=ds=#e13#", "=ds=#e13#"};
+				{ 20, 21305, "", "=q1=Red Helper Box", "=ds=#e13#", "=ds=#e13#"};
+				{ 21, 21309, "", "=q1=Snowman Kit", "=ds=#e13#", "=ds=#e13#"};
+				{ 23, 0, "INV_Box_01", "=q6="..AL["Hallow's End"], ""};
+				{ 24, 33154, "", "=q3=Sinister Squashling", "=ds=#e13#", "#HALLOWSEND:150# =ds="..AL["Daily Reward"]};
+				{
+					{ 25, 71076, "", "=q1=Creepy Crate", "=ds=#e13#", "=q1=#m4#: #QUESTID:29429#"};
+					{ 25, 71076, "", "=q1=Creepy Crate", "=ds=#e13#", "=q1=#m4#: #QUESTID:29413#"};
+				};
+				{ 26, 70908, "", "=q1=Feline Familiar", "=ds=#e13#", "#HALLOWSEND:150#"};
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Love is in the Air"], ""};
+				{ 2, 50446, "", "=q3=Toxic Wasteling", "=ds=#e13#", "=ds="..AL["Daily Reward"]};
+				{ 3, 22235, "", "=q1=Truesilver Shafted Arrow", "=ds=#e13#", "#VALENTINEDAY:40#"};
+				{ 5, 0, "INV_Box_01", "=q6="..AL["Lunar Festival"], ""};
+				{ 6, 74611, "", "=q3=Festival Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
+				{ 7, 74610, "", "=q3=Lunar Lantern", "=ds=#e13#", "#LUNARFESTIVAL:50#"};
+				{ 9, 0, "INV_Box_01", "=q6="..AL["Midsummer Fire Festival"], ""};
+				{ 10, 23083, "", "=q3=Captured Flame", "=ds=#e13#", "#MIDSUMMER:350#"};
+				{ 11, 53641, "", "=q3=Ice Chip", "=ds=#e13#", "=ds="..AL["Daily Reward"]};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Noblegarden"], ""};
+				{ 17, 44794, "", "=q3=Spring Rabbit's Foot", "=ds=#e13#", "#NOBLEGARDEN:100#"};
+				{ 19, 0, "INV_Box_01", "=q6="..AL["Pilgrim's Bounty"], ""};
+				{
+					{ 20, 44810, "", "=q3=Turkey Cage", "=ds=#e13#", "#ACHIEVEMENTID:3656#, =ec1=#m6#"};
+					{ 20, 44810, "", "=q3=Turkey Cage", "=ds=#e13#", "#ACHIEVEMENTID:3478#, =ec1=#m7#"};
+				};
 			};
 		};
 		info = {
@@ -4304,25 +5236,25 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["PetsPromotional"] = {
 		["Normal"] = {
 			{
-				{ 2, 90177, "", "=q3=Baneling", "#ACHIEVEMENTID:7842#"};
-				{ 3, 20371, "", "=q3=Blue Murloc Egg", "#ACHIEVEMENTID:411#"};
-				{ 4, 49646, "", "=q3=Core Hound Pup", "=ds=#e13#"};
-				{ 5, 13584, "", "=q3=Diablo Stone", "#ACHIEVEMENTID:662#"};
-				{ 6, 76062, "", "=q3=Fetish Shaman's Spear", "#ACHIEVEMENTID:7412#"};
-				{ 7, 39286, "", "=q3=Frosty's Collar", "#ACHIEVEMENTID:683#"};
-				{ 8, 46802, "", "=q3=Heavy Murloc Egg", "#ACHIEVEMENTID:3536#"};
-				{ 9, 62540, "", "=q3=Lil' Deathwing", "#ACHIEVEMENTID:5377#"};
-				{ 10, 85871, "", "=q3=Lucky Quilen Cub", "#ACHIEVEMENTID:6848#"};
-				{ 11, 30360, "", "=q3=Lurky's Egg", "=q2="..AL["Collector's Edition"]};
-				{ 17, 56806, "", "=q3=Mini Thor", "#ACHIEVEMENTID:4824#"};
-				{ 18, 45180, "", "=q3=Murkimus' Little Spear", "#ACHIEVEMENTID:3618#"};
-				{ 19, 71726, "", "=q3=Murky's Little Soulstone", "#ACHIEVEMENTID:6185#"};
-				{ 20, 25535, "", "=q3=Netherwhelp's Collar", "#ACHIEVEMENTID:665#"};
-				{ 21, 13583, "", "=q3=Panda Collar", "#ACHIEVEMENTID:663#"};
-				{ 22, 22114, "", "=q3=Pink Murloc Egg", "=ds=#e13#"};
-				{ 23, 67418, "", "=q3=Smoldering Murloc Egg", "#ACHIEVEMENTID:5378#"};
-				{ 24, 39656, "", "=q3=Tyrael's Hilt", "#ACHIEVEMENTID:414#"};
-				{ 25, 13582, "", "=q3=Zergling Leash", "#ACHIEVEMENTID:664#"};
+				{ 2, 90177, "", "=q3=Baneling", "=ds=#e13#", "#ACHIEVEMENTID:7842#"};
+				{ 3, 20371, "", "=q3=Blue Murloc Egg", "=ds=#e13#", "#ACHIEVEMENTID:411#"};
+				{ 4, 49646, "", "=q3=Core Hound Pup", "=ds=#e13#", "=ds=#e13#"};
+				{ 5, 13584, "", "=q3=Diablo Stone", "=ds=#e13#", "#ACHIEVEMENTID:662#"};
+				{ 6, 76062, "", "=q3=Fetish Shaman's Spear", "=ds=#e13#", "#ACHIEVEMENTID:7412#"};
+				{ 7, 39286, "", "=q3=Frosty's Collar", "=ds=#e13#", "#ACHIEVEMENTID:683#"};
+				{ 8, 46802, "", "=q3=Heavy Murloc Egg", "=ds=#e13#", "#ACHIEVEMENTID:3536#"};
+				{ 9, 62540, "", "=q3=Lil' Deathwing", "=ds=#e13#", "#ACHIEVEMENTID:5377#"};
+				{ 10, 85871, "", "=q3=Lucky Quilen Cub", "=ds=#e13#", "#ACHIEVEMENTID:6848#"};
+				{ 11, 30360, "", "=q3=Lurky's Egg", "=ds=#e13#", "=q2="..AL["Burning Crusade"].." "..AL["Collector's Edition"]};
+				{ 17, 56806, "", "=q3=Mini Thor", "=ds=#e13#", "#ACHIEVEMENTID:4824#"};
+				{ 18, 45180, "", "=q3=Murkimus' Little Spear", "=ds=#e13#", "#ACHIEVEMENTID:3618#"};
+				{ 19, 71726, "", "=q3=Murky's Little Soulstone", "=ds=#e13#", "#ACHIEVEMENTID:6185#"};
+				{ 20, 25535, "", "=q3=Netherwhelp's Collar", "=ds=#e13#", "#ACHIEVEMENTID:665#"};
+				{ 21, 13583, "", "=q3=Panda Collar", "=ds=#e13#", "#ACHIEVEMENTID:663#"};
+				{ 22, 22114, "", "=q3=Pink Murloc Egg", "=ds=#e13#", "=ds=#e13#"};
+				{ 23, 67418, "", "=q3=Smoldering Murloc Egg", "=ds=#e13#", "#ACHIEVEMENTID:5378#"};
+				{ 24, 39656, "", "=q3=Tyrael's Hilt", "=ds=#e13#", "#ACHIEVEMENTID:414#"};
+				{ 25, 13582, "", "=q3=Zergling Leash", "=ds=#e13#", "#ACHIEVEMENTID:664#"};
 			};
 		};
 		info = {
@@ -4361,9 +5293,9 @@ local moduleName = "AtlasLootMoP"
 			{
 				{ 2, 37297, "", "=q3=Gold Medallion", "=ds=#e13#"};
 				{ 3, 41133, "", "=q3=Unhatched Mr. Chilly", "=ds=#e13#"};
-				{ 4, 38658, "", "=q3=Vampiric Batling", "#ACHIEVEMENTID:2456#, =q1="..AtlasLoot:GetMapNameByID(799)};
-				{ 17, 44819, "", "=q1=Baby Blizzard Bear", "#ACHIEVEMENTID:2398#"};
-				{ 18, 49362, "", "=q1=Onyxian Whelpling", "#ACHIEVEMENTID:4400#"};
+				{ 4, 38658, "", "=q3=Vampiric Batling", "=ds=#e13#", "#ACHIEVEMENTID:2456#, =q1="..AtlasLoot:GetMapNameByID(799)};
+				{ 17, 44819, "", "=q1=Baby Blizzard Bear", "=ds=#e13#", "#ACHIEVEMENTID:2398#"};
+				{ 18, 49362, "", "=q1=Onyxian Whelpling", "=ds=#e13#", "#ACHIEVEMENTID:4400#"};
 			};
 		};
 		info = {
@@ -4376,10 +5308,11 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 2, 70099, "", "=q4=Cenarion Hatchling", "=ds=#e13#"};
-				{ 3, 49662, "", "=q3=Gryphon Hatchling", "=ds=#e13#"};
-				{ 4, 72068, "", "=q3=Guardian Cub", "=ds=#e13#"};
-				{ 5, 49693, "", "=q3=Lil' Phylactery", "=ds=#e13#"};
-				{ 6, 68385, "", "=q3=Lil' Ragnaros", "=ds=#e13#"};
+				{ 3, 92707, "", "=q4=Cinder Kitten", "=ds=#e13#"};
+				{ 4, 49662, "", "=q3=Gryphon Hatchling", "=ds=#e13#"};
+				{ 5, 72068, "", "=q3=Guardian Cub", "=ds=#e13#"};
+				{ 6, 49693, "", "=q3=Lil' Phylactery", "=ds=#e13#"};
+				{ 7, 68385, "", "=q3=Lil' Ragnaros", "=ds=#e13#"};
 				{ 17, 54847, "", "=q3=Lil' XT", "=ds=#e13#"};
 				{
 					{ 18, 68619, "", "=q3=Moonkin Hatchling", "=ds=#e13#"};
@@ -4424,44 +5357,47 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["Rare Companions"], ""};
-				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "#ACHIEVEMENTID:6332#"};
-				{ 3, 85220, "", "=q3=Terrible Turnip", "=q2="..AL["Ominous Seed"]..", =q1="..AL["Halfhill Farm"]};
-				{ 5, 0, "INV_Box_01", "=q6="..AL["Promotional Companions"], ""};
-				{ 6, 90177, "", "=q3=Baneling", "#ACHIEVEMENTID:7842#"};
-				{ 7, 85871, "", "=q3=Lucky Quilen Cub", "#ACHIEVEMENTID:6848#"};
-				{ 9, 0, "INV_Box_01", "=q6="..AL["Achievement Companions"], ""};
-				{ 10, 85578, "", "=q3=Feral Vermling", "#ACHIEVEMENTID:7500#"};
-				{ 11, 86562, "", "=q3=Hopling", "#ACHIEVEMENTID:6402#"};
-				{ 12, 89686, "", "=q3=Jade Tentacle", "#ACHIEVEMENTID:7521#"};
-				{ 13, 88147, "", "=q3=Singing Cricket Cage", "#ACHIEVEMENTID:6582#"};
-				{ 14, 85513, "", "=q3=Thundering Serpent Hatchling", "#ACHIEVEMENTID:6634#"};
-				{ 15, 89736, "", "=q3=Venus", "#ACHIEVEMENTID:7501#"};
-				{ 16, 0, "INV_Box_01", "=q6="..AL["Card Game Companions"], ""};
-				{ 17, 79744, "", "=q3=Eye of the Legion", "=ds=#e13#", "=q1="..AL["War of the Ancients"]};
-				{ 19, 0, "INV_Box_01", "=q6="..AL["Faction Companions"], ""};
-				{ 20, 85222, "", "=q3=Red Cricket", "=ds="..BabbleFaction["Sho"]};
-				{ 21, 85447, "", "=q3=Tiny Goldfish", "=ds="..BabbleFaction["The Anglers"]};
-				{ 23, 0, "INV_Box_01", "=q6="..AL["Crafted Companions"], ""};
-				{ 24, 82774, "", "=q3=Jade Owl", "=q2=#p12#"};
-				{ 25, 87526, "", "=q3=Mechanical Pandaren Dragonling", "=q2=#p5#"};
-				{ 26, 82775, "", "=q3=Sapphire Cub", "=q2=#p12#"};
-				{ 27, 89368, "", "=q1=Chi-ji Kite", "=q2=#p26#"};
-				{ 28, 89367, "", "=q1=Yu'lon Kite", "=q2=#p26#"};
+				{ 2, 80008, "", "=q4=Darkmoon Rabbit", "=ds=#e13#", "#ACHIEVEMENTID:6332#"};
+				{ 3, 86564, "", "=q3=Imbued Jade Fragment", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Karr the Darkener"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 4, 86563, "", "=q3=Hollow Reed", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Nalash Verdantis"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 5, 85220, "", "=q3=Terrible Turnip", "=ds=#e13#", "=q2="..AtlasLoot_IngameLocales["Ominous Seed"]..", =q1="..AL["Halfhill Farm"]};
+				{ 7, 0, "INV_Box_01", "=q6="..AL["Card Game Companions"], ""};
+				{ 8, 79744, "", "=q3=Eye of the Legion", "=ds=#e13#", "=q1="..AL["War of the Ancients"]};
+				{ 10, 0, "INV_Box_01", "=q6="..AL["Crafted Companions"], ""};
+				{ 11, 82774, "", "=q3=Jade Owl", "=ds=#e13#", "=q2=#p12#"};
+				{ 12, 87526, "", "=q3=Mechanical Pandaren Dragonling", "=ds=#e13#", "=q2=#p5#"};
+				{ 13, 82775, "", "=q3=Sapphire Cub", "=ds=#e13#", "=q2=#p12#"};
+				{ 14, 89368, "", "=q1=Chi-ji Kite", "=ds=#e13#", "=q2=#p26#"};
+				{ 15, 89367, "", "=q1=Yu'lon Kite", "=ds=#e13#", "=q2=#p26#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Achievement Companions"], ""};
+				{ 17, 85578, "", "=q3=Feral Vermling", "=ds=#e13#", "#ACHIEVEMENTID:7500#"};
+				{ 18, 86562, "", "=q3=Hopling", "=ds=#e13#", "#ACHIEVEMENTID:6402#"};
+				{ 19, 89686, "", "=q3=Jade Tentacle", "=ds=#e13#", "#ACHIEVEMENTID:7521#"};
+				{ 20, 88147, "", "=q3=Singing Cricket Cage", "=ds=#e13#", "#ACHIEVEMENTID:6582#"};
+				{ 21, 85513, "", "=q3=Thundering Serpent Hatchling", "=ds=#e13#", "#ACHIEVEMENTID:6634#"};
+				{ 22, 89736, "", "=q3=Venus", "=ds=#e13#", "#ACHIEVEMENTID:7501#"};
+				{ 24, 0, "INV_Box_01", "=q6="..AL["Promotional Companions"], ""};
+				{ 25, 90177, "", "=q3=Baneling", "=ds=#e13#", "#ACHIEVEMENTID:7842#"};
+				{ 26, 85871, "", "=q3=Lucky Quilen Cub", "=ds=#e13#", "#ACHIEVEMENTID:6848#"};
+				{ 28, 0, "INV_Box_01", "=q6="..AL["Faction Companions"], ""};
+				{ 29, 85222, "", "=q3=Red Cricket", "=ds=#e13#", "=ds="..BabbleFaction["Sho"].." - "..BabbleFaction["Best Friend"]};
+				{ 30, 85447, "", "=q3=Tiny Goldfish", "=ds=#e13#", "=ds="..BabbleFaction["The Anglers"]};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["Quest Reward Companions"], ""};
-				{ 2, 89587, "", "=q3=Porcupette", "=ds="..AL["Pet Battle Quests"]};
-				{ 3, 84105, "", "=q1=Fishy", "=q1=#m4#: #QUESTID:29905#"};
-				{ 5, 0, "INV_Box_01", "=q6="..AL["Merchant Sold Companions"], ""};
-				{ 6, "s123214", "", "=q1=Gilnean Raven", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m7#"};
-				{ 7, 88148, "", "=q1=Jade Crane Chick", "=ds="..AL["Battle Pet Trainer"]};
-				{ 8, "s123212", "", "=q1=Shore Crawler", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m6#"};
+				{ 2, 89587, "", "=q3=Porcupette", "=ds=#e13#", "=ds="..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
 				{
-					{ 9, 46767, "", "=q1=Warbot Ignition Key", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
-					{ 9, 46767, "", "=q1=Warbot Ignition Key", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
+					{ 3, 84105, "", "=q1=Fishy", "=ds=#e13#", "=q1=#m4#: #QUESTID:31239#"};
+					{ 3, 84105, "", "=q1=Fishy", "=ds=#e13#", "=q1=#m4#: #QUESTID:29905#"};
 				};
-				{ 11, 0, "INV_Box_01", "=q6=Unknown", ""};
-				{ 12, 90173, "", "=q3=Pandaren Water Spirit", "=ds=#e13#" }; ---NEEDS TO BE CHECKED
+				{ 5, 0, "INV_Box_01", "=q6="..AL["Merchant Sold Companions"], ""};
+				{ 6, "s123214", "", "=q1=Gilnean Raven", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m7#"};
+				{ 7, 88148, "", "=q1=Jade Crane Chick", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"]};
+				{ 8, "s123212", "", "=q1=Shore Crawler", "=ds=#e13#", "=ds="..AL["Battle Pet Trainer"].." =ec1=#m6#"};
+				{
+					{ 9, 46767, "", "=q1=Warbot Ignition Key", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(321)};
+					{ 9, 46767, "", "=q1=Warbot Ignition Key", "=ds=#e13#", "=ds="..AtlasLoot:GetMapNameByID(504).." / "..AtlasLoot:GetMapNameByID(301)};
+				};
 				{ 16, 0, "INV_Box_01", "=q6="..AL["Companion Accessories"], ""};
 				{ 17, 89906, "", "=q2=Magical Mini-Treat", "=ds="};	
 				{ 18, 89139, "", "=q1=Chain Pet Leash", "=ds="};
@@ -4470,7 +5406,91 @@ local moduleName = "AtlasLootMoP"
 			};
 		};
 		info = {
-			name = AL["New Companions"],
+			name = AL["New Companions"].." - "..AL["Mists of Pandaria"],
+			module = moduleName, menu = "PETMENU", instance = "Pets",
+		};
+	}
+
+	AtlasLoot_Data["PetsNEW2"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Blizzard Store"], ""};
+				{ 2, 92707, "", "=q4=Cinder Kitten", "=ds=#e13#"};
+				{ 4, 0, "INV_Box_01", "=q6="..AL["Quest Reward Companions"], ""};
+				{ 5, 91040, "", "=q3=Darkmoon Eye", "=ds=#e13#", "=q1=#m4#: #QUESTID:32175#"};
+				{ 6, 92799, "", "=q3=Pandaren Air Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 7, 92800, "", "=q3=Pandaren Earth Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 8, 92798, "", "=q3=Pandaren Fire Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 9, 90173, "", "=q3=Pandaren Water Spirit", "=ds=#e13#", "=q1=#m4#: #QUESTID:32428# / "..AtlasLoot_IngameLocales["Sack of Pet Supplies"]};
+				{ 11, 0, "INV_Box_01", "=q6="..AL["World Events"], ""};
+				{ 12, 91003, "", "=q3=Darkmoon Hatchling", "=ds=#e13#", "#DARKMOON:90#"};
+				{ 13, 91031, "", "=q1=Darkmoon Glowfly", "=ds=#e13#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Crafted Companions"], ""};
+				{ 17, 90900, "", "=q3=Imperial Moth", "=ds=#e13#", "=q2=#p8#"};
+				{ 18, 90902, "", "=q2=Imperial Silkworm", "=ds=#e13#", "=q2=#p8#"};
+				{ 20, 0, "INV_Box_01", "=q6="..AL["Achievement Companions"], ""};
+				{ 21, 93031, "", "=q3=Mr. Bigglesworth's Frigid Collar", "=ds=#e13#", "#ACHIEVEMENTID:7934#"};
+				{ 22, 0, "", "=q3=Red Panda Cub", "=ds=#e13#", "#ACHIEVEMENTID:7906#"};
+				{ 24, 0, "INV_Box_01", "=q6="..AL["Companion Accessories"], ""};
+				{ 25, 92738, "", "=q3=Safari Hat", "=ds=#s1#", "#ACHIEVEMENTID:7499#"};
+				{ 27, 0, "INV_Box_01", "=q6="..AL["Unknown"], ""};
+				{ 28, 93025, "", "=q3=Clock'em", "=ds=#e13#" }; ---NEEDS TO BE CHECKED Brawler's Guild reputation maybe
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Dungeon/Raid"], ""};
+				{ 2, 93040, "", "=q3=Anubisath Idol", "=ds=#e13#", "=q2="..BabbleBoss["Emperor Vek'lor"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 3, 93037, "", "=q3=Blackwing Banner", "=ds=#e13#", "=q2="..BabbleBoss["Broodlord Lashlayer"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 4, 93034, "", "=q3=Blazing Rune", "=ds=#e13#", "=q2="..BabbleBoss["Magmadar"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 5, 93032, "", "=q3=Blighted Spore", "=ds=#e13#", "=q2="..BabbleBoss["Loatheb"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 6, 93035, "", "=q3=Core of Hardened Ash", "=ds=#e13#", "=q2="..BabbleBoss["Golemagg the Incinerator"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 7, 93030, "", "=q3=Dusty Clutch of Eggs", "=ds=#e13#", "=q2="..BabbleBoss["Maexxna"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 8, 93029, "", "=q3=Gluth's Bone", "=ds=#e13#", "=q2="..BabbleBoss["Gluth"]..", =q1="..AtlasLoot:GetMapNameByID(535)};
+				{ 9, 93041, "", "=q3=Jewel of Maddening Whispers", "=ds=#e13#", "=q2="..BabbleBoss["The Prophet Skeram"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 10, 93033, "", "=q3=Mark of Flame", "=ds=#e13#", "=q2="..BabbleBoss["Sulfuron Harbinger"]..", =q1="..AtlasLoot:GetMapNameByID(696)};
+				{ 11, 93036, "", "=q3=Unscathed Egg", "=ds=#e13#", "=q2="..BabbleBoss["Razorgore the Untamed"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 12, 93039, "", "=q3=Viscidus Globule", "=ds=#e13#", "=q2="..BabbleBoss["Viscidus"]..", =q1="..AtlasLoot:GetMapNameByID(766)};
+				{ 13, 93038, "", "=q3=Whistle of Chromatic Bone", "=ds=#e13#", "=q2="..BabbleBoss["Chromaggus"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+			};
+			{
+				{ 1, 92742, "", "=q2=Polished Battle-Stone", "=ds=#e18#"};
+				{ 2, 92689, "", "=q2=Polished Aquatic Battle-Stone", "=ds=#e18#"};
+				{ 3, 92685, "", "=q2=Polished Beast Battle-Stone", "=ds=#e18#"};
+				{ 4, 92686, "", "=q2=Polished Critter Battle-Stone", "=ds=#e18#"};
+				{ 5, 92693, "", "=q2=Polished Dragonkin Battle-Stone", "=ds=#e18#"};
+				{ 6, 92684, "", "=q2=Polished Elemental Battle-Stone", "=ds=#e18#"};
+				{ 7, 92687, "", "=q2=Polished Flying Battle-Stone", "=ds=#e18#"};
+				{ 8, 92692, "", "=q2=Polished Humanoid Battle-Stone", "=ds=#e18#"};
+				{ 9, 92688, "", "=q2=Polished Magic Battle-Stone", "=ds=#e18#"};
+				{ 10, 92690, "", "=q2=Polished Mechanical Battle-Stone", "=ds=#e18#"};
+				{ 11, 92691, "", "=q2=Polished Undead Battle-Stone", "=ds=#e18#"};
+				{ 16, 92741, "", "=q3=Flawless Battle-Stone", "=ds=#e18#"};
+				{ 17, 92679, "", "=q3=Flawless Aquatic Battle-Stone", "=ds=#e18#"};
+				{ 18, 92675, "", "=q3=Flawless Beast Battle-Stone", "=ds=#e18#"};
+				{ 19, 92676, "", "=q3=Flawless Critter Battle-Stone", "=ds=#e18#"};
+				{ 20, 92683, "", "=q3=Flawless Dragonkin Battle-Stone", "=ds=#e18#"};
+				{ 21, 92665, "", "=q3=Flawless Elemental Battle-Stone", "=ds=#e18#"};
+				{ 22, 92677, "", "=q3=Flawless Flying Battle-Stone", "=ds=#e18#"};
+				{ 23, 92682, "", "=q3=Flawless Humanoid Battle-Stone", "=ds=#e18#"};
+				{ 24, 92678, "", "=q3=Flawless Magic Battle-Stone", "=ds=#e18#"};
+				{ 25, 92680, "", "=q3=Flawless Mechanical Battle-Stone", "=ds=#e18#"};
+				{ 26, 92681, "", "=q3=Flawless Undead Battle-Stone", "=ds=#e18#"};
+			};
+			{
+				{ 1, 92740, "", "=q4=Perfect Battle-Stone", "=ds=#e18#"};
+				{ 2, 92694, "", "=q4=Perfect Aquatic Battle-Stone", "=ds=#e18#"};
+				{ 3, 92695, "", "=q4=Perfect Beast Battle-Stone", "=ds=#e18#"};
+				{ 4, 92696, "", "=q4=Perfect Critter Battle-Stone", "=ds=#e18#"};
+				{ 5, 92697, "", "=q4=Perfect Dragonkin Battle-Stone", "=ds=#e18#"};
+				{ 6, 92698, "", "=q4=Perfect Elemental Battle-Stone", "=ds=#e18#"};
+				{ 7, 92699, "", "=q4=Perfect Flying Battle-Stone", "=ds=#e18#"};
+				{ 8, 92700, "", "=q4=Perfect Humanoid Battle-Stone", "=ds=#e18#"};
+				{ 9, 92701, "", "=q4=Perfect Magic Battle-Stone", "=ds=#e18#"};
+				{ 10, 92702, "", "=q4=Perfect Mechanical Battle-Stone", "=ds=#e18#"};
+				{ 11, 92703, "", "=q4=Perfect Undead Battle-Stone", "=ds=#e18#"};
+			};
+		};
+		info = {
+			name = AL["New Companions"].." - Patch 5.1",
 			module = moduleName, menu = "PETMENU", instance = "Pets",
 		};
 	}
@@ -4525,18 +5545,18 @@ local moduleName = "AtlasLootMoP"
 			};
 			{
 				{ 1, 0, "inv_misc_tournaments_tabard_human", "=q6="..BabbleFaction["Tushui Pandaren"].." #j30#"};
-				{ 2, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#"};
-				{ 3, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#"};
-				{ 4, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#"};
-				{ 5, 82765, "", "=q4=Reins of the Green Dragon Turtle", "=ds=#e26#"};
-				{ 6, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#"};
-				{ 7, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#"};
-				{ 8, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#"};
-				{ 9, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#"};
-				{ 10, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#"};
-				{ 11, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#"};
-				{ 12, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#"};
-				{ 13, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#"};
+				{ 2, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 3, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 4, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 5, 82765, "", "=q4=Reins of the Green Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 6, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 7, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 8, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 9, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 10, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 11, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 12, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 13, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
 				{ 16, 0, "inv_misc_tabard_gilneas", "=q6="..BabbleFaction["Gilneas"].." #j30#", "=ec1=#m7#"};
 				{ 17, 73839, "", "=q4=Swift Mountain Horse", "=ds=#e26#"};
 				{ 18, 73838, "", "=q3=Mountain Horse", "=ds=#e26#"};
@@ -4629,18 +5649,18 @@ local moduleName = "AtlasLootMoP"
 			};
 			{
 				{ 1, 0, "inv_misc_tournaments_tabard_orc", "=q6="..BabbleFaction["Huojin Pandaren"].." #j30#"};
-				{ 2, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#"};
-				{ 3, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#"};
-				{ 4, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#"};
-				{ 5, 82765, "", "=q4=Reins of the Green Dragon Turtle", "=ds=#e26#"};
-				{ 6, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#"};
-				{ 7, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#"};
-				{ 8, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#"};
-				{ 9, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#"};
-				{ 10, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#"};
-				{ 11, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#"};
-				{ 12, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#"};
-				{ 13, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#"};
+				{ 2, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 3, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 4, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 5, 82765, "", "=q4=Reins of the Green Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 6, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 7, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 8, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 9, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 10, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 11, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 12, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 13, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
 				{ 16, 0, "inv_misc_tournaments_symbol_orc", "=q6="..BabbleFaction["Bilgewater Cartel"].." #j30#", "=ec1=#m6#"};
 				{ 17, 62462, "", "=q4=Goblin Turbo-Trike Key", "=ds=#e26#"};
 				{ 18, 62461, "", "=q3=Goblin Trike Key", "=ds=#e26#"};
@@ -4690,72 +5710,68 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["Order of the Cloud Serpent"].." #j30#"};
-				{ 2, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#"};
-				{ 3, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#"};
-				{ 4, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#"};
+				{ 2, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 3, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 4, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
 				{ 6, 0, "INV_Box_01", "=q6="..BabbleFaction["The August Celestials"].." #j30#"};
-				{ 7, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#"};
+				{ 7, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#", "=ds=10,000 #gold#"};
 				{ 9, 0, "INV_Box_01", "=q6="..BabbleFaction["The Lorewalkers"].." #j30#"};
-				{ 10, 89363, "", "=q4=Disc of the Red Flying Cloud", "=ds=#e27#"};
+				{ 10, 89363, "", "=q3=Disc of the Red Flying Cloud", "=ds=#e27#", "=ds=600 #gold#"};
 				{ 12, 0, "INV_Box_01", "=q6="..BabbleFaction["Golden Lotus"].." #j30#"};
-				{ 13, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#"};
-				{ 14, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#"};
-				{ 15, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#"};
+				{ 13, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 14, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#", "=ds=2,500 #gold#"};
+				{ 15, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#", "=ds=1,500 #gold#"};
 				{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["The Klaxxi"].." #j30#"};
-				{ 17, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#"};
+				{ 17, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#", "=ds=10,000 #gold#"};
 				{ 19, 0, "INV_Box_01", "=q6="..BabbleFaction["The Anglers"].." #j30#"};
-				{ 20, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e26#"};
-				{ 21, 87791, "", "=q4=Reins of the Crimson Water Strider", "=ds=#e26#"};
-				{ 22, 87794, "", "=q4=Reins of the Golden Water Strider", "=ds=#e26#"};
-				{ 23, 87793, "", "=q4=Reins of the Jade Water Strider", "=ds=#e26#"};
-				{ 24, 87792, "", "=q4=Reins of the Orange Water Strider", "=ds=#e26#"};
-				{ 26, 0, "INV_Box_01", "=q6="..BabbleFaction["Shado-Pan"].." #j30#"};
-				{ 27, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 28, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 29, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#"};
+				{ 20, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e26#", "=ds=5,000 #gold#"};
+				{ 22, 0, "INV_Box_01", "=q6="..BabbleFaction["Shado-Pan"].." #j30#"};
+				{ 23, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 24, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=1,500 #gold#"};
+				{ 25, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=2,500 #gold#"};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["The Tillers"].." #j30#"};
-				{ 2, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#"};
-				{ 3, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#"};
-				{ 4, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#"};
+				{ 2, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#", "=ds=1,416 #gold# 66 #silver# 66 #copper#"};
+				{ 3, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#", "=ds=472 #gold# 22 #silver# 22 #copper#"};
+				{ 4, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#", "=ds=3069 #gold# 44 #silver# 44 #copper#"};
 				{ 6, 0, "INV_Box_01", "=q6="..AL["Vendor"]};
-				{ 7, 84101, "", "=q4=Reins of the Grand Expedition Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
-				{ 8, 87789, "", "=q4=Reins of the Blonde Riding Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
-				{ 9, 87788, "", "=q4=Reins of the Grey Riding Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
+				{ 7, 84101, "", "=q4=Reins of the Grand Expedition Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=120,000 #gold#"};
+				{ 8, 87789, "", "=q4=Reins of the Blonde Riding Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=3,000 #gold#"};
+				{ 9, 87788, "", "=q4=Reins of the Grey Riding Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=3,000 #gold#"};
 				{ 11, 0, "INV_Box_01", "=q6="..BabbleFaction["Ramkahen"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(720)};
-				{ 12, 63044, "", "=q4=Reins of the Brown Riding Camel", "=ds=#e26#", ""};
-				{ 13, 63045, "", "=q4=Reins of the Tan Riding Camel", "=ds=#e26#", ""};
+				{ 12, 63044, "", "=q4=Reins of the Brown Riding Camel", "=ds=#e26#", "=ds=100 #gold#"};
+				{ 13, 63045, "", "=q4=Reins of the Tan Riding Camel", "=ds=#e26#", "=ds=100 #gold#"};
 				{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["The Sons of Hodir"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(495)};
 				{
-					{ 17, 44080, "", "=q4=Reins of the Ice Mammoth", "=ds=#e26#"};
-					{ 17, 43958, "", "=q4=Reins of the Ice Mammoth", "=ds=#e26#"};
+					{ 17, 44080, "", "=q4=Reins of the Ice Mammoth", "=ds=#e26#", "=ds=1,000 #gold#"};
+					{ 17, 43958, "", "=q4=Reins of the Ice Mammoth", "=ds=#e26#", "=ds=1,000 #gold#"};
 				};
 				{
-					{ 18, 44086, "", "=q4=Reins of the Grand Ice Mammoth", "=ds=#e26#"};
-					{ 18, 43961, "", "=q4=Reins of the Grand Ice Mammoth", "=ds=#e26#"};
+					{ 18, 44086, "", "=q4=Reins of the Grand Ice Mammoth", "=ds=#e26#", "=ds=10,00 #gold#"};
+					{ 18, 43961, "", "=q4=Reins of the Grand Ice Mammoth", "=ds=#e26#", "=ds=10,00 #gold#"};
 				};
 				{ 20, 0, "INV_Box_01", "=q6="..BabbleFaction["The Wyrmrest Accord"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(488)};
-				{ 21, 43955, "", "=q4=Reins of the Red Drake", "=ds=#e27#"};
+				{ 21, 43955, "", "=q4=Reins of the Red Drake", "=ds=#e27#", "=ds=2,000 #gold#"};
 				{ 23, 0, "INV_Box_01", "=q6="..BabbleFaction["The Oracles"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(493)};
-				{ 24, 44707, "", "=q4=Reins of the Green Proto-Drake", "=q2="..AL["Mysterious Egg"], ""};
+				{ 24, 44707, "", "=q4=Reins of the Green Proto-Drake", "=ds=#e27#", "=q2="..AtlasLoot_IngameLocales["Mysterious Egg"], ""};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["Netherwing"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(473)};
-				{ 2, 32858, "", "=q4=Reins of the Azure Netherwing Drake", "=ds=#e27#"};
-				{ 3, 32859, "", "=q4=Reins of the Cobalt Netherwing Drake", "=ds=#e27#"};
-				{ 4, 32857, "", "=q4=Reins of the Onyx Netherwing Drake", "=ds=#e27#"};
-				{ 5, 32860, "", "=q4=Reins of the Purple Netherwing Drake", "=ds=#e27#"};
-				{ 6, 32861, "", "=q4=Reins of the Veridian Netherwing Drake", "=ds=#e27#"};
-				{ 7, 32862, "", "=q4=Reins of the Violet Netherwing Drake", "=ds=#e27#"};
+				{ 2, 32858, "", "=q4=Reins of the Azure Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 3, 32859, "", "=q4=Reins of the Cobalt Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 4, 32857, "", "=q4=Reins of the Onyx Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 5, 32860, "", "=q4=Reins of the Purple Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 6, 32861, "", "=q4=Reins of the Veridian Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 7, 32862, "", "=q4=Reins of the Violet Netherwing Drake", "=ds=#e27#", "=ds=200 #gold#"};
 				{ 9, 0, "INV_Box_01", "=q6="..BabbleFaction["Cenarion Expedition"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(467)};
-				{ 10, 33999, "", "=q4=Cenarion War Hippogryph", "=ds=#e27#"};
+				{ 10, 33999, "", "=q4=Cenarion War Hippogryph", "=ds=#e27#", "=ds=2,000 #gold#"};
 				{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["Sha'tari Skyguard"].." #j30#", "=q1="..AtlasLoot:GetMapNameByID(478)};
-				{ 17, 32319, "", "=q4=Blue Riding Nether Ray", "=ds=#e27#"};
-				{ 18, 32314, "", "=q4=Green Riding Nether Ray", "=ds=#e27#"};
-				{ 19, 32317, "", "=q4=Red Riding Nether Ray", "=ds=#e27#"};
-				{ 20, 32316, "", "=q4=Purple Riding Nether Ray", "=ds=#e27#"};
-				{ 21, 32318, "", "=q4=Silver Riding Nether Ray", "=ds=#e27#"};
+				{ 17, 32319, "", "=q4=Blue Riding Nether Ray", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 18, 32314, "", "=q4=Green Riding Nether Ray", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 19, 32317, "", "=q4=Red Riding Nether Ray", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 20, 32316, "", "=q4=Purple Riding Nether Ray", "=ds=#e27#", "=ds=200 #gold#"};
+				{ 21, 32318, "", "=q4=Silver Riding Nether Ray", "=ds=#e27#", "=ds=200 #gold#"};
 			};
 		};
 		info = {
@@ -4798,7 +5814,7 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["Dungeon"], ""};
-				{ 2, 69747, "", "=q4=Amani Battle Bear", "=q1="..BabbleZone["Zul'Aman"]};
+				{ 2, 69747, "", "=q4=Amani Battle Bear", "=q2="..AL["Timed Reward Chest"]..", =q1="..BabbleZone["Zul'Aman"]};
 				{ 3, 68823, "", "=q4=Armored Razzashi Raptor", "=q2="..AtlasLoot:EJ_GetBossName("Bloodlord Mandokir", 176)..", =q1="..AtlasLoot:GetMapNameByID(793)};
 				{ 4, 13335, "", "=q4=Deathcharger's Reins", "#ACHIEVEMENTID:729#", "", "0.10%"};
 				{ 5, 44151, "", "=q4=Reins of the Blue Proto-Drake", "=q2="..AtlasLoot:EJ_GetBossName("Skadi the Ruthless", 643)..", =q1="..AL["Heroic"].." "..AtlasLoot:GetMapNameByID(524), ""};
@@ -4809,13 +5825,14 @@ local moduleName = "AtlasLootMoP"
 				{ 10, 35513, "", "=q4=Swift White Hawkstrider", "#ACHIEVEMENTID:884#"};
 				{ 11, 68824, "", "=q4=Swift Zulian Panther", "=q2="..AtlasLoot:EJ_GetBossName("High Priestess Kilnara", 181)..", =q1="..AtlasLoot:GetMapNameByID(793)};
 				{ 16, 0, "INV_Box_01", "=q6="..AL["Outdoor"], ""};
-				{ 17, 67151, "", "=q4=Reins of Poseidus", "=q2="..AL["Poseidus"]..", =q1="..AtlasLoot:GetMapNameByID(613)};
+				{ 17, 67151, "", "=q4=Reins of Poseidus", "=q2="..BabbleRare["Poseidus"]..", =q1="..AtlasLoot:GetMapNameByID(613)};
 				{ 18, 63046, "", "=q4=Reins of the Grey Riding Camel", "#ACHIEVEMENTID:5767#", ""};
 				{ 19, 87771, "", "=q4=Reins of the Heavenly Onyx Cloud Serpent", "=q2="..AtlasLoot:EJ_GetBossName("Sha of Anger", 691).." =q1="..AtlasLoot:GetMapNameByID(809), ""};
-				{ 20, 63042, "", "=q4=Reins of the Phosphorescent Stone Drake", "=q2="..AL["Aeonaxx"]..", =q1="..AtlasLoot:GetMapNameByID(640)};
-				{ 21, 44168, "", "=q4=Reins of the Time-Lost Proto-Drake", "=q2="..AL["Time-Lost Proto Drake"]..", =q1="..AtlasLoot:GetMapNameByID(495)};
-				{ 22, 89783, "", "=q4=Son of Galleon's Saddle", "=q2="..AtlasLoot:EJ_GetBossName("Salyis's Warband", 725)..", =q1="..AtlasLoot:GetMapNameByID(807), ""};
-				{ 23, 46109, "", "=q3=Sea Turtle", "#ACHIEVEMENTID:3218#", ""};
+				{ 20, 63042, "", "=q4=Reins of the Phosphorescent Stone Drake", "=q2="..BabbleRare["Aeonaxx"]..", =q1="..AtlasLoot:GetMapNameByID(640)};
+				{ 21, 90655, "", "=q4=Reins of the Thundering Ruby Cloud Serpent", "=ds=#e27#", "=q2="..BabbleRare["Alani"]..", =q1="..AtlasLoot:GetMapNameByID(811)};
+				{ 22, 44168, "", "=q4=Reins of the Time-Lost Proto-Drake", "=q2="..BabbleRare["Time-Lost Proto Drake"]..", =q1="..AtlasLoot:GetMapNameByID(495)};
+				{ 23, 89783, "", "=q4=Son of Galleon's Saddle", "=q2="..AtlasLoot:EJ_GetBossName("Salyis's Warband", 725)..", =q1="..AtlasLoot:GetMapNameByID(807), ""};
+				{ 24, 46109, "", "=q3=Sea Turtle", "#ACHIEVEMENTID:3218#", ""};
 			};
 		};
 		info = {
@@ -4834,22 +5851,23 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 50818, "", "=q4=Invincible's Reins", "#ACHIEVEMENTID:4584#"};
 				{ 6, 77069, "", "=q4=Life-Binder's Handmaiden", "=q2="..AtlasLoot:EJ_GetBossName("Madness of Deathwing", 333)..", =q1="..AtlasLoot:GetMapNameByID(824)},
 				{ 7, 45693, "", "=q4=Mimiron's Head", "#ACHIEVEMENTID:4626#, =q1="..AtlasLoot:GetMapNameByID(529), "", ""};
-				{ 8, 43986, "", "=q4=Reins of the Black Drake", "#ACHIEVEMENTID:2051#, =q1="..AtlasLoot:GetMapNameByID(531), "100%"};
-				{ 9, 77067, "", "=q4=Reins of the Blazing Drake", "=q2="..AtlasLoot:EJ_GetBossName("Madness of Deathwing", 333)..", =q1="..AtlasLoot:GetMapNameByID(824)},
-				{ 10, 43954, "", "=q4=Reins of the Twilight Drake", "#ACHIEVEMENTID:2054#, =q1="..AtlasLoot:GetMapNameByID(531), "100%"};
-				{ 11, 43953, "", "=q4=Reins of the Blue Drake", "=q2="..BabbleBoss["Malygos"]..", =q1="..AtlasLoot:GetMapNameByID(527), ""};
-				{ 12, 43952, "", "=q4=Reins of the Azure Drake", "=q2="..BabbleBoss["Malygos"]..", =q1="..AtlasLoot:GetMapNameByID(527), ""};
-				{ 13, 63041, "", "=q4=Reins of the Drake of the South Wind", "=q2="..AtlasLoot:EJ_GetBossName("Al'Akir", 155)..", =q1="..AtlasLoot:GetMapNameByID(767)};
+				{ 8, 87777, "", "=q4=Reins of the Astral Cloud Serpent", "=ds=#e27#", "=q2="..AtlasLoot:EJ_GetBossName("Elegon", 726)..", =q1="..AtlasLoot:GetMapNameByID(896), ""};
+				{ 9, 43986, "", "=q4=Reins of the Black Drake", "#ACHIEVEMENTID:2051#, =q1="..AtlasLoot:GetMapNameByID(531), "100%"};
+				{ 10, 77067, "", "=q4=Reins of the Blazing Drake", "=q2="..AtlasLoot:EJ_GetBossName("Madness of Deathwing", 333)..", =q1="..AtlasLoot:GetMapNameByID(824)},
+				{ 11, 43954, "", "=q4=Reins of the Twilight Drake", "#ACHIEVEMENTID:2054#, =q1="..AtlasLoot:GetMapNameByID(531), "100%"};
+				{ 12, 43953, "", "=q4=Reins of the Blue Drake", "=q2="..BabbleBoss["Malygos"]..", =q1="..AtlasLoot:GetMapNameByID(527), ""};
+				{ 13, 43952, "", "=q4=Reins of the Azure Drake", "=q2="..BabbleBoss["Malygos"]..", =q1="..AtlasLoot:GetMapNameByID(527), ""};
+				{ 14, 63041, "", "=q4=Reins of the Drake of the South Wind", "=q2="..AtlasLoot:EJ_GetBossName("Al'Akir", 155)..", =q1="..AtlasLoot:GetMapNameByID(767)};
 				{
-					{ 14, 44083, "", "=q4=Reins of the Grand Black War Mammoth", "=q1="..AtlasLoot:GetMapNameByID(532)..", =ec1=#m6#", "", ""};
-					{ 14, 43959, "", "=q4=Reins of the Grand Black War Mammoth", "=q1="..AtlasLoot:GetMapNameByID(532)..", =ec1=#m7#", "", ""};
+					{ 15, 44083, "", "=q4=Reins of the Grand Black War Mammoth", "=q1="..AtlasLoot:GetMapNameByID(532)..", =ec1=#m6#", "", ""};
+					{ 15, 43959, "", "=q4=Reins of the Grand Black War Mammoth", "=q1="..AtlasLoot:GetMapNameByID(532)..", =ec1=#m7#", "", ""};
 				};
-				{ 15, 49636, "", "=q4=Reins of the Onyxian Drake", "=q2="..BabbleBoss["Onyxia"]..", =q1="..AtlasLoot:GetMapNameByID(718), ""};
-				{ 16, 69224, "", "=q4=Smoldering Egg of Millagazor", "=q2="..BabbleBoss["Ragnaros"]..", =q1="..AtlasLoot:GetMapNameByID(800)},
-				{ 18, 21218, "", "=q3=Blue Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "10.91%"};
-				{ 19, 21323, "", "=q3=Green Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "11.77%"};
-				{ 20, 21321, "", "=q3=Red Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "1.32%"};
-				{ 21, 21324, "", "=q3=Yellow Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "12.64%"};
+				{ 16, 49636, "", "=q4=Reins of the Onyxian Drake", "=q2="..BabbleBoss["Onyxia"]..", =q1="..AtlasLoot:GetMapNameByID(718), ""};
+				{ 17, 69224, "", "=q4=Smoldering Egg of Millagazor", "=q2="..BabbleBoss["Ragnaros"]..", =q1="..AtlasLoot:GetMapNameByID(800)},
+				{ 19, 21218, "", "=q3=Blue Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "10.91%"};
+				{ 20, 21323, "", "=q3=Green Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "11.77%"};
+				{ 21, 21321, "", "=q3=Red Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "1.32%"};
+				{ 22, 21324, "", "=q3=Yellow Qiraji Resonating Crystal", "=q2="..AL["Trash Mobs"]..", =q1="..AtlasLoot:GetMapNameByID(766), "", "12.64%"};
 			};
 		};
 		info = {
@@ -4861,33 +5879,45 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["MountsAchievement"] = {
 		["Normal"] = {
 			{
-				{ 1, 44843, "", "=q4=Blue Dragonhawk", "#ACHIEVEMENTID:2536#, =ec1=#m7#"};
-				{ 2, 69230, "", "=q4=Corrupted Egg of Millagazor", "#ACHIEVEMENTID:5828#" },
-				{ 3, 69213, "", "=q4=Flameward Hippogryph", "#ACHIEVEMENTID:5866#"};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Dungeon"], ""};
+				{ 2, 90710, "", "=q4=Reins of the Ashen Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 3, 87769, "", "=q4=Reins of the Crimson Cloud Serpent", "#ACHIEVEMENTID:6927#"};
+				{ 4, 89154, "", "=q4=Reins of the Crimson Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 5, 90711, "", "=q4=Reins of the Emerald Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 6, 44160, "", "=q4=Reins of the Red Proto-Drake", "#ACHIEVEMENTID:2136#"};
+				{ 7, 90712, "", "=q4=Reins of the Violet Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 8, 62900, "", "=q4=Reins of the Volcanic Stone Drake", "#ACHIEVEMENTID:4845#"};
+				{ 10, 0, "INV_Box_01", "=q6="..AL["PvP"], ""};
+				{ 11, 44223, "", "=q4=Reins of the Black War Bear", "#ACHIEVEMENTID:614#, =ec1=#m7#"};
+				{ 12, 44224, "", "=q4=Reins of the Black War Bear", "#ACHIEVEMENTID:619#, =ec1=#m6#"};
+				{ 13, 70909, "", "=q4=Dreadful War Steed", "#ACHIEVEMENTID:5823#, =ec1=#m7#"};
+				{ 14, 70910, "", "=q4=Dreadful War Wolf", "#ACHIEVEMENTID:5824#, =ec1=#m6#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Raid"], ""};
+				{ 17, 69230, "", "=q4=Corrupted Egg of Millagazor", "#ACHIEVEMENTID:5828#" };
+				{ 18, 51954, "", "=q4=Reins of the Bloodbathed Frostbrood Vanquisher", "#ACHIEVEMENTID:4602#"};
+				{ 19, 63125, "", "=q4=Reins of the Dark Phoenix", "#ACHIEVEMENTID:4988#"};
+				{ 20, 62901, "", "=q4=Reins of the Drake of the East Wind", "#ACHIEVEMENTID:4853#"};
+				{ 21, 87773, "", "=q4=Reins of the Heavenly Crimson Cloud Serpent", "#ACHIEVEMENTID:6932#"};
+				{ 22, 51955, "", "=q4=Reins of the Icebound Frostbrood Vanquisher", "#ACHIEVEMENTID:4603#"};
+				{ 23, 45801, "", "=q4=Reins of the Ironbound Proto-Drake", "#ACHIEVEMENTID:2958#"};
+				{ 24, 45802, "", "=q4=Reins of the Rusted Proto-Drake", "#ACHIEVEMENTID:2957#"};
+				{ 25, 85666, "", "=q4=Reins of the Thundering Jade Cloud Serpent", "#ACHIEVEMENTID:6682#"};
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Mount Collecting"], ""};
+				{ 2, 44178, "", "=q4=Reins of the Albino Drake", "#ACHIEVEMENTID:2143#"};
+				{ 3, 44843, "", "=q4=Blue Dragonhawk", "#ACHIEVEMENTID:2536#, =ec1=#m7#"};
 				{ 4, 44842, "", "=q4=Red Dragonhawk", "#ACHIEVEMENTID:2537#, =ec1=#m6#"};
-				{ 5, 44178, "", "=q4=Reins of the Albino Drake", "#ACHIEVEMENTID:2143#"};
-				{ 6, 90710, "", "=q4=Reins of the Ashen Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 7, 51954, "", "=q4=Reins of the Bloodbathed Frostbrood Vanquisher", "#ACHIEVEMENTID:4602#"};
-				{ 8, 87769, "", "=q4=Reins of the Crimson Cloud Serpent", "#ACHIEVEMENTID:6927#"};
-				{ 9, 89154, "", "=q4=Reins of the Crimson Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 10, 63125, "", "=q4=Reins of the Dark Phoenix", "#ACHIEVEMENTID:4988#"};
-				{ 11, 62901, "", "=q4=Reins of the Drake of the East Wind", "#ACHIEVEMENTID:4853#"};
-				{ 12, 90711, "", "=q4=Reins of the Emerald Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 13, 87773, "", "=q4=Reins of the Heavenly Crimson Cloud Serpent", "#ACHIEVEMENTID:6932#"};
-				{ 14, 51955, "", "=q4=Reins of the Icebound Frostbrood Vanquisher", "#ACHIEVEMENTID:4603#"};
-				{ 15, 45801, "", "=q4=Reins of the Ironbound Proto-Drake", "#ACHIEVEMENTID:2958#"};
-				{ 16, 44160, "", "=q4=Reins of the Red Proto-Drake", "#ACHIEVEMENTID:2136#"};
-				{ 17, 45802, "", "=q4=Reins of the Rusted Proto-Drake", "#ACHIEVEMENTID:2957#"};
-				{ 18, 85666, "", "=q4=Reins of the Thundering Jade Cloud Serpent", "#ACHIEVEMENTID:6682#"};
-				{ 19, 90712, "", "=q4=Reins of the Violet Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 20, 44177, "", "=q4=Reins of the Violet Proto-Drake", "#ACHIEVEMENTID:2144#"};
-				{ 21, 62900, "", "=q4=Reins of the Volcanic Stone Drake", "#ACHIEVEMENTID:4845#"};
-				{ 23, 44223, "", "=q4=Reins of the Black War Bear", "#ACHIEVEMENTID:614#, =ec1=#m7#"};
-				{ 24, 44224, "", "=q4=Reins of the Black War Bear", "#ACHIEVEMENTID:619#, =ec1=#m6#"};
-				{ 25, 62298, "", "=q4=Reins of the Golden King", "#ACHIEVEMENTID:4912#, =ec1=#m7#"};
-				{ 26, 67107, "", "=q4=Reins of the Kor'kron Annihilator", "#ACHIEVEMENTID:5492#, =ec1=#m6#"};
-				{ 27, 70909, "", "=q4=Dreadful War Steed", "#ACHIEVEMENTID:5823#, =ec1=#m7#"},
-				{ 28, 70910, "", "=q4=Dreadful War Wolf", "#ACHIEVEMENTID:5824#, =ec1=#m6#"},
+				{
+					{ 5, 91802, "", "=q4=Jade Pandaren Kite String", "#ACHIEVEMENTID:7862#, =ec1=#m6#"};
+					{ 5, 91802, "", "=q4=Jade Pandaren Kite String", "#ACHIEVEMENTID:7860#, =ec1=#m7#"};
+				};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Misc"], ""};
+				{ 17, 69213, "", "=q4=Flameward Hippogryph", "#ACHIEVEMENTID:5866#"};
+				{ 18, 89785, "", "=q4=Pandaren Kite String", "#ACHIEVEMENTID:6828#"};
+				{ 19, 62298, "", "=q4=Reins of the Golden King", "#ACHIEVEMENTID:4912#, =ec1=#m7#"};
+				{ 20, 67107, "", "=q4=Reins of the Kor'kron Annihilator", "#ACHIEVEMENTID:5492#, =ec1=#m6#"};
+				{ 21, 44177, "", "=q4=Reins of the Violet Proto-Drake", "#ACHIEVEMENTID:2144#"};
 			};
 		};
 		info = {
@@ -4920,7 +5950,7 @@ local moduleName = "AtlasLootMoP"
 				{ 22, 0, "INV_Box_01", "=q6="..AL["Quest Reward"], ""};
 				{ 23, 52200, "", "=q4=Reins of the Crimson Deathcharger", "=q1=#m4#: #QUESTID:24915#"};
 				{ 24, 87768, "", "=q4=Reins of the Onyx Cloud Serpent", "=q1=#m4#: #QUESTID:31277#"};
-				{ 25, 43962, "", "=q4=Reins of the White Polar Bear", "=q1=#m4#: "..AL["Hyldnir Spoils"], ""};
+				{ 25, 43962, "", "=q4=Reins of the White Polar Bear", "=q1=#m4#: "..AtlasLoot_IngameLocales["Hyldnir Spoils"], ""};
 				{ 26, 54465, "", "=q3=Subdued Abyssal Seahorse", "=q1=#m4#: #QUESTID:25371#"};
 			};
 		};
@@ -4970,7 +6000,8 @@ local moduleName = "AtlasLootMoP"
 				{ 16, 0, "INV_Box_01", "=q6="..AL["Blizzard Store"], ""};
 				{ 17, 54811, "", "=q4=Celestial Steed", "=ds=#e12#"};
 				{ 18, 78924, "", "=q4=Heart of the Aspects", "=ds=#e12#"};
-				{ 19, 69846, "", "=q4=Winged Guardian", "=ds=#e12#"};
+				{ 19, 92724, "", "=q4=Swift Windsteed", "=ds=#e27#"};
+				{ 20, 69846, "", "=q4=Winged Guardian", "=ds=#e12#"};
 			};
 		};
 		info = {
@@ -5034,19 +6065,17 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["MountsRemoved"] = {
 		["Normal"] = {
 			{
-				{ 1, 33809, "", "=q4=Amani War Bear", "=q1="..BabbleZone["Zul'Aman"], ""};
-				{ 2, 19872, "", "=q4=Swift Razzashi Raptor", "#ACHIEVEMENTID:881#"};
-				{ 3, 19902, "", "=q4=Swift Zulian Tiger", "#ACHIEVEMENTID:880#"};
-				{ 5, 49098, "", "=q4=Crusader's Black Warhorse", "#ACHIEVEMENTID:4079#, =ec1=#m6#"};
-				{ 6, 49096, "", "=q4=Crusader's White Warhorse", "#ACHIEVEMENTID:4156#, =ec1=#m7#"};
-				{ 7, 49044, "", "=q4=Swift Alliance Steed", "#ACHIEVEMENTID:3810#, =ec1=#m7#"};
-				{ 8, 49046, "", "=q4=Swift Horde Wolf", "#ACHIEVEMENTID:3810#, =ec1=#m6#"};
-				{ 9, 44164, "", "=q4=Reins of the Black Proto-Drake", "#ACHIEVEMENTID:2138#"};
-				{ 10, 44175, "", "=q4=Reins of the Plagued Proto-Drake", "#ACHIEVEMENTID:2137#"};
-				{ 12, 21176, "", "=q5=Black Qiraji Resonating Crystal", "=q1=#m4#: #QUESTID:8743#"};
-				{ 13, 37719, "", "=q4=Swift Zhevra", "#ACHIEVEMENTID:1436#"};
-				{ 14, 54860, "", "=q4=X-53 Touring Rocket", "#ACHIEVEMENTID:4832#"};
-				{ 15, 33976, "", "=q3=Brewfest Ram", "=ds=#e26#"};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Dungeon"], ""};
+				{ 2, 33809, "", "=q4=Amani War Bear", "=q1="..BabbleZone["Zul'Aman"], ""};
+				{ 3, 19872, "", "=q4=Swift Razzashi Raptor", "#ACHIEVEMENTID:881#"};
+				{ 4, 19902, "", "=q4=Swift Zulian Tiger", "#ACHIEVEMENTID:880#"};
+				{ 6, 0, "INV_Box_01", "=q6="..AL["Raid"], ""};
+				{ 7, 49098, "", "=q4=Crusader's Black Warhorse", "#ACHIEVEMENTID:4079#, =ec1=#m6#"};
+				{ 8, 49096, "", "=q4=Crusader's White Warhorse", "#ACHIEVEMENTID:4156#, =ec1=#m7#"};
+				{ 9, 49044, "", "=q4=Swift Alliance Steed", "#ACHIEVEMENTID:3810#, =ec1=#m7#"};
+				{ 10, 49046, "", "=q4=Swift Horde Wolf", "#ACHIEVEMENTID:3810#, =ec1=#m6#"};
+				{ 11, 44164, "", "=q4=Reins of the Black Proto-Drake", "#ACHIEVEMENTID:2138#"};
+				{ 12, 44175, "", "=q4=Reins of the Plagued Proto-Drake", "#ACHIEVEMENTID:2137#"};
 				{ 16, 0, "INV_Box_01", "=q6="..AL["Arena Reward"], ""};
 				{ 17, 30609, "", "=q4=Swift Nether Drake", "#ACHIEVEMENTID:886#"};
 				{ 18, 34092, "", "=q4=Merciless Nether Drake", "#ACHIEVEMENTID:887#"};
@@ -5060,6 +6089,30 @@ local moduleName = "AtlasLootMoP"
 				{ 26, 71954, "", "=q4=Ruthless Gladiator's Twilight Drake", "#ACHIEVEMENTID:6322#"};
 				{ 27, 85785, "", "=q4=Cataclysmic Gladiator's Twilight Drake", "#ACHIEVEMENTID:6741#"};
 			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["World Events"], ""};
+				{ 2, 21176, "", "=q5=Black Qiraji Resonating Crystal", "=q1=#m4#: #QUESTID:8743#"};
+				{ 3, 33976, "", "=q3=Brewfest Ram", "=ds=#e26#"};
+				{ 5, 0, "INV_Box_01", "=q6="..BabbleFaction["Alliance"], "#ACHIEVEMENTID:879#"};
+				{ 6, 13328, "", "=q4=Black Ram", "#e26#"};
+				{ 7, 13329, "", "=q4=Frost Ram", "#e26#"};
+				{ 8, 13327, "", "=q4=Icy Blue Mechanostrider Mod A", "#e26#"};
+				{ 9, 13326, "", "=q4=White Mechanostrider Mod B", "#e26#"};
+				{ 10, 12354, "", "=q4=Palomino Bridle", "#e26#"};
+				{ 11, 12353, "", "=q4=White Stallion Bridle", "#e26#"};
+				{ 12, 12302, "", "=q4=Reins of the Ancient Frostsaber", "#e26#"};
+				{ 13, 12303, "", "=q4=Reins of the Nightsaber", "#e26#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Promotional Mounts"], ""};
+				{ 17, 37719, "", "=q4=Swift Zhevra", "#ACHIEVEMENTID:1436#"};
+				{ 18, 54860, "", "=q4=X-53 Touring Rocket", "#ACHIEVEMENTID:4832#"};
+				{ 20, 0, "INV_Box_01", "=q6="..BabbleFaction["Horde"], "#ACHIEVEMENTID:879#"};
+				{ 21, 12351, "", "=q4=Horn of the Arctic Wolf", "#e26#"};
+				{ 22, 12330, "", "=q4=Horn of the Red Wolf", "#e26#"};
+				{ 23, 15292, "", "=q4=Green Kodo", "#e26#"};
+				{ 24, 15293, "", "=q4=Teal Kodo", "#e26#"};
+				{ 25, 13317, "", "=q4=Whistle of the Ivory Raptor", "#e26#"};
+				{ 26, 8586, "", "=q4=Whistle of the Mottled Red Raptor", "#e26#"};
+			};
 		};
 		info = {
 			name = AL["Unobtainable Mounts"],
@@ -5071,58 +6124,55 @@ local moduleName = "AtlasLootMoP"
 		["Normal"] = {
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["Order of the Cloud Serpent"].." #j30#"};
-				{ 2, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#"};
-				{ 3, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#"};
-				{ 4, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#"};
+				{ 2, 85430, "", "=q4=Reins of the Azure Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 3, 85429, "", "=q4=Reins of the Golden Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
+				{ 4, 79802, "", "=q4=Reins of the Jade Cloud Serpent", "=ds=#e27#", "=ds=3,000 #gold#"};
 				{ 6, 0, "INV_Box_01", "=q6="..BabbleFaction["The August Celestials"].." #j30#"};
-				{ 7, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#"};
+				{ 7, 89304, "", "=q4=Reins of the Thundering August Cloud Serpent", "=ds=#e27#", "=ds=10,000 #gold#"};
 				{ 9, 0, "INV_Box_01", "=q6="..BabbleFaction["The Lorewalkers"].." #j30#"};
-				{ 10, 89363, "", "=q4=Disc of the Red Flying Cloud", "=ds=#e27#"};
+				{ 10, 89363, "", "=q3=Disc of the Red Flying Cloud", "=ds=#e27#", "=ds=600 #gold#"};
 				{ 12, 0, "INV_Box_01", "=q6="..BabbleFaction["Golden Lotus"].." #j30#"};
-				{ 13, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#"};
-				{ 14, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#"};
-				{ 15, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#"};
+				{ 13, 87781, "", "=q4=Reins of the Azure Riding Crane", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 14, 87782, "", "=q4=Reins of the Golden Riding Crane", "=ds=#e26#", "=ds=2,500 #gold#"};
+				{ 15, 87783, "", "=q4=Reins of the Regal Riding Crane", "=ds=#e26#", "=ds=1,500 #gold#"};
 				{
 					{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["Huojin Pandaren"].." #j30#"};
 					{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["Tushui Pandaren"].." #j30#"};
 				};
-				{ 17, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#"};
-				{ 18, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#"};
-				{ 19, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#"};
-				{ 20, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#"};
-				{ 21, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#"};
-				{ 22, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#"};
-				{ 23, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#"};
-				{ 24, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#"};
-				{ 25, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#"};
-				{ 26, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#"};
-				{ 27, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#"};
+				{ 17, 87795, "", "=q4=Reins of the Black Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 18, 87796, "", "=q4=Reins of the Blue Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 19, 87797, "", "=q4=Reins of the Brown Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 20, 87799, "", "=q4=Reins of the Purple Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 21, 87800, "", "=q4=Reins of the Red Dragon Turtle", "=ds=#e26#", "=ds=1 #gold#"};
+				{ 22, 87802, "", "=q4=Reins of the Great Black Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 23, 87803, "", "=q4=Reins of the Great Blue Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 24, 87804, "", "=q4=Reins of the Great Brown Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 25, 87801, "", "=q4=Reins of the Great Green Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 26, 87805, "", "=q4=Reins of the Great Purple Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
+				{ 27, 82811, "", "=q4=Reins of the Great Red Dragon Turtle", "=ds=#e26#", "=ds=10 #gold#"};
 				{ 29, 0, "INV_Box_01", "=q6="..BabbleFaction["The Klaxxi"].." #j30#"};
-				{ 30, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#"};
+				{ 30, 85262, "", "=q4=Reins of the Amber Scorpion", "=ds=#e26#", "=ds=10,000 #gold#"};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..BabbleFaction["The Anglers"].." #j30#"};
-				{ 2, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e26#"};
-				{ 3, 87791, "", "=q4=Reins of the Crimson Water Strider", "=ds=#e26#"};
-				{ 4, 87794, "", "=q4=Reins of the Golden Water Strider", "=ds=#e26#"};
-				{ 5, 87793, "", "=q4=Reins of the Jade Water Strider", "=ds=#e26#"};
-				{ 6, 87792, "", "=q4=Reins of the Orange Water Strider", "=ds=#e26#"};
-				{ 8, 0, "INV_Box_01", "=q6="..BabbleFaction["Shado-Pan"].." #j30#"};
-				{ 9, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 10, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 11, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#"};
-				{ 16, 0, "INV_Box_01", "=q6="..BabbleFaction["The Tillers"].." #j30#"};
-				{ 17, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#"};
-				{ 18, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#"};
-				{ 19, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#"};
-				{ 21, 0, "INV_Box_01", "=q6="..AL["Achievement Reward"]};
-				{ 22, 85666, "", "=q4=Reins of the Thundering Jade Cloud Serpent", "#ACHIEVEMENTID:6682#"};
-				{ 23, 87769, "", "=q4=Reins of the Crimson Cloud Serpent", "#ACHIEVEMENTID:6927#"};
-				{ 24, 87773, "", "=q4=Reins of the Heavenly Crimson Cloud Serpent", "#ACHIEVEMENTID:6932#"};
-				{ 25, 90710, "", "=q4=Reins of the Ashen Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 26, 89154, "", "=q4=Reins of the Crimson Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 27, 90711, "", "=q4=Reins of the Emerald Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
-				{ 28, 90712, "", "=q4=Reins of the Violet Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 2, 81354, "", "=q4=Reins of the Azure Water Strider", "=ds=#e26#", "=ds=5,000 #gold#"};
+				{ 4, 0, "INV_Box_01", "=q6="..BabbleFaction["Shado-Pan"].." #j30#"};
+				{ 5, 89307, "", "=q4=Reins of the Blue Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=500 #gold#"};
+				{ 6, 89305, "", "=q4=Reins of the Green Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=1,500 #gold#"};
+				{ 7, 89306, "", "=q4=Reins of the Red Shado-Pan Riding Tiger", "=ds=#e26#", "=ds=2,500 #gold#"};
+				{ 9, 0, "INV_Box_01", "=q6="..BabbleFaction["The Tillers"].." #j30#"};
+				{ 10, 89391, "", "=q4=Reins of the Black Riding Goat", "=ds=#e26#", "=ds=1,416 #gold# 66 #silver# 66 #copper#"};
+				{ 11, 89362, "", "=q4=Reins of the Brown Riding Goat", "=ds=#e26#", "=ds=472 #gold# 22 #silver# 22 #copper#"};
+				{ 12, 89390, "", "=q4=Reins of the White Riding Goat", "=ds=#e26#", "=ds=3069 #gold# 44 #silver# 44 #copper#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Achievement Reward"]};
+				{ 17, 85666, "", "=q4=Reins of the Thundering Jade Cloud Serpent", "#ACHIEVEMENTID:6682#"};
+				{ 18, 87769, "", "=q4=Reins of the Crimson Cloud Serpent", "#ACHIEVEMENTID:6927#"};
+				{ 19, 87773, "", "=q4=Reins of the Heavenly Crimson Cloud Serpent", "#ACHIEVEMENTID:6932#"};
+				{ 20, 90710, "", "=q4=Reins of the Ashen Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 21, 89154, "", "=q4=Reins of the Crimson Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 22, 90711, "", "=q4=Reins of the Emerald Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 23, 90712, "", "=q4=Reins of the Violet Pandaren Phoenix", "#ACHIEVEMENTID:6375#"};
+				{ 24, 89785, "", "=q4=Pandaren Kite String", "#ACHIEVEMENTID:6828#"};
 			};
 			{
 				{ 1, 0, "INV_Box_01", "=q6="..AL["Promotional Mounts"]};
@@ -5131,15 +6181,16 @@ local moduleName = "AtlasLootMoP"
 				{ 5, 0, "INV_Box_01", "=q6="..AL["Card Game Mounts"]};
 				{ 6, 79771, "", "=q4=Feldrake", "=ds=#e26#", "=q1="..AL["War of the Ancients"] },
 				{ 8, 0, "INV_Box_01", "=q6="..AL["Rare Mounts"]};
-				{ 9, 87777, "", "=q4=Reins of the Astral Cloud Serpent", "=q2="..AtlasLoot:EJ_GetBossName("Elegon", 726)..", =q1="..AtlasLoot:GetMapNameByID(896), ""};
-				{ 10, 87771, "", "=q4=Reins of the Heavenly Onyx Cloud Serpent", "=q2="..AtlasLoot:EJ_GetBossName("Sha of Anger", 691).." =q1="..AtlasLoot:GetMapNameByID(809), ""};
-				{ 11, 89783, "", "=q4=Son of Galleon's Saddle", "=q2="..AtlasLoot:EJ_GetBossName("Salyis's Warband", 725)..", =q1="..AtlasLoot:GetMapNameByID(807), ""};
-				{ 13, 0, "INV_Box_01", "=q6="..AL["Quest Reward"]};
-				{ 14, 87768, "", "=q4=Reins of the Onyx Cloud Serpent", "=q1=#m4#: #QUESTID:31277#"};
+				{ 9, 87777, "", "=q4=Reins of the Astral Cloud Serpent", "=ds=#e27#", "=q2="..AtlasLoot:EJ_GetBossName("Elegon", 726)..", =q1="..AtlasLoot:GetMapNameByID(896), ""};
+				{ 10, 87771, "", "=q4=Reins of the Heavenly Onyx Cloud Serpent", "=ds=#e27#", "=q2="..AtlasLoot:EJ_GetBossName("Sha of Anger", 691).." =q1="..AtlasLoot:GetMapNameByID(809), ""};
+				{ 11, 90655, "", "=q4=Reins of the Thundering Ruby Cloud Serpent", "=ds=#e27#", "=q2="..BabbleRare["Alani"]..", =q1="..AtlasLoot:GetMapNameByID(811)};
+				{ 12, 89783, "", "=q4=Son of Galleon's Saddle", "=q2="..AtlasLoot:EJ_GetBossName("Salyis's Warband", 725)..", =q1="..AtlasLoot:GetMapNameByID(807), ""};
+				{ 14, 0, "INV_Box_01", "=q6="..AL["Quest Reward"]};
+				{ 15, 87768, "", "=q4=Reins of the Onyx Cloud Serpent", "=q1=#m4#: #QUESTID:31277#"};
 				{ 16, 0, "INV_Box_01", "=q6="..AL["Vendor"]};
-				{ 17, 84101, "", "=q4=Reins of the Grand Expedition Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
-				{ 18, 87789, "", "=q4=Reins of the Blonde Riding Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
-				{ 19, 87788, "", "=q4=Reins of the Grey Riding Yak", "=q2=Sold by Uncle Bigpocket, =q1="..AtlasLoot:GetMapNameByID(809)};
+				{ 17, 84101, "", "=q4=Reins of the Grand Expedition Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=120,000 #gold#"};
+				{ 18, 87789, "", "=q4=Reins of the Blonde Riding Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=3,000 #gold#"};
+				{ 19, 87788, "", "=q4=Reins of the Grey Riding Yak", "=q2="..AL["Uncle Bigpocket"]..", =q1="..AtlasLoot:GetMapNameByID(809), "=ds=3,000 #gold#"};
 				{ 21, 0, "INV_Box_01", "=q6="..AL["Crafted Mounts"]};
 				{ 22, 82453, "", "=q4=Jeweled Onyx Panther", "=ds=#e26# =q2=#p12#"};
 				{ 23, 83088, "", "=q3=Jade Panther", "=ds=#e27# =q2=#p12#"};
@@ -5149,21 +6200,39 @@ local moduleName = "AtlasLootMoP"
 				{ 27, 87250, "", "=q3=Depleted-Kyparium Rocket", "=ds=#e27# =q2=#p5#"};
 				{ 28, 87251, "", "=q3=Geosynchronous World Spinner", "=ds=#e27# =q2=#p5#"};
 			};
-			{
-				{ 1, 0, "INV_Box_01", "=q6=Unknown"};
-				{ 2, 87776, "", "=q4=Reins of the Heavenly Azure Cloud Serpent", "=ds=#e27#", ""};
-				{ 3, 87774, "", "=q4=Reins of the Heavenly Golden Cloud Serpent", "=ds=#e27#", ""};
-				{ 4, 87775, "", "=q4=Reins of the Heavenly Jade Cloud Serpent", "=ds=#e27#", ""};
-				{ 5, 87784, "", "=q4=Jungle Riding Crane", "=ds=#e26#", ""};
-				{ 6, 87785, "", "=q4=Reins of the Albino Riding Crane", "=ds=#e26#", ""};
-				{ 7, 84728, "", "=q4=Reins of the Crimson Riding Crane", "=ds=#e26#", ""};
-				{ 8, 87786, "", "=q4=Reins of the Black Riding Yak", "=ds=#e26#", ""};
-				{ 9, 87787, "", "=q4=Reins of the Brown Riding Yak", "=ds=#e26#", ""};
-				{ 10, 84753, "", "=q4=Reins of the White Riding Yak", "=ds=#e26#", ""};
-			};
 		};
 		info = {
 			name = AL["New Mounts"].." - "..AL["Mists of Pandaria"],
+			module = moduleName, menu = "MOUNTMENU", instance = "Mounts",
+		};
+	}
+	
+	AtlasLoot_Data["MountsNEW2"] = {
+		["Normal"] = {
+			{
+				{ 1, 93168, "", "=q4=Grand Armored Gryphon", "=ds=#e27#"}; --Need to check
+				{ 2, 93169, "", "=q4=Grand Armored Wyvern", "=ds=#e27#"}; --Need to check
+				{ 4, 0, "INV_Box_01", "=q6="..AL["Achievement Reward"]};
+				{
+					{ 5, 91802, "", "=q4=Jade Pandaren Kite String", "#ACHIEVEMENTID:7862#, =ec1=#m6#"};
+					{ 5, 91802, "", "=q4=Jade Pandaren Kite String", "#ACHIEVEMENTID:7860#, =ec1=#m7#"};
+				};
+				{ 7, 0, "INV_Box_01", "=q6="..AL["Blizzard Store"], ""};
+				{ 8, 92724, "", "=q4=Swift Windsteed", "=ds=#e27#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Unknown"], ""};
+				{ 17, 87776, "", "=q4=Reins of the Heavenly Azure Cloud Serpent", "=ds=#e27#", ""};
+				{ 18, 87774, "", "=q4=Reins of the Heavenly Golden Cloud Serpent", "=ds=#e27#", ""};
+				{ 19, 87775, "", "=q4=Reins of the Heavenly Jade Cloud Serpent", "=ds=#e27#", ""};
+				{ 20, 87784, "", "=q4=Jungle Riding Crane", "=ds=#e26#", ""};
+				{ 21, 87785, "", "=q4=Reins of the Albino Riding Crane", "=ds=#e26#", ""};
+				{ 22, 84728, "", "=q4=Reins of the Crimson Riding Crane", "=ds=#e26#", ""};
+				{ 23, 87786, "", "=q4=Reins of the Black Riding Yak", "=ds=#e26#", ""};
+				{ 24, 87787, "", "=q4=Reins of the Brown Riding Yak", "=ds=#e26#", ""};
+				{ 25, 84753, "", "=q4=Reins of the White Riding Yak", "=ds=#e26#", ""};
+			};
+		};
+		info = {
+			name = AL["New Mounts"].." - Patch 5.1",
 			module = moduleName, menu = "MOUNTMENU", instance = "Mounts",
 		};
 	}
@@ -5330,32 +6399,52 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["TransformationNonconsumedItems"] = {
 		["Normal"] = {
 			{
-				{ 1, 64481, "", "=q4=Blessing of the Old God", "=ds=#p25#"};
-				{ 2, 64646, "", "=q4=Bones of Transformation", "=ds=#p25#"};
-				{ 3, 49704, "", "=q4=Carved Ogre Idol", "=ds=#m24#"};
-				{ 4, 52201, "", "=q4=Muradin's Favor", "=ds=#m4#: #QUESTID:24917#"};
-				{ 5, 37254, "", "=q4=Super Simian Sphere", "=ds="..AL["World Drop"]};
-				{ 6, 64651, "", "=q4=Wisp Amulet", "=ds=#p25#"};
-				{ 7, 65665, "", "=q3=Burgy Blackheart's Handsome Hat", "=ds="..AL["Burgy Blackheart"]..", "..BabbleZone["Shimmering Expanse"]};
-				{ 8, 54653, "", "=q3=Darkspear Pride", "=ds=#m4#: #QUESTID:25480#"};
-				{ 9, 44719, "", "=q3=Frenzyheart Brew", "=ds="..BabbleFaction["Frenzyheart Tribe"]..": "..BabbleFaction["Revered"]};
-				{ 10, 54651, "", "=q3=Gnomeregan Pride", "=ds=#m4#: #QUESTID:25286#"};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Vendor"]};
+				{ 2, 44719, "", "=q3=Frenzyheart Brew", "=q2="..BabbleFaction["Frenzyheart Tribe"].." - "..BabbleFaction["Revered"], "=ds=3 #gold#"};
+				{ 3, 68806, "", "=q3=Kalytha's Haunted Locket", "=q2="..AL["Tex Vortacoil"]..", =q1="..BabbleZone["Azshara"], "=ds=5,000 #gold#"};
+				{
+					{ 4, 43499, "", "=q1=Iron Boot Flask", "=q2="..AL["Olut Alegut"]..", =q1="..BabbleZone["The Storm Peaks"], "#RELICULDUAR:10#"};
+					{ 4, 43499, "", "=q1=Iron Boot Flask", "=q2="..AL["Rork Sharpchin"]..", =q1="..BabbleZone["The Storm Peaks"], "#RELICULDUAR:10#"};
+				};
+				{ 5, 66888, "", "=q1=Stave of Fur and Claw", "=q2="..BabbleFaction["Timbermaw Hold"].." - "..BabbleFaction["Exalted"], "=ds=5,000 #gold#"};
+				{ 7, 0, "INV_Box_01", "=q6="..AL["Quest Reward"]};
+				{ 8, 52201, "", "=q4=Muradin's Favor", "=ds=#m4#: #QUESTID:24917#"};
+				{ 9, 54653, "", "=q3=Darkspear Pride", "=ds=#m4#: #QUESTID:25480# #m6#"};
+				{ 10, 54651, "", "=q3=Gnomeregan Pride", "=ds=#m4#: #QUESTID:25286# #m7#"};
 				{ 11, 19979, "", "=q3=Hook of the Master Angler", "=ds=#m4#: #QUESTID:8193#"};
-				{ 12, 68806, "", "=q3=Kalytha's Haunted Locket", "=ds="..AL["Vendor"]..": "..BabbleZone["Azshara"]};
-				{ 13, 33079, "", "=q3=Murloc Costume", "#ACHIEVEMENTID:412#"};
-				{ 14, 1973, "", "=q3=Orb of Deception", "=ds="..AL["World Drop"]};
-				{ 15, 35275, "", "=q3=Orb of the Sin'dorei", "=ds="..AL["Various Locations"]..": "..BabbleZone["Magisters' Terrace"]};
-				{ 16, 45850, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
-				{ 17, 45851, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
-				{ 18, 45852, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
-				{ 19, 45853, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
-				{ 20, 32782, "", "=q3=Time-Lost Figurine", "=ds="..AL["Terokk"]..": "..BabbleZone["Terokkar Forest"]};
-				{ 21, 5462, "", "=q1=Dartol's Rod of Transformation", "=ds=#m4#: #QUESTID:1028#"};
-				{ 22, 53057, "", "=q1=Faded Wizard Hat", "=ds=#m4#: #QUESTID:14392#"};
-				{ 23, 43499, "", "=q1=Iron Boot Flask", "=ds="..AL["Vendor"]..": "..BabbleZone["The Storm Peaks"]};
-				{ 24, 71259, "", "=q1=Leyara's Locket", "=ds=#m4#: #QUESTID:29311#"};
-				{ 25, 66888, "", "=q1=Stave of Fur and Claw", "=ds="..BabbleFaction["Timbermaw Hold"]..": "..BabbleFaction["Exalted"]};
-				{ 26, 17712, "", "=q1=Winter Veil Disguise Kit", "=ds="..AL["Feast of Winter Veil"]};
+				{ 12, 5462, "", "=q1=Dartol's Rod of Transformation", "=ds=#m34#: #QUESTID:1028# #m7#"};
+				{ 13, 53057, "", "=q1=Faded Wizard Hat", "=ds=#m4#: #QUESTID:14392# #m6#"};
+				{ 14, 88417, "", "=q1=Gokk'lok's Shell", "=ds=#m4#: #QUESTID:31083# #m6#"};
+				{ 15, 71259, "", "=q1=Leyara's Locket", "=ds=#m4#: #QUESTID:29311#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Rare"]};
+				{ 17, 37254, "", "=q4=Super Simian Sphere", "=ds="..AL["World Drop"]};
+				{ 18, 86589, "", "=q3=Ai-Li's Skymirror", "=q2="..AtlasLoot_IngameLocales["Ai-Li Skymirror"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 19, 86582, "", "=q3=Aqua Jewel", "=q2="..AtlasLoot_IngameLocales["Sahn Tidehunter"]..", =q1="..AtlasLoot:GetMapNameByID(811)};
+				{ 20, 65665, "", "=q3=Burgy Blackheart's Handsome Hat", "=q2="..BabbleRare["Burgy Blackheart"]..", =q1="..AtlasLoot:GetMapNameByID(615)};
+				{ 21, 86593, "", "=q3=Hozen Beach Ball", "=q2="..AtlasLoot_IngameLocales["Ik-Ik the Nimble"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 22, 88566, "", "=q3=Krastinov's Bag of Horrors", "=q2="..BabbleBoss["Doctor Theolen Krastinov"]..", =q1="..AtlasLoot:GetMapNameByID(763)};
+				{ 23, 86568, "", "=q3=Mr. Smite's Brass Compass", "=q2="..AtlasLoot_IngameLocales["Yorik Sharpeye"]..", =q1="..AtlasLoot:GetMapNameByID(811)};
+				{ 24, 1973, "", "=q3=Orb of Deception", "=q2="..AL["World Drop"]};
+				{ 25, 35275, "", "=q3=Orb of the Sin'dorei", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(798)};
+				{ 26, 86573, "", "=q3=Shard of Archstone", "=q2="..AtlasLoot_IngameLocales["Havak"]..", =q1="..AtlasLoot:GetMapNameByID(809)};
+				{ 27, 32782, "", "=q3=Time-Lost Figurine", "=q2="..BabbleRare["Terokk"]..", =q1="..AtlasLoot:GetMapNameByID(478)};
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Crafted"]};
+				{ 2, 64481, "", "=q4=Blessing of the Old God", "=ds=#p25#"};
+				{ 3, 64646, "", "=q4=Bones of Transformation", "=ds=#p25#"};
+				{ 4, 64651, "", "=q4=Wisp Amulet", "=ds=#p25#"};
+				{ 5, 45850, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
+				{ 6, 45851, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
+				{ 7, 45852, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
+				{ 8, 45853, "", "=q3=Rituals of the New Moon", "=ds=#p26#"};
+				{ 9, 69775, "", "=q3=Vrykul Drinking Horn", "=ds=#p25#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Card Game Item"]};
+				{ 17, 49704, "", "=q4=Carved Ogre Idol", "=ds="..AL["UDE Items"]..", =ds="..AL["No Longer Available"]};
+				{ 19, 0, "INV_Box_01", "=q6="..AL["Promotional"]};
+				{ 20, 33079, "", "=q3=Murloc Costume", "#ACHIEVEMENTID:412#"};
+				{ 22, 0, "INV_Box_01", "=q6="..AL["World Events"]};
+				{ 23, 17712, "", "=q1=Winter Veil Disguise Kit", "=ds="..AL["Feast of Winter Veil"]};
 			};
 		};
 		info = {
@@ -5367,15 +6456,33 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["TransformationConsumableItems"] = {
 		["Normal"] = {
 			{
-				{ 1, 38320, "", "=q1=Dire Brew", "=ds="..BabbleZone["Blackrock Depths"]};
-				{ 2, 63122, "", "=q1=Lifegiving Seed", "=ds="};
-				{ 3, 43572, "", "=q1=Magic Eater", "=ds=#p24#: =ds="..BabbleZone["Dalaran"]};
-				{ 4, 8529, "", "=q1=Noggenfogger Elixir", "=ds="..AL["Vendor"]..": "..BabbleZone["Tanaris"]};
-				{ 5, 31337, "", "=q1=Orb of the Blackwhelp", "=ds="..AL["Vendor"]..": "..BabbleZone["Blade's Edge Mountains"]};
-				{ 6, 58489, "", "=q1=Potion of Illusion", "=ds=#p1#"};
-				{ 7, 40195, "", "=q1=Pygmy Oil", "=ds=#p1#"};
-				{ 8, 6657, "", "=q1=Savory Deviate Delight", "=ds=#p3#"};
-				{ 9, 44012, "", "=q1=Underbelly Elixir", "=ds="..BabbleZone["Dalaran"]};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Vendor"]};
+				{ 2, 8529, "", "=q1=Noggenfogger Elixir", "=q2="..AL["Sprinkle Noggenfogger"]..", =q1="..AtlasLoot:GetMapNameByID(161), "35 #silver#"};
+				{ 3, 31337, "", "=q1=Orb of the Blackwhelp", "=q2="..AL["Wyrmcult Provisioner"]..", =q1="..AtlasLoot:GetMapNameByID(475), "2 #gold# 50 #silver#"};
+				{ 4, 88492, "", "=q1=Wicked Wikket", "=q2="..AL["Auntie Stormstout"]..", =q1="..AtlasLoot:GetMapNameByID(876), "15 #gold#"};
+				{ 6, 0, "INV_Box_01", "=q6="..AL["Crafted"]};
+				{ 7, 4388, "", "=q1=Discombobulator Ray", "=ds=#p5#"};
+				{ 8, 63122, "", "=q1=Lifegiving Seed", "=ds=#p27#"};
+				{ 9, 43572, "", "=q1=Magic Eater", "=ds=#p24#: =q1="..AtlasLoot:GetMapNameByID(504)};
+				{ 10, 58489, "", "=q1=Potion of Illusion", "=ds=#p1#"};
+				{ 11, 40195, "", "=q1=Pygmy Oil", "=ds=#p1#"};
+				{ 12, 6657, "", "=q1=Savory Deviate Delight", "=ds=#p3#"};
+				{ 14, 0, "INV_Box_01", "=q6="..AL["Rare"]};
+				{ 15, 89373, "", "=q2=Scotty's Lucky Coin", "=q2="..AtlasLoot_IngameLocales["Scotty"]..", =q1="..AtlasLoot:GetMapNameByID(810)};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Drop"]};
+				{ 17, 38320, "", "=q1=Dire Brew", "=q1="..AtlasLoot:GetMapNameByID(704)};
+				{ 18, 23864, "", "=q1=Torment of the Worgen", "=q1="..AtlasLoot:GetMapNameByID(799)};
+				{ 19, 44012, "", "=q1=Underbelly Elixir", "=q1="..AtlasLoot:GetMapNameByID(504)};
+				{ 20, 0, "INV_Box_01", "=q6="..AL["World Events"]};
+				{ 22, 44792, "", "=q1=Blossoming Branch", "=ds="..AL["Noblegarden"], "#NOBLEGARDEN:10#"};
+				{ 23, 20410, "", "=q1=Hallowed Wand - Bat", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 24, 20409, "", "=q1=Hallowed Wand - Ghost", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 25, 20399, "", "=q1=Hallowed Wand - Leper Gnome", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 26, 20398, "", "=q1=Hallowed Wand - Ninja", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 27, 20397, "", "=q1=Hallowed Wand - Pirate", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 28, 20413, "", "=q1=Hallowed Wand - Random", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 29, 20411, "", "=q1=Hallowed Wand - Skeleton", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
+				{ 30, 20414, "", "=q1=Hallowed Wand - Wisp", "=ds="..AL["Hallow's End"], "#HALLOWSEND:2#"};
 			};
 		};
 		info = {
@@ -5387,17 +6494,88 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["TransformationAdditionalEffects"] = {
 		["Normal"] = {
 			{
-				{ 1, 71086, "", "=q5=Dragonwrath, Tarecgosa's Rest", "=ds=#w9#"};
-				{ 2, 69897, "", "=q4=Fandral's Flamescythe", "=ds=#w9#"};
-				{ 3, 39769, "", "=q4=Arcanite Ripper", "=ds=#h2#, #w1#"};
-				{ 4, 50362, "", "=q4=Deathbringer's Will", "=ds=#s14#"};
-				{ 5, 50363, "", "=q4=Deathbringer's Will", "=ds=#s14#"};
-				{ 6, 65891, "", "=q4=Vial of the Sands", "=ds=#e12#"};
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Weapons"]};
+				{ 2, 71086, "", "=q5=Dragonwrath, Tarecgosa's Rest", "=ds=#w9#", "=q1="..AtlasLoot:GetMapNameByID(800)};
+				{ 3, 69897, "", "=q4=Fandral's Flamescythe", "=ds=#w9#", "=q2="..BabbleBoss["Majordomo Staghelm"]..", =q1="..AtlasLoot:GetMapNameByID(800)};
+				{ 4, 71466, "", "=q4=Fandral's Flamescythe", "=ds=#w9#", "=q2="..BabbleBoss["Majordomo Staghelm"]..", =q1="..AtlasLoot:GetMapNameByID(800)};
+				{ 5, 39769, "", "=q4=Arcanite Ripper", "=ds=#h2#, #w1#", "=q2="..AL["No Longer Available"]};
+				{ 6, 19910, "", "=q3=Arlokk's Grasp", "=ds=#h4#, #w13#", "=q2="..AL["No Longer Available"]};
+				{ 7, 19896, "", "=q3=Thekal's Grasp", "=ds=#h1#, #w13#", "=q2="..AL["No Longer Available"]};
+				{ 9, 0, "INV_Box_01", "=q6="..BabbleInventory["Mounts"]};
+				{ 10, 65891, "", "=q4=Vial of the Sands", "=ds=#e12#", "=ds=#p1#"};
+				{ 11, 83086, "", "=q4=Heart of the Nightwing", "=ds=#e12#", "=q2="..AL["Recruit-A-Friend"]};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Trinkets"]};
+				{ 17, 50362, "", "=q4=Deathbringer's Will", "=ds=#s14#", "=q2="..BabbleBoss["Deathbringer Saurfang"]..", =q1="..AtlasLoot:GetMapNameByID(604)};
+				{ 18, 50363, "", "=q4=Deathbringer's Will", "=ds=#s14#", "=q2="..BabbleBoss["Deathbringer Saurfang"]..", =q1="..AtlasLoot:GetMapNameByID(604)};
+				{ 19, 59461, "", "=q4=Fury of Angerforge", "=ds=#s14#", "=q2="..AL["Various Locations"]..", =q1="..AtlasLoot:GetMapNameByID(755)};
+				{ 20, 23835, "", "=q3=Gnomish Poultryizer", "=ds=#s14#", "=ds=#p5#"};
+				{ 21, 18984, "", "=q2=Dimensional Ripper - Everlook", "=ds=#s14#", "=ds=#p5#"};
+				{ 22, 18986, "", "=q2=Ultrasafe Transporter: Gadgetzan", "=ds=#s14#", "=ds=#p5#"};
 			};
 		};
 		info = {
 			name = AL["Additional Effects Transformation Items"],
 			module = moduleName, menu = "TRANSFORMATIONMENU",
+		};
+	}
+
+		-------------------
+		--- Legendaries ---
+		-------------------
+
+	AtlasLoot_Data["Legendaries"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Mists of Pandaria"]};
+				{ 2, 93364, "", "=q5=Refined Crystallized Dread", "=ds=#e7#"};
+				{ 3, 93366, "", "=q5=Refined Crystallized Horror", "=ds=#e7#"};
+				{ 4, 93365, "", "=q5=Refined Crystallized Terror", "=ds=#e7#"};
+				{ 6, 89873, "", "=q5=Crystallized Dread", "=ds=#e7#"};
+				{ 7, 89882, "", "=q5=Crystallized Horror", "=ds=#e7#"};
+				{ 8, 89881, "", "=q5=Crystallized Terror", "=ds=#e7#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Cataclysm"]};
+				{ 17, 77949, "", "=q5=Golad, Twilight of Aspects", "=ds=#h3#, #w4#", "" };
+				{ 18, 77950, "", "=q5=Tiriosh, Nightmare of Ages", "=ds=#h4#, #w4#", "" };
+				{ 19, 77947, "", "=q4=The Sleeper", "=ds=#h3#, #w4#", "" };
+				{ 20, 77948, "", "=q4=The Dreamer", "=ds=#h4#, #w4#", "" };
+				{ 21, 77945, "", "=q4=Fear", "=ds=#h3#, #w4#", "" };
+				{ 22, 77946, "", "=q4=Vengeance", "=ds=#h4#, #w4#", "" };
+				{ 24, 71086, "", "=q5=Dragonwrath, Tarecgosa's Rest", "=ds=#w9#", "" };
+				{ 25, 71085, "", "=q4=Runestaff of Nordrassil", "=ds=#w9#", "" };
+				{ 26, 71084, "", "=q4=Branch of Nordrassil", "=ds=#w9#", "" };
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Wrath of the Lich King"]};
+				{ 2, 49623, "", "=q5=Shadowmourne", "=ds=#h2#, #w1#", "" };
+				{ 3, 49888, "", "=q4=Shadow's Edge", "=ds=#h2#, #w1#", "" };
+				{ 5, 46017, "", "=q5=Val'anyr, Hammer of Ancient Kings", "=ds=#h3#, #w6#", "" };
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Burning Crusade"]};
+				{ 17, 34334, "", "=q5=Thori'dal, the Stars' Fury", "=ds=#w2#"};
+				{ 19, 32837, "", "=q5=Warglaive of Azzinoth", "=ds=#h3#, #w10#, =q1=#m1# =ds=#c9#, #c6#"};
+				{ 20, 32838, "", "=q5=Warglaive of Azzinoth", "=ds=#h4#, #w10#, =q1=#m1# =ds=#c9#, #c6#"};
+				{ 22, 30312, "", "=q5=Infinity Blade", "=ds=#h1#, #w4#"};
+				{ 23, 30311, "", "=q5=Warp Slicer", "=ds=#h1#, #w10#"};
+				{ 24, 30316, "", "=q5=Devastation", "=ds=#h2#, #w1#"};
+				{ 25, 30317, "", "=q5=Cosmic Infuse", "=ds=#h3#, #w6#"};
+				{ 26, 30313, "", "=q5=Staff of Disintegration", "=ds=#w9#"};
+				{ 27, 30318, "", "=q5=Netherstrand Longbow", "=ds=#w2#"};
+				{ 28, 30314, "", "=q5=Phaseshift Bulwark", "=ds=#w8#"};
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Classic WoW"]};
+				{ 2, 22632, "", "=q5=Atiesh, Greatstaff of the Guardian", "=ds=#w9#, =q1=#m1# =ds=#c1#"};
+				{ 3, 22589, "", "=q5=Atiesh, Greatstaff of the Guardian", "=ds=#w9#, =q1=#m1# =ds=#c3#"};
+				{ 4, 22631, "", "=q5=Atiesh, Greatstaff of the Guardian", "=ds=#w9#, =q1=#m1# =ds=#c5#"};
+				{ 5, 22630, "", "=q5=Atiesh, Greatstaff of the Guardian", "=ds=#w9#, =q1=#m1# =ds=#c8#"};
+				{ 7, 21176, "", "=q5=Black Qiraji Resonating Crystal", "=ds=#e26#"};
+				{ 9, 19019, "", "=q5=Thunderfury, Blessed Blade of the Windseeker", "=ds=#h1#, #w10#"};
+				{ 11, 17182, "", "=q5=Sulfuras, Hand of Ragnaros", "=ds=#h2#, #w6#"};
+				{ 12, 17193, "", "=q4=Sulfuron Hammer", "=ds=#h2#, #w6#"};
+			};
+		};
+		info = {
+			name = AL["Legendary Items"],
+			module = moduleName, menu = "SETMENU",
 		};
 	}
 
@@ -5408,32 +6586,58 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["Heirloom"] = {
 		["Normal"] = {
 			{
-				{ 1, 42985, "", "=q7=Tattered Dreadmist Mantle", "=ds=#s3#, #a1#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 2, 42984, "", "=q7=Preened Ironfeather Shoulders", "=ds=#s3#, #a2#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 3, 42952, "", "=q7=Stained Shadowcraft Spaulders", "=ds=#s3#, #a2#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 4, 42950, "", "=q7=Champion Herod's Shoulder", "=ds=#s3#, #a3#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 5, 42951, "", "=q7=Mystical Pauldrons of Elements", "=ds=#s3#, #a3#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 6, 69890, "", "=q7=Burnished Pauldrons of Might", "=ds=#s3#, #a4#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 7, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 9, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 10, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 11, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 12, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 13, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 14, 69889, "", "=q7=Burnished Breastplate of Might", "=ds=#s5#, #a4#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 15, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#JUSTICE:2175# / #CHAMPSEAL:60#"};
-				{ 16, 50255, "", "=q7=Dread Pirate Ring", "=ds=#s13#", "=ds="..AL["Kalu'ak Fishing Derby"]};
-				{ 18, 42992, "", "=q7=Discerning Eye of the Beast", "=ds=#s14#", "#JUSTICE:2725#  / #CHAMPSEAL:75#"};
-				{ 19, 42991, "", "=q7=Swift Hand of Justice", "=ds=#s14#", "#JUSTICE:2725#  / #CHAMPSEAL:75#"};
-				{ 21, 42944, "", "=q7=Balanced Heartseeker", "=ds=#h1#, #w4#", "#JUSTICE:2175#  / #CHAMPSEAL:60#"};
-				{ 22, 69893, "", "=q7=Bloodsoaked Skullforge Reaver", "=ds=#h3#, #w10#", "#JUSTICE:2175#  / #CHAMPSEAL:60#"};
-				{ 23, 42945, "", "=q7=Venerable Dal'Rend's Sacred Charge", "=ds=#h3#, #w10#", "#JUSTICE:2175#  / #CHAMPSEAL:60#"};
-				{ 24, 42943, "", "=q7=Bloodied Arcanite Reaper", "=ds=#h2#, #w1#", "#JUSTICE:3500# / #CHAMPSEAL:95#"};
-				{ 25, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#JUSTICE:2725# / #CHAMPSEAL:75#"};
-				{ 26, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#JUSTICE:2175# / #CHAMPSEAL:75#"};
-				{ 27, 48718, "", "=q7=Repurposed Lava Dredger", "=ds=#h2#, #w6#", "#JUSTICE:3500# / #CHAMPSEAL:95#"};
-				{ 28, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#JUSTICE:3500# / #CHAMPSEAL:95#"};
-				{ 29, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#JUSTICE:3500# / #CHAMPSEAL:95#"};
+				{ 1, 62040, "", "=q7=Ancient Bloodmoon Cloak", "=ds=#s4#", "1,200 #gold#"};
+				{ 2, 62039, "", "=q7=Inherited Cape of the Black Baron", "=ds=#s4#", "1,200 #gold#"};
+				{ 3, 69892, "", "=q7=Ripped Sandstorm Cloak", "=ds=#s4#", "1,200 #gold#"};
+				{ 4, 62038, "", "=q7=Worn Stoneskin Gargoyle Cape", "=ds=#s4#", "1,200 #gold#"};
+				{ 6, 61958, "", "=q7=Tattered Dreadmist Mask", "=ds=#s1#, #a1#", "1,500 #gold#"};
+				{ 7, 42985, "", "=q7=Tattered Dreadmist Mantle", "=ds=#s3#, #a1#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 8, 48691, "", "=q7=Tattered Dreadmist Robe", "=ds=#s5#, #a1#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 9, 62029, "", "=q7=Tattered Dreadmist Leggings", "=ds=#s11#, #a1#", "1,750 #gold#"};
+				{ 16, 61942, "", "=q7=Preened Tribal War Feathers", "=ds=#s1#, #a2#", "1,500 #gold#"};
+				{ 17, 42984, "", "=q7=Preened Ironfeather Shoulders", "=ds=#s3#, #a2#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 18, 48687, "", "=q7=Preened Ironfeather Breastplate", "=ds=#s5#, #a2#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 19, 62027, "", "=q7=Preened Wildfeather Leggings", "=ds=#s11#, #a2#", "1,750 #gold#"};
+				{ 21, 61937, "", "=q7=Stained Shadowcraft Cap", "=ds=#s1#, #a2#", "1,500 #gold#"};
+				{ 22, 42952, "", "=q7=Stained Shadowcraft Spaulders", "=ds=#s3#, #a2#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 23, 48689, "", "=q7=Stained Shadowcraft Tunic", "=ds=#s5#, #a2#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 24, 62026, "", "=q7=Stained Shadowcraft Pants", "=ds=#s11#, #a2#", "1,750 #gold#"};
+				extraText = ": "..BabbleInventory["Back"].." / "..BabbleInventory["Cloth"].." / "..BabbleInventory["Leather"];
+			};
+			{
+				{ 1, 61935, "", "=q7=Tarnished Raging Berserker's Helm", "=ds=#s1#, #a3#", "1,500 #gold#"};
+				{ 2, 42950, "", "=q7=Champion Herod's Shoulder", "=ds=#s3#, #a3#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 3, 48677, "", "=q7=Champion's Deathdealer Breastplate", "=ds=#s5#, #a3#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 4, 62024, "", "=q7=Tarnished Leggings of Destruction", "=ds=#s11#, #a3#", "1,750 #gold#"};
+				{ 6, 61936, "", "=q7=Mystical Coif of Elements", "=ds=#s1#, #a3#", "1,500 #gold#"};
+				{ 7, 42951, "", "=q7=Mystical Pauldrons of Elements", "=ds=#s3#, #a3#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 8, 48683, "", "=q7=Mystical Vest of Elements", "=ds=#s5#, #a3#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 9, 62025, "", "=q7=Mystical Kilt of Elements", "=ds=#s11#, #a3#", "1,750 #gold#"};
+				{ 16, 69887, "", "=q7=Burnished Helm of Might", "=ds=#s1#, #a4#", "1,500 #gold#"};
+				{ 17, 69890, "", "=q7=Burnished Pauldrons of Might", "=ds=#s3#, #a4#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 18, 69889, "", "=q7=Burnished Breastplate of Might", "=ds=#s5#, #a4#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 19, 69888, "", "=q7=Burnished Legplates of Might", "=ds=#s11#, #a4#", "1,750 #gold#"};
+				{ 21, 61931, "", "=q7=Polished Helm of Valor", "=ds=#s1#, #a4#", "1,500 #gold#"};
+				{ 22, 42949, "", "=q7=Polished Spaulders of Valor", "=ds=#s3#, #a4#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 23, 48685, "", "=q7=Polished Breastplate of Valor", "=ds=#s5#, #a4#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 24, 62023, "", "=q7=Polished Legplates of Valor", "=ds=#s11#, #a4#", "1,750 #gold#"};
+				extraText = ": "..BabbleInventory["Mail"].." / "..BabbleInventory["Plate"];
+			};
+			{
+				{ 1, 50255, "", "=q7=Dread Pirate Ring", "=ds=#s13#", "=ds="..AL["Kalu'ak Fishing Derby"]};
+				{ 3, 42992, "", "=q7=Discerning Eye of the Beast", "=ds=#s14#", "#JUSTICE:2725# #CHAMPSEAL:75# #DARKMOON:130#"};
+				{ 4, 42991, "", "=q7=Swift Hand of Justice", "=ds=#s14#", "#JUSTICE:2725# #CHAMPSEAL:75# #DARKMOON:130#"};
+				{ 16, 42944, "", "=q7=Balanced Heartseeker", "=ds=#h1#, #w4#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 18, 69893, "", "=q7=Bloodsoaked Skullforge Reaver", "=ds=#h3#, #w10#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 19, 42945, "", "=q7=Venerable Dal'Rend's Sacred Charge", "=ds=#h3#, #w10#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 21, 42943, "", "=q7=Bloodied Arcanite Reaper", "=ds=#h2#, #w1#", "#JUSTICE:3500# #CHAMPSEAL:95# #DARKMOON:160#"};
+				{ 23, 42948, "", "=q7=Devout Aurastone Hammer", "=ds=#h3#, #w6#", "#JUSTICE:2725# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 24, 48716, "", "=q7=Venerable Mass of McGowan", "=ds=#h1#, #w6#", "#JUSTICE:2175# #CHAMPSEAL:60# #DARKMOON:110#"};
+				{ 25, 48718, "", "=q7=Repurposed Lava Dredger", "=ds=#h2#, #w6#", "#JUSTICE:3500# #CHAMPSEAL:95# #DARKMOON:160#"};
+				{ 27, 79131, "", "=q7=Burnished Warden Staff", "=ds=#w9#", "#JUSTICE:3500# #CHAMPSEAL:95# #DARKMOON:160#"};
+				{ 28, 42947, "", "=q7=Dignified Headmaster's Charge", "=ds=#w9#", "#JUSTICE:3500# #CHAMPSEAL:95# #DARKMOON:160#"};
+				{ 30, 42946, "", "=q7=Charmed Ancient Bone Bow", "=ds=#w2#", "#JUSTICE:3500# #CHAMPSEAL:95# #DARKMOON:160#"};
+				extraText = ": "..AL["Accessories"].." / "..AL["Weapons"];
 			};
 			{
 				{ 1, 44107, "", "=q7=Exquisite Sunderseer Mantle", "=ds=#s3#, #a1#", "#HONOR:2175#"};
@@ -5451,31 +6655,97 @@ local moduleName = "AtlasLootMoP"
 				{ 19, 44094, "", "=q7=The Blessed Hammer of Grace", "=ds=#h3#, #w6#", "#HONOR:2725#"};
 				{ 20, 44095, "", "=q7=Grand Staff of Jordan", "=ds=#w9#", "#HONOR:3500#"};
 				{ 21, 44093, "", "=q7=Upgraded Dwarven Hand Cannon", "=ds=#w5#", "#HONOR:3500#"};
-			};
-			{
-				{ 2, 62040, "", "=q7=Ancient Bloodmoon Cloak", "=ds=#s4#", ""};
-				{ 3, 62039, "", "=q7=Inherited Cape of the Black Baron", "=ds=#s4#", ""};
-				{ 4, 69892, "", "=q7=Ripped Sandstorm Cloak", "=ds=#s4#", ""};
-				{ 5, 62038, "", "=q7=Worn Stoneskin Gargoyle Cape", "=ds=#s4#", ""};
-				{ 7, 61958, "", "=q7=Tattered Dreadmist Mask", "=ds=#s1#, #a1#", ""};
-				{ 8, 61942, "", "=q7=Preened Tribal War Feathers", "=ds=#s1#, #a2#", ""};
-				{ 9, 61937, "", "=q7=Stained Shadowcraft Cap", "=ds=#s1#, #a2#", ""};
-				{ 10, 61936, "", "=q7=Mystical Coif of Elements", "=ds=#s1#, #a3#", ""};
-				{ 11, 61935, "", "=q7=Tarnished Raging Berserker's Helm", "=ds=#s1#, #a3#", ""};
-				{ 12, 69887, "", "=q7=Burnished Helm of Might", "=ds=#s1#, #a4#", ""};
-				{ 13, 61931, "", "=q7=Polished Helm of Valor", "=ds=#s1#, #a4#", ""};
-				{ 17, 62029, "", "=q7=Tattered Dreadmist Leggings", "=ds=#s11#, #a1#", ""};
-				{ 18, 62027, "", "=q7=Preened Wildfeather Leggings", "=ds=#s11#, #a2#", ""};
-				{ 19, 62026, "", "=q7=Stained Shadowcraft Pants", "=ds=#s11#, #a2#", ""};
-				{ 20, 62025, "", "=q7=Mystical Kilt of Elements", "=ds=#s11#, #a3#", ""};
-				{ 21, 62024, "", "=q7=Tarnished Leggings of Destruction", "=ds=#s11#, #a3#", ""};
-				{ 22, 69888, "", "=q7=Burnished Legplates of Might", "=ds=#s11#, #a4#", ""};
-				{ 23, 62023, "", "=q7=Polished Legplates of Valor", "=ds=#s11#, #a4#", ""};
+				extraText = ": "..AL["PvP Heirlooms"];
 			};
 		};
 		info = {
 			name = AL["Heirloom"],
-			module = moduleName, menu = "SETMENU",
+			module = moduleName, menu = "HEIRLOOMMENU",
+		};
+	}
+
+	AtlasLoot_Data["HeirloomBoAArmor"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Level 85-89"], "=q1="..AL["Mists of Pandaria"]};
+				{ 2, 86521, "", "=q3=Lucid Amulet of the Agile Mind", "=ds=#s2#"};
+				{ 3, 86525, "", "=q3=Bloodsoaked Chitin Fragment", "=ds=#s14#"};
+				{ 4, 89611, "", "=q3=Quilen Statuette", "=ds=#s14#"};
+				{ 6, 0, "INV_Box_01", "=q6="..AL["Level 85"], "=q1="..AL["Cataclysm"]};
+				{ 7, 64904, "", "=q4=Ring of the Boy Emperor", "=ds=#s13#"};
+				{ 8, 64645, "", "=q4=Tyrande's Favorite Doll", "=ds=#s14#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Level 60-69"], ""};
+				{ 17, 64644, "", "=q4=Headdress of the First Shaman", "=ds=#s1#, #a3#"};
+				{ 19, 0, "INV_Box_01", "=q6="..AL["Level 50-60"], ""};
+				{ 20, 64643, "", "=q4=Queen Azshara's Dressing Gown", "=ds=#s5#, #a1#"};
+			};
+		};
+		info = {
+			name = AL["Bind on Account Armor"],
+			module = moduleName, menu = "HEIRLOOMMENU",
+		};
+	}
+
+	AtlasLoot_Data["HeirloomBoAWeapons"] = {
+		["Normal"] = {
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Level 90"], "=q1="..AL["Mists of Pandaria"]};
+				{ 2, 79340, "", "=q4=Inscribed Crane Staff", "=ds=#w9#"};
+				{ 3, 79341, "", "=q4=Inscribed Serpent Staff", "=ds=#w9#"};
+				{ 4, 79343, "", "=q4=Inscribed Tiger Staff", "=ds=#w9#"};
+				{ 6, 0, "INV_Box_01", "=q6="..AL["Level 85-89"], "=q1="..AL["Mists of Pandaria"]};
+				{ 7, 85776, "", "=q3=Wodin's Mantid Shanker", "=ds=#h1#, #w4#"};
+				{ 8, 86519, "", "=q3=Wind-Reaver's Dagger of Quick Strikes", "=ds=#h1#, #w4#"};
+				{ 9, 86527, "", "=q3=Blade of the Poisoned Mind", "=ds=#h3#, #w10#"};
+				{ 10, 86199, "", "=q3=Jade Infused Blade", "=ds=#h1#, #w10#"};
+				{ 11, 86522, "", "=q3=Blade of the Prime", "=ds=#h1#, #w10#"};
+				{ 12, 86523, "", "=q3=Swarming Cleaver of Ka'roz", "=ds=#h2#, #w10#"};
+				{ 13, 85777, "", "=q3=Ancient Pandaren Mining Pick", "=ds=#h1#, #w1#"};
+				{ 14, 86518, "", "=q3=Yaungol Fire Carrier", "=ds=#h1#, #w6#"};
+				{ 15, 86198, "", "=q3=Hammer of Ten Thunders", "=ds=#h2#, #w6#"};
+				{ 16, 86124, "", "=q3=Pandaren Fishing Spear", "=ds=#w7#"};
+				{ 17, 86394, "", "=q3=Hozen Warrior Spear", "=ds=#w7#"};
+				{ 18, 89685, "", "=q3=Spear of Xuen", "=ds=#w7#"};
+				{ 19, 88723, "", "=q3=Sturdy Yaungol Spear", "=ds=#w7#"};
+				{ 20, 86520, "", "=q3=Malik's Stalwart Spear", "=ds=#w7#"};
+				{ 21, 86196, "", "=q3=Ancient Jinyu Staff", "=ds=#w9#"};
+				{ 22, 86218, "", "=q3=Staff of the Hidden Master", "=ds=#w9#"};
+				{ 23, 86524, "", "=q3=Dissector's Staff of Mutation", "=ds=#w9#"};
+				{ 24, 89684, "", "=q3=Umbrella of Chi-Ji", "=ds=#s15#"};
+			};
+			{
+				{ 1, 0, "INV_Box_01", "=q6="..AL["Level 85"], "=q1="..AL["Cataclysm"]};
+				{ 2, 64885, "", "=q4=Scimitar of the Sirocco", "=ds=#h1#, #w10#"};
+				{ 3, 64377, "", "=q4=Zin'rokh, Destroyer of Worlds", "=ds=#h2#, #w10#"};
+				{ 4, 64880, "", "=q4=Staff of Ammunae", "=ds=#w9#"};
+				{ 5, 64489, "", "=q4=Staff of Sorcerer-Thane Thaurissan", "=ds=#w9#"};
+				{ 6, 69764, "", "=q4=Extinct Turtle Shell", "=ds=#w8#"};
+				{ 16, 0, "INV_Box_01", "=q6="..AL["Level 70-79"], ""};
+				{ 17, 64460, "", "=q4=Nifflevar Bearded Axe", "=ds=#h1#, #w1#"};
+			};
+		};
+		info = {
+			name = AL["Bind on Account Weapons"],
+			module = moduleName, menu = "HEIRLOOMMENU",
+		};
+	}
+
+	AtlasLoot_Data["HeirloomBoAMisc"] = {
+		["Normal"] = {
+			{
+				{ 1, 64881, "", "=q4=Pendant of the Scarab Storm", "=ds="};
+				{ 2, 33079, "", "=q3=Murloc Costume", "#ACHIEVEMENTID:412#"};
+				{ 4, 92738, "", "=q3=Safari Hat", "=ds=#s1#", "#ACHIEVEMENTID:7499#"};
+				{ 6, 86574, "", "=q3=Elixir of Ancient Knowledge", "=ds="};
+				{ 16, 69210, "", "=q4=Renowned Guild Tabard", "=ds=#s7#"};
+				{ 17, 69209, "", "=q3=Illustrious Guild Tabard", "=ds=#s7#"};
+				{ 19, 63517, "", "=q2=Baradin's Wardens Commendation", "=ds=", "#TOLBARAD:10#"};
+				{ 20, 63518, "", "=q2=Hellscream's Reach Commendation", "=ds=", "#TOLBARAD:10#"};
+			};
+		};
+		info = {
+			name = AL["Bind on Account"], --- Name not final
+			module = moduleName, menu = "HEIRLOOMMENU",
 		};
 	}
 
@@ -5486,22 +6756,21 @@ local moduleName = "AtlasLootMoP"
 	AtlasLoot_Data["WorldEpics90"] = {
 		["Normal"] = {
 			{
-
-
 				{ 1, 90580, "", "=q4=Cristof's Crushing Cloak", "=ds=#s4#"};
 				{ 2, 90589, "", "=q4=Dirl's Drafty Drape", "=ds=#s4#"};
 				{ 3, 90586, "", "=q4=Dory's Pageantry", "=ds=#s4#"};
-				{ 4, 90573, "", "=q4=Wang's Unshakable Smile", "=ds=#s1#, #a1#"};
-				{ 5, 90587, "", "=q4=Natli's Fireheart Robe", "=ds=#s5#, #a1#"};
-				{ 6, 90574, "", "=q4=Etoshia's Elegant Gloves", "=ds=#s9#, #a1#"};
-				{ 7, 90588, "", "=q4=Rittsyn's Ruinblasters", "=ds=#s9#, #a1#"};
-				{ 8, 90585, "", "=q4=Vulajin's Vicious Breastplate", "=ds=#s5#, #a2#"};
-				{ 9, 90572, "", "=q4=Kilt of Pandaren Promises", "=ds=#s11#, #a3#"};
-				{ 10, 90570, "", "=q4=Legguards of Sleeting Arrows", "=ds=#s11#, #a3#"};
-				{ 11, 87695, "", "=q4=Treads of Edward the Odd", "=ds=#s12#, #a3#"};
-				{ 12, 90576, "", "=q4=Spaulders of the Scorned", "=ds=#s3#, #a4#"};
-				{ 13, 90577, "", "=q4=Boblet's Bouncing Hauberk", "=ds=#s5#, #a4#"};
-				{ 14, 90579, "", "=q4=Legplates of Durable Dreams", "=ds=#s11#, #a4#"};
+				{ 4, 90578, "", "=q4=Zom's Rain-Stained Cloak", "=ds=#s4#"};
+				{ 5, 90573, "", "=q4=Wang's Unshakable Smile", "=ds=#s1#, #a1#"};
+				{ 6, 90587, "", "=q4=Natli's Fireheart Robe", "=ds=#s5#, #a1#"};
+				{ 7, 90574, "", "=q4=Etoshia's Elegant Gloves", "=ds=#s9#, #a1#"};
+				{ 8, 90588, "", "=q4=Rittsyn's Ruinblasters", "=ds=#s9#, #a1#"};
+				{ 9, 90585, "", "=q4=Vulajin's Vicious Breastplate", "=ds=#s5#, #a2#"};
+				{ 10, 90572, "", "=q4=Kilt of Pandaren Promises", "=ds=#s11#, #a3#"};
+				{ 11, 90570, "", "=q4=Legguards of Sleeting Arrows", "=ds=#s11#, #a3#"};
+				{ 12, 87695, "", "=q4=Treads of Edward the Odd", "=ds=#s12#, #a3#"};
+				{ 13, 90576, "", "=q4=Spaulders of the Scorned", "=ds=#s3#, #a4#"};
+				{ 14, 90577, "", "=q4=Boblet's Bouncing Hauberk", "=ds=#s5#, #a4#"};
+				{ 15, 90579, "", "=q4=Legplates of Durable Dreams", "=ds=#s11#, #a4#"};
 				{ 16, 90582, "", "=q4=Buc-Zakai Memento", "=ds=#s2#"};
 				{ 17, 90583, "", "=q4=Don Guerrero's Glorious Choker", "=ds=#s2#"};
 				{ 18, 90590, "", "=q4=Dorian's Necklace of Burgeoning Dreams", "=ds=#s2#"};
@@ -5510,6 +6779,23 @@ local moduleName = "AtlasLootMoP"
 				{ 22, 90591, "", "=q4=Ring of the Shipwrecked Prince", "=ds=#s13#"};
 				{ 24, 90571, "", "=q4=Scroll of Whispered Secrets", "=ds=#s15#"};
 				{ 25, 90575, "", "=q4=Sutiru's Brazen Bulwark", "=ds=#w8#"};
+			};
+			{
+				{ 1, 0, "inv_misc_bag_12", "=q6="..AtlasLoot_IngameLocales["Big Bag of Arms"].." / "..AtlasLoot_IngameLocales["Big Bag of Mysteries"], "=q2="..AtlasLoot_IngameLocales["Kah'tir"].." / "..AtlasLoot_IngameLocales["Norlaxx"]..", =q1="..AtlasLoot:GetMapNameByID(858)};
+				{ 2, 90721, "", "=q4=Courinth Waterstrider's Silken Finery", "=ds=#s11#, #a1#", "=q2="..AtlasLoot_IngameLocales["Cournith Waterstrider"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 3, 90725, "", "=q4=Gaarn's Leggings of Infestation", "=ds=#s11#, #a1#", "=q2="..AtlasLoot_IngameLocales["Gaarn the Toxic"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 4, 90720, "", "=q4=Silent Leggings of the Ghostpaw", "=ds=#s11#, #a2#", "=q2="..AtlasLoot_IngameLocales["Ruun Ghostpaw"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 5, 90724, "", "=q4=Spriggin's Sproggin' Leggin'", "=ds=#s11#, #a2#", "=q2="..AtlasLoot_IngameLocales["Spriggin"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 6, 90723, "", "=q4=Arness's Scaled Leggings", "=ds=#s11#, #a3#", "=q2="..AtlasLoot_IngameLocales["Arness the Scale"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 7, 90719, "", "=q4=Go-Kan's Golden Trousers", "=ds=#s11#, #a3#", "=q2="..AtlasLoot_IngameLocales["Go-Kan"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 8, 90722, "", "=q4=Torik-Ethis' Gilded Legplates", "=ds=#s11#, #a3#"};
+				{ 9, 90717, "", "=q4=Qu'nas' Apocryphal Legplates", "=ds=#s11#, #a4#", "=q2="..AtlasLoot_IngameLocales["Qu'nas"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 10, 90718, "", "=q4=Torik-Ethis' Bloodied Legguards", "=ds=#s11#, #a4#", "=q2="..AtlasLoot_IngameLocales["Torik-Ethis"]..", =q1="..AtlasLoot:GetMapNameByID(857)};
+				{ 11, 87650, "", "=q4=Fishsticker Crossbow", "=ds=#w3#", "=q2="..AtlasLoot_IngameLocales["Sarnak"]..", =q1="..AtlasLoot:GetMapNameByID(806)};
+				{ 12, 87641, "", "=q4=Yaungol Battle Barrier", "=ds=#w8#"};
+				{ 16, 0, "inv_box_03", "=q6="..AtlasLoot_IngameLocales["Vine-Cracked Junkbox"], "=q1=#p28#"};
+				{ 17, 88149, "", "=q4=The Gloaming Blade", "=ds=#h1#, #w4#"};
+				{ 18, 88150, "", "=q4=Krol Scimitar", "=ds=#h1#, #w10#"};
 			};
 		};
 		info = {

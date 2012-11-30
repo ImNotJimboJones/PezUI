@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.2
+Version 2.0.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -405,7 +405,9 @@ function NPH:LibNameplate_FoundGUID(selfevent, plate, guid, unitID)
 
     if HHTD.Registry_by_GUID[true][guid] or HHTD.Registry_by_GUID[false][guid] then
         self:Debug(INFO, "GUID found");
-        self:AddCrossToPlate(plate, nil, LNP:GetName(plate), guid);
+        self:AddCrossToPlate(plate, HHTD.Registry_by_GUID[true][guid] and true or false, LNP:GetName(plate), guid);
+    else
+        self:Debug(INFO2, "GUID found but not a healer");
     end
 
 end
@@ -463,12 +465,14 @@ do
     local function SetRank ()  -- ONCE
         assert(PlateAdditions, 'PlateAdditions is not defined'); -- to diagnose issue repoted on 2012-09-07
         assert(PlateAdditions.rankFont, "rankFont is invalid"); -- to diagnose issue repoted on 2012-09-07
+        assert(PlateAdditions.rankFont.SetText, "rankFont.SetText is invalid"); -- to diagnose issue repoted on 2012-10-17
         assert(IsFriend == true or IsFriend == false, "IsFriend is invalid"); -- to diagnose issue repoted on 2012-09-07
 
          if not Guid then
              assert(NP_Is_Not_Unique[IsFriend], "NP_Is_Not_Unique[IsFriend] is invalid"); -- to diagnose issue repoted on 2012-09-07
              PlateAdditions.rankFont:SetText(NP_Is_Not_Unique[IsFriend][PlateName] and '?' or HHTD.Registry_by_Name[IsFriend][PlateName].rank);
         else
+            assert(HHTD.Registry_by_GUID[IsFriend][Guid], "HHTD.Registry_by_GUID[IsFriend][Guid] is not defined"); -- to diagnose issue repoted on 2012-10-17
             PlateAdditions.rankFont:SetText(HHTD.Registry_by_GUID[IsFriend][Guid].rank);
         end
     end
@@ -553,11 +557,11 @@ do
         self.DisplayedPlates_byFrameTID[isFriend][plate] = plate;
 
         --[===[@alpha@
-        IsFriend        = nil;
-        Guid            = nil;
-        Plate           = nil;
-        PlateName       = nil;
-        PlateAdditions  = nil;
+        -- IsFriend        = nil;
+        -- Guid            = nil;
+        -- Plate           = nil;
+        -- PlateName       = nil;
+        -- PlateAdditions  = nil;
         --@end-alpha@]===]
 
     end -- }}}

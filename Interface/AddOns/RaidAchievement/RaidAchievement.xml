@@ -182,10 +182,10 @@
 	<Anchors><Anchor point="RIGHT" relativePoint="TOPRIGHT"><Offset x="-18" y="-67"/></Anchor></Anchors><Color r="1" g="0" b="0" a="1"/>
 	</FontString>
 <FontString name="$parent_tt1" inherits="GameFontNormal" text="pseareports">
-	<Anchors><Anchor point="LEFT" relativePoint="TOPLEFT"><Offset x="134" y="-264"/></Anchor></Anchors>
+	<Anchors><Anchor point="LEFT" relativePoint="TOPLEFT"><Offset x="134" y="-249"/></Anchor></Anchors>
 	</FontString>
 <FontString name="$parent_tt2" inherits="GameFontNormal" text="pseareports">
-	<Anchors><Anchor point="LEFT" relativePoint="TOPLEFT"><Offset x="134" y="-294"/></Anchor></Anchors>
+	<Anchors><Anchor point="LEFT" relativePoint="TOPLEFT"><Offset x="134" y="-279"/></Anchor></Anchors>
 	</FontString>
 
 	</Layer>

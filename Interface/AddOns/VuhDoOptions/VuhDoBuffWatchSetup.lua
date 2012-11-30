@@ -277,7 +277,7 @@ local function VUHDO_buildBuffSetupGenericPanel(aCategoryName, someCategoryBuffs
 
 	local tVariant = nil;
 	if (#tKnownVariants > 0) then
-		tVariant = VUHDO_getBuffInfoForName(tKnownVariants[1]);
+		tVariant = VUHDO_getBuffInfoForName(tKnownVariants[1], aCategoryName);
 		tIsPresent = true;
 	else
 		tIsPresent = false;

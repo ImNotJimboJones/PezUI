@@ -703,7 +703,7 @@ function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTim
 			if (anIsActive and aColor ~= nil) then
 				tIcon = VUHDO_getBarRoleIcon(tButton, 51);
 				tIcon:SetTexture(anIcon);
-				tIcon:SetVertexColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
+				tIcon:SetVertexColor(VUHDO_backColor(aColor));
 				tIcon:SetTexCoord(aClipL or 0, aClipR or 1, aClipT or 0, aClipB or 1);
 				tIcon:Show();
 			else

@@ -1,5 +1,5 @@
 ﻿-- Simplified Chinese by Diablohu(diablohudream@gmail.com)
--- Last update: 10/11/2012
+-- Last update: 11/18/2012
 
 if GetLocale() ~= "zhCN" then return end
 local L
@@ -107,6 +107,10 @@ L:SetOptionLocalization({
 	InfoFrame			= "信息框：$journal:5827"
 })
 
+L:SetMiscLocalization({
+	Kill		= "只要你们心中的暴虐不除……我……就会……回来的……",
+})
+
 -----------------------
 -- <<<The Gate of the Setting Sun>>> --
 -----------------------
@@ -125,7 +129,7 @@ L:SetOptionLocalization({
 L= DBM:GetModLocalization(675)
 
 L:SetMiscLocalization({
-	StaffingRun		= "Striker Ga'dok prepares to make a strafing run!"
+	StaffingRun		= "突袭者加杜卡准备发动一次扫射！"
 })
 
 -----------------------
@@ -186,7 +190,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	WaveStart	= "Fools! Attacking the might of the mantid head on?  Your deaths will be swift."
+	WaveStart	= "蠢货！竟敢正面挑战强大的螳螂妖？你会死得很快的。"
 })
 
 -----------------------

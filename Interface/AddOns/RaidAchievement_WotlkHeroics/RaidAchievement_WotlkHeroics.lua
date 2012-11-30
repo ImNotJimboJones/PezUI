@@ -1,4 +1,5 @@
-﻿function whraonload()
+﻿local _
+function whraonload()
 
 	whraachdone1=true
 	whratime1=0

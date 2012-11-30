@@ -1070,3 +1070,7 @@ VUHDO_I18N_DEGREES = "Grad";
 VUHDO_I18N_RAID_MANAGER = "Raid-Mgr";
 VUHDO_I18N_CAST_TIME_ONLY = "Nur wenn\nZauberzeit";
 VUHDO_I18N_EMPTY_BUTTONS = "Leere\nButtons";
+VUHDO_I18N_HEALTH_COLOR = "Farbe Leben";
+
+VUHDO_I18N_HIDE = "Verstecken";
+VUHDO_I18N_LEAVE_ALONE = "Unverändert";

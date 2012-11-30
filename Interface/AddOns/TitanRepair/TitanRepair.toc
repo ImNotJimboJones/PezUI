@@ -1,10 +1,10 @@
 ## Interface: 50001
-## Title: Titan Panel [|cffeda55fRepair|r] |cff00aa005.1.8.50001|r
+## Title: Titan Panel [|cffeda55fRepair|r] |cff00aa005.1.9.50001|r
 ## Notes: Provides a configurable durability display. Also adds the ability to auto repair items and inventory at vendors
 ## Author: Titan Development Team (http://www.titanpanel.org)
 ## SavedVariables: 
 ## OptionalDeps: 
 ## Dependencies: Titan
-## Version: 5.1.8.50001
+## Version: 5.1.9.50001
 ## X-Child-Of: Titan
 TitanRepair.xml

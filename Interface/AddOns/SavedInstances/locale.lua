@@ -41,6 +41,7 @@ Ld["Indicators"] = "Indicators"
 Ld["Instance details"] = "Instance details"
 Ld["Instance options"] = "Instance options"
 Ld["Instances"] = "Instances"
+Ld["LFR"] = "LFR"
 Ld["List categories from the current expansion pack first"] = "List categories from the current expansion pack first"
 Ld["List is empty"] = "List is empty"
 Ld["List raid categories before dungeon categories"] = "List raid categories before dungeon categories"
@@ -73,6 +74,7 @@ Ld["Show Holiday"] = "Show Holiday"
 Ld["Show holiday boss rewards"] = "Show holiday boss rewards"
 Ld["Show minimap button"] = "Show minimap button"
 Ld["Show name for a category when all displayed instances belong only to that category"] = "Show name for a category when all displayed instances belong only to that category"
+Ld["Show self always"] = "Show self always"
 Ld["Show self first"] = "Show self first"
 Ld["Show the SavedInstances minimap button"] = "Show the SavedInstances minimap button"
 Ld["Show tooltip hints"] = "Show tooltip hints"
@@ -99,6 +101,7 @@ Ld["Type"] = "Type"
 Ld["Use class color"] = "Use class color"
 Ld["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."
 Ld["Weekly Quests"] = "Weekly Quests"
+Ld["World Boss"] = "World Boss"
 Ld["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."
 
 
@@ -133,6 +136,7 @@ La["Indicators"] = "Indicateurs"
 La["Instance details"] = "Détails des instances"
 La["Instance options"] = "Option des instances"
 La["Instances"] = "Instances"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "Liste les catégories de l'extension actuelle en premier" -- Needs review
 La["List is empty"] = "La liste est vide"
 La["List raid categories before dungeon categories"] = "Liste les catégories de raid avant les donjons" -- Needs review
@@ -165,6 +169,7 @@ La["Show Holiday"] = "Montrer les vacances" -- Needs review
 La["Show holiday boss rewards"] = "Montrer les récompenses des boss de vacances" -- Needs review
 La["Show minimap button"] = "Afficher le bouton sur la minimap"
 La["Show name for a category when all displayed instances belong only to that category"] = "Montrer le nom d'une catégorie quand toutes les instances affichées sont uniquement de ce type."
+-- La["Show self always"] = ""
 La["Show self first"] = "Montrer soi-même en premier" -- Needs review
 La["Show the SavedInstances minimap button"] = "Montrer bouton de minimap de savedinstances "
 La["Show tooltip hints"] = "Montrer les astuces du tooltip"
@@ -192,6 +197,7 @@ La["Type"] = "Type" -- Needs review
 La["Use class color"] = "Coloriser par classe"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "Attention : Vous êtes entrés dans %i instances récemment et approchez la limite de i% instances par heure pour ce compte. Plus d'instances seront disponibles dans environ %s." -- Needs review
 La["Weekly Quests"] = "Quêtes hebdomadaires" -- Needs review
+-- La["World Boss"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "Si vous le souhaitez, vous pouvez combiner les icônes et le texte en un seul indicateur. Il vous suffit de choisir une icône, et insérer l'icône dans la zone de texte, l'icône que vous avez choisi sera mis à la place."
 
 elseif locale == "deDE" then do end
@@ -225,6 +231,7 @@ La["Indicators"] = "Indikatoren"
 La["Instance details"] = "Instanz-Details"
 La["Instance options"] = "Instanzoptionen"
 La["Instances"] = "Instanzen"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "Kategorien der aktuellen Erweiterung zuerst auflisten"
 La["List is empty"] = "Liste ist leer"
 La["List raid categories before dungeon categories"] = "Schlachtzug-Kategorien vor Dungeon-Kategorien auflisten"
@@ -257,6 +264,7 @@ La["Show Holiday"] = "Zeige Festtags-Informationen" -- Needs review
 La["Show holiday boss rewards"] = "Zeige Belohnungen der Festtags-Bosse" -- Needs review
 La["Show minimap button"] = "Minimap-Button anzeigen"
 La["Show name for a category when all displayed instances belong only to that category"] = "Zeige Name der Kategorie, wenn alle angezeigten Instanzen zu dieser Kategorie gehören"
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 La["Show the SavedInstances minimap button"] = "Den SavedInstances-Minimap-Button anzeigen"
 La["Show tooltip hints"] = "Tooltip-Hinweise anzeigen"
@@ -283,6 +291,7 @@ La["Type"] = "Wert" -- Needs review
 La["Use class color"] = "Klassenfarbe benutzen"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "Achtung: Du hast kürzlich %i Instanzen betreten und näherst Dich dem Limit von %i Instanzen pro Stunde für Deinen Account. Weitere Instanzen sollten in %s verfügbar sein." -- Needs review
 La["Weekly Quests"] = "Wöchentliche Quests" -- Needs review
+-- La["World Boss"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "Nach Wunsch können Icons und Text in einem einzelnen Indikator kombiniert werden. Wähle ein Icon und gebe das Wort ICON in das Textfeld ein. Wo auch immer das Wort ICON gefunden wird, wird das gewählte Icon angefügt."
 
 elseif locale == "koKR" then do end
@@ -316,6 +325,7 @@ La["Indicators"] = "표시자"
 La["Instance details"] = "인스턴스 세부 정보" -- Needs review
 La["Instance options"] = "인스턴스 설정"
 La["Instances"] = "인스턴스"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "현재 확장팩을 첫번째로 목록에 나열" -- Needs review
 La["List is empty"] = "목록 없음" -- Needs review
 La["List raid categories before dungeon categories"] = "던전 범주 앞에 공개대 범주 나열" -- Needs review
@@ -348,6 +358,7 @@ La["Show Holiday"] = "축제일 보기" -- Needs review
 La["Show holiday boss rewards"] = "축제일 보스 보상 보기" -- Needs review
 La["Show minimap button"] = "미니맵 단추 표시"
 La["Show name for a category when all displayed instances belong only to that category"] = "모든 표시된 인스턴스가 해당 카테고리에만 속하는 경우 카테고리 이름을 표시합니다."
+-- La["Show self always"] = ""
 La["Show self first"] = "자기 서버를 첫 번째 표시" -- Needs review
 La["Show the SavedInstances minimap button"] = "SavedInstances의 미니맵 단추를 표시합니다."
 La["Show tooltip hints"] = "툴팁 도움말 표시" -- Needs review
@@ -374,6 +385,7 @@ La["Type"] = "유형" -- Needs review
 La["Use class color"] = "직업 색상 사용" -- Needs review
 -- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
 La["Weekly Quests"] = "주간 퀘스트" -- Needs review
+-- La["World Boss"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "만일 원할 경우 단일 표시자에 아이콘과 문자를 조합하여 사용이 가능합니다. 그냥 아이콘을 선택하고 문자 입력부분에 아이콘 이름을 입력합니다. 어디에서도 문자 아이콘을 찾을 수 있으며 이 아이콘으로 선택을 대체할 수 있습니다."
 
 elseif locale == "esMX" then do end
@@ -407,6 +419,7 @@ elseif locale == "esMX" then do end
 -- La["Instance details"] = ""
 -- La["Instance options"] = ""
 -- La["Instances"] = ""
+-- La["LFR"] = ""
 -- La["List categories from the current expansion pack first"] = ""
 -- La["List is empty"] = ""
 -- La["List raid categories before dungeon categories"] = ""
@@ -439,6 +452,7 @@ elseif locale == "esMX" then do end
 -- La["Show holiday boss rewards"] = ""
 -- La["Show minimap button"] = ""
 -- La["Show name for a category when all displayed instances belong only to that category"] = ""
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 -- La["Show the SavedInstances minimap button"] = ""
 -- La["Show tooltip hints"] = ""
@@ -465,6 +479,7 @@ elseif locale == "esMX" then do end
 -- La["Use class color"] = ""
 -- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
 -- La["Weekly Quests"] = ""
+-- La["World Boss"] = ""
 -- La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = ""
 
 elseif locale == "ruRU" then do end
@@ -498,6 +513,7 @@ La["Indicators"] = "Индикатор"
 La["Instance details"] = "Детали подземелий"
 La["Instance options"] = "Опции подземелий"
 La["Instances"] = "Подземелья"
+-- La["LFR"] = ""
 -- La["List categories from the current expansion pack first"] = ""
 La["List is empty"] = "список чист"
 -- La["List raid categories before dungeon categories"] = ""
@@ -530,6 +546,7 @@ La["Show history in tooltip"] = "Отображать историю в подс
 -- La["Show holiday boss rewards"] = ""
 La["Show minimap button"] = "Отображать кнопку у миникарты"
 -- La["Show name for a category when all displayed instances belong only to that category"] = ""
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 La["Show the SavedInstances minimap button"] = "Отображать кнопку SavedInstances у миникарты"
 La["Show tooltip hints"] = "Показывать подсказки" -- Needs review
@@ -556,6 +573,7 @@ La["Type"] = "тип" -- Needs review
 La["Use class color"] = "Использовать цвет класса"
 -- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
 -- La["Weekly Quests"] = ""
+-- La["World Boss"] = ""
 -- La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = ""
 
 elseif locale == "zhCN" then do end
@@ -589,6 +607,7 @@ La["Indicators"] = "指示器"
 La["Instance details"] = "副本详情"
 La["Instance options"] = "副本选项"
 La["Instances"] = "副本"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "优先从当前的扩展包列表分类" -- Needs review
 La["List is empty"] = "列表为空"
 La["List raid categories before dungeon categories"] = "列表团队分类于地下城分类之前" -- Needs review
@@ -621,6 +640,7 @@ La["Show Holiday"] = "显示节日" -- Needs review
 La["Show holiday boss rewards"] = "显示节日boss奖励" -- Needs review
 La["Show minimap button"] = "显示小地图按钮"
 La["Show name for a category when all displayed instances belong only to that category"] = "显示所有已显示副本所归属的分类名字" -- Needs review
+-- La["Show self always"] = ""
 La["Show self first"] = "首先显示自身" -- Needs review
 La["Show the SavedInstances minimap button"] = "显示 SavedInstances 小地图按钮"
 La["Show tooltip hints"] = "显示提示信息"
@@ -647,6 +667,7 @@ La["Type"] = "类型" -- Needs review
 La["Use class color"] = "使用职业颜色"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "警告: 你最近已进入 %i 次副本, 并已接近你当前角色每小时进入副本  %i 次的上限. 更多的副本将在  %s 后可进入." -- Needs review
 La["Weekly Quests"] = "周常任务" -- Needs review
+-- La["World Boss"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "你可以按你的意愿来合并图标和文字在一个单独的指示器. 选择一个图标, 并插入一个词 ICON 到文字区域. 当 ICON 在任意地方被找到时, 你选择的图标将会取代." -- Needs review
 
 elseif locale == "esES" then do end
@@ -680,6 +701,7 @@ La["Indicators"] = "Indicadores" -- Needs review
 La["Instance details"] = "Detalles de la instancia"
 La["Instance options"] = "Opciones de Instancia"
 La["Instances"] = "Instancias" -- Needs review
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "mostrar primero las categorías de la expansión actual" -- Needs review
 La["List is empty"] = "Lista vacía" -- Needs review
 La["List raid categories before dungeon categories"] = "Mostrar categorías de bandas antes que categorías de mazmorras" -- Needs review
@@ -712,6 +734,7 @@ La["Show category names in the tooltip"] = "Mostrar nombres de categorías en la
 -- La["Show holiday boss rewards"] = ""
 La["Show minimap button"] = "Mostrar botón del minimapa"
 -- La["Show name for a category when all displayed instances belong only to that category"] = ""
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 La["Show the SavedInstances minimap button"] = "Mostrar el botón del minimapa de SavedInstances"
 La["Show tooltip hints"] = "Mostrar consejos sobre herramientas" -- Needs review
@@ -738,6 +761,7 @@ La["Type"] = "Tipo" -- Needs review
 La["Use class color"] = "Usar color de clase" -- Needs review
 -- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
 -- La["Weekly Quests"] = ""
+-- La["World Boss"] = ""
 -- La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = ""
 
 elseif locale == "zhTW" then do end
@@ -771,6 +795,7 @@ La["Indicators"] = "指標"
 La["Instance details"] = "副本細節"
 La["Instance options"] = "副本設定"
 La["Instances"] = "副本"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "優先從目前的資料片列出分類"
 La["List is empty"] = "列表為空"
 La["List raid categories before dungeon categories"] = "列出團隊分類在地城分類之前"
@@ -803,6 +828,7 @@ La["Show Holiday"] = "顯示節日"
 La["Show holiday boss rewards"] = "顯示節日地城獎勵"
 La["Show minimap button"] = "顯示小地圖按鈕"
 La["Show name for a category when all displayed instances belong only to that category"] = "當所有顯示的副本只屬於該類別時顯示類別名稱"
+La["Show self always"] = "總是顯示自身" -- Needs review
 La["Show self first"] = "優先顯示自己"
 La["Show the SavedInstances minimap button"] = "顯示SavedInstances小地圖按鈕"
 La["Show tooltip hints"] = "顯示工具列提示"
@@ -829,6 +855,7 @@ La["Type"] = "類型"
 La["Use class color"] = "使用職業顏色"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "警告：你最近已經進入 %i 次副本，並且已經接近帳號每小時 %i 次的進入限制，更多的副本可以在 %s 後允許進入。"
 La["Weekly Quests"] = "每週任務"
+La["World Boss"] = "世界首領"
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "如果想要的話，可以在同個指標上顯示圖示與文字。首先選擇一個圖示，並在文字框中插入「ICON」到想要出現圖示的位置，就會自動替換成你選擇的圖示。"
 
 elseif locale == "ptBR" then do end
@@ -862,6 +889,7 @@ La["Indicators"] = "Indicadores"
 La["Instance details"] = "Detalhes da Instancia"
 La["Instance options"] = "Opções de Instância"
 La["Instances"] = "Instância"
+-- La["LFR"] = ""
 La["List categories from the current expansion pack first"] = "Listar para o pacote de expansão atual"
 La["List is empty"] = "Lista vazia"
 La["List raid categories before dungeon categories"] = "Categorias de raide antes de categorias de masmorras"
@@ -894,6 +922,7 @@ La["Show history in tooltip"] = "Mostra História em caixa de dicas"
 -- La["Show holiday boss rewards"] = ""
 La["Show minimap button"] = "Mostrar botão no minimapa"
 La["Show name for a category when all displayed instances belong only to that category"] = "Mostrar o nome de uma categoria, quando todas as instâncias exibidas pertencerem a essa categoria"
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 La["Show the SavedInstances minimap button"] = "Mostrar o SavedInstances no minimapa"
 La["Show tooltip hints"] = "Mostrar caixa de dicas"
@@ -920,6 +949,7 @@ La["Type"] = "Tipo"
 La["Use class color"] = "Usar cor das classes"
 La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = "Atenção: Você entrou em cerca de%i Instância e esta se aproximando de %i , limite por hora para a sua conta. Mais instâncias devem estar disponíveis em %s."
 -- La["Weekly Quests"] = ""
+-- La["World Boss"] = ""
 La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = "Você pode combinar os ícones e texto em um único indicador, se desejar. Basta escolher um ícone, e inserir o ícone no campo de texto. Em qualquer lugar do ícone for encontrado, o ícone que você escolheu será substituída dentro"
 
 elseif locale == "itIT" then do end
@@ -953,6 +983,7 @@ elseif locale == "itIT" then do end
 -- La["Instance details"] = ""
 -- La["Instance options"] = ""
 -- La["Instances"] = ""
+-- La["LFR"] = ""
 -- La["List categories from the current expansion pack first"] = ""
 -- La["List is empty"] = ""
 -- La["List raid categories before dungeon categories"] = ""
@@ -985,6 +1016,7 @@ elseif locale == "itIT" then do end
 -- La["Show holiday boss rewards"] = ""
 -- La["Show minimap button"] = ""
 -- La["Show name for a category when all displayed instances belong only to that category"] = ""
+-- La["Show self always"] = ""
 -- La["Show self first"] = ""
 -- La["Show the SavedInstances minimap button"] = ""
 -- La["Show tooltip hints"] = ""
@@ -1011,6 +1043,7 @@ elseif locale == "itIT" then do end
 -- La["Use class color"] = ""
 -- La["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."] = ""
 -- La["Weekly Quests"] = ""
+-- La["World Boss"] = ""
 -- La["You can combine icons and text in a single indicator if you wish. Simply choose an icon, and insert the word ICON into the text field. Anywhere the word ICON is found, the icon you chose will be substituted in."] = ""
 
 end

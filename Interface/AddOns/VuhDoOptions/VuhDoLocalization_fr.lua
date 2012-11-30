@@ -1086,3 +1086,7 @@ VUHDO_I18N_DEGREES = "Degrees";
 VUHDO_I18N_RAID_MANAGER = "Raid Mgr";
 VUHDO_I18N_CAST_TIME_ONLY = "Only if\nCast Time";
 VUHDO_I18N_EMPTY_BUTTONS = "Empty\nButtons";
+VUHDO_I18N_HEALTH_COLOR = "Health\nColor";
+
+VUHDO_I18N_HIDE = "Hide";
+VUHDO_I18N_LEAVE_ALONE = "Leave alone";

@@ -132,11 +132,24 @@ end
 
 
 
+local function VUHDO_getWeaponEnchantMacroText(anEnchantName, aTargetType)
+	return "/use [@none] " .. anEnchantName .. "\n"
+	.. "/use " .. (VUHDO_BUFF_TARGET_ENCHANT == aTargetType and "16" or "17") .. "\n"
+	.. "/click StaticPopup1Button1";
+end
+
+
+
 --
-local function VUHDO_setupBuffButtonAttributes(aModifierKey, aButtonId, anActionName, aButton)
+local function VUHDO_setupBuffButtonAttributes(aModifierKey, aButtonId, anActionName, aButton, aTargetType)
 	if ((anActionName or "") ~= "") then
-		aButton:SetAttribute(aModifierKey .. "type" .. aButtonId, "spell");
-		aButton:SetAttribute(aModifierKey .. "spell" .. aButtonId, anActionName);
+		if(VUHDO_BUFF_TARGET_ENCHANT == aTargetType or VUHDO_BUFF_TARGET_ENCHANT_OFF == aTargetType) then
+			aButton:SetAttribute(aModifierKey .. "type" .. aButtonId, "macro");
+			aButton:SetAttribute(aModifierKey .. "macrotext" .. aButtonId, VUHDO_getWeaponEnchantMacroText(anActionName, aTargetType));
+		else
+			aButton:SetAttribute(aModifierKey .. "type" .. aButtonId, "spell");
+			aButton:SetAttribute(aModifierKey .. "spell" .. aButtonId, anActionName);
+		end
 	else
 		aButton:SetAttribute(aModifierKey .. "type" .. aButtonId, "");
 	end
@@ -155,7 +168,7 @@ end
 
 --
 --local tModiKey, tButtonId;
-function VUHDO_setupAllBuffButtonsTo(aButton, aBuffName, aUnit)
+function VUHDO_setupAllBuffButtonsTo(aButton, aBuffName, aUnit, aTargetType)
 	if (InCombatLockdown()) then
 		return;
 	end
@@ -163,7 +176,7 @@ function VUHDO_setupAllBuffButtonsTo(aButton, aBuffName, aUnit)
 	VUHDO_setupAllBuffButtonUnits(aButton, aUnit);
 	for _, tWithMinus in pairs(VUHDO_MODIFIER_KEYS) do
 		for tCnt = 1, VUHDO_NUM_MOUSE_BUTTONS do
-			VUHDO_setupBuffButtonAttributes(tWithMinus, tCnt, tCnt ~= 2 and aBuffName or nil, aButton);
+			VUHDO_setupBuffButtonAttributes(tWithMinus, tCnt, tCnt ~= 2 and aBuffName or nil, aButton, aTargetType);
 		end
 	end
 end
@@ -183,7 +196,7 @@ function VUHDO_buffSelectDropdown_Initialize(_, _)
 		return;
 	end
 
-	local tCategName = VUHDO_getBuffCategoryName(VUHDO_CLICKED_BUFF);
+	local tCategName = VUHDO_getBuffCategoryName(VUHDO_CLICKED_BUFF[1], VUHDO_CLICKED_BUFF[2]);
 	local tCateg = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS][tCategName];
 	local tSettings = VUHDO_BUFF_SETTINGS[tCategName];
 	local tTargetType = tCateg[1][2];
@@ -305,7 +318,7 @@ function VuhDoBuffPreClick(aButton, aMouseButton)
 	local tVariant = tSwatch:GetAttribute("buff");
 
 	if ("RightButton" == aMouseButton) then
-		VUHDO_CLICKED_BUFF = tVariant[1];
+		VUHDO_CLICKED_BUFF = tVariant;
 		VUHDO_CLICKED_TARGET = tSwatch:GetAttribute("target");
 		ToggleDropDownMenu(1, nil, VuhDoBuffSelectDropdown, aButton:GetName(), 0, -5);
 	end
@@ -315,15 +328,14 @@ function VuhDoBuffPreClick(aButton, aMouseButton)
 
 	if (2 == VUHDO_IS_USED_SMART_BUFF and aMouseButton == "LeftButton") then
 		UIErrorsFrame:AddMessage(VUHDO_I18N_SMARTBUFF_ERR_2 .. tBuff, 1, 0.1, 0.1, 1);
-		VUHDO_setupAllBuffButtonsTo(aButton, "", "");
+		VUHDO_setupAllBuffButtonsTo(aButton, "", "", nil);
 		return;
 	end
 
 	local tTarget = VUHDO_IS_USED_SMART_BUFF
 		and tSwatch:GetAttribute("lowtarget") or tSwatch:GetAttribute("goodtarget");
 
-	VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget);
-
+	VUHDO_setupAllBuffButtonsTo(aButton, tBuff, tTarget, tVariant[2]);
 
 	if (tTarget == nil and aMouseButton ~= "RightButton") then
 		UIErrorsFrame:AddMessage(VUHDO_I18N_SMARTBUFF_ERR_2 .. tBuff, 1, 0.1, 0.1, 1);
@@ -335,8 +347,8 @@ end
 --
 function VuhDoBuffPostClick(aButton, aMouseButton)
 	if (VUHDO_IS_USED_SMART_BUFF) then
-		local tBuff = aButton:GetParent():GetAttribute("buff")[1];
-		VUHDO_setupAllBuffButtonsTo(aButton, tBuff, aButton:GetParent():GetAttribute("goodtarget"));
+		local tVariant = aButton:GetParent():GetAttribute("buff");
+		VUHDO_setupAllBuffButtonsTo(aButton, tVariant[1], aButton:GetParent():GetAttribute("goodtarget"), tVariant[2]);
 	end
 end
 
@@ -407,10 +419,10 @@ end
 
 
 --
-function VUHDO_getBuffCategoryName(aBuffName)
+function VUHDO_getBuffCategoryName(aBuffName, aTargetType)
 	for tCategName, tCategBuffs in pairs(VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS]) do
 		for _, tBuffVariant in pairs(tCategBuffs) do
-			if (aBuffName == tBuffVariant[1]) then
+			if (aBuffName == tBuffVariant[1] and aTargetType == tBuffVariant[2]) then
 				return tCategName;
 			end
 		end
@@ -424,9 +436,8 @@ end
 --
 local tBuffOrder;
 local tInfo;
-local tEmpty = { };
 local function VUHDO_setUnitMissBuff(aUnit, aCategSpec, someVariants, aCategName)
-	if (not (VUHDO_BUFF_SETTINGS[aCategName]["missingColor"] or tEmpty)["show"]) then
+	if (not (VUHDO_BUFF_SETTINGS[aCategName]["missingColor"] or sEmpty)["show"]) then
 		return;
 	end
 
@@ -622,11 +633,9 @@ local tDestGroup;
 local tPlayerGroup;
 local tMaxTarget;
 local tUnit;
-local tEnchTexture1, tWeaponTexture;
-local tEnchDuration1, tEnchDuration2;
-local tHasEnch1, tHasEnch2;
+local tEnchantDuration;
+local tHasEnchant;
 local tCategName;
-local tEmpty = { };
 local tNameGroup = { };
 local tIsActive;
 local tRest, tName, tTotemNum, tTexture;
@@ -661,10 +670,19 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
 
 		elseif (VUHDO_BUFF_TARGET_ENCHANT == tMaxTarget) then
-			tHasEnch1, tEnchDuration1, _, _, _, _ = GetWeaponEnchantInfo();
+			tHasEnchant, tEnchantDuration = GetWeaponEnchantInfo();
+			if (tHasEnchant and strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(16), 1, true)) then
+				return sEmpty, sEmpty, "player", tEnchantDuration * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
+			end
 
-			if (tHasEnch1) then
-				return sEmpty, sEmpty, "player", tEnchDuration1 * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
+			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
+			return VUHDO_PLAYER_GROUP, sEmpty, "player", 0, "player", sEmpty, sEmpty, 0;
+
+		elseif (VUHDO_BUFF_TARGET_ENCHANT_OFF == tMaxTarget) then
+			_, _, _, tHasEnchant, tEnchantDuration = GetWeaponEnchantInfo();
+
+			if (tHasEnchant and strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(17), 1, true)) then
+				return sEmpty, sEmpty, "player", tEnchantDuration * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 			end
 
 			VUHDO_setUnitMissBuff("player", aCategSpec, someBuffVariants, aCategSpec);
@@ -694,7 +712,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 		end
 	end
 
-	return VUHDO_getMissingBuffs(someBuffVariants, tDestGroup or tEmpty, aCategSpec);
+	return VUHDO_getMissingBuffs(someBuffVariants, tDestGroup or sEmpty, aCategSpec);
 end
 
 

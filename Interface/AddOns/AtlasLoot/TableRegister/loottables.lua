@@ -1,4 +1,4 @@
--- $Id: loottables.lua 3855 2012-10-07 00:54:46Z Dynaletik $
+-- $Id: loottables.lua 3991 2012-11-21 23:57:09Z lag123 $
 --[[
 loottables.en.lua
 This file assigns a title to every loot table.  The primary use of this table
@@ -45,14 +45,40 @@ local MOONCLOTH = GetSpellInfo(26798);
 local SHADOWEAVE = GetSpellInfo(26801);
 local SPELLFIRE = GetSpellInfo(26797);
 
+-- Index
+--- Mists of Pandaria Instances
+---- Dungeons
+---- Raids
+--- Cataclysm Instances
+---- Dungeons
+---- Raids
+--- Wrath of the Lich King Instances
+---- Dungeons
+---- Raids
+--- Burning Crusade Instances
+---- Dungeons
+---- Raids
+--- Classic Instances
+---- Dungeons
+---- Raids
+--- Battlegrounds
+--- World Bosses
+--- World Events
+--- Crafting
+--- Collections
+---
+
 AtlasLoot_LootTableRegister = {
 	["Instances"] = {
 
------------------------------------
---- Mists of Pandaria Instances ---
------------------------------------
+	-----------------------------------
+	--- Mists of Pandaria Instances ---
+	-----------------------------------
 
-	---- Dungeons
+		----------------
+		--- Dungeons ---
+		----------------
+
 		["TempleOfTheJadeSerpent"] = {
 			["Bosses"] = {
 				{ "TJSMari", 2, EncounterJournalID = 672 },
@@ -60,7 +86,7 @@ AtlasLoot_LootTableRegister = {
 				{ "TJSFlameheart", 4, EncounterJournalID = 658 },
 				{ "TJSShaDoubt", 5, EncounterJournalID = 335 },
 			},
-			["Info"] = { BabbleZone["Temple of the Jade Serpent"], "AtlasLootMoP", mapname = "Temple of the Jade Serpent", EncounterJournalID = 313 },
+			["Info"] = { BabbleZone["Temple of the Jade Serpent"], "AtlasLootMoP", mapname = "EastTemple", EncounterJournalID = 313 },
 		},
 
 		["StormstoutBrewery"] = {
@@ -69,7 +95,7 @@ AtlasLoot_LootTableRegister = {
 				{ "BreweryHoptallus", 4, EncounterJournalID = 669 },
 				{ "BreweryYanZhu", 5, EncounterJournalID = 670 },
 			},
-			["Info"] = { BabbleZone["Stormstout Brewery"], "AtlasLootMoP", mapname = "Stormstout Brewery", EncounterJournalID = 302 },
+			["Info"] = { BabbleZone["Stormstout Brewery"], "AtlasLootMoP", mapname = "StormstoutBrewery", EncounterJournalID = 302 },
 		},
 
 		["MoguShanPalace"] = {
@@ -78,7 +104,7 @@ AtlasLoot_LootTableRegister = {
 				{ "MoguShanGekkan", 7, EncounterJournalID = 690 },
 				{ "MoguShanXin", 8, EncounterJournalID = 698 },
 			},
-			["Info"] = { BabbleZone["Mogu'Shan Palace"], "AtlasLootMoP", mapname = "Mogu'Shan Palace", EncounterJournalID = 321 },
+			["Info"] = { BabbleZone["Mogu'Shan Palace"], "AtlasLootMoP", mapname = "MogushanPalace", EncounterJournalID = 321 },
 		},
 
 		["ShadoPanMonasteryA"] = "ShadoPanMonastery",
@@ -93,7 +119,7 @@ AtlasLoot_LootTableRegister = {
 				{ "ShadoPanShaViolence", 4, EncounterJournalID = 685 },
 				{ "ShadoPanTaranZhu", EncounterJournalID = 686 },
 			},
-			["Info"] = { BabbleZone["Shado-pan Monastery"], "AtlasLootMoP", mapname = "Shado-Pan Monastery", sortOrder = { "ShadoPanMonasteryA", "ShadoPanMonasteryB" }, EncounterJournalID = 312 },
+			["Info"] = { BabbleZone["Shado-pan Monastery"], "AtlasLootMoP", mapname = "ShadowpanHideout", sortOrder = { "ShadoPanMonasteryA", "ShadoPanMonasteryB" }, EncounterJournalID = 312 },
 		},
 
 		["GateoftheSettingSun"] = {
@@ -103,7 +129,7 @@ AtlasLoot_LootTableRegister = {
 				{ "GotSSRimok", 6, EncounterJournalID = 676 },
 				{ "GotSSRaigonn", 7, EncounterJournalID = 649 },
 			},
-			["Info"] = { BabbleZone["Gate of the Setting Sun"], "AtlasLootMoP", mapname = "Gate of the Setting Sun", EncounterJournalID = 303 },
+			["Info"] = { BabbleZone["Gate of the Setting Sun"], "AtlasLootMoP", mapname = "TheGreatWall", EncounterJournalID = 303 },
 		},
 
 		["SiegeofNiuzaoTempleA"] = "SiegeofNiuzaoTemple",
@@ -117,10 +143,12 @@ AtlasLoot_LootTableRegister = {
 				{ "NTPavalak", 3, EncounterJournalID = 692 },
 				{ "NTNeronok", 4, EncounterJournalID = 727 },
 			},
-			["Info"] = { BabbleZone["Siege of Niuzao Temple"], "AtlasLootMoP", mapname = "Siege of Niuzao Temple", sortOrder = { "SiegeofNiuzaoTempleA", "SiegeofNiuzaoTempleB" }, EncounterJournalID = 324 },
+			["Info"] = { BabbleZone["Siege of Niuzao Temple"], "AtlasLootMoP", mapname = "SiegeofNiuzaoTemple", sortOrder = { "SiegeofNiuzaoTempleA", "SiegeofNiuzaoTempleB" }, EncounterJournalID = 324 },
 		},
 
-	---- Raids
+		-------------
+		--- Raids ---
+		-------------
 
 		["HeartofFear"] = {
 			["Bosses"] = {
@@ -130,6 +158,7 @@ AtlasLoot_LootTableRegister = {
 				{ "HoFMeljarak", 6, EncounterJournalID = 741 },
 				{ "HoFUnsok", 7, EncounterJournalID = 737 },
 				{ "HoFShekzeer", 9, EncounterJournalID = 743 },
+				{ "HoFTrash", 11 },
 			},
 			["Info"] = { BabbleZone["Heart of Fear"], "AtlasLootMoP", mapname = "HeartofFear", raid = true, EncounterJournalID = 330 },
 		},
@@ -142,7 +171,8 @@ AtlasLoot_LootTableRegister = {
 				{ "MSVSpiritKings", 10, EncounterJournalID = 687 },
 				{ "MSVElegon", 15, EncounterJournalID = 726 },
 				{ "MSVWilloftheEmperor", 16, EncounterJournalID = 677 },
-				{ "MoguShanVaultsPatterns", 20 },
+				{ "MoguShanVaultsTrash", 20 },
+				{ "MoguShanVaultsPatterns", 21 },
 	
 			},
 			["Info"] = { BabbleZone["Mogu'shan Vaults"], "AtlasLootMoP", mapname = "MoguShanVaults", raid = true, EncounterJournalID = 317 },
@@ -166,11 +196,14 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Terrace of Endless Spring"], "AtlasLootMoP", mapname = "TerraceofEndlessSpring", raid = true, EncounterJournalID = 320 },
 		},
 
----------------------------
---- Cataclysm Instances ---
----------------------------
+	---------------------------
+	--- Cataclysm Instances ---
+	---------------------------
 
-	---- Dungeons
+		----------------
+		--- Dungeons ---
+		----------------
+
 		["BlackrockCaverns"] = {
 			["Bosses"] = {
 				{ "BlackrockCavernsRomogg", 2, EncounterJournalID = 105 },
@@ -307,7 +340,20 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Zul'Gurub"], "AtlasLootCataclysm", mapname = "ZulGurub", EncounterJournalID = 76 },
 		},
 
-	---- Raids
+		-------------
+		--- Raids ---
+		-------------
+
+		["BaradinHold"] = {
+			["Bosses"] = {
+				{ "BaradinsWardens", 1, hide = true },
+				{ "HellscreamsReach", 2, hide = true },
+				{ "ARGALOTH", 4, EncounterJournalID = 139 },
+				{ "OCCUTHAR", 5, EncounterJournalID = 140 },
+				{ "ALIZABAL", 6, EncounterJournalID = 339 },
+			},
+			["Info"] = { BabbleZone["Baradin Hold"], "AtlasLootCataclysm", mapname = "Baradinhold", raid = true, disableCompare = true, EncounterJournalID = 75 },
+		},
 
 		["BlackwingDescent"] = {
 			["Bosses"] = {
@@ -320,17 +366,6 @@ AtlasLoot_LootTableRegister = {
 				{ "BDTrash", 9 },
 			},
 			["Info"] = { BabbleZone["Blackwing Descent"], "AtlasLootCataclysm", mapname = "BlackwingDescent", raid = true, EncounterJournalID = 73 },
-		},
-
-		["BaradinHold"] = {
-			["Bosses"] = {
-				{ "BaradinsWardens", 1, hide = true },
-				{ "HellscreamsReach", 2, hide = true },
-				{ "ARGALOTH", 4, EncounterJournalID = 139 },
-				{ "OCCUTHAR", 5, EncounterJournalID = 140 },
-				{ "ALIZABAL", 6, EncounterJournalID = 339 },
-			},
-			["Info"] = { BabbleZone["Baradin Hold"], "AtlasLootCataclysm", mapname = "Baradinhold", raid = true, disableCompare = true, EncounterJournalID = 75 },
 		},
 
 		["CoTDragonSoulA"] = "CoTDragonSoul",
@@ -402,11 +437,14 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Throne of the Four Winds"], "AtlasLootCataclysm", mapname = "Throneofthefourwinds", raid = true, EncounterJournalID = 74 },
 		},
 
------------------------
---- WotLK Instances ---
------------------------
+	----------------------------------------
+	--- Wrath of the Lich King Instances ---
+	----------------------------------------
 
-	---- Dungeons
+		----------------
+		--- Dungeons ---
+		----------------
+
 		["AhnKahet"] = {
 			["Bosses"] = {
 				{ "AhnkahetNadox", 4, EncounterJournalID = 580 },
@@ -441,7 +479,7 @@ AtlasLoot_LootTableRegister = {
 			},
 			["Info"] = { BabbleZone["Old Stratholme"], "AtlasLootWotLK", mapname = "CoTStratholme", EncounterJournalID = 279 },
 		},
-		
+
 		["DrakTharonKeep"] = {
 			["Bosses"] = {
 				{ "DrakTharonKeepTrollgore", 5, EncounterJournalID = 588 },
@@ -589,7 +627,9 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["The Violet Hold"], "AtlasLootWotLK", mapname = "VioletHold", EncounterJournalID = 283 },
 		},
 
-	---- Raids
+		-------------
+		--- Raids ---
+		-------------
 
 		["IcecrownCitadelA"] = "IcecrownCitadel",
 		["IcecrownCitadelB"] = "IcecrownCitadel",
@@ -743,11 +783,14 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Vault of Archavon"], "AtlasLootWotLK", mapname = "VaultofArchavon", raid = true, disableCompare = true },
 		},
 
---------------------
---- BC Instances ---
---------------------
+	---------------------------------
+	--- Burning Crusade Instances ---
+	---------------------------------
 
-	---- Dungeons
+		----------------
+		--- Dungeons ---
+		----------------
+
 		["AuchAuchenaiCrypts"] = {
 			["Bosses"] = {
 				{ "LowerCity", 1, hide = true },
@@ -758,7 +801,7 @@ AtlasLoot_LootTableRegister = {
 			},
 			["Info"] = { BabbleZone["Auchenai Crypts"], "AtlasLootBurningCrusade", EncounterJournalID = 247 },
 		},
-		
+
 		["AuchManaTombs"] = {
 			["Bosses"] = {
 				{ "Consortium", 1, hide = true },
@@ -940,7 +983,9 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["The Mechanar"], "AtlasLootBurningCrusade", EncounterJournalID = 258 },
 		},
 
-	---- Raids
+		-------------
+		--- Raids ---
+		-------------
 
 		["BlackTempleStart"] = "BlackTemple",
 		["BlackTempleBasement"] = "BlackTemple",
@@ -1077,9 +1122,13 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["The Eye"], "AtlasLootBurningCrusade", raid = true },
 		},
 
--------------------------
---- Classic Instances ---
--------------------------
+	-------------------------
+	--- Classic Instances ---
+	-------------------------
+
+		----------------
+		--- Dungeons ---
+		----------------
 
 		["BlackfathomDeeps"] = {
 			["Bosses"] = {
@@ -1173,23 +1222,6 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Upper Blackrock Spire"], "AtlasLootClassicWoW", mapname = "BlackrockSpire", EncounterJournalID = 229 },
 		},	
 
-		["BlackwingLair"] = {
-			["Bosses"] = {
-				{ "BWLRazorgore", 6 },
-				{ "BWLVaelastrasz", 7 },
-				{ "BWLLashlayer", 8 },
-				{ "BWLFiremaw", 9 },
-				{ "BWLEbonroc", 10 },
-				{ "BWLTrashMobs",  11, hide = true },
-				{ "BWLFlamegor", 12 },
-				{ "BWLChromaggus", 13 },
-				{ "BWLNefarian", 14 },
-				{ "BWLTrashMobs",  17 },
-				{ "T1T2T3SET", 18, hide = true },
-			},
-			["Info"] = { BabbleZone["Blackwing Lair"], "AtlasLootClassicWoW", mapname = "BlackwingLair", raid = true },
-		},
-
 		["DireMaulEnt"] = {
 			["Bosses"] = {
 				{ "LunarFestival", 7, hide = true },
@@ -1243,6 +1275,14 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Dire Maul (West)"], "AtlasLootClassicWoW", mapname = "DireMaul", EncounterJournalID = 230 },
 		},
 
+		["Gnomeregan"] = {
+			["Bosses"] = {
+				{ "GnomereganLoot#1", {4,7,8,9} },
+				{ "GnomereganLoot#2", {10}, hide = true },
+			},
+			["Info"] = { BabbleZone["Gnomeregan"], "AtlasLootClassicWoW", mapname = "Gnomeregan", EncounterJournalID = 231 },
+		},
+
 		["Maraudon"] = {
 			["Bosses"] = {
 				{ "MaraudonLoot#1", {4,5,6,7,12} },
@@ -1252,20 +1292,69 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Maraudon"], "AtlasLootClassicWoW", mapname = "Maraudon", EncounterJournalID = 232 },
 		},
 
-		["Uldaman"] = {
+		["RagefireChasm"] = {
 			["Bosses"] = {
-				{ "UldShovelphlange", },
-				{ "UldBaelog", {5,6,7} },
-				{ "UldRevelosh", 9, EncounterJournalID = 467 },
-				{ "UldIronaya", 10, EncounterJournalID = 469 },
-				{ "UldObsidianSentinel", 11, EncounterJournalID = 748 },
-				{ "UldAncientStoneKeeper", 12, EncounterJournalID = 470 },
-				{ "UldGalgannFirehammer", 13, EncounterJournalID = 471 },
-				{ "UldGrimlok", 14, EncounterJournalID = 472 },
-				{ "UldArchaedas", 15, EncounterJournalID = 473 },
-				{ "UldTrash", 25 },
+				{ "RagefireChasmLoot", {2,3,4,5} },
 			},
-			["Info"] = { BabbleZone["Uldaman"], "AtlasLootClassicWoW", mapname = "Uldaman", EncounterJournalID = 239 },
+			["Info"] = { BabbleZone["Ragefire Chasm"], "AtlasLootClassicWoW", mapname = "Ragefire", EncounterJournalID = 226 },
+		},
+
+		["RazorfenDowns"] = {
+			["Bosses"] = {
+				{ "RazorfenDownsLoot#1", {3,4,5,8,10} },
+				{ "RazorfenDownsLoot#2", {6,7}, hide = true },
+			},
+			["Info"] = { BabbleZone["Razorfen Downs"], "AtlasLootClassicWoW", mapname = "RazorfenDowns", EncounterJournalID = 233 },
+		},
+
+		["RazorfenKraul"] = {
+			["Bosses"] = {
+				{ "RazorfenKraulLoot#1", {3,4,5,6,7,10} }, 
+				{ "RazorfenKraulLoot#2", {8,11}, hide = true }, 
+			},
+			["Info"] = { BabbleZone["Razorfen Kraul"], "AtlasLootClassicWoW", mapname = "RazorfenKraul", EncounterJournalID = 234 },
+		},
+
+		["ScarletHalls"] = {
+			["Bosses"] = {
+				{ "SHBraun", 3, EncounterJournalID = 660 },
+				{ "SHHarlan", 4, EncounterJournalID = 654 },
+				{ "SHKoegler", 5, EncounterJournalID = 656 },
+			},
+			["Info"] = { BabbleZone["Scarlet Halls"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "ScarletHalls", EncounterJournalID = 311 },
+		},
+
+		["ScarletMonastery"] = {
+			["Bosses"] = {
+				{ "SMThalnos", 3, EncounterJournalID = 688 },
+				{ "SMKorloff", 4, EncounterJournalID = 671 },
+				{ "SMWhitemane", 5, EncounterJournalID = 674 },
+			},
+			["Info"] = { BabbleZone["Scarlet Monastery"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "ScarletMonastery", EncounterJournalID = 316 },
+		},
+
+		["Scholomance"] = {
+			["Bosses"] = {
+				{ "ScholoChillheart", 3, EncounterJournalID = 659 },
+				{ "ScholoJandice", 5, EncounterJournalID = 663 },
+				{ "ScholoRattlegore", 6, EncounterJournalID = 665 },
+				{ "ScholoVoss", {7, 15}, EncounterJournalID = 666 },
+				{ "ScholoGandling", 10, EncounterJournalID = 684 },
+			},
+			["Info"] = { BabbleZone["Scholomance"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "Scholomance", EncounterJournalID = 246 },
+		},
+
+		["ShadowfangKeep"] = {
+			["Bosses"] = {
+				{ "ShadowfangAshbury", 3, EncounterJournalID = 96 },
+				{ "ShadowfangSilverlaine", 4, EncounterJournalID = 97 },
+				{ "ShadowfangSpringvale", 9, EncounterJournalID = 98 },
+				{ "ShadowfangWalden", 10, EncounterJournalID = 99 },
+				{ "ShadowfangGodfrey", 11, EncounterJournalID = 100 },
+				{ "Valentineday#3", 12, hide = true },
+				{ "ShadowfangTrash", 21 },
+			},
+			["Info"] = { BabbleZone["Shadowfang Keep"], {"AtlasLootClassicWoW", "AtlasLootCataclysm"}, mapname = "ShadowfangKeep", EncounterJournalID = 64 },
 		},
 
 		["StratholmeCrusader"] = {
@@ -1301,20 +1390,29 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Stratholme"].." - "..AL["The Gauntlet"], "AtlasLootClassicWoW", mapname = "Stratholme", EncounterJournalID = 236 },
 		},
 
-		["RazorfenDowns"] = {
-			["Bosses"] = {
-				{ "RazorfenDownsLoot#1", {3,4,5,8,10} },
-				{ "RazorfenDownsLoot#2", {6,7}, hide = true },
+		["TheDeadminesEnt"] = "TheDeadminesEaI",
+		["TheDeadmines"] = "TheDeadminesEaI",
+		["TheDeadminesEaI"] = {
+			["TheDeadminesEnt"] = {
+				{ "DeadminesTrash", {4,5}, hide = true },
 			},
-			["Info"] = { BabbleZone["Razorfen Downs"], "AtlasLootClassicWoW", mapname = "RazorfenDowns", EncounterJournalID = 233 },
+			["TheDeadmines"] = {
+				{ "DeadminesGlubtok", 3, EncounterJournalID = 89 },
+				{ "DeadminesGearbreaker", 5, EncounterJournalID = 90 },
+				{ "DeadminesFoeReaper", 6, EncounterJournalID = 91 },
+				{ "DeadminesRipsnarl", 7, EncounterJournalID = 92 },
+				{ "DeadminesCookie", 8, EncounterJournalID = 93 },
+				{ "DeadminesVanessa", 9, EncounterJournalID = 95 },
+				{ "DeadminesTrash", 18 },
+			},
+			["Info"] = { BabbleZone["The Deadmines"], {"AtlasLootClassicWoW", "AtlasLootCataclysm"}, sortOrder = { "TheDeadminesEnt", "TheDeadmines" }, mapname = "TheDeadmines", EncounterJournalID = 63 },
 		},
 
-		["RazorfenKraul"] = {
+		["TheStockade"] = {
 			["Bosses"] = {
-				{ "RazorfenKraulLoot#1", {3,4,5,6,7,10} }, 
-				{ "RazorfenKraulLoot#2", {8,11}, hide = true }, 
+				{ "Stockade", {2,3,4} },
 			},
-			["Info"] = { BabbleZone["Razorfen Kraul"], "AtlasLootClassicWoW", mapname = "RazorfenKraul", EncounterJournalID = 234 },
+			["Info"] = { BabbleZone["The Stockade"], "AtlasLootClassicWoW", mapname = "TheStockade", EncounterJournalID = 238 },
 		},
 
 		["TheSunkenTemple"] = {
@@ -1329,11 +1427,71 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Sunken Temple"], "AtlasLootClassicWoW", mapname = "TempleOfAtalHakkar", EncounterJournalID = 237 },
 		},
 
-		["RagefireChasm"] = {
+		["Uldaman"] = {
 			["Bosses"] = {
-				{ "RagefireChasmLoot", {2,3,4,5} },
+				{ "UldShovelphlange", },
+				{ "UldBaelog", {5,6,7} },
+				{ "UldRevelosh", 9, EncounterJournalID = 467 },
+				{ "UldIronaya", 10, EncounterJournalID = 469 },
+				{ "UldObsidianSentinel", 11, EncounterJournalID = 748 },
+				{ "UldAncientStoneKeeper", 12, EncounterJournalID = 470 },
+				{ "UldGalgannFirehammer", 13, EncounterJournalID = 471 },
+				{ "UldGrimlok", 14, EncounterJournalID = 472 },
+				{ "UldArchaedas", 15, EncounterJournalID = 473 },
+				{ "UldTrash", 25 },
 			},
-			["Info"] = { BabbleZone["Ragefire Chasm"], "AtlasLootClassicWoW", mapname = "Ragefire", EncounterJournalID = 226 },
+			["Info"] = { BabbleZone["Uldaman"], "AtlasLootClassicWoW", mapname = "Uldaman", EncounterJournalID = 239 },
+		},
+
+		["WailingCavernsEnt"] = "WailingCavernsEaI",
+		["WailingCaverns"] = "WailingCavernsEaI",
+		["WailingCavernsEaI"] = {
+			["WailingCavernsEnt"] = {
+				{ "WailingCavernsLoot#1", 3, hide = true },
+			},
+			["WailingCaverns"] = {
+				{ "WailingCavernsLoot#1", {2,3,4,5} },
+				{ "WailingCavernsLoot#2", {6,7,8,10,11}, hide = true },
+				{ "VWOWSets#1", 16, hide = true },
+			},
+			["Info"] = { BabbleZone["Wailing Caverns"], "AtlasLootClassicWoW", sortOrder = { "WailingCavernsEnt", "WailingCaverns" }, mapname = "WailingCaverns", EncounterJournalID = 240 },
+		},
+
+		["ZulFarrak"] = {
+			["Bosses"] = {
+				{ "ZFGahzrilla", 5 },
+				{ "ZFSezzziz", 12 },
+				{ "ZFChiefUkorzSandscalp", 14 },
+				{ "ZFWitchDoctorZumrah", 16 },
+				{ "ZFAntusul", 17 },
+				{ "ZFHydromancerVelratha", 19 },
+				{ "ZFDustwraith", 21 },
+				{ "ZFZerillis", 22 },
+				{ "LunarFestival", 23, hide = true },
+				{ "ZFTrash", 25 },
+			},
+			["Info"] = { BabbleZone["Zul'Farrak"], "AtlasLootClassicWoW", mapname = "ZulFarrak", EncounterJournalID = 241 },
+		},
+
+		-------------
+		--- Raids ---
+		-------------
+
+		["BlackwingLair"] = {
+			["Bosses"] = {
+				{ "BWLRazorgore", 6 },
+				{ "BWLVaelastrasz", 7 },
+				{ "BWLLashlayer", 8 },
+				{ "BWLFiremaw", 9 },
+				{ "BWLEbonroc", 10 },
+				{ "BWLTrashMobs",  11, hide = true },
+				{ "BWLFlamegor", 12 },
+				{ "BWLChromaggus", 13 },
+				{ "BWLNefarian", 14 },
+				{ "BWLTrashMobs",  17 },
+				{ "T1T2T3SET", 18, hide = true },
+			},
+			["Info"] = { BabbleZone["Blackwing Lair"], "AtlasLootClassicWoW", mapname = "BlackwingLair", raid = true },
 		},
 
 		["MoltenCore"] = {
@@ -1375,95 +1533,6 @@ AtlasLoot_LootTableRegister = {
 			["Info"] = { BabbleZone["Temple of Ahn'Qiraj"], "AtlasLootClassicWoW", mapname = "TempleofAhnQiraj", raid = true },
 		},
 
-		["ShadowfangKeep"] = {
-			["Bosses"] = {
-				{ "ShadowfangAshbury", 3, EncounterJournalID = 96 },
-				{ "ShadowfangSilverlaine", 4, EncounterJournalID = 97 },
-				{ "ShadowfangSpringvale", 9, EncounterJournalID = 98 },
-				{ "ShadowfangWalden", 10, EncounterJournalID = 99 },
-				{ "ShadowfangGodfrey", 11, EncounterJournalID = 100 },
-				{ "Valentineday#3", 12, hide = true },
-				{ "ShadowfangTrash", 21 },
-			},
-			["Info"] = { BabbleZone["Shadowfang Keep"], {"AtlasLootClassicWoW", "AtlasLootCataclysm"}, mapname = "ShadowfangKeep", EncounterJournalID = 64 },
-		},
-
-		["Gnomeregan"] = {
-			["Bosses"] = {
-				{ "GnomereganLoot#1", {4,7,8,9} },
-				{ "GnomereganLoot#2", {10}, hide = true },
-			},
-			["Info"] = { BabbleZone["Gnomeregan"], "AtlasLootClassicWoW", mapname = "Gnomeregan", EncounterJournalID = 231 },
-		},
-
-		["ScarletHalls"] = {
-			["Bosses"] = {
-				{ "SHBraun", 3, EncounterJournalID = 660 },
-				{ "SHHarlan", 4, EncounterJournalID = 654 },
-				{ "SHKoegler", 5, EncounterJournalID = 656 },
-			},
-			["Info"] = { BabbleZone["Scarlet Halls"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "ScarletHalls", EncounterJournalID = 311 },
-		},
-
-		["ScarletMonastery"] = {
-			["Bosses"] = {
-				{ "SMThalnos", 3, EncounterJournalID = 688 },
-				{ "SMKorloff", 4, EncounterJournalID = 671 },
-				{ "SMWhitemane", 5, EncounterJournalID = 674 },
-			},
-			["Info"] = { BabbleZone["Scarlet Monastery"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "ScarletMonastery", EncounterJournalID = 316 },
-		},
-
-		["Scholomance"] = {
-			["Bosses"] = {
-				{ "ScholoChillheart", 3, EncounterJournalID = 659 },
-				{ "ScholoJandice", 5, EncounterJournalID = 663 },
-				{ "ScholoRattlegore", 6, EncounterJournalID = 665 },
-				{ "ScholoVoss", {7, 15}, EncounterJournalID = 666 },
-				{ "ScholoGandling", 10, EncounterJournalID = 684 },
-			},
-			["Info"] = { BabbleZone["Scholomance"], {"AtlasLootClassicWoW", "AtlasLootMoP"}, mapname = "Scholomance", EncounterJournalID = 246 },
-		},
-
-		["TheDeadminesEnt"] = "TheDeadminesEaI",
-		["TheDeadmines"] = "TheDeadminesEaI",
-		["TheDeadminesEaI"] = {
-			["TheDeadminesEnt"] = {
-				{ "DeadminesTrash", {4,5}, hide = true },
-			},
-			["TheDeadmines"] = {
-				{ "DeadminesGlubtok", 3, EncounterJournalID = 89 },
-				{ "DeadminesGearbreaker", 5, EncounterJournalID = 90 },
-				{ "DeadminesFoeReaper", 6, EncounterJournalID = 91 },
-				{ "DeadminesRipsnarl", 7, EncounterJournalID = 92 },
-				{ "DeadminesCookie", 8, EncounterJournalID = 93 },
-				{ "DeadminesVanessa", 9, EncounterJournalID = 95 },
-				{ "DeadminesTrash", 18 },
-			},
-			["Info"] = { BabbleZone["The Deadmines"], {"AtlasLootClassicWoW", "AtlasLootCataclysm"}, sortOrder = { "TheDeadminesEnt", "TheDeadmines" }, mapname = "TheDeadmines", EncounterJournalID = 63 },
-		},
-
-		["WailingCavernsEnt"] = "WailingCavernsEaI",
-		["WailingCaverns"] = "WailingCavernsEaI",
-		["WailingCavernsEaI"] = {
-			["WailingCavernsEnt"] = {
-				{ "WailingCavernsLoot#1", 3, hide = true },
-			},
-			["WailingCaverns"] = {
-				{ "WailingCavernsLoot#1", {2,3,4,5} },
-				{ "WailingCavernsLoot#2", {6,7,8,10,11}, hide = true },
-				{ "VWOWSets#1", 16, hide = true },
-			},
-			["Info"] = { BabbleZone["Wailing Caverns"], "AtlasLootClassicWoW", sortOrder = { "WailingCavernsEnt", "WailingCaverns" }, mapname = "WailingCaverns", EncounterJournalID = 240 },
-		},
-
-		["TheStockade"] = {
-			["Bosses"] = {
-				{ "Stockade", {2,3,4} },
-			},
-			["Info"] = { BabbleZone["The Stockade"], "AtlasLootClassicWoW", mapname = "TheStockade", EncounterJournalID = 238 },
-		},
-
 		["TheRuinsofAhnQiraj"] = {
 			["Bosses"] = {
 				{ "CenarionCircle", 1, hide = true },
@@ -1479,27 +1548,11 @@ AtlasLoot_LootTableRegister = {
 			},
 			["Info"] = { BabbleZone["Ruins of Ahn'Qiraj"], "AtlasLootClassicWoW", mapname = "RuinsofAhnQiraj", raid = true },
 		},
-
-		["ZulFarrak"] = {
-			["Bosses"] = {
-				{ "ZFGahzrilla", 5 },
-				{ "ZFSezzziz", 12 },
-				{ "ZFChiefUkorzSandscalp", 14 },
-				{ "ZFWitchDoctorZumrah", 16 },
-				{ "ZFAntusul", 17 },
-				{ "ZFHydromancerVelratha", 19 },
-				{ "ZFDustwraith", 21 },
-				{ "ZFZerillis", 22 },
-				{ "LunarFestival", 23, hide = true },
-				{ "ZFTrash", 25 },
-			},
-			["Info"] = { BabbleZone["Zul'Farrak"], "AtlasLootClassicWoW", mapname = "ZulFarrak", EncounterJournalID = 241 },
-		},
 	},
 
----------------------
---- Battlegrounds ---
----------------------
+	---------------------
+	--- Battlegrounds ---
+	---------------------
 
 	["Battlegrounds"] = {
 
@@ -1584,9 +1637,29 @@ AtlasLoot_LootTableRegister = {
 		},
 	},
 
---------------------
---- World Bosses ---
---------------------
+	["PVP"] = {
+		["AlteracValley"] = {
+			["Bosses"] = {
+				{ "AVMisc" },
+				{ "AVBlue" },
+			},
+			["Info"] = { BabbleZone["Alterac Valley"].." "..AL["Rewards"], "AtlasLootClassicWoW"},
+		},
+
+		["WarsongGulch"] = {
+			["Bosses"] = {
+				{ "WSGMisc", 6 },
+				{ "WSGAccessories", 7 },
+				{ "WSGWeapons", 8 },
+				{ "WSGArmor", 10 },
+			},
+			["Info"] = { BabbleZone["Warsong Gulch"].." "..AL["Rewards"], "AtlasLootClassicWoW"},
+		},
+	},
+
+	--------------------
+	--- World Bosses ---
+	--------------------
 
 	["WorldBosses"] = {
 
@@ -1617,9 +1690,9 @@ AtlasLoot_LootTableRegister = {
 		},
 	},
 
---------------------
---- World Events ---
---------------------
+	--------------------
+	--- World Events ---
+	--------------------
 
 	["WorldEvents"] = {
 
@@ -1632,9 +1705,9 @@ AtlasLoot_LootTableRegister = {
 		},
 	},
 
-----------------
---- Crafting ---
-----------------
+	----------------
+	--- Crafting ---
+	----------------
 
 	["Crafting"] = {
 
@@ -1744,6 +1817,10 @@ AtlasLoot_LootTableRegister = {
 		},
 	},
 
+	-------------------
+	--- Collections ---
+	-------------------
+
 	["Misc"] = {
 		["Pets"] = {
 			["Bosses"] = {
@@ -1759,9 +1836,10 @@ AtlasLoot_LootTableRegister = {
 				{ "PetsPetStore" },
 				{ "PetsRemoved" },
 				{ "PetsNEW" },
+				{ "PetsNEW2" },
 				{ "PetsAccessories" },
 			},
-			["Info"] = { BabbleInventory["Companions"], "AtlasLootCataclysm"},
+			["Info"] = { BabbleInventory["Companions"], "AtlasLootMoP"},
 		},
 
 		["Mounts"] = {
@@ -1777,8 +1855,9 @@ AtlasLoot_LootTableRegister = {
 				{ "MountsEvent" },
 				{ "MountsRemoved" },
 				{ "MountsNEW" },
+				{ "MountsNEW2" },
 			},
-			["Info"] = { BabbleInventory["Mounts"], "AtlasLootCataclysm"},
+			["Info"] = { BabbleInventory["Mounts"], "AtlasLootMoP"},
 		},
 
 		["Tabards"] = {
@@ -1789,7 +1868,7 @@ AtlasLoot_LootTableRegister = {
 				{ "TabardsAchievementQuestRare" },
 				{ "TabardsRemoved" },
 			},
-			["Info"] = { BabbleInventory["Tabards"], "AtlasLootCataclysm"},
+			["Info"] = { BabbleInventory["Tabards"], "AtlasLootMoP"},
 		},
 		
 		["TransformationItems"] = {
@@ -1798,9 +1877,9 @@ AtlasLoot_LootTableRegister = {
 				{ "TransformationConsumableItems" },
 				{ "TransformationAdditionalEffects" },
 			},
-			["Info"] = { AL["Transformation Items"], "AtlasLootCataclysm"},
+			["Info"] = { AL["Transformation Items"], "AtlasLootMoP"},
 		},
-		
+
 		["WorldEpics"] = {
 			["Bosses"] = {
 				{ "WorldEpics90" },
@@ -1811,27 +1890,7 @@ AtlasLoot_LootTableRegister = {
 				{ "WorldEpics4049" },
 				{ "WorldEpics3039" },
 			},
-			["Info"] = { AL["BoE World Epics"], "AtlasLootWotLK"},
-		},
-	},
-
-	["PVP"] = {
-		["AlteracValley"] = {
-			["Bosses"] = {
-				{ "AVMisc" },
-				{ "AVBlue" },
-			},
-			["Info"] = { BabbleZone["Alterac Valley"].." "..AL["Rewards"], "AtlasLootClassicWoW"},
-		},
-
-		["WarsongGulch"] = {
-			["Bosses"] = {
-				{ "WSGMisc", 6 },
-				{ "WSGAccessories", 7 },
-				{ "WSGWeapons", 8 },
-				{ "WSGArmor", 10 },
-			},
-			["Info"] = { BabbleZone["Warsong Gulch"].." "..AL["Rewards"], "AtlasLootClassicWoW"},
+			["Info"] = { AL["BoE World Epics"], "AtlasLootMoP"},
 		},
 	},
 
@@ -1843,7 +1902,24 @@ AtlasLoot_LootTableRegister = {
 			},
 			["Info"] = { AL["ilvl 245"].." - "..AL["Rewards"], "AtlasLootWotLK"},
 		},
-	},	
+	},
+
+	["TierSets"] = {
+		["TierSetsMenus"] = {
+			["Bosses"] = {
+				{ "T1T2T3SET" },
+				{ "T456SET" },
+				{ "T7T8SET" },
+				{ "T9SET" },
+				{ "T10SET" },
+				{ "T1112SET" },
+				{ "T13SET" },
+				{ "T14SET" },
+			},
+			["Info"] = { AL["Tier Sets"], "AtlasLootMoP"},
+		},
+	},
+
 }
 
 AtlasLoot_LootTableRegister["Instances"]["EmptyPage"] = {

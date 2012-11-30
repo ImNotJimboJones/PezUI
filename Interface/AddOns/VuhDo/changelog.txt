@@ -1,3 +1,47 @@
+Version 3.20.
+
+
+Bugfixes:
+-- Changed "Dark Power", "Light Power" constants to "Chi" pendants
+
+
+Improvements:
+
+
+Changes:
+
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.19.
+
+
+Bugfixes:
+-- Changed "Mastery: Illuminated Healing" to "Illuminated
+   Healing" to track the buff really
+-- Fixed error in options menu introduced with 5.1
+
+
+Improvements:
+-- Increased display update speed after pet summon
+-- Weapon enchants will now be told apart
+
+
+Changes:
+-- Tagged for version 5.1
+
+
+
+Features:
+-- Added Symbiosis to BuffWatch
+-- Added rogue poisons to BuffWatch
+-- Added shaman offhand weapon enchant to BuffWatch
+
+
+--------------------------------------------------------------
 Version 3.18.
 
 
