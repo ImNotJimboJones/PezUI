@@ -29,29 +29,29 @@ ThreatPlatesDB = {
 			},
 		},
 	},
-	["global"] = {
-		["version"] = "6.007",
-	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
+	},
+	["global"] = {
+		["version"] = "6.008",
 	},
 	["profiles"] = {
 		["Default"] = {
 			["nameplate"] = {
-				["scale"] = {
-					["Normal"] = 0.75,
-					["Boss"] = 0.75,
-					["Neutral"] = 0.75,
-					["Elite"] = 0.75,
-				},
 				["toggle"] = {
 					["Totem"] = true,
+				},
+				["scale"] = {
+					["Elite"] = 0.75,
+					["Boss"] = 0.75,
+					["Neutral"] = 0.75,
+					["Normal"] = 0.75,
 				},
 			},
 			["comboWidget"] = {
 				["ON"] = true,
 			},
-			["allowClass"] = true,
+			["friendlyClass"] = true,
 			["uniqueSettings"] = {
 				[33] = {
 				},
@@ -124,31 +124,13 @@ ThreatPlatesDB = {
 					"", -- [50]
 				},
 			},
-			["threat"] = {
-				["tank"] = {
-					["scale"] = {
-						["LOW"] = 1.15,
-						["MEDIUM"] = 0.9500000000000001,
-						["HIGH"] = 0.75,
-					},
-				},
-				["dps"] = {
-					["scale"] = {
-						["LOW"] = 0.75,
-						["MEDIUM"] = 0.9500000000000001,
-						["HIGH"] = 1.15,
-					},
-				},
-				["useType"] = false,
-				["scaleType"] = {
-					["Normal"] = 0,
-					["Boss"] = 0,
-				},
-				["useHPColor"] = false,
+			["text"] = {
+				["amount"] = false,
 			},
 			["debuffWidget"] = {
 				["mode"] = "blacklistMine",
 			},
+			["cacheClass"] = true,
 			["cache"] = {
 			},
 			["settings"] = {
@@ -160,19 +142,19 @@ ThreatPlatesDB = {
 				},
 				["level"] = {
 					["align"] = "LEFT",
-					["y"] = 1,
-					["vertical"] = "CENTER",
 					["show"] = false,
 					["x"] = 49,
+					["y"] = 1,
+					["vertical"] = "CENTER",
 					["size"] = 11,
 				},
 				["normal"] = {
 					["threatcolor"] = {
 						["LOW"] = {
 							["a"] = 0,
-							["b"] = 0,
-							["g"] = 0,
 							["r"] = 0,
+							["g"] = 0,
+							["b"] = 0,
 						},
 					},
 				},
@@ -205,7 +187,6 @@ ThreatPlatesDB = {
 				["theme"] = "arrows",
 			},
 			["tidyplatesFade"] = true,
-			["cacheClass"] = true,
 			["blizzFade"] = {
 				["amount"] = 0,
 			},
@@ -217,9 +198,28 @@ ThreatPlatesDB = {
 			["classWidget"] = {
 				["ON"] = false,
 			},
-			["friendlyClass"] = true,
-			["text"] = {
-				["amount"] = false,
+			["allowClass"] = true,
+			["threat"] = {
+				["scaleType"] = {
+					["Normal"] = 0,
+					["Boss"] = 0,
+				},
+				["dps"] = {
+					["scale"] = {
+						["MEDIUM"] = 0.9500000000000001,
+						["LOW"] = 0.75,
+						["HIGH"] = 1.15,
+					},
+				},
+				["useType"] = false,
+				["tank"] = {
+					["scale"] = {
+						["MEDIUM"] = 0.9500000000000001,
+						["LOW"] = 1.15,
+						["HIGH"] = 0.75,
+					},
+				},
+				["useHPColor"] = false,
 			},
 		},
 	},
