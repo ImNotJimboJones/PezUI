@@ -148,10 +148,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showValue"] = false,
-						["enabled"] = false,
-						["stripColors"] = false,
 						["showupdates"] = "",
+						["enabled"] = false,
+						["showValue"] = false,
+						["stripColors"] = false,
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -236,12 +236,12 @@ BazookaDB = {
 						["pos"] = 6,
 					},
 					["Broker_uClock"] = {
-						["showValue"] = false,
+						["showupdates"] = "",
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
+						["showValue"] = false,
 						["stripColors"] = false,
-						["showupdates"] = "",
 						["pos"] = 9,
 					},
 					["SN - Expertise"] = {
@@ -359,9 +359,9 @@ BazookaDB = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
-						["pos"] = 2,
 						["showSuffix"] = false,
 						["bar"] = 2,
+						["pos"] = 2,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,
@@ -411,6 +411,10 @@ BazookaDB = {
 					["RaidBuffStatus"] = {
 						["enabled"] = false,
 						["pos"] = 2,
+					},
+					["IonBroker"] = {
+						["enabled"] = false,
+						["pos"] = 8,
 					},
 					["IonHydrogen"] = {
 						["enabled"] = false,
