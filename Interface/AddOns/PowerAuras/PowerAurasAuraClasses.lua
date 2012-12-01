@@ -2747,7 +2747,7 @@ function cPowaPowerType:IsCorrectPowerType(unit)
 	if (self.PowerType==SPELL_POWER_HOLY_POWER  and PowaAuras.playerclass == "PALADIN")
 	or (self.PowerType==SPELL_POWER_ALTERNATE_POWER) 
 	or (self.PowerType==SPELL_POWER_RUNIC_POWER and PowaAuras.playerclass == "DEATHKNIGHT") 
-	or (self.PowerType==SPELL_POWER_LIGHT_FORCE and PowaAuras.playerclass == "MONK") 
+	or (self.PowerType==SPELL_POWER_CHI and PowaAuras.playerclass == "MONK") 
 	or (self.PowerType==SPELL_POWER_SHADOW_ORBS and PowaAuras.playerclass == "PRIEST") 
 	or ((self.PowerType==SPELL_POWER_SOUL_SHARDS or self.PowerType==SPELL_POWER_BURNING_EMBERS or self.PowerType==SPELL_POWER_DEMONIC_FURY) and PowaAuras.playerclass == "WARLOCK") 
 	or ((self.PowerType==SPELL_POWER_LUNAR_ECLIPSE or self.PowerType==SPELL_POWER_SOLAR_ECLIPSE)     and PowaAuras.playerclass == "DRUID") then return true; end
