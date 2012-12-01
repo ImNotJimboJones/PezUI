@@ -20,7 +20,7 @@ goto Ragefire Chasm 67.7,11.3
 ..accept 30969
 ..accept 30983
 step
- goto 68.2,12.2
+goto 68.2,12.2
 .talk 61724
 ..accept 30982
 ..accept 30984
@@ -37,11 +37,11 @@ goto 68.7,64.2
 .from Adarogg##61408 |only if not havequest(30982)
 .kill Adarogg##61408 |q 30982/1 |only if havequest(30982)
 |confirm |only if not havequest(30982)
-step	
+step
 goto 65.0,70.8
 .talk 61780
 .' Tell him:
-.' <It's Safe to come out now.> 
+.' <It's Safe to come out now.>
 |confirm
 |only if not completedq(30984)
 step
@@ -50,7 +50,7 @@ step
 goto 53.0,26.1
 .talk 61790
 .' Tell him:
-.' <It's Safe to come out now.> 
+.' <It's Safe to come out now.>
 |confirm
 |only if not completedq(30984)
 step
@@ -94,7 +94,6 @@ goto 31.7,76.5
 .talk 61724
 ..turnin 30982
 ..turnin 30984
-
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Dungeon Guides\\Classic Dungeons\\Deadmines (DM) 15-18",[[
 dungeon 756
@@ -127,7 +126,7 @@ step
 label "start"
 goto The Deadmines,29.3,27.1
 .talk 46889
-..accept 27842 
+..accept 27842
 step
 goto 28.8,27.3
 .talk 46906
@@ -177,7 +176,7 @@ goto 49.0,87.4 |n
 .' Phase 1 (Lumbering Oaf):
 .' Avoid _Sticky Bombs_ on the ground.
 .' The Lumbering Oaf will periodically use _Oaf Smash_, picking up a player and slamming them, dealing 100% of the players health as damage.
-.' The Lumbering Oaf will use _Throw Helix_ onto a player for 10 seconds, 
+.' The Lumbering Oaf will use _Throw Helix_ onto a player for 10 seconds,
 .' After Throw Helix, there will be a _Chest Bomb_ on the player, dealing 46k-57k fire damage.
 .' _Helix' Crew_ throws bombs at random players throughout the entire fight.
 .' Phase 2:
@@ -211,7 +210,7 @@ goto The Deadmines/2 10.0,82.7
 .' Avoid being in it's path when it uses it's abilities and you should be fine.
 .from Foe Reaper 5000##43778 |only if not havequest(27847)
 .kill Foe Reaper 5000##43778 |q 27847/1 |only if havequest(27847)
-|confirm |next "canon_blast" |only if not havequest(27847) 
+|confirm |next "canon_blast" |only if not havequest(27847)
 |only if heroic_dung()
 step
 label "Proto_Reap"
@@ -270,7 +269,7 @@ goto 60.6,44.5
 step
 .' A note will appear on the ground
 .' Don't click it until your group is ready, it will start the _Vanessa VanCleef_ event.
-.' Once you click it, Vanessa will come out and poison you. 
+.' Once you click it, Vanessa will come out and poison you.
 .' When you awaken you'll be suspended above a lava pool. |goto 12.7,80.1 <8 |c
 |only if heroic_dung()
 step
@@ -280,7 +279,7 @@ goto 12.4,71.8
 .' You will be dazed and fires will appear. _Avoid the fires at all cost_ they deal out massive damage.
 .' Make your way down the ramp. |goto 12.4,71.8 <5 |c
 |only if heroic_dung()
-step	
+step
 .from Glubtok##49670
 .' After you defeat Glubtok, _Helix Gearbreaker_  will appear at the door.
 .' The group needs to collapse at the door, as spiders will spawn and fill the room.
@@ -354,12 +353,12 @@ step
 label "start"
 goto Wailing Caverns,46.6,59.2
 .talk 5768
-..accept 26870 
+..accept 26870
 step
 goto 46.6,58.4
 .talk 5767
-..accept 26872 
-..accept 26873 
+..accept 26872
+..accept 26873
 step
 ' Do the following as you move through the instance
 .from Deviate Ravager##3636+, Deviate Guardian##3637+, Deviate Crocolisk##5053+
@@ -385,7 +384,7 @@ path	13.7,33.9	19.8,41.6
 .' Jump in the water and follow this path
 .from Lord Pythas##3670 |only if  not havequest(26870)
 ..kill Lord Pythas##3670 |q 26870/3 |only if havequest(26870)
-|confirm |only if not havequest(26870)	
+|confirm |only if not havequest(26870)
 step
 map Wailing Caverns
 path loop off; strict

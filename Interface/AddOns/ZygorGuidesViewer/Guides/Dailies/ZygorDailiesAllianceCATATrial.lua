@@ -248,25 +248,22 @@ goto 22.1,81.2
 .talk 27602
 ..turnin 12323
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Quests",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Quests",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the quests for the Brewfest event.
- 	condition suggested isevent('Brewfest')
-step
-#include "Brewfest Quests"
+description This guide section will walk you through completing the quests for the Hallow's End event.
+condition suggested isevent("Hallow's End")
+#include "Hallows_End_Quests_Alliance"
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Dailies",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Dailies",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the daily quests for the Brewfest event.
- 	condition suggested isevent('Brewfest')
+description This guide section will walk you through completing the daily quests for the Hallow's End event.
+condition suggested isevent("Hallow's End")
 daily
-step
-#include "Brewfest Dailies"
+#include "Hallows_End_Dailies_Alliance"
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Achievements",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Achievements",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the achievements for the Brewfest event.
- 	condition suggested isevent('Brewfest')
-step
-#include "Brewfest Achievements"
+description This guide section will walk you through completing the achievements for the Hallow's End event.
+condition suggested isevent("Hallow's End")
+#include "Hallows_End_Achievements_Alliance"
 ]])

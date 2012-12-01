@@ -59,7 +59,7 @@ do
 		Lib.banned_nodes = {}
 
 		local WEAK_VALUES={__mode='v'}
-		Lib.nodes = {all={},taxi={},id={},mageteleport={}}
+		Lib.nodes = {all={},taxi={},id={},mageteleport={},['start']={},['end']={}}
 		-- if a node falls out of the 'all', drop it everywhere.
 		local allnodes = Lib.nodes.all
 		setmetatable(Lib.nodes.taxi,WEAK_VALUES)
@@ -68,6 +68,8 @@ do
 
 		local MAGE_TELEPORT_COST = 20
 		local MAGE_TELEPORT_COST_STORMWIND = 30    -- Stormwind Mage Tower is a bitch to get out of.
+		local COST_CROSSCONTINENT_DEFAULT = 20
+		local COST_SHIP_DEFAULT = 240
 
 		Lib.knowntaxis = {}  -- managed by LibTaxi
 
@@ -162,9 +164,9 @@ do
 		-- IMPORTANT OBSERVATION.
 		-- Nodes are (almost) ALWAYS separated by "walk"/"fly"
 
-		local function MapName(id)
-			if type(id)=="table" then id=id.m end
-			return GetMapNameByID(tonumber(id) or 0) or (id==0 and "Azeroth") or (id==13 and "Kalimdor") or (id==14 and "Eastern Kingdoms") or (id==466 and "Outland") or (id==485 and "Northrend") or (id==862 and "Pandaria") or "(map "..tostring(id).."?)"
+		local function MapName(id,floor)
+			if type(id)=="table" then id,floor=id.m,id.f end
+			return ZGV.Pointer.GetMapNameByID2(tonumber(id) or 0,floor or 0) or "(map "..tostring(id).."?)"
 		end
 
 		local node_proto = {}
@@ -229,10 +231,12 @@ do
 		end
 
 		function node_proto.tostring(node,withneighs)
-			local ret = ("[%d] %s\"%s\" = %s /%d %.1f,%.1f"):format(node.num, (node.id and "@"..node.id.." " or ""), node:GetText(), MapName(node),node.f, node.x*100,node.y*100, neighs)
+			local ret = ("[%d] %s\"%s\" = %s /%d %.1f,%.1f [%s]"):format(node.num, (node.id and "@"..node.id.." " or ""), node:GetText(), MapName(node.m),node.f, node.x*100,node.y*100, node.type or "?")
+			if node.is_arrival then  ret = ret .. " (arrival)" end
 			if node.region then  ret = ret .. (" (REG:|cff0088ff%s|r)"):format(node.region)  end
 			if node.type=="taxi" then  ret = ret .. (" (taxi known:%s)"):format((node.known==true and "|cff00ff00YES|r") or (node.known==false and "|cffff0000NO|r") or "|cffffaa00?|r")  end
 			if node.score then  ret = ret .. (" (t=|cffffffff%.1f|r, h=%.1f)"):format(node.score or -1,node.heur or -1)  end
+			if node.link then  ret = ret .. (" (link:mode=%s)"):format(node.link.mode)  end
 			if withneighs then
 				local neighs = ""
 				for n,link in pairs(node.n) do neighs=neighs.." ".. n:tostring().." <"..(link.mode or "?")..">\n" end
@@ -251,6 +255,8 @@ do
 		function node_proto:CanFlyTo(dest)
 			if type(dest)=="number" then dest=Lib.nodes.all[dest] end
 			if dest==self then return false,"same node" end
+			if self.onlyhardwire then return false,"src is onlyhardwire" end
+			if dest.onlyhardwire and not self.player then return false,"dest is onlyhardwire" end
 			if not (dest.c==self.c and dest.c>=0) then return false,"not same cont" end
 			if dest.type=="border" then return false,"dest is a border" end
 			if dest.nofly or self.nofly then return false,"either is nofly" end
@@ -260,8 +266,13 @@ do
 			if not is_vash(dest.m)==is_vash(self.m) then return false,"either is vash" end
 			--if ((dest.m==321 and dest.f==2) or (self.m==321 and self.f==2))  then return false,"dest is orgri cleft" end
 			--if ((dest.m==504 and dest.f==2) or (self.m==504 and self.f==2)) then return false,"dest is dala sewer" end
+
+			if ((self.m==321 or self.m==504) and self.f==2)  -- Orgri or Dala
+			or ((dest.m==321 or dest.m==504) and dest.f==2)
+				then return false,"Orgri or Dala underground" end
+
 			if (dest.f>0 or self.f>0) -- a cave, usually
-			and not ((self.m==321 or self.m==504) and self.f==1)  -- but not Orgri or Dala
+			and not ((self.m==321 or self.m==504) and self.f==1)  -- but not Orgri or Dala overground
 			and not ((dest.m==321 or dest.m==504) and dest.f==1)
 				then return false,"dest is a cave or something; not Orgri or Dala, anyway" end
 			return true
@@ -281,6 +292,9 @@ do
 		-- node.c = cont id
 		local function DoNodeLinkage(n1,n2,debugmode)
 			if n1.c==n2.c then
+
+				if n1.onlyhardwire then return false,"src is onlyhardwire" end
+				if n2.onlyhardwire and not n1.player then return false,"dest is onlyhardwire" end
 
 				if n1.type=="taxi" and n2.type=="taxi" then
 					-- Timings are IN.
@@ -320,7 +334,7 @@ do
 					or (n2.regionobj and n2.regionobj:HasGreenBorder(n1.m))
 				   )
 				and not (n1~=Lib.startnode and n1~=Lib.endnode and n2~=Lib.startnode and n2~=Lib.endnode and (n1.noallzone or n2.noallzone)) -- startnode and endnode is allowed to connect even in noallzone, we'll just run a "mud" penalty for beelines later
-				and not (n2.m==41 and (n1.y-0.8)*(n2.y-0.8)<0) -- Darnassus! Unwalkable to Rut'Theran! TEMPORARY... --TODO: make this a region.
+				and not (n2.m==41 and (n1.y-0.8)*(n2.y-0.8)<0) -- Darnassus! Unwalkable to Rut'n! TEMPORARY... --TODO: make this a region.
 				--and not (n1.is_remote~=n2.is_remote)
 				then
 					n1.n[n2]={mode="walk",implicit=true}
@@ -455,7 +469,11 @@ do
 				m = _ or m
 			end
 			m=m or text  -- could be just the zone, after all.
-			m = Lib.data.MapIDsByName[m]
+			if tonumber(m) then
+				m=tonumber(m) -- pure numeric zone!
+			else
+				m = Lib.data.MapIDsByName[m]
+			end
 			if type(m)=="table" then m=m[1] end
 
 			assert(m,"Bad map in MakeNode('"..text.."')")
@@ -542,7 +560,9 @@ do
 			if ntype=="_" then ntype=nil end
 			ntype=ntype and ntype:lower()
 
+			
 			-- Powerhorse: extract all {data:blablabla} tags.
+
 			local extra={mode=ntype or "walk"}
 			while text:find("{") do
 				local text1,key,val,text2 = text:match("^(.-){(.-):(.-)}(.-)$")
@@ -562,11 +582,14 @@ do
 
 			if extra.style=="portal_dungeon" then
 				ntype="portal"
+				extra.mode="portal"
 			end
 
 			text=text:gsub("\\>","%%GT%%")
 
-			-- Powerhorse #2: parse "zone 12,34 to zone 55,66"
+
+			-- Powerhorse #2: parse "zone 12,34 -to- zone 55,66"
+
 			local mxy1,dir,mxy2 = text:match("^(.-)%s+%-([xto]+)%-%s+(.-)$")
 			if not mxy1 then mxy1 = text end -- OMG one node!?
 			local m1,f1,x1,y1,id1,dat1 = MakeNode(mxy1)
@@ -640,8 +663,8 @@ do
 			end
 
 			if extra.style=="portal_dungeon" then
-				link12.tag = "portalDungeonIn"
-				link21.tag = "portalDungeonOut"
+				link12.tag = "portalDungeonEnter" -- note: these are TRAVEL MODES, so they're verbs.
+				link21.tag = "portalDungeonExit"
 			end
 
 			if n1.spell then
@@ -701,8 +724,8 @@ do
 				n1.n[n2]=data
 				data.hardwired=1
 
-				if n1.c~=n2.c then  -- continent crossing, distance will be extreme
-					data.cost=data.cost or 20 -- just assume 20s and get over it.
+				if n1.c~=n2.c and data.mode~="ship" and data.mode~="zeppelin" then  -- continent crossing, distance will be extreme, and it's not a ship, oddly
+					data.cost=data.cost or COST_CROSSCONTINENT_DEFAULT -- just assume 20s and get over it.
 				end
 			end
 
@@ -1025,6 +1048,9 @@ do
 
 		local temp_fields = {'cost','time','heur','score','status','calclink','parent','prev','next','text','maplabel','toend','taxiFinal'}
 
+		local lam,laf,lax,lay, lbm,lbf,lbx,lby
+		local fromme=false
+
 		--- Drop our special start/end nodes from the map
 		function Lib:ClearPath()
 			local removed,node,lastn
@@ -1056,9 +1082,6 @@ do
 		end
 
 		local success_endnode
-
-		local lam,laf,lax,lay, lbm,lbf,lbx,lby
-		local fromme=false
 
 		--]=]
 
@@ -1099,7 +1122,7 @@ do
 		local bestcost
 
 		--local flylink={mode="fly"}  -- DO NOT USE, breaks cachins.
-		Lib.hearthlink = {mode="hearth",cost=60}  -- down from 150, as it kept preferring a taxi to a hearth --up from 60, was hearthing too much
+		Lib.hearthlink = {mode="hearth",cost=55}  -- down from 150, as it kept preferring a taxi to a hearth. Down from 60 to make it occur more often while leveling.
 		Lib.astralrecall = {mode="astralrecall",cost=30}
 
 		Lib.DO_HEUR = false
@@ -1293,7 +1316,7 @@ do
 						if ZGV and ZGV.DEV and not found and not hearthunknown[bind] then --Easy way to find more Hearth locations for MoP
 							hearthunknown[bind]=1
 							StaticPopupDialogs["HearthStone!"] = {
-								text = bind.." this Hearth location is not known! Report it!",
+								text = bind.." - this Hearth location is not known! Report it!",
 								button1 = YES,
 								button2 = NO,
 								timeout = 0,
@@ -1387,14 +1410,17 @@ do
 					--[[  DETERMINE THE MOVEMENT COST, BASING ON LINK MODE ]]--
 					local time,mytime = 0,nil
 					do
-						if mode == "taxi" then
+						if neighlink.cost and mode~="taxi" then -- explicit cost given, don't use any mode-based templates (taxis still use their own times)
+							mycost = neighlink.cost  -- timetabled!
+							mytime = mycost
+
+						elseif mode == "taxi" then
 							mycost = neighlink.cost  -- timetabled!
 									or
 									getdist(current,neigh) * 1.2 -- taxis fly in wide curves...
-									/ (WALKSPEED*4.5) -- roughly?
+										/ (WALKSPEED*4.5) -- roughly?
 							mytime = mycost
 							if IsSpellKnown(117983) then mycost=mycost*.8 end -- Guild Perk Ride like the Wind.
-							if ZGV.db.profile.pathfinding_preferfly then mycost=mycost*0.1 end
 						elseif mode == "tram" then
 							--mycost = 120.00  -- 2 minutes.
 							mycost = 300.00  -- make it suck
@@ -1421,6 +1447,10 @@ do
 							mycost = dist / speedcost
 							--(Astrolabe:ComputeDistance(current.m,current.f or 0,current.x,current.y, neigh.m,neigh.f or 0,neigh.x,neigh.y) or 99999999)*speedcost
 							-- divide by movement speed later
+						end
+
+						if ZGV.db.profile.pathfinding_preferfly then
+							if mode=="walk" or mode=="fly" then mycost=mycost*3 end
 						end
 
 						if mycost>100000 then mycost=10 end  -- sanitize "impassable" links
@@ -1594,13 +1624,12 @@ do
 			{'taxidumb',"Arrive at your destination"},
 
 			{'*_ship__ship_ship',"Ride the boat to {next_port}"}, {'ship_ship',"arrive"},
-
 			{'*_zeppelin__zeppelin_zeppelin',"Ride the zeppelin to {next_port}"}, {'zeppelin_zeppelin',"arrive"},
 
 			{'*_portal__portal_*',"portalclick"}, {'portal*_*',"arrive"},
 			{'*_portal__portalauto_*',"portalauto"},-- {'portalauto_X',"arrive"},
-			{'*_portal__portalDungeonIn_portal',"portalauto"},-- {'portaldungeon_X',"arrive"},
-			{'*_portal__portalDungeonOut_*',"Use the portal to exit {map}"},-- {'portaldungeon_X',"arrive"},
+			{'*_portal__portalDungeonEnter_*',"portalauto"},-- {'portaldungeon_X',"arrive"},
+			{'*_portal__portalDungeonExit_*',"Use the portal to exit {map}"},-- {'portaldungeon_X',"arrive"},
 			{'portalauto',"Enter portal to {next_map}"},
 			{'portaldungeon',"Enter portal to {next_map}"},
 			{'portalclick',"Click portal to {next_map}\nTeleport to {next_map}"},
@@ -1609,6 +1638,7 @@ do
 			{'*_darkportal',"Enter the huge green portal\nTeleport to {next_map}"},
 			{'*_cityportal',"Enter the circular portal\nTeleport to {next_map}"},
 			{'*_pandarope',"Click the rope on the ground\nto swing to {next_map}"},
+			{'*_blackcat',"Talk to the Nightsaber Rider\nto travel {next_name}"},
 			{'*__transporter_*',"Enter the transporter"},
 			{'transporter_*',"Exit the transporter"},
 
@@ -1641,10 +1671,26 @@ do
 		-- And, this is for fast lookups.
 		local travel_locale_keys={}  for i,pair in ipairs(travel_locale) do travel_locale_keys[pair[1]]=pair[2] end
 
+		local function AngleBetween(n1,n2,n3)
+			if not (n1 and n2 and n3) then return 99 end
+			local a1 = n2:GetAngleTo(n1)
+			local a2 = n2:GetAngleTo(n3)
+			if not (a1 and a2) then return 99 end
+			local d = math.abs(a2-a1)
+			if d>180 then d=360-d end
+			return d
+		end
+
+		Lib.RESULTS_SKIPPED_START = {}
+		Lib.RESULTS_SKIPPED_END = {}
+
 		local n
 		function Lib:ReportPath(endnode)
 			local results = {}
 			self.RESULTS = results
+
+			wipe(Lib.RESULTS_SKIPPED_START)
+			wipe(Lib.RESULTS_SKIPPED_END)
 
 			self.is_first_run = false
 
@@ -1668,24 +1714,14 @@ do
 
 			--=========== HAIRPIN OPTIMIZATION
 
-			local function AngleBetween(n1,n2,n3)
-				if not (n1 and n2 and n3) then return 99 end
-				local a1 = n2:GetAngleTo(n1)
-				local a2 = n2:GetAngleTo(n3)
-				if not (a1 and a2) then return 99 end
-				local d = math.abs(a2-a1)
-				if d>180 then d=360-d end
-				return d
-			end
-
-			-- try to skip starting point; hairpin turns are nasty
-			local sn,n1,n2=results[1],results[2],results[3]
 			-- try to skip the first point, if it's close and an acute angle
+
+			local sn,n1,n2=results[1],results[2],results[3]
 
 			--if (n1.type=="border" or n1.type=="fly" or n1.type=="walk")
 			while sn and n1 and n2
 			and n2.link and (n2.link.mode=="walk" or n2.link.mode=="border" or n2.link.mode=="fly")
-			and not (n1.link.mode=="teleport" or n1.link.mode=="hearth" or n1.link.mode=="astralrecall")
+			and (n1.link.mode=="walk" or n1.link.mode=="fly")
 			--and n2.border
 			and
 				(
@@ -1696,7 +1732,7 @@ do
 					--(n2.type=="border" and n2.border and getdist(n1,n2)+getdist(n1,n2.border)-getdist(n2,n2.border)<100)  -- n1 is between n2 and n2.border
 					(
 						-- or standing next to the point, acute angle, same floor
-						      AngleBetween(sn,n1,n2)<45-- and getdist(sn,n1)<getdist(n1,n2)
+						AngleBetween(sn,n1,n2)<45-- and getdist(sn,n1)<getdist(n1,n2)
 						and sn.f==n1.f and n1.f==n2.f
 					)
 					or
@@ -1710,15 +1746,16 @@ do
 			and not (n1.testflags and not n1.flagtestresult)
 			and not (n2.testflags and not n2.flagtestresult)
 			do
-				Lib:Debug("skipped starting node: %s",n1:tostring())
+				Lib:Debug("|cffff8800skipped starting node|r: %s",n1:tostring())
 				-- remove n1 from between sn and n2
 				sn.link=n1.link
 				tremove(results,2)
-
+				tinsert(Lib.RESULTS_SKIPPED_START,n1)
 				sn,n1,n2=results[1],results[2],results[3]
 			end
 
 			-- repeat for pre-end point. UGLY.
+
 			if #results>2 then
 				-- try to skip the pre-last point, if it's close and an acute angle
 				local n1,n2,en=results[#results-2],results[#results-1],results[#results]
@@ -1727,10 +1764,11 @@ do
 				--and n2.border
 				and ( getdist(n2,en)<(n2.dist or 20)  or  (getdist(n2,en)<(n2.dist or 20)*3 and AngleBetween(n1,n2,en)<45) )
 				then
-					Lib:Debug("skipped pre-ending node")
+					Lib:Debug("|cffff8800skipped pre-ending node|r: %s",n2:tostring())
 					-- remove n1 from between sn and n2
 					n1.link=n2.link
 					tremove(results,#results-1)
+					tinsert(Lib.RESULTS_SKIPPED_END,n1)
 				end
 			end
 
@@ -1758,7 +1796,8 @@ do
 
 				--]]
 
-				if n.type=="taxi" then  -- no point in checking other nodes, is there :)
+				if n.type=="taxi" -- no point in checking other nodes, is there :)
+				and n.tag~="blackcat" then --These don't connect like most taxi nodes.
 					if np.type=="taxi" --or n.cost<0 -- there's a taxi before this, or player's currently on one
 					and nn.type~="taxi"
 					then  -- we're an endpoint!
@@ -1857,7 +1896,7 @@ do
 				local text = text
 					:gsub("{node}",node:GetText(node.prev,node.next) or "?")
 					:gsub("{name}",node.name or "?")
-					:gsub("{next_name}",nextnode and (nextnode.taxiDestination and nextnode.taxiDestination.name or nextnode.name) or "?")
+					:gsub("{next_name}",nextnode and (nextnode.taxiDestination and nextnode.taxiDestination.name or nextnode.extitle or nextnode.name) or "?")
 					:gsub("{map}",MapName(node))
 					:gsub("{next_map}",nextmap or "?")
 					:gsub("{next_port}",nextnode and nextnode.port and nextnode.port..", "..nextmap or nextmap or "?port?")
@@ -1873,23 +1912,24 @@ do
 
 			-- print out. Remove it later!
 			--print("path:")
-			for i=2,#results do
+			for i=1,#results do
 				local node=results[i]
 				local color=""
 				if (node.is_arrival) then color="|cff888888" end
 				--if not (node.is_arrival and Lib.cfg.strip_arrivals) then
-					Lib:Debug (color.."%d. |cff88ff88%s|r |cff88ccdd[%s]|r  |cff888888%s  (dist %d, time %.1f, total %.1f)|r |cff8888dd{%s}|r", i-1, node.text, node.maplabel or "",  node:tostring(), node.link and node.link.dist or 0, node.cost-(node.prev and node.prev.cost or 0), node.cost, node.a_b__c_d~="" and node.a_b__c_d or node.a_b or "")
+					Lib:Debug (color.."%d. |cff88ff88%s|r -- |cff88ccdd%s|r  (dist %d, time %.1f, total %.1f)|r |cff8888dd{%s}|r",
+					i-1, node.type=="start" and "START" or node.text, node.maplabel,
+					node.link and node.link.dist or 0, node.cost-(node.prev and node.prev.cost or 0), node.cost, node.a_b__c_d~="" and node.a_b__c_d or node.a_b or "")
 				--end
 			end
 
 			lastupdate=0
 
 			if #results==2 then
-				if getdist(results[1],results[2])<20 then return self:ReportArrival() end
+				if getdist(results[1],results[2])<ZGV.Pointer:GetDefaultStepDist() then return self:ReportArrival() end
 			end
 
 			if self.PathFoundHandler then self.PathFoundHandler("success",results,{fromme=fromme}) end
-
 		end
 
 		function Lib:ReportFail()
@@ -1954,7 +1994,14 @@ do
 				while perframethrot>=1 and self.calculating do
 					--perframethrot = perframethrot - self:StepPath()
 					resumed,num = resume(self.thread,self,perframethrot) -- returns num as count of nodes covered. nil if ending.
-					assert(resumed,num)
+					--[[
+					if not resumed then
+						-- restart!
+						self.thread = coroutine.create(self.StepForever)
+						resumed,num = resume(self.thread,self,perframethrot) -- returns num as count of nodes covered. nil if ending.
+					end
+					-- MAYBE not restart, since it ends up reviving dead paths
+					--]]
 					if num then
 						perframethrot = perframethrot-num
 						count=count+num
@@ -2013,7 +2060,6 @@ do
 		end
 
 		function Lib:FindPath(am,af,ax,ay,bm,bf,bx,by, handler, extradata)
-			Lib:Debug("FindPath(...)")
 			--if ax>=1 then ax,ay=ax/100,ay/100 end
 			--if bx>=1 then bx,by=bx/100,by/100 end
 			am,af = ZGV:SanitizeMapFloor(am,af)
@@ -2029,12 +2075,13 @@ do
 			end
 			self.PathFoundHandler = handler
 			self.extradata = extradata
+			wipe(self.nodes['start'])
+			wipe(self.nodes['end'])
 			self:FindLastPath(lbm)
 			--self:FindImpossiblePath()
 		end
 
 		function Lib:FindLastPath()
-			Lib:Debug("FindLastPath")
 			self:ClearPath()
 			self:CheckMaxSpeeds()
 			--[[
@@ -2058,13 +2105,14 @@ do
 				local m,f=ZGV.CurrentMapID,ZGV.CurrentMapFloor
 				lam,laf,lax,lay = playerpos()
 				if not lam or not lax or lam==0 then
+					Lib:Debug("&LibRover FindLastPath current pos unknown, failing")
 					Lib:ReportFail()
 					return
 				end
 				local x,y = Astrolabe:TranslateWorldMapPosition( lam, laf, lax, lay, m, f )
 				if x and y and x>0 and y>0 and x<1 and y<1 then
 					lam,laf,lax,lay=m,f,x,y
-					Lib:Debug("We're actually in %s at %.1f %.1f", GetMapNameByID(lam) or lam,lax*100,lay*100)
+					--Lib:Debug("We're actually in %s at %.1f %.1f", GetMapNameByID(lam) or lam,lax*100,lay*100)
 				end
 			end
 			--end
@@ -2077,7 +2125,7 @@ do
 			--assert(lbf,"missing ending floor")
 			--assert(lbx and lby,"missing ending coord")
 
-			Lib:Debug("Finding from %s/%d %.1f,%.1f to %s/%d %.1f,%.1f", GetMapNameByID(lam) or lam,laf,lax*100,lay*100,GetMapNameByID(lbm) or lbm,lbf,lbx*100,lby*100)
+			Lib:Debug("&LibRover FindLastPath from %s/%d %.1f,%.1f to %s/%d %.1f,%.1f", GetMapNameByID(lam) or lam,laf,lax*100,lay*100,GetMapNameByID(lbm) or lbm,lbf,lbx*100,lby*100)
 
 			self.startnode = {m=lam,f=laf,x=lax,y=lay,type="start",player=fromme, score=0,cost=0,time=0}
 			self.endnode = {m=lbm,f=lbf,x=lbx,y=lby,type="end",extra_title=Lib.extradata and Lib.extradata.title}
@@ -2102,6 +2150,10 @@ do
 
 			AddNode(self.startnode)
 			AddNode(self.endnode)
+
+			if self.extradata.direct then -- let's shoot ourselves in the foot! yeah!
+				self.startnode.n[self.endnode]={mode="walk",cost=-9999999}
+			end
 
 			self.opennodes = {[self.startnode]=1}
 			self.closednodes = {}
@@ -2149,7 +2201,7 @@ do
 			 or map==884 --Brewmoon Festival
 			 or map==900 --Crypt of Forgotten Kings
 			 or map==9999 --Greenstone Village --Don't know these map ids yet.
-			 or map==9999 --Theramore's Fall
+			 or map==906 --Theramore's Fall
 			 then
 							
 				local title=map~=899 and GetMapNameByID(map) or "Arena of Annilhilation" --TODO Localize Area of Annilhilation
@@ -2179,6 +2231,7 @@ do
 			Lib.updating=false
 			Lib.calculating=false
 			Lib.thread=nil
+			lam,laf,lax,lay,lbm,lbf,lbx,lby = nil
 			Lib:Debug("LibRover aborting")
 		end
 
@@ -2269,17 +2322,34 @@ do
 			elseif event=="PLAYER_CONTROL_LOST" then  --getting on a taxi
 				Lib:Debug("We're flying!")
 				ZGunitOnTaxi=true
-				lastupdate=999  -- done in UpdateNow() but just makes sure frame doesn't update first.... It has happened
+				lastupdate=999
 				Lib:UpdateNow()
-			elseif event=="PLAYER_CONTROL_GAINED" then  --getting off a taxi
+			elseif event=="PLAYER_CONTROL_GAINED" or event=="UNIT_EXITING_VEHICLE" then  --getting off a taxi or vehicle
 				Lib:Debug("Got off taxi.")
 				ZGunitOnTaxi=false
 				Lib.delayed_by_taxi=nil
 				SetMapToCurrentZone()  -- EVIL.
 				Lib:UpdateNow()
+			elseif event == "UNIT_ENTERING_VEHICLE"
+			 and UnitVehicleSkin("player")=="INTERFACE\\PLAYERACTIONBARALT\\NATURAL.BLP"
+			 and GetCurrentMapAreaID()==42 then
+			 --[[
+				LibTaxi.LastTaxi = {fullname = "Darkshire Cat 1, Darkshore"}
+				LibTaxi.LastTaxi.node = LibTaxi:FindTaxi("Darkshire Cat 1")
+				if LibTaxi.LastTaxi.node then
+					LibTaxi.LastTaxi.name,LibTaxi.LastTaxi.zone = LibTaxi.LastTaxi.node.name,GetMapNameByID(LibTaxi.LastTaxi.node.m)
+				else
+					LibTaxi.LastTaxi.name,LibTaxi.LastTaxi.zone = LibTaxi.LastTaxi.fullname:match("(.*), (.*)")
+				end--]]
 
+				Lib:Debug("We're flying!(kinda)")
+				ZGunitOnTaxi=true
+				lastupdate=999
+				Lib:UpdateNow()
 			elseif event=="WORLD_MAP_UPDATE" then
-				lastupdate=999  -- soft force update
+				lastupdate = 999  -- soft force update; this happens too often
+			elseif event=="ZONE_CHANGED_NEW_AREA" then
+				Lib:UpdateNow()  -- hard force update
 			elseif event=="TAXIMAP_OPENED" then	-- highlight suggested taxi destination
 
 				local taxiframe = TaxiFrame
@@ -2334,8 +2404,11 @@ do
 		Lib.frame:RegisterEvent("LEARNED_SPELL_IN_TAB")
 		Lib.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
 		Lib.frame:RegisterEvent("PLAYER_CONTROL_LOST")
+		Lib.frame:RegisterEvent("UNIT_EXITING_VEHICLE")
+		Lib.frame:RegisterEvent("UNIT_ENTERING_VEHICLE")
 		Lib.frame:RegisterEvent("TAXIMAP_OPENED")
 		Lib.frame:RegisterEvent("WORLD_MAP_UPDATE")
+		Lib.frame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 		Lib.frame:SetScript("OnEvent", onEvent)
 		Lib.frame:SetScript("OnUpdate", function(frame,elapsed) Lib:OnUpdate(elapsed) end)
 

@@ -24,19 +24,24 @@ ZygorGuidesViewer:RegisterInclude("go_disenchant",[[
 --------------------------------------------------------------------------------------------------------------------------------------
 -- Starting Includes.
 --------------------------------------------------------------------------------------------------------------------------------------
+ZygorGuidesViewer:RegisterInclude ("profession_levelcheck",[[
+		'_Note:_ Your current level is _{intlevel}_. You MUST be at least level _5_ to learn a profession. |only if level<5
+		'Your current skill in %prof1% is \|cffbbff88{skill("%prof1%")}\|r. |only if level>=5 and skill("%prof1%")>0  // and 600>=skill("%prof1%")
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 75 until you're level _10_. |only if level>=5 and level<10
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 150 until you're level _20_. |only if level>=10 and level<20
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 225 until you're level _35_. |only if level>=20 and level<35
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 300 until you're level _50_. |only if level>=35 and level<50
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 375 until you're level _65_. |only if level>=50 and level<65
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 450 until you're level _75_. |only if level>=65 and level<75
+		'_Note:_ Your current level is _{intlevel}_. You won't be able to learn %prof1% past 525 until you're level _85_. |only if level>=75 and level<85
+]])
+
 ZygorGuidesViewer:RegisterInclude ("profession_single_start",[[
 	step 
 		|title + %prof1% 1-600
 		'This guide will instruct you on how to power level the _%prof1%_ profession in the fastest time.
 		// level requirement/cap warning
-		'You MUST be at least level 5 to learn a profession. |only if level<5
-		'Your current skill in %prof1% is \|cffbbff88{skill("%prof1%")}\|r. |only if level>=5 and skill("%prof1%")>0 and 525>=skill("%prof1%")
-		'You won't be able to learn %prof1% past 75 until you're level 10. |only if level>=5 and level<10
-		'You won't be able to learn %prof1% past 150 until you're level 20. |only if level>=10 and level<20
-		'You won't be able to learn %prof1% past 225 until you're level 35. |only if level>=20 and level<35
-		'You won't be able to learn %prof1% past 300 until you're level 50. |only if level>=35 and level<50
-		'You won't be able to learn %prof1% past 375 until you're level 65. |only if level>=50 and level<65
-		'You won't be able to learn %prof1% past 450 until you're level 75. |only if level>=65 and level<75
+		#include "profession_levelcheck",prof1="%prof1%"
 		|confirm
 
 	// make room for %prof1%
@@ -54,14 +59,7 @@ ZygorGuidesViewer:RegisterInclude ("profession_secondary_start",[[
 		|title + %prof1% 1-525
 		'This guide will instruct you on how to power level the _%prof1%_ profession in the fastest time.
 		// level requirement/cap warning
-		'You MUST be at least level 5 to learn a profession. |only if level<5
-		'Your current skill in %prof1% is \|cffbbff88{skill("%prof1%")}\|r. |only if level>=5 and skill("%prof1%")>0 and 525>=skill("%prof1%")
-		'You won't be able to learn %prof1% past 75 until you're level 10. |only if level>=5 and level<10
-		'You won't be able to learn %prof1% past 150 until you're level 20. |only if level>=10 and level<20
-		'You won't be able to learn %prof1% past 225 until you're level 35. |only if level>=20 and level<35
-		'You won't be able to learn %prof1% past 300 until you're level 50. |only if level>=35 and level<50
-		'You won't be able to learn %prof1% past 375 until you're level 65. |only if level>=50 and level<65
-		'You won't be able to learn %prof1% past 450 until you're level 75. |only if level>=65 and level<75
+		#include "profession_levelcheck",prof1="%prof1%"
 		|confirm
 ]])
 
@@ -71,14 +69,8 @@ ZygorGuidesViewer:RegisterInclude("profession_dual_start",[[
 		|title + %prof1% 1-525
 		'This guide will instruct you on how to power level the _%prof1%_ profession in the fastest time.
 		// level requirement/cap warning
-		'You MUST be at least level 5 to learn a profession. |only if level<5
-		'Your current skill in %prof1% is \|cffbbff88{skill("%prof1%")}\|r. |only if level>=5 and skill("%prof1%")>0 and 525>=skill("%prof1%")
-		'You won't be able to learn %prof1% past 75 until you're level 10. |only if level>=5 and level<10
-		'You won't be able to learn %prof1% past 150 until you're level 20. |only if level>=10 and level<20
-		'You won't be able to learn %prof1% past 225 until you're level 35. |only if level>=20 and level<35
-		'You won't be able to learn %prof1% past 300 until you're level 50. |only if level>=35 and level<50
-		'You won't be able to learn %prof1% past 375 until you're level 65. |only if level>=50 and level<65
-		'You won't be able to learn %prof1% past 450 until you're level 75. |only if level>=65 and level<75
+		#include "profession_levelcheck",prof1="%prof1%"
+
 		'You'll be given the choice to use your _%prof2%_ skill to gather necessary ingredients. |only if skill("%prof2%")>0
 		'You'll be given the choice to pick up _%prof2% as your second profession_ to gather necessary ingredients. |only if skill("%prof2%")==0
 		|confirm 
@@ -136,3 +128,6 @@ ZygorGuidesViewer:RegisterInclude("max_skill_warning",[[
 		'Warning! You have maxed your current _%skill%_ rank. Click here to go and learn the next rank. |confirm |next "%goto%" |only if skill("%skill%")==skillmax("%skill%") and skill("%skill%")<525
 ]])
 
+ZygorGuidesViewer:RegisterInclude("cooking_fire",[[
+		.' Stand next to a fire, or create one yourself |cast Cooking fire##818
+]])

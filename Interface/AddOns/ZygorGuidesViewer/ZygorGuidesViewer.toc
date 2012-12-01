@@ -1,4 +1,4 @@
-## Interface: 50001
+## Interface: 50100
 ## Notes: Free multi-purpose leveling guide viewer.|n|nDesigned for use with Zygor Guides, but supporting user-supplied guides as well.
 ## Title: |cffffff88Z|cffffee66y|cffffdd44g|cffffcc22o|cffffbb00r|r Guides Viewer 4
 ## qqqTitle: |cffffff88Z|cffffee66y|cffffdd44g|cffffcc22o|cffffbb00r|r Guides Viewer |TInterface\AddOns\ZygorGuidesViewer\Skins\gnome:48:48:0:0|t

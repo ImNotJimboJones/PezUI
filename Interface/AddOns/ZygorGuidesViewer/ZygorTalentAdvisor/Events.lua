@@ -31,14 +31,16 @@ local function OnEvent(self,event,...)
 	elseif event == "CHARACTER_POINTS_CHANGED" then
 		if ZGV.db.profile.talentpopup==1 then
 			if not PlayerTalentFrame:IsVisible() then 
-				TalentMicroButton:Click() ZTA_TalentToggle() 
+				TalentMicroButton:Click() ZTA:TalentToggle() 
 				
 				end --click the micro button so that it will close on esc correctly.
 		elseif ZGV.db.profile.talentpopup==2 then
-			if not PlayerTalentFrame:IsVisible() then TalentMicroButton:Click() ZTA_TalentToggle() ZygorTalentAdvisorPopout_Show() end
+			if not PlayerTalentFrame:IsVisible() then TalentMicroButton:Click() ZTA:TalentToggle() ZygorTalentAdvisorPopout_Show() end
 		elseif ZGV.db.profile.talentpopup==3 then
 			if not PlayerTalentFrame:IsVisible() then 
 			if #ZTA.needToLearn > 0 then
+				ZTA:GetUserBuild()
+				ZTA:CompareSpec()
 				ZTA:LearnSuggestedTalents(ZTA.needToLearn) end
 				print(L['talentpopup_autolearn']:format(#ZTA.needToLearn,ZTA.currentBuild.title))
 			end

@@ -278,7 +278,7 @@ goto 41.9,63.5
 step
 ding 4
 step
-goto 27.8,74.5
+goto 21.4,64.1
 .' Kill Frostmane Troll Whelps as you walk
 .click Felix's Box##2350
 .get Felix Box##10438 |q 3361/1
@@ -334,9 +334,9 @@ goto 41.9,63.5
 ..turnin 3361
 step
 'Enter the cave |goto Coldridge Valley/9
-'|goto Coldridge Valley/0 51.5,83.2 <5 |n
+'|goto Coldridge Valley/0 52.0,84.8 <5 |n
 step
-goto Coldridge Valley/9 66.7,29.2 
+goto Coldridge Valley/9 66.7,29.2
 .kill Wayward Fire Elemental##37112 |q 218/3
 step
 goto 76.1,30.8
@@ -349,7 +349,7 @@ step
 ding 5
 step
 'Leave the cave |goto Coldridge Valley/0 |c
-'|goto Coldridge Valley/9 14.0,40.7 |n
+'|goto Coldridge Valley/9 12.7,36.9 |n
 step
 goto Coldridge Valley/0 42.7,62.2
 .talk 786
@@ -378,11 +378,11 @@ goto 60.2,16.5
 .click Beer Barrel##32 |tip It's sitting on the ground in the corner.
 .get Coldridge Beer Flagon##49754 |q 24492/1
 step
- goto 61.5,13.2
+goto 61.5,13.2
 .click Wolf-Hide Cloak##286 |tip It's upstairs next to some barrels of explosives.
 .get Ragged Wolf-Hide Cloak##57541 |q 24492/2
 step
- goto 69.9,44.21
+goto 69.9,44.21
 .talk 37113
 ..turnin 24492
 .' You will fly to Kharanos |goto 53.3,49.8,0.5 |noway |c
@@ -599,7 +599,7 @@ goto 41.0,34.9
 only Gnome Warlock
 |modelnpc Training Dummy##44548
 step
-goto 40.1,35.6 
+goto 40.1,35.6
 .talk 63238
 ..accept 31138
 only Gnome Monk
@@ -610,7 +610,7 @@ goto 41.0,34.9
 |modelnpc Training Dummy##44548
 only Gnome Monk
 step
-goto 40.1,35.6 
+goto 40.1,35.6
 .talk 63238
 ..turnin 31138
 only Gnome Monk
@@ -675,18 +675,18 @@ ding 4
 step
 .' Enter the cave |goto 34.1,66.5 <5 |c
 step
-goto 25.9,65.8
+goto New Tinkertown/8 29.6,49.5
 .' Follow the path to the back of the cave
 .kill Boss Bruggor##42773 |q 26318/2
 step
-goto 27.1,64.7
+goto New Tinkertown/8 35.4,40.9
 .click Detonator##9277
 .' Detonate the Trogg Tunnel |q 26318/1
 step
 '|goto 31.9,49.2 |n
 .' Leave the cave |goto 34.1,66.5 <10 |noway |c
 step
-goto 37.3,65.2
+goto New Tinkertown 37.3,65.2
 .talk 42708
 ..turnin 26318
 ..accept 26329
@@ -726,7 +726,7 @@ goto 48.7,52.9
 ..accept 26342
 step
 goto 53.5,45.8
-.' Use your Paintinator on Crushcog Sentry-Bots |use Paintinator##58203 
+.' Use your Paintinator on Crushcog Sentry-Bots |use Paintinator##58203
 .' Blind 5 Crushcog's Sentry-Bots |q 26342/1
 |modelnpc 42291
 step
@@ -895,7 +895,7 @@ only Human Hunter
 step
 goto 35.0,60.7
 .' Use your Steady Shot ability on the Training Dummy
-.' Practice Steady Shot 5 times |q 26917/2
+.' Practice Steady Shot 5 times |q 26917/1
 |modelnpc Training Dummy##44548
 only Human Hunter
 step
@@ -915,7 +915,7 @@ goto 35.0,60.7
 .' Use your Shadow Word: Pain ability on the Training Dummy
 .' Practice Shadow Word: Pain 5 times |q 26919/2
 |modelnpc Training Dummy##44548
- only Human Priest
+only Human Priest
 step
 goto 39.3,43.8
 .talk 375
@@ -1592,14 +1592,14 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingd
 author support@zygorguides.com
 image Elwynn_2
 next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Elwynn Forest (1-10)\\Elwynn Forest (7-10)
-startlevel 5.10
+startlevel 5.05
 dynamic on
 step
-goto Elwynn Forest,45.6,47.7
+goto Northshire 24.2,73.4
 .talk 6774
 ..accept 2158
 step
-goto 41.7,64.6
+goto Elwynn Forest 41.7,64.6
 .talk 42983
 .fpath Goldshire
 step
@@ -1655,18 +1655,16 @@ step
 goto 39.0,82.4 |n
 .' Enter the mine |goto 39.0,82.4,0.5 |noway |c
 step
-goto 39.9,80.0
+goto Elwynn Forest/1 49.9,61.5
 .' Go to this spot inside the mine
 .' Explore the Fargodeep Mine |q 62/1
 step
-goto 38.1,82.9
+goto Elwynn Forest/1 53.8,60.1
 .from Kobold Tunneler##475+, Kobold Miner##40+
 .get 10 Gold Dust |q 47/1
 .get 8 Large Candle |q 60/1
 step
-ding 6
-step
-goto 43.3,65.7
+goto Elwynn Forest 43.3,65.7
 .talk 253
 ..turnin 60
 ..accept 26150
@@ -1712,8 +1710,6 @@ goto 34.5,84.3
 .talk 246
 ..turnin 86
 ..accept 84
-step
-ding 7
 step
 goto 43.1,85.7
 .talk 247
@@ -1775,14 +1771,14 @@ goto Elwynn Forest,42.1,65.9
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Elwynn Forest (1-10)\\Elwynn Forest (7-10)",[[
 author support@zygorguides.com
 image Elwynn_3
-next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-14)
+next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-15)
 startlevel 7.2
 dynamic on
 step
 goto Elwynn Forest,74.0,72.2
 .talk 261
-..turnin 35
-..accept 37
+..turnin 35 |only if havequest(35)
+..accept 37 |only if completedq(35)
 ..accept 52
 step
 goto 74.0,72.3
@@ -1816,6 +1812,7 @@ goto 72.7,60.3
 .click Half-Eaten body##14
 ..turnin 37
 ..accept 45
+|only if completedq(35)
 step
 goto 75.1,56.3
 .from Rogue Wizard##474+
@@ -1825,6 +1822,7 @@ goto 79.8,55.5
 .click Rolf's Corpse##14
 ..turnin 45
 ..accept 71
+|only if completedq(35)
 step
 goto 77.6,59.0
 .from Murloc Lurker##732+, Murloc Forager##46+
@@ -1838,7 +1836,7 @@ goto 80.9,61.5
 .click Bundles of Wood##1248+
 .get 8 Bundle of Wood |q 5545/1
 .' You can find more Prowlers and Young Forest Bears around [Elwynn Forest,87.8,64.7]
-' |from Gray Forest Wolf##1922, Greypaw##44256, Gonzalez##43294 
+' |from Gray Forest Wolf##1922, Greypaw##44256, Gonzalez##43294
 step
 goto 81.4,66.1
 .talk 10616
@@ -1850,8 +1848,8 @@ goto 79.5,68.7
 step
 goto 74.0,72.2
 .talk 261
-..turnin 71
-..accept 59
+..turnin 71 |only if completedq(35)
+..accept 59 |only if completedq(35)
 ..turnin 52
 ..turnin 46
 step
@@ -1862,6 +1860,7 @@ step
 goto 79.5,68.7
 .talk 278
 ..turnin 59
+|only if completedq(35)
 step
 goto 81.8,66.0
 .talk 42256
@@ -1871,11 +1870,11 @@ step
 goto 61.7,53.9 |n
 .' Enter the Jasperlode Mines |goto 61.7,53.9 |noway |c
 step
-goto 60.4,49.8
+goto Elwynn Forest/19 37.7,52.5
 .' Go to this spot inside the mine
 .' Explore the Jasperlode Mine |q 76/1
 step
-goto 42.1,65.9
+goto Elwynn Forest 42.1,65.9
 .talk 240
 ..turnin 76
 ..accept 239
@@ -1911,12 +1910,12 @@ goto 24.2,74.5
 .talk 963
 ..turnin 11
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-14)",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-15)",[[
 author support@zygorguides.com
 image Westfall
 description Westfall borders the Kingdom of Stormwind and is mostly populated by humans not under the Alliance's complete control. The region was stolen right under the Alliance's nose by its own bitter people. Once a rich agricultural center, this land has lain fallow and forgotten since the Second War, but was held by the Defias Brotherhood for a time before the Cataclysm. Stormwind claimed the land as its own, but found little time to be concerned with it, with insufficient funds and might to retake the region. A handful of farmers still tried to keep their land, and some even attempted a tithe to Stormwind every year, but most only grew enough to feed themselves. Bandits and gnolls raided those farms that remained, and Stormwind's resources were stretched too thin to protect the beleaguered populace. The Defias Brotherhood controlled much of the region, focused in the southern area of Moonbrook.
-next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (14-15)
-startlevel 10.7
+next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Redridge Mountains (15-21)\\Redridge Mountains (15-16)
+startlevel 10.5
 dynamic on
 step
 goto Stormwind City 62.9,71.5
@@ -2238,14 +2237,6 @@ step
 goto Westfall,42.6,71.7
 .' Follow the trail of homeless people to leave The Deadmines
 .' Go outside to Westfall |goto Westfall |noway |c
-]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (14-15)",[[
-author support@zygorguides.com
-image Westfall_2
-description Westfall borders the Kingdom of Stormwind and is mostly populated by humans not under the Alliance's complete control. The region was stolen right under the Alliance's nose by its own bitter people. Once a rich agricultural center, this land has lain fallow and forgotten since the Second War, but was held by the Defias Brotherhood for a time before the Cataclysm. Stormwind claimed the land as its own, but found little time to be concerned with it, with insufficient funds and might to retake the region. A handful of farmers still tried to keep their land, and some even attempted a tithe to Stormwind every year, but most only grew enough to feed themselves. Bandits and gnolls raided those farms that remained, and Stormwind's resources were stretched too thin to protect the beleaguered populace. The Defias Brotherhood controlled much of the region, focused in the southern area of Moonbrook.
-next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Redridge Mountains (15-21)\\Redridge Mountains (15-16)
-startlevel 14.4
-dynamic on
 step
 goto Westfall,30.5,85.6
 .talk 392
@@ -2381,8 +2372,6 @@ goto 54.2,51.2
 .talk 1374
 ..turnin 315
 step
-ding 6
-step
 goto 53.7,52.2
 .talk 40950
 ..turnin 25724
@@ -2393,40 +2382,40 @@ goto 53.7,52.1
 .talk 40951
 ..accept 25668
 step
-goto 49.5,52.1 |n
-.' Enter the cave |goto 49.5,52.1,0.5 |noway |c
+goto Dun Morogh 49.4,51.7 |n
+.' Enter the cave |goto Dun Morogh 49.4,51.7 |noway |c
 step
-goto 48.3,47.0
+goto Dun Morogh/7 51.7,48.8
 .click Pilfered Supplies##335
 .talk 40991
 ..' Tell him Captain Tharran wants him to deploy his remote observation bots and withdraw to Kharanos
 .' Convey orders to Mountaineer Dunstan |q 313/1
 step
-goto 49.2,47.8
+goto Dun Morogh/7 60.4,55.9
 .click Pilfered Supplies##335
 .talk 40994
 ..' Tell him Captain Tharran wants him to deploy his remote observation bots and withdraw to Kharanos
 .' Convey orders to Mountaineer Lewin |q 313/2
 step
-goto 49.3,44.3
+goto Dun Morogh/7 61.4,22.6
 .click Pilfered Supplies##335
 .talk 41056
 ..' Tell him Captain Tharran wants him to deploy his remote observation bots and withdraw to Kharanos
 .' Convey orders to Mountaineer Valgrum |q 313/3
 step
-goto 48.3,47.0
+goto Dun Morogh/7 53.8,48.1
 .kill 10 Wendigo |q 25667/1
 .click Pilfered Supplies##335
 .get 6 Pilfered Supplies |q 25668/1
 ' |from Young Wendigo##40940
 step
-goto 49.5,52.1 |n
-.' Leave the cave |goto 49.5,52.1,0.5 |noway |c
+goto Dun Morogh/7 61.0,92.8 |n
+.' Leave the cave |goto Dun Morogh/7 61.0,92.8 |noway |c
 step
-goto 50.5,52.5 |n
-.' Follow the path up |goto 50.5,52.5,0.5 |noway |c
+goto Dun Morogh/0 50.5,52.5 |n
+.' Follow the path up |goto Dun Morogh/0 50.5,52.5,0.5 |noway |c
 step
-goto 53.7,52.1
+goto Dun Morogh/0 53.7,52.1
 .talk 40951
 ..turnin 25668
 step
@@ -2576,10 +2565,10 @@ goto 76.2,53.0
 .talk 50631
 ..accept 25937
 step
-goto 77.7,55.0 |n
-.' Enter the cave |goto 77.7,55.0,0.5 |noway |c
+goto 78.0,54.7 |n
+.' Enter the cave |goto 78.0,54.7 |noway |c
 step
-goto 78.2,53.3
+goto Dun Morogh/11 39.0,82.6
 .kill 8 Rockjaw Skullthumper##1115+ |q 432/1
 .kill 8 Rockjaw Bonesnapper##1117+ |q 432/2
 .click Frozen Artifact##6752+
@@ -2587,8 +2576,8 @@ goto 78.2,53.3
 .' Use Runes of Return on Trapped Miners |use Runes of Return##56222 |tip They look like scared dwarves along the walls inside the cave.
 .' Rescue 7 Trapped Miners |q 433/1
 step
-goto 77.7,55.0 |n
-.' Leave the cave |goto 77.7,55.0,0.5 |noway |c
+goto Dun Morogh 78.0,54.7 |n
+.' Leave the cave |goto Dun Morogh 78.0,54.7 |noway |c
 step
 goto 75.1,55.9 |n
 .' Follow the path up |goto 75.1,55.9,0.5 |noway |c
@@ -4569,7 +4558,7 @@ goto 22.1,42.7
 .talk 342
 ..turnin 26509
 step
- goto 28.4,48.9
+goto 28.4,48.9
 .talk 8965
 ..accept 26508
 step
@@ -5952,7 +5941,7 @@ goto 86.9,44.6
 .' Help Tenjiyu |q 26775/2
 step
 goto 86.9,41.2
-.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path. 
+.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path.
 .' Get a Burning Twig
 .' Use the Light Tiki Fire ability on your hotbar next to the Zul'Gurub Tiki |tip It's a floating wooden mask in front of you, next to the Gurubashi Brazier.
 .' The guards blocking the path will run to put out the burning tiki
@@ -5960,7 +5949,7 @@ goto 86.9,41.2
 .' Skip to the next step in the guide
 step
 goto 86.4,39.3
-.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path. 
+.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path.
 .' Get a Burning Twig
 .' Run down the path and use the Light Tiki Fire ability on your hotbar next to the Zul'Gurub Tiki at [86.1,38.0] |tip It's a floating wooden mask in front of you, next to the Gurubashi Brazier.  You will need to use your Dash ability on your hotbar to get to the tiki in time, before you lose your Burning Twig.
 .' The guards blocking the path will run to put out the burning tiki
@@ -5968,7 +5957,7 @@ goto 86.4,39.3
 .' Skip to the next step in the guide
 step
 goto 85.3,37.7
-.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path. 
+.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path.
 .' Get a Burning Twig
 .' Run down the path and use the Light Tiki Fire ability on your hotbar next to the Zul'Gurub Tiki at [83.9,38.3] |tip It's a floating wooden mask in front of you, next to the Gurubashi Brazier.  You will need to use your Dash ability on your hotbar to get to the tiki in time, before you lose your Burning Twig.
 .' The guards blocking the path will run to put out the burning tiki
@@ -5981,7 +5970,7 @@ goto 82.8,37.5
 .' Speak with Chiyu |q 26775/3
 step
 goto 82.5,33.9
-.' Click the Giant Skullpile |tip It looks like a big pile of skulls sitting in this small troll hut. 
+.' Click the Giant Skullpile |tip It looks like a big pile of skulls sitting in this small troll hut.
 .' Walk onto the bridge to 81.7,34.0
 .' Use your Drop Skull ability to put the skull on the bridge
 .' The troll will trip on the skull and fall off the bridge
@@ -5989,7 +5978,7 @@ goto 82.5,33.9
 .' Skip to the next step in the guide
 step
 goto 79.9,34.2
-.' Click the Giant Skullpile |tip It looks like a big pile of skulls sitting in this small troll hut. 
+.' Click the Giant Skullpile |tip It looks like a big pile of skulls sitting in this small troll hut.
 .' Walk onto the bridge to 79.0,33.5
 .' Use your Drop Skull ability to put the skull on the bridge
 .' The troll will trip on the skull and fall off the bridge
@@ -5997,7 +5986,7 @@ goto 79.9,34.2
 .' Skip to the next step in the guide
 step
 goto 74.3,31.2
-.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path. 
+.' Click the Gurubashi Brazier |tip It's a square metal container with fire in it on the ground in the middle of the path.
 .' Get a Burning Twig
 .' Use the Light Tiki Fire ability on your hotbar next to the Zul'Gurub Tiki at [74.7,32.0] |tip It's a floating wooden mask in front of you, next to the Gurubashi Brazier.  You will need to use your Dash ability on your hotbar to get to the tiki in time, before you lose your Burning Twig.
 .' The guards blocking the path will run to put out the burning tiki
@@ -7048,7 +7037,7 @@ goto 48.3,31.9
 ..turnin 27011
 ..turnin 27012
 step
- goto 43.2,15.9
+goto 43.2,15.9
 .talk 45157
 ..accept 27156
 step
@@ -7057,7 +7046,7 @@ goto 43.0,16.3
 ..' Tell them Lieutenant Myner asked you to challenge them to a duel
 .' Challenge and Defeat 7 Hearthglen Trainees |q 27156/1
 step
- goto 43.2,15.9
+goto 43.2,15.9
 .talk 45157
 ..turnin 27156
 ..accept 27157
@@ -7085,7 +7074,7 @@ step
 goto 45.8,12.1 |n
 .' Leave the mine |goto 45.8,12.1,0.5 |noway |c
 step
- goto 43.2,15.9
+goto 43.2,15.9
 .talk 45157
 ..turnin 27157
 step
@@ -7100,11 +7089,6 @@ goto 57.7,36.1
 .' Click the Quest Complete box that displays on the right side of the screen under your minimap
 ..turnin 27152
 ..accept 27153
-step
-goto 50.6,52.6
-.talk 44458
-..turnin 26957
-..accept 27017
 step
 goto 43.7,17.3
 .talk 45150
@@ -7142,6 +7126,11 @@ step
 goto 42.0,14.8
 .talk 44441
 ..turnin 27155
+step
+goto 50.6,52.6
+.talk 44458
+..turnin 26957
+..accept 27017
 step
 goto 49.3,55.0
 .talk 44454
@@ -7561,7 +7550,7 @@ goto 52.9,53.1
 step
 goto 53.0,53.1
 .clicknpc Fiona's Caravan##45400
-.' Complete the Argus' Journal quest |tip This will give you a 2% experience bonus while in Eastern Plaguelands, so will allow you to level faster. 
+.' Complete the Argus' Journal quest |tip This will give you a 2% experience bonus while in Eastern Plaguelands, so will allow you to level faster.
 |confirm
 step
 goto 53.2,54.6
@@ -7813,7 +7802,7 @@ goto 75.6,52.0
 .talk 11036
 ..turnin 27620
 step
- goto Eastern Plaguelands,75.8,52.4
+goto Eastern Plaguelands,75.8,52.4
 .talk 45729
 ..accept 27466
 step
@@ -9108,6 +9097,15 @@ goto 45.6,46.3
 ..' Take 1 Spool of Thread
 .' Click to proceed. |confirm
 only NightElf
+step
+goto 45.6,46.3
+.click Tailor's Table##7209
+..' Investigate the hides.
+..' Take 4 Hides
+..' Take 1 Handfuls of Mud
+..' Take 3 Spool of Thread
+.' Click to proceed. |confirm
+only Pandaran
 step
 goto 45.5,46.4
 .talk 48001
@@ -10870,7 +10868,7 @@ goto 49.9,37.4
 ..turnin 9293
 ..accept 9294
 step
-goto 79.7,48.2
+goto 52.0,41.1
 .talk 16501
 ..accept 26966
 only Draenei Paladin
@@ -10880,12 +10878,12 @@ goto 51.0,37.1
 |modelnpc Training Dummy##44548
 only Draenei Paladin
 step
-goto 79.7,48.2
+goto 52.0,41.1
 .talk 16501
 ..turnin 26966
 only Draenei Paladin
 step
-goto 79.3,49.1
+goto 50.3,43.1
 .talk 17089
 ..accept 26969
 only Draenei Shaman
@@ -10896,7 +10894,7 @@ goto 51.0,37.1
 |modelnpc Training Dummy##44548
 only Draenei Shaman
 step
-goto 79.3,49.1
+goto 50.3,43.1
 .talk 17089
 ..turnin 26969
 only Draenei Shaman
@@ -10912,66 +10910,66 @@ goto 52.5,41.2
 ..turnin 26970
 only Draenei Priest
 step
-goto 79.6,48.8
+goto 50.9,42.3
 .talk 16500
 ..accept 26968
 only Draenei Mage
 step
-goto 51.0,37.1
+goto 51.3,36.5
 .' Use your Frost Nova ability on the Training Dummy
 .' Practice Frost Nova 2 times |q 26968/2
 |modelnpc Training Dummy##44548
 only Draenei Mage
 step
-goto 79.6,48.8
+goto 50.9,42.3
 .talk 16500
 ..turnin 26968
 only Draenei Mage
 step
-goto 79.9,49.7
+goto 51.5,44.3
 .talk 16499
 ..accept 26963
 only Draenei Hunter
 step
-goto 79.8,45.8
+goto 51.3,36.5
 .' Use your Steady Shot ability on the Training Dummy
 .' Practice Steady Shot 5 times |q 26963/2
 |modelnpc Training Dummy##44548
 only Draenei Hunter
 step
-goto 79.9,49.7
+goto 51.5,44.3
 .talk 16499
 ..turnin 26963
 only Draenei Hunter
 step
-goto 79.6,49.5
+goto 50.9,43.7
 .talk 16503
 ..accept 26958
 only Draenei Warrior
 step
-goto 79.7,45.9
+goto 51.3,36.5
 .' Use your Charge ability on a Training Dummy
 .' Practice Charge |q 26958/2
 |modelnpc Training Dummy##44548
 only Draenei Warrior
 step
-goto 79.6,49.5
+goto 50.9,43.7
 .talk 16503
 ..turnin 26958
 only Draenei Warrior
 step
-goto 35.9,28.0
+goto 50.6,48.4
 .talk 63335
 ..accept 31173
 only Draenei Monk
 step
-goto 79.7,45.9
+goto 51.3,36.5
 .' Use your Tiger Palm ability on a Training Dummy
 .' Practice Tiger Palm |q 31173/2
 |modelnpc Training Dummy##44548
 only Draenei Monk
 step
-goto 35.9,28.0
+goto 50.6,48.4
 .talk 63335
 ..turnin 31173
 only Draenei Monk
@@ -11331,17 +11329,17 @@ goto Azuremyst Isle,28.5,66.4
 .click Bristlelimb Cage##1787
 .' Free 8 Stillpine Captives |q 9544/1
 step
-goto Azuremyst Isle,27.0,76.7 |n
-.' Enter the cave |goto Azuremyst Isle,27.0,76.7,0.3 |noway |c
+goto Azuremyst Isle 26.9,76.3 |n
+.' Enter the cave |goto Azuremyst Isle 26.9,76.3 |noway |c
 step
-goto Azuremyst Isle,25.2,74.2
+goto Azuremyst Isle/2 40.9,67.1
 .' Follow the path to the bottom of the cave
 .kill Warlord Sriss'tiz##17298 |q 9515/1
 step
-goto Azuremyst Isle,27.0,76.7 |n
-.' Leave the cave |goto Azuremyst Isle,27.0,76.7,0.3 |noway |c
+goto Azuremyst Isle/2 59.7,88.5 |n
+.' Leave the cave |goto Azuremyst Isle/2 59.7,88.5 |noway |c
 step
-goto Azuremyst Isle,16.6,94.5
+goto Azuremyst Isle 16.6,94.5
 .talk 17311
 ..turnin 10428
 ..accept 9527
@@ -11839,7 +11837,7 @@ goto Bloodmyst Isle,55.4,55.3
 ..turnin 9699
 ..accept 9700
 step
- goto 44.9,56.0
+goto 44.9,56.0
 .kill 10 Royal Blue Flutterer##17350+ |q 9647/1
 .' You can find more:
 .' Around [Bloodmyst Isle,44.5,50.4]
@@ -11847,8 +11845,8 @@ step
 step
 goto 52.5,22.3
 .' Go to this spot
-.' Confirm the Sun Portal Site |q 9700/1
-.kill 5 Void Anomaly##17550+ |q 9700/2
+.' Confirm the Sun Portal Site |q 9700/2
+.kill 5 Void Anomaly##17550+ |q 9700/1
 step
 goto 42.1,21.2
 .talk 17421
@@ -12238,7 +12236,7 @@ goto 47.4,59.7
 ..accept 26940
 only NightElf Mage
 step
-goto 47.4,59.7
+goto 48.6,66.2
 .' Use Frost Nova on the Training Dummy
 .' Practice Frost Nova 2 times |q 26940/2
 |modelnpc Training Dummy##44548
@@ -12256,7 +12254,7 @@ goto 49.2,52.4
 ..accept 26945
 only NightElf Warrior
 step
-goto 47.4,59.7
+goto 48.6,66.2
 .' Use Charge on the Training Dummy
 .' Practice Charge |q 26945/2
 |modelnpc Training Dummy##44548
@@ -12274,13 +12272,13 @@ goto 49.2,60.6
 ..accept 26947
 only NightElf Hunter
 step
-goto 47.4,59.7
+goto 48.6,66.2
 .' Use Steady Shot on the Training Dummies
 .' Practice Steady Shot 5 times |q 26947/2
 |modelnpc Training Dummy##44548
 only NightElf Hunter
 step
- goto 49.2,60.6
+goto 49.2,60.6
 .talk 3596
 ..turnin 26947
 ..accept 28723
@@ -12292,7 +12290,7 @@ goto 49.2,53.2
 ..accept 26946
 only NightElf Rogue
 step
-goto 47.4,59.7
+goto 48.6,66.2
 .' Use Sinister Strike on the Training Dummy to build up combo points and then Eviscerate.
 .' Practice Eviscerate 3 times |q 26946/2
 |modelnpc Training Dummy##44548
@@ -12310,7 +12308,7 @@ goto 47.6,59.5
 ..accept 26949
 only NightElf Priest
 step
-goto 47.9,58.9
+goto 48.6,66.2
 .' Use Shadow Word: Pain on the Training Dummy
 .' Practice Shadow Word: Pain 5 times |q 26949/2
 |modelnpc Training Dummy##44548
@@ -12328,7 +12326,7 @@ goto 46.6,56.7
 ..accept 26948
 only NightElf Druid
 step
-goto 47.9,58.9
+goto 48.6,66.2
 .' Use your Moonfire ability spell on the Training Dummy
 .' Practice Moonfire |q 26948/2
 |modelnpc Training Dummy##44548
@@ -12346,7 +12344,7 @@ goto 48.7,52.5
 ..accept 31169
 only NightElf Monk
 step
-goto 47.4,59.7
+goto 48.6,66.2
 .' Use Tiger Palm on the Training Dummy
 .' Practice Tiger Palm |q 31169/2
 |modelnpc Training Dummy##44548
@@ -12378,7 +12376,7 @@ goto 38.8,29.8
 ..turnin 28725
 ..accept 28726
 step
-goto 39.7,14.6
+goto Teldrassil/2 46.3,46.3
 .kill 12 Webwood Spider##1986+ |q 28726/1
 step
 ding 4
@@ -12388,7 +12386,7 @@ step
 ..turnin 28726
 ..accept 28727
 step
-goto 38.7,9.5
+goto Teldrassil/2 44.9,28.1
 .kill Githyiss the Vile##1994+ |q 28727/1
 step
 'Next to you:
@@ -12396,7 +12394,7 @@ step
 ..turnin 28727
 ..accept 28728
 step
-goto 42.5,50.6
+goto Shadowglen/0 42.5,50.2
 .talk 49479
 ..turnin 28728
 ..accept 28729
@@ -12521,25 +12519,23 @@ goto 55.5,50.0
 .talk 3567
 ..turnin 2459
 step
-ding 7
-step
 goto 53.6,47.2 |n
 .' Follow this small path to the cave |goto 53.6,47.2,0.5 |noway |c
 step
 goto 54.5,46.0 |n
 .' Enter the cave |goto 54.5,46.0,0.5 |noway |c
 step
-goto 52.9,43.9
+goto Teldrassil/3 15.8,52.4
 .' Follow the path to the right
 .from Lord Melenas##2038
 .get Melenas' Head |q 932/1
-.' Use your Ireroot Seeds on Shadow Sprites |use Ireroot Seeds##46716
+.' Use your Ireroot Seeds on Sprites in this cave |use Ireroot Seeds##46716
 .' Kill 12 Fel Rock Grellkin with Ireroot Seeds |q 13946/1
 step
-goto 54.5,46.0 |n
-.' Leave the cave |goto 54.5,46.0,0.5 |noway |c
+goto Teldrassil 54.5,46.0 |n
+.' Leave the cave |goto Teldrassil 54.5,46.0 |noway |c
 step
-goto 55.8,50.5
+goto Teldrassil 55.8,50.5
 .talk 2083
 ..turnin 13946
 step
@@ -12551,7 +12547,7 @@ goto Teldrassil,55.6,51.7
 .talk 34761
 .' Tell her that you're ready to depart for Ban'ethil Barrow Den. |goto 45.7,50.5 |noway |c
 step
-goto 45.0,53.5
+goto Teldrassil/4 42.3,83.0
 .talk 7317
 ..accept 2541
 step
@@ -12599,12 +12595,12 @@ step
 ..turnin 2541
 ..accept 2561
 step
-goto 45.7,52.8
+goto Teldrassil/4 57.9,65.3
 .from Rageclaw##7318 |tip He's through the doors in the room immediately next to you and Oben Rageclaw.  Just walk up to the door, even though it is locked, it will automatically open for you.
 .' Use your Voodoo Charm on Rageclaw's corpse |use Voodoo Charm##8149
 .' Release Oben Rageclaw's Spirit |q 2561/1
 step
-goto 45.0,53.5
+goto Teldrassil/4 42.3,83.0
 .talk 7317
 ..turnin 2561
 step
@@ -12612,9 +12608,7 @@ step
 .kill 20 Ban'ethil Gnarlpine |q 13945/1
 ' |from Gnarlpine Defender##2010+, Gnarlpine Shaman##009+, Gnarlpine Shaman##2009+, Gnarlpine Augur##2011+,
 step
-ding 8
-step
-goto 55.7,52.0
+goto Teldrassil 55.7,52.0
 .talk 2078
 ..turnin 483
 ..accept 486
@@ -20490,7 +20484,7 @@ goto 78.4,62
 ..accept 9716
 step
 goto 80.1,73.3
-.kill Boglash##18281 |q 9895/1 |tip I found Boglash here. He is a tall alien looking thing with really long legs. He walks around in the water, so some searching may be necessary.
+.kill Boglash##18281 |q 9895/1 |tip He walks around this whole area in the water, so some searching may be necessary.
 step
 goto 85.3,90.9
 .kill Kataru##18080 |q 9747/1 |tip In the big building, all the way at the top.
@@ -20562,10 +20556,6 @@ goto 79.1,65.3
 .talk 17858
 ..turnin 9728
 step
-goto 80.4,64.7
-.talk 18070
-..accept 9785
-step
 goto 78.5,63.1
 .talk 17834
 ..accept 9697
@@ -20583,6 +20573,10 @@ goto 78.4,62
 .talk 17841
 ..turnin 9718
 ..accept 9720
+step
+goto 80.4,64.7
+.talk 18070
+..accept 9785
 step
 goto 78.1,63.8
 .talk 17901 |tip He patrols around town so you may need to search for him
@@ -20818,8 +20812,6 @@ goto 23.3,66.2
 ..accept 9702
 step
 goto 27,63.3
-//.click Discarded Nutriment##6940 
-//.click Discarded Nutriment##6941 
 .click Discarded Nutriment##3993
 .get 10 Discarded Nutriment##24233 |q 9702/1
 step
@@ -20940,7 +20932,7 @@ goto 17.3,38.4
 .get 6 Marshlight Bleeder Venom|q 9830/1
 .' You'll be able to find more around [Zangarmarsh,19.6,33.3]
 step
- .' The path to Ango'Rosh Grounds starts here |goto 17.1,13.4 <5 |noway |c
+.' The path to Ango'Rosh Grounds starts here |goto 17.1,13.4 <5 |noway |c
 step
 goto 18.3,7.7
 .kill 1 Overlord Gorefist##18160 |q 9839/1 |tip Follow the path up the hill. Overlord Gorefist is inside the small house on the left.
@@ -21324,7 +21316,7 @@ goto 31,76.1
 .talk 22446
 ..accept 10913
 step
- goto 31.1,76.2
+goto 31.1,76.2
 .talk 22458
 ..accept 10922
 ..'Escort the Archaeologists |q 10922/1
@@ -22199,7 +22191,7 @@ goto 37.1,70.5
 .kill 12 Grovestalker Lynx##21022+ |q 10455/1
 step
 goto 34.3,77.4
- .from Lashh'an Talonite##19943+, Lashh'an Wing Guard##19944+, Lashh'an Windwalker##19945+, Lashh'an Matriarch##20113+
+.from Lashh'an Talonite##19943+, Lashh'an Wing Guard##19944+, Lashh'an Windwalker##19945+, Lashh'an Matriarch##20113+
 .get 18 Plucked Lashh'an Feather |q 10555/1
 step
 goto 34.3,77.4
@@ -23755,7 +23747,7 @@ goto 32.1,64.2
 only if rep ('The Aldor') >= Neutral
 step
 goto 39.1,28.9
- .from Gan'arg Mekgineer##16949+
+.from Gan'arg Mekgineer##16949+
 ..collect 5 Condensed Nether Gas##31653 |q 10855
 step
 goto 38.0,25.5
@@ -24161,7 +24153,7 @@ goto 37.1,43.9
 step
 ding 69
 step
- goto 42.2,45.1
+goto 42.2,45.1
 .talk 21024
 ..turnin 10680
 ..accept 10458
@@ -24344,8 +24336,8 @@ goto 34.6,39.9
 .' Reclaim Flanis's pack
 .get Flanis Pack |q 10583/1
 step
- goto 39.5,39.4 |n
- .' Jump down here |goto 39.7,39.6 <5 |c
+goto 39.5,39.4 |n
+.' Jump down here |goto 39.7,39.6 <5 |c
 step
 goto 37.7,38.3
 .' Use your Elemental Displacer on Summoner Skartax |use Elemental Displacer##30672 |modelnpc Summoner Skartax##21207+
@@ -24355,7 +24347,7 @@ step
 goto 40.4,39.4 |n
 .' Leave the Deathforge |goto 40.4,39.4,0.5 |noway |c
 step
- goto 40.5,41.3
+goto 40.5,41.3
 .talk 21471
 ..turnin 10583
 ..turnin 10585
@@ -29802,7 +29794,7 @@ step
 goto 72.6,39.0
 .' Use Gavrock's Runebreaker on Runed Giants |use Gavrock's Runebreaker##36796 |modelnpc Runed Giant##26417+
 .' Free 4 Runed Giants |q 12099/1
-.info This spell does not always work. If it fails, you can retry on the same giant while it's attacking you.
+.' This spell does not always work. If it fails, you can retry on the same giant while it's attacking you.
 step
 goto 79.8,33.6
 .talk 26420
@@ -30705,7 +30697,7 @@ step
 goto 62.9,70.6
 .click Har'koan Relic##7356
 .get 10 Har'koan Relic |q 12635/1
- .from Cursed Offspring of Har'koa##28404+
+.from Cursed Offspring of Har'koa##28404+
 .' Use your Whisker of Har'koa on their corpses |use Whisker of Har'koa##38676
 .' Resurrect 7 Cursed Offsprings of Har'koa |q 12632/1
 step
@@ -30973,13 +30965,6 @@ step
 goto 59.5,58.1
 .talk 28479
 ..turnin 12721
-step
-goto Dalaran 68.6,42
-.talk 28160
-..accept 12521
-step
-.talk 28160
-.' Tell him you are ready to fly to Sholazar Basin
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Northrend 70-80\\Sholazar Basin (77-78)",[[
 author support@zygorguides.com
@@ -30987,6 +30972,13 @@ image Sholazar
 next Zygor's Alliance Leveling Guides\\Northrend 70-80\\The Storm Peaks (78-80)
 startlevel 77.35
 dynamic on
+step
+goto Dalaran 68.6,42
+.talk 28160
+..accept 12521
+step
+.talk 28160
+.' Tell him you are ready to fly to Sholazar Basin
 step
 goto Sholazar Basin,39.7,58.7
 .talk 27987
@@ -31394,7 +31386,7 @@ step
 goto 55.7,64.9
 .talk 28217
 ..' Pull it to its feet
-.kill the crocodile that spawns|n 
+.kill the crocodile that spawns|n
 .' Locate the Injured Rainspeaker Oracle |goal Locate Injured Rainspeaker Oracle |q 12540/1
 step
 goto 55.7,64.9
@@ -33158,7 +33150,7 @@ goto 62.6,51.3
 ..turnin 13341
 ..accept 13309
 step
- goto Icecrown,62.5,51.1
+goto Icecrown,62.5,51.1
 .talk 31737
 ..accept 13284
 step
@@ -34409,8 +34401,7 @@ author support@zygorguides.com
 condition end achieved(4903)
 startlevel 00.00
 dynamic on
-leechsteps "Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-14)"
-leechsteps "Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (14-15)"
+leechsteps "Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Westfall (10-15)\\Westfall (10-15)"
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Loremaster Guides\\Eastern Kingdoms 1-60\\Wetlands",[[
 author support@zygorguides.com
@@ -34516,6 +34507,9 @@ leechsteps "Zygor's Alliance Leveling Guides\\Kalimdor 1-60\\Desolace (33-37)\\D
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Loremaster Guides\\Kalimdor 1-60\\Dustwallow Marsh",[[
 author support@zygorguides.com
 condition end achieved(4929)
+step
+'If you have completed the scenario, "Theramore's Fall," then you will have to visit Zidormi at [Dustwallow Marsh 55.9,49.6] to travel back to Theramore's past.
+|confirm
 #include "Dustwallow_Marsh"
 step
 goto Dustwallow Marsh,68.2,48.6
@@ -34772,7 +34766,7 @@ goto 13.6,39.1
 step
 goto 16.0,51.6
 .talk 19294
- ..turnin 10351
+..turnin 10351
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Loremaster Guides\\Outland 60-70\\Zangarmarsh",[[
 author support@zygorguides.com
@@ -35641,7 +35635,7 @@ step
 goto 66.6,20.1
 ..kill Fingrom##20757 |q 10805/4
 step
- goto 65.3,21.5
+goto 65.3,21.5
 ..kill 10 Bladespire Enforcer##19997+ |q 10805/1
 ..kill 5 Bladespire Battlemage##19996+ |q 10805/2
 ..kill 5 Bladespire Ravager##20729+ |q 10805/3
@@ -36237,7 +36231,7 @@ goto 58.3,70.8
 .talk 21797
 ..turnin 10634
 step
- goto 52.5,57.3
+goto 52.5,57.3
 .' Equip the Spectrecles in your bags |equipped Spectrecles##30721 |use Spectrecles##30721
 .' Starting from this bridge, follow the main road clockwise around Shadowmoon Valley
 .from Ghostrider of Karabor##21784 |tip You will only be able to see them if you have your Spectrecles equipped.
@@ -37048,9 +37042,8 @@ goto 48.9,52.8
 ..turnin 14222
 step
 ding 5
-// OUT OF GILNEAS CITY
 step
-goto Gilneas 36.4,61.3 
+goto Gilneas 36.4,61.3
 .talk 36332
 ..accept 14375 |instant
 step
@@ -37090,7 +37083,7 @@ ding 6
 step
 goto 34.1,68.0
 .kill 10 Forsaken Invader##34511 |q 14347/1
-.' Click Black Gunpowder Kegs				//.click object is not found
+.' Click Black Gunpowder Kegs
 .collect Black Gunpowder Keg##49202 |n
 .' Use the Black Gunpowder Kegs on Horrid Abominations |use Black Gunpowder Keg##49202
 .' Throw Gunpowder Kegs at 4 Horrid Abominations |q 14348/1
@@ -37138,7 +37131,7 @@ goto 25.1,72.3
 .invehicle |clicknpc Forsaken Catapult##36283 |q 14382
 step
 goto 25.0,74.7
-.' Use the Launch ability on your hotbar to launch yourself onto the deck of the Forsaken ship at [26.9,79.5]
+.' Use the Launch ability on your hotbar to launch yourself onto the deck of the Forsaken ship at [24.6,76.0]
 .kill Captain Anson##36397 |q 14382/1 |tip He is on the bottom level of the ship, one layer down, towards the back.
 step
 goto 25.1,72.3
@@ -37276,7 +37269,7 @@ step
 goto 36.7,85.8
 .kill 6 Forsaken Castaway##36488 |q 14412/1
 step
- goto 36.9,84.2
+goto 36.9,84.2
 .talk 36456
 ..turnin 14404
 ..turnin 14412
@@ -37288,22 +37281,22 @@ goto 37.6,65.2
 ..accept 14465
 .' You will ride a horse to Greymane Manor |invehicle |c
 step
-goto 28.1,50.0
+goto Gilneas/2 62.1,49.6
 .talk 36606
 ..turnin 14465
 ..accept 14466
 step
-goto 26.4,46.9
+goto Gilneas/3 42.7,20.6
 .' Follow the stairs up.
 .talk 36743
 ..turnin 14466
 ..accept 14467 |instant
 step
-goto 26.4,46.9
+goto Gilneas/3 42.7,20.6
 .talk 36743
 ..accept 24438
 step
-goto 29.0,54.2
+goto Gilneas/0 29.0,54.2
 .clicknpc Stagecoach Carriage##44928
 .' Ride in the Stagecoach Carriage |invehicle |c |q 24438
 step
@@ -37509,7 +37502,7 @@ step
 goto 76.4,31.2 |n
 .' Enter the mine |goto 76.4,31.2,0.5 |noway |c
 step
-goto 80.4,32.3
+Gilneas/1 54.5,82.8
 .' Follow the path in the mine
 .' Kill Forsaken Slavedrivers to get Slaver's Keys and click Ball and Chains to free Enslaved Villagers |tip They are attached to the Enslaved Villagers' legs, who are mining rocks around this area.
 .kill Brothogg the Slavemaster##37802 |q 24674/1
@@ -37524,10 +37517,10 @@ goto 75.3,31.6
 step
 ding 11
 step
-goto 76.4,31.2 |n
-.' Leave the mine |goto 76.4,31.2,0.5 |noway |c
+goto Gilneas/1 28.6,69.5 |n
+.' Leave the mine |goto Gilneas/1 28.6,69.5 |c
 step
-goto 70.9,39.8
+goto Gilneas/0 70.9,39.8
 .talk 37783
 ..turnin 24575
 step

@@ -8,7 +8,6 @@ image JadeForest
 next Zygor's Horde Leveling Guides\\Pandaria 85-90\\Valley of the Four Winds (86-87)
 startlevel 85
 dynamic on
-// THE NEW STUFF ADDED IN THE LATEST PATCH IS CURRENTLY MISSING SEVERAL CORRECT NPC NAMES.
 step
 goto Orgrimmar 49.8,75.3
 ..accept 29612
@@ -36,12 +35,12 @@ goto The Jade Forest 30.8,10.2
 step
 .' Follow the steps down here. |goto 31.4,11.3 <5 |c
 step
-.clicknpc Gunship Turret##67032
+.clicknpc Gunship Turret##67032 |tip It's on the lower level of the ship.
 |invehicle
 step
 .' Use your abilities on your action bar.
 .kill 80 Thunder Hold Troops |q 31765/1
-.kill 9 Thunder Hold Cannons |q 31765/2 
+.kill 9 Thunder Hold Cannons |q 31765/2
 |modelnpc 66203
 |modelnpc 66348
 |modelnpc 66506
@@ -52,9 +51,9 @@ goto 31.0,11.0
 ..turnin 31765
 ..accept 31766
 step
-  goto 31.5,11.1
-  .click Rappelling Rope##7548
-  .' Rappel into Honeydew Glade |q 31766/1
+goto 31.5,11.1
+.click Rappelling Rope##7548
+.' Rappel into Honeydew Glade |q 31766/1
 step
 goto 31.6,11.3
 .talk 55135
@@ -63,7 +62,7 @@ goto 31.6,11.3
 ..accept 31768
 step
 goto 32.8,6.6
-.kill Thunder Hold Troops |q 31767/1
+.kill 15 Thunder Hold Troops |q 31767/1
 .' Find Thunder Hold Munitions and use Nazgrim's Flare Gun to destroy them. |use Nazgrim's Flare Gun##89605
 .' Thunder Hold Munitions destroyed |q 31768/1
 '|modeldisplay 44984
@@ -76,7 +75,7 @@ step
 goto 34.8,10.6
 .talk 66646
 ..turnin 31768
-..turnin 31767  
+..turnin 31767
 ..accept 31769
 step
 goto 34.0,10.0
@@ -125,13 +124,12 @@ goto 30.5,7.2
 .talk 55146
 .' Tell him to quit messing around.
 .' Rivett Clutchpop Rescued |q 29694/2
-step=
+step
 goto 29.4,8.5
 .talk 55170
 .' Tell her to get on her feet!
 .' Shokia Rescued |q 29694/4
 step
-// NEED DISPLAY ID FOR HONEYBREW
 goto 29.2,9.0
 .kill 10 Sha-Infested Prowler##66668 |q 31773/1
 .click Barrel of Honeybrew |q 31772/1
@@ -178,26 +176,26 @@ goto 30.9,17.5
 ..accept 29743
 step
 goto 30.1,21.3
-.click Ancient Statue Arm//##11369 
+.click Ancient Statue Arm
 .' Choose the create a sketch option.
 .' Statue Arm Sketched |q 29743/2
 step
 goto 30.0,22.3
-.click Ancient Statue Head//##11370
+.click Ancient Statue Head
 .' Choose the create a sketch option.
 .' Statue Head Sketched |q 29743/4
 step
 goto 28.5,22.1
-.click Ancient Statue Shoulder//##11375
+.click Ancient Statue Shoulder
 .' Choose the create a sketch option.
 .' Statue Shoulder Sketched |q 29743/3
 step
 goto 29.4,18.9
-.click Ancient Statue Torso//##11374
+.click Ancient Statue Torso
 .' Choose the create a sketch option.
 .' Statue Torso Sketched |q 29743/1
 step
-.' Click the Auto complete quest box:
+.' Click the Auto complete quest box that appears below your minimap:
 ..turnin 29743
 step
 goto 28.6,18.1
@@ -223,7 +221,7 @@ goto 31.7,21.9
 ..turnin 29804
 ..accept 31775
 ..accept 31776
-step 
+step
 goto The Jade Forest 31.4,21.8
 .talk 65998
 ..accept 31778
@@ -236,7 +234,7 @@ goto 30.3,24.2
 ..kill Master Engineer Cogswing and Gyro-Mechanic Lavenderp |q 31776/1
 |modelnpc 65882
 |modelnpc 65883
-step 
+step
 goto 29.7,23.7
 .kill Morgus Grimhatchet##65880 |q 31776/2
 .' He walks around the area.
@@ -258,17 +256,17 @@ goto 28.3,24.6
 step
 goto 31.1,21.6
 .talk 55521
-..turnin 31777		
+..turnin 31777
 step
 goto 31.4,21.8
 .talk 65998
 ..turnin 31778
-step 
+step
 goto 31.6,21.9
 .talk 66656
 ..turnin 31775
 ..turnin 31776
-  ..accept 31779
+..accept 31779
 step
 .' Cross the bridge here. |goto 27.3,25.1 |c
 step
@@ -371,7 +369,7 @@ goto 30.6,34.1
 .click Stone Monolith
 .' Third Stone Monolith Translated |q 31134/3
 step
- goto 30.8,34.0
+goto 30.8,34.0
 .talk 63217
 ..turnin 31134
 ..accept 31152
@@ -480,7 +478,7 @@ step
 goto The Jade Forest 28.3,47.8
 .talk 56339
 ..turnin 29941
-step 
+step
 goto The Jade Forest 28.3,47.8
 .talk 56406
 ..accept 29937
@@ -513,7 +511,7 @@ goto 26.7,55.4
 .from Muck Snapper##56447+
 .get 4 Snapper Steak##76420+ |q 29942/1
 .' Stand on the Deck and throw Gut Bombs in the water |use Gut Bomb##76262
-.click Dead Deepriver Slicky//##209877
+.click Dead Deepriver Slicky
 .get 5 Exploded Slicky##76260 |q 29939/1
 step
 goto The Jade Forest 27.0,50.8
@@ -565,7 +563,7 @@ step
 goto 28.6,47.5
 .talk 55646
 ..turnin 29731
-step 
+step
 goto The Jade Forest 28.6,47.4
 .talk 55648
 ..accept 29823
@@ -595,17 +593,17 @@ step
 goto The Jade Forest 28.7,47.5
 .talk 56339
 ..accept 29943
-step 
+step
 goto The Jade Forest 30.8,52.3
 .talk 56406
 ..accept 29968
-step 
+step
 goto The Jade Forest 31.6,52.5
 .kill 8 Alliance Infiltrator##56303+ |q 29943/1
 .click Green Branch
 .get 7 Green Branch##76333 |q 29968/1
 step
-'Standing next to you 
+'Standing next to you
 .talk 56490
 ..turnin 29943
 ..accept 29966
@@ -654,7 +652,7 @@ goto The Jade Forest 47.1,46.1
 step
 goto The Jade Forest 47.0,46.0
 .talk 59173 |q 31230/3
-step 
+step
 goto The Jade Forest 48.5,44.5
 .talk 59160 |q 31230/1
 step
@@ -672,7 +670,7 @@ step
 goto The Jade Forest 46.6,46.2
 .talk 55234
 ..accept 29716
-step 
+step
 goto The Jade Forest 46.4,45.8
 .talk 56062
 ..accept 29865
@@ -818,7 +816,7 @@ step
 ..accept 29747
 step
 goto The Jade Forest 48.6,20.5
-.clicknpc Shattered Simulacrum//##55472
+.clicknpc Shattered Simulacrum
 ..accept 29748
 step
 goto The Jade Forest 48.1,18.1
@@ -843,17 +841,29 @@ goto The Jade Forest 44.2,15.0
 ..accept 29751
 ..accept 29752
 step
-  goto 42.2,17.1
+goto 42.2,17.1
 .click Pungent Ritual Candle##209701
 .get Pungent Ritual Candle##74761+ |q 29751/3
+.' While doing this:
+.from Shan'ze Spiritclaw##55291+
+.get 8 Spirit Bottle##74763+ |q 29750/1 |n
+.' Use the Staff of Pei-Zhi on Wayward Ancestors |use Staff of Pei-Zhi##74771
 step
-  goto 42.7,15.8
+goto 42.7,15.8
 .click Jade Cong##209699
 .get Jade Cong##74762 |q 29751/1
+.' While doing this:
+.from Shan'ze Spiritclaw##55291+
+.get 8 Spirit Bottle##74763+ |q 29750/1 |n
+.' Use the Staff of Pei-Zhi on Wayward Ancestors |use Staff of Pei-Zhi##74771
 step
 goto The Jade Forest 41.6,14.4
 .click Chipped Ritual Bowl##209700
 .get Chipped Ritual Bowl##74760 |q 29751/2
+.' While doing this:
+.from Shan'ze Spiritclaw##55291+
+.get 8 Spirit Bottle##74763+ |q 29750/1 |n
+.' Use the Staff of Pei-Zhi on Wayward Ancestors |use Staff of Pei-Zhi##74771
 step
 goto The Jade Forest 41.0,14.7
 .from Shan'ze Spiritclaw##55291+
@@ -896,11 +906,16 @@ step
 goto The Jade Forest 43.6,12.8
 .talk 59492
 ..turnin 29755
-// Tian Monastery
+step
+'Follow the path here |goto 38.0,18.2 |c
+step
+'Follow the path here |goto 38.2,24.1 |c
+step
+.' Follow this path into the Tian Monastery. |goto 41.5,25.0 |c
 step
 goto 43.6,24.5
 .talk 59736
-.fpath Banquet Grounds
+.fpath Tian Monastery
 step
 goto 45.0,24.9
 .talk 54913
@@ -1065,7 +1080,6 @@ step
 goto 42.7,23.2
 .talk 54914
 ..turnin 29646
-// Mine Quests
 step
 goto The Jade Forest 46.1,29.1 |n
 .' Enter the mine |goto The Jade Forest 46.1,29.1 <5 |c
@@ -1230,7 +1244,7 @@ goto The Jade Forest 28.0,47.2
 ..turnin 30499
 ..accept 30466
 ..accept 30484
-step 
+step
 goto 28.1,47.4
 .click Bucket of Slickies |q 30466/2
 step
@@ -1267,6 +1281,10 @@ step
 goto The Jade Forest 28.2,46.7 |n
 .talk 64207
 .' Tell him you are ready to leave |goto The Jade Forest 44.6,67.2 <5 |c
+step
+goto 43.1,68.5
+.talk 64310
+.fpath Serpent's Overlook
 step
 goto The Jade Forest 44.5,66.9
 .' Use Ka Pao's Meditation Candle |use Ka Pao's Meditation Candle##80071
@@ -1329,11 +1347,12 @@ goto The Jade Forest 49.3,61.4
 .talk 59899
 ..accept 30648
 step
-goto The Jade Forest 49.3,61.4
+goto 49.3,61.4
 .talk 59899
-.' Tell her that you are ready to leave
-.' You will travel to the Valley of the Four Winds
-'Click the Complete Quest box that displays on the right side of the screen under your minimap
+.' Tell her that you're ready to leave.
+.' Travel to the Valley of the Four Winds |q 30648/1
+step
+.' Click the Quest complete box located at the top right of your screen.
 ..turnin 30648
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Pandaria 85-90\\Valley of the Four Winds (86-87)",[[
@@ -1863,8 +1882,8 @@ goto Valley of the Four Winds 44.2,34.3
 .talk 57401
 ..turnin 30054
 step
-goto Valley of the Four Winds 44.6,34.1
-.talk 57402
+goto Valley of the Four Winds 44.3,34.2
+.talk 62385
 ..turnin 30057
 step
 goto Valley of the Four Winds 38.6,51.7
@@ -1952,7 +1971,7 @@ goto Valley of the Four Winds 54.7,67.7
 .get 8 Sack of Grain##77033 |q 30028/1
 step
 goto 51.3,77.4
-.click Rappeling Rope 
+.click Rappeling Rope
 .' Use the Cliff Harness. |q 30032/1
 step
 goto 53.6,76.4 |n
@@ -2288,7 +2307,7 @@ goto 16.1,82.6
 step
 goto 19.1,77.4
 .from Bulgeback Tortoise##58431
-.get Intact Tortoise Shell##79059 |q 30185/1
+.get 5 Intact Tortoise Shell##79059 |q 30185/1
 step
 goto Valley of the Four Winds 19.9,75.7
 .talk 58422
@@ -2389,7 +2408,7 @@ goto Krasarang Wilds 75.3,11.8
 .click Slick Murdfish
 .get 4 Slick Mudfish##78877 |q 30081/2
 .click Rain-Slick Honeycomb |tip They are found on the sides of tree trunks around this area
-.get Chunk of Honeycomb##78881 |q 30081/3
+.get 4 Chunk of Honeycomb##78881+ |q 30081/3
 .' You can find more of all of these items at [72.5,9.8]
 step
 goto Krasarang Wilds 75.8,7.6
@@ -2699,7 +2718,6 @@ step
 goto Krasarang Wilds 28.8,50.6
 .talk 56112
 ..accept 30230
-// Marista
 step
 #include "Marista_Hub"
 step
@@ -2715,7 +2733,7 @@ startlevel 87.5
 dynamic on
 step
 goto Valley of the Four Winds 70.1,23.5
-.talk 62738 
+.talk 62738
 .' Speak with the Highroad Grummle |q 31255/1
 step
 goto The Veiled Stair 56.7,75.7
@@ -2806,7 +2824,6 @@ goto 71.6,93.1
 .talk 59442
 ..turnin 30511
 ..accept 30513
-// Binan Village
 step
 goto 74.8,88.8
 .talk 59263
@@ -3080,7 +3097,7 @@ goto 62.5,80.4
 .talk 59442
 ..turnin 30655
 ..turnin 30661
-..accept 31455
+..accept 31453
 step
 goto 62.3,79.6
 .talk 63535
@@ -3110,7 +3127,7 @@ goto Kun-Lai Summit/9 64.3,60.4
 step
 goto Kun-Lai Summit/9 64.3,60.4
 .clicknpc Tuffi##61874
-.' Ride Tuffi |invehicle 
+.' Ride Tuffi |invehicle
 step
 goto Kun-Lai Summit 70.0,72.8
 'Click the Quest Discovered box that displays on the right side of the screen under your minimap
@@ -3242,7 +3259,7 @@ step
 .click Stolen Supplies
 .get 12 Stolen Supplies##80315 |q 30618/1
 step
-'Hearth to The Lucky Traveller |goto 57.4,60.0 <5 |use Hearthstone##6948 |noway |c
+'Hearth to The Lucky Traveller |goto Kun-Lai Summit 57.4,60.0 <10 |use Hearthstone##6948 |noway |c
 step
 goto 57.3,60.2
 .talk 59716
@@ -3255,7 +3272,6 @@ step
 goto 57.7,61.7
 .talk 59695
 ..turnin 30618
-// Valley of Emperors and Zouchin Village
 step
 goto 57.2,61.2
 .talk 59696
@@ -3617,7 +3633,6 @@ step
 goto 62.3,29.0
 .talk 63784
 ..turnin 31228
-// Kota Basecamp
 step
 goto 58.1,61.5
 .talk 59701
@@ -3645,7 +3660,7 @@ goto 48.0,73.2
 .from Mo Mo##59805
 .get Rabbitsfoot's Luckydo##81137 |q 30603/1
 step
-goto 52.0,67.2
+goto Kun-Lai Summit 52.0,67.2
 .talk 59452
 ..turnin 30602
 ..turnin 30603
@@ -3687,7 +3702,7 @@ goto Kun-Lai Summit 52.7,70.5
 .kill 6 Broketooth Tosser##59416+ |q 30604/2
 .kill 8 Broketooth Charger##59414+ |q 30604/1
 step
-goto 52.0,67.3
+goto Kun-Lai Summit 52.0,67.3
 .talk 59452
 ..turnin 30599
 ..turnin 30600
@@ -3728,7 +3743,7 @@ goto Kun-Lai Summit 52.0,67.2
 ..turnin 30608
 ..accept 30610
 step
-goto 52.0,67.2
+goto Kun-Lai Summit 52.0,67.2
 .talk 59452
 ..turnin 30606
 ..accept 30611
@@ -3751,7 +3766,7 @@ goto 46.0,63.1
 .' Wait for Tassle to enrage Chomp Chomp |q 30612/1
 .kill The Ook of Dook##60188 |q 30612/2 |tip When he throws bananas just dodge them until he runs back to you.
 step
-goto 52.0,67.3
+goto Kun-Lai Summit 52.0,67.3
 .talk 59452
 .turnin 30612
 step
@@ -3853,11 +3868,10 @@ step
 goto Vale of Eternal Blossoms 56.8,43.4
 .talk 59905
 ..turnin 31511
-// Shado-Pan Fallback
 step
 goto Kun-Lai Summit 44.5,89.9
 .talk 60161
-..turnin 31455
+..turnin 31453
 ..accept 30670
 ..accept 30665
 step
@@ -3908,7 +3922,6 @@ goto 44.5,89.9
 .talk 60161
 ..turnin 30690
 ..accept 30699
-// Winter's Blossom
 step
 goto 35.0,59.4
 .talk 61816
@@ -4135,7 +4148,6 @@ goto 71.0,56.6
 .talk 60687
 ..turnin 30776
 ..accept 30777
-// Lower Sumprushes
 step
 goto 68.0,67.7
 .talk 60857
@@ -4215,7 +4227,6 @@ step
 goto 76.2,72.9
 .talk 60622
 ..turnin 30793
-// Hatred's Vice + Gao-Ran + Dusklight Hollow + Rensai's Watchpost + Sik'Vess
 step
 goto 82.7,73.0
 .talk 61261
@@ -4232,7 +4243,7 @@ goto 82.6,73.0
 ..accept 30780
 step
 'While you are doing the following steps make sure you complete the following:
-.kill 12 Ashfang Hyena##60932+ |q 30779/1 |n
+.kill 8 Ashfang Hyena##60932+ |q 30779/1 |n
 .click Palewind Totem
 .get 9 Palewind Totem##81355 |q 30780/1 |n
 .' Use your Shado-Pan Torch to burn Palewind Villagers |use Shado-Pan Torch##81356
@@ -4668,7 +4679,6 @@ goto 53.9,78.1
 .talk 62278
 ..turnin 31687
 ..turnin 31688
-//Shado-Pan Garrison
 step
 goto 50.1,72.0
 .talk 62909
@@ -4747,7 +4757,6 @@ goto 39.3,62.2
 .talk 61581
 ..turnin 30924
 ..accept 30925
-// Fields of Niuzao, Bluesaddle and Bag-of-Rocks
 step
 goto 39.2,62.0
 .talk 61161
@@ -4796,7 +4805,6 @@ step
 goto 35.4,56.6
 .talk 61161
 ..turnin 30930
-//Niuzao Temple Resume
 step
 goto 43.2,48.7
 .from Sra'thik Guard##61518+, Sra'thik Supplier##61516+
@@ -4821,7 +4829,7 @@ goto 39.4,62.0
 .talk 61584
 ..accept 30927
 step
-goto 32.8,61.1
+goto 32.8,61.1 |n
 .' Find the catacombs |q 30926/1
 step
 goto Townlong Steppes/13 50.1,26.0
@@ -4837,8 +4845,6 @@ step
 .clicknpc Fear-Stricken Sentinel##62276+
 .' Give peace to 10 Fear-Stricken Sentinels |q 30927/1
 step
-'Exit the catacombs |goto Townlong Steppes/13 18.6,68.5 <5 |c
-step
 goto Townlong Steppes 39.4,61.9
 .talk 61584
 ..turnin 30927
@@ -4851,8 +4857,8 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Pandaria 85-90\\
 author support@zygorguides.com
 image DreadWastes
 startlevel 89
+endlevel 90
 dynamic on
-// Serpent's Spine. New Start?
 step
 goto Vale of Eternal Blossoms 14.1,77.2
 .talk 62112
@@ -4898,14 +4904,13 @@ step
 goto 66.7,29.5
 .kill 6 Vengeful Gurthani Spirit |q 31676/1
 .from Sapfly##62386+
-.get 100 Sapfly Bits##83075 |q 31005/1	
+.get 100 Sapfly Bits##83075 |q 31005/1
 step
 goto 70.2,25.7
 .talk 62202
 ..turnin 31005
 ..turnin 31676
 ..accept 31006
-// Klaxxi'vess
 step
 goto 70.2,25.7
 .talk 62202
@@ -4942,7 +4947,7 @@ goto 40.0,39.0
 .' Use the Klaxxi Resonating Crystal on the Inactive Sonic Relay. |use Klaxxi Resonating Crystal##83276
 .' Sonic Relay activated |q 31009/1
 step
- 		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+'Click the Complete Quest box that displays on the right side of the screen under your minimap
 ..turnin 31009
 ..accept 31010
 step
@@ -5141,7 +5146,7 @@ goto 41.7,63.6
 .kill Oracle Hiss'ir##63998 |q 31359/1
 .' He patrols around The Briny Muck.
 step
- goto 41.9,63.7
+goto 41.9,63.7
 .click Glowing Amber
 ..accept 31398
 step
@@ -5170,7 +5175,6 @@ step
 goto 55.0,35.9
 .talk 62538
 ..accept 31730
-//Sunset Brewgarden
 step
 goto 51.2,11.4
 .talk 62666
@@ -5342,7 +5346,6 @@ goto 51.2,11.4
 .talk 62666
 ..turnin 31073
 ..accept 31075
-//Rikkitun Village
 step
 goto 38.2,17.2
 .talk 62666
@@ -5443,7 +5446,6 @@ step
 goto 50.3,12.1
 .talk 62666
 ..turnin 31086
-//Soggy's Gamble
 step
 goto 56.1,70.2
 .talk 63498
@@ -5598,7 +5600,7 @@ goto 54.8,34.1
 .talk 64815
 ..accept 31605
 step
-'Swim underwater and enter this cave |goto 25.7,53.9 <5 |c 
+'Swim underwater and enter this cave |goto 25.7,53.9 <5 |c
 step
 goto 25.7,50.4
 .click Ancient Amber Chunk
@@ -5609,9 +5611,9 @@ goto 25.7,50.3
 ..turnin 31175
 ..accept 31176
 ..accept 31177
-..accept 31178 
+..accept 31178
 step
-'Leave the cave |goto 25.7,53.9 <5 |c 
+'Leave the cave |goto 25.7,53.9 <5 |c
 step
 goto 26.3,58.8
 .from Dread Remora##63353
@@ -5621,13 +5623,13 @@ goto 26.3,58.8
 .click Spiny Starfish
 .get 12 Starfish Meat |q 31176/1
 step
-'Enter this cave |goto 25.7,53.9 <5 |c 
+'Enter this cave |goto 25.7,53.9 <5 |c
 step
 goto 25.7,50.3
 .talk 63071
 ..turnin 31176
 ..turnin 31177
-..turnin 31178 
+..turnin 31178
 ..accept 31179
 step
 goto 25.7,50.3
@@ -5635,7 +5637,7 @@ goto 25.7,50.3
 .kill 12 Muckscale Flesheater##63465+ |q 31179/2
 .kill Muckscale Serpentus##63466 |q 31179/2
 step
-'Leave the cave |goto 25.7,53.9 <5 |c 
+'Leave the cave |goto 25.7,53.9 <5 |c
 step
 goto 31.8,88.9
 .talk 65253
@@ -5653,11 +5655,14 @@ step
 goto 55.0,35.9
 .talk 62538
 ..turnin 31179
-//Klaxxi'vess Dream Amber
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-86\\The Jade Forest",[[
+author support@zygorguides.com
 image JadeForest
-// Nectarbreeze Orchard
+condition end achieved(6534)
+step
+'You must complete The Jade Forest Leveling Guide before completing this guide section.
+.'Click here to continue. |confirm
 step
 goto The Jade Forest 43.5,75.9
 .talk 54697
@@ -5715,43 +5720,134 @@ goto 41.0,74.0
 ..turnin 29587
 ..turnin 29670
 ]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\Valley of the Four Winds",[[
+author support@zygorguides.com
+image ValleyOfTheFourWinds
+condition end achieved(6301)
+leechsteps "Zygor's Horde Leveling Guides\\Pandaria 85-90\\Valley of the Four Winds (86-87)"
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\Krasarang Wilds",[[
+author support@zygorguides.com
+image KrasarangWilds
+condition end achieved(6536)
+leechsteps "Zygor's Horde Leveling Guides\\Pandaria 85-90\\Krasarang Wilds (87)"
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\Kun-Lai Summit",[[
+author support@zygorguides.com
+image KunLai
+condition end achieved(6538)
+leechsteps "Zygor's Horde Leveling Guides\\Pandaria 85-90\\Kun-Lai Summit (87-88)"
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\Townlong Steppes",[[
+author support@zygorguides.com
+image TownlongSteppes
+condition end achieved(6539)
+leechsteps "Zygor's Horde Leveling Guides\\Pandaria 85-90\\Townlong Steppes (88-89)"
+]])
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\Dread Wastes",[[
+author support@zygorguides.com
+image DreadWastes
+condition end achieved(6540)
+leechsteps "Zygor's Horde Leveling Guides\\Pandaria 85-90\\Dread Wastes (89-90)"
+]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Daily",[[
 description This guide will walk you through the Monk daily for extra experience.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 1
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31840) and level>=20
+condition suggested raceclass('Monk') and not completedq(31840) or not completedq(31841) or not completedq(31842) or not completedq(31843) or not completedq(31844) or not completedq(31845) or not completedq(31846) and level>=1
 condition end completedq(31840)
-dynamic on 
+dynamic on
 step
 'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
 .' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31856
 step
 goto 48.6,42.7
 .talk 66260
-..accept 31840
+..accept 31840 |daily |or
+..accept 31841 |daily |or
+..accept 31842 |daily |or
+..accept 31843 |daily |or
+..accept 31844 |daily |or
+..accept 31845 |daily |or
+..accept 31846 |daily |or
 step
 goto 47.1,40.1
-.talk 722
+.talk 66138
 ..' Tell him you wish to challenge him
 .' Follow him to the center of the area and fight him
-.from Master Cheng##602
+.from Master Cheng##66138
 .' Complete Master Cheng's Training |q 31840/1
+|only if havequest(31840)
+step
+goto 48.6,39.6
+.talk 65960
+..' Tell her you wish to challenge her
+.' Follow her to the center of the area and fight her
+.from Master Woo##65960
+.' Complete Master Cheng's Training |q 31841/1
+|only if havequest(31841)
+step
+goto 48.0,40.2
+.talk 65899
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Kistane##65899
+.' Complete Master Kistane's Training |q 31842/1
+|only if havequest(31842)
+step
+goto 48.0,40.2
+.talk 66073
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Yoon##66073
+.' Complete Master Yoon's Training |q 31843/1
+|only if havequest(31843)
+step
+goto 47.1,40.1
+.talk 66138
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Cheng##66138
+.' Complete Master Cheng's Training |q 31844/1
+|only if havequest(31844)
+step
+goto 47.1,40.1
+.talk 66149
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Tsang##66149
+.' Complete Master Tsang's Training |q 31845/1
+|only if havequest(31845)
+step
+goto 47.1,40.1
+.talk 65977
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Hsu##65977
+.' Complete Master Hsu's Training |q 31846/1
+|only if havequest(31846)
 step
 goto 48.6,42.7
 .talk 66260
-..turnin 31840
+..turnin 31840 |or
+..turnin 31841 |or
+..turnin 31842 |or
+..turnin 31843 |or
+..turnin 31844 |or
+..turnin 31845 |or
+..turnin 31846 |or
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 20",[[
 description This guide will walk you through the Monk daily for extra experience.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 20
 condition invalid not raceclass('Monk') !!Monk only.
 condition suggested raceclass('Monk') and not completedq(31834) and level>=20
 condition end completedq(31834)
-dynamic on 
+dynamic on
 step
 'Upon reaching level 20 as a Monk, you will automatically accept a class quest:
 ..accept 31856
@@ -5790,84 +5886,296 @@ goto 48.6,42.7
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 30",[[
 description This guide will walk you through the Monk quest at level 30.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 30
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=30
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31833) and level>=30
+condition end completedq(31833)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 30 as a Monk, you will automatically accept a class quest:
+..accept 31855
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31855
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31855
+..accept 31833
+step
+goto 48.6,39.6
+.talk 65960
+..' Tell her you wish to challenge her
+.' Follow her to the center of the area and fight her
+.from Master Woo##65960
+.' Complete Master Woo's Training |q 31833/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31833
+..accept 31841
+step
+goto 48.6,39.6
+.talk 65960
+..' Tell her you wish to challenge her
+.' Follow her to the center of the area and fight her
+.from Master Woo##65960
+.' Complete Master Cheng's Training |q 31841/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31841
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 40",[[
 description This guide will walk you through the Monk quest at level 40.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 40
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=40
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31835) and level>=40
+condition end completedq(31835)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 40 as a Monk, you will automatically accept a class quest:
+..accept 31857
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31857
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31857
+..accept 31835
+step
+goto 48.0,40.2
+.talk 65899
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Kistane##65899
+.' Complete Master Kistane's Training |q 31835/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31835
+..accept 31842
+step
+goto 48.0,40.2
+.talk 65899
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Kistane##65899
+.' Complete Master Kistane's Training |q 31842/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31842
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 50",[[
 description This guide will walk you through the Monk quest at level 50.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 50
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=50
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31836) and level>=50
+condition end completedq(31836)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 50 as a Monk, you will automatically accept a class quest:
+..accept 31858
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31858
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31858
+..accept 31836
+step
+goto 48.0,40.2
+.talk 66073
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Yoon##66073
+.' Complete Master Yoon's Training |q 31836/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31836
+..accept 31843
+step
+goto 48.0,40.2
+.talk 66073
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Yoon##66073
+.' Complete Master Yoon's Training |q 31843/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31843
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 60",[[
 description This guide will walk you through the Monk quest at level 60.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 60
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=60
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31837) and level>=60
+condition end completedq(31837)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 60 as a Monk, you will automatically accept a class quest:
+..accept 31859
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31859
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31859
+..accept 31837
+step
+goto 47.1,40.1
+.talk 66138
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Cheng##66138
+.' Complete Master Cheng's Training |q 31837/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31837
+..accept 31844
+step
+goto 47.1,40.1
+.talk 66138
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Cheng##66138
+.' Complete Master Cheng's Training |q 31844/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31844
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 70",[[
 description This guide will walk you through the Monk quest at level 70.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 70
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=70
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31838) and level>=70
+condition end completedq(31838)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 70 as a Monk, you will automatically accept a class quest:
+..accept 31860
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31860
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31860
+..accept 31838
+step
+goto 47.1,40.1
+.talk 66149
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Tsang##66149
+.' Complete Master Tsang's Training |q 31838/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31838
+..accept 31845
+step
+goto 47.1,40.1
+.talk 66149
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Tsang##66149
+.' Complete Master Tsang's Training |q 31845/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31845
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 80",[[
 description This guide will walk you through the Monk quest at level 80.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 80
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=80
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31861) and level>=80
+condition end completedq(31861)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 80 as a Monk, you will automatically accept a class quest:
+..accept 31861
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31861
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31861
+..accept 31839
+step
+goto 47.1,40.1
+.talk 65977
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Hsu##65977
+.' Complete Master Hsu's Training |q 31839/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31839
+..accept 31846
+step
+goto 47.1,40.1
+.talk 65977
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Hsu##65977
+.' Complete Master Hsu's Training |q 31846/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31846
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Peak of Serenity\\Monk Quest 90",[[
 description This guide will walk you through the Monk quest at level 90.
 author support@zygorguides.com
-image Serenity_Peak 
+image Serenity_Peak
 monkquest 90
 condition invalid not raceclass('Monk') !!Monk only.
-condition suggested raceclass('Monk') and not completedq(31834) and level>=90
-condition end completedq(31834)
-dynamic on 
+condition suggested raceclass('Monk') and not completedq(31844) and level>=90
+condition end completedq(31844)
+dynamic on
 step
-'We will get this guide out as soon as we can.
+'Upon reaching level 90 as a Monk, you will automatically accept a class quest:
+..accept 31889
+step
+'Use your Zen Pilgrimage ability |cast Zen Pilgrimage##126892
+.' Travel to the Peak of Serenity |goto Kun-Lai Summit 48.6,42.9 |noway |c |q 31889
+step
+goto Kun-Lai Summit 48.6,42.7
+.talk 66260
+..turnin 31889
+..accept 31844
+step
+goto 47.1,40.1
+.talk 66260
+..' Tell him you wish to challenge him
+.' Follow him to the center of the area and fight him
+.from Master Hight##66260
+.' Complete Master Hight's Training |q 31844/1
+step
+goto 48.6,42.7
+.talk 66260
+..turnin 31844
 ]])

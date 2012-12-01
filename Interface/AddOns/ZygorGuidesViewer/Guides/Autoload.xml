@@ -68,9 +68,10 @@
 		<Script file="Dungeons\ZygorDungeonHordeMOP.lua"/>
 		<Script file="Dungeons\ZygorDungeonHordeMOPTrial.lua"/>
 		
-		<Script file="Dungeons\ZygorDungeonScenariosMOP_MASTER.lua"/>
-		<Script file="Dungeons\ZygorDungeonScenariosMOP.lua"/>
-		<Script file="Dungeons\ZygorDungeonScenariosMOPTrial.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAlliance_MoP_MASTER.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosAlliance_MoP.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHorde_MoP_MASTER.lua"/>
+		<Script file="Dungeons\ZygorDungeonScenariosHorde_MoP.lua"/>
 
 		<Script file="Dungeons\ZygorGearHorde_MASTER.lua"/>
 		<Script file="Dungeons\ZygorGearHorde.lua"/>
@@ -83,6 +84,7 @@
 	<!-- PROFESSIONS -->
 		<!-- CATA -->
 		<Script file='Professions\ZygorProfessionsCommon.lua'/> <!-- Everyone gets this -->
+		<Script file='Professions\ZygorProfessionsCommonMOP.lua'/> <!-- Everyone on MOP gets this -->
 
 		<Script file="Professions\ZygorProfessionsAllianceCATA_MASTER.lua"/>
 		<Script file="Professions\ZygorProfessionsAllianceCATA.lua"/>

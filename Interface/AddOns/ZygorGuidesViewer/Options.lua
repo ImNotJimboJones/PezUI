@@ -170,7 +170,7 @@ function ZGV:Options_DefineOptionTables()
 		AddOption('debugflag',{
 			hidden = true,
 			type = 'execute',
-			func = function(inp) inp = inp.input:sub(#inp[1]+2)  self.db.profile.debug_flags[inp] = not self.db.profile.debug_flags[inp]  ZGV:Print("Debug flag "..inp.." is now "..(self.db.profile.debug_flags[inp] and "ON" or "OFF"))  end,
+			func = function(inp) inp = inp.input:sub(#inp[1]+2)  local f=self.db.profile.debug_flags[inp]  if f==nil then f=true end  self.db.profile.debug_flags[inp] = not f  ZGV:Print("Debug flag "..inp.." is now "..(self.db.profile.debug_flags[inp] and "ON" or "OFF"))  end,
 		})
 
 		AddOption('detectpet',{
@@ -325,14 +325,15 @@ function ZGV:Options_DefineOptionTables()
 
 		AddOptionSep()
 
+		--[[
 		AddOption('guidesinhistory',{
 			type = 'range',
 			min = 3, max = 15, step = 1, bigStep = 1,
 			set = function(i,v) Setter_Simple(i,v)  while (#self.db.char.guides_history>v) do tremove(self.db.char.guides_history) end   end,
 			_default = 5,
 		})
-
 		AddOptionSep()
+		--]]
 
 		AddOption('resetwindow',{
 			type = 'execute',
@@ -809,7 +810,6 @@ function ZGV:Options_DefineOptionTables()
 		--AddOption('',{ type="header", name=L["opt_map_extras"] })
 
 		AddOption('minimapzoom',{ type = 'toggle', width = "full", set = function(i,v) Setter_Simple(i,v)  self.Pointer:MinimapZoomChanged() end, _default = false, })
-
 	end
 
 	AddOptionGroup("travelsystem","Travelsystem","zgtravelsystem")
@@ -857,7 +857,7 @@ function ZGV:Options_DefineOptionTables()
 				type = 'select',
 				disabled = function() return self.db.profile.waypointaddon~="internal" and self.db.profile.waypointaddon~="tomtom" end,
 				values={ [0]=L["opt_antspacing_0"], [50]=L["opt_antspacing_yd"]:format(50), [100]=L["opt_antspacing_yd_def"]:format(100), [200]=L["opt_antspacing_yd"]:format(200), [300]=L["opt_antspacing_yd"]:format(300) },
-				set = function(i,v) Setter_Simple(i,v)  self.Waypoints:SetAntSpacing(v) self:SetWaypoint() end,
+				set = function(i,v) Setter_Simple(i,v)  self.Pointer:SetAntSpacing(v) self:SetWaypoint() end,
 			})
 			
 			AddOptionSep()
@@ -1039,12 +1039,10 @@ function ZGV:Options_DefineOptionTables()
 	AddOptionGroup("conv","Conv","zgconv")
 	do
 		AddSubgroup('autoquest',{width='triple'})
-			AddOption('autoaccept',{ type = 'toggle' })
-			AddOption('autoturnin',{ type = 'toggle' })
-			AddOptionSep()
-			AddOption('',{type="description",width="single"})
-			AddOption('autoselectitem',{ type = 'toggle', disabled = function() return not self.db.profile.autoturnin end})
-			AddOptionSep()
+			AddOption('autoaccept',{ type = 'toggle', name=function() return L['opt_autoaccept'..(ZGV.db.profile.autoacceptturninall and "_all" or "")] end, desc=function() return L['opt_autoaccept_desc'] end, })
+			AddOption('autoturnin',{ type = 'toggle', name=function() return L['opt_autoturnin'..(ZGV.db.profile.autoacceptturninall and "_all" or "")] end, desc=function() return L['opt_autoturnin_desc'] end, })
+			--AddOptionSep()
+			--[[
 			local function make_accept_turnin_mnemonic()
 				local s=""
 				if ZGV.db.profile.autoaccept then s="accept" end
@@ -1058,6 +1056,17 @@ function ZGV:Options_DefineOptionTables()
 				width="full",
 				disabled=function() return not self.db.profile.autoaccept and not self.db.profile.autoturnin end
 			})
+			--]]
+			AddOption('autoacceptturninall',{
+				name=L['opt_autoacceptturninall_'],
+				desc=L['opt_autoacceptturninall__desc'],
+				type = 'toggle',
+			})
+			AddOptionSep()
+			AddOption('autoacceptshowobjective',{ type = 'toggle', width="full", disabled=function() return not self.db.profile.autoaccept end })
+			AddOptionSep()
+			AddOption('questitemselector',{ type = 'toggle', width="full"})
+			AddOption('autoselectitem',{ type = 'toggle', disabled = function() return not (self.db.profile.autoturnin and self.db.profile.questitemselector) end, width="full"})
 			AddOptionSep()
 			AddOption('fixblizzardautoaccept',{ type = 'toggle', width = "full", })
 		EndSubgroup()
@@ -1066,24 +1075,25 @@ function ZGV:Options_DefineOptionTables()
 		--	AddOption('',{type="description",name=L['opt_item_desc']})
 
 		AddSubgroup('vendor',{width='double'})
-			AddOption('showgrayvalue',{type = 'toggle', set = function(i,v) Setter_Simple(i,v)  ZGV.Loot:ToggleFrame() end})
+			AddOption('showgreyvalue',{type = 'toggle', set = function(i,v) Setter_Simple(i,v)  ZGV.Loot:ToggleFrame() end})
 			AddOption('autobuy',{ type = 'toggle'})
 			AddOptionSep()
 			AddOption('autosell',{ type = 'toggle'})
 			AddOption('autobuyframe',{ type='toggle', disabled=function() return not self.db.profile.autobuy end})
-			AddOption('showgraysellbutton',{ type = 'toggle', width="full", _default=true})
+			AddOption('showgreysellbutton',{ type = 'toggle', width="full", _default=true})
 		EndSubgroup()
 
 		AddSubgroup('gear',{width='double'})
-			AddOption('autogear',{ type = 'toggle',width="full"})
-			AddOption('autogearframe',{ type='toggle', width="full"})
+			AddOption('autogear',{ type = 'toggle',width="full", _default=true, set = function(i,v) Setter_Simple(i,v)  ZGV.ItemScore.AutoEquip:Toggle() end})
+			AddOption('autogearframe',{ type='toggle', width="full", _default=true, disabled=function() return not self.db.profile.autogear end})
 			AddOption('clearnotupgrades',{
 				type = 'execute',
 				func=function ()
-					ZGV.db.profile.notUpgrades = {}
-					ZGV:Print("Cleared the items that were not upgrades previously.")
+					wipe(ZGV.db.profile.badupgrade[GetSpecialization() or 1])
+					ZGV:Print(L['itemscore_ae_clearednotupgrade'])
 				     end,
-				 width='single'
+				 width='single',
+				 disabled=function() return not self.db.profile.autogear end,
 			})
 		EndSubgroup()
 
@@ -1096,6 +1106,11 @@ function ZGV:Options_DefineOptionTables()
 		AddOption('silentmode',{ type = 'toggle', width = "full", })
 
 		AddOption('foglight',{ type = 'toggle', width = "full", set = function(i,v) Setter_Simple(i,v)  if v then self.Foglight:Startup() else self.Foglight:TurnOff() end end, _default = true, })
+
+		AddOption('flashmapnodes',{ type = 'toggle', width = "full", set = function(i,v) Setter_Simple(i,v)  if (not v) then self.Pointer:MinimapNodeFlashOff() end end, _default = true, })
+
+		AddOption('autotrackquests',{ type = 'toggle', width = "full", _default = false, hidden = function() return not ZGV.db.profile.debug end, })
+
 		AddOption('foglightdebug',{
 			name = "(Debug) Check fog",
 			desc = "Check foglighting for the current map",
@@ -1105,9 +1120,9 @@ function ZGV:Options_DefineOptionTables()
 		})
 		AddOption('foglightdump',{
 			name = "(Debug) Dump fog",
-			desc = "Dump foglighting for all maps (hold shift: just differences)",
+			desc = "Dump foglighting for current map (ctrl: all maps) (shift: just differences)",
 			type = 'execute',
-			func = function() ZGV.Foglight:DumpMapOverlayInfos(IsShiftKeyDown()) end,
+			func = function() ZGV.Foglight:DumpMapOverlayInfos(IsShiftKeyDown(),IsControlKeyDown()) end,
 			hidden = function() return not ZGV.db.profile.debug end,
 		})
 
@@ -1181,10 +1196,11 @@ function ZGV:Options_DefineOptionTables()
 		AddOption('fakelevel',{
 			name = "Fake level (0=disable)",
 			width="full",
-			type = 'range', min = 0, max = 85, step = 0.2, bigStep = 0.2,
+			type = 'range', min = 0, max = 90, step = 0.2, bigStep = 0.2,
 			get = function(i,v) return self.db.char[i[#i]] end,
 			set = function(i,v) self.db.char[i[#i]]=v end,
 		})
+
 		AddOption('fakecombat',{
 			name = "Fake combat mode",
 			desc = "Check to simulate combat mode, for testing of 'delay after combat' and similar situations.",
@@ -1193,7 +1209,7 @@ function ZGV:Options_DefineOptionTables()
 		})
 		AddOptionSep()
 
-		local skills={"Blacksmithing","Tailoring", "Leatherworking", "Inscription",  "Jewelcrafting",  "Mining",  "Herbalism",  "Enchanting",  "Engineering",  "Alchemy",  "Skinning",  "Fishing",  "Cooking",  "First Aid",  "Archaeology" }
+		local skills={"Blacksmithing","Tailoring", "Leatherworking", "Inscription",  "Jewelcrafting",  "Mining",  "Herbalism",  "Enchanting",  "Engineering",  "Alchemy",  "Skinning",  "Fishing",  "Cooking", "Way of the Grill", "Way of the Wok", "Way of the Pot", "Way of the Steamer", "Way of the Oven", "Way of the Brew", "First Aid",  "Archaeology" }
 		local skillvalues={}  for i,v in ipairs(skills) do skillvalues[v]=v end
 		AddOption('fakeskill',{
 			name = "Fake profession",
@@ -1244,7 +1260,7 @@ function ZGV:Options_DefineOptionTables()
 			desc = "Skill level.",
 			type = 'range',
 			min = 0,
-			max = 525,
+			max = 600,
 			step = 1,
 			bigStep = 1,
 			set = function(i,v)
@@ -1260,6 +1276,7 @@ function ZGV:Options_DefineOptionTables()
 				return skill and skill.level or 0
 			      end,
 			disabled = function() return not ZGV.db.profile.fakeskillcheck end,
+			width="half",
 			_default = 0,
 		})
 		AddOption('fakeskillmax',{
@@ -1268,13 +1285,14 @@ function ZGV:Options_DefineOptionTables()
 			type = 'select',
 			values={
 				[0]="none",
-				[75]="Apprentice (75)",
-				[150]="Journeyman (150)",
-				[225]="Expert (225)",
-				[300]="Artisan (300)",
-				[375]="Master (375)",
-				[450]="Grand Master (450)",
-				[525]="Illustrious G. M. (525)",
+				[75]="75 Apprentice",
+				[150]="150 Journeyman",
+				[225]="225 Expert",
+				[300]="300 Artisan",
+				[375]="375 Master",
+				[450]="450 Grand Master",
+				[525]="525 Illustrious G. M.",
+				[600]="600 Zen Master",
 			},
 			set = function(i,v)
 				Setter_Simple(i,v)
@@ -1458,6 +1476,13 @@ function ZGV:Options_DefineOptionTables()
 			type = 'toggle',
 			set = function(i,v) Setter_Simple(i,v) LibRover.do_updating = v end,
 		})
+		AddOption('debug_frame',{
+			name = "Debug Output Frame",
+			desc = "Usually ChatFrame1..ChatFrame9",
+			type = 'input',
+			set = function(i,v) Setter_Simple(i,v) ZGV.debugframe = _G[v] end,
+			_default = "ChatFrame1"
+		})
 	end
 	end
 
@@ -1513,15 +1538,22 @@ function ZGV:Options_RegisterDefaults()
 
 			-- convenience
 			autoaccept = false,
-			autoselectitem = false,
 			autoturnin = false,
+			questitemselector = true,
+			autoselectitem = false,
 			fixblizzardautoaccept = false,
 			autosell=false,
 			autobuy=true,
-			autobuyframe=true,
-			autogear=true,
-			notUpgrades = {},
-			autogearframe=true,
+			autobuyframe=true, --remove this once new system is out.
+			autogear=true, --remove this once new system is out.
+			notUpgrades = {}, --remove this once new system is out.
+			badupgrade = { --There are four specs possible.
+				[1] = {},
+				[2] = {},
+				[3] = {},
+				[4] = {},		
+			},
+			autogearframe=true, --remove this once new system is out.
 			customcolorants=false,
 			colorantstaxi={r=0.4,b=0.0,g=1.0,alpha=0.8},
 			colorantsship={r=0.0,b=1.0,g=0.7,alpha=0.8},
@@ -1530,7 +1562,7 @@ function ZGV:Options_RegisterDefaults()
 			colorantsother={r=1.0,b=1.0,g=1.0,alpha=0.8},
 			singlecolorantscolor={r=0.5,b=0.5,g=0.5,alpha=0.8},
 			singlecolorants=false,
-			showgrayvalue=false,
+			showgreyvalue=false,
 			analyzereps = false,
 			autotaxi = false,
 			cvanchor = true,

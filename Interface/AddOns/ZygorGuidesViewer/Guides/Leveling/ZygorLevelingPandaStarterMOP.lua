@@ -7,7 +7,6 @@ image WanderingIsle
 condition suggested raceclass('Pandaren') and level<=5
 startlevel 1
 endlevel 12
-// WARRIOR
 step
 goto The Wandering Isle 56.7,18.2
 .talk 53566
@@ -25,7 +24,6 @@ goto 56.7,18.2
 ..turnin 30038
 ..accept 29406 |next "next01"
 |only Pandaren Warrior
-// HUNTER
 step
 goto 56.7,18.2
 .talk 53566
@@ -43,12 +41,11 @@ goto 56.7,18.2
 ..turnin 30034
 ..accept 29406 |next "next01"
 |only Pandaren Hunter
-// ROGUE
 step
 goto 56.7,18.2
 .talk 53566
 ..turnin 30043
-..accept 30036 
+..accept 30036
 |only Pandaren Rogue
 step
 goto 56.9,19.7
@@ -62,7 +59,6 @@ goto 56.7,18.2
 ..turnin 30036
 ..accept 29406 |next "next01"
 |only Pandaren Rogue
-// PRIEST
 step
 goto 56.7,18.2
 .talk 53566
@@ -81,7 +77,6 @@ goto 56.7,18.2
 ..turnin 30035
 ..accept 29406 |next "next01"
 |only Pandaren Priest
-// SHAMAN
 step
 goto 56.7,18.2
 .talk 53566
@@ -100,7 +95,6 @@ goto 56.7,18.2
 ..turnin 30037
 ..accept 29406 |next "next01"
 |only Pandaren Shaman
-// MAGE
 step
 goto 56.7,18.2
 .talk 53566
@@ -119,7 +113,6 @@ goto 56.7,18.2
 ..turnin 30033
 ..accept 29406 |next "next01"
 |only Pandaren Mage
-// MONK
 step
 goto 56.7,18.2
 .talk 53566
@@ -185,10 +178,10 @@ goto 55.1,32.8
 ..accept 29419
 step
 goto 54.0,21.0
-.' Kill the Amberleaf Scamp's that are attacking Min Dimwind
-.' Rescue the Cart Driver |q 29419/1
+.' Kill the Amberleaf Scamps that are attacking Min Dimwind
+..' Rescue the Cart Driver |q 29419/1
 .from Amberleaf Scamp##54130+
-.get 6 Stolen Training Supplies##72071 |q 29424/1
+..get 6 Stolen Training Supplies##72071 |q 29424/1
 '|modelnpc Min Dimwind##56503
 step
 goto 55.1,32.4
@@ -228,7 +221,7 @@ step
 goto 47.3,31.3
 .' Use your Wind Stone in your bags next to this _Wind Stone_ to summon a _Living Air_ |use Wind Stone##72109
 .from Living Air##54631
-.get Fluttering Breeze##72112|q 29523/1
+..get Fluttering Breeze##72112|q 29523/1
 step
 goto 48.9,29.8
 .click Loose Dogwood Root |tip They are on the ground around the trees in this area.
@@ -251,19 +244,19 @@ goto 38.8,25.5
 ..accept 29664
 step
 goto 38.7,25.4
-.click Brazier of the Flickering Flame 
+.click Brazier of the Flickering Flame
 .' Light the Challenge Torch |q 29664/1
 step
 goto 38.3,24.8
-.click Brazier of the Violet Flame 
+.click Brazier of the Violet Flame
 .' Light the Violet Brazier |q 29664/4
 step
 goto 39.0,23.5
-.click Brazier of the Red Flame 
+.click Brazier of the Red Flame
 .' Light the Red Brazier |q 29664/2
 step
 goto 39.2,25.4
-.click Brazier of the Blue Flame 
+.click Brazier of the Blue Flame
 .' Light the Blue Brazier |q 29664/3
 step
 goto 38.8,25.5
@@ -396,17 +389,17 @@ step
 step
 goto 75.1,74.7
 .click Stolen Carrot##+ |tip They are all around inside this tunnel.
-.get 3 Stolen Carrot##74296+ |q 29770/2
+..get 3 Stolen Carrot##74296+ |q 29770/2
 step
 'Follow the path up |goto 76.5,71.0 <5 |c
 step
 goto 78.9,70.8
 .click Pilfered Pumpkin##+ |tip They are around the trees in this area.
-.get 3 Pilfered Pumkin##74297+ |q 29770/3
+..get 3 Pilfered Pumkin##74297+ |q 29770/3
 step
 goto 71.1,78.8
 .click Uprooted Turnip##+ |tip They are lying on the ground all around this area.
-.get 3 Uprooted Turnip##74295+ |q 29770/1
+..get 3 Uprooted Turnip##74295+ |q 29770/1
 step
 goto 71.0,71.6
 .kill 10 Plump Virmen##55483+ |q 29769/1
@@ -427,7 +420,7 @@ step
 goto 62.4,76.7
 .from Raggis##55506
 .click Dai-Lo Recess Mallet |tip It's sitting on a wooden barrel to the left of the small wooden stairs.
-.get Dai-Lo Recess Mallet##74298 |q 29768/1
+..get Dai-Lo Recess Mallet##74298 |q 29768/1
 step
 goto 63.6,77.6
 .click Discarded Wood Plank##+
@@ -488,11 +481,11 @@ goto 29.9,39.8
 step
 goto 32.0,52.8
 .click Defaced Scroll of Wisdom## |tip They are hanging on large boulders around this area.
-.' Burn 5 Defaced Scrolls of Wisdom |q 29778/1
+..' Burn 5 Defaced Scrolls of Wisdom |q 29778/1
 .click Abandoned Stone Block |tip They look like piles of gray blocks on the ground around this area.
-.get 12 Abandoned Stone Block##74624+ |q 29783/1
+..get 12 Abandoned Stone Block##74624+ |q 29783/1
 .from Hozen Wiseman##55601+
-.get 8 Paint Soaked Brush##74615+ |q 29777/1
+..get 8 Paint Soaked Brush##74615+ |q 29777/1
 step
 goto 31.7,39.7
 .talk 55588
@@ -518,9 +511,9 @@ goto 21.0,34.5
 step
 goto 21.0,34.5
 .click Stolen Fireworks
-.get 8 Stolen Firework Bundles |q 29781/1
+..get 8 Stolen Firework Bundles |q 29781/1
 .from Fe-Feng Firethief##57466+, Fe-Feng Firethief##55633+, Fe-Feng Ruffian##55632+
-.' Kill 20 Fe-Feng Hozen |q 29779/1
+..' Kill 20 Fe-Feng Hozen |q 29779/1
 .' You can find more Hozen and Fireworks around [26.5,30.6]
 step
 'Standing next to you
@@ -574,8 +567,8 @@ goto 19.5,51.2
 ..accept 29789
 step
 goto 22.9,57.2
-.click Kun-pai Ritual Charm##+ |tip They are redropes hanging from tree branches around this area.
-.get 8 Kun-Pai Ritual Charm##74634+ |q 29789/1
+.click Kun-pai Ritual Charm##+ |tip They are red ropes hanging from tree branches around this area.
+..get 8 Kun-Pai Ritual Charm##74634+ |q 29789/1
 .kill 8 Thornbranch Scamp##55640 |q 29788/1
 step
 goto 19.5,51.2
@@ -626,10 +619,10 @@ goto 52.4,82.6
 .click Broken Bamboo Stalk##+ |tip They are all around the tall bamboo stalks in this area.
 .get 10 Broken Bamboo Stalk##80806+ |q 29795/1
 .kill 9 Pei-Wu Tiger##55946+ |q 30591/1
-.' You can find more around
-.' Here [56.5,82.8]
-.' Here [56.2,73.2]
-.' And here [50.8,69.8]
+..' You can find more around
+..' Here [56.5,82.8]
+..' Here [56.2,73.2]
+..' And here [50.8,69.8]
 step
 goto 50.1,76.6
 .talk 55943
@@ -651,9 +644,9 @@ goto 36.4,72.5
 step
 goto 38.3,74.1
 .click Packed Explosion Charge##+ |tip They are smal bundles of red dynamite on the ground around this area.
-.get Packed Explosion Charge##74955+ |q 30590/1
-.from Darkened Terror##56008+, Darkened Horror##56007+ 
-.' Kill 8 Darkened Terrors or Horrors |q 29793/1
+..get Packed Explosion Charge##74955+ |q 30590/1
+.from Darkened Terror##56008+, Darkened Horror##56007+
+.' Kill #8# Darkened Terrors or Horrors |q 29793/1
 step
 goto 36.3,72.3
 .talk 60055
@@ -676,11 +669,11 @@ goto 42.3,86.3
 step
 goto 38.5,87.4
 .clicknpc Injured Sailor##55999+
-.' Pick up an Injured Sailor
-.' Once you have a Sailor you can bring him here [42.2,86.7]
-.' Rescue 3 Injured Sailor |q 29794/1
+..' Pick up an Injured Sailor
+..' Once you have a Sailor you can bring him here [42.2,86.7]
+..' Rescue 3 Injured Sailor |q 29794/1
 .click Alliance Medical Supplies##+ |tip They look like wooden boxes with red crosses on them on the ground around this area.
-.get 8 Alliance Medical Supplies##74958+ |q 29797/1
+..get 8 Alliance Medical Supplies##74958+ |q 29797/1
 .kill 8 Deep Sea Tormentor##56360 |q 29665/1
 step
 goto 42.2,86.5
@@ -711,7 +704,7 @@ goto 39.3,86.2
 ..accept 29799
 step
 goto 41.2,85.4
-.' Watch your minimap and look for bronze cogs.  These are fallen Horde Druids and Alliance Priest. Go to them and revive them. Focus on keeping them alive. |tip They are on the ground laying under sheets of gray metal.
+.' Watch your minimap and look for bronze cogs.  These are fallen Horde Druids and Alliance Priests. Go to them and revive them. Focus on keeping them alive. |tip They are on the ground laying under sheets of gray metal.
 .clicknpc Horde Druid##60834
 .clicknpc Alliance Priest##60878
 .' Run around this whole area and keep reviving the druids and priest until the bar on the bottom of your screen fills
@@ -739,9 +732,9 @@ goto 51.4,48.3
 .' Tell him you're ready to decide.
 '_Choose Your Destiny!_
 .' Here you will have to choose whether you will side with _The Alliance_ or _The Horde_.
-.' Join the Alliance |goto Stormwind City |c |next "Alliance" |or
+.' Click here if you wish to join the Alliance |confirm |next "Alliance" |or
 .' Or
-.' Join The Horde |goto Orgrimmar |c |next "Horde" |or
+.' Click here if you wish to join The Horde |confirm |next "Horde" |or
 step
 label	"Alliance"
 goto Stormwind City 74.2,92.0
@@ -803,7 +796,7 @@ step
 label end
 'Use the Suggest section of the guide menu to choose the guide you would like to continue leveling with.
 ]])
-if UnitFactionGroup("player")~="Neutral" then return end --Dont show place holders unless they are panda!
+if UnitFactionGroup("player")~="Neutral" then return end
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Loremaster Guides\\Your guides will load after you choose a faction.",[[]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Dailies Guides\\Your guides will load after you choose a faction.",[[]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Events Guides\\Your guides will load after you choose a faction.",[[]])

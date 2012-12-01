@@ -74,7 +74,7 @@ goto 24.5,47.6
 ..accept 28467
 step
 goto 24.5,47.6
-  .from Winterfall Totemic##7441+, Winterfall Den Watcher##7440+, Winterfall Runner##10916+
+.from Winterfall Totemic##7441+, Winterfall Den Watcher##7440+, Winterfall Runner##10916+
 .'Kill 15 Winterfall Furbolg |q 28460/1
 ..get 10 Winterfall Spirit Beads |q 28522/1
 .' You can find more mobs around [Winterspring,27.3,49.3].
@@ -118,7 +118,7 @@ goto 65.3,46.2
 .talk 48722
 .accept 28614
 step
- goto 65.4,46.2
+goto 65.4,46.2
 .talk 48723
 ..accept 28615
 step
@@ -142,7 +142,7 @@ label	"the_grind"
 .' At this point, you can do two repeatable quests, as well as grind to earn rep.
 .' More Beads for Salfa requires that you grind in Winterspring.  You collect 5 Winterfall Spirit Beads, which are worth 2,000 Reputation per turn in.  Click here to farm at the Winterspring location. |confirm |next "winterfall"
 .' or
-.' Feathers for Nafien requires that you grind in Felwood. You collect 5 Deadwood Headdress Feathers, which are worth 2,000 Reputation per turn in.  Click here to farm at the Felwood location. |confirm |next "deadwood"      
+.' Feathers for Nafien requires that you grind in Felwood. You collect 5 Deadwood Headdress Feathers, which are worth 2,000 Reputation per turn in.  Click here to farm at the Felwood location. |confirm |next "deadwood"
 .' Collecting 65 Beads/Feathers will get you from Honored to Exalted.
 step
 label	"winterfall"
@@ -155,10 +155,10 @@ goto 67.5,49.8
 step
 goto 21.1,46.2
 .talk 11556
-..accept 28523 |n                                     
-.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm     
-.' or           
-.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted    
+..accept 28523 |n
+.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm
+.' or
+.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted
 step
 label	"deadwood"
 goto Felwood,61.9,12.3
@@ -171,10 +171,10 @@ step
 label	"turnin"
 goto 64.0,10.3
 .talk 15395
- ..accept 28395 |n
-.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm     
-.' or           
-.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted    
+..accept 28395 |n
+.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm
+.' or
+.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted
 step
 label	"exalted"
 .' Congratulations, you are now Exalted with Timbermaw Hold!
@@ -211,7 +211,7 @@ label	"start"
 ' Explore Darkshore |achieve 844
 ' Explore Teldrassil |achieve 842
 ' Explore Azuremyst Isle |achieve 860
-' Explore Bloodmyst Isle |achieve 861          
+' Explore Bloodmyst Isle |achieve 861
 |confirm always
 step
 'Skipping next part of guide |next "+n_barrens" |only if step:Find("+durotar"):IsComplete()
@@ -220,37 +220,37 @@ step
 goto Orgrimmar,45.4,8.5
 .' Discover Orgrimmar |achieve 728/12
 step
-goto Durotar,54.0,9.0 
+goto Durotar,54.0,9.0
 .' Discover Skull Rock |achieve 728/11
 step
 goto 52.4,24.2
 .' Discover Drygulch Ravine |achieve 728/10
 step
-goto 53.5,43.4 
+goto 53.5,43.4
 .' Discover Razor Hill |achieve 728/7
 step
-goto 58.1,60.2 
+goto 58.1,60.2
 .' Discover Tiragarde Keep |achieve 728/6
 step
-goto 66.6,82.9 
+goto 66.6,82.9
 .' Discover Echo Isles |achieve 728/5
 step
-goto 56.1,75.8 
+goto 56.1,75.8
 .' Discover Sen'jin Village |achieve 728/4
 step
-goto 48.5,79.1 
+goto 48.5,79.1
 .' Discover Northwatch Foothold |achieve 728/2
 step
-goto 44.5,62.2 
+goto 44.5,62.2
 .' Discover Valley of Trials |achieve 728/1
 step
-goto 44.6,50.6 
+goto 44.6,50.6
 .' Discover Razormane Grounds |achieve 728/8
 step
-goto 40.5,40.0 
+goto 40.5,40.0
 .' Discover Southfury Watershed |achieve 728/3
 step
-goto 40.3,24.7 
+goto 40.3,24.7
 .' Discover Thunder Ridge |achieve 728/9
 step
 label	"durotar"
@@ -260,43 +260,43 @@ label	"n_barrens"
 'Skipping next part of guide |next "+s_barrens" |only if step:Find("+n_barrens1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Northern Barrens,67.2,12.1 
+goto Northern Barrens,67.2,12.1
 .' Discover Boulder Lode Mine |achieve 750/1
 step
-goto 55.7,18.5 
+goto 55.7,18.5
 .' Discover The Sludge Fen |achieve 750/4
 step
-goto 39.6,14.1 
+goto 39.6,14.1
 .' Discover The Mor'shan Rampart |achieve 750/3
 step
-goto 25.5,31.7 
+goto 25.5,31.7
 .' Discover The Dry Hills |achieve 750/6
 step
-goto 36.8,45.9 
+goto 36.8,45.9
 .' Discover The Forgotten Pools |achieve 750/7
 step
-goto 43.1,35.4 
+goto 43.1,35.4
 .' Discover Dreadmist Peak |achieve 750/5
 step
-goto 54.9,41.1 
+goto 54.9,41.1
 .' Discover Grol'dom Farm |achieve 750/8
 step
-goto 67.0,41.3 
+goto 67.0,41.3
 .' Discover Far Watch Post |achieve 750/9
 step
-goto 58.8,50.0 
+goto 58.8,50.0
 .' Discover Thorn Hill |achieve 750/10
 step
-goto 50.2,57.3 
+goto 50.2,57.3
 .' Discover The Crossroads |achieve 750/11
 step
-goto 40.3,73.9 
+goto 40.3,73.9
 .' Discover Lushwater Oasis |achieve 750/2
 step
-goto 55.7,78.6 
+goto 55.7,78.6
 .' Discover The Stagnant Oasis |achieve 750/12
 step
-goto 70.3,84.1 
+goto 70.3,84.1
 .' Discover The Merchant Coast |achieve 750/14
 step
 label	"n_barrens1"
@@ -306,10 +306,10 @@ label	"s_barrens"
 'Skipping next part of guide |next "+dustwallow" |only if step:Find("+s_barrens1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Southern Barrens,68.8,49.1 
+goto Southern Barrens,68.8,49.1
 .' Discover Northwatch Hold |achieve 4996/7
 step
-goto 52.2,48.6 
+goto 52.2,48.6
 .' Discover Forward Command |achieve 4996/3
 step
 goto 47.8,33.68
@@ -318,7 +318,7 @@ step
 goto 39.3,22.3
 .' Discover Hunter's Hill |achieve 4996/6
 step
-goto 36.5,11.1 
+goto 36.5,11.1
 .' Discover Honor's Stand |achieve 4996/5
 step
 goto 42.4,44.0
@@ -340,31 +340,31 @@ label	"dustwallow"
 'Skipping next part of guide |next "+thousand" |only if step:Find("+dustwallow1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Dustwallow Marsh,29.7,49.0 
+goto Dustwallow Marsh,29.7,49.0
 .' Discover Shady Rest Inn |achieve 850/5
 step
-goto 36.3,30.4 
+goto 36.3,30.4
 .' Discover Brackenwall Village |achieve 850/7
 step
-goto 41.4,12.4 
+goto 41.4,12.4
 .' Discover Blackhoof Village |achieve 850/2
 step
-goto 76.0,17.5 
+goto 76.0,17.5
 .' Discover Alcaz Island |achieve 850/9
 step
-goto 61.5,30.2 
+goto 61.5,30.2
 .' Discover Dreadmurk Shore |achieve 850/6
 step
-goto 67.1,49.8 
+goto 67.1,49.8
 .' Discover Theramore Isle |achieve 850/1
 step
-goto 46.6,46.1 
+goto 46.6,46.1
 .' Discover Direhorn Post |achieve 850/3
 step
-goto 41.4,75.1 
+goto 41.4,75.1
 .' Discover Mudsprocket |achieve 850/4
 step
-goto 43.4,75.5 
+goto 43.4,75.5
 .' Discover Wyrmbog |achieve 850/8
 step
 label	"dustwallow1"
@@ -374,37 +374,37 @@ label	"thousand"
 'Skipping next part of guide |next "+tanaris" |only if step:Find("+thousand1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Thousand Needles,88.4,47.8 
+goto Thousand Needles,88.4,47.8
 .' Discover Splithoof Heights |achieve 846/10
 step
-goto 51.7,30.0 
+goto 51.7,30.0
 .' Discover Razorfen Downs |achieve 846/2
 step
-goto 33.6,38.6 
+goto 33.6,38.6
 .' Discover Darkcloud Pinnacle |achieve 846/8
 step
-goto 32.1,18.3 
+goto 32.1,18.3
 .' Discover The Great Lift |achieve 846/1
 step
-goto 13.4,10.3 
+goto 13.4,10.3
 .' Discover Westreach Summit |achieve 846/7
 step
-goto 13.1,37.5 
+goto 13.1,37.5
 .' Discover Highperch |achieve 846/12
 step
-goto 31.1,58.8 
+goto 31.1,58.8
 .' Discover Twilight Bulwark |achieve 846/6
 step
-goto 47.0,50.7 
+goto 47.0,50.7
 .' Discover Freewind Post |achieve 846/9
 step
-goto 54.9,63.2 
+goto 54.9,63.2
 .' Discover The Twilight Withering |achieve 846/5
 step
-goto 67.1,85.7 
+goto 67.1,85.7
 .' Discover Sunken Dig Site |achieve 846/3
 step
-goto 92.4,78.8 
+goto 92.4,78.8
 .' Discover Southsea Holdfast |achieve 846/4
 step
 label	"thousand1"
@@ -414,34 +414,34 @@ label	"tanaris"
 'Skipping next part of guide |next "+ungoro" |only if step:Find("+tanaris1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Tanaris,37.3,14.3 
+goto Tanaris,37.3,14.3
 .' Discover Zul'Farrak |achieve 851/15
 step
-goto 40.9,27.3 
+goto 40.9,27.3
 .' Discover Sandsorrow Watch |achieve 851/2
 step
-goto 52.3,45.4 
+goto 52.3,45.4
 .' Discover Broken Pillar |achieve 851/6
 step
-goto 55.1,40.9 
+goto 55.1,40.9
 .' Discover Abyssal Sands |achieve 851/5
 step
-goto 64.2,50.0 
+goto 64.2,50.0
 .' Discover Caverns of Time |achieve 851/16
 step
-goto 71.6,49.4 
+goto 71.6,49.4
 .' Discover Lost Rigger Cove |achieve 851/4
 step
-goto 63.0,59.2 
+goto 63.0,59.2
 .' Discover Southbreak Shore |achieve 851/9
 step
-goto 53.7,67.6 
+goto 53.7,67.6
 .' Discover The Gaping Chasm |achieve 851/10
 step
-goto 53.6,91.7 
+goto 53.6,91.7
 .' Discover Land's End Beach |achieve 851/12
 step
-goto 37.8,77.7 
+goto 37.8,77.7
 .' Discover Valley of the Watchers |achieve 851/3
 step
 goto 40.8,70.6
@@ -466,7 +466,7 @@ label	"ungoro"
 'Skipping next part of guide |next "+uldum" |only if step:Find("+ungoro1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Un'Goro Crater,77.1,39.2 
+goto Un'Goro Crater,77.1,39.2
 .' Discover Ironstone Plateau |achieve 854/11
 step
 goto 39.2,34.3
@@ -515,10 +515,10 @@ step
 goto 69.0,21.8
 .' Discover The Gate of Unending Cycles |achieve 4865/19
 step
-goto 64.6,31.8 
+goto 64.6,31.8
 .' Discover Obelisk of the Stars |achieve 4865/9
 step
-goto 67.1,40.9 
+goto 67.1,40.9
 .' Discover Nahorn |achieve 4865/6
 step
 goto 84.7,52.8
@@ -698,7 +698,7 @@ step
 goto 50.7,59.0
 .' Discover Kodo Graveyard |achieve 848/10
 step
-goto 70.6,74.8 
+goto 70.6,74.8
 .' Discover Shok'Thokar |achieve 848/14
 step
 goto 80.3,79.3
@@ -858,7 +858,7 @@ goto 93.4,39.2
 .' Discover Bough Shadow |achieve 845/16
 step
 label	"ashenvale1"
-' Explore Ashenvale |achieve 845 
+' Explore Ashenvale |achieve 845
 step
 label "hyjal"
 'Skipping next part of guide |next "+winter" |only if step:Find("+hyjal1"):IsComplete()
@@ -947,7 +947,7 @@ label	"azshara"
 'Skipping next part of guide |next "+moon" |only if step:Find("+azshara1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto Azshara,52.25,26.95 
+goto Azshara,52.25,26.95
 .' Discover Darnassian Base Camp |achieve 852/4
 step
 goto 73.69,20.98
@@ -1088,7 +1088,7 @@ step
 goto 63.9,21.9
 .' Discover Ruins of Mathystra |achieve 844/6
 step
-goto 72.5,17.3 
+goto 72.5,17.3
 .' Discover Shatterspear Vale |achieve 844/2
 step
 goto 65.9,7.0
@@ -1138,7 +1138,7 @@ label	"azure"
 'Skipping next part of guide |next "+blood" |only if step:Find("+azure1"):IsComplete()
 'Proceeding next step |next |only if default
 step
-goto 52.4,89.3 
+goto 52.4,89.3
 .' Ride the boat to Azuremyst Isle |tip Make sure to avoid Alliance Guards as best you can
 .' Ride to Azuremyst Isle |goto Azuremyst Isle |noway |c
 step

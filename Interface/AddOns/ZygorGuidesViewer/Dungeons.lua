@@ -41,7 +41,7 @@ setmetatable(Dungeons,{
 		-- cache from game, to get all data in one place
 		if not id then return end
 
-		if type(id)=="string" then error("No function Dungeons."..id) end
+		if type(id)=="string" then return end   -- error("No function Dungeons."..id)   -- don't error, this breaks Spoo.
 
 		local name, typeID, subtypeID, minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, expansionLevel, groupID, textureFilename, difficulty, maxPlayers, description, isHoliday = GetLFGDungeonInfo(id)
 		if name and typeID~=4 then

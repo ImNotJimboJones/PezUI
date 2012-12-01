@@ -92,14 +92,18 @@ data.basenodes.setup = {
 data.basenodes.MapsWithExplicitFloors = {
 	[321] = { -- Orgrimmar
 		-- Cleft of Shadow, two entries
-		"Orgrimmar/1 45.90,66.94 -x- Orgrimmar/2 35.85,79.06", "@+ -x- Orgrimmar/1 42.09,61.03",
-		"Orgrimmar/1 55.12,51.43 -x- Orgrimmar/2 67.37,36.52",
+		"Orgrimmar/1 45.90,66.94 <title:Cleft of Shadow entrance> -x- Orgrimmar/2 35.85,79.06 <title:Cleft of Shadow tunnel> {cost:0}", "@+ -x- Orgrimmar/1 42.09,61.03 <title:Cleft of Shadow entrance> {cost:0}", -- 3-way west tunnel
+		"Orgrimmar/1 55.12,51.43 <title:Cleft of Shadow entrance> -x- Orgrimmar/2 70.52,19.53 <title:Cleft of Shadow tunnel> {cost:0}", "@+ -x- Orgrimmar/2 67.37,36.52 <title:Cleft of Shadow exit> {cost:0}", -- s-shaped east tunnel
 	},
 	[504] = { -- Dalaran
 		-- Underbelly, a few entries
-		"Dalaran/1 34.89,45.42 -x- Dalaran/2 34.28,43.57",
-		"Dalaran/1 60.28,47.77 -x- Dalaran/2 64.16,48.00",
-		"Dalaran/1 48.30,32.54 <dist:2> -to- Dalaran/2 62.74,48.83", -- well jump!
+		--"Dalaran/1 34.89,45.42 -x- Dalaran/2 34.28,43.57",
+		"Dalaran/1 34.89,45.42 <title:Western sewer entrance> -x- Dalaran/1 31.59,45.56 <onlyhardwire_qq:1> <title:Western sewer entrance midpoint> <region:underbelly> {cost:0}",
+		"@+ -x- Dalaran/2 34.28,43.57 <title:Western sewer exit> {cost:0}",
+		--"Dalaran/1 60.28,47.77 -x- Dalaran/2 64.16,48.00",
+		"Dalaran/1 60.28,47.77 <title:Eastern sewer entrance> -x- Dalaran/1 62.68,51.37 <onlyhardwire_qq:1> <title:Eastern sewer entrance midpoint> <region:underbelly> {cost:0}",
+		"@+ -x- Dalaran/2 64.16,48.00 <title:Eastern sewer exit> {cost:0}",
+		"Dalaran/1 48.30,32.54 <dist:2> <title:Dalaran Well> -to- Dalaran/2 62.74,48.83 {cost:0}", -- well jump!
 	},
 	[750] = { -- Maraudon
 		"Maraudon/1 15.53,56.75 -x- Maraudon/2 28.99,4.84",
@@ -123,11 +127,13 @@ data.basenodes.MapsWithExplicitFloors = {
 		"Dun Morogh/0 42.7,64.1 -x- Dun Morogh/6 60.6,11.0",  -- Coldridge Pass
 		"Dun Morogh/0 41.1,70.0 -x- Dun Morogh/6 38.0,91.1", -- Coldridge Pass
 		"Dun Morogh/10 79.5,84.2 -x- New Tinkertown/0 32.6,37.0", --Gnome Starter
-
 	},
 	[4] = { --Durotar
 		"Durotar/0 83.2,53.6 -x- Durotar/12 54.9,9.5", -- Skull Rock
-		"Durotar/0 45.3,56.0 -x- Durotar/8 72.0,92.0", -- Burning Blade Coven
+		"Valley of Trials/0 53.0,21.3 -x- Durotar/8 72.2,89.7", -- Burning Blade Coven
+		"Durotar/10 41.9,30.9 -x- Durotar/11 32.4,30.3", -- Great Hall
+		"Durotar/0 59.0,58.3 -x- Durotar/10 32.0,51.8", -- Tiragarde Keep
+		"Durotar/0 52.8,28.6 -x- Durotar/19 50.3,90.5", -- Dustwind Cave
 	},
 	[891] = { --Echo Isles
 		"Echo Isles/0 59.3,21.8 -x- Echo Isles/9 53.9,80.5",
@@ -196,6 +202,20 @@ data.basenodes.MapsWithExplicitFloors = {
 	[895] = { --New Tinkertown
 		"New Tinkertown/0 33.3,66.4 -x- New Tinkertown/8 94.6,58.1", -- Frostmane Hold
 	},
+	[544] = { -- The Lost Isles
+		"The Lost Isles/0 31.5,78.1 -x- The Lost Isles/1 48.1,90.0", -- Kaja'mite Cavern
+		"The Lost Isles/0 70.0,48.0 -x- The Lost Isles/2 50.0,10.8", -- Volcanoth's Lair
+	},
+	[678] = { -- Gilneas
+		"Gilneas/0 29.1,51.8 -x- Gilneas/2 69.9,63.4", -- Greymane Manor
+		"Gilneas/2 60.3,46.2 -x- Gilneas/3 56.1,46.5", -- Greymane Manor2
+		"Gilneas/0 76.6,31.1 -x- Gilneas/1 28.5,70.0", -- Emberstone Mine
+	},
+	[609] = { -- Kezan
+		"Kezan/0 65.6,86.7 -x- Kezan/7 64.0,19.6", -- Kaja'Mine Copper
+		"Kezan/0 74.3,83.3 -x- Kezan/6 32.9,31.0", -- Kaja'Mine Silver
+		"Kezan/0 70.9,76.5 -x- Kezan/5 41.0,75.5", -- Kaja'Mine Gold
+	},
 	[17] = { --Badlands
 		"Badlands/0 41.6,11.6 -x- Badlands/18 75.6,36.5", --Uldaman Entrance
 	},
@@ -211,9 +231,14 @@ data.basenodes.MapsWithExplicitFloors = {
 		"The Jade Forest/6 39.8,38.0 -x- The Jade Forest/7 51.2,51.0", -- Greenstone Quarry (Upper Quarry --> Lower Quarry)
 		"The Jade Forest/0 57.7,31.7 -x- The Jade Forest/15 76.8,20.0", -- The Widow's Wail (Outside of Cave --> Inside Cave)
 	},
+	[857] = {
+		"Krasarang Wilds/0 80.3,17.8 -x- Krasarang Wilds/1 33.3,24.4",
+		"Krasarang Wilds/1 61.6,51.8 -x- Krasarang Wilds/2 59.5,36.7",
+		"Krasarang Wilds/2 62.7,39.6 -x- Krasarang Wilds/3 82.3,36.0",
+	},	
 	[809] = { --Kun-Lai Summit
 		"Kun-Lai Summit/11 52.4,65.5 -x- Kun-Lai Summit/12 51.6,55.9", --The Deeper2
-		"Kun-Lai Summit/0  56.3,16.6 -x- Kun-Lai Summit/11 52.8,71.6", --The Deeper
+		"Kun-Lai Summit/0  52.9,71.3 -x- Kun-Lai Summit/11 56.5,15.9", --The Deeper
 		"Kun-Lai Summit/0  50.3,61.7 -x- Kun-Lai Summit/10 74.9,91.5", -- Knucklethump Hole
 		"Kun-Lai Summit/0  73.2,73.5 -x- Kun-Lai Summit/9 11.5,30.0", -- Pranksters' Hollow
 		"Kun-Lai Summit/0  59.1,52.5 -x- Kun-Lai Summit/8 66.9,82.3", -- Howlingwind Cavern
@@ -264,6 +289,8 @@ data.basenodes.MapsWithExplicitFloors = {
 	[905] = { --Shrine of Seven Stars 
 		--In Vale of Eternal Blossoms
 	},
+	[820] = { -- End Time
+	},
 }
 
 --[[
@@ -307,12 +334,23 @@ data.basenodes.advanced = {
 	{"REGION",{name="krasarang_edge",center="Valley of the Four Winds 76.0,57.2",radius=60,greenborders={"Krasarang Wilds"}}},
 	{"REGION",{name="krasarang_edge",center="Valley of the Four Winds 74.1,56.3",radius=20,greenborders={"Krasarang Wilds"}}},
 
+	{"REGION",{name="orc_cave",center="Durotar 45.3,56.3",radius=20,greenborders={"Valley of Trials"}}},
+
 	{"REGION",{name="shrine2moon_west",center="Shrine of Two Moons/2 30.3,53.5",radius=75,nofly=1}},
 	{"REGION",{name="shrine2moon_east",center="Shrine of Two Moons/2 70.4,46.2",radius=75,nofly=1}},
 
 	{"REGION",{name="shrine7star_west",center="Vale of Eternal Blossoms/4 40.8,69.2",radius=75,nofly=1}},
 	{"REGION",{name="shrine7star_east",center="Vale of Eternal Blossoms/4 69.5,40.4",radius=75,nofly=1}},
 		
+	{"REGION",{name="endtime_entry",center="End Time/1 80,45",radius=200,nofly=1}},  -- One can't rove around the whole End Time map.
+
+	{"REGION",{name="underbelly",mapzone=504,minimapzone="The Underbelly",nofly=1}},
+
+	-- Pandaria, since we're mostly running for the initial levels
+	{"REGION",{name="garrosharpoint",center="The Jade Forest/0 44.4,93.3",radius=200 }},
+	{"REGION",{name="pawdonvillage",center="The Jade Forest/0 44.35,86.00",radius=145 }},
+	{"REGION",{name="pawdonvillage",center="The Jade Forest/0 41.88,83.49",radius=285 }},
+
 	--[[
 	{"REGION",{name="dmentry",mapzone=39,minimapzone="Defias Hideout",nofly=1,noallzone=1}},
 	{"REGION",{name="dmentry2",mapzone=39,minimapzone="The Deadmines",nofly=1,noallzone=1}},
@@ -373,7 +411,7 @@ data.basenodes.borders = {
 	},
 	[2] = {
 		"Westfall 61.8,17.8 -x- Elwynn Forest 21.0,79.7",
-		"Elwynn Forest 32,50 -x- Stormwind City 74.1,92.3",
+		"Elwynn Forest 32,50 -x- Stormwind City 74.1,92.3", "@+ -x- Stormwind City 66.20,77.18 <title:Stormwind City gates> {cost:5}",
 		"Westfall 67.3,62.5 -x- Duskwood 10.6,63.0",
 		"Duskwood 44.9,79.2 -x- Northern Stranglethorn 51.3,11.5",
 		"Northern Stranglethorn 51.1,69.8 -x- The Cape of Stranglethorn 59.2,24.3",
@@ -480,6 +518,11 @@ data.basenodes.borders = {
 		"Kun-Lai Summit,55.5,93.0 -x- Vale of Eternal Blossoms,44.1,12.8 {cond:PlayerCompletedQuest(31512)}", --Alliance you actually get the ability to do this border during the quest... Lets see how it works.
 		"Kun-Lai Summit,55.5,93.0 -x- Vale of Eternal Blossoms,44.1,12.8 {cond:PlayerCompletedQuest(31511)}", --Horde
 
+		-- And now some stuff to appease the groundwalkers.
+		"The Jade Forest 44.46,89.43 -x- The Jade Forest 44.22,88.43",  -- Garrosh'ar point
+		"The Jade Forest 45.66,85.82 -x- The Jade Forest 47.06,87.95",  -- paw'don bridge
+
+
 		--Shrine of 7 Stars is a  micro dungeon right now... Yes Shrine of 2 Moons is it's own map..
 		--Panda Land cities are all in micro dungeons to make them walk borders.
 	},
@@ -498,14 +541,6 @@ data.basenodes.travel = {
 	"Vale of Eternal Blossoms/4,74.0,40.8 -to- Ironforge,25.51,08.43 (A:PORTAL)",
 	"Vale of Eternal Blossoms/4,71.6,35.8 -to- Stormwind City,49.6,86.5 (A:PORTAL)",
 
-	--[[
-	"Shrine of Seven Stars/4,61.6,39.6 -to- Dalaran,55.86,46.81 (A:PORTAL)",
-	"Shrine of Seven Stars/4,68.5,52.8 -to- Shattrath City,54.97,40.23 (A:PORTAL)",
-	"Shrine of Seven Stars/4,70.8,30.6 -to- The Exodar,47.62,59.82 (A:PORTAL)",
-	"Shrine of Seven Stars/4,77.2,43.5 -to- Darnassus,43.47,78.67 (A:PORTAL)",
-	"Shrine of Seven Stars/4,74.0,40.8 -to- Ironforge,25.51,08.43 (A:PORTAL)",
-	"Shrine of Seven Stars/4,71.6,35.8 -to- Stormwind City,49.6,86.5 (A:PORTAL)",
-	--]]
 	"Shrine of Two Moons/2,73.5,42.8 -to- Orgrimmar,48.3,64.5 (H:PORTAL)",
 	"Shrine of Two Moons/2,75.6,52.6 -to- Silvermoon City,58.3,19.2 (H:PORTAL)",
 	"Shrine of Two Moons/2,73.5,36.5 -to- Thunder Bluff,22.2,16.9 (H:PORTAL)",
@@ -513,6 +548,14 @@ data.basenodes.travel = {
 	"Shrine of Two Moons/2,63.5,57.3 -to- Shattrath City,53.0,49.2 (H:PORTAL)",
 	"Shrine of Two Moons/2,61.5,36.5 -to- Dalaran,55.86,46.81 (H:PORTAL)",
 	
+	--There are portals here... No idea when/how they appear...
+	--"Krasarang Wilds 89.0,33.9 -to- Stormwind City 74.2,92.2 (A:PORTAL) {cond:PlayerCompletedQuest(32109)}", --QUESTID NEEDS CONFIRMED
+	--"Krasarang Wilds 89.2,33.9 -x- Krasarang Wilds 18.1,79.6 (A:PORTAL) {cond:PlayerCompletedQuest(32109)}", --To the ship
+
+	--"Krasarang Wilds 9.9,54.9 -to- Durotar 45.6,13.2 (H:PORTAL) {cond:PlayerCompletedQuest(32108)}", --To orgrim
+	--"Krasarang Wilds 10.2,54.8 -x- Krasarang Wilds 76.1,34.5 (H:PORTAL) {cond:PlayerCompletedQuest(32108)}", 
+	--"Krasarang Wilds 76.2,34.0 -x- Krasarang Wilds/3 37.4,46.4 (H:PORTAL) {cond:PlayerCompletedQuest(32108)}", 
+
 	"Townlong Steppes, 29.0,22.1 -x- Townlong Steppes, 48.5,69.9 (B:PORTAL) {cond:PlayerCompletedQuest(31110)}",
 	"Dread Wastes,75.09,21.25 <tag:pandarope> -x- Vale of Eternal Blossoms,14.21,76.79 <tag:pandarope> (B:PORTAL)", -- (click the Climbing Rope to either climb up or jump down the cliff)
 	"Krasarang Wilds,48.6,27.1 <tag:pandarope> -x- Valley of the Four Winds,51.2,77.5 <tag:pandarope> (B:PORTAL)", -- (click the Climbing Rope to either climb up or jump down the cliff). Might need quest
@@ -530,6 +573,8 @@ data.basenodes.travel = {
 
 	"Stormwind City,18.0,25.8 -x- Borean Tundra 59.7,69.4 (A:SHIP) {cost:177}", -- ship turnaround = 275, ~40s waiting; 275/2+40 = 177.5
 	"Stormwind City,22.5,55.8 -x- Teldrassil 55.0,93.7 <port:Darnassus> (A:SHIP)",
+	"Teldrassil 52.3,89.5 <port:Darnassus> -x-  Azuremyst Isle 21.3,54.0 (A:SHIP)", --TODO the map is a little strange between Azuremyst and the actual ship.
+	
 	"Stormwind City,70.5,30.0 @tramsw <noallzone:1> -x- Ironforge 78,51 (A:TRAM)",   "Stormwind City,66.4,35.0 -x- @tramsw (A:WALK) {dontsetborder:1}",
 	{"Wetlands,6.4,62.2 <port:Menethil Harbor>","Dustwallow Marsh,71.5,56.3",faction="A",mode="ship"},
 	{"Wetlands,5.1,55.7 <port:Menethil Harbor>","Howling Fjord,61.3,62.6 <port:Valgarde>",faction="A",mode="ship"},--,cost=300}, --ship turnaround is 450, but takes forever to depart/arrive
@@ -571,14 +616,16 @@ data.basenodes.travel = {
 	-- portals -to- Blasted Lands
 	"Blasted Lands,53.9,46.1 @bl_port_dst",
 	-- Horde
-	"Orgrimmar/2 44.7,68.0 -to- Blasted Lands 53.9,46.1 (H:PORTAL)",
-	-- Ally
-	"Ironforge,27.2,7.0 -to- @bl_port_dst (B:PORTAL) {cond:UnitLevel('player')>=58}",
-	"Stormwind City,49.0,87.3 -to- @bl_port_dst (B:PORTAL) {cond:UnitLevel('player')>=58}",
-	"The Exodar,48.2,63.0 -to- @bl_port_dst (B:PORTAL) {cond:UnitLevel('player')>=58}",
-	"Darnassus,44.1,78.2 -to- @bl_port_dst (B:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Orgrimmar/2 44.7,68.0 -to- @bl_port_dst (H:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Silvermoon City 58.4,20.9 -to- @bl_port_dst (H:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Undercity 85.2,17.1 -to- @bl_port_dst (H:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Thunder Bluff 23.2,13.5 -to- @bl_port_dst (H:PORTAL) {cond:UnitLevel('player')>=58}",
 
-	-- missing: more horde BL portals
+	-- Ally
+	"Ironforge,27.2,7.0 -to- @bl_port_dst (A:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Stormwind City,49.0,87.3 -to- @bl_port_dst (A:PORTAL) {cond:UnitLevel('player')>=58}",
+	"The Exodar,48.2,63.0 -to- @bl_port_dst (A:PORTAL) {cond:UnitLevel('player')>=58}",
+	"Darnassus,44.1,78.2 -to- @bl_port_dst (A:PORTAL) {cond:UnitLevel('player')>=58}",
 
 	"Blasted Lands,55.0,54.2 <tag:darkportal> -x- Hellfire Peninsula,89.4,50.2 (B:PORTAL) <tag:darkportal> {cond:UnitLevel('player')>=58}",
 
@@ -688,10 +735,10 @@ data.basenodes.travel = {
 	"Valley of the Four Winds 36.0,69.1 -x- Stormstout Brewery 79.4,39.7 {style:portal_dungeon}",
 
 	--Scarlet Halls
-	"Tirisfal Glades/13 69.1,24.6 -x- Scarlet Halls/1 34.3,90.1 {style:portal_dungeon}",
+	"Tirisfal Glades/13 78.5,58.2 -x- Scarlet Halls/1 34.3,90.1 {style:portal_dungeon}",
 
 	--Scarlet Monastery
-	"Tirisfal Glades/13 78.6,58.7 -x- Scarlet Monastery/1 75.7,45.8 {style:portal_dungeon}",
+	"Tirisfal Glades/13 69.4,25.1 -x- Scarlet Monastery/1 75.7,45.8 {style:portal_dungeon}",
 
 	--Scholomance
 	"Western Plaguelands 69.1,72.9 -x- Scholomance/1 18.1,60.9 {style:portal_dungeon}",
@@ -730,7 +777,8 @@ data.basenodes.travel = {
 
 	-- GNOMEREGAN
 	"Dun Morogh/10 30.0,74.7 -x- Gnomeregan 64.33,28.96 {style:portal_dungeon}",
-
+	
+	--[[ --Old dungeons
 	-- SCARLET MONASTERY: GRAVEYARD
 	"Tirisfal Glades 84.87,30.59 -x- Scarlet Monastery/1 83.85,82.91 {style:portal_dungeon}",
 
@@ -742,6 +790,7 @@ data.basenodes.travel = {
 
 	-- SCARLET MONASTERY: CATHEDRAL
 	"Tirisfal Glades 85.34,30.55 -x- Scarlet Monastery/4 60.40,91.31 {style:portal_dungeon}",
+	--]]
 
 	-- RAZORFEN KRAUL
 	"Southern Barrens 40.72,94.39 -x- Razorfen Kraul 69.89,82.97 {style:portal_dungeon}",
@@ -908,7 +957,7 @@ data.basenodes.travel = {
 	"Burning Steppes 27.43,27.87 -x- Blackrock Caverns 32.02,70.10 {style:portal_dungeon}",
 
 	-- THE STONECORE
-	"Deepholm 47.70,52.95 -x- The Stonecore 54.27,93.90 {style:portal_dungeon}",
+	"Deepholm 47.70,51.98 -x- The Stonecore 54.27,93.90 {style:portal_dungeon}",
 
 	-- THE VORTEX PINNACLE
 	"Uldum 76.81,84.55 -x- The Vortex Pinnacle 54.12,16.81 {style:portal_dungeon}",
@@ -1119,6 +1168,9 @@ data.basenodes.inns = {
 	['Tirisfal Glades']={
 		{name="Brill",faction="H",npc="Innkeeper Renee",npcid=5688,x=60.8,y=51.6},
 		{name="The Bulwark",faction="H",npc="Provisioner Elda",npcid=46271,x=83.0,y=71.8},
+	},
+	['Deathknell']={
+		{name="Deathknell Graves",faction="H",npc="",npcid=0,x=40.5,y=78.5},
 	},
 	['Eversong Woods']={
 		{name="Falconwing Square",faction="H",npc="Innkeeper Delaniel",npcid=15433,x=48.1,y=47.7},
@@ -1338,9 +1390,11 @@ data.basenodes.inns = {
 		{name="The Incursion",faction="A",npc="Magister Xintar",npcid=58926,x=67.3,y=33.0},
 		{name="Crane Wing Refuge",faction="B",npc="Ni the Merciful",npcid=62869,x=40.8,y=34.5},
 		{name="Sentinel Basecamp",faction="A",npc="Magister Xintar",npcid=58926,x=25.5,y=33.2},
+		{name="Krasarang Cove",faction="A",npc="Keeper Jaril",npcid=3552,x=88.8,y=35.3},
 		{name="Marista's Bair & Brew",faction="B",npc="Cranfur the Noodler",npcid=62872,x=51.5,y=77.2},
 		{name="Thunder Cleft",faction="H",npc="Malaya Dawnchaser",npcid=58184,x=60.9,y=24.9},
 		{name="Dawnchaser Retreat",faction="H",npc="Aizra Dawnchaser",npcid=62967,x=28.3,y=50.8},
+		{name="Horde Landing Site",faction="H",npc="Tonak",npcid=2239,x=82.3,y=36.0},
 	},
 	['Valley of the Four Winds']={
 		{name="Pang's Stead",faction="B",npc="Nan Thunderfoot",npcid=65528,x=83.7,y=20.2},

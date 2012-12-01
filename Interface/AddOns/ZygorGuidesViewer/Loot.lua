@@ -1,18 +1,17 @@
 local ZGV = ZygorGuidesViewer
 if not ZGV then return end
 
-tinsert(ZGV.startups,function(self)
-	ZGV.Loot:ToggleFrame()
-end)
+local tinsert,tremove,print,ipairs,pairs,wipe=tinsert,tremove,print,ipairs,pairs,wipe
 
 local Loot = {}
 local L = ZGV.L
 local CHAIN = ZGV.ChainCall
+local zgname = ZygorGuidesViewer_L("Main")["zgname"] -- until I have time to update the rest of the file. ~Errc
 
 ZGV.Loot=Loot
 
--- Value of gray frame
-function Loot:GetGrayBagValue()
+-- Value of grey frame
+function Loot:GetGreyBagValue()
 	local totalValue=0
 	local bag, slot
 	local itemList= {}
@@ -34,12 +33,12 @@ function Loot:GetGrayBagValue()
 			end
 		end
 	end
-	self.GrayFrame.Value:SetText("|cffffdd00"..GetMoneyString(totalValue).."|r") --value of all the grays! Super important
+	self.GreyFrame.Value:SetText("|cffffdd00"..GetMoneyString(totalValue).."|r") --value of all the greys! Super important
 end
 
 function Loot:CloseFrame()
-	self.GrayFrame:Hide()
-	ZGV.db.profile.showgrayvalue=false
+	self.GreyFrame:Hide()
+	ZGV.db.profile.showgreyvalue=false
 end
 
 function Loot:CreateFrame()
@@ -47,18 +46,20 @@ function Loot:CreateFrame()
 		return ZGV.CurrentSkinStyle:SkinData(property)
 	end
 
-	self.GrayFrame = CHAIN(CreateFrame("Frame","ZygorGrayFrame",ZGV.Frame)) --Parented to ZGV.Frame so that it hides at the same times.
-		:SetBackdrop(SkinData("MoneyBackdrop"))	:SetBackdropColor(unpack(SkinData("MoneyBackdropColor")))
-		:SetBackdropBorderColor(unpack(SkinData("MoneyBackdropBorderColor")))
-		:SetSize(165,28):SetPoint("CENTER",UIParent,"CENTER")
-		:SetMovable(true):SetClampedToScreen(true):RegisterForDrag("LeftButton")
+	self.GreyFrame = CHAIN(ZygorGreyFrame)
+		--:SetParent(ZGV.Frame) --Parented to ZGV.Frame so that it hides at the same times.
+		:SetBackdrop(SkinData("MoneyBackdrop"))	:SetBackdropColor(unpack(SkinData("MoneyBackdropColor"))) :SetBackdropBorderColor(unpack(SkinData("MoneyBackdropBorderColor")))
+		:SetSize(165,28)
+		:SetMovable(true) :SetClampedToScreen(true) :RegisterForDrag("LeftButton")
 		:SetScript("OnEnter",function(self) UIFrameFadeIn(self.Close, 0.2, self.Close:GetAlpha() , 1.0) end) 
 		:SetScript("OnLeave",function(self) if not MouseIsOver(self.Close) then UIFrameFadeOut(self.Close, 0.2, self.Close:GetAlpha() , 0.0) end end) 
-		:SetScript("OnDragStart",function(self) self:StartMoving() end) :SetScript("OnDragStop",function(self) self:StopMovingOrSizing() end)
+		:SetScript("OnDragStart",function(self) self:StartMoving() end)
+		:SetScript("OnDragStop",function(self) self:StopMovingOrSizing() end)
+		:SetUserPlaced(true)
 		:Hide()
 	.__END
 
-	local F = self.GrayFrame
+	local F = self.GreyFrame
 		
 	local SegoeFont=ZGV.DIR.."\\Skins\\SegoeUI.TTF"
 
@@ -67,7 +68,7 @@ function Loot:CreateFrame()
 		:SetJustifyV("TOP")
 		:SetFont(SegoeFont,11)
 		:SetParent(F)
-		:SetText(L['loot_grayframe_maintext'])
+		:SetText(L['loot_greyframe_maintext'])
 	.__END
 
 	F.Value = CHAIN(F:CreateFontString())
@@ -78,7 +79,7 @@ function Loot:CreateFrame()
 		:SetText("h")
 	.__END
 
-	F.Close = CHAIN(CreateFrame("Button", "ZygorGrayFrameClose" , F )) 
+	F.Close = CHAIN(CreateFrame("Button", "ZygorGreyFrameClose" , F )) 
 		:SetSize(10,10)
 		:SetPoint("LEFT",F.MainText,"RIGHT",3)
 		:RegisterForClicks("LeftButtonUp")
@@ -89,16 +90,16 @@ function Loot:CreateFrame()
 end
 
 function Loot:ToggleFrame()
-	if ZGV.db.profile.showgrayvalue  then
-		if not Loot.GrayFrame then 
-			Loot:CreateFrame()
-			Loot.Events:RegisterEvent("BAG_UPDATE") --Register the event while we are at it.
+	if ZGV.db.profile.showgreyvalue then
+		if not self.GreyFrame then 
+			self:CreateFrame()
+			self.Events:RegisterEvent("BAG_UPDATE_DELAYED") --Register the event while we are at it.
 		end
 		
-		self.GrayFrame:Show()
-		self:GetGrayBagValue()
-	elseif self.GrayFrame then
-		self.GrayFrame:Hide()
+		self.GreyFrame:Show()
+		self:GetGreyBagValue()
+	elseif self.GreyFrame then
+		self.GreyFrame:Hide()
 	end
 end
 
@@ -107,13 +108,13 @@ function Loot:UpdateSkin()
 		return ZGV.CurrentSkinStyle:SkinData(property)
 	end
 	
-	self.GrayFrame:SetBackdrop(SkinData("MoneyBackdrop"))
-	self.GrayFrame:SetBackdropColor(unpack(SkinData("MoneyBackdropColor")))
-	self.GrayFrame:SetBackdropBorderColor(unpack(SkinData("MoneyBackdropBorderColor")))
-	AssignButtonTexture(self.GrayFrame.Close,ZGV.CurrentSkinStyle:SkinData("TitleButtons"),6,16)
+	self.GreyFrame:SetBackdrop(SkinData("MoneyBackdrop"))
+	self.GreyFrame:SetBackdropColor(unpack(SkinData("MoneyBackdropColor")))
+	self.GreyFrame:SetBackdropBorderColor(unpack(SkinData("MoneyBackdropBorderColor")))
+	AssignButtonTexture(self.GreyFrame.Close,ZGV.CurrentSkinStyle:SkinData("TitleButtons"),6,16)
 end
 
-function Loot:SellGrayItems() --Auto Sell Gray Items
+function Loot:SellGreyItems() --Auto Sell Grey Items
 	local bag, slot
 
 	local totalprice=0
@@ -125,7 +126,7 @@ function Loot:SellGrayItems() --Auto Sell Gray Items
 				local price=select(11,GetItemInfo(item))
 				if quality==0 and price > 0 then
 					local count=select(2,GetContainerItemInfo(bag,slot))
-					ZGV:Print(L['loot_sellgrays_sold']:format(count,link,GetMoneyString(price*count)))
+					ZGV:Print(L['loot_sellgreys_sold']:format(link,count,GetMoneyString(price*count)))
 					UseContainerItem(bag,slot) -- Will use an item and since vendor is open, will sell the item.
 					totalprice=totalprice+price*count
 				end
@@ -133,49 +134,30 @@ function Loot:SellGrayItems() --Auto Sell Gray Items
 		end
 	end
 	if totalprice>0 then
-		ZGV:Print(L['loot_sellgrays_total']:format(GetMoneyString(totalprice)))
+		ZGV:Print(L['loot_sellgreys_total']:format(GetMoneyString(totalprice)))
 	end
 end
 
 --Buying items from steps in guide
 
-local ItemsNeeded
+function Loot:ShowBuyConfirm(cost)
+	ZGV:Debug("Showing/Creating Auto Buy Frame")
+	local items=Loot.ItemsToBuy
+	if not self.popup then self.popup = ZGV.Popup:CreatePopup() end
+	local popup = self.popup
+	local itemtext = ""
 
-local function ShowBuyConfirm(ItemsNeed,totalCost)
-	local zgname = ZygorGuidesViewer_L("Main")["zgname"]
+	for name,item in pairs(items) do itemtext = itemtext..item.link.." x |cffff0000"..item.amount.."|r\n" end
 
-	local cost=totalCost
+	popup:SetText(L['loot_autobuyframetext']:format(itemtext,GetMoneyString(cost)))
 
-	BuyConfirm.hideOnEscape=true -- tricking the game to think a static popup is displayed so that escape works correctly.
-	StaticPopup_DisplayedFrames[6]=BuyConfirm
-
-	BuyConfirm_Text:SetText(zgname.." would like to buy\n")
-
-	local items=ItemsNeed
-	local name, item
-	local numItems=0
-
-	for name,item in pairs(items) do
-		BuyConfirm_Text:SetText(BuyConfirm_Text:GetText()..item.link.."x|cffff0000"..item.amount.."\n")
-		numItems=numItems+1
-	end
-
-	BuyConfirm_Gold:SetText(floor(cost/10000)) cost=cost%10000
-	BuyConfirm_Silver:SetText(floor(cost/100)) cost=cost%100
-	BuyConfirm_Copper:SetText(cost)
-
-	BuyConfirm_Text1:ClearAllPoints()
-	local moveLeft = BuyConfirm:GetWidth() - 71 - BuyConfirm_Gold:GetStringWidth() - BuyConfirm_Silver:GetStringWidth()- BuyConfirm_Copper:GetStringWidth()
-	BuyConfirm_Text1:SetPoint("TOPLEFT",BuyConfirm,"TOPLEFT",moveLeft/2,-14-BuyConfirm_Text:GetHeight())
-
-	BuyConfirm:SetHeight(70+BuyConfirm_Text:GetHeight())
-	BuyConfirm:Show()
+	popup.AcceptFunc = function(self) Loot:BuyItems() end
+	popup.Settings = function(self) ZygorGuidesViewer:OpenOptions("conv") end
+	popup:Show()
 end
 
-local function BuyItems()
-	local items=ItemsNeeded
-
-	local name, item
+function Loot:BuyItems()
+	local items=Loot.ItemsToBuy
 
 	for name,item in pairs(items) do
 		while item.amount > 0 do
@@ -189,213 +171,119 @@ local function BuyItems()
 			item.amount=item.amount-buyAmount
 		end
 	end
+	wipe(self.ItemsToBuy) -- wipe table after we are done
 end
 
-function CanGoInBag(item, bag)
-   local itemFamily = GetItemFamily(item)
-   local bagFamily = select(2, GetContainerNumFreeSlots(bag))
-   if not itemFamily or not bagFamily then return false end
-   return bagFamily == 0 or bit.band(itemFamily, bagFamily) > 0
-end
-
-local function findBuyItems()
-	ItemsNeeded = {}
+function Loot:FindItemsToBuy()
+	if not ZGV.CurrentStep then return end
 	local goals=ZGV.CurrentStep.goals
-	local totalCost,neededSlots,costForOne= 0,0,0
-	local name,number,id, index , maxStack, numAvail, notAvail
+	local totalCost,neededSlots = 0,0
+	local id
 
-	for i=1, #goals do
-		if goals[i].action=="buy" and goals[i].status~="complete" then
-			name=goals[i].target
-			id=goals[i].targetid
-			if not id then print(zgname..": No item ID for item, please report issue.") return end
-			number=tonumber(goals[i]:GetText():match("%s%d+"))
+	if not self.ItemsToBuy then self.ItemsToBuy = {} else wipe(self.ItemsToBuy) end
 
-			for merchindex=1,GetMerchantNumItems() do
-				local merchItemName,_,costForOne,_,numAvail = GetMerchantItemInfo(merchindex)
+	ZGV:Debug("Trying to find items to buy")
 
-				if merchItemName == name then
-					notAvail=false
-					index=merchindex
-					maxStack=GetMerchantItemMaxStack(merchindex)
+	for i=1, #goals do while(1) do
+		if goals[i].action~="buy" or goals[i].status=="complete" then break end	
+		local name=goals[i].target
+		local number=tonumber(goals[i]:GetText():match("%s%d+"))
+		local found = false
 
-					if not number then return end
+		id=goals[i].targetid
 
-					if number%maxStack == 0 then neededSlots = neededSlots + floor(number/maxStack)
-					else neededSlots = neededSlots + floor(number/maxStack) + 1 end
+		if not id or not number then return end -- no item id in guide or we couldn't find out how many.
 
-					for k=1, floor((merchindex-1)/10) do
-						MerchantNextPageButton:Click() -- send them to the correct page
-					end
+		for index=1,GetMerchantNumItems() do while(1) do 
+			local merchItemName,_,costForOne,_,numAvail = GetMerchantItemInfo(index)
+			if merchItemName ~= name then break end
 
-					if costForOne==0 then print(zgname..": "..name.." does not use gold to buy. Please purchase yourself.") return end
-					if numAvail~=-1 and numAvail < number then print(zgname..": "..number.." "..name.." are not avaliable at this time.") return end
+			local maxStack=GetMerchantItemMaxStack(index)
 
-					totalCost = totalCost + number*costForOne
+			if number%maxStack == 0 then neededSlots = neededSlots + floor(number/maxStack)
+			else neededSlots = neededSlots + floor(number/maxStack) + 1 end
 
-					ItemsNeeded[name]={["needed"]=goals[i].count, ["amount"]=number, ["id"]=id, ["index"]=index, ["maxStack"]=maxStack, ["link"]=(select(2,GetItemInfo(id)))}
+			for k=1, floor((index-1)/10) do MerchantNextPageButton:Click() end -- send them to the correct page
 
-					break -- item found so go to next item
-				else
-					notAvail=true
-				end
-			end
-			if notAvail then
-				local link=(select(2,GetItemInfo(id)))
-				print(zgname..": ".. link.. "|cffffee66 not available at this vendor or is out of stock.")
-			end
-		--elseif goals[i].action=="talk" and goals[i].npc and goals[i].npc:match("Auctioneer") then return --don't try to buy items from a vendor that are suppose to be from a auctioneer
+			if costForOne==0 then ZGV:Print(L['loot_autobuynotmoney']:format(name)) return end
+			if numAvail~=-1 and numAvail < number then ZGV:Print(L['loot_autobuynostock']:format(name,number)) return end
+			
+			totalCost = totalCost + number*costForOne
+
+			self.ItemsToBuy[name]={["amount"]=number, ["index"]=index, ["maxStack"]=maxStack, ["link"]=(select(2,GetItemInfo(id)))}
+			
+			found = true
+
+		break end if found then break end end
+		if not found then
+			local link=(select(2,GetItemInfo(id)))
+			 ZGV:Print(L['loot_autobuynotavail']:format(link))
 		end
-	end
+	break end end
+
+	if totalCost <= 0 then return end -- items dont exist in this step or are of a different type than gold
+	
+	ZGV:Debug("Found items")
 
 	local playerMoney = GetMoney()
-	local totalSlots=0
-	for bag=1,4 do --All items of one type can go in the same games. So just check the last item.
+	local totalAvailSlots=0
+
+	local function CanGoInBag(item, bag) --Test the item family of available bags with the item
+		   local itemFamily = GetItemFamily(item)
+		   local bagFamily = select(2, GetContainerNumFreeSlots(bag))
+		   if not itemFamily or not bagFamily then return false end
+		   return bagFamily == 0 or bit.band(itemFamily, bagFamily) > 0
+	end
+
+	for bag=1,4 do --All items of one type can go in the same bags. So just check the last item.
 		if CanGoInBag(id,bag) then
-			totalSlots=totalSlots+GetContainerNumFreeSlots(bag)
+			totalAvailSlots=totalAvailSlots+GetContainerNumFreeSlots(bag)
 		end
 	end
 
-	if neededSlots > totalSlots and totalCost > 0 then print(zgname..": Not enough room for "..neededSlots.. " stacks.") return end
+	if neededSlots > totalAvailSlots then ZGV:Print(L['loot_autobuynoroom']:format(neededSlots)) return end
 
-	if playerMoney >= totalCost and totalCost > 0 then
+	if playerMoney >= totalCost then
+		ZGV:Debug("Trying to buy items")
 		if ZGV.db.profile.autobuyframe then
-			ShowBuyConfirm(ItemsNeeded,totalCost)--BuyItems(ItemsNeeded)
+			Loot:ShowBuyConfirm(totalCost)--BuyItems(Loot.ItemsToBuy)
 		else
-			BuyItems()
+			Loot:BuyItems()
 		end
-	elseif playerMoney < totalCost and totalCost > 0 then
-		print(zgname..": You do not have enough money to buy all items.")
+	elseif playerMoney < totalCost then
+		ZGV:Print(L['loot_autobuypoor']:format(GetMoneyString(totalCost)))
 	end
 end
 
 local function OnEvent(self,event)
-	if event=="BAG_UPDATE" and ZGV.db.profile.showgrayvalue then
-		Loot:GetGrayBagValue()
+	if event=="BAG_UPDATE_DELAYED" and ZGV.db.profile.showgreyvalue then
+		Loot:GetGreyBagValue()
 	elseif event=="MERCHANT_SHOW" then
-		if ZGV.db.profile.showgraysellbutton then
-			if not Loot.graysell then
-				Loot.graysell = CHAIN(CreateFrame("Button", "ZygorGuidesViewerSellButton", MerchantFrame, "OptionsButtonTemplate"))
+		if ZGV.db.profile.showgreysellbutton then
+			if not Loot.greysell then
+				Loot.greysell = CHAIN(CreateFrame("Button", "ZygorGuidesViewerSellButton", MerchantFrame, "OptionsButtonTemplate"))
 					:SetPoint("TOPLEFT", 60, -30)
-					:SetText(L['loot_sellgraybutton'])
-					:SetScript("OnClick",Loot.SellGrayItems)
+					:SetText(L['loot_sellgreybutton'])
+					:SetScript("OnClick",Loot.SellGreyItems)
 				.__END
 			end
-			Loot.graysell:Show()
-		elseif Loot.graysell then 
-			Loot.graysell:Hide()
+			Loot.greysell:Show()
+		elseif Loot.greysell then 
+			Loot.greysell:Hide()
 		end
 
-		if ZGV.db.profile.autosell then Loot:SellGrayItems() end
-		if ZGV.db.profile.autobuy then findBuyItems() end
+		if ZGV.db.profile.autosell then Loot:SellGreyItems() end
+		if ZGV.db.profile.autobuy then  Loot:FindItemsToBuy() end
 	end
 end
 
-Loot.Events = CreateFrame("Frame")
-Loot.Events:RegisterEvent("MERCHANT_SHOW")
-Loot.Events:SetScript("OnEvent", OnEvent)
-
-local function CreateBuyConfirm()
-	local buyConfirm=CreateFrame("Frame","BuyConfirm",UIParent)
-		buyConfirm:SetBackdrop({bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border", tile = true, edgeSize=32, tileSize = 1, insets = { left = 11, right = 12, top = 10, bottom = 11 }})
-		buyConfirm:SetBackdropColor(1,0,0,1)
-		buyConfirm:SetWidth(400)
-		buyConfirm:ClearAllPoints()
-		buyConfirm:SetPoint("TOP",0,-100)
-		buyConfirm:SetFrameStrata("DIALOG")
-		buyConfirm:Hide()
-
-	local text=buyConfirm:CreateFontString("BuyConfirm_Text","ARTWORK","SystemFont_Med2")
-		text:ClearAllPoints()
-		text:SetPoint("TOP",0,-20)
-
-	local text1=buyConfirm:CreateFontString("BuyConfirm_Text1","ARTWORK","SystemFont_Med2")
-		text1:SetText("for ")
-
-	local gold=buyConfirm:CreateFontString("BuyConfirm_Gold","ARTWORK","SystemFont_Med2")
-		gold:ClearAllPoints()
-		gold:SetPoint("TOPLEFT",text1,"TOPRIGHT",0,0)
-		gold:SetText("0")
-
-	local goldicon=buyConfirm:CreateTexture("BuyConfirm_GoldIcon", "OVERLAY")
-		goldicon:ClearAllPoints()
-		goldicon:SetTexture("Interface\\MoneyFrame\\UI-GoldIcon")
-		goldicon:SetPoint("TOPLEFT", gold, "TOPRIGHT",2,0)
-		goldicon:SetSize(12,12)
-
-	local silver=buyConfirm:CreateFontString("BuyConfirm_Silver","ARTWORK","SystemFont_Med2")
-		silver:ClearAllPoints()
-		silver:SetPoint("TOPLEFT",goldicon,"TOPRIGHT",2,0)
-		silver:SetText("0")
-
-	local silvericon=buyConfirm:CreateTexture("BuyConfirm_SilverIcon", "OVERLAY")
-		silvericon:ClearAllPoints()
-		silvericon:SetTexture("Interface\\MoneyFrame\\UI-SilverIcon")
-		silvericon:SetPoint("TOPLEFT", silver, "TOPRIGHT",2,0)
-		silvericon:SetSize(12,12)
-
-	local copper=buyConfirm:CreateFontString("BuyConfirm_Copper","ARTWORK","SystemFont_Med2")
-		copper:ClearAllPoints()
-		copper:SetPoint("TOPLEFT",silvericon,"TOPRIGHT",2,0)
-		copper:SetText("0")
-
-	local coppericon=buyConfirm:CreateTexture("BuyConfirm_CopperIcon", "OVERLAY")
-		coppericon:ClearAllPoints()
-		coppericon:SetTexture("Interface\\MoneyFrame\\UI-CopperIcon")
-		coppericon:SetPoint("TOPLEFT", copper, "TOPRIGHT",2,0)
-		coppericon:SetSize(12,12)
-
-	local checkbutton=CreateFrame("CheckButton", "BuyConfirm_CheckButton",buyConfirm,"UICheckButtonTemplate")
-		checkbutton:SetSize(20,20)
-		checkbutton:ClearAllPoints()
-		checkbutton:SetPoint("BOTTOM",buyConfirm,"BOTTOMLEFT",25,10)
-		_G[checkbutton:GetName() .. "Text"]:SetText("Don't show again")
-
-	local acceptbutton=CreateFrame("Button", "BuyConfirm_AcceptButton",buyConfirm,"UIPanelButtonTemplate")
-		acceptbutton:SetSize(100,15)
-		acceptbutton:ClearAllPoints()
-		acceptbutton:SetPoint("LEFT",checkbutton,"RIGHT",135,0)
-		acceptbutton:SetText("Accept")
-
-	local declinebutton=CreateFrame("Button", "BuyConfirm_DeclineButton",buyConfirm,"UIPanelButtonTemplate")
-		declinebutton:SetSize(100,15)
-		declinebutton:ClearAllPoints()
-		declinebutton:SetPoint("LEFT",acceptbutton,"RIGHT",10,0)
-		declinebutton:SetText("Decline")
-
-	local function escaped()
-		buyConfirm:Hide()
-		StaticPopup_DisplayedFrames[6]=nil
-	end
-
-	local function declined(self,key)
-		local checked=checkbutton:GetChecked()
-		if key=="LeftButton" then
-			if checked then
-				ZGV.db.profile.autobuy=false
-				checkbutton:SetChecked(false)
-			end
-			buyConfirm:Hide()
-			StaticPopup_DisplayedFrames[6]=nil
-		end
-	end
-
-	local function accepted()
-		local checked=checkbutton:GetChecked()
-		if checked then
-			ZGV.db.profile.autobuy=true
-			ZGV.db.profile.autobuyframe=false
-			checkbutton:SetChecked(false)
-		end
-		buyConfirm:Hide()
-		StaticPopup_DisplayedFrames[6]=nil
-		BuyItems()
-	end
-
-	acceptbutton:SetScript("OnClick",accepted)
-	declinebutton:SetScript("OnClick",declined)
-
-	hooksecurefunc("StaticPopup_EscapePressed",escaped)
+function Loot:RegisterEvents()
+	Loot.Events = CreateFrame("Frame")
+	Loot.Events:RegisterEvent("MERCHANT_SHOW")
+	Loot.Events:SetScript("OnEvent", OnEvent)
 end
 
-CreateBuyConfirm()
+tinsert(ZGV.startups,function(self)
+	ZGV.Loot:RegisterEvents()
+	ZGV.Loot:ToggleFrame()
+end)

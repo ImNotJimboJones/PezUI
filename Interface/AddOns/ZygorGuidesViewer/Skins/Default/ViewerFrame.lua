@@ -77,7 +77,7 @@ function ZygorGuidesViewer_ProgressBar_SetUp()
 end
 
 function ZygorGuidesViewer_ProgressBar_Update()
-	if not ZGV.CurrentGuide or not ZGV.CurrentGuide.CurrentStepNum then return end
+	if not ZGV.CurrentGuide or not ZGV.CurrentGuide.CurrentStepNum or not ZGV.db.profile.progress then return end
 	local TotalSize=ZygorGuidesViewerFrame_Step1:GetWidth()
 	local percent,num = ZGV.CurrentGuide:GetCompletion()
 

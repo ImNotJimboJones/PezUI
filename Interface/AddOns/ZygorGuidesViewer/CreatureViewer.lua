@@ -148,7 +148,7 @@ end
 --viewer and main are declared at the top.
 
 local function SetAnchor()
-
+	
 	if CV.Frame.anchor then
 		if not ZGV.db.profile.cvanchor then
 			viewer:SetMovable(true)
@@ -268,6 +268,8 @@ do
 end
 
 function CV:SetMaster()
+	if abs(viewer:GetRight() - main:GetLeft()) > 2 or abs(viewer:GetTop() - main:GetTop()) > 2 then return end 
+	--Let the user place this frame most of the time, except at startup and when it is close to default pos.
 	viewer:SetPoint("TOPRIGHT",main,"TOPLEFT",unpack(ZGV.CurrentSkinStyle:SkinData("CreatureViewerGap")))
 end
 
@@ -283,6 +285,7 @@ function CV:CreateFrame()
 		:SetSize(100,150)
 		:SetResizable(true)
 		:SetMovable(true)
+		:SetUserPlaced(true)
 		:SetScript("OnUpdate",self.Frame_OnUpdate)
 		:SetAllPoints()
 		.__END -- Backdrop is set afterwards

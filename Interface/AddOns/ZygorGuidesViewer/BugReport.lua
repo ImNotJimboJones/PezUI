@@ -335,9 +335,18 @@ function ZGV:BugReport(maint)
 			for slot=1,GetContainerNumSlots(bag) do
 				local item = GetContainerItemLink(bag,slot)
 				if item then
-					local id,name = string.match(item,"item:(.-):.-|h%[(.-)%]")
 					local tex,count = GetContainerItemInfo(bag,slot)
-					tinsert(inventory,("    %s ##%d x%d\n"):format(name,id,count))
+					local id,name = string.match(item,"item:(%d-):.-|h%[(.-)%]")
+					if name then
+						tinsert(inventory,("    %s ##%d x%d\n"):format(name or "?",id or 0,count or 0))
+					else
+						id,name = string.match(item,"battlepet:(%d-):.-|h%[(.-)%]")
+						if name then
+							tinsert(inventory,("    CAGED PET: %s ##%d x%d\n"):format(name or "?",id or 0,count or 0))
+						else
+							tinsert(inventory,"    ? "..item)
+						end
+					end
 				end
 			end
 		end
@@ -346,11 +355,12 @@ function ZGV:BugReport(maint)
 		s = s .. "\n"
 	end
 
-	s = s .. "-- Buffs/debuffs --\n"
+	s = s .. "-- Buffs --\n"
 	for i=1,30 do
 		local name,_,tex = UnitBuff("player",i)
 		if name then s=s..("%s (\"%s\")\n"):format(name,tex) end
 	end
+	s = s .. "-- Debuffs --\n"
 	for i=1,30 do
 		local name,_,tex = UnitDebuff("player",i)
 		if name then s=s..("%s (\"%s\")\n"):format(name,tex) end
@@ -369,6 +379,26 @@ function ZGV:BugReport(maint)
 		s = s .. table.concat(TableKeys(self.db.char.taxis)," , ")
 	end
 	s = s .. "\n\n"
+
+	if ZGV.db.profile.pathfinding then
+		s = s .. "-- Travel Route --\n"
+		for k,v in ipairs(LibRover.RESULTS) do
+			s = s .. (" %d. %s\n"):format(k,v:tostring())
+		end
+		if #LibRover.RESULTS_SKIPPED_START>0 then
+			s = s .. "  Skipped at start:\n"
+			for k,v in ipairs(LibRover.RESULTS_SKIPPED_START) do
+				s = s .. (" %s\n"):format(v:tostring())
+			end
+		end
+		if #LibRover.RESULTS_SKIPPED_END>0 then
+			s = s .. "  Skipped at end:\n"
+			for k,v in ipairs(LibRover.RESULTS_SKIPPED_END) do
+				s = s .. (" %s\n"):format(v:tostring())
+			end
+		end
+		s = s .. "\n\n"
+	end
 
 	s = s .. "-- Options --\n"
 	s = s .. "Profile:\n"

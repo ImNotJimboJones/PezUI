@@ -24,7 +24,7 @@ ZGV.dailyQuests = {}
 ZGV.instantQuests = {}
 ZGV.completedQuests = {}
 -- ZGV.completedQuestTitles = {}  -- let's not use this anymore, with GetQuestID available
-setmetatable(ZGV.completedQuests,{__index=function(tab,id) return ZGV.Expansion_Mists and (IsQuestFlaggedCompleted(id or 0)) or rawget(tab,id) end })
+setmetatable(ZGV.completedQuests,{__index=function(tab,id) return IsQuestFlaggedCompleted(tonumber(id) or 0) end })
 
 
 local function GetCaptures(s)
@@ -136,6 +136,7 @@ function ZGV:QuestTracking_CacheQuestLog()
 
 			quest.title = strQuestLogTitleText
 			quest.level = strQuestLevel
+			quest.tagnum = GetQuestLogQuestType(i) --will return a number.[0] = "", [1] = "Group", [41] = "PvP",[62] = "Raid", [81] = "Dungeon", [83] = "Legendary",[ 85] = "Heroic",[98] = "Scenario", [102] = "Account",
 			--quest.objective = obj
 			--quest.description = desc
 			quest.complete = (isComplete==1)
@@ -569,7 +570,7 @@ function ZGV:MarkUselessQuests()
 	local guidequests = self.CurrentGuide:GetQuests()
 	local strings = ""
 	for qi,quest in ipairs(self.quests) do
-		quest.useless = not guidequests[quest.id] and not quest.daily
+		quest.useless = not guidequests[quest.id] and not quest.daily and not (quest.tagnum==102)
 		if quest.useless then strings = strings .. quest.title .. "\n" end
 		--print(quest.title,quest.useless)
 	end

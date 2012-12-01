@@ -7,6 +7,11 @@ function ZGV_DeclineQuest()
 	ZGV.tmp_no_autoquest=time()
 end
 
+local do_not_autoaccept_these_quests = {
+	[10552]=1, --Scryers
+	[10551]=1, --Aldors
+}
+
 -- fixes for Blizzard autoaccepting madness.
 --[[
 function QuestFrameDetailPanel_OnShow_after()
@@ -76,11 +81,6 @@ tinsert(ZGV.startups,function(self)
 end)
 
 function ZGV:QuestAutoAccept_InGreeting()
-	if GetNumAvailableQuests()>0 and ZGV.db.profile.autoacceptturninall then -- let's not be picky
-		self:Print("Opening quest in greeting: "..GetAvailableTitle(1))
-		SelectAvailableQuest(1)
-		return true
-	end
 	for qnum=1,GetNumAvailableQuests() do
 		if self.CurrentStep then
 			for i,goal in ipairs(self.CurrentStep.goals) do
@@ -92,19 +92,19 @@ function ZGV:QuestAutoAccept_InGreeting()
 			end
 		end
 	end
+	if GetNumAvailableQuests()>0 and ZGV.db.profile.autoacceptturninall then -- let's not be picky
+		self:Print("Opening quest in greeting: "..GetAvailableTitle(1))
+		SelectAvailableQuest(1)
+		return true
+	end
 end
 
 function ZGV:QuestAutoAccept_InGossip()
-	if GetNumGossipAvailableQuests()>0 and ZGV.db.profile.autoacceptturninall then -- let's not be picky
-		self:Print("Opening quest in gossip: ".. GetGossipAvailableQuests())
-		SelectGossipAvailableQuest(1)
-		return true
-	end
 	local quests={GetGossipAvailableQuests()}
 	for qnum=1,GetNumGossipAvailableQuests() do
 		if self.CurrentStep then
 			for i,goal in ipairs(self.CurrentStep.goals) do
-				if goal.action=="accept" and goal.quest and goal.quest.title==quests[qnum*3-2] and goal:GetStatus()=="incomplete" then
+				if goal.action=="accept" and goal.quest and goal.quest.title==quests[(qnum-1)*5+1] and goal:GetStatus()=="incomplete" then
 					self:Print("Opening quest  in gossip")
 					SelectGossipAvailableQuest(qnum)
 					return true
@@ -112,22 +112,16 @@ function ZGV:QuestAutoAccept_InGossip()
 			end
 		end
 	end
+	if GetNumGossipAvailableQuests()>0 and ZGV.db.profile.autoacceptturninall then -- let's not be picky
+		self:Print("Opening quest in gossip: ".. GetGossipAvailableQuests())
+		SelectGossipAvailableQuest(1)
+		return true
+	end
 end
 
 function ZGV:QuestAutoAccept_InDetail()
-	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
-		self:Print("Accepting quest")
-		local title=GetTitleText()
-		local obj=GetObjectiveText()
-		if title and obj then
-			RaidNotice_AddMessage(RaidBossEmoteFrame,"|cff00aacc- New Quest -|n|cffffdd00"..title.."|r|n|cffddccbb"..obj,ChatTypeInfo.SYSTEM,15)
-			-- there's a limit of 2 messages here.
-		end
-		QuestDetailAcceptButton_OnClick()
-		GetQuestReward(QuestInfoFrame.itemChoice)
-		return true
-	end
 	local id = GetQuestID()
+	if do_not_autoaccept_these_quests[id] then return end
 	if self.CurrentStep then
 		for i,goal in ipairs(self.CurrentStep.goals) do
 			if goal.action=="accept" and goal.quest and goal.quest.id==id and goal:IsCompleteable() and not goal:IsObsolete() then
@@ -143,11 +137,37 @@ function ZGV:QuestAutoAccept_InDetail()
 			end
 		end
 	end
+	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
+		self:Print("Accepting quest")
+		if ZGV.db.profile.autoacceptshowobjective then
+			local title=GetTitleText()
+			local obj=GetObjectiveText()
+			if title and obj then
+				RaidNotice_AddMessage(RaidBossEmoteFrame,"|cff00aacc- New Quest -|n|cffffdd00"..title.."|r|n|cffddccbb"..obj,ChatTypeInfo.SYSTEM,15)
+				-- there's a limit of 2 messages here.
+			end
+		end
+		QuestDetailAcceptButton_OnClick()
+		 -- It might be an instant quest! Bastardize it now.
+		GetQuestReward(QuestInfoFrame.itemChoice)
+		return true
+	end
 end
 
 function ZGV:QuestAutoTurnin_InGreeting()
 	for qnum=1,GetNumActiveQuests() do
 		local title = GetActiveTitle(qnum)
+		
+		if self.CurrentStep then
+			for i,goal in ipairs(self.CurrentStep.goals) do
+				if goal.action=="turnin" and goal.quest and goal.quest.title==title and goal:GetStatus()=="incomplete" then
+					self:Print("Turning in quest in greeting: ".. title)
+					SelectActiveQuest(qnum)
+					return true
+				end
+			end
+		end
+
 		if ZGV.db.profile.autoacceptturninall then -- let's not be picky
 			for i,quest in ipairs(self.quests) do
 				if quest.title==title and quest.complete then
@@ -158,32 +178,13 @@ function ZGV:QuestAutoTurnin_InGreeting()
 			end
 		end
 
-		
-		if self.CurrentStep then
-			for i,goal in ipairs(self.CurrentStep.goals) do
-				if goal.action=="turnin" and goal.quest and goal.quest.title==title and goal:GetStatus()=="incomplete" then
-					self:Print("Activating quest")
-					SelectActiveQuest(qnum)
-					return true
-				end
-			end
-		end
 	end
 end
 
 function ZGV:QuestAutoTurnin_InGossip()
 	local quests={GetGossipActiveQuests()}
 	for qnum=1,GetNumGossipActiveQuests() do
-		local title = quests[qnum*3-2]
-		if ZGV.db.profile.autoacceptturninall then -- let's not be picky
-			for i,quest in ipairs(self.quests) do
-				if quest.title==title and quest.complete then
-					self:Print("Turning in quest in gossip: ".. title)
-					SelectGossipActiveQuest(qnum)
-					return true
-				end
-			end
-		end
+		local title = quests[(qnum-1)*5+1]
 		if self.CurrentStep then
 			for i,goal in ipairs(self.CurrentStep.goals) do
 				if goal.action=="turnin" and goal.quest and goal.quest.title==title and goal:GetStatus()=="incomplete" then
@@ -193,40 +194,53 @@ function ZGV:QuestAutoTurnin_InGossip()
 				end
 			end
 		end
-	end
-end
-
-function ZGV:QuestAutoComplete_InProgress()
-	if not IsQuestCompletable() or QuestInfoFrame.chooseItems then return end
-	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
-		self:Print("Completing quest")
-		CompleteQuest()
-		return true
-	end
-	local id = GetQuestID()
-	if self.CurrentStep then
-		for i,goal in ipairs(self.CurrentStep.goals) do
-			if goal.quest and goal.quest.id==id then
-				self:Print("Completing quest")
-				CompleteQuest()
-				return true
+		if ZGV.db.profile.autoacceptturninall then -- let's not be picky
+			for i,quest in ipairs(self.quests) do
+				if quest.title==title and quest.complete then
+					self:Print("Turning in quest in gossip: ".. title)
+					SelectGossipActiveQuest(qnum)
+					return true
+				end
 			end
 		end
 	end
 end
 
-function ZGV:QuestAutoTurnin_InComplete()
-	if ( QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 0 ) then return end
-	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
-		self:Print("Turning in quest")
-		GetQuestReward(QuestInfoFrame.itemChoice)
-		return true
-	end
+function ZGV:QuestAutoComplete_InProgress()
 	local id = GetQuestID()
+	if do_not_autoaccept_these_quests[id] then return end
+	if not IsQuestCompletable() then return end --or GetNumQuestChoices()>1 then return end
 	if self.CurrentStep then
 		for i,goal in ipairs(self.CurrentStep.goals) do
 			if goal.quest and goal.quest.id==id then
-				self:Print("Turning in quest")
+				self:Print("Completing quest.")
+				CompleteQuest()
+				return true
+			end
+		end
+	end
+	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
+		self:Print("Completing quest.")
+		CompleteQuest()
+		return true
+	end
+end
+
+function ZGV:QuestAutoTurnin_InComplete()
+	local id = GetQuestID()
+	if not id then return end
+	if do_not_autoaccept_these_quests[id] then ZGV:Debug("&qauto Quest %d is on do_not_autoaccept_these_quests list.",id) return end
+	if ( QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 1 ) then return end
+	if GetNumQuestChoices()==1 then QuestInfoFrame.itemChoice=1 end
+	if ZGV.db.profile.autoacceptturninall then -- let's not be picky
+		self:Print("Turning in quest.")
+		GetQuestReward(QuestInfoFrame.itemChoice)
+		return true
+	end
+	if self.CurrentStep then
+		for i,goal in ipairs(self.CurrentStep.goals) do
+			if goal.quest and goal.quest.id==id then
+				self:Print("Turning in quest.")
 				GetQuestReward(QuestInfoFrame.itemChoice)
 				return true
 			end
@@ -246,7 +260,7 @@ end
 function ZGV:QuestAutoTurning_ChooseReward()
 	if not QuestFrame:IsShown() or not QuestInfoFrame or not QuestInfoFrame.chooseItems then return end
 	
-	if ( QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 0 ) then
+	if ( QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 1 ) then
 		local rewardids = {}
 		local usables = {}
 

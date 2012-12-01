@@ -1,6 +1,5 @@
 local ZGV = ZygorGuidesViewer
 if not ZGV then return end
-if not ZGV.Expansion_Mists then print("PetBattle says goodbye; you're not on Mists API yet.") return end
 
 PetBattle = {}
 ZGV.PetBattle = PetBattle
@@ -10,14 +9,14 @@ PetBattle.PetJournal = {
 	AvailGuides = {},
 	}
 
-local PetJournal=PetBattle.PetJournal
 local pet=PetBattle
 
 local _G,assert,table,string,tinsert,tonumber,tostring,type,ipairs,pairs,setmetatable,math,wipe = _G,assert,table,string,tinsert,tonumber,tostring,type,ipairs,pairs,setmetatable,math,wipe
 
 tinsert(ZGV.startups,function(self)
 	PetBattle:PetRegEvents()
-	ZGV:ScheduleTimer(function() PetBattle.PetJournal.JournalIconSetup() end, 2.0)
+	hooksecurefunc("TogglePetJournal",function() PetBattle.PetJournal.JournalIconSetup() end)
+	-- ZGV:ScheduleTimer(function() PetBattle.PetJournal.JournalIconSetup() end, 2.0)
 end)
 
 local CHAIN = ZGV.ChainCall
@@ -1113,45 +1112,60 @@ end
 
 --Zygor button for the pet Journal
 
-function PetJournal.Icon_OnClick(self,but)
+function PetBattle.PetJournal.Icon_OnClick(self,but)
 	local pet=self:GetParent()
 	local specID = pet.speciesID
 	if specID and PetBattle.PetJournal.AvailGuides[specID] then
 		ZGV:SetGuide(PetBattle.PetJournal.AvailGuides[specID])
 		return
 	end
-	ZGV:Error("How odd. We don't seem to have a guide for "..C_PetJournal.GetPetInfoBySpeciesID(specID))
+	ZGV:Error("How odd. We don't seem to have a guide for %s",C_PetJournal.GetPetInfoBySpeciesID(specID))
 end
 
-function PetJournal.ScheduleUpdate()
-	ZGV:ScheduleTimer(function() PetJournal.UpdateIcons() end, 0.1)
+function PetBattle.PetJournal.ScheduleUpdate()
+	ZGV:ScheduleTimer(function() PetBattle.PetJournal.UpdateIcons() end, 0.0001)
 end
 
-function PetJournal.UpdateIcons()
+function PetBattle.PetJournal.UpdateIcons()
 	for i=1, 12 do
-		local button=PetJournal.Icons[i]
+		local button=PetBattle.PetJournal.Icons[i]
 
 		local pet=button:GetParent()
 		local specID = pet.speciesID
 
-		if specID and PetBattle.PetJournal.AvailGuides[specID] then
+		if specID and PetBattle.PetJournal.AvailGuides[specID] --[[and not pet.owned]] and pet:IsShown() then
+			ZGV:Debug("&petguides Showing icon for pet %d %s",specID,pet.name:GetText())
 			button:Show()
 		else
+			if ZGV.db.profile.debug then
+				if not pet:IsShown() then
+					ZGV:Debug("&petguides Not showing icon for pet button %d... hidden",i)
+				elseif not specID then
+					ZGV:Debug("&petguides Not showing icon for pet %s... unknown??",pet.name:GetText())
+				elseif not PetBattle.PetJournal.AvailGuides[specID] then
+					ZGV:Debug("&petguides Not showing icon for pet %d %s: no guide",specID,pet.name:GetText())
+				elseif pet.owned then
+					ZGV:Debug("&petguides Not showing icon for pet %d %s: owned",specID,pet.name:GetText())
+				end
+			end
 			button:Hide()
 		end
 	end
 end
 
-function PetJournal.JournalIconSetup()
-	PetJournal_LoadUI() -- Load it so we can use it!
+function PetBattle.PetJournal.JournalIconSetup()
+	if PetBattle.PetJournal.loaded then return end
+	
+	hooksecurefunc("HybridScrollFrame_Update",function(scrollframe) if PetJournal and PetJournal.listScroll then PetBattle.PetJournal.ScheduleUpdate() end end)  -- CRAZY and inefficient. But it's either this, or 
 
 	for g,guide in ipairs(ZGV.registeredguides) do
 		if guide.pet then PetBattle.PetJournal.AvailGuides[guide.pet]=guide end
 	end
 
-	for i=1, 12 do --Max number of pets that can be shown at once. Bliz has it set to 12 currently as well.
+	for i=1,1000 do --Max number of pets that can be shown at once. Bliz has it set to 12 currently as well. Other addons might mess with it, so increasing. ~sinus
 		local prefix="PetJournalListScrollFrameButton"..i
 		local button=_G[prefix]
+		if not button then break end
 
 		local iconFrame = CreateFrame("Button", "ZygorPetIconFrame"..i, button,"OptionsButtonTemplate")
 		iconFrame:SetSize(25,20)
@@ -1164,33 +1178,36 @@ function PetJournal.JournalIconSetup()
 			GameTooltip:Show()
 		end)
 		iconFrame:SetScript("OnLeave",function() GameTooltip:Hide() end)
-		iconFrame:SetScript("OnClick", function(...) PetJournal.Icon_OnClick(...) end) -- Find the pet!
+		iconFrame:SetScript("OnClick", function(...) PetBattle.PetJournal.Icon_OnClick(...) end) -- Find the pet!
 
 		iconFrame.tex=iconFrame:CreateTexture("ZygorTalentIconTexture"..i,"OVERLAY")
 		iconFrame.tex:SetAllPoints(true)
 		iconFrame.tex:SetTexture(ZGV.DIR.."\\ZygorTalentAdvisor\\Skin\\popout-button")
 
-		local scroll=_G['PetJournalListScrollFrame']
-
-		scroll:HookScript("OnVerticalScroll",PetJournal.ScheduleUpdate)
-		scroll:HookScript("OnMouseWheel",PetJournal.ScheduleUpdate)
-		scroll.scrollDown:HookScript("OnClick",PetJournal.ScheduleUpdate)
-		scroll.scrollUp:HookScript("OnClick",PetJournal.ScheduleUpdate)
-
 		button.zygorButton=iconFrame
 
-		PetJournal.Icons[i]=iconFrame
+		PetBattle.PetJournal.Icons[i]=iconFrame
 	end
-	PetJournal.loaded=true
+
+	local scroll=_G['PetJournalListScrollFrame']
+	scroll:HookScript("OnVerticalScroll",PetBattle.PetJournal.ScheduleUpdate)
+	scroll:HookScript("OnMouseWheel",PetBattle.PetJournal.ScheduleUpdate)
+	scroll.scrollDown:HookScript("OnClick",PetBattle.PetJournal.ScheduleUpdate)
+	scroll.scrollUp:HookScript("OnClick",PetBattle.PetJournal.ScheduleUpdate)
+	-- for what purpose was this in the 1,12 loop above..? 2012-10-28 ~~sinus
+
+	PetBattle.PetJournal.loaded=true
 end
 
 --EVENTS
 
+local hits_per_round = {}
+
 local function OnEvent(self,event,...)
 	--print("Event Name: "..event.." Other Data: ",...)
 
-	if event=="PET_JOURNAL_LIST_UPDATE" and PetJournal.loaded then
-		ZGV:ScheduleTimer(function() PetJournal.UpdateIcons() end, 0.1)
+	if event=="PET_JOURNAL_LIST_UPDATE" and PetBattle.PetJournal.loaded then
+		PetBattle.PetJournal.ScheduleUpdate()
 		-- schedule it to happen almost instantly, Info is not ready if ran otherwise.
 	end
 
@@ -1231,10 +1248,21 @@ local function OnEvent(self,event,...)
 		PetBattle_MainFrameUpdateRound(...)
 		PetBattle_EnemyFrameUpdateRound(...)
 		PetBattle_AllyFrameUpdateRound(...)
+		wipe(hits_per_round)
 	elseif event=="PET_BATTLE_PET_CHANGED" and PetBattle.OpeningDone then
 		PetBattle:MainFrameUpdate()
+
+	elseif event=="PET_BATTLE_HEALTH_CHANGED" then
+		local owner,pet,hp_delta = ...
+		local maxhp = C_PetBattles.GetMaxHealth(owner,pet)
+		hits_per_round[owner..pet] = (hits_per_round[owner..pet] or 0) + hp_delta
+
+		--RaidNotice_AddMessage(RaidBossEmoteFrame,("%d (%d%%)"):format(hp_delta,hits_per_round[owner..pet]/maxhp*100),hp_delta>0 and ChatTypeInfo.GUILD or ChatTypeInfo.YELL,3)
 	end
 end
+
+local ReviveJustCooled=true
+local REVIVE_PETS=125439
 
 function PetBattle:PetRegEvents()
 
@@ -1250,6 +1278,29 @@ function PetBattle:PetRegEvents()
 	event:RegisterEvent("PET_BATTLE_PET_ROUND_PLAYBACK_COMPLETE")
 	event:RegisterEvent("PET_BATTLE_PET_CHANGED")
 	event:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
+
+	
+	-- Sinus tinkering:
+
+	-- Announce revive cooldown
+	ZGV:ScheduleRepeatingTimer(function()
+		if ZGV.db.profile.pet_notifyrevive then
+			if InCombatLockdown() or PetBattleFrame:IsVisible() or not IsUsableSpell(REVIVE_PETS) then return end
+			local cd = GetSpellCooldown(REVIVE_PETS)
+			if cd>0 then
+				ReviveJustCooled=false
+				return
+			end
+			if cd==0 and not ReviveJustCooled then
+				ReviveJustCooled=true
+				RaidNotice_AddMessage(RaidBossEmoteFrame,"You can revive your pets now.",ChatTypeInfo.SYSTEM,5)
+			end
+		end
+	end, 5)
+
+	event:RegisterEvent("PET_BATTLE_HEALTH_CHANGED")
+
+
 	--[[event:RegisterEvent("PET_BATTLE_ABILITY_CHANGED")
 	event:RegisterEvent("PET_BATTLE_ACTION_SELECTED")
 	event:RegisterEvent("PET_BATTLE_AURA_APPLIED")
@@ -1278,7 +1329,7 @@ local petTypes = PetBattle.petType
 function petDump()
 	local s = ""
 
-	local isWild=PetJournal.isWild
+	local isWild=PetBattle.PetJournal.isWild
 
 	for index=1, C_PetJournal.GetNumPets(isWild) do
 		local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle, canTrade = C_PetJournal.GetPetInfoByIndex(index, isWild);

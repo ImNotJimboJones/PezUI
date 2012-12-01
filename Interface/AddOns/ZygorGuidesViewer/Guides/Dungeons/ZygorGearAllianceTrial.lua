@@ -7,118 +7,118 @@ ZygorGuidesViewer.ItemScore.Items = {}
 ZygorGuidesViewer.ItemScore.Items["Classic Dungeons\\Ragefire Chasm (RFC)"] = {
 dungeonmap=680,
 dungeon=4,
-{ boss=61408, -- Adarogg
-82880, -- Fang of Adarogg
-                82879, -- Collarspike Bracers
-82772, -- Snarlmouth Leggings
+{ boss=61408,
+82880,
+82879,
+82772,
 },
-{ boss=61528, -- Lava Guard Gordoth
-82888, -- Heartboiler Staff
-                82883, -- Bloodcursed Felblade
-82886, -- Gorewalker Treads
+{ boss=61528,
+82888,
+82883,
+82886,
 },
-{ boss=61463, -- Slagmaw
-82878, -- Fireworm Robes
-                82885, -- Flameseared Carapace
-82884, --Chitonous Bracers
+{ boss=61463,
+82878,
+82885,
+82884,
 },
-{ boss=61412, -- Dark Shaman Koranthal
-82882, -- Dark Ritual Cape
-                82877, -- Grasp of the Broken Totem
-82881, -- Cuffs of Black Elements
+{ boss=61412,
+82882,
+82877,
+82881,
 },
-{ quest=30996, -- Quest: The Dark Shaman
-82891, -- Robes of the Doomed Ritual
-82892, -- Ragefire Leggings
-82893, -- Hide Vest of the Shaman
-82894, -- Stone Guard Greaves
-82895, -- Searing Belt
+{ quest=30996,
+82891,
+82892,
+82893,
+82894,
+82895,
 }
 }
 ZygorGuidesViewer.ItemScore.Items["Classic Dungeons\\Deadmines (DM or VC)"] = {
 dungeonmap=756,
 dungeon=6,
 { boss=47739,
-5202, -- Corsair's Overshirt
-5193, -- Cape of the Brotherhood
-5198, -- Cookie's Stirring Rod
-5197, -- Cookie's Tenderizer
-5192, -- Thief's Blade
+5202,
+5193,
+5198,
+5197,
+5192,
 },
-{ boss=47626, -- Admiral Ripsnarl
-872, -- Rockslicer
-5196, -- Smite's Reaver
+{ boss=47626,
+872,
+5196,
 },
-{ boss=43778, -- Foe Reaper 5000
-1937, -- Buzz Saw
-5187, -- Foe Reaper
+{ boss=43778,
+1937,
+5187,
 },
 { boss=47162,
-2169, -- Buzzer Blade
-5195, -- Gold-Flecked Gloves
+2169,
+5195,
 },
-{ boss=47296, -- Helix Gearbreaker
-5443, -- Gold-Plated Buckler
-5191, -- Cruel Barb
-5200, -- Impaling Harpoon
-5199, -- Smelting Pants
+{ boss=47296,
+5443,
+5191,
+5200,
+5199,
 },
 { quest={27790},
-65935, -- Cookie's Meat Mallet    --Alliance Quest--The Defias Kingpin
-65959, -- Cookie's Stirring Stick    --Alliance Quest--The Defias Kingpin
-65983, -- Cookie's Table Cloth    --Alliance Quest--The Defias Kingpin
+65935,
+65959,
+65983,
 }
 }
 ZygorGuidesViewer.ItemScore.Items["Classic Dungeons\\Wailing Caverns"] = {
 dungeonmap=749,
 dungeon=1,
-{ boss=5912, -- Deviate Faerie Dragon
-6632, -- Feyscale Cloak
-5243, -- Firebelcher
+{ boss=5912,
+6632,
+5243,
 },
-{ boss=3653, -- Kresh
-13245, -- Kresh's Back
-6447, -- Worn Turtle Shell Shield
+{ boss=3653,
+13245,
+6447,
 },
-{ boss=3671, -- Lady Anacondra
-5404, -- Serpent's Shoulders
-10412, -- Belt of the Fang
-6446, -- Snakeskin Bag
+{ boss=3671,
+5404,
+10412,
+6446,
 },
-{ boss=3669, -- Lord Cobrahn
-6465, -- Robe of the Moccasin
-6460, -- Cobrahn's Grasp
-10410, -- Leggings of the Fang
+{ boss=3669,
+6465,
+6460,
+10410,
 },
-{ boss=3670, -- Lord Pythas
-6472, -- Stinging Viper
-6473, -- Armor of the Fang
+{ boss=3670,
+6472,
+6473,
 },
-{ boss=3673, -- Lord Serpentis
-6469, -- Venomstrike
-5970, -- Serpent Gloves
-10411, -- Footpads of the Fang
-6459, -- Savage Trodders
+{ boss=3673,
+6469,
+5970,
+10411,
+6459,
 },
-{ boss=3654, -- Mutanus the Devourer
-6627, -- Mutant Scale Breastplate
-6463, -- Deep Fathom Ring
-6461, -- Slime-Encrusted Pads
+{ boss=3654,
+6627,
+6463,
+6461,
 },
-{ boss=3674, -- Skum
-6448, -- Tail Spike
-6449, -- Glowing Lizardscale Cloak
+{ boss=3674,
+6448,
+6449,
 },
-{ boss=5775, -- Verdan the Everliving
-6630, -- Seedcloud Buckler
-6631, -- Living Root
-6629, -- Sporid Cape
+{ boss=5775,
+6630,
+6631,
+6629,
 },
-{ quest=26870, -- Cleansing the Caverns
-65985, -- Cleansed Pauldrons
-65937, -- Serpentis' Gloves
-65961, -- Cobrahn's Boots
-66003, -- Pythas' Vest
-65911, -- Anacondra's Robe
+{ quest=26870,
+65985,
+65937,
+65961,
+66003,
+65911,
 }
 }

@@ -212,7 +212,7 @@ function ZGV:OnInitialize()
 		assert(self.Frame,"Cannot initialize any skin, sorry")
 	end
 	ZygorGuidesViewerFrame = self.Frame
-	if self.db.profile.visible then self.Frame:Show() else self.Frame:Hide() end
+	self.Frame:SetShown(self.db.profile.visible)
 
 	self.frameNeedsResizing = 0
 
@@ -261,12 +261,17 @@ function ZGV:OnInitialize()
 	end
 	--]]
 
-	if self.LocaleFont then FONT=self.LocaleFont end
+	if L['LocaleFont'] and string.find(L['LocaleFont'],"ttf") then FONT=L['LocaleFont'] end
 
 	-- home detection, fire-and-forget style.
 	hooksecurefunc("ConfirmBinder",function() ZygorGuidesViewer.recentlyHomeChanged=true end)
 
 	if addonName:find("DEV") then self.DEV=true end
+
+	if self.DEV then
+		ZGV.DebugFrame = ZGV.ChainCall(CreateFrame("FRAME","ZygorDebugFrame",UIParent)) :SetPoint("TOPLEFT") :SetSize(1,1) .__END
+		ZGV.DebugFrame.text1 = ZGV.ChainCall(ZGV.DebugFrame:CreateFontString()) :SetPoint("TOPLEFT") :SetFontObject(SystemFont_Tiny) .__END
+	end
 end
 
 function ZGV:OnEnable()
@@ -473,18 +478,16 @@ function ZGV:SetGuide(name,step)
 
 			self.LastSkip = 1
 
-			step = min(max(1,step),#guide.steps)
-
-			step = guide:GetFirstValidStep(step)
-			if step then
+			local stepobj = guide:GetFirstValidStep(step) -- make sure it's valid
+			if stepobj then
 				--self:QuestTracking_ResetDailies(true)
 				name=name:gsub(self.CurrentGuide.type,ZGV.GuideTitles[self.CurrentGuide.type]) -- make LEVELING-Leveling and such.
-				self:Print(L["message_loadedguide"]:format(name))
+				self:Print(L["message_loadedguide"]:format(name,step))
 				self:Debug("Guide loaded: "..name)
 
 				self:SendMessage("ZYGORGV_GUIDE_LOADED",name)
 
-				self:FocusStep(step.num)
+				self:FocusStep(stepobj.num)
 
 				ZygorGuidesViewerFrame_Border_Guides_GuideButton:UnlockHighlight()
 			end
@@ -626,6 +629,13 @@ function ZGV:FocusStep(num,quiet)
 		history[self.CurrentGuide.type]={self.CurrentGuide.title,self.CurrentStepNum}
 		--if #history>self.db.profile.guidesinhistory then tremove(history) end
 	end
+	
+	-- TRACK QUESTS
+	if ZGV.db.profile.autotrackquests then
+		for gi,goal in ipairs(cs.goals) do
+			if goal.questid then self:TrackQuest(goal.questid) break end
+		end
+	end
 
 
 	-- SANITIZE MAPS. In case there's zoning involved.
@@ -676,6 +686,27 @@ function ZGV:GotoStep(num,num2)
 		self:SetGuide(guide,step)
 	else
 		self:FocusStep(step)
+	end
+end
+
+function ZGV:TrackQuest(id)
+	local q = ZGV.questsbyid[id]
+	if not q or not q.inlog then return end
+	if not IsQuestWatched(q.index) then
+		AddQuestWatch(q.index)
+		WatchFrame_Update(self)
+	end
+	SetSuperTrackedQuestID(q.id)
+	WORLDMAP_SETTINGS.selectedQuestId = q.id
+	QuestPOIUpdateIcons()
+	QuestPOI_SelectButtonByQuestId("WatchFrameLines", WORLDMAP_SETTINGS.selectedQuestId, true)
+	WorldMapFrame_SelectQuestById(q.id)
+end
+
+function ZGV:PointToQuest(id)
+	local _,x,y,obj = QuestPOIGetIconInfo(id)
+	if x and y then
+		self:SetWaypoint(x,y)
 	end
 end
 
@@ -772,7 +803,19 @@ function ZGV:SkipStep(fast)
 
 	if self.CurrentStep.needsreload then return self:ReloadStep(fast) end
 
-	local step = step or (fast and self.db.profile.instantskip and self.CurrentStep:GetNextCompletableStep() or self.CurrentStep:GetNextValidStep())  -- always returns a step, unless we're at the end.
+	if not step then  -- when not forced, that is: usually.
+		local step2,stepnum,guide
+		
+		if fast and self.db.profile.instantskip then step2,stepnum,guide=self.CurrentStep:GetNextCompletableStep()
+		else step2,stepnum,guide=self.CurrentStep:GetNextValidStep() end  -- always returns a step, unless we're at the end.
+
+		if guide then
+			--print("ABOUT TO JUMP GUIDES to:",guide,stepnum)
+			self:SetGuide(guide,stepnum)
+			return
+		end
+		step=step2
+	end
 
 	if step then
 		-- not last step
@@ -1359,7 +1402,7 @@ function ZGV:UpdateFrame(full,onupdate)
 
 							local status = goal:GetStatus()
 
-							if status=="hidden" then
+							if status=="hidden" and not self.db.profile.showwrongsteps then
 								-- don't display the line, simple
 
 							elseif self.db.profile.collapsecompleted and goal:CanBeIndentHidden() and not stepdata:IsComplete() then
@@ -1377,6 +1420,8 @@ function ZGV:UpdateFrame(full,onupdate)
 								--local goaltxt = goal:GetText(stepnum>=self.CurrentStepNum)
 								--local goaltxt = goal:GetText(true,self.db.profile.showbriefsteps and (self.briefstepexpansion<=0.1 --[[or stepdata~=self.briefstepexpanded--]]))
 								local goaltxt = goal:GetText(true,showbriefsteps and ((self.briefstepexpansionlines[stepbuttonnum] or 0)<=0.1 --[[or stepdata~=self.briefstepexpanded--]]))
+
+								if self.db.profile.showwrongsteps and status=="hidden" then goaltxt = "|cff880000[*BAD*]|r "..goaltxt end
 
 								if goaltxt~="?" and goaltxt~="" then
 									local link = ((goal.tooltip and not self.db.profile.tooltipsbelow) or (goal.x and not self.db.profile.windowlocked) or goal.image) and " |cffdd44ff*|r" or ""
@@ -1624,6 +1669,8 @@ function ZGV:UpdateFrame(full,onupdate)
 									icon:SetIcon(actionicon[goal.action])
 									icon:SetDesaturated(true)
 
+								else	-- maybe hidden, maybe WTF
+									icon:SetIcon(1)
 								end
 							else
 								label:SetPoint("TOPLEFT",line,"TOPLEFT",0,0)
@@ -2710,7 +2757,13 @@ end
 
 function ZGV:Print(s,ifdebug)
 	if not self.db.profile.silentmode then
-		ChatFrame1:AddMessage(L['name']..": "..tostring(s))
+		local chatframe = ZGV.debugframe
+		if not chatframe then
+			chatframe = _G[ZGV.db.profile.debug_frame]
+			ZGV.debugframe = chatframe
+		end
+		if not chatframe then chatframe=ChatFrame1 end
+		chatframe:AddMessage(L['name']..": "..tostring(s))
 		if ifdebug then self:Debug(s) end
 	end
 end
@@ -2735,25 +2788,27 @@ function ZGV:MatchProfs(fitprof,levelmin,levelmax)
 	if GetSpellInfo(GetSpellInfo(spellId)) then return prof1level>=levelmin and prof1level<levelmax end
 	if GetSpellInfo(GetSpellInfo(spellId)) then return prof2level>=levelmin and prof2level<levelmax end
 end
-local eventtex = {
-	CALENDAR_DARKMOONFAIRETEROKKA = "DARKMOON FAIRE",
-	CALENDAR_DARKMOONFAIREELWYNN = "DARKMOON FAIRE",
-	CALENDAR_DARKMOONFAIREMULGORE = "DARKMOON FAIRE",
-	CALENDAR_NOBLEGARDEN = "NOBLEGARDEN",
-	CALENDAR_BREWFEST = "BREWFEST",
-	CALENDAR_HARVESTFESTIVAL = "HARVEST FESTIVAL",
-	CALENDAR_HARVESTFESTIVAL = "PILGRIM'S BOUNTY",
-	CALENDAR_WINTERVEIL = "FEAST OF WINTER VEIL",
-	CALENDAR_LUNARFESTIVAL = "LUNAR FESTIVAL",
-	CALENDAR_LOVEINTHEAIR = "LOVE IS IN THE AIR",
-	CALENDAR_CHILDRENSWEEK = "CHILDREN'S WEEK",
-	CALENDAR_MIDSUMMER = "MIDSUMMER FIRE FESTIVAL",
-	CALENDAR_HALLOWSEND = "HALLOW'S END",
-}
 
 function ZGV:FindEvent(eventName)
 	local _,month,day,year=CalendarGetDate()
 	local calmonth=CalendarGetMonth()
+
+	local eventtex = {
+		CALENDAR_DARKMOONFAIRETEROKKA = "DARKMOON FAIRE",
+		CALENDAR_DARKMOONFAIREELWYNN = "DARKMOON FAIRE",
+		CALENDAR_DARKMOONFAIREMULGORE = "DARKMOON FAIRE",
+		CALENDAR_NOBLEGARDEN = "NOBLEGARDEN",
+		CALENDAR_BREWFEST = "BREWFEST",
+		CALENDAR_HARVESTFESTIVAL = "HARVEST FESTIVAL",
+		CALENDAR_HARVESTFESTIVAL_PILGRIM = "PILGRIM'S BOUNTY",
+		CALENDAR_WINTERVEIL = "FEAST OF WINTER VEIL",
+		CALENDAR_LUNARFESTIVAL = "LUNAR FESTIVAL",
+		CALENDAR_LOVEINTHEAIR = "LOVE IS IN THE AIR",
+		CALENDAR_CHILDRENSWEEK = "CHILDREN'S WEEK",
+		CALENDAR_MIDSUMMER = "MIDSUMMER FIRE FESTIVAL",
+		CALENDAR_HALLOWSEND = "HALLOW'S END",
+	}
+
 
 	eventName=eventName:upper()
 
@@ -3062,8 +3117,15 @@ function ZGV:GoalOnClick(goalframe,button)
 				self:FakeCompleteGoal(goal,true)
 			end
 		end
+		if goal.next then
+			ZGV:FocusStep(goal.parentStep:GetJumpDestination(goal.next))
+		end
 		if goal.scriptfun then
 			goal:scriptfun()
+		end
+		if goal.questid then
+			self:TrackQuest(goal.questid)
+			self:PointToQuest(goal.questid)
 		end
 		--[[
 		-- NOT allowed :/
@@ -3482,7 +3544,7 @@ function ZGV:OpenQuickStepMenu(stepframe,goalframe)
 						tooltipTitle = L['qmenu_quest_openmap'],
 						tooltipText = L['qmenu_quest_openmap_desc'],
 						tooltipOnButton = true,
-						func = function()  WorldMap_OpenToQuest(goal.quest.id,nil)  end,
+						func = function()  WorldMap_OpenToQuest(goal.quest.id,nil)  ZGV:PointToQuest(goal.quest.id)  end,
 					})
 				end
 			end
@@ -3767,6 +3829,19 @@ function ZGV:RegisterInclude(title,text)
 			return params[param] or ""
 		end
 		return self.text:gsub("%%(%w+)%%",parse_param)
+	end
+end
+
+ZGV.registered_functions = {}
+function ZGV:RegisterFunction(title,func)
+	self.registered_functions[title]={func=func}
+
+	self.registered_functions[title].GetParsed = function (self,params)
+		local function parse_param(param)
+			return params[param] or ""
+		end
+		local text = func()
+		return text:gsub("%%(%w+)%%",parse_param)
 	end
 end
 
@@ -4128,7 +4203,7 @@ function ZGV:Debug (msg,...)
 		local flag,rest = msg:match("^&([a-zA-Z0-9_]+)%s+(.*)$")
 		if flag then
 			local flagdata = ZGV.db.profile.debug_flags[flag]
-			if not flagdata then  return  end
+			if flagdata==false then return end -- otherwise assume it SET!
 			if type(flagdata)=="table" and flagdata.color then flag = "|c"..flagdata.color..flag.."|r" end
 			flagsmsg = (flagsmsg and (flagsmsg.." ") or "") .. "[" .. flag .. "]"
 			msg = rest
@@ -4460,11 +4535,12 @@ function ZGV:LoadGuidesByType(guidetype)
 end
 
 function ZGV:LoadNeededGuides()
+	local t0=debugprofilestop()
 	for gi,g in pairs(self.registeredguides) do
 		if g.need_to_parse then
 			local success = g:Parse(true)
 			g.need_to_parse = nil
-			return nil  -- only one at a time, take it slow
+			if debugprofilestop()-t0>100 then return nil end  -- 0.1s allowed here
 		end
 	end
 	return true
@@ -4481,7 +4557,8 @@ end
 
 function ZGV_DEV()
 	--ZGV:AddEvent("")
-	if ZGV.TimeShip then ZGV:ScheduleRepeatingTimer("TimeShip",0.1) end
+	--if ZGV.TimeShip then ZGV:ScheduleRepeatingTimer("TimeShip",0.1) end
+	--ZGV:ScheduleRepeatingTimer("MemHogging",0.1)
 end
 
 
@@ -4557,3 +4634,67 @@ end
 		end
 	end
 end --]=]
+
+local lasttime,lastmem=GetTime(),0
+local memavg={0,0,0,0,0}
+function ZGV:MemHogging()
+	UpdateAddOnMemoryUsage()
+	local mem = GetAddOnMemoryUsage(addonName)
+	local time = GetTime()
+	if time~=lasttime and mem~=lastmem then
+		local total=0
+		for i=1,4 do memavg[i]=memavg[i+1] total=total+memavg[i+1] end
+		local kbs = floor((mem-lastmem)/(time-lasttime))
+		memavg[5]=kbs
+
+		kbs=(kbs+total)/5
+
+		ZGV.DebugFrame.text1:SetText(("%s %d"):format(strrep(".",kbs/3),kbs))
+	end
+	lasttime,lastmem=time,mem
+end
+
+local memmark=0
+function ZGV:MemHogStart()
+	UpdateAddOnMemoryUsage()
+	memmark=GetAddOnMemoryUsage(addonName)
+end
+
+function ZGV:MemHogStop(desc)
+	UpdateAddOnMemoryUsage()
+	local memmark2=GetAddOnMemoryUsage(addonName)
+	print("|cff00ff88",desc,("%.1f"):format(memmark2-memmark))
+end
+
+function ZGV:MemHogTest()
+	self:MemHogStart()
+	self:MemHogStop()
+	self:MemHogStart()
+	self:MemHogStop()
+	self:MemHogStart()
+	local a={}
+	for i=1,1000 do a[i]={} end
+	self:MemHogStop()
+end
+
+function ZGV:DumpScenario()
+	local s = ""
+	local name, currentStage, numStages = C_Scenario.GetInfo()
+	if not name then self:Print("You're not in a scenario, dude.") return end
+	s=s..("SCENARIO: %s\n"):format(name)
+
+	local stageName, stageDescription, numCriteria = C_Scenario.GetStepInfo()
+	if not stageName then self:Print(s.."No stage at this time, sorry.") return end
+	s=s..("STAGE %d/%d: %s (%s)\n"):format(currentStage, numStages, stageName, stageDescription)
+
+	for crit=1,numCriteria do
+		local criteriaString, criteriaType, criteriaCompleted, quantity, totalQuantity, flags, assetID, quantityString, criteriaID = C_Scenario.GetCriteriaInfo(crit)
+		criteriaString = string.format("%d/%d %s", quantity, totalQuantity, criteriaString);
+
+		s=s..("CRITERIA %d/%d [#%s]: %s  --  %s  (%s, asset %s, flags %s)\n"):format(
+			crit,numCriteria, criteriaID, criteriaString,  criteriaCompleted and "completed" or "incomplete",
+			criteriaType,assetID,flags)
+	end
+
+	ZGV:ShowDump(s,name)
+end

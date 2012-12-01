@@ -271,6 +271,8 @@ Foglight.data = {
     {'',0,0,0,0},
     {'',0,0,0,0},
     {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
   },
   ['Hyjal_terrain1']={
     {'Interface\\WorldMap\\Hyjal\\AshenLake',282,418,6,78},
@@ -304,6 +306,7 @@ Foglight.data = {
     {'Interface\\WorldMap\\Mulgore\\TheGoldenPlains',186,216,448,101},
     {'Interface\\WorldMap\\Mulgore\\TheRollingPlains',260,243,527,291},
     {'Interface\\WorldMap\\Mulgore\\TheVentureCoMine',208,300,530,138},
+    {'Interface\\WorldMap\\Mulgore\\ThunderBluff',373,259,208,62},
     {'Interface\\WorldMap\\Mulgore\\ThunderhornWaterWell',201,167,333,202},
     {'Interface\\WorldMap\\Mulgore\\WildmaneWaterWell',190,172,331,0},
     {'Interface\\WorldMap\\Mulgore\\WindfuryRidge',222,202,400,0},
@@ -416,6 +419,7 @@ Foglight.data = {
   },
   ['Teldrassil']={
     {'Interface\\WorldMap\\Teldrassil\\BanethilHollow',175,235,374,221},
+    {'Interface\\WorldMap\\Teldrassil\\Darnassus',298,337,149,181},
     {'Interface\\WorldMap\\Teldrassil\\GnarlpineHold',198,181,347,355},
     {'Interface\\WorldMap\\Teldrassil\\LakeAlameth',289,202,422,310},
     {'Interface\\WorldMap\\Teldrassil\\PoolsofArlithrien',140,210,345,243},
@@ -749,6 +753,7 @@ Foglight.data = {
     {'Interface\\WorldMap\\HillsbradFoothills\\HillsbradFields',302,175,191,302},
     {'',0,0,0,0},
     {'',0,0,0,0},
+    {'',0,0,0,0},
   },
   ['Sunwell']={
     {'Interface\\WorldMap\\Sunwell\\SunsReachHarbor',512,416,252,252},
@@ -828,10 +833,6 @@ Foglight.data = {
   },
   ['RuinsofGilneas']={
     {'Interface\\WorldMap\\RuinsofGilneas\\GilneasPuzzle',1002,668,0,0},
-    {'Interface\\WorldMap\\RuinsofGilneas\\GilneasPuzzle',1002,668,0,0},
-    {'Interface\\WorldMap\\RuinsofGilneas\\GilneasPuzzle',1002,668,0,0},
-    {'Interface\\WorldMap\\RuinsofGilneas\\GilneasPuzzle',1002,668,0,0},
-    {'Interface\\WorldMap\\RuinsofGilneas\\GilneasPuzzle',1002,668,0,0},
   },
   ['RuinsofGilneasCity']={
   },
@@ -889,6 +890,7 @@ Foglight.data = {
     {'Interface\\WorldMap\\VashjirRuins\\RuinsOfVashjir',349,361,217,268},
     {'Interface\\WorldMap\\VashjirRuins\\ShimmeringGrotto',339,278,400,0},
     {'Interface\\WorldMap\\VashjirRuins\\SilverTideHollow',480,319,150,32},
+    {'',0,0,0,0},
     {'',0,0,0,0},
   },
   ['Silverpine']={
@@ -1327,6 +1329,7 @@ Foglight.data = {
     {'',0,0,0,0},
     {'',0,0,0,0},
     {'',0,0,0,0},
+    {'',0,0,0,0},
   },
   ['CrystalsongForest']={
     {'Interface\\WorldMap\\CrystalsongForest\\TheAzureFront',416,424,0,244},
@@ -1583,148 +1586,172 @@ Foglight.data = {
     {'Interface\\WorldMap\\TheLostIsles_terrain2\\WarchiefsLookout',159,230,264,144},
     {'Interface\\WorldMap\\TheLostIsles_terrain2\\Lostpeak',350,517,581,21},
   },
+  -- Pandaria
+  ['TheWanderingIsle']={
+    {'Interface\\WorldMap\\TheWanderingIsle\\TheWoodofStaves',989,466,13,202},
+    {'Interface\\WorldMap\\TheWanderingIsle\\Fe-FangVillage',234,286,134,9},
+    {'Interface\\WorldMap\\TheWanderingIsle\\MorningBreezeVillage',261,315,203,36},
+    {'Interface\\WorldMap\\TheWanderingIsle\\RidgeofLaughingWinds',313,321,183,198},
+    {'Interface\\WorldMap\\TheWanderingIsle\\Pei-WuForest',651,262,351,406},
+    {'Interface\\WorldMap\\TheWanderingIsle\\SkyfireCrash-Site',346,263,124,405},
+    {'Interface\\WorldMap\\TheWanderingIsle\\MandoriVillage',610,374,392,294},
+    {'Interface\\WorldMap\\TheWanderingIsle\\TempleofFiveDawns',607,461,395,182},
+    {'Interface\\WorldMap\\TheWanderingIsle\\TheDawningValley',677,668,325,0},
+    {'Interface\\WorldMap\\TheWanderingIsle\\TheSingingPools',372,475,545,12},
+    {'Interface\\WorldMap\\TheWanderingIsle\\TheRows',385,373,504,295},
+  },
+  ['DreadWastes']={
+    {'Interface\\WorldMap\\DreadWastes\\BREWGARDEN',250,218,351,0},
+    {'Interface\\WorldMap\\DreadWastes\\BRINYMUCK',325,270,214,311},
+    {'Interface\\WorldMap\\DreadWastes\\CLUTCHESOFSHEKZEER',209,318,341,125},
+    {'Interface\\WorldMap\\DreadWastes\\DREADWATERLAKE',322,211,437,313},
+    {'Interface\\WorldMap\\DreadWastes\\HEARTOFFEAR',262,293,191,122},
+    {'Interface\\WorldMap\\DreadWastes\\HORRIDMARCH',323,194,441,224},
+    {'Interface\\WorldMap\\DreadWastes\\KLAXXIVESS',236,206,458,110},
+    {'Interface\\WorldMap\\DreadWastes\\KYPARIVOR',325,190,485,0},
+    {'Interface\\WorldMap\\DreadWastes\\RIKKITUNVILLAGE',218,186,236,32},
+    {'Interface\\WorldMap\\DreadWastes\\SOGGYSGAMBLE',268,241,450,406},
+    {'Interface\\WorldMap\\DreadWastes\\TERRACEOFGURTHAN',209,234,593,92},
+    {'Interface\\WorldMap\\DreadWastes\\ZANVESS',290,283,162,385},
+  },
+  ['Krasarang']={
+    {'Interface\\WorldMap\\Krasarang\\AnglersOutpost',265,194,545,205},
+    {'Interface\\WorldMap\\Krasarang\\CradleOfChiJi',272,250,176,376},
+    {'Interface\\WorldMap\\Krasarang\\DojaniRiver',190,282,513,3},
+    {'Interface\\WorldMap\\Krasarang\\FallsongRiver',214,393,218,77},
+    {'Interface\\WorldMap\\Krasarang\\ZhusBastion',306,204,612,0},
+    {'Interface\\WorldMap\\Krasarang\\LostDynasty',217,279,589,27},
+    {'Interface\\WorldMap\\Krasarang\\NayeliLagoon',246,240,343,373},
+    {'Interface\\WorldMap\\Krasarang\\RedwingRefuge',212,265,317,63},
+    {'Interface\\WorldMap\\Krasarang\\RuinsOfDojan',204,383,444,44},
+    {'Interface\\WorldMap\\Krasarang\\RuinsOfKorja',211,395,125,88},
+    {'Interface\\WorldMap\\Krasarang\\TempleOfTheRedCrane',219,259,300,215},
+    {'Interface\\WorldMap\\Krasarang\\TheDeepwild',188,412,397,59},
+    {'Interface\\WorldMap\\Krasarang\\TheForbiddenJungle',257,300,0,79},
+    {'Interface\\WorldMap\\Krasarang\\TheSouthernIsles',252,313,23,267},
+    {'Interface\\WorldMap\\Krasarang\\UngaIngoo',258,170,330,498},
+    {'Interface\\WorldMap\\Krasarang\\TheSouthernIsles',252,313,23,267},
+    {'Interface\\WorldMap\\Krasarang\\krasarangCove',286,268,701,19},
+  },
+  ['Krasarang_terrain1']={
+    {'Interface\\WorldMap\\Krasarang_terrain1\\ANGLERSOUTPOST',347,199,545,200},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\CRADLEOFCHIJI',272,250,176,376},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\REDWINGREFUGE',212,265,317,63},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\DOJANIRIVER',190,282,513,3},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\FALLSONGRIVER',214,393,218,77},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\NAYELILAGOON',246,240,343,373},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\RUINSOFDOJAN',204,383,444,44},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\RUINSOFKORJA',211,395,125,88},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\TEMPLEOFTHEREDCRANE',219,259,300,215},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\THEDEEPWILD',188,412,397,59},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\THEFORBIDDENJUNGLE',257,300,0,79},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\LOSTDYNASTY',217,279,589,27},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\THESOUTHERNISLES',275,329,0,267},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\KRASARANGCOVE',295,293,701,19},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\UNGAINGOO',258,170,330,498},
+    {'',0,0,0,0},
+    {'',0,0,0,0},
+    {'Interface\\WorldMap\\Krasarang_terrain1\\ZHUSBASTION',306,204,612,0},
+  },
+  ['KunLaiSummit']={
+    {'Interface\\WorldMap\\KunLaiSummit\\BinanVillage',240,198,607,470},
+    {'Interface\\WorldMap\\KunLaiSummit\\FireboughNook',224,172,322,496},
+    {'Interface\\WorldMap\\KunLaiSummit\\GateoftheAugust',261,162,449,506},
+    {'Interface\\WorldMap\\KunLaiSummit\\Kotapeak',252,257,233,360},
+    {'Interface\\WorldMap\\KunLaiSummit\\Mogujia',253,208,462,411},
+    {'Interface\\WorldMap\\KunLaiSummit\\MountNeverset',313,208,228,264},
+    {'Interface\\WorldMap\\KunLaiSummit\\MuskpawRanch',229,262,603,313},
+    {'Interface\\WorldMap\\KunLaiSummit\\PeakOfSerenity',287,277,333,63},
+    {'Interface\\WorldMap\\KunLaiSummit\\ShadoPanMonastery',385,385,88,92},
+    {'Interface\\WorldMap\\KunLaiSummit\\TEMPLEOFTHEWHITETIGER',250,260,587,170},
+    {'Interface\\WorldMap\\KunLaiSummit\\TheBurlapTrail',310,276,398,310},
+    {'Interface\\WorldMap\\KunLaiSummit\\ValleyOfEmperors',224,241,453,191},
+    {'Interface\\WorldMap\\KunLaiSummit\\ZouchinVillage',298,219,502,64},
+    {'Interface\\WorldMap\\KunLaiSummit\\Iseoflostsouls',259,233,602,4},
+  },
+  ['TheJadeForest']={
+    {'Interface\\WorldMap\\TheJadeForest\\ChunTianMonastery',227,198,300,56},
+    {'Interface\\WorldMap\\TheJadeForest\\DawnsBlossom',234,210,325,178},
+    {'Interface\\WorldMap\\TheJadeForest\\DreamersPavillion',218,148,474,520},
+    {'Interface\\WorldMap\\TheJadeForest\\EmperorsOmen',202,204,430,21},
+    {'Interface\\WorldMap\\TheJadeForest\\GlassfinVillage',278,310,525,358},
+    {'Interface\\WorldMap\\TheJadeForest\\GrookinMound',253,229,182,214},
+    {'Interface\\WorldMap\\TheJadeForest\\HellscreamsHope',196,166,181,75},
+    {'Interface\\WorldMap\\TheJadeForest\\JadeMines',236,142,400,146},
+    {'Interface\\WorldMap\\TheJadeForest\\NectarbreezeOrchard',219,256,290,330},
+    {'Interface\\WorldMap\\TheJadeForest\\NookaNooka',219,205,189,151},
+    {'Interface\\WorldMap\\TheJadeForest\\RuinsOfGanShi',196,158,316,0},
+    {'Interface\\WorldMap\\TheJadeForest\\SerpentsSpine',191,216,388,299},
+    {'Interface\\WorldMap\\TheJadeForest\\SlingtailPits',179,180,428,416},
+    {'Interface\\WorldMap\\TheJadeForest\\TempleOfTheJadeSerpent',264,211,468,295},
+    {'Interface\\WorldMap\\TheJadeForest\\TheArboretum',242,210,481,215},
+    {'Interface\\WorldMap\\TheJadeForest\\Waywardlanding',219,186,346,482},
+    {'Interface\\WorldMap\\TheJadeForest\\WindlessIsle',251,348,539,43},
+    {'Interface\\WorldMap\\TheJadeForest\\WreckOfTheSkyShark',210,158,202,0},
+  },
+  ['TheHiddenPass']={
+    {'Interface\\WorldMap\\TheHiddenPass\\TheBlackMarket',479,493,371,175},
+    {'Interface\\WorldMap\\TheHiddenPass\\TheHiddenCliffs',294,220,433,0},
+    {'Interface\\WorldMap\\TheHiddenPass\\TheHiddenSteps',290,191,412,477},
+  },
+  ['TownlongWastes']={
+    {'Interface\\WorldMap\\TownlongWastes\\GaoRanBlockade',353,200,546,468},
+    {'Interface\\WorldMap\\TownlongWastes\\KriVess',255,269,420,209},
+    {'Interface\\WorldMap\\TownlongWastes\\MingChiCrossroads',247,221,417,447},
+    {'Interface\\WorldMap\\TownlongWastes\\NiuzaoTemple',296,359,213,241},
+    {'Interface\\WorldMap\\TownlongWastes\\OsulMesa',238,296,560,185},
+    {'Interface\\WorldMap\\TownlongWastes\\palewindVillage',282,306,692,362},
+    {'Interface\\WorldMap\\TownlongWastes\\ShadoPanGarrison',213,170,413,385},
+    {'Interface\\WorldMap\\TownlongWastes\\ShanzeDao',300,246,125,0},
+    {'Interface\\WorldMap\\TownlongWastes\\Sikvess',261,235,306,433},
+    {'Interface\\WorldMap\\TownlongWastes\\SriVess',294,283,92,192},
+    {'Interface\\WorldMap\\TownlongWastes\\TheSumprushes',271,205,545,369},
+  },
+  ['ValeofEternalBlossoms']={
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\GuoLaiRuins',337,349,87,3},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\MistfallVillage',310,305,200,363},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\MoguShanPalace',373,385,629,22},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\SettingSunTraining',350,429,0,234},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheGoldenStair',242,254,328,16},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheStairsAscent',446,359,556,267},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheTwinMonoliths',272,522,444,97},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TuShenBurialGround',267,308,349,316},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WhiteMoonShrine',298,262,482,10},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WhitepetalLake',267,281,278,170},
+    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WinterboughGlade',361,333,4,107},
+  },
+  ['ValleyoftheFourWinds']={
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\CliffsofDispair',510,264,215,404},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\DustbackGorge',209,308,0,343},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\GildedFan',208,292,438,41},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\GrandGranery',314,212,334,325},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\Halfhill',206,245,438,177},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\HarvestHome',260,251,5,239},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\KuzenVillage',199,304,224,74},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\MudmugsPlace',230,217,561,161},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\NesingwarySafari',249,342,104,326},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\PaoquanHollow',273,246,12,105},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\PoolsofPurity',213,246,513,58},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\SilkenFields',254,259,530,253},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\RumblingTerrace',277,245,582,301},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\SingingMarshes',175,291,170,130},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\StormsoutBrewery',257,288,227,380},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\Theheartland',286,392,253,75},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\ThunderfootFields',380,317,622,0},
+    {'Interface\\WorldMap\\ValleyoftheFourWinds\\ZhusDecent',303,323,699,114},
+  },
 }
-
-if ZGV.Expansion_Mists then
-	local MoP_maps = {
-	-- Pandaria
-	  ['TheWanderingIsle']={
-	    {'Interface\\WorldMap\\TheWanderingIsle\\TheWoodofStaves',989,466,13,202},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\Fe-FangVillage',234,286,134,9},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\MorningBreezeVillage',261,315,203,36},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\RidgeofLaughingWinds',313,321,183,198},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\Pei-WuForest',651,262,351,406},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\SkyfireCrash-Site',346,263,124,405},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\MandoriVillage',610,374,392,294},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\TempleofFiveDawns',607,461,395,182},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\TheDawningValley',677,668,325,0},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\TheSingingPools',372,475,545,12},
-	    {'Interface\\WorldMap\\TheWanderingIsle\\TheRows',385,373,504,295},
-	  },
-	  ['DreadWastes']={
-	    {'Interface\\WorldMap\\DreadWastes\\BREWGARDEN',250,218,351,0},
-	    {'Interface\\WorldMap\\DreadWastes\\BRINYMUCK',325,270,214,311},
-	    {'Interface\\WorldMap\\DreadWastes\\CLUTCHESOFSHEKZEER',209,318,341,125},
-	    {'Interface\\WorldMap\\DreadWastes\\DREADWATERLAKE',322,211,437,313},
-	    {'Interface\\WorldMap\\DreadWastes\\HEARTOFFEAR',262,293,191,122},
-	    {'Interface\\WorldMap\\DreadWastes\\HORRIDMARCH',323,194,441,224},
-	    {'Interface\\WorldMap\\DreadWastes\\KLAXXIVESS',236,206,458,110},
-	    {'Interface\\WorldMap\\DreadWastes\\KYPARIVOR',325,190,485,0},
-	    {'Interface\\WorldMap\\DreadWastes\\RIKKITUNVILLAGE',218,186,236,32},
-	    {'Interface\\WorldMap\\DreadWastes\\SOGGYSGAMBLE',268,241,450,406},
-	    {'Interface\\WorldMap\\DreadWastes\\TERRACEOFGURTHAN',209,234,593,92},
-	    {'Interface\\WorldMap\\DreadWastes\\ZANVESS',290,283,162,385},
-	  },
-	  ['Krasarang']={
-	    {'Interface\\WorldMap\\Krasarang\\AnglersOutpost',265,194,545,205},
-	    {'Interface\\WorldMap\\Krasarang\\CradleOfChiJi',272,250,176,376},
-	    {'Interface\\WorldMap\\Krasarang\\DojaniRiver',190,282,513,3},
-	    {'Interface\\WorldMap\\Krasarang\\FallsongRiver',214,393,218,77},
-	    {'Interface\\WorldMap\\Krasarang\\ZhusBastion',306,204,612,0},
-	    {'Interface\\WorldMap\\Krasarang\\LostDynasty',217,279,589,27},
-	    {'Interface\\WorldMap\\Krasarang\\NayeliLagoon',246,240,343,373},
-	    {'Interface\\WorldMap\\Krasarang\\RedwingRefuge',212,265,317,63},
-	    {'Interface\\WorldMap\\Krasarang\\RuinsOfDojan',204,383,444,44},
-	    {'Interface\\WorldMap\\Krasarang\\RuinsOfKorja',211,395,125,88},
-	    {'Interface\\WorldMap\\Krasarang\\TempleOfTheRedCrane',219,259,300,215},
-	    {'Interface\\WorldMap\\Krasarang\\TheDeepwild',188,412,397,59},
-	    {'Interface\\WorldMap\\Krasarang\\TheForbiddenJungle',257,300,0,79},
-	    {'Interface\\WorldMap\\Krasarang\\TheSouthernIsles',252,313,23,267},
-	    {'Interface\\WorldMap\\Krasarang\\UngaIngoo',258,170,330,498},
-	    {'Interface\\WorldMap\\Krasarang\\TheSouthernIsles',252,313,23,267},
-	    {'Interface\\WorldMap\\Krasarang\\krasarangCove',286,268,701,19},
-	  },
-	  ['KunLaiSummit']={
-	    {'Interface\\WorldMap\\KunLaiSummit\\BinanVillage',240,198,607,470},
-	    {'Interface\\WorldMap\\KunLaiSummit\\FireboughNook',224,172,322,496},
-	    {'Interface\\WorldMap\\KunLaiSummit\\GateoftheAugust',261,162,449,506},
-	    {'Interface\\WorldMap\\KunLaiSummit\\Kotapeak',252,257,233,360},
-	    {'Interface\\WorldMap\\KunLaiSummit\\Mogujia',253,208,462,411},
-	    {'Interface\\WorldMap\\KunLaiSummit\\MountNeverset',313,208,228,264},
-	    {'Interface\\WorldMap\\KunLaiSummit\\MuskpawRanch',229,262,603,313},
-	    {'Interface\\WorldMap\\KunLaiSummit\\PeakOfSerenity',287,277,333,63},
-	    {'Interface\\WorldMap\\KunLaiSummit\\ShadoPanMonastery',385,385,88,92},
-	    {'Interface\\WorldMap\\KunLaiSummit\\TEMPLEOFTHEWHITETIGER',250,260,587,170},
-	    {'Interface\\WorldMap\\KunLaiSummit\\TheBurlapTrail',310,276,398,310},
-	    {'Interface\\WorldMap\\KunLaiSummit\\ValleyOfEmperors',224,241,453,191},
-	    {'Interface\\WorldMap\\KunLaiSummit\\ZouchinVillage',298,219,502,64},
-	    {'Interface\\WorldMap\\KunLaiSummit\\Iseoflostsouls',259,233,602,4},
-	  },
-	  ['TheJadeForest']={
-	    {'Interface\\WorldMap\\TheJadeForest\\ChunTianMonastery',227,198,300,56},
-	    {'Interface\\WorldMap\\TheJadeForest\\DawnsBlossom',234,210,325,178},
-	    {'Interface\\WorldMap\\TheJadeForest\\DreamersPavillion',218,148,474,520},
-	    {'Interface\\WorldMap\\TheJadeForest\\EmperorsOmen',202,204,430,21},
-	    {'Interface\\WorldMap\\TheJadeForest\\GlassfinVillage',278,310,525,358},
-	    {'Interface\\WorldMap\\TheJadeForest\\GrookinMound',253,229,182,214},
-	    {'Interface\\WorldMap\\TheJadeForest\\HellscreamsHope',196,166,181,75},
-	    {'Interface\\WorldMap\\TheJadeForest\\JadeMines',236,142,400,146},
-	    {'Interface\\WorldMap\\TheJadeForest\\NectarbreezeOrchard',219,256,290,330},
-	    {'Interface\\WorldMap\\TheJadeForest\\NookaNooka',219,205,189,151},
-	    {'Interface\\WorldMap\\TheJadeForest\\RuinsOfGanShi',196,158,316,0},
-	    {'Interface\\WorldMap\\TheJadeForest\\SerpentsSpine',191,216,388,299},
-	    {'Interface\\WorldMap\\TheJadeForest\\SlingtailPits',179,180,428,416},
-	    {'Interface\\WorldMap\\TheJadeForest\\TempleOfTheJadeSerpent',264,211,468,295},
-	    {'Interface\\WorldMap\\TheJadeForest\\TheArboretum',242,210,481,215},
-	    {'Interface\\WorldMap\\TheJadeForest\\Waywardlanding',219,186,346,482},
-	    {'Interface\\WorldMap\\TheJadeForest\\WindlessIsle',251,348,539,43},
-	    {'Interface\\WorldMap\\TheJadeForest\\WreckOfTheSkyShark',210,158,202,0},
-	  },
-	  ['TheHiddenPass']={
-	    {'Interface\\WorldMap\\TheHiddenPass\\TheBlackMarket',479,493,371,175},
-	    {'Interface\\WorldMap\\TheHiddenPass\\TheHiddenCliffs',294,220,433,0},
-	    {'Interface\\WorldMap\\TheHiddenPass\\TheHiddenSteps',290,191,412,477},
-	  },
-	  ['TownlongWastes']={
-	    {'Interface\\WorldMap\\TownlongWastes\\GaoRanBlockade',353,200,546,468},
-	    {'Interface\\WorldMap\\TownlongWastes\\KriVess',255,269,420,209},
-	    {'Interface\\WorldMap\\TownlongWastes\\MingChiCrossroads',247,221,417,447},
-	    {'Interface\\WorldMap\\TownlongWastes\\NiuzaoTemple',296,359,213,241},
-	    {'Interface\\WorldMap\\TownlongWastes\\OsulMesa',238,296,560,185},
-	    {'Interface\\WorldMap\\TownlongWastes\\palewindVillage',282,306,692,362},
-	    {'Interface\\WorldMap\\TownlongWastes\\ShadoPanGarrison',213,170,413,385},
-	    {'Interface\\WorldMap\\TownlongWastes\\ShanzeDao',300,246,125,0},
-	    {'Interface\\WorldMap\\TownlongWastes\\Sikvess',261,235,306,433},
-	    {'Interface\\WorldMap\\TownlongWastes\\SriVess',294,283,92,192},
-	    {'Interface\\WorldMap\\TownlongWastes\\TheSumprushes',271,205,545,369},
-	  },
-	  ['ValeofEternalBlossoms']={
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\GuoLaiRuins',337,349,87,3},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\MistfallVillage',310,305,200,363},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\MoguShanPalace',373,385,629,22},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\SettingSunTraining',350,429,0,234},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheGoldenStair',242,254,328,16},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheStairsAscent',446,359,556,267},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TheTwinMonoliths',272,522,444,97},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\TuShenBurialGround',267,308,349,316},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WhiteMoonShrine',298,262,482,10},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WhitepetalLake',267,281,278,170},
-	    {'Interface\\WorldMap\\ValeofEternalBlossoms\\WinterboughGlade',361,333,4,107},
-	  },
-	  ['ValleyoftheFourWinds']={
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\CliffsofDispair',510,264,215,404},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\DustbackGorge',209,308,0,343},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\GildedFan',208,292,438,41},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\GrandGranery',314,212,334,325},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\Halfhill',206,245,438,177},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\HarvestHome',260,251,5,239},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\KuzenVillage',199,304,224,74},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\MudmugsPlace',230,217,561,161},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\NesingwarySafari',249,342,104,326},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\PaoquanHollow',273,246,12,105},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\PoolsofPurity',213,246,513,58},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\SilkenFields',254,259,530,253},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\RumblingTerrace',277,245,582,301},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\SingingMarshes',175,291,170,130},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\StormsoutBrewery',257,288,227,380},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\Theheartland',286,392,253,75},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\ThunderfootFields',380,317,622,0},
-	    {'Interface\\WorldMap\\ValleyoftheFourWinds\\ZhusDecent',303,323,699,114},
-	  },
-  }
-	for map,data in pairs(MoP_maps) do Foglight.data[map]=data end
-	MoP_maps=nil
-end
 
 function Foglight:Startup()
 	if not ZGV.db.profile.foglight then return end
@@ -1850,11 +1877,12 @@ end
 --- Cheat. Mess with the original WorldMapFrame_Update by faking GetMapOverlayInfo() responses!
 
 -- RUN THIS.
-function Foglight:DumpMapOverlayInfos(diff)
+function Foglight:DumpMapOverlayInfos(diff,all)
 	if GetCurrentMapContinent()==-1 then return self:_DumpSpecialMapOverlayInfos(diff) end
 	local dump
-	if diff then dump = "-- DIFFERENCES from Foglight.data :\n" else dump = "Foglight.data = {\n" end
+	if diff then dump = "-- DIFFERENCES from Foglight.data :\n" elseif all then dump = "Foglight.data = {\n" else dump = "" end
 	local conts = {GetMapContinents()}
+	local current = GetMapInfo()
 	for ci,c in pairs(conts) do
 		ChatFrame1:AddMessage(ci.." = "..c)
 		local zones = {GetMapZones(ci)}
@@ -1862,16 +1890,18 @@ function Foglight:DumpMapOverlayInfos(diff)
 		for zi,z in pairs(zones) do
 			SetMapZoom(ci,zi)
 			local zonetag = GetMapInfo()
-			local zone,count = self:_Dump_GrabOneZone(zonetag,diff)
-			if count>0 then
-				dump = dump
-					.. "  ['" .. zonetag .. "']={\n"
-					.. zone
-					.. "  },\n"
+			if all or zonetag==current then
+				local zone,count = self:_Dump_GrabOneZone(zonetag,diff)
+				if count>0 then
+					dump = dump
+						.. "  ['" .. zonetag .. "']={\n"
+						.. zone
+						.. "  },\n"
+				end
 			end
 		end
 	end
-	if not diff then dump = dump .. "}\n" end
+	if not diff or all then dump = dump .. "}\n" end
 	ZGV:ShowDump(dump,"Paste this into Foglight.lua:")
 end
 

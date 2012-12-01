@@ -45,8 +45,8 @@ local classtalents=
 	["MAGE"]		= { "Arcane","Fire","Frost" },
 	["WARLOCK"]		= { "Affliction","Demonology","Destruction" },
 	["SHAMAN"]		= { "Elemental","Enhancement","Restoration" },
-	["DRUID"]		= { "Balance","Feral Combat","Restoration" },
-	-- TODO When MoP hits we'd be having problems with druid-4 specs this way
+	["DRUID"]		= { "Balance","Feral","Guardian","Restoration" },
+	-- TODO When MoP hits we'd be having problems with druid-4 specs this way -- Hey found this a month after MoP!
 }
 -- Reversing the table
 for k,v in pairs(classtalents) do
@@ -91,7 +91,7 @@ local function ParseMapXYDist(text,insanefloor)
 
 	if map then
 		-- only map name should be left in the text - might be text or numeric, and might have /floor
-		_,flr = map:match("^(.+)%s*/%s*(%d+)$")
+		_,flr = map:match("^(.-)%s*/%s*(%d+)$")
 		map = _ or map
 	end
 
@@ -123,6 +123,9 @@ local function ParseMapXYDist(text,insanefloor)
 
 	return map,flr,x,y,dist, err
 end
+_G['ParseMapXYDist']=ParseMapXYDist
+Parser.ParseMapXYDist=ParseMapXYDist
+
 
 -- cache map IDs. Testing.
 function ZGV:DumpMapIDsByName()
@@ -185,6 +188,7 @@ local function ParseID(str)
 	if not name and not id then name=str end
 	return name, id, obj
 end
+Parser.ParseID = ParseID
 
 --- parse just the header, until the first 'step' tag. No chunking, just header data extraction.
 function Parser:ParseHeader(text)
@@ -236,6 +240,7 @@ local ConditionEnv = {
 	_G = _G,
 	-- variables needing update
 	level=1,
+	intlevel=1,
 	ZGV=ZGV,
 
 	-- these must be assigned in an _Update() call, if "local" scripts are to work. HORRIBLE local-faking.
@@ -245,12 +250,14 @@ local ConditionEnv = {
 
 	_Update = function()
 		Parser.ConditionEnv.level = ZGV:GetPlayerPreciseLevel()
+		Parser.ConditionEnv.intlevel = floor(Parser.ConditionEnv.level)
 		if ZGV.db.char.fakelevel and ZGV.db.char.fakelevel>0 then Parser.ConditionEnv.level=ZGV.db.char.fakelevel end
 	end,
 
 	_Setup = function()
 		-- reputation 'constants'
 		for standing,num in pairs(ZGV.StandingNamesEngRev) do Parser.ConditionEnv[standing]=num end
+		for standing,num in pairs(ZGV.FriendshipNamesEngRev) do Parser.ConditionEnv[standing]=num end
 	end,
 
 	_SetLocal = function(guide,step,goal)
@@ -262,6 +269,9 @@ local ConditionEnv = {
 	-- independent data feeds
 	rep = function(faction)
 		return ZGV:GetReputation(faction).standing
+	end,
+	friend = function(faction)
+		return ZGV:GetReputation(faction).friendship
 	end,
 	repval = function(faction,baselevel)
 		baselevel = ZGV.StandingNamesEngRev[baselevel]
@@ -300,19 +310,11 @@ local ConditionEnv = {
 		return select(4,GetAchievementInfo(achieveid))
 	end,
 	haspet = function(petid)
-		if ZGV.Expansion_Mists then
-			local isWild= PetJournal and PetJournal.isWild or false --PetJournal.isWild does not have a known use atm if it is true. Always is false
-			local total,known = C_PetJournal.GetNumPets(isWild)
-			for i=1,known do
-				local userPetID,creatureID=C_PetJournal.GetPetInfoByIndex(i, isWild),(select(11,C_PetJournal.GetPetInfoByIndex(i, isWild)))
-				if userPetID and creatureID==petid then return true end
-			end
-		else
-			local id,name,spell
-			for i=1,GetNumCompanions("CRITTER") do
-				id,name,spell = GetCompanionInfo("CRITTER",i)
-				if id==petid then return true end
-			end
+		local isWild= PetJournal and PetJournal.isWild or false --PetJournal.isWild does not have a known use atm if it is true. Always is false
+		local total,known = C_PetJournal.GetNumPets(isWild)
+		for i=1,known do
+			local userPetID,creatureID=C_PetJournal.GetPetInfoByIndex(i, isWild),(select(11,C_PetJournal.GetPetInfoByIndex(i, isWild)))
+			if userPetID and creatureID==petid then return true end
 		end
 	end,
 	hasmount = function(mountspell)
@@ -335,11 +337,7 @@ local ConditionEnv = {
 	end,
 	heroic_dung = function(diff)
 		diff = diff or 2
-		if ZGV.Expansion_Mists then
-			return GetDungeonDifficultyID()==diff
-		else
-			return GetDungeonDifficulty()==diff
-		end
+		return GetDungeonDifficultyID()==diff
 	end,
 	heroic_raid = function(diff)
 		diff = diff or 3
@@ -404,6 +402,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 
 	-- do inclusion. Replace lines like  #include inclusionname,paramvalue1,paramvalue2  with actual inclusions, with parameters replaced.
 	local function do_include(line)
+		local orig_line = line
 		line = line:gsub("\\,","##COMMA##") :gsub("\\\"","##QUOTE##")
 		line = line:gsub('%s*//.-$',"")
 		local words={strsplit(",",line)}
@@ -416,12 +415,13 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 			if param then params[param]=val end
 		end
 		local inclusion = ZGV.registered_includes[title]
+		if not inclusion then ZGV:Debug("&parser #include not found in |cffffaa00%s|r: '|cffff5500%s|r' in line '|cffaaaaaa%s|r'",guide.title,title,orig_line) end
 		return inclusion and inclusion:GetParsed(params) or ""
 	end
 
 	local safety=0
 	while (text:find("#include")) do
-		text = text:gsub("#include (.-)[\r\n]",do_include)
+		text = text:gsub("#include%s*(.-)%s-[\r\n]",do_include)
 		safety=safety+1
 		assert(safety<20,"#include recursion exceeded safety depth")
 	end
@@ -433,13 +433,19 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 
 	local do_debug
 
+	local last5lines = {}
+
 	local function parseerror(msg)
+		local chunk = ""
+		for i=1,#last5lines do chunk=chunk.."\n"..last5lines[i] end
 		return nil,msg,linecount,guide and guide.steps and #guide.steps or 0,chunk
 	end
 
 	local indoors_flag
 
 	guide.does_macrotext_follow = nil
+
+	local GOALTYPES = ZGV.GOALTYPES
 
 	while (index<#text) do
 		local st,en,line=strfind(text,"%s*(.-)%s*\n",index)
@@ -482,6 +488,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 		else
 			-- remove comments, retrim
 			line = line:gsub("%s*//.*$","")
+			line = line:gsub("%-%-.*$","")
 
 			-- extract indent, retrim
 			local indent
@@ -497,11 +504,22 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 			-- strip leading pipes, retrim
 			line = line:gsub("^|%s*","")
 
+
 			local goal={}
+			if step then
+				goal.parentStep = step
+				goal.num = #step.goals+1
+			end
 
 			local chunkcount=1
 
 			if do_debug then ZGV:Debug("Parsing: line "..linecount..": "..line) end
+
+
+			-- keep a running list of 5 last lines, just for error context
+			tinsert(last5lines,line)
+			if #last5lines>5 then tremove(last5lines,1) end
+
 
 			-- cloak escaped pipes
 			line = line:gsub("\\|","%%PIPE%%")
@@ -546,16 +564,22 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					end
 				elseif cmd=="author" then
 					guide[cmd]=params
-
+				elseif cmd=="trial" then
+					guide[cmd]=(params=="on")
 				elseif cmd=="dungeon" then
 					guide.dungeon = tonumber(params)
+				elseif cmd=="dungeondifficulty" then
+					if params=="Heroic" then guide.dungeondifficulty = 2
+					elseif params=="Challenge" then guide.dungeondifficulty = 8
+					else --This is normal dungeons, or default to this for badly formatted params
+						guide.dungeondifficulty = 1
+					end
 				elseif cmd=="pet" then
 					guide.pet = tonumber(params)
 				elseif cmd=="monkquest" then
 					guide.monkquest = tonumber(params)
 				elseif cmd=="dungeonfloor" then
 					guide.dungeonfloor = tonumber(params)
-
 				elseif cmd=="description" then
 					local keywords = params:match("^# (.+)")
 					if keywords then
@@ -670,7 +694,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					if kclass==guide.class then -- If this is our class we may want to show a spec icon
 						if tablelength(guide[cmd])==0 then
 							-- This is *probaly* for a single spec and for our class
-							local _,_,_,specicon=GetTalentTabInfo(spec,false,false,nil)
+							local _,_,_,specicon=GetSpecializationInfo(spec,false,false,nil)
 							guide.icon= { texname=specicon }
 						else
 							-- This is a multispec thing, screw it, let's show a class icon
@@ -742,6 +766,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					-- TODO make sure it aint unique
 					local name=params
 					if not name then return parseerror("macro paramaters absent") end
+					if #name>14 then return parseerror("macroname too long: "..name) end
 					name=name:sub(1,14)
 					name="ZG"..name
 					if not guide.macro then guide.macro={} end
@@ -837,82 +862,17 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					end
 				--]]
 				-- goal commands
-				elseif cmd=="accept" or cmd=="turnin" then
-					goal.action = goal.action or cmd
-					if not params then return parseerror("no quest parameter") end
-					goal.quest,goal.questid = ParseID(params)
-					if goal.quest then
-						local q,qp = goal.quest:match("^(.-)%s-%((%d+)%)$")
-						if q then goal.quest,goal.questpart=q,qp end
-					end
-					if not goal.quest and not goal.questid then return parseerror("no quest parameter") end
 
-					if goal.questid then
-						if not step.level then return parseerror("Missing step level information") end
-						local lev = ZGV.mentionedQuests[goal.questid]
-						if guide.dynamic then
-							if not lev or lev<step.level then lev=step.level end
-						else
-							if not lev then lev=-1 end
-						end
-						ZGV.mentionedQuests[goal.questid] = lev
-					end
+				elseif cmd=="goto" or cmd=="at" or cmd=="fly" then
 
-				elseif cmd=="talk" then
+					if do_debug then ZGV:Debug(":== "..cmd..": ["..params.."]") end
 
 					goal.action = goal.action or cmd
-					if not params then return parseerror("no npc") end
-					goal.npc,goal.npcid = ParseID(params)
-					if not goal.npc and not goal.npcid then return parseerror("no npc") end
+					local errortxt = GOALTYPES[cmd].parse(goal,params,step,prevmap,prevfloor,indoors_flag)
+					if type(errortxt)=="string" then return parseerror(errortxt) end
 
-				elseif cmd=="goto" or cmd=="at" then
-					goal.action = goal.action or cmd
-
-					local params2,title = params:match('^(.-)%s*"(.*)"')
-					if title then params=params2 end
-
-					local map,flr,x,y,dist, err = ParseMapXYDist(params)
-
-					if err then return parseerror(err) end
-
-					goal.map,goal.floor = (map or goal.map or step.map or prevmap), (flr or goal.floor or step.floor or prevfloor)
-					if not goal.map then
-						return parseerror("'"..cmd.."' has no map parameter, neither has one been given before.")
-					end
 					step.map,step.floor = goal.map,goal.floor
 					prevmap,prevfloor = step.map,step.floor
-
-					goal.x = x or goal.x
-					goal.y = y or goal.y
-					goal.dist = dist or goal.dist
-
-					if (goal.action=="accept" or goal.action=="turnin" 	or goal.action=="kill" 	or goal.action=="get" 	or goal.action=="talk" 	or goal.action=="goal" 	or goal.action=="use") then
-						goal.autotitle = goal.param or goal.target or goal.quest
-					end
-
-					goal.is_indoors = indoors_flag
-
-					goal.waytitle=title
-
-				elseif cmd=="fly" then
-
-					goal.action = goal.action or cmd
-
-					local node = LibTaxi:FindTaxi(params)
-					if node then
-						goal.x=node.x
-						goal.y=node.y
-						goal.map=node.m
-						goal.floor= ZGV:SanitizeMapFloor(node.m,node.f)
-						step.map,step.floor = goal.map,goal.floor
-						prevmap,prevfloor = step.map,step.floor
-						goal.dist = 50
-						goal.landing = node.name
-						goal.title = node.name -- TODO is this safe? ~aprotas
-						break
-					else
-						return parseerror("'"..cmd.."' has an unknown landing name '"..params.."'.")
-					end
 
 				elseif cmd=="path" then
 
@@ -947,97 +907,6 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 						end
 					end
 
-				elseif cmd=="kill" or cmd=="get" or cmd=="collect" or cmd=="goal" or cmd=="buy" then
-					goal.action = goal.action or cmd
-
-					-- first, extract the count
-					-- oooh boy, this could be an expression..! gods help us.
-					local count,excl,object
-
-					count,object = params:match("^%((.*)%)%s*(.*)")
-					if count then
-						goal.countexpr = count
-					else
-						count,excl,object = params:match("^([0-9]+)(!?)%s+(.*)")
-					end
-					if not object then object=params end
-					goal.count = tonumber(count) or 0
-					if excl=="!" then goal.exact = 1 end
-
-					-- check for plural
-					local name,plural = object:match("^(.+)(%+)$")
-					if plural then
-						goal.plural=true
-						object=name
-					end
-
-					-- now object##id
-					goal.target,goal.targetid = ParseID(object)
-
-					-- finally, assume buys are futureproof
-					if cmd=="buy" then goal.future=true end
-
-					-- something missing?
-					if not goal.targetid and not goal.target then return parseerror("no parameter") end
-					--[[
-					if goal.target:match("%+%+") then
-						if goal.target:match("%+%+$") then
-							goal.target = goal.target:gsub("%+%+","")
-							goal.targets = goal.target
-						else
-							local sing,pl = goal.target:match("(.+)%+%+%+(.+)")
-							if not sing or not pl then
-								sing = goal.target:gsub("([^%s%+]+)++([^%s%+]+)","%1")
-								pl = goal.target:gsub("([^%s%+]+)++([^%s%+]+)","%2")
-							end
-							goal.target = sing
-							goal.targets = pl
-						end
-					end
-					--]]
-
-				elseif cmd=="earn" then
-					goal.action = goal.action or cmd
-
-					local count,excl,object = params:match("^([0-9]+)(!?) (.*)")
-					goal.count = tonumber(count) or 1
-					if excl=="!" then goal.exact = 1 end
-					goal.target,goal.targetid = ParseID(object)
-					if not goal.targetid then return parseerror("no parameter") end
-
-				elseif cmd=="create" then
-					goal.action = goal.action or cmd
-
-					local spell,skill,level = params:match("^(.-)%s*,%s*(.-)%s*,%s*(.+)$")
-					if spell then
-						goal.spell,goal.spellid = ParseID(spell)
-						goal.spell = GetSpellInfo(tonumber(goal.spellid))
-
-						local castskill
-						if skill=="Mining" or skill=="Smelting" then
-							goal.skill = "Mining"
-							castskill = ZGV.LocaleSkills["Smelting"]
-						else
-							goal.skill = skill
-							castskill = ZGV.LocaleSkills[skill]
-						end
-
-						local total = level:match("(%d+) total")
-						if total then
-							goal.count=tonumber(total)
-						else
-							goal.skilllevel = tonumber(level)
-						end
-
-						goal.macrosrc = "#showtooltip ".. castskill .."{;}/run CloseTradeSkill(){;}/cast "..castskill.."{;}/run ZGV:PerformTradeSkillGoal({stepnum},{goalnum})"
-						-- This is insane, I know. Here we have a macro that will call a function that will call upon the values above. Great and simple... NOT.
-					else
-						--local spell,num = params:match("^(.-)%s*,%s*([0-9]+)$")
-						local num,item = params:match("^([0-9]+)%s+(.+)$")
-						goal.count = tonumber(num)
-						goal.item,goal.itemid = ParseID(item)
-					end
-
 				elseif cmd=="from" then
 					goal.action = goal.action or cmd
 					params=params:gsub([[\,]],"!!comma!!")
@@ -1056,69 +925,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 						tinsert(goal.mobs,{name=nm,id=id,pl=plural and true or false})
 					end
 					goal.mobspre = mobs
-				elseif cmd=="complete" then
-					goal.action = goal.action or cmd
-					_,goal.questid,goal.objnum = ParseID(params)
-					if not goal.questid then return parseerror("no quest parameter") end
-				elseif cmd=="ding" then
-					goal.action = goal.action or cmd
-					goal.level = tonumber(params)
-					if not goal.level then return parseerror("'ding': invalid level value") end
-					prevlevel = tonumber(params)
-				elseif cmd=="equipped" then
-					goal.action = goal.action or cmd
-					goal.target,goal.targetid = ParseID(params)
-				elseif cmd=="hearth" then
-					goal.action = goal.action or cmd
-					goal.item = "Hearthstone"
-					goal.itemid = 6948
-					goal.itemuse = true
-					goal.param = BZL[params]
-					goal.force_noway = true
-				elseif cmd=="rep" then
-					goal.action = goal.action or cmd
-					goal.faction,goal.rep,goal.repexp = params:match("^(.-)%s*,%s*(.-),([0-9]-)$")
-					if type(goal.rep)=="string" then goal.rep=ZGV.StandingNamesEngRev[goal.rep] end
-					if ZGV.BFL[goal.faction] then goal.faction=ZGV.BFL[goal.faction] end
-				elseif cmd=="achieve" then
-					goal.action = goal.action or cmd
-					_,goal.achieveid,goal.achievesub = ParseID(params)
-				elseif cmd=="skill" or cmd=="skillmax" then
-					goal.action = goal.action or cmd
-					goal.skill,goal.skilllevel = params:match("^(.+),([0-9]+)$")
-					goal.skilllevel = tonumber(goal.skilllevel)
-					if not goal.skill then return parseerror("'skill*': no skill found") end
-					if cmd=="skillmax" and (goal.skilllevel % 75 > 0) then return parseerror("skillmax: you can't raise a skill max level to "..goal.skilllevel.."; did you mean "..(goal.skilllevel - goal.skilllevel % 75).." or "..(goal.skilllevel - goal.skilllevel % 75 + 75).." ?") end
-				elseif cmd=="learn" then
-					goal.action = goal.action or cmd
-					goal.recipe,goal.recipeid = ParseID(params)
-					if not goal.recipeid then return parseerror("'learn': no recipe found") end
-				elseif cmd=="learnspell" then
-					goal.action = goal.action or cmd
-					goal.spell,goal.spellid = ParseID(params)
-				elseif cmd=="learnpet" then
-					goal.action = goal.action or cmd
-					goal.pet,goal.petid = ParseID(params)
-				elseif cmd=="learnmount" then
-					goal.action = goal.action or cmd
-					goal.spell,goal.spellid = ParseID(params)
 
-				elseif cmd=="fpath" or cmd=="home" then
-					goal.action = goal.action or cmd
-					goal.param = params
-					if not goal.param then return parseerror("no parameter") end
-				elseif cmd=="havebuff" then
-					goal.action = goal.action or cmd
-					goal.buff = params
-					if not goal.buff then return parseerror("no parameter") end
-				elseif cmd=="nobuff" then
-					goal.action = goal.action or cmd
-					goal.buff = params
-					if not goal.buff then return parseerror("no parameter") end
-				elseif cmd=="invehicle" then
-					goal.action = goal.action or cmd
-				elseif cmd=="outvehicle" then
-					goal.action = goal.action or cmd
 				elseif cmd=="condition" then	-- new in 3.1: supersede the "startlevel" eventually.
 					if not step then
 						local case,cond = params:match("(.-) (.+)$")
@@ -1160,54 +967,11 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 						goal.condition_complete = fun
 					end
 
-				elseif cmd=="click" then
-					goal.action = goal.action or cmd
-					goal.target,goal.targetid = ParseID(params)
 
-				elseif cmd=="clicknpc" then
-					goal.action = goal.action or cmd
-					goal.npc,goal.npcid = ParseID(params)
-
-				elseif cmd=="confirm" then
-					goal.action = goal.action or cmd
-					if params == "always" then
-						goal.always = true
-					else
-						goal.always = false
-					end
-					goal.optional = true
-
-				elseif cmd=="info" then
-					goal.action = goal.action or cmd
-					goal.info = params
-
-
-				-- clickable icon displayers
-
-				elseif cmd=="cast" then
-					goal.action = goal.action or cmd
-					goal.castspell,goal.castspellid = ParseID(params)
-					if not goal.castspell and not goal.castspellid then return parseerror("no parameter") end
-				elseif cmd=="petaction" then
-					goal.action = goal.action or cmd
-					goal.petaction = tonumber(params)
-					if not goal.petaction then goal.petaction = params end
-					if not goal.petaction then return parseerror("petaction needs an action number") end
-				elseif cmd=="item" then
-					goal.action = goal.action or cmd
-					goal.item,goal.itemid = ParseID(params)
-					if not goal.item and not goal.itemid then return parseerror("no parameter") end
-
-					-- collect the item into the gear table
-					guide.items = guide.items or {}
-					guide.items[goal.itemid]=step.num
-				elseif cmd=="use" then
-					goal.action = goal.action or cmd
-					goal.item,goal.itemid = ParseID(params)
-					goal.itemuse=true
-					if not goal.item and not goal.itemid then return parseerror("no parameter") end
 				elseif cmd=="script" then
 					goal.script = params
+				elseif cmd=="updatescript" then
+					goal.updatescript = params
 				elseif cmd=="macro" then
 					goal.macrosrc = params
 				elseif cmd=="buttonicon" then
@@ -1256,8 +1020,13 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					goal.force_complete = true
 				elseif cmd=="opt" then
 					goal.optional = true
-				elseif cmd=="noway" then
+
+				-- waypoint creation:
+				elseif cmd=="noway" then -- prevent waypointing, even if there are coords
 					goal.force_noway = true
+				elseif cmd=="nowayinzone" then -- prevent waypointing if we're in the same zone
+					goal.force_nowayinzone = true
+				
 				elseif cmd=="sticky" then
 					goal.force_sticky = true
 				elseif cmd=="important" then
@@ -1285,7 +1054,7 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					--params = params:gsub("_(.-)_","|cffffee88%1|r")
 					-- or not, since it reverts to white.
 
-				goal.tooltip = LG[params]
+					goal.tooltip = LG[params]
 
 				elseif cmd=="image" then
 					goal.image = params
@@ -1313,6 +1082,14 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 
 				elseif cmd=="debug" then
 					do_debug = (params=="on")
+
+
+				-- NEW: catch-all from the goals table.
+				elseif GOALTYPES[cmd] and GOALTYPES[cmd].parse then
+					goal.action = goal.action or cmd
+					local errortxt = GOALTYPES[cmd].parse(goal,params)
+					if type(errortxt)=="string" then parseerror(errortxt) end
+
 
 				elseif #chunk>1 then -- text
 
@@ -1370,11 +1147,19 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					goal.text = text
 				end
 
+
+				if cmd=="ding" then
+					prevlevel = goal.level
+				end
+
+
 				chunkcount=chunkcount+1
 				if chunkcount>20 then
 					return nil,"More than 20 chunks in line",linecount,line
 				end
 			end
+			-- all chunks are in goal or step... hopefully.
+
 
 			if #TableKeys(goal)>0 then
 				if not step then return nil,"What? Unknown data before first 'step' tag, or what?",linecount,line end
@@ -1382,6 +1167,8 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 				-- so there's something to record? go ahead.
 
 				setmetatable(goal,ZGV.GoalProto_mt)
+
+				tinsert(step.goals,goal)
 
 				if not goal.action then
 					if (goal.x or goal.map) then
@@ -1395,15 +1182,9 @@ function Parser:ParseEntry(guide,fully_parse,lastparsed)
 					goal.noobsolete = true
 				end
 
-
-				goal.parentStep = step
-				goal.num = #step.goals+1
-
 				if goal.dist and math.abs(goal.dist)<5 then goal.dist=goal.dist*20 end
 
 				goal.showinbrief = had_asterisk
-
-				step.goals[#step.goals+1] = goal
 
 				if (goal.action=="get" or goal.action=="kill" or goal.action=="goal") and not goal.questid and not goal.objnum and not goal.force_nocomplete then
 					return nil,"Objective has no quest ID / obj num!",linecount,line
@@ -1475,9 +1256,6 @@ local h="" for i=33,127 do h=h .. c(i) end
 function __uncrapt(text,q)
 
 end
-
-_G['ParseMapXYDist']=ParseMapXYDist
-
 
 tinsert(ZGV.startups,function(self)
 	do -- unit-check ParseMapXYDist

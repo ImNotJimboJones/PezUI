@@ -22,7 +22,8 @@ function Log:Trim()
 	end
 end
 
-function Log:Add(s)
+function Log:Add(frm,...)
+	local s = frm:format(...)
 	table.insert(self.entries,date("%H:%M:%S").."> "..s)
 	if #self.entries>self.size then
 		table.remove(self.entries,1)

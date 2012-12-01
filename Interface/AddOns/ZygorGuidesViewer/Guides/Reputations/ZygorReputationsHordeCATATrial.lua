@@ -72,7 +72,7 @@ goto 24.5,47.6
 ..accept 28467
 step
 goto 24.5,47.6
-  .from Winterfall Totemic##7441+, Winterfall Den Watcher##7440+, Winterfall Runner##10916+
+.from Winterfall Totemic##7441+, Winterfall Den Watcher##7440+, Winterfall Runner##10916+
 .'Kill 15 Winterfall Furbolg |q 28460/1
 ..get 10 Winterfall Spirit Beads |q 28522/1
 .' You can find more mobs around [Winterspring,27.3,49.3].
@@ -116,7 +116,7 @@ goto 65.3,46.2
 .talk 48722
 .accept 28614
 step
- goto 65.4,46.2
+goto 65.4,46.2
 .talk 48723
 ..accept 28615
 step
@@ -140,7 +140,7 @@ label	"the_grind"
 .' At this point, you can do two repeatable quests, as well as grind to earn rep.
 .' More Beads for Salfa requires that you grind in Winterspring.  You collect 5 Winterfall Spirit Beads, which are worth 2,000 Reputation per turn in.  Click here to farm at the Winterspring location. |confirm |next "winterfall"
 .' or
-.' Feathers for Nafien requires that you grind in Felwood. You collect 5 Deadwood Headdress Feathers, which are worth 2,000 Reputation per turn in.  Click here to farm at the Felwood location. |confirm |next "deadwood" |tip         
+.' Feathers for Nafien requires that you grind in Felwood. You collect 5 Deadwood Headdress Feathers, which are worth 2,000 Reputation per turn in.  Click here to farm at the Felwood location. |confirm |next "deadwood" |tip
 .' Collecting 65 Beads/Feathers will get you from Honored to Exalted.
 step
 label	"winterfall"
@@ -153,10 +153,10 @@ goto 67.5,49.8
 step
 goto 21.1,46.2
 .talk 11556
-..accept 28523 |n                                     
-.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm     
-.' or           
-.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted    
+..accept 28523 |n
+.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm
+.' or
+.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted
 step
 label	"deadwood"
 goto Felwood,61.9,12.3
@@ -169,10 +169,10 @@ step
 label	"turnin"
 goto 64.0,10.3
 .talk 15395
- ..accept 28395 |n
-.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm     
-.' or           
-.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted    
+..accept 28395 |n
+.' Click here to go back to grinding. |next "the_grind" |only if rep('Timbermaw Hold')<=Revered |confirm
+.' or
+.' Exalted with Timbermaw Hold |next "exalted" |condition rep('Timbermaw Hold')==Exalted
 step
 label	"exalted"
 .' Congratulations, you are now Exalted with Timbermaw Hold!

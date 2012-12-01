@@ -6,6 +6,7 @@
 
 	<Include file="DEV\DEV.xml" />
 	<Script file="Ver.lua"/>
+	<Script file="Class.lua"/>
 	<Script file="BugReport.lua"/>
 	<Script file="Parser.lua"/>
 	<Script file="ChainsParser.lua"/>
@@ -29,8 +30,8 @@
 	<Script file="Step.lua"/>
 	<Script file="Goal.lua"/>
 
-	<Script file="Loot.lua"/>
 	<Include file="Loot.xml"/>
+	<Script file="Loot.lua"/>
 	<Script file="PetBattle.lua"/>
 
 	<Script file="Config.lua"/>

@@ -47,9 +47,74 @@ ZygorGuidesViewer:RegisterInclude("hearth_dalaran",[[
 		'Hearth to A Hero's Welcome, Dalaran  |goto Dalaran |use Hearthstone##6948 |noway |c  //44.4,62.7
 ]])
 
+ZygorGuidesViewer:RegisterInclude("Spirt_Harmony",[[
+		goto Vale of Eternal Blossoms/0 61.7,21.7
+		.talk Danky##1149
+]])
+
 --------------------------------------------------------------------------------------------------------------------------------------
 -- Portal Includes
 --------------------------------------------------------------------------------------------------------------------------------------
+
+
+ZygorGuidesViewer:RegisterInclude("h_begin_pandaria",[[
+	step
+		.' In order to get to Pandaria for the first time, you must complete the opening questline to The Jade Forest.
+		|confirm
+	step
+		goto Orgrimmar 49.8,75.3
+		..accept The Art of War##29612
+		.' Report to Grommash Hold |q 29612/1
+	step
+		goto Orgrimmar 48.6,70.6
+		.talk General Nazgrim##54870
+		..turnin The Art of War##29612
+		..accept All Aboard!##31853
+	step
+		goto Kalimdor 61.2,44.6
+		' Look for a ship in the air. You have to use a flying mount to get to General Nazgrim.
+		.talk General Nazgrim##55054
+		..turnin All Aboard!##31853
+		..accept Into the Mists##29690
+	step
+		.talk General Nazgrim##55054
+		.' Tell him you're ready to go!
+		.' Discover Pandaria |q 29690/1
+	step
+		goto The Jade Forest 30.8,10.2
+		.talk General Nazgrim##55135
+		..turnin Into the Mists##29690
+		..accept Paint it Red!##31765
+	step
+		.' Follow the steps down here. |goto 31.4,11.3 <5 |c
+	step
+		.clicknpc Gunship Turret##67032
+		|invehicle
+	step
+		.' Use your abilities on your action bar.
+		.kill 80 Thunder Hold Troops |q 31765/1
+		.kill 9 Thunder Hold Cannons |q 31765/2 
+		|modelnpc 66203
+		|modelnpc 66348
+		|modelnpc 66506
+		|modelnpc 66291
+	step
+		goto 31.0,11.0
+		.talk Rivett Clutchpop##67250
+		..turnin Paint it Red!##31765
+		..accept Touching Ground##31766
+	step
+		  goto 31.5,11.1
+		  .click Rappelling Rope##7548
+		  .' Rappel into Honeydew Glade |q 31766/1
+	step
+		goto 31.6,11.3
+		.talk General Nazgrim##55135
+		..turnin Touching Ground##31766
+]])
+
+
+
 --How to get to the Dark Portal from Orgrimmar--
 ZygorGuidesViewer:RegisterInclude("darkportal",[[
 		goto Orgrimmar,45.9,66.9 |n
@@ -76,6 +141,12 @@ ZygorGuidesViewer:RegisterInclude("portal_hyjal",[[
 		.' Teleport to Mount Hyjal |goto Mount Hyjal |noway |c
 ]])
 
+ZygorGuidesViewer:RegisterInclude("port_hyjal",[[
+		goto Orgrimmar,51.1,38.3
+		.' Click the Portal to Hyjal |tip It looks like a big swirling portal in front of some huge tree roots.
+		.' Teleport to Mount Hyjal |goto Mount Hyjal |noway |c
+]])
+
 ZygorGuidesViewer:RegisterInclude("HyjalPortaltoOrg",[[
 		goto Mount Hyjal,63.5,24.4
 		.' Click the Portal to Orgrimmar |tip It looks like a big swirling orange portal next to a big building.
@@ -93,7 +164,13 @@ ZygorGuidesViewer:RegisterInclude("portal_deepholm",[[
 		.' Teleport to Deepholm |goto Deepholm |noway |c
 ]])
 
-ZygorGuidesViewer:RegisterInclude("portal_vashj'ir",[[
+ZygorGuidesViewer:RegisterInclude("port_deepholm",[[
+		goto Orgrimmar,50.8,36.4 |n
+		.' Click the Portal to Deepholm |tip It looks like a purple swirling portal.
+		.' Teleport to Deepholm |goto Deepholm |noway |c
+]])
+
+ZygorGuidesViewer:RegisterInclude("port_vashj'ir",[[
 		goto Orgrimmar,49.3,36.5
 		.' Click on the portal to Vashj'ir |tip It looks like a blue swirling portal.
 		.' Teleport to Vashj'ir |goto Abyssal Depths |noway |c
@@ -111,7 +188,7 @@ ZygorGuidesViewer:RegisterInclude("port_uldum",[[
 		.' Teleport to Uldum |goto Uldum |noway |c
 ]])
 
-ZygorGuidesViewer:RegisterInclude("portal_twilight",[[
+ZygorGuidesViewer:RegisterInclude("port_twilight",[[
 		goto Orgrimmar,50.2,39.4
 		.' Click the Portal to Twilight Highlands |tip It looks like a big swirling portal in front of some big metal twisting spiral objects.
 		.' Teleport to Twilight Highlands |goto Twilight Highlands |noway |c
@@ -1464,14 +1541,17 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Dailies",[[
 
 ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[ 
 	step
-		|fly Thunder Bluff
-	step
 		goto Mulgore,36.8,35.8
 		.click the Portal to Darkmoon Island
 		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
 	step
 		goto Darkmoon Island,56.0,52.9 |n
 		.' Follow the Path to the Darkmoon Faire |goto Darkmoon Island,56.0,52.9,1 |noway |c
+	step
+		goto Darkmoon Island 55.4,54.8
+		.talk Selina Dourman##10445
+		..accept Banners, Banners Everywhere!##29520
+		|only if skill("Tailoring")>74
 	step
 		goto Darkmoon Island,49.3,60.8
 		.talk Rinling##14841
@@ -1553,8 +1633,9 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 		.' Click Discarded Weapons
 		.collect 6 Discarded Weapon##72018 |n
 		.' Disenchant the Discarded Weapons |use Discarded Weapon##72018
-		.' Collect 6 Soothsayer's Dust |q 28825/1
+		.' Collect 6 Soothsayer's Dust |q 29510/1
 		|modeldisplay Discarded Weapon##10777
+		|only if skill("Enchanting")>74
 	step
 		'All around the Island
 		.click Tonk Scrap##6314
@@ -1610,6 +1691,13 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 		.buy 5 Simple Flour##30817 |q 29509
 		|only if skill("Cooking")>74
 	step
+		goto Mulgore 43.8,44.6
+		.talk Mahu##3005
+		.buy 1 Coarse Thread##2320
+		.buy 1 Blue Dye##6260
+		.buy 1 Red Dye##2604
+		|only if skill("Tailoring")>74
+	step
 		goto Mulgore,36.8,35.8
 		.click Portal to Darkmoon Island
 		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
@@ -1619,6 +1707,11 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 		.click Portal to Darkmoon Island
 		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
 		|only if skill("Alchemy")>74
+	step
+		goto Mulgore,36.8,35.8
+		.click Portal to Darkmoon Island
+		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
+		|only if skill("Tailoring")>74
 	step
 		goto Darkmoon Island,56.0,52.9 |n
 		.' Follow the Path to the Darkmoon Faire |goto Darkmoon Island,56.0,52.9,1 |noway |c
@@ -1632,6 +1725,10 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 		.' Use the Cocktail Shaker in your bags to make Moonberry Fizz |use Cocktail Shaker##72043
 		.' Create 5 Sevings of Moonberry Fizz |q 29506/1
 		|only if skill("Alchemy")>74
+	step
+		goto Darkmoon Island 50.0,66.2
+		.' Use the Darkmoon Banner Kit in your bags to plant a banner here. |use Darkmoon Banner Kit##72048
+		.' Plant a Darkmoon Banner |q 29520/1
 	step
 		goto Darkmoon Island,52.7,68.1
 		.' Click the Plump Frogs in your bags |use Plump Frogs##72056
@@ -1662,7 +1759,7 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 	step
 		goto Darkmoon Island,55.0,70.8
 		.talk Chronos##14833
-		..accept Tan My Hide##29519
+		..turnin Tan My Hide##29519
 		|only if skill("Skinning")>74
 	step
 		goto 55.0,70.8
@@ -1685,14 +1782,19 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Quests",[[
 		..turnin A Fizzy Fusion##29506
 		|only if skill("Alchemy")>74
 	step
+		goto Darkmoon Island 55.4,54.8
+		.talk Selina Dourman##10445
+		..turnin Banners, Banners Everywhere!##29520
+		|only if skill("Tailoring")>74
+	step
 		goto Darkmoon Island,49.3,60.7
 		.talk Rinling##14841
-		..accept Rearm, Reuse, Recycle##29518
+		..turnin Rearm, Reuse, Recycle##29518
 		|only if skill("Mining")>74
 	step
 		goto Darkmoon Island,53.2,75.8
 		.talk Sayge##14822
-		..accept Putting Trash to Good Use##29510
+		..turnin Putting Trash to Good Use##29510
 		|only if skill("Enchanting")>74
 	step
 		goto Darkmoon Island,51.3,81.8
@@ -1883,14 +1985,17 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 		.' You still need to earn the Achievement Darkmoon Despoiler |achieve 6029 |only if not achieved(6029)   
 		|confirm always
 	step
-		|fly Thunder Bluff
-	step
 		goto Mulgore,36.8,35.8
 		.click the Portal to Darkmoon Island
 		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
 	step
 		goto Darkmoon Island,56.0,52.9 |n
 		.' Follow the Path to the Darkmoon Faire |goto Darkmoon Island,56.0,52.9,1 |noway |c
+	step
+		goto Darkmoon Island 55.4,54.8
+		.talk Selina Dourman##10445
+		..accept Banners, Banners Everywhere!##29520
+		|only if skill("Tailoring")>74
 	step
 		goto Darkmoon Island,51.9,60.9
 		.talk Professor Thaddeus Paleo##14847
@@ -1977,7 +2082,8 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 		.click Discarded Weapon##10777+
 		.collect 6 Discarded Weapon##72018 |n
 		.' Disenchant the Discarded Weapons |use Discarded Weapon##72018
-		.' Collect 6 Soothsayer's Dust |q 28825/1
+		.' Collect 6 Soothsayer's Dust |q 29510/1
+		|only if skill("Enchanting")>74
 	step
 		'All around the Island
 		.click Tonk Scrap##6314
@@ -2044,10 +2150,17 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 		.buy 5 Simple Flour##30817 |q 29509
 		|only if skill("Cooking")>74
 	step
+		goto Mulgore 43.8,44.6
+		.talk Mahu##3005
+		.buy 1 Coarse Thread##2320
+		.buy 1 Blue Dye##6260
+		.buy 1 Red Dye##2604
+		|only if skill("Tailoring")>74
+	step
 		goto Mulgore,36.8,35.8
 		.click Portal to Darkmoon Island
 		.' Telport to Darkmoon Island |goto Darkmoon Island |noway |c
-		|only if skill("Cooking")>74 or skill("Alchemy")>74 or skill("Archaeology")>74
+		|only if skill("Cooking")>74 or skill("Alchemy")>74 or skill("Archaeology")>74 or skill("Tailoring")>74
 	step
 		goto Darkmoon Island,56.0,52.9 |n
 		.' Follow the Path to the Darkmoon Faire |goto Darkmoon Island,56.0,52.9,1 |noway |c
@@ -2057,6 +2170,11 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 		.' Use the Cocktail Shaker in your bags to make Moonberry Fizz |use Cocktail Shaker##72043
 		.' Create 5 Sevings of Moonberry Fizz |q 29506/1
 		|only if skill("Alchemy")>74
+	step
+		goto Darkmoon Island 50.0,66.2
+		.' Use the Darkmoon Banner Kit in your bags to plant a banner here. |use Darkmoon Banner Kit##72048
+		.' Plant a Darkmoon Banner |q 29520/1
+		|only if skill("Tailoring")>74
 	step
 		goto Darkmoon Island,52.7,68.1
 		.' Click the Plump Frogs in your bags |use Plump Frogs##72056
@@ -2092,7 +2210,7 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 	step
 		goto Darkmoon Island,55.0,70.8
 		.talk Chronos##14833
-		..accept Tan My Hide##29519
+		..turnin Tan My Hide##29519
 		|only if skill("Skinning")>74
 	step
 		goto 55.0,70.8
@@ -2115,14 +2233,19 @@ ZygorGuidesViewer:RegisterInclude("H_Darkmoon_Faire_Achievements",[[
 		..turnin A Fizzy Fusion##29506
 		|only if skill("Alchemy")>74
 	step
+		goto Darkmoon Island 55.4,54.8
+		.talk Selina Dourman##10445
+		..turnin Banners, Banners Everywhere!##29520
+		|only if skill("Tailoring")>74
+	step
 		goto Darkmoon Island,49.3,60.7
 		.talk Rinling##14841
-		..accept Rearm, Reuse, Recycle##29518
+		..turnin Rearm, Reuse, Recycle##29518
 		|only if skill("Mining")>74
 	step
 		goto Darkmoon Island,53.2,75.8
 		.talk Sayge##14822
-		..accept Putting Trash to Good Use##29510
+		..turnin Putting Trash to Good Use##29510
 		|only if skill("Enchanting")>74
 	step
 		goto Darkmoon Island,51.3,81.8
@@ -4466,8 +4589,6 @@ ZygorGuidesViewer:RegisterInclude("H_Winterveil_Achievements",[[
 -- HALLOWS END --
 ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 	step
-		#include "rideto_tirisfal"
-	step
 		goto Undercity,63.3,47.6
 		.talk Forsaken Commoner##19178
 		..accept A Season for Celebration##29400
@@ -4476,14 +4597,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		goto Undercity,67.4,6.6
 		.talk Spoops##15309
 		..accept Hallow's End Treats for Spoops!##8312
-	step
-		goto Undercity,67.4,13.1
-		.talk Darkcaller Yanka##15197
-		..turnin A Season for Celebration##29400
-	step
-		goto 68.8,7.9
-		.talk Candace Fenlow##53763
-		..accept A Friend in Need##29431
 	step
 		goto Undercity,67.7,37.9
 		.talk Innkeeper Norman##6741
@@ -4497,7 +4610,13 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		.talk Innkeeper Norman##6741
 		..turnin Chicken Clucking for a Mint##8354
 	step
-		#include "rideto_org"
+		goto Undercity,67.4,13.1
+		.talk Darkcaller Yanka##15197
+		..turnin A Season for Celebration##29400
+	step
+		goto 68.8,7.9
+		.talk Candace Fenlow##53763
+		..accept A Friend in Need##29431
 	step
 		goto Orgrimmar,32.9,65.1
 		.talk Kali Remik##11814
@@ -4554,24 +4673,21 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		goto 46.0,49.3
 		.click Blood Nettle##10249
 		.get 5 Blood Nettle |q 29426/3
-		.' You can find more Blood Nettle's here: [43.6,48.8]
+		.' You can find more Blood Nettles here: [43.6,48.8]
 	step
 		goto 55.2,45.9
 		.talk Kor'geld##3348
-		.buy 5 Crystal Vial |q 29426/1
+		.buy 5 Crystal Vial##3371 |q 29426/2
 	step
-		goto 57.2,46.5
-		.talk Magenius##3351
-		.buy 5 Arcane Powder |q 29426/2
+		#include "auctioneer"
+		.buy 2 Strange Dust##10940 |q 29426/1
 	step
 		goto 58.0,48.4
 		.talk Delian Sunshade##54146
 		..turnin Taking Precautions##29426
 		..accept The Collector's Agent##29427
 	step
-		|fly Thunder Bluff
-	step
-		goto 45.8,64.7
+		goto Thunder Bluff 45.8,64.7
 		.talk Innkeeper Pala##6746
 		..accept Dancing for Marzipan##8360
 	step
@@ -4582,10 +4698,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		goto 45.8,64.7
 		.talk Innkeeper Pala##6746
 		..turnin Dancing for Marzipan##8360
-	step
-		|fly Orgrimmar
-	step
-		'Go outside to Durotar |goto Durotar |noway |c
 	step
 		goto Durotar,52.6,41.2
 		.talk Masked Orphan Matron##23973
@@ -4638,8 +4750,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		..turnin "Let the Fires Come!"##12139 |or
 		..turnin Smash the Pumpkin##12155
 	step
-		#include "rideto_tirisfal"
-	step
 		goto Undercity,67.4,6.6
 		.talk Spoops##15309
 		..turnin Hallow's End Treats for Spoops!##8312
@@ -4652,8 +4762,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Quests_Horde",[[
 		.click Stolen Crate##335
 		..turnin The Collector's Agent##29427
 		..accept What Now?##29428
-	step
-		#include "rideto_org"
 	step
 		goto Orgrimmar,54.4,77.6
 		.talk Edgar Goodwin##54141
@@ -4705,8 +4813,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Dailies_Horde",[[
 		..turnin "Let the Fires Come!"##12139
 		..turnin Smash the Pumpkin##12155
 	step
-		#include "rideto_tirisfal"
-	step
 		goto Undercity,67.4,13.0
 		.talk Darkcaller Yanka##15197
 		..accept A Time to Build Up##29376 |daily
@@ -4747,13 +4853,9 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Dailies_Horde",[[
 		.talk Candace Fenlow##53763
 		..turnin Stink Bombs Away!##29374
 	step
-		#include "rideto_stranglethorn"
-	step
 		goto Elwynn Forest,33.6,48.2
 		.' Use the Dousing Agent in your Bags on the _Wickerman_ when you fly in front of _Stormwind_ |use Dousing Agent##68647
 		.' Douse the Alliance's Wickerman |q 29377/1
-	step
-		#include "rideto_stranglethorn"
 	step
 		goto Undercity,67.4,13.0
 		.talk Darkcaller Yanka##15197
@@ -4768,8 +4870,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Durotar, Razor Hill |achieve 965/8
-	step
-		'Go north to Orgrimmar |goto Orgrimmar |noway |c
 	step
 		goto Orgrimmar,53.9,79.0
 		.click Candy Bucket##6404
@@ -4796,42 +4896,30 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Ashenvale, Splintertree Post |achieve 965/3
 	step
-		|fly Silverwind Refuge
-	step
 		 goto Ashenvale,50.2,67.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Ashenvale, Silverwind Refuge |achieve 965/2
-	step
-		|fly Hellscream's Watch
 	step
 		goto Ashenvale,38.6,42.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Ashenvale, Hellscream's Watch |achieve 965/1
 	step
-		|fly Zoram'gar Outpost
-	step
 		 goto Ashenvale,13.0,34.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Ashenvale, Zoram'gar Outpost |achieve 965/4
-	step
-		|fly Sun Rock Retreat
 	step
 		goto Stonetalon Mountains,50.4,63.8
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Stonetalon Mountains, Sun Rock Retreat |achieve 965/25
 	step
-		|fly Krom'gar Fortress
-	step
 		goto Stonetalon Mountains,66.5,64.2
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Stonetalon Mountains, Krom'gar Fortress |achieve 965/24
-	step
-		|fly Nozzlepot's Outpost
 	step
 		goto Northern Barrens,62.5,16.6
 		.click Candy Bucket##6404
@@ -4843,21 +4931,15 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Stonetalon Mountains, Grol'dom Farm |achieve 965/17 |use Handful of Treats##37586
 	step
-		|fly The Crossroads
-	step
 		goto Northern Barrens,49.5,57.9 
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Barrens, The Crossroads |achieve 965/16
 	step
-		|fly Ratchet
-	step
 		  goto Northern Barrens,67.4,74.7
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Barrens, Ratchet |achieve 965/19
-	step
-		|fly Thunder Bluff
 	step
 		goto Thunder Bluff,45.6,65.0
 		.click Candy Bucket##6404
@@ -4869,108 +4951,75 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Mulgore, Bloodhoof Village |achieve 965/15
 	step
-		|fly Desolation Hold
-	step
 		goto Southern Barrens,40.7,69.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Southern Barrens, Desolation Hold |achieve 965/22
-	step
-		|fly Hunter's Hill
 	step
 		goto Southern Barrens,39.2,20.0
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Southern Barrens, Hunter's Hill |achieve 965/23
 	step
-		|fly Karnum's Glade
-	step
 		goto Desolace,56.7,50.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Desolace, Karnum's Glade |achieve 965/6
-	step
-		|fly Shadowprey Village
 	step
 		goto Desolace,24.1,68.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Desolace, Shadowprey Village |achieve 965/7
 	step
-		|fly Camp Ataya
-	step
 		goto Feralas,41.5,15.7
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Feralas, Camp Ataya |achieve 965/12
-	step
-		|fly Stonemaul Hold
 	step
 		goto Feralas,52.0,47.6
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Feralas, Stonemaul Hold |achieve 965/14
 	step
-		|fly Camp Mojache
-	step
 		goto Feralas,74.8,45.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Desolace, Camp Mojache |achieve 965/13
-	step
-		|fly Cenarion Hold
 	step
 		goto Silithus,55.5,36.8
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Silithus, Cenarion Hold |achieve 965/21
 	step
-		|fly Marshal's Stand
-	step
 		goto Un'Goro Crater,55.3,62.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Un'Goro Crater, Marshal's Stand |achieve 965/29
-	step
-		|fly Gadgetzan
 	step
 		goto Tanaris,52.6,27.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Tanaris, Gadgetzan |achieve 965/27
 	step
-		|fly Bootlegger Outpost
-	step
 		 goto Tanaris,55.8,60.9
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Tanaris, Bootlegger Outpost |achieve 965/26
-	step
-		|fly Brackenwall Village
 	step
 		goto Dustwallow Marsh,36.8,32.4
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Dustwallow Marsh, Brackenwall Village |achieve 965/9
 	step
-		|fly Mudsprocket
-	step
 		goto 41.9,74.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Dustwallow Marsh, Mudsprocket |achieve 965/10
 	step
-		|fly Ratchet
-	step
-		goto Northern Barrens,63.6,38.6 |n
-		.' Ride the boat to Booty Bay |goto The Cape of Stranglethorn |noway |c
-	step
 		goto The Cape of Stranglethorn,40.9,74.0
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in The Cape of Stranglethorn, Booty Bay |achieve 967/5
-	step
-		|fly Hardwrench Hideaway
 	step
 		goto The Cape of Stranglethorn,35.0,27.2
 		.click Candy Bucket##6404
@@ -4982,84 +5031,60 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Stranglethorn Vale, Grom'gol Base Camp |achieve 967/15
 	step
-		|fly Stonard
-	step
 		goto Swamp of Sorrows,46.9,56.9
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Swamp of Sorrows, Stonard |achieve 967/22
-	step
-		|fly Bogpaddle
 	step
 		goto Swamp of Sorrows,71.6,13.8
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Swamp of Sorrows, Bogpaddle |achieve 967/21
 	step
-		|fly New Kargath
-	step
 		goto Badlands,18.4,42.7
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Badlands, New Kargath |achieve 967/3
-	step
-		|fly Fuselight
 	step
 		goto Badlands,65.8,35.6
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Badlands, Fuselight |achieve 967/2
 	step
-		|fly Hammerfall
+		goto Searing Gorge,39.4,66.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Searing Gorge, Iron Summit |achieve 967/16
 	step
 		goto Arathi Highlands,69.0,33.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Arathi Highlands, Hammerfall |achieve 967/1
 	step
-		|fly Iron Summit
-	step
-		goto Searing Gorge,39.4,66.1
-		.click Candy Bucket##6404
-		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
-		.' Visit the Candy Bucket in Searing Gorge, Iron Summit |achieve 967/16
-	step
-		|fly Revantusk Village
-	step
 		goto The Hinterlands,78.2,81.5
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in The Hinterlands, Revantusk Village |achieve 967/14
-	step
-		|fly Hiri'watha Research Station
 	step
 		goto The Hinterlands,31.8,57.9
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Hinterlands, Hiri'watha Research Station |achieve 967/13
 	step
-		|fly Light's Hope Chapel
-	step
 		goto Eastern Plaguelands,75.6,52.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Eastern Plaguelands, Light's Hope Chapel |achieve 967/7
 	step
-		|fly Andorhal
-	step
 		goto Western Plaguelands,48.3,63.8
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
-		.' Visit the Candy Bucket in Western Plaguelands, Andorhal |achieve 967/7
-	step
-		|fly Tranquillien
+		.' Visit the Candy Bucket in Western Plaguelands, Andorhal |achieve 967/26
 	step
 		goto Ghostlands,48.7,31.9
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Ghostlands, Tranquillien |achieve 967/10
-	step
-		'Go north to Eversong Woods |goto Eversong Woods |noway |c
 	step
 		goto Eversong Woods,43.7,71.0
 		.click Candy Bucket##6404
@@ -5070,8 +5095,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Eversong Woods, Falconwing Square |achieve 967/9
-	step
-		'Go west to Silvermoon City |goto Silvermoon City |noway |c
 	step
 		goto Silvermoon City,67.6,72.9
 		.click Candy Bucket##6404
@@ -5092,8 +5115,6 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Undercity, The Trade Quarter |achieve 967/25
 	step
-		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
 		goto Tirisfal Glades,61.0,51.4
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
@@ -5104,35 +5125,25 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Tirisfal Glades, The Bulwark |achieve 967/24
 	step
-		|fly Forsaken Rear Guard
-	step
 		goto Silverpine Forest,44.3,20.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Silverpine Forest, The Forsaken Rear Guard |achieve 967/19
-	step
-		|fly The Sepulcher
 	step
 		goto Silverpine Forest,46.5,42.9
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Silverpine Forest, The Sepulcher |achieve 967/20
 	step
-		|fly Tarren Mill
-	step
 		goto Hillsbrad Foothills,57.9,47.3
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Hillsbrad Foothills, Tarren Mill |achieve 967/12
 	step
-		|fly Eastpoint Tower
-	step
 		goto Hillsbrad Foothills,60.3,63.7
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Hillsbrad Foothills, Eastpoint Tower |achieve 967/11
-	step
-		|fly Trade Quarter
 	step
 		goto Undercity,85.3,17.1
 		.' Click the Portal to Blasted Lands 
@@ -5160,13 +5171,13 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Shattrath City, Scryer's Tier |achieve 968/11
-		only if rep ('The Scryers') >= Friendly
+		only if rep ('The Scryers')>=Neutral
 	step
 		goto Shattrath City,28.2,49.1
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Shattrath City, Aldor Rise |achieve 968/11
-		only if rep ('The Aldor') >= Friendly
+		only if rep ('The Aldor')>=Neutral
 	step
 		goto Terokkar Forest,48.7,45.2
 		.click Candy Bucket##6404
@@ -5182,13 +5193,13 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Shadowmoon Valley, Sanctum of the Stars |achieve 968/9
-		only if rep ('The Scryers') >= Friendly
+		only if rep ('The Scryers')>=Neutral
 	step
 		goto 61.0,28.2
 		.click Candy Bucket##6404
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Shadowmoon Valley, Altar of Sha'tar |achieve 968/9
-		only if rep ('The Aldor') >= Friendly
+		only if rep ('The Aldor')>=Neutral
 	step
 		goto Nagrand,56.7,34.5
 		.click Candy Bucket##6404
@@ -5230,32 +5241,223 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
 		.' Visit the Candy Bucket in Netherstorm, The Stormspire |achieve 968/8
 	step
-		'You must be at least level 75 to complete this step:
+		goto Borean Tundra 41.8,54.4
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Borean Tundrea, Warsong Hold |achieve 5835/4
+	step
+		goto Borean Tundra 78.4,49.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Borean Tundrea, Unu'pe |achieve 5835/3
+	step
+		goto Borean Tundra 76.7,37.4
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Borean Tundrea, Taunka'le Village |achieve 5835/2
+	step
+		goto Borean Tundra 49.7,10.0
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Borean Tundrea, Bor'gorok Outpost |achieve 5835/1
+	step
+		goto Sholazar Basin 26.6,59.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Sholazar Basin, Nesingwary Base Camp |achieve 5835/18
+	step
+		goto Dragonblight 37.8,46.5
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dragonblight, Agmar's Hammer |achieve 5835/8
+	step
+		goto Dragonblight 48.1,74.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dragonblight, Moa'ki Harbor |achieve 5835/9
+	step
+		goto Dragonblight 76.8,63.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dragonblight, Venomspite |achieve 5835/10
+	step
+		goto Dragonblight 60.1,53.5
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dragonblight, Wyrmrest Temple |achieve 5835/11
+	step
+		goto Dalaran 48.3,41.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dalaran, The Legerdemain Lounge |achieve 5835/5
+	step
+		goto Dalaran 66.7,29.8
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dalaran, Sunreaver's Sanctuary |achieve 5835/6
+	step
+		'Enter The Underbelly here. |goto Dalaran 34.7,45.5 |c
+	step
+		goto Dalaran/2 38.0,60.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dalaran, The Underbelly |achieve 5835/7
+	step
+		Exit The Underbelly. |goto Dalaran/1 34.7,45.5 |c
+	step
+		goto The Storm Peaks 41.1,85.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Storm Peaks, K3 |achieve 5835/22
+	step
+		goto The Storm Peaks 37.1,49.5
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Storm Peaks, Grom'arsh Crash Site |achieve 5835/21
+	step
+		goto The Storm Peaks 30.9,37.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Storm Peaks, Bouldercrag's Refuge |achieve 5835/19
+	step
+		goto The Storm Peaks 67.6,50.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Storm Peaks, Camp Tunka'lo |achieve 5835/20
+	step
+		goto Zul'Drak 59.3,57.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Zul'Drak, Zim'Torga |achieve 5835/24
+	step
+		goto Zul'Drak 40.8,65.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Zul'Drak, The Argent Stand |achieve 5835/23
+	step
+		goto Grizzly Hills 20.9,64.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Grizzly Hills, Conquest Hold |achieve 5835/13
+	step
+		goto Grizzly Hills 65.4,47.0
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Grizzly Hills, Camp Oneqwah |achieve 5835/12
+	step
+		goto Howling Fjord 49.5,10.8
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Howling Fjord, Camp Winterhoof |achieve 5835/14
+	step
+		goto Howling Fjord 79.2,30.6
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Howling Fjord, Vengeance Landing |achieve 5835/17
+	step
+		goto Howling Fjord 52.1,66.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Howling Fjord, New Agamand |achieve 5835/16
+	step
+		goto Howling Fjord 25.4,59.8
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Howling Fjord, Kamagua |achieve 5835/15
+	step
+		goto Abyssal Depths 51.3,60.6
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vashj'ir, Tenebrous Cavern |achieve 5838/13
+	step
+		goto Shimmering Expanse 51.5,62.4
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vashj'ir, Legion's Rest |achieve 5838/11
+	step
+		goto Shimmering Expanse 49.2,41.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vashj'ir, Silver Tide Hollow |achieve 5838/12
+	step
+		goto Kelp'thar Forest 63.4,60.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vashj'ir, Deepmist Grotto |achieve 5838/10
+	step
+		goto Deepholm 51.1,50.0
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Deepholm, Temple of Earth |achieve 5838/1
+	step
+		goto Mount Hyjal 63.0,24.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Mount Hyjal, Nordrassil |achieve 5838/3
+	step
+		goto Mount Hyjal 42.7,45.6
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Mount Hyjal, Shrine of Aviana |achieve 5838/4
+	step
+		goto Mount Hyjal 18.7,37.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Mount Hyjal, Grove of Aessina |achieve 5838/2
+	step
+		goto Twilight Highlands 45.1,76.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Twilight Highlands, Crushblow |achieve 5838/6
+	step
+		goto Twilight Highlands 53.4,42.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Twilight Highlands, Bloodgulch |achieve 5838/5
+	step
+		goto Twilight Highlands 75.4,16.5
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Twilight Highlands, The Krazzworks |achieve 5838/7
+	step
+		goto Uldum 54.7,33.0
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Uldum, Ramkahen |achieve 5838/9
+	step
+		goto Uldum 26.6,7.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Uldum, Oasis of Vir'sar |achieve 5838/8
+	step
+		'You must be at least level 90 to complete this step:
 		.' Use the Dungeon Finder to queue for The Headless Horseman
 		.from Headless Horseman##23682
 		.' Complete the Bring Me The Head of... Oh Wait achievement |achieve 255
 	step
-		'Use your Tricky Treats 5 times in a row quickly |use Tricky Treat##33226 |tip You can only get these by killing The Headless Horseman in the previous guide step.
+		'Use your Tricky Treats 5 times in a row quickly |use Tricky Treat##33226 |tip You can get these by killing The Headless Horseman in the previous guide step, or from Hallow's End Candy Buckets.
 		.' You will start puking :-)
 		.' Complete the Out With It achievement |achieve 288
 	step
-		goto 67.7,6.5
+		goto Undercity 67.7,6.5
 		.talk Chub##53757
 		.buy Tooth Pick##37604 |n
 		.' Use your Tooth Pick |use Tooth Pick##37604
 		.' Show off your sparkling smile by using a Tooth Pick |achieve 981
 	step
 		'Use your Weighted Jack-o'-Lanterns on the following races: |use Weighted Jack-o'-Lantern##34068 |tip You receive Weighted Jack-o'-Lanterns by doing the Hallow's End daily quests.  Make sure the player doesn't already have a jack-o-lantern on their head or you won't get credit.  The best place to complete this is in Dalaran, but it can be done anywhere in the world.
-		.' Gnome |achieve 291/1
-		.' Blood Elf |achieve 291/2
-		.' Draenei |achieve 291/3
-		.' Dwarf |achieve 291/4
-		.' Human |achieve 291/5
-		.' Night Elf |achieve 291/6
-		.' Orc |achieve 291/7
-		.' Tauren |achieve 291/8
-		.' Troll |achieve 291/9
-		.' Undead |achieve 291/10
+		.' Blood Elf |achieve 291/1
+		.' Draenei |achieve 291/2
+		.' Dwarf |achieve 291/3
+		.' Gnome |achieve 291/4
+		.' Goblin |achieve 291/5
+		.' Human |achieve 291/6
+		.' Night Elf |achieve 291/7
+		.' Orc |achieve 291/8
+		.' Tauren |achieve 291/9
+		.' Troll |achieve 291/10
+		.' Undead |achieve 291/11
+		.' Worgen |achieve 291/12
 	step
 		'Have other players use Hallowed Wands on you while in a party to transform into the following:
 		.' Transform into a Bat |achieve 283/1
@@ -5266,10 +5468,10 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		.' Transform into a Skeleton |achieve 283/6
 		.' Transform into a Wisp |achieve 283/7
 	step
-		goto 67.7,6.5
+		goto Undercity 67.7,6.5
 		.talk Chub##53757
-		.buy Sinister Squashling##33154 |n
-		.buy Hallowed Helm##33292 |n
+		.buy 1 Sinister Squashling##33154 |n
+		.buy 1 Hallowed Helm##33292 |n
 		.' Use the Sinister Squashling |use Sinister Squashling##33154
 		.' Obtain a Sinister Squashling pet |achieve 292/1
 		.' Obtain a Hallowed Helm |achieve 292/2
@@ -5281,8 +5483,134 @@ ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde",[[
 		'Congratulations, you are now one of The Hallowed!
 ]])
 
+ZygorGuidesViewer:RegisterInclude("Hallows_End_Achievements_Horde_Pandaria",[[
+	step
+		goto The Jade Forest 55.7,24.4
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Sri-La Village |achieve 7602/8
+	step
+		goto The Jade Forest 41.7,23.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Tian Monastery |achieve 7602/9
+	step
+		goto The Jade Forest 28.5,13.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Honeydew Village |achieve 7602/6
+	step
+		goto The Jade Forest 28.0,47.4
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Grookin Hill |achieve 7602/5
+	step
+		goto The Jade Forest 45.8,43.6
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Dawn's Blossom |achieve 7602/3
+	step
+		goto The Jade Forest 48.1,34.6
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Greenstone Village |achieve 7602/4
+	step
+		goto The Jade Forest 54.6,63.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Jade Forest, Jade Temple Grounds |achieve 7602/7
+	step
+		goto Krasarang Wilds 75.9,6.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Krasarang Wilds, Zhu's Hope |achieve 7602/12
+	step
+		goto Krasarang Wilds 61.0,25.1
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Krasarang Wilds, Thunder Cleft |achieve 7602/24
+	step
+		goto Krasarang Wilds 51.4,77.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Krasarang Wilds, Marista |achieve 7602/11
+	step
+		goto Krasarang Wilds 28.3,50.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Krasarang Wilds, Dawnchaser Retreat |achieve 7602/10
+	step
+		goto Dread Wastes 55.2,71.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dread Wastes, Soggy's Gamble |achieve 7602/2
+	step
+		goto Dread Wastes 55.9,32.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Dread Wastes, Klaxxi'vess |achieve 7602/1
+	step
+		goto Townlong Steppes 71.1,57.8
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Candy item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Townlong Steppes, Longying Outpost  |achieve 7602/19
+	step
+		goto Kun-Lai Summit 72.7,92.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Kun-Lai Summit, Binan Village |achieve 7602/13
+	step
+		goto Kun-Lai Summit 62.7,80.5
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Kun-Lai Summit, Eastwind Rest |achieve 7602/14
+	step
+		goto Kun-Lai Summit 57.5,60.0
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Kun-Lai Summit, One Keg |achieve 7602/16
+	step
+		goto Kun-Lai Summit 64.2,61.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Kun-Lai Summit, The Grummle Bazaar |achieve 7602/15
+	step
+		goto Kun-Lai Summit 62.5,28.9
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Kun-Lai Summit, Zouchin Village |achieve 7602/17
+	step
+		goto Shrine of Two Moons/2 58.4,77.3
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vale of Eternal Blossoms, Shrine of Two Moons |achieve 7602/21
+	step
+		goto Vale of Eternal Blossoms 35.1,77.7
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Vale of Eternal Blossoms, Mistfall Village |achieve 7602/20
+	step
+		goto Valley of the Four Winds 19.9,55.8
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Valley of the Four Winds, Stoneplow |achieve 7602/23
+	step
+		goto Valley of the Four Winds 83.7,20.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in Valley of the Four Winds, Pang's Stead |achieve 7602/22
+	step
+		 goto The Veiled Stair 55.0,72.2
+		.click Candy Bucket##6404
+		..' Complete the Candy Bucket quest |tip If you cannot complete this quest because of a "Duplicate item found" message, open the Handful of Treats item in your bags and take out the contents. |use Handful of Treats##37586
+		.' Visit the Candy Bucket in The Veiled Stair, Tavern in the Mists |achieve 7602/18
+]])
+
 -- PILGRIM'S BOUNTY --
 ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
+	step
+		It's suggested that you have at least _300 skill level in Cooking_ before you begin the quests for this. Please refer to _Zygor's Cooking Guide_ for assistance in leveling up to 300 in Cooking.
+		|confirm
 	step
 		goto Undercity,65.6,8.1
 		.talk Bountiful Feast Hostess##34654
@@ -5302,9 +5630,8 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 	step
 		goto 63.2,8.9
 		.talk Roberta Carter##34712
-		.' Learn the Apprentice Cooking skill, if you don't have it already
-		.' Learn the Spice Bread recipe
-		|confirm
+		.skillmax Cooking,75
+		.learn Spice Bread##37836
 	step
 		goto 63.9,11.1
 		.talk Rose Standish##34683
@@ -5318,7 +5645,7 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 		.collect Recipe: Slow-Roasted Turkey##46807
 	step
 		'Use your Recipe: Spice Bread Stuffing to learn the recipe |use Recipe: Spice Bread Stuffing##46803
-		|confirm
+		.learn Spice Bread Stuffing##66038
 	step
 		goto 63.9,11.5
 		.talk Miles Standish##34677
@@ -5326,18 +5653,20 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 	step
 		goto 63.9,11.1
 		.talk Rose Standish##34683
-		.buy 5 Simple Flour##30817 |n
-		.buy 5 Mild Spices##2678 |n
-		.buy 5 Autumnal Herbs##44835 |n
+		.buy 10 Simple Flour##30817 |n
+		.buy 10 Mild Spices##2678 |n
+		.buy 10 Autumnal Herbs##44835 |n
 		.' Cook next to the Pilgrim's Bounty Cooking Fire at [63.2,8.3]
-		.create 5 Spice Bread##37836,Cooking,5 total |n
-		.create 5 Spice Bread Stuffing##66038,Cooking,5 total |q 14037/1
-		.get 5 Spice Bread Stuffing |q 14037/2
+		.create 10 Spice Bread##37836,Cooking,5 total |n
+		.create 10 Spice Bread Stuffing##66038,Cooking,5 total |q 14037/1
+		.get 10 Spice Bread Stuffing |q 14037/2
+	step
 		|skill Cooking,100
 		.' If you need to train your Cooking skill to allow a higher max level, talk to Roberta Carter at [63.2,8.9]
-	step
-		'Use your Recipe: Pumpkin Pie to learn the recipe |use Recipe: Pumpkin Pie##46804
 		|confirm
+	step
+		'Use your Recipe: Pumpkin Pie to learn the recipe |use Recipe: Pumpkin Pie##46804 |tip You will need to be at least 100 in Cooking to learn this.
+		.learn Pumpkin Pie##66036
 	step
 		goto 65.3,14.3
 		.talk William Mullins##34768
@@ -5351,18 +5680,13 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 		.' Cook next to the Pilgrim's Bounty Cooking Fire at [63.2,8.3]
 		.create 5 Pumpkin Pie##66036,Cooking,5 total |q 14040/1
 		.get 5 Pumpkin Pie |q 14040/2
+	step
 		|skill Cooking,160
 		.' If you need to train your Cooking skill to allow a higher max level, talk to Roberta Carter at [63.2,8.9]
-	step
-		'Use your Recipe: Cranberry Chutney to learn the recipe |use Recipe: Cranberry Chutney##46805
 		|confirm
 	step
-		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
-		goto Tirisfal Glades,60.7,58.8 |n
-		.' Ride the zeppelin to Orgrimmar. |goto Orgrimmar |noway |c
-	step
-		'Go South to Durotar. |goto Durotar |noway|c
+		'Use your Recipe: Cranberry Chutney to learn the recipe |use Recipe: Cranberry Chutney##46805 |tip You will need to be at least 160 in Cooking to learn this.
+		.learn Cranberry Chutney##66035
 	step
 		goto Durotar 46.6,13.8
 		.talk Francis Eaton##34679
@@ -5371,88 +5695,72 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 	step
 		goto 46.6,13.8
 		.talk Dalni Tallgrass##34685
-		.buy 5 Tangy Southfury Cranberries##46793+ |n
-		.buy 5 Honey##44853 |n
+		.buy 10 Tangy Southfury Cranberries##46793+ |n
+		.buy 10 Honey##44853 |n
 		.' Cook next to the Pilgrim's Bounty Cooking Fire at [46.4,13.8]
-		.create 5 Cranberry Chutney##66035,Cooking,5 total |q 14041/1
-		.get 5 Cranberry Chutney |q 14041/2
-		|skill Cooking,220
-		.' If you need to train your Cooking skill to allow a higher max level, talk to Ondani Greatmill at [46.4,13.9]
+		.create 10 Cranberry Chutney##66035,Cooking,5 total |q 14041/1
+		.get 10 Cranberry Chutney |q 14041/2
 	step
 		.clicknpc The Turkey Chair##34812
 		.' Eat each type of food 5 times in a row |tip You can see how many times you've eaten the food by looking at it's buff that it gives you next to your mini map.
 		.' Gain the Spirit of Sharing |achieve 3557/1
-	step
-		'Go inside Orgrimmar |goto Orgrimmar |noway |c
-	step
-		|fly Thunder Bluff
 	step
 		goto Thunder Bluff,30.9,63.7
 		.talk Dokin Farplain##34678
 		..turnin Cranberry Chutney##14041
 		..accept Candied Sweet Potatoes##14043
 	step
+		|skill Cooking,220
+		.' If you need to train your Cooking skill to allow a higher max level, talk to Mahara Goldwheat at [30.8,69.6]
+		|confirm
+	step
+		'Use your Recipe: Candied Sweet Potatoes to learn the recipe |use Recipe: Candied Sweet Potatoes##46806 |tip You will need to be at least 160 in Cooking to learn this.
+		.learn Candied Sweet Potatoes##66034
+	step
 		goto 31.1,63.4
 		.talk Laha Farplain##34684
-		.buy Mulgore Sweet Potato##46797 |n
-		.buy Honey##44853 |n
-		.buy Autumnal Herbs##44835 |n
+		.buy 5 Mulgore Sweet Potato##46797 |n
+		.buy 5 Honey##44853 |n
+		.buy 5 Autumnal Herbs##44835 |n
 		.' Cook next to the Pilgrim's Bounty Cooking Fire at [30.5,70.1]
 		.create 5 Candied Sweet Potatoes##66034,Cooking,5 total |q 14043/1
 		.get 5 Candied Sweet Potatoes |q 14043/2
+	step
 		|skill Cooking,280
 		.' If you need to train your Cooking skill to allow a higher max level, talk to Mahara Goldwheat at [31.0,69.8]
+		|confirm
+	step
+		'Use your Recipe: Slow-roasted Turkey to learn the recipe |use Recipe: Candied Sweet Potatoes##46807 |tip You will need to be at least 160 in Cooking to learn this.
+		.learn Slow-Roasted Turkey##66037
 	step
 		goto 29.9,62.7
 		.clicknpc The Turkey Chair##34812
 		.' Eat each type of food 5 times in a row |tip You can see how many times you've eaten the food by looking at it's buff that it gives you next to your mini map.
 		.' Gain the Spirit of Sharing |achieve 3557/3
 	step
-		|fly Orgrimmar
-	step
-		'Go outside to Durotar |goto Durotar |noway |c
-	step
 		goto Durotar,46.6,13.8
 		.talk Francis Eaton##34679
 		..turnin Candied Sweet Potatoes##14043
 		..accept Undersupplied in the Undercity##14044
-	step
-		'Go into Orgrimmar. |goto Orgrimmar |noway|c
-	step
-		goto Orgrimmar,50.8,55.8 |n
-		.' Ride the zeppelin to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
-		'Go into Undercity |goto Undercity |noway |c
 	step
 		goto Undercity,63.9,11.5
 		.talk Miles Standish##34677
 		..turnin Undersupplied in the Undercity##14044
 		..accept Slow-roasted Turkey##14047
 	step
-		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
 		goto Tirisfal Glades,62.2,56.4
 		.from Wild Turkey##32820+ |tip You can find these all around Tirisfal Glades, so you are not limited to staying in this area.  Ride around Tirisfal Glades and look for Wild Turkeys, you should be able to find them easily if you ride around.
 		.collect 20 Wild Turkey##44834 |q 14047
 	step
-		'Go into Undercity |goto Undercity |noway |c
-	step
 		goto Undercity,63.9,11.1
 		.talk Rose Standish##34683
-		.buy Honey##44853 |n
-		.buy Autumnal Herbs##44835 |n
+		.buy 10 Honey##44853 |n
+		.buy 5 Autumnal Herbs##44835 |n
 		.' Cook next to the Pilgrim's Bounty Cooking Fire at [63.1,8.3]
 		.create 5 Slow-Roasted Turkey##66037,Cooking,5 total |q 14047/1
 		.get 5 Slow-Roasted Turkey |q 14047/2
 		|skill Cooking,300
 		.' If you need to train your Cooking skill to allow a higher max level, talk to Roberta Carter at [63.2,8.9]
-	step
-		'Go outside to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
-		goto Tirisfal Glades,60.7,58.8 |n
-		.' Ride the zeppelin to Orgrimmar. |goto Orgrimmar |noway|c
-	step
-		'Go south to Durotar. |goto Durotar |noway|c
 	step
 		goto Durotar,46.6,13.8
 		.talk Francis Eaton##34679
@@ -5462,17 +5770,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Quests_Horde",[[
 ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 	step
 	label start
-		goto Orgrimmar,50.9,55.7 |n
-		'Ride the Zeppelin to Tirisfal Glades. |goto Tirisfal Glades |noway|c
-	step
-		'Go south to Undercity. |goto Undercity |noway|c
-	step
-		goto Undercity,54.9,11.3
-		.click Orb of Translocation##7161
-		' Go to Silvermoon City |goto Silvermoon City |noway|c
-	step
-		' Go south to Eversong Woods. |goto Eversong Woods |noway|c
-	step
 		goto Eversong Woods,55.7,53.2
 		.clicknpc The Turkey Chair##34812
 		.' Eat each type of food 5 times in a row |tip You can see how many times you've eaten the food by looking at it's buff that it gives you next to your mini map.
@@ -5483,16 +5780,10 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.' While in each of the chairs, press 1.
 		.' Pass the Candied Sweet Potatoes. |achieve 3558/1
 		.' Pass the Cranberry Chutney. |achieve 3558/2
-		.' Pass the Pumpkin Pie. Pumpkin Pie. |achieve 3558/3
+		.' Pass the Pumpkin Pie. |achieve 3558/3
 		.' Pass the Slow-Roasted Turkey. |achieve 3558/4
 		.' Pass the Spice Bread Stuffing. |achieve 3558/5
 		.' Earn the Sharing is Caring Achievement. |achieve 3558
-	step
-		'Go North to Silvermoon City. |goto Silvermoon City|noway|c
-	step
-		goto Silvermoon City,49.4,14.8 
-		.click Orb of Translocation##7161
-		'Go to the Undercity |goto Undercity |noway|c
 	step
 		goto Undercity,65.2,14.2
 		.talk William Mullins##34768
@@ -5504,23 +5795,14 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 	step
 		goto 63.9,11.1
 		.talk Rose Standish##34683
-		.buy 20 Ripe Tirisfal Pumpkin##46796 |n
-		.buy 20 Simple Flour##30817 |n
-		.buy 20 Mild Spices##2678 |n
-		.buy 20 Autumnal Herbs##44835 |n
-		|confirm always
-	step
-		'Go south to Tirisfal Glades. |goto Tirisfal Glades |noway|c
+		.buy 20 Ripe Tirisfal Pumpkin##46796 
+		.buy 20 Simple Flour##30817
+		.buy 20 Mild Spices##2678 
+		.buy 20 Autumnal Herbs##44835
 	step
 		goto Tirisfal Glades,62.2,56.4
 		.from Wild Turkey##32820+ |tip You can find these all around Tirisfal Glades, so you are not limited to staying in this area.  Ride around Tirisfal Glades and look for Wild Turkeys, you should be able to find them easily if you ride around.
-		.collect 20 Wild Turkey##44834 |n
-		|confirm always
-	step
-		goto Tirisfal Glades,60.7,58.8 |n
-		'Ride the Zeppelin to Orgrimmar. |goto Orgrimmar |noway|c
-	step
-		'Go South to Durotar. |goto Durotar |noway|c
+		.collect 20 Wild Turkey##44834
 	step
 		goto Durotar,46.4,13.9
 		.talk Ondani Greatmill##34713
@@ -5530,10 +5812,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		goto Durotar,46.6,13.8
 		.talk Dalni Tallgrass##34685
 		.buy 20 Tangy Southfury Cranberries##46793
-	step
-		'Go into Orgrimmar. |goto Orgrimmar|noway|c
-	step
-		|fly Thunder Bluff
 	step
 		goto Thunder Bluff,31.0,63.3
 		.talk Laha Farplain##34684
@@ -5551,10 +5829,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.turnin Easy As Pie##14060 |achieve 3597/3
 		..collect Pilgrim's Hat##46723
 		..' You need the hat for a later achievement.
-	step
-		|fly Orgrimmar
-	step
-		'Go South to Durotar. |goto Durotar |noway|c
 	step
 		goto Durotar,46.4,13.9
 		.create 20 Spice Bread##37836,Cooking,20 total |n
@@ -5580,13 +5854,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.turnin Don't Forget The Stuffing!##14062 |achieve 3597/2
 		..collect Turkey Shooter##44812 |tip Collect Turkey Shooters.  You will need at least 8 for an Achievement.
 	step
-		'Go into Orgrimmar. |goto Orgrimmar|noway|c
-	step
-		goto Orgrimmar,50.8,55.8 |n
-		.' Ride the zeppelin to Tirisfal Glades |goto Tirisfal Glades |noway |c
-	step
-		'Go South to Undercity. |goto Undercity |noway|c
-	step
 		goto Undercity,63.9,11.1
 		.talk Rose Standish##34683
 		.buy 40 Honey##44853
@@ -5609,23 +5876,10 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 	step
 		.' Earn the Pilgrim's Progress Achievement. |achieve 3597
 	step
-		'Go out to Tirisfal Glades. |goto Tirisfal Glades |noway|c
-	step
 		goto Tirisfal Glades,62.5,57.8
-		'You will need to fly around Tirisfal Glades.  You have to kill 40 Turkey's without letting you Turkey Tracker Buff fall off.  You will be given 30 seconds for each kill to find a new turkey.
+		'You will need to fly around Tirisfal Glades.  You have to kill 40 turkeys without letting your Turkey Tracker Buff fall off.  You will be given 30 seconds for each kill to find a new turkey.
 		.kill Wild Turkey##32820+ |n
 		.' Earn the Turkinator Achievement. |achieve 3578
-	step
-		goto Tirisfal Glades,60.7,58.7 |n
-		'Ride the Zeppelin to Orgrimmar |goto Orgrimmar |noway|c
-	step
-		goto Orgrimmar,35.5,69.1 |n
-		.' Click the Portal to Blasted Lands. |goto Blasted Lands |noway|c
-	step
-		goto Blasted Lands,55.0,54.0 |n
-		.' Go through the Portal. |goto Hellfire Peninsula |noway|c
-	step
-		|fly Stonebreaker Hold
 	step
 		goto Terokkar Forest,44.9,65.6 |n
 		.' Go through the swirling portal. |goto Sethekk Halls|noway|c
@@ -5639,21 +5893,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.' Kill Talon King Ikiss while wearing these items.
 		.' Earn the Terokkar Turkey Time Achievement. |achieve 3582
 	step
-		.' Leave the instance. |goto Terokkar Forest |noway|c
-	step
-		|fly Shattrath 
-	step
-		goto Shattrath City,56.8,48.9 |n
-		.' Click the Portal to Orgrimmar. |goto Orgrimmar |noway|c
-	step
-		goto Orgrimmar,53.6,78.8
-		.talk Innkeeper Gryshka##6929
-		.home Valley of Strength
-	step
-		|fly Hellscream's Watch
-	step
-		.' Go Northwest to Darkshore. |goto Darkshore |noway|c
-	step
 		goto Darkshore,41.0,15.0 |n
 		.' Fly across the water to Teldrassil |goto Teldrassil,57.1,92.0,1 |noway|c
 	step
@@ -5664,21 +5903,12 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.clicknpc The Turkey Chair##34812
 		.' Take a seat at a Darnassus Bountiful Table. |achieve 3581/1
 	step
-		goto Teldrassil,52.5,89.4 |n
-		.' Ride the boat to Azuremyst Isle. |goto Azuremyst Isle |noway|c
-	step
 		goto The Exodar,77.1,52.2
 		.' Equip Pilgrim's Attire |equipped Pilgrim's Attire##46800 |use Pilgrim's Attire##46800 |or 
 		.' Equip Pilgrim's Dress |equipped Pilgrim's Dress##44785 |use Pilgrim's Dress##44785 |or
 		.' Equip Pilgrim's Robe |equipped Pilgrim's Robe##46824 |use Pilgrim's Robe##46824  |or
 		.clicknpc The Turkey Chair##34812
 		.' Take a seat at the Exodar Bountiful Table. |achieve 3581/2
-	step
-		goto Azuremyst Isle,21.4,54.1 |n
-		'Ride the boat to Teldrassil. |goto Teldrassil |noway|c
-	step
-		goto Teldrassil,55.0,93.7 |n
-		.' Ride the boat to Stormwind |goto Stormwind City |noway|c
 	step
 		goto Elwynn Forest,34.7,50.6
 		.' Equip Pilgrim's Attire |equipped Pilgrim's Attire##46800 |use Pilgrim's Attire##46800 |or 
@@ -5715,7 +5945,7 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 		.' Shoot a Undead Rogue |achieve 3559/9
 		.' Shoot a Goblin Rogue |achieve 3559/4
 	step
-		.' You have reached the End of this guide, you can only do the Dailys Once per day. 
+		.' You have reached the End of this guide, you can only do the Dailies Once per day. 
 		Click here to continue. |confirm always
 		|next "end" |only if achieved(3656)
 		|next "start" |only if not achieved(3656)
@@ -5727,9 +5957,6 @@ ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Achievements_Horde",[[
 ZygorGuidesViewer:RegisterInclude("Pilgrims_Bounty_Dailies",[[
 	step
 	label daily
-		goto Orgrimmar,50.9,55.7 |n
-		.' Ride the Zeppelin to Tirisfal Glades. |goto Tirisfal Glades |noway|c
-	step
 		goto Undercity,65.2,14.2
 		.talk William Mullins##34768
 		.accept She Says Potato##14058 |daily
@@ -6109,8 +6336,6 @@ ZygorGuidesViewer:RegisterInclude("Midsummer_Quests",[[
  		.click Alliance Bonfire##7734 
 		..accept Desecrate this Fire!##11761 |instant
 	step
-		|fly Grom'gol Base Camp
-	step
 		goto Northern Stranglethorn 40.6,50.9
 		.talk Northern Stranglethorn Vale Flame Keeper##51582
 		..accept Honor the Flame##28924 |instant
@@ -6240,8 +6465,6 @@ ZygorGuidesViewer:RegisterInclude("Midsummer_Quests",[[
 		goto Silverpine Forest 49.6,38.2
 		.talk Silverpine Forest Flame Keeper##25939
 		..accept Honor the Flame##11584 |instant
-	step
-		|fly Trade Quarter
 	step
 		goto Undercity 66.9,13.5
 		.talk Earthen Ring Elder##26221
@@ -7883,8 +8106,8 @@ ZygorGuidesViewer:RegisterInclude("H_Dinner_Impossible",[[
 		.' Click here to go farm these materials |script ZGV:GotoStep("farm1")
 		|next usefeast
 	step
-		#include trainCooking |only if skill("Cooking")>=375
-		.learn Great Feast##45554 |only if skill("Cooking")>=375
+		#include trainCooking
+		.learn Great Feast##45554
 	step
 	label farm1
 		'You can either buy these items from the auction house or farm them 
@@ -8103,6 +8326,26 @@ ZygorGuidesViewer:RegisterInclude("H_MOP_Cooking_Dailies",[[
 		.'_
 		.' Click here if this quest is not available today |confirm
 	step
+		goto 52.8,51.8
+		.talk Anthea Ironpaw##58713
+		..accept Cindergut Peppers##30329
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		goto 52.6,51.6
+		.talk Mei Mei Ironpaw##58714
+		..accept The Mile-High Grub##30331
+	step
+		goto 32.5,23.9
+		.' Use the _Master's Pot_ in your bags next to the bonfire. |use Master's Pot##79895
+		.' Create 20 Mushan Tail Stew |q 30331/1
+		|only if havequest(30331)
+	step
+		goto 31.2,36.0
+		.from Kunzen Hunter##59121+, Kunzen Herdskeeper##59122+, Kunzen Ritualist##+59123, Kunzen Rockflinger##59120+,Kunzen Collector##59124+
+		.collect 4 Cindergut Pepper##79864
+		|only if havequest(30329)
+	step
 		goto 44.0,22.2 |n
 		.' Enter the cave here |goto 44.0,22.2 <5 |noway |c
 		|only if havequest(30328)
@@ -8124,6 +8367,10 @@ ZygorGuidesViewer:RegisterInclude("H_MOP_Cooking_Dailies",[[
 		.get 4 Fatty Goatsteak |q 30332/1
 		|only if havequest(30332)
 	step
+		goto Valley of the Four Winds 52.8,51.8
+		.talk Anthea Ironpaw##58713
+		..turnin Cindergut Peppers##30329
+	step
 		goto Valley of the Four Winds 53.4,51.6
 		.talk Jian Ironpaw##58716
 		..turnin The Truffle Shuffle##30330
@@ -8135,6 +8382,10 @@ ZygorGuidesViewer:RegisterInclude("H_MOP_Cooking_Dailies",[[
 		goto 53.0,51.3
 		.talk Kol Ironpaw##58712
 		..turnin Fatty Goatsteak##30332
+	step
+		goto 52.6,51.6
+		.talk Mei Mei Ironpaw##58714
+		..turnin The Mile-High Grub##30331
 ]])
 
 ZygorGuidesViewer:RegisterInclude("Nomi_Dailies",[[
@@ -8405,7 +8656,7 @@ ZygorGuidesViewer:RegisterInclude("H_Old_Crafty_and_Ironjaw",[[
 		.' The higher level your fishing skill, the better. You will catch less junk the higher you are, which gives you a higher chance to catch Old Ironjaw.
 		.' Click here when you're ready to proceed to the next step in the guide |confirm
 	step
-		#include portal_twilight
+		#include port_twilight
 	step
 		'Go to Ironforge |goto Ironforge |noway |c 
 	step
@@ -11690,7 +11941,7 @@ ZygorGuidesViewer:RegisterInclude("H_Tillers_DailyQuest", [[
 		|modelnpc Tilled Soil##59990+
 		|only if havequest(31673)
 	step
-		goto 53.8,50.9
+		goto 56.5,50.4
 		.talk Wing Nga##60231
 		.' Tell her that you'd like to borrow one of Farmer Fung's kites.
 		.' Ride a kite. |invehicle |c
@@ -12006,7 +12257,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.' Ask him what what this place is.
 		.' Speak to Elder Liao. |q 30649/4
 	step
-		goto 74.2,42.6
+		goto Vale of Eternal Blossoms 74.2,42.6
 		.talk Jaluu the Generous##59908
 		.' Ask him if he has seen anything suspicious.
 		.' Speak to Jaluu the Generous. |q 30649/1
@@ -12055,16 +12306,13 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
 	step
-		'Go in this building and down to [22.0,16.1]
+		goto Vale of Eternal Blossoms/18 54.9,53.5
 		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
 		.kill Dagou##59977 |q 30637/1
 	step
-		.' Click the Quest Auto-Complete box in the top right corner:
-		..turnin The Guo-Lai Halls##30637
+		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
 	step
-		'Leave the building |goto 22.4,26.6 <5 |c
-	step
-		goto 21.6,30.6
+		goto Vale of Eternal Blossoms 21.6,30.6
 		.kill 9 Stone Guardian##59973+ |q 30635/1
 		.click Revelite Crystal
 		.get 7 Relelite Crystal##80511+ |q 30636/1
@@ -12113,7 +12361,9 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 39.7,26.0
 		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
 		.' [39.2,19.2]
+		.' [37.5,22.9]
 		.' [40.5,18.4]
+		.' [43.1,22.1]
 		.' [43.2,15.9] 
 		.' [47.5,19.1]
 		.' [50.5,23.6]
@@ -12122,7 +12372,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		goto 44.2,15.8
 		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
-		.' Shao-Tien Behemoth ritual stopped. |q 31760/1
+		.' Shao-Tien Behemoth ritual stopped |q 31760/1
 		|modelnpc 58460
 		|only if havequest(31760)
 	step
@@ -12148,8 +12398,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		goto 44.0,21.8
 		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
-		.' Kill 12 Shao-Tien Marauders. |q 30307/1 |only if havequest(30307)
-		.' Free 5 Torture victims. |q 31755/1 |only if havequest(31755)
+		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
+		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
 		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
 		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
 		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
@@ -12271,10 +12521,13 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 56.7,43.6
 		.talk Leven Dawnblade##58408
 		 ..turnin Behind Our Lines##31136
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
+		|next |only if defualt
+	step
+		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
+		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
+		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
+		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
 	step
 	label ruins
 		goto 34.0,38.1
@@ -12336,6 +12589,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..turnin Blood on the Rise##30226 |daily 
 		..accept Wulon, the Granite Sentinel##30227 |daily |or 
 		..accept The Ashweb Matriarch##30225 |daily |or
+		..accept The Crumbling Hall##30277 |daily |or 
+		..accept The Thunder Below##30280 |daily |or
 	step
 		goto 33.5,40.8
 		.talk Sinan the Dreamer##63266
@@ -12359,25 +12614,26 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
 		|only if havequest(30280)
 	step
-		'Follow this hallway. |goto 18.5,16.1 <5 |c
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 42.3,53.7 <5 |c
 		|only if havequest(30277)
 	step
-		goto 17.3,11.9
+		goto Vale of Eternal Blossoms/18 36.3,36.6
 		.click Deactivate First Spirit Wall
 		.' Deactivate the First Spirit Wall |q 30277/1
 		|only if havequest(30277)
 	step
-		goto 13.9,10.0
+		goto Vale of Eternal Blossoms/18 23.2,28.8
 		.click Deactivate Second Spirit Wall
 		.' Deactivate the Second Spirit Wall |q 30277/2
 		|only if havequest(30277)
 	step
-		goto 18.6,7.4
+		goto Vale of Eternal Blossoms/18 38.3,31.1
 		.click Deactivate Final Spirit Wall
+		|tip Make sure you're stepping on the green tiles, as the others will hurt you. There is a path to both the spirit wall and the artifact.
 		.' Deactivate the Final Spirit Wall |q 30277/3
 		|only if havequest(30277)
 	step
-		goto 20.6,10.5
+		goto Vale of Eternal Blossoms/18 49.3,30.4
 		.click Ancient Guo-Lai Artifact
 		.get Ancient Guo-Lai Artifact |q 30277/4
 		|only if havequest(30277)
@@ -12407,7 +12663,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
 		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
 		..accept Clearing in the Forest##30263 |daily |or 2
-		..accept Ferocious Feralmaw##30194 |daily |or 2
+		..accept Encroaching Storm##30194 |daily |or 2
 		..accept Ruffling Some Feathers##30232 |daily |or 2
 		..accept The Pandaren Uprising Relived##30237 |daily |or 2
 		..accept Return to Rest##30238 |daily |or 2
@@ -12436,7 +12692,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.'_
 		.' If this quest is not available click here. |confirm
 	step
-		goto 26.1,53.1
+		goto 25.8,74.8
 		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
 		.from Fairlands Gazelle##58454+ |only if havequest(30193)
 		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
@@ -12488,7 +12744,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		goto 33.9,72.2
 		.talk Che Wildwalker##59338
-		..turnin Ferocious Feralmaw##30194 |daily
+		..turnin Encroaching Storm##30194 |daily
 		..turnin Ruffling Some Feathers##30232 |daily
 		..turnin Clearing in the Forest##30263 |daily
 		..turnin Return to Rest##30238 |daily
@@ -12537,11 +12793,13 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 35.1,75.4
 		.talk Sun Tenderheart##59337
 		..turnin Attack on Mistfall Village##31243 |daily
-		..accept Wu Kao Scouting Reports##30285 |daily // Not Available
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
 	step
 		goto 35.3,74.9
 		.talk Rook Stonetoe##58911
 		..accept Freeing Mind and Body##30289 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
 		..accept Mogu Make Poor House Guests##30287 |daily |or 2
 		..accept Stonebound Killers##30290 |daily |or 2
 	step
@@ -12556,29 +12814,57 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.' 60 Mistfall Village fires doused. |q 30288/1
 		|only if havequest(30288)
 	step
-		goto 33.8,72.6
-		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287)
-		.' Kill 12 Shao-Tien attackers. |q 30287/1 |only if havequest(30287)
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
 		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
 		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Golden Lotus Guard##64200
 	step
 		goto 35.1,75.4
 		.talk Sun Tenderheart##59337
 		..turnin Wu Kao Scouting Reports##30285 |daily
+		..turnin Backed Into a Corner##30286 |daily
 	step
 		goto 35.3,74.9
 		.talk Rook Stonetoe##58911
-		..turnin Mogu Make Poor House Guests##30287 |daily
-		..turnin Freeing Mind and Body##30289 |daily
+		..turnin Freeing Mind and Body##30289 |daily |or 2
+		..turnin Mogu Make Poor House Guests##31293 |daily |or 2
+		..turnin Mogu Make Poor House Guests##30287 |daily |or 2
+		..turnin Stonebound Killers##30290 |daily |or 2
 	step
 		goto 35.3,76.8
 		.talk Mayor Shiyo##59336
 		..turnin My Town, It's On Fire Again##30288 |daily
 	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..accept Gaohun the Soul-Severer##30296 |daily |or
+		..accept Baolai the Immolator##30297 |daily |or
+		.' Click here if these quests are unavailable |confirm |next "sun"
+	step
+		goto 39.2,74.6
+		.kill Gaohun the Soul-Severer##62881 |q 30296/1
+		|only if havequest(30296)
+	step
+		goto 37.5,81.5
+		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
+		|only if havequest(30297)
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Gaohun the Soul-Severer##30296 |daily 
+		..turnin Baolai the Immolator##30297 |daily 
+	step
+	label sun
 		goto 35.1,75.4
 		.talk Sun Tenderheart##59337
-		..accept Setting Sun Garrison##31297 |daily |next "ssg"
-		..accept The Ruins of Guo-Lai##31296 |daily |next "ruins"
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
 	step
 	label whitepetal
 		goto 43.6,46.1
@@ -12622,6 +12908,17 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.click Fresh Dirt##20 |only if havequest(30339)
 		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
 	step
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Under Watchful Eyes##30341 |daily
+		..turnin The Displaced Paleblade##30314 |daily
+		..turnin The Moving Mists##30313 |daily
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..turnin Stick in the Mud##30340 |daily
+		..turnin Getting your Hands Dirty##30339 |daily
+	step
 		goto 42.3,46.0
 		.talk Ren Firetongue##59343
 		..turnin A Thousand Pointy Teeth##30284 |daily
@@ -12631,17 +12928,6 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..turnin A Weighty Task##30338 |daily
 	step
 		goto 42.3,46.0
-		.talk Merchant Tantan##59341
-		..turnin Stick in the Mud##30340 |daily
-		..turnin Getting your Hands Dirty##30339 |daily
-	step
-		goto 43.6,46.1
-		.talk He Softfoot##59342
-		..turnin Under Watchful Eyes##30341 |daily
-		..turnin The Displaced Paleblade##30314 |daily
-		..turnin The Moving Mists##30313 |daily
-	step
-		goto 42.3,46.0
 		.talk Ren Firetongue##59343
 		..accept Vicejaw##30234 |daily |or |next "vicejaw"
 		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
@@ -12649,6 +12935,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..accept Mistfall Village##31245 |daily |or |next "mistfall"
 		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
 		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
+		..accept Cracklefang##30233 |daily |or |next "crackle"
 	step
 	label vicejaw
 		goto 37.3,51.1
@@ -12770,11 +13057,14 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..accept Upon the Ramparts##30246 |daily |or
 		..accept Enemy at the Gates##30264 |daily |or
 		..accept No Reprieve##30444 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
 	step
 		goto 21.4,71.5
 		.talk Kun Autumnlight##58920
 		..accept Mantid Under Fire##30243 |daily |or
 		..accept Along the Serpent's Spine##30244 |daily |or
+		..accept Lost Scouts##30245 |daily |or
 		.'_
 		.' If these quests are unavailable today, click here. |confirm
 	step
@@ -12789,6 +13079,1302 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..accept Roll Club: Serpent's Spine##30261 |daily
 		.'_
 		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto Vale of Eternal Blossoms 3.9,51.7
+		.clicknpc Hot Oil Cauldron##64369
+		.' Use the Abilities on your toolbar to set the enemies below on fire.
+		.' Kill 80 Krik'thik Hivelings |q 30243/1
+		|only if havequest(30243)
+	step
+		.' Click the quest complete box in the corner below your minimap.
+		..turnin Mantid Under Fire##30243
+		..accept Along the Serpent's Spine##30244
+		.' If this quest isn't available, click here |confirm
+		|only if havequest(30243)
+	step
+		goto Vale of Eternal Blossoms 18.6,36.4
+		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
+		.talk Shado-Pan Scout##58947 |q 30245/1
+		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
+		..turnin Lost Scouts##30245
+		..accept The Butcher##30248
+		|only if havequest(30245)
+	step
+		goto 17.0,47.5
+		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
+		.kill 8 Shao-Tien mogu |q 30444/1
+		|only if havequest(30444)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		.' Let's roll. |q 30261/1
+		|only if havequest(30261)
+	step
+		'Hold down your right mouse button to help you maneuver through the course. |tip Grab as many speed boosts as you can to make it go quicker.
+		.' Complete the Serpent's Spine Roll Course. |q 30261/2
+		|only if havequest(30261)
+	step
+		goto 15.6,66.1
+		.clicknpc War Serpent##65336
+		.' Mount a War Serpent |invehicle |q 30264/1
+		|only if havequest(30264)
+	step
+		'Use the abilities on your hotbar to do the following:
+		.kill 60 Krik'thik Hiveling##63972+ |q 30264/2
+		.kill 3 Krik'thik War Wagon##64274+ |q 30264/3
+		.kill 3 Krik'thik Catapult##64275+ |q 30264/4
+		|only if havequest(30264)
+	step
+		'Click the Return to Setting Sun Garrison button. |outvehicle
+		|only if havequest(30264)
+	step
+		goto 5.4,72.3
+		.click Setting Sun Turret 
+		.' Mount a turret. |invehicle |c
+		|only if havequest(30266)
+	step
+		.kill 30 Krik'thik Swarmer##63973+ |q 30266/1
+		|only if havequest(30266)
+	step
+		'Click the Leave Vehicle button. |outvehicle
+		|only if havequest(30266)
+	step
+		goto 11.4,58.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30246/1
+		|only if havequest(30246)
+	step
+		goto 6.9,68.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30244/1
+		|only if havequest(30244)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin Along the Serpent's Spine##30244 |daily
+		..accept Under the Setting Sun##30249 |daily
+		|only if havequest(30244)
+	step
+		goto 6.0,58.8
+		.kill Kri'chon##63978 |q 30249/1
+		|only if havequest(30249)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Bloodied Skies##30266 |daily
+		|only if havequest(30266)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..turnin Roll Club: Serpent's Spine##30261 |daily
+		|only if havequest(30261)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Upon the Ramparts##30246 |daily
+		..turnin No Reprieve##30444
+		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
+	step
+		goto 7.9,33.9
+		.kill Vyraxxis##63977 |q 30251/1
+		|only if havequest(30251)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily
+		|only if havequest(30251)
+	step
+		goto 21.4,71.5
+		.talk Anji Autumnlight##58919
+		..turnin Enemy at the Gates##30264 |daily
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..turnin Mantid Under Fire##30243 |daily
+		..turnin Under the Setting Sun##30249 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label mistfall3
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Attack on Mistfall Village##31246 |daily
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##31293 |daily
+		..turnin Stonebound Killers##30290 |daily
+		..turnin Freeing Mind and Body##30289 |daily
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily 
+		..turnin Backed Into a Corner##30286 |daily 
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..accept Gaohun the Soul-Severer##30296 |daily |or
+		..accept Baolai the Immolator##30297 |daily |or
+		.' If it's not available, click here.  |confirm
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
+	step
+		goto 39.2,74.6
+		.kill Gaohun the Soul-Severer##62881 |q 30296/1
+		|only if havequest(30296)
+	step
+		goto 37.5,81.5
+		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
+		|only if havequest(30297)
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Gaohun the Soul-Severer##30296 |daily 
+		..turnin Baolai the Immolator##30297 |daily 
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label crackle
+		goto Vale of Eternal Blossoms 46.5,59.1
+		.from Cracklefang##58768
+		.' Cracklefang Slain |q 30233/1
+	step
+		goto 42.4,46.0
+		.talk Ren Firetongue##59343
+		..turnin Cracklefang##30233
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label revered
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.buy 1 Grand Commendation of the Golden Lotus##93215
+		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("Golden Lotus")>=Revered
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..accept Battle Spear of the Thunder King##30640
+		|only if not completedq(30640)
+	step
+		goto 21.4,19.7
+		.click Battle Spear of the Thunder King
+		.get Battle Spear of the Thunder King##80808 |q 30640/1
+		|only if not completedq(30640)
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
+		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
+	step
+		'Enter the building here. |goto 22.3,26.4 <5 |c
+		|only if havequest(30641)
+	step
+		goto Vale of Eternal Blossoms/18 56.2,48.7
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
+		|confirm
+		|only if havequest(30641)
+	step
+		goto 58.5,44.4
+		.talk Ren Firetongue##63571
+		.' Tell him Zhi sent you.
+		.' Enter the Hall of Tiles |q 30641/1
+		|only if havequest(30641)
+	step
+		'Follow Ren Firetongue |goto Vale of Eternal Blossoms/19 44.7,67.1 <5 |c
+		|only if havequest(30641)
+	step
+		goto 52.0,76.1
+		.from Zhao-Jin the Bloodletter##60359 |tip He constantly shoots lighting at you so keep on the move. If you are in melee range he will try to cleave you, step around him as he begins casting.
+		.click Battle Helm of the Thunder King
+		.get Battle Helm of the Thunder King##80222 |q 30641/2
+		|only if havequest(30641)
+	step
+		'While exiting the building be careful of the tiles. The safe path is along the pale tiles.
+		.' Exit the building. |goto Vale of Eternal Blossoms/18 56.1,93.7 <5 |c
+		|only if havequest(30641)
+	step
+		goto Vale of Eternal Blossoms 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Helm of the Thunder King##30641 |only if havequest(30641)
+		..accept Battle Axe of the Thunder King##30642 //// Cannot get gate to drop.
+		|only if not completedq(30642)
+	step
+		'Enter the building here. |goto 40.4,77.1 <5 |c
+		|only if not completedq(30642)
+	step
+		goto 44.3,76.5
+		.' Fight off the Jade Constructs that attack you. |tip If you need help defeating them walk into the orbs around this room. Blue will give a damage and haste buff, green will heal you.
+		.from Jade Construct##60297+
+		.' Pass the Trial of the Constructs |q 30642/1
+		|only if not completedq(30642)
+	step
+		goto 45.4,76.2
+		.click Battle Axe of the Thunder King
+		.get Battle Axe of the Thunder King##80807 |q 30642/2
+		|only if not completedq(30642)
+	step
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Axe of the Thunder King##30642
+		|only if not completedq(30642)
+		|next "end"
+	step
+	label honored
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
+		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
+		..accept Painting the Ruins Red##30298 |daily
+		.'_
+		.' Click here if the Daily quest is not available today |confirm
+	step
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept He Knows What He's Doing##30305 |daily |or 2
+		..accept Carved in Stone##30481 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..accept No Stone Unturned##30299 |daily
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if this quest is not available |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
+		goto 24.6,29.6
+		.' All around this area:
+		.click Shao-Tien Cage##9667
+		.' Release Golden Lotus Prisoners |q 30300/2
+		.' You can find more cages here [24.6,38.3]
+		.' And more cages here: [29.9,29.4]
+		|only if havequest(30300)
+	step
+		goto 31.8,33.0 |only if havequest(30298) or havequest(30481) or havequest(30305)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.from Shao-Tien Soul-Caller##63611+, Shao-Tien Dominator##63610+ |only if havequest(30298) or havequest(30481)
+		.kill 15 Guo-Lai mogu |q 30298/1 |only if havequest(30298)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
+		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
+	step
+		goto Vale of Eternal Blossoms/18 41.0,52.8
+		.talk He Softfoot##64647
+		.' Let's go |q 30639/1
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms/18 43.8,27.3
+		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
+		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
+		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
+		|modelnpc Zhao-Jin the Bloodletter##64663
+		|modelnpc Crumbling Jade Warrior##64883
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..turnin He Knows What He's Doing##30305
+		..turnin Carved in Stone##30481
+		|only if havequest(30481) or havequest(30305)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
+		..accept The Imperion Threat##30302 |daily
+		.'_
+		.' Click here if this daily quest is not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..turnin The Key to Success##30300
+		|only if havequest(30300)
+	step
+		goto Vale of Eternal Blossoms/18 74.3,53.5
+		.from Huo-Shuang##63691
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto Vale of Eternal Blossoms 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin The Imperion Threat##30302
+	step
+		goto 56.8,43.8
+		.talk Leven Dawnblade##58408
+		..turnin The Secrets of Guo-Lai##30639
+	step
+		goto Vale of Eternal Blossoms 21.3,71.5
+		.talk Kun Autumnlight##58920
+		..turnin The Butcher##30248
+		|next "end"
+	step
+	label exalted
+		goto 56.7,43.7
+		.talk Leven Dawnblade##58408
+		..accept The Mogu's Message##30643
+	step
+		'Enter the building here. |goto 40.4,77.2 <5 |c
+	step
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin The Mogu's Message##30643 |tip WARNING! Turning in this quest will spawn enemy ambushers.
+		..accept What Comes to Pass##30644
+	step
+		goto 56.5,43.3
+		.talk Sun Tenderheart##58468
+		..turnin What Comes to Pass##30644
+		..accept The Might of Three##30645
+	step
+		goto 64.4,41.5
+		.from Shao-Tien Marauder##60225+, Granite Quilen##60223+, Shao-Tien Spiritrender##60224+, Reanimated Jade Warrior##60121+
+		.' Kill 100 Mogu Invaders |q 30645/1 |tip While doing this quest you will get some help from the Jade Serpent, Xeun the White Tiger, and Niuzao the Black Ox. Kills 1-34 will aided by the Jade Serpent, use the AoE buff given to take down many foes at once. Kill 34-67 will be aided by the White Tiger, use his buff to focus down individual targets in larger packs, when they are shattered they will deal extreme AoE damage. Kills 67-100 will be aided by Niuzao, use his buff to damage enemies in a cone. Periodically you will instantly kill enemies with a knockback.
+	step
+		goto 74.2,41.8
+		.talk Sinan the Dreamer##59906
+		..turnin The Might of Three##30645
+		..accept The Final Power##30646
+	step
+		goto 77.6,37.2
+		.' Use the Red Crane's power to jump over the wall of flame.
+		|confirm
+		|only if havequest(30646)
+	step
+		goto 78.7,35.8
+		'Zhao-Jin will periodically throw Lightning Spears. Click them to pick them up and then use the new button on your screen to hurl the spear back at him. this will be your main source of damage.
+		'Zhao-Jin will also summon Lightning Waves. With the Red Crane's buff you can easily jump over these.
+		.kill Zhao-Jin the Bloodletter##60273 |q 30646/1
+	step
+		goto 56.5,43.6
+		.talk Anji Autumnlight##58465
+		..turnin The Final Power##30646
+		|next "end"
+	step
+	label end
+		'You have reached the end of the guide for today.
+		.' Click here to go back to the beginning of the dailies. |confirm |next "dailies"
+]])
+ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
+	step
+	label goldenmenu
+		'Proceeding to Pre-Quests |next |only if default
+		'Proceeding to The Golden Lotus Dailies |next "dailies" |only if completedq(30638)
+		'Skipping the Golden Lotus |next "end_of_lotus" |only if rep("Golden Lotus")>=Revered
+	step
+		goto Kun-Lai Summit 63.7,86.7
+		.talk Farmhand Ko##63751
+		..accept Temple of the White Tiger##31393
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin Temple of the White Tiger##31393
+		..accept A Celestial Experience##31395
+	step
+		goto 68.9,42.8
+		'Talk to Xuen |q 31395/1 |modelnpc Xuen##64528
+		.from Spirit of Violence##64656
+		.' Pass the First Test |q 31395/2
+		.from Spirit of Anger##64684
+		.' Pass the Second Test |q 31395/3
+		.from Spirit of Hatred##64742
+		.' Pass the Third Test |q 31395/4
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin A Celestial Experience##31395
+		..accept A Witness to History##31511
+	step
+		goto 56.1,91.6
+		.talk Sunwalker Dezco##64853
+		.' Tell him there is only one way to find out. |q 31511/1
+	step
+		goto Vale of Eternal Blossoms 56.8,43.4
+		.talk Zhi the Harmonious##59905
+		..turnin A Witness to History##31511
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..accept The Shrine of Two Moons##30649
+	step
+		goto 61.3,22.0
+		.talk Mokimo the Strong##59959
+		.' Ask him how the refuges are settling in.
+		.' Speak to Mokimo the Strong. |q 30649/2
+	step
+		goto Shrine of Two Moons/1 68.4,47.7
+		.talk Madam Vee Luo##62996
+		.' Ask her what you can find in the city.
+		.' Speak to Madam Vee Luo. |q 30649/3
+	step
+		goto Vale of Eternal Blossoms 62.0,20.5
+		.talk Elder Liao##63996
+		.' Ask him what what this place is.
+		.' Speak to Elder Liao. |q 30649/4
+	step
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.' Ask him if he has seen anything suspicious.
+		.' Speak to Jaluu the Generous. |q 30649/1
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..turnin The Golden Lotus##30649
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Ruins of Guo-Lai##30632
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin The Ruins of Guo-Lai##30632
+		..accept Out with the Scouts##30633
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..accept Barring Entry##30634
+	step
+		goto 33.8,22.6
+		.talk Lao Softfoot##65252
+		.' Tell him you're ready to infiltrate the cave. |q 30634/1
+	step
+		'Follow Lao Softfoot up the hill. |tip Do not stray far from him, he will keep you stealthed as long as you are close.
+		.' Wait for the patrol to be at a safe distance and place the explosives at the mouth of the cave [27.6,15.3] |use Explosive Keg##80484
+		.' Explosives Planted |q 30634/2
+	step
+		goto 30.6,29.6
+		.kill 8 Shao-Tien Precursor##59914+ |q 30633/1
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..turnin Barring Entry##30634
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Out with the Scouts##30633
+		..accept Killing the Quilen##30635
+		..accept Stones of Power##30636
+	step
+		goto 22.5,27.0
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept The Guo-Lai Halls##30637
+	step
+		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
+	step
+		goto Vale of Eternal Blossoms/18 54.9,53.5
+		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
+		.kill Dagou##59977 |q 30637/1
+	step
+		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
+	step
+		goto Vale of Eternal Blossoms 21.6,30.6
+		.kill 9 Stone Guardian##59973+ |q 30635/1
+		.click Revelite Crystal
+		.get 7 Relelite Crystal##80511+ |q 30636/1
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Killing the Quilen##30635
+		..turnin Stones of Power##30636
+		..turnin The Guo-Lai Halls##30637
+		..accept Leaving an Opening##30638
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin Leaving an Opening##30638
+	step
+	label dailies
+		.' You will only be able to accept 5 quests from the following NPCs.
+		|confirm
+	step
+		goto Vale of Eternal Blossoms 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Eternal Vigil##30307 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..accept Stone Hard Quilen##30308 |daily |or 2
+		..accept Set in Stone##30309 |daily |or 2
+		..accept Thundering Skies##30310 |daily |or 2
+		..accept Crumbling Behemoth##31762 |daily |or 2
+		..accept Unleashed Spirits##31757 |daily |or 2 
+		..accept Striking First##31760 |daily |or 2
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..accept High Standards##30311 |daily |or
+		..accept Laosy Scouting##31758 |daily |or
+		..accept Cannonfire##31754 |daily |or
+		..accept High Chance of Rain##31756 |daily |or
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..accept Given a Second Chance##30312 |daily |or
+		..accept Free Spirits##30320 |daily |or
+		..accept Acts of Cruelty##31755 |daily |or
+	step
+		goto 39.7,26.0
+		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
+		.' [39.2,19.2]
+		.' [37.5,22.9]
+		.' [40.5,18.4]
+		.' [43.1,22.1]
+		.' [43.2,15.9] 
+		.' [47.5,19.1]
+		.' [50.5,23.6]
+		.' Rescue Lao Softfoot |q 31758/1
+		|only if havequest(31758)
+	step
+		goto 44.2,15.8
+		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
+		.' Shao-Tien Behemoth ritual stopped |q 31760/1
+		|modelnpc 58460
+		|only if havequest(31760)
+	step
+		goto 50.9,22.3
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Eastern Stormcaller |q 31756/1
+		|only if havequest(31756)
+	step
+		goto 47.8,19.1
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Northern Stormcaller |q 31756/2
+		|only if havequest(31756)
+	step
+		goto 43.1,27.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Southern Stormcaller |q 31756/3
+		|only if havequest(31756)
+	step
+		goto 36.8,18.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Western Stormcaller |q 31756/4
+		|only if havequest(31756)
+	step
+		goto 44.0,21.8
+		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
+		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
+		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
+		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
+		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
+		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
+		.' You can find more Unleashed Spirits at [46.9,34.3] |only if havequest(31757)
+		.kill 8 Granite Quilen##59157 |q 30308/1 |only if havequest(30308)
+		.click Golden Lotus Banner |only if havequest(30311)
+		.' Raise 6 Golden Lotus Standards |q 30311/1 |only if havequest(30311)
+		.click Soul Vortex |only if havequest(30320)
+		.clicknpc Captive Pandaren Soul##59231 |only if havequest(30320)
+		.' Free 15 Captive Pandaren Spirits |q 30320/1 |only if havequest(30320)
+		.kill Shao-Tien Behemoth |q 31762/1 |only if havequest(31762)
+		.' Use your Wu Kao Explosive near a Shao-Tien Cannon. |use Wu Kao Explosive##89123 |only if havequest(31754)
+		.' Destroy 7 Shao-Tien Cannons. |q 31754/1 |only if havequest(31754)
+	step
+		goto 52.3,28.8 
+		.' Use Shado-Pan Bandages on Wounded Defenders |use Shado-Pan Bandages##84242
+		.' Heal 6 Wounded Defenders |q 30312/1
+		|only if havequest(30312)
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..turnin Given a Second Chance##30312 |daily
+		..turnin Free Spirits##30320 |daily
+		..turnin Acts of Cruelty##31755 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..turnin Stone Hard Quilen##30308 |daily
+		..turnin Set in Stone##30309 |daily
+		..turnin Thundering Skies##30310 |daily
+		..turnin Crumbling Behemoth##31762 |daily
+		..turnin Unleashed Spirits##31757 |daily
+		..turnin Anji's Diplomacy##31760 |daily
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..turnin High Standards##30311 |daily
+		..turnin Laosy Scouting##31758 |daily
+		..turnin Cannonfire##31754 |daily
+		..turnin High Chance of Rain##31756 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin The Eternal Vigil##30307 |daily
+		..accept Whitepetal Lake##31131 |daily |or |next "whitepetal"
+		..accept Mistfall Village##31242 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31243 |daily |or |next "mistfall3"
+		.' If Leven has no available quests after turning in The Eternal Vigil click here. |confirm 
+	step
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..accept A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.4
+		.talk He Softfoot##58470
+		..accept The Silent Approach##30281 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..accept Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..accept Rude Awakenings##30292 |daily |or
+		..accept In Enemy Hands##30293 |daily |or
+	step
+		goto 43.4,42.9
+		.clicknpc Shao-Tien Ritual Statue##63090
+		.' Click all four statues and fight off whatever creature spawns to defend them.
+		.' Shao-Tien Ritual Statues destroyed |q 30283/1
+		|only if havequest(30283)
+	step
+		goto 45.2,41.7
+		.kill 8 Paleblade Flesheater##63082+ |q 30292/1 |only if havequest(30292)
+		.from Shao-Tien Mindbender##63129+, Shao-Tien Reclaimer##63081+ |only if havequest(30281)
+		.' Kill 10 Whitepetal mogu |q 30281/1 |only if havequest(30281)
+		.' Use the Shado-Pan Torch in your bags near the Shao-Tien Banners in this area. |use Shado-Pan Torch##84781 |only if havequest(30282)
+		.' Burn 10 Shao-Tien Banners |q 30282/1 |only if havequest(30282)
+		.' Rescue 8 Dominated Defenders by killing the Shao-Tien Mindbender's controlling them. |q 30293/1 |only if havequest(30293)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Silent Approach##30281 |daily
+		..accept The Soul-Gatherer##30482
+	step
+		goto 40.8,48.0
+		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
+		.get Soul-Gatherer's Beads |q 30482/1
+		|only if havequest(30482)
+	step
+		goto 56.6,43.2
+		.talk He Softfoot##58470
+		..turnin The Soul-Gatherer##30482
+	step
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..turnin A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..turnin Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..turnin Rude Awakenings##30292 |daily
+		..turnin In Enemy Hands##30293 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..accept Behind Our Lines##31136 |daily |or |next "behind"
+		..accept The Ruins of Guo-Lai##31248 |daily |or |next "ruins"
+		..accept Setting Sun Garrision##31250 |daily |or |next "ssg"
+		..accept Mistfall Village##31249 |daily |or |next "mistfall"
+	step
+	label	"behind"
+		goto 69.2,54.8
+		.' Walk along this path until you find General Tamuja
+		.kill General Temuja##63101+ |q 31136/1
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..turnin Behind Our Lines##31136
+		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
+		|next |only if defualt
+	step
+		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
+		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
+		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
+		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ruins of Guo-Lai##31248 |only if havequest(31248)
+		..turnin The Ruins of Guo-Lai##31294 |only if havequest(31294)
+		..turnin Guo-Lai Infestation##31240 |only if havequest(31240)
+		..turnin The Ruins of Guo-Lai##31296 |only if havequest(31296)
+		..accept In Ashen Webs##30200 |daily 
+		..accept Troubling the Troublemakers##30228 |daily 
+		..accept Blood on the Rise##30226 |daily 
+		|confirm
+	step
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..accept Hard as a Rock##30304 |daily |or
+		..accept That's Not a Rock!##30204 |daily |or
+	step
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..accept Runelocked##30205 |daily 
+		..accept Runes in the Ruins##30206 |daily 
+		|confirm
+	step
+		goto 31.2,31.0
+		.' Around this ruin there will be four blue runic symbols on the ground, walk over each of them to unlock the Ancient Mogu Artifact
+		.click Ancient Mogu Artifact
+		.get Ancient Mogu Artifact##85204 |q 30205/1
+		.' The relic may also be at [26.9,19.6]
+		|only if havequest(30205)
+	step
+		goto 30.7,20.4
+		.from Stonebark Trickster##58545 |only if havequest(30228)
+		.' Kill 8 Stonebark sprites |q 30228/1 |only if havequest(30228)
+		.from Shao-Tien Fist##65134+, Shao-Tien Sorcerer##65133+ |only if havequest(30226)
+		.' Kill 8 Ruin's Rise mogu. |q 30226/1 |only if havequest(30226)
+	step
+		goto 26.3,29.2
+		.click Mogu Statue |only if havequest(30304)
+		.from Mogu Statue##63447+ |only if havequest(30304)
+		.' Destroy 10 Mogu Statues |q 30304/1 |only if havequest(30304)
+		.from Ashweb Weaver##58459+, Ashweb Piercer##58475+ |only if havequest(30200)
+		.' Kill 10 Ashweb Spiders |q 30200/1 |only if havequest(30200)
+		.' Use your Shado-Pan Torch on the small rocks around this area. |use Shado-Pan Torch##85261 |only if havequest(30204)
+		.kill 50 Ashweb Hatchling##58568+ |q 30204/1 |only if havequest(30204)
+		.click Guo-Lai Runestone##6714 |only if havequest(30206)
+		.get 12 Guo-Lai Runestone |q 30206/1 |only if havequest(30206)
+		.' You can find more of the objectives in this step at [25.2,38.7]
+	step
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..turnin Hard as a Rock##30304 |daily 
+		..turnin That's Not a Rock!##30204 |daily 
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin In Ashen Webs##30200 |daily 
+		..turnin Troubling the Troublemakers##30228 |daily 
+		..turnin Blood on the Rise##30226 |daily 
+		..accept Wulon, the Granite Sentinel##30227 |daily |or 
+		..accept The Ashweb Matriarch##30225 |daily |or
+		..accept The Crumbling Hall##30277 |daily |or
+	step
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..turnin Runelocked##30205 |daily 
+		..turnin Runes in the Ruins##30206 |daily 
+	step
+		goto Vale of Eternal Blossoms/18 77.6,72.9
+		.kill Wulon##63510 |q 30227/1
+		|only if havequest(30227)
+	step
+		goto Vale of Eternal Blossoms/18 75.7,47.9
+		.kill Bloodtip##58474 |q 30225/1 |tip Every 20% Bloodtip casts Call Swarmers which brings out many small spiders, they are easily killed and need to be killed immediately.
+		|only if havequest(30225)
+	step
+		goto 56.1,49.1
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
+		|confirm
+		|only if havequest(30280)
+	step
+		goto Vale of Eternal Blossoms/19 53.9,68.3
+		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
+		|only if havequest(30280)
+	step
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 42.3,53.7 <5 |c
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 36.3,36.6
+		.click Deactivate First Spirit Wall
+		.' Deactivate the First Spirit Wall |q 30277/1
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 23.2,28.8
+		.click Deactivate Second Spirit Wall
+		.' Deactivate the Second Spirit Wall |q 30277/2
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 38.3,31.1
+		.click Deactivate Final Spirit Wall
+		|tip Make sure you're stepping on the green tiles, as the others will hurt you. There is a path to both the spirit wall and the artifact.
+		.' Deactivate the Final Spirit Wall |q 30277/3
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 49.3,30.4
+		.click Ancient Guo-Lai Artifact
+		.get Ancient Guo-Lai Artifact |q 30277/4
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Thunder Below##30280 
+		|only if havequest(30280)
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Crumbling Hall##30277 
+		|only if havequest(30277)
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ashweb Matriarch##30225 |daily |or 
+		..turnin Wulon, the Granite Sentinel##30227 |daily |or
+		|next "end" |only if rep('Golden Lotus')<=Honored
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Mistfall Village##31242 |daily |only if havequest(31242)
+		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
+		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
+		..accept Clearing in the Forest##30263 |daily |or 2
+		..accept Encroaching Storm##30194 |daily |or 2
+		..accept Ruffling Some Feathers##30232 |daily |or 2
+		..accept The Pandaren Uprising Relived##30237 |daily |or 2
+		..accept Return to Rest##30238 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..accept Sprite Plight##30190 |daily |or 2
+		..accept My Town, It's on Fire##30192 |daily |or 2
+		..accept Steer Clear of the Beer Here##30191 |daily |or 2
+		.'_
+		.' If these quests are not available click here |confirm
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..accept Meating Expectations##30193 |daily |or 2
+		..accept Pomfruit Pickup##30231 |daily |or 2
+		..accept Lushroom Rush##30196 |daily |or 2
+		.'_
+		.' If these quests are not available click here. |confirm
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..accept Blooming Blossoms##30195 |daily
+		.'_
+		.' If this quest is not available click here. |confirm
+	step
+		goto 25.8,74.8
+		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
+		.from Fairlands Gazelle##58454+ |only if havequest(30193)
+		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
+		.' Use the Pomharvest Firework in your bags to knock Pomfruits out of the trees in the area |use Pomharvest Firework##79344 |only if havequest(30231)
+		.clicknpc Pomfruit##58767 |only if havequest(30231)
+		.get 12 Pomfruit##79250+ |q 30231/1 |only if havequest(30231)
+		.from Silkfeather Hawk##58457 |only if havequest(30232)
+		.get 120 Silken Feather##84121+ |q 30232/1 |only if havequest(30232)
+		.click Eternal Blossom |tip These can be found most abundantly along the river. |only if havequest(30195)
+		.get 10 Eternal Blossom##79246+ |q 30195/1 |only if havequest(30195)
+	step
+		 goto 29.9,53.5
+		.from Shao-Tien Painweaver##65131+, Shao-Tien Conqueror##65132+
+		.' Kill 10 Winterbough Glade mogu. |q 30263/1
+		|only if havequest(30263)
+	step
+		goto 37.3,81.4
+		.from 12 Slateskin Troublemaker##58673+ |q 30190/1 |only if havequest(30190)
+		.click Stolen Mistfall Keg |only if havequest(30191)
+		.get 10 Stolen Mistfall Keg##85778+ |q 30191/1 |only if havequest(30191)
+		.click Brazier Fire |only if havequest(30192)
+		.' Put out 30 Brazier Fires |q 30192/1 |only if havequest(30192)
+	step
+		goto 49.5,67.6
+		.kill 8 Ancient Mogu Spirit##58671+ |q 30237/1 |only if havequest(30237)
+		.click Lushroom |only if havequest(30196)
+		.get 12 Lushroom##85681+ |q 30196/1 |only if havequest(30196)
+		.click Pandaren Gravestone |only if havequest(30238)
+		.' Honor 6 Pandaren Gravestones |q 30238/1 |only if havequest(30238)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Pandaren Uprising Relived##30237 |daily
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..turnin Sprite Plight##30190 |daily
+		..turnin My Town, It's on Fire##30192 |daily
+		..turnin Steer Clear of the Beer Here##30191 |daily
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..turnin Meating Expectations##30193 |daily
+		..turnin Pomfruit Pickup##30231 |daily
+		..turnin Lushroom Rush##30196 |daily
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..turnin Blooming Blossoms##30195 |daily
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Encroaching Storm##30194 |daily
+		..turnin Ruffling Some Feathers##30232 |daily
+		..turnin Clearing in the Forest##30263 |daily
+		..turnin Return to Rest##30238 |daily
+		..accept Lao-Fe the Slavebinder##30239 |daily |or |next "slave"
+		..accept Aetha##30236 |daily |or |next "aetha"
+		..accept The Ruins of Guo-Lai##31294 |daily |or |next "ruins"
+		..accept Mogu within the Ruins of Guo-Lai##31295 |daily |or |next honored
+		..accept Setting Sun Garrison##30385 |daily |or |next "ssg"
+		..accept Quid Pro Quo##30235 |daily |or
+	step
+		goto 30.8,79.4
+		.' Use the Stone of the Water to walk on water |use Stone of the Water Strider##87807
+		.kill Quid##58771 |q 30235/1
+		|only if havequest(30235)
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Quid Pro Quo##30235
+	step
+	label aetha
+		goto 35.0,90.0
+		.from Aetha##58778 |tip Aetha will constantly summon Tornadoes, simply kite Aetha to a new location out of the range. With your Stone of the Water Strider buff, you should easily be able to kite on the water.
+		.' Subdue Aetha |q 30236/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Aetha##30236 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label slave
+		goto 47.4,65.8
+		.kill Spirit of Lao-Fe##58817 |q 30239/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Lao-Fe the Slavebinder##30239 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall2
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Attack on Mistfall Village##31243 |daily
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket##11350 
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Shao-Tien Subjugator##64201
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##30287 |daily
+		..turnin Freeing Mind and Body##30289 |daily
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
+	step
+	label whitepetal
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Whitepetal Lake##31131 |daily
+		..accept Under Watchful Eyes##30341 |daily |or
+		..accept The Displaced Paleblade##30314 |daily |or
+		..accept The Moving Mists##30313 |daily |or
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept A Thousand Pointy Teeth##30284 |daily |or 2
+		..accept Sparkle in the Eye##30265 |daily |or 2
+		..accept Stunning Display##30291 |daily |or 2
+		..accept Fiery Tongue, Fragile Feet##30342 |daily |or 2
+		..accept A Weighty Task##30338 |daily |or 2
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..accept Stick in the Mud##30340 |daily |or
+		..accept Getting your Hands Dirty##30339 |daily |or
+	step
+		goto 41.1,47.0
+		.kill 15 Knifetooth Swarmer##59404+ |q 30284/1 |only if havequest(30284)
+		.kill 8 Stillwater Crocodile##58455+ |q 30342/1 |only if havequest(30342)
+		.click Ruby Eye |tip These are inside of the Mogu heads underwater. |only if havequest(30265)
+		.get 8 Ruby Eye##84646+ |q 30265/1 |only if havequest(30265)
+		.clicknpc Stunned Whitepetal##62984 Carp |only if havequest(30291)
+		.get 12 Stunned Whitepetal Carp##84656 |q 30291/1 |only if havequest(30291)
+		.click Mogu Artifact |only if havequest(30338)
+		.get 8 Mogu Artifact##84655 |q 30338/1 |only if havequest(30338)
+	step
+		goto 44.1,53.2
+		.' Use the Shado-Pan Flare in your bags to illuminate Shao-Tien Surveyors. |use Shado-Pan Flare##89366 |only if havequest(30341)
+		.kill 8 Shao-Tien Surveyor##59379+ |q 30341/1 |only if havequest(30341)
+		.kill 8 Fog Walker##58672+ |q 30313/1 |only if havequest(30313)
+		.from Paleblade Flesheater##59378+, Paleblade Slithertongue##63044+ |only if havequest(30314)
+		.' Kill 8 Paleblade Saurok |q 30314/1 |only if havequest(30314)
+		.click Whitepetal Reeds##10817 |only if havequest(30340)
+		.get 12 Whitepetal Reed##84241 |q 30340/1 |only if havequest(30340)
+		.click Fresh Dirt##20 |only if havequest(30339)
+		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
+	step
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Under Watchful Eyes##30341 |daily
+		..turnin The Displaced Paleblade##30314 |daily
+		..turnin The Moving Mists##30313 |daily
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..turnin Stick in the Mud##30340 |daily
+		..turnin Getting your Hands Dirty##30339 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin A Thousand Pointy Teeth##30284 |daily
+		..turnin Sparkle in the Eye##30265 |daily
+		..turnin Stunning Display##30291 |daily
+		..turnin Fiery Tongue, Fragile Feet##30342 |daily
+		..turnin A Weighty Task##30338 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept Vicejaw##30234 |daily |or |next "vicejaw"
+		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
+		..accept Guo-Lai Infestation##31240 |daily |or |next "ruins"
+		..accept Mistfall Village##31245 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
+		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
+		..accept Cracklefang##30233 |daily |or |next "crackle"
+	step
+	label vicejaw
+		goto 37.3,51.1
+		.kill Vicejaw##58769 |q 30234/1 |tip When you first pull Vicejaw, kite him through the corpses of Paleblade Flesheaters that are lying all around, when he eats 10 of them he will begin casting Upchuck. When he does this he wil not move and will only attack in front of himself, walk around to his backside and attack until his energy meter resets to 0. When he is weak Vicejaw will pick you up and begin to eat you. Kill him before he is able to chew you to death. He will not try to eat you if he is using Upchuck, time it right and you won't have to race to kill him.
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin Vicejaw##30234 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins2
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Guo-Lai Encampment##31244
+		..accept Painting the Ruins Red##30298 |daily
+		..accept Offering a Warm Welcome##30301 |daily
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..accept No Stone Unturned##30299 |daily 
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if no quest is available |confirm
+	step
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept Carved in Stone##30481 |daily
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 25.4,28.8
+		.from Shao-Tien Dominator##63610+, Shao-Tien Soul-Caller##63611+, Shao-Tien Torturer##63641+ |only if havequest(30298)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.' Kill 15 Guo-Lai mogu. |q 30298/1 |only if havequest(30298)
+		.get 1 Shao-Tien Cage Key |q 30300/1 |only if havequest(30300)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.click Shao-Tien Cage |only if havequest(30300)
+		.' Free 6 Golden Lotus Prisoners. |q 30300/2 |only if havequest(30300)
+		.click Mogu Statue |only if havequest(30299)
+		.from Mogu Statue##63447+ |only if havequest(30299)
+		.' Destroy 10 Mogu Statues |q 30299/1 |only if havequest(30299)
+		.' Use your Shado-Pan Torch on the Tents around this area. |use Shado-Pan Torch##85581 |only if havequest(30301)
+		.' Burn 6 Shao-Tien Tents |q 30301/1 |only if havequest(30301)
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..turnin No Stone Unturned##30299 
+		..turnin The Key to Success##30300 
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Painting the Ruins Red##30298 
+		..turnin Offering a Warm Welcome##30301 
+		..accept The Imperion Threat##30302 |daily
+	step
+		goto 68.6,71.0
+		.from Gochao the Ironfist##62880
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin The Imperion Threat##30302
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label ssg
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Setting Sun Garrison##31247 |daily |only if havequest(31247)
+		..turnin Setting Sun Garrison##30385 |daily |only if havequest(30385)
+		..turnin Setting Sun Garrison##31297 |daily |only if havequest(31297)
+		..turnin Setting Sun Garrision##31250 |daily |only if havequest(31250)
+		..accept The Battle Ring##30306 |daily
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Survival Ring: Flame##30240 |daily |or
+		..accept Survival Ring: Blades##30242 |daily |or
+	step
+		goto 19.7,74.2
+		.from Shado-Pan Trainee##58992+
+		.' Defeat 20 Shado-Pan Trainees. |q 30306/1
+		|only if havequest(30306)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid getting hit by the fireworks.
+		.' Live through the Survival Ring for 90 seconds |q 30240/1
+		|only if havequest(30240)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid the posts with blades surrounding them and the running pandas.
+		.' Live through the Survival Ring for 90 seconds |q 30242/1
+		|only if havequest(30242)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Survival Ring: Flame##30240 |daily |or
+		..turnin Survival Ring: Blades##30242 |daily |or
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin The Battle Ring##30306 |daily
+		..accept Upon the Ramparts##30246 |daily |or
+		..accept Enemy at the Gates##30264 |daily |or
+		..accept No Reprieve##30444 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..accept Mantid Under Fire##30243 |daily |or
+		..accept Along the Serpent's Spine##30244 |daily |or
+		..accept Lost Scouts##30245 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Bloodied Skies##30266 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..accept Roll Club: Serpent's Spine##30261 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto Vale of Eternal Blossoms 18.6,36.4
+		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
+		.talk Shado-Pan Scout##58947 |q 30245/1
+		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
+		..turnin Lost Scouts##30245
+		..accept The Butcher##30248
+		|only if havequest(30245)
 	step
 		goto 17.0,47.5
 		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
@@ -12887,8 +14473,10 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.talk Rook Stonetoe##58911
 		..turnin Attack on Mistfall Village##31246 |daily
 		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
 		..accept Stonebound Killers##30290 |daily |or 2
 		..accept Freeing Mind and Body##30289 |daily |or 2
+		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
 	step
 		goto 35.1,75.4
 		.talk Sun Tenderheart##59337
@@ -12906,17 +14494,19 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.' 60 Mistfall Village fires doused. |q 30288/1
 		|only if havequest(30288)
 	step
-		goto 33.6,72.8
+		goto 33.8,72.6
 		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287)
-		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
-		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.' Kill 6 Shao-Tien attackers. |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers. |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |only if havequest(30285)
 		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
-		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
-		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
-		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them |q 30289/1 |only if havequest(30289)
+		|modelnpc Shao-Tien Subjugator##64201
+		|modelnpc Golden Lotus Guard##64200
 	step
 		goto 35.2,74.9
 		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##31293 |daily
 		..turnin Mogu Make Poor House Guests##30287 |daily
 		..turnin Stonebound Killers##30290 |daily
 		..turnin Freeing Mind and Body##30289 |daily
@@ -12952,7 +14542,27 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		|next "revered" |only if rep('Golden Lotus')==Revered 
 		|next "exalted" |only if rep('Golden Lotus')==Exalted
 	step
+	label crackle
+		goto Vale of Eternal Blossoms 46.5,59.1
+		.from Cracklefang##58768
+		.' Cracklefang Slain |q 30233/1
+	step
+		goto 42.4,46.0
+		.talk Ren Firetongue##59343
+		..turnin Cracklefang##30233
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
 	label revered
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.buy 1 Grand Commendation of the Golden Lotus##93215
+		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("Golden Lotus")>=Revered
+	step
 		goto 57.2,42.9
 		.talk Zhi the Harmonious##59905
 		..accept Battle Spear of the Thunder King##30640
@@ -12963,8 +14573,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		goto 57.2,42.9
 		.talk Zhi the Harmonious##59905
-		..turnin Battle Spear of the Thunder King##30640
-		..accept Battle Helm of the Thunder King##30641
+		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
+		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
 	step
 		'Enter the building here. |goto 22.3,26.4 <5 |c
 	step
@@ -13013,7 +14623,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 33.8,38.5
 		.talk Leven Dawnblade##58408
 		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
-		..accept The Secrets of Guo-Lai##30639
+		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
 		..accept Painting the Ruins Red##30298 |daily
 		.'_
 		.' Click here if the Daily quest is not available today |confirm
@@ -13042,6 +14652,10 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.get Shao-Tien Cage Key |q 30300/1
 		|only if havequest(30300)
 	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
 		goto 24.6,29.6
 		.' All around this area:
 		.click Shao-Tien Cage##9667
@@ -13058,41 +14672,53 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
 		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
 	step
-		goto 18.4,15.8
+		goto Vale of Eternal Blossoms/18 41.0,52.8
 		.talk He Softfoot##64647
-		.' Let's go. |q 30639/1
+		.' Let's go |q 30639/1
+		|only if havequest(30639)
 	step
-		goto 19.1,9.6
+		goto Vale of Eternal Blossoms/18 43.8,27.3
 		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
 		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
 		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
 		|modelnpc Zhao-Jin the Bloodletter##64663
 		|modelnpc Crumbling Jade Warrior##64883
+		|only if havequest(30639)
 	step
-		goto 33.4,38.0
+		goto Vale of Eternal Blossoms 33.4,38.0
 		.talk Rook Stonetoe##59333
 		..turnin He Knows What He's Doing##30305
 		..turnin Carved in Stone##30481
+		|only if havequest(30481) or havequest(30305)
 	step
 		goto 33.8,38.5
 		.talk Leven Dawnblade##58408
-		..turnin Painting the Ruins Red##30298
+		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
 		..accept The Imperion Threat##30302 |daily
+		.'_
+		.' Click here if this daily quest is not available |confirm
 	step
 		goto 33.1,39.0
 		.talk Sun Tenderheart##59334
 		..turnin The Key to Success##30300
+		|only if havequest(30300)
 	step
-		goto 78.0,73.1
-		.kill Shao-Tien Imperion##62880 |q 30302/1
+		goto Vale of Eternal Blossoms/18 74.3,53.5
+		.from Huo-Shuang##63691
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
 	step
-		goto 33.8,38.5
+		goto Vale of Eternal Blossoms 33.8,38.5
 		.talk Leven Dawnblade##58408
 		..turnin The Imperion Threat##30302
 	step
 		goto 56.8,43.8
 		.talk Leven Dawnblade##58408
 		..turnin The Secrets of Guo-Lai##30639
+	step
+		goto Vale of Eternal Blossoms 21.3,71.5
+		.talk Kun Autumnlight##58920
+		..turnin The Butcher##30248
 		|next "end"
 	step
 	label exalted
@@ -13135,6 +14761,14 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.talk Anji Autumnlight##58465
 		..turnin The Final Power##30646
 		|next "end"
+	step
+	label end_of_lotus
+		'You have achieved Revered status with the Golden Lotus!
+		|next |only if default
+	step
+	label end
+		'You have reached the end of the guide for today. You can only do the Dailies once per day.
+		|confirm |next goldenmenu
 ]])
 --------------------------------------------------------------------------------------------------------------------------------------
 -- ACHIEVEMENTS
@@ -14347,7 +15981,7 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_EasternKingdoms",[[
 		'Skipping next part of guide |next "+strangle" |only if step:Find("+vashj'ir1"):IsComplete()
 		'Proceeding next step |next |only if default
 	step
-		#include "portal_vashj'ir"
+		#include "port_vashj'ir"
 	step
 		goto Abyssal Depths,54.1,63.9
 		.' Discover Korthun's End |achieve 4825/5
@@ -16607,57 +18241,161 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_Northrend",[[
 ]])
 
 ZygorGuidesViewer:RegisterInclude("H_Explorer_Pandaria",[[
+		goto The Jade Forest 40.0,73.0
+		.' Discover Nectarbreeze Orchard |achieve 6351/8
+	step
+		goto 46.0,90.0
+		.' Discover Garrosh'ar Point |achieve 6351/15
+	step
+		goto 52.1,90.8
+		.' Discover Dreamer's Pavilion |achieve 6351/3
+	step
+		goto 52.0,82.0
+		.' Discover Slingtail Pits |achieve 6351/12
+	step
+		goto 58.0,80.0
+		.' Discover Pearl Lake |achieve 6351/5
+	step
+		goto 57.0,57.0
+		.' Discover Temple of the Jade Serpent |achieve 6351/13
+	step
+		goto 47.0,60.0
+		.' Discover Serpent's Heart |achieve 6351/11
+	step
+		goto 48.0,45.0
+		.' Discover Dawn's Blossom |achieve 6351/2
+	step
+		goto 57.0,44.0
+		.' Discover The Arboretum |achieve 6351/14
+	step
+		goto 65.0,30.0
+		.' Discover Windward Isle |achieve 6351/16
+	step
+		goto 50.0,26.2
+		.' Discover Emperor's Omen |achieve 6351/4
+	step
+		goto 46.0,29.0
+		.' Discover Greenstone Quarry |achieve 6351/7
 	step
 		goto The Jade Forest 41.2,21.5
 		.' Discover Tian Monastery |achieve 6351/1
 	step
-		goto 52.1,90.8
-		.' Discover Dreamer's Pavilion |achieve 6351/2
+		goto 40.0,13.0
+		.' Discover Terrace of Ten Thunders |achieve 6351/10
 	step
-		goto 58.0,80.0
-		.' Discover Pearl Lake |achieve 6351/3
-	step
-		goto 46.0,29.0
-		.' Discover Greenstone Quarry |achieve 6351/4
+		goto 29.0,13.044
+		.' Discover Honeydew Village |achieve 6351/17
 	step
 		goto 25.0,37.0
-		.' Discover Camp Nooka Nooka |achieve 6351/5
-	step
-		goto 47.0,60.0
-		.' Discover Serpent's Heart |achieve 6351/6
-	step
-		goto 57.0,57.0
-		.' Discover Temple of the Jade Serpent |achieve 6351/7
-	step
-		goto 46.0,90.0
-		.' Discover Garrosh'ar Point |achieve 6351/8
-	step
-		goto 29.0,13.0
-		.' Discover Honeydew Village |achieve 6351/9
-	step
-		goto 48.0,45.0
-		.' Discover Dawn's Blossom |achieve 6351/10
-	step
-		goto 50.0,26.2
-		.' Discover Emperor's Omen |achieve 6351/11
+		.' Discover Camp Nooka Nooka |achieve 6351/9
 	step
 		goto 25.0,48.0
-		.' Discover Grookin Hill |achieve 6351/12
+		.' Discover Grookin Hill |achieve 6351/6
+// Valley
 	step
-		goto 40.0,73.0
-		.' Discover Nectarbreeze Orchard |achieve 6351/13
+		goto Valley of the Four Winds 75.7,24.9
+		.' Discover the Thunderfoot Ranch |achieve 6969/17
 	step
-		goto 40.0,13.0
-		.' Discover Terrace of Ten Thunders |achieve 6351/14
+		goto 60.7,27.6
+		.' Discover the Pools of Purity |achieve 6969/11
 	step
-		goto 52.0,82.0
-		.' Discover Slingtail Pits |achieve 6351/15
+		goto 68.6,43.3
+		.' Discover Mudmug's Place |achieve 6969/8
 	step
-		goto 57.0,44.0
-		.' Discover The Arboretum |achieve 6351/16
+		goto 81.53,47.92
+		.' Discover Zhu's Watch |achieve 6969/18
 	step
-		goto 65.0,30.0
-		.' Discover Windward Isle |achieve 6351/17
+		goto 73.2,58.3
+		.' Discover the Rumbling Terrace |achieve 6969/12
+	step
+		goto 65.2,57.4
+		.' Discover Silken Fields |achieve 6969/13
+	step
+		goto 56.1,49.8
+		.' Discover Halfhill |achieve 6969/5
+	step
+		goto 54.2,38.7
+		.' Discover the Gilded Fan |achieve 6969/3
+	step
+		goto 40.4,43.1
+		.' Discover the Heartland |achieve 6969/16
+	step
+		goto 33.1,23.5
+		.' Discover the Kunzen Village |achieve 6969/7
+	step
+		goto 16.6,38.7
+		.' Discover Paoquan Hollow |achieve 6969/10
+	step
+		goto 25.0,43.6
+		.' Discover Singing Marshes |achieve 6969/14
+	step
+		goto 19.0,57.0
+		.' Discover Stoneplow |achieve 6969/6
+	step
+		goto 13.0,75.5
+		.' Discover Dustback Gorge |achieve 6969/2
+	step
+		goto 16.1,82.7
+		.' Discover the Nesingwary Safari |achieve 6969/9
+	step
+		goto 35.9,68.0
+		.' Discover Stormstout Brewery |achieve 6969/15
+	step
+		goto 52.4,63.0
+		.' Discover The Imperial Granary |achieve 6969/4
+	step
+		goto 50.1,75.1
+		.' Discover Winds' Edge |achieve 6969/1
+// Krasarang
+	step
+		goto Krasarang Wilds 76.6,8.7
+		.' Discover Zhu's Watch |achieve 6975/16
+	step
+		goto 80.6,25.6
+		.' Discover Krasarang Cove |achieve 6975/5
+	step
+		goto 68.5,22.8
+		.' Discover The Krasari Ruins |achieve 6975/6
+	step
+		goto 65.3,32.9
+		.' Discover the Dojan River |achieve 6975/3
+	step
+		goto 68.0,44.2
+		.' Discover the Anglers Wharf |achieve 6975/1
+	step
+		goto 53.9,37.4
+		.' Discover the Ruins of Dojan |achieve 6975/9
+	step
+		goto 45.5,31.8
+		.' Discover The Deepwild |achieve 6975/12
+	step
+		goto 40.0,32.5
+		.' Discover Crane Wing Refuge |achieve 6975/8
+	step
+		goto 39.1,56.8
+		.' Discover the Temple of the Red Crane |achieve 6975/11
+	step
+		goto 43.3,90.2
+		.' Discover Unga Ingoo |achieve 6975/15
+	step
+		goto 40.7,82.9
+		.' Discover Nayeli Lagoon |achieve 6975/7
+	step
+		goto 31.2,63.2
+		.' Discover the Cradle of Chi-Ji |achieve 6975/2
+	step
+		goto 12.7,59.9
+		.' Discover The Southern Isle |achieve 6975/14
+	step
+		goto 24.0,47.1
+		.' Discover the Ruins of Korja |achieve 6975/10
+	step
+		goto 30.2,38.3
+		.' Discover Fallsong Village |achieve 6975/4
+	step
+		goto 14.1,39.0
+		.' Discover The Forbidden Jungle |achieve 6975/13
+// Kun-Lai
 	step
 		goto Kun-Lai Summit 71.8,92.2
 		.' Discover Binan Village |achieve 6976/1
@@ -16692,14 +18430,15 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_Pandaria",[[
 		goto 58.0,74.8
 		.' Discover Mogujia |achieve 6976/6
 	step
-		goto 38.0,75.1
-		.' Discover Kota Peak |achieve 6976/5
+		goto 55.5,92.0
+		.' Discover the Gate of the August Celestials |achieve 6976/3
 	step
 		goto 45.4,86.2
 		.' Discover Firebough Nook |achieve 6976/2
 	step
-		goto 55.5,92.0
-		.' Discover the Gate of the August Celestials |achieve 6976/3
+		goto 38.0,75.1
+		.' Discover Kota Peak |achieve 6976/5
+// Townlong
 	step
 		goto Townlong Steppes 67.3,44.9
 		.' Discover Fire Camp Osul |achieve 6977/5
@@ -16713,11 +18452,14 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_Pandaria",[[
 		goto Townlong Steppes 28.6,25.8
 		.' Discover Shan'ze Dao |achieve 6977/8
 	step
+		goto 26.3,39.1
+		.' Discover Sra'vess |achieve 6977/10
+	step
 		goto 49.2,71.0
 		.' Discover Shado-Pan Garrison |achieve 6977/7
 	step
 		goto 44.6,77.5
-		.' Discover Sik'vess |achieve6977/9
+		.' Discover Sik'vess |achieve 6977/9
 	step
 		goto 54.3,79.0
 		.' Discover Rensai's Watchpost |achieve 6977/3
@@ -16726,25 +18468,17 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_Pandaria",[[
 		|confirm
 	step
 		goto 71.3,70.5
-		.' Discover the Slumprushes |achieve 6977/10
+		.' Discover the Slumprushes |achieve 6977/11
 	step
 		goto 82.5,72.4
 		.' Discover Hatred's Vice |achieve 6977/6
 	step
 		goto 75.5,82.5
 		.' Discover the Gao-Ran Battlefront |achieve 6977/1
+// Dread
 	step
 		goto Dread Wastes 63.2,18.4
 		.' Discover Kypari Vor |achieve 6978/3
-	step
-		goto 68.3,30.4
-		.' Discover Terace of Gurthan |achieve 6978/7
-	step
-		goto 66.0,42.2
-		.' Discover Writhingwood |achieve 6978/11
-	step
-		goto 53.6,34.9
-		.' Discover Klaxxi'vess |achieve 6978/2
 	step
 		goto 50.5,12.2
 		.' Discover The Sunset Brewgarden |achieve 6978/10
@@ -16758,113 +18492,27 @@ ZygorGuidesViewer:RegisterInclude("H_Explorer_Pandaria",[[
 		goto 46.2,34.5
 		.' Discover The Clutches of Shek'zeer |achieve 6978/9
 	step
+		goto 53.6,34.9
+		.' Discover Klaxxi'vess |achieve 6978/2
+	step
 		goto 38.7,62.2
 		.'Discover The Briny Muck |achieve 6978/8
 	step
 		goto 30.5,73.6
 		.' Discover Zan'vess |achieve 6978/12
 	step
-		goto 59.2,60.6
-		.' Discover Kypari Zar |achieve 6978/4
-	step
 		goto 55.9,70.3
 		.' Discover Soggy's Gamble |achieve 6978/6
 	step
-		goto Krasarang Wilds 14.1,39.0
-		.' Discover The Forbidden Jungle |achieve 6975/13
+		goto 59.2,60.6
+		.' Discover Kypari Zar |achieve 6978/4
 	step
-		goto 30.2,38.3
-		.' Discover Fallsong Village |achieve 6975/4
+		goto 66.0,42.2
+		.' Discover Writhingwood |achieve 6978/11
 	step
-		goto 24.0,47.1
-		.' Discover the Ruins of Korja |achieve 6975/10
-	step
-		goto 12.7,59.9
-		.' Discover The Southern Isle |achieve 6975/14 //BUGGED
-	step
-		goto 31.2,63.2
-		.' Discover the Cradle of Chi-Ji |achieve 6975/2
-	step
-		goto 40.7,82.9
-		.' Discover Nayeli Lagoon |achieve 6975/7
-	step
-		goto 43.3,90.2
-		.' Discover Unga Ingoo |achieve 6975/15
-	step
-		goto 39.1,56.8
-		.' Discover the Temple of the Red Crane |achieve 6975/11
-	step
-		goto 40.0,32.5
-		.' Discover Crane Wing Refuge |achieve 6975/8
-	step
-		goto 45.5,31.8
-		.' Discover The Deepwild |achieve 6975/12
-	step
-		goto 53.9,37.4
-		.' Discover the Ruins of Dojan |achieve 6975/9
-	step
-		goto 65.3,32.9
-		.' Discover the Dojan River |achieve 6975/3
-	step
-		goto 68.0,44.2
-		.' Discover the Anglers Wharf |achieve 6975/1
-	step
-		goto 68.5,22.8
-		.' Discover The Krasari Ruins |achieve 6975/6
-	step
-		goto 80.6,25.6
-		.' Discover Krasarang Cove |achieve 6975/5
-	step
-		goto 76.6,8.7
-		.' Discover Zhu's Watch |achieve 6975/16
-	step
-		goto Valley of the Four Winds 73.2,58.3
-		.' Discover the Rumbling Terrace |achieve 6969/12
-	step
-		goto 68.6,43.3
-		.' Discover Mudmug's Place |achieve 6969/8
-	step
-		goto 65.2,57.4
-		.' Discover Silken Fields |achieve 6969/13
-	step
-		goto 56.1,49.8
-		.' Discover Halfhill |achieve 6969/5
-	step
-		goto 52.4,63.0
-		.' Discover The Imperial Granary |achieve 6969/4
-	step
-		goto 50.1,75.1
-		.' Discover Winds' Edge |achieve 6969/1
-	step
-		goto 35.9,68.0
-		.' Discover Stormstout Brewery |achieve 6969/15
-	step
-		goto 16.1,82.7
-		.' Discover the Nesingwary Safari |achieve 6969/9
-	step
-		goto 13.0,75.5
-		.' Discover Dustback Gorge |achieve 6969/2
-	step
-		goto 19.0,57.0
-		.' Discover Stoneplow |achieve 6969/6
-	step
-		goto 16.6,38.7
-		.' Discover Paoquan Hollow |achieve 6969/10
-	step
-		goto 25.0,43.6
-		.' Discover Singing Marshes |achieve 6969/14
-	step
-		goto 33.1,23.5
-		.' Discover the Kunzen Village |achieve 6969/7
-	step
-		goto 40.4,43.1
-		.' Discover the Heartland |achieve 6969/16
-	step
-		goto 54.2,38.7
-		.' Discover the Gilded Fan |achieve 6969/3
-	step
-		goto 60.7,27.6
-		.' Discover the Pools of Purity |achieve 6969/11
+		goto 68.3,30.4
+		.' Discover Terace of Gurthan |achieve 6978/7
+// Vale
 	step
 		goto Vale of Eternal Blossoms 86.4,62.5
 		.' Discover the Shrine of Seven Stars |achieve 6979/6
@@ -16947,6 +18595,1027 @@ ZygorGuidesViewer:RegisterInclude("Mag'har_Neutral",[[
 ]])
 
 ZygorGuidesViewer:RegisterInclude("H_Tillers",[[
+	startlevel 90
+	step
+		'Proceeding to the Tiller's Dailies  |next "dailies" |condition completedq(31945) |only if completedq(31945)
+		'Proceeding to the Tiller's Prequests |next |condition not completedq(31945) |only if not completedq(31945)
+	step
+		goto Vale of Eternal Blossoms 60.2,22.9
+		.talk Farmer Doran##64011
+		..accept The Tillers##31374
+	step
+		goto Valley of the Four Winds 52.0,48.0
+		.talk Farmer Yoon##58721
+		..turnin The Tillers##31374
+		..accept A Helping Hand##30252
+	step
+		goto 51.8,48.8
+		.click Unbudging Rock
+		.' Clear 8 Unbudging Rocks |q 30252/1
+	step
+		goto 52.8,47.9
+		.talk Farmer Yoon##58646
+		..turnin A Helping Hand##30252
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..accept Learn and Grow I: Seeds##30535
+	step
+		goto 52.9,52.2
+		.talk Merchant Greenfield##58718
+		.' Tell him you're there to pick up seeds.
+		.' Get a Packet of Green Cabbage Seeds |q 30535/1
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin Learn and Grow I: Seeds##30535
+		..accept Learn and Grow II: Tilling and Planting##30254
+	step
+		goto 52.0,48.3
+		.clicknpc Untilled Soil##59985+
+		.' Till 2 patches of Soil. |q 30254/1
+		.' Use the EZ-Gro Green Cabbage Seeds in your bags on the Tilled Soil. |use EZ-Gro Green Cabbage Seeds##80302
+		.' Plant seeds in 2 patches of Tilled Soil. |q 30254/2
+		|modelnpc Tilled Soil##58563
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin Learn and Grow II: Tilling and Planting##30254
+		..accept Learn and Grow III: Tending Crops##30255
+	step
+		goto 52.0,48.3
+		.' Use the Rusty Watering Can on the Parched EZ-Gro Green Cabbage |use Rusty Watering Can##79104
+		.' Water 2 parched Ez-Gro Green Cabbage |q 30255/1
+		|modelnpc Parched EZ-Gro Green Cabbage##59987
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin Learn and Grow III: Tending Crops##30255
+		..accept Learn and Grow IV: Harvesting##30256
+	step
+		goto 52.0,48.3
+		.clicknpc Ripe EZ-Gro Green Cabbage##59833
+		.get 2 EZ-Gro Green Cabbage |q 30256/1
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin Learn and Grow IV: Harvesting##30256
+		..accept Learn and Grow V: Halfhill Market##30257
+	step
+		goto 52.8,48.0
+		.click Dark Soil
+		.get Marsh Lily |q 30257/1
+	step
+		goto 53.1,51.8
+		.talk Gina Mudclaw##58706
+		..turnin Learn and Grow V: Halfhill Market##30257 
+		..accept Learn and Grow VI: Gina's Vote##31945
+	step
+		goto 52.9,52.2
+		.talk Merchant Greenfield##58718
+		.buy 1 Scallion Seeds##80591 |q 31945
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Scallion Seeds on the Tilled Soil |use Scallion Seeds##80591
+		.' Plant Scallion Seeds |q 31945/1
+		|modelnpc Tilled Soil##58563
+	step
+	label info
+		'Click here for information on Bursting Crops |next "bursting" |confirm
+		'Click here for information on Parched Crops |next "parched" |confirm
+		'Click here for information on Infested Crops |next "infested" |confirm
+		'Click here for information on Wiggling Crops |next "wiggling" |confirm
+		'Click here for information on Alluring Crops |next "alluring" |confirm
+		'Click here for information on Smothered Crops |next "smothered" |confirm
+		'Click here for information on Wild Crops |next "wild" |confirm
+		'Click here for information on Runty Crops |next "runty" |confirm
+		'Click here for information on Tangled Crops |next "tangled" |confirm
+	step
+	label bursting
+		'Unless you got a Bursting Scallion immediately after planting your Scallions, you will have to wait a full day until you can pick your crops.
+		.' Click here if you are ready to harvest your crops. |confirm
+		.' Click here to start doing dailies. |next "dailies" |confirm
+	step
+		goto 52.0,48.4
+		.clicknpc Bursting Scallions##63160 
+		.clicknpc Ripe Scallions##63165
+		.' Harvest Ripe Scallions |q 31945/2
+		.get 5 Scallion##74843 |q 31945/3
+		|next "exit"
+	step
+	label runty
+		goto 52.0,48.4
+		.clicknpc Runty Scallions##63166
+		.' Press your Space Bar and jump. 
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label wiggling
+		goto 52.0,48.4
+		.clicknpc Wiggling Scallions##63169
+		.from Voracious Virmen##60039
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label infested
+		goto 52.2,48.3
+		.click Vintage Bug Sprayer
+		.collect Vintage Bug Sprayer##80513 |n
+		.' Use your Vintage Bug Sprayer on the Infested Scallions |use Vintage Bug Sprayer##80513
+		|modelnpc Infested Scallions##63162
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label alluring
+		goto 52.2,48.3
+		.clicknpc Alluring Scallions##63159
+		.from Swooping Plainshawk##60072
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label wild
+		goto 52.0,48.4
+		.clicknpc Wild Scallions##63170	
+		.' Ride the Scallion |invehicle |c 
+	step
+		'Spam the Flex ability on your new hotbar, when the plant tries to cast Vine Slam, interrupt it with your Gnaw ability.
+		.' Build 50 stacks on Dominance. |outvehicle |c
+	step
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label tangled
+		goto 52.0,48.4 |n
+		.clicknpc Tangled Scallions##63168
+		.' Run to [51.7,48.9]
+		'|goto 51.7,48.9 <5 |c
+	step
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+	step
+	label parched
+		goto 52.0,48.4
+		.' Use the Rusty Watering Can on the Parched Scallions |use Rusty Watering Can##79104
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+		|modelnpc Parched Scallions##63163
+	step
+	label smothered
+		goto 52.0,48.4
+		.clicknpc Encroaching Weed##60185
+		.' Ride the Weed |invehicle |c
+	step
+		'Spam the Pull ability on your new hotbar. 
+		.' Pull the Weed |outvehicle |c
+	step
+		.' Click here to return to the information page. |next "info" |confirm
+		.' Click here when you are have tilled your crops. |next "bursting" |confirm
+		|modelnpc Smothered Scallions##63167
+	step
+	label exit
+		goto 53.1,51.8
+		.talk Gina Mudclaw##58706
+		..turnin Learn and Grow VI: Gina's Vote##31945
+	step
+	label dailies
+		goto Valley of the Four Winds 51.9,48.3
+		'Start each day out by harvesting the crops from the previous day.
+		|confirm
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646 |tip He will only have 2 quests a day.
+		..accept The Kunzen Hunter-Chief##30336 |daily |or 2
+		..accept That Dangling Carrot##31670 |daily |or 2
+		..accept Stealing is Bad... Re-Stealing is OK##30334 |daily |or 2
+		..accept The Cabbage Test##31669 |daily |or 2
+		..accept It's Melon Time##31942 |daily |or 2
+		..accept A Pumpkin-y Perfume##31672 |daily |or 2
+		..accept Stalling the Ravage##30335 |daily |or 2
+		..accept Red Blossom Leeks, You Make the Croc-in' World Go Down##31673 |daily |or 2
+		..accept Squash Those Foul Odors##31941 |or 2
+		..accept The Lesser of Two Evils##30333 |or 2
+		..accept The White Turnip Treatment##31675 |or 2
+		..accept The Pink Turnip Challenge##31674 |or 2
+		..accept Which Berries? Witchberries.##31943 |or 2
+		..accept Why Not Scallions?##31671 |or 2
+		..accept Simian Sabotage##30337 |or 2
+	step
+		goto 52.7,50.5
+		.talk Andi##64464 |tip He will only have 1 quest a day.
+		..accept A Gift For Fung##30475 |daily |or
+		..accept A Gift For Chee Chee##30471 |daily |or
+		..accept A Gift For Haohan##30477 |daily |or
+		..accept A Gift For Jogu##30478 |daily |or
+		..accept A Gift For Sho##30472 |daily |or
+		..accept A Gift For Tina##30470 |daily |or
+		..accept A Gift For Ella##30474 |daily |or
+		..accept A Gift For Old Hillpaw##30476 |daily |or
+		..accept A Gift For Fish##30473 |daily |or
+		 ..accept A Gift For Gina##30479 |daily |or
+	step
+		goto 53.1,51.7
+		.talk Ella##58647
+		..accept You Have to Burn the Ropes##30327 |daily
+		.'_
+		.' Click here if Ella is not in town |confirm
+	step
+		goto 53.0,51.7
+		.talk Haohan Mudclaw##57402
+		..accept Pest Problems##30319
+		.'_
+		.' Click here if Haohan is not in town |confirm
+	step
+		goto 53.1,51.7
+		.talk Tina Mudclaw##58761
+		..accept They Don't Even Wear Them##30323
+		.'_
+		.' Click here if Tina is not in town |confirm
+	step
+		goto 53.1,52.1
+		.talk Chee Chee##58709
+		..accept Not in Chee-Chee's Backyard##30324 |daily
+		.'_
+		.' Click here if Chee-Chee is not in town |confirm
+	step
+		goto 52.8,51.8
+		.talk Fish Fellreed##58705
+		..accept The Kunzen Legend-Chief##30326 |daily
+		.'_
+		.' Click here if Fish Felreed is not in town |confirm
+	step
+		goto 52.9,51.7
+		.talk Farmer Fung##57298
+		..accept Water, Water Everywhere##30317 |daily
+		.'_
+		.' Click here if Farmer Fung is not in town |confirm
+	step
+		goto 53.1,52.1
+		.talk Sho##58708
+		..accept Where It Counts##30325
+		.'_
+		.' Click here if Sho is not in town |confirm
+	step
+		goto 53.6,52.5
+		.talk Jogu the Drunk##58710
+		..accept Weed War II##30321 |daily
+		.'_
+		.' Click here if Jogu has no available quests. |confirm
+	step
+		goto 53.0,51.8
+		.talk Old Hillpaw##58707
+		..accept Chasing the Chicken##30318
+		.'_
+		.' Click here if Old Hillpaw is not in town. |confirm
+	step
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		..accept Money Matters##30322
+		.'_
+		.' If this quest is unavailable click here. |confirm
+	step
+		goto 55.1,50.3
+		.talk Innkeeper Lei Lan##59582
+		.' Tell her you are here on behalf of Gina Mudclaw.
+		.' Innkeeper Lei Lan's Payment |q 30322/3
+		|only if havequest(30322)
+	step
+		goto 55.6,52.1
+		.talk Lolo Lio##59585
+		.' Tell him you are here on behalf of Gina Mudclaw.
+		.' Lolo Lio's Payment |q 30322/4
+		|only if havequest(30322)
+	step
+		goto 56.1,49.6
+		.talk Trader Jambeezi##59583
+		.' Tell him you are here on behalf of Gina Mudclaw.
+		.' Trader Jambeezi's Payment |q 30322/2
+		|only if havequest(30322)
+	step
+		goto 56.7,47.1
+		.talk Spicemaster Jin Jao##59581
+		.' Tell him you are here on behalf of Gina Mudclaw.
+		.' Spicemaster Jin Jao's Payment |q 30322/1
+		|only if havequest(30322)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Juicycrunch Carrot Seeds##80590
+		|only if havequest(31670)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Green Cabbage Seeds##79102
+		|only if havequest(31669)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Witchberry Seeds##89326
+		|only if havequest(31943)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Scallion Seeds##80591
+		|only if havequest(31671)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 White Turnip Seeds##80595
+		|only if havequest(31675)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Pink Turnip Seeds##80594
+		|only if havequest(31674)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Jade Squash Seeds##89328
+		|only if havequest(31941)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Striped Melon Seeds##89329
+		|only if havequest(31942)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Mogu Pumpkin Seeds##80592
+		|only if havequest(31672)
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 1 Red Blossom Leek Seeds##80593
+		|only if havequest(31673)
+	step
+		goto 56.5,50.4
+		.talk Wing Nga##60231
+		.' Tell her that you'd like to borrow one of Farmer Fung's kites.
+		.' Ride a kite. |invehicle |c
+		|only if havequest(30317)
+	step
+		.' Use your Water Buckest ability on the Dusty Spots below you. |tip They are outlined by a yellow circle.
+		.' Water 35 Dusty Spots |q 30317/1
+		|only if havequest(30317)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Scallion Seeds on the Tilled Soil |use Scallion Seeds##80591
+		.' Plant Scallion Seeds |q 31671/1
+		|modelnpc Tilled Soil##58563
+		|only if havequest(31671)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Juicycrunch Carrot Seed on the Tilled Soil |use Juicycrunch Carrot Seeds##80590
+		.' Plant 1 Juicycrunch Carrot Seed |q 31670/1
+		|modelnpc Tilled Soil##58563
+		|only if havequest(31670)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Witchberry Seeds on the Tilled Soil |use Witchberry Seeds##89326
+		.' Plant Witchberry Seeds |q 31943/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31943)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Mogu Pumpkin Seeds on the Tilled Soil |use Mogu Pumpkin Seeds##80592
+		.' Plant Mogu Pumpkin Seeds |q 31672/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31672)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Jade Squash Seeds on the Tilled Soil |use Jade Squash Seeds##89328
+		.' Plant Jade Squash Seeds |q 31941/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31941)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your White Turnip Seeds on the Tilled Soil |use White Turnip Seeds##80595
+		.' Plant White Turnip Seeds |q 31675/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31675)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Pink Turnip Seeds on the Tilled Soil |use Pink Turnip Seeds##80594
+		.' Plant Pink Turnip Seeds |q 31674/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31674)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Green Cabbage Seeds on the Tilled Soil |use Green Cabbage Seeds##79102
+		.' Plant Green Cabbage Seeds |q 31669/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31669)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Striped Melon Seeds on the Tilled Soil |use Striped Melon Seeds##89329
+		.' Plant Striped Melon Seeds |q 31942/1
+		|modelnpc Tilled Soil##58563+
+		|only if havequest(31942)
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Red Blossom Leek Seeds on the Tilled Soil |use Red Blossom Leek Seeds##80593
+		.' Plant Red Blossom Leek Seeds |q 31673/1
+		|modelnpc Tilled Soil##58563
+		|only if havequest(31673)
+	step
+		goto 45.9,48.5
+		.click Goldenfire Orchid##10921
+		.get Goldenfire Orchid |q 30479/1
+		.' You can also find this here: [41.6,42.8]
+		.' or here: [37.5,37.3]
+		|only if havequest(30479)
+	step
+		goto 42.4,50.0
+		.talk Lost Dog##59533
+		..accept Lost and Lonely##30526
+		|only if repval('The Tillers','Revered')>=13000
+	step
+		goto 38.5,51.7
+		.talk Gai Lan##57385
+		.' Ask him, "What Weeds?"
+		.' Get the Weed War buff. |havebuff Weed War
+		|only if havequest(30321)
+	step
+		.clicknpc Ugly Weed##57306
+		.clicknpc Nasty Weed##57308
+		.click Weed-B-Gone Gas Bomb |tip Use the new button available to you to clear a lot of weeds at once
+		.' Pull 100 Weeds |q 30321/1
+		|only if havequest(30321)
+	step
+		goto 31.3,53.2
+		.clicknpc Hillpaw's Chicken##58918 |tip Most of these chickens are disguised animals. When you pick one up click the button that appears on your screen.
+		.' You can deliver lost hens to the chicken coop here [30.4,52.5]
+		.get Old Hillpaw's Prize Chicken##80223 |q 30318/1
+		|only if havequest(30318)
+	step
+		goto 37.4,37.3
+		.from Monstrous Plainshawk##59641
+		.collect 1 Bloody Plainshawk Leg##80232
+		|only if havequest(30475)
+	step
+		goto 39.6,45.3
+		.talk Wika-Wika##59532
+		.' Mook-mooks?
+		.' Get the Pest Problems buff. |havebuff Pest Problems
+		|only if havequest(30319)
+	step
+		goto 39.6,45.3
+		.clicknpc Black-Nose Marmot##59530
+		.' Stomp 25 Black-Nose Marmot |q 30319/1
+		|only if havequest(30319)
+	step
+		goto 30.2,46.0
+		.from Teeku##59130, Jim-Jim##59128, Jokka-Jokka##59126, Kon-Kon##59127
+		.' Kill the Kunzen-Hunter Chief. |q 30336/1
+		|only if havequest(30336)
+	step
+		goto 29.2,38.2
+		.from Skyrange Mushan##64309+
+		.get 20 Tasty T-Bone |q 30526/1
+		|only if havequest(30526)
+	step
+		goto 32.0,32.1
+		.click Kunzen Rope
+		.' Burn 6 ropes |q 30327/1
+		|only if havequest(30327)
+	step
+		goto 29.7,34.5
+		.click Yu-Ping Soup Cauldron
+		.get Yu-Ping Soup##79870 |q 30472/1
+		|only if havequest(30472)
+	step
+		goto 29.7,34.5
+		.kill 1 Kunzen Ritualist##59123 |q 30325/3
+		.click Blazing Ember##5746
+		.' Kick 4 Blazing Ember |q 30325/2
+		.click Kunzen Ritual Candle##11320
+		.' Throw 8 Kunzen Ritual Candles |q 30325/1
+		|only if havequest(30325)
+	step
+		goto 31.6,28.7
+		.from Buk-Buk##59133+, Bimba##59135+, Yammo##59134+, Rit-Rit##59132+
+		.get 1 Kunzen Legend-Book##79866 |q 30326/1
+		|only if havequest(30326)
+	step
+		goto 33.6,23.9
+		.click Authentic Valley Stir Fry
+		.get Authentic Valley Stir Fry |q 30471/1
+		|only if havequest(30471)
+	step
+		goto 34.0,24.1
+		.click Yak Statuette
+		.get Yak Statuette##79828 |q 30473/1
+		|only if havequest(30473)
+	step
+		goto 32.7,30.6
+		'Use the Barrel of Fireworks in your bags. |use Barrel of Fireworks##79885
+		.' Stolen tools exploded |q 30337/2
+		|only if havequest(30337)
+	step
+		goto 30.4,28.1
+		'Use the Barrel of Fireworks in your bags. |use Barrel of Fireworks##79885
+		.' Stolen weapons exploded |q 30337/1
+		|only if havequest(30337)
+	step
+		goto 32.1,25.9
+		'Use the Barrel of Fireworks in your bags. |use Barrel of Fireworks##79885
+		.' Stolen beer exploded |q 30337/3
+		|only if havequest(30337)
+	step
+		goto 35.0,22.0
+		'Use the Barrel of Fireworks in your bags. |use Barrel of Fireworks##79885
+		.' Stolen grain exploded |q 30337/4
+		|only if havequest(30337)
+	step
+		goto 34.2,23.5
+		.from Kunzen Rockflinger##59120+, Kunzen Collector##59124+, Kunzen Ravager##59119+, Kunzen Hunter##59121+
+		.' Kill 12 Kunzen hozen |q 30335/1
+		|only if havequest(30335)
+	step
+		goto 34.2,23.5
+		.click Stolen Vegetable |only if havequest(30334)
+		.get 16 Stolen Vegetable##79824 |q 30334/1 |only if havequest(30334)
+		.from Kunzen Rockflinger##59120+, Kunzen Collector##59124+, Kunzen Ravager##59119+ |only if havequest(30324)
+		.' Kill 8 Kunzen tribe members. |q 30324/1 |only if havequest(30324)
+	step
+		goto 44.1,29.1
+		.from Enormous Cattail Grouper##59639
+		.get Enormous Cattail Grouper Tooth |q 30477/1
+		|only if havequest(30477)
+	step
+		'Enter this warren. |goto 46.9,21.1 <5 |c
+		|only if havequest(30333)
+	step
+		goto 48.7,18.7
+		.kill Springtail Warren-Mother##59516 |q 30333/1
+		|only if havequest(30333)
+	step
+		'Leave the warren. |goto 46.9,21.1 <5 |c
+		|only if havequest(30333)
+	step
+		'Enter this warren. |goto 44.0,22.3 <5 |c
+		|only if havequest(30470)
+	step
+		goto 44.7,19.6
+		.from Springtail Littlewhisker##59515+, Springtail Trapper##59513+, Springtail Burrower##59514+
+		.get Stolen Circlet##80138 |q 30323/1
+		.get Ransacked Ring##80137 |q 30323/2
+		.get Buglarized Bracelet##80139 |q 30323/3
+		|only if havequest(30323)
+	step
+		'Leave the warren. |goto 44.0,22.3 <5 |c
+		|only if havequest(30470)
+	step
+		'This item could be in either warren or the patch of land seperating the two entrances.
+		.click Chrysoberyl Outcropping##7456
+		.get Uncut Chrysoberyl |q 30470/1
+		|only if havequest(30470)
+	step
+		goto 44.2,28.8
+		.click Freshwater Oyster
+		.get Blue Freshwater Pearl## |q 30476/1
+		|only if havequest(30476)
+	step
+		goto 42.4,50.0
+		.talk Lost Dog##59533
+		..turnin Lost and Lonely##30526
+		|only if havequest(30526)
+	step
+		goto 52.6,47.8
+		.click Yoon's Apples
+		.collect 8 Yoon's Apple##80234
+		|only if havequest(30478)
+	step
+		goto 52.8,47.9
+		.click Yoon's Craneberries
+		.collect 50 Yoon's Craneberry##80235
+		|only if havequest(30478)
+	step
+		goto 53.2,52.2
+		.talk Bobo Ironpaw##58717
+		.' Tell him you've got all this fruit here.
+		.get Apple-Berry Hooch |q 30478/1
+		|only if havequest(30478)
+	step
+		goto 53.0,51.3
+		.talk Kol Ironpaw##58712
+		.' Ask him if he could grill your plainshawk leg.
+		.get Grilled Plainshawk Leg##80233 |q 30475/1
+		|only if havequest(30475)
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin The Kunzen Hunter-Chief##30336
+		..turnin That Dangling Carrot##31670
+		..turnin Stealing is Bad... Re-Stealing is OK##30334
+		..turnin The Cabbage Test##31669
+		..turnin It's Melon Time##31942
+		..turnin A Pumpkin-y Perfume##31672
+		..turnin Stalling the Ravage##30335
+		..turnin Red Blossom Leeks, You Make the Croc-in' World Go Down##31673
+		..turnin Squash Those Foul Odors##31941
+		..turnin The Lesser of Two Evils##30333
+		..turnin The White Turnip Treatment##31675
+		..turnin The Pink Turnip Challenge##31674
+		..turnin Which Berries? Witchberries.##31943
+		..turnin Why Not Scallions?##31671
+		..turnin Simian Sabotage##30337
+	step
+		goto 52.9,51.7
+		.talk Farmer Fung##57298
+		..turnin Water, Water Everywhere##30317
+		..turnin A Gift For Fung##30475 |only if havequest(30475)
+	step
+		goto 52.8,51.8
+		.talk Fish Fellreed##58705
+		..turnin The Kunzen Legend-Chief##30326
+		..turnin A Gift For Fish##30473 |only if havequest(30473)
+	step
+		goto  53.0,51.7
+		.talk Ella##58647
+		..turnin You Have to Burn the Ropes##30327
+	step
+		goto 53.1,52.1
+		.talk Sho##58708
+		..turnin Where It Counts##30325
+		..turnin A Gift For Sho##30472 |only if havequest(30472)
+	step
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		..turnin Money Matters##30322
+		..turnin A Gift For Gina##30479
+	step
+		goto 53.1,51.9
+		.talk Old Hillpaw##58707
+		..turnin Chasing the Chicken##30318
+		..turnin A Gift For Old Hillpaw##30476 |only if havequest(30476)
+	step
+		goto 53.1,51.7
+		.talk Tina Mudclaw##58761
+		..turnin A Gift For Tina##30470 |only if havequest(30470)
+		..turnin They Don't Even Wear Them##30323
+	step
+		goto 53.0,51.7
+		.talk Haohan Mudclaw##57402
+		..turnin Pest Problems##30319
+		..turnin A Gift For Haohan##30477 |only if havequest(30477)
+	step
+		goto 53.6,52.5
+		.talk Jogu the Drunk##58710
+		..turnin Weed War II##30321
+		..turnin A Gift For Jogu##30478 |only if havequest(30478)
+	step
+		goto 53.1,52.1
+		.talk Chee Chee##58709
+		..turnin Not in Chee-Chee's Backyard##30324
+		..turnin A Gift For Chee Chee##30471 |only if havequest(30471)
+		|next "honored" |only if rep('The Tillers')==Honored
+		|next "revered" |only if rep('The Tillers')==Revered
+		|next "exalted" |only if rep('The Tillers')==Exalted
+		|next "end" |only if rep('The Tillers')<=Friendly
+	step
+	label honored
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..accept Growing the Farm I: The Weeds##30260
+		|next mungmung |only if repval('The Tillers','Honored')>=5600 and completedq(31936) and not completedq(31946)
+	step
+		goto 38.6,51.7
+		.talk Gai Lan##57385
+		..turnin Growing the Farm I: The Weeds##30260
+		..accept Growing the Farm I: A Little Problem##30516
+	step
+		goto 36.5,51.1
+		.click Spideroot
+		.get 6 Spideroot |q 30516/1
+	step
+		goto 38.6,51.7
+		.talk Gai Lan##57385
+		..turnin Growing the Farm I: A Little Problem##30516
+		|next "revered" |only if rep('The Tillers')>=Revered
+	step
+		goto 51.9,48.3
+		'When you arrive at Sunsong Ranch you will get a buff. After 15 minutes your ranch will be expanded. |tip You cannot buy your farm upgrade until the expansion is done. 
+		|confirm
+		|only if not completedq(31936)
+	step
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		.buy 1 "Jinyu Princess" Irrigation System##89812 |q 31936
+	step
+		'Click the "Jinyu Princess" Irrigation System in your bags. |use "Jinyu Princess" Irrigation System##89812
+		..accept The "Jinyu Princess" Irrigation System##31936
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin The "Jinyu Princess" Irrigation System##31936
+		|next mungmung |only if repval('The Tillers','Honored')>=5600 and completedq(31936) and not completedq(31946)
+		|next "end" |only if default
+	step
+	label revered
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		.buy 1 Grand Commendation of the Tillers##93226
+		.' Use the Commendation of the Tillers you just purchased. |use Grand Commendation of the Tillers##93226
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("The Tillers")>=Revered
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..accept Growing the Farm II: The Broken Wagon##30523
+		|next "fung" |only if repval('The Tillers','Revered')>=4200
+		|next "mungmung" |only if completedq(31936) and not completedq(31946)
+		|only if completedq(30516) and rep('The Tillers')>=Revered
+	step
+		goto 41.7,30.0
+		.talk Fish Fellreed##58705
+		..turnin Growing the Farm II: The Broken Wagon##30523
+		..accept Growing the Farm II: Knock on Wood##30524
+	step
+		goto 42.8,29.1
+		.click Boat Planks
+		.get 100 Waxed Plank##80136 |q 30524/1
+	step
+		goto 41.7,30.0
+		.talk Fish Fellreed##58705
+		..turnin Growing the Farm II: Knock on Wood##30524
+	step
+		goto 51.9,48.3
+		'When you arrive at Sunsong Ranch you will get a buff. After 15 minutes your ranch will be expanded. |tip You cannot buy your farm upgrade until the expansion is done. 
+		|confirm
+		|only if not completedq(31937)
+	step
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		.buy 1 "Thunder King" Pest Repellers##89813 |q 31937
+	step
+		'Click the "Thunder King" Pest Repellers in your bags. |use "Thunder King" Pest Repellers##89813
+		..accept "Thunder King" Pest Repellers##31937
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin "Thunder King" Pest Repellers##31937
+		|next "end"
+	step
+	label mungmung
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..accept Mung-Mung's Vote I: A Hozen's Problem##30258
+		|next "fung" |only if completedq(31946)
+	step
+		goto 44.2,34.3
+		.talk Mung-Mung##57401
+		..turnin Mung-Mung's Vote I: A Hozen's Problem##30258
+		..accept Mung-Mung's Vote II: Rotten to the Core##30259
+	step
+		goto 42.7,38.2
+		.click Partially Chewed Carrot
+		.get 10 Partially Chewed Carrot##80116 |q 30259/1
+	step
+		goto 44.2,34.3
+		.talk Mung-Mung##57401
+		..turnin Mung-Mung's Vote II: Rotten to the Core##30259
+		..accept Mung-Mung's Vote III: The Great Carrot Caper##31946
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 2 Juicycrunch Carrot Seeds##80590 |q 31946
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Juicycrunch Carrot Seeds on the Tilled Soil |use Juicycrunch Carrot Seeds##80590
+		.' Plant 2 Juicycrunch Carrot Seeds |q 31946/1
+		|modelnpc Tilled Soil##58563
+	step
+		'Wait a day for the carrots to grow and then harvest them.
+		.' Harvest 2 Ripe Juicycrunch Carrots |q 31946/2
+		.get 10 Juicycrunch Carrot##74841 |q 31946/3
+	step
+		goto 44.2,34.3
+		.talk Mung-Mung##57401
+		..turnin Mung-Mung's Vote III: The Great Carrot Caper##31946
+		|next "end"
+	step
+	label fung
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..accept Farmer Fung's Vote I: Yak Attack##30517
+		|next |only if repval('The Tillers','Revered')>=8400
+		.' Click here if this quest is not available yet |confirm |next end
+	step
+		goto 48.3,33.9
+		.talk Farmer Fung##57298
+		..turnin Farmer Fung's Vote I: Yak Attack##30517
+		..accept Farmer Fung's Vote II: On the Loose##30518
+	step
+		goto 51.0,36.7
+		.clicknpc Escaped Shagskin##59491
+		.' Ride 5 Escaped Shagskin to [50.4,34.7] |q 30518/1
+	step
+		goto 48.3,33.9
+		.talk Farmer Fung##57298
+		..turnin Farmer Fung's Vote II: On the Loose##30518
+		..accept Farmer Fung's Vote III: Crazy For Cabbage##31947
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 3 Green Cabbage Seeds##79102 |q 31947
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Green Cabbage Seeds on the Tilled Soil |use Green Cabbage Seeds##79102
+		.' Plant 3 Green Cabbage Seeds |q 31947/1
+		|modelnpc Tilled Soil##58563
+	step
+		'Wait a day for the Green Cabbage to grow and then harvest them.
+		.' Harvest 3 Green Cabbage |q 31947/2
+		.get 15 Green Cabbage##74840 |q 31947/3
+	step
+		goto 48.3,33.9
+		.talk Farmer Fung##57298
+		..turnin Farmer Fung's Vote III: Crazy For Cabbage##31947
+	step
+	label nana
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..accept Nana's Vote I: Nana's Secret Recipe##30519
+		|next |only if repval('The Tillers','Revered')>=16800
+		.' Click here if this quest is not available yet |confirm |next end
+	step
+		goto 54.7,47.0
+		.talk Nana Mudclaw##64597
+		..turnin Nana's Vote I: Nana's Secret Recipe##30519
+		..accept Nana's Vote II: The Sacred Springs##31948
+	step
+		goto 56.7,21.7
+		.from Thousand-Year Guardian##66850+
+		.' You may have to kill the Guardian first, then collect the water
+		'Use the Empty Pitcher while standing under the waterfall. |use Empty Pitcher##89902
+		.' Thousand-Year Water |q 31948/1
+	step
+		goto 54.7,47.0
+		.talk Nana Mudclaw##64597
+		..turnin Nana's Vote II: The Sacred Springs##31948
+		..accept Nana's Vote III: Witchberry Julep##31949
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 3 Witchberry Seeds##89326 |q 31949
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Witchberry Seeds on the Tilled Soil |use Witchberry Seeds##89326
+		.' Plant 3 Witchberry Seeds |q 31949/1
+		|modelnpc Tilled Soil##58563
+		|only if havequest(31949)
+	step
+		'Wait a day for the Witchberries to grow and then harvest them.
+		.' Harvest 3 Witchberries |q 31949/2
+		.get 15 Witchberries##74846 |q 31949/3	
+	step
+		goto 54.7,47.0
+		.talk Nana Mudclaw##64597
+		..turnin Nana's Vote III: Witchberry Julep##31949
+	step
+	label haohan
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..accept Haohan's Vote I: Bungalow Break-In##30521
+		.' Click here if this quest is not available yet |confirm |next end
+	step
+		goto 44.6,34.1
+		.talk Haohan Mudclaw##57402
+		..turnin Haohan's Vote I: Bungalow Break-In##30521
+		..accept Haohan's Vote II: The Real Culprits##30522
+	step
+		goto 39.4,43.6
+		.clicknpc Suspicious Footprint##52171
+		.' Investigate 8 Suspicious Footprints. |q 30522/1 |tip When you click the eighth footprint a hozen will attack you.
+	step
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..turnin Haohan's Vote II: The Real Culprits##30522
+		..accept Haohan's Vote III: Pure Poison##30525
+	step
+		'Enter this warren |goto 47.0,20.9 <5 |c
+	step
+		.click Cave Lily
+		.get Cave Lily##80141 |q 30525/2
+	step
+		'Leave this warren |goto 47.0,20.9 <5 |c
+	step
+		'Enter this warren |goto 44.0,22.2 <5 |c
+	step
+		.click Bloodbloom##2313
+		.get Bloodbloom##80140 |q 30525/1
+	step
+		'Leave this warren |goto 44.0,22.2 <5 |c
+	step
+		goto 42.5,22.3
+		.click Violet Lichen##2314
+		.get Violet Lichen |q 30525/4
+	step
+		'Enter this warren |goto 39.4,20.4 <5 |c
+	step
+		.click Ghostcap##9844
+		.get Ghostcap##80142 |q 30525/3
+	step
+		'Leave this warren |goto 39.4,20.4 <5 |c
+	step
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..turnin Haohan's Vote III: Pure Poison##30525
+		..accept Haohan's Vote IV: Melons For Felons##30527
+	step
+		goto 52.9,52.1
+		.talk Merchant Greenfield##58718
+		.buy 4 Striped Melon Seeds##89329 |q 30527
+	step
+		goto 52.0,48.4
+		.clicknpc Untilled Soil##58562
+		.' Use your Striped Melon Seeds on the Tilled Soil |use Striped Melon Seeds##89329
+		.' Plant 4 Striped Melon Seeds |q 30527/1
+		|modelnpc Tilled Soil##58563
+	step
+		'Wait a day for the Striped Melons to grow and then harvest them.
+		.' Harvest 4 Striped Melons |q 30527/2
+		.get 20 Striped Melon##74848 |q 30527/3	
+	step
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..turnin Haohan's Vote IV: Melons For Felons##30527
+		..accept Haohan's Vote V: Chief Yip-Yip##30528 //20000 Revered?
+	step
+		'Enter the cave here |goto 33.1,20.2 <5 |c
+	step
+		goto 32.4,20.6
+		.kill Chief Yip-Yip##59567 |q 30528/1
+		'Use the _Throw Melon_ button on your screen when he begins casting _Charging Up_. This will cause him to stop attacking and take increased damage for a few seconds.
+	step
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..turnin Haohan's Vote V: Chief Yip-Yip##30528
+	step
+		goto 52.0,49.0
+		'After some talking, the Offering Bowl should light up for you to click.
+		.click Offering Bowl
+		|confirm
+		|next "end"
+	step
+	label exalted
+		goto 52.2,48.8
+		.talk Farmer Yoon##58646
+		..accept Growing the Farm III: The Mossy Boulder##30529
+		.' Click here if this quest is not available yet |confirm |next end
+		|next |only if default
+	step
+		goto 44.6,34.1
+		.talk Haohan Mudclaw##57402
+		..turnin Growing the Farm III: The Mossy Boulder##30529
+	step
+		goto 51.9,48.3
+		'When you arrive at Sunsong Ranch you will get a buff. After 15 minutes your ranch will be expanded. |tip You cannot buy your farm upgrade until the expansion is done. 
+		|confirm
+		|only if not completedq(31938)
+	step
+		goto 53.2,51.8
+		.talk Gina Mudclaw##58706
+		.buy 1 "Earth-Slasher" Master Plow##89814 |q 31938
+	step
+		'Click the "Earth-Slasher" Master Plow in your bags. |use "Earth-Slasher" Master Plow##89814
+		..accept The "Earth-Slasher" Master Plow##31938
+	step
+		goto 52.3,48.8
+		.talk Farmer Yoon##58646
+		..turnin The "Earth-Slasher" Master Plow##31938
+	step
+		goto 52.0,49.0
+		.click Tillers Shrine##11506
+		..accept A Second Hand##30534
+	step
+		'For this quest you must be _Best Friends_ with one of the 10 Tiller NPCs. Please refer to the Reputations guides for assistance in gaining rep for an individual.
+		|confirm
+	step
+		'Go to your _Best Friend's_ home.
+		.' Ask them: <Friend>, how'd you like to help us run the farm? |q 30534/1
+	step
+		goto 52.0,49.0
+		.click Tillers Shrine##11506
+		..turnin A Second Hand##30534
+	step
+	label end
+		'The last thing to do with The Tillers each day is to plant as many crops as your farm can hold. Each crop harvest will award reputation so do this every day.
+		.' Click here to go back to the beginning of the dailies section. |next "dailies" |confirm
 ]])
 
 ZygorGuidesViewer:RegisterGuideSorting({
@@ -17756,11 +20425,13 @@ ZygorGuidesViewer:RegisterInclude("Argent Tourney_Valiant",[[
 
 ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		'In order to begin gaining _Reputation_ with the _Shado-Pan_, you must first become Revered with the _Golden Lotus_.
-		|confirm
+		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
+		.' Click here to begin working on the Shado-Pan after you have become revered with the Golden Lotus |confirm |next "startshado"
 	step
-		#include "Golden_Lotus"
-		|next if rep("Golden Lotus")>=Revered
+	label golden
+		#include "Golden_Lotus_Revered"
 	step
+	label startshado
 		goto Vale of Eternal Blossoms 63.3,21.1
 		.talk Kai Kang##64002
 		..accept The Shado-Pan##31389
@@ -17784,6 +20455,7 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.talk Master Snowdrift##63009
 		..accept The Challenger's Ring: Chao the Voice##31127
 		|only if not completedq(31127)
+		|only if rep('Shado-Pan')>=Honored
 	step
 		goto 49.4,70.6
 		.talk Master Snowdrift##63009
@@ -17911,6 +20583,7 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.talk Ban Bearheart##62304
 		..accept The Challenger's Ring: Snow Blossom##31038
 		|only if not completedq(31038)
+		|only if rep('Shado-Pan')>=Honored
 	step
 		goto 49.0,70.4
 		.talk Ban Bearheart##62304
@@ -17952,6 +20625,8 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		goto 49.0,70.4
 		.talk Ban Bearheart##62304
 		..accept The Mogu Menace##31105 |daily |or 4
+		..accept The Mogu Menace##31106 |daily |or 4
+		..accept The Mogu Menace##31039 |daily |or 4
 		..accept Bronze Claws##31044 |daily |or 4
 		..accept Illusions Of The Past##31045 |daily |or 4
 		..accept Grave Consequences##31048 |daily |or 4
@@ -17987,6 +20662,7 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.' Free 20 Cloudrider Hatchlings. |q 31046/1 |only if havequest(31046)
 		.click Shiny Egg |only if havequest(31041)
 		.get 8 Cloudrunner Egg |q 31041/1 |only if havequest(31041)
+		|only if havequest(31041) or havequest(31046) or havequest(31047)
 	step
 		goto 24.4,15.2
 		.kill 3 Shan'ze Illusionist##62440+ |q 31045/1|only if havequest(31045)
@@ -17998,8 +20674,10 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.get 4 Onyx Heart |q 31042/1 |only if havequest(31042)
 	step
 		goto 28.5,18.5
-		.from Shan'ze Serpentbinder##62293+, Shan'ze Beastmaster##62530+ |only if havequest(31105)
+		.from Shan'ze Serpentbinder##62293+, Shan'ze Beastmaster##62530+ |only if havequest(31105) or havequest(31106) or havequest (31039)
 		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31105/1 |only if havequest(31105)
+		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31106/1 |only if havequest(31106)
+		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31039/1 |only if havequest(31039)
 		.from Bronze Quilen##62266+ |only if havequest(31044)
 		.get 20 Bronze Claw##83153+ |q 31044/1 |only if havequest(31044)
 	step
@@ -18016,6 +20694,8 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.talk Fei Li##62354
 		.talk Snow Blossom##62380
 		..turnin The Mogu Menace##31105 |daily
+		..turnin The Mogu Menace##31106 |daily
+		..turnin The Mogu Menace##31039 |daily
 		..turnin Bronze Claws##31044 |daily
 		..turnin Illusions Of The Past##31045 |daily
 		..turnin Grave Consequences##31048 |daily
@@ -18090,6 +20770,7 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 		.talk Ling of the Six Pools##63614
 		..accept The Challenger's Ring: Hawkmaster Nurong##31220
 		|only if not completedq(31220)
+		|only if rep('Shado-Pan')>=Honored
 	step
 		goto 49.0,71.3
 		.talk Ling of the Six Pools##63614
@@ -18305,6 +20986,13 @@ ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
 /// Exalted Reputation
 	step
 	label end
+		goto 48.8,70.6
+		.talk Rushi the Fox##64595
+		.buy 1 Grand Commendation of the Shado-Pan##93220
+		.' Use the Commendation of the Shado-Pan you just purchased. |use Grand Commendation of the Shado-Pan##93220
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("Shado-Pan")>=Revered
+	step
 		goto 49.4,70.6
 		.talk Master Snowdrift##63009
 		..accept Mogu Incursions##31266
@@ -18593,17 +21281,14 @@ ZygorGuidesViewer:RegisterInclude("Marista_Hub",[[
 		..accept The Gratitude of Stoneplow##30628
 ]])
 ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
-		goto Vale of Eternal Blossoms 62.8,23.4
-		.talk Sage Lotusbloom##64001
-		..accept A Celestial Task##32010
+		'In order to begin gaining _Reputation_ with the _August Celestials_, you must first become Revered with the _Golden Lotus_.
+		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
+		.' Click here to begin working on the August Celestials after you have become revered with the Golden Lotus |confirm |next "startaug"
 	step
-		'You will need to earn _Revered_ with _The Golden Lotus_ before you can do these dailies.
-		.' Earn _Neutral_ Status with The Golden Lotus |condition rep("Golden Lotus")>=Neutral
-		.' Earn _Friendly_ Status with The Golden Lotus |condition rep("Golden Lotus")>=Friendly
-		.' Earn _Honored_ Status with The Golden Lotus |condition  rep("Golden Lotus")>=Honored
-		.' Earn _Revered_ Status With The Golden Lotus |condition  rep("Golden Lotus")>=Revered
+	label golden
+		#include "Golden_Lotus_Revered"
 	step
-	label start
+	label startaug
 		goto Vale of Eternal Blossoms 62.8,23.4
 		.talk Sage Lotusbloom##64001
 		.' The following quests will only be available the first time you are sent to a new area. They are random and Sage Lotusbloom will only have one at a time.
@@ -18786,13 +21471,15 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		goto The Jade Forest 53.9,61.9
 		.talk Elder Sage Tai-Feng##57324
 		..turnin Attack At The Temple of the Jade Serpent##31376 |only if havequest(31376)
-		..accept Arrows of Fortune##30065 |daily
-		..accept Hidden Power##30066 |daily
+		..accept Arrows of Fortune##30065 |daily |or
+		..accept Hidden Power##30066 |daily |or
+		..accept The Darkness Around Us##30006 |daily |or
 	step
 		goto 53.9,61.9
 		.talk Elder Sage Storm-Sing##57319
 		..accept Behind the Masks##30063 |daily
 		..accept Saving the Sutras##30064 |daily
+		'Click here if he has no quests today. |confirm
 	step
 		goto 56.5,53.6
 		.click Ancient Sutra
@@ -18809,6 +21496,11 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		|modelnpc Yu'lon Guardian##57400
 		|modelnpc Yu'lon Adept##57316
 	step
+		goto 53.4,54.2
+		.from Final Doubt##57330+, Lingering Doubt##57396+, Shadow Of Doubt##57389
+		.' Kill 15 Sha Invaders |q 30006/1
+		|only if havequest(30006)
+	step
 		goto 53.9,61.9
 		.talk Elder Sage Storm-Sing##57319
 		..turnin Behind the Masks##30063
@@ -18818,8 +21510,10 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		.talk Elder Sage Tai-Feng##57324
 		..turnin Arrows of Fortune##30065 
 		..turnin Hidden Power##30066
+		..turnin The Darkness Around Us##30006
 		..accept Flames of the Void##30068 |daily
 		..accept The Shadow of Doubt##30067 |daily
+		'Click here if he has no quests today. |confirm
 	step
 		goto 57.5,62.3
 		.kill Shadow of Doubt##57389 |q 30067/1
@@ -18843,9 +21537,7 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		.talk Elder Sage Tai-Feng##57324
 		..turnin The Shadow of Doubt##30067
 		..turnin Flames of the Void##30068
-	step
-		'Click here if you have not done dailies at The Cradle of Chi-Ji today. |confirm |next "crane"
-		'Click here if you have done dailies at The Cradle of Chi-Ji today |confirm |next "end"
+		|next "end"
 /// Temple of the White Tiger. Not giving rep for August Celstials.
 	step
 	label tiger
@@ -18946,8 +21638,28 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		..turnin Round 4: The P.U.G.##30907 |daily
 		..turnin Round 4: Master Windfur##30902 |daily
 	step
-		'Click here if you have not done dailies at The Cradle of Chi-Ji today. |confirm |next "crane"
-		'Click here if you have done dailies at The Cradle of Chi-Ji today |confirm |next "end"
+		goto Kun-Lai Summit 68.5,56.5
+		.talk Lin Tenderpaw##60981
+		..accept The Torch of Strength##31492
+		.' Click here if this quest is unavailable |confirm |next "end"
+	step
+		'For this quest you must go up the path, avoiding all of the tornadoes that roam around. If you mount, or touch a tornado, you will have to go back to Lin and start the quest over.
+		|confirm
+	step
+		goto 69.6,53.0 |n
+		.' Enter the first temple here. |goto 69.6,53.0 |noway |c
+	step
+		goto 66.9,51.2 |n
+		.' Enter the second temple here. |goto 66.9,51.2 |noway |c
+	step
+		goto 68.6,46.6
+		.' Click _The Strong Brazier_ to light it.
+		.' Light the Strong Brazier |q 31492/1
+	step
+		goto Kun-Lai Summit 68.5,56.5
+		.talk Lin Tenderpaw##60981
+		..turnin The Torch of Strength##31492
+		|next "end"
 /// Niuzao Temple. Possible unlock hub at revered.
 	step
 	label ox
@@ -19016,6 +21728,568 @@ ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		goto 38.9,62.4
 		.talk High Adept Paosha##61583
 		..turnin Paying Tribute##30955 |daily
+	step
+	label "end"
+		goto Vale of Eternal Blossoms 62.8,23.4
+		.talk Sage Lotusbloom##64001
+		.buy 1 Grand Commendation of the August Celestials##93224
+		.' Use the Commendation of the August Celestials you just purchased. |use Grand Commendation of the August Celestials##93224
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("August Celestials")>=Revered
+	step
+		'You have reached the end of this daily guide.
+		.' Click here to return to the start of the dailies. |next "startaug" |confirm
+]])
+
+ZygorGuidesViewer:RegisterInclude("Dominance_Offensive",[[
+	startlevel 90
+	step
+		'Proceeding to the Dominance Offensive Dailies  |next "dailies" |condition completedq(32108) |only if completedq(32108)
+		'Proceeding to the Dominance Offensive Prequests |next |condition not completedq(32108) |only if not completedq(32108)
+	step
+		goto Vale of Eternal Blossoms 61.5,19.8
+		'Click the quest discovered box under your minimap.
+		..accept Meet the Scout##32249
+	step
+		goto Krasarang Wilds 8.7,64.4
+		.talk Scout Rokla##67812
+		..turnin Meet the Scout##32249
+	step
+		goto Krasarang Wilds 8.7,64.4
+		.talk Garrosh Hellscream##62092
+		..accept The Might of the Warchief##32250
+	step
+		goto Krasarang Wilds 10.0,64.1
+		.from Alliance Sentinel##67900+, Alliance Footman##+, Alliance Priest##+
+		..' Kill 25 Alliance troops |q 32250/1
+	step
+		goto Krasarang Wilds 10.7,53.2
+		.talk Blood Guard Gro'tash##67927
+		..' Find Blood Guard Gro'tash |q 32250/2
+	step
+		goto Krasarang Wilds 15.7,57.8
+		.talk Grizzle Gearslip##67926
+		..' Find Grizzle Gearslip |q 32250/3
+	step
+		'Next to you
+		.talk Garrosh Hellscream##62092
+		..turnin The Might of the Warchief##32250
+		..accept Domination Point##32108
+	step
+		goto 8.5,63.8
+		.click Signal Fire
+		..turnin Domination Point##32108
+	step
+		goto Krasarang Wilds 9.7,52.5
+		.talk Kromthar##67785
+		.fpath Domination Point
+	step
+	label "dailies"
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..accept The Ruins of Ogudei##32449 |daily |or |next "ogudei"
+		..accept The Time is Now!##32450 |daily |or |next "lion"
+		..accept Flash! Aaaaaahhhh!##32235 |daily |or |next
+		.' If no quests are available, click here |confirm |next "cave"
+	step
+		goto Krasarang Wilds 10.2,53.6
+		.talk Brolic##67767
+		..accept Tear It Up##32126 |daily
+	step
+		goto Krasarang Wilds 10.3,55.6
+		.talk Shokia##56411
+		..accept Death on Two Legs##32123 |daily
+	step
+		goto Krasarang Wilds 11.8,57.6
+		.' Fly up in the air and throw your Bilgewater Molotovs at the Skyfire Gyrocopter X2s |use The Bilgewater Molotov##92019
+		.' Kill 6 Skyfire Gyrocopter X2s |q 32235/1
+	step
+		goto Krasarang Wilds 8.1,61.3
+		.click Alliance Supply Drop
+		.' Destroy 8 Alliance Supply Drops |q 32126/1
+	step
+		goto 9.9,64.2
+		.from Shieldwall Marine##+, Shieldwall Stormcaller##+,
+		.' Kill 10 Alliance Troops |q 32123/1
+	step
+		goto Krasarang Wilds 10.3,55.6
+		.talk Shokia##56411
+		..turnin Death on Two Legs##32123
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..turnin Tear It Up##32126
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Flash! Aaaaaahhhh!##32235
+		..accept Another One Bites the Dust##32128 |daily
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..accept All Dead, All Dead##32127 |daily
+	step
+		goto Krasarang Wilds 12.7,75.8
+		.from Captain Brent the Black##+ |tip On the second floor of the ship, towards the back.
+		..kill Captain Brent the Black |q 32127/1
+	step
+		goto Krasarang Wilds 12.3,75.6
+		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
+		.' Destroy the Defiant ammunition |q 32128/2
+	step
+		goto Krasarang Wilds 15.0,76.4
+		.from Captain Mulkey##+ |tip On the second floor of the ship, towards the back.
+		..kill Captain Mulkey |q 32127/2
+	step
+		goto Krasarang Wilds 15.1,76.6
+		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
+		.' Destroy the Valor's Edge ammunition |q 32128/1
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Another One Bites the Dust##32128
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..turnin All Dead, All Dead##32127
+		|next "end"
+	step
+	label "cave"
+		goto Krasarang Wilds 12.8,56.8
+		.click Bounty Board
+		..accept Wanted: Lieutenant Ethan Jacobson##32223 |daily |or
+		..accept Wanted: Chief Engineer Cogwrench##32222 |daily |or
+	step
+		goto Krasarang Wilds 13.0,56.2
+		.talk Rivett Clutchpop##67608
+		..accept Storming the Beach##32221 |daily |or
+		..accept Bilgewater Infiltrators##32214 |daily |or
+	step
+		goto Krasarang Wilds 13.7,55.8
+		.talk Duke##67562
+		..accept Krasarang Steampot##32199 |daily |or
+		..accept Mystery Meatloaf##32197 |daily |or
+	step
+		goto Krasarang Wilds 13.7,55.8
+		.talk Boss-Lady Trixel##67535
+		..accept Work Order: Iron##32140 |daily |or
+		..accept Work Order: Fuel##32136 |daily |or
+		..accept Work Order: Lumber##32138 |daily |or
+	step
+		goto Krasarang Wilds 9.9,60.8
+		.' Use the "New" and "Improved" Infared Heat Focals in your bags. |use "New" and "Improved" Infared Heat Focals##92475
+		.from SI:7 Saboteur##67689+
+		.' Kill 10 SI:7 Saboteurs |q 32214/1
+		|only if havequest(32214)
+	step
+		goto Krasarang Wilds 17.7,54.7
+		.from Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
+		.collect 5 Polluted Viseclaw Meat##91869 |q 32199/1
+		|only if havequest(32199)
+	step
+		goto Krasarang Wilds 15.9,65.1
+		.from Mature Terrapin##67895+, Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
+		.collect 7 Chunk of Mystery Meat##91874 |q 32197/1
+		|only if havequest(32197)
+	step
+		goto Krasarang Wilds 19.0,71.0
+		..kill Lieutenant Ethan Jacobson##68028 |q 32223/1
+		|only if havequest(32223)
+	step
+		 goto Krasarang Wilds 21.6,51.2
+		 ..kill Chief Engineer Cogwrench##68012 |q 32222/1
+		 |only if havequest(32222)
+	step
+		goto Krasarang Wilds 18.8,68.2
+		.from Shieldwall Marine##67354+
+		.from Dwarven Mortar Team Engineer##67545+
+		.from Shieldwall Stormcaller##67425+
+		.' Kill 10 Shieldwall Forces |q 32221/1
+		|only if havequest(32221)
+	step
+		goto Krasarang Wilds 20.5,58.1
+		.talk Zino "The Shredder" Quickchop##67534
+		..turnin Work Order: Lumber##32138
+		..accept Stacked!##32139
+		|only if havequest(32138) or completedq(32138)
+	step
+		goto Krasarang Wilds 22.6,62.3
+		.talk Daxil "The Gem" Oregrind##67537
+		..turnin Work Order: Iron##32140
+		..accept Power Metal##32141 |daily
+		|only if havequest(32140) or completedq(32140)
+	step
+		goto Krasarang Wilds 25.5,60.4
+		.talk Grizzle Gearship##67542
+		..turnin Work Order: Fuel##32136
+		..accept Runnin' On Empty##32137
+		|only if havequest(32136) or completedq(32136)
+	step
+		goto Krasarang Wilds 20.6,58.1
+		.talk Bixy Buzzsaw##67533
+		..accept Universal Remote-Explode##32238
+		|only if completedq(32238)
+	step
+		goto Krasarang Wilds 25.3,60.4
+		.talk Bixy Buzzsaw##67553
+		..accept Precious Resource##32237
+		|only if completedq(32136)
+	step
+		goto Krasarang Wilds 22.4,62.2
+		.talk Bixy Buzzsaw##67553
+		..accept Bug Off!##32236 |daily
+		|only if completedq(32140)
+	step
+		goto Krasarang Wilds 20.2,60.7
+		.click Domination Point Lumber## |only if havequest(32139)
+		.collect 9 Domination Point Lumber |q 32139/1 |only if havequest(32139)
+		'Use your Universal Remote on Shieldwall Mecha-Pounders to weaken them. |use Universal Remote##91902 |only if havequest(32238)
+		.kill Shieldwall Mecha-Pounder##68011 |q 32238/1 |only if havequest(32238)
+		|only if havequest(32139) or havequest(32238)
+	step
+		goto Krasarang Wilds 23.5,56.4
+		.click Fauly Valve
+		.' Tighten 8 Faulty Valves |q 32237/1
+		|only if havequest(32237)
+	step
+		goto Krasarang Wilds 26.5,63.2
+		.click "Distilled" Fuel Barrel
+		..get 9 "Distilled" Fuel Barrel |q 32137/1
+		|only if havequest(32137)
+	step
+		goto Krasarang Wilds 19.9,62.5
+		'Use your Hand-Dandy Bug Off Sprayer on _Agitated Shale Spiders_ to spawn Shale Shards |use Hand-Dandy Bug Off Sprayer##93026 |only if havequest(32236)
+		.' Spray 5 Agitated Shale Spiders |q 32236/1 |only if havequest(32236)
+		.kill 12 Shale Shards##68653+ |q 32236/2 |only if havequest(32236)
+		'Click _Energized Iron_ deposits on the sides of the cave to spawn Energized Iron Ore Chunks. |only if havequest(32141)
+		.click Energized Iron Ore Chunk |only if havequest(32141)
+		.get 7 Energized Iron Ore Chunk |q 32141/1 |only if havequest(32141)
+		|modelnpc Agitated Shale Spider##67759 |only if havequest(32236)
+		|only if havequest(32236) or havequest(32141)
+	step
+		goto Krasarang Wilds 20.6,58.1
+		.talk Bixy Buzzsaw##67533
+		..accept Universal Remote-Explode##32238
+		|only if havequest(32238)
+	step
+		goto Krasarang Wilds 20.5,58.1
+		.talk Zino "The Shredder" Quickchop##67534
+		..turnin Stacked!##32139
+		|only if havequest(32139)
+	step
+		goto Krasarang Wilds 22.4,62.2
+		.talk Bixy Buzzsaw##67553
+		..turnin Bug Off!##32236 
+		|only if havequest(32236)
+	step
+		goto Krasarang Wilds 25.3,60.4
+		.talk Bixy Buzzsaw##67553
+		..turnin Precious Resource##32237
+		|only if havequest(32237)
+	step
+		goto Krasarang Wilds 26.0,58.1
+		.talk Sezik Steampot##67536
+		..turnin Krasarang Steampot##32199 |only if havequest(32199)
+		..turnin Mystery Meatloaf##32197 |only if havequest(32197)
+		|only if havequest(32199) or havequest(32197)
+	step
+		goto Krasarang Wilds 13.8,55.9
+		.talk Boss-Lady Trixel##67535
+		..turnin Power Metal##32141 |only if havequest(32141)
+		..turnin Runnin' On Empty##32137 |only if havequest(32137)
+		|only if havequest(32137) or havequest(32141)
+	step
+		goto Krasarang Wilds 13.0,56.1
+		.talk Rivett Clutchpop##67608
+		..turnin Storming the Beach##32221 |only if havequest(32221)
+		..turnin Bilgewater Infiltrators##32214 |only if havequest(32214)
+		|only if havequest(32214) or havequest(32221)
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Wanted: Lieutenant Ethan Jacobson##32223 |only if havequest(32223)
+		..turnin Wanted: Chief Engineer Cogwrench##32222 |only if havequest(32222)
+		|next "end"
+	step
+	label "lion"
+		goto Krasarang Wilds 75.9,34.4
+		.talk Shademaster Kiryn##67628
+		..turnin The Time is Now!##32450
+		..accept Hero Killer##32135 |daily
+		..accept Worker Harassment##32132 |daily
+		..accept Sentry Wards##32133 |daily
+	step
+		goto Krasarang Wilds 75.9,34.2
+		.talk Zazzix "Toasty" Sparkrocket##67402
+		..accept Good Luck, Have Fun##32130 |daily |or 2
+		..accept We Require More Minerals!##32131 |daily |or 2
+		..accept Hard Counter##32134 |daily |or 2
+	step
+		goto Krasarang Wilds 81.8,25.4
+		.from Thane Stonehearth##67636 |q 32135/1
+		|only if havequest(32135)
+	step
+		goto Krasarang Wilds 86.2,25.6
+		.click Town Hall Sentry Ward Location
+		.' Place the Sentry Ward in Town Hall |q 32133/1
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 86.1,33.1
+		.click Docks Sentry Ward Location
+		.' Place the Sentry Ward on the docks |q 32133/2
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 84.9,32.5
+		.kill 8 Dwarven Mortar Team Engineer##67545+ |q 32134/1
+		.kill 2 Dwarven Mortar Tube##67541+ |q 31234/2
+		|only if havequest(31234)
+	step
+		goto Krasarang Wilds 87.1,30.9 |n
+		.' Enter the Barracks here |goto Krasarang Wilds 87.1,30.9 |noway |c
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 87.7,32.7
+		.click Barracks Sentry Ward Location
+		.' Place the Sentry Ward in the Barracks |q 32133/3
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 84.2,22.9
+		.from Shieldwall Peasant##67423+
+		..' Kill 30 Shieldwall Peasant |q 32132/1
+		|only if havequest(32132)
+	step
+		goto Krasarang Wilds 78.2,18.3
+		.from Shieldwall Engineer##67971
+		.click Animatable Stone
+		.collect 20 Animatable Stone##91823 |q 32131/1
+		|only if havequest(32131)
+	step
+		goto Krasarang Wilds 81.4,25.7
+		.from Shieldwall Footman##67304
+		.collect 10 Extra-Waxy Alliance Ears##92474 |q 32130/1
+		|only if havequest(32130)
+	step
+		goto Krasarang Wilds 75.9,34.2
+		.talk Zazzix "Toasty" Sparkrocket##67402
+		..turnin Good Luck, Have Fun##32130
+		..turnin We Require More Minerals!##32131
+		..turnin Hard Counter##32134
+	step
+		goto Krasarang Wilds 75.9,34.4
+		.talk Shademaster Kiryn##67628
+		..turnin Hero Killer##32135
+		..turnin Worker Harassment##32132
+		..turnin Sentry Wards##32133
+		|next "end"
+	step
+	label "ogudei"
+		goto Krasarang Wilds 76.3,34.1
+		.talk Belloc Brightblade##67847
+		..turnin The Ruins of Ogudei##32449
+		..accept Taking Advantage##32118 |daily
+	step
+		goto Krasarang Wilds 76.2,34.0 |n
+		'Click the portal to go to the Ruins of Ogudei |goto Krasarang Wilds/3 37.4,46.4,0.5
+		|only if havequest(32118)
+	step
+		goto Krasarang Wilds/3 36.1,42.1
+		.talk Kaelis Sunsoar##68274
+		..turnin Taking Advantage##32118
+	step
+		goto Krasarang Wilds/3 36.1,42.1
+		.talk Kaelis Sunsoar##68274
+		..accept The Spirit Trap##32342 |daily
+		..accept It Is A Mystery##32344 |daily
+		..accept Legacy of Ogudei##32120 |daily
+		..accept Ogudei's Lieutenants##32343 |daily
+		..accept Kick 'em While They're Down##32348 |daily
+	step
+		goto Krasarang Wilds/3 78.6,44.2 |n
+		.' Go up the path here. |goto Krasarang Wilds/3 78.6,44.2 |noway |c
+	step
+		'Walk around this cave and pay attention to your Anamoly Reader above your actionbars. This quest is like a "Hot & Cold" game, where the closer you get, the greater anamoly reading you get. Once you have 100%, you will automatically disperse the anamoly.
+		.' Disperse the anamoly |q 32344/1
+		|only if havequest(32344)
+	step
+		goto Krasarang Wilds/2 55.5,53.7
+		.from Spiritbound Brutalizer##68073+
+		.from Spiritbound Arcanist##68070+
+		.collect 5 Ancient Mogu Essence##92704 |q 32120/1
+		|only if havequest(32120)
+	step
+		goto Krasarang Wilds/2 74.1,29.7
+		.from Spirit Trap##68061+
+		..get 3 Spirit Trap |q 32342/1
+		|only if havequest(32342)
+	step
+		goto Krasarang Wilds/2 67.8,80.3
+		.from Gen-li, Twister of Words##68169+
+		.from Meng-do, Strength of Mountains##68170+
+		..collect Gen-Li's Essence##92736 |q 32343/1
+		..collect Meng-do's Essence##92735 |q 32343/1
+	step
+		goto Krasarang Wilds/2 56.7,38.7 |n
+		.' Go up the stairs here. |goto Krasarang Wilds/2 56.7,38.7 |noway |c
+	step
+		goto Krasarang Wilds/1 59.3,37.3
+		.from Shieldwall Footman##67304+, Shieldwall Rifleman##1761+, Lion's Landing Guard Captain##2774+
+		.' Kill 12 Lion's Landing Military |q 32348/1
+	step
+		goto Krasarang Wilds/3 36.2,41.2
+		.talk Kaelis Sunsoar##68274
+		..turnin The Spirit Trap##32342
+		..turnin It Is A Mystery##32344
+		..turnin Legacy of Ogudei##32120
+		..turnin Ogudei's Lieutenants##32343
+		..turnin Kick 'em While They're Down##32348
+		|next "end"
+	step
+	label "end"
+		'This is the end of this guide.
+		.' Click here to return to the beginning of the dailies |confirm |next "dailies"
+]])
+
+ZygorGuidesViewer:RegisterInclude("Sturdy_Traps",[[
+	startlevel 90
+	step
+		'This guide will take you through the bonus quests for the Dominance Offensive.
+		'These quests do not offer any reputation, but they do offer Valor Points and the Lesser Charms of Good Fortune.
+		|confirm
+	step
+	label "menu"
+		'Click here to go purchase and accept the Sturdy Tiger Trap questline. |confirm |next "tiger"
+		.'_
+		'Click here to go purchase and accept the Sturdy Crane Snare questline. |confirm |next "crane"
+		.'_
+		'Click here to go purchase and accept the Sturdy Crab Crate questline. |confirm |next "crab"
+	step
+	label "tiger"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Tiger Trap##91822
+	step
+		'Click the _Sturdy Tiger Trap_ in your bags. |use Sturdy Tiger Trap##91822
+		..accept Beastmaster's Hunt: The Tiger##32162
+	step
+		goto Dread Wastes 51.6,67.4
+		.from Wasteland Yak##66549+, Wasteland Calf##66595
+		.collect 25 Unbruised Yak Haunch##91816 |q 32162/1
+	step
+		goto Krasarang Wilds 13.9,41.4
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Tiger##32162
+	step
+		goto Krasarang Wilds 13.8,41.2
+		.clicknpc Krasari Elder##67556
+		..accept Beastmaster's Quarry: The Tiger##32182
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Tiger##32182
+		|next "group"
+	step
+	label "crab"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Crab Crate##91822
+	step
+		'Click the _Sturdy Crab Crate_ in your bags. |use Sturdy Crab Crate##91822
+		..accept Beastmaster's Hunt: The Crab##32163
+	step
+		goto Krasarang Wilds 45.2,91.6
+		.from Unga Villager##60358+
+		..get 30 Funky Rotten Fish |q 32163/1
+	step
+		goto Krasarang Wilds 56.3,42.1
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Crab##32163
+	step
+		goto Krasarang Wilds 56.4,42.1
+		.click Captured Colossal Viseclaw
+		..accept Beastmaster's Quarry: The Crab##32183
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Crab##32183
+		|next "group"
+	step
+	label "crane"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Crane Snare##91819
+	step
+		'Click the _Sturdy Crane Snare_ in your bags. |use Sturdy Crane Snare##91819
+		..accept Beastmaster's Hunt: The Crane##32161
+	step
+		goto Krasarang Wilds/0 34.5,71.2
+		.from Child of Chi-Ji##60616+
+		..get 5 Pristine Golden Crownfeather |q 32161/1
+	step
+		goto Krasarang Wilds/0 73.2,44.6
+		.from Great Crane##59763+
+		..get Pristine Jet Crownfeather##91815 |q 32161/2
+	step
+		goto Krasarang Wilds 56.3,42.1
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Crane##32161
+	step
+		goto Krasarang Wilds 56.4,42.1
+		.click Ancient Bloodcrown Crane##
+		..accept Beastmaster's Quarry: The Crane##32181
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Crane##32181
+		|next "group"
+	step
+	label group
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.' The dailies you have completed will determine which enemies are available to you to fight.
+		.' Click here to fight the _Ancient Bloodcrown Crane_. |confirm |next bc
+		.' Click here to fight the _Krasari Elder_. |confirm |next ke
+		.' Click here to fight the _Colossal Viseclaw_. |confirm |next cv
+	step
+	label bc
+		.' Tell him you would like to fight the Bloodcrown Crane.
+		.' During the fight, pay attention to the songs that it uses.
+		.' Some can be interrupted while others simply need to be avoided.
+		.from Ancient Bloodcrown Crane##67555
+		..accept Ancient's Fall##32167
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.turnin Ancient's Fall##32167
+		|next "end"
+	step
+	label ke
+		.' Tell him you would like to fight the Krasari Elder.
+		.' During the fight, you will want to stay close to it at _ALL TIMES_.
+		.' It will occassionally vanish, if you have a hunter simply put a flare out.
+		.from Krasari Elder##67556
+		..accept End of an Elder##32168
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.turnin End of an Elder##32168
+		|next "end"
+	step
+	label cv
+		.' Tell him you would like to fight the Colossal Viseclaw.
+		.' During the fight, you will want to kite him around.
+		.' He will have a damage reduction buff that decreases while he moves.
+		.' If it reaches _0_, the buff will reset.
+		.from Colossal Viseclaw##67508
+		..accept A Colossal Victory##32169
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin A Colossal Victory##32169
+		|next "end"
+	step
+	label end
+		'You have reached the end of the guide.
+		.' Click here to go back to the beginning of the Traps guide. |next "menu"
 ]])
 
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -19162,6 +22436,8 @@ ZygorGuidesViewer:RegisterInclude("vendor_Fishing",[[
 ]])
 
 ZygorGuidesViewer:RegisterInclude("vendor_Enchanting",[[
+		goto Orgrimmar 53.3,48.9
+		.talk Kithas##3346
 ]])
 
 ZygorGuidesViewer:RegisterInclude("vendor_Skinning",[[
@@ -19190,6 +22466,19 @@ ZygorGuidesViewer:RegisterInclude("auctioneer_dalaran",[[
 		.talk Brassbolt Mechawrench##35594
 ]])
 
+ZygorGuidesViewer:RegisterInclude("shatt_auctioneer",[[
+		goto Shattrath City,51.0,26.5 |only if rep ('The Aldor') >= Neutral
+		.talk Auctioneer Itoran##50143 |only if rep ('The Aldor') >= Neutral
+		goto Shattrath City,57.0,63.2 |only if rep ('The Scryers') >= Friendly
+		.talk Auctioneer Kalaren##50139|only if rep ('The Scryers') >= Friendly
+]])
+
+ZygorGuidesViewer:RegisterInclude("goto_shatt_auctioneer",[[
+		goto Shattrath City,51.0,26.5 |only if rep ('The Aldor') >= Neutral
+		.talk Auctioneer Itoran##50143 |only if rep ('The Aldor') >= Neutral
+		goto Shattrath City,57.0,63.2 |only if rep ('The Scryers') >= Friendly
+		.talk Auctioneer Kalaren##50139|only if rep ('The Scryers') >= Friendly
+]])
 --------------------------------------------------------------------------------------------------------------------------------------
 -- Anvils
 --------------------------------------------------------------------------------------------------------------------------------------

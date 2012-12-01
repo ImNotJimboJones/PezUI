@@ -111,7 +111,7 @@ function Guide:GetCompletion()
 		if not self.startlevel or not self.endlevel then return "error","no starting/ending level set" end
 		return min(1,max(0,(ZGV:GetPlayerPreciseLevel()-self.startlevel)/(self.endlevel-self.startlevel)))
 	elseif mode=="quests" then
-		if not next(ZGV.completedQuests) then return "loading","waiting for quest data to arrive from server" end
+		--if not next(ZGV.completedQuests) then return "loading","waiting for quest data to arrive from server" end
 		local quests = self:GetQuests()
 		local count,comp = 0,0
 		for qid,step in pairs(quests) do
@@ -257,7 +257,7 @@ function Guide:GetQuests()
 end
 
 ------- hello popup
---[[ Goodbye popup
+
 StaticPopupDialogs['ZYGORGUIDESVIEWER_NEXTGUIDE'] = {
 	text = L['static_caption']..L['static_nextguide'],
 	button1 = ACCEPT,
@@ -268,7 +268,6 @@ StaticPopupDialogs['ZYGORGUIDESVIEWER_NEXTGUIDE'] = {
 	OnAccept = function(self) ZGV:SetGuide(self.guide) end,
 	OnCancel = function(self) ZGV.db.char.ignoredguides[self.guide.title]=true  end,
 }
---]]
 
 StaticPopupDialogs['ZYGORGUIDESVIEWER_BADGUIDE'] = {
 	text = L['static_caption']..L['static_badguide'],
@@ -288,13 +287,27 @@ function Guide:AdvertiseWithPopup(nodelay)
 	if delay and ZGV:IsPlayerInCombat() then
 		ZGV.call_after_combat = function() self:AdvertiseWithPopup(true) end
 		ZGV:Print("Next guide is ready. Just finish your combat.")
-	else
+	elseif ZGV.Popup then
 		local dialog = ZGV.Popup:CreatePopup()
 
-		local image = self.image and L['static_image']:format(self.image)
+		if self.image then
+			dialog.tex = CHAIN(dialog:CreateTexture()) 
+				:SetPoint("TOP",dialog.text2,"BOTTOM",0,-3) :SetSize(275,115) :SetTexture(self.image)
+			.__END
 
-		if image then dialog:SetText(L['static_nextguide2'],self.title_short..image)
-		else dialog:SetText(L['static_nextguide2'],self.title_short) end
+			dialog.AdjustSize = function(self)
+				local offsets = 10 + 10 + 5 --Logo and top + text and buttons + buttons and bottom
+				self:SetHeight(offsets + self.tex:GetHeight() + self.text:GetStringHeight() + self.text2:GetStringHeight() + self.logo:GetHeight() + self.acceptbutton:GetHeight() )
+				--String width is 300, so max width is 350
+			end
+		end
+		
+		--local image = self.image and L['static_image']:format(self.image)
+
+		--if image then dialog:SetText(L['static_nextguide2'],self.title_short..image)
+		--else dialog:SetText(L['static_nextguide2'],self.title_short) end
+
+		dialog:SetText(L['static_nextguide2'],self.title_short)
 
 		dialog.AcceptFunc = function(self) ZGV:SetGuide(self.guide) end
 		dialog.DeclineFunc = function(self) ZGV.db.char.ignoredguides[self.guide.title]=true  end
@@ -303,25 +316,43 @@ function Guide:AdvertiseWithPopup(nodelay)
 		dialog.guide=self
 
 		dialog:Show()
+	else
+		local dialog = StaticPopup_Show('ZYGORGUIDESVIEWER_NEXTGUIDE',self.title_short)
+		dialog.guide=self
 	end
 end
 
+--TODO make sure this isn't redundant a bit inside
 function Guide:GetFirstValidStep(start)
 	if not self.fully_parsed then return end
-	local first = self.steps[start or 1]
-	assert(first,"no steps?? what the hell?")
-	if first:AreRequirementsMet() or ZGV.db.profile.showwrongsteps then return first end
-	local firstvalid = first:GetNextValidStep()
-	if not firstvalid then
+	start=start or 1
+	local startstep = self:GetStep(start)
+	if start~=1 and not startstep then return self:GetFirstValidStep(1) end
+	assert(startstep,"GetFirstValidStep: no starting step at 1?? what the hell??")
+
+	-- starting step is good?
+	if startstep:AreRequirementsMet() or ZGV.db.profile.showwrongsteps then return startstep end
+
+	-- no? let's go forward...
+	local nextvalid = startstep:GetNextValidStep()
+	if nextvalid then return nextvalid end
+
 		-- uh-oh! Either we started on an invalid step and there are only invalids to the end... or something went very wrong.
-		assert(start>1,"The guide has NO valid steps!")
-		first = self.steps[1]
-		if first:AreRequirementsMet() then return first end
-		firstvalid = first:GetNextValidStep()
-		assert(firstvalid,"The guide has NO valid steps! (after retry at start)")
-		ZGV:Print("No valid steps past "..start.." found. Restarting guide at step 1.")
-	end
-	return firstvalid  -- always returns something, or breaks.
+	-- hopefully the FIRST step is good?
+	--assert(start>1,"The guide has NO valid steps!?")
+	if start~=1 then return self:GetFirstValidStep(1) end  -- restart at 1, maybe that helps
+
+	return self.steps[1]  -- always returns something, or breaks.
+
+	--assert(nextvalid,"The guide has NO valid steps! (after retry at start)")
+	--ZGV:Print("No valid steps past "..start.." found. Restarting guide at step 1.")
+end
+function Guide:GetStep(num_or_label)
+	if not self.steps or not self.steplabels then return end
+	num_or_label = self.steplabels[num_or_label] or tonumber(num_or_label)
+	if type(num_or_label)=="table" then num_or_label=num_or_label[1] end
+	--num_or_label = max(1,min(#self.steps, num_or_label))
+	return self.steps[num_or_label]
 end
 
 function Guide:AskReload() --reload after a panda has choosen a faction.
@@ -493,7 +524,7 @@ function Guide:IsDungeon()
 		 or not dung then --have not been to this dungeon yet.
 
 			for i,guide in ipairs(ZGV.registeredguides) do
-				if guide.dungeon and guide.dungeon == map then
+				if guide.dungeon and guide.dungeon == map and (not guide.dungeondifficulty or guide.dungeondifficulty==GetDungeonDifficultyID()) then
 					if ZGV.db.char.guidename==guide.title then break end --If they already have the guide loaded.
 					Guide:SuggestDungeonGuide(i,map)
 					break

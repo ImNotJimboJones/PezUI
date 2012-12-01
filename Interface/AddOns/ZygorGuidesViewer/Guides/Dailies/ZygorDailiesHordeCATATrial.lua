@@ -254,13 +254,13 @@ goto 16.4,80.3
 .' Click the Element 115 in the back room of the ship|tip It looks like a red canister with a handle on the top
 ..collect Element 115##37664|q 12432
 step
-  goto 21.4,84.5
+goto 21.4,84.5
 .' On the next step you will guide a rocket into this Alliance lumber boat
 .' Your target will be the wooden X on the side
 .' Go to 13.6,88.9
 .' You will want to use your keys, not your mouse, to guide the rocket
 .' Avoid icebergs or the rocket will explode and you will have to start over
-.' Click a red rocket to take control of one|invehicle|c|q 12432	
+.' Click a red rocket to take control of one|invehicle|c|q 12432
 step
 goto 9.6,79.1
 .' Hit the wooden X on the back of the Alliance Lumber boat
@@ -284,24 +284,22 @@ goto 10.1,77.2
 .talk 27532
 ..turnin 12315
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Quests",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Quests",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the quests for the Brewfest event.
-condition suggested isevent('Brewfest')
-step
-#include "H_Brewfest_Quests"
+description This guide section will walk you through completing the quests for the Hallow's End event.
+condition suggested isevent("Hallow's End")
+#include "Hallows_End_Quests_Horde"
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Dailies",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Dailies",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the daily quests for the Brewfest event.
-condition suggested isevent('Brewfest')
-step
-#include "H_Brewfest_Dailies"	
+description This guide section will walk you through completing the daily quests for the Hallow's End event.
+condition suggested isevent("Hallow's End")
+daily
+#include "Hallows_End_Dailies_Horde"
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Brewfest (September 20th - October 6th)\\Brewfest Achievements",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Events Guides\\Hallow's End (October 18th - October 31st)\\Hallow's End Achievements",[[
 author support@zygorguides.com
-description This guide section will walk you through completing the achievements for the Brewfest event.
-condition suggested isevent('Brewfest')
-step
-#include "H_Brewfest_Achievements"
+description This guide section will walk you through completing the achievements for the Hallow's End event.
+condition suggested isevent("Hallow's End")
+#include "Hallows_End_Achievements_Horde"
 ]])

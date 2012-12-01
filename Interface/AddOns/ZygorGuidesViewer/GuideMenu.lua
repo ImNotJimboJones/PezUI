@@ -1166,8 +1166,13 @@ function Menu:NavigateTo(path)
 		self:Hide()
 		return
 	elseif path and path:find("^PETSMOUNTS\\Pets")then
-		if not PetJournal:IsVisible() then ToggleFrame(PetJournalParent) PetJournalParentTab2:Click() end
-		self:Hide()
+		if (not PetJournalParent) then
+			PetJournal_LoadUI()
+		end
+		if PetJournal then
+			if not PetJournal:IsVisible() then TogglePetJournal(2) end
+			self:Hide()
+		end
 		return
 	end
 	self.path = path

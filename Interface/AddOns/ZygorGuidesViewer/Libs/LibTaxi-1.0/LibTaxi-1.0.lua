@@ -120,8 +120,8 @@ do
 	Lib.frame:RegisterEvent("UI_INFO_MESSAGE")
 	Lib.frame:RegisterEvent("ADDON_LOADED")
 	Lib.frame:RegisterEvent("UPDATE_FACTION")
-	Lib.frame:RegisterEvent("PLAYER_CONTROL_LOST")
-	Lib.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
+	--Lib.frame:RegisterEvent("PLAYER_CONTROL_LOST")
+	--Lib.frame:RegisterEvent("PLAYER_CONTROL_GAINED")
 	Lib.frame:SetScript("OnEvent", onEvent)
 
 	--- Gets all the known flight paths, in current locale.
@@ -207,6 +207,14 @@ do
 			['Darkshore']={
 				{name="Grove of the Ancients",faction="A",npc="Delanea",npcid=33253,x=44.4,y=75.5},
 				{name="Lor'danel",faction="A",npc="Teldira Moonfeather",npcid=3841,x=51.7,y=17.6},
+				--BlackCats
+				--name needs to be like that to connect a taxi tag. extitle can not be title b/c then only title gets put on the Pointer
+				{name="Darkshire Cat 1",extitle="Lor'danel",faction="A",npc="Nightsaber Rider",npcid=33359,x=52.2,y=22.3,tag="blackcat"},
+				{name="Darkshire Cat 2",extitle="Lor'danel",faction="A",npc="Nightsaber Rider",npcid=33359,x=51.0,y=22.7,tag="blackcat"},
+				{name="Darkshire Cat 3",extitle="Ruins of Mathystra",faction="A",npc="Nightsaber Rider",npcid=33359,x=58.6,y=20.0,tag="blackcat"},
+				{name="Darkshire Cat 4",extitle="Shatterspear Vale",faction="A",npc="Nightsaber Rider",npcid=33359,x=69.1,y=18.9,tag="blackcat"},
+				{name="Darkshire Cat 5",extitle="Bashal'Aran",faction="A",npc="Nightsaber Rider",npcid=33359,x=46.9,y=33.2,tag="blackcat"},
+			
 			},
 			['Darnassus']={
 				{name="Darnassus",faction="A",npc="Leora",npcid=40552,x=36.6,y=47.8},
@@ -652,22 +660,24 @@ do
 				{name="Serpent's Overlook",faction="B",npc="Sky Dancer Ji",npcid=64310,x=43.1,y=68.5,available=function() return GetSpellInfo(GetSpellInfo(115916) or 0) end},
 				{name="Paw'Don Village",faction="A",npc="Wing Kyo",npcid=487,x=46.0,y=85.1},
 				{name="Pearlfin Village",faction="A",npc="Ut-Nam",npcid=56737,x=58.0,y=82.5},
-				{name="Honeydew Village",faction="H",npc="Wing Hya",npcid=691,x=28.1,y=15.6}, -- quest 31770?
-				{name="Grookin Hill",faction="H",npc="Grookin Flapmaster",npcid=60952,x=27.8,y=47.9}, --quest 29936?
+				{name="Honeydew Village",faction="H",npc="Wing Hya",npcid=691,x=28.1,y=15.6},
+				{name="Grookin Hill",faction="H",npc="Grookin Flapmaster",npcid=60952,x=27.8,y=47.9},
 			},
 			['Krasarang Wilds']={
 				{name="Zhu's Watch",faction="B",npc="Gee Hung",npcid=60232,x=76.7,y=8.4},
 				{name="Thunder Cleft",faction="H",npc="Lira Skysplitter",npcid=59046,x=59.2,y=24.6},
 				{name="Dawnchaser Retreat",faction="H",npc="Munch Windhoof",npcid=59047,x=29.0,y=50.3},
+				{name="Domination Point",faction="H",npc="Kromthar",npcid=2249,x=9.7,y=52.5},
 				{name="Marista",faction="B",npc="Nan-Po",npcid=60441,x=52.4,y=76.6},
 				{name="The Incursion",faction="A",npc="Tylen Moonfeather",npcid=59049,x=67.8,y=32.5},
 				{name="Sentinel Basecamp",faction="A",npc="Maylen Moonfeather",npcid=59048,x=25.2,y=33.5},
+				{name="Lion's Landing",faction="A",npc="Daggin Windbeard",npcid=2690,x=88.3,y=34.7},
 				{name="Cradle of Chi-Ji",faction="B",npc="Feather Keeper Li",npcid=65189,x=31.1,y=63.2},
 			},
 			['Valley of the Four Winds']={
 				{name="Pang's Stead",faction="B",npc="Princeton",npcid=60230,x=84.5,y=21.1},
 				{name="Grassy Cline",faction="B",npc="Kim of the Mountain Winds",npcid=62658,x=70.8,y=24.1},
-				{name="Halfhill",faction="B",npc="Wing Nga",npcid=60231,x=53.8,y=50.9},
+				{name="Halfhill",faction="B",npc="Wing Nga",npcid=60231,x=56.5,y=50.4},
 				{name="Stoneplow",faction="B",npc="\"Dragonwing\" Dan",npcid=58843,x=20.3,y=58.7},
 			},
 			['Vale of Eternal Blossoms']={
@@ -706,6 +716,42 @@ do
 	}
 	Lib.flightcost = {
 		[1] = {
+			["001:001"] = {
+				["name"] = "Darkshire Cat 1, Darkshore",  --Lor'danel, Darkshore
+				--["taxioperator"] = "blackcat",
+				["neighbors"] = {
+					["003:003"] = 50, --Ruins of Mathystra, Darkshore
+				},
+			},
+			["002:002"] = {
+				["name"] = "Darkshire Cat 2, Darkshore",  --Lor'danel, Darkshore
+				--["taxioperator"] = "blackcat",
+				["neighbors"] = {
+					["005:005"] = 53, --Bashal'Aran, Darkshore
+				},
+			},
+			["003:003"] = {
+				["name"] = "Darkshire Cat 3, Darkshore", --Ruins of Mathystra, Darkshore
+				--["taxioperator"] = "blackcat",
+				["neighbors"] = {
+					["001:001"] = 50, --Lor'danel, Darkshore
+					["004:004"] = 75, --Shatterspear Vale, Darkshore
+				},
+			},
+			["004:004"] = {
+				["name"] = "Darkshire Cat 4, Darkshore", --Shatterspear Vale, Darkshore
+				--["taxioperator"] = "blackcat",
+				["neighbors"] = {
+					["001:001"] = 115, --Lor'danel, Darkshore
+				},
+			},
+			["005:005"] = {
+				["name"] = "Darkshire Cat 5, Darkshore", --Bashal'Aran, Darkshore
+				--["taxioperator"] = "blackcat",
+				["neighbors"] = {
+					["002:002"] = 53, --Lor'danel, Darkshore
+				},
+			},
 			["205:745"] = {
 				["name"] = "The Exodar",
 				["neighbors"] = {
@@ -3581,7 +3627,7 @@ do
 		[5] = { -- Cata? no FPs there, but oh well
 		},
 		[6] = { -- Pandaria
-			["346:455"] = { --Dread Wastes Complete
+			["346:455"] = { --Dread Wastes
 				["name"] = "The Sunset Brewgarden, Dread Wastes",
 				["neighbors"] = {
 					["400:493"] = 34, --Gao-Ran Battlefront, Townlong Steppes
@@ -3626,7 +3672,7 @@ do
 					["608:447"] = 81, --Shrine of Seven Stars, Vale of Eternal Blossoms
 				},
 			},
-			["384:571"] = { -- Townlong Stepps Complete
+			["384:571"] = { -- Townlong Stepps
 				["name"] = "Longying Outpost, Townlong Steppes",
 				["neighbors"] = {
 					["460:530"] = 41, --Shado-Pan Fallback, Kun-Lai Summit
@@ -3664,7 +3710,7 @@ do
 					["561:505"] = 77, --Shrine of Two Moons, Vale of Eternal Blossoms
 				},
 			},
-			["558:739"] = { -- Kun-Lai Summit Complete
+			["558:739"] = { -- Kun-Lai Summit
 				["name"] = "Zouchin Village, Kun-Lai Summit",
 				["neighbors"] = {
 					["578:667"] = 44, --Temple of the White Tiger, Kun-Lai Summit
@@ -3760,7 +3806,7 @@ do
 					["608:447"] = 65, --Shrine of Seven Stars, Vale of Eternal Blossoms
 				},
 			},
-			["653:438"] = { -- The Veiled Stair Complete
+			["653:438"] = { -- The Veiled Stair
 				["name"] = "Tavern in the Mists, The Veiled Stair",
 				["neighbors"] = {
 					["690:418"] = 22, --Pang's Stead, Valley of the Four Winds
@@ -3768,13 +3814,13 @@ do
 					["645:411"] = 20, --Grassy Cline, Valley of the Four Winds
 				},
 			},
-			["561:505"] = { -- Vale of Eternal Blossoms Complete
+			["561:505"] = { -- Vale of Eternal Blossoms
 				["name"] = "Shrine of Two Moons, Vale of Eternal Blossoms",
 				["neighbors"] = {
 					["790:499"] = 163, --Dawn's Blossom, Jade Forest
 					["679:618"] = 133, --Honeydew Village, Jade Forest
 					["690:418"] = 92, --Pang's Stead, Valley of the Four Winds
-					["588:352"] = 74, --Halfhill, Valley of the Four Winds
+					["597:353"] = 74, --Halfhill, Valley of the Four Winds
 					["611:514"] = 84, --Binan Village, Kun-Lai Summit
 					["558:561"] = 67, --Eastwind Rest, Kun-Lai Summit
 					["645:411"] = 74, --Grassy Cline, Valley of the Four Winds
@@ -3800,7 +3846,7 @@ do
 					["790:499"] = 170, --Dawn's Blossom, Jade Forest
 					["784:346"] = 124, --Paw'Don Village, Jade Forest
 					["690:418"] = 80, --Pang's Stead, Valley of the Four Winds
-					["588:352"] = 67, --Halfhill, Valley of the Four Winds
+					["597:353"] = 67, --Halfhill, Valley of the Four Winds
 					["611:514"] = 91, --Binan Village, Kun-Lai Summit
 					["513:549"] = 64, --Westwind Rest, Kun-Lai Summit
 					["645:411"] = 63, --Grassy Cline, Valley of the Four Winds
@@ -3810,11 +3856,11 @@ do
 					["346:455"] = 113, --The Sunset Brewgarden, Dread Wastes
 				},
 			},
-			["645:411"] = { -- Valley of the Four Winds Complete
+			["645:411"] = { -- Valley of the Four Winds
 				["name"] = "Grassy Cline, Valley of the Four Winds",
 				["neighbors"] = {
 					["690:418"] = 30, --Pang's Stead, Valley of the Four Winds
-					["588:352"] = 37, --Halfhill, Valley of the Four Winds
+					["597:353"] = 37, --Halfhill, Valley of the Four Winds
 					["653:438"] = 16, --Tavern in the Mists, The Veiled Stair
 					["561:505"] = 69, --Shrine of Two Moons, Vale of Eternal Blossoms
 					["608:447"] = 64, --Shrine of Seven Stars, Vale of Eternal Blossoms
@@ -3824,7 +3870,7 @@ do
 				["name"] = "Pang's Stead, Valley of the Four Winds",
 				["neighbors"] = {
 					["790:499"] = 56, --Dawn's Blossom, Jade Forest
-					["588:352"] = 56, --Halfhill, Valley of the Four Winds
+					["597:353"] = 56, --Halfhill, Valley of the Four Winds
 					["691:341"] = 37, --Zhu's Watch, Krasarang Wilds
 					["622:298"] = 65, --Thunder Cleft, Krasarang Wilds
 					["653:438"] = 29, --Tavern in the Mists, The Veiled Stair
@@ -3835,7 +3881,7 @@ do
 					--["677:491"] = time, --Grookin Hill, Jade Forest ---Not a direct flight this way!? wtf
 				},
 			},
-			["588:352"] = {
+			["597:353"] = {
 				["name"] = "Halfhill, Valley of the Four Winds",
 				["neighbors"] = {
 					["690:418"] = 51, --Pang's Stead, Valley of the Four Winds
@@ -3853,20 +3899,21 @@ do
 			["477:335"] = {
 				["name"] = "Stoneplow, Valley of the Four Winds",
 				["neighbors"] = {
-					["588:352"] = 46, --Halfhill, Valley of the Four Winds
+					["597:353"] = 46, --Halfhill, Valley of the Four Winds
 					["502:230"] = 45, --Dawnchaser Retreat, Krasarang Wilds
 					["511:197"] = 62, --Cradle of Chi-Ji, Krasarang Wilds
 					["371:387"] = 64, --Klaxxi'vess, Dread Wastes
 					["487:275"] = 27, --Sentinel Basecamp, Krasarang Wilds
 					["655:277"] = 61, --The Incursion, Krasarang Wilds
+					["427:225"] = 64, --Domination Point, Krassarang Wilds
 				},
 			},
-			["691:341"] = { -- Krasarang Wilds Complete
+			["691:341"] = { -- Krasarang Wilds
 				["name"] = "Zhu's Watch, Krasarang Wilds",
 				["neighbors"] = {
 					["622:298"] = 43, --Thunder Cleft, Krasarang Wilds
 					["690:418"] = 34, --Pang's Stead, Valley of the Four Winds
-					["588:352"] = 47, --Halfhill, Valley of the Four Winds
+					["597:353"] = 47, --Halfhill, Valley of the Four Winds
 					["611:514"] = 87, --Binan Village, Kun-Lai Summit
 					["784:346"] = 40, --Paw'Don Village, Jade Forest
 				},
@@ -3879,12 +3926,13 @@ do
 					["511:197"] = 19, --Cradle of Chi-Ji, Krasarang Wilds
 					["595:162"] = 50, --Marista, Krasarang Wilds
 					["371:387"] = 104, --Klaxxi'vess, Dread Wastes
+					["427:225"] = 73, --Domination Point, Krassarang Wilds
 				},
 			},
 			["511:197"] = {
 				["name"] = "Cradle of Chi-Ji, Krasarang Wilds",
 				["neighbors"] = {
-					["588:352"] = 80, --Halfhill, Valley of the Four Winds
+					["597:353"] = 80, --Halfhill, Valley of the Four Winds
 					["477:335"] = 61, --Stoneplow, Valley of the Four Winds
 					["502:230"] = 15, --Dawnchaser Retreat, Krasarang Wilds
 					["595:162"] = 43, --Marista, Krasarang Wilds
@@ -3905,7 +3953,7 @@ do
 				["name"] = "Thunder Cleft, Krasarang Wilds",
 				["neighbors"] = {
 					["690:418"] = 61, --Pang's Stead, Valley of the Four Winds
-					["588:352"] = 34, --Halfhill, Valley of the Four Winds
+					["597:353"] = 34, --Halfhill, Valley of the Four Winds
 					["691:341"] = 39, --Zhu's Watch, Krasarang Wilds
 					["502:230"] = 80, --Dawnchaser Retreat, Krasarang Wilds
 					["595:162"] = 71, --Marista, Krasarang Wilds
@@ -3914,7 +3962,7 @@ do
 			["487:275"] = {
 				["name"] = "Sentinel Basecamp, Krasarang Wilds",
 				["neighbors"] = {
-					["588:352"] = 65, --Halfhill, Valley of the Four Winds
+					["597:353"] = 65, --Halfhill, Valley of the Four Winds
 					["655:277"] = 75, --The Incursion, Krasarang Wilds
 					["477:335"] = 43, --Stoneplow, Valley of the Four Winds
 					["595:162"] = 75, --Marista, Krasarang Wilds
@@ -3924,11 +3972,26 @@ do
 			["655:277"] = {
 				["name"] = "The Incursion, Krasarang Wilds",
 					["neighbors"] = {
-					["588:352"] = 44, --Halfhill, Valley of the Four Winds
+					["597:353"] = 44, --Halfhill, Valley of the Four Winds
 					["477:335"] = 60, --Stoneplow, Valley of the Four Winds
 					["487:275"] = 76, --Sentinel Basecamp, Krasarang Wilds
 					["595:162"] = 63, --Marista, Krasarang Wilds
 					["511:197"] = 76, --Cradle of Chi-Ji, Krasarang Wilds
+					["736:272"] = 64, --Lion's Landing, Krassarang Wilds
+				},
+			},
+			["736:272"] = {
+				["name"] = "Lion's Landing, Krassarang Wilds",
+				["neighbors"] = {
+					["784:346"] = 64, --Paw'Don Village, Jade Forest
+					["655:277"] = 45, --The Incursion, Krasarang Wilds
+				},
+			},
+			["427:225"] = {
+				["name"] = "Domination Point, Krassarang Wilds",
+				["neighbors"] = {
+					["477:335"] = 64, --Stoneplow, Valley of the Four Winds
+					["502:230"] = 61, --Dawnchaser Retreat, Krasarang Wilds
 				},
 			},
 			["770:583"] = { --Jade Forest
@@ -4033,6 +4096,7 @@ do
 					["691:341"] = 49, --Zhu's Watch, Krasarang Wilds
 					["611:514"] = 110, --Binan Village, Kun-Lai Summit
 					["608:447"] = 131, --Shrine of Seven Stars, Vale of Eternal Blossoms
+					["736:272"] = 49, --Lion's Landing, Krassarang Wilds
 				},
 			},
 		},
@@ -4180,6 +4244,8 @@ do
 					end
 				else
 					for n,node in ipairs(zone) do
+						if node.tag and node.tag=="blackcat" then node.known = true end --All blackcats are useable by an alliance character
+
 						if Lib.master[node.name]==false then --if zone is overlevel and for some reason it is false, set it back to nil
 							Lib.master[node.name]=nil
 						elseif Lib.master[node.name]==true then -- we know a flightpath that is over our level

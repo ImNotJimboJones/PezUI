@@ -446,7 +446,6 @@ end
 --==Learn the talents when the accept button is pressed or when the graphic is pressed on the talent screen.
 	-- Specializations are learned within the OnClick event for the accept button.
 function ZTA:LearnSuggestedTalents(talents)
-
 	if type(talents)=="table" then
 		for tier,index in ipairs(talents) do
 			LearnTalents(index)

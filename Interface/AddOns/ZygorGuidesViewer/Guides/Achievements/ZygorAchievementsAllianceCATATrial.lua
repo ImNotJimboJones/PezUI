@@ -3,7 +3,7 @@ if not ZygorGuidesViewer then return end
 if UnitFactionGroup("player")~="Alliance" then return end
 if ZGV:DoMutex("AchievementsA") then return end
 ZygorGuidesViewer:RegisterInclude("hearth",[[
-'Hearth to the Trade District |goto Stormwind City |use Hearthstone##6948 |noway |c 
+'Hearth to the Trade District |goto Stormwind City |use Hearthstone##6948 |noway |c
 ]])
 ZygorGuidesViewer:RegisterInclude("rideto_borean",[[
 goto Stormwind City,18.2,25.5 |n
@@ -42,7 +42,7 @@ goto Stormwind City,76.2,18.7
 .' Click the Portal to Hyjal |tip It's a swirling blue and green portal.
 .' Teleport to Mount Hyjal |goto Mount Hyjal |noway |c
 ]])
-ZygorGuidesViewer:RegisterInclude("portal_vashjir",[[
+ZygorGuidesViewer:RegisterInclude("port_vashjir",[[
 goto Stormwind City,73.3,16.8
 .' Click the Portal to Vashj'ir |tip It's a big swirling portal.
 .' Teleport to Vashj'ir |goto Kelp'thar Forest |noway |c
@@ -52,7 +52,7 @@ goto Stormwind City,73.2,19.7
 .' Click the Portal to Deepholm |tip It's a pink and purple swirling portal.
 .' Teleport to Deepholm |goto Deepholm |noway |c
 ]])
-ZygorGuidesViewer:RegisterInclude("portal_twilight",[[
+ZygorGuidesViewer:RegisterInclude("port_twilight",[[
 goto Stormwind City,75.3,16.4
 .' Click the Portal to Twilight Highlands |tip It's a big swirling portal.
 .' Teleport to Twilight Highlands |goto Twilight Highlands |noway |c
@@ -61,12 +61,11 @@ ZygorGuidesViewer:RegisterInclude("shatport_sw",[[
 goto Shattrath City,57.2,48.2
 .' Click the Portal to Stormwind |goto Stormwind City,49.6,86.5,0.5 |noway |c
 ]])
-ZygorGuidesViewer:RegisterInclude("portal_ulum",[[
- goto Stormwind City,75.3,20.6
+ZygorGuidesViewer:RegisterInclude("portal_uldum",[[
+goto Stormwind City,75.3,20.6
 .' Click the Portal to Uldum |goto Uldum |noway |c
 ]])
 ZygorGuidesViewer:RegisterInclude("innkeeper_stormwind",[[
 goto Stormwind City,60.4,75.3
 .talk 6740
 ]])
-

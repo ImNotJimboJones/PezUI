@@ -434,32 +434,41 @@ function Step:OnEnter()
 end
 
 function Step:GetNext()
-	if self:AreRequirementsMet() then  -- do NOT use jumps in steps that are wrong for some reason.
+	if self:AreRequirementsMet() or ZGV.db.profile.showwrongsteps then  -- do NOT use jumps in steps that are wrong for some reason.
 		for i,goal in ipairs(self.goals) do
 			if goal.next and goal:IsVisible() and (not goal:IsCompleteable() or goal:IsComplete()) then
-				ZGV:Debug("Next: goal["..i.."] \""..goal:GetText().."\" says \""..tostring(goal.next).."\"")
+				ZGV:Debug("Step:GetNext: step %d goal %d \"%s\" says \"%s\"",self.num,i,goal:GetText(),tostring(goal.next))
 				return goal.next
 			end
 		end
 	end
-	ZGV:Debug("Step:GetNext - step says "..tostring(self.next))
+	ZGV:Debug("Step:GetNext: step %d says %s so going with %s",self.num,tostring(self.next),self.next or "+1")
 	return self.next or "+1"
 end
 
-function Step:GetJumpStepNum(jump,jump2)
+-- Get a jump's destination step number.
+-- @param jump Optional: provide an alternative jump label to test, instead of the internal.
+-- @returns stepnum,guidetitle
+function Step:GetJumpDestination(jump)
 	if not jump then jump=self:GetNext() end
-	assert(jump,"jump to nowhere!")
+	assert(jump,"no jump!")
 	if type(jump)=="number" or jump:match("^%d+$") then
 		return tonumber(jump) -- 123
 	else
-		local sign=jump:sub(1,1)  if sign=="+" or sign=="-" then jump=jump:sub(2) end
+		local sign=jump:sub(1,1)  if sign=="+" or sign=="-" then jump=jump:sub(2) end  -- we'll get back to the sign
 		if jump:match("^%d+$") then
 			-- NOW it's numeric! step number delta
 			jump=tonumber(jump) or 0
 			return self.num + jump * (sign=="-" and -1 or 1) -- "-7","+7"
-		elseif jump:match("[/\\]") then
-			-- "folder\guide",5
-			return jump2,jump
+		elseif jump:find("\\") then
+			-- "folder\\guide::5"
+			local guide,tag = jump:match("(.*)::(.*)")
+			if not tag then guide=jump end
+			
+			guide = ZGV:SanitizeGuideTitle(guide)
+			tag = tonumber(tag) or tag or 1
+			
+			return tag,guide
 		else
 			-- "label","+label","-label"
 
@@ -473,67 +482,68 @@ function Step:GetJumpStepNum(jump,jump2)
 				if num>self.num then closest_fore=num break end
 			end
 			if sign=="+" then
+				ZGV:Debug("Step:GetJumpD: step %d jumping to \"%s\", fore = %d",self.num,jump,tostring(closest_fore))
 				return closest_fore  -- may be nil, so what.
 			elseif sign=="-" then
+				ZGV:Debug("Step:GetJumpD: step %d jumping to \"%s\", back = %d",self.num,jump,tostring(closest_back))
 				return closest_back  -- likewise.
 			elseif not closest_fore or (closest_back and closest_fore and self.num-closest_back < closest_fore-self.num) then
+				ZGV:Debug("Step:GetJumpD: step %d jumping to \"%s\", closest (back) = %d",self.num,jump,tostring(closest_back))
 				return closest_back
 			else
+				ZGV:Debug("Step:GetJumpD: step %d jumping to \"%s\", closest (fore) = %d",self.num,jump,tostring(closest_fore))
 				return closest_fore
 			end
 		end
 	end
 end
 
-do	-- test GetJumpStepNum
+do	-- test GetJumpDestination
 	-- steps: a,b,a,c,d,a
 	local guide = { steplabels={a={1,3,6},b={2},c={4},d={5}}, steps={ {},{},{},{},{},{} } }
 	for n,step in ipairs(guide.steps) do step.num=n step.parentGuide=guide setmetatable(step,ZGV.StepProto_mt) end
-	assert(guide.steps[1]:GetJumpStepNum("+2")==3)	--delta fore
-	assert(guide.steps[3]:GetJumpStepNum("-1")==2)	--delta back
-	assert(guide.steps[3]:GetJumpStepNum("5")==5)	--absolute
-	assert(guide.steps[3]:GetJumpStepNum("c")==4)	--unique
-	assert(guide.steps[3]:GetJumpStepNum("z")==nil)	--label fail
-	assert(guide.steps[4]:GetJumpStepNum("+a")==6)	--fore
-	assert(guide.steps[4]:GetJumpStepNum("+b")==nil)	--fore fail
-	assert(guide.steps[4]:GetJumpStepNum("-a")==3)	--back
-	assert(guide.steps[3]:GetJumpStepNum("-c")==nil)	--back fail
-	assert(guide.steps[4]:GetJumpStepNum("a")==3)	--closest, find back
-	assert(guide.steps[5]:GetJumpStepNum("a")==6)	--closest, find fore
+	assert(guide.steps[1]:GetJumpDestination("+2")==3)	--delta fore
+	assert(guide.steps[3]:GetJumpDestination("-1")==2)	--delta back
+	assert(guide.steps[3]:GetJumpDestination("5")==5)	--absolute
+	assert(guide.steps[3]:GetJumpDestination("c")==4)	--unique
+	assert(guide.steps[3]:GetJumpDestination("z")==nil)	--label fail
+	assert(guide.steps[4]:GetJumpDestination("+a")==6)	--fore
+	assert(guide.steps[4]:GetJumpDestination("+b")==nil)	--fore fail
+	assert(guide.steps[4]:GetJumpDestination("-a")==3)	--back
+	assert(guide.steps[3]:GetJumpDestination("-c")==nil)	--back fail
+	assert(guide.steps[4]:GetJumpDestination("a")==3)	--closest, find back
+	assert(guide.steps[5]:GetJumpDestination("a")==6)	--closest, find fore
 end
 
-function Step:GetJumpStep(jump,jump2)
-	local step,guide = self:GetJumpStepNum(jump,jump2)
-	if guide then return step,guide end  -- stepnum,guidename in case of a cross-guide jump.
+-- Return next step, including 'next' tags.
+-- returns a step and nothing more.
+-- Only returns nil when there is NO next step.
+function Step:GetNextStep(nextlabel)
+	nextlabel = nextlabel or self:GetNext()  -- always something.
 
+	-- special next tag
+	local step,guide = self:GetJumpDestination(nextlabel)
+	if not guide then
+		-- normal next
+		local stepobj = self.parentGuide:GetStep(step)
 	-- step is not validated, validate now
-	if not step or step<1 then
-		ZGV:Print("|cffff4400ERROR!|r Cannot jump from step |cffffff88"..self.num.."|r to label '|cffffff88"..tostring(jump).."|r'. This is guide |cffffff88"..self.parentGuide.title_short.."|r. Please report this, providing a generated Bug Report.")
+		if not stepobj and nextlabel~="+1" then
+			ZGV:Print("|cffff4400ERROR!|r Cannot jump from step |cffffff88"..self.num.."|r to label '|cffffff88"..tostring(nextlabel).."|r'. This is guide |cffffff88"..self.parentGuide.title_short.."|r. Please report this, providing a generated Bug Report.")
+			ZGV:Print("Meanwhile, try to navigate to the next step manually, by holding |cff55ff00CTRL+ALT|r and skipping the step.")
+			return self
+		end
+		return stepobj
+	else
+		local gu = ZGV:GetGuideByTitle(guide)
+		if not gu then
+			ZGV:Print("|cffff4400ERROR!|r Cannot jump from step |cffffff88"..self.num.."|r to guide '|cffffff88"..tostring(guide).."|r'. This is guide |cffffff88"..self.parentGuide.title_short.."|r. Please report this, providing a generated Bug Report.")
 		ZGV:Print("Meanwhile, try to navigate to the next step manually, by holding |cff55ff00CTRL+ALT|r and skipping the step.")
 		return self
 	end
-	local steps = self.parentGuide.steps
-	--step=min(step,#steps)
-	return steps[step]
-end
-Step.Find = Step.GetJumpStep  -- alias
 
--- Return next step, including 'next' tags.
--- returns a step and nothing more. No guide jumps allowed.
--- Only returns nil when there is NO next step.
-function Step:GetNextStep()
-	local guide=self.parentGuide
-	local step,g
-	local snext = self:GetNext()
-	if snext then
-		-- special next tag
-		step,g = self:GetJumpStep(snext)  -- always returns valid step
-		assert(not g,"Cross-guide 'next' jumps are not allowed!")
-		--assert(step,"No valid step found! Step number was ".. self.num ..", next was "..tostring(snext))
-		return step
-	else
-		-- regular next step
-		return guide.steps[self.num+1]
+		return nil,step,guide
+		--gu:Parse(true)
+		--return gu:GetStep(step), true,guide  -- "changed guides!"
 	end
 
 	--local prevnum=num
@@ -543,29 +553,45 @@ function Step:GetNextStep()
 	-- ZGV:Debug("step:GetNextStep, current ".. self.num .." next ".. tostring(step.num))
 
 end
+Step.Find = Step.GetNextStep  -- alias
+
+local visited_steps={}
+local visited_path={}
+ZGV.debug_VSTEPS=visited_steps
+ZGV.debug_VPATH=visited_path
 
 -- Only returns nil when there is NO next valid step.
+-- Called from 
 function Step:GetNextValidStep()
 	local step=self
 	local numskips=1
+	local stepnum,guide
 	repeat
-		step = step:GetNextStep()
-		numskips=numskips+1
-		assert(numskips<2000,"2000 skips and no valid next step found!")
+		step, stepnum,guide = step:GetNextStep()
+		numskips=numskips+1  assert(numskips<2000,"2000 skips and no valid next step found!")
 	until not step or step:AreRequirementsMet() or ZGV.db.profile.showwrongsteps
-	return step
+	return step,stepnum,guide -- or nil if none.
 end
 
 function Step:GetNextCompletableStep()
 	local step=self
 	local numskips=1
 	local stepcomplete,steppossible
+	local stepnum,guide
+	wipe(visited_steps)
+	wipe(visited_path)
+	visited_steps[step]=1
 	repeat
-		step = step:GetNextStep()
-		numskips=numskips+1
-		assert(numskips<2000,"2000 skips and no completable step found!")
-		stepcomplete,steppossible = step:IsComplete()
+		step, stepnum,guide = step:GetNextStep()
+		--numskips=numskips+1  assert(numskips<2000,"2000 skips and no completable step found!")
+		if step then
+			assert(not visited_steps[step],"LOOPING! started in step ".. self.num..", detected in ".. step.num .." , see ZGV.debug_VPATH")
+			stepcomplete,steppossible = step:IsComplete()
+
+			visited_steps[step]=1
+			tinsert(visited_path,step.num)
+		end
 	until not step or ((step:AreRequirementsMet() or ZGV.db.profile.showwrongsteps) and not stepcomplete and steppossible)
-	return step
+	return step,stepnum,guide
 end
 

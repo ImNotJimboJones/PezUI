@@ -87,188 +87,7 @@ end
 -- Moved 'em out of Internal waypointer so that TomTom, for example,
 -- may equally enjoy the pleasures of nettles^W path-based navigation ~aprotas
 
-local curve_spacing = 100
-local max_ants_per_segment = 40
 
-local function calc_catmull_rom(t,t2,t3,p0,p1,p2,p3)
-	return 0.5 * ( (2*p1.gx) + (-p0.gx+p2.gx)*t + (2*p0.gx-5*p1.gx+4*p2.gx-p3.gx) * t2 + (-p0.gx+3*p1.gx-3*p2.gx+p3.gx) * t3),
-		   0.5 * ( (2*p1.gy) + (-p0.gy+p2.gy)*t + (2*p0.gy-5*p1.gy+4*p2.gy-p3.gy) * t2 + (-p0.gy+3*p1.gy-3*p2.gy+p3.gy) * t3)
-	-- kept separate just in case. Inlined below for optimization.
-end
-
-local function calc_angles(points,do_loop,recalc)
-	local atan2=math.atan2
-	for k,point in ipairs(points) do
-		if recalc then point.angle=nil end
-		if not point.angle and point.gx then
-			local nextpoint = points[k+1]
-			if not nextpoint then
-				if do_loop then nextpoint=points[1] else break end
-			end
-			if nextpoint and nextpoint.gx then
-				local angle = atan2(nextpoint.gx-point.gx,(point.gy-nextpoint.gy)*0.66)
-				if angle>0 then angle=6.2831-angle else angle=-angle end
-				point.angle = angle
-			end
-		end
-	end
-end
-
-local function calc_angles_curved(points,do_loop,recalc)
-	local atan2=math.atan2
-	for i=1,#points do
-		local point=points[i]
-		if recalc then point.angle=nil end
-		if not point.angle and point.gx then
-			local p0i,p1i,p2i,p3i = i-1,i,i+1,i+2
-			if p0i<1 then p0i = do_loop and p0i+#points or 1 end
-			if p2i>#points then p2i = do_loop and p2i-#points or #points end
-			if p3i>#points then p3i = do_loop and p3i-#points or #points end
-			local p0,p1,p2,p3=points[p0i],points[p1i],points[p2i],points[p3i]
-			local x,y = calc_catmull_rom(0.2,0.04,0.008,p0,p1,p2,p3)
-			if x then
-				local angle = atan2(x-point.gx,(point.gy-y)*0.66)
-				if angle>0 then angle=6.2831-angle else angle=-angle end
-				point.angle = angle
-			end
-		end
-	end
-end
-
--- optimization madness: localize EVERYTHING
--- Sinus, I'm sorry, but I guess Internal's not the only arrow needing those ~aprotas
-
-local abs=math.abs
-local ceil=math.ceil
-
-local antpoints = {}
-local ants_set = false
-
-local function spawn_curve_ants(points,loop,phase)
-	if #points<3 then return end
-	--print("curving!!")
-	local abs=abs
-	local ceil=ceil
-
-	local antpoints_num = 1
-	local np=#points
-	for i=1,np do  while true do
-		--tinsert(antpoints,points[i])
-		local p0i,p1i,p2i,p3i = i-1,i,i+1,i+2
-		if p0i<1 then p0i = loop and p0i+#points or 1 end
-		if p2i>#points then p2i = loop and p2i-#points or #points end
-		if p3i>#points then p3i = loop and p3i-#points or #points end
-
-		local p0,p1,p2,p3=points[p0i],points[p1i],points[p2i],points[p3i]
-
-		local curve_accuracy = p1.curve_accuracy
-		if not curve_accuracy then
-			--local dist = Astrolabe:ComputeDistance(p1.map,p1.floor,p1.x/100,p1.y/100,p2.map,p2.floor,p2.x/100,p2.y/100)   -- Astrolabe thinks x and y are 0..1, and they're 0..100 here. Results will be valid, though exaggerated.
-			local dist = Astrolabe:ComputeDistance(0,0,p1.gx,p1.gy,0,0,p2.gx,p2.gy)   -- Astrolabe thinks x and y are 0..1, and they're 0..100 here. Results will be valid, though exaggerated.
-			if not dist or dist<1 then dist=1 end
-			curve_accuracy = ceil(dist/curve_spacing)
-			if curve_accuracy>max_ants_per_segment then curve_accuracy=max_ants_per_segment end
-			curve_accuracy = 1/curve_accuracy
-			p1.curve_accuracy = curve_accuracy
-		end
-
-		--print("acc",curve_accuracy)
-		for t=phase*curve_accuracy,1-(1-phase)*curve_accuracy,curve_accuracy*0.999 do
-			local t2 = t*t
-			local t3 = t*t*t
-
-			-- Catmull-Rom
-			local x,y = calc_catmull_rom(t,t2,t3,p0,p1,p2,p3)
-			--local x = 0.5 * ( (2*p1.gx) + (-p0.x+p2.x)*t + (2*p0.x-5*p1.x+4*p2.x-p3.x) * t2 + (-p0.x+3*p1.x-3*p2.x+p3.x) * t3)
-			--local y = 0.5 * ( (2*p1.gy) + (-p0.y+p2.y)*t + (2*p0.y-5*p1.y+4*p2.y-p3.y) * t2 + (-p0.y+3*p1.y-3*p2.y+p3.y) * t3)
-
-			--if (abs(x-p1.x)+abs(y-p1.y)>0.1) and (abs(x-p2.x)+abs(y-p2.y)>0.1) then
-			local ant = antpoints[antpoints_num]
-			if not ant then
-				ant = {icon=ZGV.Pointer.Icons.ant}
-				antpoints[antpoints_num]=ant
-			end
-			ant.map=p1.gm
-			ant.floor=p1.gf
-			ant.x=x
-			ant.y=y
-			ant.sub=i+t
-			antpoints_num = antpoints_num+1
-			--print(("%d/%.2f: [%.1f,%.1f]->[%.1f,%.1f] = [%.1f,%.1f]"):format(i,t,p1.x,p1.y,p2.x,p2.y,x,y))
-			--end
-		end
-		break
-	end end
-		--print("curved, ",#antpoints)
-	while #antpoints>antpoints_num+1 do tremove(antpoints) end
-	return antpoints
-end
-
-function ZGV.Waypoints:SetAntSpacing(spacing)
-	curve_spacing = spacing
-end
-
-local function spawn_straight_ants(points,loop,phase)
-	if #points<2 then return end
-	--print("curving!!")
-	local abs=abs
-	local ceil=ceil
-
-	local def_ant_icon = ZGV.Pointer.Icons.ant
-
-	local antpoints_num = 1
-	local np=#points
-	local breakall
-	for i=1,np do  while true do
-		local p1 = points[i]
-		local p2 = points[i+1]
-		if not p2 then
-			if loop then p2=points[1] else breakall=true break end
-		end
-
-		-- NEW CHECK. Points are supposedly on global maps. If points do NOT share a global map, NO ANTS BETWEEN THEM.
-		if p1.gm
-		and p1.gm==p2.gm
-		and p1.gf==p2.gf
-		then
-
-			local curve_accuracy = p1.curve_accuracy
-			if not curve_accuracy then
-				--local dist = Astrolabe:ComputeDistance(p1.map,p1.floor,p1.x/100,p1.y/100,p2.map,p2.floor,p2.x/100,p2.y/100)   -- Astrolabe thinks x and y are 0..1, and they're 0..100 here. Results will be valid, though exaggerated.
-				local dist = Astrolabe:ComputeDistance(p1.gm,p1.gf,p1.gx,p1.gy,p2.gm,p2.gf,p2.gx,p2.gy)   -- Astrolabe thinks x and y are 0..1, and they're 0..100 here. Results will be valid, though exaggerated.
-				if not dist or dist<1 then dist=1 end  -- correct for the above exaggeration
-				curve_accuracy = ceil(dist/curve_spacing)
-				if curve_accuracy>max_ants_per_segment then curve_accuracy=max_ants_per_segment end
-				curve_accuracy = 1/curve_accuracy
-				p1.curve_accuracy = curve_accuracy
-			end
-
-			--print("acc",curve_accuracy)
-			for t=phase*curve_accuracy,1-(1-phase)*curve_accuracy,curve_accuracy*0.999 do
-				-- straight line
-				local x = p1.gx + t*(p2.gx-p1.gx)
-				local y = p1.gy + t*(p2.gy-p1.gy)
-
-				local ant = antpoints[antpoints_num]
-				if not ant then
-					ant = {icon=ZGV.Pointer.Icons.ant}
-					antpoints[antpoints_num]=ant
-				end
-				ant.map=p1.gm
-				ant.floor=p1.gf
-				ant.x=x
-				ant.y=y
-				ant.sub=i+t
-				ant.icon = p2.ant_icon or def_ant_icon
-				antpoints_num = antpoints_num+1
-				--tinsert(antpoints,{map=0,floor=0,x=x,y=y,sub=i+t,icon=ZGV.Pointer.Icons.ant})
-			end
-		end
-		break
-	end  if breakall then break end  end
-	while #antpoints>antpoints_num-1 do tremove(antpoints) end
-	return antpoints
-end
 
 -- Waypoint functions by addon
 
@@ -295,15 +114,15 @@ ZGV.WaypointFunctions['tomtom'] = {
 				-- Copied from Internal one not to break things with scopes etc
 				local antpoints
 				if waypath.ants=="straight" or #waypath.coords<3 then
-					antpoints = spawn_straight_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
+					antpoints = ZGV.Pointer.spawn_straight_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
 				else
-					antpoints = spawn_curve_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
+					antpoints = ZGV.Pointer.spawn_curve_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
 				end
 
 				--calc_angles(antpoints,waypath.loop)
 				if antpoints then
 					self.Pointer:ClearWaypoints("ant")
-					self.Waypoints:SetAntSpacing(self.db.profile.antspacing)
+					self.Pointer:SetAntSpacing(self.db.profile.antspacing)
 
 					for k,point in ipairs(antpoints) do
 						ZGV.Pointer:SetWaypoint_ant (point.map,point.floor,point.x,point.y, k, point.icon)
@@ -335,18 +154,18 @@ do --=========================================== CARBONITE =====================
 	local lastwaypath -- Optimization trick, last waypath we were asked to display
 
 	local function ClearCarboniteWaypoints()
-		local map=Nx.Map:GeM(1)
-		if map then wipe(map.Tar) end
+		local map=Nx.Map:GetMap(1)
+		if map then wipe(map.Targets) end
 	end
 
 	-- TODO I really forgot what the last option does, need to lurk it up ~aprotas
 	local function CreateCarboniteWaypointMXY(mapid,x,y,title,option)
-		local map=Nx.Map:GeM(1) if not map then return end
-		local mid=Nx.AITI[mapid] -- AITI → AreaID to Carbonite ID ~ aprotas
+		local map=Nx.Map:GetMap(1) if not map then return end
+		local mid=Nx.AIdToId[mapid] -- AITI → AreaID to Carbonite ID ~ aprotas
 		if mid then
 			-- TODO should we need to ever give floor id?
-			map:STXY(mid,x,y,title,option)
-			map:CTO(-1,1) -- TODO I have neither ability nor desire to find out what it does, but I'm just mimicking Nx.TTST behaviour here ~aprotas
+			map:SetTargetXY(mid,x,y,title,option)
+			map:ChangeTargetOrder(-1,1) -- TODO I have neither ability nor desire to find out what it does, but I'm just mimicking Nx.TTST behaviour here ~aprotas
 		else
 			self:Debug("Carbonite does not have an ID for map "..mapid.." please report")
 		end
@@ -355,11 +174,11 @@ do --=========================================== CARBONITE =====================
 	local function RecycleRouteCarbonite()
 		-- WARNING we are being of evil by overriding user addon settings
 		-- we could possibly restore it back but do we really have to?
-		local map=Nx.Map:GeM(1)
+		local map=Nx.Map:GetMap(1)
 		if map then
-			if not map.GOp["RouteRecycle"] then
+			if not map.GOpts["RouteRecycle"] then
 				ZGV:Debug("Forcing Carbonite setting: RouteRecycle")
-				map.GOp["RouteRecycle"]=true
+				map.GOpts["RouteRecycle"]=true
 			end
 		end
 	end
@@ -368,29 +187,29 @@ do --=========================================== CARBONITE =====================
 		-- TODO make sure this does not reverse the direction when it's NOT needed
 		-- TODO testing on multipoint "regular" waypoints
 		-- TODO testing on acyclic waypaths
-		local map=Nx.Map:GeM(1)
+		local map=Nx.Map:GetMap(1)
 		if map then
-			map:RoT()
+			map:RouteTargets()
 		end
 	end
 
 	-- Makes the waypoints set clear out at long (60 yard) radius
 	local function LongClearanceCarbonite()
-		local map=Nx.Map:GeM(1)
-		if map and map.Tar then
+		local map=Nx.Map:GetMap(1)
+		if map and map.Targets then
 			-- Setting the distances
 			local DIST=60 -- WARNING: hardcoded value
 			local sqrt=math.sqrt
-			for k,v in ipairs(map.Tar) do
+			for k,v in ipairs(map.Targets) do
 				v.Rad=DIST
-				if #map.Tar>1 then -- Making sure we're giving enough space not to overlap the previous point
-					local u=map.Tar[k==1 and #map.Tar or k-1]
-					local dist=sqrt((v.TMX-u.TMX)^2+(v.TMY-u.TMY)^2)	-- Distance between the points
+				if #map.Targets>1 then -- Making sure we're giving enough space not to overlap the previous point
+					local u=map.Targets[k==1 and #map.Targets or k-1]
+					local dist=sqrt((v.TargetMX-u.TargetMX)^2+(v.TargetMY-u.TargetMY)^2)	-- Distance between the points
 					-- Correcting the waypath distance to the next waypoint
-					if v.Rad>=dist and dist>0 then
-						v.Rad=dist/2-1
-						if v.Rad<1 then v.Rad=1 end
-						ZGV:Debug("Waypoints ["..k.."→"..(k==1 and #map.Tar or k-1).."] are too packed, correcting clear distance to "..v.Rad)
+					if v.Radius>=dist and dist>0 then
+						v.Radius=dist/2-1
+						if v.Radius<1 then v.Radius=1 end
+						ZGV:Debug("Waypoints ["..k.."→"..(k==1 and #map.Targets or k-1).."] are too packed, correcting clear distance to "..v.Radius)
 					end
 				end
 			end
@@ -399,21 +218,21 @@ do --=========================================== CARBONITE =====================
 
 	-- Makes the waypoints not clear at all
 	local function NoClearanceCarbonite()
-		local map=Nx.Map:GeM(1)
-		if map and map.Tar then
-			for k,v in ipairs(map.Tar) do
-				v.Rad=-1 -- Carbonite must be -very- astonished
+		local map=Nx.Map:GetMap(1)
+		if map and map.Targets then
+			for k,v in ipairs(map.Targets) do
+				v.Radius=-1 -- Carbonite must be -very- astonished
 			end
 		end
 	end
 
 	ZGV.WaypointFunctions['carbonite'] = {
 		isready = function()
-			return not not (Nx and Nx.TTAW)
+			return not not (Nx and Nx.Map)
 		end,
 		setwaypoint = function (self,goalnumORx,y,title)
 			local waypath=self.CurrentStep and self.CurrentStep.waypath or nil
-			local map=Nx.Map:GeM(1)
+			local map=Nx.Map:GetMap(1)
 
 			if not (waypath and #waypath.coords>1) then
 				ClearCarboniteWaypoints() -- There may be a need to preserve current waypath points
@@ -588,94 +407,6 @@ ZGV.WaypointFunctions['metamap'] = {
 }
 
 --============================================= internal =============================================
-local PATHFOUND_TO_MANUAL, PATHFINDING_TARGET
-local oldpathtarget
---local FAILED_PATH
-local function PathFoundHandler(state,path,ext)
-	if ZGV.Pointer.corpsearrow then return end
-	if ext and ext.token and ext.token~=ZGV.Pointer.CurrentPathTarget then ZGV:Debug("Found wrong path!") return end
-
-	if state=="success" then
-		ZGV.Pointer.TempWaypath = {follow="pathfind",loop=false,ants="straight",coords={}}
-
-		local first=true
-		for i,node in ipairs(path) do
-			local icon
-			if not node.player and node.t~="end" then icon=ZGV.Pointer.Icons.arrow else icon=ZGV.Pointer.Icons.none end  -- start and end nodes are HIDDEN.
-			--if w.node==LibRover.endnode then break end -- don't add the last one! add it separately. WHY!??
-			local wayp = {map=node.m,floor=node.f,x=node.x,y=node.y, title=node.maplabel, arrowtitle=node.text,player=node.player, force_noway=node.player, type="path", icon=ZGV.Pointer.Icons.arrow, pathnode=node}
-
-			if node.t=="end" then wayp.noskip = true end
-
-			if first and not node.player then first=false  wayp.arrow=true  end
-
-			wayp.dist = node.dist or (IsFlying("player") and 30 or 10)  -- by default, screw precision
-
-			if node.type=="taxi" then
-				-- source taxi: never complete waypoint
-				-- destination taxi: early complete waypoint, let LibRover wait for touchdown
-				if node.link.mode~="taxi" then
-					--start
-					wayp.dist = 2
-					wayp.noskip = true
-				end
-			elseif node.type=="portal" then
-				if node.link.mode~="portal" then
-					wayp.dist = 2
-					wayp.noskip = true
-				end
-			elseif node.type=="ship" or node.type=="zeppelin" then
-				if node.link.mode~="ship" and node.link.mode~="zeppelin" then
-					wayp.dist = 5
-					wayp.noskip = true
-				else
-					wayp.dist = 100
-				end
-			end
-
-			local mode = node.link and node.link.mode
-			if mode=="taxi" then wayp.ant_icon = ZGV.Pointer.Icons.ant_g
-			elseif mode=="ship" then wayp.ant_icon = ZGV.Pointer.Icons.ant_b
-			elseif mode=="portal" or mode=="teleport" or mode=="hearth" or mode=="astralrecall" or mode=="courtesy" then wayp.ant_icon = ZGV.Pointer.Icons.ant_p
-			elseif mode=="fly" then wayp.ant_icon = ZGV.Pointer.Icons.ant_y
-			else wayp.ant_icon = ZGV.Pointer.Icons.ant
-			end
-
-			-- OMG if it's the LAST waypoint in a travel path, point DIRECTLY, instead of at the placeholder.
-			if node.t=="end" then wayp.surrogate_for=ZGV.Pointer.CurrentPathTarget end
-
-			tinsert(ZGV.Pointer.TempWaypath.coords, wayp)
-		end
-
-		--[[
-		if ZGV.Pointer.CurrentPathTarget then
-			local w = ZGV.Pointer.CurrentPathTarget
-			tinsert(ZGV.Pointer.TempWaypath.coords, {map=w.m,floor=w.f,x=w.x,y=w.y,title=w.title,force_noway=true})
-		end
-		--]]
-
-		ZGV.Pointer.ArrowFrame.waypoint = nil -- clear arrow, so that it updates around line 804 this file. We :SetWaypoint right under here.
-		--FAILED_PATH = nil
-		ZGV:SetWaypoint(nil,nil,nil,"path",{dontcleartemp=true}) -- clear none, just refresh
-	elseif state=="failure" then
-		ZGV:Debug("Path Not Found!")
-		ZGV.Pointer.TempWaypath = nil
-		--FAILED_PATH = ZGV.Pointer.CurrentPathTarget
-		ZGV:SetWaypoint(nil,nil,nil,"path",{dontcleartemp=true}) -- clear none, just refresh
---[[ Causing the Lovely arrow problems ~Errc
-	elseif state=="arrival" then
-		ZGV:Debug("Arrived at destination!")
-		ZGV.Pointer.TempWaypath = nil
-		--FAILED_PATH = ZGV.Pointer.CurrentPathTarget
-		local pt = ZGV.Pointer.CurrentPathTarget
-		if pt then ZGV.Pointer:SetWaypoint (pt.m,pt.f,pt.x,pt.y,pt) end
---]]
-	elseif state=="progress" then
-		ZGV.Pointer:ShowWaiting(ext and ext.progress or 0)
-	end
-	--ZGV:SetWaypoint() -- clear none, just refresh
-end
-ZGV.Waypoints_PathFoundHandler = PathFoundHandler
 
 local farmPathEvent=CreateFrame("Frame")
 farmPathEvent:RegisterEvent("ZONE_CHANGED_NEW_AREA")
@@ -691,344 +422,584 @@ ZGV.WaypointFunctions['internal'] = {
 
 		--if only_type~="ant" then print("|cff8000ff SetWaypoint "..(only_type or "?")) end
 
+
+		-- Don't do anything if we have a corpse arrow 
 		if self.Pointer.corpsearrow or self.Pointer:IsCorpseArrowNeeded() then  return  end
 
-		if only_type=="ant" then
-			self.Pointer:ClearWaypoints_ant(#antpoints)
-		elseif only_type then
-			self.Pointer:ClearWaypoints(only_type)
-		else
-			self.Pointer:ClearWaypoints("way")
-			self.Pointer:ClearWaypoints("path")
-			self.Pointer:ClearWaypoints_ant(0)
-			wipe(antpoints)  ants_set=nil
+		if not ZGV.db.profile.waypointerredux and false then
+			-- OLD WAY
 
-			LibRover:Abort()
-			ZGV.Pointer.CurrentPathTarget = nil
-
-			--if not PATHFOUND_TO_MANUAL then self.Pointer.TempWaypath=nil end
-		end
-		if goalnumORx==false then
-			self.Pointer.TempWaypath = nil
-			return
-		end
-
-		if type(goalnumORx)=="number" and not y then
-			-- goal number given: show just that goal, remove manuals.
-			ZGV:Debug("WAY clicked goal, killing manuals")
-			self.Pointer:ClearWaypoints("manual")
-		end
-
-		--self.Pointer:HideArrow() --should hide itself if waypoint is removed
-		-- self.Pointer.TempWaypath dies automatically with its target waypoint!
-
-		--[[
-		if PATHFOUND_TO_MANUAL and self.Pointer.nummanual==0 then
-			self.Pointer.TempWaypath=nil
-			PATHFOUND_TO_MANUAL = nil
-		end
-		--]]
-
-		if y then
-			ZGV:Debug("Waypoint coords: %.2f %.2f",goalnumORx,y)
-			-- coords, plain as day
-			setwaypoint_data.title=title
-			setwaypoint_data.type=only_type
-			local way = self.Pointer:SetWaypoint (nil,nil,goalnumORx,y,setwaypoint_data)
-
-			if self.db.profile.pathfinding and not LibRover.is_stub then
-				ZGV.Pointer.CurrentPathTarget = way
-				--if way~=FAILED_PATH then
-				LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, PathFoundHandler, {title=way.title, waypoint=way})
-				--end
+			if only_type=="ant" then
+				self.Pointer:ClearWaypoints_ant(#ZGV.Pointer.antpoints)
+			elseif only_type then
+				self.Pointer:ClearWaypoints(only_type)
 			else
+				self.Pointer:ClearWaypoints("way")
+				self.Pointer:ClearWaypoints("path")
+				self.Pointer:ClearWaypoints_ant(0)
+				wipe(self.Pointer.antpoints)  ants_set=nil
+	
+				LibRover:Abort()
+	
 				ZGV.Pointer.CurrentPathTarget = nil
+	
+				--if not PATHFOUND_TO_MANUAL then self.Pointer.TempWaypath=nil end
+	
 			end
-		end
+			if goalnumORx==false then
+				self.Pointer.TempWaypath = nil
+	
+				return
+			end
+	
+			if type(goalnumORx)=="number" and not y then
+				-- goal number given: show just that goal, remove manuals.
+				ZGV:Debug("WAY clicked goal, killing manuals")
+				self.Pointer:ClearWaypoints("manual")
+			end
+	
+			--self.Pointer:HideArrow() --should hide itself if waypoint is removed
+			-- self.Pointer.TempWaypath dies automatically with its target waypoint!
+	
+			--[[
+			if PATHFOUND_TO_MANUAL and self.Pointer.nummanual==0 then
+				self.Pointer.TempWaypath=nil
+				PATHFOUND_TO_MANUAL = nil
+			end
+			--]]
+	
+			if y then
+				ZGV:Debug("Waypoint coords: %.2f %.2f",goalnumORx,y)
+				-- coords, plain as day
+				wipe(setwaypoint_data)  setwaypoint_data.persistent=true  setwaypoint_data.overworld=true
+				setwaypoint_data.title=title
+				setwaypoint_data.type=only_type
+				local way = self.Pointer:SetWaypoint (nil,nil,goalnumORx,y,setwaypoint_data)
+	
+	
+				if self.db.profile.pathfinding and not LibRover.is_stub then
+					ZGV.Pointer.CurrentPathTarget = way
+					--if way~=FAILED_PATH then
+					LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+					--end
+				else
+					ZGV.Pointer.CurrentPathTarget = nil
+				end
+			end
+	
+	
+			local map = GetCurrentMapAreaID()
+			local overworld = (map==13 or map==14 or map==0 or map==689 or map==-1 or map==485 or map==466)
+			self.Pointer:SetAntSpacing(overworld and self.db.profile.antspacing*10 or self.db.profile.antspacing)
 
-		local map = GetCurrentMapAreaID()
-		local overworld = (map==13 or map==14 or map==0 or map==689 or map==-1 or map==485 or map==466)
-		self.Waypoints:SetAntSpacing(overworld and self.db.profile.antspacing*10 or self.db.profile.antspacing)
-
-
-
-		local step = self.CurrentStep
-
-		local arrowpoint,pathpoint,farmpoint
-
-		local activeants=0
-
-		local function set_waypoints(points,worldsize,minisize,type)
-			local pathmode = (type=="path")
-			local antmode = (type=="ant")
-			for k,point in ipairs(points) do
-				if not point.force_noway and point.x then
-					if not antmode then
-						local data = setwaypoint_data
-						
-						data.title = not antmode and
-								(title
-								or point.waytitle or point.title
-								or (pathmode and (step and step.waypath and step.waypath.title and step.waypath.title or "Path").." ("..k..")")
-								or (step and step:GetWayTitle())
-								or (point.map and point.x and ("%s %d,%d"):format(ZGV.Pointer.GetMapNameByID2(point.map),point.x*100,point.y*100))
-								or L['waypoint_step']:format(self.CurrentStepNum)
-								)
-						data.onminimap="always"
-						data.showonedge=not antmode and not pathmode
-						data.passive=antmode
-						data.type=type
-						data.num=k
-
-						for k,v in pairs(point) do if k~="map" and k~="floor" and k~="x" and k~="y" then data[k]=v end end
-						local way = self.Pointer:SetWaypoint (point.map,point.floor,point.x,point.y, data, false)
-						point.pointer_way=way
-						if way then
-							if (not antmode and not point.player) or point.arrow or type=="manual" then
-								arrowpoint = arrowpoint --[[or way.surrogate_for--]] or way
-								farmpoint = arrowpoint or way
-								--pathpoint = pathpoint or way  -- in case they ARE different somehow
+			local step = self.CurrentStep
+	
+			local arrowpoint,pathpoint,farmpoint
+	
+	
+			local activeants=0
+	
+			local function set_waypoints(points,worldsize,minisize,type)
+				local pathmode = (type=="path")
+				local antmode = (type=="ant")
+				for k,point in ipairs(points) do
+					if not point.force_noway and point.x then
+						if not antmode then
+	
+							wipe(setwaypoint_data)  setwaypoint_data.persistent=true  setwaypoint_data.overworld=true
+							local data = setwaypoint_data
+							
+							data.title = not antmode and
+									(title
+									or point.waytitle or point.title
+									or (pathmode and (step and step.waypath and step.waypath.title and step.waypath.title or "Path").." ("..k..")")
+									or (step and step:GetWayTitle())
+									or (point.map and point.x and ("%s %d,%d"):format(ZGV.Pointer.GetMapNameByID2(point.map),point.x*100,point.y*100))
+									or L['waypoint_step']:format(self.CurrentStepNum)
+									)
+							data.onminimap="always"
+							data.showonedge=not antmode and not pathmode
+							data.passive=antmode
+							data.type=type
+							data.num=k
+	
+							for k,v in pairs(point) do if k~="map" and k~="floor" and k~="x" and k~="y" then data[k]=v end end
+							local way = self.Pointer:SetWaypoint (point.map,point.floor,point.x,point.y, data, false)
+							point.pointer_way=way
+							if way then
+								if (not antmode and not point.player) or point.arrow or type=="manual" then
+									arrowpoint = arrowpoint --[[or way.surrogate_for--]] or way
+									farmpoint = arrowpoint or way
+									--pathpoint = pathpoint or way  -- in case they ARE different somehow
+								end
+								-- or (step.waypath and step.waypath.current==point)
+							else
+								--self:Print(("Unabmle to create waypoint: %s/%d %.2f %.2f"):format(point.map,point.floor,point.x,point.y))
 							end
-							-- or (step.waypath and step.waypath.current==point)
-						else
-							--self:Print(("Unabmle to create waypoint: %s/%d %.2f %.2f"):format(point.map,point.floor,point.x,point.y))
+						else -- ants!!!
+							ZGV.Pointer:SetWaypoint_ant (point.map,point.floor,point.x,point.y, k, point.icon)
 						end
-					else -- ants!!!
-						ZGV.Pointer:SetWaypoint_ant (point.map,point.floor,point.x,point.y, k, point.icon)
+					end
+				end
+				if antmode then activeants=#points end
+			end
+	
+			local function update_ant_waypoints(points)  -- optimized for ants
+				for k,point in ipairs(points) do
+					local way = point.pointer_way
+					if way then
+						way.map,way.floor,way.x,way.y=point.map,point.floor,point.x,point.y
 					end
 				end
 			end
-			if antmode then activeants=#points end
-		end
-
-		local function update_ant_waypoints(points)  -- optimized for ants
-			for k,point in ipairs(points) do
-				local way = point.pointer_way
-				if way then
-					way.map,way.floor,way.x,way.y=point.map,point.floor,point.x,point.y
-				end
-			end
-		end
-		-- TODO we are updating this constantly. that's really inefficient ~aprotas
-		-- No, we're not really re-defining this function over and over. ~sinus
-
-		 --or (step and step.waypath)
-		local farmpath=(step and step.waypath)
-		local waypath = ZGV.Pointer.TempWaypath
-
-		-- manuals don't mix well with farm/follow paths. REMOVE manuals, when finding a path. Oh well.
-		-- OR NOT?
-
-	--[[	if step and step.waypath and ZGV.Pointer.TempWaypath and self.Pointer.nummanual>0 then
-			self.Pointer:ClearWaypoints("manual")
-			ZGV.Pointer.TempWaypath=nil
-			waypath = step and step.waypath
-		end--]]
-
-		local function showPaths(waypath)
-			if waypath and #waypath.coords>1 then  -- show ants, or just the path, anyway.
-				self.Pointer.pathfollow = waypath.follow
-				self.Pointer.pathloop = waypath.loop
-
-				for wpi,wp in ipairs(waypath.coords) do
-					wp.curve_accuracy=nil  -- clear this cached value, we might change accuracy.
-
-					-- point is player? get new location
-					if wp.player then
-
-						local m,f,x,y = Astrolabe:GetCurrentPlayerPosition("last")
-						wp.map,wp.floor,wp.x,wp.y = m,f,x,y
-						wp.gx,wp.gy,wp.gm,wp.gf = nil,nil,nil,nil
-						wp.icon=nil
-						--ZGV.Pointer:SetWaypoint (wp.map,wp.floor,wp.x,wp.y,nil,nil)--data,arrow)
-						--ants=spawn(waypath)
-						--show(waypath, ants)
-					end
-
-					--globalize position! fill gm,gx,gy with world-global values. Otherwise ants can't travel over zone crossings.
-					if not wp.gx and wp.map then
-						local mastermap = Astrolabe.WorldMapSize[wp.map].systemParent or 0
-						local masterminflr = ZGV:SanitizeMapFloor(mastermap,0)
-						--if Astrolabe.WorldMapSize[wp.map].system==466 then mastermap=466 end  -- outland, do NOT translate onto Azeroth
-						--if Astrolabe.WorldMapSize[wp.map].system==640 then mastermap=640 end  -- deepholm, do NOT translate onto Azeroth
-						--if wp.c==-1 then mastermap=Astrolabe.WorldMapSize[wp.map].system end  -- instances, do NOT translate onto Azeroth
-						if wp.map~=mastermap then
-							wp.gx,wp.gy = Astrolabe:TranslateWorldMapPosition( wp.map, wp.floor, wp.x, wp.y, mastermap, masterminflr )
+			-- TODO we are updating this constantly. that's really inefficient ~aprotas
+			-- No, we're not really re-defining this function over and over. ~sinus
+	
+			 --or (step and step.waypath)
+			local farmpath=(step and step.waypath)
+			local waypath = ZGV.Pointer.TempWaypath
+	
+			-- manuals don't mix well with farm/follow paths. REMOVE manuals, when finding a path. Oh well.
+			-- OR NOT?
+	
+	
+		--[[	if step and step.waypath and ZGV.Pointer.TempWaypath and self.Pointer.nummanual>0 then
+				self.Pointer:ClearWaypoints("manual")
+				ZGV.Pointer.TempWaypath=nil
+				waypath = step and step.waypath
+			end--]]
+	
+	
+			local function showPaths(waypath)
+				if waypath and #waypath.coords>1 then  -- show ants, or just the path, anyway.
+					self.Pointer.pathfollow = waypath.follow
+					self.Pointer.pathloop = waypath.loop
+	
+					for wpi,wp in ipairs(waypath.coords) do
+						wp.curve_accuracy=nil  -- clear this cached value, we might change accuracy.
+	
+						-- point is player? get new location
+						if wp.player then
+	
+							local m,f,x,y = Astrolabe:GetCurrentPlayerPosition("last")
+							wp.map,wp.floor,wp.x,wp.y = m,f,x,y
+							wp.gx,wp.gy,wp.gm,wp.gf = nil,nil,nil,nil
+							wp.icon=nil
+							--ZGV.Pointer:SetWaypoint (wp.map,wp.floor,wp.x,wp.y,nil,nil)--data,arrow)
+							--ants=spawn(waypath)
+							--show(waypath, ants)
 						end
-						if wp.gx then
-							wp.gm,wp.gf=mastermap,masterminflr
+	
+						--globalize position! fill gm,gx,gy with world-global values. Otherwise ants can't travel over zone crossings.
+						if not wp.gx and wp.map then
+							local mastermap = Astrolabe.WorldMapSize[wp.map].systemParent or 0
+							local masterminflr = ZGV:SanitizeMapFloor(mastermap,0)
+							--if Astrolabe.WorldMapSize[wp.map].system==466 then mastermap=466 end  -- outland, do NOT translate onto Azeroth
+							--if Astrolabe.WorldMapSize[wp.map].system==640 then mastermap=640 end  -- deepholm, do NOT translate onto Azeroth
+							--if wp.c==-1 then mastermap=Astrolabe.WorldMapSize[wp.map].system end  -- instances, do NOT translate onto Azeroth
+							if wp.map~=mastermap then
+								wp.gx,wp.gy = Astrolabe:TranslateWorldMapPosition( wp.map, wp.floor, wp.x, wp.y, mastermap, masterminflr )
+							end
+							if wp.gx then
+								wp.gm,wp.gf=mastermap,masterminflr
+							else
+								wp.gm,wp.gf=wp.map,wp.floor
+								wp.gx,wp.gy=wp.x,wp.y
+							end
+						end
+					end
+	
+					if waypath.ants and ZGV.Pointer.curve_spacing>0
+					and only_type=="ant"
+					then --and not step.waypath_curved
+						--step.waypath_curved = true
+	
+						local antpoints
+						--print("spawning, player = "..waypath.coords[1].x)
+						if waypath.ants=="straight" or #waypath.coords<3 then
+							antpoints = ZGV.Pointer.spawn_straight_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
 						else
-							wp.gm,wp.gf=wp.map,wp.floor
-							wp.gx,wp.gy=wp.x,wp.y
+							antpoints = ZGV.Pointer.spawn_curve_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
 						end
-					end
-				end
-
-				if waypath.ants and curve_spacing>0
-				and only_type=="ant"
-				then --and not step.waypath_curved
-					--step.waypath_curved = true
-
-					local antpoints
-					--print("spawning, player = "..waypath.coords[1].x)
-					if waypath.ants=="straight" or #waypath.coords<3 then
-						antpoints = spawn_straight_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
-					else
-						antpoints = spawn_curve_ants(waypath.coords,waypath.loop,ZGV.Pointer.antphase)
-					end
-
-					--calc_angles(antpoints,waypath.loop)
-					if antpoints then
-						if ants_optimized_which_isnt_implemented then
-							if ants_set then
-								update_ant_waypoints(antpoints)
+	
+						--calc_angles(antpoints,waypath.loop)
+						if antpoints then
+							if ants_optimized_which_isnt_implemented then
+								if ZGV.Pointer.ants_set then
+									update_ant_waypoints(antpoints)
+								else
+									set_waypoints(antpoints,35,30,"ant")
+									ZGV.Pointer.ants_set=true
+								end
 							else
 								set_waypoints(antpoints,35,30,"ant")
-								ants_set=true
+							end
+						end
+					end
+	
+					if not only_type or only_type=="path" then
+						if waypath.ants=="curved" then
+							ZGV.Pointer.calc_angles_curved(waypath.coords,waypath.loop)
+						else
+							ZGV.Pointer.calc_angles(waypath.coords,waypath.loop)
+						end
+	
+						for k,point in ipairs(waypath.coords) do
+							if point.angle and self.Pointer.pathloop then
+								point.icon = ZGV.Pointer.Icons.none
+							elseif point.angle then
+								point.icon=ZGV.Pointer.Icons.arrow
+							else
+								point.icon=ZGV.Pointer.Icons.dot
+							end
+						end
+						set_waypoints(waypath.coords,nil,nil,"path")
+					end
+				else
+					self.Pointer.pathfollow = nil
+				end
+	
+			end
+	
+	
+			if farmpath and waypath and GetCurrentMapAreaID()~=farmpath.coords[1].map then
+				showPaths(waypath)
+				showPaths(farmpath)
+				ZGV.Pointer.pathfollow="pathfind"
+			elseif farmpath and waypath and GetCurrentMapAreaID()==farmpath.coords[1].map then -- only show the farmpath when in the zone
+				showPaths(farmpath)
+			else
+				local waypathing = waypath or farmpath
+				showPaths(waypathing)
+			end
+	
+	
+	
+			ZGV.Pointer:ClearWaypoints_ant(activeants)
+	
+			if only_type=="ant"  then return end   --------------------- only non-ants beyond this point
+	
+			local points
+			if step and step.goals and not only_type then
+				ZGV:Debug("WAY showing goal(s)")
+				if goalnumORx then
+					points={step.goals[goalnumORx]}
+				else
+					points={}
+					for i=1,#step.goals do
+						if step.goals[i].x then tinsert(points,step.goals[i]) end
+					end
+				end
+	
+				if #points>0 then
+					ZGV:Debug("setting wayps, waypath=%s, cpt=%s",tostring(waypath),tostring(ZGV.Pointer.CurrentPathTarget))
+					set_waypoints(points,35,30,"way")
+	
+	
+	
+	
+	
+	
+	
+	
+					if not waypath
+					and step.L
+					and not ZGV.Pointer.CurrentPathTarget
+					then
+						ZGV:Debug("WAY arrowpoint=%s",(arrowpoint and arrowpoint.type or "NONE"))
+						if self.db.profile.pathfinding then  ZGV.Pointer.CurrentPathTarget = arrowpoint  else  ZGV.Pointer.CurrentPathTarget = nil  end
+						Path=ZGV.Pointer.CurrentPathTarget
+					end
+	
+				end
+			end
+	
+			-- ALL MAP POINTS ARE IN PLACE!
+			-- Now point to some of them, perhaps...
+	
+			 function changeZone()
+				if not UnitIsDeadOrGhost("player") and farmpoint and farmpath and not WorldMapButton:IsVisible() and farmpath.coords then
+					if GetCurrentMapAreaID()==farmpath.coords[1].map then
+	
+						ZGV.Pointer.TempWaypath=nil
+						ZGV.Pointer:RemoveWaypoint(farmpoint)
+						ZGV:SetWaypoint()
+						showPaths(farmpath)
+						LibRover:Abort()
+					else
+						local way=farmpoint
+	
+						if way.num~=1 then
+							LibRover:FindLastPath()
+						else
+							if way.map and not way.m then
+								LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+							else
+								LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+							end
+						end
+	
+						LibRover:UpdateNow()
+					end
+				end
+			end
+	
+	
+			farmPathEvent:SetScript("OnEvent", changeZone)
+	
+			if arrowpoint and not UnitIsDeadOrGhost("player")
+			and not self.Pointer.ArrowFrame.waypoint
+			and not arrowpoint.passive
+			then
+				-- don't overwrite the stinking arrow
+				self.Pointer:ShowArrow (arrowpoint)
+			end
+	
+	
+			-- And perhaps initiate a search for a path.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+			oldpathtarget="dupa" -- ah fuck, waypoints are REUSED!    foo=way ; way = ZGV.Pointer:SetWaypoint(...) ; assert(foo==way)
+			local way = ZGV.Pointer.CurrentPathTarget
+			if self.db.profile.pathfinding then
+	
+				if way~=oldpathtarget and only_type~="path" then
+	
+					--oldpathtarget = way
+					if way and not farmpath then
+					--and way~=FAILED_PATH
+						if way.map and not way.m then
+							LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+						else
+							LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+						end
+	
+					elseif farmpath and farmpoint then
+						way=farmpoint
+	
+						if way.map and not way.m then
+							if way.map~=GetCurrentMapAreaID() then
+								LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
 							end
 						else
-							set_waypoints(antpoints,35,30,"ant")
+							if way.m~=GetCurrentMapAreaID() then
+								LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+							end
 						end
 					end
-				end
-
-				if not only_type or only_type=="path" then
-					if waypath.ants=="curve" then
-						calc_angles_curved(waypath.coords,waypath.loop)
-					else
-						calc_angles(waypath.coords,waypath.loop)
-					end
-
-					for k,point in ipairs(waypath.coords) do
-						if point.angle and self.Pointer.pathloop then
-							point.icon = ZGV.Pointer.Icons.none
-						elseif point.angle then
-							point.icon=ZGV.Pointer.Icons.arrow
-						else
-							point.icon=ZGV.Pointer.Icons.dot
-						end
-					end
-					set_waypoints(waypath.coords,nil,nil,"path")
 				end
 			else
-				self.Pointer.pathfollow = nil
+				LibRover:Abort()
 			end
-
-		end
-
-		if farmpath and waypath and GetCurrentMapAreaID()~=farmpath.coords[1].map then
-			showPaths(waypath)
-			showPaths(farmpath)
-			ZGV.Pointer.pathfollow="pathfind"
-		elseif farmpath and waypath and GetCurrentMapAreaID()==farmpath.coords[1].map then -- only show the farmpath when in the zone
-			showPaths(farmpath)
 		else
-			local waypathing = waypath or farmpath
-			showPaths(waypathing)
-		end
+			-- NEW WAY
+			ZGV:Debug("Using waypointerredux.")
 
-		ZGV.Pointer:ClearWaypoints_ant(activeants)
+			-- Clear stuff out
+			
+			self.Pointer:ClearWaypoints("way")
+			--self.Pointer:ClearWaypoints("manual")
+			--self.Pointer:ClearWaypoints("path")
+			--self.Pointer:ClearSet("route")
 
-		if only_type=="ant"  then return end   --------------------- only non-ants beyond this point
 
-		local points
-		if step and step.goals and not only_type then
-			ZGV:Debug("WAY showing goal(s)")
-			if goalnumORx then
-				points={step.goals[goalnumORx]}
+			--LibRover:Abort()
+			--ZGV.Pointer.DestinationWaypoint = nil
+
+
+			if (type(goalnumORx)=="number" and not y) -- goal number given: show just that goal, remove manuals
+			or (ZGV.Pointer.nummanual>0 and ZGV.Pointer.DestinationWaypoint.type~="manual") -- there's a manual, but abandoned
+			then
+				self.Pointer:ClearWaypoints("manual")
+			end
+
+
+			-- false: HIDE THE WAYPOINTS!
+			if goalnumORx==false then -- well, already cleared...
+				return
+			end
+	
+			-- Coordinates given: show one waypoint (and let waypointer path to it)
+			if y then
+				ZGV:Debug("&waypoints SetWaypoint coords: %.2f %.2f",goalnumORx,y)
+				-- coords, plain as day
+				wipe(setwaypoint_data)
+				setwaypoint_data.persistent=true
+				setwaypoint_data.overworld=true
+				setwaypoint_data.title=title
+				setwaypoint_data.type="way"
+				setwaypoint_data.is_destination=true
+				setwaypoint_data.find_path=true
+				local way = self.Pointer:SetWaypoint (nil,nil,goalnumORx,y,setwaypoint_data)
+				return
+			end
+
+			
+			---------------- NORMAL FUNCTION -------------
+
+			if type(goalnumORx)=="number" and not y then
+				ZGV:Debug("WAY clicked goal %d, will point to it")
+			end
+	
+	
+			local step = self.CurrentStep
+			local arrowpoint,pathpoint,farmpoint
+	
+			-- SHOW FARM PATH.
+	
+			local arrowpoint,farmpoint 
+
+			local farmpath = step and step.waypath
+			if farmpath then
+				ZGV.Pointer:ShowSet(farmpath,"farm")
+				if not farmpath.loop then arrowpoint = ZGV.Pointer.pointsets["farm"].points[1] end
 			else
-				points={}
-				for i=1,#step.goals do
-					if step.goals[i].x then tinsert(points,step.goals[i]) end
-				end
+				ZGV.Pointer:ClearSet("farm")
 			end
+	
+			-- SHOW STEP WAYPOINTS.
+	
+			local pointed = false
 
-			if #points>0 then
-				ZGV:Debug("setting wayps, waypath=%s, cpt=%s",tostring(waypath),tostring(ZGV.Pointer.CurrentPathTarget))
-				set_waypoints(points,35,30,"way")
-
-				if not waypath
-				and step.L
-				and not ZGV.Pointer.CurrentPathTarget
-				then
-					ZGV:Debug("WAY arrowpoint=%s",(arrowpoint and arrowpoint.type or "NONE"))
-					if self.db.profile.pathfinding then  ZGV.Pointer.CurrentPathTarget = arrowpoint  else  ZGV.Pointer.CurrentPathTarget = nil  end
-					Path=ZGV.Pointer.CurrentPathTarget
-				end
-			end
-		end
-
-		-- ALL MAP POINTS ARE IN PLACE!
-		-- Now point to some of them, perhaps...
-
-		 function changeZone()
-			if not UnitIsDeadOrGhost("player") and farmpoint and farmpath and not WorldMapButton:IsVisible() and farmpath.coords then
-				if GetCurrentMapAreaID()==farmpath.coords[1].map then
-
-					ZGV.Pointer.TempWaypath=nil
-					ZGV.Pointer:RemoveWaypoint(farmpoint)
-					ZGV:SetWaypoint()
-					showPaths(farmpath)
-					LibRover:Abort()
+			local points
+			if step and step.goals and not only_type then
+				ZGV:Debug("WAY showing goal(s)")
+				if goalnumORx then
+					points={step.goals[goalnumORx]}
 				else
-					local way=farmpoint
+					points={}
+					for i=1,#step.goals do
+						if step.goals[i].x then tinsert(points,step.goals[i]) end
+					end
+				end
+	
+				if #points>0 then
+					ZGV:Debug("setting wayps, waypath=%s, cpt=%s",tostring(waypath),tostring(ZGV.Pointer.DestinationWaypoint))
+					
+					arrowpoint,farmpoint = ZGV.Pointer.set_waypoints(points,35,30,"way")
+				end
+			end
 
-					if way.num~=1 then
-						LibRover:FindLastPath()
+			-- Waypoints are set.
+
+			-- NOW, POINT THE ARROW / PLOT THE PATH.
+
+			if ZGV.Pointer.nummanual>0 then
+				-- leave it the hell alone.
+			elseif arrowpoint then
+				ZGV.Pointer:FindTravelPath(arrowpoint)
+			elseif farmpath and not pointed and ZGV.Pointer.nummanual==0 then
+				-- TRY TO POINT TO A FARM PATH.
+				-- find center of farm path and point there
+				local firstcoord = farmpath.coords[1]
+				if firstcoord and GetCurrentMapAreaID()~=firstcoord.map then
+					local x,y=0,0
+					for i,coord in ipairs(farmpath.coords) do x=x+coord.x y=y+coord.y end
+					x=x/#farmpath.coords
+					y=y/#farmpath.coords
+	
+					local way = ZGV.Pointer:SetWaypoint(firstcoord.map,firstcoord.floor,x,y,{icon=ZGV.Pointer.Icons.none})
+					if way then ZGV.Pointer:FindTravelPath(way) end
+				end
+			else
+				LibRover:Abort()
+			end
+
+
+			--[[
+			function changeZone()	-- who the hell named a function "changeZone" when it doesn't change a zone? ~sinus
+				if not UnitIsDeadOrGhost("player") and farmpoint and farmpath and not WorldMapButton:IsVisible() and farmpath.coords then
+					if GetCurrentMapAreaID()==farmpath.coords[1].map then
+	
+						ZGV.Pointer.TempWaypath=nil
+						ZGV.Pointer:RemoveWaypoint(farmpoint)
+						ZGV:SetWaypoint()
+						ZGV.Pointer:ShowSet(farmpath)
+						LibRover:Abort()
 					else
-						if way.map and not way.m then
-							LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+						local way=farmpoint
+	
+						if way.num~=1 then
+							LibRover:FindLastPath()
 						else
-							LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, PathFoundHandler, {title=way.title, waypoint=way})
+							if way.map and not way.m then
+								LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+							else
+								LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+							end
 						end
-					end
-
-					LibRover:UpdateNow()
-				end
-			end
-		end
-
-		farmPathEvent:SetScript("OnEvent", changeZone)
-
-		if arrowpoint and not UnitIsDeadOrGhost("player")
-		and not self.Pointer.ArrowFrame.waypoint
-		then
-			-- don't overwrite the stinking arrow
-			self.Pointer:ShowArrow (arrowpoint)
-		end
-
-		-- And perhaps initiate a search for a path.
-		oldpathtarget="dupa" -- ah fuck, waypoints are REUSED!    foo=way ; way = ZGV.Pointer:SetWaypoint(...) ; assert(foo==way)
-		local way = ZGV.Pointer.CurrentPathTarget
-		if self.db.profile.pathfinding then
-
-			if way~=oldpathtarget and only_type~="path" then
-
-				--oldpathtarget = way
-				if way and not farmpath then
-				--and way~=FAILED_PATH
-					if way.map and not way.m then
-						LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
-					else
-						LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, PathFoundHandler, {title=way.title, waypoint=way})
-					end
-
-				elseif farmpath and farmpoint then
-					way=farmpoint
-
-					if way.map and not way.m then
-						if way.map~=GetCurrentMapAreaID() then
-							LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
-						end
-					else
-						if way.m~=GetCurrentMapAreaID() then
-							LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, PathFoundHandler, {title=way.title, waypoint=way})
-						end
+	
+						LibRover:UpdateNow()
 					end
 				end
 			end
-		else
-			LibRover:Abort()
+			--]]
+			--farmPathEvent:SetScript("OnEvent", changeZone)
+	
+			--[[
+			if arrowpoint and not UnitIsDeadOrGhost("player")
+			and not self.Pointer.ArrowFrame.waypoint
+			then
+				-- don't overwrite the stinking arrow
+				self.Pointer:ShowArrow (arrowpoint)
+			end
+			--]]
+	
+			-- And perhaps initiate a search for a path.
+	
+			
+			
+	
+				
+			--[[
+			oldpathtarget="dupa" -- ah fuck, waypoints are REUSED!    foo=way ; way = ZGV.Pointer:SetWaypoint(...) ; assert(foo==way)
+			local way = ZGV.Pointer.CurrentPathTarget
+			if self.db.profile.pathfinding then
+	
+				if way~=oldpathtarget and only_type~="path" then
+	
+					--oldpathtarget = way
+					if way and not farmpath then
+					--and way~=FAILED_PATH
+						if way.map and not way.m then
+							LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+						else
+							LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+						end
+	
+					elseif farmpath and farmpoint then
+						way=farmpoint
+	
+						if way.map and not way.m then
+							if way.map~=GetCurrentMapAreaID() then
+								LibRover:FindPath(0,0,0,0,way.map,way.floor,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, is_indoors=way.is_indoors, waypoint=way })
+							end
+						else
+							if way.m~=GetCurrentMapAreaID() then
+								LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, ZGV.Pointer.PathFoundHandler, {title=way.title, waypoint=way})
+							end
+						end
+					end
+				end
+			else
+				LibRover:Abort()
+			end
+			--]]
 		end
 
 	end,

@@ -86,9 +86,11 @@ grip:SetScript("OnMouseUp", function(self)
 	updateScrollHeight(InterfaceOptionsFrameCategories)
 	updateScrollHeight(InterfaceOptionsFrameAddOns)
 end)
+local widthed
 grip:SetScript("OnEvent", function(self)
 	updateScrollHeight(InterfaceOptionsFrameCategories)
 	updateScrollHeight(InterfaceOptionsFrameAddOns)
+	if not widthed then InterfaceOptionsFrame:SetWidth(850) widthed=true end
 end)
 if not grip:IsEventRegistered("PLAYER_LOGIN") then
 	grip:RegisterEvent("PLAYER_LOGIN")
@@ -119,8 +121,8 @@ end
 
 --InterfaceOptionsFrame:SetFrameStrata("FULLSCREEN_DIALOG")
 InterfaceOptionsFrame:SetResizable(true)
-InterfaceOptionsFrame:SetWidth(800)
-InterfaceOptionsFrame:SetMinResize(800, 495)
+InterfaceOptionsFrame:SetWidth(850)
+InterfaceOptionsFrame:SetMinResize(850, 495)
 InterfaceOptionsFrame:SetClampedToScreen(true)
 --InterfaceOptionsFrame:SetToplevel(true)
 

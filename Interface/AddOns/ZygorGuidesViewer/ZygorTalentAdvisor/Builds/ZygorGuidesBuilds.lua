@@ -463,9 +463,9 @@ ZTA:RegisterBuild("ROGUE","Leveling Combat(Recommended)","Combat", [[
 	Deadly Brew
 	Shuriken Toss
 ]],[[
-	Major Glyph of Vendetta
+	Major Glyph of Adrenaline Rush
 	Major Glyph of Deadly Momentum
-	Major Glyph of Cheap Shot
+	Major Glyph of Blade Flurry
 	Minor Glyph of Blurred Speed
 	Minor Glyph of Safe Fall
 	Minor Glyph of Disguise

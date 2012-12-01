@@ -16,7 +16,7 @@ goto Orgrimmar/2 70.2,48.8 |n
 step
 label	"start"
 goto Ragefire Chasm 69.4,11.0
-.talk 61823 
+.talk 61823
 ..accept 30998
 ..accept 30996
 step
@@ -37,11 +37,11 @@ goto 68.7,64.2
 .from Adarogg##61408 |only if not havequest(30997)
 .kill Adarogg##61408 |q 30997/1 |only if havequest(30997)
 |confirm |only if not havequest(30997)
-step	
+step
 goto 65.0,70.8
 .talk 61780
 .' Tell him:
-.' <It's Safe to come out now.> 
+.' <It's Safe to come out now.>
 |confirm
 |only if not completedq(30995)
 step
@@ -50,7 +50,7 @@ step
 goto 53.0,26.1
 .talk 61790
 .' Tell him:
-.' <It's Safe to come out now.> 
+.' <It's Safe to come out now.>
 |confirm
 |only if not completedq(30995)
 step
@@ -86,7 +86,7 @@ step
 |only if havequest(30998)
 step
 goto 33.5,80.6
-.talk 61823 
+.talk 61823
 ..turnin 30998
 ..turnin 30996
 step
@@ -94,7 +94,6 @@ goto 31.7,76.5
 .talk 61822
 ..turnin 30997
 ..turnin 30995
-
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Dungeon Guides\\Classic Dungeons\\Deadmines (DM) 15-18",[[
 dungeon 756

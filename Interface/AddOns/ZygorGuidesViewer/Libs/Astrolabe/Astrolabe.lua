@@ -1190,7 +1190,7 @@ local function harvestMapData( HarvestedMapData )
 	mapData.zone = (GetCurrentMapZone()) or -100;
 	mapData.numFloors = numFloors;
 	local _, TLx, TLy, BRx, BRy = GetCurrentMapZone();
-	if ( TLx and TLy and BRx and BRy) then
+	if TLx and TLy and BRx and BRy and (firstFloor==0 or usesTerrainMap) then  -- we have a "ground floor"
 		mapData[0] = {};
 		if not ( TLx < BRx ) then
 			TLx = -TLx;
@@ -1283,7 +1283,7 @@ local function activate( newInstance, oldInstance )
 			end
 		end
 
-		for id=1,1000 do  -- TODO: replace with "for _, id in ipairs(GetAreaMaps()) do"
+		for _, id in ipairs(GetAreaMaps()) do
 			if not ( HarvestedMapData[id] ) then
 				if ( SetMapByID(id) ) then
 					harvestMapData(HarvestedMapData);
@@ -1821,6 +1821,9 @@ for mapID, harvestedData in pairs(Astrolabe.HarvestedMapData) do
 			floorData.height = floorData.height or (harvData.BRy - harvData.TLy)
 			floorData.xOffset = floorData.xOffset or harvData.TLx
 			floorData.yOffset = floorData.yOffset or harvData.TLy
+
+			floorData.mapName = harvData.mapName
+			floorData.floorName = harvData.floorName
 		end
 	end
 	mapData[0]=nil
@@ -1906,7 +1909,7 @@ for mapID, harvestedData in pairs(Astrolabe.HarvestedMapData) do
 		if not ( next(mapData, nil) ) then
 			mapData = { xOffset = 0, height = 1, yOffset = 0, width = 1 };
 			-- if this is an outside continent level or world map then throw up an extra warning
-			if ( harvestedData.cont > 0 and harvestedData.zone == 0 ) then
+			if ( harvestedData.cont and harvestedData.cont > 0 and harvestedData.zone == 0 ) then
 				printError(("Astrolabe is missing data for world map %s [%d] (%d, %d)."):format(harvestedData.mapName, mapID, harvestedData.cont, harvestedData.zone));
 			end
 		end
@@ -1922,7 +1925,7 @@ for mapID, harvestedData in pairs(Astrolabe.HarvestedMapData) do
 		if not ( mapData.system ) then
 			mapData.system = mapID;
 
-			if ( harvestedData.cont > 0 and harvestedData.zone > 0 ) then
+			if ( harvestedData.cont and harvestedData.zone and harvestedData.cont > 0 and harvestedData.zone > 0 ) then
 				mapData.system = Astrolabe:GetMapID(harvestedData.cont, nil);
 			end
 		end
@@ -1958,6 +1961,8 @@ WorldMapSize[688][2].xOffset,WorldMapSize[688][2].yOffset=-181,-427
 WorldMapSize[688][3].xOffset,WorldMapSize[688][3].yOffset=117,-69
 WorldMapSize[539].system=678 -- Gilneas "empty" broken map
 WorldMapSize[545].system=678 -- Gilneas "empty" broken map
+
+if WorldMapSize[539] and WorldMapSize[539].floorMax<3 then WorldMapSize[539]=WorldMapSize[545] end  -- we know 545 is in the data, it's hardcoded.
 
 -- micro dungeons
 if GetDungeonMaps then
@@ -2023,6 +2028,22 @@ Astrolabe.MicroDungeonSize = MicroDungeonSize
 MICRODUNGEONS = {
 	-- SINUS: microdungeons! Export these using Astrolabe:CalculateMicroDungeon() when in a cave.
 	  [4] = {
+	    [10] = {
+	      floorName = "Tiragarde Keep",
+	      height = 83.333999633789,
+	      microName = "TiragardeKeep",
+	      width = 125.0009765625,
+	      xOffset = 5052.4995117188,
+	      yOffset = 203.33299255371,
+	    },
+	    [11] = {
+	      floorName = "Great Hall",
+	      height = 83.333999633789,
+	      microName = "TiragardeKeep",
+	      width = 125.0009765625,
+	      xOffset = 5052.4995117188,
+	      yOffset = 203.33299255371,
+	    },
 	    [12] = {
 	      floorName = "Skull Rock",
 	      height = 180,
@@ -2030,6 +2051,14 @@ MICRODUNGEONS = {
 	      width = 270,
 	      xOffset = 4629,
 	      yOffset = -1580.5,
+	    },
+	    [19] = {
+	      floorName = "Dustwind Cave",
+	      height = 172,
+	      microName = "DustwindCave",
+	      width = 258,
+	      xOffset = 4622.5,
+	      yOffset = -971.25,
 	    },
 	    [8] = {
 	      floorName = "Burning Blade Coven",
@@ -2316,6 +2345,72 @@ MICRODUNGEONS = {
 	      yOffset = 3009.169921875,
 	    },
 	  },
+	  [544] = {
+	    [1] = {
+	      floorName = "Kaja'Mite Cavern",
+	      height = 182.66662597656,
+	      microName = "KajamiteCavern",
+	      width = 274,
+	      xOffset = -3089,
+	      yOffset = -696.83331298828,
+	    },
+	    [2] = {
+	      height = 675,
+	      microName = "VolcanothsLair",
+	      width = 1012.5,
+	      xOffset = -1728.75,
+	      yOffset = -1500,
+	    },
+	  },
+	  [678] = {
+	    [1] = {
+	      height = 280,
+	      microName = "EmberstoneMine",
+	      width = 420,
+	      xOffset = -1140,
+	      yOffset = 980,
+	    }, 
+	    [2] = {
+	      height = 166.97998046875,
+	      microName = "GreymaneManor",
+	      width = 250.4697265625,
+	      xOffset = -2710.2348632813,
+	      yOffset = 1500.0100097656,
+	    },
+	   [3] = {
+	      height = 186.97998046875,
+	      microName = "GreymaneManor",
+	      width = 280.4697265625,
+	      xOffset = -2725.2348632813,
+	      yOffset = 1480.0100097656,
+	    },
+	  },
+	  [605] = {
+	    [5] = {
+	      floorName = "Kaja'Mine Gold",
+	      height = 116.666015625,
+	      microName = "Kajamine",
+	      width = 175,
+	      xOffset = -1232.5,
+	      yOffset = 8321.6669921875,
+	    },
+	    [6] = {
+	      floorName = "Kaja'Mine Silver",
+	      height = 116.666015625,
+	      microName = "Kajamine",
+	      width = 175,
+	      xOffset = -1172.5,
+	      yOffset = 8451.6669921875,
+	    },
+	    [7] = {
+	      floorName = "Kaja'Mine Copper",
+	      height = 220,
+	      microName = "Kajamine",
+	      width = 330,
+	      xOffset = -1460,
+	      yOffset = 8480,
+	    },
+	  },
 	  [806] = {
 	   [15] = {
 		height = 220,
@@ -2366,16 +2461,6 @@ MICRODUNGEONS = {
 	      xOffset = -1847,
 	      yOffset = -3174.5,
 	    },
-	  },
-	  [810] = {
-	    [13] = {
-	      height = 325,
-	      floorName = "Niuzao Catacombs",
-	      microName = "NiuzaoCatacombs",
-	      width = 487.5,
-	      xOffset = -5256.25,
-	      yOffset = -2425,
-	    },
 	    [11] = {
 	      floorName = "Upper Deep",
 	      height = 156.66650390625,
@@ -2399,6 +2484,16 @@ MICRODUNGEONS = {
 	      width = 465,
 	      xOffset = -1945,
 	      yOffset = -3835,
+	    },
+	  },
+	  [810] = {
+	    [13] = {
+	      height = 325,
+	      floorName = "Niuzao Catacombs",
+	      microName = "NiuzaoCatacombs",
+	      width = 487.5,
+	      xOffset = -5256.25,
+	      yOffset = -2425,
 	    },
 	  },
 	  [811] = {
@@ -2433,6 +2528,32 @@ MICRODUNGEONS = {
 	      width = 3200,
 	      xOffset = -3200,
 	      yOffset = -1600,
+	    },
+	  },
+	  [857] = {
+	    [1] = {
+	      floorName = "Explorers' League HQ",
+	      height = 175,
+	      microName = "RuinsofOgudei",
+	      width = 262.5,
+	      xOffset = 731.875,
+	      yOffset = 575,
+	    },
+	    [2] = {
+	      floorName = "Ruins of Ogudei",
+	      height = 335.00073242188,
+	      microName = "RuinsofOgudei",
+	      width = 502.5009765625,
+	      xOffset = 632.96899414063,
+	      yOffset = 549.99963378906,
+	    },
+	    [3] = {
+	      floorName = "Reliquary Incursion",
+	      height = 141.666015625,
+	      microName = "RuinsofOgudei",
+	      width = 212.4990234375,
+	      xOffset = 796.87097167969,
+	      yOffset = 621.6669921875,
 	    },
 	  },
 	  [866] = {
@@ -2543,8 +2664,8 @@ local function CalcFloorMinMax()
 		zonedata.floorMax = 0
 		for fl,fldata in pairs(zonedata) do
 			if type(fl)=="number" then
-				if fl<zonedata.floorMin then zonedata.floorMin=fl
-				elseif fl>zonedata.floorMax then zonedata.floorMax=fl end
+				if fl<zonedata.floorMin then zonedata.floorMin=fl end
+				if fl>zonedata.floorMax then zonedata.floorMax=fl end
 			end
 		end
 	end
