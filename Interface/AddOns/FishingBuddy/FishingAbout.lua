@@ -33,7 +33,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "v0.8.1d", },
 	["RustyXXL"] = { "V1.0.4", },
 	["Ithilrandir"] = { "V1.0.5", },
-	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", },
+	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", "V1.2d", },
 	["Freydis88"] = { "V1.0.9e", },
 	["Frontiii"] = { "V1.0.9e", },
 };

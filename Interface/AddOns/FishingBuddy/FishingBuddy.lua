@@ -717,18 +717,6 @@ QuestItems[69914] = {
 	["enUS"] = "Giant Catfish",
 	open = true,
 };
-QuestItems[79046] = {
-	["enUS"] = "Sugar Minnow",
-};
-QuestItems[81122] = {
-	["enUS"] = "Wolf Pirahna",
-};
-QuestItems[80830] = {
-	["enUS"] = "Rusty Shipwreck Debris",
-};
-QuestItems[80260] = {
-	["enUS"] = "Dojani Eel",
-};
 FishingBuddy.QuestItems = QuestItems;
 
 -- Nat Pagle fish
@@ -782,8 +770,7 @@ local function SetFishingLevel(skillcheck, zone, subzone, fishid)
 	return skill + mods;
 end
 
-local questIndex = select('#', GetAuctionItemClasses());
-local questType = select(questIndex, GetAuctionItemClasses());
+local questType = select(10, GetAuctionItemClasses());
 local CurLoc = GetLocale();
 local function AddFishie(color, id, name, zone, subzone, texture, quantity, quality, level, it, st, poolhint)
 	local GSB = FishingBuddy.GetSettingBool;
@@ -957,7 +944,11 @@ local function UseFishingItem(itemtable)
 		if ( GetItemCount(itemid) > 0 and (not info.setting or GSB(info.setting)) ) then
 			if ( not info.usable or info.usable(info) ) then
 				local buff = GetSpellInfo(info.spell);
-				if ( (info.check and info.check(buff)) or not FL:HasBuff(buff) ) then
+				local doit = not FL:HasBuff(buff);
+				if ( info.check ) then
+					doit, itemid = info.check(buff, info, doit);
+				end
+				if ( doit ) then
 					FL:InvokeLuring(itemid);
 					return true;
 				end
@@ -1116,7 +1107,10 @@ StatusEvents["UNIT_AURA"] = function(arg1)
 end
 
 local function ReadyForFishing()
-	return FL:IsFishingReady(FishingBuddy.GetSettingBool("PartialGear"));
+	local GSB = FishingBuddy.GetSettingBool;
+	local id = FL:GetMainHandItem(true);
+	-- if we're holding the spear, assume we're fishing
+	return (GSB("UseTuskarrSpear") and (id == 88535)) or FL:IsFishingReady(GSB("PartialGear"));
 end
 FishingBuddy.ReadyForFishing = ReadyForFishing;
 

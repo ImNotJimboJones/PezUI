@@ -1,21 +1,20 @@
 ------------------------------------------------------------------------
-r419 | kagaro | 2012-08-28 06:28:13 +0000 (Tue, 28 Aug 2012) | 1 line
+r422 | kagaro | 2012-11-30 12:39:22 +0000 (Fri, 30 Nov 2012) | 1 line
 Changed paths:
-   A /tags/1.13 (from /trunk:418)
+   A /tags/1.14 (from /trunk:421)
 
-Tagging as 1.13
+Tagging as 1.14
 ------------------------------------------------------------------------
-r418 | kagaro | 2012-08-28 06:24:32 +0000 (Tue, 28 Aug 2012) | 1 line
+r421 | kagaro | 2012-11-30 12:38:41 +0000 (Fri, 30 Nov 2012) | 1 line
 Changed paths:
    M /trunk/kgPanels.toc
    M /trunk/kgPanelsConfig/kgPanelsConfig.toc
 
-Update for 5.x release
+toc bump
 ------------------------------------------------------------------------
-r416 | kagaro | 2012-07-29 16:08:11 +0000 (Sun, 29 Jul 2012) | 1 line
+r420 | kagaro | 2012-11-05 15:06:04 +0000 (Mon, 05 Nov 2012) | 1 line
 Changed paths:
-   M /trunk/.pkgmeta
    M /trunk/kgPanels.lua
 
-When advance features are disabled for textures we disable the enhancements for that frame. The default is disabled
+added scaling adjustments for stan
 ------------------------------------------------------------------------

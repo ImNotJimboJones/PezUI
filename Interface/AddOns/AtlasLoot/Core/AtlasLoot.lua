@@ -1,4 +1,4 @@
--- $Id: AtlasLoot.lua 4010 2012-11-25 19:45:29Z hegarol $
+-- $Id: AtlasLoot.lua 4021 2012-11-30 16:51:31Z hegarol $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -14,7 +14,7 @@ local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 --Establish version number and compatible version of Atlas
 local VERSION_MAJOR = "7";
 local VERSION_MINOR = "04";
-local VERSION_BOSSES = "00";
+local VERSION_BOSSES = "01";
 ATLASLOOT_VERSION = "|cffFF8400AtlasLoot Enhanced v"..VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES.."|r";
 ATLASLOOT_VERSION_NUM = VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES
 

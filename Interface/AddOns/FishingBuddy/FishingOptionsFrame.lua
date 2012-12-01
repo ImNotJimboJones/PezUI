@@ -371,6 +371,44 @@ local function orderbuttons(btnlist)
 	return order;
 end
 
+local RIGHT_OFFSET = 32;
+local BUTTON_SEP = 16;
+local function layoutorder(btnlist, maxwidth)
+	if not btnlist then
+		return {};
+	end
+
+	local order = orderbuttons(btnlist);
+	local layout = {};
+	local used = {};
+	
+	local idx = 1;
+	while (idx <= #order ) do
+		if ( not used[idx] ) then
+			local left = order[idx];
+			local leftbut = btnlist[left];
+			local right = nil;
+
+			local tw = RIGHT_OFFSET + BUTTON_SEP + leftbut.width;
+			for jdx=#order,idx+1,-1 do
+				if ( not right and not used[jdx] ) then
+					local tr = order[jdx];
+					local tb = btnlist[tr];
+					if ((tb.width + tw) <= maxwidth) then
+						used[jdx] = 1;
+						right = tr;
+					end
+				end
+			end
+			
+			tinsert(layout, { left, right } );
+		end
+		idx = idx + 1;
+	end
+	
+	return layout;
+end
+
 local function CleanupButton(button)
 	button.name = nil;
 	button.width = 0;
@@ -428,10 +466,6 @@ local function Setup(options, nomap)
 			if ( button ) then
 				button.custom = 1;
 				button.checkbox = (button:GetObjectType() == "CheckButton");
-				if ( not nomap ) then
-					button:ClearAllPoints();
-					button:SetParent(FishingOptionsFrame);
-				end
 			end
 		elseif ( option.v ) then
 			button = optionbuttons[index];
@@ -440,8 +474,6 @@ local function Setup(options, nomap)
 					"CheckButton", "FishingBuddyOption"..index,
 					FishingOptionsFrame, "OptionsSmallCheckButtonTemplate");
 				optionbuttons[index] = button;
-			else
-				button:SetParent(FishingOptionsFrame);
 			end
 			button.checkbox = 1;
 			index = index + 1;
@@ -449,6 +481,8 @@ local function Setup(options, nomap)
 		if ( button ) then
 			if ( not nomap ) then
 				optionmap[name] = button;
+				button:ClearAllPoints();
+				button:SetParent(FishingOptionsFrame);
 				button:SetFrameLevel(FishingOptionsFrame:GetFrameLevel() + 2);
 			end
 
@@ -486,6 +520,7 @@ local function Setup(options, nomap)
 			
 			if ( button.checkbox ) then
 				button:SetChecked(GetSetting(name));
+				button:SetHitRectInsets(0, -button.width, 0, 0);
 			end
 			-- hack for sliders (why?)
 			if (button:GetObjectType() == "Slider") then
@@ -554,42 +589,29 @@ local function Setup(options, nomap)
 		end
 	end
 
+	local layout = layoutorder(pb, FishingOptionsFrame:GetWidth());	
 	local lastbutton = nil;
-	local order = orderbuttons(pb);
-	local right = false;
-	for iorder,which in ipairs(order) do
-		local name = primaries[which];
+	for idx,line in ipairs(layout) do
+		local li, ri = line[1], line[2];
+		local name = primaries[li];
 		local button = optionmap[name];
-		if ( not lastbutton ) then
-			button:SetPoint("TOPLEFT", 32, -82);
-			lastbutton = button;
-		else
-			local yoff = 0;
-			if ( button.margin ) then
-				yoff = yoff - button.margin[1] or 0;
-			end
-			if ( right) then
-				if (lastbutton.margin) then
-					yoff = yoff + lastbutton.margin[1] or 0;
-				end
-				button.adjacent = lastbutton;
-				button:SetPoint("TOP", lastbutton, "TOP", 0, 0);
-				button.right = 1;
-				right = false;
-			else
-				button:SetPoint("TOPLEFT", lastbutton, "BOTTOMLEFT", lastoff, yoff);
-				lastbutton = button;
-				right = true;
-			end
+		local yoff = 0;
+		if ( button.margin ) then
+			yoff = yoff - button.margin[1] or 0;
 		end
-	end
-	for iorder,which in ipairs(order) do
-		local name = primaries[which];
-		local button = optionmap[name];
-		if (button.right) then
+		if ( idx == 1 ) then
+			button:SetPoint("TOPLEFT", RIGHT_OFFSET, -82);
+		else
+			button:SetPoint("TOPLEFT", lastbutton, "BOTTOMLEFT", lastoff, yoff);
+		end
+		lastbutton = button;
+		if ( ri ) then
+			name = primaries[ri];
+			button = optionmap[name];
+			button.adjacent = lastbutton;
+			button:SetPoint("TOP", lastbutton, "TOP", 0, 0);
 			if ( button.checkbox ) then
-				button:SetPoint("RIGHT", FishingOptionsFrame, "RIGHT", -32-maxwidth, 0);
-				button:SetHitRectInsets(0, -maxwidth, 0, 0);
+				button:SetPoint("RIGHT", FishingOptionsFrame, "RIGHT", -32-button.width, 0);
 			else
 				button:SetPoint("LEFT", FishingOptionsFrame, "RIGHT", -32-button.width-button.slider, 0);
 			end

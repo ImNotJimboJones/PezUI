@@ -1,4 +1,4 @@
--- $Id: Options.lua 3777 2012-09-23 08:25:49Z ananhaid $
+-- $Id: Options.lua 4019 2012-11-30 07:45:33Z celellach $
 local AtlasLoot = _G.AtlasLoot
 --Invoke libraries
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
@@ -38,7 +38,7 @@ do
 						inline = true,
 						name = "",
 						args = {
-							all = {						
+							all = {
 								type = "group",
 								inline = true,
 								name = "",

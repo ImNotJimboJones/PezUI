@@ -1,4 +1,4 @@
--- $Id: WorldEventMenus.lua 4004 2012-11-25 13:14:52Z celellach $
+-- $Id: WorldEventMenus.lua 4013 2012-11-27 07:39:08Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
@@ -145,7 +145,7 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 			{
 				{ 2, "Valentineday", "ability_hunter_pet_tallstrider", "=ds="..AL["Vendor"], ""};
 				{ 3, "Valentineday#2", "INV_ValentinesBoxOfChocolates02", "=ds="..AL["Misc"], ""};
-				{ 17, "ApothecaryHummel", "inv_misc_head_undead_01", "=ds="..AL["Apothecary Hummel"], "=q5="..AL["Daily Reward"]};
+				{ 17, "ApothecaryHummel", "inv_misc_head_undead_01", "=ds="..BabbleBoss["Apothecary Hummel"], "=q5="..AL["Daily Reward"]};
 			};
 		};
 		info = {

@@ -1,4 +1,4 @@
-﻿-- $Id: constants.fr.lua 3997 2012-11-23 05:10:16Z TrAsHeR $
+﻿-- $Id: constants.fr.lua 4020 2012-11-30 08:10:52Z TrAsHeR $
 --[[
 constants.fr.lua --- Traduction frFR par TrAsHeR (Tchoupie @ Ysondre-EU). Merci à KKram pour les premières traductions & Pettigrow pour ses quelques traductions.
 This file defines an AceLocale table for all the various text strings needed
@@ -6,6 +6,9 @@ by AtlasLoot.  In this implementation, if a translation is missing, it will fall
 back to the English translation.
 
 The AL["text"] = true; shortcut can ONLY be used for English (the root translation).
+
+Before adding a new string, check first if it can be acquired from GetItemInfo, GetSpellInfo or GetAchievementCriteriaInfo.
+Also check if it should be added instead to one of the Babble libraries we use.
 ]]
 
 
@@ -1099,7 +1102,6 @@ if AL then
 	AL["Smokywood Pastures Vendor"] = "Vendeurs de Gourmandises Fumebois";
 	AL["Bash'ir Landing Stasis Chambers"] = "Chambre de stase alpha du point d'ancrage de Bash'ir";
 	AL["Battle Pet Trainer"] = "Dresseur de mascottes de combat";
-	AL["Apothecary Hummel"] = "Apothicaire Hummel"; --Will be removed soon once its added to BabbleBoss
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = "L'épreuve du grand croisé";

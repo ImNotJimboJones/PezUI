@@ -7,8 +7,8 @@ L["1. kgPanels"] = "1. kgPanels"
 L["2. Artwork"] = "Bildmaterial"
 L["3. Textures"] = "Texturen"
 L["4. Text"] = "4. Text"
-L["5. Scripting"] = "5. Skripte"
-L["6. Import and Export"] = "6. Import und Export"
+L["5. Scripting"] = "Skripte"
+L["6. Import and Export"] = "Import und Export"
 L["Activate"] = "Aktivieren"
 L["Active Layout: "] = "Aktives Layout:"
 L["Active Panels"] = "Aktive Panels"
@@ -18,7 +18,7 @@ L["Add New Layout"] = "Neues Layout hinzufügen"
 L["Addon Name"] = "Addonname"
 L["Addon Settings"] = "Addoneinstellungen"
 L["Addon this Panels script depends."] = "Addon worauf dieses Panel angewiesen ist."
-L["Advanced Texture Options"] = "Advanced Texture Options" -- Requires localization
+L["Advanced Texture Options"] = "Erweiterte Txturoptionen" -- Needs review
 L["A layout with that name already exists. Overwrite?"] = "Ein Layout mit diesem Namen existiert bereits. Überschreiben?"
 L["All"] = "Alle"
 L["AlphaKey"] = "Alphaschlüssel"
@@ -63,16 +63,16 @@ L["Border Texture"] = "Rand-Textur"
 L["Bottom"] = "Unten"
 L["Bottom background inset."] = "Hintergrund Einsätze unten"
 L["Bottom Left"] = "Unten links"
-L["Bottom Left Corner"] = "Bottom Left Corner" -- Requires localization
+L["Bottom Left Corner"] = "Ecke Links unten" -- Needs review
 L["Bottom Right"] = "Unten rechts"
-L["Bottom Right Corner"] = "Bottom Right Corner" -- Requires localization
+L["Bottom Right Corner"] = "Ecke Rechts unten" -- Needs review
 L["Center"] = "Mitte"
 L["Change the name of this layout"] = "Den Namen dieses Layouts ändern."
 L["Change the name of this panel."] = "Den Namen dieses Panels ändern."
 L["Color And Opacity Settings"] = "Farb und sichtbarkeits Einstellungen"
 L["Color for the text."] = "Farbe für den Text."
 L["Colors"] = "Farben"
-L["Color style of this panel. NOTE: None disables background coloring."] = "Farb Style dieses Panels. Hinweiss:None/Keins schaltet das Hintergrund einfärben ab."
+L["Color style of this panel. NOTE: None disables background coloring."] = "Farb Stil dieses Panels. Hinweiss:None/Keins schaltet das Hintergrund einfärben ab." -- Needs review
 L["Color to use for the gradient."] = "Farbe für den Farbverlauf"
 L["Copy"] = "Kopieren"
 L["Copy configuration from another panel to use in this panel."] = "Kopiere die Configuration von einem anderen Panel um sie in diesem Panel zu nutzen."
@@ -84,7 +84,7 @@ L["Create a new panel using your specific defaults."] = "Einen neuen Panel mit d
 L["Create a new panel with generic defaults"] = "Erstelle ein neues Panel mit allgemeinen Einstellungen"
 L["Create Using Defaults"] = "Erstellen mit Voreinstellungen"
 L["Cropped"] = "Abschneiden"
-L["Custom Coords"] = "eigene Coords"
+L["Custom Coords"] = "Benutzerdefinierte Coords" -- Needs review
 L["Custom Coords Configuration"] = "Eigene Koordinaten Einstellungen."
 L["Default"] = "Voreinstellung"
 L["Default Panel Options"] = "Voreingestellte Paneloptionen"
@@ -96,10 +96,10 @@ L["Delete this panel from the layout."] = "Diesen Panel aus dem Layout löschen.
 L["Dialog"] = "Diaog"
 L["Disable"] = "Deaktivieren"
 L["Down"] = "runter"
-L["Enable"] = "Enable" -- Requires localization
+L["Enable"] = "Einschalten" -- Needs review
 L["Enable Addon"] = "Addon aktivieren"
-L["Enable Advanced Border Features"] = "Enable Advanced Border Features" -- Requires localization
-L["Enable Advanced Border Functions"] = "Enable Advanced Border Functions" -- Requires localization
+L["Enable Advanced Border Features"] = "Aktivieren der erweiterten Rahmenfunktionen" -- Needs review
+L["Enable Advanced Border Functions"] = "Aktivieren der Erweiterten Texturoptionen" -- Needs review
 L["Enter the new name of the layout"] = "Gebe den neuen Namen für das Layout ein"
 L["Enter the script for OnClick callback."] = "Gebe das Script für OnClick callback ein."
 L["Enter the script for OnEnter callback."] = "Geben Sie hier die Scripte für OnEnter Rückfragen ein."
@@ -114,148 +114,104 @@ L["Enter the script for OnUpdate callback."] = "Geben Sie hier die Scripte für 
 L["Export"] = "Exportieren"
 L["Export this layout to the clipboard to copy and send to friends."] = "Dieses Layout in die Zwischenablage exportieren um es zu kopieren und an Freunde zu senden."
 L["FAQ"] = "FAQ"
-L["FAQ_1_1"] = [=[|cffffffffWas ist dieser Layout Kram?|r
+L["FAQ_1_1"] = [=[Was bedeutet Layout?
 
 kgPanels ordnet Panels einem Layout zu. Jedes Layout wird global gespeichert und kann einem beliebigen Charakter einfach als aktives Layout zugewiesen werden.
-]=]
+]=] -- Needs review
 L["FAQ_1_2"] = [=[ 	
-|cffffffffIch möchte ein Panel hinzufügen, aber die Erstell-Buttons sind grau. Was tue ich falsch?|r
+Ich möchte ein Panel hinzufügen, aber die Erstell-Buttons sind grau. Was mache ich falsch?
 
-Du musst ein Layout ausgewählt haben. Klicke m Layoutmenü auf das Layout das du nutzen möchtest und aktiviere es.
-]=]
-L["FAQ_1_3"] = [=[
-|cffffffffParenting and Anchoring|r
+Du musst ein Layout ausgewählt haben. Klicke im Layoutmenü auf das Layout das du nutzen möchtest und aktiviere es.
+]=] -- Needs review
+L["FAQ_1_3"] = [=[Abhängigkeiten und verankerung?
 
-kgPanels supports using YOUR defined panel name for parenting. 
-Do not use kgPanelsxxx for a parent name. Doing so may cause unspecified behavior, as kgPanels recycles frames as needed. 
-So again if you create a panel called 'silly panel' you can use 'silly panel' as the parent and anchor name.
-]=] -- Requires localization
-L["FAQ_1_4"] = [=[
-|cffffffffFinding frame names|r
+kgPanels unterstützt die Verwendung von Ihnen definierten Panel-Namens für die Abhängigkeit.
+Verwenden Sie keine kgPanelsxxx für ein abhängigen Namen. Andernfalls kann es zu undefiniertem Verhalten, wie kgPanels recycelt Frames als nötig.
+Also noch einmal, wenn Sie ein Panel namens "dumme Panel" Sie können 'Silly Panel "als abhängigkeit-und Anker-Namen verwenden.]=] -- Needs review
+L["FAQ_1_4"] = [=[Das Auffinden von Frame-Namen?
 
-kgPanels configuration system, adds a keybinding for the Framefinder. Under keybinding define a key for the frame finder
-After that its as simple as hitting the key to bring up the frame finder and show you what frames are under the mouse.
-]=] -- Requires localization
-L["FAQ_2_1"] = [=[
-|cffffffffHow do I add Artwork?|r
+kgPanels Konfigurations-System, fügt eine Tastenkombination für den Framefinder der Blizzard-Tastaturbelegung hinzu. Unter dieser Tastenbelegung könnt Ihr einen Schlüssel für den Rahmen-finder definieren.Danach braucht Ihr nur noch mit der Maus auf den gesuchten frame bewegen und die Definierte Taste verwenden, dann bekommt ihr den/die besagten Frames in einem Fenster aufgelistet.]=] -- Needs review
+L["FAQ_2_1"] = [=[Wie kann ich Hintergrund oder Rahmen-Material einfügen?
 
-You use the artwork library to add new peices as you need. If you have shared media installed those items will also appear in the dropdown list.
-]=] -- Requires localization
-L["FAQ_2_2"] = [=[
-|cffffffffWhy dont I see my color blending when I have a texture set?|r
+Unter der Texturbibliothek geben Sie den gewünschten Namen ein und gleich rechter davon Wählen sie ob dies als Hintergrund oder Rahmen verwendetet werden soll. Dann müßt ihr den Pfad eingeben, abei is zu beachten das dieser mit " \\ " eingeben werden muß, z.B. "\\Interface\\Addons\\Texturen\\<Bildnamen>.tga". Für Hintergrundbilder sollten die maße (h x b) 256 x 512 haben und für Rahmen  50 x 50.]=] -- Needs review
+L["FAQ_2_2"] = [=[Warum sehe ich meine Farbmischung nicht, wenn ich eine Textur gesetzt haben? 
 
-Set your background style to gradiant or solid to blend the color into the texture.
-]=] -- Requires localization
+Stellen Sie Ihren Hintergrund Stil "Farbverlauf" oder "Dauerhaft" ein, um die Farbe in die Textur zu mischen. Behalten Sie die einstellung "Mischen" unter "Mischung Hintergrundfarbe" bei.]=] -- Needs review
 L["FAQ_2_3"] = [=[ 	 	
 |cffffffffWie kann ich die Rahmenfarbe ändern?|r
 
 Wähle die Farbe in der Hauptsektion des jeweiligen Panels.]=]
-L["FAQ_2_4"] = [=[
-|cffffffffWhen i change the opacity I get mixed results|r
+L["FAQ_2_4"] = [=[Wenn ich die Deckkraft ändere, bekomme ich unterschiedliche Ergebnisse?
 
-The main Opacity setting overrids the color opactiy.
-]=] -- Requires localization
-L["FAQ_3_1"] = [=[
-|cffffffffI just added a texture to the library but I dont see it. What am I doing wrong?|r
+Die Haupteinstellung" Deckkraft" überschreibt die Farbdeckkraft.]=] -- Needs review
+L["FAQ_3_1"] = [=[Ich habe soeben eine Textur in der Bibliothek, aber ich kann diese nicht sehen. Was mache ich falsch?
 
-When you add a texture you must be sure that WoW can see the directory and the file is spelled correctly. If you just added this file to disk, you will need to restart
-WoW for it to pick up the new file in its path.
-]=] -- Requires localization
-L["FAQ_3_2"] = [=[
-|cffffffffI added a border but it looks funny. Am I doing something wrong?|r
+Wenn Sie eine Textur hinzufügen, müssen Sie sicher sein, dass WoW das Verzeichnis lesen kann und die Datei richtig geschrieben ist. Dann müssen Sie WoW neu starten, das diese Datei mit dem Pfad mit eingelesen werden kann.]=] -- Needs review
+L["FAQ_3_2"] = [=[Ich fügte einen Rahmen hinzu, aber es sieht komisch aus. Mache ich etwas falsch?
 
-No, unfortunetly WoW doesnt always return a size for a texture, so kgPanels uses a default 50x50 size for borders. This may result in squished texture graphics for borders.
-]=] -- Requires localization
-L["FAQ_3_3"] = [=[
-|cffffffffI want to mirror some texture art. How do I do that?|r
+Nein, leider kann WoW nicht immer eine Größe für eine Textur ausgeben, kgPanels verwendet ein Standard von 50x50 pixel. Dies kann sonst zur zerquetschtung der Rahmen-Grafiken führen.]=] -- Needs review
+L["FAQ_3_3"] = [=[Ich möchte einige Texturen spiegeln. Wie mache ich das?
 
-Use the flip horizontal option for the texture. To reverse top and bottom use flip vertical.
-]=] -- Requires localization
-L["FAQ_3_4"] = [=[
-|cffffffffWhat is border edge size?|r
+Verwenden Sie "Horizontal" für Links/ Rechts und "Vertikal" für Hoch/Runter.]=] -- Needs review
+L["FAQ_3_4"] = [=[Was ist Randkantengröße?
 
-This is the size clipping used by WoW for borders. Changin this value will make your borders thicker or thinner as you change the value.
-]=] -- Requires localization
-L["FAQ_3_5"] = [=[
-|cffffffffDoes kgPanels support SharedMedia?|r
-Yes
-]=] -- Requires localization
-L["FAQ_4_1"] = [=[
-|cffffffffI want to use a particular font, but the list only shows 'Blizzard'. How do I add more fonts?|r
+Dies ist der Größenausschnitt. Wechlse diesen Wert wird ihre dicke um zu ändern.]=] -- Needs review
+L["FAQ_3_5"] = [=[Wird SharedMedia von KgPanels unterstützt?
 
-Right now font support is limited. kgPanels will use any fonts available with SharedMedia. The other Option is to replace the default blizzard font ala Clearfont and ClearFont2
-]=] -- Requires localization
-L["FAQ_5_1"] = [=[
-|cffffffffScripting variables available|r
-In any defined script the following variables are available:|r
+Ja]=] -- Needs review
+L["FAQ_4_1"] = [=[Ich möchte eine bestimmte Schriftart verwenden, aber die Liste zeigt nur 'Blizzard'. Wie füge ich mehr Schriftarten?
 
-|cffff6666self|r, which is always set to the panel invoking the script.|r
+Gerade jetzt ist Schriftart-Unterstützung begrenzt. kgPanels verwendet verfügbare Schriftarten mit SharedMedia. Die andere Option ist, die standardmäßig "Blizzard-Schrift" die Clearfont und ClearFont2 ersetzt.]=] -- Needs review
+L["FAQ_5_1"] = [=[Scripting-Variablen stehen zur Verfügung
 
-|cffff6666self.bg|r, this is the background art frame.|r
+In einem definierten Skript stehen die folgenden Variablen zur Verfügung,
 
-|cffff6666self.text|r, this is the fontstring for the frame.|r
+Die sich immer auf dem Panel Aufruf des Skripts bezieht.
 
-|cffff6666kgPanels|r, this is a reference to the kgPanels object.|r
+Dies ist der Stand der Rahmentechnik.
 
-]=] -- Requires localization
-L["FAQ_5_2"] = [=[
-|cffffffffkgPanels script usable functions|r
+ist die SchriftString für den Rahmen. 
 
-|cffff6666kgPanels:FetchFrame(name)|r, this will get any frame defined in your layout.|r
+ist dies ein verweis auf ein Objekt von kgPanels .]=] -- Needs review
+L["FAQ_5_2"] = [=[kgPanels script nutzbaren Funktionen
 
-|cffff6666kgPanels:ActivateLayout(name)|R, this allows you to switch layouts.|r
+kgPanels: FetchFrame (name), wird dies noch Rahmen in Ihrem Layout definiert.
 
-There are other functions, however without detailed knowledge of internal data structures it is advised you do not use them.|r
-]=] -- Requires localization
-L["FAQ_5_3"] = [=[|cffffffffPassed in variables|r
+kgPanels: ActivateLayout (Name), Sie können in diesem Layouts wechseln.
 
-Each handler passes in the upper level args, (see wowwiki Event api). 
-The first variable is always self. 
+Es gibt noch andere Funktionen, jedoch ohne detaillierte Kenntnisse der internen Datenstrukturen es ratsam, diese nicht zu verwenden.]=] -- Needs review
+L["FAQ_5_3"] = [=[Bestanden in den Variablen
 
-OnEvent, we broke up the vararg so your function can simply reference arg1, arg2, arg3, etc..|r
+Jeder Handler übergibt der oberen Ebene args (siehe WoWWiki Ereignis api).
+Die erste Variable ist immer selbstverständlich.
 
-OnUpdate provides the argument elapsed|r
+OnEvent, brauchen wir den Vararg damit Ihre Funktion einfach verweisen können arg1, arg2, arg3, etc..
 
-OnClick provides the argument button,pressed and released will be true or false|r
+OnUpdate bietet das Argument abgelaufen
 
-]=] -- Requires localization
-L["FAQ_5_4"] = [=[
-|cffffffffI added an OnEvent script but it never fires. What am I missing?|r
+OnClick bietet das Argument Taste gedrückt und wieder losgelassen wird wahr oder falsch sein]=] -- Needs review
+L["FAQ_5_4"] = [=[Ich fügte hinzu, einen OnEvent Skript, aber es wird nie ausgelöst. Was mir noch fehlt?
 
-In your OnLoad, register for the events you wish to receive. i.e.|r
+In Ihrem OnLoad, für die Ereignisse, die Sie erhalten möchten, registrieren. d. h.
 
-self:RegisterEvent("PLAYER_LOGIN")|r
+self:RegisterEvent("PLAYER_LOGIN")
 
-At this current time, Non WoW generated events are not available. So receiving AceEvent-3.0 only message wont trigger your OnEvent.|r
-However if you so choose you can could embed AceEvent-3.0 into the frame reference. Please be aware this may cause you to receive events twice.|r
-]=] -- Requires localization
-L["FAQ_5_5"] = [=[
-|CffffffffI added an OnClick/OnEnter/OnLeave script 
-but nothing happens. What am I doing wrong?|r
+Zu dieser Zeit, sind Non WoW generierten Ereignisse nicht verfügbar. So erhalten AceEvent-3.0 nur die Nachricht wird nicht ausgelöst in Ihren OnEvent.
+Allerdings, wenn Sie sich entscheiden, so dass Sie  AceEvent-3.0 in den Rahmen Verweis einbinden könnten. Bitte beachten Sie, dies kann  dazu führen, dies zweimal zu erhalten.]=] -- Needs review
+L["FAQ_5_5"] = [=[Ich fügte hinzu, eine OnClick / OnEnter / OnLeave script
+aber nichts passiert. Was mache ich falsch?
 
-You need to enable the mouse for the panel to receive those events.
+Sie müssen sicher stellen das die Maus für das Panel diese Ereignisse ausführen kann.]=] -- Needs review
+L["FAQ_5_6"] = [=[Gibt es einige Beispiel-Scripts?
+Beispiel-Skripte sind auf wowace gepostet.]=] -- Needs review
+L["FAQ_6_1"] = [=[Ich habe versucht, ein Layout zu importieren, aber nichts passiert, was ist hier los?
+Überprüfen Sie Ihre Konsole, wenn die Daten nicht zu entpacken es sollte eine Meldung, warum.]=] -- Needs review
+L["FAQ_6_2"] = [=[ I tried to export but was unable to import. What happened?
+Did you follow the status line to copy to your system clipboard?]=] -- Needs review
+L["FAQ_6_3"] = [=[Wie importiere ich meine alten eePanels Setup?
 
-]=] -- Requires localization
-L["FAQ_5_6"] = [=[
-|cffffffffAre tehre some sample scripts?|r
-
-Sample scripts will be posted on wowace.
-]=] -- Requires localization
-L["FAQ_6_1"] = [=[
-|cffffffffI tried to import a layout but nothign happened, whats going on?|r
-Check your console, if the data failed to unpack their should be a message telling you why.
-]=] -- Requires localization
-L["FAQ_6_2"] = [=[
-|cffffffffI tried to export but was unable to import. What happened?|r
-Did you follow the status line to copy to your system clipboard?
-]=] -- Requires localization
-L["FAQ_6_3"] = [=[
-|cffffffffHow do I import my old eePanels setup?|r
-
-Load up eePanels, go to the layout menu add a new name and click import
-from eePanels. It will import as much as it can and try to guess parenting
-as much as possible. Scripts DO NOT import from eePanels.
-]=] -- Requires localization
+Laden Sie eePanels, Gehen Sie zu dem Layout-Menü mit einen neuen Namen und klicken Sie auf Importieren
+von eePanels. Es importiert so viel wie es kann und versucht Abhängigkeiten so viel wie möglich zu laden. Scripts NICHT aus eePanels importieren.]=] -- Needs review
 L["Flip Horizontally"] = "Horizontal spiegeln"
 L["Flip Vertically"] = "Vertikal spiegeln"
 L["Font"] = "Schrift"
@@ -265,24 +221,24 @@ L["Font to use for this panel."] = "Schriftart für dieses Panel"
 L["For help using kgPanels, please see the FAQ section."] = "Für die Hilfe bein nutzung von kgPanels, siehe die FAQ Section"
 L["Frame Finder"] = "Rahmen Finder"
 L["Frames"] = "Rahmen/Bilder"
-L["Frame strata to set this in, Background is the lowest strata."] = "Frame strata to set this in, Background is the lowest strata." -- Requires localization
+L["Frame strata to set this in, Background is the lowest strata."] = "Frame Schichten, um dieses in gesetzt, ist Hintergrund der untersten Schichten." -- Needs review
 L["Frame you wish to anchor this panel to."] = "Rahmen den du mit diesem Panel verankern möchtest "
-L["Frame you wish to parent against. NOTE: To parent against a panel you have already defined, simply use that name."] = "Frame you wish to parent against. NOTE: To parent against a panel you have already defined, simply use that name." -- Requires localization
+L["Frame you wish to parent against. NOTE: To parent against a panel you have already defined, simply use that name."] = "Rahmen wollen Abhängigkeiten. HINWEIS: Um abhängigkeiten für ein Panel zu definiert, verwenden Sie einfach den Namen." -- Needs review
 L["From"] = "von"
 L["General Options"] = "Allgemeine Optionen"
 L["General Settings"] = "Allgemeine Einstellungen"
 L["General Text Settings"] = "Generelle Texteinstellungen"
 L["Gradient"] = "Farbverlauf"
 L["Gradient style of this panel."] = "Farbverlauf Style für dieses Panel"
-L["Hide or Show the Bottom border."] = "Hide or Show the Bottom border." -- Requires localization
-L["Hide or Show the Bottom Left Corner."] = "Hide or Show the Bottom Left Corner." -- Requires localization
-L["Hide or Show the Bottom Right Corner."] = "Hide or Show the Bottom Right Corner." -- Requires localization
-L["Hide or Show the Left border."] = "Hide or Show the Left border." -- Requires localization
-L["Hide or Show the Right border."] = "Hide or Show the Right border." -- Requires localization
-L["Hide or Show the Top border."] = "Hide or Show the Top border." -- Requires localization
-L["Hide or Show the Top Left Corner"] = "Hide or Show the Top Left Corner" -- Requires localization
-L["Hide or Show the Top Left Corner."] = "Hide or Show the Top Left Corner." -- Requires localization
-L["Hide or Show the Top Right Corner."] = "Hide or Show the Top Right Corner." -- Requires localization
+L["Hide or Show the Bottom border."] = "Ausblenden oder Anzeigen des unteren Randes.." -- Needs review
+L["Hide or Show the Bottom Left Corner."] = "Ausblenden oder Anzeigen der Ecke Links unten." -- Needs review
+L["Hide or Show the Bottom Right Corner."] = "Ausblenden oder Anzeigen der Ecke rechts unten." -- Needs review
+L["Hide or Show the Left border."] = "Ausblenden oder Anzeigen des linken Randes." -- Needs review
+L["Hide or Show the Right border."] = "Ausblenden oder Anzeigen des Rechten Randes." -- Needs review
+L["Hide or Show the Top border."] = "v oberen Randes." -- Needs review
+L["Hide or Show the Top Left Corner"] = "Ausblenden oder Anzeigen der Ecke Links oben." -- Needs review
+L["Hide or Show the Top Left Corner."] = "Ausblenden oder Anzeigen der Ecke Links oben." -- Needs review
+L["Hide or Show the Top Right Corner."] = "Ausblenden oder Anzeigen der oberen Ecke." -- Needs review
 L["High"] = "Hoch"
 L["Horizontal"] = "Horizontal"
 L["Horizontal Justification"] = "Horizontale Ausrichtung "
@@ -294,9 +250,9 @@ L["Import from eePanels2"] = "Von eePanels2 importieren"
 L["Import Layout"] = "Layout importieren"
 L["Import New Layout"] = "Neues Layout importieren"
 L["Import panels from eePanels2"] = "Panele von eePanels2 importieren"
-L["Indicate what type of artwork you are adding."] = "Gibt an welche Art von Artwork du dazu fügen möchtest"
+L["Indicate what type of artwork you are adding."] = "Gib an welche Art von Artwork du hinzu fügen möchtest" -- Needs review
 L["Inset Options"] = "Inset Optionen"
-L["Intercept Mouse Clicks"] = "Maus Klicks abfangen "
+L["Intercept Mouse Clicks"] = "Mausklicks abfangen " -- Needs review
 L["Invert the artwork."] = "Artwork invertieren"
 L["Justification of the text."] = "Ausrichtung des Textes."
 L["kgPanel"] = "kgPanel"
@@ -322,7 +278,7 @@ L["Name"] = "Name"
 L["Name of this new panel"] = "Name dieses neuen Panels"
 L["Name to import this layout under."] = "Name unter dem das Layout importiert werden soll."
 L["New name for this panel."] = "Neuer Name für dieses Panel."
-L["None"] = "None"
+L["None"] = "Nichts" -- Needs review
 L["Nudge"] = "In Einzelschritten verschieben"
 L["Nudge the panel position in a given direction."] = "Verschiebt das Panel in eine vorgegebene Richtung"
 L["OnClick"] = "OnClick"
@@ -361,9 +317,9 @@ L["Rename"] = "Umbenennen"
 L["Rename Layout"] = "Layout umbenennen"
 L["Rename Panel"] = "Panel umbenennen"
 L["Right"] = "Rechts"
-L["Right background inset."] = "Right background inset." -- Requires localization
+L["Right background inset."] = "Rechts im Hintergrund" -- Needs review
 L["Rotate"] = "Rotieren"
-L["Rotate the artwork centered on the middle point."] = "Dreht das Artwork zentriert um den Mittelpunkt."
+L["Rotate the artwork centered on the middle point."] = "Rotiert das Artwork zentiert um den Mittelpunkt" -- Needs review
 L["Scaling"] = "Skallierung"
 L["Scripts"] = "Scripte"
 L["Scripts Dependency"] = "Scriptabhängigkeit"
@@ -376,7 +332,7 @@ L["Size of the text in points."] = "Schriftgröße"
 L["Solid"] = "Dauerhaft"
 L["Strata"] = "Schichtverlauf"
 L["Sublevel"] = "Untere Ebene"
-L["Sublevel allows you to have multiple backgrounds in the same draw layer for stacking effects"] = "Sublevel allows you to have multiple backgrounds in the same draw layer for stacking effects" -- Requires localization
+L["Sublevel allows you to have multiple backgrounds in the same draw layer for stacking effects"] = "Sublevel können Sie mehrere Hintergründe in die gleiche Schicht ziehen zum Stapeln der Effekte." -- Needs review
 L["Text"] = "Text"
 L["Text Options"] = "Textoptionen"
 L["Text Positioning"] = "Textpositionierung"
@@ -384,8 +340,8 @@ L["Texture Options"] = "Texturoptionen"
 L["Textures"] = "Texturen"
 L["There is already a panel with that name. Overwrite?"] = "Es gibt bereits ein Panel mit diesem Namen. Überschreiben?"
 L["This is the general option menu. Core seetings are located in this main area."] = "Dies ist das generelle Optionsmenü. Core-Einstellungen befinden sich in diesem Bereich."
-L["This is the name as it will appear in drops down menus and the side tab."] = "This is the name as it will appear in drops down menus and the side tab." -- Requires localization
-L["This is the name of the layout, as it will appear in drops downs, and the under the Layout tab."] = "This is the name of the layout, as it will appear in dropdowns, and under the Layout tab." -- Requires localization
+L["This is the name as it will appear in drops down menus and the side tab."] = "Dies ist der Name, wie er im Drop-Down-Menüs und der Seite Registerkarte angezeigt wird." -- Needs review
+L["This is the name of the layout, as it will appear in drops downs, and the under the Layout tab."] = "Dies ist der Name des Layouts, wie es in Dropdown-Menüs wird angezeigt, und die unter der Registerkarte Layout." -- Needs review
 L["This is the path to the texture you wish to add. NOTE: this path must be realtive to the WoW folder and seperated by '\\\\'"] = "Das ist der Pfad zu der Textur, die du hinzufügen willst. Anmerkung: Der Pfad muss relativ zum WoW-Ordner sein und mit '\\\\' getrennt sein."
 L["This option allows you to turn kgPanels on/off"] = "Diese Option erlaubt es dir kgPanels an/aus zu schalten"
 L["This option controls wether the panel will interact with the mouse. Required for OnLeave,OnEnter,OnClick"] = "Diese Option kontolliert erlaubt es der Maus mit dem Panel zu interagieren. Benötigt für OnLeave,OnEnter,OnClick."
@@ -401,9 +357,9 @@ L["Tooltip"] = "Tooltip"
 L["Top"] = "Oben"
 L["Top background inset."] = "Top background inset." -- Requires localization
 L["Top Left"] = "Oben links"
-L["Top Left Corner"] = "Top Left Corner" -- Requires localization
+L["Top Left Corner"] = "Linke Obere Ecke" -- Needs review
 L["Top Right"] = "Oben rechts"
-L["Top Right Corner"] = "Top Right Corner" -- Requires localization
+L["Top Right Corner"] = "Rechte obere Ecke" -- Needs review
 L["ULx"] = "ULx"
 L["ULy"] = "ULy"
 L["Unknown"] = "Unbekannt"

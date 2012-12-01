@@ -1,15 +1,15 @@
-## Interface: 50001
+## Interface: 50100
 ## LoadOnDemand: 1
 ## Notes: Configuration for kgPanels
 ## Title: kgPanelsConfig
 ## Author: kagaro, EvilElvis
 ## X-Category: Interface Enhancements
 ## Dependencies: kgPanels
-## Version: 1.13
+## Version: 1.14
 ## X-License: All Rights Reserved
 ## X-Email: sal.scotto@gmail.com
 ## OptionalDeps: Ace3, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
-## X-Curse-Packaged-Version: 1.13
+## X-Curse-Packaged-Version: 1.14
 ## X-Curse-Project-Name: kgPanels
 ## X-Curse-Project-ID: kg-panels
 ## X-Curse-Repository-ID: wow/kg-panels/mainline

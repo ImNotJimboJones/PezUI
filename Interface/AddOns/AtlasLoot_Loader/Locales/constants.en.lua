@@ -1,4 +1,4 @@
--- $Id: constants.en.lua 3993 2012-11-22 08:39:14Z celellach $
+-- $Id: constants.en.lua 4019 2012-11-30 07:45:33Z celellach $
 --[[
 constants.en.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -6,6 +6,9 @@ by AtlasLoot.  In this implementation, if a translation is missing, it will fall
 back to the English translation.
 
 The AL["text"] = true; shortcut can ONLY be used for English (the root translation).
+
+Before adding a new string, check first if it can be acquired from GetItemInfo, GetSpellInfo or GetAchievementCriteriaInfo.
+Also check if it should be added instead to one of the Babble libraries we use.
 ]]
 
 	-- Table holding all loot tables is initialised here as it loads early
@@ -1099,7 +1102,6 @@ if AL then
 	AL["Smokywood Pastures Vendor"] = true;
 	AL["Bash'ir Landing Stasis Chambers"] = true;
 	AL["Battle Pet Trainer"] = true;
-	AL["Apothecary Hummel"] = true; --Will be removed soon once its added to BabbleBoss
 
 	-- Zones
 	AL["Trial of the Grand Crusader"] = true;

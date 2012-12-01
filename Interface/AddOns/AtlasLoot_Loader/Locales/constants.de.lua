@@ -1,4 +1,4 @@
-﻿-- $Id: constants.de.lua 3993 2012-11-22 08:39:14Z celellach $
+﻿-- $Id: constants.de.lua 4013 2012-11-27 07:39:08Z celellach $
 --[[
 constants.de.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -1077,7 +1077,6 @@ if AL then
 	AL["Rork Sharpchin"] = "Rork Spitzkinn";
 	AL["Sprinkle Noggenfogger"] = "Sprinkel Noggenfogger";
 	AL["Wyrmcult Provisioner"] = "Versorger des Wyrmkults";
-	AL["Apothecary Hummel"] = "Apotheker Hummel";
 	AL["Auntie Stormstout"] = "Tantchen Sturmbräu";
 
 	-- Zones

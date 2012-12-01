@@ -1,0 +1,17 @@
+------------------------------------------------------------------------
+r155 | Odica | 2012-11-21 22:03:48 +0000 (Wed, 21 Nov 2012) | 11 lines
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+
+- added zone: Molten Front
+- corrected zone level for Dread Wastes: was 87-88, now 89-90
+- added Battle Pet Levels (special thanks to Grdn!)
+- API: added function:
+     low,high = GetBattlePetLevel(zone)
+- API: added function:
+     r,g,b = GetBattlePetLevelColor(zone, petLevel)
+- API: added function:
+     string = GetBattlePetLevelString(zone)
+- API: made function public:
+     r,g,b = CalculateLevelColor(low, high, currentLevel)
+------------------------------------------------------------------------

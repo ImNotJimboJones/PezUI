@@ -1,4 +1,4 @@
--- $Id: Filter.lua 3767 2012-09-21 14:41:29Z lag123 $
+-- $Id: Filter.lua 4015 2012-11-28 13:54:41Z lag123 $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -475,7 +475,7 @@ function Filter:FilterBySlot(lootTable)
 		end
 		countOld = curItemPos - count
 
-		if extraText and extraText ~= "" or stats then
+		if (extraText and extraText ~= "") or stats then
 			for _,k in ipairs(FilterSort) do
 				if type(FilterTable[k]) == "table" then
 					for i,j in ipairs(FilterTable[k]) do
@@ -484,7 +484,8 @@ function Filter:FilterBySlot(lootTable)
 								xgo = false
 							end
 						else
-							Slotname = j
+							Slotname = j or "nil"
+							extraText = extraText or "nil"
 							if (k ~= "WeaponsMeeleTwoHand" and not strfind(extraText, "#h2#") and strfind(extraText, Slotname) and db.filterSlots[k][j] == false) then
 								xgo = false
 							elseif k == "WeaponsMeeleTwoHand" and strfind(extraText, "#h2#") and strfind(extraText, Slotname) and db.filterSlots[k][j] == false then

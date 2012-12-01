@@ -19,9 +19,9 @@
 ## DefaultState: enabled
 ## LoadOnDemand: 1
 ## Dependencies: PitBull4
-## Version: v4.0.0-beta41
+## Version: v4.0.0-beta42
 ## X-PitBull4-Condition: return select(2, UnitClass("player")) == "PRIEST" and select(4, GetBuildInfo()) >= 50000
-## X-Curse-Packaged-Version: v4.0.0-beta41
+## X-Curse-Packaged-Version: v4.0.0-beta42
 ## X-Curse-Project-Name: PitBull Unit Frames 4.0
 ## X-Curse-Project-ID: pitbull4
 ## X-Curse-Repository-ID: wow/pitbull4/mainline

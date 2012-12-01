@@ -1,4 +1,4 @@
--- $Id: worldevents.lua 4004 2012-11-25 13:14:52Z celellach $
+-- $Id: worldevents.lua 4013 2012-11-27 07:39:08Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
@@ -648,7 +648,7 @@ local moduleName = "AtlasLoot_WorldEvents"
 			};
 		};
 		info = {
-			name = AL["Apothecary Hummel"],
+			name = BabbleBoss["Apothecary Hummel"],
 			module = moduleName, menu = "LOEVISINTHEAIRMENU",
 		};
 	};
