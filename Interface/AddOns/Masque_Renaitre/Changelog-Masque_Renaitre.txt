@@ -1,3 +1,6 @@
+v5.1
+-update TOC pending changes which I'm still testing
+
 v5.0.3
 -added Fade Circle
 
