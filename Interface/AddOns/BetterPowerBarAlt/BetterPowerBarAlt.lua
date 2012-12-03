@@ -108,5 +108,9 @@ _G.SlashCmdList["BETTERPOWERBARALT"] = function(input)
 	if input:trim() == "reset" then
 		PlayerPowerBarAlt:ClearAllPoints()
 		PlayerPowerBarAlt:SetPoint("CENTER")
+		print("|cff33ff99BetterPowerBarAlt|r: Frame position reset")
+	else
+		print("Usage: /bpba reset")
+		print("Reset the frame position")
 	end
 end
