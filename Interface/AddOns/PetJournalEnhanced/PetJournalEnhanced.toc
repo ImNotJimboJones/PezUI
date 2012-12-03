@@ -1,0 +1,30 @@
+## Interface: 50100
+## Title: PetJournal Enhanced
+## Notes: Displays the rarity of the enemies pets in their tooltip.
+## Author: nullberri
+## Version: 2.5.2
+## X-Date: 2012-7-25
+## X-Category: Pet Journal
+## X-Localizations: enUS, ptBR (partial)
+## SavedVariables: PetJournalEnhancedDB
+## Dependencies: Blizzard_PetJournal
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\AceDB-3.0\AceDB-3.0.xml
+libs\AceEvent-3.0\AceEvent-3.0.xml
+libs\LibPetJournal-2.0\LibPetJournal-2.0.lua
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceLocale-3.0\AceLocale-3.0.xml
+
+
+PetJournalEnhanced.lua
+Localization.lua
+modules\HookedFunctions.lua
+modules\DropdownMenu.lua
+modules\UniqueCount.lua
+modules\ZoneIDs.lua
+modules\ZoneFiltering.lua
