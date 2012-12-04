@@ -1,0 +1,12 @@
+## Interface: 50100
+## Title: Thnan's Mod - Farm
+## Notes: Adds a farming window to the UI.
+## Author: Thnan (Jaedenar US-A)
+## Version: 1.0.0
+
+## Dependencies: ThnanMod
+
+Locales.lua
+Core.lua
+FarmWindow.lua
+Config.lua

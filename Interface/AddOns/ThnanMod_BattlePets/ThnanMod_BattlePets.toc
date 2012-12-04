@@ -1,0 +1,12 @@
+## Interface: 50100
+## Title: Thnan's Mod - Battle Pets
+## Notes: Adds quality information to wild pet tooltips
+## Author: Thnan (Jaedenar US-A)
+## Version: 1.0.0
+
+## Dependencies: ThnanMod
+
+Locales.lua
+Core.lua
+Tooltips.lua
+Config.lua
