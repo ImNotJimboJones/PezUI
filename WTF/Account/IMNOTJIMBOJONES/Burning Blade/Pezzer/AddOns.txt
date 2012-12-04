@@ -297,3 +297,6 @@ Atlas_WorldEvents: enabled
 DBM-Scenario-MoP: enabled
 LoseControl: enabled
 PitBull4_LoseControl: enabled
+ThnanMod: enabled
+ThnanMod_Farm: enabled
+ThnanMod_BattlePets: enabled
