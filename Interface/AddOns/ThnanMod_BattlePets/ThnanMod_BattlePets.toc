@@ -2,7 +2,7 @@
 ## Title: Thnan's Mod - Battle Pets
 ## Notes: Adds quality information to wild pet tooltips
 ## Author: Thnan (Jaedenar US-A)
-## Version: 1.0.0
+## Version: 1.0.2
 
 ## Dependencies: ThnanMod
 

@@ -4,6 +4,14 @@ Adds a line to wild pet tooltips showing the highest rarity pet of its type that
 
 VERSION CHANGES:
 
+1.0.2:
+
+- Actually, really fixed issue causing framerate loss when mousing over wild pets. (Really!)
+
+1.0.1:
+
+- Fixed issue causing framerate loss when mousing over wild pets. (again)
+
 1.0.0:
 
  - Moved to dependent addon.

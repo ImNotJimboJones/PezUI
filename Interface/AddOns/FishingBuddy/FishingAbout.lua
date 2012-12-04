@@ -11,7 +11,7 @@ credits[FBConstants.ROLE_TRANSLATE_ZHTW] = {
 	["smartdavislin"] = { "V1.0.2", },
 	["Andyca"] = { "V1.0.7a" },
 	["zhTW"] = { "V1.0.9e", },
-	["titanium0107"] = { "V1.1e", "V1.2", "V1.2a", "V1.2c", },
+	["titanium0107"] = { "V1.1e", "V1.2", "V1.2a", "V1.2c", "V1.2e", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_ITIT] = {
@@ -68,6 +68,7 @@ credits[FBConstants.ROLE_TRANSLATE_RURU] = {
 	["frodo10"] = { "V1.0" },
 	["DVK"] = { "V1.1f" },
 	["Ant1dotE"] = { "V1.0.1", "V1.0.2", "V1.0.4" },
+	["BloodyFess"] = { "V1.2d", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_PTBR] = {
@@ -92,6 +93,7 @@ credits[FBConstants.ROLE_HELP_BUGS] = {
 	["callumw"] = { "Typo identification in fishing lib" },
 	["Ninmah"] = { "Beta tester", "Auto-loot reset bug" },
 	["WildCard_25"] = { "Fish Watcher update bug" },
+	["Grizzly_UK"] = { "Forum support and understanding" },
 };
 
 -- Ideas and suggestions

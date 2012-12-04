@@ -2,7 +2,7 @@
 ## Title: Thnan's Mod
 ## Notes: A framework for various features
 ## Author: Thnan (Jaedenar US-A)
-## Version: 3.0.0
+## Version: 3.0.2
 
 ## SavedVariables: ThnanMod_Saved
 

@@ -1,10 +1,16 @@
-﻿Version 1.2d
+﻿Version 1.2e
+- Fishing pets work again
+- Add option to display the Nat Pagle quest fish you've caught "today"
+- Updated Russian translation (thanks BloodyFess!)
+- Updated LibTourist library
+
+Version 1.2d
 - Add option to just "maintain" the raft if it's already on, i.e. manual engagement
 - Support the Sharpened Tuskaar Spear (ugly, but it works for now)
 - Fix the minimap icon setting, again
 - Updated LibTourist to the latest version
 - Updated German translation (thanks DirtyHarryGermany!)
-- Fix summon pet erros -- BUT PETS DON"T WORK YET
+- Fix summon pet errors -- BUT PETS DON"T WORK YET
 - Fix Curse bugs #206, #207, #208
 
 Version 1.2c

@@ -116,6 +116,8 @@ FishingTranslations["enUS"] = {
 	CONFIG_FISHWATCHZONE_INFO	 = "Display the current zone in the fish watch area.",
 	CONFIG_FISHWATCHPERCENT_ONOFF = "Show percentages",
 	CONFIG_FISHWATCHPERCENT_INFO = "Display the percentage of each kind of fish on the watch display.",
+	CONFIG_FISHWATCHPAGLE_ONOFF  = "Watch Pagle's Fish",
+	CONFIG_FISHWATCHPAGLE_INFO   = "Display which Pagle quest fish you have caught today.",
 
 	CONFIG_EASYCAST_ONOFF	 = "Easy Cast",
 	CONFIG_EASYCAST_INFO     = "Enable double-right-click casting.",

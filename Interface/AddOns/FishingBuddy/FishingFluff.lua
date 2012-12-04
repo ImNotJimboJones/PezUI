@@ -87,11 +87,15 @@ local function GetPetsUpdate(self, ...)
 	for index=start,finish do
 		local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, self.isWild);
 		if ( isOwned) then
+			local addit = not petmap[creatureID];
 			if (customName) then
 				name = customName;
+				addit = true;
 			end
-			tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=false });
-			petmap[creatureID] = petID;
+			if (addit) then
+				tinsert(ourpets, { cID=creatureID, icon=icon, name=name, petID=petID, checked=false });
+				petmap[creatureID] = petID;
+			end
 		end
 	end
 	if (finish == numPets) then
@@ -103,6 +107,9 @@ local function GetPetsUpdate(self, ...)
 		end
 	else
 		self.index = finish + 1;
+	end
+	if (FishingBuddy.Debugging) then
+		FishingBuddy_Info["ourpets"] = ourpets;
 	end
 end
 
@@ -143,6 +150,8 @@ local function CheckedOurPets()
 end
 
 local function DoUpdateChosenPets()
+	local settingpets = GetSetting(PETSETTING);
+
 	chosenpets = {};
 	chosenlist = {};
 	numchosen = 0;
@@ -153,7 +162,7 @@ local function DoUpdateChosenPets()
 		if ( settingpets == PET_ALL ) then
 			allpets = true;
 		end
-		
+
 		for idx=1,#ourpets do
 			local cid = ourpets[idx].cID;
 			if ( FISHINGPETS[cid] and settingpets == PET_FISHING ) then
@@ -172,8 +181,6 @@ local function DoUpdateChosenPets()
 end
 
 local function UpdateChosenPets()
-	local settingpets = GetSetting(PETSETTING);
-
 	if (#ourpets == 0) then
 		GetOurPets(DoUpdateChosenPets);
 	else
@@ -221,9 +228,9 @@ FluffEvents[FBConstants.FISHING_ENABLED_EVT] = function()
 						end
 					end
 				end
-				if ( petid ~= nowpet and petid > 0) then
+				if ( petid and petid ~= nowpet ) then
 					resetPet = nowpet;
-					C_PetJournal.SummonPetByID(petid);
+					C_PetJournal.SummonPetByGUID(petid);
 				end
 			end
 		end
@@ -241,11 +248,11 @@ end
 
 local function DoPetReset(pet)
 	if ( pet and pet > 0 ) then
-		C_PetJournal.SummonPetByID(pet);
+		C_PetJournal.SummonPetByGUID(pet);
 	elseif (FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE) then
 		local nowpet = C_PetJournal.GetSummonedPetGUID();
-		if ( nowpet and nowpet > 0 ) then
-			C_PetJournal.SummonPetByID(nowpet);
+		if ( nowpet ) then
+			C_PetJournal.SummonPetByGUID(nowpet);
 		end
 	end
 end
@@ -650,16 +657,21 @@ end
 FishingBuddy.RegisterHandlers(FluffEvents);
 
 if ( FishingBuddy.Debugging ) then
+	local function DumpChosen()
+		DoUpdateChosenPets();
+		local Debug = FishingBuddy.Debug;
+		local pets = FishingPetFrame.petnames;
+		local n = FL:tablecount(chosenpets);
+		Debug("chosenpets "..n.." "..#ourpets.." "..#pets);
+		for idx=1,#chosenpets do
+			Debug("petid "..chosenpets[idx])
+		end
+	end
+	
 	FishingBuddy.Commands["pets"] = {};
 	FishingBuddy.Commands["pets"].func =
 		function(what)
-			local Debug = FishingBuddy.Debug;
-			local pets = FishingPetFrame.petnames;
-			local n = FL:tablecount(chosenpets);
-			Debug("chosenpets "..n.." "..#ourpets.." "..#pets);
-			for idx=1,#chosenlist do
-				Debug("petid "..chosenlist[idx])
-			end
+			GetOurPets(DumpChosen);
 			return true;
 		end
 end

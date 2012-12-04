@@ -723,13 +723,17 @@ FishingBuddy.QuestItems = QuestItems;
 local PagleFish = {};
 PagleFish[86545] = {
 	["enUS"] = "Mimic Octopus",
+	quest = 31446,
 };
 PagleFish[86544] = {
 	["enUS"] = "Spinefish Alpha",
+	quest = 31444,
 };
 PagleFish[86542] = {
 	["enUS"] = "Flying Tiger Gourami",
+	quest = 31443,
 };
+FishingBuddy.PagleFish = PagleFish;
 
 local QuestLures = {};
 QuestLures[58788] = {
@@ -1384,16 +1388,6 @@ FishingBuddy.Commands[FBConstants.UPDATEDB].func =
 		end
 		FishingBuddy.Print(FBConstants.UPDATEDB_MSG, count);
 		return true;
-	end;
-
-FishingBuddy.Commands[FBConstants.CURRENT] = {};
-FishingBuddy.Commands[FBConstants.CURRENT].help = FBConstants.CURRENT_HELP;
-FishingBuddy.Commands[FBConstants.CURRENT].func =
-	function(what)
-		if ( what and what == FBConstants.RESET) then
-			FishingMode();
-			return true;
-		end
 	end;
 
 local function nextarg(msg, pattern)

@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 155 $
+Revision: $Rev: 156 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 155 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 156 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -141,7 +141,8 @@ local function PLAYER_LEVEL_UP(self, level)
 				end
 			elseif zoneType == "Battleground" and low and high then
 				local playerLevel = playerLevel
-				if playerLevel >= low and (playerLevel == MAX_PLAYER_LEVEL or math.fmod(playerLevel, 10) >= 6) then
+--				if playerLevel >= low and (playerLevel == MAX_PLAYER_LEVEL or math.fmod(playerLevel, 10) >= 6) then
+				if low <= playerLevel and playerLevel <= high then
 					recInstances[zone] = true
 				end
 			elseif zoneType == "Instance" and low and high then
@@ -2684,7 +2685,7 @@ do
 
 	zones[BZ["Alterac Valley"]] = {
 		low = 45,
-		high = 85,
+		high = 90,
 		continent = Eastern_Kingdoms,
 		paths = BZ["Hillsbrad Foothills"],
 		groupSize = 40,
@@ -2694,7 +2695,7 @@ do
 
 	zones[BZ["Arathi Basin"]] = {
 		low = 10,
-		high = 85,
+		high = 90,
 		continent = Eastern_Kingdoms,
 		paths = BZ["Arathi Highlands"],
 		groupSize = 15,
@@ -2704,7 +2705,7 @@ do
 
 	zones[BZ["Warsong Gulch"]] = {
 		low = 10,
-		high = 85,
+		high = 90,
 		continent = Kalimdor,
 		paths = isHorde and BZ["Northern Barrens"] or BZ["Ashenvale"],
 		groupSize = 10,
@@ -4715,7 +4716,7 @@ do
 
 	zones[BZ["Eye of the Storm"]] = {
 		low = 35,
-		high = 85,
+		high = 90,
 		continent = Outland,
 		groupSize = 15,
 		type = "Battleground",
@@ -5296,7 +5297,7 @@ do
 
 	zones[BZ["Strand of the Ancients"]] = {
 		low = 65,
-		high = 85,
+		high = 90,
 		continent = Northrend,
 		groupSize = 15,
 		type = "Battleground",
@@ -5305,7 +5306,7 @@ do
 
 	zones[BZ["Isle of Conquest"]] = {
 		low = 75,
-		high = 85,
+		high = 90,
 		continent = Northrend,
 		groupSize = 40,
 		type = "Battleground",
@@ -5770,7 +5771,7 @@ do
 
 	zones[BZ["The Battle for Gilneas"]] = {
 		low = 85,
-		high = 85,
+		high = 90,
 		continent = Eastern_Kingdoms,
 		groupSize = 10,
 		type = "Battleground",
@@ -5779,7 +5780,7 @@ do
 
 	zones[BZ["Twin Peaks"]] = {
 		low = 85,
-		high = 85,
+		high = 90,
 		continent = Eastern_Kingdoms,
 		paths = BZ["Twilight Highlands"],
 		groupSize = 10,

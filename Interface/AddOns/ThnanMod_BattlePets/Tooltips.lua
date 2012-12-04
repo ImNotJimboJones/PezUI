@@ -4,7 +4,21 @@ local config = WPT.config;
 
 -- tooltip line generation
 
-local function petList()
+local petList = {};
+local petListTainted = true;
+local function taintPetList()
+	petListTainted = true;
+end
+local taintFrame = CreateFrame("Frame");
+taintFrame:SetScript("OnEvent", taintPetList);
+taintFrame:RegisterEvent("PET_JOURNAL_LIST_UPDATE");
+local function updatePetList()
+	local registeredFrames = {GetFramesRegisteredForEvent("PET_JOURNAL_LIST_UPDATE")};
+	for key, frame in pairs(registeredFrames) do
+		frame:UnregisterEvent("PET_JOURNAL_LIST_UPDATE");
+		-- this event will be spammed while we play with the filters... no need for
+		-- other frames to update every time. We'll reregister them when we're done.
+	end
 	-- record current filter settings
 	local collectedFlag = C_PetJournal.IsFlagFiltered(LE_PET_JOURNAL_FLAG_COLLECTED);
 	local favoritesFlag = C_PetJournal.IsFlagFiltered(LE_PET_JOURNAL_FLAG_FAVORITES);
@@ -20,9 +34,6 @@ local function petList()
 	local searchText = nil;
 	if PetJournal then
 		searchText = PetJournal.searchBox:GetText();
-		PetJournal:UnregisterEvent("PET_JOURNAL_LIST_UPDATE");
-		-- this event will be spammed while we play with the filters... no need for
-		-- the journal to update every time. We'll reregister it when we're done.
 	end
 	
 	-- clear all filters
@@ -34,20 +45,22 @@ local function petList()
 	C_PetJournal.ClearSearchFilter();
 	
 	-- search all pets for rarities
-	local wildPets = {};
+	petList = {};
 	for i = 1, C_PetJournal.GetNumPets(false) do
 		local petID, _, isOwned, _, _, _, _, name, _, _, _, _, _, isWildPet = C_PetJournal.GetPetInfoByIndex(i, false);
 		if isWildPet then
 			local _, _, _, _, rarity = C_PetJournal.GetPetStats(petID);
-			
-			if (type(wildPets[name]) == "table") then
-				if (rarity > wildPets[name].rarity) then
-					wildPets[name].rarity = rarity;
+			if not rarity then
+				rarity = 0;
+			end
+			if (type(petList[name]) == "table") then
+				if (rarity > petList[name].rarity) then
+					petList[name].rarity = rarity;
 				end
 			else
-				wildPets[name] = {};
-				wildPets[name].owned = isOwned;
-				wildPets[name].rarity = rarity;
+				petList[name] = {};
+				petList[name].owned = isOwned;
+				petList[name].rarity = rarity;
 			end
 		end
 	end
@@ -65,24 +78,28 @@ local function petList()
 	if searchText and (searchText ~= SEARCH) then
 		C_PetJournal.SetSearchFilter(searchText);
 	end
-	if PetJournal then
-		PetJournal:RegisterEvent("PET_JOURNAL_LIST_UPDATE");
+	for key, frame in pairs(registeredFrames) do
+		frame:RegisterEvent("PET_JOURNAL_LIST_UPDATE");
 		-- Hey look! All fixed!
 	end
-	return wildPets;
+	petListTainted = false;
 end
+
+local tooltipLines = {};
+for rarity = 1, 4 do
+	local rarityColor = ITEM_QUALITY_COLORS[rarity - 1].hex;
+	local rarityName = _G["BATTLE_PET_BREED_QUALITY"..rarity];
+	tooltipLines[rarity] = rarityColor..(L.caught:format(rarityName)).."|r";
+end
+tooltipLines[0] = ITEM_QUALITY_COLORS[5].hex..L.notCaught.."|r";
+
 local function tooltipLineForPet(name)
-	local wildPets = petList();
+	if petListTainted then
+		updatePetList();
+	end
 	
-	if (wildPets[name] ~= nil) then
-		if (wildPets[name].owned) then
-			local rarityColor = ITEM_QUALITY_COLORS[wildPets[name].rarity - 1].hex;
-			local rarityName = _G["BATTLE_PET_BREED_QUALITY"..wildPets[name].rarity];
-			
-			return rarityColor..(L.caught:format(rarityName)).."|r";
-		else
-			return ITEM_QUALITY_COLORS[5].hex..L.notCaught.."|r";
-		end
+	if petList[name] then
+		return tooltipLines[petList[name].rarity];
 	else
 		return "";
 	end
@@ -97,7 +114,6 @@ local function mouseoverPet_World()
 			GameTooltip:AddLine(line);
 			GameTooltip:Show();
 		end
-		collectgarbage();
 	end
 end
 local mouseoverFrame = CreateFrame("Frame");
@@ -158,7 +174,6 @@ local function mouseoverPet_Minimap()
 			GameTooltip:AddDoubleLine(text, prevRightText);
 			GameTooltip:Show();
 		end
-		collectgarbage();
 	end
 end
 local function tooltipHide()
@@ -176,7 +191,6 @@ local function mouseoverPet_Battle(self, petOwner, petIndex)
 		local speciesID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, petIndex);
 		local speciesName = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
 		local caughtRarity = tooltipLineForPet(speciesName);
-		collectgarbage();
 		local numOwned = C_PetJournal.GetNumCollectedInfo(speciesID);
 		if numOwned > 0 then
 			if not self.CollectedRarityText then

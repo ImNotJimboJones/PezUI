@@ -4,6 +4,14 @@ A framework for various features. See each plugin's readme for information and v
 
 VERSION CHANGES:
 
+3.0.2:
+
+- Fixed the same bug in Battle Pets plugin. It's actually fixed this time!
+
+3.0.1:
+
+- Bug fixes in Battle Pets plugin.
+
 3.0.0:
 
 - Added tooltips to config check boxes.
