@@ -2,8 +2,8 @@
 MADB = {
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
@@ -19,8 +19,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup5"] = {
-					["name"] = "CompactRaidGroup5",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup5",
 				},
 				["BNToastFrame"] = {
 					["name"] = "BNToastFrame",
@@ -45,11 +45,11 @@ MADB = {
 				["Boss5TargetFrame"] = {
 					["name"] = "Boss5TargetFrame",
 					["pos"] = {
-						"TOPRIGHT", -- [1]
-						"Boss4TargetFrame", -- [2]
-						"BOTTOMRIGHT", -- [3]
-						0, -- [4]
-						-4.99993896484375, -- [5]
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						2320, -- [4]
+						633.9996948242188, -- [5]
 					},
 				},
 				["BagsMover"] = {
@@ -104,8 +104,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup4"] = {
-					["name"] = "CompactRaidGroup4",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup4",
 				},
 				["GuildChallengeAlertFrame"] = {
 					["name"] = "GuildChallengeAlertFrame",
@@ -118,8 +118,8 @@ MADB = {
 					},
 				},
 				["RaidUnitFramesMover"] = {
-					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
+					["hidden"] = true,
 				},
 				["MainMenuBarVehicleLeaveButton"] = {
 					["name"] = "MainMenuBarVehicleLeaveButton",
@@ -132,8 +132,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup7"] = {
-					["name"] = "CompactRaidGroup7",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup7",
 				},
 				["VehicleSeatIndicator"] = {
 					["name"] = "VehicleSeatIndicator",
@@ -156,8 +156,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup3"] = {
-					["name"] = "CompactRaidGroup3",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup3",
 				},
 				["LootWonAlertFrame1"] = {
 					["name"] = "LootWonAlertFrame1",
@@ -172,35 +172,35 @@ MADB = {
 				["Boss1TargetFrame"] = {
 					["name"] = "Boss1TargetFrame",
 					["pos"] = {
-						"TOPRIGHT", -- [1]
+						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
-						"TOPRIGHT", -- [3]
-						-7.99992847443, -- [4]
-						-285.9999190767672, -- [5]
+						"BOTTOMLEFT", -- [3]
+						2320, -- [4]
+						1054, -- [5]
 					},
 				},
 				["Boss2TargetFrame"] = {
 					["name"] = "Boss2TargetFrame",
 					["pos"] = {
-						"TOPRIGHT", -- [1]
-						"Boss1TargetFrame", -- [2]
-						"BOTTOMRIGHT", -- [3]
-						0, -- [4]
-						-5.0001220703125, -- [5]
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						2320, -- [4]
+						948.9999389648438, -- [5]
 					},
 				},
 				["CompactRaidGroup8"] = {
-					["name"] = "CompactRaidGroup8",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup8",
 				},
-				["PetBattleMover6"] = {
-					["name"] = "PetBattleMover6",
+				["BonusRollMoneyWonFrame"] = {
+					["name"] = "BonusRollMoneyWonFrame",
 					["pos"] = {
-						"CENTER", -- [1]
+						"TOP", -- [1]
 						"UIParent", -- [2]
-						"BOTTOM", -- [3]
-						0, -- [4]
-						350, -- [5]
+						"TOP", -- [3]
+						-571, -- [4]
+						-88, -- [5]
 					},
 				},
 				["AchievementAlertFrame1"] = {
@@ -213,9 +213,15 @@ MADB = {
 						-110, -- [5]
 					},
 				},
-				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
-					["hidden"] = true,
+				["BonusRollFrame"] = {
+					["name"] = "BonusRollFrame",
+					["pos"] = {
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-571, -- [4]
+						-84, -- [5]
+					},
 				},
 				["RaidUnitFramesManagerMover"] = {
 					["name"] = "RaidUnitFramesManagerMover",
@@ -227,19 +233,15 @@ MADB = {
 						-139.9998779296875, -- [5]
 					},
 				},
-				["CriteriaAlertFrame1"] = {
-					["name"] = "CriteriaAlertFrame1",
+				["Boss3TargetFrame"] = {
+					["name"] = "Boss3TargetFrame",
 					["pos"] = {
-						"TOP", -- [1]
+						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
-						"TOP", -- [3]
-						-3.0517578125e-005, -- [4]
-						-100, -- [5]
+						"BOTTOMLEFT", -- [3]
+						2320, -- [4]
+						843.999755859375, -- [5]
 					},
-				},
-				["CompactRaidGroup1"] = {
-					["name"] = "CompactRaidGroup1",
-					["hidden"] = true,
 				},
 				["AchievementAlertFrame2"] = {
 					["name"] = "AchievementAlertFrame2",
@@ -249,6 +251,16 @@ MADB = {
 						"TOP", -- [3]
 						0, -- [4]
 						-205, -- [5]
+					},
+				},
+				["GroupLootFrame1"] = {
+					["name"] = "GroupLootFrame1",
+					["pos"] = {
+						"BOTTOMLEFT", -- [1]
+						"UIParent", -- [2]
+						"BOTTOMLEFT", -- [3]
+						250, -- [4]
+						500, -- [5]
 					},
 				},
 				["LootFrame"] = {
@@ -261,33 +273,23 @@ MADB = {
 						499.9998779296875, -- [5]
 					},
 				},
-				["CompactRaidGroup6"] = {
-					["name"] = "CompactRaidGroup6",
-					["hidden"] = true,
-				},
 				["Boss4TargetFrame"] = {
 					["name"] = "Boss4TargetFrame",
-					["pos"] = {
-						"TOPRIGHT", -- [1]
-						"Boss3TargetFrame", -- [2]
-						"BOTTOMRIGHT", -- [3]
-						0, -- [4]
-						-5, -- [5]
-					},
-				},
-				["CompactRaidGroup2"] = {
-					["name"] = "CompactRaidGroup2",
-					["hidden"] = true,
-				},
-				["GroupLootFrame1"] = {
-					["name"] = "GroupLootFrame1",
 					["pos"] = {
 						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
 						"BOTTOMLEFT", -- [3]
-						250, -- [4]
-						500, -- [5]
+						2320, -- [4]
+						738.9996948242188, -- [5]
 					},
+				},
+				["CompactRaidGroup2"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup2",
+				},
+				["CompactRaidGroup6"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup6",
 				},
 				["MACompactRaidFrameManagerToggleButton"] = {
 					["name"] = "MACompactRaidFrameManagerToggleButton",
@@ -299,34 +301,32 @@ MADB = {
 						-35, -- [5]
 					},
 				},
-				["Boss3TargetFrame"] = {
-					["name"] = "Boss3TargetFrame",
+				["CompactRaidGroup1"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup1",
+				},
+				["CriteriaAlertFrame1"] = {
+					["name"] = "CriteriaAlertFrame1",
 					["pos"] = {
-						"TOPRIGHT", -- [1]
-						"Boss2TargetFrame", -- [2]
-						"BOTTOMRIGHT", -- [3]
+						"TOP", -- [1]
+						"UIParent", -- [2]
+						"TOP", -- [3]
+						-3.0517578125e-005, -- [4]
+						-100, -- [5]
+					},
+				},
+				["PlayerDebuffsMover"] = {
+					["hidden"] = true,
+					["name"] = "PlayerDebuffsMover",
+				},
+				["PetBattleMover6"] = {
+					["name"] = "PetBattleMover6",
+					["pos"] = {
+						"CENTER", -- [1]
+						"UIParent", -- [2]
+						"BOTTOM", -- [3]
 						0, -- [4]
-						-5.00006103515625, -- [5]
-					},
-				},
-				["BonusRollMoneyWonFrame"] = {
-					["name"] = "BonusRollMoneyWonFrame",
-					["pos"] = {
-						"TOP", -- [1]
-						"UIParent", -- [2]
-						"TOP", -- [3]
-						-571, -- [4]
-						-88, -- [5]
-					},
-				},
-				["BonusRollFrame"] = {
-					["name"] = "BonusRollFrame",
-					["pos"] = {
-						"TOP", -- [1]
-						"UIParent", -- [2]
-						"TOP", -- [3]
-						-571, -- [4]
-						-84, -- [5]
+						350, -- [5]
 					},
 				},
 			},
