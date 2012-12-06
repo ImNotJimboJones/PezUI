@@ -157,7 +157,7 @@ function Hooked:CreateDropdownMenu(level)
 		info.value = 2;
 		UIDropDownMenu_AddButton(info, level)
 		
-		info.text = "Zone Filter"
+		info.text = "Zones"
 		info.value = 3;
 		UIDropDownMenu_AddButton(info, level)		
 		
@@ -169,9 +169,20 @@ function Hooked:CreateDropdownMenu(level)
 		info.value = 4;
 		UIDropDownMenu_AddButton(info, level)
 		
-		info.text = "Sort Options"
+		info.text = "Quantity"
+		info.value = 8;
+		UIDropDownMenu_AddButton(info, level)
+		
+		if Hooked.db.display.BreedInfo then
+			info.text = "Breed"
+			info.value = 9;
+			UIDropDownMenu_AddButton(info, level)
+		end
+		info.text = "Sorting"
 		info.value = 5
 		UIDropDownMenu_AddButton(info, level)
+		
+		
 		
 		local info = UIDropDownMenu_CreateInfo();
 		info.notCheckable = true
@@ -184,7 +195,86 @@ function Hooked:CreateDropdownMenu(level)
 	if level == 2 then	
 		local info = UIDropDownMenu_CreateInfo();
 		info.keepShownOnClick = true;	
-		if UIDROPDOWNMENU_MENU_VALUE == 1 then --blizzard pet families
+		
+		if Hooked.db.display.BreedInfo and UIDROPDOWNMENU_MENU_VALUE == 9 then
+			local BreedData = PetJournalEnhanced:GetModule("BreedData")
+			
+			info.notCheckable = true;
+			info.text = CHECK_ALL
+			info.func = function()
+					for i=1,#self.db.filtering.breed do 
+						self.db.filtering.breed[i] = true
+					end
+
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = UNCHECK_ALL
+			info.func = function()
+					for i=1,#self.db.filtering.breed	do 
+						self.db.filtering.breed[i] = false
+					end
+
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			for i=1,#BreedData.breeds do
+				info.notCheckable = false;	
+				info.keepShownOnClick = true
+				info.checked = false
+				info.isNotRadio = true
+				info.text = BreedData.breeds[i][4]
+				info.func = function(_, _, _, value)
+							self.db.filtering.breed[i] = not self.db.filtering.breed[i]
+							PetJournalEnhanced:UpdatePets()
+						end 
+				info.checked = function() return self.db.filtering.breed[i] end
+				UIDropDownMenu_AddButton(info, level)
+				
+			end	
+		elseif UIDROPDOWNMENU_MENU_VALUE == 8 then
+			info.notCheckable = true;
+			info.text = CHECK_ALL
+			info.func = function()
+					for i=1,#self.db.filtering.quantity	do 
+						self.db.filtering.quantity[i] = true
+					end
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = UNCHECK_ALL
+			info.func = function()
+							for i=1,#self.db.filtering.quantity	do 
+								self.db.filtering.quantity[i] = false
+							end
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+							PetJournalEnhanced:UpdatePets()
+						end
+			UIDropDownMenu_AddButton(info, level)
+			
+			
+			for i=1,#self.db.filtering.quantity do
+				info.notCheckable = false;	
+				info.keepShownOnClick = true
+				info.checked = false
+				info.isNotRadio = true
+				info.text = i
+				info.func = function(_, _, _, value)
+							self.db.filtering.quantity[i] = not self.db.filtering.quantity[i]
+							PetJournalEnhanced:UpdatePets()
+						end 
+				info.checked = function() return self.db.filtering.quantity[i] end
+				UIDropDownMenu_AddButton(info, level)
+			
+			end
+		
+		elseif UIDROPDOWNMENU_MENU_VALUE == 1 then --blizzard pet families
 			info.hasArrow = false;
 			info.isNotRadio = true;
 			info.notCheckable = true;
@@ -381,6 +471,10 @@ function Hooked:CreateDropdownMenu(level)
 			
 
 			local sortTypes = {"Level","Alphabetical","Pet Type","Rarity","Pet Highest Stat"}--,["Added to Pet Journal"]=SORT_PETID}
+			
+			if Hooked.db.display.BreedInfo then
+				table.insert(sortTypes,"Breed")
+			end	
 			
 			--create sort menu options
 			for i=1,#sortTypes do 

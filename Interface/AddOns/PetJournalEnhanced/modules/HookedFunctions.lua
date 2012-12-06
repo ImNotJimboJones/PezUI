@@ -6,6 +6,7 @@ local MAX_STAMINA = 3
 local MAX_ATTACK = 4
 local _
 local Hooked = PetJournalEnhanced:NewModule("Hooked")
+local BreedInfo = PetJournalEnhanced:GetModule("BreedInfo")
 
 function Hooked:Initialize(database)
 	if not self.initialized then
@@ -31,7 +32,7 @@ function Hooked:Initialize(database)
 		UIDropDownMenu_Initialize(PetJournalFilterDropDown, self.PetJournalFilterDropDown , "MENU")
 		
 		--self:RegisterMessage("PETJOURNAL_ENHANCED_UPDATE")
-		--hooksecurefunc("PetJournal_UpdatePetCard", Hooked.PetJournal_UpdatePetCard)
+		hooksecurefunc("PetJournal_UpdatePetCard", Hooked.PetJournal_UpdatePetCard)
 		hooksecurefunc("PetJournal_UpdatePetLoadOut", Hooked.PetJournal_UpdatePetLoadOut)
 		
 		--PetJournal_UpdatePetCard = Hooked.PetJournal_UpdatePetCard
@@ -65,6 +66,59 @@ function Hooked:Update()
 		self.PetJournal_FindPetCardIndex()
 		self.PetJournal_UpdatePetList()
 	end
+end
+
+
+function Hooked.PetJournal_UpdatePetCard(self)
+	
+	if not PetJournalPetCard.petID then return end
+	
+	
+	local _, customName, level , _, _, _, _, name = C_PetJournal.GetPetInfoByPetID(PetJournalPetCard.petID);
+	local _, _, _, _, rarity = C_PetJournal.GetPetStats(PetJournalPetCard.petID);
+	local health, power, speed, breedIndex, confidence = BreedInfo:Extrapolate(PetJournalPetCard.petID,25)
+	local breedName = BreedInfo:GetName(breedIndex,confidence)
+	local color = BreedInfo:GetColor(confidence)
+	
+	if Hooked.db.display.Extrapolate and level and level < 25 then
+		local HealthText = self.HealthFrame.health:GetText()
+		self.HealthFrame.health:SetText(HealthText..color.." ("..health..")|r");
+		
+		local powerText = self.PowerFrame.power:GetText()
+		self.PowerFrame.power:SetText(powerText..color.." ("..power..")|r");
+		
+		local speedText = self.SpeedFrame.speed:GetText()
+		self.SpeedFrame.speed:SetText(speedText..color.." ("..speed..")|r");
+	end
+
+	if rarity then
+		local r, g, b,hex  = GetItemQualityColor(rarity-1)
+		name = "|c"..hex..name.."|r"
+		
+		if customName then
+			customName = "|c"..hex..customName.."|r"
+		end
+	end
+	
+	if Hooked.db.display.BreedInfo then
+		if customName then
+			customName = customName.." "..breedName
+		elseif name then
+			name = name.." "..breedName
+		end
+	end
+	
+	if customName then
+		self.PetInfo.name:SetText(customName);
+		self.PetInfo.name:SetHeight(24);
+		self.PetInfo.subName:Show();
+		self.PetInfo.subName:SetText(name);
+	else
+		self.PetInfo.name:SetText(name);
+		self.PetInfo.name:SetHeight(32);
+		self.PetInfo.subName:Hide();
+	end
+	
 end
 
 function Hooked.PetJournal_ShowPetDropdown(index, anchorTo, offsetX, offsetY)
@@ -225,6 +279,10 @@ function Hooked.PetJournal_UpdatePetList()
 							elseif maxStat == MAX_SPEED then
 								pet.highStat:SetTexCoord(0.0,0.5,0.5,1)
 							end
+							
+							local h,w = pet.highStat:GetSize()
+							
+							--pet.highStat:SetSize(18,18)
 							pet.highStat:Show()
 						end
 					end
@@ -232,14 +290,22 @@ function Hooked.PetJournal_UpdatePetList()
 					pet.highStat:Hide()
 				end
 				
+				
+				
+				
+				
+				
 				--color the names by their rarity
 				if Hooked.db.display.coloredNames and canBattle and rarity then
 					local r, g, b,hex  = GetItemQualityColor(rarity-1)
+					
 					name = "|c"..hex..name.."|r"
 					if customName then
 						customName = "|c"..hex..customName.."|r"
 					end
 				end
+				
+				
 
 				pet.dragButton.levelBG:SetShown(canBattle);
 				pet.dragButton.level:SetShown(canBattle);
@@ -286,14 +352,25 @@ function Hooked.PetJournal_UpdatePetList()
 				pet.isDead:Hide();
 			end
 			
+			
+			
+			local pjePet =  PetJournalEnhanced:RetreivePet(petID)
+			local breed = ""
+			if Hooked.db.display.BreedInfo and pjePet and pjePet.breed and pjePet.breed > 0 and pjePet.breedConfidence then
+				breed = BreedInfo:GetName(pjePet.breed,pjePet.breedConfidence)
+			end
+			
 			if customName then
-				pet.name:SetText(customName);
+				pet.name:SetText(customName.." "..breed);
 				pet.name:SetHeight(12);
 				pet.subName:Show();
 				pet.subName:SetText(name);
+			elseif name then
+				pet.name:SetText(name.." "..breed)
+				pet.name:SetHeight(30);
+				pet.subName:Hide();
 			else
-				pet.name:SetText(name)
-				--pet.name:SetText(name.." "..index.." org: "..PetJournalEnhanced.petMapping[index].index );
+				pet.name:SetText(nil)
 				pet.name:SetHeight(30);
 				pet.subName:Hide();
 			end
@@ -343,11 +420,16 @@ function Hooked.PetJournal_UpdatePetLoadOut()
 				local _, customName, _, _, _, _, _,name = C_PetJournal.GetPetInfoByPetID(petID)
 				local rarity = select(5,C_PetJournal.GetPetStats(petID))
 				local hex  = select(4,GetItemQualityColor(rarity-1))
+				local breedIndex, confidence = BreedInfo:GetBreed(petID)
+				local breedName = BreedInfo:GetName(breedIndex, confidence)
+				
+				breedName = Hooked.db.display.BreedInfo and breedName or ""
+				
 				if customName then
-					Pet.subName:SetText("|c"..hex..customName.."|r");
+					Pet.subName:SetText("|c"..hex..customName.."|r "..breedName);
 					Pet.name:SetText("|c"..hex..name.."|r");
 				else
-					Pet.name:SetText("|c"..hex..name.."|r");
+					Pet.name:SetText("|c"..hex..name.."|r "..breedName);
 					--pet.name:SetText(name.." "..index.." org: "..PetJournalEnhanced.petMapping[index].index );
 				end
 			end

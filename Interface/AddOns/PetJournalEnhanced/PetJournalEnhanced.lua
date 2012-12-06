@@ -25,18 +25,6 @@ function PetJournalEnhanced:UpdatePets()
 	end
 end
 
---Only refresh pets when the number of pets changes otherwise multiple updates occure
---[[function PetJournalEnhanced:RefreshPets()
-	local numPets,numOwned = C_PetJournal.GetNumPets(false);
-	print(numPets,numOwned)
-	if numOwned ~= self.petCount and numPets + 1 <=  then
-		print("updating")
-		self.petCount = numOwned
-		self:UpdatePets()
-	end
-end]]
-
-
 function PetJournalEnhanced:InitPetJournal()
 	if not self.initialized then
 		self.modules.ZoneFiltering:Initialize()
@@ -58,6 +46,7 @@ function PetJournalEnhanced:GetSortFunctions()
 		self:ComposeSortFunction("isOwned",DESCENDING,"petType",USER,"level",DESCENDING,"name",ASCENDING),--pet type
 		self:ComposeSortFunction("isOwned",DESCENDING,"rarity", USER,"level",DESCENDING,"name",ASCENDING),--rarity
 		self:ComposeSortFunction("isOwned",DESCENDING,"maxStat",USER,"level",DESCENDING,"name",ASCENDING),--specialization
+		self:ComposeSortFunction("isOwned",DESCENDING,"breed",USER,"level",DESCENDING,"name",ASCENDING),--specialization
 	}
 		
 	--local sortTypes = {"Level","Alphabetical","Pet Type","Rarity","Pet Highest Stat"}
@@ -118,65 +107,77 @@ end
 function PetJournalEnhanced:CreateOptionsMenu()
 	local db = self.db.global.display
 	local options = {
-    name = "PetJournal Enhanced",
-    handler = self,
-    type = 'group',
-    args = {
-		petJournal = {
-			name = "PetJournal",
-			handler = self,
-			type = 'group',
-			order = 1,
-			args = {
-				showPetCount = {
-					order = 1,
-					name = "Show unique pet count",
-					type = "toggle",
-					set = function(info,val) 
-						db.uniquePetCount = val 
-						self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
-					end,
-					get = function(info) return db.uniquePetCount or false end
-				},
-				showMaxStat = {
-					order = 2,
-					name = "Show pets specialization",
-					type = "toggle",
-					width = "double",
-					set = function(info,val) 
-						db.maxStatIcon = val 
-						self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
-					end,
-					get = function(info) return db.maxStatIcon or false end
-				},
-				colorBorders = {
-					order = 2,
-					name = "Color pet borders",
-					type = "toggle",
-					width = "double",
-					set = function(info,val) 
-						db.coloredBorders = val 
-						self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
-					end,
-					get = function(info) return db.coloredBorders or false end
-				},
-				colorName = {
-					order = 2,
-					name = "Color pet names",
-					type = "toggle",
-					width = "double",
-					set = function(info,val) 
-						db.coloredNames = val 
-						self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
-					end,
-					get = function(info) return db.coloredNames or false end
-				},
+		name = "PetJournal Enhanced",
+		handler = self,
+		type = 'group',
+		args = {
+			showPetCount = {
+				order = 1,
+				name = "Show unique pet count",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.uniquePetCount = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.uniquePetCount or false end
 			},
-		},
-		
-		
-    },
-	
+			showMaxStat = {
+				order = 2,
+				name = "Show pets specialization",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.maxStatIcon = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.maxStatIcon or false end
+			},
+			colorBorders = {
+				order = 3,
+				name = "Color pet borders",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.coloredBorders = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.coloredBorders or false end
+			},
+			colorName = {
+				order = 4,
+				name = "Color pet names",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.coloredNames = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.coloredNames or false end
+			},
+			BreedInfo = {
+				order = 5,
+				name = "Display Breed Info",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.BreedInfo = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.BreedInfo or false end
+			},
+			level25Stats = {
+				order = 5,
+				name = "Display Extroplated Pet Stats",
+				type = "toggle",
+				width = "double",
+				set = function(info,val) 
+					db.Extrapolate = val 
+					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
+				end,
+				get = function(info) return db.Extrapolate or false end
+			},
+	},
 }
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("PetJournalEnhanced", options)
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions("PetJournalEnhanced","PetJournal Enhanced")
@@ -258,6 +259,10 @@ function PetJournalEnhanced:Reset()
 		filtering.specialization[i] = true
 	end
 	
+	for i=1,#filtering.quantity do
+		filtering.quantity[i] = true
+	end
+	
 	filtering.currentZone = false
 	filtering.canBattle = true
 	filtering.cantBattle = true
@@ -275,79 +280,13 @@ function PetJournalEnhanced:Reset()
 	self:UpdatePets()
 end
 
-
---/run PetJournalEnhanced:Debug("albino snake")
---/run PetJournalEnhanced:Debug("yellow moth")
---/run PetJournalEnhanced:Debug("albino snack")
-function PetJournalEnhanced:Debug(petName)
-	petName = trim(petName)
-	print("Begining Debug")
-	
-	local FAILED = "|c00FF0000FAILED|r"
-	local SUCCESS = "|c0000FF00SUCCESS|r"
-	
-	if IsAddOnLoaded("Pet Theory") then
-		print(FAILED,"Detected Pet theory is installed, Pet journal enhances is not compatible with pet theory")
-	end
-	
-	if IsAddOnLoaded("_PetJournalEnhanced") then
-		print(FAILED," a conflicting and outdated install of PetJournal Enhanced was detected, Delete _PetJournalEnhanced from your addons folder")
-	end
-	
-	self:InitPetJournal()
-	
-	self:Reset()
-	
-	print("Settings reset for maximum pets")
-	
-	print("Searching blizzard for",petName)
-	local numPets = C_PetJournal.GetNumPets(PetJournal.isWild)
-	local petNameUpper = string.upper(petName)
-	for i=1,numPets do
-		local _, _, _, _, _, _, _, name = C_PetJournal.GetPetInfoByIndex(i, PetJournal.isWild)
-		nameUpper = string.upper(name)
-		if  petNameUpper == nameUpper then
-			print(SUCCESS,"found: ",name,"in blizzard's list at position",i)
-			break
-		end
-		if i==numPets then
-			print(FAILED,"to find:",petName," in blizzards list")
-		end
-	end
-	
-	print("Sorting pets")
-	self:SortPets(true)
-	
-	print("Searching Pet Journal Enhanced for ",petName)
-	for i=1,#self.petMapping do
-		nameUpper = string.upper(self.petMapping[i].name)
-		if  petNameUpper == nameUpper then
-			print(SUCCESS,"found: ",self.petMapping[i].name,"in Pet Journal Enhanced's list at position",i)
-			print("opening pet journal to ",self.petMapping[i].name)
-			if not PetJournalParent:IsShown() then
-				TogglePetJournal(2)
-			end
-			self.modules.Hooked.PetJournal_ShowPetCard(i)
-			break
-		end
-		if i==#self.petMapping then
-			print(FAILED,"to find:",petName," in Pet Journal Enhanced's list")
-		end
-	end
-	
-	
-	
-	self:UpdatePets()
-	print("End Debug")
-	
-end
-
 function PetJournalEnhanced:SortPets(forceSort)
 	if PetJournalParent:IsShown() or forceSort then
 		local db = self.db.global
 		local filtering = db.filtering
+		local display = db.display
 		local numPets = C_PetJournal.GetNumPets(PetJournal.isWild)
-		
+		local zoneIDs = self.modules.ZoneIDs
 		
 		
 		--clearing pet mapping makes the garbage collector happy
@@ -370,13 +309,16 @@ function PetJournalEnhanced:SortPets(forceSort)
 				pet.name = name
 				pet.petType = petType
 				pet.canBattle = canBattle
-				pet.rarity = rarity or 0
-				
+				pet.rarity = rarity or 0				
 				pet.maxStat = 0
 				if isOwned and canBattle and maxHealth and attack and speed then
 					pet.maxStat = self.GetMaxStat(maxHealth,attack,speed)
 				end
 				
+				local breedIndex, confidence = BreedInfo:GetBreed(petID)
+				pet.breed = breedIndex
+				pet.breedConfidence = confidence
+
 				--pets that cant battle shouldn't have a level for sorting purposes
 				if not canBattle then
 					pet.level = 0
@@ -395,8 +337,15 @@ function PetJournalEnhanced:SortPets(forceSort)
 				self:AddPet(pet)
 			end
 			
+			pet.owned = C_PetJournal.GetNumCollectedInfo(speciesID)
 			pet.favorite = favorite
 			pet.index = i
+			
+			if level and pet.level and pet.level < level then
+				local breedIndex, confidence = BreedInfo:GetBreed(petID)
+				pet.breed = breedIndex
+				pet.breedConfidence = confidence
+			end
 			
 			if canBattle then
 				pet.level = level
@@ -412,8 +361,6 @@ function PetJournalEnhanced:SortPets(forceSort)
 				exclude = true	
 			elseif not filtering.cantTrade and not tradable  then
 				exclude = true	
-			elseif filtering.currentZone and not string.find(sourceText, GetZoneText(),1,true) then
-				exclude = true
 			elseif pet.rarity and pet.rarity > 0 and not filtering.rarity[pet.rarity] then
 				exclude = true
 			elseif pet.maxStat > 0 and  not filtering.specialization[pet.maxStat] then
@@ -422,6 +369,18 @@ function PetJournalEnhanced:SortPets(forceSort)
 				exclude = true
 			elseif not filtering.unknownZone and not (string.find(sourceText,"Pet Battle:") or string.find(sourceText,"Zone:"))  then
 				exclude = true
+			elseif pet.owned > 0 and not filtering.quantity[pet.owned] then
+				exclude = true
+			elseif display.BreedInfo and pet.breed > 0 and  not filtering.breed[pet.breed] then
+				exclude =true
+			end
+			
+			if filtering.currentZone then--and not string.find(sourceText, GetZoneText(),1,true) then
+				local zones = zoneIDs.SpeciesToZoneId[pet.speciesID]
+				local mapID = GetCurrentMapAreaID()
+				if (zones and not zones[mapID]) or zones == nil then
+					exclude =true
+				end
 			end
 			
 			if not exclude then
@@ -443,16 +402,21 @@ function PetJournalEnhanced:OnInitialize()
 				coloredNames = true,
 				coloredBorders = true,
 				maxStatIcon = true,
+				BreedInfo = false,
+				Extrapolate = true,
 			},
 			filtering = {
 				rarity = {[1]=true,[2]=true,[3]=true,[4]=true},
+				breed = {[1]=true,[2]=true,[3]=true,[4]=true,[5]=true,[6]=true,[7]=true,[8]=true,[9]=true,[10]=true},
 				specialization = {[1]=true,[2]=true,[3]=true,[4]=true},
+				quantity = {[1]=true,[2]=true,[3]=true},
 				currentZone = false,
 				canBattle =true,
 				cantBattle = true,
 				unknownZone = true,
 				cantTrade = true,
 				canTrade = true,
+				
 			},
 			sorting = {
 				selection = 1,
