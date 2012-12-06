@@ -13,6 +13,7 @@ TomTomDB = {
 			},
 			["persistence"] = {
 				["savewaypoints"] = false,
+				["cleardistance"] = 0,
 			},
 			["mapcoords"] = {
 				["playeraccuracy"] = 1,
