@@ -3,6 +3,22 @@ BrokerToolBoxDB = {
 	["Burning Blade"] = {
 		["Pezzer"] = {
 			["tools"] = {
+				["money"] = {
+					["UnitFactionGroup"] = "Horde",
+					["money"] = 521571662,
+					["showtotal"] = true,
+				},
+				["clock"] = {
+					["24hours"] = false,
+				},
+				["token"] = {
+					["currency"] = {
+						[395] = true,
+						[396] = true,
+						[390] = true,
+						[392] = true,
+					},
+				},
 				["repair"] = {
 					["autorepair"] = true,
 					["BrokenWarningSound"] = true,
@@ -10,20 +26,6 @@ BrokerToolBoxDB = {
 					["autojunksell"] = true,
 					["BrokenWarningThreshold"] = 20,
 					["BrokenWarning"] = true,
-				},
-				["money"] = {
-					["UnitFactionGroup"] = "Horde",
-					["money"] = 293434919,
-					["showtotal"] = true,
-				},
-				["token"] = {
-					["currency"] = {
-						[395] = true,
-						[396] = true,
-					},
-				},
-				["clock"] = {
-					["24hours"] = false,
 				},
 			},
 		},
