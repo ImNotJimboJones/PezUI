@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs-ruRU.lua 1419 2011-07-12 17:20:37Z arithmandar $
+-- $Id: Atlas_DungeonLocs-ruRU.lua 1772 2012-10-03 15:12:26Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -29,7 +29,7 @@
 -- Atlas Data  (Russian)
 -- Compiled by StingerSoft
 -- stingersoft@gmail.com
--- Last Update: $Date: 2011-07-13 01:20:37 +0800 (Wed, 13 Jul 2011) $
+-- Last Update: $Date: 2012-10-03 23:12:26 +0800 (週三, 03 十月 2012) $
 
 --]]
 

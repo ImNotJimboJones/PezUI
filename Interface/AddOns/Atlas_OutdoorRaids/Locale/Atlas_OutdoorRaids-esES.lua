@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids-esES.lua 1772 2012-10-03 15:12:26Z arithmandar $
+-- $Id: Atlas_OutdoorRaids-esES.lua 1852 2012-10-28 11:43:32Z maqjav@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,7 +29,7 @@
 -- Datos de Atlas (Español)
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@hotmail.com
--- Úlltima Actualización (last update): $Date: 2012-10-03 23:12:26 +0800 (Wed, 03 Oct 2012) $
+-- Úlltima Actualización (last update): 28/10/2012
 
 --]]
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
@@ -41,11 +41,13 @@ if AL then
 	AL["Ancient Skull Pile"] = "Montón de cráneos antiguos";
 	AL["Darkscreecher Akkarai"] = "Estridador oscuro Akkarai";
 	AL["Gezzarak the Huntress"] = "Gezzarak la Cazadora";
+	AL["Graveyard"] = "Cementerio";
 	AL["Grella <Skyguard Quartermaster>"] = "Grella <Intendente de la Guardia del cielo>";
 	AL["Hazzik"] = "Hazzik";
 	AL["Hazzik's Package"] = "Paquete de Hazzik";
 	AL["Karrog"] = "Karrog";
 	AL["Outdoor Raid Encounters"] = "Encuentros de banda";
+	AL["Pandaria World Bosses"] = "Jefes del Mundo en Pandaria";
 	AL["Random"] = "Aleatorio";
 	AL["Sahaak <Keeper of Scrolls>"] = "Sahaak <Vigilante de pergaminos>";
 	AL["Severin <Skyguard Medic>"] = "Severin <Médico de la Guardia del cielo>";
@@ -60,5 +62,4 @@ if AL then
 	AL["Talonpriest Zellek"] = "Sacerdote de la garra Zellek";
 	AL["Terokk"] = "Terokk";
 	AL["Vakkiz the Windrager"] = "Vakkiz el Furibundo del Viento";
-	AL["Graveyard"] = "Cementerio";
 end

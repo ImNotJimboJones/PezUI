@@ -715,11 +715,39 @@ function ViewList_Show(path,flatgroup)
 		if g.next then s = s .. "|cffffeebbNext guide:|r ".. g.next:match(".+\\(.-)$") .."\n" end
 
 		s = s .. "\n"
-		local status,msg = Menu.selectedguide:GetStatus()
+		local status,msg = g:GetStatus()
 		local color = GuideStatusColor[status]
-		if status=="COMPLETE" and Menu.selectedguide.type=="LEVELING" then status=status.."_lev" end
-		s = s .. ("|cffffeebbGuide status:|r |cff%02x%02x%02x%s|r %s"):format(color.r*255,color.g*255,color.b*255, L['guidepicker_status_'..status] , msg and "("..msg..")" or "")
-		s = s .. "\n\n"
+		if status=="COMPLETE" and g.type=="LEVELING" then status=status.."_lev" end
+		-- s = s .. ("|cffffeebbGuide status:|r |cff%02x%02x%02x%s|r %s\n"):format(color.r*255,color.g*255,color.b*255, L['guidepicker_status_'..status] , msg and #msg>0 and "("..msg..")" or "") -- TODO: show status properly! Conditional? Or what?
+
+		local complete,cur,tot = g:GetCompletion()
+		if complete~="loading" then
+			if complete then
+				if g.completionmode=="quests" then
+					if g.type=="DAILIES" then
+						local qmin,qsome,qmax = unpack(g.completionparams)
+						qmin=tonumber(qmin)
+						qsome=tonumber(qsome)
+						qmax=tonumber(qmax)
+						if not qmin then
+							s = s .. ("|cffffeebbComplete:|r %d/%d quests\n"):format(cur,tot)
+						elseif cur<qmin then
+							s = s .. ("|cffffeebbDailies not started yet|r (%d/%d quests)\n"):format(cur,tot)
+						elseif cur<qsome then
+							s = s .. ("|cffffeebbToday: not done|r (%d/%d quests)\n"):format(cur,tot)
+						elseif cur<qmax then
+							s = s .. ("|cffffeebbToday: done partially|r (%d/%d quests)\n"):format(cur,tot)
+						elseif cur<=tot then
+							s = s .. ("|cffffeebbToday: done?|r (%d/%d quests)\n"):format(cur,tot)
+						end
+					else
+						s = s .. ("|cffffeebbComplete:|r %d/%d quests\n"):format(cur,tot)
+					end
+				end
+			end
+		end
+
+		s = s .. "\n"
 
 		s = s .. (Menu.selectedguide.description or "")
 

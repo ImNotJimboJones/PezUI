@@ -358,8 +358,8 @@ ZTA:RegisterBuild("MONK","Leveling Brewmaster","Brewmaster", [[
 	Healing Elixirs
 	Invoke Xuen, the White Tiger
 ]],[[
-	Major Glyph of Afterlife
-	Major Glyph of Sparring
+	Major Glyph of Guard
+	Major Glyph of Stoneskin
 	Major Glyph of Fortifying Brew
 	Minor Glyph of Spirit Roll
 	Minor Glyph of Water Roll

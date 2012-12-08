@@ -87,6 +87,7 @@ function arrowframeproto:ShowTraveling (elapsed,angle,dist)
 
 	self.arrow.turn.anim:SetRadians(angle)
 	self.arrow.turn:Play()
+	self.arrow.angle = angle
 
 	if perc>0.5 and self.precise.turn then
 		-- precision dot

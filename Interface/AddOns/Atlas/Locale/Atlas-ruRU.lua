@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-ruRU.lua 1817 2012-10-10 14:21:40Z StingerSoft@gmail.com $
+﻿-- $Id: Atlas-ruRU.lua 1838 2012-10-25 09:28:46Z StingerSoft@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -1201,5 +1201,8 @@ if AL then
 	AL["Priestess Summerpetal"] = "Жрица Летний Лепесток";
 
 	--Terrace of Endless Spring
-
+	AL["Elder Asani"] = "Старейшина Асани";
+	AL["Elder Regail"] = "Старейшина Регейл";
+	AL["Protector Kaolan"] = "Защитник Каолань";
+	
 end

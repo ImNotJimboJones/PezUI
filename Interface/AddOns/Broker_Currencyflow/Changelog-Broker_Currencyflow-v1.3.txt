@@ -1,0 +1,20 @@
+tag v1.3
+48e845c4f555e2b2a1157171dad7409261672105
+m42i <mfourtytwoi@gmail.com>
+2012-12-01 14:21:03 +0100
+
+5.1 patch release
+
+
+--------------------
+
+wusula:
+	- fix: wrong amounts of MoP Archaeology fragments
+	- add Lesser Charm of Good Fortune (MoP 5.1.0)
+	- bump TOC to 5.1.0
+	- localization for Elder Charm of Good Fortune
+	- add Elder Charm of Good Fortune
+	- fix: Archaeology fragment icon missing (GetArchaeologyRaceInfo)
+m42i:
+	- Update .gitingore with some embedded libraries.
+	- Remove and update libraries that are handled by the wowace.com packager.

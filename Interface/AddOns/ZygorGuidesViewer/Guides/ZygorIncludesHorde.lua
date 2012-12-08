@@ -56,7 +56,7 @@ ZygorGuidesViewer:RegisterInclude("Spirt_Harmony",[[
 -- Portal Includes
 --------------------------------------------------------------------------------------------------------------------------------------
 
-
+--Opening up the portal to Pandaria--
 ZygorGuidesViewer:RegisterInclude("h_begin_pandaria",[[
 	step
 		.' In order to get to Pandaria for the first time, you must complete the opening questline to The Jade Forest.
@@ -112,8 +112,6 @@ ZygorGuidesViewer:RegisterInclude("h_begin_pandaria",[[
 		.talk General Nazgrim##55135
 		..turnin Touching Ground##31766
 ]])
-
-
 
 --How to get to the Dark Portal from Orgrimmar--
 ZygorGuidesViewer:RegisterInclude("darkportal",[[
@@ -1362,7 +1360,7 @@ ZygorGuidesViewer:RegisterInclude("H_Icecrown_Argent_Crusade_Rep",[[
 	step
 		|fly Crusaders' Pinnacle
 	step
-		goto 79.8,30.8
+		goto Icecrown 79.8,30.8
 		.talk Crusader Bridenbrad##30562
 		..turnin The Boon of Alexstrasza##13079
 		..accept Hope Yet Remains##13080
@@ -11588,3188 +11586,6 @@ ZygorGuidesViewer:RegisterInclude("H_Therazane_DailyQuest", [[
 		..turnin Beneath the Surface##28488
 ]])
 
--- Pandaria
-
-ZygorGuidesViewer:RegisterInclude("H_Tillers_PreQuest", [[
-		goto Vale of Eternal Blossoms 60.2,22.9
-		.talk Farmer Doran##64011
-		..accept The Tillers##31374
-	step
-		goto Valley of the Four Winds 52.0,48.0
-		.talk Farmer Yoon##58721
-		..turnin The Tillers##31374
-		..accept A Helping Hand##30252
-	step
-		goto 51.8,48.8
-		.click Unbudging Rock
-		.' Clear 8 Unbudging Rocks |q 30252/1
-	step
-		goto 52.8,47.9
-		.talk Farmer Yoon##58646
-		..turnin A Helping Hand##30252
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..accept Learn and Grow I: Seeds##30535
-	step
-		goto 52.9,52.2
-		.talk Merchant Greenfield##58718
-		.' Tell him you're there to pick up seeds.
-		.' Get a Packet of Green Cabbage Seeds |q 30535/1
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..turnin Learn and Grow I: Seeds##30535
-		..accept Learn and Grow II: Tilling and Planting##30254
-	step
-		goto 52.0,48.3
-		.clicknpc Untilled Soil##59985+
-		.' Till 2 patches of Soil. |q 30254/1
-		.' Use the EZ-Gro Green Cabbage Seeds in your bags on the Tilled Soil. |use EZ-Gro Green Cabbage Seeds##80302
-		.' Plant seeds in 2 patches of Tilled Soil. |q 30254/2
-		|modelnpc Tilled Soil##59990+
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..turnin Learn and Grow II: Tilling and Planting##30254
-		..accept Learn and Grow III: Tending Crops##30255
-	step
-		goto 52.0,48.3
-		.' Use the Rusty Watering Can on the Parched EZ-Gro Green Cabbage |use Rusty Watering Can##79104
-		.' Water 2 parched Ez-Gro Green Cabbage |q 30255/1
-		|modelnpc Parched EZ-Gro Green Cabbage##59987
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..turnin Learn and Grow III: Tending Crops##30255
-		..accept Learn and Grow IV: Harvesting##30256
-	step
-		goto 52.0,48.3
-		.clicknpc Ripe EZ-Gro Green Cabbage##59833
-		.get 2 EZ-Gro Green Cabbage |q 30256/1
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..turnin Learn and Grow IV: Harvesting##30256
-		..accept Learn and Grow V: Halfhill Market##30257
-	step
-		goto 52.8,48.0
-		.click Dark Soil
-		.get Marsh Lily |q 30257/1
-	step
-		goto 53.1,51.8
-		.talk Gina Mudclaw##58706
-		..turnin Learn and Grow V: Halfhill Market##30257 
-		..accept Learn and Grow VI: Gina's Vote##31945
-	step
-		goto 52.9,52.2
-		.talk Merchant Greenfield##58718
-		.buy 1 Scallion Seeds##80591
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Scallion Seeds on the Tilled Soil |use Scallion Seeds##80591
-		.' Plant Scallion Seeds |q 31945/1
-		|modelnpc Tilled Soil##59990+
-	step
-	label info
-		'Click here for information on Bursting Crops |next "bursting" |confirm
-		'Click here for information on Parched Crops |next "parched" |confirm
-		'Click here for information on Infested Crops |next "infested" |confirm
-		'Click here for information on Wiggling Crops |next "wiggling" |confirm
-		'Click here for information on Alluring Crops |next "alluring" |confirm
-		'Click here for information on Smothered Crops |next "smothered" |confirm
-		'Click here for information on Wild Crops |next "wild" |confirm
-		'Click here for information on Runty Crops |next "runty" |confirm
-		'Click here for information on Tangled Crops |next "tangled" |confirm
-	step
-	label bursting
-		'Unless you got a Bursting Scallion immediately after planting your Scallions, you will have to wait a full day until you can pick your crops.
-		.' Click here if you are ready to harvest your crops. |confirm
-		.' Click here to start doing dailies. |next "dailies" |confirm
-	step
-		goto 52.0,48.4
-		.clicknpc Bursting Scallions##63160 
-		.clicknpc Ripe Scallions##63165
-		.' Harvest Ripe Scallions |q 31945/2
-		.get 5 Scallion##74843 |q 31945/3
-		|next "exit"
-	step
-	label runty
-		goto 52.0,48.4
-		.clicknpc Runty Scallions##63166
-		.' Press your Space Bar and jump. 
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label wiggling
-		goto 52.0,48.4
-		.clicknpc Wiggling Scallions##63169
-		.from Voracious Virmen##60039
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label infested
-		goto 52.2,48.3
-		.click Vintage Bug Sprayer
-		.collect Vintage Bug Sprayer##80513 |n
-		.' Use your Vintage Bug Sprayer on the Infested Scallions |use Vintage Bug Sprayer##80513
-		|modelnpc Infested Scallions##63162
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label alluring
-		goto 52.2,48.3
-		.clicknpc Alluring Scallions##63159
-		.from Swooping Plainshawk##60072
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label wild
-		goto 52.0,48.4
-		.clicknpc Wild Scallions##63170	
-		.' Ride the Scallion |invehicle |c 
-	step
-		'Spam the Flex ability on your new hotbar, when the plant tries to cast Vine Slam, interrupt it with your Gnaw ability.
-		.' Build 50 stacks on Dominance. |outvehicle |c
-	step
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label tangled
-		goto 52.0,48.4 |n
-		.clicknpc Tangled Scallions##63168
-		.' Run to [51.7,48.9]
-		'|goto 51.7,48.9 <5 |c
-	step
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-	step
-	label parched
-		goto 52.0,48.4
-		.' Use the Rusty Watering Can on the Parched Scallions |use Rusty Watering Can##79104
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-		|modelnpc Parched Scallions##63163
-	step
-	label smothered
-		goto 52.0,48.4
-		.clicknpc Encroaching Weed##60185
-		.' Ride the Weed |invehicle |c
-	step
-		'Spam the Pull ability on your new hotbar. 
-		.' Pull the Weed |outvehicle |c
-	step
-		.' Click here to return to the information page. |next "info" |confirm
-		.' Click here when you are have tilled your crops. |next "bursting" |confirm
-		|modelnpc Smothered Scallions##63167
-	step
-	label exit
-		goto 53.1,51.8
-		.talk Gina Mudclaw##58706
-		..turnin Learn and Grow VI: Gina's Vote##31945
-]])
-ZygorGuidesViewer:RegisterInclude("H_Tillers_DailyQuest", [[
-	label dailies
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..accept The Kunzen Hunter-Chief##30336 |daily |or 2
-		..accept That Dangling Carrot##31670 |daily |or 2
-		..accept Stealing is Bad... Re-Stealing is OK##30334 |daily |or 2
-		..accept The Cabbage Test##31669 |daily |or 2
-		..accept It's Melon Time##31942 |daily |or 2
-		..accept A Pumpkin-y Perfume##31672 |daily |or 2
-		..accept Stalling the Ravage##30335 |daily |or 2
-		..accept Red Blossom Leeks, You Make the Croc-in' World Go Down##31673 |daily |or 2
-		..accept Squash Those Foul Odors##31941 |or 2
-		..accept The Lesser of Two Evils##30333 |or 2
-		..accept The White Turnip Treatment##31675 |or 2
-	step
-		goto 52.7,50.5
-		.talk Andi##64464
-		..accept A Gift For Fung##30475 |daily |or
-		..accept A Gift For Chee Chee##30471 |daily |or
-		..accept A Gift For Haohan##30477 |daily |or
-		..accept A Gift For Jogu##30478 |daily |or
-		..accept A Gift For Sho##30472 |daily |or
-		..accept A Gift For Tina##30470 |daily |or
-		..accept A Gift For Ella##30474 |daily |or
-	step
-		goto 53.1,51.7
-		.talk Ella##58647
-		..accept You Have to Burn the Ropes##30327 |daily
-		.' Click here if Ella is not in town |confirm
-	step
-		goto 53.0,51.7
-		.talk Haohan Mudclaw##57402
-		..accept Pest Problems##30319
-		.' Click here if Haohan is not in town |confirm
-	step
-		goto 53.1,51.7
-		.talk Tina Mudclaw##58761
-		..accept They Don't Even Wear Them##30323
-		.' Click here if Tina is not in town |confirm
-	step
-		goto 53.1,52.1
-		.talk Chee Chee##58709
-		..accept Not in Chee-Chee's Backyard##30324 |daily
-		.' Click here if Chee-Chee is not in town |confirm
-	step
-		goto 52.9,51.7
-		.talk Farmer Fung##57298
-		..accept Water, Water Everywhere##30317 |daily
-		.' Click here if Farmer Fung is not in town |confirm
-	step
-		goto 53.1,52.1
-		.talk Sho##58708
-		..accept Where It Counts##30325
-		.' Click here if Sho is not in town |confirm
-	step
-		goto 53.6,52.5
-		.talk Jogu the Drunk##58710
-		..accept Weed War II##30321 |daily
-		.' Click here if Jogu has no available quests. |confirm
-	step
-		goto 53.0,51.8
-		.talk Old Hillpaw##58707
-		..accept Chasing the Chicken##30318
-		.' Click here if Old Hillpaw is not in town. |confirm
-	step
-		goto 53.2,51.8
-		.talk Gina Mudclaw##58706
-		..accept Money Matters##30322
-		.' If this quest is unavailable click here. |confirm
-	step
-		goto 55.1,50.3
-		.talk Innkeeper Lei Lan##59582
-		.' Tell her you are here on behalf of Gina Mudclaw.
-		.' Innkeeper Lei Lan's Payment |q 30322/3
-		|only if havequest(30322)
-	step
-		goto 55.6,52.1
-		.talk Lolo Lio##59585
-		.' Tell him you are here on behalf of Gina Mudclaw.
-		.' Lolo Lio's Payment |q 30322/4
-		|only if havequest(30322)
-	step
-		goto 56.1,49.6
-		.talk Trader Jambeezi##59583
-		.' Tell him you are here on behalf of Gina Mudclaw.
-		.' Trader Jambeezi's Payment |q 30322/2
-		|only if havequest(30322)
-	step
-		goto 56.7,47.1
-		.talk Spicemaster Jin Jao##59581
-		.' Tell him you are here on behalf of Gina Mudclaw.
-		.' Spicemaster Jin Jao's Payment |q 30322/1
-		|only if havequest(30322)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Juicycrunch Carrot Seeds##80590 
-		|only if havequest(31670)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Green Cabbage Seeds##79102 
-		|only if havequest(31669)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 White Turnip Seeds##80595 
-		|only if havequest(31675)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Jade Squash Seeds##89328 
-		|only if havequest(31941)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Striped Melon Seeds##89329 
-		|only if havequest(31942)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Mogu Pumpkin Seeds##80592 
-		|only if havequest(31672)
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 1 Red Blossom Leek Seeds##80593
-		|only if havequest(31673)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Juicycrunch Carrot Seeds on the Tilled Soil |use Juicycrunch Carrot Seeds##80590
-		.' Plant Juicycrunch Carrot Seeds |q 31670/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31670)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Jade Squash Seeds on the Tilled Soil |use Jade Squash Seeds##89328 
-		.' Plant Jade Squash Seeds |q 31941/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31941)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your White Turnip Seeds on the Tilled Soil |use White Turnip Seeds##80595
-		.' Plant White Turnip Seeds |q 31675/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31675)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Green Cabbage Seeds on the Tilled Soil |use Green Cabbage Seeds##79102
-		.' Plant Green Cabbage Seeds |q 31669/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31669)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Striped Melon Seeds on the Tilled Soil |use Striped Melon Seeds##89329
-		.' Plant Striped Melon Seeds |q 31942/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31942)
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Red Blossom Leek Seeds on the Tilled Soil |use Red Blossom Leek Seeds##80593
-		.' Plant Red Blossom Leek Seeds |q 31673/1
-		|modelnpc Tilled Soil##59990+
-		|only if havequest(31673)
-	step
-		goto 56.5,50.4
-		.talk Wing Nga##60231
-		.' Tell her that you'd like to borrow one of Farmer Fung's kites.
-		.' Ride a kite. |invehicle |c
-		|only if havequest(30317)
-	step
-		.' Use your Water Buckest ability on the Dusty Spots below you. |tip They are outlined by a yellow circle.
-		.' Water 35 Dusty Spots |q 30317/1
-		|only if havequest(30317)
-	step
-		goto 38.5,51.7
-		.talk Gai Lan##57385
-		.' Ask him, "What Weeds?"
-		.' Get the Weed War buff. |havebuff Weed War
-		|only if havequest(30321)
-	step
-		.clicknpc Ugly Weed##57306
-		.clicknpc Nasty Weed##57308
-		.click Weed-B-Gone Gas Bomb |tip Use the new button available to you to clear a lot of weeds at once
-		.' Pull 100 Weeds |q 30321/1
-		|only if havequest(30321)
-	step
-		goto 31.3,53.2
-		.clicknpc Hillpaw's Chicken##58918 |tip Most of these chickens are disguised animals. When you pick one up click the button that appears on your screen.
-		.' You can deliver lost hens to the chicken coop here [30.4,52.5]
-		.get Old Hillpaw's Prize Chicken##80223 |q 30318/1
-		|only if havequest(30318)
-	step
-		goto 37.4,37.3
-		.from Monstrous Plainshawk##59641
-		.collect Bloody Planshawk Leg
-		|only if havequest(30475)
-	step
-		goto 39.6,45.3
-		.talk Wika-Wika##59532
-		.' Mook-mooks?
-		.' Get the Pest Problems buff. |havebuff Pest Problems
-		|only if havequest(30319)
-	step
-		goto 39.6,45.3
-		.clicknpc Black-Nose Marmot##59530
-		.' Stomp 25 Black-Nose Marmot |q 30319/1
-		|only if havequest(30319)
-	step
-		goto 30.2,46.0
-		.from Teeku##59130, Jim-Jim##59128, Jokka-Jokka##59126, Kon-Kon##59127
-		.' Kill the Kunzen-Hunter Chief. |q 30336/1
-		|only if havequest(30336)
-	step
-		goto 32.0,32.1
-		.click Kunzen Rope
-		.' Burn 6 ropes |q 30327/1
-		|only if havequest(30327)
-	step
-		goto 53.0,51.3
-		.talk Kol Ironpaw##58712
-		.' Ask him if he could grill your plainshawk leg.
-		.get Grilled Plainshawk Leg##80233 |q 30475/1
-		|only if havequest(30475)
-	step
-		goto 29.7,34.5
-		.click Yu-Ping Soup Cauldron
-		.get Yu-Ping Soup##79870 |q 30472/1
-		|only if havequest(30472)
-	step
-		goto 29.7,34.5
-		.kill 1 Kunzen Ritualist##59123 |q 30325/3
-		.click Blazing Ember
-		.' Kick 4 Blazing Ember |q 30325/2
-		.click Kunzen Ritual Candle
-		.' Throw 8 Kunzen Ritual Candles |q 30325/1
-		|only if havequest(30325)
-	step
-		goto 33.6,23.9
-		.click Authentic Valley Stir Fry 
-		.get Authentic Valley Stir Fry |q 30471/1
-		|only if havequest(30471)
-	step
-		goto 34.2,23.5
-		.from Kunzen Rockflinger##59120+, Kunzen Collector##59124+, Kunzen Ravager##59119+, Kunzen Hunter##59121+  
-		.get Spicy Shrimp Dumplings |q 30474/1
-		|only if havequest(30474)
-	step
-		goto 34.2,23.5
-		.from Kunzen Rockflinger##59120+, Kunzen Collector##59124+, Kunzen Ravager##59119+, Kunzen Hunter##59121+  
-		.' Kill 12 Kunzen hozen |q 30335/1
-		.collect 1 Nice Necklace##86433 |n |only if not completedq(31325)
-		.' Click the Nice Necklace in your bags. |use Nice Necklace##86433 |only if not completedq(31325)
-		..accept A Very Nice Necklace##31325 |only if not completedq(31325)
-		|only if havequest(30335)
-	step
-		goto 34.2,23.5
-		.click Stolen Vegetable |only if havequest(30334)
-		.get 16 Stolen Vegetable##79824 |q 30334/1 |only if havequest(30334)
-		.from Kunzen Rockflinger##59120+, Kunzen Collector##59124+, Kunzen Ravager##59119+ |only if havequest(30324)
-		.' Kill 8 Kunzen tribe members. |q 30324/1 |only if havequest(30324)	
-	step
-		goto 44.1,29.1
-		.from Enormous Cattail Grouper##59639
-		.get Enormous Cattail Grouper Tooth |q 30477/1
-		|only if havequest(30477)
-	step
-		'Enter this warren. |goto 46.9,21.1 <5 |c
-		|only if havequest(30333)
-	step
-		goto 48.7,18.7
-		.kill Springtail Warren-Mother##59516 |q 30333/1
-		|only if havequest(30333)
-	step
-		'Leave the warren. |goto 46.9,21.1 <5 |c
-		|only if havequest(30333)
-	step
-		'Enter this warren. |goto 44.0,22.3 <5 |c
-		|only if havequest(30470)
-	step
-		goto 44.7,19.6
-		.from Springtail Littlewhisker##59515+, Springtail Trapper##59513+, Springtail Burrower##59514+
-		.get Stolen Circlet##80138 |q 30323/1
-		.get Ransacked Ring##80137 |q 30323/2
-		.get Buglarized Bracelet##80139 |q 30323/3
-		|only if havequest(30323)
-	step
-		'Before you leave this Warren
-		.click Chrysoberyl Outcropping
-		.get Uncut Chrysoberyl |q 30470/1
-		|only if havequest(30470)
-	step
-		'Leave the warren. |goto 44.0,22.3 <5 |c
-		|only if havequest(30470)
-	step
-		goto 45.1,33.8
-		.talk Tina Mudclaw##58761
-		..turnin A Very Nice Necklace##31325
-		|only if havequest(31325)
-	step
-		goto 52.6,47.8
-		.click Yoon's Apples
-		.collect 8 Yoon's Apple##80234
-		|only if havequest(30478)
-	step
-		goto 52.8,47.9
-		.click Yoon's Craneberries
-		.collect 50 Yoon's Craneberry##80235
-		|only if havequest(30478)
-	step
-		goto 53.2,52.2
-		.talk Bobo Ironpaw##58717
-		.' Tell him you've got all this fruit here.
-		.get Apple-Berry Hooch |q 30478/1
-		|only if havequest(30478)
-	step
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..turnin The Kunzen Hunter-Chief##30336 
-		..turnin That Dangling Carrot##31670
-		..turnin Stealing is Bad... Re-Stealing is OK##30334
-		..turnin The Cabbage Test##31669
-		..turnin It's Melon Time##31942
-		..turnin A Pumpkin-y Perfume##31672
-		..turnin Stalling the Ravage##30335 
-		..turnin Red Blossom Leeks, You Make the Croc-in' World Go Down##31673
-		..turnin Squash Those Foul Odors##31941
-		..turnin The Lesser of Two Evils##30333 
-		..turnin The White Turnip Treatment##31675 
-	step
-		goto 52.9,51.7
-		.talk Farmer Fung##57298
-		..turnin Water, Water Everywhere##30317
-		..turnin A Gift For Fung##30475 |only if havequest(30475)
-	step
-		goto  53.0,51.7
-		.talk Ella##58647
-		..turnin You Have to Burn the Ropes##30327
-		..turnin A Gift For Ella##30474 |only if havequest(30474)
-	step
-		goto 53.1,52.1
-		.talk Sho##58708
-		..turnin Where It Counts##30325
-		..turnin A Gift For Sho##30472 |only if havequest(30472)
-	step
-		goto 53.2,51.8
-		.talk Gina Mudclaw##58706
-		..turnin Money Matters##30322
-	step
-		goto 53.1,51.9
-		.talk Old Hillpaw##58707
-		..turnin Chasing the Chicken##30318
-	step
-		goto 53.1,51.7
-		.talk Tina Mudclaw##58761
-		..turnin A Gift For Tina##30470 |only if havequest(30470)
-		..turnin They Don't Even Wear Them##30323
-	step
-		goto 53.0,51.7
-		.talk Haohan Mudclaw##57402
-		..turnin Pest Problems##30319
-		..turnin A Gift For Haohan##30477 |only if havequest(30477)
-	step
-		goto 53.6,52.5
-		.talk Jogu the Drunk##58710
-		..turnin Weed War II##30321
-		..turnin A Gift For Jogu##30478 |only if havequest(30478)
-	step
-		goto 53.1,52.1
-		.talk Chee Chee##58709
-		..turnin Not in Chee-Chee's Backyard##30324
-		..turnin A Gift For Chee Chee##30471 |only if havequest(30471)
-		|next "honored" |only if rep('The Tillers')>=Honored
-		|next "end"|only if rep('The Tillers')<=Friendly
-	step
-	label honored
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..accept Growing the Farm I: The Weeds##30260
-	step
-		goto 38.6,51.7
-		.talk Gai Lan##57385
-		..turnin Growing the Farm I: The Weeds##30260
-		..accept Growing the Farm I: A Little Problem##30516
-	step
-		goto 36.5,51.1
-		.click Spideroot
-		.get 6 Spideroot |q 30516/1
-	step
-		goto 38.6,51.7
-		.talk Gai Lan##57385
-		..turnin Growing the Farm I: A Little Problem##30516
-	step
-	label mungmung
-		goto 52.3,48.8
-		.talk Farmer Yoon##58646
-		..accept Mung-Mung's Vote I: A Hozen's Problem##30258
-	step
-		goto 44.2,34.3
-		.talk Mung-Mung##57401
-		..turnin Mung-Mung's Vote I: A Hozen's Problem##30258
-		..accept Mung-Mung's Vote II: Rotten to the Core##30259
-	step
-		goto 42.7,38.2
-		.click Partially Chewed Carrot
-		.get 10 Partially Chewed Carrot##80116 |q 30259/1
-	step
-		goto 44.2,34.3
-		.talk Mung-Mung##57401
-		..turnin Mung-Mung's Vote II: Rotten to the Core##30259
-		..accept Mung-Mung's Vote III: The Great Carrot Caper##31946
-	step
-		goto 52.9,52.1
-		.talk Merchant Greenfield##58718
-		.buy 2 Juicycrunch Carrot Seeds##80590 
-	step
-		goto 52.0,48.4
-		.clicknpc Untilled Soil##58562
-		.' Use your Juicycrunch Carrot Seeds on the Tilled Soil |use Juicycrunch Carrot Seeds##80590
-		.' Plant 2 Juicycrunch Carrot Seeds |q 31946/1
-		|modelnpc Tilled Soil##59990+
-	step
-		'Wait a day for the carrots to grow and then harvest them.
-		.' Harvest 2 Ripe Juicycrunch Carrots |q 31946/2
-		.get 10 Juicycrunch Carrot##74841 l|q 31946/3
-]])
-ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
-	step
-		'Proceeding to Pre-Quests |next |only if default
-		'Proceeding to The Golden Lotus Dailies |next "dailies" |only if completedq(30638)
-	step
-		goto Kun-Lai Summit 63.7,86.7
-		.talk Farmhand Ko##63751
-		..accept Temple of the White Tiger##31393
-	step
-		goto 68.7,43.0
-		.talk Sunwalker Dezco##64542
-		..turnin Temple of the White Tiger##31393
-		..accept A Celestial Experience##31395
-	step
-		goto 68.9,42.8
-		'Talk to Xuen |q 31395/1 |modelnpc Xuen##64528
-		.from Spirit of Violence##64656
-		.' Pass the First Test |q 31395/2
-		.from Spirit of Anger##64684
-		.' Pass the Second Test |q 31395/3
-		.from Spirit of Hatred##64742
-		.' Pass the Third Test |q 31395/4
-	step
-		goto 68.7,43.0
-		.talk Sunwalker Dezco##64542
-		..turnin A Celestial Experience##31395
-		..accept A Witness to History##31511
-	step
-		goto 56.1,91.6
-		.talk Sunwalker Dezco##64853
-		.' Tell him there is only one way to find out. |q 31511/1
-	step
-		goto Vale of Eternal Blossoms 56.8,43.4
-		.talk Zhi the Harmonious##59905
-		..turnin A Witness to History##31511
-	step
-		goto Vale of Eternal Blossoms 56.7,42.7
-		.talk Sun Tenderheart##58468
-		..accept The Shrine of Two Moons##30649
-	step
-		goto 61.3,22.0
-		.talk Mokimo the Strong##59959
-		.' Ask him how the refuges are settling in.
-		.' Speak to Mokimo the Strong. |q 30649/2
-	step
-		goto Shrine of Two Moons/1 68.4,47.7
-		.talk Madam Vee Luo##62996
-		.' Ask her what you can find in the city.
-		.' Speak to Madam Vee Luo. |q 30649/3
-	step
-		goto Vale of Eternal Blossoms 62.0,20.5
-		.talk Elder Liao##63996
-		.' Ask him what what this place is.
-		.' Speak to Elder Liao. |q 30649/4
-	step
-		goto Vale of Eternal Blossoms 74.2,42.6
-		.talk Jaluu the Generous##59908
-		.' Ask him if he has seen anything suspicious.
-		.' Speak to Jaluu the Generous. |q 30649/1
-	step
-		goto Vale of Eternal Blossoms 56.7,42.7
-		.talk Sun Tenderheart##58468
-		..turnin The Golden Lotus##30649
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..accept The Ruins of Guo-Lai##30632
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin The Ruins of Guo-Lai##30632
-		..accept Out with the Scouts##30633
-	step
-		goto 33.7,38.4
-		.talk Kun Autumnlight##58471
-		..accept Barring Entry##30634
-	step
-		goto 33.8,22.6
-		.talk Lao Softfoot##65252
-		.' Tell him you're ready to infiltrate the cave. |q 30634/1
-	step
-		'Follow Lao Softfoot up the hill. |tip Do not stray far from him, he will keep you stealthed as long as you are close.
-		.' Wait for the patrol to be at a safe distance and place the explosives at the mouth of the cave [27.6,15.3] |use Explosive Keg##80484
-		.' Explosives Planted |q 30634/2
-	step
-		goto 30.6,29.6
-		.kill 8 Shao-Tien Precursor##59914+ |q 30633/1
-	step
-		goto 33.7,38.4
-		.talk Kun Autumnlight##58471
-		..turnin Barring Entry##30634
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin Out with the Scouts##30633
-		..accept Killing the Quilen##30635
-		..accept Stones of Power##30636
-	step
-		goto 22.5,27.0
-		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
-		..accept The Guo-Lai Halls##30637
-	step
-		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
-	step
-		goto Vale of Eternal Blossoms/18 54.9,53.5
-		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
-		.kill Dagou##59977 |q 30637/1
-	step
-		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
-	step
-		goto Vale of Eternal Blossoms 21.6,30.6
-		.kill 9 Stone Guardian##59973+ |q 30635/1
-		.click Revelite Crystal
-		.get 7 Relelite Crystal##80511+ |q 30636/1
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin Killing the Quilen##30635
-		..turnin Stones of Power##30636
-		..turnin The Guo-Lai Halls##30637
-		..accept Leaving an Opening##30638
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..turnin Leaving an Opening##30638
-	step
-	label dailies
-		.' You will only be able to accept 5 quests from the following NPCs.
-		|confirm
-	step
-		goto Vale of Eternal Blossoms 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..accept The Eternal Vigil##30307 |daily
-	step
-		goto 56.6,43.6
-		.talk Anji Autumnlight##58465
-		..accept Stone Hard Quilen##30308 |daily |or 2
-		..accept Set in Stone##30309 |daily |or 2
-		..accept Thundering Skies##30310 |daily |or 2
-		..accept Crumbling Behemoth##31762 |daily |or 2
-		..accept Unleashed Spirits##31757 |daily |or 2 
-		..accept Striking First##31760 |daily |or 2
-	step
-		goto 56.6,43.6
-		.talk Kun Autumnlight##58471
-		..accept High Standards##30311 |daily |or
-		..accept Laosy Scouting##31758 |daily |or
-		..accept Cannonfire##31754 |daily |or
-		..accept High Chance of Rain##31756 |daily |or
-	step
-		goto 56.6,43.1
-		.talk Sun Tenderheart##58468
-		..accept Given a Second Chance##30312 |daily |or
-		..accept Free Spirits##30320 |daily |or
-		..accept Acts of Cruelty##31755 |daily |or
-	step
-		goto 39.7,26.0
-		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
-		.' [39.2,19.2]
-		.' [37.5,22.9]
-		.' [40.5,18.4]
-		.' [43.1,22.1]
-		.' [43.2,15.9] 
-		.' [47.5,19.1]
-		.' [50.5,23.6]
-		.' Rescue Lao Softfoot |q 31758/1
-		|only if havequest(31758)
-	step
-		goto 44.2,15.8
-		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
-		.' Shao-Tien Behemoth ritual stopped |q 31760/1
-		|modelnpc 58460
-		|only if havequest(31760)
-	step
-		goto 50.9,22.3
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Eastern Stormcaller |q 31756/1
-		|only if havequest(31756)
-	step
-		goto 47.8,19.1
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Northern Stormcaller |q 31756/2
-		|only if havequest(31756)
-	step
-		goto 43.1,27.
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Southern Stormcaller |q 31756/3
-		|only if havequest(31756)
-	step
-		goto 36.8,18.
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Western Stormcaller |q 31756/4
-		|only if havequest(31756)
-	step
-		goto 44.0,21.8
-		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
-		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
-		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
-		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
-		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
-		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
-		.' You can find more Unleashed Spirits at [46.9,34.3] |only if havequest(31757)
-		.kill 8 Granite Quilen##59157 |q 30308/1 |only if havequest(30308)
-		.click Golden Lotus Banner |only if havequest(30311)
-		.' Raise 6 Golden Lotus Standards |q 30311/1 |only if havequest(30311)
-		.click Soul Vortex |only if havequest(30320)
-		.clicknpc Captive Pandaren Soul##59231 |only if havequest(30320)
-		.' Free 15 Captive Pandaren Spirits |q 30320/1 |only if havequest(30320)
-		.kill Shao-Tien Behemoth |q 31762/1 |only if havequest(31762)
-		.' Use your Wu Kao Explosive near a Shao-Tien Cannon. |use Wu Kao Explosive##89123 |only if havequest(31754)
-		.' Destroy 7 Shao-Tien Cannons. |q 31754/1 |only if havequest(31754)
-	step
-		goto 52.3,28.8 
-		.' Use Shado-Pan Bandages on Wounded Defenders |use Shado-Pan Bandages##84242
-		.' Heal 6 Wounded Defenders |q 30312/1
-		|only if havequest(30312)
-	step
-		goto 56.6,43.1
-		.talk Sun Tenderheart##58468
-		..turnin Given a Second Chance##30312 |daily
-		..turnin Free Spirits##30320 |daily
-		..turnin Acts of Cruelty##31755 |daily
-	step
-		goto 56.6,43.6
-		.talk Anji Autumnlight##58465
-		..turnin Stone Hard Quilen##30308 |daily
-		..turnin Set in Stone##30309 |daily
-		..turnin Thundering Skies##30310 |daily
-		..turnin Crumbling Behemoth##31762 |daily
-		..turnin Unleashed Spirits##31757 |daily
-		..turnin Anji's Diplomacy##31760 |daily
-	step
-		goto 56.6,43.6
-		.talk Kun Autumnlight##58471
-		..turnin High Standards##30311 |daily
-		..turnin Laosy Scouting##31758 |daily
-		..turnin Cannonfire##31754 |daily
-		..turnin High Chance of Rain##31756 |daily
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..turnin The Eternal Vigil##30307 |daily
-		..accept Whitepetal Lake##31131 |daily |or |next "whitepetal"
-		..accept Mistfall Village##31242 |daily |or |next "mistfall"
-		..accept Attack on Mistfall Village##31243 |daily |or |next "mistfall3"
-		.' If Leven has no available quests after turning in The Eternal Vigil click here. |confirm 
-	step
-		goto 56.7,43.2
-		.talk Ren Firetongue##58469
-		..accept A Smashing Impression##30283 |daily
-	step
-		goto 56.5,43.4
-		.talk He Softfoot##58470
-		..accept The Silent Approach##30281 |daily
-	step
-		goto 56.5,43.7
-		.talk Anji Autumnlight##58465
-		..accept Burning Away the Filth##30282 |daily
-	step
-		goto 56.5,43.7
-		.talk Kun Autumnlight##58471
-		..accept Rude Awakenings##30292 |daily |or
-		..accept In Enemy Hands##30293 |daily |or
-	step
-		goto 43.4,42.9
-		.clicknpc Shao-Tien Ritual Statue##63090
-		.' Click all four statues and fight off whatever creature spawns to defend them.
-		.' Shao-Tien Ritual Statues destroyed |q 30283/1
-		|only if havequest(30283)
-	step
-		goto 45.2,41.7
-		.kill 8 Paleblade Flesheater##63082+ |q 30292/1 |only if havequest(30292)
-		.from Shao-Tien Mindbender##63129+, Shao-Tien Reclaimer##63081+ |only if havequest(30281)
-		.' Kill 10 Whitepetal mogu |q 30281/1 |only if havequest(30281)
-		.' Use the Shado-Pan Torch in your bags near the Shao-Tien Banners in this area. |use Shado-Pan Torch##84781 |only if havequest(30282)
-		.' Burn 10 Shao-Tien Banners |q 30282/1 |only if havequest(30282)
-		.' Rescue 8 Dominated Defenders by killing the Shao-Tien Mindbender's controlling them. |q 30293/1 |only if havequest(30293)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin The Silent Approach##30281 |daily
-		..accept The Soul-Gatherer##30482
-	step
-		goto 40.8,48.0
-		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
-		.get Soul-Gatherer's Beads |q 30482/1
-		|only if havequest(30482)
-	step
-		goto 56.6,43.2
-		.talk He Softfoot##58470
-		..turnin The Soul-Gatherer##30482
-	step
-		goto 56.7,43.2
-		.talk Ren Firetongue##58469
-		..turnin A Smashing Impression##30283 |daily
-	step
-		goto 56.5,43.7
-		.talk Anji Autumnlight##58465
-		..turnin Burning Away the Filth##30282 |daily
-	step
-		goto 56.5,43.7
-		.talk Kun Autumnlight##58471
-		..turnin Rude Awakenings##30292 |daily
-		..turnin In Enemy Hands##30293 |daily
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		 ..accept Behind Our Lines##31136 |daily |or |next "behind"
-		..accept The Ruins of Guo-Lai##31248 |daily |or |next "ruins"
-		..accept Setting Sun Garrision##31250 |daily |or |next "ssg"
-		..accept Mistfall Village##31249 |daily |or |next "mistfall"
-	step
-	label	"behind"
-		goto 69.2,54.8
-		.' Walk along this path until you find General Tamuja
-		.kill General Temuja##63101+ |q 31136/1
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		 ..turnin Behind Our Lines##31136
-		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
-		|next |only if defualt
-	step
-		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
-		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
-		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
-		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label ruins
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Ruins of Guo-Lai##31248 |only if havequest(31248)
-		..turnin The Ruins of Guo-Lai##31294 |only if havequest(31294)
-		..turnin Guo-Lai Infestation##31240 |only if havequest(31240)
-		..turnin The Ruins of Guo-Lai##31296 |only if havequest(31296)
-		..accept In Ashen Webs##30200 |daily 
-		..accept Troubling the Troublemakers##30228 |daily 
-		..accept Blood on the Rise##30226 |daily 
-		|confirm
-	step
-		goto 34.0,38.1
-		.talk Kun Autumnlight##58504
-		..accept Hard as a Rock##30304 |daily |or
-		..accept That's Not a Rock!##30204 |daily |or
-	step
-		goto 33.5,40.8
-		.talk Sinan the Dreamer##63266
-		..accept Runelocked##30205 |daily 
-		..accept Runes in the Ruins##30206 |daily 
-		|confirm
-	step
-		goto 31.2,31.0
-		.' Around this ruin there will be four blue runic symbols on the ground, walk over each of them to unlock the Ancient Mogu Artifact
-		.click Ancient Mogu Artifact
-		.get Ancient Mogu Artifact##85204 |q 30205/1
-		.' The relic may also be at [26.9,19.6]
-		|only if havequest(30205)
-	step
-		goto 30.7,20.4
-		.from Stonebark Trickster##58545 |only if havequest(30228)
-		.' Kill 8 Stonebark sprites |q 30228/1 |only if havequest(30228)
-		.from Shao-Tien Fist##65134+, Shao-Tien Sorcerer##65133+ |only if havequest(30226)
-		.' Kill 8 Ruin's Rise mogu. |q 30226/1 |only if havequest(30226)
-	step
-		goto 26.3,29.2
-		.click Mogu Statue |only if havequest(30304)
-		.from Mogu Statue##63447+ |only if havequest(30304)
-		.' Destroy 10 Mogu Statues |q 30304/1 |only if havequest(30304)
-		.from Ashweb Weaver##58459+, Ashweb Piercer##58475+ |only if havequest(30200)
-		.' Kill 10 Ashweb Spiders |q 30200/1 |only if havequest(30200)
-		.' Use your Shado-Pan Torch on the small rocks around this area. |use Shado-Pan Torch##85261 |only if havequest(30204)
-		.kill 50 Ashweb Hatchling##58568+ |q 30204/1 |only if havequest(30204)
-		.click Guo-Lai Runestone##6714 |only if havequest(30206)
-		.get 12 Guo-Lai Runestone |q 30206/1 |only if havequest(30206)
-		.' You can find more of the objectives in this step at [25.2,38.7]
-	step
-		goto 34.0,38.1
-		.talk Kun Autumnlight##58504
-		..turnin Hard as a Rock##30304 |daily 
-		..turnin That's Not a Rock!##30204 |daily 
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin In Ashen Webs##30200 |daily 
-		..turnin Troubling the Troublemakers##30228 |daily 
-		..turnin Blood on the Rise##30226 |daily 
-		..accept Wulon, the Granite Sentinel##30227 |daily |or 
-		..accept The Ashweb Matriarch##30225 |daily |or
-		..accept The Crumbling Hall##30277 |daily |or 
-		..accept The Thunder Below##30280 |daily |or
-	step
-		goto 33.5,40.8
-		.talk Sinan the Dreamer##63266
-		..turnin Runelocked##30205 |daily 
-		..turnin Runes in the Ruins##30206 |daily 
-	step
-		goto Vale of Eternal Blossoms/18 77.6,72.9
-		.kill Wulon##63510 |q 30227/1
-		|only if havequest(30227)
-	step
-		goto Vale of Eternal Blossoms/18 75.7,47.9
-		.kill Bloodtip##58474 |q 30225/1 |tip Every 20% Bloodtip casts Call Swarmers which brings out many small spiders, they are easily killed and need to be killed immediately.
-		|only if havequest(30225)
-	step
-		goto 56.1,49.1
-		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
-		|confirm
-		|only if havequest(30280)
-	step
-		goto Vale of Eternal Blossoms/19 53.9,68.3
-		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
-		|only if havequest(30280)
-	step
-		'Follow this hallway. |goto Vale of Eternal Blossoms/18 42.3,53.7 <5 |c
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 36.3,36.6
-		.click Deactivate First Spirit Wall
-		.' Deactivate the First Spirit Wall |q 30277/1
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 23.2,28.8
-		.click Deactivate Second Spirit Wall
-		.' Deactivate the Second Spirit Wall |q 30277/2
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 38.3,31.1
-		.click Deactivate Final Spirit Wall
-		|tip Make sure you're stepping on the green tiles, as the others will hurt you. There is a path to both the spirit wall and the artifact.
-		.' Deactivate the Final Spirit Wall |q 30277/3
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 49.3,30.4
-		.click Ancient Guo-Lai Artifact
-		.get Ancient Guo-Lai Artifact |q 30277/4
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Thunder Below##30280 
-		|only if havequest(30280)
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Crumbling Hall##30277 
-		|only if havequest(30277)
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Ashweb Matriarch##30225 |daily |or 
-		..turnin Wulon, the Granite Sentinel##30227 |daily |or
-		|next "end" |only if rep('Golden Lotus')<=Honored
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label mistfall
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Mistfall Village##31242 |daily |only if havequest(31242)
-		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
-		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
-		..accept Clearing in the Forest##30263 |daily |or 2
-		..accept Encroaching Storm##30194 |daily |or 2
-		..accept Ruffling Some Feathers##30232 |daily |or 2
-		..accept The Pandaren Uprising Relived##30237 |daily |or 2
-		..accept Return to Rest##30238 |daily |or 2
-		.'_
-		.' Click here if these quests are not available |confirm
-	step
-		goto 35.4,74.1
-		.talk Mayor Shiyo##58819
-		..accept Sprite Plight##30190 |daily |or 2
-		..accept My Town, It's on Fire##30192 |daily |or 2
-		..accept Steer Clear of the Beer Here##30191 |daily |or 2
-		.'_
-		.' If these quests are not available click here |confirm
-	step
-		goto 33.9,70.4
-		.talk Cook Tope##58818
-		..accept Meating Expectations##30193 |daily |or 2
-		..accept Pomfruit Pickup##30231 |daily |or 2
-		..accept Lushroom Rush##30196 |daily |or 2
-		.'_
-		.' If these quests are not available click here. |confirm
-	step
-		goto 33.8,69.7
-		.talk Merchant Tantan##58820
-		..accept Blooming Blossoms##30195 |daily
-		.'_
-		.' If this quest is not available click here. |confirm
-	step
-		goto 25.8,74.8
-		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
-		.from Fairlands Gazelle##58454+ |only if havequest(30193)
-		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
-		.' Use the Pomharvest Firework in your bags to knock Pomfruits out of the trees in the area |use Pomharvest Firework##79344 |only if havequest(30231)
-		.clicknpc Pomfruit##58767 |only if havequest(30231)
-		.get 12 Pomfruit##79250+ |q 30231/1 |only if havequest(30231)
-		.from Silkfeather Hawk##58457 |only if havequest(30232)
-		.get 120 Silken Feather##84121+ |q 30232/1 |only if havequest(30232)
-		.click Eternal Blossom |tip These can be found most abundantly along the river. |only if havequest(30195)
-		.get 10 Eternal Blossom##79246+ |q 30195/1 |only if havequest(30195)
-	step
-		 goto 29.9,53.5
-		.from Shao-Tien Painweaver##65131+, Shao-Tien Conqueror##65132+
-		.' Kill 10 Winterbough Glade mogu. |q 30263/1
-		|only if havequest(30263)
-	step
-		goto 37.3,81.4
-		.from 12 Slateskin Troublemaker##58673+ |q 30190/1 |only if havequest(30190)
-		.click Stolen Mistfall Keg |only if havequest(30191)
-		.get 10 Stolen Mistfall Keg##85778+ |q 30191/1 |only if havequest(30191)
-		.click Brazier Fire |only if havequest(30192)
-		.' Put out 30 Brazier Fires |q 30192/1 |only if havequest(30192)
-	step
-		goto 49.5,67.6
-		.kill 8 Ancient Mogu Spirit##58671+ |q 30237/1 |only if havequest(30237)
-		.click Lushroom |only if havequest(30196)
-		.get 12 Lushroom##85681+ |q 30196/1 |only if havequest(30196)
-		.click Pandaren Gravestone |only if havequest(30238)
-		.' Honor 6 Pandaren Gravestones |q 30238/1 |only if havequest(30238)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin The Pandaren Uprising Relived##30237 |daily
-	step
-		goto 35.4,74.1
-		.talk Mayor Shiyo##58819
-		..turnin Sprite Plight##30190 |daily
-		..turnin My Town, It's on Fire##30192 |daily
-		..turnin Steer Clear of the Beer Here##30191 |daily
-	step
-		goto 33.9,70.4
-		.talk Cook Tope##58818
-		..turnin Meating Expectations##30193 |daily
-		..turnin Pomfruit Pickup##30231 |daily
-		..turnin Lushroom Rush##30196 |daily
-	step
-		goto 33.8,69.7
-		.talk Merchant Tantan##58820
-		..turnin Blooming Blossoms##30195 |daily
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Encroaching Storm##30194 |daily
-		..turnin Ruffling Some Feathers##30232 |daily
-		..turnin Clearing in the Forest##30263 |daily
-		..turnin Return to Rest##30238 |daily
-		..accept Lao-Fe the Slavebinder##30239 |daily |or |next "slave"
-		..accept Aetha##30236 |daily |or |next "aetha"
-		..accept The Ruins of Guo-Lai##31294 |daily |or |next "ruins"
-		..accept Mogu within the Ruins of Guo-Lai##31295 |daily |or |next honored
-		..accept Setting Sun Garrison##30385 |daily |or |next "ssg"
-		..accept Quid Pro Quo##30235 |daily |or
-	step
-		goto 30.8,79.4
-		.' Use the Stone of the Water to walk on water |use Stone of the Water Strider##87807
-		.kill Quid##58771 |q 30235/1
-		|only if havequest(30235)
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Quid Pro Quo##30235
-	step
-	label aetha
-		goto 35.0,90.0
-		.from Aetha##58778 |tip Aetha will constantly summon Tornadoes, simply kite Aetha to a new location out of the range. With your Stone of the Water Strider buff, you should easily be able to kite on the water.
-		.' Subdue Aetha |q 30236/1
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Aetha##30236 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label slave
-		goto 47.4,65.8
-		.kill Spirit of Lao-Fe##58817 |q 30239/1
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Lao-Fe the Slavebinder##30239 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label mistfall2
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Attack on Mistfall Village##31243 |daily
-		..accept Wu Kao Scouting Reports##30285 |daily |or
-		..accept Backed Into a Corner##30286 |daily |or
-	step
-		goto 35.3,74.9
-		.talk Rook Stonetoe##58911
-		..accept Freeing Mind and Body##30289 |daily |or 2
-		..accept Mogu Make Poor House Guests##31293 |daily |or 2
-		..accept Mogu Make Poor House Guests##30287 |daily |or 2
-		..accept Stonebound Killers##30290 |daily |or 2
-	step
-		goto 35.3,76.8
-		.talk Mayor Shiyo##59336
-		..accept My Town, It's On Fire Again##30288 |daily
-	step
-		goto 37.8,73.2
-		.click Miftfall Water Bucket##11350 
-		.collect Mistfall Water Bucket##85950 |n
-		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
-		.' 60 Mistfall Village fires doused. |q 30288/1
-		|only if havequest(30288)
-	step
-		goto 33.6,72.8
-		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
-		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
-		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
-		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
-		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
-		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
-		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
-		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
-		|modelnpc Golden Lotus Guard##64200
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Wu Kao Scouting Reports##30285 |daily
-		..turnin Backed Into a Corner##30286 |daily
-	step
-		goto 35.3,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Freeing Mind and Body##30289 |daily |or 2
-		..turnin Mogu Make Poor House Guests##31293 |daily |or 2
-		..turnin Mogu Make Poor House Guests##30287 |daily |or 2
-		..turnin Stonebound Killers##30290 |daily |or 2
-	step
-		goto 35.3,76.8
-		.talk Mayor Shiyo##59336
-		..turnin My Town, It's On Fire Again##30288 |daily
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..accept Gaohun the Soul-Severer##30296 |daily |or
-		..accept Baolai the Immolator##30297 |daily |or
-		.' Click here if these quests are unavailable |confirm |next "sun"
-	step
-		goto 39.2,74.6
-		.kill Gaohun the Soul-Severer##62881 |q 30296/1
-		|only if havequest(30296)
-	step
-		goto 37.5,81.5
-		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
-		|only if havequest(30297)
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Gaohun the Soul-Severer##30296 |daily 
-		..turnin Baolai the Immolator##30297 |daily 
-	step
-	label sun
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
-		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
-	step
-	label whitepetal
-		goto 43.6,46.1
-		.talk He Softfoot##59342
-		..turnin Whitepetal Lake##31131 |daily
-		..accept Under Watchful Eyes##30341 |daily |or
-		..accept The Displaced Paleblade##30314 |daily |or
-		..accept The Moving Mists##30313 |daily |or
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..accept A Thousand Pointy Teeth##30284 |daily |or 2
-		..accept Sparkle in the Eye##30265 |daily |or 2
-		..accept Stunning Display##30291 |daily |or 2
-		..accept Fiery Tongue, Fragile Feet##30342 |daily |or 2
-		..accept A Weighty Task##30338 |daily |or 2
-	step
-		goto 42.3,46.0
-		.talk Merchant Tantan##59341
-		..accept Stick in the Mud##30340 |daily |or
-		..accept Getting your Hands Dirty##30339 |daily |or
-	step
-		goto 41.1,47.0
-		.kill 15 Knifetooth Swarmer##59404+ |q 30284/1 |only if havequest(30284)
-		.kill 8 Stillwater Crocodile##58455+ |q 30342/1 |only if havequest(30342)
-		.click Ruby Eye |tip These are inside of the Mogu heads underwater. |only if havequest(30265)
-		.get 8 Ruby Eye##84646+ |q 30265/1 |only if havequest(30265)
-		.clicknpc Stunned Whitepetal##62984 Carp |only if havequest(30291)
-		.get 12 Stunned Whitepetal Carp##84656 |q 30291/1 |only if havequest(30291)
-		.click Mogu Artifact |only if havequest(30338)
-		.get 8 Mogu Artifact##84655 |q 30338/1 |only if havequest(30338)
-	step
-		goto 44.1,53.2
-		.' Use the Shado-Pan Flare in your bags to illuminate Shao-Tien Surveyors. |use Shado-Pan Flare##89366 |only if havequest(30341)
-		.kill 8 Shao-Tien Surveyor##59379+ |q 30341/1 |only if havequest(30341)
-		.kill 8 Fog Walker##58672+ |q 30313/1 |only if havequest(30313)
-		.from Paleblade Flesheater##59378+, Paleblade Slithertongue##63044+ |only if havequest(30314)
-		.' Kill 8 Paleblade Saurok |q 30314/1 |only if havequest(30314)
-		.click Whitepetal Reeds##10817 |only if havequest(30340)
-		.get 12 Whitepetal Reed##84241 |q 30340/1 |only if havequest(30340)
-		.click Fresh Dirt##20 |only if havequest(30339)
-		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
-	step
-		goto 43.6,46.1
-		.talk He Softfoot##59342
-		..turnin Under Watchful Eyes##30341 |daily
-		..turnin The Displaced Paleblade##30314 |daily
-		..turnin The Moving Mists##30313 |daily
-	step
-		goto 42.3,46.0
-		.talk Merchant Tantan##59341
-		..turnin Stick in the Mud##30340 |daily
-		..turnin Getting your Hands Dirty##30339 |daily
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..turnin A Thousand Pointy Teeth##30284 |daily
-		..turnin Sparkle in the Eye##30265 |daily
-		..turnin Stunning Display##30291 |daily
-		..turnin Fiery Tongue, Fragile Feet##30342 |daily
-		..turnin A Weighty Task##30338 |daily
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..accept Vicejaw##30234 |daily |or |next "vicejaw"
-		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
-		..accept Guo-Lai Infestation##31240 |daily |or |next "ruins"
-		..accept Mistfall Village##31245 |daily |or |next "mistfall"
-		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
-		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
-		..accept Cracklefang##30233 |daily |or |next "crackle"
-	step
-	label vicejaw
-		goto 37.3,51.1
-		.kill Vicejaw##58769 |q 30234/1 |tip When you first pull Vicejaw, kite him through the corpses of Paleblade Flesheaters that are lying all around, when he eats 10 of them he will begin casting Upchuck. When he does this he wil not move and will only attack in front of himself, walk around to his backside and attack until his energy meter resets to 0. When he is weak Vicejaw will pick you up and begin to eat you. Kill him before he is able to chew you to death. He will not try to eat you if he is using Upchuck, time it right and you won't have to race to kill him.
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..turnin Vicejaw##30234 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label ruins2
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin Guo-Lai Encampment##31244
-		..accept Painting the Ruins Red##30298 |daily
-		..accept Offering a Warm Welcome##30301 |daily
-	step
-		goto 33.1,39.0
-		.talk Wounded Defender##63753
-		..accept No Stone Unturned##30299 |daily 
-		..accept The Key to Success##30300 |daily
-		.'_
-		.' Click here if no quest is available |confirm
-	step
-		goto 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..accept Carved in Stone##30481 |daily
-		.'_
-		.' Click here if this quest is not available today |confirm
-	step
-		map Vale of Eternal Blossoms
-		path loose; loop; curved
-		path	31.5,34.1	25.8,34.5	24.4,32.9
-		path	22.0,27.7	19.2,30.6	20.3,34.3
-		path	23.9,39.1
-		.from Shao-Tien Torturer##63641
-		.' He walks along this path
-		.get Shao-Tien Cage Key |q 30300/1
-		|only if havequest(30300)
-	step
-		goto 25.4,28.8
-		.from Shao-Tien Dominator##63610+, Shao-Tien Soul-Caller##63611+, Shao-Tien Torturer##63641+ |only if havequest(30298)
-		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
-		.' Kill 15 Guo-Lai mogu. |q 30298/1 |only if havequest(30298)
-		.get 1 Shao-Tien Cage Key |q 30300/1 |only if havequest(30300)
-		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
-		.click Shao-Tien Cage |only if havequest(30300)
-		.' Free 6 Golden Lotus Prisoners. |q 30300/2 |only if havequest(30300)
-		.click Mogu Statue |only if havequest(30299)
-		.from Mogu Statue##63447+ |only if havequest(30299)
-		.' Destroy 10 Mogu Statues |q 30299/1 |only if havequest(30299)
-		.' Use your Shado-Pan Torch on the Tents around this area. |use Shado-Pan Torch##85581 |only if havequest(30301)
-		.' Burn 6 Shao-Tien Tents |q 30301/1 |only if havequest(30301)
-	step
-		goto 33.1,39.0
-		.talk Wounded Defender##63753
-		..turnin No Stone Unturned##30299 
-		..turnin The Key to Success##30300 
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin Painting the Ruins Red##30298 
-		..turnin Offering a Warm Welcome##30301 
-		..accept The Imperion Threat##30302 |daily
-	step
-		goto 68.6,71.0
-		.from Gochao the Ironfist##62880
-		.' Kill the Shao-Tien Imperion |q 30302/1
-		|only if havequest(30302)
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin The Imperion Threat##30302
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label ssg
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Setting Sun Garrison##31247 |daily |only if havequest(31247)
-		..turnin Setting Sun Garrison##30385 |daily |only if havequest(30385)
-		..turnin Setting Sun Garrison##31297 |daily |only if havequest(31297)
-		..turnin Setting Sun Garrision##31250 |daily |only if havequest(31250)
-		..accept The Battle Ring##30306 |daily
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..accept Survival Ring: Flame##30240 |daily |or
-		..accept Survival Ring: Blades##30242 |daily |or
-	step
-		goto 19.7,74.2
-		.from Shado-Pan Trainee##58992+
-		.' Defeat 20 Shado-Pan Trainees. |q 30306/1
-		|only if havequest(30306)
-	step
-		goto 19.2,67.5
-		.' Stay within the circle and avoid getting hit by the fireworks.
-		.' Live through the Survival Ring for 90 seconds |q 30240/1
-		|only if havequest(30240)
-	step
-		goto 19.2,67.5
-		.' Stay within the circle and avoid the posts with blades surrounding them and the running pandas.
-		.' Live through the Survival Ring for 90 seconds |q 30242/1
-		|only if havequest(30242)
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..turnin Survival Ring: Flame##30240 |daily |or
-		..turnin Survival Ring: Blades##30242 |daily |or
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin The Battle Ring##30306 |daily
-		..accept Upon the Ramparts##30246 |daily |or
-		..accept Enemy at the Gates##30264 |daily |or
-		..accept No Reprieve##30444 |daily |or
-		.'_
-		.' If these quests are unavailable today, click here. |confirm
-	step
-		goto 21.4,71.5
-		.talk Kun Autumnlight##58920
-		..accept Mantid Under Fire##30243 |daily |or
-		..accept Along the Serpent's Spine##30244 |daily |or
-		..accept Lost Scouts##30245 |daily |or
-		.'_
-		.' If these quests are unavailable today, click here. |confirm
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..accept Bloodied Skies##30266 |daily
-		.'_
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		..accept Roll Club: Serpent's Spine##30261 |daily
-		.'_
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto Vale of Eternal Blossoms 3.9,51.7
-		.clicknpc Hot Oil Cauldron##64369
-		.' Use the Abilities on your toolbar to set the enemies below on fire.
-		.' Kill 80 Krik'thik Hivelings |q 30243/1
-		|only if havequest(30243)
-	step
-		.' Click the quest complete box in the corner below your minimap.
-		..turnin Mantid Under Fire##30243
-		..accept Along the Serpent's Spine##30244
-		.' If this quest isn't available, click here |confirm
-		|only if havequest(30243)
-	step
-		goto Vale of Eternal Blossoms 18.6,36.4
-		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
-		.talk Shado-Pan Scout##58947 |q 30245/1
-		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
-		..turnin Lost Scouts##30245
-		..accept The Butcher##30248
-		|only if havequest(30245)
-	step
-		goto 17.0,47.5
-		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
-		.kill 8 Shao-Tien mogu |q 30444/1
-		|only if havequest(30444)
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		.' Let's roll. |q 30261/1
-		|only if havequest(30261)
-	step
-		'Hold down your right mouse button to help you maneuver through the course. |tip Grab as many speed boosts as you can to make it go quicker.
-		.' Complete the Serpent's Spine Roll Course. |q 30261/2
-		|only if havequest(30261)
-	step
-		goto 15.6,66.1
-		.clicknpc War Serpent##65336
-		.' Mount a War Serpent |invehicle |q 30264/1
-		|only if havequest(30264)
-	step
-		'Use the abilities on your hotbar to do the following:
-		.kill 60 Krik'thik Hiveling##63972+ |q 30264/2
-		.kill 3 Krik'thik War Wagon##64274+ |q 30264/3
-		.kill 3 Krik'thik Catapult##64275+ |q 30264/4
-		|only if havequest(30264)
-	step
-		'Click the Return to Setting Sun Garrison button. |outvehicle
-		|only if havequest(30264)
-	step
-		goto 5.4,72.3
-		.click Setting Sun Turret 
-		.' Mount a turret. |invehicle |c
-		|only if havequest(30266)
-	step
-		.kill 30 Krik'thik Swarmer##63973+ |q 30266/1
-		|only if havequest(30266)
-	step
-		'Click the Leave Vehicle button. |outvehicle
-		|only if havequest(30266)
-	step
-		goto 11.4,58.8
-		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
-		.' Kill 10 Kir'thik wall attackers |q 30246/1
-		|only if havequest(30246)
-	step
-		goto 6.9,68.8
-		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
-		.' Kill 10 Kir'thik wall attackers |q 30244/1
-		|only if havequest(30244)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin Along the Serpent's Spine##30244 |daily
-		..accept Under the Setting Sun##30249 |daily
-		|only if havequest(30244)
-	step
-		goto 6.0,58.8
-		.kill Kri'chon##63978 |q 30249/1
-		|only if havequest(30249)
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..turnin Bloodied Skies##30266 |daily
-		|only if havequest(30266)
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		..turnin Roll Club: Serpent's Spine##30261 |daily
-		|only if havequest(30261)
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Upon the Ramparts##30246 |daily
-		..turnin No Reprieve##30444
-		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
-	step
-		goto 7.9,33.9
-		.kill Vyraxxis##63977 |q 30251/1
-		|only if havequest(30251)
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily
-		|only if havequest(30251)
-	step
-		goto 21.4,71.5
-		.talk Anji Autumnlight##58919
-		..turnin Enemy at the Gates##30264 |daily
-	step
-		goto 21.4,71.5
-		.talk Kun Autumnlight##58920
-		..turnin Mantid Under Fire##30243 |daily
-		..turnin Under the Setting Sun##30249 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label mistfall3
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Attack on Mistfall Village##31246 |daily
-		..accept Mogu Make Poor House Guests##30287 |daily |or 2
-		..accept Stonebound Killers##30290 |daily |or 2
-		..accept Freeing Mind and Body##30289 |daily |or 2
-		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..accept Wu Kao Scouting Reports##30285 |daily |or
-		..accept Backed Into a Corner##30286 |daily |or
-	step
-		goto 35.3,76.7
-		.talk Mayor Shiyo##59336
-		..accept My Town, It's On Fire Again##30288 |daily
-	step
-		goto 37.8,73.2
-		.click Miftfall Water Bucket
-		.collect Mistfall Water Bucket##85950 |n
-		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
-		.' 60 Mistfall Village fires doused. |q 30288/1
-		|only if havequest(30288)
-	step
-		goto 33.6,72.8
-		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
-		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
-		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
-		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
-		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
-		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
-		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
-		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
-		|modelnpc Golden Lotus Guard##64200
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Mogu Make Poor House Guests##31293 |daily
-		..turnin Stonebound Killers##30290 |daily
-		..turnin Freeing Mind and Body##30289 |daily
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Wu Kao Scouting Reports##30285 |daily 
-		..turnin Backed Into a Corner##30286 |daily 
-	step
-		goto 35.3,76.7
-		.talk Mayor Shiyo##59336
-		..turnin My Town, It's On Fire Again##30288 |daily
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..accept Gaohun the Soul-Severer##30296 |daily |or
-		..accept Baolai the Immolator##30297 |daily |or
-		.' If it's not available, click here.  |confirm
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
-		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
-	step
-		goto 39.2,74.6
-		.kill Gaohun the Soul-Severer##62881 |q 30296/1
-		|only if havequest(30296)
-	step
-		goto 37.5,81.5
-		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
-		|only if havequest(30297)
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Gaohun the Soul-Severer##30296 |daily 
-		..turnin Baolai the Immolator##30297 |daily 
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label crackle
-		goto Vale of Eternal Blossoms 46.5,59.1
-		.from Cracklefang##58768
-		.' Cracklefang Slain |q 30233/1
-	step
-		goto 42.4,46.0
-		.talk Ren Firetongue##59343
-		..turnin Cracklefang##30233
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label revered
-		goto 74.2,42.6
-		.talk Jaluu the Generous##59908
-		.buy 1 Grand Commendation of the Golden Lotus##93215
-		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
-		.' If you have already purchased this (either on this or another character), click here. |confirm
-		|only if rep("Golden Lotus")>=Revered
-	step
-		goto 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..accept Battle Spear of the Thunder King##30640
-		|only if not completedq(30640)
-	step
-		goto 21.4,19.7
-		.click Battle Spear of the Thunder King
-		.get Battle Spear of the Thunder King##80808 |q 30640/1
-		|only if not completedq(30640)
-	step
-		goto 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
-		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
-	step
-		'Enter the building here. |goto 22.3,26.4 <5 |c
-		|only if havequest(30641)
-	step
-		goto Vale of Eternal Blossoms/18 56.2,48.7
-		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
-		|confirm
-		|only if havequest(30641)
-	step
-		goto 58.5,44.4
-		.talk Ren Firetongue##63571
-		.' Tell him Zhi sent you.
-		.' Enter the Hall of Tiles |q 30641/1
-		|only if havequest(30641)
-	step
-		'Follow Ren Firetongue |goto Vale of Eternal Blossoms/19 44.7,67.1 <5 |c
-		|only if havequest(30641)
-	step
-		goto 52.0,76.1
-		.from Zhao-Jin the Bloodletter##60359 |tip He constantly shoots lighting at you so keep on the move. If you are in melee range he will try to cleave you, step around him as he begins casting.
-		.click Battle Helm of the Thunder King
-		.get Battle Helm of the Thunder King##80222 |q 30641/2
-		|only if havequest(30641)
-	step
-		'While exiting the building be careful of the tiles. The safe path is along the pale tiles.
-		.' Exit the building. |goto Vale of Eternal Blossoms/18 56.1,93.7 <5 |c
-		|only if havequest(30641)
-	step
-		goto Vale of Eternal Blossoms 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Helm of the Thunder King##30641 |only if havequest(30641)
-		..accept Battle Axe of the Thunder King##30642 //// Cannot get gate to drop.
-		|only if not completedq(30642)
-	step
-		'Enter the building here. |goto 40.4,77.1 <5 |c
-		|only if not completedq(30642)
-	step
-		goto 44.3,76.5
-		.' Fight off the Jade Constructs that attack you. |tip If you need help defeating them walk into the orbs around this room. Blue will give a damage and haste buff, green will heal you.
-		.from Jade Construct##60297+
-		.' Pass the Trial of the Constructs |q 30642/1
-		|only if not completedq(30642)
-	step
-		goto 45.4,76.2
-		.click Battle Axe of the Thunder King
-		.get Battle Axe of the Thunder King##80807 |q 30642/2
-		|only if not completedq(30642)
-	step
-		goto 44.8,76.3
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Axe of the Thunder King##30642
-		|only if not completedq(30642)
-		|next "end"
-	step
-	label honored
-		goto 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
-		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
-		..accept Painting the Ruins Red##30298 |daily
-		.'_
-		.' Click here if the Daily quest is not available today |confirm
-	step
-		goto 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..accept He Knows What He's Doing##30305 |daily |or 2
-		..accept Carved in Stone##30481 |daily |or 2
-		.'_
-		.' Click here if these quests are not available |confirm
-	step
-		goto 33.1,39.0
-		.talk Sun Tenderheart##59334
-		..accept No Stone Unturned##30299 |daily
-		..accept The Key to Success##30300 |daily
-		.'_
-		.' Click here if this quest is not available |confirm
-	step
-		map Vale of Eternal Blossoms
-		path loose; loop; curved
-		path	31.5,34.1	25.8,34.5	24.4,32.9
-		path	22.0,27.7	19.2,30.6	20.3,34.3
-		path	23.9,39.1
-		.from Shao-Tien Torturer##63641
-		.' He walks along this path
-		.get Shao-Tien Cage Key |q 30300/1
-		|only if havequest(30300)
-	step
-		goto 15.0,25.9
-		.kill Bai-Jin the Butcher##58949 |q 30248/1
-		|only if havequest(30248)
-	step
-		goto 24.6,29.6
-		.' All around this area:
-		.click Shao-Tien Cage##9667
-		.' Release Golden Lotus Prisoners |q 30300/2
-		.' You can find more cages here [24.6,38.3]
-		.' And more cages here: [29.9,29.4]
-		|only if havequest(30300)
-	step
-		goto 31.8,33.0 |only if havequest(30298) or havequest(30481) or havequest(30305)
-		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
-		.from Shao-Tien Soul-Caller##63611+, Shao-Tien Dominator##63610+ |only if havequest(30298) or havequest(30481)
-		.kill 15 Guo-Lai mogu |q 30298/1 |only if havequest(30298)
-		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
-		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
-		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
-	step
-		goto Vale of Eternal Blossoms/18 41.0,52.8
-		.talk He Softfoot##64647
-		.' Let's go |q 30639/1
-		|only if havequest(30639)
-	step
-		goto Vale of Eternal Blossoms/18 43.8,27.3
-		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
-		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
-		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
-		|modelnpc Zhao-Jin the Bloodletter##64663
-		|modelnpc Crumbling Jade Warrior##64883
-		|only if havequest(30639)
-	step
-		goto Vale of Eternal Blossoms 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..turnin He Knows What He's Doing##30305
-		..turnin Carved in Stone##30481
-		|only if havequest(30481) or havequest(30305)
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
-		..accept The Imperion Threat##30302 |daily
-		.'_
-		.' Click here if this daily quest is not available |confirm
-	step
-		goto 33.1,39.0
-		.talk Sun Tenderheart##59334
-		..turnin The Key to Success##30300
-		|only if havequest(30300)
-	step
-		goto Vale of Eternal Blossoms/18 74.3,53.5
-		.from Huo-Shuang##63691
-		.' Kill the Shao-Tien Imperion |q 30302/1
-		|only if havequest(30302)
-	step
-		goto Vale of Eternal Blossoms 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin The Imperion Threat##30302
-	step
-		goto 56.8,43.8
-		.talk Leven Dawnblade##58408
-		..turnin The Secrets of Guo-Lai##30639
-	step
-		goto Vale of Eternal Blossoms 21.3,71.5
-		.talk Kun Autumnlight##58920
-		..turnin The Butcher##30248
-		|next "end"
-	step
-	label exalted
-		goto 56.7,43.7
-		.talk Leven Dawnblade##58408
-		..accept The Mogu's Message##30643
-	step
-		'Enter the building here. |goto 40.4,77.2 <5 |c
-	step
-		goto 44.8,76.3
-		.talk Zhi the Harmonious##59905
-		..turnin The Mogu's Message##30643 |tip WARNING! Turning in this quest will spawn enemy ambushers.
-		..accept What Comes to Pass##30644
-	step
-		goto 56.5,43.3
-		.talk Sun Tenderheart##58468
-		..turnin What Comes to Pass##30644
-		..accept The Might of Three##30645
-	step
-		goto 64.4,41.5
-		.from Shao-Tien Marauder##60225+, Granite Quilen##60223+, Shao-Tien Spiritrender##60224+, Reanimated Jade Warrior##60121+
-		.' Kill 100 Mogu Invaders |q 30645/1 |tip While doing this quest you will get some help from the Jade Serpent, Xeun the White Tiger, and Niuzao the Black Ox. Kills 1-34 will aided by the Jade Serpent, use the AoE buff given to take down many foes at once. Kill 34-67 will be aided by the White Tiger, use his buff to focus down individual targets in larger packs, when they are shattered they will deal extreme AoE damage. Kills 67-100 will be aided by Niuzao, use his buff to damage enemies in a cone. Periodically you will instantly kill enemies with a knockback.
-	step
-		goto 74.2,41.8
-		.talk Sinan the Dreamer##59906
-		..turnin The Might of Three##30645
-		..accept The Final Power##30646
-	step
-		goto 77.6,37.2
-		.' Use the Red Crane's power to jump over the wall of flame.
-		|confirm
-		|only if havequest(30646)
-	step
-		goto 78.7,35.8
-		'Zhao-Jin will periodically throw Lightning Spears. Click them to pick them up and then use the new button on your screen to hurl the spear back at him. this will be your main source of damage.
-		'Zhao-Jin will also summon Lightning Waves. With the Red Crane's buff you can easily jump over these.
-		.kill Zhao-Jin the Bloodletter##60273 |q 30646/1
-	step
-		goto 56.5,43.6
-		.talk Anji Autumnlight##58465
-		..turnin The Final Power##30646
-		|next "end"
-	step
-	label end
-		'You have reached the end of the guide for today.
-		.' Click here to go back to the beginning of the dailies. |confirm |next "dailies"
-]])
-ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
-	step
-	label goldenmenu
-		'Proceeding to Pre-Quests |next |only if default
-		'Proceeding to The Golden Lotus Dailies |next "dailies" |only if completedq(30638)
-		'Skipping the Golden Lotus |next "end_of_lotus" |only if rep("Golden Lotus")>=Revered
-	step
-		goto Kun-Lai Summit 63.7,86.7
-		.talk Farmhand Ko##63751
-		..accept Temple of the White Tiger##31393
-	step
-		goto 68.7,43.0
-		.talk Sunwalker Dezco##64542
-		..turnin Temple of the White Tiger##31393
-		..accept A Celestial Experience##31395
-	step
-		goto 68.9,42.8
-		'Talk to Xuen |q 31395/1 |modelnpc Xuen##64528
-		.from Spirit of Violence##64656
-		.' Pass the First Test |q 31395/2
-		.from Spirit of Anger##64684
-		.' Pass the Second Test |q 31395/3
-		.from Spirit of Hatred##64742
-		.' Pass the Third Test |q 31395/4
-	step
-		goto 68.7,43.0
-		.talk Sunwalker Dezco##64542
-		..turnin A Celestial Experience##31395
-		..accept A Witness to History##31511
-	step
-		goto 56.1,91.6
-		.talk Sunwalker Dezco##64853
-		.' Tell him there is only one way to find out. |q 31511/1
-	step
-		goto Vale of Eternal Blossoms 56.8,43.4
-		.talk Zhi the Harmonious##59905
-		..turnin A Witness to History##31511
-	step
-		goto Vale of Eternal Blossoms 56.7,42.7
-		.talk Sun Tenderheart##58468
-		..accept The Shrine of Two Moons##30649
-	step
-		goto 61.3,22.0
-		.talk Mokimo the Strong##59959
-		.' Ask him how the refuges are settling in.
-		.' Speak to Mokimo the Strong. |q 30649/2
-	step
-		goto Shrine of Two Moons/1 68.4,47.7
-		.talk Madam Vee Luo##62996
-		.' Ask her what you can find in the city.
-		.' Speak to Madam Vee Luo. |q 30649/3
-	step
-		goto Vale of Eternal Blossoms 62.0,20.5
-		.talk Elder Liao##63996
-		.' Ask him what what this place is.
-		.' Speak to Elder Liao. |q 30649/4
-	step
-		goto 74.2,42.6
-		.talk Jaluu the Generous##59908
-		.' Ask him if he has seen anything suspicious.
-		.' Speak to Jaluu the Generous. |q 30649/1
-	step
-		goto Vale of Eternal Blossoms 56.7,42.7
-		.talk Sun Tenderheart##58468
-		..turnin The Golden Lotus##30649
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..accept The Ruins of Guo-Lai##30632
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin The Ruins of Guo-Lai##30632
-		..accept Out with the Scouts##30633
-	step
-		goto 33.7,38.4
-		.talk Kun Autumnlight##58471
-		..accept Barring Entry##30634
-	step
-		goto 33.8,22.6
-		.talk Lao Softfoot##65252
-		.' Tell him you're ready to infiltrate the cave. |q 30634/1
-	step
-		'Follow Lao Softfoot up the hill. |tip Do not stray far from him, he will keep you stealthed as long as you are close.
-		.' Wait for the patrol to be at a safe distance and place the explosives at the mouth of the cave [27.6,15.3] |use Explosive Keg##80484
-		.' Explosives Planted |q 30634/2
-	step
-		goto 30.6,29.6
-		.kill 8 Shao-Tien Precursor##59914+ |q 30633/1
-	step
-		goto 33.7,38.4
-		.talk Kun Autumnlight##58471
-		..turnin Barring Entry##30634
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin Out with the Scouts##30633
-		..accept Killing the Quilen##30635
-		..accept Stones of Power##30636
-	step
-		goto 22.5,27.0
-		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
-		..accept The Guo-Lai Halls##30637
-	step
-		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
-	step
-		goto Vale of Eternal Blossoms/18 54.9,53.5
-		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
-		.kill Dagou##59977 |q 30637/1
-	step
-		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
-	step
-		goto Vale of Eternal Blossoms 21.6,30.6
-		.kill 9 Stone Guardian##59973+ |q 30635/1
-		.click Revelite Crystal
-		.get 7 Relelite Crystal##80511+ |q 30636/1
-	step
-		goto 34.0,38.0
-		.talk Anji Autumnlight##58465
-		..turnin Killing the Quilen##30635
-		..turnin Stones of Power##30636
-		..turnin The Guo-Lai Halls##30637
-		..accept Leaving an Opening##30638
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..turnin Leaving an Opening##30638
-	step
-	label dailies
-		.' You will only be able to accept 5 quests from the following NPCs.
-		|confirm
-	step
-		goto Vale of Eternal Blossoms 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..accept The Eternal Vigil##30307 |daily
-	step
-		goto 56.6,43.6
-		.talk Anji Autumnlight##58465
-		..accept Stone Hard Quilen##30308 |daily |or 2
-		..accept Set in Stone##30309 |daily |or 2
-		..accept Thundering Skies##30310 |daily |or 2
-		..accept Crumbling Behemoth##31762 |daily |or 2
-		..accept Unleashed Spirits##31757 |daily |or 2 
-		..accept Striking First##31760 |daily |or 2
-	step
-		goto 56.6,43.6
-		.talk Kun Autumnlight##58471
-		..accept High Standards##30311 |daily |or
-		..accept Laosy Scouting##31758 |daily |or
-		..accept Cannonfire##31754 |daily |or
-		..accept High Chance of Rain##31756 |daily |or
-	step
-		goto 56.6,43.1
-		.talk Sun Tenderheart##58468
-		..accept Given a Second Chance##30312 |daily |or
-		..accept Free Spirits##30320 |daily |or
-		..accept Acts of Cruelty##31755 |daily |or
-	step
-		goto 39.7,26.0
-		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
-		.' [39.2,19.2]
-		.' [37.5,22.9]
-		.' [40.5,18.4]
-		.' [43.1,22.1]
-		.' [43.2,15.9] 
-		.' [47.5,19.1]
-		.' [50.5,23.6]
-		.' Rescue Lao Softfoot |q 31758/1
-		|only if havequest(31758)
-	step
-		goto 44.2,15.8
-		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
-		.' Shao-Tien Behemoth ritual stopped |q 31760/1
-		|modelnpc 58460
-		|only if havequest(31760)
-	step
-		goto 50.9,22.3
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Eastern Stormcaller |q 31756/1
-		|only if havequest(31756)
-	step
-		goto 47.8,19.1
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Northern Stormcaller |q 31756/2
-		|only if havequest(31756)
-	step
-		goto 43.1,27.
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Southern Stormcaller |q 31756/3
-		|only if havequest(31756)
-	step
-		goto 36.8,18.
-		.click Shao-Tien Stormcaller##11827
-		.' Destroy the Western Stormcaller |q 31756/4
-		|only if havequest(31756)
-	step
-		goto 44.0,21.8
-		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
-		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
-		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
-		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
-		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
-		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
-		.' You can find more Unleashed Spirits at [46.9,34.3] |only if havequest(31757)
-		.kill 8 Granite Quilen##59157 |q 30308/1 |only if havequest(30308)
-		.click Golden Lotus Banner |only if havequest(30311)
-		.' Raise 6 Golden Lotus Standards |q 30311/1 |only if havequest(30311)
-		.click Soul Vortex |only if havequest(30320)
-		.clicknpc Captive Pandaren Soul##59231 |only if havequest(30320)
-		.' Free 15 Captive Pandaren Spirits |q 30320/1 |only if havequest(30320)
-		.kill Shao-Tien Behemoth |q 31762/1 |only if havequest(31762)
-		.' Use your Wu Kao Explosive near a Shao-Tien Cannon. |use Wu Kao Explosive##89123 |only if havequest(31754)
-		.' Destroy 7 Shao-Tien Cannons. |q 31754/1 |only if havequest(31754)
-	step
-		goto 52.3,28.8 
-		.' Use Shado-Pan Bandages on Wounded Defenders |use Shado-Pan Bandages##84242
-		.' Heal 6 Wounded Defenders |q 30312/1
-		|only if havequest(30312)
-	step
-		goto 56.6,43.1
-		.talk Sun Tenderheart##58468
-		..turnin Given a Second Chance##30312 |daily
-		..turnin Free Spirits##30320 |daily
-		..turnin Acts of Cruelty##31755 |daily
-	step
-		goto 56.6,43.6
-		.talk Anji Autumnlight##58465
-		..turnin Stone Hard Quilen##30308 |daily
-		..turnin Set in Stone##30309 |daily
-		..turnin Thundering Skies##30310 |daily
-		..turnin Crumbling Behemoth##31762 |daily
-		..turnin Unleashed Spirits##31757 |daily
-		..turnin Anji's Diplomacy##31760 |daily
-	step
-		goto 56.6,43.6
-		.talk Kun Autumnlight##58471
-		..turnin High Standards##30311 |daily
-		..turnin Laosy Scouting##31758 |daily
-		..turnin Cannonfire##31754 |daily
-		..turnin High Chance of Rain##31756 |daily
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		..turnin The Eternal Vigil##30307 |daily
-		..accept Whitepetal Lake##31131 |daily |or |next "whitepetal"
-		..accept Mistfall Village##31242 |daily |or |next "mistfall"
-		..accept Attack on Mistfall Village##31243 |daily |or |next "mistfall3"
-		.' If Leven has no available quests after turning in The Eternal Vigil click here. |confirm 
-	step
-		goto 56.7,43.2
-		.talk Ren Firetongue##58469
-		..accept A Smashing Impression##30283 |daily
-	step
-		goto 56.5,43.4
-		.talk He Softfoot##58470
-		..accept The Silent Approach##30281 |daily
-	step
-		goto 56.5,43.7
-		.talk Anji Autumnlight##58465
-		..accept Burning Away the Filth##30282 |daily
-	step
-		goto 56.5,43.7
-		.talk Kun Autumnlight##58471
-		..accept Rude Awakenings##30292 |daily |or
-		..accept In Enemy Hands##30293 |daily |or
-	step
-		goto 43.4,42.9
-		.clicknpc Shao-Tien Ritual Statue##63090
-		.' Click all four statues and fight off whatever creature spawns to defend them.
-		.' Shao-Tien Ritual Statues destroyed |q 30283/1
-		|only if havequest(30283)
-	step
-		goto 45.2,41.7
-		.kill 8 Paleblade Flesheater##63082+ |q 30292/1 |only if havequest(30292)
-		.from Shao-Tien Mindbender##63129+, Shao-Tien Reclaimer##63081+ |only if havequest(30281)
-		.' Kill 10 Whitepetal mogu |q 30281/1 |only if havequest(30281)
-		.' Use the Shado-Pan Torch in your bags near the Shao-Tien Banners in this area. |use Shado-Pan Torch##84781 |only if havequest(30282)
-		.' Burn 10 Shao-Tien Banners |q 30282/1 |only if havequest(30282)
-		.' Rescue 8 Dominated Defenders by killing the Shao-Tien Mindbender's controlling them. |q 30293/1 |only if havequest(30293)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin The Silent Approach##30281 |daily
-		..accept The Soul-Gatherer##30482
-	step
-		goto 40.8,48.0
-		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
-		.get Soul-Gatherer's Beads |q 30482/1
-		|only if havequest(30482)
-	step
-		goto 56.6,43.2
-		.talk He Softfoot##58470
-		..turnin The Soul-Gatherer##30482
-	step
-		goto 56.7,43.2
-		.talk Ren Firetongue##58469
-		..turnin A Smashing Impression##30283 |daily
-	step
-		goto 56.5,43.7
-		.talk Anji Autumnlight##58465
-		..turnin Burning Away the Filth##30282 |daily
-	step
-		goto 56.5,43.7
-		.talk Kun Autumnlight##58471
-		..turnin Rude Awakenings##30292 |daily
-		..turnin In Enemy Hands##30293 |daily
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		 ..accept Behind Our Lines##31136 |daily |or |next "behind"
-		..accept The Ruins of Guo-Lai##31248 |daily |or |next "ruins"
-		..accept Setting Sun Garrision##31250 |daily |or |next "ssg"
-		..accept Mistfall Village##31249 |daily |or |next "mistfall"
-	step
-	label	"behind"
-		goto 69.2,54.8
-		.' Walk along this path until you find General Tamuja
-		.kill General Temuja##63101+ |q 31136/1
-	step
-		goto 56.7,43.6
-		.talk Leven Dawnblade##58408
-		 ..turnin Behind Our Lines##31136
-		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
-		|next |only if defualt
-	step
-		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
-		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
-		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
-		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label ruins
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Ruins of Guo-Lai##31248 |only if havequest(31248)
-		..turnin The Ruins of Guo-Lai##31294 |only if havequest(31294)
-		..turnin Guo-Lai Infestation##31240 |only if havequest(31240)
-		..turnin The Ruins of Guo-Lai##31296 |only if havequest(31296)
-		..accept In Ashen Webs##30200 |daily 
-		..accept Troubling the Troublemakers##30228 |daily 
-		..accept Blood on the Rise##30226 |daily 
-		|confirm
-	step
-		goto 34.0,38.1
-		.talk Kun Autumnlight##58504
-		..accept Hard as a Rock##30304 |daily |or
-		..accept That's Not a Rock!##30204 |daily |or
-	step
-		goto 33.5,40.8
-		.talk Sinan the Dreamer##63266
-		..accept Runelocked##30205 |daily 
-		..accept Runes in the Ruins##30206 |daily 
-		|confirm
-	step
-		goto 31.2,31.0
-		.' Around this ruin there will be four blue runic symbols on the ground, walk over each of them to unlock the Ancient Mogu Artifact
-		.click Ancient Mogu Artifact
-		.get Ancient Mogu Artifact##85204 |q 30205/1
-		.' The relic may also be at [26.9,19.6]
-		|only if havequest(30205)
-	step
-		goto 30.7,20.4
-		.from Stonebark Trickster##58545 |only if havequest(30228)
-		.' Kill 8 Stonebark sprites |q 30228/1 |only if havequest(30228)
-		.from Shao-Tien Fist##65134+, Shao-Tien Sorcerer##65133+ |only if havequest(30226)
-		.' Kill 8 Ruin's Rise mogu. |q 30226/1 |only if havequest(30226)
-	step
-		goto 26.3,29.2
-		.click Mogu Statue |only if havequest(30304)
-		.from Mogu Statue##63447+ |only if havequest(30304)
-		.' Destroy 10 Mogu Statues |q 30304/1 |only if havequest(30304)
-		.from Ashweb Weaver##58459+, Ashweb Piercer##58475+ |only if havequest(30200)
-		.' Kill 10 Ashweb Spiders |q 30200/1 |only if havequest(30200)
-		.' Use your Shado-Pan Torch on the small rocks around this area. |use Shado-Pan Torch##85261 |only if havequest(30204)
-		.kill 50 Ashweb Hatchling##58568+ |q 30204/1 |only if havequest(30204)
-		.click Guo-Lai Runestone##6714 |only if havequest(30206)
-		.get 12 Guo-Lai Runestone |q 30206/1 |only if havequest(30206)
-		.' You can find more of the objectives in this step at [25.2,38.7]
-	step
-		goto 34.0,38.1
-		.talk Kun Autumnlight##58504
-		..turnin Hard as a Rock##30304 |daily 
-		..turnin That's Not a Rock!##30204 |daily 
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin In Ashen Webs##30200 |daily 
-		..turnin Troubling the Troublemakers##30228 |daily 
-		..turnin Blood on the Rise##30226 |daily 
-		..accept Wulon, the Granite Sentinel##30227 |daily |or 
-		..accept The Ashweb Matriarch##30225 |daily |or
-		..accept The Crumbling Hall##30277 |daily |or
-	step
-		goto 33.5,40.8
-		.talk Sinan the Dreamer##63266
-		..turnin Runelocked##30205 |daily 
-		..turnin Runes in the Ruins##30206 |daily 
-	step
-		goto Vale of Eternal Blossoms/18 77.6,72.9
-		.kill Wulon##63510 |q 30227/1
-		|only if havequest(30227)
-	step
-		goto Vale of Eternal Blossoms/18 75.7,47.9
-		.kill Bloodtip##58474 |q 30225/1 |tip Every 20% Bloodtip casts Call Swarmers which brings out many small spiders, they are easily killed and need to be killed immediately.
-		|only if havequest(30225)
-	step
-		goto 56.1,49.1
-		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
-		|confirm
-		|only if havequest(30280)
-	step
-		goto Vale of Eternal Blossoms/19 53.9,68.3
-		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
-		|only if havequest(30280)
-	step
-		'Follow this hallway. |goto Vale of Eternal Blossoms/18 42.3,53.7 <5 |c
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 36.3,36.6
-		.click Deactivate First Spirit Wall
-		.' Deactivate the First Spirit Wall |q 30277/1
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 23.2,28.8
-		.click Deactivate Second Spirit Wall
-		.' Deactivate the Second Spirit Wall |q 30277/2
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 38.3,31.1
-		.click Deactivate Final Spirit Wall
-		|tip Make sure you're stepping on the green tiles, as the others will hurt you. There is a path to both the spirit wall and the artifact.
-		.' Deactivate the Final Spirit Wall |q 30277/3
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms/18 49.3,30.4
-		.click Ancient Guo-Lai Artifact
-		.get Ancient Guo-Lai Artifact |q 30277/4
-		|only if havequest(30277)
-	step
-		goto Vale of Eternal Blossoms 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Thunder Below##30280 
-		|only if havequest(30280)
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Crumbling Hall##30277 
-		|only if havequest(30277)
-	step
-		goto 34.0,38.1
-		.talk Anji Autumnlight##58503
-		..turnin The Ashweb Matriarch##30225 |daily |or 
-		..turnin Wulon, the Granite Sentinel##30227 |daily |or
-		|next "end" |only if rep('Golden Lotus')<=Honored
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label mistfall
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Mistfall Village##31242 |daily |only if havequest(31242)
-		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
-		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
-		..accept Clearing in the Forest##30263 |daily |or 2
-		..accept Encroaching Storm##30194 |daily |or 2
-		..accept Ruffling Some Feathers##30232 |daily |or 2
-		..accept The Pandaren Uprising Relived##30237 |daily |or 2
-		..accept Return to Rest##30238 |daily |or 2
-		.'_
-		.' Click here if these quests are not available |confirm
-	step
-		goto 35.4,74.1
-		.talk Mayor Shiyo##58819
-		..accept Sprite Plight##30190 |daily |or 2
-		..accept My Town, It's on Fire##30192 |daily |or 2
-		..accept Steer Clear of the Beer Here##30191 |daily |or 2
-		.'_
-		.' If these quests are not available click here |confirm
-	step
-		goto 33.9,70.4
-		.talk Cook Tope##58818
-		..accept Meating Expectations##30193 |daily |or 2
-		..accept Pomfruit Pickup##30231 |daily |or 2
-		..accept Lushroom Rush##30196 |daily |or 2
-		.'_
-		.' If these quests are not available click here. |confirm
-	step
-		goto 33.8,69.7
-		.talk Merchant Tantan##58820
-		..accept Blooming Blossoms##30195 |daily
-		.'_
-		.' If this quest is not available click here. |confirm
-	step
-		goto 25.8,74.8
-		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
-		.from Fairlands Gazelle##58454+ |only if havequest(30193)
-		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
-		.' Use the Pomharvest Firework in your bags to knock Pomfruits out of the trees in the area |use Pomharvest Firework##79344 |only if havequest(30231)
-		.clicknpc Pomfruit##58767 |only if havequest(30231)
-		.get 12 Pomfruit##79250+ |q 30231/1 |only if havequest(30231)
-		.from Silkfeather Hawk##58457 |only if havequest(30232)
-		.get 120 Silken Feather##84121+ |q 30232/1 |only if havequest(30232)
-		.click Eternal Blossom |tip These can be found most abundantly along the river. |only if havequest(30195)
-		.get 10 Eternal Blossom##79246+ |q 30195/1 |only if havequest(30195)
-	step
-		 goto 29.9,53.5
-		.from Shao-Tien Painweaver##65131+, Shao-Tien Conqueror##65132+
-		.' Kill 10 Winterbough Glade mogu. |q 30263/1
-		|only if havequest(30263)
-	step
-		goto 37.3,81.4
-		.from 12 Slateskin Troublemaker##58673+ |q 30190/1 |only if havequest(30190)
-		.click Stolen Mistfall Keg |only if havequest(30191)
-		.get 10 Stolen Mistfall Keg##85778+ |q 30191/1 |only if havequest(30191)
-		.click Brazier Fire |only if havequest(30192)
-		.' Put out 30 Brazier Fires |q 30192/1 |only if havequest(30192)
-	step
-		goto 49.5,67.6
-		.kill 8 Ancient Mogu Spirit##58671+ |q 30237/1 |only if havequest(30237)
-		.click Lushroom |only if havequest(30196)
-		.get 12 Lushroom##85681+ |q 30196/1 |only if havequest(30196)
-		.click Pandaren Gravestone |only if havequest(30238)
-		.' Honor 6 Pandaren Gravestones |q 30238/1 |only if havequest(30238)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin The Pandaren Uprising Relived##30237 |daily
-	step
-		goto 35.4,74.1
-		.talk Mayor Shiyo##58819
-		..turnin Sprite Plight##30190 |daily
-		..turnin My Town, It's on Fire##30192 |daily
-		..turnin Steer Clear of the Beer Here##30191 |daily
-	step
-		goto 33.9,70.4
-		.talk Cook Tope##58818
-		..turnin Meating Expectations##30193 |daily
-		..turnin Pomfruit Pickup##30231 |daily
-		..turnin Lushroom Rush##30196 |daily
-	step
-		goto 33.8,69.7
-		.talk Merchant Tantan##58820
-		..turnin Blooming Blossoms##30195 |daily
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Encroaching Storm##30194 |daily
-		..turnin Ruffling Some Feathers##30232 |daily
-		..turnin Clearing in the Forest##30263 |daily
-		..turnin Return to Rest##30238 |daily
-		..accept Lao-Fe the Slavebinder##30239 |daily |or |next "slave"
-		..accept Aetha##30236 |daily |or |next "aetha"
-		..accept The Ruins of Guo-Lai##31294 |daily |or |next "ruins"
-		..accept Mogu within the Ruins of Guo-Lai##31295 |daily |or |next honored
-		..accept Setting Sun Garrison##30385 |daily |or |next "ssg"
-		..accept Quid Pro Quo##30235 |daily |or
-	step
-		goto 30.8,79.4
-		.' Use the Stone of the Water to walk on water |use Stone of the Water Strider##87807
-		.kill Quid##58771 |q 30235/1
-		|only if havequest(30235)
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Quid Pro Quo##30235
-	step
-	label aetha
-		goto 35.0,90.0
-		.from Aetha##58778 |tip Aetha will constantly summon Tornadoes, simply kite Aetha to a new location out of the range. With your Stone of the Water Strider buff, you should easily be able to kite on the water.
-		.' Subdue Aetha |q 30236/1
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Aetha##30236 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label slave
-		goto 47.4,65.8
-		.kill Spirit of Lao-Fe##58817 |q 30239/1
-	step
-		goto 33.9,72.2
-		.talk Che Wildwalker##59338
-		..turnin Lao-Fe the Slavebinder##30239 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label mistfall2
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Attack on Mistfall Village##31243 |daily
-		..accept Wu Kao Scouting Reports##30285 |daily |or
-		..accept Backed Into a Corner##30286 |daily |or
-	step
-		goto 35.3,74.9
-		.talk Rook Stonetoe##58911
-		..accept Freeing Mind and Body##30289 |daily |or 2
-		..accept Mogu Make Poor House Guests##31293 |daily |or 2
-		..accept Mogu Make Poor House Guests##30287 |daily |or 2
-		..accept Stonebound Killers##30290 |daily |or 2
-	step
-		goto 35.3,76.8
-		.talk Mayor Shiyo##59336
-		..accept My Town, It's On Fire Again##30288 |daily
-	step
-		goto 37.8,73.2
-		.click Miftfall Water Bucket##11350 
-		.collect Mistfall Water Bucket##85950 |n
-		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
-		.' 60 Mistfall Village fires doused. |q 30288/1
-		|only if havequest(30288)
-	step
-		goto 33.6,72.8
-		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
-		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
-		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
-		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
-		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
-		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
-		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
-		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
-		|modelnpc Shao-Tien Subjugator##64201
-		|modelnpc Golden Lotus Guard##64200
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Wu Kao Scouting Reports##30285 |daily
-	step
-		goto 35.3,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Mogu Make Poor House Guests##30287 |daily
-		..turnin Freeing Mind and Body##30289 |daily
-	step
-		goto 35.3,76.8
-		.talk Mayor Shiyo##59336
-		..turnin My Town, It's On Fire Again##30288 |daily
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
-		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
-	step
-	label whitepetal
-		goto 43.6,46.1
-		.talk He Softfoot##59342
-		..turnin Whitepetal Lake##31131 |daily
-		..accept Under Watchful Eyes##30341 |daily |or
-		..accept The Displaced Paleblade##30314 |daily |or
-		..accept The Moving Mists##30313 |daily |or
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..accept A Thousand Pointy Teeth##30284 |daily |or 2
-		..accept Sparkle in the Eye##30265 |daily |or 2
-		..accept Stunning Display##30291 |daily |or 2
-		..accept Fiery Tongue, Fragile Feet##30342 |daily |or 2
-		..accept A Weighty Task##30338 |daily |or 2
-	step
-		goto 42.3,46.0
-		.talk Merchant Tantan##59341
-		..accept Stick in the Mud##30340 |daily |or
-		..accept Getting your Hands Dirty##30339 |daily |or
-	step
-		goto 41.1,47.0
-		.kill 15 Knifetooth Swarmer##59404+ |q 30284/1 |only if havequest(30284)
-		.kill 8 Stillwater Crocodile##58455+ |q 30342/1 |only if havequest(30342)
-		.click Ruby Eye |tip These are inside of the Mogu heads underwater. |only if havequest(30265)
-		.get 8 Ruby Eye##84646+ |q 30265/1 |only if havequest(30265)
-		.clicknpc Stunned Whitepetal##62984 Carp |only if havequest(30291)
-		.get 12 Stunned Whitepetal Carp##84656 |q 30291/1 |only if havequest(30291)
-		.click Mogu Artifact |only if havequest(30338)
-		.get 8 Mogu Artifact##84655 |q 30338/1 |only if havequest(30338)
-	step
-		goto 44.1,53.2
-		.' Use the Shado-Pan Flare in your bags to illuminate Shao-Tien Surveyors. |use Shado-Pan Flare##89366 |only if havequest(30341)
-		.kill 8 Shao-Tien Surveyor##59379+ |q 30341/1 |only if havequest(30341)
-		.kill 8 Fog Walker##58672+ |q 30313/1 |only if havequest(30313)
-		.from Paleblade Flesheater##59378+, Paleblade Slithertongue##63044+ |only if havequest(30314)
-		.' Kill 8 Paleblade Saurok |q 30314/1 |only if havequest(30314)
-		.click Whitepetal Reeds##10817 |only if havequest(30340)
-		.get 12 Whitepetal Reed##84241 |q 30340/1 |only if havequest(30340)
-		.click Fresh Dirt##20 |only if havequest(30339)
-		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
-	step
-		goto 43.6,46.1
-		.talk He Softfoot##59342
-		..turnin Under Watchful Eyes##30341 |daily
-		..turnin The Displaced Paleblade##30314 |daily
-		..turnin The Moving Mists##30313 |daily
-	step
-		goto 42.3,46.0
-		.talk Merchant Tantan##59341
-		..turnin Stick in the Mud##30340 |daily
-		..turnin Getting your Hands Dirty##30339 |daily
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..turnin A Thousand Pointy Teeth##30284 |daily
-		..turnin Sparkle in the Eye##30265 |daily
-		..turnin Stunning Display##30291 |daily
-		..turnin Fiery Tongue, Fragile Feet##30342 |daily
-		..turnin A Weighty Task##30338 |daily
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..accept Vicejaw##30234 |daily |or |next "vicejaw"
-		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
-		..accept Guo-Lai Infestation##31240 |daily |or |next "ruins"
-		..accept Mistfall Village##31245 |daily |or |next "mistfall"
-		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
-		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
-		..accept Cracklefang##30233 |daily |or |next "crackle"
-	step
-	label vicejaw
-		goto 37.3,51.1
-		.kill Vicejaw##58769 |q 30234/1 |tip When you first pull Vicejaw, kite him through the corpses of Paleblade Flesheaters that are lying all around, when he eats 10 of them he will begin casting Upchuck. When he does this he wil not move and will only attack in front of himself, walk around to his backside and attack until his energy meter resets to 0. When he is weak Vicejaw will pick you up and begin to eat you. Kill him before he is able to chew you to death. He will not try to eat you if he is using Upchuck, time it right and you won't have to race to kill him.
-	step
-		goto 42.3,46.0
-		.talk Ren Firetongue##59343
-		..turnin Vicejaw##30234 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted 
-	step
-	label ruins2
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin Guo-Lai Encampment##31244
-		..accept Painting the Ruins Red##30298 |daily
-		..accept Offering a Warm Welcome##30301 |daily
-	step
-		goto 33.1,39.0
-		.talk Wounded Defender##63753
-		..accept No Stone Unturned##30299 |daily 
-		..accept The Key to Success##30300 |daily
-		.'_
-		.' Click here if no quest is available |confirm
-	step
-		goto 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..accept Carved in Stone##30481 |daily
-		.'_
-		.' Click here if this quest is not available today |confirm
-	step
-		map Vale of Eternal Blossoms
-		path loose; loop; curved
-		path	31.5,34.1	25.8,34.5	24.4,32.9
-		path	22.0,27.7	19.2,30.6	20.3,34.3
-		path	23.9,39.1
-		.from Shao-Tien Torturer##63641
-		.' He walks along this path
-		.get Shao-Tien Cage Key |q 30300/1
-		|only if havequest(30300)
-	step
-		goto 25.4,28.8
-		.from Shao-Tien Dominator##63610+, Shao-Tien Soul-Caller##63611+, Shao-Tien Torturer##63641+ |only if havequest(30298)
-		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
-		.' Kill 15 Guo-Lai mogu. |q 30298/1 |only if havequest(30298)
-		.get 1 Shao-Tien Cage Key |q 30300/1 |only if havequest(30300)
-		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
-		.click Shao-Tien Cage |only if havequest(30300)
-		.' Free 6 Golden Lotus Prisoners. |q 30300/2 |only if havequest(30300)
-		.click Mogu Statue |only if havequest(30299)
-		.from Mogu Statue##63447+ |only if havequest(30299)
-		.' Destroy 10 Mogu Statues |q 30299/1 |only if havequest(30299)
-		.' Use your Shado-Pan Torch on the Tents around this area. |use Shado-Pan Torch##85581 |only if havequest(30301)
-		.' Burn 6 Shao-Tien Tents |q 30301/1 |only if havequest(30301)
-	step
-		goto 33.1,39.0
-		.talk Wounded Defender##63753
-		..turnin No Stone Unturned##30299 
-		..turnin The Key to Success##30300 
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin Painting the Ruins Red##30298 
-		..turnin Offering a Warm Welcome##30301 
-		..accept The Imperion Threat##30302 |daily
-	step
-		goto 68.6,71.0
-		.from Gochao the Ironfist##62880
-		.' Kill the Shao-Tien Imperion |q 30302/1
-		|only if havequest(30302)
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##59332
-		..turnin The Imperion Threat##30302
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label ssg
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Setting Sun Garrison##31247 |daily |only if havequest(31247)
-		..turnin Setting Sun Garrison##30385 |daily |only if havequest(30385)
-		..turnin Setting Sun Garrison##31297 |daily |only if havequest(31297)
-		..turnin Setting Sun Garrision##31250 |daily |only if havequest(31250)
-		..accept The Battle Ring##30306 |daily
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..accept Survival Ring: Flame##30240 |daily |or
-		..accept Survival Ring: Blades##30242 |daily |or
-	step
-		goto 19.7,74.2
-		.from Shado-Pan Trainee##58992+
-		.' Defeat 20 Shado-Pan Trainees. |q 30306/1
-		|only if havequest(30306)
-	step
-		goto 19.2,67.5
-		.' Stay within the circle and avoid getting hit by the fireworks.
-		.' Live through the Survival Ring for 90 seconds |q 30240/1
-		|only if havequest(30240)
-	step
-		goto 19.2,67.5
-		.' Stay within the circle and avoid the posts with blades surrounding them and the running pandas.
-		.' Live through the Survival Ring for 90 seconds |q 30242/1
-		|only if havequest(30242)
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..turnin Survival Ring: Flame##30240 |daily |or
-		..turnin Survival Ring: Blades##30242 |daily |or
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin The Battle Ring##30306 |daily
-		..accept Upon the Ramparts##30246 |daily |or
-		..accept Enemy at the Gates##30264 |daily |or
-		..accept No Reprieve##30444 |daily |or
-		.'_
-		.' If these quests are unavailable today, click here. |confirm
-	step
-		goto 21.4,71.5
-		.talk Kun Autumnlight##58920
-		..accept Mantid Under Fire##30243 |daily |or
-		..accept Along the Serpent's Spine##30244 |daily |or
-		..accept Lost Scouts##30245 |daily |or
-		.'_
-		.' If these quests are unavailable today, click here. |confirm
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..accept Bloodied Skies##30266 |daily
-		.'_
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		..accept Roll Club: Serpent's Spine##30261 |daily
-		.'_
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto Vale of Eternal Blossoms 18.6,36.4
-		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
-		.talk Shado-Pan Scout##58947 |q 30245/1
-		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
-		..turnin Lost Scouts##30245
-		..accept The Butcher##30248
-		|only if havequest(30245)
-	step
-		goto 17.0,47.5
-		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
-		.kill 8 Shao-Tien mogu |q 30444/1
-		|only if havequest(30444)
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		.' Let's roll. |q 30261/1
-		|only if havequest(30261)
-	step
-		'Hold down your right mouse button to help you maneuver through the course. |tip Grab as many speed boosts as you can to make it go quicker.
-		.' Complete the Serpent's Spine Roll Course. |q 30261/2
-		|only if havequest(30261)
-	step
-		goto 18.2,63.6
-		.talk Kelari Featherfoot##58704
-		..turnin Roll Club: Serpent's Spine##30261 |daily
-	step
-		goto 15.6,66.1
-		.clicknpc War Serpent##65336
-		.' Mount a War Serpent |invehicle |q 30264/1
-		|only if havequest(30264)
-	step
-		'Use the abilities on your hotbar to do the following:
-		.kill 60 Krik'thik Hiveling##63972+ |q 30264/2
-		.kill 3 Krik'thik War Wagon##64274+ |q 30264/3
-		.kill 3 Krik'thik Catapult##64275+ |q 30264/4
-		|only if havequest(30264)
-	step
-		'Click the Return to Setting Sun Garrison button. |outvehicle
-		|only if havequest(30264)
-	step
-		goto 5.4,72.3
-		.click Setting Sun Turret 
-		.' Mount a turret. |invehicle |c
-		|only if havequest(30266)
-	step
-		.kill 30 Krik'thik Swarmer##63973+ |q 30266/1
-		|only if havequest(30266)
-	step
-		'Click the Leave Vehicle button. |outvehicle
-		|only if havequest(30266)
-	step
-		goto 11.4,58.8
-		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
-		.' Kill 10 Kir'thik wall attackers |q 30246/1
-	step
-		goto 6.9,68.8
-		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
-		.' Kill 10 Kir'thik wall attackers |q 30244/1
-		|only if havequest(30244)
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin Along the Serpent's Spine##30244 |daily
-		..accept Under the Setting Sun##30249 |daily
-		|only if havequest(30244)
-	step
-		goto 6.0,58.8
-		.kill Kri'chon##63978 |q 30249/1
-		|only if havequest(30249)
-	step
-		goto 21.5,71.2
-		.talk Leven Dawnblade##59340
-		..turnin Bloodied Skies##30266 |daily
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Upon the Ramparts##30246 |daily
-		..turnin No Reprieve##30444
-		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
-	step
-		goto 7.9,33.9
-		.kill Vyraxxis##63977 |q 30251/1
-		|only if havequest(30251)
-	step
-		goto 21.4,71.6
-		.talk Anji Autumnlight##58919
-		..turnin Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily
-	step
-		goto 21.4,71.5
-		.talk Anji Autumnlight##58919
-		..turnin Enemy at the Gates##30264 |daily
-	step
-		goto 21.4,71.5
-		.talk Kun Autumnlight##58920
-		..turnin Mantid Under Fire##30243 |daily
-		..turnin Under the Setting Sun##30249 |daily
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label mistfall3
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Attack on Mistfall Village##31246 |daily
-		..accept Mogu Make Poor House Guests##30287 |daily |or 2
-		..accept Mogu Make Poor House Guests##31293 |daily |or 2
-		..accept Stonebound Killers##30290 |daily |or 2
-		..accept Freeing Mind and Body##30289 |daily |or 2
-		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..accept Wu Kao Scouting Reports##30285 |daily |or
-		..accept Backed Into a Corner##30286 |daily |or
-	step
-		goto 35.3,76.7
-		.talk Mayor Shiyo##59336
-		..accept My Town, It's On Fire Again##30288 |daily
-	step
-		goto 37.8,73.2
-		.click Miftfall Water Bucket
-		.collect Mistfall Water Bucket##85950 |n
-		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
-		.' 60 Mistfall Village fires doused. |q 30288/1
-		|only if havequest(30288)
-	step
-		goto 33.8,72.6
-		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287)
-		.' Kill 6 Shao-Tien attackers. |q 30287/1 |only if havequest(30287)
-		.' Kill 12 Shao-Tien attackers. |q 31293/1 |only if havequest(31293)
-		.click Wu Kao Scouting Report |only if havequest(30285)
-		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
-		.' Free 6 Dominated Guards by killing the Subjugator controlling them |q 30289/1 |only if havequest(30289)
-		|modelnpc Shao-Tien Subjugator##64201
-		|modelnpc Golden Lotus Guard##64200
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Mogu Make Poor House Guests##31293 |daily
-		..turnin Mogu Make Poor House Guests##30287 |daily
-		..turnin Stonebound Killers##30290 |daily
-		..turnin Freeing Mind and Body##30289 |daily
-	step
-		goto 35.1,75.4
-		.talk Sun Tenderheart##59337
-		..turnin Wu Kao Scouting Reports##30285 |daily 
-		..turnin Backed Into a Corner##30286 |daily 
-	step
-		goto 35.3,76.7
-		.talk Mayor Shiyo##59336
-		..turnin My Town, It's On Fire Again##30288 |daily
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..accept Gaohun the Soul-Severer##30296 |daily |or
-		..accept Baolai the Immolator##30297 |daily |or
-	step
-		goto 39.2,74.6
-		.kill Gaohun the Soul-Severer##62881 |q 30296/1
-		|only if havequest(30296)
-	step
-		goto 37.5,81.5
-		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
-		|only if havequest(30297)
-	step
-		goto 35.2,74.9
-		.talk Rook Stonetoe##58911
-		..turnin Gaohun the Soul-Severer##30296 |daily 
-		..turnin Baolai the Immolator##30297 |daily 
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label crackle
-		goto Vale of Eternal Blossoms 46.5,59.1
-		.from Cracklefang##58768
-		.' Cracklefang Slain |q 30233/1
-	step
-		goto 42.4,46.0
-		.talk Ren Firetongue##59343
-		..turnin Cracklefang##30233
-		|next "end" |only if rep('Golden Lotus')<=Friendly
-		|next "honored" |only if rep('Golden Lotus')==Honored 
-		|next "revered" |only if rep('Golden Lotus')==Revered 
-		|next "exalted" |only if rep('Golden Lotus')==Exalted
-	step
-	label revered
-		goto 74.2,42.6
-		.talk Jaluu the Generous##59908
-		.buy 1 Grand Commendation of the Golden Lotus##93215
-		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
-		.' If you have already purchased this (either on this or another character), click here. |confirm
-		|only if rep("Golden Lotus")>=Revered
-	step
-		goto 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..accept Battle Spear of the Thunder King##30640
-	step
-		goto 21.4,19.7
-		.click Battle Spear of the Thunder King
-		.get Battle Spear of the Thunder King##80808 |q 30640/1
-	step
-		goto 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
-		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
-	step
-		'Enter the building here. |goto 22.3,26.4 <5 |c
-	step
-		goto Vale of Eternal Blossoms/18 56.2,48.7
-		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
-		|confirm
-		|only if havequest(30641)
-	step
-		goto 58.5,44.4
-		.talk Ren Firetongue##63571
-		.' Tell him Zhi sent you.
-		.' Enter the Hall of Tiles |q 30641/1
-	step
-		'Follow Ren Firetongue |goto Vale of Eternal Blossoms/19 44.7,67.1 <5 |c
-	step
-		goto 52.0,76.1
-		.from Zhao-Jin the Bloodletter##60359 |tip He constantly shoots lighting at you so keep on the move. If you are in melee range he will try to cleave you, step around him as he begins casting.
-		.click Battle Helm of the Thunder King
-		.get Battle Helm of the Thunder King##80222 |q 30641/2
-	step
-		'While exiting the building be careful of the tiles. The safe path is along the pale tiles.
-		.' Exit the building. |goto Vale of Eternal Blossoms/18 56.1,93.7 <5 |c
-	step
-		goto Vale of Eternal Blossoms 57.2,42.9
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Helm of the Thunder King##30641
-		..accept Battle Axe of the Thunder King##30642 //// Cannot get gate to drop.
-	step
-		'Enter the building here. |goto 40.4,77.1 <5 |c
-	step
-		goto 44.3,76.5
-		.' Fight off the Jade Constructs that attack you. |tip If you need help defeating them walk into the orbs around this room. Blue will give a damage and haste buff, green will heal you.
-		.from Jade Construct##60297+
-		.' Pass the Trial of the Constructs |q 30642/1
-	step
-		goto 45.4,76.2
-		.click Battle Axe of the Thunder King
-		.get Battle Axe of the Thunder King##80807 |q 30642/2
-	step
-		goto 44.8,76.3
-		.talk Zhi the Harmonious##59905
-		..turnin Battle Axe of the Thunder King##30642
-		|next "end"
-	step
-	label honored
-		goto 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
-		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
-		..accept Painting the Ruins Red##30298 |daily
-		.'_
-		.' Click here if the Daily quest is not available today |confirm
-	step
-		goto 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..accept He Knows What He's Doing##30305 |daily |or 2
-		..accept Carved in Stone##30481 |daily |or 2
-		.'_
-		.' Click here if these quests are not available |confirm
-	step
-		goto 33.1,39.0
-		.talk Sun Tenderheart##59334
-		..accept No Stone Unturned##30299 |daily
-		..accept The Key to Success##30300 |daily
-		.'_
-		.' Click here if this quest is not available |confirm
-	step
-		map Vale of Eternal Blossoms
-		path loose; loop; curved
-		path	31.5,34.1	25.8,34.5	24.4,32.9
-		path	22.0,27.7	19.2,30.6	20.3,34.3
-		path	23.9,39.1
-		.from Shao-Tien Torturer##63641
-		.' He walks along this path
-		.get Shao-Tien Cage Key |q 30300/1
-		|only if havequest(30300)
-	step
-		goto 15.0,25.9
-		.kill Bai-Jin the Butcher##58949 |q 30248/1
-		|only if havequest(30248)
-	step
-		goto 24.6,29.6
-		.' All around this area:
-		.click Shao-Tien Cage##9667
-		.' Release Golden Lotus Prisoners |q 30300/2
-		.' You can find more cages here [24.6,38.3]
-		.' And more cages here: [29.9,29.4]
-		|only if havequest(30300)
-	step
-		goto 31.8,33.0 |only if havequest(30298) or havequest(30481) or havequest(30305)
-		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
-		.from Shao-Tien Soul-Caller##63611+, Shao-Tien Dominator##63610+ |only if havequest(30298) or havequest(30481)
-		.kill 15 Guo-Lai mogu |q 30298/1 |only if havequest(30298)
-		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
-		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
-		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
-	step
-		goto Vale of Eternal Blossoms/18 41.0,52.8
-		.talk He Softfoot##64647
-		.' Let's go |q 30639/1
-		|only if havequest(30639)
-	step
-		goto Vale of Eternal Blossoms/18 43.8,27.3
-		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
-		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
-		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
-		|modelnpc Zhao-Jin the Bloodletter##64663
-		|modelnpc Crumbling Jade Warrior##64883
-		|only if havequest(30639)
-	step
-		goto Vale of Eternal Blossoms 33.4,38.0
-		.talk Rook Stonetoe##59333
-		..turnin He Knows What He's Doing##30305
-		..turnin Carved in Stone##30481
-		|only if havequest(30481) or havequest(30305)
-	step
-		goto 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
-		..accept The Imperion Threat##30302 |daily
-		.'_
-		.' Click here if this daily quest is not available |confirm
-	step
-		goto 33.1,39.0
-		.talk Sun Tenderheart##59334
-		..turnin The Key to Success##30300
-		|only if havequest(30300)
-	step
-		goto Vale of Eternal Blossoms/18 74.3,53.5
-		.from Huo-Shuang##63691
-		.' Kill the Shao-Tien Imperion |q 30302/1
-		|only if havequest(30302)
-	step
-		goto Vale of Eternal Blossoms 33.8,38.5
-		.talk Leven Dawnblade##58408
-		..turnin The Imperion Threat##30302
-	step
-		goto 56.8,43.8
-		.talk Leven Dawnblade##58408
-		..turnin The Secrets of Guo-Lai##30639
-	step
-		goto Vale of Eternal Blossoms 21.3,71.5
-		.talk Kun Autumnlight##58920
-		..turnin The Butcher##30248
-		|next "end"
-	step
-	label exalted
-		goto 56.7,43.7
-		.talk Leven Dawnblade##58408
-		..accept The Mogu's Message##30643
-	step
-		'Enter the building here. |goto 40.4,77.2 <5 |c
-	step
-		goto 44.8,76.3
-		.talk Zhi the Harmonious##59905
-		..turnin The Mogu's Message##30643 |tip WARNING! Turning in this quest will spawn enemy ambushers.
-		..accept What Comes to Pass##30644
-	step
-		goto 56.5,43.3
-		.talk Sun Tenderheart##58468
-		..turnin What Comes to Pass##30644
-		..accept The Might of Three##30645
-	step
-		goto 64.4,41.5
-		.from Shao-Tien Marauder##60225+, Granite Quilen##60223+, Shao-Tien Spiritrender##60224+, Reanimated Jade Warrior##60121+
-		.' Kill 100 Mogu Invaders |q 30645/1 |tip While doing this quest you will get some help from the Jade Serpent, Xeun the White Tiger, and Niuzao the Black Ox. Kills 1-34 will aided by the Jade Serpent, use the AoE buff given to take down many foes at once. Kill 34-67 will be aided by the White Tiger, use his buff to focus down individual targets in larger packs, when they are shattered they will deal extreme AoE damage. Kills 67-100 will be aided by Niuzao, use his buff to damage enemies in a cone. Periodically you will instantly kill enemies with a knockback.
-	step
-		goto 74.2,41.8
-		.talk Sinan the Dreamer##59906
-		..turnin The Might of Three##30645
-		..accept The Final Power##30646
-	step
-		goto 77.6,37.2
-		.' Use the Red Crane's power to jump over the wall of flame.
-		|confirm
-		|only if havequest(30646)
-	step
-		goto 78.7,35.8
-		'Zhao-Jin will periodically throw Lightning Spears. Click them to pick them up and then use the new button on your screen to hurl the spear back at him. this will be your main source of damage.
-		'Zhao-Jin will also summon Lightning Waves. With the Red Crane's buff you can easily jump over these.
-		.kill Zhao-Jin the Bloodletter##60273 |q 30646/1
-	step
-		goto 56.5,43.6
-		.talk Anji Autumnlight##58465
-		..turnin The Final Power##30646
-		|next "end"
-	step
-	label end_of_lotus
-		'You have achieved Revered status with the Golden Lotus!
-		|next |only if default
-	step
-	label end
-		'You have reached the end of the guide for today. You can only do the Dailies once per day.
-		|confirm |next goldenmenu
-]])
 --------------------------------------------------------------------------------------------------------------------------------------
 -- ACHIEVEMENTS
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -18594,6 +15410,2694 @@ ZygorGuidesViewer:RegisterInclude("Mag'har_Neutral",[[
 		..turnin The Mag'har##9406
 ]])
 
+ZygorGuidesViewer:RegisterGuideSorting({
+	"Leveling",
+	"Loremaster",
+	"Dailies",
+	"Events",
+	"Dungeons",
+	"Gear",
+	"Professions",
+	"Achievements",
+	"Pets & Mounts",
+	"Titles",
+	"Reputations",
+	"Macros",
+})
+
+ZygorGuidesViewer:RegisterInclude("Argent Tourney_Aspirant",[[
+		goto Icecrown,76.3,24.3
+		.talk Magister Edien Sunhollow##33542
+		..accept Up To The Challenge##13678
+	step
+		goto 76.3,24.4
+		.talk Magister Edien Sunhollow##33542
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13673 |daily |or
+		..accept A Worthy Weapon##13674 |daily |or
+		..accept The Edge of Winter##13675 |daily |or
+	step
+		goto 76.3,24.4
+		.talk Amariel Sunsworn##33658
+		..accept Training in the Field##13676 |daily
+	step
+		goto 76.2,24.4
+		.talk Galathia Brightdawn##33659
+		..accept Learning the Reins##13677 |daily
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..' Tell her you are glad to help
+		.get Ashwood Brand |q 13673/1
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13674
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13674/1
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13675
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13675/1
+	step
+		goto Icecrown,74.8,35.5
+		.from Vrykul Necrolord##31783+, Frostbrood Whelp##31718+
+		.kill 8 Icecrown Scourge |q 13676/1
+	step
+		goto 75.6,23.7
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Sunreaver Hawkstrider|invehicle |q 13677
+	step
+		goto 73.1,24.8
+		.' Target a Melee Target
+		.' If you don't want to kill your mount be sure to keep your Defend ability maxed out at 3 stacks
+		.' Use your Thrust ability to attack the target 5 times |q 13677/1
+	step
+		goto 72.9,25.1
+		.' Target a Charge Target from a distance
+		.' Use Shield-Breaker ability until you notice the targets Defend is gone
+		.' Use your Charge ability on the Charge Target 2 times |q 13677/3
+	step
+		goto 73.3,25.0
+		.' Target a Ranged Target from a distance
+		.' Use Shield-Breaker ability on Ranged Target to bring it's shields down
+		.' Use Shield-Breaker ability on Ranged Target twice, while it's shields are down|q 13677/2
+	step
+		goto 76.3,24.4
+		.talk Magister Edien Sunhollow##33542
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13673
+		..turnin A Worthy Weapon##13674
+		..turnin The Edge of Winter##13675
+	step
+		goto 76.3,24.4
+		.talk Amariel Sunsworn##33658
+		..turnin Training in the Field##13676
+	step
+		goto 76.2,24.4
+		.talk Galathia Brightdawn##33659
+		..turnin Learning the Reins##13677
+	step
+		'Make sure you have 15 Aspirant's Seals:
+		.get 15 Aspirant's Seal |q 13678/1 |tip If you do not have 15 Aspirant's Seals, keep repeating the daily quests in this guide section.  It takes 3 days of doing these Aspirant Rank dailies to get 15 Aspirant's Seals.
+	step
+		goto 76.3,24.4
+		.talk Magister Edien Sunhollow##33542
+		..turnin Up To The Challenge##13678
+]])
+
+ZygorGuidesViewer:RegisterInclude("Argent Tourney_Valiant",[[
+		goto Icecrown,76.3,24.4
+		.talk Magister Edien Sunhollow##33542
+		..accept The Aspirant's Challenge##13680
+	step
+		goto 71.8,20.0
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Sunreaver Hawkstrider|invehicle |q 13680
+	step
+		goto 71.4,19.6
+		.talk Squire David##33447
+		.' Tell him you are ready to fight!|tip Use your Defend ability on your hotbar to max your shield out at 3 charges before telling Squire David this.
+		.'An Argent Valiant runs up on a horse
+		.' Use the abilities on your hotbar to defeat the Argent Valiant|tip The best strategy to defeat the Argent Valiant is to always make sure your shield is up by using your Defend ability.  Then, use your Shield-Breaker ability to bring down the Argent Valiant's shield.  When his shield is down, use your Charge ability on him.  Keep repeating this process until he is defeated.
+		.' Defeat the Argent Valiant |q 13680/1
+	step
+		goto 76.3,24.4
+		.talk Magister Edien Sunhollow##33542
+		..turnin The Aspirant's Challenge##13680
+		..accept A Valiant Of Orgrimmar##13691 |only Orc
+		..accept A Valiant Of Sen'jin##13693 |only Troll
+		..accept A Valiant Of Thunder Bluff##13694 |only Tauren
+		..accept A Valiant Of Undercity##13695 |only Scourge
+		..accept A Valiant Of Silvermoon##13696 |only BloodElf
+	step
+		goto 76.5,24.6
+		.talk Mokra the Skullcrusher##33361
+		..turnin A Valiant Of Orgrimmar##13691
+		..accept The Valiant's Charge##13697
+		only Orc
+	step
+		goto 76.0,24.5
+		.talk Zul'tore##33372
+		..turnin A Valiant Of Sen'jin##13693
+		..accept The Valiant's Charge##13719
+		only Troll
+	step
+		goto 76.2,24.6
+		.talk Runok Wildmane##33403
+		..turnin A Valiant Of Thunder Bluff##13694
+		..accept The Valiant's Charge##13720
+		only Tauren
+	step
+		goto 76.5,24.2
+		.talk Deathstalker Visceri##33373
+		..turnin A Valiant Of Undercity##13695
+		..accept The Valiant's Charge##13721
+		only Scourge
+	step
+		goto 76.5,23.9
+		.talk Eressea Dawnsinger##33379
+		..turnin A Valiant Of Silvermoon##13696
+		..accept The Valiant's Charge##13722
+		only BloodElf
+	// ORC VALIANT RANK DAILY LOOP (BEGIN)
+	step
+		goto 76.5,24.6
+		.talk Mokra the Skullcrusher##33361
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13762 |daily |or
+		..accept A Worthy Weapon##13763 |daily |or
+		..accept The Edge Of Winter##13764 |daily |or
+		only Orc
+	step
+		goto 76.5,24.5
+		.talk Akinos##33405
+		..accept A Valiant's Field Training##13765 |daily
+		only Orc
+	step
+		goto 76.4,24.6
+		.talk Morah Worgsister##33544
+		..accept The Grand Melee##13767 |daily
+		..accept At The Enemy's Gates##13856 |daily
+		only Orc
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..get Ashwood Brand |q 13762/1
+		only Orc
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13763
+		only Orc
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13763/1
+		only Orc
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13764
+		only Orc
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13764/1
+		only Orc
+	step
+		goto Icecrown,48.9,71.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13856
+		only Orc
+	step
+		goto 50.1,74.8
+		.kill 15 Boneguard Footman##33438|q 13856/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
+		.kill 10 Boneguard Scout##33550 |q 13856/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
+		.kill 3 Boneguard Lieutenant##33429 |q 13856/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on them to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
+		only Orc
+	step
+		goto 49.1,71.4
+		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13856
+		only Orc
+	step
+		goto 44.3,54.2
+		.kill 10 Converted Hero##32255 |q 13765/1
+		only Orc
+	step
+		goto 75.5,24.0
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Orgrimmar Wolf|invehicle |q 13767
+		only Orc
+	step
+		goto 75.3,26.0
+		.' Talk to the riders on mounts of other Horde races
+		.' Tell them you are ready to fight!
+		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
+		.get 3 Mark of the Valiant |q 13767/1
+		only Orc
+	step
+		goto 76.5,24.6
+		.talk Mokra the Skullcrusher##33361
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13762
+		..turnin A Worthy Weapon##13763
+		..turnin The Edge Of Winter##13764
+		only Orc
+	step
+		goto 76.5,24.5
+		.talk Akinos##33405
+		..turnin A Valiant's Field Training##13765
+		only Orc
+	step
+		goto 76.4,24.6
+		.talk Morah Worgsister##33544
+		..turnin The Grand Melee##13767
+		..turnin At The Enemy's Gates##13856
+		only Orc
+	// ORC VALIANT RANK DAILY LOOP (END)
+	//
+	// TROLL VALIANT RANK DAILY LOOP (BEGIN)
+	step
+		goto 76.0,24.5
+		.talk Zul'tore##33372
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13768 |daily |or
+		..accept A Worthy Weapon##13769 |daily |or
+		..accept The Edge Of Winter##13770 |daily |or
+		only Troll
+	step
+		goto 76.0,24.6
+		.talk Shadow Hunter Mezil-kree##33540
+		..accept A Valiant's Field Training##13771 |daily
+		only Troll
+	step
+		goto 75.9,24.4
+		.talk Gahju##33545
+		..accept The Grand Melee##13772 |daily
+		..accept At The Enemy's Gates##13857 |daily
+		only Troll
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..' Tell her you are glad to help
+		.get Ashwood Brand |q 13768/1
+		only Troll
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13769
+		only Troll
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13769/1
+		only Troll
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13770
+		only Troll
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13770/1
+		only Troll
+	step
+		goto Icecrown,48.9,71.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13857
+		only Troll
+	step
+		goto 50.1,74.8
+		.kill 15 Boneguard Footman##33438|q 13857/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
+		.kill 10 Boneguard Scout##33550 |q 13857/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
+		.kill 3 Boneguard Lieutenant##33429 |q 13857/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
+		only Troll
+	step
+		goto 49.1,71.4
+		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13857
+		only Troll
+	step
+		goto 44.3,54.2
+		.kill 10 Converted Hero##32255 |q 13771/1
+		only Troll
+	step
+		goto 75.6,23.8
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Darkspear Raptor|invehicle |q 13772
+		only Troll
+	step
+		goto 75.3,26.0
+		.' Talk to the riders on mounts of other Horde races
+		.' Tell them you are ready to fight!
+		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
+		.get 3 Mark of the Valiant |q 13772/1
+		only Troll
+	step
+		goto 76.0,24.5
+		.talk Zul'tore##33372
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13768
+		..turnin A Worthy Weapon##13769
+		..turnin The Edge Of Winter##13770
+		only Troll
+	step
+		goto 76.0,24.6
+		.talk Shadow Hunter Mezil-kree##33540
+		..turnin A Valiant's Field Training##13771
+		only Troll
+	step
+		goto 75.9,24.4
+		.talk Gahju##33545
+		..turnin The Grand Melee##13772
+		..turnin At The Enemy's Gates##13857
+		only Troll
+	// TROLL VALIANT RANK DAILY LOOP (END)
+	//
+	// TAUREN VALIANT RANK DAILY LOOP (BEGIN)
+	step
+		goto 76.2,24.6
+		.talk Runok Wildmane##33403
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13773 |daily |or
+		..accept A Worthy Weapon##13774 |daily |or
+		..accept The Edge Of Winter##13775 |daily |or
+		only Tauren
+	step
+		goto 76.3,24.7
+		.talk Dern Ragetotem##33539
+		..accept A Valiant's Field Training##13776 |daily
+		only Tauren
+	step
+		goto 76.1,24.6
+		.talk Anka Clawhoof##33549
+		..accept The Grand Melee##13777 |daily
+		..accept At The Enemy's Gates##13858 |daily
+		only Tauren
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..' Tell her you are glad to help
+		.get Ashwood Brand |q 13773/1
+		only Tauren
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13774
+		only Tauren
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13774/1
+		only Tauren
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13775
+		only Tauren
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13775/1
+		only Tauren
+	step
+		goto Icecrown,48.9,71.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13858
+		only Tauren
+	step
+		goto 50.1,74.8
+		.kill 15 Boneguard Footman##33438 |q 13858/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
+		.kill 10 Boneguard Scout##33550 |q 13858/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
+		.kill 3 Boneguard Lieutenant##33429 |q 13858/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
+		only Tauren
+	step
+		goto 49.1,71.4
+		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13858
+		only Tauren
+	step
+		goto 44.3,54.2
+		.kill 10 Converted Hero##32255 |q 13776/1
+		only Tauren
+	step
+		goto 75.5,24.3
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Thunder Bluff Kodo|invehicle |q 13777
+		only Tauren
+	step
+		goto 75.3,26.0
+		.' Talk to the riders on mounts of other Horde races
+		.' Tell them you are ready to fight!
+		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
+		.get 3 Mark of the Valiant |q 13777/1
+		only Tauren
+	step
+		goto 76.2,24.6
+		.talk Runok Wildmane##33403
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13773
+		..turnin A Worthy Weapon##13774
+		..turnin The Edge Of Winter##13775
+		only Tauren
+	step
+		goto 76.3,24.7
+		.talk Dern Ragetotem##33539
+		..turnin A Valiant's Field Training##13776
+		only Tauren
+	step
+		goto 76.1,24.6
+		.talk Anka Clawhoof##33549
+		..turnin The Grand Melee##13777
+		..turnin At The Enemy's Gates##13858
+		only Tauren
+	// TAUREN VALIANT RANK DAILY LOOP (END)
+	//
+	// SCOURGE VALIANT RANK DAILY LOOP (BEGIN)
+	step
+		goto 76.5,24.2
+		.talk Deathstalker Visceri##33373
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13778 |daily |or
+		..accept A Worthy Weapon##13779 |daily |or
+		..accept The Edge Of Winter##13780 |daily |or
+		only Scourge
+	step
+		goto 76.6,24.1
+		.talk Sarah Chalke##33541
+		..accept A Valiant's Field Training##13781 |daily
+		only Scourge
+	step
+		goto 76.5,24.3
+		.talk Handler Dretch##33547
+		..accept The Grand Melee##13782 |daily
+		..accept At The Enemy's Gates##13860 |daily
+		only Scourge
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..' Tell her you're glad to help
+		.get Ashwood Brand |q 13778/1
+		only Scourge
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13779
+		only Scourge
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13779/1
+		only Scourge
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13780
+		only Scourge
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13780/1
+		only Scourge
+	step
+		goto Icecrown,48.9,71.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13860
+		only Scourge
+	step
+		goto 50.1,74.8
+		.kill 15 Boneguard Footman##33438|q 13860/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
+		.kill 10 Boneguard Scout##33550 |q 13860/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
+		.kill 3 Boneguard Lieutenant##33429 |q 13860/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
+		only Scourge
+	step
+		goto 49.1,71.4
+		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13860
+		only Scourge
+	step
+		goto 44.3,54.2
+		.kill 10 Converted Hero##32255 |q 13781/1
+		only Scourge
+	step
+		goto 75.6,23.9
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Forsaken Warhorse|invehicle |q 13782
+		only Scourge
+	step
+		goto 75.3,26.0
+		.' Talk to the riders on mounts of other Horde races
+		.' Tell them you are ready to fight!
+		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
+		.get 3 Mark of the Valiant |q 13782/1
+		only Scourge
+	step
+		goto 76.5,24.2
+		.talk Deathstalker Visceri##33373
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13778
+		..turnin A Worthy Weapon##13779
+		..turnin The Edge Of Winter##13780
+		only Scourge
+	step
+		goto 76.6,24.1
+		.talk Sarah Chalke##33541
+		..turnin A Valiant's Field Training##13781
+		only Scourge
+	step
+		goto 76.5,24.3
+		.talk Handler Dretch##33547
+		..turnin The Grand Melee##13782
+		..turnin At The Enemy's Gates##13860
+		only Scourge
+	// SCOURGE VALIANT RANK DAILY LOOP (END)
+	//
+	// BLOOD ELF VALIANT RANK DAILY LOOP (BEGIN)
+	step
+		goto 76.5,23.9
+		.talk Eressea Dawnsinger##33379
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..accept A Blade Fit For A Champion##13783 |daily |or
+		..accept A Worthy Weapon##13784 |daily |or
+		..accept The Edge Of Winter##13785 |daily |or
+		only BloodElf
+	step
+		goto 76.4,23.8
+		.talk Kethiel Sunlance##33538
+		..accept A Valiant's Field Training##13786 |daily
+		only BloodElf
+	step
+		goto 76.5,23.9
+		.talk Aneera Thuron##33548
+		..accept The Grand Melee##13787 |daily
+		..accept At The Enemy's Gates##13859 |daily
+		only BloodElf
+	step
+		goto Grizzly Hills,61.2,50.3
+		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
+		.' Target Lake Frogs
+		.' Use the emote /kiss on the Lake Frogs
+		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
+		.talk Maiden of Ashwood Lake##33220
+		..' Tell her you are glad to help
+		.get Ashwood Brand |q 13783/1
+		only BloodElf
+	step
+		goto Icecrown,69.1,76.2
+		.click Winter Hyacinth##3231
+		.collect 4 Winter Hyacinth##45000 |q 13784
+		only BloodElf
+	step
+		goto Dragonblight,93.2,26.1
+		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
+		.' Listen to the Maiden of Drak'Mar
+		.click Blade of Drak'Mar##8564
+		.get Blade of Drak'Mar |q 13784/1
+		only BloodElf
+	step
+		goto Crystalsong Forest,54.5,74.9
+		.from Lord Everblaze##33289
+		.collect 1 Everburning Ember##45005 |q 13785
+		only BloodElf
+	step
+		goto Howling Fjord,42.2,19.7
+		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
+		.get Winter's Edge |q 13785/1
+		only BloodElf
+	step
+		goto Icecrown,48.9,71.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13859
+		only BloodElf
+	step
+		goto 50.1,74.8
+		.kill 15 Boneguard Footman##33438|q 13859/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
+		.kill 10 Boneguard Scout##33550 |q 13859/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
+		.kill 3 Boneguard Lieutenant##33429 |q 13859/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
+		only BloodElf
+	step
+		goto 49.1,71.4
+		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13859
+		only BloodElf
+	step
+		goto 44.3,54.2
+		.kill 10 Converted Hero##32255 |q 13786/1
+		only BloodElf
+	step
+		goto 75.5,24.1
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Silvermoon Hawkstrider|invehicle |q 13787
+		only BloodElf
+	step
+		goto 75.3,26.0
+		.' Talk to the riders on mounts of other Horde races
+		.' Tell them you are ready to fight!
+		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
+		.get 3 Mark of the Valiant |q 13787/1
+		only BloodElf
+	step
+		goto 76.5,23.9
+		.talk Eressea Dawnsinger##33379
+		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
+		..turnin A Blade Fit For A Champion##13783
+		..turnin A Worthy Weapon##13784
+		..turnin The Edge Of Winter##13785
+		only BloodElf
+	step
+		goto 76.4,23.8
+		.talk Kethiel Sunlance##33538
+		..turnin A Valiant's Field Training##13786
+		only BloodElf
+	step
+		goto 76.5,23.9
+		.talk Aneera Thuron##33548
+		..turnin The Grand Melee##13787
+		..turnin At The Enemy's Gates##13859
+		only BloodElf
+	// BLOOF ELF VALIANT RANK DAILY LOOP (END)
+	step
+		'Make sure you have 25 Valiant Seals:
+		.get 25 Valiant's Seal |q 13697/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Orc
+		.get 25 Valiant's Seal |q 13719/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Troll
+		.get 25 Valiant's Seal |q 13720/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Tauren
+		.get 25 Valiant's Seal |q 13721/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Scourge
+		.get 25 Valiant's Seal |q 13722/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only BloodElf
+	step
+		goto 76.5,24.6
+		.talk Mokra the Skullcrusher##33361
+		..turnin The Valiant's Charge##13697
+		..accept The Valiant's Challenge##13726
+		only Orc
+	step
+		goto 76.0,24.5
+		.talk Zul'tore##33372
+		..turnin The Valiant's Charge##13719
+		..accept The Valiant's Challenge##13727
+		only Troll
+	step
+		goto 76.2,24.6
+		.talk Runok Wildmane##33403
+		..turnin The Valiant's Charge##13720
+		..accept The Valiant's Challenge##13728
+		only Tauren
+	step
+		goto 76.5,24.2
+		.talk Deathstalker Visceri##33373
+		..turnin The Valiant's Charge##13721
+		..accept The Valiant's Challenge##13729
+		only Scourge
+	step
+		goto 76.5,23.9
+		.talk Eressea Dawnsinger##33379
+		..turnin The Valiant's Charge##13722
+		..accept The Valiant's Challenge##13731
+		only BloodElf
+	step
+		goto 72.2,22.5
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Orgrimmar Wolf|invehicle |q 13726
+		only Orc
+	step
+		goto 72.0,22.5
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Darkspear Raptor|invehicle |q 13727
+		only Troll
+	step
+		goto 71.9,22.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Thunder Bluff Kodo|invehicle |q 13728
+		only Tauren
+	step
+		goto 72.1,22.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Forsaken Warhorse|invehicle |q 13729
+		only Scourge
+	step
+		goto 72.2,22.4
+		.' Equip the Horde Lance in your bags|use Horde Lance##46070
+		.' Click to mount the Stabled Silvermoon Hawkstrider|invehicle |q 13731
+		only BloodElf
+	step
+		goto 68.6,21.0
+		.talk Squire Danny##33518
+		..' Tell him you are ready to fight!
+		.'An Argent Champion runs up on a horse
+		.' Use the abilities on your hotbar to defeat the Argent Champion|tip The best strategy to defeat the Argent Champion is to always make sure your shield is up by using your Defend ability.  Make sure your shield is stacked to 3 charges before you begin the fight.  When the fight begins, immediately use your Charge ability on the Argent Champion.  Stay in very close range and spam your Thrust ability.  Remember to keep your shield maxed at 3 charges, also.  Eventually, the Argent Champion will try to run away to get into Charge range.  When he starts to run away, start spamming your Charge ability until you charge him in the back, then get back into melee range and start spamming your Thrust ability again.  Keep repeating this process until he is defeated.
+		.' Defeat the Argent Valiant |q 13726/1 |only Orc
+		.' Defeat the Argent Valiant |q 13727/1 |only Troll
+		.' Defeat the Argent Valiant |q 13728/1 |only Tauren
+		.' Defeat the Argent Valiant |q 13729/1 |only Scourge
+		.' Defeat the Argent Valiant |q 13731/1 |only BloodElf
+	step
+		goto 76.5,24.6
+		.talk Mokra the Skullcrusher##33361
+		..turnin The Valiant's Challenge##13726
+		..accept A Champion Rises##13736
+		only Orc
+	step
+		goto 76.0,24.5
+		.talk Zul'tore##33372
+		..turnin The Valiant's Challenge##13727
+		..accept A Champion Rises##13737
+		only Troll
+	step
+		goto 76.2,24.6
+		.talk Runok Wildmane##33403
+		..turnin The Valiant's Challenge##13728
+		..accept A Champion Rises##13738
+		only Tauren
+	step
+		goto 76.5,24.2
+		.talk Deathstalker Visceri##33373
+		..turnin The Valiant's Challenge##13729
+		..accept A Champion Rises##13739
+		only Scourge
+	step
+		goto 76.5,23.9
+		.talk Eressea Dawnsinger##33379
+		..turnin The Valiant's Challenge##13731
+		..accept A Champion Rises##13740
+		only BloodElf
+	step
+		goto 69.7,22.9
+		.talk Justicar Mariel Trueheart##33817
+		..turnin A Champion Rises##13736 |only Orc
+		..turnin A Champion Rises##13737 |only Troll
+		..turnin A Champion Rises##13738 |only Tauren
+		..turnin A Champion Rises##13739 |only Scourge
+		..turnin A Champion Rises##13740 |only BloodElf
+		..accept The Scourgebane##13795 |only DeathKnight
+		..accept Eadric the Pure##13794 |only !DeathKnight
+	step
+		goto 73.8,20.1
+		.talk Crok Scourgebane##33762
+		..turnin The Scourgebane##13795
+		only DeathKnight
+	step
+		goto 70.0,23.4
+		.talk Eadric the Pure##33759
+		..turnin Eadric the Pure##13794
+		only !DeathKnight
+]])
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+-- MoP DAILIES/REPUTATIONS
+--------------------------------------------------------------------------------------------------------------------------------------
+ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
+		'In order to begin gaining _Reputation_ with the _Shado-Pan_, you must first become Revered with the _Golden Lotus_.
+		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
+		.' Click here to begin working on the Shado-Pan after you have become revered with the Golden Lotus |confirm |next "startshado"
+	step
+	label golden
+		#include "Golden_Lotus_Revered"
+	step
+	label startshado
+		goto Vale of Eternal Blossoms 63.3,21.1
+		.talk Kai Kang##64002
+		..accept The Shado-Pan##31389
+		|only if not completedq(31389)
+	step
+		goto Townlong Steppes 49.0,70.4
+		.talk Ban Bearheart##62304
+		..turnin The Shado-Pan##31389
+		|only if not completedq(31389)
+	step
+	label dailies
+		goto 49.3,71.0
+		'Click here if Master Snowdrift is the questgiver today |next |confirm |modelnpc 63009
+		.' He can be found here: [49.5,70.6]
+		'Click here if Ban Bearheart is the questgiver today |next "bearheart" |confirm |modelnpc 62304
+		.' He can be found here [49.0,70.5]
+		'Click here if Ling of the Six Pools is the questgiver today |next "ling" |confirm |modelnpc 63614
+		.' She can be found here: [49.0,71.3]
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009
+		..accept The Challenger's Ring: Chao the Voice##31127
+		|only if not completedq(31127)
+		|only if rep('Shado-Pan')>=Honored
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009
+		..accept The Challenger's Ring: Lao-Chin the Iron Belly##31128
+		|only if rep('Shado-Pan')>=Revered
+	step
+		goto 49.3,72.0
+		.talk Lao-Chin the Iron Belly##62978
+		.' I'm here to challenge you! |q 31128/1
+		|only if havequest(31128)
+	step
+		goto 50.6,67.8
+		.talk Lao-Chin the Iron Belly##63135
+		.' All right, let's do this!
+		.' Defeat Lao-Chin the Iron Belly |q 31128/2
+		|only if havequest(31128)
+	step
+		goto 49.6,70.5
+		.talk Master Snowdrift##63009
+		..turnin The Challenger's Ring: Lao-Chin the Iron Belly##31128
+		|only if havequest(31128)
+	step
+		goto 49.7,70.5
+		.talk Chao the Voice##62550
+		.' Tell her you're here to challenge her! |q 31127/1
+		|only if havequest(31127)
+	step
+		goto 50.1,68.3
+		.talk Chao the Voice##63125
+		.' Let's do this.
+		.' Defeat Chao the Voice |q 31127/2
+		|only if havequest(31127)
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009
+		..turnin The Challenger's Ring: Chao the Voice##31127
+		|only if havequest(31127)
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009 |tip You will only be able to accept 4 of the following dailies.
+		..accept Assault Fire Camp Gai-Cho##31113 |daily |or 4
+		..accept Assault Deadtalker's Plateau##31114 |daily |or 4
+		..accept The Enemy of My Enemy... Is Still My Enemy!##31119 |daily |or 4
+		..accept Spirit Dust##31116 |daily |or 4 
+		..accept The Deadtalker Cipher##31118 |daily |or 4
+	step
+		'Talk to Chao the Voice or Protector Yi and ask one of them to come with you. They will help you in combat and allow you to turnin your quests outside of this questing hub.|tip Yi patrols so you may need to search for him.
+		.' Chao the Voice at [49.7,70.5] |modelnpc 62550
+		.' Protector Yi at [49.3,71.3] |modelnpc 62546
+		|confirm
+		|only if not completedq(31128)
+	step
+		'Talk to Chao the Voice, Protector Yi or Lao-Chin the Iron Belly and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.|tip Yi patrols so you may need to search for him.
+		.' Chao the Voice at [49.7,70.5] |modelnpc 62550
+		.' Protector Yi at [49.3,71.3] |modelnpc 62546
+		.' Lao-Chin the Iron Belly at [49.3,71.9] |modelnpc 62978
+		|confirm
+		|only if completedq(31128)
+	step
+		goto 63.4,43.3
+		.from Gai-Cho Yaungol##62552+, Gai-Cho Earthtalker##62553+, Gai-Cho Pitchthrower##62608+ |only if havequest(31113)
+		.' Kill 16 Gai-Cho Yaungol, Earthtalkers, or Pitchthrowers. |q 31113/1 |only if havequest(31113)
+		.click Highly Explosive Yaungol Oil Barrel |only if havequest(31119)
+		.collect Highly Explosive Yaungol Oil##84762 |n |tip You can only carry 10 at a time, so you may need to make multiple trips. |only if havequest(31119)
+	step
+		goto 60.2,48.6
+		'Use your Highly Explosive Yaungol Oil to kill as many enemies in this area as you can in 1 hit. |use Highly Explosive Yaungol Oil Barrel##84762
+		.from Gai-Cho Boltshooter##62589+, Gai-Cho Cauterizer##62577+, Gai-Cho Gatewatcher##62568+, Kri'thik Aggressor##62572+, Kri'thik Screecher##62602+
+		.' Kill 100 Gai-Cho Battledfired Combatants |q 31119/1
+		.' If you run out of oil, you can find more here [63.4,43.3]
+		|only if havequest(31119)
+	step
+		goto 51.1,51.8
+		.kill 8 Deadtalker Corpsedefiler##62677+ |q 31114/1 |only if havequest(31114)
+		.kill Deadtalker Crusher##62844 |q 31114/2 |tip He is elite but with your companion you should be able to defeat him. |only if havequest(31114)
+		.from Defiled Spirit##62679 |only if havequest(31116)
+		.collect Ancient Spirit Dust##84727 |n |only if havequest(31116)
+		.click Defiled Yaungol Remains |only if havequest(31116)
+		.' Return 8 Spirits to Their Remains |q 31116/1 |only if havequest(31116)
+	step
+		goto 51.1,51.8
+		.from Deadtalker Crusher##62844+, Deadtalker Corpsedefiler##62677+ |only if havequest(31118)
+		.get Ciphered Scroll##84759 |q 31118/1 |only if havequest(31118)
+	step
+		'Next to you will either be Chao the Voice or Protector Yi:
+		.'Talk to Chao the Voice |modelnpc 62550
+		.'Talk to Protector Yi |modelnpc 62546
+		..turnin Assault Fire Camp Gai-Cho##31113 |daily
+		..turnin Assault Deadtalker's Plateau##31114  |daily
+		..turnin The Enemy of My Enemy... Is Still My Enemy!##31119 |daily
+		..turnin Spirit Dust##31116 |daily
+		..turnin The Deadtalker Cipher##31118 |daily
+		|only if not completedq(31128)
+	step
+		'Next to you will either be Chao the Voice, Protector Yi, or Lao-Chin the Iron Belly:
+		.'Talk to Chao the Voice |modelnpc 62550
+		.'Talk to Protector Yi |modelnpc 62546
+		.'Talk to Lao-Chin the Iron Belly |modelnpc 62978
+		..turnin Assault Fire Camp Gai-Cho##31113 |daily
+		..turnin Assault Deadtalker's Plateau##31114  |daily
+		..turnin The Enemy of My Enemy... Is Still My Enemy!##31119 |daily
+		..turnin Spirit Dust##31116 |daily
+		..turnin The Deadtalker Cipher##31118 |daily
+		|only if completedq(31128)
+	step
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept Uruk!##31117 |daily |or
+		..accept Cheng Bo!##31120 |daily |or
+	step
+		goto 50.4,48.9
+		.kill Uruk##62613 |q 31117/1
+	step
+		goto 60.7,42.1
+		.kill Cheng Bo##62554 |q 31120/1
+	step
+		goto 49.6,70.5
+		.talk Master Snowdrift##63009
+		..turnin Uruk!##31117 |daily |or
+		..turnin Cheng Bo!##31120 |daily |or
+		|next "end"
+///New questgiver today?
+	step
+	label bearheart
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..accept The Challenger's Ring: Snow Blossom##31038
+		|only if not completedq(31038)
+		|only if rep('Shado-Pan')>=Honored
+	step
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..accept The Challenger's Ring: Yalia Sagewhisper##31104
+		|only if rep('Shado-Pan')>=Revered
+	step
+		goto 48.9,70.1
+		.talk Snow Blossom##62380
+		.' Ask her to meet in the Challenger's Ring. |q 31038/1
+		|only if havequest(31038)
+	step
+		goto 50.2,67.9
+		.talk Snow Blossom##62834
+		.' I challenge you!
+		.' Defeat Snow Blossom |q 31038/2
+		|only if havequest(31038)
+	step
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..turnin The Challenger's Ring: Snow Blossom##31038
+		|only if havequest(31038)
+	step
+		goto 48.9,70.0
+		.talk Yalia Sagewhisper##62303
+		.' Ask her to meet you in the Challenger's Ring. |q 31104/1
+		|only if havequest(31104)
+	step
+		goto 50.4,67.7
+		.talk Yalia Sagewhisper##62850
+		.' I challenge you!
+		.' Defeat Yalia Sagewhisper |q 31104/2
+		|only if havequest(31104)
+	step
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..turnin The Challenger's Ring: Yalia Sagewhisper##31104
+		|only if havequest(31104)
+	step
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..accept The Mogu Menace##31105 |daily |or 4
+		..accept The Mogu Menace##31106 |daily |or 4
+		..accept The Mogu Menace##31039 |daily |or 4
+		..accept Bronze Claws##31044 |daily |or 4
+		..accept Illusions Of The Past##31045 |daily |or 4
+		..accept Grave Consequences##31048 |daily |or 4
+		..accept Dark Arts##31043 |daily |or 4
+		..accept Onyx Hearts##31042 |daily |or 4
+		..accept Born Free##31047 |daily |or 4
+		..accept Spiteful Sprites##31040 |daily |or 4
+		..accept Egg Rescue!##31041 |daily |or 4
+		..accept Little Hatchlings##31046 |daily |or 4
+	step
+		'Talk to Snow Blossom or Fei Li and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
+		.' Snow Blossom at [48.9,70.1] |modelnpc 62380
+		.' Fei Li at [48.8,70.2] |modelnpc 62354
+		|confirm
+		|only if not completedq(31104)
+	step
+		'Talk to Snow Blossom, Fei Li, or Yalia Sagewhisper and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
+		.' Snow Blossom at [48.9,70.1] |modelnpc 62380
+		.' Fei Li at [48.8,70.2] |modelnpc 62354
+		.' Yalia Sagewhisper at [48.8,70.0] |modelnpc 62303
+		|confirm
+		|only if completedq(31104)
+	step
+		goto 28.8,22.4
+		.talk Moshu the Arcane##62810
+		..accept Through the Portal##31110
+		|only if not completedq(31110)
+	step
+		goto 32.8,25.1
+		.clicknpc Ball and Chain##62539 |only if havequest(31047)
+		.' Free 6 Wild Cloudriders |q 31047/1 |only if havequest(31047)
+		.click Shan'ze Cage |only if havequest(31046)
+		.' Free 20 Cloudrider Hatchlings. |q 31046/1 |only if havequest(31046)
+		.click Shiny Egg |only if havequest(31041)
+		.get 8 Cloudrunner Egg |q 31041/1 |only if havequest(31041)
+		|only if havequest(31041) or havequest(31046) or havequest(31047)
+	step
+		goto 24.4,15.2
+		.kill 3 Shan'ze Illusionist##62440+ |q 31045/1|only if havequest(31045)
+		.click Shan'ze Tablet |only if havequest(31043)
+		.get 8 Shan'ze Tablet |q 31043/1 |only if havequest(31043)
+		.click Mogu Burial Urn |only if havequest(31048)
+		.kill 24 Shan'ze Ancestor##62285+ |q 31048/1 |only if havequest(31048)
+		.from Onyx Stormclaw##62448 |only if havequest(31042)
+		.get 4 Onyx Heart |q 31042/1 |only if havequest(31042)
+	step
+		goto 28.5,18.5
+		.from Shan'ze Serpentbinder##62293+, Shan'ze Beastmaster##62530+ |only if havequest(31105) or havequest(31106) or havequest (31039)
+		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31105/1 |only if havequest(31105)
+		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31106/1 |only if havequest(31106)
+		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31039/1 |only if havequest(31039)
+		.from Bronze Quilen##62266+ |only if havequest(31044)
+		.get 20 Bronze Claw##83153+ |q 31044/1 |only if havequest(31044)
+	step
+		goto 23.0,19.5
+		.from Darkwoods Pixie##62268+, Darkwoods Charmer##62457+
+		.' Kill 30 Darkwoods Sprites or Darkwoods Charmers. |q 31040/1
+		|only if havequest(31040)
+	step
+		.from Shan'ze Serpentbinder##62293+, Shan'ze Illusionist##62440+, Shan'ze Ancestor##62285+, Shan'ze Beastmaster##62515+, Darkwoods Charmer##62520
+		.get 1000 Ancient Arcane Powder##84102+ |q 31110/1
+		|only if havequest(31110)
+	step
+		'Next to you will either be Fei Li or Snow Blossom
+		.talk Fei Li##62354
+		.talk Snow Blossom##62380
+		..turnin The Mogu Menace##31105 |daily
+		..turnin The Mogu Menace##31106 |daily
+		..turnin The Mogu Menace##31039 |daily
+		..turnin Bronze Claws##31044 |daily
+		..turnin Illusions Of The Past##31045 |daily
+		..turnin Grave Consequences##31048 |daily
+		..turnin Dark Arts##31043 |daily
+		..turnin Onyx Hearts##31042 |daily
+		..turnin Born Free##31047 |daily
+		..turnin Spiteful Sprites##31040 
+		..turnin Egg Rescue!##31041 
+		..turnin Little Hatchlings##31046 
+		..accept When The Dead Speak##31062 |daily |or
+		..accept Riding the Storm##31061 |daily |or
+		..accept In Sprite Of Everything##31049 |daily |or
+		|only if not completedq(31104)
+	step
+		'Next to you will either be Fei Li, Snow Blossom, or Yalia Sagewhisper
+		.talk Fei Li##62354
+		.talk Snow Blossom##62380
+		.talk Yalia Sagewhisper##62303
+		..turnin The Mogu Menace##31105 |daily
+		..turnin Bronze Claws##31044 |daily
+		..turnin Illusions Of The Past##31045 |daily
+		..turnin Grave Consequences##31048 |daily
+		..turnin Dark Arts##31043 |daily
+		..turnin Onyx Hearts##31042 |daily
+		..turnin Born Free##31047 |daily
+		..turnin Spiteful Sprites##31040 
+		..turnin Egg Rescue!##31041 
+		..turnin Little Hatchlings##31046 
+		..accept When The Dead Speak##31062 |daily |or
+		..accept Riding the Storm##31061 |daily |or
+		..accept In Sprite Of Everything##31049 |daily |or
+		|only if completedq(31104)
+	step
+		goto 30.9,12.6
+		.' Use the Bronze Claws on the Cloudrunners around this area. |use Bronze Claws##83134
+		.from Shan'ze Cloudrunner##62584 
+		.' Free 8 Shan'ze Cloudriders |q 31061/1
+		|only if havequest(31061)
+	step
+		'Click the Leave Vehicle button. |outvehicle
+		|only if havequest(31061)
+	step
+		'Enter the tunnel here. |goto 20.3,15.8 <5 |c
+		|only if havequest(31049)
+	step
+		goto 19.5,13.8
+		.kill Darkwoods Faerie##62522 |q 31049/1
+		|only if havequest(31049)
+	step
+		'Leave the tunnel here. |goto 20.3,15.8 <5 |c
+		|only if havequest(31049)
+	step
+		goto 32.3,9.5
+		.kill Shan'ze Deathspeaker##62559 |q 31062/1 |tip Make sure you destroy his Spirit Gems, if you let them pile up they can overwhelm you.
+		|only if havequest(31062)
+	step
+		goto 28.8,22.4
+		.talk Moshu the Arcane##62810
+		..turnin Through the Portal##31110
+		|only if havequest(31110)
+	step
+		goto 49.0,70.4
+		.talk Ban Bearheart##62304
+		..turnin When The Dead Speak##31062 
+		..turnin Riding the Storm##31061 
+		..turnin In Sprite Of Everything##31049 
+		|next "end"
+/// New Questigver today
+	step
+	label ling
+		goto 49.0,71.3
+		.talk Ling of the Six Pools##63614
+		..accept The Challenger's Ring: Hawkmaster Nurong##31220
+		|only if not completedq(31220)
+		|only if rep('Shado-Pan')>=Honored
+	step
+		goto 49.0,71.3
+		.talk Ling of the Six Pools##63614
+		..accept The Challenger's Ring: Tenwu of the Red Smoke##31221
+		|only if rep('Shado-Pan')>=Revered 
+	step
+		goto 48.9,71.2
+		.talk Tenwu of the Red Smoke##63616
+		.' Ask him to meet you in the Challenger's Ring. |q 31221/1
+		|only if havequest(31221)
+	step
+		goto 50.6,68.5
+		.talk Tenwu of the Red Smoke##64471
+		.' Let's see if you can back that talk up.
+		.' Defeat Temwu of the Red Smoke |q 31221/2
+		|only if havequest(31221)
+	step
+		goto 49.0,71.3
+		.talk Ling of the Six Pools##63614
+		..turnin The Challenger's Ring: Tenwu of the Red Smoke##31221
+		|only if havequest(31221)
+	step
+		goto 49.0,70.9
+		.talk Hawkmaster Nurong##63618
+		.' Ask him to meet you in the Challenger's Ring. |q 31220/1
+		|only if havequest(31220)
+	step
+		goto 50.7,68.2
+		.talk Hawkmaster Nurong##64470
+		.' Let's go!
+		.' Defeat Hawkmaster Nurong |q 31220/2
+		|only if havequest(31220)
+	step
+		goto 49.0,71.3
+		.talk Ling of the Six Pools##63614
+		..turnin The Challenger's Ring: Hawkmaster Nurong##31220
+		|only if havequest(31220)
+	step
+		goto 49.0,71.3
+		.talk Ling of the Six Pools##63614
+		..accept Sra'vess Wetwork##31196 |daily |or 4
+		..accept The Bigger They Come...##31197 |daily |or 4
+		..accept A Morale Victory##31198 |daily |or 4
+		..accept Destroy the Siege Weapons!##31199 |daily |or 4
+		..accept Fumigation##31200 |daily |or 4
+		..accept Friends, Not Food!##31201 |daily |or 4
+	step
+		'Talk to Hawkmaster Nurong or Taoshi and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
+		'Hawkmaster Nurong at [48.7,71.2] |modelnpc 63618
+		'Taoshi at [48.7,71.0] |modelnpc 63617
+		|confirm
+		|only if not completedq(31221)
+	step
+		'Talk to Hawkmaster Nurong, Taoshi, or Tenwu of the Red Smoke and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
+		'Hawkmaster Nurong at [48.7,71.2] |modelnpc 63618
+		'Taoshi at [48.7,71.0] |modelnpc 63617
+		'Tenwu of the Red Smoke [48.9,71.2] |modelnpc 63616
+		|confirm
+		|only if completedq(31221)
+	step
+		goto 48.7,71.1
+		.talk Ku-Mo##65341
+		..accept Seeking Father##30933
+		.' If this quest is unavailable, click here. |confirm
+		|only if not completedq(30933)
+	step
+		goto 27.5,54.6
+		.click Sra'thik Siege Weapon
+		.' Small Southern Siege Weapon destroyed |q 31199/2
+		|only if havequest(31199)
+	step
+		goto 25.8,53.8
+		.click Sra'thik Siege Weapon
+		.' Large Southern Siege Weapon destroyed |q 31199/1
+		|only if havequest(31199)
+	step
+		goto 23.5,55.5
+		.click Sra'thik Idol
+		.' Southern Idol destroyed |q 31198/1
+		|only if havequest(31198)
+	step
+		goto 21.5,49.2
+		.click Sra'thik Idol
+		.' Central Idol destroyed |q 31198/3
+		|only if havequest(31198)
+	step
+		goto 27.2,41.2
+		.click Sra'thik Siege Weapon
+		.' Large Northern Siege Weapon destroyed |q 31199/3
+		|only if havequest(31199)
+	step
+		goto 26.2,39.8
+		.click Sra'thik Siege Weapon
+		.' Small Northern Siege Weapon destroyed |q 31199/4
+		|only if havequest(31199)
+	step
+		goto 27.8,41.9
+		.click Sra'thik Idol
+		.' Eastern Idol destroyed |q 31198/4
+		|only if havequest(31198)
+	step
+		goto 23.6,44.7 
+		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
+		.' Egg Chamber bombed |q 31200/3
+		|only if havequest(31200)
+	step
+		goto 22.0,41.6 
+		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
+		.' Torture Cell bombed |q 31200/4
+		|only if havequest(31200)
+	step
+		goto 21.2,43.2 
+		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
+		.' Slaughtering Pit bombed |q 31200/5
+		|only if havequest(31200)
+	step
+		goto 21.0,45.9 
+		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
+		.' Amber Vault bombed |q 31200/1
+		|only if havequest(31200)
+	step
+		goto 16.2,45.8
+		.click Sra'thik Idol
+		.' Western Idol destroyed |q 31198/2
+		|only if havequest(31198)
+	step
+		goto 17.6,58.0
+		.talk Shado-Pan Trainee##64459
+		.' Tell them "No you're not!"
+		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/3
+		|only if havequest(31201)
+	step
+		goto 17.4,57.0
+		.talk Shado-Pan Trainee##64460
+		.' Tell them "No you're not!"
+		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/2
+		|only if havequest(31201)
+	step
+		goto 17.4,57.0
+		.talk Sentinel Ku-Yao##61694
+		.' Tell him his son has been looking for him.
+		.' Search for Sentinel Ku-Yao. |q 30933/1
+		|only if havequest(30933)
+	step
+		goto 18.0,53.5
+		.talk Shado-Pan Trainee##64461
+		.' Tell them "No you're not!"
+		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/1
+		|only if havequest(31201)
+	step
+		goto 23.9,47.3
+		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
+		.' Nutriment Cell bombed |q 31200/2
+		|only if havequest(31200)
+	step
+		'Make sure you have done the following around Sra'vess:
+		.from Sra'thik Mutilator##63678+, Sra'thik Cacophyte##63680+, Sra'thik Drone##63677+, Sra'thik Regenerator##63681+, Sra'thik Swiftwing##63683+ |only if havequest(31196)
+		.' Kill 15 Lesser Sra'thik mantid. |q 31196/1 |only if havequest(31196)
+		.from Sra'thik Swarm-Leader##63685+, Sra'thik Vessguard##63686+, Sra'thik Will-Breaker##63684+, Sra'thik Deathmixer##63688+ |only if havequest(31197)
+		.' Kill 4 Greater Sra'thik mantid. |q 31197/1 |only if havequest(31197)
+	step
+		'Next to you is either Hawkmaster Nurong or Taoshi
+		.talk Taoshi##63617
+		.talk to Hawkmaster Nurong##63618
+		..turnin Sra'vess Wetwork##31196 |daily
+		..turnin The Bigger They Come...##31197 |daily
+		..turnin A Morale Victory##31198 |daily
+		..turnin Destroy the Siege Weapons!##31199 |daily
+		..turnin Fumigation##31200 |daily
+		..turnin Friends, Not Food!##31201 |daily 
+		|only if not completedq(31221)
+	step
+		'Next to you is either Hawkmaster Nurong, Taoshi, or Tenwu.
+		.'Talk to Taoshi |modelnpc 63617
+		.'Talk to Hawkmaster Nurong |modelnpc 63618
+		.'Talk to Tenwu of the Red Smoke |modelnpc 63616
+		..turnin Sra'vess Wetwork##31196 |daily
+		..turnin The Bigger They Come...##31197 |daily
+		..turnin A Morale Victory##31198 |daily
+		..turnin Destroy the Siege Weapons!##31199 |daily
+		..turnin Fumigation##31200 |daily
+		..turnin Friends, Not Food!##31201 |daily 
+		|only if completedq(31221)
+	step
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept Target of Opportunity: Sra'thik Hivelord##31204 |daily |or
+		..accept Target of Opportunity: Sra'thik Swarmlord##31203 |daily |or
+	step
+		goto 16.4,40.9
+		.kill Sra'thik Swarmlord##63693 |q 31203/1
+		|only if havequest(31203)
+	step
+		'Enter the building here. |goto 27.1,44.1 <5 |c
+		|only if havequest(31204)
+	step
+		goto 24.3,44.0
+		.kill Sra'thik Hivelord##63694 |q 31204/1
+		|only if havequest(31204)
+	step
+		'Leave the building. |goto 27.1,44.1 <5 |c
+		|only if havequest(31204)
+	step
+		goto 48.7,71.1
+		.talk Ku-Mo##65341
+		..turnin Seeking Father##30933
+		|only if havequest(30933)
+	step
+		goto 49.0,71.4
+		.talk Ling of the Six Pools##63614
+		..turnin Target of Opportunity: Sra'thik Hivelord##31204 |daily |or
+		..turnin Target of Opportunity: Sra'thik Swarmlord##31203 |daily |or
+		|next "end"
+/// Exalted Reputation
+	step
+	label end
+		goto 48.8,70.6
+		.talk Rushi the Fox##64595
+		.buy 1 Grand Commendation of the Shado-Pan##93220
+		.' Use the Commendation of the Shado-Pan you just purchased. |use Grand Commendation of the Shado-Pan##93220
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("Shado-Pan")>=Revered
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009
+		..accept Mogu Incursions##31266
+		|only if rep('Shado-Pan')==Exalted and not completedq(31266)
+	step
+		goto 48.8,58.6
+		.kill Shan'ze Spymaster##63888 |q 31266/1
+		|only if rep('Shado-Pan')==Exalted and not completedq(31266)
+	step
+		goto 49.4,70.6
+		.talk Master Snowdrift##63009
+		..turnin Mogu Incursions##31266
+		..accept Surprise Attack!##31277
+		|only if rep('Shado-Pan')==Exalted and not completedq(31277)
+	step
+		goto 42.6,63.9
+		.talk Ban Bearheart##63908
+		.' Tell him "Let's go".
+		.' Join the battle of Niuzao Temple |q 31277/1
+		|only if havequest(31277)
+	step
+		goto 41.3,60.0
+		'Wait for the dialogue to end and fight off the invasion.
+		.from Shan'ze Brutalizer##63933+
+		.from Hei Feng##63920 |tip When he casts Deep Breath step behind him.
+		.' Defeat the Mogu Invasion |q 31277/2
+		|only if havequest(31277) 
+	step
+		goto 49.2,71.0
+		.talk Ban Bearheart##62304
+		..turnin Surprise Attack!##31277
+		|only if havequest(31277)
+	step
+		'You have reached the end of this daily guide.
+		.' Click here to return to the start of the dailies. |next "dailies" |confirm
+]])
+
+ZygorGuidesViewer:RegisterInclude("Marista_Hub",[[
+	step
+		goto Krasarang Wilds 52.4,76.6
+		.talk Nan-Po##60441
+		.fpath Marista
+	step
+		goto 51.7,75.3
+		.talk Tony Tuna##60182
+		..accept Particular Plumage##30667
+	step
+		goto 51.5,76.9
+		.talk Jay Cloudfall##60173
+		..accept Sudden, Unexpected Crocolisk Aggression##30666
+	step
+		goto 46.4,68.6
+		.from Crimson Lory##60198+
+		.get 6 Crimson Tailfeather##80678+ |q 30667/2
+		.from Emerald Lory##60200+
+		.get 6 Emerald Tailfeather##80677+ |q 30667/1
+		.from Dusky Lory##60196+
+		.get 6 Dusky Tailfeather##80679+ |q 30667/3
+ 		.from Mortbreath Skulker##60202+, Mortbreath Snapper##60201+
+ 		.' Kill 8 Mortbreath crocolisk |q 30666/1
+	step
+		goto 51.7,75.3
+		.talk Tony Tuna##60182
+		..turnin Particular Plumage##30667
+	step
+		goto 51.5,76.9
+		.talk Jay Cloudfall##60173
+		..turnin Sudden, Unexpected Crocolisk Aggression##30666
+		..accept Build Your Own Raft##30668
+	step
+		goto 52.3,77.9
+		.click Tough Kelp
+		.get Tough Kelp##80804 |q 30668/2
+	step
+		goto 52.4,76.2
+		.click Spare Plank
+		.get 4 Spare Plank##80685 |q 30668/1
+	step
+		goto 51.5,76.9
+		.talk Jay Cloudfall##60173
+		..turnin Build Your Own Raft##30668
+		..accept The Lorewalker on the Lake##30669
+	step
+		goto 51.7,76.6
+		.click Your Raft
+		.' Pick up your raft |q 30669/1
+	step
+		goto 46.0,78.9
+		.talk Wise Ana Wu##60139
+		..turnin The Lorewalker on the Lake##30669
+		..accept Wisdom Has A Price##30671
+		..accept Misery##30691
+	step
+		.' Go underwater and enter the cave |goto 46.0,79.9 <5 |c
+	step
+		goto 46.2,83.5
+		.from Nahassa##60203+ |tip Nahassa will use an ability called Feverish Deathbite that will cause you to hallucinate many more crocolisks have spawned, they aren't really there so don't panic.
+		.' Put Nahassa out of his misery |q 30691/1
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin Misery##30691
+	step
+		.' Exit the cave |goto 46.0,79.9 <5 |c
+	step
+		goto 46.0,79.0
+		.from Great Grey Shark##60204+, Nayeli Hammerhead##60432+
+		.get 5 Shark Fillet##80810+ |q 30671/1
+	step
+		goto 46.0,78.9
+		.talk Wise Ana Wu##60139
+		..turnin Wisdom Has A Price##30671
+		..accept Balance##30672
+	step
+		goto 45.1,84.9
+		'Run over one of the piles of fish along the beach.
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept Balance Without Violence##30674
+	step
+		.from Unga Fish-Getter##60299+
+		.collect 1 Confusing Treasure Map##80827 |n
+		.' Click the Confusing Treasure Map in your bags |use Confusing Treasure Map##80827
+		..accept Buried Hozen Treasure##30675
+	step
+		goto 46.1,86.7
+		.clicknpc Flailing Carp |tip You can find these all along the beach
+		.' Throw 6 Flailing Carp back into the water |q 30674/1
+		.kill 10 Unga Fish-Getter##60299+ |q 30672/1
+		.click Lump of Sand
+		.get Buried Hozen Treasure##80817 |q 30675/1
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin Balance Without Violence##30674
+		..turnin Buried Hozen Treasure##30675
+	step
+		goto 51.5,76.8
+		.talk Jay Cloudfall##60173
+		..turnin Balance##30672
+	step
+		goto Krasarang Wilds 29.7,39.0
+		.talk Tired Shushen##58278
+		..accept Thieving Raiders##30168
+		..accept Raid Leader Slovan##30169
+	step
+		goto 31.8,29.0
+		.kill Slovan##58285 |q 30169/1
+		.from Riverblade Flesh-hunter##58274
+		.get 5 Pillaged Jinyu Loot##78958 |q 30168/1
+	step
+		goto Krasarang Wilds 29.7,39.1
+		.talk Tired Shushen##58278
+		..turnin Thieving Raiders##30168
+		..turnin Raid Leader Slovan##30169
+	step
+		goto 24.6,39.2
+		.clicknpc Dawnchaser Captive##58608
+		.' Rescue 8 Captives |q 30163/1
+		.kill 8 Korjan Reclaimer##58614+ |q 30229/1
+		.click Mogu Artifact
+		.get 10 Mogu Artifact##79120+ |q 30230/1
+	step
+		goto 28.8,50.6
+		.talk Kang Bramblestaff##56112
+		..turnin Re-Reclaim##30230
+	step
+		goto 28.7,50.9
+		.talk Kor Bloodtusk##58114
+		..turnin For the Tribe##30163
+		..turnin The Greater Danger##30229
+	step
+		goto 29.1,51.1
+		.talk Ambassador Han##58630
+		..accept The Mantid##30175
+	step
+		goto 16.0,39.8
+		.talk Sunwalker Dezco##58607
+		..accept The Stoneplow Convoy##30164
+	step
+		goto 15.3,35.3
+		.clicknpc Stoneplow Envoy##58955
+		.' Save 7 Stoneplow Envoy |q 30164/1
+		.from Ik'thallik Precursor##58367+, Ik'thallik Vanguard##58368+
+		.' Kill 10 Ik'thallik Mantid |q 30175/1
+	step
+		goto 16.0,39.8
+		.talk Sunwalker Dezco##58607
+		..turnin The Stoneplow Convoy##30164
+	step
+		goto 15.7,39.7
+		.talk Ambassador Len##58954
+		..turnin The Mantid##30175
+	step
+		goto 16.0,39.8
+		.talk Sunwalker Dezco##58607
+		..accept For Family##30174
+	step
+		goto 23.6,48.8
+		.talk Kor Bloodtusk##58670
+		.' Try to free Kor from his bonds
+		.kill Groundbreaker Brojai##58224 |q 30174/1 |tip He will summon adds one at a time. They aren't too difficult to kill.
+	step
+		goto 28.9,50.8
+		.talk Sunwalker Dezco##58607
+		..turnin For Family##30174
+		..accept Warn Stoneplow##30241
+	step
+		goto Valley of the Four Winds 19.5,56.8
+		.talk Watch Commander Loon Mai##56720
+		..turnin Warn Stoneplow##30241
+	step
+		goto 18.1,55.9
+		.talk Mudmug##56474
+		..accept It Does You No Good In The Keg##30653
+	step
+		goto Valley of the Four Winds 18.0,56.3
+		.talk Watch Commander Loon Mai##56720
+		..accept The Swarm Begins##30622
+	step
+		goto Valley of the Four Winds 18.0,56.5
+		.talk Mei Barrelbottom##59855
+		..accept The Mantidote##30623
+	step
+		goto Valley of the Four Winds 17.5,50.2
+		.' Deliver beer to Zhu's Wardens |q 30653/1
+	step
+		goto Valley of the Four Winds 15.2,55.4
+		.' Deliver beer to Crane Wing Priests |q 30653/2
+	step
+		goto Valley of the Four Winds 13.0,56.0
+		.' Deliver beer to Tauren Settlers |q 30653/4
+	step
+		goto Valley of the Four Winds 10.7,55.5
+		.' Deliver beer to Shado-Pan |q 30653/3
+	step
+		.' Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin It Does You No Good In The Keg##30653
+	step
+		goto 13.4,54.6
+		.from Ik'thallik Infestor##56721+, Ik'thik Warrior##56722+
+		.' Kill 15 Ik'thallik Infestors or Warriors |q 30622/1
+		.' Use Ken-Ken's mask on Ik'thik Wing Commanders. |use Ken-Ken's Mask##80337
+		.from Manifestation of Fear##59874+ 
+		.' Defeat 5 Manifestation of Fear that come out of Ik'thik Wing Commanders. |q 30623/1 
+	step
+		.' Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Mantidote##30623
+// BUGGED
+	step
+		goto 11.6,49.5
+		.talk Guard Captain Oakenshield##57198
+		..turnin The Swarm Begins##30622
+		..accept Students No More##30625 /////Currently Bugged
+	step
+		'The students you are looking for can be at one of four locations fighting one of the quest mobs below. Find the students and kill the follow monsters:
+		.'Ik'thallik Tendon-Slicer at [9.5,54.0]
+		.kill Ik'thallik Tendon-Slicer##59888 |q 30625/3
+		.'Ik'thallik Fearmonger at [9.5,58.2]
+		.kill Ik'thallik Fearmonger##59889 |q 30625/4
+		.'Ik'thallik Bloodrager at [8.9,54.2]
+		.kill Ik'thallik Bloodrager##59887 |q 30625/1
+		.'Ik'thik Incubator at [8.9,51.0]
+		.kill Ik'thik Incubator##59890 |q 30625/2
+	step
+		goto 11.6,49.5
+		.talk Guard Captain Oakenshield##57198
+		..turnin Students No More##30625
+		..accept Retreat!##30626
+	step
+		goto 18.0,56.3
+		.talk Watch Commander Loon Mai##56720
+		..turnin Retreat!##30626
+	step
+		goto 17.9,55.7
+		.talk Master Bruised Paw##59856
+		..accept The Savior of Stoneplow##30627
+	step
+		goto 18.0,56.7 |n
+		.talk Miss Fanny##59857
+		.' Tell her "Let's go". |invehicle
+	step
+		'Use your Unyielding Fist ability to defeat the Mantid Collossus. |tip Use your Unyielding Fist ability when the new icon on your screens flashes orange
+		.kill Mantid Colossus##56703 |q 30627/1
+	step
+		goto 18.0,56.3
+		.talk Watch Commander Loon Mai##56720
+		..turnin The Savior of Stoneplow##30627
+		..accept The Gratitude of Stoneplow##30628
+]])
+
+ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
+		'In order to begin gaining _Reputation_ with the _August Celestials_, you must first become Revered with the _Golden Lotus_.
+		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
+		.' Click here to begin working on the August Celestials after you have become revered with the Golden Lotus |confirm |next "startaug"
+	step
+	label golden
+		#include "Golden_Lotus_Revered"
+	step
+	label startaug
+		goto Vale of Eternal Blossoms 62.8,23.4
+		.talk Sage Lotusbloom##64001
+		.' The following quests will only be available the first time you are sent to a new area. They are random and Sage Lotusbloom will only have one at a time.
+		..accept Challenge At The Temple of the Red Crane##31379 |or |next "crane" |only if not completedq(31379)
+		..accept Attack At The Temple of the Jade Serpent##31377  |or |next "serpent" |only if not completedq(31377)
+		..accept Defense At Niuzao Temple##31383 |or |next "ox" |only if not completedq(31383)
+		..accept Trial At The Temple of the White Tiger##31381 |or |next "tiger" |only if not completedq(31381)
+		.' If no quest is available, ask her how you can help the August Celestials today. Then click on whichever spirit needs you today.
+		.' Niuzao the Black Ox |confirm |next "ox"
+		.' Yu'lon the Jade Serpent |confirm |next "serpent"
+		.' Xuen the White Tiger |confirm |next "tiger"
+		.' Chi-Ji the Red Crane |confirm |next "crane"
+	step
+	label crane
+		goto Krasarang Wilds 31.3,63.4
+		.talk Thelonius##60506
+		..turnin Challenge At The Temple of the Red Crane##31379
+		|only if not completedq(31379)
+	step
+		goto 31.3,63.4
+		.talk Thelonius##60506
+		..accept Students of Chi-Ji##30718 |daily
+		..accept Champion of Chi-Ji##30740 |daily |only if achieved(7287)
+	step
+		goto 31.3,63.6
+		.talk Yan Quillpaw##60529
+		..accept Gifts of the Great Crane##30717 |daily
+	step
+		goto 31.3,63.6
+		.talk Kuo-Na Quillpaw##60528
+		..accept Chasing Hope##30716 |daily
+	step
+		goto 34.6,82.0
+		.talk Champion of Chi-Ji##60546
+		.' Let's fight!
+		.' Defeat a Champion of Chi-Ji |q 30740/1
+		|only if havequest(30740)
+	step
+		goto 31.2,73.9
+		.from 10 Student of Chi-Ji##60601+
+		.' Duel 10 Students of Chi-Ji |q 30718/1
+		.click Cerulean Gift of the Crane
+		.click Crimson Gift of the Crane
+		.click Bronze Gift of the Crane
+		.get 10 Gift of the Great Crane##80938+ |q 30717/1
+		.' Find 3 Spirits of the Crane |q 30716/1 |tip They look like stealthed birds roaming around the isle in set paths. Run into them.
+	step
+		goto 31.3,63.6
+		.talk Kuo-Na Quillpaw##60528
+		..turnin Chasing Hope##30716 |daily
+	step
+		goto 31.3,63.6
+		.talk Yan Quillpaw##60529
+		..turnin Gifts of the Great Crane##30717 |daily
+	step
+		goto 31.3,63.4
+		.talk Thelonius##60506
+		..turnin Students of Chi-Ji##30718 |daily
+		..accept Ellia Ravenmane##30725 |daily |or
+		..accept Minh Do-Tan##30726 |daily |or
+		..accept Ellia Ravenmane: Rematch##30727 |daily |or
+		..accept Fat Long-Fat##30728 |daily |or
+		..accept Julia Bates##30729 |daily |or
+		..accept Dextrous Izissha##30730 |daily |or
+		..accept Kuo-Na Quillpaw##30731 |daily |or
+		..accept Ellia Ravenmane: Revenge##30732 |daily |or
+		..accept Tukka-Tuk##30733 |daily |or
+		..accept Huck Wheelbarrow##30734 |daily |or
+		..accept Mindel Sunspeaker##30735 |daily |or
+		..accept Yan Quillpaw##30736 |daily |or
+		..accept Fat Long-Fat: Rematch##30737 |daily |or
+		..accept Thelonius##30738 |daily |or
+		..accept Ellia Ravenmane: Redemption##30739 |daily |or
+		|only if not achieved(7287)
+	step
+		goto 31.3,63.4
+		.talk Thelonius##60506
+		..turnin Students of Chi-Ji##30718 |daily
+		..turnin Champion of Chi-Ji##30740 |daily
+		|only if achieved(7287)
+		|next "end"
+	step
+		goto 32.0,70.7
+		.talk Fat Long-Fat##60534 |tip He is on the very top of this building.
+		.' Let's fight!
+		.' Defeat Fat Long-Fat |q 30728/1
+	step
+		goto 31.8,71.2
+		.talk Ellia Ravenmane##60530
+		.' Let's fight!
+		.' Defeat Ellia Ravenmane |q 30725/1
+	step
+		goto 32.1,69.9
+		.talk Mindel Sunspeaker##60541
+		.' Let's fight!
+		.' Defeat Mindel Sunspeaker |q 30735/1
+	step
+		goto 32.0,76.5
+		.talk Minh Do-Tan##60532
+		.' Let's fight!
+		.' Defeat Minh Do-Tan |q 30726/1
+	step
+		goto 34.1,75.1
+		.talk Tukka-Tuk##60539
+		.' Let's fight!
+		.' Defeat Tukka-Tuk |q 30733/1
+	step
+		goto 36.4,75.6
+		.talk Ellia Ravenmane##60545
+		.' Let's fight!
+		.' Defeat Ellia Ravenmane |q 30739/1
+	step
+		goto 31.7,80.3
+		.talk Dextrous Izissha##60536
+		.' Let's fight!
+		.' Defeat Dextrous Izissha |q 30730/1
+	step
+		goto 34.8,82.6
+		.talk Fat Long-Fat##60543
+		.' Let's fight!
+		.' Defeat Fat Long-Fat |q 30737/1
+	step
+		goto 36.6,74.8
+		.talk Kuo-Na Quillpaw##60537
+		.' Let's fight!
+		.' Defeat Kuo-Na Quillpaw |q 30731/1
+	step
+		goto 35.2,75.1
+		.talk Ellia Ravenmane##60533
+		.' Let's fight!
+		.' Defeat Ellia Ravenmane |q 30727/1
+	step
+		goto 28.9,75.5
+		.talk Julia Bates##60535
+		.' Let's fight!
+		.' Defeat Julia Bates |q 30729/1
+	step
+		goto 27.9,70.3
+		.talk Huck Wheelbarrow##60540
+		.' Let's fight!
+		.' Defeat Huck Wheelbarrow |q 30734/1
+	step
+		goto 36.5,76.2
+		.talk Yan Quillpaw##60542
+		.' Let's fight!
+		.' Defeat Yan Quillpaw |q 30736/1
+	step
+		goto 34.5,83.3
+		.talk Ellia Ravenmane##60538
+		.' Let's fight!
+		.' Defeat Ellia Ravenmane |q 30732/1
+	step
+		goto 28.8,72.4
+		.talk Thelonius##60544
+		.' Let's fight!
+		.' Defeat Thelonius |q 30738/1
+	step
+		goto 31.3,63.4
+		.talk Thelonius##60506
+		..turnin Ellia Ravenmane##30725 |daily |or
+		..turnin Minh Do-Tan##30726 |daily |or
+		..turnin Ellia Ravenmane: Rematch##30727 |daily |or
+		..turnin Fat Long-Fat##30728 |daily |or
+		..turnin Julia Bates##30729 |daily |or
+		..turnin Dextrous Izissha##30730 |daily |or
+		..turnin Kuo-Na Quillpaw##30731 |daily |or
+		..turnin Ellia Ravenmane: Revenge##30732 |daily |or
+		..turnin Tukka-Tuk##30733 |daily |or
+		..turnin Huck Wheelbarrow##30734 |daily |or
+		..turnin Mindel Sunspeaker##30735 |daily |or
+		..turnin Yan Quillpaw##30736 |daily |or
+		..turnin Fat Long-Fat: Rematch##30737 |daily |or
+		..turnin Thelonius##30738 |daily |or
+		..turnin Ellia Ravenmane: Redemption##30739 |daily |or
+		|only if not achieved(7287)
+		|next "end"
+////Not always here,
+	step
+	label serpent
+		goto The Jade Forest 53.9,61.9
+		.talk Elder Sage Tai-Feng##57324
+		..turnin Attack At The Temple of the Jade Serpent##31376 |only if havequest(31376)
+		..accept Arrows of Fortune##30065 |daily |or
+		..accept Hidden Power##30066 |daily |or
+		..accept The Darkness Around Us##30006 |daily |or
+	step
+		goto 53.9,61.9
+		.talk Elder Sage Storm-Sing##57319
+		..accept Behind the Masks##30063 |daily
+		..accept Saving the Sutras##30064 |daily
+		'Click here if he has no quests today. |confirm
+	step
+		goto 56.5,53.6
+		.click Ancient Sutra
+		.get 6 Ancient Sutra##77432 |q 30064/1
+		|only if havequest(30064)
+	step
+		goto 55.3,57.4
+		.from Final Doubt##57330+, Lingering Doubt##57396+ |only if havequest(30063)
+		.get 8 Mask of Doubt##77419+ |q 30063/1 |only if havequest(30063)
+		.click Defender's Arrow |only if havequest(30065)
+		.get 10 Defender's Arrow##77452+ |q 30065/1 |only if havequest(30065)
+		.' Use the Stack of Mantras in your bags on Yu'lon Adepts and Yu'lon Guardians |use Stack of Mantras##77475 |only if havequest(30066)
+		.' Deliver 6 Ancient Mantras |q 30066/1 |only if havequest(30066)
+		|modelnpc Yu'lon Guardian##57400
+		|modelnpc Yu'lon Adept##57316
+	step
+		goto 53.4,54.2
+		.from Final Doubt##57330+, Lingering Doubt##57396+, Shadow Of Doubt##57389
+		.' Kill 15 Sha Invaders |q 30006/1
+		|only if havequest(30006)
+	step
+		goto 53.9,61.9
+		.talk Elder Sage Storm-Sing##57319
+		..turnin Behind the Masks##30063
+		..turnin Saving the Sutras##30064 
+	step
+		goto The Jade Forest 53.9,61.9
+		.talk Elder Sage Tai-Feng##57324
+		..turnin Arrows of Fortune##30065 
+		..turnin Hidden Power##30066
+		..turnin The Darkness Around Us##30006
+		..accept Flames of the Void##30068 |daily
+		..accept The Shadow of Doubt##30067 |daily
+		'Click here if he has no quests today. |confirm
+	step
+		goto 57.5,62.3
+		.kill Shadow of Doubt##57389 |q 30067/1
+		|only if havequest(30067)
+	step
+		goto 54.1,60.9
+		.clicknpc War Serpent##57871
+		.' Ride the War Serpent |invehicle
+		|only if havequest(30068)
+	step
+		'Fly around the Jade Temple Grounds and extinguish Void Flames. |tip they look like black fire.
+		.' If you run out of water you can refill it in the river [53.9,58.0]
+		.' Douse 6 Void Flames |q 30068/1
+		|only if havequest(30068)
+	step
+		goto 53.9,61.9
+		.' Click the Leave Vehicle button. |outvehicle
+		|only if havequest(30068)
+	step
+		goto 53.9,61.9
+		.talk Elder Sage Tai-Feng##57324
+		..turnin The Shadow of Doubt##30067
+		..turnin Flames of the Void##30068
+		|next "end"
+/// Temple of the White Tiger. Not giving rep for August Celstials.
+	step
+	label tiger
+		goto Kun-Lai Summit 67.2,55.9
+		.talk Xuen##60968
+		..turnin Trial At The Temple of the White Tiger##31381 
+		|only if havequest(31381)
+	step
+		goto 67.2,55.9
+		.talk Xuen##60968
+		..accept Round 1: Brewmaster Chani##30879 |daily |or
+		..accept Round 1: The Streetfighter##30880 |daily |or 
+		..accept Contending With Bullies##31517 |daily |tip This quest may not be available.
+		|confirm
+	step
+		goto 71.1,55.8
+		.kill Shonuf##64757 |q 31517/1
+		|only if havequest(31517)
+	step
+		goto 71.0,51.8
+		.talk Brewmaster Chani##60996
+		.' Challenge her. |tip She has a lot of health but isn't too difficult to kill. She will toss Bitter Brew on the ground, so kite her out of it. She also has an AoE cone called The Steamer, you can avoid this by either moving out of it, or interrupting the channel.
+		.'Defeat Brewmaster Chani |q 30879/1
+		|only if havequest(30879)
+	step
+		goto 71.0,51.8
+		.talk Lun-Chi##60994
+		.' Challenge her.
+		.' Defeat The Streetfighter |q 30880/1
+		|only if havequest(30880)
+	step
+		goto 70.3,51.3
+		.talk Xuen##60968
+		..turnin Round 1: Brewmaster Chani##30879 
+		..turnin Round 1: The Streetfighter##30880 
+		..turnin Contending With Bullies##31517
+		..accept Round 2: Clever Ashyo & Ken-Ken##30881 |daily |or
+		..accept Round 2: Kang Bramblestaff##30882 |daily |or
+	step
+		goto 71.7,45.4
+		.talk Kang Bramblestaff##60978
+		.' Challenge him.
+		.' Defeat Kang Bramblestaff |q 30882/1
+		|only if havequest(30882)
+	step
+		goto 71.7,45.4
+		.talk Clever Ashyo##60980
+		.' Challenge him. |tip Kill Ken-Ken first as he is the weaker of the two. He will cast Ken-Ken Rampage causing him to whirlwind, when he does momentarily switch to Ashyo. Ashyo will summon Water Spouts and Healing Spheres. The Spheres are top priority and the Spouts are easily avoidable.
+		.' Defeat Clever Ashyo |q 30881/1
+		.' Defeat Ken-Ken |q 30881/2
+		|modelnpc Ken-Ken##60979
+		|only if havequest(30881)
+	step
+		goto 71.8,44.9
+		.talk Xuen##60968
+		..turnin Round 2: Clever Ashyo & Ken-Ken##30881 |daily
+		..turnin Round 2: Kang Bramblestaff##30882 |daily
+		..accept Round 3: The Wrestler##30883 |daily |or
+		..accept Round 3: Master Boom Boom##30885 |daily |or
+	step
+		goto 66.7,46.5
+		.talk Master Boom Boom##61013
+		.' Challenge him. |tip He will constantly toss Dynamite at you that will put a landmine on the ground if you walk over it. When he starts the fuse on his boom box, be out of the middle of the arena by the time it finishes.
+		.' Defeat Master Boom Boom |q 30885/1
+		|only if havequest(30885)
+	step
+		goto 66.7,46.5
+		.talk The Wrestler##60997
+		.' Challenge him. |tip Click on the chairs around the room to increase your damage and cause The Wrestler to be stunned for 10 seconds. If you space these out enough, you could potentially kill him before he can hurt you. Periodically he will grapple and throw you, it does not do much damage but it prevents control of your character. Finally, he uses a Sling Sweat ability which puts a blue puddle on the ground that reduces your movement speed and does damage.
+		.' Defeat The Wrestler |q 30883/1
+		|only if havequest(30883)
+	step
+		goto 66.4,46.3
+		.talk Xuen##60968
+		..turnin Round 3: The Wrestler##30883 |daily
+		..turnin Round 3: Master Boom Boom##30885 |daily
+		..accept Round 4: The P.U.G.##30907 |daily |or
+		..accept Round 4: Master Windfur##30902 |daily |or
+	step
+		goto 68.8,43.8
+		.talk Master Windfur##61012
+		.' Challenge him.
+		.' Defeat Master Windfur. |q 30902/1
+		|only if havequest(30902)
+	step
+		'Enter the building and go to [69.0,43.7]
+		.talk Healiss##61004
+		.' Challenge him. |tip Defeat the P.U.G. by first kill Healiss. He will attempt to run away and only has one healing spell that he may try to use, it is called Jungle Remedy, save Interrupts and Stuns for this ability. Next deal with Tankiss, he has more health but is a greater threat than Hackiss, his only ability is called Ground Pummel which will knock you can and deal some damage. Finally kill Hackiss, his only ability is Backstab. This will leave a small bleed on you.
+		.' Defeat Hackiss |q 30907/1
+		.' Defeat Healiss |q 30907/2
+		.' Defeat Tankiss |q 30907/3
+		|modelnpc Hackiss##61007
+		|modelnpc Tankiss##61006
+		|only if havequest(30907)
+	step
+		goto 68.5,44.6
+		.talk Xuen##60968
+		..turnin Round 4: The P.U.G.##30907 |daily
+		..turnin Round 4: Master Windfur##30902 |daily
+	step
+		goto Kun-Lai Summit 68.5,56.5
+		.talk Lin Tenderpaw##60981
+		..accept The Torch of Strength##31492
+		.' Click here if this quest is unavailable |confirm |next "end"
+	step
+		'For this quest you must go up the path, avoiding all of the tornadoes that roam around. If you mount, or touch a tornado, you will have to go back to Lin and start the quest over.
+		|confirm
+	step
+		goto 69.6,53.0 |n
+		.' Enter the first temple here. |goto 69.6,53.0 |noway |c
+	step
+		goto 66.9,51.2 |n
+		.' Enter the second temple here. |goto 66.9,51.2 |noway |c
+	step
+		goto 68.6,46.6
+		.' Click _The Strong Brazier_ to light it.
+		.' Light the Strong Brazier |q 31492/1
+	step
+		goto Kun-Lai Summit 68.5,56.5
+		.talk Lin Tenderpaw##60981
+		..turnin The Torch of Strength##31492
+		|next "end"
+/// Niuzao Temple. Possible unlock hub at revered.
+	step
+	label ox
+		goto Townlong Steppes 39.3,62.3
+		.talk Ogo the Elder##61580
+		..turnin Defense At Niuzao Temple##31383 |only if havequest(31383)
+		..accept The Siege Swells##30956 |daily |or
+		..accept The Unending Siege##30952 |daily |or
+	step
+		goto 39.3,62.3
+		.talk Ogo the Younger##61581
+		..accept The Big Guns##30959 |daily |or
+		..accept A Blade is a Blade##30954 |daily |or
+	step
+		goto 39.2,62.1
+		.talk Yak-Keeper Kyana##61585
+		..accept Fallen Sentinels##30953 |daily
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 39.4,61.9
+		.talk Sentinel Commander Qipan##61584
+		..accept The Overwhelming Swarm##30957 |daily
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 38.9,62.4
+		.talk High Adept Paosha##61583
+		..accept In Battle's Shadow##30958 |daily |or
+		..accept Paying Tribute##30955 |daily |or
+	step
+		'The following can all be done around Niuzao Temple:
+		.' Use your Pot of Fire on Sra'thik War Wagons |use Pot of Fire##82346 |modelnpc Sra'thik War Wagon##61510 |only if havequest(30959)
+		.' Cause 3 Sri'thik War Wagons to explode. |q 30959/1 |only if havequest(30959)
+		.from Sra'thik Swiftclaw##61508+, Sra'thik Warcaller##61502+, Sra'thik Fleshrender##61514+ |only if havequest(30956)
+		.' Kill 25 Sri'thik attackers |q 30956/1 |only if havequest(30956)
+		.kill 4 Sra'thik Kunchong##61509+ |q 30957/1 |only if havequest(30957)
+		.click Loose Brick |only if havequest(30958)
+		.' Throw 10 Loose Stones up to Niuzao Stonemasons |q 30958/1 |only if havequest(30958)
+		.' Use your Yak's Milk Flask on Wounded Niuzao Sentinels. |use Yak's Milk Flask##82381 |tip Normal healing spells will also heal the Sentinels if you have them. |only if havequest(30953)
+		.' Heal 8 Niuzao Sentinels |q 30953/1 |only if havequest(30953)
+		.click Niuzao Food Supply |only if havequest(30955)
+		.' Gather 6 Food for Niuzao |q 30955/1 |only if havequest(30955)
+		.from Sra'thik Warcaller##61502+, Sra'thik Swiftclaw##61508+ |only if havequest(30952)
+		.' Kill 12 Sra'thik attackers |q 30952/1 |only if havequest(30952)
+		.click Sra'thik Weapon |tip After you kill a Sra'thik a weapon may drop. |only if havequest(30954)
+		.get 10 Sra'thik Weapon##82353 |q 30954/1 |only if havequest(30954)
+	step
+		goto 39.3,62.3
+		.talk Ogo the Elder##61580
+		..turnin The Siege Swells##30956 |daily 
+		..turnin The Unending Siege##30952 |daily 
+	step
+		goto 39.3,62.3
+		.talk Ogo the Younger##61581
+		..turnin The Big Guns##30959 |daily 
+		..turnin A Blade is a Blade##30954 |daily 
+	step
+		goto 39.2,62.1
+		.talk Yak-Keeper Kyana##61585
+		..turnin Fallen Sentinels##30953 |daily 
+		..turnin In Battle's Shadow##30958 |daily 
+	step
+		goto 39.4,61.9
+		.talk Sentinel Commander Qipan##61584
+		..turnin The Overwhelming Swarm##30957 |daily
+	step
+		goto 38.9,62.4
+		.talk High Adept Paosha##61583
+		..turnin Paying Tribute##30955 |daily
+	step
+	label "end"
+		goto Vale of Eternal Blossoms 62.8,23.4
+		.talk Sage Lotusbloom##64001
+		.buy 1 Grand Commendation of the August Celestials##93224
+		.' Use the Commendation of the August Celestials you just purchased. |use Grand Commendation of the August Celestials##93224
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("August Celestials")>=Revered
+	step
+		'You have reached the end of this daily guide.
+		.' Click here to return to the start of the dailies. |next "startaug" |confirm
+]])
+
+ZygorGuidesViewer:RegisterInclude("Dominance_Offensive",[[
+	startlevel 90
+	step
+		'Proceeding to the Dominance Offensive Dailies  |next "dailies" |condition completedq(32108) |only if completedq(32108)
+		'Proceeding to the Dominance Offensive Prequests |next |condition not completedq(32108) |only if not completedq(32108)
+	step
+		goto Vale of Eternal Blossoms 61.5,19.8
+		'Click the quest discovered box under your minimap.
+		..accept Meet the Scout##32249
+	step
+		goto Krasarang Wilds 8.7,64.4
+		.talk Scout Rokla##67812
+		..turnin Meet the Scout##32249
+	step
+		goto Krasarang Wilds 8.7,64.4
+		.talk Garrosh Hellscream##62092
+		..accept The Might of the Warchief##32250
+	step
+		goto Krasarang Wilds 10.0,64.1
+		.from Alliance Sentinel##67900+, Alliance Footman##+, Alliance Priest##+
+		..' Kill 25 Alliance troops |q 32250/1
+	step
+		goto Krasarang Wilds 10.7,53.2
+		.talk Blood Guard Gro'tash##67927
+		..' Find Blood Guard Gro'tash |q 32250/2
+	step
+		goto Krasarang Wilds 15.7,57.8
+		.talk Grizzle Gearslip##67926
+		..' Find Grizzle Gearslip |q 32250/3
+	step
+		'Next to you
+		.talk Garrosh Hellscream##62092
+		..turnin The Might of the Warchief##32250
+		..accept Domination Point##32108
+	step
+		goto 8.5,63.8
+		.click Signal Fire
+		..turnin Domination Point##32108
+	step
+		goto Krasarang Wilds 9.7,52.5
+		.talk Kromthar##67785
+		.fpath Domination Point
+	step
+	label "dailies"
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..accept The Ruins of Ogudei##32449 |daily |or |next "ogudei"
+		..accept The Time is Now!##32450 |daily |or |next "lion"
+		..accept Flash! Aaaaaahhhh!##32235 |daily |or |next
+		.' If no quests are available, click here |confirm |next "cave"
+	step
+		goto Krasarang Wilds 10.2,53.6
+		.talk Brolic##67767
+		..accept Tear It Up##32126 |daily
+	step
+		goto Krasarang Wilds 10.3,55.6
+		.talk Shokia##56411
+		..accept Death on Two Legs##32123 |daily
+	step
+		goto Krasarang Wilds 11.8,57.6
+		.' Fly up in the air and throw your Bilgewater Molotovs at the Skyfire Gyrocopter X2s |use The Bilgewater Molotov##92019
+		.' Kill 6 Skyfire Gyrocopter X2s |q 32235/1
+	step
+		goto Krasarang Wilds 8.1,61.3
+		.click Alliance Supply Drop
+		.' Destroy 8 Alliance Supply Drops |q 32126/1
+	step
+		goto 9.9,64.2
+		.from Shieldwall Marine##+, Shieldwall Stormcaller##+,
+		.' Kill 10 Alliance Troops |q 32123/1
+	step
+		goto Krasarang Wilds 10.3,55.6
+		.talk Shokia##56411
+		..turnin Death on Two Legs##32123
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..turnin Tear It Up##32126
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Flash! Aaaaaahhhh!##32235
+		..accept Another One Bites the Dust##32128 |daily
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..accept All Dead, All Dead##32127 |daily
+	step
+		goto Krasarang Wilds 12.7,75.8
+		.from Captain Brent the Black##+ |tip On the second floor of the ship, towards the back.
+		..kill Captain Brent the Black |q 32127/1
+	step
+		goto Krasarang Wilds 12.3,75.6
+		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
+		.' Destroy the Defiant ammunition |q 32128/2
+	step
+		goto Krasarang Wilds 15.0,76.4
+		.from Captain Mulkey##+ |tip On the second floor of the ship, towards the back.
+		..kill Captain Mulkey |q 32127/2
+	step
+		goto Krasarang Wilds 15.1,76.6
+		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
+		.' Destroy the Valor's Edge ammunition |q 32128/1
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Another One Bites the Dust##32128
+	step
+		goto Krasarang Wilds 10.3,53.1
+		.talk Brolic##67767
+		..turnin All Dead, All Dead##32127
+		|next "end" |only if default
+		|next "exalted" |only if rep("Dominance Offensive")==Exalted
+	step
+	label "cave"
+		goto Krasarang Wilds 12.8,56.8
+		.click Bounty Board
+		..accept Wanted: Lieutenant Ethan Jacobson##32223 |daily |or
+		..accept Wanted: Chief Engineer Cogwrench##32222 |daily |or
+	step
+		goto Krasarang Wilds 13.0,56.2
+		.talk Rivett Clutchpop##67608
+		..accept Storming the Beach##32221 |daily |or
+		..accept Bilgewater Infiltrators##32214 |daily |or
+	step
+		goto Krasarang Wilds 13.7,55.8
+		.talk Duke##67562
+		..accept Krasarang Steampot##32199 |daily |or
+		..accept Mystery Meatloaf##32197 |daily |or
+	step
+		goto Krasarang Wilds 13.7,55.8
+		.talk Boss-Lady Trixel##67535
+		..accept Work Order: Iron##32140 |daily |or
+		..accept Work Order: Fuel##32136 |daily |or
+		..accept Work Order: Lumber##32138 |daily |or
+	step
+		goto Krasarang Wilds 9.9,60.8
+		.' Use the "New" and "Improved" Infared Heat Focals in your bags. |use "New" and "Improved" Infared Heat Focals##92475
+		.from SI:7 Saboteur##67689+
+		.' Kill 10 SI:7 Saboteurs |q 32214/1
+		|only if havequest(32214)
+	step
+		goto Krasarang Wilds 17.7,54.7
+		.from Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
+		.collect 5 Polluted Viseclaw Meat##91869 |q 32199/1
+		|only if havequest(32199)
+	step
+		goto Krasarang Wilds 15.9,65.1
+		.from Mature Terrapin##67895+, Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
+		.collect 7 Chunk of Mystery Meat##91874 |q 32197/1
+		|only if havequest(32197)
+	step
+		goto Krasarang Wilds 19.0,71.0
+		..kill Lieutenant Ethan Jacobson##68028 |q 32223/1
+		|only if havequest(32223)
+	step
+		 goto Krasarang Wilds 21.6,51.2
+		 ..kill Chief Engineer Cogwrench##68012 |q 32222/1
+		 |only if havequest(32222)
+	step
+		goto Krasarang Wilds 18.8,68.2
+		.from Shieldwall Marine##67354+
+		.from Dwarven Mortar Team Engineer##67545+
+		.from Shieldwall Stormcaller##67425+
+		.' Kill 10 Shieldwall Forces |q 32221/1
+		|only if havequest(32221)
+	step
+		goto Krasarang Wilds 20.5,58.1
+		.talk Zino "The Shredder" Quickchop##67534
+		..turnin Work Order: Lumber##32138
+		..accept Stacked!##32139
+		|only if havequest(32138) or completedq(32138)
+	step
+		goto Krasarang Wilds 22.6,62.3
+		.talk Daxil "The Gem" Oregrind##67537
+		..turnin Work Order: Iron##32140
+		..accept Power Metal##32141 |daily
+		|only if havequest(32140) or completedq(32140)
+	step
+		goto Krasarang Wilds 25.5,60.4
+		.talk Grizzle Gearship##67542
+		..turnin Work Order: Fuel##32136
+		..accept Runnin' On Empty##32137
+		|only if havequest(32136) or completedq(32136)
+	step
+		goto Krasarang Wilds 20.6,58.1
+		.talk Bixy Buzzsaw##67533
+		..accept Universal Remote-Explode##32238
+		|only if completedq(32238)
+	step
+		goto Krasarang Wilds 25.3,60.4
+		.talk Bixy Buzzsaw##67553
+		..accept Precious Resource##32237
+		|only if completedq(32136)
+	step
+		goto Krasarang Wilds 22.4,62.2
+		.talk Bixy Buzzsaw##67553
+		..accept Bug Off!##32236 |daily
+		|only if completedq(32140)
+	step
+		goto Krasarang Wilds 20.2,60.7
+		.click Domination Point Lumber## |only if havequest(32139)
+		.collect 9 Domination Point Lumber |q 32139/1 |only if havequest(32139)
+		'Use your Universal Remote on Shieldwall Mecha-Pounders to weaken them. |use Universal Remote##91902 |only if havequest(32238)
+		.kill Shieldwall Mecha-Pounder##68011 |q 32238/1 |only if havequest(32238)
+		|only if havequest(32139) or havequest(32238)
+	step
+		goto Krasarang Wilds 23.5,56.4
+		.click Fauly Valve
+		.' Tighten 8 Faulty Valves |q 32237/1
+		|only if havequest(32237)
+	step
+		goto Krasarang Wilds 26.5,63.2
+		.click "Distilled" Fuel Barrel
+		..get 9 "Distilled" Fuel Barrel |q 32137/1
+		|only if havequest(32137)
+	step
+		goto Krasarang Wilds 19.9,62.5
+		'Use your Hand-Dandy Bug Off Sprayer on _Agitated Shale Spiders_ to spawn Shale Shards |use Hand-Dandy Bug Off Sprayer##93026 |only if havequest(32236)
+		.' Spray 5 Agitated Shale Spiders |q 32236/1 |only if havequest(32236)
+		.kill 12 Shale Shards##68653+ |q 32236/2 |only if havequest(32236)
+		'Click _Energized Iron_ deposits on the sides of the cave to spawn Energized Iron Ore Chunks. |only if havequest(32141)
+		.click Energized Iron Ore Chunk |only if havequest(32141)
+		.get 7 Energized Iron Ore Chunk |q 32141/1 |only if havequest(32141)
+		|modelnpc Agitated Shale Spider##67759 |only if havequest(32236)
+		|only if havequest(32236) or havequest(32141)
+	step
+		goto Krasarang Wilds 20.6,58.1
+		.talk Bixy Buzzsaw##67533
+		..accept Universal Remote-Explode##32238
+		|only if havequest(32238)
+	step
+		goto Krasarang Wilds 20.5,58.1
+		.talk Zino "The Shredder" Quickchop##67534
+		..turnin Stacked!##32139
+		|only if havequest(32139)
+	step
+		goto Krasarang Wilds 22.4,62.2
+		.talk Bixy Buzzsaw##67553
+		..turnin Bug Off!##32236 
+		|only if havequest(32236)
+	step
+		goto Krasarang Wilds 25.3,60.4
+		.talk Bixy Buzzsaw##67553
+		..turnin Precious Resource##32237
+		|only if havequest(32237)
+	step
+		goto Krasarang Wilds 26.0,58.1
+		.talk Sezik Steampot##67536
+		..turnin Krasarang Steampot##32199 |only if havequest(32199)
+		..turnin Mystery Meatloaf##32197 |only if havequest(32197)
+		|only if havequest(32199) or havequest(32197)
+	step
+		goto Krasarang Wilds 13.8,55.9
+		.talk Boss-Lady Trixel##67535
+		..turnin Power Metal##32141 |only if havequest(32141)
+		..turnin Runnin' On Empty##32137 |only if havequest(32137)
+		|only if havequest(32137) or havequest(32141)
+	step
+		goto Krasarang Wilds 13.0,56.1
+		.talk Rivett Clutchpop##67608
+		..turnin Storming the Beach##32221 |only if havequest(32221)
+		..turnin Bilgewater Infiltrators##32214 |only if havequest(32214)
+		|only if havequest(32214) or havequest(32221)
+	step
+		goto Krasarang Wilds 10.1,53.9
+		.talk Blood Guard Gro'tash##67880
+		..turnin Wanted: Lieutenant Ethan Jacobson##32223 |only if havequest(32223)
+		..turnin Wanted: Chief Engineer Cogwrench##32222 |only if havequest(32222)
+		|next "end" |only if default
+		|next "exalted" |only if rep("Dominance Offensive")==Exalted
+	step
+	label "lion"
+		goto Krasarang Wilds 75.9,34.4
+		.talk Shademaster Kiryn##67628
+		..turnin The Time is Now!##32450
+		..accept Hero Killer##32135 |daily
+		..accept Worker Harassment##32132 |daily
+		..accept Sentry Wards##32133 |daily
+	step
+		goto Krasarang Wilds 75.9,34.2
+		.talk Zazzix "Toasty" Sparkrocket##67402
+		..accept Good Luck, Have Fun##32130 |daily |or 2
+		..accept We Require More Minerals!##32131 |daily |or 2
+		..accept Hard Counter##32134 |daily |or 2
+	step
+		goto Krasarang Wilds 81.8,25.4
+		.from Thane Stonehearth##67636 |q 32135/1
+		|only if havequest(32135)
+	step
+		goto Krasarang Wilds 86.2,25.6
+		.click Town Hall Sentry Ward Location
+		.' Place the Sentry Ward in Town Hall |q 32133/1
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 86.1,33.1
+		.click Docks Sentry Ward Location
+		.' Place the Sentry Ward on the docks |q 32133/2
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 84.9,32.5
+		.kill 8 Dwarven Mortar Team Engineer##67545+ |q 32134/1
+		.kill 2 Dwarven Mortar Tube##67541+ |q 31234/2
+		|only if havequest(31234)
+	step
+		goto Krasarang Wilds 87.1,30.9 |n
+		.' Enter the Barracks here |goto Krasarang Wilds 87.1,30.9 |noway |c
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 87.7,32.7
+		.click Barracks Sentry Ward Location
+		.' Place the Sentry Ward in the Barracks |q 32133/3
+		|only if havequest(32133)
+	step
+		goto Krasarang Wilds 84.2,22.9
+		.from Shieldwall Peasant##67423+
+		..' Kill 30 Shieldwall Peasant |q 32132/1
+		|only if havequest(32132)
+	step
+		goto Krasarang Wilds 78.2,18.3
+		.from Shieldwall Engineer##67971
+		.click Animatable Stone
+		.collect 20 Animatable Stone##91823 |q 32131/1
+		|only if havequest(32131)
+	step
+		goto Krasarang Wilds 81.4,25.7
+		.from Shieldwall Footman##67304
+		.collect 10 Extra-Waxy Alliance Ears##92474 |q 32130/1
+		|only if havequest(32130)
+	step
+		goto Krasarang Wilds 75.9,34.2
+		.talk Zazzix "Toasty" Sparkrocket##67402
+		..turnin Good Luck, Have Fun##32130
+		..turnin We Require More Minerals!##32131
+		..turnin Hard Counter##32134
+	step
+		goto Krasarang Wilds 75.9,34.4
+		.talk Shademaster Kiryn##67628
+		..turnin Hero Killer##32135
+		..turnin Worker Harassment##32132
+		..turnin Sentry Wards##32133
+		|next "end" |only if default
+		|next "exalted" |only if rep("Dominance Offensive")==Exalted
+	step
+	label "ogudei"
+		goto Krasarang Wilds 76.3,34.1
+		.talk Belloc Brightblade##67847
+		..turnin The Ruins of Ogudei##32449
+		..accept Taking Advantage##32118 |daily
+	step
+		goto Krasarang Wilds 76.2,34.0 |n
+		'Click the portal to go to the Ruins of Ogudei |goto Krasarang Wilds/3 37.4,46.4,0.5
+		|only if havequest(32118)
+	step
+		goto Krasarang Wilds/3 36.1,42.1
+		.talk Kaelis Sunsoar##68274
+		..turnin Taking Advantage##32118
+	step
+		goto Krasarang Wilds/3 36.1,42.1
+		.talk Kaelis Sunsoar##68274
+		..accept The Spirit Trap##32342 |daily
+		..accept It Is A Mystery##32344 |daily
+		..accept Legacy of Ogudei##32120 |daily
+		..accept Ogudei's Lieutenants##32343 |daily
+		..accept Kick 'em While They're Down##32348 |daily
+	step
+		goto Krasarang Wilds/3 78.6,44.2 |n
+		.' Go up the path here. |goto Krasarang Wilds/3 78.6,44.2 |noway |c
+	step
+		'Walk around this cave and pay attention to your Anamoly Reader above your actionbars. This quest is like a "Hot & Cold" game, where the closer you get, the greater anamoly reading you get. Once you have 100%, you will automatically disperse the anamoly.
+		.' Disperse the anamoly |q 32344/1
+		|only if havequest(32344)
+	step
+		goto Krasarang Wilds/2 55.5,53.7
+		.from Spiritbound Brutalizer##68073+
+		.from Spiritbound Arcanist##68070+
+		.collect 5 Ancient Mogu Essence##92704 |q 32120/1
+		|only if havequest(32120)
+	step
+		goto Krasarang Wilds/2 74.1,29.7
+		.from Spirit Trap##68061+
+		..get 3 Spirit Trap |q 32342/1
+		|only if havequest(32342)
+	step
+		goto Krasarang Wilds/2 67.8,80.3
+		.from Gen-li, Twister of Words##68169+
+		.from Meng-do, Strength of Mountains##68170+
+		..collect Gen-Li's Essence##92736 |q 32343/1
+		..collect Meng-do's Essence##92735 |q 32343/1
+	step
+		goto Krasarang Wilds/2 56.7,38.7 |n
+		.' Go up the stairs here. |goto Krasarang Wilds/2 56.7,38.7 |noway |c
+	step
+		goto Krasarang Wilds/1 59.3,37.3
+		.from Shieldwall Footman##67304+, Shieldwall Rifleman##67297+, Lion's Landing Guard Captain##68310+
+		.' Kill 12 Lion's Landing Military |q 32348/1
+	step
+		goto Krasarang Wilds/3 36.2,41.2
+		.talk Kaelis Sunsoar##68274
+		..turnin The Spirit Trap##32342
+		..turnin It Is A Mystery##32344
+		..turnin Legacy of Ogudei##32120
+		..turnin Ogudei's Lieutenants##32343
+		..turnin Kick 'em While They're Down##32348
+		|next "end" |only if default
+		|next "exalted" |only if rep("Dominance Offensive")==Exalted
+	step
+	label "end"
+		'This is the end of this guide.
+		.' Click here to return to the beginning of the dailies |confirm |next "dailies"
+	step
+	label "exalted"
+		'Congratulations, you are now Exalted with the Dominance Offensive!
+]])
+
+ZygorGuidesViewer:RegisterInclude("Sturdy_Traps",[[
+	startlevel 90
+	step
+		'This guide will take you through the bonus quests for the Dominance Offensive.
+		'These quests do not offer any reputation, but they do offer Valor Points and the Lesser Charms of Good Fortune.
+		|confirm
+	step
+	label "menu"
+		'Click here to go purchase and accept the Sturdy Tiger Trap questline. |confirm |next "tiger"
+		.'_
+		'Click here to go purchase and accept the Sturdy Crane Snare questline. |confirm |next "crane"
+		.'_
+		'Click here to go purchase and accept the Sturdy Crab Crate questline. |confirm |next "crab"
+	step
+	label "tiger"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Tiger Trap##91822
+	step
+		'Click the _Sturdy Tiger Trap_ in your bags. |use Sturdy Tiger Trap##91822
+		..accept Beastmaster's Hunt: The Tiger##32162
+	step
+		goto Dread Wastes 51.6,67.4
+		.from Wasteland Yak##66549+, Wasteland Calf##66595
+		.collect 25 Unbruised Yak Haunch##91816 |q 32162/1
+	step
+		goto Krasarang Wilds 13.9,41.4
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Tiger##32162
+	step
+		goto Krasarang Wilds 13.8,41.2
+		.clicknpc Krasari Elder##67556
+		..accept Beastmaster's Quarry: The Tiger##32182
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Tiger##32182
+		|next "group"
+	step
+	label "crab"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Crab Crate##91822
+	step
+		'Click the _Sturdy Crab Crate_ in your bags. |use Sturdy Crab Crate##91822
+		..accept Beastmaster's Hunt: The Crab##32163
+	step
+		goto Krasarang Wilds 45.2,91.6
+		.from Unga Villager##60358+
+		..get 30 Funky Rotten Fish |q 32163/1
+	step
+		goto Krasarang Wilds 56.3,42.1
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Crab##32163
+	step
+		goto Krasarang Wilds 56.4,42.1
+		.click Captured Colossal Viseclaw
+		..accept Beastmaster's Quarry: The Crab##32183
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Crab##32183
+		|next "group"
+	step
+	label "crane"
+		goto Krasarang Wilds 10.7,53.6
+		.talk Ongrom Black Tooth##67751
+		.buy 1 Sturdy Crane Snare##91819
+	step
+		'Click the _Sturdy Crane Snare_ in your bags. |use Sturdy Crane Snare##91819
+		..accept Beastmaster's Hunt: The Crane##32161
+	step
+		goto Krasarang Wilds/0 34.5,71.2
+		.from Child of Chi-Ji##60616+
+		..get 5 Pristine Golden Crownfeather |q 32161/1
+	step
+		goto Krasarang Wilds/0 73.2,44.6
+		.from Great Crane##59763+
+		..get Pristine Jet Crownfeather##91815 |q 32161/2
+	step
+		goto Krasarang Wilds 56.3,42.1
+		.click Mount of Dirt##
+		..turnin Beastmaster's Hunt: The Crane##32161
+	step
+		goto Krasarang Wilds 56.4,42.1
+		.click Ancient Bloodcrown Crane##
+		..accept Beastmaster's Quarry: The Crane##32181
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin Beastmaster's Quarry: The Crane##32181
+		|next "group"
+	step
+	label group
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.' The dailies you have completed will determine which enemies are available to you to fight.
+		.' Click here to fight the _Ancient Bloodcrown Crane_. |confirm |next bc
+		.' Click here to fight the _Krasari Elder_. |confirm |next ke
+		.' Click here to fight the _Colossal Viseclaw_. |confirm |next cv
+	step
+	label bc
+		.' Tell him you would like to fight the Bloodcrown Crane.
+		.' During the fight, pay attention to the songs that it uses.
+		.' Some can be interrupted while others simply need to be avoided.
+		.from Ancient Bloodcrown Crane##67555
+		..accept Ancient's Fall##32167
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.turnin Ancient's Fall##32167
+		|next "end"
+	step
+	label ke
+		.' Tell him you would like to fight the Krasari Elder.
+		.' During the fight, you will want to stay close to it at _ALL TIMES_.
+		.' It will occassionally vanish, if you have a hunter simply put a flare out.
+		.from Krasari Elder##67556
+		..accept End of an Elder##32168
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		.turnin End of an Elder##32168
+		|next "end"
+	step
+	label cv
+		.' Tell him you would like to fight the Colossal Viseclaw.
+		.' During the fight, you will want to kite him around.
+		.' He will have a damage reduction buff that decreases while he moves.
+		.' If it reaches _0_, the buff will reset.
+		.from Colossal Viseclaw##67508
+		..accept A Colossal Victory##32169
+	step
+		goto Krasarang Wilds 12.6,62.7
+		.talk Jorn Skyseer##67447
+		..turnin A Colossal Victory##32169
+		|next "end"
+	step
+	label end
+		'You have reached the end of the guide.
+		.' Click here to go back to the beginning of the Traps guide. |next "menu"
+]])
+
 ZygorGuidesViewer:RegisterInclude("H_Tillers",[[
 	startlevel 90
 	step
@@ -19618,2679 +19122,3155 @@ ZygorGuidesViewer:RegisterInclude("H_Tillers",[[
 		.' Click here to go back to the beginning of the dailies section. |next "dailies" |confirm
 ]])
 
-ZygorGuidesViewer:RegisterGuideSorting({
-	"Leveling",
-	"Loremaster",
-	"Dailies",
-	"Events",
-	"Dungeons",
-	"Gear",
-	"Professions",
-	"Achievements",
-	"Pets & Mounts",
-	"Titles",
-	"Reputations",
-	"Macros",
-})
-
-ZygorGuidesViewer:RegisterInclude("Argent Tourney_Aspirant",[[
-		goto Icecrown,76.3,24.3
-		.talk Magister Edien Sunhollow##33542
-		..accept Up To The Challenge##13678
-	step
-		goto 76.3,24.4
-		.talk Magister Edien Sunhollow##33542
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13673 |daily |or
-		..accept A Worthy Weapon##13674 |daily |or
-		..accept The Edge of Winter##13675 |daily |or
-	step
-		goto 76.3,24.4
-		.talk Amariel Sunsworn##33658
-		..accept Training in the Field##13676 |daily
-	step
-		goto 76.2,24.4
-		.talk Galathia Brightdawn##33659
-		..accept Learning the Reins##13677 |daily
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..' Tell her you are glad to help
-		.get Ashwood Brand |q 13673/1
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13674
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13674/1
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13675
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13675/1
-	step
-		goto Icecrown,74.8,35.5
-		.from Vrykul Necrolord##31783+, Frostbrood Whelp##31718+
-		.kill 8 Icecrown Scourge |q 13676/1
-	step
-		goto 75.6,23.7
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Sunreaver Hawkstrider|invehicle |q 13677
-	step
-		goto 73.1,24.8
-		.' Target a Melee Target
-		.' If you don't want to kill your mount be sure to keep your Defend ability maxed out at 3 stacks
-		.' Use your Thrust ability to attack the target 5 times |q 13677/1
-	step
-		goto 72.9,25.1
-		.' Target a Charge Target from a distance
-		.' Use Shield-Breaker ability until you notice the targets Defend is gone
-		.' Use your Charge ability on the Charge Target 2 times |q 13677/3
-	step
-		goto 73.3,25.0
-		.' Target a Ranged Target from a distance
-		.' Use Shield-Breaker ability on Ranged Target to bring it's shields down
-		.' Use Shield-Breaker ability on Ranged Target twice, while it's shields are down|q 13677/2
-	step
-		goto 76.3,24.4
-		.talk Magister Edien Sunhollow##33542
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13673
-		..turnin A Worthy Weapon##13674
-		..turnin The Edge of Winter##13675
-	step
-		goto 76.3,24.4
-		.talk Amariel Sunsworn##33658
-		..turnin Training in the Field##13676
-	step
-		goto 76.2,24.4
-		.talk Galathia Brightdawn##33659
-		..turnin Learning the Reins##13677
-	step
-		'Make sure you have 15 Aspirant's Seals:
-		.get 15 Aspirant's Seal |q 13678/1 |tip If you do not have 15 Aspirant's Seals, keep repeating the daily quests in this guide section.  It takes 3 days of doing these Aspirant Rank dailies to get 15 Aspirant's Seals.
-	step
-		goto 76.3,24.4
-		.talk Magister Edien Sunhollow##33542
-		..turnin Up To The Challenge##13678
-]])
-
-ZygorGuidesViewer:RegisterInclude("Argent Tourney_Valiant",[[
-		goto Icecrown,76.3,24.4
-		.talk Magister Edien Sunhollow##33542
-		..accept The Aspirant's Challenge##13680
-	step
-		goto 71.8,20.0
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Sunreaver Hawkstrider|invehicle |q 13680
-	step
-		goto 71.4,19.6
-		.talk Squire David##33447
-		.' Tell him you are ready to fight!|tip Use your Defend ability on your hotbar to max your shield out at 3 charges before telling Squire David this.
-		.'An Argent Valiant runs up on a horse
-		.' Use the abilities on your hotbar to defeat the Argent Valiant|tip The best strategy to defeat the Argent Valiant is to always make sure your shield is up by using your Defend ability.  Then, use your Shield-Breaker ability to bring down the Argent Valiant's shield.  When his shield is down, use your Charge ability on him.  Keep repeating this process until he is defeated.
-		.' Defeat the Argent Valiant |q 13680/1
-	step
-		goto 76.3,24.4
-		.talk Magister Edien Sunhollow##33542
-		..turnin The Aspirant's Challenge##13680
-		..accept A Valiant Of Orgrimmar##13691 |only Orc
-		..accept A Valiant Of Sen'jin##13693 |only Troll
-		..accept A Valiant Of Thunder Bluff##13694 |only Tauren
-		..accept A Valiant Of Undercity##13695 |only Scourge
-		..accept A Valiant Of Silvermoon##13696 |only BloodElf
-	step
-		goto 76.5,24.6
-		.talk Mokra the Skullcrusher##33361
-		..turnin A Valiant Of Orgrimmar##13691
-		..accept The Valiant's Charge##13697
-		only Orc
-	step
-		goto 76.0,24.5
-		.talk Zul'tore##33372
-		..turnin A Valiant Of Sen'jin##13693
-		..accept The Valiant's Charge##13719
-		only Troll
-	step
-		goto 76.2,24.6
-		.talk Runok Wildmane##33403
-		..turnin A Valiant Of Thunder Bluff##13694
-		..accept The Valiant's Charge##13720
-		only Tauren
-	step
-		goto 76.5,24.2
-		.talk Deathstalker Visceri##33373
-		..turnin A Valiant Of Undercity##13695
-		..accept The Valiant's Charge##13721
-		only Scourge
-	step
-		goto 76.5,23.9
-		.talk Eressea Dawnsinger##33379
-		..turnin A Valiant Of Silvermoon##13696
-		..accept The Valiant's Charge##13722
-		only BloodElf
-	// ORC VALIANT RANK DAILY LOOP (BEGIN)
-	step
-		goto 76.5,24.6
-		.talk Mokra the Skullcrusher##33361
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13762 |daily |or
-		..accept A Worthy Weapon##13763 |daily |or
-		..accept The Edge Of Winter##13764 |daily |or
-		only Orc
-	step
-		goto 76.5,24.5
-		.talk Akinos##33405
-		..accept A Valiant's Field Training##13765 |daily
-		only Orc
-	step
-		goto 76.4,24.6
-		.talk Morah Worgsister##33544
-		..accept The Grand Melee##13767 |daily
-		..accept At The Enemy's Gates##13856 |daily
-		only Orc
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..get Ashwood Brand |q 13762/1
-		only Orc
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13763
-		only Orc
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13763/1
-		only Orc
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13764
-		only Orc
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13764/1
-		only Orc
-	step
-		goto Icecrown,48.9,71.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13856
-		only Orc
-	step
-		goto 50.1,74.8
-		.kill 15 Boneguard Footman##33438|q 13856/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
-		.kill 10 Boneguard Scout##33550 |q 13856/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
-		.kill 3 Boneguard Lieutenant##33429 |q 13856/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on them to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
-		only Orc
-	step
-		goto 49.1,71.4
-		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13856
-		only Orc
-	step
-		goto 44.3,54.2
-		.kill 10 Converted Hero##32255 |q 13765/1
-		only Orc
-	step
-		goto 75.5,24.0
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Orgrimmar Wolf|invehicle |q 13767
-		only Orc
-	step
-		goto 75.3,26.0
-		.' Talk to the riders on mounts of other Horde races
-		.' Tell them you are ready to fight!
-		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
-		.get 3 Mark of the Valiant |q 13767/1
-		only Orc
-	step
-		goto 76.5,24.6
-		.talk Mokra the Skullcrusher##33361
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13762
-		..turnin A Worthy Weapon##13763
-		..turnin The Edge Of Winter##13764
-		only Orc
-	step
-		goto 76.5,24.5
-		.talk Akinos##33405
-		..turnin A Valiant's Field Training##13765
-		only Orc
-	step
-		goto 76.4,24.6
-		.talk Morah Worgsister##33544
-		..turnin The Grand Melee##13767
-		..turnin At The Enemy's Gates##13856
-		only Orc
-	// ORC VALIANT RANK DAILY LOOP (END)
-	//
-	// TROLL VALIANT RANK DAILY LOOP (BEGIN)
-	step
-		goto 76.0,24.5
-		.talk Zul'tore##33372
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13768 |daily |or
-		..accept A Worthy Weapon##13769 |daily |or
-		..accept The Edge Of Winter##13770 |daily |or
-		only Troll
-	step
-		goto 76.0,24.6
-		.talk Shadow Hunter Mezil-kree##33540
-		..accept A Valiant's Field Training##13771 |daily
-		only Troll
-	step
-		goto 75.9,24.4
-		.talk Gahju##33545
-		..accept The Grand Melee##13772 |daily
-		..accept At The Enemy's Gates##13857 |daily
-		only Troll
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..' Tell her you are glad to help
-		.get Ashwood Brand |q 13768/1
-		only Troll
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13769
-		only Troll
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13769/1
-		only Troll
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13770
-		only Troll
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13770/1
-		only Troll
-	step
-		goto Icecrown,48.9,71.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13857
-		only Troll
-	step
-		goto 50.1,74.8
-		.kill 15 Boneguard Footman##33438|q 13857/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
-		.kill 10 Boneguard Scout##33550 |q 13857/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
-		.kill 3 Boneguard Lieutenant##33429 |q 13857/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
-		only Troll
-	step
-		goto 49.1,71.4
-		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13857
-		only Troll
-	step
-		goto 44.3,54.2
-		.kill 10 Converted Hero##32255 |q 13771/1
-		only Troll
-	step
-		goto 75.6,23.8
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Darkspear Raptor|invehicle |q 13772
-		only Troll
-	step
-		goto 75.3,26.0
-		.' Talk to the riders on mounts of other Horde races
-		.' Tell them you are ready to fight!
-		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
-		.get 3 Mark of the Valiant |q 13772/1
-		only Troll
-	step
-		goto 76.0,24.5
-		.talk Zul'tore##33372
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13768
-		..turnin A Worthy Weapon##13769
-		..turnin The Edge Of Winter##13770
-		only Troll
-	step
-		goto 76.0,24.6
-		.talk Shadow Hunter Mezil-kree##33540
-		..turnin A Valiant's Field Training##13771
-		only Troll
-	step
-		goto 75.9,24.4
-		.talk Gahju##33545
-		..turnin The Grand Melee##13772
-		..turnin At The Enemy's Gates##13857
-		only Troll
-	// TROLL VALIANT RANK DAILY LOOP (END)
-	//
-	// TAUREN VALIANT RANK DAILY LOOP (BEGIN)
-	step
-		goto 76.2,24.6
-		.talk Runok Wildmane##33403
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13773 |daily |or
-		..accept A Worthy Weapon##13774 |daily |or
-		..accept The Edge Of Winter##13775 |daily |or
-		only Tauren
-	step
-		goto 76.3,24.7
-		.talk Dern Ragetotem##33539
-		..accept A Valiant's Field Training##13776 |daily
-		only Tauren
-	step
-		goto 76.1,24.6
-		.talk Anka Clawhoof##33549
-		..accept The Grand Melee##13777 |daily
-		..accept At The Enemy's Gates##13858 |daily
-		only Tauren
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..' Tell her you are glad to help
-		.get Ashwood Brand |q 13773/1
-		only Tauren
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13774
-		only Tauren
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13774/1
-		only Tauren
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13775
-		only Tauren
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13775/1
-		only Tauren
-	step
-		goto Icecrown,48.9,71.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13858
-		only Tauren
-	step
-		goto 50.1,74.8
-		.kill 15 Boneguard Footman##33438 |q 13858/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
-		.kill 10 Boneguard Scout##33550 |q 13858/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
-		.kill 3 Boneguard Lieutenant##33429 |q 13858/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
-		only Tauren
-	step
-		goto 49.1,71.4
-		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13858
-		only Tauren
-	step
-		goto 44.3,54.2
-		.kill 10 Converted Hero##32255 |q 13776/1
-		only Tauren
-	step
-		goto 75.5,24.3
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Thunder Bluff Kodo|invehicle |q 13777
-		only Tauren
-	step
-		goto 75.3,26.0
-		.' Talk to the riders on mounts of other Horde races
-		.' Tell them you are ready to fight!
-		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
-		.get 3 Mark of the Valiant |q 13777/1
-		only Tauren
-	step
-		goto 76.2,24.6
-		.talk Runok Wildmane##33403
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13773
-		..turnin A Worthy Weapon##13774
-		..turnin The Edge Of Winter##13775
-		only Tauren
-	step
-		goto 76.3,24.7
-		.talk Dern Ragetotem##33539
-		..turnin A Valiant's Field Training##13776
-		only Tauren
-	step
-		goto 76.1,24.6
-		.talk Anka Clawhoof##33549
-		..turnin The Grand Melee##13777
-		..turnin At The Enemy's Gates##13858
-		only Tauren
-	// TAUREN VALIANT RANK DAILY LOOP (END)
-	//
-	// SCOURGE VALIANT RANK DAILY LOOP (BEGIN)
-	step
-		goto 76.5,24.2
-		.talk Deathstalker Visceri##33373
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13778 |daily |or
-		..accept A Worthy Weapon##13779 |daily |or
-		..accept The Edge Of Winter##13780 |daily |or
-		only Scourge
-	step
-		goto 76.6,24.1
-		.talk Sarah Chalke##33541
-		..accept A Valiant's Field Training##13781 |daily
-		only Scourge
-	step
-		goto 76.5,24.3
-		.talk Handler Dretch##33547
-		..accept The Grand Melee##13782 |daily
-		..accept At The Enemy's Gates##13860 |daily
-		only Scourge
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..' Tell her you're glad to help
-		.get Ashwood Brand |q 13778/1
-		only Scourge
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13779
-		only Scourge
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13779/1
-		only Scourge
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13780
-		only Scourge
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13780/1
-		only Scourge
-	step
-		goto Icecrown,48.9,71.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13860
-		only Scourge
-	step
-		goto 50.1,74.8
-		.kill 15 Boneguard Footman##33438|q 13860/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
-		.kill 10 Boneguard Scout##33550 |q 13860/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
-		.kill 3 Boneguard Lieutenant##33429 |q 13860/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
-		only Scourge
-	step
-		goto 49.1,71.4
-		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13860
-		only Scourge
-	step
-		goto 44.3,54.2
-		.kill 10 Converted Hero##32255 |q 13781/1
-		only Scourge
-	step
-		goto 75.6,23.9
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Forsaken Warhorse|invehicle |q 13782
-		only Scourge
-	step
-		goto 75.3,26.0
-		.' Talk to the riders on mounts of other Horde races
-		.' Tell them you are ready to fight!
-		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
-		.get 3 Mark of the Valiant |q 13782/1
-		only Scourge
-	step
-		goto 76.5,24.2
-		.talk Deathstalker Visceri##33373
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13778
-		..turnin A Worthy Weapon##13779
-		..turnin The Edge Of Winter##13780
-		only Scourge
-	step
-		goto 76.6,24.1
-		.talk Sarah Chalke##33541
-		..turnin A Valiant's Field Training##13781
-		only Scourge
-	step
-		goto 76.5,24.3
-		.talk Handler Dretch##33547
-		..turnin The Grand Melee##13782
-		..turnin At The Enemy's Gates##13860
-		only Scourge
-	// SCOURGE VALIANT RANK DAILY LOOP (END)
-	//
-	// BLOOD ELF VALIANT RANK DAILY LOOP (BEGIN)
-	step
-		goto 76.5,23.9
-		.talk Eressea Dawnsinger##33379
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..accept A Blade Fit For A Champion##13783 |daily |or
-		..accept A Worthy Weapon##13784 |daily |or
-		..accept The Edge Of Winter##13785 |daily |or
-		only BloodElf
-	step
-		goto 76.4,23.8
-		.talk Kethiel Sunlance##33538
-		..accept A Valiant's Field Training##13786 |daily
-		only BloodElf
-	step
-		goto 76.5,23.9
-		.talk Aneera Thuron##33548
-		..accept The Grand Melee##13787 |daily
-		..accept At The Enemy's Gates##13859 |daily
-		only BloodElf
-	step
-		goto Grizzly Hills,61.2,50.3
-		.' Use the Warts-B-Gone Lip Balm|use Warts-B-Gone Lip Balm##44986
-		.' Target Lake Frogs
-		.' Use the emote /kiss on the Lake Frogs
-		.' Repeat this process until one of the Lake Frogs turns into the Maiden of Ashwood Lake
-		.talk Maiden of Ashwood Lake##33220
-		..' Tell her you are glad to help
-		.get Ashwood Brand |q 13783/1
-		only BloodElf
-	step
-		goto Icecrown,69.1,76.2
-		.click Winter Hyacinth##3231
-		.collect 4 Winter Hyacinth##45000 |q 13784
-		only BloodElf
-	step
-		goto Dragonblight,93.2,26.1
-		.' Use Winter Hyacinths in the water here|use Winter Hyacinth##45000
-		.' Listen to the Maiden of Drak'Mar
-		.click Blade of Drak'Mar##8564
-		.get Blade of Drak'Mar |q 13784/1
-		only BloodElf
-	step
-		goto Crystalsong Forest,54.5,74.9
-		.from Lord Everblaze##33289
-		.collect 1 Everburning Ember##45005 |q 13785
-		only BloodElf
-	step
-		goto Howling Fjord,42.2,19.7
-		.'Use the Everburning Ember on Maiden of Winter's Breath|use Everburning Ember##45005
-		.get Winter's Edge |q 13785/1
-		only BloodElf
-	step
-		goto Icecrown,48.9,71.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Campaign Warhorse|invehicle |q 13859
-		only BloodElf
-	step
-		goto 50.1,74.8
-		.kill 15 Boneguard Footman##33438|q 13859/1 |tip They are skeletons that walk around this area.  You can simply run over these with your horse, you don't need to target or attack them at all.
-		.kill 10 Boneguard Scout##33550 |q 13859/2 |tip They are gargoyles that fly around this area.  Use your Shield-Breaker ability on them, while also using your Defend ability to keep your shield maxed at 3 charges.
-		.kill 3 Boneguard Lieutenant##33429 |q 13859/3 |tip They ride horses around this area.  Use your Shield-Breaker ability on then to bring down their shields, then use your Charge ability on them.  Also, keep your shield maxed at 3 by using your Defend ability.  If they get too close, you can also use your Thrust ability to do a good amount of damage, but just remember to keep your shield maxed at 3 charges.
-		only BloodElf
-	step
-		goto 49.1,71.4
-		'Click the red arrow on your vehicle hot bar to stop riding the horse |outvehicle |q 13859
-		only BloodElf
-	step
-		goto 44.3,54.2
-		.kill 10 Converted Hero##32255 |q 13786/1
-		only BloodElf
-	step
-		goto 75.5,24.1
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Silvermoon Hawkstrider|invehicle |q 13787
-		only BloodElf
-	step
-		goto 75.3,26.0
-		.' Talk to the riders on mounts of other Horde races
-		.' Tell them you are ready to fight!
-		.' Fight and defeat them|tip Use your Defend ability to keep your shield maxed at 3 charges, then use your Shield-Breaker to lower the Valiants' shields, then use your Charge ability on them.  If they get close, use your Thrust ability, then use your Charge ability when they run away to get into Charge range.  Just remember to keep your shield maxed at 3 charges.
-		.get 3 Mark of the Valiant |q 13787/1
-		only BloodElf
-	step
-		goto 76.5,23.9
-		.talk Eressea Dawnsinger##33379
-		.' You will only be able to accept, and turn in, 1 of these 3 daily quests per day:
-		..turnin A Blade Fit For A Champion##13783
-		..turnin A Worthy Weapon##13784
-		..turnin The Edge Of Winter##13785
-		only BloodElf
-	step
-		goto 76.4,23.8
-		.talk Kethiel Sunlance##33538
-		..turnin A Valiant's Field Training##13786
-		only BloodElf
-	step
-		goto 76.5,23.9
-		.talk Aneera Thuron##33548
-		..turnin The Grand Melee##13787
-		..turnin At The Enemy's Gates##13859
-		only BloodElf
-	// BLOOF ELF VALIANT RANK DAILY LOOP (END)
-	step
-		'Make sure you have 25 Valiant Seals:
-		.get 25 Valiant's Seal |q 13697/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Orc
-		.get 25 Valiant's Seal |q 13719/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Troll
-		.get 25 Valiant's Seal |q 13720/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Tauren
-		.get 25 Valiant's Seal |q 13721/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only Scourge
-		.get 25 Valiant's Seal |q 13722/1 |tip If you do not have 25 Valiant's Seals, keep repeating the daily quests in this guide section.  It takes 5 days of doing these Valiant Rank dailies to get 25 Valiant's Seals. |only BloodElf
-	step
-		goto 76.5,24.6
-		.talk Mokra the Skullcrusher##33361
-		..turnin The Valiant's Charge##13697
-		..accept The Valiant's Challenge##13726
-		only Orc
-	step
-		goto 76.0,24.5
-		.talk Zul'tore##33372
-		..turnin The Valiant's Charge##13719
-		..accept The Valiant's Challenge##13727
-		only Troll
-	step
-		goto 76.2,24.6
-		.talk Runok Wildmane##33403
-		..turnin The Valiant's Charge##13720
-		..accept The Valiant's Challenge##13728
-		only Tauren
-	step
-		goto 76.5,24.2
-		.talk Deathstalker Visceri##33373
-		..turnin The Valiant's Charge##13721
-		..accept The Valiant's Challenge##13729
-		only Scourge
-	step
-		goto 76.5,23.9
-		.talk Eressea Dawnsinger##33379
-		..turnin The Valiant's Charge##13722
-		..accept The Valiant's Challenge##13731
-		only BloodElf
-	step
-		goto 72.2,22.5
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Orgrimmar Wolf|invehicle |q 13726
-		only Orc
-	step
-		goto 72.0,22.5
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Darkspear Raptor|invehicle |q 13727
-		only Troll
-	step
-		goto 71.9,22.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Thunder Bluff Kodo|invehicle |q 13728
-		only Tauren
-	step
-		goto 72.1,22.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Forsaken Warhorse|invehicle |q 13729
-		only Scourge
-	step
-		goto 72.2,22.4
-		.' Equip the Horde Lance in your bags|use Horde Lance##46070
-		.' Click to mount the Stabled Silvermoon Hawkstrider|invehicle |q 13731
-		only BloodElf
-	step
-		goto 68.6,21.0
-		.talk Squire Danny##33518
-		..' Tell him you are ready to fight!
-		.'An Argent Champion runs up on a horse
-		.' Use the abilities on your hotbar to defeat the Argent Champion|tip The best strategy to defeat the Argent Champion is to always make sure your shield is up by using your Defend ability.  Make sure your shield is stacked to 3 charges before you begin the fight.  When the fight begins, immediately use your Charge ability on the Argent Champion.  Stay in very close range and spam your Thrust ability.  Remember to keep your shield maxed at 3 charges, also.  Eventually, the Argent Champion will try to run away to get into Charge range.  When he starts to run away, start spamming your Charge ability until you charge him in the back, then get back into melee range and start spamming your Thrust ability again.  Keep repeating this process until he is defeated.
-		.' Defeat the Argent Valiant |q 13726/1 |only Orc
-		.' Defeat the Argent Valiant |q 13727/1 |only Troll
-		.' Defeat the Argent Valiant |q 13728/1 |only Tauren
-		.' Defeat the Argent Valiant |q 13729/1 |only Scourge
-		.' Defeat the Argent Valiant |q 13731/1 |only BloodElf
-	step
-		goto 76.5,24.6
-		.talk Mokra the Skullcrusher##33361
-		..turnin The Valiant's Challenge##13726
-		..accept A Champion Rises##13736
-		only Orc
-	step
-		goto 76.0,24.5
-		.talk Zul'tore##33372
-		..turnin The Valiant's Challenge##13727
-		..accept A Champion Rises##13737
-		only Troll
-	step
-		goto 76.2,24.6
-		.talk Runok Wildmane##33403
-		..turnin The Valiant's Challenge##13728
-		..accept A Champion Rises##13738
-		only Tauren
-	step
-		goto 76.5,24.2
-		.talk Deathstalker Visceri##33373
-		..turnin The Valiant's Challenge##13729
-		..accept A Champion Rises##13739
-		only Scourge
-	step
-		goto 76.5,23.9
-		.talk Eressea Dawnsinger##33379
-		..turnin The Valiant's Challenge##13731
-		..accept A Champion Rises##13740
-		only BloodElf
-	step
-		goto 69.7,22.9
-		.talk Justicar Mariel Trueheart##33817
-		..turnin A Champion Rises##13736 |only Orc
-		..turnin A Champion Rises##13737 |only Troll
-		..turnin A Champion Rises##13738 |only Tauren
-		..turnin A Champion Rises##13739 |only Scourge
-		..turnin A Champion Rises##13740 |only BloodElf
-		..accept The Scourgebane##13795 |only DeathKnight
-		..accept Eadric the Pure##13794 |only !DeathKnight
-	step
-		goto 73.8,20.1
-		.talk Crok Scourgebane##33762
-		..turnin The Scourgebane##13795
-		only DeathKnight
-	step
-		goto 70.0,23.4
-		.talk Eadric the Pure##33759
-		..turnin Eadric the Pure##13794
-		only !DeathKnight
-]])
-
-ZygorGuidesViewer:RegisterInclude("Shado_Pan_Daily_H",[[
-		'In order to begin gaining _Reputation_ with the _Shado-Pan_, you must first become Revered with the _Golden Lotus_.
-		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
-		.' Click here to begin working on the Shado-Pan after you have become revered with the Golden Lotus |confirm |next "startshado"
-	step
-	label golden
-		#include "Golden_Lotus_Revered"
-	step
-	label startshado
-		goto Vale of Eternal Blossoms 63.3,21.1
-		.talk Kai Kang##64002
-		..accept The Shado-Pan##31389
-		|only if not completedq(31389)
-	step
-		goto Townlong Steppes 49.0,70.4
-		.talk Ban Bearheart##62304
-		..turnin The Shado-Pan##31389
-		|only if not completedq(31389)
+ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
+	step
+		'Proceeding to Pre-Quests |next |only if default
+		'Proceeding to The Golden Lotus Dailies |next "dailies" |only if completedq(30638)
+	step
+		goto Kun-Lai Summit 72.0,94.2
+		.talk Wanderer Chu##64521
+		..accept Temple of the White Tiger##31393
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin Temple of the White Tiger##31393
+		..accept A Celestial Experience##31395
+	step
+		goto 68.9,42.8
+		'Talk to Xuen |q 31395/1 |modelnpc Xuen##64528
+		.from Spirit of Violence##64656
+		.' Pass the First Test |q 31395/2
+		.from Spirit of Anger##64684
+		.' Pass the Second Test |q 31395/3
+		.from Spirit of Hatred##64742
+		.' Pass the Third Test |q 31395/4
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin A Celestial Experience##31395
+		..accept A Witness to History##31511
+	step
+		goto 56.1,91.6
+		.talk Sunwalker Dezco##64853
+		.' Tell him there is only one way to find out. |q 31511/1
+	step
+		goto Vale of Eternal Blossoms 56.8,43.4
+		.talk Zhi the Harmonious##59905
+		..turnin A Witness to History##31511
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..accept The Shrine of Two Moons##30649
+	step
+		goto 61.3,22.0
+		.talk Mokimo the Strong##59959
+		.' Ask him how the refuges are settling in.
+		.' Speak to Mokimo the Strong. |q 30649/2
+	step
+		goto Shrine of Two Moons/1 68.4,47.7
+		.talk Madam Vee Luo##62996
+		.' Ask her what you can find in the city.
+		.' Speak to Madam Vee Luo. |q 30649/3
+	step
+		goto Vale of Eternal Blossoms 62.0,20.5
+		.talk Elder Liao##63996
+		.' Ask him what what this place is.
+		.' Speak to Elder Liao. |q 30649/4
+	step
+		goto Vale of Eternal Blossoms 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.' Ask him if he has seen anything suspicious.
+		.' Speak to Jaluu the Generous. |q 30649/1
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..turnin The Golden Lotus##30649
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Ruins of Guo-Lai##30632
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin The Ruins of Guo-Lai##30632
+		..accept Out with the Scouts##30633
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..accept Barring Entry##30634
+	step
+		goto 33.8,22.6
+		.talk Lao Softfoot##65252
+		.' Tell him you're ready to infiltrate the cave. |q 30634/1
+	step
+		'Follow Lao Softfoot up the hill. |tip Do not stray far from him, he will keep you stealthed as long as you are close.
+		.' Wait for the patrol to be at a safe distance and place the explosives at the mouth of the cave [27.6,15.3] |use Explosive Keg##80484
+		.' Explosives Planted |q 30634/2
+	step
+		goto 30.6,29.6
+		.kill 8 Shao-Tien Precursor##59914+ |q 30633/1
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..turnin Barring Entry##30634
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Out with the Scouts##30633
+		..accept Killing the Quilen##30635
+		..accept Stones of Power##30636
+	step
+		goto 22.5,27.0
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept The Guo-Lai Halls##30637
+	step
+		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
+	step
+		goto Vale of Eternal Blossoms/18 54.9,53.5
+		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
+		.kill Dagou##59977 |q 30637/1
+	step
+		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
+	step
+		goto Vale of Eternal Blossoms 21.6,30.6
+		.kill 9 Stone Guardian##59973+ |q 30635/1
+		.click Revelite Crystal
+		.get 7 Relelite Crystal##80511+ |q 30636/1
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Killing the Quilen##30635
+		..turnin Stones of Power##30636
+		..turnin The Guo-Lai Halls##30637
+		..accept Leaving an Opening##30638
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin Leaving an Opening##30638
 	step
 	label dailies
-		goto 49.3,71.0
-		'Click here if Master Snowdrift is the questgiver today |next |confirm |modelnpc 63009
-		.' He can be found here: [49.5,70.6]
-		'Click here if Ban Bearheart is the questgiver today |next "bearheart" |confirm |modelnpc 62304
-		.' He can be found here [49.0,70.5]
-		'Click here if Ling of the Six Pools is the questgiver today |next "ling" |confirm |modelnpc 63614
-		.' She can be found here: [49.0,71.3]
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009
-		..accept The Challenger's Ring: Chao the Voice##31127
-		|only if not completedq(31127)
-		|only if rep('Shado-Pan')>=Honored
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009
-		..accept The Challenger's Ring: Lao-Chin the Iron Belly##31128
-		|only if rep('Shado-Pan')>=Revered
-	step
-		goto 49.3,72.0
-		.talk Lao-Chin the Iron Belly##62978
-		.' I'm here to challenge you! |q 31128/1
-		|only if havequest(31128)
-	step
-		goto 50.6,67.8
-		.talk Lao-Chin the Iron Belly##63135
-		.' All right, let's do this!
-		.' Defeat Lao-Chin the Iron Belly |q 31128/2
-		|only if havequest(31128)
-	step
-		goto 49.6,70.5
-		.talk Master Snowdrift##63009
-		..turnin The Challenger's Ring: Lao-Chin the Iron Belly##31128
-		|only if havequest(31128)
-	step
-		goto 49.7,70.5
-		.talk Chao the Voice##62550
-		.' Tell her you're here to challenge her! |q 31127/1
-		|only if havequest(31127)
-	step
-		goto 50.1,68.3
-		.talk Chao the Voice##63125
-		.' Let's do this.
-		.' Defeat Chao the Voice |q 31127/2
-		|only if havequest(31127)
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009
-		..turnin The Challenger's Ring: Chao the Voice##31127
-		|only if havequest(31127)
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009 |tip You will only be able to accept 4 of the following dailies.
-		..accept Assault Fire Camp Gai-Cho##31113 |daily |or 4
-		..accept Assault Deadtalker's Plateau##31114 |daily |or 4
-		..accept The Enemy of My Enemy... Is Still My Enemy!##31119 |daily |or 4
-		..accept Spirit Dust##31116 |daily |or 4 
-		..accept The Deadtalker Cipher##31118 |daily |or 4
-	step
-		'Talk to Chao the Voice or Protector Yi and ask one of them to come with you. They will help you in combat and allow you to turnin your quests outside of this questing hub.|tip Yi patrols so you may need to search for him.
-		.' Chao the Voice at [49.7,70.5] |modelnpc 62550
-		.' Protector Yi at [49.3,71.3] |modelnpc 62546
+		.' You will only be able to accept 5 quests from the following NPCs.
 		|confirm
-		|only if not completedq(31128)
 	step
-		'Talk to Chao the Voice, Protector Yi or Lao-Chin the Iron Belly and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.|tip Yi patrols so you may need to search for him.
-		.' Chao the Voice at [49.7,70.5] |modelnpc 62550
-		.' Protector Yi at [49.3,71.3] |modelnpc 62546
-		.' Lao-Chin the Iron Belly at [49.3,71.9] |modelnpc 62978
+		goto Vale of Eternal Blossoms 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Eternal Vigil##30307 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..accept Stone Hard Quilen##30308 |daily |or 2
+		..accept Set in Stone##30309 |daily |or 2
+		..accept Thundering Skies##30310 |daily |or 2
+		..accept Crumbling Behemoth##31762 |daily |or 2
+		..accept Unleashed Spirits##31757 |daily |or 2 
+		..accept Striking First##31760 |daily |or 2
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..accept High Standards##30311 |daily |or
+		..accept Laosy Scouting##31758 |daily |or
+		..accept Cannonfire##31754 |daily |or
+		..accept High Chance of Rain##31756 |daily |or
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..accept Given a Second Chance##30312 |daily |or
+		..accept Free Spirits##30320 |daily |or
+		..accept Acts of Cruelty##31755 |daily |or
+	step
+		goto 39.7,26.0
+		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
+		.' [39.2,19.2]
+		.' [37.5,22.9]
+		.' [40.5,18.4]
+		.' [43.1,22.1]
+		.' [43.2,15.9] 
+		.' [47.5,19.1]
+		.' [50.5,23.6]
+		.' Rescue Lao Softfoot |q 31758/1
+		|only if havequest(31758)
+	step
+		goto 44.2,15.8
+		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
+		.' Shao-Tien Behemoth ritual stopped |q 31760/1
+		|modelnpc 58460
+		|only if havequest(31760)
+	step
+		goto 50.9,22.3
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Eastern Stormcaller |q 31756/1
+		|only if havequest(31756)
+	step
+		goto 47.8,19.1
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Northern Stormcaller |q 31756/2
+		|only if havequest(31756)
+	step
+		goto 43.1,27.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Southern Stormcaller |q 31756/3
+		|only if havequest(31756)
+	step
+		goto 36.8,18.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Western Stormcaller |q 31756/4
+		|only if havequest(31756)
+	step
+		goto 44.0,21.8
+		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
+		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
+		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
+		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
+		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
+		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
+		.' You can find more Unleashed Spirits at [46.9,34.3] |only if havequest(31757)
+		.kill 8 Granite Quilen##59157 |q 30308/1 |only if havequest(30308)
+		.click Golden Lotus Banner |only if havequest(30311)
+		.' Raise 6 Golden Lotus Standards |q 30311/1 |only if havequest(30311)
+		.click Soul Vortex |only if havequest(30320)
+		.clicknpc Captive Pandaren Soul##59231 |only if havequest(30320)
+		.' Free 15 Captive Pandaren Spirits |q 30320/1 |only if havequest(30320)
+		.kill Shao-Tien Behemoth |q 31762/1 |only if havequest(31762)
+		.' Use your Wu Kao Explosive near a Shao-Tien Cannon. |use Wu Kao Explosive##89123 |only if havequest(31754)
+		.' Destroy 7 Shao-Tien Cannons. |q 31754/1 |only if havequest(31754)
+	step
+		goto 52.3,28.8 
+		.' Use Shado-Pan Bandages on Wounded Defenders |use Shado-Pan Bandages##84242
+		.' Heal 6 Wounded Defenders |q 30312/1
+		|only if havequest(30312)
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..turnin Given a Second Chance##30312 |daily
+		..turnin Free Spirits##30320 |daily
+		..turnin Acts of Cruelty##31755 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..turnin Stone Hard Quilen##30308 |daily
+		..turnin Set in Stone##30309 |daily
+		..turnin Thundering Skies##30310 |daily
+		..turnin Crumbling Behemoth##31762 |daily
+		..turnin Unleashed Spirits##31757 |daily
+		..turnin Anji's Diplomacy##31760 |daily
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..turnin High Standards##30311 |daily
+		..turnin Laosy Scouting##31758 |daily
+		..turnin Cannonfire##31754 |daily
+		..turnin High Chance of Rain##31756 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin The Eternal Vigil##30307 |daily
+		..accept Whitepetal Lake##31131 |daily |or |next "whitepetal"
+		..accept Mistfall Village##31242 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31243 |daily |or |next "mistfall3"
+		.' If Leven has no available quests after turning in The Eternal Vigil click here. |confirm 
+	step
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..accept A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.4
+		.talk He Softfoot##58470
+		..accept The Silent Approach##30281 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..accept Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..accept Rude Awakenings##30292 |daily |or
+		..accept In Enemy Hands##30293 |daily |or
+	step
+		goto 43.4,42.9
+		.clicknpc Shao-Tien Ritual Statue##63090
+		.' Click all four statues and fight off whatever creature spawns to defend them.
+		.' Shao-Tien Ritual Statues destroyed |q 30283/1
+		|only if havequest(30283)
+	step
+		goto 45.2,41.7
+		.kill 8 Paleblade Flesheater##63082+ |q 30292/1 |only if havequest(30292)
+		.from Shao-Tien Mindbender##63129+, Shao-Tien Reclaimer##63081+ |only if havequest(30281)
+		.' Kill 10 Whitepetal mogu |q 30281/1 |only if havequest(30281)
+		.' Use the Shado-Pan Torch in your bags near the Shao-Tien Banners in this area. |use Shado-Pan Torch##84781 |only if havequest(30282)
+		.' Burn 10 Shao-Tien Banners |q 30282/1 |only if havequest(30282)
+		.' Rescue 8 Dominated Defenders by killing the Shao-Tien Mindbender's controlling them. |q 30293/1 |only if havequest(30293)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Silent Approach##30281 |daily
+		..accept The Soul-Gatherer##30482 |daily
+		.' Click here if this quest is unavailable |confirm |next "skipsoul"
+	step
+		goto 40.8,48.0
+		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
+		.get Soul-Gatherer's Beads |q 30482/1
+		|only if havequest(30482)
+	step
+		goto 56.6,43.2
+		.talk He Softfoot##58470
+		..turnin The Soul-Gatherer##30482
+	step
+	label skipsoul
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..turnin A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..turnin Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..turnin Rude Awakenings##30292 |daily
+		..turnin In Enemy Hands##30293 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..accept Behind Our Lines##31136 |daily |or |next "behind"
+		..accept The Ruins of Guo-Lai##31248 |daily |or |next "ruins"
+		..accept Setting Sun Garrision##31250 |daily |or |next "ssg"
+		..accept Mistfall Village##31249 |daily |or |next "mistfall"
+	step
+	label	"behind"
+		goto 69.2,54.8
+		.' Walk along this path until you find General Tamuja
+		.kill General Temuja##63101+ |q 31136/1
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..turnin Behind Our Lines##31136
+		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
+		|next |only if defualt
+	step
+		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
+		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
+		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
+		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ruins of Guo-Lai##31248 |only if havequest(31248)
+		..turnin The Ruins of Guo-Lai##31294 |only if havequest(31294)
+		..turnin Guo-Lai Infestation##31240 |only if havequest(31240)
+		..turnin The Ruins of Guo-Lai##31296 |only if havequest(31296)
+		..accept In Ashen Webs##30200 |daily 
+		..accept Troubling the Troublemakers##30228 |daily 
+		..accept Blood on the Rise##30226 |daily 
 		|confirm
-		|only if completedq(31128)
 	step
-		goto 63.4,43.3
-		.from Gai-Cho Yaungol##62552+, Gai-Cho Earthtalker##62553+, Gai-Cho Pitchthrower##62608+ |only if havequest(31113)
-		.' Kill 16 Gai-Cho Yaungol, Earthtalkers, or Pitchthrowers. |q 31113/1 |only if havequest(31113)
-		.click Highly Explosive Yaungol Oil Barrel |only if havequest(31119)
-		.collect Highly Explosive Yaungol Oil##84762 |n |tip You can only carry 10 at a time, so you may need to make multiple trips. |only if havequest(31119)
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..accept Hard as a Rock##30304 |daily |or
+		..accept That's Not a Rock!##30204 |daily |or
 	step
-		goto 60.2,48.6
-		'Use your Highly Explosive Yaungol Oil to kill as many enemies in this area as you can in 1 hit. |use Highly Explosive Yaungol Oil Barrel##84762
-		.from Gai-Cho Boltshooter##62589+, Gai-Cho Cauterizer##62577+, Gai-Cho Gatewatcher##62568+, Kri'thik Aggressor##62572+, Kri'thik Screecher##62602+
-		.' Kill 100 Gai-Cho Battledfired Combatants |q 31119/1
-		.' If you run out of oil, you can find more here [63.4,43.3]
-		|only if havequest(31119)
-	step
-		goto 51.1,51.8
-		.kill 8 Deadtalker Corpsedefiler##62677+ |q 31114/1 |only if havequest(31114)
-		.kill Deadtalker Crusher##62844 |q 31114/2 |tip He is elite but with your companion you should be able to defeat him. |only if havequest(31114)
-		.from Defiled Spirit##62679 |only if havequest(31116)
-		.collect Ancient Spirit Dust##84727 |n |only if havequest(31116)
-		.click Defiled Yaungol Remains |only if havequest(31116)
-		.' Return 8 Spirits to Their Remains |q 31116/1 |only if havequest(31116)
-	step
-		goto 51.1,51.8
-		.from Deadtalker Crusher##62844+, Deadtalker Corpsedefiler##62677+ |only if havequest(31118)
-		.get Ciphered Scroll##84759 |q 31118/1 |only if havequest(31118)
-	step
-		'Next to you will either be Chao the Voice or Protector Yi:
-		.'Talk to Chao the Voice |modelnpc 62550
-		.'Talk to Protector Yi |modelnpc 62546
-		..turnin Assault Fire Camp Gai-Cho##31113 |daily
-		..turnin Assault Deadtalker's Plateau##31114  |daily
-		..turnin The Enemy of My Enemy... Is Still My Enemy!##31119 |daily
-		..turnin Spirit Dust##31116 |daily
-		..turnin The Deadtalker Cipher##31118 |daily
-		|only if not completedq(31128)
-	step
-		'Next to you will either be Chao the Voice, Protector Yi, or Lao-Chin the Iron Belly:
-		.'Talk to Chao the Voice |modelnpc 62550
-		.'Talk to Protector Yi |modelnpc 62546
-		.'Talk to Lao-Chin the Iron Belly |modelnpc 62978
-		..turnin Assault Fire Camp Gai-Cho##31113 |daily
-		..turnin Assault Deadtalker's Plateau##31114  |daily
-		..turnin The Enemy of My Enemy... Is Still My Enemy!##31119 |daily
-		..turnin Spirit Dust##31116 |daily
-		..turnin The Deadtalker Cipher##31118 |daily
-		|only if completedq(31128)
-	step
-		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
-		..accept Uruk!##31117 |daily |or
-		..accept Cheng Bo!##31120 |daily |or
-	step
-		goto 50.4,48.9
-		.kill Uruk##62613 |q 31117/1
-	step
-		goto 60.7,42.1
-		.kill Cheng Bo##62554 |q 31120/1
-	step
-		goto 49.6,70.5
-		.talk Master Snowdrift##63009
-		..turnin Uruk!##31117 |daily |or
-		..turnin Cheng Bo!##31120 |daily |or
-		|next "end"
-///New questgiver today?
-	step
-	label bearheart
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..accept The Challenger's Ring: Snow Blossom##31038
-		|only if not completedq(31038)
-		|only if rep('Shado-Pan')>=Honored
-	step
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..accept The Challenger's Ring: Yalia Sagewhisper##31104
-		|only if rep('Shado-Pan')>=Revered
-	step
-		goto 48.9,70.1
-		.talk Snow Blossom##62380
-		.' Ask her to meet in the Challenger's Ring. |q 31038/1
-		|only if havequest(31038)
-	step
-		goto 50.2,67.9
-		.talk Snow Blossom##62834
-		.' I challenge you!
-		.' Defeat Snow Blossom |q 31038/2
-		|only if havequest(31038)
-	step
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..turnin The Challenger's Ring: Snow Blossom##31038
-		|only if havequest(31038)
-	step
-		goto 48.9,70.0
-		.talk Yalia Sagewhisper##62303
-		.' Ask her to meet you in the Challenger's Ring. |q 31104/1
-		|only if havequest(31104)
-	step
-		goto 50.4,67.7
-		.talk Yalia Sagewhisper##62850
-		.' I challenge you!
-		.' Defeat Yalia Sagewhisper |q 31104/2
-		|only if havequest(31104)
-	step
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..turnin The Challenger's Ring: Yalia Sagewhisper##31104
-		|only if havequest(31104)
-	step
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..accept The Mogu Menace##31105 |daily |or 4
-		..accept The Mogu Menace##31106 |daily |or 4
-		..accept The Mogu Menace##31039 |daily |or 4
-		..accept Bronze Claws##31044 |daily |or 4
-		..accept Illusions Of The Past##31045 |daily |or 4
-		..accept Grave Consequences##31048 |daily |or 4
-		..accept Dark Arts##31043 |daily |or 4
-		..accept Onyx Hearts##31042 |daily |or 4
-		..accept Born Free##31047 |daily |or 4
-		..accept Spiteful Sprites##31040 |daily |or 4
-		..accept Egg Rescue!##31041 |daily |or 4
-		..accept Little Hatchlings##31046 |daily |or 4
-	step
-		'Talk to Snow Blossom or Fei Li and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
-		.' Snow Blossom at [48.9,70.1] |modelnpc 62380
-		.' Fei Li at [48.8,70.2] |modelnpc 62354
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..accept Runelocked##30205 |daily 
+		..accept Runes in the Ruins##30206 |daily 
 		|confirm
-		|only if not completedq(31104)
 	step
-		'Talk to Snow Blossom, Fei Li, or Yalia Sagewhisper and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
-		.' Snow Blossom at [48.9,70.1] |modelnpc 62380
-		.' Fei Li at [48.8,70.2] |modelnpc 62354
-		.' Yalia Sagewhisper at [48.8,70.0] |modelnpc 62303
+		goto 31.2,31.0
+		.' Around this ruin there will be four blue runic symbols on the ground, walk over each of them to unlock the Ancient Mogu Artifact
+		.click Ancient Mogu Artifact
+		.get Ancient Mogu Artifact##85204 |q 30205/1
+		.' The relic may also be at [26.9,19.6]
+		|only if havequest(30205)
+	step
+		goto 30.7,20.4
+		.from Stonebark Trickster##58545 |only if havequest(30228)
+		.' Kill 8 Stonebark sprites |q 30228/1 |only if havequest(30228)
+		.from Shao-Tien Fist##65134+, Shao-Tien Sorcerer##65133+ |only if havequest(30226)
+		.' Kill 8 Ruin's Rise mogu. |q 30226/1 |only if havequest(30226)
+	step
+		goto 26.3,29.2
+		.click Mogu Statue |only if havequest(30304)
+		.from Mogu Statue##63447+ |only if havequest(30304)
+		.' Destroy 10 Mogu Statues |q 30304/1 |only if havequest(30304)
+		.from Ashweb Weaver##58459+, Ashweb Piercer##58475+ |only if havequest(30200)
+		.' Kill 10 Ashweb Spiders |q 30200/1 |only if havequest(30200)
+		.' Use your Shado-Pan Torch on the small rocks around this area. |use Shado-Pan Torch##85261 |only if havequest(30204)
+		.kill 50 Ashweb Hatchling##58568+ |q 30204/1 |only if havequest(30204)
+		.click Guo-Lai Runestone##6714 |only if havequest(30206)
+		.get 12 Guo-Lai Runestone |q 30206/1 |only if havequest(30206)
+		.' You can find more of the objectives in this step at [25.2,38.7]
+	step
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..turnin Hard as a Rock##30304 |daily 
+		..turnin That's Not a Rock!##30204 |daily 
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin In Ashen Webs##30200 |daily 
+		..turnin Troubling the Troublemakers##30228 |daily 
+		..turnin Blood on the Rise##30226 |daily 
+		..accept Wulon, the Granite Sentinel##30227 |daily |or 
+		..accept The Ashweb Matriarch##30225 |daily |or
+		..accept The Crumbling Hall##30277 |daily |or 
+		..accept The Thunder Below##30280 |daily |or
+	step
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..turnin Runelocked##30205 |daily 
+		..turnin Runes in the Ruins##30206 |daily 
+	step
+		goto Vale of Eternal Blossoms/18 77.6,72.9
+		.kill Wulon##63510 |q 30227/1
+		|only if havequest(30227)
+	step
+		goto Vale of Eternal Blossoms/18 75.7,47.9
+		.kill Bloodtip##58474 |q 30225/1 |tip Every 20% Bloodtip casts Call Swarmers which brings out many small spiders, they are easily killed and need to be killed immediately.
+		|only if havequest(30225)
+	step
+		goto 56.1,49.1
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
 		|confirm
-		|only if completedq(31104)
+		|only if havequest(30280)
 	step
-		goto 28.8,22.4
-		.talk Moshu the Arcane##62810
-		..accept Through the Portal##31110
-		|only if not completedq(31110)
+		goto Vale of Eternal Blossoms/19 53.9,68.3
+		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
+		|only if havequest(30280)
 	step
-		goto 32.8,25.1
-		.clicknpc Ball and Chain##62539 |only if havequest(31047)
-		.' Free 6 Wild Cloudriders |q 31047/1 |only if havequest(31047)
-		.click Shan'ze Cage |only if havequest(31046)
-		.' Free 20 Cloudrider Hatchlings. |q 31046/1 |only if havequest(31046)
-		.click Shiny Egg |only if havequest(31041)
-		.get 8 Cloudrunner Egg |q 31041/1 |only if havequest(31041)
-		|only if havequest(31041) or havequest(31046) or havequest(31047)
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 28.1,39.3 <5 |c
+		|only if havequest(30277)
 	step
-		goto 24.4,15.2
-		.kill 3 Shan'ze Illusionist##62440+ |q 31045/1|only if havequest(31045)
-		.click Shan'ze Tablet |only if havequest(31043)
-		.get 8 Shan'ze Tablet |q 31043/1 |only if havequest(31043)
-		.click Mogu Burial Urn |only if havequest(31048)
-		.kill 24 Shan'ze Ancestor##62285+ |q 31048/1 |only if havequest(31048)
-		.from Onyx Stormclaw##62448 |only if havequest(31042)
-		.get 4 Onyx Heart |q 31042/1 |only if havequest(31042)
+		goto Vale of Eternal Blossoms/18 36.0,36.6
+		.click Deactivate First Spirit Wall
+		.' Deactivate the First Spirit Wall |q 30277/1
+		|only if havequest(30277)
 	step
-		goto 28.5,18.5
-		.from Shan'ze Serpentbinder##62293+, Shan'ze Beastmaster##62530+ |only if havequest(31105) or havequest(31106) or havequest (31039)
-		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31105/1 |only if havequest(31105)
-		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31106/1 |only if havequest(31106)
-		.' Kill 12 Shan'ze Serpentbinders or Beastmasters |q 31039/1 |only if havequest(31039)
-		.from Bronze Quilen##62266+ |only if havequest(31044)
-		.get 20 Bronze Claw##83153+ |q 31044/1 |only if havequest(31044)
+		goto 23.2,28.9
+		.click Deactivate Second Spirit Wall
+		.' Deactivate the Second Spirit Wall |q 30277/2
+		|only if havequest(30277)
 	step
-		goto 23.0,19.5
-		.from Darkwoods Pixie##62268+, Darkwoods Charmer##62457+
-		.' Kill 30 Darkwoods Sprites or Darkwoods Charmers. |q 31040/1
-		|only if havequest(31040)
+		goto 41.6,18.4
+		.click Deactivate Final Spirit Wall
+		.' Deactivate the Final Spirit Wall |q 30277/3
+		|only if havequest(30277)
 	step
-		.from Shan'ze Serpentbinder##62293+, Shan'ze Illusionist##62440+, Shan'ze Ancestor##62285+, Shan'ze Beastmaster##62515+, Darkwoods Charmer##62520
-		.get 1000 Ancient Arcane Powder##84102+ |q 31110/1
-		|only if havequest(31110)
+		goto 49.4,30.6
+		.click Ancient Guo-Lai Artifact
+		.get Ancient Guo-Lai Artifact |q 30277/4
+		|only if havequest(30277)
 	step
-		'Next to you will either be Fei Li or Snow Blossom
-		.talk Fei Li##62354
-		.talk Snow Blossom##62380
-		..turnin The Mogu Menace##31105 |daily
-		..turnin The Mogu Menace##31106 |daily
-		..turnin The Mogu Menace##31039 |daily
-		..turnin Bronze Claws##31044 |daily
-		..turnin Illusions Of The Past##31045 |daily
-		..turnin Grave Consequences##31048 |daily
-		..turnin Dark Arts##31043 |daily
-		..turnin Onyx Hearts##31042 |daily
-		..turnin Born Free##31047 |daily
-		..turnin Spiteful Sprites##31040 
-		..turnin Egg Rescue!##31041 
-		..turnin Little Hatchlings##31046 
-		..accept When The Dead Speak##31062 |daily |or
-		..accept Riding the Storm##31061 |daily |or
-		..accept In Sprite Of Everything##31049 |daily |or
-		|only if not completedq(31104)
+		goto Vale of Eternal Blossoms 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Thunder Below##30280 
+		|only if havequest(30280)
 	step
-		'Next to you will either be Fei Li, Snow Blossom, or Yalia Sagewhisper
-		.talk Fei Li##62354
-		.talk Snow Blossom##62380
-		.talk Yalia Sagewhisper##62303
-		..turnin The Mogu Menace##31105 |daily
-		..turnin Bronze Claws##31044 |daily
-		..turnin Illusions Of The Past##31045 |daily
-		..turnin Grave Consequences##31048 |daily
-		..turnin Dark Arts##31043 |daily
-		..turnin Onyx Hearts##31042 |daily
-		..turnin Born Free##31047 |daily
-		..turnin Spiteful Sprites##31040 
-		..turnin Egg Rescue!##31041 
-		..turnin Little Hatchlings##31046 
-		..accept When The Dead Speak##31062 |daily |or
-		..accept Riding the Storm##31061 |daily |or
-		..accept In Sprite Of Everything##31049 |daily |or
-		|only if completedq(31104)
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Crumbling Hall##30277 
+		|only if havequest(30277)
 	step
-		goto 30.9,12.6
-		.' Use the Bronze Claws on the Cloudrunners around this area. |use Bronze Claws##83134
-		.from Shan'ze Cloudrunner##62584 
-		.' Free 8 Shan'ze Cloudriders |q 31061/1
-		|only if havequest(31061)
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ashweb Matriarch##30225 |daily |or 
+		..turnin Wulon, the Granite Sentinel##30227 |daily |or
+		|next "end" |only if rep('Golden Lotus')<=Honored
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Mistfall Village##31242 |daily |only if havequest(31242)
+		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
+		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
+		..accept Clearing in the Forest##30263 |daily |or 2
+		..accept Encroaching Storm##30194 |daily |or 2
+		..accept Ruffling Some Feathers##30232 |daily |or 2
+		..accept The Pandaren Uprising Relived##30237 |daily |or 2
+		..accept Return to Rest##30238 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..accept Sprite Plight##30190 |daily |or 2
+		..accept My Town, It's on Fire##30192 |daily |or 2
+		..accept Steer Clear of the Beer Here##30191 |daily |or 2
+		.'_
+		.' If these quests are not available click here |confirm
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..accept Meating Expectations##30193 |daily |or 2
+		..accept Pomfruit Pickup##30231 |daily |or 2
+		..accept Lushroom Rush##30196 |daily |or 2
+		.'_
+		.' If these quests are not available click here. |confirm
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..accept Blooming Blossoms##30195 |daily
+		.'_
+		.' If this quest is not available click here. |confirm
+	step
+		goto 25.8,74.8
+		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
+		.from Fairlands Gazelle##58454+ |only if havequest(30193)
+		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
+		.' Use the Pomharvest Firework in your bags to knock Pomfruits out of the trees in the area |use Pomharvest Firework##79344 |only if havequest(30231)
+		.clicknpc Pomfruit##58767 |only if havequest(30231)
+		.get 12 Pomfruit##79250+ |q 30231/1 |only if havequest(30231)
+		.from Silkfeather Hawk##58457 |only if havequest(30232)
+		.get 120 Silken Feather##84121+ |q 30232/1 |only if havequest(30232)
+		.click Eternal Blossom |tip These can be found most abundantly along the river. |only if havequest(30195)
+		.get 10 Eternal Blossom##79246+ |q 30195/1 |only if havequest(30195)
+	step
+		 goto 29.9,53.5
+		.from Shao-Tien Painweaver##65131+, Shao-Tien Conqueror##65132+
+		.' Kill 10 Winterbough Glade mogu. |q 30263/1
+		|only if havequest(30263)
+	step
+		goto 37.3,81.4
+		.from 12 Slateskin Troublemaker##58673+ |q 30190/1 |only if havequest(30190)
+		.click Stolen Mistfall Keg |only if havequest(30191)
+		.get 10 Stolen Mistfall Keg##85778+ |q 30191/1 |only if havequest(30191)
+		.click Brazier Fire |only if havequest(30192)
+		.' Put out 30 Brazier Fires |q 30192/1 |only if havequest(30192)
+	step
+		goto 49.5,67.6
+		.kill 8 Ancient Mogu Spirit##58671+ |q 30237/1 |only if havequest(30237)
+		.click Lushroom |only if havequest(30196)
+		.get 12 Lushroom##85681+ |q 30196/1 |only if havequest(30196)
+		.click Pandaren Gravestone |only if havequest(30238)
+		.' Honor 6 Pandaren Gravestones |q 30238/1 |only if havequest(30238)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Pandaren Uprising Relived##30237 |daily
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..turnin Sprite Plight##30190 |daily
+		..turnin My Town, It's on Fire##30192 |daily
+		..turnin Steer Clear of the Beer Here##30191 |daily
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..turnin Meating Expectations##30193 |daily
+		..turnin Pomfruit Pickup##30231 |daily
+		..turnin Lushroom Rush##30196 |daily
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..turnin Blooming Blossoms##30195 |daily
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Encroaching Storm##30194 |daily
+		..turnin Ruffling Some Feathers##30232 |daily
+		..turnin Clearing in the Forest##30263 |daily
+		..turnin Return to Rest##30238 |daily
+		..accept Lao-Fe the Slavebinder##30239 |daily |or |next "slave"
+		..accept Aetha##30236 |daily |or |next "aetha"
+		..accept The Ruins of Guo-Lai##31294 |daily |or |next "ruins"
+		..accept Mogu within the Ruins of Guo-Lai##31295 |daily |or |next honored
+		..accept Setting Sun Garrison##30385 |daily |or |next "ssg"
+		..accept Quid Pro Quo##30235 |daily |or
+	step
+		goto 30.8,79.4
+		.' Use the Stone of the Water to walk on water |use Stone of the Water Strider##87807
+		.kill Quid##58771 |q 30235/1
+		|only if havequest(30235)
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Quid Pro Quo##30235
+	step
+	label aetha
+		goto 35.0,90.0
+		.from Aetha##58778 |tip Aetha will constantly summon Tornadoes, simply kite Aetha to a new location out of the range. With your Stone of the Water Strider buff, you should easily be able to kite on the water.
+		.' Subdue Aetha |q 30236/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Aetha##30236 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label slave
+		goto 47.4,65.8
+		.kill Spirit of Lao-Fe##58817 |q 30239/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Lao-Fe the Slavebinder##30239 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall2
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Attack on Mistfall Village##31243 |daily
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket##11350 
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily
+		..turnin Backed Into a Corner##30286 |daily
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Freeing Mind and Body##30289 |daily |or 2
+		..turnin Mogu Make Poor House Guests##31293 |daily |or 2
+		..turnin Mogu Make Poor House Guests##30287 |daily |or 2
+		..turnin Stonebound Killers##30290 |daily |or 2
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..accept Gaohun the Soul-Severer##30296 |daily |or
+		..accept Baolai the Immolator##30297 |daily |or
+		.' Click here if these quests are unavailable |confirm |next "sun"
+	step
+		goto 39.2,74.6
+		.kill Gaohun the Soul-Severer##62881 |q 30296/1
+		|only if havequest(30296)
+	step
+		goto 37.5,81.5
+		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
+		|only if havequest(30297)
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Gaohun the Soul-Severer##30296 |daily 
+		..turnin Baolai the Immolator##30297 |daily 
+	step
+	label sun
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
+	step
+	label whitepetal
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Whitepetal Lake##31131 |daily
+		..accept Under Watchful Eyes##30341 |daily |or
+		..accept The Displaced Paleblade##30314 |daily |or
+		..accept The Moving Mists##30313 |daily |or
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept A Thousand Pointy Teeth##30284 |daily |or 2
+		..accept Sparkle in the Eye##30265 |daily |or 2
+		..accept Stunning Display##30291 |daily |or 2
+		..accept Fiery Tongue, Fragile Feet##30342 |daily |or 2
+		..accept A Weighty Task##30338 |daily |or 2
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..accept Stick in the Mud##30340 |daily |or
+		..accept Getting your Hands Dirty##30339 |daily |or
+	step
+		goto 41.1,47.0
+		.kill 15 Knifetooth Swarmer##59404+ |q 30284/1 |only if havequest(30284)
+		.kill 8 Stillwater Crocodile##58455+ |q 30342/1 |only if havequest(30342)
+		.click Ruby Eye |tip These are inside of the Mogu heads underwater. |only if havequest(30265)
+		.get 8 Ruby Eye##84646+ |q 30265/1 |only if havequest(30265)
+		.clicknpc Stunned Whitepetal##62984 Carp |only if havequest(30291)
+		.get 12 Stunned Whitepetal Carp##84656 |q 30291/1 |only if havequest(30291)
+		.click Mogu Artifact |only if havequest(30338)
+		.get 8 Mogu Artifact##84655 |q 30338/1 |only if havequest(30338)
+	step
+		goto 44.1,53.2
+		.' Use the Shado-Pan Flare in your bags to illuminate Shao-Tien Surveyors. |use Shado-Pan Flare##89366 |only if havequest(30341)
+		.kill 8 Shao-Tien Surveyor##59379+ |q 30341/1 |only if havequest(30341)
+		.kill 8 Fog Walker##58672+ |q 30313/1 |only if havequest(30313)
+		.from Paleblade Flesheater##59378+, Paleblade Slithertongue##63044+ |only if havequest(30314)
+		.' Kill 8 Paleblade Saurok |q 30314/1 |only if havequest(30314)
+		.click Whitepetal Reeds##10817 |only if havequest(30340)
+		.get 12 Whitepetal Reed##84241 |q 30340/1 |only if havequest(30340)
+		.click Fresh Dirt##20 |only if havequest(30339)
+		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
+	step
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Under Watchful Eyes##30341 |daily
+		..turnin The Displaced Paleblade##30314 |daily
+		..turnin The Moving Mists##30313 |daily
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..turnin Stick in the Mud##30340 |daily
+		..turnin Getting your Hands Dirty##30339 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin A Thousand Pointy Teeth##30284 |daily
+		..turnin Sparkle in the Eye##30265 |daily
+		..turnin Stunning Display##30291 |daily
+		..turnin Fiery Tongue, Fragile Feet##30342 |daily
+		..turnin A Weighty Task##30338 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept Vicejaw##30234 |daily |or |next "vicejaw"
+		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
+		..accept Guo-Lai Infestation##31240 |daily |or |next "ruins"
+		..accept Mistfall Village##31245 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
+		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
+		..accept Cracklefang##30233 |daily |or |next "crackle"
+	step
+	label vicejaw
+		goto 37.3,51.1
+		.kill Vicejaw##58769 |q 30234/1 |tip When you first pull Vicejaw, kite him through the corpses of Paleblade Flesheaters that are lying all around, when he eats 10 of them he will begin casting Upchuck. When he does this he wil not move and will only attack in front of himself, walk around to his backside and attack until his energy meter resets to 0. When he is weak Vicejaw will pick you up and begin to eat you. Kill him before he is able to chew you to death. He will not try to eat you if he is using Upchuck, time it right and you won't have to race to kill him.
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin Vicejaw##30234 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins2
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Guo-Lai Encampment##31244
+		..accept Painting the Ruins Red##30298 |daily
+		..accept Offering a Warm Welcome##30301 |daily
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..accept No Stone Unturned##30299 |daily 
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if no quest is available |confirm
+	step
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept Carved in Stone##30481 |daily
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 25.4,28.8
+		.from Shao-Tien Dominator##63610+, Shao-Tien Soul-Caller##63611+, Shao-Tien Torturer##63641+ |only if havequest(30298)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.' Kill 15 Guo-Lai mogu. |q 30298/1 |only if havequest(30298)
+		.get 1 Shao-Tien Cage Key |q 30300/1 |only if havequest(30300)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.click Shao-Tien Cage |only if havequest(30300)
+		.' Free 6 Golden Lotus Prisoners. |q 30300/2 |only if havequest(30300)
+		.click Mogu Statue |only if havequest(30299)
+		.from Mogu Statue##63447+ |only if havequest(30299)
+		.' Destroy 10 Mogu Statues |q 30299/1 |only if havequest(30299)
+		.' Use your Shado-Pan Torch on the Tents around this area. |use Shado-Pan Torch##85581 |only if havequest(30301)
+		.' Burn 6 Shao-Tien Tents |q 30301/1 |only if havequest(30301)
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..turnin No Stone Unturned##30299 
+		..turnin The Key to Success##30300 
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Painting the Ruins Red##30298 
+		..turnin Offering a Warm Welcome##30301 
+		..accept The Imperion Threat##30302 |daily
+	step
+		goto 68.6,71.0
+		.from Gochao the Ironfist##62880
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin The Imperion Threat##30302
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label ssg
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Setting Sun Garrison##31247 |daily |only if havequest(31247)
+		..turnin Setting Sun Garrison##30385 |daily |only if havequest(30385)
+		..turnin Setting Sun Garrison##31297 |daily |only if havequest(31297)
+		..turnin Setting Sun Garrision##31250 |daily |only if havequest(31250)
+		..accept The Battle Ring##30306 |daily
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Survival Ring: Flame##30240 |daily |or
+		..accept Survival Ring: Blades##30242 |daily |or
+	step
+		goto 19.7,74.2
+		.from Shado-Pan Trainee##58992+
+		.' Defeat 20 Shado-Pan Trainees. |q 30306/1
+		|only if havequest(30306)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid getting hit by the fireworks.
+		.' Live through the Survival Ring for 90 seconds |q 30240/1
+		|only if havequest(30240)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid the posts with blades surrounding them and the running pandas.
+		.' Live through the Survival Ring for 90 seconds |q 30242/1
+		|only if havequest(30242)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Survival Ring: Flame##30240 |daily |or
+		..turnin Survival Ring: Blades##30242 |daily |or
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin The Battle Ring##30306 |daily
+		..accept Upon the Ramparts##30246 |daily |or
+		..accept Enemy at the Gates##30264 |daily |or
+		..accept No Reprieve##30444 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..accept Mantid Under Fire##30243 |daily |or
+		..accept Along the Serpent's Spine##30244 |daily |or
+		..accept Lost Scouts##30245 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Bloodied Skies##30266 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..accept Roll Club: Serpent's Spine##30261 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto Vale of Eternal Blossoms 3.9,51.7
+		.clicknpc Hot Oil Cauldron##64369
+		.' Use the Abilities on your toolbar to set the enemies below on fire.
+		.' Kill 80 Krik'thik Hivelings |q 30243/1
+		|only if havequest(30243)
+	step
+		.' Click the quest complete box in the corner below your minimap.
+		..turnin Mantid Under Fire##30243
+		..accept Along the Serpent's Spine##30244
+		.' If this quest isn't available, click here |confirm
+		|only if havequest(30243)
+	step
+		goto Vale of Eternal Blossoms 18.6,36.4
+		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
+		.talk Shado-Pan Scout##58947 |q 30245/1
+		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
+		..turnin Lost Scouts##30245
+		..accept The Butcher##30248
+		|only if havequest(30245)
+	step
+		goto 17.0,47.5
+		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
+		.kill 8 Shao-Tien mogu |q 30444/1
+		|only if havequest(30444)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		.' Let's roll. |q 30261/1
+		|only if havequest(30261)
+	step
+		'Hold down your right mouse button to help you maneuver through the course. |tip Grab as many speed boosts as you can to make it go quicker.
+		.' Complete the Serpent's Spine Roll Course. |q 30261/2
+		|only if havequest(30261)
+	step
+		goto 15.6,66.1
+		.clicknpc War Serpent##65336
+		.' Mount a War Serpent |invehicle |q 30264/1
+		|only if havequest(30264)
+	step
+		'Use the abilities on your hotbar to do the following:
+		.kill 60 Krik'thik Hiveling##63972+ |q 30264/2
+		.kill 3 Krik'thik War Wagon##64274+ |q 30264/3
+		.kill 3 Krik'thik Catapult##64275+ |q 30264/4
+		|only if havequest(30264)
+	step
+		'Click the Return to Setting Sun Garrison button. |outvehicle
+		|only if havequest(30264)
+	step
+		goto 5.4,72.3
+		.click Setting Sun Turret 
+		.' Mount a turret. |invehicle |c
+		|only if havequest(30266)
+	step
+		.kill 30 Krik'thik Swarmer##63973+ |q 30266/1
+		|only if havequest(30266)
 	step
 		'Click the Leave Vehicle button. |outvehicle
-		|only if havequest(31061)
-	step
-		'Enter the tunnel here. |goto 20.3,15.8 <5 |c
-		|only if havequest(31049)
-	step
-		goto 19.5,13.8
-		.kill Darkwoods Faerie##62522 |q 31049/1
-		|only if havequest(31049)
-	step
-		'Leave the tunnel here. |goto 20.3,15.8 <5 |c
-		|only if havequest(31049)
-	step
-		goto 32.3,9.5
-		.kill Shan'ze Deathspeaker##62559 |q 31062/1 |tip Make sure you destroy his Spirit Gems, if you let them pile up they can overwhelm you.
-		|only if havequest(31062)
-	step
-		goto 28.8,22.4
-		.talk Moshu the Arcane##62810
-		..turnin Through the Portal##31110
-		|only if havequest(31110)
-	step
-		goto 49.0,70.4
-		.talk Ban Bearheart##62304
-		..turnin When The Dead Speak##31062 
-		..turnin Riding the Storm##31061 
-		..turnin In Sprite Of Everything##31049 
-		|next "end"
-/// New Questigver today
-	step
-	label ling
-		goto 49.0,71.3
-		.talk Ling of the Six Pools##63614
-		..accept The Challenger's Ring: Hawkmaster Nurong##31220
-		|only if not completedq(31220)
-		|only if rep('Shado-Pan')>=Honored
-	step
-		goto 49.0,71.3
-		.talk Ling of the Six Pools##63614
-		..accept The Challenger's Ring: Tenwu of the Red Smoke##31221
-		|only if rep('Shado-Pan')>=Revered 
-	step
-		goto 48.9,71.2
-		.talk Tenwu of the Red Smoke##63616
-		.' Ask him to meet you in the Challenger's Ring. |q 31221/1
-		|only if havequest(31221)
-	step
-		goto 50.6,68.5
-		.talk Tenwu of the Red Smoke##64471
-		.' Let's see if you can back that talk up.
-		.' Defeat Temwu of the Red Smoke |q 31221/2
-		|only if havequest(31221)
-	step
-		goto 49.0,71.3
-		.talk Ling of the Six Pools##63614
-		..turnin The Challenger's Ring: Tenwu of the Red Smoke##31221
-		|only if havequest(31221)
-	step
-		goto 49.0,70.9
-		.talk Hawkmaster Nurong##63618
-		.' Ask him to meet you in the Challenger's Ring. |q 31220/1
-		|only if havequest(31220)
-	step
-		goto 50.7,68.2
-		.talk Hawkmaster Nurong##64470
-		.' Let's go!
-		.' Defeat Hawkmaster Nurong |q 31220/2
-		|only if havequest(31220)
-	step
-		goto 49.0,71.3
-		.talk Ling of the Six Pools##63614
-		..turnin The Challenger's Ring: Hawkmaster Nurong##31220
-		|only if havequest(31220)
-	step
-		goto 49.0,71.3
-		.talk Ling of the Six Pools##63614
-		..accept Sra'vess Wetwork##31196 |daily |or 4
-		..accept The Bigger They Come...##31197 |daily |or 4
-		..accept A Morale Victory##31198 |daily |or 4
-		..accept Destroy the Siege Weapons!##31199 |daily |or 4
-		..accept Fumigation##31200 |daily |or 4
-		..accept Friends, Not Food!##31201 |daily |or 4
-	step
-		'Talk to Hawkmaster Nurong or Taoshi and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
-		'Hawkmaster Nurong at [48.7,71.2] |modelnpc 63618
-		'Taoshi at [48.7,71.0] |modelnpc 63617
-		|confirm
-		|only if not completedq(31221)
-	step
-		'Talk to Hawkmaster Nurong, Taoshi, or Tenwu of the Red Smoke and ask one of them to come with you. They will help you in combat and allow you to turn in your quests outside of this questing hub.
-		'Hawkmaster Nurong at [48.7,71.2] |modelnpc 63618
-		'Taoshi at [48.7,71.0] |modelnpc 63617
-		'Tenwu of the Red Smoke [48.9,71.2] |modelnpc 63616
-		|confirm
-		|only if completedq(31221)
-	step
-		goto 48.7,71.1
-		.talk Ku-Mo##65341
-		..accept Seeking Father##30933
-		.' If this quest is unavailable, click here. |confirm
-		|only if not completedq(30933)
-	step
-		goto 27.5,54.6
-		.click Sra'thik Siege Weapon
-		.' Small Southern Siege Weapon destroyed |q 31199/2
-		|only if havequest(31199)
-	step
-		goto 25.8,53.8
-		.click Sra'thik Siege Weapon
-		.' Large Southern Siege Weapon destroyed |q 31199/1
-		|only if havequest(31199)
-	step
-		goto 23.5,55.5
-		.click Sra'thik Idol
-		.' Southern Idol destroyed |q 31198/1
-		|only if havequest(31198)
-	step
-		goto 21.5,49.2
-		.click Sra'thik Idol
-		.' Central Idol destroyed |q 31198/3
-		|only if havequest(31198)
-	step
-		goto 27.2,41.2
-		.click Sra'thik Siege Weapon
-		.' Large Northern Siege Weapon destroyed |q 31199/3
-		|only if havequest(31199)
-	step
-		goto 26.2,39.8
-		.click Sra'thik Siege Weapon
-		.' Small Northern Siege Weapon destroyed |q 31199/4
-		|only if havequest(31199)
-	step
-		goto 27.8,41.9
-		.click Sra'thik Idol
-		.' Eastern Idol destroyed |q 31198/4
-		|only if havequest(31198)
-	step
-		goto 23.6,44.7 
-		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
-		.' Egg Chamber bombed |q 31200/3
-		|only if havequest(31200)
-	step
-		goto 22.0,41.6 
-		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
-		.' Torture Cell bombed |q 31200/4
-		|only if havequest(31200)
-	step
-		goto 21.2,43.2 
-		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
-		.' Slaughtering Pit bombed |q 31200/5
-		|only if havequest(31200)
-	step
-		goto 21.0,45.9 
-		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
-		.' Amber Vault bombed |q 31200/1
-		|only if havequest(31200)
-	step
-		goto 16.2,45.8
-		.click Sra'thik Idol
-		.' Western Idol destroyed |q 31198/2
-		|only if havequest(31198)
-	step
-		goto 17.6,58.0
-		.talk Shado-Pan Trainee##64459
-		.' Tell them "No you're not!"
-		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/3
-		|only if havequest(31201)
-	step
-		goto 17.4,57.0
-		.talk Shado-Pan Trainee##64460
-		.' Tell them "No you're not!"
-		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/2
-		|only if havequest(31201)
-	step
-		goto 17.4,57.0
-		.talk Sentinel Ku-Yao##61694
-		.' Tell him his son has been looking for him.
-		.' Search for Sentinel Ku-Yao. |q 30933/1
-		|only if havequest(30933)
-	step
-		goto 18.0,53.5
-		.talk Shado-Pan Trainee##64461
-		.' Tell them "No you're not!"
-		.' Shado-Pan Trainee at Southern Feeding Pit freed. |q 31201/1
-		|only if havequest(31201)
-	step
-		goto 23.9,47.3
-		'Use the Bag of Shado-Pan Gas Bombs at this location. |use Bag of Shado-Pan Gas Bombs##86532
-		.' Nutriment Cell bombed |q 31200/2
-		|only if havequest(31200)
-	step
-		'Make sure you have done the following around Sra'vess:
-		.from Sra'thik Mutilator##63678+, Sra'thik Cacophyte##63680+, Sra'thik Drone##63677+, Sra'thik Regenerator##63681+, Sra'thik Swiftwing##63683+ |only if havequest(31196)
-		.' Kill 15 Lesser Sra'thik mantid. |q 31196/1 |only if havequest(31196)
-		.from Sra'thik Swarm-Leader##63685+, Sra'thik Vessguard##63686+, Sra'thik Will-Breaker##63684+, Sra'thik Deathmixer##63688+ |only if havequest(31197)
-		.' Kill 4 Greater Sra'thik mantid. |q 31197/1 |only if havequest(31197)
-	step
-		'Next to you is either Hawkmaster Nurong or Taoshi
-		.talk Taoshi##63617
-		.talk to Hawkmaster Nurong##63618
-		..turnin Sra'vess Wetwork##31196 |daily
-		..turnin The Bigger They Come...##31197 |daily
-		..turnin A Morale Victory##31198 |daily
-		..turnin Destroy the Siege Weapons!##31199 |daily
-		..turnin Fumigation##31200 |daily
-		..turnin Friends, Not Food!##31201 |daily 
-		|only if not completedq(31221)
-	step
-		'Next to you is either Hawkmaster Nurong, Taoshi, or Tenwu.
-		.'Talk to Taoshi |modelnpc 63617
-		.'Talk to Hawkmaster Nurong |modelnpc 63618
-		.'Talk to Tenwu of the Red Smoke |modelnpc 63616
-		..turnin Sra'vess Wetwork##31196 |daily
-		..turnin The Bigger They Come...##31197 |daily
-		..turnin A Morale Victory##31198 |daily
-		..turnin Destroy the Siege Weapons!##31199 |daily
-		..turnin Fumigation##31200 |daily
-		..turnin Friends, Not Food!##31201 |daily 
-		|only if completedq(31221)
-	step
-		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
-		..accept Target of Opportunity: Sra'thik Hivelord##31204 |daily |or
-		..accept Target of Opportunity: Sra'thik Swarmlord##31203 |daily |or
-	step
-		goto 16.4,40.9
-		.kill Sra'thik Swarmlord##63693 |q 31203/1
-		|only if havequest(31203)
-	step
-		'Enter the building here. |goto 27.1,44.1 <5 |c
-		|only if havequest(31204)
-	step
-		goto 24.3,44.0
-		.kill Sra'thik Hivelord##63694 |q 31204/1
-		|only if havequest(31204)
-	step
-		'Leave the building. |goto 27.1,44.1 <5 |c
-		|only if havequest(31204)
-	step
-		goto 48.7,71.1
-		.talk Ku-Mo##65341
-		..turnin Seeking Father##30933
-		|only if havequest(30933)
-	step
-		goto 49.0,71.4
-		.talk Ling of the Six Pools##63614
-		..turnin Target of Opportunity: Sra'thik Hivelord##31204 |daily |or
-		..turnin Target of Opportunity: Sra'thik Swarmlord##31203 |daily |or
-		|next "end"
-/// Exalted Reputation
-	step
-	label end
-		goto 48.8,70.6
-		.talk Rushi the Fox##64595
-		.buy 1 Grand Commendation of the Shado-Pan##93220
-		.' Use the Commendation of the Shado-Pan you just purchased. |use Grand Commendation of the Shado-Pan##93220
-		.' If you have already purchased this (either on this or another character), click here. |confirm
-		|only if rep("Shado-Pan")>=Revered
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009
-		..accept Mogu Incursions##31266
-		|only if rep('Shado-Pan')==Exalted and not completedq(31266)
-	step
-		goto 48.8,58.6
-		.kill Shan'ze Spymaster##63888 |q 31266/1
-		|only if rep('Shado-Pan')==Exalted and not completedq(31266)
-	step
-		goto 49.4,70.6
-		.talk Master Snowdrift##63009
-		..turnin Mogu Incursions##31266
-		..accept Surprise Attack!##31277
-		|only if rep('Shado-Pan')==Exalted and not completedq(31277)
-	step
-		goto 42.6,63.9
-		.talk Ban Bearheart##63908
-		.' Tell him "Let's go".
-		.' Join the battle of Niuzao Temple |q 31277/1
-		|only if havequest(31277)
-	step
-		goto 41.3,60.0
-		'Wait for the dialogue to end and fight off the invasion.
-		.from Shan'ze Brutalizer##63933+
-		.from Hei Feng##63920 |tip When he casts Deep Breath step behind him.
-		.' Defeat the Mogu Invasion |q 31277/2
-		|only if havequest(31277) 
-	step
-		goto 49.2,71.0
-		.talk Ban Bearheart##62304
-		..turnin Surprise Attack!##31277
-		|only if havequest(31277)
-	step
-		'You have reached the end of this daily guide.
-		.' Click here to return to the start of the dailies. |next "dailies" |confirm
-]])
-
-ZygorGuidesViewer:RegisterInclude("Marista_Hub",[[
-	step
-		goto Krasarang Wilds 52.4,76.6
-		.talk Nan-Po##60441
-		.fpath Marista
-	step
-		goto 51.7,75.3
-		.talk Tony Tuna##60182
-		..accept Particular Plumage##30667
-	step
-		goto 51.5,76.9
-		.talk Jay Cloudfall##60173
-		..accept Sudden, Unexpected Crocolisk Aggression##30666
-	step
-		goto 46.4,68.6
-		.from Crimson Lory##60198+
-		.get 6 Crimson Tailfeather##80678+ |q 30667/2
-		.from Emerald Lory##60200+
-		.get 6 Emerald Tailfeather##80677+ |q 30667/1
-		.from Dusky Lory##60196+
-		.get 6 Dusky Tailfeather##80679+ |q 30667/3
- 		.from Mortbreath Skulker##60202+, Mortbreath Snapper##60201+
- 		.' Kill 8 Mortbreath crocolisk |q 30666/1
-	step
-		goto 51.7,75.3
-		.talk Tony Tuna##60182
-		..turnin Particular Plumage##30667
-	step
-		goto 51.5,76.9
-		.talk Jay Cloudfall##60173
-		..turnin Sudden, Unexpected Crocolisk Aggression##30666
-		..accept Build Your Own Raft##30668
-	step
-		goto 52.3,77.9
-		.click Tough Kelp
-		.get Tough Kelp##80804 |q 30668/2
-	step
-		goto 52.4,76.2
-		.click Spare Plank
-		.get 4 Spare Plank##80685 |q 30668/1
-	step
-		goto 51.5,76.9
-		.talk Jay Cloudfall##60173
-		..turnin Build Your Own Raft##30668
-		..accept The Lorewalker on the Lake##30669
-	step
-		goto 51.7,76.6
-		.click Your Raft
-		.' Pick up your raft |q 30669/1
-	step
-		goto 46.0,78.9
-		.talk Wise Ana Wu##60139
-		..turnin The Lorewalker on the Lake##30669
-		..accept Wisdom Has A Price##30671
-		..accept Misery##30691
-	step
-		.' Go underwater and enter the cave |goto 46.0,79.9 <5 |c
-	step
-		goto 46.2,83.5
-		.from Nahassa##60203+ |tip Nahassa will use an ability called Feverish Deathbite that will cause you to hallucinate many more crocolisks have spawned, they aren't really there so don't panic.
-		.' Put Nahassa out of his misery |q 30691/1
+		|only if havequest(30266)
+	step
+		goto 11.4,58.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30246/1
+		|only if havequest(30246)
+	step
+		goto 6.9,68.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30244/1
+		|only if havequest(30244)
 	step
 		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin Misery##30691
-	step
-		.' Exit the cave |goto 46.0,79.9 <5 |c
-	step
-		goto 46.0,79.0
-		.from Great Grey Shark##60204+, Nayeli Hammerhead##60432+
-		.get 5 Shark Fillet##80810+ |q 30671/1
-	step
-		goto 46.0,78.9
-		.talk Wise Ana Wu##60139
-		..turnin Wisdom Has A Price##30671
-		..accept Balance##30672
-	step
-		goto 45.1,84.9
-		'Run over one of the piles of fish along the beach.
-		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
-		..accept Balance Without Violence##30674
-	step
-		.from Unga Fish-Getter##60299+
-		.collect 1 Confusing Treasure Map##80827 |n
-		.' Click the Confusing Treasure Map in your bags |use Confusing Treasure Map##80827
-		..accept Buried Hozen Treasure##30675
-	step
-		goto 46.1,86.7
-		.clicknpc Flailing Carp |tip You can find these all along the beach
-		.' Throw 6 Flailing Carp back into the water |q 30674/1
-		.kill 10 Unga Fish-Getter##60299+ |q 30672/1
-		.click Lump of Sand
-		.get Buried Hozen Treasure##80817 |q 30675/1
-	step
-		'Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin Balance Without Violence##30674
-		..turnin Buried Hozen Treasure##30675
-	step
-		goto 51.5,76.8
-		.talk Jay Cloudfall##60173
-		..turnin Balance##30672
-	step
-		goto Krasarang Wilds 29.7,39.0
-		.talk Tired Shushen##58278
-		..accept Thieving Raiders##30168
-		..accept Raid Leader Slovan##30169
-	step
-		goto 31.8,29.0
-		.kill Slovan##58285 |q 30169/1
-		.from Riverblade Flesh-hunter##58274
-		.get 5 Pillaged Jinyu Loot##78958 |q 30168/1
-	step
-		goto Krasarang Wilds 29.7,39.1
-		.talk Tired Shushen##58278
-		..turnin Thieving Raiders##30168
-		..turnin Raid Leader Slovan##30169
-	step
-		goto 24.6,39.2
-		.clicknpc Dawnchaser Captive##58608
-		.' Rescue 8 Captives |q 30163/1
-		.kill 8 Korjan Reclaimer##58614+ |q 30229/1
-		.click Mogu Artifact
-		.get 10 Mogu Artifact##79120+ |q 30230/1
-	step
-		goto 28.8,50.6
-		.talk Kang Bramblestaff##56112
-		..turnin Re-Reclaim##30230
-	step
-		goto 28.7,50.9
-		.talk Kor Bloodtusk##58114
-		..turnin For the Tribe##30163
-		..turnin The Greater Danger##30229
-	step
-		goto 29.1,51.1
-		.talk Ambassador Han##58630
-		..accept The Mantid##30175
-	step
-		goto 16.0,39.8
-		.talk Sunwalker Dezco##58607
-		..accept The Stoneplow Convoy##30164
-	step
-		goto 15.3,35.3
-		.clicknpc Stoneplow Envoy##58955
-		.' Save 7 Stoneplow Envoy |q 30164/1
-		.from Ik'thallik Precursor##58367+, Ik'thallik Vanguard##58368+
-		.' Kill 10 Ik'thallik Mantid |q 30175/1
-	step
-		goto 16.0,39.8
-		.talk Sunwalker Dezco##58607
-		..turnin The Stoneplow Convoy##30164
-	step
-		goto 15.7,39.7
-		.talk Ambassador Len##58954
-		..turnin The Mantid##30175
-	step
-		goto 16.0,39.8
-		.talk Sunwalker Dezco##58607
-		..accept For Family##30174
-	step
-		goto 23.6,48.8
-		.talk Kor Bloodtusk##58670
-		.' Try to free Kor from his bonds
-		.kill Groundbreaker Brojai##58224 |q 30174/1 |tip He will summon adds one at a time. They aren't too difficult to kill.
-	step
-		goto 28.9,50.8
-		.talk Sunwalker Dezco##58607
-		..turnin For Family##30174
-		..accept Warn Stoneplow##30241
-	step
-		goto Valley of the Four Winds 19.5,56.8
-		.talk Watch Commander Loon Mai##56720
-		..turnin Warn Stoneplow##30241
-	step
-		goto 18.1,55.9
-		.talk Mudmug##56474
-		..accept It Does You No Good In The Keg##30653
-	step
-		goto Valley of the Four Winds 18.0,56.3
-		.talk Watch Commander Loon Mai##56720
-		..accept The Swarm Begins##30622
-	step
-		goto Valley of the Four Winds 18.0,56.5
-		.talk Mei Barrelbottom##59855
-		..accept The Mantidote##30623
-	step
-		goto Valley of the Four Winds 17.5,50.2
-		.' Deliver beer to Zhu's Wardens |q 30653/1
-	step
-		goto Valley of the Four Winds 15.2,55.4
-		.' Deliver beer to Crane Wing Priests |q 30653/2
-	step
-		goto Valley of the Four Winds 13.0,56.0
-		.' Deliver beer to Tauren Settlers |q 30653/4
-	step
-		goto Valley of the Four Winds 10.7,55.5
-		.' Deliver beer to Shado-Pan |q 30653/3
-	step
-		.' Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin It Does You No Good In The Keg##30653
-	step
-		goto 13.4,54.6
-		.from Ik'thallik Infestor##56721+, Ik'thik Warrior##56722+
-		.' Kill 15 Ik'thallik Infestors or Warriors |q 30622/1
-		.' Use Ken-Ken's mask on Ik'thik Wing Commanders. |use Ken-Ken's Mask##80337
-		.from Manifestation of Fear##59874+ 
-		.' Defeat 5 Manifestation of Fear that come out of Ik'thik Wing Commanders. |q 30623/1 
-	step
-		.' Click the Complete Quest box that displays on the right side of the screen under your minimap
-		..turnin The Mantidote##30623
-// BUGGED
-	step
-		goto 11.6,49.5
-		.talk Guard Captain Oakenshield##57198
-		..turnin The Swarm Begins##30622
-		..accept Students No More##30625 /////Currently Bugged
-	step
-		'The students you are looking for can be at one of four locations fighting one of the quest mobs below. Find the students and kill the follow monsters:
-		.'Ik'thallik Tendon-Slicer at [9.5,54.0]
-		.kill Ik'thallik Tendon-Slicer##59888 |q 30625/3
-		.'Ik'thallik Fearmonger at [9.5,58.2]
-		.kill Ik'thallik Fearmonger##59889 |q 30625/4
-		.'Ik'thallik Bloodrager at [8.9,54.2]
-		.kill Ik'thallik Bloodrager##59887 |q 30625/1
-		.'Ik'thik Incubator at [8.9,51.0]
-		.kill Ik'thik Incubator##59890 |q 30625/2
-	step
-		goto 11.6,49.5
-		.talk Guard Captain Oakenshield##57198
-		..turnin Students No More##30625
-		..accept Retreat!##30626
-	step
-		goto 18.0,56.3
-		.talk Watch Commander Loon Mai##56720
-		..turnin Retreat!##30626
-	step
-		goto 17.9,55.7
-		.talk Master Bruised Paw##59856
-		..accept The Savior of Stoneplow##30627
-	step
-		goto 18.0,56.7 |n
-		.talk Miss Fanny##59857
-		.' Tell her "Let's go". |invehicle
-	step
-		'Use your Unyielding Fist ability to defeat the Mantid Collossus. |tip Use your Unyielding Fist ability when the new icon on your screens flashes orange
-		.kill Mantid Colossus##56703 |q 30627/1
-	step
-		goto 18.0,56.3
-		.talk Watch Commander Loon Mai##56720
-		..turnin The Savior of Stoneplow##30627
-		..accept The Gratitude of Stoneplow##30628
-]])
-ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
-		'In order to begin gaining _Reputation_ with the _August Celestials_, you must first become Revered with the _Golden Lotus_.
-		.' Click here to work on the Golden Lotus Dailies and gain reputation with them |confirm |next "golden"
-		.' Click here to begin working on the August Celestials after you have become revered with the Golden Lotus |confirm |next "startaug"
-	step
-	label golden
-		#include "Golden_Lotus_Revered"
-	step
-	label startaug
-		goto Vale of Eternal Blossoms 62.8,23.4
-		.talk Sage Lotusbloom##64001
-		.' The following quests will only be available the first time you are sent to a new area. They are random and Sage Lotusbloom will only have one at a time.
-		..accept Challenge At The Temple of the Red Crane##31379 |or |next "crane" |only if not completedq(31379)
-		..accept Attack At The Temple of the Jade Serpent##31377  |or |next "serpent" |only if not completedq(31377)
-		..accept Defense At Niuzao Temple##31383 |or |next "ox" |only if not completedq(31383)
-		..accept Trial At The Temple of the White Tiger##31381 |or |next "tiger" |only if not completedq(31381)
-		.' If no quest is available, ask her how you can help the August Celestials today. Then click on whichever spirit needs you today.
-		.' Niuzao the Black Ox |confirm |next "ox"
-		.' Yu'lon the Jade Serpent |confirm |next "serpent"
-		.' Xuen the White Tiger |confirm |next "tiger"
-		.' Chi-Ji the Red Crane |confirm |next "crane"
-	step
-	label crane
-		goto Krasarang Wilds 31.3,63.4
-		.talk Thelonius##60506
-		..turnin Challenge At The Temple of the Red Crane##31379
-		|only if not completedq(31379)
-	step
-		goto 31.3,63.4
-		.talk Thelonius##60506
-		..accept Students of Chi-Ji##30718 |daily
-		..accept Champion of Chi-Ji##30740 |daily |only if achieved(7287)
-	step
-		goto 31.3,63.6
-		.talk Yan Quillpaw##60529
-		..accept Gifts of the Great Crane##30717 |daily
-	step
-		goto 31.3,63.6
-		.talk Kuo-Na Quillpaw##60528
-		..accept Chasing Hope##30716 |daily
-	step
-		goto 34.6,82.0
-		.talk Champion of Chi-Ji##60546
-		.' Let's fight!
-		.' Defeat a Champion of Chi-Ji |q 30740/1
-		|only if havequest(30740)
-	step
-		goto 31.2,73.9
-		.from 10 Student of Chi-Ji##60601+
-		.' Duel 10 Students of Chi-Ji |q 30718/1
-		.click Cerulean Gift of the Crane
-		.click Crimson Gift of the Crane
-		.click Bronze Gift of the Crane
-		.get 10 Gift of the Great Crane##80938+ |q 30717/1
-		.' Find 3 Spirits of the Crane |q 30716/1 |tip They look like stealthed birds roaming around the isle in set paths. Run into them.
-	step
-		goto 31.3,63.6
-		.talk Kuo-Na Quillpaw##60528
-		..turnin Chasing Hope##30716 |daily
-	step
-		goto 31.3,63.6
-		.talk Yan Quillpaw##60529
-		..turnin Gifts of the Great Crane##30717 |daily
-	step
-		goto 31.3,63.4
-		.talk Thelonius##60506
-		..turnin Students of Chi-Ji##30718 |daily
-		..accept Ellia Ravenmane##30725 |daily |or
-		..accept Minh Do-Tan##30726 |daily |or
-		..accept Ellia Ravenmane: Rematch##30727 |daily |or
-		..accept Fat Long-Fat##30728 |daily |or
-		..accept Julia Bates##30729 |daily |or
-		..accept Dextrous Izissha##30730 |daily |or
-		..accept Kuo-Na Quillpaw##30731 |daily |or
-		..accept Ellia Ravenmane: Revenge##30732 |daily |or
-		..accept Tukka-Tuk##30733 |daily |or
-		..accept Huck Wheelbarrow##30734 |daily |or
-		..accept Mindel Sunspeaker##30735 |daily |or
-		..accept Yan Quillpaw##30736 |daily |or
-		..accept Fat Long-Fat: Rematch##30737 |daily |or
-		..accept Thelonius##30738 |daily |or
-		..accept Ellia Ravenmane: Redemption##30739 |daily |or
-		|only if not achieved(7287)
-	step
-		goto 31.3,63.4
-		.talk Thelonius##60506
-		..turnin Students of Chi-Ji##30718 |daily
-		..turnin Champion of Chi-Ji##30740 |daily
-		|only if achieved(7287)
-		|next "end"
-	step
-		goto 32.0,70.7
-		.talk Fat Long-Fat##60534 |tip He is on the very top of this building.
-		.' Let's fight!
-		.' Defeat Fat Long-Fat |q 30728/1
-	step
-		goto 31.8,71.2
-		.talk Ellia Ravenmane##60530
-		.' Let's fight!
-		.' Defeat Ellia Ravenmane |q 30725/1
-	step
-		goto 32.1,69.9
-		.talk Mindel Sunspeaker##60541
-		.' Let's fight!
-		.' Defeat Mindel Sunspeaker |q 30735/1
-	step
-		goto 32.0,76.5
-		.talk Minh Do-Tan##60532
-		.' Let's fight!
-		.' Defeat Minh Do-Tan |q 30726/1
-	step
-		goto 34.1,75.1
-		.talk Tukka-Tuk##60539
-		.' Let's fight!
-		.' Defeat Tukka-Tuk |q 30733/1
-	step
-		goto 36.4,75.6
-		.talk Ellia Ravenmane##60545
-		.' Let's fight!
-		.' Defeat Ellia Ravenmane |q 30739/1
-	step
-		goto 31.7,80.3
-		.talk Dextrous Izissha##60536
-		.' Let's fight!
-		.' Defeat Dextrous Izissha |q 30730/1
-	step
-		goto 34.8,82.6
-		.talk Fat Long-Fat##60543
-		.' Let's fight!
-		.' Defeat Fat Long-Fat |q 30737/1
-	step
-		goto 36.6,74.8
-		.talk Kuo-Na Quillpaw##60537
-		.' Let's fight!
-		.' Defeat Kuo-Na Quillpaw |q 30731/1
-	step
-		goto 35.2,75.1
-		.talk Ellia Ravenmane##60533
-		.' Let's fight!
-		.' Defeat Ellia Ravenmane |q 30727/1
-	step
-		goto 28.9,75.5
-		.talk Julia Bates##60535
-		.' Let's fight!
-		.' Defeat Julia Bates |q 30729/1
-	step
-		goto 27.9,70.3
-		.talk Huck Wheelbarrow##60540
-		.' Let's fight!
-		.' Defeat Huck Wheelbarrow |q 30734/1
-	step
-		goto 36.5,76.2
-		.talk Yan Quillpaw##60542
-		.' Let's fight!
-		.' Defeat Yan Quillpaw |q 30736/1
-	step
-		goto 34.5,83.3
-		.talk Ellia Ravenmane##60538
-		.' Let's fight!
-		.' Defeat Ellia Ravenmane |q 30732/1
-	step
-		goto 28.8,72.4
-		.talk Thelonius##60544
-		.' Let's fight!
-		.' Defeat Thelonius |q 30738/1
-	step
-		goto 31.3,63.4
-		.talk Thelonius##60506
-		..turnin Ellia Ravenmane##30725 |daily |or
-		..turnin Minh Do-Tan##30726 |daily |or
-		..turnin Ellia Ravenmane: Rematch##30727 |daily |or
-		..turnin Fat Long-Fat##30728 |daily |or
-		..turnin Julia Bates##30729 |daily |or
-		..turnin Dextrous Izissha##30730 |daily |or
-		..turnin Kuo-Na Quillpaw##30731 |daily |or
-		..turnin Ellia Ravenmane: Revenge##30732 |daily |or
-		..turnin Tukka-Tuk##30733 |daily |or
-		..turnin Huck Wheelbarrow##30734 |daily |or
-		..turnin Mindel Sunspeaker##30735 |daily |or
-		..turnin Yan Quillpaw##30736 |daily |or
-		..turnin Fat Long-Fat: Rematch##30737 |daily |or
-		..turnin Thelonius##30738 |daily |or
-		..turnin Ellia Ravenmane: Redemption##30739 |daily |or
-		|only if not achieved(7287)
-		|next "end"
-////Not always here,
-	step
-	label serpent
-		goto The Jade Forest 53.9,61.9
-		.talk Elder Sage Tai-Feng##57324
-		..turnin Attack At The Temple of the Jade Serpent##31376 |only if havequest(31376)
-		..accept Arrows of Fortune##30065 |daily |or
-		..accept Hidden Power##30066 |daily |or
-		..accept The Darkness Around Us##30006 |daily |or
-	step
-		goto 53.9,61.9
-		.talk Elder Sage Storm-Sing##57319
-		..accept Behind the Masks##30063 |daily
-		..accept Saving the Sutras##30064 |daily
-		'Click here if he has no quests today. |confirm
-	step
-		goto 56.5,53.6
-		.click Ancient Sutra
-		.get 6 Ancient Sutra##77432 |q 30064/1
-		|only if havequest(30064)
-	step
-		goto 55.3,57.4
-		.from Final Doubt##57330+, Lingering Doubt##57396+ |only if havequest(30063)
-		.get 8 Mask of Doubt##77419+ |q 30063/1 |only if havequest(30063)
-		.click Defender's Arrow |only if havequest(30065)
-		.get 10 Defender's Arrow##77452+ |q 30065/1 |only if havequest(30065)
-		.' Use the Stack of Mantras in your bags on Yu'lon Adepts and Yu'lon Guardians |use Stack of Mantras##77475 |only if havequest(30066)
-		.' Deliver 6 Ancient Mantras |q 30066/1 |only if havequest(30066)
-		|modelnpc Yu'lon Guardian##57400
-		|modelnpc Yu'lon Adept##57316
-	step
-		goto 53.4,54.2
-		.from Final Doubt##57330+, Lingering Doubt##57396+, Shadow Of Doubt##57389
-		.' Kill 15 Sha Invaders |q 30006/1
-		|only if havequest(30006)
-	step
-		goto 53.9,61.9
-		.talk Elder Sage Storm-Sing##57319
-		..turnin Behind the Masks##30063
-		..turnin Saving the Sutras##30064 
-	step
-		goto The Jade Forest 53.9,61.9
-		.talk Elder Sage Tai-Feng##57324
-		..turnin Arrows of Fortune##30065 
-		..turnin Hidden Power##30066
-		..turnin The Darkness Around Us##30006
-		..accept Flames of the Void##30068 |daily
-		..accept The Shadow of Doubt##30067 |daily
-		'Click here if he has no quests today. |confirm
-	step
-		goto 57.5,62.3
-		.kill Shadow of Doubt##57389 |q 30067/1
-		|only if havequest(30067)
-	step
-		goto 54.1,60.9
-		.clicknpc War Serpent##57871
-		.' Ride the War Serpent |invehicle
-		|only if havequest(30068)
-	step
-		'Fly around the Jade Temple Grounds and extinguish Void Flames. |tip they look like black fire.
-		.' If you run out of water you can refill it in the river [53.9,58.0]
-		.' Douse 6 Void Flames |q 30068/1
-		|only if havequest(30068)
-	step
-		goto 53.9,61.9
-		.' Click the Leave Vehicle button. |outvehicle
-		|only if havequest(30068)
-	step
-		goto 53.9,61.9
-		.talk Elder Sage Tai-Feng##57324
-		..turnin The Shadow of Doubt##30067
-		..turnin Flames of the Void##30068
-		|next "end"
-/// Temple of the White Tiger. Not giving rep for August Celstials.
-	step
-	label tiger
-		goto Kun-Lai Summit 67.2,55.9
-		.talk Xuen##60968
-		..turnin Trial At The Temple of the White Tiger##31381 
-		|only if havequest(31381)
-	step
-		goto 67.2,55.9
-		.talk Xuen##60968
-		..accept Round 1: Brewmaster Chani##30879 |daily |or
-		..accept Round 1: The Streetfighter##30880 |daily |or 
-		..accept Contending With Bullies##31517 |daily |tip This quest may not be available.
-		|confirm
-	step
-		goto 71.1,55.8
-		.kill Shonuf##64757 |q 31517/1
-		|only if havequest(31517)
-	step
-		goto 71.0,51.8
-		.talk Brewmaster Chani##60996
-		.' Challenge her. |tip She has a lot of health but isn't too difficult to kill. She will toss Bitter Brew on the ground, so kite her out of it. She also has an AoE cone called The Steamer, you can avoid this by either moving out of it, or interrupting the channel.
-		.'Defeat Brewmaster Chani |q 30879/1
-		|only if havequest(30879)
-	step
-		goto 71.0,51.8
-		.talk Lun-Chi##60994
-		.' Challenge her.
-		.' Defeat The Streetfighter |q 30880/1
-		|only if havequest(30880)
-	step
-		goto 70.3,51.3
-		.talk Xuen##60968
-		..turnin Round 1: Brewmaster Chani##30879 
-		..turnin Round 1: The Streetfighter##30880 
-		..turnin Contending With Bullies##31517
-		..accept Round 2: Clever Ashyo & Ken-Ken##30881 |daily |or
-		..accept Round 2: Kang Bramblestaff##30882 |daily |or
-	step
-		goto 71.7,45.4
-		.talk Kang Bramblestaff##60978
-		.' Challenge him.
-		.' Defeat Kang Bramblestaff |q 30882/1
-		|only if havequest(30882)
-	step
-		goto 71.7,45.4
-		.talk Clever Ashyo##60980
-		.' Challenge him. |tip Kill Ken-Ken first as he is the weaker of the two. He will cast Ken-Ken Rampage causing him to whirlwind, when he does momentarily switch to Ashyo. Ashyo will summon Water Spouts and Healing Spheres. The Spheres are top priority and the Spouts are easily avoidable.
-		.' Defeat Clever Ashyo |q 30881/1
-		.' Defeat Ken-Ken |q 30881/2
-		|modelnpc Ken-Ken##60979
-		|only if havequest(30881)
-	step
-		goto 71.8,44.9
-		.talk Xuen##60968
-		..turnin Round 2: Clever Ashyo & Ken-Ken##30881 |daily
-		..turnin Round 2: Kang Bramblestaff##30882 |daily
-		..accept Round 3: The Wrestler##30883 |daily |or
-		..accept Round 3: Master Boom Boom##30885 |daily |or
-	step
-		goto 66.7,46.5
-		.talk Master Boom Boom##61013
-		.' Challenge him. |tip He will constantly toss Dynamite at you that will put a landmine on the ground if you walk over it. When he starts the fuse on his boom box, be out of the middle of the arena by the time it finishes.
-		.' Defeat Master Boom Boom |q 30885/1
-		|only if havequest(30885)
-	step
-		goto 66.7,46.5
-		.talk The Wrestler##60997
-		.' Challenge him. |tip Click on the chairs around the room to increase your damage and cause The Wrestler to be stunned for 10 seconds. If you space these out enough, you could potentially kill him before he can hurt you. Periodically he will grapple and throw you, it does not do much damage but it prevents control of your character. Finally, he uses a Sling Sweat ability which puts a blue puddle on the ground that reduces your movement speed and does damage.
-		.' Defeat The Wrestler |q 30883/1
-		|only if havequest(30883)
-	step
-		goto 66.4,46.3
-		.talk Xuen##60968
-		..turnin Round 3: The Wrestler##30883 |daily
-		..turnin Round 3: Master Boom Boom##30885 |daily
-		..accept Round 4: The P.U.G.##30907 |daily |or
-		..accept Round 4: Master Windfur##30902 |daily |or
-	step
-		goto 68.8,43.8
-		.talk Master Windfur##61012
-		.' Challenge him.
-		.' Defeat Master Windfur. |q 30902/1
-		|only if havequest(30902)
-	step
-		'Enter the building and go to [69.0,43.7]
-		.talk Healiss##61004
-		.' Challenge him. |tip Defeat the P.U.G. by first kill Healiss. He will attempt to run away and only has one healing spell that he may try to use, it is called Jungle Remedy, save Interrupts and Stuns for this ability. Next deal with Tankiss, he has more health but is a greater threat than Hackiss, his only ability is called Ground Pummel which will knock you can and deal some damage. Finally kill Hackiss, his only ability is Backstab. This will leave a small bleed on you.
-		.' Defeat Hackiss |q 30907/1
-		.' Defeat Healiss |q 30907/2
-		.' Defeat Tankiss |q 30907/3
-		|modelnpc Hackiss##61007
-		|modelnpc Tankiss##61006
-		|only if havequest(30907)
-	step
-		goto 68.5,44.6
-		.talk Xuen##60968
-		..turnin Round 4: The P.U.G.##30907 |daily
-		..turnin Round 4: Master Windfur##30902 |daily
-	step
-		goto Kun-Lai Summit 68.5,56.5
-		.talk Lin Tenderpaw##60981
-		..accept The Torch of Strength##31492
-		.' Click here if this quest is unavailable |confirm |next "end"
-	step
-		'For this quest you must go up the path, avoiding all of the tornadoes that roam around. If you mount, or touch a tornado, you will have to go back to Lin and start the quest over.
-		|confirm
-	step
-		goto 69.6,53.0 |n
-		.' Enter the first temple here. |goto 69.6,53.0 |noway |c
-	step
-		goto 66.9,51.2 |n
-		.' Enter the second temple here. |goto 66.9,51.2 |noway |c
-	step
-		goto 68.6,46.6
-		.' Click _The Strong Brazier_ to light it.
-		.' Light the Strong Brazier |q 31492/1
-	step
-		goto Kun-Lai Summit 68.5,56.5
-		.talk Lin Tenderpaw##60981
-		..turnin The Torch of Strength##31492
-		|next "end"
-/// Niuzao Temple. Possible unlock hub at revered.
-	step
-	label ox
-		goto Townlong Steppes 39.3,62.3
-		.talk Ogo the Elder##61580
-		..turnin Defense At Niuzao Temple##31383 |only if havequest(31383)
-		..accept The Siege Swells##30956 |daily |or
-		..accept The Unending Siege##30952 |daily |or
-	step
-		goto 39.3,62.3
-		.talk Ogo the Younger##61581
-		..accept The Big Guns##30959 |daily |or
-		..accept A Blade is a Blade##30954 |daily |or
-	step
-		goto 39.2,62.1
-		.talk Yak-Keeper Kyana##61585
-		..accept Fallen Sentinels##30953 |daily
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto 39.4,61.9
-		.talk Sentinel Commander Qipan##61584
-		..accept The Overwhelming Swarm##30957 |daily
-		.' If this quest is unavailable today, click here. |confirm
-	step
-		goto 38.9,62.4
-		.talk High Adept Paosha##61583
-		..accept In Battle's Shadow##30958 |daily |or
-		..accept Paying Tribute##30955 |daily |or
-	step
-		'The following can all be done around Niuzao Temple:
-		.' Use your Pot of Fire on Sra'thik War Wagons |use Pot of Fire##82346 |modelnpc Sra'thik War Wagon##61510 |only if havequest(30959)
-		.' Cause 3 Sri'thik War Wagons to explode. |q 30959/1 |only if havequest(30959)
-		.from Sra'thik Swiftclaw##61508+, Sra'thik Warcaller##61502+, Sra'thik Fleshrender##61514+ |only if havequest(30956)
-		.' Kill 25 Sri'thik attackers |q 30956/1 |only if havequest(30956)
-		.kill 4 Sra'thik Kunchong##61509+ |q 30957/1 |only if havequest(30957)
-		.click Loose Brick |only if havequest(30958)
-		.' Throw 10 Loose Stones up to Niuzao Stonemasons |q 30958/1 |only if havequest(30958)
-		.' Use your Yak's Milk Flask on Wounded Niuzao Sentinels. |use Yak's Milk Flask##82381 |tip Normal healing spells will also heal the Sentinels if you have them. |only if havequest(30953)
-		.' Heal 8 Niuzao Sentinels |q 30953/1 |only if havequest(30953)
-		.click Niuzao Food Supply |only if havequest(30955)
-		.' Gather 6 Food for Niuzao |q 30955/1 |only if havequest(30955)
-		.from Sra'thik Warcaller##61502+, Sra'thik Swiftclaw##61508+ |only if havequest(30952)
-		.' Kill 12 Sra'thik attackers |q 30952/1 |only if havequest(30952)
-		.click Sra'thik Weapon |tip After you kill a Sra'thik a weapon may drop. |only if havequest(30954)
-		.get 10 Sra'thik Weapon##82353 |q 30954/1 |only if havequest(30954)
-	step
-		goto 39.3,62.3
-		.talk Ogo the Elder##61580
-		..turnin The Siege Swells##30956 |daily 
-		..turnin The Unending Siege##30952 |daily 
-	step
-		goto 39.3,62.3
-		.talk Ogo the Younger##61581
-		..turnin The Big Guns##30959 |daily 
-		..turnin A Blade is a Blade##30954 |daily 
-	step
-		goto 39.2,62.1
-		.talk Yak-Keeper Kyana##61585
-		..turnin Fallen Sentinels##30953 |daily 
-		..turnin In Battle's Shadow##30958 |daily 
-	step
-		goto 39.4,61.9
-		.talk Sentinel Commander Qipan##61584
-		..turnin The Overwhelming Swarm##30957 |daily
-	step
-		goto 38.9,62.4
-		.talk High Adept Paosha##61583
-		..turnin Paying Tribute##30955 |daily
-	step
-	label "end"
-		goto Vale of Eternal Blossoms 62.8,23.4
-		.talk Sage Lotusbloom##64001
-		.buy 1 Grand Commendation of the August Celestials##93224
-		.' Use the Commendation of the August Celestials you just purchased. |use Grand Commendation of the August Celestials##93224
+		..turnin Along the Serpent's Spine##30244 |daily
+		..accept Under the Setting Sun##30249 |daily
+		|only if havequest(30244)
+	step
+		goto 6.0,58.8
+		.kill Kri'chon##63978 |q 30249/1
+		|only if havequest(30249)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Bloodied Skies##30266 |daily
+		..accept The Butcher##30248 |daily
+		|only if havequest(30266) or completedq(30266)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..turnin Roll Club: Serpent's Spine##30261 |daily
+		|only if havequest(30261)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Upon the Ramparts##30246 |daily
+		..turnin No Reprieve##30444
+		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
+		goto 7.9,33.9
+		.kill Vyraxxis##63977 |q 30251/1
+		|only if havequest(30251)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily
+		|only if havequest(30251)
+	step
+		goto 21.4,71.5
+		.talk Anji Autumnlight##58919
+		..turnin Enemy at the Gates##30264 |daily
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..turnin Mantid Under Fire##30243 |daily
+		..turnin Under the Setting Sun##30249 |daily
+		..turnin The Butcher##30248 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label mistfall3
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Attack on Mistfall Village##31246 |daily
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##31293 |daily
+		..turnin Stonebound Killers##30290 |daily
+		..turnin Freeing Mind and Body##30289 |daily
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily 
+		..turnin Backed Into a Corner##30286 |daily 
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..accept Gaohun the Soul-Severer##30296 |daily |or
+		..accept Baolai the Immolator##30297 |daily |or
+		.' If it's not available, click here.  |confirm
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
+	step
+		goto 39.2,74.6
+		.kill Gaohun the Soul-Severer##62881 |q 30296/1
+		|only if havequest(30296)
+	step
+		goto 37.5,81.5
+		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
+		|only if havequest(30297)
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Gaohun the Soul-Severer##30296 |daily 
+		..turnin Baolai the Immolator##30297 |daily 
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label crackle
+		goto Vale of Eternal Blossoms 46.5,59.1
+		.from Cracklefang##58768
+		.' Cracklefang Slain |q 30233/1
+	step
+		goto 42.4,46.0
+		.talk Ren Firetongue##59343
+		..turnin Cracklefang##30233
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label revered
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.buy 1 Grand Commendation of the Golden Lotus##93215
+		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
 		.' If you have already purchased this (either on this or another character), click here. |confirm
-		|only if rep("August Celestials")>=Revered
-	step
-		'You have reached the end of this daily guide.
-		.' Click here to return to the start of the dailies. |next "startaug" |confirm
-]])
-
-ZygorGuidesViewer:RegisterInclude("Dominance_Offensive",[[
-	startlevel 90
-	step
-		'Proceeding to the Dominance Offensive Dailies  |next "dailies" |condition completedq(32108) |only if completedq(32108)
-		'Proceeding to the Dominance Offensive Prequests |next |condition not completedq(32108) |only if not completedq(32108)
-	step
-		goto Vale of Eternal Blossoms 61.5,19.8
-		'Click the quest discovered box under your minimap.
-		..accept Meet the Scout##32249
-	step
-		goto Krasarang Wilds 8.7,64.4
-		.talk Scout Rokla##67812
-		..turnin Meet the Scout##32249
-	step
-		goto Krasarang Wilds 8.7,64.4
-		.talk Garrosh Hellscream##62092
-		..accept The Might of the Warchief##32250
-	step
-		goto Krasarang Wilds 10.0,64.1
-		.from Alliance Sentinel##67900+, Alliance Footman##+, Alliance Priest##+
-		..' Kill 25 Alliance troops |q 32250/1
-	step
-		goto Krasarang Wilds 10.7,53.2
-		.talk Blood Guard Gro'tash##67927
-		..' Find Blood Guard Gro'tash |q 32250/2
-	step
-		goto Krasarang Wilds 15.7,57.8
-		.talk Grizzle Gearslip##67926
-		..' Find Grizzle Gearslip |q 32250/3
-	step
-		'Next to you
-		.talk Garrosh Hellscream##62092
-		..turnin The Might of the Warchief##32250
-		..accept Domination Point##32108
-	step
-		goto 8.5,63.8
-		.click Signal Fire
-		..turnin Domination Point##32108
-	step
-		goto Krasarang Wilds 9.7,52.5
-		.talk Kromthar##67785
-		.fpath Domination Point
-	step
-	label "dailies"
-		goto Krasarang Wilds 10.1,53.9
-		.talk Blood Guard Gro'tash##67880
-		..accept The Ruins of Ogudei##32449 |daily |or |next "ogudei"
-		..accept The Time is Now!##32450 |daily |or |next "lion"
-		..accept Flash! Aaaaaahhhh!##32235 |daily |or |next
-		.' If no quests are available, click here |confirm |next "cave"
-	step
-		goto Krasarang Wilds 10.2,53.6
-		.talk Brolic##67767
-		..accept Tear It Up##32126 |daily
-	step
-		goto Krasarang Wilds 10.3,55.6
-		.talk Shokia##56411
-		..accept Death on Two Legs##32123 |daily
-	step
-		goto Krasarang Wilds 11.8,57.6
-		.' Fly up in the air and throw your Bilgewater Molotovs at the Skyfire Gyrocopter X2s |use The Bilgewater Molotov##92019
-		.' Kill 6 Skyfire Gyrocopter X2s |q 32235/1
-	step
-		goto Krasarang Wilds 8.1,61.3
-		.click Alliance Supply Drop
-		.' Destroy 8 Alliance Supply Drops |q 32126/1
-	step
-		goto 9.9,64.2
-		.from Shieldwall Marine##+, Shieldwall Stormcaller##+,
-		.' Kill 10 Alliance Troops |q 32123/1
-	step
-		goto Krasarang Wilds 10.3,55.6
-		.talk Shokia##56411
-		..turnin Death on Two Legs##32123
-	step
-		goto Krasarang Wilds 10.3,53.1
-		.talk Brolic##67767
-		..turnin Tear It Up##32126
-	step
-		goto Krasarang Wilds 10.1,53.9
-		.talk Blood Guard Gro'tash##67880
-		..turnin Flash! Aaaaaahhhh!##32235
-		..accept Another One Bites the Dust##32128 |daily
-	step
-		goto Krasarang Wilds 10.3,53.1
-		.talk Brolic##67767
-		..accept All Dead, All Dead##32127 |daily
-	step
-		goto Krasarang Wilds 12.7,75.8
-		.from Captain Brent the Black##+ |tip On the second floor of the ship, towards the back.
-		..kill Captain Brent the Black |q 32127/1
-	step
-		goto Krasarang Wilds 12.3,75.6
-		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
-		.' Destroy the Defiant ammunition |q 32128/2
-	step
-		goto Krasarang Wilds 15.0,76.4
-		.from Captain Mulkey##+ |tip On the second floor of the ship, towards the back.
-		..kill Captain Mulkey |q 32127/2
-	step
-		goto Krasarang Wilds 15.1,76.6
-		.click Powder Magazine |tip It's on the bottom floor of the ship, next to Fireworks and Bombs.
-		.' Destroy the Valor's Edge ammunition |q 32128/1
-	step
-		goto Krasarang Wilds 10.1,53.9
-		.talk Blood Guard Gro'tash##67880
-		..turnin Another One Bites the Dust##32128
-	step
-		goto Krasarang Wilds 10.3,53.1
-		.talk Brolic##67767
-		..turnin All Dead, All Dead##32127
-		|next "end"
-	step
-	label "cave"
-		goto Krasarang Wilds 12.8,56.8
-		.click Bounty Board
-		..accept Wanted: Lieutenant Ethan Jacobson##32223 |daily |or
-		..accept Wanted: Chief Engineer Cogwrench##32222 |daily |or
-	step
-		goto Krasarang Wilds 13.0,56.2
-		.talk Rivett Clutchpop##67608
-		..accept Storming the Beach##32221 |daily |or
-		..accept Bilgewater Infiltrators##32214 |daily |or
-	step
-		goto Krasarang Wilds 13.7,55.8
-		.talk Duke##67562
-		..accept Krasarang Steampot##32199 |daily |or
-		..accept Mystery Meatloaf##32197 |daily |or
-	step
-		goto Krasarang Wilds 13.7,55.8
-		.talk Boss-Lady Trixel##67535
-		..accept Work Order: Iron##32140 |daily |or
-		..accept Work Order: Fuel##32136 |daily |or
-		..accept Work Order: Lumber##32138 |daily |or
-	step
-		goto Krasarang Wilds 9.9,60.8
-		.' Use the "New" and "Improved" Infared Heat Focals in your bags. |use "New" and "Improved" Infared Heat Focals##92475
-		.from SI:7 Saboteur##67689+
-		.' Kill 10 SI:7 Saboteurs |q 32214/1
-		|only if havequest(32214)
-	step
-		goto Krasarang Wilds 17.7,54.7
-		.from Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
-		.collect 5 Polluted Viseclaw Meat##91869 |q 32199/1
-		|only if havequest(32199)
-	step
-		goto Krasarang Wilds 15.9,65.1
-		.from Mature Terrapin##67895+, Polluted Viseclaw##67896+, Polluted Viseclaw Scuttler##68584+
-		.collect 7 Chunk of Mystery Meat##91874 |q 32197/1
-		|only if havequest(32197)
-	step
-		goto Krasarang Wilds 19.0,71.0
-		..kill Lieutenant Ethan Jacobson##68028 |q 32223/1
-		|only if havequest(32223)
-	step
-		 goto Krasarang Wilds 21.6,51.2
-		 ..kill Chief Engineer Cogwrench##68012 |q 32222/1
-		 |only if havequest(32222)
-	step
-		goto Krasarang Wilds 18.8,68.2
-		.from Shieldwall Marine##67354+
-		.from Dwarven Mortar Team Engineer##67545+
-		.from Shieldwall Stormcaller##67425+
-		.' Kill 10 Shieldwall Forces |q 32221/1
-		|only if havequest(32221)
-	step
-		goto Krasarang Wilds 20.5,58.1
-		.talk Zino "The Shredder" Quickchop##67534
-		..turnin Work Order: Lumber##32138
-		..accept Stacked!##32139
-		|only if havequest(32138) or completedq(32138)
-	step
-		goto Krasarang Wilds 22.6,62.3
-		.talk Daxil "The Gem" Oregrind##67537
-		..turnin Work Order: Iron##32140
-		..accept Power Metal##32141 |daily
-		|only if havequest(32140) or completedq(32140)
-	step
-		goto Krasarang Wilds 25.5,60.4
-		.talk Grizzle Gearship##67542
-		..turnin Work Order: Fuel##32136
-		..accept Runnin' On Empty##32137
-		|only if havequest(32136) or completedq(32136)
-	step
-		goto Krasarang Wilds 20.6,58.1
-		.talk Bixy Buzzsaw##67533
-		..accept Universal Remote-Explode##32238
-		|only if completedq(32238)
-	step
-		goto Krasarang Wilds 25.3,60.4
-		.talk Bixy Buzzsaw##67553
-		..accept Precious Resource##32237
-		|only if completedq(32136)
-	step
-		goto Krasarang Wilds 22.4,62.2
-		.talk Bixy Buzzsaw##67553
-		..accept Bug Off!##32236 |daily
-		|only if completedq(32140)
-	step
-		goto Krasarang Wilds 20.2,60.7
-		.click Domination Point Lumber## |only if havequest(32139)
-		.collect 9 Domination Point Lumber |q 32139/1 |only if havequest(32139)
-		'Use your Universal Remote on Shieldwall Mecha-Pounders to weaken them. |use Universal Remote##91902 |only if havequest(32238)
-		.kill Shieldwall Mecha-Pounder##68011 |q 32238/1 |only if havequest(32238)
-		|only if havequest(32139) or havequest(32238)
-	step
-		goto Krasarang Wilds 23.5,56.4
-		.click Fauly Valve
-		.' Tighten 8 Faulty Valves |q 32237/1
-		|only if havequest(32237)
-	step
-		goto Krasarang Wilds 26.5,63.2
-		.click "Distilled" Fuel Barrel
-		..get 9 "Distilled" Fuel Barrel |q 32137/1
-		|only if havequest(32137)
-	step
-		goto Krasarang Wilds 19.9,62.5
-		'Use your Hand-Dandy Bug Off Sprayer on _Agitated Shale Spiders_ to spawn Shale Shards |use Hand-Dandy Bug Off Sprayer##93026 |only if havequest(32236)
-		.' Spray 5 Agitated Shale Spiders |q 32236/1 |only if havequest(32236)
-		.kill 12 Shale Shards##68653+ |q 32236/2 |only if havequest(32236)
-		'Click _Energized Iron_ deposits on the sides of the cave to spawn Energized Iron Ore Chunks. |only if havequest(32141)
-		.click Energized Iron Ore Chunk |only if havequest(32141)
-		.get 7 Energized Iron Ore Chunk |q 32141/1 |only if havequest(32141)
-		|modelnpc Agitated Shale Spider##67759 |only if havequest(32236)
-		|only if havequest(32236) or havequest(32141)
-	step
-		goto Krasarang Wilds 20.6,58.1
-		.talk Bixy Buzzsaw##67533
-		..accept Universal Remote-Explode##32238
-		|only if havequest(32238)
-	step
-		goto Krasarang Wilds 20.5,58.1
-		.talk Zino "The Shredder" Quickchop##67534
-		..turnin Stacked!##32139
-		|only if havequest(32139)
-	step
-		goto Krasarang Wilds 22.4,62.2
-		.talk Bixy Buzzsaw##67553
-		..turnin Bug Off!##32236 
-		|only if havequest(32236)
-	step
-		goto Krasarang Wilds 25.3,60.4
-		.talk Bixy Buzzsaw##67553
-		..turnin Precious Resource##32237
-		|only if havequest(32237)
-	step
-		goto Krasarang Wilds 26.0,58.1
-		.talk Sezik Steampot##67536
-		..turnin Krasarang Steampot##32199 |only if havequest(32199)
-		..turnin Mystery Meatloaf##32197 |only if havequest(32197)
-		|only if havequest(32199) or havequest(32197)
-	step
-		goto Krasarang Wilds 13.8,55.9
-		.talk Boss-Lady Trixel##67535
-		..turnin Power Metal##32141 |only if havequest(32141)
-		..turnin Runnin' On Empty##32137 |only if havequest(32137)
-		|only if havequest(32137) or havequest(32141)
-	step
-		goto Krasarang Wilds 13.0,56.1
-		.talk Rivett Clutchpop##67608
-		..turnin Storming the Beach##32221 |only if havequest(32221)
-		..turnin Bilgewater Infiltrators##32214 |only if havequest(32214)
-		|only if havequest(32214) or havequest(32221)
-	step
-		goto Krasarang Wilds 10.1,53.9
-		.talk Blood Guard Gro'tash##67880
-		..turnin Wanted: Lieutenant Ethan Jacobson##32223 |only if havequest(32223)
-		..turnin Wanted: Chief Engineer Cogwrench##32222 |only if havequest(32222)
-		|next "end"
-	step
-	label "lion"
-		goto Krasarang Wilds 75.9,34.4
-		.talk Shademaster Kiryn##67628
-		..turnin The Time is Now!##32450
-		..accept Hero Killer##32135 |daily
-		..accept Worker Harassment##32132 |daily
-		..accept Sentry Wards##32133 |daily
-	step
-		goto Krasarang Wilds 75.9,34.2
-		.talk Zazzix "Toasty" Sparkrocket##67402
-		..accept Good Luck, Have Fun##32130 |daily |or 2
-		..accept We Require More Minerals!##32131 |daily |or 2
-		..accept Hard Counter##32134 |daily |or 2
-	step
-		goto Krasarang Wilds 81.8,25.4
-		.from Thane Stonehearth##67636 |q 32135/1
-		|only if havequest(32135)
-	step
-		goto Krasarang Wilds 86.2,25.6
-		.click Town Hall Sentry Ward Location
-		.' Place the Sentry Ward in Town Hall |q 32133/1
-		|only if havequest(32133)
-	step
-		goto Krasarang Wilds 86.1,33.1
-		.click Docks Sentry Ward Location
-		.' Place the Sentry Ward on the docks |q 32133/2
-		|only if havequest(32133)
-	step
-		goto Krasarang Wilds 84.9,32.5
-		.kill 8 Dwarven Mortar Team Engineer##67545+ |q 32134/1
-		.kill 2 Dwarven Mortar Tube##67541+ |q 31234/2
-		|only if havequest(31234)
-	step
-		goto Krasarang Wilds 87.1,30.9 |n
-		.' Enter the Barracks here |goto Krasarang Wilds 87.1,30.9 |noway |c
-		|only if havequest(32133)
-	step
-		goto Krasarang Wilds 87.7,32.7
-		.click Barracks Sentry Ward Location
-		.' Place the Sentry Ward in the Barracks |q 32133/3
-		|only if havequest(32133)
-	step
-		goto Krasarang Wilds 84.2,22.9
-		.from Shieldwall Peasant##67423+
-		..' Kill 30 Shieldwall Peasant |q 32132/1
-		|only if havequest(32132)
-	step
-		goto Krasarang Wilds 78.2,18.3
-		.from Shieldwall Engineer##67971
-		.click Animatable Stone
-		.collect 20 Animatable Stone##91823 |q 32131/1
-		|only if havequest(32131)
-	step
-		goto Krasarang Wilds 81.4,25.7
-		.from Shieldwall Footman##67304
-		.collect 10 Extra-Waxy Alliance Ears##92474 |q 32130/1
-		|only if havequest(32130)
-	step
-		goto Krasarang Wilds 75.9,34.2
-		.talk Zazzix "Toasty" Sparkrocket##67402
-		..turnin Good Luck, Have Fun##32130
-		..turnin We Require More Minerals!##32131
-		..turnin Hard Counter##32134
-	step
-		goto Krasarang Wilds 75.9,34.4
-		.talk Shademaster Kiryn##67628
-		..turnin Hero Killer##32135
-		..turnin Worker Harassment##32132
-		..turnin Sentry Wards##32133
-		|next "end"
-	step
-	label "ogudei"
-		goto Krasarang Wilds 76.3,34.1
-		.talk Belloc Brightblade##67847
-		..turnin The Ruins of Ogudei##32449
-		..accept Taking Advantage##32118 |daily
-	step
-		goto Krasarang Wilds 76.2,34.0 |n
-		'Click the portal to go to the Ruins of Ogudei |goto Krasarang Wilds/3 37.4,46.4,0.5
-		|only if havequest(32118)
-	step
-		goto Krasarang Wilds/3 36.1,42.1
-		.talk Kaelis Sunsoar##68274
-		..turnin Taking Advantage##32118
-	step
-		goto Krasarang Wilds/3 36.1,42.1
-		.talk Kaelis Sunsoar##68274
-		..accept The Spirit Trap##32342 |daily
-		..accept It Is A Mystery##32344 |daily
-		..accept Legacy of Ogudei##32120 |daily
-		..accept Ogudei's Lieutenants##32343 |daily
-		..accept Kick 'em While They're Down##32348 |daily
-	step
-		goto Krasarang Wilds/3 78.6,44.2 |n
-		.' Go up the path here. |goto Krasarang Wilds/3 78.6,44.2 |noway |c
-	step
-		'Walk around this cave and pay attention to your Anamoly Reader above your actionbars. This quest is like a "Hot & Cold" game, where the closer you get, the greater anamoly reading you get. Once you have 100%, you will automatically disperse the anamoly.
-		.' Disperse the anamoly |q 32344/1
-		|only if havequest(32344)
-	step
-		goto Krasarang Wilds/2 55.5,53.7
-		.from Spiritbound Brutalizer##68073+
-		.from Spiritbound Arcanist##68070+
-		.collect 5 Ancient Mogu Essence##92704 |q 32120/1
-		|only if havequest(32120)
-	step
-		goto Krasarang Wilds/2 74.1,29.7
-		.from Spirit Trap##68061+
-		..get 3 Spirit Trap |q 32342/1
-		|only if havequest(32342)
-	step
-		goto Krasarang Wilds/2 67.8,80.3
-		.from Gen-li, Twister of Words##68169+
-		.from Meng-do, Strength of Mountains##68170+
-		..collect Gen-Li's Essence##92736 |q 32343/1
-		..collect Meng-do's Essence##92735 |q 32343/1
-	step
-		goto Krasarang Wilds/2 56.7,38.7 |n
-		.' Go up the stairs here. |goto Krasarang Wilds/2 56.7,38.7 |noway |c
-	step
-		goto Krasarang Wilds/1 59.3,37.3
-		.from Shieldwall Footman##67304+, Shieldwall Rifleman##1761+, Lion's Landing Guard Captain##2774+
-		.' Kill 12 Lion's Landing Military |q 32348/1
-	step
-		goto Krasarang Wilds/3 36.2,41.2
-		.talk Kaelis Sunsoar##68274
-		..turnin The Spirit Trap##32342
-		..turnin It Is A Mystery##32344
-		..turnin Legacy of Ogudei##32120
-		..turnin Ogudei's Lieutenants##32343
-		..turnin Kick 'em While They're Down##32348
-		|next "end"
-	step
-	label "end"
-		'This is the end of this guide.
-		.' Click here to return to the beginning of the dailies |confirm |next "dailies"
-]])
-
-ZygorGuidesViewer:RegisterInclude("Sturdy_Traps",[[
-	startlevel 90
-	step
-		'This guide will take you through the bonus quests for the Dominance Offensive.
-		'These quests do not offer any reputation, but they do offer Valor Points and the Lesser Charms of Good Fortune.
+		|only if rep("Golden Lotus")>=Revered
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..accept Battle Spear of the Thunder King##30640
+		|only if not completedq(30640)
+	step
+		goto 21.4,19.7
+		.click Battle Spear of the Thunder King
+		.get Battle Spear of the Thunder King##80808 |q 30640/1
+		|only if not completedq(30640)
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
+		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
+	step
+		'Enter the building here. |goto 22.3,26.4 <5 |c
+		|only if havequest(30641)
+	step
+		goto Vale of Eternal Blossoms/18 56.2,48.7
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
 		|confirm
+		|only if havequest(30641)
 	step
-	label "menu"
-		'Click here to go purchase and accept the Sturdy Tiger Trap questline. |confirm |next "tiger"
-		.'_
-		'Click here to go purchase and accept the Sturdy Crane Snare questline. |confirm |next "crane"
-		.'_
-		'Click here to go purchase and accept the Sturdy Crab Crate questline. |confirm |next "crab"
+		goto 58.5,44.4
+		.talk Ren Firetongue##63571
+		.' Tell him Zhi sent you.
+		.' Enter the Hall of Tiles |q 30641/1
+		|only if havequest(30641)
 	step
-	label "tiger"
-		goto Krasarang Wilds 10.7,53.6
-		.talk Ongrom Black Tooth##67751
-		.buy 1 Sturdy Tiger Trap##91822
+		'Follow Ren Firetongue |goto Vale of Eternal Blossoms/19 44.7,67.1 <5 |c
+		|only if havequest(30641)
 	step
-		'Click the _Sturdy Tiger Trap_ in your bags. |use Sturdy Tiger Trap##91822
-		..accept Beastmaster's Hunt: The Tiger##32162
+		goto 52.0,76.1
+		.from Zhao-Jin the Bloodletter##60359 |tip He constantly shoots lighting at you so keep on the move. If you are in melee range he will try to cleave you, step around him as he begins casting.
+		.click Battle Helm of the Thunder King
+		.get Battle Helm of the Thunder King##80222 |q 30641/2
+		|only if havequest(30641)
 	step
-		goto Dread Wastes 51.6,67.4
-		.from Wasteland Yak##66549+, Wasteland Calf##66595
-		.collect 25 Unbruised Yak Haunch##91816 |q 32162/1
+		'While exiting the building be careful of the tiles. The safe path is along the pale tiles.
+		.' Exit the building. |goto Vale of Eternal Blossoms/18 56.1,93.7 <5 |c
+		|only if havequest(30641)
 	step
-		goto Krasarang Wilds 13.9,41.4
-		.click Mount of Dirt##
-		..turnin Beastmaster's Hunt: The Tiger##32162
+		goto Vale of Eternal Blossoms 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Helm of the Thunder King##30641 |only if havequest(30641)
+		..accept Battle Axe of the Thunder King##30642 //// Cannot get gate to drop.
+		|only if not completedq(30642)
 	step
-		goto Krasarang Wilds 13.8,41.2
-		.clicknpc Krasari Elder##67556
-		..accept Beastmaster's Quarry: The Tiger##32182
+		'Enter the building here. |goto 40.4,77.1 <5 |c
+		|only if not completedq(30642)
 	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		..turnin Beastmaster's Quarry: The Tiger##32182
-		|next "group"
+		goto 44.3,76.5
+		.' Fight off the Jade Constructs that attack you. |tip If you need help defeating them walk into the orbs around this room. Blue will give a damage and haste buff, green will heal you.
+		.from Jade Construct##60297+
+		.' Pass the Trial of the Constructs |q 30642/1
+		|only if not completedq(30642)
 	step
-	label "crab"
-		goto Krasarang Wilds 10.7,53.6
-		.talk Ongrom Black Tooth##67751
-		.buy 1 Sturdy Crab Crate##91822
+		goto 45.4,76.2
+		.click Battle Axe of the Thunder King
+		.get Battle Axe of the Thunder King##80807 |q 30642/2
+		|only if not completedq(30642)
 	step
-		'Click the _Sturdy Crab Crate_ in your bags. |use Sturdy Crab Crate##91822
-		..accept Beastmaster's Hunt: The Crab##32163
-	step
-		goto Krasarang Wilds 45.2,91.6
-		.from Unga Villager##60358+
-		..get 30 Funky Rotten Fish |q 32163/1
-	step
-		goto Krasarang Wilds 56.3,42.1
-		.click Mount of Dirt##
-		..turnin Beastmaster's Hunt: The Crab##32163
-	step
-		goto Krasarang Wilds 56.4,42.1
-		.click Captured Colossal Viseclaw
-		..accept Beastmaster's Quarry: The Crab##32183
-	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		..turnin Beastmaster's Quarry: The Crab##32183
-		|next "group"
-	step
-	label "crane"
-		goto Krasarang Wilds 10.7,53.6
-		.talk Ongrom Black Tooth##67751
-		.buy 1 Sturdy Crane Snare##91819
-	step
-		'Click the _Sturdy Crane Snare_ in your bags. |use Sturdy Crane Snare##91819
-		..accept Beastmaster's Hunt: The Crane##32161
-	step
-		goto Krasarang Wilds/0 34.5,71.2
-		.from Child of Chi-Ji##60616+
-		..get 5 Pristine Golden Crownfeather |q 32161/1
-	step
-		goto Krasarang Wilds/0 73.2,44.6
-		.from Great Crane##59763+
-		..get Pristine Jet Crownfeather##91815 |q 32161/2
-	step
-		goto Krasarang Wilds 56.3,42.1
-		.click Mount of Dirt##
-		..turnin Beastmaster's Hunt: The Crane##32161
-	step
-		goto Krasarang Wilds 56.4,42.1
-		.click Ancient Bloodcrown Crane##
-		..accept Beastmaster's Quarry: The Crane##32181
-	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		..turnin Beastmaster's Quarry: The Crane##32181
-		|next "group"
-	step
-	label group
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		.' The dailies you have completed will determine which enemies are available to you to fight.
-		.' Click here to fight the _Ancient Bloodcrown Crane_. |confirm |next bc
-		.' Click here to fight the _Krasari Elder_. |confirm |next ke
-		.' Click here to fight the _Colossal Viseclaw_. |confirm |next cv
-	step
-	label bc
-		.' Tell him you would like to fight the Bloodcrown Crane.
-		.' During the fight, pay attention to the songs that it uses.
-		.' Some can be interrupted while others simply need to be avoided.
-		.from Ancient Bloodcrown Crane##67555
-		..accept Ancient's Fall##32167
-	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		.turnin Ancient's Fall##32167
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Axe of the Thunder King##30642
+		|only if not completedq(30642)
 		|next "end"
 	step
-	label ke
-		.' Tell him you would like to fight the Krasari Elder.
-		.' During the fight, you will want to stay close to it at _ALL TIMES_.
-		.' It will occassionally vanish, if you have a hunter simply put a flare out.
-		.from Krasari Elder##67556
-		..accept End of an Elder##32168
+	label honored
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
+		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
+		..accept Painting the Ruins Red##30298 |daily
+		.'_
+		.' Click here if the Daily quest is not available today |confirm
 	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		.turnin End of an Elder##32168
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept He Knows What He's Doing##30305 |daily |or 2
+		..accept Carved in Stone##30481 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..accept No Stone Unturned##30299 |daily
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if this quest is not available |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
+		goto 24.6,29.6
+		.' All around this area:
+		.click Shao-Tien Cage##9667
+		.' Release Golden Lotus Prisoners |q 30300/2
+		.' You can find more cages here [24.6,38.3]
+		.' And more cages here: [29.9,29.4]
+		|only if havequest(30300)
+	step
+		goto 31.8,33.0 |only if havequest(30298) or havequest(30481) or havequest(30305)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.from Shao-Tien Soul-Caller##63611+, Shao-Tien Dominator##63610+ |only if havequest(30298) or havequest(30481)
+		.kill 15 Guo-Lai mogu |q 30298/1 |only if havequest(30298)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
+		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
+	step
+		goto Vale of Eternal Blossoms/18 41.0,52.8
+		.talk He Softfoot##64647
+		.' Let's go |q 30639/1
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms/18 43.8,27.3
+		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
+		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
+		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
+		|modelnpc Zhao-Jin the Bloodletter##64663
+		|modelnpc Crumbling Jade Warrior##64883
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..turnin He Knows What He's Doing##30305
+		..turnin Carved in Stone##30481
+		|only if havequest(30481) or havequest(30305)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
+		..accept The Imperion Threat##30302 |daily
+		.'_
+		.' Click here if this daily quest is not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..turnin The Key to Success##30300
+		|only if havequest(30300)
+	step
+		goto Vale of Eternal Blossoms/18 74.3,53.5
+		.from Huo-Shuang##63691
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto Vale of Eternal Blossoms 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin The Imperion Threat##30302
+	step
+		goto 56.8,43.8
+		.talk Leven Dawnblade##58408
+		..turnin The Secrets of Guo-Lai##30639
+	step
+		goto Vale of Eternal Blossoms 21.3,71.5
+		.talk Kun Autumnlight##58920
+		..turnin The Butcher##30248
 		|next "end"
 	step
-	label cv
-		.' Tell him you would like to fight the Colossal Viseclaw.
-		.' During the fight, you will want to kite him around.
-		.' He will have a damage reduction buff that decreases while he moves.
-		.' If it reaches _0_, the buff will reset.
-		.from Colossal Viseclaw##67508
-		..accept A Colossal Victory##32169
+	label exalted
+		goto 56.7,43.7
+		.talk Leven Dawnblade##58408
+		..accept The Mogu's Message##30643
 	step
-		goto Krasarang Wilds 12.6,62.7
-		.talk Jorn Skyseer##67447
-		..turnin A Colossal Victory##32169
+		'Enter the building here. |goto 40.4,77.2 <5 |c
+	step
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin The Mogu's Message##30643 |tip WARNING! Turning in this quest will spawn enemy ambushers.
+		..accept What Comes to Pass##30644
+	step
+		goto 56.5,43.3
+		.talk Sun Tenderheart##58468
+		..turnin What Comes to Pass##30644
+		..accept The Might of Three##30645
+	step
+		goto 64.4,41.5
+		.from Shao-Tien Marauder##60225+, Granite Quilen##60223+, Shao-Tien Spiritrender##60224+, Reanimated Jade Warrior##60121+
+		.' Kill 100 Mogu Invaders |q 30645/1 |tip While doing this quest you will get some help from the Jade Serpent, Xeun the White Tiger, and Niuzao the Black Ox. Kills 1-34 will aided by the Jade Serpent, use the AoE buff given to take down many foes at once. Kill 34-67 will be aided by the White Tiger, use his buff to focus down individual targets in larger packs, when they are shattered they will deal extreme AoE damage. Kills 67-100 will be aided by Niuzao, use his buff to damage enemies in a cone. Periodically you will instantly kill enemies with a knockback.
+	step
+		goto 74.2,41.8
+		.talk Sinan the Dreamer##59906
+		..turnin The Might of Three##30645
+		..accept The Final Power##30646
+	step
+		goto 77.6,37.2
+		.' Use the Red Crane's power to jump over the wall of flame.
+		|confirm
+		|only if havequest(30646)
+	step
+		goto 78.7,35.8
+		'Zhao-Jin will periodically throw Lightning Spears. Click them to pick them up and then use the new button on your screen to hurl the spear back at him. this will be your main source of damage.
+		'Zhao-Jin will also summon Lightning Waves. With the Red Crane's buff you can easily jump over these.
+		.kill Zhao-Jin the Bloodletter##60273 |q 30646/1
+	step
+		goto 56.5,43.6
+		.talk Anji Autumnlight##58465
+		..turnin The Final Power##30646
 		|next "end"
 	step
 	label end
-		'You have reached the end of the guide.
-		.' Click here to go back to the beginning of the Traps guide. |next "menu"
+		'You have reached the end of the guide for today.
+		.' Click here to go back to the beginning of the dailies. |confirm |next "dailies"
 ]])
+ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
+	step
+	label goldenmenu
+		'Proceeding to Pre-Quests |next |only if default
+		'Proceeding to The Golden Lotus Dailies |next "dailies" |only if completedq(30638)
+		'Skipping the Golden Lotus |next "end_of_lotus" |only if rep("Golden Lotus")>=Revered
+	step
+		goto Kun-Lai Summit 72.0,94.2
+		.talk Wanderer Chu##64521
+		..accept Temple of the White Tiger##31393
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin Temple of the White Tiger##31393
+		..accept A Celestial Experience##31395
+	step
+		goto 68.9,42.8
+		'Talk to Xuen |q 31395/1 |modelnpc Xuen##64528
+		.from Spirit of Violence##64656
+		.' Pass the First Test |q 31395/2
+		.from Spirit of Anger##64684
+		.' Pass the Second Test |q 31395/3
+		.from Spirit of Hatred##64742
+		.' Pass the Third Test |q 31395/4
+	step
+		goto 68.7,43.0
+		.talk Sunwalker Dezco##64542
+		..turnin A Celestial Experience##31395
+		..accept A Witness to History##31511
+	step
+		goto 56.1,91.6
+		.talk Sunwalker Dezco##64853
+		.' Tell him there is only one way to find out. |q 31511/1
+	step
+		goto Vale of Eternal Blossoms 56.8,43.4
+		.talk Zhi the Harmonious##59905
+		..turnin A Witness to History##31511
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..accept The Shrine of Two Moons##30649
+	step
+		goto 61.3,22.0
+		.talk Mokimo the Strong##59959
+		.' Ask him how the refuges are settling in.
+		.' Speak to Mokimo the Strong. |q 30649/2
+	step
+		goto Shrine of Two Moons/1 68.4,47.7
+		.talk Madam Vee Luo##62996
+		.' Ask her what you can find in the city.
+		.' Speak to Madam Vee Luo. |q 30649/3
+	step
+		goto Vale of Eternal Blossoms 62.0,20.5
+		.talk Elder Liao##63996
+		.' Ask him what what this place is.
+		.' Speak to Elder Liao. |q 30649/4
+	step
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.' Ask him if he has seen anything suspicious.
+		.' Speak to Jaluu the Generous. |q 30649/1
+	step
+		goto Vale of Eternal Blossoms 56.7,42.7
+		.talk Sun Tenderheart##58468
+		..turnin The Golden Lotus##30649
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Ruins of Guo-Lai##30632
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin The Ruins of Guo-Lai##30632
+		..accept Out with the Scouts##30633
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..accept Barring Entry##30634
+	step
+		goto 33.8,22.6
+		.talk Lao Softfoot##65252
+		.' Tell him you're ready to infiltrate the cave. |q 30634/1
+	step
+		'Follow Lao Softfoot up the hill. |tip Do not stray far from him, he will keep you stealthed as long as you are close.
+		.' Wait for the patrol to be at a safe distance and place the explosives at the mouth of the cave [27.6,15.3] |use Explosive Keg##80484
+		.' Explosives Planted |q 30634/2
+	step
+		goto 30.6,29.6
+		.kill 8 Shao-Tien Precursor##59914+ |q 30633/1
+	step
+		goto 33.7,38.4
+		.talk Kun Autumnlight##58471
+		..turnin Barring Entry##30634
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Out with the Scouts##30633
+		..accept Killing the Quilen##30635
+		..accept Stones of Power##30636
+	step
+		goto 22.5,27.0
+		'Click the Quest Discovered box that displays on the right side of the screen under your minimap
+		..accept The Guo-Lai Halls##30637
+	step
+		.' Enter the Ruins of Guo-Lai. |goto 22.5,26.9 <5 |c
+	step
+		goto Vale of Eternal Blossoms/18 54.9,53.5
+		.' Attack Zhao-Jin the Bloodletter, he will run. |modelnpc Zhao-Jin the Bloodletter##59921
+		.kill Dagou##59977 |q 30637/1
+	step
+		'Leave the building |goto Vale of Eternal Blossoms/18 56.0,93.4 <5 |c
+	step
+		goto Vale of Eternal Blossoms 21.6,30.6
+		.kill 9 Stone Guardian##59973+ |q 30635/1
+		.click Revelite Crystal
+		.get 7 Relelite Crystal##80511+ |q 30636/1
+	step
+		goto 34.0,38.0
+		.talk Anji Autumnlight##58465
+		..turnin Killing the Quilen##30635
+		..turnin Stones of Power##30636
+		..turnin The Guo-Lai Halls##30637
+		..accept Leaving an Opening##30638
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin Leaving an Opening##30638
+	step
+	label dailies
+		.' You will only be able to accept 5 quests from the following NPCs.
+		|confirm
+	step
+		goto Vale of Eternal Blossoms 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..accept The Eternal Vigil##30307 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..accept Stone Hard Quilen##30308 |daily |or 2
+		..accept Set in Stone##30309 |daily |or 2
+		..accept Thundering Skies##30310 |daily |or 2
+		..accept Crumbling Behemoth##31762 |daily |or 2
+		..accept Unleashed Spirits##31757 |daily |or 2 
+		..accept Striking First##31760 |daily |or 2
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..accept High Standards##30311 |daily |or
+		..accept Laosy Scouting##31758 |daily |or
+		..accept Cannonfire##31754 |daily |or
+		..accept High Chance of Rain##31756 |daily |or
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..accept Given a Second Chance##30312 |daily |or
+		..accept Free Spirits##30320 |daily |or
+		..accept Acts of Cruelty##31755 |daily |or
+	step
+		goto 39.7,26.0
+		.click Shao-Tien Cage##9667  |tip If he is not in this cage try one of the other coordinates below.
+		.' [39.2,19.2]
+		.' [37.5,22.9]
+		.' [40.5,18.4]
+		.' [43.1,22.1]
+		.' [43.2,15.9] 
+		.' [47.5,19.1]
+		.' [50.5,23.6]
+		.' Rescue Lao Softfoot |q 31758/1
+		|only if havequest(31758)
+	step
+		goto 44.2,15.8
+		.' Kill the Shao-Tien Soul-Renders surrounding the Behemoth.
+		.' Shao-Tien Behemoth ritual stopped |q 31760/1
+		|modelnpc 58460
+		|only if havequest(31760)
+	step
+		goto 50.9,22.3
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Eastern Stormcaller |q 31756/1
+		|only if havequest(31756)
+	step
+		goto 47.8,19.1
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Northern Stormcaller |q 31756/2
+		|only if havequest(31756)
+	step
+		goto 43.1,27.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Southern Stormcaller |q 31756/3
+		|only if havequest(31756)
+	step
+		goto 36.8,18.
+		.click Shao-Tien Stormcaller##11827
+		.' Destroy the Western Stormcaller |q 31756/4
+		|only if havequest(31756)
+	step
+		goto 44.0,21.8
+		.from Shao-Tien Soul-Render##58460+, Shao-Tien Marauder##58412+ |only if havequest(30307)
+		.' Kill 12 Shao-Tien Mogu |q 30307/1 |only if havequest(30307)
+		.' Free 5 Torture victims |q 31755/1 |only if havequest(31755)
+		.kill 6 Mogu Effigy##59156+ |q 30309/1 |only if havequest(30309)
+		.kill 3 Subjugated Serpent##59158+ |q 30310/1 |only if havequest(30310)
+		.kill 30 Unleashed Spirit |q 31757/1 |only if havequest(31757)
+		.' You can find more Unleashed Spirits at [46.9,34.3] |only if havequest(31757)
+		.kill 8 Granite Quilen##59157 |q 30308/1 |only if havequest(30308)
+		.click Golden Lotus Banner |only if havequest(30311)
+		.' Raise 6 Golden Lotus Standards |q 30311/1 |only if havequest(30311)
+		.click Soul Vortex |only if havequest(30320)
+		.clicknpc Captive Pandaren Soul##59231 |only if havequest(30320)
+		.' Free 15 Captive Pandaren Spirits |q 30320/1 |only if havequest(30320)
+		.kill Shao-Tien Behemoth |q 31762/1 |only if havequest(31762)
+		.' Use your Wu Kao Explosive near a Shao-Tien Cannon. |use Wu Kao Explosive##89123 |only if havequest(31754)
+		.' Destroy 7 Shao-Tien Cannons. |q 31754/1 |only if havequest(31754)
+	step
+		goto 52.3,28.8 
+		.' Use Shado-Pan Bandages on Wounded Defenders |use Shado-Pan Bandages##84242
+		.' Heal 6 Wounded Defenders |q 30312/1
+		|only if havequest(30312)
+	step
+		goto 56.6,43.1
+		.talk Sun Tenderheart##58468
+		..turnin Given a Second Chance##30312 |daily
+		..turnin Free Spirits##30320 |daily
+		..turnin Acts of Cruelty##31755 |daily
+	step
+		goto 56.6,43.6
+		.talk Anji Autumnlight##58465
+		..turnin Stone Hard Quilen##30308 |daily
+		..turnin Set in Stone##30309 |daily
+		..turnin Thundering Skies##30310 |daily
+		..turnin Crumbling Behemoth##31762 |daily
+		..turnin Unleashed Spirits##31757 |daily
+		..turnin Anji's Diplomacy##31760 |daily
+	step
+		goto 56.6,43.6
+		.talk Kun Autumnlight##58471
+		..turnin High Standards##30311 |daily
+		..turnin Laosy Scouting##31758 |daily
+		..turnin Cannonfire##31754 |daily
+		..turnin High Chance of Rain##31756 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		..turnin The Eternal Vigil##30307 |daily
+		..accept Whitepetal Lake##31131 |daily |or |next "whitepetal"
+		..accept Mistfall Village##31242 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31243 |daily |or |next "mistfall3"
+		.' If Leven has no available quests after turning in The Eternal Vigil click here. |confirm 
+	step
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..accept A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.4
+		.talk He Softfoot##58470
+		..accept The Silent Approach##30281 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..accept Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..accept Rude Awakenings##30292 |daily |or
+		..accept In Enemy Hands##30293 |daily |or
+	step
+		goto 43.4,42.9
+		.clicknpc Shao-Tien Ritual Statue##63090
+		.' Click all four statues and fight off whatever creature spawns to defend them.
+		.' Shao-Tien Ritual Statues destroyed |q 30283/1
+		|only if havequest(30283)
+	step
+		goto 45.2,41.7
+		.kill 8 Paleblade Flesheater##63082+ |q 30292/1 |only if havequest(30292)
+		.from Shao-Tien Mindbender##63129+, Shao-Tien Reclaimer##63081+ |only if havequest(30281)
+		.' Kill 10 Whitepetal mogu |q 30281/1 |only if havequest(30281)
+		.' Use the Shado-Pan Torch in your bags near the Shao-Tien Banners in this area. |use Shado-Pan Torch##84781 |only if havequest(30282)
+		.' Burn 10 Shao-Tien Banners |q 30282/1 |only if havequest(30282)
+		.' Rescue 8 Dominated Defenders by killing the Shao-Tien Mindbender's controlling them. |q 30293/1 |only if havequest(30293)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Silent Approach##30281 |daily
+		..accept The Soul-Gatherer##30482 |daily
+		.' Click here if this quest is unavailable |confirm |next "skipsoul"
+	step
+		goto 40.8,48.0
+		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
+		.get Soul-Gatherer's Beads |q 30482/1
+		|only if havequest(30482)
+	step
+		goto 56.6,43.2
+		.talk He Softfoot##58470
+		..turnin The Soul-Gatherer##30482
+	step
+	label "skipsoul"
+		goto 56.7,43.2
+		.talk Ren Firetongue##58469
+		..turnin A Smashing Impression##30283 |daily
+	step
+		goto 56.5,43.7
+		.talk Anji Autumnlight##58465
+		..turnin Burning Away the Filth##30282 |daily
+	step
+		goto 56.5,43.7
+		.talk Kun Autumnlight##58471
+		..turnin Rude Awakenings##30292 |daily
+		..turnin In Enemy Hands##30293 |daily
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..accept Behind Our Lines##31136 |daily |or |next "behind"
+		..accept The Ruins of Guo-Lai##31248 |daily |or |next "ruins"
+		..accept Setting Sun Garrision##31250 |daily |or |next "ssg"
+		..accept Mistfall Village##31249 |daily |or |next "mistfall"
+	step
+	label	"behind"
+		goto 69.2,54.8
+		.' Walk along this path until you find General Tamuja
+		.kill General Temuja##63101+ |q 31136/1
+	step
+		goto 56.7,43.6
+		.talk Leven Dawnblade##58408
+		 ..turnin Behind Our Lines##31136
+		|next "ruins" |only if havequest(31248) or havequest(31294) or havequest(31296)
+		|next |only if defualt
+	step
+		.' Friendly |next "end" |only if rep('Golden Lotus')<=Friendly
+		.' Honored |next "honored" |only if rep('Golden Lotus')==Honored
+		.' Revered |next "revered" |only if rep('Golden Lotus')==Revered 
+		.' Exalted |next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ruins of Guo-Lai##31248 |only if havequest(31248)
+		..turnin The Ruins of Guo-Lai##31294 |only if havequest(31294)
+		..turnin Guo-Lai Infestation##31240 |only if havequest(31240)
+		..turnin The Ruins of Guo-Lai##31296 |only if havequest(31296)
+		..accept In Ashen Webs##30200 |daily 
+		..accept Troubling the Troublemakers##30228 |daily 
+		..accept Blood on the Rise##30226 |daily 
+		|confirm
+	step
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..accept Hard as a Rock##30304 |daily |or
+		..accept That's Not a Rock!##30204 |daily |or
+	step
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..accept Runelocked##30205 |daily 
+		..accept Runes in the Ruins##30206 |daily 
+		|confirm
+	step
+		goto 31.2,31.0
+		.' Around this ruin there will be four blue runic symbols on the ground, walk over each of them to unlock the Ancient Mogu Artifact
+		.click Ancient Mogu Artifact
+		.get Ancient Mogu Artifact##85204 |q 30205/1
+		.' The relic may also be at [26.9,19.6]
+		|only if havequest(30205)
+	step
+		goto 30.7,20.4
+		.from Stonebark Trickster##58545 |only if havequest(30228)
+		.' Kill 8 Stonebark sprites |q 30228/1 |only if havequest(30228)
+		.from Shao-Tien Fist##65134+, Shao-Tien Sorcerer##65133+ |only if havequest(30226)
+		.' Kill 8 Ruin's Rise mogu. |q 30226/1 |only if havequest(30226)
+	step
+		goto 26.3,29.2
+		.click Mogu Statue |only if havequest(30304)
+		.from Mogu Statue##63447+ |only if havequest(30304)
+		.' Destroy 10 Mogu Statues |q 30304/1 |only if havequest(30304)
+		.from Ashweb Weaver##58459+, Ashweb Piercer##58475+ |only if havequest(30200)
+		.' Kill 10 Ashweb Spiders |q 30200/1 |only if havequest(30200)
+		.' Use your Shado-Pan Torch on the small rocks around this area. |use Shado-Pan Torch##85261 |only if havequest(30204)
+		.kill 50 Ashweb Hatchling##58568+ |q 30204/1 |only if havequest(30204)
+		.click Guo-Lai Runestone##6714 |only if havequest(30206)
+		.get 12 Guo-Lai Runestone |q 30206/1 |only if havequest(30206)
+		.' You can find more of the objectives in this step at [25.2,38.7]
+	step
+		goto 34.0,38.1
+		.talk Kun Autumnlight##58504
+		..turnin Hard as a Rock##30304 |daily 
+		..turnin That's Not a Rock!##30204 |daily 
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin In Ashen Webs##30200 |daily 
+		..turnin Troubling the Troublemakers##30228 |daily 
+		..turnin Blood on the Rise##30226 |daily 
+		..accept Wulon, the Granite Sentinel##30227 |daily |or 
+		..accept The Ashweb Matriarch##30225 |daily |or
+		..accept The Crumbling Hall##30277 |daily |or
+	step
+		goto 33.5,40.8
+		.talk Sinan the Dreamer##63266
+		..turnin Runelocked##30205 |daily 
+		..turnin Runes in the Ruins##30206 |daily 
+	step
+		goto Vale of Eternal Blossoms/18 77.6,72.9
+		.kill Wulon##63510 |q 30227/1
+		|only if havequest(30227)
+	step
+		goto Vale of Eternal Blossoms/18 75.7,47.9
+		.kill Bloodtip##58474 |q 30225/1 |tip Every 20% Bloodtip casts Call Swarmers which brings out many small spiders, they are easily killed and need to be killed immediately.
+		|only if havequest(30225)
+	step
+		goto 56.1,49.1
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
+		|confirm
+		|only if havequest(30280)
+	step
+		goto Vale of Eternal Blossoms/19 53.9,68.3
+		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
+		|only if havequest(30280)
+	step
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 28.1,39.3 <5 |c
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 36.0,36.6
+		.click Deactivate First Spirit Wall
+		.' Deactivate the First Spirit Wall |q 30277/1
+		|only if havequest(30277)
+	step
+		goto 23.2,28.9
+		.click Deactivate Second Spirit Wall
+		.' Deactivate the Second Spirit Wall |q 30277/2
+		|only if havequest(30277)
+	step
+		goto 41.6,18.4
+		.click Deactivate Final Spirit Wall
+		.' Deactivate the Final Spirit Wall |q 30277/3
+		|only if havequest(30277)
+	step
+		goto 49.4,30.6
+		.click Ancient Guo-Lai Artifact
+		.get Ancient Guo-Lai Artifact |q 30277/4
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Thunder Below##30280 
+		|only if havequest(30280)
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Crumbling Hall##30277 
+		|only if havequest(30277)
+	step
+		goto 34.0,38.1
+		.talk Anji Autumnlight##58503
+		..turnin The Ashweb Matriarch##30225 |daily |or 
+		..turnin Wulon, the Granite Sentinel##30227 |daily |or
+		|next "end" |only if rep('Golden Lotus')<=Honored
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Mistfall Village##31242 |daily |only if havequest(31242)
+		..turnin Mistfall Village##31245 |daily |only if havequest(31245)
+		..turnin Mistfall Village##31249 |daily |only if havequest(31249)
+		..accept Clearing in the Forest##30263 |daily |or 2
+		..accept Encroaching Storm##30194 |daily |or 2
+		..accept Ruffling Some Feathers##30232 |daily |or 2
+		..accept The Pandaren Uprising Relived##30237 |daily |or 2
+		..accept Return to Rest##30238 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..accept Sprite Plight##30190 |daily |or 2
+		..accept My Town, It's on Fire##30192 |daily |or 2
+		..accept Steer Clear of the Beer Here##30191 |daily |or 2
+		.'_
+		.' If these quests are not available click here |confirm
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..accept Meating Expectations##30193 |daily |or 2
+		..accept Pomfruit Pickup##30231 |daily |or 2
+		..accept Lushroom Rush##30196 |daily |or 2
+		.'_
+		.' If these quests are not available click here. |confirm
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..accept Blooming Blossoms##30195 |daily
+		.'_
+		.' If this quest is not available click here. |confirm
+	step
+		goto 25.8,74.8
+		.kill 8 Thundermaw##58456+ |q 30194/1 |only if havequest(30194)
+		.from Fairlands Gazelle##58454+ |only if havequest(30193)
+		.get 10 Fairlands Gazelle Meat##79244+ |q 30193/1 |only if havequest(30193)
+		.' Use the Pomharvest Firework in your bags to knock Pomfruits out of the trees in the area |use Pomharvest Firework##79344 |only if havequest(30231)
+		.clicknpc Pomfruit##58767 |only if havequest(30231)
+		.get 12 Pomfruit##79250+ |q 30231/1 |only if havequest(30231)
+		.from Silkfeather Hawk##58457 |only if havequest(30232)
+		.get 120 Silken Feather##84121+ |q 30232/1 |only if havequest(30232)
+		.click Eternal Blossom |tip These can be found most abundantly along the river. |only if havequest(30195)
+		.get 10 Eternal Blossom##79246+ |q 30195/1 |only if havequest(30195)
+	step
+		 goto 29.9,53.5
+		.from Shao-Tien Painweaver##65131+, Shao-Tien Conqueror##65132+
+		.' Kill 10 Winterbough Glade mogu. |q 30263/1
+		|only if havequest(30263)
+	step
+		goto 37.3,81.4
+		.from 12 Slateskin Troublemaker##58673+ |q 30190/1 |only if havequest(30190)
+		.click Stolen Mistfall Keg |only if havequest(30191)
+		.get 10 Stolen Mistfall Keg##85778+ |q 30191/1 |only if havequest(30191)
+		.click Brazier Fire |only if havequest(30192)
+		.' Put out 30 Brazier Fires |q 30192/1 |only if havequest(30192)
+	step
+		goto 49.5,67.6
+		.kill 8 Ancient Mogu Spirit##58671+ |q 30237/1 |only if havequest(30237)
+		.click Lushroom |only if havequest(30196)
+		.get 12 Lushroom##85681+ |q 30196/1 |only if havequest(30196)
+		.click Pandaren Gravestone |only if havequest(30238)
+		.' Honor 6 Pandaren Gravestones |q 30238/1 |only if havequest(30238)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin The Pandaren Uprising Relived##30237 |daily
+	step
+		goto 35.4,74.1
+		.talk Mayor Shiyo##58819
+		..turnin Sprite Plight##30190 |daily
+		..turnin My Town, It's on Fire##30192 |daily
+		..turnin Steer Clear of the Beer Here##30191 |daily
+	step
+		goto 33.9,70.4
+		.talk Cook Tope##58818
+		..turnin Meating Expectations##30193 |daily
+		..turnin Pomfruit Pickup##30231 |daily
+		..turnin Lushroom Rush##30196 |daily
+	step
+		goto 33.8,69.7
+		.talk Merchant Tantan##58820
+		..turnin Blooming Blossoms##30195 |daily
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Encroaching Storm##30194 |daily
+		..turnin Ruffling Some Feathers##30232 |daily
+		..turnin Clearing in the Forest##30263 |daily
+		..turnin Return to Rest##30238 |daily
+		..accept Lao-Fe the Slavebinder##30239 |daily |or |next "slave"
+		..accept Aetha##30236 |daily |or |next "aetha"
+		..accept The Ruins of Guo-Lai##31294 |daily |or |next "ruins"
+		..accept Mogu within the Ruins of Guo-Lai##31295 |daily |or |next honored
+		..accept Setting Sun Garrison##30385 |daily |or |next "ssg"
+		..accept Quid Pro Quo##30235 |daily |or
+	step
+		goto 30.8,79.4
+		.' Use the Stone of the Water to walk on water |use Stone of the Water Strider##87807
+		.kill Quid##58771 |q 30235/1
+		|only if havequest(30235)
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Quid Pro Quo##30235
+	step
+	label aetha
+		goto 35.0,90.0
+		.from Aetha##58778 |tip Aetha will constantly summon Tornadoes, simply kite Aetha to a new location out of the range. With your Stone of the Water Strider buff, you should easily be able to kite on the water.
+		.' Subdue Aetha |q 30236/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Aetha##30236 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label slave
+		goto 47.4,65.8
+		.kill Spirit of Lao-Fe##58817 |q 30239/1
+	step
+		goto 33.9,72.2
+		.talk Che Wildwalker##59338
+		..turnin Lao-Fe the Slavebinder##30239 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label mistfall2
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Attack on Mistfall Village##31243 |daily
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket##11350 
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.6,72.8
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287) or havequest(31293)
+		.' Kill 6 Shao-Tien attackers |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |tip These scrolls are very small and can be hard to find. |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.kill 8 Stonebound Quilen##63950+ |q 30290/1 |only if havequest(30290)
+		.' Rescue 6 Cornered Villagers |q 30286/1 |tip Attack the Subjugators or Quilen that are pinning them down. |only if havequest(30286)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them. |q 30289/1 |only if havequest(30289)
+		|modelnpc Shao-Tien Subjugator##64201
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily
+	step
+		goto 35.3,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##30287 |daily
+		..turnin Freeing Mind and Body##30289 |daily
+	step
+		goto 35.3,76.8
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Setting Sun Garrison##31297 |daily |or |next "ssg"
+		..accept The Ruins of Guo-Lai##31296 |daily |or |next "ruins"
+	step
+	label whitepetal
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Whitepetal Lake##31131 |daily
+		..accept Under Watchful Eyes##30341 |daily |or
+		..accept The Displaced Paleblade##30314 |daily |or
+		..accept The Moving Mists##30313 |daily |or
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept A Thousand Pointy Teeth##30284 |daily |or 2
+		..accept Sparkle in the Eye##30265 |daily |or 2
+		..accept Stunning Display##30291 |daily |or 2
+		..accept Fiery Tongue, Fragile Feet##30342 |daily |or 2
+		..accept A Weighty Task##30338 |daily |or 2
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..accept Stick in the Mud##30340 |daily |or
+		..accept Getting your Hands Dirty##30339 |daily |or
+	step
+		goto 41.1,47.0
+		.kill 15 Knifetooth Swarmer##59404+ |q 30284/1 |only if havequest(30284)
+		.kill 8 Stillwater Crocodile##58455+ |q 30342/1 |only if havequest(30342)
+		.click Ruby Eye |tip These are inside of the Mogu heads underwater. |only if havequest(30265)
+		.get 8 Ruby Eye##84646+ |q 30265/1 |only if havequest(30265)
+		.clicknpc Stunned Whitepetal##62984 Carp |only if havequest(30291)
+		.get 12 Stunned Whitepetal Carp##84656 |q 30291/1 |only if havequest(30291)
+		.click Mogu Artifact |only if havequest(30338)
+		.get 8 Mogu Artifact##84655 |q 30338/1 |only if havequest(30338)
+	step
+		goto 44.1,53.2
+		.' Use the Shado-Pan Flare in your bags to illuminate Shao-Tien Surveyors. |use Shado-Pan Flare##89366 |only if havequest(30341)
+		.kill 8 Shao-Tien Surveyor##59379+ |q 30341/1 |only if havequest(30341)
+		.kill 8 Fog Walker##58672+ |q 30313/1 |only if havequest(30313)
+		.from Paleblade Flesheater##59378+, Paleblade Slithertongue##63044+ |only if havequest(30314)
+		.' Kill 8 Paleblade Saurok |q 30314/1 |only if havequest(30314)
+		.click Whitepetal Reeds##10817 |only if havequest(30340)
+		.get 12 Whitepetal Reed##84241 |q 30340/1 |only if havequest(30340)
+		.click Fresh Dirt##20 |only if havequest(30339)
+		.get 12 Fresh Whitepetal Worm##84240 |q 30339/1 |only if havequest(30339)
+	step
+		goto 43.6,46.1
+		.talk He Softfoot##59342
+		..turnin Under Watchful Eyes##30341 |daily
+		..turnin The Displaced Paleblade##30314 |daily
+		..turnin The Moving Mists##30313 |daily
+	step
+		goto 42.3,46.0
+		.talk Merchant Tantan##59341
+		..turnin Stick in the Mud##30340 |daily
+		..turnin Getting your Hands Dirty##30339 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin A Thousand Pointy Teeth##30284 |daily
+		..turnin Sparkle in the Eye##30265 |daily
+		..turnin Stunning Display##30291 |daily
+		..turnin Fiery Tongue, Fragile Feet##30342 |daily
+		..turnin A Weighty Task##30338 |daily
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..accept Vicejaw##30234 |daily |or |next "vicejaw"
+		..accept Setting Sun Garrison##31247 |daily |or |next "ssg"
+		..accept Guo-Lai Infestation##31240 |daily |or |next "ruins"
+		..accept Mistfall Village##31245 |daily |or |next "mistfall"
+		..accept Attack on Mistfall Village##31246 |daily |or |next "mistfall3"
+		..accept Guo-Lai Encampment##31244 |daily |or |next "ruins2"
+		..accept Cracklefang##30233 |daily |or |next "crackle"
+	step
+	label vicejaw
+		goto 37.3,51.1
+		.kill Vicejaw##58769 |q 30234/1 |tip When you first pull Vicejaw, kite him through the corpses of Paleblade Flesheaters that are lying all around, when he eats 10 of them he will begin casting Upchuck. When he does this he wil not move and will only attack in front of himself, walk around to his backside and attack until his energy meter resets to 0. When he is weak Vicejaw will pick you up and begin to eat you. Kill him before he is able to chew you to death. He will not try to eat you if he is using Upchuck, time it right and you won't have to race to kill him.
+	step
+		goto 42.3,46.0
+		.talk Ren Firetongue##59343
+		..turnin Vicejaw##30234 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted 
+	step
+	label ruins2
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Guo-Lai Encampment##31244
+		..accept Painting the Ruins Red##30298 |daily
+		..accept Offering a Warm Welcome##30301 |daily
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..accept No Stone Unturned##30299 |daily 
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if no quest is available |confirm
+	step
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept Carved in Stone##30481 |daily
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 25.4,28.8
+		.from Shao-Tien Dominator##63610+, Shao-Tien Soul-Caller##63611+, Shao-Tien Torturer##63641+ |only if havequest(30298)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.' Kill 15 Guo-Lai mogu. |q 30298/1 |only if havequest(30298)
+		.get 1 Shao-Tien Cage Key |q 30300/1 |only if havequest(30300)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.click Shao-Tien Cage |only if havequest(30300)
+		.' Free 6 Golden Lotus Prisoners. |q 30300/2 |only if havequest(30300)
+		.click Mogu Statue |only if havequest(30299)
+		.from Mogu Statue##63447+ |only if havequest(30299)
+		.' Destroy 10 Mogu Statues |q 30299/1 |only if havequest(30299)
+		.' Use your Shado-Pan Torch on the Tents around this area. |use Shado-Pan Torch##85581 |only if havequest(30301)
+		.' Burn 6 Shao-Tien Tents |q 30301/1 |only if havequest(30301)
+	step
+		goto 33.1,39.0
+		.talk Wounded Defender##63753
+		..turnin No Stone Unturned##30299 
+		..turnin The Key to Success##30300 
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin Painting the Ruins Red##30298 
+		..turnin Offering a Warm Welcome##30301 
+		..accept The Imperion Threat##30302 |daily
+	step
+		goto 68.6,71.0
+		.from Gochao the Ironfist##62880
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##59332
+		..turnin The Imperion Threat##30302
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label ssg
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Setting Sun Garrison##31247 |daily |only if havequest(31247)
+		..turnin Setting Sun Garrison##30385 |daily |only if havequest(30385)
+		..turnin Setting Sun Garrison##31297 |daily |only if havequest(31297)
+		..turnin Setting Sun Garrision##31250 |daily |only if havequest(31250)
+		..accept The Battle Ring##30306 |daily
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Survival Ring: Flame##30240 |daily |or
+		..accept Survival Ring: Blades##30242 |daily |or
+	step
+		goto 19.7,74.2
+		.from Shado-Pan Trainee##58992+
+		.' Defeat 20 Shado-Pan Trainees. |q 30306/1
+		|only if havequest(30306)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid getting hit by the fireworks.
+		.' Live through the Survival Ring for 90 seconds |q 30240/1
+		|only if havequest(30240)
+	step
+		goto 19.2,67.5
+		.' Stay within the circle and avoid the posts with blades surrounding them and the running pandas.
+		.' Live through the Survival Ring for 90 seconds |q 30242/1
+		|only if havequest(30242)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Survival Ring: Flame##30240 |daily |or
+		..turnin Survival Ring: Blades##30242 |daily |or
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin The Battle Ring##30306 |daily
+		..accept Upon the Ramparts##30246 |daily |or
+		..accept Enemy at the Gates##30264 |daily |or
+		..accept No Reprieve##30444 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..accept Mantid Under Fire##30243 |daily |or
+		..accept Along the Serpent's Spine##30244 |daily |or
+		..accept Lost Scouts##30245 |daily |or
+		.'_
+		.' If these quests are unavailable today, click here. |confirm
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..accept Bloodied Skies##30266 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..accept Roll Club: Serpent's Spine##30261 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto Vale of Eternal Blossoms 18.6,36.4
+		.' Kill the Shao-Tien Mobs attacking the Shado-Pan Scouts.
+		.talk Shado-Pan Scout##58947 |q 30245/1
+		.' Click the Quest Complete box that displays on the right side of the screen under your minimap
+		..turnin Lost Scouts##30245
+		..accept The Butcher##30248
+		|only if havequest(30245)
+	step
+		goto 17.0,47.5
+		.from Shao-Tien Antiquator##58928+, Shao-Tien Fist##58927+
+		.kill 8 Shao-Tien mogu |q 30444/1
+		|only if havequest(30444)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		.' Let's roll. |q 30261/1
+		|only if havequest(30261)
+	step
+		'Hold down your right mouse button to help you maneuver through the course. |tip Grab as many speed boosts as you can to make it go quicker.
+		.' Complete the Serpent's Spine Roll Course. |q 30261/2
+		|only if havequest(30261)
+	step
+		goto 18.2,63.6
+		.talk Kelari Featherfoot##58704
+		..turnin Roll Club: Serpent's Spine##30261 |daily
+	step
+		goto 15.6,66.1
+		.clicknpc War Serpent##65336
+		.' Mount a War Serpent |invehicle |q 30264/1
+		|only if havequest(30264)
+	step
+		'Use the abilities on your hotbar to do the following:
+		.kill 60 Krik'thik Hiveling##63972+ |q 30264/2
+		.kill 3 Krik'thik War Wagon##64274+ |q 30264/3
+		.kill 3 Krik'thik Catapult##64275+ |q 30264/4
+		|only if havequest(30264)
+	step
+		'Click the Return to Setting Sun Garrison button. |outvehicle
+		|only if havequest(30264)
+	step
+		goto 5.4,72.3
+		.click Setting Sun Turret 
+		.' Mount a turret. |invehicle |c
+		|only if havequest(30266)
+	step
+		.kill 30 Krik'thik Swarmer##63973+ |q 30266/1
+		|only if havequest(30266)
+	step
+		'Click the Leave Vehicle button. |outvehicle
+		|only if havequest(30266)
+	step
+		goto 11.4,58.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30246/1
+	step
+		goto 6.9,68.8
+		.from Krik'thik Locust-Guard##63974+, Krik'thik Needler##63976+
+		.' Kill 10 Kir'thik wall attackers |q 30244/1
+		|only if havequest(30244)
+	step
+		'Click the Complete Quest box that displays on the right side of the screen under your minimap
+		..turnin Along the Serpent's Spine##30244 |daily
+		..accept Under the Setting Sun##30249 |daily
+		|only if havequest(30244)
+	step
+		goto 6.0,58.8
+		.kill Kri'chon##63978 |q 30249/1
+		|only if havequest(30249)
+	step
+		goto 21.5,71.2
+		.talk Leven Dawnblade##59340
+		..turnin Bloodied Skies##30266 |daily
+		..accept The Butcher##30248 |daily
+		|only if havequest(30266) or completedq(30266)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Upon the Ramparts##30246 |daily
+		..turnin No Reprieve##30444
+		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
+		goto 7.9,33.9
+		.kill Vyraxxis##63977 |q 30251/1
+		|only if havequest(30251)
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..turnin Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily
+	step
+		goto 21.4,71.5
+		.talk Anji Autumnlight##58919
+		..turnin Enemy at the Gates##30264 |daily
+	step
+		goto 21.4,71.5
+		.talk Kun Autumnlight##58920
+		..turnin Mantid Under Fire##30243 |daily
+		..turnin Under the Setting Sun##30249 |daily
+		..turnin The Butcher##30248 |daily
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label mistfall3
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Attack on Mistfall Village##31246 |daily
+		..accept Mogu Make Poor House Guests##30287 |daily |or 2
+		..accept Mogu Make Poor House Guests##31293 |daily |or 2
+		..accept Stonebound Killers##30290 |daily |or 2
+		..accept Freeing Mind and Body##30289 |daily |or 2
+		.' If the turn in step for this step is grayed out, click here. |confirm |next "mistfall2"
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..accept Wu Kao Scouting Reports##30285 |daily |or
+		..accept Backed Into a Corner##30286 |daily |or
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..accept My Town, It's On Fire Again##30288 |daily
+	step
+		goto 37.8,73.2
+		.click Miftfall Water Bucket
+		.collect Mistfall Water Bucket##85950 |n
+		.' Use the Miftfall Water Bucket to put out 60 fires around town. |use Mistfall Water Bucket##85950
+		.' 60 Mistfall Village fires doused. |q 30288/1
+		|only if havequest(30288)
+	step
+		goto 33.8,72.6
+		.from Shao-Tien Pillager##63948+, Shao-Tien Subjugator##63947+ |only if havequest(30287)
+		.' Kill 6 Shao-Tien attackers. |q 30287/1 |only if havequest(30287)
+		.' Kill 12 Shao-Tien attackers. |q 31293/1 |only if havequest(31293)
+		.click Wu Kao Scouting Report |only if havequest(30285)
+		.get 3 Wu Kao Scouting Report##86099 |q 30285/1 |only if havequest(30285)
+		.' Free 6 Dominated Guards by killing the Subjugator controlling them |q 30289/1 |only if havequest(30289)
+		|modelnpc Shao-Tien Subjugator##64201
+		|modelnpc Golden Lotus Guard##64200
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Mogu Make Poor House Guests##31293 |daily
+		..turnin Mogu Make Poor House Guests##30287 |daily
+		..turnin Stonebound Killers##30290 |daily
+		..turnin Freeing Mind and Body##30289 |daily
+	step
+		goto 35.1,75.4
+		.talk Sun Tenderheart##59337
+		..turnin Wu Kao Scouting Reports##30285 |daily 
+		..turnin Backed Into a Corner##30286 |daily 
+	step
+		goto 35.3,76.7
+		.talk Mayor Shiyo##59336
+		..turnin My Town, It's On Fire Again##30288 |daily
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..accept Gaohun the Soul-Severer##30296 |daily |or
+		..accept Baolai the Immolator##30297 |daily |or
+	step
+		goto 39.2,74.6
+		.kill Gaohun the Soul-Severer##62881 |q 30296/1
+		|only if havequest(30296)
+	step
+		goto 37.5,81.5
+		.kill Baolai the Immolator##63695 |q 30297/1 |tip  WARNING! Do not be near a ledge when he does his cleave, it will send you flying back dealing heavy falling damage.
+		|only if havequest(30297)
+	step
+		goto 35.2,74.9
+		.talk Rook Stonetoe##58911
+		..turnin Gaohun the Soul-Severer##30296 |daily 
+		..turnin Baolai the Immolator##30297 |daily 
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label crackle
+		goto Vale of Eternal Blossoms 46.5,59.1
+		.from Cracklefang##58768
+		.' Cracklefang Slain |q 30233/1
+	step
+		goto 42.4,46.0
+		.talk Ren Firetongue##59343
+		..turnin Cracklefang##30233
+		|next "end" |only if rep('Golden Lotus')<=Friendly
+		|next "honored" |only if rep('Golden Lotus')==Honored 
+		|next "revered" |only if rep('Golden Lotus')==Revered 
+		|next "exalted" |only if rep('Golden Lotus')==Exalted
+	step
+	label revered
+		goto 74.2,42.6
+		.talk Jaluu the Generous##59908
+		.buy 1 Grand Commendation of the Golden Lotus##93215
+		.' Use the Commendation of the Golden Lotus you just purchased. |use Grand Commendation of the Golden Lotus##93215
+		.' If you have already purchased this (either on this or another character), click here. |confirm
+		|only if rep("Golden Lotus")>=Revered
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..accept Battle Spear of the Thunder King##30640
+	step
+		goto 21.4,19.7
+		.click Battle Spear of the Thunder King
+		.get Battle Spear of the Thunder King##80808 |q 30640/1
+	step
+		goto 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Spear of the Thunder King##30640 |only if not completedq(30640)
+		..accept Battle Helm of the Thunder King##30641 |only if not completedq(30641)
+	step
+		'Enter the building here. |goto 22.3,26.4 <5 |c
+	step
+		goto Vale of Eternal Blossoms/18 56.2,48.7
+		'Traverse the following rooms by only stepping on the pale tiles, colored tiles will harm you.
+		|confirm
+		|only if havequest(30641)
+	step
+		goto 58.5,44.4
+		.talk Ren Firetongue##63571
+		.' Tell him Zhi sent you.
+		.' Enter the Hall of Tiles |q 30641/1
+	step
+		'Follow Ren Firetongue |goto Vale of Eternal Blossoms/19 44.7,67.1 <5 |c
+	step
+		goto 52.0,76.1
+		.from Zhao-Jin the Bloodletter##60359 |tip He constantly shoots lighting at you so keep on the move. If you are in melee range he will try to cleave you, step around him as he begins casting.
+		.click Battle Helm of the Thunder King
+		.get Battle Helm of the Thunder King##80222 |q 30641/2
+	step
+		'While exiting the building be careful of the tiles. The safe path is along the pale tiles.
+		.' Exit the building. |goto Vale of Eternal Blossoms/18 56.1,93.7 <5 |c
+	step
+		goto Vale of Eternal Blossoms 57.2,42.9
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Helm of the Thunder King##30641
+		..accept Battle Axe of the Thunder King##30642 //// Cannot get gate to drop.
+	step
+		'Enter the building here. |goto 40.4,77.1 <5 |c
+	step
+		goto 44.3,76.5
+		.' Fight off the Jade Constructs that attack you. |tip If you need help defeating them walk into the orbs around this room. Blue will give a damage and haste buff, green will heal you.
+		.from Jade Construct##60297+
+		.' Pass the Trial of the Constructs |q 30642/1
+	step
+		goto 45.4,76.2
+		.click Battle Axe of the Thunder King
+		.get Battle Axe of the Thunder King##80807 |q 30642/2
+	step
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin Battle Axe of the Thunder King##30642
+		|next "end"
+	step
+	label honored
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Mogu within the Ruins of Guo-Lai##31295 |only if havequest(31295)
+		..accept The Secrets of Guo-Lai##30639 |only if not completedq(30639)
+		..accept Painting the Ruins Red##30298 |daily
+		.'_
+		.' Click here if the Daily quest is not available today |confirm
+	step
+		goto 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..accept He Knows What He's Doing##30305 |daily |or 2
+		..accept Carved in Stone##30481 |daily |or 2
+		.'_
+		.' Click here if these quests are not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..accept No Stone Unturned##30299 |daily
+		..accept The Key to Success##30300 |daily
+		.'_
+		.' Click here if this quest is not available |confirm
+	step
+		map Vale of Eternal Blossoms
+		path loose; loop; curved
+		path	31.5,34.1	25.8,34.5	24.4,32.9
+		path	22.0,27.7	19.2,30.6	20.3,34.3
+		path	23.9,39.1
+		.from Shao-Tien Torturer##63641
+		.' He walks along this path
+		.get Shao-Tien Cage Key |q 30300/1
+		|only if havequest(30300)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
+	step
+		goto 24.6,29.6
+		.' All around this area:
+		.click Shao-Tien Cage##9667
+		.' Release Golden Lotus Prisoners |q 30300/2
+		.' You can find more cages here [24.6,38.3]
+		.' And more cages here: [29.9,29.4]
+		|only if havequest(30300)
+	step
+		goto 31.8,33.0 |only if havequest(30298) or havequest(30481) or havequest(30305)
+		.click Guo-Lai Runestone##6714+ |only if havequest(30481)
+		.from Shao-Tien Soul-Caller##63611+, Shao-Tien Dominator##63610+ |only if havequest(30298) or havequest(30481)
+		.kill 15 Guo-Lai mogu |q 30298/1 |only if havequest(30298)
+		.get 12 Guo-Lai Runestone |q 30481/1 |only if havequest(30481)
+		.' Stand on the Poison Traps and attack enemies in this area |model 10547 |only if havequest(30305)
+		.' Lure 8 enemies into Poison Traps |q 30305/1 |only if havequest(30305)
+	step
+		goto Vale of Eternal Blossoms/18 41.0,52.8
+		.talk He Softfoot##64647
+		.' Let's go |q 30639/1
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms/18 43.8,27.3
+		'Engage Zhao-Jin the Bloodletter and defeat the Crumbling Jade Warriors he sends at you.
+		'After you defeat the Crumbling Jade Warriors, Zhao-Jin will summon a Jade Collossus, weaken it as fast as you can.
+		.' Uncover the mogu plan in the Hall of Statues |q 30639/2
+		|modelnpc Zhao-Jin the Bloodletter##64663
+		|modelnpc Crumbling Jade Warrior##64883
+		|only if havequest(30639)
+	step
+		goto Vale of Eternal Blossoms 33.4,38.0
+		.talk Rook Stonetoe##59333
+		..turnin He Knows What He's Doing##30305
+		..turnin Carved in Stone##30481
+		|only if havequest(30481) or havequest(30305)
+	step
+		goto 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin Painting the Ruins Red##30298 |only if havequest(30298)
+		..accept The Imperion Threat##30302 |daily
+		.'_
+		.' Click here if this daily quest is not available |confirm
+	step
+		goto 33.1,39.0
+		.talk Sun Tenderheart##59334
+		..turnin The Key to Success##30300
+		|only if havequest(30300)
+	step
+		goto Vale of Eternal Blossoms/18 74.3,53.5
+		.from Huo-Shuang##63691
+		.' Kill the Shao-Tien Imperion |q 30302/1
+		|only if havequest(30302)
+	step
+		goto Vale of Eternal Blossoms 33.8,38.5
+		.talk Leven Dawnblade##58408
+		..turnin The Imperion Threat##30302
+	step
+		goto 56.8,43.8
+		.talk Leven Dawnblade##58408
+		..turnin The Secrets of Guo-Lai##30639
+	step
+		goto Vale of Eternal Blossoms 21.3,71.5
+		.talk Kun Autumnlight##58920
+		..turnin The Butcher##30248
+		|next "end"
+	step
+	label exalted
+		goto 56.7,43.7
+		.talk Leven Dawnblade##58408
+		..accept The Mogu's Message##30643
+	step
+		'Enter the building here. |goto 40.4,77.2 <5 |c
+	step
+		goto 44.8,76.3
+		.talk Zhi the Harmonious##59905
+		..turnin The Mogu's Message##30643 |tip WARNING! Turning in this quest will spawn enemy ambushers.
+		..accept What Comes to Pass##30644
+	step
+		goto 56.5,43.3
+		.talk Sun Tenderheart##58468
+		..turnin What Comes to Pass##30644
+		..accept The Might of Three##30645
+	step
+		goto 64.4,41.5
+		.from Shao-Tien Marauder##60225+, Granite Quilen##60223+, Shao-Tien Spiritrender##60224+, Reanimated Jade Warrior##60121+
+		.' Kill 100 Mogu Invaders |q 30645/1 |tip While doing this quest you will get some help from the Jade Serpent, Xeun the White Tiger, and Niuzao the Black Ox. Kills 1-34 will aided by the Jade Serpent, use the AoE buff given to take down many foes at once. Kill 34-67 will be aided by the White Tiger, use his buff to focus down individual targets in larger packs, when they are shattered they will deal extreme AoE damage. Kills 67-100 will be aided by Niuzao, use his buff to damage enemies in a cone. Periodically you will instantly kill enemies with a knockback.
+	step
+		goto 74.2,41.8
+		.talk Sinan the Dreamer##59906
+		..turnin The Might of Three##30645
+		..accept The Final Power##30646
+	step
+		goto 77.6,37.2
+		.' Use the Red Crane's power to jump over the wall of flame.
+		|confirm
+		|only if havequest(30646)
+	step
+		goto 78.7,35.8
+		'Zhao-Jin will periodically throw Lightning Spears. Click them to pick them up and then use the new button on your screen to hurl the spear back at him. this will be your main source of damage.
+		'Zhao-Jin will also summon Lightning Waves. With the Red Crane's buff you can easily jump over these.
+		.kill Zhao-Jin the Bloodletter##60273 |q 30646/1
+	step
+		goto 56.5,43.6
+		.talk Anji Autumnlight##58465
+		..turnin The Final Power##30646
+		|next "end"
+	step
+	label end_of_lotus
+		'You have achieved Revered status with the Golden Lotus!
+		|next |only if default
+	step
+	label end
+		'You have reached the end of the guide for today. You can only do the Dailies once per day.
+		|confirm |next goldenmenu
+]])
+
+ZygorGuidesViewer:RegisterInclude("H_Cloud_Serpent",[[
+	step
+	label	start
+		'Proceeding to Order of the Cloud Serpent Dailies |condition completedq(30142) |next "dailies" |only if completedq(30142)
+		'Moving to the Order of the Cloud Serpent prequests. |next |condition not completedq(30142) |only if not completedq(30142)
+	step
+		goto Vale of Eternal Blossoms 60.6,21.7
+		.talk Wei Lakebreeze##64533
+		..accept The Order of the Cloud Serpent##31375
+	step
+		goto The Jade Forest 57.5,45.1
+		.talk Instructor Skythorn##58228
+		..turnin The Order of the Cloud Serpent##31375
+	step
+		goto 57.7,45.0
+		.talk Elder Anli##58564
+		..accept Wild Things##30134
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225
+		..turnin Wild Things##30134
+		..accept Beating the Odds##30135
+		..accept Empty Nests##30136
+		..accept Egg Collection##30137
+	step
+		goto 64.4,31.1
+		.' Use the Silken Rope in your bags on Windward Hatchlings |use Silken Rope##78947
+		.' Get 6 Hatchlings and bring them to [65.8,31.2]
+		.' Return 6 Windward Hatchlings to their nests. |q 30136/1
+	step
+		goto 68.1,31.2
+		.from Slitherscale Ripper##58212+, Slitherscale Eggdrinker##63532+
+		.' Kill 8 Slitherscale saurok |q 30135/1
+		.click Serpent Egg
+		.get 6 Serpent Egg##78959 |q 30137/1
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225
+		..turnin Beating the Odds##30135
+		..turnin Empty Nests##30136
+		..turnin Egg Collection##30137
+		..accept Choosing the One##30138
+		..turnin Choosing the One##30138
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225 |tip You will only accept one of the following quests.
+		..accept The Rider's Journey##30139 |or
+		..accept The Rider's Journey##30140 |or
+		..accept The Rider's Journey##30141 |or
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228 |tip You will only turn in one of the following quests.
+		..turnin The Rider's Journey##30139
+		..turnin The Rider's Journey##30140
+		..turnin The Rider's Journey##30141
+		..accept It's A...##30142
+	step
+		.' Watch the scene and see your egg hatch.
+		.' Egg Hatched. |q 30142/1
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228
+		..turnin It's A...##30142
+	step
+	label dailies
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		..accept Catch!##30151 |daily |or 2
+		..accept Pooped##31704 |daily |or 2
+		..accept Feeding Time##30156 |daily |or 2
+		..accept The Easiest Way To A Serpent's Heart##30154 |daily |or 2
+		..accept Sweet as Honey##30150 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if not completedq(30143)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		..accept Catch!##30151 |daily |or 2
+		..accept Pooped##31704 |daily |or 2
+		..accept Pooped##31716 |daily |or 2
+		..accept Feeding Time##30156 |daily |or 2
+		..accept The Easiest Way To A Serpent's Heart##30154 |daily |or 2
+		..accept Sweet as Honey##30150 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if completedq(30143)
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228
+		..accept Restoring the Balance##30155 |daily |or 2
+		..accept Disarming the Enemy##30158 |daily |or 2
+		..accept Thinning The Pack##31698 |daily |or 2
+		..accept Weeping Widows##31706 |daily |or 2
+		..accept A Tangled Web##31707 |daily |or 2
+		..accept Monkey Mischief##31712 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm |only if not havequest(30155) and not havequest(30158) and not havequest(31698) and not havequest(31706)
+		.' Click here if there no more quests available today |confirm |only if havequest(30155) or havequest(30158) or havequest(31698) or havequest(31706)
+	step
+		goto 57.5,44.7
+		.talk Jenova Longeye##58413
+		..accept Just a Flesh Wound##30148 |daily |only if skill("First Aid")>=525
+		..accept A Feast for the Senses##30149 |daily |only if skill("Cooking")>=525
+		..accept Fragments of the Past##30147 |daily |only if skill("Archaeology")>=525
+		..accept Snack Time##30146 |daily |only if skill("Fishing")>=400
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept Slitherscale Suppression##31194 |daily |or 2
+		..accept Madcap Mayhem##31703 |daily |or 2
+		..accept Dark Huntress##31701 |daily |or 2
+		..accept On The Prowl##31702 |daily |or 2
+		..accept The Seed of Doubt##31711 |daily |or 2
+		..accept The Trainer's Challenge: Qua-Ro Whitebrow##31721 |daily |or 2
+		..accept The Trainer's Challenge: Ace Longpaw##31717 |daily |or 2
+		..accept The Trainer's Challenge: Suchi the Sweet##31720 |daily |or 2
+		..accept The Trainer's Challenge: Big Bao##31718 |daily |or 2
+		..accept The Big Kah-Oona##31715 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+	step
+		goto 58.3,45.0
+		.talk Ningna Darkwheel##58509
+		..accept Sprite Fright##31699 |daily |or
+		..accept The Shoe Is On The Other Foot##31700 |daily |or
+		.'_
+		.' Click here if these quests are unavailable |confirm
+	step
+		goto 58.5,44.7
+		.talk Suchi the Sweet##58510
+		..accept Preservation##30159 |daily |or
+		..accept Emptier Nests##30157 |daily |or
+		.'_
+		.' Click here if these quests are unavailable today |confirm |only if not havequest(30159) or not havequest(30157)
+	step
+		goto 57.5,44.0
+		.talk Big Bao##58508
+		..accept Lingering Doubt##31709 |daily
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		goto 57.3,43.5
+		.talk Qua-Ro Whitebrow##58511
+		..accept Serpent's Scale##31708 |daily
+		..accept Saving the Serpents##31714 |daily
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..accept The Sky Race##30152 |daily
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		..accept The Big Brew-haha##31713
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		.' Tell her you are ready to start the Sky Race.
+		.' Ride your Dragon! |invehicle
+		|only if havequest(30152)
+	step
+		path	60.6,39.4	59.7,31.5	61.3,25.2
+		path	66.3,36.0	66.2,42.4	66.8,51.4
+		path	64.0,51.0	60.4,52.9	61.8,54.5
+		path	58.7,46.8	58.4,46.4	58.1,46.0
+		'Follow this path and collect the checked flags hanging off of the Checkpoint balloons. As you fly, gain speed by flying through cloud rings
+		.' Pass 10 Checkpoints. |q 30152/1
+		.' Pass underneath the Finish Line |q 30152/2
+		|only if havequest(30152)
+	step
+		goto 57.3,43.5
+		.talk Qua-Ro Whitebrow##58511
+		.' Challenge him to a duel!
+		.' Defeat Qua-Ro Whitebrow |q 31721/1 
+		|only if havequest(31721)
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		.' Challenge him to a duel!
+		.' Defeat Ace Longpaw |q 31717/1
+		|only if havequest(31717)
+	step
+		goto 57.5,44.0
+		.talk Big Bao##58508
+		.' Challnge him to a duel!
+		.' Defeat Big Bao |q 31718/1
+		|only if havequest(31718)
+	step
+		goto 58.5,44.7
+		.talk Suchi the Sweet##58510
+		.' Challenge her to a duel!
+		.' Defeat Suchi the Sweet |q 31720/1
+		|only if havequest(31720)
+	step
+		goto 69.8,31.3
+		.kill Slitherscale Lizard-Lord##63536 |q 31194/1
+		|only if havequest(31194)
+	step
+		goto 68.1,31.2 |only if havequest(30155) or havequest(30158)
+		.from Slitherscale Ripper##58212+, Slitherscale Eggdrinker##63532+ |only if havequest(30155)
+		.' Kill 8 Slitherscale saurok |q 30155/1 |only if havequest(30155)
+		.click Slitherscale Weapons |only if havequest(30158)
+		.get 5 Slitherscale Harpoon##79025 |q 30158/1 |only if havequest(30158)
+		.click Serpent Egg |only if havequest(30159)
+		.get 8 Serpent Eggs |q 30159/1 |only if havequest(30159)
+	step
+		goto 64.6,33.3
+		.from Saltback Turtle##58218+, Saltback Yearling##58219+
+		.collect 15 Saltback Meat Scrap##79028 |n
+		.' Use the meat scraps to make a Saltback meat |use Saltback Meat Scrap##79028
+		.collect 3 Saltback Meat##79027 |n
+		.' Use the meat to feed your Hatchling |use Saltback Meat##79027 |q 30156/1
+	step
+		goto 57.2,45.2
+		.' Use the Bouncy Ball in your bags. |use Bouncy Ball##79043
+		.' Catch the Bouncy Ball whenever your Hatchling tosses it up, this will be every second throw.
+		.' Catch the Ball 8 times. |q 30151/1
+		|only if havequest(30151)
+	step
+		goto 55.1,46.5
+		.click Hatchling Poop##9572 |tip It is all around this area.
+		.get 5 Tiny Bags of Poop |q 31704/1
+		|only if havequest(31704)
+	step
+		goto 55.1,46.5
+		.click Hatchling Poop##9572 |tip It is all around this area.
+		.get 5 Big Bags of Poop |q 31716/1
+		|only if havequest(31716)
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Pooped##31704
+		|only if havequest(31704)
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Pooped##31716
+		|only if havequest(31716)
+	step
+		goto 62.7,27.4
+		.kill Shadowfae Madcap##65613 |q 31703/1
+		|only if havequest(31703)
+	step
+		goto 64.7,25.7
+		.kill Windward Huntress##63538 |q 31701/1
+		|only if havequest(31701)
+	step
+		goto 63.8,22.3
+		.kill Windward Saber## |q 31702/1
+		|only if havequest(31702)
+	step
+		goto 62.8,24.7
+		.from Windward Tiger##63537 |only if havequest(30154)
+		.get 5 Tiger Flank##85282 |q 30154/1 |only if havequest(30154)
+		.kill 7 Shadowfae Trickster |q 31699/1 |only if havequest(31699)
+		.from Windward Alpha+, Windward Tiger##63537+ |only if havequest(31698)
+		.' Kill 8 Windward Tigers. |q 31698/1 |only if havequest(31698)
+		.click Stolen Boots |only if havequest(31700)
+		.get 14 Stolen Boots##89054 |q 31700/1 |only if havequest(31700)
+	step
+		'Enter the cave here. |goto 58.0,31.7 <5 |c
+		|only if havequest(31708) or havequest(31710) or havequest(31706) or havequest(31711) or havequest(31709) or havequest(31707)
+	step
+		goto The Jade Forest/15 62.7,25.7
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Northeastern Sha Disturbance |q 31709/2
+		|only if havequest(31709)
+	step
+		goto The Jade Forest/15 37.0,31.9
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Northwestern Sha Disturbance |q 31709/1
+		|only if havequest(31709)
+	step
+		goto The Jade Forest/15 35.7,40.2
+		.kill Seed of Doubt |q 31711/1
+		|only if havequest(31711)
+	step
+		 goto The Jade Forest/15 61.0,74.1
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Southern Sha Disturbance |q 31709/3
+		|only if havequest(31709)
+	step
+		.' Kill Widowspawn |only if havequest(31710)
+		.get 100 Tiny Spider Eye's |q 31710/1 |only if havequest(31710)
+		.kill 7 Weeping Widow |q 31706/1 |only if havequest(31706)
+		.click Serpent's Scale |only if havequest(31708)
+		.get 25 Serpent's Scale##88895 |q 31708/1 |only if havequest(31708)
+		.from Widow's Web##65634+ |only if havequest(31707)
+		.' Free 5 Sri-La Villagers |q 31707/1 |only if havequest(31707)
+	step
+		'Leave the cave. |goto The Jade Forest/15 75.8,19.0 |c
+		|only if havequest(31708) or havequest(31710) or havequest(31706) or havequest(31711) or havequest(31709) or havequest(31707)
+	step
+		.' Enter the Oona Kagu cave. |goto The Jade Forest/0 57.7,27.7 <5 |c
+		|only if havequest(31715)
+	step
+		goto The Jade Forest/16 45.8,77.8
+		.kill 1 Lord Oona##65628 |q 31715/1
+		|only if havequest(31715)
+	step
+		goto 55.2,28.4
+		.click Serpent
+		.collect 10 Rescued Serpent##88894 |q 31714/1
+		|only if havequest(31714)
+	step
+		goto 55.2,28.4
+		.from Oona Brewchugger##65624
+		.click Stolen Sri-La Keg
+		.' Collect 100 Sri-La Stout |q 31713/1
+		|modeldisplay 11025
+		|only if havequest(31713)
+	step
+		goto 55.2,28.0
+		.from Oona Goon##65621+, Oona Brewchugger##65624+, Oona Tuna-Catcher##65623+
+		.' Kill 13 Oona hozen |q 31712/1
+		|only if havequest(31712)
+	step
+		goto The Jade Forest 64.5,31.1
+		.' Use your Silken Rope on _Windward Hatchlings_. |use Silken Rope##78947
+		.' Bring the Windward Hatchlings to the nest at [63.4,31.4].
+		.' Return 6 Windward Hatchlings |q 30157/1
+		|modelnpc 58243
+		|modelnpc 58220
+		|modelnpc 58244
+		|only if havequest(30157)
+	step
+		'Use your First Aid skill to create 8 _Windwool Bandages_ or _Heavy Windwool Bandages_.
+		'You can also ask other players to sell you some bandages.
+		.create 8 Windwool Bandage##102697,First Aid,8 total |or
+		--.collect 8 Windwool Bandage##72985 |or
+		.' or
+		.create 8 Heavy Windwool Bandage##102699,First Aid,8 total |or
+		--.collect 8 Heavy Windwool Bandage##72986 |or
+		|only if havequest(30148)
+	step
+		goto 63.9,31.1
+		.' Use your Windwool Bandages on Injured Hatchlings |use Windwool Bandage##72985
+		.' Heavy Windwool Bandages work, too. |use Heavy Windwool Bandage##72986
+		.' Bandage 8 Injured Hatchlings |q 30148/1
+		|modelnpc Injured Hatchling##58416
+		|only if havequest(30148)
+	step
+		goto 57.0,43.0
+		.' Equip your Fishing Pole |use Fishing Pole##6256
+		.' Use your Fishing skill to fish in the water here |cast Fishing##7620
+		.get 10 Sugar Minnow##79046 |q 30146/1 |only if havequest(30146)
+		.collect 10 Golden Carp##74866 |only if havequest(30149)
+		|only if havequest(30146) or havequest(30149)
+	step
+		'Use your Cooking skill to create 5 Fish Cakes.
+		.create 5 Fish Cake##104297,Cooking,5 total |q 30149/1 |or
+		.buy 5 Fish Cake##74641 |or
+		'You can ask other players to sell you some, if they happen to have leftovers.
+		|only if havequest(30149)
+	step
+		goto The Jade Forest 55.1,47.2
+		.from Honeykeeper##58363+
+		.get 30 Honeycomb##79030 |q 30150/1
+		|only if havequest(30150)
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		..turnin The Big Brew-haha##31713
+		|only if havequest(31713)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564 |tip You will only have a couple of these quests.
+		..turnin Slitherscale Suppression##31194
+		..turnin Dark Huntress##31701
+		..turnin On The Prowl##31702
+		..turnin Restoring the Balance##30155
+		..turnin Disarming the Enemy##30158
+		..turnin Madcap Mayhem##31703
+		..turnin The Easiest Way To A Serpent's Heart##30154
+		..turnin Sprite Fright##31699
+		..turnin Thinning The Pack##31698
+		..turnin The Shoe Is On The Other Foot##31700
+		..turnin Weeping Widows##31706
+		..turnin The Seed of Doubt##31711
+		..turnin A Tangled Web##31707
+		..turnin The Sky Race##30152
+		..turnin The Trainer's Challenge: Qua-Ro Whitebrow##31721
+		..turnin The Trainer's Challenge: Ace Longpaw##31717
+		..turnin The Trainer's Challenge: Suchi the Sweet##31720 
+		..turnin The Trainer's Challenge: Big Bao##31718
+		..turnin Preservation##30159
+		..turnin Lingering Doubt##31709
+		..turnin Emptier Nests##30157
+		..turnin Monkey Mischief##31712
+		..turnin The Big Kah-Oona##31715
+		..turnin Saving the Serpents##31714
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Tiny Treats##31710 
+		|only if havequest(31710)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if not completedq(30143)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if completedq(30143)
+	step
+		'Open your world map, find dig sites in Pandaria, then go to them |tip They look like small shovel icons on your world map that spawn in random places.  Once you get to the zone where the dig site is located, you will see the dig site on your map as a red highlighted area.
+		.' Use your Survey ability inside the dig site area |cast Survey##80451
+		.' A telescope will appear, follow the direction it points in and continue using your Survey ability to eventually find the artifacts |tip Each dig site has 6 artifacts you can find.
+		.' Click the Archaeology Fragments that spawn on the ground
+		.get 6 Serpentrider Relic## |q 30147/1
+		|only if havequest(30147)
+	step
+		goto 57.5,44.7
+		.talk Jenova Longeye##58413
+		..turnin Just a Flesh Wound##30148 |only if skill("First Aid")>=525
+		..turnin A Feast for the Senses##30149 |only if skill("Cooking")>=525
+		..turnin Fragments of the Past##30147 |daily |only if skill("Archaeology")>=525
+		..turnin Snack Time##30146 |daily |only if skill("Fishing")>=525
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Sweet as Honey##30150
+		|only if havequest(30150)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..turnin Catch!##30151
+		|only if havequest(30151)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept Needle Me Not##31705 |daily
+		|only if completedq(30151)
+	step
+		goto 57.0,41.2
+		.' Use the Golden Honey in your bags |use Golden Honey##89113
+		.kill Orchard Needler |q 31705/1
+		|only if havequest(31705)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..turnin Needle Me Not##31705
+		|next "exalted" |only if rep("Order of the Cloud Serpent")==Exalted
+		|next "revered" |only if rep("Order of the Cloud Serpent")==Revered
+		|next "end" |only if rep("Order of the Cloud Serpent")<=Revered
+	step
+	label revered
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept They Grow Like Weeds##30143
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		.' Ask Instructor Windbalde how your serpent is doing.
+		.' Speak to Instructor Windblade |q 30143/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin They Grow Like Weeds##30143
+		..accept Flight Training: Ring Round-Up##30144
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c 
+		|only if havequest(30144)
+	step
+		'Fly your Cloud Serpent through the rings made from clouds.
+		.' Fly through 6 Cloud Rings |q 30144/1
+	step
+		goto 58.6,43.7
+		.' Click the Leave Vehicle button |outvehicle |c
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: Ring Round-Up##30144
+		..accept Flight Training: Full Speed Ahead##30145
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c
+		|only if havequest(30145)
+	step
+		'Follow Instructor Windblade through the course, her mounts flies faster than yours so fly through some of the cloud rings to maintain speed with your guide. If you move too slowly or get too far away from the guide, the course will restart.
+		.' Finish the course |q 30145/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: Full Speed Ahead##30145
+		..accept Flight Training: In Due Course##30187
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c
+		|only if havequest(30187)
+	step
+		path	strict; curved; loop
+		path	60.6,39.4	59.7,31.5	61.3,25.2
+		path	66.3,36.0	66.2,42.4	66.8,51.4
+		path	64.0,51.0	60.4,52.9	61.8,54.5
+		path	58.7,46.8	58.4,46.4
+		'Follow this path and collect the checked flags hanging off of the Checkpoint balloons. As you fly, gain speed by flying through cloud rings
+		.' Pass 10 Checkpoints |q 30187/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: In Due Course##30187
+		|next "end"
+	step
+	label exalted
+		goto 57.6,45.0
+		.talk Elder Anli##58564
+		..accept Riding the Skies##31811
+	step
+		'Watch the cinematic
+		.' Join the Order of the Cloud Serpent |q 31811/1
+	step
+		goto 57.6,45.0
+		.talk Elder Anli##58564
+		..turnin Riding the Skies##31811
+	step
+		Proceeding to the next step |next end |only if default
+		Proceeding to Riding the Skies Quest |next exalted |only if rep('Order of the Cloud Serpent')==Exalted
+	step
+	label	exalted
+		goto 57.7,44.9
+		.talk Elder Anli##58564
+		..accept Riding the Skies##31810
+	step
+		goto 57.7,44.9
+		.talk Elder Anli##58564
+		..turnin Riding the Skies##31810
+	step
+	label end
+		'This the end of our daily guide.
+		.' Click here to go back to the beginning |confirm |next start
+]])
+
 
 --------------------------------------------------------------------------------------------------------------------------------------
 -- Trainers

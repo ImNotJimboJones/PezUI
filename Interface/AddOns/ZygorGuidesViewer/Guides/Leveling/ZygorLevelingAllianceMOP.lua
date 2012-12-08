@@ -1298,7 +1298,7 @@ step
 goto 54.6,61.8
 .talk 59727
 .fpath Jade Temple Grounds
-.' Ask her to take you to Glassfin Village. |goto 58.2,84.2 |noway|c
+.' Ask her to take you to Pearlfin Village. |goto 58.2,84.2 |noway|c
 step
 goto 58.6,82.3
 .talk 59550
@@ -2687,16 +2687,16 @@ goto 67.4,32.7
 .talk 58735
 ..turnin 30349
 step
+goto 67.4,32.6
+.talk 58814
+..turnin 30351
+step
 goto 67.4,32.7
 .talk 58745
 ..turnin 30347
 ..accept 30348
 step
 'Observe Lorekeeper Vaeldrin's Ritual |q 30348/1
-step
-goto 67.4,32.6
-.talk 58814
-..turnin 30351
 step
 goto 67.4,32.7
 .talk 58745

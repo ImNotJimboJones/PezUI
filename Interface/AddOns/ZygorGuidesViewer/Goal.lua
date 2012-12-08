@@ -1221,7 +1221,7 @@ function get_recipe(skill,spellid)
 		end
 		if line then
 			local skillName, skillType, numAvailable, isExpanded, serviceType, numSkillUps = GetTradeSkillInfo(line)
-			local itemid = (GetTradeSkillItemLink(line) or ""):match("|H.-:(%d+)")
+			local itemid = tonumber((GetTradeSkillItemLink(line) or ""):match("|H.-:(%d+)"))
 
 			return {avail=numAvailable,type=skillType,numup=numSkillUps and numSkillUps>0 and numSkillUps or 1, lastskill=skill, itemid=itemid}
 		else
@@ -1261,6 +1261,7 @@ function Goal:GetText(showcompleteness,brief)
 
 	local text="?"
 	local progtext
+	local extramsg
 
 	local GOALTYPE=GOALTYPES[self.action]
 
@@ -1505,25 +1506,26 @@ function Goal:GetText(showcompleteness,brief)
 
 			local skill = ZGV:GetSkill(self.skill)
 			local skill_loc = ZGV.LocaleSkills[self.skill]
+			local skill_create_text = L['stepgoal_perform_'..(self.skill:lower())]
 
 			if self:IsComplete() then
 				text = ("Created %s"):format(COLOR_ITEM(self.spell))
 				if self.skilllevel then
-					progtext = ("\n (%s level %s reached)"):format(COLOR_ITEM(skill_loc), COLOR_GOAL(self.skilllevel))
+					extramsg = ("\n (%s level %s reached)"):format(COLOR_ITEM(skill_loc), COLOR_GOAL(self.skilllevel))
 				elseif self.count then
-					progtext = ("\n (%s created)"):format(COLOR_GOAL(self.count))
+					extramsg = ("\n (%s created)"):format(COLOR_GOAL(self.count))
 				end
 			else
 				local errortype
 
 				local errormsgs = {
-					maxlevel = "\n (max skill level too low)",
-					closed = "\n (open %s window)",
-					unknown = "\n (unknown recipe)",
-					trivial = "\n (creating %s won't raise your skill anymore)",
-					lackingredients = "\n (ingredients suffice for only %s of %s)",
-					noingredients = "\n (not enough ingredients)",
-					wtf = "\n (?unknown error?)",
+					maxlevel = "(max skill level too low)",
+					closed = "(open %s window)",
+					unknown = "(unknown recipe)",
+					trivial = "(creating %s won't raise your skill anymore)",
+					lackingredients = "(ingredients suffice for only %s of %s)",
+					noingredients = "(not enough ingredients)",
+					wtf = "(?unknown error?)",
 				}
 
 				if self.skilllevel then
@@ -1567,11 +1569,11 @@ function Goal:GetText(showcompleteness,brief)
 					if errortype=="trivial" then
 						-- gray
 						text = ("Gain %s skill points to reach %s level %s"):format(COLOR_GOAL(remaining), COLOR_ITEM(skill_loc), COLOR_GOAL(self.skilllevel))
-						progtext = errormsgs['trivial']:format(COLOR_ITEM(self.spell))
+						extramsg = errormsgs['trivial']:format(COLOR_ITEM(self.spell))
 					elseif errortype or remaining<1 then
 						-- error?
 						text = ("Gain %s skill points, creating %s\n Reach %s level %s"):format(COLOR_GOAL(remaining), COLOR_ITEM(self.spell), COLOR_ITEM(skill_loc), COLOR_GOAL(self.skilllevel))
-						if errortype then progtext = errormsgs[errortype]:format(skill_loc) end
+						if errortype then extramsg = errormsgs[errortype]:format(skill_loc) end
 					elseif not self.recipedata or (self.recipedata.type=="optimal" and self.recipedata.numup==1) then
 						-- orange or standard
 						text = ("Gain %s skill points, creating %s\n Reach %s level %s"):format(COLOR_GOAL(remaining), COLOR_ITEM(self.spell), COLOR_ITEM(skill_loc), COLOR_GOAL(self.skilllevel))
@@ -1585,11 +1587,11 @@ function Goal:GetText(showcompleteness,brief)
 						text = "?wtf?"
 					end
 
-					if not progtext and self.recipedata and self.recipedata.avail<produced then
+					if not extramsg and self.recipedata and self.recipedata.avail<produced then
 						if self.recipedata.avail==0 then
-							progtext = errormsgs['noingredients']
+							extramsg = errormsgs['noingredients']
 						elseif remaining>self.recipedata.avail then
-							progtext = errormsgs['lackingredients']:format(COLOR_GOAL(self.recipedata.avail),produced)
+							extramsg = errormsgs['lackingredients']:format(COLOR_GOAL(self.recipedata.avail),produced)
 						end
 					end
 
@@ -1603,27 +1605,28 @@ function Goal:GetText(showcompleteness,brief)
 						self.recipedata,errortype = get_recipe(self.skill,self.spellid)
 					end
 
-					local have=0
+					local have,remaining=0,0
 
 					if self.recipedata and self.recipedata.itemid then
 						self.targetid = self.recipedata.itemid
 						have = GetItemCount(self.recipedata.itemid)
 						if have then
+							remaining = max(0,self.count-have)
 							if have>=self.count then
 								text = ("Created %s %s"):format(COLOR_GOAL(self.count),COLOR_ITEM(plural(self.spell,self.count)))
 							else
 								-- primary display
-								text = ("Create %s %s"):format(COLOR_GOAL(self.count-have),COLOR_ITEM(plural(GetItemInfo(self.recipedata.itemid),self.count-have)))
+								text = skill_create_text:format(COLOR_GOAL(self.count-have),COLOR_ITEM(plural(GetItemInfo(self.recipedata.itemid),self.count-have)))
 								if self.recipedata.avail==0 then
-									progtext = errormsgs.noingredients
-								elseif self.count-have>self.recipedata.avail then
-									progtext = errormsgs.lackingredients:format(COLOR_GOAL(self.recipedata.avail),remaining)
+									extramsg = errormsgs.noingredients
+								elseif remaining>self.recipedata.avail then
+									extramsg = errormsgs.lackingredients:format(COLOR_GOAL(self.recipedata.avail),remaining)
 								end
 							end
 						end
 					else
-						text = L['stepgoal_perform_'..(self.skill:lower())]:format(COLOR_GOAL(self.count),COLOR_ITEM(plural(self.spell,self.count)))
-						progtext = errormsgs[errortype]:format(skill_loc)
+						text = skill_create_text:format(COLOR_GOAL(self.count),COLOR_ITEM(plural(self.spell,self.count)))
+						extramsg = errormsgs[errortype]:format(skill_loc)
 					end
 
 					self.skillnum = max(0,min(tonumber(self.count)-have or 0,self.recipedata and tonumber(self.recipedata.avail) or 0))
@@ -1709,7 +1712,7 @@ function Goal:GetText(showcompleteness,brief)
 		end
 	end
 
-	return text
+	return text .. (extramsg and "\n "..extramsg or "")
 end
 
 function Goal:GetString()

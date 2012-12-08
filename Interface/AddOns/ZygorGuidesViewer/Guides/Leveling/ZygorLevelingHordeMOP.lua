@@ -5656,7 +5656,7 @@ goto 55.0,35.9
 .talk 62538
 ..turnin 31179
 ]])
-ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-86\\The Jade Forest",[[
+ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Pandaria 85-90\\The Jade Forest",[[
 author support@zygorguides.com
 image JadeForest
 condition end achieved(6534)

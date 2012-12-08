@@ -77,7 +77,7 @@ local function ParseMapXYDist(text,insanefloor)
 	local map,x,y,dist,flr,_,err
 
 	-- old syntax: 12.3,44.2,-150
-	map,x,y,dist = text:match("^(.+),([0-9%.]+),([0-9%.]+),(-?[0-9%.]+)$")
+	map,x,y,dist = text:match("^(.+)[%s,]+([0-9%.]+),([0-9%.]+),(-?[0-9%.]+)$")
 	if not map then x,y,dist = text:match("^([0-9%.]+),([0-9%.]+),(-?[0-9%.]+)$") end
 	if not x then map,x,y = text:match("^(.+),([0-9%.]+),(-?[0-9%.]+)$") end
 	if not x then

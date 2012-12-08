@@ -161,6 +161,29 @@ do
 
 
 
+		function pointInPoly(x,y,...)
+			local pts = select("#",...)
+			print("pts",pts)
+			local odd=false
+			local p1x,p1y,p2x,p2y
+			for i=1,pts,2 do
+				p1x = p2x or select(i,...)
+				p1y = p2y or select(i+1,...)
+				p2x = select(i+2,...) or select(1,...)
+				p2y = select(i+3,...) or select(2,...)
+				print("i",i,"p1",p1x,p1y,"p2",p2x,p2y)
+				if (((p1y<y and p2y>=y)
+				or (p2y<y and p1y>=y))
+				and (p1x<=x or p2x<=x)) then
+					if (p1x+(y-p1y)/(p2y-p1y)*(p2x-p1x)<x) then
+						odd=not odd
+					end
+				end
+			end
+			return odd
+		end
+
+
 		-- IMPORTANT OBSERVATION.
 		-- Nodes are (almost) ALWAYS separated by "walk"/"fly"
 
@@ -1449,7 +1472,7 @@ do
 							-- divide by movement speed later
 						end
 
-						if ZGV.db.profile.pathfinding_preferfly then
+						if ZGV.db.profile.pathfinding_preferfly and maxspeed > 1 then --Don't want to use hearth too much. If maxspeed = 1 then we can't move quick anyhow so walking is already bad.
 							if mode=="walk" or mode=="fly" then mycost=mycost*3 end
 						end
 
@@ -1797,7 +1820,7 @@ do
 				--]]
 
 				if n.type=="taxi" -- no point in checking other nodes, is there :)
-				and n.tag~="blackcat" then --These don't connect like most taxi nodes.
+				and n.taxioperator~="blackcat" then --These don't connect like most taxi nodes.
 					if np.type=="taxi" --or n.cost<0 -- there's a taxi before this, or player's currently on one
 					and nn.type~="taxi"
 					then  -- we're an endpoint!
@@ -2479,4 +2502,4 @@ local function GetMapZoneNumbers(zonename)
 	end
 	return 0
 end
---]]
+--]] 

@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-zhTW.lua 1813 2012-10-10 10:59:24Z arithmandar $
+﻿-- $Id: Atlas-zhTW.lua 1836 2012-10-25 00:20:45Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -1196,5 +1196,8 @@ if AL then
 	AL["Priestess Summerpetal"] = "女司祭夏瓣";
 
 	--Terrace of Endless Spring
+	AL["Elder Asani"] = "長者阿沙尼";
+	AL["Elder Regail"] = "長者瑞蓋爾";
+	AL["Protector Kaolan"] = "守衛者考蘭";
 
 end

@@ -3595,7 +3595,9 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..turnin Arrival in Outland##10288
 		..accept Journey to Honor Hold##10140
 	step
-		|fly Honor Hold
+		goto 87.4,52.4
+		.talk Amish Wildhammer##18931
+		.' Tell him, 'Send me to Honor Hold!' |goto Hellfire Peninsula 54.6,62.6 |noway |c
 	step
 		goto 54.5,62.8
 		.talk Marshal Isildor##19308
@@ -3627,11 +3629,11 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..accept The Path of Anguish##10142
 	step
 		goto 60.4,52.1
-		.' Click the Salvaged Metal and Wood|They are scraps on the ground around this area.
+		.' Click the _Salvaged Metal_ and _Salvaged Wood_ around this area.
 		.get 8 Salvaged Metal##182797 |q 10055/1
 		.get 8 Salvaged Wood##182799 |q 10055/2
+		.from Bonechewer Evoker##19701, Bonechewer Raider##16925, Bonechewer Mutant##16876, Bonechewer Scavenger##18952
 		.kill 20 Bonechewer Orcs |q 10482/1
-		'|from Bonechewer Evoker##19701, Bonechewer Raider##16925, Bonechewer Mutant##16876, Bonechewer Scavenger##18952
 		|model Salvageable Wood##6481
 		|model Salvageable Metal##6999
 	step
@@ -3662,17 +3664,15 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..accept Disrupt Their Reinforcements##10144
 	step
 		goto 72.0,59.6
-		.kill the demons here|n
+		.from Wrathguard##18975+, Doomwhisperer##18981+, Fel Handler##19190+, Netherhound##16950+
 		.collect 4 Demonic Rune Stone##28513|q 10144
-		'|from Wrathguard##18975, Doomwhisperer##18981
 	step
 		goto 72.7,59
 		.' Stand inside the portal and click it to destroy it |q 10144/2
 	step
 		goto 71.7,56.4
-		.kill the demons here|n
+		.from Wrathguard##18975+, Doomwhisperer##18981+, Fel Handler##19190+, Netherhound##16950+
 		.collect 4 Demonic Rune Stone##28513|q 10144
-		'|from Wrathguard##18975, Doomwhisperer##18981
 	step
 		goto 71.4,55.2
 		.' Stand inside the portal and click it to destroy it |q 10144/1
@@ -3685,8 +3685,8 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		goto 71.4,62.5
 		.talk Wing Commander Dabir'ee##19409
 		.' Take the flight
-		.' Click the bomb in your bags, bomb Gateway Shaadraz |q 10146/2|use Seaforium PU-36 Explosive Nether Modulator##28038
-		.' Click the bomb in your bags, bomb Gateway Murketh |q 10146/1|use Seaforium PU-36 Explosive Nether Modulator##28038
+		.' Use the bomb in your bags to bomb Gateway Shaadraz |q 10146/2|use Seaforium PU-36 Explosive Nether Modulator##28038
+		.' Use the bomb in your bags to bomb Gateway Murketh |q 10146/1|use Seaforium PU-36 Explosive Nether Modulator##28038
 	step
 		goto 71.4,62.7
 		.talk Forward Commander Kingston##19310
@@ -3695,11 +3695,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 	step
 		goto 71.4,62.5
 		.talk Wing Commander Dabir'ee##19409
-		..'Fly to Shatter Point|goto Hellfire Peninsula,78.5,35.1,1|noway|c
-	step
-		goto 78.4,34.9
-		.talk Runetog Wildhammer##20234
-		.fpath Shatter Point
+		.' Tell him to send you to Shatter Point. |goto Hellfire Peninsula78.5,35.1 |noway |c
 	step
 		goto 78.4,34.9
 		.talk Runetog Wildhammer##20234
@@ -3725,15 +3721,9 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..turnin Mission: The Abyssal Shelf##10163
 		..accept Go to the Front##10382
 	step
-		goto 78.3,34.5|n
-		.talk Gryphoneer Windbellow##20235 |tip Right next to an Armored Gryphon Destroyer.
-		..'Fly to Honor Point|goto Hellfire Peninsula,68.7,28.2,1|noway|c
-	step
 		goto 68.3,28.6
 		.talk Field Marshal Brock##20793
 		..turnin Go to the Front##10382
-	step
-		'Hearth to Honor Hold|goto Hellfire Peninsula,54.3,63.6,0.5|use Hearthstone##6948|noway|c
 	step
 		goto 54.3,63.6
 		.talk Father Malgor Devidicus##16825
@@ -3756,36 +3746,36 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..accept A Job for an Intelligent Man##9355
 		..accept When This Mine's a-Rockin'##10079
 	step
-		'Go inside the mine to 54.9,62.9|goto 54.9,62.9
+		goto 54.9,62.9
 		.kill 12 Gan'arg Sapper##18827+ |q 10079/1
 	step
-		'Go outside the mine to 52,62.6|goto 52,62.6
+		goto 52,62.6
 		.talk Foreman Biggums##16837
 		..turnin When This Mine's a-Rockin'##10079
 		..accept The Mastermind##10099
 	step
-		'Go inside the mine to 56.3,61.4|goto 56.3,61.4
+		goto 56.3,61.4
 		.kill Z'kral##18974 |q 10099/1|tip He is all the way at the bottom of the mine
 	step
-		'Go outside the cave to 52,62.6|goto 52,62.6
+		goto 52,62.6
 		.talk Foreman Biggums##16837
 		..turnin The Mastermind##10099
 	step
-		goto 66.1,48.8
+		goto 67.1,48.9
 		.click Trampled Skeletons |tip They are very easy to miss, but once you find one you will find them really fast.
 		.' Cleanse 8 Trampled Skeletons |q 10047/1
 	step
 		goto 58.7,47
-		.' Use your Flaming Torch on the Eastern Thrower to burn it |q 10078/1|use Flaming Torch##26002|tip It's a big catapult.
+		.' Use your Flaming Torch on the Eastern Thrower to burn it |q 10078/1|use Flaming Torch##26002
 	step
 		goto 55.9,46.7
-		.' Use your Flaming Torch on the Central Eastern Thrower to burn it |q 10078/2|use Flaming Torch##26002|tip It's a big catapult.
+		.' Use your Flaming Torch on the Central Eastern Thrower to burn it |q 10078/2|use Flaming Torch##26002
 	step
 		goto 53.5,47.2
-		.' Use your Flaming Torch on the Central Western Thrower to burn it |q 10078/3|use Flaming Torch##26002|tip It's a big catapult.
+		.' Use your Flaming Torch on the Central Western Thrower to burn it |q 10078/3|use Flaming Torch##26002
 	step
 		goto 52.8,47.1
-		.' Use your Flaming Torch on the Western Thrower to burn it |q 10078/4|use Flaming Torch##26002|tip It's a big catapult.
+		.' Use your Flaming Torch on the Western Thrower to burn it |q 10078/4|use Flaming Torch##26002
 	step
 		goto 65.8,67.2
 		.kill Bleeding Hollow orcs|n
@@ -3824,7 +3814,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 	step
 		goto 50.2,74.8
 		.from Deranged Helboar##16863
-		.get Tainted Helboar Meat|n
+		.collect Tainted Helboar Meat##23270 |n
 		.' Use your Purification Mixture on the Tainted Helboar Meat|use Purification Mixture##23268|tip The meat won't become purified every time, it can become toxic as well.
 		.get 8 Purified Helboar Meat|q 9361/1
 	step
@@ -3883,7 +3873,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..accept Cruel Taskmasters##9399
 	step
 		goto 23.4,39.7
-		.talk Scout Vanura##16797
+		.talk Scout Vanura##16797 |tip She patrols up and down the stairs.
 		..accept Deadly Predators##9398
 	step
 		goto 23.4,36.5
@@ -3933,8 +3923,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		..accept An Ambitious Plan##9383
 	step
 		goto 40.3,30.9
-		.' Get close to the ribcage of the skeleton and next to the poisoned water
-		.' Empty your Cleansing Vial in this spot|use Cleansing Vial##23361
+		.' Empty your Cleansing Vial in this spot |use Cleansing Vial##23361
 		.kill Aggonis##17000 |q 9427/1
 	step
 		goto 23.4,36.5
@@ -3951,18 +3940,18 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		.from Hulking Helboar##16880+
 		.get 6 Helboar Blood Sample |q 9372/1
 	step
-		goto 15.7,52
+		goto 15.7,52.0
 		.talk Thiah Redmane##16991
 		..turnin Demonic Contamination##9372
 		..accept Testing the Antidote##10255
 	step
-		goto 25,54
+		goto Hellfire Peninsula 18.0,53.1
 		.' Use the Cenarion Antidote on a Hulking Helboar |use Cenarion Antidote##23337
 		.' Administer the Antidote |q 10255/1
 		|modelnpc Hulking Helboar##16880
 		|modelnpc Dreaktusk##16992
 	step
-		goto 15.7,52
+		goto 15.7,52.0
 		.talk Thiah Redmane##16991
 		..turnin Testing the Antidote##10255
 	step
@@ -4013,7 +4002,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		goto 15.0,58.3
 		.kill 4 Illidari Taskmaster##17058+ |q 9399/1 |tip If you kill the taskmaster first, his slaves leave you alone.
 		.click Sha'naar Relic##6840+
-		.get Sha-naar Relic |q 9430/1 
+		.get 10 Sha-naar Relic |q 9430/1 
 	step
 		goto 24,72.1
 		.talk Gremni Longbeard##16850
@@ -4039,42 +4028,36 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 	step
 		goto 25.7,75.1
 		.from Avruu##17084
-		.collect 1 Avruu's Orb
+		.collect 1 Avruu's Orb##23580
 		.' Click Avruu's Orb |use Avruu's Orb##23580
 		..accept Avruu's Orb##9418
 	step
 		goto 29,81.5
 		.click Haal'eshi Altar##6964
-		.' Place Avruu's Orb on the Altar
 		.' Fight Aeranas until he's almost dead
 		.talk Aeranas##17085
 		..turnin Avruu's Orb##9418
-	step
-		goto 24,72.1
-		.talk Gremni Longbeard##16850
-		..turnin The Arakkoa Threat##9417
-		.talk Mirren Longbeard##16851
-		..turnin The Finest Down##9420
 	step
 		goto 23.7,69.2
 		.from 10 Quillfang Ravager##16934+, Quillfang Skitterer##19189 |q 9385/1
 	step
 		goto 24,72.1
 		.talk Gremni Longbeard##16850
+		..turnin The Arakkoa Threat##9417
 		..turnin Rampaging Ravagers##9385
+		.talk Mirren Longbeard##16851
+		..turnin The Finest Down##9420
 	step
 		goto 30.3,61.2
 		.kill 8 Stonescythe Whelp##16927+ |q 9398/2
-	step
-		goto 32.1,59.3
 		.kill 4 Stonescythe Alpha##16929+ |q 9398/1
-		.' You can find 2 more Stonescythe Alphas at [Hellfire Peninsula,33.7,62.1]
+		.' You can find more Stonescythe Alphas around [33.7,62.1]
 	step
 		goto 49.5,81.8
 		.from Rogue Voidwalker##16974+, Uncontrolled Voidwalker##16975+
 		.get 10 Condensed Voidwalker Essence|q 9351/1
-		.' Use your Sanctified Crystal on an Uncontrolled Voidwalker when it's almost dead|use Sanctified Crystal##23417
-		.click glowing Crystal##327
+		.' Use your Sanctified Crystal on an Uncontrolled Voidwalker when it's almost dead |use Sanctified Crystal##23417
+		.click Glowing Crystal##327
 		.get Glowing Sanctified Crystal|q 9383/1
 	step
 		goto 53.6,81.1
@@ -4086,8 +4069,6 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		goto 49.2,74.8
 		.talk "Screaming" Screed Luckheed##19367
 		..turnin Voidwalkers Gone Wild##9351
-	step
-		'Hearth to the Temple of Telhamat|goto Hellfire Peninsula,23.4,37.2,3|use Hearthstone##6948|noway|c
 	step
 		goto 23.4,36.5
 		.talk Amaan the Wise##16796
@@ -4112,8 +4093,6 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 		goto 23.4,36.5
 		.talk Amaan the Wise##16796
 		..turnin The Seer's Relic##9545
-	step
-		|fly Honor Hold
 	step
 		goto 50.9,60.2
 		.talk Honor Guard Wesilow##16827
@@ -4175,8 +4154,7 @@ ZygorGuidesViewer:RegisterInclude("Hellfire_Peninsula",[[
 	step
 		goto 45,75
 		.' Use the Anchorite Relic in your bags |use Anchorite Relic##31772
-		.' Pull orcs to the relic
-		.' Kill the orcs and a Fel Spirit will spawn
+		.' Kill the orcs near the relic you just set down to spawn _Fel Spirits_.
 		.from Fel Spirit##22454+
 		.' Jules Avenged |q 10909/1
 		|modelnpc Shattered Hand Berserker##16878
@@ -5084,7 +5062,7 @@ ZygorGuidesViewer:RegisterInclude("A_Icecrown_Argent_Crusade_Rep",[[
 		.talk Torastrasza##26949
 		..'Tell him you want to go to the ground level of the temple|goto Dragonblight,58.0,55.2,0.1|noway|c
 	step
-		goto 79.8,30.8
+		goto Icecrown 79.8,30.8
 		.talk Crusader Bridenbrad##30562
 		..turnin The Boon of Alexstrasza##13079
 		..accept Hope Yet Remains##13080
@@ -11674,7 +11652,7 @@ ZygorGuidesViewer:RegisterInclude("A_Darkmoon_Faire_Dailies",[[
 	step
 		goto Darkmoon Island,54.3,53.1
 		.talk Zina Sharpworth##55266
-		.buy Sack o' Tokens##78906 |n
+		.buy Sack o' Tokens##78909 |n
 		.' Open your Sack o' Tokens in your bags |use Sack o' Tokens##78906
 		.collect 20 Darkmoon Faire Game Tokens##71083
 	step
@@ -11936,15 +11914,15 @@ ZygorGuidesViewer:RegisterInclude("A_Darkmoon_Faire_Quests",[[
 		.buy 5 Moonberry Juice##1645 |q 29506
 		|only if skill("Alchemy")>74
 	step
-		goto Stormwind City 53.2,81.6
-		.talk Alexandra Bolero##1347
+		goto Elwynn Forest 42.0,67.0
+		.talk Tharynn Bouden##66
 		.buy 1 Coarse Thread##2320
 		.buy 1 Blue Dye##6260
 		.buy 1 Red Dye##2604
 		|only if skill("Tailoring")>74
 	step
-		goto Stormwind City,77.6,53.0
-		.talk Erika Tate##5483
+		goto Elwynn Forest 42.0,67.0
+		.talk Tharynn Bouden##66
 		.buy 5 Simple Flour##30817 |q 29509
 		|only if skill("Cooking")>74
 	step
@@ -20685,6 +20663,12 @@ ZygorGuidesViewer:RegisterInclude("A_Baradin_Hold_Dailies", [[
 		..turnin The Warden##28223
 ]])
 
+
+-----------------------------------------------------------------------------------------
+-- MoP Dailies/Reputations
+-----------------------------------------------------------------------------------------
+
+
 ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		'Proceeding to Pre-Quests |next |only if default
@@ -20968,7 +20952,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 	step
 		'Click the Complete Quest box that displays on the right side of the screen under your minimap
 		..turnin The Silent Approach##30281 |daily
-		..accept The Soul-Gatherer##30482
+		..accept The Soul-Gatherer##30482 |daily
+		.' Click here if this quest is unavailable |confirm |next "skipsoul"
 	step
 		goto 40.8,48.0
 		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
@@ -20979,6 +20964,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.talk He Softfoot##58470
 		..turnin The Soul-Gatherer##30482
 	step
+	label "skipsoul"
 		goto 56.7,43.2
 		.talk Ren Firetongue##58469
 		..turnin A Smashing Impression##30283 |daily
@@ -21099,25 +21085,25 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
 		|only if havequest(30280)
 	step
-		'Follow this hallway. |goto 18.5,16.1 <5 |c
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 28.1,39.3 <5 |c
 		|only if havequest(30277)
 	step
-		goto 17.3,11.9
+		goto Vale of Eternal Blossoms/18 36.0,36.6
 		.click Deactivate First Spirit Wall
 		.' Deactivate the First Spirit Wall |q 30277/1
 		|only if havequest(30277)
 	step
-		goto 13.9,10.0
+		goto 23.2,28.9
 		.click Deactivate Second Spirit Wall
 		.' Deactivate the Second Spirit Wall |q 30277/2
 		|only if havequest(30277)
 	step
-		goto 18.6,7.4
+		goto 41.6,18.4
 		.click Deactivate Final Spirit Wall
 		.' Deactivate the Final Spirit Wall |q 30277/3
 		|only if havequest(30277)
 	step
-		goto 20.6,10.5
+		goto 49.4,30.6
 		.click Ancient Guo-Lai Artifact
 		.get Ancient Guo-Lai Artifact |q 30277/4
 		|only if havequest(30277)
@@ -21490,15 +21476,41 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..turnin Painting the Ruins Red##30298 
 		..turnin Offering a Warm Welcome##30301 
 		..accept The Imperion Threat##30302 |daily
+		..accept The Crumbling Hall##30277 |daily |or 2
+		.' Click here if there aren't 2 dailies available. |confirm
 	step
 		goto Vale of Eternal Blossoms/18 76.8,72.5
 		.from Gochao the Ironfist##62880
 		.' Kill the Shao-Tien Imperion |q 30302/1
 		|only if havequest(30302)
 	step
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 28.1,39.3 <5 |c
+		|only if havequest(30277)
+	step
+		goto Vale of Eternal Blossoms/18 36.0,36.6
+		.click Deactivate First Spirit Wall
+		.' Deactivate the First Spirit Wall |q 30277/1
+		|only if havequest(30277)
+	step
+		goto 23.2,28.9
+		.click Deactivate Second Spirit Wall
+		.' Deactivate the Second Spirit Wall |q 30277/2
+		|only if havequest(30277)
+	step
+		goto 41.6,18.4
+		.click Deactivate Final Spirit Wall
+		.' Deactivate the Final Spirit Wall |q 30277/3
+		|only if havequest(30277)
+	step
+		goto 49.4,30.6
+		.click Ancient Guo-Lai Artifact
+		.get Ancient Guo-Lai Artifact |q 30277/4
+		|only if havequest(30277)
+	step
 		goto Vale of Eternal Blossoms/0 33.8,38.5
 		.talk Leven Dawnblade##59332
 		..turnin The Imperion Threat##30302
+		..turnin The Crumbling Hall##30277
 		|next "end" |only if rep('Golden Lotus')<=Friendly
 		|next "honored" |only if rep('Golden Lotus')==Honored 
 		|next "revered" |only if rep('Golden Lotus')==Revered 
@@ -21544,6 +21556,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		..accept Upon the Ramparts##30246 |daily |or 2
 		..accept Enemy at the Gates##30264 |daily |or 2
 		..accept No Reprieve##30444 |daily |or 2
+		|confirm
 	step
 		goto 21.4,71.5
 		.talk Kun Autumnlight##58920
@@ -21556,6 +21569,14 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 21.5,71.2
 		.talk Leven Dawnblade##59340
 		..accept Bloodied Skies##30266 |daily
+		.'_
+		.' If this quest is unavailable today, click here. |confirm
+	step
+		goto 21.4,71.6
+		.talk Anji Autumnlight##58919
+		..accept Upon the Ramparts##30246 |daily |or 2
+		..accept Enemy at the Gates##30264 |daily |or 2
+		..accept No Reprieve##30444 |daily |or 2
 		.'_
 		.' If this quest is unavailable today, click here. |confirm
 	step
@@ -21642,12 +21663,19 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto 21.5,71.2
 		.talk Leven Dawnblade##59340
 		..turnin Bloodied Skies##30266 |daily
+		..accept The Butcher##30248 |daily
+		|only if havequest(30266) or completedq(30266)
 	step
 		goto 21.4,71.6
 		.talk Anji Autumnlight##58919
-		..turnin Upon the Ramparts##30246 |daily
+		..turnin Upon the Ramparts##30246
+		..turnin Enemy at the Gates##30264
 		..turnin No Reprieve##30444
 		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
 	step
 		goto 7.9,33.9
 		.kill 1 Vyraxxis##63977 |q 30251/1
@@ -21665,6 +21693,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		.talk Kun Autumnlight##58920
 		..turnin Mantid Under Fire##30243 |daily
 		..turnin Under the Setting Sun##30249 |daily
+		..turnin The Butcher##30248 |daily
 		|next "end" |only if rep('Golden Lotus')<=Friendly
 		|next "honored" |only if rep('Golden Lotus')==Honored 
 		|next "revered" |only if rep('Golden Lotus')==Revered 
@@ -21922,6 +21951,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus",[[
 		goto Vale of Eternal Blossoms 33.8,38.5
 		.talk Leven Dawnblade##58408
 		..turnin The Imperion Threat##30302
+		..turnin The Crumbling Hall##30277
 	step
 		goto 56.8,43.8
 		.talk Leven Dawnblade##58408
@@ -22259,7 +22289,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 	step
 		'Click the Complete Quest box that displays on the right side of the screen under your minimap
 		..turnin The Silent Approach##30281 |daily
-		..accept The Soul-Gatherer##30482
+		..accept The Soul-Gatherer##30482 |daily
+		.' Click here if this quest is unavailable |confirm |next "skipsoul"
 	step
 		goto 40.8,48.0
 		.from Shadowmaster Sydow##63240+ |tip You can stand on the Lily Pads in the water.
@@ -22270,6 +22301,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		.talk He Softfoot##58470
 		..turnin The Soul-Gatherer##30482
 	step
+	label "skipsoul"
 		goto 56.7,43.2
 		.talk Ren Firetongue##58469
 		..turnin A Smashing Impression##30283 |daily
@@ -22390,7 +22422,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		.kill Milau##64965 |q 30280/1 |tip Milau has several deadly abilities. He will cast a Lightning Breath in any direction, do not be in front of him when he does this. He also starts casting Lightning Pools, constantly move until he is done. Periodically he will pull you to the middle of the room and cast Lightning Sweep. While he is casting get as much distance on him as you can.
 		|only if havequest(30280)
 	step
-		'Follow this hallway. |goto Vale of Eternal Blossoms/18 18.5,16.1 <5 |c
+		'Follow this hallway. |goto Vale of Eternal Blossoms/18 28.1,39.3 <5 |c
 		|only if havequest(30277)
 	step
 		goto Vale of Eternal Blossoms/18 36.0,36.6
@@ -22398,17 +22430,17 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		.' Deactivate the First Spirit Wall |q 30277/1
 		|only if havequest(30277)
 	step
-		goto 13.9,10.0
+		goto 23.2,28.9
 		.click Deactivate Second Spirit Wall
 		.' Deactivate the Second Spirit Wall |q 30277/2
 		|only if havequest(30277)
 	step
-		goto 18.6,7.4
+		goto 41.6,18.4
 		.click Deactivate Final Spirit Wall
 		.' Deactivate the Final Spirit Wall |q 30277/3
 		|only if havequest(30277)
 	step
-		goto 20.6,10.5
+		goto 49.4,30.6
 		.click Ancient Guo-Lai Artifact
 		.get Ancient Guo-Lai Artifact |q 30277/4
 		|only if havequest(30277)
@@ -22757,7 +22789,8 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		.talk Leven Dawnblade##59332
 		..turnin Painting the Ruins Red##30298 
 		..turnin Offering a Warm Welcome##30301 
-		..accept The Imperion Threat##30302 |daily
+		..accept The Imperion Threat##30302 |daily |or 2
+		
 	step
 		goto 68.6,71.0
 		.from Gochao the Ironfist##62880
@@ -22767,6 +22800,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		goto 33.8,38.5
 		.talk Leven Dawnblade##59332
 		..turnin The Imperion Threat##30302
+		..turnin The Crumbling Hall##30277
 		|next "end" |only if rep('Golden Lotus')<=Friendly
 		|next "honored" |only if rep('Golden Lotus')==Honored 
 		|next "revered" |only if rep('Golden Lotus')==Revered 
@@ -22907,12 +22941,18 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		goto 21.5,71.2
 		.talk Leven Dawnblade##59340
 		..turnin Bloodied Skies##30266 |daily
+		..accept The Butcher##30248 |daily
+		|only if havequest(30266) or completedq(30266)
 	step
 		goto 21.4,71.6
 		.talk Anji Autumnlight##58919
 		..turnin Upon the Ramparts##30246 |daily
 		..turnin No Reprieve##30444
 		..accept Vyraxxis, the Krik'thik Swarm-Lord##30251 |daily |only if completedq(30246)
+	step
+		goto 15.0,25.9
+		.kill Bai-Jin the Butcher##58949 |q 30248/1
+		|only if havequest(30248)
 	step
 		goto 7.9,33.9
 		.kill Vyraxxis##63977 |q 30251/1
@@ -22930,6 +22970,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		.talk Kun Autumnlight##58920
 		..turnin Mantid Under Fire##30243 |daily
 		..turnin Under the Setting Sun##30249 |daily
+		..turnin The Butcher##30248 |daily
 		|next "end" |only if rep('Golden Lotus')<=Friendly
 		|next "honored" |only if rep('Golden Lotus')==Honored 
 		|next "revered" |only if rep('Golden Lotus')==Revered 
@@ -23167,6 +23208,7 @@ ZygorGuidesViewer:RegisterInclude("Golden_Lotus_Revered",[[
 		goto Vale of Eternal Blossoms 33.8,38.5
 		.talk Leven Dawnblade##58408
 		..turnin The Imperion Threat##30302
+		..turnin The Crumbling Hall##30277
 	step
 		goto 56.8,43.8
 		.talk Leven Dawnblade##58408
@@ -24428,6 +24470,570 @@ ZygorGuidesViewer:RegisterInclude("A_Tillers_DailyQuest", [[
 		.' Click here to go back to the beginning of the dailies section. |next "dailies" |confirm
 ]])
 
+ZygorGuidesViewer:RegisterInclude("A_Cloud_Serpent", [[
+	step
+	label	start
+		'Proceeding to Order of the Cloud Serpent Dailies |condition completedq(30142) |next "dailies" |only if completedq(30142)
+		'Moving to the Order of the Cloud Serpent prequests. |next |condition not completedq(30142) |only if not completedq(30142)
+	step
+		goto Vale of Eternal Blossoms 85.8,62.3
+		.talk Instructor Windspear##64484
+		..accept The Order of the Cloud Serpent##31373
+	step
+		goto The Jade Forest 57.8,45.0
+		.talk Instructor Skythorn##58228
+		..turnin The Order of the Cloud Serpent##31373
+	step
+		goto 57.7,45.0
+		.talk Elder Anli##58564
+		..accept Wild Things##30134
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225
+		..turnin Wild Things##30134
+		..accept Beating the Odds##30135
+		..accept Empty Nests##30136
+		..accept Egg Collection##30137
+	step
+		goto 64.4,31.1
+		.' Use the Silken Rope in your bags on Windward Hatchlings |use Silken Rope##78947
+		.' Get 6 Hatchlings and bring them to [65.8,31.2]
+		.' Return 6 Windward Hatchlings to their nests. |q 30136/1
+	step
+		goto 68.1,31.2
+		.from Slitherscale Ripper##58212+, Slitherscale Eggdrinker##63532+
+		.' Kill 8 Slitherscale saurok. |q 30135/1
+		.click Serpent Egg
+		.get 6 Serpent Egg##78959 |q 30137/1
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225
+		..turnin Beating the Odds##30135
+		..turnin Empty Nests##30136
+		..turnin Egg Collection##30137
+		..accept Choosing the One##30138
+		..turnin Choosing the One##30138
+	step
+		goto 65.3,31.7
+		.talk Instructor Tong##58225 |tip You will only accept one of the following quests.
+		..accept The Rider's Journey##30139 |or
+		..accept The Rider's Journey##30140 |or
+		..accept The Rider's Journey##30141 |or
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228 |tip You will only turn in one of the following quests.
+		..turnin The Rider's Journey##30139
+		..turnin The Rider's Journey##30140
+		..turnin The Rider's Journey##30141
+		..accept It's A...##30142
+	step
+		.' Watch the scene and see your egg hatch.
+		.' Egg Hatched. |q 30142/1
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228
+		..turnin It's A...##30142
+	step
+	label dailies
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		..accept Catch!##30151 |daily |or 2
+		..accept Pooped##31704 |daily |or 2
+		..accept Feeding Time##30156 |daily |or 2
+		..accept The Easiest Way To A Serpent's Heart##30154 |daily |or 2
+		..accept Sweet as Honey##30150 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if not completedq(30143)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		..accept Catch!##30151 |daily |or 2
+		..accept Pooped##31704 |daily |or 2
+		..accept Pooped##31716 |daily |or 2
+		..accept Feeding Time##30156 |daily |or 2
+		..accept The Easiest Way To A Serpent's Heart##30154 |daily |or 2
+		..accept Sweet as Honey##30150 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if completedq(30143)
+	step
+		goto 57.6,45.1
+		.talk Instructor Skythorn##58228
+		..accept Restoring the Balance##30155 |daily |or 2
+		..accept Disarming the Enemy##30158 |daily |or 2
+		..accept Thinning The Pack##31698 |daily |or 2
+		..accept Weeping Widows##31706 |daily |or 2
+		..accept A Tangled Web##31707 |daily |or 2
+		..accept Monkey Mischief##31712 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm |only if not havequest(30155) and not havequest(30158) and not havequest(31698) and not havequest(31706)
+		.' Click here if there no more quests available today |confirm |only if havequest(30155) or havequest(30158) or havequest(31698) or havequest(31706)
+	step
+		goto 57.5,44.7
+		.talk Jenova Longeye##58413
+		..accept Just a Flesh Wound##30148 |daily |only if skill("First Aid")>=525
+		..accept A Feast for the Senses##30149 |daily |only if skill("Cooking")>=525
+		..accept Fragments of the Past##30147 |daily |only if skill("Archaeology")>=525
+		..accept Snack Time##30146 |daily |only if skill("Fishing")>=400
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept Slitherscale Suppression##31194 |daily |or 2
+		..accept Madcap Mayhem##31703 |daily |or 2
+		..accept Dark Huntress##31701 |daily |or 2
+		..accept On The Prowl##31702 |daily |or 2
+		..accept The Seed of Doubt##31711 |daily |or 2
+		..accept The Trainer's Challenge: Qua-Ro Whitebrow##31721 |daily |or 2
+		..accept The Trainer's Challenge: Ace Longpaw##31717 |daily |or 2
+		..accept The Trainer's Challenge: Suchi the Sweet##31720 |daily |or 2
+		..accept The Trainer's Challenge: Big Bao##31718 |daily |or 2
+		..accept The Big Kah-Oona##31715 |daily |or 2
+		.'_
+		.' Click here if these quests are unavailable |confirm
+	step
+		goto 58.3,45.0
+		.talk Ningna Darkwheel##58509
+		..accept Sprite Fright##31699 |daily |or
+		..accept The Shoe Is On The Other Foot##31700 |daily |or
+		.'_
+		.' Click here if these quests are unavailable |confirm
+	step
+		goto 58.5,44.7
+		.talk Suchi the Sweet##58510
+		..accept Preservation##30159 |daily |or
+		..accept Emptier Nests##30157 |daily |or
+		.'_
+		.' Click here if these quests are unavailable today |confirm |only if not havequest(30159) or not havequest(30157)
+	step
+		goto 57.5,44.0
+		.talk Big Bao##58508
+		..accept Lingering Doubt##31709 |daily
+		.'_
+		.' Click here if this quest is not available today |confirm
+	step
+		goto 57.3,43.5
+		.talk Qua-Ro Whitebrow##58511
+		..accept Serpent's Scale##31708 |daily
+		..accept Saving the Serpents##31714 |daily
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..accept The Sky Race##30152 |daily
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		..accept The Big Brew-haha##31713
+		.'_
+		.' Click here if this quest is unavailable |confirm
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		.' Tell her you are ready to start the Sky Race.
+		.' Ride your Dragon! |invehicle
+		|only if havequest(30152)
+	step
+		path	60.6,39.4	59.7,31.5	61.3,25.2
+		path	66.3,36.0	66.2,42.4	66.8,51.4
+		path	64.0,51.0	60.4,52.9	61.8,54.5
+		path	58.7,46.8	58.4,46.4	58.1,46.0
+		'Follow this path and collect the checked flags hanging off of the Checkpoint balloons. As you fly, gain speed by flying through cloud rings
+		.' Pass 10 Checkpoints. |q 30152/1
+		.' Pass underneath the Finish Line |q 30152/2
+		|only if havequest(30152)
+	step
+		goto 57.3,43.5
+		.talk Qua-Ro Whitebrow##58511
+		.' Challenge him to a duel!
+		.' Defeat Qua-Ro Whitebrow |q 31721/1 
+		|only if havequest(31721)
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		.' Challenge him to a duel!
+		.' Defeat Ace Longpaw |q 31717/1
+		|only if havequest(31717)
+	step
+		goto 57.5,44.0
+		.talk Big Bao##58508
+		.' Challnge him to a duel!
+		.' Defeat Big Bao |q 31718/1
+		|only if havequest(31718)
+	step
+		goto 58.5,44.7
+		.talk Suchi the Sweet##58510
+		.' Challenge her to a duel!
+		.' Defeat Suchi the Sweet |q 31720/1
+		|only if havequest(31720)
+	step
+		goto 69.8,31.3
+		.kill Slitherscale Lizard-Lord##63536 |q 31194/1
+		|only if havequest(31194)
+	step
+		goto 68.1,31.2 |only if havequest(30155) or havequest(30158)
+		.from Slitherscale Ripper##58212+, Slitherscale Eggdrinker##63532+ |only if havequest(30155)
+		.' Kill 8 Slitherscale saurok |q 30155/1 |only if havequest(30155)
+		.click Slitherscale Weapons |only if havequest(30158)
+		.get 5 Slitherscale Harpoon##79025 |q 30158/1 |only if havequest(30158)
+		.click Serpent Egg |only if havequest(30159)
+		.get 8 Serpent Eggs |q 30159/1 |only if havequest(30159)
+	step
+		goto 64.6,33.3
+		.from Saltback Turtle##58218+, Saltback Yearling##58219+
+		.collect 15 Saltback Meat Scrap##79028 |n
+		.' Use the meat scraps to make a Saltback meat |use Saltback Meat Scrap##79028
+		.collect 3 Saltback Meat##79027 |n
+		.' Use the meat to feed your Hatchling |use Saltback Meat##79027 |q 30156/1
+	step
+		goto 57.2,45.2
+		.' Use the Bouncy Ball in your bags. |use Bouncy Ball##79043
+		.' Catch the Bouncy Ball whenever your Hatchling tosses it up, this will be every second throw.
+		.' Catch the Ball 8 times. |q 30151/1
+		|only if havequest(30151)
+	step
+		goto 55.1,46.5
+		.click Hatchling Poop##9572 |tip It is all around this area.
+		.get 5 Tiny Bags of Poop |q 31704/1
+		|only if havequest(31704)
+	step
+		goto 55.1,46.5
+		.click Hatchling Poop##9572 |tip It is all around this area.
+		.get 5 Big Bags of Poop |q 31716/1
+		|only if havequest(31716)
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Pooped##31704
+		|only if havequest(31704)
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Pooped##31716
+		|only if havequest(31716)
+	step
+		goto 62.7,27.4
+		.kill Shadowfae Madcap##65613 |q 31703/1
+		|only if havequest(31703)
+	step
+		goto 64.7,25.7
+		.kill Windward Huntress##63538 |q 31701/1
+		|only if havequest(31701)
+	step
+		goto 63.8,22.3
+		.kill Windward Saber## |q 31702/1
+		|only if havequest(31702)
+	step
+		goto 62.8,24.7
+		.from Windward Tiger##63537 |only if havequest(30154)
+		.get 5 Tiger Flank##85282 |q 30154/1 |only if havequest(30154)
+		.kill 7 Shadowfae Trickster |q 31699/1 |only if havequest(31699)
+		.from Windward Alpha+, Windward Tiger##63537+ |only if havequest(31698)
+		.' Kill 8 Windward Tigers. |q 31698/1 |only if havequest(31698)
+		.click Stolen Boots |only if havequest(31700)
+		.get 14 Stolen Boots##89054 |q 31700/1 |only if havequest(31700)
+	step
+		'Enter the cave here. |goto 58.0,31.7 <5 |c
+		|only if havequest(31708) or havequest(31710) or havequest(31706) or havequest(31711) or havequest(31709) or havequest(31707)
+	step
+		goto The Jade Forest/15 62.7,25.7
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Northeastern Sha Disturbance |q 31709/2
+		|only if havequest(31709)
+	step
+		goto The Jade Forest/15 37.0,31.9
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Northwestern Sha Disturbance |q 31709/1
+		|only if havequest(31709)
+	step
+		goto The Jade Forest/15 35.7,40.2
+		.kill Seed of Doubt |q 31711/1
+		|only if havequest(31711)
+	step
+		 goto The Jade Forest/15 61.0,74.1
+		.' Use the Sha Attunement Device next to this Disturbance |use Sha Attunement Device##88966
+		.' Measure the Southern Sha Disturbance |q 31709/3
+		|only if havequest(31709)
+	step
+		.' Kill Widowspawn |only if havequest(31710)
+		.get 100 Tiny Spider Eye's |q 31710/1 |only if havequest(31710)
+		.kill 7 Weeping Widow |q 31706/1 |only if havequest(31706)
+		.click Serpent's Scale |only if havequest(31708)
+		.get 25 Serpent's Scale##88895 |q 31708/1 |only if havequest(31708)
+		.from Widow's Web##65634+ |only if havequest(31707)
+		.' Free 5 Sri-La Villagers |q 31707/1 |only if havequest(31707)
+	step
+		'Leave the cave. |goto The Jade Forest/15 75.8,19.0 |c
+		|only if havequest(31708) or havequest(31710) or havequest(31706) or havequest(31711) or havequest(31709) or havequest(31707)
+	step
+		.' Enter the Oona Kagu cave. |goto The Jade Forest/0 57.7,27.7 <5 |c
+		|only if havequest(31715)
+	step
+		goto The Jade Forest/16 45.8,77.8
+		.kill 1 Lord Oona##65628 |q 31715/1
+		|only if havequest(31715)
+	step
+		goto 55.2,28.4
+		.click Serpent
+		.collect 10 Rescued Serpent##88894 |q 31714/1
+		|only if havequest(31714)
+	step
+		goto 55.2,28.4
+		.from Oona Brewchugger##65624
+		.click Stolen Sri-La Keg
+		.' Collect 100 Sri-La Stout |q 31713/1
+		|modeldisplay 11025
+		|only if havequest(31713)
+	step
+		goto 55.2,28.0
+		.from Oona Goon##65621+, Oona Brewchugger##65624+, Oona Tuna-Catcher##65623+
+		.' Kill 13 Oona hozen |q 31712/1
+		|only if havequest(31712)
+	step
+		goto The Jade Forest 64.5,31.1
+		.' Use your Silken Rope on _Windward Hatchlings_. |use Silken Rope##78947
+		.' Bring the Windward Hatchlings to the nest at [63.4,31.4].
+		.' Return 6 Windward Hatchlings |q 30157/1
+		|modelnpc 58243
+		|modelnpc 58220
+		|modelnpc 58244
+		|only if havequest(30157)
+	step
+		'Use your First Aid skill to create 8 _Windwool Bandages_ or _Heavy Windwool Bandages_.
+		'You can also ask other players to sell you some bandages.
+		.create 8 Windwool Bandage##102697,First Aid,8 total |or
+		--.collect 8 Windwool Bandage##72985 |or
+		.' or
+		.create 8 Heavy Windwool Bandage##102699,First Aid,8 total |or
+		--.collect 8 Heavy Windwool Bandage##72986 |or
+		|only if havequest(30148)
+	step
+		goto 63.9,31.1
+		.' Use your Windwool Bandages on Injured Hatchlings |use Windwool Bandage##72985
+		.' Heavy Windwool Bandages work, too. |use Heavy Windwool Bandage##72986
+		.' Bandage 8 Injured Hatchlings |q 30148/1
+		|modelnpc Injured Hatchling##58416
+		|only if havequest(30148)
+	step
+		goto 57.0,43.0
+		.' Equip your Fishing Pole |use Fishing Pole##6256
+		.' Use your Fishing skill to fish in the water here |cast Fishing##7620
+		.get 10 Sugar Minnow##79046 |q 30146/1 |only if havequest(30146)
+		.collect 10 Golden Carp##74866 |only if havequest(30149)
+		|only if havequest(30146) or havequest(30149)
+	step
+		'Use your Cooking skill to create 5 Fish Cakes.
+		.create 5 Fish Cake##104297,Cooking,5 total |q 30149/1 |or
+		.buy 5 Fish Cake##74641 |or
+		'You can ask other players to sell you some, if they happen to have leftovers.
+		|only if havequest(30149)
+	step
+		goto The Jade Forest 55.1,47.2
+		.from Honeykeeper##58363+
+		.get 30 Honeycomb##79030 |q 30150/1
+		|only if havequest(30150)
+	step
+		goto 58.0,43.7
+		.talk Ace Longpaw##58506
+		..turnin The Big Brew-haha##31713
+		|only if havequest(31713)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564 |tip You will only have a couple of these quests.
+		..turnin Slitherscale Suppression##31194
+		..turnin Dark Huntress##31701
+		..turnin On The Prowl##31702
+		..turnin Restoring the Balance##30155
+		..turnin Disarming the Enemy##30158
+		..turnin Madcap Mayhem##31703
+		..turnin The Easiest Way To A Serpent's Heart##30154
+		..turnin Sprite Fright##31699
+		..turnin Thinning The Pack##31698
+		..turnin The Shoe Is On The Other Foot##31700
+		..turnin Weeping Widows##31706
+		..turnin The Seed of Doubt##31711
+		..turnin A Tangled Web##31707
+		..turnin The Sky Race##30152
+		..turnin The Trainer's Challenge: Qua-Ro Whitebrow##31721
+		..turnin The Trainer's Challenge: Ace Longpaw##31717
+		..turnin The Trainer's Challenge: Suchi the Sweet##31720 
+		..turnin The Trainer's Challenge: Big Bao##31718
+		..turnin Preservation##30159
+		..turnin Lingering Doubt##31709
+		..turnin Emptier Nests##30157
+		..turnin Monkey Mischief##31712
+		..turnin The Big Kah-Oona##31715
+		..turnin Saving the Serpents##31714
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Tiny Treats##31710 
+		|only if havequest(31710)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if not completedq(30143)
+	step
+		goto 57.5,45.3
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		|only if completedq(30143)
+	step
+		'Open your world map, find dig sites in Pandaria, then go to them |tip They look like small shovel icons on your world map that spawn in random places.  Once you get to the zone where the dig site is located, you will see the dig site on your map as a red highlighted area.
+		.' Use your Survey ability inside the dig site area |cast Survey##80451
+		.' A telescope will appear, follow the direction it points in and continue using your Survey ability to eventually find the artifacts |tip Each dig site has 6 artifacts you can find.
+		.' Click the Archaeology Fragments that spawn on the ground
+		.get 6 Serpentrider Relic## |q 30147/1
+		|only if havequest(30147)
+	step
+		goto 57.5,44.7
+		.talk Jenova Longeye##58413
+		..turnin Just a Flesh Wound##30148 |only if skill("First Aid")>=525
+		..turnin A Feast for the Senses##30149 |only if skill("Cooking")>=525
+		..turnin Fragments of the Past##30147 |daily |only if skill("Archaeology")>=525
+		..turnin Snack Time##30146 |daily |only if skill("Fishing")>=525
+	step
+		goto 57.5,45.4
+		'Talk to Your Hatchling |tip Your Hatchling is whichever color egg you chose in the prequests.
+		|modelnpc Your Hatchling##58416
+		|modelnpc Your Hatchling##58213
+		..turnin Sweet as Honey##30150
+		|only if havequest(30150)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..turnin Catch!##30151
+		|only if havequest(30151)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept Needle Me Not##31705 |daily
+		|only if completedq(30151)
+	step
+		goto 57.0,41.2
+		.' Use the Golden Honey in your bags |use Golden Honey##89113
+		.kill Orchard Needler |q 31705/1
+		|only if havequest(31705)
+	step
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..turnin Needle Me Not##31705
+		|next "exalted" |only if rep("Order of the Cloud Serpent")==Exalted
+		|next "revered" |only if rep("Order of the Cloud Serpent")==Revered
+		|next "end" |only if rep("Order of the Cloud Serpent")<=Revered
+	step
+	label revered
+		goto 57.6,44.9
+		.talk Elder Anli##58564
+		..accept They Grow Like Weeds##30143
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		.' Ask Instructor Windbalde how your serpent is doing.
+		.' Speak to Instructor Windblade |q 30143/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin They Grow Like Weeds##30143
+		..accept Flight Training: Ring Round-Up##30144
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c 
+		|only if havequest(30144)
+	step
+		'Fly your Cloud Serpent through the rings made from clouds.
+		.' Fly through 6 Cloud Rings |q 30144/1
+	step
+		goto 58.6,43.7
+		.' Click the Leave Vehicle button |outvehicle |c
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: Ring Round-Up##30144
+		..accept Flight Training: Full Speed Ahead##30145
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c
+		|only if havequest(30145)
+	step
+		'Follow Instructor Windblade through the course, her mounts flies faster than yours so fly through some of the cloud rings to maintain speed with your guide. If you move too slowly or get too far away from the guide, the course will restart.
+		.' Finish the course |q 30145/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: Full Speed Ahead##30145
+		..accept Flight Training: In Due Course##30187
+	step
+		'The color of Cloud Serpent depends on your egg color choice when you unlocked the dailies for this faction.
+		.clicknpc Golden Cloud Serpent##58429
+		.clicknpc Azure Cloud Serpent##58441
+		.clicknpc Jade Cloud Serpent##58442
+		.' Ride your Cloud Serpent |invehicle |c
+		|only if havequest(30187)
+	step
+		path	strict; curved; loop
+		path	60.6,39.4	59.7,31.5	61.3,25.2
+		path	66.3,36.0	66.2,42.4	66.8,51.4
+		path	64.0,51.0	60.4,52.9	61.8,54.5
+		path	58.7,46.8	58.4,46.4
+		'Follow this path and collect the checked flags hanging off of the Checkpoint balloons. As you fly, gain speed by flying through cloud rings
+		.' Pass 10 Checkpoints |q 30187/1
+	step
+		goto 58.6,43.7
+		.talk Instructor Windblade##58420
+		..turnin Flight Training: In Due Course##30187
+		|next "end"
+	step
+	label exalted
+		goto 57.6,45.0
+		.talk Elder Anli##58564
+		..accept Riding the Skies##31811
+	step
+		'Watch the cinematic
+		.' Join the Order of the Cloud Serpent |q 31811/1
+	step
+		goto 57.6,45.0
+		.talk Elder Anli##58564
+		..turnin Riding the Skies##31811
+	step
+		Proceeding to the next step |next end |only if default
+		Proceeding to Riding the Skies Quest |next exalted |only if rep('Order of the Cloud Serpent')==Exalted
+	step
+	label	exalted
+		goto 57.7,44.9
+		.talk Elder Anli##58564
+		..accept Riding the Skies##31810
+	step
+		goto 57.7,44.9
+		.talk Elder Anli##58564
+		..turnin Riding the Skies##31810
+	step
+	label end
+		'This the end of our daily guide.
+		.' Click here to go back to the beginning |confirm |next start
+]])
 
 ZygorGuidesViewer:RegisterInclude("August_Celestials",[[
 		'In order to begin gaining _Reputation_ with the _August Celestials_, you must first become Revered with the _Golden Lotus_.
@@ -25554,7 +26160,7 @@ ZygorGuidesViewer:RegisterInclude("Operation_Shieldwall_Daily",[[
 //Lions Landing
 	step
 		goto Krasarang Wilds 89.7,32.8
-		.talk Marshal Troteman##68331
+		.talk Mishka##67630
 		..accept Resource Gathering##32149 |daily
 		..accept Supply Block##32150 |daily
 	step
@@ -25600,7 +26206,8 @@ ZygorGuidesViewer:RegisterInclude("Operation_Shieldwall_Daily",[[
 		..turnin Tower Defense##32151
 		..turnin Hero Killer##32153
 		..turnin Siege Damage##32152 |daily |or 3
-		|next end
+		|next "exalted" |only if rep("Operation: Shieldwall")==Exalted
+		|next "end" |only if default
 // The Skyfire
 	step
 	label Skyfire
@@ -25741,7 +26348,8 @@ ZygorGuidesViewer:RegisterInclude("Operation_Shieldwall_Daily",[[
 		.talk Tinkmaster Overspark ##67976
 		..turnin A Kind of Magic##32143 
 		..turnin Don't Lose Your Head##32145
-		|next end
+		|next "exalted" |only if rep("Operation: Shieldwall")==Exalted
+		|next "end" |only if default
 // Ruins of Ogudei
 	step
 	label Ruins of Ogudei
@@ -25799,11 +26407,15 @@ ZygorGuidesViewer:RegisterInclude("Operation_Shieldwall_Daily",[[
 		..turnin Oi Ain't Afraid o' No Ghosts!##32346 |daily
 		..turnin Ogudei's Lieutenants##32122 |daily
 		..turnin It Is A Mystery##32119 |daily 
-		|next end
+		|next "exalted" |only if rep("Operation: Shieldwall")==Exalted
+		|next "end" |only if default
 	step
-	label end
+	label "end"
 		.' You have reached the end of the guide.
-		|next dailies
+		.' Click here to return to the beginning of the dailies |confirm |next dailies
+	step
+	label "exalted"
+		'Congratulations, you have reached Exalted with Operation: Shieldwall!
 ]])
 
 ZygorGuidesViewer:RegisterInclude("Beastmaster_Dailies",[[
@@ -25951,6 +26563,9 @@ ZygorGuidesViewer:RegisterInclude("Beastmaster_Dailies",[[
 	label EOG
 		.' You have reached the end of the guide.
 ]])
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------
 -- ACHIEVEMENTS
 --------------------------------------------------------------------------------------------------------------------------------------

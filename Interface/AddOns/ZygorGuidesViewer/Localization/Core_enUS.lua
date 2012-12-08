@@ -83,6 +83,7 @@ ZygorGuidesViewer_L("Main", "enUS", function() return {
 	['opt_iconscale_desc'] = "Size of the icons on the map",
 
 
+
 	['talentpopup_suggest'] = "Zygor Guides suggested talent.",
 	['talentpopup_suggest_click'] = "|cffffff00Click|cff00ff00 to learn.",
 	['talentpopup_notsuggest'] = "Zygor Guides did not suggest this talent.",
@@ -231,25 +232,6 @@ ZygorGuidesViewer_L("Main", "enUS", function() return {
 	["opt_flashborder"] = "Flash whole window",
 	["opt_flashborder_desc"] = "Flash the whole window whenever a step is completed.",
 
-	["opt_group_map"] = "Waypoints",
-	["opt_group_map_desc"] = "These settings govern how Zygor Guides Viewer interacts with map-handling addons.",
-		["opt_group_map_waypointing"] = "Waypointing addon",
-		["opt_group_map_waypointing_desc"] = "Select the addon that you'd like to handle the waypoints for Zygor Guides Viewer.",
-		["opt_hidearrowwithguide"] = "Hide arrow when closing viewer",
-		["opt_hidearrowwithguide_desc"] = "Select this to make the arrow follow the guide window's visibility.\nLeave unchecked if you want the arrow to stay visible when you hide the guides.",
-		["opt_group_addons_internal"] = "Zygor arrow",
-		["opt_group_addons_tomtom"] = "TomTom",
-		["opt_group_addons_carbonite"] = "Carbonite",
-		["opt_group_addons_cart2"] = "Cartographer 2",
-		["opt_group_addons_cart3"] = "Cartographer 3",
-		["opt_group_addons_metamap"] = "MetaMap",
-		--["opt_group_addons_none"] = "none",
-
-		["opt_corpsearrow"] = "Point towards corpse",
-		["opt_corpsearrow_desc"] = "Use the waypointer arrow to point towards your corpse upon death - if your waypointer of choice doesn't by itself.",
-		["opt_corpsearrowjokes"] = "Corpse humour",
-		["opt_corpsearrowjokes_desc"] = "Having your demise mocked might teach you to be more careful next time. Or, it might strip you of your cares and make you accept death as a natural part of life. Your mileage may vary.",
-
 	--[[	-- obsolete stuff
 
 		['opt_backopacity'] = "Background opacity",
@@ -277,8 +259,8 @@ ZygorGuidesViewer_L("Main", "enUS", function() return {
 		["opt_group_data_entry_desc"] = "Paste a new guide here (remember to wrap its steps in:|nguide Title Of Guide|nsteps...|nsteps...|nend\n); note that pasting and parsing of a large guide (>30kB) may take a few seconds.",
 	--]]
 
-	["opt_group_waypointer"] = "Internal Waypointer",
-	["opt_group_waypointer_desc"] = function() return "The internal map node display and waypointing system." .. (ZGV.db.profile.waypointaddon~="internal" and "|n|cffff8888You're using an external waypointing addon. These settings are not used." or "") end,
+	--["opt_group_waypointer"] = "Internal Waypointer",
+	--["opt_group_waypointer_desc"] = function() return "The internal map node display and waypointing system." .. (ZGV.db.profile.waypointaddon~="internal" and "|n|cffff8888You're using an external waypointing addon. These settings are not used." or "") end,
 
 	['opt_group_progress'] = "Step completion",
 	--['opt_group_progress_desc'] = "To ensure optimal leveling progress, this addon will suggest moving to the next quest hub's section as soon as you outlevel your current area.",
@@ -322,19 +304,46 @@ If you're new to the guides, or have only started using them on this character, 
 	--]]
 	['opt_group_progress_bottomdesc'] = "",
 
-	['opt_group_mapinternal'] = "Internal waypointer",
-		['opt_arrowshow'] = "Show rotating arrow",			['opt_arrowshow_desc'] = "Display a rotating arrow, indicating the direction towards the waypoint.",
-		['opt_arrowsmooth'] = "Smooth rotation",			['opt_arrowsmooth_desc'] = "Add a slight drag to the arrow's rotation. Purely cosmetic.",
-		['opt_arrowmeters'] = "Metric system",			['opt_arrowmeters_desc'] = "Use meters and kilometers instead of yards and miles.",
-		['opt_arrowfreeze'] = "Non-interactive",			['opt_arrowfreeze_desc'] = "Make the pointer arrow transparent to mouse clicks.",
-		['opt_arrowcam'] = "Arrow follows camera",	 		['opt_arrowcam_desc'] = "Show directions basing on the direction the camera is turned. If unchecked, the pointer arrow shows directions basing only on where your character is facing.\n\nNote: in camera mode, the arrow might point in weird directions when using click-to-move.",
-		['opt_arrowcolordist'] = "Colour by distance",		['opt_arrowcolordist_desc'] = "Colour the arrow by distance, instead of by direction.",
-		['opt_arrowscale'] = "Scale",					['opt_arrowscale_desc'] = "Set the size of the waypointing arrow.",
-		['opt_arrowalpha'] = "Opacity",					['opt_arrowalpha_desc'] = "Set the opacity of the waypointing arrow.",
-		['opt_arrowfontsize'] = "Arrow font size",			['opt_arrowfontsize_desc'] = "Set the size of the labels under the arrow.",
-		['opt_mapcoords'] = "Show coordinates",			['opt_mapcoords_desc'] = "Display player and cursor coordinates on the world map.",
+	['opt_group_arrow'] = "Waypointing",
+	['opt_group_arrow_desc'] = "These settings control the direction arrow and map markers.",
+		--[[
+		["opt_group_map_waypointing"] = "Waypointing addon",
+		["opt_group_map_waypointing_desc"] = "Select the addon that you'd like to handle the waypoints for Zygor Guides Viewer.",
+		["opt_group_addons_internal"] = "Zygor arrow",
+		["opt_group_addons_tomtom"] = "TomTom",
+		["opt_group_addons_carbonite"] = "Carbonite",
+		["opt_group_addons_cart2"] = "Cartographer 2",
+		["opt_group_addons_cart3"] = "Cartographer 3",
+		["opt_group_addons_metamap"] = "MetaMap",
+		["opt_group_addons_none"] = "none",
+		["opt_hidearrowwithguide"] = "Hide arrow when closing viewer",
+		["opt_hidearrowwithguide_desc"] = "Select this to make the arrow follow the guide window's visibility.\nLeave unchecked if you want the arrow to stay visible when you hide the guides.",
+		--]]
 
-		['opt_group_travelsystem'] = "Travel System",			['opt_group_travelsystem_desc'] = "Adjust your settings for the travel system.",
+	--['opt_group_mapinternal'] = "Internal waypointer",
+		['opt_arrowshow'] = "Show direction arrow",			['opt_arrowshow_desc'] = "Display a rotating arrow, indicating the direction towards the current waypoint.",
+
+		['opt_arrow_display'] = "Arrow look and feel:",
+			['opt_arrowsmooth'] = "Smooth rotation",			['opt_arrowsmooth_desc'] = "Add a slight drag to the arrow's rotation. Purely cosmetic.",
+			['opt_arrowfreeze'] = "Non-interactive",			['opt_arrowfreeze_desc'] = "Make the pointer arrow transparent to mouse clicks.",
+			--['opt_arrowcam'] = "Arrow follows camera",	 		['opt_arrowcam_desc'] = "Show directions basing on the direction the camera is turned. If unchecked, the pointer arrow shows directions basing only on where your character is facing.\n\nNote: in camera mode, the arrow might point in weird directions when using click-to-move.",
+			['opt_arrowcolordist'] = "Color by distance",		['opt_arrowcolordist_desc'] = "Color the arrow by distance, instead of by direction.",
+			['opt_arrowscale'] = "Scale",					['opt_arrowscale_desc'] = "Set the size of the waypointing arrow.",
+			['opt_arrowalpha'] = "Opacity",					['opt_arrowalpha_desc'] = "Set the opacity of the waypointing arrow.",
+			['opt_arrowfontsize'] = "Arrow font size",			['opt_arrowfontsize_desc'] = "Set the size of the labels under the arrow.",
+			['opt_mapcoords'] = "Show coordinates",			['opt_mapcoords_desc'] = "Display player and cursor coordinates on the world map.",
+			['opt_arrowmeters'] = "Use metric system",			['opt_arrowmeters_desc'] = "Use meters and kilometers instead of yards and miles.",
+		['opt_arrow_extras'] = "Additional arrow functions:",
+			['opt_corpsearrow'] = "Point towards corpse",
+			['opt_corpsearrow_desc'] = "Use the waypointer arrow to point towards your corpse upon death - if your waypointer of choice doesn't by itself.",
+			['opt_corpsearrowjokes'] = "Corpse humour",
+			['opt_corpsearrowjokes_desc'] = "Having your demise mocked might teach you to be more careful next time. Or, it might strip you of your cares and make you accept death as a natural part of life. Your mileage may vary.",
+
+
+	['opt_group_travelsystem'] = "Travel System",			['opt_group_travelsystem_desc'] = "Adjust your settings for the travel system.",
+		['opt_pathfinding'] = "Find travel routes",		['opt_pathfinding_desc'] = "Automatically find a route to destination.",
+		['opt_pathfinding_lazy'] = "Prefer comfortable paths",		['opt_pathfinding_lazy_desc'] = "Best travel comfort: maximizing usage of flight paths and minimizing user interaction - at the cost of longer travel times.",
+
 		['opt_ants'] = "Ants",
 		['opt_customcolorants'] = "Customize ant colors",		['opt_customcolorants_desc'] = "Choose your own ant colors",
 		['opt_singlecolorants'] = "Single custom color",		['opt_singlecolorants_desc'] = "Use a single color for all ants",
@@ -344,11 +353,6 @@ If you're new to the guides, or have only started using them on this character, 
 		['opt_colorantsfly'] = "Flying Mount",				['opt_colorantsfly_desc'] = "This color will be used for a flying mount",
 		['opt_colorantsportal'] = "Portal",					['opt_colorantsportal_desc'] = "Use this color to for portal, hearthstone, or teleport use",
 		['opt_colorantsother'] = "Normal",				['opt_colorantsother_desc'] = "This color will be used for normal (ground) travel",
-
-		['opt_pathfinding'] = "Find travel routes",		['opt_pathfinding_desc'] = "Automatically find a route to destination.",
-		['opt_pathfinding_lazy'] = "Prefer comfortable paths",		['opt_pathfinding_lazy_desc'] = "Best travel comfort: maximizing usage of flight paths and minimizing user interaction - at the cost of longer travel times.",
-
-		['opt_map_extras'] = "Extra map features:",
 
 		['opt_foglight'] = "Reveal whole map",				['opt_foglight_desc'] = "Reveal unexplored areas on the map.",
 		['opt_progress'] = "Show progress bar",				['opt_progress_desc'] = "Show the bar at the bottom of the Zygor Guide frame.",
@@ -739,6 +743,7 @@ If you're new to the guides, or have only started using them on this character, 
 	["stepgoal_scenariostage_done"] = "Scenario stage %d completed",
 
 	["stepgoal_perform_alchemy"] = "Create %s %s",
+	["stepgoal_perform_first aid"] = "Create %s %s",
 	["stepgoal_perform_enchanting"] = "Cast %s %s",
 	["stepgoal_perform_blacksmithing"] = "Forge %s %s",
 	["stepgoal_perform_engineering"] = "Construct %s %s",
@@ -971,6 +976,12 @@ If you're new to the guides, or have only started using them on this character, 
 	pointer_floors_27_7_0 = "+Exit cave",
 	pointer_floors_27_0_6 = "-Enter tunnel",
 	pointer_floors_27_6_0 = "+Exit tunnel",
+	pointer_floors_29_0_14 = "-Enter Blackrock Mountain",
+	pointer_floors_29_14_0 = "+Exit Blackrock Mountain",
+	pointer_floors_29_14_15 = "-Enter side passage",
+	pointer_floors_29_15_14 = "+Return to main hall",
+	pointer_floors_29_14_16 = "-Descend down chains",
+	pointer_floors_29_16_14 = "+Climb up chains",
 	pointer_floors_820 = "+(use Time Transit Device)",
 	pointer_floors_up = "+Go upstairs",
 	pointer_floors_down = "-Go downstairs",

@@ -4,6 +4,9 @@ Copyright 2010 ~ 2012 Arith Hsu <arithmandarjp @ yahoo.co.jp>
 ==============
 = Change Log =
 ==============
+* 1.3.7 (2012/12/08)
+    - TOC update to support WoW 5.1
+
 * 1.3.6 (2012/09/26)
     - TOC update to support WoW 5.0
     

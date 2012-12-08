@@ -2314,7 +2314,6 @@ ZygorGuidesViewer:RegisterGuide("Zygor's Alliance Leveling Guides\\Eastern Kingd
 author support@zygorguides.com
 image Dun Morogh
 next Zygor's Alliance Leveling Guides\\Eastern Kingdoms 1-60\\Dun Morogh (1-10)\\Dun Morogh (8-10)
-startlevel 5.4
 dynamic on
 step
 goto Dun Morogh,53.9,50.7
@@ -2410,10 +2409,10 @@ goto Dun Morogh/7 53.8,48.1
 ' |from Young Wendigo##40940
 step
 goto Dun Morogh/7 61.0,92.8 |n
-.' Leave the cave |goto Dun Morogh/7 61.0,92.8 |noway |c
+.' Leave the cave |goto Dun Morogh/7,61.0,92.8 |noway |c
 step
 goto Dun Morogh/0 50.5,52.5 |n
-.' Follow the path up |goto Dun Morogh/0 50.5,52.5,0.5 |noway |c
+.' Follow the path up |goto Dun Morogh/0,50.5,52.5,0.5 |noway |c
 step
 goto Dun Morogh/0 53.7,52.1
 .talk 40951
@@ -37499,10 +37498,7 @@ goto 75.3,47.4
 .from Brown Stag##37786+
 .get 10 Side of Stag Meat |q 24675/1
 step
-goto 76.4,31.2 |n
-.' Enter the mine |goto 76.4,31.2,0.5 |noway |c
-step
-Gilneas/1 54.5,82.8
+goto Gilneas/1 54.5,82.8
 .' Follow the path in the mine
 .' Kill Forsaken Slavedrivers to get Slaver's Keys and click Ball and Chains to free Enslaved Villagers |tip They are attached to the Enslaved Villagers' legs, who are mining rocks around this area.
 .kill Brothogg the Slavemaster##37802 |q 24674/1
@@ -37516,9 +37512,6 @@ goto 75.3,31.6
 .' Free 5 Enslaved Gilnean |q 24575/1
 step
 ding 11
-step
-goto Gilneas/1 28.6,69.5 |n
-.' Leave the mine |goto Gilneas/1 28.6,69.5 |c
 step
 goto Gilneas/0 70.9,39.8
 .talk 37783
@@ -37602,7 +37595,7 @@ step
 goto 7.7,71.5
 .' Go downstairs and run through the tunnel
 .' Spam use your Half-Burnt Torch to keep the rats and spiders from attacking you |use Half-Burnt Torch##50220
-.' Exit the tunnel on the other side |goto 679 |noway |c |q 24678
+.' Exit the tunnel on the other side |goto 678 |noway |c |q 24678
 step
 goto 49.8,56.9
 .talk 38144

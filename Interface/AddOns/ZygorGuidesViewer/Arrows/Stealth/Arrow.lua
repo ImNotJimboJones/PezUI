@@ -62,6 +62,7 @@ function arrowframeproto:OnLoad()
 	local TINY_TURNS = false
 
 	self.arrow.SetAngle = function(self,angle)
+		self.angle = angle
 		angle=angle*rad2deg
 		
 		if TINY_TURNS then

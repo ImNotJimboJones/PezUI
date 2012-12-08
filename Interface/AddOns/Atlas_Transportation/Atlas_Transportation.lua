@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation.lua 1832 2012-10-15 23:39:19Z dynaletik@gmail.com $
+-- $Id: Atlas_Transportation.lua 1834 2012-10-23 14:55:20Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -882,6 +882,8 @@ local myData = {
 		{ INDENT..GREY..AL["Rappelling Rope"].." / "..AL["Climbing Rope"] };
 		{ ORNG.." E) "..BZ["Whispercloud Rise"].." / "..BZ["Zouchin Province"]..", "..BZ["Kun-Lai Summit"] };
 		{ INDENT..GREY..AL["Whispercloud's Balloon"] };
+		{ ORNG.." F) "..BZ["Serpent's Spine"]..", "..BZ["Vale of Eternal Blossoms"].." / "..BZ["Terrace of Gurthan"]..", "..BZ["Dread Wastes"] };
+		{ INDENT..GREY..AL["Shado-Pan Rope"] };
 		{ "" };
 		{ _RED..AL["Taxi Nodes"] };
 		{ BLUE..BZ["The Jade Forest"] };
@@ -963,6 +965,8 @@ local myData = {
 		{ INDENT..GREY..AL["Rappelling Rope"].." / "..AL["Climbing Rope"] };
 		{ ORNG.." E) "..BZ["Whispercloud Rise"].." / "..BZ["Zouchin Province"]..", "..BZ["Kun-Lai Summit"] };
 		{ INDENT..GREY..AL["Whispercloud's Balloon"] };
+		{ ORNG.." F) "..BZ["Serpent's Spine"]..", "..BZ["Vale of Eternal Blossoms"].." / "..BZ["Terrace of Gurthan"]..", "..BZ["Dread Wastes"] };
+		{ INDENT..GREY..AL["Shado-Pan Rope"] };
 		{ "" };
 		{ _RED..AL["Taxi Nodes"] };
 		{ BLUE..BZ["The Jade Forest"] };

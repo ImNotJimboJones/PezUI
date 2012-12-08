@@ -4,7 +4,7 @@ local data={}
 addon.LibRoverData = data
 
 data.MapIDsByName = {
- ['Abyssal Depths']=614,  ['Ahn\'Qiraj']=766,  ['Ahn\'Qiraj: The Fallen Kingdom']=772,  ['Ahn\'kahet: The Old Kingdom']=522,  ['Alterac Valley']=401,  ['Arathi Basin']=461,  ['Arathi Highlands']=16,  ['Ashenvale']=43,  ['Auchenai Crypts']=722,  ['Azjol-Nerub']=533,  ['Azshara']=181,  ['Azuremyst Isle']=464,  ['Badlands']=17,  ['Baradin Hold']=752,  ['Black Temple']=796,  ['Blackfathom Deeps']=688,  ['Blackrock Caverns']=753,  ['Blackrock Depths']=704,  ['Blackrock Spire']=721,  ['Blackwing Descent']=754,  ['Blackwing Lair']=755,  ['Blade\'s Edge Mountains']=475,  ['Blasted Lands']=19,  ['Bloodmyst Isle']=476,  ['Borean Tundra']=486,  ['Burning Steppes']=29,  ['Crystalsong Forest']=510,  ['Dalaran']=504,  ['Darkshore']=42,  ['Darkmoon Island']=823,  ['Darnassus']=381,  ['Deadwind Pass']=32,  ['Deepholm']=640,  ['Desolace']=101,  ['Dire Maul']=699,  ['Dragon Soul']=824,  ['Dragonblight']=488,  ['Drak\'Tharon Keep']=534,  ['Dun Morogh']=27,  ['Durotar']=4,  ['Duskwood']=34,  ['Dustwallow Marsh']=141,  ['Kalimdor']=13, ['Eastern Kingdoms']=14, ['Eastern Plaguelands']=23,  ['Elwynn Forest']=30,  ['End Time']=820,  ['Eversong Woods']=462,  ['Eye of the Storm']=482,  ['Felwood']=182,  ['Feralas']=121,  ['Firelands']=800,  ['Ghostlands']=463,  ['Gilneas City']=611,  ['Gilneas']={539,545,678,679},  ['Gnomeregan']=691,  ['Grim Batol']=757,  ['Grizzly Hills']=490,  ['Gruul\'s Lair']=776,  ['Gundrak']=530,  ['Halls of Lightning']=525,  ['Halls of Origination']=759,  ['Halls of Reflection']=603,  ['Halls of Stone']=526,  ['Hellfire Peninsula']=465,  ['Hellfire Ramparts']=797,  ['Hillsbrad Foothills']=24,  ['Howling Fjord']=491,  ['Hour of Twilight']=819,  ['Hrothgar\'s Landing']=541,  ['Hyjal Summit']=775,  ['Icecrown Citadel']=604,  ['Icecrown']=492,  ['Ironforge']=341,  ['Isle of Conquest']=540,  ['Isle of Quel\'Danas']=499,  ['Karazhan']=799,  ['Kelp\'thar Forest']=610,  ['Kezan']=605,  ['Loch Modan']=35,  ['Lost City of the Tol\'vir']=747,  ['Magisters\' Terrace']=798,  ['Magtheridon\'s Lair']=779,  ['Mana-Tombs']=732,  ['Maraudon']=750,  ['Molten Core']=696,  ['Molten Front']=795,  ['Moonglade']=241,  ['Mount Hyjal']={606,683},  ['Mulgore']=9,  ['Nagrand']=477,  ['Naxxramas']=535,  ['Netherstorm']=479,  ['Northern Barrens']=11,  ['Northern Stranglethorn']=37,  ['Old Hillsbrad Foothills']=734,  ['Onyxia\'s Lair']=718,  ['Orgrimmar']=321,  ['Pit of Saron']=602,  ['Plaguelands: The Scarlet Enclave']=502,  ['Ragefire Chasm']=680,  ['Razorfen Downs']=760,  ['Razorfen Kraul']=761,  ['Redridge Mountains']=36,  ['Ruins of Ahn\'Qiraj']=717,  ['Ruins of Gilneas City']=685,  ['Ruins of Gilneas']=684,  ['Scarlet Monastery']=762,  ['OLD Scholomance']=763,  ['Searing Gorge']=28,  ['Serpentshrine Cavern']=780,  ['Sethekk Halls']=723,  ['Shadow Labyrinth']=724,  ['Shadowfang Keep']=764,  ['Shadowmoon Valley']=473,  ['Shattrath City']=481,  ['Shimmering Expanse']=615,  ['Sholazar Basin']=493,  ['Silithus']=261,  ['Silvermoon City']=480,  ['Silverpine Forest']=21,  ['Southern Barrens']=607,  ['Stonetalon Mountains']=81,  ['Stormwind City']=301,  ['Strand of the Ancients']=512,  ['Stranglethorn Vale']=689,  ['Stratholme']=765,  ['Sunwell Plateau']=789,  ['Swamp of Sorrows']=38,  ['Tanaris']=161,  ['Teldrassil']=41,  ['Tempest Keep']=782,  ['Terokkar Forest']=478,  ['The Arcatraz']=731,  ['The Bastion of Twilight']=758,  ['The Battle for Gilneas (Old City Map)']=677,  ['The Battle for Gilneas']=736,  ['The Black Morass']=733,  ['The Blood Furnace']=725,  ['The Botanica']=729,  ['The Cape of Stranglethorn']=673,  ['The Culling of Stratholme']=521,  ['The Deadmines']=756,  ['The Exodar']=471,  ['The Eye of Eternity']=527,  ['The Forge of Souls']=601,  ['The Hinterlands']=26,  ['The Lost Isles']={544,681,682},  ['The Maelstrom']={737,751},  ['The Mechanar']=730,  ['The Nexus']={520,803},  ['The Obsidian Sanctum']=531,  ['The Oculus']=528,  ['The Ruby Sanctum']=609,  ['The Shattered Halls']=710,  ['The Slave Pens']=728,  ['The Steamvault']=727,  ['The Stockade']=690,  ['The Stonecore']=768,  ['The Storm Peaks']=495,  ['The Temple of Atal\'Hakkar']=687,  ['The Underbog']=726,  ['The Violet Hold']=536,  ['The Vortex Pinnacle']=769,  ['Thousand Needles']=61,  ['Throne of the Four Winds']=773,  ['Throne of the Tides']=767,  ['Thunder Bluff']=362,  ['Tirisfal Glades']=20,  ['Tol Barad Peninsula']=709,  ['Tol Barad']=708,  ['Trial of the Champion']=542,  ['Trial of the Crusader']=543,  ['Twilight Highlands']={700,770},  ['Twin Peaks']=626,  ['Uldaman']=692,  ['Ulduar']=529,  ['Uldum']={720,748},  ['Un\'Goro Crater']=201,  ['Undercity']=382,  ['Utgarde Keep']=523,  ['Utgarde Pinnacle']=524,  ['Vashj\'ir']=613,  ['Vault of Archavon']=532,  ['Wailing Caverns']=749,  ['Warsong Gulch']=443,  ['Well of Eternity']=816,  ['Western Plaguelands']=22,  ['Westfall']=39,  ['Wetlands']=40,  ['Wintergrasp']=501,  ['Winterspring']=281,  ['Zangarmarsh']=467,  ['Zul\'Aman']=781,  ['Zul\'Drak']=496,  ['Zul\'Farrak']=686,  ['Zul\'Gurub']={697,793},
+ ['Abyssal Depths']=614,  ['Ahn\'Qiraj']=766,  ['Ahn\'Qiraj: The Fallen Kingdom']=772,  ['Ahn\'kahet: The Old Kingdom']=522,  ['Alterac Valley']=401,  ['Arathi Basin']=461,  ['Arathi Highlands']=16,  ['Ashenvale']=43,  ['Auchenai Crypts']=722,  ['Azjol-Nerub']=533,  ['Azshara']=181,  ['Azuremyst Isle']=464,  ['Badlands']=17,  ['Baradin Hold']=752,  ['Black Temple']=796,  ['Blackfathom Deeps']=688,  ['Blackrock Caverns']=753,  ['Blackrock Depths']=704,  ['Blackrock Spire']=721,  ['Blackwing Descent']=754,  ['Blackwing Lair']=755,  ['Blade\'s Edge Mountains']=475,  ['Blasted Lands']=19,  ['Bloodmyst Isle']=476,  ['Borean Tundra']=486,  ['Burning Steppes']=29,  ['Crystalsong Forest']=510,  ['Dalaran']=504,  ['Darkshore']=42,  ['Darkmoon Island']=823,  ['Darnassus']=381,  ['Deadwind Pass']=32,  ['Deepholm']=640,  ['Desolace']=101,  ['Dire Maul']=699,  ['Dragon Soul']=824,  ['Dragonblight']=488,  ['Drak\'Tharon Keep']=534,  ['Dun Morogh']=27,  ['Durotar']=4,  ['Duskwood']=34,  ['Dustwallow Marsh']=141,  ['Kalimdor']=13, ['Eastern Kingdoms']=14, ['Eastern Plaguelands']=23,  ['Elwynn Forest']=30,  ['End Time']=820,  ['Eversong Woods']=462,  ['Eye of the Storm']=482,  ['Felwood']=182,  ['Feralas']=121,  ['Firelands']=800,  ['Ghostlands']=463,  ['Gilneas City']=611,  ['Gilneas']=678,  ['Gnomeregan']=691,  ['Grim Batol']=757,  ['Grizzly Hills']=490,  ['Gruul\'s Lair']=776,  ['Gundrak']=530,  ['Halls of Lightning']=525,  ['Halls of Origination']=759,  ['Halls of Reflection']=603,  ['Halls of Stone']=526,  ['Hellfire Peninsula']=465,  ['Hellfire Ramparts']=797,  ['Hillsbrad Foothills']=24,  ['Howling Fjord']=491,  ['Hour of Twilight']=819,  ['Hrothgar\'s Landing']=541,  ['Hyjal Summit']=775,  ['Icecrown Citadel']=604,  ['Icecrown']=492,  ['Ironforge']=341,  ['Isle of Conquest']=540,  ['Isle of Quel\'Danas']=499,  ['Karazhan']=799,  ['Kelp\'thar Forest']=610,  ['Kezan']=605,  ['Loch Modan']=35,  ['Lost City of the Tol\'vir']=747,  ['Magisters\' Terrace']=798,  ['Magtheridon\'s Lair']=779,  ['Mana-Tombs']=732,  ['Maraudon']=750,  ['Molten Core']=696,  ['Molten Front']=795,  ['Moonglade']=241,  ['Mount Hyjal']={606,683},  ['Mulgore']=9,  ['Nagrand']=477,  ['Naxxramas']=535,  ['Netherstorm']=479,  ['Northern Barrens']=11,  ['Northern Stranglethorn']=37,  ['Old Hillsbrad Foothills']=734,  ['Onyxia\'s Lair']=718,  ['Orgrimmar']=321,  ['Pit of Saron']=602,  ['Plaguelands: The Scarlet Enclave']=502,  ['Ragefire Chasm']=680,  ['Razorfen Downs']=760,  ['Razorfen Kraul']=761,  ['Redridge Mountains']=36,  ['Ruins of Ahn\'Qiraj']=717,  ['Ruins of Gilneas City']=685,  ['Ruins of Gilneas']=684,  ['Scarlet Monastery']=762,  ['OLD Scholomance']=763,  ['Searing Gorge']=28,  ['Serpentshrine Cavern']=780,  ['Sethekk Halls']=723,  ['Shadow Labyrinth']=724,  ['Shadowfang Keep']=764,  ['Shadowmoon Valley']=473,  ['Shattrath City']=481,  ['Shimmering Expanse']=615,  ['Sholazar Basin']=493,  ['Silithus']=261,  ['Silvermoon City']=480,  ['Silverpine Forest']=21,  ['Southern Barrens']=607,  ['Stonetalon Mountains']=81,  ['Stormwind City']=301,  ['Strand of the Ancients']=512,  ['Stranglethorn Vale']=689,  ['Stratholme']=765,  ['Sunwell Plateau']=789,  ['Swamp of Sorrows']=38,  ['Tanaris']=161,  ['Teldrassil']=41,  ['Tempest Keep']=782,  ['Terokkar Forest']=478,  ['The Arcatraz']=731,  ['The Bastion of Twilight']=758,  ['The Battle for Gilneas (Old City Map)']=677,  ['The Battle for Gilneas']=736,  ['The Black Morass']=733,  ['The Blood Furnace']=725,  ['The Botanica']=729,  ['The Cape of Stranglethorn']=673,  ['The Culling of Stratholme']=521,  ['The Deadmines']=756,  ['The Exodar']=471,  ['The Eye of Eternity']=527,  ['The Forge of Souls']=601,  ['The Hinterlands']=26,  ['The Lost Isles']=544,  ['The Maelstrom']={737,751},  ['The Mechanar']=730,  ['The Nexus']={520,803},  ['The Obsidian Sanctum']=531,  ['The Oculus']=528,  ['The Ruby Sanctum']=609,  ['The Shattered Halls']=710,  ['The Slave Pens']=728,  ['The Steamvault']=727,  ['The Stockade']=690,  ['The Stonecore']=768,  ['The Storm Peaks']=495,  ['The Temple of Atal\'Hakkar']=687,  ['The Underbog']=726,  ['The Violet Hold']=536,  ['The Vortex Pinnacle']=769,  ['Thousand Needles']=61,  ['Throne of the Four Winds']=773,  ['Throne of the Tides']=767,  ['Thunder Bluff']=362,  ['Tirisfal Glades']=20,  ['Tol Barad Peninsula']=709,  ['Tol Barad']=708,  ['Trial of the Champion']=542,  ['Trial of the Crusader']=543,  ['Twilight Highlands']={700,770},  ['Twin Peaks']=626,  ['Uldaman']=692,  ['Ulduar']=529,  ['Uldum']={720,748},  ['Un\'Goro Crater']=201,  ['Undercity']=382,  ['Utgarde Keep']=523,  ['Utgarde Pinnacle']=524,  ['Vashj\'ir']=613,  ['Vault of Archavon']=532,  ['Wailing Caverns']=749,  ['Warsong Gulch']=443,  ['Well of Eternity']=816,  ['Western Plaguelands']=22,  ['Westfall']=39,  ['Wetlands']=40,  ['Wintergrasp']=501,  ['Winterspring']=281,  ['Zangarmarsh']=467,  ['Zul\'Aman']=781,  ['Zul\'Drak']=496,  ['Zul\'Farrak']=686,  ['Zul\'Gurub']={697,793},
  ['The Wandering Isle']=808, ['Pandaria']=862, ['Shrine of Seven Stars']=905, ['Shrine of Two Moons']=903, ['Kun-Lai Summit']=809, ['The Jade Forest']=806, ['Vale of Eternal Blossoms']=811, ['Townlong Steppes']=810, ['Dread Wastes']=858, ['Valley of the Four Winds']=807, ['Krasarang Wilds']=857, ['The Veiled Stair']=873, ['Gate of the Setting Sun']=875, ['Scarlet Halls']=871, ['Scarlet Monastery']=874, ['Scholomance']=898, ['Shado-Pan Monastery']=877, ['Siege of Niuzao Temple']=887, ['Stormstout Brewery']=876, ['Temple of the Jade Serpent']=867,['Unga Ingoo']=882, ['Brewmoon Festival']=884, ['A Brewing Storm']=878, ['Crypt of Forgotten Kings']=900, ['Proving Grounds']=899,
  ['Greenstone Village']=880, ['Temple of Kotmogu']=881, ['Zan\'vess']=883, ['Mogu\'shan Palace']=885, ['Terrace of Endless Spring']=886, ['Mogu\'shan Vaults']=896, ['Heart of Fear']=897,
  ['Coldridge Valley'] = 866, ['Northshire'] = 864, ['Shadowglen']=888, ['Valley of Trials']=889, ['Camp Narache']=890, ['Echo Isles']=891, ['Deathknell']=892, ['Sunstrider Isle']=893, ['Ammen Vale']=894, ['New Tinkertown']=895,
@@ -90,12 +90,12 @@ data.basenodes.setup = {
 	--]]
 
 data.basenodes.MapsWithExplicitFloors = {
-	[321] = { -- Orgrimmar
+	["Orgrimmar"] = {
 		-- Cleft of Shadow, two entries
 		"Orgrimmar/1 45.90,66.94 <title:Cleft of Shadow entrance> -x- Orgrimmar/2 35.85,79.06 <title:Cleft of Shadow tunnel> {cost:0}", "@+ -x- Orgrimmar/1 42.09,61.03 <title:Cleft of Shadow entrance> {cost:0}", -- 3-way west tunnel
 		"Orgrimmar/1 55.12,51.43 <title:Cleft of Shadow entrance> -x- Orgrimmar/2 70.52,19.53 <title:Cleft of Shadow tunnel> {cost:0}", "@+ -x- Orgrimmar/2 67.37,36.52 <title:Cleft of Shadow exit> {cost:0}", -- s-shaped east tunnel
 	},
-	[504] = { -- Dalaran
+	["Dalaran"] = { -- 
 		-- Underbelly, a few entries
 		--"Dalaran/1 34.89,45.42 -x- Dalaran/2 34.28,43.57",
 		"Dalaran/1 34.89,45.42 <title:Western sewer entrance> -x- Dalaran/1 31.59,45.56 <onlyhardwire_qq:1> <title:Western sewer entrance midpoint> <region:underbelly> {cost:0}",
@@ -105,67 +105,67 @@ data.basenodes.MapsWithExplicitFloors = {
 		"@+ -x- Dalaran/2 64.16,48.00 <title:Eastern sewer exit> {cost:0}",
 		"Dalaran/1 48.30,32.54 <dist:2> <title:Dalaran Well> -to- Dalaran/2 62.74,48.83 {cost:0}", -- well jump!
 	},
-	[750] = { -- Maraudon
+	["Maraudon"] = { -- 
 		"Maraudon/1 15.53,56.75 -x- Maraudon/2 28.99,4.84",
 	},
 	[762] = { -- Scarlet Monastery - this is funny; yes, it should be empty: floors are wings, inaccessible from each other. Rely on normal entrance/exit paths.
 	},
-	[691] = { -- Gnomeregan
+	["Gnomeregan"] = {
 		"Gnomeregan/1 57.67,50.98 -to- Gnomeregan/2 81.36,46.02",
 		"Gnomeregan/1 47.05,86.94 -x- Gnomeregan/2 75.38,74.06",
 		"Gnomeregan/2 35.21,88.08 -x- Gnomeregan/3 38.60,50.33",
 		"Gnomeregan/3 48.26,71.95 -x- Gnomeregan/4 71.25,77.54",
 	},
-	[688] = { -- Blackfathom Deeps
+	["Blackfathom Deeps"] = {
 		"Blackfathom Deeps/1 61.51,71.88 -x- Blackfathom Deeps/2 39.21,31.65",
 		"Blackfathom Deeps/2 47.24,79.12 -x- Blackfathom Deeps/3 43.60,61.06",
 	},
 
 	--MicroDungeons
-	[27] = { -- Dun Morogh
+	["Dun Morogh"] = {
 		"Dun Morogh/0 48.9,52.6 -x- Dun Morogh/7 60.8,92.0",  -- Grizzled Den
 		"Dun Morogh/0 42.7,64.1 -x- Dun Morogh/6 60.6,11.0",  -- Coldridge Pass
 		"Dun Morogh/0 41.1,70.0 -x- Dun Morogh/6 38.0,91.1", -- Coldridge Pass
 		"Dun Morogh/10 79.5,84.2 -x- New Tinkertown/0 32.6,37.0", --Gnome Starter
 	},
-	[4] = { --Durotar
+	["Durotar"] = {
 		"Durotar/0 83.2,53.6 -x- Durotar/12 54.9,9.5", -- Skull Rock
 		"Valley of Trials/0 53.0,21.3 -x- Durotar/8 72.2,89.7", -- Burning Blade Coven
 		"Durotar/10 41.9,30.9 -x- Durotar/11 32.4,30.3", -- Great Hall
 		"Durotar/0 59.0,58.3 -x- Durotar/10 32.0,51.8", -- Tiragarde Keep
 		"Durotar/0 52.8,28.6 -x- Durotar/19 50.3,90.5", -- Dustwind Cave
 	},
-	[891] = { --Echo Isles
+	["Echo Isles"] = {
 		"Echo Isles/0 59.3,21.8 -x- Echo Isles/9 53.9,80.5",
 	},
-	[11] = { --Northern Barrens
+	["Northern Barrens"] = {
 		"Northern Barrens/0 38.9,69.2 -x- Northern Barrens/20 22.5,88.6", -- Wailing Caverns Cave Entrance
 	},
-	[101] = { --Desolace
+	["Desolace"] = {
 		"Desolace/0  28.9,62.6 -x- Desolace/21 24.6,43.5", -- Wicked Grotto **Only Way to Get To Felspore Cavern**
 		"Desolace/21 29.5,62.5 -x- Desolace/22 47.4,88.1", -- Felspore Cavern
 		"Desolace/21 27.7,33.7 -x- Desolace/22 45.5,78.2", -- Felspore Cavern
 	},
-	[9] = { --Mulgore
+	["Mulgore"] = {
 		"Mulgore/0 34.8,61.3 -x- Mulgore/6 76.9,56.3", -- Palemane Rock
 		"Mulgore/0 60.8,47.4 -x- Mulgore/7 39.6,90.7", -- The Venture Co. Mine
 		"Mulgore/0 59.3,36.6 -x- Mulgore/7 30.4,14.6", -- The Venture Co. Mine
 		"Mulgore/0 59.2,44.0 -x- Mulgore/7 28.6,65.2", -- The Venture Co. Mine
 	},
-	[39] = { --Westfall
+	["Westfall"] = {
 		"Westfall/0 43.8,73.4 -x- Westfall/17 69.3,23.7", -- Deadmines Cave Entrance (Moonbrook)
 		"Westfall/0 44.5,24.7 -x- Westfall/5 41.1,94.1", -- Jangolode Mine
 	},
-	[261] = { --Silithus
+	["Silithus"] = {
 		"Silithus/0 70.4,15.9 -x- Silithus/13 15.1,70.0", -- Twilight's Run
 	},
-	[30] = { --Elwynn
+	["Elwynn Forest"] = {
 		"Elwynn Forest/0 61.7,53.7 -x- Elwynn Forest/19 48.9,90.1", --Jaspermind
 		"Elwynn Forest/0 38.9,82.3 -x- Elwynn Forest/1 39.9,88.0", --Fargomine
 		"Elwynn Forest/1 55.4,36.3 -x- Elwynn Forest/2 56.3,26.0", --Fargomine Lower
 		"Elwynn Forest/0 38.5,81.5 -x- Elwynn Forest/2 35.2,68.4", --Fargomine Lower
 	},
-	[161] = { --Tanaris
+	["Tanaris"] = {
 		"Tanaris/0 35.3,42.6 -x- Tanaris/15 55.9,36.4", -- The Noxious Lair
 		"Tanaris/0 34.8,41.6 -x- Tanaris/15 50.4,25.1", -- The Noxious Lair
 		"Tanaris/0 34.5,42.4 -x- Tanaris/15 47.5,33.6", -- The Noxious Lair
@@ -174,69 +174,72 @@ data.basenodes.MapsWithExplicitFloors = {
 		"Tanaris/0 64.9,50.0 -x- Tanaris/17 53.3,29.4", -- Caverns of Time
 		"Tanaris/17 36.8,75.0 -x- Tanaris/18 61.8,52.4", -- Caverns of Time2
 	},
-	[41] = { --Teldrassil
+	["Teldrassil"] = {
 		"Teldrassil/0 45.6,50.6 -x- Teldrassil/4 52.6,15.5", -- Banethil Barrow Den (Upper Den)
 		"Teldrassil/4 24.6,86.0 -x- Teldrassil/5 29.9,76.4", -- Banethil Barrow Den (Lower Den)
 		"Teldrassil/4 54.2,36.5 -x- Teldrassil/5 46.7,39.7", -- Banethil Barrow Den (Lower Den)
 		"Teldrassil/0 54.5,46.3 -x- Teldrassil/3 77.6,81.7", -- Fel Rock
 		"Shadowglen/0 39.3,30.4 -x- Teldrassil/2 45.4,90.3", -- Shadowthread Cave
 	},
-	[463] = { --Ghostlands
+	["Ghostlands"] = {
 		"Ghostlands/0 66.4,28.5 -x- Ghostlands/1 94.0,35.6", -- Amani Catacombs
 		"Ghostlands/0 58.3,27.5 -x- Ghostlands/1 10.0,26.0", -- Amani Catacombs
 	},
-	[464] = { --Azuremyst Isle
+	["Azuremyst Isle"] = {
 		"Azuremyst Isle/0 26.9,76.3 -x- Azuremyst Isle/2 59.5,88.1", -- Tides' Hollow
 		"Azuremyst Isle/0 45.3,19.4 -x- Azuremyst Isle/3 21.2,94.6", -- Stillpine Hold
 	},
-	[20] = { --Tirisfal Glades
+	["Tirisfal Glades"] = {
 		"Tirisfal Glades/0 82.6,33.5 -x- Tirisfal Glades/13 17.3,82.9", -- Scarlet Monastery Entrance
 		"Tirisfal Glades/0 82.3,32.6 -x- Tirisfal Glades/13 14.5,73.1", -- Scarlet Monastery Entrance
 	},
-	[892] = { --Deathknell
+	["Deathknell"] = {
 		"Deathknell/0 29.7,30.7 -x- Deathknell/12 87.3,52.0", -- Night's Web Hollow
 	},
-	[866] = { -- Coldridge Valley
+	["Coldridge Valley"] = {
 		"Coldridge Valley/0 52.0,84.6 -x- Coldridge Valley/9 12.8,36.8", -- Frostmane Hovel
 	},
-	[895] = { --New Tinkertown
+	["New Tinkertown"] = {
 		"New Tinkertown/0 33.3,66.4 -x- New Tinkertown/8 94.6,58.1", -- Frostmane Hold
 	},
-	[544] = { -- The Lost Isles
-		"The Lost Isles/0 31.5,78.1 -x- The Lost Isles/1 48.1,90.0", -- Kaja'mite Cavern
+	["The Lost Isles"] = {
+		"The Lost Isles/0 31.2,78.6 -x- The Lost Isles/1 48.1,90.0", -- Kaja'mite Cavern
 		"The Lost Isles/0 70.0,48.0 -x- The Lost Isles/2 50.0,10.8", -- Volcanoth's Lair
 	},
-	[678] = { -- Gilneas
-		"Gilneas/0 29.1,51.8 -x- Gilneas/2 69.9,63.4", -- Greymane Manor
+	["Gilneas"] = {
+		"Gilneas/0 28.8,51.2 -x- Gilneas/2 69.9,63.4", -- Greymane Manor
 		"Gilneas/2 60.3,46.2 -x- Gilneas/3 56.1,46.5", -- Greymane Manor2
 		"Gilneas/0 76.6,31.1 -x- Gilneas/1 28.5,70.0", -- Emberstone Mine
 	},
-	[609] = { -- Kezan
+	["Kezan"] = {
 		"Kezan/0 65.6,86.7 -x- Kezan/7 64.0,19.6", -- Kaja'Mine Copper
 		"Kezan/0 74.3,83.3 -x- Kezan/6 32.9,31.0", -- Kaja'Mine Silver
 		"Kezan/0 70.9,76.5 -x- Kezan/5 41.0,75.5", -- Kaja'Mine Gold
 	},
-	[17] = { --Badlands
+	["Badlands"] = {
 		"Badlands/0 41.6,11.6 -x- Badlands/18 75.6,36.5", --Uldaman Entrance
 	},
-	[29] = { --Burning Steppes
-		"Burning Steppes/0 21.0,38.0 -x- Burning Steppes/14 51.3,94.7", -- Blackrock Spire
-		"Searing Gorge/0 34.8,85.6 -x- Burning Steppes/14 47.5,12.4", -- Blackrock Spire
-		"Burning Steppes/14 72.0,43.2 -x- Burning Steppes/15 60.5,27.8", -- Blackrock Caverns
-		"Burning Steppes/14 66.8,60.7 -x- Burning Steppes/15 41.7,79.6", -- Blackrock Caverns
-		"Burning Steppes/14 46.8,50.8 -x- Burning Steppes/16 60.7,93.4", -- Blackrock Depths
+	["Burning Steppes"] = {
+		"Burning Steppes/0 21.0,38.0 -x- Burning Steppes/14 49.50,88.66", -- Blackrock Spire south entrance
+		"Burning Steppes/14 72.0,43.2 -x- Burning Steppes/15 60.5,27.8", -- Blackrock Caverns foyer
+		"Burning Steppes/14 66.8,60.7 -x- Burning Steppes/15 41.7,79.6", -- Blackrock Caverns foyer north
+		"Burning Steppes/14 46.8,50.8 -x- Burning Steppes/16 58.2,88.5", -- Blackrock Depths chain
 	},
-	[806] = { --Jade Forest
+	["Searing Gorge"] = {
+		"Searing Gorge/0 34.8,85.6 -x- Burning Steppes/14 46.47,18.25", -- Blackrock Spire north entrance
+		"Searing Gorge/14 46.8,50.8 -x- Searing Gorge/16 58.2,88.5", -- Blackrock Depths chain again - silly two-zone clone dungeon
+	},
+	["The Jade Forest"] = {
 		"The Jade Forest/0 45.9,28.9 -x- The Jade Forest/6 75.7,24.7", -- Greenstone Quarry (Outisde --> Upper Quarry)
 		"The Jade Forest/6 39.8,38.0 -x- The Jade Forest/7 51.2,51.0", -- Greenstone Quarry (Upper Quarry --> Lower Quarry)
 		"The Jade Forest/0 57.7,31.7 -x- The Jade Forest/15 76.8,20.0", -- The Widow's Wail (Outside of Cave --> Inside Cave)
 	},
-	[857] = {
+	["Krasarang Wilds"] = {
 		"Krasarang Wilds/0 80.3,17.8 -x- Krasarang Wilds/1 33.3,24.4",
 		"Krasarang Wilds/1 61.6,51.8 -x- Krasarang Wilds/2 59.5,36.7",
 		"Krasarang Wilds/2 62.7,39.6 -x- Krasarang Wilds/3 82.3,36.0",
 	},	
-	[809] = { --Kun-Lai Summit
+	["Kun-Lai Summit"] = {
 		"Kun-Lai Summit/11 52.4,65.5 -x- Kun-Lai Summit/12 51.6,55.9", --The Deeper2
 		"Kun-Lai Summit/0  52.9,71.3 -x- Kun-Lai Summit/11 56.5,15.9", --The Deeper
 		"Kun-Lai Summit/0  50.3,61.7 -x- Kun-Lai Summit/10 74.9,91.5", -- Knucklethump Hole
@@ -244,10 +247,10 @@ data.basenodes.MapsWithExplicitFloors = {
 		"Kun-Lai Summit/0  59.1,52.5 -x- Kun-Lai Summit/8 66.9,82.3", -- Howlingwind Cavern
 		"Kun-Lai Summit/0  53.0,46.5 -x- Kun-Lai Summit/17 88.3,54.8", -- Tomb of something
 	},
-	[810] = { --Townlong Steppes
+	["Townlong Steppes"] = {
 		"Townlong Steppes /0 33.02,61.24 -x- Townlong Steppes/13 20.15,68.46", -- Niuzao Catacombs
 	},
-	[811] = { --Vale of Eternal Blossoms
+	["Vale of Eternal Blossoms"] = {
 		"Vale of Eternal Blossoms/0 22.2,26.3 -x- Vale of Eternal Blossoms/18 54.0,88.2", -- Guo-Lai Halls
 		
 		"Vale of Eternal Blossoms/3 38.6,28.4 <nofly:1> -x- Vale of Eternal Blossoms 86.8,64.3 {B:WALK}",  -- main door
@@ -267,12 +270,12 @@ data.basenodes.MapsWithExplicitFloors = {
 		"Vale of Eternal Blossoms/3 25.5,55.8 <nofly:1> -x- Vale of Eternal Blossoms 85.6,67.4 {B:WALK}",  -- west door
 		"Vale of Eternal Blossoms/3 60.3,18.0 <nofly:1> -x- Vale of Eternal Blossoms 89.1,63.5 {B:WALK}",  -- east door
 	},
-	[873] = { --The Veiled Stair
+	["The Veiled Stair"] = {
 		"Kun-Lai Summit/0 73.2,94.6 -x- The Veiled Stair/5 25.1,12.5", -- The Ancient Passage
 		"The Veiled Stair/0 50.6,40.4 -x- The Veiled Stair/5 63.1,86.4", -- The Ancient Passage
 		"The Veiled Stair/0 57.3,13.6 -x- The Veiled Stair/5 77.6,36.7", -- The Ancient Passage
 	},
-	[903] = { --Shrine of Two Moons
+	["Shrine of Two Moons"] = {
 		"Shrine of Two Moons/1 22.1,54.4 <dist:5> -x- Shrine of Two Moons/2 27.8,80.6 <dist:5>", -- west staircase
 		"Shrine of Two Moons/1 77.5,42.6 <dist:5> -x- Shrine of Two Moons/2 74.4,70.3 <dist:5>", -- east staircase
 
@@ -286,12 +289,26 @@ data.basenodes.MapsWithExplicitFloors = {
 		"Shrine of Two Moons/1 26.8,80.7 <nofly:1> -x- Vale of Eternal Blossoms 59.1,17.9 {B:WALK}",  -- west door
 		"Shrine of Two Moons/1 77.4,69.0 <nofly:1> -x- Vale of Eternal Blossoms 63.5,17.0 {B:WALK}",  -- east door
 	},
+	["Blackrock Caverns"] = {
+		"Blackrock Caverns /1 52.05,20.12 -to- Blackrock Caverns /2 29.97,17.32",
+		"Blackrock Caverns /2 29.37,13.13 -x- Blackrock Caverns /1 49.93,12.98",
+	},
 	[905] = { --Shrine of Seven Stars 
 		--In Vale of Eternal Blossoms
 	},
 	[820] = { -- End Time
 	},
 }
+
+-- translate the above from names to numbers
+for zone,zonedata in pairs(data.basenodes.MapsWithExplicitFloors) do
+	if type(zone)~="number" then
+		local id=data.MapIDsByName[zone]
+		if type(id)=="table" then id=id[1] end
+		data.basenodes.MapsWithExplicitFloors[zone]=nil
+		data.basenodes.MapsWithExplicitFloors[id]=zonedata
+	end
+end
 
 --[[
 	Regions are custom subzones. Two nodes cannot connect to each other automatically if they're in different regions (or game maps, too).
@@ -831,14 +848,13 @@ data.basenodes.travel = {
 
 	-- BLACKROCK DEPTHS
 	--"Searing Gorge 26.99,72.56 -x- Blackrock Depths 34.70,77.80 {style:portal_dungeon}",
-	"Burning Steppes/16 40,17 -x- Blackrock Depths 34.70,77.80 {style:portal_dungeon}",
+	"Burning Steppes/16 46.2,62.9 -x- Searing Gorge/16 40.2,57.9",
+	"Searing Gorge/16 40,17 -x- Blackrock Depths 34.70,77.80 {style:portal_dungeon}",
 
 	-- LOWER BLACKROCK SPIRE
+	-- UPPER BLACKROCK SPIRE too
 	--"Burning Steppes 24.34,25.63 -x- Blackrock Spire/4 26.77,38.23 {style:portal_dungeon}",
 	"Burning Steppes/14 65.8,42.0 -x- Blackrock Spire/4 26.77,38.23 {style:portal_dungeon}",
-
-	-- UPPER BLACKROCK SPIRE
-	"Burning Steppes 24.34,25.63 -x- Blackrock Spire/4 26.77,38.23 {style:portal_dungeon}",
 
 	-- ZUL'FARRAK
 	"Tanaris 39.22,21.27 -x- Zul'Farrak 56.60,90.95 {style:portal_dungeon}",
@@ -952,9 +968,6 @@ data.basenodes.travel = {
 
 	-- THRONE OF THE TIDES
 	"Abyssal Depths 69.49,24.99 -x- Throne of the Tides 49.85,88.23 {style:portal_dungeon}",
-
-	-- BLACKROCK CAVERNS
-	"Burning Steppes 27.43,27.87 -x- Blackrock Caverns 32.02,70.10 {style:portal_dungeon}",
 
 	-- THE STONECORE
 	"Deepholm 47.70,51.98 -x- The Stonecore 54.27,93.90 {style:portal_dungeon}",
@@ -1161,6 +1174,7 @@ data.basenodes.inns = {
 	['The Lost Isles']={
 		{name="Shipwreck Shore",faction="H",npc="Grimy Greasefingers",npcid=36496,x=28.0,y=75.8},
 		{name="Town-In-A-Box",faction="H",npc="Grimy Greasefingers",npcid=42473,x=45.0,y=65.4},
+		{name="Warchief's Lookout",faction="H",npc="Grimy Greasefingers",npcid=42473,x=36.8,y=43.2},
 	},
 	['Mulgore']={
 		{name="Bloodhoof Village",faction="H",npc="Innkeeper Kauth",npcid=6747,x=46.8,y=60.4},

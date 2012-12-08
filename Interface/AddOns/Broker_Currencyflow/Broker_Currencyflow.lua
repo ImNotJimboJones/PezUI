@@ -45,13 +45,14 @@ local tracking = {
   [515] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_DARKMOONPRIZETICKET"]},
   [698] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ZENJCTOKEN"]}, -- MoP jewelcrafting
 
-
   -- PvE
   [241] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_CHAMPIONSEAL"]},
   [395] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_JUSTICEPOINTS"]}, -- Low tier
   [396] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_VALORPOINTS"]}, -- High tier
   [614] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_MOTEDARKNESS"]}, -- T13 (Dragonsoul) currency
   [615] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ESSENCEDEATHWING"]}, -- T13 (Dragonsoul) currency
+  [697] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_ELDERCHARMOFGOODFORTUNE"]}, -- MoP  Elder Charm of Good Fortune
+  [738] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_LESSERGOODFORTUNE"]}, -- MoP  Lesser Charm of Good Fortune
 
   -- PvP
   [392] = {["type"] = TYPE_CURRENCY, ["name"] = L["NAME_HONORPOINTS"]}, -- Low tier
@@ -68,9 +69,9 @@ local tracking = {
   [401] = {["type"] = TYPE_FRAGMENT, ["index"] = 7, ["name"] = L["NAME_AF_TOLVIR"]},
   [385] = {["type"] = TYPE_FRAGMENT, ["index"] = 8, ["name"] = L["NAME_AF_TROLL"]},
   [399] = {["type"] = TYPE_FRAGMENT, ["index"] = 9, ["name"] = L["NAME_AF_VRYKULL"]},
-  [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_PANDAREN"]},
-  [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_MOGU"]},
-  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_OTHER"]},
+  [0]   = {["type"] = TYPE_FRAGMENT, ["index"] = 10, ["name"] = L["NAME_AF_OTHER"]},
+  [676] = {["type"] = TYPE_FRAGMENT, ["index"] = 11, ["name"] = L["NAME_AF_PANDAREN"]},
+  [677] = {["type"] = TYPE_FRAGMENT, ["index"] = 12, ["name"] = L["NAME_AF_MOGU"]},
 }
 
 -- Used to copy a table instead of just copying the reference to it.
@@ -741,16 +742,16 @@ end
 
 function Currencyflow:OptionsMain()
   local buttonOptions = {
-    ["1"] = L["CFGOPT_BTNNONE"],
-    ["2"] = L["CFGOPT_BTNMONEY"],
-    ["3"] = L["CFGOPT_BTNSESSIONTOTAL"],
-    ["4"] = L["CFGOPT_BTNSESSIONPERHOUR"],
-    ["5"] = L["CFGOPT_BTNTODAYTOTAL"],
-    ["6"] = L["CFGOPT_BTNTODAYPERHOUR"],
-    ["7"] = L["CFGOPT_BTNWEEKTOTAL"],
-    ["8"] = L["CFGOPT_BTNWEEKPERHOUR"],
-    ["9"] = L["CFGOPT_BTNMONTHTOTAL"],
-    ["10"] = L["CFGOPT_BTNMONTHPERHOUR"],
+    ["001"] = L["CFGOPT_BTNNONE"],
+    ["002"] = L["CFGOPT_BTNMONEY"],
+    ["003"] = L["CFGOPT_BTNSESSIONTOTAL"],
+    ["004"] = L["CFGOPT_BTNSESSIONPERHOUR"],
+    ["005"] = L["CFGOPT_BTNTODAYTOTAL"],
+    ["006"] = L["CFGOPT_BTNTODAYPERHOUR"],
+    ["007"] = L["CFGOPT_BTNWEEKTOTAL"],
+    ["008"] = L["CFGOPT_BTNWEEKPERHOUR"],
+    ["009"] = L["CFGOPT_BTNMONTHTOTAL"],
+    ["010"] = L["CFGOPT_BTNMONTHPERHOUR"],
   }
   for id,currency in pairs(tracking) do buttonOptions[tostring(id)] = format(L["CFGOPT_BTNOTHER"], currency.name) end
 
@@ -921,6 +922,8 @@ function Currencyflow:OptionsColumns()
   addColumn(396) -- Valor Point
   addColumn(614) -- Mote of Darkness
   addColumn(615) -- Essence of Corrupted Deathwing
+  addColumn(697) -- MoP Elder Charm of Good Fortune
+  addColumn(738) -- MoP Lesser Charm of Good Fortune
 
   -- PVP --
   currencyColumns["header3"] = {name = L["CFGHDR_PVP"], type = "header", order = 300}
@@ -1024,7 +1027,7 @@ function Currencyflow:LoadCurrencies()
       if icon ~= nil and icon ~= "" then currency.icon = "Interface\\Icons\\"..icon
       else currency.icon = ICON_QM end
     elseif currency.type == TYPE_FRAGMENT then
-      local name, currencyid, icon, itemid = GetArchaeologyRaceInfo(currency.index)
+      local name, icon, currencyid, itemid = GetArchaeologyRaceInfo(currency.index)
 
       -- Another dumb marvel of blizz consistency. When info
       -- is not available, instead of returning nil or "",

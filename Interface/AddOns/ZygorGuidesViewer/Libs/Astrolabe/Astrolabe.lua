@@ -111,18 +111,9 @@ local GetFramerate = GetFramerate
 
 -- Zone phase sanitization: upon each call to GetCurrentMapAreaID, make sure all phases of the same zone point to the current.
 local zone_aliases = {
-	-- Gilneas
-	[539]=539,
-	[545]=539,
-	[678]=539,
-	[679]=539,
 	-- Mount Hyjal
 	[606]=606,
 	--[683]=606,  -- this causes errors and has some "area 1" level, what the heck
-	-- The Lost Isles
-	[544]=544,
-	[681]=544,
-	[682]=544,
 	-- The Maelstrom
 	[737]=737,
 	[751]=737,
@@ -1610,12 +1601,6 @@ WorldMapSize = {
 	[544] = {
 		system = 544,
 	},
-	[545] = {
-		height = 2097.91669,
-		width = 3145.83325,
-		xOffset = 0,
-		yOffset = 0,
-	},
 	[602] = {
 		height = 1022.91668,
 		width = 1533.33347,
@@ -1658,24 +1643,6 @@ WorldMapSize = {
 		xOffset = 0,
 		yOffset = 0,
 	},
-	[679] = {
-		height = 2097.91669,
-		width = 3145.83325,
-		xOffset = 0,
-		yOffset = 0,
-	},
-	[681] = {
-		height = 3010.41666,
-		width = 4514.58301,
-		xOffset = 0,
-		yOffset = 0,
-	},
-	[682] = {
-		height = 3010.41666,
-		width = 4514.58301,
-		xOffset = 0,
-		yOffset = 0,
-	},
 	[686] = {
 		height = 922.9166,
 		width = 1383.33334,
@@ -1715,7 +1682,21 @@ WorldMapSize = {
 		xOffset = 0,
 		yOffset = 0,
 	},
-	-- sinus:
+	[753] = {  -- Blackrock Caverns
+		{ -- [1]
+			height = nil,
+			width = nil,
+			xOffset = nil,
+			yOffset = nil,
+		},
+		{ -- [2]
+			height = nil,
+			width = nil,
+			xOffset = 639,
+			yOffset = nil
+		},
+	},
+-- sinus:
 	[800] = {
 		{ -- [1]
 			height = 1058.3332824707,
@@ -1959,10 +1940,6 @@ WorldMapSize[691][3].xOffset,WorldMapSize[691][3].yOffset=-530,-491  -- Gnomereg
 WorldMapSize[691][4].xOffset,WorldMapSize[691][4].yOffset=-726,-516  -- Gnomeregan is a NIGHTMARE.
 WorldMapSize[688][2].xOffset,WorldMapSize[688][2].yOffset=-181,-427
 WorldMapSize[688][3].xOffset,WorldMapSize[688][3].yOffset=117,-69
-WorldMapSize[539].system=678 -- Gilneas "empty" broken map
-WorldMapSize[545].system=678 -- Gilneas "empty" broken map
-
-if WorldMapSize[539] and WorldMapSize[539].floorMax<3 then WorldMapSize[539]=WorldMapSize[545] end  -- we know 545 is in the data, it's hardcoded.
 
 -- micro dungeons
 if GetDungeonMaps then
@@ -2177,6 +2154,32 @@ MICRODUNGEONS = {
 	      yOffset = 7086.6586914063,
 	    },
 	  },
+	  [28] = { -- Searing Gorge, cloning Blackrock here, since it's retarded.
+	    [14] = {
+	      floorName = "Blackrock Spire",
+	      height = 475,
+	      microName = "BlackrockMountain",
+	      width = 712.5,
+	      xOffset = 761.25,
+	      yOffset = 7325,
+	    },
+	    [15] = {
+	      floorName = "Blackrock Caverns",
+	      height = 170,
+	      microName = "BlackrockMountain",
+	      width = 255,
+	      xOffset = 1145,
+	      yOffset = 7480,
+	    },
+	    [16] = {
+	      floorName = "Blackrock Depths",
+	      height = 506.6826171875,
+	      microName = "BlackrockMountain",
+	      width = 760.02398681641,
+	      xOffset = 627.48602294922,
+	      yOffset = 7086.6586914063,
+	    },
+	  },
 	  [30] = {
 	    [1] = {
 	      floorName = "Fargodeep Mine",
@@ -2366,23 +2369,26 @@ MICRODUNGEONS = {
 	    [1] = {
 	      height = 280,
 	      microName = "EmberstoneMine",
+	      floorName = "Emberstone Mine",
 	      width = 420,
-	      xOffset = -1140,
-	      yOffset = 980,
+	      xOffset = 2300,
+	      yOffset = 450,
 	    }, 
 	    [2] = {
 	      height = 166.97998046875,
 	      microName = "GreymaneManor",
+	      floorName = "Greymane Manor",
 	      width = 250.4697265625,
-	      xOffset = -2710.2348632813,
-	      yOffset = 1500.0100097656,
+	      xOffset = 735, --Offset for this floor and floor 3 are really messed up
+	      yOffset = 970,
 	    },
 	   [3] = {
 	      height = 186.97998046875,
 	      microName = "GreymaneManor",
+	      floorName = "Greymane Manor",
 	      width = 280.4697265625,
-	      xOffset = -2725.2348632813,
-	      yOffset = 1480.0100097656,
+	      xOffset = 725,
+	      yOffset = 955,
 	    },
 	  },
 	  [605] = {

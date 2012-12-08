@@ -139,8 +139,7 @@ step
 'Redirecting to Archaeology 300-375 |next "arc_300-375" |only if skill("Archaeology")>=300 and skill("Archaeology")<375
 'Redirecting to Archaeology 375-450 |next "arc_375-450" |only if skill("Archaeology")>=375 and skill("Archaeology")<450
 'Redirecting to Archaeology 450-525 |next "arc_450-525" |only if skill("Archaeology")>=450 and skill("Archaeology")<525
-'Redirecting to Archaeology 450-525 |next "arc_525-600" |only if skill("Archaeology")>=525 and skill("Archaeology")<600
-'Redirecting to Archaeology finale |next "arc_600" |only if default
+'Redirecting to Archaeology finale |next "arc_525" |only if skill("Archaeology")>=525 and skill("Archaeology")<600
 step
 title + Archaeology 1-50
 label "arc_1-50"
@@ -449,8 +448,7 @@ label "route"
 'Redirecting to Enchanting 300-351 |next "ench_300_351" |only if skill("Enchanting")>=300 and skill("Enchanting")<351
 'Redirecting to Enchanting 351-426 |next "ench_351_426" |only if skill("Enchanting")>=351 and skill("Enchanting")<426
 'Redirecting to Enchanting 426-525 |next "ench_426_525" |only if skill("Enchanting")>=426 and skill("Enchanting")<525
-'Redirecting to Enchanting finale |next "ench_525" |only if skill("Enchanting")>=525 and skill("Enchanting")<600 and not ZGV.guidesets['ProfessionsHMoP']
-'Redirecting to Enchanting 500-600 |next "ench_525-600" |only if skill("Enchanting")>=525 and skill("Enchanting")<600 and ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Enchanting finale |next "ench_525" |only if skill("Enchanting")>=525 and skill("Enchanting")<600
 'Redirecting to Enchanting finale |next "ench_600" |only if default
 step
 title +Enchanting 1-75
@@ -696,8 +694,7 @@ label "route"
 'Redirecting to First Aid 300-350 |next "aid_300-350" |only if skill("First Aid")>=300 and skill("First Aid")<350
 'Redirecting to First Aid 350-450 |next "aid_350-450" |only if skill("First Aid")>=350 and skill("First Aid")<450
 'Redirecting to First Aid 450-525 |next "aid_450-525" |only if skill("First Aid")>=450 and skill("First Aid")<525
-'Redirecting to First Aid finale |next "aid_525" |only if skill("First Aid")>=525 and skill("First Aid")<600 and not ZGV.guidesets['ProfessionsHMoP']
-'Redirecting to First Aid 500-600 |next "aid_525-600" |only if skill("First Aid")>=525 and skill("First Aid")<600 and ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to First Aid finale |next "aid_525" |only if skill("First Aid")>=525 and skill("First Aid")<600
 'Redirecting to First Aid finale |next "aid_600" |only if default
 step
 title + First Aid 1-75
@@ -814,10 +811,7 @@ label "route"
 'Redirecting to Herbalism 285-375 |next "herb_285-375" |only if skill("Herbalism")>=285 and skill("Herbalism")<375
 'Redirecting to Herbalism 375-425 |next "herb_375_425" |only if skill("Herbalism")>=375 and skill("Herbalism")<425
 'Redirecting to Herbalism 425-525 |next "herb_425-525" |only if skill("Herbalism")>=425 and skill("Herbalism")<525
-'Redirecting to Herbalism 525-545 |next "herb_525-545" |only if skill("Herbalism")>=525 and skill("Herbalism")<545
-'Redirecting to Herbalism 545-590 |next "herb_545-590" |only if skill("Herbalism")>=545 and skill("Herbalism")<590
-'Redirecting to Herbalism 590-600 |next "herb_590-600" |only if skill("Herbalism")>=590 and skill("Herbalism")<600
-'Redirecting to Herbalism finale |next "herb_600" |only if default
+'Redirecting to Herbalism finale |next "herb_525" |only if skill("Herbalism")>=525 and skill("Herbalism")<600
 step
 title + Herbalism (1-70)
 label	"herb_1-70"
@@ -857,7 +851,9 @@ label "route"
 'Redirecting to Inscription 275-350 |next "ins_275-350" |only if skill("Inscription")>=275 and skill("Inscription")<350
 'Redirecting to Inscription 350-425 |next "ins_350-425" |only if skill("Inscription")>=350 and skill("Inscription")<425
 'Redirecting to Inscription 425-500 |next "ins_425-500" |only if skill("Inscription")>=425 and skill("Inscription")<500
-'Redirecting to Inscription 500-600 |next "ins_500-600" |only if skill("Inscription")>=500 and skill("Inscription")<600
+'Redirecting to Inscription 500-525 |next "ins_500-525" |only if skill("Inscription")>=500 and skill("Inscription")<525 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Inscription finale |next "ins_525" |only if skill("Inscription")>=525 and skill("Inscription")<600 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Inscription 500-600 |next "ins_500-600" |only if skill("Inscription")>=500 and skill("Inscription")<600 and ZGV.guidesets['ProfessionsHMoP']
 'Redirecting to Inscription finale |next "ins_600" |only if default
 step
 .'NOTE: When getting additional materials using this guide, do not sell them or throw them away. Most of them will be used in the guide at a later time.
@@ -1078,8 +1074,7 @@ label "route"
 'Redirecting to Jewelcrafting 275-350 |next "jc_300-350" |only if skill("Jewelcrafting")>=275 and skill("Jewelcrafting")<350
 'Redirecting to Jewelcrafting 350-425 |next "jc_350-425" |only if skill("Jewelcrafting")>=350 and skill("Jewelcrafting")<425
 'Redirecting to Jewelcrafting 425-525 |next "jc_425-525" |only if skill("Jewelcrafting")>=425 and skill("Jewelcrafting")<525
-'Redirecting to Jewelcrafting 425-525 |next "jc_525-600" |only if skill("Jewelcrafting")>=525 and skill("Jewelcrafting")<600
-'Redirecting to Jewelcrafting finale |next "jc_600" |only if default
+'Redirecting to Jewelcrafting finale |next "jc_525" |only if skill("Jewelcrafting")>=525 and skill("Jewelcrafting")<600
 step
 title + Jewelcrafting 1-50
 label "jc_1-50"
@@ -1266,7 +1261,9 @@ step
 'Redirecting to Tailoring 300-350 |next "tl_300-350" |only if skill("Tailoring")>=300 and skill("Tailoring")<350
 'Redirecting to Tailoring 350-425 |next "tl_350-425" |only if skill("Tailoring")>=350 and skill("Tailoring")<425
 'Redirecting to Tailoring 425-500 |next "tl_425-500" |only if skill("Tailoring")>=425 and skill("Tailoring")<500
-'Redirecting to Tailoring 500-600 |next "next_guide" |only if skill("Tailoring")>=500 and skill("Tailoring")<600
+'Redirecting to Tailoring 500-525 |next "tl_500-525" |only if skill("Tailoring")>=500 and skill("Tailoring")<525 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Tailoring finale |next "tl_525" |only if skill("Tailoring")>=525 and skill("Tailoring")<600 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Tailoring 500-600 |next "tl_500-600" |only if skill("Tailoring")>=500 and skill("Tailoring")<600 and ZGV.guidesets['ProfessionsHMoP']
 'Redirecting to Tailoring finale |next "tl_600" |only if default
 step
 title + Tailoring 1-75
@@ -1385,7 +1382,9 @@ label "route"
 'Redirecting to Leatherworking 300-350 |next "lw_300-350" |only if skill("Leatherworking")>=300 and skill("Leatherworking")<350
 'Redirecting to Leatherworking 350-425 |next "lw_350-425" |only if skill("Leatherworking")>=350 and skill("Leatherworking")<425
 'Redirecting to Leatherworking 425-500 |next "lw_425-500" |only if skill("Leatherworking")>=425 and skill("Leatherworking")<500
-'Redirecting to Leatherworking 500-600 |next "lw_500-600" |only if skill("Leatherworking")>=500 and skill("Leatherworking")<600
+'Redirecting to Leatherworking 500-525 |next "lw_500-525" |only if skill("Leatherworking")>=500 and skill("Leatherworking")<525 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Leatherworking finale |next "lw_525" |only if skill("Leatherworking")>=525 and skill("Leatherworking")<600 and not ZGV.guidesets['ProfessionsHMoP']
+'Redirecting to Leatherworking 500-600 |next "lw_500-600" |only if skill("Leatherworking")>=500 and skill("Leatherworking")<600 and ZGV.guidesets['ProfessionsHMoP']
 'Redirecting to Leatherworking finale |next "lw_600" |only if default
 step
 label "lw_1-55"
@@ -1529,7 +1528,7 @@ step
 'Redirecting to Skinning 300-350 |next "skn_300-350" |only if skill("Skinning")>=300 and skill("Skinning")<350
 'Redirecting to Skinning 350-450 |next "skn_350-450" |only if skill("Skinning")>=350 and skill("Skinning")<450
 'Redirecting to Skinning 450-525 |next "skn_450-525" |only if skill("Skinning")>=450 and skill("Skinning")<525
-'Redirecting to Skinning finale |next "skn_525" |only if default
+'Redirecting to Skinning finale |next "skn_525" |only if skill("Skinning")>=525 and skill("Skinning")<600
 next 100
 step
 Title + Skinning 1-60
@@ -1595,8 +1594,7 @@ step
 'Redirecting to Mining 275-350 |next "m_275-350" |only if skill("Mining")>=275 and skill("Mining")<350
 'Redirecting to Mining 350-425 |next "m_350-425" |only if skill("Mining")>=350 and skill("Mining")<425
 'Redirecting to Mining 425-525 |next "m_425-525" |only if skill("Mining")>=425 and skill("Mining")<525
-'Redirecting to Mining 525-600 |next "m_525-600" |only if skill("Mining")>=525 and skill("Mining")<600
-'Redirecting to Mining finale |next "m_600" |only if default
+'Redirecting to Mining finale |next "m_525" |only if skill("Mining")>=525 and skill("Mining")<600
 step
 #include "home_ValleyofStrength"
 step

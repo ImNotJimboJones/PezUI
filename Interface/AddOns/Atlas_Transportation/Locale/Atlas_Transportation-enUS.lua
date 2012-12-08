@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation-enUS.lua 1830 2012-10-15 04:00:34Z arithmandar $
+-- $Id: Atlas_Transportation-enUS.lua 1834 2012-10-23 14:55:20Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -57,4 +57,5 @@ if AL then
 	AL["Abandoned Kite"] = "Abandoned Kite";
 	AL["From sea level to ground level"] = "From sea level to ground level";
 	AL["Whispercloud's Balloon"] = "Whispercloud's Balloon";
+	AL["Shado-Pan Rope"] = "Shado-Pan Rope"; -- 66390
 end

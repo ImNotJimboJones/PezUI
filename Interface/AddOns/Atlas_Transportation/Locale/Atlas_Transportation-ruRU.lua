@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation-ruRU.lua 1830 2012-10-15 04:00:34Z arithmandar $
+-- $Id: Atlas_Transportation-ruRU.lua 1838 2012-10-25 09:28:46Z StingerSoft@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,7 +28,7 @@
 -- Atlas Localization Data (Russian)
 -- Translated by Nitrogen (Exorsus Guild)
 -- Свежеватель Душ
--- Last Update : $Date: 2012-10-15 12:00:34 +0800 (Mon, 15 Oct 2012) $
+-- Last Update : $Date: 2012-10-25 17:28:46 +0800 (週四, 25 十月 2012) $
 --]]
 
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
@@ -62,6 +62,7 @@ if AL then
 	AL["Climbing Rope"] = "Канат";
 	AL["Rappelling Rope"] = "Канат для спуска";
 	AL["Abandoned Kite"] = "Брошенный воздушный змей";
---	AL["From sea level to ground level"] = "From sea level to ground level";
+	AL["From sea level to ground level"] = "От уровня моря к земле";
 	AL["Whispercloud's Balloon"] = "Воздушный шар Шепота Облака";
+	AL["Shado-Pan Rope"] = "Шадопанская веревка"; -- 66390
 end

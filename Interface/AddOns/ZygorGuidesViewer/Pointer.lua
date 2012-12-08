@@ -121,6 +121,10 @@ function Pointer:Startup()
 	overlay:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	overlay:RegisterEvent("WORLD_MAP_UPDATE")
 	ZGV:ScheduleRepeatingTimer(function()  if not WorldMapFrame:IsVisible() then SetMapToCurrentZone() end  end, 10.0)   -- to help the current zone cache
+	
+	if ZGV.db.profile.autotravel then
+		ZGV:ScheduleRepeatingTimer(function()  Pointer:DoAutoTravel() end, 0.01)
+	end
 
 	--overlay:EnableMouse(true)
 	--overlay:SetScript("OnMouseUp",self.Overlay_OnClick)
@@ -156,13 +160,6 @@ function Pointer:Startup()
 	-- try to fix Astrolabe zoning problems...
 	AstrolabeFixZones(770,700) --twilight
 	AstrolabeFixZones(700,770)
-	AstrolabeFixZones(539,545) --gilneas
-	AstrolabeFixZones(545,539)
-	AstrolabeFixZones(678,679)
-	AstrolabeFixZones(679,678)
-	AstrolabeFixZones(544,681)
-	AstrolabeFixZones(682,681)
-	AstrolabeFixZones(681,682)
 
 	self:SetMinimapPlayerTexture()
 
@@ -246,25 +243,18 @@ end
 	persistent - don't hide when arrived at
 --]]
 
-local phasedBases={ [1]=539, [2]=606, [3]=544, [4]=737, [5]=700, [6]=720, [7]=697 }
+local phasedBases={ [1]=606, [2]=737, [3]=700, [4]=720, [5]=697 }
 local phasedMaps = {
-	[539]=1, -- Gilneas
-	[545]=1,
-	[678]=1,
-	[679]=1,
-	[606]=2, -- Mount Hyjal
-	[683]=2,
-	[544]=3, -- The Lost Isles
-	[681]=3,
-	[682]=3,
-	[737]=4, -- The Maelstrom
-	[751]=4,
-	[700]=5, -- Twilight Highlands
-	[770]=5,
-	[720]=6, -- Uldum
-	[748]=6,
-	[697]=7, -- Zul'Gurub
-	[793]=7
+	[606]=1, -- Mount Hyjal
+	[683]=1,
+	[737]=2, -- The Maelstrom
+	[751]=2,
+	[700]=3, -- Twilight Highlands
+	[770]=3,
+	[720]=4, -- Uldum
+	[748]=4,
+	[697]=5, -- Zul'Gurub
+	[793]=6,
 } -- TODO expand as per need
 setmetatable(phasedMaps,{__index=function(t,map) return map and type(map)=="number" and 10000+map or 0 end})
 ZGV.Pointer.phasedMaps = phasedMaps
@@ -336,7 +326,7 @@ Pointer.waypoints_ants = waypoints_ants
 
 -- SPECIAL setwaypoint, optimized for ants
 local icons=Pointer.Icons
-function Pointer:SetWaypoint_ant (m,f,x,y,num,icon)
+function Pointer:SetWaypoint_ant (m,f,x,y,num,icon, ant)  -- ant is here for one-time lookup! don't reuse!!
 	-- phasing? meh.
 	local waypoint = waypoints_ants[num]
 	waypoint.m=m
@@ -344,6 +334,10 @@ function Pointer:SetWaypoint_ant (m,f,x,y,num,icon)
 	waypoint.x=x
 	waypoint.y=y
 	waypoint.c = Astrolabe.WorldMapSize[m].system
+
+	-- clone some data to make a smarter, more aware ant
+	waypoint.p1m,waypoint.p2m,waypoint.p1f,waypoint.p2f =ant.p1m,ant.p2m,ant.p1f,ant.p2f
+	waypoint.ant_dist=ant.ant_dist
 
 	if not icon then icon=icons.ant end
 	if waypoint.icon~=icon then
@@ -676,7 +670,7 @@ function markerproto:UpdateWorldMapIcon(m,f)
 		self.worldmapFrame.icon:SetSize(halfsize,halfsize)
 	else
 		self.worldmapFrame:EnableMouse(not self.passive)
-		local fullsize = self.size or self.icon.size
+		local fullsize = self.size or self.icon and self.icon.size
 		self.worldmapFrame.icon:SetSize(fullsize,fullsize)
 	end
 
@@ -688,15 +682,34 @@ function markerproto:UpdateWorldMapIcon(m,f)
 		if self.m~=m then show=false end
 	end
 
-	if show and self.m==m and self.f~=f   -- same map, wrong floor. HIDE it?
 	 -- NO. FADE IT.
 	--and not (Astrolabe.WorldMapSize[m][f] and Astrolabe.WorldMapSize[m][f].microName)  -- unless we're in a cave, show outside points
 	--and not (Astrolabe.WorldMapSize[self.m][self.f] and Astrolabe.WorldMapSize[self.m][self.f].microName)  -- unless it's in a cave, show those from overworld
 	--and self.type~="ant" then  -- or it's an ant.
-	then
-		self.worldmapFrame:SetAlpha(0.3)
+
+	if show then
+		if self.type=="ant" then
+			-- fuck. Ants are system-mapped. Check their parents?
+			if self.p1m==m and self.p2m==m then
+				-- gradual fading, if one of floors is current
+				if self.p1f==f and self.p2f~=f then
+					self.worldmapFrame:SetAlpha(1-self.ant_dist*0.7)
+				elseif self.p1f~=f and self.p2f==f then
+					self.worldmapFrame:SetAlpha(0.3+self.ant_dist*0.7)
+				elseif self.p1f==f and self.p2f==f then
+					self.worldmapFrame:SetAlpha(1.0)
+				else
+					self.worldmapFrame:SetAlpha(0.3)
+				end
+			else
+				self.worldmapFrame:SetAlpha(1.0)
+			end
+		else
+			-- normal waypts
+			self.worldmapFrame:SetAlpha((self.m==m and self.f~=f) and 0.3 or 1.0)
+		end
 	else
-		self.worldmapFrame:SetAlpha(1.0)
+		self.worldmapFrame:SetAlpha(1.0) --?? not shown and alpha=1??
 		--show=false
 	end
 
@@ -858,6 +871,8 @@ function Pointer:CreateArrowFrame()
 	self:SetupArrow()
 end
 
+local CHAIN = ZGV.ChainCall
+
 function Pointer:SetupArrow()
 	self.ArrowFrame = self.CurrentArrowSkin:CreateFrame()
 
@@ -878,8 +893,6 @@ function Pointer:SetupArrow()
 
 	-- opacity
 	self.ArrowFrame:SetAlpha(profile.arrowalpha)
-
-	local CHAIN = ZGV.ChainCall
 
 	local iconScale = 38*profile.arrowscale
 	if not self.ArrowFrame.ArrowIcon then
@@ -1359,6 +1372,7 @@ end
 -- table - order your floors from TOP to BOTTOM.
 local FloorUpDowns = {
 	[721] = 1, --Blackrock Spire
+	[753] = -1, --Blackrock Spire
 	[321] = -1, --Orgrimmar
 	[504] = -1, --Dalaran
 	[691] = -1, --Gnomeregan
@@ -1377,9 +1391,9 @@ function FloorOrder(map,a,b)
 			return a-b
 		end
 		-- "2_3" ordering
-		return order[a.."_"..b] or 0
+		return order[a.."_"..b] or -1
 	end
-	return 0
+	return -1
 end
 
 
@@ -1406,7 +1420,7 @@ local teleLocs = {
 local function ZoneIsOutdoor(map)
 	local mapdata = Astrolabe.WorldMapSize[map]   if not mapdata then return end
 	local system = mapdata.system
-	return (system==13 or system==14 or system==466 or system==485 or system==862) and map~=504 and map~=321 and map~=903
+	return (system==13 or system==14 or system==466 or system==485 or system==862 or system==605 or system==544) and map~=504 and map~=321 and map~=903
 	-- continents
 end
 
@@ -1414,6 +1428,7 @@ local function GetPreciseFloorCrossingText(map,f_from,f_to)
 	if ZoneIsOutdoor(map) then -- overworld, assuming we're in/out of a cave or mine.
 		if f_from==0 then return L['pointer_floors_incave'] end
 		if f_to==0 then return L['pointer_floors_outcave'] end
+		
 	end
 	return nil
 end
@@ -1592,15 +1607,22 @@ function Pointer.ArrowFrame_OnUpdate_Common(self,elapsed)
 				local l = L[id]
 				if l==id then return nil else return l end
 			end
+
+			errortxt = nil --nil  this because it is about to get replaced with something else.
+
 			errortxt = L_or_nil('pointer_floors_'..cm..'_'..cf..'_'..self.waypoint.f)
 					or L_or_nil('pointer_floors_'..cm..'_'..cf..'_*')
 					or L_or_nil('pointer_floors_'..cm..'_*_'..self.waypoint.f)
 					or L_or_nil('pointer_floors_'..cm)
 					or GetPreciseFloorCrossingText(cm,cf,self.waypoint.f)
 					or (badfloor>0 and L['pointer_floors_up'] or L['pointer_floors_down'])
-			show_stairs=true
+			show_stairs = nil --We are trying to enter a cave, point to the location inside the cave
 
-			if ZoneIsOutdoor(self.waypoint.m) then errortxt,show_stairs=nil end  -- Don't warn about floors on outdoor maps. TODO: remove later. 
+			--TODO show_stairs should show the special arrow for going up and down between floors,
+			--as of 12/5/12 it was not working properly for me(Erich) because it was not appearing at all.
+			--Instead of showing no arrow, pointing straight toward the location is better.
+
+			--if ZoneIsOutdoor(self.waypoint.m) then errortxt,show_stairs=nil end  -- Don't warn about floors on outdoor maps. TODO: remove later. 
 				-- diff floor? prepare to do floor warnings.
 		end
 		-- Otherwise just point. No funny stuff here.
@@ -1719,7 +1741,7 @@ function Pointer.ArrowFrame_OnUpdate_Common(self,elapsed)
 
 		--angle = angle + 2.356194  -- rad(135)
 
-		if profile.arrowsmooth and self.CurrentArrowSkin and self.CurrentArrowSkin.features.smooth then
+		if profile.arrowsmooth and Pointer.CurrentArrowSkin and Pointer.CurrentArrowSkin.features.smooth then
 			local dif = angle-oldangle
 			if dif>0.001 or dif<0.001 then
 				while dif>3.14159 do dif=dif-6.28319 end
@@ -2529,7 +2551,8 @@ function Pointer.GetMapNameByID2(id,floor)
 	if floor then
 		floor = ZGV:SanitizeMapFloor(id,floor)
 		local mapdata = Astrolabe.WorldMapSize[id]
-		if mapdata and mapdata[floor] and mapdata[floor].floorName~=0 then return mapdata[floor].floorName end
+		if mapdata and mapdata[floor] and mapdata[floor].floorName and mapdata.floorName~=0 then return mapdata[floor].floorName 
+		elseif mapdata and mapdata[floor] and mapdata[floor].microName and mapdata.microName~=0 then return mapdata[floor].microName  end
 	end
 	return GetMapNameByID(id or 0) or extramaps[id]
 end
@@ -2681,7 +2704,8 @@ local function spawn_curve_ants(points,loop,phase)
 		end
 
 		--print("acc",curve_accuracy)
-		for t=phase*curve_accuracy,1-(1-phase)*curve_accuracy,curve_accuracy*0.999 do
+		--for t=phase*curve_accuracy,1-(1-phase)*curve_accuracy,curve_accuracy*0.999 do
+		for t=phase*curve_accuracy,0.9999,curve_accuracy*0.999 do
 			local t2 = t*t
 			local t3 = t*t*t
 
@@ -2702,6 +2726,9 @@ local function spawn_curve_ants(points,loop,phase)
 			ant.map,ant.floor,ant.x,ant.y=p1.gm,p1.gf,x,y
 			ant.sub=i+t
 			ant.icon = p2.ant_icon or def_ant_icon
+			ant.p1f,ant.p2f=p1.f,p4.f
+			ant.p1m,ant.p2m=p1.m,p4.m
+			ant.ant_dist=t
 
 			--print(("%d/%.2f: [%.1f,%.1f]->[%.1f,%.1f] = [%.1f,%.1f]"):format(i,t,p1.x,p1.y,p2.x,p2.y,x,y))
 			--end
@@ -2735,7 +2762,7 @@ local function spawn_straight_ants(points,loop,phase)
 		-- NEW CHECK. Points are supposedly on global maps. If points do NOT share a global map, NO ANTS BETWEEN THEM.
 		if p1.gm
 		and p1.gm==p2.gm
-		and p1.gf==p2.gf
+		--and p1.gf==p2.gf
 		then
 
 			local curve_accuracy = p1.curve_accuracy
@@ -2766,6 +2793,9 @@ local function spawn_straight_ants(points,loop,phase)
 				ant.map,ant.floor,ant.x,ant.y=p1.gm,p1.gf,x,y
 				ant.sub=i+t
 				ant.icon = p2.ant_icon or def_ant_icon
+				ant.p1f,ant.p2f=p1.f,p2.f
+				ant.p1m,ant.p2m=p1.m,p2.m
+				ant.ant_dist=t
 
 				--base_t=t
 
@@ -2849,31 +2879,34 @@ local function set_waypoints(points,worldsize,minisize,type,setname)
 end
 Pointer.set_waypoints = set_waypoints
 
-local function set_waypoints_ants(points,num,start_at,worldsize,minisize)
+local function set_waypoints_ants(ants,num,start_at,worldsize,minisize)
 	for k=1,num do
-		local point=points[k]
-		Pointer:SetWaypoint_ant (point.map,point.floor,point.x,point.y, k+start_at, point.icon)
+		local ant=ants[k]
+		Pointer:SetWaypoint_ant (ant.map,ant.floor,ant.x,ant.y, k+start_at, ant.icon, ant)
 	end
 end
 
 local function move_point_to_global(point)
-	if not point or not point.m or not Astrolabe.WorldMapSize[point.m] then return end
-	local mastermap = Astrolabe.WorldMapSize[point.m].systemParent or 0
-	local masterminflr = ZGV:SanitizeMapFloor(mastermap,0)
+	if not point then return end
+	local m = point.m	if not m then return end
+	local data = Astrolabe.WorldMapSize[m]
+	local mastermap = data.systemParent or 0
+	local masterfloor = ZGV:SanitizeMapFloor(mastermap,0) -- even if it's the same map, remap to be able to work with bare coords
+
 	--if Astrolabe.WorldMapSize[point.map].system==466 then mastermap=466 end  -- outland, do NOT translate onto Azeroth
 	--if Astrolabe.WorldMapSize[point.map].system==640 then mastermap=640 end  -- deepholm, do NOT translate onto Azeroth
 	--if point.c==-1 then mastermap=Astrolabe.WorldMapSize[point.map].system end  -- instances, do NOT translate onto Azeroth
-	if point.m~=mastermap then
-		point.gx,point.gy = Astrolabe:TranslateWorldMapPosition( point.m, point.f, point.x, point.y, mastermap, masterminflr )
+	if m~=mastermap or point.f~=masterfloor then
+		point.gx,point.gy = Astrolabe:TranslateWorldMapPosition( m, point.f, point.x, point.y, mastermap, masterfloor )
 	end
 	if point.gx then
-		point.gm,point.gf=mastermap,masterminflr
+		point.gm,point.gf=mastermap,masterfloor
 	else
 		point.gm,point.gf=point.m,point.f
 		point.gx,point.gy=point.x,point.y
 	end
 end
-
+_G['move_point_to_global']=move_point_to_global
 
 
 function Pointer:SetAntSpacing(spacing)
@@ -3160,4 +3193,43 @@ function Pointer:FindTravelPath(way)
 	ZGV.Pointer.DestinationWaypoint = way
 	LibRover:FindPath(0,0,0,0,way.m,way.f,way.x,way.y, PathFoundHandler, {title=way.title, waypoint=way, direct=not ZGV.db.profile.pathfinding})
 	--end
+end
+
+
+
+function Pointer:DoAutoTravel()
+	if ZGV.db.profile.autotravel then
+		if not Pointer.AutoTravelFrame then
+			Pointer.AutoTravelFrame = CHAIN(CreateFrame("FRAME","ZygorGuidesViewerPointer_AutoTravelFrame"))
+				:SetPoint("TOPLEFT",UIParent,"TOPLEFT")
+				:SetSize(1,1)
+				.__END
+			Pointer.AutoTravelFrame.t1 = CHAIN(Pointer.AutoTravelFrame:CreateTexture(nil,"OVERLAY"))
+				:SetPoint("TOPLEFT",Pointer.AutoTravelFrame,"TOPLEFT",0,0)
+				:SetTexture(1,1,1)
+				:SetSize(5,5)
+				.__END
+			Pointer.AutoTravelFrame.t2 = CHAIN(Pointer.AutoTravelFrame:CreateTexture(nil,"OVERLAY"))
+				:SetPoint("TOPLEFT",Pointer.AutoTravelFrame,"TOPLEFT",5,0)
+				:SetTexture(0,1,0)
+				:SetSize(5,5)
+				.__END
+			Pointer.AutoTravelFrame.t3 = CHAIN(Pointer.AutoTravelFrame:CreateTexture(nil,"OVERLAY"))
+				:SetPoint("TOPLEFT",Pointer.AutoTravelFrame,"TOPLEFT",10,0)
+				:SetTexture(1,0,1)
+				:SetSize(5,5)
+				.__END
+			print("creating autotravel frame")
+		end
+
+		local angle = Pointer.ArrowFrame.arrow.angle
+		if angle then
+			if angle>0.2 and angle<3.1415 then Pointer.AutoTravelFrame.t1:SetTexture(0,1,0) --green:left
+			elseif angle>=3.1415 and angle<6.083 then Pointer.AutoTravelFrame.t1:SetTexture(1,0,0) --red:right
+			else Pointer.AutoTravelFrame.t1:SetTexture(0,0,0) --black:none
+			end
+
+			-- TODO distance
+		end
+	end
 end

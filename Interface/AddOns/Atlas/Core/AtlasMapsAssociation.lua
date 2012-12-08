@@ -1,4 +1,4 @@
--- $Id: AtlasMapsAssociation.lua 1800 2012-10-09 21:29:04Z dynaletik@gmail.com $
+-- $Id: AtlasMapsAssociation.lua 1867 2012-11-01 00:13:25Z dynaletik@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -360,7 +360,6 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Desolace"]] = 			"MaraudonEnt";
 	[BZ["Vale of Eternal Blossoms"]] = 	"MoguShanPalace";
 	[BZ["Kun-Lai Summit"]] = 		"MoguShanVaults";
-	[BZ["Dustwallow Marsh"]] = 		"OnyxiasLair";
 	[BZ["Orgrimmar"]] = 			"RagefireChasm";
 	[BZ["Thousand Needles"]] = 		"RazorfenDowns";
 	[BZ["Southern Barrens"]] = 		"RazorfenKraul";

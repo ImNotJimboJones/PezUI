@@ -4,6 +4,9 @@ Copyright 2011 ~ 2012 Arith Hsu
 ==============
 = Change Log =
 ==============
+* 2.9 (2012/12/08)
+    - TOC update to support WoW 5.1
+
 * 2.8 (2012/10/04)
     - Added Brewfest maps
     - Translation Update

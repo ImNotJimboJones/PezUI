@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-esES.lua 1802 2012-10-10 07:55:55Z arithmandar $
+﻿-- $Id: Atlas-esES.lua 1875 2012-11-07 06:19:41Z maqjav@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,7 +30,7 @@ local AL = AceLocale:NewLocale("Atlas", "esES", false);
 -- Atlas Spanish Localization
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@gmail.com
--- Última Actualización (last update): 04/10/2012
+-- Última Actualización (last update): 07/11/2012
 
 -- Atlas Spanish Localization
 if ( GetLocale() == "esES" ) then
@@ -95,6 +95,8 @@ if AL then
 	AL["ATLAS_OPTIONS_CTRL"] = "Pulsar control para ver las herramientas";
 	AL["ATLAS_OPTIONS_CTRL_TIP"] = "Activa mostrar ventanas emergentes de texto mientras pulsas Ctrl y pasas el ratón por encima de la información del mapa. Es util cuando el texto es demasiado largo y no se puede mostrar en la ventana.";
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "No mostrar la misma información de nuevo.";
+	AL["ATLAS_OPTIONS_CHECKMODULE"] = "Recuérdame que módulo(s) / plug-in(s) falta(n).";
+	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Activar para comprobar si falta algún módulo / plug-in de Atlas después del inicio de WoW.";
 
 	AL["ATLAS_BUTTON_CLOSE"] = "Cerrar";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
@@ -148,7 +150,10 @@ if AL then
 	AL["ATLAS_DEP_OK"] = "Vale";
 	
 	AL["ATLAS_INFO"] = "Información de Atlas";
-	AL["ATLAS_INFO_12200"] = "Aviso importante:\n\nDebido al aumento del tamaño en los archivos de este accesorio, \nse han separado parte de los mapas de mazmorras, y otros accesorios \ninternos en módulos separados.\n\nLos usuarios que descarguen este accesorio desde conocidas páginas web \ndeberían de obtener únicamente el núcleo del accesorio, el cual solo contiene \nla función del núcleo y los mapas de la última expansión.\n\nLos usuarios que también quieran descargar los mapas de las mazmorras \nantiguas y los mapas de todos los plug-ins de Atlas \nhechos por nosotros, tendrán que descargarselos por separado.\n\nPara mas información puedes acceder al foro en:\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12200"] = "Aviso importante:\n\nDebido al aumento del tamaño en los \narchivos de este accesorio, se han separado parte de los mapas de mazmorras, \ny otros accesorios internos en módulos separados.\n\nLos usuarios que descarguen este accesorio desde conocidas páginas web obtendrán \núnicamente el núcleo del accesorio, el cual solo contiene la función del núcleo \ny los mapas de la última expansión.\n\nLos usuarios que también quieran descargar los mapas de las mazmorras antiguas y \nlos mapas de todos los plug-ins \nde Atlas hechos por nosotros, tendrán que \ndescargarselos por separado.\n\nPara mas información accede a:\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
+	AL["ATLAS_INFO_12201"] = "Te informamos de que hemos creado un nuevo plug-in - |cff6666ffAtlas Escenarios|cffffffff, \nque contiene los nuevos mapas de los escenarios introducidos en WoW 5.0. \n\nPara mas detalles aacede a nuestra web, y no olvides de descargarlo / \ninstalarlo por separado.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
+
+	AL["ATLAS_MISSING_MODULE"] = "Atlas has detected missing module(s) / plugin(s): ";
 
 	--************************************************
 -- Zone Names, Acronyms, and Common Strings
@@ -252,7 +257,7 @@ if AL then
 	AL["BRM"] = "MRN"; -- Blackrock Mountain, Montaña Roca Negra"
 	AL["BWL"] = "GAN"; -- Blackwing Lair, Guarida Alanegra
 	AL["DM"] = "LM"; -- Dire Maul, La Masacre	
-AL["Gnome"] = "Gnome"; -- Gnomeregan
+	AL["Gnome"] = "Gnome"; -- Gnomeregan
 	AL["Halls"] = "Salones"; -- Scarlet Halls
 	AL["LBRS"] = "CRNI"; -- Lower Blackrock Spire
 	AL["Mara"] = "Mara"; -- Maraudon
@@ -622,19 +627,19 @@ AL["Gnome"] = "Gnome"; -- Gnomeregan
 	--Molten Core
 
 	--Scarlet Halls
-	AL["Commander Lindon"] = "Commander Lindon"; --FALTA
-	AL["Hooded Crusader"] = "Hooded Crusader"; --FALTA
+	AL["Commander Lindon"] = "Comandante Lindon";
+	AL["Hooded Crusader"] = "Cruzada encapuchada";
 	AL["Bucket of Meaty Dog Food"] = "Cubo de comida de perro"; --Check
 	AL["Reinforced Archery Target"] = "Objetivo de tiro con arco reforzado";
 	
 	--Scarlet Monastery
 	
 	--Scholomance
-	AL["Instructor Chillheart's Phylactery"] = "Filacteria del Instructor Corazón de hielo"; --Check
+	AL["Instructor Chillheart's Phylactery"] = "Filacteria de la instructora Corazón Álgido";
 
 	AL["Professor Slate"] = "Profesor Slate"; 
 	AL["Polyformic Acid Potion"] = "La ciencia del ácido polifórmico";
-	AL["Talking Skull"] = "Talking Skull"; -- FALTA
+	AL["Talking Skull"] = "Calavera parlante";
 	AL["In the Shadow of the Light"] = "A la sombra de la Luz";
 	AL["Kel'Thuzad's Deep Knowledge"] = "Saber profundo de Kel'Thuzad";
 	AL["Forbidden Rites and other Rituals Necromantic"] = "Ritos prohibidos y otros rituales nigrománticos";
@@ -651,12 +656,6 @@ AL["Gnome"] = "Gnome"; -- Gnomeregan
 	AL["Haunted Stable Hand"] = "Mozo de cuadra encantado";
 	AL["Investigator Fezzen Brasstacks"] = "Investigator Fezzen Brasstacks"; --FALTA		
 
-
-
-
-
-
-
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Comandante de Cruzada Eligor Albar <Hermandad de la Luz>";
 	AL["Master Craftsman Wilhelm <Brotherhood of the Light>"] = "Maestro artesano Wilhelm <Hermandad de la Luz>";
@@ -667,7 +666,6 @@ AL["Gnome"] = "Gnome"; -- Gnomeregan
 	AL["Festival Lane Postbox"] = "Buzón de la calle del Festival";
 	AL["Elder Farwhisper"] = "Ancestro Levesusurro";
 	AL["Market Row Postbox"] = "Buzón de la Fila del Mercado";
-
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "Buzón de la plaza de los Ancianos";
@@ -1174,36 +1172,39 @@ AL["Gnome"] = "Gnome"; -- Gnomeregan
 	AL["Mortaxx <The Tolling Bell>"] = "Mortaxx <La campana que dobla>";
 	AL["Tiki Lord Zim'wae"] = "Señor Tiki Zim'wae";
 	AL["Zanzil's Cauldron of Burning Blood"] = "Caldero de sangre ardiente de Zanzil";
-	
+
 
 --*********************
 -- Mists of Pandaria Instances
 --*********************
 
 	--Gate of the Setting Sun
-	AL["Bowmistress Li <Guard Captain>"] = "Bowmistress Li <Guard Captain>"; --FALTA
+	AL["Bowmistress Li <Guard Captain>"] = "Maestra arquera Li <Capitana de la Guardia>";
 
 	--Heart of Fear
 
 	--Mogu'shan Palace
-	AL["Sinan the Dreamer"] = "Sinan the Dreamer"; --FALTA
+	AL["Sinan the Dreamer"] = "Sinan la Soñadora <Custodia>";
 
 	--Mogu'shan Vaults
 
 	--Shado-Pan Monastery
-	AL["Ban Bearheart"] = "Ban Bearheart"; --FALTA
+	AL["Ban Bearheart"] = "Ban Corazón Fiero";
 
 	--Siege of Niuzao Temple
-	AL["Shado-Master Chum Kiu"] = "Shado-Master Chum Kiu"; --FALTA
+	AL["Shado-Master Chum Kiu"] = "Maestro Shado Chum Kiu";
 
 	--Stormstout Brewery
-	AL["Auntie Stormstout"] = "Auntie Stormstout"; --FALTA
-	AL["Chen Stormstout"] = "Chen Stormstout"; --FALTA
+	AL["Auntie Stormstout"] = "Tía Cerveza de Trueno";
+	AL["Chen Stormstout"] = "Chen Cerveza de Trueno";
 
 	--Temple of the Jade Serpent
-	AL["Master Windstrong"] = "Master Windstrong"; --FALTA
-	AL["Priestess Summerpetal"] = "Priestess Summerpetal"; --FALTA
+	AL["Master Windstrong"] = "Maestro Viento Impetuoso";
+	AL["Priestess Summerpetal"] = "Sacerdotisa Pétalo Estival";
 
 	--Terrace of Endless Spring
+	AL["Elder Asani"] = "Elder Asani";--FALTA
+	AL["Elder Regail"] = "Elder Regail";--FALTA
+	AL["Protector Kaolan"] = "Protector Kaolan";--FALTA
 
 end

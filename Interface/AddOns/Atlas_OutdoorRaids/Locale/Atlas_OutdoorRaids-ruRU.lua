@@ -29,7 +29,7 @@
 -- Atlas Data  (Russian)
 -- Compiled by StingerSoft
 -- stingersoft@gmail.com
--- Last Update: $Date: 2012-10-03 23:12:26 +0800 (Wed, 03 Oct 2012) $
+-- Last Update: $Date: 2012-10-03 23:12:26 +0800 (週三, 03 十月 2012) $
 
 --]]
 

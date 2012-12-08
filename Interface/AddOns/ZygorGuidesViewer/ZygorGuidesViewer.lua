@@ -271,6 +271,9 @@ function ZGV:OnInitialize()
 	if self.DEV then
 		ZGV.DebugFrame = ZGV.ChainCall(CreateFrame("FRAME","ZygorDebugFrame",UIParent)) :SetPoint("TOPLEFT") :SetSize(1,1) .__END
 		ZGV.DebugFrame.text1 = ZGV.ChainCall(ZGV.DebugFrame:CreateFontString()) :SetPoint("TOPLEFT") :SetFontObject(SystemFont_Tiny) .__END
+		if self.db.profile.fpsgraph then
+			ZGV:StartFPSFrame()
+		end
 	end
 end
 
@@ -4697,4 +4700,37 @@ function ZGV:DumpScenario()
 	end
 
 	ZGV:ShowDump(s,name)
+end
+
+
+function ZGV:StartFPSFrame()
+	if not ZGV.FPSFrame then
+		ZGV.FPSFrame = ZGV.ChainCall(CreateFrame("FRAME","ZygorFPSFrame",UIParent)) :SetPoint("BOTTOMLEFT") :SetSize(201,50) :SetFrameStrata("DIALOG") .__END
+		ZGV.FPSFrame.back = ZGV.ChainCall(ZGV.FPSFrame:CreateTexture()) :SetAllPoints() :SetTexture(0,0,0,1) .__END
+		ZGV.FPSFrame.bars={}
+		for b=1,200 do
+			tinsert(ZGV.FPSFrame.bars, ZGV.ChainCall(ZGV.FPSFrame:CreateTexture()) :SetPoint("BOTTOMLEFT",ZGV.FPSFrame,"BOTTOMLEFT",b,0) :SetSize(1,50) :SetTexture(1,1,1) .__END)
+		end
+		local elapses={0,0,0,0,0,0,0,0,0}
+		function ZGV.FPSFrame:OnUpdate(elapsed)
+			--local fps=GetFramerate()
+			local fps=1/elapsed
+			local n=floor(min(200,max(1,elapsed*100)))  -- n bars to cover
+			for b=1,200-n do
+				self.bars[b]:SetHeight(self.bars[b+n]:GetHeight())
+			end
+			local h=min(fps/2,50)  -- 1..50
+			for b=200-n+1,200 do
+				self.bars[b]:SetHeight(h)
+			end
+			for b=1,200 do
+				local h1=self.bars[b]:GetHeight()/50
+				local r=(h1<0.5) and 1 or 2-(h1*2)
+				local g=(h1<0.5) and h1*2 or 1
+				self.bars[b]:SetTexture(r,g,0)
+			end
+		end
+		ZGV.FPSFrame:SetScript("OnUpdate",ZGV.FPSFrame.OnUpdate)
+	end
+	ZGV.FPSFrame:SetShown(ZGV.db.profile.fpsgraph)
 end

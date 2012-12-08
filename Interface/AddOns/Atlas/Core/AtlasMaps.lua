@@ -1,4 +1,4 @@
--- $Id: AtlasMaps.lua 1783 2012-10-04 15:29:35Z dynaletik@gmail.com $
+-- $Id: AtlasMaps.lua 1836 2012-10-25 00:20:45Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -2877,7 +2877,7 @@ Syntax:
 	SiegeofNiuzaoTempleB = {
 		ZoneName = { BZ["Siege of Niuzao Temple"].." [B]" };
 		Location = { BZ["Townlong Steppes"] };
-		DungeonHeroicID = "554";
+		DungeonID = "554";
 		Acronym = AL["SNT"];
 		JournalInstanceID = "324";
 		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
@@ -2928,9 +2928,9 @@ Syntax:
 		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
 		{ BLUE.." A) "..AL["Entrance"] };
 		{ WHIT.." 1) "..Atlas_GetBossName("Protectors of the Endless", 683) };
-		{ WHIT..INDENT..Atlas_GetBossName("Elder Asani") };
-		{ WHIT..INDENT..Atlas_GetBossName("Elder Regail") };
-		{ WHIT..INDENT..Atlas_GetBossName("Protector Kaolan") };
+		{ WHIT..INDENT..AL["Elder Asani"] };
+		{ WHIT..INDENT..AL["Elder Regail"] };
+		{ WHIT..INDENT..AL["Protector Kaolan"] };
 		{ WHIT.." 2) "..Atlas_GetBossName("Tsulong", 742) };
 		{ WHIT.." 3) "..Atlas_GetBossName("Lei Shi", 729) };
 		{ WHIT.." 4) "..Atlas_GetBossName("Sha of Fear", 709) };

@@ -12381,7 +12381,7 @@ goto Azshara,50.4,74.3
 step
 goto Azshara,51.5,74.3
 .talk 37005
-.fpath Southern Rocketway Terminus
+.fpath Southern Rocketway
 step
 goto Azshara,52.2,74.2
 .talk 35817
@@ -20269,8 +20269,6 @@ goto Blasted Lands 54.45,50.52
 .talk 19254
 ..accept 9407
 step
-.' Go into the big green portal to Outland |goto Hellfire Peninsula
-step
 goto Hellfire Peninsula 87.4,49.8
 .talk 19253
 ..turnin 9407
@@ -20345,8 +20343,8 @@ step
 goto 66.1,43.7
 .talk 19401
 .' Take the flight
-.click the bomb in your bags, bomb Gateway Shaadraz |use Seaforium PU-36 Explosive Nether Modulator##28038 |q 10129/2
-.click the bomb in your bags, bomb Gateway Murketh |use Seaforium PU-36 Explosive Nether Modulator##28038 |q 10129/1 |tip They look like big machines with giant green crystals floating above them.
+.' Use the bomb in your bags to bomb Gateway Shaadraz |use Seaforium PU-36 Explosive Nether Modulator##28038 |q 10129/2
+.' Use the bomb in your bags to bomb Gateway Murketh |use Seaforium PU-36 Explosive Nether Modulator##28038 |q 10129/1 |tip They look like big machines with giant green crystals floating above them.
 step
 goto 65.9,43.6
 .talk 19273
@@ -20382,7 +20380,7 @@ goto 64.4,31.9
 .from Razorsaw##20798
 .get Head of Forgefiend Razorsaw |q 10390/2
 .collect the Burning Legion Missive##29590 |n
-.click the Burning Legion Missive |use Burning Legion Missive##29590
+.click Burning Legion Missive |use Burning Legion Missive##29590
 ..accept 10393
 step
 goto 55,36
@@ -20408,7 +20406,7 @@ goto 52.8,26.4
 step
 goto 53.1,27.6
 .' Go inside the portal
-.click the floating thing inside the portal
+.click Rune of Spite
 .' Close the Burning Legion Gate |q 10392/2 |tip You might have to stand right underneath it and zoom in your view to be able to click the floating glyph inside the portal.
 step
 goto 55,36
@@ -20444,7 +20442,7 @@ goto 66.2,42
 step
 goto 61.7,81.2
 .talk 19558
-.fpath Spinebreaker Post
+.fpath Spinebreaker Ridge
 step
 goto 61.9,81.5
 .talk 19683
@@ -20663,7 +20661,7 @@ goto 61.9,81.5
 ..turnin 10278
 ..accept 10294
 step
-goto 75.4,66.3
+goto 77.6,66.5
 .from Collapsing Voidwalker##17014+, Vacillating Voidcaller##19527+
 .get 40 Void Ridge Soul Shard |q 10294/1
 step
@@ -20695,19 +20693,10 @@ goto 48.9,35.4
 .click Shredder Parts##335
 .get 6 Shredder Spare Parts |q 10236/1
 step
-goto 45.9,39.8
-.from Shattered Hand Berserker##16878+, Shattered Hand Guard##19414+
-.' Reap 20 Shattered Hand Souls |q 10864/1
-step
 goto 51.4,30.6
 .talk 16915
 ..turnin 10236
 ..accept 10238
-step
-goto 52.3,36.5
-.talk 16588
-..turnin 10864
-..accept 10838
 step
 goto 45.1,41.0
 .click Manni's Cage##1787
@@ -20720,6 +20709,15 @@ step
 goto 47.5,46.6
 .click Jakk's Cage##1787
 .' Save Jakk |q 10238/3
+step
+goto 45.9,39.8
+.from Shattered Hand Berserker##16878+, Shattered Hand Guard##19414+
+.' Reap 20 Shattered Hand Souls |q 10864/1
+step
+goto 52.3,36.5
+.talk 16588
+..turnin 10864
+..accept 10838
 step
 goto 45.5,47.2
 .' Use your Demoniac Scryer in your bags at this spot |use Demoniac Scryer##31606
@@ -20744,6 +20742,7 @@ step
 goto 51.4,30.6
 .' Use the Felhound Whistle while standing next to Forman Razelcraz |use Felhound Whistle##30803
 |modelnpc Foreman Razelcraz##16915
+|confirm
 step
 goto 49.9,29.3
 .from Deranged Helboar##16863+
@@ -20762,6 +20761,7 @@ step
 'Follow this mine shaft |goto 54.4,31.4
 .kill Urga'zz##18976 |q 10630/1 |tip All the way in the back of the mine.
 step
+goto 51.6,31.7 |n
 'Leave the mine |goto Hellfire Peninsula,51.6,31.7,0.5 |noway |c
 step
 goto 51.4,30.6
@@ -20826,7 +20826,7 @@ goto 28.5,60.2
 ..accept 10103
 step
 .click Orb of Translocation##7161
-.' Skip to the next step
+|confirm
 step
 goto 30.2,54
 .from Bonestripper Vulture##16973+
@@ -20871,7 +20871,7 @@ goto 28.5,60.2
 ..accept 9391
 step
 .click Orb of Translocation##7161
-.' Skip to the next step.
+|confirm
 step
 goto 39,40.3
 .' Stand on the big stone block
@@ -20880,8 +20880,7 @@ goto 39,40.3
 .kill Draenei Anchorite##16994 |q 9370/1
 step
 goto 18.1,49.9
-.' He walks along the road from Falcon Watch to Zangarmarsh. Some searching may be required.
-.talk 20159
+.talk 20159 |tip He walks along the road from Falcon Watch to Zangarmarsh. Some searching may be required.
 .' Fight him until he's almost dead
 ..turnin 10286
 ..accept 10287
@@ -20928,7 +20927,7 @@ goto 28.5,60.2
 ..turnin 9391
 step
 .click Orb of Translocation##7161
-.' Skip to the next step.
+|confirm
 step
 goto 15.7,52
 .talk 16991
@@ -20961,10 +20960,6 @@ step
 goto Hellfire Peninsula,15.7,52
 .talk 16888
 ..turnin 10159
-step
-goto 15.1,55.7
-.from Illidari Taskmaster##17058+
-.get 5 Demonic Essence |q 9387/1
 step
 goto 15.6,58.8
 .talk 20678
@@ -21010,13 +21005,17 @@ goto 16.3,65.1
 .talk 19361
 ..turnin 10369
 step
+goto 15.1,55.7
+.from Illidari Taskmaster##17058+
+.get 5 Demonic Essence |q 9387/1
+step
 goto 26.8,59.7
 .talk 16794
 ..turnin 9387
 step
 goto 27.1,62.1
 .talk 17226
-..turnin 9483 |n
+..accept 9483 |instant
 .' Follow Viera Sunwhisper
 .' When she stops, use Carinda's Scroll of Retribution on her |q 9472/1 |use Carinda's Scroll of Retribution##23693
 step
@@ -21024,14 +21023,16 @@ goto 26.4,60.3
 .talk 16793
 ..turnin 9472
 step
-goto 25.6,70.3
-.from Haal'eshi Windwalker##16966+, Haal'eshi Talonguard##16967+, Avruu##17084 |tip You can find them all around this area, and in the canyon also.
-.get 4 Haal'eshi Scroll |q 9396/1
-step
 goto 25.4,71.6
 .click Kaliri Nest##7143
 .' When a female Kaliri hatchling spawns, use your Empty Birdcage on it |use Empty Birdcage##23485
 .' Cage the Female Kaliri Hatchling |q 9397/1
+.' You can also find a nest at the following locations:
+.' [26.3,75.2]
+.' [25.7,75.1]
+.' [25.7,76.2]
+.' [25.1,76.1] (Bottom Floor)
+.' [24.7,76.5] (Bottom Floor)
 step
 goto 26.2,77.1|n
 .' The path up to Avruu starts here |goto Hellfire Peninsula,26.1,77.1,0.3 |noway |c
@@ -21047,6 +21048,10 @@ goto 29,81.5
 .' Fight Aeranas until he's almost dead
 .talk 17085
 ..turnin 9418
+step
+goto 25.6,70.3
+.from Haal'eshi Windwalker##16966+, Haal'eshi Talonguard##16967+, Avruu##17084 |tip You can find them all around this area, and in the canyon also.
+.get 4 Haal'eshi Scroll |q 9396/1
 step
 goto 24.6,76
 .talk 16993
@@ -21105,7 +21110,7 @@ goto 27.2,61.9
 ..turnin 9376
 step
 goto Zangarmarsh 82.9,65.4 |n
-'Go northwest to Zangarmarsh |goto Zangarmarsh
+'Go northwest to Zangarmarsh |goto Zangarmarsh 82.9,65.4 |noway |c
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Outland 60-70\\Zangarmarsh (62-64)",[[
 author support@zygorguides.com
@@ -21133,39 +21138,25 @@ goto 78.4,62
 ..turnin 9912
 ..accept 9716
 step
-goto 80.1,73.3
-.from Marshfang Ripper##18130+, Young Sporebat##20387+, Umbraglow Stinger##18132+
-.get 10 Unidentified Plant Parts |q 9802/1
-step
 goto 81,72.2
-.kill Boglash##18281 |q 9895/1 |tip Despite his elite status, he's pretty easy to kill. He walks around in the water, so some searching may be necessary.
-step
-goto 82.6,72.3
-.from Boglash##18281, Fen Strider##18134+ |tip It's easier if you just run around in the water all around the east part of Zangarmarsh.
-.collect 6 Fertile Spores##24449 |q 9806 |future
-step
-goto 80.4,64.2
-.talk 17909
-..turnin 9802
+.kill Boglash##18281 |q 9895/1 |tip He walks around in the water, so some searching may be necessary.
 step
 goto 78.5,63.1
 .talk 17834
 ..turnin 9895
 step
-goto 84.8,84.4
-.kill 6 Umbrafen Oracle##18077+ |q 9747/2
-.kill 8 Umbrafen Seer##18079+ |q 9747/3
-.kill 6 Umbrafen Witchdoctor##20115+ |q 9747/4
-step
 goto 85.3,90.9
 .kill Kataru##18080 |q 9747/1 |tip In the big building, all the way at the top.
-step
-ding 63
 step
 goto 83.4,85.5
 .talk 17969
 ..accept 9752
 .' Escort Kayra Longmane to safety |q 9752/1
+step
+goto 84.8,84.4
+.kill 6 Umbrafen Oracle##18077+ |q 9747/2
+.kill 8 Umbrafen Seer##18079+ |q 9747/3
+.kill 6 Umbrafen Witchdoctor##20115+ |q 9747/4
 step
 goto 80.4,64.2
 .talk 17956
@@ -21182,10 +21173,6 @@ goto 78.4,62
 .talk 17841
 ..turnin 9752
 step
-goto 75.7,90.2
-.kill 10 Marsh Lurker##18136+ |q 10096/2
-.kill 10 Marsh Dredger##18137+ |q 10096/1
-step
 'Go southwest inside the cave to [70.5,97.9]
 .click Ikeyen's Belongings##318
 .get Ikeyen's Belongings |q 9788/1
@@ -21193,10 +21180,15 @@ step
 'Go northeast inside the cave to [72.5,94]
 .kill Lord Klaq##18282 |q 9894/1 |tip On the bottom level of the cave, in the small round room all the way in the back.
 step
+goto 75.7,90.2
+.kill 10 Marsh Lurker##18136+ |q 10096/2
+.kill 10 Marsh Dredger##18137+ |q 10096/1
+step
 goto 70.9,82.1
 'Stand here to Investigate Umbrafen Lake |q 9716/1
 .from Steam Pump Overseer##18340+, Darkcrest Slaver##19946+, Darkcrest Sorceress##19947+
 .get 30 Naga Claws |q 9728/1
+.get 10 Unidentified Plant Parts |q 9802/1
 step
 goto 80.4,64.7
 .talk 18070
@@ -21207,8 +21199,7 @@ goto 80.4,64.2
 ..turnin 9788
 .talk 17909
 ..turnin 10096
-.' Turn in any stacks of 10 Unidentified Plant Parts you have
-.' If you found an Uncatalogued Species, turn that in also
+..turnin 9802
 step
 goto 79.1,65.3
 .talk 17858
@@ -21237,7 +21228,7 @@ goto 80.4,64.7
 .talk 18070
 ..accept 9785
 step
-goto 78.1,63.8
+goto 79.1,67.4
 .talk 17901
 .' Get the Mark of War |q 9785/2
 step
@@ -21447,12 +21438,8 @@ goto 19,64
 step
 goto 14.5,61.6
 .click Mature Spore Sac##6911
-.collect 40 Mature Spore Sac##24290 |q 9739 |tip You need 30 extra to turn in for Sporeggar reputation, so you can accept quests. |future
-.' If you find this quest is bugged and you are not able to collect all _40 Mature Spore Sac_ then click below to continue.
-|confirm |next "collect_10_sac"
-|next "collect_40_sac" |only if default
+.collect 10 Mature Spore Sac##24290 |q 9739
 step
-label	"collect_10_sac"
 goto 13.6,59.8
 .from Starving Fungal Giant##18125+, Starving Bog Lord##19519+ |only if rep ('Sporeggar') <= Unfriendly
 .collect 6 Bog Lord Tendril##24291 |only if rep ('Sporeggar') <= Unfriendly
@@ -21476,10 +21463,6 @@ goto 19.1,63.9
 ..accept 9744 |instant
 next "collect_6_tendril" |only if rep ('Sporeggar') <= Unfriendly
 next "Sporeggar_friendly" |only if rep ('Sporeggar') >= Neutral
-step
-label	"collect_40_sac"
-goto 13.6,59.8
-.' Go here to Investigate the Spawning Glen |q 9701/1
 step
 goto 19.1,63.9
 .talk 17923
@@ -21509,11 +21492,14 @@ step
 goto 19.2,49.4
 .talk 17925
 ..accept 9806
-..turnin 9806
 step
-goto 19.5,50
-.talk 17856
-..accept 9726
+goto Zangarmarsh 20.6,53.7
+.from Greater Sporebat##18129+
+..get 6 Fertile Spores |q 9806/1
+step
+goto 19.2,49.4
+.talk 17925
+..turnin 9806
 step
 goto 22.4,46.1
 .kill Terrorclaw##20477 |q 9904/1
@@ -21525,10 +21511,6 @@ step
 goto 25.4,42.9
 .' Use your Ironvine Seeds on the Marshlight Lake Pump Controls |use Ironvine Seeds##24355 |tip The pump controls look like a little box with some levers on it.
 .' Disable the Marshlight Lake Pump Controls |q 9720/2
-step
-goto 26.8,43
-.kill 12 Bloodscale Slavedriver##18089+ |q 9726/1
-.kill 6 Bloodscale Enchantress##18088+ |q 9726/2
 step
 goto 34.5,34.8
 .' Kill Boss Grog'ak |tip He's standing on the side of the road.
@@ -21565,6 +21547,23 @@ goto 23.3,66.2
 .talk 17831
 ..turnin 9708
 ..accept 9709
+step
+goto Zangarmarsh 19.9,53.3
+.click Glowcap##
+.collect 10 Glowcap##24245 |q 9808/1
+step
+goto Zangarmarsh 19.7,52.0
+.talk 17924
+..accept 9808
+..turnin 9808
+step
+goto 19.5,50
+.talk 17856
+..accept 9726
+step
+goto 26.8,43
+.kill 12 Bloodscale Slavedriver##18089+ |q 9726/1
+.kill 6 Bloodscale Enchantress##18088+ |q 9726/2
 step
 goto 19.5,50
 .talk 17856
@@ -21642,11 +21641,21 @@ goto Zangarmarsh,78.4,62
 .talk 17841
 ..turnin 9732
 step
-goto Terokkar Forest 32.6,5.0 |n
-.' Go southeast to Terokkar Forest |goto Terokkar Forest
+goto Zangarmarsh,79.1,64.9
+.click the Wanted Poster |tip It's a piece of paper hanging on the wall of this tower.
+..accept 9730
+..accept 9817
 step
-goto Shattrath City 69.2,4.1 |n
-.' Go south to Shattrath City |goto Shattrath City |noway |c
+goto 65.1,68.7
+.kill Rajah Haghazed##18046 |q 9730/1
+step
+goto 65.2,40.9
+.kill Rajis Fyashe##18044 |q 9817/1
+step
+goto 79.1,65.3
+.talk 17858
+..turnin 9730
+..turnin 9817
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Leveling Guides\\Outland 60-70\\Terokkar Forest (64-66)",[[
 author support@zygorguides.com
@@ -21777,7 +21786,7 @@ goto 44.3,26.3
 step
 goto 47.1,27
 .talk 18482
-.' Fight Empoor until he's almost dead
+.' Fight Empoor until he's almost dead |tip He walks on this path between Shattrath and Tuurem. Some searching may be necessary.
 ..turnin 9978
 ..accept 9979
 step
@@ -22437,7 +22446,7 @@ goto 55.8,38
 ..accept 9939
 step
 goto 55,39
-.talk 18234
+.talk 18234 |tip He walks around this area,
 ..accept 9870
 step
 goto 54.7,39.7
@@ -22485,10 +22494,6 @@ goto 48.3,21.5
 .kill 5 Warmaul Shaman##18064+ |q 9939/2
 .kill 5 Warmaul Reaver##17138+ |q 9939/3
 step
-goto 48.3,21.5
-.from Warmaul Shaman##18064+, Warmaul Reaver##17138+
-.get 10 Obsidian Warbeads |q 10479/1
-step
 goto 32.4,36.1
 .talk 18229
 ..turnin 9864
@@ -22509,6 +22514,10 @@ goto 23.4,29.2
 .click the yellow cages around this area
 .' Free 5 Mag'har Prisoners |q 9948/1
 step
+goto 48.3,21.5
+.from Warmaul Shaman##18064+, Warmaul Reaver##17138+
+.get 10 Obsidian Warbeads |q 10479/1
+step
 goto 32.4,36.1
 .talk 18414
 ..turnin 9945
@@ -22519,15 +22528,15 @@ goto 41.5,40.9
 .from Muck Spawn##17154+
 .get 5 Muck-ridden Core |q 9815/1
 step
+goto 30.9,42.3
+.from Ortor of Murkblood##18204 |tip He's standing inside the big building here.
+.get Head of Ortor of Murkblood |q 9867/1
+step
 goto 32,39.1
 .kill 20 Murkblood Scavenger##18207+ |q 9865/1
 .kill 10 Murkblood Raider##18203+ |q 9865/2
 .kill 5 Murkblood Putrifier##18202+ |q 9862/1
 .get 10 Murkblood Idol |q 9863/1
-step
-goto 30.9,42.3
-.from Ortor of Murkblood##18204 |tip He's standing inside the big building here.
-.get Head of Ortor of Murkblood |q 9867/1
 step
 goto 32.4,36.1
 .talk 18229
@@ -22553,6 +22562,7 @@ goto 33.4,62.4
 .click Oshu'gun Crystal Fragment##6415
 .from Vir'aani Raider##17149
 .get 10 Oshu'gun Crystal Fragment |q 9882/1
+.' You can find more mobs and crystals around [41.4,70.8]
 step
 goto 30.6,67.5
 .kill 8 Voidspawn##17981+ |q 9925/1
@@ -22612,15 +22622,15 @@ goto 19.8,60.9
 step
 ding 67
 step
-goto Nagrand,55.5,37.6
-.talk 18106
-..turnin 9891
-..accept 9906
-step
 goto 55.8,38
 .talk 18407
 ..turnin 10479
 ..turnin 9939
+step
+goto Nagrand,55.5,37.6
+.talk 18106
+..turnin 9891
+..accept 9906
 step
 goto 55.5,37.6
 .talk 18300
@@ -35571,25 +35581,7 @@ author support@zygorguides.com
 condition end achieved(1190)
 startlevel 00.00
 dynamic on
-step
-'You must complete the Zangarmarsh Leveling Guide before completing this guide section. |tip We recommend being at least level 80 before trying to complete this guide. |script ZGV:SetGuide("Zygor's Horde Leveling Guides\\Outland 60-70\\Zangarmarsh (62-64)")
-.' Skip to the next step in the guide
-step
-goto Zangarmarsh,79.1,64.9
-.click the Wanted Poster |tip It's a piece of paper hanging on the wall of this tower.
-..accept 9730
-..accept 9817
-step
-goto 65.1,68.7
-.kill Rajah Haghazed##18046 |q 9730/1
-step
-goto 65.2,40.9
-.kill Rajis Fyashe##18044 |q 9817/1
-step
-goto 79.1,65.3
-.talk 17858
-..turnin 9730
-..turnin 9817
+leechsteps "Zygor's Horde Leveling Guides\\Outland 60-70\\Zangarmarsh (62-64)"
 ]])
 ZygorGuidesViewer:RegisterGuide("Zygor's Horde Loremaster Guides\\Outland 60-70\\Terokkar Forest",[[
 author support@zygorguides.com
@@ -35597,11 +35589,11 @@ condition end achieved(1272)
 startlevel 00.00
 dynamic on
 step
-'You must complete the Terokkar Forest Leveling Guide before completing this guide section. |tip We recommend being at least level 80 before trying to complete this guide. |script ZGV:SetGuide("Zygor's Horde Leveling Guides\\Outland 60-70\\Terokkar Forest (64-66)")
+'You must complete the Terokkar Forest and Nagrand Leveling Guides before completing this guide section. |tip We recommend being at least level 80 before trying to complete this guide. |script ZGV:SetGuide("Zygor's Horde Leveling Guides\\Outland 60-70\\Terokkar Forest (64-66)")
 |confirm
 step
 goto Shattrath City,48.2,18.7
-.talk 22429
+.talk 22429 |tip He walks around on the platform above the Lower City.
 ..accept 10917
 step
 goto 58.0,15.2
@@ -35767,8 +35759,9 @@ goto 49.3,45.9
 ..turnin 10036
 step
 goto Shattrath City,53.7,32.6
-.talk 19715
+.talk 19715 |tip He walks all around the building, some searching may be necessary.
 ..turnin 10228
+..accept 10231
 step
 goto 52.6,21.0
 .talk 22292
@@ -35946,7 +35939,7 @@ goto 42.8,20.7
 step
 goto 43.6,20.4
 .from Mogor##18069
-.' Defeat Mogor, Hero of the Warmaul |q 9973/1
+.' Defeat Mogor, Hero of the Warmaul |q 9977/1
 step
 goto 42.8,20.7
 .talk 22893
@@ -36105,6 +36098,38 @@ goto Shattrath City,77.3,34.9
 ..turnin 10009
 ..accept 10010
 step
+goto Shattrath City,53.7,32.6
+.talk 19715 |tip He walks all around the building, some searching may be necessary.
+..accept 10231
+step
+goto Shattrath City 43.6,29.5
+.talk 19720+
+.' Tell him you heard he has a book, then fight him until he surrenders.
+..turnin 10231
+..accept 10251
+step
+goto Nagrand 51.8,56.9
+.talk 19844
+..turnin 10251
+..accept 10252
+step
+goto Nagrand 32.4,77.7
+.from Aged Clefthoof##17133+
+..get Aged Clefthoof Blubber |q 10252/3
+step
+goto Nagrand 28.0,30.2
+.from Mountain Gronn##19201+
+..get Mountain Gronn Eyeball |q 10252/1
+step
+goto Nagrand 33.4,25.8
+.from Greater Windroc##17129+
+..get Flawless Greater Windroc Beak |q 10252/2
+step
+goto Nagrand 51.8,56.9
+.talk 19844
+..turnin 10252
+..accept 10253
+step
 goto Nagrand,44.5,65.4
 .from Tusker##18290
 .get Heart of Tusker |q 9852/1
@@ -36212,6 +36237,14 @@ step
 goto 55.4,37.5
 .talk 18090
 ..accept 11048
+step
+goto Terokkar Forest 39.6,71.4
+.from Levixus##19847+
+..get The Book of the Dead |q 10253/1
+step
+goto Terokkar Forest 35.1,66.2
+.talk 19417
+..turnin 10253
 step
 goto Terokkar Forest,20.0,63.0
 .' Go to this spot
@@ -36325,6 +36358,8 @@ goto Shattrath City 54.1,44.7
 .talk 18481
 ..turnin 10102
 ..accept 10167
+step
+goto Shattrath City
 step
 goto Terokkar Forest 37.2,65.6 |n
 .' Follow this path |goto Terokkar Forest,37.2,65.6,0.5 |noway |c
@@ -38270,28 +38305,25 @@ goto The Lost Isles/1 50.1,86.8
 .' Use your KTC Snapflash near the floating green camera hologram on the left wall as you enter the cave |use KTC Snapflash##49887
 .' Capture Cave Painting 1 |q 14031/1
 step
-The Lost Isles/1 64.7,58.4
+goto 64.7,58.4
 .' Escort the Frightened Miner and protect him
 .' Use your KTC Snapflash near the floating green camera hologram, it will be on the roof of the cave after take the ramp down |use KTC Snapflash##49887
 .' Capture Cave Painting 2 |q 14031/2
 step
-goto The Lost Isles/1 86.4,44.8
+goto 86.4,44.8
 .' Escort the Frightened Miner and protect him
 .' Use your KTC Snapflash near the floating green camera hologram, it will be on the right wall |use KTC Snapflash##49887
 .' Capture Cave Painting 3 |q 14031/3
 step
-goto The Lost Isles/1 44.3,24.1
+goto 44.3,24.1
 .' Escort the Frightened Miner and protect him
 .' Make the Kaja'mite Ore mining a success! |q 14021/1
 .' Use your KTC Snapflash near the floating green camera hologram, it will be next to a big face statue with spiked teeth |use KTC Snapflash##49887
 .' Capture the Pygmy Altar |q 14031/4
 step
-The Lost Isles/1 41.9,24.9
+goto 41.9,24.9
 .talk 35837
 ..accept 14233
-step
-goto The Lost Isles/1 48.1,90.0 |n
-.' Leave the cave |goto The Lost Isles/1 48.1,90.0 |noway |c
 step
 goto The Lost Isles/0 31.3,79.3
 .talk 35769
@@ -38651,12 +38683,12 @@ goto 68.9,46.4
 ..turnin 24954
 ..accept 24958
 step
-goto The Lost Isles/2 58.2,43.9
+goto The Lost Isles/2 71.6,55.2
 .' Use your Bootzooka repeatedly on Volcanoth |use Bootzooka##52043 |tip He's a huge turtle inside a cave.  Move to the side and take cover behind the rock on the left when Volcanoth is about to breathe fire.
 .' Kill Volcanoth |q 24958/1
 |modelnpc Volcanoth##50058
 step
-goto The Lost Isles/2 62.7,49.4
+goto 62.7,49.4
 .talk 38928
 ..turnin 24958
 ..accept 25023

@@ -698,8 +698,9 @@ function ZGV:Options_DefineOptionTables()
 		--]]
 	end
 
-	AddOptionGroup('map',"Map","zgmap")
+	AddOptionGroup("arrow","Arrow","zgarrow", { disabled = function() return self.db.profile.waypointaddon~="internal" end, })
 	do
+	  --[[
 		AddOption('waypoints',{
 			type = 'select',
 			values={
@@ -715,15 +716,10 @@ function ZGV:Options_DefineOptionTables()
 		})
 
 		AddOptionSep()
+	  --]]
 
-		AddOption('hidearrowwithguide',{
-			type = 'toggle',
-			disabled = function() return self.db.profile.waypointaddon=="none" end,
-			width="full",
-			_default = true,
-		})
-		AddOptionSep()
-
+	  --[[
+	  -- Unchecking this totally breaks Astrolabe-based waypointing. Silly Astro needs icons set to visible to calculate distances and bearings.
 		AddOption('minicons',{
 			type = 'toggle',
 			set = function(i,v) Setter_Simple(i,v) 	self:SetWaypoint()  if self:IsWaypointAddonEnabled("cart2") then  Cartographer_Notes:MINIMAP_UPDATE_ZOOM()  Cartographer_Notes:UpdateMinimapIcons()  end end,
@@ -731,6 +727,10 @@ function ZGV:Options_DefineOptionTables()
 			width="single",
 			_default = true,
 		})
+	  --]]
+
+	  --[[
+	  -- These two are removed because they were never supported in our icons. We can either make the icons support this setting... or remove it. For now it's removal.
 		AddOption('iconalpha',{
 			type = 'range',
 			min = 0.1, max = 1, step = 0.01, bigStep = 0.05,
@@ -749,22 +749,11 @@ function ZGV:Options_DefineOptionTables()
 		})
 
 		AddOptionSep()
+	  --]]
 
-		AddOption('corpsearrow',{
-			type = 'toggle',
-			disabled = function() return self.db.profile.waypointaddon=="none" end,
-			_default = true,
-		})
-		AddOption('corpsearrowjokes',{
-			type = 'toggle',
-			disabled = function() return not self.db.profile.corpsearrow or self.db.profile.waypointaddon=="none" end,
-			_default = true,
-		})
-	end
-
-	AddOptionGroup("waypointer","Waypointer","zgwaypointer", { disabled = function() return self.db.profile.waypointaddon~="internal" end, })
-	do
 		AddOption('arrowshow',{  type = 'toggle', width="full", set = function(i,v) Setter_Simple(i,v)  self.Pointer:UpdateArrowVisibility() end, _default=true, })
+
+		AddOption('',{ type="header", name=L["opt_arrow_display"] })
 
 		AddOption('arrowskin',{
 			type = "select",
@@ -780,12 +769,21 @@ function ZGV:Options_DefineOptionTables()
 		})
 		AddOptionSep()
 
-		AddOption('arrowfreeze',{ type = 'toggle', set = function(i,v) Setter_Simple(i,v)  self.Pointer:SetupArrow() end, _default=false, })
-		AddOptionSep()
 
-		AddOption('arrowmeters',{ type = 'toggle', width = "full", _default=false, })
-		AddOption('arrowsmooth',{  type = 'toggle', disabled = function() return not ZGV.Pointer.CurrentArrowSkin.features['smooth'] end,  width = "full", _default=true, })
-		AddOption('arrowcolordist',{ type = 'toggle',  disabled = function() return not ZGV.Pointer.CurrentArrowSkin.features['colordist'] end,  width = "full",  _default = false,  })
+		--[[
+		AddOption('hidearrowwithguide',{
+			type = 'toggle',
+			--disabled = function() return self.db.profile.waypointaddon=="none" end,
+			width="full",
+			_default = true,
+		})
+		AddOptionSep()
+		--]]
+
+		AddOption('arrowfreeze',{ type = 'toggle', set = function(i,v) Setter_Simple(i,v)  self.Pointer:SetupArrow() end, width = "single", _default=false, })
+		AddOption('arrowsmooth',{  type = 'toggle', disabled = function() return not ZGV.Pointer.CurrentArrowSkin.features['smooth'] end,  width = "single", _default=true, })
+		AddOption('arrowcolordist',{ type = 'toggle',  disabled = function() return not ZGV.Pointer.CurrentArrowSkin.features['colordist'] end,  width = "single",  _default = false,  })
+		AddOptionSep()
 
 		AddOption('arrowalpha',{
 			type = 'range',
@@ -805,11 +803,24 @@ function ZGV:Options_DefineOptionTables()
 			set = function(i,v) Setter_Simple(i,v)  ZGV.Pointer:SetFontSize(v)  end,
 			_default = 10,
 		})
-		AddOption('audiocues',{ type = 'toggle', width = "full", _default = false, })
 
-		--AddOption('',{ type="header", name=L["opt_map_extras"] })
+		AddOptionSep()
+		AddOption('arrowmeters',{ type = 'toggle', width = "full", _default=false, })
 
+		AddOption('',{ type="header", name=L["opt_arrow_extras"] })
+
+		AddOption('corpsearrow',{
+			type = 'toggle',
+			disabled = function() return self.db.profile.waypointaddon=="none" end,
+			_default = true,
+		})
+		AddOption('corpsearrowjokes',{
+			type = 'toggle',
+			disabled = function() return not self.db.profile.corpsearrow or self.db.profile.waypointaddon=="none" end,
+			_default = true,
+		})
 		AddOption('minimapzoom',{ type = 'toggle', width = "full", set = function(i,v) Setter_Simple(i,v)  self.Pointer:MinimapZoomChanged() end, _default = false, })
+		AddOption('audiocues',{ type = 'toggle', width = "full", _default = false, })
 	end
 
 	AddOptionGroup("travelsystem","Travelsystem","zgtravelsystem")
@@ -1483,6 +1494,9 @@ function ZGV:Options_DefineOptionTables()
 			set = function(i,v) Setter_Simple(i,v) ZGV.debugframe = _G[v] end,
 			_default = "ChatFrame1"
 		})
+
+		AddOption('fpsgraph',{ name="FPS Graph", desc="Show a detailed FPS graph. Max=100fps.", type = 'toggle', width = "full", _default=false, set = function(i,v) Setter_Simple(i,v)  ZGV:StartFPSFrame() end, })
+
 	end
 	end
 
@@ -1631,6 +1645,9 @@ function ZGV:Options_RegisterDefaults()
 	self.db:RegisterDefaults(defaults)
 
 	if self.db.profile.arrowskin=="sheen" then self.db.profile.arrowskin="fancy" end
+
+	self.db.profile.waypointaddon = "internal"
+	self.db.profile.minicons = true
 
 	if not self.db.profile.tmp__was_sheened then  -- one-time switch to stealth
 		self.Pointer:SetArrowSkin("stealth")

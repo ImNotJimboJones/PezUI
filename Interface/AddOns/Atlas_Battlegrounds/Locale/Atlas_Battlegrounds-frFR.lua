@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-frFR.lua 1772 2012-10-03 15:12:26Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-frFR.lua 1839 2012-10-25 16:53:25Z mr.kevin.fischer@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -193,10 +193,11 @@ if AL then
 	-- Twin Peaks
 	AL["Wildhammer Longhouse"] = "Bastion des Marteaux-hardis";
 	AL["Dragonmaw Clan Compound"] = "Forge des Gueules-de-Dragon";
-	
-	-- Temple of Kotmogu
-AL["Scoring Point"] = "Scoring Point"; -- Translation needed
 
 	-- Silvershard Mines
 	AL["Capture Point"] = "Point de capture";
+
+	-- Temple of Kotmogu
+	AL["Scoring Point"] = "Point de but"; -- Translation needed
+
 end

@@ -436,9 +436,9 @@ function ItemScore:GetItemScore(itemid, invslot, verbose, itemlink)
 
 		-- Okay, type ascertained. Is it proper for the player at all?
 		local uselevel = rule.itemtypes[subclass]
-		if self.playerlevel <= 10 and (subclass == "CLOTH" or subclass == "LEATHER") then
+		if self.playerlevel <= 20 and (subclass == "CLOTH" or subclass == "LEATHER") then
 			if rule.itemtypes["LEATHER"] and not uselevel then
-				uselevel = 1 --Let leather users use cloth until level 10. This is so if a slot is empty, it is better than nothing
+				uselevel = 1 --Let leather users use cloth until level 20. This is so if a slot is empty, it is better than nothing
 			elseif rule.itemtypes["MAIL"] and not uselevel then
 				uselevel = 1 --Mail users can use cloth or leather at low level.
 			end
@@ -471,7 +471,7 @@ function ItemScore:GetItemScore(itemid, invslot, verbose, itemlink)
 
 	if self.playerlevel<GetMaxPlayerLevel() then
 		if self.playerlevel <= 85 and item.info.quality==7 then value = value +10000 end --BoA Heirlooms. They give exp boost so they are very good.
-		if self.playerlevel <= 10 and item.stats.RESISTANCE0_NAME then value = value + (item.stats.RESISTANCE0_NAME)*3 end -- Give Armor a weight at low level.
+		if self.playerlevel <= 20 and item.stats.RESISTANCE0_NAME then value = value + (item.stats.RESISTANCE0_NAME)*3 end -- Give Armor a weight at low level.
 
 		value = value + item.info.ilevel * 1 -- Item score is only used to make sure value ~=0
 	else

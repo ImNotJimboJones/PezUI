@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_OutdoorRaids-frFR.lua 1772 2012-10-03 15:12:26Z arithmandar $
+﻿-- $Id: Atlas_OutdoorRaids-frFR.lua 1839 2012-10-25 16:53:25Z mr.kevin.fischer@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -33,11 +33,13 @@ if AL then
 	AL["Ancient Skull Pile"] = "Ancienne pile de crânes";
 	AL["Darkscreecher Akkarai"] = "Akkarai le Hurle-sombre";
 	AL["Gezzarak the Huntress"] = "Gezzarak la Chasseresse";
+	AL["Graveyard"] = "Cimetière";
 	AL["Grella <Skyguard Quartermaster>"] = "Grella <Intendante de la Garde-ciel>";
 	AL["Hazzik"] = "Hazzik";
 	AL["Hazzik's Package"] = "Paquet d'Hazzik";
 	AL["Karrog"] = "Karrog";
 	AL["Outdoor Raid Encounters"] = "Rencontres de raids extérieurs";
+	AL["Pandaria World Bosses"] = "Boss de Monde de Pandarie";
 	AL["Random"] = "Aléatoire";
 	AL["Sahaak <Keeper of Scrolls>"] = "Sahaak <Gardiens des parchemins>";
 	AL["Severin <Skyguard Medic>"] = "Séverin <Infirmier de la Garde-ciel>";
@@ -52,5 +54,4 @@ if AL then
 	AL["Talonpriest Zellek"] = "Prêtre de la serre Zellek";
 	AL["Terokk"] = "Terokk";
 	AL["Vakkiz the Windrager"] = "Vakkiz le Ragevent";
-	AL["Graveyard"] = "Cimetière";
 end

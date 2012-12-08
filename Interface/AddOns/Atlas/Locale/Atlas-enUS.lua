@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-enUS.lua 1811 2012-10-10 10:54:01Z arithmandar $
+﻿-- $Id: Atlas-enUS.lua 1836 2012-10-25 00:20:45Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -1198,5 +1198,8 @@ if AL then
 	AL["Priestess Summerpetal"] = "Priestess Summerpetal";
 
 	--Terrace of Endless Spring
+	AL["Elder Asani"] = "Elder Asani";
+	AL["Elder Regail"] = "Elder Regail";
+	AL["Protector Kaolan"] = "Protector Kaolan";
 
 end
