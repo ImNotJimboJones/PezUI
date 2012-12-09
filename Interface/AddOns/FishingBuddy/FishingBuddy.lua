@@ -28,6 +28,41 @@ local POLES = {
 	["Nat Pagle's Fish Terminator"] = "19944:0:0:0",
 }
 
+-- handle key menu
+local function SetKeyValue(self, what, value)
+	local show = FBConstants.Keys[value];
+	FishingBuddy.SetSetting(what, value);
+	UIDropDownMenu_SetSelectedValue(self, show);
+	UIDropDownMenu_SetText(self, show);
+end
+
+local function LoadKeyMenu(keymenu, what)
+	local menu = keymenu.menu;
+	local info = {};
+	local menuwidth = 0;
+	local setting = FishingBuddy.GetSetting(what);
+	for value,label in pairs(FBConstants.Keys) do
+		local v = value;
+		local w = what;
+		local m = menu;
+		info.text = label;
+		info.func = function() SetKeyValue(m, w, v); end;
+		if ( setting == value ) then
+			info.checked = true;
+		else
+			info.checked = false;
+		end
+		UIDropDownMenu_AddButton(info);
+		menu.label:SetText(label);
+		local width = menu.label:GetWidth();
+		if (width > menuwidth) then
+			menuwidth = width;
+		end
+	end
+	UIDropDownMenu_SetWidth(menu, menuwidth + 32);
+	keymenu:SetLabel(FBConstants.KEYS_LABEL_TEXT);
+end
+
 local GeneralOptions = {
 	["ShowNewFishies"] = {
 		["text"] = FBConstants.CONFIG_SHOWNEWFISHIES_ONOFF,
@@ -118,7 +153,6 @@ local CastingOptions = {
 		["tooltip"] = FBConstants.CONFIG_EASYCAST_INFO,
 		["tooltipd"] = FBConstants.CONFIG_EASYCAST_INFOD,
 		["enabled"] = function() return (not IsFishingAceEnabled()) and 1 or 0 end,
-		["layoutright"] = "EasyCastKeys",
 		["v"] = 1,
 		["m"] = 1,
 		["default"] = 1 },
@@ -223,14 +257,13 @@ local CastingOptions = {
 	},
 	["EasyCastKeys"] = {
 		["default"] = FBConstants.KEYS_NONE,
-		["button"] = "FishingBuddyOption_EasyCastKeys",
+		["button"] = "FBEasyKeys",
 		["tooltipd"] = FBConstants.CONFIG_EASYCASTKEYS_INFO,
-		["margin"] = { 16, 0 },
 		["deps"] = { ["EasyCast"] = "h" },
 		["setup"] =
 			function(button)
 				local gs = FishingBuddy.GetSetting;
-				FishingBuddyOption_EasyCastKeys:SetKeyValue("EasyCastKeys", gs("EasyCastKeys"));
+				FBEasyKeys.menu:SetKeyValue("EasyCastKeys", gs("EasyCastKeys"));
 				button.overlay:ClearAllPoints();
 				button.overlay:SetPoint("TOPLEFT", button.label, "TOPLEFT");
 				button.overlay:SetSize(button:GetWidth(), button:GetHeight());
@@ -1634,10 +1667,29 @@ FishingBuddy.OnEvent = function(self, event, ...)
 		FishingBuddy.Initialize();
 		FishingBuddy.Slider_Create(VolumeSlider);
 		FishingBuddy.OptionsFrame.HandleOptions(GENERAL, nil, GeneralOptions);
+		FishingBuddy.AddSchoolFish();
+
+		local keymenu = FishingBuddy.CreateFBDropDownMenu("FBEasyKeys", "FishingBuddyDropDownMenuTemplate");
+		keymenu.menu.SetKeyValue = SetKeyValue;
+		keymenu.html:Hide();
+		
+		keymenu.menu.label:SetText(FBConstants.CONFIG_EASYCAST_ONOFF);
+		local check = keymenu.menu.label:GetWidth();
+		
+		UIDropDownMenu_Initialize(keymenu.menu, function()
+										  LoadKeyMenu(keymenu, "EasyCastKeys");
+									  end);
+		-- prettify drop down?
+		check = check + keymenu:GetWidth();
+		if (FishingBuddy.FitInOptionFrame(check)) then
+			CastingOptions["EasyCast"].layoutright = "EasyCastKeys";
+		else
+			CastingOptions["EasyCastKeys"].alone = 1;
+		end
 		FishingBuddy.OptionsFrame.HandleOptions(name, "Interface\\Icons\\INV_Fishingpole_02", CastingOptions);
 		FishingBuddy.OptionsFrame.HandleOptions(nil, nil, InvisibleOptions);
 		FishingBuddy.OptionsUpdate();
-		FishingBuddy.AddSchoolFish();
+		
 		self:UnregisterEvent("VARIABLES_LOADED");
 		-- tell all the listeners about this one
 		RunHandlers(event, ...);

@@ -33,7 +33,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "v0.8.1d", },
 	["RustyXXL"] = { "V1.0.4", },
 	["Ithilrandir"] = { "V1.0.5", },
-	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", "V1.2d", },
+	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", "V1.2d", "V1.2f", },
 	["Freydis88"] = { "V1.0.9e", },
 	["Frontiii"] = { "V1.0.9e", },
 };
@@ -51,6 +51,7 @@ credits[FBConstants.ROLE_TRANSLATE_ESES] = {
 	["Valdesca"] = { "v0.9.9e6", },
 	["Winderfind Drakkari"] = { "v1.0.7a" },
 	["jmaister"] = { "V1.0.9e", },
+	["karrash76"] = { "V1.2f", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_KOKR] = {

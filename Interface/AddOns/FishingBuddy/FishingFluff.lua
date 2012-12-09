@@ -247,7 +247,7 @@ local function Untrack(yes)
 end
 
 local function DoPetReset(pet)
-	if ( pet and pet > 0 ) then
+	if ( pet ) then
 		C_PetJournal.SummonPetByGUID(pet);
 	elseif (FishingBuddy.GetSetting(PETSETTING) ~= PET_NONE) then
 		local nowpet = C_PetJournal.GetSummonedPetGUID();
@@ -601,9 +601,10 @@ local function UpdateItemOptions()
 			sub.text = info.option.text;
 			sub.tooltip = info.option.tooltip;
 			sub.default = info.option.default;
+			sub.visible = option.visible;
 			sub.v = 1;
 			sub.deps = {};
-			sub.deps[info.setting] = "d";
+			sub.deps[info.setting] = "h";
 			FluffOptions[info.option.setting] = sub;
 		end
 	end

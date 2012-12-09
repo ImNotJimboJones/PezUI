@@ -1,4 +1,10 @@
-﻿Version 1.2e
+﻿Version 1.2f
+- Updated Spanish (esES) translation (thanks karrash76!)
+- Updated German translation (thanks DirtyHarryGermany!)
+- Updated LibTourist to the latest version
+- Make options display better with long names (CurseForge #110)
+
+Version 1.2e
 - Fishing pets work again
 - Add option to display the Nat Pagle quest fish you've caught "today"
 - Updated Russian translation (thanks BloodyFess!)
