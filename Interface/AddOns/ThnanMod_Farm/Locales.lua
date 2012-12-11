@@ -14,7 +14,9 @@ L.farmWindowLabelText = "Farming Tool Panel";
 L.sunsongRanchName = "Sunsong Ranch";
 
 L.showAutomaticallyCheckBoxLabel = "Show Farm Window on Farm";
-L.showAutomaticallyCheckBoxTooltip = "This option will cause the farm tool panel to appear when zoning in to Sunsong Ranch";
+L.showAutomaticallyCheckBoxTooltip = "This option will cause the farm tool panel to appear when zoning in to Sunsong Ranch.";
+L.hideInCombatCheckBoxLabel = "Hide in combat";
+L.hideInCombatCheckBoxTooltip = "This option will cause the farm tool panel to hide when entering combat and reappear when leaving combat.";
 
 --[[ Template for other localizations ]]--
 
@@ -34,7 +36,9 @@ if (locale == "<locale code>") then
 	L.sunsongRanchName = "Sunsong Ranch";
 
 	L.showAutomaticallyCheckBoxLabel = "Show Farm Window on Farm";
-	L.showAutomaticallyCheckBoxTooltip = "This option will cause the farm tool panel to appear when zoning in to Sunsong Ranch";
+	L.showAutomaticallyCheckBoxTooltip = "This option will cause the farm tool panel to appear when zoning in to Sunsong Ranch.";
+	L.hideInCombatCheckBoxLabel = "Hide in combat";
+	L.hideInCombatCheckBoxTooltip = "This option will cause the farm tool panel to hide when entering combat and reappear when leaving combat.";
 end
 
 --]]

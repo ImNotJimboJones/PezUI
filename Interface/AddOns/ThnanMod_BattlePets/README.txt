@@ -4,6 +4,12 @@ Adds a line to wild pet tooltips showing the highest rarity pet of its type that
 
 VERSION CHANGES:
 
+1.1.0:
+
+- Added options to show the level of the highest rarity pet in world, battle and minimap tooltips.
+- Added option to add rarity and level information to the release pet confirmation dialog.
+- Fixed issue sometimes causing lua error when showing battle tooltips.
+
 1.0.2:
 
 - Actually, really fixed issue causing framerate loss when mousing over wild pets. (Really!)

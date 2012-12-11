@@ -428,6 +428,17 @@ local growCheckIDs = {
 	66161, -- Turnip
 };
 
+local extraGrowCheckButtons = {};
+local function getGrowCheckButton(index)
+	if not extraGrowCheckButtons[index] then
+		extraGrowCheckButtons[index] = CreateFrame("Button", ("FRMGC%02d"):format(index), nil, "SecureActionButtonTemplate");
+		extraGrowCheckButtons[index]:SetAttribute("type", "macro");
+		extraGrowCheckButtons[index]:Hide();
+	end
+	
+	return extraGrowCheckButtons[index];
+end
+local maxMacroLength = 1023;
 local function growCheckButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
 	GameTooltip:ClearLines();
@@ -436,14 +447,33 @@ local function growCheckButton_OnEnter(self)
 	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
 	GameTooltip:Show();
 	if not InCombatLockdown() then
-		local macrotext = "";
+		local macroLines = {};
 		for i = 1, #growCheckIDs do
 			local name = nameForNPC(growCheckIDs[i]);
 			if name then
-				macrotext = macrotext.."/tar "..name.."\n";
+				macroLines[#macroLines + 1] = "/tar "..name.."\n";
 			end
 		end
-		self:SetAttribute("macrotext", macrotext);
+		
+		local macroText = "";
+		local currentButton = self;
+		local nextButtonIndex = 1;
+		local clickNextLine = "/click FRMGC01";
+		
+		for i = 1, #macroLines do
+			if (macroText:len() + macroLines[i]:len() + clickNextLine:len()) <= maxMacroLength then
+				macroText = macroText..macroLines[i];
+			else
+				macroText = macroText..clickNextLine;
+				currentButton:SetAttribute("macrotext", macroText);
+				macroText = macroLines[i];
+				currentButton = getGrowCheckButton(nextButtonIndex);
+				nextButtonIndex = nextButtonIndex + 1;
+				clickNextLine = ("/click FRMGC%02d"):format(nextButtonIndex);
+			end
+		end
+		
+		currentButton:SetAttribute("macrotext", macroText);
 	end
 end
 
@@ -475,6 +505,27 @@ zoneFrame:RegisterEvent("ZONE_CHANGED");
 zoneFrame:SetScript("OnEvent", subZoneChanged);
 
 subZoneChanged();
+
+-- hide in combat
+
+local wasShown = farmWindow:IsShown();
+local function combatFrame_Event(self, event)
+	if config.hideInCombat then
+		if event == "PLAYER_REGEN_DISABLED" then
+			wasShown = farmWindow:IsShown();
+			farmWindow:Hide();
+		else
+			if wasShown then
+				farmWindow:Show();
+			end
+		end
+	end
+end
+
+local combatFrame = CreateFrame("Frame");
+combatFrame:SetScript("OnEvent", combatFrame_Event);
+combatFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
+combatFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
 
 -- plugin function to show frame so slash command can access it
 

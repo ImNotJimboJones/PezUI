@@ -9,20 +9,26 @@ local config = FRM.config;
 --[[ Default Config Values ]]--
 
 config.showAutomatically = true;
+config.hideInCombat = true;
 
 --[[ Saved Variable Handlers ]]--
 
 function FRM:loadSavedVars(global, realm, character)
+	if (type(global) == "table") then
+		config.hideInCombat = global.hideInCombat;
+	end
 	if (type(character) == "table") then
 		config.showAutomatically = character.showAutomatically;
 	end
 end
 
 function FRM:storeSavedVars()
+	local global = {};
+	global.hideInCombat = config.hideInCombat;
 	local character = {};
 	character.showAutomatically = config.showAutomatically;
 	
-	return nil, nil, character;
+	return global, nil, character;
 end
 
 --[[ Register With Framework ]]--

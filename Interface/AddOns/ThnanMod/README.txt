@@ -4,6 +4,13 @@ A framework for various features. See each plugin's readme for information and v
 
 VERSION CHANGES:
 
+3.1.0:
+
+- Added features to Battle Pets plugin.
+- Bug fixes in Battle Pets plugin.
+- Added features to Farm plugin.
+- Bug fixes in Farm plugin.
+
 3.0.2:
 
 - Fixed the same bug in Battle Pets plugin. It's actually fixed this time!

@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.3
+Version 2.0.4
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -403,7 +403,7 @@ do
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.0.3,', L["RELEASE_DATE"], '2012-11-28T01:06:12Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.0.4,', L["RELEASE_DATE"], '2012-12-09T23:48:25Z') end,
                 order = -5,
             },
             core = {
@@ -413,7 +413,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.0.3 -- ' .. L["RELEASE_DATE"] .. ' 2012-11-28T01:06:12Z',
+                        name = L["VERSION"] .. ' 2.0.4 -- ' .. L["RELEASE_DATE"] .. ' 2012-12-09T23:48:25Z',
                         order = 1,
                     },
                     Pve = {

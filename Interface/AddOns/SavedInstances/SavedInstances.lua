@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 203 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 207 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -1016,6 +1016,10 @@ local function ShowQuestTooltip(cell, arg, ...)
 	indicatortip:Clear()
 	indicatortip:SetHeaderFont(tooltip:GetHeaderFont())
 	indicatortip:AddHeader(ClassColorise(vars.db.Toons[toon].Class, toon), qstr)
+	if isDaily then
+	  indicatortip:AddLine(YELLOWFONT .. L["Time Left"] .. ":" .. FONTEND,
+	      SecondsToTime(addon:GetNextDailyResetTime() - time()))
+	end
         local ql = {}
         for id,qi in pairs(vars.db.Toons[toon].Quests) do
           if (not isDaily) == (not qi.isDaily) then
@@ -1630,7 +1634,8 @@ function core:Refresh()
 
         local quests = GetQuestsCompleted()
         for _,einfo in pairs(addon.WorldBosses) do
-           if quests and quests[einfo.quest] and weeklyreset then
+           if weeklyreset and (IsQuestFlaggedCompleted(einfo.quest) or 
+	      (quests and quests[einfo.quest])) then
              local truename = einfo.name
              local instance = vars.db.Instances[truename] 
              instance[thisToon] = instance[thisToon] or temp[truename] or { }

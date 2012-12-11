@@ -1,9 +1,23 @@
 ------------------------------------------------------------------------
-r205 | oscarucb | 2012-11-28 00:20:35 +0000 (Wed, 28 Nov 2012) | 1 line
+r208 | oscarucb | 2012-12-09 21:47:31 +0000 (Sun, 09 Dec 2012) | 1 line
 Changed paths:
-   A /tags/5.0.1 (from /trunk:204)
+   A /tags/5.0.2 (from /trunk:207)
 
-Tagging as 5.0.1
+Tagging as 5.0.2
+------------------------------------------------------------------------
+r207 | oscarucb | 2012-12-09 21:46:38 +0000 (Sun, 09 Dec 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+make world boss kill detection more responsive
+
+------------------------------------------------------------------------
+r206 | oscarucb | 2012-12-03 13:12:51 +0000 (Mon, 03 Dec 2012) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add a timer to the daily tooltip
+
 ------------------------------------------------------------------------
 r204 | oscarucb | 2012-11-28 00:09:49 +0000 (Wed, 28 Nov 2012) | 1 line
 Changed paths:
