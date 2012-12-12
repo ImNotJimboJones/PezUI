@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 569 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 579 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -26,7 +26,7 @@ local playername = UnitName("player")
 local playerclass = select(2,UnitClass("player"))
 local xperltankrequest = false
 local xperltankrequestt = 0
-local nextfeastannounce = 0
+local nextfeastannounce = {}
 local nextcauldronannounce = 0
 local nexttableannounce = 0
 local nextsoulannounce = 0
@@ -165,32 +165,32 @@ local taunts = {
 	20736, -- Distracting Shot
 }
 
-local feastsz = {
+local feastdata = {
 	-- cata
-	[57426] = 50, -- Fish Feast
-	[87643] = 50, -- Broiled Dragon Feast
-	[87915] = 50, -- Goblin Barbecue Feast
-	[87644] = 50, -- Seafood Magnifique Feast
+	[57426] = { limit=50, }, -- Fish Feast
+	[87643] = { limit=50, }, -- Broiled Dragon Feast
+	[87915] = { limit=50, }, -- Goblin Barbecue Feast
+	[87644] = { limit=50, }, -- Seafood Magnifique Feast
 
 	-- mop
-	[126503] = 10,   -- Banquet of the Brew
-	[126492] = 10,   -- Banquet of the Grill
-	[126501] = 10,   -- Banquet of the Oven
-	[126497] = 10,   -- Banquet of the Pot
-	[126499] = 10,   -- Banquet of the Steamer
-	[126495] = 10,   -- Banquet of the Wok
-	[126504] = 25,   -- Great Banquet of the Brew
-	[126494] = 25,   -- Great Banquet of the Grill
-	[126502] = 25,   -- Great Banquet of the Oven
-	[126498] = 25,   -- Great Banquet of the Pot
-	[126500] = 25,   -- Great Banquet of the Steamer
-	[126496] = 25,   -- Great Banquet of the Wok
-	[105193] = 25,   -- Great Pandaren Banquet
-	[104958] = 10,   -- Pandaren Banquet
+	[126503] = { limit=10, },   -- Banquet of the Brew
+	[126504] = { limit=25, },   -- Great Banquet of the Brew
+	[126492] = { limit=10, bonus="STRENGTH" },  -- Banquet of the Grill
+	[126494] = { limit=25, bonus="STRENGTH" },  -- Great Banquet of the Grill
+	[126501] = { limit=10, bonus="STAMINA" },   -- Banquet of the Oven
+	[126502] = { limit=25, bonus="STAMINA" },   -- Great Banquet of the Oven
+	[126497] = { limit=10, bonus="INTELLECT" }, -- Banquet of the Pot
+	[126498] = { limit=25, bonus="INTELLECT" }, -- Great Banquet of the Pot
+	[126499] = { limit=10, bonus="SPIRIT" },    -- Banquet of the Steamer
+	[126500] = { limit=25, bonus="SPIRIT" },    -- Great Banquet of the Steamer
+	[126495] = { limit=10, bonus="AGILITY" },   -- Banquet of the Wok
+	[126496] = { limit=25, bonus="AGILITY" },   -- Great Banquet of the Wok
+	[104958] = { limit=10, },   -- Pandaren Banquet
+	[105193] = { limit=25, },   -- Great Pandaren Banquet
 }
-local feasts = {}
-for id,_ in pairs(feastsz) do
-	feasts[id] = BS[id]
+for id,info in pairs(feastdata) do
+	info.name = BS[id]
+	info.id = id
 end
 
 local classes = CLASS_SORT_ORDER
@@ -215,6 +215,7 @@ raid.reset = function()
 	raid.LastDeath = raid.LastDeath or {}; wipe(raid.LastDeath)
 	raid.israid = false
 	raid.isparty = false
+	raid.islfg = false
 	raid.isbattle = false
 	raid.readid = 0
 	raid.size = 1
@@ -473,7 +474,7 @@ function RaidBuffStatus:OnInitialize()
 		AutoShowDashRaid = true,
 		AutoShowDashBattle = false,
 		MiniMapAngle = random(0, 359),
-		dashcols = 5,
+		dashcols = 6,
 		dashscale = 1.0,
 		optionsscale = 1.0,
 		ShortenNames = false,
@@ -1339,6 +1340,9 @@ function RaidBuffStatus:ReadRaid()
 			RaidBuffStatus:ReadUnit("raid" .. i, i)
 		end
 	end
+	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+	  raid.islfg = true
+	end
 	RaidBuffStatus:DeleteOldUnits()
 	if raid.israid then
 		local minguildies = 0.75 * groupnum
@@ -1551,46 +1555,44 @@ function RaidBuffStatus:DeleteOldUnits()
 	end
 end
 
-
+local linelimit = 150
 function RaidBuffStatus:Say(msg, player, prepend, channel)
 	if not msg then
 		msg = "nil"
 	end
-	local pre = ""
-	if prepend or RaidBuffStatus.db.profile.PrependRBS then
-		pre = "RBS::"
-	end
-	local str = pre
 	local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") or raid.pug
-	for _,s in pairs({strsplit(" ", msg)}) do
-		if #str + #s >= 150 then
-			if player then
-				SendChatMessage(str, "WHISPER", nil, player)
-			else
-				if channel then
-					SendChatMessage(str, channel)
-				else
-					if RaidBuffStatus.db.profile.ReportChat and raid.isparty and not raid.isbattle then SendChatMessage(str, "party") end
-					if RaidBuffStatus.db.profile.ReportChat and raid.israid and canspeak and not raid.isbattle then SendChatMessage(str, "raid") end
-					if RaidBuffStatus.db.profile.ReportSelf then RaidBuffStatus:Print(str) end
-					if RaidBuffStatus.db.profile.ReportOfficer then SendChatMessage(str, "officer") end
-				end
-			end
-			str = pre
-		end
-		str = str .. " " .. s
-	end
-	if player then
+	while #msg > 0 do
+	  local str = msg
+	  if #str > linelimit then
+            local bpt = linelimit
+            for i = linelimit, linelimit-30, -1 do -- look for break characters near the end
+              if string.match(string.sub(str,i), "^[%p%s]") then
+                bpt = i
+                break
+              end
+            end
+            msg = str:sub(bpt+1)
+            str = str:sub(1,bpt)
+          else
+            msg = ""
+	  end
+	  if prepend or RaidBuffStatus.db.profile.PrependRBS then
+		str = "RBS::"..str
+	  end
+	  if player then
 		SendChatMessage(str, "WHISPER", nil, player)
-	else
-		if channel then
-			SendChatMessage(str, channel)
-		else
-			if RaidBuffStatus.db.profile.ReportChat and raid.isparty and not raid.isbattle then SendChatMessage(str, "party") end
-			if RaidBuffStatus.db.profile.ReportChat and raid.israid and canspeak and not raid.isbattle then SendChatMessage(str, "raid") end
-			if RaidBuffStatus.db.profile.ReportSelf then RaidBuffStatus:Print(str) end
-			if RaidBuffStatus.db.profile.ReportOfficer then SendChatMessage(str, "officer") end
-		end
+	  elseif channel then
+		SendChatMessage(str, channel)
+   	  else
+	        if RaidBuffStatus.db.profile.ReportChat and not raid.isbattle then
+		    if raid.islfg then SendChatMessage(str, "INSTANCE_CHAT")
+		    elseif raid.isparty then SendChatMessage(str, "PARTY")
+		    elseif raid.israid and canspeak then SendChatMessage(str, "RAID") 
+		    end
+	        end
+		if RaidBuffStatus.db.profile.ReportSelf then RaidBuffStatus:Print(str) end
+		if RaidBuffStatus.db.profile.ReportOfficer then SendChatMessage(str, "officer") end
+	  end
 	end
 end
 
@@ -3187,7 +3189,7 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 				RaidBuffStatus.rezerrezee[srcname] = nil
 			end
 			if subevent == "SPELL_CAST_START" then
-				if feasts[spellID] then
+				if feastdata[spellID] then
 					RaidBuffStatus:Announces("Feast", srcname, nil, spellID)
 				elseif spellID == 92649 or spellID == 92712 then -- (Big) Cauldron of Battle
 					RaidBuffStatus:Announces("Cauldron", srcname, nil, spellID)
@@ -3447,214 +3449,83 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 	end
 end
 
+local function EventReport(msg, dorw, doraid, doparty, doself)
+  if doself then
+    local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
+    UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
+    RaidBuffStatus:Print(fancyicon)
+  end
+  if raid.isbattle then return end
+  local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
+  if dorw and raid.israid then
+    if not canspeak then
+       RaidBuffStatus:OfficerWarning()
+    else
+       SendChatMessage(msg, "RAID_WARNING")
+    end
+  end 
+  if raid.islfg and (doraid or doparty) then
+    SendChatMessage(msg, "INSTANCE_CHAT")
+  elseif raid.israid and doraid then
+    SendChatMessage(msg, "RAID")
+  elseif raid.isparty and doparty then
+    SendChatMessage(msg, "PARTY")
+  end
+end
+
 function RaidBuffStatus:TauntSay(msg, typeoftaunt)
-        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
+	local settings = RaidBuffStatus.db.profile
 	if typeoftaunt == "taunt" then
-		if RaidBuffStatus.db.profile.tauntself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.tauntsound then
+		if settings.tauntsound then
 			PlaySoundFile("Sound\\interface\\PickUp\\PickUpMetalSmall.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.tauntrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.tauntraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.tauntparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.tauntrw, settings.tauntraid, settings.tauntparty, settings.tauntself)
 	elseif typeoftaunt == "failedtauntimmune" then
-		if RaidBuffStatus.db.profile.failselfimmune then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.failsoundimmune then
+		if settings.failsoundimmune then
 			PlaySoundFile("Sound\\Spells\\SimonGame_Visual_GameFailedLarge.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.failrwimmune then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.failraidimmune and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.failpartyimmune and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.failrwimmune, settings.failraidimmune, settings.failpartyimmune, settings.failselfimmune)
 	elseif typeoftaunt == "failedtauntresist" then
-		if RaidBuffStatus.db.profile.failselfresist then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.failsoundresist then
+		if settings.failsoundresist then
 			PlaySoundFile("Sound\\Spells\\SimonGame_Visual_GameFailedSmall.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.failrwresist then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.failraidresist and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.failpartyresist and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.failrwresist, settings.failraidresist, settings.failpartyresist, settings.failselfresist)
 	elseif typeoftaunt == "ninjataunt" then
-		if RaidBuffStatus.db.profile.ninjaself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.ninjasound then
+		if settings.ninjasound then
 			PlaySoundFile("Sound\\Doodad\\G_NecropolisWound.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.ninjarw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.ninjaraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.ninjaparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.ninjarw, settings.ninjaraid, settings.ninjaparty, settings.ninjaself)
 	elseif typeoftaunt == "nontanktaunt" then
-		if RaidBuffStatus.db.profile.nontanktauntself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.nontanktauntsound then
+		if settings.nontanktauntsound then
 			PlaySoundFile("Sound\\Creature\\Voljin\\VoljinAggro01.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.nontanktauntrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.nontanktauntraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.nontanktauntparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.nontanktauntrw, settings.nontanktauntraid, settings.nontanktauntparty, settings.nontanktauntself)
 	elseif typeoftaunt == "otherfail" then
-		if RaidBuffStatus.db.profile.otherfailself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.otherfailsound then
+		if settings.otherfailsound then
 			PlaySoundFile("Sound\\Doodad\\ZeppelinHeliumA.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.otherfailtauntrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.otherfailtauntraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.otherfailtauntparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.otherfailrw, settings.otherfailraid, settings.otherfailparty, settings.otherfailself)
 	elseif typeoftaunt == "tauntme" then
-		if RaidBuffStatus.db.profile.tauntmeself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.tauntmesound then
+		if settings.tauntmesound then
 			PlaySoundFile("Sound\\interface\\MagicClick.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.tauntmerw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.tauntmeraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.tauntmeparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.tauntmerw, settings.tauntmeraid, settings.tauntmeparty, settings.tauntmeself)
 	end
 end
 
 
 function RaidBuffStatus:CCBreakSay(msg, typeoftaunt)
-        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
+	local settings = RaidBuffStatus.db.profile
 	if typeoftaunt == "ccwarntank" then
-		if RaidBuffStatus.db.profile.ccwarntankself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.ccwarntanksound then
+		if settings.ccwarntanksound then
 			PlaySoundFile("Sound\\Creature\\Ram\\RamPreAggro.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.ccwarntankrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.ccwarntankraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.ccwarntankparty and not raid.isbattle then
---			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
---			SendChatMessage(fancyicon, "party")
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.ccwarntankrw, settings.ccwarntankraid, settings.ccwarntankparty, settings.ccwarntankself)
 	elseif typeoftaunt == "ccwarnnontank" then
-		if RaidBuffStatus.db.profile.ccwarnnontankself then
-			local fancyicon = RaidBuffStatus:MakeFancyIcon(msg)
-			UIErrorsFrame:AddMessage(fancyicon, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(fancyicon)
-		end
-		if RaidBuffStatus.db.profile.ccwarnnontanksound then
+		if settings.ccwarnnontanksound then
 			PlaySoundFile("Sound\\Creature\\Sheep\\SheepDeath.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.ccwarnnontankrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.ccwarnnontankraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.ccwarnnontankparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.ccwarnnontankrw, settings.ccwarnnontankraid, settings.ccwarnnontankparty, settings.ccwarnnontankself)
 	end
 end
 
@@ -3975,10 +3846,18 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
         local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
 	if RaidBuffStatus.db.profile.feasts then
 		if message == "Feast" then
-			if GetTime() > nextfeastannounce and RaidBuffStatus:GetUnitFromName(who) then
-				local fname = (spellID and feasts[spellID]) or "Feast"
+			local sid = spellID or 0
+			if GetTime() > (nextfeastannounce[sid] or 0) and RaidBuffStatus:GetUnitFromName(who) then
+			        local finfo = feastdata[sid]
+				local fname = (spellID and GetSpellLink(spellID)) or (finfo and finfo.name) or "Feast"
 				msg = who .. " " .. (L["prepares a %s!"]):format(fname)
-				nextfeastannounce = GetTime() + 15
+				if finfo and finfo.bonus then
+				  local btext = _G["ITEM_MOD_"..finfo.bonus.."_SHORT"]
+				  if btext then
+				    msg = msg .. " ("..L["Bonus"].." "..btext..")" 
+				  end
+				end
+				nextfeastannounce[sid] = GetTime() + 15
 				RaidBuffStatus:ScheduleTimer(function()
 					RaidBuffStatus:Announces(message .. "Expiring", who, nil, spellID)
 				end, 130)
@@ -3987,8 +3866,9 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 			
 		elseif message == "FeastExpiring" and not incombat and not isdead then
 	        	local players = tonumber(RaidBuffStatus.report.AliveCount) or raid.size
-			local feeds = feastsz[spellID] or 40
-			local fname = (spellID and feasts[spellID]) or "Feast"
+			local finfo = spellID and feastdata[spellID]
+			local feeds = (finfo and finfo.limit) or 40
+			local fname = (spellID and GetSpellLink(spellID)) or (finfo and finfo.name) or "Feast"
 			if players > feeds then -- dont announce expiration if there's not enough for everyone
 			  return
 			end
@@ -4107,7 +3987,9 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 	if not canspeak and not RaidBuffStatus.db.profile.nonleadspeak then
 	   return 
 	end
-	if raid.isparty then
+	if raid.islfg then
+		SendChatMessage(msg, "INSTANCE_CHAT")
+	elseif raid.isparty then
 		SendChatMessage(msg, "PARTY")
 	elseif canspeak then
 		SendChatMessage(msg, "RAID_WARNING")
@@ -4131,10 +4013,14 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 		RaidBuffStatus:Debug("Bot warning detected.")
 		nextrepairannounce = GetTime() + 15
 	else
-		for _,name in pairs(feasts) do
-		  if message:find((L["prepares a %s!"]):format(name)) then
-		     nextfeastannounce = GetTime() + 15
-		     break
+	        local pat = L["prepares a %s!"]:gsub("%%s","(.+)")
+		local m = message:match(pat)
+		if m then
+		  for id,info in pairs(feastdata) do
+		    if m:find(info.name) then
+		      nextfeastannounce[id] = GetTime() + 15
+		      break
+		    end
 		  end
 		end
 	end
@@ -4282,91 +4168,27 @@ end
 
 
 function RaidBuffStatus:DeathSay(msg, typeofdeath)
-        local canspeak = UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")
+	local settings = RaidBuffStatus.db.profile
 	if typeofdeath == "tank" then
-		if RaidBuffStatus.db.profile.tankdeathself then
-			UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(msg)
-		end
-		if RaidBuffStatus.db.profile.tankdeathsound then
+		if settings.tankdeathsound then
 			PlaySoundFile("Sound\\interface\\igQuestFailed.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.tankdeathrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.tankdeathraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.tankdeathparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.tankdeathrw, settings.tankdeathraid, settings.tankdeathparty, settings.tankdeathself)
 	elseif typeofdeath == "healer" then
-		if RaidBuffStatus.db.profile.healerdeathself then
-			UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(msg)
-		end
-		if RaidBuffStatus.db.profile.healerdeathsound then
+		if settings.healerdeathsound then
 			PlaySoundFile("Sound\\Event Sounds\\Wisp\\WispPissed1.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.healerdeathrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.healerdeathraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.healerdeathparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.healerdeathrw, settings.healerdeathraid, settings.healerdeathparty, settings.healerdeathself)
 	elseif typeofdeath == "meleedps" then
-		if RaidBuffStatus.db.profile.meleedpsdeathself then
-			UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(msg)
-		end
-		if RaidBuffStatus.db.profile.meleedpsdeathsound then
+		if settings.meleedpsdeathsound then
 			PlaySoundFile("Sound\\interface\\iCreateCharacterA.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.meleedpsdeathrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.meleedpsdeathraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.meleedpsdeathparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.meleedpsdeathrw, settings.meleedpsdeathraid, settings.meleedpsdeathparty, settings.meleedpsdeathself)
 	elseif typeofdeath == "rangeddps" then
-		if RaidBuffStatus.db.profile.rangeddpsdeathself then
-			UIErrorsFrame:AddMessage(msg, 0, 1.0, 1.0, 1.0, 1)
-			RaidBuffStatus:Print(msg)
-		end
-		if RaidBuffStatus.db.profile.rangeddpsdeathsound then
+		if settings.rangeddpsdeathsound then
 			PlaySoundFile("Sound\\interface\\iCreateCharacterA.wav", "Master")
 		end
-		if RaidBuffStatus.db.profile.rangeddpsdeathrw then
-			if not canspeak and raid.israid then
-				RaidBuffStatus:OfficerWarning()
-			else
-				SendChatMessage(msg, "RAID_WARNING")
-			end
-		end
-		if RaidBuffStatus.db.profile.rangeddpsdeathraid and not raid.isbattle then
-			SendChatMessage(msg, "raid")
-		end
-		if RaidBuffStatus.db.profile.rangeddpsdeathparty and not raid.isbattle then
-			SendChatMessage(msg, "party")
-		end
+		EventReport(msg, settings.rangeddpsdeathrw, settings.rangeddpsdeathraid, settings.rangeddpsdeathparty, settings.rangeddpsdeathself)
 	end
 end
 

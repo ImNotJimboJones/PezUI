@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 573 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 580 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -450,8 +450,7 @@ local function generic_whispertobuff(reportl, prefix, buffinfo, buffers, buffnam
     for name,unit in pairs(raid.classes[info[1]]) do  -- foreach unit of that class
         if RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead 
 	   and ((info[4] == nil) or (info[4] == unit.spec)) then
-	   buffname = buffname or BS[info[2]]
-           RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, name)
+           RaidBuffStatus:Say(prefix .. "<" .. (buffname or BS[info[2]]) .. ">: " .. targets, name)
            if RaidBuffStatus.db.profile.whisperonlyone then
               return
            else
@@ -1031,8 +1030,8 @@ local BF = {
 				if raid.classes.SHAMAN[name].spec == 3 then
 					table.insert(report.shamanwithearthshield, name)
 				end
-			elseif unit.istank then
-				if class == "PALADIN" or class == "DRUID" or class == "WARRIOR" or class == "DEATHKNIGHT" then  -- only melee tanks need earthshield
+			elseif unit.istank or
+			       GetPartyAssignment("MAINTANK",unit.unitid) then -- allow earthshield on non-traditional tanks
 					report.checking.earthshield = true
 					if unit.hasbuff[BS[974]] then  -- Earth Shield
 						table.insert(report.tanksgotearthshield, name)
@@ -1040,7 +1039,6 @@ local BF = {
 					else
 						table.insert(report.tanksneedingearthshield, name)
 					end
-				end
 			end
 		end,
 		post = function(self, raid, report)
