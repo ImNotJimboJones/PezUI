@@ -300,3 +300,4 @@ PitBull4_LoseControl: enabled
 ThnanMod: enabled
 ThnanMod_Farm: disabled
 ThnanMod_BattlePets: enabled
+GetNitroboosted: enabled
