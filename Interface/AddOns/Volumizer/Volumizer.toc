@@ -1,13 +1,13 @@
-## Interface: 40300
+## Interface: 50100
 ## Title: Volumizer
 ## Notes: Volume control panel.
 ## Author: Torhal
-## Version: 4.3.3-2.0.2
+## Version: 5.1.0-2.1
 ## SavedVariables: VolumizerPresets
-## X-Date: 2012-03-09T19:16:19Z
+## X-Date: 2012-12-13T06:21:49Z
 ## X-Email: torhal-wow@googlegroups.com
 ## X-Category: Audio & Video
-## X-Curse-Packaged-Version: 4.3.3-2.0.2
+## X-Curse-Packaged-Version: 5.1.0-2.1
 ## X-Curse-Project-Name: Volumizer
 ## X-Curse-Project-ID: volumizer
 ## X-Curse-Repository-ID: wow/volumizer/mainline

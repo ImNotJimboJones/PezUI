@@ -1,0 +1,13 @@
+tag 5.1.0-2.1
+d979454cc63ec96d2f5b44b30b29258c795c5d33
+James D. Callahan III <jcallahan@curse.com>
+2012-12-13 00:22:46 -0600
+
+
+
+--------------------
+
+James D. Callahan III:
+	- Added command-line support for preset switching; /vol <preset name> - non-case-sensitive.
+	- Stylistic changes and minor cleanup.
+	- Bumped the ToC Interface version to 50100.

@@ -1,7 +1,7 @@
-## Interface: 050001
+## Interface: 050100
 ## Title: NeedToKnow
 ## Author: Kitjan, lieandswell
-## Version: 4.0.10
+## Version: 4.0.11
 ## Notes: Timer bars for buffs, debuffs, cooldowns, etc.
 ## X-Credits: Bilt, Fxfighter EU-Echsenkessel, metalchoir, sp00n, Vlakarados, wowui.cn
 ## X-Category: Buffs, Combat
