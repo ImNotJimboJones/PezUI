@@ -49,7 +49,7 @@ local GetMacroInfo = _G.GetMacroInfo
 
 local GetSpellCooldown = _G.GetSpellCooldown
 local GetSpellTexture = _G.GetSpellTexture
-local GetSpellCount = _G.GetSpellCount
+local GetSpellCharges = _G.GetSpellCharges
 local IsCurrentSpell = _G.IsCurrentSpell
 local IsAutoRepeatSpell = _G.IsAutoRepeatSpell
 local IsAttackSpell = _G.IsAttackSpell
@@ -754,6 +754,8 @@ function BUTTON:MACRO_UpdateData(...)
 	end
 end
 
+
+
 function BUTTON:MACRO_SetSpellIcon(spell)
 
 	local _, texture
@@ -1018,9 +1020,9 @@ end
 
 function BUTTON:MACRO_SetSpellState(spell)
 
-	if (GetSpellCount(spell) and  GetSpellCount(spell) > 1) then
+	if (GetSpellCharges(spell) and  GetSpellCharges(spell) > 1) then
 
-		self.count:SetText(GetSpellCount(spell))
+		self.count:SetText(GetSpellCharges(spell))
 	else
 		self.count:SetText("")
 	end
@@ -1349,7 +1351,18 @@ end
 
 function BUTTON:MACRO_UpdateUsableSpell(spell)
 
+
+spell = spell:lower()
+
+--- necessary for spells changing of subtypes between specs, ie, Rain of Fire() and Rain of Fire(Destruction)
+if (sIndex[spell]) then
+isUsable, notEnoughMana = IsUsableSpell(sIndex[spell].spellID)
+else
 	local isUsable, notEnoughMana = IsUsableSpell(spell)
+end
+
+
+
 
 	if (notEnoughMana) then
 
@@ -1753,8 +1766,9 @@ function BUTTON:MACRO_PlaceSpell(action1, action2, hasAction)
 	 	spell, subName = GetSpellBookItemName(action1, action2)
 	 	_, spellID = GetSpellBookItemInfo(action1, action2)
 
-	 	--print(GetSpellBookItemName(action1, action2))
-	 	--spell = GetSpellInfo(spellID)
+		--print(GetSpellBookItemName(action1, action2))
+		--print(GetSpellBookItemInfo(action1, action2))
+        --spell = GetSpellInfo(spellID)
 
 	 	self.data.macro_Text = self:AutoWriteMacro(spell, subName)
 	 	self.data.macro_Auto = spell..";"..subName
@@ -2301,9 +2315,10 @@ function BUTTON:MACRO_SetSpellTooltip(spell)
 			end
 
 		elseif (self.UberTooltips) then
-			GameTooltip:SetSpellBookItem(sIndex[spell].index, sIndex[spell].booktype)
+			GameTooltip:SetSpellByID(spell_id)
 		else
-			GameTooltip:SetText(sIndex[spell].spellName, 1, 1, 1)
+			local spell = GetSpellInfo(spell_id)
+			GameTooltip:SetText(spell, 1, 1, 1)
 		end
 
 		self.UpdateTooltip = macroButton_SetTooltip
@@ -3503,7 +3518,7 @@ local function controlOnEvent(self, event, ...)
 			["/equip"] = true,
 			["/eq"] = true,
 			["/equipslot"] = true,
-			["/use"] = true,
+			["/use"] = true,	
 			["/userandom"] = true,
 		}
 

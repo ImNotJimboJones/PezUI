@@ -611,6 +611,8 @@ local flyoutBarUpdater = CreateFrame("Frame", nil, UIParent)
 
 function BUTTON:Flyout_UpdateButtons(init)
 
+	local slot
+
 	if (self.flyout) then
 
 		local flyout, count, list, button, prefix, macroSet  = self.flyout, 0, ""
