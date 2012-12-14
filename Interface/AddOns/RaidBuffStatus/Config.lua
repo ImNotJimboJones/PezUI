@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 566 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 584 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -179,7 +179,17 @@ local options = {
 					set = function(info, v)
 						RaidBuffStatus.db.profile.foodlevel = v
 					end,
-				}
+				},
+				feasttt = {
+					type = 'toggle',
+					name = L["Augment Banquet Tooltips"],
+					desc = L["Augment Banquet Tooltips with stat bonus information"],
+					order = 3,
+					get = function(info) return RaidBuffStatus.db.profile.FeastTT end,
+					set = function(info, v)
+						RaidBuffStatus.db.profile.FeastTT = v
+					end,
+				},
 			},
 		},
 		reporting = {

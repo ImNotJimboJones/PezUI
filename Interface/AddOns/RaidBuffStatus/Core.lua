@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 579 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 585 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -191,6 +191,21 @@ local feastdata = {
 for id,info in pairs(feastdata) do
 	info.name = BS[id]
 	info.id = id
+	feastdata[info.name] = info
+end
+
+local function AddTTFeastBonus(self)
+  local name, link = self:GetItem()
+  --local id = name and link and link:match("\124Hitem:(\d+):")
+  --id = id and tonumber(id)
+  local info = name and feastdata[name]
+  if info and info.bonus and RaidBuffStatus.db.profile.FeastTT then
+    local btext = _G["ITEM_MOD_"..info.bonus.."_SHORT"]
+    if btext then
+      self:AddDoubleLine(name,L["Bonus"].." "..btext)   
+      self:Show()
+     end
+  end
 end
 
 local classes = CLASS_SORT_ORDER
@@ -358,6 +373,7 @@ function RaidBuffStatus:OnInitialize()
 		HowOften = 3,
 		foodlevel = 250,
 		OldFlasksElixirs = false,
+		FeastTT = true,
 		ShowGroupNumber = false,
 --		ShowMissingBlessing = true,
 		whisperonlyone = true,
@@ -2554,9 +2570,13 @@ function RaidBuffStatus:DelayedEnable()
 	RaidBuffStatus:RegisterEvent("PLAYER_REGEN_DISABLED", "EnteringCombat")
 	RaidBuffStatus:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "COMBAT_LOG_EVENT_UNFILTERED")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_ADDON", "CHAT_MSG_ADDON")
-	RaidBuffStatus:RegisterEvent("CHAT_MSG_RAID_WARNING", "CHAT_MSG_RAID_WARNING")
-	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY", "CHAT_MSG_RAID_WARNING")
-	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY_LEADER", "CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_RAID_WARNING",	 	"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY", 			"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_PARTY_LEADER", 		"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_RAID", 			"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_RAID_LEADER", 		"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_INSTANCE_CHAT", 		"CHAT_MSG_RAID_WARNING")
+	RaidBuffStatus:RegisterEvent("CHAT_MSG_INSTANCE_CHAT_LEADER", 	"CHAT_MSG_RAID_WARNING")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_WHISPER", "CHAT_MSG_WHISPER")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_BN_WHISPER", "CHAT_MSG_BN_WHISPER")
 	RaidBuffStatus:RegisterEvent("PARTY_INVITE_REQUEST", "PARTY_INVITE_REQUEST")
@@ -2575,13 +2595,14 @@ function RaidBuffStatus:DelayedEnable()
 		RaidBuffStatus:Debug('Registering CTRA event')
 		hooksecurefunc("CT_RAOptions_UpdateMTs", function() RaidBuffStatus:oRA_MainTankUpdate() end)
 	end
-	local res = StaticPopupDialogs["RESURRECT"].OnShow
-	StaticPopupDialogs["RESURRECT"].OnShow = function(...)
+	local res = 
+	hooksecurefunc(StaticPopupDialogs["RESURRECT"], "OnShow", function()
 		RaidBuffStatus:SendRezMessage("RESSED")
-		res(...)
-	end
+	end)
 	WorldMapFrame:Show()
 	WorldMapFrame:Hide() 
+        GameTooltip:HookScript("OnTooltipSetItem", AddTTFeastBonus)
+        ItemRefTooltip:HookScript("OnTooltipSetItem", AddTTFeastBonus)
 end
 
 function RaidBuffStatus:OnDisable()
@@ -4017,8 +4038,8 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
 		local m = message:match(pat)
 		if m then
 		  for id,info in pairs(feastdata) do
-		    if m:find(info.name) then
-		      nextfeastannounce[id] = GetTime() + 15
+		    if info.name and m:find(info.name) then
+		      nextfeastannounce[info.id] = GetTime() + 15
 		      break
 		    end
 		  end
@@ -4344,6 +4365,7 @@ function RaidBuffStatus:PopUpWizard()
 		timeout = 200,
 		whileDead = true,
 		hideOnEscape = true,
+		preferredIndex = 3, -- reduce chance of taint
 	}
 	StaticPopup_Show("RBS_WIZARD")
 end

@@ -24,6 +24,8 @@ vars.L = setmetatable({},{
 
 Ld["Announce even when you don't have assist or lead"] = "Announce even when you don't have assist or lead"
 Ld["Announce without lead"] = "Announce without lead"
+Ld["Augment Banquet Tooltips"] = "Augment Banquet Tooltips"
+Ld["Augment Banquet Tooltips with stat bonus information"] = "Augment Banquet Tooltips with stat bonus information"
 Ld["Bonus"] = "Bonus"
 Ld["Crit Buff"] = "Crit Buff"
 Ld["Mastery Buff"] = "Mastery Buff"
@@ -585,6 +587,8 @@ Ld.TankTauntWarnings = {
 if locale == "frFR" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 La["Crit Buff"] = "Buff Coup critique"
 La["Mastery Buff"] = "Buff Maîtrise"
@@ -1147,6 +1151,8 @@ La.TankTauntWarnings = {
 elseif locale == "deDE" then do end
 La["Announce even when you don't have assist or lead"] = "Ankündigungen ausgeben, sogar wenn man kein Leiter oder Assistent ist"
 La["Announce without lead"] = "Ohne Leitung ausgeben"
+La["Augment Banquet Tooltips"] = "Erweitere Bankett-Tooltipps"
+La["Augment Banquet Tooltips with stat bonus information"] = "Erweitere Bankett-Tooltipps mit Informationen zum Bonuswert"
 La["Bonus"] = "Bonus"
 La["Crit Buff"] = "Kritischer Treffer Buff"
 La["Mastery Buff"] = "Meisterschaft Buff"
@@ -1707,6 +1713,8 @@ La.TankTauntWarnings = {
 elseif locale == "koKR" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 La["Crit Buff"] = "치명타 버프"
 La["Mastery Buff"] = "특화도 버프"
@@ -2267,6 +2275,8 @@ La.TankTauntWarnings = {
 elseif locale == "esMX" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
@@ -2827,6 +2837,8 @@ La.TankTauntWarnings = {
 elseif locale == "ruRU" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 La["Crit Buff"] = "Бафф на шанс крита"
 La["Mastery Buff"] = "Бафф на искусность"
@@ -3387,6 +3399,8 @@ La.TankTauntWarnings = {
 elseif locale == "zhCN" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
@@ -3947,6 +3961,8 @@ La.TankTauntWarnings = {
 elseif locale == "esES" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
@@ -4508,6 +4524,8 @@ La.TankTauntWarnings = {
 elseif locale == "zhTW" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
@@ -5068,6 +5086,8 @@ La.TankTauntWarnings = {
 elseif locale == "ptBR" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 La["Crit Buff"] = "Bônus de crítico"
 La["Mastery Buff"] = "Bônus de maestria"
@@ -5628,6 +5648,8 @@ La.TankTauntWarnings = {
 elseif locale == "itIT" then do end
 -- La["Announce even when you don't have assist or lead"] = ""
 -- La["Announce without lead"] = ""
+-- La["Augment Banquet Tooltips"] = ""
+-- La["Augment Banquet Tooltips with stat bonus information"] = ""
 -- La["Bonus"] = ""
 -- La["Crit Buff"] = ""
 -- La["Mastery Buff"] = ""
