@@ -1,0 +1,45 @@
+------------------------------------------------------------------------
+r374 | tiker | 2012-12-14 01:58:39 +0000 (Fri, 14 Dec 2012) | 1 line
+Changed paths:
+   A /tags/5.1.4 (from /trunk:373)
+
+Tagging as 5.1.4
+------------------------------------------------------------------------
+r373 | tiker | 2012-12-14 01:57:01 +0000 (Fri, 14 Dec 2012) | 1 line
+Changed paths:
+   M /trunk/GoGoMount.lua
+   M /trunk/GoGoMount.toc
+
+- Fixed problem where shape forms, aspects, etc. wouldn't work after reloading the console if the spells were added as favorites
+------------------------------------------------------------------------
+r372 | tiker | 2012-12-03 16:04:48 +0000 (Mon, 03 Dec 2012) | 4 lines
+Changed paths:
+   M /trunk/GoGoMount.lua
+   M /trunk/GoGoMount.toc
+
+- Disabled version broadcasts in Battlegrounds for now (to fix error popping up)
+- Added support for [b]Grand Gryphon[/b]
+- Added support for [b]Grand Wyvern[/b]
+
+------------------------------------------------------------------------
+r371 | tiker | 2012-12-01 16:21:55 +0000 (Sat, 01 Dec 2012) | 1 line
+Changed paths:
+   M /trunk/GoGoMount.toc
+   M /trunk/GoGoMountData.lua
+
+- fixed missing bracket
+------------------------------------------------------------------------
+r370 | tiker | 2012-12-01 15:26:59 +0000 (Sat, 01 Dec 2012) | 7 lines
+Changed paths:
+   M /trunk/GoGoMount.lua
+   M /trunk/GoGoMount.toc
+   M /trunk/GoGoMountData.lua
+
+- Update TOC version
+- Added support for [b]Grand Armored Gryphon[/b]
+- Added support for [b]Grand Armored Wyvern[/b]
+- Added support for [b]Swift Windsteed[/b]
+- Added support for [b]Jade Pandaren Kite[/b]
+- Added support for [b]The Sky Claw[/b]
+
+------------------------------------------------------------------------
