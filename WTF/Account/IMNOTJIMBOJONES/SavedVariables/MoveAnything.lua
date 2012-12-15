@@ -2,15 +2,15 @@
 MADB = {
 	["characters"] = {
 	},
-	["tooltips"] = 1,
 	["frameListRows"] = 18,
+	["tooltips"] = 1,
 	["profiles"] = {
 		["default"] = {
 			["name"] = "default",
 			["frames"] = {
 				["CompactRaidGroup5"] = {
-					["name"] = "CompactRaidGroup5",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup5",
 				},
 				["BNToastFrame"] = {
 					["name"] = "BNToastFrame",
@@ -94,12 +94,12 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup4"] = {
-					["name"] = "CompactRaidGroup4",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup4",
 				},
 				["RaidUnitFramesMover"] = {
-					["hidden"] = true,
 					["name"] = "RaidUnitFramesMover",
+					["hidden"] = true,
 				},
 				["MainMenuBarVehicleLeaveButton"] = {
 					["name"] = "MainMenuBarVehicleLeaveButton",
@@ -112,8 +112,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup7"] = {
-					["name"] = "CompactRaidGroup7",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup7",
 				},
 				["VehicleSeatIndicator"] = {
 					["name"] = "VehicleSeatIndicator",
@@ -136,8 +136,8 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup3"] = {
-					["name"] = "CompactRaidGroup3",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup3",
 				},
 				["LootWonAlertFrame1"] = {
 					["name"] = "LootWonAlertFrame1",
@@ -170,17 +170,17 @@ MADB = {
 					},
 				},
 				["CompactRaidGroup8"] = {
-					["name"] = "CompactRaidGroup8",
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup8",
 				},
-				["FramerateLabel"] = {
-					["name"] = "FramerateLabel",
+				["PetBattleMover6"] = {
+					["name"] = "PetBattleMover6",
 					["pos"] = {
-						"BOTTOM", -- [1]
+						"CENTER", -- [1]
 						"UIParent", -- [2]
 						"BOTTOM", -- [3]
-						-13, -- [4]
-						225, -- [5]
+						0, -- [4]
+						350, -- [5]
 					},
 				},
 				["RaidUnitFramesManagerMover"] = {
@@ -203,19 +203,19 @@ MADB = {
 						-200, -- [5]
 					},
 				},
-				["BonusRollMoneyWonFrame"] = {
-					["name"] = "BonusRollMoneyWonFrame",
+				["Boss3TargetFrame"] = {
+					["name"] = "Boss3TargetFrame",
 					["pos"] = {
-						"TOP", -- [1]
+						"BOTTOMLEFT", -- [1]
 						"UIParent", -- [2]
-						"TOP", -- [3]
-						-570, -- [4]
-						-77, -- [5]
+						"BOTTOMLEFT", -- [3]
+						2320, -- [4]
+						843.999755859375, -- [5]
 					},
 				},
-				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
+				["CompactRaidGroup1"] = {
 					["hidden"] = true,
+					["name"] = "CompactRaidGroup1",
 				},
 				["Boss4TargetFrame"] = {
 					["name"] = "Boss4TargetFrame",
@@ -237,6 +237,14 @@ MADB = {
 						499.9998779296875, -- [5]
 					},
 				},
+				["CompactRaidGroup6"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup6",
+				},
+				["CompactRaidGroup2"] = {
+					["hidden"] = true,
+					["name"] = "CompactRaidGroup2",
+				},
 				["GroupLootFrame1"] = {
 					["name"] = "GroupLootFrame1",
 					["pos"] = {
@@ -246,14 +254,6 @@ MADB = {
 						250, -- [4]
 						500, -- [5]
 					},
-				},
-				["CompactRaidGroup2"] = {
-					["name"] = "CompactRaidGroup2",
-					["hidden"] = true,
-				},
-				["CompactRaidGroup6"] = {
-					["name"] = "CompactRaidGroup6",
-					["hidden"] = true,
 				},
 				["MACompactRaidFrameManagerToggleButton"] = {
 					["name"] = "MACompactRaidFrameManagerToggleButton",
@@ -265,18 +265,18 @@ MADB = {
 						-35, -- [5]
 					},
 				},
-				["CompactRaidGroup1"] = {
-					["name"] = "CompactRaidGroup1",
+				["PlayerDebuffsMover"] = {
 					["hidden"] = true,
+					["name"] = "PlayerDebuffsMover",
 				},
-				["Boss3TargetFrame"] = {
-					["name"] = "Boss3TargetFrame",
+				["BonusRollMoneyWonFrame"] = {
+					["name"] = "BonusRollMoneyWonFrame",
 					["pos"] = {
-						"BOTTOMLEFT", -- [1]
+						"TOP", -- [1]
 						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						2320, -- [4]
-						843.999755859375, -- [5]
+						"TOP", -- [3]
+						-570, -- [4]
+						-77, -- [5]
 					},
 				},
 				["AlertFrame"] = {
@@ -286,17 +286,17 @@ MADB = {
 						"UIParent", -- [2]
 						"TOP", -- [3]
 						3.0517578125e-005, -- [4]
-						-200, -- [5]
+						-230, -- [5]
 					},
 				},
-				["PetBattleMover6"] = {
-					["name"] = "PetBattleMover6",
+				["FramerateLabel"] = {
+					["name"] = "FramerateLabel",
 					["pos"] = {
-						"CENTER", -- [1]
+						"BOTTOM", -- [1]
 						"UIParent", -- [2]
 						"BOTTOM", -- [3]
-						0, -- [4]
-						350, -- [5]
+						-13, -- [4]
+						225, -- [5]
 					},
 				},
 			},
