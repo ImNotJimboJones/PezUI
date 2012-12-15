@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 585 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 587 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -188,11 +188,17 @@ local feastdata = {
 	[104958] = { limit=10, },   -- Pandaren Banquet
 	[105193] = { limit=25, },   -- Great Pandaren Banquet
 }
-for id,info in pairs(feastdata) do
+function RaidBuffStatus:UpdateFeastData()
+  for id,info in pairs(feastdata) do
+    if type(id) == "number" then
 	info.name = BS[id]
 	info.id = id
 	feastdata[info.name] = info
+    end
+  end
+  RaidBuffStatus.feastdata = feastdata
 end
+RaidBuffStatus:UpdateFeastData()
 
 local function AddTTFeastBonus(self)
   local name, link = self:GetItem()
@@ -2563,6 +2569,9 @@ function RaidBuffStatus:DelayedEnable()
 	RaidBuffStatus:ScheduleTimer(function()
 		RaidBuffStatus:IconFix()
 	end, 15) -- to handle icons not being downloaded from the server yet HORRIBLE CODING!!
+	RaidBuffStatus:ScheduleTimer(function()
+		RaidBuffStatus:UpdateFeastData()
+	end, 15) -- handle cache delay on feast spellnames
 	RaidBuffStatus:JoinedPartyRaidChanged()
 	RaidBuffStatus:UpdateMiniMapButton()
 	RaidBuffStatus:RegisterEvent("GROUP_ROSTER_UPDATE", "JoinedPartyRaidChanged")
@@ -2595,7 +2604,9 @@ function RaidBuffStatus:DelayedEnable()
 		RaidBuffStatus:Debug('Registering CTRA event')
 		hooksecurefunc("CT_RAOptions_UpdateMTs", function() RaidBuffStatus:oRA_MainTankUpdate() end)
 	end
-	local res = 
+	for _,prefix in pairs({"RBS", "oRA3", "CTRA"}) do
+	  RegisterAddonMessagePrefix(prefix)
+	end
 	hooksecurefunc(StaticPopupDialogs["RESURRECT"], "OnShow", function()
 		RaidBuffStatus:SendRezMessage("RESSED")
 	end)
@@ -3573,7 +3584,7 @@ function RaidBuffStatus:TriggerXPerlTankUpdate()
 	xperltankrequestt = GetTime() + 5 -- wait for 5 seconds to allow message to be processed by other addons before reading tank list again
 end
 
-function RaidBuffStatus:CHAT_MSG_ADDON(CHAT_MSG_ADDON, prefix, message, distribution, sender)
+function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sender)
 	RaidBuffStatus:Debug(prefix .." message:" .. message .. " sender:" .. sender)
 	if prefix == "oRA3" and distribution == "RAID" and message and message:find("SDurability") then
 		local _, min, broken = select(3, message:find("SDurability%^N(%d+)%^N(%d+)%^N(%d+)"))
@@ -3682,7 +3693,9 @@ function RaidBuffStatus:SendVersion()
 		return
 	end
 	local version = RaidBuffStatus.revision .. " " .. RaidBuffStatus.version
-	if raid.israid then
+	if raid.islfg then
+		SendAddonMessage("RBS", "VER " .. version, "INSTANCE_CHAT")
+	elseif raid.israid then
 		SendAddonMessage("RBS", "VER " .. version, "RAID")
 	elseif raid.isparty then
 		SendAddonMessage("RBS", "VER " .. version, "PARTY")
@@ -4019,7 +4032,7 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 	end
 end
 
-function RaidBuffStatus:CHAT_MSG_RAID_WARNING(chan, message, who)
+function RaidBuffStatus:CHAT_MSG_RAID_WARNING(event, message, who)
 	if not message or not who then
 		return
 	end
