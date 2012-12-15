@@ -268,7 +268,7 @@ end
 local function GetAuraInstance(guid, aura_id)
 	if guid and aura_id then
 		local aura_instance_id = guid..aura_id
-		local spellid, expiration, stacks, caster, duration, texture, auratype
+		local spellid, spellname, expiration, stacks, caster, duration, texture, auratype, auratarget
 		spellid = Aura_Spellid[aura_instance_id]
 		spellname = Aura_Spellname[aura_instance_id]
 		expiration = Aura_Expiration[aura_instance_id]

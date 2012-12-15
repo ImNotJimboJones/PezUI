@@ -52,6 +52,7 @@ TidyPlatesHubDefaults = {
 	TextNameColorMode = 1,
 	TextPlateNameColorMode = 1,
 	ClassColorPartyMembers = false,
+	ColorEnableOffTank = false,
 	
 	-- Threat
 	ColorAttackingMe = {r = .8, g = 0, b = 0,},		-- Orange

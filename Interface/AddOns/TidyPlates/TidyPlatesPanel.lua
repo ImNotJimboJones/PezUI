@@ -123,10 +123,11 @@ local ThemeDropdownMenuItems = {}
 local ApplyPanelSettings
 
 local version = GetAddOnMetadata("TidyPlates", "version")
-local versionString = string.gsub(string.gsub(string.gsub(version, "%$", ""), "%(", ""), "%)", "")
+--local versionString = string.gsub(string.gsub(string.gsub(version, "%$", ""), "%(", ""), "%)", "")
+local versionString = "|cFF666666"..version
 --local versionString = string.gsub(version, "%$", "")
 local addonString = GetAddOnMetadata("TidyPlates", "title")
-local titleString = addonString.." "..versionString
+local titleString = addonString			-- .." |cFF444444"..versionString
 local firstShow = true
 
 
@@ -180,6 +181,28 @@ end
 
 local function ActivateInterfacePanel()
 
+
+	panel.Label:SetFont("Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf", 26)
+	panel.Label:SetPoint("TOPLEFT", panel, "TOPLEFT", 16+6, -16-4)
+	
+	panel.Version = panel:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge')
+	panel.Version:SetPoint("TOPRIGHT", panel, "TOPRIGHT", -16, -16-4)
+	panel.Version:SetHeight(15)
+	panel.Version:SetWidth(350)
+	panel.Version:SetJustifyH("RIGHT")
+	panel.Version:SetJustifyV("TOP")
+	panel.Version:SetText(versionString)
+	panel.Version:SetFont("Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf", 18)
+	
+-- Get Spec Info
+--[[
+local primarySpecIndex = GetSpecialization( false, false, 1 )
+local primarySpecName, primarySpecDescription, primarySpecIcon, primarySpecBackground = select(2, GetSpecializationInfo(primaryspecindex))
+
+--local secondarySpecIndex = GetSpecialization( false, false, 2 )
+--local secondarySpecName, secondarySpecDescription, secondarySpecIcon, secondarySpecBackground = select(2, GetSpecializationInfo(secondarySpecIndex))
+--]]
+
 --[[
 	local font = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
 
@@ -202,17 +225,18 @@ local function ActivateInterfacePanel()
 	----------------------
 	--  Dropdown
 	panel.PrimarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown", panel, ThemeDropdownMenuItems, TidyPlatesDefaultThemeName, nil, true)
-	panel.PrimarySpecTheme:SetPoint("TOPLEFT", 16, -108)
+	panel.PrimarySpecTheme:SetPoint("TOPLEFT", 16-8, -85)
 	
 	-- [[	Prim. Edit Button
 	panel.PrimaryEditButton = CreateFrame("Button", "TidyPlatesEditButton", panel)
-	panel.PrimaryEditButton:SetPoint("LEFT", panel.PrimarySpecTheme, "RIGHT", 29, 2)
+	panel.PrimaryEditButton:SetPoint("LEFT", panel.PrimarySpecTheme, "RIGHT", 30, 2)
 	panel.PrimaryEditButton.Texture = panel.PrimaryEditButton:CreateTexture(nil, "OVERLAY")
 	panel.PrimaryEditButton.Texture:SetAllPoints(panel.PrimaryEditButton)
 	panel.PrimaryEditButton.Texture:SetTexture( "Interface\\Addons\\TidyPlates\\media\\Wrench")
-	panel.PrimaryEditButton:SetHeight(16)
-	panel.PrimaryEditButton:SetWidth(16)
+	panel.PrimaryEditButton:SetHeight(20)
+	panel.PrimaryEditButton:SetWidth(20)
 	panel.PrimaryEditButton:Enable()
+	--panel.PrimaryEditButton.tooltipText = "Theme Settings"
 	panel.PrimaryEditButton:EnableMouse()
 	panel.PrimaryEditButton:SetScript("OnClick", function() ConfigureTheme("primary") end)
 	--]]
@@ -223,24 +247,25 @@ local function ActivateInterfacePanel()
 	panel.PrimaryLabel:SetPoint("BOTTOMLEFT", panel.PrimarySpecTheme,"TOPLEFT", 20, 5)
 	panel.PrimaryLabel:SetWidth(170)
 	panel.PrimaryLabel:SetJustifyH("LEFT")
-	panel.PrimaryLabel:SetText("Primary Theme:")
+	panel.PrimaryLabel:SetText("Primary Spec Theme:")
 
 	----------------------
 	-- Secondary Spec
 	----------------------
 	-- Dropdown
 	panel.SecondarySpecTheme = PanelHelpers:CreateDropdownFrame("TidyPlatesChooserDropdown2", panel, ThemeDropdownMenuItems, TidyPlatesDefaultThemeName, nil, true)
-	panel.SecondarySpecTheme:SetPoint("TOPLEFT",panel.PrimarySpecTheme, "TOPRIGHT", 45, 0)
+	panel.SecondarySpecTheme:SetPoint("TOPLEFT",panel.PrimarySpecTheme, "TOPRIGHT", 55, 0)
 
 	-- [[	Sec. Edit Button
 	panel.SecondaryEditButton = CreateFrame("Button", "TidyPlatesEditButton", panel)
-	panel.SecondaryEditButton:SetPoint("LEFT", panel.SecondarySpecTheme, "RIGHT", 29, 2)
+	panel.SecondaryEditButton:SetPoint("LEFT", panel.SecondarySpecTheme, "RIGHT", 30, 2)
 	panel.SecondaryEditButton.Texture = panel.SecondaryEditButton:CreateTexture(nil, "OVERLAY")
 	panel.SecondaryEditButton.Texture:SetAllPoints(panel.SecondaryEditButton)
 	panel.SecondaryEditButton.Texture:SetTexture( "Interface\\Addons\\TidyPlates\\media\\Wrench")
-	panel.SecondaryEditButton:SetHeight(16)
-	panel.SecondaryEditButton:SetWidth(16)
+	panel.SecondaryEditButton:SetHeight(20)
+	panel.SecondaryEditButton:SetWidth(20)
 	panel.SecondaryEditButton:Enable()
+	--panel.SecondaryEditButton.tooltipText = "Theme Settings"
 	panel.SecondaryEditButton:EnableMouse()
 	panel.SecondaryEditButton:SetScript("OnClick", function() ConfigureTheme("secondary") end)
 	--]]
@@ -250,19 +275,8 @@ local function ActivateInterfacePanel()
 	panel.SecondaryLabel:SetPoint("BOTTOMLEFT", panel.SecondarySpecTheme,"TOPLEFT", 20, 5)
 	panel.SecondaryLabel:SetWidth(170)
 	panel.SecondaryLabel:SetJustifyH("LEFT")
-	panel.SecondaryLabel:SetText("Secondary Theme:")
+	panel.SecondaryLabel:SetText("Second Spec Theme:")
 
-	---- Note 
-	panel.ThemeChooserDescription = panel:CreateFontString(nil, 'ARTWORK') --, 'GameFontLarge'
-	panel.ThemeChooserDescription:SetFont("Fonts\\FRIZQT__.TTF", 10, nil)
-	panel.ThemeChooserDescription:SetPoint("BOTTOMLEFT", panel.PrimarySpecTheme, "TOPLEFT", 20, 28)
-	panel.ThemeChooserDescription:SetWidth(340)
-	panel.ThemeChooserDescription:SetJustifyH("LEFT")
-	panel.ThemeChooserDescription:SetText(
-		"Please choose a theme for your Primary and Secondary Specializations. "
-		.."The appropriate theme will be automatically activated when you switch specs.")
-	panel.ThemeChooserDescription:SetTextColor(1,1,1,1)
-	
 	----------------------
 	-- Other Options
 	----------------------
@@ -281,7 +295,7 @@ local function ActivateInterfacePanel()
 	-- Friendly Visibility
 	panel.AutoShowFriendly = PanelHelpers:CreateDropdownFrame("TidyPlatesAutoShowFriendly", panel, AutomationDropdownItems, NO_AUTOMATION, nil, true)
 	--panel.AutoShowFriendly:SetPoint("TOPLEFT", panel.PrimarySpecTheme, "TOPLEFT", 0, -75)
-	panel.AutoShowFriendly:SetPoint("TOPLEFT",panel.AutoShowEnemy, "TOPRIGHT", 45, 0)
+	panel.AutoShowFriendly:SetPoint("TOPLEFT",panel.AutoShowEnemy, "TOPRIGHT", 55, 0)
 	--
 	panel.AutoShowFriendlyLabel = panel:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
 	panel.AutoShowFriendlyLabel:SetPoint("BOTTOMLEFT", panel.AutoShowFriendly,"TOPLEFT", 20, 5)
@@ -305,11 +319,11 @@ local function ActivateInterfacePanel()
 	local BlizzOptionsButton = CreateFrame("Button", "TidyPlatesOptions_BlizzOptionsButton", panel, "TidyPlatesPanelButtonTemplate")
 	--BlizzOptionsButton:SetPoint("TOPRIGHT", ResetButton, "TOPLEFT", -8, 0)
 	BlizzOptionsButton:SetPoint("TOPLEFT", panel.AutoShowEnemy, "TOPLEFT", 16, -55)
-	BlizzOptionsButton:SetWidth(300)
-	BlizzOptionsButton:SetText("Blizzard Nameplate Motion & Visibility")
+	BlizzOptionsButton:SetWidth(260)
+	BlizzOptionsButton:SetText("Nameplate Motion & Visibility")
 	
 	-- Cast Watcher
-	panel.EnableCastWatcher = PanelHelpers:CreateCheckButton("TidyPlatesOptions_EnableCastWatcher", panel, "Show Non-Target Casting Bars (When Possible)")
+	panel.EnableCastWatcher = PanelHelpers:CreateCheckButton("TidyPlatesOptions_EnableCastWatcher", panel, "Show Off-Target Cast Bars")
 	panel.EnableCastWatcher:SetPoint("TOPLEFT", BlizzOptionsButton, "TOPLEFT", 0, -35)
 	panel.EnableCastWatcher:SetScript("OnClick", function(self) SetSpellCastWatcher(self:GetChecked()) end)
 	
@@ -378,10 +392,12 @@ local function ActivateInterfacePanel()
 		
 	end)
 	
-	InterfaceOptions_AddCategory(panel);
+	
 end
 
+
 TidyPlatesInterfacePanel = panel
+InterfaceOptions_AddCategory(panel);
 
 local function RaiseBlizzardFrames(enable)
 	if enable then

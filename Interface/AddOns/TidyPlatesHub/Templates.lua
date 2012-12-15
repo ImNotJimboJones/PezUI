@@ -596,7 +596,6 @@ local function CreateInterfacePanel( objectName, panelTitle, parentTitle)
 	----------------
 	-- Return a pointer to the whole thingy
 	----------------
-	InterfaceOptions_AddCategory(panel)
 	return panel
 end
 

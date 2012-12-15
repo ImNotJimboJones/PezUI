@@ -13,7 +13,7 @@ local EnableTankWatch = TidyPlatesWidgets.EnableTankWatch
 local DisableTankWatch = TidyPlatesWidgets.DisableTankWatch
 local EnableAggroWatch = TidyPlatesWidgets.EnableAggroWatch
 local DisableAggroWatch = TidyPlatesWidgets.DisableAggroWatch
-local IsTankedByAnotherTank = TidyPlatesWidgets.IsTankedByAnotherTank
+
 local GetAggroCondition = TidyPlatesWidgets.GetThreatCondition
 local IsTotem = TidyPlatesUtility.IsTotem
 local IsAuraShown = TidyPlatesWidgets.IsAuraShown
@@ -27,6 +27,11 @@ local IsFriend = TidyPlatesUtility.IsFriend
 local IsGuildmate = TidyPlatesUtility.IsGuildmate
 
 -- InstanceStatus, CachedUnitDescription, CachedUnitGuild, CachedUnitClass, IsFriend, IsGuildmate
+
+local isTanked = TidyPlatesWidgets.IsTankedByAnotherTank
+local function IsTankedByAnotherTank(...)
+	if LocalVars.ColorEnableOffTank and isTanked(...) then return true end
+end
 
 local CreateThreatLineWidget = WidgetLib.CreateThreatLineWidget
 local CreateAuraWidget = WidgetLib.CreateAuraWidget
@@ -319,48 +324,6 @@ unit.threatValue
 	ColorAttackingOthers	Safe
 --]]
 
-local function ColorFunctionDamage(unit)
-	if unit.threatValue > 1 then return LocalVars.ColorAttackingMe				-- When player is unit's target		-- Warning
-	elseif unit.threatValue == 1 then return LocalVars.ColorAggroTransition											-- Transition	
-	else return LocalVars.ColorAttackingOthers end																	-- Safe
-end
-
-local function ColorFunctionTank(unit)
-	if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank	-- When unit is tanked by another
-	elseif unit.threatValue > 2 then return LocalVars.ColorAttackingMe				-- When player is solid target		-- Safe
-	elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition												-- Transition
-	else return LocalVars.ColorAttackingOthers end																		-- Warning
-end
-
-local function ColorFunctionTankSwapColors(unit)
-	if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank	-- When unit is tanked by another
-	elseif unit.threatValue > 2 then return LocalVars.ColorAttackingOthers				-- When player is solid target		-- Safe
-	elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition													-- Transition
-	else return LocalVars.ColorAttackingMe end																				-- Warning
-end
-
-local function ColorFunctionByThreatAutoDetect(unit)
-	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
-		if TidyPlatesWidgets.IsTankingAuraActive then 
-			return ColorFunctionTankSwapColors(unit)
-		else return ColorFunctionDamage(unit) end
-	end
-end
-
-local function ColorFunctionByThreat(unit)
-	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
-		if TidyPlatesWidgets.IsTankingAuraActive then 
-			return ColorFunctionTank(unit)
-		else return ColorFunctionDamage(unit) end
-	end
-end
-
-
--- By Raid Icon
-local function ColorFunctionByRaidIcon(unit)
-	return RaidIconColors[unit.raidIcon]
-end
-
 local function ColorFunctionByReaction(unit)
 	if unit.reaction == "FRIENDLY" and unit.type == "PLAYER" then
 		if IsGuildmate(unit.name) then return PaleBlue				
@@ -370,6 +333,59 @@ local function ColorFunctionByReaction(unit)
 	return ReactionColors[unit.reaction][unit.type]
 end
 
+local function ColorFunctionDamage(unit)
+	if unit.threatValue > 1 then return LocalVars.ColorAttackingMe				-- When player is unit's target		-- Warning
+	elseif unit.threatValue == 1 then return LocalVars.ColorAggroTransition											-- Transition	
+	else return LocalVars.ColorAttackingOthers end																	-- Safe
+end
+
+local function ColorFunctionTank(unit)
+	
+	if unit.threatValue > 2 then 
+		return LocalVars.ColorAttackingMe							-- When player is solid target, ie. Safe
+	else	
+		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank		-- When unit is tanked by another
+		elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition				-- Transition
+		else return LocalVars.ColorAttackingOthers end										-- Warning
+	end	
+end
+
+local function ColorFunctionTankSwapColors(unit)
+	
+	if unit.threatValue > 2 then 
+		return LocalVars.ColorAttackingOthers				-- When player is solid target		-- Safe
+	else
+		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank			-- When unit is tanked by another
+		elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition					-- Transition
+		else return LocalVars.ColorAttackingMe end												-- Warning
+	end
+end
+
+local function ColorFunctionByThreatAutoDetect(unit)
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
+		if TidyPlatesWidgets.IsTankingAuraActive then 
+			return ColorFunctionTankSwapColors(unit)
+		else return ColorFunctionDamage(unit) end
+	end
+	
+end
+
+local function ColorFunctionByThreat(unit)
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
+		if TidyPlatesWidgets.IsTankingAuraActive then 
+			return ColorFunctionTank(unit)
+		else return ColorFunctionDamage(unit) end
+	end
+	
+end
+
+
+-- By Raid Icon
+local function ColorFunctionByRaidIcon(unit)
+	return RaidIconColors[unit.raidIcon]
+end
+
+-- By Level Color
 local function ColorFunctionByLevelColor(unit)
 	tempColor.r, tempColor.g, tempColor.b = unit.levelcolorRed, unit.levelcolorGreen, unit.levelcolorBlue
 	return tempColor 
@@ -381,7 +397,7 @@ local ColorFunctions = {DummyFunction, ColorFunctionByClassEnemy, ColorFunctionB
 
 local function HealthColorDelegate(unit)	
 	local color, class
-		
+
 	-- Aggro Coloring
 	if unit.reaction == "FRIENDLY"  then
 		if LocalVars.ColorShowPartyAggro and LocalVars.ColorPartyAggroBar then
@@ -419,8 +435,8 @@ end
 -- "By Threat (Low) Tank"
 local function WarningBorderFunctionByThreatTank(unit)
 	if unit.InCombatLockdown and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
-		if unit.threatValue < 3 and not IsTankedByAnotherTank(unit) then 
-			return ColorFunctionTank(unit)
+		if unit.threatValue < 3 then 
+			if IsTankedByAnotherTank(unit) then return else	return ColorFunctionTank(unit) end
 		end
 	end
 end
@@ -428,8 +444,10 @@ end
 -- Warning Glow (Auto Detect)
 local function WarningBorderFunctionByThreatAutoDetect(unit) 
 	if unit.InCombatLockdown and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
-		if TidyPlatesWidgets.IsTankingAuraActive and (not IsTankedByAnotherTank(unit)) then 
-			if unit.threatValue == 2 then return LocalVars.ColorAggroTransition
+		
+		if TidyPlatesWidgets.IsTankingAuraActive then 
+			if IsTankedByAnotherTank(unit) then return
+			elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition
 			elseif unit.threatValue < 2 then return LocalVars.ColorAttackingMe	end
 		elseif unit.threatValue > 0 then
 			return ColorFunctionDamage(unit)
@@ -492,8 +510,6 @@ local function NameColorByReaction(unit)
 	return NameReactionColors[unit.reaction][unit.type]
 end
 	
-
-
 -- By Significance
 local function NameColorBySignificance(unit)	
 	if unit.reaction ~= "FRIENDLY" then
@@ -822,7 +838,7 @@ end
 -- By Threat (Low) Tank Mode
 local function ScaleFunctionByThreatLow(unit)
 	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if IsTankedByAnotherTank(unit) then return end
+		if  IsTankedByAnotherTank(unit) then return end
 		if unit.type == "NPC" and unit.health > 2 and unit.threatValue < 2 then return LocalVars.ScaleSpotlight end 
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
 		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
@@ -922,7 +938,7 @@ end
 -- Tank Mode
 local function AlphaFunctionByThreatLow (unit) 
 	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
-		if IsTankedByAnotherTank(unit) then return end
+		if  IsTankedByAnotherTank(unit) then return end
 		if unit.threatValue < 2 and unit.health > 0 then return LocalVars.OpacitySpotlight end
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
 		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
@@ -1380,6 +1396,7 @@ local function ApplyStyleCustomization(style)
 	style.eliteicon.show = (LocalVars.WidgetEliteIndicator == true)
 	ApplyFontCustomization(style)
 end
+
 
 local function ApplyThemeCustomization(theme)
 	EnableWatchers()

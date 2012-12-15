@@ -259,6 +259,7 @@ do
 	-- UpdateHitboxShape:  Updates the nameplate's hitbox, but only out of combat
 	function UpdateHitboxShape()
 		if not InCombat then 
+			--nameplate:EnableMouse(true)	-- The logic is reversed. ODD.
 			objectstyle = style.hitbox
 			SetObjectShape(nameplate, objectstyle.width, objectstyle.height) 
 		end 
@@ -286,11 +287,13 @@ do
 			style = extended.style
 			threatborder = visual.threatborder
 	end
+	
 	--------------------------------
 	-- Data Conversion Functions
 	local ClassReference = {}		
 	-- ColorToString: Converts a color to a string with a C- prefix
 	local function ColorToString(r,g,b) return "C"..math.floor((100*r) + 0.5)..math.floor((100*g) + 0.5)..math.floor((100*b) + 0.5) end
+	--local function ColorToString(r,g,b) return "C"..floor(100*r)..floor(100*g)..floor(100*b) end
 	-- GetUnitCombatStatus: Determines if a unit is in combat by checking the name text color
 	local function GetUnitCombatStatus(r, g, b) return (r > .5 and g < .5) end
 	-- GetUnitAggroStatus: Determines if a unit is attacking, by looking at aggro glow region
@@ -313,13 +316,22 @@ do
 		end
 	end
 	-- GetUnitReaction: Determines the reaction, and type of unit from the health bar color
-	local function GetUnitReaction(red, green, blue)									
-		if red < .01 and blue < .01 and green > .99 then return "FRIENDLY", "NPC" 
-		elseif red < .01 and blue > .99 and green < .01 then return "FRIENDLY", "PLAYER"
-		elseif red > .99 and blue < .01 and green > .99 then return "NEUTRAL", "NPC"
-		elseif red > .99 and blue < .01 and green < .01 then return "HOSTILE", "NPC"
-		else return "HOSTILE", "PLAYER" end
+	local function GetUnitReaction(red, green, blue)
+
+		if red < .01 then 	-- Friendly
+			if blue < .01 and green > .99 then return "FRIENDLY", "NPC" 
+			elseif blue > .99 and green < .01 then return "FRIENDLY", "PLAYER"
+			end
+		elseif red > .99 then
+			if blue < .01 and green > .99 then return "NEUTRAL", "NPC"
+			elseif blue < .01 and green < .01 then return "HOSTILE", "NPC" 
+			end
+		elseif red > .53 then
+			if green > .5 and green < .6 and blue > .99 then return "HOSTILE", "NPC" end 	-- .533, .533, .99	-- Tapped Mob
+		end
+		return "HOSTILE", "PLAYER" 
 	end
+	
 	-- Raid Icon Lookup table
 	local ux, uy
 	local RaidIconCoordinate = { --from GetTexCoord. input is ULx and ULy (first 2 values).
@@ -327,10 +339,18 @@ do
 		[0.25]	= { [0]		= "CIRCLE", [0.25]	= "SQUARE",	},
 		[0.5]	= { [0]		= "DIAMOND", [0.25]	= "CROSS", },
 		[0.75]	= { [0]		= "TRIANGLE", [0.25]	= "SKULL", }, }
-		
+	
 	-- Populates the class color lookup table
 	for classname, color in pairs(RAID_CLASS_COLORS) do 
-		ClassReference[ColorToString(color.r, color.g, color.b)] = classname end
+		local r, g, b = color.r, color.g, color.b
+		local colorstring = ColorToString(r, g, b)
+		ClassReference[colorstring] = classname 
+	end
+	
+	-- Custom lookups
+	ClassReference["C010060"] = "MONK"
+	ClassReference["C418094"] = "PRIEST"
+
 	--------------------------------
 	-- Mass Gather Functions
 	--------------------------------
@@ -379,7 +399,6 @@ do
 		else unit.threatSituation = "LOW"; unit.threatValue = 0 end
 		
 		unit.isMarked = regions.raidicon:IsShown() or false
-		
 		unit.isInCombat = GetUnitCombatStatus(regions.name:GetTextColor())
 		unit.red, unit.green, unit.blue = bars.health:GetStatusBarColor()
 		unit.reaction, unit.type = GetUnitReaction(unit.red, unit.green, unit.blue)
@@ -804,7 +823,7 @@ do
 		local b, n = plate:GetChildren()
 		bars.health, bars.cast = b:GetChildren()
 		health, cast = bars.health, bars.cast		-- Blizzard bars
-
+		
 		-- Regions
 		regions.threatglow, regions.healthborder, regions.highlight, regions.level, regions.skullicon, regions.raidicon, regions.eliteicon = b:GetRegions()
 		regions.name = n:GetRegions()
@@ -936,9 +955,12 @@ do
 		if bars then 
 			local border = select(2, bars:GetRegions() )
 			--print(frame:GetName(), border.GetTexture and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border")
+			-- Test: /run local DummyFrame1 = CreateFrame("Frame", "DummyFrame", WorldFrame); CreateFrame("Frame", "DummyFrameChild", DummyFrame1)
 			return border and border.GetTexture and border:GetTexture() == "Interface\\Tooltips\\Nameplate-Border"
 		end
 	end
+	
+	
 	
 	-- OnWorldFrameChange: Checks for new Blizz Plates
 	local function OnWorldFrameChange(...)

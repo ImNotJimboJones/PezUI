@@ -1,5 +1,19 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.8.1
+---------------------------
+
+- "Tapped" units (colored light purple by the Blizz nameplate system) will now register as "Hostile NPCs" in Tidy Plates.  This is partially inaccurate, since the tapped mobs could be neutral (like target dummies), but there is no way to discriminate this from the plate.
+- Fixed several tainted global variables
+- Added custom Monk and Priest color lookups for class recognition.  (RAID_CLASS_COLORS is not completely accurate) 
+- Changed the way the class colors are stored, hopefully fixing some other class ID problems
+- Disable Tanks module by default.  Add option button to hub.
+- Hopefully Fixed Off-Tank coloring issue.
+
+6.8
+---------------------------
+- Updated to 5.1 ToC and new nameplate object configuration
+
 6.7.9
 ---------------------------
 - Corrected another error in the spell cast watcher; "StopCastAnimationOnNameplate" is now properly referenced.  This only affects arena matches.  I don't do arenas, so this was never properly tested.  Let me know if more errors pop up.

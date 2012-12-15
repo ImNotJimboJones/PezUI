@@ -16,6 +16,14 @@ local castbarVertical = VerticalAdjustment - 15
 
 local StyleDefault = {}
 
+-- [[
+StyleDefault.hitbox = {
+	width = 300,
+	height = 100,
+}
+
+--]]
+
 StyleDefault.frame = {
 	width = 100,
 	height = 45,
