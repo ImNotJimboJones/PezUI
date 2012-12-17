@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.109
+	raversion=1.110
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -446,12 +446,12 @@ t4:SetHeight(180)
 t4:SetFont(GameFontNormal:GetFont(), 14)
 t4:SetPoint("TOPLEFT",30,-207)
 
-local atext="|cffff0000Important!|r\n\nLearn how |cffff0000not to fail|r your |cff00ff00[RaidAchievement help]|r achievement on site\n\n|cff00ff00Click  Ctrl+C  to copy|r"
+local atext="|cffff0000Important!|r\n\nLearn how |cffff0000not to fail|r your |cff00ff00[RaidAchievement help]|r achievement on site\n\n|cff00ff00Highlight link and click  Ctrl+C  to copy|r"
   if GetLocale()=="ruRU" then
-    atext="|cffff0000Важно!|r\n\nУзнай как |cffff0000не провалить|r достижение |cff00ff00[RaidAchievement help]|r на сайте\n\n|cff00ff00Нажмите  Ctrl+C  чтобы скопировать|r"
+    atext="|cffff0000Важно!|r\n\nУзнай как |cffff0000не провалить|r достижение |cff00ff00[RaidAchievement help]|r на сайте\n\n|cff00ff00Выделите ссылку и нажмите  Ctrl+C  чтобы скопировать|r"
   end
   if GetLocale()=="itIT" then
-    atext="|cff00ff00Messaggio importante!|r\n\nIl progetto |cff00ff00RaidAchievement|r forse sarà |cffff0000chiuso|r, per sappere cosa si può fare visita il sito\n\n|cff00ff00Clicca  Ctrl+C  per copiare|r"
+    atext="|cff00ff00Messaggio importante!|r\n\nIl progetto |cff00ff00RaidAchievement|r forse sarà |cffff0000chiuso|r, per sappere cosa si può fare visita il sito\n\n|cff00ff00Evidenzia il link a clicca  Ctrl+C  per copiare|r"
   end
 
   
@@ -473,7 +473,7 @@ radfsdfsdfjy4:SetAutoFocus(false)
 radfsdfsdfjy4:SetHeight(150)
 radfsdfsdfjy4:SetWidth(225)
 radfsdfsdfjy4:Show()
-radfsdfsdfjy4:SetScript("OnTextChanged", function(self) radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help") radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText())) end )
+radfsdfsdfjy4:SetScript("OnTextChanged", function(self) radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help") end ) --radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
 
 radfdfdpsdonatefr2:SetScrollChild(radfsdfsdfjy4)
 radfdfdpsdonatefr2:Show()
@@ -591,10 +591,6 @@ PSFeamain1:Show()
 PSFeamain2:Show()
 PSFeamain3:Show()
 
---донейт текст показывать
-radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
-radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
-radfsdfsdfjy4:SetFocus()
 
 openrasound1()
 openrasound2()
@@ -749,10 +745,6 @@ function PSFea_buttonaddon()
 PSFea_closeallpr()
 PSFeamain3:Show()
 
---донейт текст показывать
-radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
-radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
-radfsdfsdfjy4:SetFocus()
 
 openrasound1()
 openrasound2()
@@ -1264,12 +1256,7 @@ PSFmain1:Show()
 PSFmain2:Show()
 PSFmain3:Show()
 
-if dfsdfsdfjy4 then
---донейт текст показывать
-dfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
-dfsdfsdfjy4:HighlightText(0,string.len(dfsdfsdfjy4:GetText()))
-dfsdfsdfjy4:SetFocus()
-end
+
 
 
 PSFmain2_Button3:SetAlpha(0.3)
@@ -1745,10 +1732,7 @@ PSFeamain1:Show()
 PSFeamain2:Show()
 PSFeamain3:Show()
 
---донейт текст показывать
-radfsdfsdfjy4:SetText("http://www.phoenixstyle.com/help")
-radfsdfsdfjy4:HighlightText(0,string.len(radfsdfsdfjy4:GetText()))
-radfsdfsdfjy4:SetFocus()
+
 
 openrasound1()
 openrasound2()
@@ -2119,9 +2103,6 @@ psdonatefr22:Show()
 
 end
 
-psdonateeb22:SetText("http://www.phoenixstyle.com")
-psdonateeb22:HighlightText(0,string.len(psdonateeb22:GetText()))
-psdonateeb22:SetFocus()
 
 
 end
@@ -2131,7 +2112,7 @@ function raaddonloadedcheckspam()
 local int=GetBuildInfo()
 local _, month, day, year = CalendarGetDate()
 
-if psnotproched==nil and (psdonaspanvar==nil or (psdonaspanvar and psdonaspanvar==1 and ((month==12 and day>20) or (month==1 and day<30)))) then
+if psnotproched==nil and (psdonaspanvar==nil or (psdonaspanvar and psdonaspanvar==1 and ((month==12 and day>22) or (month==1 and day<30)))) then
 local a1=math.random(1,4)
 if a1==4 and UnitInRaid("player")==nil and UnitInParty("player")==nil then
   --сообщение

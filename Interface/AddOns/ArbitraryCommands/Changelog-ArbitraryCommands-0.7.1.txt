@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r28 | farmbuyer | 2012-12-15 23:17:49 +0000 (Sat, 15 Dec 2012) | 1 line
+Changed paths:
+   A /tags/0.7.1 (from /trunk:27)
+
+Tagging as 0.7.1
+------------------------------------------------------------------------
+r27 | farmbuyer | 2012-12-15 23:17:16 +0000 (Sat, 15 Dec 2012) | 1 line
+Changed paths:
+   M /trunk/ac.lua
+
+Don't try mapping a _G.CHAT shortcut if the original SLASH_* command isn't present (for whatever reason).
+------------------------------------------------------------------------

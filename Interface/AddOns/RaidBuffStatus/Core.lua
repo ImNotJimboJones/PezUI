@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 587 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 589 $", ".* (.*) .*"))
 
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
@@ -4032,6 +4032,7 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 	end
 end
 
+local feastpat = L["prepares a %s!"]:gsub("%%s","(.+)")
 function RaidBuffStatus:CHAT_MSG_RAID_WARNING(event, message, who)
 	if not message or not who then
 		return
@@ -4047,14 +4048,20 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(event, message, who)
 		RaidBuffStatus:Debug("Bot warning detected.")
 		nextrepairannounce = GetTime() + 15
 	else
-	        local pat = L["prepares a %s!"]:gsub("%%s","(.+)")
-		local m = message:match(pat)
+		local m = message:match(feastpat)
 		if m then
-		  for id,info in pairs(feastdata) do
-		    if info.name and m:find(info.name) then
-		      nextfeastannounce[info.id] = GetTime() + 15
-		      break
+		  m = m:match("\124h%[(.+)%]\124h") or m -- strip hyperlink goop
+		  local id = feastdata[m] and feastdata[m].id
+		  if not id then
+		    for _,info in pairs(feastdata) do
+		      if info.name and m:find(info.name) then
+		        id = info.id
+		        break
+		      end
 		    end
+		  end
+		  if id then
+		    nextfeastannounce[id] = GetTime() + 15
 		  end
 		end
 	end

@@ -751,9 +751,10 @@ do
 	for _,v in ipairs{
 		"SAY", "YELL", "PARTY", "RAID", "GUILD", "OFFICER", "RAID_WARNING", "BATTLEGROUND"
 	} do
-		local l = _G["SLASH_"..v.."1"]:sub(2)
+		local l = _G["SLASH_"..v.."1"]
+		l = l and l:sub(2)
 		--print("mapping",l,"to",v)
-		chanmap[l] = v
+		if l then chanmap[l] = v end
 	end
 	function _G.CHAT (slash, msg)
 		local chantype, channel

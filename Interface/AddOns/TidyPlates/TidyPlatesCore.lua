@@ -327,7 +327,7 @@ do
 			elseif blue < .01 and green < .01 then return "HOSTILE", "NPC" 
 			end
 		elseif red > .53 then
-			if green > .5 and green < .6 and blue > .99 then return "HOSTILE", "NPC" end 	-- .533, .533, .99	-- Tapped Mob
+			if green > .5 and green < .6 and blue > .99 then return "TAPPED", "NPC" end 	-- .533, .533, .99	-- Tapped Mob
 		end
 		return "HOSTILE", "PLAYER" 
 	end
@@ -349,7 +349,6 @@ do
 	
 	-- Custom lookups
 	ClassReference["C010060"] = "MONK"
-	ClassReference["C418094"] = "PRIEST"
 
 	--------------------------------
 	-- Mass Gather Functions

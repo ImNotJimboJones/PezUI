@@ -42,6 +42,24 @@ local CreateTotemIconWidget = WidgetLib.CreateTotemIconWidget
 
 local function DummyFunction() end
 
+local ReactionColors = {
+	["FRIENDLY"] = {
+		["PLAYER"] = {r = 0, g = 0, b = 1,},
+		["NPC"] = {r = 0, g = 1, b = 0,},
+	},
+	["HOSTILE"] = {
+		["PLAYER"] = {r = 1, g = 0, b = 0,},
+		["NPC"] = {r = 1, g = 0, b = 0,},
+	},
+	["NEUTRAL"] = {
+		["NPC"] = {r = 1, g = 1, b = 0,},
+	},
+	["TAPPED"] = {
+		--["NPC"] = {r = .53, g = .53, b = 1,},
+		["NPC"] = {r = .45, g = .45, b = .45,},
+	},
+}
+
 local NameReactionColors = {
 	["FRIENDLY"] = {
 		["PLAYER"] = {r = 60/255, g = 168/255, b = 255/255,},
@@ -54,6 +72,12 @@ local NameReactionColors = {
 	["NEUTRAL"] = {
 		["NPC"] = {r = 252/255, g = 180/255, b = 27/255,},
 	},
+	["TAPPED"] = {
+		--["NPC"] = {r = .8, g = .8, b = 1,},
+		["NPC"] = {r = .7, g = .7, b = .7,},
+	},
+	
+	
 }
 
 --local NormalGrey = {r = .5, g = .5, b = .5, a = .3}
@@ -97,19 +121,7 @@ local PaleBlue = {r = 0, g = 130/255, b = 225/255,}
 local PaleBlueText = {r = 194/255, g = 253/255, b = 1,}
 local DarkRed = {r = .9, g = 0.08, b = .08,}
 
-local ReactionColors = {
-	["FRIENDLY"] = {
-		["PLAYER"] = {r = 0, g = 0, b = 1,},
-		["NPC"] = {r = 0, g = 1, b = 0,},
-	},
-	["HOSTILE"] = {
-		["PLAYER"] = {r = 1, g = 0, b = 0,},
-		["NPC"] = {r = 1, g = 0, b = 0,},
-	},
-	["NEUTRAL"] = {
-		["NPC"] = {r = 1, g = 1, b = 0,},
-	},
-}
+
 
 local RaidClassColors = RAID_CLASS_COLORS
 
@@ -808,6 +820,20 @@ local function CustomTextBinaryDelegate(unit)
 end
 
 ------------------------------------------------------------------------------
+-- Filter
+------------------------------------------------------------------------------
+local function UnitFilter(unit)
+	if LocalVars.OpacityFilterLookup[unit.name] then return true
+	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
+	elseif LocalVars.OpacityFilterFriendlyNPC and unit.type == "NPC" and unit.reaction == "FRIENDLY" then return true
+	elseif LocalVars.OpacityFilterNPC and unit.type == "NPC" then return true
+	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
+	elseif LocalVars.OpacityFilterInactive then 
+		if unit.reaction ~= "FRIENDLY" and not (unit.isMarked or unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
+	end
+end
+
+------------------------------------------------------------------------------
 -- Scale
 ------------------------------------------------------------------------------
 
@@ -910,7 +936,10 @@ local function ScaleDelegate(...)
 	elseif LocalVars.ScaleIgnoreNeutralUnits and unit.reaction == "NEUTRAL" then 
 	elseif LocalVars.ScaleIgnoreInactive and not (unit.reaction == "FRIENDLY" and (unit.isInCombat or (unit.threatValue > 0) or (unit.health < unit.healthmax))) then 
 	elseif LocalVars.ScaleCastingSpotlight and unit.isCasting then scale = LocalVars.ScaleSpotlight
-	else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...)  
+	else 
+				-- Filter
+		if UnitFilter(unit) then scale = LocalVars.ScaleFiltered 
+		else scale = ScaleFunctionsUniversal[LocalVars.ScaleSpotlightMode](...) end
 	end
 	
 	return scale or LocalVars.ScaleStandard
@@ -987,19 +1016,6 @@ local function AlphaFunctionByThreatAutoDetect(unit)
 	else return AlphaFunctionByThreatHigh(unit) end										-- dps mode
 end
 
-local function AlphaFilter(unit)
-	if LocalVars.OpacityFilterLookup[unit.name] then return true
-	elseif LocalVars.OpacityFilterNeutralUnits and unit.reaction == "NEUTRAL" then return true
-	elseif LocalVars.OpacityFilterFriendlyNPC and unit.type == "NPC" and unit.reaction == "FRIENDLY" then return true
-	elseif LocalVars.OpacityFilterNPC and unit.type == "NPC" then return true
-	elseif LocalVars.OpacityFilterNonElite and (not unit.isElite) then return true
-	elseif LocalVars.OpacityFilterInactive then 
-		if unit.reaction ~= "FRIENDLY" and not (unit.isMarked or unit.isInCombat or unit.threatValue > 0 or unit.health < unit.healthmax) then return true end
-		
-	--elseif LocalVars.OpacityFilterInactive and (unit.isInCombat or unit.healthmax > unit.health) then return true
-	end
-end
-
 local AlphaFunctionsUniversal = { DummyFunction, AlphaFunctionByThreatAutoDetect, AlphaFunctionByThreatHigh, 
 		AlphaFunctionByThreatLow,  AlphaFunctionByActiveDebuffs, AlphaFunctionByEnemy, AlphaFunctionByNPC, 
 		AlphaFunctionByRaidIcon, AlphaFunctionByActive, AlphaFunctionByEnemyHealer, AlphaFunctionByLowHealth}
@@ -1023,7 +1039,7 @@ local function AlphaDelegate(...)
 	elseif unit.isMouseover and LocalVars.OpacityFullMouseover then return Diminish(LocalVars.OpacityTarget)
 	else
 		-- Filter
-		if AlphaFilter(unit) then alpha = LocalVars.OpacityFiltered 
+		if UnitFilter(unit) then alpha = LocalVars.OpacityFiltered 
 		-- Spotlight
 		else alpha = AlphaFunctionsUniversal[LocalVars.OpacitySpotlightMode](...) end
 	end
@@ -1399,6 +1415,7 @@ end
 
 
 local function ApplyThemeCustomization(theme)
+	RaidClassColors = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 	EnableWatchers()
 	ApplyStyleCustomization(theme["Default"])
 	ApplyFontCustomization(theme["NameOnly"])

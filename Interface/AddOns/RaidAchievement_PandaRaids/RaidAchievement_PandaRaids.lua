@@ -150,7 +150,7 @@ end
 if GetCurrentMapAreaID()==886 then
 
 
-if arg2=="SPELL_DAMAGE" and arg13 and arg13>0 then
+if arg2=="SPELL_DAMAGE" and arg14 and arg14>0 then
 	if prraspisokon[2]==1 and raachdone1 then
     local id=tonumber(string.sub(arg7,-12,-9),16)
     if id==64443 then

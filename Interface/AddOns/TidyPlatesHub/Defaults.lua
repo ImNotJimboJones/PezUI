@@ -19,7 +19,12 @@ TidyPlatesHubDefaults = {
 	OpacityFullSpell = false,				-- Bring Casting units to Full Opacity
 	OpacityFullNoTarget = true,				-- Use full opacity when No Target
 	OpacityFullMouseover = false,
+	
+	-- Filter
+	---------------------------------------
 	OpacityFiltered = 0,
+	ScaleFiltered = .8,
+	
 	OpacityFilterNeutralUnits = false,		-- OpacityHideNeutral = false,
 	OpacityFilterNonElite = false,			-- OpacityHideNonElites = false,
 	OpacityFilterNPC = false,

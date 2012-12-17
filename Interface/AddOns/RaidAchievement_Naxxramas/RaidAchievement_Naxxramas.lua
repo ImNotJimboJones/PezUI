@@ -262,9 +262,9 @@ if nxrawheresk then
   end
   if a==nil then
     a=string.find(nxraName,"%（")
-  end
-  if a==nil then
-    a=string.find(nxraName,"（")
+    if a==nil then
+      a=string.find(nxraName,"（")
+    end
   end
   local b=0
   if a then

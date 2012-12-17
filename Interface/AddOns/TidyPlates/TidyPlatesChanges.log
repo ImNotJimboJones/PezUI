@@ -1,5 +1,13 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.8.2
+---------------------------
+- TAPPED mobs now are a unit.reaction member
+- Added "Filtered Unit Scale" to the Hub:Filter category
+- Removed test code, which was accidentally causing Mages to get Priest coloring and Icon
+- Support for Phanx's "Class Colors" addon, http://www.wowinterface.com/downloads/info12513-ClassColors.html
+
+
 6.8.1
 ---------------------------
 

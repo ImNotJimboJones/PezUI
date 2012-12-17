@@ -1,10 +1,10 @@
 ## Interface: 50001
 ## Title: Arbitrary Commands
-## Version: 0.7
+## Version: 0.7.1
 ## Notes: A popup menu containing user-programmable scripts.
 ## SavedVariables: ArbitCommDB
 ## OptionalDeps: Ace3, LibDBIcon-1.0, ForAllIndentsAndPurposes, WowLua, LibFarmbuyer
-## X-Curse-Packaged-Version: 0.7
+## X-Curse-Packaged-Version: 0.7.1
 ## X-Curse-Project-Name: Arbitrary Commands
 ## X-Curse-Project-ID: arbitcomm
 ## X-Curse-Repository-ID: wow/arbitcomm/mainline
