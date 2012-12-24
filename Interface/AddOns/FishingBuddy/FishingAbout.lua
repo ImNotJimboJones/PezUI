@@ -51,7 +51,7 @@ credits[FBConstants.ROLE_TRANSLATE_ESES] = {
 	["Valdesca"] = { "v0.9.9e6", },
 	["Winderfind Drakkari"] = { "v1.0.7a" },
 	["jmaister"] = { "V1.0.9e", },
-	["karrash76"] = { "V1.2f", },
+	["karrash76"] = { "V1.2f", "V1.2g", },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_KOKR] = {

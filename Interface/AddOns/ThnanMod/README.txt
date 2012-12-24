@@ -4,6 +4,23 @@ A framework for various features. See each plugin's readme for information and v
 
 VERSION CHANGES:
 
+3.2.2:
+
+- Bug fixes in Farm plugin (NOT the same bug as last time).
+
+3.2.1:
+
+- Bug fixes in Farm plugin.
+
+3.2.0:
+
+- Added Time module to framework.
+- Added text boxes to Config module.
+- Added labels to Config module.
+- Added features to Battle Pets plugin.
+- Bug fixes in Battle Pets plugin.
+- Added features to Farm plugin.
+
 3.1.0:
 
 - Added features to Battle Pets plugin.

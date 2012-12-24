@@ -1,10 +1,10 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: |cffff0000DE|cff0062ffTracking|cffffffffBroker|r
 ## Notes: Change minimap tracking modes plugin for any LibDataBroker display.
 ## Author: |cff69ccf0by Dark_Elf|r
-## Version: |cffff7d0av5.0.4|r
+## Version: |cffff7d0av5.1.0a|r
 ## X-Localizations: enUS
-## SavedVariablesPerCharacter: DETrackingBrokerDB
+## SavedVariables: DETrackingBrokerDB
 ## OptionalDeps: Ace3, LibDBIcon-1.0
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua

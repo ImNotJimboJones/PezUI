@@ -4,8 +4,8 @@ local config = WPT.config;
 
 local releasePetDialog;
 
-local function updateDialogs()
-	if config.colorReleaseDialog then
+local function updateDialogs(level, value, dropDownFrame, anchorName, xOffset, yOffset)
+	if config.colorReleaseDialog and dropDownFrame == PetJournal.petOptionsMenu then
 		local _, _, level = C_PetJournal.GetPetInfoByPetID(PetJournal.menuPetID);
 		local _, _, _, _, rarity = C_PetJournal.GetPetStats(PetJournal.menuPetID);
 		local rarityColor = ITEM_QUALITY_COLORS[rarity - 1].hex;
@@ -22,13 +22,13 @@ function WPT:resetReleaseDialog()
 end
 
 if PetJournal then
-	hooksecurefunc(_G, "PetJournal_ShowPetDropdown", updateDialogs);
+	hooksecurefunc(_G, "ToggleDropDownMenu", updateDialogs);
 	releasePetDialog = StaticPopupDialogs["BATTLE_PET_RELEASE"];
 else
 	local frame = CreateFrame("Frame");
 	frame:SetScript("OnEvent", function(self, evt, msg)
 		if msg == "Blizzard_PetJournal" then
-			hooksecurefunc(_G, "PetJournal_ShowPetDropdown", updateDialogs);
+			hooksecurefunc(_G, "ToggleDropDownMenu", updateDialogs);
 			releasePetDialog = StaticPopupDialogs["BATTLE_PET_RELEASE"];
 			frame:UnregisterEvent("ADDON_LOADED");
 			frame:SetScript("OnEvent", nil);

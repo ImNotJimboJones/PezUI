@@ -572,13 +572,14 @@ local FluffOptions = {
 };
 
 local function UpdateItemOptions()
-	for itemid,info in pairs(FishingItems) do
-		local id = itemid;
+	for id,info in pairs(FishingItems) do
 		local option = {};
 		
 		option.visible =
 			function(button)
-				return (GetItemCount(id) > 0);
+				if (GetItemCount(id) > 0) then
+					return 1;
+				end
 			end
 		option.init =
 			function(option, button)

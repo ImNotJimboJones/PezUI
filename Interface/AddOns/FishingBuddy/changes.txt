@@ -1,4 +1,9 @@
-﻿Version 1.2f
+﻿Version 1.2g
+- FIx a subtle bug in the Pandaren item code that hopefully will make it work for everyone else
+- Updated Spanish (esES) translation (thanks karrash76!)
+- Updated LibTourist to the latest version
+
+Version 1.2f
 - Updated Spanish (esES) translation (thanks karrash76!)
 - Updated German translation (thanks DirtyHarryGermany!)
 - Updated LibTourist to the latest version

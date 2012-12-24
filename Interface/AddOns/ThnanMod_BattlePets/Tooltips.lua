@@ -56,17 +56,24 @@ local function updatePetList()
 			if not level then
 				level = 0;
 			end
-			if (type(petList[name]) == "table") then
-				if (rarity > petList[name].rarity) then
-					petList[name].rarity = rarity;
-					petList[name].level = level;
-				elseif (rarity == petList[name].rarity and level > petList[name].level) then
-					petList[name].level = level;
-				end
-			else
+			if (type(petList[name]) ~= "table") then
 				petList[name] = {};
 				petList[name].owned = isOwned;
+				petList[name].rarity = 0;
+				petList[name].level = 0;
+			end
+			local i = #petList[name] + 1;
+			if isOwned then
+				petList[name][i] = {};
+				petList[name][i].rarity = rarity;
+				petList[name][i].level = level;
+			end
+			if (rarity > petList[name].rarity) then
+				petList[name].index = i;
 				petList[name].rarity = rarity;
+				petList[name].level = level;
+			elseif (rarity == petList[name].rarity and level > petList[name].level) then
+				petList[name].index = i;
 				petList[name].level = level;
 			end
 		end
@@ -95,24 +102,46 @@ end
 -- tooltip line generation
 
 local tooltipLines = {};
+local additionalLines = {};
 for rarity = 1, 4 do
 	local rarityColor = ITEM_QUALITY_COLORS[rarity - 1].hex;
 	local rarityName = _G["BATTLE_PET_BREED_QUALITY"..rarity];
 	tooltipLines[rarity] = rarityColor..(L.caught:format(rarityName)).."|r";
+	additionalLines[rarity] = rarityColor..(L.alsoCaught:format(rarityName)).."|r";
 end
 tooltipLines[0] = ITEM_QUALITY_COLORS[5].hex..L.notCaught.."|r";
-
 local function tooltipLineForPet(name, includeLevel)
 	if petListTainted then
 		updatePetList();
 	end
-	
 	if petList[name] then
+		local ret1, ret2, ret3 = nil, nil, nil;
 		if (includeLevel and petList[name].level > 0) then
-			return tooltipLines[petList[name].rarity].." |cFFFFFFFF"..L.caughtLevel:format(petList[name].level).."|r";
+			ret1 = tooltipLines[petList[name].rarity].." |cFFFFFFFF"..L.caughtLevel:format(petList[name].level).."|r";
 		else
-			return tooltipLines[petList[name].rarity];
+			ret1 = tooltipLines[petList[name].rarity];
 		end
+		if petList[name].owned and config.showAdditionalPets then
+			for i = 1, #petList[name] do
+				if i ~= petList[name].index then
+					if ret2 then
+						if (includeLevel and petList[name].level > 0) then
+							ret3 = additionalLines[petList[name][i].rarity].." |cFFFFFFFF"..L.caughtLevel:format(petList[name][i].level).."|r";
+						else
+							ret3 = additionalLines[petList[name][i].rarity];
+						end
+					else
+						if (includeLevel and petList[name].level > 0) then
+							ret2 = additionalLines[petList[name][i].rarity].." |cFFFFFFFF"..L.caughtLevel:format(petList[name][i].level).."|r";
+						else
+							ret2 = additionalLines[petList[name][i].rarity];
+						end
+					end
+				end
+			end
+		end
+		
+		return ret1, ret2, ret3;
 	else
 		return "";
 	end
@@ -122,11 +151,13 @@ end
 
 local function mouseoverPet_World()
 	if (config.enabled and UnitIsWildBattlePet("mouseover")) then
-		local line = tooltipLineForPet(UnitName("mouseover"), config.showLevelInWorld);
-		if (line ~= "") then
-			GameTooltip:AddLine(line);
-			GameTooltip:Show();
+		local lines = {tooltipLineForPet(UnitName("mouseover"), config.showLevelInWorld)};
+		for i = 1, #lines do
+			if (lines[i] ~= "") then
+				GameTooltip:AddLine(lines[i]);
+			end
 		end
+		GameTooltip:Show();
 	end
 end
 local mouseoverFrame = CreateFrame("Frame");
@@ -138,8 +169,12 @@ mouseoverFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
 local prevLeftText = "";
 local prevRightText = "";
 local function stripTextureFromString(string)
-	local index = string:find("|t");
-	if (index ~= nil) then
+	local index = string:find("|c");
+	if index then
+		return string:sub(index+10, -3);
+	end
+	index = string:find("|t");
+	if index then
 		return string:sub(index + 2);
 	else
 		return string;
@@ -203,12 +238,17 @@ local function mouseoverPet_Battle(self, petOwner, petIndex)
 	if (config.enabled and petOwner == LE_BATTLE_PET_ENEMY and C_PetBattles.IsWildBattle()) then
 		local speciesID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, petIndex);
 		local speciesName = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
-		local caughtRarity = tooltipLineForPet(speciesName, config.showLevelInBattle);
+		local caughtLines = {tooltipLineForPet(speciesName, config.showLevelInBattle)};
+		local caughtRarity = caughtLines[1];
+		for i = 2, #caughtLines do
+			caughtRarity = caughtRarity.."\n"..caughtLines[i];
+		end
 		local numOwned = C_PetJournal.GetNumCollectedInfo(speciesID);
 		if numOwned > 0 then
 			if not self.CollectedRarityText then
 				self.CollectedRarityText = self:CreateFontString(nil, "ARTWORK", "GameFontNormal");
 				self.CollectedRarityText:SetPoint("TOPLEFT", self.CollectedText, "BOTTOMLEFT", 0, -6);
+				self.CollectedRarityText:SetJustifyH("LEFT");
 			end
 			self.CollectedRarityText:SetText(caughtRarity);
 			self.CollectedRarityText:Show();
@@ -225,5 +265,4 @@ local function mouseoverPet_Battle(self, petOwner, petIndex)
 		end
 	end
 end
-
 hooksecurefunc(_G, "PetBattleUnitTooltip_UpdateForUnit", mouseoverPet_Battle);

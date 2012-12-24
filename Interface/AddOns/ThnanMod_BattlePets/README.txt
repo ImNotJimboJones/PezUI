@@ -4,6 +4,12 @@ Adds a line to wild pet tooltips showing the highest rarity pet of its type that
 
 VERSION CHANGES:
 
+1.2.0:
+
+- Fixed issue where coloring confirmation dialog failed with other addons.
+- Fixed issue where minimap tooltips would fail to detect a pet name if it was greyed out.
+- Added option to show all owned pets in world and battle tooltips.
+
 1.1.0:
 
 - Added options to show the level of the highest rarity pet in world, battle and minimap tooltips.

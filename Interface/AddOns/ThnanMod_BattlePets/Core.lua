@@ -13,10 +13,11 @@ config.showLevelInWorld = true;
 config.showLevelInBattle = true;
 config.showLevelInMinimap = false;
 config.colorReleaseDialog = true;
+config.showAdditionalPets = true;
 
 --[[ Saved Variable handlers ]]--
 
-local currentDataVersion = 1;
+local currentDataVersion = 2;
 
 --[[ version nil
 global.enabled
@@ -28,17 +29,29 @@ global.showLevelInBattle
 global.showLevelInMinimap
 global.colorReleaseDialog
 ]]--
+--[[ version 2
+global.enabled
+global.showLevelInWorld
+global.showLevelInBattle
+global.showLevelInMinimap
+global.colorReleaseDialog
+global.showAdditionalPets
+]]--
 
 function WPT:loadSavedVars(global, realm, character)
 	if type(global) == "table" then
 		if not global.dataVersion then
-			config.enabled = global.enabled;
-		elseif global.dataVersion == 1 then
-			config.enabled = global.enabled;
+			global.dataVersion = 0;
+		end
+		config.enabled = global.enabled;
+		if global.dataVersion >= 1 then
 			config.showLevelInWorld = global.showLevelInWorld;
 			config.showLevelInBattle = global.showLevelInBattle;
 			config.showLevelInMinimap = global.showLevelInMinimap;
 			config.colorReleaseDialog = global.colorReleaseDialog;
+		end
+		if global.dataVersion == 2 then
+			config.showAdditionalPets = global.showAdditionalPets;
 		end
 	end
 end
@@ -51,6 +64,7 @@ function WPT:storeSavedVars()
 	global.showLevelInBattle = config.showLevelInBattle;
 	global.showLevelInMinimap = config.showLevelInMinimap;
 	global.colorReleaseDialog = config.colorReleaseDialog;
+	global.showAdditionalPets = config.showAdditionalPets;
 	return global, nil, nil;
 end
 

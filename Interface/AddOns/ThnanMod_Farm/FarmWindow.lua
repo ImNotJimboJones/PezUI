@@ -2,7 +2,7 @@ local _, FRM = ...;
 local config = FRM.config;
 local L = FRM.L;
 
--- NPC name parsing
+--[[ NPC name parsing ]]--
 
 local npcTooltip = CreateFrame("GameTooltip", "FRMnpcTooltip");
 local tooltipText = npcTooltip:CreateFontString();
@@ -14,11 +14,11 @@ local function nameForNPC(npcID)
 	return tooltipText:GetText();
 end
 
--- create window
+--[[ create window ]]--
 
 local farmWindow = CreateFrame("Frame", "farmWindow", UIParent, "BasicFrameTemplate");
 farmWindow:SetPoint("CENTER");
-farmWindow:SetWidth((7*36) + (5*8) + 2);
+farmWindow:SetWidth((7*36) + (8*5) + 2);
 farmWindow:SetHeight((5*36) + (6*5) + 23);
 farmWindow:SetMovable(true);
 farmWindow:EnableMouse(true);
@@ -30,10 +30,11 @@ farmWindow:SetScript("OnHide", farmWindow.StopMovingOrSizing);
 local farmWindowLabel = farmWindow:CreateFontString("farmWindowLabel", "ARTWORK", "GameFontNormal");
 farmWindowLabel:SetText(L.farmWindowLabelText);
 farmWindowLabel:SetPoint("TOP", 0, -5);
-
 farmWindow:Hide();
 
--- button creation functions
+--[[ button creation ]]--
+
+-- functions
 
 local function farmButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
@@ -47,13 +48,27 @@ end
 local function farmButton_OnEvent(self, evt)
 	self:updateCount();
 end
+local function farmButton_OnEvent_combat(self, evt)
+	if evt == "BAG_UPDATE" then
+		self:updateCount();
+	elseif evt == "PLAYER_REGEN_ENABLED" then
+		self:loadItem();
+		self:UnregisterEvent("PLAYER_REGEN_ENABLED");
+		self:SetScript("OnEvent", farmButton_OnEvent);
+	end
+end
 local function farmButton_OnEvent_unloaded(self, evt)
 	if evt == "BAG_UPDATE" then
 		self:updateCount();
 	elseif evt == "GET_ITEM_INFO_RECEIVED" then
 		if self:loadItem() then
 			self:UnregisterEvent("GET_ITEM_INFO_RECEIVED");
-			self:SetScript("OnEvent", farmButton_OnEvent);
+			if InCombatLockdown() then
+				self:SetScript("OnEvent", farmButton_OnEvent_combat);
+				self:RegisterEvent("PLAYER_REGEN_ENABLED");
+			else
+				self:SetScript("OnEvent", farmButton_OnEvent);
+			end
 		end
 	end
 end
@@ -77,12 +92,16 @@ local function seedButton_setMacroText(self)
 	end
 end
 local function seedButton_loadItem(self)
-	local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
-	
-	if itemName and itemTexture then
+	if (not self.itemName) and (not self.itemTexture) then
+		local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
 		self.itemName = itemName;
-		self:setMacroText();
-		self.icon:SetTexture(itemTexture);
+		self.itemTexture = itemTexture;
+	end
+	if self.itemName and self.itemTexture then
+		if not InCombatLockdown() then
+			self:setMacroText();
+			self.icon:SetTexture(self.itemTexture);
+		end
 		return true;
 	else
 		return false;
@@ -106,11 +125,16 @@ local function seedButton_updateCount(self)
 end
 
 local function toolButton_loadItem(self)
-	local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
-	
-	if itemName and itemTexture then
-		self:SetAttribute("item", itemName);
-		self.icon:SetTexture(itemTexture);
+	if (not self.itemName) and (not self.itemTexture) then
+		local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
+		self.itemName = itemName;
+		self.itemTexture = itemTexture;
+	end
+	if self.itemName and self.itemTexture then
+		if not InCombatLockdown() then
+			self:SetAttribute("item", self.itemName);
+			self.icon:SetTexture(self.itemTexture);
+		end
 		return true;
 	else
 		return false;
@@ -125,9 +149,24 @@ local function toolButton_updateCount(self)
 		icon:SetVertexColor(0.4, 0.4, 0.4);
 	end
 end
+local function toolButton_dropTool(self)
+	if config.dropOnRightClick then
+		for bag = 0, NUM_BAG_SLOTS do
+			for slot = 1, GetContainerNumSlots(bag) do
+				if GetContainerItemID(bag, slot) == self.itemID then
+					PickupContainerItem(bag, slot);
+					DeleteCursorItem();
+					return;
+				end
+			end
+		end
+	end
+end
 
+local buttonCount = 0;
 local function createFarmButton(itemID, buttonType)
-	local button = CreateFrame("Button", itemID.."FRMButton", farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
+	local button = CreateFrame("Button", "FRMButton"..buttonCount, farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
+	buttonCount = buttonCount + 1;
 	
 	button.itemID = itemID;
 	button:SetScript("OnEnter", farmButton_OnEnter);
@@ -143,7 +182,10 @@ local function createFarmButton(itemID, buttonType)
 			button:SetScript("OnEnter", seedButton_OnEnter_load);
 		end
 	elseif buttonType == "tool" then
-		button:SetAttribute("type", "item");
+		button:SetAttribute("type1", "item");
+		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+		button.dropTool = toolButton_dropTool;
+		button:SetAttribute("type2", "dropTool");
 		button.loadItem = toolButton_loadItem;
 		button.updateCount = toolButton_updateCount;
 	end
@@ -190,6 +232,8 @@ local bugSprayerButton = createFarmButton(80513, "tool");
 local shovelButton = createFarmButton(89880, "tool");
 local plowButton = createFarmButton(89815, "tool");
 
+--[[ button placement ]]--
+
 -- define row and column values for TOPLEFT corners
 
 local col1, col2, col3, col4, col5, col6, col7 = 5, 46, 87, 128, 169, 210, 251;
@@ -229,7 +273,7 @@ bugSprayerButton:SetPoint("TOPLEFT", col4 + halfCol, row1);
 shovelButton:SetPoint("TOPLEFT", col3 + halfCol, row2);
 plowButton:SetPoint("TOPLEFT", col4 + halfCol, row2);
 
--- grow check
+--[[ grow check ]]--
 
 local growCheckIDs = {
 	-- Green Cabbage
@@ -427,7 +471,6 @@ local growCheckIDs = {
 	-- Terrible Turnip
 	66161, -- Turnip
 };
-
 local extraGrowCheckButtons = {};
 local function getGrowCheckButton(index)
 	if not extraGrowCheckButtons[index] then
@@ -451,7 +494,7 @@ local function growCheckButton_OnEnter(self)
 		for i = 1, #growCheckIDs do
 			local name = nameForNPC(growCheckIDs[i]);
 			if name then
-				macroLines[#macroLines + 1] = "/tar "..name.."\n";
+				macroLines[#macroLines + 1] = "/targetexact "..name.."\n";
 			end
 		end
 		
@@ -481,54 +524,319 @@ local growCheckButton = CreateFrame("Button", "growCheckFRMButton", farmWindow, 
 growCheckButton:SetScript("OnEnter", growCheckButton_OnEnter);
 growCheckButton:SetScript("OnLeave", farmButton_OnLeave);
 growCheckButton:SetAttribute("type", "macro");
-growCheckButton:SetPoint("TOPLEFT", col4, row3);
+growCheckButton:SetPoint("TOPLEFT", col3 + halfCol, row3);
 growCheckButton.icon:SetTexture("Interface\\ICONS\\Ability_Druid_TreeofLife");
 
--- zone change detection
+--[[ showing and hiding ]]--
 
-local prevZone = "";
+-- automatic show/hide checking
 
-local function subZoneChanged()
-	local subzone = GetSubZoneText();
-	
-	if ((subzone == L.sunsongRanchName) and config.showAutomatically) then
-		farmWindow:Show();
-	elseif ((prevZone == L.sunsongRanchName) and config.showAutomatically) then
-		farmWindow:Hide();
+local function onFarm()
+	return ((GetSubZoneText() == L.sunsongRanchName) and config.showAutomatically);
+end
+local inventoryIDs = {
+	-- seeds
+	79102, -- green cabbage
+	80591, -- scallion
+	80593, -- red blossom leek
+	80595, -- white turnip
+	89326, -- witchberry
+	80590, -- juicycrunch carrot
+	80592, -- mogu pumpkin
+	80594, -- pink turnip
+	89328, -- jade squash
+	89329, -- striped melon
+	85217, -- magebulb
+	85215, -- snakeroot
+	89202, -- songbell
+	85216, -- enigma
+	89202, -- raptorleaf
+	89197, -- windshear cactus
+	85267, -- autumn blossom
+	85268, -- spring blossom
+	85269, -- winter blossom
+	85219, -- omminous seed
+	-- tools
+	79104, -- watering can
+	80513, -- bug sprayer
+	89880, -- shovel
+	89815, -- plow
+};
+local function hasItems()
+	if not config.hideWhenEmpty then
+		return true
 	end
-	
-	prevZone = subzone;
+	for i = 1, #inventoryIDs do
+		if GetItemCount(inventoryIDs[i], false, false) > 0 then
+			return true;
+		end
+	end
+	return false;
+end
+local isInCombat = false;
+local function notInCombat()
+	return not (isInCombat and config.hideInCombat);
+end
+local function notInVehicle()
+	return not (UnitUsingVehicle("player") and config.hideInVehicle);
 end
 
-local zoneFrame = CreateFrame("Frame");
-zoneFrame:RegisterEvent("ZONE_CHANGED");
-zoneFrame:SetScript("OnEvent", subZoneChanged);
+local autoShowOverride = false;
+function FRM:farmWindowAutoShowEvent(event)
+	if event == "PLAYER_REGEN_DISABLED" then
+		isInCombat = true;
+	elseif event == "PLAYER_REGEN_ENABLED" then
+		isInCombat = false;
+	end
 
-subZoneChanged();
+	if autoShowOverride or InCombatLockdown() then
+		return;
+	end
+	
+	if onFarm() and hasItems() and notInCombat() and notInVehicle() then
+		farmWindow:Show();
+	else
+		farmWindow:Hide();
+	end
+end
 
--- hide in combat
+local autoShowFrame = CreateFrame("Frame");
+autoShowFrame:SetScript("OnEvent", FRM.farmWindowAutoShowEvent);
+autoShowFrame:RegisterEvent("ZONE_CHANGED");
+autoShowFrame:RegisterEvent("PLAYER_LOGIN");
+autoShowFrame:RegisterEvent("BAG_UPDATE");
+autoShowFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
+autoShowFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
+autoShowFrame:RegisterEvent("UNIT_ENTERED_VEHICLE");
+autoShowFrame:RegisterEvent("UNIT_EXITED_VEHICLE");
 
-local wasShown = farmWindow:IsShown();
-local function combatFrame_Event(self, event)
-	if config.hideInCombat then
-		if event == "PLAYER_REGEN_DISABLED" then
-			wasShown = farmWindow:IsShown();
-			farmWindow:Hide();
+-- manual show/hide
+
+function FRM:showFarmFrame()
+	if not InCombatLockdown() then
+		farmWindow:Show();
+		autoShowOverride = true;
+	else
+		ThnanMod:output(L.farmWindowShowInCombatError);
+	end
+end
+
+local function farmWindowCloseButtonClicked()
+	autoShowOverride = false;
+end
+farmWindow.CloseButton:HookScript("OnClick", farmWindowCloseButtonClicked);
+
+--[[ forecast ]]--
+
+-- labels
+
+local forecastLabel = farmWindow:CreateFontString("farmWindowForecastLabel", "ARTWORK", "GameFontNormal");
+forecastLabel:SetText(L.farmWindowForecastLabel);
+forecastLabel:SetPoint("CENTER", 0, -48);
+
+local forecastChangeLabel = farmWindow:CreateFontString("farmWindowForecastChangeLabel", "ARTWORK", "GameFontNormalSmall");
+forecastChangeLabel:SetText("|cFFFFFFFF"..L.farmWindowForecastChange.."|r");
+forecastChangeLabel:SetPoint("TOP", forecastLabel, "BOTTOM", 0, -2);
+
+-- buttons
+
+local function forecastButton_OnEnter(self)
+	GameTooltip:SetOwner(farmWindow);
+	if self.itemID then
+		GameTooltip:SetItemByID(self.itemID);
+		GameTooltip:AddLine(self.itemTooltipLine, 0, 1, 1, true);
+	else
+		GameTooltip:ClearLines();
+		GameTooltip:AddLine(self.noInfoTooltip, 0, 1, 1, true);
+	end
+	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
+	GameTooltip:Show();
+end
+
+local forecastSeedButton = CreateFrame("Button", "FRMForecastSeedButton", farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
+forecastSeedButton:SetPoint("TOPLEFT", col3 + halfCol, row5);
+forecastSeedButton:SetAttribute("type", "macro");
+forecastSeedButton.itemTooltipLine = L.forecastSeedButtonTooltip;
+forecastSeedButton.noInfoTooltip = L.forecastSeedNoInfoTooltip;
+forecastSeedButton:SetScript("OnEnter", forecastButton_OnEnter);
+forecastSeedButton:SetScript("OnLeave", farmButton_OnLeave);
+forecastSeedButton.setMacroText = seedButton_setMacroText;
+function forecastSeedButton:updateCount()
+	seedButton_updateCount(self);
+	if not self.itemID then
+		local countText = _G[self:GetName().."Count"];
+		countText:SetText("");
+		local icon = _G[self:GetName().."Icon"];
+		icon:SetVertexColor(1.0, 1.0, 1.0);
+	end
+end
+
+local forecastCropButton = CreateFrame("Button", "FRMForecastCropButton", farmWindow, "ActionbuttonTemplate");
+forecastCropButton:SetPoint("TOPLEFT", col4 + halfCol, row5);
+forecastCropButton.itemTooltipLine = L.forecastCropButtonTooltip;
+forecastCropButton.noInfoTooltip = L.forecastCropNoInfoTooltip;
+forecastCropButton:SetScript("OnEnter", forecastButton_OnEnter);
+forecastCropButton:SetScript("OnLeave", farmButton_OnLeave);
+
+-- updates
+
+local data = FRM.data;
+local time = ThnanMod.Time;
+local function updateData(newSeed)
+	local day, month, year = time:currentDailyDate();
+	local today = ("%d-%d-%d"):format(day, month, year);
+	local yesterday = ("%d-%d-%d"):format(time:rectifyDate(day - 1, month, year));
+	if data.today ~= today then
+		if data.today then
+			data.yesterday = data.today;
+			data.yesterdayForecast = data.todayForecast;
+		end
+		if newSeed then
+			data.today = today;
+			data.todayForecast = newSeed;
 		else
-			if wasShown then
-				farmWindow:Show();
+			data.today = nil;
+			data.todayForecast = nil;
+		end
+	elseif newSeed then
+		data.todayForecast = newSeed;
+	end
+	if data.yesterday ~= yesterday then
+		data.yesterday = nil;
+		data.yesterdayForecast = nil;
+	end
+end
+local noInfoIcon = "Interface\\BUTTONS\\UI-GroupLoot-Pass-Down";
+local cropIDFromSeedID = {
+	[79102] = 74840, -- green cabbage
+	[80591] = 74843, -- scallion
+	[80593] = 74844, -- red blossom leek
+	[80595] = 74850, -- white turnip
+	[89326] = 74846, -- witchberry
+	[80590] = 74841, -- juicycrunch carrot
+	[80592] = 74842, -- mogu pumpkin
+	[80594] = 74849, -- pink turnip
+	[89328] = 74847, -- jade squash
+	[89329] = 74848, -- striped melon
+};
+local previousToday = "";
+local function farmWindow_OnUpdate(self)
+	forecastChangeLabel:SetText("|cFFFFFFFF"..L.farmWindowForecastChange:format(time:timeUntilDailyReset()).."|r");
+	
+	local today = ("%d-%d-%d"):format(time:currentDailyDate());
+	if today ~= previousToday then
+		previousToday = today;
+		updateData();
+	end
+	if not InCombatLockdown() then
+		-- update seed button
+		if data.todayForecast then
+			local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(data.todayForecast);
+			if itemName and itemTexture then
+				forecastSeedButton.icon:SetTexture(itemTexture);
+				forecastSeedButton.itemID = data.todayForecast;
+				forecastSeedButton.itemName = itemName;
+				forecastSeedButton:setMacroText();
+			else
+				forecastSeedButton.icon:SetTexture(noInfoIcon);
+				forecastSeedButton.itemID = nil;
+				forecastSeedButton.itemName = nil;
+				forecastSeedButton:SetAttribute("macroText", nil);
+			end
+		else
+			forecastSeedButton.icon:SetTexture(noInfoIcon);
+			forecastSeedButton.itemID = nil;
+			forecastSeedButton.itemName = nil;
+			forecastSeedButton:SetAttribute("macroText", nil);
+		end
+		forecastSeedButton:updateCount();
+		-- update crop button
+		if data.yesterdayForecast then
+			local cropID = cropIDFromSeedID[data.yesterdayForecast];
+			local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(cropID);
+			if itemTexture then
+				forecastCropButton.icon:SetTexture(itemTexture);
+				forecastCropButton.itemID = cropID;
+			else
+				forecastCropButton.icon:SetTexture(noInfoIcon);
+				forecastCropButton.itemID = nil;
+			end
+		else
+			forecastCropButton.icon:SetTexture(noInfoIcon);
+			forecastCropButton.itemID = nil;
+		end
+	end
+end
+farmWindow:SetScript("OnUpdate", farmWindow_OnUpdate);
+
+local seedIDFromForecastText = {
+	[L.joguPredictsGreenCabbage] = 79102,
+	[L.joguPredictsScallion] = 80591,
+	[L.joguPredictsRedBlossomLeek] = 80593,
+	[L.joguPredictsWhiteTurnip] = 80595,
+	[L.joguPredictsWitchberry] = 89326,
+	[L.joguPredictsJuicycrunchCarrot] = 80590,
+	[L.joguPredictsMoguPumpkin] = 80592,
+	[L.joguPredictsPinkTurnip] = 80594,
+	[L.joguPredictsJadeSquash] = 89328,
+	[L.joguPredictsStripedMelon] = 89329,
+};
+local function gossipUpdate(self)
+	local seedID = seedIDFromForecastText[GetGossipText()];
+	if seedID then
+		updateData(seedID);
+	end
+end
+farmWindow:SetScript("OnEvent", gossipUpdate);
+farmWindow:RegisterEvent("GOSSIP_SHOW");
+
+--[[ tool drop ]]--
+
+local function dropButton_OnEnter(self)
+	GameTooltip:SetOwner(farmWindow);
+	GameTooltip:ClearLines();
+	GameTooltip:AddLine(L.dropToolsTitle, false);
+	GameTooltip:AddLine("|cFFFFFFFF"..L.dropToolsDescription.."|r", true);
+	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
+	GameTooltip:Show();
+end
+local toolIDs = {
+	79104, -- watering can
+	80513, -- bug sprayer
+	89880, -- shovel
+	89815, -- master plow
+};
+local function dropButton_OnClick()
+	for i = 1, #toolIDs do
+		local found = false;
+		for bag = 0, NUM_BAG_SLOTS do
+			for slot = 1, GetContainerNumSlots(bag) do
+				if GetContainerItemID(bag, slot) == toolIDs[i] then
+					PickupContainerItem(bag, slot);
+					DeleteCursorItem();
+					found = true;
+					break;
+				end
+			end
+			if found then
+				break;
 			end
 		end
 	end
 end
 
-local combatFrame = CreateFrame("Frame");
-combatFrame:SetScript("OnEvent", combatFrame_Event);
-combatFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
-combatFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
+local dropToolsButton = CreateFrame("Button", "dropToolsFRMButton", farmWindow, "ActionButtonTemplate");
+dropToolsButton:SetPoint("TOPLEFT", col4 + halfCol, row3);
+dropToolsButton.icon:SetTexture("Interface\\ICONS\\misc_arrowdown");
+dropToolsButton:SetScript("OnClick", dropButton_OnClick);
+dropToolsButton:SetScript("OnEnter", dropButton_OnEnter);
+dropToolsButton:SetScript("OnLeave", farmButton_OnLeave);
 
--- plugin function to show frame so slash command can access it
-
-function FRM:showFarmFrame()
-	farmWindow:Show();
+local function exitFrame_OnEvent()
+	if (GetSubZoneText() ~= L.sunsongRanchName) and config.dropOnLeavingFarm then
+		dropButton_OnClick();
+	end
 end
+local exitFrame = CreateFrame("Frame");
+exitFrame:SetScript("OnEvent", exitFrame_OnEvent);
+exitFrame:RegisterEvent("ZONE_CHANGED");

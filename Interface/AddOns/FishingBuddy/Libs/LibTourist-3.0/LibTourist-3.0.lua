@@ -1,6 +1,6 @@
 ﻿--[[
 Name: LibTourist-3.0
-Revision: $Rev: 157 $
+Revision: $Rev: 158 $
 Author(s): ckknight (ckknight@gmail.com), Arrowmaster, Odica (maintainer)
 Website: http://ckknight.wowinterface.com/
 Documentation: http://www.wowace.com/addons/libtourist-3-0/
@@ -10,7 +10,7 @@ License: MIT
 ]]
 
 local MAJOR_VERSION = "LibTourist-3.0"
-local MINOR_VERSION = 90000 + tonumber(("$Revision: 157 $"):match("(%d+)"))
+local MINOR_VERSION = 90000 + tonumber(("$Revision: 158 $"):match("(%d+)"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -2725,7 +2725,7 @@ do
 		type = "City",
 		fishing_min = 75,
 		battlepet_low = 1,
-		battlepet_high = 2,
+		battlepet_high = 3,
 	}
 
 	zones[BZ["Silvermoon City"]] = {
@@ -2738,7 +2738,7 @@ do
 		faction = "Horde",
 		type = "City",
 		battlepet_low = 1,
-		battlepet_high = 2,
+		battlepet_high = 3,
 	}
 
 	zones[BZ["Stormwind City"]] = {
@@ -2763,7 +2763,7 @@ do
 		type = "City",
 		fishing_min = 75,
 		battlepet_low = 1,
-		battlepet_high = 2,
+		battlepet_high = 1,
 	}
 
 	zones[BZ["Undercity"]] = {
@@ -2778,7 +2778,7 @@ do
 		type = "City",
 		fishing_min = 75,
 		battlepet_low = 1,
-		battlepet_high = 2,
+		battlepet_high = 3,
 	}
 
 	zones[BZ["Dun Morogh"]] = {
@@ -2997,7 +2997,7 @@ do
 			[BZ["Swamp of Sorrows"]] = true,
 		},
 		fishing_min = 75,
-		battlepet_low = 3,
+		battlepet_low = 4,
 		battlepet_high = 6,
 	}
 
@@ -3081,7 +3081,7 @@ do
 		},
 		fishing_min = 150,
 		battlepet_low = 7,
-		battlepet_high = 9,
+		battlepet_high = 10,
 	}
 
 	zones[BZ["Northern Stranglethorn"]] = {
@@ -3614,7 +3614,7 @@ do
 		type = "City",
 		fishing_min = 75,
 		battlepet_low = 1,
-		battlepet_high = 2,
+		battlepet_high = 1,
 	}
 
 	zones[BZ["The Exodar"]] = {

@@ -1,19 +1,6 @@
 local L = LibStub("AceLocale-3.0"):GetLocale("Skada", false)
 local AceGUI = LibStub("AceGUI-3.0")
 
-if not StaticPopupDialogs["ResetSkadaDialog"] then
-	StaticPopupDialogs["ResetSkadaDialog"] = {
-		preferredIndex = 4,
-		text = L["Do you want to reset Skada?"],
-		button1 = ACCEPT,
-		button2 = CANCEL,
-		timeout = 30,
-		whileDead = 0,
-		hideOnEscape = 1,
-		OnAccept = function() Skada:Reset() end,
-	}
-end
-
 -- Configuration menu.
 function Skada:OpenMenu(window)
 	if not self.skadamenu then
@@ -272,6 +259,11 @@ function Skada:OpenMenu(window)
 	            info.func = function() Skada.db.profile.report.channel = "Party"; Skada.db.profile.report.chantype = "preset" end
 	            UIDropDownMenu_AddButton(info, level)
 
+	            info.text = L["Instance"]
+	            info.checked = (Skada.db.profile.report.channel == "INSTANCE_CHAT")
+	            info.func = function() Skada.db.profile.report.channel = "INSTANCE_CHAT"; Skada.db.profile.report.chantype = "preset" end
+	            UIDropDownMenu_AddButton(info, level)
+
 	            info.text = L["Guild"]
 	            info.checked = (Skada.db.profile.report.channel == "Guild")
 	            info.func = function() Skada.db.profile.report.channel = "Guild"; Skada.db.profile.report.chantype = "preset" end
@@ -460,6 +452,7 @@ function Skada:CreateReportWindow(window)
 		say			= { L["Say"], "preset"},
 		raid 		= { L["Raid"], "preset"},
 		party 		= { L["Party"], "preset"},
+		instance_chat 		= { L["Instance"], "preset"},
 		guild 		= { L["Guild"], "preset"},
 		officer 	= { L["Officer"], "preset"},
 		self 		= { L["Self"], "self"},

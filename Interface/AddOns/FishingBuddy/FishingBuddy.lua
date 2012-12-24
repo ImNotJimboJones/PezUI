@@ -1048,8 +1048,6 @@ local function UpdateLure()
 			LastLure.time = nil;
 		end
 
-		-- we can drop through and add our normal lure, because the quest buff is on
-		-- the player, not the pole...
 		local skill, _, _, _ = FL:GetCurrentSkill();
 		
 		if (skill > 0) then
@@ -1095,7 +1093,7 @@ local function UpdateLure()
 					LastLure.time = GetTime() + RELURE_DELAY;
 					DoLure = nil;
 					return true;
-				else
+				elseif ( not LastLure.time ) then
 					LastLure = nil;
 					LastState = 0;
 				end

@@ -13,7 +13,6 @@ function config:setEnabled(value)
 		config.enabled = false;
 	end
 end
-
 function config:setShowLevelInWorld(value)
 	if (value and not config.showLevelInWorld) then
 		config.showLevelInWorld = true;
@@ -21,7 +20,6 @@ function config:setShowLevelInWorld(value)
 		config.showLevelInWorld = false;
 	end
 end
-
 function config:setShowLevelInBattle(value)
 	if (value and not config.showLevelInBattle) then
 		config.showLevelInBattle = true;
@@ -29,7 +27,6 @@ function config:setShowLevelInBattle(value)
 		config.showLevelInBattle = false;
 	end
 end
-
 function config:setShowLevelInMinimap(value)
 	if (value and not config.showLevelInMinimap) then
 		config.showLevelInMinimap = true;
@@ -37,13 +34,19 @@ function config:setShowLevelInMinimap(value)
 		config.showLevelInMinimap = false;
 	end
 end
-
 function config:setColorReleaseDialog(value)
 	if (value and not config.colorReleaseDialog) then
 		config.colorReleaseDialog = true;
 	elseif (not value and config.colorReleaseDialog) then
 		config.colorReleaseDialog = false;
 		WPT:resetReleaseDialog();
+	end
+end
+function config:setShowAdditionalPets(value)
+	if (value and not config.showAdditionalPets) then
+		config.showAdditionalPets = true;
+	elseif (not value and config.showAdditionalPets) then
+		config.showAdditionalPets = false;
 	end
 end
 
@@ -69,26 +72,30 @@ levelInMinimapCheckBox:setBelow(levelInBattleCheckBox);
 local colorReleaseDialogCheckBox = factory:createCheckBox(configPanel, L.colorReleaseDialogCheckBoxLabel, L.colorReleaseDialogCheckBoxTooltip, "global");
 colorReleaseDialogCheckBox:setBelow(levelInMinimapCheckBox);
 
+local showAdditionalPetsCheckBox = factory:createCheckBox(configPanel, L.showAdditionalPetsCheckBoxLabel, L.showAdditionalPetsCheckBoxTooltip, "global");
+showAdditionalPetsCheckBox:setBelow(colorReleaseDialogCheckBox);
+
 function configPanel:default()
 	config:setEnabled(true);
 	config:setShowLevelInWorld(true);
 	config:setShowLevelInBattle(true);
 	config:setShowLevelInMinimap(false);
 	config:setColorReleaseDialog(true);
+	config:setShowAdditionalPets(true);
 end
-
 function configPanel:okay()
 	config:setEnabled(enabledCheckBox:GetChecked());
 	config:setShowLevelInWorld(levelInWorldCheckBox:GetChecked());
 	config:setShowLevelInBattle(levelInBattleCheckBox:GetChecked());
 	config:setShowLevelInMinimap(levelInMinimapCheckBox:GetChecked());
 	config:setColorReleaseDialog(colorReleaseDialogCheckBox:GetChecked());
+	config:setShowAdditionalPets(showAdditionalPetsCheckBox:GetChecked());
 end
-
 function configPanel:refresh()
 	enabledCheckBox:SetChecked(config.enabled);
 	levelInWorldCheckBox:SetChecked(config.showLevelInWorld);
 	levelInBattleCheckBox:SetChecked(config.showLevelInBattle);
 	levelInMinimapCheckBox:SetChecked(config.showLevelInMinimap);
 	colorReleaseDialogCheckBox:SetChecked(config.colorReleaseDialog);
+	showAdditionalPetsCheckBox:SetChecked(config.showAdditionalPets);
 end

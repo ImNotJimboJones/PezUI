@@ -6,9 +6,14 @@ local realmName = GetRealmName();
 local currentDataVersion = 1;
 local savedVarsFrame = CreateFrame("Frame");
 
-local Event_loaded = "ADDON_LOADED";
-local Event_enterWorld = "PLAYER_LOGIN";
-local Event_logout = "PLAYER_LOGOUT";
+-- Core Config values
+
+TMPrivate.configValues = {};
+local configValues = TMPrivate.configValues;
+
+configValues.dailyResetTime = 11;
+
+-- variable storage/loading functions
 
 local function checkData()
 	if (type(ThnanMod_Saved) ~= "table") then
@@ -45,6 +50,9 @@ local function playerLogout(self, event)
 		ThnanMod_Saved[realmName].realm[pluginName] = realm;
 		ThnanMod_Saved[realmName][playerName][pluginName] = character;
 	end
+	-- framework values
+	ThnanMod_Saved[realmName].realm.Core = {};
+	ThnanMod_Saved[realmName].realm.Core.dailyResetTime = configValues.dailyResetTime;
 end
 local function enteringWorld(self, event)
 	for pluginName, plugin in pairs(TMPrivate.plugins) do
@@ -53,19 +61,24 @@ local function enteringWorld(self, event)
 		local charRef = ThnanMod_Saved[realmName][playerName][pluginName];
 		plugin:loadSavedVars(globalRef, realmRef, charRef);
 	end
-	savedVarsFrame:UnregisterEvent(Event_enterWorld);
+	
+	if type(ThnanMod_Saved[realmName].realm.Core) == "table" then
+		configValues.dailyResetTime = ThnanMod_Saved[realmName].realm.Core.dailyResetTime;
+	end
+	
+	savedVarsFrame:UnregisterEvent("PLAYER_LOGIN");
 	savedVarsFrame:SetScript("OnEvent", playerLogout);
-	savedVarsFrame:RegisterEvent(Event_logout);
+	savedVarsFrame:RegisterEvent("PLAYER_LOGOUT");
 	ThnanMod:output(L.loaded:format(L.slashCommand));
 end
 local function addonLoaded(self, event, addonName)
 	if addonName == tocName then
 		checkData();
-		savedVarsFrame:UnregisterEvent(Event_loaded);
+		savedVarsFrame:UnregisterEvent("ADDON_LOADED");
 		savedVarsFrame:SetScript("OnEvent", enteringWorld);
-		savedVarsFrame:RegisterEvent(Event_enterWorld);
+		savedVarsFrame:RegisterEvent("PLAYER_LOGIN");
 	end
 end
 
 savedVarsFrame:SetScript("OnEvent", addonLoaded);
-savedVarsFrame:RegisterEvent(Event_loaded);
+savedVarsFrame:RegisterEvent("ADDON_LOADED");

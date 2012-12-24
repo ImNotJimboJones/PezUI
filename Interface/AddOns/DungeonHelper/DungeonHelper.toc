@@ -1,11 +1,11 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: DungeonHelper
-## Version: v2.3.2
+## Version: v2.3.3
 ## Notes:
 ## Author: yess
 ## X-eMail: starfire@fantasymail.de
 ## SavedVariables: DungeonHelperDB
-## X-Curse-Packaged-Version: v2.3.2
+## X-Curse-Packaged-Version: v2.3.3
 ## X-Curse-Project-Name: Dungeon Helper
 ## X-Curse-Project-ID: broker_findgroup
 ## X-Curse-Repository-ID: wow/broker_findgroup/mainline

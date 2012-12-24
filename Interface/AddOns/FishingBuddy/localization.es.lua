@@ -185,8 +185,8 @@ Puntuaci\195\179n estilo Draznar's: %d ",
 	ROLE_TRANSLATE_KOKR = "Traducci\195\179n Coreana",
 	ROLE_TRANSLATE_PTBR = "Traducci\195\179n portuguesa brasile\195\177a", -- Needs review
 	ROLE_TRANSLATE_RURU = "Traducci\195\179n Rusa",
-	ROLE_TRANSLATE_ZHCN = "Traducci\195\179n Chino Simplificado", -- Needs review
-	ROLE_TRANSLATE_ZHTW = "Traducci\195\179n Chino Tradicional", -- Needs review
+	ROLE_TRANSLATE_ZHCN = "Traducci\195\179n Chino simplificado.",
+	ROLE_TRANSLATE_ZHTW = "Traducci\195\179n Chino tradicional.",
 	SCHOOL = "Card\195\186men",
 	SHOWFISHIES = "Muestra Pez",
 	SHOWFISHIES_INFO = "Muestra historial de pesca por tipo de pez.",
