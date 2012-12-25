@@ -1,3 +1,7 @@
+** v1.23
+
+- Fixed a typo that caused an error
+
 ** v1.22
 
 - Fixed a bug with expertise for casters

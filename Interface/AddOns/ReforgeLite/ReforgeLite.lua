@@ -1,4 +1,4 @@
--- ReforgeLite v1.22 by d07.RiV (Iroared)
+-- ReforgeLite v1.23 by d07.RiV (Iroared)
 -- All rights reserved
 
 local function DeepCopy (t, cache)
@@ -351,7 +351,7 @@ ReforgeLite.itemStats = {
   {
     name = "ITEM_MOD_HIT_RATING_SHORT",
     tip = L["Hit"],
-    tip = L["HitLong"],
+    long = L["HitLong"],
     getter = function()
       local result = GetCombatRating(class == "HUNTER" and CR_HIT_RANGED or CR_HIT_SPELL)
       local e2h = ReforgeLite:GetConversion().e2h
