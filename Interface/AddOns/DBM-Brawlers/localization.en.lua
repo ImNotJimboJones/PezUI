@@ -6,7 +6,7 @@ local L
 L= DBM:GetModLocalization("Brawlers")
 
 L:SetGeneralLocalization({
-	name = "Brawlers: Options"
+	name = "Brawlers: General"
 })
 
 L:SetWarningLocalization({
@@ -15,17 +15,13 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	specWarnYourTurn	= "Show special warning when it's your match",
-	SpectatorMode		= "Show warnings/timers when spectating fights"
+	SpectatorMode		= "Show warnings/timers when spectating fights\n(Personal 'Special Warning' messages not shown to spectators)"
 })
 
 L:SetMiscLocalization({
---	Bizmo			= "Bizmo",
+	Bizmo			= "Bizmo",--Alliance
+	Bazzelflange	= "Boss Bazzelflange",--Horde
 	--I wish there was a better way to do this....so much localizing. :(
---	Rank			= "Rank (%d+)",--Experimental "Entering arena" detection by scanning for Rank plus number
---	EnteringArena1	= "Now entering the arena",
---	EnteringArena2	= "Here's our challenger",
---	EnteringArena3	= "Look out... here comes",
---	EnteringArena4	= "Put your hands together",
 	Rank1			= "Rank 1",
 	Rank2			= "Rank 2",
 	Rank3			= "Rank 3",
@@ -34,20 +30,7 @@ L:SetMiscLocalization({
 	Rank6			= "Rank 6",
 	Rank7			= "Rank 7",
 	Rank8			= "Rank 8",
-	Victory1		= "is our victor",
-	Victory2		= "Congratulations",
-	Victory3		= "Brilliant victory",
-	Victory4		= "wins",
-	Victory5		= "Keep 'em comin'",
-	Victory6		= "Great job not dying",
-	Lost1			= "were you even trying",
-	Lost2			= "Now would you kindly remove your corpse",
-	Lost3			= "So much blood! Nice",
-	Lost4			= "Get back in line and try again",
-	Lost5			= "you're gonna have to break a few eggs",
-	Lost6			= "try not to die so much",
-	Lost7			= "what a mess",
-	Lost8			= "His name was",--LoL at fight club reference here
+	Proboskus		= "Oh dear... I'm sorry, but it looks like you're going to have to fight Proboskus."
 })
 
 ------------
