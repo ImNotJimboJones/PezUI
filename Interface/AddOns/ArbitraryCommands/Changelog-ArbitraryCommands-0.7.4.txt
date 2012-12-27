@@ -1,9 +1,17 @@
 ------------------------------------------------------------------------
-r28 | farmbuyer | 2012-12-15 23:17:49 +0000 (Sat, 15 Dec 2012) | 1 line
+r30 | farmbuyer | 2012-12-26 23:04:38 +0000 (Wed, 26 Dec 2012) | 1 line
 Changed paths:
-   A /tags/0.7.1 (from /trunk:27)
+   A /tags/0.7.4 (from /trunk:29)
 
-Tagging as 0.7.1
+Tagging as 0.7.4
+------------------------------------------------------------------------
+r29 | farmbuyer | 2012-12-26 23:03:32 +0000 (Wed, 26 Dec 2012) | 1 line
+Changed paths:
+   M /trunk/ArbitraryCommands.toc
+   M /trunk/ac.lua
+   M /trunk/helptext.lua
+
+TOC bump for 5.1, correct CHAT() argument handling for /i types.
 ------------------------------------------------------------------------
 r27 | farmbuyer | 2012-12-15 23:17:16 +0000 (Sat, 15 Dec 2012) | 1 line
 Changed paths:

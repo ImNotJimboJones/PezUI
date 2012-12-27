@@ -743,13 +743,14 @@ do
 		["s"] = "SAY", ["say"] = "SAY",
 		["y"] = "YELL", ["yell"] = "YELL",
 		["p"] = "PARTY", ["party"] = "PARTY",
+		["i"] = "INSTANCE_CHAT", ["instance"] = "INSTANCE_CHAT",
 		["ra"] = "RAID", ["raid"] = "RAID",
 		["g"] = "GUILD", ["o"] = "OFFICER",
 		["rw"] = "RAID_WARNING",
-		["bg"] = "BATTLEGROUND",
+		["bg"] = "INSTANCE_CHAT",
 	}
 	for _,v in ipairs{
-		"SAY", "YELL", "PARTY", "RAID", "GUILD", "OFFICER", "RAID_WARNING", "BATTLEGROUND"
+		"SAY", "YELL", "INSTANCE_CHAT", "PARTY", "RAID", "GUILD", "OFFICER", "RAID_WARNING"
 	} do
 		local l = _G["SLASH_"..v.."1"]
 		l = l and l:sub(2)

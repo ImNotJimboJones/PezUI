@@ -82,7 +82,7 @@ Examples: <CHAT("rw","Pulling in 5 seconds")>
 
 <CHAT("r","Thank you for your interest in our guild.  The website is www.example.com.")>
 
-Strings usable as <chat_slash> are say/s, yell/y, party/p, raid/ra,
+Strings usable as <chat_slash> are say/s, yell/y, instance/i, party/p, raid/ra,
 rw, bg, r (to reply to whispers), and valid numbers for public channels.  For
 locales other than US English, the common slash commands for those chat types
 should be included automatically.
