@@ -74,6 +74,7 @@ function VUHDO_updatePlayerTarget()
 			VUHDO_setHealth("target", 1); -- VUHDO_UPDATE_ALL
 		else
 			VUHDO_removeHots("target");
+			VUHDO_resetDebuffsFor("target");
 			VUHDO_removeAllDebuffIcons("target");
 			VUHDO_updateTargetBars("target");
 			table.wipe(VUHDO_RAID["target"] or tEmptyInfo);
@@ -81,9 +82,10 @@ function VUHDO_updatePlayerTarget()
 		end
 
 		VUHDO_updateHealthBarsFor("target", 1); -- VUHDO_UPDATE_ALL
-		VUHDO_REMOVE_HOTS = false;
-		VUHDO_updateAllRaidBars();
-		VUHDO_initAllEventBouquets();
+		--VUHDO_REMOVE_HOTS = false;
+		--VUHDO_updateAllRaidBars();
+		--VUHDO_initAllEventBouquets();
+		VUHDO_initEventBouquetsFor("target");
 	end
 end
 

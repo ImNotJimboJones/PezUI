@@ -200,7 +200,7 @@ local function VUHDO_generateTargetMacroText(aTarget, aFriendlyAction, aHostileA
 			tModiSpell = "[noharm,@vuhdo";
 		end
 
-		if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"]) then
+		--[[if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"]) then
 			if ("DRUID" == VUHDO_PLAYER_CLASS) then
 				tModiSpell = tModiSpell .. ",noform:1/3";
 			end
@@ -208,7 +208,7 @@ local function VUHDO_generateTargetMacroText(aTarget, aFriendlyAction, aHostileA
 			if ("PRIEST" == VUHDO_PLAYER_CLASS) then
 				tModiSpell = tModiSpell .. ",noform:1";
 			end
-		end
+		end]]
 		tModiSpell = tModiSpell .. "] ";
 
 		tFriendText = "/use " .. tModiSpell .. aFriendlyAction .. "\n";
@@ -350,7 +350,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 
 	tSpellPost = getAutoBattleRezText(anIsKeyboard);
 
-	if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
+	--[[if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
 		and VUHDO_SPELLS[anAction] ~= nil and not VUHDO_SPELLS[anAction]["nostance"]) then
 
 		if ("DRUID" == VUHDO_PLAYER_CLASS) then
@@ -362,7 +362,7 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 			tModiSpell = tModiSpell .. "noform:1,";
 			tSpellPost = "/tar [form:1,nounithasvehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
 		end
-	end
+	end]]
 
 	if (anIsKeyboard) then
 		tText = tText .. "/use [" .. tModiSpell .. "@mouseover] " .. anAction .. "\n";

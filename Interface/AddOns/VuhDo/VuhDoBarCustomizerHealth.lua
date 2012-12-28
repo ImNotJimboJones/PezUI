@@ -659,7 +659,7 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 
   tAllButtons = VUHDO_getUnitButtons(aUnit);
 	tInfo = VUHDO_RAID[aUnit];
-	if (tInfo == nil or tAllButtons == nil) then
+	if (tAllButtons == nil) then
 		return;
 	end
 

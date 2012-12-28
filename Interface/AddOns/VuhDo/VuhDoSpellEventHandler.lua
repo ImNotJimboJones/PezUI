@@ -126,13 +126,12 @@ function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
 		if (VUHDO_CONFIG["RES_IS_SHOW_TEXT"]) then
 			local tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName);
 
-			local tGroupType = VUHDO_getCurrentGroupType();
-			if (VUHDO_GROUP_TYPE_RAID == tGroupType) then
-				SendChatMessage(tText, "RAID", nil, nil);
-			elseif (VUHDO_GROUP_TYPE_PARTY == tGroupType) then
-				SendChatMessage(tText, "PARTY", nil, nil);
-			else
-				SendChatMessage(tText, "WHISPER", nil, aTargetName);
+			if (UnitInBattleground("player") or HasLFGRestrictions()) then
+				SendChatMessage(tText, "INSTANCE_CHAT");
+			elseif (IsInRaid()) then
+				SendChatMessage(tText, "RAID");
+			elseif (IsInGroup()) then
+				SendChatMessage(tText, "PARTY");
 			end
 		end
 		return;

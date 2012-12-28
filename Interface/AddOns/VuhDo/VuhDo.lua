@@ -309,6 +309,7 @@ function VUHDO_setHealth(aUnit, aMode)
 		if (tIsDead) then
 			VUHDO_removeAllDebuffIcons(aUnit);
 			VUHDO_removeHots(aUnit);
+			VUHDO_initEventBouquetsFor(aUnit);
 		end
 
 		if (1 == aMode) then -- VUHDO_UPDATE_ALL
@@ -864,73 +865,36 @@ local tName, tRealm;
 local tOldUnitType;
 local tPet;
 function VUHDO_refreshRaidMembers()
-	VUHDO_IS_SUSPICIOUS_ROSTER = false;
+	VUHDO_PLAYER_RAID_ID = VUHDO_getPlayerRaidUnit();
+	VUHDO_IN_COMBAT_RELOG = false;
 
-	if (VUHDO_isConfigDemoUsers()) then
-		VUHDO_reloadRaidDemoUsers();
-		VUHDO_updateAllRaidNames();
-	else
-		VUHDO_PLAYER_RAID_ID = VUHDO_getPlayerRaidUnit();
-		VUHDO_IN_COMBAT_RELOG = false;
+	tOldUnitType = tUnitType;
+	tUnitType, tPetUnitType = VUHDO_getUnitIds();
 
-		tOldUnitType = tUnitType;
-		tUnitType, tPetUnitType = VUHDO_getUnitIds();
+	tMaxMembers = ("raid" == tUnitType) and 40 or ("party" == tUnitType) and 4 or 0;
 
-		tMaxMembers = ("raid" == tUnitType) and 4 or ("party" == tUnitType) and 4 or 0;
-		twipe(VUHDO_RAID_NAMES); -- für VUHDO_SUSPICIOUS_RAID_ROSTER
-
-		if (not InCombatLockdown()) then -- Im combat lockdown heben wir uns verwaiste unit-ids auf um nachrückende Spieler darstellen zu können
-			if (tOldUnitType ~= tUnitType) then -- Falls Gruppe<->Raid
-				twipe(VUHDO_RAID);
+	for i = 1, tMaxMembers do
+		tPlayer = format("%s%d", tUnitType, i);
+		if (UnitExists(tPlayer) and tPlayer ~= VUHDO_PLAYER_RAID_ID) then
+			tInfo = VUHDO_RAID[tPlayer];
+			if (tInfo == nil or VUHDO_RAID_GUIDS[UnitGUID(tPlayer)] ~= tPlayer) then
+				VUHDO_setHealth(tPlayer, 1); -- VUHDO_UPDATE_ALL
 			else
-				for tPlayer, _ in pairs(VUHDO_RAID) do
-					if (not UnitExists(tPlayer) or tPlayer == VUHDO_PLAYER_RAID_ID) then -- bei raid roster wechsel kann unsere raid id vorher wem anders gehört haben
-						VUHDO_RAID[tPlayer] = nil;
-					end
+				tInfo["group"] = VUHDO_getUnitGroup(tPlayer, false);
+				tInfo["isVehicle"] = UnitHasVehicleUI(tPlayer);
+				tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
+
+				if (tIsDcChange) then
+					VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
 				end
-			end
-		end
-
-		for i = 1, tMaxMembers do
-			tPlayer = format("%s%d", tUnitType, i);
-			if (UnitExists(tPlayer) and tPlayer ~= VUHDO_PLAYER_RAID_ID) then
-				tInfo = VUHDO_RAID[tPlayer];
-				if (tInfo == nil or VUHDO_RAID_GUIDS[UnitGUID(tPlayer)] ~= tPlayer) then
-					VUHDO_setHealth(tPlayer, 1); -- VUHDO_UPDATE_ALL
-				else
-					tInfo["group"] = VUHDO_getUnitGroup(tPlayer, false);
-					tInfo["isVehicle"] = UnitHasVehicleUI(tPlayer);
-					tInfo["role"] = VUHDO_determineRole(tPlayer); -- weil talent-scanner nach und nach arbeitet
-					tInfo["afk"], tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(tPlayer);
-					tInfo["range"] = VUHDO_isInRange(tPlayer);
-
-					tName, tRealm = UnitName(tPlayer);
-					tInfo["name"] = tName;
-					if (strlen(tRealm or "") > 0) then
-						tInfo["fullName"] = tName .. "-" .. tRealm;
-					else
-						tInfo["fullName"] = tName;
-						if (VUHDO_RAID_NAMES[tName] ~= nil) then
-							VUHDO_IS_SUSPICIOUS_ROSTER = true;
-						end
-					end
-					VUHDO_RAID_NAMES[tName] = tPlayer;
-
-					if (tIsDcChange) then
-						VUHDO_updateBouquetsForEvent(tPlayer, 19); -- VUHDO_UPDATE_DC
-					end
-				end
-
 				VUHDO_setHealthSafe(format("%s%d", tPetUnitType, i), 1); -- VUHDO_UPDATE_ALL
-			elseif (VUHDO_RAID[tPlayer] ~= nil) then
-				VUHDO_RAID[tPlayer]["connected"] = false;
-				tPet = VUHDO_RAID[tPlayer]["petUnit"];
-				if (VUHDO_RAID[tPet] ~= nil) then
-					VUHDO_RAID[tPet]["connected"] = false;
-				end
 			end
-
-			VUHDO_TIMERS["MIRROR_TO_MACRO"] = 8;
+		elseif (VUHDO_RAID[tPlayer] ~= nil) then
+			VUHDO_RAID[tPlayer]["connected"] = false;
+			tPet = VUHDO_RAID[tPlayer]["petUnit"];
+			if (VUHDO_RAID[tPet] ~= nil) then
+				VUHDO_RAID[tPet]["connected"] = false;
+			end
 		end
 
 		VUHDO_setHealthSafe("player", 1); -- VUHDO_UPDATE_ALL
@@ -954,9 +918,5 @@ function VUHDO_refreshRaidMembers()
 		VUHDO_sortEmergencies();
 	end
 	VUHDO_createClusterUnits();
-
-	if (VUHDO_IS_SUSPICIOUS_ROSTER) then
-		VUHDO_lateRaidReload();
-	end
 end
 

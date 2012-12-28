@@ -250,7 +250,6 @@ VUHDO_DEFAULT_SPELL_CONFIG = {
 	["IS_AUTO_FIRE"] = true,
 	["IS_FIRE_HOT"] = false,
 	["IS_FIRE_OUT_FIGHT"] = false,
-	["IS_KEEP_STANCE"] = false,
 	["IS_AUTO_TARGET"] = false,
 	["IS_CANCEL_CURRENT"] = false,
 	["IS_FIRE_TRINKET_1"] = false,
@@ -423,12 +422,6 @@ local function VUHDO_customDebuffsAddDefaultSettings(aBuffName)
 			["timer"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["timer"],
 			["isStacks"] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["isStacks"],
 		}
-
-		-- Wrack
-		--[[if (select(1, GetSpellInfo(92956)) == aBuffName) then
-			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isAliveTime"] = true;
-			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isFullDuration"] = true;
-		end]]
 	end
 
 	if (not VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][aBuffName]["isColor"]) then
@@ -749,74 +742,6 @@ function VUHDO_loadDefaultConfig()
 		VUHDO_CONFIG["IS_SHARE"] = true;
 		VUHDO_CONFIG["VERSION"] = 4;
 	end
-
-
-	--[[VUHDO_addCustomSpellIds(18,
-		92956, -- Sinestra: Wrack
-
-		-- Firelands
-		99506, -- Widows Kiss
-		--Alysrazor
-		101296, -- Fiero Blast
-		100723, -- Gushing Wound
-		--Shannox
-		99837, -- Crystal Prison
-		99937, -- Jagged Tear
-		--Baleroc
-		--99403, -- Tormented
-		99256, -- Torment
-		99252, -- Blaze of Glory
-		--Lord Rhyolith
-		--Majordomo Staghelm
-		98450, -- Searing Seeds
-		--Ragnaros
-		99399, -- Burning Wound
-		--Trash
-		99532  -- Melt Armor
-	);
-
-	-- 4.3 Dragon Soul
-	VUHDO_addCustomSpellIds(19,
-		-- Morchok
-		103687, -- Crush Armor
-		--Hagara the Stormbinder
-		104451, -- Ice Tomb
-		105259, -- Watery Entrenchment
-		105289, -- Shattered Ice
-		-- Warmaster Blackhorn
-		109204, -- Twilight Barrage
-		108046, -- Shockwave
-		108043, -- Devastate
-		107567, -- Brutal strike
-		107558, -- Degeneration
-		--108045, -- Vengeance
-		-- Ultraxion
-		106108, -- Heroic will
-		106369, -- Twilight shift
-		106415, -- Twilight burst
-		105927, -- Faded Into Twilight
-		110068, -- Fading light (not sure, maybe must be removed)
-		-- Yor'sahj the Unsleeping
-		--104849, -- Void bolt
-		109389, -- Deep Corruption
-		-- Warlord Zon'ozz
-		103434, -- Disrupting shadows
-		110306, -- Black Blood of Go'rath
-		--104543, -- Focused anger
-		--106836, -- Void diffusion
-		-- Spine of Deathwing
-		105563, -- Grasping Tendrils
-		105490, -- Fiery Grip
-		105479, -- Searing Plasma
-		106199, -- Blood corruption: death
-		106200, -- Blood corruption: earth
-		106005, -- Degradation
-		-- Madness of Deathwing
-		105841, -- Degenerative bite
-		105445, -- Blistering heat
-		109603  -- Tetanus
-	);]]
-
 
 	-- 5.x - MoP
 	VUHDO_addCustomSpellIds(20,

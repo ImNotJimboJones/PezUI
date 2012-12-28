@@ -67,6 +67,7 @@ local format = format;
 local sConfig = { };
 local sRebuffSecs;
 local sRebuffPerc;
+local sGermanOrEnglish = GetLocale() == "deDE" or GetLocale() == "enGB" or GetLocale() == "enUS";
 
 -----------------------------------------------------------------------------
 function VUHDO_buffWatchInitBurst()
@@ -671,7 +672,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 
 		elseif (VUHDO_BUFF_TARGET_ENCHANT == tMaxTarget) then
 			tHasEnchant, tEnchantDuration = GetWeaponEnchantInfo();
-			if (tHasEnchant and strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(16), 1, true)) then
+			if (tHasEnchant and (not sGermanOrEnglish or strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(16), 1, true))) then
 				return sEmpty, sEmpty, "player", tEnchantDuration * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 			end
 
@@ -681,7 +682,7 @@ local function VUHDO_getMissingBuffsForCode(aTargetCode, someBuffVariants, aCate
 		elseif (VUHDO_BUFF_TARGET_ENCHANT_OFF == tMaxTarget) then
 			_, _, _, tHasEnchant, tEnchantDuration = GetWeaponEnchantInfo();
 
-			if (tHasEnchant and strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(17), 1, true)) then
+			if (tHasEnchant and (not sGermanOrEnglish or strfind(someBuffVariants[1], VUHDO_getWeaponEnchantName(17), 1, true))) then
 				return sEmpty, sEmpty, "player", tEnchantDuration * 0.001, "player", VUHDO_PLAYER_GROUP, sEmpty, 0;
 			end
 

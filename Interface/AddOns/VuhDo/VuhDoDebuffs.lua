@@ -524,3 +524,10 @@ local tEmptySchoolInfo = { };
 function VUHDO_getUnitDebuffSchoolInfos(aUnit, aDebuffSchool)
 	return (VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] or VUHDO_INIT_UNIT_DEBUFF_SCHOOLS)[aDebuffSchool] or tEmptySchoolInfo;
 end
+
+
+--
+function VUHDO_resetDebuffsFor(aUnit)
+	VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] = nil;
+	VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit] = nil;
+end

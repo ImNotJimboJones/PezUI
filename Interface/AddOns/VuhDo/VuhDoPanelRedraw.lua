@@ -1110,7 +1110,7 @@ function VUHDO_lnfReloadUI()
 	end
 	VUHDO_IS_RELOADING = true;
 	VUHDO_initAllBurstCaches();
-	VUHDO_refreshRaidMembers();
+	VUHDO_reloadRaidMembers();
 	VUHDO_updatePanelVisibility();
 	VUHDO_redrawAllPanels();
 	VUHDO_buildGenericHealthBarBouquet();

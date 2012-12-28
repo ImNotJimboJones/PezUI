@@ -389,6 +389,8 @@ function VuhDoActionPostClick(aButton)
 end
 
 
+local sIsStatusShown = false;
+
 
 ---
 function VUHDO_startMoving(aPanel)
@@ -416,6 +418,7 @@ function VUHDO_startMoving(aPanel)
 	elseif (IsMouseButtonDown(2) and not InCombatLockdown()
 		and (VuhDoNewOptionsPanelPanel == nil or not VuhDoNewOptionsPanelPanel:IsVisible())) then
 		VUHDO_showAllPlayerIcons(aPanel);
+		sIsStatusShown = true;
 	end
 end
 
@@ -430,7 +433,11 @@ function VUHDO_stopMoving(aPanel)
 	end
 	VUHDO_savePanelCoords(aPanel);
 	VUHDO_saveCurrentProfilePanelPosition(VUHDO_getPanelNum(aPanel));
-	VUHDO_hideAllPlayerIcons();
+	if (sIsStatusShown) then
+		sIsStatusShown = false;
+		VUHDO_hideAllPlayerIcons();
+		VUHDO_initAllEventBouquets();
+	end
 end
 
 

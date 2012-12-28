@@ -359,7 +359,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		VUHDO_EVENT_TIMES[anEvent] = { 0, 0, 0, 0, 0, 0 };
 	end
 	local tDuration = GetTime();]]
-
+	--VUHDO_Msg(anEvent);
 	if ("COMBAT_LOG_EVENT_UNFILTERED" == anEvent) then
 		if (VUHDO_VARIABLES_LOADED) then
 			VUHDO_parseCombatLogEvent(anArg2, anArg8, anArg11, anArg13, anArg15);

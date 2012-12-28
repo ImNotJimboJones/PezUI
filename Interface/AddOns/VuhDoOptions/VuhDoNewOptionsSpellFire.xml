@@ -260,22 +260,6 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentStanceCheckButton" text="VUHDO_I18N_KEEP_STANCE" inherits="VuhDoCheckButtonTemplate">
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="13" y="-31" />
-								</Offset>
-							</Anchor>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								VUHDO_lnfSetModel(self, "VUHDO_SPELL_CONFIG.IS_KEEP_STANCE");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K345);
-							</OnLoad>
-						</Scripts>
-					</CheckButton>
-
 					<CheckButton name="$parentTargetCheckButton" text="VUHDO_I18N_TARGET" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT">

@@ -625,7 +625,9 @@ function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 				VUHDO_updateEventBouquet(aUnit, tName);
 			elseif (aUnit ~= nil) then -- focus / n/a
 				for _, tDelegate in pairs(VUHDO_REGISTERED_BOUQUETS[tName]) do
-					tDelegate(aUnit, true, nil, 100, 0, 100, VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"], nil, nil, 0);
+					if (VUHDO_isBouquetInterestedInEvent(tName, VUHDO_UPDATE_DC)) then
+						tDelegate(aUnit, true, nil, 100, 0, 100, VUHDO_PANEL_SETUP["BAR_COLORS"]["OFFLINE"], nil, nil, 0);
+					end
 				end
 			end
 		end
@@ -644,6 +646,26 @@ function VUHDO_initAllEventBouquets()
 
 	VUHDO_updateBouquetsForEvent("focus", 19); -- VUHDO_UPDATE_DC
 	VUHDO_updateBouquetsForEvent("target", 19); -- VUHDO_UPDATE_DC
+end
+
+
+
+--
+function VUHDO_initEventBouquetsFor(...)
+	local tUnitToInit;
+	for tCnt = 1, select('#', ...) do
+
+		tUnitToInit = select(tCnt, ...);
+		for _, tAllBouquetUnits in pairs(VUHDO_LAST_EVALUATED_BOUQUETS) do
+			for tUnit, tAllResults in pairs(tAllBouquetUnits) do
+				if (tUnit == tUnitToInit) then
+					tAllResults[1] = nil; -- Change "active" flag to enforce re-evaluation
+				end
+			end
+		end
+		VUHDO_updateBouquetsForEvent(tUnitToInit, 1); -- VUHDO_UPDATE_ALL
+
+	end
 end
 
 

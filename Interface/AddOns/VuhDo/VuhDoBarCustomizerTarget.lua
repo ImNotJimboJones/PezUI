@@ -217,13 +217,21 @@ end
 
 
 --
+local sTargetSourceUnits = {};
+local sUnitTargetsUnits = {};
+local sUnitTotUnits = {};
+
+--
 local tTargetButton, tTotButton;
 local tAllButtons;
 local tTarget;
 local tTargetOfTarget;
 function VUHDO_updateTargetBars(aUnit)
 	if (strfind(aUnit, "target", 1, true) and aUnit ~= "target") then
-		aUnit = gsub(aUnit, "target", "");
+		if (sTargetSourceUnits[aUnit] == nil) then
+			sTargetSourceUnits[aUnit] = gsub(aUnit, "target", "");
+		end
+		aUnit = sTargetSourceUnits[aUnit];
 	end
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
@@ -231,8 +239,15 @@ function VUHDO_updateTargetBars(aUnit)
 		return;
 	end
 
-	tTarget = aUnit .. "target";
-	tTargetOfTarget = tTarget .. "target";
+	if (sUnitTargetsUnits[aUnit] == nil) then
+		sUnitTargetsUnits[aUnit] = aUnit .. "target";
+	end
+	tTarget = sUnitTargetsUnits[aUnit];
+
+	if (sUnitTotUnits[tTarget] == nil) then
+		sUnitTotUnits[tTarget] = tTarget .. "target";
+	end
+	tTargetOfTarget = sUnitTotUnits[tTarget];
 
 	for _, tButton in pairs(tAllButtons) do
 		VUHDO_forgetTargetButton(tTarget, VUHDO_getTargetButton(tButton));
@@ -319,7 +334,10 @@ local function VUHDO_updateTargetHealth(aUnit, aTargetUnit)
 		end
 	end
 
-	tTotUnit = aTargetUnit .. "target";
+	if (sUnitTotUnits[aTargetUnit] == nil) then
+		sUnitTotUnits[aTargetUnit] = aTargetUnit .. "target";
+	end
+	tTotUnit = sUnitTotUnits[tTarget];
 
 	tGuid = UnitGUID(tTotUnit);
 	if (VUHDO_TOT_GUIDS[aUnit] ~= tGuid) then
