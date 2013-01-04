@@ -101,6 +101,35 @@ local MovAny = {
 		MoneyWonAlertMover1 = "MoneyWonAlertMover1",
 		MoneyWonAlertMover2 = "MoneyWonAlertMover2",
 		MoneyWonAlertMover3 = "MoneyWonAlertMover3",
+		
+		StaticPopup1 = "StaticPopup1",
+		StaticPopup2 = "StaticPopup2",
+		StaticPopup3 = "StaticPopup3",
+		StaticPopup4 = "StaticPopup4",
+		StaticPopup1Button1 = "StaticPopup1Button1",
+		StaticPopup1Button2 = "StaticPopup1Button2",
+		StaticPopup1Button3 = "StaticPopup1Button3",
+		StaticPopup1EditBox = "StaticPopup1EditBox",
+		StaticPopup2Button1 = "StaticPopup2Button1",
+		StaticPopup2Button2 = "StaticPopup2Button2",
+		StaticPopup2Button3 = "StaticPopup2Button3",
+		StaticPopup2EditBox = "StaticPopup2EditBox",
+		StaticPopup3Button1 = "StaticPopup3Button1",
+		StaticPopup3Button2 = "StaticPopup3Button2",
+		StaticPopup3Button3 = "StaticPopup3Button3",
+		StaticPopup3EditBox = "StaticPopup3EditBox",
+		StaticPopup4Button1 = "StaticPopup4Button1",
+		StaticPopup4Button2 = "StaticPopup4Button2",
+		StaticPopup4Button3 = "StaticPopup4Button3",
+		StaticPopup4EditBox = "StaticPopup4EditBox",
+		
+		DropDownList1 = "DropDownList1",
+		DropDownList1Button1 = "DropDownList1Button1",
+		DropDownList1Button2 = "DropDownList1Button2",
+		DropDownList1Button3 = "DropDownList1Button3",
+		DropDownList1Button4 = "DropDownList1Button4",
+		DropDownList1Button5 = "DropDownList1Button5",
+		DropDownList1Button6 = "DropDownList1Button6",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -437,13 +466,28 @@ local MovAny = {
 	end,
 	
 	hPetActionBar_Update = function()
-		API:SyncElement("PetActionButtonsMover")
-		API:SyncElement("PetActionButtonsVerticalMover")
+	--	if ( MovAny:IsModified(PetActionButtonsMover) or MovAny:IsModified(PetActionButtonsVerticalMover) ) then
+			API:SyncElement("PetActionButtonsMover")
+			API:SyncElement("PetActionButtonsVerticalMover")
+	--	end
+	end,
+	
+	hFocusFrame_Update = function()
+	--print("Test")
+		if MovAny:IsModified(FocusFrame, opt, hidden) then
+		--	print("HIDE")
+			RegisterStateDriver("FocusFrame", "visibility", "hide")
+		else
+		--	print("SHOW")
+			RegisterStateDriver("FocusFrame", "visibility", "show");
+		end
 	end,
 	
 	hPetActionBarFrame_OnUpdate = function()
-		API:SyncElement("PetActionButtonsMover")
-		API:SyncElement("PetActionButtonsVerticalMover")
+	--	if ( MovAny:IsModified(PetActionButtonsMover) or MovAny:IsModified(PetActionButtonsVerticalMover) ) then
+			API:SyncElement("PetActionButtonsMover")
+			API:SyncElement("PetActionButtonsVerticalMover")
+	--	end
 	end,
 	hAddFrameLock = function()
 	--	print("hAddFrameLock", SHOW_MULTI_ACTIONBAR_1, SHOW_MULTI_ACTIONBAR_2)
@@ -469,7 +513,7 @@ _G.MovAny = MovAny
 
 BINDING_HEADER_MOVEANYTHING = "MoveAnything"
 
-StaticPopupDialogs["MOVEANYTHING_RESET_ALL_CONFIRM"] = {
+--[[StaticPopupDialogs["MOVEANYTHING_RESET_ALL_CONFIRM"] = {
 	preferredIndex = 3,
 	text = MOVANY.RESET_ALL_CONFIRM,
 	button1 = TEXT(YES),
@@ -482,7 +526,50 @@ StaticPopupDialogs["MOVEANYTHING_RESET_ALL_CONFIRM"] = {
 	showAlert = 1,
 	whileDead = 1,
 	hideOnEscape = 1,
-}
+}]]
+
+
+MoveAny_ProfileResetAll = CreateFrame("Frame", "MoveAny_ProfileResetAll", UIParent)
+MoveAny_ProfileResetAll:SetBackdrop({
+	bgFile = [=[Interface\DialogFrame\UI-DialogBox-Background]=],
+	edgeFile = [=[Interface\DialogFrame\UI-DialogBox-Border]=], tile = true, edgeSize = 32,
+	insets = {top = 12, left = 11, bottom = 11, right = 12},
+})
+MoveAny_ProfileResetAll:SetBackdropColor(0 , 0 , 0 , 0.8)
+MoveAny_ProfileResetAll:SetPoint("CENTER", UIParent, "CENTER", 16, -2)
+MoveAny_ProfileResetAll:SetFrameStrata("TOOLTIP")
+MoveAny_ProfileResetAll:SetSize(336, 120)
+MoveAny_ProfileResetAll:Hide()
+
+MoveAny_ProfileResetAll.fstring = MoveAny_ProfileResetAll:CreateFontString(nil, "OVERLAY")
+MoveAny_ProfileResetAll.fstring:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+MoveAny_ProfileResetAll.fstring:SetText(MOVANY.PROFILE_RESET_CONFIRM)
+MoveAny_ProfileResetAll.fstring:SetTextColor(1, 0.8, 0)
+MoveAny_ProfileResetAll.fstring:SetShadowOffset(0, 0)
+MoveAny_ProfileResetAll.fstring:SetPoint("TOPLEFT", MoveAny_ProfileResetAll, "TOPLEFT", 20 , -25)
+
+MoveAny_ProfileResetAll.button1 = CreateFrame("Button", "MoveAny_ProfileResetAllButton1", MoveAny_ProfileResetAll, "UIPanelButtonTemplate")
+MoveAny_ProfileResetAll.button1:SetPoint("BOTTOMLEFT", MoveAny_ProfileResetAll, "BOTTOMLEFT", 20, 20)
+MoveAny_ProfileResetAll.button1:SetFrameLevel(MoveAny_ProfileResetAll:GetFrameLevel() + 2)
+MoveAny_ProfileResetAll.button1:SetHeight(22)
+MoveAny_ProfileResetAll.button1:SetWidth(80)
+MoveAny_ProfileResetAll.button1:SetFrameStrata("TOOLTIP")
+MoveAny_ProfileResetAll.button1:SetText(YES)
+MoveAny_ProfileResetAll.button1:SetNormalFontObject("GameFontNormalSmall")
+MoveAny_ProfileResetAll.button1:SetHighlightFontObject("GameFontHighlightSmall")
+MoveAny_ProfileResetAll.button1:SetScript("OnClick", function() MovAny:CompleteReset() MoveAny_ProfileResetAll:Hide() end)
+
+MoveAny_ProfileResetAll.button2 = CreateFrame("Button", "MoveAny_ProfileResetAllButton2", MoveAny_ProfileResetAll, "UIPanelButtonTemplate")
+MoveAny_ProfileResetAll.button2:SetPoint("BOTTOMRIGHT", MoveAny_ProfileResetAll, "BOTTOMRIGHT",-20, 20)
+MoveAny_ProfileResetAll.button2:SetFrameLevel(MoveAny_ProfileResetAll:GetFrameLevel() + 2)
+MoveAny_ProfileResetAll.button2:SetHeight(22)
+MoveAny_ProfileResetAll.button2:SetWidth(80)
+MoveAny_ProfileResetAll.button2:SetFrameStrata("TOOLTIP")
+MoveAny_ProfileResetAll.button2:SetText(NO)
+MoveAny_ProfileResetAll.button2:SetNormalFontObject("GameFontNormalSmall")
+MoveAny_ProfileResetAll.button2:SetHighlightFontObject("GameFontHighlightSmall")
+MoveAny_ProfileResetAll.button2:SetScript("OnClick", function() MoveAny_ProfileResetAll:Hide() end)
+
 
 function MovAny:Load()
 	if self.inited then
@@ -643,6 +730,7 @@ function MovAny:Boot()
 	if self.inited then
 		return
 	end
+	
 	if not MADB.dontHookCreateFrame and CreateFrame then
 		hooksecurefunc("CreateFrame", self.hCreateFrame)
 	end
@@ -774,7 +862,8 @@ function MovAny:Boot()
 		self:hBlizzard_TalentUI()
 	end
 end
-
+	
+	
 function MovAny:OnPlayerLogout()
 	if not MAOptions then
 		return
@@ -5176,22 +5265,21 @@ function MovAny_OptionsOnShow()
 end
 
 function MovAny:ProfileRenameClicked(b)
-	local dlg = StaticPopup_Show("MOVEANYTHING_PROFILE_RENAME", MovAny:GetProfileName())
-	if dlg then
-		dlg.editBox:SetText(MovAny:GetProfileName())
-	end
+	MoveAny_ProfileRename:Show()
+	MoveAny_ProfileRename.editBox:SetText(MovAny:GetProfileName())
 end
 
 function MovAny:ProfileSaveAsClicked(b)
-	StaticPopup_Show("MOVEANYTHING_PROFILE_SAVE_AS")
+	MoveAny_SaveAs:Show()
 end
 
 function MovAny:ProfileAddClicked(b)
-	StaticPopup_Show("MOVEANYTHING_PROFILE_ADD")
+	MoveAny_ProfileAdd:Show()
 end
 
 function MovAny:ProfileDeleteClicked(b)
-	StaticPopup_Show("MOVEANYTHING_PROFILE_DELETE", MovAny:GetProfileName())
+--	StaticPopup_Show("MOVEANYTHING_PROFILE_DELETE", MovAny:GetProfileName())
+	MoveAny_ProfileDelete:Show()
 end
 
 function MovAny.ProfileDropDownClicked(b)

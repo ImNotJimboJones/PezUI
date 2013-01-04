@@ -422,7 +422,7 @@
 						if MADB.playSound then
 							PlaySound("igMainMenuOption")
 						end
-						StaticPopup_Show("MOVEANYTHING_PROFILE_RESET_CONFIRM")
+						MoveAny_ProfileReset:Show()
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -503,7 +503,7 @@
 						if MADB.playSound then
 							PlaySound("igMainMenuOption")
 						end
-						StaticPopup_Show("MOVEANYTHING_RESET_ALL_CONFIRM")
+						MoveAny_ProfileResetAll:Show()
 					</OnClick>
 				</Scripts>
 			</Button>

@@ -69,7 +69,7 @@
 --     Returns an array with the set of unit ids for the current group.
 --]]
 
-local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("46"):match ("(%d+)") or 0)
+local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("47"):match ("(%d+)") or 0)
 
 if not LibStub then error(MAJOR.." requires LibStub") end
 local lib = LibStub:NewLibrary (MAJOR, MINOR)
@@ -128,7 +128,7 @@ lib.cache = {}
 lib.static_cache = {}
 
 
--- Note: hook before we cache the NotifyInspect reference!
+-- Note: if we cache NotifyInspect, we have to hook before we cache it!
 if not lib.hooked then
   hooksecurefunc("NotifyInspect", function (...) return lib:NotifyInspect (...) end)
   lib.hooked = true
@@ -154,7 +154,7 @@ local GetSpecializationRoleByID       = _G.GetSpecializationRoleByID
 local GetSpellInfo                    = _G.GetSpellInfo
 local GetTalentInfo                   = _G.GetTalentInfo
 local IsInRaid                        = _G.IsInRaid
-local NotifyInspect                   = _G.NotifyInspect
+--local NotifyInspect                   = _G.NotifyInspect -- Don't cache, as to avoid missing future hooks
 local GetNumClasses                   = _G.GetNumClasses
 local UnitExists                      = _G.UnitExists
 local UnitGUID                        = _G.UnitGUID

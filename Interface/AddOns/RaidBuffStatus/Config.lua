@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 584 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 591 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -82,7 +82,7 @@ local options = {
 			name = 'f',
 			desc = 'Testin stuff',
 			func = function()
-				SendAddonMessage("oRA3", RaidBuffStatus:Serialize("Inventory", "Healthstone"), "RAID")
+				RaidBuffStatus:SendAddonMessage("oRA3", RaidBuffStatus:Serialize("Inventory", "Healthstone"))
 			end,
 			guiHidden = true,
 			cmdHidden = true,

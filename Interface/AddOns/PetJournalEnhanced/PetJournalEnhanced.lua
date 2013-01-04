@@ -10,6 +10,8 @@ local DESCENDING = 2
 local USER = nil
 
 local _
+local breedInfo = LibStub("LibPetBreedInfo-1.0")
+
 
 
 PetJournalEnhanced = LibStub("AceAddon-3.0"):NewAddon("PetJournalEnhanced","AceEvent-3.0")
@@ -19,7 +21,7 @@ local function trim(s)
 end
 
 function PetJournalEnhanced:UpdatePets()
-	if PetJournal:IsShown() then
+	if PetJournal and PetJournal:IsShown() then
 		self:SortPets()
 		self.modules.Hooked:Update()
 	end
@@ -129,6 +131,14 @@ function PetJournalEnhanced:CreateOptionsMenu()
 				width = "double",
 				set = function(info,val) 
 					db.maxStatIcon = val 
+					for i=1,#PetJournal.listScroll.buttons do
+						button = PetJournal.listScroll.buttons[i] 
+						if db.maxStatIcon then
+							button.name:SetPoint("TOPLEFT","PetJournalListScrollFrameButton"..i,"TOPLEFT",10+button.highStat:GetWidth(),-2)
+						else
+							button.name:SetPoint("LEFT","PetJournalListScrollFrameButton"..i,"LEFT",12,0)
+						end
+					end
 					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
 				end,
 				get = function(info) return db.maxStatIcon or false end
@@ -155,16 +165,16 @@ function PetJournalEnhanced:CreateOptionsMenu()
 				end,
 				get = function(info) return db.coloredNames or false end
 			},
-			BreedInfo = {
+			breedInfo = {
 				order = 5,
 				name = "Display Breed Info",
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
-					db.BreedInfo = val 
+					db.breedInfo = val 
 					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
 				end,
-				get = function(info) return db.BreedInfo or false end
+				get = function(info) return db.breedInfo or false end
 			},
 			level25Stats = {
 				order = 5,
@@ -263,6 +273,10 @@ function PetJournalEnhanced:Reset()
 		filtering.quantity[i] = true
 	end
 	
+	for i=1,#filtering.breed do
+		filtering.breed[i] = true
+	end
+	
 	filtering.currentZone = false
 	filtering.canBattle = true
 	filtering.cantBattle = true
@@ -315,9 +329,8 @@ function PetJournalEnhanced:SortPets(forceSort)
 					pet.maxStat = self.GetMaxStat(maxHealth,attack,speed)
 				end
 				
-				local breedIndex, confidence = BreedInfo:GetBreed(petID)
-				pet.breed = breedIndex
-				pet.breedConfidence = confidence
+				pet.breed, pet.breedConfidence = breedInfo:GetBreedByPetID(petID)
+				if not pet.breed then pet.breed = 0 end
 
 				--pets that cant battle shouldn't have a level for sorting purposes
 				if not canBattle then
@@ -342,9 +355,8 @@ function PetJournalEnhanced:SortPets(forceSort)
 			pet.index = i
 			
 			if level and pet.level and pet.level < level then
-				local breedIndex, confidence = BreedInfo:GetBreed(petID)
-				pet.breed = breedIndex
-				pet.breedConfidence = confidence
+				pet.breed, pet.breedConfidence = breedInfo:GetBreedByPetID(petID)
+				if not pet.breed then pet.breed = 0 end
 			end
 			
 			if canBattle then
@@ -371,7 +383,7 @@ function PetJournalEnhanced:SortPets(forceSort)
 				exclude = true
 			elseif pet.owned > 0 and not filtering.quantity[pet.owned] then
 				exclude = true
-			elseif display.BreedInfo and pet.breed > 0 and  not filtering.breed[pet.breed] then
+			elseif display.breedInfo and pet.breed > 0 and  not filtering.breed[pet.breed] then
 				exclude =true
 			end
 			
@@ -402,7 +414,7 @@ function PetJournalEnhanced:OnInitialize()
 				coloredNames = true,
 				coloredBorders = true,
 				maxStatIcon = true,
-				BreedInfo = false,
+				breedInfo = false,
 				Extrapolate = true,
 			},
 			filtering = {
@@ -435,11 +447,15 @@ function PetJournalEnhanced:OnInitialize()
 	self.SortFunctions = self:GetSortFunctions()
 	--self:InitPetJournal()
 	
-	PetJournal:HookScript("OnShow",function()
-		local self = PetJournalEnhanced
-		self:InitPetJournal()
-		self:UpdatePets()
-	end)
+	
+	if IsAddOnLoaded("Blizzard_PetJournal") then
+		
+		PetJournalEnhanced:InitPetJournal()
+		PetJournal:HookScript("OnShow",function()
+			PetJournalEnhanced:UpdatePets()
+		end)
+	end
+	
 	
 	self:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 	self:RegisterEvent("ZONE_CHANGED");
@@ -484,10 +500,13 @@ end
 
 --due to a bug with curse.com client not cleanly uninstalling old versions
 --notify user if old version is found
-function PetJournalEnhanced:ADDON_LOADED(event,...)
-	local name = ...
-	if name == "_PetJournalEnhanced"  then
-		StaticPopup_Show("PETJOURNAL_ENHANCED_DUPLICATE")
+function PetJournalEnhanced:ADDON_LOADED(event,arg1)
+	if arg1 == "Blizzard_PetJournal" or IsAddOnLoaded("Blizzard_PetJournal") then
+		PetJournalEnhanced:InitPetJournal()
+		PetJournal:HookScript("OnShow",function()
+			PetJournalEnhanced:UpdatePets()
+		end)
+		self:UnregisterEvent("ADDON_LOADED")
 	end
 end
 
@@ -512,35 +531,8 @@ function PetJournalEnhanced:GetNumPets()
 	return #self.petMapping
 end
 
---blizzard functions to overwrite
 
 
---static dialog for notifying the user of a duplicate and outdated installation of PJE
-StaticPopupDialogs["PETJOURNAL_ENHANCED_DUPLICATE"] = {
-    text = "You have a second copy of PetJournal Enhanced|n installed named _PetJournalEnhanced|n in your /interface/addons/ folder",
-    button1 = "OK",
-    button2 = "Don't warn me again",
-    OnAccept = function (self)  end,
-    OnCancel = function (self) PetJournalEnhancedOptions.warning = false end,
-    OnHide = function (self) end,
-    hideOnEscape = 1,
-    timeout = 0,
-    exclusive = 1,
-    whileDead = 1,
-}
-
-StaticPopupDialogs["PETJOURNAL_ENHANCED_PETHEORY"] = {
-    text = "You have a second copy of PetJournal Enhanced|n installed named _PetJournalEnhanced|n in your /interface/addons/ folder",
-    button1 = "OK",
-    button2 = "Don't warn me again",
-    OnAccept = function (self)  end,
-    OnCancel = function (self) PetJournalEnhancedOptions.warning = false end,
-    OnHide = function (self) end,
-    hideOnEscape = 1,
-    timeout = 0,
-    exclusive = 1,
-    whileDead = 1,
-}
 
 
 

@@ -5,8 +5,9 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 589 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 594 $", ".* (.*) .*"))
 
+local addon = RaidBuffStatus
 RaidBuffStatus.L = L
 RaidBuffStatus.GI = GI
 RaidBuffStatus.bars = {}
@@ -164,6 +165,10 @@ local taunts = {
 	-- Hunter
 	20736, -- Distracting Shot
 }
+local taunthash = {}
+for _, spell in ipairs(taunts) do
+	taunthash[spell] = true
+end
 
 local feastdata = {
 	-- cata
@@ -921,22 +926,22 @@ function RaidBuffStatus:DoReport(force)
 	playerid = UnitGUID("player") -- this never changes but on logging in it may take time before it returns a value
 	playername = UnitName("player") -- ditto
 	playerclass = select(2,UnitClass("player")) -- ditto
-	if raid.israid and not raid.isbattle and not incombat then
+	if not raid.isbattle and not incombat then
 		if report.checking.durabilty and not _G.oRA3 and GetTime() > nextdurability then
 			if #report.durabilitylist > 0 then
 				nextdurability = GetTime() + 30 -- check more often if someone is broken
 			else
 				nextdurability = GetTime() + 60 * 5
 			end
-			SendAddonMessage("CTRA", "DURC", "RAID")
+			RaidBuffStatus:SendAddonMessage("CTRA", "DURC")
 		end
 		if GetTime() > nextitemcheck  then
 			for itemcheck, _ in pairs(RaidBuffStatus.itemcheck) do
 				if report.checking[RaidBuffStatus.itemcheck[itemcheck].check] and GetTime() > RaidBuffStatus.itemcheck[itemcheck].next then
 					nextitemcheck = GetTime() + 3
 --					RaidBuffStatus:Debug("Item:" .. RaidBuffStatus.itemcheck[itemcheck].item)
-					SendAddonMessage("CTRA", "ITMC " .. RaidBuffStatus.itemcheck[itemcheck].item, "RAID")
-					SendAddonMessage("oRA3", RaidBuffStatus:Serialize("InventoryCount", RaidBuffStatus.itemcheck[itemcheck].item), "RAID")
+					RaidBuffStatus:SendAddonMessage("CTRA", "ITMC " .. RaidBuffStatus.itemcheck[itemcheck].item)
+					RaidBuffStatus:SendAddonMessage("oRA3", RaidBuffStatus:Serialize("InventoryCount", RaidBuffStatus.itemcheck[itemcheck].item))
 					if #report[RaidBuffStatus.itemcheck[itemcheck].list] >= RaidBuffStatus.itemcheck[itemcheck].min then
 						RaidBuffStatus.itemcheck[itemcheck].next = GetTime() + RaidBuffStatus.itemcheck[itemcheck].frequencymissing
 					else
@@ -2604,7 +2609,8 @@ function RaidBuffStatus:DelayedEnable()
 		RaidBuffStatus:Debug('Registering CTRA event')
 		hooksecurefunc("CT_RAOptions_UpdateMTs", function() RaidBuffStatus:oRA_MainTankUpdate() end)
 	end
-	for _,prefix in pairs({"RBS", "oRA3", "CTRA"}) do
+	RaidBuffStatus.Prefixes = {["RBS"]=1, ["oRA3"]=1, ["CTRA"]=1}
+	for prefix,_ in pairs(RaidBuffStatus.Prefixes) do
 	  RegisterAddonMessagePrefix(prefix)
 	end
 	hooksecurefunc(StaticPopupDialogs["RESURRECT"], "OnShow", function()
@@ -2988,15 +2994,13 @@ end
 
 
 function RaidBuffStatus:GetUnitFromName(whom)
-	if whom:find("%(") then
-		whom = string.sub(whom, 1, whom:find("%(") - 1)
+	local p = whom:find("%(")
+	if p then
+		whom = string.sub(whom, 1, p - 1)
 	end
-	for class,_ in pairs(raid.classes) do
-		for name,_ in pairs(raid.classes[class]) do
-			if whom == name then
-				return raid.classes[class][name]
-			end
-		end
+	for class,cinfo in pairs(raid.classes) do
+		local u = cinfo[whom]
+		if u then return u end
 	end
 	return nil
 end
@@ -3011,9 +3015,6 @@ function RaidBuffStatus:RaidBuff(list, cheapspell) -- raid-wide buffs
 	local outofrange
 	local thiszone = RaidBuffStatus:GetMyZone()
 	for _, v in ipairs(list) do
-		if v:find("%(") then
-			v = string.sub(v, 1, v:find("%(") - 1)
-		end
 		local unit = RaidBuffStatus:GetUnitFromName(v)
 		if unit and unit.unitid and (not unit.isdead or rezspellshash[cheapspell]) and unit.online and (not raid.israid or unit.zone == thiszone) then
 			table.insert(pb, unit)
@@ -3103,9 +3104,6 @@ function RaidBuffStatus:PartyBuff(list, cheapspell) -- party-wide buffs
 	local pb = {{},{},{},{},{},{},{},{}}
 	local outofrange
 	for _, v in ipairs(list) do
-		if v:find("%(") then
-			v = string.sub(v, 1, v:find("%(") - 1)
-		end
 		local unit = RaidBuffStatus:GetUnitFromName(v)
 		if unit and unit.unitid and not unit.isdead and unit.online then
 			table.insert(pb[unit.group], unit.unitid)
@@ -3160,11 +3158,18 @@ function RaidBuffStatus:GotReagent(reagent)
 	return false
 end
 
-function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, hideCaster, srcGUID, srcname, srcflags, srcRaidFlags, dstGUID, dstname, dstflags, dstRaidFlags, spellID, spellname, spellschool, extraspellID, extraspellname, extraspellschool, auratype)
+function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, hideCaster, 
+	srcGUID, srcname, srcflags, srcRaidFlags, 
+	dstGUID, dstname, dstflags, dstRaidFlags, 
+	spellID, spellname, spellschool, extraspellID, extraspellname, extraspellschool, auratype)
 	if not raid.israid and not raid.isparty then
 		return
 	end
-	if (subevent == "UNIT_DIED" and band(tonumber(dstGUID:sub(0,5), 16), 0x00f) == 0x000) or (spellID == 27827 and subevent == "SPELL_AURA_APPLIED") then -- Spirit of Redemption
+	if not subevent then
+		return
+	end
+	if (subevent == "UNIT_DIED" and band(dstflags,COMBATLOG_OBJECT_TYPE_PLAYER) > 0) or 
+	   (spellID == 27827 and subevent == "SPELL_AURA_APPLIED") then -- Spirit of Redemption
 		--RaidBuffStatus:Debug(subevent .. " someone died:" .. dstname)
 		local unit = RaidBuffStatus:GetUnitFromName(dstname)
 		if not unit then
@@ -3177,24 +3182,24 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 		RaidBuffStatus:SomebodyDied(unit)
 		return
 	end
+	if not spellID or not spellname then -- must come after UNIT_DIED, which has no spell
+		return
+	end
 	if (spellID == 20707 or spellID == 6203) and 
 	   (subevent == "SPELL_CAST_SUCCESS" or subevent == "SPELL_AURA_APPLIED" or subevent == "SPELL_AURA_REFRESH") then 
 		RaidBuffStatus:LockSoulStone(srcname)
 		RaidBuffStatus:Debug("Lock cast soulstone:" .. srcname .. " " .. subevent)
 		return
 	end
-	if RaidBuffStatus.db.profile.misdirectionwarn and subevent == "SPELL_CAST_SUCCESS" and (spellID == 34477 or spellID == 57934) then
-		if not RaidBuffStatus:IsInRaid(srcname) then
-			return
-		end
+	if (spellID == 34477 or spellID == 57934) and
+	   subevent == "SPELL_CAST_SUCCESS" and 
+	   RaidBuffStatus.db.profile.misdirectionwarn and
+	   RaidBuffStatus:IsInRaid(srcname) then
 		RaidBuffStatus:MisdirectionEventLog(srcname, spellname, dstname)
 		return
 	end
 	if not incombat then
-			if not subevent or not spellID or not srcname or not spellname then
-				return
-			end
-			if not RaidBuffStatus:IsInRaid(srcname) then
+			if not srcname or not RaidBuffStatus:IsInRaid(srcname) then
 				return
 			end
 			if rezspellshash[spellname] then
@@ -3237,23 +3242,23 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 					RaidBuffStatus:Announces("Repair", srcname, nil, spellID)
 				end
 			end
-		return
 	end
-	if not spellID or not dstGUID or not srcname then
-		return
-	end
-	if band(tonumber(dstGUID:sub(0,5), 16), 0x00f) == 0x000 then
+	if not dstflags or band(dstflags, COMBATLOG_OBJECT_CONTROL_PLAYER) > 0 then
 		return  -- the destination is a player and we only care about stuff to mobs
 	end
 	-- else do workaround for broken polymorph combat log
-	if spellname and spellID and (subevent == "SPELL_AURA_APPLIED" or subevent == "SPELL_AURA_REMOVED") and workaroundbugccspellshash[spellname] and RaidBuffStatus.db.profile.ccwarn then
-		if not RaidBuffStatus:IsInRaid(srcname) then
+	if (subevent == "SPELL_AURA_APPLIED" or subevent == "SPELL_AURA_REMOVED") and 
+	   workaroundbugccspellshash[spellname] and RaidBuffStatus.db.profile.ccwarn then
+		if not srcname or not RaidBuffStatus:IsInRaid(srcname) then
 			return
 		end
-		RaidBuffStatus:WorkAroundBugCCEvent(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, extraspellID, extraspellname)
-	elseif currentsheep[dstGUID] and RaidBuffStatus.db.profile.ccwarn then
+		RaidBuffStatus:WorkAroundBugCCEvent(event, timestamp, subevent, 
+			srcGUID, srcname, srcflags, srcRaidFlags, 
+			dstGUID, dstname, dstflags, dstRaidFlags,
+			spellID, spellname, spellschool, extraspellID, extraspellname)
+	elseif dstGUID and currentsheep[dstGUID] and RaidBuffStatus.db.profile.ccwarn then
 		RaidBuffStatus:Debug("was sheeped")
---		if not RaidBuffStatus:IsInRaid(srcname) then
+--		if not srcname or not RaidBuffStatus:IsInRaid(srcname) then
 --			return
 --		end
 		if (GetTime() - currentsheep[dstGUID]) > 35 then
@@ -3276,23 +3281,37 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 		if subevent == "SWING_DAMAGE" then
 			spellname = L["Melee Swing"]
 		end
-		RaidBuffStatus:CCEventLog(event, timestamp, "SPELL_AURA_BROKEN_SPELL", srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, currentsheepspell[dstGUID], BS[currentsheepspell[dstGUID]], spellschool, spellID, spellname)
+		RaidBuffStatus:CCEventLog(event, timestamp, "SPELL_AURA_BROKEN_SPELL", 
+			srcGUID, srcname, srcflags, srcRaidFlags, 
+			dstGUID, dstname, dstflags, dstRaidFlags,
+			currentsheepspell[dstGUID], BS[currentsheepspell[dstGUID]], spellschool, spellID, spellname)
 		currentsheep[dstGUID] = nil
 		currentsheepspell[dstGUID] = nil
-	elseif (subevent == "SPELL_MISSED" or subevent == "SPELL_AURA_APPLIED") and RaidBuffStatus.db.profile.tankwarn then
-		if not RaidBuffStatus:IsInRaid(srcname) then
+	elseif taunthash[spellID] and (subevent == "SPELL_MISSED" or subevent == "SPELL_AURA_APPLIED") and 
+	       RaidBuffStatus.db.profile.tankwarn then
+		if not srcname or not RaidBuffStatus:IsInRaid(srcname) then
 			return
 		end
-		RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, extraspellID, extraspellname)
-	elseif spellname and spellID and (subevent == "SPELL_AURA_BROKEN" or subevent == "SPELL_AURA_BROKEN_SPELL" ) and ccspellshash[spellname] and RaidBuffStatus.db.profile.ccwarn then
-		if not RaidBuffStatus:IsInRaid(srcname) then
+		RaidBuffStatus:TauntEventLog(event, timestamp, subevent, 
+			srcGUID, srcname, srcflags, srcRaidFlags, 
+			dstGUID, dstname, dstflags, dstRaidFlags,
+			spellID, spellname, spellschool, extraspellID, extraspellname)
+	elseif (subevent == "SPELL_AURA_BROKEN" or subevent == "SPELL_AURA_BROKEN_SPELL" ) and 
+	       ccspellshash[spellname] and RaidBuffStatus.db.profile.ccwarn then
+		if not srcname or not RaidBuffStatus:IsInRaid(srcname) then
 			return
 		end
-		RaidBuffStatus:CCEventLog(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, extraspellID, extraspellname)
+		RaidBuffStatus:CCEventLog(event, timestamp, subevent, 
+			srcGUID, srcname, srcflags, srcRaidFlags, 
+			dstGUID, dstname, dstflags, dstRaidFlags,
+			spellID, spellname, spellschool, extraspellID, extraspellname)
 	end
 end
 
-function RaidBuffStatus:WorkAroundBugCCEvent(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, extraspellID, extraspellname)
+function RaidBuffStatus:WorkAroundBugCCEvent(event, timestamp, subevent, 
+	srcGUID, srcname, srcflags, srcRaidFlags, 
+	dstGUID, dstname, dstflags, dstRaidFlags, 
+	spellID, spellname, spellschool, extraspellID, extraspellname)
 	if subevent == "SPELL_AURA_APPLIED" then
 		currentsheep[dstGUID] = GetTime()
 		currentsheepspell[dstGUID] = spellID
@@ -3315,7 +3334,10 @@ function RaidBuffStatus:MisdirectionEventLog(srcname, spellname, dstname)
 end
 
 
-function RaidBuffStatus:CCEventLog(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, extraspellID, extraspellname)
+function RaidBuffStatus:CCEventLog(event, timestamp, subevent, 
+	srcGUID, srcname, srcflags, srcRaidFlags, 
+	dstGUID, dstname, dstflags, dstRaidFlags, 
+	spellID, spellname, spellschool, extraspellID, extraspellname)
 	if not spellID or not dstGUID or not srcname then
 		return
 	end
@@ -3335,7 +3357,7 @@ function RaidBuffStatus:CCEventLog(event, timestamp, subevent, srcGUID, srcname,
 		cctype = "ccwarntank"
 		prepend = false
 	end
-	local dsticon = dstflags and RaidBuffStatus:GetIcon(dstflags) or ""
+	local dsticon = dstRaidFlags and RaidBuffStatus:GetIcon(dstRaidFlags) or ""
 	if dsticon ~= "" then
 		dsticon = "{rt" .. dsticon .. "}"
 	end
@@ -3356,14 +3378,20 @@ function RaidBuffStatus:CCEventLog(event, timestamp, subevent, srcGUID, srcname,
 end
 
 
-function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcname, srcflags, dstGUID, dstname, dstflags, spellID, spellname, spellschool, misstype)
+function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, 
+	srcGUID, srcname, srcflags, srcRaidFlags, 
+	dstGUID, dstname, dstflags, dstRaidFlags, 
+	spellID, spellname, spellschool, misstype)
+	if not taunthash[spellID] then
+		return
+	end
 	local targetid = UnitGUID("target")
 	local mytarget = true
 	if dstGUID ~= targetid then
 		if not RaidBuffStatus.db.profile.tauntmeself and not RaidBuffStatus.db.profile.tauntmesound and not RaidBuffStatus.db.profile.tauntmerw and not RaidBuffStatus.db.profile.tauntmeraid and not RaidBuffStatus.db.profile.tauntmeparty then
 			return
 		end
-		if band(tonumber(dstGUID:sub(0,5), 16), 0x00f) ~= 0x003 then
+		if band(dstflags, COMBATLOG_OBJECT_CONTROL_PLAYER) > 0 then
 			return  -- the destination is not a creature
 		end
 		mytarget = false
@@ -3375,7 +3403,7 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 	if RaidBuffStatus.db.profile.bossonly and not boss then
 		return
 	end
-	local dsticon = dstflags and RaidBuffStatus:GetIcon(dstflags) or ""
+	local dsticon = dstRaidFlags and RaidBuffStatus:GetIcon(dstRaidFlags) or ""
 	if dsticon ~= "" then
 		dsticon = "{rt" .. dsticon .. "}"
 	end
@@ -3391,23 +3419,17 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 		if subevent ~= "SPELL_MISSED" then
 			return
 		end
-		for _,v in ipairs (taunts) do
-			if spellID == v then
-				if misstype == "EVADE" or misstype == "IMMUNE" then
-					if boss then
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntimmune")
-					else
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntimmune")
-					end
-					return
-				else
-					if boss then
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntresist")
-					else
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntresist")
-					end
-					return
-				end
+		if misstype == "EVADE" or misstype == "IMMUNE" then
+			if boss then
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntimmune")
+			else
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntimmune")
+			end
+		else
+			if boss then
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntresist")
+			else
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT their target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "failedtauntresist")
 			end
 		end
 		return
@@ -3416,16 +3438,11 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 		if subevent ~= "SPELL_AURA_APPLIED" then
 			return -- only care about suceeding taunts to mobs targeting me
 		end
-		for _,v in ipairs (taunts) do
-			if spellID == v then
-				if UnitGUID(srcname .. "-target") == dstGUID and UnitGUID(srcname .. "-target-target") == playerid then
-					if boss then
-						RaidBuffStatus:TauntSay(L["%s taunted my boss mob (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "tauntme")
-					else
-						RaidBuffStatus:TauntSay(L["%s taunted my mob (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "tauntme")
-					end
-				end
-				return
+		if UnitGUID(srcname .. "-target") == dstGUID and UnitGUID(srcname .. "-target-target") == playerid then
+			if boss then
+				RaidBuffStatus:TauntSay(L["%s taunted my boss mob (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "tauntme")
+			else
+				RaidBuffStatus:TauntSay(L["%s taunted my mob (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "tauntme")
 			end
 		end
 		return
@@ -3434,48 +3451,44 @@ function RaidBuffStatus:TauntEventLog(event, timestamp, subevent, srcGUID, srcna
 	if UnitGUID("targettarget") == playerid then
 		ninja = true
 	end
-	for _,v in ipairs (taunts) do
-		if spellID == v then
-			if subevent == "SPELL_AURA_APPLIED" then
-				local unit = RaidBuffStatus:GetUnitFromName(srcname)
-				if not unit then
-					return
-				end
-				if unit.istank then
-					if ninja then
-						if boss then
-							RaidBuffStatus:TauntSay(L["%s ninjaed my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "ninjataunt")
-						else
-							RaidBuffStatus:TauntSay(L["%s ninjaed my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "ninjataunt")
-						end
-					else
-						if boss then
-							RaidBuffStatus:TauntSay(L["%s taunted my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "taunt")
-						else
-							RaidBuffStatus:TauntSay(L["%s taunted my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "taunt")
-						end
-					end
+	if subevent == "SPELL_AURA_APPLIED" then
+		local unit = RaidBuffStatus:GetUnitFromName(srcname)
+		if not unit then
+			return
+		end
+		if unit.istank then
+			if ninja then
+				if boss then
+					RaidBuffStatus:TauntSay(L["%s ninjaed my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "ninjataunt")
 				else
-					if boss then
-						RaidBuffStatus:TauntSay(L["NON-TANK %s taunted my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "nontanktaunt")
-					else
-						RaidBuffStatus:TauntSay(L["NON-TANK %s taunted my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "nontanktaunt")
-					end
+					RaidBuffStatus:TauntSay(L["%s ninjaed my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "ninjataunt")
 				end
 			else
-				if ninja then
-					if boss then
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO NINJA my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
-					else
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO NINJA my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
-					end
+				if boss then
+					RaidBuffStatus:TauntSay(L["%s taunted my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "taunt")
 				else
-					if boss then
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
-					else
-						RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
-					end
+					RaidBuffStatus:TauntSay(L["%s taunted my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "taunt")
 				end
+			end
+		else
+			if boss then
+				RaidBuffStatus:TauntSay(L["NON-TANK %s taunted my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "nontanktaunt")
+			else
+				RaidBuffStatus:TauntSay(L["NON-TANK %s taunted my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "nontanktaunt")
+			end
+		end
+	else
+		if ninja then
+			if boss then
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO NINJA my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
+			else
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO NINJA my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
+			end
+		else
+			if boss then
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT my boss target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
+			else
+				RaidBuffStatus:TauntSay(miss .. " " .. L["%s FAILED TO TAUNT my target (%s%s%s) with %s"]:format(srcname, dsticon, dstname, dsticon, spellname), "otherfail")
 			end
 		end
 	end
@@ -3584,9 +3597,37 @@ function RaidBuffStatus:TriggerXPerlTankUpdate()
 	xperltankrequestt = GetTime() + 5 -- wait for 5 seconds to allow message to be processed by other addons before reading tank list again
 end
 
+local listenchannels = { ["RAID"]=1, ["PARTY"]=1, ["INSTANCE_CHAT"]=1 }
 function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sender)
-	RaidBuffStatus:Debug(prefix .." message:" .. message .. " sender:" .. sender)
-	if prefix == "oRA3" and distribution == "RAID" and message and message:find("SDurability") then
+	if not prefix or not RaidBuffStatus.Prefixes[prefix] or not message or not distribution or not sender then
+	  return
+	end
+	RaidBuffStatus:Debug(prefix .." message:" .. message .. " sender:" .. sender .. " distribution:" .. distribution)
+	if prefix == "RBS" then
+	  if strsub(message, 1, 4) == "VER " then
+		local _, _, revision, version = string.find(message, "^VER (.*) (.*)")
+		RaidBuffStatus.rbsversions[sender] = version .. " build-" .. revision
+		if not toldaboutnewversion and RaidBuffStatus.db.profile.versionannounce and version and
+		   tonumber(revision) and tonumber(revision) > RaidBuffStatus.revision then
+			toldaboutnewversion = true
+			local releasetype = ""
+			if string.find(version, "^r") then
+				releasetype = L["alpha"]
+			elseif string.find(version, "beta") then
+				releasetype = L["beta"]
+			end
+			RaidBuffStatus:Print(L["%s has a newer (%s) version of RBS (%s) than you (%s)"]:format(sender, releasetype, RaidBuffStatus.rbsversions[sender], RaidBuffStatus.version .. " build-" .. RaidBuffStatus.revision))
+		end
+		if not toldaboutrbsuser[sender] and RaidBuffStatus.db.profile.userannounce then
+			toldaboutrbsuser[sender] = true
+			RaidBuffStatus:Print(L["%s is running RBS %s"]:format(sender, RaidBuffStatus.rbsversions[sender]))
+		end
+	  end
+	end
+	if not listenchannels[distribution] then 
+	  return
+	end
+	if prefix == "oRA3" and message:find("SDurability") then
 		local _, min, broken = select(3, message:find("SDurability%^N(%d+)%^N(%d+)%^N(%d+)"))
 		if min == nil then
 			return
@@ -3595,7 +3636,7 @@ function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sen
 		RaidBuffStatus.broken[sender] = broken
 		RaidBuffStatus:Debug(prefix .." message:" .. message .. " sender:" .. sender)
 		RaidBuffStatus:Debug("got one" .. min .. " " .. broken)
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("^DURC") then
+	elseif prefix == "CTRA" and message:find("^DURC") then
 		RaidBuffStatus:Debug("Got DURC request")
 		if nextdurability - GetTime() < 30 then
 			nextdurability = GetTime() + 30  -- stops it calling again too often when another person or addon does a durability check
@@ -3604,7 +3645,7 @@ function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sen
 			RaidBuffStatus:Debug("Sending DURC reply")
 			RaidBuffStatus:SendDurability(nil, sender)
 		end
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("^DUR ") then
+	elseif prefix == "CTRA" and message:find("^DUR ") then
 		local cur, max, broken, requestby = select(3, message:find("^DUR (%d+) (%d+) (%d+) ([^%s]+)$"))
 		cur = tonumber(cur)
 		max = tonumber(max)
@@ -3614,27 +3655,27 @@ function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sen
 			RaidBuffStatus.broken[sender] = broken
 		end
 		return
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("^ITM ") then
+	elseif prefix == "CTRA" and message:find("^ITM ") then
 		local numitems, itemname, requestby = message:match("^ITM ([-%d]+) (.+) ([^%s]+)$")
 		RaidBuffStatus:UpdateInventory(sender, itemname, numitems)
-	elseif prefix == "oRA3" and distribution == "RAID" and message and message:find("SInventoryItem") then
+	elseif prefix == "oRA3" and message:find("SInventoryItem") then
 		local itemname, numitems = select(3, message:find("SInventoryItem%^S(.+)%^N(%d+)^"))
 		RaidBuffStatus:UpdateInventory(sender, itemname, numitems)
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("^ITMC ") then
+	elseif prefix == "CTRA" and message:find("^ITMC ") then
 		local itemname = select(3, message:find("^ITMC (.+)$"))
 		if itemname then
-			SendAddonMessage("CTRA", "ITM " .. GetItemCount(itemname) .. " " .. itemname .. " " .. sender, "RAID")
+			RaidBuffStatus:SendAddonMessage("CTRA", "ITM " .. GetItemCount(itemname) .. " " .. itemname .. " " .. sender)
 		end
-	elseif prefix == "oRA3" and distribution == "RAID" and message and message:find("SInventoryCount") then
+	elseif prefix == "oRA3" and message:find("SInventoryCount") then
 		local itemname = select(3, message:find("SInventoryCount%^S(.+)%^"))
 		if itemname then
-			SendAddonMessage("oRA3", RaidBuffStatus:Serialize("InventoryItem", itemname, GetItemCount(itemname)), "RAID")
+			RaidBuffStatus:SendAddonMessage("oRA3", RaidBuffStatus:Serialize("InventoryItem", itemname, GetItemCount(itemname)))
 		end
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("CD 3 ") then
+	elseif prefix == "CTRA" and message:find("CD 3 ") then
 		RaidBuffStatus:Debug("Lock cast soulstone via ora2:" .. sender)
 		RaidBuffStatus:LockSoulStone(sender)
 		return
-	elseif prefix == "oRA3" and distribution == "RAID" and message and message:find("Cooldown") then
+	elseif prefix == "oRA3" and message:find("Cooldown") then
 		local spellid = select(3, message:find("Cooldown%^N(%d+)"))
 		RaidBuffStatus:Debug("Got cool down:" .. sender .. " " .. spellid)
 		spellid = 0 + spellid
@@ -3643,12 +3684,12 @@ function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sen
 			RaidBuffStatus:LockSoulStone(sender)
 		end
 		return
-	elseif XPerl_MainTanks and prefix == "CTRA" and distribution == "RAID" and message then
+	elseif XPerl_MainTanks and prefix == "CTRA" then
 		if strsub(message, 1, 4) == "SET " or strsub(message, 1, 2) == "R " then
 			RaidBuffStatus:Debug("triggered xperl tank update")
 			RaidBuffStatus:TriggerXPerlTankUpdate()
 		end
-	elseif prefix == "CTRA" and distribution == "RAID" and message and message:find("RES") then
+	elseif prefix == "CTRA" and message:find("RES") then
 		RaidBuffStatus:Debug(prefix .." message:" .. message .. " sender:" .. sender)
 		if message == "RESSED" then  -- got rez but not accepted yet
 			RaidBuffStatus:Debug("RESSED from" .. sender)
@@ -3665,26 +3706,6 @@ function RaidBuffStatus:CHAT_MSG_ADDON(event, prefix, message, distribution, sen
 				RaidBuffStatus.rezerrezee[sender] = rezee
 			end
 		end
-	elseif prefix == "RBS" then
-		if strsub(message, 1, 4) == "VER " then
-			local _, _, revision, version = string.find(message, "^VER (.*) (.*)")
-			RaidBuffStatus.rbsversions[sender] = version .. " build-" .. revision
-			if not toldaboutnewversion and RaidBuffStatus.db.profile.versionannounce and version and
-			   tonumber(revision) and tonumber(revision) > RaidBuffStatus.revision then
-				toldaboutnewversion = true
-				local releasetype = ""
-				if string.find(version, "^r") then
-					releasetype = L["alpha"]
-				elseif string.find(version, "beta") then
-					releasetype = L["beta"]
-				end
-				RaidBuffStatus:Print(L["%s has a newer (%s) version of RBS (%s) than you (%s)"]:format(sender, releasetype, RaidBuffStatus.rbsversions[sender], RaidBuffStatus.version .. " build-" .. RaidBuffStatus.revision))
-			end
-			if not toldaboutrbsuser[sender] and RaidBuffStatus.db.profile.userannounce then
-				toldaboutrbsuser[sender] = true
-				RaidBuffStatus:Print(L["%s is running RBS %s"]:format(sender, RaidBuffStatus.rbsversions[sender]))
-			end
-		end
 	end
 end
 
@@ -3692,24 +3713,20 @@ function RaidBuffStatus:SendVersion()
 	if raid.isbattle then
 		return
 	end
-	local version = RaidBuffStatus.revision .. " " .. RaidBuffStatus.version
-	if raid.islfg then
-		SendAddonMessage("RBS", "VER " .. version, "INSTANCE_CHAT")
-	elseif raid.israid then
-		SendAddonMessage("RBS", "VER " .. version, "RAID")
-	elseif raid.isparty then
-		SendAddonMessage("RBS", "VER " .. version, "PARTY")
-	else
-		if not GetGuildInfo("PLAYER") then
-			RaidBuffStatus:Debug("Guildless!")
-			return
-		end
-		RaidBuffStatus:Debug(GetGuildInfo("PLAYER"))
-		SendAddonMessage("RBS", "VER " .. version, "GUILD")
-	end
+	RaidBuffStatus:SendAddonMessage("RBS","VER " .. RaidBuffStatus.revision .. " " .. RaidBuffStatus.version, true)
 end
 
-
+function RaidBuffStatus:SendAddonMessage(prefix, msg, allowguild)
+	if raid.islfg then
+		SendAddonMessage(prefix, msg, "INSTANCE_CHAT")
+	elseif raid.israid then
+		SendAddonMessage(prefix, msg, "RAID")
+	elseif raid.isparty then
+		SendAddonMessage(prefix, msg, "PARTY")
+	elseif allowguild and IsInGuild() then
+		SendAddonMessage(prefix, msg, "GUILD")
+	end
+end
 
 function RaidBuffStatus:CreateBar(currenty, name, text, r, g, b, a, tooltip, chat)
 	if RaidBuffStatus.bars[name] then
@@ -4160,15 +4177,16 @@ end
 
 
 function RaidBuffStatus:GetIcon(flag)
-	if band(flag, COMBATLOG_OBJECT_SPECIAL_MASK) == 0 then
+	local val = band(flag, COMBATLOG_OBJECT_RAIDTARGET_MASK)
+	if val == 0 then
 		return
 	end
+	local v = COMBATLOG_OBJECT_RAIDTARGET1
 	for i = 1, 8 do
-		local mask = COMBATLOG_OBJECT_RAIDTARGET1 * (2 ^ (i - 1))
-		local mark = (band(flag, mask) == mask)
-		if mark then
+		if v == val then
 			return i
 		end
+		v = v * 2
 	end
 	return nil
 end
@@ -4456,12 +4474,12 @@ end
 --end
 
 function RaidBuffStatus:SendRezMessage(message)
-	if raid.israid and not raid.isbattle and not incombat then
-		SendAddonMessage("CTRA", message, "RAID")
+	if not raid.isbattle and not incombat then
+		RaidBuffStatus:SendAddonMessage("CTRA", message)
 		RaidBuffStatus:Debug("sending rez message: " .. message)
-		return
+	else
+		RaidBuffStatus:Debug("not sending rez message")
 	end
-	RaidBuffStatus:Debug("not sending rez message")
 end
 
 function RaidBuffStatus:UnitIsMounted(unitid)
@@ -4703,10 +4721,10 @@ function RaidBuffStatus:SendDurability(event, sender)
 		end
 	end
 	if sender then
-		SendAddonMessage("CTRA", string.format("DUR %s %s %s %s", cur, max, broken, sender), "RAID")
+		RaidBuffStatus:SendAddonMessage("CTRA", string.format("DUR %s %s %s %s", cur, max, broken, sender))
 	else
 		local perc = math.floor(cur / max * 100)
-		SendAddonMessage("oRA3", RaidBuffStatus:Serialize("Durability", perc, vmin, broken), "RAID")
+		RaidBuffStatus:SendAddonMessage("oRA3", RaidBuffStatus:Serialize("Durability", perc, vmin, broken))
 	end
 end
 

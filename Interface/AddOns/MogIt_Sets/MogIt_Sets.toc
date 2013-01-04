@@ -1,11 +1,12 @@
-﻿## Interface: 40300
+﻿## Interface: 50100
 ## Title: MogIt_Sets
 ## Notes: Sets module for MogIt
-## Author: Aelobin (The Maelstrom EU) & Lombra (Shattered Hand EU)
-## Version: 2.1
+## Author: Aelobin (The Maelstrom EU) & Lombra (Defias Brotherhood EU)
+## Version: 2.1.1
 ## LoadOnDemand: 1
 ## RequiredDeps: MogIt
-## X-Curse-Packaged-Version: v2.1
+## X-MogItModuleVersion: 1
+## X-Curse-Packaged-Version: v2.1.1
 ## X-Curse-Project-Name: MogIt_Sets
 ## X-Curse-Project-ID: mogit_sets
 ## X-Curse-Repository-ID: wow/mogit_sets/mainline

@@ -3,6 +3,7 @@ local Hooked = PetJournalEnhanced:GetModule("Hooked")
 local _
 local ASCENDING =  1
 local DESCENDING = 2
+local breedInfo = LibStub("LibPetBreedInfo-1.0")
 
 local function __genOrderedIndex( t )
     local orderedIndex = {}
@@ -173,7 +174,7 @@ function Hooked:CreateDropdownMenu(level)
 		info.value = 8;
 		UIDropDownMenu_AddButton(info, level)
 		
-		if Hooked.db.display.BreedInfo then
+		if Hooked.db.display.breedInfo then
 			info.text = "Breed"
 			info.value = 9;
 			UIDropDownMenu_AddButton(info, level)
@@ -196,8 +197,7 @@ function Hooked:CreateDropdownMenu(level)
 		local info = UIDropDownMenu_CreateInfo();
 		info.keepShownOnClick = true;	
 		
-		if Hooked.db.display.BreedInfo and UIDROPDOWNMENU_MENU_VALUE == 9 then
-			local BreedData = PetJournalEnhanced:GetModule("BreedData")
+		if Hooked.db.display.breedInfo and UIDROPDOWNMENU_MENU_VALUE == 9 then
 			
 			info.notCheckable = true;
 			info.text = CHECK_ALL
@@ -222,12 +222,13 @@ function Hooked:CreateDropdownMenu(level)
 				end
 			UIDropDownMenu_AddButton(info, level)
 			
-			for i=1,#BreedData.breeds do
+			
+			for i,breedName in breedInfo:IterateBreedNames() do
 				info.notCheckable = false;	
 				info.keepShownOnClick = true
 				info.checked = false
 				info.isNotRadio = true
-				info.text = BreedData.breeds[i][4]
+				info.text = breedName
 				info.func = function(_, _, _, value)
 							self.db.filtering.breed[i] = not self.db.filtering.breed[i]
 							PetJournalEnhanced:UpdatePets()
@@ -472,7 +473,7 @@ function Hooked:CreateDropdownMenu(level)
 
 			local sortTypes = {"Level","Alphabetical","Pet Type","Rarity","Pet Highest Stat"}--,["Added to Pet Journal"]=SORT_PETID}
 			
-			if Hooked.db.display.BreedInfo then
+			if Hooked.db.display.breedInfo then
 				table.insert(sortTypes,"Breed")
 			end	
 			
@@ -552,7 +553,7 @@ function Hooked:CreateDropdownMenu(level)
 				info.keepShownOnClick = true
 				info.checked = false
 				info.isNotRadio = true
-				info.text = "|c"..hex.._G["BATTLE_PET_BREED_QUALITY"..i].."|r"
+				info.text = string.format("|c%s%s|r",hex,_G["BATTLE_PET_BREED_QUALITY"..i])
 				info.func = 	function(_, _, _, value)
 							self.db.filtering.rarity[i] = not self.db.filtering.rarity[i]
 							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)

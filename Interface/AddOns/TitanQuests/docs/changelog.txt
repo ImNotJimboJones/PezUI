@@ -19,7 +19,13 @@ legend:
 * = changed feature (bugfixes, changed behavior, etc.)
 - = removed feature
 
-version 3.0.7 (09-18-2011 20:22 UTC)
+version 3.0.8 (01-01-2012 17:30 UTC)
+* corrected timestamps for previous releases in changelog
+
+version 3.0.8 - beta 1 (12-18-2012 13:10 UTC)
+* updated toc for WoW 5.1.x
+
+version 3.0.7 (09-18-2012 20:22 UTC)
 * corrected timestamps for previous releases in changelog
 
 version 3.0.7 - beta 2 (09-04-2012 04:34 UTC)

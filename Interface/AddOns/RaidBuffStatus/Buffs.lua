@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 580 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 593 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -430,10 +430,9 @@ local function generic_whispertobuff(reportl, prefix, buffinfo, buffers, buffnam
 
   if buffers then
     for _, name in ipairs(buffers) do
-      name = string.sub(name, 1, name:find("%(") - 1)
       local unit = RaidBuffStatus:GetUnitFromName(name)
-      if unit and RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead then
-         RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, name)
+      if unit and RaidBuffStatus:InMyZone(unit.name) and unit.online and not unit.isdead then
+         RaidBuffStatus:Say(prefix .. "<" .. buffname .. ">: " .. targets, unit.name)
          if RaidBuffStatus.db.profile.whisperonlyone then
             return
          end

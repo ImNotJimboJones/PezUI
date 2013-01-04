@@ -1838,6 +1838,7 @@ function MovAny:CreateFrameEditor(id, name)
 				if fe.editFrame then
 					fe.editFrame:UnregisterAllEvents()
 				end
+			--	print(fe.editFrame:GetName())
 			end
 			self.confirm = nil
 			MovAny:UpdateGUIIfShown(true)

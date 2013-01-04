@@ -86,8 +86,8 @@ function module.FrameUpdate(module,self,value)
 	mog.Set_FrameUpdate(self,self.data);
 end
 
-function module.OnEnter(module,self,value)
-	mog.Set_OnEnter(self,self.data);
+function module:OnEnter(frame, value)
+	mog.ShowSetTooltip(frame, data.items[value], data.name[value])
 end
 
 function module.OnClick(module,self,btn,value)
