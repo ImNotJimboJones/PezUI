@@ -124,6 +124,7 @@ function psealocale()
 	whrabrannemo2 = "安全系统自动修复装置已被关闭。立刻消除化全部存储器内容并……"
 	whragundemo = "我要把你碎尸万断"
 	whratitle = "    巫妖王之怒英雄"
+	raspectext  = "过大的战斗区域. 在团队中需要更多的插件!"
 
 
 

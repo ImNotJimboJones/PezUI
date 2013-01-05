@@ -327,7 +327,7 @@ end
 
 
 --метка
-if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and arg10==125915 then
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED") and (arg10==125915 or arg10==114565 or arg10==114568) then
   if pzraspisokon[10]==1 and pzraachdone1 then
 --    raunitisplayer(arg7,arg8)
 --    if raunitplayertrue then
@@ -339,7 +339,7 @@ end
 if arg2=="SWING_DAMAGE" then
   if pzraspisokon[10]==1 and pzraachdone1 then
     local id=tonumber(string.sub(arg4,-12,-9),16)
-    if id==64479 then
+    if id==64479 or id==58787 then
       pzrafailnoreason(10,arg8)
     end
   end
