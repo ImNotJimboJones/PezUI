@@ -34,77 +34,107 @@ local MyZone
 local MessageFormat = "%s %s!"
 
 -- Channels
-local BattlegroundChannel		= "BATTLEGROUND"
-local RaidInstanceChannel		= "RAID"
-local PartyInstanceChannel		= "PARTY"
-local SoloChannel				= "SAY"
+local BattlegroundChannel		= "INSTANCE_CHAT"
+local RaidInstanceChannel		= "INSTANCE_CHAT"
+local PartyInstanceChannel		= "INSTANCE_CHAT"
 local RaidChannel				= "RAID"
 local PartyChannel				= "PARTY"
+local SoloChannel				= "SAY"
 
 function GetNitroboosted_OnEvent(self, event, ...)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local eventType, destGUID, id
-		if select(4, GetBuildInfo()) >= 40200 then
+		if select(4, GetBuildInfo()) >= 50100 then
+			BattlegroundChannel = "INSTANCE_CHAT"
+			RaidInstanceChannel = "INSTANCE_CHAT"
+			PartyInstanceChannel = "INSTANCE_CHAT"
+			eventType, destGUID, id = select(2, ...), select(8, ...), select(12, ...)
+		elseif select(4, GetBuildInfo()) >= 40200 then
+			BattlegroundChannel = "BATTLEGROUND"
+			RaidInstanceChannel = "RAID"
+			PartyInstanceChannel = "PARTY"
 			eventType, destGUID, id = select(2, ...), select(8, ...), select(12, ...)
 		elseif select(4, GetBuildInfo()) >= 40100 then
+			BattlegroundChannel = "BATTLEGROUND"
+			RaidInstanceChannel = "RAID"
+			PartyInstanceChannel = "PARTY"
 			eventType, destGUID, id = select(2, ...), select(7, ...), select(10, ...)
 		elseif select(4, GetBuildInfo()) >= 40000 then
+			BattlegroundChannel = "BATTLEGROUND"
+			RaidInstanceChannel = "RAID"
+			PartyInstanceChannel = "PARTY"
 			eventType, destGUID, id = select(2, ...), select(6, ...), select(9, ...)
 		elseif select(4, GetBuildInfo()) >= 20400 then
+			BattlegroundChannel = "BATTLEGROUND"
+			RaidInstanceChannel = "RAID"
+			PartyInstanceChannel = "PARTY"
 			eventType, destGUID, id = select(2, ...), select(6, ...), select(9, ...)
 		end
 
-		if select(2, IsInInstance()) == "pvp" then
-			if GN_Battleground == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, BattlegroundChannel)
+		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) and IsInInstance() then
+			if select(2, IsInInstance()) == "pvp" then
+				if GN_Battleground == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, BattlegroundChannel)
+						end
+					end
+				end
+			elseif select(2, IsInInstance()) == "raid" then
+				if GN_RaidInstance == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, RaidInstanceChannel)
+						end
+					end
+				end
+			elseif select(2, IsInInstance()) == "party" then
+				if GN_PartyInstance == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, PartyInstanceChannel)
+						end
+					end
+				end
+			elseif select(2, IsInInstance()) == nil then
+				if GN_PartyInstance == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, PartyInstanceChannel)
+						end
 					end
 				end
 			end
-		elseif select(2, IsInInstance()) == "raid" then
-			if GN_RaidInstance == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, RaidInstanceChannel)
+		else
+			if IsInRaid() == true then
+				if GN_Raid == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, RaidChannel)
+						end
 					end
 				end
-			end
-		elseif select(2, IsInInstance()) == "party" then
-			if GN_PartyInstance == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, PartyInstanceChannel)
+			elseif GetNumSubgroupMembers() ~= nil and GetNumSubgroupMembers() > 0 then
+				if GN_Party == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, PartyChannel)
+						end
 					end
 				end
-			end
-		elseif IsInRaid() == true then
-			if GN_Raid == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, RaidChannel)
-					end
-				end
-			end
-		elseif GetNumSubgroupMembers() ~= nil and GetNumSubgroupMembers() > 0 then
-			if GN_Party == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, PartyChannel)
-					end
-				end
-			end
-		elseif select(2, IsInInstance()) == "none" then
-			if GN_Solo == true then
-				if eventType == "SPELL_AURA_APPLIED" then
-					if id == 94794 and destGUID == UnitGUID("player") then
-						local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
-						SendChatMessage(Message, SoloChannel)
+			elseif select(2, IsInInstance()) == "none" then
+				if GN_Solo == true then
+					if eventType == "SPELL_AURA_APPLIED" then
+						if id == 94794 and destGUID == UnitGUID("player") then
+							local Message = format(MessageFormat, GetSpellLink(id), GN_OnMe)
+							SendChatMessage(Message, SoloChannel)
+						end
 					end
 				end
 			end
@@ -113,6 +143,7 @@ function GetNitroboosted_OnEvent(self, event, ...)
 end
 
 function GetNitroboosted_SlashCommands(arg1)
+	local arg1 = string.lower(arg1)
 	if arg1 == "" then
 		GetNitroboosted_PrintSlashMenu()
 	elseif arg1 == "party" then
