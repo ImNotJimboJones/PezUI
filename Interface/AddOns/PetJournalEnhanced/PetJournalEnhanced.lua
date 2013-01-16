@@ -28,14 +28,18 @@ function PetJournalEnhanced:UpdatePets()
 end
 
 function PetJournalEnhanced:InitPetJournal()
+	PetJournal:HookScript("OnShow",function()
+			PetJournalEnhanced:UpdatePets()
+			PetJournalEnhanced:PetTheoryWarning()
+	end)
 	if not self.initialized then
-		self.modules.ZoneFiltering:Initialize()
+		--self.modules.ZoneFiltering:Initialize()
 		for k,v in pairs(self.modules) do
 			if v.Initialize then
 				v:Initialize(self.db)
 			end
 		end
-		self:SetZoneFilter()
+		--self:SetZoneFilter()
 		self.initialized = true
 	end
 end
@@ -131,13 +135,9 @@ function PetJournalEnhanced:CreateOptionsMenu()
 				width = "double",
 				set = function(info,val) 
 					db.maxStatIcon = val 
-					for i=1,#PetJournal.listScroll.buttons do
-						button = PetJournal.listScroll.buttons[i] 
-						if db.maxStatIcon then
-							button.name:SetPoint("TOPLEFT","PetJournalListScrollFrameButton"..i,"TOPLEFT",10+button.highStat:GetWidth(),-2)
-						else
-							button.name:SetPoint("LEFT","PetJournalListScrollFrameButton"..i,"LEFT",12,0)
-						end
+					local Hooked = self:GetModule("Hooked")
+					if Hooked.initialized then 
+						Hooked:SetHighStatShown(val)
 					end
 					self:SendMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")  
 				end,
@@ -167,7 +167,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			breedInfo = {
 				order = 5,
-				name = "Display Breed Info",
+				name = "Display pet breed",
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -178,7 +178,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			level25Stats = {
 				order = 5,
-				name = "Display Extroplated Pet Stats",
+				name = "Display predicted pet stats",
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -223,25 +223,6 @@ function PetJournalEnhanced:RetreivePet(id)
 	return self.pets[id]
 end	
 
-
-function PetJournalEnhanced:SetZoneFilter()
-	local zoneTree = self.modules.ZoneFiltering.zoneTree--self.modules.ZoneFiltering:GetZoneTree()
-	local zones2Pets = self.modules.ZoneFiltering.zones2Pets--self.modules.ZoneFiltering:GetZones2Pets()
-
-	wipe(self.zoneFilter)
-		
-	for continent,zones in pairs(zoneTree) do
-		for zone,enabled in pairs(zones) do
-			for i=1,#zones2Pets[zone] do 
-				local speciesID = zones2Pets[zone][i]
-				self.zoneFilter[speciesID] = self.zoneFilter[speciesID] or enabled
-			end
-		end
-	end
-	
-	
-end
-
 function PetJournalEnhanced:Reset()
 	C_PetJournal.SetFlagFilter(LE_PET_JOURNAL_FLAG_COLLECTED, true)
 	C_PetJournal.SetFlagFilter(LE_PET_JOURNAL_FLAG_FAVORITES, false);
@@ -249,14 +230,14 @@ function PetJournalEnhanced:Reset()
 	C_PetJournal.AddAllPetTypesFilter();
 	C_PetJournal.AddAllPetSourcesFilter();
 	
-	local zoneTree = self.modules.ZoneFiltering.zoneTree
+	--[[local zoneTree = self.modules.ZoneFiltering.zoneTree
 	for continent,zones in pairs(zoneTree) do
 		for zone,_ in pairs(zones) do
 			zones[zone] = true
 		end
 	end
 	
-	self:SetZoneFilter()
+	self:SetZoneFilter()]]
 	
 	local filtering = self.db.global.filtering
 	local sorting = self.db.global.sorting
@@ -300,13 +281,10 @@ function PetJournalEnhanced:SortPets(forceSort)
 		local filtering = db.filtering
 		local display = db.display
 		local numPets = C_PetJournal.GetNumPets(PetJournal.isWild)
-		local zoneIDs = self.modules.ZoneIDs
-		
-		
-		--clearing pet mapping makes the garbage collector happy
+		local currentZoneId =  GetCurrentMapAreaID()
+		local ZoneFiltering = self:GetModule("ZoneFiltering")
 		wipe(self.petMapping)
-		
-
+	
 		for i=1,numPets do
 			local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle, tradable, unique = C_PetJournal.GetPetInfoByIndex(i, PetJournal.isWild)
 			local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
@@ -364,6 +342,7 @@ function PetJournalEnhanced:SortPets(forceSort)
 			end
 			
 			local exclude = false
+			local zones = ZoneFiltering:GetZonesBySpeciesID(speciesID)
 			
 			if not filtering.cantBattle and not canBattle  then
 				exclude = true
@@ -375,29 +354,30 @@ function PetJournalEnhanced:SortPets(forceSort)
 				exclude = true	
 			elseif pet.rarity and pet.rarity > 0 and not filtering.rarity[pet.rarity] then
 				exclude = true
+			elseif pet.owned > 0 and not filtering.quantity[pet.owned] then
+				exclude = true
 			elseif pet.maxStat > 0 and  not filtering.specialization[pet.maxStat] then
 				exclude = true
-			elseif self.zoneFilter[speciesID] == false then
+			elseif filtering.currentZone and (zones == nil or not zones[currentZoneId]) then
 				exclude = true
 			elseif not filtering.unknownZone and not (string.find(sourceText,"Pet Battle:") or string.find(sourceText,"Zone:"))  then
 				exclude = true
-			elseif pet.owned > 0 and not filtering.quantity[pet.owned] then
-				exclude = true
 			elseif display.breedInfo and pet.breed > 0 and  not filtering.breed[pet.breed] then
 				exclude =true
-			end
-			
-			if filtering.currentZone then--and not string.find(sourceText, GetZoneText(),1,true) then
-				local zones = zoneIDs.SpeciesToZoneId[pet.speciesID]
-				local mapID = GetCurrentMapAreaID()
-				if (zones and not zones[mapID]) or zones == nil then
-					exclude =true
+			elseif zones then
+				local filtered = false
+				for k,v in pairs(zones) do
+					filtered = filtered or ZoneFiltering:GetFiltered(k)
 				end
+				if filtered == false then exclude = true end
 			end
 			
 			if not exclude then
 				table.insert(self.petMapping,pet)
 			end
+			
+			
+			
 		end
 		
 		local sortFunc = self.SortFunctions[db.sorting.selection]
@@ -419,7 +399,7 @@ function PetJournalEnhanced:OnInitialize()
 			},
 			filtering = {
 				rarity = {[1]=true,[2]=true,[3]=true,[4]=true},
-				breed = {[1]=true,[2]=true,[3]=true,[4]=true,[5]=true,[6]=true,[7]=true,[8]=true,[9]=true,[10]=true},
+				breed = {[3]=true,[4]=true,[5]=true,[6]=true,[7]=true,[8]=true,[9]=true,[10]=true,[11]=true,[12]=true,},
 				specialization = {[1]=true,[2]=true,[3]=true,[4]=true},
 				quantity = {[1]=true,[2]=true,[3]=true},
 				currentZone = false,
@@ -445,22 +425,20 @@ function PetJournalEnhanced:OnInitialize()
 	self.zoneFilter = {}
 	self.pets = {}
 	self.SortFunctions = self:GetSortFunctions()
-	--self:InitPetJournal()
+	
 	
 	
 	if IsAddOnLoaded("Blizzard_PetJournal") then
-		
 		PetJournalEnhanced:InitPetJournal()
-		PetJournal:HookScript("OnShow",function()
-			PetJournalEnhanced:UpdatePets()
-		end)
+	else
+		self:RegisterEvent("ADDON_LOADED")
 	end
 	
 	
 	self:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 	self:RegisterEvent("ZONE_CHANGED");
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-	self:RegisterEvent("ADDON_LOADED")
+	
 	self:RegisterEvent("PET_JOURNAL_PET_DELETED")
 	--self:RegisterEvent("PET_BATTLE_CAPTURED")
 	
@@ -503,10 +481,13 @@ end
 function PetJournalEnhanced:ADDON_LOADED(event,arg1)
 	if arg1 == "Blizzard_PetJournal" or IsAddOnLoaded("Blizzard_PetJournal") then
 		PetJournalEnhanced:InitPetJournal()
-		PetJournal:HookScript("OnShow",function()
-			PetJournalEnhanced:UpdatePets()
-		end)
 		self:UnregisterEvent("ADDON_LOADED")
+	end
+end
+
+function PetJournalEnhanced:PetTheoryWarning()
+	if IsAddOnLoaded("PetTheory") then
+		StaticPopup_Show("PJE_PET_THEORY_WARNING")
 	end
 end
 
@@ -532,6 +513,14 @@ function PetJournalEnhanced:GetNumPets()
 end
 
 
+StaticPopupDialogs["PJE_PET_THEORY_WARNING"] = {
+	preferredIndex = STATICPOPUP_NUMDIALOGS,
+	text = "Warning:|nPetJournal Enhanced is not compatible with Pet Theory.|nPlease Uninstall either PetJournal Enhanced or Pet Theory",
+	button1 = OKAY,
+	timeout = 0,
+	exclusive = 1,
+	hideOnEscape = 1,
+}
 
 
 

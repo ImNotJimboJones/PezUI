@@ -189,7 +189,9 @@ FishingBuddy.OutfitManager.RegisterManager = function(name, init, choose, switch
 	OutfitManagers[name].Initialize = init;
 	OutfitManagers[name].Choose = choose;
 	OutfitManagers[name].Switch = switch;
-	choose(false);
+	
+	local cm = FishingBuddy.GetSetting("OutfitManager");
+	choose(cm and (cm == name));
 end
 
 local function UpdateManagers()

@@ -2,7 +2,7 @@
 ## Title: PetJournal Enhanced
 ## Notes: Displays the rarity of the enemies pets in their tooltip.
 ## Author: nullberri
-## Version: 2.6.1
+## Version: 2.6.2
 ## X-Date: 2012-7-25
 ## X-Category: Pet Journal
 ## X-Localizations: enUS
@@ -23,7 +23,8 @@ libs\LibPetBreedInfo-1.0\LibPetBreedInfo-1.0.lua
 
 PetJournalEnhanced.lua
 modules\ZoneIDs.lua
+modules\ZoneFiltering.lua
 modules\HookedFunctions.lua
 modules\DropdownMenu.lua
 modules\UniqueCount.lua
-modules\ZoneFiltering.lua
+

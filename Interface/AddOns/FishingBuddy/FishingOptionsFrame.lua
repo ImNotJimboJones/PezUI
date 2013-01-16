@@ -380,8 +380,8 @@ local function orderbuttons(btnlist)
 	return order;
 end
 
-local RIGHT_OFFSET = 32;
-local BUTTON_SEP = 16;
+local RIGHT_OFFSET = 16;
+local BUTTON_SEP = 8;
 local function layoutorder(btnlist, maxwidth)
 	if not btnlist then
 		return {};
@@ -419,15 +419,20 @@ local function layoutorder(btnlist, maxwidth)
 	return layout;
 end
 
+local function FirstPosition(button)
+	button:SetPoint("TOPLEFT", FishingBuddyFrameInset, "TOPLEFT", 4, -4);
+end
+
+local SQUISH_OFF = 6;
 local function dolayout(layout, lastbutton, firstoff)
 	for idx,line in ipairs(layout) do
 		local lb, rb = line[1], line[2];
-		local yoff = 0;
+		local yoff = SQUISH_OFF;
 		if ( lb.margin ) then
 			yoff = yoff - lb.margin[1] or 0;
 		end
 		if ( not lastbutton ) then
-			lb:SetPoint("TOPLEFT", RIGHT_OFFSET, -82);
+			FirstPosition(lb);
 		else
 			lb:SetPoint("TOPLEFT", lastbutton, "BOTTOMLEFT", firstoff, yoff);
 			firstoff = 0;
@@ -439,12 +444,12 @@ local function dolayout(layout, lastbutton, firstoff)
 			if ( rb.margin ) then
 				yoff = yoff + rb.margin[1] or 0;
 			end
-			rb:SetPoint("TOP", lastbutton, "TOP", 0, yoff);
+			rb:SetPoint("TOP", lb, "TOP");
 			if ( rb.checkbox ) then
-				rb:SetPoint("RIGHT", FishingOptionsFrame, "RIGHT", -32-rb.width, 0);
+				rb:SetPoint("RIGHT", FishingBuddyFrameInset, "RIGHT", -rb.width, 0);
 				rb:SetHitRectInsets(0, -rb.width, 0, 0);
 			else
-				rb:SetPoint("LEFT", FishingOptionsFrame, "RIGHT", -32-rb.width-rb.slider, 0);
+				rb:SetPoint("RIGHT", FishingBuddyFrameInset, "RIGHT", -rb.slider, 0);
 			end
 		end
 	end
@@ -488,9 +493,12 @@ local function CleanupButton(button)
 	button:SetParent(nil);
 end
 
+local insidewidth = 0;
 local function Setup(options, nomap)
 	FishingOptionsFrame.groupoptions = options;
-	
+
+	insidewidth = FishingBuddyFrameInset:GetWidth();
+
 -- Clear out all the stuff we put on the old buttons
 	for name,button in pairs(optionmap) do
 		CleanupButton(button);
@@ -555,7 +563,7 @@ local function Setup(options, nomap)
 				local text = getglobal(button:GetName().."Text");
 				if (text) then
 					text:SetText(option.text);
-					button.width = button.width + text:GetWidth() + 8;
+					button.width = button.width + text:GetWidth();
 				end
 			else
 				button.text = "";
@@ -591,7 +599,7 @@ local function Setup(options, nomap)
 						overlay:SetScript("OnLeave", Handle_OnLeave);
 					end
 					overlay:SetSize(button.width or button:GetWidth(), button:GetHeight());
-					overlay:SetPoint("CENTER", button, "CENTER");
+					overlay:SetPoint("LEFT", button, "LEFT");
 					overlay.tooltipText = tooltip;
 					button.overlay = overlay;
 					overlayidx = overlayidx + 1;
@@ -629,7 +637,6 @@ local function Setup(options, nomap)
 		end
 	end
 
-	local insidewidth = FishingOptionsFrame:GetWidth() - RIGHT_OFFSET;
 	local layout = layoutorder(pb, insidewidth);	
 	local lastbutton = dolayout(layout, nil, 0);
 	
@@ -651,9 +658,9 @@ local function Setup(options, nomap)
 	for _,name in pairs(primaries) do
 		local button = optionmap[name];
 		if ( not lastbutton ) then
-			button:SetPoint("TOPLEFT", 32, -82);
+			FirstPosition(button);
 		else
-			local yoff = 2;
+			local yoff = SQUISH_OFF;
 			if ( button.margin ) then
 				yoff = yoff - button.margin[1];
 			end
@@ -680,7 +687,7 @@ local function Setup(options, nomap)
 			 if (toright) then
 				 toright:ClearAllPoints();
 				 toright:SetPoint("CENTER", button, "CENTER", 0, 0);
-				 toright:SetPoint("RIGHT", FishingOptionsFrame, "RIGHT", -32, 0);
+				 toright:SetPoint("RIGHT", FishingBuddyFrameInset, "RIGHT", -32, 0);
 			 end
 		end
 	end
@@ -738,7 +745,7 @@ local function PositionTab(tab, prevtab)
 	if ( prevtab ) then
 		tab:SetPoint("TOPLEFT", prevtab, "BOTTOMLEFT", 0, -17);
 	else
-		tab:SetPoint("TOPLEFT", FishingOptionsFrame, "TOPRIGHT", -32, -65);
+		tab:SetPoint("TOPLEFT", FishingBuddyFrameInset, "TOPRIGHT", 6, -3);
 	end
 	tab:Show();
 end
@@ -996,7 +1003,13 @@ end
 
 -- Helper function
 FishingBuddy.FitInOptionFrame = function(width)
-	return width < (FishingOptionsFrame:GetWidth() - RIGHT_OFFSET - RIGHT_OFFSET - BUTTON_SEP);
+	local check = insidewidth;
+	-- Default to something that should be close in case we haven't
+	-- seen the window yet
+	if (check == 0) then
+		check = 327;
+	end
+	return width < (check - RIGHT_OFFSET - BUTTON_SEP);
 end
 
 -- Create the options frame, unmanaged -- we get managed specially later

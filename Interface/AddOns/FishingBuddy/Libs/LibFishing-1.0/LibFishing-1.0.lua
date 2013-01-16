@@ -7,7 +7,7 @@ Licensed under a Creative Commons "Attribution Non-Commercial Share Alike" Licen
 --]]
 
 local MAJOR_VERSION = "LibFishing-1.0"
-local MINOR_VERSION = 90000 + tonumber(("$Rev: 732 $"):match("%d+"))
+local MINOR_VERSION = 90000 + tonumber(("$Rev: 762 $"):match("%d+"))
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
@@ -198,6 +198,16 @@ function FishLib:IsWorn(itemid)
 	-- return nil
 end
 
+function FishLib:IsItemOneHanded(item)
+	if ( item ) then
+		local _,_,_,_,_,_,_,_,bodyslot,_ = GetItemInfo(item);
+		if ( bodyslot == "INVTYPE_2HWEAPON" or bodyslot == INVTYPE_2HWEAPON ) then
+			return false;
+		end
+	end
+	return true;
+end
+
 local useinventory = {};
 local lureinventory = {};
 function FishLib:UpdateLureInventory()
@@ -344,6 +354,8 @@ if ( not fishlibframe) then
 	fishlibframe:RegisterEvent("UNIT_INVENTORY_CHANGED");
 	fishlibframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
 	fishlibframe:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+	fishlibframe:RegisterEvent("EQUIPMENT_SWAP_FINISHED");
+	fishlibframe:RegisterEvent("ITEM_LOCK_CHANGED");	
 end
 
 fishlibframe.fl = FishLib;
@@ -353,11 +365,13 @@ fishlibframe:SetScript("OnEvent", function(self, event, ...)
 	if ( event == "UPDATE_CHAT_WINDOWS" ) then
 		canCreateFrame = true;
 		self:UnregisterEvent(event);
-	elseif ( event == "SKILL_LINES_CHANGED" or
-		( event == "UNIT_INVENTORY_CHANGED" and arg1 == "player" ) ) then
-		if (self.fl) then
-			self.fl:UpdateLureInventory();
-		end
+	elseif ( event == "UNIT_INVENTORY_CHANGED" and arg1 == "player" ) then
+		self.fl:UpdateLureInventory();
+		-- we can't actually rely on EQUIPMENT_SWAP_FINISHED, it appears
+		self.fl:ForceGearCheck();
+	elseif ( event == "SKILL_LINES_CHANGED" or event == "ITEM_LOCK_CHANGED" or event == "EQUIPMENT_SWAP_FINISHED" ) then
+		-- Did something we're wearing change?
+		self.fl:ForceGearCheck();
 	elseif ( event == "CHAT_MSG_SKILL" ) then
 		self.fl.caughtSoFar = 0;
 	elseif ( event == "LOOT_OPENED" ) then
@@ -366,7 +380,7 @@ fishlibframe:SetScript("OnEvent", function(self, event, ...)
 		end
 	elseif ( event == "UNIT_SPELLCAST_CHANNEL_START" or event == "UNIT_SPELLCAST_CHANNEL_STOP" ) then
 		if (arg1 ~= "player" ) then
-			return;
+			self.fl:UpdateLureInventory();
 		end
 	end
 end);
@@ -639,16 +653,29 @@ function FishLib:IsFishingPole(itemLink)
 	return false;
 end
 
+FishLib.gearcheck = true;
+FishLib.hasgear = false;
+
+function FishLib:ForceGearCheck()
+	self.gearcheck = true;
+	self.hasgear = false;
+end
+
 function FishLib:IsFishingGear()
-	if (self:IsFishingPole()) then
-		return true;
-	end
-	for i=1,16,1 do
-		if (self:FishingBonusPoints(slotinfo[i].id, 1) > 0) then
-			return true;
+	if ( self.gearcheck ) then
+		if (self:IsFishingPole()) then
+			self.hasgear = true;
 		end
+		for i=1,16,1 do
+			if ( not self.hasgear ) then
+				if (self:FishingBonusPoints(slotinfo[i].id, 1) > 0) then
+					self.hasgear = true;
+				end
+			end
+		end
+		self.gearcheck = false;
 	end
-	-- return nil;
+	return self.hasgear;
 end
 
 function FishLib:IsFishingReady(partial)
@@ -1297,7 +1324,7 @@ function FishLib:GetOutfitBonus()
 end
 
 -- return a list of the best items we have for a fishing outfit
-function FishLib:GetFishingOutfitItems(wearing, usepole)
+function FishLib:GetFishingOutfitItems(wearing, nopole)
 	local ibp = function(link) return self:FishingBonusPoints(link); end;
 	-- find fishing gear
 	-- no affinity, check all bags
@@ -1305,17 +1332,18 @@ function FishLib:GetFishingOutfitItems(wearing, usepole)
 	local itemtable = {};
 	for invslot=1,17,1 do
 		local slotid = slotinfo[invslot].id;
-		if ( not nopole or slotid ~= main ) then
+		local ismain = (slotid == mainhand);
+		if ( not nopole or not ismain ) then
 			local slotname = slotinfo[invslot].name;
-			local maxb = nil;
+			local maxb = -1;
 			local link;
 			-- should we include what we're already wearing?
 			if ( wearing ) then
 				link = GetInventoryItemLink("player", slotid);
 				if ( link ) then
 					maxb = self:FishingBonusPoints(link);
-					outfit = outfit or {};
 					if (maxb > 0) then
+						outfit = outfit or {};
 						outfit[invslot] = { link=link, slot=slotid };
 					end
 				end
@@ -1324,7 +1352,6 @@ function FishLib:GetFishingOutfitItems(wearing, usepole)
 			-- this only gets items in bags, hence the check above for slots
 			wipe(itemtable);
 			itemtable = GetInventoryItemsForSlot(slotid, itemtable);
-	
 			for location,id in pairs(itemtable) do
 				local player, bank, bags, slot, bag = EquipmentManager_UnpackLocation(location);
 				if ( bags ) then
@@ -1334,8 +1361,13 @@ function FishLib:GetFishingOutfitItems(wearing, usepole)
 				end
 				if ( link ) then
 					local b = self:FishingBonusPoints(link);
-					if (b > 0) then
-						if ( not maxb or b > maxb ) then
+					local go = false;
+					if ( ismain ) then
+						go = self:IsFishingPole(link);
+					end
+					if (go or (b > 0)) then
+						local usable, _ = IsUsableItem(link);
+						if ( usable and (b > maxb) ) then
 							maxb = b;
 							outfit = outfit or {};
 							outfit[slotid] = { link=link, bag=bag, slot=slot, slotname=slotname };

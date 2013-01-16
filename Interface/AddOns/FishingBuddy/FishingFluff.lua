@@ -580,6 +580,7 @@ local function UpdateItemOptions()
 				if (GetItemCount(id) > 0) then
 					return 1;
 				end
+				return 0;
 			end
 		option.init =
 			function(option, button)
@@ -605,7 +606,7 @@ local function UpdateItemOptions()
 			sub.visible = option.visible;
 			sub.v = 1;
 			sub.deps = {};
-			sub.deps[info.setting] = "h";
+			sub.deps[info.setting] = "d";
 			FluffOptions[info.option.setting] = sub;
 		end
 	end

@@ -92,6 +92,7 @@ L["Shift + Right click to show a URL for the item"] = "Shift + 右鍵 單擊顯�
 L["Show Filters"] = "顯示過濾器" -- Needs review
 L["Show Previews"] = "顯示預覽" -- Needs review
 L["Slot"] = "裝備欄"
+L["Slot Controls"] = "槽控制" -- Needs review
 L["Sorting"] = "排序" -- Needs review
 L["Source"] = "來源"
 L["Synchronize Positioning"] = "同步定位" -- Needs review

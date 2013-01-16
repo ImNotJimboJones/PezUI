@@ -1,0 +1,4 @@
+r39 fixed ticket 65 - Enabled breed option hides some pets in the journal
+r39 addressed ticket 64 - Create Pet thory incompatibility warning 
+r39 addressed ticket 60 - Investigate elvui conflict 
+

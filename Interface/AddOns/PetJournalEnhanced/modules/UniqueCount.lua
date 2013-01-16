@@ -7,7 +7,7 @@ function UniquePets:ScanPets()
 	local count = 0
 	for i,petID in LibPetJournal:IteratePetIDs() do 
 		local speciesID = C_PetJournal.GetPetInfoByPetID(petID)
-		if not pets[speciesID] then
+		if speciesID and not pets[speciesID] then
 			count = count + 1
 			pets[speciesID] = speciesID
 		end

@@ -147,12 +147,15 @@ local function IsFishingAceEnabled()
 	return false;
 end
 
+local EasyCastInit;
+
 local CastingOptions = {
 	["EasyCast"] = {
 		["text"] = FBConstants.CONFIG_EASYCAST_ONOFF,
 		["tooltip"] = FBConstants.CONFIG_EASYCAST_INFO,
 		["tooltipd"] = FBConstants.CONFIG_EASYCAST_INFOD,
 		["enabled"] = function() return (not IsFishingAceEnabled()) and 1 or 0 end,
+		["init"] = function(o, b) EasyCastInit(o, b); end,
 		["v"] = 1,
 		["m"] = 1,
 		["default"] = 1 },
@@ -260,6 +263,7 @@ local CastingOptions = {
 		["button"] = "FBEasyKeys",
 		["tooltipd"] = FBConstants.CONFIG_EASYCASTKEYS_INFO,
 		["deps"] = { ["EasyCast"] = "h" },
+		["init"] = function(o, b) EasyCastInit(o, b); end,
 		["setup"] =
 			function(button)
 				local gs = FishingBuddy.GetSetting;
@@ -342,6 +346,16 @@ local VolumeSlider =
 	["rightextra"] = 32,
 	["setting"] = "EnhanceSound_MasterVolume",
 };
+
+EasyCastInit = function(option, button)
+	-- prettify drop down?
+	local check = FBEasyKeys.menu.label:GetWidth() + FBEasyKeys:GetWidth();
+	if (FishingBuddy.FitInOptionFrame(check)) then
+		CastingOptions["EasyCast"].layoutright = "EasyCastKeys";
+	else
+		CastingOptions["EasyCastKeys"].alone = 1;
+	end
+end
 
 -- default FishingBuddy option handlers
 FishingBuddy.BaseGetSetting = function(setting)
@@ -1672,18 +1686,10 @@ FishingBuddy.OnEvent = function(self, event, ...)
 		keymenu.html:Hide();
 		
 		keymenu.menu.label:SetText(FBConstants.CONFIG_EASYCAST_ONOFF);
-		local check = keymenu.menu.label:GetWidth();
 		
 		UIDropDownMenu_Initialize(keymenu.menu, function()
 										  LoadKeyMenu(keymenu, "EasyCastKeys");
 									  end);
-		-- prettify drop down?
-		check = check + keymenu:GetWidth();
-		if (FishingBuddy.FitInOptionFrame(check)) then
-			CastingOptions["EasyCast"].layoutright = "EasyCastKeys";
-		else
-			CastingOptions["EasyCastKeys"].alone = 1;
-		end
 		FishingBuddy.OptionsFrame.HandleOptions(name, "Interface\\Icons\\INV_Fishingpole_02", CastingOptions);
 		FishingBuddy.OptionsFrame.HandleOptions(nil, nil, InvisibleOptions);
 		FishingBuddy.OptionsUpdate();

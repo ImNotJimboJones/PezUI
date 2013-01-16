@@ -18,33 +18,42 @@ local function GetColor(confidence)
 end
 
 
+function Hooked:SetHighStatShown(enabled)
+	for i=1,#PetJournal.listScroll.buttons do
+		button = PetJournal.listScroll.buttons[i] 
+		self.highStatIcons[i]:SetShown(enabled)
+		button.name:ClearAllPoints()
+		
+		local buttonAnchor = "PetJournalListScrollFrameButton"..i
+		if enabled then
+			button.name:SetPoint("TOPLEFT",buttonAnchor,"TOPLEFT",10+self.highStatIcons[i]:GetWidth(),-2)
+		else
+			button.name:SetPoint("TOPLEFT",buttonAnchor,"TOPLEFT",12,-2)
+		end
+	end
+end
+
 function Hooked:Initialize(database)
 	if not self.initialized then
 		self.db = database.global
 		
+		self.highStatIcons = {}
 		for i=1,#PetJournal.listScroll.buttons do
 			button = PetJournal.listScroll.buttons[i] 
-			button.highStat = button:CreateTexture(nil,"OVERLAY")
-			button.highStat:SetTexture("Interface\\PetBattles\\PetBattle-StatIcons")
-			button.highStat:SetTexCoord(0.0,0.5,0.0,0.5)
-			button.highStat:SetSize(12,12)
-			
-			button.highStat:SetPoint("RIGHT",button.name,"LEFT",0,0)
-			
-			
-			if Hooked.db.display.maxStatIcon then
-				button.name:SetPoint("TOPLEFT","PetJournalListScrollFrameButton"..i,"TOPLEFT",10+button.highStat:GetWidth(),-2)
-			end
-			
-			button.highStat:SetDrawLayer("OVERLAY", 7)
-			button.highStat:Hide()
+			local highStatIcon = button:CreateTexture(nil,"OVERLAY")
+			local buttonAnchor = "PetJournalListScrollFrameButton"..i
+			highStatIcon:SetTexture("Interface\\PetBattles\\PetBattle-StatIcons")
+			highStatIcon:SetTexCoord(0.0,0.5,0.0,0.5)
+			highStatIcon:SetSize(12,12)
+			highStatIcon:SetPoint("RIGHT",button.name,"LEFT",0,0)
+			highStatIcon:SetParent(button)
+			highStatIcon:SetDrawLayer("OVERLAY",7)
+			highStatIcon:Show()
+			self.highStatIcons[i] = highStatIcon
 		end
 	
+		self:SetHighStatShown(self.db.display.maxStatIcon)
 	
-		
-		
-		local ZoneFiltering = PetJournalEnhanced:GetModule("ZoneFiltering")
-		self.zoneTree = ZoneFiltering:GetZoneTree()
 		UIDropDownMenu_Initialize(PetJournalFilterDropDown, self.PetJournalFilterDropDown , "MENU")
 		
 		--self:RegisterMessage("PETJOURNAL_ENHANCED_UPDATE")
@@ -319,7 +328,7 @@ function Hooked.PetJournal_UpdatePetList()
 				pet.dragButton.favorite:Hide();
 			end
 			
-			pet.highStat:Hide()
+			Hooked.highStatIcons[i]:Hide()
 			
 			if isOwned then
 				local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID);
@@ -334,24 +343,24 @@ function Hooked.PetJournal_UpdatePetList()
 						--texture is the same, were just setting what part were rendering
 						--todo: move to a table of textures with precomputed texcoords
 						if maxStat == MAX_BALANCED then
-							pet.highStat:Hide()
+							Hooked.highStatIcons[i]:Hide()
 						else
 							if maxStat == MAX_ATTACK then
-								pet.highStat:SetTexCoord(0.0,0.5,0.0,0.5)
+								Hooked.highStatIcons[i]:SetTexCoord(0.0,0.5,0.0,0.5)
 							elseif maxStat == MAX_STAMINA then
-								pet.highStat:SetTexCoord(0.5,1.0,0.5,1.0)
+								Hooked.highStatIcons[i]:SetTexCoord(0.5,1.0,0.5,1.0)
 							elseif maxStat == MAX_SPEED then
-								pet.highStat:SetTexCoord(0.0,0.5,0.5,1)
+								Hooked.highStatIcons[i]:SetTexCoord(0.0,0.5,0.5,1)
 							end
 							
-							local h,w = pet.highStat:GetSize()
+							local h,w = Hooked.highStatIcons[i]:GetSize()
 							
 							--pet.highStat:SetSize(18,18)
-							pet.highStat:Show()
+							Hooked.highStatIcons[i]:Show()
 						end
 					end
 				else
-					pet.highStat:Hide()
+					Hooked.highStatIcons[i]:Hide()
 				end
 				
 				

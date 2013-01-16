@@ -33,7 +33,7 @@ credits[FBConstants.ROLE_TRANSLATE_DEDE] = {
 	["blackrat"] = { "v0.8.1d", },
 	["RustyXXL"] = { "V1.0.4", },
 	["Ithilrandir"] = { "V1.0.5", },
-	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", "V1.2d", "V1.2f", },
+	["DirtyHarryGermany"] = { "V1.0.7h", "V1.0.9e", "V1.1e", "V1.2a", "V1.2c", "V1.2d", "V1.2f", "V1.2g", },
 	["Freydis88"] = { "V1.0.9e", },
 	["Frontiii"] = { "V1.0.9e", },
 };
@@ -69,7 +69,8 @@ credits[FBConstants.ROLE_TRANSLATE_RURU] = {
 	["frodo10"] = { "V1.0" },
 	["DVK"] = { "V1.1f" },
 	["Ant1dotE"] = { "V1.0.1", "V1.0.2", "V1.0.4" },
-	["BloodyFess"] = { "V1.2d", },
+	["BloodyFess"] = { "V1.2d", "V1.2h" },
+	["Turbid121"] = { "V1.2h", "V1.2i" },
 };
 
 credits[FBConstants.ROLE_TRANSLATE_PTBR] = {
@@ -330,7 +331,6 @@ local function AboutSetup(self)
 		credits = nil;
 		table.sort(self.credits, function (a, b) return a.sort < b.sort; end)
 	end
-	FishingAboutFrame:SetAllPoints();
 end
 
 local AboutOptions = {
@@ -345,7 +345,7 @@ local function OnEvent(self, event)
 	self:UnregisterEvent("VARIABLES_LOADED");
 end
 
-local frame = CreateFrame("FRAME", "FishingAboutFrame")
+local frame = CreateFrame("FRAME", "FishingAboutFrame", FishingBuddyFrameInset)
 frame:SetScript("OnEvent", OnEvent)
 frame:RegisterEvent("VARIABLES_LOADED")
 frame:Hide()

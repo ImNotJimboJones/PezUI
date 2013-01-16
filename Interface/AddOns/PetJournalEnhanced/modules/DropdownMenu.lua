@@ -4,52 +4,7 @@ local _
 local ASCENDING =  1
 local DESCENDING = 2
 local breedInfo = LibStub("LibPetBreedInfo-1.0")
-
-local function __genOrderedIndex( t )
-    local orderedIndex = {}
-    for key in pairs(t) do
-        table.insert( orderedIndex, key )
-    end
-    table.sort( orderedIndex )
-    return orderedIndex
-end
-
-local function orderedNext(t, state)
-    -- Equivalent of the next function, but returns the keys in the alphabetic
-    -- order. We use a temporary ordered key table that is stored in the
-    -- table being iterated.
-
-    --print("orderedNext: state = "..tostring(state) )
-    if state == nil then
-        -- the first time, generate the index
-        t.__orderedIndex = __genOrderedIndex( t )
-        key = t.__orderedIndex[1]
-        return key, t[key]
-    end
-    -- fetch the next value
-    key = nil
-    for i = 1,table.getn(t.__orderedIndex) do
-        if t.__orderedIndex[i] == state then
-            key = t.__orderedIndex[i+1]
-        end
-    end
-
-    if key then
-        return key, t[key]
-    end
-
-    -- no more value to return, cleanup
-    t.__orderedIndex = nil
-    return
-end
-
-local function orderedPairs(t)
-    -- Equivalent of the pairs() function on tables. Allows to iterate
-    -- in order
-    return orderedNext, t, nil
-end
-
-
+local ZoneFiltering = PetJournalEnhanced:GetModule("ZoneFiltering")
 
 function Hooked:CreateDropdownMenu(level)
 	if level == 1 then
@@ -197,7 +152,7 @@ function Hooked:CreateDropdownMenu(level)
 		local info = UIDropDownMenu_CreateInfo();
 		info.keepShownOnClick = true;	
 		
-		if Hooked.db.display.breedInfo and UIDROPDOWNMENU_MENU_VALUE == 9 then
+		if Hooked.db.display.breedInfo and UIDROPDOWNMENU_MENU_VALUE == 9 then --breed filter
 			
 			info.notCheckable = true;
 			info.text = CHECK_ALL
@@ -237,7 +192,7 @@ function Hooked:CreateDropdownMenu(level)
 				UIDropDownMenu_AddButton(info, level)
 				
 			end	
-		elseif UIDROPDOWNMENU_MENU_VALUE == 8 then
+		elseif UIDROPDOWNMENU_MENU_VALUE == 8 then --quantity
 			info.notCheckable = true;
 			info.text = CHECK_ALL
 			info.func = function()
@@ -341,37 +296,24 @@ function Hooked:CreateDropdownMenu(level)
 				info.checked = function() return not C_PetJournal.IsPetSourceFiltered(i) end;
 				UIDropDownMenu_AddButton(info, level);
 			end
+		
 		elseif UIDROPDOWNMENU_MENU_VALUE == 3 then --zone filter
 			local info = UIDropDownMenu_CreateInfo()
-			local zoneTree = ZoneFiltering:GetZoneTree()
+			local zoneTree = ZoneFiltering:GetZoneGroupMapping()
 			info.hasArrow = false;
 			info.isNotRadio = true;
 			info.notCheckable = true;
 			info.keepShownOnClick = true
 			info.text = CHECK_ALL
 			info.func = function()
-							for continent,v in pairs(zoneTree) do
-								for zone,_ in pairs(v) do
-									zoneTree[continent][zone] = true
-								end
-							end	
-							self.db.filtering.unknownZone = true
-							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
-							PetJournalEnhanced:SetZoneFilter()
+							ZoneFiltering:SetAllFiltered(true)
 							PetJournalEnhanced:UpdatePets()
 						end
 			UIDropDownMenu_AddButton(info, level)
 			
 			info.text = UNCHECK_ALL
 			info.func = function()
-							for continent,v in pairs(zoneTree) do
-								for zone,_ in pairs(v) do
-									zoneTree[continent][zone] = false
-								end
-							end	
-								self.db.filtering.unknownZone = false
-							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
-							PetJournalEnhanced:SetZoneFilter()
+							ZoneFiltering:SetAllFiltered(false)
 							PetJournalEnhanced:UpdatePets()
 						end
 			UIDropDownMenu_AddButton(info, level)
@@ -385,26 +327,26 @@ function Hooked:CreateDropdownMenu(level)
 			info.func = 	function(_, _, _, value)
 						self.db.filtering.unknownZone = not self.db.filtering.unknownZone
 						UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
-						PetJournalEnhanced:SetZoneFilter()
 						PetJournalEnhanced:UpdatePets()
 					end 
 			info.checked = function() return self.db.filtering.unknownZone end
 			UIDropDownMenu_AddButton(info, level)
 			
-			
-			
-			for k,_ in orderedPairs(zoneTree) do
+			local ZoneGroupMap = ZoneFiltering:GetZoneGroupMapping()
+			for i=1,ZoneFiltering:GetNumZoneGroups() do
 				info.hasArrow = true;
 				info.notCheckable = true;	
 				info.keepShownOnClick = true
 				info.checked = false
 				info.isNotRadio = true
-				info.text = k
-				info.value = k
+				info.text = ZoneFiltering:GetZoneGroupNames(i)
+				info.value = i
 				info.func = 	nil
 				info.checked = nil
 				UIDropDownMenu_AddButton(info, level)
 			end
+			
+			
 			
 			
 		elseif UIDROPDOWNMENU_MENU_VALUE == 4 then --pet specialization
@@ -558,7 +500,6 @@ function Hooked:CreateDropdownMenu(level)
 							self.db.filtering.rarity[i] = not self.db.filtering.rarity[i]
 							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 							PetJournalEnhanced:UpdatePets()
-							
 						end 
 				info.checked = function() return self.db.filtering.rarity[i] end
 				UIDropDownMenu_AddButton(info, level)
@@ -567,8 +508,7 @@ function Hooked:CreateDropdownMenu(level)
 	end
 
 	if level == 3  then
-		local zoneTree = self.zoneTree
-		if zoneTree[UIDROPDOWNMENU_MENU_VALUE] then
+		if UIDROPDOWNMENU_MENU_VALUE >= 1 and UIDROPDOWNMENU_MENU_VALUE <= ZoneFiltering:GetNumZoneGroups() then
 			local info = UIDropDownMenu_CreateInfo()
 		
 			info.hasArrow = false;
@@ -577,41 +517,38 @@ function Hooked:CreateDropdownMenu(level)
 			info.keepShownOnClick = true
 			info.text = CHECK_ALL
 			info.func = function()
-							for k,_ in pairs(zoneTree[UIDROPDOWNMENU_MENU_VALUE]) do
-								zoneTree[UIDROPDOWNMENU_MENU_VALUE][k] = true
-							end
-							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,3)
-							PetJournalEnhanced:SetZoneFilter()
+							ZoneFiltering:SetAllGroupFiltered(UIDROPDOWNMENU_MENU_VALUE,true)
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 							PetJournalEnhanced:UpdatePets()
 						end
 			UIDropDownMenu_AddButton(info, level)
 			
 			info.text = UNCHECK_ALL
 			info.func = function()
-							for k,_ in pairs(zoneTree[UIDROPDOWNMENU_MENU_VALUE]) do
-								zoneTree[UIDROPDOWNMENU_MENU_VALUE][k] = false
-							end
-							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,3)
-							PetJournalEnhanced:SetZoneFilter()
+							ZoneFiltering:SetAllGroupFiltered(UIDROPDOWNMENU_MENU_VALUE,false)
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 							PetJournalEnhanced:UpdatePets()
 						end
 			UIDropDownMenu_AddButton(info, level)
-			for k,_ in orderedPairs(zoneTree[UIDROPDOWNMENU_MENU_VALUE]) do
+			
+			
+			local zoneIDs = ZoneFiltering:GetZoneGroup(UIDROPDOWNMENU_MENU_VALUE)
+			for i=1, #zoneIDs do
+				local zoneID = zoneIDs[i]
 				info.hasArrow = false;
 				info.notCheckable = false;	
 				info.keepShownOnClick = true
 				info.checked = false
 				info.isNotRadio = true
-				info.text = k
-				info.value = k
+				info.text = GetMapNameByID(zoneID)
+				info.value = zoneID
 				info.func = 	function(_, _, _, value)
-							zoneTree[UIDROPDOWNMENU_MENU_VALUE][k] = not zoneTree[UIDROPDOWNMENU_MENU_VALUE][k]
-							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,3)
-							PetJournalEnhanced:SetZoneFilter()
+							local isEnabled = ZoneFiltering:GetFiltered(zoneID)
+							ZoneFiltering:SetFiltered(zoneID,not isEnabled)
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 							PetJournalEnhanced:UpdatePets()
-							
 						end 
-				info.checked = function() return zoneTree[UIDROPDOWNMENU_MENU_VALUE][k] end
+				info.checked = function() return ZoneFiltering:GetFiltered(zoneID) end
 				UIDropDownMenu_AddButton(info, level)
 			end
 		end

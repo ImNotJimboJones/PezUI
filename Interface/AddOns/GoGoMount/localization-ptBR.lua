@@ -57,13 +57,13 @@ if GetLocale() == "ptBR" then
 		AzuremystIsle = "Azuremyst Isle", -- Requires localization
 		BloodmystIsle = "Bloodmyst Isle", -- Requires localization
 		CrumblingDepths = "Crumbling Depths", -- Requires localization
-		Dalaran = "Dalaran", -- Requires localization
+		Dalaran = "Dalaran", -- Needs review
 		DarkbreakCove = "Darkbreak Cove", -- Requires localization
 		Deepholm = "Deepholm", -- Requires localization
 		DireMaul = "Dire Maul", -- Requires localization
 		EversongWoods = "Eversong Woods", -- Requires localization
 		Ghostlands = "Ghostlands", -- Requires localization
-		Icecrown = "Icecrown", -- Requires localization
+		Icecrown = "Coroa de Gelo", -- Needs review
 		Ironforge = "Ironforge", -- Requires localization
 		IsleOfQuelDanas = "Isle of Quel'Danas", -- Requires localization
 		KrasusLanding = "Krasus' Landing", -- Requires localization
@@ -71,7 +71,7 @@ if GetLocale() == "ptBR" then
 		Lghorek = "L'ghorek", -- Requires localization
 		Nespirah = "Nespirah", -- Requires localization
 		ShimmeringExpanse = "Shimmering Expanse", -- Requires localization
-		SholazarBasin = "Sholazar Basin", -- Requires localization
+		SholazarBasin = "Bacia Sholazar", -- Needs review
 		SilvermoonCity = "Silvermoon City", -- Requires localization
 		SilverTideHollow = "Silver Tide Hollow", -- Requires localization
 		TempleOfBethekk = "Temple of Bethekk", -- Requires localization
@@ -83,7 +83,7 @@ if GetLocale() == "ptBR" then
 		TheExodar = "The Exodar", -- Requires localization
 		TheFrozenSea = "O Mar Congelado", -- Needs review
 		TheOculus = "The Oculus", -- Requires localization
-		TheStormPeaks = "The Storm Peaks", -- Requires localization
+		TheStormPeaks = "Picos Tempestuosos", -- Needs review
 		TheTempleOfAtalHakkar = "The Temple of Atal'Hakkar", -- Requires localization
 		TheUnderbelly = "The Underbelly", -- Requires localization
 		TheVioletCitadel = "A Cidadela Violeta", -- Needs review
@@ -92,7 +92,7 @@ if GetLocale() == "ptBR" then
 		TolBaradPeninsula = "Tol Barad Peninsula", -- Requires localization
 		TwistingNether = "Twisting Nether", -- Requires localization
 		Vashjir = "Vashj'ir", -- Requires localization
-		Wintergrasp = "Wintergrasp", -- Requires localization
+		Wintergrasp = "Invérnia", -- Needs review
 	},
 }
 
