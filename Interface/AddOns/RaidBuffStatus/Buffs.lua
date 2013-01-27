@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 593 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 598 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -404,6 +404,23 @@ local function player_spell(buffinfo)
     end
   end
   return nil
+end
+
+local function unithasbuff(unit, bufflist, staticfavored)
+  for _, v in pairs(bufflist) do
+    b = unit.hasbuff[v]
+    if b then
+      if staticfavored and RaidBuffStatus.db.profile.preferstaticbuff and -- looking for a static buff
+         UnitIsVisible(unit.unitid) then -- duration is only available when unit is visible
+         if b.duration and b.duration > 5*60 then -- this is the static buff
+	   return true
+	 end
+      else
+        return true
+      end
+    end
+  end
+  return false
 end
 
 -- generic buffinfo struct: 1=CLASSNAME, 2=spellid, [ 3=priority, [ 4=spec ] ]
@@ -1521,14 +1538,7 @@ local BF = {
 				cbelixirs = recentbelixirs
 				cgelixirs = recentgelixirs
 			end
-			local missingbuff = true
-			for _, v in ipairs(cflasks) do
-				if unit.hasbuff[v] then
-					missingbuff = false
-					break
-				end
-			end
-			if missingbuff then
+			if not unithasbuff(unit, cflasks) then
 			  	for _, v in ipairs(oldflasks) do
 					if unit.hasbuff[v] then -- slacking flask
 						table.insert(report.oldflixirlist, name .. "(" .. v .. ")")
@@ -1679,14 +1689,7 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			if class == "ROGUE" then
                                 report.checking.wepbuff = true
-                                local missingbuff = true
-                                for _, v in ipairs(roguewepbuffs) do
-                                        if unit.hasbuff[v] then
-                                                missingbuff = false
-                                                break
-                                        end
-                                end
-                                if missingbuff then
+                                if not unithasbuff(unit, roguewepbuffs) then
                                         table.insert(report.wepbufflist, name)
                                 end
 				return
@@ -1829,14 +1832,7 @@ local BF = {
 			if raid.ClassNumbers.MAGE > 0 or  raid.ClassNumbers.WARLOCK > 0 then
 				report.checking.spbuff = true
 				if class ~= "ROGUE" and class ~= "WARRIOR" and class ~= "DEATHKNIGHT" and class ~= "HUNTER" then
-					local missingbuff = true
-					for _, v in ipairs(spbuff) do
-						if unit.hasbuff[v] then
-							missingbuff = false
-							break
-						end
-					end
-					if missingbuff then
+					if not unithasbuff(unit, spbuff, true) then
 						if RaidBuffStatus.db.profile.ShowGroupNumber then
 							table.insert(report.spbufflist, name .. "(" .. unit.group .. ")" )
 						else
@@ -1890,14 +1886,7 @@ local BF = {
 			   raid.ClassNumbers.MONK > 0 or
 			   raid.ClassNumbers.PALADIN > 0 then
 				report.checking.statbuff = true
-				local missingbuff = true
-				for _, v in ipairs(statbuff) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, statbuff) then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
 						table.insert(report.statbufflist, name .. "(" .. unit.group .. ")" )
 					else
@@ -1951,14 +1940,7 @@ local BF = {
                             (raid.ClassNumbers.DRUID > 0 or raid.ClassNumbers.MONK > 0))
                         then
 				report.checking.masterybuff = true
-				local missingbuff = true
-				for _, v in ipairs(masterybuff) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, masterybuff, true) then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
 						table.insert(report.masterybufflist, name .. "(" .. unit.group .. ")" )
 					else
@@ -2007,14 +1989,7 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			if raid.ClassNumbers.PRIEST > 0 then
 				report.checking.fortitude = true
-				local missingbuff = true
-				for _, v in ipairs(fortitude) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, fortitude, true) then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
 						table.insert(report.fortitudelist, name .. "(" .. unit.group .. ")" )
 					else
@@ -2068,14 +2043,7 @@ local BF = {
 			  report.checking.critbuff = ((next(buffers) and true) or false)
 			end
 			if report.checking.critbuff then
-				local missingbuff = true
-				for _, v in ipairs(critbuff) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, critbuff, true) then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
 						table.insert(report.critbufflist, name .. "(" .. unit.group .. ")" )
 					else
@@ -2282,14 +2250,7 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			if class == "HUNTER" then
 				report.checking.noaspect = true
-				local missingbuff = true
-				for _, v in ipairs(aspects) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, aspects) then
 					table.insert(report.noaspectlist, name)
 				end
 			end
@@ -2330,14 +2291,7 @@ local BF = {
 				return
 			end
 			report.checking.dkpresence = true
-			local missingbuff = true
-			for _, v in ipairs(dkpresences) do
-				if unit.hasbuff[v] then
-					missingbuff = false
-					break
-				end
-			end
-			if missingbuff then
+			if not unithasbuff(unit, dkpresences) then
 				table.insert(report.dkpresencelist, name)
 			end
 		end,
@@ -2582,14 +2536,7 @@ local BF = {
 		main = function(self, name, class, unit, raid, report)
 			if class == "MAGE" then
 				report.checking.magearmor = true
-				local missingbuff = true
-				for _, v in ipairs(magearmors) do
-					if unit.hasbuff[v] then
-						missingbuff = false
-						break
-					end
-				end
-				if missingbuff then
+				if not unithasbuff(unit, magearmors) then
 					table.insert(report.magearmorlist, name)
 				end
 			end
@@ -2718,14 +2665,7 @@ local BF = {
 				return
 			end
 			report.checking.drumskings = true
-			local missingbuff = not unit.hasbuff[BS[69378]] -- forgotten kings
-			for _, v in ipairs(statbuff) do
-				if unit.hasbuff[v] then
-					missingbuff = false
-					break
-				end
-			end
-			if missingbuff then
+			if not unit.hasbuff[BS[69378]] and not unithasbuff(unit, statbuff) then -- forgotten kings
 				table.insert(report.drumskingslist, name)
 			end
 		end,

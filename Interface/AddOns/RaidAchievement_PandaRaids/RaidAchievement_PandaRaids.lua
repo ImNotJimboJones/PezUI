@@ -19,15 +19,17 @@ end
 
 
 prraspisokach25={
---HoF
 
 
---MV
+--HoE
 6553,
 
 --ToES
 6933,
 6825,
+
+--MV
+6455,
 
 }
 
@@ -41,7 +43,75 @@ end
 end
 
 
-function prra_OnUpdate(prracurtime)
+function prra_OnUpdate(curtime)
+
+--после 10 сек после ачивки чек
+if ratrackgoodattack2 and curtime>ratrackgoodattack2+10 then
+
+    ratrackgoodattack2=nil
+    
+    --собираем инфо по тем кто в рейде!
+    local taball={}
+    local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
+    if pppl and (pppl==4 or pppl==6 or pppl==7) then
+      psdifflastfight=25
+    end
+		local psgroup=2
+		if psdifflastfight==25 then
+			psgroup=5
+		end
+		for i = 1,GetNumGroupMembers() do
+			local name, _, subgroup, _, _, _, _, online, isDead = GetRaidRosterInfo(i)
+			if subgroup<=psgroup then
+				table.insert(taball,name)
+			end
+		end
+		
+		--если 75% игроков нанесло атаку...
+		if #taball>0 then
+      if #ratrackgoodattack1<#taball then
+        if #ratrackgoodattack1>=#taball*0.75 then
+          --поиск ников что не сделали свое дело!
+          for k=1,#ratrackgoodattack1 do
+             if ratrackgoodattack1[k] then
+               if #taball>0 then
+                 for j=1,#taball do
+                   if taball[j] and taball[j]==ratrackgoodattack1[k] then
+                     table.remove(taball,j)
+                   end
+                 end
+               end
+             end
+          end
+          if #taball<7 and #taball>0 then
+            --вывод списка фейлеров
+            local text=""
+            for v=1,#taball do
+              text=text..taball[v]
+              if v~=#taball then
+                text=text..", "
+              end
+            end
+            raplaysound(3,prraspisokach25[4])
+            if (wherereportraidach=="sebe") then
+              DEFAULT_CHAT_FRAME:AddMessage("- "..achlinnk.." NO DAMAGE: "..text)
+            else
+            if (UnitIsGroupAssistant("player")==nil and UnitIsGroupLeader("player")==nil) and wherereportraidach=="raid_warning" then
+              razapuskanonsa("raid", "{rt8} "..achlinnk.." NO DAMAGE: "..text)
+            else
+              razapuskanonsa(wherereportraidach, "{rt8} "..achlinnk.." NO DAMAGE: "..text)
+            end
+            end
+          end
+        end
+      end
+    end
+    ratrackgoodattack1=nil
+    ratrackgoodattack2=nil
+    ratrackgoodattack3=nil
+end
+
+
 
 end
 
@@ -124,6 +194,57 @@ local arg1, arg2, arg3,arg4,arg5,arg6,argNEW1,arg7,arg8,arg9,argNEW2,arg10,arg11
 --Heart of Fear
 if GetCurrentMapAreaID()==897 then
 
+
+
+--Mogushan
+if GetCurrentMapAreaID()==896 then
+
+if arg2=="SPELL_DAMAGE" and arg10==116809 then
+  if (ratrackgoodattack2==nil or (ratrackgoodattack2 and ratrackgoodattack2>GetTime()+10)) then
+    ratrackgoodattack1={} --список игроков что нанесли удар
+    table.wipe(ratrackgoodattack1)
+    ratrackgoodattack2=GetTime() --время 1 атаки
+    ratrackgoodattack3=arg7 --гуид того по кому атака
+  end
+  if ratrackgoodattack3==arg7 then
+    local bil=0
+    for i=1,#ratrackgoodattack1 do
+      if ratrackgoodattack1[i]==arg5 then
+        bil=1
+      end
+    end
+    if bil==0 then
+      table.insert(ratrackgoodattack1,arg5)
+    end
+
+    --собираем инфо по тем кто в рейде!
+    local taball={}
+    local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
+    if pppl and (pppl==4 or pppl==6 or pppl==7) then
+      psdifflastfight=25
+    end
+		local psgroup=2
+		if psdifflastfight==25 then
+			psgroup=5
+		end
+		for i = 1,GetNumGroupMembers() do
+			local name, _, subgroup, _, _, _, _, online, isDead = GetRaidRosterInfo(i)
+			if subgroup<=psgroup then
+				table.insert(taball,name)
+			end
+		end
+		if #ratrackgoodattack1>=#taball then
+      if prraspisokon[4]==1 and raachdone1 then
+        prraachcompl(4)
+      end
+    end
+  end
+end
+
+end
+--
+
+
 if arg2=="SPELL_CAST_SUCCESS" and arg10==122786 then
 	if prraspisokon[1]==1 and raachdone1 then
 		prrafailnoreason(1) --arg8
@@ -134,16 +255,6 @@ end
 end
 --
 
-
-
---Mogushan
-if GetCurrentMapAreaID()==896 then
-
-
-
-
-end
---
 
 
 --ToES
@@ -166,7 +277,12 @@ if arg2=="SPELL_AURA_APPLIED" and (arg10==119985 or arg10==119414) then
 	if prraspisokon[3]==1 and raachdone1 then
 		raunitisplayer(arg7,arg8)
 		if raunitplayertrue then
-      prrafailnoreason(3,arg8) --arg8
+      --проверка что нет дебаффа на хихиканье
+      local spbuf=GetSpellInfo(129147)
+      if UnitBuff(arg8, spbuf) or UnitDebuff(arg8, spbuf) then
+      else
+        prrafailnoreason(3,arg8) --arg8
+      end
     end
 	end
 end

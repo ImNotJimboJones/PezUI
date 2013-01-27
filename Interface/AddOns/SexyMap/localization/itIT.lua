@@ -138,9 +138,7 @@ L["Show on minimap"] = "Visualizza sulla Minimappa"
 L["Show %s:"] = "Visualizza %s:"
 L["Show who pinged"] = "Visualizza chi ha pingato"
 L["Snowflake"] = "Fiocco di neve"
-L["Spice up your minimap with some sexy options."] = [=[Vivacizza la Minimappa con alcune opzioni sexy.
-
-descrizione file .toc]=]
+L["Spice up your minimap with some sexy options."] = "Vivacizza la Minimappa con alcune opzioni sexy."
 L["Square"] = "Quadrato"
 L["Standard Buttons"] = "Pulsanti Standard"
 L["Static Rotation"] = "Rotazione Statica"

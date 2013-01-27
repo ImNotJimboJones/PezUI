@@ -88,6 +88,7 @@ local function IsTankedByAnotherTank(unit)
 		elseif unit.isMouseover then targetOf = UnitName("mouseovertarget")		-- Nameplate is a mouseover
 		else targetOf = TrackedUnitTargets[unit.guid] end
 		
+		--print(GetTime(), unit.name, unit.guid, targetOf)
 		if targetOf and TankNames[targetOf] then return true end
 	end
 	return false
@@ -109,7 +110,7 @@ local TankStances = {
 
 --TidyPlatesWidgets.IsTankingAuraActive = false
 
-local function CheckPlayerAuras()
+local function CheckAuras()
 	local spellID, name, _
 	local tankAura = false
 	-- Check Auras
@@ -130,21 +131,25 @@ local function CheckPlayerAuras()
 	
 	if TidyPlatesWidgets.IsTankingAuraActive ~= tankAura then
 		TidyPlatesWidgets.IsTankingAuraActive = tankAura
-		--print("Tank Mode:", TidyPlatesWidgets.IsTankingAuraActive)
-		
 		TidyPlates:RequestDelegateUpdate()
 	end
-	
-	--print(UnitClass("player"), TidyPlatesWidgets.IsTankingAuraActive)
 end
 
-local function TankWatcherEvents(frame, event, ...)
-	if event == "UNIT_AURA" or event == "UPDATE_SHAPESHIFT_FORM" then
-		local unitid = ...
-		if unitid == "player" then CheckPlayerAuras() end
-		return
-	end
-	
+local function TestPartAssignments()
+			local party = "party1"
+			
+			local isAssigned = GetPartyAssignment("MAINTANK", party) or ("TANK" == UnitGroupRolesAssigned(party))
+			
+			if isAssigned then TankNames[UnitName(party)] = true 
+			else TankNames[UnitName(party)] = nil end
+			--print(GetTime(), UnitName(party), isAssigned)
+			
+		--for index = 1, 2 do
+
+		--end	
+end
+
+local function CheckAssignments()
 	local index, size
 	if UnitInRaid("player") then
 		inRaid = true
@@ -164,8 +169,17 @@ local function TankWatcherEvents(frame, event, ...)
 			TankNames[UnitName("pet")] = true  			-- Adds your pet to the list (for you, only)
 		end	
 	end	
-	
-	CheckPlayerAuras()
+end
+
+local function TankWatcherEvents(frame, event, ...)
+	if event == "UNIT_AURA" or event == "UPDATE_SHAPESHIFT_FORM" then
+		local unitid = ...
+		if unitid == "player" then CheckAuras() end
+		return
+	end
+
+	CheckAssignments()
+	CheckAuras()
 end
 	
 

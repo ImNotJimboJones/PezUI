@@ -5,7 +5,7 @@ TidyPlatesHubSettings = {}
 TidyPlatesHubDefaults = {
 	-- Style
 	---------------------------------------
-	ArtDefault = "Blizzard",
+	--ArtDefault = "Blizzard",
 	StyleTheme = 3, 
 	StyleEnemyMode = 1, 
 	StyleFriendlyMode = 1,

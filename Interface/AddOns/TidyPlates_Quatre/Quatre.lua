@@ -117,7 +117,8 @@ StyleDefault.level = {
 	height = 10,
 	x = -2,
 	--y = VerticalAdjustment + 14.85,
-	y = VerticalAdjustment + 15.5,
+	--y = VerticalAdjustment + 15.5,
+	y = VerticalAdjustment + 16,
 	align = "LEFT",
 	anchor = "CENTER",
 	vertical = "BOTTOM",
@@ -194,6 +195,40 @@ StyleDefault.raidicon = {
 	y = VerticalAdjustment + 21,
 	anchor = "CENTER",
 }
+
+StyleDefault.customart = {
+	width = 25,
+	height = 25,
+	--x = 0,
+	--y = 39,
+	x = -55,
+	y = VerticalAdjustment + 21,
+	anchor = "CENTER",
+	show = true,
+}
+
+
+local arenaIconPath = "Interface\\AddOns\\TidyPlatesWidgets\\ArenaIcons"
+local arenaUnitIDs = {"arena1", "arena2", "arena3", "arena4", "arena5"}
+
+local function GetArenaIndex(unitname)
+	if IsActiveBattlefieldArena() then
+		local unitid, name
+		for i = 1, #arenaUnitIDs do
+			unitid = arenaUnitIDs[i]
+			name = UnitName(unitid)
+			if name and (name == unitname) then return unitid end
+		end
+	end
+end
+
+local function ArenaIconCustom(unit)
+	local unitid = GetArenaIndex(unit.name)
+	return "Interface\\AddOns\\TidyPlatesWidgets\\ArenaIcons\\arena5"
+	--if unitid then return arenaIconPath..unitid end
+end
+
+
 
 StyleDefault.skullicon = {
 	width = 8,
@@ -278,6 +313,7 @@ Theme.SetCustomText = TidyPlatesHubFunctions.SetCustomTextBinary
 Theme.OnInitialize = OnInitialize		-- Need to provide widget positions
 Theme.OnActivateTheme = OnActivateTheme -- called by Tidy Plates Core, Theme Loader
 Theme.OnApplyThemeCustomization = ApplyDamageCustomization -- Called By Hub Panel
+-- Theme.SetCustomArt = ArenaIconCustom
 
 do
 	local TankTheme = CopyTable(Theme)

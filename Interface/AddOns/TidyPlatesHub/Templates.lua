@@ -168,6 +168,40 @@ local function CreateQuickSlider(name, label, ... ) --, neighborFrame, xOffset, 
 		return frame
 	end
 	
+	local function CreateDrawer(name, label, ...)
+		local columnFrame = ...
+		local frame = CreateFrame("Frame", name, columnFrame)
+		frame.AnchorButton = CreateFrame("Button", name.."Button", columnFrame)
+		
+		-- Heading Appearance
+		frame:SetHeight(26)
+		frame:SetWidth(500)
+		-- Clicky Button
+		
+		--frame.Border = frame:CreateTexture(nil, "ARTWORK")
+		
+		frame.Text = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
+		frame.Text:SetFont(font, 26)
+		frame.Text:SetTextColor(255/255, 105/255, 6/255)
+		frame.Text:SetAllPoints()
+		frame.Text:SetText("Test Text")
+		frame.Text:SetJustifyH("LEFT")
+		frame.Text:SetJustifyV("BOTTOM")
+		
+		--frame.Button = CreateFrame("Button", name.."Button", frame)
+		
+		--local frame = CreateFrame("ScrollFrame", name, columnFrame, "UIPanelScrollFrameTemplate")
+		--:SetScrollChild()
+		
+		-- Margins
+		frame.Margins = { Left = 6, Right = 2, Top = 12, Bottom = 2,}
+		-- Set Positions
+		QuickSetPoints(frame.AnchorButton, ...)
+		frame:SetPoint("TOPLEFT", frame.AnchorButton, "TOPLEFT", 0, 0)
+		-- Done!
+		return frame
+	end
+	
 	local function CreateQuickItemLabel(name, label, ...)
 		local columnFrame = ...
 		local frame = CreateFrame("Frame", name, columnFrame)

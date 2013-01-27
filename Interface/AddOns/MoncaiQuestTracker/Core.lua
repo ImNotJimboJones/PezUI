@@ -1,8 +1,8 @@
 ﻿--------------------------------------------------------------------------------------------------------
 -- Moncaí's Quest Tracker
 -- Author: Moncaí
--- Copyright (C) 2006-2010 moncai AT mgtx DOT net, all rights reserved.
--- Date: $Date: 2012-09-04 10:05:34 +0000 (Tue, 04 Sep 2012) $, $Rev: 54 $
+-- Copyright (C) 2006-2013 moncai AT mgtx DOT net, all rights reserved.
+-- Date: $Date: 2013-01-22 19:33:10 +0000 (Tue, 22 Jan 2013) $, $Rev: 56 $
 --------------------------------------------------------------------------------------------------------
 local MQT = LibStub("AceAddon-3.0"):NewAddon("MoncaiQuestTracker", "AceConsole-3.0");
 _G["MQT"] = MQT;

@@ -1,4 +1,4 @@
--- $Id: AtlasLoot.lua 4021 2012-11-30 16:51:31Z hegarol $
+-- $Id: AtlasLoot.lua 4057 2013-01-25 17:46:08Z hegarol $
 --[[
 Atlasloot Enhanced
 Author Hegarol
@@ -14,14 +14,14 @@ local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 --Establish version number and compatible version of Atlas
 local VERSION_MAJOR = "7";
 local VERSION_MINOR = "04";
-local VERSION_BOSSES = "01";
+local VERSION_BOSSES = "02";
 ATLASLOOT_VERSION = "|cffFF8400AtlasLoot Enhanced v"..VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES.."|r";
 ATLASLOOT_VERSION_NUM = VERSION_MAJOR.."."..VERSION_MINOR.."."..VERSION_BOSSES
 
 --Now allows for multiple compatible Atlas versions.  Always put the newest first
 ATLASLOOT_MIN_ATLAS = "1.22.0"
-ATLASLOOT_CURRENT_ATLAS = {"1.22.1"};
-ATLASLOOT_PREVIEW_ATLAS = {"1.22.2", "1.22.3"};
+ATLASLOOT_CURRENT_ATLAS = {"1.23.0"};
+ATLASLOOT_PREVIEW_ATLAS = {"1.23.1", "1.23.2"};
 
 --ATLASLOOT_POSITION = AL["Position:"];
 ATLASLOOT_DEBUGMESSAGES = false;
@@ -122,6 +122,7 @@ local AtlasLootDBDefaults = {
 		ShowBossTooltip = true,
 		LastMinAtlasVersion = 0,
 		EnableMouseOverDesc = true,
+		CurrentUpgradeLvl = 0,
 	}
 }
 
@@ -1349,7 +1350,7 @@ do
 	-- @param itemID 
 	function AtlasLoot:GetHeirloomMaxLvl(itemID)
 		if not itemID then return end
-		local maxLvl = 80
+		local maxLvl = 85
 		local _,itemLink,itemRarity = GetItemInfo(itemID)
 		if itemRarity ~= 7 then return end
 		AtlasLootScanTooltip:SetOwner(UIParent, "ANCHOR_NONE")
@@ -1416,6 +1417,9 @@ function AtlasLoot:CheckHeroic(itemTable)
 	end
 end
 
+--gsub(ITEM_UPGRADE_TOOLTIP_FORMAT, "%%d", "(%%d)")
+
+
 --- Returns a MapName by ID
 -- This function only replace nil with a "error" string
 -- @param id MapId ( http://www.wowpedia.org/MapID )
@@ -1477,3 +1481,8 @@ function AtlasLoot:ShowSecretPage()
 	
 	AtlasLoot:ShowLootPage("SECRET_PAGE")
 end
+
+
+-- ###########################################################################
+-- itemEditor
+-- ###########################################################################

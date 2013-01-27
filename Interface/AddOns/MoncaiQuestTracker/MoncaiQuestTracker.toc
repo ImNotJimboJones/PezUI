@@ -1,4 +1,4 @@
-﻿## Interface: 50001
+﻿## Interface: 50100
 ## Title: Moncaí's |cff00ff00Quest Tracker|r
 ## Notes: Improved Quest Tracker
 ## Title-deDE: Moncaí's |cff00ff00Quest Tracker|r
@@ -8,12 +8,12 @@
 ## SavedVariables: MQTC, MQTdb
 ## OptionalDeps: QuestHelper, Swatter
 ## Author: Moncaí
-## Version: 5.0.4-beta
-## X-Date: $Date: 2012-09-04 10:05:34 +0000 (Tue, 04 Sep 2012) $
-## X-Revision: $Rev: 54 $
+## Version: 5.1.0
+## X-Date: $Date: 2013-01-22 19:33:10 +0000 (Tue, 22 Jan 2013) $
+## X-Revision: $Rev: 56 $
 ## X-Localizations: enUS, deDE, frFR
 ## X-Website: http://wow.curse.com/downloads/wow-addons/details/moncaiqt.aspx
-## X-Curse-Packaged-Version: v5.4.0-beta
+## X-Curse-Packaged-Version: v5.1.0
 ## X-Curse-Project-Name: Moncai Quest Tracker
 ## X-Curse-Project-ID: moncaiqt
 ## X-Curse-Repository-ID: wow/moncaiqt/mainline

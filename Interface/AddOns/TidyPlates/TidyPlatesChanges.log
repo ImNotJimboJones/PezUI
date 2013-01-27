@@ -1,5 +1,12 @@
 Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
+6.8.3
+---------------------------
+- Rogue Anticipation stacks are now displayed on the combo point widget
+- AuraWidget.lua: Added some (currently inactive) code within aurawidget.lua for, "Personal Aura Tracker".  Feel free to mess with it.  Search for, "Personal Aura Tracker"
+- AuraWidget.lua: Added some (currently inactive) code for highlighting abilities that can be activated.  Again, if you want to mess with it on your own, feel free.
+- Made some changes to the Off-Tank Color feature; Enabling it will force detection of Off-Tanks, even if you are not a tank.  NOTE: There are still limitations inherent in the WoW-API which limits the ability of this feature to track all on-screen targets and target-ofs.
+
 6.8.2
 ---------------------------
 - TAPPED mobs now are a unit.reaction member
@@ -10,7 +17,6 @@ Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
 6.8.1
 ---------------------------
-
 - "Tapped" units (colored light purple by the Blizz nameplate system) will now register as "Hostile NPCs" in Tidy Plates.  This is partially inaccurate, since the tapped mobs could be neutral (like target dummies), but there is no way to discriminate this from the plate.
 - Fixed several tainted global variables
 - Added custom Monk and Priest color lookups for class recognition.  (RAID_CLASS_COLORS is not completely accurate) 
@@ -20,8 +26,22 @@ Packer Note: Files to exclude: *.db *.png *.gif *.jpg *.tif *.txt *.psd *.bmp
 
 6.8
 ---------------------------
-- Updated to 5.1 ToC and new nameplate object configuration
+- Updated to 5.1 ToC and new nameplate object configuration:
 
+Nameplate Stack WoW 5.1:
+
+Nameplate_Frame
+	NameplateChild_Frame1_Statusbars
+		Statusbars_Child_Frame1_Healthbar				(Statusbar)
+		Statusbars_Child_Frame2_Castbar					(Statusbar)
+		Statusbars_Region_Texture1_Threat				(Texture)
+		Statusbars_Region_Texture2_HealthBarBorder		(Texture)
+		...
+		...
+	NameplateChild_Frame1_UnitName
+		UnitName_Region_Fontstring1_Name				(Fontstring)
+
+		
 6.7.9
 ---------------------------
 - Corrected another error in the spell cast watcher; "StopCastAnimationOnNameplate" is now properly referenced.  This only affects arena matches.  I don't do arenas, so this was never properly tested.  Let me know if more errors pop up.

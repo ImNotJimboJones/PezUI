@@ -780,8 +780,8 @@ do
 		castbar:SetFrameStrata("BACKGROUND")
 		
 		-- Textures
+		local upperlayer = CreateFrame("Frame", nil, healthbar)
 		visual = extended.visual
-		visual.customart = extended:CreateTexture(nil, "OVERLAY")
 		visual.target = extended:CreateTexture(nil, "ARTWORK")
 		visual.raidicon = extended:CreateTexture(nil, "OVERLAY")
 		visual.raidicon:SetTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")		
@@ -790,12 +790,14 @@ do
 		visual.healthborder = healthbar:CreateTexture(nil, "ARTWORK")
 		visual.threatborder = healthbar:CreateTexture(nil, "ARTWORK")
 		visual.highlight = healthbar:CreateTexture(nil, "OVERLAY")
+		visual.customart = upperlayer:CreateTexture(nil, "OVERLAY")
 		visual.highlight:SetAllPoints(visual.healthborder)
 		visual.highlight:SetBlendMode("ADD")
 		visual.castborder = castbar:CreateTexture(nil, "ARTWORK")
 		visual.castnostop = castbar:CreateTexture(nil, "ARTWORK")
 		visual.spellicon = castbar:CreateTexture(nil, "OVERLAY")
 		for i, v in pairs(visual) do v:SetNonBlocking(true) end
+		
 		-- Formatted Text
 		visual.customtext = extended:CreateFontString(nil, "OVERLAY")
 		visual.name  = extended:CreateFontString(nil, "OVERLAY")
@@ -817,7 +819,20 @@ do
 		regions = extended.regions
 		bars = extended.bars
 		
+		--[[
+		Nameplate Stack WoW 5.1
 
+		Nameplate_Frame
+			NameplateChild_Frame1_Statusbars
+				Statusbars_Child_Frame1_Healthbar		(Statusbar)
+				Statusbars_Child_Frame2_Castbar			(Statusbar)
+				Statusbars_Region_Texture1_Threat		(Texture)
+				...
+				...
+			NameplateChild_Frame1_UnitName
+				UnitName_Region_Fontstring1_Name			(Fontstring)
+		--]]
+		
 		-- Bars
 		local b, n = plate:GetChildren()
 		bars.health, bars.cast = b:GetChildren()

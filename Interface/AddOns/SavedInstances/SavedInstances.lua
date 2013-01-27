@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 214 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 219 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -94,6 +94,8 @@ addon.LFRInstances = {
 addon.WorldBosses = {
   [691] = { quest=32099, expansion=4, level=90 }, -- Sha of Anger
   [725] = { quest=32098, expansion=4, level=90 }, -- Galleon
+  --[814] = { quest=32211, expansion=4, level=90 }, -- Nalak
+  --[826] = { quest=?, expansion=4, level=90 }, -- Oondasta
 }
 
 addon.showopts = {
@@ -726,29 +728,10 @@ end
 function addon:UpdateInstance(id)
   --debug("UpdateInstance: "..id)
   if not id or id <= 0 then return end
-  local currentbuild = select(2, GetBuildInfo())
-  currentbuild = tonumber(currentbuild)
   local name, typeID, subtypeID, 
         minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, 
 	expansionLevel, groupID, textureFilename, 
-	difficulty, maxPlayers, description, isHoliday = nil
-  if LFGGetDungeonInfoByID and LFGDungeonInfo then -- 4.2 (requires LFGDungeonInfo)
-    local instanceInfo = LFGGetDungeonInfoByID(id)
-    if not instanceInfo then return end
-    name, typeID, -- subtypeID,
-    minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, 
-    expansionLevel, groupID, textureFilename, 
-    difficulty, maxPlayers, description, isHoliday
-	= unpack(instanceInfo)
-  elseif GetLFGDungeonInfo and currentbuild > 14545 then -- 4.3
-    name, typeID, subtypeID,
-    minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, 
-    expansionLevel, groupID, textureFilename, 
-    difficulty, maxPlayers, description, isHoliday
-        = GetLFGDungeonInfo(id)
-  else -- dont know how to query
-    return
-  end
+	difficulty, maxPlayers, description, isHoliday = GetLFGDungeonInfo(id)
   -- name is nil for non-existent ids
   -- isHoliday is for single-boss holiday instances that don't generate raid saves
   -- typeID 4 = outdoor area, typeID 6 = random
@@ -771,7 +754,6 @@ function addon:UpdateInstance(id)
   vars.db.Instances[name] = instance
   instance.Show = (instance.Show and addon.showopts[instance.Show]) or "saved"
   instance.Encounters = nil -- deprecated
-  --instance.LFDupdated = currentbuild
   instance.LFDupdated = nil
   instance.LFDID = id
   instance.Holiday = isHoliday or nil
@@ -854,7 +836,8 @@ function addon:UpdateToonData()
 	  end
 	else
 	  addon.playedpending = true
-	  addon.playedreg = {}
+	  addon.playedreg = addon.playedreg or {}
+	  wipe(addon.playedreg)
 	  for i=1,10 do
 	    local c = _G["ChatFrame"..i]
 	    if c and c:IsEventRegistered("TIME_PLAYED_MSG") then
@@ -1032,9 +1015,10 @@ local function ShowQuestTooltip(cell, arg, ...)
 	indicatortip:Clear()
 	indicatortip:SetHeaderFont(tooltip:GetHeaderFont())
 	indicatortip:AddHeader(ClassColorise(vars.db.Toons[toon].Class, toon), qstr)
-	if isDaily then
+        local nightlyReset = addon:GetNextDailyResetTime()
+	if isDaily and nightlyReset then
 	  indicatortip:AddLine(YELLOWFONT .. L["Time Left"] .. ":" .. FONTEND,
-	      SecondsToTime(addon:GetNextDailyResetTime() - time()))
+	      SecondsToTime(nightlyReset - time()))
 	end
         local ql = {}
         for id,qi in pairs(vars.db.Toons[toon].Quests) do
@@ -1591,6 +1575,16 @@ local function localarr(name) -- save on memory churn by reusing arrays in updat
   return wipe(core[name])
 end
 
+function core:memcheck(context)
+  UpdateAddOnMemoryUsage()
+  local newval = GetAddOnMemoryUsage("SavedInstances")
+  core.memusage = core.memusage or 0
+  if newval ~= core.memusage then
+    debug(string.format("%.3f",newval - core.memusage).." KB in "..context)
+    core.memusage = newval
+  end
+end
+
 function core:Refresh()
 	-- update entire database from the current character's perspective
         addon:UpdateInstanceData()
@@ -1650,7 +1644,7 @@ function core:Refresh()
 	  end
 	end
 
-        local quests = GetQuestsCompleted()
+        local quests = GetQuestsCompleted(localarr("QuestCompleteTemp"))
         for _,einfo in pairs(addon.WorldBosses) do
            if weeklyreset and (IsQuestFlaggedCompleted(einfo.quest) or 
 	      (quests and quests[einfo.quest])) then
@@ -1666,15 +1660,20 @@ function core:Refresh()
            end
         end
 
+        local icnt, dcnt = 0,0
 	for name, _ in pairs(temp) do
 	 if vars.db.Instances[name][thisToon] then
 	  for diff,info in pairs(vars.db.Instances[name][thisToon]) do
 	    if not info.ID then
 	      vars.db.Instances[name][thisToon][diff] = nil
+	      dcnt = dcnt + 1
 	    end
 	  end
+	 else
+	  icnt = icnt + 1
 	 end
 	end
+	--debug("Refresh temp reaped "..icnt.." instances and "..dcnt.." diffs")
 	wipe(temp)
 	-- update the lockout-specific details for the current instance if necessary
 	if storelockout then

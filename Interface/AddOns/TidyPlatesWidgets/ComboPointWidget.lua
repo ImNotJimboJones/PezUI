@@ -17,6 +17,13 @@ local function UpdateWidgetFrame(frame)
 		local points 
 		if UnitExists("target") then points = GetComboPoints("player", "target") end
 		if points and points > 0 then 
+			
+			-- Anticipation
+			local name, rank, icon, count, _, duration, expirationTime, _,_,_,_= UnitAura("player", "Anticipation")
+			if name and count > 0 then
+				points = points + count
+			end
+
 			frame.Icon:SetTexture(comboWidgetPath..tostring(points)) 
 			frame:Show()
 		else frame:_Hide() end	
@@ -52,6 +59,7 @@ end
 local WatcherFrame = CreateFrame("Frame", nil, WorldFrame )
 local isEnabled = false
 WatcherFrame:RegisterEvent("UNIT_COMBO_POINTS")
+WatcherFrame:RegisterEvent("UNIT_AURA")
 
 local function WatcherFrameHandler(frame, event, unitid)
 		local guid = UnitGUID("target")

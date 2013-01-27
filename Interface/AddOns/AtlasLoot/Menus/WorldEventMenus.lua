@@ -1,4 +1,4 @@
--- $Id: WorldEventMenus.lua 4013 2012-11-27 07:39:08Z celellach $
+-- $Id: WorldEventMenus.lua 4030 2012-12-04 16:44:04Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleInventory = AtlasLoot_GetLocaleLibBabble("LibBabble-Inventory-3.0")
@@ -212,14 +212,17 @@ local BabbleZone = AtlasLoot_GetLocaleLibBabble("LibBabble-Zone-3.0")
 				{ 8, "DarkmoonD1D2#7", "spell_nature_bloodlust", "=ds="..LOCALIZED_CLASS_NAMES_MALE["SHAMAN"], "=ec1=#j8# - #j9#"};
 				{ 9, "DarkmoonD1D2#8", "spell_nature_drowsy", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARLOCK"], "=ec1=#j8# - #j9#"};
 				{ 10, "DarkmoonD1D2#9", "inv_sword_27", "=ds="..LOCALIZED_CLASS_NAMES_MALE["WARRIOR"], "=ec1=#j8# - #j9#"};
+				{ 12, 74035, "", "=q4=Master Pit Fighter", "=ds=#s14#", "#ACHIEVEMENTID:6024#"};
+				{ 13, 74034, "", "=q3=Pit Fighter", "=ds=#s14# / #m2#", "#ACHIEVEMENTID:6023#"};
 				{ 17, "Darkmoon", "ability_hunter_pet_bear", "=ds="..BabbleInventory["Mounts"].." & "..BabbleInventory["Companions"], ""};
-				{ 18, "Darkmoon#2", "inv_misc_food_164_fish_seadog", "=ds="..AL["Food and Drinks"], ""};
-				{ 19, "Darkmoon#3", "inv_misc_bone_taurenskull_01", "=ds="..AL["Heirloom"], ""};
-				{ 21, "DarkmoonDeck", "inv_inscription_trinket_tiger", "=ds="..AL["Level 90"].." "..AL["Trinkets"], ""};
-				{ 22, "DarkmoonDeck#2", "inv_inscription_tarot_hurricanecard", "=ds="..AL["Level 85"].." "..AL["Trinkets"], ""};
-				{ 23, "DarkmoonDeck#3", "INV_Inscription_TarotGreatness", "=ds="..AL["Level 80"].." "..AL["Trinkets"], ""};
-				{ 24, "DarkmoonDeck#4", "INV_Misc_Ticket_Tarot_Madness", "=ds="..AL["Level 60 & 70 Trinkets"], ""};
-				{ 25, "DarkmoonDeck#5", "INV_Misc_Ticket_Tarot_Furies", "=ds="..AL["Low Level Decks"], ""};
+				{ 18, "Darkmoon#2", "inv_misc_cape_darkmoonfaire_c_01", "=ds="..AL["Toys"], ""};
+				{ 19, "Darkmoon#3", "inv_misc_food_164_fish_seadog", "=ds="..AL["Food and Drinks"], ""};
+				{ 20, "Darkmoon#5", "inv_misc_bone_taurenskull_01", "=ds="..AL["Heirloom"], ""};
+				{ 22, "DarkmoonDeck", "inv_inscription_trinket_tiger", "=ds="..AL["Level 90"].." "..AL["Trinkets"], ""};
+				{ 23, "DarkmoonDeck#2", "inv_inscription_tarot_hurricanecard", "=ds="..AL["Level 85"].." "..AL["Trinkets"], ""};
+				{ 24, "DarkmoonDeck#3", "INV_Inscription_TarotGreatness", "=ds="..AL["Level 80"].." "..AL["Trinkets"], ""};
+				{ 25, "DarkmoonDeck#4", "INV_Misc_Ticket_Tarot_Madness", "=ds="..AL["Level 60 & 70 Trinkets"], ""};
+				{ 26, "DarkmoonDeck#5", "INV_Misc_Ticket_Tarot_Furies", "=ds="..AL["Low Level Decks"], ""};
 			};
 		};
 		info = {

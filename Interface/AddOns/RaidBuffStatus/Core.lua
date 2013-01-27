@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 594 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 599 $", ".* (.*) .*"))
 
 local addon = RaidBuffStatus
 RaidBuffStatus.L = L
@@ -229,8 +229,6 @@ raid.reset = function()
 	  raid.classes[cl] = raid.classes[cl] or {}
 	  wipe(raid.classes[cl])
 	end
-	raid.maxunleashedragepoints = 0
-	raid.maxabominationsmightpoints = 0
 	raid.ClassNumbers = raid.ClassNumbers or {}; wipe(raid.ClassNumbers)
 	raid.BuffTimers = raid.BuffTimers or {}; wipe(raid.BuffTimers)
 	raid.TankList = raid.TankList or {}; wipe(raid.TankList)
@@ -389,6 +387,7 @@ function RaidBuffStatus:OnInitialize()
 --		ShowMissingBlessing = true,
 		whisperonlyone = true,
 		abouttorunout = 3,
+		preferstaticbuff = true,
 		LockWindow = false,
 		IgnoreLastThreeGroups = false,
 		DisableInCombat = true,
@@ -1326,12 +1325,10 @@ end
 
 function RaidBuffStatus:ReadRaid()
 	raid.readid = raid.readid + 1
-	raid.TankList = {}
-	raid.ManaList = {}
-	raid.DPSList = {}
-	raid.HealerList = {}
-	raid.maxabominationsmightpoints = 0
-	raid.maxunleashedragepoints = 0
+	wipe(raid.TankList)
+	wipe(raid.ManaList)
+	wipe(raid.DPSList)
+	wipe(raid.HealerList)
 	for _,class in ipairs(classes) do
 		raid.ClassNumbers[class] = 0
 	end
@@ -1422,7 +1419,6 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		local israngeddps = false
 		local ishealer = false
 		local spec = nil
-		local hasbuff = {}
 		local guild = GetGuildInfo(unitid)
 		if guild then
 			if not raid.guilds[guild] then
@@ -1463,6 +1459,9 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		rcn.online = UnitIsConnected(unitid)
 		rcn.rank = rank
 		rcn.guild = guild
+		local hasbuff = rcn.hasbuff or {}
+		rcn.hasbuff = hasbuff
+		wipe(hasbuff)
 		RaidBuffStatus:UpdateSpec(rcn)
 		spec = raid.classes[class][name] and raid.classes[class][name].spec
 		local mintimeleft = RaidBuffStatus.db.profile.abouttorunout * 60
@@ -1484,7 +1483,7 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 				end
 				hasbuff[buffName] = {}
 --				hasbuff[buffName].timeleft = expirationTime - thetime
---				hasbuff[buffName].duration = duration
+				hasbuff[buffName].duration = duration
 				if unitCaster then
 --					if UnitIsUnit(unitCaster, "player") then
 --						hasbuff[buffName].caster = "*" .. UnitName(unitCaster) .. "*"
@@ -1566,7 +1565,6 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 		rcn.ismeleedps = ismeleedps
 		rcn.israngeddps = israngeddps
 		rcn.ishealer = ishealer
-		rcn.hasbuff = hasbuff
 		rcn.realm = realm
 		rcn.name = name
 	end
@@ -3234,7 +3232,7 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 					RaidBuffStatus:Announces("Table", srcname, nil, spellID)
 				elseif spellID == 29893 then -- Ritual of Souls 
 					RaidBuffStatus:Announces("Soul", srcname, nil, spellID)
-					RaidBuffStatus.soulwelllastseen = GetTime() + 180
+					RaidBuffStatus.soulwelllastseen = GetTime() + 120
 				end
 				return
 			elseif subevent == "SPELL_CAST_SUCCESS" then
@@ -3988,7 +3986,7 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 				nextsoulannounce = GetTime() + 15
 				RaidBuffStatus:ScheduleTimer(function()
 					RaidBuffStatus:Announces("SoulExpiring", who)
-				end, 130)
+				end, 90)
 			end
 			RaidBuffStatus:PingMinimap(who)
 		elseif message == "SoulExpiring" and not incombat and not isdead then

@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 591 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 598 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -333,6 +333,16 @@ local options = {
 					get = function(info) return RaidBuffStatus.db.profile.abouttorunout end,
 					set = function(info, v)
 						RaidBuffStatus.db.profile.abouttorunout = v
+					end,
+				},
+				preferstaticbuff = {
+					type = 'toggle',
+					name = L["Prefer Static Buff"],
+					desc = L["Report missing static buffs even when an equivalent passive aura is already present."],
+					order = 14,
+					get = function(info) return RaidBuffStatus.db.profile.preferstaticbuff end,
+					set = function(info, v)
+						RaidBuffStatus.db.profile.preferstaticbuff = v
 					end,
 				},
 -- The aliens stole my brain before I could write the code for this feature.

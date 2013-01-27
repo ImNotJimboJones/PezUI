@@ -1,4 +1,4 @@
--- $Id: loottables.lua 3991 2012-11-21 23:57:09Z lag123 $
+-- $Id: loottables.lua 4051 2013-01-04 06:06:37Z Dynaletik $
 --[[
 loottables.en.lua
 This file assigns a title to every loot table.  The primary use of this table
@@ -159,6 +159,7 @@ AtlasLoot_LootTableRegister = {
 				{ "HoFUnsok", 7, EncounterJournalID = 737 },
 				{ "HoFShekzeer", 9, EncounterJournalID = 743 },
 				{ "HoFTrash", 11 },
+				{ "Patternsilvl496", 12 },
 			},
 			["Info"] = { BabbleZone["Heart of Fear"], "AtlasLootMoP", mapname = "HeartofFear", raid = true, EncounterJournalID = 330 },
 		},
@@ -172,7 +173,7 @@ AtlasLoot_LootTableRegister = {
 				{ "MSVElegon", 15, EncounterJournalID = 726 },
 				{ "MSVWilloftheEmperor", 16, EncounterJournalID = 677 },
 				{ "MoguShanVaultsTrash", 20 },
-				{ "MoguShanVaultsPatterns", 21 },
+				{ "Patternsilvl496", 21 },
 	
 			},
 			["Info"] = { BabbleZone["Mogu'shan Vaults"], "AtlasLootMoP", mapname = "MoguShanVaults", raid = true, EncounterJournalID = 317 },
@@ -192,6 +193,7 @@ AtlasLoot_LootTableRegister = {
 				{ "ToESTsulong", 6, EncounterJournalID = 742 },
 				{ "ToESLeiShi", 7, EncounterJournalID = 729 },
 				{ "ToESShaofFear", 8, EncounterJournalID = 709 },
+				{ "Patternsilvl496", 10 },
 			},
 			["Info"] = { BabbleZone["Terrace of Endless Spring"], "AtlasLootMoP", mapname = "TerraceofEndlessSpring", raid = true, EncounterJournalID = 320 },
 		},

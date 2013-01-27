@@ -1,4 +1,4 @@
--- $Id: constants.en.lua 4019 2012-11-30 07:45:33Z celellach $
+-- $Id: constants.en.lua 4045 2012-12-20 18:46:32Z lag123 $
 --[[
 constants.en.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -103,6 +103,7 @@ if AL then
 	AL["Item Buttons"] = true;
 	AL["Loot Table"] = true;
 	AL["Enable mouse on item descriptions"] = true;
+	AL["Upgrade Level:"] = true;
 
 	-- Default Frame
 	AL["Default Frame"] = true;
@@ -250,21 +251,6 @@ if AL then
 	AL["Show Price"] = true;
 	AL["Skill"] = true;
 	AL["Location"] = true;
-	AL["ilvl 200"] = true;
-	AL["ilvl 213"] = true;
-	AL["ilvl 226"] = true;
-	AL["ilvl 245"] = true;
-	AL["ilvl 264"] = true;
-	AL["ilvl 397"] = true;
-	AL["ilvl 470"] = true;
-	AL["ilvl 490"] = true;
-	AL["Grand Marshal"] = true;
-	AL["Gladiator"] = true;
-	AL["Vengeful"] = true;
-	AL["Merciless"] = true;
-	AL["Brutal"] = true;
-	AL["Wrathful"] = true;
-	AL["Cataclysmic"] = true;
 
 	-- #######################################
 	-- UI things END
@@ -374,6 +360,23 @@ if AL then
 	AL["Tier 14 Set"] = true;
 	AL["TCG Items"] = true; -- Trading Card Game Items
 	AL["Rare Mobs"] = true;
+	AL["Grand Marshal"] = true;
+	AL["Gladiator"] = true;
+	AL["Vengeful"] = true;
+	AL["Merciless"] = true;
+	AL["Brutal"] = true;
+	AL["Wrathful"] = true;
+	AL["Cataclysmic"] = true;
+	AL["ilvl 200"] = true;
+	AL["ilvl 213"] = true;
+	AL["ilvl 226"] = true;
+	AL["ilvl 245"] = true;
+	AL["ilvl 264"] = true;
+	AL["ilvl 397"] = true;
+	AL["ilvl 470"] = true;
+	AL["ilvl 490"] = true;
+	AL["ilvl 489"] = true;
+	AL["ilvl 496"] = true;
 
 	-- PvP Menu
 	AL["Arathi Basin Sets"] = true;
@@ -416,6 +419,7 @@ if AL then
 	AL["Playable Race Masks"] = true; 		-- Hallow's End
 	AL["Non-Playable Race Masks"] = true; 	-- Hallow's End
 	AL["Schematics & Patterns"] = true; 	-- Lunar Festival
+	AL["Toys"] = true; 						-- Darkmoon Faire
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = true;
@@ -1087,6 +1091,10 @@ if AL then
 	--- Mists of Pandaria
 	AL["Uncle Bigpocket"] = true;
 	AL["Auntie Stormstout"] = true;
+	AL["Luo Luo"] = true;
+	AL["Meng Meng"] = true;
+	AL["Ongrom Black Tooth"] = true;
+	AL["Proveditor Grantley"] = true;
 	--- World Events
 	AL["Crimson Templar"] = true;  --- mob removed from game?
 	AL["Azure Templar"] = true;  --- mob removed from game?

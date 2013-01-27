@@ -474,6 +474,11 @@ end
 local function EventUnitAura(unitid)
 	if inArena or unitid == "target" or unitid == "target" or unitid == "focus" then
 		UpdateAurasByUnitID(unitid)
+	-- [[
+	-- Personal Aura Tracker
+	elseif unitid == "player" then
+		UpdateAurasByUnitID("target")
+	--]]
 	end
 end
 
@@ -493,6 +498,27 @@ local function EventPlayerEnterWorld()
 	else
 		inArena = false
 	end
+end
+
+local function EventPlayerAbilityUpdated(...)
+	--print("Ability Update", GetTime(), ...)
+	UpdateAurasByUnitID("target")
+	
+	-- Personal Ability Reminder
+	-- SPELL_UPDATE_USABLE
+	--GetSpellCooldown()
+	--usable, nomana = IsUsableSpell("spellName" or spellID or spellIndex[, "bookType"]);
+	
+	--[[
+	"SPELL_COOLDOWN_READY",
+	"SPELL_COOLDOWN_CHANGED",
+	"SPELL_COOLDOWN_STARTED",
+	"SPELL_UPDATE_USABLE",
+	"PLAYER_TARGET_CHANGED",
+	"UNIT_POWER",
+	"RUNE_POWER_UPDATE",
+	"RUNE_TYPE_UPDATE"
+	--]]
 end
 
 --[[
@@ -552,6 +578,13 @@ local GeneralEvents = {
 	["UNIT_AURA"] = EventUnitAura,
 	["PLAYER_ENTERING_WORLD"] = EventPlayerEnterWorld,
 	["PLAYER_REGEN_ENABLED"] = CleanAuraLists,
+	
+	["SPELL_UPDATE_USABLE"] = EventPlayerAbilityUpdated,
+	["SPELL_UPDATE_COOLDOWN"] = EventPlayerAbilityUpdated,
+	["SPELL_COOLDOWN_READY"] = EventPlayerAbilityUpdated,
+	["SPELL_COOLDOWN_STARTED"] = EventPlayerAbilityUpdated,
+
+	--["ACTIONBAR_UPDATE_USABLE"] = EventPlayerAbilityUpdated,
 	
 	--["PLAYER_TALENT_UPDATE"] = UpdatePlayerDispelTypes,
 	--["ACTIVE_TALENT_GROUP_CHANGED"] = UpdatePlayerDispelTypes,
@@ -662,8 +695,11 @@ local function UpdateWidgetTime(frame, expiration)
 end
 
 
-local function UpdateIcon(frame, texture, expiration, stacks)
+local function UpdateIcon(frame, texture, expiration, stacks, useHighlight)
 	if frame and texture and expiration then
+		if useHighlight then frame.Highlight:Show(); frame.Border:Hide()
+		else frame.Highlight:Hide(); frame.Border:Show() end
+		
 		-- Icon
 		frame.Icon:SetTexture(texture)
 		
@@ -701,49 +737,89 @@ local function UpdateIconGrid(frame, guid)
 		local currentAuraIndex = 0
 		local aura
 		
-		-- Cache displayable debuffs
+		
+		-- Cache displayable auras
+		------------------------------------------------------------------------------------------------------
+		-- This block will go through the auras on the unit and make a list of those that should
+		-- be displayed, listed by priority.
 		if AurasOnUnit then
 			frame:Show()
 			for instanceid in pairs(AurasOnUnit) do
 				currentAuraIndex = debuffCount + 1
-				
-				--local aura = {}
+
 				CurrentAura[currentAuraIndex] = wipe(CurrentAura[currentAuraIndex] or {})
 				aura = CurrentAura[currentAuraIndex]
 
 				aura.spellid, aura.name, aura.expiration, aura.stacks, aura.caster, aura.duration, aura.texture, aura.type, aura.reaction = GetAuraInstance(guid, instanceid)
-
-				
 				
 				if tonumber(aura.spellid) then
 					aura.unit = frame.unit
 					
 					-- Call Filter Function
 					local show, priority = frame.Filter(aura)
-					--local show, priority = true, 10		-- Testing
 					aura.priority = priority or 10
-					
 					
 					-- Get Order/Priority
 					if show and aura.expiration > GetTime() then
 						debuffCount = debuffCount + 1
 						DebuffCache[debuffCount] = aura
-						--DebuffCache[debuffCount] = instanceid
 					end
-					
-					--print("UpdateIconGrid", aura.spellid, aura.name, aura.expiration, aura.stacks, aura.caster, aura.duration, aura.texture, aura.type, aura.reaction, show, aura.priority)
+
 				end
 			end
 		end
 		
+		--[[
+		-- Personal Aura Tracker
+		-- For displaying the presence of an aura on your character, using current target's aura widget --
+		-- = DebuffLimit
+		if frame.unit.isTarget and frame.unit.reaction ~= "FRIENDLY" then --  and InCombatLockdown()
+			local plName, _, plIcon, plCount, _, _, plExpiration = UnitAura("player", "Slice and Dice")
+			
+			if plName then
+				UpdateIcon(AuraIconFrames[AuraSlotIndex], plIcon, plExpiration, plCount) 
+				AuraSlotIndex = 2
+			end
+		end
+		--]]
+		
 		-- Display Auras
+		------------------------------------------------------------------------------------------------------
 		if debuffCount > 0 then 
+			local useHighlight
 			sort(DebuffCache, debuffSort)
 			for index = 1,  #DebuffCache do
 				local cachedaura = DebuffCache[index]
 				if cachedaura.spellid and cachedaura.expiration then 
-					--print("UpdateIcon", AuraIconFrames[AuraSlotIndex], cachedaura.texture, cachedaura.expiration, cachedaura.stacks)
-					UpdateIcon(AuraIconFrames[AuraSlotIndex], cachedaura.texture, cachedaura.expiration, cachedaura.stacks) 
+					--[[
+						-- Personal Ability Reminder
+						--if the aura has been self-cast...
+						--Check current aura for availability
+						usable, nomana = IsUsableSpell(spellid);
+						
+						IsSpellInRange(...)
+						
+						local spell = %s;
+						local spellName = GetSpellInfo(spell);
+						local startTime, duration = WeakAuras.GetSpellCooldown(spell);
+						startTime = startTime or 0;
+						duration = duration or 0;
+						local onCooldown = duration > 1.51;
+						local active = IsUsableSpell(spell) and not onCooldown
+						
+
+					--]]
+					
+					
+					--print(cachedaura.name, IsUsableSpell(cachedaura.spellid), select(2, GetSpellCooldown(cachedaura.spellid)) == 0)
+					--[[
+					--if IsUsableSpell(cachedaura.spellid) and select(2, GetSpellCooldown(cachedaura.spellid)) == 0 then 
+					if select(2, GetSpellCooldown(cachedaura.spellid)) == 0 then 
+						useHighlight = true
+					else useHighlight = false end
+					--]]
+					
+					UpdateIcon(AuraIconFrames[AuraSlotIndex], cachedaura.texture, cachedaura.expiration, cachedaura.stacks, useHighlight) 
 					AuraSlotIndex = AuraSlotIndex + 1
 				end
 				if AuraSlotIndex > DebuffLimit then break end
@@ -833,14 +909,11 @@ end
 -------------------------------------------------------------
 -- Widget Frames
 -------------------------------------------------------------
-local WideArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameWide"				-- FINISH ART
-local SquareArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameSquare"				-- FINISH ART
-local AuraGlowArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraGlow"	
-local AuraHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\CCBorder"			-- AuraBorderArt, AuraHighlightArt
-local AuraTestArt = ""
---local AuraFont = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
+local WideArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameWide"
+local SquareArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameSquare"
+local WideHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameHighlightSquare"	
+local SquareHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrameHighlightSquare"
 local AuraFont = "FONTS\\ARIALN.TTF"
-
 
 local function Enable()
 	AuraMonitor:SetScript("OnEvent", CombatEventHandler)
@@ -874,7 +947,7 @@ local function Disable()
 	WatcherIsEnabled = false
 end
 
--- Create an Aura Icon
+-- Create a Wide Aura Icon
 local function CreateWideAuraIconFrame(parent)
 	local frame = CreateFrame("Frame", nil, parent)
 	frame.unit = nil
@@ -890,10 +963,10 @@ local function CreateWideAuraIconFrame(parent)
 	frame.Border:SetWidth(32); frame.Border:SetHeight(32)
 	frame.Border:SetPoint("CENTER", 1, -2)
 	frame.Border:SetTexture(WideArt)
-	-- Glow
-	--frame.Glow = frame:CreateTexture(nil, "ARTWORK")
-	--frame.Glow:SetAllPoints(frame.Border)
-	--frame.Glow:SetTexture(AuraGlowArt)
+	-- Highlight
+	frame.Highlight = frame:CreateTexture(nil, "ARTWORK")
+	frame.Highlight:SetAllPoints(frame.Border)
+	frame.Highlight:SetTexture(WideHighlightArt)
 	--  Time Text
 	frame.TimeLeft = frame:CreateFontString(nil, "OVERLAY")
 	frame.TimeLeft:SetFont(AuraFont ,9, "OUTLINE")
@@ -929,7 +1002,7 @@ local function CreateWideAuraIconFrame(parent)
 end
 
 
--- Create an Aura Icon
+-- Create a Square Aura Icon
 local function CreateSquareAuraIconFrame(parent)
 	local frame = CreateFrame("Frame", nil, parent)
 	frame.Parent = parent
@@ -939,12 +1012,14 @@ local function CreateSquareAuraIconFrame(parent)
 	frame.Icon:SetAllPoints(frame)
 	frame.Icon:SetTexCoord(.10, 1-.07, .12, 1-.12)  -- obj:SetTexCoord(left,right,top,bottom)
 	-- Border
-	-- [[
 	frame.Border = frame:CreateTexture(nil, "ARTWORK")
 	frame.Border:SetWidth(32); frame.Border:SetHeight(32)
 	frame.Border:SetPoint("CENTER", 0, -2)
 	frame.Border:SetTexture(SquareArt)
-	--]]
+	-- Highlight
+	frame.Highlight = frame:CreateTexture(nil, "ARTWORK")
+	frame.Highlight:SetAllPoints(frame.Border)
+	frame.Highlight:SetTexture(SquareHighlightArt)
 	--  Time Text
 	frame.TimeLeft = frame:CreateFontString(nil, "OVERLAY")
 	frame.TimeLeft:SetFont(AuraFont ,9, "OUTLINE")

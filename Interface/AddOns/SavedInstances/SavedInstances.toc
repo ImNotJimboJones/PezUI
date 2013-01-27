@@ -2,10 +2,10 @@
 ## Title: SavedInstances
 ## Notes: Tracks raid/instance lockouts on your characters, related currencies and cooldowns.
 ## Author: oscarucb
-## Version: 5.1.0
-## X-Build: 214
-## X-ReleaseDate: 2013-01-08T12:12:11Z
-## X-Revision: $Revision: 204 $
+## Version: 5.1.1
+## X-Build: 219
+## X-ReleaseDate: 2013-01-19T00:34:22Z
+## X-Revision: $Revision: 218 $
 ## X-AceForum: 14896
 ## X-License: BSD
 ## X-Category: Raid
@@ -16,7 +16,7 @@
 ## SavedVariables: SavedInstancesDB
 # ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed
-## X-Curse-Packaged-Version: 5.1.0
+## X-Curse-Packaged-Version: 5.1.1
 ## X-Curse-Project-Name: SavedInstances
 ## X-Curse-Project-ID: saved_instances
 ## X-Curse-Repository-ID: wow/saved_instances/mainline
@@ -30,6 +30,7 @@ libs\AceEvent-3.0\AceEvent-3.0.xml
 libs\AceTimer-3.0\AceTimer-3.0.xml
 libs\AceGUI-3.0\AceGUI-3.0.xml
 libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceConsole-3.0\AceConsole-3.0.xml
 libs\LibQTip-1.0\lib.xml
 #@end-no-lib-strip@ 
 

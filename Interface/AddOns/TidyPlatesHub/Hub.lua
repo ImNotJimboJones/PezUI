@@ -36,12 +36,61 @@ local function CreateInterfacePanelWidgets(panel)
 	local AlignmentColumn = panel.AlignmentColumn
 	local OffsetColumnB = 200	-- 240
 	
+	
+	--[[
+	
+	Style
+		Enemy Nameplates
+		Friendly Nameplates
+	+Style ---
+		Help Text
+		Headline Options
+		Healthbar Options
+		
+	Color		(This mode would be an added option under the color modes, called, Global?)
+		Coloring Modes
+	+Color Additional Options
+		
+	
+	
+	Alpha 
+		Spotlight Modes
+		Spotlight Scale
+	+Alpha
+		Additional Options
+		
+	Filter
+	
+	Scale
+		Spotlight Mode
+		Spotlight Scale
+	+Scale
+		
+	Threat
+		Enable Threat Coloring? 
+		Highlight Group Member Aggro
+	+Threat
+		Custom Threat Colors
+		
+	Health (Color)
+	
+	Reaction Colors
+	
+	Aura
+	
+	Widgets
+	
+	Advanced Frame Settings
+	  
+	--]]
+	------------------------------
 	-- Style
 	------------------------------
 	panel.StyleLabel = CreateQuickHeadingLabel(nil, "Style", AlignmentColumn, nil, 0, 5)	
 	panel.StyleEnemyMode =  CreateQuickDropdown(objectName.."StyleEnemyMode", "Enemy Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleLabel, 0, 2)
 	panel.StyleFriendlyMode =  CreateQuickDropdown(objectName.."StyleFriendlyMode", "Friendly Nameplates:", StyleModes, 1, AlignmentColumn, panel.StyleEnemyMode)
 
+	------------------------------
 	--[[ Headline View
 	------------------------------
 	panel.HeadlineLabel = CreateQuickHeadingLabel(nil, "Headline Mode", AlignmentColumn, nil, OffsetColumnB, 5)
@@ -49,13 +98,15 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.TextPlateFieldMode =  CreateQuickDropdown(objectName.."TextPlateFieldMode", "Optional Text Field:", TextPlateFieldModes, 1, AlignmentColumn, panel.TextPlateNameColorMode, OffsetColumnB)	-- |cffee9900Text-Only Style
 	--]]
 	
+	------------------------------
 	-- Headline View
 	------------------------------
 	panel.HeadlineLabel = CreateQuickHeadingLabel(nil, "Headline Mode", AlignmentColumn, panel.StyleFriendlyMode, 0, 5)
 	panel.TextPlateNameColorMode =  CreateQuickDropdown(objectName.."TextPlateNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.HeadlineLabel)	-- |cffee9900Text-Only Style 
 	panel.TextPlateFieldMode =  CreateQuickDropdown(objectName.."TextPlateFieldMode", "Optional Text Field:", TextPlateFieldModes, 1, AlignmentColumn, panel.TextPlateNameColorMode)	-- |cffee9900Text-Only Style
 	
-	-- Color & Text
+	------------------------------
+	-- Color & Text: Column 1
 	------------------------------
 	panel.ColorLabel = CreateQuickHeadingLabel(nil, "Health Bar Mode", AlignmentColumn, panel.TextPlateFieldMode, 0, 5)
 	--panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Health Bar Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel)	-- 6.x Multi-Theme First stage
@@ -63,9 +114,13 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ColorDangerGlowMode =  CreateQuickDropdown(objectName.."ColorDangerGlowMode", "Warning Border/Glow:", WarningGlowModes, 1, AlignmentColumn, panel.ColorHealthBarMode)
 	panel.TextNameColorMode =  CreateQuickDropdown(objectName.."TextNameColorMode", "Name Text Color:", NameColorModes, 1, AlignmentColumn, panel.ColorDangerGlowMode)	
 	
+	------------------------------
+	-- Color & Text: Column 2
+	------------------------------
 	panel.TextHealthTextMode =  CreateQuickDropdown(objectName.."TextHealthTextMode", "Optional Text Field:", TextModes, 1, AlignmentColumn, panel.ColorLabel, OffsetColumnB)
 	panel.TextShowLevel = CreateQuickCheckbutton(objectName.."TextShowLevel", "Show Level", AlignmentColumn, panel.TextHealthTextMode, OffsetColumnB)
 	panel.TextUseBlizzardFont = CreateQuickCheckbutton(objectName.."TextUseBlizzardFont", "Use Default Blizzard Font", AlignmentColumn, panel.TextShowLevel, OffsetColumnB)
+	--panel.TextGreyWhenNoGUID = CreateQuickCheckbutton(objectName.."TextGreyWhenNoGUID", "Grey when GUID is Unknown", AlignmentColumn, panel.TextUseBlizzardFont, OffsetColumnB)
 	
 	-- [[  6.x Multi-Theme
 	--panel.ArtDefault  =  CreateQuickDropdown(objectName.."ArtDefault", "Default Art:", ArtStyles, 1, AlignmentColumn, panel.ColorLabel, OffsetColumnB)
@@ -73,6 +128,7 @@ local function CreateInterfacePanelWidgets(panel)
 	--panel.ArtSpotlightMode  =  CreateQuickDropdown(objectName.."ArtSpotlightMode", "Art Spotlight Mode:", ArtModes, 1, AlignmentColumn, panel.ArtSpotlight, OffsetColumnB)
 	--]]
 	
+	------------------------------
 	--Opacity
 	------------------------------
 	panel.OpacityLabel = CreateQuickHeadingLabel(nil, "Opacity", AlignmentColumn, panel.TextNameColorMode, 0, 5)	
@@ -84,6 +140,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.OpacityFullMouseover = CreateQuickCheckbutton(objectName.."OpacityFullMouseover", "Bring Mouseovers to Target Opacity", AlignmentColumn, panel.OpacityFullSpell, 16)
 	panel.OpacityFullNoTarget = CreateQuickCheckbutton(objectName.."OpacityFullNoTarget", "Use Target Opacity When No Target Exists", AlignmentColumn, panel.OpacityFullMouseover, 16)
 	
+	------------------------------
 	-- Filter
 	--------------------------------
 	panel.FilterLabel = CreateQuickHeadingLabel(nil, "Filter", AlignmentColumn, panel.OpacityFullNoTarget, 0, 5)
@@ -97,6 +154,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.OpacityCustomFilterLabel = CreateQuickItemLabel(nil, "Filter By Unit Name:", AlignmentColumn, panel.OpacityFilterInactive, 8)	
 	panel.OpacityFilterList = CreateQuickEditbox(objectName.."OpacityFilterList", AlignmentColumn, panel.OpacityCustomFilterLabel, 8)
 
+	------------------------------
 	--Scale
 	------------------------------
 	panel.ScaleLabel = CreateQuickHeadingLabel(nil, "Scale", AlignmentColumn, panel.OpacityFilterList, 0, 5)	
@@ -108,6 +166,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ScaleIgnoreInactive= CreateQuickCheckbutton(objectName.."ScaleIgnoreInactive", "Ignore Inactive Units", AlignmentColumn, panel.ScaleIgnoreNonEliteUnits, 16)
 	panel.ScaleCastingSpotlight= CreateQuickCheckbutton(objectName.."ScaleCastingSpotlight", "Bring Casting Units to Spotlight Scale", AlignmentColumn, panel.ScaleIgnoreInactive, 0)
 	
+	------------------------------
 	-- Threat
 	------------------------------
 	panel.ThreatLabel = CreateQuickHeadingLabel(nil, "Threat", AlignmentColumn, panel.ScaleCastingSpotlight, 0, 5)	
@@ -125,7 +184,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ColorPartyAggroGlow = CreateQuickCheckbutton(objectName.."ColorPartyAggroGlow", "Border/Warning Glow", AlignmentColumn, panel.ColorPartyAggroBar, 16)
 	panel.ColorPartyAggroText = CreateQuickCheckbutton(objectName.."ColorPartyAggroText", "Name Text Color", AlignmentColumn, panel.ColorPartyAggroGlow, 16)
 
-	
+	------------------------------
 	-- Health
 	------------------------------
 	panel.HealthLabel = CreateQuickHeadingLabel(nil, "Health", AlignmentColumn, panel.ColorPartyAggroText, 0, 5)	
@@ -136,6 +195,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.ColorMediumHealth = CreateQuickColorbox(objectName.."ColorMediumHealth", "Medium Health", AlignmentColumn, panel.ColorHighHealth , 16)
 	panel.ColorLowHealth = CreateQuickColorbox(objectName.."ColorLowHealth", "Low Health", AlignmentColumn, panel.ColorMediumHealth , 16)
 	
+	------------------------------
 	-- Aura (Buff and Debuff) Widget
 	------------------------------
 	panel.DebuffsLabel = CreateQuickHeadingLabel(nil, "Buffs & Debuffs", AlignmentColumn, panel.ColorLowHealth, 0, 5)
@@ -168,6 +228,7 @@ local function CreateInterfacePanelWidgets(panel)
 			
 	--]]
 	
+	------------------------------
 	--Widgets
 	------------------------------
 	panel.WidgetsLabel = CreateQuickHeadingLabel(nil, "Widgets", AlignmentColumn, panel.WidgetsDebuffTrackList, 0, 5)
@@ -182,7 +243,7 @@ local function CreateInterfacePanelWidgets(panel)
 	panel.WidgetsRangeIndicator = CreateQuickCheckbutton(objectName.."WidgetsRangeIndicator", "Show Party Range Warning", AlignmentColumn, panel.WidgetsThreatIndicatorMode)
 	panel.WidgetsRangeMode =  CreateQuickDropdown(objectName.."WidgetsRangeMode", "Range:", RangeModes, 1, AlignmentColumn, panel.WidgetsRangeIndicator, 16)
 	
-	
+	------------------------------
 	--Frame
 	------------------------------
 	panel.AdvancedLabel = CreateQuickHeadingLabel(nil, "Advanced", AlignmentColumn, panel.WidgetsRangeMode, 0, 5)

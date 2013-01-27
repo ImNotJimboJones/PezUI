@@ -307,14 +307,18 @@ function Hooked:CreateDropdownMenu(level)
 			info.text = CHECK_ALL
 			info.func = function()
 							ZoneFiltering:SetAllFiltered(true)
+							self.db.filtering.unknownZone = true
 							PetJournalEnhanced:UpdatePets()
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 						end
 			UIDropDownMenu_AddButton(info, level)
 			
 			info.text = UNCHECK_ALL
 			info.func = function()
 							ZoneFiltering:SetAllFiltered(false)
+							self.db.filtering.unknownZone = false
 							PetJournalEnhanced:UpdatePets()
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
 						end
 			UIDropDownMenu_AddButton(info, level)
 			

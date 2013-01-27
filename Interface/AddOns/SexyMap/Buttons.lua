@@ -49,6 +49,7 @@ local addonButtons = { -- For the rare addons that don't use LibDBIcon for some 
 	NXMiniMapBut = "Carbonite",
 	RaidTrackerAceMMI = "Raid Tracker",
 	TellTrackAceMMI = "Tell Track",
+	TenTonHammer_MinimapButton = "PlayerScore",
 }
 
 local options = {
@@ -146,7 +147,8 @@ local options = {
 			end,
 			set = function(info, v)
 				mod.db.controlVisibility = v
-				for _,f in pairs(animFrames) do
+				for i = 1, #animFrames do
+					local f = animFrames[i]
 					if not v then
 						mod:ChangeFrameVisibility(f, "always")
 					else
@@ -213,27 +215,6 @@ function mod:OnInitialize(profile)
 		}
 	end
 
-	if profile.buttons.dragPositions.AtlasButtonFrame then
-		profile.buttons.dragPositions.AtlasButtonFrame = nil -- XXX temp
-	end
-	if profile.buttons.visibilitySettings.AtlasButtonFrame then
-		profile.buttons.visibilitySettings.AtlasButtonFrame = nil -- XXX temp
-	end
-
-	if profile.buttons.dragPositions.FishingBuddyMinimapFrame then
-		profile.buttons.dragPositions.FishingBuddyMinimapFrame = nil -- XXX temp
-	end
-	if profile.buttons.visibilitySettings.FishingBuddyMinimapFrame then
-		profile.buttons.visibilitySettings.FishingBuddyMinimapFrame = nil -- XXX temp
-	end
-
-	if profile.buttons.dragPositions.HealBot_ButtonFrame then
-		profile.buttons.dragPositions.HealBot_ButtonFrame = nil -- XXX temp
-	end
-	if profile.buttons.visibilitySettings.HealBot_ButtonFrame then
-		profile.buttons.visibilitySettings.HealBot_ButtonFrame = nil -- XXX temp
-	end
-
 	self.db = profile.buttons
 end
 
@@ -267,6 +248,8 @@ function mod:OnEnable()
 	highlight:SetPoint("TOPLEFT", MiniMapWorldMapButton, "TOPLEFT", 2, -2)
 
 	sm.core:RegisterModuleOptions("Buttons", options, L["Buttons"])
+
+	mod:StartFrameGrab()
 end
 
 --------------------------------------------------------------------------------
@@ -277,9 +260,10 @@ do
 	local OnFinished = function(anim)
 		-- Minimap or Minimap icons including nil checks to compensate for other addons
 		local f, focus = anim:GetParent(), GetMouseFocus()
+		local n = f:GetName()
 		if focus and ((focus:GetName() == "Minimap") or (focus:GetParent() and focus:GetParent():GetName() and focus:GetParent():GetName():find("Mini[Mm]ap"))) then
 			f:SetAlpha(1)
-		else
+		elseif not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then -- Check this again in case the user changed the setting to "visible" during fade
 			f:SetAlpha(0)
 		end
 	end
@@ -289,7 +273,8 @@ do
 	local OnEnter = function()
 		if not mod.db.controlVisibility or fadeStop or moving then return end
 
-		for _,f in pairs(animFrames) do
+		for i = 1, #animFrames do
+			local f = animFrames[i]
 			local n = f:GetName()
 			if not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then
 				local delayed = f.smAlphaAnim:IsDelaying()
@@ -312,7 +297,8 @@ do
 		end
 		fadeStop = nil
 
-		for _,f in pairs(animFrames) do
+		for i = 1, #animFrames do
+			local f = animFrames[i]
 			local n = f:GetName()
 			if not mod.db.visibilitySettings[n] or mod.db.visibilitySettings[n] == "hover" then
 				f.smAnimGroup:Stop()
@@ -334,7 +320,7 @@ do
 			f.smAlphaAnim:SetOrder(1)
 			f.smAlphaAnim:SetDuration(0.3)
 			f.smAnimGroup:SetScript("OnFinished", OnFinished)
-			tinsert(animFrames, f)
+			animFrames[#animFrames+1] = f
 
 			-- Configure fading
 			if mod.db.controlVisibility then
@@ -371,44 +357,25 @@ do
 		f:HookScript("OnLeave", OnLeave)
 	end
 
-	-- Force buttons to stay hidden/shown to prevent other addons doing so, which then makes people complain to me that the functionality isn't working.
-	local noop = function() end
-
+	local hideFrame = CreateFrame("Frame") -- Dummy frame we use for hiding buttons to prevent other addons re-showing them
+	hideFrame:Hide()
+	local frameParents = {} -- Store the original button parents for restoration
 	function mod:ChangeFrameVisibility(frame, vis)
 		if vis == "always" then
-			if not dynamicButtons[frame:GetName()] then
-				if frame.oldShow then
-					frame.Show = frame.oldShow
-					frame.oldShow = nil
-				end
-				if not frame.oldHide then
-					frame.oldHide = frame.Hide
-					frame.Hide = noop
-				end
-				frame:Show()
+			if frameParents[frame] then
+				frame:SetParent(frameParents[frame])
+				frameParents[frame] = nil
 			end
 			frame:SetAlpha(1)
 		elseif vis == "never" then
-			if frame.oldHide then
-				frame.Hide = frame.oldHide
-				frame.oldHide = nil
+			if not frameParents[frame] then
+				frameParents[frame] = frame:GetParent()
 			end
-			if not frame.oldShow then
-				frame.oldShow = frame.Show
-				frame.Show = noop
-			end
-			frame:Hide()
+			frame:SetParent(hideFrame)
 		else
-			if not dynamicButtons[frame:GetName()] then
-				if frame.oldHide then
-					frame.Hide = frame.oldHide
-					frame.oldHide = nil
-				end
-				if frame.oldShow then
-					frame.Show = frame.oldShow
-					frame.oldShow = nil
-				end
-				frame:Show()
+			if frameParents[frame] then
+				frame:SetParent(frameParents[frame])
+				frameParents[frame] = nil
 			end
 			frame:SetAlpha(0)
 		end
@@ -492,8 +459,8 @@ do
 				setPosition(frame, angle)
 			end
 		else
-			for _,f in pairs(animFrames) do
-				local n = f:GetName()
+			for i = 1, #animFrames do
+				local f = animFrames[i]
 				-- Don't move the Clock or Zone Text when changing shape/preset
 				if n ~= "MinimapZoneTextButton" and n ~= "TimeManagerClockButton" then
 					local x, y = f:GetCenter()
@@ -504,6 +471,45 @@ do
 				end
 			end
 		end
+	end
+end
+
+--------------------------------------------------------------------------------
+-- Button grab
+--
+
+do
+	local alreadyGrabbed = {}
+	local grabFrames = function(...)
+		for i=1, select("#", ...) do
+			local f = select(i, ...)
+			local n = f:GetName()
+			if n and not alreadyGrabbed[n] then
+				alreadyGrabbed[n] = true
+				mod:NewFrame(f)
+			end
+		end
+	end
+
+	function mod:StartFrameGrab()
+		-- Try to capture new frames periodically
+		-- We'd use ADDON_LOADED but it's too early, some addons load a minimap icon afterwards
+		local updateTimer = sm.core.frame:CreateAnimationGroup()
+		local anim = updateTimer:CreateAnimation()
+		updateTimer:SetScript("OnLoop", function(frame)
+			grabFrames(MinimapZoneTextButton, Minimap, MiniMapTrackingButton, TimeManagerClockButton, MinimapBackdrop:GetChildren())
+			grabFrames(MinimapCluster:GetChildren())
+			grabFrames(Minimap:GetChildren())
+			frame:SetScript("OnLoop", function()
+				grabFrames(Minimap:GetChildren())
+			end)
+		end)
+		anim:SetOrder(1)
+		anim:SetDuration(2)
+		updateTimer:SetLooping("REPEAT")
+		updateTimer:Play()
+
+		self.StartFrameGrab = nil
 	end
 end
 

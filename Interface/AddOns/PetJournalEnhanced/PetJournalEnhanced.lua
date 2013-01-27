@@ -239,6 +239,9 @@ function PetJournalEnhanced:Reset()
 	
 	self:SetZoneFilter()]]
 	
+	local ZoneFiltering = self:GetModule("ZoneFiltering")
+	ZoneFiltering:SetAllFiltered(true)
+	
 	local filtering = self.db.global.filtering
 	local sorting = self.db.global.sorting
 	

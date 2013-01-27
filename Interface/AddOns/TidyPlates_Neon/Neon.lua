@@ -194,6 +194,14 @@ DefaultStyle.level = {
 	show = false,
 }
 
+DefaultStyle.customart = {
+	width = 14,
+	height = 14,
+	x = -44,
+	y = VerticalAdjustment + 5,
+	anchor = "CENTER",
+	--show = true,
+}
 
 DefaultStyle.customtext = {
 	typeface = font,
@@ -342,6 +350,50 @@ do
 	TankTheme.OnApplyThemeCustomization = ApplyTankCustomization -- Called By Hub Panel
 	TankTheme.ShowConfigPanel = ShowTidyPlatesHubTankPanel
 end
+
+--[[ Create Test Variant
+do
+	local TestTheme = CopyTable(Theme)
+	TidyPlatesThemeList["Test Theme"] = TestTheme
+	
+	
+	--------------------------------------------------
+	--------------------------------------------------
+	TestTheme["Default"].healthborder.texture = ""
+	TestTheme["Default"].healthborder.width = 0
+	TestTheme["Default"].healthborder.height = 0
+	TestTheme["Default"].healthborder.x = 0
+	TestTheme["Default"].healthborder.y = 0
+	
+	--TestTheme["Default"].healthbar.texture =
+	--TestTheme["Default"].healthbar.backdrop =
+	
+	--TestTheme["NameOnly"].
+
+	--------------------------------------------------
+	--------------------------------------------------
+	
+	
+	local function ApplyTestCustomization()
+		ApplyThemeCustomization(TestTheme)
+	end
+
+	local function OnActivateTestTheme(themeTable)
+		--print("NeonTank", themeTable, other)
+		if TestTheme == themeTable then
+			LocalVars = TidyPlatesHubFunctions:UseDamageVariables()
+			ApplyTestCustomization()
+		end
+	end
+	
+
+	
+	TestTheme.OnActivateTheme = OnActivateTestTheme -- called by Tidy Plates Core, Theme Loader
+	TestTheme.OnApplyThemeCustomization = ApplyTestCustomization -- Called By Hub Panel
+	TestTheme.ShowConfigPanel = ShowTidyPlatesHubDamagePanel
+end
+
+--]]
 
 --[[
 -- Create Gladiator Variant

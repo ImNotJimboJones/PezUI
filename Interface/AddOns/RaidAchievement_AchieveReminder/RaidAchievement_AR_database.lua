@@ -280,7 +280,7 @@ ralltrack  ={
 {0,0,1,0},--Gate of the Setting Sun
 {1,1,0,0},--Siege of Niuzao Temple
 {0,0,1,0,0,0,0,0,0,0,0,0,0,0},--Heart of Fear 
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0},--Mogu'shan Vaults
+{0,0,0,0,0,1,0,0,0,0,0,0,0,0},--Mogu'shan Vaults
 {0,1,0,1,0,0,0,0,0},--Terrace of Endless Spring
 {1,1,0,0},--A Brewing Storm
 {1,0,0},--Arena of Annihilation

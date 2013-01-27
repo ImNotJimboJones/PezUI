@@ -1,4 +1,4 @@
-﻿-- $Id: constants.fr.lua 4020 2012-11-30 08:10:52Z TrAsHeR $
+﻿-- $Id: constants.fr.lua 4046 2012-12-21 09:23:49Z TrAsHeR $
 --[[
 constants.fr.lua --- Traduction frFR par TrAsHeR (Tchoupie @ Ysondre-EU). Merci à KKram pour les premières traductions & Pettigrow pour ses quelques traductions.
 This file defines an AceLocale table for all the various text strings needed
@@ -103,6 +103,7 @@ if AL then
 	--AL["Item Buttons"] = true; -- à traduire
 	AL["Loot Table"] = "Table de loot";
 	AL["Enable mouse on item descriptions"] = "Activer la souris sur la description de l'objet";
+	AL["Upgrade Level:"] = "Niveau d'amélioration :";
 
 	-- Default Frame
 	AL["Default Frame"] = "Frame par défaut";
@@ -250,21 +251,6 @@ if AL then
 	AL["Show Price"] = "Afficher le prix";
 	AL["Skill"] = "Talent";
 	AL["Location"] = "Lieu";
-	--AL["ilvl 200"] = true;
-	--AL["ilvl 213"] = true;
-	--AL["ilvl 226"] = true;
-	--AL["ilvl 245"] = true;
-	--AL["ilvl 264"] = true;
-	--AL["ilvl 397"] = true;
-	--AL["ilvl 470"] = true;
-	--AL["ilvl 490"] = true;
-	AL["Grand Marshal"] = "Connétable";
-	AL["Gladiator"] = "Gladiateur";
-	AL["Vengeful"] = "Vengeur";
-	AL["Merciless"] = "Impitoyable";
-	AL["Brutal"] = "Brutale";
-	AL["Wrathful"] = "Courroucé";
-	AL["Cataclysmic"] = "Cataclysmique";
 
 	-- #######################################
 	-- UI things END
@@ -374,6 +360,21 @@ if AL then
 	--AL["Tier 14 Set"] = true;
 	AL["TCG Items"] = "Objets des cartes à jouer"; -- Trading Card Game Items
 	AL["Rare Mobs"] = "Monstres rares";
+	AL["Grand Marshal"] = "Connétable";
+	AL["Gladiator"] = "Gladiateur";
+	AL["Vengeful"] = "Vengeur";
+	AL["Merciless"] = "Impitoyable";
+	AL["Brutal"] = "Brutale";
+	AL["Wrathful"] = "Courroucé";
+	AL["Cataclysmic"] = "Cataclysmique";
+	--AL["ilvl 200"] = true;
+	--AL["ilvl 213"] = true;
+	--AL["ilvl 226"] = true;
+	--AL["ilvl 245"] = true;
+	--AL["ilvl 264"] = true;
+	--AL["ilvl 397"] = true;
+	--AL["ilvl 470"] = true;
+	--AL["ilvl 490"] = true;
 
 	-- PvP Menu
 	AL["Arathi Basin Sets"] = "Sets du Bassin d'Arathi";
@@ -416,6 +417,7 @@ if AL then
 	AL["Playable Race Masks"] = "Masques de race jouable";			-- Hallow's End
 	AL["Non-Playable Race Masks"] = "Masques de race non-jouable";	-- Hallow's End
 	AL["Schematics & Patterns"] = "Schémas et patrons";			-- Lunar Festival
+	AL["Toys"] = "Jouets"; 									-- Darkmoon Faire
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = "|cff1eff00Clic-Gauche|r Parcours des Listes d'Objets";
@@ -1087,6 +1089,10 @@ if AL then
 	--- Mists of Pandaria
 	AL["Uncle Bigpocket"] = "Oncle Poche Profonde";
 	AL["Auntie Stormstout"] = "Tatie Brune d’Orage";
+	--AL["Luo Luo"] = true;
+	--AL["Meng Meng"] = true;
+	AL["Ongrom Black Tooth"] = "Ongrom Dent-Noire";
+	AL["Proveditor Grantley"] = "Provéditeur Grantley";
 	--- World Events
 	AL["Crimson Templar"] = "Templier cramoisi";  --- mob removed from game?
 	AL["Azure Templar"] = "Templier d'azur";  --- mob removed from game?

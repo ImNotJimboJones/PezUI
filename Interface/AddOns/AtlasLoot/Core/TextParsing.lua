@@ -1,4 +1,4 @@
--- $Id: TextParsing.lua 4002 2012-11-24 18:37:48Z celellach $
+-- $Id: TextParsing.lua 4032 2012-12-05 16:13:54Z celellach $
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
 local BabbleBoss = AtlasLoot_GetLocaleLibBabble("LibBabble-Boss-3.0")
 local BabbleFaction = AtlasLoot_GetLocaleLibBabble("LibBabble-Faction-3.0")
@@ -799,11 +799,6 @@ AtlasLoot_TextParsing = {
 	{ "#valentineday2#", "|TInterface\\Icons\\inv_jewelry_necklace_43:0|t"},
 
 	-- Currency Icons - Factions
-	{ "#ccombat#", "|TInterface\\Icons\\INV_Jewelry_Talisman_06:0|t" },
-	{ "#ctactical#", "|TInterface\\Icons\\INV_Jewelry_Amulet_02:0|t" },
-	{ "#clogistics#", "|TInterface\\Icons\\INV_Jewelry_Necklace_16:0|t" },
-	{ "#cremulos#", "|TInterface\\Icons\\INV_Jewelry_Necklace_14:0|t" },
-	{ "#ccenarius#", "|TInterface\\Icons\\INV_Jewelry_Necklace_12:0|t" },
 	{ "#glowcap#", "|TInterface\\Icons\\INV_Mushroom_02:0|t" },
 	{ "#kyparite#", "|TInterface\\Icons\\inv_ore_manticyte:0|t" },							-- Kyparite (Klaxxi)
 	{ "#ogrilashard#", "|TInterface\\Icons\\INV_Misc_Apexis_Shard:0|t" },

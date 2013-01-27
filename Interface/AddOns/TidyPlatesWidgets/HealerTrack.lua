@@ -11,8 +11,101 @@
 		you're not in a battleground.
 
 --]]
-
 local RoleList = {}
+
+local function IsHealer(name)
+	
+	if name then 
+		local Role = RoleList[name]
+		if Role == nil then
+			--RequestBattlefieldScoreData()
+		else 
+			--if Role == "Healer" then print(name, "Marked as Healer") end
+			return Role == "Healer" 
+		end
+	end	
+end
+
+---------------------------------------------------------------------------------------------------------
+-- Widget
+---------------------------------------------------------------------------------------------------------
+local widgetPath = "Interface\\Addons\\TidyPlatesWidgets\\HealerWidget"
+local friendlyHealerIcon = widgetPath.."\\Friendly"
+local hostileHealerIcon = widgetPath.."\\Hostile"
+local WidgetList = {}
+
+-- Update Graphics
+local function UpdateWidgetFrame(self, unit)
+	-- Custom Code I
+	--------------------------------------
+	if unit.type == "PLAYER" and IsHealer(unit.name) then 
+		if unit.reaction == "HOSTILE" then
+			self:Show()
+			self.Icon:SetTexture(hostileHealerIcon) 
+		else self:Show();self.Icon:SetTexture(friendlyHealerIcon) end
+	else self:_Hide() end	
+	--------------------------------------
+	-- End Custom Code
+end
+
+-- Context
+local function UpdateWidgetContext(self, unit)
+	local guid = unit.guid
+	self.guid = guid
+	
+	-- Add to Widget List
+	if guid then
+		WidgetList[guid] = self
+	end
+	
+	-- Custom Code II
+	--------------------------------------
+	UpdateWidgetFrame(self, unit) 
+	--------------------------------------
+	-- End Custom Code
+end
+
+local function ClearWidgetContext(self)
+	local guid = self.guid
+	if guid then
+		WidgetList[guid] = nil
+		self.guid = nil
+	end
+end
+
+-- Widget Creation
+local function CreateWidgetFrame(parent)
+	local frame = CreateFrame("Frame", nil, parent)
+	frame:Hide()
+	
+	-- Custom Code III
+	--------------------------------------
+	frame:SetHeight(32)
+	frame:SetWidth(64)
+	frame.Icon = frame:CreateTexture(nil, "OVERLAY")
+	frame.Icon:SetAllPoints(frame)	
+	frame.Icon:SetTexture(defaultTexture)
+	frame:SetAlpha(.7)
+	--if not isEnabled then EnableWatcherFrame(true) end
+	--------------------------------------
+	-- End Custom Code
+	
+	-- Required Widget Code
+	frame.UpdateContext = UpdateWidgetContext
+	frame.Update = UpdateWidgetFrame
+	frame._Hide = frame.Hide
+	frame.Hide = function() ClearWidgetContext(frame); frame:_Hide() end
+	
+	return frame
+end
+
+TidyPlatesWidgets.CreateHealerWidget = CreateWidgetFrame
+
+
+
+---------------------------------------------------------------------------------------------------------
+-- Healer Tracking System
+---------------------------------------------------------------------------------------------------------
 local HealerListByGUID = {}
 local HealerListByName = {}
 
@@ -20,8 +113,6 @@ local function ParseName(identifier)
 	local name, server = select( 3, strfind(identifier, "([^-]+)-?(.*)"))
 	return name, server
 end
-
-
 
 --[[
 Detection Method 1: 
@@ -161,6 +252,21 @@ local HealerSpells = {
         [53563] = "PALADIN", -- Beacon of Light
         [31821] = "PALADIN", -- Aura Mastery
         [85222] = "PALADIN", -- Light of Dawn
+		
+        -- Monk
+		---------
+        [115175] = "MONK", -- Soothing Mist
+        [115294] = "MONK", -- Mana Tea
+        [115310] = "MONK", -- Revival
+        [116670] = "MONK", -- Uplift
+        [116680] = "MONK", -- Thunder Focus Tea
+        [116849] = "MONK", -- Life Cocoon
+        [116995] = "MONK", -- Surging mist
+        [119611] = "MONK", -- Renewing mist
+        [132120] = "MONK", -- Envelopping Mist
+		
+		-- http://www.icy-veins.com/mistweaver-monk-wow-pve-healing-rotation-cooldowns-abilities
+		-- http://www.wowhead.com/spells=-12.10.270
 }
 
 local SpellEvents = { 
@@ -225,44 +331,16 @@ local function Enable()
 	HealerTrackWatcher:RegisterEvent("PLAYER_ENTERING_WORLD")
 	HealerTrackWatcher:RegisterEvent("UPDATE_BATTLEFIELD_SCORE")
 	WipeLists() 
-	--print("TidyPlatesBeta Message: Enemy Healer (PvP) Tracking is Enabled")
 end
 
 local function Disable() 
 	HealerTrackWatcher:SetScript("OnEvent", nil)
 	HealerTrackWatcher:UnregisterAllEvents()
 	WipeLists() 
-	--print("TidyPlatesBeta Message: Enemy Healer (PvP) Tracking is Disabled")
-end
-
-local HealerClasses = {
-	["DRUID"] = true,
-	["SHAMAN"] = true,
-	["PALADIN"] = true,
-	["PRIEST"] = true,
-}
-
-local function IsHealer(name, class)
-	--if class and (not HealerClasses[class]) then return false end
-	
-	if name then 
-		local Role = RoleList[name]
-		if Role == nil then
-			--print(name, "Unit not found")
-			--RequestBattlefieldScoreData()
-		else 
-			--if Role == "Healer" then print(name, "Marked as Healer") end
-			return Role == "Healer" 
-		end
-	end	
 end
 
 TidyPlatesUtility.EnableHealerTrack = Enable
 TidyPlatesUtility.DisableHealerTrack = Disable
 TidyPlatesUtility.IsHealer = IsHealer
-
---TidyPlatesCache = TidyPlatesCache or {}
---TidyPlatesCache.RoleList = RoleList
-
 
 			

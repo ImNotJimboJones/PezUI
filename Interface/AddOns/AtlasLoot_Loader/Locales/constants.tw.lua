@@ -1,4 +1,4 @@
-﻿-- $Id: constants.tw.lua 4013 2012-11-27 07:39:08Z celellach $
+﻿-- $Id: constants.tw.lua 4047 2012-12-22 08:21:02Z ananhaid $
 --[[
 constants.tw.lua
 This file defines an AceLocale table for all the various text strings needed
@@ -100,6 +100,7 @@ if AL then
 	AL["Item Buttons"] = "物品按鍵";
 	AL["Loot Table"] = "物品表";
 	AL["Enable mouse on item descriptions"] = "啟用滑鼠指向物品屬性";
+	AL["Upgrade Level:"] = "升級等級：";
 
 	-- Default Frame
 	AL["Default Frame"] = "預設框架";
@@ -247,21 +248,6 @@ if AL then
 	AL["Show Price"] = "顯示價格";
 	AL["Skill"] = "技能";
 	AL["Location"] = "位置";
-	AL["ilvl 200"] = "等級 200";
-	AL["ilvl 213"] = "等級 213";
-	AL["ilvl 226"] = "等級 226";
-	AL["ilvl 245"] = "等級 245";
-	AL["ilvl 264"] = "等級 264";
-	AL["ilvl 397"] = "等級 397";
-	AL["ilvl 470"] = "等級 470";
-	AL["ilvl 490"] = "等級 490";
-	AL["Grand Marshal"] = "總元帥";
-	AL["Gladiator"] = "鬥士";
-	AL["Vengeful"] = "復仇";
-	AL["Merciless"] = "殘忍";
-	AL["Brutal"] = "野蠻";
-	AL["Wrathful"] = "憤怒";
-	AL["Cataclysmic"] = "絕命";
 
 	-- #######################################
 	-- UI things END
@@ -371,6 +357,23 @@ if AL then
 	AL["Tier 14 Set"] = "T14 套裝";
 	AL["TCG Items"] = "卡片遊戲物品";
 	AL["Rare Mobs"] = "稀有怪物";
+	AL["Grand Marshal"] = "總元帥";
+	AL["Gladiator"] = "鬥士";
+	AL["Vengeful"] = "復仇";
+	AL["Merciless"] = "殘忍";
+	AL["Brutal"] = "野蠻";
+	AL["Wrathful"] = "憤怒";
+	AL["Cataclysmic"] = "絕命";
+	AL["ilvl 200"] = "等級 200";
+	AL["ilvl 213"] = "等級 213";
+	AL["ilvl 226"] = "等級 226";
+	AL["ilvl 245"] = "等級 245";
+	AL["ilvl 264"] = "等級 264";
+	AL["ilvl 397"] = "等級 397";
+	AL["ilvl 470"] = "等級 470";
+	AL["ilvl 490"] = "等級 490";
+	AL["ilvl 489"] = "等級 489";
+	AL["ilvl 496"] = "等級 496";
 
 	-- PvP Menu
 	AL["Arathi Basin Sets"] = "阿拉希盆地套裝";
@@ -413,6 +416,7 @@ if AL then
 	AL["Playable Race Masks"] = "種族面具玩具"; 		-- Hallow's End
 	AL["Non-Playable Race Masks"] = "非種族面具玩具"; 	-- Hallow's End
 	AL["Schematics & Patterns"] = "設計圖/圖樣";			-- Lunar Festival
+	AL["Toys"] = "玩具"; 						-- Darkmoon Faire
 
 	-- Minimap Button
 	AL["|cff1eff00Left-Click|r Browse Loot Tables"] = "|cff1eff00左鍵|r 瀏覽物品掉落表";
@@ -1084,6 +1088,10 @@ if AL then
 	--- Mists of Pandaria
 	AL["Uncle Bigpocket"] = "大包公";
 	AL["Auntie Stormstout"] = "風暴烈酒姑媽";
+	AL["Luo Luo"] = "洛洛";
+	AL["Meng Meng"] = "萌萌";
+	AL["Ongrom Black Tooth"] = "『黑齒』歐格姆";
+	AL["Proveditor Grantley"] = "供應商格蘭特雷";
 	--- World Events
 	AL["Crimson Templar"] = "赤紅聖殿騎士";
 	AL["Azure Templar"] = "碧藍聖殿騎士";

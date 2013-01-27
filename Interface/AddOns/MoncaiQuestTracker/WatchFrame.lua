@@ -247,9 +247,9 @@ function fun.WatchFrame_Update (self, twice)
 	
 	local maxFrameWidth = WATCHFRAME_MAXLINEWIDTH;
 	local maxWidth = 0;
-	local maxLineWidth;
-	local numObjectives;
+	local maxLineWidth, numObjectives, numPopUps;
 	local totalObjectives = 0;
+	WATCHFRAME_NUM_POPUPS = 0;
 
 	--MOD
 	if MQT.db.profile.fixedwidth then
@@ -260,15 +260,26 @@ function fun.WatchFrame_Update (self, twice)
 	--EMOD
 	
 	WatchFrame_ResetLinkButtons();
-	
 	for i = 1, #WATCHFRAME_OBJECTIVEHANDLERS do
-		nextAnchor, maxLineWidth, numObjectives = WATCHFRAME_OBJECTIVEHANDLERS[i](lineFrame, nextAnchor, maxHeight, maxFrameWidth);
+		nextAnchor, maxLineWidth, numObjectives, numPopUps = WATCHFRAME_OBJECTIVEHANDLERS[i](lineFrame, nextAnchor, maxHeight, maxFrameWidth);
 		--Print(i .. " -> " .. (nextAnchor and "ok" or "bad"))
 		maxWidth = max(maxLineWidth, maxWidth);
-		totalObjectives = totalObjectives + numObjectives
+		totalObjectives = totalObjectives + numObjectives;
+		WATCHFRAME_NUM_POPUPS = WATCHFRAME_NUM_POPUPS + numPopUps;
 	end
+	
 	--disabled for now, might make it an option
 	--lineFrame:SetWidth(min(maxWidth, maxFrameWidth));
+	
+	-- shadow
+	if ( WATCHFRAME_NUM_POPUPS > 0) then
+		if (not lineFrame.Shadow:IsShown()) then
+			lineFrame.Shadow:Show();
+			lineFrame.Shadow.FadeIn:Play();
+		end
+	else
+		lineFrame.Shadow:Hide();
+	end
 	
 	if ( totalObjectives > 0 ) then
 		WatchFrameHeader:Show();
@@ -333,10 +344,12 @@ local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, 
 		end
 	else
 		--this should be the default, set in WatchFrameLineTemplate_Reset
-		if ( eligible ~= nil ) then
+		if ( eligible ~= nil and eligible == false) then
 			line.text.eligible = eligible;
+			line.text:SetTextColor(DIM_RED_FONT_COLOR.r, DIM_RED_FONT_COLOR.g, DIM_RED_FONT_COLOR.b);
 		else
 			line.text.eligible = true;
+			line.text:SetTextColor(0.8, 0.8, 0.8);
 		end
 	end
 	-- dash
@@ -348,6 +361,9 @@ local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, 
 		line.dash:SetText(QUEST_DASH);
 		line.dash:Hide();
 		usedWidth = DASH_WIDTH;
+	elseif ( dash == DASH_ICON ) then
+		line.dash:SetWidth(DASH_ICON_WIDTH);
+		usedWidth = DASH_ICON_WIDTH;
 	end	
 	-- multiple lines
 	if ( hasItem and WATCHFRAME_SETLINES_NUMLINES < 2 ) then
@@ -387,18 +403,19 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 	local numPOICompleteIn = 0;
 	local numPOICompleteOut = 0;
 	
-	local text, finished;
+	local text, finished, objectiveType;
 	local numQuestWatches = GetNumQuestWatches();
 	local numObjectives;
-	local title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID;
+	local title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID, startEvent;
+	local numValidQuests = 0;
 
 	local maxWidth = 0;
 	local lineWidth = 0;
 	local topEdge = 0;
 
 	local playerMoney = GetMoney(); local bl = MQT.BuddyList; --MOD
-	local selectedQuestId = WORLDMAP_SETTINGS.selectedQuestId;
-	if ( not WorldMapFrame:IsShown() ) then
+	local selectedQuestId = WORLDMAP_SETTINGS.selectedQuestId; --Remove?
+	if ( not WorldMapFrame or not WorldMapFrame:IsShown() ) then
 		-- For the filter REMOTE ZONES: when it's unchecked we need to display local POIs only. Unfortunately all the POI
 		-- code uses the current map so the tracker would not display the right quests if the world map was windowed and
 		-- open to a different zone.
@@ -411,19 +428,41 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 	
 	table.wipe(VISIBLE_WATCHES);
 	WatchFrame_ResetQuestLines();
+
+	-- if supertracked quest is not in the quest log anymore, stop supertracking it
+	if ( GetQuestLogIndexByID(GetSuperTrackedQuestID()) == 0 ) then
+		SetSuperTrackedQuestID(0);
+	end
+	
+	local inScenario = C_Scenario.IsInScenario();
 	
 	for i = 1, numQuestWatches do
+		local validQuest = false;
 		WATCHFRAME_SETLINES = table.wipe(WATCHFRAME_SETLINES or { });
 		questIndex = GetQuestIndexForWatch(i);
 		if ( questIndex ) then
-			title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID = GetQuestLogTitle(questIndex);
+			-- don't show non-scenario quests in scenarios
+			if ( not inScenario or GetQuestLogQuestType(questIndex) == QUEST_TYPE_SCENARIO ) then
+				validQuest = true;
+			end
+		end
+		if ( validQuest ) then
+			numValidQuests = numValidQuests + 1;
+			title, level, questTag, suggestedGroup, isHeader, isCollapsed, isComplete, isDaily, questID, startEvent = GetQuestLogTitle(questIndex);
+
+			if (GetSuperTrackedQuestID() == 0) then
+				SetSuperTrackedQuestID(questID);
+			end
+			
+			local questFailed = false;
 			local requiredMoney = GetQuestLogRequiredMoney(questIndex);			
 			numObjectives = GetNumQuestLeaderBoards(questIndex);
 			if ( isComplete and isComplete < 0 ) then
 				isComplete = false;
+				questFailed = true; 
 				mytitle = (title or "nil") .. " (" .. FAILED .. ")"; -- MOD
-			elseif ( numObjectives == 0 and playerMoney >= requiredMoney ) then
-				isComplete = true;
+			elseif ( numObjectives == 0 and playerMoney >= requiredMoney and not startEvent  ) then
+				isComplete = true; 
 				mytitle = (title or "nil") .. " (" .. COMPLETE .. ")"; -- MOD
 			else -- MOD
 				mytitle = title -- MOD
@@ -437,7 +476,7 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 			end			
 			
 			if ( filterOK ) then
-				local link, item, charges = GetQuestLogSpecialItemInfo(questIndex);
+				local link, item, charges, showItemWhenComplete  = GetQuestLogSpecialItemInfo(questIndex);
 				if ( requiredMoney > 0 ) then
 					WatchFrame.watchMoney = true;	-- for update event			
 				end
@@ -470,27 +509,28 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 				lastLine = questTitle;
 
 				if ( isComplete ) then
+					local showItem = item and showItemWhenComplete;
 					if (GetQuestLogIsAutoComplete(questIndex)) then
 						line = WatchFrame_GetQuestLine();
-						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, QUEST_WATCH_QUEST_COMPLETE, DASH_HIDE, nil, true);
+						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, QUEST_WATCH_QUEST_COMPLETE, DASH_HIDE, showItem, true);
 						lastLine = line;
 						line = WatchFrame_GetQuestLine();
-						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, QUEST_WATCH_CLICK_TO_COMPLETE, DASH_HIDE, nil, true);
+						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, QUEST_WATCH_CLICK_TO_COMPLETE, DASH_HIDE, showItem, true);
 						lastLine = line;
 					else
 						line = WatchFrame_GetQuestLine();
-						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, GetQuestLogCompletionText(questIndex), DASH_SHOW, nil, true);
+						WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, GetQuestLogCompletionText(questIndex), DASH_SHOW, showItem, true);
 						lastLine = line;
 					end
+				elseif ( questFailed ) then
+					line = WatchFrame_GetQuestLine();
+					WatchFrame_SetLine(line, lastLine, WATCHFRAMELINES_FONTSPACING, not IS_HEADER, FAILED, DASH_HIDE, nil, nil, false);
+					lastLine = line;
 				else
 					for j = 1, numObjectives do
-						text, objectiveType, finished = GetQuestLogLeaderBoard(j, questIndex);
-						if not text then text = ("(no info %d/%d-%d)"):format(j, numObjectives, questIndex) end -- MOD/BUG
-						
-						if ( not finished ) then
-							if (objectiveType ~= "spell") then
-								text = WatchFrame_ReverseQuestObjective(text);
-							end
+						text, objectiveType, finished = GetQuestLogLeaderBoard(j, questIndex);						
+						if ( not finished and text ) then
+							text = ReverseQuestObjective(text, objectiveType);
 							
 							bs = bl:getBuddyWatch(questID, j) -- MODIFIED
 							if bs then
@@ -526,7 +566,7 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 				table.insert(VISIBLE_WATCHES, numVisible, questIndex);		-- save the quest log index because watch order can change after dropdown is opened
 				-- turn on quest item
 				local itemButton;
-				if ( item and not isComplete ) then
+				if ( item and (not isComplete or showItemWhenComplete) ) then
 					watchItemIndex = watchItemIndex + 1;
 					itemButton = _G["WatchFrameItem"..watchItemIndex];
 					if ( not itemButton ) then
@@ -605,11 +645,13 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 	
 	WatchFrame_ReleaseUnusedQuestLines();
 
-	if ( selectedQuestId ) then
-		QuestPOI_SelectButtonByQuestId("WatchFrameLines", selectedQuestId, true);	
+	local trackedQuestID = GetSuperTrackedQuestID();
+	if ( trackedQuestID ) then
+		QuestPOIUpdateIcons();
+		QuestPOI_SelectButtonByQuestId("WatchFrameLines", trackedQuestID, true);	
 	end
 	
-	return lastLine or nextAnchor, maxWidth, numQuestWatches;	
+	return lastLine or nextAnchor, maxWidth, numValidQuests, 0;	
 end
 
 

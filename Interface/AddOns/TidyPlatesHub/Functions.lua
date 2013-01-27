@@ -166,6 +166,19 @@ end
 local function GetEnemyClass(name)
 	if LocalVars.AdvancedEnableUnitCache then 
 			return CachedUnitClass(name) end	
+end 
+
+local arenaUnitIDs = {"arena1", "arena2", "arena3", "arena4", "arena5"}
+
+local function GetArenaIndex(unitname)
+	if IsActiveBattlefieldArena() then
+		local unitid, name
+		for i = 1, #arenaUnitIDs do
+			unitid = arenaUnitIDs[i]
+			name = UnitName(unitid)
+			if name and (name == unit.name) then return unitid end
+		end
+	end
 end
 
 ------------------------------------------------------------------------------------
@@ -351,13 +364,13 @@ local function ColorFunctionDamage(unit)
 	else return LocalVars.ColorAttackingOthers end																	-- Safe
 end
 
-local function ColorFunctionTank(unit)
+local function ColorFunctionRawTank(unit)
 	
 	if unit.threatValue > 2 then 
 		return LocalVars.ColorAttackingMe							-- When player is solid target, ie. Safe
 	else	
-		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank		-- When unit is tanked by another
-		elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition				-- Transition
+		--if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank		-- When unit is tanked by another
+		if unit.threatValue == 2 then return LocalVars.ColorAggroTransition				-- Transition
 		else return LocalVars.ColorAttackingOthers end										-- Warning
 	end	
 end
@@ -367,14 +380,16 @@ local function ColorFunctionTankSwapColors(unit)
 	if unit.threatValue > 2 then 
 		return LocalVars.ColorAttackingOthers				-- When player is solid target		-- Safe
 	else
-		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank			-- When unit is tanked by another
-		elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition					-- Transition
+		--if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank			-- When unit is tanked by another
+		if unit.threatValue == 2 then return LocalVars.ColorAggroTransition					-- Transition
 		else return LocalVars.ColorAttackingMe end												-- Warning
 	end
 end
 
 local function ColorFunctionByThreatAutoDetect(unit)
 	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
+		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank end
+		
 		if TidyPlatesWidgets.IsTankingAuraActive then 
 			return ColorFunctionTankSwapColors(unit)
 		else return ColorFunctionDamage(unit) end
@@ -382,13 +397,14 @@ local function ColorFunctionByThreatAutoDetect(unit)
 	
 end
 
-local function ColorFunctionByThreat(unit)
+local function ColorFunctionByRawThreat(unit)
 	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
+		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank end
+		
 		if TidyPlatesWidgets.IsTankingAuraActive then 
-			return ColorFunctionTank(unit)
+			return ColorFunctionRawTank(unit)
 		else return ColorFunctionDamage(unit) end
 	end
-	
 end
 
 
@@ -405,7 +421,7 @@ end
 
 
 	
-local ColorFunctions = {DummyFunction, ColorFunctionByClassEnemy, ColorFunctionByThreatAutoDetect, ColorFunctionByReaction, ColorFunctionByLevelColor, ColorFunctionByRaidIcon, ColorFunctionByHealth, ColorFunctionByThreat, ColorFunctionByClassFriendly }
+local ColorFunctions = {DummyFunction, ColorFunctionByClassEnemy, ColorFunctionByThreatAutoDetect, ColorFunctionByReaction, ColorFunctionByLevelColor, ColorFunctionByRaidIcon, ColorFunctionByHealth, ColorFunctionByRawThreat, ColorFunctionByClassFriendly }
 
 local function HealthColorDelegate(unit)	
 	local color, class
@@ -420,7 +436,7 @@ local function HealthColorDelegate(unit)
 	if not color then color = ColorFunctions[LocalVars.ColorHealthBarMode](unit) end	
 
 	if color then 
-		return color.r, color.g, color.b
+		return color.r, color.g, color.b 
 	else return unit.red, unit.green, unit.blue end
 end
 
@@ -448,7 +464,7 @@ end
 local function WarningBorderFunctionByThreatTank(unit)
 	if unit.InCombatLockdown and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
 		if unit.threatValue < 3 then 
-			if IsTankedByAnotherTank(unit) then return else	return ColorFunctionTank(unit) end
+			if IsTankedByAnotherTank(unit) then return else	return ColorFunctionRawTank(unit) end
 		end
 	end
 end
@@ -583,7 +599,7 @@ local function NameColorByEnemyClass(unit)
 end
 
 local function NameColorByThreat(unit)
-	if InCombatLockdown() then return ColorFunctionByThreat(unit)
+	if InCombatLockdown() then return ColorFunctionByRawThreat(unit)
 	else return NameReactionColors[unit.reaction][unit.type] end
 end
 
@@ -1057,6 +1073,9 @@ end
 -- Widgets
 ------------------------------------------------------------------------------
 
+
+
+
 local function GetPrefixPriority(debuff)
 	local spellid = tostring(debuff.spellid)
 	local name = debuff.name
@@ -1272,6 +1291,10 @@ end
 -- Widget Activation
 ------------------------------------------------------------------------------
 
+
+-- testing HealerWidget
+--CreateHealerWidget = TidyPlatesWidgets.CreateHealerWidget
+
 local function OnInitializeWidgets(plate, configTable)
 	AddClassIcon(plate, ((LocalVars.ClassEnemyIcon or LocalVars.ClassPartyIcon)) , configTable.ClassIcon)
 	AddTotemIcon(plate,  LocalVars.WidgetsTotemIcon, configTable.TotemIcon)
@@ -1283,6 +1306,9 @@ local function OnInitializeWidgets(plate, configTable)
 		AddDebuffWidget(plate, LocalVars.WidgetsDebuff, configTable.DebuffWidgetPlus )	
 	else AddDebuffWidget(plate, LocalVars.WidgetsDebuff, configTable.DebuffWidget ) end
 	
+	--testing HealerWidget
+	--plate.widgets.HealerWidget = CreateHealerWidget(plate)
+	--plate.widgets.HealerWidget:SetPoint("CENTER", -50, 2) --0, 0)
 end
 
 local function OnContextUpdateDelegate(plate, unit)
@@ -1298,6 +1324,10 @@ local function OnUpdateDelegate(plate, unit)
 	if (LocalVars.ClassEnemyIcon and unit.reaction ~= "FRIENDLY") or (LocalVars.ClassPartyIcon and unit.reaction == "FRIENDLY") then Widgets.ClassIcon:Update(unit, LocalVars.ClassPartyIcon) end
 	if LocalVars.WidgetsTotemIcon then Widgets.TotemIcon:Update(unit)  end
 	if (LocalVars.WidgetsThreatIndicatorMode == 2) and LocalVars.WidgetsThreatIndicator then plate.widgets.ThreatWheelWidget:Update(unit) end 		-- Threat Wheel
+	
+	--testing HealerWidget
+	--Widgets.HealerWidget:Update(unit)
+	
 end
 
 -- Threat Functions List
@@ -1309,7 +1339,7 @@ local ThreatFunctionList = {
 	[AlphaFunctionByThreatLow] = true,
 	[AlphaFunctionByThreatAutoDetect] = true,
 	[ColorFunctionByThreatAutoDetect] = true,
-	[ColorFunctionByThreat] = true,
+	[ColorFunctionByRawThreat] = true,
 	[NameColorByThreat] = true,
 	[NameColorByThreatAutoDetect] = true,
 	[WarningBorderFunctionByThreatDamage] = true,
@@ -1331,6 +1361,9 @@ local function EnableWatchers()
 		TidyPlatesUtility:DisableHealerTrack()
 	end
 
+	-- Testing HealerWidget
+	--TidyPlatesUtility:EnableHealerTrack()		-- Force enable
+	
 	-- Aggro/Threat
 	if ThreatFunctionList[AlphaFunctionsUniversal[LocalVars.OpacitySpotlightMode]] or
 		ThreatFunctionList[ColorFunctions[LocalVars.ColorHealthBarMode]] or
@@ -1415,11 +1448,11 @@ end
 
 
 local function ApplyThemeCustomization(theme)
-	RaidClassColors = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 	EnableWatchers()
 	ApplyStyleCustomization(theme["Default"])
 	ApplyFontCustomization(theme["NameOnly"])
 	TidyPlates:ForceUpdate()
+	RaidClassColors = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 end
 	
 ---------------------------------------------

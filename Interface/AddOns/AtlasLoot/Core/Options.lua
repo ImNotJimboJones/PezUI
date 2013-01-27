@@ -1,4 +1,4 @@
--- $Id: Options.lua 4019 2012-11-30 07:45:33Z celellach $
+-- $Id: Options.lua 4045 2012-12-20 18:46:32Z lag123 $
 local AtlasLoot = _G.AtlasLoot
 --Invoke libraries
 local AL = LibStub("AceLocale-3.0"):GetLocale("AtlasLoot");
@@ -130,6 +130,19 @@ do
 										order = 60,
 										get = getOpt,
 										set = setOpt,
+										width = "full",
+									},
+									CurrentUpgradeLvl = {
+										type = "range",
+										name = AL["Upgrade Level:"],
+										--desc = ,
+										min = 0, max = 2, bigStep = 1,
+										get = getOpt,
+										set = function(info, value)
+											setOpt(info, value)
+											if AtlasLoot.RefreshLootPage then AtlasLoot:RefreshLootPage() end
+										end,
+										order = 70,
 										width = "full",
 									},
 								},
