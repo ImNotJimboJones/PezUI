@@ -1,6 +1,6 @@
 local addonName, vars = ...
 local L = vars.L
-RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 598 $", ".* (.*) .*"))
+RBS_svnrev["Config.lua"] = select(3,string.find("$Revision: 601 $", ".* (.*) .*"))
 
 local buttonoptions = {
 	enabledisable = L["Enable/disable buff check"],
@@ -2097,7 +2097,7 @@ local options = {
 				cauldrons = {
 					type = 'toggle',
 					name = L["Cauldron"],
-					desc = L["Announce to raid warning when a Cauldron is prepared"],
+					desc = L["Announce to raid warning when a %s is prepared"]:format(L["Cauldron"]),
 					order = 3,
 					get = function(info) return RaidBuffStatus.db.profile.cauldrons end,
 					set = function(info, v)
@@ -2117,7 +2117,7 @@ local options = {
 				refreshmenttable = {
 					type = 'toggle',
 					name = L["Refreshment Table"],
-					desc = L["Announce to raid warning when a Refreshment Table is prepared"],
+					desc = L["Announce to raid warning when a %s is prepared"]:format(L["Refreshment Table"]),
 					order = 5,
 					get = function(info) return RaidBuffStatus.db.profile.refreshmenttable end,
 					set = function(info, v)
@@ -2127,7 +2127,7 @@ local options = {
 				soulwell = {
 					type = 'toggle',
 					name = L["Soul Well"],
-					desc = L["Announce to raid warning when a Soul Well is prepared"],
+					desc = L["Announce to raid warning when a %s is prepared"]:format(L["Soul Well"]),
 					order = 6,
 					get = function(info) return RaidBuffStatus.db.profile.soulwell end,
 					set = function(info, v)
@@ -2137,11 +2137,21 @@ local options = {
 				repair = {
 					type = 'toggle',
 					name = L["Repair Bot"],
-					desc = L["Announce to raid warning when a Repair Bot is prepared"],
+					desc = L["Announce to raid warning when a %s is prepared"]:format(L["Repair Bot"]),
 					order = 7,
 					get = function(info) return RaidBuffStatus.db.profile.repair end,
 					set = function(info, v)
 						RaidBuffStatus.db.profile.repair = v
+					end,
+				},
+				bling = {
+					type = 'toggle',
+					name = L["Blingtron"],
+					desc = L["Announce to raid warning when a %s is prepared"]:format(L["Blingtron"]),
+					order = 7.5,
+					get = function(info) return RaidBuffStatus.db.profile.bling end,
+					set = function(info, v)
+						RaidBuffStatus.db.profile.bling = v
 					end,
 				},
 				wellautowhisper = {

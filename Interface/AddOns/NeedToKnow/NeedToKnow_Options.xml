@@ -639,6 +639,27 @@
                 </Scripts>
             </Slider>
 
+          <Slider name="$parentFontOutlineSlider" inherits="OptionsSliderTemplate">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parentFontSizeSlider" relativePoint="TOPRIGHT">
+                <Offset>
+                  <AbsDimension x="24"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnValueChanged>
+                NeedToKnow.ProfileSettings["FontOutline"] = value;
+                local str;
+                if     value == 0 then str = "None"    -- FIXME: Localization
+                elseif value == 1 then str = "Normal"  -- FIXME: Localization
+                else   str = "Heavy" end
+                _G[self:GetName().."Text"]:SetText("Font Outline: "..str); -- FIXME: LOCALIZATION
+                NeedToKnow.Update();
+              </OnValueChanged>
+            </Scripts>
+          </Slider>
+
             <Button name="$parentConfigModeButton" inherits="UIPanelButtonTemplate">
                 <Size>
                     <AbsDimension x="128" y="22"/>

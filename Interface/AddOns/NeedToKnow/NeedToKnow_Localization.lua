@@ -36,6 +36,7 @@ NEEDTOKNOW.ITEM_NAMES =
 
 -- Define defaults in enUS
     NEEDTOKNOW.ALTERNATE_POWER = "Alternate Power";
+    NEEDTOKNOW.COMBO_POINTS = "Combo Points";
     NEEDTOKNOW.BAR_TOOLTIP1 = "NeedToKnow";
     NEEDTOKNOW.BAR_TOOLTIP2 = "Right click bars to configure. More options in the Blizzard interface options menu. Type /needtoknow to lock and enable.";
 
@@ -102,6 +103,8 @@ NEEDTOKNOW.ITEM_NAMES =
     NEEDTOKNOW.UIPANEL_BARTEXTURE = "Bar texture";
     NEEDTOKNOW.UIPANEL_BARFONT = "Bar font";
     NEEDTOKNOW.UIPANEL_FONT = "Font";
+    NEEDTOKNOW.UIPANEL_FONT_OUTLINE = "Font Outline";
+
 
     NEEDTOKNOW.UIPANEL_PROFILES_SUBTEXT1 = "These options allow you to manage profiles.  Each profile is a complete NeedToKnow configuration for one talent spec.\nBy default, profiles are per-character (and have character: in front of their name.) Per-character profiles are only available to this character.  Profiles can be switched between per-character and per-account so that the same profile can be used by multiple characters on the same account.";
     NEEDTOKNOW.UIPANEL_CURRENTPRIMARY = "Current Primary Profile:";
@@ -344,7 +347,7 @@ NEEDTOKNOW.POWER_TYPES =
     RAGE,
     FOCUS,
     ENERGY,
-    NEEDTOKNOW.BARMENU_POWER_PRIMARY, -- LOCME
+    NEEDTOKNOW.BARMENU_POWER_PRIMARY,
     RUNES,
     RUNIC_POWER,
     SOUL_SHARDS,
@@ -352,10 +355,11 @@ NEEDTOKNOW.POWER_TYPES =
     HOLY_POWER,
     NEEDTOKNOW.ALTERNATE_POWER, -- index 10
     "Dark Force", -- Currently unused according to wowpedia
-    LIGHT_FORCE, -- Chi
+    CHI, -- Chi
     SHADOW_ORBS,
     BURNING_EMBERS,
     DEMONIC_FURY
 };
 NEEDTOKNOW.POWER_TYPES[0] = MANA
+NEEDTOKNOW.POWER_TYPES[-1] = NEEDTOKNOW.COMBO_POINTS
 

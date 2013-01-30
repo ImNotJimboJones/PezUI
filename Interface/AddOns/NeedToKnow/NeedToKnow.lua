@@ -110,7 +110,7 @@ m_scratch.bar_entry =
     }
 -- NEEDTOKNOW = {} is defined in the localization file, which must be loaded before this file
 
-NEEDTOKNOW.VERSION = "4.0.11"
+NEEDTOKNOW.VERSION = "4.0.12"
 local c_UPDATE_INTERVAL = 0.05
 local c_MAXBARS = 20
 
@@ -196,6 +196,7 @@ NEEDTOKNOW.PROFILE_DEFAULTS = {
     BarSpacing  = 3,
     BarPadding  = 3,
     FontSize    = 12,
+    FontOutline = 0,
 }
 
 NEEDTOKNOW.SHORTENINGS= {
@@ -253,6 +254,7 @@ NEEDTOKNOW.SHORTENINGS= {
     --BarSpacing  = "BSp",
     --BarPadding  = "BPd",
     --FontSize    = "FSz",
+    --FontOutline = "FOl",
 }
 
 NEEDTOKNOW.LENGTHENINGS= {
@@ -310,6 +312,7 @@ NEEDTOKNOW.LENGTHENINGS= {
     --BarSpacing  = "BSp",
     --BarPadding  = "BPd",
     --FontSize    = "FSz",
+    --FontOutline = "FOl";
 }
 
 -- -------------------
@@ -868,6 +871,17 @@ function NeedToKnow.ResetCharacter(bCreateSpecProfile)
 end
 
 
+function NeedToKnow.AllocateProfileKey()
+    local n=NeedToKnow_Globals.NextProfile or 1
+    while NeedToKnow_Profiles["G"..n] do
+        n = n+1
+    end
+    if ( NeedToKnow_Globals.NextProfile==null or n >= NeedToKnow_Globals.NextProfile ) then
+        NeedToKnow_Globals.NextProfile = n+1
+    end
+    return "G"..n;
+end
+
 function NeedToKnow.CreateProfile(settings, idxSpec, nameProfile)
     if not nameProfile then
         nameProfile = UnitName("player") .. "-"..GetRealmName() .. "." .. idxSpec
@@ -883,12 +897,7 @@ function NeedToKnow.CreateProfile(settings, idxSpec, nameProfile)
     end
 
     if not keyProfile then
-        local n=NeedToKnow_Globals.NextProfile or 1
-        while NeedToKnow_Profiles["G"..n] do
-            n = n+1
-        end
-        NeedToKnow_Globals.NextProfile = n+1
-        keyProfile = "G"..n
+        keyProfile = NeedToKnow.AllocateProfileKey()
     end
 
     if NeedToKnow_CharSettings.Profiles[keyProfile] then
@@ -1033,17 +1042,30 @@ function NeedToKnowLoader.SafeUpgrade()
         NeedToKnowLoader.Reset()
     end
 
+    local maxKey = 0
     for iS,vS in pairs(NeedToKnow_Globals.Profiles) do
         if vS.bUncompressed then
             NeedToKnow.CompressProfile(vS)
         end
-
+        local cur = tonumber(iS:sub(2))
+        if ( cur > maxKey ) then maxKey = cur end
         NeedToKnow_Profiles[iS] = vS
     end
     if NeedToKnow_CharSettings.Profiles then
         for iS,vS in pairs(NeedToKnow_CharSettings.Profiles) do
+            if ( NeedToKnow_Profiles[iS] ) then
+                print("NeedToKnow error encountered, both", vS.name, "and", NeedToKnow_Profiles[iS].name, "collided.  Some specs may be mapped to one that should have been mapped to the other.");
+                iS = NeedToKnow.AllocateProfileKey();
+            end
+            local cur = tonumber(iS:sub(2))
+            if ( cur > maxKey ) then maxKey = cur end
             NeedToKnow_Profiles[iS] = vS
         end
+    end
+
+    if ( not NeedToKnow_Globals.NextProfile or maxKey > NeedToKnow_Globals.NextProfile ) then
+        print("Warning, NeedToKnow forgot how many profiles it had allocated.  New account profiles may hiccup when switching characters.")
+        NeedToKnow_Globals.NextProfile = maxKey + 1
     end
 
      -- TODO: check the required members for existence and delete any corrupted profiles
@@ -1056,6 +1078,14 @@ function NeedToKnowLoader.SetPowerTypeList(player_CLASS)
     then
         table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
             { Setting = "4", MenuText = NEEDTOKNOW.POWER_TYPES[4] } ) 
+    end
+
+    -- -1 - Combo Points
+    if player_CLASS == "DRUID" or
+       player_CLASS == "ROGUE" 
+    then
+        table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
+        { Setting = "-1", MenuText = NEEDTOKNOW.COMBO_POINTS } )
     end
 
     -- 0 - Mana
@@ -1141,7 +1171,7 @@ function NeedToKnowLoader.SetPowerTypeList(player_CLASS)
     if player_CLASS == "MONK"
     then
     table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
-        { Setting = tostring(SPELL_POWER_LIGHT_FORCE), MenuText = LIGHT_FORCE } )
+        { Setting = tostring(SPELL_POWER_CHI), MenuText = CHI } )
     end
 
     -- 13 - Shadow Orbs for shadow priest
@@ -1150,7 +1180,7 @@ function NeedToKnowLoader.SetPowerTypeList(player_CLASS)
         table.insert(NeedToKnowRMB.BarMenu_SubMenus.PowerTypeList,
             { Setting = tostring(SPELL_POWER_SHADOW_ORBS), MenuText = SHADOW_ORBS } )
     end
-	
+
     -- 14 - Burning Embers for Destruction warlocks
     if player_CLASS == "WARLOCK"
     then
@@ -1423,8 +1453,17 @@ function NeedToKnow.Bar_Update(groupID, barID)
     end
     local fontPath = NeedToKnow.LSM:Fetch("font", NeedToKnow.ProfileSettings["BarFont"])
     if ( fontPath ) then
-        bar.text:SetFont(fontPath, NeedToKnow.ProfileSettings["FontSize"])
-        bar.time:SetFont(fontPath, NeedToKnow.ProfileSettings["FontSize"])
+        local ol = NeedToKnow.ProfileSettings["FontOutline"]
+        if ( ol == 0 ) then
+          ol = nil
+        elseif (ol == 1) then
+          ol = "OUTLINE"
+        else
+          ol = "THICKOUTLINE"
+        end
+
+        bar.text:SetFont(fontPath, NeedToKnow.ProfileSettings["FontSize"],ol)
+        bar.time:SetFont(fontPath, NeedToKnow.ProfileSettings["FontSize"],ol)
     end
     
     bar:SetWidth(groupSettings.Width)
@@ -1478,7 +1517,7 @@ function NeedToKnow.Bar_Update(groupID, barID)
             for barSpell in bar.auraName:gmatch("([^,]+)") do
                 iSpell = iSpell+1
                 barSpell = strtrim(barSpell)
-                local _, nDigits = barSpell:find("^%d+")
+                local _, nDigits = barSpell:find("^-?%d+")
                 if ( nDigits == barSpell:len() ) then
                     table.insert(bar.spells, { idxName=iSpell, id=tonumber(barSpell) } )
                 else
@@ -1647,8 +1686,12 @@ function NeedToKnow.SetScripts(bar)
     elseif ( "EQUIPSLOT" == bar.settings.BuffOrDebuff ) then
         bar:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
     elseif ( "POWER" == bar.settings.BuffOrDebuff ) then
-        bar:RegisterEvent("UNIT_POWER")
-        bar:RegisterEvent("UNIT_DISPLAYPOWER")
+        if bar.settings.AuraName == "-1" then
+          bar:RegisterEvent("UNIT_COMBO_POINTS")
+        else
+          bar:RegisterEvent("UNIT_POWER")
+          bar:RegisterEvent("UNIT_DISPLAYPOWER")
+        end
     elseif ( "USABLE" == bar.settings.BuffOrDebuff ) then
         bar:RegisterEvent("SPELL_UPDATE_USABLE")
     elseif ( "mhand" == bar.settings.Unit or "ohand" == bar.settings.Unit ) then
@@ -1661,21 +1704,21 @@ function NeedToKnow.SetScripts(bar)
         NeedToKnow.CheckCombatLogRegistration(bar)
     else
         bar:RegisterEvent("UNIT_AURA")
-        if ( bar.unit == "focus" ) then
-            bar:RegisterEvent("PLAYER_FOCUS_CHANGED")
-        elseif ( bar.unit == "target" ) then
-            bar:RegisterEvent("PLAYER_TARGET_CHANGED")
-        elseif ( bar.unit == "pet" ) then
-            bar:RegisterEvent("UNIT_PET")
-        elseif ( "lastraid" == bar.settings.Unit ) then
-            if ( not NeedToKnow.BarsForPSS ) then
-                NeedToKnow.BarsForPSS = {}
-            end
-            NeedToKnow.BarsForPSS[bar] = true
-            NeedToKnow.RegisterSpellcastSent()
-        end
     end
 
+    if ( bar.unit == "focus" ) then
+        bar:RegisterEvent("PLAYER_FOCUS_CHANGED")
+    elseif ( bar.unit == "target" ) then
+        bar:RegisterEvent("PLAYER_TARGET_CHANGED")
+    elseif ( bar.unit == "pet" ) then
+        bar:RegisterEvent("UNIT_PET")
+    elseif ( "lastraid" == bar.settings.Unit ) then
+        if ( not NeedToKnow.BarsForPSS ) then
+            NeedToKnow.BarsForPSS = {}
+        end
+        NeedToKnow.BarsForPSS[bar] = true
+        NeedToKnow.RegisterSpellcastSent()
+    end
     
     if bar.settings.bDetectExtends then
         local idx,entry
@@ -1713,6 +1756,7 @@ function NeedToKnow.ClearScripts(bar)
     bar:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     bar:UnregisterEvent("PLAYER_TOTEM_UPDATE")
     bar:UnregisterEvent("UNIT_AURA")
+    bar:UnregisterEvent("UNIT_COMBO_POINTS")
     bar:UnregisterEvent("UNIT_POWER")
     bar:UnregisterEvent("UNIT_DISPLAYPOWER")
     bar:UnregisterEvent("UNIT_INVENTORY_CHANGED")
@@ -1748,76 +1792,6 @@ function NeedToKnow.Bar_OnSizeChanged(self)
     if (self.bar2 and self.bar2.cur_value) then mfn_SetStatusBarValue(self, self.bar2, self.bar2.cur_value, self.bar1.cur_value) end
 end
 
-function NeedToKnow.Bar_OnEvent(self, event, unit, ...)
-    if ( event == "COMBAT_LOG_EVENT_UNFILTERED") then
-        local combatEvent = select(1, ...)
-
-        if ( c_AURAEVENTS[combatEvent] ) then
-            local guidTarget = select(7, ...)
-            if ( guidTarget == g_UnitGUID(self.unit) ) then
-                local idSpell, nameSpell = select(11, ...)
-                if (self.auraName:find(idSpell) or
-                     self.auraName:find(nameSpell)) 
-                then 
-                    mfn_Bar_AuraCheck(self)
-                end
-            end
-        elseif ( combatEvent == "UNIT_DIED" ) then
-            local guidDeceased = select(7, ...) 
-            if ( guidDeceased == UnitGUID(self.unit) ) then
-                mfn_Bar_AuraCheck(self)
-            end
-        end 
-    elseif ( event == "PLAYER_TOTEM_UPDATE"  ) or
-           ( event == "ACTIONBAR_UPDATE_COOLDOWN" ) or
-           ( event == "SPELL_UPDATE_COOLDOWN" ) or
-           ( event == "SPELL_UPDATE_USABLE" )  
-    then
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "UNIT_AURA" ) and ( unit == self.unit ) then
-        mfn_Bar_AuraCheck(self)
-    elseif ( (event == "UNIT_POWER") or (event == "UNIT_DISPLAYPOWER") ) and ( unit == self.unit ) then
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "UNIT_INVENTORY_CHANGED" and unit == "player" ) then
-        NeedToKnow.UpdateWeaponEnchants()
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "PLAYER_TARGET_CHANGED" ) or ( event == "PLAYER_FOCUS_CHANGED" ) then
-        if self.unit == "targettarget" then
-            NeedToKnow.CheckCombatLogRegistration(self)
-        end
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "UNIT_TARGET" and unit == "target" ) then 
-        if self.unit == "targettarget" then
-            NeedToKnow.CheckCombatLogRegistration(self)
-        end
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "UNIT_PET" and unit == "player" ) then
-        mfn_Bar_AuraCheck(self)
-    elseif ( event == "PLAYER_SPELLCAST_SUCCEEDED" ) then
-        local spellName, spellID, tgt = select(1,...)
-        local i,entry
-        for i,entry in ipairs(self.spells) do
-            if entry.id == spellID or entry.name == spellName then
-                self.unit = tgt or "unknown"
-                --trace("Updating",self:GetName(),"since it was recast on",self.unit)
-                mfn_Bar_AuraCheck(self)
-                break;
-            end
-        end
-    elseif ( event == "START_AUTOREPEAT_SPELL" ) then
-        self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
-    elseif ( event == "STOP_AUTOREPEAT_SPELL" ) then
-        self:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
-    elseif ( event == "UNIT_SPELLCAST_SUCCEEDED" ) then
-        local spell = select(1,...)
-        if ( self.settings.bAutoShot and unit == "player" and spell == c_AUTO_SHOT_NAME ) then
-            local interval = UnitRangedDamage("player")
-            self.tAutoShotCD = interval
-            self.tAutoShotStart = g_GetTime()
-            mfn_Bar_AuraCheck(self)
-        end
-    end
-end
 
 
 
@@ -2438,17 +2412,26 @@ end
 
 
 
--- Bar_AuraCheck helper for tracking usable gear based on the slot its in
--- rather than the equipment name
+-- Bar_AuraCheck helper for power and combo points.  The current
+-- amount is reported as the first tooltip number rather than 
+-- stacks since 1 stack doesn't get displayed normally
 mfn_AuraCheck_POWER = function (bar, bar_entry, all_stacks)
     local spellName, spellRank, spellIconPath
     local cpt = UnitPowerType(bar.unit)
     local pt = bar_entry.id
+
     if ( pt ) then
         if pt == 4 then pt = cpt end
 
-        local curPower = UnitPower(bar.unit, pt)
-        local maxPower = UnitPowerMax(bar.unit, pt)
+        local curPower, maxPower;
+        if ( pt == -1 ) then
+            curPower = GetComboPoints("player", bar.unit)
+            maxPower =  MAX_COMBO_POINTS
+        else
+            curPower = UnitPower(bar.unit, pt)
+            maxPower = UnitPowerMax(bar.unit, pt)
+        end
+
         if ( maxPower and maxPower > 0 and
              (not bar.settings.power_sole or pt == cpt) ) 
         then
@@ -2483,13 +2466,14 @@ mfn_AuraCheck_POWER = function (bar, bar_entry, all_stacks)
 
             mfn_AddInstanceToStacks(all_stacks, bar_entry, 
                    0,                                          -- duration
-                   NEEDTOKNOW.POWER_TYPES[pt],                   -- name
+                   NEEDTOKNOW.POWER_TYPES[pt],                 -- name
                    1,                                          -- count
-                   0,                                            -- expiration time
+                   0,                                          -- expiration time
                    nil,                                        -- icon path
                    bar.unit,                                   -- caster
                    curPower,                                   -- tooltip #1
-                   maxPower )                                  -- tooltip #2
+                   maxPower,                                   -- tooltip #2
+                   floor(curPower*1000/maxPower)/10 )          -- tooltip #3
         end
     end
 end
@@ -3074,5 +3058,102 @@ mfn_EnergyBar_OnUpdate = function(bar, elapsed)
             bar.ticking = false
             bar:SetScript("OnUpdate", nil)
         end
+    end
+end
+
+
+
+
+-- Define the event dispatching table.  Note, this comes last as the referenced 
+-- functions must already be declared.  Avoiding the re-evaluation of all that
+-- is one of the reasons this is an optimization!
+local fnAuraCheckIfUnitMatches = function(self, unit)
+    if ( unit == self.unit )  then
+        mfn_Bar_AuraCheck(self)
+    end
+end
+
+local fnAuraCheckIfUnitPlayer = function(self, unit)
+    if ( unit == "player" ) then
+        mfn_Bar_AuraCheck(self)
+    end
+end
+
+local EDT = {}
+EDT["COMBAT_LOG_EVENT_UNFILTERED"] = function(self, unit, ...)
+    local combatEvent = select(1, ...)
+
+    if ( c_AURAEVENTS[combatEvent] ) then
+        local guidTarget = select(7, ...)
+        if ( guidTarget == g_UnitGUID(self.unit) ) then
+            local idSpell, nameSpell = select(11, ...)
+            if (self.auraName:find(idSpell) or
+                    self.auraName:find(nameSpell)) 
+            then 
+                mfn_Bar_AuraCheck(self)
+            end
+        end
+    elseif ( combatEvent == "UNIT_DIED" ) then
+        local guidDeceased = select(7, ...) 
+        if ( guidDeceased == UnitGUID(self.unit) ) then
+            mfn_Bar_AuraCheck(self)
+        end
+    end 
+end
+EDT["PLAYER_TOTEM_UPDATE"] = mfn_Bar_AuraCheck
+EDT["ACTIONBAR_UPDATE_COOLDOWN"] = mfn_Bar_AuraCheck
+EDT["SPELL_UPDATE_COOLDOWN"] = mfn_Bar_AuraCheck
+EDT["SPELL_UPDATE_USABLE"] = mfn_Bar_AuraCheck
+EDT["UNIT_AURA"] = fnAuraCheckIfUnitMatches
+EDT["UNIT_POWER"] = fnAuraCheckIfUnitMatches
+EDT["UNIT_DISPLAYPOWER"] = fnAuraCheckIfUnitMatches
+EDT["UNIT_COMBO_POINTS"] = mfn_Bar_AuraCheck
+EDT["UNIT_INVENTORY_CHANGED"] = fnAuraCheckIfUnitPlayer
+EDT["PLAYER_TARGET_CHANGED"] = function(self, unit)
+    if self.unit == "targettarget" then
+        NeedToKnow.CheckCombatLogRegistration(self)
+    end
+    mfn_Bar_AuraCheck(self)
+end  
+EDT["PLAYER_FOCUS_CHANGED"] = EDT["PLAYER_TARGET_CHANGED"]
+EDT["UNIT_TARGET"] = function(self, unit)
+    if unit == "target" and self.unit == "targettarget" then
+        NeedToKnow.CheckCombatLogRegistration(self)
+    end
+    mfn_Bar_AuraCheck(self)
+end  
+EDT["UNIT_PET"] = fnAuraCheckIfUnitPlayer
+EDT["PLAYER_SPELLCAST_SUCCEEDED"] = function(self, unit, ...)
+    local spellName, spellID, tgt = select(1,...)
+    local i,entry
+    for i,entry in ipairs(self.spells) do
+        if entry.id == spellID or entry.name == spellName then
+            self.unit = tgt or "unknown"
+            --trace("Updating",self:GetName(),"since it was recast on",self.unit)
+            mfn_Bar_AuraCheck(self)
+            break;
+        end
+    end
+end
+EDT["START_AUTOREPEAT_SPELL"] = function(self, unit, ...)
+    self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+end
+EDT["STOP_AUTOREPEAT_SPELL"] = function(self, unit, ...)
+    self:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+end
+EDT["UNIT_SPELLCAST_SUCCEEDED"] = function(self, unit, ...)
+    local spell = select(1,...)
+    if ( self.settings.bAutoShot and unit == "player" and spell == c_AUTO_SHOT_NAME ) then
+        local interval = UnitRangedDamage("player")
+        self.tAutoShotCD = interval
+        self.tAutoShotStart = g_GetTime()
+        mfn_Bar_AuraCheck(self)
+    end
+end
+
+function NeedToKnow.Bar_OnEvent(self, event, unit, ...)
+    local fn = EDT[event]
+    if fn then 
+        fn(self, unit, ...)
     end
 end

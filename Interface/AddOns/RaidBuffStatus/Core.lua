@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 599 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 601 $", ".* (.*) .*"))
 
 local addon = RaidBuffStatus
 RaidBuffStatus.L = L
@@ -32,6 +32,7 @@ local nextcauldronannounce = 0
 local nexttableannounce = 0
 local nextsoulannounce = 0
 local nextrepairannounce = 0
+local nextblingannounce = 0
 local nextdurability = 0
 local nextitemcheck = 0
 local currentsheep = {}
@@ -512,6 +513,7 @@ function RaidBuffStatus:OnInitialize()
 		refreshmenttable = true,
 		soulwell = true,
 		repair = true,
+		bling = true,
 		antispam = true,
 		nonleadspeak = false,
 		feastautowhisper = true,
@@ -2580,6 +2582,8 @@ function RaidBuffStatus:DelayedEnable()
 	RaidBuffStatus:RegisterEvent("GROUP_ROSTER_UPDATE", "JoinedPartyRaidChanged")
 	RaidBuffStatus:RegisterEvent("PLAYER_ENTERING_WORLD", "JoinedPartyRaidChanged")
 	RaidBuffStatus:RegisterEvent("PLAYER_REGEN_DISABLED", "EnteringCombat")
+	RaidBuffStatus:RegisterEvent("PET_BATTLE_OPENING_START", "EnteringPetCombat")
+	RaidBuffStatus:RegisterEvent("PET_BATTLE_CLOSE", "LeftPetCombat")
 	RaidBuffStatus:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "COMBAT_LOG_EVENT_UNFILTERED")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_ADDON", "CHAT_MSG_ADDON")
 	RaidBuffStatus:RegisterEvent("CHAT_MSG_RAID_WARNING",	 	"CHAT_MSG_RAID_WARNING")
@@ -2626,13 +2630,13 @@ function RaidBuffStatus:OnDisable()
 	RaidBuffStatus.oRAEvent:UnRegisterForTankEvent()
 end
 
-function RaidBuffStatus:EnteringCombat()
+function RaidBuffStatus:EnteringCombat(force)
 	incombat = true
 	if (InCombatLockdown()) then
 		return
 	end
 	RaidBuffStatus.lasttobuf = ""
-	if RaidBuffStatus.db.profile.HideInCombat then
+	if RaidBuffStatus.db.profile.HideInCombat or force then
 		if RaidBuffStatus.frame:IsVisible() then
 			dashwasdisplayed = true
 			RaidBuffStatus:HideReportFrame()
@@ -2645,16 +2649,23 @@ function RaidBuffStatus:EnteringCombat()
 	RaidBuffStatus:UpdateButtons()
 end
 
-function RaidBuffStatus:LeftCombat()
+function RaidBuffStatus:LeftCombat(force)
 	if not RaidBuffStatus.delayedenablecalled then
 		RaidBuffStatus:DelayedEnable()
 	end
 	incombat = false
 	RaidBuffStatus:AddBuffButtons()
 	RaidBuffStatus:UpdateButtons()
-	if RaidBuffStatus.db.profile.HideInCombat and dashwasdisplayed then
+	if (force or RaidBuffStatus.db.profile.HideInCombat) and dashwasdisplayed then
 		RaidBuffStatus:ShowReportFrame()	
 	end
+end
+
+function RaidBuffStatus:EnteringPetCombat()
+	RaidBuffStatus:EnteringCombat(true)
+end
+function RaidBuffStatus:LeftPetCombat()
+	RaidBuffStatus:LeftCombat(true)
 end
 
 function RaidBuffStatus:Tooltip(self, title, list, tlist, blist, slist, pallyblessingsmessagelist, itemcountlist, unknownlist, kingsbuffer, mightbuffer, gotitlist, zonelist, itemlist)
@@ -3238,6 +3249,8 @@ function RaidBuffStatus:COMBAT_LOG_EVENT_UNFILTERED(event, timestamp, subevent, 
 			elseif subevent == "SPELL_CAST_SUCCESS" then
 				if spellID == 67826 or spellID == 22700 or spellID == 44389 or spellID == 54711 then -- Jeeves, Field Repair Bot 74A, Field Repair Bot 110G, Scrapbot
 					RaidBuffStatus:Announces("Repair", srcname, nil, spellID)
+				elseif spellID == 126459 then
+					RaidBuffStatus:Announces("Blingtron", srcname, nil, spellID)
 				end
 			end
 	end
@@ -4027,6 +4040,20 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 			end
 		end
 	end
+	if RaidBuffStatus.db.profile.bling then
+		if message == "Blingtron" then
+			if GetTime() > nextblingannounce and RaidBuffStatus:GetUnitFromName(who) then
+				msg = who .. L[" has set us up a Blingtron"]
+				nextblingannounce = GetTime() + 15
+				RaidBuffStatus:ScheduleTimer(function()
+					RaidBuffStatus:Announces("BlingtronExpiring", who)
+				end, 540)
+			end
+			RaidBuffStatus:PingMinimap(who)
+		elseif message == "BlingtronExpiring" and not incombat and not isdead then
+			msg = L["Blingtron about to expire!"]
+		end
+	end
 	if not msg or msg == "" then
 		return
 	end
@@ -4062,6 +4089,9 @@ function RaidBuffStatus:CHAT_MSG_RAID_WARNING(event, message, who)
 	elseif message:find(L[" has set us up a Repair Bot"]) then
 		RaidBuffStatus:Debug("Bot warning detected.")
 		nextrepairannounce = GetTime() + 15
+	elseif message:find(L[" has set us up a Blingtron"]) then
+		RaidBuffStatus:Debug("Bling warning detected.")
+		nextblingannounce = GetTime() + 15
 	else
 		local m = message:match(feastpat)
 		if m then

@@ -1,8 +1,8 @@
 ## Interface: 50100
 ## Title: Thnan's Mod - Battle Pets
-## Notes: Adds quality information to wild pet tooltips and pet journal confirmation dialogs
+## Notes: Adds quality and level information to pet tooltips and pet journal confirmation dialogs
 ## Author: Thnan (Jaedenar US-A)
-## Version: 1.2.0
+## Version: 1.3.0
 
 ## Dependencies: ThnanMod
 

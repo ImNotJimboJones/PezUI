@@ -2,7 +2,7 @@
 ## Title: Thnan's Mod - Farm
 ## Notes: Adds a farming window to the UI.
 ## Author: Thnan (Jaedenar US-A)
-## Version: 1.2.2
+## Version: 1.3.0
 
 ## Dependencies: ThnanMod
 

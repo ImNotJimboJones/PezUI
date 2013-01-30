@@ -1,8 +1,17 @@
 Thnan's Mod
 
-A framework for various features. See each plugin's readme for information and version changes.
+A framework for various features. See each plugin's readme for more information.
 
 VERSION CHANGES:
+
+3.3.0:
+
+- Fixed issue where time until daily quest reset was sometimes incorrect.
+- Fixed issue where daily reset config setting would set itself to 11.
+- Fixed issue causing excessive memory usage in time functions.
+- Added features to Battle Pets plugin.
+- Bug fixes in Farm plugin.
+- Added features to Farm plugin.
 
 3.2.2:
 

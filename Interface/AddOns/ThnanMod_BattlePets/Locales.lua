@@ -6,8 +6,10 @@ local L = addon.L;
 L.slashCmdTag = "pets";
 L.caught = "Best Quality: %s"; -- %s = pet rarity name
 L.alsoCaught = "Also Caught: %s"; -- %s = pet rarity name
+L.alsoCollected = "Also Collected: %s"; -- %s = pet rarity name
 L.caughtLevel = "(lvl %d)"; -- %d = level
 L.notCaught = "None Captured";
+L.notCollected = "None Collected";
 L.confirmationDialogPetInfoString = "%s (%s, lvl %d)"; -- first %s = pet name, second %s = pet rarity, %d = level
 
 L.pluginName = "Battle Pets";
@@ -20,6 +22,8 @@ L.levelInBattleCheckBoxLabel = "Show pet level in battle tooltips";
 L.levelInBattleCheckBoxTooltip = "Enabling this option will cause battle tooltips to include the level of the highest rarity pet";
 L.levelInMinimapCheckBoxLabel = "Show pet level in minimap tooltips";
 L.levelInMinimapCheckBoxTooltip = "Enabling this option will cause minimap tooltips to include the level of the highest rarity pet";
+L.levelInItemsCheckBoxLabel = "Show pet level in item tooltips";
+L.levelInItemsCheckBoxTooltip = "Enabling this option will cause item tooltips to include the level of the highest rarity pet";
 L.colorReleaseDialogCheckBoxLabel = "Color release dialog text";
 L.colorReleaseDialogCheckBoxTooltip = "This option causes rarity and level info for the pet being released to appear in the release dialog";
 L.showAdditionalPetsCheckBoxLabel = "Show Additional Pets";
@@ -35,8 +39,10 @@ if (locale == "<locale code>") then
 	L.slashCmdTag = "pets";
 	L.caught = "Best Quality: %s"; -- %s = pet rarity name
 	L.alsoCaught = "Also Caught: %s"; -- %s = pet rarity name
+	L.alsoCollected = "Also Collected: %s"; -- %s = pet rarity name
 	L.caughtLevel = "(lvl %d)"; -- %d = level
 	L.notCaught = "None Captured";
+	L.notCollected = "None Collected";
 	L.confirmationDialogPetInfoString = "%s (%s, lvl %d)"; -- first %s = pet name, second %s = pet rarity, %d = level
 	
 	L.pluginName = "Battle Pets";
@@ -49,6 +55,8 @@ if (locale == "<locale code>") then
 	L.levelInBattleCheckBoxTooltip = "Enabling this option will cause battle tooltips to include the level of the highest rarity pet";
 	L.levelInMinimapCheckBoxLabel = "Show pet level in minimap tooltips";
 	L.levelInMinimapCheckBoxTooltip = "Enabling this option will cause minimap tooltips to include the level of the highest rarity pet";
+	L.levelInItemsCheckBoxLabel = "Show pet level in item tooltips";
+	L.levelInItemsCheckBoxTooltip = "Enabling this option will cause item tooltips to include the level of the highest rarity pet";
 	L.colorReleaseDialogCheckBoxLabel = "Color release dialog text";
 	L.colorReleaseDialogCheckBoxTooltip = "This option causes rarity and level info for the pet being released to appear in the release dialog";
 	L.showAdditionalPetsCheckBoxLabel = "Show Additional Pets";

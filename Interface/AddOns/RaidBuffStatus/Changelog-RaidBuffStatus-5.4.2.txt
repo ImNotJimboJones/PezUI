@@ -1,9 +1,18 @@
 ------------------------------------------------------------------------
-r600 | oscarucb | 2013-01-22 13:12:22 +0000 (Tue, 22 Jan 2013) | 1 line
+r602 | oscarucb | 2013-01-28 10:40:28 +0000 (Mon, 28 Jan 2013) | 1 line
 Changed paths:
-   A /tags/5.4.1 (from /trunk:599)
+   A /tags/5.4.2 (from /trunk:601)
 
-Tagging as 5.4.1
+Tagging as 5.4.2
+------------------------------------------------------------------------
+r601 | oscarucb | 2013-01-26 22:36:23 +0000 (Sat, 26 Jan 2013) | 3 lines
+Changed paths:
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+autohide dashboard during pet battles
+add an option to announce Blingtron
+
 ------------------------------------------------------------------------
 r599 | oscarucb | 2013-01-19 23:18:55 +0000 (Sat, 19 Jan 2013) | 2 lines
 Changed paths:
@@ -50,13 +59,5 @@ Changed paths:
    M /trunk/Core.lua
 
 minor fix to last
-
-------------------------------------------------------------------------
-r591 | oscarucb | 2012-12-21 23:29:55 +0000 (Fri, 21 Dec 2012) | 2 lines
-Changed paths:
-   M /trunk/Config.lua
-   M /trunk/Core.lua
-
-ticket 373: fix "not in a raid" errors from addon comms
 
 ------------------------------------------------------------------------

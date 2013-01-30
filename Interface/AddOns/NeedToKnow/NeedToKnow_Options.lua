@@ -255,6 +255,7 @@ function NeedToKnowOptions.UIPanel_Appearance_Update()
     local barSpacingSlider = _G[panelName.."BarSpacingSlider"];
     local barPaddingSlider = _G[panelName.."BarPaddingSlider"];
     local fontSizeSlider = _G[panelName.."FontSizeSlider"];
+    local fontOutlineSlider = _G[panelName.."FontOutlineSlider"];
 
     -- Mimic the behavior of the context menu, and force the alpha to one in the swatch
     local r,g,b = unpack(settings.BkgdColor);
@@ -269,6 +270,9 @@ function NeedToKnowOptions.UIPanel_Appearance_Update()
     fontSizeSlider:SetMinMaxValues(5,20);
     fontSizeSlider:SetValue(settings.FontSize);
     fontSizeSlider:SetValueStep(0.5);
+    fontOutlineSlider:SetMinMaxValues(0,2);
+    fontOutlineSlider:SetValue(settings.FontOutline);
+    fontOutlineSlider:SetValueStep(1);
 
     NeedToKnowOptions.UpdateBarTextureDropDown(_G[panelName.."Textures"]);
     NeedToKnowOptions.UpdateBarFontDropDown(_G[panelName.."Fonts"]);
@@ -341,7 +345,7 @@ function NeedToKnowOptions.RebuildProfileList(profilePanel)
             n = n + 1
             local profName
             if NeedToKnow_Globals.Profiles[profKey] == rProfile then
-                profName = 'Account: '..rProfile.name -- LOCME
+                profName = 'Account: '..rProfile.name -- FIXME Localization
             else
                 profName = 'Character: '..rProfile.name -- Fixme: Character-Server:
             end

@@ -17,6 +17,7 @@ L.forecastSeedNoInfoTooltip = "No forecast information available for today's see
 L.forecastCropButtonTooltip = "If you harvest this crop today, you will get more than usual";
 L.forecastCropNoInfoTooltip = "No forecast information available for today's crop. You should have talked to Jogu yesterday!";
 L.farmWindowShowInCombatError = "Sorry, can't do that in combat. Try again later!";
+L.portalButtonNoFactionText = "Sorry, you can't get off the Wandering Isle that easily!";
 
 L.pluginName = "Farm";
 L.pluginDescription = "Adds a button panel for farming tasks.\n\nThis config panel can be accessed directly by typing /ThnanMod farm.\nThe tool panel can be shown at any time by typing /ThnanMod farm show.";
@@ -37,12 +38,12 @@ L.dropOnLeavingFarmCheckBoxTooltip = "This option will make you drop all the far
 
 
 L.sunsongRanchName = "Sunsong Ranch";
-L.joguPredictsGreenCabbage = "Oooh... ooooh! My senses are tingling! I see... huge Green Cabbages in your future."; -- unconfirmed
+L.joguPredictsGreenCabbage = "Oooh... ooooh! My shenses are tingling! I see... huge Green Cabbages in your future.";
 L.joguPredictsScallion = "Have I ever told you that I hate Scallions? Hate 'em!\n\n<Jogu lets out a loud belch.>\n\nUnfortunately for me, they're going to be in high season tomorrow.";
-L.joguPredictsRedBlossomLeek = "Shpring for a leek, and you might get two."; -- unconfirmed
-L.joguPredictsWhiteTurnip = "Fields of white turnips. Raw and shipicy!"; -- unconfirmed
-L.joguPredictsWitchberry = "Which berries should you plant? Witchberries, of course!"; -- unconfirmed
-L.joguPredictsJuicycrunchCarrot = "You ever heard of a juicycrunch carrot? They'll never be juicier than tomorrow."; -- unconfirmed
+L.joguPredictsRedBlossomLeek = "Shpring for a leek, and you might get two.";
+L.joguPredictsWhiteTurnip = "Fields of white turnips. Raw and shpicy!"; -- unconfirmed
+L.joguPredictsWitchberry = "Which berries should you plant? Witchberries, of course!";
+L.joguPredictsJuicycrunchCarrot = "You ever heard of a juishycrunch carrot? They'll never be juisher than tomorrow.";
 L.joguPredictsMoguPumpkin = "Pumpkins! It'sh gonna be huge, gigantic pumpkins!";
 L.joguPredictsPinkTurnip = "I'm seeing Pink Turnipsh in your future.";
 L.joguPredictsJadeSquash = "Jade Squash grow the color of milky jade. Conditionsh will be perfect tomorrow for growing thish vegetable... I think.";

@@ -57,46 +57,52 @@ function time:rectifyDate(day, month, year)
 	return day, month, year;
 end
 function time:timeUntilDailyReset()
-	local now = date("!*t");
-	local resetHours = (24 + configValues.dailyResetTime) - now.hour;
-	if resetHours > 23 then
-		resetHours = resetHours - 24;
-	end
+	local nowHour = tonumber(date("!%H"));
+	local nowMin = tonumber(date("!%M"));
+	local resetHours = (24 + configValues.dailyResetTime) - nowHour;
 	local resetMinutes = 0;
-	if (now.min > 0) then
+	if (nowMin > 0) then
 		resetHours = resetHours - 1;
-		resetMinutes = 60 - now.min;
+		resetMinutes = 60 - nowMin;
+	end
+	if resetHours > 24 then
+		resetHours = resetHours - 24;
+	elseif resetHours == 24  and resetMinutes > 0 then
+		resetHours = 0;
 	end
 	return resetHours, resetMinutes;
 end
 function time:currentDailyDate()
-	local now = date("!*t");
+	local nowYear = tonumber(date("!%Y"));
+	local nowMonth = tonumber(date("!%m"));
+	local nowDay = tonumber(date("!%d"));
+	local nowHour = tonumber(date("!%H"));
+	local nowMin = tonumber(date("!%M"));
 	local resetHours, resetMinutes = time:timeUntilDailyReset();
-	configValues.dailyResetTime = 11;
 	
 	if configValues.dailyResetTime > 12 then
 		if resetHours < configValues.dailyResetTime then
-			return now.day, now.month, now.year;
+			return nowDay, nowMonth, nowYear;
 		elseif resetHours == configValues.dailyResetTime then
 			if resetMinutes == 0 then
-				return now.day, now.month, now.year;
+				return nowDay, nowMonth, nowYear;
 			else
-				return time:rectifyDate(now.day + 1, now.month, now.year);
+				return time:rectifyDate(nowDay + 1, nowMonth, nowYear);
 			end
 		else
-			return time:rectifyDate(now.day + 1, now.month, now.year);
+			return time:rectifyDate(nowDay + 1, nowMonth, nowYear);
 		end
 	else
 		if resetHours < configValues.dailyResetTime then
-			return time:rectifyDate(now.day - 1, now.month, now.year);
+			return time:rectifyDate(nowDay - 1, nowMonth, nowYear);
 		elseif resetHours == configValues.dailyResetTime then
 			if resetMinutes == 0 then
-				return time:rectifyDate(now.day - 1, now.month, now.year);
+				return time:rectifyDate(nowDay - 1, nowMonth, nowYear);
 			else
-				return now.day, now.month, now.year;
+				return nowDay, nowMonth, nowYear;
 			end
 		else
-			return now.day, now.month, now.year;
+			return nowDay, nowMonth, nowYear;
 		end
 	end
 end

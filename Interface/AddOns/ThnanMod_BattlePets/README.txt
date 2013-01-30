@@ -1,8 +1,17 @@
 Thnan's Mod - Battle Pets
 
-Adds a line to wild pet tooltips showing the highest rarity pet of its type that you own.
+This module adds a tooltip line to wild battle pets, items that teach you pets, and caged pets, telling you the highest rarity version you own of that pet type, and optionally, its level. This line appears when mousing over a pet in the world, on the minimap and in battle with it.
+The module also adds rarity and level information to the release pet confirmation dialog.
+The options to include the pet level in the tooltips cause the level of the highest quality pet to be displayed, not the highest level pet overall. For example, if you have a level 15 rare squirrel, and a level 20 uncommon squirrel, the tooltip will say level 15.
 
 VERSION CHANGES:
+
+1.3.0:
+
+- Hooked trigger for world tooltips to GameTooltip:OnTooltipSetUnit instead of catching UPDATE_MOUSEOVER_UNIT.
+- Added tooltip lines to pet items.
+- Added tooltip lines to caged pets.
+- Cleaned up the appearance of battle tooltips.
 
 1.2.0:
 

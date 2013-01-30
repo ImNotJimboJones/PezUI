@@ -19,7 +19,7 @@ end
 local farmWindow = CreateFrame("Frame", "farmWindow", UIParent, "BasicFrameTemplate");
 farmWindow:SetPoint("CENTER");
 farmWindow:SetWidth((7*36) + (8*5) + 2);
-farmWindow:SetHeight((5*36) + (6*5) + 23);
+farmWindow:SetHeight((6*36) + (7*5) + 23);
 farmWindow:SetMovable(true);
 farmWindow:EnableMouse(true);
 farmWindow:RegisterForDrag("LeftButton");
@@ -88,7 +88,7 @@ local function seedButton_OnEnter_load(self)
 end
 local function seedButton_setMacroText(self)
 	if tilledSoilName and self.itemName then
-		self:SetAttribute("macrotext", "/tar "..tilledSoilName.."\n/use "..self.itemName.."\n/targetlasttarget");
+		self:SetAttribute("macrotext", "/targetexact "..tilledSoilName.."\n/use "..self.itemName.."\n/targetlasttarget");
 	end
 end
 local function seedButton_loadItem(self)
@@ -163,8 +163,60 @@ local function toolButton_dropTool(self)
 	end
 end
 
+local noFactionIcon = "Interface\\BUTTONS\\UI-GroupLoot-Pass-Down";
+local function portalButton_OnEnter_noID(self)
+	GameTooltip:SetOwner(farmWindow);
+	GameTooltip:ClearLines();
+	GameTooltip:AddLine(L.portalButtonNoFactionText, 0, 1, 1, true);
+	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
+	GameTooltip:Show();
+end
+local function portalButton_OnEvent_noID(self, evt)
+	local faction = UnitFactionGroup("player");
+	if faction == "Alliance" then
+		self.itemID = self.allianceID;
+	elseif faction == "Horde" then
+		self.itemID = self.hordeID;
+	end
+	self.loadItem = toolButton_loadItem;
+	self:UnregisterEvent("NEUTRAL_FACTION_SELECT_RESULT");
+	self:SetScript("OnEvent", farmButton_OnEvent);
+	self:RegisterEvent("BAG_UPDATE");
+	self:SetScript("OnEnter", farmButton_OnEnter);
+	if not self:loadItem() then
+		self:SetScript("OnEvent", farmButton_OnEvent_unloaded);
+		self:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+	end
+	self:updateCount();
+end
+local function portalButton_loadItem(self)
+	local faction = UnitFactionGroup("player");
+	if faction == "Alliance" then
+		self.itemID = self.allianceID;
+	elseif faction == "Horde" then
+		self.itemID = self.hordeID;
+	end
+
+	if not self.itemID then
+		self.icon:SetTexture(noFactionIcon);
+		self:SetScript("OnEnter", portalButton_OnEnter_noID);
+		self:UnregisterEvent("BAG_UPDATE");
+		self:SetScript("OnEvent", portalButton_OnEvent_noID);
+		self:RegisterEvent("NEUTRAL_FACTION_SELECT_RESULT");
+		ThnanMod:output("no ID");
+		return true;
+	else
+		return toolButton_loadItem(self);
+	end
+end
+local function portalButton_updateCount(self)
+	if self.itemID then
+		seedButton_updateCount(self);
+	end
+end
+
 local buttonCount = 0;
-local function createFarmButton(itemID, buttonType)
+local function createFarmButton(itemID, buttonType, allianceID, hordeID)
 	local button = CreateFrame("Button", "FRMButton"..buttonCount, farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
 	buttonCount = buttonCount + 1;
 	
@@ -188,13 +240,20 @@ local function createFarmButton(itemID, buttonType)
 		button:SetAttribute("type2", "dropTool");
 		button.loadItem = toolButton_loadItem;
 		button.updateCount = toolButton_updateCount;
+	elseif buttonType == "portal" then
+		button:SetAttribute("type", "item");
+		button.allianceID = allianceID;
+		button.hordeID = hordeID;
+		button.loadItem = portalButton_loadItem;
+		button.updateCount = portalButton_updateCount;
 	end
 	
+	button:RegisterEvent("BAG_UPDATE");
 	if not button:loadItem() then
 		button:SetScript("OnEvent", farmButton_OnEvent_unloaded);
 		button:RegisterEvent("GET_ITEM_INFO_RECEIVED");
 	end
-	button:RegisterEvent("BAG_UPDATE");
+	button:updateCount();
 	
 	return button;
 end
@@ -224,6 +283,7 @@ local springBlossomButton = createFarmButton(85268, "seed");
 local winterBlossomButton = createFarmButton(85269, "seed");
 
 local ominousSeedButton = createFarmButton(85219, "seed");
+local unstableShardButton = createFarmButton(91806, "seed");
 
 -- create tool buttons
 
@@ -232,13 +292,20 @@ local bugSprayerButton = createFarmButton(80513, "tool");
 local shovelButton = createFarmButton(89880, "tool");
 local plowButton = createFarmButton(89815, "tool");
 
+-- create portal buttons
+
+local stormgrimmarButton = createFarmButton(nil, "portal", 91860, 91850);
+local ironbluffButton = createFarmButton(nil, "portal", 91864, 91861);
+local darnacityButton = createFarmButton(nil, "portal", 91865, 91862);
+local exomoonButton = createFarmButton(nil, "portal", 91866, 91863);
+
 --[[ button placement ]]--
 
 -- define row and column values for TOPLEFT corners
 
 local col1, col2, col3, col4, col5, col6, col7 = 5, 46, 87, 128, 169, 210, 251;
 local halfCol = 20;
-local row1, row2, row3, row4, row5 = -28, -69, -110, -151, -192;
+local row1, row2, row3, row4, row5, row6 = -28, -69, -110, -151, -192, -233;
 
 -- place seed buttons
 
@@ -247,6 +314,7 @@ scallionButton:SetPoint("TOPLEFT", col1, row2);
 redBlossomLeekButton:SetPoint("TOPLEFT", col1, row3);
 whiteTurnipButton:SetPoint("TOPLEFT", col1, row4);
 witchberryButton:SetPoint("TOPLEFT", col1, row5);
+unstableShardButton:SetPoint("TOPLEFT", col1, row6);
 
 juicycrunchCarrotButton:SetPoint("TOPLEFT", col2, row1);
 moguPumpkinButton:SetPoint("TOPLEFT", col2, row2);
@@ -257,14 +325,14 @@ stripedMelonButton:SetPoint("TOPLEFT", col2, row5);
 magebulbButton:SetPoint("TOPLEFT", col6, row1);
 snakerootButton:SetPoint("TOPLEFT", col6, row2);
 songbellButton:SetPoint("TOPLEFT", col6, row3);
-autumnBlossomButton:SetPoint("TOPLEFT", col6, row4);
+autumnBlossomButton:SetPoint("TOPLEFT", col6 + halfCol, row4);
 winterBlossomButton:SetPoint("TOPLEFT", col6, row5);
 
 enigmaButton:SetPoint("TOPLEFT", col7, row1);
 raptorleafButton:SetPoint("TOPLEFT", col7, row2);
 windshearCactusButton:SetPoint("TOPLEFT", col7, row3);
-springBlossomButton:SetPoint("TOPLEFT", col7, row4);
-ominousSeedButton:SetPoint("TOPLEFT", col7, row5);
+springBlossomButton:SetPoint("TOPLEFT", col7, row5);
+ominousSeedButton:SetPoint("TOPLEFT", col7, row6);
 
 -- place tool buttons
 
@@ -272,6 +340,13 @@ wateringCanButton:SetPoint("TOPLEFT", col3 + halfCol, row1);
 bugSprayerButton:SetPoint("TOPLEFT", col4 + halfCol, row1);
 shovelButton:SetPoint("TOPLEFT", col3 + halfCol, row2);
 plowButton:SetPoint("TOPLEFT", col4 + halfCol, row2);
+
+-- place portal buttons
+
+stormgrimmarButton:SetPoint("TOPLEFT", col2 + halfCol, row6);
+ironbluffButton:SetPoint("TOPLEFT", col3 + halfCol, row6);
+darnacityButton:SetPoint("TOPLEFT", col4 + halfCol, row6);
+exomoonButton:SetPoint("TOPLEFT", col5 + halfCol, row6);
 
 --[[ grow check ]]--
 
@@ -470,6 +545,9 @@ local growCheckIDs = {
 	66173, -- Tree
 	-- Terrible Turnip
 	66161, -- Turnip
+	-- Portal Shard
+	67446, -- Unstable
+	67486, -- Stable
 };
 local extraGrowCheckButtons = {};
 local function getGrowCheckButton(index)
@@ -548,7 +626,7 @@ local inventoryIDs = {
 	89329, -- striped melon
 	85217, -- magebulb
 	85215, -- snakeroot
-	89202, -- songbell
+	89233, -- songbell
 	85216, -- enigma
 	89202, -- raptorleaf
 	89197, -- windshear cactus
@@ -556,11 +634,21 @@ local inventoryIDs = {
 	85268, -- spring blossom
 	85269, -- winter blossom
 	85219, -- omminous seed
+	91806, -- unstable portal shard
 	-- tools
 	79104, -- watering can
 	80513, -- bug sprayer
 	89880, -- shovel
 	89815, -- plow
+	-- portals
+	91860, -- Stormwind
+	91864, -- Ironforge
+	91865, -- Darnassus
+	91866, -- Exodar
+	91850, -- Orgrimmar
+	91861, -- Thunder Bluff
+	91862, -- Undercity
+	91863, -- Silvermoon
 };
 local function hasItems()
 	if not config.hideWhenEmpty then
@@ -632,7 +720,7 @@ farmWindow.CloseButton:HookScript("OnClick", farmWindowCloseButtonClicked);
 
 local forecastLabel = farmWindow:CreateFontString("farmWindowForecastLabel", "ARTWORK", "GameFontNormal");
 forecastLabel:SetText(L.farmWindowForecastLabel);
-forecastLabel:SetPoint("CENTER", 0, -48);
+forecastLabel:SetPoint("CENTER", -1, -29);
 
 local forecastChangeLabel = farmWindow:CreateFontString("farmWindowForecastChangeLabel", "ARTWORK", "GameFontNormalSmall");
 forecastChangeLabel:SetText("|cFFFFFFFF"..L.farmWindowForecastChange.."|r");
