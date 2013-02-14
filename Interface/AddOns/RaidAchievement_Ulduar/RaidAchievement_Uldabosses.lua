@@ -3,10 +3,10 @@ if pseatime1==0 then pseatime1=arg1 else
 psearex1=arg1-ratime1
 if psearex1<4.8 then
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(2,pseaspisokach10[1])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(2,pseaspisokach25[1])
 end
 
@@ -24,10 +24,10 @@ ratime1=ratime1+1
 if ratime1>2 then
 raachdone1=nil
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[2])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[2])
 end
 
@@ -40,10 +40,10 @@ end
 function pseaachcompl(pseanrach)
 raachdone2=nil
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(2,pseaspisokach10[pseanrach])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(2,pseaspisokach25[pseanrach])
 end
 
@@ -64,10 +64,10 @@ raquantrepdone=raquantrepdone+1
 end
 end
 end
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[pseanrach])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[pseanrach])
 end
 
@@ -85,10 +85,10 @@ raquantrepdone=raquantrepdone+1
 end
 end
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[pseanrach])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[pseanrach])
 end
 
@@ -106,10 +106,10 @@ raquantrepdone=raquantrepdone+1
 end
 end
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[pseanrach])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[pseanrach])
 end
 
@@ -127,10 +127,10 @@ raquantrepdone=raquantrepdone+1
 end
 end
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[12],3)
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[12],3)
 end
 
@@ -146,10 +146,10 @@ if raquantrepeatach==raquantrepdone-1 and raquantrepeatachtm==0 then
 raquantrepdone=raquantrepdone+1
 end
 end
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[12],2)
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[12],2)
 end
 
@@ -165,10 +165,10 @@ if raquantrepeatach==raquantrepdone-1 and raquantrepeatachtm==0 then
 raquantrepdone=raquantrepdone+1
 end
 end
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(1,pseaspisokach10[12],1)
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(1,pseaspisokach25[12],1)
 end
 

@@ -6,7 +6,7 @@ function phraonload()
 	phrahuntertime=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==3 and a2=="party" then
+if select(3,GetInstanceInfo())==2 and a2=="party" then
 	RaidAchievement_phra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_phra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_phra:RegisterEvent("CHAT_MSG_MONSTER_SAY")
@@ -86,7 +86,7 @@ if phracheckzonedelay and GetTime()>phracheckzonedelay then
 phracheckzonedelay=nil
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==3 and a2=="party" then
+if select(3,GetInstanceInfo())==2 and a2=="party" then
 	RaidAchievement_phra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_phra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_phra:RegisterEvent("CHAT_MSG_MONSTER_SAY")

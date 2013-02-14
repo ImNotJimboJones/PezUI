@@ -19,6 +19,8 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "KB/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kbps"
 L["TITAN_MEGABYTE"] = "MB";
 L["TITAN_NONE"] = "None";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "You may not delete your current profile.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Warning : "..FONT_COLOR_CODE_CLOSE
@@ -360,9 +362,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Initial: ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Increasing Rate: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB";     
      
---L["TITAN_MONEY_GOLD"] = "g";
---L["TITAN_MONEY_SILVER"] = "s";
---L["TITAN_MONEY_COPPER"] = "c";
 L["TITAN_MONEY_FORMAT"] = "%d".."g"..", %02d".."s"..", %02d".."c";
      
 L["TITAN_PERFORMANCE_TOOLTIP"] = "Performance Info";
@@ -525,9 +524,6 @@ L["TITAN_GOLD_COIN_LABELS"] = "Show Text Labels";
 L["TITAN_GOLD_COIN_ICONS"] = "Show Icon Labels";
 L["TITAN_GOLD_ONLY"] = "Show Gold Only";
 L["TITAN_GOLD_COLORS"] = "Show Gold Colors";
-L["TITAN_USE_COMMA"] = "Use comma";
-L["TITAN_USE_PERIOD"] = "Use period";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "Volume Info";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Master Sound Volume: ";

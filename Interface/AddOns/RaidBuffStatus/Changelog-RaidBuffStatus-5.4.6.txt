@@ -1,0 +1,85 @@
+------------------------------------------------------------------------
+r612 | oscarucb | 2013-02-13 10:46:52 +0000 (Wed, 13 Feb 2013) | 1 line
+Changed paths:
+   A /tags/5.4.6 (from /trunk:611)
+
+Tagging as 5.4.6
+------------------------------------------------------------------------
+r611 | oscarucb | 2013-02-13 10:44:57 +0000 (Wed, 13 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+fix earthshield reporting
+
+------------------------------------------------------------------------
+r610 | oscarucb | 2013-02-07 00:47:52 +0000 (Thu, 07 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+add mop's slacking flasks
+
+------------------------------------------------------------------------
+r608 | oscarucb | 2013-02-06 23:53:55 +0000 (Wed, 06 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+only send auto-accept whispers if the feature is enabled
+
+------------------------------------------------------------------------
+r606 | oscarucb | 2013-02-05 08:34:40 +0000 (Tue, 05 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+fix regression in earthshield indicator
+
+------------------------------------------------------------------------
+r604 | oscarucb | 2013-02-04 02:10:00 +0000 (Mon, 04 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+fix a regression with combat hiding
+
+------------------------------------------------------------------------
+r603 | oscarucb | 2013-02-02 16:19:11 +0000 (Sat, 02 Feb 2013) | 4 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+add the buffer/buffee list to the symbiosis tooltip
+fix the buffer/buffee list in the earthshield tooltip
+reduce some memory churn
+
+------------------------------------------------------------------------
+r601 | oscarucb | 2013-01-26 22:36:23 +0000 (Sat, 26 Jan 2013) | 3 lines
+Changed paths:
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+autohide dashboard during pet battles
+add an option to announce Blingtron
+
+------------------------------------------------------------------------
+r599 | oscarucb | 2013-01-19 23:18:55 +0000 (Sat, 19 Jan 2013) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+save some memory churn
+
+------------------------------------------------------------------------
+r598 | oscarucb | 2013-01-19 01:47:09 +0000 (Sat, 19 Jan 2013) | 4 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Config.lua
+   M /trunk/Core.lua
+
+add an option to prefer static buffs over auras
+So for example tell the warlock to buff Dark Intent even when there's an ele shaman
+some minor streamlining to buff checking
+
+------------------------------------------------------------------------
+r597 | oscarucb | 2013-01-06 20:59:49 +0000 (Sun, 06 Jan 2013) | 2 lines
+Changed paths:
+   M /trunk/Core.lua
+
+adjust soulwell duration (now 2 min)
+
+------------------------------------------------------------------------

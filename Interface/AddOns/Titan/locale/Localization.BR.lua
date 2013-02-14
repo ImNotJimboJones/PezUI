@@ -20,6 +20,8 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "kB/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kbps"
 L["TITAN_MEGABYTE"] = "MB";
 L["TITAN_NONE"] = "Nenhum";
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "Você não pode apagar seu perfil atual.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Atenção : "..FONT_COLOR_CODE_CLOSE
@@ -340,9 +342,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Inicial: ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Taxa de Aumento: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB";     
      
---L["TITAN_MONEY_GOLD"] = "o";
---L["TITAN_MONEY_SILVER"] = "p";
---L["TITAN_MONEY_COPPER"] = "c";
 L["TITAN_MONEY_FORMAT"] = "%d".."o"..", %02d".."p"..", %02d".."c";
      
 L["TITAN_PERFORMANCE_TOOLTIP"] = "Informações de Performance";
@@ -479,8 +478,8 @@ L["TITAN_GOLD_TOGGLE_PLAYER_TEXT"] = "Display Player Gold";
 L["TITAN_GOLD_TOGGLE_ALL_TEXT"] = "Display Server Gold";
 L["TITAN_GOLD_SESS_EARNED"] = "Ganho nesta Sessão";
 L["TITAN_GOLD_PERHOUR_EARNED"] = "Ganho por Hora";
-L["TITAN_GOLD_SESS_LOST"] = "Perca Nesta Sessão";
-L["TITAN_GOLD_PERHOUR_LOST"] = "Perca por Hora";
+L["TITAN_GOLD_SESS_LOST"] = "Perda Nesta Sessão";
+L["TITAN_GOLD_PERHOUR_LOST"] = "Perda por Hora";
 L["TITAN_GOLD_STATS_TITLE"] = "Estatísticas da Sessão";
 L["TITAN_GOLD_TTL_GOLD"] = "Ouro Total";
 L["TITAN_GOLD_START_GOLD"] = "Ouro Inicial";
@@ -505,9 +504,6 @@ L["TITAN_GOLD_COIN_LABELS"] = "Exibir Rótulo de Texto";
 L["TITAN_GOLD_COIN_ICONS"] = "Exibir Rótulo de Ícones";
 L["TITAN_GOLD_ONLY"] = "Exibir Somente Ouro";
 L["TITAN_GOLD_COLORS"] = "Exibir Gold Colors";
-L["TITAN_USE_COMMA"] = "Use comma";
-L["TITAN_USE_PERIOD"] = "Use period";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "Informação de Volume";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Master Sound Volume: ";

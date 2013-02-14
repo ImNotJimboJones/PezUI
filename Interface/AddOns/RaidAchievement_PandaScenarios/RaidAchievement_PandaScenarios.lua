@@ -5,7 +5,7 @@ function pzraonload()
 	_, pzraenglishclass = UnitClass("player")
 	pzrahuntertime=0
 
-if GetInstanceDifficulty()==2 then
+if select(3,GetInstanceInfo())==1 then
 	RaidAchievement_pzra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_SAY")
@@ -70,7 +70,7 @@ if pzracheckzonedelay and GetTime()>pzracheckzonedelay then
 pzracheckzonedelay=nil
 
 
-if GetInstanceDifficulty()==2 then
+if select(3,GetInstanceInfo())==1 then
 	RaidAchievement_pzra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_SAY")

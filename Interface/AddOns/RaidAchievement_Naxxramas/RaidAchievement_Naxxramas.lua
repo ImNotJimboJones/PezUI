@@ -49,10 +49,10 @@ function nxra_OnUpdate()
 
 if nxrafobiaend and GetTime()>nxrafobiaend then
 nxramexna=0
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(3,nxraspisokach10[1])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(3,nxraspisokach25[1])
 end
 pseareportfailnoreason()
@@ -205,9 +205,9 @@ end
 if (arg2=="SPELL_DAMAGE" or (arg2=="SPELL_MISSED" and arg12 and (arg12=="ABSORB" or arg12=="RESIST"))) and arg9==57591 and UnitName("player")==arg7 and rabattlev==1 then
 if nxraspisokon[6]=="yes" and raachdone1 then
 --проверка на ачивку у себя!
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 _, _, _, nxrasarto = GetAchievementInfo(2047)
-elseif GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+elseif select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 _, _, _, nxrasarto = GetAchievementInfo(2048)
 end
 if (nxrasarto) then else

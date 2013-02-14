@@ -1,0 +1,33 @@
+------------------------------------------------------------------------
+r69 | lombra | 2013-02-08 00:36:55 +0000 (Fri, 08 Feb 2013) | 1 line
+Changed paths:
+   A /tags/4.5.1 (from /trunk:68)
+
+- Tagging as 4.5.1.
+------------------------------------------------------------------------
+r68 | lombra | 2013-02-08 00:36:18 +0000 (Fri, 08 Feb 2013) | 1 line
+Changed paths:
+   M /trunk/ChangeLog.txt
+
+- Update change log.
+------------------------------------------------------------------------
+r67 | lombra | 2013-02-07 17:57:12 +0000 (Thu, 07 Feb 2013) | 3 lines
+Changed paths:
+   M /trunk/filtersCore.lua
+   M /trunk/locales/enUS.lua
+   M /trunk/reset.lua
+   M /trunk/spellList.lua
+
+- Add more bad auras.
+- Add button for reverting all eligible records.
+- Make sure tooltip info is not added twice in the spell list when tooltip info is enabled.
+------------------------------------------------------------------------
+r66 | lombra | 2012-12-14 23:03:24 +0000 (Fri, 14 Dec 2012) | 3 lines
+Changed paths:
+   M /trunk/Critline.toc
+   M /trunk/filtersCore.lua
+
+- ToC bump.
+- Merge player and target auras into a single table. This should allow custom aura filter to work for target auras.
+- Add lots of filtered MoP buffs.
+------------------------------------------------------------------------

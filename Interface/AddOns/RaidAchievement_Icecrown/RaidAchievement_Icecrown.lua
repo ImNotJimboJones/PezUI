@@ -137,7 +137,7 @@ end
 
 if rsciccinportal and icracurtime>rsciccportalopen+31 then
 local qport=8
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 qport=3
 end
 
@@ -277,7 +277,7 @@ else
 
 if rsciccinportal and icracurtime>rsciccportalopen+26 then
 local qport=8
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 qport=3
 end
 
@@ -391,10 +391,10 @@ end
 if arg2=="SPELL_CAST_START" and arg9==72293 then
 if icraspisokon[2]=="yes" and raachdone1 then
 ratime1=ratime1+1
-if ratime1==3 and (GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6) then
+if ratime1==3 and (select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5) then
 icrafailnoreason(2)
 end
-if ratime1==5 and (GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7) then
+if ratime1==5 and (select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6) then
 icrafailnoreason(2)
 end
 end
@@ -488,7 +488,7 @@ end
 if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==70338 or arg9==73785 or arg9==73786 or arg9==73787) and arg12 then
 	if icraspisokon[9]=="yes" and raachdone2 then
 	local stack=0
-	if GetInstanceDifficulty()==6 then
+	if select(3,GetInstanceInfo())==5 then
 		local risult=arg12/162000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -501,7 +501,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==70338 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if GetInstanceDifficulty()==4 then
+	if select(3,GetInstanceInfo())==3 then
 		local risult=arg12/108000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -514,7 +514,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==70338 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if GetInstanceDifficulty()==5 then
+	if select(3,GetInstanceInfo())==4 then
 		local risult=arg12/81000
 		if math.ceil(risult)==risult then
 			stack=risult
@@ -527,7 +527,7 @@ if arg2=="SPELL_PERIODIC_DAMAGE" and (arg9==70338 or arg9==73785 or arg9==73786 
 			end
 		end
 	end
-	if GetInstanceDifficulty()==3 then
+	if select(3,GetInstanceInfo())==2 then
 		local risult=arg12/54000
 		if math.ceil(risult)==risult then
 			stack=risult

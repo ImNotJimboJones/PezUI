@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -466,7 +466,7 @@ Prat:AddModuleToLoad(function()
 	["Prat_Playernames: Stored Player Data Cleared"] = "Prat_Playernames: Информация о собеседниках очищена",
 	["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Запрос сервера для всех неизвестных играков. Заметка: Это происходит дастаточно медленно, и их данные не сохраняются.",
 	Random = "Случайно",
-	-- realidcolor_desc = "",
+	realidcolor_desc = "Окрашивание имен RealID",
 	realidcolor_name = "RealID Цвет",
 	["Reset Settings"] = "Сброс настроек",
 	["Restore default settings, and delete stored character data."] = "Восстановить настройки по умолчанию и удалить сохраненную информацию о собеседниках.",
@@ -493,7 +493,7 @@ Prat:AddModuleToLoad(function()
 	["Unknown Use Common Color"] = "Общий цвет для неизвестных",
 	["Use Channel Color"] = "Использовать цвет канала",
 	["Use Player Color"] = "Использовать цвет игрока",
-	-- ["Use toon name for RealID"] = "",
+	["Use toon name for RealID"] = "Использовать имя персонажа вместо RealID",
 }
 
   )
@@ -1103,7 +1103,7 @@ Prat:AddModuleToLoad(function()
     for k, v in pairs(self.Subgroups) do
       self.Subgroups[k] = nil
     end
-	
+
     for i = 1, GetNumRaidMembers() do
       _, rank, SubGroup, Level, _, Class, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
       Name, Server = UnitName("raid" .. i)
@@ -1399,8 +1399,8 @@ Prat:AddModuleToLoad(function()
     -- ["CHAT_MSG_RAID"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
-    ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
-    ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
+    ["CHAT_MSG_INSTANCE_CHAT"] = module.updateBG,
+    ["CHAT_MSG_INSTANCE_CHAT_LEADER"] = module.updateBG,
     ["CHAT_MSG_SYSTEM"] = module.updateGF,
   }
 
@@ -1411,8 +1411,8 @@ Prat:AddModuleToLoad(function()
     CHAT_MSG_RAID = true,
     CHAT_MSG_RAID_WARNING = true,
     CHAT_MSG_RAID_LEADER = true,
-    CHAT_MSG_BATTLEGROUND = true,
-    CHAT_MSG_BATTLEGROUND_LEADER = true,
+    CHAT_MSG_INSTANCE_CHAT = true,
+    CHAT_MSG_INSTANCE_CHAT_LEADER = true,
   }
 
 

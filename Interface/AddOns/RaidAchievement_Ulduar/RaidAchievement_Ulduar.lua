@@ -208,10 +208,10 @@ if preaspisokon[7]=="yes" and raachdone2 then
 --pseaachcompl(7)
 raachdone2=nil
 
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 raplaysound(3,pseaspisokach10[7])
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 raplaysound(3,pseaspisokach25[7])
 end
 
@@ -245,20 +245,20 @@ if arg2=="SPELL_CAST_SUCCESS" and (arg9==62038 or arg9==62039) then
 thisraidtableea = {}
 for i = 1,GetNumGroupMembers() do local name,subgroup = GetRaidRosterInfo(i) if subgroup <= 5 then table.insert(thisraidtableea,(GetRaidRosterInfo(i))) end end
 pseahodirlook=true
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 pseaspellname1 = GetSpellInfo(62038)
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 pseaspellname1 = GetSpellInfo(62039)
 end
 end
 if arg2=="SPELL_DAMAGE" and arg9==62188 then
 pseahodirlook=true
 raachdone1=nil
-if GetInstanceDifficulty()==4 or GetInstanceDifficulty()==6 then
+if select(3,GetInstanceInfo())==3 or select(3,GetInstanceInfo())==5 then
 pseaspellname1 = GetSpellInfo(62038)
 end
-if GetInstanceDifficulty()==5 or GetInstanceDifficulty()==7 then
+if select(3,GetInstanceInfo())==4 or select(3,GetInstanceInfo())==6 then
 pseaspellname1 = GetSpellInfo(62039)
 end
 end

@@ -11,7 +11,7 @@ end
 	RaidAchievement_prra:RegisterEvent("ADDON_LOADED")
 	
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if GetInstanceDifficulty()==8 then
+	if select(3,GetInstanceInfo())==7 then
 		lfrenable=1
   else
     lfrenable=nil
@@ -154,7 +154,7 @@ if event == "ZONE_CHANGED_NEW_AREA" then
 rcradelayzonech=GetTime()+2
 
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if GetInstanceDifficulty()==8 then
+	if select(3,GetInstanceInfo())==7 then
 		lfrenable=1
   else
     lfrenable=nil

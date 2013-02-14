@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 598 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 611 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -105,6 +105,8 @@ local cataflasks = {
 	SpellName(79471), -- Flask of the Winds
 	SpellName(79472), -- Flask of Titanic Strength
 	SpellName(94160), -- Flask of Flowing Water
+	SpellName(105617), -- Alchemist's Flask - MoP but not as good as other flasks
+	SpellName(127230), -- Crystal of Insanity - MoP but not as good as other flasks
 }
 
 local mopflasks = {
@@ -380,6 +382,11 @@ local shamanwepbuffs = {
 	L["(Rockbiter)"], -- Shaman self buff
 	L["(Windfury)"], -- Shaman self buff
 }
+
+local function initreporttable(tablename)
+  report[tablename] = report[tablename] or {}
+  wipe(report[tablename])
+end
 
 local function getbuffinfo(buffinfo_or_checkname)
   local r = buffinfo_or_checkname
@@ -1008,7 +1015,7 @@ local BF = {
 
 	earthshield = {
 		order = 875,
-		list = "earthshieldlist",
+		list = "earthshieldslackers",
 		check = "checkearthshield",
 		default = true,
 		defaultbuff = true,
@@ -1025,18 +1032,18 @@ local BF = {
 		chat = function(report, raid, prefix, channel)
 			prefix = prefix or ""
 			if report.checking.earthshield then
-				if # report.earthshieldlist > 0 then
+				if # report.earthshieldslackers > 0 then
 					RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[974] .. ">: " .. table.concat(report.tanksneedingearthshield, ", "), nil, nil, channel)  -- Earth Shield
 					RaidBuffStatus:Say(L["Slackers: "] .. table.concat(report.earthshieldslackers, ", "))
 				end
 			end
 		end,
 		pre = function(self, raid, report)
-			report.tanksneedingearthshield = {}
-			report.tanksgotearthshield = {}
-			report.shamanwithearthshield = {}
-			report.haveearthshield = {}
-			report.earthshieldslackers = {}
+			initreporttable("tanksneedingearthshield")
+			initreporttable("tanksgotearthshield")
+			initreporttable("shamanwithearthshield")
+			initreporttable("haveearthshield")
+			initreporttable("earthshieldslackers")
 		end,
 		main = function(self, name, class, unit, raid, report)
 			if raid.ClassNumbers.SHAMAN < 1 then
@@ -1046,12 +1053,16 @@ local BF = {
 				if raid.classes.SHAMAN[name].spec == 3 then
 					table.insert(report.shamanwithearthshield, name)
 				end
-			elseif unit.istank or
+			end
+			local hasbuff = unit.hasbuff[BS[974]] -- Earth Shield
+			if hasbuff then
+				report.haveearthshield[name] = hasbuff.caster
+			end
+			if unit.istank or
 			       GetPartyAssignment("MAINTANK",unit.unitid) then -- allow earthshield on non-traditional tanks
 					report.checking.earthshield = true
-					if unit.hasbuff[BS[974]] then  -- Earth Shield
+					if hasbuff then
 						table.insert(report.tanksgotearthshield, name)
-						report.haveearthshield[name] = unit.hasbuff[BS[974]].caster  -- Earth Shield
 					else
 						table.insert(report.tanksneedingearthshield, name)
 					end
@@ -1064,7 +1075,6 @@ local BF = {
 				report.checking.earthshield = true
 			end
 			if numberneeded > 0 and numberavailable > 0 then
-				report.earthshieldlist = report.tanksneedingearthshield
 				for _, name in ipairs(report.shamanwithearthshield) do
 					local found = false
 					for _, caster in pairs(report.haveearthshield) do
@@ -1077,24 +1087,26 @@ local BF = {
 						table.insert(report.earthshieldslackers, name)
 					end
 				end
+			else
+				wipe(report.tanksneedingearthshield)
 			end
 		end,
 		icon = BSI[974],  -- Earth Shield
 		update = function(self)
-			RaidBuffStatus:DefaultButtonUpdate(self, report.earthshieldlist, RaidBuffStatus.db.profile.checkearthshield, report.checking.earthshield or false, RaidBuffStatus.BF.earthshield:buffers())
+			RaidBuffStatus:DefaultButtonUpdate(self, report.tanksneedingearthshield, RaidBuffStatus.db.profile.checkearthshield, report.checking.earthshield or false, RaidBuffStatus.BF.earthshield:buffers())
 		end,
 		click = function(self, button, down)
 			RaidBuffStatus:ButtonClick(self, button, down, "earthshield", BS[974], true)  -- Earth Shield
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Tank missing Earth Shield"], report.earthshieldlist, nil, RaidBuffStatus.BF.earthshield:buffers(), report.earthshieldslackers, nil, nil, nil, nil, nil, report.haveearthshield)
+			RaidBuffStatus:Tooltip(self, L["Tank missing Earth Shield"], report.tanksneedingearthshield, nil, RaidBuffStatus.BF.earthshield:buffers(), report.earthshieldslackers, nil, nil, nil, nil, nil, report.haveearthshield)
 		end,
 		singlebuff = true,
 		partybuff = false,
 		raidbuff = false,
 		whispertobuff = function(reportl, prefix)
 			for _,name in pairs(report.earthshieldslackers) do
-				RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[974] .. ">: " .. table.concat(reportl, ", "), name)  -- Earth Shield
+				RaidBuffStatus:Say(prefix .. "<" .. L["Missing "] .. BS[974] .. ">: " .. table.concat(report.tanksneedingearthshield, ", "), name)  -- Earth Shield
 			end
 		end,
 		buffers = function()
@@ -1133,8 +1145,8 @@ local BF = {
 			end
 		end,
 		pre = function(self, raid, report)
-			report.soulstonelist = {}
-			report.havesoulstonelist = {}
+			initreporttable("soulstonelist")
+			initreporttable("havesoulstonelist")
 		end,
 		main = function(self, name, class, unit, raid, report)
 			if raid.ClassNumbers.WARLOCK > 0 then
@@ -1247,8 +1259,8 @@ local BF = {
 				RaidBuffStatus.itemcheck.healthstone.frequencymissing = 30
 --				RaidBuffStatus:Debug("RaidBuffStatus.itemcheck.healthstone.item = " .. RaidBuffStatus.itemcheck.healthstone.item)
 			end
-			report.healthstonelistunknown = {}
-			report.healthstonelistgotone = {}
+			initreporttable("healthstonelistunknown")
+			initreporttable("healthstonelistgotone")
 		end,
 		main = function(self, name, class, unit, raid, report)
 			if raid.ClassNumbers.WARLOCK < 1 or not raid.israid or raid.isbattle then
@@ -1337,8 +1349,8 @@ local BF = {
 				RaidBuffStatus.itemcheck.flaskofbattle.frequency = 60 * 3
 				RaidBuffStatus.itemcheck.flaskofbattle.frequencymissing = 60 * 3
 			end
-			report.flaskofbattlelistunknown = {}
-			report.flaskofbattlelistgotone = {}
+			initreporttable("flaskofbattlelistunknown")
+			initreporttable("flaskofbattlelistgotone")
 		end,
 		main = function(self, name, class, unit, raid, report)
 			if not raid.israid then
@@ -1525,8 +1537,8 @@ local BF = {
 		class = allclasses,
 		chat = L["Flask or two Elixirs"],
 		pre = function(self, raid, report)
-			report.belixirlist = {}
-			report.gelixirlist = {}
+			initreporttable("belixirlist")
+			initreporttable("gelixirlist")
 		end,
 		main = function(self, name, class, unit, raid, report)
 			report.checking.flaskir = true
@@ -2327,12 +2339,17 @@ local BF = {
 		timer = false,
 		class = { DRUID = true, },
 		chat = BS[110309], -- Symbiosis
+		pre = function(self, raid, report)
+			initreporttable("havesymbiosis")
+		end,
 		main = function(self, name, class, unit, raid, report)
 			if class == "DRUID" then
 				report.checking.symbiosis = true
 				if not unit.hasbuff[BS[110309]] then -- symbiosis
 					table.insert(report.symbiosislist, name)
 				end
+			elseif unit.hasbuff[BS[110309]] then
+				report.havesymbiosis[name] = unit.hasbuff[BS[110309]].caster
 			end
 		end,
 		post = nil,
@@ -2344,7 +2361,9 @@ local BF = {
 			RaidBuffStatus:ButtonClick(self, button, down, "symbiosis")
 		end,
 		tip = function(self)
-			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[110309], report.symbiosislist) -- Symbiosis
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[110309], report.symbiosislist, -- Symbiosis
+						nil, nil, nil, nil, nil, nil, nil, nil,
+						report.havesymbiosis)
 		end,
 		partybuff = nil,
 	},

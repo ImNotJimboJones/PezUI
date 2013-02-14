@@ -19,6 +19,8 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "КБ/с";
 L["TITAN_KILOBITS_PER_SECOND"] = "кбит/с"
 L["TITAN_MEGABYTE"] = "мб";
 L["TITAN_NONE"] = "Нету";	
+L["TITAN_USE_COMMA"] = "Use comma";
+L["TITAN_USE_PERIOD"] = "Use period";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "Вы не можете удалить свой текущий профиль.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Внимание : "..FONT_COLOR_CODE_CLOSE
@@ -360,9 +362,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Исходная: ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Темп прироста: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB"; 	
 	
---L["TITAN_MONEY_GOLD"] = "з";
---L["TITAN_MONEY_SILVER"] = "с";
---L["TITAN_MONEY_COPPER"] = "м";
 L["TITAN_MONEY_FORMAT"] = "%d".."з"..", %02d".."с"..", %02d".."м";
 	
 L["TITAN_PERFORMANCE_TOOLTIP"] = "Производительность";
@@ -525,9 +524,6 @@ L["TITAN_GOLD_COIN_LABELS"] = "Показать метки денег";
 L["TITAN_GOLD_COIN_ICONS"] = "Показать иконки";
 L["TITAN_GOLD_ONLY"] = "Показать только золото";
 L["TITAN_GOLD_COLORS"] = "Показать окраску золота";
-L["TITAN_USE_COMMA"] = "Use comma";
-L["TITAN_USE_PERIOD"] = "Use period";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "Контроль звука";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Громкость общего звука: ";

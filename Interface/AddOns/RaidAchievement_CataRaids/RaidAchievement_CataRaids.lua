@@ -11,7 +11,7 @@ end
 	RaidAchievement_crra:RegisterEvent("ADDON_LOADED")
 	
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if GetInstanceDifficulty()==8 then
+	if select(3,GetInstanceInfo())==7 then
 		lfrenable=1
   else
     lfrenable=nil
@@ -386,7 +386,7 @@ rcradelayzonech=GetTime()+2
 racrcheckdeadth43296=nil
 
 	local _, instanceType, difficulty, _, maxPlayers, playerDifficulty, isDynamicInstance = GetInstanceInfo()
-	if GetInstanceDifficulty()==8 then
+	if select(3,GetInstanceInfo())==7 then
 		lfrenable=1
   else
     lfrenable=nil

@@ -20,8 +20,10 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "KB/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kbps"
 L["TITAN_MEGABYTE"] = "MB";
 L["TITAN_NONE"] = "Nada";
+L["TITAN_USE_COMMA"] = "Usar coma como separador numérico";
+L["TITAN_USE_PERIOD"] = "Use punto como separador numérico";
 
-L["TITAN_MOVABLE_TOOLTIP"] = "Pincha para mover";
+--L["TITAN_MOVABLE_TOOLTIP"] = "Pincha para mover";
 
 L["TITAN_PANEL_ERROR_DUP_PLUGIN"] = " aparece duplicado. Esto puede hacer que Titan Panel falle, por favor, corrija el problema."
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "No puedes borrar el perfil actual.";
@@ -388,9 +390,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Inicial: ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Ratio de Incremento: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB";
 
-L["TITAN_MONEY_GOLD"] = "o";
-L["TITAN_MONEY_SILVER"] = "p";
-L["TITAN_MONEY_COPPER"] = "b";
 L["TITAN_MONEY_FORMAT"] = "%d".."o"..", %02d".."p"..", %02d".."b";
 
 L["TITAN_PERFORMANCE_TOOLTIP"] = "Monitorización";
@@ -553,9 +552,6 @@ L["TITAN_GOLD_COIN_LABELS"] = "Mostrar etiquetas en texto";
 L["TITAN_GOLD_COIN_ICONS"] = "Mostrar etiquetas en texto";
 L["TITAN_GOLD_ONLY"] = "Mostrar sólo oro";
 L["TITAN_GOLD_COLORS"] = "Mostrar colores en el oro";
-L["TITAN_USE_COMMA"] = "Usar coma como separador numérico";
-L["TITAN_USE_PERIOD"] = "Use punto como separador numérico";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "Control de Volumen";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Volumen general: ";

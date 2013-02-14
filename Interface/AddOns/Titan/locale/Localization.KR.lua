@@ -20,6 +20,8 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "KB/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kbps"
 L["TITAN_MEGABYTE"] = "MB";
 L["TITAN_NONE"] = "없음";
+L["TITAN_USE_COMMA"] = "쉼표 사용";
+L["TITAN_USE_PERIOD"] = "마침표 사용";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "현재 프로필을 삭제할 수 없습니다.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."경고 : "..FONT_COLOR_CODE_CLOSE
@@ -288,7 +290,6 @@ L["TITAN_CLOCK_MENU_HIDE_GAMETIME"] = "시간/달력 버튼 숨기기";
 L["TITAN_CLOCK_MENU_HIDE_MAPTIME"] = "시간 버튼 숨기기";
 L["TITAN_CLOCK_MENU_HIDE_CALENDAR"] = "달력 버튼 숨기기";
      
-     
 L["TITAN_COORDS_FORMAT"] = "(%.d, %.d)";
 L["TITAN_COORDS_FORMAT2"] = "(%.1f, %.1f)";
 L["TITAN_COORDS_FORMAT3"] = "(%.2f, %.2f)";
@@ -361,9 +362,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "초기: ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "증가율: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB";     
      
---L["TITAN_MONEY_GOLD"] = "G";
---L["TITAN_MONEY_SILVER"] = "S";
---L["TITAN_MONEY_COPPER"] = "C";
 L["TITAN_MONEY_FORMAT"] = "%d".."G"..", %02d".."S"..", %02d".."C";
      
 L["TITAN_PERFORMANCE_TOOLTIP"] = "성능 정보";
@@ -526,9 +524,6 @@ L["TITAN_GOLD_COIN_LABELS"] = "동전 이름 표시";
 L["TITAN_GOLD_COIN_ICONS"] = "아이콘 라벨 표시";
 L["TITAN_GOLD_ONLY"] = "소지금만 표시";
 L["TITAN_GOLD_COLORS"] = "소지금 색상 표시";
-L["TITAN_USE_COMMA"] = "쉼표 사용";
-L["TITAN_USE_PERIOD"] = "마침표 사용";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "음량 정보";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "주 음량 : ";

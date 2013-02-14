@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.114
+	raversion=1.116
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -138,7 +138,7 @@ end
 if ramsgtimestart>0 and racurrenttime>ramsgtimestart+0.4 then
 ramsgtimestart=0
 --тут отправда в аддон канал инфы
-  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   SendAddonMessage("RaidAc", "myname:"..ranamemsgsend.."++mychat:"..ramsgmychat.."++", "Instance_CHAT")
   else
   SendAddonMessage("RaidAc", "myname:"..ranamemsgsend.."++mychat:"..ramsgmychat.."++", "RAID")
@@ -384,7 +384,7 @@ raverschech1=1
 if (UnitInRaid("player")) then
 local inInstance, instanceType = IsInInstance()
 if instanceType~="pvp" then
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
 SendAddonMessage("RAother", "5"..raversion, "Instance_CHAT")
 else
 SendAddonMessage("RAother", "5"..raversion, "raid")
@@ -1107,10 +1107,10 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==3 and buul==1 then
+if select(3,GetInstanceInfo())==2 and buul==1 then
 
 local chattt="party"
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   chattt="Instance_CHAT"
 end
 
@@ -1140,10 +1140,10 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==3 and buul==1 then
+if select(3,GetInstanceInfo())==2 and buul==1 then
 
 local chattt="party"
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   chattt="Instance_CHAT"
 end
 
@@ -1173,10 +1173,10 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==3 and buul==1 then
+if select(3,GetInstanceInfo())==2 and buul==1 then
 
 local chattt="party"
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   chattt="Instance_CHAT"
 end
 
@@ -1207,10 +1207,10 @@ for i=1,#idheroics do
 		buul=1
 	end
 end
-if GetInstanceDifficulty()==2 and buul==1 then
+if select(3,GetInstanceInfo())==1 and buul==1 then
 
 local chattt="party"
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   chattt="Instance_CHAT"
 end
 
@@ -1309,7 +1309,7 @@ end
 if pseashowfailreas then ratmp1="1-"..rasoundtoplay[1]..rasoundtoplay[2]..rasoundtoplay[3]..rasoundtoplay[4]..rasoundtoplay[5]..rasoundtoplay[6] end
 print ("RA "..UnitName("player").." v."..raversion.." "..ratmp1.." "..ratmp2.." "..wherereportraidach..wherereportpartyach.." "..psa6.." installed: "..raaddoninstalledsins)
 if cchat==nil then
-if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
 SendAddonMessage("RAother", "3info", "Instance_CHAT")
 else
 SendAddonMessage("RAother", "3info", "raid")
@@ -1339,7 +1339,7 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
   else
   razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
@@ -1353,7 +1353,7 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2..")."..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
   else
   razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2..")."..ratemp)
@@ -1367,7 +1367,7 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r ("..prichina2.." - "..qquant..")."..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
   else
   razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4.." ("..prichina2.." - "..qquant..")."..ratemp)
@@ -1384,7 +1384,7 @@ if (wherereportraidach=="sebe") then
 out("- "..achlinnk.." |cffff0000"..pseatreb4.."|r"..ratemp)
 else
 if UnitIsGroupAssistant("player")==false and wherereportraidach=="raid_warning" then
-  if GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
+  if select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO) then
   razapuskanonsa("Instance_CHAT", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
   else
   razapuskanonsa("raid", "RA: {rt8} "..achlinnk.." "..pseatreb4..ratemp)
@@ -1416,7 +1416,7 @@ function razapuskanonsa(kudarep, chtorep)
 if kudarep and chtorep then
 
 
-if (kudarep=="party" or kudarep=="raid" or kudarep=="raid_warning") and (GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO)) then
+if (kudarep=="party" or kudarep=="raid" or kudarep=="raid_warning") and (select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) or IsLFGModeActive(LE_LFG_CATEGORY_SCENARIO)) then
 kudarep="Instance_CHAT"
 end
 

@@ -10,7 +10,7 @@ function whraonload()
 	whrahuntertime=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==3 and a2=="party" then
+if select(3,GetInstanceInfo())==2 and a2=="party" then
 	RaidAchievement_whra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_whra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_whra:RegisterEvent("PLAYER_ALIVE")
@@ -107,7 +107,7 @@ if event == "ZONE_CHANGED_NEW_AREA" then
 whrabossanet=0
 
 local _, a2 = GetInstanceInfo()
-if GetInstanceDifficulty()==3 and a2=="party" then
+if select(3,GetInstanceInfo())==2 and a2=="party" then
 	RaidAchievement_whra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_whra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_whra:RegisterEvent("PLAYER_ALIVE")

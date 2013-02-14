@@ -19,7 +19,9 @@ L["TITAN_MILLISECOND"] = "ms";
 L["TITAN_KILOBYTES_PER_SECOND"] = "KB/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kbps"
 L["TITAN_MEGABYTE"] = "MB";
-L["TITAN_NONE"] = "None";
+L["TITAN_NONE"] = "Nessuno";
+L["TITAN_USE_COMMA"] = "Usa virgola";
+L["TITAN_USE_PERIOD"] = "Usa punto";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "Non puoi eliminare il profilo in uso.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Attenzione : "..FONT_COLOR_CODE_CLOSE
@@ -84,7 +86,7 @@ L["TITAN_PANEL_GLOBAL_PROFILE"] = "Profilo Globale";
 L["TITAN_PANEL_GLOBAL_USE"] = "Usa profilo globale";     
 L["TITAN_PANEL_GLOBAL_USE_AS"] = "Usa come profilo globale";     
 L["TITAN_PANEL_GLOBAL_USE_DESC"] = "Usa un profilo che vale per tutti i personaggi";     
-L["TITAN_PANEL_GLOBAL_RESET_PART"] = "resetting options";     
+L["TITAN_PANEL_GLOBAL_RESET_PART"] = " opzioni di reset";     
 L["TITAN_PANEL_GLOBAL_ERR_1"] = "Non puoi caricare un profilo se stai usando un profilo globale";     
 
 -- general panel locale
@@ -245,23 +247,24 @@ L["TITAN_BAG_MENU_IGNORE_SLOTS"] = "Ignora contenitori";
 L["TITAN_BAG_MENU_IGNORE_PROF_BAGS_SLOTS"] = "Ignora zaini delle professioni";
 L["TITAN_BAG_PROF_BAG_NAMES"] = {
 -- Enchanting
-"Enchanted Mageweave Pouch", "Enchanted Runecloth Bag", "Enchanter's Satchel", "Big Bag of Enchantment", "Spellfire Bag", 
-"Mysterious Bag", "Otherworldly Bag", "\"Carriage - Exclusive\" Enchanting Evening Purse",
+"Borsa di Telamagica Incantata", "Borsa di Telarunica Incantata", "Zaino da Incantatore", "Sacca Grande da Incantatore", 
+"Sacca di Fuocoincanto", "Sacca Misteriosa", "Sacca Ultraterrena", "Borsetta da Incantatore \"Esclusiva\" di Dolce Gabbata",
 -- Engineering
-"Heavy Toolbox", "Fel Iron Toolbox", "Titanium Toolbox", "Khorium Toolbox", "Elementium Toolbox", "\"Carriage - Maddy\" High Tech Bag",
+"Cassetta degli Attrezzi Pesante", "Cassetta degli Attrezzi di Vilferro", "Cassetta degli Attrezzi di Titanio",
+"Cassetta degli Attrezzi d'Elementio", "Cassetta Tecnologica \"Follia\" di Dolce Gabbata",
 -- Herbalism
-"Herb Pouch", "Cenarion Herb Bag", "Satchel of Cenarius", "Mycah's Botanical Bag", "Emerald Bag", "Hyjal Expedition Bag",
-"\"Carriage - Going Green\" Herb Tote Bag",
+"Sacca da Erbalista", "Sacca per Erbe Cenariana", "Sacco Cenariano", "Sacca Botanica di Mycah", "Sacca di Smeraldo",
+"Sacca della Spedizione di Hyjal", "Cesta per Erbe \"Verdissima\" di Dolce Gabbata",
 -- Inscription
-"Scribe's Satchel", "Pack of Endless Pockets", "\"Carriage - Xandera\" Student's Satchel",
+"Cartella dello Scriba", "Sacca Milletasche", "Zaino da Studente \"Scuola Oggi\" di Dolce Gabbata",
 -- Jewelcrafting
-"Gem Pouch", "Bag of Jewels", "\"Carriage - Exclusive\" Gem Studded Clutch",
+"Borsa da Orafo", "Borsa di Gioielli", "Pochette da Sera \"Inimitabile\" di Dolce Gabbata",
 -- Leatherworking
-"Leatherworker's Satchel", "Bag of Many Hides", "Trapper's Traveling Pack", "\"Carriage - Meeya\" Leather Bag",
+"Sacca del Conciatore", "Sacca per Molte Pelli", "Zaino da Viaggio del Mastro Bracconiere", "Sacca di Cuoio \"A Pelle\" di Dolce Gabbata",
 -- Mining
-"Mining Sack", "Reinforced Mining Bag", "Mammoth Mining Bag", "\"Carriage - Christina\" Precious Metal Bag",
+"Sacco da Minatore", "Sacco da Minatore Rinforzato", "Sacco da Minatore di Mammut", "Sacco di Preziosi \"Diamiani\" di Dolce Gabbata",
 -- fishing
-"Lure Master Tackle Box",
+"Cassetta del Gran Pescatore",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "Orologio";     
@@ -294,260 +297,254 @@ L["TITAN_COORDS_FORMAT3"] = "(%.2f, %.2f)";
 L["TITAN_COORDS_FORMAT_LABEL"] = "(xx , yy)";
 L["TITAN_COORDS_FORMAT2_LABEL"] = "(xx.x , yy.y)";
 L["TITAN_COORDS_FORMAT3_LABEL"] = "(xx.xx , yy.yy)";
-L["TITAN_COORDS_FORMAT_COORD_LABEL"] = "Coordinate Format";
+L["TITAN_COORDS_FORMAT_COORD_LABEL"] = "Formato Coordinate";
 L["TITAN_COORDS_BUTTON_LABEL"] = "Loc: ";
-L["TITAN_COORDS_TOOLTIP"] = "Location Info";
-L["TITAN_COORDS_TOOLTIP_HINTS_1"] = "Hint: Shift + left-click to add location";
-L["TITAN_COORDS_TOOLTIP_HINTS_2"] = "info to the chat message.";
-L["TITAN_COORDS_TOOLTIP_ZONE"] = "Zone: ";
-L["TITAN_COORDS_TOOLTIP_SUBZONE"] = "SubZone: ";
-L["TITAN_COORDS_TOOLTIP_PVPINFO"] = "PVP Info: ";
+L["TITAN_COORDS_TOOLTIP"] = "Info Località";
+L["TITAN_COORDS_TOOLTIP_HINTS_1"] = "Suggerimento: Maiusc + click sinistro per aggiungere informazioni";
+L["TITAN_COORDS_TOOLTIP_HINTS_2"] = "sulla località al messaggio della chat.";
+L["TITAN_COORDS_TOOLTIP_ZONE"] = "Zona: ";
+L["TITAN_COORDS_TOOLTIP_SUBZONE"] = "Sottozona: ";
+L["TITAN_COORDS_TOOLTIP_PVPINFO"] = "Info PVP: ";
 L["TITAN_COORDS_TOOLTIP_HOMELOCATION"] = "Home Location";
 L["TITAN_COORDS_TOOLTIP_INN"] = "Inn: ";
-L["TITAN_COORDS_MENU_TEXT"] = "Location";
-L["TITAN_COORDS_MENU_SHOW_ZONE_ON_PANEL_TEXT"] = "Show Zone Text";
-L["TITAN_COORDS_MENU_SHOW_COORDS_ON_MAP_TEXT"] = "Show Coordinates on World Map";
-L["TITAN_COORDS_MAP_CURSOR_COORDS_TEXT"] = "Cursor: %s";
-L["TITAN_COORDS_MAP_PLAYER_COORDS_TEXT"] = "Player: %s";
+L["TITAN_COORDS_MENU_TEXT"] = "Località";
+L["TITAN_COORDS_MENU_SHOW_ZONE_ON_PANEL_TEXT"] = "Mostra testo zona";
+L["TITAN_COORDS_MENU_SHOW_COORDS_ON_MAP_TEXT"] = "Mostra coordinate sulla mappa";
+L["TITAN_COORDS_MAP_CURSOR_COORDS_TEXT"] = "Cursore: %s";
+L["TITAN_COORDS_MAP_PLAYER_COORDS_TEXT"] = "Giocatore: %s";
 L["TITAN_COORDS_NO_COORDS"] = "No Coords";
-L["TITAN_COORDS_MENU_SHOW_LOC_ON_MINIMAP_TEXT"] = "Show Location Name Above Minimap";
-L["TITAN_COORDS_MENU_UPDATE_WORLD_MAP"] = "Update World Map When Zone Changes";
+L["TITAN_COORDS_MENU_SHOW_LOC_ON_MINIMAP_TEXT"] = "Mostra località sopra alla minimappa";
+L["TITAN_COORDS_MENU_UPDATE_WORLD_MAP"] = "Aggiorna mappa quando cambi località";
      
 L["TITAN_FPS_FORMAT"] = "%.1f";
 L["TITAN_FPS_BUTTON_LABEL"] = "FPS: ";
 L["TITAN_FPS_MENU_TEXT"] = "FPS";
-L["TITAN_FPS_TOOLTIP_CURRENT_FPS"] = "Current FPS: ";
-L["TITAN_FPS_TOOLTIP_AVG_FPS"] = "Average FPS: ";
-L["TITAN_FPS_TOOLTIP_MIN_FPS"] = "Minimum FPS: ";
-L["TITAN_FPS_TOOLTIP_MAX_FPS"] = "Maximum FPS: ";
-L["TITAN_FPS_TOOLTIP"] = "Frames Per Second";
+L["TITAN_FPS_TOOLTIP_CURRENT_FPS"] = "FPS Correnti: ";
+L["TITAN_FPS_TOOLTIP_AVG_FPS"] = "FPS Medi: ";
+L["TITAN_FPS_TOOLTIP_MIN_FPS"] = "FPS Minimi: ";
+L["TITAN_FPS_TOOLTIP_MAX_FPS"] = "FPS Massimo: ";
+L["TITAN_FPS_TOOLTIP"] = "Frame al secondo";
      
 L["TITAN_LATENCY_FORMAT"] = "%d".."ms";
 L["TITAN_LATENCY_BANDWIDTH_FORMAT"] = "%.3f ".."KB/s";
-L["TITAN_LATENCY_BUTTON_LABEL"] = "Latency: ";
-L["TITAN_LATENCY_TOOLTIP"] = "Network Status";
-L["TITAN_LATENCY_TOOLTIP_LATENCY_HOME"] = "Realm Latency (home): ";
-L["TITAN_LATENCY_TOOLTIP_LATENCY_WORLD"] = "Game Latency (world): ";
-L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_IN"] = "Bandwidth In: ";
-L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_OUT"] = "Bandwidth Out: ";
-L["TITAN_LATENCY_MENU_TEXT"] = "Latency";
+L["TITAN_LATENCY_BUTTON_LABEL"] = "Latenza: ";
+L["TITAN_LATENCY_TOOLTIP"] = "Stato Network";
+L["TITAN_LATENCY_TOOLTIP_LATENCY_HOME"] = "Latenza Reame (locale): ";
+L["TITAN_LATENCY_TOOLTIP_LATENCY_WORLD"] = "Latenza Gioco (reame): ";
+L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_IN"] = "Banda in Ingresso: ";
+L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_OUT"] = "Banda in Uscita: ";
+L["TITAN_LATENCY_MENU_TEXT"] = "Latenza";
      
-L["TITAN_LOOTTYPE_BUTTON_LABEL"] = "Loot: ";
-L["TITAN_LOOTTYPE_FREE_FOR_ALL"] = "Free For All";
-L["TITAN_LOOTTYPE_ROUND_ROBIN"] = "Round Robin";
-L["TITAN_LOOTTYPE_MASTER_LOOTER"] = "Master Looter";
-L["TITAN_LOOTTYPE_GROUP_LOOT"] = "Group Loot";
-L["TITAN_LOOTTYPE_NEED_BEFORE_GREED"] = "Need Before Greed";
-L["TITAN_LOOTTYPE_TOOLTIP"] = "Loot Type Info";
-L["TITAN_LOOTTYPE_MENU_TEXT"] = "Loot Type";
-L["TITAN_LOOTTYPE_RANDOM_ROLL_LABEL"] = "Random Roll";
-L["TITAN_LOOTTYPE_TOOLTIP_HINT1"] = "Hint: Left-click for random roll.";
-L["TITAN_LOOTTYPE_TOOLTIP_HINT2"] = "Select roll type from right-click menu.";
-L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"] = "Dungeon Difficulty";
-L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"] = "Raid Difficulty";
-L["TITAN_LOOTTYPE_SHOWDUNGEONDIFF_LABEL"] = "Show Dungeon/Raid Difficulty";
-L["TITAN_LOOTTYPE_SETDUNGEONDIFF_LABEL"] = "Set Dungeon Difficulty";
-L["TITAN_LOOTTYPE_SETRAIDDIFF_LABEL"] = "Set Raid Difficulty";
-L["TITAN_LOOTTYPE_AUTODIFF_LABEL"] = "Auto (Group Based)";
+L["TITAN_LOOTTYPE_BUTTON_LABEL"] = "Predazione: ";
+L["TITAN_LOOTTYPE_FREE_FOR_ALL"] = "Libero per Tutti";
+L["TITAN_LOOTTYPE_ROUND_ROBIN"] = "Rotazione Fissa";
+L["TITAN_LOOTTYPE_MASTER_LOOTER"] = "Resp. del Bottino";
+L["TITAN_LOOTTYPE_GROUP_LOOT"] = "Bottino di Gruppo";
+L["TITAN_LOOTTYPE_NEED_BEFORE_GREED"] = "Necessità prima di Bramosia";
+L["TITAN_LOOTTYPE_TOOLTIP"] = "Info Tipo Predazione";
+L["TITAN_LOOTTYPE_MENU_TEXT"] = "Tipo Predazione";
+L["TITAN_LOOTTYPE_RANDOM_ROLL_LABEL"] = "Tiro casuale";
+L["TITAN_LOOTTYPE_TOOLTIP_HINT1"] = "Suggerimento: Click Sinistro per fare un tiro casuale.";
+L["TITAN_LOOTTYPE_TOOLTIP_HINT2"] = "Scegli tipo di tiro dal menu col tasto destro.";
+L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"] = "Difficolta Scorreria";
+L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"] = "Difficoltà Incursione";
+L["TITAN_LOOTTYPE_SHOWDUNGEONDIFF_LABEL"] = "Mostra difficoltà Scorreria/Incursione";
+L["TITAN_LOOTTYPE_SETDUNGEONDIFF_LABEL"] = "Imposta difficoltà Scorreria";
+L["TITAN_LOOTTYPE_SETRAIDDIFF_LABEL"] = "Imposta difficoltà Incursione";
+L["TITAN_LOOTTYPE_AUTODIFF_LABEL"] = "Auto (in base al gruppo)";
      
 L["TITAN_MEMORY_FORMAT"] = "%.3f".."MB";
 L["TITAN_MEMORY_FORMAT_KB"] = "%d".."KB";
 L["TITAN_MEMORY_RATE_FORMAT"] = "%.3f".."KB/s";
-L["TITAN_MEMORY_BUTTON_LABEL"] = "Memory: ";
-L["TITAN_MEMORY_TOOLTIP"] = "Memory Usage";
-L["TITAN_MEMORY_TOOLTIP_CURRENT_MEMORY"] = "Current: ";
-L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Initial: ";
-L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Increasing Rate: ";
+L["TITAN_MEMORY_BUTTON_LABEL"] = "Memoria: ";
+L["TITAN_MEMORY_TOOLTIP"] = "Uso Memoria";
+L["TITAN_MEMORY_TOOLTIP_CURRENT_MEMORY"] = "Corrente: ";
+L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Iniziale: ";
+L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Velocità aumento: ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "KB/MB";     
      
---L["TITAN_MONEY_GOLD"] = "g";
---L["TITAN_MONEY_SILVER"] = "s";
---L["TITAN_MONEY_COPPER"] = "c";
 L["TITAN_MONEY_FORMAT"] = "%d".."g"..", %02d".."s"..", %02d".."c";
      
-L["TITAN_PERFORMANCE_TOOLTIP"] = "Performance Info";
+L["TITAN_PERFORMANCE_TOOLTIP"] = "Info Performance";
 L["TITAN_PERFORMANCE_MENU_TEXT"] = "Performance";
-L["TITAN_PERFORMANCE_ADDONS"] = "Addon Usage";
-L["TITAN_PERFORMANCE_ADDON_MEM_USAGE_LABEL"] = "Addon Memory Usage";
-L["TITAN_PERFORMANCE_ADDON_MEM_FORMAT_LABEL"] = "Addon Memory Format";
-L["TITAN_PERFORMANCE_ADDON_CPU_USAGE_LABEL"] = "Addon CPU Usage";
-L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"] = "Name:";
-L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"] = "Usage";
-L["TITAN_PERFORMANCE_ADDON_RATE_LABEL"] = "Rate";
-L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"] = "Total Addon Memory:";
-L["TITAN_PERFORMANCE_ADDON_TOTAL_CPU_USAGE_LABEL"] = "Total CPU Time:";
-L["TITAN_PERFORMANCE_MENU_SHOW_FPS"] = "Show FPS";
-L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY"] = "Show Realm Latency";
-L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY_WORLD"] = "Show Game Latency";
-L["TITAN_PERFORMANCE_MENU_SHOW_MEMORY"] = "Show Memory";
-L["TITAN_PERFORMANCE_MENU_SHOW_ADDONS"] = "Show Addon Memory Usage";
-L["TITAN_PERFORMANCE_MENU_SHOW_ADDON_RATE"] = "Show Addon Usage Rate";
-L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL"] = "CPU Profiling Mode";
-L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL_ON"] = "Enable CPU Profiling Mode ";
-L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL_OFF"] = "Disable CPU Profiling Mode ";
-L["TITAN_PERFORMANCE_CONTROL_TOOLTIP"] = "Monitored Addons: ";
-L["TITAN_PERFORMANCE_CONTROL_TITLE"] = "Monitored Addons";
+L["TITAN_PERFORMANCE_ADDONS"] = "Uso Addon";
+L["TITAN_PERFORMANCE_ADDON_MEM_USAGE_LABEL"] = "Uso memoria Addon";
+L["TITAN_PERFORMANCE_ADDON_MEM_FORMAT_LABEL"] = "Formato memoria Addon";
+L["TITAN_PERFORMANCE_ADDON_CPU_USAGE_LABEL"] = "Uso CPU Addon";
+L["TITAN_PERFORMANCE_ADDON_NAME_LABEL"] = "Nome:";
+L["TITAN_PERFORMANCE_ADDON_USAGE_LABEL"] = "Uso";
+L["TITAN_PERFORMANCE_ADDON_RATE_LABEL"] = "Tasso";
+L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"] = "Memoria Addon totale:";
+L["TITAN_PERFORMANCE_ADDON_TOTAL_CPU_USAGE_LABEL"] = "Tempo CPU totale:";
+L["TITAN_PERFORMANCE_MENU_SHOW_FPS"] = "Mostra FPS";
+L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY"] = "Mostra latenza reame";
+L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY_WORLD"] = "Mostra latenza gioco";
+L["TITAN_PERFORMANCE_MENU_SHOW_MEMORY"] = "Mostra memoria";
+L["TITAN_PERFORMANCE_MENU_SHOW_ADDONS"] = "Mostra uso memoria addon";
+L["TITAN_PERFORMANCE_MENU_SHOW_ADDON_RATE"] = "Mostra tasso uso Addon";
+L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL"] = "Modalità controllo CPU";
+L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL_ON"] = "Abilita modalità controllo CPU ";
+L["TITAN_PERFORMANCE_MENU_CPUPROF_LABEL_OFF"] = "Disabilita modalità controllo CPU ";
+L["TITAN_PERFORMANCE_CONTROL_TOOLTIP"] = "Addon monitorati: ";
+L["TITAN_PERFORMANCE_CONTROL_TITLE"] = "Addon monitorati";
 L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
-L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Hint: Left-click to force a garbage collection.";
+L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Suggerimento: Click sinistro per forzare una garbage collection.";
 		     
 L["TITAN_XP_FORMAT"] = "%d";
 L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
-L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/hr This Level: ";
-L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/hr This Session: ";
-L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Time To Level: ";
-L["TITAN_XP_LEVEL_COMPLETE"] = "Level Complete: ";
-L["TITAN_XP_TOTAL_RESTED"] = "Rested: ";
-L["TITAN_XP_XPTOLEVELUP"] = "XP To Level: ";
-L["TITAN_XP_TOOLTIP"] = "XP Info";
-L["TITAN_XP_TOOLTIP_TOTAL_TIME"] = "Total Time Played: ";
-L["TITAN_XP_TOOLTIP_LEVEL_TIME"] = "Time Played This Level: ";
-L["TITAN_XP_TOOLTIP_SESSION_TIME"] = "Time Played This Session: ";
-L["TITAN_XP_TOOLTIP_TOTAL_XP"] = "Total XP Required This Level: ";
-L["TITAN_XP_TOOLTIP_LEVEL_XP"] = "XP Gained This Level: ";
-L["TITAN_XP_TOOLTIP_TOLEVEL_XP"] = "XP Needed To Level: ";
-L["TITAN_XP_TOOLTIP_SESSION_XP"] = "XP Gained This Session: ";
-L["TITAN_XP_TOOLTIP_XPHR_LEVEL"] = "XP/HR This Level: ";
-L["TITAN_XP_TOOLTIP_XPHR_SESSION"] = "XP/HR This Session: ";     
-L["TITAN_XP_TOOLTIP_TOLEVEL_LEVEL"] = "Time To Level (Level Rate): ";
-L["TITAN_XP_TOOLTIP_TOLEVEL_SESSION"] = "Time To Level (Session Rate): ";
-L["TITAN_XP_MENU_TEXT"] = "XP";
-L["TITAN_XP_MENU_SHOW_XPHR_THIS_LEVEL"] = "Show XP/HR This Level";
-L["TITAN_XP_MENU_SHOW_XPHR_THIS_SESSION"] = "Show XP/HR This Session";
-L["TITAN_XP_MENU_SHOW_RESTED_TOLEVELUP"] = "Show Multi-Info View";
-L["TITAN_XP_MENU_SIMPLE_BUTTON_TITLE"] = "Button";
-L["TITAN_XP_MENU_SIMPLE_BUTTON_RESTED"] = "Show Rested XP";
-L["TITAN_XP_MENU_SIMPLE_BUTTON_TOLEVELUP"] = "Show XP To Level";
-L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "Show Estimated Kills To Level";
-L["TITAN_XP_MENU_RESET_SESSION"] = "Reset Session";
-L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Refresh Timers";
-L["TITAN_XP_UPDATE_PENDING"] = "Updating...";
-L["TITAN_XP_KILLS_LABEL"] = "Kills To Level (at %d XP gained last): ";
-L["TITAN_XP_KILLS_LABEL_SHORT"] = "Est. Kills: ";
-L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Session Time: ";
-L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Show Session Time";
-L["TITAN_XP_GAIN_PATTERN"] = "(.*) dies, you gain (%d+) experience.";
-L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Est. Gains: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "XP Gains To Level (at %d XP gained last): ";
-L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "Show Estimated XP Gains To Level";
+L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "PE/hr questo livello: ";
+L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "PE/hr questa sessione: ";
+L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Tempo per salire di lv: ";
+L["TITAN_XP_LEVEL_COMPLETE"] = "Livello completo: ";
+L["TITAN_XP_TOTAL_RESTED"] = "Riposato: ";
+L["TITAN_XP_XPTOLEVELUP"] = "PE al prossimo lv: ";
+L["TITAN_XP_TOOLTIP"] = "Info PE";
+L["TITAN_XP_TOOLTIP_TOTAL_TIME"] = "Tempo totale di gioco: ";
+L["TITAN_XP_TOOLTIP_LEVEL_TIME"] = "Tempo a questo lv: ";
+L["TITAN_XP_TOOLTIP_SESSION_TIME"] = "Tempo questa sessione: ";
+L["TITAN_XP_TOOLTIP_TOTAL_XP"] = "PE totali necessari questo lv: ";
+L["TITAN_XP_TOOLTIP_LEVEL_XP"] = "PE guadagnati questo lv: ";
+L["TITAN_XP_TOOLTIP_TOLEVEL_XP"] = "PE necessari al prossimo lv: ";
+L["TITAN_XP_TOOLTIP_SESSION_XP"] = "PE guadagnati questa sessione: ";
+L["TITAN_XP_TOOLTIP_XPHR_LEVEL"] = "PE/HR questo lv: ";
+L["TITAN_XP_TOOLTIP_XPHR_SESSION"] = "PE/HR questa sessione: ";     
+L["TITAN_XP_TOOLTIP_TOLEVEL_LEVEL"] = "Tempo al prossimo lv (Tasso lv): ";
+L["TITAN_XP_TOOLTIP_TOLEVEL_SESSION"] = "Tempo al prossimo lv (Tasso sessione): ";
+L["TITAN_XP_MENU_TEXT"] = "PE";
+L["TITAN_XP_MENU_SHOW_XPHR_THIS_LEVEL"] = "Mostra PE/HR questo lv";
+L["TITAN_XP_MENU_SHOW_XPHR_THIS_SESSION"] = "Mostra PE/HR questa sessione";
+L["TITAN_XP_MENU_SHOW_RESTED_TOLEVELUP"] = "Mostra vista multi-info";
+L["TITAN_XP_MENU_SIMPLE_BUTTON_TITLE"] = "Bottone";
+L["TITAN_XP_MENU_SIMPLE_BUTTON_RESTED"] = "Mostra PE Riposato";
+L["TITAN_XP_MENU_SIMPLE_BUTTON_TOLEVELUP"] = "Mostra PE al prossimo lv";
+L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "Mostra uccisioni rimanenti al prossimo lv";
+L["TITAN_XP_MENU_RESET_SESSION"] = "Reimposta sessione";
+L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Reimposta timers";
+L["TITAN_XP_UPDATE_PENDING"] = "Aggiorno...";
+L["TITAN_XP_KILLS_LABEL"] = "Uccisioni al prossimo lv (%d PE ottenuti l'ultima volta): ";
+L["TITAN_XP_KILLS_LABEL_SHORT"] = "Uccisioni: ";
+L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Tempo sessione: ";
+L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Mostra tempo sessione";
+L["TITAN_XP_GAIN_PATTERN"] = "(.*) muore, otteni (%d+) esperienza.";
+L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Incrementi PE da ott.: ";
+L["TITAN_XP_XPGAINS_LABEL"] = "Incrementi PE al prossimo lv. (%d PE ottenuti l'ultima volta): ";
+L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "Mostra incrementi PE al prossimo lv";
 
      --Titan Repair
      L["REPAIR_LOCALE"] = {
-          pattern = "^Integrità (%d+) / (%d+)$",
-          menu = "Repair",
-          tooltip = "Repair Info",
-          button = "Durability: ",
-          normal = "Repair Cost (Normal): ",
-          friendly = "Repair Cost (Friendly): ",
-          honored = "Repair Cost (Honored): ",
-          revered = "Repair Cost (Revered): ",
-          exalted = "Repair Cost (Exalted): ",
-          buttonNormal = "Show Normal",
-          buttonFriendly = "Show Friendly (5%)",
-          buttonHonored = "Show Honored (10%)",
-          buttonRevered = "Show Revered (15%)",
-          buttonExalted = "Show Exalted (20%)",
-          percentage = "Show as Percentage",
-          itemnames = "Show Item Names",
-          mostdamaged = "Show Most Damaged",
-          showdurabilityframe = "Show Durability Frame",
-          undamaged = "Show Undamaged Items",
-          discount = "Discount",
-          nothing = "Nothing Damaged",
-          confirmation = "Do you want to repair all items ?",
-          badmerchant = "This merchant cannot repair. Displaying normal repair costs instead.",
-          popup = "Show Repair Popup",
-          showinventory = "Calculate Inventory Damage",
-          WholeScanInProgress = "Updating...",
-          AutoReplabel = "Auto-Repair",
-          AutoRepitemlabel = "Auto Repair All Items",
-          ShowRepairCost = "Show Repair Cost",
-		  		ignoreThrown = "Ignore Thrown",
-		  		ShowItems = "Show Items",
-		  		ShowDiscounts = "Show Discounts",
-		  		ShowCosts = "Show Costs",
-		  		Items = "Items",
-		  		Discounts = "Discounts",
-		  		Costs = "Costs",
-				CostTotal = "Total Cost",
-				CostBag = "Bag Cost",
-				CostEquip = "Equip Cost",
+          pattern = "^Integrità (%d+)/(%d+)$",
+          menu = "Riparazione",
+          tooltip = "Info Riparazione",
+          button = "Integrità: ",
+          normal = "Costo Riparazione (Normale): ",
+          friendly = "Costo Riparazione (Amichevole): ",
+          honored = "Costo Riparazione (Onorato): ",
+          revered = "Costo Riparazione (Riverito): ",
+          exalted = "Costo Riparazione (Osannato): ",
+          buttonNormal = "Mostra Normale",
+          buttonFriendly = "Mostra Amichevole (5%)",
+          buttonHonored = "Mostra Onorato (10%)",
+          buttonRevered = "Mostra Riverito (15%)",
+          buttonExalted = "Mostra Osannato (20%)",
+          percentage = "Mostra come percentuale",
+          itemnames = "Mostra nomi oggetti",
+          mostdamaged = "Mostra più danneggiato",
+          showdurabilityframe = "Mostra integrità",
+          undamaged = "Mostra oggetti non danneggiati",
+          discount = "Sconto",
+          nothing = "Niente da riparare",
+          confirmation = "Vuoi riparare tutti gli oggetti?",
+          badmerchant = "Questo mercante non può riparare. Visualizzo i costi normali di riparazione.",
+          popup = "Mostra popup riparazione",
+          showinventory = "Calcola danno nello zaino",
+          WholeScanInProgress = "Aggiorno...",
+          AutoReplabel = "Auto-Ripara",
+          AutoRepitemlabel = "Ripara automaticamente tutti gli oggetti",
+          ShowRepairCost = "Mostra costo riparazione",
+		  		ignoreThrown = "Ignora coltelli da lancio",
+		  		ShowItems = "Mostra oggetti",
+		  		ShowDiscounts = "Mostra sconti",
+		  		ShowCosts = "Mostra costi",
+		  		Items = "Oggetti",
+		  		Discounts = "Sconti",
+		  		Costs = "Costi",
+				CostTotal = "Costo totale",
+				CostBag = "Costo zaino",
+				CostEquip = "Costo equipaggiati",
  				TooltipOptions = "Tooltip",
     };
      
-     L["TITAN_REPAIR"] = "Titan Repair"
-     L["TITAN_REPAIR_GBANK_TOTAL"] = "Guild Bank Funds :"
-     L["TITAN_REPAIR_GBANK_WITHDRAW"] = "Guild Bank Withdrawal Allowed :"
-     L["TITAN_REPAIR_GBANK_USEFUNDS"] = "Use Guild Bank Funds"
-     L["TITAN_REPAIR_GBANK_NOMONEY"] = "Guild Bank can't afford the repair cost, or you can't withdraw that much."
-     L["TITAN_REPAIR_GBANK_NORIGHTS"] = "You are either not in a guild or you don't have permission to use the guild bank to repair your items."
-     L["TITAN_REPAIR_CANNOT_AFFORD"] = "You cannot afford to repair, at this time."
-     L["TITAN_REPAIR_REPORT_COST_MENU"] = "Report Repair Cost to Chat"
-     L["TITAN_REPAIR_REPORT_COST_CHAT"] = "Repair cost was "
+     L["TITAN_REPAIR"] = "Riparazione di Titan"
+     L["TITAN_REPAIR_GBANK_TOTAL"] = "Fondi della banca della gilda:"
+     L["TITAN_REPAIR_GBANK_WITHDRAW"] = "Fondi disponibili della banca della gilda:"
+     L["TITAN_REPAIR_GBANK_USEFUNDS"] = "Usa fondi della banca della gilda"
+     L["TITAN_REPAIR_GBANK_NOMONEY"] = "La banca della gilda non può permettersi così tanto oppure non hai i permessi per prendere così tanti soldi."
+     L["TITAN_REPAIR_GBANK_NORIGHTS"] = "Non sei in una gilda o non hai il permesso per utilizzare la banca della gilda per riparare i tuoi oggettix."
+     L["TITAN_REPAIR_CANNOT_AFFORD"] = "Non puoi permetterti la riparazione."
+     L["TITAN_REPAIR_REPORT_COST_MENU"] = "Scrivi il costo di riparazione nella chat"
+     L["TITAN_REPAIR_REPORT_COST_CHAT"] = "Il costo di riparazione è "
      
 --L["TITAN_PLUGINS_MENU_TITLE"] = "Plugins";
 
-L["TITAN_GOLD_TOOLTIPTEXT"] = "Total Gold on";
+L["TITAN_GOLD_TOOLTIPTEXT"] = "Oro totale su";
 L["TITAN_GOLD_ITEMNAME"] = "Titan Gold";
-L["TITAN_GOLD_CLEAR_DATA_TEXT"] = "Clear Database";
-L["TITAN_GOLD_RESET_SESS_TEXT"] = "Reset Current Session";
-L["TITAN_GOLD_DB_CLEARED"] = "Titan Gold - Database Cleared.";
-L["TITAN_GOLD_SESSION_RESET"] = "Titan Gold - Session Reset.";
-L["TITAN_GOLD_MENU_TEXT"] = "Gold";
-L["TITAN_GOLD_TOOLTIP"] = "Gold Info";
-L["TITAN_GOLD_TOGGLE_PLAYER_TEXT"] = "Display Player Gold";
-L["TITAN_GOLD_TOGGLE_ALL_TEXT"] = "Display Server Gold";
-L["TITAN_GOLD_SESS_EARNED"] = "Earned This Session";
-L["TITAN_GOLD_PERHOUR_EARNED"] = "Earned Per Hour";
-L["TITAN_GOLD_SESS_LOST"] = "Lost This Session";
-L["TITAN_GOLD_PERHOUR_LOST"] = "Lost Per Hour";
-L["TITAN_GOLD_STATS_TITLE"] = "Session Statistics";
-L["TITAN_GOLD_TTL_GOLD"] = "Total Gold";
-L["TITAN_GOLD_START_GOLD"] = "Starting Gold";
-L["TITAN_GOLD_TOGGLE_SORT_GOLD"] = "Sort Table By Gold";
-L["TITAN_GOLD_TOGGLE_SORT_NAME"] = "Sort Gold By Name";
-L["TITAN_GOLD_TOGGLE_GPH_SHOW"] = "Display Gold Per Hour";
-L["TITAN_GOLD_TOGGLE_GPH_HIDE"] = "Hide Gold Per Hour";
+L["TITAN_GOLD_CLEAR_DATA_TEXT"] = "Svuota Database";
+L["TITAN_GOLD_RESET_SESS_TEXT"] = "Reimposta sessione corrente";
+L["TITAN_GOLD_DB_CLEARED"] = "Titan Gold - Database cancellato.";
+L["TITAN_GOLD_SESSION_RESET"] = "Titan Gold - Reimposta sessione.";
+L["TITAN_GOLD_MENU_TEXT"] = "Oro";
+L["TITAN_GOLD_TOOLTIP"] = "Info oro";
+L["TITAN_GOLD_TOGGLE_PLAYER_TEXT"] = "Mostra oro giocatore";
+L["TITAN_GOLD_TOGGLE_ALL_TEXT"] = "Mostra oro server";
+L["TITAN_GOLD_SESS_EARNED"] = "Guadagnati in questa sessione";
+L["TITAN_GOLD_PERHOUR_EARNED"] = "Guadagnati ogni ora";
+L["TITAN_GOLD_SESS_LOST"] = "Persi questa sessione";
+L["TITAN_GOLD_PERHOUR_LOST"] = "Persi ogni ora";
+L["TITAN_GOLD_STATS_TITLE"] = "Statistiche sessione";
+L["TITAN_GOLD_TTL_GOLD"] = "Oro totale";
+L["TITAN_GOLD_START_GOLD"] = "Oro iniziale";
+L["TITAN_GOLD_TOGGLE_SORT_GOLD"] = "Ordina per quantità";
+L["TITAN_GOLD_TOGGLE_SORT_NAME"] = "Ordina per nome";
+L["TITAN_GOLD_TOGGLE_GPH_SHOW"] = "Mostra oro ogni ora";
+L["TITAN_GOLD_TOGGLE_GPH_HIDE"] = "Nascondi oro per ora";
 L["TITAN_GOLD_GOLD"] = "g";
 L["TITAN_GOLD_SILVER"] = "s";
 L["TITAN_GOLD_COPPER"] = "c";
-L["TITAN_GOLD_STATUS_PLAYER_SHOW"] = "Visible";
-L["TITAN_GOLD_STATUS_PLAYER_HIDE"] = "Hidden";
-L["TITAN_GOLD_DELETE_PLAYER"] = "Delete Toon";
-L["TITAN_GOLD_SHOW_PLAYER"] = "Show Toon";
-L["TITAN_GOLD_FACTION_PLAYER_ALLY"] = "Alliance";
-L["TITAN_GOLD_FACTION_PLAYER_HORDE"] = "Horde";
-L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."Warning: "
-..FONT_COLOR_CODE_CLOSE.."This setting will wipe your Titan Gold database. "
-.."If you wish to continue with this operation, push 'Accept', otherwise push 'Cancel' or the 'Escape' key.";
-L["TITAN_GOLD_COIN_NONE"] = "Show No Labels";
-L["TITAN_GOLD_COIN_LABELS"] = "Show Text Labels";
-L["TITAN_GOLD_COIN_ICONS"] = "Show Icon Labels";
-L["TITAN_GOLD_ONLY"] = "Show Gold Only";
-L["TITAN_GOLD_COLORS"] = "Show Gold Colors";
-L["TITAN_USE_COMMA"] = "Use comma";
-L["TITAN_USE_PERIOD"] = "Use period";
+L["TITAN_GOLD_STATUS_PLAYER_SHOW"] = "Visibile";
+L["TITAN_GOLD_STATUS_PLAYER_HIDE"] = "Nascosto";
+L["TITAN_GOLD_DELETE_PLAYER"] = "Elimina personaggio";
+L["TITAN_GOLD_SHOW_PLAYER"] = "Mostra personaggio";
+L["TITAN_GOLD_FACTION_PLAYER_ALLY"] = "Alleanza";
+L["TITAN_GOLD_FACTION_PLAYER_HORDE"] = "Orda";
+L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."Attenzione: "
+..FONT_COLOR_CODE_CLOSE.."Questa impostazione cancellerà il database. "
+.."Se vuoi continuare con questa operazione, premi 'Accetta', altrimenti premi 'Annulla' o il tasto Cancella.";
+L["TITAN_GOLD_COIN_NONE"] = "Non mostrare descrizione";
+L["TITAN_GOLD_COIN_LABELS"] = "Mostra descrizione";
+L["TITAN_GOLD_COIN_ICONS"] = "Mostra icone";
+L["TITAN_GOLD_ONLY"] = "Mostra solo oro";
+L["TITAN_GOLD_COLORS"] = "Mostra colori";
 
-
-L["TITAN_VOLUME_TOOLTIP"] = "Volume Info";
-L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Master Sound Volume: ";
-L["TITAN_VOLUME_SOUND_TOOLTIP_VALUE"] = "Effects Sound Volume: ";
-L["TITAN_VOLUME_AMBIENCE_TOOLTIP_VALUE"] = "Ambience Sound Volume: ";
-L["TITAN_VOLUME_MUSIC_TOOLTIP_VALUE"] = "Music Sound Volume: ";
-L["TITAN_VOLUME_MICROPHONE_TOOLTIP_VALUE"] = "Microphone Sound Volume: ";
-L["TITAN_VOLUME_SPEAKER_TOOLTIP_VALUE"] = "Speaker Sound Volume: ";
-L["TITAN_VOLUME_TOOLTIP_HINT1"] = "Hint: Left-click to adjust the"
-L["TITAN_VOLUME_TOOLTIP_HINT2"] = "sound volume.";
-L["TITAN_VOLUME_CONTROL_TOOLTIP"] = "Volume Control: ";
-L["TITAN_VOLUME_CONTROL_TITLE"] = "Volume Control";
+L["TITAN_VOLUME_TOOLTIP"] = "Info Volume";
+L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Volume master: ";
+L["TITAN_VOLUME_SOUND_TOOLTIP_VALUE"] = "Volume effetti: ";
+L["TITAN_VOLUME_AMBIENCE_TOOLTIP_VALUE"] = "Volume effetti ambiente: ";
+L["TITAN_VOLUME_MUSIC_TOOLTIP_VALUE"] = "Volume suono musica: ";
+L["TITAN_VOLUME_MICROPHONE_TOOLTIP_VALUE"] = "Volume microfono: ";
+L["TITAN_VOLUME_SPEAKER_TOOLTIP_VALUE"] = "Volume casse: ";
+L["TITAN_VOLUME_TOOLTIP_HINT1"] = "Suggerimento: Click Sinistro per impostare il"
+L["TITAN_VOLUME_TOOLTIP_HINT2"] = "volume.";
+L["TITAN_VOLUME_CONTROL_TOOLTIP"] = "Controllo volume: ";
+L["TITAN_VOLUME_CONTROL_TITLE"] = "Controllo volume";
 L["TITAN_VOLUME_MASTER_CONTROL_TITLE"] = "Master";
-L["TITAN_VOLUME_SOUND_CONTROL_TITLE"] = "Effects";
-L["TITAN_VOLUME_AMBIENCE_CONTROL_TITLE"] = "Ambience";
-L["TITAN_VOLUME_MUSIC_CONTROL_TITLE"] = "Music";
-L["TITAN_VOLUME_MICROPHONE_CONTROL_TITLE"] = "Microphone";
-L["TITAN_VOLUME_SPEAKER_CONTROL_TITLE"] = "Speaker";
-L["TITAN_VOLUME_CONTROL_HIGH"] = "High";
-L["TITAN_VOLUME_CONTROL_LOW"] = "Low";
-L["TITAN_VOLUME_MENU_TEXT"] = "Volume Control";
-L["TITAN_VOLUME_MENU_AUDIO_OPTIONS_LABEL"] = "Show Sound/Voice Options" ;
-L["TITAN_VOLUME_MENU_OVERRIDE_BLIZZ_SETTINGS"] = "Override Blizzard Volume Settings";
+L["TITAN_VOLUME_SOUND_CONTROL_TITLE"] = "Effetti";
+L["TITAN_VOLUME_AMBIENCE_CONTROL_TITLE"] = "Ambiente";
+L["TITAN_VOLUME_MUSIC_CONTROL_TITLE"] = "Musica";
+L["TITAN_VOLUME_MICROPHONE_CONTROL_TITLE"] = "Microfono";
+L["TITAN_VOLUME_SPEAKER_CONTROL_TITLE"] = "Casse";
+L["TITAN_VOLUME_CONTROL_HIGH"] = "Alto";
+L["TITAN_VOLUME_CONTROL_LOW"] = "Basso";
+L["TITAN_VOLUME_MENU_TEXT"] = "Controllo volume";
+L["TITAN_VOLUME_MENU_AUDIO_OPTIONS_LABEL"] = "Mostra opzioni suono/voce" ;
+L["TITAN_VOLUME_MENU_OVERRIDE_BLIZZ_SETTINGS"] = "Sovrascrivi impostazioni volume Blizzard";

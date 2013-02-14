@@ -1,4 +1,4 @@
-function GetNitroboosted_OnLoad()
+﻿function GetNitroboosted_OnLoad()
 	GetNitroboostedFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
 	-- Slash Commands

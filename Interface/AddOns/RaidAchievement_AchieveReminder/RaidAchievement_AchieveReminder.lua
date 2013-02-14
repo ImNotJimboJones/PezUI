@@ -35,13 +35,13 @@ if ralldelaycheckzone2 and icracurtime>ralldelaycheckzone2 then
 ralldelaycheckzone2=nil
 ralldelaycheckzone=GetTime()+0.5 --ыытест не работал инфо после релога, так заработал
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
-  if UnitInRaid("player") or a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+  if UnitInRaid("player") or a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
   SetMapToCurrentZone()
   end
   local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if GetInstanceDifficulty()==8 then
+if select(3,GetInstanceInfo())==7 then
 --no LFR
-elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
   local found=0
   for kj=1,#ralllocations do
     if ralllocations[kj]==GetCurrentMapAreaID() then
@@ -73,11 +73,11 @@ if ralldelaycheckzone and icracurtime>ralldelaycheckzone then
   ralldelaycheckzone=nil
   local vbil=0
   local a1, a2, a3, a4, a5 = GetInstanceInfo()
-  if UnitInRaid("player") or (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+  if UnitInRaid("player") or (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
   SetMapToCurrentZone()
   end
   local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if GetInstanceDifficulty()==8 then
+if select(3,GetInstanceInfo())==7 then
 --no LFR
 elseif GetRealZoneText() and ralllocationnames and ralllocations and GetCurrentMapAreaID() then
   for i=1,#ralllocations do
@@ -106,16 +106,16 @@ end
 
 local _, a2, a3, _, a5 = GetInstanceInfo()
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if GetInstanceDifficulty()==8 then
+if select(3,GetInstanceInfo())==7 then
 --no LFR
 else
 	if ralloptions[1]==1 then
 		if #rallnomorereport[1]==0 then
-			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
 				icllcheckachieves(1)
 				local a1, a2, a3, a4, a5 = GetInstanceInfo()
         if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
-          if GetInstanceDifficulty()~=2 and a2~=nil then
+          if select(3,GetInstanceInfo())~=1 and a2~=nil then
             table.insert(rallnomorereport[1],GetCurrentMapAreaID())
             table.insert(rallnomorereport[2],a5)
           end
@@ -133,10 +133,10 @@ else
 			end
 			if bil==0 then
 				icllcheckachieves(1)
-				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
           local a1, a2, a3, a4, a5 = GetInstanceInfo()
           if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
-            if GetInstanceDifficulty()~=2 and a2~=nil then
+            if select(3,GetInstanceInfo())~=1 and a2~=nil then
               table.insert(rallnomorereport[1],GetCurrentMapAreaID())
               table.insert(rallnomorereport[2],a5)
             end
@@ -486,13 +486,13 @@ function icll_button33()
 local bil=0
 SetMapToCurrentZone()
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if GetInstanceDifficulty()==8 then
+if select(3,GetInstanceInfo())==7 then
 --no LFR
 else
 for i=1,#ralllocations do
 	if ralllocations[i]==GetCurrentMapAreaID() then
 		local a1, a2, a3, a4, a5 = GetInstanceInfo()
-		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
 			if ralltip[i]=="10" or ralltip[i]=="25" then
 				if tonumber(ralltip[i])==a5 then
 					bil=i
@@ -1194,14 +1194,14 @@ if ralloptions[1]==1 then
 
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
 SetMapToCurrentZone()
-if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or GetInstanceDifficulty()==3 or (GetInstanceDifficulty()==2 and a2==nil) then
+if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
 
 
 --проверка по имени локации, если имя встречается дважды - проверяется цифра на сколько чел расчитано и с той колонкой работаем
 
 local found=0
 local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
-if GetInstanceDifficulty()==8 then
+if select(3,GetInstanceInfo())==7 then
 --no LFR
 else
 for kj=1,#ralllocations do
@@ -1613,7 +1613,7 @@ end
 
 function rallreportinchat(texttableout,chat,whisp)
 
-if chat and (chat=="party" or chat=="raid" or chat=="raid_warning") and GetInstanceDifficulty()==8 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) then
+if chat and (chat=="party" or chat=="raid" or chat=="raid_warning") and select(3,GetInstanceInfo())==7 or IsLFGModeActive(LE_LFG_CATEGORY_LFD) then
 chat="Instance_CHAT"
 end
 

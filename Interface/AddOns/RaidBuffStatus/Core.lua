@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 601 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 608 $", ".* (.*) .*"))
 
 local addon = RaidBuffStatus
 RaidBuffStatus.L = L
@@ -2636,7 +2636,7 @@ function RaidBuffStatus:EnteringCombat(force)
 		return
 	end
 	RaidBuffStatus.lasttobuf = ""
-	if RaidBuffStatus.db.profile.HideInCombat or force then
+	if RaidBuffStatus.db.profile.HideInCombat or (force == true) then
 		if RaidBuffStatus.frame:IsVisible() then
 			dashwasdisplayed = true
 			RaidBuffStatus:HideReportFrame()
@@ -2656,7 +2656,7 @@ function RaidBuffStatus:LeftCombat(force)
 	incombat = false
 	RaidBuffStatus:AddBuffButtons()
 	RaidBuffStatus:UpdateButtons()
-	if (force or RaidBuffStatus.db.profile.HideInCombat) and dashwasdisplayed then
+	if (force == true or RaidBuffStatus.db.profile.HideInCombat) and dashwasdisplayed then
 		RaidBuffStatus:ShowReportFrame()	
 	end
 end
@@ -4641,11 +4641,11 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 	if not whom then
 		return
 	end
-	if not RaidBuffStatus:CanAutoInvite(whom) then return end
 	if RaidBuffStatus.db.profile.guildmembers and IsInGuild() then
 		for i=1, GetNumGuildMembers() do
 			name = GetGuildRosterInfo(i)
 			if name == whom then
+	                        if not RaidBuffStatus:CanAutoInvite(whom) then return end -- may send a whisper
 				RaidBuffStatus:Print((L["Invite auto-accepted from guild member %s."]):format(whom))
 				RaidBuffStatus:AcceptInvite()
 				return
@@ -4656,6 +4656,7 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 		for i=1, GetNumFriends() do
 			name = GetFriendInfo(i)
 			if name == whom then
+	                        if not RaidBuffStatus:CanAutoInvite(whom) then return end -- may send a whisper
 				RaidBuffStatus:Print((L["Invite auto-accepted from friend %s."]):format(whom))
 				RaidBuffStatus:AcceptInvite()
 				return
@@ -4669,6 +4670,7 @@ function RaidBuffStatus:PARTY_INVITE_REQUEST(event, whom)
 			if (client == "WoW" and isOnline) then
 				local _,name,_,realm = BNGetToonInfo(pID)
 				if name == whom then
+	                                if not RaidBuffStatus:CanAutoInvite(whom) then return end -- may send a whisper
 					RaidBuffStatus:Print((L["Invite auto-accepted from battle.net friend %s."]):format(whom))
 					RaidBuffStatus:AcceptInvite()
 					return

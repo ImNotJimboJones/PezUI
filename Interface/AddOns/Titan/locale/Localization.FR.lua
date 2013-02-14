@@ -20,6 +20,8 @@ L["TITAN_KILOBYTES_PER_SECOND"] = "Ko/s";
 L["TITAN_KILOBITS_PER_SECOND"] = "kb/s"
 L["TITAN_MEGABYTE"] = "Mo";
 L["TITAN_NONE"] = "Aucun";
+L["TITAN_USE_COMMA"] = "Utiliser une virgule pour le séparateur de milliers";
+L["TITAN_USE_PERIOD"] = "Utiliser un point pour le séparateur de milliers";
 
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "Vous ne pouvez pas supprimer votre profil en cours.";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Attention : "..FONT_COLOR_CODE_CLOSE
@@ -362,9 +364,6 @@ L["TITAN_MEMORY_TOOLTIP_INITIAL_MEMORY"] = "Initial : ";
 L["TITAN_MEMORY_TOOLTIP_INCREASING_RATE"] = "Taux d'augmentation : ";
 L["TITAN_MEMORY_KBMB_LABEL"] = "Ko/Mo";
 
---	L["TITAN_MONEY_GOLD"] = "o";
---	L["TITAN_MONEY_SILVER"] = "a";
---	L["TITAN_MONEY_COPPER"] = "c";
 L["TITAN_MONEY_FORMAT"] = "%d".."o"..", %02d".."a"..", %02d".."c";
 
 L["TITAN_PERFORMANCE_TOOLTIP"] = "Performances";
@@ -524,9 +523,6 @@ L["TITAN_GOLD_COIN_NONE"] = "Ne rien afficher";
 L["TITAN_GOLD_COIN_LABELS"] = "Afficher le texte des pièces";
 L["TITAN_GOLD_COIN_ICONS"] = "Afficher les images des pièces";
 L["TITAN_GOLD_ONLY"] = "Afficher uniquement les pièces d'or";
-L["TITAN_USE_COMMA"] = "Utiliser une virgule pour le séparateur de milliers";
-L["TITAN_USE_PERIOD"] = "Utiliser un point pour le séparateur de milliers";
-
 
 L["TITAN_VOLUME_TOOLTIP"] = "Contrôle du volume";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "Volume global : ";
