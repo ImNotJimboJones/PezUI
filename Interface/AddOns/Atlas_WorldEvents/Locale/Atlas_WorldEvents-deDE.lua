@@ -1,17 +1,17 @@
-﻿-- $Id: Atlas_WorldEvents-deDE.lua 37 2012-09-25 16:53:12Z arith $
+﻿-- $Id: Atlas_WorldEvents-deDE.lua 47 2013-02-17 12:14:13Z arith $
 --[[
 
-	Atlas Arena, a World of Warcraft instance map browser
-	Copyright 2010 - 2011 Arith Hsu
+	Atlas World Events, a World of Warcraft map browser for world events
+	Copyright 2011 ~ 2013 Arith Hsu
 
 	This file is a plugin of Atlas.
 
-	Atlas Arena is free software; you can redistribute it and/or modify
+	Atlas World Events is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
 
-	Atlas is distributed in the hope that it will be useful,
+	Atlas World Events is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
@@ -27,7 +27,10 @@ local AL = AceLocale:NewLocale("Atlas_WorldEvents", "deDE", false);
 
 if AL then
 
+
+	-- ----------------------------------------------------------------------
 	-- Common
+	-- ----------------------------------------------------------------------
 	AL["World Events Maps"] = "Weltereigniskarten" -- Needs review
 	AL["Lower"] = "Untere" -- Needs review
 	AL["Major Cities"] = "Hauptstädte" -- Needs review
@@ -41,18 +44,25 @@ if AL then
 	AL["Horde Questline"] = "Horde-Questreihe" -- Needs review
 	AL["Alliance Questline"] = "Allianz-Questreihe" -- Needs review
 	AL["Portals"] = "Portale" -- Needs review
+--	AL["Daily Quest"] = "Daily Quest";
 
+	-- ----------------------------------------------------------------------
 	-- World Events
+	-- ----------------------------------------------------------------------
 	AL["Lunar Festival"] = "Mondfest" -- Needs review
-	AL["Jan. 23 ~ Feb. 13"] = "23. Januar - 13. Februar" -- Needs review
+	AL["Lunar_Date"] = "27. Januar - 9. Februar" -- Needs review
 	AL["Midsummer Fire Festival"] = "Sonnenwendfest" -- Needs review
-	AL["June 21 ~ July 4"] = "21. Juni - 4. Juli" -- Needs review
+	AL["Midsummer_Date"] = "21. Juni - 4. Juli" -- Needs review
 	AL["Hallow's End"] = "Schlotternächte" -- Needs review
-	AL["October 18 ~ October 31"] = "18. Oktober - 31. Oktober" -- Needs review
+	AL["Hallow_Date"] = "18. Oktober - 31. Oktober" -- Needs review
+	AL["Brewfest"] = "Braufest";
+	AL["Love is in the Air"] = "Liebe liegt in der Luft";
 	-- Darkmoon Faire
 	AL["The first Sunday each month, last for a week"] = "Beginn: erster Sonntag jeden Monats, Dauer: eine Woche" -- Needs review
 
+	-- ----------------------------------------------------------------------
 	-- Lunar Festival
+	-- ----------------------------------------------------------------------
 	-- Azeroth
 	AL["Elder Hammershout"] = "Urahne Hammerklang" -- Needs review
 	AL["Elder Stormbrow"] = "Urahne Sturmbraue" -- Needs review
@@ -135,7 +145,9 @@ if AL then
 	AL["Elder Chogan'gada"] = "Urahne Chogan'gada" -- Needs review
 	AL["Elder Kilias"] = "Urahne Kilias" -- Needs review
 
+	-- ----------------------------------------------------------------------
 	-- Hallow's End
+	-- ----------------------------------------------------------------------
 	AL["Trick: "] = "Streich:" -- Needs review
 	AL["Masked Orphan Matron"] = "Maskierte Waisenmatrone" -- Needs review
 	AL["Orc Commoner"] = "Orcbürger" -- Needs review
@@ -166,7 +178,9 @@ if AL then
 	AL["Innkeeper Firebrew"] = "Gastwirt Feuerbräu" -- Needs review
 	AL["Innkeeper Saelienne"] = "Gastwirtin Saelienne" -- Needs review
 
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire - NPC
 	AL["Selina Dourman <Darkmoon Faire Information>"] = "Selina Sauermann <Information des Dunkelmond-Jahrmarkts>" -- Needs review
 	AL["Zina Sharpworth <Game Tokens>"] = "Zina Schnittwert <Spieljetons>" -- Needs review
@@ -212,7 +226,21 @@ if AL then
 	AL["Putting the Carnies Back Together Again"] = "Kratzer, Beulen, blaue Flecke" -- Needs review
 	AL["Keeping the Faire Sparkling"] = "Jahrmarkt der Eitelkeiten" -- Needs review
 
+	-- ----------------------------------------------------------------------
+	-- Brewfest
+	-- ----------------------------------------------------------------------
+	-- Queest
+	-- Brewfest - NPC
+	-- ----------------------------------------------------------------------
+	-- Love is in the Air
+	-- ----------------------------------------------------------------------
+	-- Quests
+	-- NPC
+	-- Mics.
+
+	-- ----------------------------------------------------------------------
 	-- Location Description
+	-- ----------------------------------------------------------------------
 	AL["(Outside the city gate)"] = "(Außerhalb des Stadttors)"
 	AL["(Outside the gate)"] = "(Außerhalb des Tors)"
 	AL["(On the roof of the bank)"] = "(Auf dem Dach der Bank)" -- Needs review

@@ -4,6 +4,15 @@ Copyright 2011 ~ 2012 Arith Hsu
 ==============
 = Change Log =
 ==============
+* 3.00 (2013/02/18)
+    - Update version number to prevent from blocking by Atlas
+
+* 2.10 (2013/02/17)
+    - Added "Love is in the Air" event
+    - Update Lunar Festival duration info
+    - Update Brewfest duration info
+    - Minor tuining for string IDs
+
 * 2.9 (2012/12/08)
     - TOC update to support WoW 5.1
 

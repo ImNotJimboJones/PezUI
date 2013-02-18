@@ -1,16 +1,16 @@
 --[[
 
 	Atlas World Events, a World of Warcraft map browser for world events
-	Copyright 2011 ~ 2012 Arith Hsu
+	Copyright 2011 ~ 2013 Arith Hsu
 
 	This file is a plugin of Atlas.
 
-	"Atlas World Events" is free software; you can redistribute it and/or modify
+	Atlas World Events is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
 
-	Atlas is distributed in the hope that it will be useful,
+	Atlas World Events is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
@@ -42,7 +42,7 @@ local myCategory = AL["World Events Maps"];
 local myData = {
 	Lunar_Azeroth = {
 		ZoneName = { AL["Lunar Festival"].." - "..BZ["Eastern Kingdoms"] };
-		{ ORNG..AL["Lunar Festival"].." - "..AL["Jan. 23 ~ Feb. 13"] };
+		{ ORNG..AL["Lunar Festival"].." - "..AL["Lunar_Date"] };
 		{ "" };
 		{ WHIT.." 1) "..AL["Elder Hammershout"]	..DASH..BLUE..BZ["Stormwind City"]..", "..BZ["Elwynn Forest"] };
 		{ GREY..INDENT..AL["(Outside the city gate)"] };
@@ -80,7 +80,7 @@ local myData = {
 	};
 	Lunar_Kalimdor = {
 		ZoneName = { AL["Lunar Festival"].." - "..BZ["Kalimdor"] };
-		{ ORNG..AL["Lunar Festival"].." - "..AL["Jan. 23 ~ Feb. 13"] };
+		{ ORNG..AL["Lunar Festival"].." - "..AL["Lunar_Date"] };
 		{ "" };
 		{ GREN.." 1') "..AL["Valadar Starsong"]..DASH..BZ["Nighthaven"]..", "..BZ["Moonglade"] };
 		{ GREY..INDENT..AL["Quest: Elune's Blessing"] };
@@ -120,7 +120,7 @@ local myData = {
 	};
 	Lunar_Northrend = {
 		ZoneName = { AL["Lunar Festival"].." - "..BZ["Northrend"] };
-		{ ORNG..AL["Lunar Festival"].." - "..AL["Jan. 23 ~ Feb. 13"] };
+		{ ORNG..AL["Lunar Festival"].." - "..AL["Lunar_Date"] };
 		{ "" };
 		{ WHIT.." 1) "..AL["Elder Sardis"]	..DASH..BZ["Valiance Keep"]..", "..BZ["Borean Tundra"] };
 		{ WHIT.." 3) "..AL["Elder Pamuya"]	..DASH..BZ["Warsong Hold"]..", "..BZ["Borean Tundra"] };
@@ -155,9 +155,149 @@ local myData = {
 		{ GREY..INDENT.."("..BZ["Njorn Stair"]..")" };
 		{ WHIT.."25) "..AL["Elder Chogan'gada"]	..DASH..ORNG..BZ["Utgarde Pinnacle"]..", "..BZ["Howling Fjord"] };
 	};
+	Love_Alliance_MajorCities = {
+		ZoneName = { AL["Love is in the Air"].." - "..BF["Alliance"].." ("..AL["Major Cities"]..")" };
+		Location = { BZ["Ironforge"].." / "..BZ["Stormwind City"].." / "..BZ["Darnassus"].." / "..BZ["The Exodar"] };
+		{ ORNG..AL["Love is in the Air"].." - "..AL["Love_Date"] };
+		{ "" };
+		{ BLUE..AL["Alliance Questline"] };
+		{ YELL.." 1) "..AL["Quest: "]..AL["Uncommon Scents"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Junior Detective"] };
+		{ GREN..INDENT..INDENT.." 2) "..GREY.."(35, 69) "..BZ["Ironforge"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(76, 57) "..BZ["The Exodar"] };
+		{ GREN..INDENT..INDENT.." 7) "..GREY.."(44, 56) "..BZ["Darnassus"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ YELL.." 2) "..AL["Quest: "]..AL["Something Stinks"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ YELL.." 3) "..AL["Quest: "]..AL["Pilfering Perfume"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ YELL.." 4) "..AL["Quest: "]..AL["Fireworks At The Gilded Rose"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Marion Sutton"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(60, 76) "..AL["The Gilded Rose"]..", "..BZ["Trade District"]..", "..BZ["Stormwind City"] };
+		{ YELL.." 5) "..AL["Quest: "]..AL["Hot On The Trail"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Marion Sutton"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(60, 76) "..AL["The Gilded Rose"]..", "..BZ["Trade District"]..", "..BZ["Stormwind City"] };
+		{ YELL.." 6) "..AL["Quest: "]..AL["A Friendly Chat..."] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Marion Sutton"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(60, 76) "..AL["The Gilded Rose"]..", "..BZ["Trade District"]..", "..BZ["Stormwind City"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ YELL.." 7) "..AL["Quest: "]..AL["Something is in the Air (and it Ain't Love)"] };
+		{ WHIT..INDENT..AL["Start"]..": "..AL["Faded Lovely Greeting Card"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+		{ "" };
+		{ BLUE..AL["Daily Quest"] };
+		{ CYAN.." 1) "..AL["A gift for a Lord of Ironforge"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 1) "..GREY.."(33, 66) "..BZ["Ironforge"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Muradin Bronzebeard"] };
+		{ GREN..INDENT..INDENT.." 3) "..GREY.."(40, 55) "..BZ["Ironforge"] };
+		{ CYAN.." 2) "..AL["A gift for a Lord of Stormwind"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(62, 75) "..BZ["Stormwind City"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["King Varian Wrynn"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(85, 31) "..BZ["Stormwind City"] };
+		{ CYAN.." 3) "..AL["A Gift for the Prophet"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(73, 56) "..BZ["The Exodar"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Prophet Velen"] };
+		{ GREN..INDENT..INDENT..GREY.."(54, 55) "..BZ["Blood Watch"]..", "..BZ["Bloodmyst Isle"]..", "..BZ["The Exodar"] };
+		{ CYAN.." 4) "..AL["A Gift for the High Priestess of Elune"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 7) "..GREY.."(45, 57) "..BZ["Darnassus"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Tyrande Whisperwind"] };
+		{ GREN..INDENT..INDENT.." 8) "..GREY.."(43, 77) "..BZ["Temple of the Moon"]..", "..BZ["Darnassus"] };
+		{ CYAN.." 5) "..AL["Bonbon Blitz"] };
+		{ CYAN.." 6) "..AL["A Perfect Puff of Perfume"] };
+		{ CYAN.." 7) "..AL["A Cloudlet of Classy Cologne"] };
+		{ GREN..INDENT..AL["Public Relations Agent"] };
+		{ GREN..INDENT..INDENT.." 1) "..GREY.."(33, 66) "..BZ["Ironforge"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(62, 75) "..BZ["Stormwind City"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(73, 56) "..BZ["The Exodar"] };
+		{ GREN..INDENT..INDENT.." 7) "..GREY.."(45, 57) "..BZ["Darnassus"] };
+		{ CYAN.." 8) "..AL["Crushing the Crown"] };
+		{ GREN..INDENT..AL["Inspector Snip Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
+	};
+	Love_Horde_MajorCities = {
+		ZoneName = { AL["Love is in the Air"].." - "..BF["Horde"].." ("..AL["Major Cities"]..")" };
+		Location = { BZ["Orgrimmar"].." / "..BZ["Undercity"].." / "..BZ["Thunder Bluff"].." / "..BZ["Silvermoon City"] };
+		{ ORNG..AL["Love is in the Air"].." - "..AL["Love_Date"] };
+		{ "" };
+		{ BLUE..AL["Horde Questline"] };
+		{ YELL.." 1) "..AL["Quest: "]..AL["Uncommon Scents"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Junior Detective"] };
+		{ GREN..INDENT..INDENT.." 1) "..GREY.."(64, 37) "..BZ["Undercity"] };
+		{ GREN..INDENT..INDENT.." 8) "..GREY.."(64, 70) "..BZ["Silvermoon City"] };
+		{ GREN..INDENT..INDENT.."10) "..GREY.."(44, 55) "..BZ["Thunder Bluff"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ YELL.." 2) "..AL["Quest: "]..AL["Something Stinks"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ YELL.." 3) "..AL["Quest: "]..AL["Pilfering Perfume"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ YELL.." 4) "..AL["Quest: "]..AL["Snivel's Sweetheart"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Roka"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(57, 60) "..AL["Gotri's Traveling Gear"]..", "..BZ["The Drag"]..", "..BZ["Orgrimmar"] };
+		{ YELL.." 5) "..AL["Quest: "]..AL["Hot On The Trail"] };
+		{ GREN..INDENT..AL["Start"].." / "..AL["End"]..": "..AL["Roka"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(57, 60) "..AL["Gotri's Traveling Gear"]..", "..BZ["The Drag"]..", "..BZ["Orgrimmar"] };
+		{ YELL.." 6) "..AL["Quest: "]..AL["A Friendly Chat..."] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Roka"] };
+		{ GREN..INDENT..INDENT.." 6) "..GREY.."(57, 60) "..AL["Gotri's Traveling Gear"]..", "..BZ["The Drag"]..", "..BZ["Orgrimmar"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ YELL.." 7) "..AL["Quest: "]..AL["Something is in the Air (and it Ain't Love)"] };
+		{ WHIT..INDENT..AL["Start"]..": "..AL["Faded Lovely Greeting Card"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+		{ "" };
+		{ BLUE..AL["Daily Quest"] };
+		{ CYAN.." 1) "..AL["A Gift for the Banshee Queen"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 2) "..GREY.."(66, 38) "..BZ["Undercity"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Lady Sylvanas Windrunner"] };
+		{ GREN..INDENT..INDENT.." 3) "..GREY.."(57, 91) "..BZ["Royal Quarter"]..", "..BZ["Undercity"] };
+		{ CYAN.." 2) "..AL["A Gift for the Warchief"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(52, 76) "..BZ["Orgrimmar"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["King Varian Wrynn"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(85, 31) "..BZ["Orgrimmar"] };
+		{ CYAN.." 3) "..AL["A Gift for the Regent Lord of Quel'Thalas"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.." 8) "..GREY.."(64, 66) "..BZ["Silvermoon City"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Lor'themar Theron"] };
+		{ GREN..INDENT..INDENT.." 9) "..GREY.."(54, 20) "..BZ["Silvermoon City"] };
+		{ CYAN.." 4) "..AL["A Gift for the High Chieftain"] };
+		{ GREN..INDENT..AL["Start"]..": "..AL["Kwee Q. Peddlefeet"] };
+		{ GREN..INDENT..INDENT.."10) "..GREY.."(43, 52) "..BZ["Thunder Bluff"] };
+		{ GREN..INDENT..AL["End"]..": "..AL["Baine Bloodhoof"] };
+		{ GREN..INDENT..INDENT.."11) "..GREY.."(60, 51) "..BZ["Thunder Bluff"] };
+		{ CYAN.." 5) "..AL["Bonbon Blitz"] };
+		{ CYAN.." 6) "..AL["A Perfect Puff of Perfume"] };
+		{ CYAN.." 7) "..AL["A Cloudlet of Classy Cologne"] };
+		{ GREN..INDENT..AL["Public Relations Agent"] };
+		{ GREN..INDENT..INDENT.." 2) "..GREY.."(66, 38) "..BZ["Undercity"] };
+		{ GREN..INDENT..INDENT.." 4) "..GREY.."(52, 76) "..BZ["Orgrimmar"] };
+		{ GREN..INDENT..INDENT.." 8) "..GREY.."(64, 66) "..BZ["Silvermoon City"] };
+		{ GREN..INDENT..INDENT.."10) "..GREY.."(43, 52) "..BZ["Thunder Bluff"] };
+		{ CYAN.." 8) "..AL["Crushing the Crown"] };
+		{ GREN..INDENT..AL["Detective Snap Snagglebolt"] };
+		{ GREN..INDENT..INDENT.." 5) "..GREY.."(50, 75) "..BZ["Orgrimmar"] };
+	};
 	MidSummer_Azeroth = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Eastern Kingdoms"] };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ ORNG.." 1) "..BZ["Court of the Sun"].." (70, 43), "..BZ["Silvermoon City"] };
 		{ _RED.." 2) "..BZ["North Sanctum"].." (46, 50), "..BZ["Eversong Woods"] };
@@ -205,7 +345,7 @@ local myData = {
 	};
 	MidSummer_Kalimdor = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Kalimdor"] };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ BLUE.." 1) "..BZ["Dolanaar"].." (54, 52), "..BZ["Teldrassil"] };
 		{ ORNG.." 2) "..BZ["Warrior's Terrace"].." (62, 49), "..BZ["Darnassus"] };
@@ -250,7 +390,7 @@ local myData = {
 	};
 	MidSummer_Outland = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Outland"] };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ BLUE.." 1) "..BZ["Honor Hold"].." (62, 58), "..BZ["Hellfire Peninsula"] };
 		{ _RED.." 2) "..BZ["Thrallmar"].." (55, 40), "..BZ["Hellfire Peninsula"] };
@@ -273,7 +413,7 @@ local myData = {
 	};
 	MidSummer_Northrend = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Northrend"] };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ BLUE.." 1) "..BZ["Fizzcrank Airstrip"].." (55, 20), "..BZ["Borean Tundra"] };
 		{ _RED.." 2) "..BZ["Bor'gorok Outpost"].." (51, 12), "..BZ["Borean Tundra"] };
@@ -298,7 +438,7 @@ local myData = {
 	};
 	MidSummer_Azeroth_MajorCities = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Eastern Kingdoms"].." ("..AL["Major Cities"]..")" };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ BLUE.." 1) "..BZ["Hall of Explorers"]..", "..BZ["Ironforge"] };
 		{ BLUE.." 2) "..BZ["Mage Quarter"]..", "..BZ["Stormwind City"] };
@@ -311,7 +451,7 @@ local myData = {
 	};
 	MidSummer_Kalimdor_MajorCities = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Kalimdor"].." ("..AL["Major Cities"]..")" };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ BLUE.." 1) "..BZ["Warrior's Terrace"].." (63, 47), "..BZ["Darnassus"] };
 		{ BLUE.." 2) "..BZ["The Crystal Hall"].." (41, 26), "..BZ["The Exodar"] };
@@ -324,7 +464,7 @@ local myData = {
 	};
 	MidSummer_Deepholm = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Deepholm"] };
-		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Jun. 21 ~ Jul. 4"] };
+		{ ORNG..AL["Midsummer Fire Festival"].." - "..AL["Midsummer_Date"] };
 		{ "" };
 		{ PURP.." 1) "..BZ["Temple of Earth"].." (49, 51)" };
 		{ "" };
@@ -332,7 +472,7 @@ local myData = {
 	};
 	Hallow_End = {
 		ZoneName = { AL["Hallow's End"] };
-		{ ORNG..AL["Hallow's End"].." - "..AL["Oct. 18 ~ Oct. 31"] };
+		{ ORNG..AL["Hallow's End"].." - "..AL["Hallow_Date"] };
 		{ "" };
 		{ _RED..AL["Horde Questline"] };
 		{ YELL.." 1) "..AL["Quest: "]..AL["Masked Orphan Matron"] };
@@ -465,7 +605,7 @@ local myData = {
 	Brewfest_Alliance_MajorCities = {
 		ZoneName = { AL["Brewfest"].." - "..BF["Alliance"].." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Ironforge"].." / "..BZ["Stormwind City"].." / "..BZ["Darnassus"].." / "..BZ["The Exodar"] };
-		{ ORNG..AL["Brewfest"].." - "..AL["Sep. 28 ~ Oct. 13"] };
+		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
 		{ BLUE..AL["Alliance Questline"] };
 		{ YELL.." 1) "..AL["Quest: "]..AL["Brewfest!"] };
@@ -485,7 +625,7 @@ local myData = {
 	Brewfest_Alliance = {
 		ZoneName = { AL["Brewfest"].." - "..BF["Alliance"] };
 		Location = { BZ["Dun Morogh"] };
-		{ ORNG..AL["Brewfest"].." - "..AL["Sep. 28 ~ Oct. 13"] };
+		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
 		{ BLUE..AL["Alliance Questline"] };
 		{ YELL.." 1) "..AL["Quest: "]..AL["Brewfest!"] };
@@ -529,7 +669,7 @@ local myData = {
 	Brewfest_Horde_MajorCities = {
 		ZoneName = { AL["Brewfest"].." - "..BF["Horde"].." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Orgrimmar"].." / "..BZ["Undercity"].." / "..BZ["Thunder Bluff"].." / "..BZ["Silvermoon City"] };
-		{ ORNG..AL["Brewfest"].." - "..AL["Sep. 28 ~ Oct. 13"] };
+		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
 		{ BLUE..AL["Horde Questline"] };
 		{ YELL.." 1) "..AL["Quest: "]..AL["Brewfest!"] };
@@ -552,7 +692,7 @@ local myData = {
 	Brewfest_Horde = {
 		ZoneName = { AL["Brewfest"].." - "..BF["Horde"] };
 		Location = { BZ["Durotar"] };
-		{ ORNG..AL["Brewfest"].." - "..AL["Sep. 28 ~ Oct. 13"] };
+		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
 		{ _RED..AL["Horde Questline"] };
 		{ YELL.." 1) "..AL["Quest: "]..AL["Brewfest!"] };

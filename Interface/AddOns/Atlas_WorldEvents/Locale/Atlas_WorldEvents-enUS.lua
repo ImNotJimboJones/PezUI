@@ -1,17 +1,17 @@
-﻿-- $Id: Atlas_WorldEvents-enUS.lua 42 2012-10-03 17:16:06Z arith $
+﻿-- $Id: Atlas_WorldEvents-enUS.lua 47 2013-02-17 12:14:13Z arith $
 --[[
 
-	Atlas Arena, a World of Warcraft instance map browser
-	Copyright 2010 - 2011 Arith Hsu
+	Atlas World Events, a World of Warcraft map browser for world events
+	Copyright 2011 ~ 2013 Arith Hsu
 
 	This file is a plugin of Atlas.
 
-	Atlas Arena is free software; you can redistribute it and/or modify
+	Atlas World Events is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
 
-	Atlas is distributed in the hope that it will be useful,
+	Atlas World Events is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
@@ -27,7 +27,10 @@ local AL = AceLocale:NewLocale("Atlas_WorldEvents", "enUS", true);
 
 if AL then
 
+
+	-- ----------------------------------------------------------------------
 	-- Common
+	-- ----------------------------------------------------------------------
 	AL["World Events Maps"] = "World Events Maps";
 	AL["Lower"] = "Lower";
 	AL["Major Cities"] = "Major Cities";
@@ -41,20 +44,27 @@ if AL then
 	AL["Horde Questline"] = "Horde Questline";
 	AL["Alliance Questline"] = "Alliance Quest line";
 	AL["Portals"] = "Portals";
+	AL["Daily Quest"] = "Daily Quest";
 
+	-- ----------------------------------------------------------------------
 	-- World Events
+	-- ----------------------------------------------------------------------
 	AL["Lunar Festival"] = "Lunar Festival";
-	AL["Jan. 23 ~ Feb. 13"] = "Jan. 23 ~ Feb. 13";
+	AL["Lunar_Date"] = "Jan. 27 ~ Feb. 09";
 	AL["Midsummer Fire Festival"] = "Midsummer Fire Festival";
-	AL["Jun. 21 ~ Jul. 4"] = "Jun. 21 - Jul. 4";
+	AL["Midsummer_Date"] = "Jun. 21 - Jul. 4";
 	AL["Hallow's End"] = "Hallow's End";
-	AL["Oct. 18 ~ Oct. 31"] = "Oct. 18 ~ Oct. 31";
+	AL["Hallow_Date"] = "Oct. 18 ~ Oct. 31";
 	AL["Brewfest"] = "Brewfest";
-	AL["Sep. 28 ~ Oct. 13"] = "Sep. 28 ~ Oct. 13";
+	AL["Brewfest_Date"] = "Sep. 20 ~ Oct. 15";
+	AL["Love is in the Air"] = "Love is in the Air";
+	AL["Love_Date"] = "Feb. 10 - Feb. 23";
 	-- Darkmoon Faire
 	AL["The first Sunday each month, last for a week"] = "The first Sunday each month, last for a week";
 
+	-- ----------------------------------------------------------------------
 	-- Lunar Festival
+	-- ----------------------------------------------------------------------
 	-- Azeroth
 	AL["Elder Hammershout"] = "Elder Hammershout";	-- 15562
 	AL["Elder Stormbrow"] = "Elder Stormbrow";	-- 15565
@@ -137,7 +147,9 @@ if AL then
 	AL["Elder Chogan'gada"] = "Elder Chogan'gada";
 	AL["Elder Kilias"] = "Elder Kilias";
 
+	-- ----------------------------------------------------------------------
 	-- Hallow's End
+	-- ----------------------------------------------------------------------
 	AL["Trick: "] = "Trick: ";
 	AL["Masked Orphan Matron"] = "Masked Orphan Matron";
 	AL["Orc Commoner"] = "Orc Commoner";
@@ -168,7 +180,9 @@ if AL then
 	AL["Innkeeper Firebrew"] = "Innkeeper Firebrew";
 	AL["Innkeeper Saelienne"] = "Innkeeper Saelienne";
 	
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire - NPC
 	AL["Selina Dourman <Darkmoon Faire Information>"] = "Selina Dourman <Darkmoon Faire Information>"; -- 10445
 	AL["Zina Sharpworth <Game Tokens>"] = "Zina Sharpworth <Game Tokens>"; -- 55266
@@ -214,7 +228,9 @@ if AL then
 	AL["Putting the Carnies Back Together Again"] = "Putting the Carnies Back Together Again"; -- 29512
 	AL["Keeping the Faire Sparkling"] = "Keeping the Faire Sparkling"; -- 29516
 
+	-- ----------------------------------------------------------------------
 	-- Brewfest
+	-- ----------------------------------------------------------------------
 	-- Queest
 	AL["Brewfest!"] = "Brewfest!"; -- 11441 / 11446
 	AL["Catch the Wild Wolpertinger!"] = "Catch the Wild Wolpertinger!"; -- 11117 / 11431
@@ -230,8 +246,7 @@ if AL then
 	AL["Brew For Brewfest"] = "Brew For Brewfest"; -- 29394 / 29393
 	AL["This One Time, When I Was Drunk..."] = "This One Time, When I Was Drunk..."; -- 12020
 	AL["Brew of the Month Club"] = "Brew of the Month Club";
-	
-	-- NPC
+	-- Brewfest - NPC
 	AL["Dwarf Commoner"] = "Dwarf Commoner";
 	AL["Gnome Commoner"] = "Gnome Commoner";
 	AL["Night Elf Commoner"] = "Night Elf Commoner";
@@ -263,8 +278,54 @@ if AL then
 	AL["Blix Fixwidget"] = "Blix Fixwidget";
 	AL["Cort Gorestein"] = "Cort Gorestein";
 	AL["Ja'ron"] = "Ja'ron";
+
+	-- ----------------------------------------------------------------------
+	-- Love is in the Air
+	-- ----------------------------------------------------------------------
+	-- Quests
+	AL["Bonbon Blitz"] = "Bonbon Blitz";
+	AL["A Perfect Puff of Perfume"] = "A Perfect Puff of Perfume";
+	AL["A Cloudlet of Classy Cologne"] = "A Cloudlet of Classy Cologne";
+	AL["A gift for a Lord of Ironforge"] = "A gift for a Lord of Ironforge";
+	AL["A gift for a Lord of Stormwind"] = "A gift for a Lord of Stormwind";
+	AL["Uncommon Scents"] = "Uncommon Scents";
+	AL["Something Stinks"] = "Something Stinks";
+	AL["Pilfering Perfume"] = "Pilfering Perfume";
+	AL["Fireworks At The Gilded Rose"] = "Fireworks At The Gilded Rose";
+	AL["Hot On The Trail"] = "Hot On The Trail";
+	AL["A Friendly Chat..."] = "A Friendly Chat...";
+	AL["Snivel's Sweetheart"] = "Snivel's Sweetheart";
+	AL["Something is in the Air (and it Ain't Love)"] = "Something is in the Air (and it Ain't Love)";
+	AL["Crushing the Crown"] = "Crushing the Crown";
+	AL["A Gift for the Prophet"] = "A Gift for the Prophet";
+	AL["A Gift for the High Priestess of Elune"] = "A Gift for the High Priestess of Elune";
+	AL["A Gift for the Regent Lord of Quel'Thalas"] = "A Gift for the Regent Lord of Quel'Thalas";
+	AL["A Gift for the Banshee Queen"] = "A Gift for the Banshee Queen";
+	AL["A Gift for the Warchief"] = "A Gift for the Warchief";
+	AL["A Gift for the High Chieftain"] = "A Gift for the High Chieftain";
+	-- NPC
+	AL["Kwee Q. Peddlefeet"] = "Kwee Q. Peddlefeet";
+	AL["Public Relations Agent"] = "Public Relations Agent";
+	AL["Junior Detective"] = "Junior Detective";
+	AL["Detective Snap Snagglebolt"] = "Detective Snap Snagglebolt";
+	AL["Inspector Snip Snagglebolt"] = "Inspector Snip Snagglebolt";
+	AL["Marion Sutton"] = "Marion Sutton";
+	AL["Faded Lovely Greeting Card"] = "Faded Lovely Greeting Card";
+	AL["King Varian Wrynn"] = "King Varian Wrynn";
+	AL["Muradin Bronzebeard"] = "Muradin Bronzebeard";
+	AL["Prophet Velen"] = "Prophet Velen";
+	AL["Tyrande Whisperwind"] = "Tyrande Whisperwind";
+	AL["Lor'themar Theron"] = "Lor'themar Theron";
+	AL["Baine Bloodhoof"] = "Baine Bloodhoof";
+	AL["Lady Sylvanas Windrunner"] = "Lady Sylvanas Windrunner";
+	AL["Roka"] = "Roka";
+	-- Mics.
+	AL["The Gilded Rose"] = "The Gilded Rose";
+	AL["Gotri's Traveling Gear"] = "Gotri's Traveling Gear";
 	
+	-- ----------------------------------------------------------------------
 	-- Location Description
+	-- ----------------------------------------------------------------------
 	AL["(Outside the city gate)"] = "(Outside the city gate)"; -- Elder Hammershout is outside the Stormwind City gate.
 	AL["(Outside the gate)"] = "(Outside the gate)"; -- Elder Starglade is outside the gate of Zul'Gurub
 	AL["(On the roof of the bank)"] = "(On the roof of the bank)";

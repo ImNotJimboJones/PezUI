@@ -5,11 +5,11 @@
 ## Notes: An Atlas Plugin that displays world events maps.
 ## Notes-zhCN: Atlas 世界事件地图插件。
 ## Notes-zhTW: Atlas 世界事件地圖集, 顯示重要世界事件任務目標點地圖
-## Version: 2.9
-## X-Date: Dec. 08th, 2012
+## Version: 3.00
+## X-Date: Feb. 18th, 2013
 ## X-Category: Map
 ## RequiredDeps: Atlas
-## X-Curse-Packaged-Version: v2.9
+## X-Curse-Packaged-Version: v3.00
 ## X-Curse-Project-Name: Atlas World Events
 ## X-Curse-Project-ID: atlas-worldevents
 ## X-Curse-Repository-ID: wow/atlas-worldevents/mainline

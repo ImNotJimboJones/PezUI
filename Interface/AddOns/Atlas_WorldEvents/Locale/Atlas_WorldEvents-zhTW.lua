@@ -1,17 +1,17 @@
-﻿-- $Id: Atlas_WorldEvents-zhTW.lua 40 2012-10-03 07:09:48Z ananhaid $
+﻿-- $Id: Atlas_WorldEvents-zhTW.lua 47 2013-02-17 12:14:13Z arith $
 --[[
 
-	Atlas Arena, a World of Warcraft instance map browser
-	Copyright 2010 - 2011 Arith Hsu
+	Atlas World Events, a World of Warcraft map browser for world events
+	Copyright 2011 ~ 2013 Arith Hsu
 
 	This file is a plugin of Atlas.
 
-	Atlas Arena is free software; you can redistribute it and/or modify
+	Atlas World Events is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
 
-	Atlas is distributed in the hope that it will be useful,
+	Atlas World Events is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
@@ -27,7 +27,10 @@ local AL = AceLocale:NewLocale("Atlas_WorldEvents", "zhTW", false);
 
 if AL then
 
+
+	-- ----------------------------------------------------------------------
 	-- Common
+	-- ----------------------------------------------------------------------
 	AL["World Events Maps"] = "世界事件地圖";
 	AL["Lower"] = "下層";
 	AL["Major Cities"] = "主城";
@@ -41,20 +44,27 @@ if AL then
 	AL["Horde Questline"] = "部落任務線";
 	AL["Alliance Questline"] = "聯盟任務線";
 	AL["Portals"] = "傳送門";
+	AL["Daily Quest"] = "每日任務";
 
+	-- ----------------------------------------------------------------------
 	-- World Events
+	-- ----------------------------------------------------------------------
 	AL["Lunar Festival"] = "新年慶典";
-	AL["Jan. 23 ~ Feb. 13"] = "一月23日～二月13日";
+	AL["Lunar_Date"] = "一月27日～二月9日";
 	AL["Midsummer Fire Festival"] = "仲夏火焰節";
-	AL["Jun. 21 ~ Jul. 4"] = "六月21日～七月4日";
+	AL["Midsummer_Date"] = "六月21日～七月4日";
 	AL["Hallow's End"] = "萬鬼節";
-	AL["Oct. 18 ~ Oct. 31"] = "十月18日～十月31日";
+	AL["Hallow_Date"] = "十月18日～十月31日";
 	AL["Brewfest"] = "啤酒節";
-	AL["Sep. 28 ~ Oct. 13"] = "九月28日～十月13日";
+	AL["Brewfest"] = "九月28日～十月13日";
+	AL["Love is in the Air"] = "愛就在身邊開始";
+	AL["Love_Date"] = "二月10日～二月23日";
 	-- Darkmoon Faire
 	AL["The first Sunday each month, last for a week"] = "每月第一個週日, 維持一週";
 
+	-- ----------------------------------------------------------------------
 	-- Lunar Festival
+	-- ----------------------------------------------------------------------
 	-- Azeroth
 	AL["Elder Hammershout"] = "錘嘯長者";	-- 15562
 	AL["Elder Stormbrow"] = "雷眉長者";	-- 15565
@@ -137,7 +147,9 @@ if AL then
 	AL["Elder Chogan'gada"] = "修干加達長者";
 	AL["Elder Kilias"] = "奇里亞斯長者";
 
+	-- ----------------------------------------------------------------------
 	-- Hallow's End
+	-- ----------------------------------------------------------------------
 	AL["Trick: "] = "惡作劇: ";
 	AL["Masked Orphan Matron"] = "戴面具的孤兒監護員";
 	AL["Orc Commoner"] = "獸人平民";
@@ -168,7 +180,9 @@ if AL then
 	AL["Innkeeper Firebrew"] = "旅店老闆洛雷·火酒";
 	AL["Innkeeper Saelienne"] = "旅店老闆塞琳尼";
 	
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire
+	-- ----------------------------------------------------------------------
 	-- Darkmoon Faire - NPC
 	AL["Selina Dourman <Darkmoon Faire Information>"] = "薩琳娜·杜洛曼 <暗月馬戲團諮詢員>"; -- 10445
 	AL["Zina Sharpworth <Game Tokens>"] = "麗娜·夏普沃斯 <暗月馬戲團代幣>"; -- 55266
@@ -214,7 +228,9 @@ if AL then
 	AL["Putting the Carnies Back Together Again"] = "讓工作人員再次回到崗位"; -- 29512
 	AL["Keeping the Faire Sparkling"] = "讓馬戲團閃閃發亮"; -- 29516
 
+	-- ----------------------------------------------------------------------
 	-- Brewfest
+	-- ----------------------------------------------------------------------
 	-- Queest
 	AL["Brewfest!"] = "啤酒節!"; -- 11441 / 11446
 	AL["Catch the Wild Wolpertinger!"] = "抓住野生鹿角兔!"; -- 11117 / 11431
@@ -230,8 +246,7 @@ if AL then
 	AL["Brew For Brewfest"] = "啤酒節佳釀"; -- 29394 / 29393
 	AL["This One Time, When I Was Drunk..."] = "就這麼一次，在我酒醉的時候..."; -- 12020
 	AL["Brew of the Month Club"] = "每月啤酒俱樂部";
-	
-	-- NPC
+	-- Brewfest - NPC
 	AL["Dwarf Commoner"] = "矮人平民";
 	AL["Gnome Commoner"] = "地精平民";
 	AL["Night Elf Commoner"] = "夜精靈平民";
@@ -263,8 +278,54 @@ if AL then
 	AL["Blix Fixwidget"] = "布力克斯·修械";
 	AL["Cort Gorestein"] = "寇特·高斯坦";
 	AL["Ja'ron"] = "賈隆";
+
+	-- ----------------------------------------------------------------------
+	-- Love is in the Air
+	-- ----------------------------------------------------------------------
+	-- Quests
+	AL["Bonbon Blitz"] = "Bonbon Blitz";
+	AL["A Perfect Puff of Perfume"] = "完美香氣";
+	AL["A Cloudlet of Classy Cologne"] = "A Cloudlet of Classy Cologne";
+	AL["A gift for a Lord of Ironforge"] = "A gift for a Lord of Ironforge";
+	AL["A gift for a Lord of Stormwind"] = "A gift for a Lord of Stormwind";
+	AL["Uncommon Scents"] = "香水疑雲";
+	AL["Something Stinks"] = "Something Stinks";
+	AL["Pilfering Perfume"] = "Pilfering Perfume";
+	AL["Fireworks At The Gilded Rose"] = "Fireworks At The Gilded Rose";
+	AL["Hot On The Trail"] = "Hot On The Trail";
+	AL["A Friendly Chat..."] = "A Friendly Chat...";
+	AL["Snivel's Sweetheart"] = "Snivel's Sweetheart";
+	AL["Something is in the Air (and it Ain't Love)"] = "Something is in the Air (and it Ain't Love)";
+	AL["Crushing the Crown"] = "Crushing the Crown";
+	AL["A Gift for the Prophet"] = "A Gift for the Prophet";
+	AL["A Gift for the High Priestess of Elune"] = "A Gift for the High Priestess of Elune";
+	AL["A Gift for the Regent Lord of Quel'Thalas"] = "給奎爾薩拉斯攝政王的禮物";
+	AL["A Gift for the Banshee Queen"] = "給女妖之王的禮物";
+	AL["A Gift for the Warchief"] = "A Gift for the Warchief";
+	AL["A Gift for the High Chieftain"] = "A Gift for the High Chieftain";
+	-- NPC
+	AL["Kwee Q. Peddlefeet"] = "邱比特·傳播者";
+	AL["Public Relations Agent"] = "公共關係仲介商";
+	AL["Junior Detective"] = "資遣警探";
+	AL["Detective Snap Snagglebolt"] = "Detective Snap Snagglebolt";
+	AL["Inspector Snip Snagglebolt"] = "Inspector Snip Snagglebolt";
+	AL["Marion Sutton"] = "Marion Sutton";
+	AL["Faded Lovely Greeting Card"] = "Faded Lovely Greeting Card";
+	AL["King Varian Wrynn"] = "King Varian Wrynn";
+	AL["Muradin Bronzebeard"] = "Muradin Bronzebeard";
+	AL["Prophet Velen"] = "Prophet Velen";
+	AL["Tyrande Whisperwind"] = "Tyrande Whisperwind";
+	AL["Lor'themar Theron"] = "洛索瑪·塞隆";
+	AL["Baine Bloodhoof"] = "Baine Bloodhoof";
+	AL["Lady Sylvanas Windrunner"] = "希瓦娜斯·風行者女士";
+	AL["Roka"] = "Roka";
+	-- Mics.
+	AL["The Gilded Rose"] = "The Gilded Rose";
+	AL["Gotri's Traveling Gear"] = "Gotri's Traveling Gear";
 	
+	-- ----------------------------------------------------------------------
 	-- Location Description
+	-- ----------------------------------------------------------------------
 	AL["(Outside the city gate)"] = "（城市大門外面）"; -- Elder Hammershout is outside the Stormwind City gate.
 	AL["(Outside the gate)"] = "（大門外面）"; -- Elder Starglade is outside the gate of Zul'Gurub
 	AL["(On the roof of the bank)"] = "（銀行屋頂上）";
