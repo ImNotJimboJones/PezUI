@@ -339,6 +339,8 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 				end
 
 				txColor["isDefault"] = tColor["isDefault"];
+				txColor["noStacksColor"] = tColor["noStacksColor"];
+				txColor["useSlotColor"] = tColor["useSlotColor"];
 			else
 				txColor = nil;
 			end
@@ -347,6 +349,7 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 			if (tCounter >= 0) then
 				txCounter = tCounter;
 			end
+
 			tTimer = tTimer or 0;
 			tTimer2 = tTimer2 or 0;
 			tDuration = tDuration or 0;

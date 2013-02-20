@@ -39,15 +39,12 @@ VUHDO_SPELLS = {
 	[VUHDO_SPELL_ID.ILLUMINATED_HEALING] = { ["isHot"] = true, },
 
 	-- Priest
-	--[VUHDO_SPELL_ID.BUFF_FEAR_WARD] = { ["nostance"] = true },
-	--[VUHDO_SPELL_ID.BUFF_LEVITATE] = { ["nostance"] = true },
-	--[VUHDO_SPELL_ID.BUFF_POWER_WORD_FORTITUDE] = { ["nostance"] = true },
 	[VUHDO_SPELL_ID.SPIRIT_SHELL] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.RENEW] = { ["isHot"] = true },
-	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = { ["isHot"] = true--[[, ["nostance"] = true]] },
+	[VUHDO_SPELL_ID.POWERWORD_SHIELD] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.PRAYER_OF_MENDING] = { ["isHot"] = true },
 	[VUHDO_SPELL_ID.DIVINE_AEGIS] = { ["isHot"] = true, ["nodefault"] = true },
-	[VUHDO_SPELL_ID.PAIN_SUPPRESSION] = { ["isHot"] = true, ["nodefault"] = true--[[, ["nostance"] = true]] },
+	[VUHDO_SPELL_ID.PAIN_SUPPRESSION] = { ["isHot"] = true, ["nodefault"] = true },
 	[VUHDO_SPELL_ID.GRACE] = { ["isHot"] = true, ["nodefault"] = true },
 	[VUHDO_SPELL_ID.GUARDIAN_SPIRIT] = { ["isHot"] = true, ["nohelp"] = true, ["noselftarget"] = true	},
 	[VUHDO_SPELL_ID.ECHO_OF_LIGHT] = { ["isHot"] = true },
@@ -95,6 +92,10 @@ function VUHDO_initFromSpellbook()
 		if (someParams["isHot"] and VUHDO_isSpellKnown(tSpellName)) then
 			VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = tSpellName;
 		end
+	end
+
+	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
+		VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = VUHDO_SPELL_ID.ECHO_OF_LIGHT;
 	end
 
 	twipe(VUHDO_ACTIVE_HOTS);

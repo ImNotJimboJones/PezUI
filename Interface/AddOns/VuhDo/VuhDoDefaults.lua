@@ -650,6 +650,10 @@ local VUHDO_DEFAULT_CONFIG = {
 				["enable"] = false,
 				["thresh"] = 10000,
 			},
+			["cb"] = {
+				["enable"] = false,
+				["thresh"] = 10000,
+			},
 		},
 
 	},
@@ -757,10 +761,13 @@ function VUHDO_loadDefaultConfig()
 		122949, --Unseen Strike
 		123474, --Overwhelming Assault
 		124783, --Storm Unleashed
+		123180, --Wind Step
 		--Garalon
 		122835, --Pheromones
 		123081, --Pungency
-		123120, --Pheromone Trail
+		122774, --Crush (knocked down)
+		123423, --Weak Points
+		--123120, --Pheromone Trail
 		--Wind Lord Mel'jarak
 		121881, --Amber Prison
 		122055, --Residue
@@ -769,7 +776,7 @@ function VUHDO_loadDefaultConfig()
 		121949, --Parasitic Growth
 		122784, --Reshape Life
 		122064, --Corrosive Resin
-		122504, --Burning Amber
+		--122504, --Burning Amber
 		--Grand Empress Shek'zeer
 		125390, --Fixate
 		123707, --Eyes of the Empress
@@ -782,12 +789,30 @@ function VUHDO_loadDefaultConfig()
 		124849, --Consuming Terror
 		124863, --Visions of Demise
 		123845, --Heart of Fear
+		123184, --Dissonance Field
+		125283, --Sha Corruption
+		--Trash
+		123417, --Dismantled Armor
+		123422, --Arterial Bleeding
+		123434, --Gouge Throat
+		123436, --Riposte
+		123497, --Gale Force Winds
+		123180, --Wind Step
+		123420, --Stunning Strike
+		125081, --Slam
+		125490, --Burning Sting
+		126901, --Mortal Rend
+		126912, --Grievous Whirl
 
 		--[[ Mogushan Vaults ]]
 
 		-- Trash
 		118562, --Petrified
 		116596, --Smoke Bomb
+		116970, --Sundering Bite
+		121087, --Curse of Vitality
+		120670, --Pyroblast
+		116606, --Troll Rush
 		--The Stone Guard
 		130395, --Jasper Chains
 		130774, --Amethyst Pool
@@ -811,7 +836,9 @@ function VUHDO_loadDefaultConfig()
 		122151, --Voodoo doll
 		117723, --Frail Soul
 		116260, --Crossed Over
+		116278, --Soul Sever
 		--The Spirit Kings
+		117708, --Maddening Shout
 		118303, --Fixate
 		118048, --Pillaged
 		118135, --Pinned Down
@@ -821,7 +848,10 @@ function VUHDO_loadDefaultConfig()
 		117878, --Overcharged
 		117949, --Closed circuit
 		117945, --Arcing Energy
+		132222, --Destabilizing Energies
 		--Will of the Emperor
+		116835, --Devastating Arc
+		132425, --Stomp
 		116525, --Focused Assault
 		116778, --Focused Defense
 		117485, --Impeding Thrust
@@ -842,6 +872,9 @@ function VUHDO_loadDefaultConfig()
 		117436, --Lightning Prison: Stunned
 		118191, --Corrupted Essence
 		117986, --Defiled Ground: Stacks
+		117235, --Purified
+		117283, --Cleansing Waters
+		117353, --Overwhelming Corruption
 
 		--Tsulong
 		122768, --Dread Shadows

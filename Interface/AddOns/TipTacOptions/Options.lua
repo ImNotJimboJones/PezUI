@@ -254,6 +254,8 @@ end
 
 local f = CreateFrame("Frame",modName.."Options",UIParent);
 
+f.options = options;
+
 f:SetWidth(424);
 f:SetHeight(378);	-- "18" per category entry
 f:SetBackdrop({ bgFile = "Interface\\ChatFrame\\ChatFrameBackground", edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", tile = 1, tileSize = 16, edgeSize = 16, insets = { left = 3, right = 3, top = 3, bottom = 3 } });

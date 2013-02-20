@@ -391,7 +391,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Совет: Для сжатия/очистки памяти нажмите ЛКМ.";
 	
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "ОПТ/ч на этом уровне: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "ОПТ/ч за эту сессию: ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Время до уровня: ";

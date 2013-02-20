@@ -276,7 +276,7 @@ VUHDO_UNIT_POWER_RUNES = 6;
 
 
 
--- Resurection spells by class
+-- Resurrection spells by class
 VUHDO_RESURRECTION_SPELLS = {
 	["PALADIN"] = { VUHDO_SPELL_ID.REDEMPTION },
 	["SHAMAN"] = { VUHDO_SPELL_ID.ANCESTRAL_SPIRIT },

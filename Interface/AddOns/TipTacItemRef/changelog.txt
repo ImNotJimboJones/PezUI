@@ -1,3 +1,8 @@
+TipTacItemRef Changes | 2013 Feb 19
+-----------------------------------
+- Changed the TOC version to 50100 for the 5.1 patch.
+- Items should now show the proper item level when it has been upgraded.
+
 TipTacItemRef Changes | 2012 Aug 30
 -----------------------------------
 - Changed the TOC version to 50001 for the 5.0 Mists of Pandaria patch.

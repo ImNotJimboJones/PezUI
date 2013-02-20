@@ -391,7 +391,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "힌트: 왼쪽 클릭으로 메모리를 청소합니다.";
 		     
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "현재 레벨에서의 시간당 경험치: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "현재 접속에서의 시간당 경험치: ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "레벨당 시간: ";

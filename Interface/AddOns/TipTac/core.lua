@@ -704,7 +704,11 @@ local function FormatBarValues(fs,val,max,type)
 	elseif (type == "full") then
 		fs:SetFormattedText("%s / %s (%.0f%%)",FormatValue(val),FormatValue(max),val / max * 100);
 	elseif (type == "deficit") then
-		fs:SetFormattedText(val == max and "" or "-%d",FormatValue(max - val));
+		if (val ~= max) then
+			fs:SetFormattedText("-%s",FormatValue(max - val));
+		else
+			fs:SetText("");
+		end
 	elseif (type == "percent") then
 		fs:SetFormattedText("%.0f%%",val / max * 100);
 	end

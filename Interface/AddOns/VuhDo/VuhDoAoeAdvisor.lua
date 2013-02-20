@@ -30,13 +30,14 @@ end
 
 
 
-local VUHDO_SPELL_ID_COH = 34861; -- MOPok
-local VUHDO_SPELL_ID_POH = 596; -- MOPok
-local VUHDO_SPELL_ID_CH = 1064; -- MOPok
-local VUHDO_SPELL_ID_WG = 48438; -- MOPok
-local VUHDO_SPELL_ID_TQ = 740; -- MOPok
-local VUHDO_SPELL_ID_LOD = 85222; -- MOPok
-local VUHDO_SPELL_ID_HR = 82327; -- MOPok
+local VUHDO_SPELL_ID_COH = 34861;
+local VUHDO_SPELL_ID_POH = 596;
+local VUHDO_SPELL_ID_CH = 1064;
+local VUHDO_SPELL_ID_WG = 48438;
+local VUHDO_SPELL_ID_TQ = 740;
+local VUHDO_SPELL_ID_LOD = 85222;
+local VUHDO_SPELL_ID_HR = 82327;
+local VUHDO_SPELL_ID_CB = 123986;
 
 VUHDO_AOE_SPELLS = {
 
@@ -171,7 +172,7 @@ VUHDO_AOE_SPELLS = {
 	["hr"] = {
 		--["present"] = false,
 		["id"] = VUHDO_SPELL_ID_HR,
-		["base"] = (683 + 683) * 0.5,
+		["base"] = (5098 + 6230) * 0.3, --(ca. 0.25 + 0.5 target)
 		["divisor"] = 4859,
 		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_HR)),
 		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_HR)),
@@ -186,7 +187,30 @@ VUHDO_AOE_SPELLS = {
 		["cone"] = 360,
 		--["checkCd"] = false,
 		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_HR)) or 0,
-	}, -- MOP
+	},
+
+	-- Chi Burst
+	["cb"] = {
+		--["present"] = false,
+		["id"] = VUHDO_SPELL_ID_CB,
+		["base"] = (325 + 972) * 0.5,
+		["divisor"] = 1.267, -- 1/78,9% Atk
+		["icon"] = (GetSpellTexture(VUHDO_SPELL_ID_CB)),
+		["name"] = (GetSpellInfo(VUHDO_SPELL_ID_CB)),
+		["avg"] = 0,
+		["max_targets"] = 6,
+		["degress"] = 1,
+		["rangePow"] = 4, -- not POW actually
+		--["isRadial"] = true,
+		["isLinear"] = true,
+		--["isSourcePlayer"] = false,
+		["isDestRaid"] = true,
+		["thresh"] = 10000,
+		["isHealsPlayer"] = true,
+		--["cone"] = 360,
+		--["checkCd"] = false,
+		["time"] = select(7, GetSpellInfo(VUHDO_SPELL_ID_CB)) or 0,
+	},
 };
 local VUHDO_AOE_SPELLS = VUHDO_AOE_SPELLS;
 
@@ -215,8 +239,12 @@ function VUHDO_aoeUpdateSpellAverages()
 	local tSpellModi;
 
 	for tName, tInfo in pairs(VUHDO_AOE_SPELLS) do
-		tSpellModi = tInfo["base"] / tInfo["divisor"];
-		tInfo["avg"] = floor((tInfo["base"] + tBonus * tSpellModi) + 0.5);
+		if ("cb" == tName) then
+			tInfo["avg"] = 32800; -- @TODO
+		else
+			tSpellModi = tInfo["base"] / tInfo["divisor"];
+			tInfo["avg"] = floor((tInfo["base"] + tBonus * tSpellModi) + 0.5);
+		end
 		tInfo["thresh"] = VUHDO_CONFIG["AOE_ADVISOR"]["config"][tName]["thresh"];
 	end
 end
@@ -319,10 +347,10 @@ local tCurrTotal;
 local tCluster = { };
 local tInfo;
 
-local tEvaluator;
 local tIsSourcePlayer;
 local tIsDestRaid;
 local tIsRadial;
+local tIsLinear;
 local tRangePow;
 local tJumpRangePow;
 local tMaxTargets;
@@ -332,6 +360,7 @@ local tSpellHeal;
 local tTime;
 local tDegress;
 local tThresh;
+local tIsHealsPlayer;
 
 
 
@@ -345,13 +374,16 @@ local function VUHDO_getBestUnitForAoeGroup(anAoeInfo, aPlayerModi, aGroup)
 			tInfo = VUHDO_RAID[tInfo];
 		end
 
-		if (tInfo["baseRange"] and (tEvaluator == nil or tEvaluator(tInfo["unit"]))) then
-
-			VUHDO_getCustomDestCluster(tInfo["unit"], tCluster,
-				tIsSourcePlayer, tIsRadial, tRangePow,
-				tMaxTargets, 101, tIsDestRaid, -- 101% = no health limit
-				tCdSpell,	tCone, tJumpRangePow
-			);
+		if (tInfo["baseRange"]) then
+			if (tIsLinear) then
+				VUHDO_getUnitsInLinearCluster(tInfo["unit"], tCluster, tRangePow, tMaxTargets, tIsHealsPlayer);
+			else
+				VUHDO_getCustomDestCluster(tInfo["unit"], tCluster,
+					tIsSourcePlayer, tIsRadial, tRangePow,
+					tMaxTargets, 101, tIsDestRaid, -- 101% = no health limit
+					tCdSpell,	tCone, tJumpRangePow
+				);
+			end
 
 			if (#tCluster > 1) then
 				tCurrTotal = VUHDO_sumClusterHealing(tCluster, tSpellHeal, tDegress, tTime);
@@ -380,10 +412,10 @@ local tGroupUnit = {
 };
 
 local function VUHDO_getBestUnitsForAoe(anAoeInfo, aPlayerModi)
-	tEvaluator = anAoeInfo["evaluator"];
 	tIsSourcePlayer = anAoeInfo["isSourcePlayer"];
 	tIsDestRaid = anAoeInfo["isDestRaid"];
 	tIsRadial = anAoeInfo["isRadial"];
+	tIsLinear = anAoeInfo["isLinear"];
 	tRangePow = anAoeInfo["rangePow"];
 	tJumpRangePow = anAoeInfo["jumpRangePow"];
 	tMaxTargets = anAoeInfo["max_targets"];
@@ -393,6 +425,7 @@ local function VUHDO_getBestUnitsForAoe(anAoeInfo, aPlayerModi)
 	tTime = anAoeInfo["time"];
 	tDegress = anAoeInfo["degress"];
 	tThresh = anAoeInfo["thresh"];
+	tIsHealsPlayer = anAoeInfo["isHealsPlayer"];
 	--tThresh = 1000;
 
 	if (sIsPerGroup and not tIsDestRaid) then

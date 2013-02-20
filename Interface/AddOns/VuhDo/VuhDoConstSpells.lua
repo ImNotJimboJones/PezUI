@@ -31,7 +31,7 @@ VUHDO_SPELL_ID.DESPERATE_PRAYER = VUHDO_getSpellInfo(19236);
 VUHDO_SPELL_ID.DISPEL_MAGIC = VUHDO_getSpellInfo(528);
 VUHDO_SPELL_ID.DIVINE_AEGIS = VUHDO_getSpellInfo(47515);
 VUHDO_SPELL_ID.DIVINE_ILLUMINATION = VUHDO_getSpellInfo(71166);
-VUHDO_SPELL_ID.ECHO_OF_LIGHT = VUHDO_getSpellInfo(77485);
+VUHDO_SPELL_ID.ECHO_OF_LIGHT = VUHDO_getSpellInfo(77489);
 VUHDO_SPELL_ID.EARTHLIVING = VUHDO_getSpellInfo(51945);
 VUHDO_SPELL_ID.ETERNAL_FLAME = VUHDO_getSpellInfo(114163);
 VUHDO_SPELL_ID.FLASH_HEAL = VUHDO_getSpellInfo(2061);
@@ -110,8 +110,47 @@ VUHDO_SPELL_ID.UPLIFT = VUHDO_getSpellInfo(116670);
 VUHDO_SPELL_ID.REVIVAL = VUHDO_getSpellInfo(115310);  -- Instant-Gruppenheilung all within vision + Alle 3 Detox
 VUHDO_SPELL_ID.ZEN_SPHERE = VUHDO_getSpellInfo(124081);
 VUHDO_SPELL_ID.CHI_WAVE = VUHDO_getSpellInfo(115098);
-VUHDO_SPELL_ID.SERPENTS_ZEAL = VUHDO_getSpellInfo(127722)
+VUHDO_SPELL_ID.SERPENTS_ZEAL = VUHDO_getSpellInfo(127722);
 VUHDO_SPELL_ID.LIFE_COCOON = VUHDO_getSpellInfo(116849);
+
+
+
+-- 3000 MASTERY (=>BOM)
+VUHDO_SPELL_ID.GRACE_OF_AIR = VUHDO_getSpellInfo(116956);
+VUHDO_SPELL_ID.SPIRIT_BEAST_BLESSING = VUHDO_getSpellInfo(128997);
+VUHDO_SPELL_ID.ROAR_OF_COURAGE = VUHDO_getSpellInfo(93435);
+
+-- 5% Stats (=>BOK, Motw, LotE)
+VUHDO_SPELL_ID.EMBRACE_OF_THE_SHALE_SPIDER = VUHDO_getSpellInfo(90363);
+
+-- 10% Stam (PWS, BloodPakt, Commanding shout)
+VUHDO_SPELL_ID.QIRAJI_FORTITUDE = VUHDO_getSpellInfo(90364);
+
+-- 10% Spell Power (Arcane, Dalaran)
+VUHDO_SPELL_ID.STILL_WATER = VUHDO_getSpellInfo(126309);
+VUHDO_SPELL_ID.BURNING_WRATH = VUHDO_getSpellInfo(77747);
+
+-- 10% Atk speed (Unholy Aura)
+--[[VUHDO_SPELL_ID.CRACKLING_HOWL = VUHDO_getSpellInfo(128432);
+VUHDO_SPELL_ID.SERPENTS_SWIFTNESS = VUHDO_getSpellInfo(128433);
+VUHDO_SPELL_ID.SWIFTBLADES_CUNNING = VUHDO_getSpellInfo(113742);
+VUHDO_SPELL_ID.UNLEASH_RAGE = VUHDO_getSpellInfo(30809);]]
+
+-- 10% ATK power (Horn of Winter, Trueshot, battle shout)
+
+-- 10% Spell Haste (not needed yet)
+--[[moonkin aura,
+ mind quickening
+ Shadowform
+ elemental oath]]
+
+-- 5% Crit (=> Legacy of the wgite Tiger)
+VUHDO_SPELL_ID.LEADER_OF_THE_PACK  = VUHDO_getSpellInfo(17007);
+VUHDO_SPELL_ID.TERRIFYING_ROAR  = VUHDO_getSpellInfo(90309);
+--still water
+VUHDO_SPELL_ID.FURIOUS_HOWL  = VUHDO_getSpellInfo(24604);
+--arcane brilliance
+--Legacy of the white tiger
 
 
 ------------------

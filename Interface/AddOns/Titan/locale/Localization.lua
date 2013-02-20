@@ -391,7 +391,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Hint: Left-click to force a garbage collection.";
 		     
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/hr This Level: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/hr This Session: ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Time To Level: ";

@@ -4,10 +4,11 @@
 - Keine Balkenfarbe custom debuffs per spellID
 - Sehbehindertenmodus Optionen
 
-- Direction arrow bei hoher frame strata?
-- Share Bouquets
-- Target-Farbe bei Gesinnungswechsel
-- Uplift Mönch als AOE-Advice
+- Shields anderer Spieler
+- Shields als Bouquet-Item (Balken)
+- Mehr Default-Custom Debuffs
+- BuffWatch in PetBattles verstecken
+
 
 
 1. Health     3

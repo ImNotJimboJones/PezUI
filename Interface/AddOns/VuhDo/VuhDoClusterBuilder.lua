@@ -48,6 +48,10 @@ local VUHDO_MAP_FIX_WIDTH = {
 	["AlteracValley"] = {
 		[1] = 4237.49987792969,
 	},
+
+	["StormwindCity"] = {
+		[0] = 1737.4999589920044,
+	},
 };
 
 
@@ -288,6 +292,7 @@ function VUHDO_updateAllClusters()
 	tDungeonLevels = VUHDO_MAP_FIX_WIDTH[tMapFileName];
 	if (tDungeonLevels ~= nil) then
 		tMaxX = tDungeonLevels[tCurrLevel];
+		--VUHDO_Msg(GetCurrentMapDungeonLevel());
 	end
 
 	-- Otherwise get from heuristic database
@@ -427,3 +432,145 @@ function VUHDO_getDistanceBetween(aUnit, anotherUnit)
 
 	return nil;
 end
+
+
+
+--
+local tDeltas, tXCoord, tYCoord;
+local function VUHDO_getRealPosition(aUnit)
+	if (VUHDO_CLUSTER_BLACKLIST[aUnit]) then
+		return nil;
+	end
+
+	if (VUHDO_COORD_DELTAS[aUnit] ~= nil) then
+		tXCoord, tYCoord = GetPlayerMapPosition(aUnit);
+		if (tXCoord ~= nil and tYCoord ~= nil) then
+			return tXCoord * VUHDO_MAP_WIDTH, tYCoord * VUHDO_MAP_WIDTH / 1.5;
+		end
+	end
+
+	return nil;
+end
+
+--------------------------------------------------------------------------------------------------
+
+local VuhDoLine = { };
+local sLines = { };
+VuhDoLine.__index = VuhDoLine;
+
+--
+local tLine;
+function VuhDoLine.create(aLineNum, aStartX, aStartY, anEndX, anEndY)
+	--local tLine = { };
+	if (sLines[aLineNum] == nil) then
+		sLines[aLineNum] = { };
+		setmetatable(sLines[aLineNum], VuhDoLine);
+	end
+	tLine = sLines[aLineNum];
+
+	tLine.startX, tLine.startY, tLine.endX, tLine.endY
+		= aStartX, aStartY, anEndX, anEndY;
+	return tLine;
+end
+
+
+
+--
+function VuhDoLine:enthaelt(anX, anY)
+	return (anX >= self.startX and anX <= self.endX) or (anX <= self.startX and anX >= self.endX);
+end
+
+function VuhDoLine:hoehe()
+	return self.endY - self.endY;
+end
+
+function VuhDoLine:breite()
+	return self.endX - self.startX;
+end
+
+function VuhDoLine:steigung()
+	return self:hoehe() / self:breite();
+end
+
+function VuhDoLine:laenge()
+	return sqrt((self:hoehe() * self:hoehe()) + (self:breite() * self:breite()));
+end
+
+function VuhDoLine:achsenabschnitt()
+	return self.startY - (self:steigung() * self.startX);
+end
+
+
+local tX;
+function VuhDoLine:schnittpunkt(aLine)
+	tX = (aLine:achsenabschnitt() - self:achsenabschnitt()) / (self:steigung() - aLine:steigung());
+	return  tX, self:steigung() * tX + self:achsenabschnitt();
+end
+
+
+
+--
+local tLineToTarget;
+local tOrthogonale;
+local tOrthoLaenge;
+local tPlayerX, tPlayerY;
+local tTargetX, tTargetY;
+local tZuPruefenX, tZuPruefenY;
+local tSchnittX, tSchnittY;
+local tDestCluster = { };
+local tNumFound;
+local tUnit;
+function VUHDO_getUnitsInLinearCluster(aUnit, anArray, aRange, aMaxTargets, anIsHealsPlayer)
+	twipe(anArray);
+	twipe(tDestCluster);
+
+	if (VUHDO_MAP_WIDTH == 0 or VUHDO_COORD_DELTAS[aUnit] == nil) then
+		return;
+	end
+
+	tPlayerX, tPlayerY = VUHDO_getRealPosition("player");
+	if (tPlayerX == nil) then
+		return;
+	end
+
+	tTargetX, tTargetY = VUHDO_getRealPosition(aUnit);
+	if (tTargetX == nil) then
+		return;
+	end
+
+	tLineToTarget = VuhDoLine.create(1, tPlayerX, tPlayerY, tTargetX, tTargetY);
+
+	for _, tInfo in pairs(VUHDO_CLUSTER_BASE_RAID) do
+		tUnit = tInfo["unit"];
+		if ("player" ~= tUnit and VUHDO_CLUSTER_BLACKLIST[tUnit] == nil)  then
+			tZuPruefenX, tZuPruefenY = VUHDO_getRealPosition(tUnit);
+			if (tZuPruefenX ~= nil) then
+
+				tOrthogonale = VuhDoLine.create(2, tZuPruefenX, tZuPruefenY,
+					tZuPruefenX + tLineToTarget:hoehe(),
+					tZuPruefenY - tLineToTarget:breite());
+
+				tSchnittX, tSchnittY = tOrthogonale:schnittpunkt(tLineToTarget);
+
+				if (tLineToTarget:enthaelt(tSchnittX, tSchnittY)) then
+					if (tOrthogonale:laenge() <= aRange) then
+						tDestCluster[#tDestCluster + 1] = aUnit;
+					end
+				end
+			end
+		end
+	end
+
+	if (anIsHealsPlayer) then
+		if (VUHDO_tableUniqueAdd(tDestCluster, "player")) then
+			aMaxTargets = aMaxTargets + 1;
+		end
+	end
+
+	tsort(tDestCluster, VUHDO_sortClusterComparator);
+	tNumFound = #tDestCluster;
+	for tCnt = 1, tNumFound > aMaxTargets and aMaxTargets or tNumFound do
+		anArray[tCnt] = tDestCluster[tCnt];
+	end
+end
+

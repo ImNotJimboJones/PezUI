@@ -297,7 +297,7 @@ function VUHDO_determineDebuff(aUnit)
 		tNow = GetTime();
 
 		for tCnt = 1, 255 do
-			tName, _, tIcon, tStacks, tTypeString, tDuration, tExpiry, _, _, _, tSpellId, _, tIsBossDebuff, _ = UnitDebuff(aUnit, tCnt, false);
+			tName, _, tIcon, tStacks, tTypeString, tDuration, tExpiry, _, _, _, tSpellId, _, tIsBossDebuff = UnitDebuff(aUnit, tCnt, false);
 
 			--[[tName = "Blah";
 			tTypeString = "Magic";

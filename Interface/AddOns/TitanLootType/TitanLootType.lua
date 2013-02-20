@@ -2,7 +2,6 @@
 -- * TitanLootType.lua
 -- *
 -- * By: TitanMod, Dark Imakuni, Adsertor and the Titan Development Team
--- *     (HonorGoG, jaketodd422, joejanko, Lothayer, Tristanian)
 -- **************************************************************************
 
 -- ******************************** Constants *******************************
@@ -59,12 +58,12 @@ function TitanPanelLootTypeButton_OnLoad(self)
 end
 
 function TitanPanelLootTypeButton_GetDungeonDifficultyIDText(isRaid, withpar)
- 	local par1, par2 = "", ""
- 	if withpar then par1, par2 = "(", ")" end
- 	local diffstr = "|cffffff9a"..par1.._G["UNKNOWN"]..par2.."|r"
+	local par1, par2 = "", ""
+	if withpar then par1, par2 = "(", ")" end
+	local diffstr = "|cffffff9a"..par1.._G["UNKNOWN"]..par2.."|r"
 	if isRaid then
 	-- raids
- 	local diff = GetRaidDifficulty()
+	local diff = GetRaidDifficulty()
 	if not diff then return diffstr end
 	-- remove () chars from difficulty
 	local tmpstr = string.gsub(_G["RAID_DIFFICULTY"..tostring(diff)], "%(", "")
@@ -78,6 +77,7 @@ function TitanPanelLootTypeButton_GetDungeonDifficultyIDText(isRaid, withpar)
 	-- dungeons
 	local diff = GetDungeonDifficultyID()
 	if not diff then return diffstr end
+	if diff == 8 then diff = 2 end
 	-- remove () chars from difficulty
 	local tmpstr = string.gsub(_G["DUNGEON_DIFFICULTY"..tostring(diff)], "%(", "")
 	tmpstr = string.gsub(tmpstr, "%)", "")
@@ -99,18 +99,18 @@ function TitanPanelLootTypeButton_OnEvent(self, event, ...)
 			if event == "CHAT_MSG_SYSTEM" then
 				-- Match difficulty system message to alert addon for possible update
 				-- dungeons
-  			local strm1 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY1"])
-  			local strm2 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY2"])
-  			local strm3 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY3"])
-  			
-  			-- raids
-  			local strm4 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY1"])
-  			local strm5 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY2"])
-  			local strm6 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY3"])
-  			local strm7 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY4"])
-  			
-  			if (arg1 == strm1 or arg1 == strm2 or arg1 == strm3 or arg1 == strm4 or arg1 == strm5 or arg1 == strm6 or arg1 == strm7) and TitanGetVar(TITAN_LOOTTYPE_ID, "ShowDungeonDiff") then
-  				TitanPanelPluginHandle_OnUpdate(updateTable)
+				local strm1 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY1"])
+				local strm2 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY2"])
+				local strm3 = format( _G["ERR_DUNGEON_DIFFICULTY_CHANGED_S"], _G["DUNGEON_DIFFICULTY3"])
+
+				-- raids
+				local strm4 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY1"])
+				local strm5 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY2"])
+				local strm6 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY3"])
+				local strm7 = format( _G["ERR_RAID_DIFFICULTY_CHANGED_S"], _G["RAID_DIFFICULTY4"])
+
+				if (arg1 == strm1 or arg1 == strm2 or arg1 == strm3 or arg1 == strm4 or arg1 == strm5 or arg1 == strm6 or arg1 == strm7) and TitanGetVar(TITAN_LOOTTYPE_ID, "ShowDungeonDiff") then
+					TitanPanelPluginHandle_OnUpdate(updateTable)
 				end
 				return;
 			end
@@ -243,7 +243,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  elseif _G["UIDROPDOWNMENU_MENU_LEVEL"] == 2  and _G["UIDROPDOWNMENU_MENU_VALUE"] == "SetDungeonDiff" then
  info = {};
  info.text = _G["GREEN_FONT_COLOR_CODE"].._G["DUNGEON_DIFFICULTY1"].."|r";
- info.func = function() SetDungeonDifficulty(1) end
+ info.func = function() SetDungeonDifficultyID(1) end
  info.checked = function() if GetDungeonDifficultyID() == 1 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
@@ -264,7 +264,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  
  info = {}
  info.text = _G["RED_FONT_COLOR_CODE"].._G["DUNGEON_DIFFICULTY2"].."|r";
- info.func = function() SetDungeonDifficulty(2) end
+ info.func = function() SetDungeonDifficultyID(2) end
  info.checked = function() if GetDungeonDifficultyID() == 2 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then

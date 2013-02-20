@@ -393,7 +393,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Info : clic-gauche pour forcer un nettoyage de la mémoire.";
 
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/h pour ce niveau : ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/h pour cette session : ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Temps avant niveau : ";

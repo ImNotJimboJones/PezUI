@@ -43,6 +43,7 @@ local VUHDO_tableUniqueAdd;
 local VUHDO_isInSameZone;
 local VUHDO_isInBattleground;
 local VUHDO_brightenTextColor;
+local VUHDO_isConfigDemoUsers;
 
 local UnitBuff = UnitBuff;
 local GetTotemInfo = GetTotemInfo;
@@ -78,6 +79,7 @@ function VUHDO_buffWatchInitBurst()
 	VUHDO_isInSameZone = _G["VUHDO_isInSameZone"];
 	VUHDO_isInBattleground = _G["VUHDO_isInBattleground"];
 	VUHDO_brightenTextColor = _G["VUHDO_brightenTextColor"];
+	VUHDO_isConfigDemoUsers = _G["VUHDO_isConfigDemoUsers"];
 
 	sConfig = VUHDO_BUFF_SETTINGS["CONFIG"];
 	sRebuffSecs = sConfig["REBUFF_MIN_MINUTES"] * 60;
@@ -481,6 +483,7 @@ local tInfo;
 local tCategName;
 local tIsAvailable;
 local tIsNotInBattleground;
+local tBuffGroup;
 local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 	tMaxVariant = someBuffVariants;
 	tCategName = aCategSpec;
@@ -517,11 +520,25 @@ local function VUHDO_getMissingBuffs(someBuffVariants, someUnits, aCategSpec)
 			tIsAvailable = tInfo["connected"] and not tInfo["dead"];
 
 			_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[1]);
-			for tCnt = 3, 5 do
-				if (tMaxVariant[tCnt] == nil or tTexture ~= nil) then
-					break;
+
+			if (tTexture == nil) then
+				for tCnt = 3, 10 do
+					tBuffGroup = tMaxVariant[tCnt];
+					if (tBuffGroup == nil) then
+						break;
+					end
+
+					for _, tSameGroupBuff in pairs(tBuffGroup) do
+						_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tSameGroupBuff);
+						if (tTexture ~= nil) then
+							break;
+						end
+					end
+
+					if (tTexture == nil) then -- Kein Buff in einer der Gruppen? => Raus, nachbuffen
+						break;
+					end
 				end
-				_, _, tTexture, tCount, _, tStart, tRest, _, _ = UnitBuff(tUnit, tMaxVariant[tCnt]);
 			end
 
 			if (tTexture ~= nil) then
@@ -908,15 +925,14 @@ end
 
 --
 local tAllSwatches;
-local sOldMissBuffs = { };
+local tOldMissBuffs = { };
 function VUHDO_updateBuffPanel()
 	if (VUHDO_isConfigDemoUsers()) then
 		return;
 	end
 
-	twipe(sOldMissBuffs);
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		sOldMissBuffs[tUnit] = tInfo["missbuff"];
+		tOldMissBuffs[tUnit] = tInfo["missbuff"];
 		tInfo["missbuff"] = nil;
 	end
 
@@ -928,11 +944,13 @@ function VUHDO_updateBuffPanel()
 	end
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (sOldMissBuffs[tUnit] ~= tInfo["missbuff"]) then
+		if (tOldMissBuffs[tUnit] ~= tInfo["missbuff"]) then
 			tInfo["debuff"], tInfo["debuffName"] = VUHDO_determineDebuff(tUnit);
 			VUHDO_updateHealthBarsFor(tUnit, VUHDO_UPDATE_DEBUFF);
 		end
 	end
+
+	twipe(tOldMissBuffs);
 end
 
 

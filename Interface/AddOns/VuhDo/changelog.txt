@@ -1,3 +1,77 @@
+Version 3.29.
+
+
+Bugfixes:
+-- BuffWatch Rebuff Arcane Brilliance if either no spell power
+   OR no crit buff on target
+
+
+Improvements:
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.28.
+
+
+Bugfixes:
+-- Hopefully fixed Eternal Flame AoE predicition
+
+
+Improvements:
+-- Performance optimizations
+-- Direction arrow bouquet now can have range text yards/10
+-- Added more shields to shield absorb (thx acer13189)
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.27.
+
+
+Bugfixes:
+-- Performance optimizations
+
+Improvements:
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.26.
+
+
+Bugfixes:
+-- Workaround for unit incoming resurrection client bug
+-- Fixed a bug in shield absorb calculation
+
+
+Improvements:
+-- Added several default custom debuffs
+	 (options=>tools=>reset "Custom Debuffs" may be needed)
+-- Increased performance
+-- All mutual exclusive buffs should be recognized by BuffWatch now
+-- Bouquet item "SHIELD_COUNT" now works for shields from all sources
+
+Changes:
+
+
+Features:
+-- Added Chi Burst to trackable AOE advices (experimental)
+
+
+--------------------------------------------------------------
 Version 3.25.
 
 

@@ -11,6 +11,15 @@ local VUHDO_SHIELDS = {
 	[65148] = 15, -- VUHDO_SPELL_ID.SACRED_SHIELD (Buff) -- ok
 	[114908] = 15, -- VUHDO_SPELL_ID.SPIRIT_SHELL (Buff) -- ok
 	[116849] = 12, -- Life Cocoon
+	[115295] = 30, -- Guard (brewmaster monk's self buff, unglyphed)
+	[118604] = 30, -- Guard (brewmaster monk's black ox statue (cast on group), unglyphed)
+	--[123402] = 30, -- Guard (brewmaster monk's self buff, with Glyph of Guard) - Magic damage ONLY
+	--[136070] = 30, -- Guard (brewmaster monk's black ox statue (cast on group), with Glyph of Guard) - Magic damage ONLY
+	[112048] = 6, -- Shield Barrier (Prot warrior)
+	--[77535] = 10, -- Blood Shield (Blood DK) - Physical damage ONLY
+	[108416] = 20, -- Sacrificial Pact (warlock talent)
+	[1463] = 8, -- Incanter's Ward (mage talent)
+	[114893] = 10, -- Stone Bulwark Totem (shaman talent)
 }
 
 
@@ -50,8 +59,11 @@ local sMissedEvents = {
 local VUHDO_SHIELD_LEFT = { };
 local VUHDO_SHIELD_SIZE = { };
 local VUHDO_SHIELD_EXPIRY = { };
+local VUHDO_SHIELD_LAST_SOURCE_GUID = { };
 local sEmpty = { };
 
+
+local VUHDO_PLAYER_SHIELDS = { };
 
 
 --
@@ -81,7 +93,7 @@ local function VUHDO_initShieldValue(aUnit, aShieldName, anAmount, aDuration)
 	end
 
 	if (VUHDO_SHIELD_LEFT[aUnit] == nil) then
-		VUHDO_SHIELD_LEFT[aUnit], VUHDO_SHIELD_SIZE[aUnit], VUHDO_SHIELD_EXPIRY[aUnit] = {}, {}, {};
+		VUHDO_SHIELD_LEFT[aUnit], VUHDO_SHIELD_SIZE[aUnit], VUHDO_SHIELD_EXPIRY[aUnit], VUHDO_SHIELD_LAST_SOURCE_GUID[aUnit] = {}, {}, {}, {};
 	end
 
 	VUHDO_SHIELD_LEFT[aUnit][aShieldName] = anAmount;
@@ -132,6 +144,7 @@ local function VUHDO_removeShield(aUnit, aShieldName)
 	VUHDO_SHIELD_SIZE[aUnit][aShieldName] = nil;
 	VUHDO_SHIELD_LEFT[aUnit][aShieldName] = nil;
 	VUHDO_SHIELD_EXPIRY[aUnit][aShieldName] = nil;
+	VUHDO_SHIELD_LAST_SOURCE_GUID[aUnit][aShieldName] = nil;
 	--VUHDO_Msg("Removed shield " .. aShieldName .. " from " .. aUnit);
 end
 
@@ -153,16 +166,20 @@ end
 
 
 --
-local tInit, tValue;
-function VUHDO_getShieldLeftCount(aUnit, aShield)
+local tInit, tValue, tSourceGuid;
+function VUHDO_getShieldLeftCount(aUnit, aShield, aMode)
 	tInit = (VUHDO_SHIELD_SIZE[aUnit] or sEmpty)[aShield] or 0;
 
 	if (tInit > 0) then
-		tValue = ceil(4 * ((VUHDO_SHIELD_LEFT[aUnit] or sEmpty)[aShield] or 0) / tInit);
-		return tValue > 4 and 4 or tValue;
-	else
-		return 0;
+		tSourceGuid = VUHDO_SHIELD_LAST_SOURCE_GUID[aUnit][aShield];
+		if (aMode == 3 or aMode == 0
+		or (aMode == 1 and tSourceGuid == VUHDO_PLAYER_GUID)
+		or (aMode == 2 and tSourceGuid ~= VUHDO_PLAYER_GUID)) then
+			tValue = ceil(4 * ((VUHDO_SHIELD_LEFT[aUnit] or sEmpty)[aShield] or 0) / tInit);
+			return tValue > 4 and 4 or tValue;
+		end
 	end
+	return 0;
 end
 
 
@@ -173,8 +190,9 @@ local tSpellName;
 local function VUHDO_updateShields(aUnit)
 	for tSpellId, _ in pairs(VUHDO_SHIELDS) do
 		tSpellName = select(1, GetSpellInfo(tSpellId));
-		tRemain = select(14, UnitAura(aUnit, tSpellName));
+		tRemain = select(15, UnitAura(aUnit, tSpellName));
 
+		--VUHDO_xMsg(UnitAura(aUnit, tSpellName));
 		if (tRemain ~= nil and "number" == type(tRemain)) then
 			if (tRemain > 0) then
 				VUHDO_updateShieldValue(aUnit, tSpellName, tRemain, nil);
@@ -244,11 +262,12 @@ function VUHDO_parseCombatLogShieldAbsorb(aMessage, aSrcGuid, aDstGuid, aShieldN
 	VUHDO_xMsg(aShieldName, aSpellId);
 	end]]
 
-	if (VUHDO_PLAYER_GUID == aSrcGuid and VUHDO_SHIELDS[aSpellId] ~= nil) then
+	if (VUHDO_SHIELDS[aSpellId] ~= nil) then
 		if ("SPELL_AURA_REFRESH" == aMessage) then
 			VUHDO_updateShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aSpellId]);
 		elseif ("SPELL_AURA_APPLIED" == aMessage) then
 			VUHDO_initShieldValue(tUnit, aShieldName, anAmount, VUHDO_SHIELDS[aSpellId]);
+			VUHDO_SHIELD_LAST_SOURCE_GUID[tUnit][aShieldName] = aSrcGuid;
 		elseif ("SPELL_AURA_REMOVED" == aMessage
 			or "SPELL_AURA_BROKEN" == aMessage
 			or "SPELL_AURA_BROKEN_SPELL" == aMessage) then
@@ -277,6 +296,7 @@ function VUHDO_parseCombatLogShieldAbsorb(aMessage, aSrcGuid, aDstGuid, aShieldN
 		VUHDO_SHIELD_LEFT[tUnit] = nil;
 		VUHDO_SHIELD_EXPIRY[tUnit] = nil;
 		VUHDO_DEBUFF_SHIELDS[tUnit] = nil;
+		VUHDO_SHIELD_LAST_SOURCE_GUID[tUnit] = nil;
 	end
 
 	VUHDO_updateBouquetsForEvent(tUnit, 36); -- VUHDO_UPDATE_SHIELD

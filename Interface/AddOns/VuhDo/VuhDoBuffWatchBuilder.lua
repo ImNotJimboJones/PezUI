@@ -1,10 +1,10 @@
 local _;
+local _G = _G;
 
 local pairs = pairs;
-local InCombatLockdown = InCombatLockdown;
 
-local VUHDO_BUFF_PANEL_BASE_HEIGHT = nil;
-local VUHDO_BUFF_PANEL_BASE_WIDTH = nil;
+local VUHDO_BUFF_PANEL_BASE_HEIGHT;
+local VUHDO_BUFF_PANEL_BASE_WIDTH;
 local VUHDO_IN_PANEL_HEIGHT;
 local VUHDO_PANEL_OFFSET_Y;
 local VUHDO_PANEL_OFFSET_X;

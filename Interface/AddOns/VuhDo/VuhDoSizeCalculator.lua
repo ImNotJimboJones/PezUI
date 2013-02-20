@@ -138,13 +138,13 @@ local VUHDO_getNumHotSlots = VUHDO_getNumHotSlots;
 
 --
 local tHotCfg;
-local tHotSlots;
 local function VUHDO_getHotIconWidth(aPanelNum)
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
 
 	if (tHotCfg["radioValue"] == 1 or tHotCfg["radioValue"] == 4) then
-		tHotSlots = VUHDO_getNumHotSlots(aPanelNum);
-		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * tHotSlots * 0.01;
+		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"]
+			* VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"]
+			* VUHDO_getNumHotSlots(aPanelNum) * 0.01;
 	else
 		return 0;
 	end
@@ -157,7 +157,10 @@ function VUHDO_getHealButtonWidth(aPanelNum)
 	if (VUHDO_IS_PANEL_CONFIG and not VUHDO_CONFIG_SHOW_RAID) then
 		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"];
 	elseif (sHealButtonWidthCache[aPanelNum] == nil) then
-		sHealButtonWidthCache[aPanelNum] = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] + VUHDO_getTargetBarWidth(aPanelNum) + VUHDO_getHotIconWidth(aPanelNum);
+		sHealButtonWidthCache[aPanelNum] =
+			VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"]
+			+ VUHDO_getTargetBarWidth(aPanelNum)
+			+ VUHDO_getHotIconWidth(aPanelNum);
 	end
 	return sHealButtonWidthCache[aPanelNum];
 end
@@ -166,7 +169,8 @@ end
 
 --
 local function VUHDO_isPanelHorizontal(aPanelNum)
-	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["arrangeHorizontal"] and (not VUHDO_IS_PANEL_CONFIG or VUHDO_CONFIG_SHOW_RAID);
+	return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["arrangeHorizontal"]
+		and (not VUHDO_IS_PANEL_CONFIG or VUHDO_CONFIG_SHOW_RAID);
 end
 
 
@@ -223,4 +227,3 @@ function VUHDO_getHealPanelHeight(aPanelNum)
 	return VUHDO_isPanelHorizontal(aPanelNum)
 		and VUHDO_getHealPanelHeightHor(aPanelNum) or VUHDO_getHealPanelHeightVer(aPanelNum);
 end
-

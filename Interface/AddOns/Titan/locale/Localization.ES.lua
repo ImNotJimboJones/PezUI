@@ -419,7 +419,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Consejo: Click-Izq. para forzar una limpieza de memoria.";
 
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/hr este nivel: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/hr esta sesión: ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Tiempo para subir: ";

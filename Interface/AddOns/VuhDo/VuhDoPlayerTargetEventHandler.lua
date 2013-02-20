@@ -82,9 +82,6 @@ function VUHDO_updatePlayerTarget()
 		end
 
 		VUHDO_updateHealthBarsFor("target", 1); -- VUHDO_UPDATE_ALL
-		--VUHDO_REMOVE_HOTS = false;
-		--VUHDO_updateAllRaidBars();
-		--VUHDO_initAllEventBouquets();
 		VUHDO_initEventBouquetsFor("target");
 	end
 end

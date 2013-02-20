@@ -337,7 +337,7 @@ L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Hinweis: Links-Klick f\195\188r eine Speicherbereinigung.";
 
 L["TITAN_XP_FORMAT"] = "%d";
-L["TITAN_XP_PERCENT_FORMAT"] = "%d".." (%.1f%%)";
+L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/Std (Level): ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/Std (Sitzung): ";
 L["TITAN_XP_BUTTON_LABEL_TOLEVEL_TIME_LEVEL"] = "Zeit bis Aufstieg: ";

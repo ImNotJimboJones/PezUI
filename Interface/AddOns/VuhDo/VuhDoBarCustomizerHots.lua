@@ -306,11 +306,12 @@ local function VUHDO_customizeHotIcons(aButton, aHotName, aRest, aTimes, anIcon,
 	end
 
 	tIsChargeAlpha = false;
-
-	if (aColor ~= nil and (not aColor["isDefault"] or not sIsHotShowIcon)) then
+	if (aColor ~= nil and aColor["useSlotColor"]) then
+		tHotColor = VUHDO_copyColor(tHotCfg);
+	elseif (aColor ~= nil and (not aColor["isDefault"] or not sIsHotShowIcon)) then
 		tHotColor = aColor;
 
-		if (aTimes > 1) then
+		if (aTimes > 1 and not aColor["noStacksColor"]) then
 			tChargeColor = sBarColors[VUHDO_CHARGE_COLORS[aTimes]];
 			if (sHotCols["useColorBack"]) then
 				tHotColor["R"], tHotColor["G"], tHotColor["B"], tHotColor["O"]
@@ -388,7 +389,7 @@ local function VUHDO_updateHotIcons(aUnit, aHotName, aRest, aTimes, anIcon, aDur
 		return;
 	end
 
-	tShieldCharges = aMode ~= 2 and VUHDO_getShieldLeftCount(aUnit, aHotSpellName or aHotName) or 0; -- if not our shield don't show remaining absorption
+	tShieldCharges = VUHDO_getShieldLeftCount(aUnit, aHotSpellName or aHotName, aMode) or 0; -- if not our shield don't show remaining absorption
 
 	for tIndex, tHotName in pairs(sHotSlots) do
 		if (aHotName == tHotName) then
@@ -588,6 +589,7 @@ local function VUHDO_updateHots(aUnit, anInfo)
 
 			if (tDebuffOffset == nil) then
 				tBuffName, _, tBuffIcon, tStacks, _, tDuration, tExpiry, tCaster, _, _, tSpellId = UnitBuff(aUnit, tCnt);
+
 				if (tBuffIcon == nil) then
 					tDebuffOffset = tCnt - 1;
 				end

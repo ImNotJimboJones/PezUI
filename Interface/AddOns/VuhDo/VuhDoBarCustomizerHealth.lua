@@ -653,9 +653,9 @@ local tAllButtons;
 function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 	VUHDO_updateBouquetsForEvent(aUnit, anUpdateMode);
 
-	if (4 == anUpdateMode) then -- VUHDO_UPDATE_DEBUFF
+	--[[if (4 == anUpdateMode) then -- VUHDO_UPDATE_DEBUFF
 		return;
-	end
+	end]]
 
   tAllButtons = VUHDO_getUnitButtons(aUnit);
 	tInfo = VUHDO_RAID[aUnit];

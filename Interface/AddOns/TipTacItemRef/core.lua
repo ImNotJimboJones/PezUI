@@ -42,6 +42,49 @@ local COLOR_INCOMPLETE = { 0.5, 0.5, 0.5 };
 -- Returns colored text string
 local function BoolCol(bool) return (bool and "|cff80ff80" or "|cffff8080"); end
 
+-- Analyses the itemLink and checks for upgrades that affects itemLevel -- Only itemLevel 450 and above will have this
+-- Until Blizzard adds an easier solution, this function is supposed to be portable between addons, and is placed in the global namespace.
+function GetUpgradedItemLevelFromItemLink(itemLink)
+	local ITEMLINK_PATTERN = "(item:[^|]+)";
+	-- Finds the last and 11th parameter of an itemLink, which is the upgradeId
+	local ITEMLINK_PATTERN_UPGRADE = ":(%d+)$";
+	-- Table for adjustment of levels due to upgrade -- Source: http://www.wowinterface.com/forums/showthread.php?t=45388
+	local UPGRADED_LEVEL_ADJUST = {
+		[1] = 8, -- 1/1
+		[373] = 4, -- 1/2
+		[374] = 8, -- 2/2
+		[375] = 4, -- 1/3
+		[376] = 4, -- 2/3
+		[377] = 4, -- 3/3
+		[379] = 4, -- 1/2
+		[380] = 4, -- 2/2
+--		[445] = 0, -- 0/2
+		[446] = 4, -- 1/2
+		[447] = 8, -- 2/2
+--		[451] = 0, -- 0/1
+		[452] = 8, -- 1/1
+--		[453] = 0, -- 0/2
+		[454] = 4, -- 1/2
+		[455] = 8, -- 2/2
+--		[456] = 0, -- 0/1
+		[457] = 8, -- 1/1
+--		[458] = 0, -- 0/4
+		[459] = 4, -- 1/4
+		[460] = 8, -- 2/4
+		[461] = 12, -- 3/4
+		[462] = 16, -- 4/4
+	};
+	-- Make certain we only have the raw itemLink, and not the full itemString
+	itemLink = itemLink:match(ITEMLINK_PATTERN);
+	local _, _, _, itemLevel = GetItemInfo(itemLink);
+	local upgradeId = tonumber(itemLink:match(ITEMLINK_PATTERN_UPGRADE));
+	if (itemLevel) and (itemLevel >= 450) and (upgradeId) and (UPGRADED_LEVEL_ADJUST[upgradeId]) then
+		return itemLevel + UPGRADED_LEVEL_ADJUST[upgradeId];
+	else
+		return itemLevel;
+	end
+end
+
 --------------------------------------------------------------------------------------------------------
 --                                         Create Tooltip Icon                                        --
 --------------------------------------------------------------------------------------------------------
@@ -144,7 +187,7 @@ local function SetHyperlink_Hook(self,refString)
 		-- Call Tip Type Func
 		if (TipTypeFuncs[linkToken]) and (self:NumLines() > 0) then
 			tipDataAdded[self] = "hyperlink";
-			TipTypeFuncs[linkToken](self,(":"):split(rawLink));
+			TipTypeFuncs[linkToken](self,rawLink,(":"):split(rawLink));
 		end
 	end
 end
@@ -168,7 +211,7 @@ local function OnTooltipSetItem(self,...)
 			local id = link:match("item:(%d+)");
 			if (id) then
 				tipDataAdded[self] = "item";
-				TipTypeFuncs.item(self,"item",id);
+				TipTypeFuncs.item(self,link,"item",id);
 			end
 		end
 	end
@@ -180,7 +223,7 @@ local function OnTooltipSetSpell(self,...)
 		local _, _, id = self:GetSpell();
 		if (id) then
 			tipDataAdded[self] = "spell";
-			TipTypeFuncs.spell(self,"spell",id);
+			TipTypeFuncs.spell(self,nil,"spell",id);
 		end
 	end
 end
@@ -247,7 +290,7 @@ end
 --------------------------------------------------------------------------------------------------------
 
 -- instancelock
-function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterBits)
+function TipTypeFuncs:instancelock(link,linkToken,guid,mapId,difficulty,encounterBits)
 	--AzDump(guid,mapId,difficulty,encounterBits)
   	-- TipType Border Color -- Disable these 3 lines to color border. Az: Work into options?
 --	if (cfg.if_itemQualityBorder) then
@@ -256,8 +299,9 @@ function TipTypeFuncs:instancelock(linkToken,guid,mapId,difficulty,encounterBits
 end
 
 -- item
-function TipTypeFuncs:item(linkToken,id)
-	local _, _, itemRarity, itemLevel, _, _, _, itemStackCount, _, itemTexture = GetItemInfo(id);
+function TipTypeFuncs:item(link,linkToken,id)
+	local _, _, itemRarity, itemLevel, _, _, _, itemStackCount, _, itemTexture = GetItemInfo(link);
+	itemLevel = GetUpgradedItemLevelFromItemLink(link);
 	-- Icon
 	if (self.SetIconTextureAndText) and (not cfg.if_smartIcons or SmartIconEvaluation(self,linkToken)) then
 		local count = (itemStackCount and itemStackCount > 1 and (itemStackCount == 0x7FFFFFFF and "#" or itemStackCount) or "");
@@ -282,7 +326,7 @@ function TipTypeFuncs:item(linkToken,id)
 end
 
 -- spell
-function TipTypeFuncs:spell(linkToken,id)
+function TipTypeFuncs:spell(link,linkToken,id)
 	local name, rank, icon = GetSpellInfo(id);
 	-- Icon
 	if (self.SetIconTextureAndText) and (not cfg.if_smartIcons or SmartIconEvaluation(self,linkToken)) then
@@ -300,7 +344,7 @@ function TipTypeFuncs:spell(linkToken,id)
 end
 
 -- quest
-function TipTypeFuncs:quest(linkToken,id,level)
+function TipTypeFuncs:quest(link,linkToken,id,level)
 	if (cfg.if_showQuestLevelAndId) then
 		self:AddLine(format("QuestLevel: %d, QuestID: %d",level or 0,id or 0),unpack(cfg.if_infoColor));
 		self:Show();
@@ -312,7 +356,7 @@ function TipTypeFuncs:quest(linkToken,id,level)
 end
 
 -- currency -- Thanks to Vladinator for adding this!
-function TipTypeFuncs:currency(linkToken,id)
+function TipTypeFuncs:currency(link,linkToken,id)
 	local _, currencyCount, currencyTexture = GetCurrencyInfo(id);
 	if (self.SetIconTextureAndText) then
 		self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture,currencyCount);
@@ -329,7 +373,7 @@ function TipTypeFuncs:currency(linkToken,id)
 end
 
 -- achievement
-function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unknown1,unknown2,unknown3,unknown4)
+function TipTypeFuncs:achievement(link,linkToken,id,guid,completed,month,day,year,unknown1,unknown2,unknown3,unknown4)
 	if (cfg.if_modifyAchievementTips) then
 		completed = (tonumber(completed) == 1);
 		local tipName = self:GetName();
@@ -393,7 +437,7 @@ function TipTypeFuncs:achievement(linkToken,id,guid,completed,month,day,year,unk
 					end
 				end
 				myDone1 = (isPlayer and "" or BoolCol(myDone1).."*|r")..criteriaList[i].label;
-				myDone2 = criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*"); 
+				myDone2 = criteriaList[i + 1] and criteriaList[i + 1].label..(isPlayer and "" or BoolCol(myDone2).."*");
 				self:AddDoubleLine(myDone1,myDone2,r1,g1,b1,r2,g2,b2);
 			end
 		end

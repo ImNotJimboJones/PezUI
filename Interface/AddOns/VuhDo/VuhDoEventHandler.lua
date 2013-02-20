@@ -350,6 +350,7 @@ end
 --VUHDO_EVENT_TIMES = { };
 --
 local tEmptyRaid = { };
+local tInfo;
 function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16, anArg17)
 
 	--[[if (VUHDO_EVENT_TIMES["all"] == nil) then
@@ -368,8 +369,10 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 			end
 		end
 	elseif ("UNIT_AURA" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
-			VUHDO_updateHealth(anArg1, 4); -- VUHDO_UPDATE_DEBUFF
+		tInfo = (VUHDO_RAID or tEmptyRaid)[anArg1];
+		if (tInfo ~= nil) then
+			tInfo["debuff"], tInfo["debuffName"] = VUHDO_determineDebuff(anArg1);
+			VUHDO_updateBouquetsForEvent(anArg1, 4); -- VUHDO_UPDATE_DEBUFF
 		end
 	elseif ("UNIT_HEALTH" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
@@ -708,13 +711,13 @@ function VUHDO_slashCmd(aCommand)
 	elseif (tCommandWord == "proff") then
 		SetCVar("scriptProfile", "0");
 		ReloadUI();
-	elseif (strfind(tCommandWord, "chkvars")) then
+	--[[elseif (strfind(tCommandWord, "chkvars")) then
 		table.wipe(VUHDO_DEBUG);
 		for tFName, tData in pairs(_G) do
 			if(strsub(tFName, 1, 1) == "t" or strsub(tFName, 1, 1) == "s") then
 				VUHDO_Msg("Emerging local variable " .. tFName);
 			end
-		end
+		end]]
 	elseif (strfind(tCommandWord, "mm")
 		or strfind(tCommandWord, "map")) then
 		VUHDO_CONFIG["SHOW_MINIMAP"] = VUHDO_forceBooleanValue(VUHDO_CONFIG["SHOW_MINIMAP"]);

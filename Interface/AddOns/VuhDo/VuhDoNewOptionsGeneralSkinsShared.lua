@@ -2460,7 +2460,7 @@ function VUHDO_loadProfileNoInit(aName)
 	end
 
 	-- @TODO: Warum werden die nicht direkt geladen (ipairs-Problem?)
-	if (tProfile["CONFIG"]["CUSTOM_DEBUFF"] ~= nil and tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"] ~= nil) then
+	if (tProfile["CONFIG"]["CUSTOM_DEBUFF"] ~= nil and tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"] ~= nil and VUHDO_CONFIG["CUSTOM_DEBUFF"] ~= nil) then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"] = VUHDO_deepCopyTable(tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"]);
 	end
 

@@ -24,6 +24,7 @@ local UnitIsTappedByPlayer = UnitIsTappedByPlayer;
 local GetTexCoordsForRole = GetTexCoordsForRole;
 local UnitIsPVP = UnitIsPVP;
 local UnitFactionGroup = UnitFactionGroup;
+local UnitHasIncomingResurrection = UnitHasIncomingResurrection;
 local _;
 
 local VUHDO_RAID = { };
@@ -59,6 +60,7 @@ local VUHDO_getLatestCustomDebuff;
 
 local sIsInverted;
 local sBarColors;
+local sIsDistance;
 
 ----------------------------------------------------------
 
@@ -98,6 +100,7 @@ function VUHDO_bouquetValidatorsInitBurst()
 
 	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"];
 	sBarColors = VUHDO_PANEL_SETUP["BAR_COLORS"];
+	sIsDistance = VUHDO_CONFIG["DIRECTION"]["isDistanceText"];
 end
 
 local tEmptyInfo = { };
@@ -594,7 +597,7 @@ end
 
 --
 local function VUHDO_resurrectionValidator(anInfo, someCustom)
-	return UnitHasIncomingResurrection(anInfo["unit"]), "Interface\\RaidFrame\\Raid-Icon-Rez", -1, -1, -1;
+	return anInfo["dead"] and UnitHasIncomingResurrection(anInfo["unit"]), "Interface\\RaidFrame\\Raid-Icon-Rez", -1, -1, -1;
 end
 
 
@@ -832,12 +835,13 @@ end
 --
 local tUnit;
 local tDirection;
-local tCell;
-local tColor = { ["useBackground"] = true };
-local function VUHDO_directionArrowValidator(anInfo, _)
+local tColor = { ["useBackground"] = true, ["noStacksColor"] = true };
+local tDefaultColor = { ["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1, ["useBackground"] = true, ["useSlotColor"] = true }
+local tDistance;
+local function VUHDO_directionArrowValidator(anInfo, someInfos)
 	tUnit = anInfo["unit"];
 
-	if (not VUHDO_shouldDisplayArrow(tUnit) or not anInfo["visible"]) then
+	if (not VUHDO_shouldDisplayArrow(tUnit)) then
 		return false, nil, -1, -1, -1;
 	end
 
@@ -846,17 +850,24 @@ local function VUHDO_directionArrowValidator(anInfo, _)
 		return false, nil, -1, -1, -1;
 	end
 
-	tCell = VUHDO_getCellForDirection(tDirection);
-
-	if (VUHDO_CONFIG["DIRECTION"]["isDistanceText"]) then
-		tColor["R"], tColor["G"] = VUHDO_getRedGreenForDistance(VUHDO_getDistanceBetween("player", tUnit) or 0);
-		tColor["B"] = 0;
+	if (sIsDistance) then
+		tDistance = VUHDO_getDistanceBetween("player", tUnit);
+		if (tDistance ~= nil) then
+			tColor["R"], tColor["G"] = VUHDO_getRedGreenForDistance(tDistance);
+			tDistance = (tDistance > 0 and tDistance < 100) and floor(tDistance * 0.1) or nil;
+			if (tDistance ~= nil) then
+				tColor["B"], tColor["useText"] = 0.2, true;
+				tColor["TR"], tColor["TG"], tColor["TB"] = tColor["R"], tColor["G"], 0.2;
+			end
+		else
+			tDistance = nil;
+		end
 	else
-		tColor["R"], tColor["G"], tColor["B"] = 1, 0.4, 0.4;
+		tDistance = nil;
 	end
 
-	return true, "Interface\\AddOns\\VuhDo\\Images\\Arrow.blp", -1, -1, -1, tColor, nil,
-		VUHDO_getTexCoordsForCell(tCell);
+	return true, "Interface\\AddOns\\VuhDo\\Images\\Arrow.blp", -1,
+		tDistance or -1, -1, tDistance ~= nil and tColor or tDefaultColor, nil, VUHDO_getTexCoordsForCell(VUHDO_getCellForDirection(tDirection));
 end
 
 
@@ -1320,7 +1331,7 @@ VUHDO_BOUQUET_BUFFS_SPECIAL = {
 	["DIRECTION"] = {
 		["displayName"] = VUHDO_I18N_BOUQUET_DIRECTION_ARROW,
 		["validator"] = VUHDO_directionArrowValidator,
-		["no_color"] = true,
+		--["no_color"] = true,
 		["updateCyclic"] = true,
 		["interests"] = { VUHDO_UPDATE_RANGE, VUHDO_UPDATE_ALIVE },
 	},

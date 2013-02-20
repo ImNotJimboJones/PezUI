@@ -165,7 +165,7 @@ end
 
 --
 local tQuota, tAllButtons, tBar;
-function VUHDO_sideBarLeftBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
+local function VUHDO_sideBarBouquetCallback(aBarNum, aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
 		or (aMaxValue or 0) > 1 and aCurrValue / aMaxValue
 		or 0;
@@ -174,11 +174,11 @@ function VUHDO_sideBarLeftBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue,
 	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
 			if (tQuota > 0) then
-				tBar = VUHDO_getHealthBar(tButton, 17);
+				tBar = VUHDO_getHealthBar(tButton, aBarNum);
 				tBar:SetValue(tQuota);
 				tBar:SetVuhDoColor(aColor);
 			else
-				VUHDO_getHealthBar(tButton, 17):SetValue(0);
+				VUHDO_getHealthBar(tButton, aBarNum):SetValue(0);
 			end
 		end
 	end
@@ -187,22 +187,13 @@ end
 
 
 --
-local tQuota, tAllButtons, tBar;
-function VUHDO_sideBarRightBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
-	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
-		or (aMaxValue or 0) > 1 and aCurrValue / aMaxValue
-		or 0;
+function VUHDO_sideBarLeftBouquetCallback(...)
+	VUHDO_sideBarBouquetCallback(17, ...);
+end
 
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			if (tQuota > 0) then
-				tBar = VUHDO_getHealthBar(tButton, 18);
-				tBar:SetValue(tQuota);
-				tBar:SetVuhDoColor(aColor);
-			else
-				VUHDO_getHealthBar(tButton, 18):SetValue(0);
-			end
-		end
-	end
+
+
+--
+function VUHDO_sideBarRightBouquetCallback(...)
+	VUHDO_sideBarBouquetCallback(18, ...);
 end
