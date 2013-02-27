@@ -49,6 +49,7 @@ local GetMacroInfo = _G.GetMacroInfo
 
 local GetSpellCooldown = _G.GetSpellCooldown
 local GetSpellTexture = _G.GetSpellTexture
+local GetSpellCount = _G.GetSpellCount
 local GetSpellCharges = _G.GetSpellCharges
 local IsCurrentSpell = _G.IsCurrentSpell
 local IsAutoRepeatSpell = _G.IsAutoRepeatSpell
@@ -754,8 +755,6 @@ function BUTTON:MACRO_UpdateData(...)
 	end
 end
 
-
-
 function BUTTON:MACRO_SetSpellIcon(spell)
 
 	local _, texture
@@ -926,7 +925,7 @@ function BUTTON:MACRO_UpdateIcon(...)
 
 	self.updateMacroIcon = nil
 
-	local spell, item, show, texture = self.macrospell, self.macroitem, self.macroshow or self.macroicon
+	local spell, item, show, texture = self.macrospell, self.macroitem, self.macroshow, self.macroicon
 
 	if (self.actionID) then
 
@@ -934,15 +933,17 @@ function BUTTON:MACRO_UpdateIcon(...)
 
 	elseif (show and #show>0) then
 
-    		if(GetItemInfo(show) or ItemCache[show]) then
-			texture = self:MACRO_SetItemIcon(show)
-    		else
+        if(GetItemInfo(show) or ItemCache[show]) then
+            texture = self:MACRO_SetItemIcon(show)
+        else
 			texture = self:MACRO_SetSpellIcon(show)
-    		end
+            self:MACRO_SetSpellState(show);
+        end
 
 	elseif (spell and #spell>0) then
 
 		texture = self:MACRO_SetSpellIcon(spell)
+        self:MACRO_SetSpellState(spell);
 
 	elseif (item and #item>0) then
 
@@ -1020,14 +1021,19 @@ end
 
 function BUTTON:MACRO_SetSpellState(spell)
 
-	if (GetSpellCharges(spell) and  GetSpellCharges(spell) > 1) then
+    local charges, maxCharges, chargeStart, chargeDuration = GetSpellCharges(spell)
+    if (maxCharges and maxCharges > 1) then
+        self.count:SetText(charges)
+    else
+        self.count:SetText("")
+    end
 
-		self.count:SetText(GetSpellCharges(spell))
-	else
-		self.count:SetText("")
-	end
+    count = GetSpellCount(spell)
+    if (count and count > 0) then
+        self.count:SetText(count)
+    end
 
-	if (cIndex[spell:lower()]) then
+    if (cIndex[spell:lower()]) then
 
 		spell = cIndex[spell:lower()].spellID
 
@@ -1108,13 +1114,13 @@ function BUTTON:MACRO_UpdateState(...)
 
 	elseif (show and #show>0) then
 
-    		if(GetItemInfo(show) or ItemCache[show]) then
-			self:MACRO_SetItemState(show)
-    		else
-			self:MACRO_SetSpellState(show)
-    		end
+        if (GetItemInfo(show) or ItemCache[show]) then
+            self:MACRO_SetItemState(show)
+        else
+            self:MACRO_SetSpellState(show)
+        end
 
-	elseif (spell and #spell>0) then
+    elseif (spell and #spell>0) then
 
 		self:MACRO_SetSpellState(spell)
 
@@ -1124,14 +1130,14 @@ function BUTTON:MACRO_UpdateState(...)
 
 	elseif (self:GetAttribute("macroShow")) then
 
-		show = self:GetAttribute("macroShow")
+        show = self:GetAttribute("macroShow")
 
-    		if(GetItemInfo(show) or ItemCache[show]) then
-			self:MACRO_SetItemState(show)
-    		else
-			self:MACRO_SetSpellState(show)
-    		end
-	else
+        if (GetItemInfo(show) or ItemCache[show]) then
+            self:MACRO_SetItemState(show)
+        else
+            self:MACRO_SetSpellState(show)
+        end
+    else
 		self:SetChecked(nil)
 		self.count:SetText("")
 	end
@@ -1351,18 +1357,16 @@ end
 
 function BUTTON:MACRO_UpdateUsableSpell(spell)
 
+    local isUsable, notEnoughMana
+	local spellName = spell:lower()
 
-spell = spell:lower()
-
---- necessary for spells changing of subtypes between specs, ie, Rain of Fire() and Rain of Fire(Destruction)
-if (sIndex[spell]) then
-isUsable, notEnoughMana = IsUsableSpell(sIndex[spell].spellID)
-else
-	local isUsable, notEnoughMana = IsUsableSpell(spell)
-end
-
-
-
+	--- necessary for spells changing of subtype between specs, ie, Rain of Fire() and Rain of Fire(Destruction)
+    --- unable to reproduce this but will leave it in here for now
+	if (sIndex[spellName]) then
+		isUsable, notEnoughMana = IsUsableSpell(sIndex[spellName].spellID)
+	else
+		isUsable, notEnoughMana = IsUsableSpell(spell)
+	end
 
 	if (notEnoughMana) then
 
@@ -1554,6 +1558,10 @@ function BUTTON:MACRO_ACTIONBAR_UPDATE_STATE(...)
 
 end
 
+function BUTTON:MACRO_ACTIONBAR_UPDATE_USABLE(...)
+    -- TODO
+end
+
 BUTTON.MACRO_COMPANION_UPDATE = BUTTON.MACRO_ACTIONBAR_UPDATE_STATE
 BUTTON.MACRO_TRADE_SKILL_SHOW = BUTTON.MACRO_ACTIONBAR_UPDATE_STATE
 BUTTON.MACRO_TRADE_SKILL_CLOSE = BUTTON.MACRO_ACTIONBAR_UPDATE_STATE
@@ -1723,6 +1731,19 @@ BUTTON.MACRO_UPDATE_EXTRA_ACTIONBAR = BUTTON.MACRO_UPDATE_VEHICLE_ACTIONBAR
 --for 4.x compatibility
 BUTTON.MACRO_UPDATE_BONUS_ACTIONBAR = BUTTON.MACRO_UPDATE_VEHICLE_ACTIONBAR
 
+
+function BUTTON:MACRO_SPELL_UPDATE_CHARGES(...)
+
+    local spell = self.macrospell
+    local charges, maxCharges, chargeStart, chargeDuration = GetSpellCharges(spell)
+
+    if (maxCharges and maxCharges > 1) then
+        self.count:SetText(charges)
+        else
+        self.count:SetText("")
+    end
+end
+
 function BUTTON:MACRO_OnEvent(...)
 
 	local event = "MACRO_"..select(1,...)
@@ -1766,8 +1787,8 @@ function BUTTON:MACRO_PlaceSpell(action1, action2, hasAction)
 	 	spell, subName = GetSpellBookItemName(action1, action2)
 	 	_, spellID = GetSpellBookItemInfo(action1, action2)
 
-		--print(GetSpellBookItemName(action1, action2))
-		--print(GetSpellBookItemInfo(action1, action2))
+        --print(GetSpellBookItemName(action1, action2))
+        --print(GetSpellBookItemInfo(action1, action2))
         --spell = GetSpellInfo(spellID)
 
 	 	self.data.macro_Text = self:AutoWriteMacro(spell, subName)
@@ -2306,7 +2327,6 @@ function BUTTON:MACRO_SetSpellTooltip(spell)
 		local spell_id = sIndex[spell].spellID
 
 		if (morphSpells[spell_id]) then
-
 			if (self.UberTooltips) then
 				GameTooltip:SetHyperlink("spell:"..morphSpells[spell_id])
 			else
@@ -2315,10 +2335,10 @@ function BUTTON:MACRO_SetSpellTooltip(spell)
 			end
 
 		elseif (self.UberTooltips) then
-			GameTooltip:SetSpellByID(spell_id)
+            GameTooltip:SetSpellByID(spell_id)
 		else
-			local spell = GetSpellInfo(spell_id)
-			GameTooltip:SetText(spell, 1, 1, 1)
+            local spell = GetSpellInfo(spell_id)
+            GameTooltip:SetText(spell, 1, 1, 1)
 		end
 
 		self.UpdateTooltip = macroButton_SetTooltip
@@ -2466,6 +2486,9 @@ function BUTTON:MACRO_OnShow(...)
 	self:RegisterEvent("ACTIONBAR_SLOT_CHANGED")
 	self:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
 	self:RegisterEvent("ACTIONBAR_UPDATE_STATE")
+    self:RegisterEvent("ACTIONBAR_UPDATE_USABLE")
+
+    self:RegisterEvent("SPELL_UPDATE_CHARGES")
 
 	self:RegisterEvent("RUNE_POWER_UPDATE")
 
@@ -2518,8 +2541,11 @@ function BUTTON:MACRO_OnHide(...)
 	self:UnregisterEvent("ACTIONBAR_SLOT_CHANGED")
 	self:UnregisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
 	self:UnregisterEvent("ACTIONBAR_UPDATE_STATE")
+    self:UnregisterEvent("ACTIONBAR_UPDATE_USABLE")
 
-	self:UnregisterEvent("RUNE_POWER_UPDATE")
+    self:UnregisterEvent("SPELL_UPDATE_CHARGES")
+
+    self:UnregisterEvent("RUNE_POWER_UPDATE")
 
 	self:UnregisterEvent("TRADE_SKILL_SHOW")
 	self:UnregisterEvent("TRADE_SKILL_CLOSE")
@@ -3518,7 +3544,7 @@ local function controlOnEvent(self, event, ...)
 			["/equip"] = true,
 			["/eq"] = true,
 			["/equipslot"] = true,
-			["/use"] = true,	
+			["/use"] = true,
 			["/userandom"] = true,
 		}
 

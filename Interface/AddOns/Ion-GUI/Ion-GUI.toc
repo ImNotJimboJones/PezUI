@@ -1,7 +1,7 @@
 ﻿## Interface: 50100
 ## Title: Ion: GUI
 ## Author: Maul
-## Version: Hydrogen-2
+## Version: Hydrogen-5
 ## Notes: GUI for Ion
 ## DefaultState: enabled
 ## Dependencies: Ion

@@ -286,7 +286,6 @@ function ION:UpdateSpellIndex()
 
 	for i = 1,sIndexMax do
 
-
 		spellName, subName = GetSpellBookItemName(i, BOOKTYPE_SPELL)
 		spellType, spellID = GetSpellBookItemInfo(i, BOOKTYPE_SPELL)
 		spellLvl = GetSpellAvailableLevel(i, BOOKTYPE_SPELL)
@@ -304,7 +303,6 @@ function ION:UpdateSpellIndex()
 					spellID = tempID
 				end
 			end
-
 
 			altName, _, _, cost, _, powerType = GetSpellInfo(spellID)
 
@@ -2348,8 +2346,8 @@ local function control_OnEvent(self, event, ...)
 	elseif (event == "ACTIVE_TALENT_GROUP_CHANGED" or
 		  event == "LEARNED_SPELL_IN_TAB" or
 		  event == "CHARACTER_POINTS_CHANGED" or
-                  event == "SPELLS_CHANGED") then
-	
+          event == "SPELLS_CHANGED") then
+
 		updater.elapsed = 0
 		updater:Show()
 

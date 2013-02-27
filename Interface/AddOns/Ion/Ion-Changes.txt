@@ -1,3 +1,7 @@
+Hydrogen-5
+- Spell Count bug fix (i.e. Death Knight's Scent of Blood count update)
+- Spell Charges fix properly implemented
+
 Hydrogen-4
 - Forum version, include most hotfixes appearing on the forum (flyx, Nephyrin, chinoloco,kouik)
 - should now display the appropriate tooltip in all cases.
@@ -8,6 +12,7 @@ Hydrogen-4
 
 
 Hydrogen-3 
+
 
 Hydrogen-2
 -Now scans profession spells
