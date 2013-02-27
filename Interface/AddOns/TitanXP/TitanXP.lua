@@ -221,24 +221,22 @@ function TitanPanelXPButton_GetButtonText(id)
           			local labelnumofkills = "";
           			local labelnumofgains = "";
                 local percent = floor(10000*(currentXP/totalXP)+0.5)/100;
-                --currentXPText = format(TITAN_XP_FORMAT, currentXP);
-                --totalXPText = format(TITAN_XP_FORMAT, totalXP);
                 if TitanGetVar(TITAN_XP_ID,"ShowSimpleToLevel") then
-                	toLevelXPText = TitanUtils_GetColoredText(format(L["TITAN_XP_FORMAT"], toLevelXP), _G["GREEN_FONT_COLOR"]);
+                	toLevelXPText = TitanUtils_GetColoredText(format(L["TITAN_XP_FORMAT"], comma_value(math.floor(toLevelXP+0.5))), _G["GREEN_FONT_COLOR"]);
                 	labeltolevel = L["TITAN_XP_XPTOLEVELUP"];
                 end
                 if TitanGetVar(TITAN_XP_ID,"ShowSimpleRested") then
-                	rest = TitanUtils_GetColoredText(GetXPExhaustion()==nil and "0" or GetXPExhaustion(),{r=0.44, g=0.69, b=0.94});
+                	rest = TitanUtils_GetColoredText(comma_value(GetXPExhaustion()==nil and "0" or GetXPExhaustion()),{r=0.44, g=0.69, b=0.94});
                 	labelrested = L["TITAN_XP_TOTAL_RESTED"];
                 end
                 if TitanGetVar(TITAN_XP_ID,"ShowSimpleNumOfKills") then
-                	numofkills = TitanUtils_GetColoredText(numofkills, {r=0.24, g=0.7, b=0.44})
+                	numofkills = TitanUtils_GetColoredText(comma_value(numofkills), {r=0.24, g=0.7, b=0.44})
                 	labelnumofkills = L["TITAN_XP_KILLS_LABEL_SHORT"];
                 else
                 	numofkills = ""
                 end
                 if TitanGetVar(TITAN_XP_ID,"ShowSimpleNumOfGains") then
-                	numofgains = TitanUtils_GetColoredText(numofgains, {r=1, g=0.49, b=0.04})
+                	numofgains = TitanUtils_GetColoredText(comma_value(numofgains), {r=1, g=0.49, b=0.04})
                 	labelnumofgains = L["TITAN_XP_XPGAINS_LABEL_SHORT"];
                 else
                 	numofgains = ""
@@ -272,8 +270,7 @@ function TitanPanelXPButton_GetTooltipText()
      local toLevelXPPercent = toLevelXP / totalXP * 100;
      local xpPerHourThisLevel = currentXP / levelTime * 3600;
      local xpPerHourThisSession = TitanPanelXPButton.sessionXP / sessionTime * 3600;
-     local estTimeToLevelThisLevel = TitanUtils_Ternary((currentXP == 0), -1, toLevelXP / currentXP * levelTime);
---     local estTimeToLevelThisSession = TitanUtils_Ternary((TitanPanelXPButton.sessionXP == 0), -1, toLevelXP / TitanPanelXPButton.sessionXP * sessionTime);
+     local estTimeToLevelThisLevel = TitanUtils_Ternary((currentXP == 0), -1, toLevelXP / (max(currentXP,1)) * levelTime);
      local estTimeToLevelThisSession = 0;
      if TitanPanelXPButton.sessionXP > 0 then
           estTimeToLevelThisSession = TitanUtils_Ternary((TitanPanelXPButton.sessionXP == 0), -1, toLevelXP / TitanPanelXPButton.sessionXP * sessionTime);
@@ -292,11 +289,11 @@ function TitanPanelXPButton_GetTooltipText()
           L["TITAN_XP_TOOLTIP_LEVEL_XP"].."\t"..TitanUtils_GetHighlightText(comma_value(currentXP).." "..format(L["TITAN_XP_PERCENT_FORMAT"], currentXPPercent)).."\n"..           
           L["TITAN_XP_TOOLTIP_TOLEVEL_XP"].."\t"..TitanUtils_GetHighlightText(comma_value(toLevelXP).." "..format(L["TITAN_XP_PERCENT_FORMAT"], toLevelXPPercent)).."\n"..
           L["TITAN_XP_TOOLTIP_SESSION_XP"].."\t"..TitanUtils_GetHighlightText(comma_value(TitanPanelXPButton.sessionXP)).."\n"..
-          format(L["TITAN_XP_KILLS_LABEL"], lastMobXP).."\t"..TitanUtils_GetHighlightText(comma_value(numofkills)).."\n"..
-          format(L["TITAN_XP_XPGAINS_LABEL"], XPGain).."\t"..TitanUtils_GetHighlightText(comma_value(numofgains)).."\n"..
+          format(L["TITAN_XP_KILLS_LABEL"], comma_value(lastMobXP)).."\t"..TitanUtils_GetHighlightText(comma_value(numofkills)).."\n"..
+          format(L["TITAN_XP_XPGAINS_LABEL"], comma_value(XPGain)).."\t"..TitanUtils_GetHighlightText(comma_value(numofgains)).."\n"..
           "\n"..
-          L["TITAN_XP_TOOLTIP_XPHR_LEVEL"].."\t"..TitanUtils_GetHighlightText(comma_value(math.floor(xpPerHourThisLevel+0.5))).."\n"..
-          L["TITAN_XP_TOOLTIP_XPHR_SESSION"].."\t"..TitanUtils_GetHighlightText(comma_value(math.floor(xpPerHourThisSession+0.5))).."\n"..
+          L["TITAN_XP_TOOLTIP_XPHR_LEVEL"].."\t"..TitanUtils_GetHighlightText(format(L["TITAN_XP_FORMAT"], comma_value(math.floor(xpPerHourThisLevel+0.5)))).."\n"..
+          L["TITAN_XP_TOOLTIP_XPHR_SESSION"].."\t"..TitanUtils_GetHighlightText(format(L["TITAN_XP_FORMAT"], comma_value(math.floor(xpPerHourThisSession+0.5)))).."\n"..
           L["TITAN_XP_TOOLTIP_TOLEVEL_LEVEL"].."\t"..TitanUtils_GetHighlightText(TitanUtils_GetAbbrTimeText(estTimeToLevelThisLevel)).."\n"..
           L["TITAN_XP_TOOLTIP_TOLEVEL_SESSION"].."\t"..TitanUtils_GetHighlightText(TitanUtils_GetAbbrTimeText(estTimeToLevelThisSession));
 end

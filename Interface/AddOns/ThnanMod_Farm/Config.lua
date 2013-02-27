@@ -43,6 +43,15 @@ function config:setHideInVehicle(value)
 		FRM:farmWindowAutoShowEvent("config");
 	end
 end
+function config:setHideWhenMounted(value)
+	if (value and not config.hideWhenMounted) then
+		config.hideWhenMounted = true;
+		FRM:farmWindowAutoShowEvent("config");
+	elseif (not value and config.hideWhenMounted) then
+		config.hideWhenMounted = false;
+		FRM:farmWindowAutoShowEvent("config");
+	end
+end
 function config:setDropOnRightClick(value)
 	if (value and not config.dropOnRightClick) then
 		config.dropOnRightClick = true;
@@ -80,8 +89,11 @@ hideWhenEmptyCheckBox:setBelow(hideInCombatCheckBox);
 local hideInVehicleCheckBox = factory:createCheckBox(configPanel, L.hideInVehicleCheckBoxLabel, L.hideInVehicleCheckBoxTooltip, "global");
 hideInVehicleCheckBox:setBelow(hideWhenEmptyCheckBox);
 
+local hideWhenMountedCheckBox = factory:createCheckBox(configPanel, L.hideWhenMountedCheckBoxLabel, L.hideWhenMountedCheckBoxTooltip, "global");
+hideWhenMountedCheckBox:setBelow(hideInVehicleCheckBox);
+
 local dropLabel = factory:createLabel(configPanel, L.dropLabelText);
-dropLabel:setBelow(hideInVehicleCheckBox);
+dropLabel:setBelow(hideWhenMountedCheckBox);
 
 local dropOnRightClickCheckBox = factory:createCheckBox(configPanel, L.dropOnRightClickCheckBoxLabel, L.dropOnRightClickCheckBoxTooltip, "global");
 dropOnRightClickCheckBox:setBelow(dropLabel);
@@ -94,6 +106,7 @@ configPanel.default = function(self)
 	config:setHideInCombat(true);
 	config:setHideWhenEmpty(true);
 	config:setHideInVehicle(true);
+	config:setHideWhenMounted(true);
 	config:setDropOnRightClick(true);
 	config:setDropOnLeavingFarm(true);
 end
@@ -102,6 +115,7 @@ configPanel.okay = function(self)
 	config:setHideInCombat(hideInCombatCheckBox:GetChecked());
 	config:setHideWhenEmpty(hideWhenEmptyCheckBox:GetChecked());
 	config:setHideInVehicle(hideInVehicleCheckBox:GetChecked());
+	config:setHideWhenMounted(hideWhenMountedCheckBox:GetChecked());
 	config:setDropOnRightClick(dropOnRightClickCheckBox:GetChecked());
 	config:setDropOnLeavingFarm(dropOnLeavingFarmCheckBox:GetChecked());
 end
@@ -110,6 +124,7 @@ configPanel.refresh = function(self)
 	hideInCombatCheckBox:SetChecked(config.hideInCombat);
 	hideWhenEmptyCheckBox:SetChecked(config.hideWhenEmpty);
 	hideInVehicleCheckBox:SetChecked(config.hideInVehicle);
+	hideWhenMountedCheckBox:SetChecked(config.hideWhenMounted);
 	dropOnRightClickCheckBox:SetChecked(config.dropOnRightClick);
 	dropOnLeavingFarmCheckBox:SetChecked(config.dropOnLeavingFarm);
 end

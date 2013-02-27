@@ -390,7 +390,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Совет: Для сжатия/очистки памяти нажмите ЛКМ.";
 	
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "ОПТ/ч на этом уровне: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "ОПТ/ч за эту сессию: ";
@@ -421,13 +421,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "Показ прим.убийств д�
 L["TITAN_XP_MENU_RESET_SESSION"] = "Сбросить сессию";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Обновить таймеры";
 L["TITAN_XP_UPDATE_PENDING"] = "Обновляется...";
-L["TITAN_XP_KILLS_LABEL"] = "Убийств до уровня (%d опыта полученно): ";
+L["TITAN_XP_KILLS_LABEL"] = "Убийств до уровня (%s опыта полученно): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "Оц. убийств: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Время сеанса: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Показать время сеанса";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*) погибает, вы получаете (%d+) |4очко:очка:очков; опыта.";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Получение опыта: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "Опыта до уровня (%d опыта в последний раз): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "Опыта до уровня (%s опыта в последний раз): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "Показать необходимый опыт до уровня";
 	
      --Titan Repair

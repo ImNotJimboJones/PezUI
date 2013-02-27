@@ -2,6 +2,14 @@ local _, FRM = ...;
 local config = FRM.config;
 local L = FRM.L;
 
+--[[ variable forward declarations ]]--
+
+-- right click planting
+
+local rightClickButtons = {};
+local rightClickSeed = nil;
+local setRightClickSeed = nil;
+
 --[[ NPC name parsing ]]--
 
 local npcTooltip = CreateFrame("GameTooltip", "FRMnpcTooltip");
@@ -20,6 +28,7 @@ local farmWindow = CreateFrame("Frame", "farmWindow", UIParent, "BasicFrameTempl
 farmWindow:SetPoint("CENTER");
 farmWindow:SetWidth((7*36) + (8*5) + 2);
 farmWindow:SetHeight((6*36) + (7*5) + 23);
+farmWindow:SetToplevel(true);
 farmWindow:SetMovable(true);
 farmWindow:EnableMouse(true);
 farmWindow:RegisterForDrag("LeftButton");
@@ -38,117 +47,141 @@ farmWindow:Hide();
 
 local function farmButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
-	GameTooltip:SetItemByID(self.itemID);
+	if self.itemID2 and IsShiftKeyDown() then
+		GameTooltip:SetItemByID(self.itemID2);
+	elseif self.itemID then
+		GameTooltip:SetItemByID(self.itemID);
+	else
+		GameTooltip:AddLine(L.portalButtonNoFactionText, 0, 1, 1, true);
+	end
 	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
 	GameTooltip:Show();
 end
 local function farmButton_OnLeave(self)
 	GameTooltip:Hide();
 end
-local function farmButton_OnEvent(self, evt)
-	self:updateCount();
-end
-local function farmButton_OnEvent_combat(self, evt)
-	if evt == "BAG_UPDATE" then
-		self:updateCount();
-	elseif evt == "PLAYER_REGEN_ENABLED" then
-		self:loadItem();
-		self:UnregisterEvent("PLAYER_REGEN_ENABLED");
-		self:SetScript("OnEvent", farmButton_OnEvent);
-	end
-end
-local function farmButton_OnEvent_unloaded(self, evt)
-	if evt == "BAG_UPDATE" then
-		self:updateCount();
-	elseif evt == "GET_ITEM_INFO_RECEIVED" then
-		if self:loadItem() then
-			self:UnregisterEvent("GET_ITEM_INFO_RECEIVED");
-			if InCombatLockdown() then
-				self:SetScript("OnEvent", farmButton_OnEvent_combat);
-				self:RegisterEvent("PLAYER_REGEN_ENABLED");
-			else
-				self:SetScript("OnEvent", farmButton_OnEvent);
-			end
+local function farmButton_OnEvent(self, event)
+	if event == "PLAYER_REGEN_ENABLED" or event == "NEUTRAL_FACTION_SELECT_RESULT" then
+		self:UnregisterEvent(event);
+		self:setAttributeValue();
+	elseif event == "MODIFIER_STATE_CHANGED" then
+		self:updateAppearance();
+		if self:IsMouseOver() then
+			farmButton_OnEnter(self);
 		end
+	elseif event == "BAG_UPDATE" or event == "GET_ITEM_INFO_RECEIVED" then
+		self:updateAppearance();
 	end
 end
+local function farmButton_OnClick(self)
+	self:SetChecked(self.checkedState);
+end
 
-local tilledSoilID = 58563;
-local tilledSoilName = nameForNPC(tilledSoilID);
-
-local function seedButton_OnEnter_load(self)
-	farmButton_OnEnter(self);
+local tilledSoilName;
+local tilledSoilCallbackButtons = {};
+do
+	local tilledSoilID = 58563;
+	tilledSoilName = nameForNPC(tilledSoilID);
 	if not tilledSoilName then
-		tilledSoilName = nameForNPC(tilledSoilID);
-	end
-	if tilledSoilName then
-		self:setMacroText();
-		self:SetScript("OnEnter", farmButton_OnEnter);
+		local callbackFrame = CreateFrame("Frame");
+		if GetSubZoneText() == L.sunsongRanchName then
+			callbackFrame:Show();
+		else
+			callbackFrame:Hide();
+		end
+		callbackFrame:SetScript("OnEvent", function()
+			if GetSubZoneText() == L.sunsongRanchName then
+				callbackFrame:Show();
+			else
+				callbackFrame:Hide();
+			end
+		end);
+		callbackFrame:RegisterEvent("ZONE_CHANGED");
+		callbackFrame:SetScript("OnUpdate", function()
+			tilledSoilName = nameForNPC(tilledSoilID);
+			if tilledSoilName then
+				for k, button in pairs(tilledSoilCallbackButtons) do
+					button:setAttributeValue();
+				end
+				tilledSoilCallbackButtons = nil;
+				callbackFrame:UnregisterEvent("ZONE_CHANGED");
+				callbackFrame:SetScript("OnEvent", nil);
+				callbackFrame:SetScript("OnUpdate", nil);
+				callbackFrame:Hide();
+			end
+		end);
 	end
 end
+
 local function seedButton_setMacroText(self)
-	if tilledSoilName and self.itemName then
-		self:SetAttribute("macrotext", "/targetexact "..tilledSoilName.."\n/use "..self.itemName.."\n/targetlasttarget");
+	if not tilledSoilName then
+		tilledSoilCallbackButtons[#tilledSoilCallbackButtons + 1] = self;
+		return;
+	end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED");
+		return;
+	end
+	
+	local text = "/targetexact "..tilledSoilName.."\n/use ";
+	if self.itemID2 then
+		text = text.."[modifier:shift] item:"..self.itemID2.."; [nomodifier] item:"..self.itemID;
+	else
+		text = text.."item:"..self.itemID;
+	end
+	text = text.."\n/targetlasttarget";
+	self:SetAttribute("macrotext", text);
+end
+local function seedButton_setRightClickSeed(self)
+	if self.itemID then
+		setRightClickSeed(self.itemID);
 	end
 end
-local function seedButton_loadItem(self)
-	if (not self.itemName) and (not self.itemTexture) then
-		local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
-		self.itemName = itemName;
+local function seedButton_updateAppearance(self)
+	if not self.itemTexture then
+		local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
 		self.itemTexture = itemTexture;
 	end
-	if self.itemName and self.itemTexture then
-		if not InCombatLockdown() then
-			self:setMacroText();
-			self.icon:SetTexture(self.itemTexture);
-		end
-		return true;
-	else
-		return false;
+	if self.itemID2 and not self.itemTexture2 then
+		local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID2);
+		self.itemTexture2 = itemTexture;
 	end
-end
-local function seedButton_updateCount(self)
-	local countText = _G[self:GetName().."Count"];
+	if not self.itemTexture or (self.itemID2 and not self.itemTexture2) then
+		self:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+	else
+		self:UnregisterEvent("GET_ITEM_INFO_RECEIVED");
+	end
+	
 	local count = GetItemCount(self.itemID, false, false);
+	if self.itemID2 and IsShiftKeyDown() then
+		self.icon:SetTexture(self.itemTexture2);
+		count = GetItemCount(self.itemID2, false, true);
+	else
+		self.icon:SetTexture(self.itemTexture);
+	end
+	
+	local countText = _G[self:GetName().."Count"];
 	if (count > 99) then
 		countText:SetText("*");
 	else
 		countText:SetText(count);
 	end
-	
-	local icon = _G[self:GetName().."Icon"];
 	if (count > 0) then
-		icon:SetVertexColor(1.0, 1.0, 1.0);
+		self.icon:SetVertexColor(1.0, 1.0, 1.0);
 	else
-		icon:SetVertexColor(0.4, 0.4, 0.4);
+		self.icon:SetVertexColor(0.4, 0.4, 0.4);
 	end
+	
+	if self.checkedState then
+		self.FlyoutBorder:Show();
+		self.FlyoutBorderShadow:Show();
+	else
+		self.FlyoutBorder:Hide();
+		self.FlyoutBorderShadow:Hide();
+	end
+	self:SetChecked(self.checkedState);
 end
 
-local function toolButton_loadItem(self)
-	if (not self.itemName) and (not self.itemTexture) then
-		local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
-		self.itemName = itemName;
-		self.itemTexture = itemTexture;
-	end
-	if self.itemName and self.itemTexture then
-		if not InCombatLockdown() then
-			self:SetAttribute("item", self.itemName);
-			self.icon:SetTexture(self.itemTexture);
-		end
-		return true;
-	else
-		return false;
-	end
-end
-local function toolButton_updateCount(self)
-	local count = GetItemCount(self.itemID, false, false);
-	local icon = _G[self:GetName().."Icon"];
-	if (count > 0) then
-		icon:SetVertexColor(1.0, 1.0, 1.0);
-	else
-		icon:SetVertexColor(0.4, 0.4, 0.4);
-	end
-end
 local function toolButton_dropTool(self)
 	if config.dropOnRightClick then
 		for bag = 0, NUM_BAG_SLOTS do
@@ -162,142 +195,146 @@ local function toolButton_dropTool(self)
 		end
 	end
 end
-
-local noFactionIcon = "Interface\\BUTTONS\\UI-GroupLoot-Pass-Down";
-local function portalButton_OnEnter_noID(self)
-	GameTooltip:SetOwner(farmWindow);
-	GameTooltip:ClearLines();
-	GameTooltip:AddLine(L.portalButtonNoFactionText, 0, 1, 1, true);
-	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
-	GameTooltip:Show();
-end
-local function portalButton_OnEvent_noID(self, evt)
-	local faction = UnitFactionGroup("player");
-	if faction == "Alliance" then
-		self.itemID = self.allianceID;
-	elseif faction == "Horde" then
-		self.itemID = self.hordeID;
-	end
-	self.loadItem = toolButton_loadItem;
-	self:UnregisterEvent("NEUTRAL_FACTION_SELECT_RESULT");
-	self:SetScript("OnEvent", farmButton_OnEvent);
-	self:RegisterEvent("BAG_UPDATE");
-	self:SetScript("OnEnter", farmButton_OnEnter);
-	if not self:loadItem() then
-		self:SetScript("OnEvent", farmButton_OnEvent_unloaded);
-		self:RegisterEvent("GET_ITEM_INFO_RECEIVED");
-	end
-	self:updateCount();
-end
-local function portalButton_loadItem(self)
-	local faction = UnitFactionGroup("player");
-	if faction == "Alliance" then
-		self.itemID = self.allianceID;
-	elseif faction == "Horde" then
-		self.itemID = self.hordeID;
+local function toolButton_updateAppearance(self)
+	if not self.itemTexture then
+		local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
+		self.itemTexture = itemTexture;
+		if not self.itemTexture then
+			self:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+		else
+			self:UnregisterEvent("GET_ITEM_INFO_RECEIVED");
+			self.icon:SetTexture(self.itemTexture);
+		end
 	end
 
-	if not self.itemID then
-		self.icon:SetTexture(noFactionIcon);
-		self:SetScript("OnEnter", portalButton_OnEnter_noID);
-		self:UnregisterEvent("BAG_UPDATE");
-		self:SetScript("OnEvent", portalButton_OnEvent_noID);
-		self:RegisterEvent("NEUTRAL_FACTION_SELECT_RESULT");
-		ThnanMod:output("no ID");
-		return true;
+	local count = GetItemCount(self.itemID, false, false);
+	if (count > 0) then
+		self.icon:SetVertexColor(1.0, 1.0, 1.0);
 	else
-		return toolButton_loadItem(self);
+		self.icon:SetVertexColor(0.4, 0.4, 0.4);
 	end
 end
-local function portalButton_updateCount(self)
+
+local noInfoTexture = "Interface\\BUTTONS\\UI-GroupLoot-Pass-Down";
+
+local function portalButton_setItem(self)
+	local faction = UnitFactionGroup("player");
+	if faction == "Alliance" then
+		self.itemID = self.allianceID;
+	elseif faction == "Horde" then
+		self.itemID = self.hordeID;
+	end
+	
+	if not self.itemID then
+		self:RegisterEvent("NEUTRAL_FACTION_SELECT_RESULT");
+		return;
+	end
+	if InCombatLockdown() then
+		self:RegisterEvent("PLAYER_REGEN_ENABLED");
+		return;
+	end
+	
+	self:SetAttribute("item", "item:"..self.itemID);
+end
+local function portalButton_updateAppearance(self)
 	if self.itemID then
-		seedButton_updateCount(self);
+		seedButton_updateAppearance(self);
+	else
+		self.icon:SetTexture(noInfoTexture);
+		self.icon:SetVertexColor(1.0, 1.0, 1.0);
 	end
 end
 
 local buttonCount = 0;
-local function createFarmButton(itemID, buttonType, allianceID, hordeID)
-	local button = CreateFrame("Button", "FRMButton"..buttonCount, farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
+local function createFarmButton(itemID, itemID2, buttonType)
+	local button = CreateFrame("CheckButton", "FRMButton"..buttonCount, farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
 	buttonCount = buttonCount + 1;
 	
-	button.itemID = itemID;
 	button:SetScript("OnEnter", farmButton_OnEnter);
 	button:SetScript("OnLeave", farmButton_OnLeave);
 	button:SetScript("OnEvent", farmButton_OnEvent);
+	button:HookScript("OnClick", farmButton_OnClick);
 	
-	if buttonType == "seed" then
-		button:SetAttribute("type", "macro");
-		button.setMacroText = seedButton_setMacroText;
-		button.loadItem = seedButton_loadItem;
-		button.updateCount = seedButton_updateCount;
-		if not tilledSoilName then
-			button:SetScript("OnEnter", seedButton_OnEnter_load);
-		end
-	elseif buttonType == "tool" then
-		button:SetAttribute("type1", "item");
-		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
-		button.dropTool = toolButton_dropTool;
-		button:SetAttribute("type2", "dropTool");
-		button.loadItem = toolButton_loadItem;
-		button.updateCount = toolButton_updateCount;
-	elseif buttonType == "portal" then
-		button:SetAttribute("type", "item");
-		button.allianceID = allianceID;
-		button.hordeID = hordeID;
-		button.loadItem = portalButton_loadItem;
-		button.updateCount = portalButton_updateCount;
-	end
+	button.checkedState = false;
 	
 	button:RegisterEvent("BAG_UPDATE");
-	if not button:loadItem() then
-		button:SetScript("OnEvent", farmButton_OnEvent_unloaded);
-		button:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+	
+	if buttonType == "seed" then
+		button.itemID = itemID
+		if itemID2 and select(4, GetBuildInfo()) >= 50200 then	-- temporary check to prevent seed bags being
+			button:RegisterEvent("MODIFIER_STATE_CHANGED");		-- referenced before patch 5.2
+			button.itemID2 = itemID2;
+		end
+		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+		button:SetAttribute("*type1", "macro");
+		button:SetAttribute("*type2", "setRightClickSeed");
+		button.setAttributeValue = seedButton_setMacroText;
+		seedButton_setMacroText(button);
+		button.setRightClickSeed = seedButton_setRightClickSeed;
+		rightClickButtons[#rightClickButtons + 1] = button;
+		button.updateAppearance = seedButton_updateAppearance;
+	elseif buttonType == "tool" then
+		button.itemID = itemID;
+		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+		button:SetAttribute("*type1", "item");
+		button:SetAttribute("*type2", "dropTool");
+		button:SetAttribute("item", "item:"..itemID);
+		button.dropTool = toolButton_dropTool;
+		button.updateAppearance = toolButton_updateAppearance;
+	elseif buttonType == "portal" then
+		button.allianceID = itemID;
+		button.hordeID= itemID2;
+		button:SetAttribute("type", "item");
+		button.setAttributeValue = portalButton_setItem;
+		portalButton_setItem(button);
+		button.updateAppearance = portalButton_updateAppearance;
 	end
-	button:updateCount();
+	
+	button:updateAppearance();
 	
 	return button;
 end
 
 -- create seed buttons
 
-local greenCabbageButton = createFarmButton(79102, "seed");
-local scallionButton = createFarmButton(80591, "seed");
-local redBlossomLeekButton = createFarmButton(80593, "seed");
-local whiteTurnipButton = createFarmButton(80595, "seed");
-local witchberryButton = createFarmButton(89326, "seed");
-local juicycrunchCarrotButton = createFarmButton(80590, "seed");
-local moguPumpkinButton = createFarmButton(80592, "seed");
-local pinkTurnipButton = createFarmButton(80594, "seed");
-local jadeSquashButton = createFarmButton(89328, "seed");
-local stripedMelonButton = createFarmButton(89329, "seed");
+local greenCabbageButton = createFarmButton(79102, 95434, "seed");
+local scallionButton = createFarmButton(80591, 95441, "seed");
+local redBlossomLeekButton = createFarmButton(80593, 95440, "seed");
+local whiteTurnipButton = createFarmButton(80595, 95443, "seed");
+local witchberryButton = createFarmButton(89326, 95444, "seed");
+local juicycrunchCarrotButton = createFarmButton(80590, 95436, "seed");
+local moguPumpkinButton = createFarmButton(80592, 95438, "seed");
+local pinkTurnipButton = createFarmButton(80594, 95439, "seed");
+local jadeSquashButton = createFarmButton(89328, 95437, "seed");
+local stripedMelonButton = createFarmButton(89329, 95442, "seed");
 
-local magebulbButton = createFarmButton(85217, "seed");
-local snakerootButton = createFarmButton(85215, "seed");
-local songbellButton = createFarmButton(89233, "seed");
-local enigmaButton = createFarmButton(85216, "seed");
-local raptorleafButton = createFarmButton(89202, "seed");
-local windshearCactusButton = createFarmButton(89197, "seed");
+local magebulbButton = createFarmButton(85217, 95452, "seed");
+local snakerootButton = createFarmButton(85215, 95448, "seed");
+local songbellButton = createFarmButton(89233, 95446, "seed");
+local enigmaButton = createFarmButton(85216, 95450, "seed");
+local raptorleafButton = createFarmButton(89202, 95458, "seed");
+local windshearCactusButton = createFarmButton(89197, 95456, "seed");
 
-local autumnBlossomButton = createFarmButton(85267, "seed");
-local springBlossomButton = createFarmButton(85268, "seed");
-local winterBlossomButton = createFarmButton(85269, "seed");
+local autumnBlossomButton = createFarmButton(85267, nil, "seed");
+local springBlossomButton = createFarmButton(85268, nil, "seed");
+local winterBlossomButton = createFarmButton(85269, nil, "seed");
 
-local ominousSeedButton = createFarmButton(85219, "seed");
-local unstableShardButton = createFarmButton(91806, "seed");
+local ominousSeedButton = createFarmButton(85219, nil, "seed");
+local unstableShardButton = createFarmButton(91806, nil, "seed");
 
 -- create tool buttons
 
-local wateringCanButton = createFarmButton(79104, "tool");
-local bugSprayerButton = createFarmButton(80513, "tool");
-local shovelButton = createFarmButton(89880, "tool");
-local plowButton = createFarmButton(89815, "tool");
+local wateringCanButton = createFarmButton(79104, nil, "tool");
+local bugSprayerButton = createFarmButton(80513, nil, "tool");
+local shovelButton = createFarmButton(89880, nil, "tool");
+local plowButton = createFarmButton(89815, nil, "tool");
 
 -- create portal buttons
 
-local stormgrimmarButton = createFarmButton(nil, "portal", 91860, 91850);
-local ironbluffButton = createFarmButton(nil, "portal", 91864, 91861);
-local darnacityButton = createFarmButton(nil, "portal", 91865, 91862);
-local exomoonButton = createFarmButton(nil, "portal", 91866, 91863);
+local stormgrimmarButton = createFarmButton(91860, 91850, "portal");
+local ironbluffButton = createFarmButton(91864, 91861, "portal");
+local darnacityButton = createFarmButton(91865, 91862, "portal");
+local exomoonButton = createFarmButton(91866, 91863, "portal");
 
 --[[ button placement ]]--
 
@@ -559,12 +596,11 @@ local function getGrowCheckButton(index)
 	
 	return extraGrowCheckButtons[index];
 end
-local maxMacroLength = 1023;
 local function growCheckButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
 	GameTooltip:ClearLines();
 	GameTooltip:AddLine(L.growCheckTitle, false);
-	GameTooltip:AddLine("|cFFFFFFFF"..L.growCheckDescription.."|r", true);
+	GameTooltip:AddLine(L.growCheckDescription, 1, 1, 1, true);
 	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
 	GameTooltip:Show();
 	if not InCombatLockdown() then
@@ -582,7 +618,7 @@ local function growCheckButton_OnEnter(self)
 		local clickNextLine = "/click FRMGC01";
 		
 		for i = 1, #macroLines do
-			if (macroText:len() + macroLines[i]:len() + clickNextLine:len()) <= maxMacroLength then
+			if (macroText:len() + macroLines[i]:len() + clickNextLine:len()) <= 1023 then
 				macroText = macroText..macroLines[i];
 			else
 				macroText = macroText..clickNextLine;
@@ -635,6 +671,17 @@ local inventoryIDs = {
 	85269, -- winter blossom
 	85219, -- omminous seed
 	91806, -- unstable portal shard
+	-- bags
+	95434, -- green cabbage
+	95441, -- scallion
+	95440, -- red blossom leek
+	95443, -- white turnip
+	95444, -- witchberry
+	95436, -- juicycrunch carrot
+	95438, -- mogu pumpkin
+	95439, -- pink turnip
+	95437, -- jade squash
+	95442, -- striped melon
 	-- tools
 	79104, -- watering can
 	80513, -- bug sprayer
@@ -668,8 +715,12 @@ end
 local function notInVehicle()
 	return not (UnitUsingVehicle("player") and config.hideInVehicle);
 end
+local function notMounted()
+	return not (IsMounted() and config.hideWhenMounted);
+end
 
 local autoShowOverride = false;
+local autoShowOverrideHide = false;
 function FRM:farmWindowAutoShowEvent(event)
 	if event == "PLAYER_REGEN_DISABLED" then
 		isInCombat = true;
@@ -677,11 +728,15 @@ function FRM:farmWindowAutoShowEvent(event)
 		isInCombat = false;
 	end
 
-	if autoShowOverride or InCombatLockdown() then
+	if event == "ZONE_CHANGED" then
+		autoShowOverrideHide = false;
+	end
+
+	if autoShowOverride or autoShowOverrideHide or InCombatLockdown() then
 		return;
 	end
 	
-	if onFarm() and hasItems() and notInCombat() and notInVehicle() then
+	if onFarm() and hasItems() and notInCombat() and notInVehicle() and notMounted() then
 		farmWindow:Show();
 	else
 		farmWindow:Hide();
@@ -697,6 +752,7 @@ autoShowFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
 autoShowFrame:RegisterEvent("PLAYER_REGEN_ENABLED");
 autoShowFrame:RegisterEvent("UNIT_ENTERED_VEHICLE");
 autoShowFrame:RegisterEvent("UNIT_EXITED_VEHICLE");
+autoShowFrame:RegisterEvent("UNIT_AURA");
 
 -- manual show/hide
 
@@ -711,6 +767,7 @@ end
 
 local function farmWindowCloseButtonClicked()
 	autoShowOverride = false;
+	autoShowOverrideHide = true;
 end
 farmWindow.CloseButton:HookScript("OnClick", farmWindowCloseButtonClicked);
 
@@ -740,23 +797,63 @@ local function forecastButton_OnEnter(self)
 	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
 	GameTooltip:Show();
 end
+local function forecastSeedButton_setMacroText(self)
+	if self.itemID then
+		seedButton_setMacroText(self);
+	else
+		if InCombatLockdown() then
+			self:RegisterEvent("PLAYER_REGEN_ENABLED");
+		else
+			self:UnregisterEvent("PLAYER_REGEN_ENABLED");
+			self:SetAttribute("macrotext", nil);
+		end
+	end
+end
+local function forecastSeedButton_updateAppearance(self)
+	if self.itemID then
+		seedButton_updateAppearance(self);
+	else
+		self.icon:SetTexture(noInfoTexture);
+		self.icon:SetVertexColor(1.0, 1.0, 1.0);
+		local countText = _G[self:GetName().."Count"];
+		countText:SetText("");
+	end
+end
+local function forecastCropButton_updateAppearance(self)
+	if self.itemID then
+		if not self.itemTexture then
+			local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(self.itemID);
+			self.itemTexture = itemTexture;
+		end
+		if self.itemTexture then
+			self:UnregisterEvent("GET_ITEM_INFO_RECEIVED");
+			self.icon:SetTexture(self.itemTexture);
+		else
+			self:RegisterEvent("GET_ITEM_INFO_RECEIVED");
+		end
+	else
+		self.icon:SetTexture(noInfoTexture);
+	end
+end
 
-local forecastSeedButton = CreateFrame("Button", "FRMForecastSeedButton", farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
+local forecastSeedButton = CreateFrame("CheckButton", "FRMForecastSeedButton", farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
 forecastSeedButton:SetPoint("TOPLEFT", col3 + halfCol, row5);
-forecastSeedButton:SetAttribute("type", "macro");
+forecastSeedButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
+forecastSeedButton:SetAttribute("*type1", "macro");
+forecastSeedButton:SetAttribute("*type2", "setRightClickSeed");
 forecastSeedButton.itemTooltipLine = L.forecastSeedButtonTooltip;
 forecastSeedButton.noInfoTooltip = L.forecastSeedNoInfoTooltip;
 forecastSeedButton:SetScript("OnEnter", forecastButton_OnEnter);
 forecastSeedButton:SetScript("OnLeave", farmButton_OnLeave);
-forecastSeedButton.setMacroText = seedButton_setMacroText;
-function forecastSeedButton:updateCount()
-	seedButton_updateCount(self);
-	if not self.itemID then
-		local countText = _G[self:GetName().."Count"];
-		countText:SetText("");
-		local icon = _G[self:GetName().."Icon"];
-		icon:SetVertexColor(1.0, 1.0, 1.0);
-	end
+forecastSeedButton:SetScript("OnEvent", farmButton_OnEvent);
+forecastSeedButton:HookScript("OnClick", farmButton_OnClick);
+forecastSeedButton.checkedState = false;
+rightClickButtons[#rightClickButtons + 1] = forecastSeedButton;
+forecastSeedButton.setAttributeValue = forecastSeedButton_setMacroText;
+forecastSeedButton.setRightClickSeed = seedButton_setRightClickSeed;
+forecastSeedButton.updateAppearance = forecastSeedButton_updateAppearance;
+if select(4, GetBuildInfo()) >= 50200 then						-- temporary check to prevent seed bags being
+	forecastSeedButton:RegisterEvent("MODIFIER_STATE_CHANGED");	-- referenced before patch 5.2
 end
 
 local forecastCropButton = CreateFrame("Button", "FRMForecastCropButton", farmWindow, "ActionbuttonTemplate");
@@ -765,6 +862,8 @@ forecastCropButton.itemTooltipLine = L.forecastCropButtonTooltip;
 forecastCropButton.noInfoTooltip = L.forecastCropNoInfoTooltip;
 forecastCropButton:SetScript("OnEnter", forecastButton_OnEnter);
 forecastCropButton:SetScript("OnLeave", farmButton_OnLeave);
+forecastCropButton:SetScript("OnEvent", farmButton_OnEvent);
+forecastCropButton.updateAppearance = forecastCropButton_updateAppearance;
 
 -- updates
 
@@ -794,7 +893,7 @@ local function updateData(newSeed)
 		data.yesterdayForecast = nil;
 	end
 end
-local noInfoIcon = "Interface\\BUTTONS\\UI-GroupLoot-Pass-Down";
+
 local cropIDFromSeedID = {
 	[79102] = 74840, -- green cabbage
 	[80591] = 74843, -- scallion
@@ -807,52 +906,52 @@ local cropIDFromSeedID = {
 	[89328] = 74847, -- jade squash
 	[89329] = 74848, -- striped melon
 };
+local bagIDFromSeedID = {
+	[79102] = 95434, -- green cabbage
+	[80591] = 95441, -- scallion
+	[80593] = 95440, -- red blossom leek
+	[80595] = 95443, -- white turnip
+	[89326] = 95444, -- witchberry
+	[80590] = 95436, -- juicycrunch carrot
+	[80592] = 95438, -- mogu pumpkin
+	[80594] = 95439, -- pink turnip
+	[89328] = 95437, -- jade squash
+	[89329] = 95442, -- striped melon
+};
 local previousToday = "";
+local previousTodaySeed = 0;
+local previousYesterdaySeed = 0;
 local function farmWindow_OnUpdate(self)
 	forecastChangeLabel:SetText("|cFFFFFFFF"..L.farmWindowForecastChange:format(time:timeUntilDailyReset()).."|r");
 	
 	local today = ("%d-%d-%d"):format(time:currentDailyDate());
 	if today ~= previousToday then
 		previousToday = today;
-		updateData();
+		updateData(nil);
 	end
-	if not InCombatLockdown() then
-		-- update seed button
-		if data.todayForecast then
-			local itemName, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(data.todayForecast);
-			if itemName and itemTexture then
-				forecastSeedButton.icon:SetTexture(itemTexture);
-				forecastSeedButton.itemID = data.todayForecast;
-				forecastSeedButton.itemName = itemName;
-				forecastSeedButton:setMacroText();
-			else
-				forecastSeedButton.icon:SetTexture(noInfoIcon);
-				forecastSeedButton.itemID = nil;
-				forecastSeedButton.itemName = nil;
-				forecastSeedButton:SetAttribute("macroText", nil);
-			end
-		else
-			forecastSeedButton.icon:SetTexture(noInfoIcon);
-			forecastSeedButton.itemID = nil;
-			forecastSeedButton.itemName = nil;
-			forecastSeedButton:SetAttribute("macroText", nil);
+	
+	if previousTodaySeed ~= data.todayForecast then
+		previousTodaySeed = data.todayForecast;
+		forecastSeedButton.itemID = data.todayForecast;
+		if select(4, GetBuildInfo()) >= 50200 then								-- temporary check to prevent seed bags being
+			forecastSeedButton.itemID2 = bagIDFromSeedID[data.todayForecast];	-- referenced before patch 5.2
+			forecastSeedButton.itemTexture2 = nil;
 		end
-		forecastSeedButton:updateCount();
-		-- update crop button
-		if data.yesterdayForecast then
-			local cropID = cropIDFromSeedID[data.yesterdayForecast];
-			local _, _, _, _, _, _, _, _, _, itemTexture = GetItemInfo(cropID);
-			if itemTexture then
-				forecastCropButton.icon:SetTexture(itemTexture);
-				forecastCropButton.itemID = cropID;
-			else
-				forecastCropButton.icon:SetTexture(noInfoIcon);
-				forecastCropButton.itemID = nil;
-			end
+		forecastSeedButton.itemTexture = nil;
+		forecastSeedButton:setAttributeValue();
+		if forecastSeedButton.itemID and forecastSeedButton.itemID == rightClickSeed then
+			forecastSeedButton.checkedState = true;
 		else
-			forecastCropButton.icon:SetTexture(noInfoIcon);
-			forecastCropButton.itemID = nil;
+			forecastSeedButton.checkedState = false;
 		end
+		forecastSeedButton:updateAppearance();
+	end
+	
+	if previousYesterdaySeed ~= data.yesterdayForecast then
+		previousYesterdaySeed = data.yesterdayForecast;
+		forecastCropButton.itemID = cropIDFromSeedID[data.yesterdayForecast];
+		forecastCropButton.itemTexture = nil;
+		forecastCropButton:updateAppearance();
 	end
 end
 farmWindow:SetScript("OnUpdate", farmWindow_OnUpdate);
@@ -873,6 +972,7 @@ local function gossipUpdate(self)
 	local seedID = seedIDFromForecastText[GetGossipText()];
 	if seedID then
 		updateData(seedID);
+		farmWindow_OnUpdate(farmWindow);
 	end
 end
 farmWindow:SetScript("OnEvent", gossipUpdate);
@@ -884,7 +984,7 @@ local function dropButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
 	GameTooltip:ClearLines();
 	GameTooltip:AddLine(L.dropToolsTitle, false);
-	GameTooltip:AddLine("|cFFFFFFFF"..L.dropToolsDescription.."|r", true);
+	GameTooltip:AddLine(L.dropToolsDescription, 1, 1, 1, true);
 	GameTooltip:SetAnchorType("ANCHOR_TOPLEFT");
 	GameTooltip:Show();
 end
@@ -928,3 +1028,56 @@ end
 local exitFrame = CreateFrame("Frame");
 exitFrame:SetScript("OnEvent", exitFrame_OnEvent);
 exitFrame:RegisterEvent("ZONE_CHANGED");
+
+--[[ right click planting ]]--
+
+-- seed setting
+
+setRightClickSeed = function(seedID)
+	if rightClickSeed == seedID then
+		rightClickSeed = nil;
+	else
+		rightClickSeed = seedID;
+	end
+	for k, button in pairs(rightClickButtons) do
+		if rightClickSeed and (button.itemID == rightClickSeed) then
+			button.checkedState = true;
+		else
+			button.checkedState = false;
+		end
+		button:updateAppearance();
+	end
+end
+
+-- click detection and binding
+
+local isBound = false;
+local clickNumber = 1;
+local firstClickTime = 0;
+local rightClickFrame = CreateFrame("Frame");
+rightClickFrame:SetScript("OnUpdate", function(self)
+	if (GetTime() - firstClickTime) > 0.5 then
+		clickNumber = 1;
+		rightClickFrame:Hide();
+	end
+	if isBound then
+		ClearOverrideBindings(rightClickFrame);
+		isBound = false;
+	end
+end);
+rightClickFrame:Hide();
+
+local function worldFrame_OnMouseUp(self, button)
+	if GetSubZoneText() == L.sunsongRanchName and button == "RightButton" then
+		if clickNumber == 1 then
+			clickNumber = 2;
+			firstClickTime = GetTime();
+			rightClickFrame:Show();
+		elseif clickNumber == 2 and rightClickSeed and not InCombatLockdown() and GetUnitName("target") == tilledSoilName then
+			SetOverrideBindingItem(rightClickFrame, false, "BUTTON2", "item:"..rightClickSeed);
+			isBound = true;
+			MouselookStop();
+		end
+	end
+end
+WorldFrame:HookScript("OnMouseUp", worldFrame_OnMouseUp);

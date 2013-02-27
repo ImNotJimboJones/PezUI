@@ -335,7 +335,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "左键点击回收内存.";
 		     
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "经验/小时 当前等级: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "经验/小时 本次连接: ";
@@ -366,13 +366,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "显示升级所需的预估击杀数";
 L["TITAN_XP_MENU_RESET_SESSION"] = "重置连接时间";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "刷新计时器";
 L["TITAN_XP_UPDATE_PENDING"] = "更新中...";
-L["TITAN_XP_KILLS_LABEL"] = "升级所需击杀数 (基于最后一个的经验 %d): ";
+L["TITAN_XP_KILLS_LABEL"] = "升级所需击杀数 (基于最后一个的经验 %s): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "预估击杀数: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "连接时间: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "显示连接时间";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*)死亡，你获得(%d+)点经验。";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "预估获得经验: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "升级所需杀怪数 (基于最后杀怪所获%d点经验): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "升级所需杀怪数 (基于最后杀怪所获%s点经验): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "显示升级所需(基于最后一次所获经验)";
      
      --Titan Repair

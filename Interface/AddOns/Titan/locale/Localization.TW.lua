@@ -334,7 +334,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "提示: 左鍵強制清除垃圾。";
 
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "EXP/小時 目前等級: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "EXP/小時 目前階段: ";
@@ -365,13 +365,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "顯示升級還需要的預計擊殺�
 L["TITAN_XP_MENU_RESET_SESSION"] = "重設經驗值統計";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "更新時間";
 L["TITAN_XP_UPDATE_PENDING"] = "更新中...";
-L["TITAN_XP_KILLS_LABEL"] = "升級還需的擊殺數(上次獲得 %d EXP): ";
+L["TITAN_XP_KILLS_LABEL"] = "升級還需的擊殺數(上次獲得 %s EXP): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "預估擊殺數: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "連接: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "顯示連接時間";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*)死亡，你獲得(%d+)點經驗。";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "預估獲得經驗: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "升級所需擊殺數(基於最後擊殺獲得的%d點經驗): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "升級所需擊殺數(基於最後擊殺獲得的%s點經驗): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "顯示升級所需(基於最後所獲經驗)";
 	
 -- Titan Repair

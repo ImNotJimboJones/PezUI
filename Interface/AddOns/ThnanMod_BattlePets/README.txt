@@ -6,6 +6,11 @@ The options to include the pet level in the tooltips cause the level of the high
 
 VERSION CHANGES:
 
+1.3.1:
+
+- Changed pet list generation to only call GetPetStats if petID is not nil.
+- Pet items added in patch 5.2 will now have tooltip lines.
+
 1.3.0:
 
 - Hooked trigger for world tooltips to GameTooltip:OnTooltipSetUnit instead of catching UPDATE_MOUSEOVER_UNIT.

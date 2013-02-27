@@ -392,7 +392,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Info : clic-gauche pour forcer un nettoyage de la mémoire.";
 
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/h pour ce niveau : ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/h pour cette session : ";
@@ -423,13 +423,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "l'estimation du nombre de mobs à tuer
 L["TITAN_XP_MENU_RESET_SESSION"] = "Réinitialise la session";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Rafraîchir les compteurs";
 L["TITAN_XP_UPDATE_PENDING"] = "Mise à jour...";
-L["TITAN_XP_KILLS_LABEL"] = "Mobs à tuer avant niveau (à %d XP par mob) : ";
+L["TITAN_XP_KILLS_LABEL"] = "Mobs à tuer avant niveau (à %s XP par mob) : ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "Mobs à tuer : ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Temps joué pour cette session : ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Montrer le temps joué pour cette session";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*) meurt, vous gagnez (%d+) points d'expérience.";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Est. des gains : ";
-L["TITAN_XP_XPGAINS_LABEL"] = "Gains d'XP pour passer de niveau (à %d XP gagné): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "Gains d'XP pour passer de niveau (à %s XP gagné): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "les estimations de gains d'XP pour monter";
 
 --Titan Repair

@@ -52,7 +52,7 @@ function TitanPanelLocationButton_OnLoad(self)
 			CoordsFormat1 = 1,
 			CoordsFormat2 = false,
 			CoordsFormat3 = false,
-			UpdateWorldmap = true,
+			UpdateWorldmap = false,
 		}
 	};
 
@@ -216,20 +216,24 @@ end
 -- VARS : button = value of action
 -- **************************************************************************
 function TitanPanelLocationButton_OnClick(self, button)
-	if (button == "LeftButton" and IsShiftKeyDown()) then
-		local activeWindow = ChatEdit_GetActiveWindow();
-		if ( activeWindow ) then
-			if (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat1")) then
-				message = TitanUtils_ToString(self.zoneText).." "..
-				format(L["TITAN_COORDS_FORMAT"], 100 * self.px, 100 * self.py);
-			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat2")) then
-				message = TitanUtils_ToString(self.zoneText).." "..
-				format(L["TITAN_COORDS_FORMAT2"], 100 * self.px, 100 * self.py);
-			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat3")) then
-				message = TitanUtils_ToString(self.zoneText).." "..
-				format(L["TITAN_COORDS_FORMAT3"], 100 * self.px, 100 * self.py);
+	if (button == "LeftButton") then
+		if (IsShiftKeyDown()) then
+			local activeWindow = ChatEdit_GetActiveWindow();
+			if ( activeWindow ) then
+				if (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat1")) then
+					message = TitanUtils_ToString(self.zoneText).." "..
+					format(L["TITAN_COORDS_FORMAT"], 100 * self.px, 100 * self.py);
+				elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat2")) then
+					message = TitanUtils_ToString(self.zoneText).." "..
+					format(L["TITAN_COORDS_FORMAT2"], 100 * self.px, 100 * self.py);
+				elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat3")) then
+					message = TitanUtils_ToString(self.zoneText).." "..
+					format(L["TITAN_COORDS_FORMAT3"], 100 * self.px, 100 * self.py);
+				end
+				activeWindow:Insert(message);
 			end
-			activeWindow:Insert(message);
+		else
+			ToggleFrame(WorldMapFrame);
 		end
 	end
 --[[

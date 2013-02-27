@@ -1,4 +1,8 @@
-﻿Version 1.2i
+﻿Version 1.2j
+- Updated Spanish translation (thanks Magire!)
+- Updated Brazilian Portuguese translation  (thanks tiagopl!)
+
+Version 1.2i
 - Fix for Equipment Manager event misunderstanding
 - Updated Russian translation (thanks Turbid121!)
 

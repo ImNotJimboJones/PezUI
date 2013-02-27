@@ -390,7 +390,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "힌트: 왼쪽 클릭으로 메모리를 청소합니다.";
 		     
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "현재 레벨에서의 시간당 경험치: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "현재 접속에서의 시간당 경험치: ";
@@ -421,13 +421,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "다음 레벨까지 필요한 킬수 �
 L["TITAN_XP_MENU_RESET_SESSION"] = "현재 접속 초기화";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "갱신 타이머";
 L["TITAN_XP_UPDATE_PENDING"] = "갱신중...";
-L["TITAN_XP_KILLS_LABEL"] = "다음 레벨까지 필요한 킬수 (최근 획득한 경험치 %d 기준): ";
+L["TITAN_XP_KILLS_LABEL"] = "다음 레벨까지 필요한 킬수 (최근 획득한 경험치 %s 기준): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "킬 수: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "접속 시간: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "현재 접속 시간 표시";
 L["TITAN_XP_GAIN_PATTERN"] = "%1$s|1이;가; 죽었습니다. %2$d의 경험치를 획득했습니다.";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "획득: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "레벨당 획득한 경험치 (최근 획득한 경험치 %d 기준): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "레벨당 획득한 경험치 (최근 획득한 경험치 %s 기준): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "레벨당 경험치 획득 표시";
 
      --Titan Repair

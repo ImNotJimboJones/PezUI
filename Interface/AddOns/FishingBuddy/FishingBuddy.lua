@@ -1107,7 +1107,7 @@ local function UpdateLure()
 					LastLure.time = GetTime() + RELURE_DELAY;
 					DoLure = nil;
 					return true;
-				elseif ( not LastLure.time ) then
+				elseif ( LastLure and not LastLure.time ) then
 					LastLure = nil;
 					LastState = 0;
 				end

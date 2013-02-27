@@ -390,7 +390,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Hint: Left-click to force a garbage collection.";
 		     
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "XP/hr This Level: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "XP/hr This Session: ";
@@ -421,13 +421,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "Show Estimated Kills To Level";
 L["TITAN_XP_MENU_RESET_SESSION"] = "Reset Session";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Refresh Timers";
 L["TITAN_XP_UPDATE_PENDING"] = "Updating...";
-L["TITAN_XP_KILLS_LABEL"] = "Kills To Level (at %d XP gained last): ";
+L["TITAN_XP_KILLS_LABEL"] = "Kills To Level (at %s XP gained last): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "Est. Kills: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Session Time: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Show Session Time";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*) dies, you gain (%d+) experience.";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Est. Gains: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "XP Gains To Level (at %d XP gained last): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "XP Gains To Level (at %s XP gained last): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "Show Estimated XP Gains To Level";
 
      --Titan Repair

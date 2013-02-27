@@ -48,7 +48,10 @@ local function updatePetList()
 	petList = {};
 	for i = 1, C_PetJournal.GetNumPets(false) do
 		local petID, _, isOwned, _, level, _, _, name = C_PetJournal.GetPetInfoByIndex(i, false);
-		local _, _, _, _, rarity = C_PetJournal.GetPetStats(petID);
+		local rarity =  nil;
+		if petID then
+			_, _, _, _, rarity = C_PetJournal.GetPetStats(petID);
+		end
 		if not rarity then
 			rarity = 0;
 		end
@@ -546,7 +549,7 @@ local speciesIDFromItemID = {
 	[89736]	= 855,	-- Venus
 	[93039]	= 1154,	-- Viscidus Globule
 	[69824]	= 310,	-- Voodoo Figurine
-	[46767]	= 227,	-- Warbot
+	[46767]	= 227,	-- Warbot (old)
 	[11110]	= 84,	-- Westfall Chicken
 	[23015]	= 127,	-- Whiskers the Rat
 	[8489]	= 46,	-- White Kitten
@@ -565,6 +568,31 @@ local speciesIDFromItemID = {
 	[89367]	= 850,	-- Yu'lon Kite
 	[13582]	= 94,	-- Zergling
 	[49664]	= 247,	-- Zipao Tiger
+	-- added in patch 5.2
+	[93669]	= 1174,	--	Gusting Grimoire
+	[94025]	= 1176,	--	Red Panda
+	[94124]	= 1178,	--	Sunreaver Micro-Sentry
+	[94125]	= 1177,	--	Living Sandling
+	[94126]	= 1180,	--	Zandalari Kneebiter
+	[94152]	= 1183,	--	Son of Animus
+	[94190]	= 1185,	--	Spectral Porcupette
+	[94191]	= nil,	--	Stunted Direhorn
+	[94208]	= 1196,	--	Sunfur Panda
+	[94209]	= 1197,	--	Snowy Panda
+	[94210]	= 1198,	--	Mountain Panda
+	[94573]	= nil,	--	Direhorn Runt
+	[94574]	= nil,	--	Pygmy Direhorn
+	[94595]	= 1201,	--	Spawn of G'nathus
+	[94835]	= 1202,	--	Ji-Kun Hatchling
+	[95422]	= 1211,	--	Zandalari Anklerender
+	[95423]	= 1212,	--	Zandalari Footslasher
+	[95424]	= 1213,	--	Zandalari Toenibbler
+	[95621]	= 227,	--	Warbot (new)
+	[94903]	= 1204,	--	Pierre
+	[94932]	= 1206,	--	Tiny Red Carp
+	[94933]	= 1207,	--	Tiny Blue Carp
+	[94934]	= 1208,	--	Tiny Green Carp
+	[94935]	= 1209,	--	Tiny White Carp
 };
 local function addLinesToItemTooltip(tooltip, link)
 	if config.enabled and link then

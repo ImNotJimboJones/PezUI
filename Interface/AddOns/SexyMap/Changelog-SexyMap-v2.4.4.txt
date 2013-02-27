@@ -1,0 +1,13 @@
+tag v2.4.4
+728d48d4caeb2cf556468cbff9f9013ebdc64b22
+funkydude <none>
+2013-02-25 16:12:48 +0000
+
+Tagging as v2.4.4
+
+
+--------------------
+
+funkydude:
+	- Replace some HookScripts with SetScripts to overwrite other addons doing dumb things. (MoveAnything sets a minimap zoom script for some reason) Lots of locale updates. Misc tweaks.
+	- Buttons: add another addon button

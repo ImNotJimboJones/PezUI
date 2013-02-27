@@ -2,12 +2,25 @@ Thnan's Mod - Farm
 
 This module adds a tool panel for your farm. The panel has buttons for every seed and every tool as well as a "grow check" button.
 The seed buttons provide one-click planting in the nearest Tilled Soil.
+Holding the shift key will cause seed buttons to show the bag for their crop. This feature requires patch 5.2.
 Right clicking a tool button will drop that tool. This can be turned off in the options menu.
+Right clicking a seed button will enable planting the seed by double right clicking on a Tilled Soil.
 The grow check button will target any plant that needs attention before it will grow, i.e. any plant that is not a "growing" plant.
 Jogu's forecast will be saved and displayed in the tool panel. Unfortunately, this feature currently only works with English locales.
 The tool panel also has buttons for your portal shards.
 
 VERSION CHANGES:
+
+1.4.0:
+
+- The tool panel will now draw itself on top of other windows when selected.
+- Rebuilt button creation functions.
+- Rebuilt forecast system.
+- Holding the shift key will now cause seed buttons to show the corresponding seed bag, if applicable. This requires patch 5.2.
+- Having seed bags in your inventory will cause the farm panel to automatically show on Sunsong Ranch.
+- Added option to hide the window when mounted.
+- The tool panel will now actually stay closed after clicking the close button, until you reenter Sunsong Ranch.
+- Jogu's forecasts are now detected in ptBR, ptPT, frFR, deDE, itIT, koKR, esES, esMX, ruRU and zhTW locales.
 
 1.3.0:
 

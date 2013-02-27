@@ -391,7 +391,7 @@ L["TITAN_PERFORMANCE_CONTROL_HIGH"] = "40";
 L["TITAN_PERFORMANCE_CONTROL_LOW"] = "1";
 L["TITAN_PERFORMANCE_TOOLTIP_HINT"] = "Suggerimento: Click sinistro per forzare una garbage collection.";
 		     
-L["TITAN_XP_FORMAT"] = "%d";
+L["TITAN_XP_FORMAT"] = "%s";
 L["TITAN_XP_PERCENT_FORMAT"] = "(%.1f%%)";
 L["TITAN_XP_BUTTON_LABEL_XPHR_LEVEL"] = "PE/hr questo livello: ";
 L["TITAN_XP_BUTTON_LABEL_XPHR_SESSION"] = "PE/hr questa sessione: ";
@@ -422,13 +422,13 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_KILLS"] = "Mostra uccisioni rimanenti al prossimo
 L["TITAN_XP_MENU_RESET_SESSION"] = "Reimposta sessione";
 L["TITAN_XP_MENU_REFRESH_PLAYED"] = "Reimposta timers";
 L["TITAN_XP_UPDATE_PENDING"] = "Aggiorno...";
-L["TITAN_XP_KILLS_LABEL"] = "Uccisioni al prossimo lv (%d PE ottenuti l'ultima volta): ";
+L["TITAN_XP_KILLS_LABEL"] = "Uccisioni al prossimo lv (%s PE ottenuti l'ultima volta): ";
 L["TITAN_XP_KILLS_LABEL_SHORT"] = "Uccisioni: ";
 L["TITAN_XP_BUTTON_LABEL_SESSION_TIME"] = "Tempo sessione: ";
 L["TITAN_XP_MENU_SHOW_SESSION_TIME"] = "Mostra tempo sessione";
 L["TITAN_XP_GAIN_PATTERN"] = "(.*) muore, otteni (%d+) esperienza.";
 L["TITAN_XP_XPGAINS_LABEL_SHORT"] = "Incrementi PE da ott.: ";
-L["TITAN_XP_XPGAINS_LABEL"] = "Incrementi PE al prossimo lv. (%d PE ottenuti l'ultima volta): ";
+L["TITAN_XP_XPGAINS_LABEL"] = "Incrementi PE al prossimo lv. (%s PE ottenuti l'ultima volta): ";
 L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "Mostra incrementi PE al prossimo lv";
 
      --Titan Repair

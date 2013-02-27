@@ -14,12 +14,13 @@ config.showAutomatically = true;
 config.hideInCombat = true;
 config.hideWhenEmpty = true;
 config.hideInVehicle = true;
+config.hideWhenMounted = true;
 config.dropOnRightClick = true;
 config.dropOnLeavingFarm = false;
 
 --[[ Saved Variable Handlers ]]--
 
-local currentDataVersion = 1;
+local currentDataVersion = 2;
 
 --[[ version nil
 (C) global.hideInCombat
@@ -37,14 +38,30 @@ local currentDataVersion = 1;
 (C) character.showAutomatically
 (C) character.dropOnLeavingFarm
 ]]--
+--[[ version 2
+(C) global.hideInCombat
+(C) global.hideWhenEmpty
+(C) global.hideInVehicle
+(C) global.hideWhenMounted
+(C) global.dropOnRightClick
+(D) realm.today
+(D) realm.todayForecast
+(D) realm.yesterday
+(D) realm.yesterdayForecast
+(C) character.showAutomatically
+(C) character.dropOnLeavingFarm
+]]--
 
 function FRM:loadSavedVars(global, realm, character)
 	if (type(global) == "table") then
 		config.hideInCombat = global.hideInCombat;
-		if global.dataVersion == 1 then
+		if global.dataVersion >= 1 then
 			config.hideWhenEmpty = global.hideWhenEmpty;
 			config.hideInVehicle = global.hideInVehicle;
 			config.dropOnRightClick = global.dropOnRightClick;
+		end
+		if global.dataVersion == 2 then
+			config.hideWhenMounted = global.hideWhenMounted;
 		end
 	end
 	if (type(realm) == "table") then
@@ -67,6 +84,7 @@ function FRM:storeSavedVars()
 	global.hideInCombat = config.hideInCombat;
 	global.hideWhenEmpty = config.hideWhenEmpty;
 	global.hideInVehicle = config.hideInVehicle;
+	global.hideWhenMounted = config.hideWhenMounted;
 	global.dropOnRightClick = config.dropOnRightClick;
 	local realm = {};
 	realm.today = data.today;
