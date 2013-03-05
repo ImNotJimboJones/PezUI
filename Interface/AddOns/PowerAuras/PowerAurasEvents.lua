@@ -122,23 +122,19 @@ function PowaAuras:GetInstanceType()
 	elseif (instanceType=="arena") then
 		instanceType = "Arena";
 	elseif (instanceType=="party" or instanceType=="raid") then
-		instanceDifficulty = GetInstanceDifficulty();
-		if (instanceType=="party") then
-			if (instanceDifficulty==1) then
-				instanceType = "5Man";
-			else
-				instanceType = "5ManHeroic";
-			end
+		instanceDifficulty = select(3, GetInstanceInfo());
+		if (instanceDifficulty==1) then
+			instanceType = "5Man";
+		elseif (instanceDifficulty==2 or instanceDifficulty==8) then
+			instanceType = "5ManHeroic";
+		elseif (instanceDifficulty==3) then
+			instanceType = "10Man";
+		elseif (instanceDifficulty==4 or instanceDifficulty==7 or instanceDifficulty==9) then
+			instanceType = "25Man";
+		elseif (instanceDifficulty==5) then
+			instanceType = "10ManHeroic";
 		else
-			if (instanceDifficulty==1) then
-				instanceType = "10Man";
-			elseif (instanceDifficulty==2) then
-				instanceType = "25Man";
-			elseif (instanceDifficulty==3) then
-				instanceType = "10ManHeroic";
-			else
-				instanceType = "25ManHeroic";
-			end
+			instanceType = "25ManHeroic";
 		end
 	else
 		instanceType = "None";
