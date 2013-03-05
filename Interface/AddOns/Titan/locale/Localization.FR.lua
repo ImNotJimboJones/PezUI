@@ -265,8 +265,10 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 "Sac en cuir « Meeya » par La Tannée","Sacoche de travailleur du cuir","Sac des nombreuses peaux","Sac de voyage de trappeur",
 -- mining
 "Sac à métaux précieux « Christina » par La Tannée","Sac de mineur","Sac de mineur renforcé","Sac de mineur colossal",
--- fishing
+-- Fishing
 "Boîte d'appâts du maître des leurres",
+-- Cooking
+"Réfrigérateur portable",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "Horloge";

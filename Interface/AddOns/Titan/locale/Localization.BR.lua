@@ -242,8 +242,10 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 "Algibeira do Coureiro", "Bolsa de Muitos Pelegos", "Mala de Viagem do Coureador", "Bolsa de Couro \"Lepos'Tiche - Miya\"",
 -- Mining
 "Saco de Mineração", "Bolsa de Mineração Reforçada", "Bolsa de Mineração de Mamute", "Bolsa de Metal Precioso \"Lepos'Tiche - Christina\"", "Bolsa de Mineração Triplamente Reforçada",
--- fishing
+-- Fishing
 "Caixa de Pesca do Mestre Anzol",
+-- Cooking
+"Portable Refrigerator",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "Relógio";     

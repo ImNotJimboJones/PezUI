@@ -288,7 +288,9 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 -- Mining
 "Saco de minero","Bolsa de minero reforzada","Bolsa de minero descomunal","Bolsa de metal precioso \"Trasportín Christina\"",
 -- Fishing
-"Caja de aparejos Maestro del Cebo",
+"Caja de aparejos \"Maestro del Cebo\"",
+-- Cooking
+"Refrigerador portátil",
 };
 
 --L["TITAN_BGMINIMAP_MENU_TEXT"] = "Campo de Batalla en minimapa"

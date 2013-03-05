@@ -263,8 +263,10 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 "가죽세공인의 가방", "가죽 덧댄 가방", "덫사냥꾼의 여행 가방", "\"나르지 보들보들\" 가죽 가방",
 -- Mining
 "강화된 채광용 자루", "채광용 자루", "매머드 채광 자루", "\"나르지 찰캉찰캉\" 귀중한 금속 가방",
--- fishing
+-- Fishing
 "미끼 낚시의 대가 낚시상자",
+-- Cooking
+"Portable Refrigerator",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "시계";     

@@ -263,8 +263,10 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 "Sacca del Conciatore", "Sacca per Molte Pelli", "Zaino da Viaggio del Mastro Bracconiere", "Sacca di Cuoio \"A Pelle\" di Dolce Gabbata",
 -- Mining
 "Sacco da Minatore", "Sacco da Minatore Rinforzato", "Sacco da Minatore di Mammut", "Sacco di Preziosi \"Diamiani\" di Dolce Gabbata",
--- fishing
+-- Fishing
 "Cassetta del Gran Pescatore",
+-- Cooking
+"Frigorifero Portatile",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "Orologio";     

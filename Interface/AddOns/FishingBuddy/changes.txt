@@ -1,4 +1,8 @@
-﻿Version 1.2j
+﻿Version 1.2k
+- Updated LibBabble-SubZone, prep for 5.2
+- Remove Kalu'ak Fishing Derby timer, now that it's gone for good (sniff!)
+
+Version 1.2j
 - Updated Spanish translation (thanks Magire!)
 - Updated Brazilian Portuguese translation  (thanks tiagopl!)
 

@@ -262,8 +262,10 @@ L["TITAN_BAG_PROF_BAG_NAMES"] = {
 "Leatherworker's Satchel", "Bag of Many Hides", "Trapper's Traveling Pack", "\"Carriage - Meeya\" Leather Bag",
 -- Mining
 "Mining Sack", "Reinforced Mining Bag", "Mammoth Mining Bag", "\"Carriage - Christina\" Precious Metal Bag",
--- fishing
+-- Fishing
 "Lure Master Tackle Box",
+-- Cooking
+"Portable Refrigerator",
 };
 
 L["TITAN_CLOCK_TOOLTIP"] = "Clock";     
