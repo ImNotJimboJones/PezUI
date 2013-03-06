@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-zhTW.lua 1836 2012-10-25 00:20:45Z ananhaid $
+﻿-- $Id: Atlas-zhTW.lua 1931 2013-03-04 05:43:08Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -27,12 +27,12 @@
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local AL = AceLocale:NewLocale("Atlas", "zhTW", false);
 
--- Atlas Traditional Chinese Localization
 if ( GetLocale() == "zhTW" ) then
 -- Define the leading strings to be ignored while sorting
 -- Ex: The Stockade
 AtlasSortIgnore = {};
 
+-- Syntax: ["real_zone_name"] = "localized map zone name"
 AtlasZoneSubstitutions = {
 	["The Temple of Atal'Hakkar"] = "沈沒的神廟";
 	["Ahn'Qiraj"] = "安其拉神廟";
@@ -121,7 +121,8 @@ if AL then
 	AL["ATLAS_DDL_PARTYSIZE_5_TZ"] = "5 人副本 3/3";
 	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "10 人副本 1/2";
 	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "10 人副本 2/2";
-	AL["ATLAS_DDL_PARTYSIZE_20TO40"] = "20-40 人副本";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "20-40 人副本 1/2";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "20-40 人副本 2/2";
 	AL["ATLAS_DDL_EXPANSION"] = "依資料片分類";
 	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "舊世界副本 1/2";
 	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "舊世界副本 2/2";
@@ -130,9 +131,11 @@ if AL then
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "浩劫與重生副本";
 	AL["ATLAS_DDL_EXPANSION_MOP"] = "潘達利亞之謎副本";
 	AL["ATLAS_DDL_TYPE"] = "依地圖類型分類";
-	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "副本 1/3";
-	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "副本 2/3";
-	AL["ATLAS_DDL_TYPE_INSTANCE_SZ"] = "副本 3/3";
+	AL["ATLAS_DDL_TYPE_INSTANCE_AB"] = "副本 1/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_CF"] = "副本 2/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_GM"] = "副本 3/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_NS"] = "副本 4/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "副本 5/5";
 	AL["ATLAS_DDL_TYPE_ENTRANCE"] = "副本入口";
 
 	AL["ATLAS_INSTANCE_BUTTON"] = "副本";
@@ -147,7 +150,7 @@ if AL then
 	AL["ATLAS_INFO"] = "Atlas 訊息";
 	AL["ATLAS_INFO_12200"] = "重要提示：\n\n由於副本插件檔案大小日益增加，我們已獨立出部分副本地圖和內建插件\n到單獨的模組。\n\n您從各大遊戲插件網站所下載的 Atlas 插件，可能只包含了主要的核心功能\n與最新資料片裡的副本地圖。\n\n若您想要取得包含舊的資料片的所有地圖，以及 Atlas 團隊所開發的其他\n模組，您必須分別下載這些獨立模組的壓縮檔並分別進行安裝。\n\n請詳讀我們論壇的這個討論串以了解更多詳情：\n|cff6666ffhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522|cffffffff\n或造訪我們的首頁：\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
 	AL["ATLAS_INFO_12201"] = "我們最近新增了一個新的 Atlas 插件 - |cff6666ffAtlas 情境地圖|cffffffff，用以提供 WoW 5.0 \n起新增的情境事件的地圖。\n\n請參見我們的網站以取得更詳細的資訊，並請記得分別下載並安裝此插件。\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
-	
+
 	AL["ATLAS_MISSING_MODULE"] = "Atlas 已偵測到遺失的模組/插件：";
 
 --************************************************
@@ -168,7 +171,7 @@ if AL then
 	AL["Midsummer Festival"] = "仲夏節慶";
 
 	--Misc strings
-	AL["Colon"] = ": "; -- The colon symbol to be used in string, ex: "Zone: Firelands
+	AL["Colon"] = ":"; -- The colon symbol to be used in string, ex: "Zone: Firelands
 	AL["Adult"] = "成年";
 	AL["AKA"] = "又稱";
 	AL["Arcane Container"] = "秘法容器";
@@ -365,6 +368,8 @@ if AL then
 	AL["SB"] = "SB"; --Stormstout Brewery
 	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
 	AL["TES"] = "TES"; --Terrace of Endless Spring
+	AL["ToT"] = "ToT"; --Throne of Thunder
+
 --************************************************
 -- Instance Entrance Maps
 --************************************************
@@ -881,7 +886,7 @@ if AL then
 	AL["Echo of Medivh"] = "麥迪文的回音";
 
 	--Magisters Terrace
---	AL["Exarch Larethor"] = "Exarch Larethor";
+	AL["Exarch Larethor"] = "主教雷索爾";
 	AL["Fel Crystals"] = "惡魔水晶";
 	AL["Apoko"] = "阿波考";
 	AL["Eramas Brightblaze"] = "依拉瑪·火光";
@@ -916,11 +921,11 @@ if AL then
 --*****************
 
 	--Azjol-Nerub: Ahn'kahet: The Old Kingdom
---	AL["Seer Ixit"] = "Seer Ixit";
+	AL["Seer Ixit"] = "先知伊須特";
 	AL["Ahn'kahet Brazier"] = "安卡罕特火盆";
 
 	--Azjol-Nerub: Azjol-Nerub
---	AL["Reclaimer A'zak"] = "Reclaimer A'zak";
+	AL["Reclaimer A'zak"] = "回收者阿札克";
 	AL["Watcher Gashra"] = "看守者賈西拉";
 	AL["Watcher Narjil"] = "看守者納吉爾";
 	AL["Watcher Silthik"] = "看守者席爾希克";
@@ -933,7 +938,7 @@ if AL then
 	AL["Chromie"] = "克羅米";
 
 	--Drak'Tharon Keep
---	AL["Image of Drakuru"] = "Image of Drakuru";
+	AL["Image of Drakuru"] = "德拉庫魯的影像";
 	AL["Kurzel"] = "庫賽爾";
 	AL["Elder Kilias"] = "奇里亞斯長者";
 	AL["Drakuru's Brazier"] = "德拉庫魯的火盆";
@@ -957,8 +962,8 @@ if AL then
 	AL["Dark Ranger Kalira"] = "黑暗遊俠卡麗菈";
 
 	--Gundrak
---	AL["Chronicler Bah'Kini"] = "Chronicler Bah'Kini";
---	AL["Tol'mar"] = "Tol'mar";
+	AL["Chronicler Bah'Kini"] = "撰史者巴琪妮";
+	AL["Tol'mar"] = "托爾瑪";
 	AL["Elder Ohanzee"] = "歐漢茲長者";
 
 	--Icecrown Citadel
@@ -975,7 +980,7 @@ if AL then
 	--Naxxramas
 	AL["Mr. Bigglesworth"] = "畢勾沃斯先生";
 	AL["Frostwyrm Lair"] = "冰霜巨龍的巢穴";
-	AL["Teleporter to Middle"] = "傳送到中間的傳送門"; -- Needs review
+	AL["Teleporter to Middle"] = "傳送到中間";
 
 	--The Obsidian Sanctum
 	AL["Black Dragonflight Chamber"] = "黑龍軍團密室";
@@ -988,14 +993,14 @@ if AL then
 	--The Nexus: The Eye of Eternity
 
 	--The Nexus: The Nexus
---	AL["Warmage Kaitlyn"] = "Warmage Kaitlyn";
+	AL["Warmage Kaitlyn"] = "戰爭法師凱特林";
 	AL["Berinand's Research"] = "貝瑞那德的研究";
 	AL["Elder Igasho"] = "伊加修長者";
 
 	--The Nexus: The Oculus
---	AL["Belgaristrasz"] = "Belgaristrasz";
---	AL["Eternos"] = "Eternos";
---	AL["Verdisa"] = "Verdisa";
+	AL["Belgaristrasz"] = "貝加瑞斯塔茲";
+	AL["Eternos"] = "伊特諾斯";
+	AL["Verdisa"] = "薇爾迪莎";
 	AL["Centrifuge Construct"] = "離心傀儡";
 	AL["Cache of Eregos"] = "伊瑞茍斯的貯藏箱";	
 
@@ -1032,28 +1037,28 @@ if AL then
 	--Ulduar E
 
 	--Ulduar: Halls of Lightning
---	AL["Stormherald Eljrrin"] = "Stormherald Eljrrin";
+	AL["Stormherald Eljrrin"] = "風暴信使埃利林";
 
 	--Ulduar: Halls of Stone
---	AL["Kaldir Ironbane"] = "Kaldir Ironbane";
+	AL["Kaldir Ironbane"] = "卡迪爾·鐵禍";
 	AL["Tribunal Chest"] = "議庭之箱";
 	AL["Elder Yurauk"] = "由羅克長者";	
 	AL["Brann Bronzebeard"] = "布萊恩·銅鬚";
 
 	--Utgarde Keep: Utgarde Keep
---	AL["Defender Mordun"] = "Defender Mordun";
+	AL["Defender Mordun"] = "防衛者摩丹";
 	AL["Dark Ranger Marrah"] = "黑暗遊俠瑪拉";
 	AL["Elder Jarten"] = "加坦長者";
 
 	--Utgarde Keep: Utgarde Pinnacle
 	AL["Brigg Smallshanks"] = "布里格·細柄";
---	AL["Image of Argent Confessor Paletress"] = "Image of Argent Confessor Paletress";
+	AL["Image of Argent Confessor Paletress"] = "銀白告解者帕爾璀絲的影像";
 	AL["Elder Chogan'gada"] = "修干加達長者";
 
 	--Vault of Archavon
 
 	--The Violet Hold
---	AL["Lieutenant Sinclari"] = "Lieutenant Sinclari";
+	AL["Lieutenant Sinclari"] = "辛克拉麗中尉";
 
 --*********************
 -- Cataclysm Instances
@@ -1066,12 +1071,12 @@ if AL then
 	--Blackwing Descent
 
 	--Caverns of Time: Dragon Soul
---	AL["Dasnurimi <Geologist & Conservator>"] = "Dasnurimi <Geologist & Conservator>";
---	AL["Lord Afrasastrasz"] = "Lord Afrasastrasz";
+	AL["Dasnurimi <Geologist & Conservator>"] = "達斯魯黎米 <地理學家與護存者>";
+	AL["Lord Afrasastrasz"] = "艾弗薩斯塔茲領主";
 
 	--Caverns of Time: End Time
---	AL["Alurmi"] = "Alurmi";
---	AL["Nozdormu"] = "Nozdormu";
+	AL["Alurmi"] = "阿勒米";
+	AL["Nozdormu"] = "諾茲多姆";
 
 	--Caverns of Time: Hour of Twilight
 
@@ -1196,8 +1201,7 @@ if AL then
 	AL["Priestess Summerpetal"] = "女司祭夏瓣";
 
 	--Terrace of Endless Spring
-	AL["Elder Asani"] = "長者阿沙尼";
-	AL["Elder Regail"] = "長者瑞蓋爾";
-	AL["Protector Kaolan"] = "守衛者考蘭";
+
+	--Throne of Thunder
 
 end

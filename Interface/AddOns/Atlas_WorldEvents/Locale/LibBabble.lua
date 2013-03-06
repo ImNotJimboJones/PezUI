@@ -1,18 +1,17 @@
-﻿-- $Id: LibBabble.lua 37 2012-09-25 16:53:12Z arith $
+﻿-- $Id: LibBabble.lua 52 2013-03-05 16:56:43Z arith $
 --[[
 
-	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 Lothaer <lothayer@gmail.com >, Atlas Team
+	Atlas World Events, a World of Warcraft map browser for world events
+	Copyright 2011 ~ 2013 Arith Hsu
 
-	This file is part of Atlas.
+	This file is a plugin of Atlas.
 
-	Atlas is free software; you can redistribute it and/or modify
+	Atlas World Events is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.
 
-	Atlas is distributed in the hope that it will be useful,
+	Atlas World Events is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.

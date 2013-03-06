@@ -1,8 +1,8 @@
-﻿-- $Id: Atlas_Scenarios-enUS.lua 1858 2012-10-30 15:19:39Z arithmandar $
+﻿-- $Id: Atlas_Scenarios-enUS.lua 1944 2013-03-05 15:24:26Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2012 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -31,25 +31,37 @@ if AL then
 	AL["Scenarios Maps"] = "Scenarios Maps";
 
 	-- Common Strings
+	AL["Colon"] = ": "; -- The colon symbol to be used in string, ex: "Zone: Firelands
+	AL["Connection"] = "Connection";
+	AL["End"] = "End";
+	AL["Final Stage"] = "Final Stage";
+	AL["Key"] = "Key";
+	AL["Random"] = "Random";
 	AL["Stage 1"] = "Stage 1";
 	AL["Stage 2"] = "Stage 2";
 	AL["Stage 3"] = "Stage 3";
 	AL["Stage 4"] = "Stage 4";
 	AL["Stage 5"] = "Stage 5";
-	AL["Final Stage"] = "Final Stage";
+	AL["Stage 6"] = "Stage 6";
+	AL["Stage 7"] = "Stage 7";
 	AL["Start"] = "Start";
-	AL["End"] = "End";
-	AL["Random"] = "Random";
 	AL["Summon"] = "Summon";
-	AL["Connection"] = "Connection";
 
-	-- Brewing Storm
+	-- A Brewing Storm
 	AL["Make Boomer's Brew"] = "Make Boomer's Brew";
 	AL["Assist Blanche in brewing her famous Boomer's Brew."] = "Assist Blanche in brewing her famous Boomer's Brew.";
 	AL["Road to Thunderpaw"] = "Road to Thunderpaw";
 	AL["Escort Blanche down Thunderpaw Road."] = "Escort Blanche down Thunderpaw Road.";
 	AL["Save Thunderpaw Refuge"] = "Save Thunderpaw Refuge";
 	AL["Defeat Borokhula the Destroyer."] = "Defeat Borokhula the Destroyer.";
+
+	-- A Little Patience
+	AL["Prepare the Defenses"] = "Prepare the Defenses";
+	AL["Assist the two groups of laborers in the construction of their defenses."] = "Assist the two groups of laborers in the construction of their defenses.";
+	AL["Kill Commander Scargash"] = "Kill Commander Scargash";
+	AL["Defeat Commander Scargash and reclaim the Temple of the Red Crane."] = "Defeat Commander Scargash and reclaim the Temple of the Red Crane.";
+	AL["Traps"] = "Traps";
+	AL["Commander Scargash"] = "Commander Scargash";
 
 	-- Arena of Annihilation
 	AL["Scar-shell"] = "Scar-shell";
@@ -67,45 +79,14 @@ if AL then
 	AL["Defeat Cloudbender Kobo"] = "Defeat Cloudbender Kobo";
 
 	-- Assault on Zan'vess
-
-	-- Theramore's Fall - Horde
-	AL["To the Waterline!"] = "To the Waterline!";
-	AL["Rig powder barrels on all six ships."] = "Rig powder barrels on all six ships.";
-	AL["The Blastmaster"] = "The Blastmaster";
-	AL["Inform Blastmaster Sparkfuse of your success."] = "Inform Blastmaster Sparkfuse of your success.";
-	AL["Gryphon, Down"] = "Gryphon, Down";
-	AL["Slay Baldruc and his gryphons."] = "Slay Baldruc and his gryphons.";
-	AL["Tanks for Nothing!"] = "Tanks for Nothing!";
-	AL["Destroy Big Bessa and sabotage any unmanned tanks."] = "Destroy Big Bessa and sabotage any unmanned tanks.";
-	AL["Fly, Spy!"] = "Fly, Spy!";
-	AL["Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel."] = "Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel.";
-
-	-- Theramore's Fall - Alliance
-	AL["Welcome to Theramore"] = "Welcome to Theramore";
-	AL["Defend the ship from oncoming Horde."] = "Defend the ship from oncoming Horde.";
-	AL["Sweep the Harbor"] = "Sweep the Harbor";
-	AL["Defeat the Horde in the harbor."] = "Defeat the Horde in the harbor.";
-	AL["Into the Ruins"] = "Into the Ruins";
-	AL["Fight past the enemy into the heart of ruined Theramore."] = "Fight past the enemy into the heart of ruined Theramore.";
-	AL["The Lady Proudmoore"] = "The Lady Proudmoore";
-	AL["Locate Jaina in the Mana Bomb crater."] = "Locate Jaina in the Mana Bomb crater.";
-	AL["Destroy the Destroyer"] = "Destroy the Destroyer";
-	AL["Destroy the siege engine at the west gate and recover the stolen standards."] = "Destroy the siege engine at the west gate and recover the stolen standards.";
-	AL["The Last Stand"] = "The Last Stand";
-	AL["Protect Jaina while she attunes to the Focusing Iris."] = "Protect Jaina while she attunes to the Focusing Iris.";
-	AL["Horde Ship"] = "Horde Ship";
-	AL["The heart of ruined Theramore"] = "The heart of ruined Theramore";
-	AL["Jaina"] = "Jaina";
-	AL["West Gate"] = "West Gate";
-
-	-- Unga Ingoo
-	AL["Brewing Cauldron"] = "Brewing Cauldron";
-	AL["Escort Brewmaster Bo"] = "Escort Brewmaster Bo";
-	AL["Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron."] = "Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron.";
-	AL["Fill the Brewing Cauldron"] = "Fill the Brewing Cauldron";
-	AL["Bring 200 Unga Jungle Brew to the Brewing Cauldron."] = "Bring 200 Unga Jungle Brew to the Brewing Cauldron.";
-	AL["Defeat Captain Ook"] = "Defeat Captain Ook";
-	AL["Defeat Captain Ook."] = "Defeat Captain Ook.";
+	AL["Assault on Zan'vess"] = "Assault on Zan'vess";
+	AL["Launch an assault on the island of Zan'vess."] = "Launch an assault on the island of Zan'vess.";
+	AL["Defenses of Zan'vess"] = "Defenses of Zan'vess";
+	AL["Destroy the Sonic Towers and deactivate the Zan'vess Defense Shield."] = "Destroy the Sonic Towers and deactivate the Zan'vess Defense Shield.";
+	AL["The Heart of Zan'vess"] = "The Heart of Zan'vess";
+	AL["Storm the beach and reach the Heart of Zan'vess."] = "Storm the beach and reach the Heart of Zan'vess.";
+	AL["Weapons of Zan'vess"] = "Weapons of Zan'vess";
+	AL["Defeat Commander Tel'vrak and retrieve the Mantid weapon cache."] = "Defeat Commander Tel'vrak and retrieve the Mantid weapon cache.";
 
 	-- Brewmoon Festival
 	AL["The Brewmoon Festival!"] = "The Brewmoon Festival!";
@@ -122,18 +103,6 @@ if AL then
 	AL["Brewmaster Boof"] = "Brewmaster Boof";
 	AL["Defence Point"] = "Defence Point";
 
-	-- Greenstone Village
-	AL["Rescue the Villagers"] = "Rescue the Villagers";
-	AL["Defeat the monsters attacking the Greenstone villagers."] = "Defeat the monsters attacking the Greenstone villagers.";
-	AL["Rescue the Dojo"] = "Rescue the Dojo";
-	AL["Defeat the monsters attacking Greenstone's dojo."] = "Defeat the monsters attacking Greenstone's dojo.";
-	AL["Recover Burgled Barrels"] = "Recover Burgled Barrels";
-	AL["Find burgled brew barrels in the forest and return them to the village dojo."] = "Find burgled brew barrels in the forest and return them to the village dojo.";
-	AL["Rescue Greenstone Masons"] = "Rescue Greenstone Masons";
-	AL["Travel to the Masons' Quarter and awaken the unconscious villagers."] = "Travel to the Masons' Quarter and awaken the unconscious villagers.";
-	AL["Defeat Vengeful Hui"] = "Defeat Vengeful Hui";
-	AL["Defeat Vengeful Hui."] = "Defeat Vengeful Hui.";
-
 	-- Crypt of Forgotten Kings
 	AL["End the Terror"] = "End the Terror";
 	AL["Defeat the corrupted Shado-Pan Leader."] = "Defeat the corrupted Shado-Pan Leader.";
@@ -148,6 +117,113 @@ if AL then
 	AL["Treasure Urn"] = "Treasure Urn";
 	AL["Abomination of Anger"] = "Abomination of Anger";
 
-	-- Peak of Serenity
+	-- Dagger in the Dark
+	AL["The Mission..."] = "The Mission...";
+	AL["Speak with Vol'jin to begin the search for the Saurok cave."] = "Speak with Vol'jin to begin the search for the Saurok cave.";
+	AL["We Ride!"] = "We Ride!";
+	AL["Find the entrance to the Saurok Cave."] = "Find the entrance to the Saurok Cave.";
+	AL["Guards!"] = "Guards!";
+	AL["Defeat the Saurok guarding the cave."] = "Defeat the Saurok guarding the cave.";
+	AL["Into the Cave"] = "Into the Cave";
+	AL["Make your way deeper into the cave."] = "Make your way deeper into the cave.";
+	AL["The Source"] = "The Source";
+	AL["Find the source of the Saurok."] = "Find the source of the Saurok.";
+	AL["The Broodmaster"] = "The Broodmaster";
+	AL["Defeat Broodmaster Noshi."] = "Defeat Broodmaster Noshi.";
+	AL["Investigation"] = "Investigation";
+	AL["Investigate the Mogu Statues."] = "Investigate the Mogu Statues.";
+	AL["Ambush!"] = "Ambush!";
+	AL["Fend off the Kor'kron ambush."] = "Fend off the Kor'kron ambush.";
+
+	-- Domination Point
+	AL["The Flight MasterDP"] = "The Flight Master";
+	AL["Join up with Kromthar."] = "Join up with Kromthar.";
+	AL["A.C.E.s High"] = "A.C.E.s High";
+	AL["Fight your way through the burning refinery to General Nazgrim."] = "Fight your way through the burning refinery to General Nazgrim.";
+	AL["Reclaim the Court!"] = "Reclaim the Court!";
+	AL["Defeat the Alliance forces assaulting the keep."] = "Defeat the Alliance forces assaulting the keep.";
+	AL["The Warlord"] = "The Warlord";
+	AL["Locate Warlord Bloodhilt and help repel the Alliance assault."] = "Locate Warlord Bloodhilt and help repel the Alliance assault.";
+	AL["Legwork"] = "Legwork";
+	AL["Gather information about the Alliance and Horde forces."] = "Gather information about the Alliance and Horde forces.";
+	AL["Setting Up"] = "Setting Up";
+	AL["Set up Rivett's weapons and prepare to defend the keep!"] = "Set up Rivett's weapons and prepare to defend the keep!";
+	AL["Hold the Line!"] = "Hold the Line!";
+	AL["Hold the gate against waves of Alliance invaders and their commander."] = "Hold the gate against waves of Alliance invaders and their commander.";
+
+	-- Greenstone Village
+	AL["Rescue the Villagers"] = "Rescue the Villagers";
+	AL["Defeat the monsters attacking the Greenstone villagers."] = "Defeat the monsters attacking the Greenstone villagers.";
+	AL["Rescue the Dojo"] = "Rescue the Dojo";
+	AL["Defeat the monsters attacking Greenstone's dojo."] = "Defeat the monsters attacking Greenstone's dojo.";
+	AL["Recover Burgled Barrels"] = "Recover Burgled Barrels";
+	AL["Find burgled brew barrels in the forest and return them to the village dojo."] = "Find burgled brew barrels in the forest and return them to the village dojo.";
+	AL["Rescue Greenstone Masons"] = "Rescue Greenstone Masons";
+	AL["Travel to the Masons' Quarter and awaken the unconscious villagers."] = "Travel to the Masons' Quarter and awaken the unconscious villagers.";
+	AL["Defeat Vengeful Hui"] = "Defeat Vengeful Hui";
+	AL["Defeat Vengeful Hui."] = "Defeat Vengeful Hui.";
+
+	-- Lion's Landing
+	AL["The Flight MasterLL"] = "The Flight Master";
+	AL["Join up with Daggin Windbeard."] = "Join up with Daggin Windbeard.";
+	AL["Death on the Docks"] = "Death on the Docks";
+	AL["Fight your way through the docks to Admiral Taylor."] = "Fight your way through the docks to Admiral Taylor.";
+	AL["Defeat the Horde forces assaulting the keep."] = "Defeat the Horde forces assaulting the keep.";
+	AL["The High Marshal"] = "The High Marshal";
+	AL["Locate High Marshal Twinbraid and help repel the Horde assault."] = "Locate High Marshal Twinbraid and help repel the Horde assault.";
+	AL["Gather information from the SI:7 team."] = "Gather information from the SI:7 team.";
+	AL["Set up Sully's weapons and prepare to defend the keep!"] = "Set up Sully's weapons and prepare to defend the keep!";
+	AL["Hold the keep against waves of Horde invaders and their commander."] = "Hold the keep against waves of Horde invaders and their commander.";
+
+	-- Theramore's Fall - Horde
+	AL["To the Waterline!"] = "To the Waterline!";
+	AL["Slay Alliance captains and rig powder barrels on all ships."] = "Slay Alliance captains and rig powder barrels on all ships.";
+	AL["The Blastmaster"] = "The Blastmaster";
+	AL["Inform Blastmaster Sparkfuse of your success."] = "Inform Blastmaster Sparkfuse of your success.";
+	AL["Gryphon, Down"] = "Gryphon, Down";
+	AL["Slay Baldruc and his gryphons."] = "Slay Baldruc and his gryphons.";
+	AL["Tanks for Nothing!"] = "Tanks for Nothing!";
+	AL["Destroy Big Bessa and sabotage any unmanned tanks."] = "Destroy Big Bessa and sabotage any unmanned tanks.";
+	AL["Fly, Spy!"] = "Fly, Spy!";
+	AL["Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel."] = "Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel.";
+	AL["Alliance Ships"] = "Alliance Ships";
+	AL["Baldruc and Gryphon"] = "Baldruc and Gryphon";
+	AL["Tanks"] = "Tanks";
+	AL["Thalen Songweaver"] = "Thalen Songweaver";
+
+	-- Theramore's Fall - Alliance
+	AL["Welcome to Theramore"] = "Welcome to Theramore";
+	AL["Defend the ship from oncoming Horde."] = "Defend the ship from oncoming Horde.";
+	AL["Sweep the Harbor"] = "Sweep the Harbor";
+	AL["Defeat the Horde in the harbor."] = "Defeat the Horde in the harbor.";
+	AL["Into the Ruins"] = "Into the Ruins";
+	AL["Fight past the enemy into the heart of ruined Theramore."] = "Fight past the enemy into the heart of ruined Theramore.";
+	AL["The Lady Proudmoore"] = "The Lady Proudmoore";
+	AL["Locate Jaina in the Mana Bomb crater."] = "Locate Jaina in the Mana Bomb crater.";
+	AL["Destroy the Destroyer"] = "Destroy the Destroyer";
+	AL["Destroy the siege engine at the west gate and recover the stolen standards."] = "Destroy the siege engine at the west gate and recover the stolen standards.";
+	AL["The Last Stand"] = "The Last Stand";
+	AL["Protect Jaina while she attunes to the Focusing Iris."] = "Protect Jaina while she attunes to the Focusing Iris.";
+	AL["Horde Ships"] = "Horde Ships";
+	AL["The heart of ruined Theramore"] = "The heart of ruined Theramore";
+	AL["Jaina"] = "Jaina";
+	AL["West Gate"] = "West Gate";
+
+	-- Troves of the Thunder King
+	AL["Troves of the Thunder King"] = "Troves of the Thunder King";
+	AL["Key to the Palace of Lei Shen"] = "Key to the Palace of Lei Shen";
+	AL["Speak to Taoshi"] = "Speak to Taoshi";
+	AL["You will only have a limited amount of time to gather as much treasure as you can. Speak to Taoshi when you're ready to begin."] = "You will only have a limited amount of time to gather as much treasure as you can. Speak to Taoshi when you're ready to begin.";
+	AL["Reach the Exit"] = "Reach the Exit";
+	AL["Grab as much treasure as you can and reach the exit before the timer expires."] = "Grab as much treasure as you can and reach the exit before the timer expires.";
+
+	-- Unga Ingoo
+	AL["Brewing Cauldron"] = "Brewing Cauldron";
+	AL["Escort Brewmaster Bo"] = "Escort Brewmaster Bo";
+	AL["Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron."] = "Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron.";
+	AL["Fill the Brewing Cauldron"] = "Fill the Brewing Cauldron";
+	AL["Bring 200 Unga Jungle Brew to the Brewing Cauldron."] = "Bring 200 Unga Jungle Brew to the Brewing Cauldron.";
+	AL["Defeat Captain Ook"] = "Defeat Captain Ook";
+	AL["Defeat Captain Ook."] = "Defeat Captain Ook.";
 
 end

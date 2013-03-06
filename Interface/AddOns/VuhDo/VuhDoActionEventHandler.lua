@@ -345,20 +345,10 @@ function VuhDoActionPreClick(aButton, aMouseButton)
 	if (VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
 		return;
 	end
-	tModi = "";
-	if (IsAltKeyDown()) then
-		tModi = tModi .. "alt";
-	end
 
-	if (IsControlKeyDown()) then
-		tModi = tModi .. "ctrl";
-	end
-
-	if (IsShiftKeyDown()) then
-		tModi = tModi .. "shift";
-	end
-
+	tModi = VUHDO_getCurrentKeyModifierString();
 	tKey = VUHDO_SPELL_ASSIGNMENTS[tModi .. SecureButton_GetButtonSuffix(aMouseButton)];
+
 	if (tKey ~= nil and strlower(tKey[3]) == "menu") then
 		if (not InCombatLockdown()) then
 			VUHDO_disableActions(aButton);

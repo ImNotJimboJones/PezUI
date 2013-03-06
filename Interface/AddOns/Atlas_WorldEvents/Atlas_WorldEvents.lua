@@ -1,7 +1,7 @@
 --[[
 
 	Atlas World Events, a World of Warcraft map browser for world events
-	Copyright 2011 ~ 2013 Arith Hsu
+	Copyright 2011 ~ 2013 - Arith Hsu
 
 	This file is a plugin of Atlas.
 

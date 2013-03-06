@@ -41,11 +41,11 @@ function VUHDO_updateManaBars(aUnit, aChange)
 	tInfo = VUHDO_RAID[aUnit];
 
 	if (tInfo["isVehicle"]) then
-		if (tInfo["petUnit"] == nil) then
+		aUnit = tInfo["petUnit"];
+		if (aUnit == nil) then
 			return;
 		end
 
-		aUnit = tInfo["petUnit"];
 		tInfo = VUHDO_RAID[aUnit];
 		if (tInfo == nil) then
 			return;
@@ -87,10 +87,6 @@ local tAllButtons, tManaBar, tHealthBar, tQuota;
 local tManaBarHeight;
 local tRegularHeight;
 function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
-
-	if (aMaxValue == nil or aCurrValue == nil) then
-		anIsActive = false;
-	end
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
 

@@ -1,8 +1,8 @@
--- $Id: Atlas_Scenarios.lua 1873 2012-11-06 17:33:07Z arithmandar $
+-- $Id: Atlas_Scenarios.lua 1944 2013-03-05 15:24:26Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2012 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -58,6 +58,20 @@ local myData = {
 		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Save Thunderpaw Refuge"] };
 		{ INDENT..INDENT..GREY..AL["Defeat Borokhula the Destroyer."] };
 	};
+	SC_ALittlePatience = {
+		ZoneName = { BZ["A Little Patience"] };
+		Location = { BZ["The Deepwild"]..", "..BZ["Krasarang Wilds"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ BLUE.." A) "..AL["Start"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Prepare the Defenses"] };
+		{ INDENT..INDENT..GREY..AL["Assist the two groups of laborers in the construction of their defenses."] };
+		{ INDENT..BLUE.." B) "..AL["Traps"] };
+		{ BLUE.." C) "..AL["Commander Scargash"] };
+		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Kill Commander Scargash"] };
+		{ INDENT..INDENT..GREY..AL["Defeat Commander Scargash and reclaim the Temple of the Red Crane."] };
+	}; 
 	SC_ArenaOfAnnihilation = {
 		ZoneName = { BZ["Arena of Annihilation"] };
 		Location = { BZ["Temple of the White Tiger"]..", "..BZ["Kun-Lai Summit"] };
@@ -79,72 +93,20 @@ local myData = {
 		{ INDENT..INDENT..YELL..AL["Defeat Satay Byu"] };
 		{ INDENT..INDENT..YELL..AL["Defeat Cloudbender Kobo"] };
 	};
---[[
 	SC_AssaultonZanvess = {
 		ZoneName = { BZ["Assault on Zan'vess"] };
 		Location = { BZ["Zan'vess"]..", "..BZ["Dread Wastes"] };
 		LevelRange = "90";
 		MinLevel = "90";
 		PlayerLimit = "3";
-		{ "" };
-	};
-]]
-	SC_TheramoresFallHorde = {
-		ZoneName = { BZ["Theramore's Fall"].." - "..BF["Horde"] };
-		Location = { BZ["Theramore"]..", "..BZ["Dustwallow Marsh"] };
-		LevelRange = "90";
-		MinLevel = "90";
-		PlayerLimit = "3";
-		{ YELL.."- "..AL["Stage 1"].." - "..AL["To the Waterline!"] };
-		{ INDENT..GREY..AL["Rig powder barrels on all six ships."] };
-		{ YELL.."- "..AL["Stage 2"].." - "..AL["The Blastmaster"] };
-		{ INDENT..GREY..AL["Inform Blastmaster Sparkfuse of your success."] };
-		{ YELL.."- "..AL["Stage 3"].." - "..AL["Gryphon, Down"] };
-		{ INDENT..GREY..AL["Slay Baldruc and his gryphons."] };
-		{ YELL.."- "..AL["Stage 4"].." - "..AL["Tanks for Nothing!"] };
-		{ INDENT..GREY..AL["Destroy Big Bessa and sabotage any unmanned tanks."] };
-		{ YELL.."- "..AL["Stage 5"].." - "..AL["Fly, Spy!"] };
-		{ INDENT..GREY..AL["Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel."] };
-	};
-	SC_TheramoresFallAlliance = {
-		ZoneName = { BZ["Theramore's Fall"].." - "..BF["Alliance"] };
-		Location = { BZ["Theramore"]..", "..BZ["Dustwallow Marsh"] };
-		LevelRange = "90";
-		MinLevel = "90";
-		PlayerLimit = "3";
-		{ BLUE.." A) "..AL["Start"] };
-		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Welcome to Theramore"] };
-		{ INDENT..INDENT..GREY..AL["Defend the ship from oncoming Horde."] };
-		{ BLUE.." B) "..AL["Horde Ship"] };
-		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Sweep the Harbor"] };
-		{ INDENT..INDENT..GREY..AL["Defeat the Horde in the harbor."] };
-		{ BLUE.." C) "..AL["The heart of ruined Theramore"] };
-		{ INDENT..YELL.."- "..AL["Stage 3"].." - "..AL["Into the Ruins"] };
-		{ INDENT..INDENT..GREY..AL["Fight past the enemy into the heart of ruined Theramore."] };
-		{ BLUE.." D) "..AL["Jaina"] };
-		{ INDENT..YELL.."- "..AL["Stage 4"].." - "..AL["The Lady Proudmoore"] };
-		{ INDENT..INDENT..GREY..AL["Locate Jaina in the Mana Bomb crater."] };
-		{ BLUE.." E) "..AL["West Gate"] };
-		{ INDENT..YELL.."- "..AL["Stage 5"].." - "..AL["Destroy the Destroyer"] };
-		{ INDENT..INDENT..GREY..AL["Destroy the siege engine at the west gate and recover the stolen standards."] };
-		{ BLUE.." D) "..AL["Jaina"] };
-		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["The Last Stand"] };
-		{ INDENT..INDENT..GREY..AL["Protect Jaina while she attunes to the Focusing Iris."] };
-	};
-	SC_UngaIngoo = {
-		ZoneName = { BZ["Unga Ingoo"] };
-		Location = { BZ["Unga Ingoo"]..", "..BZ["Krasarang Wilds"] };
-		LevelRange = "90";
-		MinLevel = "90";
-		PlayerLimit = "3";
-		{ BLUE.." A) "..AL["Start"] };
-		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Escort Brewmaster Bo"] };
-		{ INDENT..INDENT..GREY..AL["Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron."] };
-		{ BLUE.." B) "..AL["Brewing Cauldron"].." / "..AL["End"] };
-		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Fill the Brewing Cauldron"] };
-		{ INDENT..INDENT..GREY..AL["Bring 200 Unga Jungle Brew to the Brewing Cauldron."] };
-		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Defeat Captain Ook"] };
-		{ INDENT..INDENT..GREY..AL["Defeat Captain Ook."] };
+		{ YELL.."- "..AL["Stage 1"].." - "..AL["Assault on Zan'vess"] };
+		{ INDENT..GREY..AL["Launch an assault on the island of Zan'vess."] };
+		{ YELL.."- "..AL["Stage 2"].." - "..AL["Defenses of Zan'vess"] };
+		{ INDENT..GREY..AL["Destroy the Sonic Towers and deactivate the Zan'vess Defense Shield."] };
+		{ YELL.."- "..AL["Stage 3"].." - "..AL["The Heart of Zan'vess"] };
+		{ INDENT..GREY..AL["Storm the beach and reach the Heart of Zan'vess."] };
+		{ YELL.."- "..AL["Final Stage"].." - "..AL["Weapons of Zan'vess"] };
+		{ INDENT..GREY..AL["Defeat Commander Tel'vrak and retrieve the Mantid weapon cache."] };
 	};
 	SC_BrewmoonFestival = {
 		ZoneName = { BZ["Brewmoon Festival"] };
@@ -168,26 +130,6 @@ local myData = {
 		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Warbringer Qobi"] };
 		{ INDENT..INDENT..GREY..AL["Defeat Warbringer Qobi."] };
 	};
-	SC_GreenstoneVillage = {
-		ZoneName = { BZ["Greenstone Village"] };
-		Location = { BZ["Greenstone Village"]..", "..BZ["The Jade Forest"] };
-		LevelRange = "90";
-		MinLevel = "90";
-		PlayerLimit = "3";
-		{ BLUE.." A) "..AL["Start"] };
-		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Rescue the Villagers"] };
-		{ INDENT..INDENT..GREY..AL["Defeat the monsters attacking the Greenstone villagers."] };
-		{ BLUE.." B) "..BZ["Greenstone Dojo"] };
-		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Rescue the Dojo"] };
-		{ INDENT..INDENT..GREY..AL["Defeat the monsters attacking Greenstone's dojo."] };
-		{ INDENT..YELL.."- "..AL["Stage 3"].." - "..AL["Recover Burgled Barrels"] };
-		{ INDENT..INDENT..GREY..AL["Find burgled brew barrels in the forest and return them to the village dojo."] };
-		{ BLUE.." C) "..BZ["Greenstone Masons' Quarter"] };
-		{ INDENT..YELL.."- "..AL["Stage 4"].." - "..AL["Rescue Greenstone Masons"] };
-		{ INDENT..INDENT..GREY..AL["Travel to the Masons' Quarter and awaken the unconscious villagers."] };
-		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Defeat Vengeful Hui"] };
-		{ INDENT..INDENT..GREY..AL["Defeat Vengeful Hui."] };
-	};
 	SC_CryptofForgottenKings = {
 		ZoneName = { BZ["Crypt of Forgotten Kings"] };
 		Location = { BZ["Vale of Eternal Blossoms"] };
@@ -208,6 +150,167 @@ local myData = {
 		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Destroy the Sha"] };
 		{ INDENT..INDENT..GREY..AL["Destroy the Abomination of Anger."] };
 		{ INDENT..INDENT..WHIT.." 2) "..AL["Abomination of Anger"] };
+	};
+	SC_DaggerintheDark = {
+		ZoneName = { BZ["Dagger in the Dark"] };
+		Location = { BZ["The Veiled Stair"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ YELL.."- "..AL["Stage 1"].." - "..AL["The Mission..."] };
+		{ INDENT..GREY..AL["Speak with Vol'jin to begin the search for the Saurok cave."] };
+		{ YELL.."- "..AL["Stage 2"].." - "..AL["We Ride!"] };
+		{ INDENT..GREY..AL["Find the entrance to the Saurok Cave."] };
+		{ YELL.."- "..AL["Stage 3"].." - "..AL["Guards!"] };
+		{ INDENT..GREY..AL["Defeat the Saurok guarding the cave."] };
+		{ YELL.."- "..AL["Stage 4"].." - "..AL["Into the Cave"] };
+		{ INDENT..GREY..AL["Make your way deeper into the cave."] };
+		{ YELL.."- "..AL["Stage 5"].." - "..AL["The Source"] };
+		{ INDENT..GREY..AL["Find the source of the Saurok."] };
+		{ YELL.."- "..AL["Stage 6"].." - "..AL["The Broodmaster"] };
+		{ INDENT..GREY..AL["Defeat Broodmaster Noshi."] };
+		{ YELL.."- "..AL["Stage 7"].." - "..AL["Investigation"] };
+		{ INDENT..GREY..AL["Investigate the Mogu Statues."] };
+		{ YELL.."- "..AL["Final Stage"].." - "..AL["Ambush!"] };
+		{ INDENT..GREY..AL["Fend off the Kor'kron ambush."] };
+	};
+	SC_DominationPoint = {
+		ZoneName = { BZ["Domination Point"] };
+		Location = { BZ["Krasarang Wilds"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ YELL.."- "..AL["Stage 1"].." - "..AL["The Flight MasterDP"] };
+		{ INDENT..GREY..AL["Join up with Kromthar."] };
+		{ YELL.."- "..AL["Stage 2"].." - "..AL["A.C.E.s High"] };
+		{ INDENT..GREY..AL["Fight your way through the burning refinery to General Nazgrim."] };
+		{ YELL.."- "..AL["Stage 3"].." - "..AL["Reclaim the Court!"] };
+		{ INDENT..GREY..AL["Defeat the Alliance forces assaulting the keep."] };
+		{ YELL.."- "..AL["Stage 4"].." - "..AL["The Warlord"] };
+		{ INDENT..GREY..AL["Locate Warlord Bloodhilt and help repel the Alliance assault."] };
+		{ YELL.."- "..AL["Stage 5"].." - "..AL["Legwork"] };
+		{ INDENT..GREY..AL["Gather information about the Alliance and Horde forces."] };
+		{ YELL.."- "..AL["Stage 6"].." - "..AL["Setting Up"] };
+		{ INDENT..GREY..AL["Set up Rivett's weapons and prepare to defend the keep!"] };
+		{ YELL.."- "..AL["Final Stage"].." - "..AL["Hold the Line!"] };
+		{ INDENT..GREY..AL["Hold the gate against waves of Alliance invaders and their commander."] };
+	};
+	SC_GreenstoneVillage = {
+		ZoneName = { BZ["Greenstone Village"] };
+		Location = { BZ["Greenstone Village"]..", "..BZ["The Jade Forest"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ BLUE.." A) "..AL["Start"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Rescue the Villagers"] };
+		{ INDENT..INDENT..GREY..AL["Defeat the monsters attacking the Greenstone villagers."] };
+		{ BLUE.." B) "..BZ["Greenstone Dojo"] };
+		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Rescue the Dojo"] };
+		{ INDENT..INDENT..GREY..AL["Defeat the monsters attacking Greenstone's dojo."] };
+		{ INDENT..YELL.."- "..AL["Stage 3"].." - "..AL["Recover Burgled Barrels"] };
+		{ INDENT..INDENT..GREY..AL["Find burgled brew barrels in the forest and return them to the village dojo."] };
+		{ BLUE.." C) "..BZ["Greenstone Masons' Quarter"] };
+		{ INDENT..YELL.."- "..AL["Stage 4"].." - "..AL["Rescue Greenstone Masons"] };
+		{ INDENT..INDENT..GREY..AL["Travel to the Masons' Quarter and awaken the unconscious villagers."] };
+		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Defeat Vengeful Hui"] };
+		{ INDENT..INDENT..GREY..AL["Defeat Vengeful Hui."] };
+	};
+	SC_LionsLanding = {
+		ZoneName = { BZ["Lion's Landing"] };
+		Location = { BZ["Krasarang Wilds"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ YELL.."- "..AL["Stage 1"].." - "..AL["The Flight MasterLL"] };
+		{ INDENT..GREY..AL["Join up with Daggin Windbeard."] };
+		{ YELL.."- "..AL["Stage 2"].." - "..AL["Death on the Docks"] };
+		{ INDENT..GREY..AL["Fight your way through the docks to Admiral Taylor."] };
+		{ YELL.."- "..AL["Stage 3"].." - "..AL["Reclaim the Court!"] };
+		{ INDENT..GREY..AL["Defeat the Horde forces assaulting the keep."] };
+		{ YELL.."- "..AL["Stage 4"].." - "..AL["The High Marshal"] };
+		{ INDENT..GREY..AL["Locate High Marshal Twinbraid and help repel the Horde assault."] };
+		{ YELL.."- "..AL["Stage 5"].." - "..AL["Legwork"] };
+		{ INDENT..GREY..AL["Gather information from the SI:7 team."] };
+		{ YELL.."- "..AL["Stage 6"].." - "..AL["Setting Up"] };
+		{ INDENT..GREY..AL["Set up Sully's weapons and prepare to defend the keep!"] };
+		{ YELL.."- "..AL["Final Stage"].." - "..AL["Hold the Line!"] };
+		{ INDENT..GREY..AL["Hold the keep against waves of Horde invaders and their commander."] };
+	};
+	SC_TheramoresFallHorde = {
+		ZoneName = { BZ["Theramore's Fall"].." - "..BF["Horde"] };
+		Location = { BZ["Theramore"]..", "..BZ["Dustwallow Marsh"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ BLUE.." A) "..AL["Start"] };
+		{ BLUE.." B) "..AL["Alliance Ships"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["To the Waterline!"] };
+		{ INDENT..INDENT..GREY..AL["Slay Alliance captains and rig powder barrels on all ships."] };
+		{ GREN.." C) "..AL["The Blastmaster"] };
+		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["The Blastmaster"] };
+		{ INDENT..INDENT..GREY..AL["Inform Blastmaster Sparkfuse of your success."] };
+		{ BLUE.." D) "..AL["Baldruc and Gryphon"] };
+		{ INDENT..YELL.."- "..AL["Stage 3"].." - "..AL["Gryphon, Down"] };
+		{ INDENT..INDENT..GREY..AL["Slay Baldruc and his gryphons."] };
+		{ BLUE.." E) "..AL["Tanks"] };
+		{ INDENT..YELL.."- "..AL["Stage 4"].." - "..AL["Tanks for Nothing!"] };
+		{ INDENT..INDENT..GREY..AL["Destroy Big Bessa and sabotage any unmanned tanks."] };
+		{ BLUE.." F) "..AL["Thalen Songweaver"] };
+		{ INDENT..YELL.."- "..AL["Stage 5"].." - "..AL["Fly, Spy!"] };
+		{ INDENT..INDENT..GREY..AL["Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel."] };
+	};
+	SC_TheramoresFallAlliance = {
+		ZoneName = { BZ["Theramore's Fall"].." - "..BF["Alliance"] };
+		Location = { BZ["Theramore"]..", "..BZ["Dustwallow Marsh"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ BLUE.." A) "..AL["Start"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Welcome to Theramore"] };
+		{ INDENT..INDENT..GREY..AL["Defend the ship from oncoming Horde."] };
+		{ BLUE.." B) "..AL["Horde Ships"] };
+		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Sweep the Harbor"] };
+		{ INDENT..INDENT..GREY..AL["Defeat the Horde in the harbor."] };
+		{ BLUE.." C) "..AL["The heart of ruined Theramore"] };
+		{ INDENT..YELL.."- "..AL["Stage 3"].." - "..AL["Into the Ruins"] };
+		{ INDENT..INDENT..GREY..AL["Fight past the enemy into the heart of ruined Theramore."] };
+		{ BLUE.." D) "..AL["Jaina"] };
+		{ INDENT..YELL.."- "..AL["Stage 4"].." - "..AL["The Lady Proudmoore"] };
+		{ INDENT..INDENT..GREY..AL["Locate Jaina in the Mana Bomb crater."] };
+		{ BLUE.." E) "..AL["West Gate"] };
+		{ INDENT..YELL.."- "..AL["Stage 5"].." - "..AL["Destroy the Destroyer"] };
+		{ INDENT..INDENT..GREY..AL["Destroy the siege engine at the west gate and recover the stolen standards."] };
+		{ BLUE.." D) "..AL["Jaina"] };
+		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["The Last Stand"] };
+		{ INDENT..INDENT..GREY..AL["Protect Jaina while she attunes to the Focusing Iris."] };
+	};
+	SC_TrovesoftheThunderKing = {
+		ZoneName = { AL["Troves of the Thunder King"] };
+		Location = { BZ["Thunder King's Citadel"]..", "..BZ["Isle of Thunder"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "1";
+		{ ORNG..AL["Key"]..AL["Colon"]..AL["Key to the Palace of Lei Shen"] };
+		{ BLUE.." A) "..AL["Start"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Speak to Taoshi"] };
+		{ INDENT..INDENT..GREY..AL["You will only have a limited amount of time to gather as much treasure as you can. Speak to Taoshi when you're ready to begin."] };
+		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Reach the Exit"] };
+		{ INDENT..INDENT..GREY..AL["Grab as much treasure as you can and reach the exit before the timer expires."] };
+	};
+	SC_UngaIngoo = {
+		ZoneName = { BZ["Unga Ingoo"] };
+		Location = { BZ["Unga Ingoo"]..", "..BZ["Krasarang Wilds"] };
+		LevelRange = "90";
+		MinLevel = "90";
+		PlayerLimit = "3";
+		{ BLUE.." A) "..AL["Start"] };
+		{ INDENT..YELL.."- "..AL["Stage 1"].." - "..AL["Escort Brewmaster Bo"] };
+		{ INDENT..INDENT..GREY..AL["Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron."] };
+		{ BLUE.." B) "..AL["Brewing Cauldron"].." / "..AL["End"] };
+		{ INDENT..YELL.."- "..AL["Stage 2"].." - "..AL["Fill the Brewing Cauldron"] };
+		{ INDENT..INDENT..GREY..AL["Bring 200 Unga Jungle Brew to the Brewing Cauldron."] };
+		{ INDENT..YELL.."- "..AL["Final Stage"].." - "..AL["Defeat Captain Ook"] };
+		{ INDENT..INDENT..GREY..AL["Defeat Captain Ook."] };
 	};
 --[[	SC_PeakofSerenity = {
 		ZoneName = { BZ["Peak of Serenity"] };

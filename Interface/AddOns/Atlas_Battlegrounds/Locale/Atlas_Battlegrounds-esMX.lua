@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Battlegrounds-esMX.lua 1852 2012-10-28 11:43:32Z maqjav@gmail.com $
+﻿-- $Id: Atlas_Battlegrounds-esMX.lua 1891 2013-02-17 15:41:01Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 

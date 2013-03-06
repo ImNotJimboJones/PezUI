@@ -1,0 +1,24 @@
+tag v4.0.0-beta43
+83f56de41a3357040bd24eddca284712a9e30751
+Shefki <shefki@shefki.org>
+2013-03-05 15:13:33 -0800
+
+Tagging as v4.0.0-beta43
+
+
+--------------------
+
+Shefki:
+	- Handle auras that have been removed in 5.2
+	- Missed removing an end.
+	- Finish removing pre-MOP compat from the Aura Filters.
+	- Fix a typo and a column indentation.
+	- Remove some parens that aren't really needed.
+Benjamin Staneck:
+	- I'm in your toc, updating your Interface Version to 50200.
+	- more cleaning
+	- I like commas
+	- more spring cleaning in the filter area
+	- remove some old compat code. I want to cry.
+	- exclude some dev only files/folders from being packaged
+	- fix the attempt to call field 'GetBestUnitID' (a nil value) error on 5.2.

@@ -4,6 +4,11 @@ A framework for various features. See each plugin's readme for more information.
 
 VERSION CHANGES:
 
+3.4.1:
+
+- Bug fixes in Farm plugin.
+- Updated to support WoW version 5.2.0
+
 3.4.0:
 
 - Compatibility updates to Battle Pets plugin.

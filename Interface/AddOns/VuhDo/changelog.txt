@@ -1,3 +1,21 @@
+Version 3.30.
+
+
+Bugfixes:
+-- Fixed damage flash bar
+-- Fixed possibly incorrect button sizes after changing a profile
+
+
+Improvements:
+-- BuffWatch will be hidden in pet battles now
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
 Version 3.29.
 
 

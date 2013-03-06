@@ -1,10 +1,10 @@
--- $Id: AtlasMaps_NPC_DB.lua 1772 2012-10-03 15:12:26Z arithmandar $
+-- $Id: AtlasMaps_NPC_DB.lua 1922 2013-02-28 15:16:04Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -639,12 +639,12 @@ Syntax:
 		{ 4, 649, 229, 284 }; -- Raigonn
 	};
 	HeartofFear = {
-		{ 1, 745, 287, 194 }; -- Imperial Vizier Zor'lok
-		{ 2, 744, 273, 56 }; -- Blade Lord Ta'yak
-		{ 3, 713, 430, 104 }; -- Garalon
---		{ INDENT..Atlas_GetBossName("Wind Lord Mel'jarak", 741) };
-		{ 4, 737, 287, 357 }; -- Amber-Shaper Un'sok
-		{ 5, 743, 67, 358 }; -- Grand Empress Shek'zeer
+		{ 1, 745, 318, 250 }; -- Imperial Vizier Zor'lok
+		{ 2, 744, 269, 74 }; -- Blade Lord Ta'yak
+		{ 3, 713, 428, 46 }; -- Garalon
+		{ 4, 741, 427, 124 }; -- Wind Lord Mel'jarak
+		{ 5, 737, 225, 377 }; -- Amber-Shaper Un'sok
+		{ 6, 743, 64, 377 }; -- Grand Empress Shek'zeer
 	};
 	MoguShanPalace = {
 		{ 1, 708, 203, 454 }; -- Trial of the King
@@ -677,7 +677,7 @@ Syntax:
 	};
 	Scholomance = {
 		{ 1, 659, 140, 133 }; -- Instructor Chillheart
-		{ 2, 663, 303, 89 }; -- Jandice Barov
+		{ 2, 663, 394, 57 }; -- Jandice Barov
 		{ 3, 665, 329, 90 }; -- Rattlegore
 		{ 4, 666, 356, 165 }; -- Lilian Voss
 		{ 6, 684, 286, 391 }; -- Darkmaster Gandling
@@ -694,13 +694,13 @@ Syntax:
 	};
 	StormstoutBrewery = {
 		{ 1, 668, 175, 340 }; -- Ook-Ook
-		{ 2, 669, 334, 280 }; -- Hoptallus
+		{ 2, 669, 314, 280 }; -- Hoptallus
 		{ 3, 670, 430, 400 }; -- Yan-Zhu the Uncasked
 	};
 	TempleOfTheJadeSerpent = {
 		{ 1, 672, 218, 68 }; -- Wise Mari
 		{ 2, 664, 65, 380 }; -- Lorewalker Stonestep
-		{ 3, 658, 243, 259 }; -- Liu Flameheart
+		{ 3, 658, 213, 252 }; -- Liu Flameheart
 		{ 4, 335, 355, 296 }; -- Sha of Doubt
 	};
 	TerraceofEndlessSpring = {
@@ -708,5 +708,26 @@ Syntax:
 		{ 2, 742, 360, 265 }; -- Tsulong
 		{ 3, 729, 296, 265 }; -- Lei Shi
 		{ 4, 709, 204, 265 }; -- Sha of Fear
+	};
+	ThroneofThunderA = {
+		{ 1, 827, 111, 196 }; -- Jin'rokh the Breaker
+		{ 2, 819, 266, 335 }; -- Horridon
+		{ 3, 816, 372, 149 }; -- Council of Elders
+	};
+	ThroneofThunderB = {
+		{ 4, 825, 88, 359 }; -- Tortos
+		{ 5, 821, 296, 185 }; -- Megaera
+		{ 6, 828, 406, 308 }; -- Ji-Kun
+	};
+	ThroneofThunderC = {
+		{ 7, 818, 392, 173 }; -- Durumu the Forgotten
+		{ 8, 820, 235, 414 }; -- Primordius
+		{ 9, 824, 156, 304 }; -- Dark Animus
+	};
+	ThroneofThunderD = {
+		{ 10, 817, 146, 160 }; -- Iron Qon
+		{ 11, 829, 405, 79 }; -- Twin Consorts
+		{ 12, 832, 118, 339 }; -- Lei Shen
+		{ 13, 831, 370, 453 }; -- Ra-den
 	};
 };

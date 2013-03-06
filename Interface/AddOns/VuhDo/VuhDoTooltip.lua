@@ -67,9 +67,7 @@ local VUHDO_VALUE_COLOR = {	["TR"] = 1,	["TG"] = 0.898,	["TB"] = 0.4, ["TO"] = 1
 --
 local tLabel;
 local function VUHDO_setTooltipLine(aText, anIsLeft, aLineNum, aColor, aTextSize)
-	tLabel = anIsLeft
-	  and _G[format("VuhDoTooltipTextL%d", aLineNum)]
-		or  _G[format("VuhDoTooltipTextR%d", aLineNum)];
+	tLabel = _G[format("VuhDoTooltipText%s%d", anIsLeft and "L" or "R", aLineNum)];
 
 	tLabel:SetText(aText);
 
@@ -337,8 +335,7 @@ function VUHDO_updateTooltip()
 	VUHDO_addTooltipLineRight(tRightText, VUHDO_VALUE_COLOR, 8);
 
 	if (VUHDO_SPELL_CONFIG["IS_TOOLTIP_INFO"]) then
-		tModifier = format("%s%s%s", IsAltKeyDown() and "alt" or "", IsControlKeyDown() and "ctrl" or "",
-			IsShiftKeyDown() and "shift" or "");
+		tModifier = VUHDO_getCurrentKeyModifierString();
 
 		for tIndex, tButtonName in ipairs(VUHDO_MOUSE_BUTTONS) do
 			tBinding = VUHDO_getSpellTooltip(tModifier, tIndex, tUnit);

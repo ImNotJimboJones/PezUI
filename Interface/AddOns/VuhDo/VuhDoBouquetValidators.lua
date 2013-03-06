@@ -930,7 +930,7 @@ end
 --
 local tShieldLeft;
 local function VUHDO_shieldCountValidator(anInfo, _)
-	tShieldLeft = getUnitOverallShieldRemain(anInfo["unit"]);
+	tShieldLeft = VUHDO_getUnitOverallShieldRemain(anInfo["unit"]);
 	return tShieldLeft >= 1000, nil, -1, floor(tShieldLeft * 0.001 + 0.5), -1;
 end
 

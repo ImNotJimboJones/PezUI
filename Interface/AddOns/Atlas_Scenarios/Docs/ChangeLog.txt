@@ -1,11 +1,24 @@
-$Id: ChangeLog.txt 1876 2012-12-04 17:37:49Z arithmandar $
+$Id: ChangeLog.txt 1941 2013-03-05 14:01:17Z arithmandar $
 
 Atlas, a World of Warcraft instance map browser
-Copyright 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 ==============
 = Change Log =
 ==============
+
+v1.24.00 (Mar. 05, 2013)
+-----------------------
+- TOC update to support WoW 5.2
+- Map update:
+    - Theramore's Fall (Horde)
+- Map added:
+    - A Little Patience
+    - Assault on Zan'vess
+    - Dagger in the Dark
+    - Domination Point
+    - Lion's Landing
+    - Troves of the Thunder King
 
 v1.23.0 (Dec. 07, 2012)
 -----------------------

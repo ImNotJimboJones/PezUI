@@ -2,6 +2,12 @@ local _;
 local select = select;
 local type = type;
 
+
+
+local UnitGetTotalAbsorbs = UnitGetTotalAbsorbs;
+
+
+
 local VUHDO_SHIELDS = {
 	[17] = 15, -- VUHDO_SPELL_ID.POWERWORD_SHIELD -- ok
 	[123258] = 15, -- Power Word: Shield (Improved)
@@ -229,14 +235,18 @@ end
 
 --
 local tSummeLeft;
-function getUnitOverallShieldRemain(aUnit)
-	tSummeLeft = 0;
+function VUHDO_getUnitOverallShieldRemain(aUnit)
+	if (UnitGetTotalAbsorbs ~= nil) then
+		return UnitGetTotalAbsorbs(aUnit) or 0;
+	else
+		tSummeLeft = 0;
 
-	for tShield, tLeft in pairs(VUHDO_SHIELD_LEFT[aUnit] or sEmpty) do
-		tSummeLeft = tSummeLeft + tLeft;
+		for tShield, tLeft in pairs(VUHDO_SHIELD_LEFT[aUnit] or sEmpty) do
+			tSummeLeft = tSummeLeft + tLeft;
+		end
+
+		return tSummeLeft;
 	end
-
-	return tSummeLeft;
 end
 
 

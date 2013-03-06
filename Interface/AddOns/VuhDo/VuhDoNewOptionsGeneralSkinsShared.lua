@@ -2013,6 +2013,16 @@ local VUHDO_PROFILE_CFG;
 local tIsInPetBattle = false;
 function VUHDO_setPetBattle(anIsStarted)
 	tIsInPetBattle = anIsStarted and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"];
+
+
+	if (VuhDoBuffWatchMainFrame ~= nil and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"]) then
+		VUHDO_setBuffWatchForceHide(anIsStarted);
+		if (anIsStarted) then
+			VuhDoBuffWatchMainFrame:Hide();
+		else
+			VUHDO_reloadBuffPanel();
+		end
+	end
 end
 
 

@@ -242,7 +242,6 @@ end
 
 
 --
-local tSetColor, tSetIcon;
 local tIconsSet = { };
 local tInfo;
 local tDebuffName, tSoundDebuff;
@@ -272,12 +271,11 @@ function VUHDO_determineDebuff(aUnit)
 	end
 
 	if (VUHDO_CHOSEN_DEBUFF_INFO[aUnit] == nil) then
-		VUHDO_CHOSEN_DEBUFF_INFO[aUnit] = { nil, 0, 0, 0 };
-		tChosenInfo = VUHDO_CHOSEN_DEBUFF_INFO[aUnit];
-	else
-		tChosenInfo = VUHDO_CHOSEN_DEBUFF_INFO[aUnit];
-		tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = nil, nil, 0, 0;
+		VUHDO_CHOSEN_DEBUFF_INFO[aUnit] = { };
 	end
+
+	tChosenInfo = VUHDO_CHOSEN_DEBUFF_INFO[aUnit];
+	tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = nil, nil, 0, 0;
 
 	if (VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] == nil) then
 		VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] = { [1] = { }, [2] = { }, [3] = { }, [4] = { } }; -- VUHDO_DEBUFF_TYPE_POISON, VUHDO_DEBUFF_TYPE_DISEASE, VUHDO_DEBUFF_TYPE_MAGIC, VUHDO_DEBUFF_TYPE_CURSE
@@ -298,15 +296,6 @@ function VUHDO_determineDebuff(aUnit)
 
 		for tCnt = 1, 255 do
 			tName, _, tIcon, tStacks, tTypeString, tDuration, tExpiry, _, _, _, tSpellId, _, tIsBossDebuff = UnitDebuff(aUnit, tCnt, false);
-
-			--[[tName = "Blah";
-			tTypeString = "Magic";
-			tIcon = "interface\\characterframe\\temporaryportrait-female-draenei";
-			tStacks = 1;
-			tDuration = 10;
-			tExpiry = GetTime() + 10;
-			tAbsorb = 28000;
-			tSpellId = 999999999;]]
 
 			if (tIcon == nil) then
 				break;
@@ -365,25 +354,19 @@ function VUHDO_determineDebuff(aUnit)
 
 		for tCnt = 1, 255 do
 			tName, _, tIcon, tStacks, _, tDuration, tExpiry, _, _, _, tSpellId = UnitBuff(aUnit, tCnt);
-
 			if (tIcon == nil) then
 				break;
 			end
 
-			--if (not VUHDO_CUSTOM_BUFF_BLACKLIST[tName]) then
-				tCustomDebuff = VUHDO_CUSTOM_DEBUFF_LIST[tName] or VUHDO_CUSTOM_DEBUFF_LIST[tostring(tSpellId or -1)] or tEmptyCustomDebuf;
-				tSetColor, tSetIcon = tCustomDebuff[1], tCustomDebuff[2];
-			--[[else
-				tSetColor, tSetIcon = false, false;
-			end]]
+			tCustomDebuff = VUHDO_CUSTOM_DEBUFF_LIST[tName] or VUHDO_CUSTOM_DEBUFF_LIST[tostring(tSpellId or -1)] or tEmptyCustomDebuf;
 
-			if (tSetColor) then
+			if (tCustomDebuff[1]) then -- Set color
 				tChosen = 6; --VUHDO_DEBUFF_TYPE_CUSTOM
 				tDebuffName = tName;
 				tSoundDebuff = tName;
 			end
 
-			if (tSetIcon) then
+			if (tCustomDebuff[2]) then -- Set icon
 				tIconsSet[tName] = { tIcon, tExpiry, tStacks or 0, tDuration, true };
 				tSoundDebuff = tName;
 			end

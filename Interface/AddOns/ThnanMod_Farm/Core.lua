@@ -26,8 +26,7 @@ local currentDataVersion = 2;
 (C) global.hideInCombat
 (C) character.showAutomatically
 ]]--
---[[ version 1
-(C) global.hideInCombat
+--[[ version 1 changes
 (C) global.hideWhenEmpty
 (C) global.hideInVehicle
 (C) global.dropOnRightClick
@@ -35,21 +34,10 @@ local currentDataVersion = 2;
 (D) realm.todayForecast
 (D) realm.yesterday
 (D) realm.yesterdayForecast
-(C) character.showAutomatically
 (C) character.dropOnLeavingFarm
 ]]--
---[[ version 2
-(C) global.hideInCombat
-(C) global.hideWhenEmpty
-(C) global.hideInVehicle
+--[[ version 2 changes
 (C) global.hideWhenMounted
-(C) global.dropOnRightClick
-(D) realm.today
-(D) realm.todayForecast
-(D) realm.yesterday
-(D) realm.yesterdayForecast
-(C) character.showAutomatically
-(C) character.dropOnLeavingFarm
 ]]--
 
 function FRM:loadSavedVars(global, realm, character)
@@ -60,7 +48,7 @@ function FRM:loadSavedVars(global, realm, character)
 			config.hideInVehicle = global.hideInVehicle;
 			config.dropOnRightClick = global.dropOnRightClick;
 		end
-		if global.dataVersion == 2 then
+		if global.dataVersion >= 2 then
 			config.hideWhenMounted = global.hideWhenMounted;
 		end
 	end
@@ -72,7 +60,7 @@ function FRM:loadSavedVars(global, realm, character)
 	end
 	if (type(character) == "table") then
 		config.showAutomatically = character.showAutomatically;
-		if character.dataVersion == 1 then
+		if character.dataVersion >= 1 then
 			config.dropOnLeavingFarm = character.dropOnLeavingFarm;
 		end
 	end

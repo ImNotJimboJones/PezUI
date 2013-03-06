@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs-esMX.lua 1772 2012-10-03 15:12:26Z arithmandar $
+-- $Id: Atlas_DungeonLocs-esMX.lua 1891 2013-02-17 15:41:01Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -29,7 +29,7 @@
 -- Datos de Atlas (Español)
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@hotmail.com
--- Última Actualización (last update): $Date: 2012-10-03 23:12:26 +0800 (週三, 03 十月 2012) $
+-- Última Actualización (last update): $Date: 2013-02-17 23:41:01 +0800 (Sun, 17 Feb 2013) $
 
 --]]
 

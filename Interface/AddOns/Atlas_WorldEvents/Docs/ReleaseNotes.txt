@@ -1,9 +1,12 @@
 Atlas World Events, a World of Warcraft world events map browser plug-in for Atlas
-Copyright 2011 ~ 2012 Arith Hsu
+Copyright 2011 ~ 2013 - Arith Hsu
 
 ==============
 = Change Log =
 ==============
+* 3.01 (2013/03/05)
+    - TOC update to support WoW 5.2
+
 * 3.00 (2013/02/18)
     - Update version number to prevent from blocking by Atlas
 

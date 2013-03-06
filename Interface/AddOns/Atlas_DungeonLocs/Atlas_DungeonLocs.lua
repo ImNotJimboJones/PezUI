@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs.lua 1772 2012-10-03 15:12:26Z arithmandar $
+-- $Id: Atlas_DungeonLocs.lua 1894 2013-02-18 17:22:11Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -185,15 +185,16 @@ local myData = {
 	};
 	DLPandaria = {
 		ZoneName = { BZ["Pandaria"] };
-		{ WHIT.." 1) "..BZ["Shado-Pan Monastery"]..", ".._RED..BZ["Kun-Lai Summit"] };
-		{ WHIT.." 2) "..BZ["Mogu'shan Vaults"]..", ".._RED..BZ["Kun-Lai Summit"] };
-		{ WHIT.." 3) "..BZ["Siege of Niuzao Temple"]..", ".._RED..BZ["Townlong Steppes"] };
-		{ WHIT.." 4) "..BZ["Gate of the Setting Sun"]..", ".._RED..BZ["Dread Wastes"].." / ".._RED..BZ["Vale of Eternal Blossoms"] };
-		{ WHIT.." 5) "..BZ["Mogu'shan Palace"]..", ".._RED..BZ["Vale of Eternal Blossoms"] };
-		{ WHIT.." 6) "..BZ["Terrace of Endless Spring"]..", ".._RED..BZ["The Veiled Stair"] };
-		{ WHIT.." 7) "..BZ["Temple of the Jade Serpent"]..", ".._RED..BZ["The Jade Forest"] };
-		{ WHIT.." 8) "..BZ["Heart of Fear"]..", ".._RED..BZ["Dread Wastes"] };
-		{ WHIT.." 9) "..BZ["Stormstout Brewery"]..", ".._RED..BZ["Valley of the Four Winds"] };
+		{ WHIT.." 1) "..BZ["Throne of Thunder"]..", ".._RED..BZ["Isle of Thunder"] };
+		{ WHIT.." 2) "..BZ["Shado-Pan Monastery"]..", ".._RED..BZ["Kun-Lai Summit"] };
+		{ WHIT.." 3) "..BZ["Mogu'shan Vaults"]..", ".._RED..BZ["Kun-Lai Summit"] };
+		{ WHIT.." 4) "..BZ["Siege of Niuzao Temple"]..", ".._RED..BZ["Townlong Steppes"] };
+		{ WHIT.." 5) "..BZ["Gate of the Setting Sun"]..", ".._RED..BZ["Dread Wastes"].." / ".._RED..BZ["Vale of Eternal Blossoms"] };
+		{ WHIT.." 6) "..BZ["Mogu'shan Palace"]..", ".._RED..BZ["Vale of Eternal Blossoms"] };
+		{ WHIT.." 7) "..BZ["Terrace of Endless Spring"]..", ".._RED..BZ["The Veiled Stair"] };
+		{ WHIT.." 8) "..BZ["Temple of the Jade Serpent"]..", ".._RED..BZ["The Jade Forest"] };
+		{ WHIT.." 9) "..BZ["Heart of Fear"]..", ".._RED..BZ["Dread Wastes"] };
+		{ WHIT.."10) "..BZ["Stormstout Brewery"]..", ".._RED..BZ["Valley of the Four Winds"] };
 	};
 };
 

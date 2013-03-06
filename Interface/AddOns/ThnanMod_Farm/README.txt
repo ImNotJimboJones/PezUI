@@ -6,10 +6,17 @@ Holding the shift key will cause seed buttons to show the bag for their crop. Th
 Right clicking a tool button will drop that tool. This can be turned off in the options menu.
 Right clicking a seed button will enable planting the seed by double right clicking on a Tilled Soil.
 The grow check button will target any plant that needs attention before it will grow, i.e. any plant that is not a "growing" plant.
-Jogu's forecast will be saved and displayed in the tool panel. Unfortunately, this feature currently only works with English locales.
+Jogu's forecast will be saved and displayed in the tool panel. This feature does not work in some locales.
 The tool panel also has buttons for your portal shards.
 
 VERSION CHANGES:
+
+1.4.1:
+
+- The forecast seed button will once again accurately show seed counts.
+- The "drop tools when leaving farm" option will once again be remembered.
+- The grow check button will now target tilled and untilled soil.
+- Updated to support WoW version 5.2.0
 
 1.4.0:
 

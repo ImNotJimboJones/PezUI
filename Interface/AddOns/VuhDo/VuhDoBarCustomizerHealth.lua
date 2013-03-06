@@ -152,6 +152,7 @@ local tInfo;
 local tOverhealSetup;
 local tValue;
 local tOpacity;
+local tHealthBar;
 local function VUHDO_updateIncHeal(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
 	tAllButtons = VUHDO_getUnitButtons(VUHDO_resolveVehicleUnit(aUnit));
@@ -182,11 +183,11 @@ local function VUHDO_updateIncHeal(aUnit)
 			else
   			tIncBar:SetValue(tHealthPlusInc);
   		end
-
- 			tIncColor["R"], tIncColor["G"], tIncColor["B"], tOpacity = VUHDO_getHealthBar(tButton, 1):GetStatusBarColor();
+			tHealthBar = VUHDO_getHealthBar(tButton, 1);
+ 			tIncColor["R"], tIncColor["G"], tIncColor["B"], tOpacity = tHealthBar:GetStatusBarColor();
  			tIncColor = VUHDO_getDiffColor(tIncColor, VUHDO_PANEL_SETUP["BAR_COLORS"]["INCOMING"]);
  			if (tIncColor["O"] ~= nil and tOpacity ~= nil) then
- 				tIncColor["O"] = tIncColor["O"] * tOpacity;
+ 				tIncColor["O"] = tIncColor["O"] * tOpacity * (tHealthBar:GetAlpha() or 1);
  			end
 
     	VUHDO_setStatusBarColor(tIncBar, tIncColor);
@@ -464,12 +465,10 @@ local VUHDO_customizeText = VUHDO_customizeText;
 
 --
 local tScaling;
-local function VUHDO_customizeDamageFlash(aButton, aLossPercent)
-	if (aLossPercent ~= nil) then
-		tScaling = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["SCALING"];
-		if (tScaling["isDamFlash"] and tScaling["damFlashFactor"] >= aLossPercent) then
-			VUHDO_UIFrameFlash(_G[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
-		end
+local function VUHDO_customizeDamageFlash(aButton, anInfo)
+	tScaling = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["SCALING"];
+	if (tScaling["isDamFlash"] and tScaling["damFlashFactor"] >= (anInfo["lifeLossPerc"] or -1)) then
+		VUHDO_UIFrameFlash(_G[aButton:GetName() .. "BgBarIcBarHlBarFlBar"], 0.05, 0.15, 0.25, false, 0.05, 0);
 	end
 end
 
@@ -584,8 +583,6 @@ end
 --
 local tAllButtons, tBar, tQuota;
 function VUHDO_backgroundBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
-	aMaxValue = aMaxValue or 0;
-
 	tQuota = (anIsActive or (aMaxValue or 0) > 1)
 		and 1 or 0;
 
@@ -611,7 +608,7 @@ function VUHDO_customizeHealButton(aButton)
 
 	VUHDO_customizeText(aButton, 1, false); -- VUHDO_UPDATE_ALL
 
-	tUnit, _ = VUHDO_getDisplayUnit(aButton);
+	tUnit = VUHDO_getDisplayUnit(aButton);
 	-- Raid icon
 	if (VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["RAID_ICON"]["show"] and tUnit ~= nil) then
   	tIcon = GetRaidTargetIndex(tUnit);
@@ -653,10 +650,6 @@ local tAllButtons;
 function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 	VUHDO_updateBouquetsForEvent(aUnit, anUpdateMode);
 
-	--[[if (4 == anUpdateMode) then -- VUHDO_UPDATE_DEBUFF
-		return;
-	end]]
-
   tAllButtons = VUHDO_getUnitButtons(aUnit);
 	tInfo = VUHDO_RAID[aUnit];
 	if (tAllButtons == nil) then
@@ -667,7 +660,7 @@ function VUHDO_updateHealthBarsFor(aUnit, anUpdateMode)
 		VUHDO_determineIncHeal(aUnit);
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_customizeText(tButton, 2, false); -- VUHDO_UPDATE_HEALTH
-			VUHDO_customizeDamageFlash(tButton, tInfo["lifeLossPerc"]);
+			VUHDO_customizeDamageFlash(tButton, tInfo);
 		end
 		tInfo["lifeLossPerc"] = nil;
 		VUHDO_updateIncHeal(aUnit);

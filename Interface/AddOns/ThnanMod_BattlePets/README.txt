@@ -6,6 +6,10 @@ The options to include the pet level in the tooltips cause the level of the high
 
 VERSION CHANGES:
 
+1.3.2:
+
+- Updated to support WoW version 5.2.0
+
 1.3.1:
 
 - Changed pet list generation to only call GetPetStats if petID is not nil.

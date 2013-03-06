@@ -136,16 +136,16 @@ end
 
 
 local function VUHDO_getWeaponEnchantMacroText(anEnchantName, aTargetType)
-	return "/use [@none] " .. anEnchantName .. "\n"
-	.. "/use " .. (VUHDO_BUFF_TARGET_ENCHANT == aTargetType and "16" or "17") .. "\n"
-	.. "/click StaticPopup1Button1";
+	return "/use [@none] " .. anEnchantName .. "\n/use "
+		.. (VUHDO_BUFF_TARGET_ENCHANT == aTargetType and "16" or "17")
+		.. "\n/click StaticPopup1Button1";
 end
 
 
 
 --
 local function VUHDO_setupBuffButtonAttributes(aModifierKey, aButtonId, anActionName, aButton, aTargetType)
-	if ((anActionName or "") ~= "") then
+	if (not VUHDO_strempty(anActionName)) then
 		if(VUHDO_BUFF_TARGET_ENCHANT == aTargetType or VUHDO_BUFF_TARGET_ENCHANT_OFF == aTargetType) then
 			aButton:SetAttribute(aModifierKey .. "type" .. aButtonId, "macro");
 			aButton:SetAttribute(aModifierKey .. "macrotext" .. aButtonId, VUHDO_getWeaponEnchantMacroText(anActionName, aTargetType));

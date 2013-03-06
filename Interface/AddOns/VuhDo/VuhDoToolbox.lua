@@ -850,3 +850,10 @@ end
 
 
 
+function VUHDO_getCurrentKeyModifierString()
+return format("%s%s%s",
+		IsAltKeyDown() and "alt" or "",
+		IsControlKeyDown() and "ctrl" or "",
+		IsShiftKeyDown() and "shift" or ""
+	);
+end

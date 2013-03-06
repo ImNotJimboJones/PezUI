@@ -415,7 +415,6 @@ function VUHDO_repairStatusbar(tBar)
 	end
 
 
-
 	tBar["SetAlpha"] = function(self, a)
 		self["texture"]:SetAlpha(a);
 	end

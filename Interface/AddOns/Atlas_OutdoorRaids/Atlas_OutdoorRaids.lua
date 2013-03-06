@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids.lua 1772 2012-10-03 15:12:26Z arithmandar $
+-- $Id: Atlas_OutdoorRaids.lua 1913 2013-02-27 14:10:46Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -70,10 +70,12 @@ local myData = {
 		Location = { BZ["Pandaria"] };
 		LevelRange = "90+";
 		MinLevel = "--";
-		PlayerLimit = "40";
+		PlayerLimit = "--";
 		JournalInstanceID = "322";
-		{ WHIT.." 1) "..Atlas_GetBossName("Sha of Anger", 691) };
-		{ WHIT.." 2) "..Atlas_GetBossName("Salyis's Warband", 725) };
+		{ WHIT.." 1) "..Atlas_GetBossName("Nalak, The Storm Lord", 814) };
+		{ WHIT.." 2) "..Atlas_GetBossName("Oondasta", 826) };
+		{ WHIT.." 3) "..Atlas_GetBossName("Sha of Anger", 691) };
+		{ WHIT.." 4) "..Atlas_GetBossName("Salyis's Warband", 725) };
 		{ WHIT..INDENT..Atlas_GetBossName("Chief Salyis") };
 		{ WHIT..INDENT..Atlas_GetBossName("Galleon") };
 	};

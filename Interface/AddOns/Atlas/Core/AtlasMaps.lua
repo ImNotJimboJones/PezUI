@@ -1,10 +1,10 @@
--- $Id: AtlasMaps.lua 1836 2012-10-25 00:20:45Z ananhaid $
+-- $Id: AtlasMaps.lua 1922 2013-02-28 15:16:04Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -2064,9 +2064,8 @@ Syntax:
 		Module = "Atlas_WrathoftheLichKing";
 		{ BLUE.." A) "..AL["Entrance"] };
 		{ GREN..INDENT..AL["Warmage Kaitlyn"] };
-		{ WHIT.." 1) "..Atlas_GetBossName("Frozen Commander", 617) };
-		{ WHIT..INDENT..Atlas_GetBossName("Commander Kolurg").." ("..BF["Alliance"]..", "..AL["Heroic"]..")" };
-		{ WHIT..INDENT..Atlas_GetBossName("Commander Stoutbeard").." ("..BF["Horde"]..", "..AL["Heroic"]..")" };
+		{ WHIT.." 1) "..Atlas_GetBossName("Commander Kolurg", 833).." ("..BF["Alliance"]..", "..AL["Heroic"]..")" };
+		{ WHIT..INDENT..Atlas_GetBossName("Commander Stoutbeard", 617).." ("..BF["Horde"]..", "..AL["Heroic"]..")" };
 		{ GREN..INDENT..AL["Berinand's Research"] };
 		{ WHIT.." 2) "..Atlas_GetBossName("Grand Magus Telestra", 618) };
 		{ WHIT.." 3) "..Atlas_GetBossName("Anomalus", 619) };
@@ -2104,13 +2103,13 @@ Syntax:
 		Module = "Atlas_WrathoftheLichKing";
 		{ BLUE.." A) "..AL["Entrance"] };
 		{ WHIT.." 1) "..Atlas_GetBossName("Grand Champions") };
-		{ ORNG..INDENT..Atlas_GetBossName("Grand Champions (Alliance)", 633) };
+		{ ORNG..INDENT..Atlas_GetBossName("Grand Champions", 834).." ("..BF["Alliance"]..")" };
 		{ WHIT..INDENT..INDENT..AL["Marshal Jacob Alerius"] };
 		{ WHIT..INDENT..INDENT..AL["Ambrose Boltspark"] };
 		{ WHIT..INDENT..INDENT..AL["Colosos"] };
 		{ WHIT..INDENT..INDENT..AL["Jaelyne Evensong"] };
 		{ WHIT..INDENT..INDENT..AL["Lana Stouthammer"] };
-		{ ORNG..INDENT..Atlas_GetBossName("Grand Champions (Horde)", 634) };
+		{ ORNG..INDENT..Atlas_GetBossName("Grand Champions", 634).." ("..BF["Horde"]..")" };
 		{ WHIT..INDENT..INDENT..Atlas_GetBossName("Mokra the Skullcrusher") };
 		{ WHIT..INDENT..INDENT..Atlas_GetBossName("Eressea Dawnsinger") };
 		{ WHIT..INDENT..INDENT..Atlas_GetBossName("Runok Wildmane") };
@@ -2785,10 +2784,10 @@ Syntax:
 		{ WHIT.." 1) "..Atlas_GetBossName("Imperial Vizier Zor'lok", 745) };
 		{ WHIT.." 2) "..Atlas_GetBossName("Blade Lord Ta'yak", 744) };
 		{ WHIT.." 3) "..Atlas_GetBossName("Garalon", 713) };
-		{ WHIT..INDENT..Atlas_GetBossName("Wind Lord Mel'jarak", 741) };
-		{ WHIT.." 4) "..Atlas_GetBossName("Amber-Shaper Un'sok", 737) };
+		{ WHIT.." 4) "..Atlas_GetBossName("Wind Lord Mel'jarak", 741) };
+		{ WHIT.." 5) "..Atlas_GetBossName("Amber-Shaper Un'sok", 737) };
 		{ WHIT..INDENT..Atlas_GetBossName("Amber Monstrosity") };
-		{ WHIT.." 5) "..Atlas_GetBossName("Grand Empress Shek'zeer", 743) };
+		{ WHIT.." 6) "..Atlas_GetBossName("Grand Empress Shek'zeer", 743) };
 	};
 	MoguShanPalace = {
 		ZoneName = { BZ["Mogu'shan Palace"] };
@@ -2928,12 +2927,78 @@ Syntax:
 		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
 		{ BLUE.." A) "..AL["Entrance"] };
 		{ WHIT.." 1) "..Atlas_GetBossName("Protectors of the Endless", 683) };
-		{ WHIT..INDENT..AL["Elder Asani"] };
-		{ WHIT..INDENT..AL["Elder Regail"] };
-		{ WHIT..INDENT..AL["Protector Kaolan"] };
+		{ WHIT..INDENT..Atlas_GetBossName("Elder Asani") };
+		{ WHIT..INDENT..Atlas_GetBossName("Elder Regail") };
+		{ WHIT..INDENT..Atlas_GetBossName("Protector Kaolan") };
 		{ WHIT.." 2) "..Atlas_GetBossName("Tsulong", 742) };
 		{ WHIT.." 3) "..Atlas_GetBossName("Lei Shi", 729) };
 		{ WHIT.." 4) "..Atlas_GetBossName("Sha of Fear", 709) };
 	};
-
+	ThroneofThunderA = {
+		ZoneName = { BZ["Throne of Thunder"].." [A]" };
+		Location = { BZ["Isle of Thunder"] };
+		DungeonID = "633";
+		DungeonHeroicID = "634";
+		Acronym = AL["ToT"];
+		JournalInstanceID = "362";
+		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
+		{ ORNG..AL["Reputation"]..AL["Colon"].."Shado-Pan Assault" };
+		{ BLUE.." A) "..AL["Entrance"] };
+		{ BLUE.." B) "..AL["Connection"] };
+		{ WHIT.." 1) "..Atlas_GetBossName("Jin'rokh the Breaker", 827) };
+		{ WHIT.." 2) "..Atlas_GetBossName("Horridon", 819) };
+		{ WHIT.." 3) "..Atlas_GetBossName("Council of Elders", 816) };
+		{ WHIT..INDENT..Atlas_GetBossName("Frost King Malakk") };
+		{ WHIT..INDENT..Atlas_GetBossName("High Priestess Mar'li") };
+		{ WHIT..INDENT..Atlas_GetBossName("Kazra'jin") };
+		{ WHIT..INDENT..Atlas_GetBossName("Sul the Sandcrawler") };
+	};
+	ThroneofThunderB = {
+		ZoneName = { BZ["Throne of Thunder"].." [B]" };
+		Location = { BZ["Isle of Thunder"] };
+		DungeonID = "633";
+		DungeonHeroicID = "634";
+		Acronym = AL["ToT"];
+		JournalInstanceID = "362";
+		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
+		{ ORNG..AL["Reputation"]..AL["Colon"].."Shado-Pan Assault" };
+		{ BLUE.." B-C) "..AL["Connection"] };
+		{ WHIT.." 4) "..Atlas_GetBossName("Tortos", 825) };
+		{ WHIT.." 5) "..Atlas_GetBossName("Megaera", 821) };
+		{ WHIT.." 6) "..Atlas_GetBossName("Ji-Kun", 828) };
+	};
+	ThroneofThunderC = {
+		ZoneName = { BZ["Throne of Thunder"].." [C]" };
+		Location = { BZ["Isle of Thunder"] };
+		DungeonID = "633";
+		DungeonHeroicID = "634";
+		Acronym = AL["ToT"];
+		JournalInstanceID = "362";
+		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
+		{ ORNG..AL["Reputation"]..AL["Colon"].."Shado-Pan Assault" };
+		{ BLUE.." C-E) "..AL["Connection"] };
+		{ WHIT.." 7) "..Atlas_GetBossName("Durumu the Forgotten", 818) };
+		{ WHIT.." 8) "..Atlas_GetBossName("Primordius", 820) };
+		{ WHIT.." 9) "..Atlas_GetBossName("Dark Animus", 824) };
+	};
+	ThroneofThunderD = {
+		ZoneName = { BZ["Throne of Thunder"].." [D]" };
+		Location = { BZ["Isle of Thunder"] };
+		DungeonID = "633";
+		DungeonHeroicID = "634";
+		Acronym = AL["ToT"];
+		JournalInstanceID = "362";
+		--Module = "Atlas_MistsofPandaria"; -- comment out because MoP is current
+		{ ORNG..AL["Reputation"]..AL["Colon"].."Shado-Pan Assault" };
+		{ BLUE.." D-F) "..AL["Connection"] };
+		{ WHIT.." 10) "..Atlas_GetBossName("Iron Qon", 817) };
+		{ WHIT..INDENT..Atlas_GetBossName("Dam'ren") };
+		{ WHIT..INDENT..Atlas_GetBossName("Quet'zal") };
+		{ WHIT..INDENT..Atlas_GetBossName("Ro'shak") };
+		{ WHIT.." 11) "..Atlas_GetBossName("Twin Consorts", 829) };
+		{ WHIT..INDENT..Atlas_GetBossName("Lu'lin") };
+		{ WHIT..INDENT..Atlas_GetBossName("Suen") };
+		{ WHIT.." 12) "..Atlas_GetBossName("Lei Shen", 832) };
+		{ WHIT.." 13) "..Atlas_GetBossName("Ra-den", 831).." ("..AL["Heroic"]..")" };
+	};
 };

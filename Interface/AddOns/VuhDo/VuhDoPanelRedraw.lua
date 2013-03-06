@@ -202,9 +202,9 @@ end
 
 --
 local tIncBar;
-function VUHDO_positionHealButton(aButton)
-	aButton:SetWidth(sBarScaling["barWidth"]);
-	aButton:SetHeight(sBarScaling["barHeight"]);
+function VUHDO_positionHealButton(aButton, aBarScaling)
+	aButton:SetWidth((aBarScaling or sBarScaling)["barWidth"]);
+	aButton:SetHeight((aBarScaling or sBarScaling)["barHeight"]);
 
 	-- Player Target
 	VUHDO_initPlayerTargetBorder(aButton, VUHDO_getPlayerTargetFrame(aButton), false);
@@ -655,7 +655,7 @@ local function VUHDO_initFlashBar()
 	tFlashBar = _G[sButton:GetName() .. "BgBarIcBarHlBarFlBar"];
 	tFlashBar:SetStatusBarTexture("Interface\\AddOns\\VuhDo\\Images\\white_square_16_16");
 	tFlashBar:SetStatusBarColor(1, 0.8, 0.8, 1);
-	tFlashBar:Hide();
+	tFlashBar:SetAlpha(0);
 end
 
 

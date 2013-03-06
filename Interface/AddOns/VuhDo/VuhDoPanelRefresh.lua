@@ -34,6 +34,7 @@ local VUHDO_fixFrameLevels;
 local VUHDO_resetNameTextCache;
 local VUHDO_reloadRaidMembers;
 local VUHDO_isPanelVisible;
+local VUHDO_positionHealButton;
 
 local sLastDebuffIcon;
 local sShowPanels;
@@ -67,6 +68,7 @@ function VUHDO_panelRefreshInitBurst()
 	VUHDO_resetNameTextCache = _G["VUHDO_resetNameTextCache"];
 	VUHDO_reloadRaidMembers = _G["VUHDO_reloadRaidMembers"];
 	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
+	VUHDO_positionHealButton = _G["VUHDO_positionHealButton"];
 	if (VUHDO_CONFIG["DEBUFF_TOOLTIP"]) then
 		sLastDebuffIcon = VUHDO_CONFIG["CUSTOM_DEBUFF"]["max_num"] + 39;
 	else
@@ -182,6 +184,9 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 			if (not tButton:IsShown()) then -- Wg. Secure handlers?
 				tButton:Show();
 			end
+
+			-- Bei Profil-Wechseln existiert der Button schon, hat aber die falsche Größe
+			VUHDO_positionHealButton(tButton, tSetup["SCALING"]);
 		end
 
 		tColIdx = tColIdx + 1;
@@ -271,7 +276,6 @@ local VUHDO_refreshUiNoMembers = VUHDO_refreshUiNoMembers;
 --
 function VUHDO_refreshUI()
 	VUHDO_IS_RELOADING = true;
-
 	VUHDO_reloadRaidMembers();
 	VUHDO_refreshUiNoMembers();
 

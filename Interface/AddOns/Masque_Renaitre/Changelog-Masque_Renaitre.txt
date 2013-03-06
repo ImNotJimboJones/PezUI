@@ -1,3 +1,6 @@
+v5.2
+-update TOC, minor tweaks
+
 v5.1
 -update TOC pending changes which I'm still testing
 

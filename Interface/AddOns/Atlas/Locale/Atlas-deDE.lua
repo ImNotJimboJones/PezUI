@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-deDE.lua 1837 2012-10-25 01:19:19Z dynaletik@gmail.com $
+﻿-- $Id: Atlas-deDE.lua 1912 2013-02-27 10:59:00Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -31,7 +31,7 @@ local AL = AceLocale:NewLocale("Atlas", "deDE", false);
 -- Deutsche Lokalisierung (German, deDE)
 -- Dynaletik (ICQ: 176-289-585)
 -- Nihlo (ICQ: 260-869-930)
--- Letztes Update: 25.10.2012
+-- Letztes Update: 27.02.2013
 
 if ( GetLocale() == "deDE" ) then
 -- Define the leading strings to be ignored while sorting
@@ -125,23 +125,26 @@ if AL then
 	AL["ATLAS_DDL_LEVEL_85TO90"] = "Instanzen Stufe 85-90";
 	AL["ATLAS_DDL_LEVEL_90PLUS"] = "Instanzen Stufe 90+";
 	AL["ATLAS_DDL_PARTYSIZE"] = "Gruppengröße";
-	AL["ATLAS_DDL_PARTYSIZE_5_AE"] = "Instanzen für 5 Spieler A-E";
-	AL["ATLAS_DDL_PARTYSIZE_5_FS"] = "Instanzen für 5 Spieler F-S";
-	AL["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Instanzen für 5 Spieler T-Z";
-	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "Instanzen für 10 Spieler A-N";
-	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Instanzen für 10 Spieler O-Z";
-	AL["ATLAS_DDL_PARTYSIZE_20TO40"] = "Instanzen für 20-40 Spieler";
+	AL["ATLAS_DDL_PARTYSIZE_5_AE"] = "Instanzen für 5 Spieler 1/3";
+	AL["ATLAS_DDL_PARTYSIZE_5_FS"] = "Instanzen für 5 Spieler 2/3";
+	AL["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Instanzen für 5 Spieler 3/3";
+	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "Instanzen für 10 Spieler 1/2";
+	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Instanzen für 10 Spieler 2/2";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "Instanzen für 20-40 Spieler 1/2";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "Instanzen für 20-40 Spieler 2/2";
 	AL["ATLAS_DDL_EXPANSION"] = "Erweiterung";
-	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "Instanzen der alten Welt A-O";
-	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Instanzen der alten Welt P-Z";
+	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "Instanzen der alten Welt 1/2";
+	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Instanzen der alten Welt 2/2";
 	AL["ATLAS_DDL_EXPANSION_BC"] = "Burning Crusade Instanzen";
 	AL["ATLAS_DDL_EXPANSION_WOTLK"] = "Wrath of the Lich King Instanzen";
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "Cataclysm Instanzen";
 	AL["ATLAS_DDL_EXPANSION_MOP"] = "Mists of Pandaria Instanzen";
 	AL["ATLAS_DDL_TYPE"] = "Typ";
-	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "Instanzen A-C";
-	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "Instanzen D-R";
-	AL["ATLAS_DDL_TYPE_INSTANCE_SZ"] = "Instanzen S-Z";
+	AL["ATLAS_DDL_TYPE_INSTANCE_AB"] = "Instanzen 1/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Instanzen 2/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Instanzen 3/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_NS"] = "Instanzen 4/5";
+	AL["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "Instanzen 5/5";
 	AL["ATLAS_DDL_TYPE_ENTRANCE"] = "Eingänge";
 
 	AL["ATLAS_INSTANCE_BUTTON"] = "Instanz";
@@ -374,6 +377,8 @@ if AL then
 	AL["SB"] = "BS, Brauerei"; --Stormstout Brewery
 	AL["TJS"] = "TdJ, Jade"; --Temple of the Jade Serpent
 	AL["TES"] = "TdEF, Terrasse"; --Terrace of Endless Spring
+	AL["ToT"] = "TdD"; --Throne of Thunder
+
 --************************************************
 -- Instance Entrance Maps
 --************************************************
@@ -1205,8 +1210,7 @@ if AL then
 	AL["Priestess Summerpetal"] = "Priesterin Sommerblatt";
 
 	--Terrace of Endless Spring
-	AL["Elder Asani"] = "Ältester Asani";
-	AL["Elder Regail"] = "Ältester Regail";
-	AL["Protector Kaolan"] = "Beschützer Kaolan"
+
+	--Throne of Thunder
 
 end

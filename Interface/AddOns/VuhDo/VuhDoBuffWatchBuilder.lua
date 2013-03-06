@@ -212,10 +212,17 @@ end
 
 
 
+--
+local sIsForceHide = false;
+function VUHDO_setBuffWatchForceHide(anIsForce)
+	sIsForceHide = anIsForce;
+end
+
+
 
 --
 function VUHDO_reloadBuffPanel()
-	if (InCombatLockdown()) then
+	if (InCombatLockdown() or sIsForceHide) then
 		return;
 	end
 

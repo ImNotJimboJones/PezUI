@@ -1,10 +1,10 @@
--- $Id: AtlasMapsAssociation.lua 1867 2012-11-01 00:13:25Z dynaletik@gmail.com $
+-- $Id: AtlasMapsAssociation.lua 1922 2013-02-28 15:16:04Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -56,6 +56,7 @@ Atlas_AssocDefaults = {
 	[BZ["Siege of Niuzao Temple"]] =	"SiegeofNiuzaoTempleA";
 	[BZ["Stratholme"]] =			"StratholmeGauntlet";
 	[BZ["Throne of Tides"]] = 		"ThroneOfTheTides";
+	[BZ["Throne of Thunder"]] = 		"ThroneofThunderA";
 	[BZ["The Wailing Caverns"]] = 		"WailingCavernsEnt";
 	[BZ["Ulduar"]] =			"UlduarA";
 };
@@ -270,6 +271,35 @@ Atlas_SubZoneData = {
 			BZ["The Slaughter House"],
 		},
 	},
+	-- Throne of Thunder
+	[BZ["Throne of Thunder"]] = {
+		--Throne of Thunder A
+		["ThroneofThunderA"] = {
+			BZ["Overgrown Statuary"],
+			BZ["Royal Amphitheater"],
+			BZ["Lightning Promenade"],
+		},
+		--Throne of Thunder B
+		["ThroneofThunderB"] = {
+			BZ["Lair of Tortos"],
+			BZ["Forgotten Depths"],
+			BZ["Roost of Ji-Kun"],
+		},
+		--Throne of Thunder C
+		["ThroneofThunderC"] = {
+			BZ["Watcher's Sanctum"],
+			BZ["Saurok Creation Pit"],
+			BZ["Halls of Flesh-Shaping"],
+		},
+		--Throne of Thunder D
+		["ThroneofThunderD"] = {
+			BZ["Hall of Kings"],
+			BZ["Grand Courtyard"],
+			BZ["Celestial Enclave"],
+			BZ["Pinnacle of Storms"],
+			BZ["Hidden Cell"],
+		},
+	},
 	-- Ulduar
 	[BZ["Ulduar"]] = {
 		--Ulduar, The Siege
@@ -385,6 +415,7 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Uldum"]] = 			"ThroneOfTheFourWinds";
 	[BZ["Abyssal Depths"]] = 		"ThroneOfTheTides";
 	[BZ["Abyssal Breach"]] = 		"ThroneOfTheTides";
+	[BZ["Isle of Thunder"]] = 		"ThroneofThunderA";
 	[BZ["Badlands"]] = 			"UldamanEnt";
 	[BZ["The Storm Peaks"]] = 		"UlduarEnt";
 	[BZ["Dalaran"]] = 			"VioletHold";
@@ -510,6 +541,10 @@ Atlas_SubZoneAssoc = {
 	["SiegeofNiuzaoTempleB"] =		BZ["Siege of Niuzao Temple"];
 	["StratholmeCrusader"] =		BZ["Stratholme"];
 	["StratholmeGauntlet"] =		BZ["Stratholme"];
+	["ThroneofThunderA"] =			BZ["Throne of Thunder"];
+	["ThroneofThunderB"] =			BZ["Throne of Thunder"];
+	["ThroneofThunderC"] =			BZ["Throne of Thunder"];
+	["ThroneofThunderD"] =			BZ["Throne of Thunder"];
 	["UlduarA"] =				BZ["Ulduar"];
 	["UlduarB"] =				BZ["Ulduar"];
 	["UlduarC"] =				BZ["Ulduar"];

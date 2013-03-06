@@ -1,4 +1,4 @@
---[[ Renaitre skins for 5.0.4 ]]
+--[[ Renaitre skin suite for 5.2 ]]
 
 local MSQ = LibStub("Masque", true)
 if not MSQ then return end
@@ -6,9 +6,9 @@ if not MSQ then return end
 -- Renaitre: Beveled
 MSQ:AddSkin("Renaitre: Beveled", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,
@@ -148,9 +148,9 @@ MSQ:AddSkin("Renaitre: Beveled Light", {
 -- Renaitre: Circle
 MSQ:AddSkin("Renaitre: Circle", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Circle",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 44,
 		Height = 44,
@@ -290,9 +290,9 @@ MSQ:AddSkin("Renaitre: Circle Light", {
 -- Renaitre: Circle Pro
 MSQ:AddSkin("Renaitre: Circle Pro", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Circle",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 44,
 		Height = 44,
@@ -432,9 +432,9 @@ MSQ:AddSkin("Renaitre: Circle Pro Light", {
 -- Renaitre: Fade
 MSQ:AddSkin("Renaitre: Fade", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,
@@ -540,9 +540,9 @@ MSQ:AddSkin("Renaitre: Fade", {
 -- Renaitre: Fade Circle
 MSQ:AddSkin("Renaitre: Fade Circle", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Circle",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 44,
 		Height = 44,
@@ -651,9 +651,9 @@ MSQ:AddSkin("Renaitre: Fade Circle", {
 -- Renaitre: Rounded
 MSQ:AddSkin("Renaitre: Rounded", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,
@@ -792,9 +792,9 @@ MSQ:AddSkin("Renaitre: Rounded Light", {
 -- Renaitre: Square
 MSQ:AddSkin("Renaitre: Square", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,
@@ -933,9 +933,9 @@ MSQ:AddSkin("Renaitre: Square Light", {
 -- Renaitre: Square Thin
 MSQ:AddSkin("Renaitre: Square Thin", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,
@@ -1075,9 +1075,9 @@ MSQ:AddSkin("Renaitre: Square Thin Light", {
 -- Renaitre: Thinnerest
 MSQ:AddSkin("Renaitre: Thinnerest", {
 	Author = "Renaitre",
-	Version = "5.0.4",
+	Version = "5.2",
 	Shape = "Square",
-	Masque_Version = 40300,
+	Masque_Version = 50200,
 	Backdrop = {
 		Width = 42,
 		Height = 42,

@@ -193,16 +193,16 @@ end
 
 if (locale == "zhCN") then
 	L.sunsongRanchName = "日歌农场";
-	L.joguPredictsGreenCabbage = "";
-	L.joguPredictsScallion = "";
-	L.joguPredictsRedBlossomLeek = "";
-	L.joguPredictsWhiteTurnip = "";
-	L.joguPredictsWitchberry = "";
-	L.joguPredictsJuicycrunchCarrot = "";
-	L.joguPredictsMoguPumpkin = "";
-	L.joguPredictsPinkTurnip = "";
-	L.joguPredictsJadeSquash = "";
-	L.joguPredictsStripedMelon = "";
+--	L.joguPredictsGreenCabbage = "";
+--	L.joguPredictsScallion = "";
+--	L.joguPredictsRedBlossomLeek = "";
+--	L.joguPredictsWhiteTurnip = "";
+--	L.joguPredictsWitchberry = "";
+--	L.joguPredictsJuicycrunchCarrot = "";
+--	L.joguPredictsMoguPumpkin = "";
+--	L.joguPredictsPinkTurnip = "";
+--	L.joguPredictsJadeSquash = "";
+--	L.joguPredictsStripedMelon = "";
 end
 
 if (locale == "zhTW") then

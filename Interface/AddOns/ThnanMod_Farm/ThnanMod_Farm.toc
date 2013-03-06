@@ -1,8 +1,8 @@
-## Interface: 50100
+## Interface: 50200
 ## Title: Thnan's Mod - Farm
 ## Notes: Adds a farming window to the UI.
 ## Author: Thnan (Jaedenar US-A)
-## Version: 1.4.0
+## Version: 1.4.1
 
 ## Dependencies: ThnanMod
 

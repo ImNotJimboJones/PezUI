@@ -261,8 +261,8 @@ local function createFarmButton(itemID, itemID2, buttonType)
 	
 	if buttonType == "seed" then
 		button.itemID = itemID
-		if itemID2 and select(4, GetBuildInfo()) >= 50200 then	-- temporary check to prevent seed bags being
-			button:RegisterEvent("MODIFIER_STATE_CHANGED");		-- referenced before patch 5.2
+		if itemID2 then
+			button:RegisterEvent("MODIFIER_STATE_CHANGED");
 			button.itemID2 = itemID2;
 		end
 		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
@@ -585,6 +585,9 @@ local growCheckIDs = {
 	-- Portal Shard
 	67446, -- Unstable
 	67486, -- Stable
+	-- Soil
+	58563, -- Tilled
+	58562, -- Untilled
 };
 local extraGrowCheckButtons = {};
 local function getGrowCheckButton(index)
@@ -787,7 +790,10 @@ forecastChangeLabel:SetPoint("TOP", forecastLabel, "BOTTOM", 0, -2);
 
 local function forecastButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
-	if self.itemID then
+	if self.itemID2 and IsShiftKeyDown() then
+		GameTooltip:SetItemByID(self.itemID2);
+		GameTooltip:AddLine(self.itemTooltipLine, 0, 1, 1, true);
+	elseif self.itemID then
 		GameTooltip:SetItemByID(self.itemID);
 		GameTooltip:AddLine(self.itemTooltipLine, 0, 1, 1, true);
 	else
@@ -852,9 +858,6 @@ rightClickButtons[#rightClickButtons + 1] = forecastSeedButton;
 forecastSeedButton.setAttributeValue = forecastSeedButton_setMacroText;
 forecastSeedButton.setRightClickSeed = seedButton_setRightClickSeed;
 forecastSeedButton.updateAppearance = forecastSeedButton_updateAppearance;
-if select(4, GetBuildInfo()) >= 50200 then						-- temporary check to prevent seed bags being
-	forecastSeedButton:RegisterEvent("MODIFIER_STATE_CHANGED");	-- referenced before patch 5.2
-end
 
 local forecastCropButton = CreateFrame("Button", "FRMForecastCropButton", farmWindow, "ActionbuttonTemplate");
 forecastCropButton:SetPoint("TOPLEFT", col4 + halfCol, row5);
@@ -933,11 +936,17 @@ local function farmWindow_OnUpdate(self)
 	if previousTodaySeed ~= data.todayForecast then
 		previousTodaySeed = data.todayForecast;
 		forecastSeedButton.itemID = data.todayForecast;
-		if select(4, GetBuildInfo()) >= 50200 then								-- temporary check to prevent seed bags being
-			forecastSeedButton.itemID2 = bagIDFromSeedID[data.todayForecast];	-- referenced before patch 5.2
-			forecastSeedButton.itemTexture2 = nil;
+		if forecastSeedButton.itemID then
+			forecastSeedButton.itemID2 = bagIDFromSeedID[data.todayForecast];
+			forecastSeedButton:RegisterEvent("BAG_UPDATE");
+			forecastSeedButton:RegisterEvent("MODIFIER_STATE_CHANGED");
+		else
+			forecastSeedButton.itemID2 = nil;
+			forecastSeedButton:UnregisterEvent("BAG_UPDATE");
+			forecastSeedButton:UnregisterEvent("MODIFIER_STATE_CHANGED");
 		end
 		forecastSeedButton.itemTexture = nil;
+		forecastSeedButton.itemTexture2 = nil;
 		forecastSeedButton:setAttributeValue();
 		if forecastSeedButton.itemID and forecastSeedButton.itemID == rightClickSeed then
 			forecastSeedButton.checkedState = true;

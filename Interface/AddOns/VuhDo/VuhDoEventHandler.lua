@@ -399,6 +399,8 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 				VUHDO_updateManaBars(anArg1, 1);
 			end
 		end
+	elseif("UNIT_ABSORB_AMOUNT_CHANGED" == anEvent) then
+			VUHDO_updateBouquetsForEvent(anArg1, 36); -- VUHDO_UPDATE_SHIELD
 	elseif ("UNIT_SPELLCAST_SUCCEEDED" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			VUHDO_spellcastSucceeded(anArg1, anArg2);
@@ -1435,7 +1437,8 @@ local VUHDO_ALL_EVENTS = {
 	"UNIT_FACTION",
 	"INCOMING_RESURRECT_CHANGED",
 	"PET_BATTLE_CLOSE", "PET_BATTLE_OPENING_START",
-	"PLAYER_REGEN_ENABLED"
+	"PLAYER_REGEN_ENABLED",
+	--"UNIT_ABSORB_AMOUNT_CHANGED"
 };
 
 

@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation.lua 1834 2012-10-23 14:55:20Z arithmandar $
+-- $Id: Atlas_Transportation.lua 1943 2013-03-05 14:37:11Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -864,6 +864,7 @@ local myData = {
 		ZoneName = { BZ["Pandaria"].." ("..BF["Alliance"]..")" };
 		{ _RED..AL["Portals"] };
 		{ PURP.." A) "..BZ["Paw'Don Village"]..", "..BZ["The Jade Forest"] };
+		{ PURP.." B) "..BZ["The Seabolt"].." / "..BZ["Za'Tual"]..", "..BZ["Isle of Thunder"] };
 		{ PURP.." A') "..BZ["Stormwind City"]..", "..BZ["Elwynn Forest"]..", "..BZ["Eastern Kingdoms"] };
 		{ PURP.." B') "..BZ["Ironforge"]..", "..BZ["Dun Morogh"]..", "..BZ["Eastern Kingdoms"] };
 		{ PURP.." C') "..BZ["Darnassus"]..", "..BZ["Teldrassil"]..", "..BZ["Kalimdor"] };
@@ -909,36 +910,40 @@ local myData = {
 		{ WHIT.."16) "..BZ["Marista"] };
 		{ WHIT.."17) "..BZ["The Incursion"] };
 		{ WHIT.."18) "..BZ["Zhu's Watch"] };
+		{ WHIT.."19) "..BZ["Lion's Landing"] };
 		{ "" };
 		{ BLUE..BZ["The Veiled Stair"] };
-		{ WHIT.."19) "..BZ["Tavern in the Mists"] };
+		{ WHIT.."20) "..BZ["Tavern in the Mists"] };
 		{ "" };
 		{ BLUE..BZ["Kun-Lai Summit"] };
-		{ WHIT.."20) "..BZ["Binan Village"] };
-		{ WHIT.."21) "..BZ["Westwind Rest"] };
-		{ WHIT.."22) "..BZ["Shado-Pan Fallback"] };
-		{ WHIT.."23) "..BZ["Kota Basecamp"] };
-		{ WHIT.."24) "..BZ["Winter's Blossom"] };
-		{ WHIT.."25) "..BZ["One Keg"] };
-		{ WHIT.."26) "..BZ["Temple of the White Tiger"] };
-		{ WHIT.."27) "..BZ["Zouchin Village"] };
+		{ WHIT.."21) "..BZ["Binan Village"] };
+		{ WHIT.."22) "..BZ["Westwind Rest"] };
+		{ WHIT.."23) "..BZ["Shado-Pan Fallback"] };
+		{ WHIT.."24) "..BZ["Kota Basecamp"] };
+		{ WHIT.."25) "..BZ["Winter's Blossom"] };
+		{ WHIT.."26) "..BZ["One Keg"] };
+		{ WHIT.."27) "..BZ["Temple of the White Tiger"] };
+		{ WHIT.."28) "..BZ["Zouchin Village"] };
 		{ "" };
 		{ BLUE..BZ["Townlong Steppes"] };
-		{ WHIT.."28) "..BZ["Longying Outpost"] };
-		{ WHIT.."29) "..BZ["Gao-Ran Battlefront"] };
-		{ WHIT.."30) "..BZ["Rensai's Watchpost"] };
-		{ WHIT.."31) "..BZ["Shado-Pan Garrison"] };
+		{ WHIT.."29) "..BZ["Longying Outpost"] };
+		{ WHIT.."30) "..BZ["Gao-Ran Battlefront"] };
+		{ WHIT.."31) "..BZ["Rensai's Watchpost"] };
+		{ WHIT.."32) "..BZ["Shado-Pan Garrison"] };
 		{ "" };
 		{ BLUE..BZ["Dread Wastes"] };
-		{ WHIT.."32) "..BZ["The Sunset Brewgarden"] };
-		{ WHIT.."33) "..BZ["Klaxxi'vess"] };
-		{ WHIT.."34) "..BZ["The Lion's Redoubt"] };
-		{ WHIT.."35) "..BZ["The Briny Muck"] };
-		{ WHIT.."36) "..BZ["Soggy's Gamble"] };
+		{ WHIT.."33) "..BZ["The Sunset Brewgarden"] };
+		{ WHIT.."34) "..BZ["Klaxxi'vess"] };
+		{ WHIT.."35) "..BZ["The Lion's Redoubt"] };
+		{ WHIT.."36) "..BZ["The Briny Muck"] };
+		{ WHIT.."37) "..BZ["Soggy's Gamble"] };
 		{ "" };
 		{ BLUE..BZ["Vale of Eternal Blossoms"] };
-		{ WHIT.."37) "..BZ["Serpent's Spine"] };
-		{ WHIT.."38) "..BZ["Shrine of Seven Stars"] };
+		{ WHIT.."38) "..BZ["Serpent's Spine"] };
+		{ WHIT.."39) "..BZ["Shrine of Seven Stars"] };
+		{ "" };
+		{ BLUE..BZ["Isle of Giants"] };
+		{ WHIT.."40) "..BZ["Beeble's Wreck"] };
 		{ "" };
 		{ _RED..AL["Legend"] };
 		{ PURP.."-- : "..AL["Portal / Waygate Path to the destination"] };
@@ -947,6 +952,7 @@ local myData = {
 		ZoneName = { BZ["Pandaria"].." ("..BF["Horde"]..")" };
 		{ _RED..AL["Portals"] };
 		{ PURP.." A) "..BZ["Honeydew Village"]..", "..BZ["The Jade Forest"] };
+		{ PURP.." B) "..BZ["The Crimson Treader"].." / "..BZ["Court of Bones"]..", "..BZ["Isle of Thunder"] };
 		{ PURP.." A') "..BZ["Orgrimmar"]..", "..BZ["Durotar"]..", "..BZ["Kalimdor"] };
 		{ PURP.." B') "..BZ["Thunder Bluff"]..", "..BZ["Mulgore"]..", "..BZ["Kalimdor"] };
 		{ PURP.." C') "..BZ["Shattrath City"]..", "..BZ["Terokkar Forest"]..", "..BZ["Outland"] };
@@ -992,36 +998,40 @@ local myData = {
 		{ WHIT.."16) "..BZ["Marista"] };
 		{ WHIT.."17) "..BZ["Thunder Cleft"] };
 		{ WHIT.."18) "..BZ["Zhu's Watch"] };
+		{ WHIT.."19) "..BZ["Domination Point"] };
 		{ "" };
 		{ BLUE..BZ["The Veiled Stair"] };
-		{ WHIT.."19) "..BZ["Tavern in the Mists"] };
+		{ WHIT.."20) "..BZ["Tavern in the Mists"] };
 		{ "" };
 		{ BLUE..BZ["Kun-Lai Summit"] };
-		{ WHIT.."20) "..BZ["Binan Village"] };
-		{ WHIT.."21) "..BZ["Eastwind Rest"] };
-		{ WHIT.."22) "..BZ["Shado-Pan Fallback"] };
-		{ WHIT.."23) "..BZ["Kota Basecamp"] };
-		{ WHIT.."24) "..BZ["Winter's Blossom"] };
-		{ WHIT.."25) "..BZ["One Keg"] };
-		{ WHIT.."26) "..BZ["Temple of the White Tiger"] };
-		{ WHIT.."27) "..BZ["Zouchin Village"] };
+		{ WHIT.."21) "..BZ["Binan Village"] };
+		{ WHIT.."22) "..BZ["Eastwind Rest"] };
+		{ WHIT.."23) "..BZ["Shado-Pan Fallback"] };
+		{ WHIT.."24) "..BZ["Kota Basecamp"] };
+		{ WHIT.."25) "..BZ["Winter's Blossom"] };
+		{ WHIT.."26) "..BZ["One Keg"] };
+		{ WHIT.."27) "..BZ["Temple of the White Tiger"] };
+		{ WHIT.."28) "..BZ["Zouchin Village"] };
+		{ WHIT.."29) "..BZ["Serpent's Spine"] };
 		{ "" };
 		{ BLUE..BZ["Townlong Steppes"] };
-		{ WHIT.."28) "..BZ["Hellscream's Fist"] };
-		{ WHIT.."29) "..BZ["Longying Outpost"] };
-		{ WHIT.."30) "..BZ["Gao-Ran Battlefront"] };
-		{ WHIT.."31) "..BZ["Rensai's Watchpost"] };
-		{ WHIT.."32) "..BZ["Shado-Pan Garrison"] };
+		{ WHIT.."30) "..BZ["Longying Outpost"] };
+		{ WHIT.."31) "..BZ["Gao-Ran Battlefront"] };
+		{ WHIT.."32) "..BZ["Rensai's Watchpost"] };
+		{ WHIT.."33) "..BZ["Shado-Pan Garrison"] };
 		{ "" };
 		{ BLUE..BZ["Dread Wastes"] };
-		{ WHIT.."33) "..BZ["The Sunset Brewgarden"] };
-		{ WHIT.."34) "..BZ["Klaxxi'vess"] };
-		{ WHIT.."35) "..BZ["The Briny Muck"] };
-		{ WHIT.."36) "..BZ["Soggy's Gamble"] };
+		{ WHIT.."34) "..BZ["The Sunset Brewgarden"] };
+		{ WHIT.."35) "..BZ["Klaxxi'vess"] };
+		{ WHIT.."36) "..BZ["The Briny Muck"] };
+		{ WHIT.."37) "..BZ["Soggy's Gamble"] };
 		{ "" };
 		{ BLUE..BZ["Vale of Eternal Blossoms"] };
-		{ WHIT.."37) "..BZ["Serpent's Spine"] };    
-		{ WHIT.."38) "..BZ["Shrine of Two Moons"] };
+		{ WHIT.."38) "..BZ["Serpent's Spine"] };    
+		{ WHIT.."39) "..BZ["Shrine of Two Moons"] };
+		{ "" };
+		{ BLUE..BZ["Isle of Giants"] };
+		{ WHIT.."40) "..BZ["Bozzle's Wreck"] };
 		{ "" };
 		{ _RED..AL["Legend"] };
 		{ PURP.."-- : "..AL["Portal / Waygate Path to the destination"] };

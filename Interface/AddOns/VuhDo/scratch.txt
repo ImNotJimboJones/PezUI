@@ -1,13 +1,13 @@
 - Bouquets, Text-Indikatoren
 
 - Option je Bouquet Stacks aufaddieren
-- Keine Balkenfarbe custom debuffs per spellID
+- Bug: Keine Balkenfarbe custom debuffs per spellID
 - Sehbehindertenmodus Optionen
+- Bug: Optionen=>Filter=>Target sofort anzeigen
 
-- Shields anderer Spieler
-- Shields als Bouquet-Item (Balken)
-- Mehr Default-Custom Debuffs
 - BuffWatch in PetBattles verstecken
+- Trinkets pro zauber zünden
+- Default bouquet pvp: Flaggenträger usw.
 
 
 

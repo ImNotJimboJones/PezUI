@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-esMX.lua 1875 2012-11-07 06:19:41Z maqjav@gmail.com $
+﻿-- $Id: Atlas-esMX.lua 1912 2013-02-27 10:59:00Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -30,7 +30,7 @@ local AL = AceLocale:NewLocale("Atlas", "esMX", false);
 -- Atlas Spanish (México) Localization
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@gmail.com
--- Última Actualización (last update): 07/11/2012
+-- Última Actualización (last update): 27/01/2013
 
 -- Atlas Spanish (Mexico) Localization
 if ( GetLocale() == "esMX" ) then
@@ -125,7 +125,8 @@ if AL then
 	AL["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Mazmorras para 5 jugadores T-Z";
 	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "Mazmorras para 10 jugadores A-N";
 	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Mazmorras para 10 jugadores O-Z";
-	AL["ATLAS_DDL_PARTYSIZE_20TO40"] = "Mazmorras para 20-40 jugadores";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "Mazmorras para 20-40 jugadores A-H";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "Mazmorras para 20-40 jugadores I-Z";
 	AL["ATLAS_DDL_EXPANSION"] = "Expansión";
 	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "Antiguas Mazmorras A-O";
 	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Antiguas Mazmorras P-Z";
@@ -134,9 +135,11 @@ if AL then
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "Mazmorras de Cataclysm";
 	AL["ATLAS_DDL_EXPANSION_MOP"] = "Mazmorras de Mists of Pandaria";
 	AL["ATLAS_DDL_TYPE"] = "Tipo";
-	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "Mazmorras A-C";
-	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "Mazmorras D-R";
-	AL["ATLAS_DDL_TYPE_INSTANCE_SZ"] = "Mazmorras S-Z";
+	AL["ATLAS_DDL_TYPE_INSTANCE_AB"] = "Mazmorras A-B";
+	AL["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Mazmorras C-F";
+	AL["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Mazmorras G-M";
+	AL["ATLAS_DDL_TYPE_INSTANCE_NS"] = "Mazmorras N-S";
+	AL["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "Mazmorras T-Z";
 	AL["ATLAS_DDL_TYPE_ENTRANCE"] = "Entradas";
 
 	AL["ATLAS_INSTANCE_BUTTON"] = "Mazmorra";
@@ -368,6 +371,7 @@ if AL then
 	AL["SB"] = "SB"; --Stormstout Brewery
 	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
 	AL["TES"] = "TES"; --Terrace of Endless Spring
+	AL["ToT"] = "ToT"; --Throne of Thunder
 --************************************************
 -- Instance Entrance Maps
 --************************************************
@@ -1202,8 +1206,6 @@ if AL then
 	AL["Priestess Summerpetal"] = "Sacerdotisa Pétalo Estival";
 
 	--Terrace of Endless Spring
-	AL["Elder Asani"] = "Elder Asani";--FALTA
-	AL["Elder Regail"] = "Elder Regail";--FALTA
-	AL["Protector Kaolan"] = "Protector Kaolan";--FALTA
 
+	--Throne of Thunder
 end

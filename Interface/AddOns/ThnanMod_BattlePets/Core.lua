@@ -21,31 +21,19 @@ config.showAdditionalPets = true;
 local currentDataVersion = 3;
 
 --[[ version nil
-global.enabled
+(C) global.enabled
 ]]--
---[[ version 1
-global.enabled
-global.showLevelInWorld
-global.showLevelInBattle
-global.showLevelInMinimap
-global.colorReleaseDialog
+--[[ version 1 changes
+(C) global.showLevelInWorld
+(C) global.showLevelInBattle
+(C) global.showLevelInMinimap
+(C) global.colorReleaseDialog
 ]]--
---[[ version 2
-global.enabled
-global.showLevelInWorld
-global.showLevelInBattle
-global.showLevelInMinimap
-global.colorReleaseDialog
-global.showAdditionalPets
+--[[ version 2 changes
+(C) global.showAdditionalPets
 ]]--
---[[ version 3
-global.enabled
-global.showLevelInWorld
-global.showLevelInBattle
-global.showLevelInMinimap
-global.showLevelInItems
-global.colorReleaseDialog
-global.showAdditionalPets
+--[[ version 3 changes
+(C) global.showLevelInItems
 ]]--
 
 function WPT:loadSavedVars(global, realm, character)
@@ -63,7 +51,7 @@ function WPT:loadSavedVars(global, realm, character)
 		if global.dataVersion >= 2 then
 			config.showAdditionalPets = global.showAdditionalPets;
 		end
-		if global.dataVersion == 3 then
+		if global.dataVersion >= 3 then
 			config.showLevelInItems = global.showLevelInItems;
 		end
 	end

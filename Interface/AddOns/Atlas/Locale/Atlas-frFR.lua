@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas-frFR.lua 1839 2012-10-25 16:53:25Z mr.kevin.fischer@gmail.com $
+﻿-- $Id: Atlas-frFR.lua 1912 2013-02-27 10:59:00Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -131,7 +131,8 @@ if AL then
 	AL["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Instances pour 5 Joueurs T-Z";
 	AL["ATLAS_DDL_PARTYSIZE_10_AN"] = "Instances pour 10 Joueurs A-N";
 	AL["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Instances pour 10 Joueurs O-Z";
-	AL["ATLAS_DDL_PARTYSIZE_20TO40"] = "Instances pour 20-40 Joueurs";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "Instances pour 20-40 Joueurs A-H";
+	AL["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "Instances pour 20-40 Joueurs I-Z";
 	AL["ATLAS_DDL_EXPANSION"] = "Extension";
 	AL["ATLAS_DDL_EXPANSION_OLD_AO"] = "Instances du Vieux Monde (A-O)";
 	AL["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Instances du Vieux Monde (P-Z)";
@@ -140,9 +141,11 @@ if AL then
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "Instances Cataclysm";
 	AL["ATLAS_DDL_EXPANSION_MOP"] = "Instances Mists of Pandaria";
 	AL["ATLAS_DDL_TYPE"] = "Type";
-	AL["ATLAS_DDL_TYPE_INSTANCE_AC"] = "Instances A-C";
-	AL["ATLAS_DDL_TYPE_INSTANCE_DR"] = "Instances D-R";
-	AL["ATLAS_DDL_TYPE_INSTANCE_SZ"] = "Instances S-Z";
+	AL["ATLAS_DDL_TYPE_INSTANCE_AB"] = "Instances A-B";
+	AL["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Instances C-F";
+	AL["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Instances G-M";
+	AL["ATLAS_DDL_TYPE_INSTANCE_NS"] = "Instances N-S";
+	AL["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "Instances T-Z";
 	AL["ATLAS_DDL_TYPE_ENTRANCE"] = "Entrées";
 
 	AL["ATLAS_INSTANCE_BUTTON"] = "Instance";
@@ -1210,8 +1213,5 @@ AL["Master Windstrong"] = "Maître Windstrong"; -- Translation needed
 	AL["Priestess Summerpetal"] = "Prêtresse Pétale de l’Été"; -- Translation needed
 
 	--Terrace of Endless Spring
-	AL["Elder Asani"] = "Ancien Asani"; -- Translation needed
-	AL["Elder Regail"] = "Ancien Regail"; -- Translation needed
-	AL["Protector Kaolan"] = "Protecteur Kaolan"; -- Translation needed
 
 end

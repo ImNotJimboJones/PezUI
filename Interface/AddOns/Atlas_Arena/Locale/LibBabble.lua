@@ -1,12 +1,11 @@
 ﻿--[[
 
-	Atlas, a World of Warcraft instance map browser
-	Copyright 2005-2010 Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 Lothaer <lothayer@gmail.com >, Atlas Team
+	Atlas Arena, a World of Warcraft instance map browser
+	Copyright 2010 - 2013 Arith Hsu
 
-	This file is part of Atlas.
+	This file is a plugin of Atlas.
 
-	Atlas is free software; you can redistribute it and/or modify
+	Atlas Arena is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation; either version 2 of the License, or
 	(at your option) any later version.

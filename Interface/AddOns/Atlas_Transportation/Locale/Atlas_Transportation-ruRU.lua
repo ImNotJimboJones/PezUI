@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-ruRU.lua 1838 2012-10-25 09:28:46Z StingerSoft@gmail.com $
+-- $Id: Atlas_Transportation-ruRU.lua 1891 2013-02-17 15:41:01Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -28,7 +28,7 @@
 -- Atlas Localization Data (Russian)
 -- Translated by Nitrogen (Exorsus Guild)
 -- Свежеватель Душ
--- Last Update : $Date: 2012-10-25 17:28:46 +0800 (週四, 25 十月 2012) $
+-- Last Update : $Date: 2013-02-17 23:41:01 +0800 (Sun, 17 Feb 2013) $
 --]]
 
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");

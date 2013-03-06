@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-zhCN.lua 1830 2012-10-15 04:00:34Z arithmandar $
+-- $Id: Atlas_Transportation-zhCN.lua 1931 2013-03-04 05:43:08Z ananhaid $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2012 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 	This file is part of Atlas.
 
@@ -55,9 +55,10 @@ if AL then
 	AL["Wind Rider"] = "驭风者";
 	AL["Won't be available once the Battle for Andorhal chain is finished."] = "“安多哈尔之战”任务链完成之前不可使用。"; -- After quest "Alas, Andorhal" (27206) is completed.
 	AL["Zeppelin Towers"] = "飞艇塔";
---	AL["Climbing Rope"] = "Climbing Rope";
---	AL["Rappelling Rope"] = "Rappelling Rope";
---	AL["Abandoned Kite"] = "Abandoned Kite";
---	AL["From sea level to ground level"] = "From sea level to ground level";
---	AL["Whispercloud's Balloon"] = "Whispercloud's Balloon";
+	AL["Climbing Rope"] = "登山绳索";
+	AL["Rappelling Rope"] = "垂降绳索";
+	AL["Abandoned Kite"] = "被遗弃的风筝";
+	AL["From sea level to ground level"] = "从海平面到陆地";
+	AL["Whispercloud's Balloon"] = "语云的热气球";
+	AL["Shado-Pan Rope"] = "影踪派绳索"; -- 66390
 end
