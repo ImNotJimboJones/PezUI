@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.4
+Version 2.1.0
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -45,7 +45,7 @@ local _, _, _, tocversion = GetBuildInfo();
 T._tocversion = tocversion;
 
 -- === Add-on basics and variable declarations {{{
-T.Healers_Have_To_Die = LibStub("AceAddon-3.0"):NewAddon("Healers Have To Die", "AceConsole-3.0", "AceEvent-3.0", "LibShefkiTimer-1.0");
+T.Healers_Have_To_Die = LibStub("AceAddon-3.0"):NewAddon("Healers Have To Die", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0");
 local HHTD = T.Healers_Have_To_Die;
 
 --[===[@debug@
@@ -175,7 +175,7 @@ local function REGISTER_HEALERS_ONLY_SPELLS_ONCE ()
         [081700] = "PRIEST", -- Archangel
         [002060] = "PRIEST", -- Greater Heal
         [002050] = "PRIEST", -- Heal
-        [014194] = "PRIEST", -- Holy Fire
+        [014914] = "PRIEST", -- Holy Fire
         [089485] = "PRIEST", -- Inner Focus
         [033206] = "PRIEST", -- Pain Suppression
         [000596] = "PRIEST", -- Prayer of Healing
@@ -253,7 +253,7 @@ end -- }}}
 HHTD:SetDefaultModuleLibraries( "AceConsole-3.0", "AceEvent-3.0")
 
 -- Set the default prototype for modules
-HHTD:SetDefaultModulePrototype( {
+HHTD.MODULE_PROTOTYPE   = {
     OnEnable = function(self) self:Debug(INFO, "prototype OnEnable called!") end,
 
     OnDisable = function(self) self:Debug(INFO, "prototype OnDisable called!") end,
@@ -266,7 +266,9 @@ HHTD:SetDefaultModulePrototype( {
 
     Error = function(self, m) HHTD.Error (self, m) end,
 
-} )
+}
+
+HHTD:SetDefaultModulePrototype( HHTD.MODULE_PROTOTYPE )
 
 -- Set modules' default state to "false"
 HHTD:SetDefaultModuleState( false )
@@ -403,7 +405,7 @@ do
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.0.4,', L["RELEASE_DATE"], '2012-12-09T23:48:25Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.1.0,', L["RELEASE_DATE"], '2013-03-06T02:57:11Z') end,
                 order = -5,
             },
             core = {
@@ -413,7 +415,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.0.4 -- ' .. L["RELEASE_DATE"] .. ' 2012-12-09T23:48:25Z',
+                        name = L["VERSION"] .. ' 2.1.0 -- ' .. L["RELEASE_DATE"] .. ' 2013-03-06T02:57:11Z',
                         order = 1,
                     },
                     Pve = {
@@ -660,6 +662,7 @@ function HHTD:OnInitialize()
 end
 
 local PLAYER_FACTION = "";
+local PLAYER_GUID    = "";
 function HHTD:OnEnable()
 
     REGISTER_HEALERS_ONLY_SPELLS_ONCE ();
@@ -679,6 +682,7 @@ function HHTD:OnEnable()
     self:SetModulesStates();
 
     PLAYER_FACTION = UnitFactionGroup("player");
+    PLAYER_GUID    = UnitGUID("player");
 
     self:ScheduleRepeatingTimer(self.Undertaker,          10, self);
     self:ScheduleRepeatingTimer(self.UpdateHealThreshold, 50, self);
@@ -689,6 +693,7 @@ function HHTD:PLAYER_ALIVE()
     self:Debug("PLAYER_ALIVE");
 
     PLAYER_FACTION = UnitFactionGroup("player");
+    PLAYER_GUID    = UnitGUID("player");
 
     self:UnregisterEvent("PLAYER_ALIVE");
 end
@@ -974,7 +979,7 @@ do
         end -- }}}
 
         if configRef.UHMHAP and record.healDone < HHTD.HealThreshold then
-            HHTD:Debug(INFO2, sourceName, "is below minimum healed amount:", record.healDone);
+            --HHTD:Debug(INFO2, sourceName, "is below minimum healed amount:", record.healDone);
             return;
         end
 
@@ -1123,9 +1128,10 @@ do
         if (not Source_Is_Friendly) and (configRef.HealerUnderAttackAlerts and (Source_Is_NPC or Source_Is_Human) and Registry_by_GUID[true][destGUID]) then
 
             if not self.Friendly_Healers_Attacked_by_GUID[destGUID] then
-                if ( CheckInteractDistance(destName, 1) ) then
 
-                    self:SendMessage("HHTD_HEALER_UNDER_ATTACK", sourceName, sourceGUID, destName, destGUID);
+                if PLAYER_GUID == destGUID or CheckInteractDistance(destName, 1) then
+
+                    self:SendMessage("HHTD_HEALER_UNDER_ATTACK", sourceName, sourceGUID, destName, destGUID, PLAYER_GUID == destGUID);
 
                     self.Friendly_Healers_Attacked_by_GUID[destGUID] = GetTime();
 

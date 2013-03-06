@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.4
+Version 2.1.0
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -222,3 +222,39 @@ function HHTD:pairs_ordered (t, reverse, SortKey) -- Not to be used where perfor
     end, t, 0;
 
 end
+
+local function BadLocalTest (localtest)
+        HHTD:Print(HHTD.Localized_Text[localtest]);
+end
+
+function HHTD:MakeError(something)
+
+    local testlocal = "test local";
+    local testbiglocal = HHTD;
+
+    if something == 1 then
+        -- Make something forbidden
+        TargetUnit('player');
+        return;
+    elseif something == 2 then
+        BadLocalTest("Bad local");
+        return;
+    end
+
+    local errorf = function () testErrorCapturing(testlocal); end;
+
+    errorf();
+end
+
+--[===[@debug@
+function HHTD:Hickup(mul)
+    if not mul then mul = 1 end
+    local t = 0;
+
+    for i=1, mul * 1000000, 1 do
+        t = t + 1
+    end
+
+    self:Debug(ERROR, 'Hickup ', t);
+end
+--@end-debug@]===]

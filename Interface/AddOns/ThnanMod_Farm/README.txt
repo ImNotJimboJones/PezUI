@@ -11,6 +11,10 @@ The tool panel also has buttons for your portal shards.
 
 VERSION CHANGES:
 
+1.4.2:
+
+- Seed and bag tooltips will no longer appear if the farm window is hidden.
+
 1.4.1:
 
 - The forecast seed button will once again accurately show seed counts.

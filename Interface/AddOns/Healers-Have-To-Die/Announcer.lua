@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.4
+Version 2.1.0
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -275,7 +275,16 @@ function Announcer:HHTD_TARGET_LOCKED (selfevent, isFriend, healerProfile)
 
 end
 
-function Announcer:HHTD_HEALER_UNDER_ATTACK (selfevent, sourceName, sourceGUID, destName, destGUID)
+function Announcer:HHTD_HEALER_UNDER_ATTACK (selfevent, sourceName, sourceGUID, destName, destGUID, isCurrentPlayer)
+
+        -- TODO: add an option to change the frequency of the alerts
+        -- TODO: add an option to display alert only if the source is human
+    if isCurrentPlayer then
+        -- TODO: add a new feature to display a set of custom messages when we are under attack.
+        --       We need to ignore Aoes.
+        return;
+    end
+
     local message = HHTD:ColorText("HHTD: ", '88555555') .. (L["HEALER_UNDER_ATTACK"]):format(HHTD:ColorText(HHTD:MakePlayerName(destName), 'FF00DD00'), HHTD:ColorText(HHTD:MakePlayerName(sourceName), 'FFDD0000'));
 
     RaidNotice_AddMessage( RaidWarningFrame, message, ChatTypeInfo["RAID_WARNING"] );

@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2011 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.0.4
+Version 2.1.0
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -721,7 +721,7 @@ do
         L["ACTIVE"] = "激活！" -- Needs review
 L["Announcer"] = "通报"
 L["Announcer_DESC"] = "此模管理聊天和音效警报" -- Needs review
--- L["AUTO_RAID_PARTY_INSTANCE"] = ""
+L["AUTO_RAID_PARTY_INSTANCE"] = "自动：团队/小队/副本" -- Needs review
 L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = "未配置团队通报信息。输入 /HHTDG" -- Needs review
 L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "太快了（查看通报阈值设置）。" -- Needs review
 L["CHAT_POST_NO_HEALERS"] = "哇靠，当前双方都没有治疗！" -- Needs review
@@ -732,7 +732,7 @@ L["ENABLED"] = "已启用！输入 /HHTDG 打开选项列表" -- Needs review
 L["HEALER_UNDER_ATTACK"] = "友方治疗者%s被%s攻击" -- Needs review
 L["HUMAN"] = "人类" -- Needs review
 L["IDLE"] = "发呆" -- Needs review
--- L["INSTANCE_CHAT"] = ""
+L["INSTANCE_CHAT"] = "副本消息" -- Needs review
 L["IS_A_HEALER"] = "%s是治疗者！" -- Needs review
 L["LOG_ACTIVE"] = "激活！" -- Needs review
 L["LOG_BELOW_THRESHOLD"] = "（低于阈值）" -- Needs review
@@ -828,106 +828,112 @@ do
     local L = LibStub("AceLocale-3.0"):NewLocale("HealersHaveToDie", "zhTW");
 
     if L then
-        -- L["ACTIVE"] = ""
-L["Announcer"] = "Announcer" -- Needs review
-L["Announcer_DESC"] = "此模組允許你管理聊天與音效警告" -- Needs review
--- L["AUTO_RAID_PARTY_INSTANCE"] = ""
--- L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = ""
--- L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = ""
--- L["CHAT_POST_NO_HEALERS"] = ""
--- L["DESCRIPTION"] = ""
-L["DISABLED"] = [=[hhtd 已經被停用了!
-輸入 '/hhtd on' 來重新啟用它。]=]
-L["ENABLED"] = "已啟用! 輸入 /HHTDG 開啟選單" -- Needs review
--- L["HEALER_UNDER_ATTACK"] = ""
--- L["HUMAN"] = ""
--- L["IDLE"] = ""
--- L["INSTANCE_CHAT"] = ""
-L["IS_A_HEALER"] = "%s 是治療者!"
--- L["LOG_ACTIVE"] = ""
--- L["LOG_BELOW_THRESHOLD"] = ""
--- L["LOG_IDLE"] = ""
--- L["NO_DATA"] = ""
+        L["ACTIVE"] = "啟動！"
+L["Announcer"] = "通報"
+L["Announcer_DESC"] = "此模組管理聊天和音效警報"
+L["AUTO_RAID_PARTY_INSTANCE"] = "自動:團隊/隊伍/副本"
+L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = "未配置團隊通報訊息。輸入 /HHTDG"
+L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "太快了（查看通報閾值設置）。"
+L["CHAT_POST_NO_HEALERS"] = "哇靠，當前雙方都沒有治療！"
+L["DESCRIPTION"] = "立刻曝光那些該死的治療並幫助他們走完自己的使命！（PvP 和 PvE）"
+L["DISABLED"] = [=[hhtd 已被禁用！
+輸入“/hhtd on”來重新啟用。]=]
+L["ENABLED"] = "已啟用！輸入 /HHTDG 開啟選項面板"
+L["HEALER_UNDER_ATTACK"] = "友方治療者%s被%s攻擊"
+L["HUMAN"] = "人類"
+L["IDLE"] = "呆滯"
+L["INSTANCE_CHAT"] = "副本頻道"
+L["IS_A_HEALER"] = "%s是治療者！"
+L["LOG_ACTIVE"] = "啟動！"
+L["LOG_BELOW_THRESHOLD"] = "（低於閾值）"
+L["LOG_IDLE"] = "呆滯"
+L["NO_DATA"] = "無數據"
 L["NPC"] = "NPC"
--- L["NPH"] = ""
-L["NPH_DESC"] = "此模組增加一個紅十字在敵方治療者血條上" -- Needs review
+L["NPH"] = "姓名版掛鉤"
+L["NPH_DESC"] = "此模組在敵方治療者姓名板上添加一個紅十字"
 L["OPT_ANNOUNCE"] = "顯示訊息"
-L["OPT_ANNOUNCE_DESC"] = "HHTD 當你的目標或是滑鼠經過一個敵對治療者時將顯示訊息。"
--- L["OPT_CLEAR_LOGS"] = ""
-L["OPT_CORE_OPTIONS"] = "核心配置選項"
-L["OPT_DEBUG"] = "偵錯"
-L["OPT_DEBUG_DESC"] = "啟用/停用 偵錯"
+L["OPT_ANNOUNCE_DESC"] = "當你的目標或是鼠標指向一個敵對治療者時 HHTD 將顯示訊息。"
+L["OPT_CLEAR_LOGS"] = "清除記錄"
+L["OPT_CORE_OPTIONS"] = "核心選項"
+L["OPT_DEBUG"] = "除錯"
+L["OPT_DEBUG_DESC"] = "啟用/禁用除錯"
 L["OPT_ENABLE_GEHR"] = "啟用圖形報告"
-L["OPT_ENABLE_GEHR_DESC"] = "Displays a graphical list of detected enemy healers with various features" -- Needs review
-L["OPT_HEALER_FORGET_TIMER"] = "治療者目標計時器" -- Needs review
-L["OPT_HEALER_FORGET_TIMER_DESC"] = "Set the Healer Forget Timer (the time in seconds an enemy will remain considered has a healer)" -- Needs review
--- L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = ""
--- L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = ""
--- L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = ""
--- L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = ""
--- L["OPT_LOG"] = ""
--- L["OPT_LOG_DESC"] = ""
--- L["OPT_LOGS"] = ""
--- L["OPT_LOGS_DESC"] = ""
-L["OPT_MODULES"] = "模組"
--- L["OPT_NPH_MARKER_SCALE"] = ""
--- L["OPT_NPH_MARKER_SCALE_DESC"] = ""
--- L["OPT_NPH_MARKER_SETTINGS"] = ""
--- L["OPT_NPH_MARKER_X_OFFSET"] = ""
--- L["OPT_NPH_MARKER_X_OFFSET_DESC"] = ""
--- L["OPT_NPH_MARKER_Y_OFFSET"] = ""
--- L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = ""
--- L["OPT_NPH_WARNING1"] = ""
--- L["OPT_NPH_WARNING2"] = ""
-L["OPT_OFF"] = "關" -- Needs review
-L["OPT_OFF_DESC"] = "停用 HHTD"
-L["OPT_ON"] = "開" -- Needs review
+L["OPT_ENABLE_GEHR_DESC"] = "顯示敵對治療多功能圖形列表"
+L["OPT_HEALER_FORGET_TIMER"] = "治療忽略計時器"
+L["OPT_HEALER_FORGET_TIMER_DESC"] = "設置治療忽略計時器（在幾秒鐘的時間敵人仍會被認為有個治療者）"
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = "治療值（|cff00dd00%u|r）閾值"
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "治療者不會被偵測到直到他們累積一定數額的治療量(基於你最大血量的百分比)。"
+L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = "保護友方治療者"
+L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = "當附近的友方治療者被攻擊時顯示警報"
+L["OPT_LOG"] = "正在記錄"
+L["OPT_LOG_DESC"] = "啟用記錄並添加一個新的“記錄”標籤到 HHTD 選項面板"
+L["OPT_LOGS"] = "記錄"
+L["OPT_LOGS_DESC"] = "顯示 HHTD 檢測到的治療和數據"
+L["OPT_MODULES"] = "模塊"
+L["OPT_NPH_MARKER_SCALE"] = "標記縮放"
+L["OPT_NPH_MARKER_SCALE_DESC"] = "更改標記尺寸"
+L["OPT_NPH_MARKER_SETTINGS"] = "標記配置"
+L["OPT_NPH_MARKER_X_OFFSET"] = "水平偏移量"
+L["OPT_NPH_MARKER_X_OFFSET_DESC"] = "水平移動標記"
+L["OPT_NPH_MARKER_Y_OFFSET"] = "垂直偏移量"
+L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = "垂直移動標記"
+L["OPT_NPH_WARNING1"] = [=[警告：敵方姓名條目前是關閉的，HHTD無法加入紅十字標誌。
+你可以在WoW的介面選項裏啟用姓名條顯示，或使用指定的按鍵。]=]
+L["OPT_NPH_WARNING2"] = [=[警告：友方姓名條目前是關閉的，HHTD無法加入治療者標誌。
+你可以在WoW的介面選項裏啟用姓名條顯示，或使用指定的按鍵。]=]
+L["OPT_OFF"] = "off"
+L["OPT_OFF_DESC"] = "禁用 HHTD"
+L["OPT_ON"] = "on"
 L["OPT_ON_DESC"] = "啟用 HHTD"
--- L["OPT_POST_ANNOUNCE_CHANNEL"] = ""
--- L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_DESCRIPTION"] = ""
--- L["OPT_POST_ANNOUNCE_ENABLE"] = ""
--- L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = ""
--- L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = ""
--- L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = ""
-L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = "你的訊息太短了!" -- Needs review
--- L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = ""
-L["OPT_POST_ANNOUNCE_NUMBER"] = "治療者名字" -- Needs review
--- L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = ""
--- L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = ""
--- L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_SETTINGS"] = ""
--- L["OPT_POST_ANNOUNCE_THROTTLE"] = ""
--- L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = ""
-L["OPT_PVE"] = "PVE啟用"
--- L["OPT_PVE_DESC"] = ""
--- L["OPT_PVPHEALERSSPECSONLY"] = ""
--- L["OPT_PVPHEALERSSPECSONLY_DESC"] = ""
--- L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = ""
--- L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = ""
-L["OPT_SOUNDS"] = "警報音效"
--- L["OPT_SOUNDS_DESC"] = ""
-L["OPT_STRICTGUIDPVE"] = "精確的檢測PVE"
--- L["OPT_STRICTGUIDPVE_DESC"] = ""
--- L["OPT_TESTONTARGET"] = ""
--- L["OPT_TESTONTARGET_DESC"] = ""
--- L["OPT_TESTONTARGET_ENOTARGET"] = ""
--- L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT"] = ""
--- L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = ""
-L["OPT_VERSION"] = "版本"
-L["OPT_VERSION_DESC"] = "顯示版本&測試資料"
-L["PARTY"] = "隊伍"
-L["RELEASE_DATE"] = "測試資料:"
+L["OPT_POST_ANNOUNCE_CHANNEL"] = "廣播頻道"
+L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = "選擇廣播通報的頻道"
+L["OPT_POST_ANNOUNCE_DESCRIPTION"] = [=[|cFFFF0000重要:|r 輸入 |cff40ff40/hhtdp|r 或是綁定一個按鍵以通報保護友方治療者與聚焦敵方治療者。
+(請看魔獸世界ESC的快捷鍵設定介面以綁定一個按鍵)]=]
+L["OPT_POST_ANNOUNCE_ENABLE"] = "聊天通報"
+L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = "啟用通報到團隊功能。"
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = "只對人類"
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = "通報中不包含 NPC。"
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = "敵對治療文本"
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = [=[輸入一個訊息以煽動你的團隊聚焦到敵方治療者。
+你必須使用 [HEALERS]關鍵字，此字會自動替換為當前敵方治療者的名稱。]=]
+L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = "這有一個友好和敵對的訊息，他們不能一樣。"
+L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = "你的訊息太少了！"
+L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = "[治療]鍵值缺失！"
+L["OPT_POST_ANNOUNCE_NUMBER"] = "治療數量"
+L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = "設置每條通報上的治療數量。"
+L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = "通報文本里有什麼東西出錯。"
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = "友方治療文本"
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = [=[輸入一個訊息調動團隊保護他們的治療。
+
+你必須使用[HEALERS]關鍵字，而此字將被替換為當前啟動的治療者。]=]
+L["OPT_POST_ANNOUNCE_SETTINGS"] = "通報到團隊設置"
+L["OPT_POST_ANNOUNCE_THROTTLE"] = "通報閾值"
+L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = "設置每條可能通報的最小時間間隔。"
+L["OPT_PVE"] = "PvE 啟用"
+L["OPT_PVE_DESC"] = "HHTD 同樣作用於 NPC。"
+L["OPT_PVPHEALERSSPECSONLY"] = "治療特定檢測"
+L["OPT_PVPHEALERSSPECSONLY_DESC"] = "只特定治療玩家。（此項禁用 PvP 最小治療量）"
+L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = "設置友方治療者角色"
+L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = "（如可能）自動設置檢測團隊治療職責到友方治療"
+L["OPT_SOUNDS"] = "音效警報"
+L["OPT_SOUNDS_DESC"] = "當你鼠標懸停或目標到一個敵對治療時 HHTD 播放特定的音效。"
+L["OPT_STRICTGUIDPVE"] = "精確 PvE 檢測"
+L["OPT_STRICTGUIDPVE_DESC"] = "當幾個NPC共享相同的名稱，HHTD將只會增加一個紅十字在真實的治療者而不是所有人上。請注意大多數時間，你需要指定目標或滑鼠停留一個單位以讓十字顯示。"
+L["OPT_TESTONTARGET"] = "在當前目標測試 HHTD 狀態"
+L["OPT_TESTONTARGET_DESC"] = "將標記當前目標為治療者來測試發生了什麼。"
+L["OPT_TESTONTARGET_ENOTARGET"] = "需要一個目標"
+L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT"] = "使用最少治療值過濾"
+L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "治療者需要治療特定數額的治療量才能被標記。"
+L["OPT_VERSION"] = "version"
+L["OPT_VERSION_DESC"] = "顯示版本和發佈日期"
+L["PARTY"] = "小隊"
+L["RELEASE_DATE"] = "發佈日期："
 L["SAY"] = "說"
-L["VERSION"] = "版本:"
+L["VERSION"] = "版本："
 L["YELL"] = "大喊"
-L["YOU_GOT_HER"] = "You got %sher|r!" -- Needs review
-L["YOU_GOT_HIM"] = "You got %shim|r!" -- Needs review
-L["YOU_GOT_IT"] = "You got %sit|r!" -- Needs review
+L["YOU_GOT_HER"] = "你抓到%s她了|r！"
+L["YOU_GOT_HIM"] = "你抓到%s他了|r！"
+L["YOU_GOT_IT"] = "你抓到%s它了|r！"
 
     end
 end

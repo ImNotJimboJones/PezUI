@@ -66,7 +66,7 @@ local function farmButton_OnEvent(self, event)
 		self:setAttributeValue();
 	elseif event == "MODIFIER_STATE_CHANGED" then
 		self:updateAppearance();
-		if self:IsMouseOver() then
+		if self:IsMouseOver() and self:IsVisible() then
 			farmButton_OnEnter(self);
 		end
 	elseif event == "BAG_UPDATE" or event == "GET_ITEM_INFO_RECEIVED" then
