@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 611 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 616 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -274,7 +274,7 @@ local allfoods = {
 
 local fortitude = {
 	SpellName(21562), 	-- Prayer of Fortitude
-	SpellName(6307),	-- Blood Pact
+        SpellName(109773), 	-- Dark Intent
 	SpellName(469),     	-- Commanding Shout
         SpellName(90364),   	-- Qiraji Fortitude
 }
@@ -1994,12 +1994,13 @@ local BF = {
 		defaulttrash = true,
 		checkzonedout = false,
 		core = true,
-		class = { PRIEST = true, },
-		buffinfo = { { "PRIEST", 21562 } },
+		class = { PRIEST = true, WARLOCK = true },
+		buffinfo = { { "PRIEST", 21562 }, { "WARLOCK", 109773 } },
 		chat = BS[21562], -- Prayer of Fortitude
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
-			if raid.ClassNumbers.PRIEST > 0 then
+			if raid.ClassNumbers.PRIEST > 0 or
+			   raid.ClassNumbers.WARLOCK > 0 then
 				report.checking.fortitude = true
 				if not unithasbuff(unit, fortitude, true) then
 					if RaidBuffStatus.db.profile.ShowGroupNumber then
@@ -2107,7 +2108,9 @@ local BF = {
 			return false
 		end,
 		pre = function(self, raid, report)
-			if raid.ClassNumbers.PRIEST > 0 or not raid.israid or raid.isbattle then
+			if raid.ClassNumbers.PRIEST > 0 or 
+			   raid.ClassNumbers.WARLOCK > 0 or 
+			   not raid.israid or raid.isbattle then
 				return
 			end
 			if not RaidBuffStatus.itemcheck.runescrollfortitude then

@@ -290,7 +290,11 @@ function PetJournalEnhanced:SortPets(forceSort)
 	
 		for i=1,numPets do
 			local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle, tradable, unique = C_PetJournal.GetPetInfoByIndex(i, PetJournal.isWild)
-			local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
+			
+			local health, maxHealth, attack, speed, rarity
+			if petID then
+				 health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
+			end
 			
 			local id = nil
 			if isOwned then id = petID else id = speciesID end 

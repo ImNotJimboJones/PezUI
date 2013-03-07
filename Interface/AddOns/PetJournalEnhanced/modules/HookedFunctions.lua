@@ -494,8 +494,9 @@ function Hooked.PetJournal_UpdatePetLoadOut()
 				local rarity = select(5,C_PetJournal.GetPetStats(petID))
 				local hex  = select(4,GetItemQualityColor(rarity-1))
 				local breedIndex, confidence = breedInfo:GetBreedByPetID(petID)
-				local breedName = Hooked.db.display.breedInfo and string.format("%s%s|r", GetColor(confidence),breedInfo:GetBreedName(breedIndex)) or ""
-
+				
+				local breedName =  (breedIndex and confidence and Hooked.db.display.breedInfo) and string.format("%s%s|r", GetColor(confidence),breedInfo:GetBreedName(breedIndex)) or ""
+				
 				if customName then
 					Pet.subName:SetText(string.format(rarityFormat,hex,customName))
 					Pet.name:SetText(string.format("|c%s%s|r%s",hex,name,breedName));

@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 608 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 614 $", ".* (.*) .*"))
 
 local addon = RaidBuffStatus
 RaidBuffStatus.L = L
@@ -1404,11 +1404,12 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 	end
 	local wellfed = GetSpellInfo(35272)-- Well Fed
 	local name, realm = UnitName(unitid)
-	if name and name ~= UNKNOWNOBJECT and name ~= UKNOWNBEING then
+	local class = select(2, UnitClass(unitid))
+	if name and name ~= UNKNOWNOBJECT and name ~= UKNOWNBEING and
+	   class and raid.classes[class] then
 		if realm and string.len(realm) > 0 then
 			name = name .. "-" .. realm
 		end
-		local class = select(2, UnitClass(unitid))
 		local rank = 0
 		local subgroup = 1
 		local role = UnitGroupRolesAssigned(unitid)
@@ -1441,7 +1442,7 @@ function RaidBuffStatus:ReadUnit(unitid, unitindex)
 			end
 		end
 		if RaidBuffStatus.db.profile.IgnoreLastThreeGroups then
-			if subgroup > 5 then
+			if subgroup > 5 and IsInInstance() then -- only ignore in instances, so 40-man world bosses work correctly
 				raid.size = raid.size - 1
 				return
 			end
@@ -3931,6 +3932,7 @@ function RaidBuffStatus:Announces(message, who, callback, spellID)
 			local finfo = spellID and feastdata[spellID]
 			local feeds = (finfo and finfo.limit) or 40
 			local fname = (spellID and GetSpellLink(spellID)) or (finfo and finfo.name) or "Feast"
+			--print("RBS: FeastExpiring: players=",players," feeds=",feeds)
 			if players > feeds then -- dont announce expiration if there's not enough for everyone
 			  return
 			end

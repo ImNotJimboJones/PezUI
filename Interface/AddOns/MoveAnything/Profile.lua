@@ -115,7 +115,7 @@ MoveAny_ProfileAdd.editBox:SetHeight(30)
 MoveAny_ProfileAdd.editBox:SetBackdrop({
 	bgFile = [=[Interface\DialogFrame\UI-DialogBox-Background]=],
 	edgeFile = [=[Interface\DialogFrame\UI-DialogBox-Border]=], tile = true, tileSize = 0, edgeSize = 18,
-	insets = {top = 2, left = 1, bottom = 1, right = 2},
+	insets = {top = 2, left = -3, bottom = 1, right = 2},
 })
 	
 	
@@ -161,6 +161,10 @@ MoveAny_ProfileDelete:SetPoint("CENTER", UIParent, "CENTER", 16, -2)
 MoveAny_ProfileDelete:SetFrameStrata("TOOLTIP")
 MoveAny_ProfileDelete:SetSize(336, 120)
 MoveAny_ProfileDelete:Hide()
+MoveAny_ProfileDelete:SetScript("OnShow", function(self)
+			self.pn = MovAny:GetProfileName()
+			self.fstring:SetText(MOVANY.PROFILE_DELETE_TEXT:format(self.pn))
+	end)
 
 MoveAny_ProfileDelete.fstring = MoveAny_ProfileDelete:CreateFontString(nil, "OVERLAY")
 MoveAny_ProfileDelete.fstring:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
@@ -235,6 +239,7 @@ MoveAny_ProfileRename:SetSize(336, 120)
 MoveAny_ProfileRename:Hide()
 MoveAny_ProfileRename:SetScript("OnShow", function(self)
 		self.pn = MovAny:GetProfileName()
+		self.fstring:SetText(MOVANY.PROFILE_RENAME_TEXT:format(self.pn))
 		self.editBox:SetScript("OnEnterPressed", function()
 			if self.pn == self.editBox:GetText() or MovAny:RenameProfile(self.pn, self.editBox:GetText()) then
 				self:Hide()
@@ -262,7 +267,7 @@ MoveAny_ProfileRename.button1:SetText(MOVANY.RENAME)
 MoveAny_ProfileRename.button1:SetNormalFontObject("GameFontNormalSmall")
 MoveAny_ProfileRename.button1:SetHighlightFontObject("GameFontHighlightSmall")
 MoveAny_ProfileRename.button1:SetScript("OnClick", function() 
-	if self.pn ~= self.editBox:GetText() and not MovAny:RenameProfile(self.pn, self.editBox:GetText()) then
+	if MoveAny_ProfileRename.pn ~= MoveAny_ProfileRename.editBox:GetText() and not MovAny:RenameProfile(MoveAny_ProfileRename.pn, MoveAny_ProfileRename.editBox:GetText()) then
 		MoveAny_ProfileRename:Show()
 	end 
 end)
@@ -365,8 +370,12 @@ MoveAny_SaveAs.button1:SetText(MOVANY.SAVE)
 MoveAny_SaveAs.button1:SetNormalFontObject("GameFontNormalSmall")
 MoveAny_SaveAs.button1:SetHighlightFontObject("GameFontHighlightSmall")
 MoveAny_SaveAs.button1:SetScript("OnClick", function() 
-	if not MovAny:CopyProfile(self.pn, self.editBox:GetText()) then
+	if not MovAny:CopyProfile(MoveAny_SaveAs.pn, MoveAny_SaveAs.editBox:GetText()) then
 		MoveAny_SaveAs:Show()
+	end
+	
+	if MovAny:CopyProfile(MoveAny_SaveAs.pn, MoveAny_SaveAs.editBox:GetText()) then
+		MoveAny_SaveAs:Hide()
 	end
 end)
 

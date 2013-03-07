@@ -271,9 +271,10 @@ MovAny.lVirtualMovers = {
 	WatchFrameMover = {
 		w = 200,
 		h = 450,
-		point = {"TOPRIGHT", "MinimapCluster", "BOTTOMRIGHT", 0, 0},
+		point = {"TOPRIGHT", "UIParent", "TOPRIGHT", -200, -200},
 	--	inherits = WatchFrame,
 		OnMAHook = function(self)
+			self:SetFrameStrata("LOW")
 			local b = WatchFrame
 			local bbb = WatchFrame:GetHeight()
 			MovAny:UnlockPoint(b)
@@ -281,9 +282,9 @@ MovAny.lVirtualMovers = {
 			b:SetPoint("TOPRIGHT", WatchFrameMover, "TOPRIGHT")
 			MovAny:LockPoint(b)
 		--	b.ignoreFramePositionManager = true
-			b:SetMovable(true)
+		--	b:SetMovable(true)
 			b:SetHeight(self:GetHeight())
-			b:SetUserPlaced(true)
+		--	b:SetUserPlaced(true)
 			self.sbf = b
 		end,
 		OnMAPostReset = function(self)
@@ -1847,7 +1848,7 @@ MovAny.lVirtualMovers = {
 		h = 100,
 		point = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -93, 125},
 		prefix = "ContainerFrame",
-		count = 14,
+		count = 13,
 		dontLock = true,
 		dontScale = true,
 		dontAlpha = true,

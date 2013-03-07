@@ -3960,6 +3960,8 @@ end
 
 function MovAny:SetBag(id, bag)
 	self.bagFrames[ id ] = bag
+	
+--	print(id, bag, self.bagFrames[id])
 end
 
 function MovAny:GrabContainerFrame(container, movableBag)

@@ -23,6 +23,7 @@
 --   .spec_icon
 --   .spec_background
 --   .spec_role 
+--   .spec_role_detailed 
 --   .talents = {
 --     [<spell_id>] = {
 --       .idx -- 1 to MAX_NUM_TALENT
@@ -69,7 +70,7 @@
 --     Returns an array with the set of unit ids for the current group.
 --]]
 
-local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("47"):match ("(%d+)") or 0)
+local MAJOR, MINOR = "LibGroupInSpecT-1.0", tonumber (("$Revision: 51 $"):match ("(%d+)") or 0)
 
 if not LibStub then error(MAJOR.." requires LibStub") end
 local lib = LibStub:NewLibrary (MAJOR, MINOR)
@@ -164,7 +165,70 @@ local UnitIsConnected                 = _G.UnitIsConnected
 local UnitIsPlayer                    = _G.UnitIsPlayer
 local UnitIsUnit                      = _G.UnitIsUnit
 local UnitName                        = _G.UnitName
-  
+
+
+local global_spec_id_roles_detailed = {
+  -- Death Knight
+  [250] = "tank", -- Blood
+  [251] = "melee", -- Frost
+  [252] = "melee", -- Unholy
+  -- Druid
+  [102] = "ranged", -- Balance
+  [103] = "melee", -- Feral
+  [104] = "tank", -- Guardian
+  [105] = "healer", -- Restoration
+  -- Hunter
+  [253] = "ranged", -- Beast Mastery
+  [254] = "ranged", -- Marksmanship
+  [255] = "ranged", -- Survival
+  -- Mage
+  [62] = "ranged", -- Arcane
+  [63] = "ranged", -- Fire
+  [64] = "ranged", -- Frost
+  -- Monk
+  [268] = "tank", -- Brewmaster
+  [269] = "melee", -- Windwalker
+  [270] = "healer", -- Mistweaver
+  -- Paladin
+  [65] = "healer", -- Holy
+  [66] = "tank", -- Protection
+  [70] = "melee", -- Retribution
+  -- Priest
+  [256] = "healer", -- Discipline
+  [257] = "healer", -- Holy
+  [258] = "ranged", -- Shadow
+  -- Rogue
+  [259] = "melee", -- Assassination
+  [260] = "melee", -- Combat
+  [261] = "melee", -- Subtlety
+  -- Shaman
+  [262] = "ranged", -- Elemental
+  [263] = "melee", -- Enhancement
+  [264] = "healer", -- Restoration
+  -- Warlock
+  [265] = "ranged", -- Affliction
+  [266] = "ranged", -- Demonology
+  [267] = "ranged", -- Destruction
+  -- Warrior
+  [71] = "melee", -- Arms
+  [72] = "melee", -- Fury
+  [73] = "tank", -- Protection
+}
+
+local class_fixed_roles = {
+  HUNTER = "DAMAGER",
+  MAGE = "DAMAGER",
+  ROGUE = "DAMAGER",
+  WARLOCK = "DAMAGER",
+}
+
+local class_fixed_roles_detailed = {
+  HUNTER = "ranged",
+  MAGE = "ranged",
+  ROGUE = "melee",
+  WARLOCK = "ranged",
+}
+
 
 -- Inspects only work after being fully logged in, so track that
 function lib:PLAYER_LOGIN ()
@@ -393,8 +457,11 @@ end
 
 function lib:UpdatePlayerInfo (guid, unit, info)
   info.class_localized, info.class, info.race_localized, info.race, info.gender, info.name, info.realm = GetPlayerInfoByGUID (guid)
+  local class = info.class
   if info.realm and info.realm == "" then info.realm = nil end
-  info.class_id = info.class and self.static_cache.class_to_class_id[info.class]
+  info.class_id = class and self.static_cache.class_to_class_id[class]
+  if not info.spec_role then info.spec_role = class and class_fixed_roles[class] end
+  if not info.spec_role_detailed then info.spec_role_detailed = class and class_fixed_roles_detailed[class] end
   info.lku = unit
 end
 
@@ -410,7 +477,8 @@ function lib:BuildInfo (unit)
 
   self:UpdatePlayerInfo (guid, unit, info)
   -- On a cold login, GetPlayerInfoByGUID() doesn't seem to be usable, so mark as stale
-  if not info.class then
+  local class = info.class
+  if not class then
     self.state.staleq[guid] = guid
     self.frame:Show ()
   end
@@ -423,14 +491,19 @@ function lib:BuildInfo (unit)
   if not info.global_spec_id or not gspecs[info.global_spec_id] then -- not a valid spec_id
     info.global_spec_id = nil
   else
-    local spec_info = gspecs[info.global_spec_id]
+    local gspec_id = info.global_spec_id
+    local spec_info = gspecs[gspec_id]
     info.spec_index          = spec_info.idx
     info.spec_name_localized = spec_info.name_localized
     info.spec_description    = spec_info.description
     info.spec_icon           = spec_info.icon
     info.spec_background     = spec_info.background
     info.spec_role           = spec_info.role
+    info.spec_role_detailed  = global_spec_id_roles_detailed[gspec_id]
   end
+
+  if not info.spec_role then info.spec_role = class and class_fixed_roles[class] end
+  if not info.spec_role_detailed then info.spec_role_detailed = class and class_fixed_roles_detailed[class] end
 
   info.talents = info.talents or {}
 
@@ -620,6 +693,7 @@ function lib:CHAT_MSG_ADDON (prefix, datastr, scope, sender)
   info.spec_icon           = gspecs[gspec_id].icon
   info.spec_background     = gspecs[gspec_id].background
   info.spec_role           = gspecs[gspec_id].role
+  info.spec_role_detailed  = global_spec_id_roles_detailed[gspec_id]
 
   local talents = self.static_cache.talents[info.class_id]
   info.talents = wipe (info.talents or {})

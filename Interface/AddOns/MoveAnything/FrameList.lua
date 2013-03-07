@@ -74,7 +74,7 @@ m = {
 			end)
 			hooksecurefunc("DeclineQuest", function() _G.QuestFrame:Hide() end)
 		end}, c)
-		API:AddElement({name = "QuestTimerFrame", displayName = "Quest Timer"}, c)
+	--	API:AddElement({name = "QuestTimerFrame", displayName = "Quest Timer"}, c)
 		
 		c = API:GetCategory("Arena")
 	--	API:AddElement({name = "ArenaEnemyFrames", displayName = "ArenaEnemyFrames", noScale = 1}, c)
@@ -101,12 +101,12 @@ m = {
 		API:AddElement({name = "PVPBannerFrame", displayName = "Arena Banner"}, c)
 		
 		c = API:GetCategory("Battlegrounds & PvP")
-		local pvpf = API:AddElement({name = "PVPFrame", displayName = "PVP Window"}, c)
+		local pvpf = API:AddElement({name = "PVPUIFrame", displayName = "PVP Window"}, c)
 		ttt1:AddCategory(c)
 	--	API:AddElement({name = "BattlefieldMinimap", displayName = "Battlefield Mini Map"}, c)
 	--	API:AddElement({name = "MiniMapBattlefieldFrame", displayName = "Battleground Minimap Button"}, c)
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "Battleground Minimap Button"}, c)
-		API:AddElement({name = "QueueStatusMinimapButton", displayName = "Battleground Minimap Button Tooltip"}, c)
+		API:AddElement({name = "QueueStatusFrame", displayName = "Battleground Minimap Button Tooltip"}, c)
 	--	API:AddElement({name = "BattlefieldFrame", displayName = "Battleground Queue"}, c)
 		API:AddElement({name = "WorldStateScoreFrame", displayName = "Battleground Score"}, c)
 		API:AddElement({name = "WorldStateCaptureBar1", displayName = "Flag Capture Timer Bar", onlyOnceCreated = 1}, c)
@@ -119,10 +119,10 @@ m = {
 		API:AddElement({name = "BagButtonsMover", displayName = "Bag Buttons"}, c)
 		API:AddElement({name = "BagButtonsVerticalMover", displayName = "Bag Buttons - Vertical"}, c)
 		API:AddElement({name = "BagFrame1", displayName = "Backpack"}, c)
-		API:AddElement({name = "BagFrame2", displayName = "Bag 1", refuseSync = 1}, c)
-		API:AddElement({name = "BagFrame3", displayName = "Bag 2", refuseSync = 1}, c)
-		API:AddElement({name = "BagFrame4", displayName = "Bag 3", refuseSync = 1}, c)
-		API:AddElement({name = "BagFrame5", displayName = "Bag 4", refuseSync = 1}, c)
+		API:AddElement({name = "BagFrame2", displayName = "Bag 1"}, c) --refuseSync = 1
+		API:AddElement({name = "BagFrame3", displayName = "Bag 2"}, c)
+		API:AddElement({name = "BagFrame4", displayName = "Bag 3"}, c)
+		API:AddElement({name = "BagFrame5", displayName = "Bag 4"}, c)
 	--	API:AddElement({name = "KeyRingFrame", displayName = "Key Ring"}, c)
 		API:AddElement({name = "CharacterBag0Slot", displayName = "Bag Button 1"}, c)
 		API:AddElement({name = "CharacterBag1Slot", displayName = "Bag Button 2"}, c)
@@ -243,6 +243,7 @@ m = {
 		API:AddElement({name = "MainMenuBarVehicleLeaveButton", displayName = "Leave Vehicle Button"}, c)
 
 		c = API:GetCategory("Class Specific")
+		API:AddElement({name = "PlayerFrameAlternateManaBar", displayName = "Alternate Mana Bar"}, c)
 		API:AddElement({name = "RuneFrame", displayName = "Deathknight Runes"}, c)
 		API:AddElement({name = "EclipseBarFrame", displayName = "Druid Eclipse Bar"}, c)
 		API:AddElement({name = "PaladinPowerBar", displayName = "Paladin Holy Power Bar"}, c)
@@ -251,6 +252,7 @@ m = {
 		API:AddElement({name = "WarlockPowerFrame", displayName = "Warlock Power Frame"}, c)
 		API:AddElement({name = "PriestBarFrame", displayName = "Shadow Priest Orbs"}, c)
 		API:AddElement({name = "MonkHarmonyBarMover", displayName = "Monk Chi Frame"}, c)
+		API:AddElement({name = "MonkStaggerBar", displayName = "Monk Stagger Frame"}, c)
 		
 		c = API:GetCategory("Dungeons & Raids")
 		API:AddElement({name = "PVEFrame", displayName = "PVE Finder Frame"}, c)
@@ -264,7 +266,7 @@ m = {
 		API:AddElement({name = "LevelUpDisplay", displayName = "LevelUpDisplay"}, c)
 		
 		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button"}, c)
-		API:AddElement({name = "QueueStatusMinimapButton", displayName = "PVE Status Button Tooltip"}, c)
+		API:AddElement({name = "QueueStatusFrame", displayName = "PVE Status Button Tooltip"}, c)
 		API:AddElement({name = "LFGDungeonReadyDialog", displayName = "Dungeon Ready Dialog"}, c)
 		API:AddElement({name = "LFGDungeonReadyPopup", displayName = "Dungeon Ready Popup"}, c)
 		API:AddElement({name = "LFGDungeonReadyStatus", displayName = "Dungeon Ready Status"}, c)

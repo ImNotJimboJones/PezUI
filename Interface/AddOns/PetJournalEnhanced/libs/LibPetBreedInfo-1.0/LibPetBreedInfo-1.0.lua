@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibPetBreedInfo-1.0", 12
+local MAJOR, MINOR = "LibPetBreedInfo-1.0", 13
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -44,11 +44,13 @@ end
 --Returns arg1: petIndex that can be used by GetBreedName to return the breeds name. arg2: a confidence indicator, lower numbers are better. A good cutoff for high confidence is .15
 --Returns nil if the species cannot battle or does not have a base stats profile or if the petID is not valid
 function lib:GetBreedByPetID(petID)
-	local speciesID, _, level, _, _, _,_ ,_, _, _, _, _, _, _, canBattle = C_PetJournal.GetPetInfoByPetID(petID)
-	if not canBattle then return end
-	local _, maxHealth, power, speed, rarity = C_PetJournal.GetPetStats(petID)
-	
-	return self:GetBreedByStats(speciesID,level,rarity,maxHealth,power,speed)
+	if petID then
+		local speciesID, _, level, _, _, _,_ ,_, _, _, _, _, _, _, canBattle = C_PetJournal.GetPetInfoByPetID(petID)
+		if not canBattle then return end
+		local _, maxHealth, power, speed, rarity = C_PetJournal.GetPetStats(petID)
+		
+		return self:GetBreedByStats(speciesID,level,rarity,maxHealth,power,speed)
+	end
 end
 
 

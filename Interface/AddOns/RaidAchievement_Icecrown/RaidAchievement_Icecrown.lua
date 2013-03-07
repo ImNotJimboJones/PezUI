@@ -185,7 +185,7 @@ if icratracktargets then
 		--чекаем рейдеров и их таргеты на наличие дебафа со стаками БОЛЕЕ 29
 		local spelllook=GetSpellInfo(70338)
 		local psgropcheck=2
-		if GetRaidDifficulty()==2 or GetRaidDifficulty()==4 then
+		if GetRaidDifficultyID()==2 or GetRaidDifficultyID()==4 then
 			psgropcheck=5
 		end
 		for i = 1,GetNumGroupMembers() do
@@ -426,7 +426,7 @@ if icraspisokon[6]=="yes" and raachdone1 then
 		end
 		if id==37970 or id==37973 or id==37972 or arg9==71393 or arg9==72790 or arg9==72791 or arg9==72789 or arg9==72052 or arg9==72800 or arg9==72801 or arg9==72802 or arg9==72809 or arg9==72804 or arg9==71393 or arg9==71815 or arg9==71405 or arg9==72810 or arg9==72811 then
 			local icrsdmg=25000
-			if GetRaidDifficulty()==1 or GetRaidDifficulty()==3 then
+			if GetRaidDifficultyID()==1 or GetRaidDifficultyID()==3 then
 				icrsdmg=23000
 			end
 

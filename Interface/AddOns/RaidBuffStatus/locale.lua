@@ -1154,18 +1154,18 @@ La.TankTauntWarnings = {
 
 elseif locale == "deDE" then do end
 La["Announce even when you don't have assist or lead"] = "Ankündigungen ausgeben, sogar wenn man kein Leiter oder Assistent ist"
--- La["Announce to raid warning when a %s is prepared"] = ""
+La["Announce to raid warning when a %s is prepared"] = "Schlachtzugswarnung ausgeben, wenn jemand einen %s aufstellt"
 La["Announce without lead"] = "Ohne Leitung ausgeben"
 La["Augment Banquet Tooltips"] = "Erweitere Bankett-Tooltipps"
 La["Augment Banquet Tooltips with stat bonus information"] = "Erweitere Bankett-Tooltipps mit Informationen zum Bonuswert"
-La["Blingtron"] = "Blingtron" -- Needs review
-La["Blingtron about to expire!"] = "Blingtron verschwindet bald!" -- Needs review
+La["Blingtron"] = "Blingtron"
+La["Blingtron about to expire!"] = "Blingtron verschwindet bald!"
 La["Bonus"] = "Bonus"
 La["Crit Buff"] = "Kritischer Treffer Buff"
-La[" has set us up a Blingtron"] = " hat einen Blingtron aufgestellt!" -- Needs review
+La[" has set us up a Blingtron"] = " hat einen Blingtron aufgestellt!"
 La["Mastery Buff"] = "Meisterschaft Buff"
--- La["Prefer Static Buff"] = ""
--- La["Report missing static buffs even when an equivalent passive aura is already present."] = ""
+La["Prefer Static Buff"] = "Statische Buffs bevorzugen"
+La["Report missing static buffs even when an equivalent passive aura is already present."] = "Fehlende statische Buffs melden, auch wenn eine passive Aura vorhanden ist."
 La["Show configuration options"] = "Optionsmenü öffnen"
 La["Spellpower Buff"] = "Zaubermacht Buff"
 La["Stat Buff"] = "Werte Buff"
