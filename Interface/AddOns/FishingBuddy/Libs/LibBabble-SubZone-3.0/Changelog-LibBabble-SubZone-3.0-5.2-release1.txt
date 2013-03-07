@@ -1,0 +1,63 @@
+------------------------------------------------------------------------
+r149 | arith | 2013-03-05 14:18:44 +0000 (Tue, 05 Mar 2013) | 1 line
+Changed paths:
+   A /tags/5.2-release1 (from /trunk:148)
+
+Tagging as 5.2-release1
+------------------------------------------------------------------------
+r148 | arith | 2013-03-05 13:23:53 +0000 (Tue, 05 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+database update
+------------------------------------------------------------------------
+r147 | arith | 2013-03-05 12:49:24 +0000 (Tue, 05 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+to trigger database export, do not use this revision
+------------------------------------------------------------------------
+r146 | arith | 2013-03-03 16:59:41 +0000 (Sun, 03 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+added most of the WoW 5.2 subzones translation
+------------------------------------------------------------------------
+r145 | arith | 2013-03-03 16:47:22 +0000 (Sun, 03 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+to trigger database export, do not use this revision
+------------------------------------------------------------------------
+r144 | arith | 2013-02-28 18:47:11 +0000 (Thu, 28 Feb 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+added additional subzone in WoW 5.2
+------------------------------------------------------------------------
+r143 | arith | 2013-02-28 18:36:51 +0000 (Thu, 28 Feb 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+to trigger database export, do not use this revision
+------------------------------------------------------------------------
+r142 | arith | 2013-02-17 13:17:21 +0000 (Sun, 17 Feb 2013) | 2 lines
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+   M /trunk/LibBabble-SubZone-3.0.toc
+
+TOC update to support WoW 5.2.0; 
+Added WoW 5.2 new zones / sub-zones; translation to be added soon
+------------------------------------------------------------------------
+r141 | arith | 2013-02-17 13:00:29 +0000 (Sun, 17 Feb 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.lua
+
+to trigger database export, do not use this revision
+------------------------------------------------------------------------
+r139 | arith | 2013-02-07 17:51:18 +0000 (Thu, 07 Feb 2013) | 1 line
+Changed paths:
+   M /trunk/LibBabble-SubZone-3.0.toc
+
+TOC update to support WoW 5.1.0
+------------------------------------------------------------------------

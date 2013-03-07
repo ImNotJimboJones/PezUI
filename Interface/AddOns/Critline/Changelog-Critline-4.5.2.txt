@@ -1,9 +1,21 @@
 ------------------------------------------------------------------------
-r69 | lombra | 2013-02-08 00:36:55 +0000 (Fri, 08 Feb 2013) | 1 line
+r71 | lombra | 2013-03-07 20:15:38 +0000 (Thu, 07 Mar 2013) | 1 line
 Changed paths:
-   A /tags/4.5.1 (from /trunk:68)
+   A /tags/4.5.2 (from /trunk:70)
 
-- Tagging as 4.5.1.
+Tagging as 4.5.2.
+------------------------------------------------------------------------
+r70 | lombra | 2013-03-07 19:49:06 +0000 (Thu, 07 Mar 2013) | 3 lines
+Changed paths:
+   M /trunk/AuraTracker.lua
+   M /trunk/ChangeLog.txt
+   M /trunk/Critline.toc
+   M /trunk/advanced.lua
+   M /trunk/filtersCore.lua
+
+- Source GUID can now apparently be an empty string.
+- ToC bumps.
+- Add more auras.
 ------------------------------------------------------------------------
 r68 | lombra | 2013-02-08 00:36:18 +0000 (Fri, 08 Feb 2013) | 1 line
 Changed paths:

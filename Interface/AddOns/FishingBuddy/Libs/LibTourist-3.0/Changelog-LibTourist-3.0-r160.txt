@@ -1,0 +1,13 @@
+------------------------------------------------------------------------
+r160 | Odica | 2013-03-06 23:42:18 +0000 (Wed, 06 Mar 2013) | 6 lines
+Changed paths:
+   M /trunk/LibTourist-3.0.lua
+   M /trunk/LibTourist-3.0.toc
+
+- Updated toc to 5.2
+- Revised the way map data is gathered, was able to remove some hardcoded values
+- Added Isle of Thunder and Isle of Giants
+- Added Townlong Steppes - Isle of Thunder v.v. portal
+- Added Throne of Thunder
+- Added entrance coordinates for Shado-Pan Monastery and Gate of the Setting Sun
+------------------------------------------------------------------------
