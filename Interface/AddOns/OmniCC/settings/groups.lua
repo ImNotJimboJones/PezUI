@@ -87,7 +87,7 @@ function OmniCC:UpdateGroups()
 			local timer = self.Timer:Get(cooldown)
 			if timer and timer.visible then
 				timer:UpdateText(true)
-				timer:UpdateOpacity()
+				timer:UpdateCooldownShown()
 			end
 		end
 	end

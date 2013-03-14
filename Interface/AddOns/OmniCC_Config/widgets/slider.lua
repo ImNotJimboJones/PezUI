@@ -67,11 +67,6 @@ function Slider:OnEnter()
 	if not GameTooltip:IsOwned(self) and self.tooltip then
 		GameTooltip:SetOwner(self, 'ANCHOR_RIGHT')
 		GameTooltip:SetText(self.tooltip)
-
-		if self.smallTip then
-            GameTooltip:AddLine(self.smallTip, 1, 1, 1)
-            GameTooltip:Show()
-        end
 	end
 end
 

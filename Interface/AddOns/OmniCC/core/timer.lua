@@ -169,8 +169,8 @@ function Timer:UpdateShown()
 	end
 end
 
-function Timer:UpdateOpacity()
-	self.cooldown:SetAlpha(self:GetSettings().spiralOpacity)
+function Timer:UpdateCooldownShown()
+	self.cooldown:SetAlpha(self:GetSettings().showCooldownModels and 1 or 0)
 end
 
 

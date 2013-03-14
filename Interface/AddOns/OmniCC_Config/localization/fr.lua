@@ -1,5 +1,5 @@
 ﻿--[[
-	OmniCC configuration localization - French
+	OmniCC configuration interface localization - French
 --]]
 
 if GetLocale() ~= 'frFR' then return end
@@ -39,7 +39,7 @@ L.Color_seconds = "En dessous d'une minute"
 L.Color_minutes = "En dessous d'une heure"
 L.Color_hours = "Une heure ou plus"
 
-L.SpiralOpacity = "Transparence des modèles de cooldown"
+L.ShowCooldownModels = "Afficher les modèles de cooldown"
 L.UseAniUpdater = "Optimiser la performance"
 
 --text positioning
@@ -72,8 +72,12 @@ L.ScaleTextTip =
 force le texte à s'adapter aux cadres
 qui sont trop petits.]]
 
-L.SpiralOpacityTip = [[Définit la transparence du spirale sombre que vous voyez
-normalement sur les boutons de sorts pendant un cooldown.]]
+L.ShowCooldownModelsTip =
+[[Active l'affichage standard
+des modèles de cooldown.]]
+
+L.ShowCooldownModelsSmallTip = [[(La spirale sombre que vous voyez normalement
+sur les boutons de sorts pendant un cooldown)]]
 
 L.UseAniUpdaterTip =
 [[Optimise la performance du processeur, mais peut
