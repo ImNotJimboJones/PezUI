@@ -1,8 +1,8 @@
-## Interface: 50100
+## Interface: 50200
 
 ## Title: Masque: Sleek
 ## Notes: Sleek skin for Masque.
-## Version: 5.1.0
+## Version: 5.2.0
 
 ## Author: Kallieen
 ## X-eMail: kallieenchan@gmail.com

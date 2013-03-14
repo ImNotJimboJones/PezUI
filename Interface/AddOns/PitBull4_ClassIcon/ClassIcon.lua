@@ -52,6 +52,7 @@ function PitBull4_ClassIcon:GetExampleTexCoord(frame, texture)
 		"PRIEST",
 		"WARLOCK",
 		"DEATHKNIGHT",
+		"MONK",
 	}
 	local seed
 	if unit == "pet" or unit:match("^raidpet(%d%d?)$") or unit:match("^partypet(%d)$") then

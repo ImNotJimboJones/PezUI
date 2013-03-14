@@ -110,7 +110,7 @@ m_scratch.bar_entry =
     }
 -- NEEDTOKNOW = {} is defined in the localization file, which must be loaded before this file
 
-NEEDTOKNOW.VERSION = "4.0.12"
+NEEDTOKNOW.VERSION = "4.0.13"
 local c_UPDATE_INTERVAL = 0.05
 local c_MAXBARS = 20
 
@@ -2436,7 +2436,7 @@ mfn_AuraCheck_POWER = function (bar, bar_entry, all_stacks)
              (not bar.settings.power_sole or pt == cpt) ) 
         then
             local bTick = false
-            if pt == 3 then
+            if pt == 3 then -- SPELL_POWER_ENERGY
                 if (pt == cpt) then
                     bar.power_regen = GetPowerRegen()
                 end
@@ -2461,6 +2461,7 @@ mfn_AuraCheck_POWER = function (bar, bar_entry, all_stacks)
                     bar.tPower = now
                     bar.last_power = curPower
                     bar.last_power_max = maxPower
+
                 end
             end
 
@@ -3108,7 +3109,12 @@ EDT["UNIT_AURA"] = fnAuraCheckIfUnitMatches
 EDT["UNIT_POWER"] = fnAuraCheckIfUnitMatches
 EDT["UNIT_DISPLAYPOWER"] = fnAuraCheckIfUnitMatches
 EDT["UNIT_COMBO_POINTS"] = mfn_Bar_AuraCheck
-EDT["UNIT_INVENTORY_CHANGED"] = fnAuraCheckIfUnitPlayer
+EDT["UNIT_INVENTORY_CHANGED"] = function(self, unit)
+  if unit == "player" then
+    NeedToKnow.UpdateWeaponEnchants()
+    mfn_Bar_AuraCheck(self)
+  end
+end
 EDT["PLAYER_TARGET_CHANGED"] = function(self, unit)
     if self.unit == "targettarget" then
         NeedToKnow.CheckCombatLogRegistration(self)

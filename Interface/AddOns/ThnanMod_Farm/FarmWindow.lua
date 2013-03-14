@@ -45,9 +45,13 @@ farmWindow:Hide();
 
 -- functions
 
+local function shouldShowItem2()
+	return ((config.showBagsByDefault and not IsShiftKeyDown()) or (not config.showBagsByDefault and IsShiftKeyDown()))
+end
+
 local function farmButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
-	if self.itemID2 and IsShiftKeyDown() then
+	if self.itemID2 and shouldShowItem2() then
 		GameTooltip:SetItemByID(self.itemID2);
 	elseif self.itemID then
 		GameTooltip:SetItemByID(self.itemID);
@@ -125,7 +129,11 @@ local function seedButton_setMacroText(self)
 	
 	local text = "/targetexact "..tilledSoilName.."\n/use ";
 	if self.itemID2 then
-		text = text.."[modifier:shift] item:"..self.itemID2.."; [nomodifier] item:"..self.itemID;
+		local id2Modifier, id1Modifier = "modifier:shift", "nomodifier";
+		if config.showBagsByDefault then
+			id1Modifier, id2Modifier = "modifier:shift", "nomodifier";
+		end
+		text = text.."["..id2Modifier.."] item:"..self.itemID2.."; ["..id1Modifier.."] item:"..self.itemID;
 	else
 		text = text.."item:"..self.itemID;
 	end
@@ -153,7 +161,7 @@ local function seedButton_updateAppearance(self)
 	end
 	
 	local count = GetItemCount(self.itemID, false, false);
-	if self.itemID2 and IsShiftKeyDown() then
+	if self.itemID2 and shouldShowItem2() then
 		self.icon:SetTexture(self.itemTexture2);
 		count = GetItemCount(self.itemID2, false, true);
 	else
@@ -161,7 +169,7 @@ local function seedButton_updateAppearance(self)
 	end
 	
 	local countText = _G[self:GetName().."Count"];
-	if (count > 99) then
+	if (count > 999) then
 		countText:SetText("*");
 	else
 		countText:SetText(count);
@@ -246,7 +254,7 @@ local function portalButton_updateAppearance(self)
 end
 
 local buttonCount = 0;
-local function createFarmButton(itemID, itemID2, buttonType)
+local function createFarmButton(itemID, itemID2, buttonType, itemID3)
 	local button = CreateFrame("CheckButton", "FRMButton"..buttonCount, farmWindow, "ActionButtonTemplate,SecureActionButtonTemplate");
 	buttonCount = buttonCount + 1;
 	
@@ -264,6 +272,7 @@ local function createFarmButton(itemID, itemID2, buttonType)
 		if itemID2 then
 			button:RegisterEvent("MODIFIER_STATE_CHANGED");
 			button.itemID2 = itemID2;
+			button.itemID3 = itemID3;
 		end
 		button:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		button:SetAttribute("*type1", "macro");
@@ -731,7 +740,7 @@ function FRM:farmWindowAutoShowEvent(event)
 		isInCombat = false;
 	end
 
-	if event == "ZONE_CHANGED" then
+	if event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" or event == "ZONE_CHANGED_NEW_AREA" then
 		autoShowOverrideHide = false;
 	end
 
@@ -749,6 +758,8 @@ end
 local autoShowFrame = CreateFrame("Frame");
 autoShowFrame:SetScript("OnEvent", FRM.farmWindowAutoShowEvent);
 autoShowFrame:RegisterEvent("ZONE_CHANGED");
+autoShowFrame:RegisterEvent("ZONE_CHANGED_INDOORS");	-- ZONE_CHANGED only fires
+autoShowFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA");	-- if one of these doesn't
 autoShowFrame:RegisterEvent("PLAYER_LOGIN");
 autoShowFrame:RegisterEvent("BAG_UPDATE");
 autoShowFrame:RegisterEvent("PLAYER_REGEN_DISABLED");
@@ -790,7 +801,7 @@ forecastChangeLabel:SetPoint("TOP", forecastLabel, "BOTTOM", 0, -2);
 
 local function forecastButton_OnEnter(self)
 	GameTooltip:SetOwner(farmWindow);
-	if self.itemID2 and IsShiftKeyDown() then
+	if self.itemID2 and shouldShowItem2() then
 		GameTooltip:SetItemByID(self.itemID2);
 		GameTooltip:AddLine(self.itemTooltipLine, 0, 1, 1, true);
 	elseif self.itemID then
@@ -921,6 +932,18 @@ local bagIDFromSeedID = {
 	[89328] = 95437, -- jade squash
 	[89329] = 95442, -- striped melon
 };
+local bagID2FromSeedID = {
+	[79102] = 95434, -- green cabbage
+	[80591] = 95441, -- scallion
+	[80593] = 95440, -- red blossom leek
+	[80595] = 95443, -- white turnip
+	[89326] = 95444, -- witchberry
+	[80590] = 95436, -- juicycrunch carrot
+	[80592] = 95438, -- mogu pumpkin
+	[80594] = 95439, -- pink turnip
+	[89328] = 95437, -- jade squash
+	[89329] = 95442, -- striped melon
+};
 local previousToday = "";
 local previousTodaySeed = 0;
 local previousYesterdaySeed = 0;
@@ -938,10 +961,12 @@ local function farmWindow_OnUpdate(self)
 		forecastSeedButton.itemID = data.todayForecast;
 		if forecastSeedButton.itemID then
 			forecastSeedButton.itemID2 = bagIDFromSeedID[data.todayForecast];
+			forecastSeedButton.itemID3 = bagID2FromSeedID[data.todayForecast];
 			forecastSeedButton:RegisterEvent("BAG_UPDATE");
 			forecastSeedButton:RegisterEvent("MODIFIER_STATE_CHANGED");
 		else
 			forecastSeedButton.itemID2 = nil;
+			forecastSeedButton.itemID3 = nil;
 			forecastSeedButton:UnregisterEvent("BAG_UPDATE");
 			forecastSeedButton:UnregisterEvent("MODIFIER_STATE_CHANGED");
 		end
@@ -1037,6 +1062,8 @@ end
 local exitFrame = CreateFrame("Frame");
 exitFrame:SetScript("OnEvent", exitFrame_OnEvent);
 exitFrame:RegisterEvent("ZONE_CHANGED");
+exitFrame:RegisterEvent("ZONE_CHANGED_INDOORS");	-- ZONE_CHANGED only fires
+exitFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA");	-- if one of these doesn't
 
 --[[ right click planting ]]--
 
@@ -1090,3 +1117,14 @@ local function worldFrame_OnMouseUp(self, button)
 	end
 end
 WorldFrame:HookScript("OnMouseUp", worldFrame_OnMouseUp);
+
+--[[ seed/bag shift reverse ]]--
+
+function FRM:showBagsByDefaultChanged()
+	for k, button in pairs(rightClickButtons) do
+		if button.itemID2 then
+			button:updateAppearance();
+			button:setAttributeValue();
+		end
+	end
+end

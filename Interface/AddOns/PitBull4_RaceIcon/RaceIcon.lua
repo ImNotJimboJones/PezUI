@@ -47,8 +47,8 @@ local RACE_TEX_COORDS = {
 	["Goblin_2"]	= {0.625, 0.75, 0.25, 0.5},
 	["Worgen_3"]	= {0.625, 0.75, 0.5, 0.75},
 	["Goblin_3"]	= {0.625, 0.75, 0.75, 1},
-	
-	
+	["Pandaren_2"] = {0.750, 0.875, 0, 0.25},
+	["Pandaren_3"]= {0.750, 0.875, 0.5, 0.75},
 }
 
 local CREATURE_ICONS = {
@@ -152,6 +152,7 @@ function PitBull4_RaceIcon:GetExampleTexCoord(frame, texture)
 			"BloodElf",
 			"Worgen",
 			"Goblin",
+			"Pandaren",
 		}
 		local race_sex_seed = RACE_TEX_COORDS[SEED_RACE[random(12)] .. "_" .. random(2,3)]
 		return unpack(race_sex_seed)

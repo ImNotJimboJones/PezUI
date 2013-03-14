@@ -69,10 +69,10 @@ m = {
 		local qf = API:AddElement({name = "QuestFrame", displayName = "Quest Offer / Return", runOnce = function()
 			hooksecurefunc(QuestFrame, "Show", function()
 				if MovAny:IsModified("QuestFrame") then
-					_G.GossipFrame:Hide()
+					HideUIPanel(GossipFrame)
 				end
 			end)
-			hooksecurefunc("DeclineQuest", function() _G.QuestFrame:Hide() end)
+			hooksecurefunc("DeclineQuest", function() HideUIPanel(GossipFrame) end)
 		end}, c)
 	--	API:AddElement({name = "QuestTimerFrame", displayName = "Quest Timer"}, c)
 		

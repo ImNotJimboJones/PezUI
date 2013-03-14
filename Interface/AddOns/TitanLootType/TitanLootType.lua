@@ -63,7 +63,7 @@ function TitanPanelLootTypeButton_GetDungeonDifficultyIDText(isRaid, withpar)
 	local diffstr = "|cffffff9a"..par1.._G["UNKNOWN"]..par2.."|r"
 	if isRaid then
 	-- raids
-	local diff = GetRaidDifficulty()
+	local diff = GetRaidDifficultyID()
 	if not diff then return diffstr end
 	-- remove () chars from difficulty
 	local tmpstr = string.gsub(_G["RAID_DIFFICULTY"..tostring(diff)], "%(", "")
@@ -286,8 +286,8 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  elseif _G["UIDROPDOWNMENU_MENU_LEVEL"] == 2  and _G["UIDROPDOWNMENU_MENU_VALUE"] == "SetRaidDiff" then
  info = {};
  info.text = _G["GREEN_FONT_COLOR_CODE"].._G["RAID_DIFFICULTY1"].."|r";
- info.func = function() SetRaidDifficulty(1) end
- info.checked = function() if GetRaidDifficulty() == 1 then return true end return false end
+ info.func = function() SetRaidDifficultyID(1) end
+ info.checked = function() if GetRaidDifficultyID() == 1 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
@@ -298,7 +298,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false
@@ -307,8 +307,8 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  
  info = {};
  info.text = _G["GREEN_FONT_COLOR_CODE"].._G["RAID_DIFFICULTY2"].."|r";
- info.func = function() SetRaidDifficulty(2) end
- info.checked = function() if GetRaidDifficulty() == 2 then return true end return false end
+ info.func = function() SetRaidDifficultyID(2) end
+ info.checked = function() if GetRaidDifficultyID() == 2 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
@@ -319,7 +319,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false
@@ -328,8 +328,8 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  
  info = {};
  info.text = _G["RED_FONT_COLOR_CODE"].._G["RAID_DIFFICULTY3"].."|r";
- info.func = function() SetRaidDifficulty(3) end
- info.checked = function() if GetRaidDifficulty() == 3 then return true end return false end
+ info.func = function() SetRaidDifficultyID(3) end
+ info.checked = function() if GetRaidDifficultyID() == 3 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
@@ -340,7 +340,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false
@@ -349,8 +349,8 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
  
  info = {};
  info.text = _G["RED_FONT_COLOR_CODE"].._G["RAID_DIFFICULTY4"].."|r";
- info.func = function() SetRaidDifficulty(4) end
- info.checked = function() if GetRaidDifficulty() == 4 then return true end return false end
+ info.func = function() SetRaidDifficultyID(4) end
+ info.checked = function() if GetRaidDifficultyID() == 4 then return true end return false end
  local inParty = 0;
  	if (UnitExists("party1") or GetNumGroupMembers() > 0) then
 		inParty = 1;
@@ -361,7 +361,7 @@ function TitanPanelRightClickMenu_PrepareLootTypeMenu()
 	 end
 	local inInstance = IsInInstance()
 	local playerlevel = UnitLevel("player")
-	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficulty() == 1) then
+	 if inInstance or (inParty == 1 and isLeader == 0) or (playerlevel < 65 and GetRaidDifficultyID() == 1) then
 		info.disabled = 1
 	 else
 	 	info.disabled = false

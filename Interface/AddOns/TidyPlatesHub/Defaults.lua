@@ -1,8 +1,14 @@
 
+local CopyTable = TidyPlatesUtility.copyTable
+
 TidyPlatesHubCache = {}
 TidyPlatesHubSettings = {}
 
 TidyPlatesHubDefaults = {
+	-- Profile
+	---------------------------------------
+	UseGlobalSet = false,
+	
 	-- Style
 	---------------------------------------
 	--ArtDefault = "Blizzard",
@@ -18,7 +24,7 @@ TidyPlatesHubDefaults = {
 	OpacitySpotlight = 1,
 	OpacityFullSpell = false,				-- Bring Casting units to Full Opacity
 	OpacityFullNoTarget = true,				-- Use full opacity when No Target
-	OpacityFullMouseover = false,
+	OpacityFullMouseover = true,
 	
 	-- Filter
 	---------------------------------------
@@ -28,8 +34,10 @@ TidyPlatesHubDefaults = {
 	OpacityFilterNeutralUnits = false,		-- OpacityHideNeutral = false,
 	OpacityFilterNonElite = false,			-- OpacityHideNonElites = false,
 	OpacityFilterNPC = false,
+	OpacityFilterPlayers = false,
 	OpacityFilterFriendlyNPC = false,
 	OpacityFilterInactive = false,
+	OpacityFilterMini = false,
 	OpacityFilterList = "Fanged Pit Viper",
 	OpacityFilterLookup = {},
 
@@ -60,6 +68,7 @@ TidyPlatesHubDefaults = {
 	ColorEnableOffTank = false,
 	
 	-- Threat
+	ThreatMode = 1, 
 	ColorAttackingMe = {r = .8, g = 0, b = 0,},		-- Orange
 	ColorAggroTransition = {r = 255/255, g = 160/255, b = 0},	-- Yellow
 	--ColorAggroTransition = {r = 255/255, g = 128/255, b = 0},	-- Orange
@@ -94,12 +103,22 @@ TidyPlatesHubDefaults = {
 	WidgetsThreatIndicatorMode = 1,
 	WidgetsRangeIndicator = false,
 	WidgetsRangeMode = 1,
+	
+	-- Aura Widget
+	---------------------------------------
 	WidgetsDebuff = true,
 	WidgetsDebuffStyle = 1,
 	WidgetsAuraMode = 1,
 	WidgetsDebuffTrackList = "My Rake\nMy Rip\nMy Moonfire\nAll 339\nMy Regrowth\nMy Rejuvenation",
 	WidgetsDebuffLookup = {},
 	WidgetsDebuffPriority = {},	
+	WidgetAuraTrackDispelFriendly = false,
+	WidgetAuraTrackCurse = true, 
+	WidgetAuraTrackDisease = true, 
+	WidgetAuraTrackMagic = true, 
+	WidgetAuraTrackPoison = true,
+	
+	
 	
 	-- Frame
 	---------------------------------------
@@ -107,7 +126,7 @@ TidyPlatesHubDefaults = {
 	AdvancedEnableUnitCache = true,
 }
 
-
+TidyPlatesHubGlobal = CopyTable(TidyPlatesHubDefaults)
 
 
 

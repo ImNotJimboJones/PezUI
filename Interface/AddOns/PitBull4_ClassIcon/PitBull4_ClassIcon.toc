@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 50200
 ## Title: PitBull4 |r[|cffeda55fClass Icon|r]
 ## Notes: Show a class icon.
 ## Author: TAP3AH
@@ -9,7 +9,7 @@
 ## X-Curse-Project-Name: PitBull4_Extras
 ## X-Curse-Project-ID: pitbull4_extras
 ## X-Curse-Repository-ID: wow/pitbull4_extras/mainline
-## X-Curse-Packaged-Version: r5
+## X-Curse-Packaged-Version: r7-release
 ## X-Curse-Project-Name: PitBull4_Extras
 ## X-Curse-Project-ID: pitbull4_extras
 ## X-Curse-Repository-ID: wow/pitbull4_extras/mainline
