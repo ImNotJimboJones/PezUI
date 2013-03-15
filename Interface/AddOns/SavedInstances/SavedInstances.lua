@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 225 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 237 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -90,6 +90,10 @@ addon.LFRInstances = {
   [529] = { total=3, base=1 }, -- The Dread Approach
   [530] = { total=3, base=4 }, -- Nightmare of Shek'zeer
   [526] = { total=4, base=1 }, -- Terrace of Endless Spring
+  [610] = { total=3, base=1 }, -- Throne of Thunder pt 1
+  [611] = { total=3, base=4 }, -- Throne of Thunder pt 2
+  [612] = { total=3, base=7 }, -- Throne of Thunder pt 3
+  [613] = { total=3, base=10}, -- Throne of Thunder pt 4
 }
 
 addon.WorldBosses = {
@@ -104,6 +108,27 @@ addon.showopts = {
   saved = "saved",
   never = "never",
 }
+
+local _specialWeeklyQuests = {
+  [32611] = { zid=928, lid=94221 }, -- Shan'ze Ritual Stone looted
+  [32626] = { zid=928, lid=94222 }, -- Key to the Palace of Lei Shen looted
+}
+function addon:specialWeeklyQuests()
+  for qid, qinfo in pairs(_specialWeeklyQuests) do
+    qinfo.quest = qid
+    if not qinfo.name and qinfo.lid then
+      local _,itemname = GetItemInfo(qinfo.lid)
+      if itemname then
+        qinfo.name = itemname.." ("..LOOT..")"
+      end
+    end
+    if not qinfo.zone and qinfo.zid then
+      qinfo.zone = GetMapNameByID(qinfo.zid)
+    end
+  end
+  return _specialWeeklyQuests
+end
+addon:specialWeeklyQuests()
 
 local function chatMsg(msg)
      DEFAULT_CHAT_FRAME:AddMessage("\124cFFFF0000"..addonName.."\124r: "..msg)
@@ -199,6 +224,7 @@ vars.defaultDB = {
 		TrackWeeklyQuests = true,
 		ShowCategories = false,
 		CategorySpaces = false,
+		RowHighlight = 0.1,
 		NewFirst = true,
 		RaidsFirst = true,
 		CategorySort = "EXPANSION", -- "EXPANSION", "TYPE"
@@ -210,6 +236,7 @@ vars.defaultDB = {
 		LimitWarn = true,
 		ShowServer = false,
 		ServerSort = true,
+		ServerOnly = false,
 		SelfFirst = true,
 		SelfAlways = false,
 		TrackLFG = true,
@@ -739,8 +766,16 @@ function addon:UpdateInstance(id)
   -- name is nil for non-existent ids
   -- isHoliday is for single-boss holiday instances that don't generate raid saves
   -- typeID 4 = outdoor area, typeID 6 = random
+  maxPlayers = tonumber(maxPlayers)
   if not name or not expansionLevel or not recLevel or typeID > 2 then return end
   if name:find(PVP_RATED_BATTLEGROUND) then return end -- ignore 10v10 rated bg
+  if subtypeID == LFG_SUBTYPEID_SCENARIO and 
+     (maxPlayers == 3 or maxPlayers == 1) then -- ignore scenarios
+     if vars.db.Instances[name] and vars.db.Instances[name].LFDID == id then
+       vars.db.Instances[name] = nil -- clean old scenario entries
+     end
+     return 
+  end
   if addon.LFRInstances[id] then -- ensure uniqueness (eg TeS LFR)
     if vars.db.Instances[name] and vars.db.Instances[name].LFDID == id then
       vars.db.Instances[name] = nil -- clean old LFR entries
@@ -764,7 +799,7 @@ function addon:UpdateInstance(id)
   instance.Expansion = expansionLevel
   instance.RecLevel = instance.RecLevel or recLevel
   if recLevel < instance.RecLevel then instance.RecLevel = recLevel end -- favor non-heroic RecLevel
-  instance.Raid = (tonumber(maxPlayers) > 5 or (tonumber(maxPlayers) == 0 and typeID == 2))
+  instance.Raid = (maxPlayers > 5 or (maxPlayers == 0 and typeID == 2))
   return newinst, true, name
 end
 
@@ -910,10 +945,12 @@ function addon:UpdateToonData()
 	for _,idx in pairs(currency) do
 	  local ci = t.currency[idx] or {}
 	  _, ci.amount, _, ci.earnedThisWeek, ci.weeklyMax, ci.totalMax = GetCurrencyInfo(idx)
-          if idx == 396 then -- VP x 100, CP x 1
+          if idx == 396 then -- VP has a weekly max scaled by 100
             ci.weeklyMax = ci.weeklyMax and math.floor(ci.weeklyMax/100)
           end
-          ci.totalMax = ci.totalMax and math.floor(ci.totalMax/100)
+	  if idx == 390 or idx == 392 or idx == 395 or idx == 396 then -- these have a total max scaled by 100
+            ci.totalMax = ci.totalMax and math.floor(ci.totalMax/100)
+	  end
           ci.season = addon:GetSeasonCurrency(idx)
 	  t.currency[idx] = ci
 	end
@@ -1257,8 +1294,10 @@ function core:OnInitialize()
 	db.Tooltip.TrackDailyQuests = (db.Tooltip.TrackDailyQuests == nil and true) or db.Tooltip.TrackDailyQuests
 	db.Tooltip.TrackWeeklyQuests = (db.Tooltip.TrackWeeklyQuests == nil and true) or db.Tooltip.TrackWeeklyQuests
 	db.Tooltip.ServerSort = (db.Tooltip.ServerSort == nil and true) or db.Tooltip.ServerSort
+	db.Tooltip.ServerOnly = (db.Tooltip.ServerOnly == nil and false) or db.Tooltip.ServerOnly
 	db.Tooltip.SelfFirst = (db.Tooltip.SelfFirst == nil and true) or db.Tooltip.SelfFirst
 	db.Tooltip.SelfAlways = (db.Tooltip.SelfAlways == nil and false) or db.Tooltip.SelfAlways
+	db.Tooltip.RowHighlight = db.Tooltip.RowHighlight or 0.1
         addon:SetupVersion()
 	RequestRaidInfo() -- get lockout data
 	if LFGDungeonList_Setup then pcall(LFGDungeonList_Setup) end -- try to force LFG frame to populate instance list LFDDungeonList
@@ -1663,6 +1702,21 @@ function core:Refresh()
              info[1] = true
            end
         end
+	local tiq = vars.db.Toons[thisToon]
+	tiq = tiq and tiq.Quests
+	if tiq then
+	  for _, qinfo in pairs(addon:specialWeeklyQuests()) do
+	    local qid = qinfo.quest
+            if weeklyreset and (IsQuestFlaggedCompleted(qid) or 
+	      (quests and quests[qid])) then
+              local q = tiq[qid] or {}
+	      tiq[qid] = q
+	      q.Title = qinfo.name
+	      q.Zone = qinfo.zone
+	      q.Expires = weeklyreset
+	    end
+	  end
+	end
 
         local icnt, dcnt = 0,0
 	for name, _ in pairs(temp) do
@@ -1725,7 +1779,9 @@ end
 local function cpairs(t)
   wipe(cnext_sorted_names)
   for n,_ in pairs(t) do
-    if vars.db.Toons[n] and vars.db.Toons[n].Show ~= "never" then
+    local tn, _,_, ts = strsplit(" - ",n)
+    if vars.db.Toons[n] and vars.db.Toons[n].Show ~= "never" and
+       (ts == GetRealmName() or not db.Tooltip.ServerOnly) then
       table.insert(cnext_sorted_names, n)
     end
   end
@@ -1877,15 +1933,18 @@ function core:ShowTooltip(anchorframe)
 	-- allocating tooltip space for instances, categories, and space between categories
 	local categoryrow = localarr("categoryrow") -- remember where each category heading goes
 	local instancerow = localarr("instancerow") -- remember where each instance goes
+	local blankrow = localarr("blankrow") -- track blank lines
 	local firstcategory = true -- use this to skip spacing before the first category
 	for _, category in ipairs(addon:OrderedCategories()) do
 		if categoryshown[category] then
 			if not firstcategory and vars.db.Tooltip.CategorySpaces then
-				tooltip:AddSeparator(6,0,0,0,0)
+				local line = tooltip:AddSeparator(6,0,0,0,0)
+				blankrow[line] = true
 			end
 			if (categories > 1 or vars.db.Tooltip.ShowSoloCategory) and categoryshown[category] then
-				categoryrow[category], _ = tooltip:AddLine()
-
+				local line = tooltip:AddLine()
+				categoryrow[category] = line
+				blankrow[line] = true
 			end
 			for _, instance in ipairs(addon:OrderedInstances(category)) do
 			       local inst = vars.db.Instances[instance]
@@ -2108,7 +2167,8 @@ function core:ShowTooltip(anchorframe)
    	    local currLine
 	    if show then
 		if not firstcategory and vars.db.Tooltip.CategorySpaces and firstcurrency then
-			tooltip:AddSeparator(6,0,0,0,0)
+			local line = tooltip:AddSeparator(6,0,0,0,0)
+		        blankrow[line] = true
 			firstcurrency = false
 		end
 		currLine = tooltip:AddLine(YELLOWFONT .. show .. FONTEND)		
@@ -2186,9 +2246,18 @@ function core:ShowTooltip(anchorframe)
 		end
 	end
 
+	local hi = true
 	for i=2,tooltip:GetLineCount() do -- row highlighting
 	  tooltip:SetLineScript(i, "OnEnter", function() end)
 	  tooltip:SetLineScript(i, "OnLeave", function() end)
+
+          if hi and not blankrow[i] then
+	    tooltip:SetLineColor(i, 1,1,1, db.Tooltip.RowHighlight)
+	    hi = false
+	  else
+	    tooltip:SetLineColor(i, 0,0,0, 0)
+	    hi = true
+	  end
 	end
 
 	-- finishing up, with hints
