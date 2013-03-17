@@ -67,15 +67,15 @@ BazookaDB = {
 						["disableMouseInCombat"] = true,
 						["showIcon"] = false,
 						["disableTooltip"] = true,
-						["pos"] = 2,
+						["pos"] = 3,
 						["bar"] = 2,
 						["disableMouseOutOfCombat"] = true,
 					},
 					["BrokerToolBox - Repair"] = {
 						["area"] = "left",
-						["pos"] = 3,
-						["disableTooltipInCombat"] = false,
 						["bar"] = 3,
+						["disableTooltipInCombat"] = false,
+						["pos"] = 3,
 					},
 					["SN - Melee Mastery"] = {
 						["pos"] = 12,
@@ -86,9 +86,9 @@ BazookaDB = {
 					},
 					["Currencyflow"] = {
 						["area"] = "left",
-						["bar"] = 2,
-						["disableTooltipInCombat"] = false,
 						["pos"] = 1,
+						["disableTooltipInCombat"] = false,
+						["bar"] = 2,
 					},
 					["SpeedyGonzales"] = {
 						["area"] = "left",
@@ -148,10 +148,10 @@ BazookaDB = {
 						["pos"] = 5,
 					},
 					["Broker_MicroMenu"] = {
-						["showupdates"] = "",
-						["enabled"] = false,
 						["showValue"] = false,
+						["enabled"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 4,
 						["bar"] = 2,
 					},
@@ -193,6 +193,13 @@ BazookaDB = {
 						["showValue"] = false,
 						["pos"] = 4,
 					},
+					["Simple iLevel"] = {
+						["area"] = "center",
+						["stripColors"] = false,
+						["showValue"] = false,
+						["bar"] = 3,
+						["pos"] = 1,
+					},
 					["Broker_Speed_Horizontal"] = {
 						["enabled"] = false,
 						["pos"] = 3,
@@ -205,9 +212,8 @@ BazookaDB = {
 					["SN - Ranged Armor Penetration"] = {
 						["pos"] = 10,
 					},
-					["Gimplist"] = {
-						["enabled"] = false,
-						["pos"] = 1,
+					["SN - Ranged Speed"] = {
+						["pos"] = 24,
 					},
 					["SN - Spell Mastery"] = {
 						["pos"] = 11,
@@ -217,31 +223,33 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["SN - Ranged Speed"] = {
-						["pos"] = 24,
+					["Broker_DurabilityInfo"] = {
+						["area"] = "cright",
+						["enabled"] = false,
+						["pos"] = 1,
 					},
 					["BrokerToolBox - Token"] = {
 						["area"] = "center",
-						["pos"] = 1,
-						["disableTooltipInCombat"] = false,
 						["bar"] = 2,
+						["disableTooltipInCombat"] = false,
+						["pos"] = 1,
 					},
 					["Broker_DualSpecObject"] = {
 						["area"] = "left",
-						["pos"] = 2,
-						["disableTooltipInCombat"] = false,
 						["bar"] = 3,
+						["disableTooltipInCombat"] = false,
+						["pos"] = 2,
 					},
 					["Aanye_XP"] = {
 						["pos"] = 6,
 					},
 					["Broker_uClock"] = {
-						["showupdates"] = "",
+						["showValue"] = false,
 						["showIcon"] = false,
 						["enabled"] = false,
 						["bar"] = 2,
-						["showValue"] = false,
 						["stripColors"] = false,
+						["showupdates"] = "",
 						["pos"] = 9,
 					},
 					["SN - Expertise"] = {
@@ -258,79 +266,68 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 16,
 					},
-					["SN - Spell Hit"] = {
-						["pos"] = 17,
-					},
 					["LDB_Guild"] = {
 						["pos"] = 6,
 					},
-					["SN - Ranged Mastery"] = {
-						["pos"] = 9,
+					["SN - Spell Hit"] = {
+						["pos"] = 17,
+					},
+					["BugSack"] = {
+						["enabled"] = false,
+						["pos"] = 1,
 					},
 					["Skada"] = {
 						["area"] = "left",
 						["enabled"] = false,
 						["pos"] = 3,
 					},
-					["Broker_wDurability"] = {
-						["enabled"] = false,
-						["pos"] = 9,
-					},
-					["BugSack"] = {
-						["enabled"] = false,
-						["pos"] = 1,
-					},
 					["shFps"] = {
 						["manualTooltip"] = false,
 						["disableMouseInCombat"] = true,
 						["disableTooltip"] = true,
-						["pos"] = 1,
+						["pos"] = 2,
 						["bar"] = 2,
 						["disableMouseOutOfCombat"] = true,
+					},
+					["Broker_wDurability"] = {
+						["enabled"] = false,
+						["pos"] = 9,
+					},
+					["Broker_Equipment"] = {
+						["enabled"] = false,
+						["pos"] = 23,
 					},
 					["DungeonHelper"] = {
 						["area"] = "cright",
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["Broker_Equipment"] = {
-						["enabled"] = false,
-						["pos"] = 23,
-					},
 					["MailMinder"] = {
 						["enabled"] = false,
 						["stripColors"] = false,
 						["pos"] = 3,
 					},
+					["Broker_Wallet"] = {
+						["enabled"] = false,
+						["pos"] = 18,
+					},
 					["SN - MP5"] = {
 						["pos"] = 18,
 					},
-					["SocialState"] = {
-						["area"] = "left",
-						["enabled"] = false,
-						["pos"] = 4,
+					["SN - Defense Mastery"] = {
+						["pos"] = 19,
 					},
 					["Draiks Broker ILevel"] = {
 						["showValue"] = false,
 						["showIcon"] = false,
 						["area"] = "left",
-						["bar"] = 3,
-						["disableTooltipInCombat"] = false,
+						["enabled"] = false,
 						["pos"] = 4,
+						["disableTooltipInCombat"] = false,
+						["bar"] = 3,
 					},
 					["SN - Spell Crit"] = {
 						["pos"] = 23,
-					},
-					["Broker_Wallet"] = {
-						["enabled"] = false,
-						["pos"] = 18,
-					},
-					["SN - Dmg Reduction"] = {
-						["pos"] = 20,
-					},
-					["DETrackingBroker"] = {
-						["enabled"] = false,
-						["pos"] = 1,
 					},
 					["YssDrop"] = {
 						["showValue"] = false,
@@ -341,8 +338,12 @@ BazookaDB = {
 						["alignment"] = "LEFT",
 						["pos"] = 1,
 					},
-					["SN - Melee Crit"] = {
-						["pos"] = 29,
+					["SN - Dmg Reduction"] = {
+						["pos"] = 20,
+					},
+					["DETrackingBroker"] = {
+						["enabled"] = false,
+						["pos"] = 1,
 					},
 					["Volumizer"] = {
 						["stripColors"] = false,
@@ -355,25 +356,33 @@ BazookaDB = {
 					["SN - Melee Attack Power"] = {
 						["pos"] = 14,
 					},
+					["SN - Melee Crit"] = {
+						["pos"] = 29,
+					},
 					["BrokerToolBox - Money"] = {
 						["showValue"] = false,
 						["area"] = "left",
 						["enabled"] = false,
+						["pos"] = 2,
 						["showSuffix"] = false,
 						["bar"] = 2,
-						["pos"] = 2,
+					},
+					["SocialState"] = {
+						["area"] = "left",
+						["enabled"] = false,
+						["pos"] = 4,
 					},
 					["BrokerXPBar"] = {
 						["pos"] = 3,
-					},
-					["SN - Defense Mastery"] = {
-						["pos"] = 19,
 					},
 					["ElkExperience"] = {
 						["pos"] = 5,
 					},
 					["SN - Vengeance"] = {
 						["pos"] = 16,
+					},
+					["SN - Ranged Mastery"] = {
+						["pos"] = 9,
 					},
 					["SN - Parry"] = {
 						["pos"] = 26,
@@ -398,8 +407,7 @@ BazookaDB = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
-					["Broker_DurabilityInfo"] = {
-						["area"] = "cright",
+					["Gimplist"] = {
 						["enabled"] = false,
 						["pos"] = 1,
 					},
