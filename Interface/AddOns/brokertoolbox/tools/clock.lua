@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("clock",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.1 (29. Mar. 2011)",
 	defaultON=true,
 	db={

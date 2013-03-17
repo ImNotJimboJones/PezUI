@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("money",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.2 (10. Sep. 2012)",
 	defaultON=true,
 	db={

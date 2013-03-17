@@ -1,11 +1,11 @@
-## Interface: 50001
+## Interface: 50200
 ## Title: Gimplist
 ## Notes: Keeps track of Gimps and warns you if you end up grouping with them.
 ## Author: DrKazza
-## Version: 1.14 release
+## Version: 1.52
 ## SavedVariables: GLDB
 ## OptionalDeps: Ace3, LibBabble-Zone-3.0, LibDataBroker-1.1
-## X-Curse-Packaged-Version: 1.14 release
+## X-Curse-Packaged-Version: 1.52
 ## X-Curse-Project-Name: Gimplist
 ## X-Curse-Project-ID: gimplist
 ## X-Curse-Repository-ID: wow/gimplist/mainline

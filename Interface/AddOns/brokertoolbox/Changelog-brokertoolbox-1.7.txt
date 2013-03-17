@@ -1,18 +1,22 @@
 ------------------------------------------------------------------------
-r21 | pathur | 2012-09-10 14:46:41 +0000 (Mon, 10 Sep 2012) | 1 line
+r24 | pathur | 2013-03-15 18:07:54 +0000 (Fri, 15 Mar 2013) | 1 line
 Changed paths:
-   A /tags/v1.5.0 (from /trunk:20)
+   A /tags/1.7 (from /trunk:23)
 
-Tagged as v1.5.0
+Tagged as 1.7
 ------------------------------------------------------------------------
-r20 | pathur | 2012-09-10 14:45:34 +0000 (Mon, 10 Sep 2012) | 1 line
+r23 | pathur | 2013-03-15 18:07:12 +0000 (Fri, 15 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/core.lua
+
+Update
+------------------------------------------------------------------------
+r22 | pathur | 2013-03-15 18:06:22 +0000 (Fri, 15 Mar 2013) | 1 line
 Changed paths:
    M /trunk/BrokerToolBox.toc
    M /trunk/core.lua
    M /trunk/localization/deDE.lua
    M /trunk/localization/enUS.lua
-   M /trunk/localization/ruRU.lua
-   M /trunk/localization/zhTW.lua
    M /trunk/tools/clock.lua
    M /trunk/tools/equipment.lua
    M /trunk/tools/experience.lua
@@ -26,14 +30,5 @@ Changed paths:
    M /trunk/tools/reputation.lua
    M /trunk/tools/token.lua
 
-Updated for patch 5.0.3
-------------------------------------------------------------------------
-r19 | pathur | 2012-03-13 23:22:15 +0000 (Tue, 13 Mar 2012) | 1 line
-Changed paths:
-   M /trunk/core.lua
-   M /trunk/localization/deDE.lua
-   M /trunk/localization/enUS.lua
-   M /trunk/tools/money.lua
-
-- Money: Added option to round
+Update for 5.2.0
 ------------------------------------------------------------------------

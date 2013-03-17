@@ -66,6 +66,15 @@ function config:setDropOnLeavingFarm(value)
 		config.dropOnLeavingFarm = false;
 	end
 end
+function config:setShowBagsByDefault(value)
+	if (value and not config.showBagsByDefault) then
+		config.showBagsByDefault = true;
+		FRM:showBagsByDefaultChanged();
+	elseif (not value and config.showBagsByDefault) then
+		config.showBagsByDefault = false;
+		FRM:showBagsByDefaultChanged();
+	end
+end
 
 --[[ Create Config Panel ]]--
 
@@ -101,6 +110,12 @@ dropOnRightClickCheckBox:setBelow(dropLabel);
 local dropOnLeavingFarmCheckBox = factory:createCheckBox(configPanel, L.dropOnLeavingFarmCheckBoxLabel, L.dropOnLeavingFarmCheckBoxTooltip, "local");
 dropOnLeavingFarmCheckBox:setBelow(dropOnRightClickCheckBox);
 
+local bagDisplayLabel = factory:createLabel(configPanel, L.bagDisplayLabelText);
+bagDisplayLabel:setBelow(dropOnLeavingFarmCheckBox);
+
+local showBagsByDefaultCheckBox = factory:createCheckBox(configPanel, L.showBagsByDefaultCheckBoxLabel, L.showBagsByDefaultCheckBoxTooltip, "local");
+showBagsByDefaultCheckBox:setBelow(bagDisplayLabel);
+
 configPanel.default = function(self)
 	config:setShowAutomatically(true);
 	config:setHideInCombat(true);
@@ -109,6 +124,7 @@ configPanel.default = function(self)
 	config:setHideWhenMounted(true);
 	config:setDropOnRightClick(true);
 	config:setDropOnLeavingFarm(true);
+	config:setShowBagsByDefault(false);
 end
 configPanel.okay = function(self)
 	config:setShowAutomatically(showAutomaticallyCheckBox:GetChecked());
@@ -118,6 +134,7 @@ configPanel.okay = function(self)
 	config:setHideWhenMounted(hideWhenMountedCheckBox:GetChecked());
 	config:setDropOnRightClick(dropOnRightClickCheckBox:GetChecked());
 	config:setDropOnLeavingFarm(dropOnLeavingFarmCheckBox:GetChecked());
+	config:setShowBagsByDefault(showBagsByDefaultCheckBox:GetChecked());
 end
 configPanel.refresh = function(self)
 	showAutomaticallyCheckBox:SetChecked(config.showAutomatically);
@@ -127,4 +144,5 @@ configPanel.refresh = function(self)
 	hideWhenMountedCheckBox:SetChecked(config.hideWhenMounted);
 	dropOnRightClickCheckBox:SetChecked(config.dropOnRightClick);
 	dropOnLeavingFarmCheckBox:SetChecked(config.dropOnLeavingFarm);
+	showBagsByDefaultCheckBox:SetChecked(config.showBagsByDefault);
 end

@@ -1,7 +1,7 @@
 local tool, i
 tool = BrokerToolBox:NewTool("equipment",{
-	author="Sanori",
-	version="1.4 (10. Sep. 2012)",
+	--author="Sanori",
+	version="1.5 (27. Sep. 2012)",
 	defaultON=true,
 	ScanEquipment = function(self, name)		--Borrowed from p3lim's Broker_Equipment
 		for slot, location in pairs(GetEquipmentSetLocations(name)) do
@@ -85,7 +85,7 @@ tool = BrokerToolBox:NewTool("equipment",{
 				end)
 				return
 			end
-			if (UnitLevel('player')>=10 and GetNumSpecGroups()==2) then
+			if (GetNumSpecGroups()==2) then
 				if (GetActiveSpecGroup()==1) then
 					SetActiveSpecGroup(2)
 				else
@@ -106,7 +106,7 @@ tool = BrokerToolBox:NewTool("equipment",{
 				GameTooltip:AddDoubleLine("|T"..icon..":12:12:0:0|t "..name,count.." "..ITEMS,r,g,b,r,g,b)
 			end
 			GameTooltip:AddLine(" ")
-			if (UnitLevel('player')>=10) then
+			if (GetSpecialization(nil, nil, 1)) then
 				GameTooltip:AddLine(TALENTS.." |cffffffff("..tool:L("Rightclick")..")|r")
 				for i=1, GetNumSpecGroups() do
 					local currentSpec = GetSpecialization(nil, nil, i)

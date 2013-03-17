@@ -1,13 +1,13 @@
 ------------------------------------------------------------------------
-r66 | drkazza | 2012-08-29 08:56:53 +0000 (Wed, 29 Aug 2012) | 1 line
+r68 | drkazza | 2013-03-16 14:52:51 +0000 (Sat, 16 Mar 2013) | 1 line
 Changed paths:
-   A /tags/1.14 release (from /trunk:65)
+   A /tags/1.52 (from /trunk:67)
 
-Tagging as 1.14 release
+Tagging as 1.52
 ------------------------------------------------------------------------
-r65 | DrKazza | 2012-08-29 07:57:39 +0000 (Wed, 29 Aug 2012) | 1 line
+r67 | DrKazza | 2013-03-16 14:48:01 +0000 (Sat, 16 Mar 2013) | 1 line
 Changed paths:
    M /trunk/Gimplist.toc
 
-Checked for MoP - seems to work
+Updated toc
 ------------------------------------------------------------------------

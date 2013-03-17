@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("location",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.1 (10. Sep. 2012)",
 	defaultON=true,
 	db={

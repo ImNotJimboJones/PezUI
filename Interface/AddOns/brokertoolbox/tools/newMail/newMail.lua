@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("newMail",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.0 (15. Feb. 2012)",
 	defaultON=false,	
 	events={

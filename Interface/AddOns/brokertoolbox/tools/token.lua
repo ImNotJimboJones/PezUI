@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("token",{
-	author="Sanori",									--author of this tool
-	version="1.5 (10. Sep. 2012)",				--tool version
+	--author="Sanori",									--author of this tool
+	version="1.7 (15. Mar. 2013)",				--tool version
 	defaultON=true,									--default active?
 	db={													--tool database
 		currency={},
@@ -58,7 +58,7 @@ tool = BrokerToolBox:NewTool("token",{
 								header=nil
 							end
 							found=true
-							name = "|TInterface\\Icons\\"..texture..":12:12:0:0|t "..name
+							name = "|T"..texture..":12:12:0:0|t "..name
 							--Workaround, because sometimes weeklyMax and totalMax have a factor of 100
 							if (totalMax>10000) then totalMax=floor(totalMax/100) end
 							if (weeklyMax>10000) then weeklyMax=floor(weeklyMax/100) end
@@ -81,10 +81,11 @@ tool = BrokerToolBox:NewTool("token",{
 	},
 	PreInit = function(self)	--Init Vars
 		self.currencyids={
-			{self:L("PVE"),396,395},
-			{self:L("PVP"),390,392,391},
-			{self:L("PROFESSION"),698,361,61,402,81},
-			{OTHER,697,515,416,241},
+			{self:L("PVE"),396,395,615,614},
+			{PLAYER_V_PLAYER,390,392,391},
+			{EXPANSION_NAME4,697,738},
+			{TRADE_SKILLS,698,361,61,402},
+			{MISCELLANEOUS,515,416,81,241},
 		}
 		self.defaultxt=self.name
 	end,
@@ -95,10 +96,10 @@ tool = BrokerToolBox:NewTool("token",{
 			local name, amount, texture, _ = GetCurrencyInfo(id)
 			if (name and name~="" and texture and texture~="" and amount and type(amount)=="number") then
 				if self.broker.text==self.defaultxt then
-					self.broker.icon="Interface\\Icons\\"..texture
+					self.broker.icon=texture
 					self.broker.text=amount
 				else
-					self.broker.text=self.broker.text.."  |TInterface\\Icons\\"..texture..":16:16:0:0|t"..amount
+					self.broker.text=self.broker.text.."  |T"..texture..":16:16:0:0|t"..amount
 				end
 			end
 		end

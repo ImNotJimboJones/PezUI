@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("freeBagSlots",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.1 (10. Sep. 2012)",
 	defaultON=false,	
 	freeSlotCount=0,

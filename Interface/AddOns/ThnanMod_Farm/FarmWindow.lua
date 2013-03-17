@@ -73,7 +73,7 @@ local function farmButton_OnEvent(self, event)
 		if self:IsMouseOver() and self:IsVisible() then
 			farmButton_OnEnter(self);
 		end
-	elseif event == "BAG_UPDATE" or event == "GET_ITEM_INFO_RECEIVED" then
+	elseif event == "BAG_UPDATE" or event == "BAG_UPDATE_COOLDOWN" or event == "GET_ITEM_INFO_RECEIVED" then
 		self:updateAppearance();
 	end
 end
@@ -134,6 +134,7 @@ local function seedButton_setMacroText(self)
 			id1Modifier, id2Modifier = "modifier:shift", "nomodifier";
 		end
 		text = text.."["..id2Modifier.."] item:"..self.itemID2.."; ["..id1Modifier.."] item:"..self.itemID;
+		text = text.."\n/use ["..id2Modifier.."] item:"..self.itemID3
 	else
 		text = text.."item:"..self.itemID;
 	end
@@ -164,6 +165,9 @@ local function seedButton_updateAppearance(self)
 	if self.itemID2 and shouldShowItem2() then
 		self.icon:SetTexture(self.itemTexture2);
 		count = GetItemCount(self.itemID2, false, true);
+		if self.itemID3 then
+			count = count + GetItemCount(self.itemID3, false, true);
+		end
 	else
 		self.icon:SetTexture(self.itemTexture);
 	end
@@ -271,6 +275,7 @@ local function createFarmButton(itemID, itemID2, buttonType, itemID3)
 		button.itemID = itemID
 		if itemID2 then
 			button:RegisterEvent("MODIFIER_STATE_CHANGED");
+			button:RegisterEvent("BAG_UPDATE_COOLDOWN");
 			button.itemID2 = itemID2;
 			button.itemID3 = itemID3;
 		end
@@ -306,23 +311,23 @@ end
 
 -- create seed buttons
 
-local greenCabbageButton = createFarmButton(79102, 95434, "seed");
-local scallionButton = createFarmButton(80591, 95441, "seed");
-local redBlossomLeekButton = createFarmButton(80593, 95440, "seed");
-local whiteTurnipButton = createFarmButton(80595, 95443, "seed");
-local witchberryButton = createFarmButton(89326, 95444, "seed");
-local juicycrunchCarrotButton = createFarmButton(80590, 95436, "seed");
-local moguPumpkinButton = createFarmButton(80592, 95438, "seed");
-local pinkTurnipButton = createFarmButton(80594, 95439, "seed");
-local jadeSquashButton = createFarmButton(89328, 95437, "seed");
-local stripedMelonButton = createFarmButton(89329, 95442, "seed");
+local greenCabbageButton = createFarmButton(79102, 95434, "seed", 80809);
+local scallionButton = createFarmButton(80591, 95441, "seed", 84783);
+local redBlossomLeekButton = createFarmButton(80593, 95440, "seed", 85158);
+local whiteTurnipButton = createFarmButton(80595, 95443, "seed", 85163);
+local witchberryButton = createFarmButton(89326, 95444, "seed", 89847);
+local juicycrunchCarrotButton = createFarmButton(80590, 95436, "seed", 84782);
+local moguPumpkinButton = createFarmButton(80592, 95438, "seed", 85153);
+local pinkTurnipButton = createFarmButton(80594, 95439, "seed", 85162);
+local jadeSquashButton = createFarmButton(89328, 95437, "seed", 89848);
+local stripedMelonButton = createFarmButton(89329, 95442, "seed", 89849);
 
-local magebulbButton = createFarmButton(85217, 95452, "seed");
-local snakerootButton = createFarmButton(85215, 95448, "seed");
-local songbellButton = createFarmButton(89233, 95446, "seed");
-local enigmaButton = createFarmButton(85216, 95450, "seed");
-local raptorleafButton = createFarmButton(89202, 95458, "seed");
-local windshearCactusButton = createFarmButton(89197, 95456, "seed");
+local magebulbButton = createFarmButton(85217, 95452, "seed", 95451);
+local snakerootButton = createFarmButton(85215, 95448, "seed", 95447);
+local songbellButton = createFarmButton(89233, 95446, "seed", 95445);
+local enigmaButton = createFarmButton(85216, 95450, "seed", 95449);
+local raptorleafButton = createFarmButton(89202, 95458, "seed", 95457);
+local windshearCactusButton = createFarmButton(89197, 95456, "seed", 95454);
 
 local autumnBlossomButton = createFarmButton(85267, nil, "seed");
 local springBlossomButton = createFarmButton(85268, nil, "seed");
@@ -683,7 +688,7 @@ local inventoryIDs = {
 	85269, -- winter blossom
 	85219, -- omminous seed
 	91806, -- unstable portal shard
-	-- bags
+	-- bags (seed)
 	95434, -- green cabbage
 	95441, -- scallion
 	95440, -- red blossom leek
@@ -694,6 +699,29 @@ local inventoryIDs = {
 	95439, -- pink turnip
 	95437, -- jade squash
 	95442, -- striped melon
+	95452, -- magebulb
+	95448, -- snakeroot
+	95446, -- songbell
+	95450, -- enigma
+	95458, -- raptorleaf
+	95456, -- windshear cactus
+	-- bags (gold)
+	80809, -- green cabbage
+	84783, -- scallion
+	85158, -- red blossom leek
+	85163, -- white turnip
+	89847, -- witchberry
+	84782, -- juicycrunch carrot
+	85153, -- mogu pumpkin
+	85162, -- pink turnip
+	89848, -- jade squash
+	89849, -- striped melon
+	95451, -- magebulb
+	95447, -- snakeroot
+	95445, -- songbell
+	95449, -- enigma
+	95457, -- raptorleaf
+	95454, -- windshear cactus
 	-- tools
 	79104, -- watering can
 	80513, -- bug sprayer
@@ -933,16 +961,16 @@ local bagIDFromSeedID = {
 	[89329] = 95442, -- striped melon
 };
 local bagID2FromSeedID = {
-	[79102] = 95434, -- green cabbage
-	[80591] = 95441, -- scallion
-	[80593] = 95440, -- red blossom leek
-	[80595] = 95443, -- white turnip
-	[89326] = 95444, -- witchberry
-	[80590] = 95436, -- juicycrunch carrot
-	[80592] = 95438, -- mogu pumpkin
-	[80594] = 95439, -- pink turnip
-	[89328] = 95437, -- jade squash
-	[89329] = 95442, -- striped melon
+	[79102] = 80809, -- green cabbage
+	[80591] = 84783, -- scallion
+	[80593] = 85158, -- red blossom leek
+	[80595] = 85163, -- white turnip
+	[89326] = 89847, -- witchberry
+	[80590] = 84782, -- juicycrunch carrot
+	[80592] = 85153, -- mogu pumpkin
+	[80594] = 85162, -- pink turnip
+	[89328] = 89848, -- jade squash
+	[89329] = 89849, -- striped melon
 };
 local previousToday = "";
 local previousTodaySeed = 0;
@@ -963,11 +991,13 @@ local function farmWindow_OnUpdate(self)
 			forecastSeedButton.itemID2 = bagIDFromSeedID[data.todayForecast];
 			forecastSeedButton.itemID3 = bagID2FromSeedID[data.todayForecast];
 			forecastSeedButton:RegisterEvent("BAG_UPDATE");
+			forecastSeedButton:RegisterEvent("BAG_UPDATE_COOLDOWN");
 			forecastSeedButton:RegisterEvent("MODIFIER_STATE_CHANGED");
 		else
 			forecastSeedButton.itemID2 = nil;
 			forecastSeedButton.itemID3 = nil;
 			forecastSeedButton:UnregisterEvent("BAG_UPDATE");
+			forecastSeedButton:UnregisterEvent("BAG_UPDATE_COOLDOWN");
 			forecastSeedButton:UnregisterEvent("MODIFIER_STATE_CHANGED");
 		end
 		forecastSeedButton.itemTexture = nil;

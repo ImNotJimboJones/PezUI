@@ -4,6 +4,11 @@ A framework for various features. See each plugin's readme for more information.
 
 VERSION CHANGES:
 
+3.5.0:
+
+- Bug fixes in Farm plugin.
+- Added features to Farm plugin.
+
 3.4.2:
 
 - Bug fixes in Farm plugin.

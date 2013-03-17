@@ -23,6 +23,7 @@ L.pluginName = "Farm";
 L.pluginDescription = "Adds a button panel for farming tasks.\n\nThis config panel can be accessed directly by typing /ThnanMod farm.\nThe tool panel can be shown at any time by typing /ThnanMod farm show.";
 L.visibilityLabelText = "Visibility Options";
 L.dropLabelText = "Tool Drop Options";
+L.bagDisplayLabelText = "Seed Bag Display Options";
 L.showAutomaticallyCheckBoxLabel = "Show farm window on farm";
 L.showAutomaticallyCheckBoxTooltip = "This option will cause the farm tool panel to appear when entering Sunsong Ranch and disappear when leaving.";
 L.hideInCombatCheckBoxLabel = "Hide in combat";
@@ -37,13 +38,15 @@ L.dropOnRightClickCheckBoxLabel = "Drop tool on right click";
 L.dropOnRightClickCheckBoxTooltip = "This option will make right clicking a tool button drop that tool."
 L.dropOnLeavingFarmCheckBoxLabel = "Drop tools when leaving farm";
 L.dropOnLeavingFarmCheckBoxTooltip = "This option will make you drop all the farm tools when you leave the farm.";
+L.showBagsByDefaultCheckBoxLabel = "Show Seed Bags By Default";
+L.showBagsByDefaultCheckBoxTooltip = "This option will cause seed buttons to show seed bags by default, and show seeds when the shift key is held.";
 
 
 L.sunsongRanchName = "Sunsong Ranch";
 L.joguPredictsGreenCabbage = "Oooh... ooooh! My shenses are tingling! I see... huge Green Cabbages in your future.";
 L.joguPredictsScallion = "Have I ever told you that I hate Scallions? Hate 'em!\n\n<Jogu lets out a loud belch.>\n\nUnfortunately for me, they're going to be in high season tomorrow.";
 L.joguPredictsRedBlossomLeek = "Shpring for a leek, and you might get two.";
-L.joguPredictsWhiteTurnip = "Fields of white turnips. Raw and shpicy!"; -- unconfirmed
+L.joguPredictsWhiteTurnip = "Fields of white turnips. Raw and shpicy!";
 L.joguPredictsWitchberry = "Which berries should you plant? Witchberries, of course!";
 L.joguPredictsJuicycrunchCarrot = "You ever heard of a juishycrunch carrot? They'll never be juisher than tomorrow.";
 L.joguPredictsMoguPumpkin = "Pumpkins! It'sh gonna be huge, gigantic pumpkins!";

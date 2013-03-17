@@ -1,6 +1,6 @@
 local tool, k, v
 tool = BrokerToolBox:NewTool("recountControl",{
-	author="Sanori",
+	--author="Sanori",
 	version="1.0 (14. Feb. 2012)",
 	defaultON=false,
 	requires="Recount",								--Required Addon

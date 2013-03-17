@@ -17,10 +17,11 @@ config.hideInVehicle = true;
 config.hideWhenMounted = true;
 config.dropOnRightClick = true;
 config.dropOnLeavingFarm = false;
+config.showBagsByDefault = false;
 
 --[[ Saved Variable Handlers ]]--
 
-local currentDataVersion = 2;
+local currentDataVersion = 3;
 
 --[[ version nil
 (C) global.hideInCombat
@@ -38,6 +39,9 @@ local currentDataVersion = 2;
 ]]--
 --[[ version 2 changes
 (C) global.hideWhenMounted
+]]--
+--[[ version 3 changes
+(C) character.showBagsByDefault
 ]]--
 
 function FRM:loadSavedVars(global, realm, character)
@@ -63,6 +67,9 @@ function FRM:loadSavedVars(global, realm, character)
 		if character.dataVersion >= 1 then
 			config.dropOnLeavingFarm = character.dropOnLeavingFarm;
 		end
+		if character.dataVersion >= 3 then
+			config:setShowBagsByDefault(character.showBagsByDefault);
+		end
 	end
 end
 
@@ -83,6 +90,7 @@ function FRM:storeSavedVars()
 	character.dataVersion = currentDataVersion;
 	character.showAutomatically = config.showAutomatically;
 	character.dropOnLeavingFarm = config.dropOnLeavingFarm;
+	character.showBagsByDefault = config.showBagsByDefault;
 	
 	return global, realm, character;
 end

@@ -1,11 +1,8 @@
 local tool
 tool = BrokerToolBox:NewTool("microbutton",{
-	author="Sanori",									--author of this tool
-	version="1.4 (10. Sep. 2012)",				--tool version
+	--author="Sanori",									--author of this tool
+	version="1.5 (15. Mar. 2013)",				--tool version
 	defaultON=false,									--default active?
-	db = {
-		HideBlizzButton = false,
-	},
 	OnUpdate = function(self, elapsed)
 		self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed
 		if (self.TimeSinceLastUpdate > 1) then
@@ -36,7 +33,7 @@ tool = BrokerToolBox:NewTool("microbutton",{
 				GameTooltip:Show()
 			end
 			ChatFrame1:RegisterEvent("TIME_PLAYED_MSG")
-		end
+		end,
 	},
 	broker = {
 		type = "data source",
@@ -44,15 +41,6 @@ tool = BrokerToolBox:NewTool("microbutton",{
 		icon = "Interface\\Spellbook\\Spellbook-Icon",
 		OnClick = function(self, button)
 			GameTooltip:Hide()
-			if button=="RightButton" then
-				tool.menu:Open(self, 'children', function(level, value)
-					tool.menu:AddToggle(tool:L("HideBlizzButton"), tool.db.HideBlizzButton, function(var)
-						tool.db.HideBlizzButton=var
-						tool:HideBlizzButtons()
-					end)
-				end)
-				return
-			end
 			tool.menu:Open(self, 'children', function(level, value)
 				local _, class = UnitClass("player")
 				local coords =  CLASS_ICON_TCOORDS[class]
@@ -71,10 +59,11 @@ tool = BrokerToolBox:NewTool("microbutton",{
 					'iconCoordBottom', 0.9453125
 				)
 				tool.menu:AddFunc(MicroButtonTooltipText(QUESTLOG_BUTTON, "TOGGLEQUESTLOG"), function() ToggleFrame(QuestLogFrame) end, "Interface\\LFGFRAME\\LFGICON-QUEST")
-				if IsInGuild() then
-					tool.menu:AddFunc(MicroButtonTooltipText(GUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, nil)
-				end
-				tool.menu:AddFunc(MicroButtonTooltipText(LOOKINGFORGUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, "Interface\\Buttons\\UI-MicroButton-Socials-Up");
+				--if IsInGuild() then
+					--tool.menu:AddFunc(MicroButtonTooltipText(GUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, nil)
+				--end
+				--tool.menu:AddFunc(MicroButtonTooltipText(LOOKINGFORGUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, "Interface\\Buttons\\UI-MicroButton-Socials-Up");
+				tool.menu:AddFunc(MicroButtonTooltipText(GUILD, "TOGGLEGUILDTAB"), function() ToggleGuildFrame() end, "Interface\\Buttons\\UI-MicroButton-Socials-Up")
 				tool.menu:AddFunc(MicroButtonTooltipText(PLAYER_V_PLAYER, "TOGGLECHARACTER4"), function() TogglePVPFrame() end, "Interface\\BattlefieldFrame\\Battleground-"..UnitFactionGroup("player"))
 				tool.menu:AddFunc(MicroButtonTooltipText(DUNGEONS_BUTTON, "TOGGLELFGPARENT"), function() ToggleLFDParentFrame() end, "Interface\\LFGFRAME\\LFG-Eye", nil, nil,
 					'iconCoordLeft', 0.0234375,
@@ -124,8 +113,7 @@ tool = BrokerToolBox:NewTool("microbutton",{
 			ChatFrame1:UnregisterEvent("TIME_PLAYED_MSG")	--to hide chat message from RequestTimePlayed
 			RequestTimePlayed()
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddLine(tool:L("leftclick"))
-			GameTooltip:AddLine(tool:L("rightclick"))
+			GameTooltip:AddLine(tool:L("click"))
 		end
 	},
 	PreInit = function(self)
@@ -135,37 +123,5 @@ tool = BrokerToolBox:NewTool("microbutton",{
 			return
 		end
 		--
-	end,
-	PostInit = function(self)
-		self:HideBlizzButtons()
-	end,
-	HideBlizzButtons = function(self)
-		if self.db.HideBlizzButton then
-			CharacterMicroButton:Hide()
-			SpellbookMicroButton:Hide()
-			TalentMicroButton:Hide()
-			AchievementMicroButton:Hide()
-			QuestLogMicroButton:Hide()
-			GuildMicroButton:Hide()
-			PVPMicroButton:Hide()
-			LFDMicroButton:Hide()
-			EJMicroButton:Hide()
-			CompanionsMicroButton:Hide()
-			MainMenuMicroButton:Hide()
-			HelpMicroButton:Hide()            --NEWBIE_TOOLTIP_GUILDTAB
-		else
-			CharacterMicroButton:Show()
-			SpellbookMicroButton:Show()
-			TalentMicroButton:Show()
-			AchievementMicroButton:Show()
-			QuestLogMicroButton:Show()
-			GuildMicroButton:Show()
-			PVPMicroButton:Show()
-			LFDMicroButton:Show()
-			EJMicroButton:Show()
-			CompanionsMicroButton:Show()
-			MainMenuMicroButton:Show()
-			HelpMicroButton:Show()
-		end
 	end,
 })

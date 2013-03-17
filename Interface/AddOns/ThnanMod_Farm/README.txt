@@ -2,7 +2,7 @@ Thnan's Mod - Farm
 
 This module adds a tool panel for your farm. The panel has buttons for every seed and every tool as well as a "grow check" button.
 The seed buttons provide one-click planting in the nearest Tilled Soil.
-Holding the shift key will cause seed buttons to show the bag for their crop. This feature requires patch 5.2.
+Holding the shift key will cause seed buttons to show the bag for their crop. There is an option to reverse this behavior.
 Right clicking a tool button will drop that tool. This can be turned off in the options menu.
 Right clicking a seed button will enable planting the seed by double right clicking on a Tilled Soil.
 The grow check button will target any plant that needs attention before it will grow, i.e. any plant that is not a "growing" plant.
@@ -10,6 +10,14 @@ Jogu's forecast will be saved and displayed in the tool panel. This feature does
 The tool panel also has buttons for your portal shards.
 
 VERSION CHANGES:
+
+1.5.0:
+
+- Using the hearthstone to leave Sunsong Ranch will now cause the window to hide and tools to drop appropriately.
+- Added option to reverse the seed bag display behavior for seed buttons.
+- Seed buttons will now show quantities up to 999.
+- Seed bags bought with gold are now supported.
+- Buttons showing seed bags will now update their displayed count correctly.
 
 1.4.2:
 

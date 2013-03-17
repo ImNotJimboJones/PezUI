@@ -1,6 +1,6 @@
 local tool
 tool = BrokerToolBox:NewTool("reputation",{
-	author="Sanori",									--author of this tool
+	--author="Sanori",									--author of this tool
 	version="1.1 (10. Sep. 2012)",				--tool version
 	defaultON=false,									--default active?
 	db = {
