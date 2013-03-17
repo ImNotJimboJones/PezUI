@@ -2,10 +2,10 @@
 ## Authors: PapaSol
 ## Notes: An interface for announcing customized alert styled after Blizzard's achievement alerts.
 ## Version: 1.4.3
-## Interface: 50001
+## Interface: 50200
 ## X-Category: Interface Enhancements Notifications Announcements Achievements
 ## SavedVariables: GlamourConfig
-## X-Curse-Packaged-Version: release for 5.0.4
+## X-Curse-Packaged-Version: release
 ## X-Curse-Project-Name: Glamour
 ## X-Curse-Project-ID: glamor
 ## X-Curse-Repository-ID: wow/glamor/mainline

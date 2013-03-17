@@ -948,6 +948,7 @@ function Glamour_GetCmd(cmd)
 			DungeonCompletionAlertFrame1:Show();
 			GuildChallengeAlertFrame:Show();
 			BNToastFrame:Show();
+			AlertFrame_FixAnchors();
 		elseif c == "showlast" then
 			if(GlamourLastFrame) then
 				GlamourLastFrame:Show();

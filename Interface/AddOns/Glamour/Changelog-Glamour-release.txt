@@ -1,13 +1,15 @@
 ------------------------------------------------------------------------
-r35 | papsol | 2012-09-09 19:56:00 +0000 (Sun, 09 Sep 2012) | 1 line
+r37 | papsol | 2013-03-17 13:04:09 +0000 (Sun, 17 Mar 2013) | 1 line
 Changed paths:
-   A /tags/release for 5.0.4 (from /trunk:34)
+   A /tags/release (from /trunk:36)
 
-Tagging as release for 5.0.4
+Tagging as release
 ------------------------------------------------------------------------
-r34 | papsol | 2012-09-09 19:55:25 +0000 (Sun, 09 Sep 2012) | 1 line
+r36 | papsol | 2013-03-17 12:55:04 +0000 (Sun, 17 Mar 2013) | 1 line
 Changed paths:
+   M /trunk/Glamour.lua
    M /trunk/Glamour.toc
+   M /trunk/Glamour.xml
 
-toc bump
+toc bump, no code change.
 ------------------------------------------------------------------------

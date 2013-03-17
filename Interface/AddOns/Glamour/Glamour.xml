@@ -486,5 +486,64 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 		</Scripts>
 	</Frame>
 
+<frame name="lootanchor" enablemouse="true" movable="true" hidden="true">
+ <scripts>
+ <onmousedown>
+  if button == "leftbutton" and not self.ismoving then
+   self:startmoving();
+   self.ismoving = true;
+  end
+  if button == "rightbutton" and not self.ismoving then
+   self:hide();
+  end
+ </onmousedown>
+ <onmouseup>
+  if button == "leftbutton" and self.ismoving then
+   self:stopmovingorsizing();
+   self.ismoving = false;
+  end
+ </onmouseup>
+ <!--  
+ <onhide>
+  if ( this.ismoving ) then
+   this:stopmovingorsizing();
+   this.ismoving = false;
+  end
+ </onhide>	
+ -->
+ </scripts>
+ <!-- tags below add a visual element to the frame. -->
+ <layers>
+  <layer level="artwork">
+   <texture setallpoints="true">
+    <color r="0.7" g="0.7" b="0.7" a="0.8" />
+   </texture>
+  		<fontstring name="lootanchortitle" inherits="gamefontnormal" text="loot anchor" parent="lootanchor">
+			<anchors>
+				<anchor point="top" relativeto="lootanchor">
+				</anchor>
+			</anchors>
+		</fontstring>
+  		<fontstring name="lootanchortext1" inherits="gamefontblacktiny" text="left-click to drag." parent="lootanchortitle">
+			<anchors>
+				<anchor point="bottom" relativeto="lootanchortitle">
+					<offset y="-8"/>
+				</anchor>
+			</anchors>
+		</fontstring>
+  		<fontstring name="lootanchortext2" inherits="gamefontblacktiny" text="right-click to hide." parent="lootanchortitle">
+			<anchors>
+				<anchor point="bottom" relativeto="lootanchortitle">
+					<offset y="-18"/>
+				</anchor>
+			</anchors>
+		</fontstring>
+  </layer>
+ </layers>
+ <size x="100" y="32" />
+ <anchors><anchor point="center" relativeto="uiparent"/></anchors>
+</frame>
+
+
 </Ui>
 
