@@ -42,7 +42,6 @@ ColorPickerPlus: enabled
 CompanionFilter: enabled
 Critline: enabled
 DeathNote: enabled
-draiks-broker-ilevel: enabled
 DungeonHelper: enabled
 Enchantrix: disabled
 Enchantrix-Barker: disabled
@@ -301,3 +300,8 @@ ThnanMod: enabled
 ThnanMod_Farm: disabled
 ThnanMod_BattlePets: enabled
 GetNitroboosted: enabled
+MozzFullWorldMap: enabled
+SimpleILevel: enabled
+SimpleILevel_Group: enabled
+SimpleILevel_Resilience: disabled
+SimpleILevel_Social: disabled
