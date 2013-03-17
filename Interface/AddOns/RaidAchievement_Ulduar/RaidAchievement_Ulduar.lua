@@ -184,7 +184,7 @@ end
 end
 
 if arg2=="UNIT_DIED" then
-local id=tonumber(string.sub(arg6,-12,-9),16)
+local id=tonumber(string.sub(arg6,6,10),16)
 
 if id==34014 then
 if preaspisokon[6]=="yes" and raachdone1 then
@@ -232,7 +232,7 @@ end
 
 
 if arg2=="UNIT_DIED" and ratimedefenderlastkill then
-	local id=tonumber(string.sub(arg6,-12,-9),16)
+	local id=tonumber(string.sub(arg6,6,10),16)
 	if id==34035 and GetTime()>ratimedefenderlastkill+3 and GetTime()<ratimedefenderlastkill+200 and rallonlyannouncs1==nil then
     rallonlyannouncs1=1
 		pseaachcompl(7)
@@ -283,7 +283,7 @@ end
 end
 
 if (arg2=="SPELL_DAMAGE" or (arg2=="SPELL_MISSED" and arg12 and (arg12=="ABSORB" or arg12=="RESIST"))) and arg9==63801 then
-local id=tonumber(string.sub(arg3,-12,-9),16)
+local id=tonumber(string.sub(arg3,6,10),16)
 if id==33836 then
 if preaspisokon[12]=="yes" and raachdone1 then
 raunitisplayer(arg6,arg7)

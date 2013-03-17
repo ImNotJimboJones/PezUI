@@ -146,7 +146,7 @@ end
 
 
 if arg2=="UNIT_DIED" then
-local id=tonumber(string.sub(arg6,-12,-9),16)
+local id=tonumber(string.sub(arg6,6,10),16)
 
 if id==16011 then
 if nxraspisokon[3]=="yes" and raachdone1 then

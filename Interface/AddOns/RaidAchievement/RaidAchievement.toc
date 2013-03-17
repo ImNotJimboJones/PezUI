@@ -1,8 +1,8 @@
-﻿## Interface: 50100
+﻿## Interface: 50200
 ## Title: Raid|cff7fff7fAchievement|r   Main
 ## Title-ruRU: Raid|cff7fff7fAchievement|r   Основной
 ## Author: Shurshik
-## Version: 1.117
+## Version: 1.118
 ## Notes: Group and raid achievements tracker
 ## Notes-ruRU: Слежение за групповыми и рейдовыми достижениями
 ## URL: http://phoenixstyle.com

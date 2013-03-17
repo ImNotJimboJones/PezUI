@@ -135,7 +135,7 @@ racheckhpannounce=nil
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 else
 rachtimerbossrecheck=GetTime()+3
@@ -158,7 +158,7 @@ racheckhpannounce=nil
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 
 
@@ -233,7 +233,7 @@ end
 if GetCurrentMapAreaID()==871 then
 if arg2=="UNIT_DIED" and phbosskilled==nil and rablockuntilreset==nil then
   if phraspisokon[1]==1 and phraachdone1 then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==59309 or id==58674 or id==58876 then
     phrafailnoreason(1)
     rablockuntilreset=1
@@ -243,7 +243,7 @@ end
 
 
 if arg2=="UNIT_DIED" then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==59303 then
     phbosskilled=1
   end
@@ -263,7 +263,7 @@ if arg2=="SPELL_AURA_APPLIED" and arg10==112955 and arg4 then
     end
   end
   if bil==0 then
-    local id=tonumber(string.sub(arg4,-12,-9),16)
+    local id=tonumber(string.sub(arg4,6,10),16)
     raunitisplayer(arg4,arg5)
     if id==58998 or raunitplayertrue then
       table.insert(ratableofnoobs,arg4)
@@ -351,7 +351,7 @@ if arg2=="SPELL_CAST_START" and arg10==113134 then --ыытест нет инф�
 end
 
 if arg2=="UNIT_DIED" and rarezurecttable then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==58605 then
     rarezurecttable=rarezurecttable+1
     if rarezurecttable==13 then
@@ -392,7 +392,7 @@ end
 if GetCurrentMapAreaID()==887 then
 if arg2=="UNIT_DIED" then
   if phraspisokon[7]==1 and phraachdone1 then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==61699 then
     phraachcompl(7)
   end
@@ -490,7 +490,7 @@ if GetCurrentMapAreaID()==875 then
 
 if arg2=="UNIT_DIED" and UnitName("boss1") then
   if phraspisokon[12]==1 and phraachdone1 then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==56929 or id==56912 or id==56930 then
     phrafailnoreason(12)
   end

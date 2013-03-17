@@ -87,7 +87,7 @@ function chraonupdate()
 if rachtimerbossrecheck and GetTime()>rachtimerbossrecheck then
 rachtimerbossrecheck=nil
 if UnitGUID("boss1") and UnitName("boss1")~="" then
-	local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+	local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 
 	if id==49541 or id==49429 then
 		rachtimervanessa=nil
@@ -169,7 +169,7 @@ chratableid=nil
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 	if id==49541 or id==49429 then
 		rachtimervanessa=nil
@@ -189,7 +189,7 @@ rahourtrackstart=nil
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 	if id==49541 then
 		rachtimervanessa=nil
@@ -295,27 +295,27 @@ end
 
 if chraspisokon[3]==1 and chraachdone1 then
 	if (arg2=="SPELL_MISSED" or arg2=="SPELL_DAMAGE" or arg2=="SPELL_PERIODIC_DAMAGE" or arg2=="SWING_DAMAGE") and arg7 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		local id2=1
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 		local id3=UnitGUID("boss1")
-		id2=tonumber(string.sub(id3,-12,-9),16)
+		id2=tonumber(string.sub(id3,6,10),16)
 end
 
 		if id==49208 and UnitGUID("boss1") and id2==43778 then
 		if UnitGUID("boss1") then
-		local bossid=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+		local bossid=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 		if bossid==43778 then
 			local percent=100
 			if UnitGUID("pet") then
-				local iiid=tonumber(string.sub(UnitGUID("pet"),-12,-9),16)
+				local iiid=tonumber(string.sub(UnitGUID("pet"),6,10),16)
 				if iiid==49208 then
 					percent=UnitHealth("pet")*100/UnitHealthMax("pet")
 				end
 			end
 			for op=1,4 do
 				if UnitGUID("partypet"..op) then
-					local iiid=tonumber(string.sub(UnitGUID("partypet"..op),-12,-9),16)
+					local iiid=tonumber(string.sub(UnitGUID("partypet"..op),6,10),16)
 					if iiid==49208 then
 						percent=UnitHealth("partypet"..op)*100/UnitHealthMax("partypet"..op)
 					end
@@ -360,7 +360,7 @@ end
 
 if arg2=="SPELL_HEAL" and arg10==93706 then
 	if chraspisokon[6]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==46962 then
 			chrafailnoreason(6)
 		end
@@ -369,7 +369,7 @@ end
 
 if arg2=="SPELL_HEAL" and arg10==93844 then
 	if chraspisokon[7]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==4278 then
 			chrafailnoreason(7)
 		end
@@ -379,7 +379,7 @@ end
 
 if arg2=="SPELL_DAMAGE" and arg10==93784 and arg14 and arg14>0 then
 	if chraspisokon[8]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==50561 then
 			chracounter1=chracounter1+1
 			if chracounter1==5 then
@@ -414,7 +414,7 @@ if GetCurrentMapAreaID()==753 then
 
 if arg2=="SPELL_DAMAGE" and arg10==93454 then
 	if chraspisokon[9]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==50376 then
 			chracounter1=chracounter1+1
 			if chracounter1==10 then
@@ -426,7 +426,7 @@ end
 
 if arg2=="UNIT_DIED" then
 	if chraspisokon[10]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==50284 then
 			chracounter1=chracounter1+1
 			if chracounter1==3 then
@@ -439,7 +439,7 @@ if arg2=="UNIT_DIED" then
 		if ratempadd_c==nil then
 			ratempadd_c=0
 		end
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if (id==39803 or id==39801 or id==39800 or id==39802) then
 			ratempadd_c=ratempadd_c+1
 			if ratempadd_c==4 then
@@ -452,7 +452,7 @@ end
 
 if arg2=="SPELL_AURA_APPLIED_DOSE" and arg10==93567 and arg14 and arg14>14 then
 	if chraspisokon[11]==1 and chraachdone1 then
-		--local id=tonumber(string.sub(arg7,-12,-9),16)
+		--local id=tonumber(string.sub(arg7,6,10),16)
 		--if id==39698 then
 			chraachcompl(11)
 		--end
@@ -489,7 +489,7 @@ if GetCurrentMapAreaID()==757 then
 
 if arg2=="SPELL_AURA_APPLIED" and arg10==90170 then
 	if chraspisokon[14]==1 and chraachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==39625 then
 			chramyfailgood(14,2)
 		end
@@ -501,7 +501,7 @@ end
 --if arg2=="SPELL_CAST_SUCCESS" or arg2=="SPELL_CAST_START" and arg10==91049 then
 --	if chraspisokon[15]==1 and chraachdone1 then
 --		if UnitGUID("boss1") then
---			local a2=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+--			local a2=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 --			if a2==40484 then
 --				chrafailnoreason(15)
 --			end
@@ -562,10 +562,10 @@ if GetCurrentMapAreaID()==781 then
 
 if chraspisokon[18]==1 and chraachdone1 then
 	if arg2=="SPELL_PERIODIC_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52755 or id==24224 then
 			if UnitGUID("boss1") then
-				local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+				local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 				if id==23577 then
 					chrafailnoreason(18,arg5)
 				end
@@ -573,10 +573,10 @@ if chraspisokon[18]==1 and chraachdone1 then
 		end
 	end
 	if arg2=="SPELL_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52755 or id==24224 then
 			if UnitGUID("boss1") then
-				local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+				local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 				if id==23577 then
 					chrafailnoreason(18,arg5)
 				end
@@ -584,10 +584,10 @@ if chraspisokon[18]==1 and chraachdone1 then
 		end
 	end
 	if arg2=="SWING_DAMAGE" and arg11 and arg11>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52755 or id==24224 then
 			if UnitGUID("boss1") then
-				local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+				local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 				if id==23577 then
 					chrafailnoreason(18,arg5)
 				end
@@ -595,10 +595,10 @@ if chraspisokon[18]==1 and chraachdone1 then
 		end
 	end
 	if arg2=="RANGE_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52755 or id==24224 then
 			if UnitGUID("boss1") then
-				local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+				local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 				if id==23577 then
 					chrafailnoreason(18,arg5)
 				end
@@ -606,10 +606,10 @@ if chraspisokon[18]==1 and chraachdone1 then
 		end
 	end
 	if arg2=="UNIT_DIED" or arg2=="UNIT_DESTROYED" then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52755 or id==24224 then
 			if UnitGUID("boss1") then
-				local id=tonumber(string.sub(UnitGUID("boss1"),-12,-9),16)
+				local id=tonumber(string.sub(UnitGUID("boss1"),6,10),16)
 				if id==23577 then
 					chrafailnoreason(18,arg5)
 				end
@@ -641,31 +641,31 @@ end
 
 if chraspisokon[20]==1 and chraachdone1 then
 	if arg2=="SPELL_PERIODIC_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52157 then
 			chrafailnoreason(20,arg5)
 		end
 	end
 	if arg2=="SPELL_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52157 then
 			chrafailnoreason(20,arg5)
 		end
 	end
 	if arg2=="SWING_DAMAGE" and arg11 and arg11>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52157 then
 			chrafailnoreason(20,arg5)
 		end
 	end
 	if arg2=="RANGE_DAMAGE" and arg14 and arg14>0 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52157 then
 			chrafailnoreason(20,arg5)
 		end
 	end
 	if arg2=="UNIT_DIED" then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==52157 then
 			chrafailnoreason(20)
 		end
@@ -693,7 +693,7 @@ chracounter1=0
 end
 
 if arg2=="UNIT_DIED" and chraspisokon[22]==1 and chraachdone1 then
-	local id=tonumber(string.sub(arg7,-12,-9),16)
+	local id=tonumber(string.sub(arg7,6,10),16)
 	if id==54191 and GetCurrentMapAreaID()==820 then
 		chracounter1=chracounter1+1
 		if chracounter1==2 then
@@ -712,7 +712,7 @@ end
 if rahourtrackstart then
 	if chraspisokon[23]==1 and chraachdone1 then
 		if arg2=="SPELL_PERIODIC_DAMAGE" and arg14 and arg14>=0 then
-			local id=tonumber(string.sub(arg7,-12,-9),16)
+			local id=tonumber(string.sub(arg7,6,10),16)
 			if id==55466 then
         chracounter1=chracounter1+1
         if chracounter1==10 then
@@ -721,7 +721,7 @@ if rahourtrackstart then
 			end
 		end
 		if arg2=="SPELL_DAMAGE" and arg14 and arg14>=0 then
-			local id=tonumber(string.sub(arg7,-12,-9),16)
+			local id=tonumber(string.sub(arg7,6,10),16)
 			if id==55466 then
         chracounter1=chracounter1+1
         if chracounter1==10 then
@@ -730,7 +730,7 @@ if rahourtrackstart then
 			end
 		end
 		if arg2=="SWING_DAMAGE" and arg11 and arg11>=0 then
-			local id=tonumber(string.sub(arg7,-12,-9),16)
+			local id=tonumber(string.sub(arg7,6,10),16)
 			if id==55466 then
         chracounter1=chracounter1+1
         if chracounter1==10 then
@@ -739,7 +739,7 @@ if rahourtrackstart then
 			end
 		end
 		if arg2=="RANGE_DAMAGE" and arg14 and arg14>=0 then
-			local id=tonumber(string.sub(arg7,-12,-9),16)
+			local id=tonumber(string.sub(arg7,6,10),16)
 			if id==55466 then
         chracounter1=chracounter1+1
         if chracounter1==10 then
@@ -754,7 +754,7 @@ end
 --well of the eternity
 
 if arg2=="SPELL_INSTAKILL" and arg10==104961 then
-	local id=tonumber(string.sub(arg7,-12,-9),16)
+	local id=tonumber(string.sub(arg7,6,10),16)
 	if id==55419 and chraspisokon[24]==1 and chraachdone1 then
 		chraachcompl(24)
   	end

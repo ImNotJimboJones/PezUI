@@ -1322,7 +1322,7 @@ local info;
 			UIDropDownMenu_AddButton(info, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 		end
 
-		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "GuildBank" then
+		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "Bank" then
 --			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
 --			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());   
 --			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
@@ -1529,7 +1529,7 @@ end
 -- **************************************************************************
 function TitanRepair_RepairItems()
   -- New RepairAll function	
-	local cost = GetRepairAllCost();
+  local cost = GetRepairAllCost();
   local money = GetMoney();
   local withdrawLimit = GetGuildBankWithdrawMoney();
   local guildBankMoney = GetGuildBankMoney();
@@ -1537,13 +1537,6 @@ function TitanRepair_RepairItems()
   -- Use Guild Bank funds
   if TitanGetVar(TITAN_REPAIR_ID,"UseGuildBank") then
   	if IsInGuild() and CanGuildBankRepair() then
-  		-- according to Blizzard GetGuildBankWithdrawMoney() can return -1 for Guild leader, reference: MerchantFrame.xml
-  		if withdrawLimit == -1 then
-  			withdrawLimit = guildBankMoney
-  		else
-  			withdrawLimit = min(withdrawLimit, guildBankMoney)
-  		end
-  	
   		if withdrawLimit > cost then
   			RepairAllItems(1)
   			-- disable repair all icon in merchant

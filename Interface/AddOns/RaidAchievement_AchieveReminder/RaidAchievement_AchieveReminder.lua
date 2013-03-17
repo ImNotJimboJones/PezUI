@@ -35,13 +35,13 @@ if ralldelaycheckzone2 and icracurtime>ralldelaycheckzone2 then
 ralldelaycheckzone2=nil
 ralldelaycheckzone=GetTime()+0.5 --ыытест не работал инфо после релога, так заработал
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
-  if UnitInRaid("player") or a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+  if UnitInRaid("player") or a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
   SetMapToCurrentZone()
   end
   local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
 if select(3,GetInstanceInfo())==7 then
 --no LFR
-elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+elseif (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
   local found=0
   for kj=1,#ralllocations do
     if ralllocations[kj]==GetCurrentMapAreaID() then
@@ -73,7 +73,7 @@ if ralldelaycheckzone and icracurtime>ralldelaycheckzone then
   ralldelaycheckzone=nil
   local vbil=0
   local a1, a2, a3, a4, a5 = GetInstanceInfo()
-  if UnitInRaid("player") or (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+  if UnitInRaid("player") or (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
   SetMapToCurrentZone()
   end
   local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
@@ -111,7 +111,7 @@ if select(3,GetInstanceInfo())==7 then
 else
 	if ralloptions[1]==1 then
 		if #rallnomorereport[1]==0 then
-			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+			if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
 				icllcheckachieves(1)
 				local a1, a2, a3, a4, a5 = GetInstanceInfo()
         if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
@@ -133,7 +133,7 @@ else
 			end
 			if bil==0 then
 				icllcheckachieves(1)
-				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+				if (a2=="pvp" and raenablebg==1) or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
           local a1, a2, a3, a4, a5 = GetInstanceInfo()
           if a2~="pvp" then --для пвп постоянно показываем зону, для сценариев также!
             if select(3,GetInstanceInfo())~=1 and a2~=nil then
@@ -492,7 +492,7 @@ else
 for i=1,#ralllocations do
 	if ralllocations[i]==GetCurrentMapAreaID() then
 		local a1, a2, a3, a4, a5 = GetInstanceInfo()
-		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+		if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
 			if ralltip[i]=="10" or ralltip[i]=="25" then
 				if tonumber(ralltip[i])==a5 then
 					bil=i
@@ -1194,7 +1194,7 @@ if ralloptions[1]==1 then
 
 local a1, a2, a3, a4, a5 = GetInstanceInfo()
 SetMapToCurrentZone()
-if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2==nil) then
+if a2=="pvp" or a2=="raid" or (a2=="party" and a3==2) or select(3,GetInstanceInfo())==2 or (select(3,GetInstanceInfo())==1 and a2=="scenario") then
 
 
 --проверка по имени локации, если имя встречается дважды - проверяется цифра на сколько чел расчитано и с той колонкой работаем
@@ -1817,7 +1817,7 @@ local guui=UnitGUID("target")
 if guui then
 local a1=tonumber(string.sub(guui,5,5))
 if a1==3 or a1==5 then
-local a2=tonumber(string.sub(guui,-12,-9),16)
+local a2=tonumber(string.sub(guui,6,10),16)
 
 local bil=0
 for i=1,#rallboss[rallcolonka] do
@@ -2648,7 +2648,7 @@ if UnitGUID(a) then
 	if guui then
 		local a1=tonumber(string.sub(guui,5,5))
 		if a1==3 or a1==5 then
-			local id=tonumber(string.sub(guui,-12,-9),16)
+			local id=tonumber(string.sub(guui,6,10),16)
 			local bil=0
 			local _, _, _, _, ai5 = GetInstanceInfo()
 			local i=1
@@ -2714,14 +2714,14 @@ local ourbosstargets={}
 local tbil=0
 
 if UnitGUID("target") then
-	local iiid=tonumber(string.sub(UnitGUID("target"),-12,-9),16)
+	local iiid=tonumber(string.sub(UnitGUID("target"),6,10),16)
 	if iiid~=0 then
 		table.insert(ourbosstargets,iiid)
 	end
 end
 for d=1,4 do
 	if UnitGUID("party"..d.."-target") then
-		local iiid=tonumber(string.sub(UnitGUID("party"..d.."-target"),-12,-9),16)
+		local iiid=tonumber(string.sub(UnitGUID("party"..d.."-target"),6,10),16)
 		if iiid~=0 then
 			table.insert(ourbosstargets,iiid)
 		end

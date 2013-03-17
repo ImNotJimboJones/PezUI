@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.117
+	raversion=1.118
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -1087,7 +1087,7 @@ end
 end
 
 --рейды панды
-if GetCurrentMapAreaID()==897 or GetCurrentMapAreaID()==896 or GetCurrentMapAreaID()==886 then
+if GetCurrentMapAreaID()==897 or GetCurrentMapAreaID()==896 or GetCurrentMapAreaID()==886 or GetCurrentMapAreaID()==930 then
 if IsAddOnLoaded("RaidAchievement_PandaRaids")==nil and wasprtryloadea==nil then
 wasprtryloadea=1
 local loaded, reason = LoadAddOn("RaidAchievement_PandaRaids")
@@ -1200,7 +1200,7 @@ end
 
 
 --сценарии панды
-local idheroics={878, 899, 884, 900, 880, 906, 882,911,912,883}
+local idheroics={878, 899, 884, 900, 880, 906, 882,911,912,883,914}
 local buul=0
 for i=1,#idheroics do
 	if idheroics[i]==GetCurrentMapAreaID() then

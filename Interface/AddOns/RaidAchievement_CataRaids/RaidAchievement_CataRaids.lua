@@ -259,7 +259,7 @@ if racrtimerbossrecheck and crracurtime>racrtimerbossrecheck then
 racrtimerbossrecheck=nil
 	if UnitGUID("boss1") and UnitName("boss1")~="" then
 		local id2=UnitGUID("boss1")
-		local id=tonumber(string.sub(id2,-12,-9),16)
+		local id=tonumber(string.sub(id2,6,10),16)
 		if id==43296 then
 			racrcheckdeadth43296=0
 		end
@@ -320,7 +320,7 @@ end
 
 	if UnitGUID("boss1") and UnitName("boss1")~="" then
 		local id2=UnitGUID("boss1")
-		local id=tonumber(string.sub(id2,-12,-9),16)
+		local id=tonumber(string.sub(id2,6,10),16)
 		if id==43296 then
 			racrcheckdeadth43296=0
 		end
@@ -444,7 +444,7 @@ end
 if raambitun then
 	if UnitGUID("boss1") then
 		local id2=UnitGUID("boss1")
-		local id=tonumber(string.sub(id2,-12,-9),16)
+		local id=tonumber(string.sub(id2,6,10),16)
 		if (id==52558 or id==52577 or id==53087) then
 
 	local bar, min_power = UnitAlternatePowerInfo("player")
@@ -546,7 +546,7 @@ if GetCurrentMapAreaID()==800 then
 
 --rhyolit die
 if arg2=="UNIT_DIED" and arg7 then
-	local id=tonumber(string.sub(arg7,-12,-9),16)
+	local id=tonumber(string.sub(arg7,6,10),16)
 	if id==52558 then
 		rarhydied=1
 	end
@@ -732,7 +732,7 @@ end
 --rarainbow={{2,3},{1,5},{2,4},{3,6}}
 if arg2=="SPELL_AURA_APPLIED" and (arg10==104897 or arg10==104894 or arg10==104901 or arg10==105027 or arg10==104898 or arg10==104896) then
 	if crraspisokon[13]==1 and raachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==55312 then
       if rarainbowtab1==nil then
         rarainbowtab1=GetTime()+4 --таймер резета
@@ -841,7 +841,7 @@ end
 
 if arg2=="SPELL_DAMAGE" and (arg10==107501 or arg10==107287) then
 	if crraspisokon[14]==1 and raachdone1 then
-		local id=tonumber(string.sub(arg7,-12,-9),16)
+		local id=tonumber(string.sub(arg7,6,10),16)
 		if id==56598 then
 			crrafailnoreason(14)
 		end

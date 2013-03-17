@@ -166,25 +166,25 @@ end
 if GetCurrentMapAreaID()==536 then
 	if whraspisokon[1]=="yes" and whraachdone1 then
 		if arg2=="SPELL_PERIODIC_DAMAGE" and arg13 and arg13>0 then
-			local id=tonumber(string.sub(arg6,-12,-9),16)
+			local id=tonumber(string.sub(arg6,6,10),16)
 			if id==29364 then
 				whrafailnoreason(1,arg4)
 			end
 		end
 		if arg2=="SPELL_DAMAGE" and arg13 and arg13>0 then
-			local id=tonumber(string.sub(arg6,-12,-9),16)
+			local id=tonumber(string.sub(arg6,6,10),16)
 			if id==29364 then
 				whrafailnoreason(1,arg4)
 			end
 		end
 		if arg2=="SWING_DAMAGE" and arg10 and arg10>0 then
-			local id=tonumber(string.sub(arg6,-12,-9),16)
+			local id=tonumber(string.sub(arg6,6,10),16)
 			if id==29364 then
 				whrafailnoreason(1,arg4)
 			end
 		end
 		if arg2=="RANGE_DAMAGE" and arg13 and arg13>0 then
-			local id=tonumber(string.sub(arg6,-12,-9),16)
+			local id=tonumber(string.sub(arg6,6,10),16)
 			if id==29364 then
 				whrafailnoreason(1,arg4)
 			end
@@ -195,7 +195,7 @@ end
 
 if arg2=="UNIT_DIED" then
 
-local id=tonumber(string.sub(arg6,-12,-9),16)
+local id=tonumber(string.sub(arg6,6,10),16)
 
 if id==30176 then
 	if whraspisokon[2]=="yes" and whraachdone1 then
@@ -285,7 +285,7 @@ end
 
 
 if whraachdone1 and rabattlev==1 and arg6 then
-local id=tonumber(string.sub(arg6,-12,-9),16)
+local id=tonumber(string.sub(arg6,6,10),16)
 if id==27483 or id==27978 then
 if arg9==1130 then else
 whrabosson=1

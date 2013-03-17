@@ -422,7 +422,7 @@ if icraspisokon[6]=="yes" and raachdone1 then
 	if arg2=="SPELL_DAMAGE" or arg2=="SPELL_MISSED" then
 		local id=0
 		if arg4 then
-			local id=tonumber(string.sub(arg4,-12,-9),16)
+			local id=tonumber(string.sub(arg4,6,10),16)
 		end
 		if id==37970 or id==37973 or id==37972 or arg9==71393 or arg9==72790 or arg9==72791 or arg9==72789 or arg9==72052 or arg9==72800 or arg9==72801 or arg9==72802 or arg9==72809 or arg9==72804 or arg9==71393 or arg9==71815 or arg9==71405 or arg9==72810 or arg9==72811 then
 			local icrsdmg=25000
@@ -557,10 +557,10 @@ if (arg2=="SPELL_AURA_APPLIED") and (arg9==70503 or arg9==73806 or arg9==73807 o
 local id=0
 local id2=0
 if arg4 then
-  id=tonumber(string.sub(arg4,-12,-9),16)
+  id=tonumber(string.sub(arg4,6,10),16)
 end
 if arg7 then
-  id2=tonumber(string.sub(arg7,-12,-9),16)
+  id2=tonumber(string.sub(arg7,6,10),16)
 end
 if id~=39190 and id2~=39190 then
   if icraspisokon[10]=="yes" and raachdone1 then

@@ -1,4 +1,4 @@
-﻿## Interface: 50100
+﻿## Interface: 50200
 ## Title: Raid|cff7fff7fAchievement|r - Pandaria raids
 ## Title-ruRU: Raid|cff7fff7fAchievement|r - Рейды Пандарии
 ## Author: Shurshik

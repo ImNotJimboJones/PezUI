@@ -51,7 +51,7 @@ function iclllocaleui()
 	ralldefaulttactic27 = "Cada vez que visites esta mazmorra, encontrarás sólo 2 de los 6 bosses que existen."
 	ralldefaulttactic28 = "si el Guardián Ahn'kahar está cerca del boss, éste se hace immune a todo el daño. Simplemente llévate al add y mata al boss rápidamente."
 	ralldefaulttactic29 = "Bjarngrim tiene 3 plataformas donde se para y obtiene Carga eléctrica temporal. Atácale mientras tenga la Carga eléctrica temporal activa."
-	ralldefaulttactic3 = "Descripción: a veces el boss daña a los enemigos a menos de 50 yardas. Por cada enemigo dañado de esta manera el boss gana 1 acumulación de "Consumir".\nTáctica: Mata rápidamente al boss."
+	ralldefaulttactic3 = "Descripción: a veces el boss daña a los enemigos a menos de 50 yardas. Por cada enemigo dañado de esta manera el boss gana 1 acumulación de \"Consumir\".\nTáctica: Mata rápidamente al boss."
 	ralldefaulttactic30 = "Algunas veces el boss golpea el Yunque de Volkhan, creando 2 Gólem Fundido. Mata el boss antes de que fabrique más de 4 gólems."
 	ralldefaulttactic31 = "En la segunda gase (volando), Onyxia lanzará Aliento Profundo en la dirección que esté mirando (pasa en diagonal a través de la sala). Si la haceis bajar rápidamente, no podrá lanzar este hechizo."
 	ralldefaulttactic32 = "Al 65%, Onyxia entra en la segunda fase. Cuando deje el suelo tienes 10 segundos para correr por dentro de las cuevas para forzar la aparición de las crías."

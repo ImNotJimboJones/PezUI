@@ -45,6 +45,9 @@ pzraspisokach5={
 7530,
 
 8017,
+
+7984,
+--7986,
 }
 
 if UnitFactionGroup("player")=="Alliance" then
@@ -114,7 +117,7 @@ pzracounter1=0
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 else
 rachtimerbossrecheck=GetTime()+3
@@ -128,11 +131,13 @@ pzraachdone1=true
 pzracounter1=0
 
 
+racountaddskilled=nil
+
 
 
 if UnitGUID("boss1") and UnitName("boss1")~="" then
 	local id2=UnitGUID("boss1")
-	local id=tonumber(string.sub(id2,-12,-9),16)
+	local id=tonumber(string.sub(id2,6,10),16)
 
 
 
@@ -216,7 +221,7 @@ end
 
 if arg2=="UNIT_DIED" and razfailekilloneadd==nil then
   if pzraspisokon[2]==1 then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==59779 or id==64381 then
     pzrafailnoreason(2)
     razfailekilloneadd=1
@@ -278,7 +283,7 @@ if GetCurrentMapAreaID()==880 then
 
 if arg2=="UNIT_DIED" and rascbochka==nil then
   if pzraspisokon[6]==1 then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==62682 then
       pzrafailnoreason(6)
       rascbochka=1
@@ -317,7 +322,7 @@ end
 if GetCurrentMapAreaID()==906 then
 
 if arg2=="UNIT_DIED" then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==64956 then
     if pzraspisokon[9]==1 and pzraachdone1 then
       pzrafailnoreason(9)
@@ -338,7 +343,7 @@ end
 --свинг удар от вратолома
 if arg2=="SWING_DAMAGE" then
   if pzraspisokon[10]==1 and pzraachdone1 then
-    local id=tonumber(string.sub(arg4,-12,-9),16)
+    local id=tonumber(string.sub(arg4,6,10),16)
     if id==64479 or id==58787 then
       pzrafailnoreason(10,arg8)
     end
@@ -354,7 +359,7 @@ end
 if GetCurrentMapAreaID()==883 then
 
 if arg2=="UNIT_DIED" then
-  local id=tonumber(string.sub(arg7,-12,-9),16)
+  local id=tonumber(string.sub(arg7,6,10),16)
   if id==2351 then
     if pzraspisokon[11]==1 and pzraachdone1 then
       pzrafailnoreason(11)
@@ -365,9 +370,44 @@ end
 end
 --
 
+--knife
+if GetCurrentMapAreaID()==914 then
 
+--1 ачивка зоны
+if arg2=="SPELL_DAMAGE" and arg10==133121 then
+  if racountaddskilled==nil then
+    racountaddskilled=0
+  end
+  local id=tonumber(string.sub(arg7,6,10),16)
+  if id==68037 or id==67257 or id==67259 then
+    racountaddskilled=racountaddskilled+1
+  end
+  if racountaddskilled==3 then
+    if pzraspisokon[12]==1 and pzraachdone1 then
+      pzraachcompl(12)
+    end
+  end
 end
 
+
+--2 ачивка зоны
+--НЕТ данных о тотеме
+if arg2=="SPELL_AURA_APPLIED" and arg10==133002 and arg13 and arg13>=0 then
+raachknifetrack=1
+end
+if arg2=="SPELL_CAST_SUCCESS" and arg10==132984 then
+raachknifetrack=1
+end
+
+
+
+
+end
+--
+
+
+
+end
 
 
 end --КОНЕЦ ОНЕВЕНТ

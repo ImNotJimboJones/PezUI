@@ -2,12 +2,12 @@
 
 
 --locations
-ralllocations={604,604,543,543,529,529,535,535,527,527,718,718,532,532,531,531,609,609,522,533,521,542,534,530,603,602,601,520,528,536,525,526,523,524,756,764,767,753,768,769,757,759,747,752,754,758,773,781,793,800,820,819,816,824,443,461,401,482,512,540,736,626,871,874,898,876,867,885,877,875,887,897,896,886,878,899,884,900,880,851,882,856,912,911,883}
+ralllocations={604,604,543,543,529,529,535,535,527,527,718,718,532,532,531,531,609,609,522,533,521,542,534,530,603,602,601,520,528,536,525,526,523,524,756,764,767,753,768,769,757,759,747,752,754,758,773,781,793,800,820,819,816,824,443,461,401,482,512,540,736,626,871,874,898,876,867,885,877,875,887,897,896,886,878,899,884,900,880,851,882,856,912,911,883,914,930}
 
-ralllocationnamesdef={"Icecrown Citadel","Icecrown Citadel","Trial of the Crusader", "Trial of the Crusader", "Ulduar", "Ulduar", "Naxxramas","Naxxramas","The Eye of Eternity","The Eye of Eternity","Onyxia's Lair","Onyxia's Lair","Vault of Archavon","Vault of Archavon","The Obsidian Sanctum","The Obsidian Sanctum","The Ruby Sanctum","The Ruby Sanctum","Ahn'kahet: The Old Kingdom","Azjol-Nerub","The Culling of Stratholme","Trial of the Champion","Drak'Tharon Keep","Gundrak","Halls of Reflection","Pit of Saron","The Forge of Souls","The Nexus","The Oculus","The Violet Hold","Halls of Lightning","Halls of Stone","Utgarde Keep","Utgarde Pinnacle", "The Deadmines","Shadowfang Keep","Throne of the Tides","Blackrock Caverns","The Stonecore","The Vortex Pinnacle","Grim Batol","Halls of Origination","Lost City of the Tol'vir","Baradin Hold","Blackwing Descent","The Bastion of Twilight","Throne of the Four Winds","Zul'Aman","Zul'Gurub", "Firelands","End Time","Hour of Twilight","Well of Eternity","Dragon Soul","Warsong Gulch","Arathi Basin","Alterac Valley","Eye of the Storm","Strand of the Ancients","Isle of Conquest","The Battle for Gilneas","Twin Peaks","Scarlet Halls","Scarlet Monastery","Scholomance","Stormstout Brewery","Temple of the Jade Serpent","Mogu'shan Palace","Shado-Pan Monastery","Gate of the Setting Sun","Siege of Niuzao Temple","Heart of Fear","Mogu'shan Vaults","Terrace of Endless Spring","A Brewing Storm", "Arena of Annihilation","Brewmoon Festval","Crypt of Forgotten Kings","Greenstone Village","Theramore's Fall","Unga Ingoo","Temple of Kotmogu","A Little Patience","Lion's Landing","Zan'vess"}
-rallcontent={2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,3,3,3,3,3,3, 3,3,3,3,3,3,3,3,3,3, 3,3,3,3,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4}
+ralllocationnamesdef={"Icecrown Citadel","Icecrown Citadel","Trial of the Crusader", "Trial of the Crusader", "Ulduar", "Ulduar", "Naxxramas","Naxxramas","The Eye of Eternity","The Eye of Eternity","Onyxia's Lair","Onyxia's Lair","Vault of Archavon","Vault of Archavon","The Obsidian Sanctum","The Obsidian Sanctum","The Ruby Sanctum","The Ruby Sanctum","Ahn'kahet: The Old Kingdom","Azjol-Nerub","The Culling of Stratholme","Trial of the Champion","Drak'Tharon Keep","Gundrak","Halls of Reflection","Pit of Saron","The Forge of Souls","The Nexus","The Oculus","The Violet Hold","Halls of Lightning","Halls of Stone","Utgarde Keep","Utgarde Pinnacle", "The Deadmines","Shadowfang Keep","Throne of the Tides","Blackrock Caverns","The Stonecore","The Vortex Pinnacle","Grim Batol","Halls of Origination","Lost City of the Tol'vir","Baradin Hold","Blackwing Descent","The Bastion of Twilight","Throne of the Four Winds","Zul'Aman","Zul'Gurub", "Firelands","End Time","Hour of Twilight","Well of Eternity","Dragon Soul","Warsong Gulch","Arathi Basin","Alterac Valley","Eye of the Storm","Strand of the Ancients","Isle of Conquest","The Battle for Gilneas","Twin Peaks","Scarlet Halls","Scarlet Monastery","Scholomance","Stormstout Brewery","Temple of the Jade Serpent","Mogu'shan Palace","Shado-Pan Monastery","Gate of the Setting Sun","Siege of Niuzao Temple","Heart of Fear","Mogu'shan Vaults","Terrace of Endless Spring","A Brewing Storm", "Arena of Annihilation","Brewmoon Festval","Crypt of Forgotten Kings","Greenstone Village","Theramore's Fall","Unga Ingoo","Temple of Kotmogu","A Little Patience","Lion's Landing","Zan'vess","Dagger in the Dark","Throne of Thunder"}
+rallcontent={2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 2,2,2,2,3,3,3,3,3,3, 3,3,3,3,3,3,3,3,3,3, 3,3,3,3,1,1,1,1,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4}
 
-ralltip={"10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5",ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifraid,ralldifparty,ralldifparty,ralldifraid,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ramainbattleground,ralldifscenario,ralldifscenario,ralldifscenario}
+ralltip={"10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","10","25","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5",ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifraid,ralldifparty,ralldifparty,ralldifraid,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ramainbattleground,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifparty,ralldifraid,ralldifraid,ralldifraid,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ramainbattleground,ralldifscenario,ralldifscenario,ralldifscenario,ralldifscenario,ralldifraid}
 
 rallachieve={
 {4534,4535,4536,4537,4577,4538,4578,4582,4539,4579,4580,4601,4581,4531,4628,4528,4629,4529,4630,4527,4631,4530,4583,4532,4636},--icc10
@@ -95,6 +95,8 @@ rallachieve={
 {7989,7990,7991,7992,7993,7988}, --A Little Patience
 {8011,8012,8010},--Lion's Landing
 {8017,8016},--Zan'vess
+{7984,7986,8009},--Dagger in the Dark
+{8094,8038,8073,8077,8082,8097,8098,8037,8081,8087,8086,8090,8069,8070,8071,8072,8056,8057,8058,8059,8060,8061,8062,8063,8064,8065,8066,8067,8068},--Throne of Thunder
 }
 
 
@@ -200,6 +202,8 @@ rallboss={
 {{0},{0},{0},{0},{0},{0}}, --A Little Patience
 {{0},{0},{0}},--Lion's Landing
 {{67879,2343},{67879,2343}},--Zan'vess
+{{67263},{67266},{67266}},--Dagger in the Dark
+{{69465},{68476},{0,69134,69078,69131,69132},{67977},{70229},{69712},{68036},{69017},{69427},{68078},{0,68905,68904},{68397},{0,69465,68476,69134,69078,69131,69132},{0,67977,70229,69712},{0,68036,69017,69427},{0,68078,68905,68904,68397},{69465},{68476},{0,69134,69078,69131,69132},{67977},{70229},{69712},{68036},{69017},{69427},{68078},{0,68905,68904},{68397},{9999999}},--Throne of Thunder
 }
 
 if UnitFactionGroup("player")=="Alliance" then
@@ -293,6 +297,8 @@ ralltrack  ={
 {0,0,0,0,0,0}, --A Little Patience
 {0,0,0},--Lion's Landing
 {1,0},--Zan'vess
+{0,1,0},--Dagger in the Dark
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},--Throne of Thunder
 }--1 если трекерится
 
 
@@ -382,6 +388,8 @@ rallmeta   ={
 {0,0,0,0,0,0}, --A Little Patience
 {0,0,0},--Lion's Landing
 {0,0},--Zan'vess
+{0,0,0},--Dagger in the Dark
+{1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},--Throne of Thunder
 }--1 если на мету
 
 
@@ -471,6 +479,8 @@ rallfullver={
 {0,0,0,0,0,1}, --A Little Patience
 {0,0,1},--Lion's Landing
 {0,1},--Zan'vess
+{0,0,1},--Dagger in the Dark
+{0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},--Throne of Thunder
 }--1 это только для фулл версии ачивка
 
 

@@ -1,7 +1,7 @@
 ﻿function prraonload()
 
 SetMapToCurrentZone()
-if GetCurrentMapAreaID()==897 or GetCurrentMapAreaID()==896 or GetCurrentMapAreaID()==886 then
+if GetCurrentMapAreaID()==897 or GetCurrentMapAreaID()==896 or GetCurrentMapAreaID()==886 or GetCurrentMapAreaID()==930 then
 	RaidAchievement_prra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_prra:RegisterEvent("UNIT_POWER")
 	RaidAchievement_prra:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
@@ -31,6 +31,9 @@ prraspisokach25={
 --MV
 6455,
 
+--TT
+--8094,
+8038,
 }
 
 
@@ -128,11 +131,12 @@ else
 --обнулять все данные при начале боя тут:
 
 
+rababahcount=nil
 
 
 	if UnitGUID("boss1") and UnitName("boss1")~="" then
 		local id2=UnitGUID("boss1")
-		local id=tonumber(string.sub(id2,-12,-9),16)
+		local id=tonumber(string.sub(id2,6,10),16)
 
 	else
 		racrtimerbossrecheck=GetTime()+3
@@ -263,7 +267,7 @@ if GetCurrentMapAreaID()==886 then
 
 if arg2=="SPELL_DAMAGE" and arg14 and arg14>0 then
 	if prraspisokon[2]==1 and raachdone1 then
-    local id=tonumber(string.sub(arg7,-12,-9),16)
+    local id=tonumber(string.sub(arg7,6,10),16)
     if id==64443 then
       prrafailnoreason(2) --arg8
     end
@@ -285,6 +289,40 @@ if arg2=="SPELL_AURA_APPLIED" and (arg10==119985 or arg10==119414) then
       end
     end
 	end
+end
+
+
+end
+--
+
+
+--Thunder Throne
+if GetCurrentMapAreaID()==930 then
+
+--5
+if (arg2=="SPELL_DAMAGE" or arg2=="SPELL_AURA_APPLIED") and arg10==137507 then
+  if rababahtimer==nil or (rababahtimer and GetTime()>rababahtimer+3) then
+    rababahtimer=GetTime()
+    if rababahcount==nil then
+      rababahcount=0
+    end
+    rababahcount=rababahcount+1
+    if rababahcount==2 then
+      if prraspisokon[5]==1 and raachdone1 then
+        --prraachcompl(5)
+      end
+    end
+  end
+end
+
+--6 ВРЕМЕННО 5 если не найду как трекерить 1 ачивку
+if arg2=="UNIT_DIED" then
+  if prraspisokon[5]==1 and raachdone1 then
+  local id=tonumber(string.sub(arg7,6,10),16)
+  if id==69221 and UnitName("boss1") then
+      pzrafailnoreason(5)
+    end
+  end
 end
 
 
