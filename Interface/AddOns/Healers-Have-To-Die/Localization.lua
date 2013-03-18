@@ -1,9 +1,9 @@
 --[=[
 HealersHaveToDie World of Warcraft Add-on
-Copyright (c) 2009-2011 by John Wellesz (Archarodim@teaser.fr)
+Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.0
+Version 2.1.1b
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -70,8 +70,10 @@ L["OPT_ANNOUNCE"] = "Show messages"
 L["OPT_ANNOUNCE_DESC"] = "HHTD will display messages when you target or mouse-over an enemy healer."
 L["OPT_CLEAR_LOGS"] = "Clear logs"
 L["OPT_CORE_OPTIONS"] = "Core options"
-L["OPT_DEBUG"] = "debug"
+L["OPT_DEBUG"] = "debugging logs"
 L["OPT_DEBUG_DESC"] = "Enables / disables debugging"
+L["OPT_DEBUGLEVEL"] = "debugging level"
+L["OPT_DEBUGLEVEL_DESC"] = "debug level: 1=all, 2=warnings, 3=errors"
 L["OPT_ENABLE_GEHR"] = "Enable Graphical Reporter"
 L["OPT_ENABLE_GEHR_DESC"] = "Displays a graphical list of detected enemy healers with various features"
 L["OPT_HEALER_FORGET_TIMER"] = "Healer Forget Timer"
@@ -193,6 +195,8 @@ L["OPT_CLEAR_LOGS"] = "Effacer les journaux"
 L["OPT_CORE_OPTIONS"] = "Options Générales"
 L["OPT_DEBUG"] = "débuggage"
 L["OPT_DEBUG_DESC"] = "Active / désactive le débuggage"
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 L["OPT_ENABLE_GEHR"] = "Activer le rapporteur graphique"
 L["OPT_ENABLE_GEHR_DESC"] = "Affiche une interface listant les soigneurs ennemis."
 L["OPT_HEALER_FORGET_TIMER"] = "Délai d'oubli des soigneurs"
@@ -310,6 +314,8 @@ L["OPT_ANNOUNCE_DESC"] = "HHTD wird Mitteilungen anzeigen, wenn du auf einen fei
 L["OPT_CORE_OPTIONS"] = "Hauptoptionen"
 L["OPT_DEBUG"] = "Fehler suchen"
 L["OPT_DEBUG_DESC"] = "Fehlersuche aktivieren / deaktivieren"
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 L["OPT_ENABLE_GEHR"] = "Graphischen Bericht aktivieren"
 L["OPT_ENABLE_GEHR_DESC"] = "Zeigt eine graphische Liste der entdeckten feindlichen Heiler mit verschiedenen Eigenschaften an."
 L["OPT_HEALER_FORGET_TIMER"] = "\"Heiler-vergessen\" Timer"
@@ -418,6 +424,8 @@ L["OPT_CLEAR_LOGS"] = "Limpiar registros." -- Needs review
 L["OPT_CORE_OPTIONS"] = "Opciones principales"
 L["OPT_DEBUG"] = "Depurar"
 L["OPT_DEBUG_DESC"] = "Activa / desactiva la depuración de errores"
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 L["OPT_ENABLE_GEHR"] = "Activa el Informe Gráfico"
 L["OPT_ENABLE_GEHR_DESC"] = "Muestra una lista gráfica de sanadores enemigos detectados con diversas funciones"
 L["OPT_HEALER_FORGET_TIMER"] = "Contador de olvido de sanador"
@@ -531,6 +539,8 @@ do
 -- L["OPT_CORE_OPTIONS"] = ""
 -- L["OPT_DEBUG"] = ""
 -- L["OPT_DEBUG_DESC"] = ""
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 -- L["OPT_ENABLE_GEHR"] = ""
 -- L["OPT_ENABLE_GEHR_DESC"] = ""
 -- L["OPT_HEALER_FORGET_TIMER"] = ""
@@ -638,6 +648,8 @@ L["OPT_CLEAR_LOGS"] = "기록 지우기"
 L["OPT_CORE_OPTIONS"] = "코어 옵션"
 L["OPT_DEBUG"] = "디버그"
 L["OPT_DEBUG_DESC"] = "디버그를 사용 / 중지합니다."
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 L["OPT_ENABLE_GEHR"] = "그래픽 보고 사용"
 L["OPT_ENABLE_GEHR_DESC"] = "다양한 기능과 함께 감지된 적 힐러를 그래픽으로 목록을 표시합니다."
 L["OPT_HEALER_FORGET_TIMER"] = "힐러 표시 시간"
@@ -718,108 +730,116 @@ do
     local L = LibStub("AceLocale-3.0"):NewLocale("HealersHaveToDie", "zhCN");
 
     if L then
-        L["ACTIVE"] = "激活！" -- Needs review
+        L["ACTIVE"] = "激活！"
 L["Announcer"] = "通报"
-L["Announcer_DESC"] = "此模管理聊天和音效警报" -- Needs review
-L["AUTO_RAID_PARTY_INSTANCE"] = "自动：团队/小队/副本" -- Needs review
-L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = "未配置团队通报信息。输入 /HHTDG" -- Needs review
-L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "太快了（查看通报阈值设置）。" -- Needs review
-L["CHAT_POST_NO_HEALERS"] = "哇靠，当前双方都没有治疗！" -- Needs review
-L["DESCRIPTION"] = "立刻曝光那些该死的治疗并帮助他们走完自己的使命！（PvP 和 PvE）" -- Needs review
+L["Announcer_DESC"] = "此模管理聊天和音效警报"
+L["AUTO_RAID_PARTY_INSTANCE"] = "自动：团队/小队/副本"
+L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = "未配置团队通报信息。输入 /HHTDG"
+L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "太快了（查看通报阈值设置）。"
+L["CHAT_POST_NO_HEALERS"] = "哇靠，当前双方都没有治疗职业！:D（暂时的）"
+L["DESCRIPTION"] = "立刻曝光那些该死的治疗并帮助他们走完自己的使命！（PvP 和 PvE）"
 L["DISABLED"] = [=[hhtd 已被禁用！
-输入“/hhtd on”来重新启用。]=] -- Needs review
-L["ENABLED"] = "已启用！输入 /HHTDG 打开选项列表" -- Needs review
-L["HEALER_UNDER_ATTACK"] = "友方治疗者%s被%s攻击" -- Needs review
-L["HUMAN"] = "人类" -- Needs review
-L["IDLE"] = "发呆" -- Needs review
-L["INSTANCE_CHAT"] = "副本消息" -- Needs review
-L["IS_A_HEALER"] = "%s是治疗者！" -- Needs review
-L["LOG_ACTIVE"] = "激活！" -- Needs review
-L["LOG_BELOW_THRESHOLD"] = "（低于阈值）" -- Needs review
-L["LOG_IDLE"] = "发呆" -- Needs review
-L["NO_DATA"] = "无数据" -- Needs review
-L["NPC"] = "NPC" -- Needs review
-L["NPH"] = "姓名版挂钩" -- Needs review
-L["NPH_DESC"] = "此模块在敌对治疗姓名板上添加一个红十字" -- Needs review
-L["OPT_ANNOUNCE"] = "显示信息" -- Needs review
-L["OPT_ANNOUNCE_DESC"] = "当你的目标或是鼠标指向一个敌对治疗者时 HHTD 将显示信息。" -- Needs review
-L["OPT_CLEAR_LOGS"] = "清除记录" -- Needs review
-L["OPT_CORE_OPTIONS"] = "核心选项" -- Needs review
-L["OPT_DEBUG"] = "除错" -- Needs review
+输入“/hhtd on”来重新启用。]=]
+L["ENABLED"] = "已启用！输入 /HHTDG 打开选项列表"
+L["HEALER_UNDER_ATTACK"] = "友方治疗职业%s被%s攻击"
+L["HUMAN"] = "人类"
+L["IDLE"] = "发呆"
+L["INSTANCE_CHAT"] = "副本消息"
+L["IS_A_HEALER"] = "%s是治疗职业！"
+L["LOG_ACTIVE"] = "激活！"
+L["LOG_BELOW_THRESHOLD"] = "（低于阈值）"
+L["LOG_IDLE"] = "发呆"
+L["NO_DATA"] = "无数据"
+L["NPC"] = "NPC"
+L["NPH"] = "姓名版挂钩"
+L["NPH_DESC"] = "此模块在敌对治疗姓名板上添加一个红十字"
+L["OPT_ANNOUNCE"] = "显示信息"
+L["OPT_ANNOUNCE_DESC"] = "当你的目标或是鼠标指向一个敌对治疗者时 HHTD 将显示信息。"
+L["OPT_CLEAR_LOGS"] = "清除记录"
+L["OPT_CORE_OPTIONS"] = "核心选项"
+L["OPT_DEBUG"] = "除错"
 L["OPT_DEBUG_DESC"] = "启用/禁用除错"
+L["OPT_DEBUGLEVEL"] = "除错等级"
+L["OPT_DEBUGLEVEL_DESC"] = "除错等级：1=全部，2=警报，3=错误"
 L["OPT_ENABLE_GEHR"] = "启用图形报告"
-L["OPT_ENABLE_GEHR_DESC"] = "显示敌对治疗多功能图形列表" -- Needs review
-L["OPT_HEALER_FORGET_TIMER"] = "治疗遗忘计时器" -- Needs review
-L["OPT_HEALER_FORGET_TIMER_DESC"] = "设置治疗遗忘计时器（用于在一定时间内将一个敌人标记为治疗者）" -- Needs review
-L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = "治疗值（|cff00dd00%u|r）阈值" -- Needs review
--- L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = ""
-L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = "保护友方治疗者" -- Needs review
-L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = "当附近的友方治疗者被攻击时显示警报" -- Needs review
-L["OPT_LOG"] = "正在记录" -- Needs review
-L["OPT_LOG_DESC"] = "启用记录并添加一个新的“记录”标签到 HHTD 选项面板" -- Needs review
-L["OPT_LOGS"] = "记录" -- Needs review
-L["OPT_LOGS_DESC"] = "显示 HHTD 检测到的治疗和数据" -- Needs review
+L["OPT_ENABLE_GEHR_DESC"] = "显示敌对治疗多功能图形列表"
+L["OPT_HEALER_FORGET_TIMER"] = "治疗职业遗忘计时器"
+L["OPT_HEALER_FORGET_TIMER_DESC"] = "设置治疗职业遗忘计时器（用于在一定时间内将一个敌人标记为治疗职业）"
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = "治疗值（|cff00dd00%u|r）阈值"
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "治疗职业当他们达到累积的治疗量根据自己的最大生命值的百分比之前不会被检测到。"
+L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = "保护友方治疗职业"
+L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = "当附近的友方治疗职业被攻击时显示警报"
+L["OPT_LOG"] = "正在记录"
+L["OPT_LOG_DESC"] = "启用记录并添加一个新的“记录”标签到 HHTD 选项面板"
+L["OPT_LOGS"] = "记录"
+L["OPT_LOGS_DESC"] = "显示 HHTD 检测到的治疗和数据"
 L["OPT_MODULES"] = "模块"
-L["OPT_NPH_MARKER_SCALE"] = "标记缩放" -- Needs review
-L["OPT_NPH_MARKER_SCALE_DESC"] = "更改标记尺寸" -- Needs review
-L["OPT_NPH_MARKER_SETTINGS"] = "标记配置" -- Needs review
-L["OPT_NPH_MARKER_X_OFFSET"] = "水平偏移量" -- Needs review
-L["OPT_NPH_MARKER_X_OFFSET_DESC"] = "水平移动标记" -- Needs review
-L["OPT_NPH_MARKER_Y_OFFSET"] = "垂直偏移量" -- Needs review
-L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = "垂直移动标记" -- Needs review
--- L["OPT_NPH_WARNING1"] = ""
--- L["OPT_NPH_WARNING2"] = ""
-L["OPT_OFF"] = "off" -- Needs review
-L["OPT_OFF_DESC"] = "禁用 HHTD" -- Needs review
-L["OPT_ON"] = "on" -- Needs review
+L["OPT_NPH_MARKER_SCALE"] = "标记缩放"
+L["OPT_NPH_MARKER_SCALE_DESC"] = "更改标记尺寸"
+L["OPT_NPH_MARKER_SETTINGS"] = "标记配置"
+L["OPT_NPH_MARKER_X_OFFSET"] = "水平偏移量"
+L["OPT_NPH_MARKER_X_OFFSET_DESC"] = "水平移动标记"
+L["OPT_NPH_MARKER_Y_OFFSET"] = "垂直偏移量"
+L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = "垂直移动标记"
+L["OPT_NPH_WARNING1"] = [=[提示：敌方姓名版未被启用。HHTD 不能添加治疗标记。
+可以通过游戏内界面选项开启姓名版显示或使用快捷键。]=]
+L["OPT_NPH_WARNING2"] = [=[提示：友方姓名版未被启用。HHTD 不能添加治疗标记。
+可以通过游戏内界面选项开启姓名版显示或使用快捷键。]=]
+L["OPT_OFF"] = "off"
+L["OPT_OFF_DESC"] = "禁用 HHTD"
+L["OPT_ON"] = "on"
 L["OPT_ON_DESC"] = "启用 HHTD"
-L["OPT_POST_ANNOUNCE_CHANNEL"] = "广播频道" -- Needs review
-L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = "选择广播通报的频道" -- Needs review
--- L["OPT_POST_ANNOUNCE_DESCRIPTION"] = ""
-L["OPT_POST_ANNOUNCE_ENABLE"] = "聊天通报" -- Needs review
-L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = "启用通报到团队功能。" -- Needs review
-L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = "只对人类" -- Needs review
-L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = "通报中不包含 NPC。" -- Needs review
-L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = "敌对治疗文本" -- Needs review
--- L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = ""
-L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = "这有一个友好和敌对的信息，他们不能一样。" -- Needs review
-L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = "你的信息太少了！" -- Needs review
-L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = "[治疗]键值缺失！" -- Needs review
-L["OPT_POST_ANNOUNCE_NUMBER"] = "治疗数量" -- Needs review
-L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = "设置每条通报上的治疗数量。" -- Needs review
-L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = "通报文本里有什么东西出错。" -- Needs review
-L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = "友方治疗文本" -- Needs review
-L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = [=[输入一个信息调动团队保护他们的治疗。
+L["OPT_POST_ANNOUNCE_CHANNEL"] = "广播频道"
+L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = "选择广播通报的频道"
+L["OPT_POST_ANNOUNCE_DESCRIPTION"] = [=[|cFFFF0000主要：|r输入 |cff40ff40/hhtdp|r 或绑定按键通报保护友方治疗职业和特殊照顾敌方治疗职业。
 
-必须使用[治疗]键值将被替换为当期激活的治疗。]=] -- Needs review
-L["OPT_POST_ANNOUNCE_SETTINGS"] = "通报到团队设置" -- Needs review
-L["OPT_POST_ANNOUNCE_THROTTLE"] = "通报阈值" -- Needs review
-L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = "设置每条可能通报的最小时间间隔。" -- Needs review
+（魔兽世界 ESC 菜单绑定界面设置按键绑定）]=]
+L["OPT_POST_ANNOUNCE_ENABLE"] = "聊天通报"
+L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = "启用通报到团队功能。"
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = "只对人类"
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = "通报中不包含 NPC。"
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = "敌对治疗文本"
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = [=[输入一个消息鼓动你的队伍集中火力攻击敌方治疗职业。
+
+必须使用 [HEALERS] 键值将被自动替换为当前激活治疗职业。]=]
+L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = "这有一个友好和敌对的信息，他们不能一样。"
+L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = "你的信息太少了！"
+L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = "[HEALERS] 键值缺失！"
+L["OPT_POST_ANNOUNCE_NUMBER"] = "治疗数量"
+L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = "设置每条通报上的治疗数量。"
+L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = "通报文本里有什么东西出错。"
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = "友方治疗文本"
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = [=[输入一个信息鼓动团队保护他们的治疗职业。
+
+必须使用 [HEALERS] 键值将被自动替换为当激活的治疗职业。]=]
+L["OPT_POST_ANNOUNCE_SETTINGS"] = "通报到团队设置"
+L["OPT_POST_ANNOUNCE_THROTTLE"] = "通报阈值"
+L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = "设置每条可能通报的最小时间间隔。"
 L["OPT_PVE"] = "PvE 启用"
-L["OPT_PVE_DESC"] = "HHTD 同样作用于 NPC。" -- Needs review
-L["OPT_PVPHEALERSSPECSONLY"] = "治疗特定检测" -- Needs review
-L["OPT_PVPHEALERSSPECSONLY_DESC"] = "只特定治疗玩家。（此项禁用 PvP 最小治疗量）" -- Needs review
-L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = "设置友方治疗者角色" -- Needs review
-L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = "（如可能）自动设置检测团队治疗职责到友方治疗" -- Needs review
+L["OPT_PVE_DESC"] = "HHTD 同样作用于 NPC。"
+L["OPT_PVPHEALERSSPECSONLY"] = "治疗职业特定检测"
+L["OPT_PVPHEALERSSPECSONLY_DESC"] = "只特定治疗玩家。（此项禁用 PvP 最小治疗量）"
+L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = "设置友方治疗职业角色"
+L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = "（如可能）自动设置检测团队治疗角色到友方治疗"
 L["OPT_SOUNDS"] = "音效警报"
-L["OPT_SOUNDS_DESC"] = "当你鼠标悬停或目标到一个敌对治疗时 HHTD 播放特定的音效。" -- Needs review
+L["OPT_SOUNDS_DESC"] = "当你鼠标悬停或目标到一个敌对治疗时 HHTD 播放特定的音效。"
 L["OPT_STRICTGUIDPVE"] = "精确 PvE 检测"
--- L["OPT_STRICTGUIDPVE_DESC"] = ""
-L["OPT_TESTONTARGET"] = "在当前目标测试 HHTD 状态" -- Needs review
-L["OPT_TESTONTARGET_DESC"] = "将标记当前目标为治疗者来测试发生了什么。" -- Needs review
-L["OPT_TESTONTARGET_ENOTARGET"] = "需要一个目标" -- Needs review
-L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT"] = "使用最少治疗值过滤" -- Needs review
--- L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = ""
-L["OPT_VERSION"] = "version" -- Needs review
-L["OPT_VERSION_DESC"] = "显示版本和发布日期" -- Needs review
-L["PARTY"] = "小队" -- Needs review
-L["RELEASE_DATE"] = "发布日期：" -- Needs review
-L["SAY"] = "说" -- Needs review
-L["VERSION"] = "版本：" -- Needs review
-L["YELL"] = "大喊" -- Needs review
-L["YOU_GOT_HER"] = "你抓到%s她了|r！" -- Needs review
-L["YOU_GOT_HIM"] = "你抓到%s他了|r！" -- Needs review
-L["YOU_GOT_IT"] = "你抓到%s它了|r！" -- Needs review
+L["OPT_STRICTGUIDPVE_DESC"] = "当多个 NPC 共享相同的名称，HHTD 只会增加一个十字而不是全部。请注意，在十字出现之前大部分的时间需要切换目标或鼠标悬停在单位。"
+L["OPT_TESTONTARGET"] = "在当前目标测试 HHTD 状态"
+L["OPT_TESTONTARGET_DESC"] = "将标记当前目标为治疗者来测试发生了什么。"
+L["OPT_TESTONTARGET_ENOTARGET"] = "需要一个目标"
+L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT"] = "使用最少治疗值过滤"
+L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "治疗职业将有指定治疗数值前被标记等。"
+L["OPT_VERSION"] = "version"
+L["OPT_VERSION_DESC"] = "显示版本和发布日期"
+L["PARTY"] = "小队"
+L["RELEASE_DATE"] = "发布日期："
+L["SAY"] = "说"
+L["VERSION"] = "版本："
+L["YELL"] = "大喊"
+L["YOU_GOT_HER"] = "你抓到%s她了|r！"
+L["YOU_GOT_HIM"] = "你抓到%s他了|r！"
+L["YOU_GOT_IT"] = "你抓到%s它了|r！"
 
     end
 end
@@ -857,6 +877,8 @@ L["OPT_CLEAR_LOGS"] = "清除記錄"
 L["OPT_CORE_OPTIONS"] = "核心選項"
 L["OPT_DEBUG"] = "除錯"
 L["OPT_DEBUG_DESC"] = "啟用/禁用除錯"
+L["OPT_DEBUGLEVEL"] = "除錯等級"
+L["OPT_DEBUGLEVEL_DESC"] = "除錯等級：1=全部，2 =警報，3 =錯誤"
 L["OPT_ENABLE_GEHR"] = "啟用圖形報告"
 L["OPT_ENABLE_GEHR_DESC"] = "顯示敵對治療多功能圖形列表"
 L["OPT_HEALER_FORGET_TIMER"] = "治療忽略計時器"
@@ -972,6 +994,8 @@ L["OPT_CLEAR_LOGS"] = "Стирает информацию в Логах"
 L["OPT_CORE_OPTIONS"] = "Основные настройки"
 L["OPT_DEBUG"] = "отладка"
 L["OPT_DEBUG_DESC"] = "Включает/выключает режим отладки."
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 L["OPT_ENABLE_GEHR"] = "Включение графического информатора"
 L["OPT_ENABLE_GEHR_DESC"] = "Отображает графический список вражеских лекарей с разными дополнительными возможностями."
 L["OPT_HEALER_FORGET_TIMER"] = "Таймер забывания лекарей"
@@ -1085,6 +1109,8 @@ do
 -- L["OPT_CORE_OPTIONS"] = ""
 -- L["OPT_DEBUG"] = ""
 -- L["OPT_DEBUG_DESC"] = ""
+-- L["OPT_DEBUGLEVEL"] = ""
+-- L["OPT_DEBUGLEVEL_DESC"] = ""
 -- L["OPT_ENABLE_GEHR"] = ""
 -- L["OPT_ENABLE_GEHR_DESC"] = ""
 -- L["OPT_HEALER_FORGET_TIMER"] = ""

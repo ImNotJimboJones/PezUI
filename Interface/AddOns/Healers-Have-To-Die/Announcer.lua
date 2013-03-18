@@ -1,9 +1,9 @@
 --[=[
 HealersHaveToDie World of Warcraft Add-on
-Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
+Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.0
+Version 2.1.1b
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -72,7 +72,7 @@ function Announcer:GetOptions () -- {{{
     local validatePostChatMessage = function (info, v)
 
         local counterpartMessage = info[#info] == 'ProtectMessage' and 'KillMessage' or 'ProtectMessage';
-        Announcer:Debug('counterpartMessage:', counterpartMessage);
+        Announcer:Debug(INFO, 'counterpartMessage:', counterpartMessage);
       
         if not v:find('%[HEALERS%]') then
             return self:Error(L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"]);
@@ -281,7 +281,7 @@ function Announcer:HHTD_HEALER_UNDER_ATTACK (selfevent, sourceName, sourceGUID, 
         -- TODO: add an option to display alert only if the source is human
     if isCurrentPlayer then
         -- TODO: add a new feature to display a set of custom messages when we are under attack.
-        --       We need to ignore Aoes.
+        --       We need to ignore AOEs.
         return;
     end
 
@@ -376,12 +376,12 @@ do
         -- send to chat
         if #FriendsFoes[true] > 0 then
             local FriendsText = ( config.ProtectMessage:gsub('%[HEALERS%]', table.concat(FriendsFoes[true],  ' - ')) );
-            self:Debug("HHTD:", FriendsText);
+            self:Debug(INFO, "HHTD:", FriendsText);
             Post(FriendsText);
         end
         if #FriendsFoes[false] > 0 then
             local FoesText    = ( config.KillMessage:gsub('%[HEALERS%]', table.concat(FriendsFoes[false], ' - ')) );
-            self:Debug("HHTD:", FoesText);
+            self:Debug(INFO, "HHTD:", FoesText);
             Post(FoesText);
         end
 

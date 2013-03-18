@@ -10,12 +10,12 @@ local activetheme = {}
 local massQueue, targetQueue, functionQueue = {}, {}, {}		-- Queue Lists
 local ForEachPlate												-- Allocated for Function (Defined later in file)
 local EMPTY_TEXTURE = "Interface\\Addons\\TidyPlates\\Media\\Empty"
-local select, pairs, tostring  = select, pairs, tostring 			-- Local function copies
+local select, pairs, tostring, wipe  = select, pairs, tostring, wipe 			-- Local function copies
 local CreateTidyPlatesStatusbar = CreateTidyPlatesStatusbar			-- Local function copy
 local InCombat, HasTarget, EnableFadeIn = false, false, true
 local Plates, PlatesVisible, PlatesFading, GUID = {}, {}, {}, {}	-- Plate Lists
 local PlatesScaling = {}	-- ScaleFade
-local nameplate, extended, bars, regions, visual					-- Temp References
+local nameplate, extended, bars, regions, visual				-- Temp/Local/Current References
 local unit, unitcache, style, stylename, unitchanged				-- Temp References
 local currentTarget													-- Stores current target plate pointer
 local extendedSetAlpha, HighlightIsShown, HighlightSetAlpha			-- Local copies of methods; faster than table lookups
@@ -126,7 +126,6 @@ do
 			objectname = anchorgroup[index]; SetAnchorGroupObject(visual[objectname], style[objectname], extended)
 			objectenable = style[objectname].show
 			if objectenable then visual[objectname]:Show() else visual[objectname]:Hide() end
-                        --if objectenable then visual[objectname]:SetAlpha(1) else visual[objectname]:SetAlpha(0) end
 		end
 		-- Bars
 		for index = 1, #bargroup do objectname = bargroup[index]; SetBarGroupObject(bars[objectname], style[objectname], extended) end
@@ -226,11 +225,11 @@ do
 	-- UpdateIndicator_CustomAlpha: Calls the alpha delegate to get the requested alpha
 	function UpdateIndicator_CustomAlpha()
 		if activetheme.SetAlpha then
-			local previousAlpha = extended.requestedAlpha
-			extended.requestedAlpha = activetheme.SetAlpha(unit) or previousAlpha or unit.alpha or 1
+			extended.requestedAlpha = activetheme.SetAlpha(unit) or unit.alpha or 1                        
 		else extended.requestedAlpha = unit.alpha or 1 end
-
-		if EnableFadeIn then                    
+                
+		if EnableFadeIn then
+                        extended.visibleAlpha = extended:GetAlpha()                 -- Just to be sure the values haven't been messed up
                         if extended.requestedAlpha ~= extended.visibleAlpha then
 				PlatesFading[nameplate] = true
 			end
@@ -257,6 +256,7 @@ do
 				extended.requestedScale = tonumber(activetheme.SetScale(unit)) or 0
                                 
 				if EnableFadeIn then
+                                        extended.visibleScale = extended:GetScale()                     -- Just to be sure!
 					if extended.visibleScale ~= extended.requestedScale then 	-- ScaleFade
 						PlatesScaling[nameplate] = true
 					end
@@ -498,28 +498,34 @@ do
 		unit.alpha = 1
 		unit.isTarget = false
 		unit.isMouseover = false
-		extended.unitcache = ClearIndices(extended.unitcache)
+                extended.unit = wipe(extended.unit)
+		--extended.unitcache = ClearIndices(extended.unitcache)
+		extended.unitcache = wipe(extended.unitcache)       -- Gonna try the native 'wipe' function
 		extended.stylename = ""
 
 		-- For Fading In
 		PlatesFading[plate] = EnableFadeIn
 		extended.requestedAlpha = 0
 		extended.visibleAlpha = 0
-		PlatesScaling[plate] = EnableFadeIn  		-- ScaleFade
-		extended.requestedScale = 1
-		extended.visibleScale = 1          -- Inital scale
 		extended:SetAlpha(0)
+                
+                PlatesScaling[plate] = EnableFadeIn  		-- ScaleFade
+                extended.requestedScale = 1
+		extended.visibleScale = 1          -- Inital scale
+		extended:SetScale(1)
 
 		-- Graphics
 		unit.isCasting = false
 		bars.castbar:Hide()
 		visual.highlight:Hide()
 		regions.highlight:Hide()
-
+                visual.raidicon:Hide()
+                visual.target:Hide()
+                
 		-- Widgets/Extensions       -- Moved to OnEchoNewNameplate
 		if activetheme.OnInitialize then activetheme.OnInitialize(extended) end
 	end
-
+        
 	--------------------------------
 	-- Individual Gather/Entry-Point Functions
 	--------------------------------
@@ -532,7 +538,6 @@ do
 		bars.castbar:Hide()
 		bars.castbar:SetScript("OnUpdate", nil)
 		unit.isCasting = false
-		--
 		PlatesVisible[plate] = nil
 		extended.unit = ClearIndices(extended.unit)
 		extended.unitcache = ClearIndices(extended.unitcache)
@@ -540,54 +545,59 @@ do
 		if plate == currentTarget then currentTarget = nil end
 	end
 
-	-- OnEchoNewNameplate: Intended to reduce CPU by bypassing the full update, and only checking the alpha value
+	-- OnEchoNewNameplate
+        --[[
+        This function takes care of the full update after the TidyP lates plate has
+        been prepared, and the parent plate has been fully populated with data.
+        --]]
+        
+        
+    
 	local function OnEchoNewNameplate(plate)
-		if not plate:IsShown() then return end
-		-- Gather Information
-		UpdateReferences(plate)
-		GatherData_Alpha(plate)
-		ProcessUnitChanges(true)        -- Forces an update
-                
-                -- [[ This stuff was moved from OnNewNameplate to reduce interference issues
-                -- Enable the plate
-                PlatesVisible[plate] = true
-                
-                -- Hook for Updates     -- This used to be done in OnNewNameplate
+                UpdateReferences(plate)
                 local health, cast = bars.health, bars.cast
                 health:HookScript("OnShow", OnShowNameplate )
-		health:HookScript("OnHide", OnHideNameplate)
-		health:HookScript("OnValueChanged", OnUpdateHealth)
-		health:HookScript("OnMinMaxChanged", OnUpdateHealthRange)
+                health:HookScript("OnHide", OnHideNameplate)
+                health:HookScript("OnValueChanged", OnUpdateHealth)
+                health:HookScript("OnMinMaxChanged", OnUpdateHealthRange)
+                extended.isHooked = true
+                
+                --[[
+                Hook for Updates Note:
+                This used to be done in OnNewNameplate.  It has been moved because
+                the event handler would sometimes call for events right after the
+                nameplate was created, but before the data was populated.
+                
+                This hooking function has been placed prior to the IsShown check
+                because sometimes the nameplate gets created and hidden in a single
+                frame.
                 --]]
+                
+		--if not plate:IsShown() then print("Hook would have Failed", plate); return else print("Hook suceeded", plate) end
+		if not plate:IsShown() then return else end
+                PlatesVisible[plate] = true
+                
+                -- Gather Information
+                GatherData_BasicInfo()      
+		GatherData_Alpha(plate)         
+		ProcessUnitChanges(true)        -- Forces an update
 	end
-	-- OnNewNameplate: When a new nameplate is generated, this function hooks the appropriate functions
+        
+	-- OnNewNameplate:
+        --[[
+        When a nameplate is created, this function prepares the conditions
+        and queues the plate for a more complete update.  Why?  On the
+        cycle that the nameplate is created, its data hasn't been
+        completely populated by Blizzard's client.  The data is complete
+        on the next frame, so we keep the unfinished plate hidden.
+        --]]
 	function OnNewNameplate(plate)
 		UpdateReferences(plate)
-		PrepareNameplate(plate)
-		--GatherData_BasicInfo()        -- this is called in PrepareNameplate... no need to call twice
-
-                -- If I comment these lines out, and let the Echo take care of everything, that should solve a few issues, right?
-                -- No, because OnUpdateHealth can be triggered between updates, in rare conditions.
-		--[[
-                local health, cast = bars.health, bars.cast
-                
-                -- Alternative to reduce initial CPU load
-                CheckNameplateStyle()
-		UpdateIndicator_CustomAlpha()
-
-		-- Hook for Updates
-		health:HookScript("OnShow", OnShowNameplate )
-		health:HookScript("OnHide", OnHideNameplate)
-		health:HookScript("OnValueChanged", OnUpdateHealth)
-		health:HookScript("OnMinMaxChanged", OnUpdateHealthRange)
-
-		-- Activates nameplate visibility
-		PlatesVisible[plate] = true
-                --]]
-		SetTargetQueue(plate, OnEchoNewNameplate)		-- Echo for a partial update (alpha only)
+		PrepareNameplate(plate)                
+		SetTargetQueue(plate, OnEchoNewNameplate) -- Echo for a full update (alpha only)
 	end
 
-	-- OnShowNameplate
+	-- OnShowNameplate: This occurs when a nameplate is Reused
 	function OnShowNameplate(source)
 		local plate = source.parentPlate
 		-- Activate Plate
@@ -597,8 +607,8 @@ do
 		GatherData_BasicInfo()
 
 		CheckNameplateStyle()
-		--UpdateIndicator_CustomAlpha()     -- This is updated on Echo
-		--UpdateHitboxShape()               -- This doesn't work anymore
+		--UpdateIndicator_CustomAlpha()     -- Gone: This is updated on Echo. 
+		--UpdateHitboxShape()               -- Gone: This doesn't work anymore; The hitbox size is locked by the client
 
 		SetTargetQueue(plate, OnUpdateNameplate)		-- Echo for a full update
 	end
@@ -608,9 +618,9 @@ do
 		if not plate:IsShown() then return end
 		-- Gather Information
 		UpdateReferences(plate)
-		GatherData_Alpha(plate)
-		GatherData_BasicInfo()
-		ProcessUnitChanges()
+		GatherData_Alpha(plate)     -- Gathers opacity and scale, for target, mouseover
+		GatherData_BasicInfo()      -- Gathers name, level, etc.
+		ProcessUnitChanges()        -- Updates indicators
 	end
 	-- OnUpdateLevel
 	function OnUpdateLevel(plate)
@@ -894,7 +904,8 @@ do
 	end
 
 	function ApplyPlateExtension(plate)
-		Plates[plate] = true
+		Plates[plate] = GetTime()
+		--Plates[plate] = true
 		plate.extended = CreateFrame("Frame", nil, plate)
 		local extended = plate.extended
 		platelevels = platelevels - 1; if platelevels < 1 then platelevels = 1 end
@@ -1071,11 +1082,10 @@ do
 	end
 
 	-- Fade Function
-	local FadeRate = .15
-	local function UpdateFade(frame, func, visible, requested)
+	local function UpdateFade(frame, func, visible, requested, rate)
 		if visible == requested then return nil, requested end
 		
-		local scaledRate = FadeRate * (30/FrameRate)
+		local scaledRate = rate * (30/FrameRate)
 		if visible < requested then
 			visible = min(visible + scaledRate, requested)
 		elseif visible > requested then
@@ -1121,13 +1131,13 @@ do
 		-- Fade/Scale Transition Loops
 		for plate in pairs(PlatesFading) do 
 			local extended = plate.extended
-			PlatesFading[plate] , extended.visibleAlpha = UpdateFade(extended, extendedSetAlpha, extended.visibleAlpha, extended.requestedAlpha)
+			PlatesFading[plate] , extended.visibleAlpha = UpdateFade(extended, extendedSetAlpha, extended.visibleAlpha, extended.requestedAlpha, .22)
 		end
 		
                 --  [[            Disabled
 		for plate in pairs(PlatesScaling) do 
 			local extended = plate.extended
-			PlatesScaling[plate], extended.visibleScale = UpdateFade(extended, extendedSetScale, extended.visibleScale, extended.requestedScale)
+			PlatesScaling[plate], extended.visibleScale = UpdateFade(extended, extendedSetScale, extended.visibleScale, extended.requestedScale, .15)
 		end
                 --]]
 

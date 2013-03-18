@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r239 | oscarucb | 2013-03-14 06:31:31 +0000 (Thu, 14 Mar 2013) | 1 line
+r241 | oscarucb | 2013-03-18 02:02:15 +0000 (Mon, 18 Mar 2013) | 1 line
 Changed paths:
-   A /tags/5.3.0 (from /trunk:238)
+   A /tags/5.3.1 (from /trunk:240)
 
-Tagging as 5.3.0
+Tagging as 5.3.1
+------------------------------------------------------------------------
+r240 | oscarucb | 2013-03-18 01:59:46 +0000 (Mon, 18 Mar 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 112: add tracking for finding the weekly Trove of the Thunder King outdoor chest
+
 ------------------------------------------------------------------------
 r237 | oscarucb | 2013-03-13 09:54:32 +0000 (Wed, 13 Mar 2013) | 2 lines
 Changed paths:

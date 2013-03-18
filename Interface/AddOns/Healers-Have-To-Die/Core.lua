@@ -1,9 +1,9 @@
 --[=[
 HealersHaveToDie World of Warcraft Add-on
-Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
+Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.0
+Version 2.1.1b
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -79,6 +79,8 @@ HHTD.LOGS = {
     [false] = {}, -- [guid] = healer_log_template
 };
 
+HHTD.DelayedFunctionCallsCount  = 0;
+HHTD.DelayedFunctionCalls       = {};
 
 do
     local _, _, _, interface = GetBuildInfo();
@@ -107,6 +109,27 @@ HHTD.Registry_by_Name = {
     [true] = {}, -- [name] = healer_template
     [false] = {}, -- [name] = healer_template
 }
+-- upvalues {{{
+local _G                = _G;
+local UnitIsPlayer      = _G.UnitIsPlayer;
+local UnitIsDead        = _G.UnitIsDead;
+local UnitFactionGroup  = _G.UnitFactionGroup;
+local UnitGUID          = _G.UnitGUID;
+local UnitIsUnit        = _G.UnitIsUnit;
+local UnitClass         = _G.UnitClass;
+local UnitName          = _G.UnitName;
+local UnitInRaid        = _G.UnitInRaid;
+local UnitInParty       = _G.UnitInParty;
+local UnitSetRole       = _G.UnitSetRole;
+local UnitGroupRolesAssigned = _G.UnitGroupRolesAssigned;
+local GetTime           = _G.GetTime;
+local pairs             = _G.pairs;
+local ipairs            = _G.ipairs;
+local unpack            = _G.unpack;
+local select            = _G.select;
+local InCombatLockdown  = _G.InCombatLockdown;
+local UnitIsFriend      = _G.UnitIsFriend;
+-- }}}
 
 function HHTD:HHTD_HEALER_GONE(selfevent, isFriend, healer)
 
@@ -129,10 +152,7 @@ function HHTD:HHTD_HEALER_GONE(selfevent, isFriend, healer)
 
 end
 
-local UnitInRaid                = _G.UnitInRaid;
-local UnitInParty               = _G.UnitInParty;
-local UnitSetRole               = _G.UnitSetRole;
-local UnitGroupRolesAssigned    = _G.UnitGroupRolesAssigned;
+
 
 function HHTD:HHTD_HEALER_BORN(selfevent, isFriend, healer)
 
@@ -141,13 +161,24 @@ function HHTD:HHTD_HEALER_BORN(selfevent, isFriend, healer)
     HHTD.Registry_by_GUID[isFriend][healer.guid] = healer;
     HHTD.Registry_by_Name[isFriend][healer.name] = healer;
 
+    --[===[@alpha@
+    if InCombatLockdown() then
+        self:AddDelayedFunctionCall('test', self.Debug, self, INFO2, "After combat lock down test");
+    end
+    --@end-alpha@]===]
+
     -- if the player is human and friendly and is part of our group, set his/her role to HEALER
     if self.db.global.SetFriendlyHealersRole then
 
         if isFriend and healer.isHuman and (UnitInRaid(healer.fullName) or UnitInParty(healer.fullName)) and UnitGroupRolesAssigned(healer.fullName) == 'NONE' then
             if (select(2, GetRaidRosterInfo(UnitInRaid("player") or 1))) > 0 then
                 self:Debug(INFO, "Setting role to HEALER for", healer.fullName);
-                UnitSetRole(healer.fullName, 'HEALER');
+
+                if InCombatLockdown() then
+                    self:AddDelayedFunctionCall("SetRole_"..healer.fullName, UnitSetRole, healer.fullName, 'HEALER');
+                else
+                    UnitSetRole(healer.fullName, 'HEALER'); -- fails in combat, has become protected in 5.2
+                end
             end
         end
 
@@ -274,20 +305,7 @@ HHTD:SetDefaultModulePrototype( HHTD.MODULE_PROTOTYPE )
 HHTD:SetDefaultModuleState( false )
 -- }}}
 
--- upvalues {{{
-local UnitIsPlayer      = _G.UnitIsPlayer;
-local UnitIsDead        = _G.UnitIsDead;
-local UnitFactionGroup  = _G.UnitFactionGroup;
-local UnitGUID          = _G.UnitGUID;
-local UnitIsUnit        = _G.UnitIsUnit;
-local UnitSex           = _G.UnitSex;
-local UnitClass         = _G.UnitClass;
-local UnitName          = _G.UnitName;
-local GetTime           = _G.GetTime;
-local PlaySoundFile     = _G.PlaySoundFile;
-local pairs             = _G.pairs;
-local ipairs            = _G.ipairs;
--- }}}
+
 
 -- }}}
 
@@ -399,13 +417,23 @@ do
                 disabled = false,
                 order = -2,
             },
+            DebugLevel = {
+                type = 'range',
+                name = L["OPT_DEBUGLEVEL"],
+                desc = L["OPT_DEBUGLEVEL_DESC"],
+                min = 1,
+                max = 3,
+                guiHidden = true,
+                disabled = false,
+                order = -3,
+            },
             
             Version = {
                 type = 'execute',
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.1.0,', L["RELEASE_DATE"], '2013-03-06T02:57:11Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.1.1b,', L["RELEASE_DATE"], '2013-03-17T17:13:18Z') end,
                 order = -5,
             },
             core = {
@@ -415,7 +443,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.1.0 -- ' .. L["RELEASE_DATE"] .. ' 2013-03-06T02:57:11Z',
+                        name = L["VERSION"] .. ' 2.1.1b -- ' .. L["RELEASE_DATE"] .. ' 2013-03-17T17:13:18Z',
                         order = 1,
                     },
                     Pve = {
@@ -633,6 +661,11 @@ local DEFAULT__CONFIGURATION = {
         HFT = 60,
         Enabled = true,
         Debug = false,
+        DebugLevel = 1,
+        --[===[@alpha@
+        Debug = true,
+        DebugLevel = 2,
+        --@end-alpha@]===]
         Log = false,
         Pve = true,
         PvpHSpecsOnly = true,
@@ -673,10 +706,6 @@ function HHTD:OnEnable()
     self:RegisterEvent("PLAYER_ALIVE"); -- talents SHOULD be available
     -- self:RegisterEvent("PARTY_MEMBER_DISABLE"); -- useless event, no argument...
     
-    -- Subscribe to our own callbacks
-    self:RegisterMessage("HHTD_HEALER_GONE");
-    self:RegisterMessage("HHTD_HEALER_BORN");
-
     self:Print(L["ENABLED"]);
 
     self:SetModulesStates();
@@ -690,7 +719,7 @@ function HHTD:OnEnable()
 end
 
 function HHTD:PLAYER_ALIVE()
-    self:Debug("PLAYER_ALIVE");
+    self:Debug(INFO, "PLAYER_ALIVE");
 
     PLAYER_FACTION = UnitFactionGroup("player");
     PLAYER_GUID    = UnitGUID("player");
@@ -759,7 +788,7 @@ do
 
             if LastDetectedGUID == unitGuid and unit == "target" then
                 self:SendMessage("HHTD_TARGET_LOCKED", isFriend, HHTD.Registry_by_GUID[isFriend][unitGuid]);
-                --self:Debug("LastDetectedGUID == unitGuid and unit == \"target\""); -- XXX
+                --self:Debug(INFO, "LastDetectedGUID == unitGuid and unit == \"target\""); -- XXX
 
                 return;
             end
@@ -769,7 +798,7 @@ do
                 -- Is this sitill true?
 
                 self:SendMessage("HHTD_HEALER_MOUSE_OVER", isFriend, HHTD.Registry_by_GUID[isFriend][unitGuid]);
-                --self:Debug("HHTD_HEALER_UNDER_MOUSE"); -- XXX
+                --self:Debug(INFO, "HHTD_HEALER_UNDER_MOUSE"); -- XXX
                 LastDetectedGUID = unitGuid;
             end
         end
@@ -873,6 +902,7 @@ do
             Private_registry_by_Name[isFriend][corpse.name] = nil;
 
             -- announce the (un)timely departure of this healer and expose the corpse for all to see
+            self:HHTD_HEALER_GONE("HHTD_HEALER_GONE", isFriend, corpse); -- make sure our handler is the first to be called
             self:SendMessage("HHTD_HEALER_GONE", isFriend, corpse);
             self:Debug(INFO2, corpse.name, "reaped");
         else
@@ -996,6 +1026,7 @@ do
                 --[===[@debug@
                 HHTD:Debug(INFO, "Healer detected:", sourceName, 'uhmhap:', configRef.UHMHAP, 'healdone:', record.healDone, 'threshold:', HHTD.HealThreshold);
                 --@end-debug@]===]
+                HHTD:HHTD_HEALER_BORN("HHTD_HEALER_BORN", isFriend, record); -- make sure ours is the first to be called
                 HHTD:SendMessage("HHTD_HEALER_BORN", isFriend, record);
             end
 
@@ -1070,7 +1101,7 @@ do
  
         --[===[@debug@
         if hideCaster then
-            --self:Debug(e, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _spellID, spellNAME, _spellSCHOOL, healAMOUNT);
+            --self:Debug(INFO, e, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, _spellID, spellNAME, _spellSCHOOL, healAMOUNT);
         end
         --@end-debug@]===]
 
@@ -1222,6 +1253,18 @@ do
          end
      end -- }}}
 
+     -- delayed execution after combat
+     if (not InCombatLockdown() and self.DelayedFunctionCallsCount > 0) then
+         for id, funcAndArgs in pairs (self.DelayedFunctionCalls) do
+
+             self:Debug(INFO2, "Running post combat command", id);
+
+             funcAndArgs.func(unpack(funcAndArgs.args));
+
+             self.DelayedFunctionCalls[id] = nil; -- remove it from the list
+             self.DelayedFunctionCallsCount = self.DelayedFunctionCallsCount - 1;
+         end
+     end
  end -- }}}
 
  

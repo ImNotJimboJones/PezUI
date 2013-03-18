@@ -1,9 +1,9 @@
 --[=[
 HealersHaveToDie World of Warcraft Add-on
-Copyright (c) 2009-2010 by John Wellesz (Archarodim@teaser.fr)
+Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.0
+Version 2.1.1b
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -32,8 +32,13 @@ local HHTD = T.Healers_Have_To_Die;
 
 local HHTD_C = T.Healers_Have_To_Die.Constants;
 
-local pairs = _G.pairs;
-local table = _G.table;
+local _G        = _G;
+local pairs     = _G.pairs;
+local tostring  = _G.tostring;
+local table     = _G.table;
+local select    = _G.select;
+local type      = _G.type;
+local date      = _G.date;
 
 function HHTD:MakePlayerName (name) --{{{
     if not name then name = "NONAME" end
@@ -137,17 +142,28 @@ end -- }}}
 --  function HHTD:Debug(...) {{{
 do
     local Debug_Templates = {
-        [ERROR]     = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFFFF5555",
-        [WARNING]   = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFF55FF55",
-        [INFO]      = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFF9999FF",
-        [INFO2]     = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFFFF9922",
+        [ERROR]     = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFFFF5555",--3
+        [WARNING]   = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFF55FF55",--2
+        [INFO]      = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFF9999FF",--1
+        [INFO2]     = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r|cFFFF9922",--1
         [false]     = "|cFFFF2222Debug:|cFFCC4444[%s.%3d]:|r",
+    }
+    local Debug_Levels = {
+        [INFO2]     = 1,
+        [INFO]      = 1,
+        [WARNING]   = 2,
+        [ERROR]     = 3,
+        [false]     = 3,
     }
     local select, type = _G.select, _G.type;
     function HHTD:Debug(...)
         if not HHTD.db.global.Debug then return end;
 
         local template = type((select(1,...))) == "number" and (select(1, ...)) or false;
+
+        if HHTD.db.global.DebugLevel and HHTD.db.global.DebugLevel > Debug_Levels[template] then
+            return;
+        end
 
         local DebugHeader = (Debug_Templates[template]):format(date("%S"), (GetTime() % 1) * 1000);
 
@@ -223,6 +239,23 @@ function HHTD:pairs_ordered (t, reverse, SortKey) -- Not to be used where perfor
 
 end
 
+function HHTD:AddDelayedFunctionCall(callID, functionLink, ...)
+
+    
+    if (not self.DelayedFunctionCalls[callID]) then 
+        self.DelayedFunctionCalls[callID] =  {["func"] = functionLink, ["args"] =  {...}};
+        self.DelayedFunctionCallsCount = self.DelayedFunctionCallsCount + 1;
+    elseif select("#",...) > 1 then -- if we had more than the function reference and its object
+
+        local args = self.DelayedFunctionCalls[callID].args;
+
+        for i=1,select("#",...), 1 do
+            args[i]=select(i, ...);
+        end
+
+    end
+end
+
 local function BadLocalTest (localtest)
         HHTD:Print(HHTD.Localized_Text[localtest]);
 end
@@ -258,3 +291,26 @@ function HHTD:Hickup(mul)
     self:Debug(ERROR, 'Hickup ', t);
 end
 --@end-debug@]===]
+
+
+function HHTD:FatalError (TheError)
+
+    if not StaticPopupDialogs["HHTD_ERROR_FRAME"] then
+        StaticPopupDialogs["HHTD_ERROR_FRAME"] = {
+            text = "|cFFFF0000HHTD Fatal Error:|r\n%s",
+            button1 = "OK",
+            OnAccept = function()
+                return false;
+            end,
+            timeout = 0,
+            whileDead = 1,
+            hideOnEscape = 1,
+            showAlert = 1,
+            preferredIndex = 3,
+        };
+    end
+
+    StaticPopup_Show ("HHTD_ERROR_FRAME", TheError);
+end
+
+
