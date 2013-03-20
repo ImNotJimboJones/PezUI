@@ -58,7 +58,6 @@ local type = type;
 
 local sRangeSpell, sIsRangeKnown, sIsHealerMode;
 local sIsDirectionArrow = false;
-local sShowShieldAbsorb = false;
 local VuhDoGcdStatusBar;
 local sHotToggleUpdateSecs = 1;
 local sAggroRefreshSecs = 1;
@@ -103,7 +102,6 @@ local function VUHDO_eventHandlerInitBurst()
 	sIsHealerMode = not VUHDO_CONFIG["THREAT"]["IS_TANK_MODE"];
 	sIsRangeKnown = not VUHDO_CONFIG["RANGE_PESSIMISTIC"] and GetSpellInfo(sRangeSpell) ~= nil;
 	sIsDirectionArrow = VUHDO_isShowDirectionArrow();
-	sShowShieldAbsorb = VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["showShieldAbsorb"];
 
 	sHotToggleUpdateSecs = VUHDO_CONFIG["UPDATE_HOTS_MS"] * 0.00033;
 	sAggroRefreshSecs = VUHDO_CONFIG["THREAT"]["AGGRO_REFRESH_MS"] * 0.001;
@@ -247,6 +245,8 @@ function VUHDO_initAllBurstCaches()
 	VUHDO_aoeAdvisorInitBurst();
 	VUHDO_bouquetValidatorsInitBurst();
 	VUHDO_bouquetsInitBurst();
+	VUHDO_textProvidersInitBurst();
+	VUHDO_textProviderHandlersInitBurst();
 	VUHDO_actionEventHandlerInitBurst();
 	VUHDO_directionsInitBurst();
 	VUHDO_dcShieldInitBurst();
@@ -364,7 +364,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 	if ("COMBAT_LOG_EVENT_UNFILTERED" == anEvent) then
 		if (VUHDO_VARIABLES_LOADED) then
 			VUHDO_parseCombatLogEvent(anArg2, anArg8, anArg11, anArg13, anArg15);
-			if (sShowShieldAbsorb) then
+			if (VUHDO_INTERNAL_TOGGLES[36]) then -- VUHDO_UPDATE_SHIELD
 				VUHDO_parseCombatLogShieldAbsorb(anArg2, anArg4, anArg8, anArg13, anArg16, anArg12, anArg17);
 			end
 		end
@@ -401,6 +401,7 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 		end
 	elseif("UNIT_ABSORB_AMOUNT_CHANGED" == anEvent) then
 			VUHDO_updateBouquetsForEvent(anArg1, 36); -- VUHDO_UPDATE_SHIELD
+			VUHDO_updateShieldBar(anArg1);
 	elseif ("UNIT_SPELLCAST_SUCCEEDED" == anEvent) then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			VUHDO_spellcastSucceeded(anArg1, anArg2);
@@ -866,6 +867,13 @@ function VUHDO_updateGlobalToggles()
 
 	VUHDO_UnRegisterEvent(not VUHDO_CONFIG["IS_READY_CHECK_DISABLED"],
 		"READY_CHECK", "READY_CHECK_CONFIRM", "READY_CHECK_FINISHED");
+
+	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_SHIELD] =
+		VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["showShieldAbsorb"]
+			or VUHDO_CONFIG["SHOW_SHIELD_BAR"]
+			or VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_SHIELD);
+
+	VUHDO_UnRegisterEvent(VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_SHIELD], "UNIT_ABSORB_AMOUNT_CHANGED");
 end
 
 
@@ -882,6 +890,7 @@ function VUHDO_loadVariables()
 	VUHDO_initMinimap();
 	VUHDO_loadDefaultBouquets();
 	VUHDO_initClassColors();
+	VUHDO_initTextProviderConfig();
 
 	VUHDO_lnfPatchFont(VuhDoOptionsTooltipText, "Text");
 end
@@ -1146,6 +1155,7 @@ end
 local tTimeDelta = 0;
 local tSlowDelta = 0;
 local tAutoProfile;
+local tTrigger;
 local tGcdStart, tGcdDuration;
 local tHotDebuffToggle = 1;
 function VUHDO_OnUpdate(_, aTimeDelta)
@@ -1438,7 +1448,7 @@ local VUHDO_ALL_EVENTS = {
 	"INCOMING_RESURRECT_CHANGED",
 	"PET_BATTLE_CLOSE", "PET_BATTLE_OPENING_START",
 	"PLAYER_REGEN_ENABLED",
-	--"UNIT_ABSORB_AMOUNT_CHANGED"
+	"UNIT_ABSORB_AMOUNT_CHANGED"
 };
 
 
@@ -1465,6 +1475,10 @@ function VUHDO_OnLoad(anInstance)
 	SlashCmdList["VUHDO"] = function(aMessage)
 		VUHDO_slashCmd(aMessage);
 	end
+
+
+	SLASH_RELOADUI1 = "/rl";
+	SlashCmdList["RELOADUI"] = ReloadUI;
 
 	anInstance:SetScript("OnEvent", VUHDO_OnEvent);
 	anInstance:SetScript("OnUpdate", VUHDO_OnUpdate);

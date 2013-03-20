@@ -2,7 +2,9 @@ VUHDO_PANEL_UNITS = { {}, {}, {}, {}, {}, {}, {}, {}, {}, {} };
 local VUHDO_PANEL_UNITS = VUHDO_PANEL_UNITS;
 
 VUHDO_UNIT_BUTTONS = {};
+VUHDO_UNIT_BUTTONS_PANEL = {};
 local VUHDO_UNIT_BUTTONS = VUHDO_UNIT_BUTTONS;
+local VUHDO_UNIT_BUTTONS_PANEL = VUHDO_UNIT_BUTTONS_PANEL;
 
 local tinsert = tinsert;
 local ipairs = ipairs;
@@ -420,10 +422,17 @@ end
 
 --
 local tUnit;
-function VUHDO_addUnitButton(aHealButton)
+function VUHDO_addUnitButton(aHealButton, aPanelNum)
 	tUnit = aHealButton:GetAttribute("unit");
 	if (VUHDO_UNIT_BUTTONS[tUnit] == nil) then
 		VUHDO_UNIT_BUTTONS[tUnit] = { };
+		VUHDO_UNIT_BUTTONS_PANEL[tUnit] = { };
 	end
+
+	if (VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum] == nil) then
+		VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum] = { };
+	end
+
 	tinsert(VUHDO_UNIT_BUTTONS[tUnit], aHealButton);
+	tinsert(VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum], aHealButton);
 end

@@ -258,6 +258,13 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
+					<StatusBar name="$parentShBar" inherits="VuhDoStatusBar">
+						<Scripts>
+							<OnLoad>
+								VUHDO_repairStatusbar(self);
+							</OnLoad>
+						</Scripts>
+					</StatusBar>
 
 					<StatusBar name="$parentIcBar" inherits="VuhDoStatusBar">
 						<Frames>

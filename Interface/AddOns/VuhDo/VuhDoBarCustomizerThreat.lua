@@ -46,3 +46,8 @@ function VUHDO_threatBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, a
 	end
 end
 
+
+
+function VUHDO_threatBarTextCallback(...)
+	VUHDO_indicatorTextCallback(7, ...);
+end

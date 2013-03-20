@@ -537,6 +537,11 @@ VUHDO_DEFAULT_RAID_CDS_BOUQUET = {
 };
 
 
+VUHDO_DEFAULT_PVP_FLAGS_BOUQUET = {
+	[VUHDO_I18N_DEF_PVP_FLAGS] = {
+	}
+}
+
 
 --
 VUHDO_DEFAULT_GRID_BOUQUETS = {
@@ -689,6 +694,77 @@ VUHDO_DEFAULT_INDICATOR_CONFIG = {
 			["vertical"] = true,
 			["turnAxis"] = false,
 		},
+	},
+
+
+	["TEXT_INDICATORS"] = {
+		["OVERHEAL_TEXT"] = {
+			["TEXT_PROVIDER"] = {
+				"OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K",
+				"OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K", "OVERHEAL_KILO_PLUS_N_K",
+			},
+		},
+
+		["MANA_BAR"] = {
+			["TEXT"] = {
+				["ANCHOR"] = "RIGHT",
+				["X_ADJUST"] = 7,
+				["Y_ADJUST"] = 2,
+				["SCALE"] = 20,
+				["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
+				["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   0.36, 0.55, 1, 1),
+				["USE_SHADOW"] = true,
+				["USE_OUTLINE"] = false,
+				["USE_MONO"] = false,
+			},
+			["TEXT_PROVIDER"] = { [0] = "" },
+		},
+
+		["SIDE_LEFT"] = {
+			["TEXT"] = {
+				["ANCHOR"] = "BOTTOM",
+				["X_ADJUST"] = 3,
+				["Y_ADJUST"] = 0,
+				["SCALE"] = 18,
+				["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
+				["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   1, 1, 1, 1),
+				["USE_SHADOW"] = false,
+				["USE_OUTLINE"] = true,
+				["USE_MONO"] = false,
+			},
+			["TEXT_PROVIDER"] = { [0] = "" },
+		},
+
+		["SIDE_RIGHT"] = {
+			["TEXT"] = {
+				["ANCHOR"] = "BOTTOM",
+				["X_ADJUST"] = 4,
+				["Y_ADJUST"] = 0,
+				["SCALE"] = 18,
+				["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
+				["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   1, 1, 1, 1),
+				["USE_SHADOW"] = false,
+				["USE_OUTLINE"] = true,
+				["USE_MONO"] = false,
+			},
+			["TEXT_PROVIDER"] = { [0] = "" },
+		},
+		["THREAT_BAR"] = {
+			["TEXT"] = {
+				["ANCHOR"] = "RIGHT",
+				["X_ADJUST"] = 7,
+				["Y_ADJUST"] = 2,
+				["SCALE"] = 20,
+				["FONT"] = "Interface\\AddOns\\VuhDo\\Fonts\\ariblk.ttf",
+				["COLOR"] = VUHDO_makeFullColor(0, 0, 0, 1,   1, 0, 0, 1),
+				["USE_SHADOW"] = true,
+				["USE_OUTLINE"] = false,
+				["USE_MONO"] = false,
+			},
+
+			["TEXT_PROVIDER"] = { [0] = "" },
+		},
+
 	}
 }
 
@@ -1156,6 +1232,12 @@ local tRaidCds = {
 };
 
 
+local tPvPFlags = {
+	23333, -- Horde Flag
+	23335, -- Alliance Flag
+	34976, -- Netherstorm Flag
+	127163, -- Power Orb
+}
 
 --
 function VUHDO_loadDefaultBouquets()
@@ -1234,6 +1316,14 @@ function VUHDO_loadDefaultBouquets()
 		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_RAID_CDS, unpack(tRaidCds));
 	end
 	tRaidCds = nil;
+
+	if (VUHDO_BOUQUETS["VERSION"] < 13) then
+		VUHDO_BOUQUETS["VERSION"] = 13;
+		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_PVP_FLAGS_BOUQUET);
+		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_PVP_FLAGS, unpack(tPvPFlags));
+	end
+	tPvPFlags = nil;
+
 
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_buildGenericTargetHealthBouquet();

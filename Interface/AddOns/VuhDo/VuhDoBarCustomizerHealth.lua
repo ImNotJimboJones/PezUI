@@ -21,6 +21,7 @@ local VUHDO_resolveVehicleUnit;
 local VUHDO_getOverhealPanel;
 local VUHDO_getOverhealText;
 local VUHDO_getUnitButtons;
+local VUHDO_getUnitButtonsPanel;
 local VUHDO_getBarRoleIcon;
 local VUHDO_getBarIconFrame;
 local VUHDO_updateClusterHighlights;
@@ -60,12 +61,13 @@ function VUHDO_customHealthInitBurst()
 	VUHDO_RAID = _G["VUHDO_RAID"];
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	VUHDO_INDICATOR_CONFIG = _G["VUHDO_INDICATOR_CONFIG"];
-	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
  	VUHDO_BAR_COLOR = VUHDO_PANEL_SETUP["BAR_COLORS"];
  	VUHDO_THREAT_CFG = VUHDO_CONFIG["THREAT"];
  	VUHDO_IN_RAID_TARGET_BUTTONS = _G["VUHDO_IN_RAID_TARGET_BUTTONS"];
 	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
 
+	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getUnitButtonsPanel = _G["VUHDO_getUnitButtonsPanel"];
 	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
 	VUHDO_getBarText = _G["VUHDO_getBarText"];
 	VUHDO_getIncHealOnUnit = _G["VUHDO_getIncHealOnUnit"];
@@ -92,6 +94,7 @@ function VUHDO_customHealthInitBurst()
 	sIsAggroText = VUHDO_CONFIG["THREAT"]["AGGRO_USE_TEXT"];
 	sIsInvertGrowth = VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"];
 	sLifeColor = VUHDO_PANEL_SETUP["PANEL_COLOR"]["HEALTH_TEXT"];
+	sIsNoRangeFade = VUHDO_CONFIG["CUSTOM_DEBUFF"]["isNoRangeFade"];
 
 	twipe(VUHDO_NAME_TEXTS);
 end
@@ -106,11 +109,12 @@ end
 
 
 local tIncColor = { ["useBackground"] = true };
+local tShieldColor = { ["useBackground"] = true };
 
 
 
 --
-local function VUHDO_getUnitHealthModiPercent(anInfo, aModifier)
+function VUHDO_getUnitHealthModiPercent(anInfo, aModifier)
 	return anInfo["healthmax"] == 0 and 0
 		or (anInfo["health"] + aModifier) / anInfo["healthmax"];
 end
@@ -142,17 +146,74 @@ end
 
 
 --
-local tOverheal;
-local tRatio;
+local tInfo;
+local tAmountInc;
+local tHealthPlusInc;
+local function VUHDO_getHealthPlusIncQuota(aUnit)
+	tInfo = VUHDO_RAID[aUnit];
+	if (not tInfo["connected"] or tInfo["dead"]) then
+		return 0, 0;
+	end
+
+	tAmountInc = VUHDO_getIncHealOnUnit(aUnit);
+	tHealthPlusInc = VUHDO_getUnitHealthModiPercent(tInfo, tAmountInc);
+	tHealthPlusInc = tHealthPlusInc > 1 and 1 or tHealthPlusInc;
+	return tHealthPlusInc, tAmountInc;
+end
+
+
+
+--
+local tInfo;
+local tAllButtons;
+local tAbsorbAmount;
+local tOpacity;
+local tHealthBar;
+local tIncBar;
+function VUHDO_updateShieldBar(aUnit, aHealthPlusIncQuota)
+	if (not VUHDO_CONFIG["SHOW_SHIELD_BAR"]) then
+		return;
+	end
+	tInfo = VUHDO_RAID[aUnit];
+	tAllButtons = VUHDO_getUnitButtons(VUHDO_resolveVehicleUnit(aUnit));
+
+	if (tInfo == nil or tAllButtons == nil or not tInfo["connected"] or tInfo["dead"] or tInfo["healthmax"] <= 0) then
+		return;
+	end
+	aHealthPlusIncQuota = aHealthPlusIncQuota and aHealthPlusIncQuota or VUHDO_getHealthPlusIncQuota(aUnit);
+
+	tAbsorbAmount = VUHDO_getUnitOverallShieldRemain(aUnit) / tInfo["healthmax"];
+  for _, tButton in pairs(tAllButtons) do
+    tShieldBar = VUHDO_getHealthBar(tButton, 19);
+
+    if (tAbsorbAmount > 0) then
+			tShieldBar:SetValueRange(aHealthPlusIncQuota, aHealthPlusIncQuota + tAbsorbAmount);
+			tHealthBar = VUHDO_getHealthBar(tButton, 1);
+ 			tShieldColor["R"], tShieldColor["G"], tShieldColor["B"], tOpacity = tHealthBar:GetStatusBarColor();
+ 			tShieldColor = VUHDO_getDiffColor(tShieldColor, VUHDO_PANEL_SETUP["BAR_COLORS"]["SHIELD"]);
+ 			if (tShieldColor["O"] ~= nil and tOpacity ~= nil) then
+ 				tShieldColor["O"] = tShieldColor["O"] * tOpacity * (tHealthBar:GetAlpha() or 1);
+ 			end
+
+    	VUHDO_setStatusBarColor(tShieldBar, tShieldColor);
+    else
+    	tShieldBar:SetValueRange(0,0);
+    end
+  end
+end
+local VUHDO_updateShieldBar = VUHDO_updateShieldBar;
+
+
+
+--
 local tAllButtons;
 local tHealthPlusInc;
 local tIncBar;
 local tAmountInc;
 local tInfo;
-local tOverhealSetup;
-local tValue;
 local tOpacity;
 local tHealthBar;
+local tIncBar;
 local function VUHDO_updateIncHeal(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
 	tAllButtons = VUHDO_getUnitButtons(VUHDO_resolveVehicleUnit(aUnit));
@@ -161,28 +222,13 @@ local function VUHDO_updateIncHeal(aUnit)
 		return;
 	end
 
-	tAmountInc = VUHDO_getIncHealOnUnit(aUnit);
+	tHealthPlusInc, tAmountInc = VUHDO_getHealthPlusIncQuota(aUnit);
 
-	if (tAmountInc > 0 and tInfo["connected"] and not tInfo["dead"]) then
-		tHealthPlusInc = VUHDO_getUnitHealthModiPercent(tInfo, tAmountInc);
-		if (tHealthPlusInc > 1) then
-			tHealthPlusInc = 1;
-		end
-	else
-		tAmountInc = 0;
-		tHealthPlusInc = 0;
-	end
+	for _, tButton in pairs(tAllButtons) do
+  	tIncBar = VUHDO_getHealthBar(tButton, 6);
 
-	if (tAmountInc > 0) then
-
-  	for _, tButton in pairs(tAllButtons) do
-    	tIncBar = VUHDO_getHealthBar(tButton, 6);
-
-			if (sIsInvertGrowth and tInfo["healthmax"] > 0) then
-				tIncBar:SetValueRange(tInfo["health"] / tInfo["healthmax"], tHealthPlusInc);
-			else
-  			tIncBar:SetValue(tHealthPlusInc);
-  		end
+		if (tAmountInc > 0 and tInfo["healthmax"] > 0) then
+			tIncBar:SetValueRange(tInfo["health"] / tInfo["healthmax"], tHealthPlusInc);
 			tHealthBar = VUHDO_getHealthBar(tButton, 1);
  			tIncColor["R"], tIncColor["G"], tIncColor["B"], tOpacity = tHealthBar:GetStatusBarColor();
  			tIncColor = VUHDO_getDiffColor(tIncColor, VUHDO_PANEL_SETUP["BAR_COLORS"]["INCOMING"]);
@@ -191,35 +237,39 @@ local function VUHDO_updateIncHeal(aUnit)
  			end
 
     	VUHDO_setStatusBarColor(tIncBar, tIncColor);
-    	tOverhealSetup = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["OVERHEAL_TEXT"];
+		else
+  		tIncBar:SetValueRange(0,0);
+		end
+	end
 
-    	if (tOverhealSetup["show"]) then
-				tOverheal = tAmountInc - tInfo["healthmax"] + tInfo["health"];
+	VUHDO_updateShieldBar(aUnit, tHealthPlusInc);
+end
 
-  	  	if (tOverheal > 0 and tInfo["healthmax"] > 0) then
-					tRatio = tOverheal / tInfo["healthmax"];
-    			if (tRatio < 1) then
-    				VUHDO_getOverhealPanel(VUHDO_getHealthBar(tButton, 1)):SetScale((0.5 + tRatio) * tOverhealSetup["scale"]);
-    			else
-	    			VUHDO_getOverhealPanel(VUHDO_getHealthBar(tButton, 1)):SetScale(1.5 * tOverhealSetup["scale"]);
-  	  		end
 
-					VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText(format("+%.1fk", tOverheal * 0.001));
-				else
-					VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText("");
-				end
-  		end
-  	end
 
-	else
+--
+local tAllButtons, tRatio, tBar, tScale;
+function VUHDO_overhealTextCallback(aUnit, aPanelNum, aProviderName, aText, aValue)
+	tAllButtons = VUHDO_getUnitButtonsPanel(aUnit, aPanelNum);
+
+	if (tAllButtons ~= nil) then
 		for _, tButton in pairs(tAllButtons) do
-			if (sIsInvertGrowth) then
-				VUHDO_getHealthBar(tButton, 6):SetValueRange(0, 0);
-			else
-  			VUHDO_getHealthBar(tButton, 6):SetValue(0);
-  		end
+			--VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText(aText);
+			tBar = VUHDO_getHealthBar(tButton, 1);
+			VUHDO_getOverhealText(tBar):SetText(aText);
 
-			VUHDO_getOverhealText(VUHDO_getHealthBar(tButton, 1)):SetText("");
+			-- Sonderwurst Overheal wirklich nötig?
+			if (strfind(aProviderName, "OVERHEAL", 1, true) ~= nil) then
+				tInfo = VUHDO_RAID[aUnit];
+				if (tInfo ~= nil) then
+	  	  	if (aValue > 0 and tInfo["healthmax"] > 0) then
+						tRatio = aValue / tInfo["healthmax"];
+					  tScale = VUHDO_PANEL_SETUP[aPanelNum]["OVERHEAL_TEXT"]["scale"];
+	    			VUHDO_getOverhealPanel(tBar):SetScale(tRatio < 1 and (0.5 + tRatio) * tScale or 1.5 * tScale);
+		  	  end
+		  	end
+			end
+
 		end
 	end
 end
@@ -628,6 +678,10 @@ local VUHDO_customizeHealButton = VUHDO_customizeHealButton;
 --
 local tInfo, tAlpha, tIcon;
 local function VUHDO_customizeDebuffIconsRange(aButton)
+	if (sIsNoRangeFade) then
+		return;
+	end
+
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
 
   if (tInfo ~= nil) then
@@ -768,7 +822,8 @@ function VUHDO_updateAllRaidBars()
 	for tUnit, _ in pairs(VUHDO_RAID) do
 		VUHDO_updateIncHeal(tUnit); -- Trotzdem wichtig um Balken zu verstecken bei neuen Units
 		VUHDO_updateManaBars(tUnit, 3);
-		VUHDO_manaBarBouquetCallback(tUnit, false, nil, nil, nil, nil, nil, nil, nil);
+		VUHDO_manaBarBouquetCallback(tUnit, false);
+		VUHDO_aggroBarBouquetCallback(tUnit, false);
 	end
 
 	if (VUHDO_REMOVE_HOTS) then

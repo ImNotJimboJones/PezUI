@@ -403,3 +403,5 @@ VUHDO_I18N_LETHAL_POISONS = "Lethal Poisons";
 VUHDO_I18N_NON_LETHAL_POISONS = "Non-lethal Poisons";
 VUHDO_I18N_DEF_COUNTER_SHIELD_ABSORB = "Counter: All Shield Absorb #k"
 VUHDO_I18N_BUFFC_WEAPON_ENCHANT_OFF = "Weapon Enchant (offhand)";
+
+VUHDO_I18N_DEF_PVP_FLAGS="PvP Flag Carriers";

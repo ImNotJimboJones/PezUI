@@ -2,11 +2,7 @@ local _;
 local select = select;
 local type = type;
 
-
-
 local UnitGetTotalAbsorbs = UnitGetTotalAbsorbs;
-
-
 
 local VUHDO_SHIELDS = {
 	[17] = 15, -- VUHDO_SPELL_ID.POWERWORD_SHIELD -- ok
@@ -85,8 +81,10 @@ local GetSpellInfo = GetSpellInfo;
 --
 local VUHDO_PLAYER_GUID = -1;
 local sIsPumpAegis = false;
+local sShowAbsorb = false;
 function VUHDO_shieldAbsorbInitBurst()
 	VUHDO_PLAYER_GUID = UnitGUID("player");
+	sShowAbsorb = VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["showShieldAbsorb"];
 	sIsPumpAegis = VUHDO_PANEL_SETUP["BAR_COLORS"]["HOTS"]["isPumpDivineAegis"];
 end
 
@@ -174,7 +172,7 @@ end
 --
 local tInit, tValue, tSourceGuid;
 function VUHDO_getShieldLeftCount(aUnit, aShield, aMode)
-	tInit = (VUHDO_SHIELD_SIZE[aUnit] or sEmpty)[aShield] or 0;
+	tInit = sShowAbsorb and (VUHDO_SHIELD_SIZE[aUnit] or sEmpty)[aShield] or 0;
 
 	if (tInit > 0) then
 		tSourceGuid = VUHDO_SHIELD_LAST_SOURCE_GUID[aUnit][aShield];
@@ -236,17 +234,7 @@ end
 --
 local tSummeLeft;
 function VUHDO_getUnitOverallShieldRemain(aUnit)
-	if (UnitGetTotalAbsorbs ~= nil) then
-		return UnitGetTotalAbsorbs(aUnit) or 0;
-	else
-		tSummeLeft = 0;
-
-		for tShield, tLeft in pairs(VUHDO_SHIELD_LEFT[aUnit] or sEmpty) do
-			tSummeLeft = tSummeLeft + tLeft;
-		end
-
-		return tSummeLeft;
-	end
+	return UnitGetTotalAbsorbs(aUnit) or 0;
 end
 
 
@@ -310,4 +298,5 @@ function VUHDO_parseCombatLogShieldAbsorb(aMessage, aSrcGuid, aDstGuid, aShieldN
 	end
 
 	VUHDO_updateBouquetsForEvent(tUnit, 36); -- VUHDO_UPDATE_SHIELD
+	VUHDO_updateShieldBar(tUnit);
 end

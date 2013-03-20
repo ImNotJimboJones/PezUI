@@ -8,6 +8,25 @@
 			<AbsDimension x="150" y="60" />
 		</Size>
 		<Frames>
+			<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
+				<Size>
+					<AbsDimension x="120" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" text="Textomat" justifyH="LEFT" inherits="VuDoDefaultFontTemplate">
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
 			<Button name="$parentCombo" inherits="VuhDoScrollComboBoxTemplate">
 				<Size>
 					<AbsDimension x="200" y="1" />
@@ -15,7 +34,7 @@
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="0" y="-55" />
+							<AbsDimension x="0" y="-25" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -25,7 +44,7 @@
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="30" y="0" />
+							<AbsDimension x="30" y="-40" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -133,13 +152,14 @@
 						if (tMorePanel:IsShown()) then
 							tMorePanel:Hide();
 						else
+							VUHDO_hideAllMorePanels();
 							tMorePanel:Show();
 						end
 					</OnClick>
 				</Scripts>
 			</Button>
 
-			<Frame name="$parentMorePanel" frameStrata="FULLSCREEN_DIALOG" hidden="true" inherits="VuhDoPanelTemplate">
+			<Frame name="$parentMorePanel" frameStrata="FULLSCREEN_DIALOG" clampedToScreen="true" hidden="true" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="170" y="60" />
 				</Size>
@@ -165,11 +185,7 @@
 						<Scripts>
 							<OnClick>
 								local tMorePanel = _G[self:GetParent():GetName()];
-								if (tMorePanel:IsShown()) then
-									tMorePanel:Hide();
-								else
-									tMorePanel:Show();
-								end
+								tMorePanel:Hide();
 							</OnClick>
 						</Scripts>
 					</Button>

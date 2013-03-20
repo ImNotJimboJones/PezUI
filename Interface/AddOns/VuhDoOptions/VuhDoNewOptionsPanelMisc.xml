@@ -310,12 +310,12 @@
 
 			<Frame name="$parentOverhealTextPanel" inherits="VuhDoPanelTemplate">
 				<Size>
-					<AbsDimension x="240" y="240" />
+					<AbsDimension x="240" y="280" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="280" y="-150" />
+							<AbsDimension x="280" y="-115" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -330,22 +330,6 @@
 						</Layers>
 					</Frame>
 
-					<CheckButton name="$parentEnableCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
-						<Anchors>
-							<Anchor point="TOPLEFT">
-								<Offset>
-									<AbsDimension x="20" y="-30" />
-								</Offset>
-							</Anchor>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show");
-								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K219);
-							</OnLoad>
-						</Scripts>
-					</CheckButton>
-
 					<Frame name="$parentTextColorTexture" inherits="VuhDoColorSwatchTexture">
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -359,7 +343,6 @@
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.BAR_COLORS.OVERHEAL_TEXT");
 								VUHDO_lnfInitColorSwatch(self, VUHDO_I18N_OVERHEAL_TEXT, VUHDO_I18N_OVERHEAL_TEXT);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K415);
-								VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -380,7 +363,6 @@
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.scale");
 								VUHDO_lnfSliderOnLoad(self, VUHDO_I18N_LIFE_TEXT_SIZE, 0.3, 2.5, "", 0.1);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K218);
-								VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -426,7 +408,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "TOPLEFT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K392);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -443,7 +424,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "TOPRIGHT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K393);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -460,7 +440,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "BOTTOMLEFT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K394);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -477,7 +456,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "BOTTOMRIGHT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K395);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -494,7 +472,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "LEFT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K396);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -511,7 +488,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "TOP");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K397);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -528,7 +504,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "BOTTOM");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K398);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -545,7 +520,6 @@
 									<OnLoad>
 										VUHDO_lnfSetRadioModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.point", "RIGHT");
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K399);
-										VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -571,7 +545,6 @@
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.yAdjust");
 								VUHDO_lnfSliderOnLoad(self, "Y", -100, 100, "%", 2);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K401);
-								VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -592,10 +565,28 @@
 								VUHDO_lnfSetModel(self, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.xAdjust");
 								VUHDO_lnfSliderOnLoad(self, "X", -100, 100, "%", 2);
 								VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K400);
-								VUHDO_lnfAddConstraint(self, VUHDO_LF_CONSTRAINT_DISABLE, "VUHDO_PANEL_SETUP.#PNUM#.OVERHEAL_TEXT.show", false);
 							</OnLoad>
 						</Scripts>
 					</Frame>
+
+					<Button name="$parentTextIndicatorCombo" inherits="VuhDoComboBoxTemplate">
+						<Size>
+							<AbsDimension x="200" y="32" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="18" y="-250" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_setComboModel(self, "VUHDO_INDICATOR_CONFIG.TEXT_INDICATORS.OVERHEAL_TEXT.TEXT_PROVIDER.#PNUM#", VUHDO_TEXT_PROVIDER_COMBO_MODEL);
+								VUHDO_lnfSetTooltip(self, "Select a text provider for overheal text indicator");
+							</OnLoad>
+						</Scripts>
+					</Button>
 
 				</Frames>
 			</Frame>
@@ -607,7 +598,7 @@
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="280" y="-36" />
+							<AbsDimension x="280" y="-20" />
 						</Offset>
 					</Anchor>
 				</Anchors>

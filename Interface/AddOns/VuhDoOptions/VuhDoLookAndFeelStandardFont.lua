@@ -3,7 +3,7 @@ local sLastName = nil;
 local sTable = nil;
 
 --
-function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
+function VUHDO_lnfStandardFontInitFromModel(aModel, aName, aParent)
 	local tTable = VUHDO_lnfGetValueFrom(aModel);
 	local tComponent;
 	local tPanel = VuhDoLnfIconTextDialog;
@@ -17,15 +17,27 @@ function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 
 	tPanel:Hide();
 
+	tComponent = _G[sPanelName .. "AnchorTextureCenterBar"];
+	tComponent:SetAlpha(0.75);
+
+
 	tComponent = _G[sPanelName .. "TitleLabelLabel"];
 	tComponent:SetText(VUHDO_I18N_ICON_TEXT_SETTINGS .. " |c00000099" .. (aName or "?") .. "|r");
 
+	tComponent = _G[sPanelName .. "AnchorTextureLeftRadioButton"];
+	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "LEFT");
+	tComponent = _G[sPanelName .. "AnchorTextureTopRadioButton"];
+	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "TOP");
 	tComponent = _G[sPanelName .. "AnchorTextureTopLeftRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "TOPLEFT");
 	tComponent = _G[sPanelName .. "AnchorTextureTopRightRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "TOPRIGHT");
+	tComponent = _G[sPanelName .. "AnchorTextureBottomRadioButton"];
+	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "BOTTOM");
 	tComponent = _G[sPanelName .. "AnchorTextureBottomLeftRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "BOTTOMLEFT");
+	tComponent = _G[sPanelName .. "AnchorTextureRightRadioButton"];
+	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "RIGHT");
 	tComponent = _G[sPanelName .. "AnchorTextureBottomRightRadioButton"];
 	VUHDO_lnfSetRadioModel(tComponent, aModel .. ".ANCHOR", "BOTTOMRIGHT");
 	tComponent = _G[sPanelName .. "AnchorTextureCenterRadioButton"];
@@ -60,6 +72,7 @@ function VUHDO_lnfStandardFontInitFromModel(aModel, aName)
 	VUHDO_lnfSetModel(tComponent, aModel .. ".USE_OUTLINE");
 
 	tPanel:ClearAllPoints();
+	--tPanel:SetPoint("CENTER", aParent:GetName(), "CENTER", 0, 0);
 	tPanel:SetPoint("CENTER", "UIParent", "CENTER", 0, 0);
 	tPanel:Show();
 end

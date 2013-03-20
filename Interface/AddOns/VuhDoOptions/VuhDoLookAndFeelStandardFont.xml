@@ -3,9 +3,9 @@
 
 	<Script file="VuhDoLookAndFeelStandardFont.lua" />
 
-	<Frame name="VuhDoLnfIconTextDialog" frameStrata="DIALOG" toplevel="true" hidden="true" parent="UIParent" movable="true" enableMouse="true" enableKeyboard="true" inherits="VuhDoFrameTemplate">
+	<Frame name="VuhDoLnfIconTextDialog" toplevel="true" frameStrata="FULLSCREEN_DIALOG" hidden="true" movable="true" enableMouse="true" enableKeyboard="true" inherits="VuhDoFrameTemplate">
 		<Size>
-			<AbsDimension x="310" y="220" />
+			<AbsDimension x="320" y="220" />
 		</Size>
 		<Anchors>
 			<Anchor point="CENTER"/>
@@ -47,7 +47,7 @@
 						</Layers>
 						<Frames>
 
-							<Frame name="$parentCenterBar" frameStrata="DIALOG">
+							<Frame name="$parentCenterBar">
 								<Size>
 									<AbsDimension x="30" y="3" />
 								</Size>
@@ -67,7 +67,7 @@
 								</Layers>
 							</Frame>
 
-							<Frame name="$parentTitle" setallPoints="true" frameStrata="FULLSCREEN_DIALOG">
+							<Frame name="$parentTitle" setallPoints="true">
 								<Layers>
 									<Layer>
 										<FontString name="$parentString" setallPoints="true" text="" inherits="VuDoWhiteFontTemplate">
@@ -75,6 +75,21 @@
 									</Layer>
 								</Layers>
 							</Frame>
+
+							<CheckButton name="$parentLeftRadioButton" inherits="VuhDoRadioBoxTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="-32" y="0" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										VUHDO_lnfSetTooltip(self, nil);
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
 
 							<CheckButton name="$parentTopLeftRadioButton" inherits="VuhDoRadioBoxTemplate">
 								<Anchors>
@@ -91,6 +106,21 @@
 								</Scripts>
 							</CheckButton>
 
+							<CheckButton name="$parentTopRadioButton" inherits="VuhDoRadioBoxTemplate">
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset>
+											<AbsDimension x="0" y="32" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										VUHDO_lnfSetTooltip(self, nil);
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+
 							<CheckButton name="$parentTopRightRadioButton" inherits="VuhDoRadioBoxTemplate">
 								<Anchors>
 									<Anchor point="TOPRIGHT">
@@ -102,6 +132,21 @@
 								<Scripts>
 									<OnLoad>
 										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K393);
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+
+							<CheckButton name="$parentBottomRadioButton" inherits="VuhDoRadioBoxTemplate">
+								<Anchors>
+									<Anchor point="BOTTOMLEFT">
+										<Offset>
+											<AbsDimension x="0" y="-32" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K394);
 									</OnLoad>
 								</Scripts>
 							</CheckButton>
@@ -151,6 +196,21 @@
 								</Scripts>
 							</CheckButton>
 
+							<CheckButton name="$parentRightRadioButton" inherits="VuhDoRadioBoxTemplate">
+								<Anchors>
+									<Anchor point="RIGHT">
+										<Offset>
+											<AbsDimension x="62" y="0" />
+										</Offset>
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnLoad>
+										VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K517);
+									</OnLoad>
+								</Scripts>
+							</CheckButton>
+
 						</Frames>
 						<Scripts>
 							<OnShow>VUHDO_lnfPatchFont(self, "TitleString")</OnShow>
@@ -160,7 +220,7 @@
 
 					<Frame name="$parentXAdjustSlider" inherits="VuhDoHSliderTemplate">
 						<Size>
-							<AbsDimension x="140" y="32" />
+							<AbsDimension x="150" y="32" />
 						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
@@ -184,7 +244,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="165" y="-35" />
+									<AbsDimension x="175" y="-35" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -222,7 +282,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="37" y="-195" />
+									<AbsDimension x="42" y="-200" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -237,7 +297,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="195" y="-25" />
+									<AbsDimension x="205" y="-25" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -253,7 +313,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="195" y="-63" />
+									<AbsDimension x="205" y="-63" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -268,7 +328,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="195" y="-101" />
+									<AbsDimension x="205" y="-101" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -283,7 +343,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="195" y="-139" />
+									<AbsDimension x="205" y="-139" />
 								</Offset>
 							</Anchor>
 						</Anchors>

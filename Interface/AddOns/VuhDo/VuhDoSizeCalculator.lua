@@ -223,7 +223,9 @@ end
 
 
 --
+local tHeight;
 function VUHDO_getHealPanelHeight(aPanelNum)
-	return VUHDO_isPanelHorizontal(aPanelNum)
+	tHeight = VUHDO_isPanelHorizontal(aPanelNum)
 		and VUHDO_getHealPanelHeightHor(aPanelNum) or VUHDO_getHealPanelHeightVer(aPanelNum);
+	return tHeight >= 20 and tHeight or 20;
 end

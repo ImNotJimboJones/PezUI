@@ -17,6 +17,7 @@ local _;
 local VUHDO_getHealthBar;
 local VUHDO_isConfigDemoUsers;
 local VUHDO_updateBouquetsForEvent;
+local VUHDO_indicatorTextCallback;
 local sIsInverted;
 function VUHDO_customManaInitBurst()
 	VUHDO_RAID = _G["VUHDO_RAID"];
@@ -28,6 +29,7 @@ function VUHDO_customManaInitBurst()
 	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
 	VUHDO_isConfigDemoUsers = _G["VUHDO_isConfigDemoUsers"];
 	VUHDO_updateBouquetsForEvent = _G["VUHDO_updateBouquetsForEvent"];
+	VUHDO_indicatorTextCallback = _G["VUHDO_indicatorTextCallback"];
 	sIsInverted = VUHDO_INDICATOR_CONFIG["CUSTOM"]["MANA_BAR"]["invertGrowth"];
 end
 
@@ -160,6 +162,13 @@ end
 
 
 --
+function VUHDO_manaBarTextCallback(...)
+	VUHDO_indicatorTextCallback(2, ...);
+end
+
+
+
+--
 local tQuota, tAllButtons, tBar;
 local function VUHDO_sideBarBouquetCallback(aBarNum, aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
@@ -192,4 +201,18 @@ end
 --
 function VUHDO_sideBarRightBouquetCallback(...)
 	VUHDO_sideBarBouquetCallback(18, ...);
+end
+
+
+
+--
+function VUHDO_sideLeftTextCallback(...)
+	VUHDO_indicatorTextCallback(17, ...);
+end
+
+
+
+--
+function VUHDO_sideRightTextCallback(...)
+	VUHDO_indicatorTextCallback(18, ...);
 end

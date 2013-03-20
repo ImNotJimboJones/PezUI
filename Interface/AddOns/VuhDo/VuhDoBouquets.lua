@@ -635,6 +635,8 @@ function VUHDO_updateBouquetsForEvent(aUnit, anEventType)
 			end
 		end
 	end
+
+	VUHDO_updateAllTextIndicatorsForEvent(aUnit, anEventType);
 end
 local VUHDO_updateBouquetsForEvent = VUHDO_updateBouquetsForEvent;
 
@@ -649,6 +651,7 @@ function VUHDO_initAllEventBouquets()
 
 	VUHDO_updateBouquetsForEvent("focus", 19); -- VUHDO_UPDATE_DC
 	VUHDO_updateBouquetsForEvent("target", 19); -- VUHDO_UPDATE_DC
+	VUHDO_registerAllTextIndicators();
 end
 
 
@@ -667,6 +670,7 @@ function VUHDO_initEventBouquetsFor(...)
 			end
 		end
 		VUHDO_updateBouquetsForEvent(tUnitToInit, 1); -- VUHDO_UPDATE_ALL
+		VUHDO_updateAllTextIndicatorsForEvent(tUnitToInit, 1);
 
 	end
 end
@@ -771,7 +775,7 @@ end
 --
 function VUHDO_isAnyoneInterstedIn(anUpdateMode)
 
-	if (VUHDO_isAnyBouquetInterstedIn(anUpdateMode)) then
+	if (VUHDO_isAnyBouquetInterstedIn(anUpdateMode) or VUHDO_isAnyTextIndicatorInterestedIn(anUpdateMode)) then
 		return true;
 	else
 		if (5 == anUpdateMode) then -- VUHDO_UPDATE_RANGE

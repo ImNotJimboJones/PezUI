@@ -128,7 +128,6 @@ function VUHDO_newOptionsSpellEditBoxCheckId(anEditBox)
 	if (tText ~= tTextById) then
 		tTextById = strsub(tTextById, 1, 20);
 		tLabel:SetText(tTextById);
-		tLabel:SetTextColor(0.4, 0.4, 1, 1);
 	else
 		tLabel:SetText("");
 	end

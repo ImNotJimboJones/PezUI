@@ -111,7 +111,7 @@ local function VUHDO_refreshPositionTableHeaders(aPanel, aPanelNum)
 	end
 
 	if (tAnzCols > 0) then
-		tIndent = (0.5 - (VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["headerWidth"] * 0.005)) -- 0-1(00%)
+		tIndent = (0.5 - (VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["headerWidth"] * 0.005))
 			* VUHDO_getHeaderWidth(aPanelNum);
 
 		for tCnt = 1, tAnzCols do
@@ -180,7 +180,7 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 				tButton:SetPoint("TOPLEFT", tPanelName, "TOPLEFT", tX, -tY);
 			end
 
-			VUHDO_addUnitButton(tButton);
+			VUHDO_addUnitButton(tButton, aPanelNum);
 			if (not tButton:IsShown()) then -- Wg. Secure handlers?
 				tButton:Show();
 			end
@@ -206,13 +206,8 @@ end
 
 
 --
-local tHeight;
 local function VUHDO_refreshInitPanel(aPanel, aPanelNum)
-	tHeight = VUHDO_getHealPanelHeight(aPanelNum);
-	if (tHeight < 20) then
-		tHeight = 20;
-	end
-	aPanel:SetHeight(tHeight);
+	aPanel:SetHeight(VUHDO_getHealPanelHeight(aPanelNum));
 	aPanel:SetWidth(VUHDO_getHealPanelWidth(aPanelNum));
 	aPanel:StopMovingOrSizing();
 	aPanel["isMoving"] = false;
@@ -262,6 +257,7 @@ end
 function VUHDO_refreshUiNoMembers()
 	VUHDO_resetNameTextCache();
 	twipe(VUHDO_UNIT_BUTTONS);
+	twipe(VUHDO_UNIT_BUTTONS_PANEL);
 	VUHDO_refreshAllPanels();
 	VUHDO_updateAllCustomDebuffs(true);
 	if (VUHDO_INTERNAL_TOGGLES[22]) then -- VUHDO_UPDATE_UNIT_TARGET
@@ -276,6 +272,7 @@ local VUHDO_refreshUiNoMembers = VUHDO_refreshUiNoMembers;
 --
 function VUHDO_refreshUI()
 	VUHDO_IS_RELOADING = true;
+
 	VUHDO_reloadRaidMembers();
 	VUHDO_refreshUiNoMembers();
 

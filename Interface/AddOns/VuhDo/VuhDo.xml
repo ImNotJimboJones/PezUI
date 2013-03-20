@@ -21,6 +21,8 @@
 	<Script file="VuhDoToolbox.lua" />
 	<Script file="VuhDoBuffConst.lua" />
 	<Script file="VuhDoDebuffConst.lua" />
+	<Script file="VuhDoTextProviders.lua" />
+	<Script file="VuhDoTextProviderHandler.lua" />
 	<Script file="VuhDoDefaultsBouquets.lua" />
 	<Script file="VuhDoDefaults.lua" />
 	<Script file="VuhDoConfigConvenience.lua" />
@@ -51,6 +53,7 @@
 	<Script file="VuhDoPlayerTargetEventHandler.lua" />
 	<Script file="VuhDoDcShield.lua" />
 	<Script file="VuhDoAoeAdvisor.lua" />
+	<Script file="VuhDoAddonAdapter.lua" />
 	<Script file="VuhDo.lua" />
 
 	<Script file="VuhDoSerializer.lua" />
@@ -58,6 +61,16 @@
 	<Script file="VuhDoNewOptionsGeneralSkinsShared.lua" />
 
 	<Frame name="VuhDoStatusBar" enableMouse="false" virtual="true" hidden="false">
+		<Frames>
+			<Frame name="$parentLabel" setAllPoints="true">
+				<Layers>
+					<Layer>
+						<FontString name="$parentLabel" text="" font="SystemFont_Tiny">
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
 		<Scripts>
 			<OnLoad>
 				VUHDO_repairStatusbar(self);
@@ -330,7 +343,5 @@
 	 </Frame>
 
 	<GameTooltip name="VuhDoScanTooltip" hidden="true" parent="UIParent" inherits="GameTooltipTemplate" />
-
-	<Script file="VuhDoAddonAdapter.lua" />
 </Ui>
 

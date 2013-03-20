@@ -183,7 +183,7 @@ VUHDO_INIT_IGNORE_DEBUFFS_DURATION = {
 
 VUHDO_INIT_IGNORE_DEBUFFS_NO_HARM = {
 	[VUHDO_SPELL_ID.DEBUFF_HUNTERS_MARK] = true,
-	[VUHDO_SPELL_ID.DEBUFF_ARCANE_BLAST] = true,
+	[VUHDO_SPELL_ID.DEBUFF_ARCANE_CHARGE] = true,
 	[VUHDO_SPELL_ID.DEBUFF_MAJOR_DREAMLESS] = true,
 	[VUHDO_SPELL_ID.DEBUFF_GREATER_DREAMLESS] = true,
 	[VUHDO_SPELL_ID.DEBUFF_DREAMLESS_SLEEP] = true,
@@ -192,6 +192,19 @@ VUHDO_INIT_IGNORE_DEBUFFS_NO_HARM = {
 	[VUHDO_SPELL_ID.DEBUFF_MIND_VISION] = true,
 	[VUHDO_SPELL_ID.DEBUFF_MUTATING_INJECTION] = true,
 	[VUHDO_SPELL_ID.DEBUFF_BANISH] = true,
-	[VUHDO_SPELL_ID.DEBUFF_PHASE_SHIFT] = true
+	[VUHDO_SPELL_ID.DEBUFF_PHASE_SHIFT] = true,
+	[(GetSpellInfo(41425))] = true, -- Hypothermia
+	[(GetSpellInfo(123981))] = true, -- Perdition
+	[(GetSpellInfo(53753))] = true, -- Nightmare Slumber
+	[(GetSpellInfo(78993))] = true, -- Concentration
+	[(GetSpellInfo(105701))] = true, -- Potion of Focus
+	[(GetSpellInfo(95223))] = true, -- Recently Mass Resurrected
+
+	[(GetSpellInfo(57724))] = true, -- Sated
+	[(GetSpellInfo(57723))] = true, -- Exhaustion
+	[(GetSpellInfo(80354))] = true, -- Temporal Displacement
+	[(GetSpellInfo(95809))] = true, -- Insanity
+	[(GetSpellInfo(137587))] = true, -- Kil'jaeden's Cunning
+	[(GetSpellInfo(12292))] = true, -- Bloodbath
 };
 

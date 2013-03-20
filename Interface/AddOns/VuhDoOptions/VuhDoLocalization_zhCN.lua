@@ -1029,7 +1029,7 @@ VUHDO_I18N_ALIVE_TIME = "Alive\nTime";
 VUHDO_I18N_PARSE = "Parse";
 VUHDO_I18N_TEXT_SHADOW = "Text/Shadow";
 VUHDO_I18N_COMBAT_LOG = "Combat Log";
-VUHDO_I18N_ICON_TEXT_SETTINGS = "Icon text settings:";
+VUHDO_I18N_ICON_TEXT_SETTINGS = "Text settings:";
 VUHDO_I18N_DISCARD_CHANGES_CONFIRM = "You have made a total of %d setup changes.\nYou really wanna DISCARD them?";
 
 VUHDO_I18N_PROFILE_NOT_EXISTS = "Error: No profile named \"%s\" exists.";

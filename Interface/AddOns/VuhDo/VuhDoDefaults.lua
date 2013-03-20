@@ -471,15 +471,18 @@ local VUHDO_DEFAULT_CONFIG = {
 	["MODE"] = VUHDO_MODE_NEUTRAL,
 	["EMERGENCY_TRIGGER"] = 100,
 	["MAX_EMERGENCIES"] = 5,
+
 	["SHOW_INCOMING"] = true,
 	["SHOW_OVERHEAL"] = true,
 	["SHOW_OWN_INCOMING"] = true,
 	["SHOW_TEXT_OVERHEAL"] = true,
+	["SHOW_SHIELD_BAR"] = false,
 
 	["RANGE_CHECK_DELAY"] = 260,
 
 	["SOUND_DEBUFF"] = nil,
 	["DETECT_DEBUFFS_REMOVABLE_ONLY"] = true,
+	["DETECT_DEBUFFS_REMOVABLE_ONLY_ICONS"] = true,
 	["DETECT_DEBUFFS_IGNORE_BY_CLASS"] = true,
 	["DETECT_DEBUFFS_IGNORE_NO_HARM"] = true,
 	["DETECT_DEBUFFS_IGNORE_MOVEMENT"] = true,
@@ -524,6 +527,7 @@ local VUHDO_DEFAULT_CONFIG = {
 		["animate"] = true,
 		["timer"] = true,
 		["max_num"] = 3,
+		["isNoRangeFade"] = false,
 		["isIcon"] = true,
 		["isColor"] = false,
 		["isStacks"] = false,
@@ -902,6 +906,127 @@ function VUHDO_loadDefaultConfig()
 		119775  --Reaching Attack
 	);
 
+
+	VUHDO_addCustomSpellIds(21,
+		-- Jin'rokh
+		138006,
+		137399,
+		138732,
+		138349,
+		137371,
+		-- Horridon
+		136769,
+		136767,
+		136708,
+		136723,
+		136587,
+		136710,
+		136670,
+		136573,
+		136512,
+		136719,
+		136654,
+		140946,
+		-- Council of Elders
+		136922,
+		137084,
+		137641,
+		136878,
+		136857,
+		137650,
+		137359,
+		137972,
+		136860,
+		--Tortos
+		134030,
+		134920,
+		136751,
+		136753,
+		137633,
+		--Megaera
+		139822,
+		134396,
+		137731,
+		136892,
+		139909,
+		137746,
+		139843,
+		139840,
+		140179,
+		--Ji-Kun
+		138309,
+		138319,
+		140571,
+		134372,
+		--Durumu the Forgotten
+		133768,
+		133767,
+		136932,
+		134122,
+		134123,
+		134124,
+		133795,
+		133597,
+		133732,
+		133677,
+		133738,
+		133737,
+		133675,
+		134626,
+		--Primordius
+		140546,
+		136180,
+		136181,
+		136182,
+		136183,
+		136184,
+		136185,
+		136186,
+		136187,
+		136050,
+		--Dark Animus
+		138569,
+		138659,
+		138609,
+		138691,
+		136962,
+		138480,
+		--Iron Qon
+		134647,
+		136193,
+		135147,
+		134691,
+		135145,
+		136520,
+		137669,
+		137668,
+		137654,
+		136577,
+		136192,
+		--Twin Consorts
+		137440,
+		137417,
+		138306,
+		137408,
+		137360,
+		137375,
+		136722,
+		--Lei Shen
+		135695,
+		136295,
+		135000,
+		394514,
+		136543,
+		134821,
+		136326,
+		137176,
+		136853,
+		135153,
+		136914,
+		135001
+		--Ra-den
+	);
+
 	for _, tName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
 		VUHDO_customDebuffsAddDefaultSettings(tName);
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tName] = VUHDO_ensureSanity(
@@ -1018,6 +1143,11 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.33,
 			["TR"] = 1, ["TG"] = 0.82, ["TB"] = 0, ["TO"] = 1,
 			["useText"] = false, ["useBackground"] = false,	["useOpacity"] = true,
+		},
+		["SHIELD"] = {
+			["R"] = 0.35, ["G"] = 0.52, ["B"] = 1, ["O"] = 1,
+			["TR"] = 0.35, ["TG"] = 0.52, ["TB"] = 1, ["TO"] = 1,
+			["useText"] = false, ["useBackground"] = true,	["useOpacity"] = true,
 		},
 		["EMERGENCY"] = VUHDO_makeFullColor(1, 0, 0, 1,   1, 0.82, 0, 1),
 		["NO_EMERGENCY"] = VUHDO_makeFullColor(0, 0, 0.4, 1,   1, 0.82, 0, 1),
@@ -1181,14 +1311,14 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 		["borderGapY"] = 5,
 
 		["barWidth"] = 75,
-		["barHeight"] = 25,
+		["barHeight"] = 28,
 
 		["showHeaders"] = true,
 		["headerHeight"] = 12,
 		["headerWidth"] = 100,
 		["headerSpacing"] = 5,
 
-		["manaBarHeight"] = 3,
+		["manaBarHeight"] = 6,
 		["sideLeftWidth"] = 6,
 		["sideRightWidth"] = 6,
 

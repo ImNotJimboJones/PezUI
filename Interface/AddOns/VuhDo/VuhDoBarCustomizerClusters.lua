@@ -77,7 +77,7 @@ function VUHDO_customClustersInitBurst()
 
 	sClusterSlot = nil;
 	for tIndex, tHotName in pairs(VUHDO_PANEL_SETUP["HOTS"]["SLOTS"]) do
-		if ("CLUSTER" == tHotName) then
+		if ("CLUSTER" == tHotName and (tIndex < 6 or tIndex > 8)) then
 			sClusterSlot = tIndex;
 		end
 	end

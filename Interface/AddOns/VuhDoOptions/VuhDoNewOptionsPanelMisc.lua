@@ -22,11 +22,11 @@ function VUHDO_getRaidTargetComboModel(aComboBox)
 		for tCnt = 1, 8 do
 			tFrame = CreateFrame("Frame", tParent:GetName() .. "Ri" .. tCnt, tParent, "VuhDoRaidTargetIconTemplate");
 			tTexture = _G[tFrame:GetName() .. "I"];
+			tTexture:SetTexture("interface\\targetingframe\\ui-raidtargetingicons");
 			VUHDO_setRaidTargetIconTexture(tTexture, tCnt);
 			tinsert(VUHDO_RAID_TARGET_COMBO_MODEL, { tCnt, tFrame } );
 		end
 	end
-
 	return VUHDO_RAID_TARGET_COMBO_MODEL;
 end
 

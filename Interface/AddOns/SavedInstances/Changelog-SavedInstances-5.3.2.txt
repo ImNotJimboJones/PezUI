@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r241 | oscarucb | 2013-03-18 02:02:15 +0000 (Mon, 18 Mar 2013) | 1 line
+r243 | oscarucb | 2013-03-19 04:54:36 +0000 (Tue, 19 Mar 2013) | 1 line
 Changed paths:
-   A /tags/5.3.1 (from /trunk:240)
+   A /tags/5.3.2 (from /trunk:242)
 
-Tagging as 5.3.1
+Tagging as 5.3.2
+------------------------------------------------------------------------
+r242 | oscarucb | 2013-03-19 04:52:45 +0000 (Tue, 19 Mar 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix a few display issues for servers containing spaces
+
 ------------------------------------------------------------------------
 r240 | oscarucb | 2013-03-18 01:59:46 +0000 (Mon, 18 Mar 2013) | 2 lines
 Changed paths:

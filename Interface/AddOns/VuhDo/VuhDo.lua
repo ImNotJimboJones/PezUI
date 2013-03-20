@@ -92,6 +92,7 @@ local UnitHasVehicleUI = UnitHasVehicleUI;
 local UnitGroupRolesAssigned = UnitGroupRolesAssigned;
 local GetRaidRosterInfo = GetRaidRosterInfo;
 local InCombatLockdown = InCombatLockdown;
+local IsInRaid = IsInRaid;
 local table = table;
 local UnitGUID = UnitGUID;
 local tinsert = tinsert;
@@ -379,6 +380,7 @@ function VUHDO_setHealth(aUnit, aMode)
 
 		elseif (tInfo ~= nil) then
 			tIsAfk, tInfo["connected"], tIsDcChange = VUHDO_updateAfkDc(aUnit);
+			tInfo["dead"] = tIsDead;
 
 			if (tIsDcChange) then
 				VUHDO_updateBouquetsForEvent(aUnit, 19); -- VUHDO_UPDATE_DC
@@ -504,9 +506,7 @@ end
 --
 local function VUHDO_removeUnitFromRaidGroups(aUnit)
 	for tModelId, tAllUnits in pairs(VUHDO_GROUPS) do
-		if (tModelId ~= 41 -- VUHDO_ID_MAINTANKS
-			and tModelId ~= 42 -- VUHDO_ID_PRIVATE_TANKS
-			and tModelId ~= 43) then -- VUHDO_ID_MAIN_ASSISTS
+		if (tModelId ~= 41 and tModelId ~= 42 and tModelId ~= 43) then  -- VUHDO_ID_MAINTANKS -- VUHDO_ID_PRIVATE_TANKS -- VUHDO_ID_MAIN_ASSISTS
 			for tIndex, tUnit in pairs(tAllUnits) do
 				if (tUnit == aUnit) then
 					tremove(tAllUnits, tIndex);

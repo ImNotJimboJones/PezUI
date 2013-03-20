@@ -1,13 +1,16 @@
-- Bouquets, Text-Indikatoren
 
 - Option je Bouquet Stacks aufaddieren
 - Bug: Keine Balkenfarbe custom debuffs per spellID
 - Sehbehindertenmodus Optionen
 - Bug: Optionen=>Filter=>Target sofort anzeigen
 
-- BuffWatch in PetBattles verstecken
 - Trinkets pro zauber zünden
-- Default bouquet pvp: Flaggenträger usw.
+- Boss frames
+- Makros aus Keys=>Local and Mausbuttons in spells=>mouse binden
+- BuffWatch: Buff-Wechsel mit Wheel
+- Hot-Bars vertikal
+- Option: Fade custom debuffs range ja/nein
+
 
 
 
@@ -30,6 +33,6 @@
 					5. Mana
 					Highlight
 					Player Target
-
+		12. Shield
 5. Target
 7. Threat

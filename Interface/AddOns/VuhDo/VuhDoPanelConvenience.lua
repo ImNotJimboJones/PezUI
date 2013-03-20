@@ -9,6 +9,7 @@ local VUHDO_HEALTH_BAR = { };
 local VUHDO_HEAL_BUTTON = { };
 local VUHDO_BUFF_SWATCHES = { };
 local VUHDO_BUFF_PANELS = { };
+local VUHDO_HEALTH_BAR_TEXT = { };
 
 local VUHDO_BAR_ICON_FRAMES = { };
 local VUHDO_BAR_ICONS = { };
@@ -160,6 +161,13 @@ end
 --
 function VUHDO_getHealthBar(aButton, aBarNumber)
 	return VUHDO_HEALTH_BAR[aButton][aBarNumber];
+end
+
+
+
+--
+function VUHDO_getHealthBarText(aButton, aBarNumber)
+	return VUHDO_HEALTH_BAR_TEXT[aButton][aBarNumber];
 end
 
 
@@ -394,9 +402,7 @@ local tValue;
 function VUHDO_repairStatusbar(tBar)
 	tBar["texture"] = tBar:CreateTexture(nil, "ARTWORK");
 	tBar["txOrient"] = VUHDO_STATUSBAR_LEFT_TO_RIGHT;
-	tBar["value"] = 0;
 	tBar["isInverted"] = false;
-	tBar["tValue"] = nil;
 
 
 
@@ -405,14 +411,17 @@ function VUHDO_repairStatusbar(tBar)
 	end
 
 
+
 	tBar["SetVuhDoColor"] = function(self, aColor)
 		self["texture"]:SetVertexColor(aColor["R"], aColor["G"], aColor["B"], aColor["O"]);
 	end
 
 
+
 	tBar["GetStatusBarColor"] = function(self)
 		return self["texture"]:GetVertexColor();
 	end
+
 
 
 	tBar["SetAlpha"] = function(self, a)
@@ -428,7 +437,6 @@ function VUHDO_repairStatusbar(tBar)
 			aValue = 1;
 		end
 
-		self["value"] = aValue;
 		if (self["isInverted"]) then
 			aValue = 1 - aValue;
 		end
@@ -472,8 +480,6 @@ function VUHDO_repairStatusbar(tBar)
 			tValue = 0;
 		end
 
-		self["value"] = tValue;
-
 		if (self["isInverted"]) then
 			tValue = 1 - tValue;
 			aMinValue, aMaxValue = 1 - aMaxValue, 1 - aMinValue;
@@ -507,12 +513,6 @@ function VUHDO_repairStatusbar(tBar)
 
 
 
-	tBar["GetValue"] = function(self)
-		return self["value"];
-	end
-
-
-
 	tBar["SetStatusBarTexture"] = function(self, aTexture)
 		self["texture"]:SetTexture(aTexture);
 	end
@@ -535,8 +535,7 @@ function VUHDO_repairStatusbar(tBar)
 			self["texture"]:SetPoint("TOPRIGHT", self, "TOPRIGHT", 0, 0);
 			self["txOrient"] = VUHDO_STATUSBAR_TOP_TO_BOTTOM;
 		end
-
-		self:SetValue(self["value"]);
+		self:SetValue(0); -- Wichtig, wenn Units nicht existieren und keine bouquets gecheckt werden
 	end
 
 
@@ -641,6 +640,16 @@ local function VUHDO_fastCacheInitButton(aPanelNum, aButtonNum)
 	VUHDO_HEALTH_BAR[tButton][17] = _G[tButtonName .. "BgBarIcBarHlBarLsBar"];
   -- Right side bar
 	VUHDO_HEALTH_BAR[tButton][18] = _G[tButtonName .. "BgBarIcBarHlBarRsBar"];
+	-- Shield bar
+	VUHDO_HEALTH_BAR[tButton][19] = _G[tButtonName .. "BgBarShBar"];
+	VUHDO_HEALTH_BAR[tTargetButton][19] = VuhDoDummyStatusBar;
+	VUHDO_HEALTH_BAR[tTotButton][19] = VuhDoDummyStatusBar;
+
+
+	VUHDO_HEALTH_BAR_TEXT[tButton] = { };
+	for tIndex, tBar in pairs(VUHDO_HEALTH_BAR[tButton]) do
+		VUHDO_HEALTH_BAR_TEXT[tButton][tIndex] = _G[tBar:GetName() .. "LabelLabel"];
+	end
 
 	VUHDO_HEAL_BUTTON[aPanelNum][aButtonNum] = tButton;
 	VUHDO_BUTTON_CACHE[tButton] = aPanelNum;

@@ -135,6 +135,14 @@ end
 
 
 
+local function VUHDO_colorPickerSetColorCode()
+	local tR, tG, tB, tO = VUHDO_backOrTextColor(VUHDO_COLOR, sIsTextEdit)
+	VuhDoColorPickerColorCodeEditBox:SetText(
+		format("%02x%02x%02x%02x", tO * 255, tR * 255, tG * 255, tB * 255));
+end
+
+
+
 --
 function VUHDO_colorPickerOpacityValueChanged(aSlider)
 	local tValue;
@@ -147,6 +155,7 @@ function VUHDO_colorPickerOpacityValueChanged(aSlider)
 		end
 		VUHDO_lnfColorSwatchInitFromModel(VUHDO_COLOR_SWATCH);
 		VUHDO_lnfUpdateVarFromModel(VUHDO_COLOR_SWATCH, VUHDO_COLOR);
+		VUHDO_colorPickerSetColorCode();
 	end
 end
 
@@ -207,7 +216,82 @@ function VUHDO_colorPickerPaste(aPanel)
 end
 
 
+
+--
 function VUHDO_colorPickerColorSelectCallback(anInstance, aR, aG, aB)
 	VuhDoColorPickerColorSwatchNew:SetTexture(aR, aG, aB);
 	VUHDO_colorPickerOnColorSelect(aR, aG, aB);
+	VUHDO_colorPickerSetColorCode();
+	VUHDO_setColorCodeTextColor();
+end
+
+
+
+--
+function VUHDO_setColorCodeTextColor()
+	if (strmatch(VuhDoColorPickerColorCodeEditBox:GetText(),
+		"^[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]$")) then
+		VuhDoColorPickerColorCodeEditBox:SetTextColor(0.8, 0.8, 1, 1);
+		return true;
+	else
+		VuhDoColorPickerColorCodeEditBox:SetTextColor(1,0,0,1);
+		return false;
+	end
+end
+
+
+
+--
+local function VUHDO_hexToInt(aHexString)
+	local tValue = 0;
+	local tByte;
+
+	for tCnt = 1, strlen(aHexString) do
+		tValue = tValue * 16;
+		tByte = strbyte(aHexString, tCnt);
+
+		if (tByte >= 48 and tByte <= 57) then
+			tByte = tByte - 48;
+		elseif (tByte >= 97 and tByte <= 102) then
+			tByte = tByte - 87;
+		end
+
+		tValue = tValue + tByte;
+	end
+
+	return tValue;
+end
+
+
+
+--
+function VUHDO_updateColorByCode(aPanel)
+	if (VUHDO_setColorCodeTextColor()) then
+		local tText = strlower(VuhDoColorPickerColorCodeEditBox:GetText());
+
+		local tO = VUHDO_hexToInt(strsub(tText, 1, 2)) / 255;
+		local tR = VUHDO_hexToInt(strsub(tText, 3, 4)) / 255;
+		local tG = VUHDO_hexToInt(strsub(tText, 5, 6)) / 255;
+		local tB = VUHDO_hexToInt(strsub(tText, 6, 7)) / 255;
+
+		if (sIsTextEdit) then
+			VUHDO_COLOR.TR = tR;
+			VUHDO_COLOR.TG = tG;
+			VUHDO_COLOR.TB = tB;
+			if (not strfind(VUHDO_PROHIBIT, "O") and VUHDO_COLOR.TO ~= nil) then
+				VUHDO_COLOR.TO = tO;
+			end
+		else
+			VUHDO_COLOR.R = tR;
+			VUHDO_COLOR.G = tG;
+			VUHDO_COLOR.B = tB;
+			if (not strfind(VUHDO_PROHIBIT, "O") and VUHDO_COLOR.TO ~= nil) then
+				VUHDO_COLOR.O = tO;
+			end
+		end
+
+		VUHDO_setPickerColor(aPanel);
+		VUHDO_lnfColorSwatchInitFromModel(VUHDO_COLOR_SWATCH);
+		VUHDO_lnfUpdateVarFromModel(VUHDO_COLOR_SWATCH, VUHDO_COLOR);
+	end
 end

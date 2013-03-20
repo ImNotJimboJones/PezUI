@@ -119,9 +119,11 @@ local function VUHDO_animateDebuffIcon(aButton, anIconInfo, aNow, anIconIndex, a
 			 -- Keep size
 		elseif (tAliveTime <= 1.1) then
 			tButton:SetScale(3.2 - 2 * tAliveTime);
-		elseif (tButton:GetScale() ~= 1) then
+		else
 			tButton:SetScale(1);
 		end
+	else -- Falls Custom Debuff vorher Animation hatte und dieser nicht
+		VUHDO_getBarIconButton(aButton, anIconIndex):SetScale(1);
 	end
 
 	if (sIsName and tAliveTime > 2) then

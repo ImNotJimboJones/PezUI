@@ -67,6 +67,7 @@ local _;
 local tostring = tostring;
 
 local sIsRemoveableOnly;
+local sIsRemoveableOnlyIcons;
 local sIsUseDebuffIcon;
 local sIsUseDebuffIconBossOnly;
 local sIsMiBuColorsInFight;
@@ -82,6 +83,7 @@ function VUHDO_debuffsInitBurst()
 	VUHDO_shouldScanUnit = _G["VUHDO_shouldScanUnit"];
 
 	sIsRemoveableOnly = VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY"];
+	sIsRemoveableOnlyIcons = VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY_ICONS"];
 	sIsUseDebuffIcon = VUHDO_PANEL_SETUP["BAR_COLORS"]["useDebuffIcon"];
 	sIsUseDebuffIconBossOnly = VUHDO_PANEL_SETUP["BAR_COLORS"]["useDebuffIconBossOnly"];
 	sIsMiBuColorsInFight = VUHDO_BUFF_SETTINGS["CONFIG"]["BAR_COLORS_IN_FIGHT"];
@@ -336,16 +338,19 @@ function VUHDO_determineDebuff(aUnit)
 				end
 			end
 
-			if ((not sIsRemoveableOnly or tAbility ~= nil)
-				and tChosen ~= 6
-				and not VUHDO_DEBUFF_BLACKLIST[tName]) then --VUHDO_DEBUFF_TYPE_CUSTOM
+			if (tChosen ~= 6 and not VUHDO_DEBUFF_BLACKLIST[tName] and tIsRelevant) then --VUHDO_DEBUFF_TYPE_CUSTOM
 
-				if (sIsUseDebuffIcon and (tIsBossDebuff or not sIsUseDebuffIconBossOnly)) then
+				if (sIsUseDebuffIcon and (tIsBossDebuff or not sIsUseDebuffIconBossOnly)
+					and (not sIsRemoveableOnlyIcons or tAbility ~= nil)) then
+
 					tIconsSet[tName] = { tIcon, tExpiry, tStacks, tDuration, false };
 					tIsStandardDebuff = true;
 				end
 
-				if (tType ~= nil and tIsRelevant and (tAbility ~= nil or tChosen == 0)) then --VUHDO_DEBUFF_TYPE_NONE
+				if (tType ~= nil
+					and (tAbility ~= nil or tChosen == 0)
+					and (not sIsRemoveableOnly or tAbility ~= nil)) then --VUHDO_DEBUFF_TYPE_NONE
+
 					tChosen = tType;
 					tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = tIcon, tRemaining, tStacks, tDuration;
 				end

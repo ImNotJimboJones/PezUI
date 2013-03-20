@@ -189,6 +189,34 @@
 				</Scripts>
 			</Button>
 
+			<EditBox name="VuhDoColorPickerColorCodeEditBox" inherits="VuhDoEditBoxTemplate">
+				<Size>
+					<AbsDimension x="100" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentPasteButton" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="-10" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetMaxLetters(8);
+					</OnLoad>
+					<OnEnterPressed>
+						VUHDO_updateColorByCode(self:GetParent());
+					</OnEnterPressed>
+					<OnTabPressed>
+						VUHDO_updateColorByCode(self:GetParent());
+					</OnTabPressed>
+					<OnTextChanged>
+						VUHDO_setColorCodeTextColor();
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+
+
 			<Slider name="$parentOpacitySliderFrame">
 				<Size>
 					<AbsDimension x="16" y="128"/>

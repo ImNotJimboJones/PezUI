@@ -1,3 +1,113 @@
+Version 3.36.
+
+
+Bugfixes:
+-- Fixed a bug where custom debuff icons could remain in wrong size
+-- Minor bugfixes
+
+
+Improvements:
+-- Added some more ignore by... debuffs
+
+Changes:
+
+Features:
+-- Added option to not fade debuff icons when player gets out of range
+   (Options=>Debuffs=>Visuals)
+
+
+--------------------------------------------------------------
+Version 3.35.
+
+
+Bugfixes:
+-- Fixed irrelevant debuffs showing by icon
+-- Fixed possible gvar taint issue
+-- Minor bugfix
+
+
+Improvements:
+-- Minor optimizations
+-- Added some Mage buffs to BuffWatch
+
+
+Changes:
+
+Features:
+
+--------------------------------------------------------------
+Version 3.34.
+
+
+Bugfixes:
+-- Minor bugfix
+
+Improvements:
+
+
+Changes:
+
+Features:
+
+--------------------------------------------------------------
+Version 3.33.
+
+
+Bugfixes:
+-- Shield status hot icon now working as configured
+-- Fixed some talent spells not being recognized
+-- Fixed alive units showing dead BGs sometimes
+-- Added Dark intent to stamina buff
+
+
+Improvements:
+-- Added custom debuffs for 5.2 raids
+-- Updated debuff ignore list
+
+
+Changes:
+
+Features:
+
+--------------------------------------------------------------
+Version 3.32.
+
+
+Bugfixes:
+-- Fixed raid target icon in combo options=>panels=>misc
+
+
+Improvements:
+-- Many optimizations
+
+
+Changes:
+-- Changed overall shield value detection to 5.2 standard
+   system
+
+Features:
+-- Separated icons and color "removable only" debuff option
+   (Options=>Debuffs=>Standard)
+
+-- Added Shield Bar
+	 (Options=>General=>Incoming, "Shield Bar")
+	 (Options=>Colors=>Modes, "Shield Bar")
+
+-- Introducing Text Providers for
+   (Options=>Panels=>Misc "Overheal" Indicator)
+   (Options=>General=>Indicators", "more" next to ...
+   "Mana Bar", "Side Left", "Side Right".
+   More to come...)
+
+-- You can now copy/paste color codes as hex string in any
+   color picker
+
+-- Added default PvP flag carrier bouquet
+--------------------------------------------------------------
+Version 3.31.
+- updated toc for patch 5.2
+
+--------------------------------------------------------------
 Version 3.30.
 
 

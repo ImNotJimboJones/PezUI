@@ -80,7 +80,7 @@ function VUHDO_serializeTable(aTable)
 		if ("string" == type(tValue)) then
 			tString = format("%sS%d+%s", tString, strlen(tValue), tValue);
 		elseif ("number" == type(tValue)) then
-			tStrValue = tostring(floor(tValue * 1000) * 0.001);
+			tStrValue = tostring(floor(tValue * 10000) * 0.0001);
 			tString = format("%sN%d+%s", tString, strlen(tStrValue), tStrValue);
 		elseif ("boolean" == type(tValue)) then
 			tString = tString .. (tValue and "1" or "0");

@@ -22,6 +22,7 @@ local sEmpty = { };
 local VUHDO_LibSharedMedia;
 local VUHDO_getActionPanel;
 local VUHDO_getPanelButtons;
+local VUHDO_getHealthBarText;
 
 -----------------------------------------------------------------------
 --local VUHDO_getNumbersFromString;
@@ -38,6 +39,7 @@ function VUHDO_guiToolboxInitBurst()
 	VUHDO_LibSharedMedia = _G["VUHDO_LibSharedMedia"];
 	VUHDO_getActionPanel = _G["VUHDO_getActionPanel"];
 	VUHDO_getPanelButtons = _G["VUHDO_getPanelButtons"];
+	VUHDO_getHealthBarText = _G["VUHDO_getHealthBarText"];
 
 	sIsManaBar = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] ~= "";
 	sIsSideBarLeft = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SIDE_LEFT"] ~= "";
@@ -853,6 +855,7 @@ end
 local tOutline, tShadowAlpha, tColor, tFactor;
 function VUHDO_customizeIconText(aParent, aHeight, aLabel, aSetup)
 	tFactor = aHeight * 0.01;
+	aLabel:ClearAllPoints();
 	aLabel:SetPoint(aSetup["ANCHOR"], aParent:GetName(), aSetup["ANCHOR"], tFactor * aSetup["X_ADJUST"], -tFactor * aSetup["Y_ADJUST"]);
 	tOutline = aSetup["USE_OUTLINE"] and "OUTLINE|" or "";
 	--tOutline = tOutline .. (aSetup["USE_MONO"] and "MONOCHROME" or ""); -- Bugs out in MoP beta
@@ -870,6 +873,7 @@ function VUHDO_customizeIconText(aParent, aHeight, aLabel, aSetup)
 
 	aLabel:SetFont(aSetup["FONT"], tFactor * aSetup["SCALE"], tOutline);
 	aLabel:SetShadowOffset(1, -1);
+	aLabel:SetText("");
 end
 
 
@@ -981,5 +985,19 @@ function VUHDO_UIFrameFlashStop(aFrame)
 		aFrame:SetAlpha(aFrame.showWhenDone and 1 or 0);
 		aFrame.flashTimer = nil;
 		sIsFlashFrame[aFrame] = nil;
+	end
+end
+
+
+
+--
+local tAllButtons;
+function VUHDO_indicatorTextCallback(aBarNum, aUnit, aPanelNum, aProviderName, aText, aValue)
+	tAllButtons = VUHDO_getUnitButtons(aUnit);
+
+	if (tAllButtons ~= nil) then
+		for _, tButton in pairs(tAllButtons) do
+			VUHDO_getHealthBarText(tButton, aBarNum):SetText(aText);
+		end
 	end
 end

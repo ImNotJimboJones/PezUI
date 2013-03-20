@@ -112,7 +112,7 @@
 
 			<Frame name="$parentIconsPanel" inherits="VuhDoPanelTemplate">
 				<Size>
-					<AbsDimension x="236" y="170" />
+					<AbsDimension x="236" y="208" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
@@ -122,6 +122,14 @@
 					</Anchor>
 				</Anchors>
 				<Frames>
+					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" text="VUHDO_I18N_ICONS" inherits="VuDoDefaultTitleFontTemplate">
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
 
 					<CheckButton name="$parentIconCheckButton" text="VUHDO_I18N_ICON" inherits="VuhDoCheckButtonTemplate">
 						<Anchors>
@@ -156,14 +164,21 @@
 						</Scripts>
 					</CheckButton>
 
-					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
-						<Layers>
-							<Layer>
-								<FontString name="$parentLabel" text="VUHDO_I18N_ICONS" inherits="VuDoDefaultTitleFontTemplate">
-								</FontString>
-							</Layer>
-						</Layers>
-					</Frame>
+					<CheckButton name="$parentRemovableCheckButton" text="VUHDO_I18N_REMOVABLE_ONLY" inherits="VuhDoCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="123" y="-69" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.DETECT_DEBUFFS_REMOVABLE_ONLY_ICONS");
+								VUHDO_lnfSetTooltip(self, nil);
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
 
 					<Frame name="$parentIgnoreLabel" inherits="VuhDoLabelFrameTemplate">
 						<Size>
@@ -172,7 +187,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="13" y="-67" />
+									<AbsDimension x="13" y="-105" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -191,7 +206,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="33" y="-100" />
+									<AbsDimension x="33" y="-138" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -211,7 +226,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="13" y="-130" />
+									<AbsDimension x="13" y="-168" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -230,7 +245,7 @@
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="125" y="-130" />
+									<AbsDimension x="125" y="-168" />
 								</Offset>
 							</Anchor>
 						</Anchors>

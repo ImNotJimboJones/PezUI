@@ -1232,7 +1232,7 @@ end
 
 --
 function VUHDO_lnfFontButtonClicked(aButton)
-	VUHDO_lnfStandardFontInitFromModel(aButton:GetAttribute("model"), aButton:GetText());
+	VUHDO_lnfStandardFontInitFromModel(aButton:GetAttribute("model"), aButton:GetText(), aButton);
 end
 
 

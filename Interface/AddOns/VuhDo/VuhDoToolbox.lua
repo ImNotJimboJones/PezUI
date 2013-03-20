@@ -564,6 +564,14 @@ end
 
 
 --
+local tEmpty = { };
+function VUHDO_getUnitButtonsPanel(aUnit, aPanelNum)
+	return (VUHDO_UNIT_BUTTONS_PANEL[aUnit] or tEmpty)[aPanelNum];
+end
+
+
+
+--
 local tInfo;
 function VUHDO_shouldScanUnit(aUnit)
 	tInfo = VUHDO_RAID[aUnit] or sEmpty;

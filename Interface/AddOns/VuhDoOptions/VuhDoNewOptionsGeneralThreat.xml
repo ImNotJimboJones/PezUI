@@ -156,6 +156,46 @@
 				</Frames>
 			</Frame>
 
+			<Frame name="$parentShieldPanel" inherits="VuhDoPanelTemplate">
+				<Size>
+					<AbsDimension x="126" y="74" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="313" y="-26" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Frames>
+
+					<CheckButton name="$parentShielBarCheckButton" text="VUHDO_I18N_ENABLE" inherits="VuhDoCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="13" y="-31" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								VUHDO_lnfSetModel(self, "VUHDO_CONFIG.SHOW_SHIELD_BAR");
+								VUHDO_lnfSetTooltip(self, nil);
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+
+					<Frame name="$parentTitleLabel" inherits="VuhDoLabelFrameTemplate">
+						<Layers>
+							<Layer>
+								<FontString name="$parentLabel" text="Shield Bar" inherits="VuDoDefaultTitleFontTemplate">
+								</FontString>
+							</Layer>
+						</Layers>
+					</Frame>
+				</Frames>
+			</Frame>
+
 			<Frame name="$parentIncomingPanel" inherits="VuhDoPanelTemplate">
 				<Size>
 					<AbsDimension x="244" y="112" />
@@ -163,7 +203,7 @@
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="20" y="-26" />
+							<AbsDimension x="43" y="-26" />
 						</Offset>
 					</Anchor>
 				</Anchors>
