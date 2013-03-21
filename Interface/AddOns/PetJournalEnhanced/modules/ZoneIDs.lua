@@ -122,21 +122,23 @@ zoneIDs.continents = {
 		823,-- Darkmoon Island
 	},
 
-
-	[6]={--	Pandaria MoP
-		858,--	Dread Wastes MoP
-		857,--	Krasarang Wilds MoP
-		809,--	Kun-Lai Summit MoP
-		905,--	Shrine of Seven Stars MoP
-		903,--	Shrine of Two Moons MoP
-		806,--	The Jade Forest MoP
-		873,--	The Veiled Stair MoP
-		808,--	The Wandering Isle MoP
-		810,--	Townlong Steppes MoP
-		811,--	Vale of Eternal Blossoms MoP
-		807,--	Valley of the Four Winds MoP
+	[6]={-- Pandaria MoP
+		858,--  Dread Wastes MoP
+		929,--  Isle of Giants MoP
+		928,--  Isle of Thunder MoP
+		857,--  Krasarang Wilds MoP
+		809,--  Kun-Lai Summit MoP
+		905,--  Shrine of Seven Stars MoP
+		903,--  Shrine of Two Moons MoP
+		806,--  The Jade Forest MoP
+		873,--  The Veiled Stair MoP
+		808,--  The Wandering Isle MoP
+		810,--  Townlong Steppes MoP
+		811,--  Vale of Eternal Blossoms MoP
+		807,--  Valley of the Four Winds MoP
 	},
 	[7]={--Instances
+		930,--  Throne of Thunder MoP
 		401,--	Alterac Valley
 		461,--	Arathi Basin
 		482,--	Eye of the Storm
@@ -250,6 +252,20 @@ zoneIDs.continents = {
 
 
 zoneIDs.SpeciesToZoneId = { 
+[1211]={[929]=929},
+[1212]={[929]=929},
+[1213]={[929]=929},
+[1180]={[929]=929},
+[1042]={[807]=807},
+[1201]={[810]=810},
+[1185]={[929]=929},
+[1181]={[928]=928},
+[1179]={[928]=928},
+[1178]={[928]=928},
+[1182]={[928]=928},
+[1175]={[928]=928},
+[1202]={[930]=930},
+[1183]={[930]=930},
 [1163]={[281]=281},
 [1160]={[32]=32},
 [1164]={[475]=475},

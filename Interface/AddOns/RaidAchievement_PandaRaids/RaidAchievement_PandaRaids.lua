@@ -320,7 +320,7 @@ if arg2=="UNIT_DIED" then
   if prraspisokon[5]==1 and raachdone1 then
   local id=tonumber(string.sub(arg7,6,10),16)
   if id==69221 and UnitName("boss1") then
-      pzrafailnoreason(5)
+      prrafailnoreason(5)
     end
   end
 end

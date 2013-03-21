@@ -1,0 +1,14 @@
+------------------------------------------------------------------------
+r32 | farmbuyer | 2013-03-20 23:58:57 +0000 (Wed, 20 Mar 2013) | 1 line
+Changed paths:
+   A /tags/0.7.5 (from /trunk:31)
+
+Tagging as 0.7.5 (5.2 TOC, don't put SLASH() text into chat history)
+------------------------------------------------------------------------
+r31 | farmbuyer | 2013-03-20 23:57:07 +0000 (Wed, 20 Mar 2013) | 1 line
+Changed paths:
+   M /trunk/ArbitraryCommands.toc
+   M /trunk/ac.lua
+
+TOC bump for 5.2.  Do not use the primary chat frame's edit box for SLASH() functions (avoids polluting the chat history).
+------------------------------------------------------------------------

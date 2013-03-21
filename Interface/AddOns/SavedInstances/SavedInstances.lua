@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 242 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 244 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -110,7 +110,7 @@ addon.showopts = {
 }
 
 local _specialWeeklyQuests = {
-  [32611] = { zid=928, lid=94221 }, -- Shan'ze Ritual Stone looted
+  [32610] = { zid=928, lid=94221 }, -- Shan'ze Ritual Stone looted
   [32626] = { zid=928, lid=94222 }, -- Key to the Palace of Lei Shen looted
   [32609] = { zid=928, aid=8104  }, -- Trove of the Thunder King (outdoor chest)
 }

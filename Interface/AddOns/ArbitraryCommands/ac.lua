@@ -595,6 +595,7 @@ do
 	editbox:SetAttribute("chatType", DEFAULT_CHAT_FRAME.editBox:GetAttribute("chatType"))
 	editbox:SetAttribute("tellTarget", DEFAULT_CHAT_FRAME.editBox:GetAttribute("tellTarget"))
 	editbox:SetAttribute("channelTarget", DEFAULT_CHAT_FRAME.editBox:GetAttribute("channelTarget"))
+	-- We could hooksecurefunc or do other things with AddHistoryLine here.
 	editbox.language = DEFAULT_CHAT_FRAME.language
 	editbox:Hide()
 	addon.macro_editbox = editbox
@@ -780,9 +781,10 @@ do
 		end
 	end
 	function _G.SLASH (text)
-		--addon.macro_editbox:SetText(text)
-		DEFAULT_CHAT_FRAME.editBox:SetText(text)
-		ChatEdit_SendText (DEFAULT_CHAT_FRAME.editBox, --[[addHistory=]]nil)
+		addon.macro_editbox:SetText(text)
+		ChatEdit_SendText (addon.macro_editbox, --[[addHistory=]]nil)
+		--DEFAULT_CHAT_FRAME.editBox:SetText(text)
+		--ChatEdit_SendText (DEFAULT_CHAT_FRAME.editBox, --[[addHistory=]]nil)
 	end
 end
 
