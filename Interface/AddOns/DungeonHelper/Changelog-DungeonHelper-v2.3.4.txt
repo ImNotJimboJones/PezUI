@@ -1,15 +1,13 @@
 ------------------------------------------------------------------------
-r90 | yess | 2012-12-23 00:53:09 +0000 (Sun, 23 Dec 2012) | 1 line
+r92 | yess | 2013-03-25 22:46:09 +0000 (Mon, 25 Mar 2013) | 1 line
 Changed paths:
-   A /tags/v2.3.3 (from /trunk:89)
+   A /tags/v2.3.4 (from /trunk:91)
 
-Tagging as v2.3.3
+Tagging as v2.3.4
 ------------------------------------------------------------------------
-r89 | yess | 2012-12-16 03:22:34 +0000 (Sun, 16 Dec 2012) | 2 lines
+r91 | yess | 2013-03-25 22:36:32 +0000 (Mon, 25 Mar 2013) | 1 line
 Changed paths:
-   M /trunk/DungeonHelper.lua
    M /trunk/DungeonHelper.toc
 
-Fix party chat issue.
 Update TOC
 ------------------------------------------------------------------------

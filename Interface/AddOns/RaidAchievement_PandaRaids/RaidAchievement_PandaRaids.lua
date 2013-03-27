@@ -34,6 +34,7 @@ prraspisokach25={
 --TT
 --8094,
 8038,
+8077,
 }
 
 
@@ -47,6 +48,46 @@ end
 
 
 function prra_OnUpdate(curtime)
+
+
+--ramariotableguid
+--mario
+if ramariotrack and curtime>ramariotrack then
+  ramariotrack=GetTime()+0.3
+  for i=1,GetNumGroupMembers() do
+    if UnitGUID("raid"..i.."-target") then
+			local a1=UnitGUID("raid"..i.."-target")
+			local id=tonumber(string.sub(a1,6,10),16)
+			if id==67966 then
+        --проверка что есть бафф
+        local bummname=GetSpellInfo(136431)
+        if UnitDebuff("raid"..i.."-target",bummname) then
+          local bil=0
+          if #ramariotableguid>0 then
+            for j=1,#ramariotableguid do
+              if ramariotableguid[j]==a1 then
+                bil=1
+              end
+            end
+          end
+          if bil==0 then
+            table.insert(ramariotableguid,a1)
+            if #ramariotableguid==5 then
+              prraachcompl(6)
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+
+
+
+
+
+
 
 --после 10 сек после ачивки чек
 if ratrackgoodattack2 and curtime>ratrackgoodattack2+10 then
@@ -132,6 +173,9 @@ else
 
 
 rababahcount=nil
+
+ramariotrack=nil
+ramariotableguid=nil
 
 
 	if UnitGUID("boss1") and UnitName("boss1")~="" then
@@ -323,6 +367,12 @@ if arg2=="UNIT_DIED" then
       prrafailnoreason(5)
     end
   end
+end
+
+--марио трекер, 1 ап
+if arg2=="SPELL_CAST_SUCCESS" and arg10==134092 and prraspisokon[6]==1 and raachdone1 and ramariotrack==nil then
+  ramariotrack=GetTime()+0.3
+  ramariotableguid={}
 end
 
 

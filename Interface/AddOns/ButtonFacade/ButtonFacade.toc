@@ -1,10 +1,10 @@
-﻿## Interface: 50001
+﻿## Interface: 50200
 ## Title: ButtonFacade
-## Version: 5.0.389
+## Version: 5.2.391
 ## Notes: Loads Masque for add-ons still using ButtonFacade's API. Do NOT disable this!
 ## Author: StormFX
 ## Dependencies: Masque
-## X-Curse-Packaged-Version: v5.1.389
+## X-Curse-Packaged-Version: v5.2.391
 ## X-Curse-Project-Name: Masque
 ## X-Curse-Project-ID: masque
 ## X-Curse-Repository-ID: wow/masque/mainline

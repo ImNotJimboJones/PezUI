@@ -6,7 +6,7 @@ if GetLocale()=="deDE" or GetLocale()=="ruRU" or GetLocale()=="zhTW" or GetLocal
 end
 
 
-	raversion=1.119
+	raversion=1.120
 	local raverstiptext="alpha"
 	if string.len(raversion)==6 then
 		raverstiptext="beta"
@@ -24,7 +24,7 @@ end
 	rabigmenuchatlisten={"raid", "raid_warning", "officer", "party", "guild", "say", "yell", "sebe"}
 	ralowmenuchatlisten={"party", "officer", "guild", "say", "yell", "sebe"}
 	if rasoundtoplay==nil then rasoundtoplay={1,1,1,2,5,0} end
-	rasoundtrack={"alarmclockbeeps1.ogg","alarmclockbeeps2.ogg","alarmclockbeeps3.ogg","fireworks.ogg","applause.ogg","gong.ogg","cat.ogg","bam.ogg","Xylo.ogg","Alert.ogg","igQuestFailed","QUESTCOMPLETED","QUESTADDED","PVPENTERQUEUE","PVPTHROUGHQUEUE","igPlayerInvite","igPlayerInviteDecline","igBackPackClose","AuctionWindowOpen","AuctionWindowClose","RaidWarning","ReadyCheck"}
+	rasoundtrack={"alarmclockbeeps1.ogg","alarmclockbeeps2.ogg","alarmclockbeeps3.ogg","fireworks.ogg","applause.ogg","gong.ogg","cat.ogg","bam.ogg","Xylo.ogg","Alert.ogg","igQuestFailed","QUESTCOMPLETED","QUESTADDED","PVPENTERQUEUE","PVPTHROUGHQUEUE","igPlayerInvite","igPlayerInviteDecline","igBackPackClose","AuctionWindowOpen","AuctionWindowClose","RaidWarning","ReadyCheck","mario.ogg"}
 
 	ramsgupdate=0
 	ramsgtimestart=0
@@ -1899,14 +1899,29 @@ if i==2 then
 				if criteria then
 					local a1,_,a3=GetAchievementCriteriaInfo(achievid,criteria)
 					if a3==false then
-						raplaysound2(rasoundtoplay[5])
+            --для марио звук не меняется!!
+            if achievid==8077 then
+              raplaysound2(23)
+            else
+              raplaysound2(rasoundtoplay[5])
+            end
 					end
 				else
-					raplaysound2(rasoundtoplay[5])
+            --для марио звук не меняется!!
+            if achievid==8077 then
+              raplaysound2(23)
+            else          
+              raplaysound2(rasoundtoplay[5])
+            end
 				end
 			end
 		else
-			raplaysound2(rasoundtoplay[5])
+            --для марио звук не меняется!!
+            if achievid==8077 then
+              raplaysound2(23)
+            else
+              raplaysound2(rasoundtoplay[5])
+            end
 		end
 	end
 end
@@ -1915,7 +1930,7 @@ end
 
 
 function raplaysound2(i)
-if i>10 then
+if i>10 and i~=23 then
 	if rasoundtoplay[6]==1 then
 		PlaySound(rasoundtrack[i], "Master")
 	else
@@ -2124,8 +2139,8 @@ if a1==4 and UnitInRaid("player")==nil and UnitInParty("player")==nil then
     text="|cff00ff00Messaggio importante|r. Il progetto |cff00ff00RaidAchievement|r forse sarà |cffff0000chiuso|r, per sappere cosa si può fare - http://www.phoenixstyle.com/help.php"
   end
   
-  --PlaySoundFile("Interface\\AddOns\\RaidAchievement\\Sounds\\"..rasoundtrack[13], "Master")
-  PlaySound(rasoundtrack[16], "Master")
+  PlaySoundFile("Interface\\AddOns\\RaidAchievement\\Sounds\\"..rasoundtrack[23], "Master")
+  --PlaySound(rasoundtrack[16], "Master")
   out(text)
   
   if psdonaspanvar==nil then

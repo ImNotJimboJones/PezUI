@@ -1,7 +1,7 @@
 -- AllPlayed-enUS.lua
--- $Id: AllPlayed-enUS.lua 224 2010-10-03 00:18:18Z LaoTseu $
+-- $Id: AllPlayed-enUS.lua 278 2013-03-03 20:20:04Z LaoTseu $
 if not AllPlayed_revision then AllPlayed_revision = {} end
-AllPlayed_revision.enUS	= ("$Revision: 224 $"):match("(%d+)")
+AllPlayed_revision.enUS	= ("$Revision: 278 $"):match("(%d+)")
 
 
 --local L = AceLibrary("AceLocale-2.2"):new("AllPlayed")
@@ -160,11 +160,14 @@ L["Main Settings"]																= true
 L["Do not show Percent Rest"]													= true
 
 -- New stuff for 40000-1
+L['Valor Points']																	= true
+L["Total Valor Points: "]														= true
 L['Justice Points']																= true
 L["Total Justice Points: "]													= true
 L['Conquest Points']																= true
 L['Conquest Pts']																	= true
 -- New abbreviations
+L['%s VP']																			= true
 L['%s JP']																			= true
 L['%s CP']																			= true
 -- The %s is replaced by the currency type
@@ -174,7 +177,37 @@ L['Show %s total']																= true
 L['Show the total %s for all characters']									= true
 -- <currency type> (<icon string>)
 L['%s (%s)']																		= true
--- <currency type> (<first icon string> or <second icon string>) 
+-- <currency type> (<first icon string> or <second icon string>)
 L["%s (%s or %s)"]																= true
 -- <realm> <faction> characters.
 L["%s %s characters "]															= true
+
+-- New Stuff for 40200-2
+L["Display Delay"]																= true
+L["How long should the tooltip be displayed after the mouse is moved out."]
+																						= true
+L["Sticky Tooltip"]																= true
+L["Keep displaying the tooltip when the mouse is over it. If uncheck, the tooltip is displayed only when mousing over the icon."]
+																						= true
+-- New stuff for 40200-3
+L["Show Item Level"]																= true
+L["Show the character item level (iLevel)"]								= true
+L["%.2f iLvl"]																		= true
+L["By item level"]																= true
+
+
+-- New stuff for 50100-1
+L["Delete Characters"]															= true
+L["Erase character data permanantely"]										= true
+L["Erase data for %s of %s"]													= true
+L["Erasing data for %s of %s"]												= true
+L.DELETE_WARNING = 
+[[WARNING!
+
+You are about to permanantely erase the data for |cffffff00%s|r of |cffffff00%s|r. You will not be able to recreate this data if the character has been deleted from your account.
+
+Are you sure you want to erase the data for |cffffff00%s|r of |cffffff00%s|r permanantely?]]
+L["Lvl: %d"]																		= true
+L["Total Character Levels: "]													= true
+L["Show level total"]															= true
+L["Show the total levels for all characters"]							= true

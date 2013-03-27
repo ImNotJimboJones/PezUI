@@ -1129,45 +1129,42 @@ end
 -- VARS : money = <research>
 -- **************************************************************************
 function TitanPanelRepair_GetGSC(money)
-   local neg = false;
-     if (money == nil) then money = 0; end
-     if (money < 0) then
-          neg = true;
-      money = money * -1;
-     end
-     local g = math.floor(money / 10000);
-     local s = math.floor((money - (g * 10000)) / 100);
-     local c = math.floor(money - (g * 10000) - (s * 100));
-     return g, s, c, neg;
+	local neg = false;
+	if (money == nil) then money = 0; end
+	if (money < 0) then
+		neg = true;
+		money = money * -1;
+	end
+	local g = math.floor(money / 10000);
+	local s = math.floor((money - (g * 10000)) / 100);
+	local c = math.floor(money - (g * 10000) - (s * 100));
+	return g, s, c, neg;
 end
 
 function TitanPanelRepair_GetTextGSC(money)
-   local GSC_GOLD = "ffd100";
-   local GSC_SILVER = "e6e6e6";
-   local GSC_COPPER = "c8602c";
-   local GSC_START = "|cff%s%d|r";
-   local GSC_PART = ".|cff%s%02d|r";
-   local GSC_NONE = "|cffa0a0a0" .. NONE .. "|r";
-     local g, s, c, neg = TitanPanelRepair_GetGSC(money);
-     local gsc = "";
-     if (g > 0) then
-      gsc = format(GSC_START, GSC_GOLD, g);
-          gsc = gsc .. format(GSC_PART, GSC_SILVER, s);
-          gsc = gsc .. format(GSC_PART, GSC_COPPER, c);
-     elseif (s > 0) then
-          gsc = format(GSC_START, GSC_SILVER, s);
-          gsc = gsc .. format(GSC_PART, GSC_COPPER, c);
-     elseif (c > 0) then
-          gsc = gsc .. format(GSC_START, GSC_COPPER, c);
-     else
-          gsc = GSC_NONE;
-     end
-
-     if (neg) then gsc = "(" .. gsc .. ")"; end
-
-     return gsc;
+	local GSC_GOLD = "ffd100";
+	local GSC_SILVER = "e6e6e6";
+	local GSC_COPPER = "c8602c";
+	local GSC_START = "|cff%s%d|r";
+	local GSC_PART = ".|cff%s%02d|r";
+	local GSC_NONE = "|cffa0a0a0" .. NONE .. "|r";
+	local g, s, c, neg = TitanPanelRepair_GetGSC(money);
+	local gsc = "";
+	if (g > 0) then
+		gsc = format(GSC_START, GSC_GOLD, g);
+		gsc = gsc .. format(GSC_PART, GSC_SILVER, s);
+		gsc = gsc .. format(GSC_PART, GSC_COPPER, c);
+	elseif (s > 0) then
+		gsc = format(GSC_START, GSC_SILVER, s);
+		gsc = gsc .. format(GSC_PART, GSC_COPPER, c);
+	elseif (c > 0) then
+		gsc = gsc .. format(GSC_START, GSC_COPPER, c);
+	else
+		gsc = GSC_NONE;
+	end
+	if (neg) then gsc = "(" .. gsc .. ")"; end
+	return gsc;
 end
-
 
 -- **************************************************************************
 -- NAME : TitanPanelRightClickMenu_PrepareRepairMenu()
@@ -1322,21 +1319,11 @@ local info;
 			UIDropDownMenu_AddButton(info, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 		end
 
-		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "Bank" then
---			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
---			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());   
---			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
-			-- create somewhere to store the result and default it 
-			local dailyGoldWithdrawlLimit = 0 
-			-- need to get the guildRankIndex for the currently logged on player 
-			local guildName, _, guildRankIndex = GetGuildInfo("player") 
-			-- guildName is nil if the character isn't in a guild 
-			if (guildName ~= nil) then 
-				-- This character is in a guild, so set the current rank so the limit will work 
-				GuildControlSetRank(guildRankIndex) 
-				dailyGoldWithdrawlLimit = GetGuildBankWithdrawGoldLimit() 
-			end 
-			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_WITHDRAW"].." "..dailyGoldWithdrawlLimit, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "GuildBank" then
+			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
+			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());
+			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
+			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_WITHDRAW"].." "..withdrawGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 			info = {}
 			info.text = L["TITAN_REPAIR_GBANK_USEFUNDS"]
 			info.func = function() TitanToggleVar(TITAN_REPAIR_ID, "UseGuildBank"); end

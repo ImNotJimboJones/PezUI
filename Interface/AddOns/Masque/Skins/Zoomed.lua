@@ -13,7 +13,7 @@ local _, Core = ...
 
 Core:AddSkin("Zoomed", {
 	Author = "JJSheets, StormFX",
-	Version = "5.0.389",
+	Version = "5.0.391",
 	Masque_Version = 40300,
 	Shape = "Square",
 	Backdrop = {
