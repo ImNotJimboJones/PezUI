@@ -98,6 +98,7 @@ local filteredAuras = {
 	[134244] = true, -- Hellscream's Warsong
 	[133455] = true, -- Horde Supremacy
 	[133456] = true, -- Alliance Supremacy
+	[134851] = true, -- Strange Feeling (Meatball)
 	[134797] = true, -- Banner of King Varian Wrynn
 	[135219] = true, -- Reaver Bombs
 	[135524] = true, -- Combat Momentum
@@ -106,6 +107,8 @@ local filteredAuras = {
 	[135871] = true, -- Horde Banner
 	[136775] = true, -- Jaguar Ferocity
 	[138422] = true, -- Confidence of Kros (Skumblade Brute)
+	[139015] = true, -- Blessing of Thunder (God-Hulk Ramuk)
+	[139068] = true, -- Determination (LFR wipe recovery)
 	
 	-- The Deadmines
 	[90932] = true, -- Ragezone (Defias Blood Wizard)
@@ -258,6 +261,7 @@ local filteredAuras = {
 	[109637] = true, -- Expose Weakness (Deathwing, Ysera - LFR)
 	[109728] = true, -- Expose Weakness (Deathwing, Kalecgos - LFR)
 	
+	[90385] = true, -- Ragezone
 	-- Shado-Pan Monastery
 	[127576] = true, -- Parting Smoke (Sha of Violence)
 	-- Mogu'shan Palace
@@ -273,12 +277,15 @@ local filteredAuras = {
 	-- Siege of Niuzao Temple
 	[120938] = true, -- Residue (Resin Flake)
 	[120778] = true, -- Caustic Tar
+	[119395] = true, -- Detonate (General Pa'valak)
 	-- Theramore's Fall
 	[105690] = true, -- Standard of Theramore
 	-- Crypt of Forgotten Kings
 	[129025] = true, -- Uncontrolled Anger (Hateful Monstrosity)
 	-- Unga Ingoo
 	[121893] = true, -- Gettin' Scurvy! (Captain Ook)
+	-- Dagger in the Dark
+	[133475] = true, -- Mogu Power
 	-- Mogu'shan Vaults
 	[116541] = true, -- Energized Tiles (Stone Guard heroic)
 	[117549] = true, -- Spiritual Innervation (Gara'jal the Spiritbinder)
@@ -298,8 +305,10 @@ local filteredAuras = {
 	[122858] = true, -- Bathed in Light (Tsulong)
 	[118977] = true, -- Fearless (Sha of Fear)
 	-- Throne of Thunder
-	[138002] = true, -- Fluidity (Jin'Rokh the Breaker)
+	[138002] = true, -- Fluidity (Jin'rokh the Breaker)
 	[137240] = true, -- Cracked Shell (Horridon)
+	[134092] = true, -- Shell Concussion (Tortos)
+	[140741] = true, -- Primal Nutriments (Ji-Kun)
 }
 
 local mt = {
@@ -399,7 +408,7 @@ function filters:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, s
 	if (eventType == "SPELL_AURA_REMOVED" or eventType == "SPELL_AURA_BROKEN" or eventType == "SPELL_AURA_BROKEN_SPELL" or eventType == "SPELL_AURA_STOLEN") then
 		if self:IsFilteredAura(spellID) and rawget(corruptTargets, destGUID) and corruptTargets[destGUID][spellID] then
 			corruptTargets[destGUID][spellID] = nil
-			addon:Debug(format("Filtered aura (%s) faded from %s.", spellName, destName))
+			addon:Debug(format("Filtered aura (%s) faded from %s.", spellName, tostring(destName)))
 		end
 	end
 	
@@ -408,7 +417,7 @@ function filters:COMBAT_LOG_EVENT_UNFILTERED(timestamp, eventType, hideCaster, s
 		if self:IsFilteredAura(spellID) then
 			corruptTargets[destGUID][spellID] = true
 			ignoredTargets[destGUID] = true
-			addon:Debug(format("Target (%s) gained filtered aura. (%s) Ignore received damage.", destName, spellName))
+			addon:Debug(format("Target (%s) gained filtered aura. (%s) Ignore received damage.", tostring(destName), spellName))
 		end
 		
 		-- auras applied by self

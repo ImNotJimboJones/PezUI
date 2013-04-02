@@ -155,7 +155,7 @@ function Hooked.PetJournal_UpdatePetCard(self)
 			
 			local stringBuilder = {}
 			for _,v in ipairs(availableBreeds) do tinsert(stringBuilder,breedInfo:GetBreedName(v)) end
-			availableBreedsText = table.concat(stringBuilder,", ")
+			local availableBreedsText = table.concat(stringBuilder,", ")
 			wipe(stringBuilder)
 			tinsert(stringBuilder,name)
 

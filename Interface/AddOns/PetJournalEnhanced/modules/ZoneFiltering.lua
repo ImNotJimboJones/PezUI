@@ -37,6 +37,19 @@ function ZoneFiltering:OnInitialize()
 			self.zoneFilter[zoneID] = true
 		end
 	end
+	
+	for i= 1 ,#ZoneGroupNames do
+		if #zoneIDs.continents[i] > 16 then
+			table.insert(ZoneGroupNames,i+1,ZoneGroupNames[i].." cont.");
+			table.insert(zoneIDs.continents,i+1,{});
+			for j = math.ceil(#zoneIDs.continents[i]/2), #zoneIDs.continents[i] do
+				table.insert(zoneIDs.continents[i+1],zoneIDs.continents[i][j]);
+			end
+			for j = #zoneIDs.continents[i], math.ceil(#zoneIDs.continents[i]/2), -1 do
+				table.remove(zoneIDs.continents[i],j)
+			end
+		end
+	end
 end
 
 function ZoneFiltering:GetNumZoneGroups()

@@ -266,7 +266,7 @@ end
 	end,
 	-- low threat
 	function(unit)
-		if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+		if InCombatLockdown() and unit.reaction ~= "FRIENDLY" then 
 			if IsTankedByAnotherTank(unit) then return HEADLINEMODE end
 			if unit.threatValue < 2 and unit.health > 0 then return BARMODE end
 		elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
@@ -362,8 +362,8 @@ unit.threatValue
 
 local function ColorFunctionByReaction(unit)
 	if unit.reaction == "FRIENDLY" and unit.type == "PLAYER" then
-		if IsGuildmate(unit.name) then return PaleBlue				
-		elseif IsFriend(unit.name) then return BrightBlue end
+		if IsGuildmate(unit.name) then return LocalVars.ColorGuildMember				
+		elseif IsFriend(unit.name) then return LocalVars.ColorGuildMember end
 	end
 	
 	return ReactionColors[unit.reaction][unit.type]
@@ -406,8 +406,9 @@ local function ColorFunctionByThreat(unit)
 			return ColorFunctionTankSwapColors(unit)
 		elseif LocalVars.ThreatMode == THREATMODE_TANK then
 			return ColorFunctionRawTank(unit)
-		else return ColorFunctionDamage(unit) end		
-	end
+		else return ColorFunctionDamage(unit) end
+		
+	else return ReactionColors[unit.reaction][unit.type] end	
 end
 
 
@@ -429,20 +430,20 @@ local ColorFunctions = {DummyFunction, ColorFunctionByClassEnemy, ColorFunctionB
 local function HealthColorDelegate(unit)	
 	local color, class
 
-	-- Aggro Coloring
+	-- Group Member Aggro Coloring
 	if unit.reaction == "FRIENDLY"  then
 		if LocalVars.ColorShowPartyAggro and LocalVars.ColorPartyAggroBar then
 			if GetAggroCondition(unit.name) then color = LocalVars.ColorPartyAggro end
 		end
 	end
 	
+	-- Color Mode / Color Spotlight
 	if not color then 
 		local func = ColorFunctions[LocalVars.ColorHealthBarMode] or DummyFunction
 		color = func(unit) 
 	end	
 
 	if color then 
-		--return color.r, color.g, color.b, 1, 0, 0, 0, 1
 		return color.r, color.g, color.b, 1	--, color.r/4, color.g/4, color.b/4, 1
 	else return unit.red, unit.green, unit.blue end
 end
@@ -477,7 +478,10 @@ local function WarningBorderFunctionByThreatTank(unit)
 end
 
 -- Warning Glow (Auto Detect)
-local function WarningBorderFunctionByThreat(unit) 
+local function WarningBorderFunctionByThreat(unit)
+	--if unit.reaction == "HOSTILE" then print(unit.name, unit.threatValue) end
+	--print("Tank Aura:", TidyPlatesWidgets.IsTankingAuraActive)
+	
 	if unit.InCombatLockdown and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
 		
 		if (LocalVars.ThreatMode == THREATMODE_AUTO and TidyPlatesWidgets.IsTankingAuraActive) 
@@ -525,8 +529,8 @@ end
 ------------------------------------------------------------------------------
 local function CastBarDelegate(unit)
 	local color
-	if unit.spellInterruptible then color = GoldColor 
-	else color = WhiteColor end 
+	if unit.spellInterruptible then color = LocalVars.ColorNormalSpellCast 
+	else color = LocalVars.ColorUnIntpellCast end 
 	return color.r, color.g, color.b, 1
 end
 
@@ -538,8 +542,8 @@ end
 
 -- By Reaction
 local function NameColorByReaction(unit)
-	if IsGuildmate(unit.name) then return PaleBlueText				
-	elseif IsFriend(unit.name) then return BrightBlueText end
+	if IsGuildmate(unit.name) then return LocalVars.TextColorGuildMember				
+	elseif IsFriend(unit.name) then return LocalVars.TextColorGuildMember end
 
 	return NameReactionColors[unit.reaction][unit.type]
 end
@@ -662,7 +666,7 @@ end
 local function TextFunctionMana(unit) 
 	if unit.isTarget then
 		local power = ceil((UnitPower("target") / UnitPowerMax("target"))*100)
-		local powername = select(2, UnitPowerType("target"))
+		local powername = getglobal(select(2, UnitPowerType("target")))
 		if power and power > 0 then	return power.."% "..powername end
 	end
 end
@@ -721,8 +725,8 @@ end
 
 -- Arena Vitals (ID, Mana, Health
 local function HealthFunctionArenaID(unit) 
-	--return GetArenaIndex(unit.name).. "# "..ShortenNumber(unit.health).."HP "..TextFunctionMana(unit)
-	return GetArenaIndex(unit.name)
+	return (TextFunctionMana(unit) or "").."  "..ShortenNumber(unit.health).."  "..(GetArenaIndex(unit.name) or "")
+	--return GetArenaIndex(unit.name)
 end
 
 
@@ -882,7 +886,7 @@ end
 
 -- By Threat (High) DPS Mode
 local function ScaleFunctionByThreatHigh(unit)
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" then 
 		if unit.type == "NPC" and unit.threatValue > 1 and unit.health > 2 then return LocalVars.ScaleSpotlight end
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
 		if GetAggroCondition(unit.name) then return LocalVars.ScaleSpotlight end
@@ -891,7 +895,7 @@ end
 
 -- By Threat (Low) Tank Mode
 local function ScaleFunctionByThreatLow(unit)
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" then 
 		if  IsTankedByAnotherTank(unit) then return end
 		if unit.type == "NPC" and unit.health > 2 and unit.threatValue < 2 then return LocalVars.ScaleSpotlight end 
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
@@ -991,7 +995,7 @@ end
 
 -- By Threat (High)
 local function AlphaFunctionByThreatHigh (unit) 
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" then 
 		if unit.threatValue > 1 and unit.health > 0 then return LocalVars.OpacitySpotlight end
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
 		if GetAggroCondition(unit.name) then return LocalVars.OpacitySpotlight end
@@ -1000,7 +1004,7 @@ end
 
 -- Tank Mode
 local function AlphaFunctionByThreatLow (unit) 
-	if InCombatLockdown() and unit.reaction == "HOSTILE" then 
+	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" then 
 		if  IsTankedByAnotherTank(unit) then return end
 		if unit.threatValue < 2 and unit.health > 0 then return LocalVars.OpacitySpotlight end
 	elseif LocalVars.ColorShowPartyAggro and unit.reaction == "FRIENDLY" then
@@ -1375,6 +1379,13 @@ local function AddDebuffWidget(plate, enable, config)
 	 end
 end
 
+local function MoveDebuffWidget(plate, config)
+	local widget = plate.widgets.DebuffWidget
+	if widget then
+		widget:SetPoint(config.anchor or "TOP", plate, config.x or 0, config.y or 0) --15, 20)
+	end
+end
+
 ------------------------------------------------------------------------------
 -- Widget Activation
 ------------------------------------------------------------------------------
@@ -1397,6 +1408,8 @@ local function OnInitializeWidgets(plate, configTable)
 	--testing HealerWidget
 	--plate.widgets.HealerWidget = CreateHealerWidget(plate)
 	--plate.widgets.HealerWidget:SetPoint("CENTER", -50, 2) --0, 0)
+	
+	if TidyPlatesGlobal_OnInitialize then TidyPlatesGlobal_OnInitialize(plate) end
 end
 
 local function OnContextUpdateDelegate(plate, unit)
@@ -1404,6 +1417,8 @@ local function OnContextUpdateDelegate(plate, unit)
 	if LocalVars.WidgetsComboPoints then Widgets.ComboWidget:UpdateContext(unit) end
 	if (LocalVars.WidgetsThreatIndicatorMode == 1) and LocalVars.WidgetsThreatIndicator then Widgets.ThreatLineWidget:UpdateContext(unit) end		-- Tug-O-Threat
 	if LocalVars.WidgetsDebuff then Widgets.DebuffWidget:UpdateContext(unit) end
+
+	if TidyPlatesGlobal_OnContextUpdate then TidyPlatesGlobal_OnContextUpdate(plate, unit) end
 end
 
 local function OnUpdateDelegate(plate, unit)
@@ -1416,6 +1431,7 @@ local function OnUpdateDelegate(plate, unit)
 	--testing HealerWidget
 	--Widgets.HealerWidget:Update(unit)
 	
+	if TidyPlatesGlobal_OnUpdate then TidyPlatesGlobal_OnUpdate(plate, unit) end
 end
 
 -- Threat Functions List
@@ -1456,8 +1472,14 @@ local function EnableWatchers()
 			SetCVar("threatWarning", 3)	
 	end
 	
-	TidyPlatesWidgets:EnableTankWatch()
-	TidyPlatesWidgets:EnableAggroWatch()		--SetCVar("threatWarning", 3)		-- Required for threat/aggro detection
+	--if LocalVars.ColorEnableOffTank then
+			TidyPlatesWidgets:EnableTankWatch()	-- Off-Tank support		-- Lots of shtuff depends on this.  
+	--else TidyPlatesWidgets:DisableTankWatch() end
+		
+	if LocalVars.ColorShowPartyAggro then TidyPlatesWidgets:EnableAggroWatch()	-- Group aggro holders
+	else TidyPlatesWidgets:DisableAggroWatch() end
+	
+	--SetCVar("threatWarning", 3)		-- Required for threat/aggro detection
 	
 	if LocalVars.WidgetsDebuff then 
 		TidyPlatesWidgets:EnableAuraWatcher() 
@@ -1533,6 +1555,18 @@ end
 
 
 local function ApplyThemeCustomization(theme)
+	ReactionColors.FRIENDLY.NPC = LocalVars.ColorFriendlyNPC
+	ReactionColors.FRIENDLY.PLAYER = LocalVars.ColorFriendlyPlayer
+	ReactionColors.HOSTILE.NPC = LocalVars.ColorHostileNPC
+	ReactionColors.HOSTILE.PLAYER = LocalVars.ColorHostilePlayer
+	ReactionColors.NEUTRAL.NPC = LocalVars.ColorNeutral
+	
+	NameReactionColors.FRIENDLY.NPC = LocalVars.TextColorFriendlyNPC
+	NameReactionColors.FRIENDLY.PLAYER = LocalVars.TextColorFriendlyPlayer
+	NameReactionColors.HOSTILE.NPC = LocalVars.TextColorHostileNPC
+	NameReactionColors.HOSTILE.PLAYER = LocalVars.TextColorHostilePlayer
+	NameReactionColors.NEUTRAL.NPC = LocalVars.TextColorNeutral
+	
 	EnableWatchers()
 	ApplyStyleCustomization(theme["Default"])
 	ApplyFontCustomization(theme["NameOnly"])
@@ -1549,9 +1583,9 @@ TidyPlatesHubFunctions.SetAlpha = AlphaDelegate
 TidyPlatesHubFunctions.SetCustomText = HealthTextDelegate
 TidyPlatesHubFunctions.OnUpdate = OnUpdateDelegate
 TidyPlatesHubFunctions.OnInitializeWidgets = OnInitializeWidgets
+TidyPlatesHubFunctions.OnContextUpdate = OnContextUpdateDelegate
 TidyPlatesHubFunctions.SetHealthbarColor = HealthColorDelegate
 TidyPlatesHubFunctions.SetThreatColor = ThreatColorDelegate
-TidyPlatesHubFunctions.OnContextUpdate = OnContextUpdateDelegate
 TidyPlatesHubFunctions.SetCastbarColor = CastBarDelegate
 TidyPlatesHubFunctions.UseDamageVariables = UseDamageVariables
 TidyPlatesHubFunctions.UseTankVariables = UseTankVariables

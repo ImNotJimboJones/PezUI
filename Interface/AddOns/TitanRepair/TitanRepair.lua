@@ -1320,8 +1320,15 @@ local info;
 		end
 
 		if _G["UIDROPDOWNMENU_MENU_VALUE"] == "GuildBank" then
-			local totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
-			local withdrawGB = TitanPanelRepair_GetTextGSC(GetGuildBankWithdrawMoney());
+			totalGBCP = GetGuildBankMoney();
+			withdrawGBCP = GetGuildBankWithdrawMoney();
+			if IsGuildLeader() ~= 1 then
+				withdrawGB = TitanPanelRepair_GetTextGSC(withdrawGBCP);
+			end
+			totalGB = TitanPanelRepair_GetTextGSC(GetGuildBankMoney());
+			if (totalGBCP < withdrawGBCP) or IsGuildLeader() == 1 then
+				withdrawGB = totalGB;
+			end
 			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_TOTAL"].." "..totalGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 			TitanPanelRightClickMenu_AddTitle(L["TITAN_REPAIR_GBANK_WITHDRAW"].." "..withdrawGB, _G["UIDROPDOWNMENU_MENU_LEVEL"]);
 			info = {}

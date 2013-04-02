@@ -249,6 +249,14 @@ function PetJournalEnhanced:Reset()
 		filtering.rarity[i] = true
 	end
 	
+	for i=1,#filtering.abilityType do
+		filtering.abilityType[i] = true
+	end
+	
+	for i=1,#filtering.level do
+		filtering.level[i] = true
+	end
+	
 	for i=1,#filtering.specialization do
 		filtering.specialization[i] = true
 	end
@@ -288,6 +296,13 @@ function PetJournalEnhanced:SortPets(forceSort)
 		local ZoneFiltering = self:GetModule("ZoneFiltering")
 		wipe(self.petMapping)
 	
+		local abilityFilter = 0
+		for i=1,#filtering.abilityType do
+			if filtering.abilityType[i] then
+				abilityFilter = bit.bor(abilityFilter,2^i);
+			end
+		end
+
 		for i=1,numPets do
 			local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle, tradable, unique = C_PetJournal.GetPetInfoByIndex(i, PetJournal.isWild)
 			
@@ -323,15 +338,16 @@ function PetJournalEnhanced:SortPets(forceSort)
 					pet.rarity = 0
 					pet.petType = 0
 				end
-				--Unused currently
-				--pet.health = health
-				--pet.maxHealth = maxHealth
-				--pet.attack = attack
-				--pet.speed = speed
-				--pet.health = 0
-				--pet.maxHealth = 0
-				--pet.attack = 0
-				--pet.speed = 0
+				
+				local abilityIDs = C_PetJournal.GetPetAbilityList(pet.speciesID);
+				
+				pet.abilityFilter = 0
+				
+				for j=1, #abilityIDs do
+					local _,_,abilityType = C_PetJournal.GetPetAbilityInfo(abilityIDs[j]);
+					pet.abilityFilter = bit.bor(pet.abilityFilter,2^abilityType);
+				end
+
 				self:AddPet(pet)
 			end
 			
@@ -350,6 +366,8 @@ function PetJournalEnhanced:SortPets(forceSort)
 			
 			local exclude = false
 			local zones = ZoneFiltering:GetZonesBySpeciesID(speciesID)
+			
+			
 			
 			if not filtering.cantBattle and not canBattle  then
 				exclude = true
@@ -371,6 +389,16 @@ function PetJournalEnhanced:SortPets(forceSort)
 				exclude = true
 			elseif display.breedInfo and pet.breed > 0 and  not filtering.breed[pet.breed] then
 				exclude =true
+			elseif not filtering.level[1] and pet.level <= 10 then
+				exclude = true
+			elseif not filtering.level[2] and pet.level <= 20 and pet.level >= 11 then
+				exclude = true
+			elseif not filtering.level[3] and pet.level <= 24 and pet.level >= 20 then
+				exclude = true
+			elseif not filtering.level[4] and pet.level == 25 then
+				exclude = true
+			elseif bit.band(abilityFilter,pet.abilityFilter) == 0 then
+				exclude = true
 			elseif zones then
 				local filtered = false
 				for k,v in pairs(zones) do
@@ -378,7 +406,7 @@ function PetJournalEnhanced:SortPets(forceSort)
 				end
 				if filtered == false then exclude = true end
 			end
-			
+
 			if not exclude then
 				table.insert(self.petMapping,pet)
 			end
@@ -408,6 +436,7 @@ function PetJournalEnhanced:OnInitialize()
 				rarity = {[1]=true,[2]=true,[3]=true,[4]=true},
 				breed = {[3]=true,[4]=true,[5]=true,[6]=true,[7]=true,[8]=true,[9]=true,[10]=true,[11]=true,[12]=true,},
 				specialization = {[1]=true,[2]=true,[3]=true,[4]=true},
+				level = {[1]=true,[2]=true,[3]=true,[4]=true},
 				quantity = {[1]=true,[2]=true,[3]=true},
 				currentZone = false,
 				canBattle =true,
@@ -415,7 +444,7 @@ function PetJournalEnhanced:OnInitialize()
 				unknownZone = true,
 				cantTrade = true,
 				canTrade = true,
-				
+				abilityType = {[1]=true,[2]=true,[3]=true,[3]=true,[4]=true,[5]=true,[6]=true,[7]=true,[8]=true,[9]=true,[10]=true},
 			},
 			sorting = {
 				selection = 1,

@@ -2,7 +2,7 @@
 ## Title: PetJournal Enhanced
 ## Notes: Displays the rarity of the enemies pets in their tooltip.
 ## Author: nullberri
-## Version: 2.6.6
+## Version: 2.7.0
 ## X-Date: 2012-7-25
 ## X-Category: Pet Journal
 ## X-Localizations: enUS

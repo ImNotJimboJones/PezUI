@@ -93,11 +93,13 @@ local function SetBarGroupObject(object, objectstyle, anchorTo)
 	end
 end
 local function MatchTextWidth()
+        --[[
 	local stringwidth = visual.name:GetStringWidth() or 100
 	bars.healthbar:SetWidth(stringwidth+style.healthbar.width )
 	visual.healthborder:SetWidth(stringwidth+style.healthborder.width)
 	visual.target:SetWidth(stringwidth+style.target.width)
 	extended:SetWidth(stringwidth+style.frame.width)
+        --]]
 end
 
 --------------------------------------------------------------------------------------------------------------
@@ -112,7 +114,7 @@ do
 	local fontgroup = {"name", "level", "spelltext", "customtext"}
 	local anchorgroup = {"healthborder", "threatborder", "castborder", "castnostop",
 						"name",  "spelltext", "customtext", "level",
-						"customart", "spellicon", "raidicon", "skullicon", "eliteicon", "target"}
+						"customart", "spellicon", "skullicon", "eliteicon", "target"}
 	local bargroup = {"castbar", "healthbar"}
 	local texturegroup = { "castborder", "castnostop", "healthborder", "threatborder", "eliteicon",
 						"skullicon", "highlight", "target", "customart", "spellicon", }
@@ -133,6 +135,8 @@ do
 		for index = 1, #texturegroup do objectname = texturegroup[index]; SetTextureGroupObject(visual[objectname], style[objectname]) end
 		-- Font Group
 		for index = 1, #fontgroup do objectname = fontgroup[index];SetFontGroupObject(visual[objectname], style[objectname]) end
+                -- Raid Icon (special case)
+                SetAnchorGroupObject(visual["raidicon"], style["raidicon"], extended)
 	end
 end
 --------------------------------------------------------------------------------------------------------------
@@ -639,7 +643,8 @@ do
 		if InCombat then unit.threatSituation, unit.threatValue = GetUnitAggroStatus(regions.threatglow)
 		else unit.threatSituation = "LOW"; unit.threatValue = 0 end
 		unit.isInCombat = GetUnitCombatStatus(regions.name:GetTextColor())
-
+                unit.reaction, unit.type = GetUnitReaction(unit.red, unit.green, unit.blue)
+                
 		CheckNameplateStyle()
 		UpdateIndicator_ThreatGlow()
 		UpdateIndicator_CustomAlpha()
@@ -842,6 +847,9 @@ do
 		local upperlayer = CreateFrame("Frame", nil, healthbar)
 		visual = extended.visual
 
+                --[[
+                -- Create Edge (Cube Frame)
+                --]]
                 
                 --[[
                 Proposed Layer Order

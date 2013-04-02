@@ -53,41 +53,7 @@ function Hooked:CreateDropdownMenu(level)
 		info.leftPadding = 0;
 		info.disabled = nil;
 
-		info.text = "Can Battle"
-		info.func = 	function(_, _, _, value)
-							self.db.filtering.canBattle = not self.db.filtering.canBattle
-							PetJournalEnhanced:UpdatePets()
-						end 
-		info.checked = function() return self.db.filtering.canBattle end;
-		info.isNotRadio = true;
-		UIDropDownMenu_AddButton(info, level)
 		
-		info.text = "Can't Battle"
-		info.func = 	function(_, _, _, value)
-							self.db.filtering.cantBattle = not self.db.filtering.cantBattle
-							PetJournalEnhanced:UpdatePets()
-						end 
-		info.checked = function() return self.db.filtering.cantBattle end;
-		info.isNotRadio = true;
-		UIDropDownMenu_AddButton(info, level)
-		
-		info.text = "Can Trade"
-		info.func = 	function(_, _, _, value)
-					
-					self.db.filtering.canTrade = not self.db.filtering.canTrade
-					PetJournalEnhanced:UpdatePets()
-				end 
-		info.checked = function() return self.db.filtering.canTrade end
-		UIDropDownMenu_AddButton(info, level)
-		
-		info.text = "Can't Trade"
-		info.func = 	function(_, _, _, value)
-					
-					self.db.filtering.cantTrade = not self.db.filtering.cantTrade
-					PetJournalEnhanced:UpdatePets()
-				end 
-		info.checked = function() return self.db.filtering.cantTrade end
-		UIDropDownMenu_AddButton(info, level)
 		
 		info.text = "Filter pets by current zone"
 		info.func = 	function(_, _, _, value)
@@ -112,6 +78,18 @@ function Hooked:CreateDropdownMenu(level)
 		info.text = SOURCES
 		info.value = 2;
 		UIDropDownMenu_AddButton(info, level)
+		
+		info.text = "Miscellaneous Filter"
+		info.value = 10;
+		UIDropDownMenu_AddButton(info, level)		
+		
+		info.text = "Level Filter"
+		info.value = 11;
+		UIDropDownMenu_AddButton(info, level)	
+		
+		info.text = "Ability Type Filter"
+		info.value = 12;
+		UIDropDownMenu_AddButton(info, level)	
 		
 		info.text = "Zones"
 		info.value = 3;
@@ -192,6 +170,153 @@ function Hooked:CreateDropdownMenu(level)
 				UIDropDownMenu_AddButton(info, level)
 				
 			end	
+		elseif UIDROPDOWNMENU_MENU_VALUE == 11 then -- Level filter
+			
+			info.notCheckable = true;
+			info.text = CHECK_ALL
+			info.func = function()
+					for i=1,#self.db.filtering.level	do 
+						self.db.filtering.level[i] = true
+					end
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = UNCHECK_ALL
+			info.func = function()
+							for i=1,#self.db.filtering.level	do 
+								self.db.filtering.level[i] = false
+							end
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+							PetJournalEnhanced:UpdatePets()
+						end
+			UIDropDownMenu_AddButton(info, level)
+			
+			
+			info.notCheckable = false;	
+			info.keepShownOnClick = true
+			info.checked = false
+			info.isNotRadio = true
+			
+			local levelBrackets = {"1-10","11-20","21-24","25"};
+			for i=1,#levelBrackets do
+				info.text = levelBrackets[i]
+				info.func = 	function(_, _, _, value)
+									self.db.filtering.level[i] = not self.db.filtering.level[i]
+									PetJournalEnhanced:UpdatePets()
+								end 
+				info.checked = function() return self.db.filtering.level[i] end;
+				info.isNotRadio = true;
+				UIDropDownMenu_AddButton(info, level)
+			end
+			
+			
+		
+		elseif UIDROPDOWNMENU_MENU_VALUE == 10 then -- misc filter
+			
+			info.notCheckable = true;
+			info.text = CHECK_ALL
+			info.func = function()
+					self.db.filtering.canBattle = true
+					self.db.filtering.cantBattle = true
+					self.db.filtering.canTrade = true
+					self.db.filtering.cantTrade = true
+					
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = UNCHECK_ALL
+			info.func = function()
+					self.db.filtering.canBattle = false
+					self.db.filtering.cantBattle = false
+					self.db.filtering.canTrade = false
+					self.db.filtering.cantTrade = false
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.notCheckable = false;	
+			info.keepShownOnClick = true
+			info.checked = false
+			info.isNotRadio = true
+			
+			info.text = "Can Battle"
+			info.func = 	function(_, _, _, value)
+								self.db.filtering.canBattle = not self.db.filtering.canBattle
+								PetJournalEnhanced:UpdatePets()
+							end 
+			info.checked = function() return self.db.filtering.canBattle end;
+			info.isNotRadio = true;
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = "Can't Battle"
+			info.func = 	function(_, _, _, value)
+								self.db.filtering.cantBattle = not self.db.filtering.cantBattle
+								PetJournalEnhanced:UpdatePets()
+							end 
+			info.checked = function() return self.db.filtering.cantBattle end;
+			info.isNotRadio = true;
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = "Can Trade"
+			info.func = 	function(_, _, _, value)
+						
+						self.db.filtering.canTrade = not self.db.filtering.canTrade
+						PetJournalEnhanced:UpdatePets()
+					end 
+			info.checked = function() return self.db.filtering.canTrade end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = "Can't Trade"
+			info.func = 	function(_, _, _, value)
+						
+						self.db.filtering.cantTrade = not self.db.filtering.cantTrade
+						PetJournalEnhanced:UpdatePets()
+					end 
+			info.checked = function() return self.db.filtering.cantTrade end
+			UIDropDownMenu_AddButton(info, level)
+		elseif UIDROPDOWNMENU_MENU_VALUE == 12 then -- ability type filter
+			
+			info.notCheckable = true;
+			info.text = CHECK_ALL
+			info.func = function()
+					for i=1,#self.db.filtering.abilityType	do 
+						self.db.filtering.abilityType[i] = true
+					end
+					UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+					PetJournalEnhanced:UpdatePets()
+				end
+			UIDropDownMenu_AddButton(info, level)
+			
+			info.text = UNCHECK_ALL
+			info.func = function()
+							for i=1,#self.db.filtering.abilityType	do 
+								self.db.filtering.abilityType[i] = false
+							end
+							UIDropDownMenu_Refresh(PetJournalFilterDropDown,1,2)
+							PetJournalEnhanced:UpdatePets()
+						end
+			UIDropDownMenu_AddButton(info, level)
+			
+			for i=1, #PET_TYPE_SUFFIX do
+				info.notCheckable = false;	
+				info.keepShownOnClick = true
+				info.checked = false
+				info.isNotRadio = true
+				info.text = PET_TYPE_SUFFIX[i]
+				info.func = function(_, _, _, value)
+							self.db.filtering.abilityType[i] = not self.db.filtering.abilityType[i]
+							PetJournalEnhanced:UpdatePets()
+						end 
+				info.checked = function() return self.db.filtering.abilityType[i] end
+				UIDropDownMenu_AddButton(info, level)
+			end
+			
+		
 		elseif UIDROPDOWNMENU_MENU_VALUE == 8 then --quantity
 			info.notCheckable = true;
 			info.text = CHECK_ALL
