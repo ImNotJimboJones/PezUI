@@ -249,7 +249,7 @@ end
 
 --
 local function VUHDO_getKiloText(aNumber)
-	return aNumber > 99500 and format("%.0fk", aNumber * 0.001)
+	return aNumber > 99500 and format("%dk", aNumber * 0.001)
 		or aNumber > 9500 and format("%.1fk", aNumber * 0.001)
 		or aNumber;
 end

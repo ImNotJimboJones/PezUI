@@ -32,6 +32,9 @@ local GetSpellBookItemInfo = GetSpellBookItemInfo;
 local CheckInteractDistance = CheckInteractDistance;
 --local UnitIsTrivial = UnitIsTrivial;
 local UnitIsUnit = UnitIsUnit;
+local IsAltKeyDown = IsAltKeyDown;
+local IsControlKeyDown = IsControlKeyDown;
+local IsShiftKeyDown = IsShiftKeyDown;
 local VUHDO_atan2 = math.atan2;
 local VUHDO_PI, VUHDO_2_PI = math.pi, math.pi * 2;
 local pairs = pairs;
@@ -562,11 +565,14 @@ function VUHDO_getUnitButtons(aUnit)
 end
 
 
+function VUHDO_getUnitButtonsSafe(aUnit)
+	return VUHDO_UNIT_BUTTONS[aUnit] or sEmpty;
+end
+
 
 --
-local tEmpty = { };
 function VUHDO_getUnitButtonsPanel(aUnit, aPanelNum)
-	return (VUHDO_UNIT_BUTTONS_PANEL[aUnit] or tEmpty)[aPanelNum];
+	return (VUHDO_UNIT_BUTTONS_PANEL[aUnit] or sEmpty)[aPanelNum] or sEmpty;
 end
 
 

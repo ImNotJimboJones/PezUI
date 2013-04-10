@@ -242,15 +242,11 @@ function VUHDO_buildRaidFromMacro()
 	  tStrIdx = tCnt * 3 - 1;
 		tSnippet = strsub(tMacroGroups, tStrIdx, tStrIdx + 2);
 		if ((tSnippet or VUHDO_EMPTY_SNIPPET) ~= VUHDO_EMPTY_SNIPPET) then
-			if (tCnt == 41) then -- VUHDO_MAX_MACRO_UNITS
-				tUnit = "player";
-			elseif (tCnt == 82) then -- VUHDO_MAX_MACRO_UNITS * 2
-				tUnit = "pet";
-			elseif (tCnt > 41) then -- VUHDO_MAX_MACRO_UNITS
-				tUnit = format("%spet%d", tPrefix, tCnt - 41);
-			else
-				tUnit = format("%s%d", tPrefix, tCnt);
-			end
+
+			tUnit = tCnt == 41 and "player"
+				or tCnt == 82 and "pet"
+				or tCnt > 41 and format("%spet%d", tPrefix, tCnt - 41)
+				or format("%s%d", tPrefix, tCnt);
 
 			tName = strsub(tMacroNames, tStrIdx, tStrIdx + 2);
 			VUHDO_buildInfoFromSnippet(tUnit, tSnippet, tName);

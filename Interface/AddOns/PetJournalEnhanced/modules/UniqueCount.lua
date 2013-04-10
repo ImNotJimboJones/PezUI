@@ -1,6 +1,10 @@
 local UniquePets = PetJournalEnhanced:NewModule("UniquePets","AceEvent-3.0")
 local LibPetJournal = LibStub("LibPetJournal-2.0")
 local _
+local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
+local UNIQUE_PETS = L["Unique Pets"]
+
+
 --Call back handler for updating unique pet count
 function UniquePets:ScanPets()
 	local pets = {}
@@ -31,7 +35,7 @@ function UniquePets:Initialize(database)
 	frame.staticText:ClearAllPoints()
 	frame.staticText:SetPoint("LEFT",frame,10,0)
 	--frame.staticText:SetPoint("RIGHT",frame.uniqueCount,"LEFT",-3,0)
-	frame.staticText:SetText("Unique Pets")
+	frame.staticText:SetText(UNIQUE_PETS)
 	
 	frame.uniqueCount:ClearAllPoints()
 	frame.uniqueCount:SetPoint("RIGHT",frame,-10,0)

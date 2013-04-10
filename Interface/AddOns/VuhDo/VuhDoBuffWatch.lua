@@ -780,7 +780,6 @@ local function VUHDO_setBuffSwatchTimer(aSwatchName, aSecsNum, aCount)
 	if ((aSecsNum or -1) >= 0) then
 		tCountStr = ((aCount or 0) > 0 and not VUHDO_BUFF_SETTINGS["CONFIG"]["HIDE_CHARGES"])
 			and format("|cffffffff%dx |r", aCount) or "";
-
 		_G[aSwatchName .. "TimerLabelLabel"]:SetText(format("%s%d:%02d", tCountStr, aSecsNum / 60, aSecsNum % 60));
 	else
 		_G[aSwatchName .. "TimerLabelLabel"]:SetText("");

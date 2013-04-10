@@ -56,8 +56,6 @@ function VUHDO_initAddonMessages()
 	if (not IsAddonMessagePrefixRegistered(VUHDO_COMMS_PREFIX)) then
 		RegisterAddonMessagePrefix(VUHDO_COMMS_PREFIX);
 	end
-
-	--VUHDO_xMsg(unpack(GetRegisteredAddonMessagePrefixes()));
 end
 
 
@@ -207,31 +205,11 @@ end
 
 --
 function VUHDO_initButtonFacade(anInstance)
-	if (VUHDO_CONFIG["IS_USE_BUTTON_FACADE"]) then
-		VUHDO_LibButtonFacade = LibStub("Masque", true);
-	else
-		VUHDO_LibButtonFacade = nil;
-	end
+	VUHDO_LibButtonFacade = VUHDO_CONFIG["IS_USE_BUTTON_FACADE"]
+		and LibStub("Masque", true) or nil;
 
 	if (VUHDO_LibButtonFacade ~= nil) then
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_BUFF_WATCH);
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_HOTS);
 	end
 end
-
-
-
-
---local VUHDO_TROUBLE_ADDONS = {
- --["SnowfallKeyPress"] = VUHDO_I18N_MAY_CAUSE_LAGS,
---}
-
---
---[[function VUHDO_checkForTroublesomeAddons()
-	for tName, tReason in pairs(VUHDO_TROUBLE_ADDONS) do
-		if (IsAddOnLoaded(tName)) then
-			VUHDO_Msg(format(VUHDO_I18N_ADDON_WARNING, tName, tReason), 1, 0.4, 0.4);
-		end
-	end
-end
-]]

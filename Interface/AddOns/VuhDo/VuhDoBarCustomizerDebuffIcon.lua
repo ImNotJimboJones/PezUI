@@ -15,6 +15,7 @@ local huge = math.huge;
 local _G = getfenv();
 
 local VUHDO_getUnitButtons;
+local VUHDO_getUnitButtonsSafe;
 local VUHDO_getBarIconTimer
 local VUHDO_getBarIconCounter;
 local VUHDO_getBarIconFrame;
@@ -38,6 +39,7 @@ function VUHDO_customDebuffIconsInitBurst()
 	VUHDO_getBarIcon = _G["VUHDO_getBarIcon"];
 	VUHDO_getBarIconName = _G["VUHDO_getBarIconName"];
 	VUHDO_getShieldPerc = _G["VUHDO_getShieldPerc"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
 
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	sCuDeStoredSettings = VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"];
@@ -134,24 +136,20 @@ end
 
 
 --
-local tAllButtons;
 local tNow;
 function VUHDO_updateAllDebuffIcons(anIsFrequent)
 	tNow = GetTime();
 
 	for tUnit, tAllDebuffInfos in pairs(VUHDO_DEBUFF_ICONS) do
-		tAllButtons = VUHDO_getUnitButtons(tUnit);
-		if (tAllButtons ~= nil) then
 
-			for tIndex, tDebuffInfo in pairs(tAllDebuffInfos) do
-				if (not anIsFrequent or (anIsFrequent and tDebuffInfo[2] + 1.21 >= tNow)) then
-					for _, tButton in pairs(tAllButtons) do
-						VUHDO_animateDebuffIcon(tButton, tDebuffInfo, tNow, tIndex + 39, false, tUnit);
-					end
+		for tIndex, tDebuffInfo in pairs(tAllDebuffInfos) do
+			if (not anIsFrequent or (anIsFrequent and tDebuffInfo[2] + 1.21 >= tNow)) then
+				for _, tButton in pairs(VUHDO_getUnitButtonsSafe(tUnit)) do
+					VUHDO_animateDebuffIcon(tButton, tDebuffInfo, tNow, tIndex + 39, false, tUnit);
 				end
 			end
-
 		end
+
 	end
 end
 
@@ -161,7 +159,7 @@ end
 local tSlot;
 local tOldest;
 local tTimestamp;
-local tAllButtons, tFrame, tIconInfo;
+local tFrame, tIconInfo;
 function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration, anIsBuff)
 	if (VUHDO_DEBUFF_ICONS[aUnit] == nil) then
 		VUHDO_DEBUFF_ICONS[aUnit] = { };
@@ -184,13 +182,10 @@ function VUHDO_addDebuffIcon(aUnit, anIcon, aName, anExpiry, aStacks, aDuration,
 	tIconInfo = { anIcon, -1, aName, anExpiry, aStacks, aDuration };
 	VUHDO_DEBUFF_ICONS[aUnit][tSlot] = tIconInfo;
 
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			VUHDO_animateDebuffIcon(tButton, tIconInfo, GetTime(), tSlot + 39, true, aUnit);
-			tFrame = VUHDO_getBarIconFrame(tButton, tSlot + 39);
-			tFrame["debuffInfo"], tFrame["isBuff"] = aName, anIsBuff;
-		end
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		VUHDO_animateDebuffIcon(tButton, tIconInfo, GetTime(), tSlot + 39, true, aUnit);
+		tFrame = VUHDO_getBarIconFrame(tButton, tSlot + 39);
+		tFrame["debuffInfo"], tFrame["isBuff"] = aName, anIsBuff;
 	end
 	tIconInfo[2] = GetTime();
 

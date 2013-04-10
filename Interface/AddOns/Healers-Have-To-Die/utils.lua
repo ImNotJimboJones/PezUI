@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.1b
+Version 2.1.2
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -39,6 +39,7 @@ local table     = _G.table;
 local select    = _G.select;
 local type      = _G.type;
 local date      = _G.date;
+local debugstack= _G.debugstack;
 
 function HHTD:MakePlayerName (name) --{{{
     if not name then name = "NONAME" end
@@ -157,9 +158,18 @@ do
     }
     local select, type = _G.select, _G.type;
     function HHTD:Debug(...)
+
+        -- if Decursive is loaded then use its debug report facility...
+        if (...) == ERROR and DecursiveRootTable then
+            local message = {'HHTD Debug error:', select(2, ...)};
+            message[#message + 1] = '\nSTACK:\n' .. debugstack(2);
+            DecursiveRootTable._HHTDErrors = DecursiveRootTable._HHTDErrors + 1;
+            DecursiveRootTable._AddDebugText(unpack(message));
+        end
+
         if not HHTD.db.global.Debug then return end;
 
-        local template = type((select(1,...))) == "number" and (select(1, ...)) or false;
+        local template = type((...)) == "number" and (...) or false;
 
         if HHTD.db.global.DebugLevel and HHTD.db.global.DebugLevel > Debug_Levels[template] then
             return;
@@ -288,7 +298,7 @@ function HHTD:Hickup(mul)
         t = t + 1
     end
 
-    self:Debug(ERROR, 'Hickup ', t);
+    self:Debug(WARNING, 'Hickup ', t);
 end
 --@end-debug@]===]
 
@@ -313,4 +323,21 @@ function HHTD:FatalError (TheError)
     StaticPopup_Show ("HHTD_ERROR_FRAME", TheError);
 end
 
+function HHTD:GetBAddon (StackLevel)
+    local stack = debugstack(1 + StackLevel,1,1);
+    if not stack:lower():find("\\libs\\")
+        and not stack:find("[/\\]CallbackHandler")
+        and not stack:find("[/\\]AceTimer")
+        and not stack:find("[/\\]AceHook")
+        and not stack:find("[/\\]AceEvent") then
 
+        if stack:find("[/\\]Healers-Have-To-Die") then
+            self:Debug(ERROR, "GetBAddon failed!"); -- XXX to test
+            return false;
+        end
+
+        return stack:match("[/\\]AddOns[/\\]([^/\\]+)[/\\]");
+    else
+        return false;
+    end
+end

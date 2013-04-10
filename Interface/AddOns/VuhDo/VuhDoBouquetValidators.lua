@@ -262,13 +262,14 @@ local function VUHDO_debuffCurseValidator(anInfo, _)
 end
 
 
-
+-- return tIsActive, tIcon, tTimer, tCounter, tDuration, tColor, tTimer2, clipLeft, clipRight, clipTop, clipBottom
+local tDebuffInfo;
 local function VUHDO_debuffBarColorValidator(anInfo, _)
 	if (anInfo["charmed"]) then
 		return true, nil, -1, -1, -1, VUHDO_getDebuffColor(anInfo);
 	elseif (0 ~= anInfo["debuff"]) then -- VUHDO_DEBUFF_TYPE_NONE
 		tDebuffInfo = VUHDO_getChosenDebuffInfo(anInfo["unit"]);
-		return true, tDebuffInfo[1], -1, tDebuffInfo[3], -1, VUHDO_getDebuffColor(anInfo);
+		return true, tDebuffInfo[1], -1, tDebuffInfo[2], -1, VUHDO_getDebuffColor(anInfo);
 	else
 		return false, nil, -1, -1, -1;
 	end

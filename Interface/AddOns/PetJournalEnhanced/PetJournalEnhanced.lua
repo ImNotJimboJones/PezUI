@@ -1,5 +1,4 @@
 --Constants
-local SETTINGS_VERSION = 22
 local MAX_BALANCED = 1
 local MAX_SPEED = 2
 local MAX_STAMINA = 3
@@ -11,10 +10,8 @@ local USER = nil
 
 local _
 local breedInfo = LibStub("LibPetBreedInfo-1.0")
-
-
-
 PetJournalEnhanced = LibStub("AceAddon-3.0"):NewAddon("PetJournalEnhanced","AceEvent-3.0")
+local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
 
 local function trim(s)
   return s:match'^%s*(.*%S)' or ''
@@ -119,7 +116,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 		args = {
 			showPetCount = {
 				order = 1,
-				name = "Show unique pet count",
+				name = L["Show unique pet count"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -130,7 +127,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			showMaxStat = {
 				order = 2,
-				name = "Show pets specialization",
+				name = L["Show pets specialization"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -145,7 +142,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			colorBorders = {
 				order = 3,
-				name = "Color pet borders",
+				name = L["Color pet borders"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -156,7 +153,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			colorName = {
 				order = 4,
-				name = "Color pet names",
+				name = L["Color pet names"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -167,7 +164,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			breedInfo = {
 				order = 5,
-				name = "Display pet breed",
+				name = L["Display pet breed"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -178,7 +175,7 @@ function PetJournalEnhanced:CreateOptionsMenu()
 			},
 			level25Stats = {
 				order = 5,
-				name = "Display predicted pet stats",
+				name = L["Display predicted pet stats"],
 				type = "toggle",
 				width = "double",
 				set = function(info,val) 
@@ -551,7 +548,7 @@ end
 
 StaticPopupDialogs["PJE_PET_THEORY_WARNING"] = {
 	preferredIndex = STATICPOPUP_NUMDIALOGS,
-	text = "Warning:|nPetJournal Enhanced is not compatible with Pet Theory.|nPlease Uninstall either PetJournal Enhanced or Pet Theory",
+	text = L["PET_THEORY_WARNING"],
 	button1 = OKAY,
 	timeout = 0,
 	exclusive = 1,

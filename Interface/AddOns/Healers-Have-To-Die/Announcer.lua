@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.1b
+Version 2.1.2
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -233,7 +233,7 @@ local previousUnitGuid;
 function Announcer:HHTD_HEALER_MOUSE_OVER(selfevent, isFriend, healerProfile)
 
     if isFriend then
-        return; -- XXX
+        return;
     end
 
     if previousUnitGuid ~= healerProfile.guid then
@@ -257,7 +257,7 @@ end
 function Announcer:HHTD_TARGET_LOCKED (selfevent, isFriend, healerProfile)
 
     if isFriend then
-        return; -- XXX
+        return;
     end
 
     self:PlaySoundFile("Sound\\interface\\AuctionWindowOpen.wav");

@@ -16,9 +16,8 @@ local VUHDO_updateTargetBars;
 local VUHDO_updateHealthBarsFor;
 local VUHDO_updateAllRaidBars;
 local VUHDO_initAllEventBouquets;
-local VUHDO_getUnitButtons;
+local VUHDO_getUnitButtonsSafe;
 local VUHDO_getPlayerTargetFrame;
-
 
 --
 function VUHDO_playerTargetEventHandlerInitBurst()
@@ -34,7 +33,7 @@ function VUHDO_playerTargetEventHandlerInitBurst()
 	VUHDO_updateHealthBarsFor = _G["VUHDO_updateHealthBarsFor"];
 	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
 	VUHDO_initAllEventBouquets = _G["VUHDO_initAllEventBouquets"];
-	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
 	VUHDO_getPlayerTargetFrame = _G["VUHDO_getPlayerTargetFrame"];
 end
 
@@ -89,19 +88,16 @@ end
 
 
 --
-local tAllButtons, tBorder;
+local tBorder;
 function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact)
-	tAllButtons =  VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		if (aColor ~= nil) then
 			tBorder = VUHDO_getPlayerTargetFrame(tButton);
-			if (aColor ~= nil) then
-				tBorder:SetFrameLevel(tButton:GetFrameLevel() + (anImpact or 0) + 2);
-				tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
-				tBorder:Show();
-			else
-				tBorder:Hide();
-			end
+			tBorder:SetFrameLevel(tButton:GetFrameLevel() + (anImpact or 0) + 2);
+			tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
+			tBorder:Show();
+		else
+			VUHDO_getPlayerTargetFrame(tButton):Hide();
 		end
 	end
 end

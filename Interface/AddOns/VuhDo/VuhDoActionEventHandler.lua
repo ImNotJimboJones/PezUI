@@ -2,9 +2,6 @@ local _;
 
 local VUHDO_IS_SMART_CAST = false;
 
-local IsAltKeyDown = IsAltKeyDown;
-local IsControlKeyDown = IsControlKeyDown;
-local IsShiftKeyDown = IsShiftKeyDown;
 local SecureButton_GetButtonSuffix = SecureButton_GetButtonSuffix;
 local InCombatLockdown = InCombatLockdown;
 local strlower = strlower;
@@ -13,7 +10,6 @@ local pairs = pairs;
 local GameTooltip = GameTooltip;
 
 local sMouseoverUnit = nil;
-
 
 
 local VUHDO_updateBouquetsForEvent;
@@ -25,13 +21,13 @@ local VUHDO_removeAllClusterHighlights;
 local VUHDO_getHealthBar;
 local VUHDO_setupSmartCast;
 local VUHDO_updateDirectionFrame;
-local VUHDO_getPanelButtons;
+local VUHDO_getCurrentKeyModifierString;
 
 
 
 local VUHDO_SPELL_CONFIG;
 local VUHDO_SPELL_ASSIGNMENTS;
-local VUHDO_getUnitButtons;
+local VUHDO_getUnitButtonsSafe;
 local VUHDO_CONFIG;
 local VUHDO_INTERNAL_TOGGLES;
 local VUHDO_RAID;
@@ -45,14 +41,14 @@ function VUHDO_actionEventHandlerInitBurst()
 	VUHDO_getHealthBar = _G["VUHDO_getHealthBar"];
 	VUHDO_setupSmartCast = _G["VUHDO_setupSmartCast"];
 	VUHDO_updateDirectionFrame = _G["VUHDO_updateDirectionFrame"];
-	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
+	VUHDO_getCurrentKeyModifierString = _G["VUHDO_getCurrentKeyModifierString"];
 
 	VUHDO_SPELL_CONFIG = _G["VUHDO_SPELL_CONFIG"];
 	VUHDO_SPELL_ASSIGNMENTS = _G["VUHDO_SPELL_ASSIGNMENTS"];
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	VUHDO_INTERNAL_TOGGLES = _G["VUHDO_INTERNAL_TOGGLES"];
 	VUHDO_RAID = _G["VUHDO_RAID"];
-	VUHDO_getPanelButtons = _G["VUHDO_getPanelButtons"];
 end
 
 
@@ -65,16 +61,16 @@ end
 
 
 --
-local anIcon, tFrame;
 local function VUHDO_placePlayerIcon(aButton, anIconNo, anIndex)
 	VUHDO_getBarIconTimer(aButton, anIconNo):SetText("");
 	VUHDO_getBarIconCounter(aButton, anIconNo):SetText("");
 	VUHDO_getBarIconCharge(aButton, anIconNo):Hide();
-	tFrame = VUHDO_getBarIconFrame(aButton, anIconNo);
+
+	local tFrame = VUHDO_getBarIconFrame(aButton, anIconNo);
 	tFrame:SetScale(1);
 	tFrame:Show();
 
-	anIcon = VUHDO_getBarIcon(aButton, anIconNo);
+	local anIcon = VUHDO_getBarIcon(aButton, anIconNo);
 	anIcon:ClearAllPoints();
 	if (anIndex == 2) then
 		anIcon:SetPoint("CENTER", aButton:GetName(), "TOPRIGHT", -5, -10);
@@ -120,74 +116,58 @@ function VUHDO_getUnitGroupPrivileges(aUnit)
 
 	return tIsLeader, tIsAssist, tIsMasterLooter;
 end
-local VUHDO_getUnitGroupPrivileges = VUHDO_getUnitGroupPrivileges;
 
 
 
 --
-local tUnit;
-local tIsLeader;
-local tIsAssist;
-local tIsMasterLooter;
-local tInfo;
-local tClass;
-local tRole;
 local function VUHDO_showPlayerIcons(aButton, aPanelNum)
-	tUnit = aButton:GetAttribute("unit");
+	local tUnit = aButton:GetAttribute("unit");
 
-	tInfo = VUHDO_RAID[tUnit];
+	local tInfo = VUHDO_RAID[tUnit];
 
 	if (tInfo == nil) then
 		return;
 	end
 
-	local tIcon;
 
-	tIsLeader, tIsAssist, tIsMasterLooter = VUHDO_getUnitGroupPrivileges(tUnit);
-	if (tIsLeader) then
-		tIcon = VUHDO_getBarIcon(aButton, 1);
-		tIcon:SetTexture("Interface\\groupframe\\ui-group-leadericon");
-		VUHDO_placePlayerIcon(aButton, 1, 0);
-	elseif (tIsAssist) then
-		tIcon = VUHDO_getBarIcon(aButton, 1);
-		tIcon:SetTexture("Interface\\groupframe\\ui-group-assistanticon");
+	local tIsLeader, tIsAssist, tIsMasterLooter = VUHDO_getUnitGroupPrivileges(tUnit);
+	if (tIsLeader or tIsAssist) then
+		VUHDO_getBarIcon(aButton, 1):SetTexture(
+			"Interface\\groupframe\\" .. (tIsLeader and "ui-group-leadericon" or "ui-group-assistanticon"));
 		VUHDO_placePlayerIcon(aButton, 1, 0);
 	end
 
 	if (tIsMasterLooter) then
-		tIcon = VUHDO_getBarIcon(aButton, 2);
-		tIcon:SetTexture("Interface\\groupframe\\ui-group-masterlooter");
+		VUHDO_getBarIcon(aButton, 2):SetTexture("Interface\\groupframe\\ui-group-masterlooter");
 		VUHDO_placePlayerIcon(aButton, 2, 1);
 	end
 
+	local tIcon;
 	if (UnitIsPVP(tUnit) and VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] > 54) then
 		tIcon = VUHDO_getBarIcon(aButton, 3);
-		tIcon:SetTexture("Alliance" == (UnitFactionGroup(tUnit))
-			and "Interface\\groupframe\\ui-group-pvp-alliance"
-			or "Interface\\groupframe\\ui-group-pvp-horde");
+		tIcon:SetTexture("Interface\\groupframe\\"
+			.. ("Alliance" == (UnitFactionGroup(tUnit)) and "ui-group-pvp-alliance" or "ui-group-pvp-horde")
+		);
 
 		VUHDO_placePlayerIcon(aButton, 3, 2);
 		tIcon:SetWidth(32);
 		tIcon:SetHeight(32);
 	end
 
-	tClass = tInfo["class"];
-	if (tClass ~= nil) then
+	if (tInfo["class"] ~= nil) then
 		tIcon = VUHDO_getBarIcon(aButton, 4);
 		tIcon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
-		tIcon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[tClass]));
+		tIcon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[tInfo["class"]]));
 		VUHDO_placePlayerIcon(aButton, 4, 3);
 	end
 
-	tRole = tInfo["role"];
-	if (tRole ~= nil) then
+	if (tInfo["role"] ~= nil) then
 		tIcon = VUHDO_getBarIcon(aButton, 5);
 		tIcon:SetTexture("Interface\\LFGFrame\\UI-LFG-ICON-ROLES");
 		tIcon:SetTexCoord(GetTexCoordsForRole(
-			VUHDO_ID_MELEE_TANK == tRole and "TANK"
-			or VUHDO_ID_RANGED_HEAL == tRole and "HEALER"
-			or "DAMAGER"
-		));
+			VUHDO_ID_MELEE_TANK == tInfo["role"] and "TANK"
+			or VUHDO_ID_RANGED_HEAL == tInfo["role"] and "HEALER"	or "DAMAGER")
+		);
 		VUHDO_placePlayerIcon(aButton, 5, 5);
 	end
 end
@@ -195,14 +175,12 @@ end
 
 
 --
-local tAllButtons;
 function VUHDO_hideAllPlayerIcons()
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
 		VUHDO_initLocalVars(tPanelNum);
-		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
 
-		for _, tButton in pairs(tAllButtons) do
+		for _, tButton in pairs(VUHDO_getPanelButtons(tPanelNum)) do
 			if (tButton:IsShown()) then
 				VUHDO_initButtonStatics(tButton, tPanelNum);
 				VUHDO_initAllHotIcons();
@@ -222,9 +200,7 @@ local function VUHDO_showAllPlayerIcons(aPanel)
 	VUHDO_removeAllHots();
 	local tPanelNum = VUHDO_getPanelNum(aPanel);
 
-	local tAllButtons = VUHDO_getPanelButtons(tPanelNum);
-
-	for _, tButton in pairs(tAllButtons) do
+	for _, tButton in pairs(VUHDO_getPanelButtons(tPanelNum)) do
 		if (tButton:IsShown()) then
 			VUHDO_showPlayerIcons(tButton, tPanelNum);
 		end
@@ -320,19 +296,16 @@ end
 
 
 --
-local tAllButtons, tQuota, tHighlightBar;
+local tQuota, tHighlightBar;
 function VUHDO_highlighterBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (anIsActive or (aMaxValue or 0) > 1)	and 1 or 0;
 
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			tHighlightBar = VUHDO_getHealthBar(tButton, 8);
-			if (aColor ~= nil) then
-				tHighlightBar:SetVuhDoColor(aColor);
-			end
-			tHighlightBar:SetValue(tQuota);
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		tHighlightBar = VUHDO_getHealthBar(tButton, 8);
+		if (aColor ~= nil) then
+			tHighlightBar:SetVuhDoColor(aColor);
 		end
+		tHighlightBar:SetValue(tQuota);
 	end
 end
 

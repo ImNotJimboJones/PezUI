@@ -6,8 +6,11 @@ local MAX_STAMINA = 3
 local MAX_ATTACK = 4
 local _
 local Hooked = PetJournalEnhanced:NewModule("Hooked")
+local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
 local breedInfo = LibStub("LibPetBreedInfo-1.0")
 local rarityFormat = "|c%s%s|r"
+
+local AVAILABLE = "|n|cffffcc00"..L["Available"]..":"
 
 local function GetColor(confidence)
 	local color = "|cffffcc00"
@@ -164,7 +167,7 @@ function Hooked.PetJournal_UpdatePetCard(self)
 				tinsert(stringBuilder,breedName)
 			end
 			
-			tinsert(stringBuilder,"|n|cffffcc00Available:")
+			tinsert(stringBuilder,AVAILABLE)
 			tinsert(stringBuilder,availableBreedsText)
 			
 			

@@ -1228,7 +1228,14 @@ local tRaidCds = {
 
 	-- Hunter
 	19263, -- Deterrence
-	90361 -- Spirit Mend
+	90361, -- Spirit Mend
+
+	-- Monk
+	115203, -- Fortifying Brew
+	115213, -- Avert Harm
+	116849, -- Life Cocoon
+	122278, -- Dampen Harm
+	122783  -- Diffuse Magic
 };
 
 

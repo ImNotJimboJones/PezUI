@@ -23,6 +23,7 @@ local VUHDO_LibSharedMedia;
 local VUHDO_getActionPanel;
 local VUHDO_getPanelButtons;
 local VUHDO_getHealthBarText;
+local VUHDO_getUnitButtonsSafe;
 
 -----------------------------------------------------------------------
 --local VUHDO_getNumbersFromString;
@@ -40,6 +41,7 @@ function VUHDO_guiToolboxInitBurst()
 	VUHDO_getActionPanel = _G["VUHDO_getActionPanel"];
 	VUHDO_getPanelButtons = _G["VUHDO_getPanelButtons"];
 	VUHDO_getHealthBarText = _G["VUHDO_getHealthBarText"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
 
 	sIsManaBar = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["MANA_BAR"] ~= "";
 	sIsSideBarLeft = VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SIDE_LEFT"] ~= "";
@@ -62,15 +64,14 @@ local VUHDO_isConfigPanelShowing = VUHDO_isConfigPanelShowing;
 
 
 --
-local tButtons, tUnit;
+local tUnit;
 local function VUHDO_hasPanelVisibleButtons(aPanelNum)
 	if (not sShowPanels or not VUHDO_IS_SHOWN_BY_GROUP) then
 		return false;
 	elseif (not sHideEmptyAndClickThrough or VUHDO_isConfigPanelShowing()) then
 		return true;
 	else
-		tButtons = VUHDO_getPanelButtons(aPanelNum);
-		for _, tButton in pairs(tButtons) do
+		for _, tButton in pairs(VUHDO_getPanelButtons(aPanelNum)) do
 			tUnit = tButton:GetAttribute("unit");
 			if (tUnit == nil) then
 				return false;
@@ -991,13 +992,8 @@ end
 
 
 --
-local tAllButtons;
 function VUHDO_indicatorTextCallback(aBarNum, aUnit, aPanelNum, aProviderName, aText, aValue)
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			VUHDO_getHealthBarText(tButton, aBarNum):SetText(aText);
-		end
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		VUHDO_getHealthBarText(tButton, aBarNum):SetText(aText);
 	end
 end

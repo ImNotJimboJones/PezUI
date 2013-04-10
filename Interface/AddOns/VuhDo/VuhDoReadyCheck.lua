@@ -26,12 +26,9 @@ end
 
 --
 local function VUHDO_placeAllReadyIcons()
-	local tAllButtons;
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
-		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
-
-		for _, tButton in pairs(tAllButtons) do
+		for _, tButton in pairs(VUHDO_getPanelButtons(tPanelNum)) do
 			if (tButton:GetAttribute("unit") ~= nil) then
 				VUHDO_placeReadyIcon(tButton);
 			else
@@ -48,9 +45,7 @@ local function VUHDO_hideAllReadyIcons()
 	local tAllButtons;
 
 	for tPanelNum = 1, VUHDO_MAX_PANELS do
-		tAllButtons = VUHDO_getPanelButtons(tPanelNum);
-
-		for _, tButton in pairs(tAllButtons) do
+		for _, tButton in pairs(VUHDO_getPanelButtons(tPanelNum)) do
 			if (tButton:GetAttribute("unit") ~= nil) then
 				VUHDO_UIFrameFlash(VUHDO_getBarRoleIcon(tButton, 20), 0, 2, 10, false, 0, 8);
 			else
@@ -73,14 +68,10 @@ end
 
 -- Status true = ready, nil = not ready
 local function VUHDO_updateReadyIcon(aUnit, anIsReady)
-	local tAllButtons = VUHDO_getUnitButtons(aUnit) or { };
-
-	local tTexture = anIsReady
-		and "Interface\\AddOns\\VuhDo\\Images\\icon_check_2"
-		or "Interface\\AddOns\\VuhDo\\Images\\icon_cancel_1";
-
-	for _, tButton in pairs(tAllButtons) do
-		VUHDO_getBarRoleIcon(tButton, 20):SetTexture(tTexture);
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		VUHDO_getBarRoleIcon(tButton, 20):SetTexture(
+			"Interface\\AddOns\\VuhDo\\Images\\" .. (anIsReady and "icon_check_2" or "icon_cancel_1")
+		);
 	end
 end
 

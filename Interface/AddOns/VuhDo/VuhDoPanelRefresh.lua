@@ -264,6 +264,7 @@ function VUHDO_refreshUiNoMembers()
 		VUHDO_rebuildTargets();
 	end
 	VUHDO_initAllEventBouquets();
+	VUHDO_resetDebuffIconDispenser();
 end
 local VUHDO_refreshUiNoMembers = VUHDO_refreshUiNoMembers;
 

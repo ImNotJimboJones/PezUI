@@ -15,6 +15,7 @@ local sClipL, sClipR, sClipT, sClipB = 0, 1, 0, 1;
 
 local sIsPlayerKnowsSwiftmend = false;
 local sSwiftmendUnits = { };
+local sEmpty = { };
 
 VUHDO_MY_HOTS = { };
 local VUHDO_MY_HOTS = VUHDO_MY_HOTS;
@@ -442,11 +443,8 @@ end
 
 
 --
-local tAllButtons;
 function VUHDO_removeHots(aUnit)
-	tAllButtons = VUHDO_getUnitButtons(aUnit) or {};
-
-	for _, tButton in pairs(tAllButtons) do
+	for _, tButton in pairs(VUHDO_getUnitButtons(aUnit) or sEmpty) do
 		VUHDO_removeButtonHots(tButton);
 	end
 end
@@ -697,20 +695,17 @@ end
 
 
 --
-local tAllButtons, tIcon;
+local tIcon;
 function VUHDO_swiftmendIndicatorBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact, aTimer2, aClipL, aClipR, aClipT, aClipB)
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			if (anIsActive and aColor ~= nil) then
-				tIcon = VUHDO_getBarRoleIcon(tButton, 51);
-				tIcon:SetTexture(anIcon);
-				tIcon:SetVertexColor(VUHDO_backColor(aColor));
-				tIcon:SetTexCoord(aClipL or 0, aClipR or 1, aClipT or 0, aClipB or 1);
-				tIcon:Show();
-			else
-				VUHDO_getBarRoleIcon(tButton, 51):Hide();
-			end
+	for _, tButton in pairs(VUHDO_getUnitButtons(aUnit) or sEmpty) do
+		if (anIsActive and aColor ~= nil) then
+			tIcon = VUHDO_getBarRoleIcon(tButton, 51);
+			tIcon:SetTexture(anIcon);
+			tIcon:SetVertexColor(VUHDO_backColor(aColor));
+			tIcon:SetTexCoord(aClipL or 0, aClipR or 1, aClipT or 0, aClipB or 1);
+			tIcon:Show();
+		else
+			VUHDO_getBarRoleIcon(tButton, 51):Hide();
 		end
 	end
 end

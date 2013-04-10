@@ -2672,7 +2672,7 @@
 <Frame name="VuhDoProgressBar" virtual="true" inherits="VuhDoStatusBar">
 	<Layers>
 		<Layer>
-			<FontString name="$parentLabel" text="Progress" inherits="VuDoDarkTitleFontTemplate">
+			<FontString name="$parentText" text="Please wait" inherits="VuDoDarkTitleFontTemplate">
 			</FontString>
 		</Layer>
 	</Layers>
@@ -2684,7 +2684,7 @@
 			self["SetProgress"] = function(self, aValue, aMaxValue)
 				local tPercent = aValue / aMaxValue;
 				self:SetValue(tPercent);
-				_G[self:GetName() .. "Label"]:SetText(" " .. floor(100 * tPercent) .. "%");
+				_G[self:GetName() .. "Text"]:SetText(" " .. floor(100 * tPercent) .. "%");
 			end
 		</OnLoad>
 	</Scripts>

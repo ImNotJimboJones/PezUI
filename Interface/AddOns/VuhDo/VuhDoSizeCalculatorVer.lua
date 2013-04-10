@@ -2,7 +2,6 @@
 local VUHDO_CONFIG;
 local VUHDO_PANEL_SETUP;
 
-local VUHDO_splitString;
 local VUHDO_isTableHeadersShowing;
 local VUHDO_isTableFootersShowing;
 local VUHDO_isLooseOrderingShowing;
@@ -19,7 +18,6 @@ function VUHDO_sizeCalculatorInitBurstVer()
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 
-	VUHDO_splitString = _G["VUHDO_splitString"];
 	VUHDO_isTableHeadersShowing = _G["VUHDO_isTableHeadersShowing"];
 	VUHDO_isTableFootersShowing = _G["VUHDO_isTableFootersShowing"];
 	VUHDO_isLooseOrderingShowing = _G["VUHDO_isLooseOrderingShowing"];

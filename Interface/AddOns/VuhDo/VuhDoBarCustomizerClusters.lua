@@ -14,7 +14,6 @@ local VUHDO_CLUSTER_UNIT = nil;
 local twipe = table.wipe;
 local pairs = pairs;
 
-
 local VUHDO_RAID = { };
 
 local VUHDO_getUnitsInRadialClusterWith;
@@ -27,6 +26,7 @@ local VUHDO_getBarIcon;
 local VUHDO_getBarIconTimer;
 local VUHDO_isInConeInFrontOf;
 local VUHDO_backColor;
+local VUHDO_getUnitButtonsSafe;
 
 local sHealthLimit;
 local sIsRaid;
@@ -56,6 +56,7 @@ function VUHDO_customClustersInitBurst()
 	VUHDO_getBarIconTimer = _G["VUHDO_getBarIconTimer"];
 	VUHDO_isInConeInFrontOf = _G["VUHDO_isInConeInFrontOf"];
 	VUHDO_backColor = _G["VUHDO_backColor"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
 
 	sClusterConfig = VUHDO_CONFIG["CLUSTER"];
 	sHealthLimit = sClusterConfig["BELOW_HEALTH_PERC"] * 0.01;
@@ -231,18 +232,15 @@ end
 
 
 --
-local tAllButtons, tBorder;
+local tBorder;
 function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
-	tAllButtons =  VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			tBorder = VUHDO_getClusterBorderFrame(tButton);
-			if (aColor ~= nil) then
-				tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
-				tBorder:Show();
-			else
-				tBorder:Hide();
-			end
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		tBorder = VUHDO_getClusterBorderFrame(tButton);
+		if (aColor ~= nil) then
+			tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
+			tBorder:Show();
+		else
+			tBorder:Hide();
 		end
 	end
 end

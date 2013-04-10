@@ -1,6 +1,13 @@
 Pack Command:  		zip -vr TP_Release.zip TidyPlates* -x@exclude.lst
 Exclusion List: 	*.svn*   *.DS_Store*   exclude.lst   *.db   *.png   *.gif   *.jpg   *.tif   *.txt   *.psd   *.bmp   
 
+6.9.8
+---------------------------
+- Hub: "By Threat" Color Modes will pass through enemy class colors, when available, and then use Reaction colors.  (NPC-Pets will continue to use the "By Threat" colors)
+- Hub: "By Threat" Warning Glow Mode now incorporates "By Enemy Healer", so it can be used for Pvp without changing config.
+* These changes may evolve into more situationally reactive configs... we'll see!
+- Widgets: HealerTrack: Should more reliably and quickly detect the spec of the enemy units.
+
 6.9.7
 ---------------------------
 - Fixed Tank Aura Watcher issue

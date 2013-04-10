@@ -68,7 +68,10 @@ local VUHDO_lnfCheckButtonClicked = VUHDO_lnfCheckButtonClicked;
 
 --
 function VUHDO_lnfRadioButtonClicked(aCheckButton)
-	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
+	local tButton;
+
+	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
+		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
 			tButton:SetChecked(aCheckButton == tButton);
 			VUHDO_lnfCheckButtonClicked(tButton);
@@ -80,10 +83,12 @@ end
 
 --
 function VUHDO_lnfTabRadioButtonClicked(aCheckButton)
+	local tButton;
 	VUHDO_lnfRadioButtonClicked(aCheckButton);
 
   -- Achtung: Zuerst verstecken dann erst anzeigen, damit OnShow/OnHide in der richtigen Reihenfolge kommt
-	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
+	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
+		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
 
 		if (tButton:IsObjectType("CheckButton")
 			and strfind(tButton:GetName(), "Radio", 1, true)
@@ -94,14 +99,15 @@ function VUHDO_lnfTabRadioButtonClicked(aCheckButton)
 	end
 
 	_G[aCheckButton["tabPanel"]]:Show();
-	collectgarbage('collect');
 end
 
 
 
 --
 function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
-	for _, tButton in pairs({ aCheckButton:GetParent():GetChildren() }) do
+	local tButton;
+	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
+		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
 		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
 			if (aCheckButton == tButton) then
 				tButton:SetChecked(true);
@@ -230,9 +236,8 @@ end
 
 
 --
-local tFocus;
 function VUHDO_lnfIsLastComboIten()
-	tFocus = GetMouseFocus();
+	local tFocus = GetMouseFocus();
 	return tFocus ~= nil and tFocus:GetName() == sLastComboItem;
 end
 
@@ -248,9 +253,8 @@ end
 
 
 --
-local tComboBox;
 function VUHDO_lnfComboItemOnEnter(aComboItem)
-	tComboBox = aComboItem.parentCombo;
+	local tComboBox = aComboItem.parentCombo;
 	if (IsMouseButtonDown() and not tComboBox.isMulti) then
 		VUHDO_lnfComboSetSelectedValue(tComboBox, aComboItem:GetAttribute("value"));
 	end
@@ -284,13 +288,13 @@ end
 --
 local function VUHDO_hideAllComponentExtensions(aComponent)
 	local tRootPane = aComponent:GetParent():GetParent();
-	local tAllSubPanes = { tRootPane:GetChildren() };
-	local tAllComponents;
-	local tSelectPanel;
+	local tSubPanel, tComponent;
 
-	for _, tSubPanel in pairs(tAllSubPanes) do
-		tAllComponents = { tSubPanel:GetChildren() } or { };
-		for _, tComponent in pairs(tAllComponents) do
+	for tCnt = 1, select("#", tRootPane:GetChildren()) do
+		tSubPanel = select(tCnt, tRootPane:GetChildren());
+
+		for tCnt2 = 1, select("#", tSubPanel:GetChildren()) do
+			tComponent = select(tCnt2, tSubPanel:GetChildren());
 			if (aComponent ~= tComponent) then
 
 				-- 1. Combo-Flyouts
@@ -309,11 +313,9 @@ end
 
 
 --
-local tComboBox;
-local tSelectPanel;
 function VUHDO_lnfComboButtonClicked(aButton)
-	tComboBox = aButton:GetParent();
-	tSelectPanel = _G[tComboBox:GetName() .. "ScrollPanel"] or _G[tComboBox:GetName() .. "SelectPanel"];
+	local tComboBox = aButton:GetParent();
+	local tSelectPanel = _G[tComboBox:GetName() .. "ScrollPanel"] or _G[tComboBox:GetName() .. "SelectPanel"];
 
 	if (tSelectPanel:IsShown()) then
 		tSelectPanel:Hide();
@@ -379,26 +381,25 @@ end
 
 --
 local VUHDO_lnfOnUpdate = false;
-local tCurrModel;
-local tPanel;
-local tAllComps = { };
-local tModel;
 local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
-	tCurrModel = aComponent:GetAttribute("model");
+	local tModel;
+	local tComp;
+	local tCurrModel = aComponent:GetAttribute("model");
+
 	if (VUHDO_lnfOnUpdate or tCurrModel == nil) then
 		return;
 	end
 
-	tPanel = aComponent:GetParent();
+	local tPanel = aComponent:GetParent();
 	if (tPanel == nil) then
 		return;
 	end
 
 	VUHDO_lnfOnUpdate = true;
 
-	tAllComps = { tPanel:GetChildren() };
+	for tCnt = 1, select("#", tPanel:GetChildren()) do
+		tComp = select(tCnt, tPanel:GetChildren());
 
-	for _, tComp in pairs(tAllComps) do
 		tModel = tComp:GetAttribute("model");
 		if (tModel ~= nil and strfind(tCurrModel, tModel , 1, true)  and aComponent ~= tComp) then
 			if (tComp:IsShown()) then
@@ -627,9 +628,8 @@ end
 
 -- Check Button
 --
-local tIsChecked;
 function VUHDO_lnfCheckButtonUpdateModel(aCheckButton)
-	tIsChecked = aCheckButton:GetChecked();
+	local tIsChecked = aCheckButton:GetChecked();
 	if (tIsChecked == nil or tIsChecked == 0) then
 		tIsChecked = false;
 	elseif(tIsChecked == 1) then

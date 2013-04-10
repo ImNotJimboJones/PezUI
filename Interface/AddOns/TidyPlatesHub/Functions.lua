@@ -400,6 +400,7 @@ end
 
 local function ColorFunctionByThreat(unit)
 	if InCombatLockdown() and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
+		
 		if IsTankedByAnotherTank(unit) then return LocalVars.ColorAttackingOtherTank end
 		
 		if LocalVars.ThreatMode == THREATMODE_AUTO and TidyPlatesWidgets.IsTankingAuraActive then
@@ -408,7 +409,11 @@ local function ColorFunctionByThreat(unit)
 			return ColorFunctionRawTank(unit)
 		else return ColorFunctionDamage(unit) end
 		
-	else return ReactionColors[unit.reaction][unit.type] end	
+	else
+		return RaidClassColors[unit.class or ""] or ReactionColors[unit.reaction][unit.type]
+		--return ReactionColors[unit.reaction][unit.type]
+	end
+
 end
 
 
@@ -459,6 +464,17 @@ local function WarningBorderFunctionByPlayerHealth(unit)
 	if healthPct < .3 then return DarkRed end
 end
 
+-- By Enemy Healer
+local function WarningBorderFunctionByEnemyHealer(unit)
+	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
+		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
+		
+		if IsHealer(unit.name) then
+			return RaidClassColors[unit.class or ""] or ReactionColors[unit.reaction][unit.type]
+		end
+	end
+end
+
 -- "By Threat (High) Damage"
 local function WarningBorderFunctionByThreatDamage(unit)
 	if InCombatLockdown and unit.reaction ~= "FRIENDLY" and unit.type == "NPC" then
@@ -477,6 +493,7 @@ local function WarningBorderFunctionByThreatTank(unit)
 	end
 end
 
+
 -- Warning Glow (Auto Detect)
 local function WarningBorderFunctionByThreat(unit)
 	--if unit.reaction == "HOSTILE" then print(unit.name, unit.threatValue) end
@@ -489,22 +506,15 @@ local function WarningBorderFunctionByThreat(unit)
 				if IsTankedByAnotherTank(unit) then return
 				elseif unit.threatValue == 2 then return LocalVars.ColorAggroTransition
 				elseif unit.threatValue < 2 then return LocalVars.ColorAttackingMe	end
-		elseif unit.threatValue > 0 then return ColorFunctionDamage(unit) end	
+		elseif unit.threatValue > 0 then return ColorFunctionDamage(unit) end
+	--else
+		-- Add healer tracking
+		--return WarningBorderFunctionByEnemyHealer(unit)
+				
 	end
 end
 
--- By Enemy Healer
-local function WarningBorderFunctionByEnemyHealer(unit)
-	if unit.reaction == "HOSTILE" and unit.type == "PLAYER" then
-		--if TidyPlatesCache and TidyPlatesCache.HealerListByName[unit.name] then
-		if IsHealer(unit.name) then
-			WarningColor.r = unit.red
-			WarningColor.g = unit.green
-			WarningColor.b = unit.blue
-			return WarningColor
-		end
-	end
-end
+
 	
 local WarningBorderFunctionsUniversal = { DummyFunction, WarningBorderFunctionByThreat,
 			WarningBorderFunctionByEnemyHealer }
@@ -610,7 +620,7 @@ end
 
 local function NameColorByThreat(unit)
 	if InCombatLockdown() then return ColorFunctionByThreat(unit)
-	else return NameReactionColors[unit.reaction][unit.type] end
+	else return RaidClassColors[unit.class or ""] or NameReactionColors[unit.reaction][unit.type] end
 end
 
 

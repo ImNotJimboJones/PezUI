@@ -1,6 +1,7 @@
 local ZoneFiltering = PetJournalEnhanced:NewModule("ZoneFiltering")
 local zoneIDs = PetJournalEnhanced:GetModule("ZoneIDs")
-
+local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
+local CONTINUED = L["Continued"]
 local ZoneGroupNames = {GetMapContinents()}
 table.insert(ZoneGroupNames,"Instances")
 ZoneFiltering.ZoneGroupNames = ZoneGroupNames
@@ -40,7 +41,7 @@ function ZoneFiltering:OnInitialize()
 	
 	for i= 1 ,#ZoneGroupNames do
 		if #zoneIDs.continents[i] > 16 then
-			table.insert(ZoneGroupNames,i+1,ZoneGroupNames[i].." cont.");
+			table.insert(ZoneGroupNames,i+1,ZoneGroupNames[i].." "..CONTINUED);
 			table.insert(zoneIDs.continents,i+1,{});
 			for j = math.ceil(#zoneIDs.continents[i]/2), #zoneIDs.continents[i] do
 				table.insert(zoneIDs.continents[i+1],zoneIDs.continents[i][j]);

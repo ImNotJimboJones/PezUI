@@ -1,8 +1,6 @@
-local VUHDO_CUSTOM_DEBUFF_LIST = { };
+local VUHDO_CUSTOM_DEBUFF_CONFIG = { };
 local VUHDO_UNIT_CUSTOM_DEBUFFS = { };
 local VUHDO_LAST_UNIT_DEBUFFS = { };
-local VUHDO_CHOSEN_DEBUFF_INFO = { };
-local VUHDO_UNIT_DEBUFF_SCHOOLS = { };
 local VUHDO_PLAYER_ABILITIES = { };
 
 
@@ -29,11 +27,6 @@ VUHDO_DEBUFF_BLACKLIST = {
 	[GetSpellInfo(71328)] = true  -- MOP okay Dungeon Cooldown
 }
 
-
-
---[[local VUHDO_CUSTOM_BUFF_BLACKLIST = {
-	--[GetSpellInfo(67847)] = true -- MOP
-}]]
 
 
 
@@ -66,13 +59,14 @@ local pairs = pairs;
 local _;
 local tostring = tostring;
 
-local sIsRemoveableOnly;
-local sIsRemoveableOnlyIcons;
+local sIsNotRemovableOnly;
+local sIsNotRemoveableOnlyIcons;
 local sIsUseDebuffIcon;
 local sIsUseDebuffIconBossOnly;
 local sIsMiBuColorsInFight;
 local sStdDebuffSound;
 local sAllDebuffSettings;
+local sEmpty = { };
 
 function VUHDO_debuffsInitBurst()
 	VUHDO_CONFIG = _G["VUHDO_CONFIG"];
@@ -82,8 +76,8 @@ function VUHDO_debuffsInitBurst()
 
 	VUHDO_shouldScanUnit = _G["VUHDO_shouldScanUnit"];
 
-	sIsRemoveableOnly = VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY"];
-	sIsRemoveableOnlyIcons = VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY_ICONS"];
+	sIsNotRemovableOnly = not VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY"];
+	sIsNotRemoveableOnlyIcons = not VUHDO_CONFIG["DETECT_DEBUFFS_REMOVABLE_ONLY_ICONS"];
 	sIsUseDebuffIcon = VUHDO_PANEL_SETUP["BAR_COLORS"]["useDebuffIcon"];
 	sIsUseDebuffIconBossOnly = VUHDO_PANEL_SETUP["BAR_COLORS"]["useDebuffIconBossOnly"];
 	sIsMiBuColorsInFight = VUHDO_BUFF_SETTINGS["CONFIG"]["BAR_COLORS_IN_FIGHT"];
@@ -99,14 +93,6 @@ function VUHDO_debuffsInitBurst()
 end
 
 ----------------------------------------------------
-
-
-
---
-local tEmptyChosen = { nil, 0, 0, 0 };
-function VUHDO_getChosenDebuffInfo(aUnit)
-	return VUHDO_CHOSEN_DEBUFF_INFO[aUnit] or tEmptyChosen;
-end
 
 
 
@@ -222,11 +208,10 @@ end
 
 
 --
-local tEmpty = { };
-local function VUHDO_isDebuffRelevant(aDebuffName, aClass)
+--[[local function VUHDO_isDebuffRelevant(aDebuffName, aClass)
 	return not VUHDO_IGNORE_DEBUFF_NAMES[aDebuffName]
-		and not (VUHDO_IGNORE_DEBUFFS_BY_CLASS[aClass or ""] or tEmpty)[aDebuffName];
-end
+		and not (VUHDO_IGNORE_DEBUFFS_BY_CLASS[aClass or ""] or sEmpty)[aDebuffName];
+end]]
 
 
 
@@ -244,115 +229,156 @@ end
 
 
 --
-local tIconsSet = { };
-local tInfo;
-local tDebuffName, tSoundDebuff;
-local tSound;
-local tIsStandardDebuff;
-local tChosenInfo;
-local tRemaining;
-local tSchool, tAllSchools;
-local tEmptyCustomDebuf = { };
-local tAbility;
-local tType;
-local tChosen;
-local tName, tIcon, tStacks, tTypeString, tDuration, tExpiry, tSpellId, tIsBossDebuff;
-local tCustomDebuff;
-local tIsRelevant;
-local tNow;
-function VUHDO_determineDebuff(aUnit)
-	tInfo = (VUHDO_RAID or tEmptyCustomDebuf)[aUnit];
-	if (tInfo == nil) then
-		return 0, ""; -- VUHDO_DEBUFF_TYPE_NONE
-	elseif (VUHDO_CONFIG_SHOW_RAID) then
-		return tInfo["debuff"], tInfo["debuffName"];
+local tIconIndex = 0;
+local tIconArray;
+local tIconArrayDispenser = { };
+local function VUHDO_getOrCreateIconArray(anIcon, aExpiry, aStacks, aDuration, anIsBuff)
+	tIconIndex = tIconIndex + 1;
+	if (#tIconArrayDispenser < tIconIndex) then
+		tIconArray = { anIcon, aExpiry, aStacks, aDuration, anIsBuff };
+		tIconArrayDispenser[tIconIndex] = tIconArray;
+	else
+		tIconArray = tIconArrayDispenser[tIconIndex];
+		tIconArray[1], tIconArray[2], tIconArray[3], tIconArray[4], tIconArray[5]
+			= anIcon, aExpiry, aStacks, aDuration, anIsBuff;
 	end
+
+	return tIconArray;
+end
+
+
+
+--
+function VUHDO_resetDebuffIconDispenser()
+	twipe(tIconArrayDispenser);
+	tIconIndex = 0;
+end
+
+
+
+--
+local VUHDO_UNIT_DEBUFF_INFOS = { };
+local sCurChosenType;
+local sCurChosenName;
+local sCurSoundName;
+local sCurIsStandard;
+local sCurIcons = { };
+
+local tUnitDebuffInfo;
+local function VUHDO_initDebuffInfos(aUnit)
+	if (VUHDO_UNIT_DEBUFF_INFOS[aUnit] == nil) then
+		VUHDO_UNIT_DEBUFF_INFOS[aUnit] = {
+			["CHOSEN"] = { [1] = nil, [2] = 0 },
+			[VUHDO_DEBUFF_TYPE_POISON] = { },
+			[VUHDO_DEBUFF_TYPE_DISEASE] = { },
+			[VUHDO_DEBUFF_TYPE_MAGIC] = { },
+			[VUHDO_DEBUFF_TYPE_CURSE] = { },
+		}
+	end
+
+	tUnitDebuffInfo = VUHDO_UNIT_DEBUFF_INFOS[aUnit];
+	tUnitDebuffInfo[VUHDO_DEBUFF_TYPE_POISON][2] = nil;
+	tUnitDebuffInfo[VUHDO_DEBUFF_TYPE_DISEASE][2] = nil;
+	tUnitDebuffInfo[VUHDO_DEBUFF_TYPE_MAGIC][2] = nil;
+	tUnitDebuffInfo[VUHDO_DEBUFF_TYPE_CURSE][2] = nil;
 
 	if (VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit] == nil) then
 		VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit] = { };
 	end
 
-	if (VUHDO_CHOSEN_DEBUFF_INFO[aUnit] == nil) then
-		VUHDO_CHOSEN_DEBUFF_INFO[aUnit] = { };
+	sCurChosenType = VUHDO_DEBUFF_TYPE_NONE;
+	sCurChosenName = "";
+	sCurSoundName = nil;
+	sCurIsStandard = false;
+	tIconIndex = 0;
+	twipe(sCurIcons);
+
+	return tUnitDebuffInfo;
+end
+
+
+
+
+--
+local tInfo;
+local tSound;
+local tRemaining;
+local tAbility;
+local tSchool;
+local tName, tIcon, tStacks, tTypeString, tDuration, tExpiry, tSpellId, tIsBossDebuff;
+local tDebuffConfig;
+local tIsRelevant;
+local tNow;
+local tUnitDebuffInfo;
+function VUHDO_determineDebuff(aUnit)
+	tInfo = (VUHDO_RAID or sEmpty)[aUnit];
+
+	if (tInfo == nil) then
+		return VUHDO_DEBUFF_TYPE_NONE, "";
+	elseif (VUHDO_CONFIG_SHOW_RAID) then
+		return tInfo["debuff"], tInfo["debuffName"];
 	end
 
-	tChosenInfo = VUHDO_CHOSEN_DEBUFF_INFO[aUnit];
-	tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = nil, nil, 0, 0;
-
-	if (VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] == nil) then
-		VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] = { [1] = { }, [2] = { }, [3] = { }, [4] = { } }; -- VUHDO_DEBUFF_TYPE_POISON, VUHDO_DEBUFF_TYPE_DISEASE, VUHDO_DEBUFF_TYPE_MAGIC, VUHDO_DEBUFF_TYPE_CURSE
-		tAllSchools = VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit];
-	else
-		tAllSchools = VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit];
-		tAllSchools[1][2], tAllSchools[2][2], tAllSchools[3][2], tAllSchools[4][2] = nil, nil, nil, nil;
-	end
-
-	tDebuffName = "";
-	twipe(tIconsSet);
-	tChosen = 0; --VUHDO_DEBUFF_TYPE_NONE
+	tUnitDebuffInfo = VUHDO_initDebuffInfos(aUnit);
 
 	if (VUHDO_shouldScanUnit(aUnit)) then
-		tSoundDebuff = nil;
-		tIsStandardDebuff = false;
 		tNow = GetTime();
 
 		for tCnt = 1, 255 do
 			tName, _, tIcon, tStacks, tTypeString, tDuration, tExpiry, _, _, _, tSpellId, _, tIsBossDebuff = UnitDebuff(aUnit, tCnt, false);
-
 			if (tIcon == nil) then
 				break;
 			end
 
 			tStacks = tStacks or 0;
 			if ((tExpiry or 0) == 0) then
-				tExpiry = (tIconsSet[tName] or {})[2] or 0;
+				tExpiry = (sCurIcons[tName] or sEmpty)[2] or tNow;
 			end
 
 			-- Custom Debuff?
-			tCustomDebuff = VUHDO_CUSTOM_DEBUFF_LIST[tName] or VUHDO_CUSTOM_DEBUFF_LIST[tostring(tSpellId or -1)] or tEmptyCustomDebuf;
-			if (tCustomDebuff[1]) then -- Farbe?
-				tChosen = 6; --VUHDO_DEBUFF_TYPE_CUSTOM
-				tDebuffName = tName;
-				tSoundDebuff = tName;
+			tDebuffConfig = VUHDO_CUSTOM_DEBUFF_CONFIG[tName] or VUHDO_CUSTOM_DEBUFF_CONFIG[tostring(tSpellId or -1)] or sEmpty;
+			if (tDebuffConfig[1]) then -- Farbe?
+				sCurChosenType, sCurChosenName, sCurSoundName = VUHDO_DEBUFF_TYPE_CUSTOM, tName, tName;
 			end
 
-			tRemaining = floor((tExpiry or tNow) - tNow);
-
-			if (tIconsSet[tName] ~= nil) then
-				tStacks = tStacks + tIconsSet[tName][3];
+			if (sCurIcons[tName] ~= nil) then
+				tStacks = tStacks + sCurIcons[tName][3];
 			end
 
-			if (tCustomDebuff[2]) then -- Icon?
-				tIconsSet[tName] = { tIcon, tExpiry, tStacks, false };
-				tSoundDebuff = tName;
+			if (tDebuffConfig[2]) then -- Icon?
+				sCurIcons[tName] = VUHDO_getOrCreateIconArray(tIcon, tExpiry, tStacks, tDuration, false);
+				sCurSoundName = tName;
 			end
 
 			tType = VUHDO_DEBUFF_TYPES[tTypeString];
 			tAbility = VUHDO_PLAYER_ABILITIES[tType];
-			tIsRelevant = VUHDO_isDebuffRelevant(tName, tInfo["class"]);
+			--tIsRelevant = VUHDO_isDebuffRelevant(tName, tInfo["class"]);
+			tIsRelevant = not VUHDO_IGNORE_DEBUFF_NAMES[tName]
+				and not (VUHDO_IGNORE_DEBUFFS_BY_CLASS[tInfo["class"] or ""] or sEmpty)[tName];
 
 			if (tType ~= nil and tIsRelevant) then
-				tSchool = tAllSchools[tType];
+				tSchool = tUnitDebuffInfo[tType];
+				tRemaining = floor(tExpiry - tNow);
 				if ((tSchool[2] or 0) < tRemaining) then
 					tSchool[1], tSchool[2], tSchool[3], tSchool[4] = tIcon, tRemaining, tStacks, tDuration;
 				end
 			end
 
-			if (tChosen ~= 6 and not VUHDO_DEBUFF_BLACKLIST[tName] and tIsRelevant) then --VUHDO_DEBUFF_TYPE_CUSTOM
+			if (sCurChosenType ~= VUHDO_DEBUFF_TYPE_CUSTOM
+				and not VUHDO_DEBUFF_BLACKLIST[tName]
+				and tIsRelevant) then
 
 				if (sIsUseDebuffIcon and (tIsBossDebuff or not sIsUseDebuffIconBossOnly)
-					and (not sIsRemoveableOnlyIcons or tAbility ~= nil)) then
+					and (sIsNotRemoveableOnlyIcons or tAbility ~= nil)) then
 
-					tIconsSet[tName] = { tIcon, tExpiry, tStacks, tDuration, false };
-					tIsStandardDebuff = true;
+					sCurIcons[tName] = VUHDO_getOrCreateIconArray(tIcon, tExpiry, tStacks, tDuration, false);
+					sCurIsStandard = true;
 				end
 
-				if (tType ~= nil
-					and (tAbility ~= nil or tChosen == 0)
-					and (not sIsRemoveableOnly or tAbility ~= nil)) then --VUHDO_DEBUFF_TYPE_NONE
-
-					tChosen = tType;
-					tChosenInfo[1], tChosenInfo[2], tChosenInfo[3], tChosenInfo[4] = tIcon, tRemaining, tStacks, tDuration;
+				-- Entweder Fähigkeit vorhanden ODER noch keiner gewählt UND auch nicht entfernbare
+				if (tType ~= nil and (tAbility ~= nil or (sCurChosenType == VUHDO_DEBUFF_TYPE_NONE and sIsNotRemovableOnly))) then
+					sCurChosenType = tType;
+					tUnitDebuffInfo["CHOSEN"][1], tUnitDebuffInfo["CHOSEN"][2] = tIcon, tStacks;
 				end
 			end
 		end
@@ -363,22 +389,21 @@ function VUHDO_determineDebuff(aUnit)
 				break;
 			end
 
-			tCustomDebuff = VUHDO_CUSTOM_DEBUFF_LIST[tName] or VUHDO_CUSTOM_DEBUFF_LIST[tostring(tSpellId or -1)] or tEmptyCustomDebuf;
+			tDebuffConfig = VUHDO_CUSTOM_DEBUFF_CONFIG[tName] or VUHDO_CUSTOM_DEBUFF_CONFIG[tostring(tSpellId or -1)] or sEmpty;
 
-			if (tCustomDebuff[1]) then -- Set color
-				tChosen = 6; --VUHDO_DEBUFF_TYPE_CUSTOM
-				tDebuffName = tName;
-				tSoundDebuff = tName;
+			if (tDebuffConfig[1]) then -- Set color
+				sCurChosenType, sCurChosenName, sCurSoundName = VUHDO_DEBUFF_TYPE_CUSTOM, tName, tName;
 			end
 
-			if (tCustomDebuff[2]) then -- Set icon
-				tIconsSet[tName] = { tIcon, tExpiry, tStacks or 0, tDuration, true };
-				tSoundDebuff = tName;
+			if (tDebuffConfig[2]) then -- Set icon
+				sCurIcons[tName] = VUHDO_getOrCreateIconArray(tIcon, tExpiry, tStacks or 0, tDuration, true);
+				sCurSoundName = tName;
 			end
 		end
 
 		-- Gained new custom debuff?
-		for tName, tDebuffInfo in pairs(tIconsSet) do
+		for tName, tDebuffInfo in pairs(sCurIcons) do
+
 			if (VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName] == nil) then
 				VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName] = { tDebuffInfo[2], tDebuffInfo[3] };
 				VUHDO_addDebuffIcon(aUnit, tDebuffInfo[1], tName, tDebuffInfo[2], tDebuffInfo[3], tDebuffInfo[4], tDebuffInfo[5]);
@@ -405,19 +430,19 @@ function VUHDO_determineDebuff(aUnit)
 
 		-- Play standard debuff sound?
 		if (sStdDebuffSound ~= nil
-			and (tChosen ~= 0 or tIsStandardDebuff) -- VUHDO_DEBUFF_TYPE_NONE
-			and tChosen ~= 6 and tChosen ~= 7 -- VUHDO_DEBUFF_TYPE_CUSTOM || VUHDO_DEBUFF_TYPE_MISSING_BUFF
-			and VUHDO_LAST_UNIT_DEBUFFS[aUnit] ~= tChosen
+			and (sCurChosenType ~= VUHDO_DEBUFF_TYPE_NONE or sCurIsStandard)
+			and sCurChosenType ~= VUHDO_DEBUFF_TYPE_CUSTOM
+			and sCurChosenType ~= VUHDO_LAST_UNIT_DEBUFFS[aUnit]
 			and tInfo["range"]) then
 
 				VUHDO_playDebuffSound(sStdDebuffSound);
-				VUHDO_LAST_UNIT_DEBUFFS[aUnit] = tChosen;
+				VUHDO_LAST_UNIT_DEBUFFS[aUnit] = sCurChosenType;
 		end
 	end -- shouldScanUnit
 
 	-- Lost old custom debuff?
 	for tName, _ in pairs(VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit]) do
-		if (tIconsSet[tName] == nil) then
+		if (sCurIcons[tName] == nil) then
 			twipe(VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName]);
 			VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit][tName] = nil;
 			VUHDO_removeDebuffIcon(aUnit, tName);
@@ -425,11 +450,11 @@ function VUHDO_determineDebuff(aUnit)
 		end
 	end
 
-	if (tChosen == 0 and tInfo["missbuff"] ~= nil and (sIsMiBuColorsInFight or not InCombatLockdown())) then --VUHDO_DEBUFF_TYPE_NONE
-		tChosen = 7; --VUHDO_DEBUFF_TYPE_MISSING_BUFF
+	if (sCurChosenType == VUHDO_DEBUFF_TYPE_NONE and tInfo["missbuff"] ~= nil and (sIsMiBuColorsInFight or not InCombatLockdown())) then
+		sCurChosenType = VUHDO_DEBUFF_TYPE_MISSING_BUFF;
 	end
 
-	return tChosen, tDebuffName;
+	return sCurChosenType, sCurChosenName;
 end
 
 local VUHDO_determineDebuff = VUHDO_determineDebuff;
@@ -456,7 +481,7 @@ function VUHDO_initDebuffs()
 	local _, tClass = UnitClass("player");
 	twipe(VUHDO_PLAYER_ABILITIES);
 
-	for tDebuffType, tAbilities in pairs(VUHDO_INIT_DEBUFF_ABILITIES[tClass] or {}) do
+	for tDebuffType, tAbilities in pairs(VUHDO_INIT_DEBUFF_ABILITIES[tClass] or sEmpty) do
 		for tCnt = 1, #tAbilities do
 			tAbility = tAbilities[tCnt];
 			--VUHDO_Msg("check: " .. tAbility);
@@ -469,24 +494,32 @@ function VUHDO_initDebuffs()
 	end
 	--VUHDO_Msg("---");
 
-	twipe(VUHDO_CUSTOM_DEBUFF_LIST);
 	if (VUHDO_CONFIG == nil) then
 		VUHDO_CONFIG = _G["VUHDO_CONFIG"];
 	end
+
 	for _, tDebuffName in pairs(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]) do
-		VUHDO_CUSTOM_DEBUFF_LIST[tDebuffName] = {
-			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isColor"],
-			VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isIcon"]
-		};
+		if (VUHDO_CUSTOM_DEBUFF_CONFIG[tDebuffName] == nil) then
+			VUHDO_CUSTOM_DEBUFF_CONFIG[tDebuffName] = { };
+		end
+
+		VUHDO_CUSTOM_DEBUFF_CONFIG[tDebuffName][1] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isColor"];
+		VUHDO_CUSTOM_DEBUFF_CONFIG[tDebuffName][2] = VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName]["isIcon"];
+	end
+
+	for tDebuffName, _ in pairs(VUHDO_CUSTOM_DEBUFF_CONFIG) do
+		if (VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"][tDebuffName] == nil) then
+			VUHDO_CUSTOM_DEBUFF_CONFIG[tDebuffName] = nil;
+		end
 	end
 
 	twipe(VUHDO_IGNORE_DEBUFF_NAMES);
 
 	if (VUHDO_CONFIG["DETECT_DEBUFFS_IGNORE_NO_HARM"]) then
-		VUHDO_IGNORE_DEBUFFS_BY_CLASS = VUHDO_deepCopyTable(VUHDO_INIT_IGNORE_DEBUFFS_BY_CLASS);
+		VUHDO_IGNORE_DEBUFFS_BY_CLASS = VUHDO_INIT_IGNORE_DEBUFFS_BY_CLASS;
 		VUHDO_tableAddAllKeys(VUHDO_IGNORE_DEBUFF_NAMES, VUHDO_INIT_IGNORE_DEBUFFS_NO_HARM);
 	else
-		VUHDO_IGNORE_DEBUFFS_BY_CLASS = {};
+		VUHDO_IGNORE_DEBUFFS_BY_CLASS = sEmpty;
 	end
 
 	if (VUHDO_CONFIG["DETECT_DEBUFFS_IGNORE_MOVEMENT"]) then
@@ -510,12 +543,22 @@ end
 --
 local tEmptySchoolInfo = { };
 function VUHDO_getUnitDebuffSchoolInfos(aUnit, aDebuffSchool)
-	return (VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] or VUHDO_INIT_UNIT_DEBUFF_SCHOOLS)[aDebuffSchool] or tEmptySchoolInfo;
+	return (VUHDO_UNIT_DEBUFF_INFOS[aUnit] or VUHDO_INIT_UNIT_DEBUFF_SCHOOLS)[aDebuffSchool] or tEmptySchoolInfo;
 end
 
 
 --
+local tEmptyChosen = { nil, 0 };
+function VUHDO_getChosenDebuffInfo(aUnit)
+	return (VUHDO_UNIT_DEBUFF_INFOS[aUnit] or sEmpty)["CHOSEN"] or tEmptyChosen;
+end
+
+
+
+--
 function VUHDO_resetDebuffsFor(aUnit)
-	VUHDO_UNIT_DEBUFF_SCHOOLS[aUnit] = nil;
+	VUHDO_initDebuffInfos(aUnit);
 	VUHDO_UNIT_CUSTOM_DEBUFFS[aUnit] = nil;
 end
+
+

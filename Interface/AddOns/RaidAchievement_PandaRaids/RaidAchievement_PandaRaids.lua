@@ -35,6 +35,7 @@ prraspisokach25={
 --8094,
 8038,
 8077,
+8037,
 }
 
 
@@ -93,7 +94,6 @@ end
 if ratrackgoodattack2 and curtime>ratrackgoodattack2+10 then
 
     ratrackgoodattack2=nil
-    
     --собираем инфо по тем кто в рейде!
     local taball={}
     local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
@@ -110,11 +110,10 @@ if ratrackgoodattack2 and curtime>ratrackgoodattack2+10 then
 				table.insert(taball,name)
 			end
 		end
-		
 		--если 75% игроков нанесло атаку...
 		if #taball>0 then
       if #ratrackgoodattack1<#taball then
-        if #ratrackgoodattack1>=#taball*0.75 then
+        if #ratrackgoodattack1>=#taball*0.01 then
           --поиск ников что не сделали свое дело!
           for k=1,#ratrackgoodattack1 do
              if ratrackgoodattack1[k] then
@@ -264,7 +263,6 @@ if arg2=="SPELL_DAMAGE" and arg10==116809 then
     if bil==0 then
       table.insert(ratrackgoodattack1,arg5)
     end
-
     --собираем инфо по тем кто в рейде!
     local taball={}
     local _, instanceType, pppl, _, maxPlayers, dif = GetInstanceInfo()
@@ -373,6 +371,14 @@ end
 if arg2=="SPELL_CAST_SUCCESS" and arg10==134092 and prraspisokon[6]==1 and raachdone1 and ramariotrack==nil then
   ramariotrack=GetTime()+0.3
   ramariotableguid={}
+end
+
+
+--7
+if arg2=="SPELL_CAST_SUCCESS" and arg10==136178 then
+	if prraspisokon[7]==1 and raachdone1 then
+		prrafailnoreason(7,arg5) --arg8
+	end
 end
 
 

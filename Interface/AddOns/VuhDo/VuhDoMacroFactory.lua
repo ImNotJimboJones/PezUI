@@ -350,20 +350,6 @@ local function VUHDO_generateRaidMacroTemplate(anAction, anIsKeyboard, aTarget, 
 
 	tSpellPost = getAutoBattleRezText(anIsKeyboard);
 
-	--[[if (VUHDO_SPELL_CONFIG["IS_KEEP_STANCE"] and VUHDO_SPELL_ID.REBIRTH ~= anAction
-		and VUHDO_SPELLS[anAction] ~= nil and not VUHDO_SPELLS[anAction]["nostance"]) then
-
-		if ("DRUID" == VUHDO_PLAYER_CLASS) then
-			tModiSpell = tModiSpell .. "noform:1/3,";
-			tSpellPost = tSpellPost .. "/tar [form:1/3,nounithasvehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
-		end
-
-		if ("PRIEST" == VUHDO_PLAYER_CLASS) then
-			tModiSpell = tModiSpell .. "noform:1,";
-			tSpellPost = "/tar [form:1,nounithasvehicleui,@" .. (anIsKeyboard and "mouseover]\n" or "vuhdo]\n");
-		end
-	end]]
-
 	if (anIsKeyboard) then
 		tText = tText .. "/use [" .. tModiSpell .. "@mouseover] " .. anAction .. "\n";
 		tText = tText .. tSpellPost;

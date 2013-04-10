@@ -3,7 +3,7 @@
 
 
 local VUHDO_RAID;
-local VUHDO_getUnitButtons;
+local VUHDO_getUnitButtonsSafe;
 local VUHDO_IN_RAID_TARGET_BUTTONS;
 local VUHDO_PANEL_SETUP;
 local VUHDO_BUTTON_CACHE;
@@ -18,10 +18,11 @@ local VUHDO_getHealthBar;
 local VUHDO_isConfigDemoUsers;
 local VUHDO_updateBouquetsForEvent;
 local VUHDO_indicatorTextCallback;
+
 local sIsInverted;
 function VUHDO_customManaInitBurst()
 	VUHDO_RAID = _G["VUHDO_RAID"];
-	VUHDO_getUnitButtons = _G["VUHDO_getUnitButtons"];
+	VUHDO_getUnitButtonsSafe = _G["VUHDO_getUnitButtonsSafe"];
 	VUHDO_IN_RAID_TARGET_BUTTONS = _G["VUHDO_IN_RAID_TARGET_BUTTONS"];
 	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 	VUHDO_BUTTON_CACHE = _G["VUHDO_BUTTON_CACHE"];
@@ -97,34 +98,31 @@ function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCo
 	end
 
 	tManaBarHeight = 0;
-	tAllButtons =  VUHDO_getUnitButtons(aUnit);
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
 		or aMaxValue > 1 and aCurrValue / aMaxValue
 		or 0;
 
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			if (anIsActive) then
-				tManaBarHeight = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["manaBarHeight"];
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		if (anIsActive) then
+			tManaBarHeight = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["manaBarHeight"];
+		end
+		tManaBar = VUHDO_getHealthBar(tButton, 2);
+		if (tQuota > 0 and tManaBarHeight > 0) then
+			if (aColor ~= nil) then
+				tManaBar:SetVuhDoColor(aColor);
 			end
-			tManaBar = VUHDO_getHealthBar(tButton, 2);
-			if (tQuota > 0 and tManaBarHeight > 0) then
-				if (aColor ~= nil) then
-					tManaBar:SetVuhDoColor(aColor);
-				end
-				tManaBar:SetValue(tQuota);
-			else
-				tManaBar:SetValue((not anIsActive and sIsInverted) and 1 or 0);
-			end
+			tManaBar:SetValue(tQuota);
+		else
+			tManaBar:SetValue((not anIsActive and sIsInverted) and 1 or 0);
+		end
 
-			if (not InCombatLockdown()) then
-				if (tManaBarHeight > 0) then
-					tManaBar:SetHeight(tManaBarHeight);
-				end
-				tRegularHeight = tButton["regularHeight"];
-				if (tRegularHeight ~= nil) then
-					VUHDO_getHealthBar(tButton, 1):SetHeight(tRegularHeight - tManaBarHeight);
-				end
+		if (not InCombatLockdown()) then
+			if (tManaBarHeight > 0) then
+				tManaBar:SetHeight(tManaBarHeight);
+			end
+			tRegularHeight = tButton["regularHeight"];
+			if (tRegularHeight ~= nil) then
+				VUHDO_getHealthBar(tButton, 1):SetHeight(tRegularHeight - tManaBarHeight);
 			end
 		end
 	end
@@ -169,22 +167,19 @@ end
 
 
 --
-local tQuota, tAllButtons, tBar;
+local tQuota, tBar;
 local function VUHDO_sideBarBouquetCallback(aBarNum, aUnit, anIsActive, anIcon, aCurrValue, aCounter, aMaxValue, aColor, aBuffName, aBouquetName)
 	tQuota = (aCurrValue == 0 and aMaxValue == 0) and 0
 		or (aMaxValue or 0) > 1 and aCurrValue / aMaxValue
 		or 0;
 
-	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons ~= nil) then
-		for _, tButton in pairs(tAllButtons) do
-			if (tQuota > 0) then
-				tBar = VUHDO_getHealthBar(tButton, aBarNum);
-				tBar:SetValue(tQuota);
-				tBar:SetVuhDoColor(aColor);
-			else
-				VUHDO_getHealthBar(tButton, aBarNum):SetValue(0);
-			end
+	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
+		if (tQuota > 0) then
+			tBar = VUHDO_getHealthBar(tButton, aBarNum);
+			tBar:SetValue(tQuota);
+			tBar:SetVuhDoColor(aColor);
+		else
+			VUHDO_getHealthBar(tButton, aBarNum):SetValue(0);
 		end
 	end
 end

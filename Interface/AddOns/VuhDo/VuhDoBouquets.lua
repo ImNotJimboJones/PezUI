@@ -196,7 +196,7 @@ local tClipL, tClipR, tClipT, tClipB;
 local tType, tBuffTimer, tBuffDuration, tBuffIsActive;
 local tAnzInfos;
 local tColor, tIcon;
-local tEmpty = { };
+local sEmpty = { };
 local txIcon;
 local txDuration;
 local txName;
@@ -270,11 +270,11 @@ local function VUHDO_evaluateBouquet(aUnit, aBouquetName, anInfo)
 		else -- Buff/Debuff
 			tName = tInfos["name"];
 			if (tInfos["mine"] and tInfos["others"]) then
-				tBuffInfo = (VUHDO_MY_AND_OTHERS_HOTS[tUnit] or tEmpty)[tName];
+				tBuffInfo = (VUHDO_MY_AND_OTHERS_HOTS[tUnit] or sEmpty)[tName];
 			elseif (tInfos["mine"]) then
-				tBuffInfo = (VUHDO_MY_HOTS[tUnit] or tEmpty)[tName];
+				tBuffInfo = (VUHDO_MY_HOTS[tUnit] or sEmpty)[tName];
 			elseif (tInfos["others"]) then
-				tBuffInfo = (VUHDO_OTHER_HOTS[tUnit] or tEmpty)[tName];
+				tBuffInfo = (VUHDO_OTHER_HOTS[tUnit] or sEmpty)[tName];
 			else
 				tBuffInfo = nil;
 			end
