@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 244 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 259 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -100,7 +100,9 @@ addon.WorldBosses = {
   [691] = { quest=32099, expansion=4, level=90 }, -- Sha of Anger
   [725] = { quest=32098, expansion=4, level=90 }, -- Galleon
   [814] = { quest=32518, expansion=4, level=90 }, -- Nalak (32211?)
-  [826] = { quest=32519, expansion=4, level=90 }, -- Oondasta
+  -- Oondasta is disabled for now until Blizzard fixes the quest flag
+  -- please complain here: http://us.battle.net/wow/en/forum/topic/8518311880
+  -- [826] = { quest=32519, expansion=4, level=90 }, -- Oondasta 
 }
 
 addon.showopts = {
@@ -140,6 +142,26 @@ function addon:specialWeeklyQuests()
 end
 addon:specialWeeklyQuests()
 
+local QuestExceptions = { 
+  -- some quests are misidentified in scope
+  [31752] = "AccountDaily", -- Blingtron
+  -- also pre-populate a few important quests
+  [32640] = "Weekly",  -- Champions of the Thunder King
+  [32641] = "Weekly",  -- Champions of the Thunder King
+  [32718] = "Weekly",  -- Mogu Runes of Fate
+  [32719] = "Weekly",  -- Mogu Runes of Fate
+}
+
+function addon:QuestInfo(questid)
+  if not questid or questid == 0 then return nil end
+  scantt:SetOwner(UIParent,"ANCHOR_NONE")
+  scantt:SetHyperlink("\124cffffff00\124Hquest:"..questid..":90\124h[]\124h\124r")
+  local l = _G[scantt:GetName().."TextLeft1"]
+  l = l and l:GetText()
+  if not l or #l == 0 then return nil end -- cache miss
+  return l, "\124cffffff00\124Hquest:"..questid..":90\124h["..l.."]\124h\124r"
+end
+
 local function chatMsg(msg)
      DEFAULT_CHAT_FRAME:AddMessage("\124cFFFF0000"..addonName.."\124r: "..msg)
 end
@@ -175,7 +197,7 @@ vars.defaultDB = {
 				-- LFG2: expiry (deserter)
 				-- WeeklyResetTime: expiry
 				-- DailyResetTime: expiry
-				-- DailyCount: integer
+				-- DailyCount: integer REMOVED
 				-- PlayedLevel: integer
 				-- PlayedTotal: integer
 				-- Money: integer
@@ -230,6 +252,7 @@ vars.defaultDB = {
 		ReverseInstances = false,
 		ShowExpired = false,
 		ShowHoliday = true,
+		ShowRandom = true,
 		TrackDailyQuests = true,
 		TrackWeeklyQuests = true,
 		ShowCategories = false,
@@ -260,6 +283,7 @@ vars.defaultDB = {
 					-- Show: boolean
 					-- Raid: boolean
 					-- Holiday: boolean
+					-- Random: boolean
 					-- Expansion: integer
 					-- RecLevel: integer
 					-- LFDID: integer
@@ -275,6 +299,14 @@ vars.defaultDB = {
 							-- Link: string hyperlink to the save
                                                         -- 1..numEncounters: boolean LFR isLooted
 	MinimapIcon = { },
+	Quests = {},  -- Account-wide Quests:  key: QuestID  value: same as toon Quest database
+	QuestDB = {   -- permanent repeatable quest DB: key: questid  value: mapid
+		Daily = {},
+		Weekly = {},
+		Darkmoon = {},
+		AccountDaily = {},
+		AccountWeekly = {},
+	},
 	--[[ REMOVED
 	Lockouts = {	-- table key: lockout ID; value:
 						-- Name: string
@@ -422,7 +454,12 @@ end
 end
 
 function addon:QuestCount(toonname)
-  local t = vars and vars.db.Toons and vars.db.Toons[toonname]
+  local t
+  if toonname then 
+    t = vars and vars.db.Toons and vars.db.Toons[toonname]
+  else -- account-wide quests
+    t = db
+  end
   if not t then return 0,0 end
   local dailycount, weeklycount = 0,0
   -- ticket 96: GetDailyQuestsCompleted() is unreliable, the response is laggy and it fails to count some quests
@@ -433,8 +470,6 @@ function addon:QuestCount(toonname)
       weeklycount = weeklycount + 1
     end
   end
-  dailycount = math.max(t.DailyCount, dailycount) -- include unrecorded quests (completed while addon was off)
-  t.DailyCount = dailycount
   return dailycount, weeklycount
 end
 
@@ -542,6 +577,7 @@ function addon:InstanceCategory(instance)
 	if not instance then return nil end
 	local instance = vars.db.Instances[instance]
 	if instance.Holiday then return "H" end
+	if instance.Random then return "N" end
 	return ((instance.Raid and "R") or ((not instance.Raid) and "D")) .. instance.Expansion
 end
 
@@ -718,7 +754,6 @@ function addon:UpdateInstanceData()
                     LFDDungeonList -- lazily updated
   if not dungeonDB or instancesUpdated then return end  -- nil before first use in UI
   instancesUpdated = true
-  core:UnregisterEvent("LFG_UPDATE_RANDOM_INFO")
   local count = 0
   local starttime = debugprofilestop()
   local maxid = 600
@@ -777,10 +812,10 @@ function addon:UpdateInstance(id)
   -- isHoliday is for single-boss holiday instances that don't generate raid saves
   -- typeID 4 = outdoor area, typeID 6 = random
   maxPlayers = tonumber(maxPlayers)
-  if not name or not expansionLevel or not recLevel or typeID > 2 then return end
+  if not name or not expansionLevel or not recLevel or (typeID > 2 and typeID ~= TYPEID_RANDOM_DUNGEON) then return end
   if name:find(PVP_RATED_BATTLEGROUND) then return end -- ignore 10v10 rated bg
-  if subtypeID == LFG_SUBTYPEID_SCENARIO and 
-     (maxPlayers == 3 or maxPlayers == 1) then -- ignore scenarios
+  if subtypeID == LFG_SUBTYPEID_SCENARIO and typeID ~= TYPEID_RANDOM_DUNGEON and
+     (maxPlayers == 3 or maxPlayers == 1) then -- ignore non-random scenarios
      if vars.db.Instances[name] and vars.db.Instances[name].LFDID == id then
        vars.db.Instances[name] = nil -- clean old scenario entries
      end
@@ -810,6 +845,9 @@ function addon:UpdateInstance(id)
   instance.RecLevel = instance.RecLevel or recLevel
   if recLevel < instance.RecLevel then instance.RecLevel = recLevel end -- favor non-heroic RecLevel
   instance.Raid = (maxPlayers > 5 or (maxPlayers == 0 and typeID == 2))
+  if typeID == TYPEID_RANDOM_DUNGEON then
+    instance.Random = true 
+  end
   return newinst, true, name
 end
 
@@ -858,12 +896,12 @@ function addon:UpdateToonData()
 				end
 			end
 		end
-		if i.Holiday and addon.activeHolidays[instance] then
+		if (i.Holiday and addon.activeHolidays[instance]) or (i.Random) then
 		  local id = i.LFDID
 		  GetLFGDungeonInfo(id) -- forces update
-		  local donetoday = GetLFGDungeonRewards(id)
+		  local donetoday, money = GetLFGDungeonRewards(id)
 		  local expires = addon:GetNextDailyResetTime()
-		  if donetoday and expires then
+		  if expires and donetoday and (i.Holiday or (money and money > 0)) then
 		    i[thisToon] = i[thisToon] or {}
 		    i[thisToon][1] = i[thisToon][1] or {}
 		    local d = i[thisToon][1]
@@ -916,7 +954,6 @@ function addon:UpdateToonData()
 	if nextreset and nextreset > time() then
 	 for toon, ti in pairs(vars.db.Toons) do
 	  if not ti.DailyResetTime or (ti.DailyResetTime < time()) then 
-	    ti.DailyCount = 0
 	    for id,qi in pairs(ti.Quests) do
 	      if qi.isDaily then
 	        ti.Quests[id] = nil
@@ -925,6 +962,14 @@ function addon:UpdateToonData()
 	    ti.DailyResetTime = nextreset
           end 
 	 end
+	 if not db.DailyResetTime or (db.DailyResetTime < time()) then -- AccountDaily reset
+	    for id,qi in pairs(db.Quests) do
+	      if qi.isDaily then
+	        db.Quests[id] = nil
+	      end
+	    end
+	    db.DailyResetTime = nextreset
+         end 
 	end
 	-- Weekly Reset
 	local nextreset = addon:GetNextWeeklyResetTime()
@@ -947,9 +992,10 @@ function addon:UpdateToonData()
 	      end
 	  end
 	end
-	local dc = GetDailyQuestsCompleted()
-	if dc > t.DailyCount then -- zero during logout, and may undercount quests
-	  t.DailyCount = dc
+	for id,qi in pairs(db.Quests) do -- AccountWeekly reset
+	  if not qi.isDaily and (qi.Expires or 0) < time() then
+	     db.Quests[id] = nil
+	  end
 	end
 	t.currency = t.currency or {}
 	for _,idx in pairs(currency) do
@@ -984,6 +1030,18 @@ function addon:QuestIsDarkmoonMonthly()
   return false
 end
 
+function addon:GetCurrentMapAreaID()
+  local oldmap = GetCurrentMapAreaID()
+  local oldlvl = GetCurrentMapDungeonLevel()
+  SetMapToCurrentZone()
+  local map = GetCurrentMapAreaID()
+  SetMapByID(oldmap)
+  if oldlvl and oldlvl > 0 then
+    SetDungeonMapLevel(oldlvl)
+  end
+  return map
+end
+
 local function SI_GetQuestReward()
   local t = vars and vars.db.Toons[thisToon]
   if not t then return end
@@ -993,31 +1051,59 @@ local function SI_GetQuestReward()
   local isMonthly = addon:QuestIsDarkmoonMonthly()
   local isWeekly = QuestIsWeekly()
   local isDaily = QuestIsDaily()
+  local isAccount
   for index = 1, GetNumQuestLogEntries() do
      local questLogTitleText, level, questTag, suggestedGroup, isHeader, 
            isCollapsed, isComplete, isDaily, questID, startEvent = GetQuestLogTitle(index)
      if questID == id then
         link = GetQuestLink(index)
+	isAccount = questTag and #questTag > 0 and ITEM_ACCOUNTBOUND:lower():find(questTag:lower()) -- questtag is localized
         break
      end
   end
+  if QuestExceptions[id] then
+    local qe = QuestExceptions[id]
+    isAccount = qe:find("Account") and true
+    isDaily = 	qe:find("Daily") and true
+    isWeekly = 	qe:find("Weekly") and true
+    isMonthly =	qe:find("Darkmoon") and true
+  end
+  if not link then 
+    isAccount = db.QuestDB.AccountDaily[id] or db.QuestDB.AccountWeekly[id]
+    debug("Fetched isAccount")
+  end
   local expires
+  local questDB
   if isWeekly then
     expires = addon:GetNextWeeklyResetTime()
+    questDB = (isAccount and db.QuestDB.AccountWeekly) or db.QuestDB.Weekly
   elseif isMonthly then 
     expires = addon:GetNextDarkmoonResetTime()
+    questDB = db.QuestDB.Darkmoon
+  elseif isDaily then
+    questDB = (isAccount and db.QuestDB.AccountDaily) or db.QuestDB.Daily
   end
   debug("Quest Complete: "..(link or title).." "..id.." : "..title.." "..
+        (isAccount and "(Account) " or "")..
         (isMonthly and "(Monthly)" or isWeekly and "(Weekly)" or isDaily and "(Daily)" or "(Regular)").."  "..
 	(expires and date("%c",expires) or ""))
   if not isMonthly and not isWeekly and not isDaily then return end
-  t.Quests = t.Quests or {}
-  t.Quests[id] = { ["Title"] = title, ["Link"] = link, 
+  local mapid = addon:GetCurrentMapAreaID()
+  questDB[id] = mapid
+  local qinfo =  { ["Title"] = title, ["Link"] = link, 
                    ["isDaily"] = isDaily, 
 		   ["Expires"] = expires,
-		   ["Zone"] = GetRealZoneText() }
+		   ["Zone"] = GetMapNameByID(mapid) }
+  local scope = t
+  if isAccount then
+    scope = db
+    if t.Quests then t.Quests[id] = nil end -- make sure we promote account quests
+  end
+  scope.Quests = scope.Quests or {}
+  scope.Quests[id] = qinfo
   local dc, wc = addon:QuestCount(thisToon)
-  debug("DailyCount: "..dc.."  WeeklyCount: "..wc)
+  local adc, awc = addon:QuestCount(nil)
+  debug("DailyCount: "..dc.."  WeeklyCount: "..wc.." AccountDailyCount: "..adc.."  AccountWeeklyCount: "..awc)
 end
 hooksecurefunc("GetQuestReward", SI_GetQuestReward)
 
@@ -1061,18 +1147,24 @@ end
 
 local function ShowQuestTooltip(cell, arg, ...)
 	local toon,qstr,isDaily = unpack(arg)
-	if not toon then return end
+	local t = db
+	local scopestr = L["Account"]
+	if toon then 
+	  t = vars.db.Toons[toon]
+	  if not t then return end
+	  scopestr = ClassColorise(vars.db.Toons[toon].Class, toon)
+	end
 	indicatortip = QTip:Acquire("SavedInstancesIndicatorTooltip", 2, "LEFT", "RIGHT")
 	indicatortip:Clear()
 	indicatortip:SetHeaderFont(tooltip:GetHeaderFont())
-	indicatortip:AddHeader(ClassColorise(vars.db.Toons[toon].Class, toon), qstr)
+	indicatortip:AddHeader(scopestr, qstr)
         local nightlyReset = addon:GetNextDailyResetTime()
 	if isDaily and nightlyReset then
 	  indicatortip:AddLine(YELLOWFONT .. L["Time Left"] .. ":" .. FONTEND,
 	      SecondsToTime(nightlyReset - time()))
 	end
         local ql = {}
-        for id,qi in pairs(vars.db.Toons[toon].Quests) do
+        for id,qi in pairs(t.Quests) do
           if (not isDaily) == (not qi.isDaily) then
 	     table.insert(ql,(qi.Zone or "").." # "..id)
           end
@@ -1080,7 +1172,7 @@ local function ShowQuestTooltip(cell, arg, ...)
         table.sort(ql)
         for _,e in ipairs(ql) do
           local id = tonumber(e:match("# (%d+)"))
-          local qi = id and vars.db.Toons[toon].Quests[id]
+          local qi = id and t.Quests[id]
           local line = indicatortip:AddLine()
 	  indicatortip:SetCell(line,1,(qi.Zone or ""),"LEFT")
           indicatortip:SetCell(line,2,(qi.Link or qi.Title),"RIGHT")
@@ -1146,7 +1238,7 @@ local function ShowIndicatorTooltip(cell, arg, ...)
 	if info.Expires > 0 then
 	  indicatortip:AddLine(YELLOWFONT .. L["Time Left"] .. ":" .. FONTEND, nil, SecondsToTime(thisinstance[toon][diff].Expires - time()))
 	end
-	if thisinstance.Raid and info.ID > 0 and diff == 5 or diff == 6 then -- heroic raid
+	if thisinstance.Raid and info.ID > 0 and (diff == 5 or diff == 6) then -- heroic raid
 	  local n = indicatortip:AddLine()
 	  indicatortip:SetCell(n, 1, YELLOWFONT .. ID .. ":" .. FONTEND, "LEFT", 1)
 	  indicatortip:SetCell(n, 2, info.ID, "RIGHT", 2)
@@ -1157,15 +1249,22 @@ local function ShowIndicatorTooltip(cell, arg, ...)
 	  scantt:SetOwner(UIParent,"ANCHOR_NONE")
 	  scantt:SetHyperlink(thisinstance[toon][diff].Link)
 	  local name = scantt:GetName()
+	  local gotbossinfo
 	  for i=2,scantt:NumLines() do
 	    local left,right = _G[name.."TextLeft"..i], _G[name.."TextRight"..i]
 	    if right and right:GetText() then
 	      local n = indicatortip:AddLine()
 	      indicatortip:SetCell(n, 1, coloredText(left), "LEFT", 2)
 	      indicatortip:SetCell(n, 3, coloredText(right), "RIGHT", 1)
+	      gotbossinfo = true
 	    else
 	      indicatortip:SetCell(indicatortip:AddLine(),1,coloredText(left),"CENTER",3)
 	    end
+	  end
+	  if not gotbossinfo and info.Link:find(":0|h[",1,true) then
+	      indicatortip:SetCell(indicatortip:AddLine(),1,WHITEFONT .. 
+	          L["Boss kill information is missing for this lockout.\nThis is a Blizzard bug affecting certain old raids."] .. 
+		  FONTEND,"CENTER",3)
 	  end
 	end
 	if info.ID < 0 then
@@ -1279,6 +1378,17 @@ end
 
 -- global addon code below
 
+function core:toonInit()
+	local ti = db.Toons[thisToon] or { }
+	db.Toons[thisToon] = ti
+	ti.LClass, ti.Class = UnitClass("player")
+	ti.Level = UnitLevel("player")
+	ti.Show = ti.Show or "saved"
+	ti.Quests = ti.Quests or {}
+	ti.DailyResetTime = ti.DailyResetTime or addon:GetNextDailyResetTime()
+	ti.WeeklyResetTime = ti.WeeklyResetTime or addon:GetNextWeeklyResetTime()
+end
+
 function core:OnInitialize()
 	SavedInstancesDB = SavedInstancesDB or vars.defaultDB
 	-- begin backwards compatibility
@@ -1292,15 +1402,14 @@ function core:OnInitialize()
 	db = db or SavedInstancesDB
 	vars.db = db
 	config = vars.config
-	db.Toons[thisToon] = db.Toons[thisToon] or { }
-	db.Toons[thisToon].LClass, db.Toons[thisToon].Class = UnitClass("player")
-	db.Toons[thisToon].Level = UnitLevel("player")
-	db.Toons[thisToon].Show = db.Toons[thisToon].Show or "saved"
+	core:toonInit()
 	db.Lockouts = nil -- deprecated
 	db.History = db.History or {}
+	db.Quests = db.Quests or vars.defaultDB.Quests
 	db.Tooltip.ReportResets = (db.Tooltip.ReportResets == nil and true) or db.Tooltip.ReportResets
 	db.Tooltip.LimitWarn = (db.Tooltip.LimitWarn == nil and true) or db.Tooltip.LimitWarn
 	db.Tooltip.ShowHoliday = (db.Tooltip.ShowHoliday == nil and true) or db.Tooltip.ShowHoliday
+	db.Tooltip.ShowRandom = (db.Tooltip.ShowRandom == nil and true) or db.Tooltip.ShowRandom
 	db.Tooltip.TrackDailyQuests = (db.Tooltip.TrackDailyQuests == nil and true) or db.Tooltip.TrackDailyQuests
 	db.Tooltip.TrackWeeklyQuests = (db.Tooltip.TrackWeeklyQuests == nil and true) or db.Tooltip.TrackWeeklyQuests
 	db.Tooltip.ServerSort = (db.Tooltip.ServerSort == nil and true) or db.Tooltip.ServerSort
@@ -1308,8 +1417,26 @@ function core:OnInitialize()
 	db.Tooltip.SelfFirst = (db.Tooltip.SelfFirst == nil and true) or db.Tooltip.SelfFirst
 	db.Tooltip.SelfAlways = (db.Tooltip.SelfAlways == nil and false) or db.Tooltip.SelfAlways
 	db.Tooltip.RowHighlight = db.Tooltip.RowHighlight or 0.1
+	db.QuestDB = db.QuestDB or vars.defaultDB.QuestDB
+	for qid, _ in pairs(db.QuestDB.Daily) do
+	  if db.QuestDB.AccountDaily[qid] then
+	    debug("Removing duplicate questDB entry: "..qid)
+	    db.QuestDB.Daily[qid] = nil
+	  end
+	end
+	for qid, escope in pairs(QuestExceptions) do -- upgrade QuestDB with new exceptions
+	  local val = 862 -- default to a blank zone
+	  for scope, qdb in pairs(db.QuestDB) do
+	    val = qdb[qid] or val
+	    qdb[qid] = nil
+	  end
+	  if db.QuestDB[escope] then
+	    db.QuestDB[escope][qid] = val
+	  end
+	end
         addon:SetupVersion()
 	RequestRaidInfo() -- get lockout data
+	RequestLFDPlayerLockInfo()
 	if LFGDungeonList_Setup then pcall(LFGDungeonList_Setup) end -- try to force LFG frame to populate instance list LFDDungeonList
 	vars.dataobject = vars.LDB and vars.LDB:NewDataObject("SavedInstances", {
 		text = "",
@@ -1361,7 +1488,8 @@ end
 function core:OnEnable()
 	self:RegisterEvent("UPDATE_INSTANCE_INFO", "Refresh")
 	self:RegisterEvent("QUEST_QUERY_COMPLETE", "Refresh")
-	self:RegisterEvent("LFG_UPDATE_RANDOM_INFO", function() addon:UpdateInstanceData() end)
+	self:RegisterEvent("LFG_UPDATE_RANDOM_INFO", function() addon:UpdateInstanceData(); addon:UpdateToonData() end)
+	self:RegisterEvent("LFG_COMPLETION_REWARD", function() RequestLFDPlayerLockInfo() end)
 	self:RegisterEvent("RAID_INSTANCE_WELCOME", RequestRaidInfo)
 	self:RegisterEvent("CHAT_MSG_SYSTEM", "CheckSystemMessage")
 	self:RegisterEvent("CHAT_MSG_CURRENCY", "CheckSystemMessage")
@@ -1726,6 +1854,39 @@ function core:Refresh()
 	      q.Expires = weeklyreset
 	    end
 	  end
+          local expires
+	  db.QuestDB.Weekly.expires = weeklyreset
+	  db.QuestDB.AccountWeekly.expires = weeklyreset
+	  db.QuestDB.Darkmoon.expires = addon:GetNextDarkmoonResetTime()
+          for scope, list in pairs(db.QuestDB) do
+	    local questlist = tiq
+	    if scope:find("Account") then
+	      questlist = db.Quests
+	    end
+            for qid, mapid in pairs(list) do
+              if tonumber(qid) and (IsQuestFlaggedCompleted(qid) or
+	        (quests and quests[qid])) and not questlist[qid] then -- recovering a lost quest
+                 local title, link = addon:QuestInfo(qid)
+                 if title then
+		    local found
+		    for _,info in pairs(questlist) do
+		      if title == info.Title then -- avoid faction duplicates, since both flags are set
+		        found = true
+			break
+		      end
+		    end
+		    if not found then
+		      debug("Recovering lost quest: "..title.." ("..scope..")")
+                      questlist[qid] = { ["Title"] = title, ["Link"] = link, 
+                                         ["isDaily"] = (scope:find("Daily") and true) or nil, 
+		                         ["Expires"] = list.expires,
+		                         ["Zone"] = GetMapNameByID(mapid) }
+		    end
+                 end
+              end
+            end
+          end
+          addon:QuestCount(thisToon)
 	end
 
         local icnt, dcnt = 0,0
@@ -1945,11 +2106,15 @@ function core:ShowTooltip(anchorframe)
 	local instancerow = localarr("instancerow") -- remember where each instance goes
 	local blankrow = localarr("blankrow") -- track blank lines
 	local firstcategory = true -- use this to skip spacing before the first category
+	local function addsep() 
+   		local line = tooltip:AddSeparator(6,0,0,0,0)
+		blankrow[line] = true
+		return line
+	end
 	for _, category in ipairs(addon:OrderedCategories()) do
 		if categoryshown[category] then
 			if not firstcategory and vars.db.Tooltip.CategorySpaces then
-				local line = tooltip:AddSeparator(6,0,0,0,0)
-				blankrow[line] = true
+				addsep()
 			end
 			if (categories > 1 or vars.db.Tooltip.ShowSoloCategory) and categoryshown[category] then
 				local line = tooltip:AddLine()
@@ -2027,17 +2192,20 @@ function core:ShowTooltip(anchorframe)
 			end
 	end
 
-	if vars.db.Tooltip.ShowHoliday or showall then
-	  local holidayinst = localarr("holidayinst")
-	  for instance, info in pairs(vars.db.Instances) do
-	    if info.Holiday then
+	local holidayinst = localarr("holidayinst")
+	local firstlfd = true
+	for instance, info in pairs(vars.db.Instances) do
+	  if showall or 
+	     (info.Holiday and vars.db.Tooltip.ShowHoliday) or
+	     (info.Random and vars.db.Tooltip.ShowRandom) then
 		for toon, t in cpairs(vars.db.Toons) do
 		  local d = info[toon] and info[toon][1]
 		  if d then
 		    addColumns(columns, toon, tooltip)
 		    if not holidayinst[instance] then
-		      if not firstcategory and vars.db.Tooltip.CategorySpaces then
-		         tooltip:AddSeparator(6,0,0,0,0)
+		      if not firstcategory and vars.db.Tooltip.CategorySpaces and firstlfd then
+			 addsep()
+			 firstlfd = false
 		      end
 		      holidayinst[instance] = tooltip:AddLine(YELLOWFONT .. instance .. FONTEND)
 		    end
@@ -2045,7 +2213,6 @@ function core:ShowTooltip(anchorframe)
      		    tooltip:SetCell(holidayinst[instance], columns[toon..1], ClassColorise(t.Class,tstr), "CENTER",maxcol)
 		  end
 		end
-	    end
 	  end
 	end
 
@@ -2061,10 +2228,12 @@ function core:ShowTooltip(anchorframe)
 		end
 		local randomLine
 		if cd1 or cd2 then
-			if not firstcategory and vars.db.Tooltip.CategorySpaces then
-				tooltip:AddSeparator(6,0,0,0,0)
+			if not firstcategory and vars.db.Tooltip.CategorySpaces and firstlfd then
+				addsep()
+			        firstlfd = false
 			end
-			cd1 = cd1 and tooltip:AddLine(YELLOWFONT .. LFG_TYPE_RANDOM_DUNGEON .. FONTEND)		
+			local cooldown = ITEM_COOLDOWN_TOTAL:gsub("%%s",""):gsub("%p","")
+			cd1 = cd1 and tooltip:AddLine(YELLOWFONT .. LFG_TYPE_RANDOM_DUNGEON..cooldown .. FONTEND)		
 			cd2 = cd2 and tooltip:AddLine(YELLOWFONT .. GetSpellInfo(71041) .. FONTEND)		
 		end
 		for toon, t in cpairs(vars.db.Toons) do
@@ -2095,8 +2264,9 @@ function core:ShowTooltip(anchorframe)
 			end
 		end
 		if show then
-			if not firstcategory and vars.db.Tooltip.CategorySpaces then
-				tooltip:AddSeparator(6,0,0,0,0)
+			if not firstcategory and vars.db.Tooltip.CategorySpaces and firstlfd then
+				addsep()
+			        firstlfd = false
 			end
 			show = tooltip:AddLine(YELLOWFONT .. DESERTER .. FONTEND)		
 		end
@@ -2124,14 +2294,25 @@ function core:ShowTooltip(anchorframe)
                                 addColumns(columns, toon, tooltip)
                         end
                 end
+                local adc, awc = addon:QuestCount(nil)
+		if adc > 0 and (vars.db.Tooltip.TrackDailyQuests or showall) then showd = true end
+		if awc > 0 and (vars.db.Tooltip.TrackWeeklyQuests or showall) then showw = true end
                 if not firstcategory and vars.db.Tooltip.CategorySpaces and (showd or showw) then
-                        tooltip:AddSeparator(6,0,0,0,0)
+			addsep()
                 end
                 if showd then
-                        showd = tooltip:AddLine(YELLOWFONT .. L["Daily Quests"] .. FONTEND)
+                        showd = tooltip:AddLine(YELLOWFONT .. L["Daily Quests"] .. (adc > 0 and " ("..adc..")" or "") .. FONTEND)
+			if adc > 0 then
+                          tooltip:SetCellScript(showd, 1, "OnEnter", ShowQuestTooltip, {nil,adc.." "..L["Daily Quests"],true})
+                          tooltip:SetCellScript(showd, 1, "OnLeave", function() indicatortip:Hide(); GameTooltip:Hide() end)
+			end
                 end
                 if showw then
-                        showw = tooltip:AddLine(YELLOWFONT .. L["Weekly Quests"] .. FONTEND)
+                        showw = tooltip:AddLine(YELLOWFONT .. L["Weekly Quests"] .. (awc > 0 and " ("..awc..")" or "") .. FONTEND)
+			if awc > 0 then
+                          tooltip:SetCellScript(showw, 1, "OnEnter", ShowQuestTooltip, {nil,awc.." "..L["Weekly Quests"],true})
+                          tooltip:SetCellScript(showw, 1, "OnLeave", function() indicatortip:Hide(); GameTooltip:Hide() end)
+			end
                 end
                 for toon, t in cpairs(vars.db.Toons) do
                         local dc, wc = addon:QuestCount(toon)
@@ -2177,8 +2358,7 @@ function core:ShowTooltip(anchorframe)
    	    local currLine
 	    if show then
 		if not firstcategory and vars.db.Tooltip.CategorySpaces and firstcurrency then
-			local line = tooltip:AddSeparator(6,0,0,0,0)
-		        blankrow[line] = true
+			addsep()
 			firstcurrency = false
 		end
 		currLine = tooltip:AddLine(YELLOWFONT .. show .. FONTEND)		
@@ -2340,4 +2520,34 @@ function core:ShowTooltip(anchorframe)
 	   end
         end
 end
+
+local function ResetConfirmed()
+  debug("Resetting characters")
+  -- clear saves
+  for instance, i in pairs(vars.db.Instances) do
+	for toon, t in pairs(vars.db.Toons) do
+		i[toon] = nil
+	end
+  end
+  wipe(vars.db.Toons) -- clear toon db
+  addon.PlayedTime = nil -- reset played cache
+  core:toonInit() -- rebuild thisToon
+  core:Refresh() 
+  vars.config:BuildOptions() -- refresh config table
+  vars.config:ReopenConfigDisplay(vars.config.ftoon)
+end
+
+
+StaticPopupDialogs["SAVEDINSTANCES_RESET"] = {
+  preferredIndex = 3, -- reduce the chance of UI taint
+  text = L["Are you sure you want to reset the SavedInstances character database? Characters will be re-populated as you log into them."],
+  button1 = OKAY,
+  button2 = CANCEL,
+  OnAccept = ResetConfirmed,
+  timeout = 0,
+  whileDead = true,
+  hideOnEscape = true,
+  enterClicksFirstButton = false,
+  showAlert = true,
+}
 
