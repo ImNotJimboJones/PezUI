@@ -55,7 +55,7 @@ local function OnInitialize(plate)
 			widget:SetPoint("CENTER", plate, db.debuffWidget.x, db.debuffWidget.y)
 			widget:SetScale(db.debuffWidget.scale)
 			widget:SetFrameLevel(plate:GetFrameLevel()+1)
-			widget.Filter = DebuffFilter
+			TidyPlatesWidgets.SetAuraFilter(DebuffFilter)
 			w.WidgetDebuff = widget
 		end
 	elseif w.WidgetDebuff then
