@@ -858,7 +858,7 @@ local function AuraHandler(parserEvent, currentProfile)
   
   -- Append stack or fade prefix if needed.
   if (not parserEvent.isFade) then
-   if (parserEvent.amount > 1) then eventTypeString = eventTypeString .. "_STACK" end
+   if (parserEvent.isDose) then eventTypeString = eventTypeString .. "_STACK" end
   else
    eventTypeString = eventTypeString .. "_FADE"
   end

@@ -5,7 +5,7 @@ local GI = LibStub("LibGroupInSpecT-1.0")
 
 RaidBuffStatus = LibStub("AceAddon-3.0"):NewAddon("RaidBuffStatus", "AceEvent-3.0", "AceTimer-3.0", "AceConsole-3.0", "AceSerializer-3.0")
 RBS_svnrev = {}
-RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 614 $", ".* (.*) .*"))
+RBS_svnrev["Core.lua"] = select(3,string.find("$Revision: 620 $", ".* (.*) .*"))
 
 local addon = RaidBuffStatus
 RaidBuffStatus.L = L
@@ -1640,17 +1640,6 @@ function RaidBuffStatus:Debug(msg)
 end
 
 
-function RaidBuffStatus:DicSize(dic) -- is there really no built-in function to do this??
-	if not dic then
-		return 0
-	end
-	local i = 0
-	for _,_ in pairs(dic) do
-		i = i + 1
-	end
-	return i
-end
-
 function RaidBuffStatus:OnProfileChanged()
 	RaidBuffStatus:LoadFramePosition()
 	RaidBuffStatus:AddBuffButtons()
@@ -1911,7 +1900,7 @@ function RaidBuffStatus:SetupFrames()
 	button:SetScript("OnClick", function() RaidBuffStatus:RefreshTalents() end)
 	button:Show()
 
-	rowy = 0 - tfi.topedge
+	local rowy = 0 - tfi.topedge
 	for i = 1, tfi.maxrows do
 		tfi.rowframes[i] = {}
 		local rowframe = CreateFrame("Frame", nil, talentframe)
@@ -2715,10 +2704,18 @@ function RaidBuffStatus:Tooltip(self, title, list, tlist, blist, slist, pallyble
 				str = str .. " " .. s
 			end
 			GameTooltip:AddLine(str,nil,nil,nil,1)
-		else
-			if RaidBuffStatus:DicSize(gotitlist) > 0 then
-				GameTooltip:AddDoubleLine(L["Has buff: "], L["Cast by:"], nil, nil, nil, GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
-				for name, caster in pairs(gotitlist) do
+		elseif next(gotitlist) then
+			GameTooltip:AddDoubleLine(L["Has buff: "], L["Cast by:"], nil, nil, nil, GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+			for name, caster in pairs(gotitlist) do
+				if gotitlist.invert_table then
+					local tmp = name
+					name = caster
+					caster = tmp
+				end
+				if caster and caster:match("^\?") then
+					caster = "???"
+				end
+				if caster ~= "invert_table" then
 					GameTooltip:AddDoubleLine(name, caster, nil, nil, nil, GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
 				end
 			end

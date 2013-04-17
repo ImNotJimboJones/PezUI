@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.2
+Version 2.1.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -65,6 +65,8 @@ HHTD_C.Healing_Classes = {
     ["DRUID"]   = true,
     ["SHAMAN"]  = true,
 };
+
+HHTD_C.MaxTOC = tonumber(GetAddOnMetadata("Healers-Have-To-Die", "X-Max-Interface") or math.huge); -- once GetAddOnMetadata() was bugged and returned nil...
 
 -- The header for HHTD key bindings
 BINDING_HEADER_HHTD = "Healers Have To Die";
@@ -434,7 +436,7 @@ do
                 name = L["OPT_VERSION"],
                 desc = L["OPT_VERSION_DESC"],
                 guiHidden = true,
-                func = function () HHTD:Print(L["VERSION"], '2.1.2,', L["RELEASE_DATE"], '2013-04-04T23:53:56Z') end,
+                func = function () HHTD:Print(L["VERSION"], '2.1.3,', L["RELEASE_DATE"], '2013-04-14T23:24:35Z') end,
                 order = -5,
             },
             core = {
@@ -444,7 +446,7 @@ do
                 args = {
                     Info_Header = {
                         type = 'header',
-                        name = L["VERSION"] .. ' 2.1.2 -- ' .. L["RELEASE_DATE"] .. ' 2013-04-04T23:53:56Z',
+                        name = L["VERSION"] .. ' 2.1.3 -- ' .. L["RELEASE_DATE"] .. ' 2013-04-14T23:24:35Z',
                         order = 1,
                     },
                     Pve = {

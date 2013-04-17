@@ -1,0 +1,111 @@
+tag 5.2.4
+9fa82ad51c775d2cd9c315f84eb74368d7fafc74
+subversion <svn@deadlybossmods.com>
+2013-04-15 21:21:47 +0200
+
+Tagging as 5.2.4
+
+
+--------------------
+
+subversion:
+	- increment version number to 5.2.4
+	- Omega via svn r9314: remove useless method
+	- Omega via svn r9313: Fix 10 man heroic bugs since there are some double nests
+	- tandanu via svn r9312: typo
+	- ebmor via svn r9311: deDE update, 'Warsong Gulch' name removed from enUS/GB
+	- Omega via svn r9310: Add a near warning for torrent of ice
+	- nbluewiz via svn r9309: # Twin Consorts : Adjust normal and heroic dusk phase timer.
+	- nbluewiz via svn r9308: # Dungeon id for world event mods.
+	- Omega via svn r9307: possibly fix a logic issues with diffusion option not working cause the return got moved into a different nested function thus allowing the rest of the code that wasn't supposed to run, to run anyways. also, as failsafe, ensure that if we skip a number, we still reset it if it's over the correct count.
+	- nbluewiz via svn r9306: # Update dungeon id for Scenario.
+	- nbluewiz via svn r9305: # Greatly reduce instance name localization. (idea from tomrus, code by bluewiz. / currently on pvp, i will do this change on scenario soon.) # ruRU update.
+	- nbluewiz via svn r9304: # Megaera : Okay, try this.
+	- Omega via svn r9303: add some notes about torrent of ice bugs. still working on heroic bosses 2 more hours. I will review the issues after raid though. many issues with current aura scanning
+	- nbluewiz via svn r9302: # Lei Shen : fix lua error. # Megaera : Comment for ice Torrent bug.
+	- Omega via svn r9301: add some notes about torrent of ice bugs. still working on heroic bosses 2 more hours. I will review the issues after raid though. many issues with current aura scanning
+	- Omega via svn r9300: tortos requires 4 group rotation
+	- Omega via svn r9299: ##Cache more frequently used global. (I realize benefit from this is next to nil, but we really do use those globals a LOT so there should still be some benefit from this)
+	- Omega via svn r9298: ##If anyone is still running DBM-BurningCrusade, i'll just yell at them when they complain about lua errors. Core should not need this check anymore. ##Remove GetThreatTarget. it's used by 0 mods and functionally limited. pretty much any place we check unit threat is already fully integrated into that function already (like the target scanner) ##Cache another frequently used global.
+	- ebmor via svn r9297: deDE update
+	- Omega via svn r9296: same for mapsizes.
+	- Omega via svn r9295: don't laod warlock scenario if you are not a warlock
+	- Omega via svn r9294: lol, dial that down to 10, 30 would get people killed.
+	- Omega via svn r9293: make every the default for megaera count, since most can work with that to start and refine it to their strat once they are aware it's there. set to never, most will never use/find feature.
+	- Omega via svn r9292: Input some rank 9 data too.
+	- Omega via svn r9291: push some ptr rank 8 updates to brawlers
+	- Omega via svn r9290: #Also add "A Brewing Storm" scenario mod
+	- Omega via svn r9289: *Crypt of forgotten kings scenario mod
+	- Omega via svn r9288: fix bug with clearing icons after beam phase ended. not sure how long this has been broken. don't nil out lastcolor until we're done with it.
+	- ultrashining via svn r9287: zhTW update
+	- nbluewiz via svn r9286: # koKR update.
+	- ebmor via svn r9285: CouncilofElders.lua: adjusted Dark Power LRF formula based on new data
+	- ebmor via svn r9284: Megaera: add option to count out every rampage (consecutive) to the dropdown list; deDE update
+	- nbluewiz via svn r9283: # Jinrokh : Fix error.
+	- Omega via svn r9282: Fix an obvious logic fail my my part also my bad on healer thing. I meant to COPY and paste it to cooldowns prototype, not CUT and paste. :)
+	- nbluewiz via svn r9281: # Apply Garajal fix to Sha of Anger.
+	- nbluewiz via svn r9280: # Core : Re-add priest healer check (Why on earth removed that?) # Jinrokh : Add failsafe code if target scanning failed. Still user target scanning because target scanning is much faster then CLEU. # Change some English locales because some option text is duplicates (ex: Megaera) # koKR update. # ruRU update from tomrus.
+	- Omega via svn r9279: make garajal marking off by default.
+	- Omega via svn r9278: roll back unnecessary check,
+	- Omega via svn r9277: attempt to fix bug where voodoo doll icon table gets filled with double/tripple entries of same person. i saw a person in LFR trying to set 2 icons on 3 of the 4 targets which means he had doubles of those names in his table probably do to lag. This check should make sure name isn't already in table before putting it in there (hopefully)
+	- Omega via svn r9276: Improve chaos bolt warning on warlock mod
+	- Omega via svn r9275: Only mess with skull if it's not an alternate set, otherwise there is likely already a skull up because lower health existing turtles are still up
+	- oscarucb via svn r9274: Tortos: work harder to ensure the first visible whirl turtle gets skull mark
+	- Omega via svn r9273: oops, can't use spellid function there
+	- Omega via svn r9272: Add some untested cooldown helpers. Tortos and council ones should be simple. megaera is more complex as it has to consider different levels of dps and strategy so it uses pulldown option for configuration (thus has to be off by default until user sets what works for their raid)
+	- ebmor via svn r9271: deDE update
+	- nbluewiz via svn r9270: # cleanup locales.
+	- nbluewiz via svn r9269: # Raden : Add creature id and basic spell information. NO WARNINGS YET.
+	- ultrashining via svn r9268: zhTW update
+	- nbluewiz via svn r9267: # Dark Animus : Update Normal Siphon Anima CD bar (not 30 sec) # koKR update.
+	- Omega via svn r9266: ok, tested it, it actually does work. now to make it more grammatically correct
+	- Omega via svn r9265: Fix bug in last with bigwigs alpha detection change header and footer to reflect versioncheck is not just checking for DBM. print number of dbm AND bigwigs users separately in footer. NOTE: this has only partially been tested as for life of me i could not find anyone to join a raid group with me to test this
+	- Omega via svn r9264: distinguish between bigwigs release versions and bigwigs alphas in versioncheck. Some small tank warning fixes and optimizes
+	- ebmor via svn r9263: CouncilofElders: Dark Power normal10: 76s 0-stack post-hotfix value confirmed, formula slightly adjusted to really generate the 76, 68, 62, ... values of the referenced log
+	- Omega via svn r9262: update 10 man normal council dark power data to new post hotfix value
+	- Omega via svn r9261: #Re-added siphon anima bar, very important in heroic. Also finished heroic stuff for it.
+	- ebmor via svn r9260: deDE update
+	- nbluewiz via svn r9259: # Core : Fix starthp check error.
+	- nbluewiz via svn r9258: # DarkAnimus : Remove Siphon Anima timer not needed at all. # Durumu : Apply Lfr hotfix (TODO : Chceck this change also applied in normal and heroic?) # Primordius : Add missing UNIT_AURA event, good works.
+	- Omega via svn r9257: dark power looks good as far as i can tell. simplify the failsafe code
+	- Omega via svn r9256: #Added special warning when you get a soul fragment on heroic council #Add discharge count warning and special warning to better facilitate CD assignments on heroic council.
+	- Omega via svn r9255: remove redundant local, it's same as english then it's not needed.
+	- nbluewiz via svn r9254: # Core : Maybe this will reduce wrong icon permission?
+	- Omega via svn r9253: add comment to icon code, it completely doesn't work what so ever, everyone and their grandma is setting icons regardless of revision. no time to mess with it right now maybe this has to do with revision not quite working right with git/curse downloads?
+	- nbluewiz via svn r9252: # koKR update.
+	- nbluewiz via svn r9251: # koKR update.
+	- Omega via svn r9250: normal is now 12 min berserk too, like LFR, only heroic uses old berserk
+	- Omega via svn r9249: remove the special warning for storm cloud cast, you really only need a special warning if it's on you so you don't stand near other people with it Add a chat yell instead to make it easier to avoid players with storm clouds
+	- Omega via svn r9248: make tortos and leishi icon options both off by default. it upset LFR
+	- Omega via svn r9247: Include mod name in the display revision for dbm now. I could have just put it in DisplayVersion itself, but figure that may cause compatibility issues so it's easier to just alter the string in version printout
+	- Omega via svn r9246: Fix a global
+	- Omega via svn r9245: fix a bug in icon check
+	- Omega via svn r9244: Detect Bigwigs versions and show in dbm version check
+	- Omega via svn r9243: add run away sound to arc nova, make it melee only, it should not concern ranged unless they are where they should not be.
+	- Omega via svn r9242: DBM will now detect if there is an icon conflict with bigwigs and DBM both running on users system. We will now print a message if both bigwigs and DBM icons are turned on that one of them should be disabled
+	- Omega via svn r9241: Make sure to check DBM.Options.DontSetIcons when using SetRaidTarget since it bypasses the DBM.Options.DontSetIcons check in dbm seticon protocol
+	- Omega via svn r9240: don't need this anymore. sucks the 1st was on a monday. :\
+	- nbluewiz via svn r9239: # Core : wipe raid table on group leave.
+	- nbluewiz via svn r9238: # Megaera : Fix Ice Torrent stuff bug.
+	- nbluewiz via svn r9237: # koKR update.
+	- nbluewiz via svn r9236: # Some countdown stuff for ToT.
+	- nbluewiz via svn r9235: # Core : small fix. # ruRU update from tomrus.
+	- tandanu via svn r9234: remove warning that shows when you still have DBM3 installed
+	- tandanu via svn r9233: not all bosses with combatInfo have a boss creature id :(
+	- Omega via svn r9232: reverse the order icons go out, so skull is more likely to go on first shell coming out rather than last.
+	- ebmor via svn r9231: Brawlers: fix enUS/GB, koKR typos; deDE update
+	- tandanu via svn r9230: change the way localizations of 'auto-localized' core variables to a more sensible format for non-english clients.
+	- nbluewiz via svn r9229: # Core : Fix lua error. / Change StartCombat delay check.
+	- nbluewiz via svn r9228: # koKR update.
+	- nbluewiz via svn r9227: # Core : 1. Add StartCombat by UNIT_HEALTH event. This will be useful for pre-cataclysm instances. By this change, combat detection for pre-cataclysm instances will greatly reduce. 2. Improve boss health report. DBM now report health more correctly. Especially for multiple bosses.
+	- Omega via svn r9226: add first new boss warning, sadly, this warning isn't for the fighter, it's for the audience, lol. Real cute blizzard. boss tormenting audience by casting debuffs on 5 random audience players. Def need special warning so you don't die while tabbed out.
+	- Omega via svn r9225: Sorry to change again, but it looks like 12 new rares were added (16 rares in one mod too much, split into 2 like blizzard did, rares 1 and rares 2 (see screen shots in mod comments for reference)
+	- Omega via svn r9224: remove commented out stuff. i think patch 5.2 broke that (same way they broke it on amber shaper in 5.2 and cobalt mines in 5.1, sometimes blizz likes to break target scanning :\
+	- nbluewiz via svn r9223: # Rank 8 and 9 : Add revision tag. # koKR update.
+	- nbluewiz via svn r9222: # Liu Flameheart : seems target scanning not works.
+	- Omega via svn r9221: Changed rares to rank 0 since they are unranked fights and just appear when you are max rank Added the new ranks 8 and 9 (no features yet just blank stubs)
+	- nbluewiz via svn r9220: # Jikun : Change LFR and 10 man text. # Megaera : LFR update.
+	- nbluewiz via svn r9219: # ruRU update from tomrus. # comment : alpha filename at http://dev.deadlybossmods.com still 5.2.3. please fix this, tandanu.
+	- nbluewiz via svn r9218: # Council of Elders : Add personal debuff timer. # Twin Consorts : I've got 10 heroic combat log(no transcriptor), adjust timer by this. Also, remove high variation cd timer.
+	- Omega via svn r9217: Fix bug in brawlers mod where events wouldn't register on first mod load (when in correct zone).
+	- tandanu via svn r9216: new version number for alpha builds

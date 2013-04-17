@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.2
+Version 2.1.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -285,105 +285,114 @@ do
     local L = LibStub("AceLocale-3.0"):NewLocale("HealersHaveToDie", "deDE");
 
     if L then
-        -- L["ACTIVE"] = ""
+        L["ACTIVE"] = "Aktiv!" -- Needs review
 L["Announcer"] = "Melder"
 L["Announcer_DESC"] = "Dieses Modul erlaubt dir Chat-Warnungen und Alarmtöne einzustellen"
--- L["AUTO_RAID_PARTY_INSTANCE"] = ""
--- L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = ""
--- L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = ""
--- L["CHAT_POST_NO_HEALERS"] = ""
+L["AUTO_RAID_PARTY_INSTANCE"] = "Auto: Schlachtzug/Gruppe/Instanz" -- Needs review
+L["CHAT_POST_ANNOUNCE_FEATURE_NOT_CONFIGURED"] = "Die Texte für die Meldungen sind nicht konfiguriert. Tippe /hhtdg" -- Needs review
+L["CHAT_POST_ANNOUNCE_TOO_SOON_WAIT"] = "Das ist zu früh (siehe Option Verzögerung)." -- Needs review
+L["CHAT_POST_NO_HEALERS"] = "Keine Heiler auf beiden Seiten :/ (noch)" -- Needs review
 L["DESCRIPTION"] = "Entdecke auf der Stelle diese verdammten Heiler und sorge dafür daß sie Ihr Schicksal ereilt! (PVE und PVP)"
 L["DISABLED"] = [=[hhtd wurde deaktiviert!
-Gib /hhtd ein, um es wieder zu aktivieren.]=] -- Needs review
+Gib /hhtd ein, um es wieder zu aktivieren.]=]
 L["ENABLED"] = "aktiviert! Für eine Optionsliste gib /HHTDG ein." -- Needs review
--- L["HEALER_UNDER_ATTACK"] = ""
--- L["HUMAN"] = ""
--- L["IDLE"] = ""
--- L["INSTANCE_CHAT"] = ""
+L["HEALER_UNDER_ATTACK"] = "Heiler %s wird von %s angegriffen" -- Needs review
+L["HUMAN"] = "Spieler" -- Needs review
+L["IDLE"] = "Untätig" -- Needs review
+L["INSTANCE_CHAT"] = "Instanz Chat" -- Needs review
 L["IS_A_HEALER"] = "%s ist ein Heiler!"
--- L["LOG_ACTIVE"] = ""
--- L["LOG_BELOW_THRESHOLD"] = ""
--- L["LOG_IDLE"] = ""
--- L["NO_DATA"] = ""
+L["LOG_ACTIVE"] = "Aktiv!" -- Needs review
+L["LOG_BELOW_THRESHOLD"] = " (unter Schwellwert)" -- Needs review
+L["LOG_IDLE"] = "inaktiv" -- Needs review
+L["NO_DATA"] = "Keine Heilung" -- Needs review
 -- L["NPC"] = ""
 L["NPH"] = "Namensschildanker"
 L["NPH_DESC"] = "Dieses Modul fügt den feindlichen Heilern ein rotes Kreuz auf den Namensschildern hinzu"
 L["OPT_ANNOUNCE"] = "Mitteilungen anzeigen"
 L["OPT_ANNOUNCE_DESC"] = "HHTD wird Mitteilungen anzeigen, wenn du auf einen feindlichen Heiler zielst oder die Maus über ihn bewegst."
--- L["OPT_CLEAR_LOGS"] = ""
+L["OPT_CLEAR_LOGS"] = "Löschen" -- Needs review
 L["OPT_CORE_OPTIONS"] = "Hauptoptionen"
 L["OPT_DEBUG"] = "Fehler suchen"
 L["OPT_DEBUG_DESC"] = "Fehlersuche aktivieren / deaktivieren"
--- L["OPT_DEBUGLEVEL"] = ""
--- L["OPT_DEBUGLEVEL_DESC"] = ""
+L["OPT_DEBUGLEVEL"] = "Debug-Ebene" -- Needs review
+L["OPT_DEBUGLEVEL_DESC"] = "Debug-Ebene: 1=Alle, 2=Warnungen, 3=Fehler" -- Needs review
 L["OPT_ENABLE_GEHR"] = "Graphischen Bericht aktivieren"
 L["OPT_ENABLE_GEHR_DESC"] = "Zeigt eine graphische Liste der entdeckten feindlichen Heiler mit verschiedenen Eigenschaften an."
 L["OPT_HEALER_FORGET_TIMER"] = "\"Heiler-vergessen\" Timer"
 L["OPT_HEALER_FORGET_TIMER_DESC"] = "Den \"Heiler-vergessen\" Timer einstellen (die Zeit in Sekunden, für deren Dauer ein Feind als Heiler betrachtet wird)"
-L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = "Mindestmenge an gesamter Heilung (|cff00dd00%u|r)" -- Needs review
-L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "Heiler werden nicht erkannt bis sie die \"Mindestmenge an gesamter Heilung\" erreicht haben." -- Needs review
--- L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = ""
--- L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = ""
--- L["OPT_LOG"] = ""
--- L["OPT_LOG_DESC"] = ""
--- L["OPT_LOGS"] = ""
--- L["OPT_LOGS_DESC"] = ""
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT"] = "Mindestmenge an gesamter Heilung (|cff00dd00%u|r)"
+L["OPT_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "Heiler werden nicht erkannt bis sie die \"Mindestmenge an gesamter Heilung\" erreicht haben."
+L["OPT_HEALER_UNDER_ATTACK_ALERTS"] = "Befreundete Heiler schützen" -- Needs review
+L["OPT_HEALER_UNDER_ATTACK_ALERTS_DESC"] = "Zeigt eine Warnung an, wenn ein befreundeter Heiler in der Nähe angegriffen wird." -- Needs review
+L["OPT_LOG"] = "Protokollieren" -- Needs review
+L["OPT_LOG_DESC"] = "Aktiviert die Protokollierung und fügt den Tab 'Protokolle' zum Optionsfenster hinzu." -- Needs review
+L["OPT_LOGS"] = "Protokolle" -- Needs review
+L["OPT_LOGS_DESC"] = "Zeigt erkannte Heiler und Statistik an." -- Needs review
 L["OPT_MODULES"] = "Module"
--- L["OPT_NPH_MARKER_SCALE"] = ""
--- L["OPT_NPH_MARKER_SCALE_DESC"] = ""
--- L["OPT_NPH_MARKER_SETTINGS"] = ""
--- L["OPT_NPH_MARKER_X_OFFSET"] = ""
--- L["OPT_NPH_MARKER_X_OFFSET_DESC"] = ""
--- L["OPT_NPH_MARKER_Y_OFFSET"] = ""
--- L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = ""
--- L["OPT_NPH_WARNING1"] = ""
--- L["OPT_NPH_WARNING2"] = ""
+L["OPT_NPH_MARKER_SCALE"] = "Symbolgröße" -- Needs review
+L["OPT_NPH_MARKER_SCALE_DESC"] = "Ändert die Symbolgröße" -- Needs review
+L["OPT_NPH_MARKER_SETTINGS"] = "Symboleinstellungen" -- Needs review
+L["OPT_NPH_MARKER_X_OFFSET"] = "Horizontale Verschiebung" -- Needs review
+L["OPT_NPH_MARKER_X_OFFSET_DESC"] = "Verschiebt Symbole horizontal." -- Needs review
+L["OPT_NPH_MARKER_Y_OFFSET"] = "Vertikale Verschiebung" -- Needs review
+L["OPT_NPH_MARKER_Y_OFFSET_DESC"] = "Verschiebt Symbole vertikal." -- Needs review
+L["OPT_NPH_WARNING1"] = [==[[=[|cFFFF0000WARNUNG:|r Die Namensplaketten feindlicher Einheiten sind deaktiviert. So kann kein rotes Kreuz angezeigt werden.
+Du kannst die Namensplaketten aktivieren über Interface > Spiel > Namen oder durch betätigen der zugewiesenen Taste.]=]]==] -- Needs review
+L["OPT_NPH_WARNING2"] = [==[[=[|cFFFF0000WARNUNG:|r Die Namensplaketten befreundeter Einheiten sind deaktiviert. So kann kein Heilersymbol angezeigt werden.
+Du kannst die Namensplaketten aktivieren über Interface > Spiel > Namen oder durch betätigen der zugewiesenen Taste.]=]]==] -- Needs review
 L["OPT_OFF"] = "aus"
 L["OPT_OFF_DESC"] = "Deaktiviert HHTD"
 L["OPT_ON"] = "an"
 L["OPT_ON_DESC"] = "Aktiviert HHTD"
--- L["OPT_POST_ANNOUNCE_CHANNEL"] = ""
--- L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_DESCRIPTION"] = ""
--- L["OPT_POST_ANNOUNCE_ENABLE"] = ""
--- L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = ""
--- L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = ""
--- L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = ""
--- L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = ""
--- L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = ""
--- L["OPT_POST_ANNOUNCE_NUMBER"] = ""
--- L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = ""
--- L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = ""
--- L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = ""
--- L["OPT_POST_ANNOUNCE_SETTINGS"] = ""
--- L["OPT_POST_ANNOUNCE_THROTTLE"] = ""
--- L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = ""
+L["OPT_POST_ANNOUNCE_CHANNEL"] = "Kanal" -- Needs review
+L["OPT_POST_ANNOUNCE_CHANNEL_DESC"] = "In diesem Kanal werden die Meldungen gesendet." -- Needs review
+L["OPT_POST_ANNOUNCE_DESCRIPTION"] = [==[[=[|cFFFF0000WICHTIG:|r Tippe |cff40ff40/hhtdp|r oder belege eine Taste um die Meldung zu senden,
+befreundete Heiler zu schützen und feindliche Heiler anzugreifen.
+(siehe im Spielmenü unter Optionen -> Tastaturbelegung, um eine Taste zu belegen)
+]=]]==] -- Needs review
+L["OPT_POST_ANNOUNCE_ENABLE"] = "Senden" -- Needs review
+L["OPT_POST_ANNOUNCE_ENABLE_DESC"] = "Wenn du einen feindlichen Heiler anvisierst oder die Maus über ihn bewegst, wird eine Meldung in einem bestimmten Kanal gesendet." -- Needs review
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY"] = "Nur Spieler" -- Needs review
+L["OPT_POST_ANNOUNCE_HUMAMNS_ONLY_DESC"] = "Es werden keine Meldungen über NPC's gesendet." -- Needs review
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE"] = "Text für feindliche Heiler" -- Needs review
+L["OPT_POST_ANNOUNCE_KILL_MESSAGE_DESC"] = [==[[=[Gib eine Meldung ein, die Dein Team anstachelt feindliche Heiler anzugreifen.
+
+Du must das Schlüsselwort [HEALERS] irgendwo verwenden, welches automatisch mit den Namen der feindlichen Heiler ersetzt wird.]=]]==] -- Needs review
+L["OPT_POST_ANNOUNCE_MESSAGES_EQUAL"] = "Es gibt eine Meldung für befreundete Heiler und eine für feindliche Heiler, die dürfen nicht gleich sein." -- Needs review
+L["OPT_POST_ANNOUNCE_MESSAGE_TOO_SHORT"] = "Deine Meldung ist zu kurz!" -- Needs review
+L["OPT_POST_ANNOUNCE_MISSING_KEYWORD"] = "Das Schlüsselwort [HEALERS] fehlt!" -- Needs review
+L["OPT_POST_ANNOUNCE_NUMBER"] = "Anzahl Heiler" -- Needs review
+L["OPT_POST_ANNOUNCE_NUMBER_DESC"] = "So viele Heiler werden maximal pro Meldung einbezogen." -- Needs review
+L["OPT_POST_ANNOUNCE_POST_MESSAGE_ISSUE"] = "In einem der Texte ist ein Fehler." -- Needs review
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE"] = "Text für befreundete Heiler" -- Needs review
+L["OPT_POST_ANNOUNCE_PROTECT_MESSAGE_DESC"] = [==[[=[Gib eine Meldung ein, die Dein Team anstachelt seine Heiler zu schützen.
+
+Du must das Schlüsselwort [HEALERS] irgendwo verwenden, welches automatisch mit den Namen der befreundeten Heiler ersetzt wird.]=]]==] -- Needs review
+L["OPT_POST_ANNOUNCE_SETTINGS"] = "Sende-Einstellungen" -- Needs review
+L["OPT_POST_ANNOUNCE_THROTTLE"] = "Verzögerung" -- Needs review
+L["OPT_POST_ANNOUNCE_THROTTLE_DESC"] = "So viele Sekunden liegen mindestens zwischen den Meldungen." -- Needs review
 L["OPT_PVE"] = "PVE-Option aktivieren"
 L["OPT_PVE_DESC"] = "HHTD wird NPCs einbeziehen"
 L["OPT_PVPHEALERSSPECSONLY"] = "Heiler Spezialisierungserkennung"
 L["OPT_PVPHEALERSSPECSONLY_DESC"] = "Erkenne nur Spieler die in Heilung spezialisiert sind. (Dies deaktiviert den \"Minimale Menge an Heilung\" Filter für PVP.)"
--- L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = ""
--- L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = ""
-L["OPT_SOUNDS"] = "Alarmtöne oder akustische Warnmeldungen" -- Needs review
+L["OPT_SET_FRIENDLY_HEALERS_ROLE"] = "Rolle befreundeter Heiler setzen" -- Needs review
+L["OPT_SET_FRIENDLY_HEALERS_ROLE_DESC"] = "Legt automatisch die Schlachtzug-Heiler-Rolle bei erkannten freundlichen Heilern (wenn möglich) fest." -- Needs review
+L["OPT_SOUNDS"] = "Warnsignal" -- Needs review
 L["OPT_SOUNDS_DESC"] = "HHTD wird einen bestimmten Sound abspielen, wenn du auf einen feindlichen Heiler zielst oder die Maus über ihn bewegst."
 L["OPT_STRICTGUIDPVE"] = "Genaue PVE-Erkennung"
 L["OPT_STRICTGUIDPVE_DESC"] = "Bei namensgleichen NPCs wird HHTD nur solchen NPCs ein rotes Kreuz hinzufügen, welche auch tatsächlich geheilt haben und nicht allen. Denke daran, daß Du meistens den NPC im Ziel haben oder mit der Maus darüber fahren mußt, damit das Kreuz erscheint."
--- L["OPT_TESTONTARGET"] = ""
--- L["OPT_TESTONTARGET_DESC"] = ""
--- L["OPT_TESTONTARGET_ENOTARGET"] = ""
+L["OPT_TESTONTARGET"] = "Verhalten von HHTD auf das momentane Ziel testen" -- Needs review
+L["OPT_TESTONTARGET_DESC"] = "Markiert das momentane Ziel als Heiler, so könnt Ihr testen, was passiert." -- Needs review
+L["OPT_TESTONTARGET_ENOTARGET"] = "Ihr habt kein Ziel." -- Needs review
 L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT"] = "Benutze den \"Minimale Menge an Heilung\" Filter"
 L["OPT_USE_HEALER_MINIMUM_HEAL_AMOUNT_DESC"] = "Heiler müssen für die genannte Menge heilen, bevor sie als solche markiert werden."
 L["OPT_VERSION"] = "Version"
 L["OPT_VERSION_DESC"] = "Version und Veröffentlichungsdatum anzeigen"
--- L["PARTY"] = ""
+L["PARTY"] = "CHAT_MSG_PARTY" -- Needs review
 L["RELEASE_DATE"] = "Veröffentlichungsdatum: "
--- L["SAY"] = ""
+L["SAY"] = "CHAT_MSG_SAY" -- Needs review
 L["VERSION"] = "Version:"
--- L["YELL"] = ""
+L["YELL"] = "CHAT_MSG_YELL" -- Needs review
 L["YOU_GOT_HER"] = "Du hast %ssie|r!"
 L["YOU_GOT_HIM"] = "Du hast %sihn|r!"
 L["YOU_GOT_IT"] = "Du hast %ses|r!"

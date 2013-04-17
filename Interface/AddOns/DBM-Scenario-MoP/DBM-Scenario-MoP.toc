@@ -21,8 +21,8 @@
 ## X-DBM-Mod-Name-zhCN: 场景战役 (熊猫人之谜)
 ## X-DBM-Mod-Name-frFR: Scénario (MoP)
 ## X-DBM-Mod-Sort: 35
-## X-DBM-Mod-LoadZoneID: 906, 851, 899, 911, 920, 934, 919
-## X-Curse-Packaged-Version: 5.2.3
+## X-DBM-Mod-LoadZoneID: 906, 851, 899, 911, 920, 934, 919, 900, 878
+## X-Curse-Packaged-Version: 5.2.4
 ## X-Curse-Project-Name: Deadly Boss Mods
 ## X-Curse-Project-ID: deadly-boss-mods
 ## X-Curse-Repository-ID: wow/deadly-boss-mods/mainline
@@ -33,8 +33,12 @@ localization.tw.lua
 localization.cn.lua
 localization.fr.lua
 localization.ru.lua
+ABrewingStorm\MapSizes.lua
+ABrewingStorm\BrewingStorm.lua
 ArenaOfAnnihilation\MapSizes.lua
 ArenaOfAnnihilation\ArenaOfAnnihilation.lua
+CryptofForgotenKings\MapSizes.lua
+CryptofForgotenKings\CryptofKings.lua
 Landfall\MapSizes.lua
 Landfall\Landfall.lua
 TheramoresFall\MapSizes.lua

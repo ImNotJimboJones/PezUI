@@ -3,7 +3,7 @@ local L = vars.L
 local addon = RaidBuffStatus
 local report = RaidBuffStatus.report
 local raid = RaidBuffStatus.raid
-RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 616 $", ".* (.*) .*"))
+RBS_svnrev["Buffs.lua"] = select(3,string.find("$Revision: 622 $", ".* (.*) .*"))
 
 local BSmeta = {}
 local BS = setmetatable({}, BSmeta)
@@ -415,7 +415,7 @@ end
 
 local function unithasbuff(unit, bufflist, staticfavored)
   for _, v in pairs(bufflist) do
-    b = unit.hasbuff[v]
+    local b = unit.hasbuff[v]
     if b then
       if staticfavored and RaidBuffStatus.db.profile.preferstaticbuff and -- looking for a static buff
          UnitIsVisible(unit.unitid) then -- duration is only available when unit is visible
@@ -430,10 +430,14 @@ local function unithasbuff(unit, bufflist, staticfavored)
   return false
 end
 
--- generic buffinfo struct: 1=CLASSNAME, 2=spellid, [ 3=priority, [ 4=spec ] ]
+-- generic buffinfo struct: 1=CLASSNAME, 2=spellid, 3=priority, 4=spec, 5=conflicting_spellid
 
+local wsptmp = {}
+local _generic_buffer_cache = {}
 local function generic_buffers(buffinfo)
-  local ret = {}
+  local ret = _generic_buffer_cache[buffinfo] or {}
+  _generic_buffer_cache[buffinfo] = ret
+  wipe(ret)
   for _,info in ipairs(getbuffinfo(buffinfo)) do
     for name,unit in pairs(raid.classes[info[1]]) do
        if (info[4] == nil) or (info[4] == unit.spec) then  -- spec-specific buff
@@ -467,20 +471,35 @@ local function generic_whispertobuff(reportl, prefix, buffinfo, buffers, buffnam
 
   local priority 
   for _,info in ipairs(getbuffinfo(buffinfo)) do -- for each class
+    local bname = (buffname or BS[info[2]])
+    local cbuff = info[5] and BS[info[5]]
     if priority and (info[3] ~= priority) then
         return -- already whispered a higher priority class
     end
+    wipe(wsptmp)
     for name,unit in pairs(raid.classes[info[1]]) do  -- foreach unit of that class
+    --for name,unit in bi_pairs(raid.classes[info[1]], info[2], info[5]) do  -- foreach unit of that class, sorted by autoguess best buff candidate
         if RaidBuffStatus:InMyZone(name) and unit.online and not unit.isdead 
 	   and ((info[4] == nil) or (info[4] == unit.spec)) then
-           RaidBuffStatus:Say(prefix .. "<" .. (buffname or BS[info[2]]) .. ">: " .. targets, name)
+	   local code = 5
+	   if unit.hasbuff[bname] and unit.hasbuff[bname].caster == name then
+	      code = 1 -- already self-buffed, top priority
+	   elseif cbuff and unit.hasbuff[cbuff] and unit.hasbuff[cbuff].caster == name then -- self buffed with conflicting
+	      code = 9
+	   end
+	   table.insert(wsptmp, code.."#"..name)
+	end
+    end
+    table.sort(wsptmp)
+    for _,codedname in ipairs(wsptmp) do
+    	   local _,name = strsplit("#",codedname)
+           RaidBuffStatus:Say(prefix .. "<" .. bname .. ">: " .. targets, name)
            if RaidBuffStatus.db.profile.whisperonlyone then
               return
            else
               priority = info[3]
            end
-        end
-     end
+    end
   end
 end
 
@@ -1890,7 +1909,7 @@ local BF = {
 		timer = false,
 		core = true,
 		class = { DRUID = true, PALADIN = true, MONK = true },
-		buffinfo = { { "DRUID", 1126, 1 }, { "MONK", 117666, 1 }, { "PALADIN", 20217, 2 } },
+		buffinfo = { { "DRUID", 1126, 1 }, { "MONK", 117666, 1 }, { "PALADIN", 20217, 2, nil, 19740 } },
 		chat = L["Stat Buff"], 
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
@@ -1943,7 +1962,7 @@ local BF = {
 		timer = false,
 		core = true,
 		class = { PALADIN = true },
-		buffinfo = { { "PALADIN", 19740 } },
+		buffinfo = { { "PALADIN", 19740, 1, nil, 20217 } },
 		chat = L["Mastery Buff"], 
 		pre = nil,
 		main = function(self, name, class, unit, raid, report)
@@ -2367,6 +2386,82 @@ local BF = {
 			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[110309], report.symbiosislist, -- Symbiosis
 						nil, nil, nil, nil, nil, nil, nil, nil,
 						report.havesymbiosis)
+		end,
+		partybuff = nil,
+	},
+
+	beacon = {
+		order = 393,
+		list = "beaconlist",
+		check = "checkbeacon",
+		default = true,
+		defaultbuff = true,
+		defaultwarning = false,
+		defaultdash = true,
+		defaultdashcombat = false,
+		defaultboss = true,
+		defaulttrash = true,
+		checkzonedout = false,
+		selfbuff = true,
+		selfonlybuff = true,
+		timer = false,
+		class = { PALADIN = true, },
+		buffinfo = { { "PALADIN", 53563, 1, 1 } },
+		chat = BS[53563], -- Beacon of light
+		pre = function(self, raid, report)
+			initreporttable("gavebeacon")
+			report.gavebeacon.invert_table = true
+			report.hpallys = generic_buffers("beacon")
+			if next(report.hpallys) then
+				report.checking.beacon = true
+			end
+		end,
+		recordcaster = function(caster, name)
+			if not caster or #caster == 0 then
+				report.beaconunknown = (report.beaconunknown or 0) + 1
+				caster = "?"..report.beaconunknown
+			end
+			report.gavebeacon[caster] = name
+		end,
+		main = function(self, name, class, unit, raid, report)
+			-- beacon is particularly gross becuse one unit can have multiple beacons
+			-- also when targets are ranged/phased we can't tell who cast their beacon buff
+			local hasbuff = unit.hasbuff[BS[53563]]
+			if hasbuff then
+			   if hasbuff.casterlist then
+				for _,caster in pairs(hasbuff.casterlist) do
+					RaidBuffStatus.BF.beacon.recordcaster(caster, name)
+				end
+			   else
+				RaidBuffStatus.BF.beacon.recordcaster(hasbuff.caster, name)
+			   end
+			end
+		end,
+		post = function(self, raid, report)
+			for _, caster in pairs(report.hpallys) do
+				if not report.gavebeacon[caster] then
+					table.insert(report.beaconlist, caster)
+				end
+			end
+			if report.beaconunknown == #report.beaconlist then -- we see the right number of beacons
+				if report.beaconunknown == 1 then -- fixup report list if we can
+					report.gavebeacon[report.beaconlist[1]] = report.gavebeacon["?1"]
+					report.gavebeacon["?1"] = nil
+				end
+				wipe(report.beaconlist)
+			end
+		end,
+		icon = BSI[53563], -- Beacon of light
+		update = function(self)
+			RaidBuffStatus:DefaultButtonUpdate(self, report.beaconlist, RaidBuffStatus.db.profile.checkbeacon, report.checking.beacon or false, report.beaconlist)
+		end,
+		click = function(self, button, down)
+			RaidBuffStatus:ButtonClick(self, button, down, "beacon")
+		end,
+		tip = function(self)
+			RaidBuffStatus:Tooltip(self, L["Missing "] .. BS[53563], report.beaconlist, 
+						nil, nil, nil, nil, nil, nil, nil, nil,
+						report.gavebeacon)
 		end,
 		partybuff = nil,
 	},

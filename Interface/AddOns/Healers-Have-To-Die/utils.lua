@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.2
+Version 2.1.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -97,7 +97,7 @@ function HHTD:CreateClassColorTables () -- {{{
                 HHTD:GetClassHexColor(class);
             else
                 RAID_CLASS_COLORS[class] = nil; -- Eat that!
-                print("HHTD: |cFFFF0000Stupid value found in _G.RAID_CLASS_COLORS table|r\nThis will cause many issues (tainting), HHTD will display this message until the culprit add-on is fixed or removed, the Stupid value is: '", class, "'");
+                self:Print("|cFFFF0000Stupid value found in _G.RAID_CLASS_COLORS table|r\nThis will cause many issues (tainting), HHTD will display this message until the culprit add-on is fixed or removed, the Stupid value is: '", class, "'");
             end
         end
     else
@@ -324,7 +324,7 @@ function HHTD:FatalError (TheError)
 end
 
 function HHTD:GetBAddon (StackLevel)
-    local stack = debugstack(1 + StackLevel,1,1);
+    local stack = debugstack(1 + StackLevel,2,0);
     if not stack:lower():find("\\libs\\")
         and not stack:find("[/\\]CallbackHandler")
         and not stack:find("[/\\]AceTimer")
@@ -336,8 +336,9 @@ function HHTD:GetBAddon (StackLevel)
             return false;
         end
 
-        return stack:match("[/\\]AddOns[/\\]([^/\\]+)[/\\]");
+        return stack:match("[/\\]AddOns[/\\]([^/\\]+)[/\\]"), stack;
     else
+        self:Debug(WARNING, 'SetScript called but not reported:', stack);
         return false;
     end
 end

@@ -622,10 +622,10 @@ local function CreateCaptureFuncs()
   SPELL_INTERRUPT = function (p, ...) p.eventType, p.skillID, p.skillName, p.skillSchool, p.extraSkillID, p.extraSkillName, p.extraSkillSchool = "interrupt", ... end,
   
   -- Aura events.
-  SPELL_AURA_APPLIED = function (p, ...) p.eventType, p.amount, p.skillID, p.skillName, p.skillSchool, p.auraType = "aura", 1, ... end,
-  SPELL_AURA_APPLIED_DOSE = function (p, ...) p.eventType, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", ... end,
-  SPELL_AURA_REMOVED = function (p, ...) p.eventType, p.isFade, p.amount, p.skillID, p.skillName, p.skillSchool, p.auraType = "aura", true, 1, ... end,
-  SPELL_AURA_REMOVED_DOSE = function (p, ...) p.eventType, p.isFade, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", true, ... end,
+  SPELL_AURA_APPLIED = function (p, ...) p.eventType, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", ... end,
+  SPELL_AURA_APPLIED_DOSE = function (p, ...) p.eventType, p.isDose, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", true, ... end,
+  SPELL_AURA_REMOVED = function (p, ...) p.eventType, p.isFade, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", true, ... end,
+  SPELL_AURA_REMOVED_DOSE = function (p, ...) p.eventType, p.isFade, p.isDose, p.skillID, p.skillName, p.skillSchool, p.auraType, p.amount = "aura", true, true, ... end,
 
   -- Enchant events.
   ENCHANT_APPLIED = function (p, ...) p.eventType, p.skillName, p.itemID, p.itemName = "enchant", ... end,

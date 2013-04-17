@@ -1,0 +1,32 @@
+------------------------------------------------------------------------
+r624 | oscarucb | 2013-04-16 05:06:45 +0000 (Tue, 16 Apr 2013) | 1 line
+Changed paths:
+   A /tags/5.6.0 (from /trunk:623)
+
+Tagging as 5.6.0
+------------------------------------------------------------------------
+r622 | oscarucb | 2013-04-06 07:20:57 +0000 (Sat, 06 Apr 2013) | 3 lines
+Changed paths:
+   M /trunk/Buffs.lua
+
+make might/kings smarter about whispering the correct pally
+favor partial buffers for single wsps
+
+------------------------------------------------------------------------
+r620 | oscarucb | 2013-03-31 08:22:44 +0000 (Sun, 31 Mar 2013) | 3 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+add support for checking Beacon of Light
+reduce memory churn in generic_buffers
+
+------------------------------------------------------------------------
+r619 | oscarucb | 2013-03-08 20:19:48 +0000 (Fri, 08 Mar 2013) | 2 lines
+Changed paths:
+   M /trunk/Buffs.lua
+   M /trunk/Core.lua
+
+fix two global variables
+
+------------------------------------------------------------------------

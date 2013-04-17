@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(825, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 9136 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 9300 $"):sub(12, -3))
 mod:SetCreatureID(67977)
 mod:SetModelID(46559)
 mod:SetUsedIcons(8, 7, 6, 5, 4, 3)
@@ -42,20 +42,20 @@ local timerSummonBatsCD				= mod:NewCDTimer(45, "ej7140", nil, nil, nil, 136685)
 local timerStompActive				= mod:NewBuffActiveTimer(10.8, 134920)--Duration of the rapid caveins
 local timerShellConcussion			= mod:NewBuffFadesTimer(20, 136431)
 
+local countdownStomp				= mod:NewCountdown(49, 134920, mod:IsHealer())
+
 local berserkTimer					= mod:NewBerserkTimer(780)
 
 mod:AddBoolOption("InfoFrame")
-if GetLocale() == "koKR" then
-	mod:AddBoolOption("SetIconOnTurtles", false)
-else
-	mod:AddBoolOption("SetIconOnTurtles", true)
-end
+mod:AddBoolOption("SetIconOnTurtles", false)
 mod:AddBoolOption("ClearIconOnTurtles", false)--Different option, because you may want auto marking but not auto clearing. or you may want auto clearning when they "die" but not auto marking when they spawn
+mod:AddBoolOption("AnnounceCooldowns", mod:HasRaidCooldown())
 
 local shelldName = GetSpellInfo(137633)
 local shellConcussion = GetSpellInfo(136431)
 local stompActive = false
 local stompCount = 0
+local stompCast = 0--The one we reset every 3
 local firstRockfall = false--First rockfall after a stomp
 local shellsRemaining = 0
 local lastConcussion = 0
@@ -63,7 +63,7 @@ local kickedShells = {}
 local addsActivated = 0
 local alternateSet = false
 local adds = {}
-local AddIcon = 8
+local AddIcon = 6
 local iconsSet = 3
 local highestVersion = 0
 local hasHighestVersion = false
@@ -81,12 +81,13 @@ end
 function mod:OnCombatStart(delay)
 	stompActive = false
 	stompCount = 0
+	stompCast = 0
 	firstRockfall = false--First rockfall after a stomp
 	shellsRemaining = 0
 	lastConcussion = 0
 	addsActivated = 0
 	highestVersion = 0
-	AddIcon = 8
+	AddIcon = 6
 	iconsSet = 3
 	alternateSet = false
 	table.wipe(adds)
@@ -94,6 +95,7 @@ function mod:OnCombatStart(delay)
 	timerRockfallCD:Start(15-delay)
 	timerCallTortosCD:Start(21-delay)
 	timerStompCD:Start(29-delay, 1)
+	countdownStomp:Start(29-delay)
 	timerBreathCD:Start(-delay)
 	if self.Options.InfoFrame and self:IsDifficulty("heroic10", "heroic25") then
 		DBM.InfoFrame:SetHeader(L.WrongDebuff:format(shelldName))
@@ -102,7 +104,7 @@ function mod:OnCombatStart(delay)
 	else
 		berserkTimer:Start(-delay)
 	end
-	if DBM:GetRaidRank() > 0 and self.Options.SetIconOnTurtles then--You can set marks and you have icons turned on
+	if DBM:GetRaidRank() > 0 and self.Options.SetIconOnTurtles and not DBM.Options.DontSetIcons then--You can set marks and you have icons turned on
 		self:SendSync("IconCheck", UnitGUID("player"), tostring(DBM.Revision))
 	end
 end
@@ -132,11 +134,21 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 134920 then
 		stompActive = true
 		stompCount = stompCount + 1
+		if stompCast == 4 then stompCast = 0 end
+		stompCast = stompCast + 1
 		warnQuakeStomp:Show(stompCount)
 		specWarnQuakeStomp:Show()
 		timerStompActive:Start()
 		timerRockfallCD:Start(7.4)--When the spam of rockfalls start
-		timerStompCD:Start(49, stompCount+1)
+		timerStompCD:Start(nil, stompCount+1)
+		countdownStomp:Start()
+		if self.Options.AnnounceCooldowns then
+			if DBM.Options.UseMasterVolume then
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCast..".ogg", "Master")
+			else
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCast..".ogg")
+			end
+		end
 	end
 end
 
@@ -145,14 +157,14 @@ local function resetaddstate()
 	table.wipe(adds)
 	if addsActivated >= 1 then--1 or more add is up from last set
 		if alternateSet then--We check whether we started with skull last time or moon
-			AddIcon = 5--Start with moon if we used skull last time
+			AddIcon = 3--Start with moon if we used skull last time
 			alternateSet = false
 		else
-			AddIcon = 8--Start with skull if we used moon last time
+			AddIcon = 6--Start with skull if we used moon last time
 			alternateSet = true
 		end
 	else--No turtles are up at all
-		AddIcon = 8--Always start with skull
+		AddIcon = 6--Always start with skull
 		alternateSet = true--And reset alternate status so we use moon next time (unless all are dead again, then re always reset to skull)
 	end
 end
@@ -164,16 +176,30 @@ mod:RegisterOnUpdateHandler(function(self)
 			local uId = "raid"..i.."target"
 			local guid = UnitGUID(uId)
 			if adds[guid] then
+				for g,i in pairs(adds) do
+					if i == 8 and g ~= guid then -- always set skull on first we see
+						adds[g] = adds[guid]
+						adds[guid] = 8
+						break
+					end
+				end
 				SetRaidTarget(uId, adds[guid])
 				iconsSet = iconsSet + 1
 				adds[guid] = nil
 			end
-			local guid2 = UnitGUID("mouseover")
-			if adds[guid2] then
-				SetRaidTarget("mouseover", adds[guid2])
-				iconsSet = iconsSet + 1
-				adds[guid2] = nil
+		end
+		local guid2 = UnitGUID("mouseover")
+		if adds[guid2] then
+			for g,i in pairs(adds) do
+				if i == 8 and g ~= guid2 then -- always set skull on first we see
+					adds[g] = adds[guid2]
+					adds[guid2] = 8
+					break
+				end
 			end
+			SetRaidTarget("mouseover", adds[guid2])
+			iconsSet = iconsSet + 1
+			adds[guid2] = nil
 		end
 	end
 end, 0.2)
@@ -196,7 +222,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			resetaddstate()
 		end
 		adds[args.destGUID] = AddIcon
-		AddIcon = AddIcon - 1
+		AddIcon = AddIcon + 1
 		addsActivated = addsActivated + 1
 	end
 end

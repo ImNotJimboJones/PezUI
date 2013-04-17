@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 259 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 263 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -113,16 +113,22 @@ addon.showopts = {
 
 local _specialWeeklyQuests = {
   [32610] = { zid=928, lid=94221 }, -- Shan'ze Ritual Stone looted
+  [32611] = { zid=928, lid1=95350 },-- Incantation of X looted
   [32626] = { zid=928, lid=94222 }, -- Key to the Palace of Lei Shen looted
   [32609] = { zid=928, aid=8104  }, -- Trove of the Thunder King (outdoor chest)
 }
 function addon:specialWeeklyQuests()
   for qid, qinfo in pairs(_specialWeeklyQuests) do
     qinfo.quest = qid
-    if not qinfo.name and qinfo.lid then
-      local _,itemname = GetItemInfo(qinfo.lid)
-      if itemname then
-        qinfo.name = itemname.." ("..LOOT..")"
+    if not qinfo.name and (qinfo.lid or qinfo.lid1) then
+      local itemname, itemlink = GetItemInfo(qinfo.lid or qinfo.lid1)
+      if itemlink and qinfo.lid then
+        qinfo.name = itemlink.." ("..LOOT..")"
+      elseif itemname and qinfo.lid1 then
+        local name = itemname:match("^[^%s]+")
+	if name and #name > 0 then
+          qinfo.name = name.." ("..LOOT..")"
+	end
       end
     end
     if not qinfo.name and qinfo.aid then
@@ -438,15 +444,19 @@ function addon:GetNextWeeklyResetTime()
 end
 
 do
-local saturday_night = {hour=23, min=59}
+local dmf_end = {hour=23, min=59}
 function addon:GetNextDarkmoonResetTime()
   -- Darkmoon faire runs from first Sunday of each month to following Saturday
-  -- this function only returns valid date during the faire
+  -- this function returns an approximate time after the end of the current month's faire
   local weekday, month, day, year = CalendarGetDate() -- date in server timezone (Sun==1)
-  saturday_night.year = year
-  saturday_night.month = month
-  saturday_night.day = day + (7-weekday)
-  local ret = time(saturday_night)
+  local firstweekday = select(4,CalendarGetAbsMonth(month, year)) -- (Sun == 1)
+  local firstsunday = ((firstweekday == 1) and 1) or (9 - firstweekday)
+  dmf_end.year = year
+  dmf_end.month = month
+  dmf_end.day = firstsunday + 7 -- 1 days of "slop"
+  -- Unfortunately, DMF boundary ignores daylight savings, and the time of day varies across regions
+  -- Report a reset well past end to make sure we don't drop quests early
+  local ret = time(dmf_end)
   local offset = addon:GetServerOffset() * 3600
   ret = ret - offset
   return ret
@@ -1854,7 +1864,7 @@ function core:Refresh()
 	      q.Expires = weeklyreset
 	    end
 	  end
-          local expires
+	  local now = time()
 	  db.QuestDB.Weekly.expires = weeklyreset
 	  db.QuestDB.AccountWeekly.expires = weeklyreset
 	  db.QuestDB.Darkmoon.expires = addon:GetNextDarkmoonResetTime()
@@ -1865,7 +1875,8 @@ function core:Refresh()
 	    end
             for qid, mapid in pairs(list) do
               if tonumber(qid) and (IsQuestFlaggedCompleted(qid) or
-	        (quests and quests[qid])) and not questlist[qid] then -- recovering a lost quest
+	        (quests and quests[qid])) and not questlist[qid] and -- recovering a lost quest
+		(list.expires == nil or list.expires > now) then -- don't repop darkmoon quests from last faire
                  local title, link = addon:QuestInfo(qid)
                  if title then
 		    local found
@@ -2352,7 +2363,7 @@ function core:ShowTooltip(anchorframe)
 		end
 		if ci and (gotsome or (ci.amount or 0) > 0) and columns[toon..1] then
 		  local name,_,tex = GetCurrencyInfo(idx)
-		  show = name.." \124T"..tex..":0\124t"
+		  show = " \124T"..tex..":0\124t"..name
 		end
 	    end
    	    local currLine

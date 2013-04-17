@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.2
+Version 2.1.3
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -75,6 +75,7 @@ local GetMouseFocus         = _G.GetMouseFocus;
 local UnitExists            = _G.UnitExists;
 local UnitGUID              = _G.UnitGUID;
 local UnitName              = _G.UnitName;
+local InCombatLockdown      = _G.InCombatLockdown;
 
 local WorldFrame            = _G.WorldFrame;
 local tostring              = _G.tostring;
@@ -86,7 +87,7 @@ end -- }}}
 
 function NPR:OnEnable() -- {{{
     NPR_ENABLED = true;
-    self:Debug(INFO, "OnEnable", debugstack(2,1,1));
+    self:Debug(INFO, "OnEnable", debugstack(1,2,0));
 
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
     self:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -97,8 +98,8 @@ function NPR:OnEnable() -- {{{
 
     --[===[@alpha@
     self.DebugTestsTimer = self:ScheduleRepeatingTimer("DebugTests", 1);
-    self.Debug_CheckHookSanityTimer = self:ScheduleRepeatingTimer("Debug_CheckHookSanity", 0.1);
     --@end-alpha@]===]
+    self.CheckHookSanityTimer = self:ScheduleRepeatingTimer("CheckHookSanity", 10);
 
     local success, errorm = pcall(self.LookForNewPlates, self); -- make sure we do it once as soon as possible to hook things first in order to detect baddons...
 
@@ -114,8 +115,8 @@ function NPR:OnDisable() -- {{{
     self:CancelTimer(self.TargetCheckTimer);
     --[===[@alpha@
     self:CancelTimer(self.DebugTestsTimer);
-    self:CancelTimer(self.Debug_CheckHookSanityTimer);
     --@end-alpha@]===]
+    self:CancelTimer(self.CheckHookSanityTimer);
 
     NPR_ENABLED = false;
 end -- }}}
@@ -135,12 +136,8 @@ local TargetCheckScannedAll     = false; -- useful when a target exists but it c
 
 local function abnormalNameplateManifest()
 
-    local HHTDMaxTOC = tonumber(GetAddOnMetadata("Healers-Have-To-Die", "X-Max-Interface") or math.huge); -- once GetAddOnMetadata() was bugged and returned nil...
-
     NPR:OnDisable(); -- cancel all timers right now
-    NPR:ScheduleTimer("SendMessage", 0.01, "NPR_FATAL_INCOMPATIBILITY", T._tocversion > HHTDMaxTOC); -- sending the message while the initisalisation is in progress is not working as expected
-    --NPR:SendMessage("NPR_FATAL_INCOMPATIBILITY", T._tocversion > HHTDMaxTOC );
-    
+    NPR:ScheduleTimer("SendMessage", 0.01, "NPR_FATAL_INCOMPATIBILITY", T._tocversion > HHTD.Constants.MaxTOC, 'MANIFEST'); -- sending the message while the initisalisation is in progress is not working as expected
 end
 
 
@@ -342,12 +339,14 @@ do
     end
 end
 
---[===[@alpha@
-local LastThrow = 0;
-function NPR:Debug_CheckHookSanity()
+function NPR:CheckHookSanity()
+
+    if InCombatLockdown() then
+        return
+    end
 
     local count = 0;
-
+    local hookInconsistency = false;
 
     for frame, data in pairs(PlateRegistry_per_frame) do
 
@@ -355,25 +354,23 @@ function NPR:Debug_CheckHookSanity()
 
         if frame:IsShown()then
             if not ActivePlates_per_frame[frame] then
-                if GetTime() - LastThrow > 4 then
-                    LastThrow = GetTime();
-                    error("Debug_CheckHookSanity(): OnShow hook failed");
-                end
+                hookInconsistency = 'OnShow';
+                self:Debug(ERROR, "CheckHookSanity(): OnShow hook failed");
             end
         else
             if ActivePlates_per_frame[frame] then
-                if GetTime() - LastThrow > 3 then
-                    LastThrow = GetTime();
-                    error("Debug_CheckHookSanity(): OnHide hook failed");
-                end
+                hookInconsistency = 'OnHide';
+                self:Debug(ERROR, "CheckHookSanity(): OnHide hook failed");
             end
         end
     end
 
-    -- self:Debug(INFO2, 'Debug_CheckHookSanity():', count, 'tests done');
+    if hookInconsistency then
+        NPR:OnDisable(); -- cancel all timers right now
+        NPR:ScheduleTimer("SendMessage", 0.01, "NPR_FATAL_INCOMPATIBILITY", T._tocversion > HHTD.Constants.MaxTOC, 'HOOK: '..hookInconsistency);
+    end
 
 end
---@end-alpha@]===]
 
 --[===[@alpha@
 local callbacks_consisistency_check = {};    
@@ -453,17 +450,16 @@ do -- {{{
 
         PlateFrame = healthBar.HHTDParentPlate;
 
-        --[===[@alpha@
+        if not ActivePlates_per_frame[PlateFrame] then
+            NPR:OnDisable(); -- cancel all timers right now
+            NPR:ScheduleTimer("SendMessage", 0.01, "NPR_FATAL_INCOMPATIBILITY", T._tocversion > HHTD.Constants.MaxTOC, 'HOOK: '..'OnShow missed');
+        end
 
+        --[===[@alpha@
         if not callbacks_consisistency_check[PlateFrame] then
             callbacks_consisistency_check[PlateFrame] = 0;
         else
             callbacks_consisistency_check[PlateFrame] = callbacks_consisistency_check[PlateFrame] - 1;
-        end
-
-        local testCase1 = false
-        if not ActivePlates_per_frame[PlateFrame] then
-            testCase1 = true;
         end
         --@end-alpha@]===]
 
@@ -481,11 +477,6 @@ do -- {{{
 
         ActivePlates_per_frame[PlateFrame] = nil;
 
-        --[===[@alpha@
-        if testCase1 then
-            error('onShow() failed for ' .. tostring(RawGetPlateName(PlateFrame)));
-        end
-        --@end-alpha@]===]
     end
 
     function PlateOnChange (healthBar)
@@ -574,12 +565,14 @@ function NPR:PLAYER_TARGET_CHANGED()
 
 end
 
+local HighlightFailsReported = false;
 function NPR:UPDATE_MOUSEOVER_UNIT()
 
     local unitName = "";
     if GetMouseFocus() == WorldFrame then -- the cursor is either on a name plate or on a 3d model (ie: not on a unit-frame)
         --self:Debug(INFO, "UPDATE_MOUSEOVER_UNIT");
 
+        local failCount = 0;
         for frame, data in pairs(ActivePlates_per_frame) do
             if not data.GUID and PlatePartCache[frame].highlight:IsShown() then -- test for highlight among shown plates
 
@@ -594,11 +587,20 @@ function NPR:UPDATE_MOUSEOVER_UNIT()
                     --@end-debug@]===]
 
                     break; -- we found what we were looking for, no need to continue
-               end
+                else
+                    self:Debug(HighlightFailsReported and INFO2 or WARNING, 'bad cache on highlight check:', unitName, "V/S:", data.name, 'mouseover');
+                    failCount = failCount + 1;
+                end
                 
                 
             end
         end
+
+        if failCount > 3 and not HighlightFailsReported then
+            HighlightFailsReported = true;
+            self:Print("|cFFFF0000WARNING:|r Another add-on is unduly modifying Blizzard's default nameplates' manifest (probably by using |cFFFFAA55:SetParent()|r) preventing HHTD from identifying nameplates accurately. You should report this to the problematic add-on's author.");
+        end
+
     end
 end
 
@@ -654,11 +656,13 @@ do
         --@end-alpha@]===]
 
         if not DidSnitched then
-            local baddon = HHTD:GetBAddon(2);
+            local baddon, proof = HHTD:GetBAddon(2);
             -- try to identify and report the add-on doing this selfish and stupid thing
             if baddon then
                 DidSnitched = true;
                 NPR:Print("|cFFFF0000WARNING:|r Apparently the add-on|cffee2222", baddon:upper(), "|ris using |cFFFFAA55:SetScript()|r instead of |cFF00DD00:HookScript()|r on Blizzard's nameplates. This will cause many issues with other add-ons relying on nameplates. You should contact|cffee2222", baddon:upper(), "|r's author about this.");
+                NPR:Print('Offending call:', proof);
+                --error('setscript used...');
             end
         end
     end
@@ -786,7 +790,7 @@ do
     local PlateData;
 
     function UpdateCache (plateFrame)
-        PlateData = ActivePlates_per_frame[plateFrame];
+        PlateData = ActivePlates_per_frame[plateFrame]; -- data can only be true if the plate is actually shown
 
         PlateData.name = RawGetPlateName(plateFrame);
         PlateData.reaction, PlateData.type = RawGetPlateType(plateFrame);
