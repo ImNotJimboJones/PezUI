@@ -30,7 +30,7 @@ end
 --
 local function VUHDO_roleOverrideSelected(_, aModelId, aName)
 	VUHDO_MANUAL_ROLES[aName] = aModelId;
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(false);
 end
 
 
@@ -73,7 +73,7 @@ end
 --
 local function VUHDO_privateTanksItemSelected(_, aUnit)
 	local tName = VUHDO_RAID[aUnit]["name"];
-	if (VUHDO_PLAYER_TARGETS[tName] ~= nil) then
+	if VUHDO_PLAYER_TARGETS[tName] then
 		VUHDO_PLAYER_TARGETS[tName] = nil;
 	else
 		VUHDO_PLAYER_TARGETS[tName] = true;
@@ -87,15 +87,15 @@ end
 
 --
 local function VUHDO_unitRoleItemSelected(_, aCommand, aUnit)
-	if ("LEAD" == aCommand) then
+	if "LEAD" == aCommand then
 		PromoteToLeader(aUnit);
-	elseif ("+A" == aCommand) then
+	elseif "+A" == aCommand then
 		PromoteToAssistant(aUnit);
 		VUHDO_Msg(VUHDO_I18N_PROMOTE_ASSIST_MSG_1 .. UnitName(aUnit) .. VUHDO_I18N_PROMOTE_ASSIST_MSG_2);
-	elseif ("-A" == aCommand) then
+	elseif "-A" == aCommand then
 		DemoteAssistant(aUnit);
 		VUHDO_Msg(VUHDO_I18N_DEMOTE_ASSIST_MSG_1 .. UnitName(aUnit) .. VUHDO_I18N_DEMOTE_ASSIST_MSG_2);
-	elseif ("ML" == aCommand) then
+	elseif "ML" == aCommand then
 		SetLootMethod("master", UnitName(aUnit));
 	end
 end
@@ -107,17 +107,17 @@ local function VUHDO_mainTankItemSelected(_, aMtPos, aUnit)
 	local tName = VUHDO_RAID[aUnit]["name"];
 
 	-- remove Maintankt?
-	if (VUHDO_MAINTANK_NAMES[aMtPos] == tName) then
+	if VUHDO_MAINTANK_NAMES[aMtPos] == tName then
 		VUHDO_sendCtraMessage("R " .. tName);
 	else
-		if (VUHDO_MAINTANK_NAMES[aMtPos] ~= nil) then
+		if VUHDO_MAINTANK_NAMES[aMtPos] then
 			VUHDO_sendCtraMessage("R " .. VUHDO_MAINTANK_NAMES[aMtPos]);
 		end
 
 		VUHDO_sendCtraMessage("SET " .. aMtPos .. " " .. tName);
 	end
 
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(false);
 end
 
 
@@ -126,14 +126,14 @@ end
 function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	local tInfo;
 
-	if (VUHDO_MENU_UNIT == nil or VUHDO_RAID[VUHDO_MENU_UNIT] == nil) then
+	if not VUHDO_MENU_UNIT or not VUHDO_RAID[VUHDO_MENU_UNIT] then
 		return;
 	end
 
 	local tName = VUHDO_RAID[VUHDO_MENU_UNIT]["name"];
 	local tUniqueBuffs, _ = VUHDO_getAllUniqueSpells();
 
-	if (aLevel > 1) then
+	if aLevel > 1 then
 		for _, tBuffName in pairs(tUniqueBuffs) do
 			local tCategory = VUHDO_getBuffCategoryName(tBuffName, VUHDO_BUFF_TARGET_UNIQUE);
 			tInfo = UIDropDownMenu_CreateInfo();
@@ -160,13 +160,13 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	VUHDO_playerTargetAddSetting(VUHDO_I18N_PROMOTE_RAID_LEADER, tUnitRank == 2, "LEAD", VUHDO_MENU_UNIT,
 		VUHDO_unitRoleItemSelected, true, tPlayerRank < 2);
 
-	if (tUnitRank == 0) then
+	if tUnitRank == 0 then
 		-- + assist
 		VUHDO_playerTargetAddSetting(VUHDO_I18N_PROMOTE_ASSISTANT, false, "+A", VUHDO_MENU_UNIT,
 			VUHDO_unitRoleItemSelected, true, tPlayerRank < 2);
 	end
 
-	if (tUnitRank == 1) then
+	if tUnitRank == 1 then
 		-- - assist
 		VUHDO_playerTargetAddSetting(VUHDO_I18N_DEMOTE_ASSISTANT, false, "-A", VUHDO_MENU_UNIT,
 			VUHDO_unitRoleItemSelected, true, tPlayerRank < 2);
@@ -180,7 +180,7 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	VUHDO_playerTargetAddTitle();
 
 	local tIsChecked = false;
-	if (VUHDO_MENU_UNIT ~= nil and VUHDO_RAID[VUHDO_MENU_UNIT] ~= nil) then
+	if VUHDO_MENU_UNIT and VUHDO_RAID[VUHDO_MENU_UNIT] ~= nil then
 		tIsChecked = VUHDO_PLAYER_TARGETS[tName] ~= nil;
 	end
 
@@ -193,10 +193,10 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 	for tCnt = 1, 8 do -- VUHDO_MAX_MTS
 		local tText, tColor;
 
-		if (VUHDO_MAINTANK_NAMES[tCnt] == tName) then
+		if VUHDO_MAINTANK_NAMES[tCnt] == tName then
 			tText = VUHDO_I18N_MT_NUMBER .. tCnt .. " (" .. VUHDO_MAINTANK_NAMES[tCnt] .. ")";
 			tColor = "|cffffe466";
-		elseif(VUHDO_MAINTANK_NAMES[tCnt] == nil) then
+		elseif not VUHDO_MAINTANK_NAMES[tCnt] then
 			tText = VUHDO_I18N_MT_NUMBER .. tCnt;
 			tColor = "|cffcccccc";
 		else
@@ -205,11 +205,11 @@ function VUHDO_playerTargetDropDown_Initialize(aFrame, aLevel)
 		end
 
 		VUHDO_playerTargetAddSetting(tText, VUHDO_MAINTANK_NAMES[tCnt] == tName, tCnt, VUHDO_MENU_UNIT,
-		VUHDO_mainTankItemSelected, false, VUHDO_getPlayerRank() < 1, tColor);
+			VUHDO_mainTankItemSelected, false, VUHDO_getPlayerRank() < 1, tColor);
 	end
 
 	-- Unique Spells
-	if (#tUniqueBuffs > 0) then
+	if #tUniqueBuffs > 0 then
 		VUHDO_playerTargetAddTitle();
 
 		tInfo = UIDropDownMenu_CreateInfo();
@@ -275,14 +275,12 @@ end
 
 --
 function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
-	if (VUHDO_CONFIG == nil) then
-		return;
-	end
+	if not VUHDO_CONFIG then return; end
 
 	local tInfo;
 
-	if (aLevel > 1) then
-		if ("S" == UIDROPDOWNMENU_MENU_VALUE) then
+	if aLevel > 1 then
+		if "S" == UIDROPDOWNMENU_MENU_VALUE then
 			for _, tSetup in ipairs(VUHDO_PROFILES) do
 				tInfo = UIDropDownMenu_CreateInfo();
 				tInfo["text"] = tSetup["NAME"];
@@ -292,7 +290,7 @@ function VUHDO_miniMapDropDown_Initialize(aFrame, aLevel)
 				tInfo["level"] = 2;
 				UIDropDownMenu_AddButton(tInfo, 2);
 			end
-		elseif ("K" == UIDROPDOWNMENU_MENU_VALUE) then
+		elseif "K" == UIDROPDOWNMENU_MENU_VALUE then
 			for tName, _ in pairs(VUHDO_SPELL_LAYOUTS) do
 				tInfo = UIDropDownMenu_CreateInfo();
 				tInfo["text"] = tName;
@@ -378,24 +376,19 @@ end
 --
 function VUHDO_minimapItemSelected(_, anId)
 	local tCmd;
-	if ("LOCK" == anId) then
-		tCmd = "lock";
-	elseif ("MINIMAP" == anId) then
-		tCmd = "minimap";
-	elseif ("SHOW" == anId) then
-		tCmd = "toggle";
-	elseif ("BROAD" == anId) then
-		tCmd = "cast";
-	elseif ("1" == anId) then
-		tCmd = "opt";
-	elseif ("BUFF" == anId) then
+	if "LOCK" == anId then tCmd = "lock";
+	elseif "MINIMAP" == anId then tCmd = "minimap";
+	elseif "SHOW" == anId then tCmd = "toggle";
+	elseif "BROAD" == anId then tCmd = "cast";
+	elseif "1" == anId then tCmd = "opt";
+	elseif "BUFF" == anId then
 		VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW"] = not VUHDO_BUFF_SETTINGS["CONFIG"]["SHOW"];
 		VUHDO_reloadBuffPanel();
 		VUHDO_saveCurrentProfile();
 		return;
-	elseif ("ROLES" == anId) then
+	elseif "ROLES" == anId then
 		table.wipe(VUHDO_MANUAL_ROLES);
-		VUHDO_reloadUI();
+		VUHDO_reloadUI(false);
 		return;
 	end
 

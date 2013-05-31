@@ -272,7 +272,7 @@ function VUHDO_updateColorByCode(aPanel)
 		local tO = VUHDO_hexToInt(strsub(tText, 1, 2)) / 255;
 		local tR = VUHDO_hexToInt(strsub(tText, 3, 4)) / 255;
 		local tG = VUHDO_hexToInt(strsub(tText, 5, 6)) / 255;
-		local tB = VUHDO_hexToInt(strsub(tText, 6, 7)) / 255;
+		local tB = VUHDO_hexToInt(strsub(tText, 7, 8)) / 255;
 
 		if (sIsTextEdit) then
 			VUHDO_COLOR.TR = tR;
@@ -285,7 +285,7 @@ function VUHDO_updateColorByCode(aPanel)
 			VUHDO_COLOR.R = tR;
 			VUHDO_COLOR.G = tG;
 			VUHDO_COLOR.B = tB;
-			if (not strfind(VUHDO_PROHIBIT, "O") and VUHDO_COLOR.TO ~= nil) then
+			if (not strfind(VUHDO_PROHIBIT, "O") and VUHDO_COLOR.O ~= nil) then
 				VUHDO_COLOR.O = tO;
 			end
 		end

@@ -1,9 +1,10 @@
 local mod	= DBM:NewMod(827, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 9283 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 9619 $"):sub(12, -3))
 mod:SetCreatureID(69465)
-mod:SetModelID(47552)
+mod:SetQuestID(32744)
+mod:SetZone()
 
 mod:RegisterCombat("combat")
 
@@ -42,9 +43,9 @@ local timerStormCD					= mod:NewCDTimer(60.5, 137313)--90-93 variable (60.5~67 s
 local timerIonization				= mod:NewBuffFadesTimer(24, 138732)
 local timerIonizationCD				= mod:NewNextTimer(61.5, 138732)
 
-local soundFocusedLightning			= mod:NewSound(137422)
-
 local berserkTimer					= mod:NewBerserkTimer(540)
+
+local soundFocusedLightning			= mod:NewSound(137422)
 
 local countdownIonization			= mod:NewCountdown(61.5, 138732)
 
@@ -109,7 +110,7 @@ function mod:SPELL_CAST_START(args)
 		warnStorm:Show()
 		specWarnStorm:Show()
 		timerStorm:Start()
-		timerStaticBurstCD:Start(22.5)--May need tweaking
+		timerStaticBurstCD:Start(20.5)--May need tweaking (20.1-24.2)
 		timerThrowCD:Start()
 		if self:IsDifficulty("heroic10", "heroic25") then
 			timerIonizationCD:Start()
@@ -118,6 +119,9 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 138732 then
 		warnIonization:Show()
 		specWarnIonization:Show()
+		if timerStaticBurstCD:GetTime() == 0 or timerStaticBurstCD:GetTime() > 5 then -- Static Burst will be delayed by Ionization
+			timerStaticBurstCD:Start(12)
+		end
 	end
 end
 

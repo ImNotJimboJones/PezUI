@@ -11,8 +11,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	specWarnWaterMove	= "$spell:138470 위에 있을 때 특수 경고 보기\n($spell:137313 시전 직전 또는 $spell:138732 약화 효과 시간이 얼마 안 남았을때)",
-	RangeFrame			= "거리 창 보기"
+	specWarnWaterMove	= "$spell:138470 위에 있을 때 특수 경고 보기\n($spell:137313 시전 직전 또는 $spell:138732 약화 효과 시간이 얼마 안 남았을때)"
 })
 
 --------------
@@ -36,7 +35,8 @@ L:SetOptionLocalization({
 	warnOrbofControl		= "$journal:7092 떨어짐시 알림 보기",
 	specWarnOrbofControl	= "$journal:7092 떨어짐시 특수 경고 보기",
 	timerDoor				= "다음 부족의 문 열림 바 표시",
-	timerAdds				= "다음 추가 병력 바 표시"
+	timerAdds				= "다음 추가 병력 바 표시",
+	SetIconOnAdds			= "추가 병력들에게 전술 목표 아이콘 설정하기"
 })
 
 L:SetMiscLocalization({
@@ -55,7 +55,6 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	PHealthFrame		= "우두머리 체력 바 사용시 $spell:136442 사라짐까지 남은 체력도 함께 보기",
-	RangeFrame			= "거리 창 보기",
 	AnnounceCooldowns	= "공격대 생존기 사용을 위해 $spell:137166 시전 횟수 음성으로 알리기\n(카즈라진의 빙의가 풀리면 초기화됨)"
 })
 
@@ -74,7 +73,7 @@ L:SetOptionLocalization({
 	InfoFrame				= "$spell:137633 효과가 없는 대상을 정보 창에서 보기",
 	SetIconOnTurtles		= "$journal:7129에 전술 목표 아이콘 설정",
 	ClearIconOnTurtles		= "$journal:7129이 $spell:133971의 영향을 받은 경우 전술 목표 아이콘 지우기",
-	AnnounceCooldowns		= "공격대 생존기 사용을 위해 $spell:134920 시전 횟수 음성으로 알리기\n(4번 시전후 초기화됨)"
+	AnnounceCooldowns		= "공격대 생존기 사용을 위해 $spell:134920 시전 횟수 음성으로 알리기"
 })
 
 L:SetMiscLocalization({
@@ -111,17 +110,14 @@ L:SetMiscLocalization({
 L= DBM:GetModLocalization(828)
 
 L:SetWarningLocalization({
-	warnFlock		= "%2$s : %1$s %3$s",
-	specWarnFlock	= "%2$s : %1$s %3$s",
-	specWarnBigBird	= "둥지 수호자 : %s"
+	warnFlock			= "%2$s : %1$s %3$s",
+	specWarnFlock		= "%2$s : %1$s %3$s",
+	specWarnBigBird		= "곧 둥지 수호자 : %s",
+	specWarnBigBird		= "둥지 수호자 : %s"
 })
 
 L:SetTimerLocalization({
 	timerFlockCD	= "둥지 (%d): %s"
-})
-
-L:SetOptionLocalization({
-	RangeFrame		= "$spell:138923 주문에 대한 거리 창 보기(10m)"
 })
 
 L:SetMiscLocalization({
@@ -159,7 +155,12 @@ L:SetOptionLocalization({
 	warnAddsLeft				= "안개도깨비 남은 횟수 알림 보기",
 	specWarnFogRevealed			= "안개도깨비가 드러날 때 특수 경고 보기",
 	ArrowOnBeam					= "$journal:6882 시전 중에 이동해야 될 방향을 DBM 화살표로 보기",
-	InfoFrame					= "$spell:133795 중첩 정보 창 보기"
+	InfoFrame					= "$spell:133795 중첩 정보 창 보기",
+	SetParticle					= "전투 시작시 입자 밀도를 최저로 설정하기\n(전투 종료후 원래 설정이 복구됩니다.)"
+})
+
+L:SetMiscLocalization({
+	LifeYell					= "%s에게 생명력 흡수! (%d)"
 })
 
 ----------------
@@ -173,7 +174,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	warnDebuffCount				= "웅덩이를 흡수할 때 변형 상태에 대한 알림 보기",
-	RangeFrame					= "거리 창 보기(5m/2m)"
+	SetIconOnBigOoze			= "$journal:6969에 전술 목표 아이콘 설정"
 })
 
 -----------------
@@ -203,7 +204,7 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	RangeFrame		= "전투 진영에 따라 거리 창 보기\n(일정 인원 이상이 뭉쳐 있을 때만 보이는 똑똑한 거리 창 입니다.)",
+	RangeFrame		= "전투 진영에 따라 거리 창 보기(10m)\n(일정 인원 이상이 뭉쳐 있을 때만 보이는 똑똑한 거리 창 입니다.)",
 	InfoFrame		= "$spell:136193 주문에 영향을 받은 대상을 정보 창에서 보기"
 })
 
@@ -223,15 +224,6 @@ L:SetTimerLocalization({
 	timerDuskCD		= "황혼 단계",
 })
 
-L:SetOptionLocalization({
-	warnNight		= "밤 단계 알림 보기",
-	warnDay			= "낮 단계 알림 보기",
-	warnDusk		= "황혼 단계 알림 보기",
-	timerDayCD		= "낮 단계 바 표시",
-	timerDuskCD		= "황혼 단계 바 표시",
-	RangeFrame		= "거리 창 보기(8m)"
-})
-
 L:SetMiscLocalization({
 	DuskPhase		= "루린! 힘을 빌려다오!"
 })
@@ -247,7 +239,6 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	specWarnIntermissionSoon	= "사잇단계 진입 전에 특수 경고 보기",
-	RangeFrame					= "거리 창 보기",
 	StaticShockArrow			= "$spell:135695 주문의 영향을 누군가 받은 경우 DBM 화살표 보기",
 	OverchargeArrow				= "$spell:136295 주문의 영향을 누군가 받은 경우 DBM 화살표 보기"
 })
@@ -257,15 +248,19 @@ L:SetOptionLocalization({
 ------------
 L= DBM:GetModLocalization(831)
 
+L:SetOptionLocalization({
+	SetIconsOnVita		= "$spell:138297 대상과 그 대상에서 가장 먼 공격대원에게 전술 목표 아이콘 설정"
+})
+
+L:SetMiscLocalization({
+	Defeat				= "Wait! I am... I am not your enemy."
+})
+
 -------------
 --  Trash  --
 -------------
 L = DBM:GetModLocalization("ToTTrash")
 
 L:SetGeneralLocalization({
-	name = "천둥의 왕좌 일반구간"
-})
-
-L:SetOptionLocalization({
-	RangeFrame		= "거리 창 보기(10m)"
+	name = "천둥의 왕좌: 일반구간"
 })

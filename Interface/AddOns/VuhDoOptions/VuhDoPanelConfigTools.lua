@@ -1,8 +1,8 @@
 local _;
 VUHDO_GLOBAL_ICONS = { };
+
 local GI_SCAN_MAX = 200001;
 VUHDO_GI_SCAN_IDX = GI_SCAN_MAX;
-
 
 local GetSpellInfo = GetSpellInfo;
 local pairs = pairs;
@@ -55,8 +55,9 @@ end
 --
 function VUHDO_getOrCreateGroupOrderPanel(aParentPanelNum, aPanelNum)
 	local tName = "Vd" .. aParentPanelNum .. "GrpOrd" .. aPanelNum;
-	if (_G[tName] == nil) then
-		CreateFrame("Frame", tName, _G["Vd" .. aParentPanelNum], "VuhDoGrpOrdTemplate");
+	if not _G[tName] then
+		local tPanel = CreateFrame("Frame", tName, _G["Vd" .. aParentPanelNum], "VuhDoGrpOrdTemplate");
+		VUHDO_fixFrameLevels(false, tPanel, 2, tPanel:GetChildren());
 	end
 
 	return _G[tName];
@@ -67,8 +68,9 @@ end
 --
 function VUHDO_getOrCreateGroupSelectPanel(aParentPanelNum, aPanelNum)
 	local tName = "Vd" .. aParentPanelNum .. "GrpSel" .. aPanelNum;
-	if (_G[tName] == nil) then
-		CreateFrame("Frame", tName, _G["Vd" .. aParentPanelNum], "VuhDoGrpSelTemplate");
+	if not _G[tName] then
+		local tPanel = CreateFrame("Frame", tName, _G["Vd" .. aParentPanelNum], "VuhDoGrpSelTemplate");
+		VUHDO_fixFrameLevels(false, tPanel, 2, tPanel:GetChildren());
 	end
 
 	return _G[tName];
@@ -80,7 +82,7 @@ end
 local sGroupOrderBarsRight = { };
 function VUHDO_getConfigOrderBarRight(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
-	if (sGroupOrderBarsRight[tIndex] == nil) then
+	if not sGroupOrderBarsRight[tIndex] then
 		local tPanel = VUHDO_getOrCreateGroupOrderPanel(aPanelNum, anOrderNum);
 		sGroupOrderBarsRight[tIndex] = _G[tPanel:GetName() .. "InsTxuR"];
 	end
@@ -94,7 +96,7 @@ end
 local sGroupOrderBarsLeft = { };
 function VUHDO_getConfigOrderBarLeft(aPanelNum, anOrderNum)
 	local tIndex = aPanelNum * 100 + anOrderNum;
-	if (sGroupOrderBarsLeft[tIndex] == nil) then
+	if not sGroupOrderBarsLeft[tIndex] then
 		local tPanel = VUHDO_getOrCreateGroupOrderPanel(aPanelNum, anOrderNum);
 		sGroupOrderBarsLeft[tIndex] = _G[tPanel:GetName() .. "InsTxuL"];
 	end
@@ -107,9 +109,9 @@ end
 --
 local tSpellNameById;
 function VUHDO_resolveSpellId(aSpellName)
-	if (tonumber(aSpellName or "x") ~= nil) then
+	if tonumber(aSpellName or "x") then
 		tSpellNameById = GetSpellInfo(tonumber(aSpellName));
-		if (tSpellNameById ~= nil) then
+		if tSpellNameById then
 			return tSpellNameById;
 		end
 	end
@@ -125,7 +127,7 @@ function VUHDO_newOptionsSpellEditBoxCheckId(anEditBox)
 	tText = anEditBox:GetText();
 	tTextById = VUHDO_resolveSpellId(tText);
 
-	if (tText ~= tTextById) then
+	if tText ~= tTextById then
 		tTextById = strsub(tTextById, 1, 20);
 		tLabel:SetText(tTextById);
 	else
@@ -150,7 +152,7 @@ function VUHDO_updateGlobalIconList()
 		tItems = VUHDO_decompressIfCompressed(tItems);
 		for _, tItem in pairs(tItems) do
 		  --  tItem["name"] can be nil for some reason (maybe on compressing bouquets?)
-			if (tItem["name"] ~= nil and VUHDO_BOUQUET_BUFFS_SPECIAL[tItem["name"]] == nil) then
+			if tItem["name"] and not VUHDO_BOUQUET_BUFFS_SPECIAL[tItem["name"]] then
 				VUHDO_USED_BUFFS[tItem["name"]] = true;
 			end
 		end
@@ -158,7 +160,7 @@ function VUHDO_updateGlobalIconList()
 
 	-- Add standard icons
 	for _, tValues in pairs(VUHDO_CUSTOM_ICONS) do
-		if (tValues[2] ~= nil) then
+		if tValues[2] then
 			VUHDO_USED_BUFFS[tValues[1]] = true;
 			VUHDO_GLOBAL_ICONS[tValues[1]] = tValues[2];
 		end
@@ -171,7 +173,7 @@ function VUHDO_updateGlobalIconList()
 
 	-- Remove obsolete
 	for tName, _ in pairs(VUHDO_GLOBAL_ICONS) do
-		if (not VUHDO_USED_BUFFS[tName]) then
+		if not VUHDO_USED_BUFFS[tName] then
 			VUHDO_GLOBAL_ICONS[tName] = nil;
 		end
 	end
@@ -179,7 +181,7 @@ function VUHDO_updateGlobalIconList()
 	-- Add new
 	for tName, _ in pairs(VUHDO_USED_BUFFS) do
 		if (VUHDO_GLOBAL_ICONS[tName] == nil) then
-			if (tonumber(tName) ~= nil) then
+			if tonumber(tName) then
 				local _, _, tIcon = GetSpellInfo(tonumber(tName));
 				VUHDO_GLOBAL_ICONS[tName] = tIcon;
 			else
@@ -194,9 +196,7 @@ end
 --
 local function VUHDO_tableContains(aTable, aValue)
 	for _, tValue in pairs(aTable) do
-		if tValue == aValue then
-			return true;
-		end
+		if tValue == aValue then return true; end
 	end
 
 	return false;
@@ -209,22 +209,18 @@ local tStep = 50;
 local tRef;
 local tName, _, tIcon;
 local function VUHDO_scanNextGlobalIcons()
-	if (not VUHDO_tableContains(VUHDO_GLOBAL_ICONS, "")) then
+	if not VUHDO_tableContains(VUHDO_GLOBAL_ICONS, "") then
 		return;
 	end
 	tRef = VUHDO_GLOBAL_ICONS;
 	for tCnt = VUHDO_GI_SCAN_IDX + tStep , VUHDO_GI_SCAN_IDX, -1 do
 		tName, _, tIcon = GetSpellInfo(tCnt);
-		if tRef[tName] == "" then
-			tRef[tName] = tIcon;
-		end
+		if tRef[tName] == "" then tRef[tName] = tIcon; end
 	end
 
 	VUHDO_GI_SCAN_IDX = VUHDO_GI_SCAN_IDX - tStep;
 
-	if (VUHDO_GI_SCAN_IDX < 1) then
-		VUHDO_GI_SCAN_IDX = GI_SCAN_MAX;
-	end
+	if VUHDO_GI_SCAN_IDX < 1 then VUHDO_GI_SCAN_IDX = GI_SCAN_MAX; end
 end
 
 
@@ -239,8 +235,6 @@ end
 
 --
 function VUHDO_getGlobalIcon(aDeBuffName)
-	if (aDeBuffName == nil) then
-		return nil;
-	end
+	if not aDeBuffName then return nil; end
 	return GetSpellBookItemTexture(aDeBuffName) or VUHDO_GLOBAL_ICONS[aDeBuffName];
 end

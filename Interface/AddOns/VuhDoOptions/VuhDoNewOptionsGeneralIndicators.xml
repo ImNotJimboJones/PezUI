@@ -159,7 +159,7 @@
 				</Scripts>
 			</Button>
 
-			<Frame name="$parentMorePanel" frameStrata="FULLSCREEN_DIALOG" clampedToScreen="true" hidden="true" inherits="VuhDoPanelTemplate">
+			<Frame name="$parentMorePanel" frameStrata="FULLSCREEN_DIALOG" clampedToScreen="true" hidden="true" inherits="VuhDoWhitePanelTemplate">
 				<Size>
 					<AbsDimension x="170" y="60" />
 				</Size>

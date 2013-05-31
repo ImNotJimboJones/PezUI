@@ -47,8 +47,8 @@ local tEmptyInfo = { };
 function VUHDO_updatePlayerTarget()
 	tTargetUnit = nil;
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (UnitIsUnit("target", tUnit) and tUnit ~= "focus" and tUnit ~= "target") then
-			if (tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"]) then
+		if UnitIsUnit("target", tUnit) and tUnit ~= "focus" and tUnit ~= "target" then
+			if tInfo["isPet"] and (VUHDO_RAID[tInfo["ownerUnit"]] or tEmptyInfo)["isVehicle"] then
 				tTargetUnit = tInfo["ownerUnit"];
 			else
 				tTargetUnit = tUnit;
@@ -57,7 +57,7 @@ function VUHDO_updatePlayerTarget()
 		end
 	end
 
-	if (VUHDO_RAID["target"] ~= nil) then
+	if VUHDO_RAID["target"] then
 		VUHDO_determineIncHeal("target");
 		VUHDO_updateHealth("target", 9); -- VUHDO_UPDATE_INC
 	end
@@ -68,8 +68,8 @@ function VUHDO_updatePlayerTarget()
 	VUHDO_updateBouquetsForEvent(tTargetUnit, 8); -- VUHDO_UPDATE_TARGET
 	VUHDO_clParserSetCurrentTarget(tTargetUnit);
 
-	if (VUHDO_INTERNAL_TOGGLES[27]) then -- VUHDO_UPDATE_PLAYER_TARGET
-		if (UnitExists("target")) then
+	if VUHDO_INTERNAL_TOGGLES[27] then -- VUHDO_UPDATE_PLAYER_TARGET
+		if UnitExists("target") then
 			VUHDO_setHealth("target", 1); -- VUHDO_UPDATE_ALL
 		else
 			VUHDO_removeHots("target");
@@ -91,7 +91,7 @@ end
 local tBorder;
 function VUHDO_barBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName, anImpact)
 	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
-		if (aColor ~= nil) then
+		if aColor then
 			tBorder = VUHDO_getPlayerTargetFrame(tButton);
 			tBorder:SetFrameLevel(tButton:GetFrameLevel() + (anImpact or 0) + 2);
 			tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));

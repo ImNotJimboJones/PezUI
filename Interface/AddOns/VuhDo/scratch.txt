@@ -8,11 +8,8 @@
 - Boss frames
 - Makros aus Keys=>Local and Mausbuttons in spells=>mouse binden
 - BuffWatch: Buff-Wechsel mit Wheel
-- Hot-Bars vertikal
-- Option: Fade custom debuffs range ja/nein
-
-
-
+- Verbleibende Dauer Totems BuffWatch
+- Statusbar bouquet item "Overshielded"
 
 1. Health     3
 2. Mana       1

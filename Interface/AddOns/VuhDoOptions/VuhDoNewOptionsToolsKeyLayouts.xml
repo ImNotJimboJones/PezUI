@@ -53,13 +53,10 @@
 					</EditBox>
 
 					<Button name="$parentLayoutCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="32" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="23" y="-45" />
+									<AbsDimension x="23" y="-28" />
 								</Offset>
 							</Anchor>
 						</Anchors>

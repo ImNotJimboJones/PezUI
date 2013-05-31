@@ -83,7 +83,7 @@ function VUHDO_newOptionsApplyToAllOnClick()
 		end
 	end
 
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(false);
 end
 
 

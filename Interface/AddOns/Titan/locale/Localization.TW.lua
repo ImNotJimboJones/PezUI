@@ -1,8 +1,14 @@
+﻿--如果你可以提供最新的中文譯文，請發送電郵到yeachan@live.com或者聯絡Titan Developement Team。
+
+
 local L = LibStub("AceLocale-3.0"):NewLocale("Titan","zhTW")
 if not L then return end
+
+L["TITAN_PANEL"] = "Titan Panel";
+local TITAN_PANEL = "Titan Panel";
 L["TITAN_DEBUG"] = "<Titan>";
-L["TITAN_INFO"] = "<Titan>"
-	
+L["TITAN_PRINT"] = "Titan";
+
 L["TITAN_NA"] = "N/A";
 L["TITAN_SECONDS"] = "秒鐘";
 L["TITAN_MINUTES"] = "分鐘";
@@ -20,9 +26,6 @@ L["TITAN_NONE"] = "無";
 L["TITAN_USE_COMMA"] = "Use comma";
 L["TITAN_USE_PERIOD"] = "Use period";
 
---L["TITAN_MOVABLE_TOOLTIP"] = "拖曳移動";
-
-L["TITAN_PANEL_ERROR_DUP_PLUGIN"] = " 出現了重覆的二次錯誤，這可能會使泰坦面板執行失敗，請修正此問題"
 L["TITAN_PANEL_ERROR_PROF_DELCURRENT"] = "你可能已經刪除目前的角色配置。";
 local TITAN_PANEL_WARNING = GREEN_FONT_COLOR_CODE.."Warning : "..FONT_COLOR_CODE_CLOSE
 local TITAN_PANEL_RELOAD_TEXT = "如果你要繼續請按「套用」，你的插件將會重新載入，如果不確定請按「取消」或 Esc 鍵。"
@@ -32,67 +35,80 @@ L["TITAN_PANEL_RESET_WARNING"] = TITAN_PANEL_WARNING
 L["TITAN_PANEL_RELOAD"] = TITAN_PANEL_WARNING
 	.."這會重新載入泰坦面板. "
 	..TITAN_PANEL_RELOAD_TEXT
-L["TITAN_PANEL_ATTEMPTS"] = "Attempts"
-L["TITAN_PANEL_ATTEMPTS_DESC"] = "The plugins below requested to be registered with Titan.\n"
+L["TITAN_PANEL_ATTEMPTS"] = TITAN_PANEL.." Attempts"
+L["TITAN_PANEL_ATTEMPTS_SHORT"] = "Attempts"
+L["TITAN_PANEL_ATTEMPTS_DESC"] = "The plugins below requested to be registered with "..TITAN_PANEL..".\n"
 	.."Please send any issues to the plugin author."
 L["TITAN_PANEL_ATTEMPTS_TYPE"] = "Type"
 L["TITAN_PANEL_ATTEMPTS_CATEGORY"] = "Category"
 L["TITAN_PANEL_ATTEMPTS_BUTTON"] = "Button Name"
-L["TITAN_PANEL_EXTRAS"] = "Extras"
+L["TITAN_PANEL_ATTEMPTS_STATUS"] = "Status"
+L["TITAN_PANEL_ATTEMPTS_ISSUE"] = "Issue"
+L["TITAN_PANEL_ATTEMPTS_NOTES"] = "Notes"
+L["TITAN_PANEL_ATTEMPTS_TABLE"] = "Table index"
+L["TITAN_PANEL_EXTRAS"] = TITAN_PANEL.." Extras"
+L["TITAN_PANEL_EXTRAS_SHORT"] = "Extras"
 L["TITAN_PANEL_EXTRAS_DESC"] = "These are plugins with configuration data that are not currently loaded.\n"
-	.."Note: You must logout before the list changes."
+	.."These are safe to delete."
 L["TITAN_PANEL_EXTRAS_DELETE_BUTTON"] = "Delete config data"
-L["TITAN_PANEL_EXTRAS_DELETE_MSG"] = "configuration entry for has been removed."
+L["TITAN_PANEL_EXTRAS_DELETE_MSG"] = "configuration entry has been removed."
 L["TITAN_PANEL_CHARS"] = "Characters"
-L["TITAN_PANEL_CHARS_DESC"] = "These are characters with configuration data.\n"
-		.."Note: You must logout before the list changes."
-L["TITAN_PANEL_CHARS_DELETE_BUTTON"] = "Delete character data"
-L["TITAN_PANEL_CHARS_DELETE_MSG"] = "character data for has been removed."
-L["TITAN_PANEL_REGISTER_START"] = "Register Titan plugins..."
+L["TITAN_PANEL_CHARS_DESC"] = "These are characters with configuration data."
+L["TITAN_PANEL_REGISTER_START"] = "Register "..TITAN_PANEL.." plugins..."
 L["TITAN_PANEL_REGISTER_END"] = "Registration process done."
 	
 -- slash command help
-L["TITAN_PANEL_SLASH_STRING2"] = LIGHTYELLOW_FONT_COLOR_CODE.."輸入: |cffffffff/titan {reset | reset tipfont/tipalpha/panelscale/spacing}";
-L["TITAN_PANEL_SLASH_STRING3"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset: |cffffffff重置面板為預設值/位置。";
-L["TITAN_PANEL_SLASH_STRING4"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset tipfont: |cffffffff重置面板提示文字大小為預設值。";
-L["TITAN_PANEL_SLASH_STRING5"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset tipalpha: |cffffffff重製面板提示視窗透明度為預設值。";
-L["TITAN_PANEL_SLASH_STRING6"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset panelscale: |cffffffff重置面板大小為預設值。";
-L["TITAN_PANEL_SLASH_STRING7"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset spacing: |cffffffff重置面板按鈕間距為預設值。";
-L["TITAN_PANEL_SLASH_STRING8"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui control: |cffffffff開啟 Ace3 面板控制介面。";
-L["TITAN_PANEL_SLASH_STRING9"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui trans: |cffffffff開啟 Ace3 透明度控制介面。";
-L["TITAN_PANEL_SLASH_STRING10"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui skin: |cffffffff開啟 Ace3 外觀控制介面。";
-L["TITAN_PANEL_SLASH_STRING11"] = LIGHTYELLOW_FONT_COLOR_CODE.."輸入|cffffffff/bscan|r 顯示 BonusScanner 使用說明。";
+L["TITAN_PANEL_SLASH_RESET_0"] = LIGHTYELLOW_FONT_COLOR_CODE.."輸入: |cffffffff/titan {reset | reset tipfont/tipalpha/panelscale/spacing}";
+L["TITAN_PANEL_SLASH_RESET_1"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset: |cffffffff重置面板為預設值/位置。";
+L["TITAN_PANEL_SLASH_RESET_2"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset tipfont: |cffffffff重置面板提示文字大小為預設值。";
+L["TITAN_PANEL_SLASH_RESET_3"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset tipalpha: |cffffffff重製面板提示視窗透明度為預設值。";
+L["TITAN_PANEL_SLASH_RESET_4"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset panelscale: |cffffffff重置面板大小為預設值。";
+L["TITAN_PANEL_SLASH_RESET_5"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."reset spacing: |cffffffff重置面板按鈕間距為預設值。";
+L["TITAN_PANEL_SLASH_GUI_0"] = LIGHTYELLOW_FONT_COLOR_CODE.."Usage: |cffffffff/titan {gui control/trans/skin}";
+L["TITAN_PANEL_SLASH_GUI_1"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui control: |cffffffff開啟 Ace3 面板控制介面。";
+L["TITAN_PANEL_SLASH_GUI_2"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui trans: |cffffffff開啟 Ace3 透明度控制介面。";
+L["TITAN_PANEL_SLASH_GUI_3"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."gui skin: |cffffffff開啟 Ace3 外觀控制介面。";
+L["TITAN_PANEL_SLASH_PROFILE_0"] = LIGHTYELLOW_FONT_COLOR_CODE.."Usage: |cffffffff/titan {profile use <profile>}";
+L["TITAN_PANEL_SLASH_PROFILE_1"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."profile use <name> <server>: |cffffffffSets the profile to the requested saved profile.";
+L["TITAN_PANEL_SLASH_PROFILE_2"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."<name>: |cffffffffcan be either the character name or the custom profile name."
+L["TITAN_PANEL_SLASH_PROFILE_3"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."<server>: |cffffffffcan be either the server name or 'TitanCustomProfile'."
+L["TITAN_PANEL_SLASH_HELP_0"] = LIGHTYELLOW_FONT_COLOR_CODE.."Usage: |cffffffff/titan {help | help <topic>}";
+L["TITAN_PANEL_SLASH_HELP_1"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."<topic>: reset/gui/profile/help ";
+L["TITAN_PANEL_SLASH_ALL_0"] = LIGHTYELLOW_FONT_COLOR_CODE.."Usage: |cffffffff/titan <topic>";
+L["TITAN_PANEL_SLASH_ALL_1"] = " - "..LIGHTYELLOW_FONT_COLOR_CODE.."<topic>: |cffffffffreset/gui/profile/help ";
 	
 -- slash command responses
 L["TITAN_PANEL_SLASH_RESP1"] = LIGHTYELLOW_FONT_COLOR_CODE.."Titan Panel 提示文字大小已重置。";
 L["TITAN_PANEL_SLASH_RESP2"] = LIGHTYELLOW_FONT_COLOR_CODE.."Titan Panel 提示視窗透明度已重置。";
 L["TITAN_PANEL_SLASH_RESP3"] = LIGHTYELLOW_FONT_COLOR_CODE.."Titan Panel 大小已重置。";
 L["TITAN_PANEL_SLASH_RESP4"] = LIGHTYELLOW_FONT_COLOR_CODE.."Titan Panel 按鈕間距已重置。";
+     
+-- global profile locale
+L["TITAN_PANEL_GLOBAL"] = "Global";     
+L["TITAN_PANEL_GLOBAL_PROFILE"] = "Global Profile";     
+L["TITAN_PANEL_GLOBAL_USE"] = "Use Global Profile";     
+L["TITAN_PANEL_GLOBAL_USE_AS"] = "Use as Global Profile";     
+L["TITAN_PANEL_GLOBAL_USE_DESC"] = "Use a global profile for all characters";     
+L["TITAN_PANEL_GLOBAL_RESET_PART"] = "resetting options";     
+L["TITAN_PANEL_GLOBAL_ERR_1"] = "You may not load a profile when a global profile is in use";
 	
 -- general panel locale
-L["TITAN_PANEL"] = "泰坦面版";
 L["TITAN_PANEL_VERSION_INFO"] = "|cffff8c00Titan Development Team |cffffffff Presents ".." |cffffffff";
 L["TITAN_PANEL_MENU_TITLE"] = "泰坦面版";
 L["TITAN_PANEL_MENU_HIDE"] = "隱藏";
-L["TITAN_PANEL_MENU_CUSTOMIZE"] = "自訂";
 L["TITAN_PANEL_MENU_IN_COMBAT_LOCKDOWN"] = "(戰鬥中)";
 L["TITAN_PANEL_MENU_RELOADUI"] = "(重載介面)";
 L["TITAN_PANEL_MENU_SHOW_COLORED_TEXT"] = "顯示彩色文字";
 L["TITAN_PANEL_MENU_SHOW_ICON"] = "顯示圖示";
 L["TITAN_PANEL_MENU_SHOW_LABEL_TEXT"] = "顯示標籤文字";
 L["TITAN_PANEL_MENU_AUTOHIDE"] = "自動隱藏";
-L["TITAN_PANEL_MENU_BGMINIMAP"] = "戰場小地圖";
 L["TITAN_PANEL_MENU_CENTER_TEXT"] = "文字置中";
-L["TITAN_PANEL_MENU_DISPLAY_ONTOP"] = "顯示最上層";
-L["TITAN_PANEL_MENU_DISPLAY_BOTH"] = "顯示二條工作列";
+L["TITAN_PANEL_MENU_DISPLAY_BAR"] = "Show Bar";
 L["TITAN_PANEL_MENU_DISABLE_PUSH"] = "關閉螢幕調整";
 L["TITAN_PANEL_MENU_DISABLE_MINIMAP_PUSH"] = "關閉小地圖調整";
 L["TITAN_PANEL_MENU_DISABLE_LOGS"] = "自動調整紀錄";
 L["TITAN_PANEL_MENU_DISABLE_BAGS"] = "自動調整背包";
 L["TITAN_PANEL_MENU_DISABLE_TICKET"] = "自動調整標籤框體";
-L["TITAN_PANEL_MENU_BUILTINS"] = "內建插件";
-L["TITAN_PANEL_MENU_LEFT_SIDE"] = "左邊區域";
-L["TITAN_PANEL_MENU_RIGHT_SIDE"] = "右邊區域";
 L["TITAN_PANEL_MENU_PROFILES"] = "配置檔";
 L["TITAN_PANEL_MENU_PROFILE"] = "配置檔「";
 L["TITAN_PANEL_MENU_PROFILE_CUSTOM"] = "自訂";
@@ -107,33 +123,38 @@ L["TITAN_PANEL_MENU_MANAGE_SETTINGS"] = "管理";
 L["TITAN_PANEL_MENU_LOAD_SETTINGS"] = "載入設定";
 L["TITAN_PANEL_MENU_DELETE_SETTINGS"] = "刪除";
 L["TITAN_PANEL_MENU_SAVE_SETTINGS"] = "儲存";
-L["TITAN_PANEL_MENU_DOUBLE_BAR"] = "工作列二行顯示";
 L["TITAN_PANEL_MENU_CONFIGURATION"] = "配置設定";
-L["TITAN_PANEL_MENU_OPTIONS"] = "選項";
-L["TITAN_PANEL_MENU_OPTIONS_PANEL"] = "面板";
+L["TITAN_PANEL_OPTIONS"] = "選項";
+L["TITAN_PANEL_MENU_TOP"] = "Top"
+L["TITAN_PANEL_MENU_TOP2"] = "Top 2"
+L["TITAN_PANEL_MENU_BOTTOM"] = "Bottom"
+L["TITAN_PANEL_MENU_BOTTOM2"] = "Bottom 2"
+L["TITAN_PANEL_MENU_OPTIONS"] = TITAN_PANEL.." Tooltips and Frames";
+L["TITAN_PANEL_MENU_OPTIONS_SHORT"] = "Tooltips and Frames";
+L["TITAN_PANEL_MENU_TOP_BARS"] = "Top Bars"
+L["TITAN_PANEL_MENU_BOTTOM_BARS"] = "Bottom Bars"
 L["TITAN_PANEL_MENU_OPTIONS_BARS"] = "狀態列";
-L["TITAN_PANEL_MENU_OPTIONS_TOOLTIPS"] = "提示訊息";
+L["TITAN_PANEL_MENU_OPTIONS_MAIN_BARS"] = TITAN_PANEL.." Top Bars";
+L["TITAN_PANEL_MENU_OPTIONS_AUX_BARS"] = TITAN_PANEL.." Bottom Bars";
+L["TITAN_PANEL_MENU_OPTIONS_TOOLTIPS"] = "Tooltips";
 L["TITAN_PANEL_MENU_OPTIONS_FRAMES"] = "視窗";
 L["TITAN_PANEL_MENU_PLUGINS"] = "插件";
 L["TITAN_PANEL_MENU_LOCK_BUTTONS"] = "鎖定面板";
 L["TITAN_PANEL_MENU_VERSION_SHOWN"] = "顯示插件版本";
 L["TITAN_PANEL_MENU_LDB_SIDE"] = "右側插件";
 L["TITAN_PANEL_MENU_LDB_FORCE_LAUNCHER"] = "強制快捷列於右側";
-L["TITAN_PANEL_MENU_DISABLE_FONT"] = "關閉字型縮放";
 L["TITAN_PANEL_MENU_CATEGORIES"] = {"內建插件","一般","戰鬥","資訊","介面","專業"}
 L["TITAN_PANEL_MENU_TOOLTIPS_SHOWN"] = "顯示提示";
 L["TITAN_PANEL_MENU_TOOLTIPS_SHOWN_IN_COMBAT"] = "戰鬥中隱藏提示訊息";
+L["TITAN_PANEL_MENU_AUTOHIDE_IN_COMBAT"] = "Lock auto hide bars while in combat";
 L["TITAN_PANEL_MENU_RESET"] = "重置面板為預設值";
 L["TITAN_PANEL_MENU_TEXTURE_SETTINGS"] = "面板設定";
-L["TITAN_PANEL_MENU_FONT"] = "字型";
 L["TITAN_PANEL_MENU_LSM_FONTS"] = "面版字體"
 L["TITAN_PANEL_MENU_ENABLED"] = "啟用";
 L["TITAN_PANEL_MENU_DISABLED"] = "停用";
 L["TITAN_PANEL_SHIFT_LEFT"] = "Shift 左鍵";
 L["TITAN_PANEL_SHIFT_RIGHT"] = "Shift 右鍵";
 L["TITAN_PANEL_MENU_SHOW_PLUGIN_TEXT"] = "Show plugin text";
-L["TITAN_PANEL_MENU_LDB_TREAT"] = "Treat as data source";
-L["TITAN_PANEL_MENU_LDB_SLAP"] = "If you need to use this request the author to change the LDB type";
 L["TITAN_PANEL_MENU_BAR_ALWAYS"] = "Always on";
 L["TITAN_PANEL_MENU_POSITION"] = "Position";
 L["TITAN_PANEL_MENU_BAR"] = "Bar";
@@ -142,46 +163,61 @@ L["TITAN_PANEL_MENU_SHOW"] = "Show plugin";
 L["TITAN_PANEL_MENU_PLUGIN_RESET"] = "Refresh plugins";
 L["TITAN_PANEL_MENU_PLUGIN_RESET_DESC"] = "Refresh plugin text and position";
 
--- localization strings for AceConfigDialog-3.0     
+-- localization strings for AceConfigDialog-3.0   
+L["TITAN_ABOUT_VERSION"] = "Version";
+L["TITAN_ABOUT_AUTHOR"] = "Author";
+L["TITAN_ABOUT_CREDITS"] = "Credits";
+L["TITAN_ABOUT_CATEGORY"] = "Category";
+L["TITAN_ABOUT_EMAIL"] = "Email";
+L["TITAN_ABOUT_WEB"] = "Website";
+L["TITAN_ABOUT_LICENSE"] = "License";  
 L["TITAN_PANEL_CONFIG_MAIN_LABEL"] = "顯示狀態列插件資訊。允許使用者在螢幕控制面板的上方或下方加入資料或快捷列插件。";			 
+L["TITAN_TRANS_MENU_TEXT"] = TITAN_PANEL.." Transparency";
 L["TITAN_TRANS_MENU_TEXT_SHORT"] = "透明度";
 L["TITAN_TRANS_MENU_DESC"] = "調整 Titan 狀態列和提示視窗的透明度。";		
 L["TITAN_TRANS_MAIN_CONTROL_TITLE"] = "主要狀態列";
 L["TITAN_TRANS_AUX_CONTROL_TITLE"] = "輔助狀態列";
 L["TITAN_TRANS_CONTROL_TITLE_TOOLTIP"] = "提示訊息";		 
-L["TITAN_TRANS_MAIN_BAR_DESC"] = "設定主要狀態列的透明度。";
-L["TITAN_TRANS_AUX_BAR_DESC"] = "設定輔助狀態列(下方)的透明度。.";
 L["TITAN_TRANS_TOOLTIP_DESC"] = "設定各種提示訊息插件的透明度。";
 L["TITAN_UISCALE_MENU_TEXT"] = "面板控制";
+L["TITAN_UISCALE_MENU_TEXT_SHORT"] = "Scale and Font";
 L["TITAN_UISCALE_CONTROL_TITLE_UI"] = "插件大小";
 L["TITAN_UISCALE_CONTROL_TITLE_PANEL"] = "面板大小";
 L["TITAN_UISCALE_CONTROL_TITLE_BUTTON"] = "按鈕間距";
+L["TITAN_UISCALE_CONTROL_TITLE_ICON"] = "Icon Spacing";
 L["TITAN_UISCALE_CONTROL_TOOLTIP_TOOLTIPFONT"] = "提示訊息文字大小";
 L["TITAN_UISCALE_TOOLTIP_DISABLE_TEXT"] = "關閉提示訊息文字大小";		 
 L["TITAN_UISCALE_MENU_DESC"] = "控制各種插件和面板的外觀。";
 L["TITAN_UISCALE_SLIDER_DESC"] = "設定整體插件的大小。";
 L["TITAN_UISCALE_PANEL_SLIDER_DESC"] = "設定各種面板按鈕及圖示大小。";
 L["TITAN_UISCALE_BUTTON_SLIDER_DESC"] = "調整左側插件間的空間大小";
+L["TITAN_UISCALE_ICON_SLIDER_DESC"] = "Adjusts the space between right-side plugins.";
 L["TITAN_UISCALE_TOOLTIP_SLIDER_DESC"] = "調整各種提示訊息插件的大小。";
 L["TITAN_UISCALE_DISABLE_TOOLTIP_DESC"] = "關閉 Titan 的提示訊息字型大小控制。";
-L["TITAN_SKINS_MAIN_DESC"] = "管理各種 Titan 狀態列的外觀。";
+
+L["TITAN_SKINS_TITLE"] = TITAN_PANEL.." Skins";
+L["TITAN_SKINS_OPTIONS_CUSTOM"] = "Skins - Custom";
+L["TITAN_SKINS_TITLE_CUSTOM"] = TITAN_PANEL.." Custom Skins";
+L["TITAN_SKINS_MAIN_DESC"] = "All custom skins are assumed to be in: \n"
+			.."..\\AddOns\\Titan\\Artwork\\Custom\\<Skin Folder>\\ ".."\n"
+			.."\n"..TITAN_PANEL.." and custom skins are stored under the Custom folder."
 L["TITAN_SKINS_LIST_TITLE"] = "外觀清單";
 L["TITAN_SKINS_SET_DESC"] = "選擇一個 Titan 狀態列的外觀設定。";
 L["TITAN_SKINS_SET_HEADER"] = "設定面板外觀";
+L["TITAN_SKINS_RESET_HEADER"] = "Reset "..TITAN_PANEL.." Skins";
 L["TITAN_SKINS_NEW_HEADER"] = "加入新外觀";
-L["TITAN_SKINS_NAME_TITLE"] = "外觀名稱";
-L["TITAN_SKINS_NAME_DESC"] = "請輸入新外觀的名稱。";
-L["TITAN_SKINS_NAME_EXAMPLE"] = "例如: My Titan Skin";
+L["TITAN_SKINS_NAME_TITLE"] = "外觀名稱";L["TITAN_SKINS_NAME_DESC"] = "請輸入新外觀的名稱。";
+L["TITAN_SKINS_NAME_DESC"] = "例如: My Titan Skin";
 L["TITAN_SKINS_PATH_TITLE"] = "外觀路徑";
 L["TITAN_SKINS_PATH_DESC"] = "請輸入放置外觀檔案的正確路徑，如範例所示，說明請看「注意」事項。";
-L["TITAN_SKINS_PATH_EXAMPLE"] = "例如: Interface\\AddOns\\Titan\\Artwork\\Custom\\<My Skin folder>\\";
 L["TITAN_SKINS_ADD_HEADER"] = "新增外觀";
 L["TITAN_SKINS_ADD_DESC"] = "新增一個面板可用的外觀到清單中。";
 L["TITAN_SKINS_REMOVE_HEADER"] = "移除外觀";
 L["TITAN_SKINS_REMOVE_DESC"] = "從清單中選擇欲移除的面板外觀。";
 L["TITAN_SKINS_REMOVE_BUTTON"] = "移除";
 L["TITAN_SKINS_REMOVE_BUTTON_DESC"] = "從清單中移除所選的面板外觀。";
-L["TITAN_SKINS_NOTES"] = "|cff19ff19注意:|r 當新增一個外觀時，請確定在載入遊戲前，外觀檔案已存在於資料夾中 (路徑有區分大小寫，且要以 '\\' 作結束)。";
+L["TITAN_SKINS_REMOVE_NOTES"] = "You are responsible for removing any unwanted custom skins "
+	.."from the "..TITAN_PANEL.." install folder. Addons can not add or remove files."
 L["TITAN_SKINS_RESET_DEFAULTS_TITLE"] = "重置配置";
 L["TITAN_SKINS_RESET_DEFAULTS_DESC"] = "重置外觀列表至默認值.";
 L["TITAN_PANEL_MENU_LSM_FONTS_DESC"] = "選擇泰坦條上各個模組的字體樣式.";
@@ -190,9 +226,15 @@ L["TITAN_PANEL_MENU_FONT_SIZE_DESC"] = "設置泰坦面板的字體大小.";
 L["TITAN_PANEL_MENU_FRAME_STRATA"] = "面版框架層疊";
 L["TITAN_PANEL_MENU_FRAME_STRATA_DESC"] = "為泰坦條設置是否顯示在最前.";
 -- /end localization strings for AceConfigDialog-3.0
+
+L["TITAN_PANEL_MENU_ADV"] = "Advanced";
+L["TITAN_PANEL_MENU_ADV_DESC"] = "Change Timers only if you experience issues with frames not adjusting.".."\n";
+L["TITAN_PANEL_MENU_ADV_PEW"] = "Entering World";
+L["TITAN_PANEL_MENU_ADV_PEW_DESC"] = "Change value (usually increase) if frames do not adjust when entering / leaving world or an instance.";
+L["TITAN_PANEL_MENU_ADV_VEHICLE"] = "Vehicle";
+L["TITAN_PANEL_MENU_ADV_VEHICLE_DESC"] = "Change value (usually increase) if frames do not adjust when entering / leaving vehicle.";
 	
 L["TITAN_AUTOHIDE_TOOLTIP"] = "自動隱藏 開/關";
-L["TITAN_AUTOHIDE_MENU_TEXT"] = "自動隱藏";
 	
 L["TITAN_BAG_FORMAT"] = "%d/%d";
 L["TITAN_BAG_BUTTON_LABEL"] = "背包: ";
@@ -206,15 +248,29 @@ L["TITAN_BAG_MENU_SHOW_USED_SLOTS"] = "顯示已使用空間";
 L["TITAN_BAG_MENU_SHOW_AVAILABLE_SLOTS"] = "顯示剩餘空間";
 L["TITAN_BAG_MENU_SHOW_DETAILED"] = "顯示詳細提示訊息";
 L["TITAN_BAG_MENU_IGNORE_SLOTS"] = "忽略容器";
-L["TITAN_BAG_MENU_IGNORE_AMMO_POUCH_SLOTS"] = "忽略彈藥袋的空間";
-L["TITAN_BAG_MENU_IGNORE_SHARD_BAGS_SLOTS"] = "忽略靈魂碎片包空間";
 L["TITAN_BAG_MENU_IGNORE_PROF_BAGS_SLOTS"] = "忽略專業背包空間";
-L["TITAN_BAG_SHARD_BAG_NAMES"] = {"靈魂袋", "小靈魂袋", "靈魂盒", "惡魔布包", "熔核惡魔布包", "黑檀暗影包", "深淵包"};
-L["TITAN_BAG_AMMO_POUCH_NAMES"] = {"裂蹄皮箭袋", "座狼皮箭袋", "龍筋箭袋", "奈幽強化箭袋", "千羽箭袋", "境外皮箭袋", "鷹身人皮箭袋", "雷布里的箭袋", "快捷箭袋", "重型箭袋", "守夜人箭袋", "狩獵箭袋", "中型箭袋", "輕皮箭袋", "小箭袋", "輕型箭袋", "走私者彈藥包", "境外皮彈藥包", "虛空鱗彈藥袋", "豺狼人皮彈藥包", "雷布里的油布包", "厚皮彈藥包", "重皮彈藥包", "守夜人的彈藥包", "中型彈藥袋", "獵槍彈藥包", "皮質小彈藥包", "小型彈藥袋", "小型彈藥包"};
-L["TITAN_BAG_PROF_BAG_NAMES"] = {"附魔魔紋包", "附魔符文布背包", "附魔大背包", "附魔師的背包", "詭秘包", "魔焰包", "克銀工具箱", "魔鐵工具箱", "沉重的工具箱", "寶石袋", "寶石包", "強化礦石包", "採礦包", "長毛象礦石包", "製皮師的背包", "拼接皮包", "猎户的旅行背包", "草藥袋", "塞納里奧草藥包", "塞納留斯的背包", "麥卡的植物袋", "抄寫員背袋", "無盡口袋包"};
-	
-L["TITAN_BGMINIMAP_MENU_TEXT"] = "戰場迷你地圖"
-L["TITAN_BGMINIMAP_TOOLTIP"] = "開關 戰場迷你地圖"
+L["TITAN_BAG_PROF_BAG_NAMES"] = {
+-- Enchanting
+"Enchanted Mageweave Pouch", "Enchanted Runecloth Bag", "Enchanter's Satchel", "Big Bag of Enchantment", "Spellfire Bag", 
+"Mysterious Bag", "Otherworldly Bag", "\"Carriage - Exclusive\" Enchanting Evening Purse",
+-- Engineering
+"Heavy Toolbox", "Fel Iron Toolbox", "Titanium Toolbox", "Khorium Toolbox", "Elementium Toolbox", "\"Carriage - Maddy\" High Tech Bag",
+-- Herbalism
+"Herb Pouch", "Cenarion Herb Bag", "Satchel of Cenarius", "Mycah's Botanical Bag", "Emerald Bag", "Hyjal Expedition Bag",
+"\"Carriage - Going Green\" Herb Tote Bag",
+-- Inscription
+"Scribe's Satchel", "Pack of Endless Pockets", "\"Carriage - Xandera\" Student's Satchel",
+-- Jewelcrafting
+"Gem Pouch", "Bag of Jewels", "\"Carriage - Exclusive\" Gem Studded Clutch",
+-- Leatherworking
+"Leatherworker's Satchel", "Bag of Many Hides", "Trapper's Traveling Pack", "\"Carriage - Meeya\" Leather Bag",
+-- Mining
+"Mining Sack", "Reinforced Mining Bag", "Mammoth Mining Bag", "\"Carriage - Christina\" Precious Metal Bag",
+-- Fishing
+"Lure Master Tackle Box",
+-- Cooking
+"Portable Refrigerator",
+};
 	
 L["TITAN_CLOCK_TOOLTIP"] = "時鐘";
 L["TITAN_CLOCK_TOOLTIP_VALUE"] = "時差值: ";
@@ -236,6 +292,9 @@ L["TITAN_CLOCK_MENU_SERVER_TIME"] = "顯示伺服器時間 (S)";
 L["TITAN_CLOCK_MENU_SERVER_ADJUSTED_TIME"] = "顯示伺服器調整時間 (A)";
 L["TITAN_CLOCK_MENU_DISPLAY_ON_RIGHT_SIDE"] = "顯示靠最右邊"
 L["TITAN_CLOCK_MENU_HIDE_GAMETIME"] = "隱藏 時間/日曆 按鈕";
+L["TITAN_CLOCK_MENU_HIDE_MAPTIME"] = "Hide Time Button";
+L["TITAN_CLOCK_MENU_HIDE_CALENDAR"] = "Hide Calendar Button";
+
 	
 L["TITAN_COORDS_FORMAT"] = "(%.d, %.d)";
 L["TITAN_COORDS_FORMAT2"] = "(%.1f, %.1f)";
@@ -260,6 +319,7 @@ L["TITAN_COORDS_MAP_CURSOR_COORDS_TEXT"] = "游標(X,Y): %s";
 L["TITAN_COORDS_MAP_PLAYER_COORDS_TEXT"] = "玩家(X,Y): %s";
 L["TITAN_COORDS_NO_COORDS"] = "無座標";
 L["TITAN_COORDS_MENU_SHOW_LOC_ON_MINIMAP_TEXT"] = "在小地圖上顯示位置";
+L["TITAN_COORDS_MENU_UPDATE_WORLD_MAP"] = "Update World Map When Zone Changes";
 	
 L["TITAN_FPS_FORMAT"] = "%.1f";
 L["TITAN_FPS_BUTTON_LABEL"] = "FPS: ";
@@ -274,10 +334,11 @@ L["TITAN_LATENCY_FORMAT"] = "%d".."ms";
 L["TITAN_LATENCY_BANDWIDTH_FORMAT"] = "%.3f ".."KB/s";
 L["TITAN_LATENCY_BUTTON_LABEL"] = "連線速度: ";
 L["TITAN_LATENCY_TOOLTIP"] = "網路狀態";
-L["TITAN_LATENCY_TOOLTIP_LATENCY"] = "連線速度: ";
+L["TITAN_LATENCY_TOOLTIP_LATENCY_HOME"] = "Realm Latency (home): ";
+L["TITAN_LATENCY_TOOLTIP_LATENCY_WORLD"] = "Game Latency (world): ";
 L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_IN"] = "頻寬(IN): ";
 L["TITAN_LATENCY_TOOLTIP_BANDWIDTH_OUT"] = "頻寬(OUT): ";
-L["TITAN_LATENCY_MENU_TEXT"] = "連線速度";
+L["TITAN_LATENCY_MENU_TEXT"] = "Latency";
 	
 L["TITAN_LOOTTYPE_BUTTON_LABEL"] = "拾取方式: ";
 L["TITAN_LOOTTYPE_FREE_FOR_ALL"] = "自由拾取";
@@ -322,6 +383,7 @@ L["TITAN_PERFORMANCE_ADDON_TOTAL_MEM_USAGE_LABEL"] = "總插件使用記憶體 :
 L["TITAN_PERFORMANCE_ADDON_TOTAL_CPU_USAGE_LABEL"] = "總插件使用 CPU :";
 L["TITAN_PERFORMANCE_MENU_SHOW_FPS"] = "顯示 FPS";
 L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY"] = "顯示連線速度";
+L["TITAN_PERFORMANCE_MENU_SHOW_LATENCY_WORLD"] = "Show Game Latency";
 L["TITAN_PERFORMANCE_MENU_SHOW_MEMORY"] = "顯示記憶體";
 L["TITAN_PERFORMANCE_MENU_SHOW_ADDONS"] = "顯示插件記憶體使用情況";
 L["TITAN_PERFORMANCE_MENU_SHOW_ADDON_RATE"] = "顯示插件使用比率";
@@ -412,11 +474,12 @@ L["TITAN_XP_MENU_SIMPLE_BUTTON_XPGAIN"] = "顯示升級所需(基於最後所獲
 		  		Items = "Items",
 		  		Discounts = "Discounts",
 		  		Costs = "Costs",
-				TooltipOptions = "Tooltip",
-				CostTotal = "Total cost",
-				CostBag = "Bag cost",
-				CostEquip = "Equip cost",
+				CostTotal = "Total Cost",
+				CostBag = "Bag Cost",
+				CostEquip = "Equip Cost",
+ 				TooltipOptions = "Tooltip",
 	};
+
 L["TITAN_REPAIR"] = "泰坦修理"
 L["TITAN_REPAIR_GBANK_TOTAL"] = "公會銀行資金 :"
 L["TITAN_REPAIR_GBANK_WITHDRAW"] = "你可以使用的資金 :"
@@ -427,8 +490,8 @@ L["TITAN_REPAIR_CANNOT_AFFORD"] = "你現在支付不起修理費用."
 L["TITAN_REPAIR_REPORT_COST_MENU"] = "輸出修理費用到聊天頻道"
 L["TITAN_REPAIR_REPORT_COST_CHAT"] = "修理費用是 "
 
-L["TITAN_PLUGINS_MENU_TITLE"] = "擴展插件";
-  
+--L["TITAN_PLUGINS_MENU_TITLE"] = "擴展插件";
+
 L["TITAN_GOLD_TOOLTIPTEXT"] = "總計金錢於";
 L["TITAN_GOLD_ITEMNAME"] = "金錢追蹤";
 L["TITAN_GOLD_CLEAR_DATA_TEXT"] = "清除資料庫";
@@ -459,7 +522,13 @@ L["TITAN_GOLD_DELETE_PLAYER"] = "刪除角色";
 L["TITAN_GOLD_SHOW_PLAYER"] = "Show toon";
 L["TITAN_GOLD_FACTION_PLAYER_ALLY"] = "聯盟";
 L["TITAN_GOLD_FACTION_PLAYER_HORDE"] = "部落";
-L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."警告: "..FONT_COLOR_CODE_CLOSE.."這會清空金幣助手的資料庫，按取消放弃此次操作.";
+L["TITAN_GOLD_CLEAR_DATA_WARNING"] = GREEN_FONT_COLOR_CODE.."警告: "
+..FONT_COLOR_CODE_CLOSE.."這會清空金幣助手的資料庫，按取消放弃此次操作.";
+L["TITAN_GOLD_COIN_NONE"] = "Show No Labels";
+L["TITAN_GOLD_COIN_LABELS"] = "Show Text Labels";
+L["TITAN_GOLD_COIN_ICONS"] = "Show Icon Labels";
+L["TITAN_GOLD_ONLY"] = "Show Gold Only";
+L["TITAN_GOLD_COLORS"] = "Show Gold Colors";
 
 L["TITAN_VOLUME_TOOLTIP"] = "音量控制";
 L["TITAN_VOLUME_MASTER_TOOLTIP_VALUE"] = "主音量大小: ";

@@ -1,3 +1,87 @@
+Version 3.41.
+
+
+Bugfixes:
+-- Minor bugfixes
+
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+-- Added new bouquet item "Statusbar: Overshielded"
+
+
+--------------------------------------------------------------
+Version 3.40.
+
+
+Bugfixes:
+-- Some bugfixes from 3.39
+
+
+Improvements:
+
+
+Changes:
+
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.39.
+
+
+Bugfixes:
+-- Minor bugfixes
+-- Fixed color picker color code
+
+
+Improvements:
+-- Smarter dynamic memory allocation
+-- Creation of some ui elements if needed only to reduce memory usage
+
+
+Changes:
+-- Using all opaque texture for panel background now. May need
+   to adjust opacity (options=>panels=>general)
+-- Revamped Options=>Move and other UI elemets a bit
+
+Features:
+
+
+--------------------------------------------------------------
+Version 3.38.
+
+
+Bugfixes:
+-- Minor bugfixes
+
+
+Improvements:
+-- major memory optimizations
+-- minor performance optimizations
+-- Two VuhDo panels colliding should not lead to a short stutter
+   anymore
+
+
+Changes:
+
+
+Features:
+-- Color picker for single target direction arrow w/o range
+	(options=>colors=states)
+-- HoT bars can now be vertical, inverted, have axis turned
+ 	 (options=>panels=>hot bars)
+-- Bouquet item for showing shields as standalone bar
+-- You can have your target or focus as separate panel group now
+   (options=>Move, "Special" => "Target", "Focus")
+
+--------------------------------------------------------------
 Version 3.37.
 
 

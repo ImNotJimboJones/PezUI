@@ -15,6 +15,7 @@ local VUHDO_CONFIG = { };
 local sIsShowGcd;
 local sUniqueSpells = { };
 local sFirstRes, sSecondRes;
+local sEmpty = { };
 
 
 function VUHDO_spellEventHandlerInitBurst()
@@ -42,8 +43,8 @@ end
 --
 local function VUHDO_activateSpellForSpec(aSpecId)
 	local tName = VUHDO_SPEC_LAYOUTS[aSpecId];
-	if (not VUHDO_strempty(tName)) then
-		if (VUHDO_SPELL_LAYOUTS[tName] ~= nil) then
+	if not VUHDO_strempty(tName) then
+		if VUHDO_SPELL_LAYOUTS[tName] then
 			VUHDO_activateLayout(tName);
 		else
 			VUHDO_Msg(format(VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST, tName), 1, 0.4, 0.4);
@@ -57,7 +58,7 @@ end
 local function VUHDO_activateSpecc(aSpecNum)
 	VUHDO_activateSpellForSpec(aSpecNum);
 	local tProfile = VUHDO_getBestProfileAfterSpecChange();
-	if (tProfile ~= nil) then
+	if tProfile then
 		VUHDO_loadProfile(tProfile);
 	end
 	VUHDO_aoeUpdateTalents();
@@ -78,22 +79,20 @@ local VUHDO_TALENT_CHANGE_SPELLS = {
 
 --
 function VUHDO_spellcastSucceeded(aUnit, aSpellName)
-	if (VUHDO_TALENT_CHANGE_SPELLS[aSpellName]) then
+	if VUHDO_TALENT_CHANGE_SPELLS[aSpellName] then
 		VUHDO_resetTalentScan(aUnit);
 		VUHDO_initDebuffs(); -- Talentabhängige Debuff-Fähigkeiten neu initialisieren.
 		VUHDO_timeReloadUI(1);
 	end
 
-	if ("player" ~= aUnit and VUHDO_PLAYER_RAID_ID ~= aUnit) then
-		return;
-	end
+	if "player" ~= aUnit and VUHDO_PLAYER_RAID_ID ~= aUnit then return; end
 
-	if (VUHDO_ACTIVE_HOTS[aSpellName]) then
+	if VUHDO_ACTIVE_HOTS[aSpellName] then
 		VUHDO_updateAllHoTs();
 		VUHDO_updateAllCyclicBouquets(true);
 	end
 
-	if (VUHDO_SPELL_ID.ACTIVATE_FIRST_TALENT == aSpellName) then
+	if VUHDO_SPELL_ID.ACTIVATE_FIRST_TALENT == aSpellName then
 		VUHDO_activateSpecc("1");
 	elseif (VUHDO_SPELL_ID.ACTIVATE_SECOND_TALENT == aSpellName) then
 		VUHDO_activateSpecc("2");
@@ -108,40 +107,45 @@ end
 local tTargetUnit;
 local tCateg;
 function VUHDO_spellcastSent(aUnit, aSpellName, aSpellRank, aTargetName)
-	if ("player" ~= aUnit or aTargetName == nil) then
-		return;
-	end
+	if "player" ~= aUnit or not aTargetName then return; end
 
-	if (sIsShowGcd) then
-		VUHDO_initGcd();
-	end
+	if sIsShowGcd then VUHDO_initGcd(); end
 
 	aTargetName = smatch(aTargetName, "^[^-]*");
 	tTargetUnit = VUHDO_RAID_NAMES[aTargetName];
 
+	if not tTargetUnit then return end;
+
 	-- Resurrection?
-	if ((aSpellName == sFirstRes or aSpellName == sSecondRes)
-		and aTargetName ~= nil and tTargetUnit ~= nil) then
+	if aSpellName == sFirstRes or aSpellName == sSecondRes then
 
-		if (VUHDO_CONFIG["RES_IS_SHOW_TEXT"]) then
-			local tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName);
+		if VUHDO_CONFIG["RES_IS_SHOW_TEXT"] then
 
-			if (UnitInBattleground("player") or HasLFGRestrictions()) then
-				SendChatMessage(tText, "INSTANCE_CHAT");
-			elseif (IsInRaid()) then
-				SendChatMessage(tText, "RAID");
-			elseif (IsInGroup()) then
-				SendChatMessage(tText, "PARTY");
+			local tChannel = (UnitInBattleground("player") or HasLFGRestrictions()) and "INSTANCE_CHAT"
+				or IsInRaid() and "RAID" or IsInGroup() and "PARTY" or nil;
+
+			if tChannel then
+				SendChatMessage((gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName)), tChannel);
 			end
+
+			--[[local tText = gsub(VUHDO_CONFIG["RES_ANNOUNCE_TEXT"], "[Vv][Uu][Hh][Dd][Oo]", aTargetName);
+
+			if UnitInBattleground("player") or HasLFGRestrictions() then
+				SendChatMessage(tText, "INSTANCE_CHAT");
+			elseif IsInRaid() then
+				SendChatMessage(tText, "RAID");
+			elseif IsInGroup() then
+				SendChatMessage(tText, "PARTY");
+			end]]
 		end
 		return;
 	end
 
 	tCateg = sUniqueSpells[aSpellName];
-	if (tCateg ~= nil and tTargetUnit ~= nil and not InCombatLockdown()) then
-		if (VUHDO_BUFF_SETTINGS ~= nil and VUHDO_BUFF_SETTINGS[tCateg] ~= nil and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg]["name"]) then
-			VUHDO_BUFF_SETTINGS[tCateg]["name"] = aTargetName;
-			VUHDO_reloadBuffPanel();
-		end
+	if tCateg and not InCombatLockdown()
+		and (VUHDO_BUFF_SETTINGS or sEmpty)[tCateg] and aTargetName ~= VUHDO_BUFF_SETTINGS[tCateg]["name"] then
+
+		VUHDO_BUFF_SETTINGS[tCateg]["name"] = aTargetName;
+		VUHDO_reloadBuffPanel();
 	end
 end

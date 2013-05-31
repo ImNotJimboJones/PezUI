@@ -405,3 +405,8 @@ VUHDO_I18N_DEF_COUNTER_SHIELD_ABSORB = "Counter: All Shield Absorb #k"
 VUHDO_I18N_BUFFC_WEAPON_ENCHANT_OFF = "Weapon Enchant (offhand)";
 
 VUHDO_I18N_DEF_PVP_FLAGS="PvP Flag Carriers";
+VUHDO_I18N_DEF_STATUS_SHIELD = "Statusbar: Shield";
+
+VUHDO_I18N_TARGET = "Target";
+VUHDO_I18N_FOCUS = "Focus";
+VUHDO_I18N_DEF_STATUS_OVERSHIELDED = "Statusbar: Overshielded";

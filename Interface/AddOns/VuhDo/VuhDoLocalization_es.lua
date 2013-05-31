@@ -406,3 +406,8 @@ VUHDO_I18N_DEF_RAID_CDS = "Raid Cooldowns";
 VUHDO_I18N_BOUQUET_STATUS_CLASS_COLOR_IF_ACTIVE = "Flag: Class Color if active";
 
 VUHDO_I18N_DEF_PVP_FLAGS="PvP Flag Carriers";
+VUHDO_I18N_DEF_STATUS_SHIELD = "Statusbar: Shield";
+
+VUHDO_I18N_TARGET = "Target";
+VUHDO_I18N_FOCUS = "Focus";
+VUHDO_I18N_DEF_STATUS_OVERSHIELDED = "Statusbar: Overshielded";

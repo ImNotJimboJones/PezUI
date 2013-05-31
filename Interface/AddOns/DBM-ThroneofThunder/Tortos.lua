@@ -1,9 +1,10 @@
 local mod	= DBM:NewMod(825, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 9300 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 9683 $"):sub(12, -3))
 mod:SetCreatureID(67977)
-mod:SetModelID(46559)
+mod:SetQuestID(32747)
+mod:SetZone()
 mod:SetUsedIcons(8, 7, 6, 5, 4, 3)
 
 mod:RegisterCombat("combat")
@@ -13,8 +14,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_START",
 	"SPELL_CAST_SUCCESS",
-	"UNIT_AURA",
-	"UNIT_SPELLCAST_SUCCEEDED"
+	"UNIT_AURA boss1",
+	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
 local warnBite						= mod:NewSpellAnnounce(135251, 3, nil, mod:IsTank())
@@ -27,7 +28,7 @@ local warnSummonBats				= mod:NewSpellAnnounce("ej7140", 3, 136685)
 local warnShellConcussion			= mod:NewTargetAnnounce(136431, 1)
 
 local specWarnCallofTortos			= mod:NewSpecialWarningSpell(136294)
-local specWarnQuakeStomp			= mod:NewSpecialWarningSpell(134920, nil, nil, nil, 2)
+local specWarnQuakeStomp			= mod:NewSpecialWarningCount(134920, nil, nil, nil, 2)
 local specWarnRockfall				= mod:NewSpecialWarningSpell(134476, false, nil, nil, 2)
 local specWarnStoneBreath			= mod:NewSpecialWarningInterrupt(133939, not mod:IsTank())
 local specWarnCrystalShell			= mod:NewSpecialWarning("specWarnCrystalShell", false)
@@ -43,6 +44,7 @@ local timerStompActive				= mod:NewBuffActiveTimer(10.8, 134920)--Duration of th
 local timerShellConcussion			= mod:NewBuffFadesTimer(20, 136431)
 
 local countdownStomp				= mod:NewCountdown(49, 134920, mod:IsHealer())
+local countdownBreath				= mod:NewCountdown(46, 133939, false) -- Coundown for the kicker. mod:IsRanged() and mod:IsDps()
 
 local berserkTimer					= mod:NewBerserkTimer(780)
 
@@ -55,7 +57,6 @@ local shelldName = GetSpellInfo(137633)
 local shellConcussion = GetSpellInfo(136431)
 local stompActive = false
 local stompCount = 0
-local stompCast = 0--The one we reset every 3
 local firstRockfall = false--First rockfall after a stomp
 local shellsRemaining = 0
 local lastConcussion = 0
@@ -81,7 +82,6 @@ end
 function mod:OnCombatStart(delay)
 	stompActive = false
 	stompCount = 0
-	stompCast = 0
 	firstRockfall = false--First rockfall after a stomp
 	shellsRemaining = 0
 	lastConcussion = 0
@@ -97,6 +97,7 @@ function mod:OnCombatStart(delay)
 	timerStompCD:Start(29-delay, 1)
 	countdownStomp:Start(29-delay)
 	timerBreathCD:Start(-delay)
+	countdownBreath:Start(-delay)
 	if self.Options.InfoFrame and self:IsDifficulty("heroic10", "heroic25") then
 		DBM.InfoFrame:SetHeader(L.WrongDebuff:format(shelldName))
 		DBM.InfoFrame:Show(5, "playergooddebuff", 137633)
@@ -122,6 +123,7 @@ function mod:SPELL_CAST_START(args)
 			specWarnStoneBreath:Show(args.sourceName)
 		end
 		timerBreathCD:Start()
+		countdownBreath:Start()
 	elseif args.spellId == 136294 then
 		warnCallofTortos:Show()
 		specWarnCallofTortos:Show()
@@ -134,19 +136,17 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 134920 then
 		stompActive = true
 		stompCount = stompCount + 1
-		if stompCast == 4 then stompCast = 0 end
-		stompCast = stompCast + 1
 		warnQuakeStomp:Show(stompCount)
-		specWarnQuakeStomp:Show()
+		specWarnQuakeStomp:Show(stompCount)
 		timerStompActive:Start()
 		timerRockfallCD:Start(7.4)--When the spam of rockfalls start
 		timerStompCD:Start(nil, stompCount+1)
 		countdownStomp:Start()
-		if self.Options.AnnounceCooldowns then
+		if self.Options.AnnounceCooldowns and stompCount < 11 then
 			if DBM.Options.UseMasterVolume then
-				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCast..".ogg", "Master")
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCount..".ogg", "Master")
 			else
-				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCast..".ogg")
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCount..".ogg")
 			end
 		end
 	end
@@ -169,12 +169,11 @@ local function resetaddstate()
 	end
 end
 
---The problem is without a doubt here, but why?
 mod:RegisterOnUpdateHandler(function(self)
-	if hasHighestVersion and not (iconsSet == 3) then--Both of these conditions were correct in last test, so only thing left to do is to even see if handler is even running AT ALL
-		for i = 1, DBM:GetNumGroupMembers() do
-			local uId = "raid"..i.."target"
-			local guid = UnitGUID(uId)
+	if hasHighestVersion and not (iconsSet == 3) then
+		for uId in DBM:GetGroupMembers() do
+			local unitid = uId.."target"
+			local guid = UnitGUID(unitid)
 			if adds[guid] then
 				for g,i in pairs(adds) do
 					if i == 8 and g ~= guid then -- always set skull on first we see
@@ -183,7 +182,7 @@ mod:RegisterOnUpdateHandler(function(self)
 						break
 					end
 				end
-				SetRaidTarget(uId, adds[guid])
+				SetRaidTarget(unitid, adds[guid])
 				iconsSet = iconsSet + 1
 				adds[guid] = nil
 			end
@@ -209,11 +208,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		shellsRemaining = shellsRemaining + 1
 		addsActivated = addsActivated - 1
 		if DBM:GetRaidRank() > 0 and self.Options.ClearIconOnTurtles then
-			for i = 1, DBM:GetNumGroupMembers() do
-				local uId = "raid"..i.."target"
-				local guid = UnitGUID(uId)
+			for uId in DBM:GetGroupMembers() do
+				local unitid = uId.."target"
+				local guid = UnitGUID(unitid)
 				if args.destGUID == guid then
-					SetRaidTarget(uId, 0)
+					SetRaidTarget(unitid, 0)
 				end
 			end
 		end
@@ -256,8 +255,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
+--Does not show in combat log, so UNIT_AURA must be used instead
+--This needs to be switched to RegisterUnitEvent once tandanu is done wit that code.
+--that way dbm isn't checking if it's boss1 325635325 times a fight.
 function mod:UNIT_AURA(uId)
-	if uId ~= "boss1" then return end
 	local _, _, _, _, _, duration, expires = UnitDebuff(uId, shellConcussion)
 	if expires and lastConcussion ~= expires then
 		lastConcussion = expires
@@ -269,32 +270,30 @@ function mod:UNIT_AURA(uId)
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
-	if spellId == 136685 and self:AntiSpam(2, 5) then --Don't filter main tank, bat tank often taunts boss just before bats for vengeance, otherwise we lose threat to dps. Then main tank taunts back after bats spawn and we go get them, fully vengeanced (if you try to pick up bats without vengeance you will not hold aggro for shit)
+	if spellId == 136685 then --Don't filter main tank, bat tank often taunts boss just before bats for vengeance, otherwise we lose threat to dps. Then main tank taunts back after bats spawn and we go get them, fully vengeanced (if you try to pick up bats without vengeance you will not hold aggro for shit)
 		warnSummonBats:Show()
 		specWarnSummonBats:Show()
 		timerSummonBatsCD:Start()
 	end
 end
 
-local function FindFastestHighestVersion()
-	mod:SendSync("FastestPerson", UnitGUID("player"))
-end
 
 function mod:OnSync(msg, guid, ver)
 	if msg == "IconCheck" and guid and ver then
-		if tonumber(ver) > highestVersion then
-			highestVersion = tonumber(ver)--Keep bumping highest version to highest we recieve from the icon setters
+		ver = tonumber(ver) or 0
+		if ver > highestVersion then
+			highestVersion = ver--Keep bumping highest version to highest we recieve from the icon setters
 			if guid == UnitGUID("player") then--Check if that highest version was from ourself
 				hasHighestVersion = true
-				self:Unschedule(FindFastestHighestVersion)
-				self:Schedule(5, FindFastestHighestVersion)
+				self:Unschedule(self.SendSync)
+				self:Schedule(5, self.SendSync, self, "FastestPerson", UnitGUID("player"))
 			else--Not from self, it means someone with a higher version than us probably sent it
-				self:Unschedule(FindFastestHighestVersion)
+				self:Unschedule(self.SendSync)
 				hasHighestVersion = false
 			end
 		end
 	elseif msg == "FastestPerson" and guid and self:AntiSpam(10, 4) then--Whoever sends this sync first wins all. They have highest version and fastest computer
-		self:Unschedule(FindFastestHighestVersion)
+		self:Unschedule(self.SendSync)
 		if guid == UnitGUID("player") then
 			hasHighestVersion = true
 		else

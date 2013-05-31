@@ -1949,7 +1949,7 @@ local tKey;
 local function VUHDO_getBestProfileForSpecAndSize(aSpec, aSize)
 	for _, tIndex in ipairs(tAutoProfileIndices) do
 		tKey = "SPEC_" .. aSpec .. "_" .. tIndex;
-		if (VUHDO_CONFIG["AUTO_PROFILES"][tKey] ~= nil and aSize <= tonumber(tIndex)) then
+		if VUHDO_CONFIG["AUTO_PROFILES"][tKey] and aSize <= tonumber(tIndex) then
 			return VUHDO_CONFIG["AUTO_PROFILES"][tKey];
 		end
 
@@ -1970,7 +1970,7 @@ end
 --
 local function VUHDO_getBestProfileForSize(aSize)
 	for _, tIndex in ipairs(tAutoProfileIndices) do
-		if (VUHDO_CONFIG["AUTO_PROFILES"][tIndex] ~= nil and aSize <= tonumber(tIndex)) then
+		if VUHDO_CONFIG["AUTO_PROFILES"][tIndex] and aSize <= tonumber(tIndex) then
 			return VUHDO_CONFIG["AUTO_PROFILES"][tIndex];
 		end
 	end
@@ -2015,9 +2015,9 @@ function VUHDO_setPetBattle(anIsStarted)
 	tIsInPetBattle = anIsStarted and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"];
 
 
-	if (VuhDoBuffWatchMainFrame ~= nil and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"]) then
+	if VuhDoBuffWatchMainFrame and VUHDO_CONFIG["HIDE_PANELS_PET_BATTLE"] then
 		VUHDO_setBuffWatchForceHide(anIsStarted);
-		if (anIsStarted) then
+		if anIsStarted then
 			VuhDoBuffWatchMainFrame:Hide();
 		else
 			VUHDO_reloadBuffPanel();
@@ -2034,24 +2034,24 @@ local tGroupType;
 function VUHDO_getAutoProfile()
 	tGroupType = VUHDO_getCurrentGroupType();
 
-	if (VUHDO_DEBUG_AUTO_PROFILE ~= nil) then
+	if VUHDO_DEBUG_AUTO_PROFILE then
 		tGroupSize = VUHDO_DEBUG_AUTO_PROFILE;
-	elseif (VUHDO_GROUP_TYPE_RAID == tGroupType or VUHDO_IS_CONFIG) then
+	elseif VUHDO_GROUP_TYPE_RAID == tGroupType or VUHDO_IS_CONFIG then
 		tGroupSize = GetNumGroupMembers();
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
+		if not VUHDO_IS_SHOWN_BY_GROUP and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle then
 			VUHDO_IS_SHOWN_BY_GROUP = true;
 			VUHDO_timeReloadUI(0.1);
 		end
-	elseif (VUHDO_GROUP_TYPE_PARTY == tGroupType) then
+	elseif VUHDO_GROUP_TYPE_PARTY == tGroupType then
 		tGroupSize = GetNumGroupMembers();
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
+		if not VUHDO_IS_SHOWN_BY_GROUP then
+			if not VUHDO_CONFIG["HIDE_PANELS_PARTY"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
-		elseif (VUHDO_CONFIG["HIDE_PANELS_PARTY"] or tIsInPetBattle) then
+		elseif VUHDO_CONFIG["HIDE_PANELS_PARTY"] or tIsInPetBattle then
 			VUHDO_IS_SHOWN_BY_GROUP = false;
 			VUHDO_timeReloadUI(0.1);
 		end
@@ -2059,21 +2059,21 @@ function VUHDO_getAutoProfile()
 		tGroupSize = 1;
 		twipe(VUHDO_MAINTANK_NAMES);
 
-		if (not VUHDO_IS_SHOWN_BY_GROUP) then
-			if (not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle) then
+		if not VUHDO_IS_SHOWN_BY_GROUP then
+			if not VUHDO_CONFIG["HIDE_PANELS_SOLO"] and VUHDO_CONFIG["SHOW_PANELS"] and not tIsInPetBattle then
 				VUHDO_IS_SHOWN_BY_GROUP = true;
 				VUHDO_timeReloadUI(0.1);
 			end
-		elseif (VUHDO_CONFIG["HIDE_PANELS_SOLO"] or tIsInPetBattle) then
+		elseif VUHDO_CONFIG["HIDE_PANELS_SOLO"] or tIsInPetBattle then
 			VUHDO_IS_SHOWN_BY_GROUP = false;
 			VUHDO_timeReloadUI(0.1);
 		end
 	end
 
-	if (VUHDO_GROUP_SIZE ~= tGroupSize and tGroupSize > 0) then
+	if VUHDO_GROUP_SIZE ~= tGroupSize and tGroupSize > 0 then
 		VUHDO_GROUP_SIZE = tGroupSize;
 		tProfile = VUHDO_getBestProfileAfterSizeChange();
-		if (tProfile ~= VUHDO_CONFIG["CURRENT_PROFILE"]) then
+		if tProfile ~= VUHDO_CONFIG["CURRENT_PROFILE"] then
 			return tProfile, tGroupSize;
 		end
 	end
@@ -2099,7 +2099,7 @@ VUHDO_PROFILE_MODEL_MATCH_NEVER = 99;
 --
 function VUHDO_getProfileNamedCompressed(aName)
 	for tIndex, tValue in pairs(VUHDO_PROFILES) do
-		if (tValue["NAME"] == aName) then
+		if tValue["NAME"] == aName then
 			return tIndex, tValue;
 		end
 	end
@@ -2172,7 +2172,7 @@ function VUHDO_createNewProfileName(aName, aUnitName)
 	local tProfile = { };
 	local tPrefix = aUnitName .. ": ";
 
-	while (tProfile ~= nil) do
+	while tProfile do
 		tNewName = tPrefix .. aName;
 		_, tProfile = VUHDO_getProfileNamedCompressed(tNewName);
 
@@ -2190,26 +2190,26 @@ local VUHDO_TARGET_PROFILE_NAME = nil;
 --
 local function VUHDO_askSaveProfileCallback(aButtonNum)
 	local _, tProfile = VUHDO_getProfileNamedCompressed(VUHDO_TARGET_PROFILE_NAME);
-	if (tProfile ~= nil and aButtonNum == 2 and tProfile["HARDLOCKED"]) then
+	if tProfile and aButtonNum == 2 and tProfile["HARDLOCKED"] then
 		VUHDO_Msg("This profile is hardlocked. It has been copied locally.");
 		aButtonNum = 1;
 	end
 
-	if (1 == aButtonNum) then -- Copy
+	if 1 == aButtonNum then -- Copy
 		VUHDO_TARGET_PROFILE_NAME = VUHDO_createNewProfileName(VUHDO_TARGET_PROFILE_NAME, VUHDO_PLAYER_NAME);
 		VUHDO_CONFIG["CURRENT_PROFILE"] = VUHDO_TARGET_PROFILE_NAME;
-	elseif (2 == aButtonNum) then -- Overwrite
-	elseif (3 == aButtonNum) then-- Discard
+	elseif 2 == aButtonNum then -- Overwrite
+	elseif 3 == aButtonNum then-- Discard
 		return;
 	end
 
 	local tIndex, _ = VUHDO_getProfileNamedCompressed(VUHDO_TARGET_PROFILE_NAME);
-	if (tIndex == nil) then
+	if not tIndex then
 		tIndex = #VUHDO_PROFILES + 1;
 	end
 
 	VUHDO_PROFILES[tIndex] = VUHDO_createNewProfile(VUHDO_TARGET_PROFILE_NAME);
-	if (1 == aButtonNum) then
+	if 1 == aButtonNum then
 		VUHDO_PROFILES[tIndex]["HARDLOCKED"] = false;
 	end
 
@@ -2222,10 +2222,10 @@ end
 --
 function VUHDO_saveProfile(aName)
 	local tExistingIndex, tExistingProfile = VUHDO_getProfileNamedCompressed(aName);
-	if (tExistingProfile ~= nil)  then
+	if tExistingProfile then
 		VUHDO_TARGET_PROFILE_NAME = aName;
 
-		if (tExistingProfile["ORIGINATOR_TOON"] ~= VUHDO_PLAYER_NAME and not VUHDO_CONFIG["IS_ALWAYS_OVERWRITE_PROFILE"]) then
+		if tExistingProfile["ORIGINATOR_TOON"] ~= VUHDO_PLAYER_NAME and not VUHDO_CONFIG["IS_ALWAYS_OVERWRITE_PROFILE"] then
 
 			VuhDoThreeSelectFrameText:SetText(
 				VUHDO_I18N_PROFILE_OVERWRITE_1 .. " \"" .. aName .. "\" "
@@ -2251,7 +2251,7 @@ end
 --
 function VUHDO_saveCurrentProfile()
 	local _, tProfile = VUHDO_getProfileNamedCompressed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-	if (tProfile ~= nil and not tProfile["LOCKED"]) then
+	if tProfile and not tProfile["LOCKED"] then
 		VUHDO_saveProfile(VUHDO_CONFIG["CURRENT_PROFILE"]);
 	end
 end
@@ -2261,8 +2261,8 @@ end
 --
 function VUHDO_saveCurrentProfilePanelPosition(aPanelNum)
 	local _, tProfile = VUHDO_getProfileNamedCompressed(VUHDO_CONFIG["CURRENT_PROFILE"]);
-	if (tProfile ~= nil) then
-		if (tProfile["PANEL_POSITIONS"] == nil) then
+	if tProfile then
+		if not tProfile["PANEL_POSITIONS"] then
 			tProfile["PANEL_POSITIONS"] = { };
 		end
 
@@ -2274,13 +2274,13 @@ end
 
 --
 local function VUHDO_isProfileRuleAllowed(tRule, aClass, aToon)
-	if (VUHDO_PROFILE_MODEL_MATCH_ALL == tRule) then
+	if VUHDO_PROFILE_MODEL_MATCH_ALL == tRule then
 		return true;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_CLASS == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_CLASS == tRule then
 		return VUHDO_PLAYER_CLASS == aClass;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_TOON == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_TOON == tRule then
 		return VUHDO_PLAYER_NAME == aToon;
-	elseif (VUHDO_PROFILE_MODEL_MATCH_NEVER == tRule) then
+	elseif VUHDO_PROFILE_MODEL_MATCH_NEVER == tRule then
 		return false;
 	else
 		return true;
@@ -2374,20 +2374,20 @@ local VUHDO_PROFILE_MODEL = {
 local tOriginatorClass = nil;
 local tOriginatorToon = nil;
 local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileModel, aDerivedRule)
-	if (aSourceArray == nil) then
+	if not aSourceArray then
 		return aDestArray;
 	end
 
-	if (aSourceArray["ORIGINATOR_CLASS"] ~= nil) then
+	if aSourceArray["ORIGINATOR_CLASS"] then
 		tOriginatorClass = aSourceArray["ORIGINATOR_CLASS"];
 	end
 
-	if (aSourceArray["ORIGINATOR_TOON"] ~= nil) then
+	if aSourceArray["ORIGINATOR_TOON"] then
 		tOriginatorToon = aSourceArray["ORIGINATOR_TOON"];
 	end
 
 	local tRootRule;
-	if (aProfileModel ~= nil) then
+	if aProfileModel then
 		tRootRule = aProfileModel["-root-"];
 	else
 		tRootRule = nil;
@@ -2400,16 +2400,16 @@ local function VUHDO_smartLoadFromProfile(aDestArray, aSourceArray, aProfileMode
 		if (tSourceValue ~= nil) then
 			local tSubModel = (aProfileModel or { })[tKey];
 
-			if ("table" == type(tSourceValue)) then
+			if "table" == type(tSourceValue) then
 
-				if ("table" == type(tDestValue)) then
+				if "table" == type(tDestValue) then
 					aDestArray[tKey] = VUHDO_smartLoadFromProfile(aDestArray[tKey], aSourceArray[tKey], tSubModel, tRootRule or aDerivedRule);
 				else
 					VUHDO_Msg("Data structures incompatible in field: " .. tKey);
 				end
 			else -- Flacher Wert
 				local tRule = tSubModel or tRootRule or aDerivedRule;
-				if (VUHDO_isProfileRuleAllowed(tRule, tOriginatorClass, tOriginatorToon)) then
+				if VUHDO_isProfileRuleAllowed(tRule, tOriginatorClass, tOriginatorToon) then
 					aDestArray[tKey] = aSourceArray[tKey];
 				--else
 					--VUHDO_Msg("Prohibit: " .. tKey);
@@ -2426,7 +2426,7 @@ end
 --
 local function VUHDO_fixDominantProfileSettings(aProfile)
 	for tCnt = 1, VUHDO_MAX_PANELS do
-		if (aProfile["PANEL_SETUP"][tCnt] ~= nil) then
+		if aProfile["PANEL_SETUP"][tCnt] then
 			if (aProfile["PANEL_SETUP"][tCnt]["MODEL"].groups == nil) then
 				VUHDO_PANEL_SETUP[tCnt]["MODEL"].groups = nil;
 			else
@@ -2444,7 +2444,7 @@ end
 function VUHDO_loadProfileNoInit(aName)
 	local tIndex, tProfile = VUHDO_getProfileNamed(aName);
 	local tPanelPositions;
-	if (tIndex == nil) then
+	if not tIndex then
 		VUHDO_Msg(VUHDO_I18N_ERROR_NO_PROFILE .. "\"" .. aName .. "\" !", 1, 0.4, 0.4);
 		return;
 	end
@@ -2461,23 +2461,22 @@ function VUHDO_loadProfileNoInit(aName)
 	VUHDO_INDICATOR_CONFIG  = VUHDO_smartLoadFromProfile(VUHDO_INDICATOR_CONFIG,  tProfile["INDICATOR_CONFIG"],  VUHDO_PROFILE_MODEL["INDICATOR_CONFIG"],  VUHDO_PROFILE_MODEL_MATCH_ALL);
 
 	tPanelPositions = tProfile["PANEL_POSITIONS"];
-	if (tPanelPositions ~= nil) then
+	if tPanelPositions then
 		for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
-			if (tPanelPositions[tCnt] ~= nil) then
+			if tPanelPositions[tCnt] then
 				VUHDO_PANEL_SETUP[tCnt]["POSITION"] = VUHDO_deepCopyTable(tPanelPositions[tCnt]);
 			end
 		end
 	end
 
 	-- @TODO: Warum werden die nicht direkt geladen (ipairs-Problem?)
-	if (tProfile["CONFIG"]["CUSTOM_DEBUFF"] ~= nil and tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"] ~= nil and VUHDO_CONFIG["CUSTOM_DEBUFF"] ~= nil) then
+	if tProfile["CONFIG"]["CUSTOM_DEBUFF"] and tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"] and VUHDO_CONFIG["CUSTOM_DEBUFF"] then
 		VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"] = VUHDO_deepCopyTable(tProfile["CONFIG"]["CUSTOM_DEBUFF"]["STORED"]);
 	end
 
 	VUHDO_fixDominantProfileSettings(tProfile);
 	VUHDO_CONFIG["CURRENT_PROFILE"] = aName;
 	VUHDO_Msg(VUHDO_I18N_PROFILE_LOADED .. aName);
-	collectgarbage('collect');
 end
 
 
@@ -2492,20 +2491,22 @@ function VUHDO_loadProfile(aName)
 	VUHDO_registerAllBouquets(false);
 	VUHDO_initAllEventBouquets();
 	VUHDO_initDebuffs();
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(true);
 	VUHDO_resetTooltip();
 	VUHDO_initBlizzFrames();
 	VUHDO_bouqetsChanged();
 	if (VUHDO_initCustomDebuffComboModel ~= nil) then
 		VUHDO_initCustomDebuffComboModel();
 	end
+
+	collectgarbage('collect');
 end
 
 
 
 --
 function VUHDO_initDefaultProfiles()
-	if ((VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] or 1) < 3) then
+	if (VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] or 1) < 3 then
 		VUHDO_GLOBAL_CONFIG["PROFILES_VERSION"] = 3;
 		for _, tProfile in ipairs(VUHDO_DEFAULT_PROFILES) do
 			VUHDO_compressAllProfileParts(tProfile);

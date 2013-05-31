@@ -1,4 +1,5 @@
 local tonumber = tonumber;
+local huge = math.huge;
 
 
 local VUHDO_getHeader;
@@ -27,85 +28,67 @@ end
 
 
 --
-local sBarScaling;
-local sModel;
-local sWidth;
-local sHeight;
-local sAnzCols;
-local sStatusFile;
-local sFont;
-local sTextSize;
-local sBarWidth;
-local sHeaderWidth;
-local sHasHeaders;
-local sHeaderColSetup;
-
---function VUHDO_panelRedrwawHeadersInitLocalVars(aPanelNum)
---end
-
-
-
-
+local tModel;
+local tWidth;
+local tHeight;
+local tAnzCols;
+local tStatusFile;
+local tFont;
+local tTextSize;
+local tBarWidth;
+local tHeaderWidth;
+local tHasHeaders;
+local tHeaderColSetup;
 local tHeader;
 local tX, tY
 local tHealthBar;
 local tHeaderText;
-local tPanelName;
 local tEmpty = { };
 function VUHDO_positionTableHeaders(aPanel, aPanelNum)
-	sBarScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
+	tModel  = VUHDO_PANEL_DYN_MODELS[aPanelNum];
+	tWidth  = VUHDO_getHeaderWidth(aPanelNum);
+	tHeight = VUHDO_getHeaderHeight(aPanelNum);
 
-	sModel  = VUHDO_PANEL_DYN_MODELS[aPanelNum];
-	sWidth  = VUHDO_getHeaderWidth(aPanelNum);
-	sHeight = VUHDO_getHeaderHeight(aPanelNum);
+	tHasHeaders = VUHDO_isTableHeaderOrFooter(aPanelNum);
+	tBarWidth = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["headerWidth"] * 0.01;
 
-	sHasHeaders = VUHDO_isTableHeaderOrFooter(aPanelNum);
-	sBarWidth = sBarScaling["headerWidth"] * 0.01;
+	if tHasHeaders then
+		tAnzCols = #(tModel or tEmpty);
 
-	if (sHasHeaders) then
-		sAnzCols = #(sModel or tEmpty);
-
-		if (sAnzCols > 20) then -- VUHDO_MAX_HEADERS_PER_PANEL
-			sAnzCols = 20; -- VUHDO_MAX_HEADERS_PER_PANEL
-		end
-
-		sHeaderColSetup = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
-		sStatusFile = VUHDO_LibSharedMedia:Fetch('statusbar', sHeaderColSetup["barTexture"]);
-		sFont = VUHDO_getFont(sHeaderColSetup["font"]);
-		sTextSize = tonumber(sHeaderColSetup["textSize"]);
-		sHeaderWidth = sWidth * sBarWidth + 0.01;
-
-		for tCnt  = 1, 20 do -- VUHDO_MAX_HEADERS_PER_PANEL
-			tHeader = VUHDO_getHeader(tCnt, aPanelNum);
-			tHeader:SetWidth(sHeaderWidth);
-			tHeader:SetHeight(sHeight);
-
-			tHealthBar = VUHDO_getHeaderBar(tHeader);
-			tHealthBar:SetValue(1);
-			tHealthBar:SetHeight(sHeight);
-
-			if (sStatusFile ~= nil) then
-				tHealthBar:SetStatusBarTexture(sStatusFile);
-			end
-
-			tHeaderText = VUHDO_getHeaderTextId(tHeader);
-			tHeaderText:SetFont(sFont, sTextSize, "OUTLINE");
-		end
+		tHeaderColSetup = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
+		tStatusFile = VUHDO_LibSharedMedia:Fetch('statusbar', tHeaderColSetup["barTexture"]);
+		tFont = VUHDO_getFont(tHeaderColSetup["font"]);
+		tTextSize = tonumber(tHeaderColSetup["textSize"]);
+		tHeaderWidth = tWidth * tBarWidth + 0.01;
 
 	else
-		sAnzCols = 0;
+		tAnzCols = 0;
 	end
 
-	tPanelName = aPanel:GetName();
-	for tCnt  = 1, sAnzCols do
-		tHeader = VUHDO_getHeader(tCnt, aPanelNum);
+	for tCnt  = 1, tAnzCols do
+		tHeader = VUHDO_getOrCreateHeader(tCnt, aPanelNum);
+
+		tHeader:SetWidth(tHeaderWidth);
+		tHeader:SetHeight(tHeight);
+
+		tHealthBar = VUHDO_getHeaderBar(tHeader);
+		tHealthBar:SetValue(1);
+		tHealthBar:SetHeight(tHeight);
+
+		if tStatusFile then tHealthBar:SetStatusBarTexture(tStatusFile); end
+
+		tHeaderText = VUHDO_getHeaderTextId(tHeader);
+		tHeaderText:SetFont(tFont, tTextSize, "OUTLINE");
 		tX, tY = VUHDO_getHeaderPos(tCnt, aPanelNum);
-		tHeader:SetPoint("TOPLEFT", tPanelName, "TOPLEFT",  tX + sWidth * 0.5 * (1 - sBarWidth), -tY);
-		VUHDO_customizeHeader(tHeader,  aPanelNum, sModel[tCnt]);
+		tHeader:SetPoint("TOPLEFT", aPanel:GetName(), "TOPLEFT",  tX + tWidth * 0.5 * (1 - tBarWidth), -tY);
+		VUHDO_customizeHeader(tHeader, aPanelNum, tModel[tCnt]);
 		tHeader:Show();
 	end
 
-	for tCnt = sAnzCols + 1, 20 do -- VUHDO_MAX_HEADERS_PER_PANEL
-		VUHDO_getHeader(tCnt, aPanelNum):Hide();
+	for tCnt = tAnzCols + 1, huge do
+		tHeader = VUHDO_getHeader(tCnt, aPanelNum);
+		if tHeader then tHeader:Hide();
+		else break; end
+		tCnt = tCnt + 1;
 	end
 end

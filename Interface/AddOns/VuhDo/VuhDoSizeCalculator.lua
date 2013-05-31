@@ -44,19 +44,19 @@ end
 
 -- Returns the total height of optional threat bars
 function VUHDO_getAdditionalTopHeight(aPanelNum)
-	if (sTopHeightCache[aPanelNum] == nil) then
+	if not sTopHeightCache[aPanelNum] then
 		local tTopSpace;
 
-		if (VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"] ~= "") then
+		if VUHDO_INDICATOR_CONFIG["BOUQUETS"]["THREAT_BAR"] ~= "" then
 			tTopSpace = VUHDO_INDICATOR_CONFIG["CUSTOM"]["THREAT_BAR"]["HEIGHT"];
 		else
 			tTopSpace = 0;
 		end
 
 		local tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
-		if (strfind(tNamePos[1], "BOTTOM", 1, true) and strfind(tNamePos[2], "TOP", 1, true)) then
+		if strfind(tNamePos[1], "BOTTOM", 1, true) and strfind(tNamePos[2], "TOP", 1, true) then
 			local tNameHeight = VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["_spacing"];
-			if (tNameHeight ~= nil and tNameHeight > tTopSpace) then
+			if tNameHeight and tNameHeight > tTopSpace then
 				tTopSpace = tNameHeight;
 			end
 		end
@@ -70,21 +70,21 @@ end
 
 --
 function VUHDO_getAdditionalBottomHeight(aPanelNum)
-	if (sBottomHeightCache[aPanelNum] == nil) then
+	if not sBottomHeightCache[aPanelNum] then
 		-- HoT icons
 		local tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
 		local tBottomSpace;
 
-		if  (tHotCfg["radioValue"] == 7 or tHotCfg["radioValue"] == 8) then
+		if tHotCfg["radioValue"] == 7 or tHotCfg["radioValue"] == 8 then
 			tBottomSpace = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"] * VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"] * 0.01;
 		else
 			tBottomSpace = 0;
 		end
 
 		local tNamePos = VUHDO_splitString(VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["position"], "+");
-		if (strfind(tNamePos[1], "TOP", 1, true) and strfind(tNamePos[2], "BOTTOM", 1, true)) then
+		if strfind(tNamePos[1], "TOP", 1, true) and strfind(tNamePos[2], "BOTTOM", 1, true) then
 			local tNameHeight = VUHDO_PANEL_SETUP[aPanelNum]["ID_TEXT"]["_spacing"];
-			if (tNameHeight ~= nil and tNameHeight > tBottomSpace) then
+			if tNameHeight and tNameHeight > tBottomSpace then
 				tBottomSpace = tNameHeight;
 			end
 		end
@@ -104,11 +104,11 @@ local function VUHDO_getTargetBarWidth(aPanelNum)
 	tBarScaling = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"];
 
 	tTargetWidth = 0;
-	if (tBarScaling["showTarget"]) then
+	if tBarScaling["showTarget"] then
 		tTargetWidth = tTargetWidth + tBarScaling["targetSpacing"] + tBarScaling["targetWidth"];
 	end
 
-	if (tBarScaling["showTot"]) then
+	if tBarScaling["showTot"] then
 		tTargetWidth = tTargetWidth + tBarScaling["totSpacing"] + tBarScaling["totWidth"];
 	end
 
@@ -119,13 +119,13 @@ end
 
 --
 function VUHDO_getNumHotSlots(aPanelNum)
-	if (VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][10] ~= nil) then
+	if VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][10] then
 		return 7;
-	elseif (VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][9] ~= nil) then
+	elseif VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][9] then
 		return 6;
 	else
 		for tCnt = 5, 1, -1 do
-			if (VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][tCnt] ~= nil) then
+			if VUHDO_PANEL_SETUP["HOTS"]["SLOTS"][tCnt] then
 				return tCnt;
 			end
 		end
@@ -141,7 +141,7 @@ local tHotCfg;
 local function VUHDO_getHotIconWidth(aPanelNum)
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"];
 
-	if (tHotCfg["radioValue"] == 1 or tHotCfg["radioValue"] == 4) then
+	if tHotCfg["radioValue"] == 1 or tHotCfg["radioValue"] == 4 then
 		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barHeight"]
 			* VUHDO_PANEL_SETUP[aPanelNum]["HOTS"]["size"]
 			* VUHDO_getNumHotSlots(aPanelNum) * 0.01;
@@ -154,9 +154,7 @@ end
 
 --
 function VUHDO_getHealButtonWidth(aPanelNum)
-	if (VUHDO_IS_PANEL_CONFIG and not VUHDO_CONFIG_SHOW_RAID) then
-		return VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"];
-	elseif (sHealButtonWidthCache[aPanelNum] == nil) then
+	if not sHealButtonWidthCache[aPanelNum] then
 		sHealButtonWidthCache[aPanelNum] =
 			VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"]
 			+ VUHDO_getTargetBarWidth(aPanelNum)
@@ -193,7 +191,7 @@ end
 
 --
 function VUHDO_getHeaderPos(aHeaderPlace, aPanelNum)
-	if (VUHDO_isPanelHorizontal(aPanelNum)) then
+	if VUHDO_isPanelHorizontal(aPanelNum) then
 		return VUHDO_getHeaderPosHor(aHeaderPlace, aPanelNum);
 	else
 		return VUHDO_getHeaderPosVer(aHeaderPlace, aPanelNum);
@@ -205,7 +203,7 @@ end
 --
 function VUHDO_getHealButtonPos(aPlaceNum, aRowNo, aPanelNum)
 	-- Achtung: Positionen nicht cachen, da z.T. von dynamischen Models abh„ngig
-	if (VUHDO_isPanelHorizontal(aPanelNum)) then
+	if VUHDO_isPanelHorizontal(aPanelNum) then
 		return VUHDO_getHealButtonPosHor(aPlaceNum, aRowNo, aPanelNum);
 	else
 		return VUHDO_getHealButtonPosVer(aPlaceNum, aRowNo, aPanelNum);

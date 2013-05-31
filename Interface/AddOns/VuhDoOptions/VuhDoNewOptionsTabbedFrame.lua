@@ -37,6 +37,9 @@ local function VUHDO_countTableDiffs(aTable, anotherTable)
 		return 0;
 	end
 
+	aTable = VUHDO_decompressIfCompressed(aTable);
+	anotherTable = VUHDO_decompressIfCompressed(anotherTable);
+
 	for tKey, tValue in pairs(aTable) do
 		if ("table" == type(tValue)) then
 			tCount = tCount + VUHDO_countTableDiffs(tValue, anotherTable[tKey]);
@@ -63,8 +66,6 @@ end
 
 --
 function VUHDO_tabbedPanelOkayClicked(aButton)
-	VuhDoNewOptionsTabbedFrame:Hide();
-
 	VUHDO_B_CONFIG = nil;
 	VUHDO_B_INDICATOR_CONFIG = nil;
 	VUHDO_B_PANEL_SETUP = nil;
@@ -99,9 +100,10 @@ function VUHDO_tabbedPanelOkayClicked(aButton)
 	VUHDO_initAllBurstCaches();
 	VUHDO_trimSpellAssignments(VUHDO_SPELL_ASSIGNMENTS);
 	VUHDO_trimSpellAssignments(VUHDO_HOSTILE_SPELL_ASSIGNMENTS);
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(true);
 
 	VUHDO_MAY_DEBUFF_ANIM = true;
+	VuhDoNewOptionsTabbedFrame:Hide();
 end
 
 
@@ -141,14 +143,14 @@ end
 --
 function VUHDO_newOptionsBufferVars()
 	if (VUHDO_B_CONFIG == nil) then
-		VUHDO_B_CONFIG = VUHDO_deepCopyTable(VUHDO_CONFIG);
-		VUHDO_B_INDICATOR_CONFIG = VUHDO_deepCopyTable(VUHDO_INDICATOR_CONFIG);
-		VUHDO_B_PANEL_SETUP = VUHDO_deepCopyTable(VUHDO_PANEL_SETUP);
-		VUHDO_B_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_SPELL_ASSIGNMENTS);
-		VUHDO_B_BUFF_SETTINGS = VUHDO_deepCopyTable(VUHDO_BUFF_SETTINGS);
-		VUHDO_B_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_SPELL_CONFIG);
-		VUHDO_B_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_SPELLS_KEYBOARD);
-		VUHDO_B_BOUQUETS = VUHDO_deepCopyTable(VUHDO_BOUQUETS);
+		VUHDO_B_CONFIG = VUHDO_compressTable(VUHDO_CONFIG);
+		VUHDO_B_INDICATOR_CONFIG = VUHDO_compressTable(VUHDO_INDICATOR_CONFIG);
+		VUHDO_B_PANEL_SETUP = VUHDO_compressTable(VUHDO_PANEL_SETUP);
+		VUHDO_B_SPELL_ASSIGNMENTS = VUHDO_compressTable(VUHDO_SPELL_ASSIGNMENTS);
+		VUHDO_B_BUFF_SETTINGS = VUHDO_compressTable(VUHDO_BUFF_SETTINGS);
+		VUHDO_B_SPELL_CONFIG = VUHDO_compressTable(VUHDO_SPELL_CONFIG);
+		VUHDO_B_SPELLS_KEYBOARD = VUHDO_compressTable(VUHDO_SPELLS_KEYBOARD);
+		VUHDO_B_BOUQUETS = VUHDO_compressTable(VUHDO_BOUQUETS);
 	end
 end
 
@@ -157,17 +159,19 @@ end
 --
 function VUHDO_yesNoDiscardChangesCallback(aDecision)
 	if (VUHDO_YES == aDecision) then
-		VuhDoNewOptionsTabbedFrame:Hide();
 
-		VUHDO_CONFIG = VUHDO_deepCopyTable(VUHDO_B_CONFIG);
-		VUHDO_INDICATOR_CONFIG = VUHDO_deepCopyTable(VUHDO_B_INDICATOR_CONFIG);
-		VUHDO_PANEL_SETUP = VUHDO_deepCopyTable(VUHDO_B_PANEL_SETUP);
-		VUHDO_SPELL_ASSIGNMENTS = VUHDO_deepCopyTable(VUHDO_B_SPELL_ASSIGNMENTS);
-		VUHDO_BUFF_SETTINGS = VUHDO_deepCopyTable(VUHDO_B_BUFF_SETTINGS);
-		VUHDO_SPELL_CONFIG = VUHDO_deepCopyTable(VUHDO_B_SPELL_CONFIG);
-		VUHDO_SPELLS_KEYBOARD = VUHDO_deepCopyTable(VUHDO_B_SPELLS_KEYBOARD);
-		VUHDO_BOUQUETS = VUHDO_deepCopyTable(VUHDO_B_BOUQUETS);
+		VUHDO_CONFIG = VUHDO_decompressIfCompressed(VUHDO_B_CONFIG);
+		VUHDO_INDICATOR_CONFIG = VUHDO_decompressIfCompressed(VUHDO_B_INDICATOR_CONFIG);
+		VUHDO_PANEL_SETUP = VUHDO_decompressIfCompressed(VUHDO_B_PANEL_SETUP);
+		VUHDO_SPELL_ASSIGNMENTS = VUHDO_decompressIfCompressed(VUHDO_B_SPELL_ASSIGNMENTS);
+		VUHDO_BUFF_SETTINGS = VUHDO_decompressIfCompressed(VUHDO_B_BUFF_SETTINGS);
+		VUHDO_SPELL_CONFIG = VUHDO_decompressIfCompressed(VUHDO_B_SPELL_CONFIG);
+		VUHDO_SPELLS_KEYBOARD = VUHDO_decompressIfCompressed(VUHDO_B_SPELLS_KEYBOARD);
+		VUHDO_BOUQUETS = VUHDO_decompressIfCompressed(VUHDO_B_BOUQUETS);
 
+		VUHDO_initAllBurstCaches();
+		VUHDO_initBouquetComboModel();
+		VUHDO_reloadUI(true);
 		VUHDO_B_CONFIG = nil;
 		VUHDO_B_INDICATOR_CONFIG = nil;
 		VUHDO_B_PANEL_SETUP = nil;
@@ -177,9 +181,7 @@ function VUHDO_yesNoDiscardChangesCallback(aDecision)
 		VUHDO_B_SPELLS_KEYBOARD = nil;
 		VUHDO_B_BOUQUETS = nil;
 
-		VUHDO_initAllBurstCaches();
-		VUHDO_initBouquetComboModel();
-		VUHDO_reloadUI();
+		VuhDoNewOptionsTabbedFrame:Hide();
 	end
 end
 

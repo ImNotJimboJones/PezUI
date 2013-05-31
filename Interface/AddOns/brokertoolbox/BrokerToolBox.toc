@@ -3,7 +3,7 @@
 ## Notes: Various Broker Tools
 ## Author: Sanori/Pathur
 ## SavedVariables: BrokerToolBoxDB
-## X-Curse-Packaged-Version: 1.7
+## X-Curse-Packaged-Version: 1.8
 ## X-Curse-Project-Name: BrokerToolBox
 ## X-Curse-Project-ID: brokertoolbox
 ## X-Curse-Repository-ID: wow/brokertoolbox/mainline

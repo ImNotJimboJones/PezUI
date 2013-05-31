@@ -1,8 +1,8 @@
 local L
 
---------------------------------
+---------------------
 -- A Brewing Storm --
---------------------------------
+---------------------
 L= DBM:GetModLocalization("d517")
 
 L:SetTimerLocalization{
@@ -15,25 +15,98 @@ L:SetOptionLocalization{
 
 L:SetMiscLocalization{
 	BrewStart			= "The storm is starting! Get ready.",
-	BrewFinish			= "You did it! Let's get this brew to the Monastery...",--Maybe switch to UPDATE_WORLD_STATES 100 progress instead in a more polished version of mod.
 	BorokhulaPull		= "Last call, you fork-tongued dip-slithers!",
 	BorokhulaAdds		= "calls out for reinforcements!"--In case useful/important on heroic. On normal just zerg boss and ignore these unless you want achievement.
 }
 
---------------------------------
--- Crypt of Forgotten Kings --
---------------------------------
-L= DBM:GetModLocalization("d504")
+-----------------------
+-- A Little Patience --
+-----------------------
+L= DBM:GetModLocalization("d589")
 
-----------------------
--- Theramore's Fall --
-----------------------
-L= DBM:GetModLocalization("d566")
+L:SetMiscLocalization{
+	ScargashPull		= "Your Alliance is WEAK!"--Not yet in use but could be with more logs and combat start timers
+}
 
 ---------------------------
 -- Arena Of Annihilation --
 ---------------------------
 L= DBM:GetModLocalization("d511")
+
+-------------------------
+-- Assault of Zan'vess --
+-------------------------
+L= DBM:GetModLocalization("d593")
+
+L:SetMiscLocalization{
+	TelvrakPull			= "Zan'vess will never fall!"
+}
+
+------------------------------
+-- Battle on the High Seas ---
+------------------------------
+L= DBM:GetModLocalization("d652")
+
+-----------------------
+-- Blood in the Snow --
+-----------------------
+L= DBM:GetModLocalization("d646")
+
+-----------------------
+-- Brewmoon Festival --
+-----------------------
+L= DBM:GetModLocalization("d539")
+
+L:SetTimerLocalization{
+	timerBossCD		= "%s Incoming"
+}
+
+L:SetOptionLocalization{
+	timerBossCD		= "Show timer for next boss spawn"
+}
+
+L:SetMiscLocalization{
+	RatEngage	= "It's the Den Mother! Look out",
+	BeginAttack	= "We must defend the villagers!",
+	Yeti		= "Bataari War Yeti",
+	Qobi		= "Warbringer Qobi"
+}
+
+------------------------------
+-- Crypt of Forgotten Kings --
+------------------------------
+L= DBM:GetModLocalization("d504")
+
+-----------------------
+-- Dagger in the Dark --
+-----------------------
+L= DBM:GetModLocalization("d616")
+
+L:SetTimerLocalization{
+	timerAddsCD		= "Summon Adds CD"
+}
+
+L:SetOptionLocalization{
+	timerAddsCD		= "Show timer for Lizard-Lord's Summon Adds cooldown"
+}
+
+L:SetMiscLocalization{
+	LizardLord		= "Dem Saurok be guardin de cave.  Let's take care of 'em."
+}
+
+----------------------------
+-- Dark Heart of Pandaria --
+----------------------------
+L= DBM:GetModLocalization("d647")
+
+L:SetMiscLocalization{
+	summonElemental		= "Minions, destroy these insects!"
+}
+
+------------------------
+-- Greenstone Village --
+------------------------
+L= DBM:GetModLocalization("d492")
 
 --------------
 -- Landfall --
@@ -56,13 +129,33 @@ L:SetWarningLocalization{
 }
 
 L:SetOptionLocalization{
-	WarnAchFiveAlive	= "Show warning if achievement \"Number Five Is Alive\" failed."
+	WarnAchFiveAlive	= "Show warning if achievement \"Number Five Is Alive\" failed"
 }
+
+----------------------------
+-- The Secret of Ragefire --
+----------------------------
+L= DBM:GetModLocalization("d649")
+
+L:SetMiscLocalization{
+	XorenthPull		= "All lesser races are enemies of the true Horde!",
+	ElagloPull		= "Fools! The true horde cannot be stopped by the likes of you."
+}
+
+----------------------
+-- Theramore's Fall --
+----------------------
+L= DBM:GetModLocalization("d566")
 
 --------------------------------
 -- Troves of the Thunder King --
 --------------------------------
 L= DBM:GetModLocalization("d620")
+
+----------------
+-- Unga Ingoo --
+----------------
+L= DBM:GetModLocalization("d499")
 
 ------------------------
 -- Warlock Green Fire --

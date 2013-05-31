@@ -28,11 +28,10 @@ end
 
 --
 local function VUHDO_buffSetupStoreSettings()
-	local tCategories = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
 	local tGenericPanel;
 	local tFound = false;
 
-	for tCategoryName, tCategoryBuffs in pairs(tCategories) do
+	for tCategoryName, tCategoryBuffs in pairs(VUHDO_getPlayerClassBuffs()) do
 		local tSettings = VUHDO_BUFF_SETTINGS[tCategoryName];
 		tGenericPanel = VUHDO_getGenericPanel(tCategoryName);
 
@@ -321,7 +320,6 @@ end
 
 --
 function VUHDO_buildAllBuffSetupGenerericPanel()
-	local tAllBuffs = VUHDO_CLASS_BUFFS[VUHDO_PLAYER_CLASS];
 	local tBuffPanel = nil;
 	local tCurPanel;
 	local tIndex;
@@ -331,13 +329,9 @@ function VUHDO_buildAllBuffSetupGenerericPanel()
 	VUHDO_BUFF_PANEL_WIDTH = 0;
 	VUHDO_BUFF_PANEL_HEIGHT = 0;
 
-	if (tAllBuffs == nil) then
-		return;
-	end
-
 	tIndex = 0;
-	for _, _ in pairs(tAllBuffs) do
-		for tCategoryName, tAllCategoryBuffs in pairs(tAllBuffs) do
+	for _, _ in pairs(VUHDO_getPlayerClassBuffs()) do
+		for tCategoryName, tAllCategoryBuffs in pairs(VUHDO_getPlayerClassBuffs()) do
 			local tNumber = VUHDO_BUFF_ORDER[tCategoryName];
 			if (tNumber == tIndex + 1) then
 				tIndex = tIndex + 1;

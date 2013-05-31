@@ -10,7 +10,6 @@ local VUHDO_CONFIG;
 local VUHDO_PANEL_SETUP;
 local VUHDO_RAID;
 
-local VUHDO_getHeader;
 local VUHDO_getHeaderPos;
 local VUHDO_customizeHeader;
 local VUHDO_getDynamicModelArray;
@@ -26,7 +25,7 @@ local VUHDO_getOrCreateHealButton;
 local VUHDO_updateAllCustomDebuffs;
 local VUHDO_getHeaderWidth;
 local VUHDO_initAllEventBouquets;
-local VUHDO_getActionPanel;
+local VUHDO_getActionPanelOrStub;
 local VUHDO_isPanelPopulated;
 local VUHDO_updateAllRaidBars;
 local VUHDO_isTableHeaderOrFooter;
@@ -35,6 +34,7 @@ local VUHDO_resetNameTextCache;
 local VUHDO_reloadRaidMembers;
 local VUHDO_isPanelVisible;
 local VUHDO_positionHealButton;
+local VUHDO_positionTableHeaders;
 
 local sLastDebuffIcon;
 local sShowPanels;
@@ -44,7 +44,6 @@ function VUHDO_panelRefreshInitBurst()
 	VUHDO_PANEL_SETUP = _G["VUHDO_PANEL_SETUP"];
 	VUHDO_RAID = _G["VUHDO_RAID"];
 
-	VUHDO_getHeader = _G["VUHDO_getHeader"];
 	VUHDO_getHeaderPos = _G["VUHDO_getHeaderPos"];
 	VUHDO_customizeHeader = _G["VUHDO_customizeHeader"];
 	VUHDO_getDynamicModelArray = _G["VUHDO_getDynamicModelArray"];
@@ -60,7 +59,7 @@ function VUHDO_panelRefreshInitBurst()
 	VUHDO_updateAllCustomDebuffs = _G["VUHDO_updateAllCustomDebuffs"];
 	VUHDO_getHeaderWidth = _G["VUHDO_getHeaderWidth"];
 	VUHDO_initAllEventBouquets = _G["VUHDO_initAllEventBouquets"];
-	VUHDO_getActionPanel = _G["VUHDO_getActionPanel"];
+	VUHDO_getActionPanelOrStub = _G["VUHDO_getActionPanelOrStub"];
 	VUHDO_isPanelPopulated = _G["VUHDO_isPanelPopulated"];
 	VUHDO_updateAllRaidBars = _G["VUHDO_updateAllRaidBars"];
 	VUHDO_isTableHeaderOrFooter = _G["VUHDO_isTableHeaderOrFooter"];
@@ -69,6 +68,7 @@ function VUHDO_panelRefreshInitBurst()
 	VUHDO_reloadRaidMembers = _G["VUHDO_reloadRaidMembers"];
 	VUHDO_isPanelVisible = _G["VUHDO_isPanelVisible"];
 	VUHDO_positionHealButton = _G["VUHDO_positionHealButton"];
+	VUHDO_positionTableHeaders = _G["VUHDO_positionTableHeaders"];
 	if (VUHDO_CONFIG["DEBUFF_TOOLTIP"]) then
 		sLastDebuffIcon = VUHDO_CONFIG["CUSTOM_DEBUFF"]["max_num"] + 39;
 	else
@@ -82,55 +82,11 @@ end
 
 --
 local function VUHDO_hasPanelButtons(aPanelNum)
-	if (not sShowPanels or not VUHDO_IS_SHOWN_BY_GROUP) then
+	if not sShowPanels or not VUHDO_IS_SHOWN_BY_GROUP then
 		return false;
 	end
 
 	return #VUHDO_PANEL_DYN_MODELS[aPanelNum] > 0;
-end
-
-
-
---
-local tHeader;
-local tX, tY;
-local tIndent;
-local tModel;
-local tAnzCols;
-local function VUHDO_refreshPositionTableHeaders(aPanel, aPanelNum)
-	tModel = VUHDO_PANEL_DYN_MODELS[aPanelNum];
-
-	if (VUHDO_isTableHeaderOrFooter(aPanelNum)) then
-		tAnzCols = #tModel;
-
-		if (tAnzCols > 20) then -- VUHDO_MAX_HEADERS_PER_PANEL
-			tAnzCols = 20; -- VUHDO_MAX_HEADERS_PER_PANEL
-		end
-	else
-		tAnzCols = 0;
-	end
-
-	if (tAnzCols > 0) then
-		tIndent = (0.5 - (VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["headerWidth"] * 0.005))
-			* VUHDO_getHeaderWidth(aPanelNum);
-
-		for tCnt = 1, tAnzCols do
-			tHeader = VUHDO_getHeader(tCnt, aPanelNum);
-			tX, tY = VUHDO_getHeaderPos(tCnt, aPanelNum);
-			tX = floor(tX + tIndent);
-
-			if (VUHDO_isDifferentButtonPoint(tHeader, tX, -tY)) then
-				tHeader:SetPoint("TOPLEFT", aPanel:GetName(), "TOPLEFT", tX, -tY);
-			end
-
-			VUHDO_customizeHeader(tHeader, aPanelNum, tModel[tCnt]);
-			tHeader:Show();
-		end
-	end
-
-	for tCnt = tAnzCols + 1, 20 do -- VUHDO_MAX_HEADERS_PER_PANEL
-		VUHDO_getHeader(tCnt, aPanelNum):Hide();
-	end
 end
 
 
@@ -145,6 +101,7 @@ local tSetup;
 local tX, tY;
 local tButton;
 local tGroupArray;
+local tDebuffFrame;
 local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 	tSetup = VUHDO_PANEL_SETUP[aPanelNum];
 	tModels = VUHDO_getDynamicModelArray(aPanelNum);
@@ -161,29 +118,27 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 
 			tButton = VUHDO_getOrCreateHealButton(tButtonIdx, aPanelNum);
 			tButtonIdx = tButtonIdx + 1;
-			if (tButtonIdx > 51) then -- VUHDO_MAX_BUTTONS_PANEL
-				return;
-			end
 
-			if (tButton["raidid"] ~= tUnit) then
+			if tButton["raidid"] ~= tUnit then
 				VUHDO_setupAllHealButtonAttributes(tButton, tUnit, false, 70 == tModelId, false, false); -- VUHDO_ID_VEHICLES
 				for tCnt = 40, sLastDebuffIcon do
-					VUHDO_setupAllHealButtonAttributes(VUHDO_getBarIconFrame(tButton, tCnt), tUnit, false, 70 == tModelId, false, true); -- VUHDO_ID_VEHICLES
+					tDebuffFrame = VUHDO_getBarIconFrame(tButton, tCnt);
+					if tDebuffFrame then
+						VUHDO_setupAllHealButtonAttributes(tDebuffFrame, tUnit, false, 70 == tModelId, false, true); -- VUHDO_ID_VEHICLES
+					end
 				end
 				VUHDO_setupAllTargetButtonAttributes(VUHDO_getTargetButton(tButton), tUnit);
 				VUHDO_setupAllTotButtonAttributes(VUHDO_getTotButton(tButton), tUnit);
 			end
 
 			tX, tY = VUHDO_getHealButtonPos(tColIdx, tGroupIdx, aPanelNum);
-			if (VUHDO_isDifferentButtonPoint(tButton, tX, -tY)) then
+			if VUHDO_isDifferentButtonPoint(tButton, tX, -tY) then
 				tButton:Hide();-- for clearing secure handler mouse wheel bindings
 				tButton:SetPoint("TOPLEFT", tPanelName, "TOPLEFT", tX, -tY);
 			end
 
 			VUHDO_addUnitButton(tButton, aPanelNum);
-			if (not tButton:IsShown()) then -- Wg. Secure handlers?
-				tButton:Show();
-			end
+			if not tButton:IsShown() then tButton:Show(); end -- Wg. Secure handlers?
 
 			-- Bei Profil-Wechseln existiert der Button schon, hat aber die falsche Größe
 			VUHDO_positionHealButton(tButton, tSetup["SCALING"]);
@@ -192,14 +147,14 @@ local function VUHDO_refreshPositionAllHealButtons(aPanel, aPanelNum)
 		tColIdx = tColIdx + 1;
 	end
 
-	for tCnt = tButtonIdx, 51 do -- VUHDO_MAX_BUTTONS_PANEL
-		tButton = VUHDO_getHealButton(tCnt, aPanelNum);
-		if (tButton == nil) then
-			break;
-		end
+	while true do
+		tButton = VUHDO_getHealButton(tButtonIdx, aPanelNum);
+		if not tButton then break; end
+
 		tButton["raidid"] = nil;
 		tButton:SetAttribute("unit", nil);
 		tButton:Hide();
+		tButtonIdx = tButtonIdx + 1;
 	end
 end
 
@@ -218,19 +173,19 @@ end
 --
 local tPanel;
 local function VUHDO_refreshPanel(aPanelNum)
-	tPanel = VUHDO_getActionPanel(aPanelNum);
+	tPanel = VUHDO_getOrCreateActionPanel(aPanelNum);
 
-	if (VUHDO_hasPanelButtons(aPanelNum)) then
+	if VUHDO_hasPanelButtons(aPanelNum) then
 		tPanel:Show();
 
 		VUHDO_refreshInitPanel(tPanel, aPanelNum);
-		VUHDO_refreshPositionTableHeaders(tPanel, aPanelNum);
+		VUHDO_positionTableHeaders(tPanel, aPanelNum);
 	end
 
 	-- Even if model is not in panel, we need to refresh VUHDO_UNIT_BUTTONS
-	if (VUHDO_isPanelPopulated(aPanelNum)) then
+	if VUHDO_isPanelPopulated(aPanelNum) then
 		VUHDO_refreshPositionAllHealButtons(tPanel, aPanelNum);
-		VUHDO_fixFrameLevels(tPanel, 2, tPanel:GetChildren());
+		VUHDO_fixFrameLevels(false, tPanel, 2, tPanel:GetChildren());
 	end
 end
 
@@ -239,10 +194,10 @@ end
 --
 local function VUHDO_refreshAllPanels()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
-		if (VUHDO_isPanelVisible(tCnt)) then
+		if VUHDO_isPanelVisible(tCnt) then
 			VUHDO_refreshPanel(tCnt);
 		else
-			VUHDO_getActionPanel(tCnt):Hide();
+			VUHDO_getActionPanelOrStub(tCnt):Hide();
 		end
 	end
 
@@ -260,7 +215,7 @@ function VUHDO_refreshUiNoMembers()
 	twipe(VUHDO_UNIT_BUTTONS_PANEL);
 	VUHDO_refreshAllPanels();
 	VUHDO_updateAllCustomDebuffs(true);
-	if (VUHDO_INTERNAL_TOGGLES[22]) then -- VUHDO_UPDATE_UNIT_TARGET
+	if VUHDO_INTERNAL_TOGGLES[22] then -- VUHDO_UPDATE_UNIT_TARGET
 		VUHDO_rebuildTargets();
 	end
 	VUHDO_initAllEventBouquets();

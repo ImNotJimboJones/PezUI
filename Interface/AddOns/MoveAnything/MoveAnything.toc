@@ -1,11 +1,16 @@
-## Interface: 50200
+## Interface: 50300
 ## Title: MoveAnything - MoP
-## Notes: 13.5.1 by Alea
-## Version: 13.5.1
+## Notes: 13.6.1 by Alea
+## Version: 13.6.1
 ## Author: Wagthaa
 ## SavedVariables: MADB
 
 Localization.en.lua
+
+
+Lib\NoTaint\embeds.xml
+Lib\NoTaint\Code.lua
+
 
 MoveAnything.lua
 Profile.lua

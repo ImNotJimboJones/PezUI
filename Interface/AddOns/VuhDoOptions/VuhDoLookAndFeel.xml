@@ -1464,50 +1464,50 @@
 
 <Button name="VuhDoComboBoxTemplate" enableMouse="false" virtual="true">
 	<Size>
-		<AbsDimension x="120" y="24" />
+		<AbsDimension x="150" y="24" />
 	</Size>
 	<Layers>
 		<Layer>
+
 			<Texture name="$parentLeft" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
 				<Size>
 					<AbsDimension x="25" y="24" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="0" y="17" />
-						</Offset>
+					<Anchor point="LEFT" relativePoint="LEFT">
 					</Anchor>
 				</Anchors>
 				<TexCoords left="0" right="0.1953125" top="0" bottom="1" />
 			</Texture>
-			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
-				<Size>
-					<AbsDimension x="100" y="24" />
-				</Size>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
-				</Anchors>
-				<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
-			</Texture>
+
 			<Texture name="$parentRight" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
 				<Size>
 					<AbsDimension x="25" y="24" />
 				</Size>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentMiddle" relativePoint="RIGHT" />
+					<Anchor point="RIGHT" relativePoint="RIGHT"/>
 				</Anchors>
 				<TexCoords left="0.8046875" right="1" top="0" bottom="1" />
 			</Texture>
 
+			<Texture name="$parentMiddle" file="Interface\AddOns\VuhDoOptions\Images\button_normal_128_32">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentLeft" relativePoint="TOPRIGHT" />
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentRight" relativePoint="BOTTOMLEFT" />
+				</Anchors>
+				<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1" />
+			</Texture>
+
 			<FontString name="$parentText" inherits="VuDoDefaultFontTemplate" text="VUHDO_I18N_SELECT" justifyH="RIGHT">
-				<Size>
-					<AbsDimension x="120" y="10" />
-				</Size>
 				<Anchors>
 					<Anchor point="RIGHT" relativeTo="$parentRight">
 						<Offset>
 							<AbsDimension x="-32" y="0" />
+						</Offset>
+					</Anchor>
+					<Anchor point="LEFT" relativeTo="$parentLeft">
+						<Offset>
+							<AbsDimension x="0" y="0" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1585,7 +1585,6 @@
 		</OnHide>
 	</Scripts>
 </Button>
-
 
 <EditBox name="VuhDoEditBoxTemplate" autoFocus="false" historyLines="0" justifyH="LEFT" virtual="true">
 	<Size>
@@ -2067,7 +2066,7 @@
 	</Scripts>
 </Button>
 
-<Frame name="VuhDoFrameTemplate" toplevel="true" movable="true" parent="UIParent" enableMouse="true" virtual="true">
+<Frame name="VuhDoFrameTemplate" toplevel="true" movable="true" virtual="true">
 	<Anchors>
 		<Anchor point="CENTER" relativeTo="UIParent">
 			<Offset>
@@ -2095,6 +2094,20 @@
 
 <Frame name="VuhDoPanelTemplate" virtual="true">
 	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_1" tile="true">
+		<BackgroundInsets>
+			<AbsInset left="3" right="3" top="3" bottom="3" />
+		</BackgroundInsets>
+		<TileSize>
+			<AbsValue val="16" />
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16" />
+		</EdgeSize>
+	</Backdrop>
+</Frame>
+
+<Frame name="VuhDoWhitePanelTemplate" virtual="true">
+	<Backdrop bgFile="Interface\AddOns\VuhDo\Images\white_square_16_16" edgeFile="Interface\AddOns\VuhDoOptions\Images\panel_edges_2" tile="true">
 		<BackgroundInsets>
 			<AbsInset left="3" right="3" top="3" bottom="3" />
 		</BackgroundInsets>
@@ -2678,7 +2691,7 @@
 	</Layers>
 	<Scripts>
 		<OnLoad>
-			VUHDO_repairStatusbar(self);
+			VUHDO_refactorStatusbar(self);
 			self:SetStatusBarTexture("Interface\\AddOns\\VuhDoOptions\\Images\\blue_lt_square_16_16");
 			self:SetStatusBarColor(1, 1, 1, 1);
 			self["SetProgress"] = function(self, aValue, aMaxValue)

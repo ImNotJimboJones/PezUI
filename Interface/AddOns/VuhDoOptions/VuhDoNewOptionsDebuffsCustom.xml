@@ -143,13 +143,10 @@
 					</Frame>
 
 					<Button name="$parentSoundCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="1" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="43" y="-170" />
+									<AbsDimension x="43" y="-153" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -310,20 +307,15 @@
 					</Frame>
 
 					<Button name="$parentSoundCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="1" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="43" y="-250" />
+									<AbsDimension x="43" y="-233" />
 								</Offset>
 							</Anchor>
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								--VUHDO_setComboModel(self, "VUHDO_CONFIG.CUSTOM_DEBUFF.SOUND", VUHDO_SOUNDS);
-								--VUHDO_lnfSetTooltip(self, VUHDO_I18N_TT.K272);
 								self:SetAttribute("custom_function", VUHDO_notifySoundSelect);
 							</OnLoad>
 						</Scripts>

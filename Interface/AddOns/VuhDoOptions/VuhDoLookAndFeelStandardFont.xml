@@ -276,13 +276,10 @@
 					</Frame>
 
 					<Button name="$parentFontCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="1" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="42" y="-200" />
+									<AbsDimension x="42" y="-183" />
 								</Offset>
 							</Anchor>
 						</Anchors>

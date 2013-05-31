@@ -22,11 +22,11 @@ local VUHDO_INTERESTED_PROVIDERS = { }
 
 --
 local function VUHDO_isTextProviderInterestedInEvent(aProviderName, anEventType)
-	if (VUHDO_INTERESTED_PROVIDERS[aProviderName] == nil) then
+	if not VUHDO_INTERESTED_PROVIDERS[aProviderName] then
 		VUHDO_INTERESTED_PROVIDERS[aProviderName] = { };
 	end
 
-	if (VUHDO_INTERESTED_PROVIDERS[aProviderName][anEventType] == nil) then
+	if not VUHDO_INTERESTED_PROVIDERS[aProviderName][anEventType] then
 		VUHDO_INTERESTED_PROVIDERS[aProviderName][anEventType] =
 			VUHDO_tableGetKeyFromValue(VUHDO_TEXT_PROVIDERS[aProviderName]["interests"], anEventType) ~= nil
 			and 1 or 0;
@@ -43,10 +43,10 @@ local tText, tValue, tMaxValue;
 local tEmpty = { };
 function VUHDO_updateAllTextIndicatorsForEvent(aUnit, anEventType)
 	tInfo = (VUHDO_RAID or tEmpty)[aUnit];
-	if (tInfo ~= nil) then
+	if tInfo then
 
 		for tProviderName, tAllIndicators in pairs(VUHDO_REGISTERED_PROVIDERS) do
-			if (VUHDO_isTextProviderInterestedInEvent(tProviderName, anEventType)) then
+			if VUHDO_isTextProviderInterestedInEvent(tProviderName, anEventType) then
 				tValue, tMaxValue = VUHDO_TEXT_PROVIDERS[tProviderName]["calculator"](tInfo);
 				tText = VUHDO_TEXT_PROVIDERS[tProviderName]["validator"](tInfo, tValue, tMaxValue);
 
@@ -56,10 +56,10 @@ function VUHDO_updateAllTextIndicatorsForEvent(aUnit, anEventType)
 
 			end
 		end
-	elseif (aUnit ~= nil) then
+	elseif aUnit then
 
 		for tProviderName, tAllIndicators in pairs(VUHDO_REGISTERED_PROVIDERS) do
-			if (VUHDO_isTextProviderInterestedInEvent(tProviderName, anEventType)) then
+			if VUHDO_isTextProviderInterestedInEvent(tProviderName, anEventType) then
 				for tIndicatorName, tFunction in pairs(tAllIndicators) do
 					tFunction(aUnit, VUHDO_TEXT_INDICATOR_PANEL_NUMS[tIndicatorName], tProviderName, "", 0);
 				end
@@ -75,7 +75,7 @@ local VUHDO_updateAllTextIndicatorsForEvent = VUHDO_updateAllTextIndicatorsForEv
 --
 function VUHDO_isAnyTextIndicatorInterestedIn(anEventType)
 	for tProviderNameName, _ in pairs(VUHDO_REGISTERED_PROVIDERS) do
-		if (VUHDO_isTextProviderInterestedInEvent(tProviderNameName, anEventType)) then
+		if VUHDO_isTextProviderInterestedInEvent(tProviderNameName, anEventType) then
 			return true;
 		end
 	end
@@ -88,12 +88,12 @@ end
 --
 local function VUHDO_registerIndicatorForProvider(aProviderName, anIndicatorId, aPanelNum, aFunction)
 
-	if (VUHDO_strempty(aProviderName)
-		or (aPanelNum > 0 and not VUHDO_isPanelPopulated(aPanelNum))) then
+	if VUHDO_strempty(aProviderName)
+		or (aPanelNum > 0 and not VUHDO_isPanelPopulated(aPanelNum)) then
 		return;
 	end
 
-	if (VUHDO_REGISTERED_PROVIDERS[aProviderName] == nil) then
+	if not VUHDO_REGISTERED_PROVIDERS[aProviderName] then
 		VUHDO_REGISTERED_PROVIDERS[aProviderName] = { };
 	end
 

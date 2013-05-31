@@ -5,7 +5,7 @@ local curElement
 local elemMetaTable
 local catMetaTable
 local _
-
+do 
 local m = {
 	customCat = nil,
 	Init = function(self)
@@ -418,3 +418,4 @@ catMetaTable = {__index = {
 }}
 
 MovAny:AddCore("API", m)
+end

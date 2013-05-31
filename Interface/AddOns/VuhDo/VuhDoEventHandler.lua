@@ -197,16 +197,16 @@ local tInfo, tIsAggroed;
 local tEmpty = {};
 local function VUHDO_updateThreat(aUnit)
 	tInfo = (VUHDO_RAID or tEmpty)[aUnit];
-	if (tInfo ~= nil) then
+	if tInfo then
 		tInfo["threat"] = UnitThreatSituation(aUnit) or 0;
 
-		if (VUHDO_INTERNAL_TOGGLES[17]) then -- VUHDO_UPDATE_THREAT_LEVEL
+		if VUHDO_INTERNAL_TOGGLES[17] then -- VUHDO_UPDATE_THREAT_LEVEL
 			VUHDO_updateBouquetsForEvent(aUnit, 17); -- VUHDO_UPDATE_THREAT_LEVEL
 		end
 
 		tIsAggroed = VUHDO_INTERNAL_TOGGLES[7] and tInfo["threat"] >= 2; -- VUHDO_UPDATE_AGGRO
 
-		if (tIsAggroed ~= tInfo["aggro"]) then
+		if tIsAggroed ~= tInfo["aggro"] then
 			tInfo["aggro"] = tIsAggroed;
 			VUHDO_updateHealthBarsFor(aUnit, 7); -- VUHDO_UPDATE_AGGRO
 		end
@@ -258,7 +258,7 @@ end
 
 --
 local function VUHDO_initOptions()
-	if (VuhDoNewOptionsTabbedFrame ~= nil) then
+	if VuhDoNewOptionsTabbedFrame then
 		VUHDO_initHotComboModels();
 		VUHDO_initHotBarComboModels();
 		VUHDO_initDebuffIgnoreComboModel();
@@ -274,17 +274,17 @@ end
 local function VUHDO_loadDefaultProfile()
 	local tName;
 
-	if (VUHDO_CONFIG == nil) then
+	if not VUHDO_CONFIG then
 		return;
 	end
 
 	tName = VUHDO_CONFIG["CURRENT_PROFILE"];
-	if ((tName or "") ~= "") then
+	if (tName or "") ~= "" then
 
 		local _, tProfile = VUHDO_getProfileNamedCompressed(tName);
 
-		if (tProfile ~= nil) then
-			if (tProfile["LOCKED"]) then -- Nicht laden, Einstellungen wurden ja auch nicht automat. gespeichert
+		if tProfile then
+			if tProfile["LOCKED"] then -- Nicht laden, Einstellungen wurden ja auch nicht automat. gespeichert
 				VUHDO_Msg("Profile " .. tProfile["NAME"] .. " is currently locked and has NOT been loaded.");
 				return;
 			end
@@ -299,16 +299,14 @@ end
 --
 local tLevel = 0;
 local function VUHDO_init()
-	if (tLevel == 0 or VUHDO_VARIABLES_LOADED) then
+	if tLevel == 0 or VUHDO_VARIABLES_LOADED then
 		tLevel = 1;
 		return;
 	end
 
 	VUHDO_COMBAT_LOG_TRACE = {};
 
-	if (VUHDO_RAID == nil) then
-		VUHDO_RAID = { };
-	end
+	if not VUHDO_RAID then VUHDO_RAID = { }; end
 
 	VUHDO_initButtonCache();
 	VUHDO_loadDefaultProfile(); -- 1. Diese Reihenfolge scheint wichtig zu sein, erzeugt
@@ -323,11 +321,11 @@ local function VUHDO_init()
 	VUHDO_initDebuffs(); -- Too soon obviously => ReloadUI
 	VUHDO_clearUndefinedModelEntries();
 	VUHDO_registerAllBouquets(true);
-	VUHDO_reloadUI();
+	VUHDO_reloadUI(false);
 	VUHDO_getAutoProfile();
-	VUHDO_initCliqueSupport(false);
+	VUHDO_initCliqueSupport();
 
-	if (VuhDoNewOptionsTabbedFrame ~= nil) then
+	if VuhDoNewOptionsTabbedFrame then
 		VuhDoNewOptionsTabbedFrame:ClearAllPoints();
 		VuhDoNewOptionsTabbedFrame:SetPoint("CENTER",  "UIParent", "CENTER",  0,  0);
 	end
@@ -337,7 +335,7 @@ local function VUHDO_init()
 	VUHDO_initButtonFacade(VUHDO_INSTANCE);
 	--VUHDO_checkForTroublesomeAddons();
 	VUHDO_initHideBlizzFrames();
-	if (not InCombatLockdown()) then
+	if not InCombatLockdown() then
 		VUHDO_initKeyboardMacros();
 	end
 
@@ -361,161 +359,177 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 	end
 	local tDuration = GetTime();]]
 	--VUHDO_Msg(anEvent);
-	if ("COMBAT_LOG_EVENT_UNFILTERED" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+	if "COMBAT_LOG_EVENT_UNFILTERED" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_parseCombatLogEvent(anArg2, anArg8, anArg11, anArg13, anArg15);
-			if (VUHDO_INTERNAL_TOGGLES[36]) then -- VUHDO_UPDATE_SHIELD
+			if VUHDO_INTERNAL_TOGGLES[36] then -- VUHDO_UPDATE_SHIELD
 				VUHDO_parseCombatLogShieldAbsorb(anArg2, anArg4, anArg8, anArg13, anArg16, anArg12, anArg17);
 			end
 		end
-	elseif ("UNIT_AURA" == anEvent) then
+
+	elseif "UNIT_AURA" == anEvent then
 		tInfo = (VUHDO_RAID or tEmptyRaid)[anArg1];
-		if (tInfo ~= nil) then
+		if tInfo then
 			tInfo["debuff"], tInfo["debuffName"] = VUHDO_determineDebuff(anArg1);
 			VUHDO_updateBouquetsForEvent(anArg1, 4); -- VUHDO_UPDATE_DEBUFF
 		end
-	elseif ("UNIT_HEALTH" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif "UNIT_HEALTH" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateHealth(anArg1, 2); -- VUHDO_UPDATE_HEALTH
 		end
-	elseif ("UNIT_HEAL_PREDICTION" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then -- auch target, focus
+
+	elseif "UNIT_HEAL_PREDICTION" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then -- auch target, focus
 			VUHDO_updateHealth(anArg1, 9); -- VUHDO_UPDATE_INC
 			VUHDO_updateBouquetsForEvent(anArg1, 9); -- VUHDO_UPDATE_ALT_POWER
 		end
-	elseif ("UNIT_POWER" == anEvent or "UNIT_POWER_FREQUENT" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
-			if ("CHI" == anArg2) then
-				if ("player" == anArg1) then
+
+	elseif "UNIT_POWER" == anEvent or "UNIT_POWER_FREQUENT" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
+			if "CHI" == anArg2 then
+				if "player" == anArg1 then
 					VUHDO_updateBouquetsForEvent("player", 35); -- VUHDO_UPDATE_CHI
 				end
-			elseif ("HOLY_POWER" == anArg2) then
-				if ("player" == anArg1) then
+			elseif "HOLY_POWER" == anArg2 then
+				if "player" == anArg1 then
 					VUHDO_updateBouquetsForEvent("player", 31); -- VUHDO_UPDATE_OWN_HOLY_POWER
 				end
-			elseif ("ALTERNATE" == anArg2) then
+			elseif "ALTERNATE" == anArg2 then
 				VUHDO_updateBouquetsForEvent(anArg1, 30); -- VUHDO_UPDATE_ALT_POWER
 			else
 				VUHDO_updateManaBars(anArg1, 1);
 			end
 		end
-	elseif("UNIT_ABSORB_AMOUNT_CHANGED" == anEvent) then
-			VUHDO_updateBouquetsForEvent(anArg1, 36); -- VUHDO_UPDATE_SHIELD
-			VUHDO_updateShieldBar(anArg1);
-	elseif ("UNIT_SPELLCAST_SUCCEEDED" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif "UNIT_ABSORB_AMOUNT_CHANGED" == anEvent then
+		VUHDO_updateBouquetsForEvent(anArg1, 36); -- VUHDO_UPDATE_SHIELD
+		VUHDO_updateShieldBar(anArg1);
+
+	elseif "UNIT_SPELLCAST_SUCCEEDED" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_spellcastSucceeded(anArg1, anArg2);
 		end
-	elseif ("UNIT_SPELLCAST_SENT" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+
+	elseif "UNIT_SPELLCAST_SENT" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_spellcastSent(anArg1, anArg2, anArg3, anArg4);
 		end
 
-	elseif ("UNIT_THREAT_SITUATION_UPDATE" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+	elseif "UNIT_THREAT_SITUATION_UPDATE" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_updateThreat(anArg1);
 		end
 
-	elseif ("PLAYER_REGEN_ENABLED" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+	elseif "PLAYER_REGEN_ENABLED" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			for tUnit, _ in pairs(VUHDO_RAID) do
 				VUHDO_updateThreat(tUnit);
 			end
 		end
 
-	elseif ("UNIT_MAXHEALTH" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+	elseif "UNIT_MAXHEALTH" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateHealth(anArg1, VUHDO_UPDATE_HEALTH_MAX);
 		end
 
-	elseif ("UNIT_TARGET" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED and "player" ~= anArg1) then
+	elseif "UNIT_TARGET" == anEvent then
+		if VUHDO_VARIABLES_LOADED and "player" ~= anArg1 then
 			VUHDO_updateTargetBars(anArg1);
 			VUHDO_updateBouquetsForEvent(anArg1, 22); -- VUHDO_UPDATE_UNIT_TARGET
 			VUHDO_updatePanelVisibility();
 		end
 
-	elseif ("UNIT_DISPLAYPOWER" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+	elseif "UNIT_DISPLAYPOWER" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateManaBars(anArg1, 3);
 		end
-	elseif ("UNIT_MAXPOWER" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
-			if ("ALTERNATE" == anArg2) then
+
+	elseif "UNIT_MAXPOWER" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
+			if "ALTERNATE" == anArg2 then
 				VUHDO_updateBouquetsForEvent(anArg1, 30); -- VUHDO_UPDATE_ALT_POWER
 			else
 				VUHDO_updateManaBars(anArg1, 2);
 			end
 		end
 
-	elseif ("UNIT_PET" == anEvent) then
-		if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PETS] or not InCombatLockdown()) then
+	elseif "UNIT_PET" == anEvent then
+		if VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PETS] or not InCombatLockdown() then
 			VUHDO_REMOVE_HOTS = false;
-			if ("player" == anArg1) then
+			if "player" == anArg1 then
 				VUHDO_quickRaidReload();
 			else
 				VUHDO_normalRaidReload();
 			end
 		end
 
-	elseif ("UNIT_ENTERED_VEHICLE" == anEvent
+	elseif "UNIT_ENTERED_VEHICLE" == anEvent
 		or "UNIT_EXITED_VEHICLE" == anEvent
-		or "UNIT_EXITING_VEHICLE" == anEvent) then
+		or "UNIT_EXITING_VEHICLE" == anEvent then
 		VUHDO_REMOVE_HOTS = false;
 		VUHDO_normalRaidReload();
-	elseif ("RAID_TARGET_UPDATE" == anEvent) then
+
+	elseif "RAID_TARGET_UPDATE" == anEvent then
 		VUHDO_TIMERS["CUSTOMIZE"] = 0.1;
-	elseif ("GROUP_ROSTER_UPDATE" == anEvent) then
-		if (VUHDO_FIRST_RELOAD_UI) then
+
+	elseif "GROUP_ROSTER_UPDATE" == anEvent then
+		if VUHDO_FIRST_RELOAD_UI then
 			VUHDO_normalRaidReload(true);
-			if (VUHDO_TIMERS["RELOAD_ROSTER"] < 0.4) then
+			if VUHDO_TIMERS["RELOAD_ROSTER"] < 0.4 then
 				VUHDO_TIMERS["RELOAD_ROSTER"] = 0.6;
 			end
 		end
-	elseif ("PLAYER_FOCUS_CHANGED" == anEvent) then
+
+	elseif "PLAYER_FOCUS_CHANGED" == anEvent then
 		VUHDO_removeAllDebuffIcons("focus");
 		VUHDO_quickRaidReload();
 		VUHDO_clParserSetCurrentFocus();
 		VUHDO_updateBouquetsForEvent(anArg1, 23); -- VUHDO_UPDATE_PLAYER_FOCUS
-		if (VUHDO_RAID["focus"] ~= nil) then
+		if VUHDO_RAID["focus"] ~= nil then
 			VUHDO_determineIncHeal("focus");
 			VUHDO_updateHealth("focus", 9); -- VUHDO_UPDATE_INC
 		end
-	elseif ("PARTY_MEMBER_ENABLE" == anEvent
-			 or "PARTY_MEMBER_DISABLE" == anEvent) then
+
+	elseif "PARTY_MEMBER_ENABLE" == anEvent
+			 or "PARTY_MEMBER_DISABLE" == anEvent then
 		VUHDO_TIMERS["CUSTOMIZE"] = 0.2;
-	elseif ("PLAYER_FLAGS_CHANGED" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif "PLAYER_FLAGS_CHANGED" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateHealth(anArg1, VUHDO_UPDATE_AFK);
 			VUHDO_updateBouquetsForEvent(anArg1, VUHDO_UPDATE_AFK);
 		end
-	elseif ("PLAYER_ENTERING_WORLD" == anEvent) then
+
+	elseif "PLAYER_ENTERING_WORLD" == anEvent then
 		VUHDO_init();
 		VUHDO_initAddonMessages();
-	elseif("UNIT_POWER_BAR_SHOW" == anEvent
-	    or "UNIT_POWER_BAR_HIDE" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif"UNIT_POWER_BAR_SHOW" == anEvent
+	    or "UNIT_POWER_BAR_HIDE" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_RAID[anArg1]["isAltPower"] = VUHDO_isAltPowerActive(anArg1);
 			VUHDO_updateBouquetsForEvent(anArg1, 30); -- VUHDO_UPDATE_ALT_POWER
 		end
 
-	elseif ("LEARNED_SPELL_IN_TAB" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+	elseif "LEARNED_SPELL_IN_TAB" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_initFromSpellbook();
 			VUHDO_registerAllBouquets(false);
 			VUHDO_initBuffs();
 			VUHDO_initDebuffs();
 		end
 
-	elseif ("VARIABLES_LOADED" == anEvent) then
+	elseif "VARIABLES_LOADED" == anEvent then
 		VUHDO_init();
 
-	elseif ("UPDATE_BINDINGS" == anEvent) then
-		if (not InCombatLockdown() and VUHDO_VARIABLES_LOADED) then
+	elseif "UPDATE_BINDINGS" == anEvent then
+		if not InCombatLockdown() and VUHDO_VARIABLES_LOADED then
 			VUHDO_initKeyboardMacros();
 		end
-	elseif ("PLAYER_TARGET_CHANGED" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+
+	elseif "PLAYER_TARGET_CHANGED" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_updatePlayerTarget();
 			VUHDO_updateTargetBars("player");
 			VUHDO_updateBouquetsForEvent("player", 22); -- VUHDO_UPDATE_UNIT_TARGET
@@ -523,73 +537,91 @@ function VUHDO_OnEvent(_, anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg
 			VUHDO_updateBouquetsForEvent("target", 22); -- VUHDO_UPDATE_UNIT_TARGET
 			VUHDO_updatePanelVisibility();
 		end
-	elseif ("CHAT_MSG_ADDON" == anEvent) then
-		if (VUHDO_VARIABLES_LOADED) then
+
+	elseif "CHAT_MSG_ADDON" == anEvent then
+		if VUHDO_VARIABLES_LOADED then
 			VUHDO_parseAddonMessage(anArg1, anArg2, anArg4);
 		end
-	elseif ("READY_CHECK" == anEvent) then
-		if (VUHDO_RAID ~= nil and (VUHDO_getPlayerRank()) >= 1) then
+
+	elseif "READY_CHECK" == anEvent then
+		if VUHDO_RAID ~= nil and (VUHDO_getPlayerRank()) >= 1 then
 			VUHDO_readyStartCheck(anArg1, anArg2);
 		end
-	elseif ("READY_CHECK_CONFIRM" == anEvent) then
-		if (VUHDO_RAID ~= nil and (VUHDO_getPlayerRank()) >= 1) then
+
+	elseif "READY_CHECK_CONFIRM" == anEvent then
+		if VUHDO_RAID and (VUHDO_getPlayerRank()) >= 1 then
 			VUHDO_readyCheckConfirm(anArg1, anArg2);
 		end
-	elseif ("READY_CHECK_FINISHED" == anEvent) then
-		if (VUHDO_RAID ~= nil and (VUHDO_getPlayerRank()) >= 1) then
+
+	elseif "READY_CHECK_FINISHED" == anEvent then
+		if VUHDO_RAID and (VUHDO_getPlayerRank()) >= 1 then
 			VUHDO_readyCheckEnds();
 		end
-	elseif("CVAR_UPDATE" == anEvent) then
+
+	elseif "CVAR_UPDATE" == anEvent then
 		VUHDO_IS_SFX_ENABLED = tonumber(GetCVar("Sound_EnableSFX")) == 1;
-		if (VUHDO_VARIABLES_LOADED) then
-			VUHDO_reloadUI();
+		if VUHDO_VARIABLES_LOADED then
+			VUHDO_reloadUI(false);
 		end
-	elseif("INSPECT_READY" == anEvent) then
+
+	elseif "INSPECT_READY" == anEvent then
 		VUHDO_inspectLockRole();
-	elseif("UNIT_CONNECTION" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif "UNIT_CONNECTION" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateHealth(anArg1, VUHDO_UPDATE_DC);
 		end
-	elseif("ROLE_CHANGED_INFORM" == anEvent) then
-		if (VUHDO_RAID_NAMES[anArg1] ~= nil) then
+
+	elseif "ROLE_CHANGED_INFORM" == anEvent then
+		if VUHDO_RAID_NAMES[anArg1] then
 			VUHDO_resetTalentScan(VUHDO_RAID_NAMES[anArg1]);
 		end
-	elseif("MODIFIER_STATE_CHANGED" == anEvent) then
-		if (VuhDoTooltip:IsShown()) then
+
+	elseif "MODIFIER_STATE_CHANGED" == anEvent then
+		if VuhDoTooltip:IsShown() then
 			VUHDO_updateTooltip();
 		end
-	elseif("PLAYER_LOGOUT" == anEvent) then
+
+	elseif "PLAYER_LOGOUT" == anEvent then
 		VUHDO_compressAllBouquets();
-	elseif("UNIT_NAME_UPDATE" == anEvent) then
+
+	elseif "UNIT_NAME_UPDATE" == anEvent then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			VUHDO_resetNameTextCache();
 			VUHDO_updateHealthBarsFor(anArg1, 7); -- VUHDO_UPDATE_AGGRO
 		end
-	elseif("PLAYER_EQUIPMENT_CHANGED" == anEvent) then
+
+	elseif "PLAYER_EQUIPMENT_CHANGED" == anEvent then
 		VUHDO_aoeUpdateSpellAverages();
-	elseif("LFG_PROPOSAL_SHOW" == anEvent) then
+
+	elseif "LFG_PROPOSAL_SHOW" == anEvent then
 		VUHDO_buildSafeParty();
-	elseif("LFG_PROPOSAL_FAILED" == anEvent) then
+
+	elseif "LFG_PROPOSAL_FAILED" == anEvent then
 		VUHDO_quickRaidReload();
-	elseif("LFG_PROPOSAL_SUCCEEDED" == anEvent) then
+
+	elseif "LFG_PROPOSAL_SUCCEEDED" == anEvent then
 		VUHDO_lateRaidReload();
 	--elseif("UPDATE_MACROS" == anEvent) then
 		--VUHDO_timeReloadUI(0.1); -- @WARNING Lädt wg. shield macro alle 8 sec.
-	elseif("UNIT_FACTION" == anEvent) then
-		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
+
+	elseif "UNIT_FACTION" == anEvent then
+		if (VUHDO_RAID or tEmptyRaid)[anArg1] then
 			VUHDO_updateBouquetsForEvent(anArg1, VUHDO_UPDATE_MINOR_FLAGS);
 		end
-	elseif("INCOMING_RESURRECT_CHANGED" == anEvent) then
+
+	elseif "INCOMING_RESURRECT_CHANGED" == anEvent then
 		if ((VUHDO_RAID or tEmptyRaid)[anArg1] ~= nil) then
 			VUHDO_updateBouquetsForEvent(anArg1, VUHDO_UPDATE_RESURRECTION);
 		end
-	elseif("PET_BATTLE_OPENING_START" == anEvent) then
+
+	elseif "PET_BATTLE_OPENING_START" == anEvent then
 		VUHDO_setPetBattle(true);
 
-	elseif("PET_BATTLE_CLOSE" == anEvent) then
+	elseif "PET_BATTLE_CLOSE" == anEvent then
 		VUHDO_setPetBattle(false);
 	else
-		VUHDO_xMsg("Error: Unexpected event: " .. anEvent, anArg1, anArg2, anArg3, anArg4, anArg5, anArg6, anArg7, anArg8, anArg9, anArg10, anArg11, anArg12, anArg13, anArg14, anArg15, anArg16);
+		VUHDO_xMsg("Error: Unexpected event: " .. anEvent);
 	end
 
 	--[[tDuration = GetTime() - tDuration;
@@ -605,10 +637,10 @@ end
 
 --
 local function VUHDO_setPanelsVisible(anIsVisible)
-	if (not InCombatLockdown()) then
+	if not InCombatLockdown() then
 		VUHDO_CONFIG["SHOW_PANELS"] = anIsVisible;
 		VUHDO_Msg(anIsVisible and VUHDO_I18N_PANELS_SHOWN or VUHDO_I18N_PANELS_HIDDEN);
-		VUHDO_redrawAllPanels();
+		VUHDO_redrawAllPanels(false);
 		VUHDO_saveCurrentProfile();
 	else
 		VUHDO_Msg("Not possible during combat!");
@@ -622,9 +654,9 @@ function VUHDO_slashCmd(aCommand)
 	local tParsedTexts = VUHDO_textParse(aCommand);
 	local tCommandWord = strlower(tParsedTexts[1]);
 
-	if (strfind(tCommandWord, "opt")) then
-		if (VuhDoNewOptionsTabbedFrame ~= nil) then
-			if (InCombatLockdown() and not VuhDoNewOptionsTabbedFrame:IsShown()) then
+	if strfind(tCommandWord, "opt") then
+		if VuhDoNewOptionsTabbedFrame then
+			if InCombatLockdown() and not VuhDoNewOptionsTabbedFrame:IsShown() then
 				VUHDO_Msg("Options not available in combat!", 1, 0.4, 0.4);
 			else
 				VUHDO_CURR_LAYOUT = VUHDO_SPEC_LAYOUTS["selected"];
@@ -634,16 +666,16 @@ function VUHDO_slashCmd(aCommand)
 		else
 			VUHDO_Msg(VUHDO_I18N_OPTIONS_NOT_LOADED, 1, 0.4, 0.4);
 		end
-	elseif (tCommandWord == "pt") then
+	elseif tCommandWord == "pt" then
 		if (tParsedTexts[2] ~= nil) then
 			local tTokens = VUHDO_splitString(tParsedTexts[2], ",");
-			if ("clear" == tTokens[1]) then
+			if "clear" == tTokens[1] then
 				table.wipe(VUHDO_PLAYER_TARGETS);
 				VUHDO_quickRaidReload();
 			else
 				for _, tName in ipairs(tTokens) do
 					tName = strtrim(tName);
-					if (VUHDO_RAID_NAMES[tName] ~= nil and not InCombatLockdown()) then
+					if VUHDO_RAID_NAMES[tName] ~= nil and not InCombatLockdown() then
 						VUHDO_PLAYER_TARGETS[tName] = true;
 					end
 				end
@@ -652,7 +684,7 @@ function VUHDO_slashCmd(aCommand)
 		else
 			local tUnit = VUHDO_RAID_NAMES[UnitName("target")];
 			local tName = (VUHDO_RAID[tUnit] or {})["name"];
-			if (not InCombatLockdown() and tName ~= nil) then
+			if not InCombatLockdown() and tName then
 				if (VUHDO_PLAYER_TARGETS[tName] ~= nil) then
 					VUHDO_PLAYER_TARGETS[tName] = nil;
 				else
@@ -662,9 +694,9 @@ function VUHDO_slashCmd(aCommand)
 			end
 		end
 
-	elseif (tCommandWord == "load" and tParsedTexts[2] ~= nil) then
+	elseif tCommandWord == "load" and tParsedTexts[2] then
 		local tTokens = VUHDO_splitString(tParsedTexts[2] .. (tParsedTexts[3] or ""), ",");
-		if (#tTokens >= 2 and strlen(strtrim(tTokens[2])) > 0) then
+		if #tTokens >= 2 and strlen(strtrim(tTokens[2])) > 0 then
 			local tName = strtrim(tTokens[2]);
 			if (VUHDO_SPELL_LAYOUTS[tName] ~= nil) then
 				VUHDO_activateLayout(tName);
@@ -672,10 +704,10 @@ function VUHDO_slashCmd(aCommand)
 				VUHDO_Msg(VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_1 .. tName .. VUHDO_I18N_SPELL_LAYOUT_NOT_EXIST_2, 1, 0.4, 0.4);
 			end
 		end
-		if (#tTokens >= 1 and strlen(strtrim(tTokens[1])) > 0) then
+		if #tTokens >= 1 and strlen(strtrim(tTokens[1])) > 0 then
 			VUHDO_loadProfile(strtrim(tTokens[1]));
 		end
-	elseif (strfind(tCommandWord, "res")) then
+	elseif strfind(tCommandWord, "res") then
 		for tPanelNum = 1, VUHDO_MAX_PANELS do
 			VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] = nil;
 		end
@@ -683,10 +715,10 @@ function VUHDO_slashCmd(aCommand)
 			["x"] = 100, ["y"] = -100, ["point"] = "TOPLEFT", ["relativePoint"] = "TOPLEFT",
 		};
 		VUHDO_loadDefaultPanelSetup();
-		VUHDO_reloadUI();
+		VUHDO_reloadUI(false);
 		VUHDO_Msg(VUHDO_I18N_PANELS_RESET);
 
-	elseif (tCommandWord == "lock") then
+	elseif tCommandWord == "lock" then
 		VUHDO_CONFIG["LOCK_PANELS"] = not VUHDO_CONFIG["LOCK_PANELS"];
 		if (VUHDO_CONFIG["LOCK_PANELS"]) then
 			VUHDO_Msg(VUHDO_I18N_LOCK_PANELS_PRE .. VUHDO_I18N_LOCK_PANELS_LOCKED);
@@ -695,23 +727,23 @@ function VUHDO_slashCmd(aCommand)
 		end
 		VUHDO_saveCurrentProfile();
 
-	elseif (tCommandWord == "show") then
+	elseif tCommandWord == "show" then
 		VUHDO_setPanelsVisible(true);
 
-	elseif (tCommandWord == "hide") then
+	elseif tCommandWord == "hide" then
 		VUHDO_setPanelsVisible(false);
 
-	elseif (tCommandWord == "toggle") then
+	elseif tCommandWord == "toggle" then
 		VUHDO_setPanelsVisible(not VUHDO_CONFIG["SHOW_PANELS"]);
 
-	elseif (strfind(tCommandWord, "cast") or strfind(tCommandWord, "mt")) then
+	elseif strfind(tCommandWord, "cast") or tCommandWord == "mt" then
 		VUHDO_ctraBroadCastMaintanks();
 		VUHDO_Msg(VUHDO_I18N_MTS_BROADCASTED);
 
 	--[[elseif (tCommandWord == "pron") then
 		SetCVar("scriptProfile", "1");
 		ReloadUI();]]
-	elseif (tCommandWord == "proff") then
+	elseif tCommandWord == "proff" then
 		SetCVar("scriptProfile", "0");
 		ReloadUI();
 	--[[elseif (strfind(tCommandWord, "chkvars")) then
@@ -721,36 +753,36 @@ function VUHDO_slashCmd(aCommand)
 				VUHDO_Msg("Emerging local variable " .. tFName);
 			end
 		end]]
-	elseif (strfind(tCommandWord, "mm")
-		or strfind(tCommandWord, "map")) then
+	elseif strfind(tCommandWord, "mm")
+		or strfind(tCommandWord, "map") then
 		VUHDO_CONFIG["SHOW_MINIMAP"] = VUHDO_forceBooleanValue(VUHDO_CONFIG["SHOW_MINIMAP"]);
 		VUHDO_CONFIG["SHOW_MINIMAP"] = not VUHDO_CONFIG["SHOW_MINIMAP"];
 		VUHDO_initShowMinimap();
-		if (VUHDO_CONFIG["SHOW_MINIMAP"]) then
-			VUHDO_Msg(VUHDO_I18N_MM_ICON .. VUHDO_I18N_CHAT_SHOWN);
-		else
-			VUHDO_Msg(VUHDO_I18N_MM_ICON .. VUHDO_I18N_CHAT_HIDDEN);
-		end
-	elseif (tCommandWord == "ui") then
-		VUHDO_reloadUI();
-	elseif (strfind(tCommandWord, "role")) then
+		VUHDO_Msg(VUHDO_I18N_MM_ICON .. (VUHDO_CONFIG["SHOW_MINIMAP"] and VUHDO_I18N_CHAT_SHOWN or VUHDO_I18N_CHAT_HIDDEN));
+	elseif tCommandWord == "ui" then
+		VUHDO_reloadUI(false);
+	elseif strfind(tCommandWord, "role") then
 		VUHDO_Msg("Roles have been reset.");
 		table.wipe(VUHDO_MANUAL_ROLES);
-		VUHDO_reloadUI();
+		VUHDO_reloadUI(false);
+	--[[elseif tCommandWord == "delcude" then
+		table.wipe(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED"]);
+		table.wipe(VUHDO_CONFIG["CUSTOM_DEBUFF"]["STORED_SETTINGS"]);
+		collectgarbage("collect");]]
 
-	elseif (tCommandWord == "test") then
+	--[[elseif tCommandWord == "test" then
 		table.wipe(VUHDO_DEBUG);
-		collectgarbage("collect");
-	--[[elseif (strfind(tCommandWord, "lfg1")) then
+		collectgarbage("collect");]]
+	--[[elseif strfind(tCommandWord, "lfg1") then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_SHOW");
-	elseif (strfind(tCommandWord, "lfg2")) then
+	elseif strfind(tCommandWord, "lfg2") then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_FAILED");
-	elseif (strfind(tCommandWord, "lfg3")) then
+	elseif strfind(tCommandWord, "lfg3") then
 		VUHDO_OnEvent(_, "LFG_PROPOSAL_SUCCEEDED");]]
-	--[[elseif (strfind(tCommandWord, "debug")) then
+	--[[elseif strfind(tCommandWord, "debug") then
 		VUHDO_DEBUG_AUTO_PROFILE = tonumber(tParsedTexts[2]);]]
 	--elseif (strfind(tCommandWord, "test")) then
-	--[[ elseif (tCommandWord == "find") then
+	--[[ elseif tCommandWord == "find" then
 		local tName = gsub(tParsedTexts[2], "_", " ");
 		for tCnt = 1, 100000 do
 			if (GetSpellInfo(tCnt) == tName) then
@@ -758,13 +790,9 @@ function VUHDO_slashCmd(aCommand)
 			end
 		end
 	]]
-	elseif (aCommand == "?"
-		or strfind(tCommandWord, "help")
-		or aCommand == "") then
+	elseif aCommand == "?" or strfind(tCommandWord, "help")	or aCommand == "" then
 		local tLines = VUHDO_splitString(VUHDO_I18N_COMMAND_LIST, "§");
-		for _, tCurLine in ipairs(tLines) do
-			VUHDO_MsgC(tCurLine);
-		end
+		for _, tCurLine in ipairs(tLines) do VUHDO_MsgC(tCurLine); end
 	else
 		VUHDO_Msg(VUHDO_I18N_BAD_COMMAND, 1, 0.4, 0.4);
 	end
@@ -778,10 +806,10 @@ local function VUHDO_UnRegisterEvent(aCondition, ...)
 	for tCnt = 1, select("#", ...) do
 		tEvent = select(tCnt, ...);
 
-		if ("UNIT_POWER_FREQUENT" == tEvent and aCondition) then
+		if "UNIT_POWER_FREQUENT" == tEvent and aCondition then
 			VUHDO_INSTANCE:RegisterUnitEvent(tEvent, "player");
 		else
-			if (aCondition) then
+			if aCondition then
 				VUHDO_INSTANCE:RegisterEvent(tEvent);
 			else
 				VUHDO_INSTANCE:UnregisterEvent(tEvent);
@@ -794,7 +822,7 @@ end
 
 --
 function VUHDO_updateGlobalToggles()
-	if (VUHDO_INSTANCE == nil) then
+	if not VUHDO_INSTANCE then
 		return;
 	end
 
@@ -816,10 +844,10 @@ function VUHDO_updateGlobalToggles()
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER_CLUSTER] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_MOUSEOVER_CLUSTER);
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE] = VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_AOE_ADVICE);
 
-	if (VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_NUM_CLUSTER]
+	if VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_NUM_CLUSTER]
 	 or VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_MOUSEOVER_CLUSTER]
 	 or VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE]
-	 or (VUHDO_isShowDirectionArrow() and VUHDO_CONFIG["DIRECTION"]["isDistanceText"])) then
+	 or (VUHDO_isShowDirectionArrow() and VUHDO_CONFIG["DIRECTION"]["isDistanceText"]) then
 		VUHDO_TIMERS["UPDATE_CLUSTERS"] = 1;
 		VUHDO_TIMERS["UPDATE_AOE"] = VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_AOE_ADVICE] and 1 or -1;
 	else
@@ -839,7 +867,7 @@ function VUHDO_updateGlobalToggles()
 		"UNIT_DISPLAYPOWER", "UNIT_MAXPOWER", "UNIT_POWER", "UNIT_POWER_FREQUENT"
 	);
 
-	if (VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_UNIT_TARGET)) then
+	if VUHDO_isAnyoneInterstedIn(VUHDO_UPDATE_UNIT_TARGET) then
 		VUHDO_INSTANCE:RegisterEvent("UNIT_TARGET");
 		VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_UNIT_TARGET] = true;
 		VUHDO_TIMERS["REFRESH_TARGETS"] = 1;
@@ -859,7 +887,8 @@ function VUHDO_updateGlobalToggles()
 		or VUHDO_isModelConfigured(VUHDO_ID_SELF_PET); -- Event nicht deregistrieren => Problem mit manchen Vehikeln
 
 	VUHDO_INTERNAL_TOGGLES[VUHDO_UPDATE_PLAYER_TARGET]
-		= VUHDO_isModelConfigured(VUHDO_ID_PRIVATE_TANKS) and not VUHDO_CONFIG["OMIT_TARGET"]
+		= (VUHDO_isModelConfigured(VUHDO_ID_PRIVATE_TANKS) and not VUHDO_CONFIG["OMIT_TARGET"])
+		or VUHDO_isModelConfigured(VUHDO_ID_TARGET);
 
 	VUHDO_UnRegisterEvent(VUHDO_CONFIG["SHOW_INCOMING"] or VUHDO_CONFIG["SHOW_OWN_INCOMING"],
 		"UNIT_HEAL_PREDICTION");
@@ -912,26 +941,26 @@ function VUHDO_updateAllAggro()
 	end
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (tInfo["connected"] and not tInfo["dead"]) then
-			if (VUHDO_INTERNAL_TOGGLES[7] and (tInfo["threat"] or 0) >= 2) then -- VUHDO_UPDATE_AGGRO
+		if tInfo["connected"] and not tInfo["dead"] then
+			if VUHDO_INTERNAL_TOGGLES[7] and (tInfo["threat"] or 0) >= 2 then -- VUHDO_UPDATE_AGGRO
 				tInfo["aggro"] = true;
 			end
 			tTarget = tInfo["targetUnit"];
-			if (UnitIsEnemy(tUnit, tTarget)) then
-				if (VUHDO_INTERNAL_TOGGLES[14]) then -- VUHDO_UPDATE_AGGRO
+			if UnitIsEnemy(tUnit, tTarget) then
+				if VUHDO_INTERNAL_TOGGLES[14] then -- VUHDO_UPDATE_AGGRO
 					_, _, tThreatPerc = UnitDetailedThreatSituation(tUnit, tTarget);
 					tInfo["threatPerc"] = tThreatPerc or 0;
 				end
 
 				tAggroUnit = VUHDO_RAID_NAMES[UnitName(tTarget .. "target")];
 
-				if (tAggroUnit ~= nil) then
-					if (VUHDO_INTERNAL_TOGGLES[14]) then -- VUHDO_UPDATE_AGGRO
+				if tAggroUnit then
+					if VUHDO_INTERNAL_TOGGLES[14] then -- VUHDO_UPDATE_AGGRO
 						_, _, tThreatPerc = UnitDetailedThreatSituation(tAggroUnit, tTarget);
 						VUHDO_RAID[tAggroUnit]["threatPerc"] = tThreatPerc or 0;
 					end
 
-					if (sIsHealerMode and VUHDO_INTERNAL_TOGGLES[7]) then -- VUHDO_UPDATE_AGGRO
+					if sIsHealerMode and VUHDO_INTERNAL_TOGGLES[7] then -- VUHDO_UPDATE_AGGRO
 						VUHDO_RAID[tAggroUnit]["aggro"] = true;
 					end
 				end
@@ -942,11 +971,11 @@ function VUHDO_updateAllAggro()
 	end
 
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (tInfo["aggro"] ~= tOldAggro[tUnit]) then
+		if tInfo["aggro"] ~= tOldAggro[tUnit] then
 			VUHDO_updateHealthBarsFor(tUnit, 7); -- VUHDO_UPDATE_AGGRO
 		end
 
-		if (tInfo["threatPerc"] ~= tOldThreat[tUnit]) then
+		if tInfo["threatPerc"] ~= tOldThreat[tUnit] then
 			VUHDO_updateBouquetsForEvent(tUnit, 14); -- VUHDO_UPDATE_THREAT_PERC
 		end
 	end
@@ -964,27 +993,25 @@ local function VUHDO_updateAllRange()
 
 		-- Check if unit is charmed
 		tIsCharmed = UnitIsCharmed(tUnit) and UnitCanAttack("player", tUnit) and not tInfo["dead"];
-		if (tInfo["charmed"] ~= tIsCharmed) then
+		if tInfo["charmed"] ~= tIsCharmed then
 			tInfo["charmed"] = tIsCharmed;
 			VUHDO_updateHealthBarsFor(tUnit, 4); -- VUHDO_UPDATE_DEBUFF
 		end
 
 		-- Check if unit is in range
-		if (sIsRangeKnown) then
+		if sIsRangeKnown then
 			tIsInRange
 				= tInfo["connected"]
 				 and (1 == IsSpellInRange(sRangeSpell, tUnit)
 							or ((tInfo["dead"] or tInfo["charmed"]) and tInfo["baseRange"])
 							or "player" == tUnit
-							or ((tUnit == "focus" or tUnit == "target")	and CheckInteractDistance(tUnit, 1))
-						 );
+							or ((tUnit == "focus" or tUnit == "target")	and CheckInteractDistance(tUnit, 1)));
 		else
 			tIsInRange
 				= tInfo["connected"]
 				 and (tInfo["baseRange"]
 							or ((tUnit == "focus" or tUnit == "target")
-								and CheckInteractDistance(tUnit, 1))
-						 );
+								and CheckInteractDistance(tUnit, 1)));
 		end
 
 		-- 3.9 Namen nach roster change manchmal nicht aktuell? 3.17: Rausgenommen, scheint manchmal periodisch zu zünden
@@ -992,11 +1019,11 @@ local function VUHDO_updateAllRange()
 			VUHDO_quickRaidReload();
 		end]]
 
-		if (tInfo["range"] ~= tIsInRange) then
+		if tInfo["range"] ~= tIsInRange then
 			tInfo["range"] = tIsInRange;
 			VUHDO_updateHealthBarsFor(tUnit, 5); -- VUHDO_UPDATE_RANGE
-			if (sIsDirectionArrow and VUHDO_getCurrentMouseOver() == tUnit
-				and (VuhDoDirectionFrame["shown"] or (not tIsInRange or VUHDO_CONFIG["DIRECTION"]["isAlways"]))) then
+			if sIsDirectionArrow and VUHDO_getCurrentMouseOver() == tUnit
+				and (VuhDoDirectionFrame["shown"] or (not tIsInRange or VUHDO_CONFIG["DIRECTION"]["isAlways"])) then
 
 				VUHDO_updateDirectionFrame();
 			end
@@ -1009,13 +1036,9 @@ end
 
 --
 function VUHDO_normalRaidReload(anIsReloadBuffs)
-	if (VUHDO_isConfigPanelShowing()) then
-		return;
-	end
+	if VUHDO_isConfigPanelShowing() then return; end
 	VUHDO_TIMERS["RELOAD_RAID"] = 2.3;
-	if (anIsReloadBuffs ~= nil) then
-		VUHDO_IS_RELOAD_BUFFS = true;
-	end
+	if anIsReloadBuffs then VUHDO_IS_RELOAD_BUFFS = true; end
 end
 
 
@@ -1029,7 +1052,7 @@ end
 
 --
 function VUHDO_lateRaidReload()
-	if (not VUHDO_isReloadPending()) then
+	if not VUHDO_isReloadPending() then
 		VUHDO_TIMERS["RELOAD_RAID"] = 5;
 	end
 end
@@ -1077,22 +1100,17 @@ end
 
 --
 local function VUHDO_doReloadRoster(anIsQuick)
-	if (not VUHDO_isConfigPanelShowing()) then
-		if (VUHDO_IS_RELOADING) then
+	if not VUHDO_isConfigPanelShowing() then
+		if VUHDO_IS_RELOADING then
 			VUHDO_quickRaidReload();
 		else
 			VUHDO_rebuildTargets();
 
-			if (InCombatLockdown()) then
+			if InCombatLockdown() then
 				VUHDO_RELOAD_AFTER_BATTLE = true;
 
 				VUHDO_IS_RELOADING = true;
-
-				--VUHDO_updateAllRaidBars(); -- RefreshRaid Members behält nicht existierende Units
-				--VUHDO_initAllEventBouquets();
-
 				VUHDO_refreshRaidMembers();
-
 				VUHDO_updateAllRaidBars();
 				VUHDO_initAllEventBouquets();
 				VUHDO_updatePanelVisibility();
@@ -1100,7 +1118,7 @@ local function VUHDO_doReloadRoster(anIsQuick)
 			else
 				VUHDO_refreshUI();
 
-				if (VUHDO_IS_RELOAD_BUFFS and not anIsQuick) then
+				if VUHDO_IS_RELOAD_BUFFS and not anIsQuick then
 					VUHDO_reloadBuffPanel();
 					VUHDO_IS_RELOAD_BUFFS = false;
 				end
@@ -1125,7 +1143,6 @@ end
 
 --
 local function VUHDO_checkResetTimer(aTimerName, aNextTick)
-
 	if VUHDO_TIMERS[aTimerName] > 0 then
 		VUHDO_TIMERS[aTimerName] = VUHDO_TIMERS[aTimerName] - sTimerDelta;
 		if VUHDO_TIMERS[aTimerName] <= 0 then
@@ -1140,7 +1157,6 @@ end
 
 --
 local function VUHDO_checkTimer(aTimerName)
-
 	if VUHDO_TIMERS[aTimerName] > 0 then
 		VUHDO_TIMERS[aTimerName] = VUHDO_TIMERS[aTimerName] - sTimerDelta;
 		return VUHDO_TIMERS[aTimerName] <= 0;
@@ -1164,15 +1180,15 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	-- --------------------------------------------------
 
 	-- Update custom debuff animation
-	if (VUHDO_DEBUFF_ANIMATION > 0) then
+	if VUHDO_DEBUFF_ANIMATION > 0 then
 		VUHDO_updateAllDebuffIcons(true);
 		VUHDO_DEBUFF_ANIMATION = VUHDO_DEBUFF_ANIMATION - aTimeDelta;
 	end
 
 	-- Update GCD-Bar
-	if (VUHDO_GCD_UPDATE and VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS] ~= nil) then
+	if VUHDO_GCD_UPDATE and VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS] ~= nil then
 		tGcdStart, tGcdDuration = GetSpellCooldown(VUHDO_GCD_SPELLS[VUHDO_PLAYER_CLASS]);
-		if ((tGcdDuration or 0) == 0) then
+		if (tGcdDuration or 0) == 0 then
 			VuhDoGcdStatusBar:SetValue(0);
 			VUHDO_GCD_UPDATE = false;
 		else
@@ -1181,7 +1197,7 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- Direction Arrow
-	if (sIsDirectionArrow and VuhDoDirectionFrame["shown"]) then
+	if sIsDirectionArrow and VuhDoDirectionFrame["shown"] then
 		VUHDO_updateDirectionFrame();
 	end
 
@@ -1193,7 +1209,7 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	-- From here 0.08 (80 msec) sec tick should be sufficient
 	---------------------------------------------------------
 
-	if (tTimeDelta < 0.08) then
+	if tTimeDelta < 0.08 then
 		tTimeDelta = tTimeDelta + aTimeDelta;
 		tSlowDelta = tSlowDelta + aTimeDelta;
 		return;
@@ -1203,14 +1219,14 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- reload UI?
-	if (VUHDO_checkTimer("RELOAD_UI")) then
-		if (VUHDO_IS_RELOADING or InCombatLockdown()) then
+	if VUHDO_checkTimer("RELOAD_UI") then
+		if VUHDO_IS_RELOADING or InCombatLockdown() then
 			VUHDO_TIMERS["RELOAD_UI"] = 0.3;
 		else
-			if (VUHDO_RELOAD_UI_IS_LNF) then
+			if VUHDO_RELOAD_UI_IS_LNF then
 				VUHDO_lnfReloadUI();
 			else
-				VUHDO_reloadUI();
+				VUHDO_reloadUI(false);
 			end
 			VUHDO_initOptions();
 			VUHDO_FIRST_RELOAD_UI = true;
@@ -1218,8 +1234,8 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- redraw single panel?
-	if (VUHDO_checkTimer("RELOAD_PANEL")) then
-		if (VUHDO_IS_RELOADING or InCombatLockdown()) then
+	if VUHDO_checkTimer("RELOAD_PANEL") then
+		if VUHDO_IS_RELOADING or InCombatLockdown() then
 			VUHDO_TIMERS["RELOAD_PANEL"] = 0.3;
 		else
 			VUHDO_PROHIBIT_REPOS = true;
@@ -1238,38 +1254,38 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	------------------------- below only if vars loaded
 	---------------------------------------------------
 
-	if (not VUHDO_VARIABLES_LOADED) then
+	if not VUHDO_VARIABLES_LOADED then
 		return;
 	end
 
 	-- Reload raid roster?
-	if (VUHDO_checkTimer("RELOAD_RAID")) then
+	if VUHDO_checkTimer("RELOAD_RAID") then
 		VUHDO_doReloadRoster(false);
 	end
 
 	-- Quick update after raid roster change?
-	if (VUHDO_checkTimer("RELOAD_ROSTER")) then
+	if VUHDO_checkTimer("RELOAD_ROSTER") then
 		VUHDO_doReloadRoster(true);
 	end
 
 	-- refresh HoTs, cyclic bouquets and customs debuffs?
-	if (VUHDO_checkResetTimer("UPDATE_HOTS", sHotToggleUpdateSecs)) then
-		if (tHotDebuffToggle == 1) then
+	if VUHDO_checkResetTimer("UPDATE_HOTS", sHotToggleUpdateSecs) then
+		if tHotDebuffToggle == 1 then
 			VUHDO_updateAllHoTs();
 			if (VUHDO_INTERNAL_TOGGLES[18]) then -- VUHDO_UPDATE_MOUSEOVER_CLUSTER
 				VUHDO_updateClusterHighlights();
 			end
-		elseif (tHotDebuffToggle == 2) then
+		elseif tHotDebuffToggle == 2 then
 			VUHDO_updateAllCyclicBouquets(false);
 		else
 			VUHDO_updateAllDebuffIcons(false);
 
 			-- Reload after player gained control
-			if (not HasFullControl()) then
+			if not HasFullControl() then
 				VUHDO_LOST_CONTROL = true;
 			else
-				if (VUHDO_LOST_CONTROL) then
-					if (VUHDO_TIMERS["RELOAD_RAID"] <= 0) then
+				if VUHDO_LOST_CONTROL then
+					if VUHDO_TIMERS["RELOAD_RAID"] <= 0 then
 						VUHDO_TIMERS["CUSTOMIZE"] = 0.3;
 					end
 					VUHDO_LOST_CONTROL = false;
@@ -1278,83 +1294,83 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 		end
 
 		tHotDebuffToggle = tHotDebuffToggle + 1;
-		if (tHotDebuffToggle > 3) then
+		if tHotDebuffToggle > 3 then
 			tHotDebuffToggle = 1;
 		end
 	end
 
 	-- track dragged panel coords
-	if (VUHDO_DRAG_PANEL ~= nil) then
+	if VUHDO_DRAG_PANEL then
 		if (VUHDO_checkResetTimer("REFRESH_DRAG", 0.05)) then
 			VUHDO_refreshDragTarget(VUHDO_DRAG_PANEL);
 		end
 	end
 
 	-- Set Button colors without repositioning
-	if (VUHDO_checkTimer("CUSTOMIZE")) then
+	if VUHDO_checkTimer("CUSTOMIZE") then
 		VUHDO_updateAllRaidTargetIndices();
 		VUHDO_updateAllRaidBars();
 		VUHDO_initAllEventBouquets();
 	end
 
 	-- Refresh Tooltip
-	if (VUHDO_checkResetTimer("REFRESH_TOOLTIP", 2.3)) then
-		if (VuhDoTooltip:IsShown()) then
+	if VUHDO_checkResetTimer("REFRESH_TOOLTIP", 2.3) then
+		if VuhDoTooltip:IsShown() then
 			VUHDO_updateTooltip();
 		end
 	end
---
+
 	-- Refresh custom debuff Tooltip
-	if (VUHDO_checkResetTimer("REFRESH_CUDE_TOOLTIP", 1)) then
+	if VUHDO_checkResetTimer("REFRESH_CUDE_TOOLTIP", 1) then
 		VUHDO_updateCustomDebuffTooltip();
 	end
 
 	-- Refresh Buff Watch
-	if (VUHDO_checkResetTimer("BUFF_WATCH", sBuffsRefreshSecs)) then
+	if VUHDO_checkResetTimer("BUFF_WATCH", sBuffsRefreshSecs) then
 		VUHDO_updateBuffPanel();
 	end
 
 	-- Refresh Inspect, check timeout
-	if (VUHDO_NEXT_INSPECT_UNIT ~= nil and GetTime() > VUHDO_NEXT_INSPECT_TIME_OUT) then
+	if VUHDO_NEXT_INSPECT_UNIT ~= nil and GetTime() > VUHDO_NEXT_INSPECT_TIME_OUT then
 		VUHDO_setRoleUndefined(VUHDO_NEXT_INSPECT_UNIT);
 		VUHDO_NEXT_INSPECT_UNIT = nil;
 	end
 
 	-- Refresh targets not in raid
-	if (VUHDO_checkResetTimer("REFRESH_TARGETS", 0.51)) then
+	if VUHDO_checkResetTimer("REFRESH_TARGETS", 0.51) then
 		VUHDO_updateAllOutRaidTargetButtons();
 	end
 
 	-----------------------------------------------------------------------------------------
 
-	if (VUHDO_CONFIG_SHOW_RAID) then
+	if VUHDO_CONFIG_SHOW_RAID then
 		return;
 	end
 
 	-- refresh aggro?
-	if (VUHDO_checkResetTimer("UPDATE_AGGRO", sAggroRefreshSecs)) then
+	if VUHDO_checkResetTimer("UPDATE_AGGRO", sAggroRefreshSecs) then
 		VUHDO_updateAllAggro();
 	end
 
 	-- refresh range?
-	if (VUHDO_checkResetTimer("UPDATE_RANGE", sRangeRefreshSecs)) then
+	if VUHDO_checkResetTimer("UPDATE_RANGE", sRangeRefreshSecs) then
 		VUHDO_updateAllRange();
 	end
 
 	-- Refresh Clusters
-	if (VUHDO_checkResetTimer("UPDATE_CLUSTERS", sClusterRefreshSecs)) then
+	if VUHDO_checkResetTimer("UPDATE_CLUSTERS", sClusterRefreshSecs) then
 		VUHDO_updateAllClusters();
 	end
 
 	-- AoE advice
-	if (VUHDO_checkResetTimer("UPDATE_AOE", sAoeRefreshSecs)) then
+	if VUHDO_checkResetTimer("UPDATE_AOE", sAoeRefreshSecs) then
 		VUHDO_aoeUpdateAll();
 	end
 
 	----------------------------------------------------
 	------------------------- below only very slow tasks
 	----------------------------------------------------
-	if (tSlowDelta < 1.2) then
+	if tSlowDelta < 1.2 then
 		tSlowDelta = tSlowDelta + aTimeDelta;
 		return;
 	else
@@ -1363,22 +1379,22 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- reload after battle
-	if (VUHDO_RELOAD_AFTER_BATTLE and not InCombatLockdown()) then
+	if VUHDO_RELOAD_AFTER_BATTLE and not InCombatLockdown() then
 		VUHDO_RELOAD_AFTER_BATTLE = false;
 
-		if (VUHDO_TIMERS["RELOAD_RAID"] <= 0) then
+		if VUHDO_TIMERS["RELOAD_RAID"] <= 0 then
 			VUHDO_quickRaidReload();
-			if (VUHDO_IS_RELOAD_BUFFS) then
+			if VUHDO_IS_RELOAD_BUFFS then
 				VUHDO_reloadBuffPanel();
 				VUHDO_IS_RELOAD_BUFFS = false;
 			end
 		end
 	end
 	-- automatic profiles, shield cleanup, hide generic blizz party
-	if (VUHDO_checkResetTimer("CHECK_PROFILES", 3.1)) then
-		if (not InCombatLockdown()) then
+	if VUHDO_checkResetTimer("CHECK_PROFILES", 3.1) then
+		if not InCombatLockdown() then
 			tAutoProfile, tTrigger = VUHDO_getAutoProfile();
-			if (tAutoProfile ~= nil and not VUHDO_IS_CONFIG) then
+			if tAutoProfile and not VUHDO_IS_CONFIG then
 				VUHDO_Msg(VUHDO_I18N_AUTO_ARRANG_1 .. tTrigger .. VUHDO_I18N_AUTO_ARRANG_2 .. "|cffffffff" .. tAutoProfile .. "|r\"");
 				VUHDO_loadProfile(tAutoProfile);
 			end
@@ -1389,20 +1405,20 @@ function VUHDO_OnUpdate(_, aTimeDelta)
 	end
 
 	-- Unit Zones
-	if (VUHDO_checkResetTimer("RELOAD_ZONES", 3.45)) then
+	if VUHDO_checkResetTimer("RELOAD_ZONES", 3.45) then
 		for tUnit, tInfo in pairs(VUHDO_RAID) do
 			tInfo["zone"], tInfo["map"] = VUHDO_getUnitZoneName(tUnit);
 		end
 	end
 
-	if (VUHDO_NEXT_INSPECT_UNIT == nil and not InCombatLockdown()
-		and VUHDO_checkResetTimer("REFRESH_INSPECT", 2.1)) then
+	if VUHDO_NEXT_INSPECT_UNIT == nil and not InCombatLockdown()
+		and VUHDO_checkResetTimer("REFRESH_INSPECT", 2.1) then
 		VUHDO_tryInspectNext();
 	end
 
 	-- Refresh d/c shield macros?
-	if (VUHDO_checkTimer("MIRROR_TO_MACRO")) then
-		if (InCombatLockdown()) then
+	if VUHDO_checkTimer("MIRROR_TO_MACRO") then
+		if InCombatLockdown() then
 			VUHDO_TIMERS["MIRROR_TO_MACRO"] = 2;
 		else
 			VUHDO_mirrorToMacro();
@@ -1457,7 +1473,7 @@ local VUHDO_ALL_EVENTS = {
 function VUHDO_OnLoad(anInstance)
 	local _, _, _, tTocVersion = GetBuildInfo();
 
-	if (tonumber(tTocVersion or 999999) < VUHDO_MIN_TOC_VERSION) then
+	if tonumber(tTocVersion or 999999) < VUHDO_MIN_TOC_VERSION then
 		VUHDO_Msg(format(VUHDO_I18N_DISABLE_BY_VERSION, VUHDO_MIN_TOC_VERSION));
 		return;
 	end

@@ -74,17 +74,16 @@ function VUHDO_serializeTable(aTable)
 
 	for tKey, tValue in pairs(aTable) do
 		tString = "number" == type(tKey)
-			and format("%sN%d=", tString, tKey)
-			or format("%sS%s=", tString, VUHDO_KEY_TO_ABBREV[tKey] or tKey);
+			and format("%sN%d=", tString, tKey) or format("%sS%s=", tString, VUHDO_KEY_TO_ABBREV[tKey] or tKey);
 
-		if ("string" == type(tValue)) then
+		if "string" == type(tValue) then
 			tString = format("%sS%d+%s", tString, strlen(tValue), tValue);
-		elseif ("number" == type(tValue)) then
+		elseif "number" == type(tValue) then
 			tStrValue = tostring(floor(tValue * 10000) * 0.0001);
 			tString = format("%sN%d+%s", tString, strlen(tStrValue), tStrValue);
-		elseif ("boolean" == type(tValue)) then
+		elseif "boolean" == type(tValue) then
 			tString = tString .. (tValue and "1" or "0");
-		elseif ("table" == type(tValue)) then
+		elseif "table" == type(tValue) then
 			local tNewString = VUHDO_serializeTable(tValue);
 			tString = format("%sT%d+%s", tString, strlen(tNewString), tNewString);
 		end
@@ -101,10 +100,7 @@ local tNumBytes;
 local tValue;
 local function VUHDO_getValueByLength(aString, aGleichPos)
 	tEndPos = strfind(aString, "+", aGleichPos + 2, true);
-
-	if (tEndPos == nil) then
-		return nil, nil;
-	end
+	if not tEndPos then return nil, nil; end
 
 	tNumBytes = tonumber(strsub(aString, aGleichPos + 2, tEndPos - 1));
 	tValue = strsub(aString, tEndPos + 1, tEndPos + tNumBytes);
@@ -121,31 +117,31 @@ function VUHDO_deserializeTable(aString)
 	local tGleichPos;
 	local tKey, tValue;
 
-	while (tIndex <= strlen(aString)) do
+	while tIndex <= strlen(aString) do
 		tGleichPos = strfind(aString, "=", tIndex + 1, true);
 
-		if (tGleichPos ~= nil) then
+		if tGleichPos then
 			tKey = strsub(aString, tIndex + 1, tGleichPos - 1);
 
-			if (78 == strbyte(aString, tIndex)) then -- N
+			if 78 == strbyte(aString, tIndex) then -- N
 				tKey = tonumber(tKey);
 			else -- S
 				tKey = VUHDO_ABBREV_TO_KEY[tKey] or tKey;
 			end
 
 			tValueType = strbyte(aString, tGleichPos + 1);
-			if (83 == tValueType) then -- S
+			if 83 == tValueType then -- S
 				tIndex, tValue = VUHDO_getValueByLength(aString, tGleichPos);
-			elseif (78 == tValueType) then -- N
+			elseif 78 == tValueType then -- N
 				tIndex, tValue = VUHDO_getValueByLength(aString, tGleichPos);
 				tValue = tonumber(tValue);
-			elseif (48 == tValueType) then -- 0
+			elseif 48 == tValueType then -- 0
 				tValue = false;
 				tIndex = tGleichPos + 2;
-			elseif (49 == tValueType) then -- 1
+			elseif 49 == tValueType then -- 1
 				tValue = true;
 				tIndex = tGleichPos + 2;
-			elseif (84 == tValueType) then -- T
+			elseif 84 == tValueType then -- T
 				tIndex, tValue = VUHDO_getValueByLength(aString, tGleichPos);
 				tValue = VUHDO_deserializeTable(tValue);
 			else
@@ -155,7 +151,7 @@ function VUHDO_deserializeTable(aString)
 			return tTable;
 		end
 
-		if (tKey ~= nil and tValue ~= nil) then
+		if tKey and tValue ~= nil then
 			tTable[tKey] = tValue;
 		end
 	end

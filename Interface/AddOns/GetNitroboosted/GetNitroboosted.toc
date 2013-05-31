@@ -1,8 +1,8 @@
-﻿## Interface: 50100
-## Title: GetNitroboosted |cFF99CC01rev |cFFFF00001.8
+﻿## Interface: 50200
+## Title: GetNitroboosted |cFF99CC01rev |cFFFF00001.9
 ## Notes: Rocket Fuel Leak announcement.
 ## Author: Resike
-## Version: 1.8
+## Version: 1.9
 ## SavedVariablesPerCharacter: GN_Solo, GN_Party, GN_Raid, GN_PartyInstance, GN_RaidInstance, GN_Battleground
 ## DefaultState: Enabled
 

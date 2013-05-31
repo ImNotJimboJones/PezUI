@@ -49,9 +49,9 @@ local VUHDO_MAP_FIX_WIDTH = {
 		[1] = 4237.49987792969,
 	},
 
-	["StormwindCity"] = {
+	--[[["StormwindCity"] = {
 		[0] = 1737.4999589920044,
-	},
+	},]]
 };
 
 
@@ -65,7 +65,7 @@ local VUHDO_INTERACT_YARDS = { 28, 11.11, 9.9, 40 };
 
 --
 local function VUHDO_clusterBuilderStoreZone(aZone)
-	if (aZone ~= nil)  then
+	if aZone then
 		VUHDO_STORED_ZONES[aZone] = { };
 		VUHDO_STORED_ZONES[aZone]["good"] = VUHDO_deepCopyTable(VUHDO_INTERACT_MAX_DISTANCES);
 		VUHDO_STORED_ZONES[aZone]["fail"] = VUHDO_deepCopyTable(VUHDO_INTERACT_FAIL_MIN_DISTANCES);
@@ -92,8 +92,8 @@ local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
 
 	for tCnt = 1, 3 do
 		-- Check only if new distance is within bandwidth (= better result than before)
-		if (tDistance > VUHDO_INTERACT_MAX_DISTANCES[tCnt] and tDistance < VUHDO_INTERACT_FAIL_MIN_DISTANCES[tCnt]) then
-			if (CheckInteractDistance(aUnit, tCnt)) then
+		if tDistance > VUHDO_INTERACT_MAX_DISTANCES[tCnt] and tDistance < VUHDO_INTERACT_FAIL_MIN_DISTANCES[tCnt] then
+			if CheckInteractDistance(aUnit, tCnt) then
 				VUHDO_INTERACT_MAX_DISTANCES[tCnt] = tDistance;
 			else
 				VUHDO_INTERACT_FAIL_MIN_DISTANCES[tCnt] = tDistance;
@@ -102,8 +102,8 @@ local function VUHDO_calibrateMapScale(aUnit, aDeltaX, aDeltaY)
 		end
 	end
 
-	if (tDistance > VUHDO_INTERACT_MAX_DISTANCES[4] and tDistance < VUHDO_INTERACT_FAIL_MIN_DISTANCES[4]) then
-		if ((VUHDO_RAID[aUnit] or tEmptyUnit)["baseRange"]) then
+	if tDistance > VUHDO_INTERACT_MAX_DISTANCES[4] and tDistance < VUHDO_INTERACT_FAIL_MIN_DISTANCES[4] then
+		if (VUHDO_RAID[aUnit] or tEmptyUnit)["baseRange"] then
 			VUHDO_INTERACT_MAX_DISTANCES[4] = tDistance;
 		else
 			VUHDO_INTERACT_FAIL_MIN_DISTANCES[4] = tDistance;
@@ -122,15 +122,15 @@ local function VUHDO_getHeuristicMapWidth()
 	for tIndex, tNormFactor in pairs(VUHDO_INTERACT_YARDS) do
 		tCurrWorldSize = tNormFactor / VUHDO_INTERACT_MAX_DISTANCES[tIndex]; -- yards per full tick = world size in yards
 
-		if (tCurrWorldSize < tMinWorldSize) then -- Better test results are always smaller = closer to the limit of interact distance
+		if tCurrWorldSize < tMinWorldSize then -- Better test results are always smaller = closer to the limit of interact distance
 			tMinWorldSize = tCurrWorldSize;
-			if (VUHDO_INTERACT_FAIL_MIN_DISTANCES[tIndex] < VUHDO_MAX_TICK_UNIT) then
+			if VUHDO_INTERACT_FAIL_MIN_DISTANCES[tIndex] < VUHDO_MAX_TICK_UNIT then
 				tUpperBoundary = tNormFactor / VUHDO_INTERACT_FAIL_MIN_DISTANCES[tIndex];
 			end
 		end
 	end
 
-	return tUpperBoundary ~= nil and (tMinWorldSize + tUpperBoundary) * 0.5 or tMinWorldSize;
+	return tUpperBoundary and (tMinWorldSize + tUpperBoundary) * 0.5 or tMinWorldSize;
 end
 
 
@@ -142,18 +142,18 @@ local function VUHDO_determineDistanceBetween(aUnit, anotherUnit)
 	tIsValid = true;
 
 	tX1, tY1 = GetPlayerMapPosition(aUnit);
-	if (tX1 + tY1 <= 0) then
+	if tX1 + tY1 <= 0 then
 		VUHDO_CLUSTER_BLACKLIST[aUnit] = true;
 		tIsValid = false;
 	end
 
 	tX2, tY2 = GetPlayerMapPosition(anotherUnit);
-	if (tX2 + tY2 <= 0) then
+	if tX2 + tY2 <= 0 then
 		VUHDO_CLUSTER_BLACKLIST[anotherUnit] = true;
 		tIsValid = false;
 	end
 
-	if (not tIsValid) then
+	if not tIsValid then
 		return nil, nil;
 	end
 
@@ -166,7 +166,7 @@ end
 local function VUHDO_clusterBuilderNewZone(anOldZone, aNewZone)
 	VUHDO_clusterBuilderStoreZone(anOldZone);
 
-	if (VUHDO_STORED_ZONES[aNewZone] ~= nil) then
+	if VUHDO_STORED_ZONES[aNewZone] then
 		VUHDO_INTERACT_MAX_DISTANCES = VUHDO_deepCopyTable(VUHDO_STORED_ZONES[aNewZone]["good"]);
 		VUHDO_INTERACT_FAIL_MIN_DISTANCES = VUHDO_deepCopyTable(VUHDO_STORED_ZONES[aNewZone]["fail"]);
 	else
@@ -198,13 +198,13 @@ local VuhDoDummyStub = {
 };
 
 function VUHDO_updateAllClusters()
-	if (WorldMapFrame:IsShown()
-		or (GetMouseFocus() or VuhDoDummyStub):GetName() == nil) then -- @UGLY Carbonite workaround
+	if WorldMapFrame:IsShown()
+		or not (GetMouseFocus() or VuhDoDummyStub):GetName() then -- @UGLY Carbonite workaround
 		return;
 	end
 
 	tX, tY = GetPlayerMapPosition("player");
-	if ((tX or 0) + (tY or 0) <= 0) then
+	if (tX or 0) + (tY or 0) <= 0 then
 		VUHDO_setMapToCurrentZone();
 	end
 
@@ -212,7 +212,7 @@ function VUHDO_updateAllClusters()
 	tCurrLevel = GetCurrentMapDungeonLevel() or 0;
 	tCurrentZone = format("%s%d", tMapFileName, tCurrLevel);
 
-	if (VUHDO_LAST_ZONE ~= tCurrentZone) then
+	if VUHDO_LAST_ZONE ~= tCurrentZone then
 		VUHDO_clusterBuilderNewZone(VUHDO_LAST_ZONE, tCurrentZone);
 		VUHDO_LAST_ZONE = tCurrentZone;
 	end
@@ -220,9 +220,9 @@ function VUHDO_updateAllClusters()
 	tNumSamples, tNumIterations = 0, 0;
 	tNumRaid = #VUHDO_CLUSTER_BASE_RAID;
 
-	while (true) do
+	while true do
 		tIndex = tIndex + 1;
-		if (tIndex > tNumRaid) then
+		if tIndex > tNumRaid then
 			tIndex = 0;
 			break;
 		end
@@ -230,20 +230,20 @@ function VUHDO_updateAllClusters()
 		tInfo = VUHDO_CLUSTER_BASE_RAID[tIndex];
 		tUnit = tInfo["unit"];
 
-		if (VUHDO_COORD_DELTAS[tUnit] == nil) then
+		if not VUHDO_COORD_DELTAS[tUnit] then
 			VUHDO_COORD_DELTAS[tUnit] = { };
 		end
 
-		if (VUHDO_isValidClusterUnit(tInfo)) then
+		if VUHDO_isValidClusterUnit(tInfo) then
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
 
-				if (VUHDO_isValidClusterUnit(tAnotherInfo)) then
+				if VUHDO_isValidClusterUnit(tAnotherInfo) then
 					tAnotherUnit = tAnotherInfo["unit"];
 					tDeltaX, tDeltaY = VUHDO_determineDistanceBetween(tUnit, tAnotherUnit);
 
-					if (tDeltaX ~= nil) then
-						if (VUHDO_COORD_DELTAS[tUnit][tAnotherUnit] == nil) then
+					if tDeltaX then
+						if not VUHDO_COORD_DELTAS[tUnit][tAnotherUnit] then
 							VUHDO_COORD_DELTAS[tUnit][tAnotherUnit] = { };
 						end
 
@@ -251,52 +251,44 @@ function VUHDO_updateAllClusters()
 						VUHDO_COORD_DELTAS[tUnit][tAnotherUnit][2] = tDeltaY;
 
 						-- and the other way round to reduce iterations
-						if (VUHDO_COORD_DELTAS[tAnotherUnit] == nil) then
+						if not VUHDO_COORD_DELTAS[tAnotherUnit] then
 							VUHDO_COORD_DELTAS[tAnotherUnit] = { };
 						end
-						if (VUHDO_COORD_DELTAS[tAnotherUnit][tUnit] == nil) then
+						if not VUHDO_COORD_DELTAS[tAnotherUnit][tUnit] then
 							VUHDO_COORD_DELTAS[tAnotherUnit][tUnit] = { };
 						end
 						VUHDO_COORD_DELTAS[tAnotherUnit][tUnit][1] = tDeltaX;
 						VUHDO_COORD_DELTAS[tAnotherUnit][tUnit][2] = tDeltaY;
 
 						tNumSamples = tNumSamples + 1;
-						if (tNumSamples > 50) then -- VUHDO_MAX_SAMPLES
-							break;
-						end
+						if tNumSamples > 50 then break; end -- VUHDO_MAX_SAMPLES
 					end
 				end
 				tNumIterations = tNumIterations + 1;
-				if (tNumIterations > 120) then -- VUHDO_MAX_ITERATIONS
-					break;
-				end
+				if tNumIterations > 120 then break; end -- VUHDO_MAX_ITERATIONS
 			end -- for
 		else -- Blacklist updaten
 			for tCnt = tIndex + 1, tNumRaid do
 				tAnotherInfo = VUHDO_CLUSTER_BASE_RAID[tCnt];
-				if (tAnotherInfo == nil) then
-					break;
-				end
+				if not tAnotherInfo then break;	end
 				VUHDO_isValidClusterUnit(tAnotherInfo);
 			end
 		end
 
-		if (tNumSamples > 50 or tNumIterations > 120) then -- VUHDO_MAX_SAMPLES -- VUHDO_MAX_ITERATIONS
-			break;
-		end
+		if tNumSamples > 50 or tNumIterations > 120 then break; end -- VUHDO_MAX_SAMPLES -- VUHDO_MAX_ITERATIONS
 	end
 
 	tMaxX = nil;
 
 	-- Try to determine well known dungeons
 	tDungeonLevels = VUHDO_MAP_FIX_WIDTH[tMapFileName];
-	if (tDungeonLevels ~= nil) then
+	if tDungeonLevels then
 		tMaxX = tDungeonLevels[tCurrLevel];
 		--VUHDO_Msg(GetCurrentMapDungeonLevel());
 	end
 
 	-- Otherwise get from heuristic database
-	if ((tMaxX or 0) == 0) then
+	if (tMaxX or 0) == 0 then
 		if (VUHDO_COORD_DELTAS["player"] ~= nil) then
 			for tUnit, tDeltas in pairs(VUHDO_COORD_DELTAS["player"]) do
 				VUHDO_calibrateMapScale(tUnit, tDeltas[1], tDeltas[2]);
@@ -306,7 +298,7 @@ function VUHDO_updateAllClusters()
 		tMaxX = VUHDO_getHeuristicMapWidth();
 
 		-- Unreasonable?
-		if (tMaxX < 1 or tMaxX >= VUHDO_MAP_LIMIT_YARDS) then
+		if tMaxX < 1 or tMaxX >= VUHDO_MAP_LIMIT_YARDS then
 			VUHDO_MAP_WIDTH = 0;
 			return;
 		end
@@ -342,29 +334,29 @@ local tStart, tDuration;
 function VUHDO_getUnitsInRadialClusterWith(aUnit, aYardsPow, anArray, aCdSpell)
 	twipe(anArray);
 
-	if (aCdSpell) then
+	if aCdSpell then
 		tStart, tDuration = GetSpellCooldown(aCdSpell);
 		tDuration = tDuration or 0;
 
-		if (tDuration > 1.5) then -- Don't remove clusters for gcd
+		if tDuration > 1.5 then -- Don't remove clusters for gcd
 			tStart = tStart or 0;
-			if (tStart + tDuration > GetTime()) then
+			if tStart + tDuration > GetTime() then
 				return anArray;
 			end
 		end
 	end
 
 	tInfo = VUHDO_RAID[aUnit];
-	if (tInfo ~= nil and not VUHDO_CLUSTER_BLACKLIST[aUnit]) then
+	if tInfo and not VUHDO_CLUSTER_BLACKLIST[aUnit] then
 		anArray[1] = aUnit;-- Source is always part of the cluster
 	end
-	if (VUHDO_MAP_WIDTH == 0 or VUHDO_COORD_DELTAS[aUnit] == nil) then
+	if VUHDO_MAP_WIDTH == 0 or not VUHDO_COORD_DELTAS[aUnit] then
 		return anArray;
 	end
 
 	for tOtherUnit, tDeltas in pairs(VUHDO_COORD_DELTAS[aUnit]) do
 		tDistance = (((tDeltas[1] or 0) * VUHDO_MAP_WIDTH) ^ 2)  + (((tDeltas[2] or 0) * VUHDO_MAP_WIDTH / 1.5) ^ 2);
-		if (tDistance <= aYardsPow and not VUHDO_CLUSTER_BLACKLIST[tOtherUnit]) then
+		if tDistance <= aYardsPow and not VUHDO_CLUSTER_BLACKLIST[tOtherUnit] then
 			anArray[#anArray + 1] = tOtherUnit;
 		end
 	end
@@ -384,9 +376,9 @@ local function VUHDO_getMostDeficitUnitOutOf(anIncludeList, anExcludeList)
 	tWinnerMissLife = -1;
 
 	for _, tUnit in pairs(anIncludeList) do
-		if (not anExcludeList[tUnit]) then
+		if not anExcludeList[tUnit] then
 			tInfo = VUHDO_RAID[tUnit];
-			if (tInfo ~= nil and tInfo["healthmax"] - tInfo["health"] > tWinnerMissLife) then
+			if tInfo and tInfo["healthmax"] - tInfo["health"] > tWinnerMissLife then
 				tWinnerUnit = tUnit;
 				tWinnerMissLife = tInfo["healthmax"] - tInfo["health"];
 			end
@@ -409,9 +401,7 @@ function VUHDO_getUnitsInChainClusterWith(aUnit, aYardsPow, anArray, aMaxTargets
 		tExcludeList[aUnit] = true;
 		VUHDO_getUnitsInRadialClusterWith(aUnit, aYardsPow, tNextJumps, aCdSpell);
 		aUnit = VUHDO_getMostDeficitUnitOutOf(tNextJumps, tExcludeList);
-		if (aUnit == nil) then
-			break;
-		end
+		if not aUnit then break; end
 	end
 	return anArray;
 end
@@ -421,11 +411,9 @@ end
 --
 local tDeltas, tDistance;
 function VUHDO_getDistanceBetween(aUnit, anotherUnit)
-	if (VUHDO_CLUSTER_BLACKLIST[aUnit] or VUHDO_CLUSTER_BLACKLIST[anotherUnit]) then
-		return nil;
-	end
+	if VUHDO_CLUSTER_BLACKLIST[aUnit] or VUHDO_CLUSTER_BLACKLIST[anotherUnit] then	return nil; end
 
-	if (VUHDO_COORD_DELTAS[aUnit] ~= nil and VUHDO_COORD_DELTAS[aUnit][anotherUnit] ~= nil) then
+	if VUHDO_COORD_DELTAS[aUnit] and VUHDO_COORD_DELTAS[aUnit][anotherUnit] then
 		tDeltas = VUHDO_COORD_DELTAS[aUnit][anotherUnit];
 		return sqrt((((tDeltas[1] or 0) * VUHDO_MAP_WIDTH) ^ 2)  + (((tDeltas[2] or 0) * VUHDO_MAP_WIDTH / 1.5) ^ 2));
 	end
@@ -438,13 +426,11 @@ end
 --
 local tDeltas, tXCoord, tYCoord;
 local function VUHDO_getRealPosition(aUnit)
-	if (VUHDO_CLUSTER_BLACKLIST[aUnit]) then
-		return nil;
-	end
+	if VUHDO_CLUSTER_BLACKLIST[aUnit] then return nil; end
 
-	if (VUHDO_COORD_DELTAS[aUnit] ~= nil) then
+	if VUHDO_COORD_DELTAS[aUnit] then
 		tXCoord, tYCoord = GetPlayerMapPosition(aUnit);
-		if (tXCoord ~= nil and tYCoord ~= nil) then
+		if tXCoord and tYCoord then
 			return tXCoord * VUHDO_MAP_WIDTH, tYCoord * VUHDO_MAP_WIDTH / 1.5;
 		end
 	end
@@ -524,27 +510,21 @@ function VUHDO_getUnitsInLinearCluster(aUnit, anArray, aRange, aMaxTargets, anIs
 	twipe(anArray);
 	twipe(tDestCluster);
 
-	if (VUHDO_MAP_WIDTH == 0 or VUHDO_COORD_DELTAS[aUnit] == nil) then
-		return;
-	end
+	if VUHDO_MAP_WIDTH == 0 or not VUHDO_COORD_DELTAS[aUnit] then return; end
 
 	tPlayerX, tPlayerY = VUHDO_getRealPosition("player");
-	if (tPlayerX == nil) then
-		return;
-	end
+	if not tPlayerX then return; end
 
 	tTargetX, tTargetY = VUHDO_getRealPosition(aUnit);
-	if (tTargetX == nil) then
-		return;
-	end
+	if not tTargetX then return; end
 
 	tLineToTarget = VuhDoLine.create(1, tPlayerX, tPlayerY, tTargetX, tTargetY);
 
 	for _, tInfo in pairs(VUHDO_CLUSTER_BASE_RAID) do
 		tUnit = tInfo["unit"];
-		if ("player" ~= tUnit and VUHDO_CLUSTER_BLACKLIST[tUnit] == nil)  then
+		if "player" ~= tUnit and not VUHDO_CLUSTER_BLACKLIST[tUnit] then
 			tZuPruefenX, tZuPruefenY = VUHDO_getRealPosition(tUnit);
-			if (tZuPruefenX ~= nil) then
+			if tZuPruefenX then
 
 				tOrthogonale = VuhDoLine.create(2, tZuPruefenX, tZuPruefenY,
 					tZuPruefenX + tLineToTarget:hoehe(),
@@ -552,8 +532,8 @@ function VUHDO_getUnitsInLinearCluster(aUnit, anArray, aRange, aMaxTargets, anIs
 
 				tSchnittX, tSchnittY = tOrthogonale:schnittpunkt(tLineToTarget);
 
-				if (tLineToTarget:enthaelt(tSchnittX, tSchnittY)) then
-					if (tOrthogonale:laenge() <= aRange) then
+				if tLineToTarget:enthaelt(tSchnittX, tSchnittY) then
+					if tOrthogonale:laenge() <= aRange then
 						tDestCluster[#tDestCluster + 1] = aUnit;
 					end
 				end
@@ -561,7 +541,7 @@ function VUHDO_getUnitsInLinearCluster(aUnit, anArray, aRange, aMaxTargets, anIs
 		end
 	end
 
-	if (anIsHealsPlayer) then
+	if anIsHealsPlayer then
 		if (VUHDO_tableUniqueAdd(tDestCluster, "player")) then
 			aMaxTargets = aMaxTargets + 1;
 		end
@@ -573,4 +553,3 @@ function VUHDO_getUnitsInLinearCluster(aUnit, anArray, aRange, aMaxTargets, anIs
 		anArray[tCnt] = tDestCluster[tCnt];
 	end
 end
-

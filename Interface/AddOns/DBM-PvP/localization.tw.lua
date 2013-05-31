@@ -93,7 +93,6 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization("z566")
 
 L:SetMiscLocalization({
-	ZoneName			= "暴風之眼",
 	ScoreExpr			= "(%d+)/1600",
 	Alliance 			= "聯盟",
 	Horde 				= "部落",
@@ -123,7 +122,7 @@ L:SetMiscLocalization({
 	BgStart60 			= "戰鬥將在1分鐘內開始。",
 	BgStart30 			= "戰鬥將在30秒鐘內開始。做好準備!",
 	Alliance 			= "聯盟",
-	Horde 				= "部落",	
+	Horde 				= "部落",
 	InfoErrorText			= "當你離開戰鬥後，旗幟框架將會回復。",
 	ExprFlagPickUp			= "(.+)的旗幟被(.+)拔掉了!",
 	ExprFlagCaptured		= "(.+)佔據了(.+)的旗幟!",
@@ -134,7 +133,7 @@ L:SetMiscLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerStart 			= "戰鬥開始", 
+	TimerStart 			= "戰鬥開始",
 	TimerFlag 			= "旗幟重生"
 })
 
@@ -189,7 +188,6 @@ L = DBM:GetModLocalization("z726")
 L:SetMiscLocalization({
 	BgStart60 			= "戰鬥將在1分鐘內開始。",
 	BgStart30 			= "戰鬥將在30秒鐘內開始。做好準備!",
-	ZoneName 			= "雙子",
 	Alliance 			= "聯盟",
 	Horde 				= "部落",
 	InfoErrorText			= "當你離開戰鬥後，旗幟框架將會回復。",
@@ -204,7 +202,7 @@ L:SetMiscLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerStart 			= "戰鬥開始", 
+	TimerStart 			= "戰鬥開始",
 	TimerFlag 			= "旗幟重生"
 })
 

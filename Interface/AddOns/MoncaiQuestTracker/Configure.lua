@@ -22,6 +22,7 @@ local defaults = {
 		verbosebuddy = false,
 		verbosechat = true,
 		debug = false,
+		imagimode = false,
 		fixedwidth = false,
 		widthwhenfixed = 220,
 		float = false,
@@ -164,7 +165,12 @@ local optionstable = {
 					type = "toggle",
 					set = setter, get = getter, width = "full",
 				},
-				
+				imagimode = {
+					name = "Imaginary Buddy debug mode",
+					desc = "Enable or disable your imaginary buddy (debug purposes).",
+					type = "toggle",
+					set = setter, get = getter, width = "full",				
+				}
 			},
 		},
 	},

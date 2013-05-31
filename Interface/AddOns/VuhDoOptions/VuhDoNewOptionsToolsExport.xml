@@ -47,13 +47,10 @@
 					</Frame>
 
 					<Button name="$parentProfileComboBox" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="180" y="32" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="123" y="-65" />
+									<AbsDimension x="123" y="-48" />
 								</Offset>
 							</Anchor>
 						</Anchors>

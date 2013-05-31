@@ -105,13 +105,10 @@
 				<Frames>
 
 					<Button name="$parentModeComboBox" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="184" y="32" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="20" y="-55" />
+									<AbsDimension x="20" y="-38" />
 								</Offset>
 							</Anchor>
 						</Anchors>

@@ -89,12 +89,12 @@ function VUHDO_initFromSpellbook()
 	twipe(VUHDO_PLAYER_HOTS);
 
 	for tSpellName, someParams in pairs(VUHDO_SPELLS) do
-		if (someParams["isHot"] and VUHDO_isSpellKnown(tSpellName)) then
+		if someParams["isHot"] and VUHDO_isSpellKnown(tSpellName) then
 			VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = tSpellName;
 		end
 	end
 
-	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
+	if "PRIEST" == VUHDO_PLAYER_CLASS then
 		VUHDO_PLAYER_HOTS[#VUHDO_PLAYER_HOTS + 1] = VUHDO_SPELL_ID.ECHO_OF_LIGHT;
 	end
 
@@ -103,13 +103,13 @@ function VUHDO_initFromSpellbook()
 
 	local tHotSlots = VUHDO_PANEL_SETUP["HOTS"]["SLOTS"];
 
-	if (tHotSlots["firstFlood"]) then
+	if tHotSlots["firstFlood"] then
 		tHotSlots["firstFlood"] = nil;
 
 		for tCnt = 1, #VUHDO_PLAYER_HOTS do
-			if (not (VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt]] or tEmpty)["nodefault"]) then
+			if not (VUHDO_SPELLS[VUHDO_PLAYER_HOTS[tCnt]] or tEmpty)["nodefault"] then
 				tinsert(tHotSlots, VUHDO_PLAYER_HOTS[tCnt]);
-				if (#tHotSlots == 10) then
+				if #tHotSlots == 10 then
 					break;
 				end
 			end
@@ -118,7 +118,7 @@ function VUHDO_initFromSpellbook()
 	end
 
 	local tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
-	if (tHotCfg["firstFlood"]) then
+	if tHotCfg["firstFlood"] then
 		for tCnt = 1, #tHotSlots do
 			tHotCfg["" .. tCnt]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt]];
 		end
@@ -126,10 +126,10 @@ function VUHDO_initFromSpellbook()
 	end
 
 	for tCnt, tHotName in pairs(tHotSlots) do
-		if (not VUHDO_strempty(tHotName)) then
+		if not VUHDO_strempty(tHotName) then
 			VUHDO_ACTIVE_HOTS[tHotName] = true;
 
-			if (tHotCfg["" .. tCnt]["others"]) then
+			if tHotCfg["" .. tCnt]["others"] then
 				VUHDO_ACTIVE_HOTS_OTHERS[tHotName] = true;
 			end
 		end

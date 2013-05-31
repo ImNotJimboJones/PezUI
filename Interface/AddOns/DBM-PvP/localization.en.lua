@@ -79,8 +79,6 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	ScoreExpr	= "(%d+)/1600",
-	Alliance	= "Alliance",
-	Horde		= "Horde",
 	WinBarText	= "%s wins",
 	BasesToWin	= "Bases to win: %d",
 	Flag		= "Flag"
@@ -102,10 +100,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	ZoneName		= "Eye of the Storm",
 	ScoreExpr		= "(%d+)/1600",
-	Alliance 		= "Alliance",
-	Horde 			= "Horde",
 	WinBarText 		= "%s wins",
 	FlagReset 		= "The flag has been reset!",
 	FlagTaken 		= "(.+) has taken the flag!",
@@ -120,7 +115,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("z489")
 
 L:SetTimerLocalization({
-	TimerStart	= "Game starts", 
+	TimerStart	= "Game starts",
 	TimerFlag	= "Flag respawn"
 })
 
@@ -134,8 +129,6 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	BgStart60 			= "The battle begins in 1 minute.",
 	BgStart30 			= "The battle begins in 30 seconds.  Prepare yourselves!",
-	Alliance 			= "Alliance",
-	Horde 				= "Horde",	
 	InfoErrorText		= "The flag carrier targeting function will be restored when you are out of combat.",
 	ExprFlagPickUp		= "The (%w+) .lag was picked up by (.+)!",
 	ExprFlagCaptured	= "(.+) captured the (%w+) flag!",
@@ -187,7 +180,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("z726")
 
 L:SetTimerLocalization({
-	TimerStart	= "Game starts", 
+	TimerStart	= "Game starts",
 	TimerFlag	= "Flag respawn"
 })
 
@@ -201,9 +194,6 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	BgStart60 			= "The battle begins in 1 minute.",
 	BgStart30 			= "The battle begins in 30 seconds.  Prepare yourselves!",
-	ZoneName 			= "Twin",
-	Alliance 			= "Alliance",
-	Horde 				= "Horde",	
 	InfoErrorText		= "The flag carrier targeting function will be restored when you are out of combat.",
 	ExprFlagPickUp		= "The (%w+) .lag was picked up by (.+)!",
 	ExprFlagCaptured	= "(.+) captured the (%w+) flag!",
@@ -215,9 +205,9 @@ L:SetMiscLocalization({
 	Vulnerable2		= "The flag carriers have become increasingly vulnerable to attack!"
 })
 
--------------------------
---  Battle of Gilneas  --
--------------------------
+------------------------------
+--  The Battle for Gilneas  --
+------------------------------
 L = DBM:GetModLocalization("z761")
 
 L:SetTimerLocalization({
@@ -233,8 +223,6 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	ScoreExpr	= "(%d+)/2000",
-	Alliance	= "Alliance",
-	Horde		= "Horde",
 	WinBarText	= "%s wins",
 	BasesToWin	= "Bases to win: %d",
 	Flag		= "Flag"
@@ -272,8 +260,6 @@ L:SetMiscLocalization({
 	OrbTaken 	= "(%S+) has taken the (%S+) orb!",
 	OrbReturn 	= "The (%S+) orb has been returned!",
 	ScoreExpr	= "(%d+)/1600",
-	Alliance	= "Alliance",
-	Horde		= "Horde",
 	WinBarText	= "Estimate %s wins",
 	OrbsToWin	= "Orbs to win: %d"
 })

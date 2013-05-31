@@ -10,28 +10,16 @@ VUHDO_LibSharedMedia:Register("font", "Arial Black", "Interface\\AddOns\\VuhDo\\
 VUHDO_LibSharedMedia:Register("font", "Emblem",	"Interface\\AddOns\\VuhDo\\Fonts\\Emblem.ttf");
 VUHDO_LibSharedMedia:Register("font", "Vixar",	"Interface\\AddOns\\VuhDo\\Fonts\\vixar.ttf");
 
-local function VUHDO_registerLsmBar(aName, aBarNum)
-	VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - " .. aName, "Interface\\AddOns\\VuhDo\\Images\\bar" .. aBarNum .. ".tga");
+local function VUHDO_registerLsmBar(...)
+	for tCnt = 1, select('#', ...) do
+		VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - " .. select(tCnt, ...), "Interface\\AddOns\\VuhDo\\Images\\bar" .. tCnt .. ".tga");
+	end
 end
-VUHDO_registerLsmBar("Rhombs", 1);
-VUHDO_registerLsmBar("Twirls", 2);
-VUHDO_registerLsmBar("Pipe, dark", 3);
-VUHDO_registerLsmBar("Concave, dark", 4);
-VUHDO_registerLsmBar("Pipe, light", 5);
-VUHDO_registerLsmBar("Flat", 6);
-VUHDO_registerLsmBar("Concave, light", 7);
-VUHDO_registerLsmBar("Convex", 8);
-VUHDO_registerLsmBar("Textile", 9);
-VUHDO_registerLsmBar("Mirrorfinish", 10);
-VUHDO_registerLsmBar("Diagonals", 11);
-VUHDO_registerLsmBar("Zebra", 12);
-VUHDO_registerLsmBar("Marble", 13);
-VUHDO_registerLsmBar("Modern Art", 14);
-VUHDO_registerLsmBar("Polished Wood", 15);
-VUHDO_registerLsmBar("Plain", 16);
-VUHDO_registerLsmBar("Minimalist", 17);
-VUHDO_registerLsmBar("Aluminium", 18);
-VUHDO_registerLsmBar("Gradient", 19);
+
+VUHDO_registerLsmBar("Rhombs", "Twirls", "Pipe, dark", "Concave, dark", "Pipe, light", "Flat", "Concave, light",
+	"Convex", "Textile", "Mirrorfinish", "Diagonals", "Zebra", "Marble", "Modern Art", "Polished Wood", "Plain",
+	"Minimalist", "Aluminium", "Gradient");
+
 VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Bar Highlighter", "Interface\\AddOns\\VuhDo\\Images\\highlight.tga");
 VUHDO_LibSharedMedia:Register("statusbar", "VuhDo - Plain White", "Interface\\AddOns\\VuhDo\\Images\\plain_white.tga");
 VUHDO_LibSharedMedia:Register("statusbar", "LiteStepLite", "Interface\\AddOns\\VuhDo\\Images\\LiteStepLite.tga");
@@ -49,13 +37,8 @@ LoadAddOn("FuBarPlugin-3.0");
 
 --
 function VUHDO_initAddonMessages()
-	if (not IsAddonMessagePrefixRegistered("CTRA")) then
-		RegisterAddonMessagePrefix("CTRA");
-	end
-
-	if (not IsAddonMessagePrefixRegistered(VUHDO_COMMS_PREFIX)) then
-		RegisterAddonMessagePrefix(VUHDO_COMMS_PREFIX);
-	end
+	if not IsAddonMessagePrefixRegistered("CTRA") then RegisterAddonMessagePrefix("CTRA"); end
+	if not IsAddonMessagePrefixRegistered(VUHDO_COMMS_PREFIX) then RegisterAddonMessagePrefix(VUHDO_COMMS_PREFIX); end
 end
 
 
@@ -63,17 +46,17 @@ end
 --
 local tHasShownError = false;
 function VUHDO_parseAddonMessage(aPrefix, aMessage, aUnitName)
-	if (VUHDO_COMMS_PREFIX == aPrefix) then
+	if VUHDO_COMMS_PREFIX == aPrefix then
 
-		if (VUHDO_parseVuhDoMessage ~= nil) then
+		if VUHDO_parseVuhDoMessage then
 			VUHDO_parseVuhDoMessage(aUnitName, aMessage);
-		elseif (not tHasShownError) then
+		elseif not tHasShownError then
 			VUHDO_Msg("VuhDo Options module not loaded: You cannot receive data from other players.", 1, 0.4, 0.4);
 			tHasShownError = true;
 		end
 
-	elseif ("CTRA" == aPrefix) then
-		if (strfind(aMessage, "#")) then
+	elseif "CTRA" == aPrefix then
+		if strfind(aMessage, "#") then
 			local tFragments = VUHDO_splitString(aMessage, "#");
 			for _, tCommand in pairs(tFragments) do
 				VUHDO_parseCtraMessage(aUnitName, tCommand);
@@ -89,12 +72,12 @@ end
 --
 function VUHDO_initFuBar()
 	-- libDataBroker
-	if (VUHDO_LibDataBroker ~= nil) then
+	if VUHDO_LibDataBroker then
 		VUHDO_LibDataBroker:NewDataObject("VuhDo", {
 			type = "launcher",
 			icon = "Interface\\AddOns\\VuhDo\\Images\\VuhDo",
 			OnClick = function(aClickedFrame, aButton)
-				if (aButton == "RightButton") then
+				if aButton == "RightButton" then
 					ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, aClickedFrame:GetName(), 0, -5);
 				else
 					VUHDO_slashCmd("opt");
@@ -109,10 +92,10 @@ function VUHDO_initFuBar()
 	end
 
 	-- Native FuBar
-	if (LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
+	if LibStub:GetLibrary("LibFuBarPlugin-3.0", true)
 		and IsAddOnLoaded("FuBar")
 		and not IsAddOnLoaded("FuBar2Broker")
-		and not IsAddOnLoaded("Broker2FuBar")) then
+		and not IsAddOnLoaded("Broker2FuBar") then
 
 		local tLibFuBarPlugin = LibStub:GetLibrary("LibFuBarPlugin-3.0");
 		LibStub("AceAddon-3.0"):EmbedLibrary(VuhDo, "LibFuBarPlugin-3.0");
@@ -135,9 +118,9 @@ function VUHDO_initFuBar()
 		end
 		VuhDo:Show();
 		function VuhDo:OnFuBarClick(aButton)
-			if ("LeftButton" == aButton) then
+			if "LeftButton" == aButton then
 				VUHDO_slashCmd("opt");
-			elseif ("RightButton" == aButton) then
+			elseif "RightButton" == aButton then
 				ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, VuhDo:GetFrame():GetName(), 0, -5);
 			end
 		end
@@ -174,27 +157,27 @@ end
 
 --
 function VUHDO_initCliqueSupport()
-	if (not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"]) then
-		return;
-	end
+	if not VUHDO_CONFIG["IS_CLIQUE_COMPAT_MODE"] then return; end
 
-	if (not IsAddOnLoaded("Clique")) then
+	if not IsAddOnLoaded("Clique") then
 		VUHDO_Msg("WARNING: Clique compatibility mode is enabled but clique doesn't seem to be loaded!", 1, 0.4, 0.4);
 	end
 
 	ClickCastFrames = ClickCastFrames or {};
 
 	local tBtnName;
+	local tIcon;
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
 		for tButtonNum = 1, 51 do -- VUHDO_MAX_BUTTONS_PANEL
 			tBtnName = format("Vd%dH%d", tPanelNum, tButtonNum);
-			if (_G[tBtnName] ~= nil) then
+			if _G[tBtnName] then
 				ClickCastFrames[_G[tBtnName]] = true;
 				ClickCastFrames[_G[tBtnName .. "Tg"]] = true;
 				ClickCastFrames[_G[tBtnName .. "Tot"]] = true;
 				for tIconNum = 40, 44 do
-					ClickCastFrames[_G[format("%sBgBarIcBarHlBarIc%d", tBtnName, tIconNum)]] = true;
+					tIcon = _G[format("%sBgBarIcBarHlBarIc%d", tBtnName, tIconNum)];
+					if tIcon then ClickCastFrames[tIcon] = true; end
 				end
 			end
 		end
@@ -205,10 +188,9 @@ end
 
 --
 function VUHDO_initButtonFacade(anInstance)
-	VUHDO_LibButtonFacade = VUHDO_CONFIG["IS_USE_BUTTON_FACADE"]
-		and LibStub("Masque", true) or nil;
+	VUHDO_LibButtonFacade = VUHDO_CONFIG["IS_USE_BUTTON_FACADE"] and LibStub("Masque", true) or nil;
 
-	if (VUHDO_LibButtonFacade ~= nil) then
+	if VUHDO_LibButtonFacade then
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_BUFF_WATCH);
 		VUHDO_LibButtonFacade:Group("VuhDo", VUHDO_I18N_HOTS);
 	end

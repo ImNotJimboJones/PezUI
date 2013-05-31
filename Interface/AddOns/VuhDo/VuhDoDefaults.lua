@@ -13,8 +13,8 @@ function VUHDO_fixHotSettings()
 	tHotCfg = VUHDO_PANEL_SETUP["HOTS"]["SLOTCFG"];
 
 	for tCnt2 = 1, 10 do
-		if (not tHotCfg["" .. tCnt2]["mine"] and not tHotCfg["" .. tCnt2]["others"]) then
-			if (tHotSlots[tCnt2] ~= nil) then
+		if not tHotCfg["" .. tCnt2]["mine"] and not tHotCfg["" .. tCnt2]["others"] then
+			if tHotSlots[tCnt2] then
 				tHotCfg["" .. tCnt2]["mine"] = true;
 				tHotCfg["" .. tCnt2]["others"] = VUHDO_EXCLUSIVE_HOTS[tHotSlots[tCnt2]];
 			end
@@ -27,15 +27,15 @@ end
 --
 local function VUHDO_getVarDescription(aVar)
 	local tMessage = "";
-	if (aVar == nil) then
+	if aVar == nil then
 		tMessage = "<nil>";
-	elseif ("boolean" == type(aVar)) then
-		if (aVar) then
+	elseif "boolean" == type(aVar) then
+		if aVar then
 			tMessage = "<true>";
 		else
 			tMessage = "<false>";
 		end
-	elseif("number" == type(aVar) or "string" == type(aVar)) then
+	elseif "number" == type(aVar) or "string" == type(aVar) then
 		tMessage = aVar .. " (" .. type(aVar) .. ")";
 	else
 		tMessage = "(" .. type(aVar) .. ")";
@@ -49,15 +49,15 @@ end
 --
 local tCreated, tRepaired;
 local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
-	if (aSaneValue ~= nil) then
-		if (type(aSaneValue) == "table") then
-			if (aValue ~= nil and type(aValue) == "table") then
+	if aSaneValue ~= nil then
+		if type(aSaneValue) == "table" then
+			if aValue ~= nil and type(aValue) == "table" then
 				for tIndex, _ in pairs(aSaneValue) do
 					aValue[tIndex] = _VUHDO_ensureSanity(aName, aValue[tIndex], aSaneValue[tIndex]);
 				end
 			else
 
-				if (aValue ~= nil) then
+				if aValue ~= nil then
 					tRepaired = tRepaired + 1;
 				else
 					tCreated = tCreated + 1;
@@ -66,9 +66,9 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 				return VUHDO_deepCopyTable(aSaneValue);
 			end
 		else
-			if (aValue == nil or type(aValue) ~= type(aSaneValue)) then
-				if ((type(aSaneValue) ~= "boolean" or (aValue ~= 1 and aValue ~= 0 and aValue ~= nil))
-				and (type(aSaneValue) ~= "number" or (aSaneValue ~= 1 and aSaneValue ~= 0))) then
+			if aValue == nil or type(aValue) ~= type(aSaneValue) then
+				if (type(aSaneValue) ~= "boolean" or (aValue ~= 1 and aValue ~= 0 and aValue ~= nil))
+				and (type(aSaneValue) ~= "number" or (aSaneValue ~= 1 and aSaneValue ~= 0)) then
 
 					if (aValue ~= nil) then
 						tRepaired = tRepaired + 1;
@@ -80,7 +80,7 @@ local function _VUHDO_ensureSanity(aName, aValue, aSaneValue)
 				end
 			end
 
-			if (aValue ~= nil and "string" == type(aValue)) then
+			if aValue ~= nil and "string" == type(aValue) then
 				aValue = strtrim(aValue);
 			end
 
@@ -100,7 +100,7 @@ function VUHDO_ensureSanity(aName, aValue, aSaneValue)
 	local tSaneValue = VUHDO_decompressIfCompressed(aSaneValue);
 	tRepairedArray = _VUHDO_ensureSanity(aName, aValue, tSaneValue);
 
-	if (tCreated + tRepaired > 0) then
+	if tCreated + tRepaired > 0 then
 		VUHDO_Msg("auto model sanity: " .. aName .. ": created " .. tCreated .. ", repaired " .. tRepaired .. " values.");
 	end
 
@@ -1149,6 +1149,10 @@ local VUHDO_DEFAULT_PANEL_SETUP = {
 			["TR"] = 0.35, ["TG"] = 0.52, ["TB"] = 1, ["TO"] = 1,
 			["useText"] = false, ["useBackground"] = true,	["useOpacity"] = true,
 		},
+		["DIRECTION"] = {
+			["R"] = 1, ["G"] = 0.4, ["B"] = 0.4, ["O"] = 1,
+			["useBackground"] = true,
+		},
 		["EMERGENCY"] = VUHDO_makeFullColor(1, 0, 0, 1,   1, 0.82, 0, 1),
 		["NO_EMERGENCY"] = VUHDO_makeFullColor(0, 0, 0.4, 1,   1, 0.82, 0, 1),
 		["OFFLINE"] = VUHDO_makeFullColor(0.298, 0.298, 0.298, 0.21,   0.576, 0.576, 0.576, 0.58),
@@ -1371,7 +1375,7 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 		["barTexture"] = "VuhDo - Polished Wood",
 
 		["BACK"] = {
-			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.4,
+			["R"] = 0, ["G"] = 0, ["B"] = 0, ["O"] = 0.35,
 			["useBackground"] = true, ["useOpacity"] = true,
 		},
 
@@ -1449,23 +1453,23 @@ local VUHDO_DEFAULT_PER_PANEL_SETUP = {
 function VUHDO_loadDefaultPanelSetup()
 	local tAktPanel;
 
-	if (VUHDO_PANEL_SETUP == nil) then
+	if not VUHDO_PANEL_SETUP then
 		VUHDO_PANEL_SETUP = VUHDO_decompressOrCopy(VUHDO_DEFAULT_PANEL_SETUP);
 	end
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
-		if (VUHDO_PANEL_SETUP[tPanelNum] == nil) then
+		if not VUHDO_PANEL_SETUP[tPanelNum] then
 			VUHDO_PANEL_SETUP[tPanelNum] = VUHDO_decompressOrCopy(VUHDO_DEFAULT_PER_PANEL_SETUP);
 
 			tAktPanel = VUHDO_PANEL_SETUP[tPanelNum];
 			tAktPanel["MODEL"]["groups"] = VUHDO_DEFAULT_MODELS[tPanelNum];
 
-			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
+			if VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_PRIVATE_TANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
 				tAktPanel["SCALING"]["showTarget"] = true;
 				tAktPanel["SCALING"]["ommitEmptyWhenStructured"] = false;
 			end
 
-			if (GetLocale() == "zhCN" or GetLocale() == "zhTW" or GetLocale() == "koKR") then
+			if GetLocale() == "zhCN" or GetLocale() == "zhTW" or GetLocale() == "koKR" then
 				tAktPanel["PANEL_COLOR"]["TEXT"]["font"] = "";
 				tAktPanel["PANEL_COLOR"]["HEADER"]["font"] = "";
 			else
@@ -1473,18 +1477,18 @@ function VUHDO_loadDefaultPanelSetup()
 				tAktPanel["PANEL_COLOR"]["HEADER"]["font"] = VUHDO_LibSharedMedia:Fetch('font', "Emblem");
 			end
 
-			if (VUHDO_DEFAULT_MODELS[tPanelNum] ~= nil and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1]) then
+			if VUHDO_DEFAULT_MODELS[tPanelNum] and VUHDO_ID_MAINTANKS == VUHDO_DEFAULT_MODELS[tPanelNum][1] then
 				tAktPanel["PANEL_COLOR"]["TEXT"]["textSize"] = 12;
 			end
 		end
 
-		if (VUHDO_PANEL_SETUP[tPanelNum]["PANEL_COLOR"]["TEXT"]["USE_SHADOW"] == nil) then
+		if not VUHDO_PANEL_SETUP[tPanelNum]["PANEL_COLOR"]["TEXT"]["USE_SHADOW"] then
 			VUHDO_PANEL_SETUP[tPanelNum]["PANEL_COLOR"]["TEXT"]["USE_SHADOW"] = not VUHDO_PANEL_SETUP[tPanelNum]["PANEL_COLOR"]["TEXT"]["outline"];
 		end
 	end
 
 	for tPanelNum = 1, 10 do -- VUHDO_MAX_PANELS
-		if (VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] == nil) then
+		if not VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] then
 			VUHDO_PANEL_SETUP[tPanelNum]["POSITION"] = {
 				["x"] = 100 + 30 * tPanelNum,
 				["y"] = 668 - 30 * tPanelNum,
@@ -1576,7 +1580,7 @@ VUHDO_DEFAULT_USER_CLASS_COLORS = {
 
 --
 function VUHDO_initClassColors()
-	if (VUHDO_USER_CLASS_COLORS == nil) then
+	if not VUHDO_USER_CLASS_COLORS then
 		VUHDO_USER_CLASS_COLORS = VUHDO_decompressOrCopy(VUHDO_DEFAULT_USER_CLASS_COLORS);
 	end
 	VUHDO_USER_CLASS_COLORS = VUHDO_ensureSanity("VUHDO_USER_CLASS_COLORS", VUHDO_USER_CLASS_COLORS, VUHDO_DEFAULT_USER_CLASS_COLORS);
@@ -1588,7 +1592,7 @@ end
 --
 local function VUHDO_getFirstFreeBuffOrder()
 	for tCnt = 1, 10000 do
-		if (VUHDO_tableGetKeyFromValue(VUHDO_BUFF_ORDER, tCnt) == nil) then
+		if not VUHDO_tableGetKeyFromValue(VUHDO_BUFF_ORDER, tCnt) then
 			return tCnt;
 		end
 	end
@@ -1601,19 +1605,19 @@ end
 --
 local function VUHDO_fixBuffOrder()
 	local _, tPlayerClass = UnitClass("player");
-	local tAllBuffs = VUHDO_CLASS_BUFFS[tPlayerClass] or { };
+	local tAllBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];
 	local tSortArray = {};
 
 	-- Order ohne buff?
 	for tCategName, _ in pairs(VUHDO_BUFF_ORDER) do
-		if (tAllBuffs[tCategName] == nil) then
+		if not tAllBuffs[tCategName] then
 			VUHDO_BUFF_ORDER[tCategName] = nil;
 		end
 	end
 
 	-- Buffs ohne order?
 	for tCategName, _ in pairs(tAllBuffs) do
-		if (VUHDO_BUFF_ORDER[tCategName] == nil) then
+		if not VUHDO_BUFF_ORDER[tCategName] then
 			VUHDO_BUFF_ORDER[tCategName] = VUHDO_getFirstFreeBuffOrder();
 		end
 
@@ -1632,7 +1636,7 @@ end
 
 --
 function VUHDO_initBuffSettings()
-	if (VUHDO_BUFF_SETTINGS["CONFIG"] == nil) then
+	if not VUHDO_BUFF_SETTINGS["CONFIG"] then
 		VUHDO_BUFF_SETTINGS["CONFIG"] = VUHDO_decompressOrCopy(VUHDO_DEFAULT_BUFF_CONFIG);
 	end
 
@@ -1640,25 +1644,22 @@ function VUHDO_initBuffSettings()
 	VUHDO_DEFAULT_BUFF_CONFIG = VUHDO_compressTable(VUHDO_DEFAULT_BUFF_CONFIG);
 
 	local _, tPlayerClass = UnitClass("player");
-	local tAllClassBuffs = VUHDO_CLASS_BUFFS[tPlayerClass];
-	if (tAllClassBuffs ~= nil) then
-		for tCategSpec, _ in pairs(tAllClassBuffs) do
+	for tCategSpec, _ in pairs(VUHDO_CLASS_BUFFS[tPlayerClass]) do
 
-			if (VUHDO_BUFF_SETTINGS[tCategSpec] == nil) then
-				VUHDO_BUFF_SETTINGS[tCategSpec] = {
-					["enabled"] = false,
-					["missingColor"] = {
-						["show"] = false,
-						["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-						["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-						["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-					}
-				};
-			end
+		if not VUHDO_BUFF_SETTINGS[tCategSpec] then
+			VUHDO_BUFF_SETTINGS[tCategSpec] = {
+				["enabled"] = false,
+				["missingColor"] = {
+					["show"] = false,
+					["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
+					["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
+					["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
+				}
+			};
+		end
 
-			if (VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] == nil) then
-				VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] = { [VUHDO_ID_ALL] = true };
-			end
+		if not VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] then
+			VUHDO_BUFF_SETTINGS[tCategSpec]["filter"] = { [VUHDO_ID_ALL] = true };
 		end
 	end
 

@@ -1,0 +1,17 @@
+------------------------------------------------------------------------
+r61 | moncai | 2013-05-25 20:14:02 +0000 (Sat, 25 May 2013) | 1 line
+Changed paths:
+   A /tags/v5.3.0 (from /trunk:60)
+
+Tagging as v5.3.0
+------------------------------------------------------------------------
+r60 | moncai | 2013-05-25 20:13:18 +0000 (Sat, 25 May 2013) | 1 line
+Changed paths:
+   M /trunk/Configure.lua
+   M /trunk/Core.lua
+   M /trunk/Libs/ChatThrottleLib.lua
+   M /trunk/MoncaiQuestTracker.toc
+   M /trunk/WatchFrame.lua
+
+5.3 update
+------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 -- Moncaí's Quest Tracker
 -- Author: Moncaí
 -- Copyright (C) 2006-2013 moncai AT mgtx DOT net, all rights reserved.
--- Date: $Date: 2013-01-22 19:33:10 +0000 (Tue, 22 Jan 2013) $, $Rev: 56 $
+-- Date: $Date: 2013-05-25 20:13:18 +0000 (Sat, 25 May 2013) $, $Rev: 60 $
 --------------------------------------------------------------------------------------------------------
 local MQT = LibStub("AceAddon-3.0"):NewAddon("MoncaiQuestTracker", "AceConsole-3.0");
 _G["MQT"] = MQT;
@@ -144,19 +144,32 @@ local BuddyList = {
 		return false
 	end,
 
-	insertQuestPart = function(qtable, buddy, questID, level, lbidx, lbtext)	
+	insertQuestPart = function(qtable, buddy, questID, level, lbidx, lbtext, objtype, finished)	
 		local quest = qtable[questID] or {}
 		quest.level = level
 		local lb = quest[lbidx] or {}
 		lb.leaderboard = lbtext
 		lb.nr = string.gmatch(lbtext, MQT.MATCH1)() or 0 --NEEDS REVIEW!!!! which format to check for??
-
+		lb.finished = finished
+		lb.objtype = objtype
+		
+		if MQT.db.profile.imagimode and (buddy == MQT.player) then
+			lb.nr = lb.nr - random(0,1) -- Let imaginary buddy lag behind by one
+			if random(0,5) == 1 then
+				lb.finished = "1"
+			else
+				lb.finished = ""
+			end
+		end
+		
 		quest[lbidx] = lb
 		qtable[questID] = quest
 	end,
 	
-	receiveQuestPart = function(self, buddy, questID, level, lbidx, lbtext)
---~ 		Print(("receiveQuestPart %s %s %s %s %s"):format(buddy, questID, level, lbidx, lbtext), 1, 0, 1)
+	receiveQuestPart = function(self, buddy, questID, level, lbidx, lbtext, objtype, finished)
+--~ 		if MQT.db.profile.debug then
+--~ 			Print(("receiveQuestPart %s %s %s %s %s %s %s"):format(buddy, questID, level, lbidx, lbtext, objtype or "?", finished or "?"), 1, 0, 1)
+--~ 		end
 		
 		local bnr = self.buddies[buddy] or self:addBuddy(buddy)
 		if not bnr then
@@ -166,7 +179,7 @@ local BuddyList = {
 		lbidx = 0 + lbidx
 		questID = 0 + questID
 		
-		self.insertQuestPart(self.buddies[bnr].buffer, buddy, questID, level, lbidx, lbtext)
+		self.insertQuestPart(self.buddies[bnr].buffer, buddy, questID, level, lbidx, lbtext,  objtype, finished)
 		
 	end,
 
@@ -189,8 +202,36 @@ local BuddyList = {
 				str = str .. lb[i]
 			end
 		end
---~ 		if MQT.db.profile.debug then Print(("getBuddyWatch(%s, %s) => '%s'"):format(questID or "nil", lbidx or -1, str or "-"), 1, 0, 0) end
+--~  		if MQT.db.profile.debug then Print(("getBuddyWatch(%s, %s) => '%s'"):format(questID or "nil", lbidx or -1, str or "-"), 1, 0, 0) end
 		return str
+	end,
+
+	getBuddyFinished = function(self, questID, lbidx)
+		local q = self.questlb[questID] or {}
+		local lb = q[lbidx] or {}
+		local finished = true;
+		for i = 1, MQT.MAX_PARTY, 1 do
+			if self.buddies[i] and self.buddies[i].questlog and self.buddies[i].questlog[questID] and self.buddies[i].questlog[questID][lbidx] then
+				finished = finished and (self.buddies[i].questlog[questID][lbidx].finished == "1")
+			end
+		end
+--~  		if MQT.db.profile.debug then Print(("getBuddyWatch(%s, %s) => '%s'"):format(questID or "nil", lbidx or -1, str or "-"), 1, 0, 0) end
+		return finished
+	end,
+	
+	
+	getBuddyComplete = function(self, questID)
+		local q = self.questlb[questID] or {}
+		local lb = q[lbidx] or {}
+		local isComplete = true;
+		for i = 1, MQT.MAX_PARTY, 1 do
+			if self.buddies[i] and self.buddies[i].questlog and self.buddies[i].questlog[questID] then
+				--Print("Checking...")
+				isComplete = isComplete and (self.buddies[i].questlog[questID].isComplete ~= "")
+			end
+		end
+		--if isComplete then Print("complete") end
+		return isComplete
 	end,
 	
 	-- packet = wrap(questID, level, suggestedGroup, title, isComplete, isDaily)
@@ -201,6 +242,15 @@ local BuddyList = {
 		quest.title = title
 		quest.isComplete = isComplete
 		quest.isDaily = isDaily
+
+		if MQT.db.profile.imagimode and (buddy == MQT.player) then
+			if random(0,1) == 1 then
+				quest.isComplete = "1"
+			else
+				quest.isComplete = "" -- Let imaginary buddy lag behind by one
+			end
+		end
+
 		qtable[questID] = quest		
 	end,
 	
@@ -215,7 +265,7 @@ local BuddyList = {
 		self.insertQuestInfo(self.buddies[bnr].buffer, buddy, questID, level, suggestedGroup, title, isComplete, isDaily)
 	end,
 	
-	updateQuestPart = function(self, buddy, questID, level, lbidx, lbtext)
+	updateQuestPart = function(self, buddy, questID, level, lbidx, lbtext, objtype, finished)
 		local bnr = self.buddies[buddy] or self:addBuddy(buddy)
 		if not bnr then
 			if MQT.db.profile.verbosebuddy then Print(L["Could not add buddy, buffer full"]) end
@@ -224,8 +274,8 @@ local BuddyList = {
 		lbidx = 0 + lbidx
 		questID = 0 + questID
 		
-		self.insertQuestPart(self.buddies[bnr].buffer, buddy, questID, level, lbidx, lbtext)
-		self.insertQuestPart(self.buddies[bnr].questlog, buddy, questID, level, lbidx, lbtext)
+		self.insertQuestPart(self.buddies[bnr].buffer, buddy, questID, level, lbidx, lbtext, objtype, finished)
+		self.insertQuestPart(self.buddies[bnr].questlog, buddy, questID, level, lbidx, lbtext, objtype, finished)
 		self:updateBuddyWatch( bnr, questID, lbidx, string.gmatch(lbtext, MQT.MATCH1)() )
 	end,
 	
@@ -251,7 +301,9 @@ local BuddyList = {
 		local name
 		local list = {}
 		
-		--Print("BuddyCheck!");
+		if MQT.db.profile.debug then 
+			Print("BuddyCheck!")
+		end
 		-- get a list of all buddies
 		for i = 1, MQT.MAX_PARTY, 1 do
 			local name = UnitName("party" .. i)
@@ -259,7 +311,11 @@ local BuddyList = {
 				list[name] = i
 			end
 		end
-
+		if MQT.db.profile.imagimode then
+			local name = UnitName("player")
+			list[name] = #list +1
+		end
+		
 		-- remove buddies that are no longer around
 		for i = 1, MQT.MAX_PARTY, 1 do
 			if self.buddies[i] and not list[self.buddies[i].name] then
@@ -292,12 +348,29 @@ MQT.BuddyList = BuddyList
 -- }
 
 function MQT.Sense(destination)
-	return (GetNumSubgroupMembers() > 0)
+	return MQT.db.profile.imagimode or (GetNumSubgroupMembers(LE_PARTY_CATEGORY_HOME) > 0)
+end
+
+function MQT.PrefixCheck(prefix)
+	-- Fix communications
+	if not IsAddonMessagePrefixRegistered( prefix ) then
+		if not RegisterAddonMessagePrefix( prefix ) then
+			Print("Unable to register prefix, communications may suffer", 1,0,0)
+		elseif MQT.db.profile.debug then 
+			Print("MQT Successfully registered prefix ".. prefix, 1,0,1)
+		end
+	end
 end
 
 function MQT.SafeAddonMessage(mtype, prefix, message, destination)
+	MQT.PrefixCheck(prefix)
+	
 	if MQT.Sense(destination) then
+--~ 		if MQT.db.profile.debug then Print("MQT sending...".. prefix, 1,1,0) end
 		ChatThrottleLib:SendAddonMessage(mtype, prefix, message, destination)
+		if MQT.db.profile.imagimode then
+			MQT:Event("CHAT_MSG_ADDON", prefix, message, destination, UnitName("player"))
+		end
 	end
 end
 
@@ -320,14 +393,15 @@ function MQT.Communicate()
 			MQT.SafeAddonMessage("BULK", MQT.NFO_PREFIX, packet, DESTINATION);
 
 			for j = 1, GetNumQuestLeaderBoards(i), 1 do
-				packet = wrap(questID, level, j, GetQuestLogLeaderBoard(j,i) or "")
+				local lbstr, objtype, finished = GetQuestLogLeaderBoard(j,i)
+				packet = wrap(questID, level, j, lbstr or "", objtype or "", finished or "")				
 				MQT.SafeAddonMessage("BULK", MQT.QST_PREFIX, packet, DESTINATION);
 			end
 		end
 		i = i + 1;
 		title, level, _, suggestedGroup, isHeader, _, isComplete, isDaily, questID, displayQuestID = GetQuestLogTitle(i)
 	end
-	MQT.SafeAddonMessage("BULK", MQT.QST_PREFIX, wrap(0,0,0,0, MQT.CMD_UPDATE), DESTINATION); 
+	MQT.SafeAddonMessage("BULK", MQT.QST_PREFIX, wrap(0,0,0,0,0,0, MQT.CMD_UPDATE), DESTINATION); 
 end
 
 local FREQ = 60
@@ -337,6 +411,7 @@ local speedup = false;
 
 -- Speed up the notification
 function MQT.Notify()
+	if MQT.db.profile.debug then Print("MQT Notify") end
 	speedup = true;
 end
 
@@ -355,7 +430,9 @@ function MQT.Update(self, elapsed)
 end
 
 function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
-	local player = UnitName("player");
+	MQT.player = UnitName("player");
+	local player = MQT.player
+	
 	local message = arg1;
 	
 	if ( event == "UI_INFO_MESSAGE" ) then
@@ -423,8 +500,14 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 			Print(message);
 		end
 
+	elseif ( event ==  "QUEST_ACCEPTED" ) then
+		-- ship quest details off
+		-- TODO: ship only this quest
+		MQT.Notify();		
+	
 	elseif ( event == "QUEST_LOG_UPDATE" or event == "UPDATE_FACTION" or event == "UNIT_QUEST_LOG_CHANGED") then
 		-- currently not registered
+		if MQT.db.profile.debug then Print("MQT General Log update", 0, 1, 0) end
 		MQT.Notify();
 		
 	elseif ( event == "VARIABLES_LOADED" ) then
@@ -441,7 +524,7 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 			MQT.Notify()
 		end
 		
-	elseif ( event == "CHAT_MSG_ADDON" and (arg4 ~= player or MQT.db.profile.debug) ) then
+	elseif ( event == "CHAT_MSG_ADDON" and (arg4 ~= player or MQT.db.profile.debug or MQT.db.profile.imagimode) ) then
 		
 		if arg1 == MQT.MSG_PREFIX then
 			if MQT.db.profile.verbosechat then Print(string.format("%s %s", arg4, arg2), MQT.MSG_C.r, MQT.MSG_C.g, MQT.MSG_C.b) end
@@ -452,8 +535,8 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 			
 		elseif arg1 == MQT.QST_PREFIX then
 			-- receive quest message
-			
-			local title, level, idx, str, cmd = unwrap(arg2);
+			-- if MQT.db.profile.debug then Print("QST: ".. arg2) end
+			local title, level, idx, str, objtype, finished, cmd = unwrap(arg2);
 			-- convert idx to number
 			idx = 0 + idx;
 
@@ -461,7 +544,7 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 				--Print("Piggyback Update received from " .. arg4)
 				
 				if (title ~= "0") then
-					BuddyList:updateQuestPart(arg4, title, level, idx, str)
+					BuddyList:updateQuestPart(arg4, title, level, idx, str, objtype, finished)
 				--else
 				--	Print("Gots a naught packet m'lord, from " .. arg4)
 				else
@@ -469,7 +552,7 @@ function MQT.Event(this, event, arg1, arg2, arg3, arg4, ...)
 				end
 				WatchFrame_Update()
 			else
-				BuddyList:receiveQuestPart(arg4, title, level, idx, str)
+				BuddyList:receiveQuestPart(arg4, title, level, idx, str, objtype, finished)
 			end
 			
 		elseif arg1 == MQT.CMD_PREFIX then
@@ -506,7 +589,9 @@ function MQT.OnInitialize(self)
 	f:RegisterEvent("CHAT_MSG_ADDON");
 	f:RegisterEvent("PARTY_MEMBERS_CHANGED");
 	f:RegisterEvent("PLAYER_ENTERING_WORLD");
-	
+	f:RegisterEvent("QUEST_ACCEPTED")
+	f:RegisterEvent("UNIT_QUEST_LOG_CHANGED")
+		
 	MQTW.frame = f;
 	
 	
@@ -649,7 +734,10 @@ end;
 
 local fragcount = 0;
 MQT.Refresh = function(self) 
+	BuddyList:buddyCheck()
+	MQT.Notify()
 	MQT.OnToggle(self)
+	
 	fragcount = fragcount + 1
 	if MQT.db.profile.debug then Print("Aaaaah, refreshing for the " .. fragcount .. "th time!") end --DEBUG
 	
@@ -673,6 +761,12 @@ function MQT.OnEnable(self)
 	if not MQTC.QList then
 		MQTC.Qlist = {}
 	end
+	
+	MQT.PrefixCheck(MQT.MSG_PREFIX)
+	MQT.PrefixCheck(MQT.QST_PREFIX)
+	MQT.PrefixCheck(MQT.CMD_PREFIX)
+	MQT.PrefixCheck(MQT.LRG_PREFIX)
+	MQT.PrefixCheck(MQT.NFO_PREFIX)
 end;
 
 function MQT.OnDisable(self)

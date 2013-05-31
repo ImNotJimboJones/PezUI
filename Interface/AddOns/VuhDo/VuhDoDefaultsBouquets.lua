@@ -483,48 +483,6 @@ VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET = {
 
 
 
---[[VUHDO_DEFAULT_WRACK_BOUQUET = {
-	[VUHDO_I18N_DEF_WRACK] = {
-		{
-			["name"] = "DURATION_ABOVE",
-			["mine"] = true, ["icon"] = 9,
-			["color"] = {
-				["R"] = 1, ["G"] = 0, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 0, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
-			["custom"] = { [1] = 10, ["radio"] = 2, ["bright"] = 1 },
-		},
-		{
-			["name"] = "DURATION_ABOVE",
-			["mine"] = true, ["icon"] = 8,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 0, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 0, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
-			["custom"] = { [1] = 8, ["radio"] = 2, ["bright"] = 1 },
-		},
-
-		{
-			["name"] = GetSpellInfo(89421), -- "Wrack",
-			["mine"] = true, ["others"] = true,	["icon"] = 1, ["alive"] = true,
-			["color"] = {
-				["R"] = 1, ["G"] = 1, ["B"] = 1, ["O"] = 1,
-				["TR"] = 1, ["TG"] = 1, ["TB"] = 1, ["TO"] = 1,
-				["useText"] = true, ["useBackground"] = true, ["useOpacity"] = true,
-				["isManuallySet"] = true,
-			},
-			["custom"] = { [1] = 1, ["radio"] = 1,	["bright"] = 1.0 },
-		},
-
-	},
-}
-]]
-
-
 VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET = {
 	[VUHDO_I18N_DEF_TANK_CDS_EXTENDED] = {
 	},
@@ -694,6 +652,11 @@ VUHDO_DEFAULT_INDICATOR_CONFIG = {
 			["vertical"] = true,
 			["turnAxis"] = false,
 		},
+		["HOT_BARS"] = {
+			["invertGrowth"] = false,
+			["vertical"] = false,
+			["turnAxis"] = false,
+		}
 	},
 
 
@@ -825,9 +788,7 @@ end
 local function VUHDO_createBouquetItem(anEvent, aColor)
 	local tItem = VUHDO_deepCopyTable(VUHDO_SANE_BOUQUET_ITEM);
 	tItem["name"] = anEvent;
-	if (aColor ~= nil) then
-		tItem["color"] = VUHDO_deepCopyColor(aColor);
-	end
+	if aColor then tItem["color"] = VUHDO_deepCopyColor(aColor); end
 	tItem["color"]["isManuallySet"] = true;
 	return tItem;
 end
@@ -848,7 +809,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 
 	-- Out of Range
 	tColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"];
-	if (tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"]) then
+	if tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"] then
 		tItem = VUHDO_createBouquetItem("NO_RANGE", tColor);
 		tBouquet[#tBouquet + 1] = tItem;
 	end
@@ -861,9 +822,8 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 	tItem = VUHDO_createBouquetItem("DEAD", VUHDO_PANEL_SETUP["BAR_COLORS"]["DEAD"]);
 	tBouquet[#tBouquet + 1] = tItem;
 
-
 	-- Overheal Erheller
-	if (VUHDO_CONFIG["SHOW_OVERHEAL"]) then
+	if VUHDO_CONFIG["SHOW_OVERHEAL"] then
 		tItem = VUHDO_createBouquetItem("OVERHEAL_HIGHLIGHT", nil);
 		tBouquet[#tBouquet + 1] = tItem;
 	end
@@ -872,24 +832,22 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 	tItem = VUHDO_createBouquetItem("DEBUFF_BAR_COLOR", nil);
 	tBouquet[#tBouquet + 1] = tItem;
 
-
 	-- Raid Icon color
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"]) then
+	if VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] then
 		tItem = VUHDO_createBouquetItem("RAID_ICON_COLOR", nil);
 		tBouquet[#tBouquet + 1] = tItem;
 	end
 
-	if (VUHDO_CONFIG["MODE"] == VUHDO_MODE_NEUTRAL) then
-
+	if VUHDO_CONFIG["MODE"] == VUHDO_MODE_NEUTRAL then
 		-- Irrelevant
-		if (VUHDO_CONFIG["EMERGENCY_TRIGGER"] < 100) then
+		if VUHDO_CONFIG["EMERGENCY_TRIGGER"] < 100 then
 			tItem = VUHDO_createBouquetItem("HEALTH_ABOVE", VUHDO_PANEL_SETUP["BAR_COLORS"]["IRRELEVANT"]);
 			tItem["custom"][1] = VUHDO_CONFIG["EMERGENCY_TRIGGER"];
 			tBouquet[#tBouquet + 1] = tItem;
 		end
 
 		-- Health Bar Texts
-		if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"]) then
+		if VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"] then
 			tItem = VUHDO_createBouquetItem("CLASS_COLOR", nil);
 			tItem["color"]["useBackground"] = false;
 			tItem["color"]["useOpacity"] = false;
@@ -903,7 +861,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 		end
 
 		-- Health Bar
-		if (aType == 0) then
+		if aType == 0 then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["GOOD"]);
 			tItem["color"]["useOpacity"] = true;
 			tItem["custom"]["grad_med"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["FAIR"]);
@@ -911,7 +869,8 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 			tItem["custom"]["grad_low"] = VUHDO_deepCopyColor(VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["LOW"]);
 			tItem["custom"]["grad_low"]["useOpacity"] = true;
 			tItem["custom"]["radio"] = 3; -- gradient
-		elseif (aType == 1) then
+
+		elseif aType == 1 then
 			tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["PANEL_COLOR"]["BARS"]);
 			tItem["custom"]["radio"] = 2; -- class color
 		else -- Solid == 2, Chimaeron == 3
@@ -923,7 +882,7 @@ local function _VUHDO_buildGenericHealthBarBouquet(aType, aName)
 		tBouquet[#tBouquet + 1] = tItem;
 
 	else
-		if (VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"]) then
+		if VUHDO_PANEL_SETUP["PANEL_COLOR"]["classColorsName"] then
 			tItem = VUHDO_createBouquetItem("CLASS_COLOR", nil);
 			tItem["color"]["useBackground"] = false;
 			tItem["color"]["useOpacity"] = false;
@@ -966,7 +925,7 @@ function VUHDO_buildGenericTargetHealthBouquet()
 
 	-- Out of Range
 	tColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"];
-	if (tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"]) then
+	if tColor["useText"] or tColor["useBackground"] or tColor["useOpacity"] then
 		tItem = VUHDO_createBouquetItem("NO_RANGE", tColor);
 		tBouquet[#tBouquet + 1] = tItem;
 	end
@@ -980,44 +939,47 @@ function VUHDO_buildGenericTargetHealthBouquet()
 	tBouquet[#tBouquet + 1] = tItem;
 
 	-- Raid Icon color
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"]) then
+	if VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] and VUHDO_PANEL_SETUP["BAR_COLORS"]["RAID_ICONS"]["enable"] then
 		tItem = VUHDO_createBouquetItem("RAID_ICON_COLOR", nil);
 		tBouquet[#tBouquet + 1] = tItem;
 	end
 
 	-- 1=enemy, 2=solid, 3=class color, 4=gradient
 	-- Health Bar Texts
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 1) then
+	if VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 1 then
 		tItem = VUHDO_createBouquetItem("ENEMY_STATE", nil);
 		tItem["color"]["useBackground"] = false;
 		tItem["color"]["useOpacity"] = false;
 		tBouquet[#tBouquet + 1] = tItem;
-	elseif (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 2) then
+	elseif VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 2 then
 		tTextColor = VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"];
 		tItem = VUHDO_createBouquetItem("ALWAYS", tTextColor);
 		tItem["color"]["useBackground"] = false;
 		tItem["color"]["useOpacity"] = false;
 		tBouquet[#tBouquet + 1] = tItem;
-	elseif (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 3) then
+	elseif VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeText"] == 3 then
 		tItem = VUHDO_createBouquetItem("CLASS_COLOR", nil);
 		tItem["color"]["useBackground"] = false;
 		tItem["color"]["useOpacity"] = false;
 		tBouquet[#tBouquet + 1] = tItem;
 	end
 
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 1) then
+	if VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 1 then
 		tItem = VUHDO_createBouquetItem("ENEMY_STATE", nil);
 		tItem["custom"]["radio"] = 1; -- solid
 		tBouquet[#tBouquet + 1] = tItem;
 
 		tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]);
 		tItem["custom"]["radio"] = 1; -- solid
-	elseif (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 2) then
+
+	elseif VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 2 then
 		tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]);
 		tItem["custom"]["radio"] = 1; -- solid
-	elseif (VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 3) then
+
+	elseif VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]["modeBack"] == 3 then
 		tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["TARGET"]);
 		tItem["custom"]["radio"] = 2; -- class color
+
 	else
 		tItem = VUHDO_createBouquetItem("STATUS_HEALTH", VUHDO_PANEL_SETUP["BAR_COLORS"]["LIFE_LEFT"]["GOOD"]);
 		tItem["color"]["useOpacity"] = true;
@@ -1063,8 +1025,8 @@ local function VUHDO_ensureBouquetItemSanity(aName, anIndex)
 	);
 
 	tItem = VUHDO_BOUQUETS["STORED"][aName][anIndex];
-	if (tItem["custom"]["radio"] == 3) then
-		if (tItem["custom"]["grad_med"] == nil) then
+	if tItem["custom"]["radio"] == 3 then
+		if tItem["custom"]["grad_med"] == nil then
 			tItem["custom"]["grad_med"]  = {
 				["R"] = 0.6, ["G"] = 0.6, ["B"] = 0.6, ["O"] = 1,
 				["TR"] = 0.6, ["TG"] = 0.6, ["TB"] = 0.6, ["TO"] = 1,
@@ -1072,7 +1034,7 @@ local function VUHDO_ensureBouquetItemSanity(aName, anIndex)
 			};
 		end
 
-		if (tItem["custom"]["grad_low"] == nil) then
+		if tItem["custom"]["grad_low"] == nil then
 			tItem["custom"]["grad_low"] = {
 				["R"] = 0.3, ["G"] = 0.3, ["B"] = 0.3, ["O"] = 1,
 				["TR"] = 0.3, ["TG"] = 0.3, ["TB"] = 0.3, ["TO"] = 1,
@@ -1081,7 +1043,7 @@ local function VUHDO_ensureBouquetItemSanity(aName, anIndex)
 		end
 
 		tSpecial = VUHDO_BOUQUET_BUFFS_SPECIAL[tItem["name"]]; -- Statusbalken haben keine Textfarbe
-		if (tSpecial ~= nil and tSpecial["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR) then
+		if tSpecial and tSpecial["custom_type"] == VUHDO_BOUQUET_CUSTOM_TYPE_STATUSBAR then
 			tItem["color"].TR, tItem["color"].TG, tItem["color"].TB, tItem["color"].useText = nil, nil, nil, false;
 			tItem["custom"]["grad_med"].TR, tItem["custom"]["grad_med"].TG, tItem["custom"]["grad_med"].TB, tItem["custom"]["grad_med"].useText = nil, nil, nil, false;
 			tItem["custom"]["grad_low"].TR, tItem["custom"]["grad_low"].TG, tItem["custom"]["grad_low"].TB, tItem["custom"]["grad_low"].useText = nil, nil, nil, false;
@@ -1248,68 +1210,60 @@ local tPvPFlags = {
 
 --
 function VUHDO_loadDefaultBouquets()
-	if (VUHDO_BOUQUETS == nil) then
-		VUHDO_BOUQUETS = VUHDO_decompressOrCopy(VUHDO_DEFAULT_BOUQUETS);
-	end
+	if not VUHDO_BOUQUETS then VUHDO_BOUQUETS = VUHDO_decompressOrCopy(VUHDO_DEFAULT_BOUQUETS); end
 	VUHDO_DEFAULT_BOUQUETS = VUHDO_compressTable(VUHDO_DEFAULT_BOUQUETS);
 
-	if (VUHDO_BOUQUETS["VERSION"] < 2) then
+	if VUHDO_BOUQUETS["VERSION"] < 2 then
 		VUHDO_BOUQUETS["VERSION"] = 2;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_BACKGROUND_BOUQUETS);
 	end
 	VUHDO_DEFAULT_BACKGROUND_BOUQUETS = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 3) then
+	if VUHDO_BOUQUETS["VERSION"] < 3 then
 		VUHDO_BOUQUETS["VERSION"] = 3;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ALTERNATE_POWERS_BOUQUET);
 	end
 	VUHDO_DEFAULT_ALTERNATE_POWERS_BOUQUET = nil;
 
 
-	if (VUHDO_BOUQUETS["VERSION"] < 4) then
+	if VUHDO_BOUQUETS["VERSION"] < 4 then
 		VUHDO_BOUQUETS["VERSION"] = 4;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_TANKS_CDS_EXTD_BOUQUET);
 		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_TANK_CDS_EXTENDED, unpack(tTankCdsExtended));
 	end
 	tTankCdsExtended = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 5) then
+	if VUHDO_BOUQUETS["VERSION"] < 5 then
 		VUHDO_BOUQUETS["VERSION"] = 5;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ROLE_ICON_BOUQUET);
 	end
 	VUHDO_DEFAULT_ROLE_ICON_BOUQUET = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 6) then
+	if VUHDO_BOUQUETS["VERSION"] < 6 then
 		VUHDO_BOUQUETS["VERSION"] = 6;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_AOE_ADVICE_BOUQUET);
 	end
 	VUHDO_DEFAULT_AOE_ADVICE_BOUQUET = nil;
 
-	--[[if (VUHDO_BOUQUETS["VERSION"] < 7) then
-		VUHDO_BOUQUETS["VERSION"] = 7;
-		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_WRACK_BOUQUET);
-	end
-	VUHDO_DEFAULT_WRACK_BOUQUET = nil;]]
-
-	if (VUHDO_BOUQUETS["VERSION"] < 8) then
+	if VUHDO_BOUQUETS["VERSION"] < 8 then
 		VUHDO_BOUQUETS["VERSION"] = 8;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET);
 	end
 	VUHDO_DEFAULT_DIRECTION_ARROW_BOUQUET = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 9) then
+	if VUHDO_BOUQUETS["VERSION"] < 9 then
 		VUHDO_BOUQUETS["VERSION"] = 9;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_GRID_BOUQUETS);
 	end
 	VUHDO_DEFAULT_GRID_BOUQUETS = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 10) then
+	if VUHDO_BOUQUETS["VERSION"] < 10 then
 		VUHDO_BOUQUETS["VERSION"] = 10;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_ROLE_COLOR_BOUQUET);
 	end
 	VUHDO_DEFAULT_ROLE_COLOR_BOUQUET = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 11) then
+	if VUHDO_BOUQUETS["VERSION"] < 11 then
 		VUHDO_BOUQUETS["VERSION"] = 11;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_HOLY_POWER_BOUQUET);
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_CHI_BOUQUET);
@@ -1317,14 +1271,14 @@ function VUHDO_loadDefaultBouquets()
 	VUHDO_DEFAULT_CHI_BOUQUET = nil;
 	VUHDO_DEFAULT_HOLY_POWER_BOUQUET = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 12) then
+	if VUHDO_BOUQUETS["VERSION"] < 12 then
 		VUHDO_BOUQUETS["VERSION"] = 12;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_RAID_CDS_BOUQUET);
 		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_RAID_CDS, unpack(tRaidCds));
 	end
 	tRaidCds = nil;
 
-	if (VUHDO_BOUQUETS["VERSION"] < 13) then
+	if VUHDO_BOUQUETS["VERSION"] < 13 then
 		VUHDO_BOUQUETS["VERSION"] = 13;
 		VUHDO_addDefaultBouquet(VUHDO_DEFAULT_PVP_FLAGS_BOUQUET);
 		VUHDO_AddSpellBouquetItem(VUHDO_I18N_DEF_PVP_FLAGS, unpack(tPvPFlags));
@@ -1335,11 +1289,20 @@ function VUHDO_loadDefaultBouquets()
 	VUHDO_buildGenericHealthBarBouquet();
 	VUHDO_buildGenericTargetHealthBouquet();
 
-	if (VUHDO_INDICATOR_CONFIG == nil) then
+	if not VUHDO_INDICATOR_CONFIG then
 		VUHDO_INDICATOR_CONFIG = VUHDO_decompressOrCopy(VUHDO_DEFAULT_INDICATOR_CONFIG);
 
 		VUHDO_INDICATOR_CONFIG["BOUQUETS"]["SWIFTMEND_INDICATOR"]
 			= "DRUID" == VUHDO_PLAYER_CLASS and VUHDO_I18N_DEF_BOUQUET_SWIFTMENDABLE or VUHDO_I18N_DEF_ROLE_ICON;
+	end
+
+	if not VUHDO_INDICATOR_CONFIG["CUSTOM"]["HOT_BARS"] then
+		VUHDO_INDICATOR_CONFIG["CUSTOM"]["HOT_BARS"] = {
+			["invertGrowth"]  = false,
+			["vertical"] = false,
+			["turnAxis"] = (VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["turnAxis"] and not VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"])
+				or (not VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["turnAxis"] and VUHDO_INDICATOR_CONFIG["CUSTOM"]["HEALTH_BAR"]["invertGrowth"])
+		}
 	end
 
 	VUHDO_ensureSanity("VUHDO_INDICATOR_CONFIG", VUHDO_INDICATOR_CONFIG, VUHDO_DEFAULT_INDICATOR_CONFIG);

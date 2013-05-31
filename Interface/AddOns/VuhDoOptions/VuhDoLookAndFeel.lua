@@ -36,11 +36,11 @@ local VUHDO_NORMAL_LABEL_COLOR_DISA = {
 
 --
 function VUHDO_lnfCheckButtonOnLoad(aCheckButton)
-	if (aCheckButton:GetText() ~= nil) then
+	if aCheckButton:GetText() then
 		local tTexts = VUHDO_splitString(aCheckButton:GetText(), "\n");
 		_G[aCheckButton:GetName() .. "Label"]:SetText(tTexts[1]);
 
-		if (tTexts[2] ~= nil and _G[aCheckButton:GetName() .. "Label2"] ~= nil) then
+		if tTexts[2] and _G[aCheckButton:GetName() .. "Label2"] then
 			_G[aCheckButton:GetName() .. "Label2"]:SetText(tTexts[2]);
 		end
 	end
@@ -50,7 +50,7 @@ end
 
 --
 function VUHDO_lnfTabCheckButtonOnLoad(aCheckButton)
-	if (aCheckButton:GetText() ~= nil) then
+	if aCheckButton:GetText() then
 		_G[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetText(aCheckButton:GetText());
 		_G[aCheckButton:GetName() .. "Label"]:SetText(aCheckButton:GetText());
 	end
@@ -72,7 +72,7 @@ function VUHDO_lnfRadioButtonClicked(aCheckButton)
 
 	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
 		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
-		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
+		if tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true) then
 			tButton:SetChecked(aCheckButton == tButton);
 			VUHDO_lnfCheckButtonClicked(tButton);
 		end
@@ -90,10 +90,10 @@ function VUHDO_lnfTabRadioButtonClicked(aCheckButton)
 	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
 		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
 
-		if (tButton:IsObjectType("CheckButton")
+		if tButton:IsObjectType("CheckButton")
 			and strfind(tButton:GetName(), "Radio", 1, true)
 			and tButton["tabPanel"] ~= nil
-			and tButton["tabPanel"] ~= aCheckButton["tabPanel"]) then
+			and tButton["tabPanel"] ~= aCheckButton["tabPanel"] then
 				 	_G[tButton["tabPanel"]]:Hide();
 		end
 	end
@@ -108,8 +108,8 @@ function VUHDO_lnfTabCheckButtonClicked(aCheckButton)
 	local tButton;
 	for tCnt = 1, select("#", aCheckButton:GetParent():GetChildren()) do
 		tButton = select(tCnt, aCheckButton:GetParent():GetChildren());
-		if (tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true)) then
-			if (aCheckButton == tButton) then
+		if tButton:IsObjectType("CheckButton") and strfind(tButton:GetName(), "Radio", 1, true) then
+			if aCheckButton == tButton then
 				tButton:SetChecked(true);
 				VUHDO_lnfTabCheckButtonOnEnter(tButton);
 			else
@@ -129,11 +129,11 @@ function VUHDO_lnfCheckButtonOnEnter(aCheckButton)
 	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Show();
 
-	if (_G[tName .. "Label"] ~= nil) then
+	if _G[tName .. "Label"] then
 		_G[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	end
 
-	if (_G[tName .. "Label2"] ~= nil) then
+	if _G[tName .. "Label2"] then
 		_G[tName .. "Label2"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	end
 end
@@ -145,11 +145,11 @@ function VUHDO_lnfCheckButtonOnLeave(aCheckButton)
 	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Hide();
 
-	if (_G[tName .. "Label"] ~= nil) then
+	if _G[tName .. "Label"] then
 		_G[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	end
 
-	if (_G[tName .. "Label2"] ~= nil) then
+	if _G[tName .. "Label2"] then
 		_G[tName .. "Label2"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	end
 end
@@ -175,7 +175,7 @@ function VUHDO_lnfTabCheckButtonOnEnter(aCheckButton)
 	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Show();
 
-	if (aCheckButton:GetChecked()) then
+	if aCheckButton:GetChecked() then
 		_G[tName .. "TextureCheckMarkLabel"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR));
 	else
 		_G[tName .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_ACTIVE_LABEL_COLOR_DISA));
@@ -189,7 +189,7 @@ function VUHDO_lnfTabCheckButtonOnLeave(aCheckButton)
 	local tName = aCheckButton:GetName();
 	_G[tName .. "TextureActiveSwatch"]:Hide();
 
-	if (aCheckButton:GetChecked()) then
+	if aCheckButton:GetChecked() then
 		_G[aCheckButton:GetName() .. "TextureCheckMarkLabel"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR));
 	else
 		_G[aCheckButton:GetName() .. "Label"]:SetTextColor(VUHDO_textColor(VUHDO_NORMAL_LABEL_COLOR_DISA));
@@ -202,10 +202,10 @@ end
 local tText;
 local tUnit;
 function VUHDO_lnfSliderOnValueChanged(aSlider)
-	if (_G[aSlider:GetName() .. "SliderValue"] ~= nil) then
+	if _G[aSlider:GetName() .. "SliderValue"] then
 		tText = "" .. floor((_G[aSlider:GetName() .. "Slider"]:GetValue() + 0.005) * 100) * 0.01;
 		tUnit = aSlider:GetAttribute("unit");
-		if (not VUHDO_strempty(tUnit)) then
+		if not VUHDO_strempty(tUnit) then
 			tText = tText .. tUnit;
 		end
 
@@ -245,7 +245,7 @@ end
 
 --
 function VUHDO_lnfRadioButtonOnShow(aRadioButton)
-	if (aRadioButton:GetChecked()) then
+	if aRadioButton:GetChecked() then
 		VUHDO_lnfRadioButtonClicked(aRadioButton);
 	end
 end
@@ -277,7 +277,7 @@ function VUHDO_lnfComboItemOnLeave(aComboItem)
 	end
 
 	tComboBox = aComboItem.parentCombo;
-	if (not tComboBox.isMulti) then
+	if not tComboBox["isMulti"] then
 		_G[aComboItem:GetName() .. "Icon"]:SetScale(1);
 		_G[aComboItem:GetName() .. "Icon"]:SetPoint("RIGHT", aComboItem:GetName(), "RIGHT", -6, 0);
 	end
@@ -292,15 +292,13 @@ local function VUHDO_hideAllComponentExtensions(aComponent)
 
 	for tCnt = 1, select("#", tRootPane:GetChildren()) do
 		tSubPanel = select(tCnt, tRootPane:GetChildren());
-
 		for tCnt2 = 1, select("#", tSubPanel:GetChildren()) do
 			tComponent = select(tCnt2, tSubPanel:GetChildren());
-			if (aComponent ~= tComponent) then
-
+			if aComponent ~= tComponent then
 				-- 1. Combo-Flyouts
-				if (strfind(tComponent:GetName(), "Combo")) then
+				if strfind(tComponent:GetName(), "Combo") then
 					tSelectPanel = _G[tComponent:GetName() .. "ScrollPanel"] or _G[tComponent:GetName() .. "SelectPanel"];
-					if (tSelectPanel ~= nil) then
+					if tSelectPanel then
 						tSelectPanel:Hide();
 					end
 				end
@@ -317,10 +315,10 @@ function VUHDO_lnfComboButtonClicked(aButton)
 	local tComboBox = aButton:GetParent();
 	local tSelectPanel = _G[tComboBox:GetName() .. "ScrollPanel"] or _G[tComboBox:GetName() .. "SelectPanel"];
 
-	if (tSelectPanel:IsShown()) then
+	if tSelectPanel:IsShown() then
 		tSelectPanel:Hide();
 	else
-		if (not tComboBox.prohibitCloseExtensions) then
+		if not tComboBox["prohibitCloseExtensions"] then
 			VUHDO_hideAllComponentExtensions(tComboBox);
 		end
 		tSelectPanel:Show();
@@ -330,7 +328,7 @@ end
 
 --
 function VUHDO_lnfComboSelectHide(aComboBox)
-	if (aComboBox.isScrollable) then
+	if aComboBox["isScrollable"] then
 		_G[aComboBox:GetName() .. "ScrollPanel"]:Hide();
 	else
 		_G[aComboBox:GetName() .. "SelectPanel"]:Hide();
@@ -372,7 +370,7 @@ function VUHDO_setComboModel(aComponent, aModel, anEntryTable, aTitle)
 	aComponent:SetAttribute("combo_table", anEntryTable);
 	aComponent:SetAttribute("title", aTitle);
 
-	if (_G[aComponent:GetName() .. "EditBox"] ~= nil) then
+	if _G[aComponent:GetName() .. "EditBox"] then
 		VUHDO_lnfSetModel(_G[aComponent:GetName() .. "EditBox"], aModel);
 	end
 end
@@ -386,14 +384,10 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 	local tComp;
 	local tCurrModel = aComponent:GetAttribute("model");
 
-	if (VUHDO_lnfOnUpdate or tCurrModel == nil) then
-		return;
-	end
+	if VUHDO_lnfOnUpdate or not tCurrModel then return; end
 
 	local tPanel = aComponent:GetParent();
-	if (tPanel == nil) then
-		return;
-	end
+	if not tPanel then return; end
 
 	VUHDO_lnfOnUpdate = true;
 
@@ -401,8 +395,8 @@ local function VUHDO_lnfUpdateAllModelControls(aComponent, aValue)
 		tComp = select(tCnt, tPanel:GetChildren());
 
 		tModel = tComp:GetAttribute("model");
-		if (tModel ~= nil and strfind(tCurrModel, tModel , 1, true)  and aComponent ~= tComp) then
-			if (tComp:IsShown()) then
+		if tModel and strfind(tCurrModel, tModel , 1, true) and aComponent ~= tComp then
+			if tComp:IsShown() then
 				tComp:Hide();
 				tComp:Show();
 			end
@@ -464,7 +458,8 @@ function VUHDO_lnfUpdateVar(aModel, aValue, aPanelNum)
 			if (VUHDO_RESET_SIZES) then
 				resetSizeCalcCaches();
 			end
-			if (strfind(aModel, "VUHDO_OPTIONS_SETTINGS.", 1, true) ~= nil) then
+			if (strfind(aModel, "VUHDO_OPTIONS_SETTINGS.", 1, true) ~= nil or
+				strfind(aModel, "INTERNAL_MODEL_", 1, true) ~= nil) then
 			elseif (tPanelNum ~= nil) then
 				if (strfind(aModel, "TOOLTIP", 1, true) ~= nil) then
 					VUHDO_demoTooltip(aPanelNum);

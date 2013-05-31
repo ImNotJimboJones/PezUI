@@ -56,26 +56,23 @@ local VUHDO_getTexCoordsForCell = VUHDO_getTexCoordsForCell;
 
 --
 local tQuota;
-local tR1, tG2;
+local tR, tG;
 local tInvModi;
 function VUHDO_getRedGreenForDistance(aDistance)
-	tQuota = 2 - (aDistance - 40) * 0.05;
+	tQuota = 4 - 0.05 * aDistance;
 
-	if (tQuota > 2) then
-		tQuota = 2;
-	elseif (tQuota < 0) then
-		tQuota = 0;
-	end
+	if tQuota > 2 then tQuota = 2;
+	elseif tQuota < 0 then tQuota = 0; end
 
-	if (tQuota > 1) then
-		tR1, tG2 = 0, 1;
+	if tQuota > 1 then
+		tR, tG = 0, 1;
 		tQuota = tQuota - 1;
 	else
-		tR1, tG2 = 1, 0;
+		tR, tG = 1, 0;
 	end
 
 	tInvModi = 1 - tQuota;
-	return tInvModi + tR1 * tQuota, tG2 * tInvModi + tQuota;
+	return tInvModi + tR * tQuota, tG * tInvModi + tQuota;
 end
 local VUHDO_getRedGreenForDistance = VUHDO_getRedGreenForDistance;
 
@@ -87,7 +84,7 @@ function VUHDO_shouldDisplayArrow(aUnit)
 	tInfo = VUHDO_RAID[aUnit];
 	return
 	  not UnitIsUnit("player", aUnit)
-		and tInfo ~= nil
+		and tInfo
 		and (not tInfo["range"] or sIsAlways)
 		and (not sIsDeadOnly or tInfo["dead"])
 		and tInfo["connected"]
@@ -107,39 +104,36 @@ local tDistance;
 local tHeight;
 local tDestR, tDestG;
 function VUHDO_updateDirectionFrame(aButton)
-	if (aButton ~= nil) then
-		tButton = aButton;
-	elseif (tButton == nil) then
-		return;
-	end
+	if aButton then tButton = aButton;
+	elseif not tButton then return; end
 
 	tUnit = tButton:GetAttribute("unit");
 
-	if (not VUHDO_shouldDisplayArrow(tUnit)) then
+	if not VUHDO_shouldDisplayArrow(tUnit) then
 		VuhDoDirectionFrame["shown"] = false;
 		VuhDoDirectionFrame:Hide();
 		return;
 	end
 
 	tDirection = VUHDO_getUnitDirection(tUnit);
-	if (tDirection == nil) then
+	if not tDirection then
 		VuhDoDirectionFrame["shown"] = false;
 		VuhDoDirectionFrame:Hide();
 		return;
 	end
 
 	tCell = VUHDO_getCellForDirection(tDirection);
-	if (tCell ~= sLastCell) then
+	if tCell ~= sLastCell then
 		sLastCell = tCell;
 		VuhDoDirectionFrameArrow:SetTexCoord(VUHDO_getTexCoordsForCell(tCell));
 	end
 
-	if (sIsDistanceText) then
+	if sIsDistanceText then
 		tDistance = VUHDO_getDistanceBetween("player", tUnit);
-		if ((tDistance or 0) > 0) then
+		if (tDistance or 0) > 0 then
 			tDistance = floor(tDistance + 0.5);
 
-			if (tDistance ~= sOldDistance) then
+			if tDistance ~= sOldDistance then
 				sOldDistance = tDistance;
 
 				VuhDoDirectionFrameText:SetText(tDistance);
@@ -153,7 +147,7 @@ function VUHDO_updateDirectionFrame(aButton)
 		end
 	end
 
-	if (sOldButton ~= tButton) then
+	if sOldButton ~= tButton then
 		sOldButton = tButton;
 		tHeight = tButton:GetHeight() * sScale * tButton:GetEffectiveScale();
 		VuhDoDirectionFrame:SetPoint("CENTER", tButton:GetName(), "CENTER", 0, 0);

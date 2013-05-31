@@ -22,7 +22,7 @@ function VUHDO_panelRedrawCustomDebuffsInitBurst()
 
 	sDebuffConfig = VUHDO_CONFIG["CUSTOM_DEBUFF"];
 
-	if ("TOPLEFT" == sDebuffConfig["point"] or "BOTTOMLEFT" == sDebuffConfig["point"]) then
+	if "TOPLEFT" == sDebuffConfig["point"] or "BOTTOMLEFT" == sDebuffConfig["point"] then
 		sSign = 1;
 	else
 		sSign = -1;
@@ -65,9 +65,7 @@ end
 local tMaxDiff, tMaxDiffTop, tMaxDiffBottom, tMaxDiffX, tRScale, tPScale;
 local function VUHDO_isMostlyInBounds(aRegion, aParent, aMaxDiffFactor)
 
-	if (aRegion:GetTop() == nil or aParent:GetTop() == nil) then
-		return nil;
-	end
+	if not aRegion:GetTop() or not aParent:GetTop() then return nil; end
 
 	tRScale, tPScale = aRegion:GetEffectiveScale() or 1, aParent:GetEffectiveScale() or 1;
 
@@ -97,7 +95,7 @@ function VUHDO_initCustomDebuffs()
 	for tCnt = 0, sMaxNum - 1 do
 		tIconIdx = 40 + tCnt;
 
-		tButton = VUHDO_getBarIconButton(sButton, tIconIdx);
+		tButton = VUHDO_getOrCreateCuDeButton(sButton, tIconIdx);
 		tButton:ClearAllPoints();
 		tButton:SetPoint(sPoint, sHealthBar:GetName(), sPoint,
 			 sXOffset + (tCnt * sStep), sYOffset); -- center
@@ -110,11 +108,11 @@ function VUHDO_initCustomDebuffs()
 		tFrame:SetPoint(sPoint, sHealthBar:GetName(), sPoint,
 			 sXOffset + (tCnt * sStep), sYOffset); -- center
 
-		if (sIsTooltipCache[tIconIdx] == nil) then
+		if not sIsTooltipCache[tIconIdx] then
 			sIsTooltipCache[tIconIdx] = VUHDO_isMostlyInBounds(tButton, sButton, 0.33);
 		end
 
-		if (VUHDO_CONFIG["DEBUFF_TOOLTIP"] and sIsTooltipCache[tIconIdx] == 1) then
+		if VUHDO_CONFIG["DEBUFF_TOOLTIP"] and sIsTooltipCache[tIconIdx] == 1 then
 			tFrame:SetWidth(sHeight);
 			tFrame:SetHeight(sHeight);
 		else
@@ -150,7 +148,9 @@ function VUHDO_initCustomDebuffs()
 
 	for tCnt = sMaxNum + 40, 44 do
 		tFrame = VUHDO_getBarIconFrame(sButton, tCnt);
-		tFrame:ClearAllPoints();
-		tFrame:Hide();
+		if tFrame then
+			tFrame:ClearAllPoints();
+			tFrame:Hide();
+		end
 	end
 end

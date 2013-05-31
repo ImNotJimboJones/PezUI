@@ -4,10 +4,6 @@
 
 	<Script file="VuhDoBuffWatchSetup.lua" />
 
-	<Button name="VuhDoNoModelComboBoxTemplate" virtual="true" inherits="VuhDoComboBoxTemplate">
-	</Button>
-
-
 	<Frame name="VuhDoBuffSetupPanelTemplate" inherits="VuhDoPanelTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="229" y="46" />
@@ -173,14 +169,11 @@
 			</Anchor>
 		</Anchors>
 		<Frames>
-			<Frame name="$parentDedicatedComboBox" inherits="VuhDoNoModelComboBoxTemplate" id="1">
-				<Size>
-					<AbsDimension x="300" y="32" />
-				</Size>
+			<Frame name="$parentDedicatedComboBox" inherits="VuhDoComboBoxTemplate" id="1">
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="15" y="-20" />
+							<AbsDimension x="15" y="-3" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -252,13 +245,10 @@
 		</Anchors>
 		<Frames>
 			<Frame name="$parentComboBox" inherits="VuhDoComboBoxTemplate" id="1">
-				<Size>
-					<AbsDimension x="300" y="32" />
-				</Size>
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="15" y="-20" />
+							<AbsDimension x="15" y="-3" />
 						</Offset>
 					</Anchor>
 				</Anchors>

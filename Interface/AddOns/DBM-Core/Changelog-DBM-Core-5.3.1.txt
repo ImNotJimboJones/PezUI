@@ -1,0 +1,121 @@
+tag 5.3.1
+e7179c58579ee520c924f34a47bc6b5af3f86277
+subversion <svn@deadlybossmods.com>
+2013-05-29 01:02:17 +0200
+
+Tagging as 5.3.1
+
+
+--------------------
+
+subversion:
+	- increment version number to
+	- Omega via svn r9689: remove some debug
+	- Omega via svn r9688: fix a couple blood in snow bugs
+	- Omega via svn r9687: add in some anti spams, for those that chain pull the hell out of dark heart
+	- Omega via svn r9686: raise stoplogging another 6 seconds. i have a feeling there is a blizzard bug we have to work around here. stoplog shouldn't hard stop the logger and dump any unwritten cached data, but it apparently does.
+	- ebmor via svn r9685: deDE update; PvP enUS/GB: unused local "ZoneName" removed
+	- nbluewiz via svn r9684: # koKR update.
+	- Omega via svn r9683: fix some unintentional breakage
+	- tandanu via svn r9682: DBM:GetGroupMembers() now supports solo raids without being in a group
+	- Omega via svn r9681: DO same for core
+	- Omega via svn r9680: Small revert and tweaks to pvp mods. some locals need custom versions of Alliance/Horde Now the code will check for localized version and global so twins and WSG mods don't break
+	- Omega via svn r9679: some locals purging
+	- Omega via svn r9678: Plan ahead for one day, when you can enter these zones when not in a raid, we still want mods to work, so use DBM:GetGroupMembers() which can dynamically choose between raid..i or party..i as needed
+	- Omega via svn r9677: fix error
+	- Omega via svn r9676: Make the PVP mods more robust to map tampering by having them ask the core what current area is instead of doing their own less inefficient checks that don't make sure map is actually set to right area first. Removed bad locals of "alliance" and "horde". use the globals. While at it, remove some other unneeded locals where we can just use global strings.
+	- nbluewiz via svn r9675: # LeiShen : some fix.
+	- Omega via svn r9674: Make it so barrens thing can be disabled. since it's a limited time event, not going to bother making GUI for it though. It can be toggled editing saved variables or in game scripts
+	- Omega via svn r9673: Ah LFR?\226?\128?\166.. Add more clarification to the howto on the constructs on amber shaper. I think 1 in 10 uses it right, MAYBE. i have to hope this helps?\226?\128?\166someone
+	- Omega via svn r9672: this probably won't fix problem but did see a logic bug that could be an issue for other problems. lets not nil out loaddelay unless we are loading a mod that got load delayed
+	- Omega via svn r9671: STILL had a load delay fail, no errors or anything, zoned into a raid while raid was in combat with trash, mod didn't load, left combat, mod still didn't load. mod never loaded. this makes no sense. so now i'm gonna put debug in and figure out what the hell. If it can't be fixed i'll just remove the load delay and people with slow computers can upgrade or reloadui when they leave combat to get their mods to load right.
+	- nbluewiz via svn r9670: # koKR update.
+	- Omega via svn r9669: remove mouseover from default events (except UNIT_HEALTH)
+	- Omega via svn r9668: remove antispams again, we tracked down the bug to blizzards end and implemented workaround. Also, because of bug, avoid using mouseover in UNIT_SPELLCAST events, it just duplicates events
+	- tandanu via svn r9667: remove the remaining bad mouseover events
+	- tandanu via svn r9666: mouseover unit events should have mouseover as unit id...
+	- Omega via svn r9665: Remove mouseover from SPELLCAST events. doesn't work in that unit event
+	- Omega via svn r9664: Improve pvp mods by having them now register events when you enter them and unregister when you leave. instead of all, always being registered. Fix a bug in trash mod in HoF (missing warning) Add antispam's back to unit events in HoF since they are firing doubles do to some unknown explanation (issue didn't affect mogu vaults)
+	- Omega via svn r9663: Fix a bad option default Change color on a positive message to a positive color
+	- tandanu via svn r9662: fix bad global accesses
+	- ultrashining via svn r9661: zhTW update
+	- ebmor via svn r9660: deDE update
+	- Omega via svn r9659: rev flag
+	- Omega via svn r9658: also, in testing mods and event handlers, i ran enough LFRs this week to make me want to break things?\226?\128?\166 It's pretty clear, for one, that HoF needs a trash mod to yell at people. We'll start out with unseen strike and dispatch. Blade lord tayak. it's clear players get confused about whether or not they are unseen target. lets see if some clarification helps.
+	- swix via svn r9657: ruRU update
+	- Omega via svn r9656: Massive pass on unit event registration to optimize all mods right down the line. I tried to be careful on which antispams got removed and left the ones for the relevant casts. I cannot promise there won't be an error somewhere though where we may see double cast warnings in the rare events a "boss" unitid fires duplicate events. in other words, be on look out for double warnings
+	- Omega via svn r9655: Missed a spot for adding UNIT_AURA
+	- Omega via svn r9654: Basic warning for rock paper scissors guy and a timer for next (assuming right, my gear sucks and i can't make the dps check of any of these new bosses) Add audio count to current place in queue
+	- Omega via svn r9653: make sure brawlers mod registers events on reloadui or login while already inside the zone.
+	- Omega via svn r9652: add dbm arrow helpers for boxing challenger reduce min time on heroic 10 and normal 25 speed kill recording. it's actually possible for less than 10 second kills now on them.
+	- Omega via svn r9651: add master boom boom stuff
+	- Omega via svn r9650: give it a spell icon
+	- Omega via svn r9649: Smaller brawler update using the improved 5.3 aura
+	- nbluewiz via svn r9648: # koKR update.
+	- Omega via svn r9647: rename brawler rares to brawler challenges.
+	- Omega via svn r9646: Added Secrets of Ragefire mod
+	- Omega via svn r9645: Battle on the High seas mod Fix bug in daggers in dark mod Work around a blizzard bug on twin consorts where Suen yells for help when her sister is already dead (causes timers to start that are bad cause her help is dead)
+	- tandanu via svn r9644: fix bad globals
+	- Omega via svn r9643: fix lei shi mod
+	- tandanu via svn r9642: fix horridon highest/fastest detection
+	- tandanu via svn r9641: refactor FindFastestAndHighestVersion
+	- Omega via svn r9640: some more event optimizes. this time some missed UNIT_HEALTH
+	- tandanu via svn r9639: typos
+	- Omega via svn r9638: lei shen option tweaks
+	- Omega via svn r9637: update loot check to work in LFR too.
+	- tandanu via svn r9636: fix InfoFrame issue in partys, this will fix http://elitistjerks.com/f104/t132675-scholomance_rattlegore_bug_report/
+	- tandanu via svn r9635: clean up UNIT_DIED/DESTROYED handling
+	- Omega via svn r9634: Remove some commented stuff
+	- Omega via svn r9633: ##exclude UNIT_DESTROYED and UNIT_DIED from UNIT event filter. these are not unit events, they are CLEU events and break badly if passed through UNIT event filter. Tandanu can possibly tweak or improve code later. but this should fix the hundreds of lua errors from UNIT_DIED mods #Some boss mod updates for new events system.
+	- Omega via svn r9632: fix a unit power event
+	- Omega via svn r9631: fix some UNIT_SPELLCAST events that need to be registered to player, so standard boss1-5 target focus no good
+	- tandanu via svn r9630: UNIT_* events with arguments are now guaranteed to only fire for unit IDs that were actually registered by the mod
+	- Omega via svn r9629: really fix load delay this time. this was my tested fix that worked. Apparently i didn't commit whole thing last itme. ensure loadDelay is only nilled out AFTER a successful load. because if it's niled out during a load attempt and load still fails, it was sometimes not retrying. the code to prevent adding mod to table more than once is in the load function, and it's niled out AFTer successful load.
+	- tandanu via svn r9628: fix DMF Cannon mod
+	- Omega via svn r9627: fix 3 of those
+	- Omega via svn r9626: this correct way tandanu?
+	- Omega via svn r9625: fix jikun regression
+	- tandanu via svn r9623: merge branch better-unit-event-handling
+	all UNIT_* events can now be registered with associated unit ids as "arguments", for example:
+	
+	mod:RegisterEventsInCombat("UNIT_AURA boss1 player")
+	
+	This will register the UNIT_AURA event for the given unit ids and call the normal UNIT_AURA handler. Note that it is currently not possible to register the same event multiple times with different IDs, you have to use one event for all unit IDs you need.
+	
+	Old UNIT_* event registrations that do not use the arguments will default to the following unit ids: boss1-5, target, focus, and mouseover. These are the same IDs that the previous special-cased UNIT-events used.
+	
+	Use UNIT_*_UNFILTERED events to get events for all unit ids.
+	
+	Note: all UNIT_* events now restrict the unit ids per default. this was done for some events previously (with the default unit IDs mentioned above). This might be an incomaptible change for some mods that rely on UNIT_AURA for raid targets, these mods must be changed to use UNIT_AURA_UNFILTERED
+	
+	Open for discussion:
+	The events that are passed to the mod are currently *not* guaranteed to be restricted to the given unit ids. The extra arguments are simply a hint to DBM-Core to avoid registration of unnecessary UNIT_*-event handlers. Example: DBM-Core registers UNIT_HEALTH for boss1-5, target, focus, and mouseover. If a mod now registers the pseudo-event "UNIT_HEALTH player", then its UNIT_HEALTH handler will not only be called for "player" events, but also for the ids that are already registered by DBM-Core or other mods.
+	However, this could be changed to check if the actual id is registered by the mod before calling the mod's event handler. This could save some if uId == "boss1" then ... checks.
+	- Omega via svn r9621: err, lets move that to emote handler directly so it's not triggering off trivial zone yells. I suppose this alienates commander spawns, but didn't really intend it for them anyways, mainly for caravans
+	- Omega via svn r9620: Lets give the emotes in barrens a little help
+	- Omega via svn r9619: RU update
+	- Omega via svn r9618: fix grammer error
+	- Omega via svn r9617: unregister UNIT_AURA during rampages or when there are no ice heads in back. This greatly reduces amount of cpu waste working around CLEU bug. This way, if UNIT_AURA processing during rampage does have something to do with combat lag, we can't get blamed for it.
+	- nbluewiz via svn r9616: # Core : Merge some CLEU events. / Fix scenario whisper / normal scenario detection bug.
+	- Omega via svn r9615: small twins update
+	- Omega via svn r9614: grab locals too
+	- Omega via svn r9613: remove the chilled warning, it's not worth the cpu waste of UNIT_AURA.
+	- Omega via svn r9612: add some debug to analyze event frequency to make a case about cpu usage of mods on megaera fight.
+	- nbluewiz via svn r9611: # koKR update.
+	- nbluewiz via svn r9610: # Sha of Fear fix.
+	- Omega via svn r9609: Add blizzards new special warning sound to our special warning sound options. make HideBossEmoteFrame on by default. now that blizzard is shoving their own special warning sounds into it (basically to help people without boss mods), we want to filter it when user IS running dbm (at least by default)
+	- ebmor via svn r9608: deDE update
+	- Omega via svn r9607: more tweaks to durumu, seems working better now that i realized i deleted UNIT_DIED instead of UNIT_AURA by mistake.
+	- Omega via svn r9606: fix the biggest fail in all of fails
+	- Omega via svn r9605: fix icons i hope
+	- nbluewiz via svn r9604: # koKR update
+	- ultrashining via svn r9603: zhTW update
+	- Omega via svn r9602: improve nilcheck
+	- Omega via svn r9601: apparently lua likes to fire code out of order and sometimes last lines fire before first lines, so have to add pointless nil checks and just have function not work when it executes backwards
+	- Omega via svn r9600: more tweaks
+	- Omega via svn r9599: fix a logic fail. we can't compare role if we don't have it
+	- Omega via svn r9598: remove unused global Add a message to remind you of your current loot setting. It's VERY easy to forget and waste bonus rolls on wrong spec.
+	- Omega via svn r9597: Dark heart of pandaria scenario
+	- Omega via svn r9596: Add blood in the snow scenario
+	- Omega via svn r9595: switch sound paths to ogg
+	- tandanu via svn r9594: increment alpha version number

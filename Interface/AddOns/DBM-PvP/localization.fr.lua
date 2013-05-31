@@ -96,7 +96,6 @@ L:SetOptionLocalization({
 L = DBM:GetModLocalization("z566")
 
 L:SetMiscLocalization({
-	ZoneName			= "L'Œil du cyclone",
 	ScoreExpr			= "(%d+)/1600",
 	Alliance 			= "Alliance",
 	Horde 				= "Horde",
@@ -127,7 +126,7 @@ L:SetMiscLocalization({
 	BgStart60 					= "Début de la bataille pour le goulet des Chanteguerres dans 1 minute.",
 	BgStart30 					= "Début de la bataille pour le goulet des Chanteguerres dans 30 secondes. Préparez-vous !",
 	Alliance 					= "Alliance",
-	Horde 						= "Horde",	
+	Horde 						= "Horde",
 	InfoErrorText 				= "Le ciblage du drapeau est restoré lorsque vous êtes hors de combat.",
 	ExprFlagPickUp 				= "Le Drapeau (%w+) a été pris par (.+) !",
 	ExprFlagCaptured 			= "(.+) a capturé le drapeau (%w+) !",
@@ -138,7 +137,7 @@ L:SetMiscLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerStart 					= "Début de la bataille dans", 
+	TimerStart 					= "Début de la bataille dans",
 	TimerFlag 					= "Respawn du drapeau",
 })
 
@@ -160,13 +159,13 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerStart			= "Début de la bataille dans", 
+	TimerStart			= "Début de la bataille dans",
 	TimerPOI			= "%s",
 	TimerSiegeEngine	= "Engins de Siège prêt"
 })
 
 L:SetOptionLocalization({
-	TimerStart			= "Voir: Temps de départ du BG", 
+	TimerStart			= "Voir: Temps de départ du BG",
 	TimerPOI			= "Montre le timer pour les captures",
 	TimerSiegeEngine	= "Montre le timer de la construction des Engins de Siège",
 	WarnSiegeEngine		= "Alerter lorsque l'Engin de Siège est prêt",
@@ -199,9 +198,8 @@ L = DBM:GetModLocalization("z726")
 L:SetMiscLocalization({
 	BgStart60 			= "Début de la bataille dans 60 secondes.",
 	BgStart30 			= "Début de la bataille dans 30 secondes. Préparez vous!",
-	ZoneName 			= "Pics-Jumeaux",
 	Alliance 			= "Alliance",
-	Horde 				= "Horde",	
+	Horde 				= "Horde",
 	InfoErrorText		= "Le ciblage du drapeau est restoré lorsque vous êtes hors de combat.",
 	ExprFlagPickUp		= "Le  Drapeau (%w+) a été pris par (.+) !",
 	ExprFlagCaptured		= "(.+) a capturé le drapeau (%w+) !",
@@ -214,7 +212,7 @@ L:SetMiscLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerStart	= "Début de la bataille dans", 
+	TimerStart	= "Début de la bataille dans",
 	TimerFlag	= "Respawn du drapeau"
 })
 

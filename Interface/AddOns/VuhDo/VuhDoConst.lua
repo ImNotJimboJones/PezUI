@@ -1,14 +1,12 @@
 VUHDO_VERSION = GetAddOnMetadata("VuhDo", "Version");
-VUHDO_MIN_TOC_VERSION = 50001;
+VUHDO_MIN_TOC_VERSION = 50200;
 VUHDO_COMMS_PREFIX = "VUHDO";
 
 VUHDO_YES = 1;
 VUHDO_NO = 2;
 
 VUHDO_MAX_PANELS = 10;        -- Maximum number of Panels, change in VuhDoPanel.XML accordingly
---VUHDO_MAX_BUTTONS_PANEL = 51; -- Maximum Number of Buttons per Panel
 --VUHDO_MAX_GROUPS_PER_PANEL = 15; -- Maximum number of Models (Groups) per Panel
---VUHDO_MAX_HEADERS_PER_PANEL = 15; -- Maximum number of Headers per Panel
 
 --VUHDO_MAX_MTS = 8;
 
@@ -68,6 +66,8 @@ VUHDO_ID_VEHICLES = 70;
 
 VUHDO_ID_SELF = 80;
 VUHDO_ID_SELF_PET = 81;
+VUHDO_ID_TARGET = 82;
+VUHDO_ID_FOCUS = 83
 
 VUHDO_ID_ALL = 999;
 
@@ -129,6 +129,8 @@ VUHDO_ID_TYPE_MEMBERS = {
 		VUHDO_ID_RANGED_HEAL,
 		VUHDO_ID_SELF,
 		VUHDO_ID_SELF_PET,
+		VUHDO_ID_TARGET,
+		VUHDO_ID_FOCUS,
 	},
 
 	[VUHDO_ID_ALL] = {

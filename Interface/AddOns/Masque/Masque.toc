@@ -1,6 +1,6 @@
-﻿## Interface: 50200
+﻿## Interface: 50300
 ## Title: Masque
-## Version: 5.2.391
+## Version: 5.3.394
 ## Author: StormFX, JJSheets
 ## Notes: A dynamic button skinning add-on.
 ## Notes-frFR: Un add-on de skinnage dynamique des boutons.
@@ -13,7 +13,7 @@
 ## X-WoWI-ID: 12097
 ## OptionalDeps: Ace3
 ## SavedVariables: MasqueDB
-## X-Curse-Packaged-Version: v5.2.391
+## X-Curse-Packaged-Version: v5.3.394
 ## X-Curse-Project-Name: Masque
 ## X-Curse-Project-ID: masque
 ## X-Curse-Repository-ID: wow/masque/mainline

@@ -1,6 +1,94 @@
 Pack Command:  		zip -vr TP_Release.zip TidyPlates* -x@exclude.lst
 Exclusion List: 	*.svn*   *.DS_Store*   exclude.lst   *.db   *.png   *.gif   *.jpg   *.tif   *.txt   *.psd   *.bmp   
 
+To Do:
+- Check unit.health on all externally bound functions
+
+6.11.3
+---------------------------
+- Check unit.health on spell cast functions, to catch premature update calls.
+
+6.11.2
+---------------------------
+- In reverting, I missed updating the TOC version for TidyPlatesHub.  Updated for 50300
+
+6.11.1
+---------------------------
+- Core: Fixed a cast bar bug, where the sub-object references were not being updated.  Addresses certain "attempt to perform arithmetic on field 'health' (a nil value)" errors
+
+6.11
+---------------------------
+- Basically, I've given up trying to quickly patch up 6.10.  I've reverted to 6.9.9, and made the changes necessary for it to work with WoW 5.3.  If you want the Performance Mode stuff, grab the old version, or keep an eye out for it to be Re-Beta'd as 6.12.  
+
+These are the changes that I've migrated:
+- Spell Casting Update, for WoW 5.3
+- Core: Set initial fonts during Init/Hooking.  Removes the possibility of :SetFont() errors.
+- Combo Points: "Antic ipation" fix for non-english regions
+
+
+6.10.4
+---------------------------
+- Core: Fixed a major typo. Should fix SetStyle/Headline Mode and ClassIcon LUA errors at the very least.  Might explain some of the other elusive bugs.
+
+6.10.3
+---------------------------
+* Performance Mode:
+By default this is NOT enabled, reverting to the older, slower, reliable method.
+Using Performance Mode may break HHTD and other nameplate addons.  
+You may also experience 'hung' nameplates.  Please report these, and try to be as 
+specific as possible in describing the condition of the game when it occured.
+
+- Core: (Since 6.10.2) Performance Mode:  This enables the performance improvements introduced in 6.10. 	
+- Core: Reintegrated original Alpha locking
+- Core: More reorganization, pruning of old, dead methods
+- Core: Set initial fonts during Init/Hooking.  Removes the possibility of :SetFont() errors.  Not sure why I didn't do this years ago.
+- Panel: Removal of latent "Show Minimap Icon" button code
+
+6.10.2
+---------------------------
+- Panel: New Option: Performance Mode.  This enables the performance improvements introduced in 6.10.  By default this is NOT enabled.
+- Using "Performance Mode" may cause problems with other nameplate addons.  
+
+6.10.1
+---------------------------
+- Panel: Reverted the dropdown menu init changes from beta4.  Seems to be messing up the panel.
+- Core: Blizz Spell Shadow: More thoroughly hidden
+- Hub: Threat/Warning Glow fix
+- Core: Spelltext; "Font Not Set" error - Hopefully fixed
+
+
+6.10
+---------------------------
+Beta 6:
+- Reorganized event handling structure to rigorously check the visibility of the parent nameplate to prevent showing previously hidden nameplates or hiding previously shown nameplates
+
+Beta5
+- Combo Points: "Anticipation" fix for non-english regions?  need to test
+- Core: Back to hooking the base plate.
+- Healertrack: Strsplit fix  (thought I fixed that several months ago.. hmmm...)
+
+Beta4
+- Refactored a bit of the Core
+- Panel: Dropdown menu will now init when the interface panel is shown, rather than on load
+- other stuff.  too tired to remember.
+
+
+
+- Reparent Tidy Plates Frames to UIParent, Reanchor back to base nameplate = Performance boost.  Sweet.
+
+6.9.9
+---------------------------
+- Hub: Added "Selective Optional Text"
+- Deprecated: 'customart' Texture and theme functions.  Please use the Widget system to create additional textures. (Removing unused textures provides a small performance improvement)
+- Core: Reorganized the nameplate strata, removing an unnecessary anchor frame
+- Core: Reorganized and relabeled some internal functions, adding a few extra comments
+- Core & Aura Widget: Made some changes to reduce extraneous calls.
+- Aura Widget: "Show Dispellable Auras" should work, now.  Ran some BGs, and things seemed to work.
+- Hub: Added a warning, notifying the user when they're not using a Hub-compatible theme.
+- Hub: Added a divider line between Headings
+- Aura Widget: The old method of applying the aura widget has been re-added; The new method (described somewhere below) is still preferred!
+- Hub: Added "Enable External Widgets" checkbox, to control the running of the Global widget functions described in 6.9.6  *
+
 6.9.8
 ---------------------------
 - Hub: "By Threat" Color Modes will pass through enemy class colors, when available, and then use Reaction colors.  (NPC-Pets will continue to use the "By Threat" colors)

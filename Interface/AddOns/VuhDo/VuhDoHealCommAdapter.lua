@@ -23,12 +23,10 @@ end
 --
 local tAllIncoming;
 function VUHDO_determineIncHeal(aUnit)
-	if (sIsNoInc) then
-		return;
-	end
+	if sIsNoInc then return; end
 
-	if (sIsOthers) then
-		if (sIsOwn) then
+	if sIsOthers then
+		if sIsOwn then
 			VUHDO_INC_HEAL[aUnit] = UnitGetIncomingHeals(aUnit);
 		else
 			tAllIncoming = (UnitGetIncomingHeals(aUnit) or 0) - (UnitGetIncomingHeals(aUnit, "player") or 0);

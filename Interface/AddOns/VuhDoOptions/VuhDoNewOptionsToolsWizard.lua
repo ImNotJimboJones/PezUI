@@ -265,7 +265,7 @@ local function VUHDO_panelWizardApplyCallback(aDecision)
 
 		VUHDO_initPanelModels();
 		VUHDO_initDynamicPanelModels();
-		VUHDO_reloadUI();
+		VUHDO_reloadUI(false);
 	end
 end
 

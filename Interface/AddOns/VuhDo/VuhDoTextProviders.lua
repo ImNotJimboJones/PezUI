@@ -14,7 +14,7 @@ end
 
 --
 local function VUHDO_chiCalculator(anInfo)
-	if (anInfo["connected"] and not anInfo["dead"]) then
+	if anInfo["connected"] and not anInfo["dead"] then
 		return UnitPower(anInfo["unit"], SPELL_POWER_CHI), UnitPowerMax(anInfo["unit"], SPELL_POWER_CHI)
 	else
 		return 0, 0;
@@ -25,7 +25,7 @@ end
 
 --
 local function VUHDO_holyPowerCalculator(anInfo)
-	if (anInfo["connected"] and not anInfo["dead"]) then
+	if anInfo["connected"] and not anInfo["dead"] then
 		return UnitPower(anInfo["unit"], 9), UnitPowerMax(anInfo["unit"], 9);
 	else
 		return 0, 0;
@@ -38,7 +38,7 @@ end
 local tAmountInc;
 local function VUHDO_overhealCalculator(anInfo)
 	tAmountInc = VUHDO_getIncHealOnUnit(anInfo["unit"]);
-	if (tAmountInc > 0 and anInfo["connected"] and not anInfo["dead"]) then
+	if tAmountInc > 0 and anInfo["connected"] and not anInfo["dead"] then
 		return tAmountInc - anInfo["healthmax"] + anInfo["health"], nil;
 	else
 		return 0, nil;
@@ -50,7 +50,7 @@ end
 local tAmountInc;
 local function VUHDO_incomingHealCalculator(anInfo)
 	tAmountInc = VUHDO_getIncHealOnUnit(anInfo["unit"]);
-	if (tAmountInc > 0 and anInfo["connected"] and not anInfo["dead"]) then
+	if tAmountInc > 0 and anInfo["connected"] and not anInfo["dead"] then
 		return tAmountInc, nil;
 	else
 		return 0, nil;
@@ -66,7 +66,7 @@ end
 
 --
 local function VUHDO_manaCalculator(anInfo)
-	if (anInfo["powertype"] == 0 and anInfo["powermax"] > 0) then
+	if anInfo["powertype"] == 0 and anInfo["powermax"] > 0 then
 		return anInfo["power"], anInfo["powermax"]
 	else
 		return 0, 0;
@@ -109,8 +109,7 @@ end
 
 
 local function VUHDO_unitOfUnitValidator(anInfo, aValue, aMaxValue)
-	return anInfo["powertype"] == 0
-		and format("%d/%d", aValue, aMaxValue) or "";
+	return anInfo["powertype"] == 0 and format("%d/%d", aValue, aMaxValue) or "";
 end
 
 --
@@ -132,7 +131,7 @@ function VUHDO_initTextProviderConfig()
   -- Falls man mal was löscht oder umbenennt
 	for tIndicatorName, anIndicatorConfig in pairs(VUHDO_INDICATOR_CONFIG["TEXT_INDICATORS"]) do
 		for tIndex, tProviderName in pairs(anIndicatorConfig["TEXT_PROVIDER"]) do
-			if (VUHDO_TEXT_PROVIDERS[tProviderName] == nil) then
+			if not VUHDO_TEXT_PROVIDERS[tProviderName] then
 				anIndicatorConfig["TEXT_PROVIDER"][tIndex] = "";
 			end
 		end

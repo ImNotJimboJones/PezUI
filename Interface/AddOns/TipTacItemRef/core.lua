@@ -42,49 +42,6 @@ local COLOR_INCOMPLETE = { 0.5, 0.5, 0.5 };
 -- Returns colored text string
 local function BoolCol(bool) return (bool and "|cff80ff80" or "|cffff8080"); end
 
--- Analyses the itemLink and checks for upgrades that affects itemLevel -- Only itemLevel 450 and above will have this
--- Until Blizzard adds an easier solution, this function is supposed to be portable between addons, and is placed in the global namespace.
-function GetUpgradedItemLevelFromItemLink(itemLink)
-	local ITEMLINK_PATTERN = "(item:[^|]+)";
-	-- Finds the last and 11th parameter of an itemLink, which is the upgradeId
-	local ITEMLINK_PATTERN_UPGRADE = ":(%d+)$";
-	-- Table for adjustment of levels due to upgrade -- Source: http://www.wowinterface.com/forums/showthread.php?t=45388
-	local UPGRADED_LEVEL_ADJUST = {
-		[1] = 8, -- 1/1
-		[373] = 4, -- 1/2
-		[374] = 8, -- 2/2
-		[375] = 4, -- 1/3
-		[376] = 4, -- 2/3
-		[377] = 4, -- 3/3
-		[379] = 4, -- 1/2
-		[380] = 4, -- 2/2
---		[445] = 0, -- 0/2
-		[446] = 4, -- 1/2
-		[447] = 8, -- 2/2
---		[451] = 0, -- 0/1
-		[452] = 8, -- 1/1
---		[453] = 0, -- 0/2
-		[454] = 4, -- 1/2
-		[455] = 8, -- 2/2
---		[456] = 0, -- 0/1
-		[457] = 8, -- 1/1
---		[458] = 0, -- 0/4
-		[459] = 4, -- 1/4
-		[460] = 8, -- 2/4
-		[461] = 12, -- 3/4
-		[462] = 16, -- 4/4
-	};
-	-- Make certain we only have the raw itemLink, and not the full itemString
-	itemLink = itemLink:match(ITEMLINK_PATTERN);
-	local _, _, _, itemLevel = GetItemInfo(itemLink);
-	local upgradeId = tonumber(itemLink:match(ITEMLINK_PATTERN_UPGRADE));
-	if (itemLevel) and (itemLevel >= 450) and (upgradeId) and (UPGRADED_LEVEL_ADJUST[upgradeId]) then
-		return itemLevel + UPGRADED_LEVEL_ADJUST[upgradeId];
-	else
-		return itemLevel;
-	end
-end
-
 --------------------------------------------------------------------------------------------------------
 --                                         Create Tooltip Icon                                        --
 --------------------------------------------------------------------------------------------------------
@@ -359,7 +316,7 @@ end
 function TipTypeFuncs:currency(link,linkToken,id)
 	local _, currencyCount, currencyTexture = GetCurrencyInfo(id);
 	if (self.SetIconTextureAndText) then
-		self:SetIconTextureAndText("Interface\\Icons\\"..currencyTexture,currencyCount);
+		self:SetIconTextureAndText(currencyTexture,currencyCount);	-- As of 5.2 GetCurrencyInfo() now returns full texture path. Previously you had to prefix it with "Interface\\Icons\\"
 	end
 	-- ID
 	if (cfg.if_showCurrencyId) then

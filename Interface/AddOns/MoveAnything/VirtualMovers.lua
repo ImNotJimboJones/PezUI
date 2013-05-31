@@ -1,6 +1,9 @@
 ﻿local MovAny = _G.MovAny
 local MOVANY = _G.MOVANY
 local _
+local HidenFrame = CreateFrame("Frame", "HidenFrame", UIParent)
+HidenFrame.frameinfo = {}
+HidenFrame:Hide()
 
 local genericFunctions
 genericFunctions = {
@@ -630,6 +633,15 @@ MovAny.lVirtualMovers = {
 				b = _G[ "ActionButton"..i ]
 				b:ClearAllPoints()
 				b:SetPoint("LEFT", "ActionButton"..(i-1), "RIGHT", 6, 0)
+				b:SetScale(1)
+			end
+		end,
+		OnMAScale = function(self, scale)
+			if type(scale) ~= "number" then
+				return
+			end
+			for i = 1, 12 do
+				_G["ActionButton"..i]:SetScale(scale)
 			end
 		end,
 	},
@@ -795,6 +807,27 @@ MovAny.lVirtualMovers = {
 				self:SetScale(1)
 			end]]
 			PetActionBarFrame:SetScale(1)
+		end,
+		OnMAHide = function(self, hidden)
+			if hidden then
+				
+				for i=1, 10 do
+			--	local frame = _G["PetActionButton"..i]
+					HidenFrame.frameinfo["PetActionBarFrame"] = PetActionBarFrame:GetParent()
+					PetActionBarFrame:SetParent("HidenFrame")
+					PetActionBarFrame:Hide()
+					PetActionBarFrame:UnregisterAllEvents()
+				end
+		--		print("Hide ButtONS!")
+			else
+				
+				if HidenFrame.frameinfo["PetActionBarFrame"] then
+					PetActionBarFrame:SetParent(HidenFrame.frameinfo["PetActionBarFrame"])
+				end	
+					PetActionBarFrame:Show()
+				
+				
+			end
 		end,
 	},
 	PetActionButtonsVerticalMover = {
@@ -1036,15 +1069,35 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
-	--[[	OnMAHide = function(self, hidden)
-			if hidden then
-				MovAny:LockVisibility(self)
-				RegisterStateDriver(MultiBarRightMover, "visibility", "hide");
-			else
-				MovAny:UnlockVisibility(self)
-				RegisterStateDriver(MultiBarRightMover, "visibility", "show");
+		OnMAHook = function(self)
+			MultiBarLeft:SetParent("UIParent")
+		end,
+		OnMAPreReset = function(self)
+			MultiBarRight:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(1)
 			end
-		end]]
+			MultiBarRight.MAHooked = nil
+	--		print("PreReset")
+		end,
+		OnMAPostReset = function(self)
+			MultiBarRight:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(1)
+			end
+			MultiBarRight.MAHooked = nil
+	--		print("PostReset")
+		end,
+		OnMAScale = function(self, scale)
+			if type(scale) ~= "number" then
+				return
+			end
+		--	MultiBarRight:SetScale(scale)
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(scale)
+			end
+	--		print("OnScale")
+		end,
 	},
 	MultiBarRightHorizontalMover = {
 		w = 498,
@@ -1072,15 +1125,31 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
-	--[[	OnMAHide = function(self, hidden)
-			if hidden then
-				MovAny:LockVisibility(self)
-				RegisterStateDriver(MultiBarRightHorizontalMover, "visibility", "hide");
-			else
-				MovAny:UnlockVisibility(self)
-				RegisterStateDriver(MultiBarRightHorizontalMover, "visibility", "show");
+		OnMAPostReset = function(self)
+			MultiBarRight:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(1)
 			end
-		end]]
+			MultiBarRight.MAHooked = nil
+		end,
+		OnMAPreReset = function(self)
+			MultiBarRight:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(1)
+			end
+			MultiBarRight.MAHooked = nil
+		end,
+		OnMAHook = function(self)			
+			MultiBarLeft:SetParent("UIParent")	
+		end,
+		OnMAScale = function(self, scale)
+			if type(scale) ~= "number" then
+				return
+			end
+			for i=1, 12 do
+				_G["MultiBarRightButton"..i]:SetScale(scale)
+			end
+		end,
 	},
 	MultiBarLeftMover = {
 		w = 38,
@@ -1108,15 +1177,33 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
-	--[[	OnMAHide = function(self, hidden)
-			if hidden then
-				MovAny:LockVisibility(self)
-				RegisterStateDriver(MultiBarLeftMover, "visibility", "hide");
-			else
-				MovAny:UnlockVisibility(self)
-				RegisterStateDriver(MultiBarLeftMover, "visibility", "show");
+		OnMAHook = function(self)		
+			MultiBarLeft:SetParent("UIParent")
+		end,
+		OnMAPreReset = function(self)
+			MultiBarLeft:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(1)
 			end
-		end]]
+		--	MultiBarLeft:SetParent("MultiBarRight")
+			MultiBarLeft.MAHooked = nil
+		end,
+		OnMAPostReset = function(self)
+			MultiBarLeft:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(1)
+			end
+		--	MultiBarLeft:SetParent("MultiBarRight")
+			MultiBarLeft.MAHooked = nil
+		end,
+		OnMAScale = function(self, scale)
+			if type(scale) ~= "number" then
+				return
+			end
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(scale)
+			end
+		end,
 	},
 	MultiBarLeftHorizontalMover = {
 		w = 498,
@@ -1144,15 +1231,33 @@ MovAny.lVirtualMovers = {
 			end
 			child.MAParent = nil
 		end,
-	--[[	OnMAHide = function(self, hidden)
-			if hidden then
-				MovAny:LockVisibility(self)
-				RegisterStateDriver(MultiBarLeftHorizontalMover, "visibility", "hide");
-			else
-				MovAny:UnlockVisibility(self)
-				RegisterStateDriver(MultiBarLeftHorizontalMover, "visibility", "show");
+		OnMAPreReset = function(self)
+			MultiBarLeft:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(1)
 			end
-		end]]
+		--	MultiBarLeft:SetParent("MultiBarRight")
+			MultiBarLeft.MAHooked = nil
+		end,
+		OnMAPostReset = function(self)
+			MultiBarLeft:SetScale(1)
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(1)
+			end
+		--	MultiBarLeft:SetParent("MultiBarRight")
+			MultiBarLeft.MAHooked = nil
+		end,
+		OnMAHook = function(self)	
+			MultiBarLeft:SetParent("UIParent")	
+		end,
+		OnMAScale = function(self, scale)
+			if type(scale) ~= "number" then
+				return
+			end
+			for i=1, 12 do
+				_G["MultiBarLeftButton"..i]:SetScale(scale)
+			end
+		end,
 	},
 	PartyMember1DebuffsMover = {
 		w = 66,

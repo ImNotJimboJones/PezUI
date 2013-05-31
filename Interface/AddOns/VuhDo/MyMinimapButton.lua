@@ -3,9 +3,7 @@ VuhDoMinimap = {
 
 	["Create"] = function(self, someModSettings, someInitSettings)
 
-		if (VuhDoMinimapButton ~= nil) then
-			return;
-		end
+		if VuhDoMinimapButton then return; end
 
 		local tFrame = CreateFrame("Button", "VuhDoMinimapButton", Minimap);
 
@@ -40,7 +38,7 @@ VuhDoMinimap = {
 		tFrame:SetScript("OnDragStart", self.OnDragStart);
 		tFrame:SetScript("OnDragStop", self.OnDragStop);
 
-		if (someModSettings["position"] == nil) then
+		if not someModSettings["position"] then
 			someModSettings["drag"] = someInitSettings["drag"];
 			someModSettings["position"] = someInitSettings["position"];
 		end
@@ -115,13 +113,11 @@ VuhDoMinimap = {
 
 
 	["OnClick"] = function(self, aButtonName)
-		if ("LeftButton" == aButtonName) then
+		if "LeftButton" == aButtonName then
 			VUHDO_slashCmd("opt");
-		elseif ("RightButton" == aButtonName) then
+		elseif "RightButton" == aButtonName then
 			ToggleDropDownMenu(1, nil, VuhDoMinimapDropDown, "VuhDoMinimapButton", 0, -5);
 		end
 	end
 
 }
-
-

@@ -45,22 +45,18 @@ function VUHDO_updateManaBars(aUnit, aChange)
 
 	if (tInfo["isVehicle"]) then
 		aUnit = tInfo["petUnit"];
-		if (aUnit == nil) then
-			return;
-		end
+		if not aUnit then return; end
 
 		tInfo = VUHDO_RAID[aUnit];
-		if (tInfo == nil) then
-			return;
-		end
+		if not tInfo then return; end
 	end
 
-	if (not VUHDO_isConfigDemoUsers()) then
-		if (aChange == 1) then
+	if not VUHDO_isConfigDemoUsers() then
+		if 1 == aChange then
 			tInfo["power"] = UnitMana(aUnit);
-		elseif (aChange == 2) then
+		elseif 2 == aChange  then
 			tInfo["powermax"] = UnitManaMax(aUnit);
-		elseif (aChange == 3) then
+		elseif 3 == aChange then
 			tPowerType, _ = UnitPowerType(aUnit);
 			tInfo["powertype"] = tonumber(tPowerType);
 			tInfo["powermax"] = UnitManaMax(aUnit);
@@ -68,16 +64,16 @@ function VUHDO_updateManaBars(aUnit, aChange)
 		end
 	end
 
-	if (tInfo["powertype"] == 0) then -- VUHDO_UNIT_POWER_MANA
+	if tInfo["powertype"] == 0 then -- VUHDO_UNIT_POWER_MANA
 		VUHDO_updateBouquetsForEvent(aUnit, 13); -- VUHDO_UPDATE_MANA
 
-		if (aChange == 3) then
+		if 3 == aChange then
 			VUHDO_updateBouquetsForEvent(aUnit, 21); -- VUHDO_UPDATE_OTHER_POWERS
 		end
 	else
 		VUHDO_updateBouquetsForEvent(aUnit, 21); -- VUHDO_UPDATE_OTHER_POWERS
 
-		if (aChange == 3) then
+		if 3 == aChange then
 			VUHDO_updateBouquetsForEvent(aUnit, 13); -- VUHDO_UPDATE_MANA
 		end
 	end
@@ -93,7 +89,7 @@ function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCo
 	aMaxValue = aMaxValue or 0;
 	aCurrValue = aCurrValue or 0;
 
-	if (aMaxValue + aCurrValue == 0) then
+	if aMaxValue + aCurrValue == 0 then
 		anIsActive = false;
 	end
 
@@ -103,54 +99,49 @@ function VUHDO_manaBarBouquetCallback(aUnit, anIsActive, anIcon, aCurrValue, aCo
 		or 0;
 
 	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
-		if (anIsActive) then
+		if anIsActive then
 			tManaBarHeight = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["manaBarHeight"];
 		end
 		tManaBar = VUHDO_getHealthBar(tButton, 2);
-		if (tQuota > 0 and tManaBarHeight > 0) then
-			if (aColor ~= nil) then
-				tManaBar:SetVuhDoColor(aColor);
-			end
+		if tQuota > 0 and tManaBarHeight > 0 then
+			if aColor then tManaBar:SetVuhDoColor(aColor); end
 			tManaBar:SetValue(tQuota);
 		else
 			tManaBar:SetValue((not anIsActive and sIsInverted) and 1 or 0);
 		end
 
-		if (not InCombatLockdown()) then
-			if (tManaBarHeight > 0) then
+		if not InCombatLockdown() then
+			if tManaBarHeight > 0 then
 				tManaBar:SetHeight(tManaBarHeight);
 			end
 			tRegularHeight = tButton["regularHeight"];
-			if (tRegularHeight ~= nil) then
+			if tRegularHeight then
 				VUHDO_getHealthBar(tButton, 1):SetHeight(tRegularHeight - tManaBarHeight);
 			end
 		end
 	end
 
-	if (VUHDO_RAID[aUnit] == nil) then
+	if not VUHDO_RAID[aUnit] then
 		return;
 	end
 
 	-- Targets und targets-of-target, die im Raid sind
 	tAllButtons = VUHDO_IN_RAID_TARGET_BUTTONS[VUHDO_RAID[aUnit]["name"]];
-	if (tAllButtons == nil) then
-		return;
-	end
+	if not tAllButtons then return; end
+
 	for _, tButton in pairs(tAllButtons) do
 		tManaBar = VUHDO_getHealthBar(tButton, 2);
-		if (tQuota > 0) then
-			if (aColor ~= nil) then
-				tManaBar:SetVuhDoColor(aColor);
-			end
+		if tQuota > 0 then
+			if aColor then tManaBar:SetVuhDoColor(aColor); end
 			tManaBar:SetValue(tQuota);
 		else
 			tManaBar:SetValue(0);
 		end
-		if (not InCombatLockdown()) then
+		if not InCombatLockdown() then
 			tManaBarHeight = VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["manaBarHeight"];
 			tManaBar:SetHeight(tManaBarHeight);
 			tRegularHeight = tButton["regularHeight"];
-			if (tRegularHeight ~= nil) then
+			if tRegularHeight then
 				VUHDO_getHealthBar(tButton, 1):SetHeight(tRegularHeight - tManaBarHeight);
 			end
 		end
@@ -174,7 +165,7 @@ local function VUHDO_sideBarBouquetCallback(aBarNum, aUnit, anIsActive, anIcon, 
 		or 0;
 
 	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
-		if (tQuota > 0) then
+		if tQuota > 0 then
 			tBar = VUHDO_getHealthBar(tButton, aBarNum);
 			tBar:SetValue(tQuota);
 			tBar:SetVuhDoColor(aColor);

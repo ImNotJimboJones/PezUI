@@ -78,7 +78,7 @@ function VUHDO_customClustersInitBurst()
 
 	sClusterSlot = nil;
 	for tIndex, tHotName in pairs(VUHDO_PANEL_SETUP["HOTS"]["SLOTS"]) do
-		if ("CLUSTER" == tHotName and (tIndex < 6 or tIndex > 8)) then
+		if "CLUSTER" == tHotName and (tIndex < 6 or tIndex > 8) then
 			sClusterSlot = tIndex;
 		end
 	end
@@ -92,16 +92,12 @@ local tInfo, tSrcInfo, tNumArray;
 local tSrcGroup;
 function VUHDO_getCustomDestCluster(aUnit, anArray, anIsSourcePlayer, anIsRadial, aRangePow, aNumMaxTargets, aHealthLimit, anIsRaid, aCdSpell, aCone, aJumpRangePow)
 	twipe(anArray);
-	if (anIsSourcePlayer and aUnit ~= "player") then
-		return 0;
-	end
+	if anIsSourcePlayer and aUnit ~= "player" then return 0; end
 
 	tSrcInfo = VUHDO_RAID[aUnit];
-	if (tSrcInfo == nil or tSrcInfo["isPet"] or "focus" == aUnit or "target" == aUnit) then
-		return 0;
-	end
+	if not tSrcInfo or tSrcInfo["isPet"] or "focus" == aUnit or "target" == aUnit then	return 0;	end
 
-	if (anIsRadial) then
+	if anIsRadial then
 		VUHDO_getUnitsInRadialClusterWith(aUnit, aRangePow, tDestCluster, aCdSpell);
 	else
 		VUHDO_getUnitsInChainClusterWith(aUnit, aJumpRangePow, tDestCluster, aNumMaxTargets, aCdSpell);
@@ -110,10 +106,10 @@ function VUHDO_getCustomDestCluster(aUnit, anArray, anIsSourcePlayer, anIsRadial
 	tSrcGroup = tSrcInfo["group"];
 	for _, tUnit in pairs(tDestCluster) do
 		tInfo = VUHDO_RAID[tUnit];
-		if (tInfo ~= nil and tInfo["healthmax"] > 0 and not tInfo["dead"] and tInfo["health"] / tInfo["healthmax"] <= aHealthLimit) then
-			if ((anIsRaid or tInfo["group"] == tSrcGroup) and VUHDO_isInConeInFrontOf(tUnit, aCone)) then -- all raid members or in same group
+		if tInfo and tInfo["healthmax"] > 0 and not tInfo["dead"] and tInfo["health"] / tInfo["healthmax"] <= aHealthLimit then
+			if (anIsRaid or tInfo["group"] == tSrcGroup) and VUHDO_isInConeInFrontOf(tUnit, aCone) then -- all raid members or in same group
 				anArray[#anArray + 1] = tUnit;
-				if (#anArray == aNumMaxTargets) then
+				if #anArray == aNumMaxTargets then
 					break;
 				end
 			end
@@ -138,28 +134,24 @@ local tNumLow;
 local tAllButtons;
 function VUHDO_updateAllClusterIcons(aUnit, anInfo)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons == nil) then
-		return;
-	end
+	if not tAllButtons then return; end
 
 	tNumLow = VUHDO_getDestCluster(aUnit, VUHDO_ICON_CLUSTER);
-	if (VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] ~= tNumLow) then
+	if VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] ~= tNumLow then
 		VUHDO_NUM_IN_UNIT_CLUSTER[aUnit] = tNumLow;
 		VUHDO_updateBouquetsForEvent(aUnit, 16); -- VUHDO_UPDATE_NUM_CLUSTER
 	end
 
-	if (sClusterSlot == nil) then
-		return;
-	end
+	if not sClusterSlot then return; end
 
 	for _, tButton in pairs(tAllButtons) do
-		if (tNumLow < sThreshFair or not anInfo["range"]) then
+		if tNumLow < sThreshFair or not anInfo["range"] then
 			VUHDO_getBarIconFrame(tButton, sClusterSlot):Hide();
 			VUHDO_getBarIconTimer(tButton, sClusterSlot):SetText("");
 		else
 			VUHDO_getBarIcon(tButton, sClusterSlot):SetVertexColor(VUHDO_backColor(tNumLow < sThreshGood and sColorFair or sColorGood));
 			VUHDO_getBarIconFrame(tButton, sClusterSlot):Show();
-			if (sClusterConfig["IS_NUMBER"]) then
+			if sClusterConfig["IS_NUMBER"] then
 				VUHDO_getBarIconTimer(tButton, sClusterSlot):SetText(tNumLow);
 			end
 		end
@@ -183,7 +175,7 @@ local VUHDO_removeAllClusterHighlights = VUHDO_removeAllClusterHighlights;
 --
 function VUHDO_highlightClusterFor(aUnit)
 	VUHDO_CLUSTER_UNIT = aUnit;
-	if (VUHDO_HIGLIGHT_NUM ~= 0) then
+	if VUHDO_HIGLIGHT_NUM ~= 0 then
 		VUHDO_removeAllClusterHighlights();
 	end
 
@@ -199,7 +191,7 @@ end
 
 --
 function VUHDO_updateClusterHighlights()
-	if (VUHDO_CLUSTER_UNIT ~= nil) then
+	if VUHDO_CLUSTER_UNIT then
 		VUHDO_highlightClusterFor(VUHDO_CLUSTER_UNIT);
 	end
 end
@@ -222,7 +214,7 @@ end
 
 --
 function VUHDO_getIsInHiglightCluster(aUnit)
-	if(VUHDO_HIGLIGHT_NUM < sThreshFair) then
+	if VUHDO_HIGLIGHT_NUM < sThreshFair then
 		return false;
 	end
 
@@ -236,7 +228,7 @@ local tBorder;
 function VUHDO_clusterBorderBouquetCallback(aUnit, anIsActive, anIcon, aTimer, aCounter, aDuration, aColor, aBuffName, aBouquetName)
 	for _, tButton in pairs(VUHDO_getUnitButtonsSafe(aUnit)) do
 		tBorder = VUHDO_getClusterBorderFrame(tButton);
-		if (aColor ~= nil) then
+		if aColor then
 			tBorder:SetBackdropBorderColor(VUHDO_backColor(aColor));
 			tBorder:Show();
 		else

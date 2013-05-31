@@ -104,7 +104,6 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	ZoneName		= "Око Бури",
 	ScoreExpr		= "(%d+)/1600",
 	Alliance 		= "Альянс",
 	Horde 			= "Орда",
@@ -122,7 +121,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("z489")
 
 L:SetTimerLocalization({
-	TimerStart	= "Битва начнется через", 
+	TimerStart	= "Битва начнется через",
 	TimerFlag	= "Восстановление флага"
 })
 
@@ -190,7 +189,7 @@ L:SetMiscLocalization({
 L = DBM:GetModLocalization("z726")
 
 L:SetTimerLocalization({
-	TimerStart	= "Битва начнется через", 
+	TimerStart	= "Битва начнется через",
 	TimerFlag	= "Восстановление флага"
 })
 
@@ -204,7 +203,6 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	BgStart60 			= "Битва начнется через 1 минуту.",
 	BgStart30 			= "Битва начнется через 30 секунд. Приготовиться!",
-	ZoneName 			= "Два Пика",
 	Alliance			= "Альянса",
 	Horde				= "Орды",
 	InfoErrorText		= "Функция выбора флагоносца будет восстановлена после выхода из режима боя.",

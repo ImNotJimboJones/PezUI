@@ -6,7 +6,7 @@ function VUHDO_newOptionsMoveOnShow()
 	VUHDO_IS_PANEL_CONFIG = true;
 	VUHDO_CONFIG_SHOW_RAID = false;
 	VUHDO_initDynamicPanelModels();
-	VUHDO_redrawAllPanels();
+	VUHDO_redrawAllPanels(false);
 end
 
 
@@ -20,7 +20,7 @@ function VUHDO_newOptionsMoveOnHide()
 	VUHDO_newOptionsPanelFindDefaultPanel();
 	VUHDO_rewritePanelModels();
 	VUHDO_initDynamicPanelModels();
-	VUHDO_redrawAllPanels();
+	VUHDO_redrawAllPanels(false);
 end
 
 
@@ -31,7 +31,7 @@ function VUHDO_newOptionsAddPanelOnclick()
 		if (VUHDO_PANEL_MODELS[tCnt] == nil) then
 			VUHDO_PANEL_MODELS[tCnt] = { };
 			VUHDO_initDynamicPanelModels();
-			VUHDO_redrawAllPanels();
+			VUHDO_redrawAllPanels(false);
 			break;
 		end
 	end
@@ -43,15 +43,10 @@ end
 function VUHDO_newOptionsAddModelOnClick(aButton)
 	local tPanelNum = VUHDO_getComponentPanelNum(aButton:GetParent());
 
-	if (#VUHDO_PANEL_MODELS[tPanelNum] >= 15) then -- VUHDO_MAX_GROUPS_PER_PANEL
-		return;
-	end;
-
 	VUHDO_CONFIG_SHOW_RAID = false;
+	tinsert(VUHDO_PANEL_MODELS[tPanelNum], VUHDO_getGuessedModel(tPanelNum));
 	VUHDO_initDynamicPanelModels();
-	tinsert(VUHDO_PANEL_MODELS[tPanelNum], VUHDO_ID_UNDEFINED);
-	VUHDO_guessUndefinedEntries(tPanelNum);
-	VUHDO_redrawAllPanels();
+	VUHDO_redrawAllPanels(false);
 end
 
 
@@ -72,7 +67,7 @@ function VUHDO_newOptionsDeleteModelOnClick(aButton)
 		VUHDO_newOptionsPanelFindDefaultPanel();
 		VUHDO_initPanelModels();
 		VUHDO_initDynamicPanelModels();
-		VUHDO_redrawAllPanels();
+		VUHDO_redrawAllPanels(false);
 	end
 end
 
@@ -85,7 +80,7 @@ function VUHDO_newOptionsYesNoDecidedClearPanel(aDecision)
 		VUHDO_PANEL_SETUP[DESIGN_MISC_PANEL_NUM]["MODEL"].groups = { };
 		VUHDO_initPanelModels();
 		VUHDO_initDynamicPanelModels();
-		VUHDO_redrawAllPanels();
+		VUHDO_redrawAllPanels(false);
 	end
 end
 

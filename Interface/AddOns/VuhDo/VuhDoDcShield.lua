@@ -84,10 +84,8 @@ local function VUHDO_buildSnippetArray()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
 		tMacroIndex = ("player" == tUnit or "pet" == tUnit) and 41 or tInfo["number"];
 
-		if ((tMacroIndex or 0) > 0) then -- nicht: Target, Focus
-			if (tInfo["isPet"]) then
-				tMacroIndex = tMacroIndex + 41; -- VUHDO_MAX_MACRO_UNITS
-			end
+		if (tMacroIndex or 0) > 0 then -- nicht: Target, Focus
+			if tInfo["isPet"] then tMacroIndex = tMacroIndex + 41; end -- VUHDO_MAX_MACRO_UNITS
 
 			VUHDO_GROUP_SNIPPETS[tMacroIndex] = format("%01d%s%s",
 				tInfo["group"] % 10,
@@ -107,19 +105,17 @@ local tMacroString, tMacroNames;
 local tIndexGroups, tIndexNames;
 local tNumMacros;
 function VUHDO_mirrorToMacro()
-	if (VUHDO_IS_DC_TEMP_DISABLE) then
-		return;
-	end
+	if (VUHDO_IS_DC_TEMP_DISABLE) then return; end
 
 	tIndexGroups = GetMacroIndexByName(VUHDO_MACRO_NAME_GROUPS);
 	tIndexNames = GetMacroIndexByName(VUHDO_MACRO_NAME_NAMES);
 
-	if (VUHDO_CONFIG["IS_DC_SHIELD_DISABLED"]) then
-		if ((tIndexGroups or 0) ~= 0) then
+	if VUHDO_CONFIG["IS_DC_SHIELD_DISABLED"] then
+		if (tIndexGroups or 0) ~= 0 then
 			DeleteMacro(tIndexGroups);
 		end
 
-		if ((tIndexNames or 0) ~= 0) then
+		if (tIndexNames or 0) ~= 0 then
 			DeleteMacro(tIndexNames);
 		end
 
@@ -136,9 +132,9 @@ function VUHDO_mirrorToMacro()
 	twipe(VUHDO_GROUP_SNIPPETS);
 	twipe(VUHDO_NAME_SNIPPETS);
 
-	if ((tIndexGroups or 0) == 0) then
+	if (tIndexGroups or 0) == 0 then
 		_, tNumMacros = GetNumMacros();
-		if ((tNumMacros or 0) > 17) then
+		if (tNumMacros or 0) > 17 then
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
@@ -148,9 +144,9 @@ function VUHDO_mirrorToMacro()
 		EditMacro(tIndexGroups, VUHDO_MACRO_NAME_GROUPS, "Ability_Repair", tMacroString, 1, 1);
 	end
 
-	if ((tIndexNames or 0) == 0) then
+	if (tIndexNames or 0) == 0 then
 		_, tNumMacros = GetNumMacros();
-		if ((tNumMacros or 0) > 17) then
+		if (tNumMacros or 0) > 17 then
 			VUHDO_Msg(VUHDO_I18N_DC_SHIELD_NO_MACROS);
 			VUHDO_IS_DC_TEMP_DISABLE = true;
 		else
@@ -168,7 +164,7 @@ local function VUHDO_buildInfoFromSnippet(aUnit, aSnippet, aName)
 	local tInfo;
 	local tClassId;
 
-	if (VUHDO_RAID[aUnit] == nil) then
+	if not VUHDO_RAID[aUnit] then
 		VUHDO_RAID[aUnit] = { };
 	end
 
@@ -227,7 +223,7 @@ function VUHDO_buildRaidFromMacro()
 	tIndexGroups = GetMacroIndexByName(VUHDO_MACRO_NAME_GROUPS);
 	tIndexNames = GetMacroIndexByName(VUHDO_MACRO_NAME_NAMES);
 
-	if ((tIndexGroups or 0) == 0 or (tIndexNames or 0) == 0) then
+	if (tIndexGroups or 0) == 0 or (tIndexNames or 0) == 0 then
 		return false;
 	end
 
@@ -241,7 +237,7 @@ function VUHDO_buildRaidFromMacro()
 	for tCnt = 1, 82 do -- VUHDO_MAX_MACRO_UNITS * 2
 	  tStrIdx = tCnt * 3 - 1;
 		tSnippet = strsub(tMacroGroups, tStrIdx, tStrIdx + 2);
-		if ((tSnippet or VUHDO_EMPTY_SNIPPET) ~= VUHDO_EMPTY_SNIPPET) then
+		if (tSnippet or VUHDO_EMPTY_SNIPPET) ~= VUHDO_EMPTY_SNIPPET then
 
 			tUnit = tCnt == 41 and "player"
 				or tCnt == 82 and "pet"
@@ -265,21 +261,22 @@ local VUHDO_SAFE_PARTY = {
 
 
 
+--
 function VUHDO_buildSafeParty()
-	if (InCombatLockdown()) then
+	if InCombatLockdown() then
 		return;
 	end
 
 	local _, _, _, tSubtypeID = GetLFGProposal();
-	if (LFG_SUBTYPEID_RAID == tSubtypeID) then
+	if LFG_SUBTYPEID_RAID == tSubtypeID then
 		local tUnit, tGroup;
 		for tCnt = 0, 25 do
 			tGroup = floor(tCnt / 5) + 1;
 			tUnit = tCnt == 0 and "player" or "raid" .. tCnt;
-			if (VUHDO_GROUPS[tGroup] == nil) then
+			if not VUHDO_GROUPS[tGroup] then
 				VUHDO_GROUPS[tGroup] = {};
 			end
-			if (tCnt % 5 == 0) then
+			if tCnt % 5 == 0 then
 				twipe(VUHDO_GROUPS[tGroup]);
 			end
 

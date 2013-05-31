@@ -8,6 +8,7 @@ local twipe = table.wipe;
 local ceil = ceil;
 local pairs = pairs;
 local _;
+local sEmpty = {};
 
 local sConfiguredModels = {};
 local sRemoveUnitFromRaidGroupsCache = {};
@@ -35,18 +36,19 @@ end
 
 --
 function VUHDO_clearUndefinedModelEntries()
-	for _, tModelArray in pairs(VUHDO_PANEL_MODELS) do
-		for tCnt = 20, 1, -1 do -- VUHDO_MAX_GROUPS_PER_PANEL
-			if (tModelArray[tCnt] == 0) then -- VUHDO_ID_UNDEFINED
-				tremove(tModelArray, tCnt);
+	for tIndex, tModelArray in pairs(VUHDO_PANEL_MODELS) do
+		local tNewArray = { };
+
+		for _, tModel in ipairs(tModelArray) do
+			if tModel ~= VUHDO_ID_UNDEFINED then
+				tinsert(tNewArray, tModel);
 			end
 		end
+		VUHDO_PANEL_MODELS[tIndex] = tNewArray;
 	end
 
 	for tKey, tModelArray in pairs(VUHDO_PANEL_MODELS) do
-		if (#(tModelArray or {}) == 0) then
-			VUHDO_PANEL_MODELS[tKey] = nil;
-		end
+		if #(tModelArray or sEmpty) == 0 then VUHDO_PANEL_MODELS[tKey] = nil; end
 	end
 end
 
@@ -59,7 +61,7 @@ function VUHDO_initPanelModels()
 	for tCnt = 1, 10 do -- VUHDO_MAX_PANELS
 		VUHDO_PANEL_MODELS[tCnt] = VUHDO_PANEL_SETUP[tCnt]["MODEL"]["groups"];
 
-		for _, tModel in pairs(VUHDO_PANEL_MODELS[tCnt] or {}) do
+		for _, tModel in pairs(VUHDO_PANEL_MODELS[tCnt] or sEmpty) do
 			sConfiguredModels[tModel] = true;
 		end
 	end
@@ -73,7 +75,7 @@ local tIsShowModel;
 local tIsOmitEmpty;
 local tMaxRows, tNumModels, tRepeatModels;
 function VUHDO_initDynamicPanelModels()
-	if (VUHDO_isConfigPanelShowing()) then
+	if VUHDO_isConfigPanelShowing() then
 		VUHDO_PANEL_DYN_MODELS = VUHDO_deepCopyTable(VUHDO_PANEL_MODELS);
 		return;
 	end
@@ -90,12 +92,10 @@ function VUHDO_initDynamicPanelModels()
 
 		for _, tModelId in pairs(tModelArray) do
 			tNumModels = #VUHDO_getGroupMembers(tModelId);
-			if (not tIsOmitEmpty or tNumModels > 0) then
+			if not tIsOmitEmpty or tNumModels > 0 then
 
 				tRepeatModels = ceil(tNumModels / tMaxRows);
-				if (tRepeatModels == 0) then
-					tRepeatModels = 1;
-				end
+				if tRepeatModels == 0 then tRepeatModels = 1;	end
 
 				for tCnt = 1, tRepeatModels do
 					tinsert(VUHDO_PANEL_DYN_MODELS[tPanelNum], tModelId);
@@ -125,13 +125,10 @@ end
 
 --
 local tGroup;
-local tEmptyGroup = {};
 function VUHDO_isUnitInModelIterative(aUnit, aModelId)
-	tGroup = VUHDO_GROUPS[aModelId] or tEmptyGroup;
+	tGroup = VUHDO_GROUPS[aModelId] or sEmpty;
 	for _, tUnit in pairs(tGroup) do
-		if (aUnit == tUnit) then
-			return true;
-		end
+		if aUnit == tUnit then return true; end
 	end
 
 	return false;
@@ -146,9 +143,9 @@ function VUHDO_isUnitInModel(aUnit, aModelId)
 
 	tModelType = VUHDO_getModelType(aModelId);
 
-	if (2 == tModelType) then -- VUHDO_ID_TYPE_GROUP
+	if 2 == tModelType then -- VUHDO_ID_TYPE_GROUP
 		return aModelId == VUHDO_RAID[aUnit]["group"];
-	elseif (1 == tModelType) then -- VUHDO_ID_TYPE_CLASS
+	elseif 1 == tModelType then -- VUHDO_ID_TYPE_CLASS
 		return aModelId == VUHDO_RAID[aUnit]["classId"];
 	else -- VUHDO_ID_TYPE_SPECIAL
 		return VUHDO_isUnitInModelIterative(aUnit, aModelId);
@@ -159,12 +156,9 @@ local VUHDO_isUnitInModel = VUHDO_isUnitInModel;
 
 
 --
-local tEmpty = { };
 function VUHDO_isModelInPanel(aPanelNum, aModelId)
-	for _, tModelId in pairs(VUHDO_PANEL_DYN_MODELS[aPanelNum] or tEmpty) do
-		if (tModelId == aModelId) then
-			return true;
-		end
+	for _, tModelId in pairs(VUHDO_PANEL_DYN_MODELS[aPanelNum] or sEmpty) do
+		if tModelId == aModelId then return true; end
 	end
 
 	return false;
@@ -181,11 +175,11 @@ end
 
 --
 local function VUHDO_isRemoveUnitFromRaidGroups(aUnit)
-	if (sRemoveUnitFromRaidGroupsCache[aUnit] == nil) then
-		if ((VUHDO_CONFIG["OMIT_MAIN_TANKS"]     and VUHDO_isUnitInModelIterative(aUnit, 41))       -- VUHDO_ID_MAINTANKS
-		 or (VUHDO_CONFIG["OMIT_PLAYER_TARGETS"] and VUHDO_isUnitInModelIterative(aUnit, 42))       -- VUHDO_ID_PRIVATE_TANKS
-		 or (VUHDO_CONFIG["OMIT_MAIN_ASSIST"]    and VUHDO_isUnitInModelIterative(aUnit, 43))) then -- VUHDO_ID_MAIN_ASSISTS
+	if not sRemoveUnitFromRaidGroupsCache[aUnit] then
 
+		if (VUHDO_CONFIG["OMIT_MAIN_TANKS"] and VUHDO_isUnitInModelIterative(aUnit, 41))       -- VUHDO_ID_MAINTANKS
+		 or (VUHDO_CONFIG["OMIT_PLAYER_TARGETS"] and VUHDO_isUnitInModelIterative(aUnit, 42))       -- VUHDO_ID_PRIVATE_TANKS
+		 or (VUHDO_CONFIG["OMIT_MAIN_ASSIST"] and VUHDO_isUnitInModelIterative(aUnit, 43)) then -- VUHDO_ID_MAIN_ASSISTS
 			sRemoveUnitFromRaidGroupsCache[aUnit] = 1;
 		else
 			sRemoveUnitFromRaidGroupsCache[aUnit] = 0;
@@ -203,11 +197,11 @@ function VUHDO_isUnitInPanel(aPanelNum, aUnit)
 
 	for _, tModelId in pairs(VUHDO_PANEL_MODELS[aPanelNum]) do
 		tModelType = VUHDO_getModelType(tModelId);
-		if (2 == tModelType or 1 == tModelType) then -- VUHDO_ID_TYPE_GROUP -- VUHDO_ID_TYPE_CLASS
-			if (VUHDO_isUnitInModel(aUnit, tModelId) and not VUHDO_isRemoveUnitFromRaidGroups(aUnit)) then
+		if 2 == tModelType or 1 == tModelType then -- VUHDO_ID_TYPE_GROUP -- VUHDO_ID_TYPE_CLASS
+			if VUHDO_isUnitInModel(aUnit, tModelId) and not VUHDO_isRemoveUnitFromRaidGroups(aUnit) then
 				return true;
 			end
-		elseif (VUHDO_isUnitInModelIterative(aUnit, tModelId)) then
+		elseif VUHDO_isUnitInModelIterative(aUnit, tModelId) then
 			return true;
 		end
 	end

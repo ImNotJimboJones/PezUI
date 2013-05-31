@@ -1,7 +1,7 @@
 local tool
 tool = BrokerToolBox:NewTool("token",{
 	--author="Sanori",									--author of this tool
-	version="1.7 (15. Mar. 2013)",				--tool version
+	version="1.8 (11. May 2013)",				--tool version
 	defaultON=true,									--default active?
 	db={													--tool database
 		currency={},
@@ -83,7 +83,7 @@ tool = BrokerToolBox:NewTool("token",{
 		self.currencyids={
 			{self:L("PVE"),396,395,615,614},
 			{PLAYER_V_PLAYER,390,392,391},
-			{EXPANSION_NAME4,697,738},
+			{EXPANSION_NAME4,697,738,752},
 			{TRADE_SKILLS,698,361,61,402},
 			{MISCELLANEOUS,515,416,81,241},
 		}

@@ -27,10 +27,11 @@ local DASH_NONE = 0;
 local DASH_SHOW = 1;
 local DASH_HIDE = 2;
 local DASH_WIDTH;
+local DASH_ICON_WIDTH = 20;
 local IS_HEADER = true;
 
 local WATCHFRAME_SETLINES = { };			-- buffer to hold lines for a quest/achievement that will be displayed only if there is room
-local WATCHFRAME_SETLINES_NUMLINES;		-- the number of visual lines to be rendered for the buffered data - used just for item wrapping right now
+local WATCHFRAME_SETLINES_NUMLINES = 0;		-- the number of visual lines to be rendered for the buffered data - used just for item wrapping right now 
 
 local watchFrameTestLine;
 
@@ -326,7 +327,7 @@ function fun.WatchFrame_Update (self, twice)
 
 end
 
-local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, dash, hasItem, isComplete, eligible)
+local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, dash, hasItem, fullHeight, eligible, usedWidth)
 	-- anchor
 	if ( anchor ) then
 		line:SetPoint("RIGHT", anchor, "RIGHT", 0, 0);
@@ -353,7 +354,7 @@ local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, 
 		end
 	end
 	-- dash
-	local usedWidth = 0;
+	local usedWidth = usedWidth or 0;
 	if ( dash == DASH_SHOW ) then
 		line.dash:SetText(QUEST_DASH);
 		usedWidth = DASH_WIDTH;
@@ -371,7 +372,7 @@ local function WatchFrame_SetLine(line, anchor, verticalOffset, isHeader, text, 
 	end
 	line.text:SetWidth(WATCHFRAME_MAXLINEWIDTH - usedWidth);
 	if ( line.text:GetHeight() > WATCHFRAME_LINEHEIGHT ) then
-		if ( isComplete ) then
+		if ( fullHeight ) then
 			line:SetHeight(line.text:GetHeight() + 4);
 		else
 			line:SetHeight(WATCHFRAME_MULTIPLE_LINEHEIGHT);
@@ -508,7 +509,16 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 				end
 				lastLine = questTitle;
 
-				if ( isComplete ) then
+				local fauxComplete = false
+				if ( isComplete ) then -- MOD Check if all buddies are complete too
+					local buddyComplete = bl:getBuddyComplete(questID)
+					if not buddyComplete then
+						isComplete = false
+						fauxComplete = true
+					end
+				end
+				
+				if ( isComplete or (numObjectives == 0 and fauxComplete) ) then --MOD
 					local showItem = item and showItemWhenComplete;
 					if (GetQuestLogIsAutoComplete(questIndex)) then
 						line = WatchFrame_GetQuestLine();
@@ -529,10 +539,15 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 				else
 					for j = 1, numObjectives do
 						text, objectiveType, finished = GetQuestLogLeaderBoard(j, questIndex);						
-						if ( not finished and text ) then
+						
+						bs = bl:getBuddyWatch(questID, j) -- MODIFIED
+						
+						if bs and finished then finished = bl:getBuddyFinished(questID, j) end -- MOD
+
+						if ( (not finished) and text ) then 
 							text = ReverseQuestObjective(text, objectiveType);
+							--Print("going ".. text)
 							
-							bs = bl:getBuddyWatch(questID, j) -- MODIFIED
 							if bs then
 								local x,y,w = string.gmatch(text, MQT.MATCHLEADERBOARD3)();
 								if w and x and y then
@@ -553,6 +568,8 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 					end
 				end
 
+				if (not isComplete) and fauxComplete then isComplete = true end --MOD
+				
 				-- stop processing if there's no room to fit the quest
 				local numLines = #WATCHFRAME_SETLINES;
 				local lastBottom = lastLine:GetBottom();
@@ -618,7 +635,7 @@ function fun.WatchFrame_DisplayTrackedQuests (lineFrame, nextAnchor, maxHeight, 
 							numPOINumeric = numPOINumeric + 1;
 							poiButton = QuestPOI_DisplayButton("WatchFrameLines", QUEST_POI_NUMERIC, numPOINumeric, questID);
 						end
-					elseif ( isComplete ) then
+					elseif ( isComplete ) then 
 						numPOICompleteOut = numPOICompleteOut + 1;
 						poiButton = QuestPOI_DisplayButton("WatchFrameLines", QUEST_POI_COMPLETE_OUT, numPOICompleteOut, questID);
 					end

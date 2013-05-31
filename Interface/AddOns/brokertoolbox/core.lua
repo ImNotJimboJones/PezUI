@@ -3,7 +3,7 @@
 -- Author: Sanori (Pathur) @ EU-Anetheron                                     --
 --------------------------------------------------------------------------------
 me = {}
-me.version="1.7 (15. Mar. 2013)"
+me.version="1.8 (11. May 2013)"
 
 me.broker = LibStub:GetLibrary("LibDataBroker-1.1")	--Data Broker
 me.dropdown = LibStub('ArkDewdrop-3.0')					--Dropdownmenu

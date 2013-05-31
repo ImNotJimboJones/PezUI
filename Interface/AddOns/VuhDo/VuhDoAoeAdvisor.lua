@@ -219,11 +219,11 @@ local VUHDO_AOE_SPELLS = VUHDO_AOE_SPELLS;
 --
 local tAltPower;
 local function VUHDO_getPlayerHealingMod()
-	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
+	if "PRIEST" == VUHDO_PLAYER_CLASS then
 		return 1 + (0.15 * (UnitBuff("player", VUHDO_SPELL_ID.CHAKRA_SANCTUARY) and 1 or 0));
-	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
+	elseif "PALADIN" == VUHDO_PLAYER_CLASS then
 		tAltPower = UnitPower("player", 9);
-		if ((tAltPower or 6) ~= 6) then
+		if (tAltPower or 6) ~= 6 then
 			return 1 / (6 - tAltPower);
 		end
 	end
@@ -239,7 +239,7 @@ function VUHDO_aoeUpdateSpellAverages()
 	local tSpellModi;
 
 	for tName, tInfo in pairs(VUHDO_AOE_SPELLS) do
-		if ("cb" == tName) then
+		if "cb" == tName then
 			tInfo["avg"] = 32800; -- @TODO
 		else
 			tSpellModi = tInfo["base"] / tInfo["divisor"];
@@ -253,9 +253,9 @@ end
 
 --
 local function VUHDO_isAoeSpellEnabled(aSpell)
-	if (not VUHDO_CONFIG["AOE_ADVISOR"]["config"][aSpell]["enable"]) then
+	if not VUHDO_CONFIG["AOE_ADVISOR"]["config"][aSpell]["enable"] then
 		return false;
-	elseif (not VUHDO_CONFIG["AOE_ADVISOR"]["knownOnly"]) then
+	elseif not VUHDO_CONFIG["AOE_ADVISOR"]["knownOnly"] then
 		return true;
 	else
 		return VUHDO_isSpellKnown(VUHDO_AOE_SPELLS[aSpell]["name"]);
@@ -276,23 +276,23 @@ function VUHDO_aoeUpdateTalents()
 		tInfo["present"] = VUHDO_isAoeSpellEnabled(tName);
 	end
 
-	if ("PRIEST" == VUHDO_PLAYER_CLASS) then
+	if "PRIEST" == VUHDO_PLAYER_CLASS then
 		VUHDO_AOE_SPELLS["coh"]["max_targets"] = VUHDO_isGlyphed(42396) and 6 or 5; -- Glyph of CoH -- MOPok
 
-	elseif ("SHAMAN" == VUHDO_PLAYER_CLASS) then
+	elseif "SHAMAN" == VUHDO_PLAYER_CLASS then
 		VUHDO_AOE_SPELLS["ch"]["jumpRangePow"] = VUHDO_isGlyphed(41552) and 22 * 22 or 11 * 11; -- Kettenbildung -- MOPok
 
-	elseif ("DRUID" == VUHDO_PLAYER_CLASS) then
+	elseif "DRUID" == VUHDO_PLAYER_CLASS then
 		VUHDO_AOE_SPELLS["wg"]["max_targets"] = VUHDO_isGlyphed(45602) and 6 or 5; -- Glyph of WG -- MOPok
 
-	elseif ("PALADIN" == VUHDO_PLAYER_CLASS) then
+	elseif "PALADIN" == VUHDO_PLAYER_CLASS then
 		local tSpell = VUHDO_AOE_SPELLS["lod"];
-		if (VUHDO_isGlyphed(41109)) then -- Glyph of LoD -- MOPok
+		if VUHDO_isGlyphed(41109) then -- Glyph of LoD
 			tSpell["max_targets"] = 4;
-			tSpell["base"] = (4599 + 5082) * 0.75; -- MOPok
+			tSpell["base"] = (4599 + 5082) * 0.75;
 		else
 			tSpell["max_targets"] = 6;
-			tSpell["base"] = (4599 + 5082) * 0.5; -- MOPok
+			tSpell["base"] = (4599 + 5082) * 0.5;
 		end
 	end
 
@@ -303,7 +303,7 @@ end
 
 --
 local function VUHDO_aoeGetIncHeals(aUnit, aCastTime)
-	if (not sIsIncoming or (sIsIncCastTimeOnly and aCastTime == 0)) then
+	if not sIsIncoming or (sIsIncCastTimeOnly and aCastTime == 0) then
 		return 0;
 	end
 
@@ -325,8 +325,8 @@ local function VUHDO_sumClusterHealing(aCluster, aMaxAmount, aDegression, aCastT
 		tInfo = VUHDO_RAID[tUnit];
 		tDeficit = tInfo["healthmax"] - tInfo["health"] - VUHDO_aoeGetIncHeals(tUnit, aCastTime);
 
-		if (tInfo["healthmax"] > 0) then
-			if (tDeficit > aMaxAmount) then
+		if tInfo["healthmax"] > 0 then
+			if tDeficit > aMaxAmount then
 				tTotal = tTotal + aMaxAmount + (1 - tInfo["health"] / tInfo["healthmax"]); -- To avoid hopping
 			elseif (tDeficit > 0) then
 				tTotal = tTotal + tDeficit;
@@ -370,12 +370,10 @@ local function VUHDO_getBestUnitForAoeGroup(anAoeInfo, aPlayerModi, aGroup)
 
 	for tCnt = 1, #aGroup do
 		tInfo = aGroup[tCnt];
-		if (VUHDO_RAID[tInfo] ~= nil) then
-			tInfo = VUHDO_RAID[tInfo];
-		end
+		if VUHDO_RAID[tInfo] then	tInfo = VUHDO_RAID[tInfo]; end
 
-		if (tInfo["baseRange"]) then
-			if (tIsLinear) then
+		if tInfo["baseRange"] then
+			if tIsLinear then
 				VUHDO_getUnitsInLinearCluster(tInfo["unit"], tCluster, tRangePow, tMaxTargets, tIsHealsPlayer);
 			else
 				VUHDO_getCustomDestCluster(tInfo["unit"], tCluster,
@@ -385,10 +383,10 @@ local function VUHDO_getBestUnitForAoeGroup(anAoeInfo, aPlayerModi, aGroup)
 				);
 			end
 
-			if (#tCluster > 1) then
+			if #tCluster > 1 then
 				tCurrTotal = VUHDO_sumClusterHealing(tCluster, tSpellHeal, tDegress, tTime);
 
-				if (tCurrTotal > tBestTotal and tCurrTotal >= tThresh) then
+				if tCurrTotal > tBestTotal and tCurrTotal >= tThresh then
 					tBestTotal = tCurrTotal;
 					tBestUnit = tInfo["unit"];
 				end
@@ -428,7 +426,7 @@ local function VUHDO_getBestUnitsForAoe(anAoeInfo, aPlayerModi)
 	tIsHealsPlayer = anAoeInfo["isHealsPlayer"];
 	--tThresh = 1000;
 
-	if (sIsPerGroup and not tIsDestRaid) then
+	if sIsPerGroup and not tIsDestRaid then
 		for tCnt = 1, 8 do
 			tGroupUnit[tCnt]["u"], tGroupUnit[tCnt]["h"] = VUHDO_getBestUnitForAoeGroup(anAoeInfo, aPlayerModi, VUHDO_GROUPS[tCnt]);
 		end
@@ -445,7 +443,7 @@ end
 local tUnitForAoe = { [0] = {}, [1] = {}, [2] = {}, [3] = {}, [4] = {}, [5] = {}, [6] = {}, [7] = {}, [8] = {} };
 local function VUHDO_abgleichVorherBesserInGruppen(anAoeName, aGroupNum, aUnit, anAoeHealed, ...)
 	for tCnt = 1, select('#', ...) do
-		if ((tUnitForAoe[select(tCnt, ...)][aUnit] or 0) >= anAoeHealed) then
+		if (tUnitForAoe[select(tCnt, ...)][aUnit] or 0) >= anAoeHealed then
 			return;
 		end
 	end
@@ -463,31 +461,25 @@ local tBestUnits;
 local tOldAoeForUnit = {};
 local tAoeChangedForUnit = { };
 function VUHDO_aoeUpdateAll()
-	if (not VUHDO_INTERNAL_TOGGLES[32]) then -- VUHDO_UPDATE_AOE_ADVICE
-		return;
-	end
+	if not VUHDO_INTERNAL_TOGGLES[32] then return; end -- VUHDO_UPDATE_AOE_ADVICE
 
 	tPlayerModi = VUHDO_getPlayerHealingMod();
 
-	for tCnt = 0, 8 do
-		twipe(tUnitForAoe[tCnt]);
-	end
+	for tCnt = 0, 8 do twipe(tUnitForAoe[tCnt]); end
 
 	twipe(tOldAoeForUnit);
-	for tUnit, tAoeSpell in pairs(VUHDO_AOE_FOR_UNIT) do
-		tOldAoeForUnit[tUnit] = tAoeSpell;
-	end
+	for tUnit, tAoeSpell in pairs(VUHDO_AOE_FOR_UNIT) do tOldAoeForUnit[tUnit] = tAoeSpell; end
 	twipe(VUHDO_AOE_FOR_UNIT);
 
 	for tName, tInfo in pairs(VUHDO_AOE_SPELLS) do
-		if (tInfo["present"]) then
+		if tInfo["present"] then
 			tBestUnits = VUHDO_getBestUnitsForAoe(tInfo, tPlayerModi);
 
 			for tIndex, tUnitInfo in pairs(tBestUnits) do
 
 				tUnit = tUnitInfo["u"];
-				if (tUnit ~= nil) then
-					if (0 == tIndex) then -- Raidweit => Besser vorher in irgendeiner Gruppen oder Raid?
+				if tUnit then
+					if 0 == tIndex then -- Raidweit => Besser vorher in irgendeiner Gruppen oder Raid?
 						VUHDO_abgleichVorherBesserInGruppen(tName, tIndex, tUnit, tUnitInfo["h"], 0, 1, 2, 3, 4, 5, 6, 7, 8);
 					else -- je Gruppe => Besser vorher in eigener Gruppe oder Raid?
 						VUHDO_abgleichVorherBesserInGruppen(tName, tIndex, tUnit, tUnitInfo["h"], 0, tIndex);
@@ -500,14 +492,10 @@ function VUHDO_aoeUpdateAll()
 
 	twipe(tAoeChangedForUnit);
 	for tUnit, tAoeSpell in pairs(tOldAoeForUnit) do
-		if (VUHDO_AOE_FOR_UNIT[tUnit] ~= tAoeSpell) then
-			tAoeChangedForUnit[tUnit] = true;
-		end
+		if VUHDO_AOE_FOR_UNIT[tUnit] ~= tAoeSpell then tAoeChangedForUnit[tUnit] = true; end
 	end
 	for tUnit, tAoeSpell in pairs(VUHDO_AOE_FOR_UNIT) do
-		if (tOldAoeForUnit[tUnit] ~= tAoeSpell) then
-			tAoeChangedForUnit[tUnit] = true;
-		end
+		if tOldAoeForUnit[tUnit] ~= tAoeSpell then tAoeChangedForUnit[tUnit] = true; end
 	end
 
 	for tUnit, _ in pairs(tAoeChangedForUnit) do

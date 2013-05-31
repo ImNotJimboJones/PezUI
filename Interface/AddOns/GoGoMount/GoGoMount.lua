@@ -43,6 +43,7 @@ function GoGo_OnEvent(self, event, ...)
 		elseif (GoGo_Variables.Player.Class == "SHAMAN") then
 			GoGo_Variables.Shaman = {}
 			GoGoFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+			GoGo_Shaman_Panel()
 		elseif (GoGo_Variables.Player.Class == "HUNTER") then
 			GoGo_Hunter_Panel()
 		elseif (GoGo_Variables.Player.Class == "PALADIN") then
@@ -54,6 +55,9 @@ function GoGo_OnEvent(self, event, ...)
 		GoGo_ExtraPassengerMounts_Panel()
 		GoGo_ZoneExclusions_Panel()
 		GoGo_GlobalExclusions_Panel()
+		if GoGo_Prefs.autodismount then
+			GoGo_SetOptionAutoDismount(1)
+		end --if
 	elseif event == "PLAYER_REGEN_DISABLED" then
 		for i, button in ipairs({GoGoButton, GoGoButton2, GoGoButton3}) do
 			if GoGo_Variables.Player.Class == "SHAMAN" then
@@ -257,21 +261,6 @@ function GoGo_ChooseMount()
 	GoGo_Variables.RidingLevel = GoGo_GetRidingSkillLevel() or 0
 	GoGo_Variables.Player.Level = UnitLevel("player")
 
--- list of mount / movement speeds unmodified for mounts shown in mount data table
-	GoGo_TableAddUnique(GoGo_Variables.GroundSpeed, 160)  -- Ground slow
-	GoGo_TableAddUnique(GoGo_Variables.GroundSpeed, 200)  -- Ground fast
-	GoGo_TableAddUnique(GoGo_Variables.GroundSpeed, 100)  -- Ground really slow
-	GoGo_TableAddUnique(GoGo_Variables.AirSpeed, 250)  -- Air slow
-	GoGo_TableAddUnique(GoGo_Variables.AirSpeed, 380)  -- Air fast
-	GoGo_TableAddUnique(GoGo_Variables.AirSpeed, 410)  -- Air faster
-	GoGo_TableAddUnique(GoGo_Variables.WaterSpeed, 67)  -- water normal
-	GoGo_TableAddUnique(GoGo_Variables.WaterSpeed, 371)  -- Abyssal Seahorse 
-	GoGo_TableAddUnique(GoGo_Variables.WaterSpeed, 108)  -- Subdued Seahorse
-	GoGo_TableAddUnique(GoGo_Variables.WaterSpeed, 91)  -- Master Angler
-	GoGo_TableAddUnique(GoGo_Variables.WaterSurfaceSpeed, 67)  -- water normal
-	GoGo_TableAddUnique(GoGo_Variables.WaterSurfaceSpeed, 371)  -- Abyssal Seahorse 
-	GoGo_TableAddUnique(GoGo_Variables.WaterSurfaceSpeed, 108)  -- Subdued Seahorse
-	GoGo_TableAddUnique(GoGo_Variables.WaterSurfaceSpeed, 91)  -- Master Angler
 	if (GoGo_Variables.Player.Class == "DRUID") then
 		GoGo_TableAddUnique(GoGo_Variables.WaterSpeed, 101)  -- Aqua Form
 		GoGo_TableAddUnique(GoGo_Variables.WaterSurfaceSpeed, 101)  -- Aqua Form
@@ -2567,6 +2556,12 @@ function GoGo_ZoneCheck()
 		end --if
 		GoGo_Variables.ZoneExclude.CanFly = false
 		-- can ride = true
+	elseif GoGo_Variables.Player.ZoneID == 856 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Temple of Kotmogu (10 player battleground)")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+		-- can ride = true
 	elseif GoGo_Variables.Player.ZoneID == 857 then
 		if GoGo_Variables.Debug >= 10 then
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Krasarang Wilds")
@@ -2651,6 +2646,13 @@ function GoGo_ZoneCheck()
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Siege of Niuzao Temple (5 man instance)")
 		end --if
 		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 888 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Shadowglen")
+		end --if
+		if GoGo_InBook(GoGo_Variables.Localize.FlightMastersLicense) then
+			GoGo_Variables.ZoneExclude.CanFly = true
+		end --if
 	elseif GoGo_Variables.Player.ZoneID == 895 then
 		if GoGo_Variables.Debug >= 10 then
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for New Tinkertown")
@@ -2691,6 +2693,33 @@ function GoGo_ZoneCheck()
 	elseif GoGo_Variables.Player.ZoneID == 906 then
 		if GoGo_Variables.Debug >= 10 then
 			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Dustwallow Marsh (scenario - 85)")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 911 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Krasarang Wilds (3 man scenario)")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+		-- can ride = true
+	elseif GoGo_Variables.Player.ZoneID == 928 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Isle of Thunder")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 929 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Isle of Giants")
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 934 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Thunder King's Citadel (scenario)")
+			-- single player scenario from key obtained during thunder king isle dailies
+		end --if
+		GoGo_Variables.ZoneExclude.CanFly = false
+	elseif GoGo_Variables.Player.ZoneID == 935 then
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_ZoneCheck: Setting up for Deepwind Gorge (Battleground)")
 		end --if
 		GoGo_Variables.ZoneExclude.CanFly = false
 	elseif GoGo_Variables.Player.ZoneID == -1 then
@@ -2793,7 +2822,10 @@ function GoGo_CheckSwimSurface()
 
 	if GoGo_Prefs.DisableWaterFlight then  -- don't want to fly from water as per client option
 		GoGo_Variables.NoFlying = true
-		GoGo_Variables.SwimSurface = false
+		if GoGo_Variables.Debug >= 10 then
+			GoGo_DebugAddLine("GoGo_CheckSwimSurface: Don't want to fly from water surface.  Disabling flying.")
+		end --if
+		--GoGo_Variables.SwimSurface = false
 		return
 	end --if
 	
@@ -3167,6 +3199,7 @@ GOGO_ERRORS = {
 	[SPELL_FAILED_NOT_MOUNTED] = true,
 	[SPELL_FAILED_NOT_SHAPESHIFT] = true,
 	[ERR_ATTACK_MOUNTED] = true,
+	[SPELL_FAILED_NO_ACTIONS] = true,  -- Spell casting while in Zen Flight
 }
 
 GOGO_SPELLS = {
@@ -3206,14 +3239,30 @@ GOGO_SPELLS = {
 	end, --function
 }
 
+---------
+function GoGo_SetOptionAutoDismount(GoGo_Value)
+---------
+	if GoGo_Value == 1 then
+		GoGoFrame:RegisterEvent("UI_ERROR_MESSAGE")
+		if _G["GoGo_Panel_AutoDismount"] then  -- check before setting - (ticket 709)
+			GoGo_Panel_AutoDismount:SetChecked(1)
+		end --if
+		GoGo_Prefs.autodismount = true
+	elseif GoGo_Value == 0 then	
+		GoGoFrame:UnregisterEvent("UI_ERROR_MESSAGE")
+		GoGo_Panel_AutoDismount:SetChecked(0)
+		GoGo_Prefs.autodismount = false
+	end --if
+end --function
+
 GOGO_COMMANDS = {
 	["auto"] = function()
 		GoGo_Prefs.autodismount = not GoGo_Prefs.autodismount
 		GoGo_Msg("auto")
 		if GoGo_Prefs.autodismount then
-			GoGo_Panel_AutoDismount:SetChecked(1)
+			GoGo_SetOptionAutoDismount(1)
 		else
-			GoGo_Panel_AutoDismount:SetChecked(0)
+			GoGo_SetOptionAutoDismount(0)
 		end --if
 	end, --function
 	["clear"] = function()
@@ -3408,9 +3457,9 @@ function GoGo_Panel_Options()
 	GoGo_Panel_AutoDismount:SetScript("OnClick",
 		function(self)
 			if GoGo_Panel_AutoDismount:GetChecked() then
-				GoGo_Prefs.autodismount = true
+				GoGo_SetOptionAutoDismount(1)
 			else
-				GoGo_Prefs.autodismount = false
+				GoGo_SetOptionAutoDismount(0)
 			end --if
 		end --function
 	)
@@ -3704,6 +3753,39 @@ function GoGo_Paladin_Panel()
 end --function
 
 ---------
+function GoGo_Shaman_Panel()
+---------
+	GoGo_Shaman_Panel = CreateFrame("Frame", nil, UIParent)
+	GoGo_Shaman_Panel.name = GoGo_Variables.Localize.String.ShamanOptions
+	GoGo_Shaman_Panel.parent = "GoGoMount"
+--	GoGo_Shaman_Panel.okay = function (self) GoGo_Panel_Okay("SHAMAN"); end;
+	GoGo_Shaman_Panel.default = function (self) GoGo_Settings_Default("SHAMAN"); end;  -- use clear command with default button
+	InterfaceOptions_AddCategory(GoGo_Shaman_Panel)
+
+	GoGo_Shaman_Panel_ClickForm = CreateFrame("CheckButton", "GoGo_Shaman_Panel_ClickForm", GoGo_Shaman_Panel, "OptionsCheckButtonTemplate")
+	GoGo_Shaman_Panel_ClickForm:SetPoint("TOPLEFT", 16, -16)
+	GoGo_Shaman_Panel_ClickFormText:SetText(GoGo_Variables.Localize.String.ShamanSingleClick)
+	GoGo_Shaman_Panel_ClickForm:SetScript("OnClick",
+		function(self)
+			if GoGo_Shaman_Panel_ClickForm:GetChecked() then
+				GoGo_Prefs.ShamanClickForm = true
+			else
+				GoGo_Prefs.ShamanClickForm = false
+			end --if
+		end --function
+	)
+	GoGo_Shaman_Panel_ClickForm:SetScript("OnShow",
+		function(self)
+			if GoGo_Prefs.ShamanClickForm then
+				GoGo_Shaman_Panel_ClickForm:SetChecked(1)
+			else
+				GoGo_Shaman_Panel_ClickForm:SetChecked(0)
+			end --if
+		end --function
+	)
+end --function
+
+---------
 function GoGo_ZoneFavorites_Panel()
 ---------
 	GoGo_ZoneFavorites_Panel = CreateFrame("Frame", nil, UIParent)
@@ -3923,11 +4005,14 @@ function GoGo_Settings_Default(Class)
 	elseif Class == "HUNTER" then
 		GoGo_Prefs.AspectPack = false
 		InterfaceOptionsFrame_OpenToCategory(GoGo_Hunter_Panel)
+	elseif Class == "SHAMAN" then
+		GoGo_Prefs.ShamanClickForm = false
 	elseif Class == "PALADIN" then
 		GoGo_Prefs.PaladinUseCrusaderAura = false
 		InterfaceOptionsFrame_OpenToCategory(GoGo_Paladin_Panel)
 	elseif Class == "MAIN" then
-		GoGo_Prefs.autodismount = true
+		--GoGo_Prefs.autodismount = true
+		GoGo_SetOptionAutoDismount(1)
 		GoGo_Prefs.DisableUpdateNotice = false
 		GoGo_Prefs.DisableMountNotice = false
 		GoGo_Prefs.GlobalPrefMount = false
@@ -3940,7 +4025,8 @@ function GoGo_Settings_Default(Class)
 		GoGo_Prefs.ExtraPassengerMounts = {}
 		GoGo_Prefs.GlobalExclude = {}
 		GoGo_Prefs.version = GetAddOnMetadata("GoGoMount", "Version")
-		GoGo_Prefs.autodismount = true
+--		GoGo_Prefs.autodismount = true
+		GoGo_SetOptionAutoDismount(1)
 		GoGo_Prefs.DisableUpdateNotice = false
 		GoGo_Prefs.DisableMountNotice = false
 		GoGo_Prefs.DruidClickForm = true
@@ -3954,6 +4040,7 @@ function GoGo_Settings_Default(Class)
 		GoGo_Prefs.RemoveBuffs = true
 		GoGo_Prefs.DruidDisableInCombat = false
 		GoGo_Prefs.PaladinUseCrusaderAura = false
+		GoGo_Prefs.ShamanClickForm = false
 	end --if
 end --function
 
@@ -3973,6 +4060,7 @@ function GoGo_Settings_SetUpdates()
 	if not GoGo_Prefs.RemoveBuffs then GoGo_Prefs.RemoveBuffs = false end
 	if not GoGo_Prefs.DruidDisableInCombat then GoGo_Prefs.DruidDisableInCombat = false end
 	if not GoGo_Prefs.PaladinUseCrusaderAura then GoGo_Prefs.PaladinUseCrusaderAura = false end
+	if not GoGo_Prefs.ShamanClickForm then GoGo_Prefs.ShamanClickForm = false end
 	
 	GoGo_Prefs.UnknownMounts = {}
 	if not GoGo_Prefs.GlobalExclude then

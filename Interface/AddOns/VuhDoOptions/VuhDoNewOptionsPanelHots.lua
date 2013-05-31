@@ -7,7 +7,7 @@ local tSortTable = { };
 function VUHDO_initHotComboModels()
 	table.wipe(VUHDO_HOT_MODELS);
 
-	VUHDO_HOT_MODELS[1] = { nil, "-- " .. VUHDO_I18N_EMPTY_HOTS .. " --" };
+	VUHDO_HOT_MODELS[1] = { "", "-- " .. VUHDO_I18N_EMPTY_HOTS .. " --" };
 	VUHDO_HOT_MODELS[2] = { "OTHER", "|cff0000ff[s]|r " .. VUHDO_I18N_OTHER_HOTS};
 	VUHDO_HOT_MODELS[3] = { "CLUSTER", "|cff0000ff[s]|r " .. VUHDO_I18N_CLUSTER_FINDER};
 

@@ -68,7 +68,7 @@ function VUHDO_customTargetInitBurst()
 	VUHDO_textColor = _G["VUHDO_textColor"];
 	VUHDO_isTargetInRange = _G["VUHDO_isTargetInRange"];
 
-	if (VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]["useOpacity"]) then
+	if VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]["useOpacity"] then
 		sOOROpacity = VUHDO_PANEL_SETUP["BAR_COLORS"]["OUTRANGED"]["O"];
 	else
 		sOOROpacity = 1;
@@ -84,7 +84,7 @@ local function VUHDO_customizeManaBar(aButton)
 
 	_, tInfo = VUHDO_getDisplayUnit(aButton);
 
-	if (tInfo["connected"]) then
+	if tInfo["connected"] then
 		tManaBar = VUHDO_getHealthBar(aButton, 2);
 		tManaBar:SetValue(tInfo["powermax"] < 2 and 0 or tInfo["power"] / tInfo["powermax"]); -- Some addons return 1 mana-max instead of zero
 		tManaBar:SetVuhDoColor(VUHDO_POWER_TYPE_COLORS[tInfo["powertype"]]);
@@ -116,7 +116,7 @@ local function VUHDO_fillCustomInfo(aUnit)
 	tInfo["powermax"] = UnitManaMax(aUnit);
 	tInfo["dead"] = UnitIsDeadOrGhost(aUnit);
 	tInfo["connected"] = UnitIsConnected(aUnit);
-	if (tLocalClass == tName) then
+	if tLocalClass == tName then
 		tInfo["className"] = UnitCreatureType(aUnit) or "";
 	else
 		tInfo["className"] = tLocalClass or "";
@@ -139,7 +139,7 @@ local function VUHDO_targetHealthBouquetCallback(aButton, aUnit, anIsActive, anI
 	tQuota = anIsActive and (aMaxValue or 0) > 0
 		and aCurrValue / aMaxValue or 0;
 
-	if (tQuota > 0) then
+	if tQuota > 0 then
 		tBar = VUHDO_getHealthBar(aButton, 1);
 		tBar:SetValue(tQuota);
 		tBar:SetVuhDoColor(aColor);
@@ -163,12 +163,12 @@ function VUHDO_customizeTargetBar(aButton, aUnit, anIsInRange)
 	VUHDO_customizeManaBar(aButton, true);
 
 	tIconIdx = GetRaidTargetIndex(aUnit);
-	if (not VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["RAID_ICON"]["show"]
-		or not VUHDO_PANEL_SETUP["RAID_ICON_FILTER"][tIconIdx]) then
+	if not VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[aButton]]["RAID_ICON"]["show"]
+		or not VUHDO_PANEL_SETUP["RAID_ICON_FILTER"][tIconIdx] then
 		tIconIdx = nil;
 	end
 
-	if (tIconIdx ~= nil) then
+	if tIconIdx then
 		tTexture = VUHDO_getTargetBarRoleIcon(aButton, 50);
 		VUHDO_setRaidTargetIconTexture(tTexture, tIconIdx);
 		tTexture:Show();
@@ -186,9 +186,9 @@ local VUHDO_customizeTargetBar = VUHDO_customizeTargetBar;
 local tName;
 local function VUHDO_rememberTargetButton(aTargetUnit, aButton)
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (UnitIsUnit(tUnit, aTargetUnit)) then
+		if UnitIsUnit(tUnit, aTargetUnit) then
 			tName = tInfo["name"];
-			if (VUHDO_IN_RAID_TARGET_BUTTONS[tName] == nil) then
+			if not VUHDO_IN_RAID_TARGET_BUTTONS[tName] then
 				VUHDO_IN_RAID_TARGET_BUTTONS[tName] = { };
 			end
 
@@ -207,8 +207,8 @@ end
 local tName;
 local function VUHDO_forgetTargetButton(aTargetUnit, aButton)
 	tName = VUHDO_IN_RAID_TARGETS[aTargetUnit];
-	if (tName ~= nil) then
-		if (VUHDO_IN_RAID_TARGET_BUTTONS[tName] == nil) then
+	if tName then
+		if not VUHDO_IN_RAID_TARGET_BUTTONS[tName] then
 			VUHDO_IN_RAID_TARGET_BUTTONS[tName] = { };
 		end
 		VUHDO_IN_RAID_TARGET_BUTTONS[tName][aButton] = nil;
@@ -227,24 +227,22 @@ local tAllButtons;
 local tTarget;
 local tTargetOfTarget;
 function VUHDO_updateTargetBars(aUnit)
-	if (strfind(aUnit, "target", 1, true) and aUnit ~= "target") then
-		if (sTargetSourceUnits[aUnit] == nil) then
+	if strfind(aUnit, "target", 1, true) and aUnit ~= "target" then
+		if not sTargetSourceUnits[aUnit] then
 			sTargetSourceUnits[aUnit] = gsub(aUnit, "target", "");
 		end
 		aUnit = sTargetSourceUnits[aUnit];
 	end
 
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons == nil) then
-		return;
-	end
+	if not tAllButtons then return; end
 
-	if (sUnitTargetsUnits[aUnit] == nil) then
+	if not sUnitTargetsUnits[aUnit] then
 		sUnitTargetsUnits[aUnit] = aUnit .. "target";
 	end
 	tTarget = sUnitTargetsUnits[aUnit];
 
-	if (sUnitTotUnits[tTarget] == nil) then
+	if not sUnitTotUnits[tTarget] then
 		sUnitTotUnits[tTarget] = tTarget .. "target";
 	end
 	tTargetOfTarget = sUnitTotUnits[tTarget];
@@ -257,7 +255,7 @@ function VUHDO_updateTargetBars(aUnit)
 	VUHDO_IN_RAID_TARGETS[tTarget] = nil;
 	VUHDO_IN_RAID_TARGETS[tTargetOfTarget] = nil;
 
-	if (not UnitExists(tTarget)) then
+	if not UnitExists(tTarget) then
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_getTargetButton(tButton):SetAlpha(0);
 			VUHDO_getTotButton(tButton):SetAlpha(0);
@@ -270,7 +268,7 @@ function VUHDO_updateTargetBars(aUnit)
 	VUHDO_fillCustomInfo(tTarget);
 
 	for _, tButton in pairs(tAllButtons) do
-		if (VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["showTarget"]) then
+		if VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["showTarget"] then
 			tTargetButton = VUHDO_getTargetButton(tButton);
 			VUHDO_customizeTargetBar(tTargetButton, tTarget, VUHDO_isTargetInRange(tTarget));
 			tTargetButton:SetAlpha(1);
@@ -279,7 +277,7 @@ function VUHDO_updateTargetBars(aUnit)
 	end
 
 	-- Target-of-target
-	if (not UnitExists(tTargetOfTarget)) then
+	if not UnitExists(tTargetOfTarget) then
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_getTotButton(tButton):SetAlpha(0);
 		end
@@ -289,7 +287,7 @@ function VUHDO_updateTargetBars(aUnit)
 	VUHDO_fillCustomInfo(tTargetOfTarget);
 
 	for _, tButton in pairs(tAllButtons) do
-		if (VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["showTot"]) then
+		if VUHDO_PANEL_SETUP[VUHDO_BUTTON_CACHE[tButton]]["SCALING"]["showTot"] then
 			tTotButton = VUHDO_getTotButton(tButton);
 			VUHDO_customizeTargetBar(tTotButton, tTargetOfTarget, VUHDO_isTargetInRange(tTargetOfTarget));
 			tTotButton:SetAlpha(1);
@@ -303,9 +301,7 @@ local VUHDO_updateTargetBars = VUHDO_updateTargetBars;
 
 --
 function VUHDO_rebuildTargets()
-	if (not VUHDO_INTERNAL_TOGGLES[22]) then -- VUHDO_UPDATE_UNIT_TARGET
-		return;
-	end
+	if not VUHDO_INTERNAL_TOGGLES[22] then return; end-- VUHDO_UPDATE_UNIT_TARGET
 
 	twipe(VUHDO_IN_RAID_TARGETS);
 	twipe(VUHDO_IN_RAID_TARGET_BUTTONS);
@@ -323,27 +319,25 @@ local tTotUnit, tGuid;
 local tAllButtons;
 local function VUHDO_updateTargetHealth(aUnit, aTargetUnit)
 	tAllButtons = VUHDO_getUnitButtons(aUnit);
-	if (tAllButtons == nil) then
-		return;
-	end
+	if not tAllButtons then	return; end
 
-	if (VUHDO_IN_RAID_TARGETS[aTargetUnit] == nil)  then
+	if not VUHDO_IN_RAID_TARGETS[aTargetUnit] then
 		VUHDO_fillCustomInfo(aTargetUnit);
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_customizeTargetBar(VUHDO_getTargetButton(tButton), aTargetUnit, VUHDO_isTargetInRange(aTargetUnit));
 		end
 	end
 
-	if (sUnitTotUnits[aTargetUnit] == nil) then
+	if not sUnitTotUnits[aTargetUnit] then
 		sUnitTotUnits[aTargetUnit] = aTargetUnit .. "target";
 	end
 	tTotUnit = sUnitTotUnits[tTarget];
 
 	tGuid = UnitGUID(tTotUnit);
-	if (VUHDO_TOT_GUIDS[aUnit] ~= tGuid) then
+	if VUHDO_TOT_GUIDS[aUnit] ~= tGuid then
 		VUHDO_updateTargetBars(aUnit);
 		VUHDO_TOT_GUIDS[aUnit] = tGuid;
-	elseif (VUHDO_IN_RAID_TARGETS[tTotUnit] == nil and UnitExists(tTotUnit))  then
+	elseif VUHDO_IN_RAID_TARGETS[tTotUnit] == nil and UnitExists(tTotUnit) then
 		VUHDO_fillCustomInfo(tTotUnit);
 		for _, tButton in pairs(tAllButtons) do
 			VUHDO_customizeTargetBar(VUHDO_getTotButton(tButton), tTotUnit, VUHDO_isTargetInRange(tTotUnit));
@@ -356,7 +350,7 @@ end
 --
 function VUHDO_updateAllOutRaidTargetButtons()
 	for tUnit, tInfo in pairs(VUHDO_RAID) do
-		if (UnitExists(tInfo["targetUnit"])) then
+		if UnitExists(tInfo["targetUnit"]) then
 			VUHDO_updateTargetHealth(tUnit, tInfo["targetUnit"]);
 		end
 	end

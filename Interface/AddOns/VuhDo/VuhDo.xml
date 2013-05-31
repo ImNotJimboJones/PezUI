@@ -73,7 +73,7 @@
 		</Frames>
 		<Scripts>
 			<OnLoad>
-				VUHDO_repairStatusbar(self);
+				VUHDO_refactorStatusbar(self);
 			</OnLoad>
 		</Scripts>
 	</Frame>

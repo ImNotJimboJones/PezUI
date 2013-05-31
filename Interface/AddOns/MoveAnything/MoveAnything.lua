@@ -89,47 +89,51 @@ local MovAny = {
 		UIParent = "UIParent",
 		WorldFrame = "WorldFrame",
 		CinematicFrame = "CinematicFrame",
-		PlayerTalentFrame = "PlayerTalentFrame",
+--	PlayerTalentFrame = "PlayerTalentFrame",
 		PetBattleFrame = "PetBattleFrame",
-		WatchFrame = "WatchFrame",
-		GroupLootContainer = "GroupLootContainer",
-		LootWonAlertMover1 = "LootWonAlertMover1",
-		LootWonAlertMover2 = "LootWonAlertMover2",
-		LootWonAlertMover3 = "LootWonAlertMover3",
-		LootWonAlertMover4 = "LootWonAlertMover4",
-		LootWonAlertMover5 = "LootWonAlertMover5",
-		MoneyWonAlertMover1 = "MoneyWonAlertMover1",
-		MoneyWonAlertMover2 = "MoneyWonAlertMover2",
-		MoneyWonAlertMover3 = "MoneyWonAlertMover3",
+--		WatchFrame = "WatchFrame",
+--		GroupLootContainer = "GroupLootContainer",
+	--	LootWonAlertMover1 = "LootWonAlertMover1",
+--		LootWonAlertMover2 = "LootWonAlertMover2",
+--		LootWonAlertMover3 = "LootWonAlertMover3",
+--		LootWonAlertMover4 = "LootWonAlertMover4",
+--		LootWonAlertMover5 = "LootWonAlertMover5",
+--		MoneyWonAlertMover1 = "MoneyWonAlertMover1",
+--		MoneyWonAlertMover2 = "MoneyWonAlertMover2",
+--		MoneyWonAlertMover3 = "MoneyWonAlertMover3",
 		
-		StaticPopup1 = "StaticPopup1",
-		StaticPopup2 = "StaticPopup2",
-		StaticPopup3 = "StaticPopup3",
-		StaticPopup4 = "StaticPopup4",
-		StaticPopup1Button1 = "StaticPopup1Button1",
-		StaticPopup1Button2 = "StaticPopup1Button2",
-		StaticPopup1Button3 = "StaticPopup1Button3",
-		StaticPopup1EditBox = "StaticPopup1EditBox",
-		StaticPopup2Button1 = "StaticPopup2Button1",
-		StaticPopup2Button2 = "StaticPopup2Button2",
-		StaticPopup2Button3 = "StaticPopup2Button3",
-		StaticPopup2EditBox = "StaticPopup2EditBox",
-		StaticPopup3Button1 = "StaticPopup3Button1",
-		StaticPopup3Button2 = "StaticPopup3Button2",
-		StaticPopup3Button3 = "StaticPopup3Button3",
-		StaticPopup3EditBox = "StaticPopup3EditBox",
-		StaticPopup4Button1 = "StaticPopup4Button1",
-		StaticPopup4Button2 = "StaticPopup4Button2",
-		StaticPopup4Button3 = "StaticPopup4Button3",
-		StaticPopup4EditBox = "StaticPopup4EditBox",
+	--	StaticPopup1 = "StaticPopup1",
+	--	StaticPopup2 = "StaticPopup2",
+	--	StaticPopup3 = "StaticPopup3",
+	--	StaticPopup4 = "StaticPopup4",
 		
-		DropDownList1 = "DropDownList1",
-		DropDownList1Button1 = "DropDownList1Button1",
-		DropDownList1Button2 = "DropDownList1Button2",
-		DropDownList1Button3 = "DropDownList1Button3",
-		DropDownList1Button4 = "DropDownList1Button4",
-		DropDownList1Button5 = "DropDownList1Button5",
-		DropDownList1Button6 = "DropDownList1Button6",
+	--	StaticPopup1Button1 = "StaticPopup1Button1",
+	--	StaticPopup1Button2 = "StaticPopup1Button2",
+	--	StaticPopup1Button3 = "StaticPopup1Button3",
+	--	StaticPopup1EditBox = "StaticPopup1EditBox",
+		
+	--	StaticPopup2Button1 = "StaticPopup2Button1",
+	--	StaticPopup2Button2 = "StaticPopup2Button2",
+	--	StaticPopup2Button3 = "StaticPopup2Button3",
+	--	StaticPopup2EditBox = "StaticPopup2EditBox",
+		
+	--	StaticPopup3Button1 = "StaticPopup3Button1",
+	--	StaticPopup3Button2 = "StaticPopup3Button2",
+	--	StaticPopup3Button3 = "StaticPopup3Button3",
+	--	StaticPopup3EditBox = "StaticPopup3EditBox",
+		
+	--	StaticPopup4Button1 = "StaticPopup4Button1",
+	--	StaticPopup4Button2 = "StaticPopup4Button2",
+	--	StaticPopup4Button3 = "StaticPopup4Button3",
+	--	StaticPopup4EditBox = "StaticPopup4EditBox",
+		
+	--	DropDownList1 = "DropDownList1",
+	--	DropDownList1Button1 = "DropDownList1Button1",
+	--	DropDownList1Button2 = "DropDownList1Button2",
+	--	DropDownList1Button3 = "DropDownList1Button3",
+	--	DropDownList1Button4 = "DropDownList1Button4",
+	--	DropDownList1Button5 = "DropDownList1Button5",
+	--	DropDownList1Button6 = "DropDownList1Button6",
 	},
 	lCreateVMs = {
 		"BagFrame1",
@@ -208,7 +212,7 @@ local MovAny = {
 		ChatFrame8EditBox = "ChatEditBoxesMover",
 		ChatFrame9EditBox = "ChatEditBoxesMover",
 		ChatFrame10EditBox = "ChatEditBoxesMover",
-		WatchFrame = "WatchFrameMover",
+	--	WatchFrame = "WatchFrameMover",
 	--	LootWonAlertFrame1 = "LootWonAlertMover1",
 	},
 	lTransContainerToBag = {
@@ -703,9 +707,14 @@ function MovAny:Load()
 				end
 				if type(data.children) == "table" then
 					for i, v in pairs(data.children) do
-						local child = type(v) == "string" and _G[v] or v
+						local child = v
+						
+						if type(v) == "string" then
+							child = _G[v]
+						end
+						
 						if child then
-					--	print(child)
+				--		print(child)
 							if not self:IsModified(child:GetName()) then
 								child.MAParent = name
 							end

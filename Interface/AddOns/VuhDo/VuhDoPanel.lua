@@ -50,7 +50,7 @@ end
 --
 local tIdAll = { VUHDO_ID_ALL };
 function VUHDO_getDynamicModelArray(aPanelNum)
-	if (0 == VUHDO_PANEL_SETUP[aPanelNum]["MODEL"]["ordering"]) then -- VUHDO_ORDERING_STRICT
+	if 0 == VUHDO_PANEL_SETUP[aPanelNum]["MODEL"]["ordering"] then -- VUHDO_ORDERING_STRICT
 		return VUHDO_PANEL_DYN_MODELS[aPanelNum] or sEmpty;
 	else
 		return tIdAll;
@@ -77,16 +77,16 @@ function VUHDO_customizeHeader(aHeader, aPanelNum, aModelId)
 	tHeaderText = VUHDO_getHeaderTextId(aHeader);
 	tHeaderText:SetText(VUHDO_getHeaderText(aModelId));
 
-	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsHeader"]
-		and 1 == VUHDO_getModelType(aModelId)) then -- VUHDO_ID_TYPE_CLASS
+	if VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsHeader"]
+		and 1 == VUHDO_getModelType(aModelId) then -- VUHDO_ID_TYPE_CLASS
 		tColor = VUHDO_getClassColorByModelId(aModelId);
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
 	end
 	tHeaderText:SetTextColor(VUHDO_textColor(tColor));
 
-	if (VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsBackHeader"]
-		and 1 == VUHDO_getModelType(aModelId)) then -- VUHDO_ID_TYPE_CLASS
+	if VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["classColorsBackHeader"]
+		and 1 == VUHDO_getModelType(aModelId) then -- VUHDO_ID_TYPE_CLASS
 		tColor = VUHDO_getClassColorByModelId(aModelId);
 	else
 		tColor = VUHDO_PANEL_SETUP[aPanelNum]["PANEL_COLOR"]["HEADER"];
@@ -102,11 +102,8 @@ local function VUHDO_getSubTable(aTable, anIndex, aCount)
 	twipe(tSubTable);
 
 	for tSubCount = anIndex, anIndex + aCount - 1 do
-		if (aTable[tSubCount] ~= nil) then
-			tSubTable[#tSubTable + 1] = aTable[tSubCount];
-		else
-			break;
-		end
+		if aTable[tSubCount] then tSubTable[#tSubTable + 1] = aTable[tSubCount];
+		else break; end
 	end
 
 	return tSubTable;
@@ -122,7 +119,7 @@ local function VUHDO_cutSubGroup(anIdentifier, aPanelNum, aModelIndex)
 	tDynModel = VUHDO_getDynamicModelArray(aPanelNum);
 	tOccurrence = 0;
 	for tModelNo = 1, aModelIndex do
-		if (tDynModel[tModelNo] == anIdentifier) then
+		if tDynModel[tModelNo] == anIdentifier then
 			tOccurrence = tOccurrence + 1;
 		end
 	end
@@ -153,9 +150,7 @@ local VUHDO_getGroupMembers = VUHDO_getGroupMembers;
 --
 local function VUHDO_getPanelUnitFirstModel(aPanelNum, aUnit)
 	for tIndex, tModelId in ipairs(VUHDO_PANEL_MODELS[aPanelNum]) do
-		if (VUHDO_isUnitInModel(aUnit, tModelId)) then
-			return tIndex;
-		end
+		if VUHDO_isUnitInModel(aUnit, tModelId) then return tIndex; end
 	end
 
 	return 9999;
@@ -175,12 +170,10 @@ local tRole1, tRole2;
 local VUHDO_RAID_SORTERS = {
 	[VUHDO_SORT_RAID_UNITID]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
@@ -190,12 +183,10 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_RAID_NAME]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
@@ -205,18 +196,16 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_RAID_CLASS]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
-				elseif (VUHDO_RAID[aUnitId]["class"] ~= nil and VUHDO_RAID[anotherUnitId]["class"] ~= nil) then
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
+				elseif VUHDO_RAID[aUnitId]["class"] and VUHDO_RAID[anotherUnitId]["class"] then
 					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId], VUHDO_RAID[anotherUnitId];
 					return tInfo1["class"] .. (tInfo1["name"] or "") > tInfo2["class"] .. (tInfo2["name"] or "");
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
@@ -226,18 +215,16 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_RAID_MAX_HP]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
-				elseif (VUHDO_RAID[aUnitId]["sortMaxHp"] ~= nil and VUHDO_RAID[anotherUnitId]["sortMaxHp"] ~= nil) then
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
+				elseif VUHDO_RAID[aUnitId]["sortMaxHp"] and VUHDO_RAID[anotherUnitId]["sortMaxHp"] then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId], VUHDO_RAID[anotherUnitId];
 					return tInfo1["sortMaxHp"] > tInfo2["sortMaxHp"];
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
@@ -247,17 +234,15 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_RAID_MODELS]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 					tFirstIdx = VUHDO_getPanelUnitFirstModel(sPanelNum, aUnitId);
 					tSecondIdx = VUHDO_getPanelUnitFirstModel(sPanelNum, anotherUnitId);
-					if (tFirstIdx ~= tSecondIdx) then
+					if tFirstIdx ~= tSecondIdx then
 						return tFirstIdx < tSecondIdx;
 					else
 						tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
@@ -268,27 +253,23 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_TA_DD_HL]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif (sIsPlayerFirst and anotherUnitId == "player") then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
 					tRole1, tRole2 = tInfo1["role"], tInfo2["role"];
 
-					if (tRole1 == VUHDO_ID_MELEE_TANK and tRole2 ~= VUHDO_ID_MELEE_TANK) then
+					if tRole1 == VUHDO_ID_MELEE_TANK and tRole2 ~= VUHDO_ID_MELEE_TANK then
 						return true;
-					elseif (tRole2 == VUHDO_ID_MELEE_TANK and tRole1 ~= VUHDO_ID_MELEE_TANK) then
+					elseif tRole2 == VUHDO_ID_MELEE_TANK and tRole1 ~= VUHDO_ID_MELEE_TANK then
 						return false;
-					elseif ((tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE)
-						and tRole2 == VUHDO_ID_RANGED_HEAL) then
+					elseif (tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE) and tRole2 == VUHDO_ID_RANGED_HEAL then
 						return true;
-					elseif ((tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE)
-						and tRole1 == VUHDO_ID_RANGED_HEAL) then
+					elseif (tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE) and tRole1 == VUHDO_ID_RANGED_HEAL then
 						return false;
 					else
 						return (tInfo1["name"] or "") < (tInfo2["name"] or "");
@@ -298,27 +279,25 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_TA_HL_DD]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif (sIsPlayerFirst and anotherUnitId == "player") then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
 					tRole1, tRole2 = tInfo1["role"], tInfo2["role"];
 
-					if (tRole1 == VUHDO_ID_MELEE_TANK and tRole2 ~= VUHDO_ID_MELEE_TANK) then
+					if tRole1 == VUHDO_ID_MELEE_TANK and tRole2 ~= VUHDO_ID_MELEE_TANK then
 						return true;
-					elseif (tRole2 == VUHDO_ID_MELEE_TANK and tRole1 ~= VUHDO_ID_MELEE_TANK) then
+					elseif tRole2 == VUHDO_ID_MELEE_TANK and tRole1 ~= VUHDO_ID_MELEE_TANK then
 						return false;
-					elseif (tRole1 == VUHDO_ID_RANGED_HEAL
-						and (tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE)) then
+					elseif tRole1 == VUHDO_ID_RANGED_HEAL
+						and (tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE) then
 						return true;
-					elseif (tRole2 == VUHDO_ID_RANGED_HEAL
-						and (tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE)) then
+					elseif tRole2 == VUHDO_ID_RANGED_HEAL
+						and (tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE) then
 						return false;
 					else
 						return (tInfo1["name"] or "") < (tInfo2["name"] or "");
@@ -328,27 +307,25 @@ local VUHDO_RAID_SORTERS = {
 
 	[VUHDO_SORT_HL_TA_DD]
 		= function(aUnitId, anotherUnitId)
-				if (sIsPlayerFirst and aUnitId == "player") then
-					return true;
-				elseif (sIsPlayerFirst and anotherUnitId == "player") then
-					return false;
+				if sIsPlayerFirst and aUnitId == "player" then return true;
+				elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
 				else
-					if (VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"]) then
+					if VUHDO_PANEL_SETUP[sPanelNum]["MODEL"]["isReverse"] then
 						aUnitId, anotherUnitId = anotherUnitId, aUnitId;
 					end
 
 					tInfo1, tInfo2 = VUHDO_RAID[aUnitId] or sEmpty, VUHDO_RAID[anotherUnitId] or sEmpty;
 					tRole1, tRole2 = tInfo1["role"], tInfo2["role"];
 
-					if (tRole1 == VUHDO_ID_RANGED_HEAL and tRole2 ~= VUHDO_ID_RANGED_HEAL) then
+					if tRole1 == VUHDO_ID_RANGED_HEAL and tRole2 ~= VUHDO_ID_RANGED_HEAL then
 						return true;
-					elseif (tRole2 == VUHDO_ID_RANGED_HEAL and tRole1 ~= VUHDO_ID_RANGED_HEAL) then
+					elseif tRole2 == VUHDO_ID_RANGED_HEAL and tRole1 ~= VUHDO_ID_RANGED_HEAL then
 						return false;
-					elseif (tRole1 == VUHDO_ID_MELEE_TANK
-						and (tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE)) then
+					elseif tRole1 == VUHDO_ID_MELEE_TANK
+						and (tRole2 == VUHDO_ID_MELEE_DAMAGE or tRole2 == VUHDO_ID_RANGED_DAMAGE) then
 						return true;
-					elseif (tRole2 == VUHDO_ID_MELEE_TANK
-						and (tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE)) then
+					elseif tRole2 == VUHDO_ID_MELEE_TANK
+						and (tRole1 == VUHDO_ID_MELEE_DAMAGE or tRole1 == VUHDO_ID_RANGED_DAMAGE) then
 						return false;
 					else
 						return (tInfo1["name"] or "") < (tInfo2["name"] or "");
@@ -368,32 +345,25 @@ function VUHDO_getGroupMembersSorted(anIdentifier, aSortCriterion, aPanelNum, aM
 	tMembers = VUHDO_getGroupMembers(anIdentifier, aPanelNum, aModelIndex);
 	sIsPlayerFirst = VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["isPlayerOnTop"];
 
-	if (41 ~= anIdentifier) then -- VUHDO_ID_MAINTANKS
+	if 41 ~= anIdentifier then -- VUHDO_ID_MAINTANKS
 		twipe(tSorted);
 		tNoExists = false;
 		tWasTarget, tWasFocus = false, false;
 		for _, tUnit in ipairs(tMembers) do
-			if (tUnit == "target") then
-				tWasTarget = true;
-			elseif (tUnit == "focus") then
-				tWasFocus = true;
+			if tUnit == "target" then tWasTarget = true;
+			elseif (tUnit == "focus") then tWasFocus = true;
 			else
 				tSorted[#tSorted + 1] = tUnit;
-				if (VUHDO_RAID[tUnit] == nil) then
-					tNoExists = true;
-				end
+				if not VUHDO_RAID[tUnit] then tNoExists = true; end
 			end
 		end
-		if (70 == anIdentifier or tNoExists) then -- VUHDO_ID_VEHICLES
+
+		if 70 == anIdentifier or tNoExists then -- VUHDO_ID_VEHICLES
 			tsort(tSorted,
 				function(aUnitId, anotherUnitId)
-					if (sIsPlayerFirst and aUnitId == "player") then
-						return true;
-					elseif (sIsPlayerFirst and anotherUnitId == "player") then
-						return false;
-					else
-						return aUnitId < anotherUnitId;
-					end
+					if sIsPlayerFirst and aUnitId == "player" then return true;
+					elseif sIsPlayerFirst and anotherUnitId == "player" then return false;
+					else return aUnitId < anotherUnitId; end
 				end
 			);
 		else
@@ -401,12 +371,8 @@ function VUHDO_getGroupMembersSorted(anIdentifier, aSortCriterion, aPanelNum, aM
 			tsort(tSorted, VUHDO_RAID_SORTERS[aSortCriterion]);
 		end
 
-		if (tWasFocus) then
-			tinsert(tSorted, 1, "focus");
-		end
-		if (tWasTarget) then
-			tinsert(tSorted, 1, "target");
-		end
+		if tWasFocus then tinsert(tSorted, 1, "focus"); end
+		if tWasTarget then tinsert(tSorted, 1, "target"); end
 
 	else -- for main tanks keep the order of CTRA/ORA
 		twipe(tSorted); -- has to be copied!!! conflicts in size calculator otherwise!
@@ -424,12 +390,12 @@ end
 local tUnit;
 function VUHDO_addUnitButton(aHealButton, aPanelNum)
 	tUnit = aHealButton:GetAttribute("unit");
-	if (VUHDO_UNIT_BUTTONS[tUnit] == nil) then
+	if not VUHDO_UNIT_BUTTONS[tUnit] then
 		VUHDO_UNIT_BUTTONS[tUnit] = { };
 		VUHDO_UNIT_BUTTONS_PANEL[tUnit] = { };
 	end
 
-	if (VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum] == nil) then
+	if not VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum] then
 		VUHDO_UNIT_BUTTONS_PANEL[tUnit][aPanelNum] = { };
 	end
 

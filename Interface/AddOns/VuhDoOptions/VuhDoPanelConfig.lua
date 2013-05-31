@@ -3,32 +3,6 @@ VUHDO_IS_PANEL_CONFIG = false;
 VUHDO_CONFIG_SHOW_RAID = false;
 
 local sMaxDragDistance = 60;
-local sGuessedModels = { };
-
-
-function VUHDO_clearGuessedModels(aPanelNum)
-	sGuessedModels[aPanelNum] = { };
-end
-
-
---
-function VUHDO_setGuessedModel(aPanelNum, aSlotNum, aValue)
-	if (sGuessedModels[aPanelNum] == nil) then
-		sGuessedModels[aPanelNum] = { };
-	end
-
-	sGuessedModels[aPanelNum][aSlotNum] = aValue;
-end
-
-
-
---
-local function VUHDO_getGuessedModel(aPanelNum, aSlotNum)
-	if ((sGuessedModels[aPanelNum] or {})[aSlotNum] == nil) then
-		return false;
-	end
-	return sGuessedModels[aPanelNum][aSlotNum];
-end
 
 
 
@@ -37,47 +11,58 @@ function VUHDO_positionAllGroupConfigPanels(aPanelNum)
 	local tIsShowOrder;
 	local tModel;
 	local tXPos, tYPos;
-	local tPanel;
+	local tOrderPanel, tSelectPanel;
 
 	for _, tButton in pairs(VUHDO_getPanelButtons(aPanelNum)) do
 		tButton:Hide();
 	end
 
 	local tModelArray = VUHDO_PANEL_MODELS[aPanelNum];
-	local tScale =  VUHDO_getHealButtonWidth(aPanelNum) / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
-
 	if (tModelArray == nil) then
 		return;
 	end
 
 	local tParentPanel = VUHDO_getActionPanel(aPanelNum);
 	local tAnzModels = #tModelArray;
+	local tScale =  VUHDO_PANEL_SETUP[aPanelNum]["SCALING"]["barWidth"] / VUHDO_getOrCreateGroupOrderPanel(aPanelNum, 1):GetWidth();
 
 	for tCnt = 1, tAnzModels do
-		VUHDO_getOrCreateGroupOrderPanel(aPanelNum, tCnt):SetScale(tScale);
-		VUHDO_getOrCreateGroupSelectPanel(aPanelNum, tCnt):SetScale(tScale);
-
+		tOrderPanel = VUHDO_getOrCreateGroupOrderPanel(aPanelNum, tCnt);
+		tOrderPanel:SetScale(tScale);
 		tXPos, tYPos = VUHDO_getHealButtonPos(tCnt, 1, aPanelNum);
 
 		tModel = VUHDO_PANEL_MODELS[aPanelNum][tCnt];
-		tIsShowOrder = (tModel ~= VUHDO_ID_UNDEFINED)
-			and not VUHDO_getGuessedModel(aPanelNum, tCnt);
+		tIsShowOrder = true;
 
-		tPanel = VUHDO_getGroupOrderPanel(aPanelNum, tCnt);
-		tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
-		tPanel:SetShown(tIsShowOrder);
+		tOrderPanel:ClearAllPoints(); -- parent könnte gewechselt haben
+		tOrderPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
+		tOrderPanel:SetShown(tIsShowOrder);
 
-		tPanel = VUHDO_getGroupSelectPanel(aPanelNum, tCnt);
-		tPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
-		tPanel:SetShown(not tIsShowOrder);
+		tSelectPanel = VUHDO_getOrCreateGroupSelectPanel(aPanelNum, tCnt);
+		tSelectPanel:SetScale(tScale);
+		tSelectPanel:ClearAllPoints();
+		tSelectPanel:SetPoint("TOPLEFT", tParentPanel:GetName(), "TOPLEFT", tXPos / tScale, -tYPos / tScale);
+		tSelectPanel:SetShown(not tIsShowOrder);
 
 		VUHDO_getConfigOrderBarLeft(aPanelNum, tCnt):Hide();
 		VUHDO_getConfigOrderBarRight(aPanelNum, tCnt):Hide();
 	end
 
-	for tCnt = tAnzModels + 1, 15 do -- VUHDO_MAX_GROUPS_PER_PANEL
- 		VUHDO_getOrCreateGroupOrderPanel(aPanelNum, tCnt):Hide();
-		VUHDO_getOrCreateGroupSelectPanel(aPanelNum, tCnt):Hide();
+	local tCnt = tAnzModels + 1;
+	while true do -- VUHDO_MAX_GROUPS_PER_PANEL
+ 		tOrderPanel = VUHDO_getGroupOrderPanel(aPanelNum, tCnt);
+ 		if (tOrderPanel ~= nil) then
+ 			tOrderPanel:Hide();
+		else
+			break;
+		end
+
+		tSelectPanel = VUHDO_getGroupSelectPanel(aPanelNum, tCnt);
+		if (tSelectPanel ~= nil) then
+			tSelectPanel:Hide();
+		end
+
+		tCnt = tCnt + 1;
 	end
 end
 
@@ -202,8 +187,7 @@ local tDragY;
 function VUHDO_determineDragTarget(aDraggedPanel)
 
 	tLowestDistance = math.huge;
-	for tPanelNum = 1, VUHDO_MAX_PANELS do
-		tPanel = VUHDO_getActionPanel(tPanelNum);
+	for tPanelNum, tPanel in pairs(VUHDO_getAllActionPanels()) do
 		if (tPanel:IsVisible()) then
 			tMaxOrderPanels = #VUHDO_PANEL_MODELS[tPanelNum];
 			for tConfigNum = 1, tMaxOrderPanels do
@@ -281,7 +265,7 @@ local tModelId;
 function VUHDO_reorderGroupsAfterDragged(aDraggedPanel)
 	tPanelNum, tOrderNum, tIsLeft = VUHDO_determineDragTarget(aDraggedPanel);
 
-	if (tOrderNum ~= nil) then
+	if tOrderNum then
 		tSourcePanelNum, tSourceGroupOrderNum = VUHDO_getComponentPanelNumModelNum(aDraggedPanel);
 		tModelId = VUHDO_PANEL_MODELS[tSourcePanelNum][tSourceGroupOrderNum];
 		VUHDO_removeFromModel(tSourcePanelNum, tSourceGroupOrderNum);
@@ -291,10 +275,9 @@ function VUHDO_reorderGroupsAfterDragged(aDraggedPanel)
 		end
 
 		VUHDO_insertIntoModel(tPanelNum, tOrderNum, tIsLeft, tModelId);
-		sGuessedModels[tPanelNum] = { };
 	end
 
-	VUHDO_redrawAllPanels();
+	VUHDO_redrawAllPanels(false);
 end
 
 
@@ -303,22 +286,17 @@ end
 local tTypeMembers;
 local tModels;
 local tIsUsed;
-function VUHDO_guessModelIdForType(aPanelNum, aType)
+local function VUHDO_guessModelIdForType(aPanelNum, aType)
 	tTypeMembers = VUHDO_ID_TYPE_MEMBERS[aType];
 	tModels = VUHDO_PANEL_MODELS[aPanelNum];
 
 	for _, tCheckId in ipairs(tTypeMembers) do
 		tIsUsed = false;
 		for _, tModelId in pairs(tModels) do
-			if (tCheckId == tModelId) then
-				tIsUsed = true;
-				break;
-			end
+			if tCheckId == tModelId then tIsUsed = true; break; end
 		end
 
-		if (not tIsUsed) then
-			return tCheckId;
-		end
+		if not tIsUsed then return tCheckId; end
 	end
 
 	return nil;
@@ -327,49 +305,32 @@ end
 
 
 --
-local tModelType;
-local tGuessId;
-local tTypeCount;
-function VUHDO_guessUndefinedEntries(aPanelNum)
+function VUHDO_getGuessedModel(aPanelNum)
 
-	tTypeCount = {
-		[VUHDO_ID_TYPE_GROUP] = { VUHDO_ID_TYPE_GROUP, 0 },
-		[VUHDO_ID_TYPE_CLASS] = { VUHDO_ID_TYPE_CLASS, 0 },
-		[VUHDO_ID_TYPE_SPECIAL] = { VUHDO_ID_TYPE_SPECIAL, 0 }
+	local tTypeCount = {
+		[VUHDO_ID_TYPE_CLASS] = 0,
+		[VUHDO_ID_TYPE_GROUP] = 0,
+		[VUHDO_ID_TYPE_SPECIAL] = 0,
 	};
 
 	for tIndex, tModelId in ipairs(VUHDO_PANEL_MODELS[aPanelNum]) do
 		tModelType = VUHDO_getModelType(tModelId);
+		tTypeCount[tModelType] = tTypeCount[tModelType] + 1;
+	end
 
-		if (tTypeCount[tModelType] ~= nil and not VUHDO_getGuessedModel(aPanelNum, tIndex)) then
-			tTypeCount[tModelType][2] = tTypeCount[tModelType][2] + 1;
-		else
-			VUHDO_PANEL_MODELS[aPanelNum][tIndex] = VUHDO_ID_TYPE_UNDEFINED;
+	local tMaxType = nil;
+	local tMaxValue = 0;
+	for tType, tValue in pairs(tTypeCount) do
+		if tValue > tMaxValue then
+			tMaxType = tType;
+			tMaxValue = tValue;
 		end
 	end
 
-	table.sort(tTypeCount,
-		function(aTupel, anotherTupel)
-			return aTupel[2] > anotherTupel[2];
-		end
-	);
-
-	for tIndex, tModelId in ipairs(VUHDO_PANEL_MODELS[aPanelNum]) do
-		if (tModelId == VUHDO_ID_TYPE_UNDEFINED) then
-			for _, tTupel in ipairs(tTypeCount) do
-				if (tTupel[2] == 0) then
-					return;
-				end
-
-				tGuessId = VUHDO_guessModelIdForType(aPanelNum, tTupel[1]);
-				if (tGuessId ~= nil) then
-					VUHDO_PANEL_MODELS[aPanelNum][tIndex] = tGuessId;
-					VUHDO_setGuessedModel(aPanelNum, tIndex, true);
-					break;
-				end
-			end
-		end
+	if tMaxType then
+		local tGuessedModel = VUHDO_guessModelIdForType(aPanelNum, tMaxType);
+		if tGuessedModel then return tGuessedModel; end
 	end
+
+	return VUHDO_ID_GROUP_1;
 end
-
-

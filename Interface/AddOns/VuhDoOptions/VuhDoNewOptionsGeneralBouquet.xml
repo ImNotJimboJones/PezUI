@@ -702,13 +702,10 @@
 							</Frame>
 
 							<Button name="$parentIconComboBox" hidden="false" inherits="VuhDoComboBoxTemplate">
-								<Size>
-									<AbsDimension x="187" y="32" />
-								</Size>
 								<Anchors>
 									<Anchor point="TOPLEFT">
 										<Offset>
-											<AbsDimension x="30" y="-210" />
+											<AbsDimension x="30" y="-193" />
 										</Offset>
 									</Anchor>
 								</Anchors>

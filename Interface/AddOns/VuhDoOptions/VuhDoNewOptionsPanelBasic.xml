@@ -53,7 +53,7 @@
 								VUHDO_lnfRadioButtonClicked(self);
 								VUHDO_lnfRadioButtonUpdateModel(self);
 								VUHDO_newOptionsLooseRadioButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -87,7 +87,7 @@
 								VUHDO_lnfRadioButtonClicked(self);
 								VUHDO_lnfRadioButtonUpdateModel(self);
 								VUHDO_newOptionsStrictRadioButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -127,7 +127,7 @@
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);
 								VUHDO_lnfCheckButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -148,7 +148,7 @@
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);
 								VUHDO_lnfCheckButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -169,7 +169,7 @@
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);
 								VUHDO_lnfCheckButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -190,7 +190,7 @@
 							<OnClick>
 								VUHDO_lnfCheckButtonUpdateModel(self);
 								VUHDO_lnfCheckButtonClicked(self);
-								VUHDO_reloadUI();
+								VUHDO_reloadUI(false);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -427,13 +427,10 @@
 					</Frame>
 
 					<Button name="$parentSortCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="32" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="13" y="-50" />
+									<AbsDimension x="13" y="-33" />
 								</Offset>
 							</Anchor>
 						</Anchors>
@@ -575,13 +572,10 @@
 					</Frame>
 
 					<Button name="$parentTextureCombo" inherits="VuhDoComboBoxTemplate">
-						<Size>
-							<AbsDimension x="200" y="32" />
-						</Size>
 						<Anchors>
 							<Anchor point="TOPLEFT">
 								<Offset>
-									<AbsDimension x="70" y="-125" />
+									<AbsDimension x="70" y="-108" />
 								</Offset>
 							</Anchor>
 						</Anchors>
