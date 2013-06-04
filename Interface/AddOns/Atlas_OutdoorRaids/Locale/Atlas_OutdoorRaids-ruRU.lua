@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_OutdoorRaids-ruRU.lua 1891 2013-02-17 15:41:01Z arithmandar $
+﻿-- $Id: Atlas_OutdoorRaids-ruRU.lua 1963 2013-03-30 19:04:14Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,7 +29,7 @@
 -- Atlas Data  (Russian)
 -- Compiled by StingerSoft
 -- stingersoft@gmail.com
--- Last Update: $Date: 2013-02-17 23:41:01 +0800 (Sun, 17 Feb 2013) $
+-- Last Update: $Date: 2013-03-31 03:04:14 +0800 (週日, 31 三月 2013) $
 
 --]]
 
@@ -42,14 +42,12 @@ if AL then
 	AL["Ancient Skull Pile"] = "Груда древних черепов";
 	AL["Darkscreecher Akkarai"] = "Темный Крикун Аккарай";
 	AL["Gezzarak the Huntress"] = "Геззарак Охотница";
-	AL["Graveyard"] = "Кладбище";
 	AL["Grella <Skyguard Quartermaster>"] = "Грелла <Интендант Стражи небес>";
 	AL["Hazzik"] = "Хаззик";
 	AL["Hazzik's Package"] = " Сверток Хаззика";
 	AL["Karrog"] = "Каррог";
 	AL["Outdoor Raid Encounters"] = "Места внешних рейдовых схваток";
 	AL["Pandaria World Bosses"] = "Pandaria World Bosses";
-	AL["Random"] = "Случайный";
 	AL["Sahaak <Keeper of Scrolls>"] = "Сахаак <Хранитель Свитков>";
 	AL["Severin <Skyguard Medic>"] = "Северин <Врач Стражи небес>";
 	AL["Skull Pile"] = "Груда черепов";
@@ -57,7 +55,6 @@ if AL then
 	AL["Sky Sergeant Doryn"] = "Небесный сержант Дорин";
 	AL["Skyguard Handler Deesak"] = "Укротитель Диисак из Стражи Небес";
 	AL["Skyguard Prisoner"] = "Плененный Страж Небес";
-	AL["Summon"] = "Призыв";
 	AL["Talonpriest Ishaal"] = "Жрец Когтя Ишааль";
 	AL["Talonpriest Skizzik"] = "Жрец Когтя Скиззик";
 	AL["Talonpriest Zellek"] = "Жрец Когтя Зеллек";

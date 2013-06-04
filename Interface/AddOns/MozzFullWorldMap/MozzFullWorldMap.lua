@@ -869,10 +869,10 @@ end
 
 ------------------------------------------------------------------------------------------------
 
-hooksecurefunc( 
-	"WorldMapQuestShowObjectives_AdjustPosition", 
-	AnchorMapOptions 
-);
+hooksecurefunc( "ToggleFrame", function( who ) if who == WorldMapFrame then AnchorMapOptions(); end end );
+hooksecurefunc( "WorldMapFrame_ToggleWindowSize", AnchorMapOptions );
+hooksecurefunc( "WorldMap_ToggleSizeUp", AnchorMapOptions );
+hooksecurefunc( "WorldMap_ToggleSizeDown", AnchorMapOptions );
 
 ------------------------------------------------------------------------------------------------
 -- end of file

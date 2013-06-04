@@ -1,8 +1,15 @@
 Thnan's Mod
 
 A framework for various features. See each plugin's readme for more information.
+THIS MOD HAS BEEN SPLIT INTO SEPARATE PROJECTS FOR EACH MODULE. Future updates will only
+be available through the other projects. See the website for more information.
 
 VERSION CHANGES:
+
+3.5.1:
+
+- Updated to support WoW version 5.3.0
+- Added notices about project split to intro blurb and options panel.
 
 3.5.0:
 

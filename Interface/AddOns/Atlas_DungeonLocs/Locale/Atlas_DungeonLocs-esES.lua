@@ -1,4 +1,4 @@
--- $Id: Atlas_DungeonLocs-esES.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: Atlas_DungeonLocs-esES.lua 1963 2013-03-30 19:04:14Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,7 +29,7 @@
 -- Datos de Atlas (Español)
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@hotmail.com
--- Última Actualización (last update): $Date: 2013-02-17 23:41:01 +0800 (Sun, 17 Feb 2013) $
+-- Última Actualización (last update): $Date: 2013-03-31 03:04:14 +0800 (週日, 31 三月 2013) $
 
 --]]
 
@@ -46,7 +46,4 @@ if AL then
 	AL["Green"] = "Verde";
 	AL["Instances"] = "Mazmorras";
 	AL["White"] = "Blanco";
-
-	--Zones
-	AL["Crusaders' Coliseum"] = "Coliseo de los Cruzados";
 end

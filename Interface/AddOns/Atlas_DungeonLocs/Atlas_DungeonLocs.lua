@@ -1,4 +1,4 @@
--- $Id: Atlas_DungeonLocs.lua 1894 2013-02-18 17:22:11Z arithmandar $
+-- $Id: Atlas_DungeonLocs.lua 2026 2013-05-21 13:37:43Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,6 +30,7 @@
 
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
 local AL = LibStub("AceLocale-3.0"):GetLocale("Atlas_DungeonLocs");
+local ALC = LibStub("AceLocale-3.0"):GetLocale("Atlas");
 
 local BLUE = "|cff6666ff";
 local GREN = "|cff66cc33";
@@ -147,7 +148,7 @@ local myData = {
 		{ WHIT..INDENT..BZ["Ulduar"] };
 		{ WHIT..INDENT..BZ["Halls of Stone"] };
 		{ WHIT..INDENT..BZ["Halls of Lightning"] };
-		{ WHIT.." 2) "..AL["Crusaders' Coliseum"]..", ".._RED..BZ["Icecrown"] };
+		{ WHIT.." 2) "..ALC["Crusaders' Coliseum"]..", ".._RED..BZ["Icecrown"] };
 		{ WHIT..INDENT..BZ["Trial of the Crusader"] };
 		{ WHIT..INDENT..BZ["Trial of the Champion"] };
 		{ WHIT.." 3) "..BZ["Gundrak"]..", ".._RED..BZ["Zul'Drak"] };
@@ -195,6 +196,10 @@ local myData = {
 		{ WHIT.." 8) "..BZ["Temple of the Jade Serpent"]..", ".._RED..BZ["The Jade Forest"] };
 		{ WHIT.." 9) "..BZ["Heart of Fear"]..", ".._RED..BZ["Dread Wastes"] };
 		{ WHIT.."10) "..BZ["Stormstout Brewery"]..", ".._RED..BZ["Valley of the Four Winds"] };
+		{ GREN.." 1') "..BZ["Deepwind Gorge"]..", ".._RED..BZ["Valley of the Four Winds"] };
+		{ "" };
+		{ WHIT..AL["White"]..": "..ORNG..AL["Instances"] };
+		{ GREN..AL["Green"]..": "..ORNG..AL["Battlegrounds"] };
 	};
 };
 

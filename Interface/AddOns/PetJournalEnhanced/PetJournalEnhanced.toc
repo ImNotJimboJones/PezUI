@@ -1,11 +1,15 @@
-## Interface: 50200
+## Interface: 50300
 ## Title: PetJournal Enhanced
 ## Notes: Displays the rarity of the enemies pets in their tooltip.
 ## Author: nullberri
-## Version: 2.8.2
+## Version: 2.9.8
+## LoadOnDemand: 1
+## LoadWith: Blizzard_PetJournal
+## SavedVariables: PetJournalEnhancedDB
 ## X-Category: Pet Journal
 ## X-Localizations: enUS,deDe,ruRU
-## SavedVariables: PetJournalEnhancedDB
+
+
 
 
 libs\LibStub\LibStub.lua
@@ -20,13 +24,40 @@ libs\AceConfig-3.0\AceConfig-3.0.xml
 libs\AceLocale-3.0\AceLocale-3.0.xml
 libs\LibPetBreedInfo-1.0\LibPetBreedInfo-1.0.lua
 
-local-enUS.lua
-local-deDE.lua
-local-ruRU.lua
+#no dep
 PetJournalEnhanced.lua
-modules\ZoneIDs.lua
+local-enUS.lua
+
+local-ptBR.lua
+local-frFR.lua
+local-deDE.lua
+#itIT
+local-koKR.lua
+local-esMX.lua
+local-ruRU.lua
+local-zhCN.lua
+#esES
+local-zhTW.lua
+local-zhCN.lua
+
+modules\StaticData.lua
+modules\config.lua
+
+#dep: StaticData
 modules\ZoneFiltering.lua
-modules\HookedFunctions.lua
-modules\DropdownMenu.lua
+
+#dep: Config
 modules\UniqueCount.lua
+
+#dep: ZoneFiltering
+modules\Sorting.lua
+
+#dep: Config, Sorting
+modules\DropdownMenu.lua
+
+#dep: Config, Sorting, DropDown
+modules\HookedFunctions.lua
+
+
+
 

@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-ruRU.lua 1912 2013-02-27 10:59:00Z Dynaletik $
+﻿-- $Id: Atlas-ruRU.lua 2024 2013-05-21 10:59:41Z StingerSoft@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,8 +30,8 @@ local AL = AceLocale:NewLocale("Atlas", "ruRU", false);
 -- Atlas Russian Localization
 -- Compiled by Eugene Filatov, bigoblin, StingerSoft
 -- Last Update: 23.01.2011
--- $Date: 2012-10-03 22:56:00 +0800 (Wed, 03 Oct 2012) $
--- $Revision: 1771 $
+-- $Date: 2013-05-21 18:59:41 +0800 (週二, 21 五月 2013) $
+-- $Revision: 2024 $
 
 if ( GetLocale() == "ruRU" ) then
 -- Define the leading strings to be ignored while sorting
@@ -174,7 +174,7 @@ if AL then
 	AL["Love is in the Air"] = "Любовная лихорадка";
 	AL["Lunar Festival"] = "Лунный фестиваль";
 	AL["Midsummer Festival"] = "Огненный солнцеворот";
-	
+
 	--Misc strings
 	AL["Colon"] = ": "; -- The colon symbol to be used in string, ex: "Zone: Firelands
 	AL["Adult"] = "Взрослый";
@@ -238,6 +238,7 @@ if AL then
 	AL["Teleporter destination"] = "Назначение телепорта";
 	AL["Third Stop"] = "Третья остановка";
 	AL["Top"] = "Верхний";
+	AL["Tunnel"] = "Туннель";
 	AL["Underwater"] = "Подводный";
 	AL["Upper"] = "Верхний";
 	AL["Varies"] = "Изменяется";
@@ -362,7 +363,7 @@ if AL then
 	AL["VP"] = "ВС"; --Вершина смерча
 	AL["ZA"] = "ЗА"; -- Зул'Аман
 	AL["ZG"] = "ЗГ"; --Зул'Гуруб
-	
+
 	--MoP Acronyms
 	AL["GSS"] = "ВЗС"; --Врата Заходящего Солнца
 	AL["HoF"] = "СС"; --Сердце Страха
@@ -374,7 +375,7 @@ if AL then
 	AL["TJS"] = "ХНЗ"; --Храм Нефритовой Змеи
 	AL["TES"] = "ТВВ"; --Терраса Вечной Весны
 	AL["ToT"] = "ЗМ"; --Throne of Thunder
-	
+
 --************************************************
 -- Instance Entrance Maps
 --************************************************
@@ -498,7 +499,6 @@ if AL then
 	AL["Knot Thimblejack"] = "Уззл Наперстяк";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "Флакон Д'жииви";
 	AL["Ferra"] = "Ферра";
 	AL["Estulan <The Highborne>"] = "Эстулан <Высокорожденный>";
 	AL["Shen'dralar Watcher"] = "Шен'драларский дозорный";
@@ -569,8 +569,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "Ключ от древнего сундука";
-	AL["Dark Keeper Key"] = "Ключ темного хранителя";
 	AL["The Black Anvil"] = "Черная наковальня";
 	AL["The Vault"] = "Подземелье";
 	AL["Watchman Doomgrip"] = "Сторож Хватка Смерти";
@@ -716,7 +714,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "Измученный жрец душ";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "Око Харамада";
 	AL["Artificer Morphalius"] = "Работник Морфалиус";
 	AL["Mamdy the \"Ologist\""] = "Мамди по кличке \"Олог\"";
 	AL["Shadow Lord Xiraxis"] = "Владыка теней Зираксис";
@@ -772,21 +769,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "Землепряд Гневвс";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "Открытие Темных врат";
 	AL["Sa'at <Keepers of Time>"] = "Са'ат <Хранители Времени>";
-	AL["The Dark Portal"] = "Темный портал";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "Битва за Гору Хиджала";
-	AL["Alliance Base"] = "База Альянса";
 	AL["Lady Jaina Proudmoore"] = "Леди Джайна Праудмур";
-	AL["Horde Encampment"] = "Стоянка орды";
 	AL["Thrall <Warchief>"] = "Тралл <Вождь>";
-	AL["Night Elf Village"] = "Деревня Ночных эльфов";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "Тиранда Шелест Ветра";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "Побег из Крепости Дарнхольда";
 	AL["Erozion"] = "Эрозион";
 	AL["Brazen"] = "Бронзень";
 	AL["Landing Spot"] = "Место высадки";
@@ -1176,7 +1166,7 @@ if AL then
 	AL["Mortaxx <The Tolling Bell>"] = "Мортакс <Предвестник смерти>";
 	AL["Tiki Lord Zim'wae"] = "Вождь тики Зим'вэ";
 	AL["Zanzil's Cauldron of Burning Blood"] = "Котел Занзила с пылающей кровью";
-	
+
 --*********************
 -- Mists of Pandaria Instances
 --*********************
@@ -1208,5 +1198,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "Монара <Последняя королева>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "Но'ку Буревестник <Владыка бури>";
+	AL["Rocky Horror"] = "Скальный ужас";
+	AL["Focused Eye"] = "Сосредоточенный глаз";
+	AL["Unblinking Eye"] = "Немигающий глаз";
+	AL["Archritualist Kelada"] = "Предводитель ритуалистов Келад";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "Мясо'рок Прокаженный <Древний ужас>";
+	AL["Zao'cho <The Emperor's Shield>"] = "Зао'чо <Щит императора>";
 
 end

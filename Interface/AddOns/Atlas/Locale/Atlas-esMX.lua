@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-esMX.lua 1912 2013-02-27 10:59:00Z Dynaletik $
+﻿-- $Id: Atlas-esMX.lua 2023 2013-05-21 09:56:33Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,7 +30,7 @@ local AL = AceLocale:NewLocale("Atlas", "esMX", false);
 -- Atlas Spanish (México) Localization
 -- Traducido por --> maqjav|Marosth de Tyrande<--
 -- maqjav@gmail.com
--- Última Actualización (last update): 27/01/2013
+-- Última Actualización (last update): 12/04/2013
 
 -- Atlas Spanish (Mexico) Localization
 if ( GetLocale() == "esMX" ) then
@@ -97,6 +97,7 @@ if AL then
 	AL["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "No mostrar la misma información de nuevo.";
 	AL["ATLAS_OPTIONS_CHECKMODULE"] = "Recuérdame que módulo(s) / plug-in(s) falta(n).";
 	AL["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Activar para comprobar si falta algún módulo / plug-in de Atlas después del inicio de WoW.";
+
 	AL["ATLAS_BUTTON_CLOSE"] = "Cerrar";
 	AL["ATLAS_BUTTON_TOOLTIP_TITLE"] = "Atlas";
 	AL["ATLAS_BUTTON_TOOLTIP_HINT"] = "Click izquierdo para abrir Atlas.\nClick central para opciones.\nClick derecho y arrastrar para mover el icono.";
@@ -134,7 +135,7 @@ if AL then
 	AL["ATLAS_DDL_EXPANSION_WOTLK"] = "Mazmorras Wrath of the Lich King";
 	AL["ATLAS_DDL_EXPANSION_CATA"] = "Mazmorras de Cataclysm";
 	AL["ATLAS_DDL_EXPANSION_MOP"] = "Mazmorras de Mists of Pandaria";
-	AL["ATLAS_DDL_TYPE"] = "Tipo";
+	AL["ATLAS_DDL_TYPE"] = "Tipo";			-- -- Sort Instance Maps by: Map Type
 	AL["ATLAS_DDL_TYPE_INSTANCE_AB"] = "Mazmorras A-B";
 	AL["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Mazmorras C-F";
 	AL["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Mazmorras G-M";
@@ -150,13 +151,14 @@ if AL then
 	AL["ATLAS_DEP_MSG2"] = "Se han sido desactivados para este personaje.";
 	AL["ATLAS_DEP_MSG3"] = "Borralos de tu directorio AddOns.";
 	AL["ATLAS_DEP_OK"] = "Vale";
-	
+
 	AL["ATLAS_INFO"] = "Información de Atlas";
 	AL["ATLAS_INFO_12200"] = "Aviso importante:\n\nDebido al aumento del tamaño en los \narchivos de este accesorio, se han separado parte de los mapas de mazmorras, \ny otros accesorios internos en módulos separados.\n\nLos usuarios que descarguen este accesorio desde conocidas páginas web obtendrán \núnicamente el núcleo del accesorio, el cual solo contiene la función del núcleo \ny los mapas de la última expansión.\n\nLos usuarios que también quieran descargar los mapas de las mazmorras antiguas y \nlos mapas de todos los plug-ins \nde Atlas hechos por nosotros, tendrán que \ndescargarselos por separado.\n\nPara mas información accede a:\nhttp://www.atlasmod.com/phpBB3/viewtopic.php?t=1522";
 	AL["ATLAS_INFO_12201"] = "Te informamos de que hemos creado un nuevo plug-in - |cff6666ffAtlas Escenarios|cffffffff, \nque contiene los nuevos mapas de los escenarios introducidos en WoW 5.0. \n\nPara mas detalles aacede a nuestra web, y no olvides de descargarlo / \ninstalarlo por separado.\n|cff6666ffhttp://www.atlasmod.com/|cffffffff";
 
 	AL["ATLAS_MISSING_MODULE"] = "Atlas has detected missing module(s) / plugin(s): ";
-	--************************************************
+
+--************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************
 
@@ -372,6 +374,7 @@ if AL then
 	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
 	AL["TES"] = "TES"; --Terrace of Endless Spring
 	AL["ToT"] = "ToT"; --Throne of Thunder
+
 --************************************************
 -- Instance Entrance Maps
 --************************************************
@@ -495,7 +498,6 @@ if AL then
 	AL["Knot Thimblejack"] = "Knot Llavededo";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "Jarra de J'eevee";
 	AL["Ferra"] = "Ferra";
 	AL["Estulan <The Highborne>"] = "Estulan <Los Altonato>";
 	AL["Shen'dralar Watcher"] = "Vigía Shen'dralar";
@@ -515,7 +517,7 @@ if AL then
 
 	--Ragefire Chasm
 	AL["Commander Bagran"] = "Comandante Bagran";
-	AL["Invoker Xorenth"] = "Invocador Xorenth"; --Check
+	AL["Invoker Xorenth"] = "Convocador Xorenth";
 	AL["Scout Cage"] = "Scout Cage"; --Check
 
 	--Razorfen Downs
@@ -566,8 +568,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "Llave del arca de reliquias";
-	AL["Dark Keeper Key"] = "Llave de guarda oscuro";
 	AL["The Black Anvil"] = "El Yunquenegro";
 	AL["The Vault"] = "Cámara Negra";
 	AL["Watchman Doomgrip"] = "Vigía Presaletal";
@@ -631,14 +631,13 @@ if AL then
 	--Scarlet Halls
 	AL["Commander Lindon"] = "Comandante Lindon";
 	AL["Hooded Crusader"] = "Cruzada encapuchada";
-	AL["Bucket of Meaty Dog Food"] = "Cubo de comida de perro"; --Check
+	AL["Bucket of Meaty Dog Food"] = "Cubo de comida para perros carnosa";
 	AL["Reinforced Archery Target"] = "Objetivo de tiro con arco reforzado";
-	
+
 	--Scarlet Monastery
-	
+
 	--Scholomance
 	AL["Instructor Chillheart's Phylactery"] = "Filacteria de la instructora Corazón Álgido";
-
 	AL["Professor Slate"] = "Profesor Slate"; 
 	AL["Polyformic Acid Potion"] = "La ciencia del ácido polifórmico";
 	AL["Talking Skull"] = "Calavera parlante";
@@ -714,7 +713,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "Sacerdote de almas atormentado";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "El ojo de Haramad";
 	AL["Artificer Morphalius"] = "Artificiero Morphalius";
 	AL["Mamdy the \"Ologist\""] = "Mamdy el \"Todólogo\"";
 	AL["Shadow Lord Xiraxis"] = "Señor de las Sombras Xiraxis";
@@ -770,21 +768,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "Lingaterra Rayge";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "Apertura del Portal Oscuro";
 	AL["Sa'at <Keepers of Time>"] = "Sa'at <Vigilantes del Tiempo>";
-	AL["The Dark Portal"] = "El Portal Oscuro";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "Batalla por el Monte Hyjal";
-	AL["Alliance Base"] = "Base de la Alianza";
 	AL["Lady Jaina Proudmoore"] = "Lady Jaina Valiente";
-	AL["Horde Encampment"] = "Campamento de la Horda";
 	AL["Thrall <Warchief>"] = "Thrall <Jefe de Guerra>";
-	AL["Night Elf Village"] = "Pueblo de los Elfos de la Noche";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "Tyrande Susurravientos <Suma sacerdotisa de Elune>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "Escape del Castillo de Durnholde";
 	AL["Erozion"] = "Erozion";
 	AL["Brazen"] = "Brazen";
 	AL["Landing Spot"] = "Punto de Aterrizaje";
@@ -924,7 +915,7 @@ if AL then
 --*****************
 
 	--Azjol-Nerub: Ahn'kahet: The Old Kingdom
-	AL["Seer Ixit"] = "Seer Ixit"; --Check
+	AL["Seer Ixit"] = "Vidente Ixit";
 	AL["Ahn'kahet Brazier"] = "Blandón Ahn'kahet"; --Check
 
 	--Azjol-Nerub: Azjol-Nerub
@@ -1055,7 +1046,7 @@ if AL then
 
 	--Utgarde Keep: Utgarde Pinnacle
 	AL["Brigg Smallshanks"] = "Brigg Espinillas";
-	AL["Image of Argent Confessor Paletress"] = "Imagen de la Confesora Argenta Cabelloclaro"; --Check
+	AL["Image of Argent Confessor Paletress"] = "Imagen de la confesora Argenta Cabelloclaro";
 	AL["Elder Chogan'gada"] = "Ancestro Chogan'gada";
 
 	--Vault of Archavon
@@ -1175,8 +1166,6 @@ if AL then
 	AL["Tiki Lord Zim'wae"] = "Señor Tiki Zim'wae";
 	AL["Zanzil's Cauldron of Burning Blood"] = "Caldero de sangre ardiente de Zanzil";
 
-
-
 --*********************
 -- Mists of Pandaria Instances
 --*********************
@@ -1208,4 +1197,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "Monara <La Última Reina>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "Orador de la tormenta No'ku <Señor de la Tempestad>";
+	AL["Rocky Horror"] = "Horror rocoso";
+	AL["Focused Eye"] = "Ojo enfocado";
+	AL["Unblinking Eye"] = "Ojo imperturbable";
+	AL["Archritualist Kelada"] = "Archiritualista Kelada";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "Flesh'rok el Enfermo <Horror saurok primordial>";
+	AL["Zao'cho <The Emperor's Shield>"] = "Zao'cho <El escudo del Emperador>"; --check
+
 end

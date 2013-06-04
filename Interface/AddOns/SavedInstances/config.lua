@@ -9,7 +9,7 @@ local Config = LibStub("AceConfig-3.0")
 
 local db
 
-addon.svnrev["config.lua"] = tonumber(("$Revision: 252 $"):match("%d+"))
+addon.svnrev["config.lua"] = tonumber(("$Revision: 298 $"):match("%d+"))
 
 -- local (optimal) references to Blizzard's strings
 local COLOR = COLOR -- "Color"
@@ -343,8 +343,20 @@ function module:BuildOptions()
 				},
 				TrackWeeklyQuests = {
 					type = "toggle",
-					order = 34,
+					order = 33.5,
 					name = L["Track Weekly Quests"],
+				},
+				TrackSkills = {
+					type = "toggle",
+					order = 33.75,
+					width = "double",
+					name = L["Track trade skill cooldowns"],
+				},
+				TrackFarm = {
+					type = "toggle",
+					order = 33.80,
+					width = "double",
+					name = L["Track farm crops"],
 				},
 				TrackLFG = {
 					type = "toggle",
@@ -374,6 +386,11 @@ function module:BuildOptions()
 					type = "toggle",
 					order = 50.4,
 					name = L["Show currency earned"]
+				},
+				CurrencyValueColor = {
+					type = "toggle",
+					order = 50.5,
+					name = L["Color currency by cap"]
 				},
 				ToonHeader = {
 					order = 31, 
@@ -618,6 +635,15 @@ function module:BuildOptions()
 			    	StaticPopup_Show("SAVEDINSTANCES_RESET")
 			    end
 			  }
+			  ret.recover = {
+			    order = 0.2,
+			    name = L["Recover Dailies"],
+			    desc = L["Attempt to recover completed daily quests for this character. Note this may recover some additional, linked daily quests that were not actually completed today."],
+			    type = "execute", 
+			    func = function()
+			        core:Refresh(true)
+			    end
+			  }
 			  local scnt = 0;
 			  for server, stoons in pairs(toons) do
 			    scnt = scnt + 1;
@@ -703,10 +729,12 @@ function module:BuildOptions()
     core.Options[k] = v
   end
   for i, curr in ipairs(addon.currency) do
+    local name,_,tex = GetCurrencyInfo(curr)
+    tex = "\124T"..tex..":0\124t "
     core.Options.args.General.args["Currency"..curr] = { 
 	type = "toggle",
 	order = 50+i,
-	name = GetCurrencyInfo(curr),
+	name = tex..name,
     }
   end
 end

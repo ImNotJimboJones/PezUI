@@ -1,4 +1,4 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("PetJournalEnhanced", "enUS", true)
+﻿local L = LibStub("AceLocale-3.0"):NewLocale("PetJournalEnhanced", "enUS", true)
 
 --UniqueCount.lua
 L["Unique Pets"] = true
@@ -40,3 +40,11 @@ L["Quantity"]=true
 
 --ZoneFiltering.lua
 L["Continued"] =true
+
+
+--2.9.0
+L["Show player hidden pets"] = true
+L["Reset player hidden pets"] = true
+L["Show Species"] = true
+L["Hide Species"] = true
+L["Instances"] = true

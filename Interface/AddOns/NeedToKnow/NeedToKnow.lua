@@ -59,6 +59,7 @@ local mfn_AuraCheck_Weapon
 local mfn_AuraCheck_AllStacks
 local mfn_GetUnresolvedCooldown
 local mfn_GetAutoShotCooldown
+local mfn_GetSpellChargesCooldown
 local mfn_GetSpellCooldown
 local mfn_AddInstanceToStacks
 local mfn_SetStatusBarValue
@@ -110,7 +111,7 @@ m_scratch.bar_entry =
     }
 -- NEEDTOKNOW = {} is defined in the localization file, which must be loaded before this file
 
-NEEDTOKNOW.VERSION = "4.0.13"
+NEEDTOKNOW.VERSION = "4.0.15"
 local c_UPDATE_INTERVAL = 0.05
 local c_MAXBARS = 20
 
@@ -152,6 +153,7 @@ NEEDTOKNOW.BAR_DEFAULTS = {
     show_icon       = false,
     show_mypip      = false,
     show_all_stacks = false,
+    show_charges    = true,
     show_ttn1       = false,
     show_ttn2       = false,
     show_ttn3       = false,
@@ -220,6 +222,7 @@ NEEDTOKNOW.SHORTENINGS= {
     show_icon       = "sIc",
     show_mypip      = "sPp",
     show_all_stacks = "All",
+    show_charges    = "Chg",
     show_text_user  = "sUr",
     show_ttn1       = "sN1",
     show_ttn2       = "sN2",
@@ -281,6 +284,7 @@ NEEDTOKNOW.LENGTHENINGS= {
    sIc = "show_icon",
    sPp = "show_mypip",
    All = "show_all_stacks",
+   Chg = "show_charges",
    sUr = "show_text_user",
    BOn = "blink_enabled",
    BOC = "blink_ooc",
@@ -1388,6 +1392,13 @@ function NeedToKnow.SetupSpellCooldown(bar, entry)
                 else
                     bar.cd_functions[idx] = mfn_GetSpellCooldown
                 end
+
+                if ( bar.cd_functions[idx] == mfn_GetSpellCooldown ) then
+                    local key = entry.id or entry.name
+                    if ( bar.settings.show_charges and GetSpellCharges(key) ) then
+                        bar.cd_functions[idx] = mfn_GetSpellChargesCooldown
+                    end
+                end
             end
         end
     end
@@ -1554,8 +1565,8 @@ function NeedToKnow.Bar_Update(groupID, barID)
             end
 
             barSettings.bAutoShot = nil
-			bar.is_counter = nil
-			bar.ticker = NeedToKnow.Bar_OnUpdate
+            bar.is_counter = nil
+            bar.ticker = NeedToKnow.Bar_OnUpdate
             
             -- Determine which helper functions to use
             if     "BUFFCD" == barSettings.BuffOrDebuff then
@@ -1569,8 +1580,8 @@ function NeedToKnow.Bar_Update(groupID, barID)
             elseif "POWER" == barSettings.BuffOrDebuff then
                 bar.fnCheck = mfn_AuraCheck_POWER
                 bar.is_counter = true
-				bar.ticker = nil
-				bar.ticking = false
+                bar.ticker = nil
+                bar.ticking = false
             elseif "CASTCD" == barSettings.BuffOrDebuff then
                 bar.fnCheck = mfn_AuraCheck_CASTCD
                 for idx, entry in ipairs(bar.spells) do
@@ -1986,7 +1997,7 @@ function NeedToKnow.ConfigureVisibleBar(bar, count, extended, buff_stacks)
         bar.time:Show()
     elseif bar.is_counter then
         bar.max_value = 1
-		local pct = buff_stacks.total_ttn[1] / buff_stacks.total_ttn[2]
+        local pct = buff_stacks.total_ttn[1] / buff_stacks.total_ttn[2]
         mfn_SetStatusBarValue(bar,bar.bar1,pct)
         if bar.bar2 then mfn_SetStatusBarValue(bar,bar.bar2,pct) end
 
@@ -1996,7 +2007,7 @@ function NeedToKnow.ConfigureVisibleBar(bar, count, extended, buff_stacks)
         if ( bar.vct ) then
             bar.vct:Hide()
         end
-	else
+    else
         -- Hide the time text and spark for auras with "infinite" duration
         bar.max_value = 1
 
@@ -2260,6 +2271,24 @@ end
 
 
 
+mfn_GetSpellChargesCooldown = function(bar, entry)
+    local barSpell = entry.id or entry.name
+    local cur, max, charge_start, recharge = GetSpellCharges(barSpell)
+    if ( cur ~= max ) then
+        local start, cd_len, enable, spellName, spellIconPath 
+        if ( cur == 0 ) then
+            start, cd_len, enable, spellName, spellIconPath = mfn_GetSpellCooldown(bar, entry)
+            return start, cd_len, enable, spellName, spellIconPath, max, charge_start
+        else
+            local spellName, _, spellIconPath = GetSpellInfo(barSpell)
+            if not spellName then spellName = barSpell end
+            return charge_start, recharge, 1, spellName, spellIconPath, max-cur
+        end
+    end
+end
+
+
+
 -- Wrapper around GetItemCooldown
 -- Expected to return start, cd_len, enable, buffName, iconpath
 function NeedToKnow.GetItemCooldown(bar, entry)
@@ -2509,7 +2538,7 @@ mfn_AuraCheck_CASTCD = function(bar, bar_entry, all_stacks)
         print("NTK ERROR setting up index",idxName,"on bar",bar:GetName(),bar.settings.AuraName);
         return;
     end
-    local start, cd_len, should_cooldown, buffName, iconPath = func(bar, bar_entry)
+    local start, cd_len, should_cooldown, buffName, iconPath, stacks, start_2 = func(bar, bar_entry)
 
     -- filter out the GCD, we only care about actual spell CDs
     if start and cd_len <= 1.5 and func ~= mfn_GetAutoShotCooldown then
@@ -2525,13 +2554,25 @@ mfn_AuraCheck_CASTCD = function(bar, bar_entry, all_stacks)
         local tNow = g_GetTime()
         local tEnd = start + cd_len
         if ( tEnd > tNow + 0.1 ) then
+            if start_2 then
+                mfn_AddInstanceToStacks( all_stacks, bar_entry,
+                    cd_len,                                   -- duration
+                    buffName,                                   -- name
+                    1,                                          -- count
+                    start_2+cd_len,                             -- expiration time
+                    iconPath,                                   -- icon path
+                    "player" )                                  -- caster
+                stacks = stacks - 1
+            else
+                if not stacks then stacks = 1 end
+            end
             mfn_AddInstanceToStacks( all_stacks, bar_entry,
-                   cd_len,                                     -- duration
-                   buffName,                                   -- name
-                   1,                                          -- count
-                   tEnd,                                       -- expiration time
-                   iconPath,                                   -- icon path
-                   "player" )                                  -- caster
+                    cd_len,                                     -- duration
+                    buffName,                                   -- name
+                    stacks,                                     -- count
+                    tEnd,                                       -- expiration time
+                    iconPath,                                   -- icon path
+                    "player" )                                  -- caster
         end
     end
 end

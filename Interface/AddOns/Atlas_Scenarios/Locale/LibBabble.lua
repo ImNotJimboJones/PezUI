@@ -1,4 +1,4 @@
-﻿-- $Id: LibBabble.lua 1771 2012-10-03 14:56:00Z arithmandar $
+﻿-- $Id: LibBabble.lua 1985 2013-04-19 21:20:27Z resike@gmail.com $
 --[[
 
 	Atlas, a World of Warcraft instance map browser

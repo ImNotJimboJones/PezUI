@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("BPCouncil", "DBM-Icecrown", 3)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 36 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 51 $"):sub(12, -3))
 mod:SetCreatureID(37970, 37972, 37973)
 mod:SetModelID(30858)
 mod:SetUsedIcons(7, 8)
@@ -20,8 +20,8 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED_DOSE",
 	"SPELL_SUMMON",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
-	"UNIT_TARGET",
-	"UNIT_SPELLCAST_SUCCEEDED"
+	"UNIT_TARGET_UNFILTERED",
+	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3"
 )
 
 local warnTargetSwitch			= mod:NewAnnounce("WarnTargetSwitch", 3, 70952)
@@ -35,8 +35,9 @@ local warnEmpoweredShockVortex	= mod:NewCastAnnounce(72039, 4)					-- 4,5sec cas
 local warnKineticBomb			= mod:NewSpellAnnounce(72053, 3, nil, mod:IsRanged())
 local warnDarkNucleus			= mod:NewSpellAnnounce(71943, 1, nil, false)	-- instant cast
 
-local specWarnVortex			= mod:NewSpecialWarning("SpecWarnVortex")
-local specWarnVortexNear		= mod:NewSpecialWarning("SpecWarnVortexNear")
+local specWarnVortex			= mod:NewSpecialWarningYou(72037)
+local yellVortex				= mod:NewYell(72037)
+local specWarnVortexNear		= mod:NewSpecialWarningClose(72037)
 local specWarnEmpoweredShockV	= mod:NewSpecialWarningRun(72039)
 local specWarnEmpoweredFlames	= mod:NewSpecialWarningRun(72040)
 local specWarnShadowPrison		= mod:NewSpecialWarningStack(72999, nil, 6)
@@ -52,11 +53,11 @@ local timerShadowPrison			= mod:NewBuffActiveTimer(10, 72999)		-- Hard mode debu
 local berserkTimer				= mod:NewBerserkTimer(600)
 
 local soundEmpoweredFlames		= mod:NewSound(72040)
+
 mod:AddBoolOption("EmpoweredFlameIcon", true)
 mod:AddBoolOption("ActivePrinceIcon", false)
 mod:AddBoolOption("RangeFrame", true)
 mod:AddBoolOption("VortexArrow")
---mod:AddBoolOption("BypassLatencyCheck", false)--Use old scan method without syncing or latency check (less reliable but not dependant on other DBM users in raid)
 
 local activePrince
 local glitteringSparksTargets	= {}
@@ -84,14 +85,13 @@ function mod:OnCombatEnd()
 	end
 end
 
-function mod:ShockVortexTarget()
-	local targetname = self:GetBossTarget(37970)
+function mod:ShockVortexTarget(targetname, uId)
 	if not targetname then return end
-		warnShockVortex:Show(targetname)
+	warnShockVortex:Show(targetname)
 	if targetname == UnitName("player") then
 		specWarnVortex:Show()
-	elseif targetname then
-		local uId = DBM:GetRaidUnitId(targetname)
+		yellVortex:Yell()
+	else
 		if uId then
 			local inRange = CheckInteractDistance(uId, 2)
 			local x, y = GetPlayerMapPosition(uId)
@@ -100,7 +100,7 @@ function mod:ShockVortexTarget()
 				x, y = GetPlayerMapPosition(uId)
 			end
 			if inRange then
-				specWarnVortexNear:Show()
+				specWarnVortexNear:Show(targetname)
 				if self.Options.VortexArrow then
 					DBM.Arrow:ShowRunAway(x, y, 10, 5)
 				end
@@ -115,10 +115,10 @@ end
 
 function mod:TrySetTarget()
 	if DBM:GetRaidRank() >= 1 and self.Options.ActivePrinceIcon then
-		for i = 1, DBM:GetNumGroupMembers() do
-			if UnitGUID("raid"..i.."target") == activePrince then
+		for uId in DBM:GetGroupMembers() do
+			if UnitGUID(uId.."target") == activePrince then
 				activePrince = nil
-				SetRaidTarget("raid"..i.."target", 8)
+				SetRaidTarget(uId.."target", 8)
 			end
 			if not (activePrince) then
 				break
@@ -130,7 +130,7 @@ end
 function mod:SPELL_CAST_START(args)
 	if args.spellId == 72037 then		-- Shock Vortex
 		timerShockVortex:Start()
-		self:ScheduleMethod(0.2, "ShockVortexTarget")
+		self:BossTargetScanner(37970, "ShockVortexTarget", 0.05, 6)
 	elseif args.spellId == 72039 then
 		warnEmpoweredShockVortex:Show()
 		specWarnEmpoweredShockV:Show()
@@ -208,7 +208,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 	end
 end
 
-function mod:UNIT_TARGET()
+function mod:UNIT_TARGET_UNFILTERED()
 	if activePrince then
 		self:TrySetTarget()
 	end

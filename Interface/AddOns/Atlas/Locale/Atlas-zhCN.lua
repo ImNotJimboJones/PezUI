@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-zhCN.lua 1931 2013-03-04 05:43:08Z ananhaid $
+﻿-- $Id: Atlas-zhCN.lua 2023 2013-05-21 09:56:33Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -494,7 +494,6 @@ if AL then
 	AL["Knot Thimblejack"] = "诺特·希姆加克";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "耶维尔的瓶子";
 	AL["Ferra"] = "费拉";
 	AL["Estulan <The Highborne>"] = "埃斯图兰 <上层精灵>";
 	AL["Shen'dralar Watcher"] = "辛德拉观察者";
@@ -565,8 +564,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "遗物宝箱钥匙";
-	AL["Dark Keeper Key"] = "黑暗守护者钥匙";
 	AL["The Black Anvil"] = "黑铁砧";
 	AL["The Vault"] = "黑色宝库";
 	AL["Watchman Doomgrip"] = "卫兵杜格瑞普";
@@ -712,7 +709,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "受折磨的灵魂牧师";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "哈拉迈德之眼";
 	AL["Artificer Morphalius"] = "工匠莫法鲁斯";
 	AL["Mamdy the \"Ologist\""] = "“杂学家”玛姆迪";
 	AL["Shadow Lord Xiraxis"] = "暗影领主希拉卡希斯";
@@ -768,21 +764,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "缚地者雷葛";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "开启黑暗之门";
 	AL["Sa'at <Keepers of Time>"] = "萨艾特 <时光守护者>";
-	AL["The Dark Portal"] = "黑暗之门";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "海加尔之战";
-	AL["Alliance Base"] = "联盟基地";
 	AL["Lady Jaina Proudmoore"] = "吉安娜·普罗德摩尔";
-	AL["Horde Encampment"] = "部落营地";
 	AL["Thrall <Warchief>"] = "萨尔 <酋长>";
-	AL["Night Elf Village"] = "暗夜精灵村庄";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "泰兰德·语风 <艾露恩的高阶女祭司>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "逃出敦霍尔德城堡";
 	AL["Erozion"] = "伊洛希恩";
 	AL["Brazen"] = "布拉森";
 	AL["Landing Spot"] = "着陆点";
@@ -1204,5 +1193,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "莫纳拉 <The Last Queen>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "颂风者诺库 <Lord of Tempest>";
+	AL["Rocky Horror"] = "岩石恐魔";
+	AL["Focused Eye"] = "聚焦之眼";
+	AL["Unblinking Eye"] = "不眠之眼";
+	AL["Archritualist Kelada"] = "大祭师克拉达";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "弗赖什鲁克 <Primordial Saurok Horror>";
+	AL["Zao'cho <The Emperor's Shield>"] = "曹卓 <The Emperor's Shield>";
 
 end

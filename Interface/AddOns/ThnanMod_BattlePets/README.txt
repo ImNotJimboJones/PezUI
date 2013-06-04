@@ -4,7 +4,13 @@ This module adds a tooltip line to wild battle pets, items that teach you pets, 
 The module also adds rarity and level information to the release pet confirmation dialog.
 The options to include the pet level in the tooltips cause the level of the highest quality pet to be displayed, not the highest level pet overall. For example, if you have a level 15 rare squirrel, and a level 20 uncommon squirrel, the tooltip will say level 15.
 
+THIS MOD HAS BEEN SPLIT INTO SEPARATE PROJECTS FOR EACH MODULE. Future updates will only be available through the other projects. See the website for more information.
+
 VERSION CHANGES:
+
+1.3.3:
+
+- Updated to support WoW version 5.3.0
 
 1.3.2:
 

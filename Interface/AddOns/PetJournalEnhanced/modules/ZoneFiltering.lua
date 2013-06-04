@@ -2,13 +2,18 @@ local ZoneFiltering = PetJournalEnhanced:NewModule("ZoneFiltering")
 local zoneIDs = PetJournalEnhanced:GetModule("ZoneIDs")
 local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
 local CONTINUED = L["Continued"]
-local ZoneGroupNames = {GetMapContinents()}
-table.insert(ZoneGroupNames,"Instances")
-ZoneFiltering.ZoneGroupNames = ZoneGroupNames
-
+local INSTANCES = L["Instances"]
 
 function ZoneFiltering:OnInitialize()
+	
+	--self:FindNewPets()
+	
+	
+	self.ZoneGroupNames = {GetMapContinents()}
+	table.insert(self.ZoneGroupNames,INSTANCES)
+	
 	local ZoneToSpecies = {}
+	
 	
 	--create temporary mapping between zones and species to figure out which zones contain pets
 	local SpeciesToZoneId = zoneIDs.SpeciesToZoneId
@@ -18,6 +23,7 @@ function ZoneFiltering:OnInitialize()
 		end
 	end
 	
+
 	--remove empty zones from zone groups
 	local zoneGroups = zoneIDs.continents
 	for i=1, #zoneGroups do
@@ -29,6 +35,7 @@ function ZoneFiltering:OnInitialize()
 		end
 	end
 	
+	
 	--create a way to store which zones are being filtered
 	self.zoneFilter = {}
 	
@@ -39,9 +46,9 @@ function ZoneFiltering:OnInitialize()
 		end
 	end
 	
-	for i= 1 ,#ZoneGroupNames do
+	for i= 1 ,#self.ZoneGroupNames do
 		if #zoneIDs.continents[i] > 16 then
-			table.insert(ZoneGroupNames,i+1,ZoneGroupNames[i].." "..CONTINUED);
+			table.insert(self.ZoneGroupNames,i+1,self.ZoneGroupNames[i].." "..CONTINUED);
 			table.insert(zoneIDs.continents,i+1,{});
 			for j = math.ceil(#zoneIDs.continents[i]/2), #zoneIDs.continents[i] do
 				table.insert(zoneIDs.continents[i+1],zoneIDs.continents[i][j]);
@@ -51,15 +58,16 @@ function ZoneFiltering:OnInitialize()
 			end
 		end
 	end
+	
 end
 
 function ZoneFiltering:GetNumZoneGroups()
-	return #ZoneGroupNames
+	return #self.ZoneGroupNames
 end
 
 function ZoneFiltering:GetZoneGroupNames(groupID)
 	assert(type(groupID) == "number")
-	return ZoneGroupNames[groupID]
+	return self.ZoneGroupNames[groupID]
 end
 
 function ZoneFiltering:GetZoneGroupMapping()
@@ -100,6 +108,81 @@ end
 
 
 
+function ZoneFiltering:IsEveryZoneEnabled()
+	for k,v in pairs(self.zoneFilter) do
+		if not v then 
+			return false 
+		end
+	end
+	return true;
+end
 
+
+--/run FindNewPets()
+function ZoneFiltering:FindNewPets()
+	--zoneIDs.SpeciesToZoneId = {}
+	MacroFrameText:SetMaxLetters(0)
+	
+	
+	local numPets = C_PetJournal.GetNumPets()
+	
+	zoneMap = {
+	["stormwind"]=301,
+	["shattrath"]=481,
+	["brawl'gar arena"] = 321,
+	["the barrens"] = 11,
+	["terokkar forest (fishing nodes)"] = 478,
+	["booty bay"] = 673,
+	["lower blackrock spire"] = 721,
+	["lor'danel"] = 42,
+	["occasionally appears alongside other creatures during battles on darkmoon island."] = 823,
+	["jade forest"] = 806,
+	["caverns of time"]= 161,
+	["valley of four winds"] = 807,
+	["coldarra"] = 486,
+	}
+	
+	for i=1, #zoneIDs.continents do
+		for j = 1, #zoneIDs.continents[i] do
+			zoneMap[string.lower(GetMapNameByID(zoneIDs.continents[i][j]))] = zoneIDs.continents[i][j]
+		end
+	end
+	
+	local keywords = {"cost","difficulty","faction","weather","season","time","event"}
+	
+	for i=1, numPets do
+		local _, speciesID, _, _, _, _, _, name, _, _, _, sourceText = C_PetJournal.GetPetInfoByIndex(i)
+		
+		if zoneIDs.SpeciesToZoneId[speciesID] == nil and (string.find(sourceText,"Pet Battle:",1,true) or string.find(sourceText,"Zone:",1,true)) then
+			sourceText = string.lower(sourceText)
+			sourceText = string.gsub(sourceText,"|[rn]","")
+			sourceText = string.gsub(sourceText,"|c%x%x%x%x%x%x%x%x","")
+			local zoneText = string.match(sourceText,"zone:(.*)") or string.match(sourceText,"drop:(.*)") or string.match(sourceText,"pet battle:(.*)")
+			if zoneText then
+				for x = 1, #keywords do
+					zoneText = string.gsub(zoneText,keywords[x]..":.*","") 
+				end
+			end
+		
+			if zoneText then
+			
+				local zones = {string.split(",",zoneText)}
+				
+				local entry = "["..speciesID.."]={"
+				for j=1, #zones do
+					local zone = strtrim(zones[j])
+					local zoneID = zoneMap[zone]
+					local entryText = (zoneID or zone or "error")
+						entry = entry .. "["..entryText.."]="..entryText..","
+				end
+				entry = entry .. "},--"..name.."|n"
+				entry= entry.gsub(entry,",}","}")
+				if not string.find(MacroFrameText:GetText(),entry,1,true) then
+					MacroFrameText:Insert(entry) 
+				end
+			end
+		end
+	end
+end
 
 

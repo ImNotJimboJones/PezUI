@@ -4,6 +4,13 @@ Copyright 2010 ~ 2013 Arith Hsu
 ==============
 = Change Log =
 ==============
+* 1.5.02 (2013/05/22)
+    - Fix code syntax issue
+    
+* 1.4.01 (2013/05/21)
+    - TOC update to support WoW 5.3
+    - Added map of The Tiger's Peak
+
 * 1.4.00 (2013/03/05)
     - TOC update to support WoW 5.2
 

@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_WorldEvents-zhTW.lua 47 2013-02-17 12:14:13Z arith $
+﻿-- $Id: Atlas_WorldEvents-zhTW.lua 57 2013-05-23 14:49:43Z arith $
 --[[
 
 	Atlas World Events, a World of Warcraft map browser for world events
@@ -50,15 +50,20 @@ if AL then
 	-- World Events
 	-- ----------------------------------------------------------------------
 	AL["Lunar Festival"] = "新年慶典";
-	AL["Lunar_Date"] = "一月27日～二月9日";
+	AL["Lunar_Date"] = "一月20日～二月3日";
+
 	AL["Midsummer Fire Festival"] = "仲夏火焰節";
-	AL["Midsummer_Date"] = "六月21日～七月4日";
+	AL["Midsummer_Date"] = "六月21日～七月5日";
+
 	AL["Hallow's End"] = "萬鬼節";
-	AL["Hallow_Date"] = "十月18日～十月31日";
+	AL["Hallow_Date"] = "十月18日～十一月1日";
+
 	AL["Brewfest"] = "啤酒節";
-	AL["Brewfest"] = "九月28日～十月13日";
+	AL["Brewfest"] = "九月28日～十月6日";
+	
 	AL["Love is in the Air"] = "愛就在身邊開始";
-	AL["Love_Date"] = "二月10日～二月23日";
+	AL["Love_Date"] = "二月10日～二月24日";
+
 	-- Darkmoon Faire
 	AL["The first Sunday each month, last for a week"] = "每月第一個週日, 維持一週";
 

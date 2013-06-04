@@ -1,4 +1,4 @@
--- $Id: Atlas_DungeonLocs-zhCN.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: Atlas_DungeonLocs-zhCN.lua 1963 2013-03-30 19:04:14Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -39,7 +39,4 @@ if AL then
 	AL["Green"] = "绿色";
 	AL["Instances"] = "副本";
 	AL["White"] = "白色";
-
-	--Zones
-	AL["Crusaders' Coliseum"] = "十字军大竞技场";
 end

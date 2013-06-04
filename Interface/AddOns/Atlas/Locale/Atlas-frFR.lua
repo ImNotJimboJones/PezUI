@@ -1,5 +1,4 @@
-﻿-- $Id: Atlas-frFR.lua 1912 2013-02-27 10:59:00Z Dynaletik $
---[[
+﻿--[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
@@ -32,8 +31,8 @@ local AL = AceLocale:NewLocale("Atlas", "frFR", false);
 -- Atlas French Localization
 -- Sur un travail de Wysiwyg, Khiria, Trasher en 2007 / 2012
 -- Many thanks to all contributors!
--- $Date: 2012-10-03 22:56:00 +0800 (Wed, 03 Oct 2012) $
--- $Revision: 1771 $
+-- $Date: 2013-05-21 17:56:33 +0800 (週二, 21 五月 2013) $
+-- $Revision: 2023 $
 
 if ( GetLocale() == "frFR" ) then
 -- Define the leading strings to be ignored while sorting
@@ -255,7 +254,7 @@ if AL then
 	AL["Wave 12"] = "Vague 12";
 	AL["Wave 18"] = "Vague 18";
 	AL["MapsNotFound"] = "Le donjon actuellement sélectionné n'a pas d'image de la carte correspondante.\nAssurez-vous d'avoir installé le bon module de cartes d'Atlas";
-	
+
 	--Classic Acronyms
 	AL["AQ"] = "AQ"; -- Ahn'Qiraj
 	AL["AQ20"] = "AQ20"; -- Ruins of Ahn'Qiraj, Ruines d'Ahn'Qiraj
@@ -378,6 +377,7 @@ if AL then
 	AL["SB"] = "SB"; --Stormstout Brewery
 	AL["TJS"] = "TJS"; --Temple of the Jade Serpent
 	AL["TES"] = "TES"; --Terrace of Endless Spring
+	AL["ToT"] = "ToT"; --Throne of Thunder
 
 --************************************************
 -- Instance Entrance Maps
@@ -502,7 +502,6 @@ if AL then
 	AL["Knot Thimblejack"] = "Noué Dédodevie";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "Bocal de J'eevee";
 	AL["Ferra"] = "Ferra";
 	AL["Estulan <The Highborne>"] = "Estulan <Le Bien-né>";
 	AL["Shen'dralar Watcher"] = "Gardien Shen'dralar";
@@ -521,8 +520,6 @@ if AL then
 	AL["Celebras the Redeemed"] = "Celebras le Racheté";
 
 	--Ragefire Chasm
-	AL["Bovaal Whitehorn"] = "Bovaal Corne-blanche";
-	AL["Stone Guard Kurjack"] = "Garde de pierre Kurjack";
 	AL["Scout Cage"] = "Cage d'eclaireur"; -- translation needed
 
 	--Razorfen Downs
@@ -573,8 +570,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "Clé du coffret à relique";
-	AL["Dark Keeper Key"] = "Clé du gardien noir";
 	AL["The Black Anvil"] = "L'Enclume noire";
 	AL["The Vault"] = "La Chambre forte";
 	AL["Watchman Doomgrip"] = "Sentinelle Ruinepoigne";
@@ -635,6 +630,24 @@ if AL then
 
 	--Molten Core
 
+	--Scarlet Halls
+	AL["Hooded Crusader"] = "Croisée capuchonnée";
+	AL["Bucket of Meaty Dog Food"] = "Seau de pâtée pour chien riche en viande";
+	AL["Reinforced Archery Target"] = "Cible d'archer renforcée"; -- Translation needed
+
+	--Scarlet Monastery
+
+	--Scholomance
+	AL["Instructor Chillheart's Phylactery"] = "Phylactère de l'Instructrice Froidecœur";
+	AL["Professor Slate"] = "Professeur Alambic";
+	AL["Polyformic Acid Potion"] = "Potion d'acide polyformique";
+	AL["Talking Skull"] = "Crâne parlant";
+	AL["In the Shadow of the Light"] = "À l’ombre de la Lumière";
+	AL["Kel'Thuzad's Deep Knowledge"] = "Connaissances approfondies de Kel’Thuzad";
+	AL["Forbidden Rites and other Rituals Necromantic"] = "Rites interdits et autres rituels nécromantiques";
+	AL["Coffer of Forgotten Souls"] = "Coffre des âmes oubliées";
+	AL["The Dark Grimoire"] = "Le grimoire noir";
+
 	--Shadowfang Keep
 	AL["Apothecary Trio"] = "Trio d'apothicaires";
 	AL["Apothecary Hummel <Crown Chemical Co.>"] = "Apothicaire Hummel <Cie de Chimie La Royale>";
@@ -644,12 +657,6 @@ if AL then
 	AL["Deathstalker Commander Belmont"] = "Commandant nécrotraqueur Belmont";
 	AL["Haunted Stable Hand"] = "Palefrenier hanté";
 	AL["Investigator Fezzen Brasstacks"] = " Enquêteur Fezzen Desfaits";
-
-	--SM: Cathedral
-
-	--SM: Halls
-	AL["Hunter Commander"] = "Commandant des chasseurs"; -- Translation needed
-	AL["Reinforced Archery Target"] = "Cible d'archer renforcée"; -- Translation needed
 
 	--Stratholme - Crusader's Square
 	AL["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] = "Commandant de la croisade Eligor Portelaube <Confrérie de la Lumière>";
@@ -661,7 +668,6 @@ if AL then
 	AL["Festival Lane Postbox"] = "Boîte de l'allée du Festival";
 	AL["Elder Farwhisper"] = "Ancien Murmeloin";
 	AL["Market Row Postbox"] = "Boîte de l'allée du Marché";
-	AL["Crusaders' Square Postbox"] = "Boîte de la place des Croisés";
 
 	--Stratholme - The Gauntlet
 	AL["Elders' Square Postbox"] = "Boîte de la place des Anciens";
@@ -708,7 +714,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "Prêtre de l'âme tourmenté"; -- Translation needed
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "L'Oeil d'Haramad";
 	AL["Artificer Morphalius"] = "Artificier Morphalius";
 	AL["Mamdy the \"Ologist\""] = "Mamdy \"l'Ologiste\"";
 	AL["Shadow Lord Xiraxis"] = "Seigneur des ténèbres Xiraxis";
@@ -764,21 +769,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "Lieur de terre Rayge";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "Ouverture de la Porte des Ténèbres";
 	AL["Sa'at <Keepers of Time>"] = "Sa'at <Les Gardiens du temps>";
-	AL["The Dark Portal"] = "La Porte des Ténèbres";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "Bataille pour le Mont Hyjal";
-	AL["Alliance Base"] = "Base de l'Alliance";
 	AL["Lady Jaina Proudmoore"] = "Dame Jaina Portvaillant";
-	AL["Horde Encampment"] = "Campement de la Horde";
 	AL["Thrall <Warchief>"] = "Thrall <Chef de guerre>";
-	AL["Night Elf Village"] = "Village des Elfes de la Nuit";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "Tyrande Murmevent <Grande prêtresse d'Elune>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "L'évasion du Fort-de-Durn";
 	AL["Erozion"] = "Erozion";
 	AL["Brazen"] = "Airain";
 	AL["Landing Spot"] = "Zone d'atterrissage";
@@ -1185,33 +1183,28 @@ if AL then
 
 	--Shado-Pan Monastery
 	AL["Ban Bearheart"] = "Ban Cœur d’Ours";
-	
-	--Scarlet Halls
-	AL["Hooded Crusader"] = "Croisée capuchonnée";
-	AL["Bucket of Meaty Dog Food"] = "Seau de pâtée pour chien riche en viande";
-
-	--Scholomance
-	AL["Instructor Chillheart's Phylactery"] = "Phylactère de l'Instructrice Froidecœur";
-	AL["Coffer of Forgotten Souls"] = "Coffre des âmes oubliées";
-	AL["Professor Slate"] = "Professeur Alambic";
-	AL["Polyformic Acid Potion"] = "Potion d'acide polyformique";
-	AL["The Dark Grimoire"] = "Le grimoire noir";
-	AL["Talking Skull"] = "Crâne parlant";
-	AL["In the Shadow of the Light"] = "À l’ombre de la Lumière";
-	AL["Kel'Thuzad's Deep Knowledge"] = "Connaissances approfondies de Kel’Thuzad";
-	AL["Forbidden Rites and other Rituals Necromantic"] = "Rites interdits et autres rituels nécromantiques";
 
 	--Siege of Niuzao Temple
 	AL["Shado-Master Chum Kiu"] = "Maître-pandashan Chum Kiu";
 
 	--Stormstout Brewery
-	AL["Auntie Stormstout"] = "Tatie Brune d’Orage"; -- Translation needed
+	AL["Auntie Stormstout"] = "Tatie Brune d’Orage";
 	AL["Chen Stormstout"] = "Chen Brune d’Orage";
 
 	--Temple of the Jade Serpent
-AL["Master Windstrong"] = "Maître Windstrong"; -- Translation needed
-	AL["Priestess Summerpetal"] = "Prêtresse Pétale de l’Été"; -- Translation needed
+	AL["Master Windstrong"] = "Maître Vent Violent";
+	AL["Priestess Summerpetal"] = "Prêtresse Pétale de l’Été";
 
 	--Terrace of Endless Spring
+
+	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "Monara <La dernière reine>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "No’ku Parle-Tempête <Seigneur de la tourmente>";
+	AL["Rocky Horror"] = "Horreur rocheuse";
+	AL["Focused Eye"] = "Oeil focalisé";
+	AL["Unblinking Eye"] = "Oeil impassible";
+	AL["Archritualist Kelada"] = "Archiritualiste Kelada";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "Carne’rok le Malade <Horreur saurok primordiale>";
+	AL["Zao'cho <The Emperor's Shield>"] = "Zao’cho <Le bouclier de l’empereur>";
 
 end

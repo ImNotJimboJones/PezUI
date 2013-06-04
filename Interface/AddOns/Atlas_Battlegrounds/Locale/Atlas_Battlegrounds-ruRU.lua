@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-ruRU.lua 1891 2013-02-17 15:41:01Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-ruRU.lua 2043 2013-05-23 16:23:31Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -41,15 +41,8 @@ local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "ruRU", false);
 if AL then
 	--Common
 	AL["Battleground Maps"] = "Карты Полей Сражений";
-	AL["Entrance"] = "Вход";
-	AL["Meeting Stone"] = "Камень встреч";
-	AL["North"] = "Север";
-	AL["Reputation"] = "Реп";
 	AL["Rescued"] = "Спасенный";
 	AL["Span of 5"] = "Диапазон: 5"; -- Blizzard's span to put players with similar level range into a BG (10-14, 15-29)
-	AL["South"] = "Юг";
-	AL["Start"] = "Начало";
-	AL["Summon"] = "Призыв";
 
 	--Places
 	AL["AV"] = "АД"; -- Alterac Valley
@@ -114,9 +107,9 @@ if AL then
 	AL["Frostwolf Relief Hut"] = "Приют Северного Волка";
 
 	--Arathi Basin
-	
+
 	--Warsong Gulch
-	
+
 	-- The Silithyst Must Flow
 	AL["The Silithyst Must Flow"] = "The Silithyst Must Flow";
 	AL["Alliance's Camp"] = "Лагерь альянса";
@@ -124,7 +117,6 @@ if AL then
 
 	--Eye of the Storm
 	AL["Flag"] = "Флаг";
-	AL["Graveyard"] = "Кладбище";
 
 	-- Halaa
 	AL["Quartermaster Davian Vaclav"] = "Интендант Дэвиан Ваклав";
@@ -202,10 +194,15 @@ if AL then
 	-- Twin Peaks
 	AL["Wildhammer Longhouse"] = "Клан Громового Молота";
 	AL["Dragonmaw Clan Compound"] = "Клан Драконьей Пасти";
-	
+
 	-- Silvershard Mines
-	AL["Capture Point"] = "Точка захвата"; -- the area where the carts spwan and you need to capture them
+	AL["Mine Cart Spawn Point"] = "Mine Cart Spawn Point";
+	AL["Mine Cart Depot"] = "Mine Cart Depot";
 
 	-- Temple of Kotmogu
-	AL["Scoring Point"] = "Точка набора очков";
+	AL["Orb of Power"] = "Orb of Power";
+	AL["Center Point (Maximum Points)"] = "Center Point (Maximum Points)";
+
+	-- Deepwind Gorge
+	AL["Center Mine"] = "Центральная шахта"; --
 end

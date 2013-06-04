@@ -21,7 +21,6 @@
 
 --]]
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
-local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0");
 local AL = LibStub("AceLocale-3.0"):GetLocale("Atlas_WorldEvents");
 
 local BLUE = "|cff6666ff";
@@ -156,7 +155,7 @@ local myData = {
 		{ WHIT.."25) "..AL["Elder Chogan'gada"]	..DASH..ORNG..BZ["Utgarde Pinnacle"]..", "..BZ["Howling Fjord"] };
 	};
 	Love_Alliance_MajorCities = {
-		ZoneName = { AL["Love is in the Air"].." - "..BF["Alliance"].." ("..AL["Major Cities"]..")" };
+		ZoneName = { AL["Love is in the Air"].." - "..FACTION_ALLIANCE.." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Ironforge"].." / "..BZ["Stormwind City"].." / "..BZ["Darnassus"].." / "..BZ["The Exodar"] };
 		{ ORNG..AL["Love is in the Air"].." - "..AL["Love_Date"] };
 		{ "" };
@@ -226,7 +225,7 @@ local myData = {
 		{ GREN..INDENT..INDENT.." 4) "..GREY.."(61, 75) "..BZ["Stormwind City"] };
 	};
 	Love_Horde_MajorCities = {
-		ZoneName = { AL["Love is in the Air"].." - "..BF["Horde"].." ("..AL["Major Cities"]..")" };
+		ZoneName = { AL["Love is in the Air"].." - "..FACTION_HORDE.." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Orgrimmar"].." / "..BZ["Undercity"].." / "..BZ["Thunder Bluff"].." / "..BZ["Silvermoon City"] };
 		{ ORNG..AL["Love is in the Air"].." - "..AL["Love_Date"] };
 		{ "" };
@@ -337,10 +336,10 @@ local myData = {
 		{ _RED.."36) "..BZ["Wild Shore"].." (50, 70), "..BZ["The Cape of Stranglethorn"] };
 		{ PURP.."37) "..BZ["Silver Tide Hollow"].."(49, 42), "..BZ["Shimmering Expanse"]..", "..BZ["Vashj'ir"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
-		{ PURP..AL["Purple: "]..BF["Neutral"] };
+		{ PURP..AL["Purple: "]..FACTION_STANDING_LABEL4 };
 	
 	};
 	MidSummer_Kalimdor = {
@@ -383,10 +382,10 @@ local myData = {
 		{ BLUE.."34) "..BZ["Feathermoon Stronghold"].." (47, 44), "..BZ["Feralas"] };
 		{ _RED.."35) "..BZ["Camp Mojache"].." (72, 47), "..BZ["Feralas"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
-		{ PURP..AL["Purple: "]..BF["Neutral"] };
+		{ PURP..AL["Purple: "]..FACTION_STANDING_LABEL4 };
 	};
 	MidSummer_Outland = {
 		ZoneName = { AL["Midsummer Fire Festival"].." - "..BZ["Outland"] };
@@ -407,8 +406,8 @@ local myData = {
 		{ _RED.."13) "..BZ["Shadowmoon Village"].." (33, 30), "..BZ["Shadowmoon Valley"] };
 		{ BLUE.."14) "..BZ["Wildhammer Stronghold"].." (40, 55), "..BZ["Shadowmoon Valley"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
 	};
 	MidSummer_Northrend = {
@@ -432,8 +431,8 @@ local myData = {
 		{ _RED.."15) "..BZ["Camp Winterhoof"].." (48, 13), "..BZ["Howling Fjord"] };
 		{ BLUE.."16) "..BZ["Fort Wildervar"].." (58, 16), "..BZ["Howling Fjord"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
 	};
 	MidSummer_Azeroth_MajorCities = {
@@ -445,8 +444,8 @@ local myData = {
 		{ _RED.." 3) "..BZ["Court of the Sun"]..", "..BZ["Silvermoon City"] };
 		{ _RED.." 4) "..BZ["Ruins of Lordaeron"]..", "..BZ["Undercity"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
 	};
 	MidSummer_Kalimdor_MajorCities = {
@@ -458,8 +457,8 @@ local myData = {
 		{ _RED.." 3) "..BZ["Valley of Wisdom"].." (47, 38), "..BZ["Orgrimmar"] };
 		{ _RED.." 4) "..BZ["Spirit Rise"].." (21, 26), "..BZ["Thunder Bluff"] };
 		{ "" };
-		{ _RED..AL["Red: "]..BF["Horde"] };
-		{ BLUE..AL["Blue: "]..BF["Alliance"] };
+		{ _RED..AL["Red: "]..FACTION_HORDE };
+		{ BLUE..AL["Blue: "]..FACTION_ALLIANCE };
 		{ ORNG..AL["Orange: "]..AL["Major Cities"] };
 	};
 	MidSummer_Deepholm = {
@@ -468,7 +467,7 @@ local myData = {
 		{ "" };
 		{ PURP.." 1) "..BZ["Temple of Earth"].." (49, 51)" };
 		{ "" };
-		{ PURP..AL["Purple: "]..BF["Neutral"] };
+		{ PURP..AL["Purple: "]..FACTION_STANDING_LABEL4 };
 	};
 	Hallow_End = {
 		ZoneName = { AL["Hallow's End"] };
@@ -555,7 +554,7 @@ local myData = {
 		{ GREY..INDENT..INDENT..BZ["Craftsmen's Terrace"]..", "..BZ["Darnassus"] };
 	};
 	DarkmoonFaire_Island = {
-		ZoneName = { BF["Darkmoon Faire"].." - "..BZ["Darkmoon Island"] };
+		ZoneName = { GetFactionInfoByID(909).." - "..BZ["Darkmoon Island"] };
 		{ ORNG..AL["The first Sunday each month, last for a week"] };
 		{ "" };
 		{ BLUE.." A) "..AL["Entrance (Transported)"] };
@@ -603,7 +602,7 @@ local myData = {
 		{ GREN.."23) "..AL["Rona Greenteeth"].." (36, 58)" };
 	};
 	Brewfest_Alliance_MajorCities = {
-		ZoneName = { AL["Brewfest"].." - "..BF["Alliance"].." ("..AL["Major Cities"]..")" };
+		ZoneName = { AL["Brewfest"].." - "..FACTION_ALLIANCE.." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Ironforge"].." / "..BZ["Stormwind City"].." / "..BZ["Darnassus"].." / "..BZ["The Exodar"] };
 		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
@@ -623,7 +622,7 @@ local myData = {
 		{ BLUE..INDENT.." 6) "..AL["End"]..": "..AL["Larkin Thunderbrew"] };
 		{ GREY..INDENT..INDENT.."(19, 53) "..BZ["Ironforge"] };	};
 	Brewfest_Alliance = {
-		ZoneName = { AL["Brewfest"].." - "..BF["Alliance"] };
+		ZoneName = { AL["Brewfest"].." - "..FACTION_ALLIANCE };
 		Location = { BZ["Dun Morogh"] };
 		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
@@ -667,7 +666,7 @@ local myData = {
 		{ GREY..INDENT..INDENT.."(54, 38) "..BZ["Dun Morogh"] };
 	};
 	Brewfest_Horde_MajorCities = {
-		ZoneName = { AL["Brewfest"].." - "..BF["Horde"].." ("..AL["Major Cities"]..")" };
+		ZoneName = { AL["Brewfest"].." - "..FACTION_HORDE.." ("..AL["Major Cities"]..")" };
 		Location = { BZ["Orgrimmar"].." / "..BZ["Undercity"].." / "..BZ["Thunder Bluff"].." / "..BZ["Silvermoon City"] };
 		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };
@@ -690,7 +689,7 @@ local myData = {
 		{ GREY..INDENT..INDENT.."(50, 73) "..BZ["Orgrimmar"] };
 	};
 	Brewfest_Horde = {
-		ZoneName = { AL["Brewfest"].." - "..BF["Horde"] };
+		ZoneName = { AL["Brewfest"].." - "..FACTION_HORDE };
 		Location = { BZ["Durotar"] };
 		{ ORNG..AL["Brewfest"].." - "..AL["Brewfest_Date"] };
 		{ "" };

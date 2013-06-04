@@ -62,29 +62,31 @@ function TitanPanelLootTypeButton_GetDungeonDifficultyIDText(isRaid, withpar)
 	if withpar then par1, par2 = "(", ")" end
 	local diffstr = "|cffffff9a"..par1.._G["UNKNOWN"]..par2.."|r"
 	if isRaid then
-	-- raids
-	local diff = GetRaidDifficultyID()
-	if not diff then return diffstr end
-	-- remove () chars from difficulty
-	local tmpstr = string.gsub(_G["RAID_DIFFICULTY"..tostring(diff)], "%(", "")
-	tmpstr = string.gsub(tmpstr, "%)", "")
+		-- raids
+		local diff = GetRaidDifficultyID()
+		if not diff then return diffstr end
+		local name, groupType, isHeroic, isChallengeMode, toggleDifficultyID = GetDifficultyInfo(diff)
+		-- remove () chars from difficulty
+		local tmpstr = string.gsub(name, "%(", "")
+		tmpstr = string.gsub(tmpstr, "%)", "")
 		if diff == 3 or diff == 4 then
-			diffstr = _G["RED_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
+			diffstr = _G["ORANGE_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
 		else
-			diffstr = _G["GREEN_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
+			diffstr = _G["RED_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
 		end
 	else
-	-- dungeons
-	local diff = GetDungeonDifficultyID()
-	if not diff then return diffstr end
-	if diff == 8 then diff = 2 end
-	-- remove () chars from difficulty
-	local tmpstr = string.gsub(_G["DUNGEON_DIFFICULTY"..tostring(diff)], "%(", "")
-	tmpstr = string.gsub(tmpstr, "%)", "")
+		-- dungeons
+		local diff = GetDungeonDifficultyID()
+		if not diff then return diffstr end
+		local name, groupType, isHeroic, isChallengeMode, toggleDifficultyID = GetDifficultyInfo(diff)
+		-- remove () chars from difficulty
+		local tmpstr = string.gsub(name, "%(", "")
+		tmpstr = string.gsub(tmpstr, "%)", "")
+		diffstr = _G["GREEN_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
 		if diff == 2 then
+			diffstr = _G["ORANGE_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
+		elseif diff == 8 then
 			diffstr = _G["RED_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
-		else
-			diffstr = _G["GREEN_FONT_COLOR_CODE"]..par1..tmpstr..par2.."|r"
 		end
 	end
 	return diffstr
@@ -156,24 +158,24 @@ end
 -- DESC : Display tooltip text
 -- **************************************************************************
 function TitanPanelLootTypeButton_GetTooltipText()
-     if (GetNumSubgroupMembers() > 0) or (GetNumGroupMembers() > 0) then
-          local lootTypeText = TitanLootMethod[GetLootMethod()].text;
-          local lootThreshold = GetLootThreshold();
-          local itemQualityDesc = _G["ITEM_QUALITY"..lootThreshold.."_DESC"];
-          local color = _G["ITEM_QUALITY_COLORS"][lootThreshold];
-          return ""..
-          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
-          			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
-               _G["LOOT_METHOD"]..": \t"..TitanUtils_GetHighlightText(lootTypeText).."\n"..
-               _G["LOOT_THRESHOLD"]..": \t"..TitanUtils_GetColoredText(itemQualityDesc, color).."\n"..               
-               TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
-               TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
+	if (GetNumSubgroupMembers() > 0) or (GetNumGroupMembers() > 0) then
+		local lootTypeText = TitanLootMethod[GetLootMethod()].text;
+		local lootThreshold = GetLootThreshold();
+		local itemQualityDesc = _G["ITEM_QUALITY"..lootThreshold.."_DESC"];
+		local color = _G["ITEM_QUALITY_COLORS"][lootThreshold];
+		return ""..
+			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
+			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
+			_G["LOOT_METHOD"]..": \t"..TitanUtils_GetHighlightText(lootTypeText).."\n"..
+			_G["LOOT_THRESHOLD"]..": \t"..TitanUtils_GetColoredText(itemQualityDesc, color).."\n"..               
+			TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
+			TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
     else
-          return L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
-          L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
-          TitanUtils_GetNormalText(_G["ERR_NOT_IN_GROUP"]).."\n"..
-          TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
-          TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
+		return L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText().."\n"..
+			L["TITAN_LOOTTYPE_DUNGEONDIFF_LABEL2"]..": \t"..TitanPanelLootTypeButton_GetDungeonDifficultyIDText(true).."\n"..
+			TitanUtils_GetNormalText(_G["ERR_NOT_IN_GROUP"]).."\n"..
+			TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT1"]).."\n"..
+			TitanUtils_GetGreenText(L["TITAN_LOOTTYPE_TOOLTIP_HINT2"]);
     end
 end
 

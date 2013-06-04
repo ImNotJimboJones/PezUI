@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-enUS.lua 1912 2013-02-27 10:59:00Z Dynaletik $
+﻿-- $Id: Atlas-enUS.lua 2023 2013-05-21 09:56:33Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -235,6 +235,7 @@ if AL then
 	AL["Teleporter destination"] = "Teleporter destination";
 	AL["Third Stop"] = "Third Stop";
 	AL["Top"] = "Top";
+	AL["Tunnel"] = "Tunnel";
 	AL["Underwater"] = "Underwater";
 	AL["Upper"] = "Upper";
 	AL["Varies"] = "Varies";
@@ -495,7 +496,6 @@ if AL then
 	AL["Knot Thimblejack"] = "Knot Thimblejack";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "J'eevee's Jar";
 	AL["Ferra"] = "Ferra";
 	AL["Estulan <The Highborne>"] = "Estulan <The Highborne>";
 	AL["Shen'dralar Watcher"] = "Shen'dralar Watcher";
@@ -566,8 +566,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "Relic Coffer Key";
-	AL["Dark Keeper Key"] = "Dark Keeper Key";
 	AL["The Black Anvil"] = "The Black Anvil";
 	AL["The Vault"] = "The Vault";
 	AL["Watchman Doomgrip"] = "Watchman Doomgrip";
@@ -713,7 +711,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "Tormented Soulpriest";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "The Eye of Haramad";
 	AL["Artificer Morphalius"] = "Artificer Morphalius";
 	AL["Mamdy the \"Ologist\""] = "Mamdy the \"Ologist\"";
 	AL["Shadow Lord Xiraxis"] = "Shadow Lord Xiraxis";
@@ -769,21 +766,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "Earthbinder Rayge";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "Opening of the Dark Portal";
 	AL["Sa'at <Keepers of Time>"] = "Sa'at <Keepers of Time>";
-	AL["The Dark Portal"] = "The Dark Portal";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "Battle for Mount Hyjal";
-	AL["Alliance Base"] = "Alliance Base";
 	AL["Lady Jaina Proudmoore"] = "Lady Jaina Proudmoore";
-	AL["Horde Encampment"] = "Horde Encampment";
 	AL["Thrall <Warchief>"] = "Thrall <Warchief>";
-	AL["Night Elf Village"] = "Night Elf Village";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "Tyrande Whisperwind <High Priestess of Elune>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "Escape from Durnholde Keep";
 	AL["Erozion"] = "Erozion";
 	AL["Brazen"] = "Brazen";
 	AL["Landing Spot"] = "Landing Spot";
@@ -1205,5 +1195,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "Monara <The Last Queen>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "No'ku Stormsayer <Lord of Tempest>";
+	AL["Rocky Horror"] = "Rocky Horror";
+	AL["Focused Eye"] = "Focused Eye";
+	AL["Unblinking Eye"] = "Unblinking Eye";
+	AL["Archritualist Kelada"] = "Archritualist Kelada";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "Flesh'rok the Diseased <Primordial Saurok Horror>";
+	AL["Zao'cho <The Emperor's Shield>"] = "Zao'cho <The Emperor's Shield>";
 
 end

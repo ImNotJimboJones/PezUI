@@ -1,4 +1,4 @@
--- $Id: AtlasButton.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: AtlasButton.lua 2018 2013-05-19 16:24:13Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, dubcat
+-- Maintainers: Arith, Dynaletik, dubcat, Resike 
 
 local AL = LibStub("AceLocale-3.0"):GetLocale("Atlas");
 

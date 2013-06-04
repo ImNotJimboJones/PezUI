@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-zhTW.lua 1931 2013-03-04 05:43:08Z ananhaid $
+﻿-- $Id: Atlas-zhTW.lua 2023 2013-05-21 09:56:33Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -233,6 +233,7 @@ if AL then
 	AL["Teleporter destination"] = "傳送目的地";
 	AL["Third Stop"] = "第三停留點";
 	AL["Top"] = "上方";
+	AL["Tunnel"] = "通道";
 	AL["Underwater"] = "水下";
 	AL["Upper"] = "上層";
 	AL["Varies"] = "多處";
@@ -493,7 +494,6 @@ if AL then
 	AL["Knot Thimblejack"] = "諾特·希姆加克";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "耶維爾的瓶子";
 	AL["Ferra"] = "費拉";
 	AL["Estulan <The Highborne>"] = "艾斯圖蘭";
 	AL["Shen'dralar Watcher"] = "辛德拉看守者";
@@ -564,8 +564,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "古物寶庫鑰匙";
-	AL["Dark Keeper Key"] = "黑暗守衛者鑰匙";
 	AL["The Black Anvil"] = "黑鐵砧";
 	AL["The Vault"] = "地窖";
 	AL["Watchman Doomgrip"] = "衛兵杜格瑞普";
@@ -711,7 +709,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "受折磨的靈魂牧師";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "哈拉瑪德之眼";
 	AL["Artificer Morphalius"] = "工匠莫法利厄司";
 	AL["Mamdy the \"Ologist\""] = "『學家』瑪姆迪";
 	AL["Shadow Lord Xiraxis"] = "暗影領主希瑞西斯";
@@ -767,21 +764,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "縛地者瑞吉";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "開啟黑暗之門";
 	AL["Sa'at <Keepers of Time>"] = "塞特 <時光守望者>";
-	AL["The Dark Portal"] = "黑暗之門";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "海加爾山戰場";
-	AL["Alliance Base"] = "聯盟營地";
 	AL["Lady Jaina Proudmoore"] = "珍娜·普勞德摩爾女士";
-	AL["Horde Encampment"] = "部落營地";
 	AL["Thrall <Warchief>"] = "索爾 <首領>";
-	AL["Night Elf Village"] = "夜精靈村";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "泰蘭妲·語風 <伊露恩的高階女祭司>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "逃離敦霍爾德";
 	AL["Erozion"] = "伊洛森";
 	AL["Brazen"] = "布瑞茲恩";
 	AL["Landing Spot"] = "降落點";
@@ -1203,5 +1193,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "魔娜菈 <The Last Queen>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "諾庫·風暴預言者 <Lord of Tempest>";
+	AL["Rocky Horror"] = "磐石駭獸";
+	AL["Focused Eye"] = "集束之眼";
+	AL["Unblinking Eye"] = "堅定無畏之眼";
+	AL["Archritualist Kelada"] = "大祭儀師凱烈德";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "『瘟疫獸』血腐洛克 <Primordial Saurok Horror>";
+	AL["Zao'cho <The Emperor's Shield>"] = "趙仇 <The Emperor's Shield>";
 
 end

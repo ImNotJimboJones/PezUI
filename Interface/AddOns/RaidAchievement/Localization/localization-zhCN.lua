@@ -3,7 +3,8 @@
 
 function psealocale()
 
-
+  raerroraddoninst = "出错! 插件没有被安装,你必须下载并安装它:"
+  raerrormodulereq = "需要额外的模块"
 	charakillintime = "条件达成！杀死堆叠有3层闪电充能的首领（30秒剩余时间）！"
 	charakillintime2 = "条件达成！当他有此增益效果时击杀首领（20秒剩余时间）！"
 	chhrbrannyell = "好啊，我们走！只需要在门禁系统中输入最终登录序列……然后……"

@@ -1,4 +1,4 @@
--- $Id: AtlasMaps_NPC_DB.lua 1922 2013-02-28 15:16:04Z Dynaletik $
+-- $Id: AtlasMaps_NPC_DB.lua 2018 2013-05-19 16:24:13Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -25,7 +25,7 @@
 --]]
 
 -- Atlas Map NPC Description Data
--- Maintainers: Arith, Dynaletik, dubcat
+-- Maintainers: Arith, Dynaletik, dubcat, Resike 
 
 AtlasMaps_NPC_DB = {
 --[[

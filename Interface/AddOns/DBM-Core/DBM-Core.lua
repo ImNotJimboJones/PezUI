@@ -44,9 +44,9 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = tonumber(("$Revision: 9689 $"):sub(12, -3)),
-	DisplayVersion = "5.3.1", -- the string that is shown as version
-	ReleaseRevision = 9689 -- the revision of the latest stable version that is available
+	Revision = tonumber(("$Revision: 9727 $"):sub(12, -3)),
+	DisplayVersion = "5.3.2", -- the string that is shown as version
+	ReleaseRevision = 9727 -- the revision of the latest stable version that is available
 }
 
 -- Legacy crap; that stupid "Version" field was never a good idea.
@@ -75,6 +75,7 @@ DBM.DefaultOptions = {
 	ModelSoundValue = "Short",
 	ChallengeBest = "Realm",
 	CountdownVoice = "Corsica",
+	CountdownVoice2 = "Kolt",
 	ShowCountdownText = false,
 	RaidWarningPosition = {
 		Point = "TOP",
@@ -165,7 +166,6 @@ DBM.DefaultOptions = {
 	LastRevision = 0,
 	FilterSayAndYell = false,
 	ChatFrame = "DEFAULT_CHAT_FRAME",
-	barrensSounds = true,
 }
 
 DBM.Bars = DBT:New()
@@ -207,6 +207,7 @@ local _, class = UnitClass("player")
 local LastZoneMapID = -1
 local queuedBattlefield = {}
 local loadDelay = nil
+local loadDelay2 = nil
 local stopDelay = nil
 local myRealRevision = DBM.Revision or DBM.ReleaseRevision
 local watchFrameRestore = false
@@ -1692,7 +1693,7 @@ do
 end
 
 function DBM:GetNumGroupMembers()
-	return GetNumGroupMembers()
+	return IsInGroup() and GetNumGroupMembers() or 1
 end
 
 function DBM:GetBossUnitId(name)
@@ -1826,16 +1827,12 @@ end
 
 function DBM:PLAYER_REGEN_ENABLED()
 	if loadDelay then
-		print("DBM Debug: Attemping to load queued mods")
-		if type(loadDelay) == "table" then
-			for i, v in ipairs(loadDelay) do
-				print("DBM Debug: loading ", v)
-				DBM:LoadMod(v)
-			end
-		else
-			print("DBM Debug: loading ", loadDelay)
-			DBM:LoadMod(loadDelay)
-		end
+--		print("DBM Debug: loading ", loadDelay)
+		DBM:LoadMod(loadDelay)
+	end
+	if loadDelay2 then
+--		print("DBM Debug: loading ", loadDelay2)
+		DBM:LoadMod(loadDelay2)
 	end
 	if guiRequested and not IsAddOnLoaded("DBM-GUI") then
 		guiRequested = false
@@ -2054,14 +2051,9 @@ function DBM:LoadMod(mod)
 	--IF we are fighting a boss, we don't have much of a choice but to try and load anyways since script ran too long isn't actually a guarentee.
 	--it's mainly for slower computers that fail to load mods in combat. Most can load in combat if we delay the garbage collect
 	if InCombatLockdown() and IsInInstance() and not IsEncounterInProgress() then
-		print("DBM Debug: Mod load delayed because of combat: ", mod)
-		if loadDelay and loadDelay ~= mod then
-			if type(loadDelay) ~= "table" then
-				loadDelay = { loadDelay }
-			end
-			if not loadDelay[mod] then
-				loadDelay[#loadDelay + 1] = mod
-			end
+		self:AddMsg(DBM_CORE_LOAD_MOD_COMBAT:format(tostring(mod.name)))
+		if loadDelay and loadDelay ~= mod then--Check if load delay exists, but make sure this isn't a loop of same mod before making a second load delay
+			loadDelay2 = mod
 		else
 			loadDelay = mod
 		end
@@ -2108,8 +2100,8 @@ function DBM:LoadMod(mod)
 		if not InCombatLockdown() then--We loaded in combat because a raid boss was in process, but lets at least delay the garbage collect so at least load mod is half as bad, to do our best to avoid "script ran too long"
 			collectgarbage("collect")
 		end
-		if type(loadDelay) == "table" then
-			loadDelay[mod] = nil
+		if loadDelay2 == mod then
+			loadDelay2 = nil
 		elseif loadDelay == mod then
 			loadDelay = nil
 		end
@@ -2809,13 +2801,6 @@ do
 	end
 
 	function DBM:CHAT_MSG_MONSTER_EMOTE(msg)
-		if DBM.Options.barrensSounds and LastZoneMapID == 11 then--Northern barrens caravan messages
-			if DBM.Options.UseMasterVolume then
-				PlaySoundFile("Sound\\interface\\UI_RaidBossWhisperWarning.ogg", "Master")
-			else
-				PlaySoundFile("Sound\\interface\\UI_RaidBossWhisperWarning.ogg")
-			end
-		end
 		return onMonsterMessage("emote", msg)
 	end
 
@@ -3043,6 +3028,17 @@ function DBM:GetHighestBossHealth()
 	return highestBossHealth
 end
 
+function DBM:GetBossHealthByCID(cid)
+	if #bossHealth == 0 then return 1 end
+	local health
+	for i, v in pairs(bossHealth) do
+		if i == cid then
+			health = v
+		end
+	end
+	return health
+end
+
 function DBM:EndCombat(mod, wipe)
 	if removeEntry(inCombat, mod) then
 		local scenario = mod.type == "SCENARIO"
@@ -3075,7 +3071,7 @@ function DBM:EndCombat(mod, wipe)
 		if wipe then
 			--Fix for "attempt to perform arithmetic on field 'pull' (a nil value)" (which was actually caused by stats being nil, so we never did getTime on pull, fixing one SHOULD fix the other)
 			local thisTime = GetTime() - mod.combatInfo.pull
-			local wipeHP = ("%d%%"):format((mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
+			local wipeHP = ("%d%%"):format((mod.mainBossId and DBM:GetBossHealthByCID(mod.mainBossId) or mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
 			local totalPulls = (savedDifficulty == "lfr25" and mod.stats.lfr25Pulls) or ((savedDifficulty == "heroic5" or savedDifficulty == "heroic10") and mod.stats.heroicPulls) or (savedDifficulty == "challenge5" and mod.stats.challengePulls) or (savedDifficulty == "normal25" and mod.stats.normal25Pulls) or (savedDifficulty == "heroic25" and mod.stats.heroic25Pulls) or ((savedDifficulty == "normal5" or savedDifficulty == "normal10" or savedDifficulty == "worldboss") and mod.stats.normalPulls) or 0
 			local totalKills = (savedDifficulty == "lfr25" and mod.stats.lfr25Kills) or ((savedDifficulty == "heroic5" or savedDifficulty == "heroic10") and mod.stats.heroicKills) or (savedDifficulty == "challenge5" and mod.stats.challengeKills) or (savedDifficulty == "normal25" and mod.stats.normal25Kills) or (savedDifficulty == "heroic25" and mod.stats.heroic25Kills) or ((savedDifficulty == "normal5" or savedDifficulty == "normal10" or savedDifficulty == "worldboss") and mod.stats.normalKills) or 0
 			if thisTime < 30 then -- Normally, one attempt will last at least 30 sec.
@@ -3631,7 +3627,7 @@ do
 				mod = not v.isCustomMod and v
 			end
 			mod = mod or inCombat[1]
-			local hp = ("%d%%"):format((mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
+			local hp = ("%d%%"):format((mod.mainBossId and DBM:GetBossHealthByCID(mod.mainBossId) or mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
 			sendWhisper(sender, chatPrefix..DBM_CORE_STATUS_WHISPER:format(difficultyText..(mod.combatInfo.name or ""), hp or DBM_CORE_UNKNOWN, getNumAlivePlayers(), GetNumGroupMembers()))
 		elseif #inCombat > 0 and DBM.Options.AutoRespond and
 		(isRealIdMessage and (not isOnSameServer(sender) or not DBM:GetRaidUnitId(select(4, BNGetFriendInfoByID(sender)))) or not isRealIdMessage and not DBM:GetRaidUnitId(sender)) then
@@ -3643,7 +3639,7 @@ do
 				mod = not v.isCustomMod and v
 			end
 			mod = mod or inCombat[1]
-			local hp = ("%d%%"):format((mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
+			local hp = ("%d%%"):format((mod.mainBossId and DBM:GetBossHealthByCID(mod.mainBossId) or mod.highesthealth and DBM:GetHighestBossHealth() or DBM:GetLowestBossHealth()) * 100)
 			if not autoRespondSpam[sender] then
 				if IsInScenarioGroup() then
 					sendWhisper(sender, chatPrefix..DBM_CORE_AUTO_RESPOND_WHISPER_SCENARIO:format(playerName, difficultyText..(mod.combatInfo.name or ""), getNumAlivePlayers(), GetNumGroupMembers()))
@@ -3883,7 +3879,7 @@ function DBM:FindDungeonIDs()
 	for i=1, 1000 do
 		local dungeon = GetDungeonInfo(i)
 		if dungeon then
-			print(i..": "..dungeon)
+			self:AddMsg(i..": "..dungeon)
 		end
 	end
 end
@@ -4700,7 +4696,7 @@ end
 do
 	local countdownProtoType = {}
 	local mt = {__index = countdownProtoType}
-	
+
 	local function showCountdown(timer)
 		TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, timer, timer)
 	end
@@ -4722,16 +4718,21 @@ do
 					DBM:Schedule(timer%1, showCountdown, floor(timer))
 				end
 			end
-			if DBM.Options.CountdownVoice == "None" then return end
-			if DBM.Options.CountdownVoice == "Mosh" then
+			local voice = DBM.Options.CountdownVoice
+			local voice2 = DBM.Options.CountdownVoice2
+			if voice == "None" then return end
+			if self.alternateVoice then--We already have an active countdown using primary voice, so fall back to secondary voice
+				voice = voice2
+			end
+			if voice == "Mosh" then--Voice only goes to 5
 				for i = count, 1, -1 do
 					if i <= 5 then
 						self.sound5:Schedule(timer-i, "Interface\\AddOns\\DBM-Core\\Sounds\\Mosh\\"..i..".ogg")
 					end
 				end
-			else--When/if more voices get added we can tweak it to use elseif rules, but for now else works smarter cause then ANY value will return to a default voice.
+			else--Voice that goes to 10
 				for i = count, 1, -1 do
-					self.sound5:Schedule(timer-i, "Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..i..".ogg")
+					self.sound5:Schedule(timer-i, "Interface\\AddOns\\DBM-Core\\Sounds\\"..voice.."\\"..i..".ogg")
 				end
 			end
 		end
@@ -4756,7 +4757,7 @@ do
 	end
 	countdownProtoType.Stop = countdownProtoType.Cancel
 
-	function bossModPrototype:NewCountdown(timer, spellId, optionDefault, optionName, count, textDisabled)
+	function bossModPrototype:NewCountdown(timer, spellId, optionDefault, optionName, count, textDisabled, altVoice)
 		if not spellId and not optionName then
 			error("NewCountdown: you must provide either spellId or optionName", 2)
 			return
@@ -4780,6 +4781,7 @@ do
 				timer = timer,
 				count = count,
 				textDisabled = textDisabled,
+				alternateVoice = altVoice,
 				mod = self
 			},
 			mt
@@ -4796,7 +4798,7 @@ do
 		return obj
 	end
 
-	function bossModPrototype:NewCountdownFades(timer, spellId, optionDefault, optionName, count, textDisabled)
+	function bossModPrototype:NewCountdownFades(timer, spellId, optionDefault, optionName, count, textDisabled, altVoice)
 		if not spellId and not optionName then
 			error("NewCountdownFades: you must provide either spellId or optionName", 2)
 			return
@@ -4820,6 +4822,7 @@ do
 				timer = timer,
 				count = count,
 				textDisabled = textDisabled,
+				alternateVoice = altVoice,
 				mod = self
 			},
 			mt
@@ -4848,15 +4851,15 @@ do
 		if not self.option or self.mod.Options[self.option] then
 			timer = timer or self.timer or 10
 			timer = timer <= 5 and self.timer or timer
-			if DBM.Options.CountdownVoice == "None" then return end
-			if DBM.Options.CountdownVoice == "Mosh" and timer == 5 then--Don't have 6-10 for him yet.
+			local voice = DBM.Options.CountdownVoice
+			if voice == "None" then return end
+			if voice == "Mosh" and timer <= 5 then--Don't have 6-10 for him yet.
 				for i = 1, timer do
 					self.sound5:Schedule(i, "Interface\\AddOns\\DBM-Core\\Sounds\\Mosh\\"..i..".ogg")
 				end
-			else--When/if more voices get added we can tweak it to use elseif rules, but for now else works smarter cause then ANY value will return to a default voice.
-				--Ugly as hel way to do it but i coudln't think of a different way to do it accurately
+			else--Voices that go to 10
 				for i = 1, timer do
-					self.sound5:Schedule(i, "Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..i..".ogg")
+					self.sound5:Schedule(i, "Interface\\AddOns\\DBM-Core\\Sounds\\"..voice.."\\"..i..".ogg")
 				end
 			end
 		end
@@ -5197,6 +5200,29 @@ do
 
 	function bossModPrototype:NewSpecialWarningPreWarn(text, optionDefault, time, ...)
 		return newSpecialWarning(self, "prewarn", text, time, optionDefault, ...)
+	end
+	
+	function DBM:PlayCountSound(number, forceVoice)
+		if number > 10 then return end
+		local voice, voice2
+		if forceVoice then--Primarlly for options
+			voice = forceVoice
+		else
+			voice = DBM.Options.CountdownVoice
+			voice2 = DBM.Options.CountdownVoice2
+		end
+		if number > 5 and (voice == "Mosh") then--Can't count past 5
+			if voice ~= voice2 then
+				voice = voice2--Fall back to secondary voice option if primary is mosh
+			else--Voice 1 and voice 2 were both set to "Mosh", they must really like mosh. At this point we must ignore their preference
+				voice = "Corsica"
+			end
+		end--If number is higher than 5 and users primary voice setting ismosh, fallback to secondary voice setting
+		if DBM.Options.UseMasterVolume then
+			PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\"..voice.."\\"..number..".ogg", "Master")
+		else
+			PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\"..voice.."\\"..number..".ogg")
+		end
 	end
 	
 	function DBM:PlaySpecialWarningSound(soundId)

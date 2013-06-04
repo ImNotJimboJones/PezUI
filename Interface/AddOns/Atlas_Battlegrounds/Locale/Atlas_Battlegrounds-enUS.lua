@@ -1,4 +1,4 @@
--- $Id: Atlas_Battlegrounds-enUS.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: Atlas_Battlegrounds-enUS.lua 2043 2013-05-23 16:23:31Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,15 +32,8 @@ local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "enUS", true);
 if AL then
 	--Common
 	AL["Battleground Maps"] = "Battleground Maps";
-	AL["Entrance"] = "Entrance";
-	AL["Meeting Stone"] = "Meeting Stone";
-	AL["North"] = "North";
-	AL["Reputation"] = "Reputation";
 	AL["Rescued"] = "Rescued";
 	AL["Span of 5"] = "Span of 5"; -- Blizzard's span to put players with similar level range into a BG (10-14, 15-29)
-	AL["South"] = "South";
-	AL["Start"] = "Start";
-	AL["Summon"] = "Summon";
 
 	--Places
 	AL["AV"] = "AV"; -- Alterac Valley
@@ -115,7 +108,6 @@ if AL then
 
 	--Eye of the Storm
 	AL["Flag"] = "Flag";
-	AL["Graveyard"] = "Graveyard";
 
 	-- Halaa
 	AL["Quartermaster Davian Vaclav"] = "Quartermaster Davian Vaclav";
@@ -195,8 +187,13 @@ if AL then
 	AL["Dragonmaw Clan Compound"] = "Dragonmaw Clan Compound";
 
 	-- Silvershard Mines
-	AL["Capture Point"] = "Capture Point"; -- the area where the carts spwan and you need to capture them
+	AL["Mine Cart Spawn Point"] = "Mine Cart Spawn Point";
+	AL["Mine Cart Depot"] = "Mine Cart Depot";
 
 	-- Temple of Kotmogu
-	AL["Scoring Point"] = "Scoring Point";
+	AL["Orb of Power"] = "Orb of Power";
+	AL["Center Point (Maximum Points)"] = "Center Point (Maximum Points)";
+
+	-- Deepwind Gorge
+	AL["Center Mine"] = "Center Mine";
 end

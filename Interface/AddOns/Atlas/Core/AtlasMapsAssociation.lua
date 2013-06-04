@@ -1,4 +1,4 @@
--- $Id: AtlasMapsAssociation.lua 1922 2013-02-28 15:16:04Z Dynaletik $
+-- $Id: AtlasMapsAssociation.lua 2022 2013-05-21 09:25:15Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -56,7 +56,7 @@ Atlas_AssocDefaults = {
 	[BZ["Siege of Niuzao Temple"]] =	"SiegeofNiuzaoTempleA";
 	[BZ["Stratholme"]] =			"StratholmeGauntlet";
 	[BZ["Throne of Tides"]] = 		"ThroneOfTheTides";
-	[BZ["Throne of Thunder"]] = 		"ThroneofThunderA";
+	[BZ["Throne of Thunder"]] = 		"ThroneofThunderB";
 	[BZ["The Wailing Caverns"]] = 		"WailingCavernsEnt";
 	[BZ["Ulduar"]] =			"UlduarA";
 };
@@ -271,31 +271,44 @@ Atlas_SubZoneData = {
 			BZ["The Slaughter House"],
 		},
 	},
+	-- The Stockade
+	[BZ["The Stockade"]] = {
+		-- The Stockade
+		["TheStockade"] = {
+			BZ["Stormwind Stockade"],
+		},
+	},
 	-- Throne of Thunder
 	[BZ["Throne of Thunder"]] = {
 		--Throne of Thunder A
 		["ThroneofThunderA"] = {
+			BZ["Ruined Approach"],
 			BZ["Overgrown Statuary"],
+			BZ["Grand Overlook"],
 			BZ["Royal Amphitheater"],
 			BZ["Lightning Promenade"],
+			BZ["The Stormbridge"],
 		},
 		--Throne of Thunder B
 		["ThroneofThunderB"] = {
 			BZ["Lair of Tortos"],
 			BZ["Forgotten Depths"],
 			BZ["Roost of Ji-Kun"],
+			BZ["Refuse Disposal"],
 		},
 		--Throne of Thunder C
 		["ThroneofThunderC"] = {
 			BZ["Watcher's Sanctum"],
-			BZ["Saurok Creation Pit"],
 			BZ["Halls of Flesh-Shaping"],
+			BZ["Saurok Creation Pit"],
+			BZ["Sewer Access Point"],
 		},
 		--Throne of Thunder D
 		["ThroneofThunderD"] = {
-			BZ["Hall of Kings"],
 			BZ["Grand Courtyard"],
+			BZ["Hall of Kings"],
 			BZ["Celestial Enclave"],
+			BZ["Lightning Ascent"],
 			BZ["Pinnacle of Storms"],
 			BZ["Hidden Cell"],
 		},

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Deathbringer", "DBM-Icecrown", 1)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 34 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 51 $"):sub(12, -3))
 mod:SetCreatureID(37813)
 mod:SetModelID(30790)
 mod:SetUsedIcons(1, 2, 3, 4, 5, 6, 7, 8)
@@ -14,16 +14,16 @@ mod:RegisterEvents(
 	"SPELL_SUMMON",
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
-	"UNIT_HEALTH",
+	"UNIT_HEALTH boss1",
 	"CHAT_MSG_MONSTER_YELL"
 )
 
-local warnFrenzySoon		= mod:NewAnnounce("WarnFrenzySoon", 2, 72737, mod:IsTank() or mod:IsHealer())
+local warnFrenzySoon		= mod:NewSoonAnnounce(72737, 2, nil, mod:IsTank() or mod:IsHealer())
 local warnAddsSoon			= mod:NewPreWarnAnnounce(72173, 10, 3)
 local warnAdds				= mod:NewSpellAnnounce(72173, 4)
 local warnFrenzy			= mod:NewSpellAnnounce(72737, 2, nil, mod:IsTank() or mod:IsHealer())
 local warnBloodNova			= mod:NewSpellAnnounce(72378, 2)
-local warnMark 				= mod:NewAnnounce("warnMark", 4, 72293)
+local warnMark 				= mod:NewTargetCountAnnounce(72293, 4, 72293)
 local warnBoilingBlood		= mod:NewTargetAnnounce(72385, 2, nil, mod:IsHealer())
 local warnRuneofBlood		= mod:NewTargetAnnounce(72410, 3, nil, mod:IsTank() or mod:IsHealer())
 
@@ -90,20 +90,11 @@ end
 do	-- add the additional Rune Power Bar
 	local last = 0
 	local function getRunePowerPercent()
-		local guid = UnitGUID("focus")
-		if mod:GetCIDFromGUID(guid) == 37813 then 
-			last = math.floor(UnitPower("focus")/UnitPowerMax("focus") * 100)
+		local guid = UnitGUID("boss1")
+		if guid and mod:GetCIDFromGUID(guid) == 37813 then 
+			last = math.floor(UnitPower("boss1")/UnitPowerMax("boss1") * 100)
 			return last
 		end
-		for i = 0, DBM:GetNumGroupMembers(), 1 do
-			local unitId = ((i == 0) and "target") or "raid"..i.."target"
-			local guid = UnitGUID(unitId)
-			if mod:GetCIDFromGUID(guid) == 37813 then
-				last = math.floor(UnitPower(unitId)/UnitPowerMax(unitId) * 100)
-				return last
-			end
-		end
-		return last
 	end
 	function mod:CreateBossRPFrame()
 		DBM.BossHealth:AddBoss(getRunePowerPercent, L.RunePower)
@@ -155,11 +146,11 @@ do
 	
 	mod:RegisterOnUpdateHandler(function(self)
 		if self.Options.BeastIcons and (DBM:GetRaidRank() > 0 and not (iconsSet == 5 and self:IsDifficulty("normal25", "heroic25") or iconsSet == 2 and self:IsDifficulty("normal10", "heroic10"))) then
-			for i = 1, DBM:GetNumGroupMembers() do
-				local uId = "raid"..i.."target"
-				local guid = UnitGUID(uId)
+			for uId in DBM:GetGroupMembers() do
+				local unitId = uId.."target"
+				local guid = UnitGUID(unitId)
 				if beastIcon[guid] then
-					SetRaidTarget(uId, beastIcon[guid])
+					SetRaidTarget(unitId, beastIcon[guid])
 					iconsSet = iconsSet + 1
 					beastIcon[guid] = nil
 				end

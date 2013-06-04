@@ -1,4 +1,4 @@
--- $Id: AtlasOptions.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: AtlasOptions.lua 2018 2013-05-19 16:24:13Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, dubcat
+-- Maintainers: Arith, Dynaletik, dubcat, Resike 
 
 --[[
 function AtlasOptions_ResetPosition()
@@ -193,8 +193,8 @@ end
 
 function AtlasOptions_SetupSlider(self, text, mymin, mymax, step)
 	self:SetMinMaxValues(mymin, mymax);
-	_G[self:GetName().."Low"]:SetText(mymin);
-	_G[self:GetName().."High"]:SetText(mymax);
+	--_G[self:GetName().."Low"]:SetText(mymin);
+	--_G[self:GetName().."High"]:SetText(mymax);
 	self:SetValueStep(step);
 end
 
@@ -206,7 +206,7 @@ end
 
 
 function AtlasOptions_UpdateSlider(self, text)
-	_G[self:GetName().."Text"]:SetText("|cffffd200"..text.." ("..round(self:GetValue(),2)..")");
+	_G[self:GetName().."Text"]:SetText("|cffffd200"..text.." ("..round(self:GetValue(), 3)..")");
 end
 
 
@@ -239,3 +239,10 @@ function AtlasOptionsFrameDropDownCats_OnClick(self)
 	Reset_Dropdowns();
 end
 
+function AtlasOptions_OnMouseWheel(self, delta)
+	if delta > 0 then
+		self:SetValue(self:GetValue() + self:GetValueStep())
+	else
+		self:SetValue(self:GetValue() - self:GetValueStep())
+	end
+end

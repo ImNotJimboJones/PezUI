@@ -1,4 +1,5 @@
-local UniquePets = PetJournalEnhanced:NewModule("UniquePets","AceEvent-3.0")
+local UniquePets = PetJournalEnhanced:NewModule("UniquePets")
+local Config = PetJournalEnhanced:GetModule("Config")
 local LibPetJournal = LibStub("LibPetJournal-2.0")
 local _
 local L =  LibStub("AceLocale-3.0"):GetLocale("PetJournalEnhanced")
@@ -19,10 +20,12 @@ function UniquePets:ScanPets()
 	UniquePets.frame.uniqueCount:SetText(count)
 end
 
-function UniquePets:Initialize(database)
-	self.db = database.global
-	self:RegisterMessage("PETJOURNAL_ENHANCED_OPTIONS_UPDATE")
+
+
+function UniquePets:OnInitialize()
+	self.config = PetJournalEnhanced:GetModule("Config")
 	self.frame = CreateFrame("frame","PJEUniquePetCount",PetJournal,"InsetFrameTemplate3")
+	
 	
 	--Create unique pet count UI elements
 	local frame = self.frame;
@@ -41,11 +44,10 @@ function UniquePets:Initialize(database)
 	frame.uniqueCount:SetPoint("RIGHT",frame,-10,0)
 	frame.uniqueCount:SetText("0")
 	
+	PetJournal:HookScript("OnShow",function() self:SetShown(Config.display.uniquePetCount) end )
+	
 	
 	--Inital ui state
-	self:SetShown(self.db.display.uniquePetCount)
-	
-	
 	LibPetJournal.RegisterCallback(self,"PetListUpdated", "ScanPets")
 	self:ScanPets()
 end
@@ -63,7 +65,12 @@ function UniquePets:SetShown(enabled)
 	end
 end
 
-function UniquePets:PETJOURNAL_ENHANCED_OPTIONS_UPDATE()
-	self:SetShown(self.db.display.uniquePetCount)
+
+function UniquePets:GetDisplayUniquePetCount()
+	return self.db.global.display.uniquePetCount
 end
+function UniquePets:SetDisplayUniquePetCount(enabled)
+	self.db.global.display.uniquePetCount = enabled
+end
+
 

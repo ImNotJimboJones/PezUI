@@ -1,8 +1,8 @@
-## Interface: 50200
+## Interface: 50300
 ## Title: Thnan's Mod
 ## Notes: A framework for various features
 ## Author: Thnan (Jaedenar US-A)
-## Version: 3.5.0
+## Version: 3.5.1
 
 ## SavedVariables: ThnanMod_Saved
 

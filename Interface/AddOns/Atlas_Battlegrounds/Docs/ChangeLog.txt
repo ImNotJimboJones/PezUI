@@ -7,6 +7,17 @@ Copyright 2011 ~ 2013 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.25.01 (May 24, 2013)
+- Maps update:
+    - Silvershard Mines: map revamp
+    - Temple of Kotmogu: map revamp
+
+v1.25.00 (May 21, 2013)
+-----------------------
+- TOC update to support WoW 5.3
+- Maps added:
+    - Deepwind Gorge
+
 v1.24.00 (Mar. 05, 2013)
 -----------------------
 - TOC update to support WoW 5.2
@@ -24,7 +35,7 @@ v1.22.1 (Oct. 10, 2012)
 v1.22.0 (Sep. 25, 2012)
 -----------------------
 - Update TOC to support WoW 5.0
-- Map added:
+- Maps added:
     - Temple of Kotmogu
     - Silvershard Mines
 
@@ -84,4 +95,3 @@ v1.17.0 (Aug. 15, 2010)
 -----------------------
 - new maps: Halaa PvP, Hellfire Peninsula PvP, Zangarmarsh PvP, 
             Terokkar Forest PvP, Wintergrasp PvP, Game of Tower, Silithyst Must Flow (arith)
-

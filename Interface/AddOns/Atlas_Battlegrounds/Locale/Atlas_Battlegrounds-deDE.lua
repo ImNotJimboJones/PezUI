@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-deDE.lua 1891 2013-02-17 15:41:01Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-deDE.lua 2043 2013-05-23 16:23:31Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,15 +32,8 @@ local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "deDE", false);
 if AL then
 	--Common
 	AL["Battleground Maps"] = "Schlachtfeldkarten";
-	AL["Entrance"] = "Eingang";
-	AL["Meeting Stone"] = "Versammlungsstein";
-	AL["North"] = "Nord";
-	AL["Reputation"] = "Ruf";
 	AL["Rescued"] = "Gerettet";
 	AL["Span of 5"] = "5er Schritte";
-	AL["South"] = "Süd";
-	AL["Start"] = "Anfang";
-	AL["Summon"] = "Beschwörbar";
 
 	--Places
 	AL["AV"] = "AV"; -- Alterac Valley
@@ -115,7 +108,6 @@ if AL then
 
 	--Eye of the Storm
 	AL["Flag"] = "Flagge";
-	AL["Graveyard"] = "Friedhof";
 
 	-- Halaa
 	AL["Quartermaster Davian Vaclav"] = "Rüstmeister Davian Watzlav";
@@ -195,8 +187,13 @@ if AL then
 	AL["Dragonmaw Clan Compound"] = "Truppenlager des Drachenmalklans";
 
 	-- Silvershard Mines
-	AL["Capture Point"] = "Zu erobernde Minenloren";
+	AL["Mine Cart Spawn Point"] = "Minenloren-Startpunkt";
+	AL["Mine Cart Depot"] = "Minenloren-Depot";
 
 	-- Temple of Kotmogu
-	AL["Scoring Point"] = "Mitte des Tempels von Katmogu";
+	AL["Orb of Power"] = "Kugel der Macht";
+	AL["Center Point (Maximum Points)"] = "Zentrum (Maximale Punkte)";
+
+	-- Deepwind Gorge
+	AL["Center Mine"] = "Mittlere Mine";
 end

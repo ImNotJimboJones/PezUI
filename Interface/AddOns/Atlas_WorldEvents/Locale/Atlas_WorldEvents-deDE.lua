@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_WorldEvents-deDE.lua 47 2013-02-17 12:14:13Z arith $
+﻿-- $Id: Atlas_WorldEvents-deDE.lua 57 2013-05-23 14:49:43Z arith $
 --[[
 
 	Atlas World Events, a World of Warcraft map browser for world events
@@ -50,13 +50,20 @@ if AL then
 	-- World Events
 	-- ----------------------------------------------------------------------
 	AL["Lunar Festival"] = "Mondfest" -- Needs review
-	AL["Lunar_Date"] = "27. Januar - 9. Februar" -- Needs review
+	AL["Lunar_Date"] = "20. Januar - 3. Februar" -- Needs review
+
 	AL["Midsummer Fire Festival"] = "Sonnenwendfest" -- Needs review
-	AL["Midsummer_Date"] = "21. Juni - 4. Juli" -- Needs review
+	AL["Midsummer_Date"] = "21. Juni - 5. Juli" -- Needs review
+
 	AL["Hallow's End"] = "Schlotternächte" -- Needs review
-	AL["Hallow_Date"] = "18. Oktober - 31. Oktober" -- Needs review
+	AL["Hallow_Date"] = "18. Oktober - 11. November" -- Needs review
+
 	AL["Brewfest"] = "Braufest";
+	AL["Brewfest_Date"] = "20. September - 6. Oktober"; 	-- update dates for year 2013
+
 	AL["Love is in the Air"] = "Liebe liegt in der Luft";
+	AL["Love_Date"] = "10. Februar - 24. Februar";		-- update dates for year 2014
+
 	-- Darkmoon Faire
 	AL["The first Sunday each month, last for a week"] = "Beginn: erster Sonntag jeden Monats, Dauer: eine Woche" -- Needs review
 

@@ -9,7 +9,13 @@ The grow check button will target any plant that needs attention before it will 
 Jogu's forecast will be saved and displayed in the tool panel. This feature does not work in some locales.
 The tool panel also has buttons for your portal shards.
 
+THIS MOD HAS BEEN SPLIT INTO SEPARATE PROJECTS FOR EACH MODULE. Future updates will only be available through the other projects. See the website for more information.
+
 VERSION CHANGES:
+
+1.5.1:
+
+- Updated to support WoW version 5.3.0
 
 1.5.0:
 

@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas-deDE.lua 1912 2013-02-27 10:59:00Z Dynaletik $
+﻿-- $Id: Atlas-deDE.lua 2023 2013-05-21 09:56:33Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -31,7 +31,7 @@ local AL = AceLocale:NewLocale("Atlas", "deDE", false);
 -- Deutsche Lokalisierung (German, deDE)
 -- Dynaletik (ICQ: 176-289-585)
 -- Nihlo (ICQ: 260-869-930)
--- Letztes Update: 27.02.2013
+-- Letztes Update: 19.05.2013
 
 if ( GetLocale() == "deDE" ) then
 -- Define the leading strings to be ignored while sorting
@@ -242,6 +242,7 @@ if AL then
 	AL["Teleporter destination"] = "Teleportziel";
 	AL["Third Stop"] = "Dritter Halt";
 	AL["Top"] = "Spitze";
+	AL["Tunnel"] = "Tunnel";
 	AL["Underwater"] = "Unter Wasser";
 	AL["Upper"] = "Oben";
 	AL["Varies"] = "Variiert";
@@ -502,7 +503,6 @@ if AL then
 	AL["Knot Thimblejack"] = "Knot Zwingschraub";
 
 	--Dire Maul (West)
-	AL["J'eevee's Jar"] = "J'eevees Glas";
 	AL["Ferra"] = "Ferra";
 	AL["Estulan <The Highborne>"] = "Estulan <Die Hochgeborenen>";
 	AL["Shen'dralar Watcher"] = "Behüter der Shen'dralar";
@@ -573,8 +573,6 @@ if AL then
 --****************************
 
 	--Blackrock Depths
-	AL["Relic Coffer Key"] = "Reliktkastenschlüssel";
-	AL["Dark Keeper Key"] = "Schlüssel des Dunkelbewahrers";
 	AL["The Black Anvil"] = "Der Schwarze Amboss";
 	AL["The Vault"] = "Der Tresorraum";
 	AL["Watchman Doomgrip"] = "Wachmann Stahlgriff";
@@ -720,7 +718,6 @@ if AL then
 	AL["Tormented Soulpriest"] = "Gequälte Seelenpriesterin";
 
 	--Auch: Mana-Tombs
-	AL["The Eye of Haramad"] = "Das Auge des Haramad";
 	AL["Artificer Morphalius"] = "Konstrukteur Morphalius";
 	AL["Mamdy the \"Ologist\""] = "Mamdy der \"Ologe\"";
 	AL["Shadow Lord Xiraxis"] = "Schattenlord Xiraxis";
@@ -776,21 +773,14 @@ if AL then
 	AL["Earthbinder Rayge"] = "Erdbinder Rayge";
 
 	--CoT: The Black Morass
-	AL["Opening of the Dark Portal"] = "Öffnung des Dunklen Portals";
 	AL["Sa'at <Keepers of Time>"] = "Sa'at <Hüter der Zeit>";
-	AL["The Dark Portal"] = "Das Dunkle Portal";
 
 	--CoT: Hyjal Summit
-	AL["Battle for Mount Hyjal"] = "Schlacht um Berg Hyjal";
-	AL["Alliance Base"] = "Basis der Allianz";
 	AL["Lady Jaina Proudmoore"] = "Lady Jaina Prachtmeer";
-	AL["Horde Encampment"] = "Lager der Horde";
 	AL["Thrall <Warchief>"] = "Thrall <Kriegshäuptling>";
-	AL["Night Elf Village"] = "Nachtelfen Dorf";
 	AL["Tyrande Whisperwind <High Priestess of Elune>"] = "Tyrande Wisperwind <Hohepriesterin von Elune>";
 
 	--CoT: Old Hillsbrad Foothills
-	AL["Escape from Durnholde Keep"] = "Flucht aus Burg Durnholde";
 	AL["Erozion"] = "Erozion";
 	AL["Brazen"] = "Brazen";
 	AL["Landing Spot"] = "Landepunkt";
@@ -1212,5 +1202,13 @@ if AL then
 	--Terrace of Endless Spring
 
 	--Throne of Thunder
+	AL["Monara <The Last Queen>"] = "Monara <Die Letzte Königin>";
+	AL["No'ku Stormsayer <Lord of Tempest>"] = "No'ku Sturmsprecher <Herr der Stürme>";
+	AL["Rocky Horror"] = "Krankenstein";
+	AL["Focused Eye"] = "Fokussiertes Auge";
+	AL["Unblinking Eye"] = "Starrendes Auge";
+	AL["Archritualist Kelada"] = "Erzritualist Kelada";
+	AL["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "Fleisch'rok der Verpestete <Urzeitlicher Saurokschrecken>";
+	AL["Zao'cho <The Emperor's Shield>"] = "Zao'cho <Der Schild des Kaisers>";
 
 end

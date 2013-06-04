@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-esES.lua 1891 2013-02-17 15:41:01Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-esES.lua 2043 2013-05-23 16:23:31Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -39,15 +39,8 @@ local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "esES", false);
 if AL then
 	--Common
 	AL["Battleground Maps"] = "Mapas de Campos de Batalla";
-	AL["Entrance"] = "Entrada";
-	AL["Meeting Stone"] = "Piedra de encuentro";
-	AL["North"] = "Norte";
-	AL["Reputation"] = "Reputación";
 	AL["Rescued"] = "Rescate";
 	AL["Span of 5"] = "Espacio de 5"; -- Blizzard's span to put players with similar level range into a BG (10-14, 15-29)
-	AL["South"] = "Sur";
-	AL["Start"] = "Comienzo";
-	AL["Summon"] = "Invocar";
 
 	--Places
 	AL["AV"] = "VA"; -- Alterac Valley
@@ -112,9 +105,9 @@ if AL then
 	AL["Frostwolf Relief Hut"] = "Puesto de auxilio de Lobo Gélido";
 
 	--Arathi Basin
-	
+
 	--Warsong Gulch
-	
+
 	-- The Silithyst Must Flow
 	AL["The Silithyst Must Flow"] = "El silitista debe fluir"; --check
 	AL["Alliance's Camp"] = "Campamento de la Alianza";
@@ -122,8 +115,7 @@ if AL then
 
 	--Eye of the Storm
 	AL["Flag"] = "Bandera";
-	AL["Graveyard"] = "Cementerio";
-	
+
 	-- Halaa
 	AL["Quartermaster Davian Vaclav"] = "Intendente Davian Vaclav";
 	AL["Chief Researcher Kartos"] = "Jefe de investigación Kartos";
@@ -147,7 +139,7 @@ if AL then
 	AL["Horde Field Scout"] = "Explorador de campo de la Horda";
 	AL["Alliance Field Scout"] = "Explorador de campo de la Alianza";
 	AL["Twinspire Graveyard"] = "Cementerio de las Agujas Gemelas"; --Check
-	
+
 	--Isle of Conquest
 	AL["Gates are marked with red bars."] = "Las puertas están marcadas con barras rojas.";
 	AL["Overlord Agmar"] = "Señor supremo Agmar";
@@ -183,7 +175,7 @@ if AL then
 	AL["Broken Temple Graveyard"] = "Cementerio del Templo Quebrado";
 	AL["Southeast Graveyard"] = "Cementerio sureste"; 
 	AL["Southwest Graveyard"] = "Cementerio suroeste"; 
-	
+
 	-- The Battle for Gilneas
 
 	-- Tol Barad
@@ -202,8 +194,13 @@ if AL then
 	AL["Dragonmaw Clan Compound"] = "Compuesto Clan Faucedraco"; --Check
 
 	-- Silvershard Mines
-	AL["Capture Point"] = "Punto de captura"; -- the area where the carts spwan and you need to capture them
+	AL["Mine Cart Spawn Point"] = "Mine Cart Spawn Point";
+	AL["Mine Cart Depot"] = "Mine Cart Depot";
 
 	-- Temple of Kotmogu
-	AL["Scoring Point"] = "Punto de marcaje";
+	AL["Orb of Power"] = "Orb of Power";
+	AL["Center Point (Maximum Points)"] = "Center Point (Maximum Points)";
+
+	-- Deepwind Gorge
+	AL["Center Mine"] = "Mina del centro";
 end

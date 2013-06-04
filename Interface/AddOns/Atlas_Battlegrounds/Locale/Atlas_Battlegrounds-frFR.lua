@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-frFR.lua 1891 2013-02-17 15:41:01Z arithmandar $
+﻿-- $Id: Atlas_Battlegrounds-frFR.lua 2043 2013-05-23 16:23:31Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,15 +32,8 @@ local AL = AceLocale:NewLocale("Atlas_Battlegrounds", "frFR", false);
 if AL then
 	--Common
 	AL["Battleground Maps"] = "Cartes des champs de bataille";
-	AL["Entrance"] = "Entrée";
-	AL["Meeting Stone"] = "Pierre de rencontre";
-	AL["North"] = "Nord";
-	AL["Reputation"] = "Réputation "; -- Espace pour le blanc avant une double ponctuation française
 	AL["Rescued"] = "Sauvé";
 	AL["Span of 5"] = "par tranche de 5"; -- Blizzard's span to put players with similar level range into a BG (10-14, 15-29)
-	AL["South"] = "Sud";
-	AL["Start"] = "Départ";
-	AL["Summon"] = "Invoqué";
 
 	--Places
 	AL["AV"] = "AV/Alterac"; -- Alterac Valley
@@ -115,7 +108,6 @@ if AL then
 
 	--Eye of the Storm
 	AL["Flag"] = "Drapeau";
-	AL["Graveyard"] = "Cimetière";
 
 	-- Halaa
 	AL["Quartermaster Davian Vaclav"] = "Intendant Davian Vaclav";
@@ -195,9 +187,10 @@ if AL then
 	AL["Dragonmaw Clan Compound"] = "Forge des Gueules-de-Dragon";
 
 	-- Silvershard Mines
-	AL["Capture Point"] = "Point de capture";
+	AL["Mine Cart Spawn Point"] = "Mine Cart Spawn Point";
+	AL["Mine Cart Depot"] = "Mine Cart Depot";
 
 	-- Temple of Kotmogu
-	AL["Scoring Point"] = "Point de but"; -- Translation needed
-
+	AL["Orb of Power"] = "Orb of Power";
+	AL["Center Point (Maximum Points)"] = "Center Point (Maximum Points)";
 end

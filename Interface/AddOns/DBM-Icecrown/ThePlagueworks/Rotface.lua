@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Rotface", "DBM-Icecrown", 2)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 34 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 48 $"):sub(12, -3))
 mod:SetCreatureID(36627)
 mod:SetModelID(31005)
 mod:SetUsedIcons(7, 8)
@@ -20,14 +20,12 @@ mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_YELL"
 )
 
-local InfectionIcon	-- alternating between 2 icons (2 debuffs can be up at the same time in 25man at least)
-
 local warnSlimeSpray			= mod:NewSpellAnnounce(69508, 2)
 local warnMutatedInfection		= mod:NewTargetAnnounce(69674, 4)
 local warnRadiatingOoze			= mod:NewSpellAnnounce(69760, 3)
 local warnOozeSpawn				= mod:NewAnnounce("WarnOozeSpawn", 1)
 local warnStickyOoze			= mod:NewSpellAnnounce(69774, 1)
-local warnUnstableOoze			= mod:NewAnnounce("WarnUnstableOoze", 2, 69558)
+local warnUnstableOoze			= mod:NewStackAnnounce(69558, 2)
 local warnVileGas				= mod:NewTargetAnnounce(72272, 3)
 
 local specWarnMutatedInfection	= mod:NewSpecialWarningYou(69674)
@@ -39,16 +37,17 @@ local specWarnLittleOoze		= mod:NewSpecialWarning("SpecWarnLittleOoze", false)
 local specWarnVileGas			= mod:NewSpecialWarningYou(72272)
 
 local timerStickyOoze			= mod:NewNextTimer(16, 69774, nil, mod:IsTank())
-local timerWallSlime			= mod:NewTimer(20, "NextPoisonSlimePipes", 69789)
+local timerWallSlime			= mod:NewNextTimer(20, 69789)
 local timerSlimeSpray			= mod:NewNextTimer(21, 69508)
 local timerMutatedInfection		= mod:NewTargetTimer(12, 69674)
 local timerOozeExplosion		= mod:NewCastTimer(4, 69839)
 local timerVileGasCD			= mod:NewNextTimer(30, 72272)
 
 local soundMutatedInfection		= mod:NewSound(69674)
+
 mod:AddBoolOption("RangeFrame", mod:IsRanged())
 mod:AddBoolOption("InfectionIcon", true)
-mod:AddBoolOption("TankArrow")
+mod:AddBoolOption("TankArrow", true)
 
 local RFVileGasTargets	= {}
 local spamOoze = 0
@@ -116,7 +115,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 69760 then
 		warnRadiatingOoze:Show()
 	elseif args.spellId == 69558 then
-		warnUnstableOoze:Show(args.spellName, args.destName, args.amount or 1)
+		warnUnstableOoze:Show(args.destName, args.amount or 1)
 	elseif args.spellId == 69674 then
 		warnMutatedInfection:Show(args.destName)
 		timerMutatedInfection:Start(args.destName)
@@ -160,7 +159,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
+function mod:SPELL_DAMAGE(sourceGUID, sourceName, sourceFlags, _, destGUID, _, _, _, spellId)
 	if spellId == 69761 and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
 		specWarnRadiatingOoze:Show()
 	elseif spellId ~= 50288 and self:GetCIDFromGUID(destGUID) == 36899 and bit.band(sourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) ~= 0 and self:IsInCombat() then--Any spell damage except for starfall
@@ -173,7 +172,7 @@ function mod:SPELL_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
-function mod:SWING_DAMAGE(sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags)
+function mod:SWING_DAMAGE(sourceGUID, sourceName, sourceFlags, _, destGUID)
 	if self:GetCIDFromGUID(sourceGUID) == 36897 and destGUID == UnitGUID("player") and self:AntiSpam(3, 2) then --Little ooze hitting you
 		specWarnLittleOoze:Show()
 	elseif self:GetCIDFromGUID(destGUID) == 36899 and bit.band(sourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) ~= 0 and self:IsInCombat() then

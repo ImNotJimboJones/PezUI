@@ -181,6 +181,15 @@ local myData = {
 		{ BLUE..BZ["Tol'Viron Arena"] };
 
 	};]]
+	-- The Tiger's Peak
+	TigersPeak = {
+		ZoneName = { BZ["The Tiger's Peak"] };
+		Location = { BZ["Shado-Pan Monastery"]..", "..BZ["Kun-Lai Summit"] };
+		LevelRange = "90";
+		--PLayerLimit = "";
+		{ BLUE.."A) "..AL["Start"] };
+	};
+	
 };
 
 

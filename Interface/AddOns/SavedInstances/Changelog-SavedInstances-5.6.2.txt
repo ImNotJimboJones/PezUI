@@ -1,0 +1,139 @@
+------------------------------------------------------------------------
+r301 | oscarucb | 2013-06-02 21:12:18 +0000 (Sun, 02 Jun 2013) | 1 line
+Changed paths:
+   A /tags/5.6.2 (from /trunk:300)
+
+Tagging as 5.6.2
+------------------------------------------------------------------------
+r300 | oscarucb | 2013-06-02 21:10:30 +0000 (Sun, 02 Jun 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add Tol Barad Commendation
+
+------------------------------------------------------------------------
+r299 | oscarucb | 2013-06-02 19:16:56 +0000 (Sun, 02 Jun 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 129: false farm detection on Truffle Shuffle quest
+
+------------------------------------------------------------------------
+r298 | oscarucb | 2013-05-27 21:17:06 +0000 (Mon, 27 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+add Champion's Seal to currency tracking
+
+------------------------------------------------------------------------
+r296 | oscarucb | 2013-05-27 15:46:58 +0000 (Mon, 27 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+remove obsolete event, prepopulate new weekly
+
+------------------------------------------------------------------------
+r295 | oscarucb | 2013-05-25 22:58:01 +0000 (Sat, 25 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add history indicator to tooltip header
+
+------------------------------------------------------------------------
+r293 | oscarucb | 2013-05-22 10:36:14 +0000 (Wed, 22 May 2013) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+tweak trade/farm reset time
+because Blizzard epically fails at daylight savings
+
+------------------------------------------------------------------------
+r291 | oscarucb | 2013-05-21 22:45:58 +0000 (Tue, 21 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+re-enable oondasta check, as that is reportedly fixed in 5.3
+
+------------------------------------------------------------------------
+r290 | oscarucb | 2013-05-21 14:20:45 +0000 (Tue, 21 May 2013) | 1 line
+Changed paths:
+   M /trunk/SavedInstances.toc
+
+5.3 ToC update
+------------------------------------------------------------------------
+r289 | oscarucb | 2013-05-19 16:21:25 +0000 (Sun, 19 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+minor performance tweak
+
+------------------------------------------------------------------------
+r287 | oscarucb | 2013-05-19 11:53:53 +0000 (Sun, 19 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+add battleground rating to toon info tooltip
+
+------------------------------------------------------------------------
+r285 | oscarucb | 2013-05-19 11:31:12 +0000 (Sun, 19 May 2013) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+Initial support for tracking farm planting and harvest
+tweak core refresh bypass
+
+------------------------------------------------------------------------
+r283 | oscarucb | 2013-05-09 22:09:16 +0000 (Thu, 09 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 127: fix a rare lua error
+
+------------------------------------------------------------------------
+r282 | oscarucb | 2013-05-09 10:39:18 +0000 (Thu, 09 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+fix cooldown display for Northrend Alchemy Research
+
+------------------------------------------------------------------------
+r280 | oscarucb | 2013-05-07 22:43:11 +0000 (Tue, 07 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 124: fix Escape from Durnholde detection on deDE
+
+------------------------------------------------------------------------
+r279 | oscarucb | 2013-05-07 10:03:40 +0000 (Tue, 07 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+tweak the cd gussing logic again
+
+------------------------------------------------------------------------
+r278 | oscarucb | 2013-05-07 01:38:51 +0000 (Tue, 07 May 2013) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+Improve TradeSkill CD reset guess
+Work harder to retrieve the actual trade cd time when filters are enabled
+
+------------------------------------------------------------------------
+r276 | oscarucb | 2013-05-04 23:46:17 +0000 (Sat, 04 May 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+ticket 120: add some missing trade cds
+
+------------------------------------------------------------------------
+r275 | oscarucb | 2013-05-04 19:55:03 +0000 (Sat, 04 May 2013) | 3 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+   M /trunk/config.lua
+
+add an option to color currencies by cap
+make trade cooldown detection more robust
+
+------------------------------------------------------------------------

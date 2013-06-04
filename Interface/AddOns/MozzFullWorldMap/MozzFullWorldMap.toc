@@ -1,6 +1,6 @@
-## Interface: 50100
+## Interface: 50300
 ## Title: MozzFullWorldMap
-## Version: 5.02.00.00
+## Version: 5.03.00.01
 ## Author: K. Scott Piel / Nordebugger / The Knights Who Say nUI / Nesingwary
 ## eMail: kscottpiel@gmail.com
 ## URL: http://forums.nUIaddon.com

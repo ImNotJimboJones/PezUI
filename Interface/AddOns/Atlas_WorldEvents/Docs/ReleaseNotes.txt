@@ -4,6 +4,13 @@ Copyright 2011 ~ 2013 - Arith Hsu
 ==============
 = Change Log =
 ==============
+* 3.03 (2013/05/24)
+    - Update the coming holidays' dates until Feb. 2014.
+
+* 3.02 (2013/05/21)
+    - TOC update to support WoW 5.3
+    - Remove BabbleFaction Library
+
 * 3.01 (2013/03/05)
     - TOC update to support WoW 5.2
 

@@ -1,4 +1,13 @@
-﻿Version 1.2l
+﻿Version 1.2n
+- Fix for CurseForge bug #216, error in option screen with Outfitter selected
+- Latest version of LibTourist
+
+Version 1.2m
+- Update TOC for 5.3
+- Better check for "in combat" and some event management updates
+- Latest version of LibBabble-SubZone
+
+Version 1.2l
 - Update TOC for 5.2
 - Updated LibBabble-SubZone and LibTourist for 5.2
 

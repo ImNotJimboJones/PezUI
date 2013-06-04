@@ -40,7 +40,7 @@
 
 
 
-local revision =("$Revision: 9644 $"):sub(12, -3)
+local revision =("$Revision: 9722 $"):sub(12, -3)
 local FrameTitle = "DBM_GUI_Option_"	-- all GUI frames get automatically a name FrameTitle..ID
 
 local PanelPrototype = {}
@@ -1541,7 +1541,7 @@ local function CreateOptionsMenu()
 		--            Raid Warning Colors            --
 		-----------------------------------------------
 		local RaidWarningPanel = DBM_GUI_Frame:CreateNewPanel(L.Tab_RaidWarning, "option")
-		local raidwarnoptions = RaidWarningPanel:CreateArea(L.RaidWarning_Header, nil, 190, true)
+		local raidwarnoptions = RaidWarningPanel:CreateArea(L.RaidWarning_Header, nil, 230, true)
 
 		local ShowWarningsInChat 	= raidwarnoptions:CreateCheckButton(L.ShowWarningsInChat, true, nil, "ShowWarningsInChat")
 		local ShowFakedRaidWarnings = raidwarnoptions:CreateCheckButton(L.ShowFakedRaidWarnings,  true, nil, "ShowFakedRaidWarnings")
@@ -1567,14 +1567,29 @@ local function CreateOptionsMenu()
 		local countSounds = {
 			{	text	= "Mosh (Male)",	value 	= "Mosh"},
 			{	text	= "Corsica (Female)",value 	= "Corsica"},
+			{	text	= "Kolt (Male)",value 	= "Kolt"},
 			{	text	= "None",value 	= "None"},
 		}
 		local CountSoundDropDown = raidwarnoptions:CreateDropdown(L.CountdownVoice, countSounds,
 		DBM.Options.CountdownVoice, function(value)
 			DBM.Options.CountdownVoice = value
+			DBM:PlayCountSound(1, DBM.Options.CountdownVoice)
 		end
 		)
-		CountSoundDropDown:SetPoint("LEFT", RaidWarnSoundDropDown, "RIGHT", 30, 0)
+		CountSoundDropDown:SetPoint("TOPLEFT", RaidWarnSoundDropDown, "TOPLEFT", 0, -40)
+		
+		local countSounds2 = {
+			{	text	= "Mosh (Male)",	value 	= "Mosh"},
+			{	text	= "Corsica (Female)",value 	= "Corsica"},
+			{	text	= "Kolt (Male)",value 	= "Kolt"},
+		}
+		local CountSoundDropDown2 = raidwarnoptions:CreateDropdown(L.CountdownVoice2, countSounds,
+		DBM.Options.CountdownVoice2, function(value)
+			DBM.Options.CountdownVoice2 = value
+			DBM:PlayCountSound(1, DBM.Options.CountdownVoice2)
+		end
+		)
+		CountSoundDropDown2:SetPoint("LEFT", CountSoundDropDown, "RIGHT", 60, 0)
 
 		--Raid Warning Colors
 		local raidwarncolors = RaidWarningPanel:CreateArea(L.RaidWarnColors, nil, 175, true)

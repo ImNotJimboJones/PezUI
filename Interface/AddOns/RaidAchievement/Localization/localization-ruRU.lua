@@ -119,6 +119,8 @@ radatabrokervart  = "Открыть | Закрыть"
 ramainbattleground  = "поле боя"
 ramainbattlegroundopt = "Отображать список достижений при входе на Поле Боя (если вкл отображение для рейдов)"
 
+raerroraddoninst  = "Ошибка! Аддон не установлен. Вам необходимо скачать и установить:"
+raerrormodulereq  = "Требуется дополнительный аддон:"
 
 pseaoldmodules  = "Старые модули"
 pseaoldmodules2 = "    Старые модули"

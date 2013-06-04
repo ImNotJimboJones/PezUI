@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Scenarios-deDE.lua 1944 2013-03-05 15:24:26Z Dynaletik $
+﻿-- $Id: Atlas_Scenarios-deDE.lua 2038 2013-05-22 17:03:19Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,15 +28,14 @@ local AL = AceLocale:NewLocale("Atlas_Scenarios", "deDE", false);
 --    local AL = AceLocale:NewLocale("Atlas", "deDE", false);
 
 if AL then
+	for key, value in pairs(Atlas_ScenariosDB) do
+		AL[value[1]] = value[2];
+	end
+
 	AL["Scenarios Maps"] = "Szenariokarten";
 
 	-- Common Strings
-	AL["Colon"] = ": ";
-	AL["Connection"] = "Verbindung";
-	AL["End"] = "Ende";
 	AL["Final Stage"] = "Letzte Phase";
-	AL["Key"] = "Schlüssel";
-	AL["Random"] = "Zufällig";
 	AL["Stage 1"] = "Phase 1";
 	AL["Stage 2"] = "Phase 2";
 	AL["Stage 3"] = "Phase 3";
@@ -44,59 +43,53 @@ if AL then
 	AL["Stage 5"] = "Phase 5";
 	AL["Stage 6"] = "Phase 6";
 	AL["Stage 7"] = "Phase 7";
-	AL["Start"] = "Anfang";
-	AL["Summon"] = "Beschwörbar";
 
 	-- A Brewing Storm
-	AL["Make Boomer's Brew"] = "Braut Hammerbräu";
-	AL["Assist Blanche in brewing her famous Boomer's Brew."] = "Helft Blanche dabei, ihr berühmtes Hammerbräu zu brauen.";
-	AL["Road to Thunderpaw"] = "Donnerpfotenpfad";
-	AL["Escort Blanche down Thunderpaw Road."] = "Eskortiert Blanche entlang des Donnerpfotenpfads.";
-	AL["Save Thunderpaw Refuge"] = "Rettet das Donnerpfotenrefugium";
-	AL["Defeat Borokhula the Destroyer."] = "Bezwingt Borokhula den Zerstörer";
 
 	-- A Little Patience
-	AL["Prepare the Defenses"] = "Bereitet die Verteidigung vor";
-	AL["Assist the two groups of laborers in the construction of their defenses."] = "Unterstützt die beiden Arbeitergruppen bei der Errichtung ihrer Verteidigungsanlagen.";
-	AL["Kill Commander Scargash"] = "Tötet Kommandant Schlitznarbe";
-	AL["Defeat Commander Scargash and reclaim the Temple of the Red Crane."] = "Bezwingt Kommandant Schlitznarbe und erobert den Tempel des Roten Kranichs zurück.";
 	AL["Traps"] = "Fallen";
 	AL["Commander Scargash"] = "Kommandant Schlitznarbe";
 
 	-- Arena of Annihilation
-	AL["Scar-shell"] = "Narbenpanzer";
-	AL["Summon and defeat the mighty dragon turtle, Scar-Shell."] = "Beschwört und bezwingt die mächtige Drachenschildkröte Narbenpanzer.";
-	AL["Jol'grum"] = "Jol'Grum";
-	AL["Summon and defeat the grummle-eating, snow-stalking horror, Jol'Grum."] = "Beschwört und bezwingt den grummelfressenden, schneepirschenden Schrecken Jol'Grum.";
-	AL["Little Liuyang"] = "Klein Liuyang";
-	AL["Summon and defeat the playful fire spirit, Liuyang."] = "Beschwört und bezwingt den verspielten Feuergeist, Liuyang.";
-	AL["Chagan Firehoof"] = "Chagan Feuerhuf";
-	AL["Summon and defeat the wandering yaungol warrior, Chagan Firehoof."] = "Beschwört und bezwingt den wandernden Yaungolkrieger Chagan Feuerhuf.";
-	AL["Defeat the Final Challenger!"] = "Bezwingt den letzten Herausforderer!";
-	AL["Summon and defeat the final challenger and then claim your reward from Wodin!"] = "Beschwört und bezwingt den letzten Herausforderer und holt Euch bei Wodin Eure Belohnung ab!";
 	AL["Defeat Maki Waterblade"] = "Bezwingt Maki Wasserklinge";
 	AL["Defeat Satay Byu"] = "Bezwingt Satay Byu";
 	AL["Defeat Cloudbender Kobo"] = "Bezwingt Wolkenformer Kobo";
 
 	-- Assault on Zan'vess
-	AL["Assault on Zan'vess"] = "Angriff auf Zan'vess";
-	AL["Launch an assault on the island of Zan'vess."] = "Leitet einen Angriff auf die Insel Zan'vess ein";
-	AL["Defenses of Zan'vess"] = "Verteidigung von Zan'vess";
-	AL["Destroy the Sonic Towers and deactivate the Zan'vess Defense Shield."] = "Zerstört die Schalltürme und deaktiviert das Verteidigungsfeld von Zan'vess.";
-	AL["The Heart of Zan'vess"] = "Das Herz von Zan'vess";
-	AL["Storm the beach and reach the Heart of Zan'vess."] = "Erstürmt den Strand und erreicht das Herz von Zan'vess.";
-	AL["Weapons of Zan'vess"] = "Die Waffen von Zan'vess";
-	AL["Defeat Commander Tel'vrak and retrieve the Mantid weapon cache."] = "Bezwingt Kommandant Tel'vrak und besorgt die Waffen der Mantis.";
+	AL["Kyparite Quarry Sonic Control Towers"] = "Schallsteuerungstürme des Kyparitsteinbruchs";
+	AL["Whispering Stones Sonic Control Towers"] = "Schallsteuerungstürme der Flüsternden Steine";
+	AL["Venomsting Pits Sonic Control Towers"] = "Schallsteuerungstürme der Giftstechergruben";
+	AL["Landing"] = "Landung";
+	AL["Squad Leader Bosh"] = "Schwadronsführer Bosh";
+	AL["Commander Tel'vrak"] = "Kommandant Tel'vrak";
+
+	-- Battle on the High Seas - Alliance
+	AL["Lieutenant Drak'on"] = "Leutnant Drak'on";
+	AL["Transport Cannon"] = "Transportkanone";
+	AL["Rope Pile"] = "Seilhaufen";
+	AL["Steal Explosives"] = "Sprengladungen stehlen";
+	AL["Lieutenant Sparklighter"] = "Leutnant Zündfunken";
+	AL["Lieutenant Fizzel"] = "Leutnant Zischel";
+	AL["Lieutenant Blasthammer"] = "Leutnant Sprenghammer";
+	AL["Run to the top deck and swing away!"] = "Lauft aufs Oberdeck und schwingt Euch vom Schiff!";
+	AL["Admiral Hagman"] = "Admiral Hagman";
+
+	-- Battle on the High Seas - Horde
+	AL["Lieutenant Parker"] = "Leutnant Parker";
+	AL["Lieutenant Fuseblast"] = "Leutnant Luntenschuss";
+	AL["Lieutenant Fizzboil"] = "Leutnant Zischelzünd";
+	AL["Lieutenant Boltblaster"] = "Leutnant Bolzenspreng";
+	AL["Admiral Hodgson"] = "Admiral Hodgson";
+
+	-- Blood in the Snow
+	AL["Dark Iron Mountaineers"] = "Dunkeleisengebirgsjäger";
+	AL["Scout Stonebeard"] = "Späher Steinbart";
+	AL["Scout Boldbrew"] = "Späherin Kühnbräu";
+	AL["Scout Forgefellow"] = "Späher Schmiedebalg";
+	AL["Farastu"] = "Farastu";
+	AL["Hekima the Wise"] = "Hekima der Weise";
 
 	-- Brewmoon Festival
-	AL["The Brewmoon Festival!"] = "Das Braumondfest!";
-	AL["Help Brewmaster Boof's assistants gather the ingredients for the Kun-Lai Kicker."] = "Helft den Gehilfen von Braumeister Boof dabei, die Zutaten für den Kun-Lai-Hammer zu sammeln.";
-	AL["The Scouts Report."] = "Berichte der Späher";
-	AL["Investigate the Yaungol sightings."] = "Untersucht die Sichtungen der Yaungol.";
-	AL["The Yaungol attack!"] = "Die Yaungol greifen an!";
-	AL["Stop the Bataari invasion on Binan Village."] = "Halte die Invasion der Bataari auf Binan auf.";
-	AL["Warbringer Qobi"] = "Kriegshetzer Qobi";
-	AL["Defeat Warbringer Qobi."] = "Bezwingt Kriegshetzer Qobi.";
 	AL["Karsar the Bloodletter"] = "Karsar der Blutvergießer";
 	AL["Li Te"] = "Li Te";
 	AL["Den Mother Moof"] = "Höhlenmutter Muuf";
@@ -104,126 +97,92 @@ if AL then
 	AL["Defence Point"] = "Verteidigungspunkt";
 
 	-- Crypt of Forgotten Kings
-	AL["End the Terror"] = "Beendet den Alptraum";
-	AL["Defeat the corrupted Shado-Pan Leader."] = "Bezwingt den verderbten Anführer der Shado-Pan.";
-	AL["The Pool of Life"] = "Der Teich des Lebens";
-	AL["Cleanse the Sha corruption from the Pool of Life."] = "Läutert den Teich des Lebens von der Sha-Verderbnis.";
-	AL["Search the Crypts"] = "Durchsucht die Krypta";
-	AL["Delve deeper into the crypt and search the bottom level."] = "Geht tiefer in die Krypta hinein und durchsucht die untere Ebene.";
-	AL["Destroy the Sha"] = "Bezwingt das Sha";
-	AL["Destroy the Abomination of Anger."] = "Bezwingt die Monstrosität des Zorns.";
 	AL["Jin Ironfist"] = "Jin Eisenfaust";
 	AL["Pool of Life"] = "Teich des Lebens";
 	AL["Treasure Urn"] = "Schatzurne";
 	AL["Abomination of Anger"] = "Monstrosität des Zorns";
 
 	-- Dagger in the Dark
-	AL["The Mission..."] = "Die Mission...";
-	AL["Speak with Vol'jin to begin the search for the Saurok cave."] = "Sprecht mit Vol'jin, um die Suche nach der Saurokhöhle zu beginnen.";
-	AL["We Ride!"] = "Unterwegs!";
-	AL["Find the entrance to the Saurok Cave."] = "Findet den Eingang zur Saurokhöhle";
-	AL["Guards!"] = "Wachen!";
-	AL["Defeat the Saurok guarding the cave."] = "Besiegt die Saurok, die die Höhle bewachen.";
-	AL["Into the Cave"] = "In die Höhle";
-	AL["Make your way deeper into the cave."] = "Dringt tiefer in die Höhle vor.";
-	AL["The Source"] = "Der Ursprung";
-	AL["Find the source of the Saurok."] = "Findet heraus, woher die Saurok stammen.";
-	AL["The Broodmaster"] = "Der Brutmeister";
-	AL["Defeat Broodmaster Noshi."] = "Bezwingt Brutmeister Noshi.";
-	AL["Investigation"] = "Untersuchung";
-	AL["Investigate the Mogu Statues."] = "Untersucht die Mogustatuen.";
-	AL["Ambush!"] = "Hinterhalt!";
-	AL["Fend off the Kor'kron ambush."] = "Wehrt den Angriff der Kor'kron ab.";
+	AL["Vol'jin"] = "Vol'jin";
+	AL["Saurok Cave"] = "Saurok-Höhle";
+	AL["Darkhatched Lizard-Lord"] = "Echsenlord der Schattennester";
+	AL["The Spring Drifter"] = "Die Frühlingsbummler";
+	AL["Cave"] = "Höhle";
+	AL["Docking"] = "Andocken";
+	AL["Saurok Hatchery"] = "Saurok-Brutstätte";
+	AL["Broodmaster Noshi"] = "Brutmeister Noshi"
+	AL["West Statue"] = "Westliche Statue";
+	AL["East Statue"] = "Östliche Statue";
+	AL["Rak'gor Bloodrazor"] = "Rak'gor Blutklinge";
+
+	-- Dark Heart of Pandaria
+	AL["Grizzle Gearslip"] = "Grizzle Radflutsch";
+	AL["Urtharges the Destroyer"] = "Urtharges der Zerstörer";
+	AL["Crafty the Ambitious"] = "Pfiffikus der Clevere";
+	AL["Norushen"] = "Norushen";
+	AL["Echo of Y'Sharrj"] = "Echo von Y'Sharrj";
 
 	-- Domination Point
 	AL["The Flight MasterDP"] = "Die Flugmeisterin";
-	AL["Join up with Kromthar."] = "Schließt Euch Kromthar an.";
-	AL["A.C.E.s High"] = "Spaß mit A.S.S.";
-	AL["Fight your way through the burning refinery to General Nazgrim."] = "Kämpft Euch durch die brennende Raffinerie zu General Nazgrim.";
-	AL["Reclaim the Court!"] = "Die Rückeroberung des Hofes!";
-	AL["Defeat the Alliance forces assaulting the keep."] = "Besiegt die Streitkräfte der Allianz, die die Burg angreifen.";
-	AL["The Warlord"] = "Der Kriegsfürst";
-	AL["Locate Warlord Bloodhilt and help repel the Alliance assault."] = "Findet Kriegsfürst Blutheft und helft dabei, den Angriff der Allianz abzuwehren.";
-	AL["Legwork"] = "Laufere";
-	AL["Gather information about the Alliance and Horde forces."] = "Sammelt Informationen über die Streitkräfte der Allianz und Horde.";
-	AL["Setting Up"] = "Vorbereitung";
-	AL["Set up Rivett's weapons and prepare to defend the keep!"] = "Macht Nietis Waffen bereit und wappnet Euch für die Verteidigung der Burg!";
-	AL["Hold the Line!"] = "Weicht nicht zurück!";
-	AL["Hold the gate against waves of Alliance invaders and their commander."] = "Haltet das Tor gegen den Ansturm der Allianztruppen und ihrer Kommandantin.";
+	AL["General Nazgrim"] = "General Nazgrim";
+	AL["Warlord Bloodhilt"] = "Kriegsfürst Blutheft";
+	AL["Cordfellow Hack"] = "Kabelfreund Hack";
+	AL["Rivett Clutchpop"] = "Nieti Kuppelplopp";
+	AL["Shademaster Kiryn"] = "Schattenmeisterin Kiryn";
+	AL["Shokia"] = "Shokia";
+	AL["Joan Lorraine"] = "Joan Lorraine";
 
 	-- Greenstone Village
-	AL["Rescue the Villagers"] = "Rettet die Dorfbewohner";
-	AL["Defeat the monsters attacking the Greenstone villagers."] = "Bezwingt die Monster, die die Dorfbewohner von Grünstein angreifen.";
-	AL["Rescue the Dojo"] = "Rettet den Dojo";
-	AL["Defeat the monsters attacking Greenstone's dojo."] = "Bezwingt die Monster, die den Dojo von Grünstein angreifen.";
-	AL["Recover Burgled Barrels"] = "Findet die gestohlenen Fässer";
-	AL["Find burgled brew barrels in the forest and return them to the village dojo."] = "Findet gestohlene Braufässer im Wald und bringt sie zum Dojo des Dorfes zurück.";
-	AL["Rescue Greenstone Masons"] = "Rettet die Steinmetze von Grünstein";
-	AL["Travel to the Masons' Quarter and awaken the unconscious villagers."] = "Reist zum Steinmetzviertel und weckt die bewusstlosen Dorfbewohner auf.";
-	AL["Defeat Vengeful Hui"] = "Bezwingt den rachsüchtigen Hui";
-	AL["Defeat Vengeful Hui."] = "Bezwingt den rachsüchtigen Hui.";
 
 	-- Lion's Landing
 	AL["The Flight MasterLL"] = "Der Flugmeister";
-	AL["Join up with Daggin Windbeard."] = "Schließt Euch Daggin Windbart an.";
-	AL["Death on the Docks"] = "Tod auf den Docks";
-	AL["Fight your way through the docks to Admiral Taylor."] = "Kämpft Euch durch die Gegner bis zu Admiral Taylor auf den Docks.";
-	AL["Defeat the Horde forces assaulting the keep."] = "Besiegt die Streitkräfte der Horde, die die Burg angreifen.";
-	AL["The High Marshal"] = "Der Hochmarschall";
-	AL["Locate High Marshal Twinbraid and help repel the Horde assault."] = "Findet Hochmarschall Doppelzopf und helft dabei, den Angriff der Horde abzuwehren.";
-	AL["Gather information from the SI:7 team."] = "Erlangt Informationen von den Agenten des SI:7.";
-	AL["Set up Sully's weapons and prepare to defend the keep!"] = "Macht Sullys Waffen bereitet und wappnet Euch für die Verteidigung der Burg!";
-	AL["Hold the keep against waves of Horde invaders and their commander."] = "Verteidigt die Burg gegen die Angriffswellen der Horde und ihre Kommandantin.";
+	AL["Daggin Windbeard"] = "Daggin Windbart";
+	AL["Attackers"] = "Angreifer";
+	AL["High Marshal Twinbraid"] = "Hochmarschall Doppelzopf";
+	AL["Admiral Taylor"] = "Admiral Taylor";
+	AL["Wolf-Rider Gaja"] = "Wolfsreiterin Gaja";
+	AL["Amber Kearnen"] = "Amber Kearnen";
+	AL["Sully \"The Pickle\" McLeary"] = "Sully \"Die Gurke\" McLeary";
+	AL["Mishka"] = "Mishka";
+	AL["Weapons"] = "Waffen";
+	AL["Wave One"] = "Welle eins";
+	AL["Wave Two"] = "Welle zwei";
+	AL["Wave Three"] = "Welle drei";
+	AL["Thaumaturge Saresse"] = "Thaumaturgin Saresse";
 
-	-- Theramore's Fall - Horde
-	AL["To the Waterline!"] = "Ein Schlag ins Wasser!";
-	AL["Slay Alliance captains and rig powder barrels on all ships."] = "Tötet Allianzkapitäne und manipuliert Pulverfässer auf allen Schiffen.";
-	AL["The Blastmaster"] = "Der Sprengmeister";
-	AL["Inform Blastmaster Sparkfuse of your success."] = "Informiert Sprengmeister Zündlunte über Euren Erfolg.";
-	AL["Gryphon, Down"] = "Greif am Boden";
-	AL["Slay Baldruc and his gryphons."] = "Tötet Baldruc und seine Greifen.";
-	AL["Tanks for Nothing!"] = "Das wird 'ne hübsche Überraschung";
-	AL["Destroy Big Bessa and sabotage any unmanned tanks."] = "Zerstört die Dicke Bessa und sabotiert alle unbemannten Panzer.";
-	AL["Fly, Spy!"] = "Auf der Flucht!";
-	AL["Slay Hedric Evencane and free Thalen Songweaver from Foothold Citadel."] = "Tötet Hedric Ebenstab und befreit Thalen Sangweber aus der Wehrzitadelle.";
-	AL["Alliance Ships"] = "Allianz-Schiffe";
-	AL["Baldruc and Gryphon"] = "Baldruc und Greif";
-	AL["Tanks"] = "Panzer";
-	AL["Thalen Songweaver"] = "Thalen Sangweber";
+	-- The Secrets of Ragefire
+	AL["Door"] = "Tür";
+	AL["Dark Shaman Xorenth"] = "Dunkelschamane Xorenth";
+	AL["Supply Crates"] = "Vorratskisten";
+	AL["Proto-drake Eggs"] = "Protodracheneier";
+	AL["Pandaria Artifacts"] = "Pandarianische Artefakte";
+	AL["Battery"] = "Batterie";
+	AL["Pool Pony"] = "Poolpony";
+	AL["Sealed Gate"] = "Versiegeltes Tor";
+	AL["Cannon Balls"] = "Kanonenkugeln";
+	AL["Broken Proto-Drake Egg"] = "Zerbrochenes Protodrachenei";
+	AL["Flame Hound"] = "Flammenhund";
+	AL["Kor'kron Dire Soldier"] = "Terrorsoldat der Kor'kron";
+	AL["Overseer Elaglo"] = "Aufseher Elaglo";
 
 	-- Theramore's Fall - Alliance
-	AL["Welcome to Theramore"] = "Willkommen in Theramore";
-	AL["Defend the ship from oncoming Horde."] = "Verteidigt das Schiff gegen die anstürmende Horde.";
-	AL["Sweep the Harbor"] = "Kehrstunde im Hafen";
-	AL["Defeat the Horde in the harbor."] = "Bezwingt die Horde im Hafen.";
-	AL["Into the Ruins"] = "In die Ruinen";
-	AL["Fight past the enemy into the heart of ruined Theramore."] = "Kämpft Euch durch die Gegner bis zum Herz der Ruinen von Theramore vor.";
-	AL["The Lady Proudmoore"] = "Lady Prachtmeer";
-	AL["Locate Jaina in the Mana Bomb crater."] = "Findet Jaina im Krater der Manabombe.";
-	AL["Destroy the Destroyer"] = "Zerstört den Zerstörer";
-	AL["Destroy the siege engine at the west gate and recover the stolen standards."] = "Zerstört die Belagerungsmaschine am Westtor und holt die gestohlenen Standarten zurück.";
-	AL["The Last Stand"] = "Das letzte Gefecht";
-	AL["Protect Jaina while she attunes to the Focusing Iris."] = "Beschützt Jaina, während sie sich auf die fokussierende Iris einstimmt.";
 	AL["Horde Ships"] = "Horde-Schiffe";
 	AL["The heart of ruined Theramore"] = "Herz der Ruinen von Theramore";
 	AL["Jaina"] = "Jaina";
 	AL["West Gate"] = "Westtor";
 
+	-- Theramore's Fall - Horde
+	AL["Alliance Ships"] = "Allianz-Schiffe";
+	AL["Baldruc and Gryphon"] = "Baldruc und Greif";
+	AL["Tanks"] = "Panzer";
+	AL["Thalen Songweaver"] = "Thalen Sangweber";
+
 	-- Troves of the Thunder King
-	AL["Troves of the Thunder King"] = "Schatzkammer des Donnerkönigs";
-	AL["Key to the Palace of Lei Shen"] = "Schlüssel zu Lei Shens Palast";
-	AL["Speak to Taoshi"] = "Sprecht mit Taoshi";
-	AL["You will only have a limited amount of time to gather as much treasure as you can. Speak to Taoshi when you're ready to begin."] = "Euch steht nur ein begrenzter Zeitraum zur Verfügung, um so viele Schätze aufzusammeln, wie Ihr nur könnt. Sprecht mit Taoshi, wenn Ihr bereit seid.";
-	AL["Reach the Exit"] = "Erreicht den Ausgang";
-	AL["Grab as much treasure as you can and reach the exit before the timer expires."] = "Greift Euch so viel Beute, wie Ihr könnt und erreicht den Ausgang, bevor die Zeit ausläuft.";
+	AL["God-Hulk Gulkan"] = "Gottkoloss Gulkan";
+	AL["Lever"] = "Hebel";
+	AL["Tenwu of the Red Smoke"] = "Tenwu der Rote Rauch";
 
 	-- Unga Ingoo
 	AL["Brewing Cauldron"] = "Braukessel";
-	AL["Escort Brewmaster Bo"] = "Eskortiert Braumeister Bo";
-	AL["Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron."] = "Bringt Braumeister Bo zum Braukessel von Unga Ingu.";
-	AL["Fill the Brewing Cauldron"] = "Füllt den Braukessel";
-	AL["Bring 200 Unga Jungle Brew to the Brewing Cauldron."] = "Bringt 200 Becher Ungadschungelbräu zum Braukessel.";
-	AL["Defeat Captain Ook"] = "Bezwingt Kapitän Uuk";
-	AL["Defeat Captain Ook."] = "Bezwingt Kapitän Uuk.";
 
 end

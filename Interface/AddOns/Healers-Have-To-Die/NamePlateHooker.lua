@@ -3,7 +3,7 @@ HealersHaveToDie World of Warcraft Add-on
 Copyright (c) 2009-2013 by John Wellesz (Archarodim@teaser.fr)
 All rights reserved
 
-Version 2.1.3
+Version 2.1.4
 
 This is a very simple and light add-on that rings when you hover or target a
 unit of the opposite faction who healed someone during the last 60 seconds (can
@@ -164,10 +164,10 @@ end -- }}}
 function NPH:OnEnable() -- {{{
     self:Debug(INFO, "OnEnable");
 
-    -- Subscribe to HHTD callbacks
-    self:RegisterMessage("HHTD_HEALER_GONE");
+    -- Subscribe to HHTD's callbacks
     self:RegisterMessage("HHTD_HEALER_BORN");
     self:RegisterMessage("HHTD_HEALER_GROW");
+    self:RegisterMessage("HHTD_HEALER_GONE");
 
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
 
@@ -414,7 +414,7 @@ function NPH:NPR_ON_GUID_FOUND(selfevent, plate, guid)
 
     if HHTD.Registry_by_GUID[true][guid] or HHTD.Registry_by_GUID[false][guid] then
         self:Debug(INFO, "GUID found");
-        self:AddCrossToPlate(plate, HHTD.Registry_by_GUID[true][guid] and true or false, NPR:GetName(plate), guid);
+        self:AddCrossToPlate(plate, HHTD.Registry_by_GUID[true][guid] and true or false, NPR:GetPlateName(plate), guid);
     else
         self:Debug(INFO2, "GUID found but not a healer");
     end
@@ -426,7 +426,7 @@ function NPH:NPR_FATAL_INCOMPATIBILITY(selfevent, outdated, incompatibility_type
     if outdated then
         self:Print("|cFFFF0000ERROR:|rHHTD is outdated and no longer compatible with this version of WoW, you need to update HHTD from Curse.com. The Nameplate Hooker module is now disabled.", 'Incompatibility type:', incompatibility_type);
     else
-        self:Print("|cFFFF0000ERROR:|rAn add-on is unduly modifying Blizzard's nameplates in a way preventing other add-ons from using them. HHTD is not compatible with such selfish add-ons. The Nameplate Hooker module is now disabled.", 'Incompatibility type:', incompatibility_type);
+        self:Print("|cFFFF0000ERROR:|rAn add-on is unduly modifying Blizzard's nameplates in a way preventing other add-ons from using them. HHTD is not compatible with such self-centred add-ons. The Nameplate Hooker module is now disabled.", 'Incompatibility type:', incompatibility_type);
     end
 
     HHTD:FatalError("The Nameplate Hooker module had to be disabled due to an incompatibility.\nSee the chat window for more details.");
@@ -554,9 +554,9 @@ do
         end
 
         --[===[@alpha@
-        if plateName ~= NPR:GetName(plate) then
-            self:Debug(ERROR, 'AddCrossToPlate(): plateName ~= NPR:GetName(plate):', plateName, '-_-', NPR:GetName(plate));
-            error('AddCrossToPlate(): plateName ~= NPR:GetName(plate)');
+        if plateName ~= NPR:GetPlateName(plate) then
+            self:Debug(ERROR, 'AddCrossToPlate(): plateName ~= NPR:GetPlateName(plate):', plateName, '-_-', NPR:GetPlateName(plate));
+            error('AddCrossToPlate(): plateName ~= NPR:GetPlateName(plate)');
         end
         --@end-alpha@]===]
 
@@ -633,7 +633,7 @@ do
                 IsFriend        = isFriend;
                 Plate           = plate;
                 PlateAdditions  = plate[PLATES__NPH_NAMES[isFriend]];
-                PlateName       = NPR:GetName(plate);
+                PlateName       = NPR:GetPlateName(plate);
                 Guid            = NPR:GetGUID(plate);
                 Guid            = HHTD.Registry_by_GUID[IsFriend][Guid] and Guid or nil;
 

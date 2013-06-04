@@ -1,4 +1,4 @@
--- $Id: Atlas_DungeonLocs-ruRU.lua 1891 2013-02-17 15:41:01Z arithmandar $
+-- $Id: Atlas_DungeonLocs-ruRU.lua 1963 2013-03-30 19:04:14Z Dynaletik $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,7 +29,7 @@
 -- Atlas Data  (Russian)
 -- Compiled by StingerSoft
 -- stingersoft@gmail.com
--- Last Update: $Date: 2013-02-17 23:41:01 +0800 (Sun, 17 Feb 2013) $
+-- Last Update: $Date: 2013-03-31 03:04:14 +0800 (週日, 31 三月 2013) $
 
 --]]
 
@@ -45,7 +45,4 @@ if AL then
 	AL["Green"] = "Зеленый";
 	AL["Instances"] = "Инстансы";
 	AL["White"] = "Белый";
-
-	--Zones
-	AL["Crusaders' Coliseum"] = "Колизей Авангарда"; 
 end

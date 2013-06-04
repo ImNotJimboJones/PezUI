@@ -29,6 +29,7 @@ if AL then
 	--Common
 	AL["Arena Maps"] = "Arena Maps";
 	AL["Quests"] = "Quests";
+	AL["Start"] = "Start";
 	
 	-- Gurubashi Arena
 	AL["Short John Mithril"] = "Short John Mithril";

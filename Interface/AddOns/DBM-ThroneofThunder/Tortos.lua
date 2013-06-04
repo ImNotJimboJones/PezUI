@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(825, "DBM-ThroneofThunder", nil, 362)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 9683 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 9709 $"):sub(12, -3))
 mod:SetCreatureID(67977)
 mod:SetQuestID(32747)
 mod:SetZone()
@@ -79,6 +79,18 @@ local function clearStomp()
 	end
 end
 
+local function checkCrystalShell()
+	if not UnitDebuff("player", shelldName) and not UnitIsDeadOrGhost("player") then
+		local percent = (UnitHealth("player") / UnitHealthMax("player")) * 100
+		if percent > 90 then
+			specWarnCrystalShell:Show(shelldName)
+		else
+			mod:Unschedule(checkCrystalShell)
+			mod:Schedule(5, checkCrystalShell)
+		end
+	end
+end
+
 function mod:OnCombatStart(delay)
 	stompActive = false
 	stompCount = 0
@@ -98,9 +110,12 @@ function mod:OnCombatStart(delay)
 	countdownStomp:Start(29-delay)
 	timerBreathCD:Start(-delay)
 	countdownBreath:Start(-delay)
-	if self.Options.InfoFrame and self:IsDifficulty("heroic10", "heroic25") then
-		DBM.InfoFrame:SetHeader(L.WrongDebuff:format(shelldName))
-		DBM.InfoFrame:Show(5, "playergooddebuff", 137633)
+	if self:IsDifficulty("heroic10", "heroic25") then
+		if self.Options.InfoFrame then
+			DBM.InfoFrame:SetHeader(L.WrongDebuff:format(shelldName))
+			DBM.InfoFrame:Show(5, "playergooddebuff", 137633)
+		end
+		checkCrystalShell()
 		berserkTimer:Start(600-delay)
 	else
 		berserkTimer:Start(-delay)
@@ -142,12 +157,8 @@ function mod:SPELL_CAST_START(args)
 		timerRockfallCD:Start(7.4)--When the spam of rockfalls start
 		timerStompCD:Start(nil, stompCount+1)
 		countdownStomp:Start()
-		if self.Options.AnnounceCooldowns and stompCount < 11 then
-			if DBM.Options.UseMasterVolume then
-				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCount..".ogg", "Master")
-			else
-				PlaySoundFile("Interface\\AddOns\\DBM-Core\\Sounds\\Corsica_S\\"..stompCount..".ogg")
-			end
+		if self.Options.AnnounceCooldowns then
+			DBM:PlayCountSound(stompCount)
 		end
 	end
 end
@@ -228,7 +239,7 @@ end
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 137633 and args:IsPlayer() then
-		specWarnCrystalShell:Show(shelldName)
+		checkCrystalShell()
 	end
 end
 
@@ -256,8 +267,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 end
 
 --Does not show in combat log, so UNIT_AURA must be used instead
---This needs to be switched to RegisterUnitEvent once tandanu is done wit that code.
---that way dbm isn't checking if it's boss1 325635325 times a fight.
 function mod:UNIT_AURA(uId)
 	local _, _, _, _, _, duration, expires = UnitDebuff(uId, shellConcussion)
 	if expires and lastConcussion ~= expires then
@@ -276,7 +285,6 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 		timerSummonBatsCD:Start()
 	end
 end
-
 
 function mod:OnSync(msg, guid, ver)
 	if msg == "IconCheck" and guid and ver then

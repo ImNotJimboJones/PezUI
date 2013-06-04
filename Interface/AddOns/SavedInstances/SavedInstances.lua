@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 263 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 300 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -64,8 +64,6 @@ local tooltip, indicatortip
 local thisToon = UnitName("player") .. " - " .. GetRealmName()
 local maxlvl = MAX_PLAYER_LEVEL_TABLE[#MAX_PLAYER_LEVEL_TABLE]
 
-local storelockout = false -- when true, store the details against the current lockout
-
 local scantt = CreateFrame("GameTooltip", "SavedInstancesScanTooltip", UIParent, "GameTooltipTemplate")
 
 local currency = { 
@@ -75,10 +73,12 @@ local currency = {
   390, -- Conquest Points
   738, -- Lesser Charm of Good Fortune
   697, -- Elder Charm of Good Fortune
+  752, -- Mogu Rune of Fate
   402, -- Ironpaw Token
   81, -- Epicurean Award
   515, -- Darkmoon Prize Ticket
-  752, -- Mogu Rune of Fate
+  241, -- Champion's Seal
+  391, -- Tol Barad Commendation
 }
 addon.currency = currency
 
@@ -100,9 +100,7 @@ addon.WorldBosses = {
   [691] = { quest=32099, expansion=4, level=90 }, -- Sha of Anger
   [725] = { quest=32098, expansion=4, level=90 }, -- Galleon
   [814] = { quest=32518, expansion=4, level=90 }, -- Nalak (32211?)
-  -- Oondasta is disabled for now until Blizzard fixes the quest flag
-  -- please complain here: http://us.battle.net/wow/en/forum/topic/8518311880
-  -- [826] = { quest=32519, expansion=4, level=90 }, -- Oondasta 
+  [826] = { quest=32519, expansion=4, level=90 }, -- Oondasta 
 }
 
 addon.showopts = {
@@ -156,6 +154,8 @@ local QuestExceptions = {
   [32641] = "Weekly",  -- Champions of the Thunder King
   [32718] = "Weekly",  -- Mogu Runes of Fate
   [32719] = "Weekly",  -- Mogu Runes of Fate
+  [32862] = "Weekly",  -- Battlefield: Barrens
+  [32872] = "Weekly",  -- Battlefield: Barrens
 }
 
 function addon:QuestInfo(questid)
@@ -222,6 +222,17 @@ vars.defaultDB = {
                                    -- Zone: string
 				   -- isDaily: boolean
 				   -- Expires: expiration (non-daily)
+
+				-- Skills: key: SpellID or CDID value: 
+				   -- Title: string
+				   -- Link: hyperlink 
+				   -- Expires: expiration
+
+				-- FarmPlanted: integer
+				-- FarmHarvested: integer
+				-- FarmCropPlanted: key: spellID value: count
+				-- FarmCropReady: key: spellID value: count
+				-- FarmExpires: expiration
 
 	Indicators = {
 		D1Indicator = "BLANK", -- indicator: ICON_*, BLANK
@@ -365,6 +376,24 @@ local function ClassColorise(class, targetstring)
 	return ColorCodeOpen(color) .. targetstring .. FONTEND
 end
 
+local function CurrencyColor(amt, max)
+  amt = amt or 0
+  if max == nil or max == 0 then
+    return amt
+  end
+  if vars.db.Tooltip.CurrencyValueColor then
+    local pct = amt / max
+    local color = GREENFONT
+    if pct == 1 then
+      color = REDFONT
+    elseif pct > 0.75 then
+      color = GOLDFONT
+    end
+    amt = color .. amt .. FONTEND
+  end
+  return amt
+end
+
 local function TableLen(table)
 	local i = 0
 	for _, _ in pairs(table) do
@@ -412,10 +441,40 @@ end
 
 function addon:GetNextDailyResetTime()
   local resettime = GetQuestResetTime()
-  if not resettime or resettime <= 0 then -- ticket 43: can fail during startup
+  if not resettime or resettime <= 0 or -- ticket 43: can fail during startup
+     resettime > 24*3600+30 then -- can also be wrong near reset in an instance
     return nil
   end
   return time() + resettime
+end
+
+do
+local midnight = {hour=23, min=59, sec=59}
+function addon:GetNextDailySkillResetTime() -- trade skill reset time
+  -- this is just a "best guess" because in reality, 
+  -- different trade skills reset at up to 3 different times
+
+  if false then -- at next server midnight
+    midnight.month, midnight.day, midnight.year = select(2,CalendarGetDate()) -- date in server timezone 
+    local ret = time(midnight)
+    local offset = addon:GetServerOffset() * 3600
+    ret = ret - offset
+    return ret
+  else -- at next daily quest reset time
+    local rt = addon:GetNextDailyResetTime()
+    if not rt then return nil end
+    local info = date("*t")
+    if false and info.isdst then 
+      -- Blizzard's ridiculous reset crap:
+      -- trade skills ignore daylight savings after the date it changes UNTIL the next major patch occurs, then go back to observing it
+      rt = rt - 3600
+      if time() > rt then -- past trade reset but before daily reset, next day
+        rt = rt + 24*3600
+      end
+    end
+    return rt
+  end
+end
 end
 
 function addon:GetNextWeeklyResetTime()
@@ -511,6 +570,7 @@ addon.transInstance = {
   [568] = 340,  -- Zul'Aman: frFR 
   [1004] = 474, -- Scarlet Monastary: deDE
   [600] = 215,  -- Drak'Tharon: ticket 105 deDE
+  [560] = 183,  -- Escape from Durnholde Keep: ticket 124 deDE
 }
 
 -- some instances (like sethekk halls) are named differently by GetSavedInstanceInfo() and LFGGetDungeonInfoByID()
@@ -959,6 +1019,7 @@ function addon:UpdateToonData()
 	if IL and tonumber(IL) and tonumber(IL) > 0 then -- can fail during logout
 	  t.IL, t.ILe = tonumber(IL), tonumber(ILe)
 	end
+	t.RBGrating = tonumber((GetPersonalRatedBGInfo())) or t.RBGrating
 	-- Daily Reset
 	local nextreset = addon:GetNextDailyResetTime()
 	if nextreset and nextreset > time() then
@@ -981,6 +1042,25 @@ function addon:UpdateToonData()
 	    db.DailyResetTime = nextreset
          end 
 	end
+	-- Skill Reset
+	for toon, ti in pairs(vars.db.Toons) do
+	  if ti.Skills then
+	    for spellid, sinfo in pairs(ti.Skills) do
+	      if sinfo.Expires and sinfo.Expires < time() then
+	        ti.Skills[spellid] = nil
+	      end
+	    end
+          end 
+	  if ti.FarmExpires and ti.FarmExpires < time() then
+	    ti.FarmPlanted = 0
+	    ti.FarmHarvested = 0
+	    if ti.FarmCropPlanted and next(ti.FarmCropPlanted) then 
+	      ti.FarmCropReady = ti.FarmCropPlanted
+	      ti.FarmCropPlanted = nil
+	    end
+	    ti.FarmExpires = nil
+	  end
+        end
 	-- Weekly Reset
 	local nextreset = addon:GetNextWeeklyResetTime()
 	if nextreset and nextreset > time() then
@@ -1137,6 +1217,9 @@ local function ShowToonTooltip(cell, arg, ...)
 	indicatortip:SetCell(indicatortip:AddHeader(),1,ClassColorise(t.Class, toon))
 	indicatortip:SetCell(1,2,ClassColorise(t.Class, LEVEL.." "..t.Level.." "..(t.LClass or "")))
 	indicatortip:AddLine(STAT_AVERAGE_ITEM_LEVEL,("%d "):format(t.IL or 0)..STAT_AVERAGE_ITEM_LEVEL_EQUIPPED:format(t.ILe or 0))
+	if t.RBGrating and t.RBGrating > 0 then
+	  indicatortip:AddLine(BATTLEGROUND_RATING, t.RBGrating)
+	end
 	if t.Money then
 	  indicatortip:AddLine(MONEY,GetMoneyString(t.Money))
 	end
@@ -1191,6 +1274,96 @@ local function ShowQuestTooltip(cell, arg, ...)
 	indicatortip:SmartAnchorTo(tooltip)
 	addon:SkinFrame(indicatortip,"SavedInstancesIndicatorTooltip")
 	indicatortip:Show()
+end
+
+local function skillsort(s1, s2)
+  if s1.Expires ~= s2.Expires then
+    return (s1.Expires or 0) < (s2.Expires or 0)
+  else
+    return (s1.Title or "") < (s2.Title or "")
+  end
+end
+
+local function ShowSkillTooltip(cell, arg, ...)
+        local toon, cstr = unpack(arg)
+        local t = vars.db.Toons[toon]
+        if not t then return end
+        indicatortip = QTip:Acquire("SavedInstancesIndicatorTooltip", 3, "LEFT", "RIGHT")
+        indicatortip:Clear()
+        indicatortip:SetHeaderFont(tooltip:GetHeaderFont())
+	local tname = ClassColorise(t.Class, toon)
+        indicatortip:AddHeader()
+	indicatortip:SetCell(1,1,tname,"LEFT")
+	indicatortip:SetCell(1,2,cstr,"RIGHT",2)
+
+        local tmp = {}
+        for _,sinfo in pairs(t.Skills) do
+	  table.insert(tmp,sinfo)
+        end
+	table.sort(tmp, skillsort)
+
+        for _,sinfo in ipairs(tmp) do
+          local line = indicatortip:AddLine()
+	  local title = sinfo.Link or sinfo.Title or "???"
+	  local tstr = SecondsToTime((sinfo.Expires or 0) - time())
+	  indicatortip:SetCell(line,1,title,"LEFT",2)
+	  indicatortip:SetCell(line,3,tstr,"RIGHT")
+        end
+        indicatortip:SetAutoHideDelay(0.1, tooltip)
+        indicatortip:SmartAnchorTo(tooltip)
+        addon:SkinFrame(indicatortip,"SavedInstancesIndicatorTooltip")
+        indicatortip:Show()
+end
+
+function addon:plantName(spellid)
+    	local name = GetSpellInfo(spellid)
+	if not name then return "unknown" end
+	name = name:gsub(L["Plant"],"")
+	name = name:gsub(L["Throw"],"")
+	name = name:gsub(L["Seeds"],"")
+	name = name:gsub(L["Seed"],"")
+	name = strtrim(name)
+	return name
+end
+
+local function ShowFarmTooltip(cell, arg, ...)
+        local toon, cstr = unpack(arg)
+        local t = vars.db.Toons[toon]
+        if not t then return end
+        indicatortip = QTip:Acquire("SavedInstancesIndicatorTooltip", 2, "LEFT", "RIGHT")
+        indicatortip:Clear()
+        indicatortip:SetHeaderFont(tooltip:GetHeaderFont())
+	local tname = ClassColorise(t.Class, toon)
+        indicatortip:AddHeader()
+	indicatortip:SetCell(1,1,tname,"LEFT")
+	indicatortip:SetCell(1,2,cstr,"RIGHT")
+
+        local exp = t.FarmExpires
+	if exp and exp > time() then
+	  indicatortip:AddLine(YELLOWFONT .. L["Time Left"] .. ":" .. FONTEND, SecondsToTime(exp - time()))
+	end
+	indicatortip:AddLine(YELLOWFONT .. L["Crops harvested today"] .. ":" .. FONTEND,(t.FarmHarvested or 0))
+	indicatortip:AddLine(YELLOWFONT .. L["Crops planted today"] .. ":" .. FONTEND,  (t.FarmPlanted or 0))
+        local crops
+	if t.FarmCropPlanted and next(t.FarmCropPlanted) then
+	  crops = t.FarmCropPlanted
+	  indicatortip:AddLine(YELLOWFONT .. L["Crops growing"] .. ":" .. FONTEND)
+	elseif t.FarmCropReady and next(t.FarmCropReady) then
+	  crops = t.FarmCropReady
+	  indicatortip:AddLine(YELLOWFONT .. L["Crops ready"] .. ":" .. FONTEND)
+	end
+	if crops then
+          for spellid,cnt in pairs(crops) do
+	    local line = indicatortip:AddLine()
+	    indicatortip:SetCell(line,1, addon:plantName(spellid),"LEFT")
+	    indicatortip:SetCell(line,2,"x"..cnt,"RIGHT")
+          end
+	end
+
+        indicatortip:SetAutoHideDelay(0.1, tooltip)
+        indicatortip:SmartAnchorTo(tooltip)
+        addon:SkinFrame(indicatortip,"SavedInstancesIndicatorTooltip")
+        indicatortip:Show()
 end
 
 local function ShowHistoryTooltip(cell, arg, ...)
@@ -1395,6 +1568,7 @@ function core:toonInit()
 	ti.Level = UnitLevel("player")
 	ti.Show = ti.Show or "saved"
 	ti.Quests = ti.Quests or {}
+	ti.Skills = ti.Skills or {}
 	ti.DailyResetTime = ti.DailyResetTime or addon:GetNextDailyResetTime()
 	ti.WeeklyResetTime = ti.WeeklyResetTime or addon:GetNextWeeklyResetTime()
 end
@@ -1420,12 +1594,15 @@ function core:OnInitialize()
 	db.Tooltip.LimitWarn = (db.Tooltip.LimitWarn == nil and true) or db.Tooltip.LimitWarn
 	db.Tooltip.ShowHoliday = (db.Tooltip.ShowHoliday == nil and true) or db.Tooltip.ShowHoliday
 	db.Tooltip.ShowRandom = (db.Tooltip.ShowRandom == nil and true) or db.Tooltip.ShowRandom
+	db.Tooltip.TrackSkills = (db.Tooltip.TrackSkills == nil and true) or db.Tooltip.TrackSkills
+	db.Tooltip.TrackFarm = (db.Tooltip.TrackFarm == nil and true) or db.Tooltip.TrackFarm
 	db.Tooltip.TrackDailyQuests = (db.Tooltip.TrackDailyQuests == nil and true) or db.Tooltip.TrackDailyQuests
 	db.Tooltip.TrackWeeklyQuests = (db.Tooltip.TrackWeeklyQuests == nil and true) or db.Tooltip.TrackWeeklyQuests
 	db.Tooltip.ServerSort = (db.Tooltip.ServerSort == nil and true) or db.Tooltip.ServerSort
 	db.Tooltip.ServerOnly = (db.Tooltip.ServerOnly == nil and false) or db.Tooltip.ServerOnly
 	db.Tooltip.SelfFirst = (db.Tooltip.SelfFirst == nil and true) or db.Tooltip.SelfFirst
 	db.Tooltip.SelfAlways = (db.Tooltip.SelfAlways == nil and false) or db.Tooltip.SelfAlways
+	db.Tooltip.CurrencyValueColor = (db.Tooltip.CurrencyValueColor == nil and true) or db.Tooltip.CurrencyValueColor
 	db.Tooltip.RowHighlight = db.Tooltip.RowHighlight or 0.1
 	db.QuestDB = db.QuestDB or vars.defaultDB.QuestDB
 	for qid, _ in pairs(db.QuestDB.Daily) do
@@ -1496,14 +1673,14 @@ function addon:SetupVersion()
 end
 
 function core:OnEnable()
-	self:RegisterEvent("UPDATE_INSTANCE_INFO", "Refresh")
-	self:RegisterEvent("QUEST_QUERY_COMPLETE", "Refresh")
+	self:RegisterEvent("UPDATE_INSTANCE_INFO", function() core:Refresh(nil) end)
 	self:RegisterEvent("LFG_UPDATE_RANDOM_INFO", function() addon:UpdateInstanceData(); addon:UpdateToonData() end)
-	self:RegisterEvent("LFG_COMPLETION_REWARD", function() RequestLFDPlayerLockInfo() end)
 	self:RegisterEvent("RAID_INSTANCE_WELCOME", RequestRaidInfo)
 	self:RegisterEvent("CHAT_MSG_SYSTEM", "CheckSystemMessage")
 	self:RegisterEvent("CHAT_MSG_CURRENCY", "CheckSystemMessage")
 	self:RegisterEvent("CHAT_MSG_LOOT", "CheckSystemMessage")
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	self:RegisterEvent("TRADE_SKILL_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", RequestRaidInfo)
 	self:RegisterEvent("LFG_LOCK_INFO_RECEIVED", RequestRaidInfo)
 	self:RegisterEvent("PLAYER_LOGOUT", function() addon.logout = true ; addon:UpdateToonData() end) -- update currency spent
@@ -1544,10 +1721,6 @@ function core:OnDisable()
         addon.resetDetect:SetScript("OnEvent", nil)
 end
 
-function addon:UpdateThisLockout()
-	storelockout = true
-	RequestRaidInfo()
-end
 local currency_msg = CURRENCY_GAINED:gsub(":.*$","")
 function core:CheckSystemMessage(event, msg)
         local inst, t = IsInInstance()
@@ -1557,14 +1730,13 @@ function core:CheckSystemMessage(event, msg)
 	   (msg:find(INSTANCE_SAVED) or -- first boss kill
 	    msg:find(currency_msg)) -- subsequent boss kills (unless capped or over level)
 	   then
-	   addon:UpdateThisLockout()
+	   RequestRaidInfo()
 	end
 end
 
 function core:LFG_COMPLETION_REWARD()
-	--local _, _, diff = GetInstanceInfo()
-	--vars.db.Toons[thisToon]["Daily"..diff] = time() + GetQuestResetTime() + addon:GetServerOffset() * 3600
-	addon:UpdateThisLockout()
+	RequestRaidInfo()
+	RequestLFDPlayerLockInfo()
 end
 
 function addon:InGroup() 
@@ -1748,6 +1920,8 @@ function addon:HistoryUpdate(forcereset, forcemesg)
   if forcemesg or (vars.db.Tooltip.LimitWarn and zoningin and livecnt >= addon.histLimit-1) then 
       chatMsg(L["Warning: You've entered about %i instances recently and are approaching the %i instance per hour limit for your account. More instances should be available in %s."]:format(livecnt, addon.histLimit, oldistexp))
   end
+  addon.histLiveCount = livecnt
+  addon.histOldest = oldistexp
   if db.Broker.HistoryText and vars.dataobject then
     if livecnt >= addon.histLimit then
       vars.dataobject.text = oldistexp
@@ -1776,10 +1950,16 @@ function core:memcheck(context)
   end
 end
 
-function core:Refresh()
+function core:Refresh(recoverdaily)
 	-- update entire database from the current character's perspective
         addon:UpdateInstanceData()
 	if not instancesUpdated then addon.RefreshPending = true; return end -- wait for UpdateInstanceData to succeed
+	local nextreset = addon:GetNextDailyResetTime()
+        if not nextreset or ((nextreset - time()) > (24*3600 - 5*60)) then  -- allow 5 minutes for quest DB to update after daily rollover
+	  debug("Skipping core:Refresh() near daily reset")
+	  addon:UpdateToonData()
+	  return
+	end
 	local temp = localarr("RefreshTemp")
 	for name, instance in pairs(vars.db.Instances) do -- clear current toons lockouts before refresh
 	  local id = instance.LFDID
@@ -1873,7 +2053,8 @@ function core:Refresh()
 	    if scope:find("Account") then
 	      questlist = db.Quests
 	    end
-            for qid, mapid in pairs(list) do
+	    if recoverdaily or (scope ~= "Daily") then
+             for qid, mapid in pairs(list) do
               if tonumber(qid) and (IsQuestFlaggedCompleted(qid) or
 	        (quests and quests[qid])) and not questlist[qid] and -- recovering a lost quest
 		(list.expires == nil or list.expires > now) then -- don't repop darkmoon quests from last faire
@@ -1895,6 +2076,7 @@ function core:Refresh()
 		    end
                  end
               end
+	     end
             end
           end
           addon:QuestCount(thisToon)
@@ -1915,19 +2097,13 @@ function core:Refresh()
 	end
 	--debug("Refresh temp reaped "..icnt.." instances and "..dcnt.." diffs")
 	wipe(temp)
-	-- update the lockout-specific details for the current instance if necessary
-	if storelockout then
-		local thisname, _, thisdiff = GetInstanceInfo()
-		local name, id, _, diff, locked, _, _, raid = GetLastLockedInstance()
-		if thisname == name and thisdiff == diff then
-			--vars.db.Lockouts[id]
-		end
-	end
-	storelockout = false
 	addon:UpdateToonData()
 end
 
-local function UpdateTooltip() 
+local function UpdateTooltip(self,elap) 
+ 	addon.updatetooltip_throttle = (addon.updatetooltip_throttle or 10) + elap 
+	if addon.updatetooltip_throttle < 0.5 then return end
+	addon.updatetooltip_throttle = 0
 	if tooltip:IsShown() and tooltip.anchorframe then 
 	   core:ShowTooltip(tooltip.anchorframe) 
 	end
@@ -2063,7 +2239,12 @@ function core:ShowTooltip(anchorframe)
 	  addon.headerfont:SetFont(hFontPath, hFontSize, "OUTLINE")
 	end
 	tooltip:SetHeaderFont(addon.headerfont)
-	local headLine = tooltip:AddHeader(GOLDFONT .. "SavedInstances" .. FONTEND)
+	addon:HistoryUpdate()
+	local histinfo = ""
+	if addon.histLiveCount and addon.histLiveCount > 0 then
+	  histinfo = "  ("..addon.histLiveCount.."/"..(addon.histOldest or "?")..")"
+	end
+	local headLine = tooltip:AddHeader(GOLDFONT .. addonName .. histinfo .. FONTEND)
 	tooltip:SetCellScript(headLine, 1, "OnEnter", ShowHistoryTooltip )
 	tooltip:SetCellScript(headLine, 1, "OnLeave", 
 					     function() if indicatortip then indicatortip:Hide(); end GameTooltip:Hide() end)
@@ -2344,6 +2525,61 @@ function core:ShowTooltip(anchorframe)
                 end
         end
 
+	if vars.db.Tooltip.TrackSkills or showall then
+		local show = false
+		for toon, t in cpairs(vars.db.Toons) do
+			if t.Skills and next(t.Skills) then
+				show = true
+				addColumns(columns, toon, tooltip)
+			end
+		end
+		if show then
+			if not firstcategory and vars.db.Tooltip.CategorySpaces then
+				addsep()
+			end
+			show = tooltip:AddLine(YELLOWFONT .. L["Trade Skill Cooldowns"] .. FONTEND)		
+		end
+		for toon, t in cpairs(vars.db.Toons) do
+			local cnt = 0
+			if t.Skills then
+				for _ in pairs(t.Skills) do cnt = cnt + 1 end
+			end
+			if cnt > 0 then
+				tooltip:SetCell(show, columns[toon..1], ClassColorise(t.Class,cnt), "CENTER",maxcol)
+		                tooltip:SetCellScript(show, columns[toon..1], "OnEnter", ShowSkillTooltip, {toon, cnt.." "..L["Trade Skill Cooldowns"]})
+		                tooltip:SetCellScript(show, columns[toon..1], "OnLeave", 
+							     function() indicatortip:Hide(); GameTooltip:Hide() end)
+			end
+		end
+        end
+
+	if vars.db.Tooltip.TrackFarm or showall then
+		local toonfarm = localarr("toonfarm")
+		local show
+		for toon, t in cpairs(vars.db.Toons) do
+			if (t.FarmPlanted or 0) > 0 or (t.FarmHarvested or 0) > 0 or
+			   (t.FarmCropReady and next(t.FarmCropReady)) then
+				toonfarm[toon] = (t.FarmHarvested or 0).."/"..(t.FarmPlanted or 0)
+				show = true
+				addColumns(columns, toon, tooltip)
+			end
+		end
+		if show then
+			if not firstcategory and vars.db.Tooltip.CategorySpaces then
+				addsep()
+			end
+			show = tooltip:AddLine(YELLOWFONT .. L["Farm Crops"] .. FONTEND)		
+		end
+		for toon, t in cpairs(vars.db.Toons) do
+			if toonfarm[toon] then
+				tooltip:SetCell(show, columns[toon..1], ClassColorise(t.Class,toonfarm[toon]), "CENTER",maxcol)
+		                tooltip:SetCellScript(show, columns[toon..1], "OnEnter", ShowFarmTooltip, {toon, L["Farm Crops"]})
+		                tooltip:SetCellScript(show, columns[toon..1], "OnLeave", 
+							     function() indicatortip:Hide(); GameTooltip:Hide() end)
+			end
+		end
+        end
+
 	local firstcurrency = true
         for _,idx in ipairs(currency) do
 	  local setting = vars.db.Tooltip["Currency"..idx]
@@ -2387,18 +2623,21 @@ function core:ShowTooltip(anchorframe)
 		     end
 		   end
 		   if vars.db.Tooltip.CurrencyEarned or showall then
-		     earned = "("..(ci.amount or "0")..totalmax..")"
+		     earned = "("..CurrencyColor(ci.amount,ci.totalMax)..totalmax..")"
 		   end
                    local str
 		   if (ci.amount or 0) > 0 or (ci.earnedThisWeek or 0) > 0 then
                      if (ci.weeklyMax or 0) > 0 then
-                       str = (ci.earnedThisWeek or "0")..weeklymax.." "..earned
+                       str = CurrencyColor(ci.earnedThisWeek,ci.weeklyMax)..weeklymax.." "..earned
 		     elseif (ci.amount or 0) > 0 then
-                       str = "("..(ci.amount or "0")..totalmax..")"
+                       str = "("..CurrencyColor(ci.amount,ci.totalMax)..totalmax..")"
 		     end
                    end
 		  if str then
-		   tooltip:SetCell(currLine, columns[toon..1], ClassColorise(t.Class,str), "CENTER",maxcol)
+		   if not vars.db.Tooltip.CurrencyValueColor then
+		     str = ClassColorise(t.Class,str)
+		   end
+		   tooltip:SetCell(currLine, columns[toon..1], str, "CENTER",maxcol)
 		   tooltip:SetCellScript(currLine, columns[toon..1], "OnEnter", ShowCurrencyTooltip, {toon, idx, ci})
 		   tooltip:SetCellScript(currLine, columns[toon..1], "OnLeave", 
 							     function() indicatortip:Hide(); GameTooltip:Hide() end)
@@ -2534,6 +2773,9 @@ end
 
 local function ResetConfirmed()
   debug("Resetting characters")
+  if addon:IsDetached() then
+    addon:HideDetached()
+  end
   -- clear saves
   for instance, i in pairs(vars.db.Instances) do
 	for toon, t in pairs(vars.db.Toons) do
@@ -2561,4 +2803,336 @@ StaticPopupDialogs["SAVEDINSTANCES_RESET"] = {
   enterClicksFirstButton = false,
   showAlert = true,
 }
+
+local trade_spells = {
+        -- Alchemy
+        -- Vanilla
+        [11479] = "xmute", 	-- Transmute: Iron to Gold
+        [11480] = "xmute", 	-- Transmute: Mithril to Truesilver
+        [17559] = "xmute", 	-- Transmute: Air to Fire
+        [17566] = "xmute", 	-- Transmute: Earth to Life
+        [17561] = "xmute", 	-- Transmute: Earth to Water
+        [17560] = "xmute", 	-- Transmute: Fire to Earth
+        [17565] = "xmute", 	-- Transmute: Life to Earth
+        [17563] = "xmute", 	-- Transmute: Undeath to Water
+        [17562] = "xmute", 	-- Transmute: Water to Air
+        [17564] = "xmute", 	-- Transmute: Water to Undeath
+        -- BC
+        [28566] = "xmute", 	-- Transmute: Primal Air to Fire
+        [28585] = "xmute", 	-- Transmute: Primal Earth to Life
+        [28567] = "xmute", 	-- Transmute: Primal Earth to Water
+        [28568] = "xmute", 	-- Transmute: Primal Fire to Earth
+        [28583] = "xmute", 	-- Transmute: Primal Fire to Mana
+        [28584] = "xmute", 	-- Transmute: Primal Life to Earth
+        [28582] = "xmute", 	-- Transmute: Primal Mana to Fire
+        [28580] = "xmute", 	-- Transmute: Primal Shadow to Water
+        [28569] = "xmute", 	-- Transmute: Primal Water to Air
+        [28581] = "xmute", 	-- Transmute: Primal Water to Shadow
+        -- WotLK
+        [60893] = 3, 		-- Northrend Alchemy Research: 3 days
+        [53777] = "xmute", 	-- Transmute: Eternal Air to Earth
+        [53776] = "xmute", 	-- Transmute: Eternal Air to Water
+        [53781] = "xmute", 	-- Transmute: Eternal Earth to Air
+        [53782] = "xmute", 	-- Transmute: Eternal Earth to Shadow
+        [53775] = "xmute", 	-- Transmute: Eternal Fire to Life
+        [53774] = "xmute", 	-- Transmute: Eternal Fire to Water
+        [53773] = "xmute", 	-- Transmute: Eternal Life to Fire
+        [53771] = "xmute", 	-- Transmute: Eternal Life to Shadow
+        [54020] = "xmute", 	-- Transmute: Eternal Might
+        [53779] = "xmute", 	-- Transmute: Eternal Shadow to Earth
+        [53780] = "xmute", 	-- Transmute: Eternal Shadow to Life
+        [53783] = "xmute", 	-- Transmute: Eternal Water to Air
+        [53784] = "xmute", 	-- Transmute: Eternal Water to Fire
+        [66658] = "xmute", 	-- Transmute: Ametrine
+        [66659] = "xmute", 	-- Transmute: Cardinal Ruby
+        [66660] = "xmute", 	-- Transmute: King's Amber
+        [66662] = "xmute", 	-- Transmute: Dreadstone
+        [66663] = "xmute", 	-- Transmute: Majestic Zircon
+        [66664] = "xmute", 	-- Transmute: Eye of Zul
+        -- Cata
+        [78866] = "xmute", 	-- Transmute: Living Elements
+        --[80243] = "xmute", 	-- Transmute: Truegold, cd removed (5.2.0 verified)
+        [80244] = "xmute", 	-- Transmute: Pyrium Bar
+        -- MoP
+        [114780] = "xmute", 	-- Transmute: Living Steel
+
+        -- Enchanting
+        [28027] = "sphere", 	-- Prismatic Sphere (2-day shared, 5.2.0 verified)
+        [28028] = "sphere", 	-- Void Sphere (2-day shared, 5.2.0 verified)
+        [116499] = true, 	-- Sha Crystal
+
+        -- Jewelcrafting
+        [47280] = true, 	-- Brilliant Glass, still has a cd (5.2.0 verified)
+        --[62242] = true, 	-- Icy Prism, cd removed (5.2.0 verified)
+        [73478] = true, 	-- Fire Prism, still has a cd (5.2.0 verified)
+        [131691] = "facet", 	-- Imperial Amethyst/Facets of Research
+        [131686] = "facet", 	-- Primordial Ruby/Facets of Research
+        [131593] = "facet", 	-- River's Heart/Facets of Research
+        [131695] = "facet", 	-- Sun's Radiance/Facets of Research
+        [131690] = "facet", 	-- Vermilion Onyx/Facets of Research
+        [131688] = "facet", 	-- Wild Jade/Facets of Research
+	[140050] = true,	-- Serpent's Heart
+
+        -- Tailoring
+        [125557] = true, 	-- Imperial Silk
+        [56005] = 7, 		-- Glacial Bag (5.2.0 verified)
+	-- Dreamcloth
+        [75141] = 7, 		-- Dream of Skywall
+        [75145] = 7, 		-- Dream of Ragnaros
+        [75144] = 7, 		-- Dream of Hyjal
+        [75142] = 7,	 	-- Dream of Deepholm
+        [75146] = 7, 		-- Dream of Azshara
+	--[18560] = true,	-- Mooncloth, cd removed (5.2.0 verified, tooltip is wrong)
+        
+        -- Inscription
+        [61288] = true, 	-- Minor Inscription Research
+        [61177] = true, 	-- Northrend Inscription Research
+        [86654] = true, 	-- Horde Forged Documents
+        [89244] = true, 	-- Alliance Forged Documents
+        [112996] = true, 	-- Scroll of Wisdom
+
+	-- Blacksmithing
+	[138646] = true, 	-- Lightning Steel Ingot
+
+	-- Leatherworking
+	[140040] = "magni", 	-- Magnificence of Leather
+	[140041] = "magni",	-- Magnificence of Scales
+
+	-- Engineering
+	[139176] = true,	-- Stabilized Lightning Source
+}
+
+local cdname = {
+	["xmute"] =  GetSpellInfo(2259).. ": "..L["Transmute"],
+	["facet"] =  GetSpellInfo(25229)..": "..L["Facets of Research"],
+	["sphere"] = GetSpellInfo(7411).. ": "..GetSpellInfo(28027),
+	["magni"] =  GetSpellInfo(2108).. ": "..GetSpellInfo(140040)
+}
+
+function core:record_skill(spellID, expires)
+  if not spellID then return end
+  local cdinfo = trade_spells[spellID]
+  if not cdinfo then 
+    addon.skillwarned = addon.skillwarned or {}
+    if expires and expires > 0 and not addon.skillwarned[spellID] then
+      addon.skillwarned[spellID] = true
+      chatMsg("Warning: Unrecognized trade skill cd "..(GetSpellInfo(spellID) or "??")..
+              " ("..spellID.."). Please report this bug!")
+    end
+    return 
+  end
+  local t = vars and vars.db.Toons[thisToon]
+  if not t then return end
+  local spellName = GetSpellInfo(spellID)
+  t.Skills = t.Skills or {}
+  local idx = spellID
+  local title = spellName
+  local link = nil
+  if type(cdinfo) == "string" then
+    idx = cdinfo
+    title = cdname[cdinfo] or title
+  elseif expires ~= 0 then
+    local slink = GetSpellLink(spellID)
+    if slink and #slink > 0 then  -- tt scan for the full name with profession
+      scantt:SetOwner(UIParent,"ANCHOR_NONE")
+      scantt:SetHyperlink(slink) 
+      local l = _G[scantt:GetName().."TextLeft1"]
+      l = l and l:GetText()
+      if l and #l > 0 then 
+        title = l
+        link = "\124cffffd000\124Henchant:"..spellID.."\124h["..l.."]\124h\124r"
+      end
+    end
+  end
+  if expires == 0 then 
+    if t.Skills[idx] then -- a cd ended early
+      debug("Clearing Trade skill cd: "..spellName.." ("..spellID..")")
+    end
+    t.Skills[idx] = nil 
+    return
+  elseif not expires then
+    expires = addon:GetNextDailySkillResetTime()
+    if not expires then return end -- ticket 127
+    if type(cdinfo) == "number" then -- over a day, make a rough guess
+      expires = expires + (cdinfo-1)*24*60*60 
+    end
+  end
+  expires = math.floor(expires)
+  local sinfo = t.Skills[idx] or {}
+  t.Skills[idx] = sinfo
+  local change = expires - (sinfo.Expires or 0)
+  if math.abs(change) > 180 then -- updating expiration guess (more than 3 min update lag)
+    debug("Trade skill cd: "..(link or title).." ("..spellID..") "..
+          (sinfo.Expires and string.format("%d",change).." sec" or "(new)")..
+	  " Local time: "..date("%c",expires))
+  end
+  sinfo.Title = title
+  sinfo.Link = link
+  sinfo.Expires = expires
+  return true
+end
+
+function core:TradeSkillRescan(spellid)
+  local scan = core:TRADE_SKILL_UPDATE()
+  if TradeSkillFrame and TradeSkillFrame.filterTbl and 
+     (scan == 0 or not addon.seencds or not addon.seencds[spellid]) then 
+    -- scan failed, probably because the skill is hidden - try again
+    addon.filtertmp = wipe(addon.filtertmp or {})
+    for k,v in pairs(TradeSkillFrame.filterTbl) do addon.filtertmp[k] = v end
+    TradeSkillOnlyShowMakeable(false)
+    TradeSkillOnlyShowSkillUps(false)
+    SetTradeSkillCategoryFilter(-1)
+    SetTradeSkillInvSlotFilter(-1, 1, 1)
+    ExpandTradeSkillSubClass(0)
+      local rescan = core:TRADE_SKILL_UPDATE()
+      debug("Rescan: "..(rescan==scan and "Failed" or "Success"))
+    TradeSkillOnlyShowMakeable(addon.filtertmp.hasMaterials);
+    TradeSkillOnlyShowSkillUps(addon.filtertmp.hasSkillUp);
+    SetTradeSkillCategoryFilter(addon.filtertmp.subClassValue or -1)
+    SetTradeSkillInvSlotFilter(addon.filtertmp.slotValue or -1, 1, 1)
+  end
+end
+
+function core:TRADE_SKILL_UPDATE()
+ local cnt = 0
+ if IsTradeSkillLinked() or IsTradeSkillGuild() then return end
+ for i = 1, GetNumTradeSkills() do
+   local link = GetTradeSkillRecipeLink(i)
+   local spellid = link and tonumber(link:match("\124Henchant:(%d+)\124h"))
+   if spellid then
+     local cd, daily = GetTradeSkillCooldown(i)
+     if cd and daily -- GetTradeSkillCooldown often returns WRONG answers for daily cds
+       and not tonumber(trade_spells[spellid]) then -- daily flag incorrectly set for some multi-day cds (Northrend Alchemy Research)
+       cd = addon:GetNextDailySkillResetTime()
+     elseif cd then
+       cd = time() + cd  -- on cd
+     else
+       cd = 0 -- off cd or no cd
+     end
+     core:record_skill(spellid, cd)
+     if cd then
+       addon.seencds = addon.seencds or {}
+       addon.seencds[spellid] = true
+       cnt = cnt + 1
+     end
+   end
+ end
+ return cnt
+end
+
+local farm_spells = {
+
+ [111102]="plant", -- Plant Green Cabbage
+ [123361]="plant", -- Plant Juicycrunch Carrot
+ [123388]="plant", -- Plant Scallions
+ [123485]="plant", -- Plant Mogu Pumpkin
+ [123535]="plant", -- Plant Red Blossom Leek
+ [123565]="plant", -- Plant Pink Turnip
+ [123568]="plant", -- Plant White Turnip
+ [123771]="plant", -- Plant Golden Seed
+ [123772]="plant", -- Plant Seed of Harmony
+ [123773]="plant", -- Plant Snakeroot Seed
+ [123774]="plant", -- Plant Enigma Seed
+ [123775]="plant", -- Plant Magebulb Seed
+ [123776]="plant", -- Plant Soybean Seed
+ [123777]="plant", -- Plant Ominous Seed
+ [123892]="plant", -- Plant Autumn Blossom Sapling
+ [123893]="plant", -- Plant Spring Blossom Seed
+ [123894]="plant", -- Plant Winter Blossom Sapling
+ [123895]="plant", -- Plant Kyparite Seed
+ [129623]="plant", -- Plant Windshear Cactus Seed
+ [129628]="plant", -- Plant Raptorleaf Seed
+ [129863]="plant", -- Plant Songbell Seed
+ [129974]="plant", -- Plant Witchberries
+ [129976]="plant", -- Plant Jade Squash
+ [129978]="plant", -- Plant Striped Melon
+ [130170]="plant", -- Plant Spring Blossom Sapling
+ [133036]="plant", -- Plant Unstable Portal Shard
+
+ [116356]="throw", -- Throw Green Cabbage Seeds
+ [123362]="throw", -- Throw Juicycrunch Carrot Seeds
+ [123389]="throw", -- Throw Scallion Seeds
+ [123486]="throw", -- Throw Mogu Pumpkin Seeds
+ [123537]="throw", -- Throw Red Blossom Leek Seeds
+ [123566]="throw", -- Throw Pink Turnip Seeds
+ [123567]="throw", -- Throw White Turnip Seeds
+ [131093]="throw", -- Throw Witchberry Seeds
+ [131094]="throw", -- Throw Jade Squash Seeds
+ [131095]="throw", -- Throw Striped Melon Seeds
+ [139975]="throw", -- Throw Songbell Seeds
+ [139977]="throw", -- Throw Snakeroot Seeds
+ [139978]="throw", -- Throw Enigma Seeds
+ [139981]="throw", -- Throw Magebulb Seeds
+ [139983]="throw", -- Throw Windshear Cactus Seeds
+ [139986]="throw", -- Throw Raptorleaf Seeds
+
+ [111123]="harvest", -- Harvest Green Cabbage
+ [115063]="harvest", -- Harvest EZ-Gro Green Cabbage
+ [123353]="harvest", -- Harvest Juicycrunch Carrot
+ [123355]="harvest", -- Harvest Plump Green Cabbage
+ [123356]="harvest", -- Harvest Plump Juicycrunch Carrot
+ [123375]="harvest", -- Harvest Scallions
+ [123380]="harvest", -- Harvest Plump Scallions
+ [123445]="harvest", -- Harvest Mogu Pumpkin
+ [123451]="harvest", -- Harvest Plump Mogu Pumpkin
+ [123516]="harvest", -- Harvest Winter Blossom Tree
+ [123522]="harvest", -- Harvest Plump Red Blossom Leek
+ [123524]="harvest", -- Harvest Red Blossom Leek
+ [123548]="harvest", -- Harvest Pink Turnip
+ [123549]="harvest", -- Harvest Plump Pink Turnip
+ [123570]="harvest", -- Harvest White Turnip
+ [123571]="harvest", -- Harvest Plump White Turnip
+ [129673]="harvest", -- Harvest Golden Lotus
+ [129674]="harvest", -- Harvest Fool\'s Cap
+ [129675]="harvest", -- Harvest Snow Lily
+ [129676]="harvest", -- Harvest Silkweed
+ [129687]="harvest", -- Harvest Green Tea Leaf
+ [129705]="harvest", -- Harvest Rain Poppy
+ [129757]="harvest", -- Harvest Snakeroot
+ [129796]="harvest", -- Harvest Magebulb
+ [129814]="harvest", -- Harvest Windshear Cactus
+ [129843]="harvest", -- Harvest Raptorleaf
+ [129887]="harvest", -- Harvest Songbell
+ [129983]="harvest", -- Harvest Witchberries
+ [129984]="harvest", -- Harvest Plump Witchberries
+ [130025]="harvest", -- Harvest Jade Squash
+ [130026]="harvest", -- Harvest Plump Jade Squash
+ [130042]="harvest", -- Harvest Striped Melon
+ [130043]="harvest", -- Harvest Plump Striped Melon
+ [130109]="harvest", -- Harvest Terrible Turnip
+ [130140]="harvest", -- Harvest Autumn Blossom Tree
+ [130168]="harvest", -- Harvest Spring Blossom Tree
+ [133106]="harvest", -- Harvest Portal Shard
+
+}
+
+function core:record_farm(spellID)
+  local ft = farm_spells[spellID]
+  if not ft then return end
+  local t = vars and vars.db.Toons[thisToon]
+  if not t then return end
+  if ft == "plant" or ft == "throw" then
+    local amt = (ft == "plant" and 1 or 4)
+    t.FarmPlanted = (t.FarmPlanted or 0) + amt
+    t.FarmCropPlanted = t.FarmCropPlanted or {}
+    t.FarmCropPlanted[spellID] = (t.FarmCropPlanted[spellID] or 0) + amt
+  elseif ft == "harvest" then
+    t.FarmHarvested = (t.FarmHarvested or 0) + 1
+    t.FarmCropReady = nil
+  end
+  t.FarmExpires = addon:GetNextDailySkillResetTime()
+  debug("Farm "..ft..": planted="..(t.FarmPlanted or 0)..
+        " harvested="..(t.FarmHarvested or 0).." expires="..date("%c",t.FarmExpires or 0))
+end
+
+function core:UNIT_SPELLCAST_SUCCEEDED(evt, unit, spellName, rank, lineID, spellID)
+  if unit ~= "player" then return end
+  if trade_spells[spellID] then 
+    if not core:record_skill(spellID) then return end
+    core:ScheduleTimer("TradeSkillRescan", 0.5, spellID)
+  elseif farm_spells[spellID] then
+    core:record_farm(spellID)
+  end
+end
+
 

@@ -684,7 +684,7 @@ StaticPopupDialogs["NEEDTOKNOW.CHOOSENAME_DIALOG"] = {
     button2 = CANCEL,
     hasEditBox = 1,
     editBoxWidth = 300,
-    --maxLetters = 255,
+    maxLetters = 0,
     OnAccept = function(self)
         local text = self.editBox:GetText();
         local variable = self.variable;
@@ -782,6 +782,7 @@ NeedToKnowRMB.BarMenu_SubMenus = {
     Opt_CASTCD = 
     {
         { VariableName = "append_cd", MenuText = "Append \"CD\"" }, -- LOCME
+        { VariableName = "show_charges", MenuText = "Show first and last charge CD" }, -- LOCME
     },
     Opt_EQUIPSLOT = 
     {

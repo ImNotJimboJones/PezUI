@@ -1,3 +1,37 @@
+** v1.30
+
+- Updated all presets, again
+- Fixed & improved item stat calculation (via a giant table)
+- Simple mode now makes it clear that only two caps are allowed
+
+** v1.29
+
+- Fixed a typo
+
+** v1.28
+
+- Improved previous upgrade algorithm instead of tooltip parsing
+
+** v1.27
+
+- Hotfix tooltip parsing
+
+** v1.26
+
+- Item upgrades should work correctly now
+- Updated a couple presets
+- Maybe fixed expertise-to-hit
+
+** v1.25
+
+- Updated item scaling
+- Updated TOC line to 5.3
+
+** v1.24
+
+- Updated all presets
+- Updated TOC line
+
 ** v1.23
 
 - Fixed a typo that caused an error

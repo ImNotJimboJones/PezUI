@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 1912 2013-02-27 10:59:00Z Dynaletik $
+-- $Id: Atlas.lua 2018 2013-05-19 16:24:13Z arithmandar $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,7 +26,7 @@
 
 -- Atlas, an instance map browser
 -- Initiator and previous author: Dan Gilbert, Lothaer
--- Maintainers: Arith, Dynaletik, dubcat
+-- Maintainers: Arith, Dynaletik, dubcat, Resike 
 
 local _G = getfenv(0);
 local pairs = _G.pairs;
@@ -59,9 +59,10 @@ ATLAS_PLUGINS = {};
 ATLAS_PLUGIN_DATA = {};
 local GREN = "|cff66cc33";
 local AtlasMap_NPC_Text_Frame_Num = 0;
+local AtlasMap_Temp_Scale = GameTooltip:GetScale();
 
 -- Only update this version number when the options have been revised and a force update is needed.
-ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.18.2"; 
+ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.24.00"; 
 
 local DefaultAtlasOptions = {
 	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS;
@@ -172,19 +173,19 @@ local function Process_Deprecated()
 	--for example, name it as 2.09 instead of 2.9
 	local Deprecated_List = {
 		--most recent (working) versions of known modules at time of release
-		{ "Atlas_Scenarios", 		"1.23.0" },
-		{ "Atlas_Cataclysm", 		"1.23.0" },
-		{ "Atlas_WrathoftheLichKing", 	"1.23.0" },
-		{ "Atlas_BurningCrusade", 	"1.23.0" },
-		{ "Atlas_ClassicWoW", 		"1.23.0" },
-		{ "Atlas_Battlegrounds", 	"1.23.0" },
-		{ "Atlas_DungeonLocs", 		"1.23.0" },
-		{ "Atlas_OutdoorRaids", 	"1.23.0" },
-		{ "Atlas_Transportation", 	"1.23.0" },
+		{ "Atlas_Scenarios", 		"1.24.01" },
+		{ "Atlas_Cataclysm", 		"1.24.01" },
+		{ "Atlas_WrathoftheLichKing", 	"1.24.01" },
+		{ "Atlas_BurningCrusade", 	"1.24.01" },
+		{ "Atlas_ClassicWoW", 		"1.24.01" },
+		{ "Atlas_Battlegrounds", 	"1.24.01" },
+		{ "Atlas_DungeonLocs", 		"1.24.01" },
+		{ "Atlas_OutdoorRaids", 	"1.24.01" },
+		{ "Atlas_Transportation", 	"1.24.01" },
 --		{ "AtlasWorld", 		"3.3.5.25" }, -- updated July 14, 2010 -- comment out because this plugin is no longer maintained
 		{ "AtlasQuest", 		"4.8.1" }, -- updated Oct. 17, 2011
 --		{ "AtlasMajorCities", 		"v1.5.3" }, -- updated November 15, 2010; -- comment out because this plugin is no longer maintained
-		{ "AtlasLoot", 			"7.05.00" }, -- updated Mar. xx, 2013
+		{ "AtlasLoot", 			"7.06.00" }, -- updated May xx, 2013
 		{ "Atlas_Arena", 		"1.3.6" }, -- updated Sep 25, 2012
 		{ "Atlas_WorldEvents", 		"2.8" }, -- updated Oct 03, 2012
 	};
@@ -581,6 +582,10 @@ function AtlasMaps_NPC_Text_OnUpdate(self)
 	end
 end
 
+function AtlasMaps_NPC_Text_OnLeave(self)
+	GameTooltip_Hide();
+	GameTooltip:SetScale(AtlasMap_Temp_Scale);
+end
 
 function Atlas_MapRefresh()
 	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
@@ -670,8 +675,10 @@ function Atlas_MapRefresh()
 	-- Check if Journal Encounter Instance is available
 	if ( base.JournalInstanceID ) then
 		Atlas_JournalEncounter_InstanceButton:Show();
+		--AtlasSetEJBackground(base.JournalInstanceID);
 	else
 		Atlas_JournalEncounter_InstanceButton:Hide();
+		--AtlasSetEJBackground();
 	end
 	
 	-- Clear boss description gametooltip when map is refreshing
@@ -748,7 +755,7 @@ function Atlas_MapRefresh()
 				AtlasMap_NPC_Text_Frame:SetHeight(15);
 				AtlasMap_NPC_Text_Frame:SetID(NPC_Table[AtlasMap_NPC_Text_Frame_Num][2]);
 				AtlasMap_NPC_Text_Frame:SetScript("OnEnter", AtlasMaps_NPC_Text_OnUpdate);
-				AtlasMap_NPC_Text_Frame:SetScript("OnLeave", GameTooltip_Hide);
+				AtlasMap_NPC_Text_Frame:SetScript("OnLeave", AtlasMaps_NPC_Text_OnLeave);
 
 				local AtlasMap_NPC_Text = AtlasMap_NPC_Text_Frame:CreateFontString("AtlasMapNPCText"..AtlasMap_NPC_Text_Frame_Num, "MEDIUM", "GameFontHighlightLarge");
 				AtlasMap_NPC_Text:SetPoint("CENTER", AtlasMap_NPC_Text_Frame, "CENTER", 0, 0);
@@ -1115,6 +1122,9 @@ function AtlasScrollBar_Update()
 end
 
 function AtlasSimpleSearch(data, text)
+	if (string.trim(text or "") == "") then
+		return data
+	end
 	local new = {};-- create a new table
 	local i;
 	local v;
@@ -1177,3 +1187,23 @@ function AtlasEntryTemplate_OnUpdate(self)
 	end
 end
 
+-- In Development, this could be fun
+--[[
+function AtlasSetEJBackground(instanceID)
+	AtlasEJBackground = CreateFrame("Frame", "AtlasEJBackground", AtlasFrame);	
+	if ( instanceID ) then
+		AtlasEJBackground:ClearAllPoints();
+		AtlasEJBackground:SetWidth(512);
+		AtlasEJBackground:SetHeight(512);
+		AtlasEJBackground:SetPoint("TOPLEFT", "AtlasFrame", "TOPLEFT", 534, -178);
+		local t = AtlasEJBackground:CreateTexture(nil,"BACKGROUND");
+		local name, description, bgImage, buttonImage, loreImage, dungeonAreaMapID, link = EJ_GetInstanceInfo(instanceID)
+		t:SetTexture(bgImage);
+		t:SetAllPoints(AtlasEJBackground);
+		AtlasEJBackground.texture = t;
+		AtlasEJBackground:Show()
+	else
+		--AtlasEJBackground:Hide()
+	end
+end
+]]

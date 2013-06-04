@@ -5,7 +5,7 @@ function pzraonload()
 	_, pzraenglishclass = UnitClass("player")
 	pzrahuntertime=0
 
-if select(3,GetInstanceInfo())==1 then
+if select(3,GetInstanceInfo())==11 or select(3,GetInstanceInfo())==12 then
 	RaidAchievement_pzra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_SAY")
@@ -48,6 +48,10 @@ pzraspisokach5={
 
 7984,
 --7986,
+
+8330,
+8347,
+8295,
 }
 
 if UnitFactionGroup("player")=="Alliance" then
@@ -73,7 +77,7 @@ if pzracheckzonedelay and GetTime()>pzracheckzonedelay then
 pzracheckzonedelay=nil
 
 
-if select(3,GetInstanceInfo())==1 then
+if select(3,GetInstanceInfo())==11 or select(3,GetInstanceInfo())==12 then
 	RaidAchievement_pzra:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	RaidAchievement_pzra:RegisterEvent("CHAT_MSG_MONSTER_SAY")
@@ -401,6 +405,47 @@ end
 
 
 
+
+end
+--
+
+
+
+
+
+if arg2=="SPELL_CAST_SUCCESS" and arg10==141423 then
+  if pzraspisokon[13]==1 then
+    local id=tonumber(string.sub(arg3,6,10),16)
+    if id==70544 then
+      pzrafailnoreason(13)
+    end
+  end
+end
+
+if arg2=="SPELL_DAMAGE" and arg10==132938 and rascbochka2==nil then
+  if pzraspisokon[14]==1 then
+    raunitisplayer(arg7,arg8)
+    if raunitplayertrue then
+      pzrafailnoreason(14,arg8)
+      rascbochka2=1
+    end
+  end
+end
+
+
+--секреты огненной пропасти
+if GetCurrentMapAreaID()==938 then
+
+if (arg2=="SPELL_DAMAGE" or arg2=="SWING_DAMAGE") and rascbochka2==nil then
+  --получение ид
+  if pzraspisokon[15]==1 then
+      local id=tonumber(string.sub(arg7,6,10),16)
+      if id==70605 or id==70606 or id==70607 or id==70608 or id==70609 then
+        pzrafailnoreason(15,arg8)
+        rascbochka2=1
+      end
+  end
+end
 
 end
 --
