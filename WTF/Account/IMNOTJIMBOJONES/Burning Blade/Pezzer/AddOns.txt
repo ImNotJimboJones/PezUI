@@ -296,12 +296,10 @@ Atlas_WorldEvents: enabled
 DBM-Scenario-MoP: enabled
 LoseControl: enabled
 PitBull4_LoseControl: enabled
-ThnanMod: enabled
-ThnanMod_Farm: disabled
-ThnanMod_BattlePets: enabled
 GetNitroboosted: enabled
 MozzFullWorldMap: enabled
 SimpleILevel: enabled
 SimpleILevel_Group: enabled
 SimpleILevel_Resilience: disabled
 SimpleILevel_Social: disabled
+ThnansMod_BattlePets: enabled

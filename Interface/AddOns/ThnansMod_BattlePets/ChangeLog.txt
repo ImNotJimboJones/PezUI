@@ -1,0 +1,79 @@
+Thnan's Mod - Battle Pets
+version changes:
+
+2.2.1:
+
+- Fixed issue causing lua errors when loading non-item hyperlinks.
+- Fixed issue causing zone labels to sometimes extend past the right edge of the battle tooltip.
+- Fixed issue causing collected pet info lines to sometimes extend past the right edge of the battle tooltip.
+- Fixed issue causing some pets to not have their highest level zone identified.
+- Pet breeds should now be immediately identified when a battle starts, instead of after a small delay.
+- Added highest level zones to pet journal tooltips.
+
+2.2.0:
+
+- Added highest level zone information to world and battle tooltips.
+- Fixed issue causing lua error when trying to show battle breed information after reloading during battle.
+
+2.1.0:
+
+- Added options to control display of breed information.
+- Added breedID display for pets already owned.
+- Added breedID to release pet confirmation dialogs.
+- Added breedID to pet journal pet card.
+- Added breedID to battle tooltips.
+- Updated to support WoW version 5.3
+- Pet items added in patch 5.3 will now have tooltip lines.
+
+2.0.0:
+
+- Converted to separate standalone addon.
+- Added option to replace the default line in tooltips.
+
+1.3.2:
+
+- Updated to support WoW version 5.2.0
+
+1.3.1:
+
+- Changed pet list generation to only call GetPetStats if petID is not nil.
+- Pet items added in patch 5.2 will now have tooltip lines.
+
+1.3.0:
+
+- Hooked trigger for world tooltips to GameTooltip:OnTooltipSetUnit instead of catching UPDATE_MOUSEOVER_UNIT.
+- Added tooltip lines to pet items.
+- Added tooltip lines to caged pets.
+- Cleaned up the appearance of battle tooltips.
+
+1.2.0:
+
+- Fixed issue where coloring confirmation dialog failed with other addons.
+- Fixed issue where minimap tooltips would fail to detect a pet name if it was greyed out.
+- Added option to show all owned pets in world and battle tooltips.
+
+1.1.0:
+
+- Added options to show the level of the highest rarity pet in world, battle and minimap tooltips.
+- Added option to add rarity and level information to the release pet confirmation dialog.
+- Fixed issue sometimes causing lua error when showing battle tooltips.
+
+1.0.2:
+
+- Actually, really fixed issue causing framerate loss when mousing over wild pets. (Really!)
+
+1.0.1:
+
+- Fixed issue causing framerate loss when mousing over wild pets. (again)
+
+1.0.0:
+
+ - Moved to dependent addon.
+ - Changed name of plugin to Battle Pets.
+ - Changed wording of tooltip lines to better integrate with Blizzard text added in 5.1
+ - Fixed issue causing excessive memory usage.
+ - Added the tooltip line to pet tooltips while in battle.
+ - Included the collected, not collected, and favorites filter options in pet list expansion.
+ - "Expand Pet List" option removed. This functionality is now baseline.
+ - Filter settings now restored after searching the pet list.
+ 

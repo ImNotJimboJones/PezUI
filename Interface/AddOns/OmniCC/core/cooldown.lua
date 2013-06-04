@@ -10,16 +10,15 @@ local Timer = OmniCC.Timer
 --[[ Control ]]--
 
 function Cooldown:Start(...)
+	local timer = Timer:Get(self) or Timer:New(self)
+	timer:UpdateOpacity()
 
-    if Cooldown.CanShow(self, ...) then
-        Cooldown.Setup(self)
-
-        local timer = Timer:Get(self) or Timer:New(self)
-        timer:UpdateOpacity()
-        timer:Start(...)
-    else
-        Cooldown.Stop(self)
-    end
+	if Cooldown.CanShow(self, ...) then
+		Cooldown.Setup(self)
+		timer:Start(...)
+	else
+		Cooldown.Stop(self)
+	end
 end
 
 function Cooldown:Setup()

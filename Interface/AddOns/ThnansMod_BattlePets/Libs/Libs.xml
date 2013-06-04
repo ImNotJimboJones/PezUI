@@ -1,0 +1,12 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<script file="LibStub.lua"/>
+	<include file="CallbackHandler-1.0\CallbackHandler-1.0.xml"/>
+	<include file="AceEvent-3.0\AceEvent-3.0.xml"/>
+	<include file="AceDB-3.0\AceDB-3.0.xml"/>
+	<include file="AceDBOptions-3.0\AceDBOptions-3.0.xml"/>
+	<include file="AceLocale-3.0\AceLocale-3.0.xml"/>
+	<include file="AceGUI-3.0\AceGUI-3.0.xml"/>
+	<include file="AceConfigRegistry-3.0\AceConfigRegistry-3.0.xml"/>
+	<include file="AceConfigDialog-3.0\AceConfigDialog-3.0.xml"/>
+	<include file="LibModuleDBShare-1.0\LibModuleDBShare-1.0.xml"/>
+</Ui>

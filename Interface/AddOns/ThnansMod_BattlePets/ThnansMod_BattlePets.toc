@@ -1,0 +1,24 @@
+## Interface: 50300
+## Title: Thnan's Mod - Battle Pets
+## Notes: Adds quality and level information to pet and pet item tooltips and pet journal confirmation dialogs
+## Author: Thnan (Jaedenar US-A)
+## Version: v2.2.1 release
+## OptionalDeps: Ace3, LibModuleDBShare-1.0
+## SavedVariables: THNANSMOD_BATTLEPETS_SAVED
+## X-Curse-Packaged-Version: v2.2.1 release
+## X-Curse-Project-Name: Thnan's Mod - Battle Pets
+## X-Curse-Project-ID: thnansmodbattlepets
+## X-Curse-Repository-ID: wow/thnansmodbattlepets/mainline
+
+#@no-lib-strip@
+Libs\Libs.xml
+#@end-no-lib-strip@
+Locales\Locales.xml
+
+StaticData.lua
+Config.lua
+PetBreeds.lua
+PetList.lua
+Tooltips.lua
+PetZones.lua
+ConfirmationDialog.lua

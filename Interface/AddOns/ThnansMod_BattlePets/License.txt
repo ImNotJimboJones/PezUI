@@ -1,0 +1,38 @@
+
+Copyright (c) 2013 Thnan. All rights reserved.
+
+Permission is granted for anyone to use, read, or otherwise interpret
+this software for any purpose, without any restrictions.
+
+Permission is granted for anyone to sample from this software, and
+to distribute such derivative works as long as neither the names of
+this software nor its authors are used in the name or title of the work
+or in any other way that may cause it to be confused with this software.
+
+Permission is granted for anyone to aggregate this software with other
+works not derived from this software for the purpose of creating a user
+interface compilation for "World of Warcraft" and to distribute such
+compilations as long as the software is not modified in any way,
+including by modifying or removing any files.
+
+This software may not be distributed standalone or in any other way, in
+whole or in part, modified or unmodified, without specific prior written
+permission from the author of this software.
+
+The names of this software and/or its authors may not be used to promote
+or endorse works derived from this software without specific prior
+written
+permission from the authors of this software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
