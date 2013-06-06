@@ -34,16 +34,16 @@ IonPetCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
+			["auraInd"] = false,
+			["barLockCtrl"] = false,
+			["bindText"] = true,
+			["possess"] = false,
 			["ctrl"] = false,
+			["custom"] = false,
+			["reaction"] = false,
+			["remap"] = false,
 			["stealth"] = false,
 			["spellGlowAlt"] = false,
-			["custom"] = false,
-			["remap"] = false,
-			["reaction"] = false,
-			["possess"] = false,
-			["bindText"] = true,
-			["barLockCtrl"] = false,
-			["auraInd"] = false,
 			["stance"] = false,
 		}, -- [1]
 	},
@@ -52,8 +52,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -62,8 +62,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -72,8 +72,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -82,8 +82,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -92,8 +92,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -102,8 +102,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -112,8 +112,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -122,8 +122,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -132,8 +132,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
@@ -142,8 +142,8 @@ IonPetCDB = {
 			["keys"] = {
 				["hotKeyText"] = ":",
 				["hotKeyLock"] = false,
-				["hotKeyPri"] = false,
 				["hotKeys"] = ":",
+				["hotKeyPri"] = false,
 			},
 			["data"] = {
 			},
