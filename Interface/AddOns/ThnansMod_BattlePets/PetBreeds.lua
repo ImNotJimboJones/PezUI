@@ -22,13 +22,11 @@ local baseStats = addon.staticData.baseStats;
 
 local breedsForSpecies = addon.staticData.breedsForSpecies;
 
-local rarityMultipliers = {
-	1.0,
-	1.1,
-	1.2,
-	1.29999,
-};
-function addon:breedsForPet(speciesID, level, rarity, health, power, speed, table, tolerateHealth)
+local rarityMultipliers = addon.staticData.petStatRarityMultipliers;
+local wildHealthMod = addon.staticData.wildPetHealthModifier;
+local flySpeedMod = addon.staticData.flyingPetSpeedModifier;
+
+function addon:breedsForPet(speciesID, level, rarity, health, power, speed, table, wild, fly)
 	local possibles = breedsForSpecies[speciesID];
 	local base = baseStats[speciesID];
 	if not possibles then
@@ -40,18 +38,24 @@ function addon:breedsForPet(speciesID, level, rarity, health, power, speed, tabl
 		return table;
 	end
 	local LR = level*rarityMultipliers[rarity];
+	local LRh = LR*5;
+	local LRs = LR;
+	if fly then
+		LRs = LR*flySpeedMod;
+	end
 	for i = 1, #possibles do
 		local breed = breedStats[possibles[i]];
 		
-		local testHealth = floor((base[1] + breed[1])*5*LR + 0.5) + 100;
-		local testPower = floor((base[2] + breed[2])*LR + 0.5);
-		local testSpeed = floor((base[3] + breed[3])*LR + 0.5);
-		
-		local healthCheck = testHealth == health;
-		if tolerateHealth then
-			healthCheck = (abs(testHealth - health) <= 1);
+		local testHealth;
+		if wild then
+			testHealth = floor(((base[1] + breed[1])*LRh + 100)/wildHealthMod + 0.5)
+		else
+			testHealth = floor((base[1] + breed[1])*LRh + 100.5);
 		end
-		if healthCheck and testPower == power and testSpeed == speed then
+		local testPower = floor((base[2] + breed[2])*LR + 0.5);
+		local testSpeed = floor((base[3] + breed[3])*LRs + 0.5);
+		
+		if testHealth == health and testPower == power and testSpeed == speed then
 			table[#table + 1] = possibles[i];
 		end
 	end
@@ -128,6 +132,7 @@ battleBreeds[LE_BATTLE_PET_ENEMY] = {
 };
 function battleBreeds:parseBattleBreeds()
 	for owner = 1, 2 do
+		local wild = ((owner == 2) and C_PetBattles.IsWildBattle());
 		for pet = 1, C_PetBattles.GetNumPets(owner) do
 			local speciesID = C_PetBattles.GetPetSpeciesID(owner, pet);
 			local level = C_PetBattles.GetLevel(owner, pet);
@@ -135,21 +140,16 @@ function battleBreeds:parseBattleBreeds()
 			local health = C_PetBattles.GetMaxHealth(owner, pet);
 			local power = C_PetBattles.GetPower(owner, pet);
 			local speed = C_PetBattles.GetSpeed(owner, pet);
-		
-			local type = C_PetBattles.GetPetType(owner, pet);
-			if type == 3 then
+			
+			local fly = false;
+			if C_PetBattles.GetPetType(owner, pet) == 3 then
 				local curHealth = C_PetBattles.GetHealth(owner, pet);
 				if curHealth > (health/2) then
-					speed = floor(speed/1.5 + 0.5);
+					fly = true;
 				end
 			end
 			
-			local tolerateHealth = false;
-			if owner == 2 and C_PetBattles.IsWildBattle() then
-				health = floor(health*1.2 + 0.5);
-				tolerateHealth = true;
-			end
-			battleBreeds[owner][pet] = addon:breedsForPet(speciesID, level, rarity, health, power, speed, nil, tolerateHealth);
+			battleBreeds[owner][pet] = addon:breedsForPet(speciesID, level, rarity, health, power, speed, nil, wild, fly);
 		end
 	end
 end

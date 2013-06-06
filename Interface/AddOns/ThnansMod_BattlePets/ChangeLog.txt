@@ -1,6 +1,12 @@
 Thnan's Mod - Battle Pets
 version changes:
 
+2.3.0:
+
+- Improved accuracy of breed identification.
+- Added option to show a caged pet's breed in its tooltip.
+- The release pet confirmation dialog information once again plays nice with other addons.
+
 2.2.1:
 
 - Fixed issue causing lua errors when loading non-item hyperlinks.

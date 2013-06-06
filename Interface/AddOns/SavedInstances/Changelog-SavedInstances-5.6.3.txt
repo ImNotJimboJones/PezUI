@@ -1,9 +1,16 @@
 ------------------------------------------------------------------------
-r301 | oscarucb | 2013-06-02 21:12:18 +0000 (Sun, 02 Jun 2013) | 1 line
+r303 | oscarucb | 2013-06-06 11:08:37 +0000 (Thu, 06 Jun 2013) | 1 line
 Changed paths:
-   A /tags/5.6.2 (from /trunk:300)
+   A /tags/5.6.3 (from /trunk:302)
 
-Tagging as 5.6.2
+Tagging as 5.6.3
+------------------------------------------------------------------------
+r302 | oscarucb | 2013-06-04 07:08:53 +0000 (Tue, 04 Jun 2013) | 2 lines
+Changed paths:
+   M /trunk/SavedInstances.lua
+
+factor some code and fix a frame level clash between the windows
+
 ------------------------------------------------------------------------
 r300 | oscarucb | 2013-06-02 21:10:30 +0000 (Sun, 02 Jun 2013) | 2 lines
 Changed paths:
@@ -119,21 +126,5 @@ Changed paths:
 
 Improve TradeSkill CD reset guess
 Work harder to retrieve the actual trade cd time when filters are enabled
-
-------------------------------------------------------------------------
-r276 | oscarucb | 2013-05-04 23:46:17 +0000 (Sat, 04 May 2013) | 2 lines
-Changed paths:
-   M /trunk/SavedInstances.lua
-
-ticket 120: add some missing trade cds
-
-------------------------------------------------------------------------
-r275 | oscarucb | 2013-05-04 19:55:03 +0000 (Sat, 04 May 2013) | 3 lines
-Changed paths:
-   M /trunk/SavedInstances.lua
-   M /trunk/config.lua
-
-add an option to color currencies by cap
-make trade cooldown detection more robust
 
 ------------------------------------------------------------------------

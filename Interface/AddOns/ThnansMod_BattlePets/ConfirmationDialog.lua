@@ -14,19 +14,28 @@ local L = LibStub("AceLocale-3.0"):GetLocale(addonName);
 
 local releasePetDialog = StaticPopupDialogs["BATTLE_PET_RELEASE"];
 
-local function updateDialogs(level, value, dropDownFrame, anchorName, xOffset, yOffset)
-	if dropDownFrame == PetJournal.petOptionsMenu then
-		if addon.db.profile.colorReleaseText then
-			local speciesID, _, level = C_PetJournal.GetPetInfoByPetID(PetJournal.menuPetID);
-			local _, health, power, speed, rarity = C_PetJournal.GetPetStats(PetJournal.menuPetID);
-			local rarityColor = ITEM_QUALITY_COLORS[rarity - 1].hex;
-			local rarityName = _G["BATTLE_PET_BREED_QUALITY"..rarity];
-			local breedText = addon:textForBreeds(addon:breedsForPet(speciesID, level, rarity, health, power, speed));
-			local nameString = L.confirmationDialogPetInfo:format("%s", rarityColor, rarityName, breedText, level);
-			releasePetDialog.text = "\n\n"..PET_RELEASE_LABEL:format(nameString).."\n\n";
+local firstCall = true;
+
+local function updateReleaseDialog(name, ...)
+	if name == "BATTLE_PET_RELEASE" then
+		if firstCall then
+			if addon.db.profile.colorReleaseText then
+				local speciesID, _, level = C_PetJournal.GetPetInfoByPetID(PetJournal.menuPetID);
+				local _, health, power, speed, rarity = C_PetJournal.GetPetStats(PetJournal.menuPetID);
+				local rarityColor = ITEM_QUALITY_COLORS[rarity - 1].hex;
+				local rarityName = _G["BATTLE_PET_BREED_QUALITY"..rarity];
+				local breedText = addon:textForBreeds(addon:breedsForPet(speciesID, level, rarity, health, power, speed));
+				local nameString = L.confirmationDialogPetInfo:format("%s", rarityColor, rarityName, breedText, level);
+				releasePetDialog.text = "\n\n"..PET_RELEASE_LABEL:format(nameString).."\n\n";
+			else
+				releasePetDialog.text = "\n\n"..PET_RELEASE_LABEL.."\n\n";
+			end
+			firstCall = false;
+			StaticPopup_Show(name, ...)
 		else
-			releasePetDialog.text = "\n\n"..PET_RELEASE_LABEL.."\n\n";
+			firstCall = true;
 		end
 	end
 end
-hooksecurefunc(_G, "ToggleDropDownMenu", updateDialogs);
+
+hooksecurefunc(_G, "StaticPopup_Show", updateReleaseDialog);

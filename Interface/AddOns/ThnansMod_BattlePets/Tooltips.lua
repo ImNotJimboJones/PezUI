@@ -222,7 +222,9 @@ cageTooltipFontStrings[3] = BattlePetTooltip:CreateFontString(nil, "ARTWORK", "G
 cageTooltipFontStrings[1]:SetPoint("TOPLEFT", BattlePetTooltip.Owned, "BOTTOMLEFT", 0, -2);
 cageTooltipFontStrings[2]:SetPoint("TOPLEFT", cageTooltipFontStrings[1], "BOTTOMLEFT", 0, -2);
 cageTooltipFontStrings[3]:SetPoint("TOPLEFT", cageTooltipFontStrings[2], "BOTTOMLEFT", 0, -2);
-local function mouseoverPet_Cage(speciesID)
+local cageTooltipBreedString = BattlePetTooltip:CreateFontString(nil, "ARTWORK", "GameFontNormal");
+cageTooltipBreedString:SetPoint("TOPLEFT", BattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
+local function mouseoverPet_Cage(speciesID, level, rarity, health, power, speed)
 	local config = addon.db.profile.itemTooltips;
 	if config.enabled then
 		local name = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
@@ -249,6 +251,15 @@ local function mouseoverPet_Cage(speciesID)
 			cageTooltipFontStrings[i]:Hide();
 		end
 	end
+	if addon.db.profile.showBreedOnCages then
+		cageTooltipBreedString:SetText("|cFFFFFFFF"..addon:textForBreeds(addon:breedsForPet(speciesID, level, rarity, health, power, speed)).."|r");
+		cageTooltipBreedString:Show();
+		BattlePetTooltip:SetHeight(BattlePetTooltip:GetHeight() + cageTooltipBreedString:GetHeight() + 2);
+		BattlePetTooltip.HealthTexture:SetPoint("TOPLEFT", cageTooltipBreedString, "BOTTOMLEFT", 0, -2);
+	else
+		cageTooltipBreedString:Hide();
+		BattlePetTooltip.HealthTexture:SetPoint("TOPLEFT", BattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
+	end
 end
 
 local hyperlinkTooltipFontStrings = {};
@@ -258,7 +269,9 @@ hyperlinkTooltipFontStrings[3] = FloatingBattlePetTooltip:CreateFontString(nil, 
 hyperlinkTooltipFontStrings[1]:SetPoint("TOPLEFT", FloatingBattlePetTooltip.Owned, "BOTTOMLEFT", 0, -2);
 hyperlinkTooltipFontStrings[2]:SetPoint("TOPLEFT", hyperlinkTooltipFontStrings[1], "BOTTOMLEFT", 0, -2);
 hyperlinkTooltipFontStrings[3]:SetPoint("TOPLEFT", hyperlinkTooltipFontStrings[2], "BOTTOMLEFT", 0, -2);
-local function hyperlinkPet_Cage(speciesID)
+local hyperlinkTooltipBreedString = FloatingBattlePetTooltip:CreateFontString(nil, "ARTWORK", "GameFontNormal");
+hyperlinkTooltipBreedString:SetPoint("TOPLEFT", FloatingBattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
+local function hyperlinkPet_Cage(speciesID, level, rarity, health, power, speed)
 	local config = addon.db.profile.itemTooltips;
 	if config.enabled then
 		local name = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
@@ -287,6 +300,15 @@ local function hyperlinkPet_Cage(speciesID)
 		for i = 1, #hyperlinkTooltipFontStrings do
 			hyperlinkTooltipFontStrings[i]:Hide();
 		end
+	end
+	if addon.db.profile.showBreedOnCages then
+		hyperlinkTooltipBreedString:SetText("|cFFFFFFFF"..addon:textForBreeds(addon:breedsForPet(speciesID, level, rarity, health, power, speed)).."|r");
+		hyperlinkTooltipBreedString:Show();
+		FloatingBattlePetTooltip:SetHeight(FloatingBattlePetTooltip:GetHeight() + hyperlinkTooltipBreedString:GetHeight() + 2);
+		FloatingBattlePetTooltip.HealthTexture:SetPoint("TOPLEFT", hyperlinkTooltipBreedString, "BOTTOMLEFT", 0, -2);
+	else
+		cageTooltipBreedString:Hide();
+		FloatingBattlePetTooltip.HealthTexture:SetPoint("TOPLEFT", FloatingBattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
 	end
 end
 
