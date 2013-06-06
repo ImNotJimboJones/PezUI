@@ -4,38 +4,24 @@
 *.app
 *.bak
 *.mpq
+*.dll
+*.dll.new
+*.exe
+*cache.md5
+*.bat
+*.lnk
+*.old
 WTF/Launcher.wtf
 WTF/Config.wtf
 Patch.html
 Battle.net Authenticator Serial.rtf
 WoW.mfil
 WoW.tfil
-BackgroundDownloader.exe
-Battle.net.dll
-Blizzard Updater.exe
-Launcher.exe
 Microsoft.VC80.CRT.manifest
-Repair.exe
-Scan.dll
-Scan.dll.new
-Scan-64.dll.new
-Wow.exe
-WowError.exe
-dbghelp.dll
-divxdecoder.dll
-msvcr80.dll
 .curseclient
 .agent.db
-Battle.net-64.dll
 Launcher.db
-MovieProxy.exe
 WoW.pfil
-World of Warcraft Launcher.exe
-Wow-64.exe
-WowError-64.exe
-WTF/RunOnce.wtf
-WTF/RunOnce-Installer.wtf
-
 
 # Folders #
 ###########
@@ -49,3 +35,8 @@ Updates
 Temp
 TempMig
 Screenshots
+
+
+# Characters #
+##############
+WTF/Account/IMNOTJIMBOJONES/Burning Blade/Xëthra
