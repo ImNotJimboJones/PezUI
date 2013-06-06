@@ -5,7 +5,7 @@
 	 /  |))\\  /  _  \\ \:' |   \\   \\ /  ._))   /  |))//      /  _ \\ \:.\\_\ \\ /  |))//  /  _ \\  _\  \_//     /  ||     /  \\      /  _ \\  _\  \_//_\  \_// /  \\  /  ||     
 	/:. ___// /:.(_)) \\ \  :   </   ///:. ||___ /:.    \\     /:./_\ \\ \  :.  ///:.    \\ /:./_\ \\// \:.\      /:. ||___ /:.  \\__  /:./_\ \\// \:.\ // \:.\  /:.  \\/:. ||___  
 	\_ \\     \  _____//(_   ___^____))\  _____))\___|  //     \  _   //(_   ___))\___|  // \  _   //\\__  /      \  _____))\__  ____))\  _   //\\__  / \\__  /  \__  //\  _____)) 
-	  \//      \//        \//           \//           \//       \// \//   \//          \//   \// \//    \\/        \//4.23.25  \//      \// \//    \\/     \\/      \//  \//       
+	  \//      \//        \//           \//           \//       \// \//   \//          \//   \// \//    \\/        \//4.23.26  \//      \// \//    \\/     \\/      \//  \//       
 
 	Power Auras Classic
 	Current author/maintainter: Resike
@@ -25,12 +25,12 @@ PowaMisc =
 	Version = GetAddOnMetadata("PowerAuras", "Version"),
 	DefaultTimerTexture = "Original",
 	DefaultStacksTexture = "Original",
-	TimerRoundUp = true,
+	TimerRoundUp = false,
 	AllowInspections = false,
 	UseGTFO = nil,
 	UserSetMaxTextures = PowaAuras.TextureCount,
 	OverrideMaxTextures = false,
-	Locked = true,
+	Locked = false,
 	SoundChannel = "Master"
 }
 
@@ -164,7 +164,9 @@ function PowaAuras:DiscoverLinkedAuras()
 end
 
 function PowaAuras:DiscoverLinksForAura(aura, ignoreOff)
-	if (not aura or (ignoreOff and aura.off) or not aura.multiids or aura.multiids == "" or self.UsedInMultis[aura.id]) then return end
+	if (not aura or (ignoreOff and aura.off) or not aura.multiids or aura.multiids == "" or self.UsedInMultis[aura.id]) then
+		return
+	end
 	for pword in string.gmatch(aura.multiids, "[^/]+") do
 		if (string.sub(pword, 1, 1) == "!") then
 			pword = string.sub(pword, 2)
@@ -432,6 +434,7 @@ function PowaAuras:InitialiseAllAuras()
 	for _, aura in pairs(self.Auras) do
 		aura:Init()
 	end
+	self:RedisplayAuras()
 end
 
 function PowaAuras:MemorizeActions(actionIndex)
@@ -466,11 +469,10 @@ function PowaAuras:MemorizeActions(actionIndex)
 				for k, v in pairs(self.AurasByType.Actions) do
 					local actionAura = self.Auras[v]
 					if (actionAura == nil) then
-						self.AurasByType.Actions[k] = nil -- aura deleted
+						self.AurasByType.Actions[k] = nil -- Aura deleted
 					elseif (not actionAura.slot) then
-						if (self:MatchString(name, actionAura.buffname, actionAura.ignoremaj)
-						 or self:MatchString(text, actionAura.buffname, actionAura.ignoremaj)) then
-							actionAura.slot = i -- remember the slot
+						if (self:MatchString(name, actionAura.buffname, actionAura.ignoremaj) or self:MatchString(text, actionAura.buffname, actionAura.ignoremaj)) then
+							actionAura.slot = i -- Remember the slot
 							-- Remember the texture
 							local tempicon
 							if (actionAura.owntex == true) then
@@ -581,10 +583,7 @@ function PowaAuras:OnUpdate(elapsed)
 				self.NextInspectUnit = nil
 				self.InspectAgain = GetTime() + self.InspectDelay
 			end
-		elseif (not self.InspectsDone
-				and self.InspectAgain ~= nil
-				and not UnitOnTaxi("player")
-				and GetTime() > self.InspectAgain) then
+		elseif (not self.InspectsDone and self.InspectAgain ~= nil and not UnitOnTaxi("player") and GetTime() > self.InspectAgain) then
 			self:TryInspectNext()
 			self.InspectAgain = GetTime() + self.InspectDelay
 		end
@@ -605,16 +604,12 @@ function PowaAuras:IsDruidTravelForm()
 	if (self.playerclass ~= "DRUID") then
 		return false
 	end
-	local nStance = GetShapeshiftForm()
-	-- If stance 4 or 6, we're in travel/flight form.
-	if(nStance == 4 or nStance == 6) then
+	local id = GetShapeshiftFormID()
+	-- Travel form, Swift Flight form, Flight form
+	if (id == 3 or id == 27 or id == 29) then
 		return true
 	end
-	-- If in stance 5, it's complicated. Moonkin/Tree form take index 5 if learned, but if not learned then flight form is here.
-	if(nStance == 5 and select(5, GetTalentInfo(3, 21)) == 0 and select(5, GetTalentInfo(1, 8)) == 0) then
-		return true
-	end
-	-- Otherwise we're not in it.
+	-- Otherwise we're not in it
 	return false
 end
 
@@ -658,7 +653,6 @@ function PowaAuras:TestThisEffect(auraId, giveReason, ignoreCascade)
 	end
 	local debugEffectTest = PowaAuras.DebugCycle or aura.Debug
 	if (debugEffectTest) then
-		self:Message("===================================")
 		self:Message("Test Aura for Hide or Show= ", auraId)
 		self:Message("Active= ", aura.Active)
 		self:Message("Showing= ", aura.Showing)
@@ -692,12 +686,12 @@ function PowaAuras:TestThisEffect(auraId, giveReason, ignoreCascade)
 		end
 	end
 	if (debugEffectTest) then
-		self:Message("shouldShow=", shouldShow, " because ", reason)
+		self:Message("shouldShow= ", shouldShow, " because ", reason)
 	end
 	if shouldShow then
 		if (not aura.Active) then
 			if (debugEffectTest) then
-				self:Message("ShowAura ", aura.buffname, " (", auraId,")", reason)
+				self:Message("ShowAura ", aura.buffname, " (", auraId, ")", reason)
 			end
 			self:DisplayAura(auraId)
 			if (not ignoreCascade) then self:AddChildrenToCascade(aura) end
@@ -707,7 +701,7 @@ function PowaAuras:TestThisEffect(auraId, giveReason, ignoreCascade)
 		local secondaryAura = self.SecondaryAuras[aura.id]
 		if (aura.Showing) then
 			if (debugEffectTest) then
-				self:Message("HideAura ", aura.buffname, " (", auraId,")", reason)
+				self:Message("HideAura ", aura.buffname, " (", auraId, ")", reason)
 			end
 			self:SetAuraHideRequest(aura, secondaryAura)
 		end
@@ -756,7 +750,9 @@ function PowaAuras:CheckMultiple(aura, reason, giveReason)
 			end
 		end
 	end
-	if (not giveReason) then return true end
+	if (not giveReason) then
+		return true
+	end
 	return true, self:InsertText(self.Text.nomReasonMulti, aura.multiids)
 end
 
@@ -867,7 +863,6 @@ local function leaveAura(frame)
 	frame:SetScript("OnDragStop", nil)
 	frame:SetScript("OnMouseDown", nil)
 	frame:SetScript("OnMouseUp", nil)
-	frame:SetScript("OnKeyUp", nil)
 end
 
 function PowaAuras:SetForDragging(aura, frame)
@@ -937,8 +932,8 @@ function PowaAuras:ShowAuraForFirstTime(aura)
 	else
 		self:ResetDragging(aura, frame)
 	end
+	model:SetUnit("none")
 	if (aura.owntex == true) then
-		model:SetUnit("none")
 		texture:Show()
 		if (aura.icon == "") then
 			texture:SetTexture("Interface\\Icons\\Inv_Misc_QuestionMark")
@@ -946,33 +941,27 @@ function PowaAuras:ShowAuraForFirstTime(aura)
 			texture:SetTexture(aura.icon)
 		end
 	elseif (aura.wowtex == true) then
-		model:SetUnit("none")
 		texture:Show()
 		texture:SetTexture(self.WowTextures[aura.texture])
 	elseif (aura.customtex == true) then
-		model:SetUnit("none")
 		texture:Show()
 		texture:SetTexture(self:CustomTexPath(aura.customname))
 	elseif (aura.textaura == true) then
-		model:SetUnit("none")
 		texture:Show()
 		texture:SetText(aura.aurastext)
 	elseif (aura.model == true) then
 		texture:Hide()
-		model:SetUnit("none")
 		model:SetModel(PowaAurasModels[aura.texture])
 	elseif (aura.modelcustom == true) then
 		texture:Hide()
 		if (aura.modelcustom ~= nil and aura.modelcustom ~= "") then
 			if (string.find(aura.modelcustompath, "%.m2")) then
-				model:SetUnit("none")
 				model:SetModel(aura.modelcustompath)
 			else
 				model:SetUnit(string.lower(aura.modelcustompath))
 			end
 		end
 	else
-		model:SetUnit("none")
 		texture:Show()
 		texture:SetTexture("Interface\\Addons\\PowerAuras\\Auras\\Aura"..aura.texture..".tga")
 	end
@@ -1265,38 +1254,32 @@ function PowaAuras:ShowSecondaryAuraForFirstTime(aura, r1, r2, r3, r4, r5, r6)
 	local frame = self.Frames[auraId]
 	local texture = self.Textures[auraId]
 	local secondaryFrame, secondaryModel, secondaryTexture = secondaryAura:CreateFrames()
+	secondaryModel:SetUnit("none")
 	if (aura.owntex == true) then
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Show()
 		secondaryTexture:SetTexture(aura.icon)
 	elseif (aura.wowtex == true) then
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Show()
 		secondaryTexture:SetTexture(self.WowTextures[aura.texture])
 	elseif (aura.customtex == true) then
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Show()
 		secondaryTexture:SetTexture(self:CustomTexPath(aura.customname))
 	elseif (aura.textaura == true) then
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Show()
 		secondaryTexture:SetText(aura.aurastext)
 	elseif (aura.model == true) then
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Hide()
 		secondaryModel:SetModel(PowaAurasModels[aura.texture])
 	elseif (aura.modelcustom == true) then
 		secondaryTexture:Hide()
 		if (aura.modelcustom ~= nil and aura.modelcustom ~= "") then
 			if (string.find(aura.modelcustompath, "%.m2")) then
-				secondaryModel:SetUnit("none")
 				secondaryModel:SetModel(aura.modelcustompath)
 			else
 				secondaryModel:SetUnit(string.lower(aura.modelcustompath))
 			end
 		end
 	else
-		secondaryModel:SetUnit("none")
 		secondaryTexture:Show()
 		secondaryTexture:SetTexture("Interface\\Addons\\PowerAuras\\Auras\\Aura"..aura.texture..".tga")
 	end
@@ -1451,9 +1434,13 @@ function PowaAuras:ShowSecondaryAuraForFirstTime(aura, r1, r2, r3, r4, r5, r6)
 end
 
 function PowaAuras:DisplayAura(auraId)
-	if (not (self.VariablesLoaded and self.SetupDone)) then return end
+	if (not (self.VariablesLoaded and self.SetupDone)) then
+		return
+	end
 	local aura = self.Auras[auraId]
-	if (aura == nil or aura.off) then return end
+	if (aura == nil or aura.off)then
+		return
+	end
 	self:ShowAuraForFirstTime(aura)
 end
 
@@ -1548,7 +1535,7 @@ function PowaAuras:UpdateAura(aura, elapsed)
 				if (aura.Stacks.SetStackCount) then
 					aura.Stacks:SetStackCount(random(1, 12))
 				else
-					self:Message("aura.Stacks:SetStackCount nil!! ", aura.id)
+					self:Message("aura.Stacks:SetStackCount nil!", aura.id)
 				end
 			end
 			aura.Stacks:Update()

@@ -245,7 +245,7 @@ function cPowaTimer:Update(elapsed)
 		return
 	end
 	if (PowaAuras.DebugCycle) then
-		PowaAuras:DisplayText("Timer.Update ",self.id)
+		PowaAuras:DisplayText("Timer.Update ", self.id)
 	end
 	if (self.enabled == false and aura.InvertAuraBelow == 0) then
 		if (PowaAuras.DebugCycle) then
@@ -255,7 +255,7 @@ function cPowaTimer:Update(elapsed)
 	end
 	local newvalue = 0
 	if (PowaAuras.DebugCycle) then
-		PowaAuras:DisplayText("newvalue=",newvalue)
+		PowaAuras:DisplayText("newvalue=", newvalue)
 	end
 	if (PowaAuras.ModTest) then
 		newvalue = math.random(0, 99) + (math.random(0, 99) / 100)
@@ -300,7 +300,7 @@ function cPowaTimer:Update(elapsed)
 				small = math.ceil(small)
 			end
 			if (PowaAuras.DebugCycle) then
-				PowaAuras:Message("small=",small)
+				PowaAuras:Message("small=", small)
 			end
 			if (self.lastShownSmall ~= small) then
 				self:ShowValue(aura, 2, small)
@@ -318,7 +318,7 @@ function cPowaTimer:Update(elapsed)
 			large = math.floor(large)
 		end
 		if (PowaAuras.DebugCycle) then
-			PowaAuras:Message("large=",large)
+			PowaAuras:Message("large=", large)
 		end
 		if (self.lastShownLarge ~= large) then
 			self:ShowValue(aura, 1, large)
@@ -338,7 +338,7 @@ function cPowaTimer:SetDurationInfo(endtime)
 	if (self.DurationInfo ~= endtime) then
 		self.DurationInfo = endtime
 		if (PowaAuras.TimerFrame[self.id]) then
-			for frameIndex = 1,2 do
+			for frameIndex = 1, 2 do
 				local timerFrame = PowaAuras.TimerFrame[self.id][frameIndex]
 				if (timerFrame and self.UpdatePing and timerFrame.PingAnimationGroup) then
 					timerFrame.PingAnimationGroup:Play()
@@ -355,10 +355,16 @@ function cPowaTimer:ExtractDigits(displayValue)
 end
 
 function cPowaTimer:ShowValue(aura, frameIndex, displayValue)
-	if (PowaAuras.TimerFrame == nil) then return end
-	if (PowaAuras.TimerFrame[self.id] == nil) then return end
+	if (PowaAuras.TimerFrame == nil) then
+		return
+	end
+	if (PowaAuras.TimerFrame[self.id] == nil)
+		then return
+	end
 	local timerFrame = PowaAuras.TimerFrame[self.id][frameIndex]
-	if (timerFrame == nil) then return end
+	if (timerFrame == nil) then
+		return
+	end
 	if (aura.texmode == 1) then
 		timerFrame.texture:SetBlendMode("ADD")
 	else
@@ -400,7 +406,9 @@ function cPowaTimer:HideFrame(i)
 end
 
 function cPowaTimer:Hide()
-	if (not self.Showing) then return end
+	if (not self.Showing) then
+		return
+	end
 	if PowaAuras.TimerFrame[self.id] then
 		self:HideFrame(1)
 		self:HideFrame(2)

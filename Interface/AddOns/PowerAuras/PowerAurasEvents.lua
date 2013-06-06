@@ -103,24 +103,35 @@ function PowaAuras:GetInstanceType()
 		instanceType = "Arena"
 	elseif (instanceType == "party" or instanceType == "raid") then
 		local _, _, instanceDifficulty = GetInstanceInfo()
+		-- 5 Man Normal
 		if (instanceDifficulty == 1) then
 			instanceType = "5Man"
-		elseif (instanceDifficulty == 2 or instanceDifficulty == 8) then
+		-- 5 Man Heroic
+		elseif (instanceDifficulty == 2) then
 			instanceType = "5ManHeroic"
+		-- Challange Mode
+		elseif (instanceDifficulty == 8) then
+			instanceType = "ChallangeMode"
+		-- 10 Man
 		elseif (instanceDifficulty == 3) then
 			instanceType = "10Man"
-		elseif (instanceDifficulty == 4 or instanceDifficulty == 7 or instanceDifficulty == 9) then
-			instanceType = "25Man"
+		-- 10 Man Heroic
 		elseif (instanceDifficulty == 5) then
 			instanceType = "10ManHeroic"
-		else
+		-- 25 Man or 25 Man LFG or 40 Man
+		elseif (instanceDifficulty == 4 or instanceDifficulty == 7 or instanceDifficulty == 9) then
+			instanceType = "25Man"
+		-- 25 Man Heroic
+		elseif (instanceDifficulty == 6) then
 			instanceType = "25ManHeroic"
 		end
-	elseif (instanceType == nil) then
+	elseif (instanceType == "scenario") then
 		local _, _, instanceDifficulty = GetInstanceInfo()
-		if (instanceDifficulty == 9) then
+		-- Scenario
+		if (instanceDifficulty == 12) then
 			instanceType = "Scenario"
-		elseif (instanceDifficulty == 10) then
+		-- Scenario Heroic
+		elseif (instanceDifficulty == 11) then
 			instanceType = "ScenarioHeroic"
 		end
 	else
@@ -520,6 +531,20 @@ function PowaAuras:ZONE_CHANGED_NEW_AREA()
 	end
 end
 
+function PowaAuras:PLAYER_DIFFICULTY_CHANGED()
+	local instanceType = self:GetInstanceType()
+	if (self.Instance == instanceType) then
+		return
+	end
+	self.Instance = instanceType
+	if (self.ModTest == false) then
+		if (self.DebugEvents) then
+			self:DisplayText("PLAYER_DIFFICULTY_CHANGED ", self.InInstance, " - ", self.InstanceType)
+		end
+		self.DoCheck.All = true
+	end
+end
+
 function PowaAuras:UNIT_COMBO_POINTS(...)
 	local unit = ...
 	if (unit ~= "player") then
@@ -640,7 +665,15 @@ function PowaAuras:COMBAT_LOG_EVENT_UNFILTERED(...)
 		return
 	end
 	-- Args
-	local timestamp, event, casterHidden, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellId, spellName, _, spellType = ...
+	local _
+	local timestamp, event, casterHidden, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellId, spellName, spellType
+	if WoWBuild >= 40200 then
+		timestamp, event, casterHidden, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellId, spellName, _, spellType = ...
+	elseif WoWBuild >= 40100 then
+		timestamp, event, casterHidden, sourceGUID, sourceName, sourceFlags2, destGUID, destName, destFlags, spellId, spellName, _, spellType = ...
+	else
+		timestamp, event, sourceGUID, sourceName, sourceFlags2, destGUID, destName, destFlags, spellId, spellName, _, spellType = ...
+	end
 	if (not spellName) then
 		return
 	end
