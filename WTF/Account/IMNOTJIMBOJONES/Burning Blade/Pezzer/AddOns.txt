@@ -302,4 +302,7 @@ SimpleILevel: enabled
 SimpleILevel_Group: enabled
 SimpleILevel_Resilience: disabled
 SimpleILevel_Social: disabled
-ThnansMod_BattlePets: enabled
+ThnansMod_BattlePets: disabled
+DBM-Brawlers: enabled
+DBM-ThroneofThunder: enabled
+xanachievementmover: enabled
