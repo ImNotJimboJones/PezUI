@@ -1,0 +1,14 @@
+tag v50300-1.0.0
+d51f2e9320b08fede7fb9a70aabb7b24ed661975
+James Whitehead II <jnwhiteh@gmail.com>
+2013-06-07 09:25:59 +0200
+
+Tagging v50300-1.0.0
+
+
+--------------------
+
+James Whitehead II:
+	- Update TOC for 4.3, update libraries
+	- Add frFR locale
+	- Bumping?

@@ -359,6 +359,12 @@ function AtlasMajorCities_RegisterWithAtlas(init)
 			if ( not city_list.Location )                               then city_list.Location = { AMC_DBcontinent[city] }; end
 			if ( AMC_Pcontinent and AMC_Pcontinent[city] == "deleted" ) then city_list.Location = nil; end
 
+			-- fill city list with empty entries, because AtlasLoot counts for it (the Atlas list shows 24 entries)
+			for idx = 1, 24 do
+				local temp = {}
+				table.insert(city_list, temp)
+			end
+
 			myData[myDataKey] = city_list;
 		end
 	end

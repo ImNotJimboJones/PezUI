@@ -932,6 +932,11 @@ function AtlasMajorCities_SetPosition(msg)
 		end
 	end
 
+	-- correct the no position shop ID with the zone number
+	if ( AMC_ShopID == "000000" ) then
+		AMC_ShopID = "00000"..string.sub(AMC_Zone,5);
+	end
+
 	local oldtitle = "";
 	local slist, setlabel;
 	if ( (msg == AMC_DeleteString) or (msg == AMC_DelNoPosString) ) then
