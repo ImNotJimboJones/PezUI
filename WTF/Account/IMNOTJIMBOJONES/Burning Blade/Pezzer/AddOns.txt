@@ -40,7 +40,6 @@ brokertoolbox: enabled
 ButtonFacade: enabled
 ColorPickerPlus: enabled
 CompanionFilter: enabled
-Critline: enabled
 DeathNote: enabled
 DungeonHelper: enabled
 Enchantrix: disabled
@@ -215,7 +214,7 @@ YssDrop: enabled
 shPerformance: enabled
 DETrackingBroker: enabled
 DBM-Core: enabled
-DBM-GUI: disabled
+DBM-GUI: enabled
 DBM-BaradinHold: enabled
 DBM-BastionTwilight: enabled
 DBM-BlackTemple: enabled
