@@ -30,8 +30,6 @@ Auc-Util-FixAH: enabled
 Bazooka: enabled
 Bazooka_Options: disabled
 BeanCounter: disabled
-BetterExtraActionButton: enabled
-BetterPowerBarAlt: enabled
 Bison: enabled
 Broker_DualSpec: enabled
 Broker_MailBox: enabled
@@ -214,7 +212,7 @@ YssDrop: enabled
 shPerformance: enabled
 DETrackingBroker: enabled
 DBM-Core: enabled
-DBM-GUI: enabled
+DBM-GUI: disabled
 DBM-BaradinHold: enabled
 DBM-BastionTwilight: enabled
 DBM-BlackTemple: enabled
@@ -301,7 +299,7 @@ SimpleILevel: enabled
 SimpleILevel_Group: enabled
 SimpleILevel_Resilience: disabled
 SimpleILevel_Social: disabled
-ThnansMod_BattlePets: disabled
+ThnansMod_BattlePets: enabled
 DBM-Brawlers: enabled
 DBM-ThroneofThunder: enabled
 xanachievementmover: enabled
