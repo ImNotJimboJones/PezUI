@@ -13,7 +13,7 @@ local maxdiff = 10 -- max number of instance difficulties
 local maxcol = 4 -- max columns per player+instance
 
 addon.svnrev = {}
-addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 302 $"):match("%d+"))
+addon.svnrev["SavedInstances.lua"] = tonumber(("$Revision: 306 $"):match("%d+"))
 
 -- local (optimal) references to provided functions
 local table, math, bit, string, pairs, ipairs, unpack, strsplit, time, type, wipe, tonumber, select, strsub = 
@@ -183,6 +183,15 @@ local GTToffset = time() - GetTime()
 local function GetTimeToTime(val)
   if not val then return nil end
   return val + GTToffset
+end
+
+-- abbreviate expansion names (which apparently are not localized in any western character set)
+local function abbreviate(iname)
+  iname = iname:gsub("Burning Crusade", "BC")
+  iname = iname:gsub("Wrath of the Lich King", "WotLK")
+  iname = iname:gsub("Cataclysm", "Cata")
+  iname = iname:gsub("Mists of Pandaria", "MoP")
+  return iname
 end
 
 vars.defaultDB = {
@@ -826,7 +835,7 @@ function addon:UpdateInstanceData()
   instancesUpdated = true
   local count = 0
   local starttime = debugprofilestop()
-  local maxid = 600
+  local maxid = 700
   for id=1,maxid do -- start with brute force
     if addon:UpdateInstance(id) then
       count = count + 1
@@ -1020,6 +1029,7 @@ function addon:UpdateToonData()
 	  t.IL, t.ILe = tonumber(IL), tonumber(ILe)
 	end
 	t.RBGrating = tonumber((GetPersonalRatedBGInfo())) or t.RBGrating
+	core:scan_item_cds()
 	-- Daily Reset
 	local nextreset = addon:GetNextDailyResetTime()
 	if nextreset and nextreset > time() then
@@ -1107,6 +1117,7 @@ function addon:UpdateToonData()
 	if zone and #zone > 0 then
 	  t.Zone = zone
 	end
+	t.LastSeen = time()
 end
 
 function addon:QuestIsDarkmoonMonthly()
@@ -1237,6 +1248,10 @@ local function ShowToonTooltip(cell, arg, ...)
 	end
 	if t.Zone then
 	  indicatortip:AddLine(ZONE,t.Zone)
+	end
+	if t.LastSeen then
+	  local when = date("%c",t.LastSeen)
+	  indicatortip:AddLine(L["Last updated"],when)
 	end
 	if t.PlayedTotal and t.PlayedLevel and ChatFrame_TimeBreakDown then
 	  --indicatortip:AddLine((TIME_PLAYED_TOTAL):format((TIME_DAYHOURMINUTESECOND):format(ChatFrame_TimeBreakDown(t.PlayedTotal))))
@@ -2371,7 +2386,7 @@ function core:ShowTooltip(anchorframe)
 			 addsep()
 			 firstlfd = false
 		      end
-		      holidayinst[instance] = tooltip:AddLine(YELLOWFONT .. instance .. FONTEND)
+		      holidayinst[instance] = tooltip:AddLine(YELLOWFONT .. abbreviate(instance) .. FONTEND)
 		    end
 		    local tstr = SecondsToTime(d.Expires - time(), false, false, 1)
      		    tooltip:SetCell(holidayinst[instance], columns[toon..1], ClassColorise(t.Class,tstr), "CENTER",maxcol)
@@ -2872,6 +2887,9 @@ local trade_spells = {
 
 	-- Engineering
 	[139176] = true,	-- Stabilized Lightning Source
+	[126459] = "item",	-- Blingtron
+	[54710]  = "item",	-- MOLL-E
+	[67826]  = "item",	-- Jeeves
 }
 
 local cdname = {
@@ -2880,6 +2898,21 @@ local cdname = {
 	["sphere"] = GetSpellInfo(7411).. ": "..GetSpellInfo(28027),
 	["magni"] =  GetSpellInfo(2108).. ": "..GetSpellInfo(140040)
 }
+
+local itemcds = { -- [itemid] = spellid
+	[87214] = 126459, 	-- Blingtron
+	[40768] = 54710, 	-- MOLL-E
+	[49040] = 67826, 	-- Jeeves
+}
+
+function core:scan_item_cds()
+  for itemid, spellid in pairs(itemcds) do
+    local start, duration = GetItemCooldown(itemid)
+    if start and duration and start > 0 then
+      core:record_skill(spellid, GetTimeToTime(start+duration))
+    end
+  end
+end
 
 function core:record_skill(spellID, expires)
   if not spellID then return end
@@ -2900,7 +2933,12 @@ function core:record_skill(spellID, expires)
   local idx = spellID
   local title = spellName
   local link = nil
-  if type(cdinfo) == "string" then
+  if cdinfo == "item" then
+    if not expires then 
+      core:ScheduleTimer("scan_item_cds", 2) -- theres a delay for the item to go on cd
+      return
+    end
+  elseif type(cdinfo) == "string" then
     idx = cdinfo
     title = cdname[cdinfo] or title
   elseif expires ~= 0 then
