@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(198, "DBM-Firelands", nil, 78)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 58 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 65 $"):sub(12, -3))
 mod:SetCreatureID(52409)
 mod:SetModelID(37875)
 mod:SetZone()
@@ -25,7 +25,7 @@ mod:RegisterEventsInCombat(
 	"RAID_BOSS_WHISPER",
 	"UNIT_HEALTH boss1",
 	"UNIT_AURA player",
-	"UNIT_SPELLCAST_SUCCEEDED",
+	"UNIT_SPELLCAST_SUCCEEDED boss1",
 	"UNIT_DIED"
 )
 
@@ -564,6 +564,7 @@ local function clearSeedsActive()
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, spellName)
+	--TODO, switch to spellid once verified spellid is always same
 	if spellName == seedCast and not seedsActive then -- The true molten seeds cast.
 		seedsActive = true
 		timerMoltenInferno:Start(11.5)--1.5-2.5 variation, we use lowest +10 seconds
