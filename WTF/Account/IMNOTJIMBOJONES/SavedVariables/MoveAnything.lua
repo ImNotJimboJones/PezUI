@@ -39,8 +39,8 @@ MADB = {
 						"TOP", -- [1]
 						"UIParent", -- [2]
 						"TOP", -- [3]
-						-570, -- [4]
-						-65, -- [5]
+						-571, -- [4]
+						-134.9998779296875, -- [5]
 					},
 				},
 				["Boss5TargetFrame"] = {
@@ -156,8 +156,8 @@ MADB = {
 						"TOP", -- [1]
 						"UIParent", -- [2]
 						"TOP", -- [3]
-						-570, -- [4]
-						-65, -- [5]
+						-571, -- [4]
+						-134.9998779296875, -- [5]
 					},
 				},
 				["Boss1TargetFrame"] = {
@@ -184,10 +184,6 @@ MADB = {
 					["name"] = "CompactRaidGroup8",
 					["hidden"] = true,
 				},
-				["PlayerDebuffsMover"] = {
-					["name"] = "PlayerDebuffsMover",
-					["hidden"] = true,
-				},
 				["RaidUnitFramesManagerMover"] = {
 					["name"] = "RaidUnitFramesManagerMover",
 					["pos"] = {
@@ -197,6 +193,10 @@ MADB = {
 						-6.999999523162842, -- [4]
 						-139.9998779296875, -- [5]
 					},
+				},
+				["PlayerDebuffsMover"] = {
+					["name"] = "PlayerDebuffsMover",
+					["hidden"] = true,
 				},
 				["FramerateLabel"] = {
 					["name"] = "FramerateLabel",
@@ -215,7 +215,7 @@ MADB = {
 						"UIParent", -- [2]
 						"TOP", -- [3]
 						-571, -- [4]
-						-200, -- [5]
+						-134.9998779296875, -- [5]
 					},
 				},
 				["BonusRollMoneyWonFrame"] = {
@@ -224,18 +224,8 @@ MADB = {
 						"TOP", -- [1]
 						"UIParent", -- [2]
 						"TOP", -- [3]
-						-570, -- [4]
-						-77, -- [5]
-					},
-				},
-				["LootFrame"] = {
-					["name"] = "LootFrame",
-					["pos"] = {
-						"BOTTOMLEFT", -- [1]
-						"UIParent", -- [2]
-						"BOTTOMLEFT", -- [3]
-						560, -- [4]
-						499.9998779296875, -- [5]
+						-571, -- [4]
+						-134.9998779296875, -- [5]
 					},
 				},
 				["CompactRaidGroup6"] = {
