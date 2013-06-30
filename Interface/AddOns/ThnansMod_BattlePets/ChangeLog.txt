@@ -1,6 +1,11 @@
 Thnan's Mod - Battle Pets
 version changes:
 
+2.3.1:
+
+- Fixed issue where inventory addons sometimes cause this addon to sometimes throw lua errors.
+- Fixed issue sometimes causing lua error for no apparent reason.
+
 2.3.0:
 
 - Improved accuracy of breed identification.

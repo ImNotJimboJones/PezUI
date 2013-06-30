@@ -9,7 +9,7 @@ local table = _G.table
 
 local tonumber, tostring = _G.tonumber, _G.tostring
 
-local pairs, ipairs = _G.pairs, _G.ipairs
+local pairs = _G.pairs
 
 local CreateFrame = _G.CreateFrame
 local GameTooltip = _G.GameTooltip
@@ -27,7 +27,7 @@ end)
 
 Volumizer:RegisterEvent("ADDON_LOADED")
 
-local LDB = LibStub:GetLibrary("LibDataBroker-1.1")
+local LDB = _G.LibStub:GetLibrary("LibDataBroker-1.1")
 
 local DataObj
 
@@ -62,115 +62,122 @@ local DEFAULT_PRESET_VALUES = {
 local INITIAL_PRESETS = {
 	{
 		name = "Preset 1",
-		values = DEFAULT_PRESET_VALUES,
+		values = _G.CopyTable(DEFAULT_PRESET_VALUES),
 	},
 	{
 		name = "Preset 2",
-		values = DEFAULT_PRESET_VALUES,
+		values = _G.CopyTable(DEFAULT_PRESET_VALUES),
 	},
 	{
 		name = "Preset 3",
-		values = DEFAULT_PRESET_VALUES,
+		values = _G.CopyTable(DEFAULT_PRESET_VALUES),
 	},
 	{
 		name = "Preset 4",
-		values = DEFAULT_PRESET_VALUES,
+		values = _G.CopyTable(DEFAULT_PRESET_VALUES),
 	},
 	{
 		name = "Preset 5",
-		values = DEFAULT_PRESET_VALUES,
+		values = _G.CopyTable(DEFAULT_PRESET_VALUES),
 	},
 }
 
 local DEFAULT_PRESET = {
-	values = DEFAULT_PRESET_VALUES
+	values = _G.CopyTable(DEFAULT_PRESET_VALUES)
 }
 
 local VOLUMES = {
 	ambience = {
-		SoundOption	= SoundPanelOptions.Sound_AmbienceVolume,
+		SoundOption	= _G.SoundPanelOptions.Sound_AmbienceVolume,
 		VolumeCVar	= "Sound_AmbienceVolume",
-		Volume		= AudioOptionsSoundPanelAmbienceVolume,
+		Volume		= _G.AudioOptionsSoundPanelAmbienceVolume,
 		EnableCVar	= "Sound_EnableAmbience",
-		Enable		= AudioOptionsSoundPanelAmbientSounds,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_AMBIENCE,
+		Enable		= _G.AudioOptionsSoundPanelAmbientSounds,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_AMBIENCE,
 	},
 	music = {
-		SoundOption	= SoundPanelOptions.Sound_MusicVolume,
+		SoundOption	= _G.SoundPanelOptions.Sound_MusicVolume,
 		VolumeCVar	= "Sound_MusicVolume",
-		Volume		= AudioOptionsSoundPanelMusicVolume,
+		Volume		= _G.AudioOptionsSoundPanelMusicVolume,
 		EnableCVar	= "Sound_EnableMusic",
-		Enable		= AudioOptionsSoundPanelMusic,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_MUSIC,
+		Enable		= _G.AudioOptionsSoundPanelMusic,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_MUSIC,
 	},
 	master = {
-		SoundOption	= SoundPanelOptions.Sound_MasterVolume,
+		SoundOption	= _G.SoundPanelOptions.Sound_MasterVolume,
 		VolumeCVar	= "Sound_MasterVolume",
-		Volume		= AudioOptionsSoundPanelMasterVolume,
+		Volume		= _G.AudioOptionsSoundPanelMasterVolume,
 		EnableCVar	= "Sound_EnableAllSound",
-		Enable		= AudioOptionsSoundPanelEnableSound,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_SOUND,
+		Enable		= _G.AudioOptionsSoundPanelEnableSound,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_SOUND,
 	},
 	sfx	= {
-		SoundOption	= SoundPanelOptions.Sound_SFXVolume,
+		SoundOption	= _G.SoundPanelOptions.Sound_SFXVolume,
 		VolumeCVar	= "Sound_SFXVolume",
-		Volume		= AudioOptionsSoundPanelSoundVolume,
+		Volume		= _G.AudioOptionsSoundPanelSoundVolume,
 		EnableCVar	= "Sound_EnableSFX",
-		Enable		= AudioOptionsSoundPanelSoundEffects,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_SOUNDFX,
+		Enable		= _G.AudioOptionsSoundPanelSoundEffects,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_SOUNDFX,
 	}
 }
 
 local TOGGLES = {
 	error = {
-		SoundOption	= SoundPanelOptions.Sound_EnableErrorSpeech,
+		SoundOption	= _G.SoundPanelOptions.Sound_EnableErrorSpeech,
 		EnableCVar	= "Sound_EnableErrorSpeech",
-		Enable		= AudioOptionsSoundPanelErrorSpeech,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_ERROR_SPEECH,
+		Enable		= _G.AudioOptionsSoundPanelErrorSpeech,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_ERROR_SPEECH,
 	},
 	emote = {
-		SoundOption	= SoundPanelOptions.Sound_EnableEmoteSounds,
+		SoundOption	= _G.SoundPanelOptions.Sound_EnableEmoteSounds,
 		EnableCVar	= "Sound_EnableEmoteSounds",
-		Enable		= AudioOptionsSoundPanelEmoteSounds,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_EMOTE_SOUNDS,
+		Enable		= _G.AudioOptionsSoundPanelEmoteSounds,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_EMOTE_SOUNDS,
 	},
 	pet = {
-		SoundOption	= SoundPanelOptions.Sound_EnablePetSounds,
+		SoundOption	= _G.SoundPanelOptions.Sound_EnablePetSounds,
 		EnableCVar	= "Sound_EnablePetSounds",
-		Enable		= AudioOptionsSoundPanelPetSounds,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_PET_SOUNDS,
+		Enable		= _G.AudioOptionsSoundPanelPetSounds,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_PET_SOUNDS,
 	},
 	loop = {
-		SoundOption	= SoundPanelOptions.Sound_ZoneMusicNoDelay,
+		SoundOption	= _G.SoundPanelOptions.Sound_ZoneMusicNoDelay,
 		EnableCVar	= "Sound_ZoneMusicNoDelay",
-		Enable		= AudioOptionsSoundPanelLoopMusic,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_MUSIC_LOOPING,
+		Enable		= _G.AudioOptionsSoundPanelLoopMusic,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_MUSIC_LOOPING,
 	},
 	background = {
-		SoundOption	= SoundPanelOptions.Sound_EnableSoundWhenGameIsInBG,
+		SoundOption	= _G.SoundPanelOptions.Sound_EnableSoundWhenGameIsInBG,
 		EnableCVar	= "Sound_EnableSoundWhenGameIsInBG",
-		Enable		= AudioOptionsSoundPanelSoundInBG,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_BGSOUND,
+		Enable		= _G.AudioOptionsSoundPanelSoundInBG,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_BGSOUND,
 	},
 	listener = {
-		SoundOption	= SoundPanelOptions.Sound_ListenerAtCharacter,
+		SoundOption	= _G.SoundPanelOptions.Sound_ListenerAtCharacter,
 		EnableCVar	= "Sound_ListenerAtCharacter",
 		Enable		= nil,
-		Tooltip		= OPTION_TOOLTIP_ENABLE_SOUND_AT_CHARACTER,
+		Tooltip		= _G.OPTION_TOOLTIP_ENABLE_SOUND_AT_CHARACTER,
 	},
 }
 
 local HorizontalSliderBG = {
-	bgFile = "Interface\\Buttons\\UI-SliderBar-Background",
-	edgeFile = "Interface\\Buttons\\UI-SliderBar-Border",
-	edgeSize = 8, tile = true, tileSize = 8,
-	insets = {left = 3, right = 3, top = 6, bottom = 6}
+	bgFile = [[Interface\Buttons\UI-SliderBar-Background]],
+	edgeFile = [[Interface\Buttons\UI-SliderBar-Border]],
+	edgeSize = 8,
+	tile = true,
+	tileSize = 8,
+	insets = {
+		left = 3,
+		right = 3,
+		top = 6,
+		bottom = 6
+	}
 }
 
 -------------------------------------------------------------------------------
 -- Variables
 -------------------------------------------------------------------------------
-VolumizerPresets = VolumizerPresets or INITIAL_PRESETS
+local user_presets
 
 -------------------------------------------------------------------------------
 -- Local functions
@@ -191,11 +198,11 @@ local function MakeCheckButton(parent)
 	local check = CreateFrame("CheckButton", nil, parent)
 	check:SetWidth(15)
 	check:SetHeight(15)
-	check:SetNormalTexture("Interface\\Buttons\\UI-CheckBox-Up")
-	check:SetPushedTexture("Interface\\Buttons\\UI-CheckBox-Down")
-	check:SetHighlightTexture("Interface\\Buttons\\UI-CheckBox-Highlight")
-	check:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
-	check:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
+	check:SetNormalTexture([[Interface\Buttons\UI-CheckBox-Up]])
+	check:SetPushedTexture([[Interface\Buttons\UI-CheckBox-Down]])
+	check:SetHighlightTexture([[Interface\Buttons\UI-CheckBox-Highlight]])
+	check:SetDisabledCheckedTexture([[Interface\Buttons\UI-CheckBox-Check-Disabled]])
+	check:SetCheckedTexture([[Interface\Buttons\UI-CheckBox-Check]])
 
 	return check
 end
@@ -270,7 +277,7 @@ do
 		slider:SetHeight(15)
 		slider:SetHitRectInsets(0, 0, -10, -10)
 		slider:SetOrientation("HORIZONTAL")
-		slider:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
+		slider:SetThumbTexture([[Interface\Buttons\UI-SliderBar-Button-Horizontal]])
 		slider:SetBackdrop(HorizontalSliderBG)
 		slider:SetMinMaxValues(ref.SoundOption.minValue, ref.SoundOption.maxValue)
 		slider:SetValue(_G.BlizzardOptionsPanel_GetCVarSafe(ref.VolumeCVar))
@@ -312,9 +319,9 @@ do
 
 				if ref == VOLUMES.master then
 					if tonumber(value) == 1 then
-						DataObj.icon = "Interface\\COMMON\\VoiceChat-Speaker-Small"
+						DataObj.icon = [[Interface\COMMON\VoiceChat-Speaker-Small]]
 					else
-						DataObj.icon = "Interface\\COMMON\\VOICECHAT-MUTED"
+						DataObj.icon = [[Interface\COMMON\VOICECHAT-MUTED]]
 					end
 				end
 			end
@@ -327,16 +334,30 @@ end
 -- Panel Backdrops
 -------------------------------------------------------------------------------
 local TooltipBackdrop = {
-	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-	tile = true, tileSize = 16, edgeSize = 16,
-	insets = { left = 5, right = 5, top = 5, bottom = 5, }
+	bgFile = [[Interface\Tooltips\UI-Tooltip-Background]],
+	edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]],
+	tile = true,
+	tileSize = 16,
+	edgeSize = 16,
+	insets = {
+		left = 5,
+		right = 5,
+		top = 5,
+		bottom = 5,
+	}
 }
 
 local PlainBackdrop = {
-	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-	tile = true, tileSize = 16, edgeSize = 16,
-	insets = { left = 5, right = 5, top = 5, bottom = 5, }
+	bgFile = [[Interface\Tooltips\UI-Tooltip-Background]],
+	tile = true,
+	tileSize = 16,
+	edgeSize = 16,
+	insets = {
+		left = 5,
+		right = 5,
+		top = 5,
+		bottom = 5,
+	}
 }
 
 -------------------------------------------------------------------------------
@@ -349,7 +370,7 @@ function Volumizer:ChangeBackdrop(backdrop)
 end
 
 local function __UsePreset(preset)
-	local ref = (preset < 1) and DEFAULT_PRESET or VolumizerPresets[preset]
+	local ref = (preset < 1) and DEFAULT_PRESET or user_presets[preset]
 
 	if not ref then
 		_G.error("The preset '"..preset.."' does not exist.")
@@ -366,15 +387,15 @@ local function __UsePreset(preset)
 	end
 end
 
-local function UsePreset(self, preset)
+local function DropDownUsePreset(self, preset)
 	__UsePreset(preset)
 
 	-- Remove the check-mark from the menu entry.
 	_G[self:GetName().."Check"]:Hide()
 end
 
-local function SavePreset(self, preset)
-	local ref = VolumizerPresets[preset]
+local function DropDownSavePreset(self, preset)
+	local ref = user_presets[preset]
 
 	if not ref then
 		_G.error("The preset '"..preset.."' does not exist.")
@@ -389,17 +410,17 @@ local function SavePreset(self, preset)
 	for category, data in pairs(TOGGLES) do
 		ref.values[category] = _G.GetCVar(data.EnableCVar)
 	end
-	VolumizerPresets[preset] = ref
+	user_presets[preset] = ref
 end
 
-local function DeletePreset(self, preset)
-	local ref = VolumizerPresets[preset]
+local function DropDownDeletePreset(self, preset)
+	local ref = user_presets[preset]
 
 	if not ref then
 		_G.error("The preset '"..preset.."' does not exist.")
 		return
 	end
-	table.remove(VolumizerPresets, preset)
+	table.remove(user_presets, preset)
 	_G.CloseDropDownMenus(1)
 end
 
@@ -409,10 +430,10 @@ local function RenamePreset_Popup(self, preset)
 	_G.CloseDropDownMenus(1)
 end
 
-local function AddPreset(self)
+local function DropDownAddPreset(self)
 	local preset = {
-		["name"]	= ("Preset %s"):format(_G.date("%b %d %H:%M:%S %Y", _G.GetTime())),
-		["values"]	= {},
+		name = ("Preset %s"):format(_G.date("%b %d %H:%M:%S %Y", _G.GetTime())),
+		values = {},
 	}
 	for category, data in pairs(DEFAULT_PRESET_VALUES) do
 		if _G.type(data) == "table" then
@@ -425,8 +446,8 @@ local function AddPreset(self)
 			preset.values[category] = data
 		end
 	end
-	table.insert(VolumizerPresets, preset)
-	RenamePreset_Popup(self, #VolumizerPresets)
+	table.insert(user_presets, preset)
+	RenamePreset_Popup(self, #user_presets)
 end
 
 do
@@ -473,6 +494,12 @@ function Volumizer:ADDON_LOADED(event, addon)
 	if addon ~= "Volumizer" then
 		return
 	end
+	user_presets = _G.VolumizerPresets
+
+	if not user_presets then
+		_G.VolumizerPresets = INITIAL_PRESETS
+		user_presets = _G.VolumizerPresets
+	end
 	self:UnregisterEvent("ADDON_LOADED")
 	self.ADDON_LOADED = nil
 
@@ -505,7 +532,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 
 	border:SetFrameStrata("MEDIUM")
 	border:SetBackdrop({
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		edgeFile = [[Interface\DialogFrame\UI-DialogBox-Border]],
 		tile = true,
 		tileSize = 32,
 		edgeSize = 32,
@@ -528,7 +555,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 	end)
 
 	local titlebg = border:CreateTexture(nil, "ARTWORK")
-	titlebg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Header")
+	titlebg:SetTexture([[Interface\DialogFrame\UI-DialogBox-Header]])
 	titlebg:SetPoint("CENTER", border, "TOP", 0, -17)
 	titlebg:SetWidth(230)
 	titlebg:SetHeight(56)
@@ -543,7 +570,6 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 	-- Slider and Checkbox setup
 	-----------------------------------------------------------------------
 	local relative = self
-
 	do
 		local widget
 
@@ -625,8 +651,6 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 
 		function output:RefreshValue()
 			local driver_index = _G.BlizzardOptionsPanel_GetCVarSafe(self.cvar)
-			local device_name = _G.Sound_GameSystem_GetOutputDriverNameByIndex(driver_index)
-
 			self.value = driver_index
 			self.newValue = driver_index
 
@@ -660,14 +684,14 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 			table.wipe(info)
 
 			if level == 1 then
-				for index, data in ipairs(VolumizerPresets) do
-					info.text = data.name
+				for index = 1, #user_presets do
+					info.text = user_presets[index].name
 					info.value = index
 					info.hasArrow = true
 					info.notCheckable = true
 
 					info.arg1 = index
-					info.func = UsePreset
+					info.func = DropDownUsePreset
 
 					_G.UIDropDownMenu_AddButton(info, level)
 				end
@@ -680,14 +704,14 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 
 				info.disabled = nil
 				info.text = _G.ADD
-				info.func = AddPreset
+				info.func = DropDownAddPreset
 				info.arg1 = 0
 				info.colorCode = "|cffffff00"
 				info.notCheckable = 1
 				_G.UIDropDownMenu_AddButton(info, level)
 
 				info.text = _G.DEFAULTS
-				info.func = UsePreset
+				info.func = DropDownUsePreset
 				info.arg1 = 0
 				info.colorCode = "|cffffff00"
 				info.notCheckable = 1
@@ -699,7 +723,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 				info.notCheckable = 1
 
 				info.text = _G.SAVE
-				info.func = SavePreset
+				info.func = DropDownSavePreset
 				_G.UIDropDownMenu_AddButton(info, level)
 
 				info.text = _G.NAME
@@ -707,7 +731,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 				_G.UIDropDownMenu_AddButton(info, level)
 
 				info.text = _G.DELETE
-				info.func = DeletePreset
+				info.func = DropDownDeletePreset
 				_G.UIDropDownMenu_AddButton(info, level)
 			end
 		end
@@ -716,10 +740,10 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 		preset_button:SetWidth(20)
 		preset_button:SetHeight(20)
 		preset_button:SetPoint("RIGHT", self, "BOTTOMRIGHT", -8, 17)
-		preset_button:SetNormalTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Up")
-		preset_button:SetHighlightTexture("Interface\\BUTTONS\\ButtonHilight-Round")
-		preset_button:SetDisabledTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Disabled")
-		preset_button:SetPushedTexture("Interface\\BUTTONS\\UI-SpellbookIcon-NextPage-Down")
+		preset_button:SetNormalTexture([[Interface\BUTTONS\UI-SpellbookIcon-NextPage-Up]])
+		preset_button:SetHighlightTexture([[Interface\BUTTONS\ButtonHilight-Round]])
+		preset_button:SetDisabledTexture([[Interface\BUTTONS\UI-SpellbookIcon-NextPage-Disabled]])
+		preset_button:SetPushedTexture([[Interface\BUTTONS\UI-SpellbookIcon-NextPage-Down]])
 
 		preset_button:SetScript("OnClick", function(self, button, down)
 			preset_menu.relativeTo = self
@@ -750,7 +774,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 			end
 			edit_box:SetText("")
 
-			VolumizerPresets[Volumizer.renaming].name = text
+			user_presets[Volumizer.renaming].name = text
 			edit_box:GetParent():Hide()
 		end
 
@@ -820,8 +844,8 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 			preset_name = preset_name:lower()
 
 			if preset_name then
-				for index = 1, #VolumizerPresets do
-					if VolumizerPresets[index].name:lower() == preset_name then
+				for index = 1, #user_presets do
+					if user_presets[index].name:lower() == preset_name then
 						can_toggle = false
 						__UsePreset(index)
 						break
@@ -842,7 +866,7 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 		type	= "data source",
 		label	= "Volumizer",
 		text	= "0%",
-		icon	= "Interface\\COMMON\\VOICECHAT-SPEAKER",
+		icon	= [[Interface\COMMON\VOICECHAT-SPEAKER]],
 		OnClick = function(display, button)
 			if button == "LeftButton" then
 				_G.SetCVar("Sound_EnableAllSound", (tonumber(_G.GetCVar("Sound_EnableAllSound")) == 0) and 1 or 0)
@@ -871,9 +895,9 @@ function Volumizer:PLAYER_ENTERING_WORLD()
 	})
 
 	if tonumber(_G.AudioOptionsSoundPanelEnableSound:GetValue()) == 1 then
-		DataObj.icon = "Interface\\COMMON\\VoiceChat-Speaker-Small"
+		DataObj.icon = [[Interface\COMMON\VoiceChat-Speaker-Small]]
 	else
-		DataObj.icon = "Interface\\COMMON\\VOICECHAT-MUTED"
+		DataObj.icon = [[Interface\COMMON\VOICECHAT-MUTED]]
 	end
 	DataObj:UpdateText(VOLUMES.master.Volume:GetValue())
 

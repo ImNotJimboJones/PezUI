@@ -1,14 +1,15 @@
 ------------------------------------------------------------------------
-r46 | papsol | 2013-03-17 12:56:10 +0000 (Sun, 17 Mar 2013) | 1 line
+r48 | papsol | 2013-06-13 14:00:21 +0000 (Thu, 13 Jun 2013) | 3 lines
 Changed paths:
-   A /tags/release (from /trunk:45)
+   A /tags/release 3.7.7 toc 5.3 (from /trunk:47)
 
-Tagging as release
+Tagging as release 3.7.7 toc 5.3
+
+toc bump for 5.3
 ------------------------------------------------------------------------
-r45 | papsol | 2013-03-17 12:48:34 +0000 (Sun, 17 Mar 2013) | 1 line
+r47 | papsol | 2013-06-13 13:56:43 +0000 (Thu, 13 Jun 2013) | 1 line
 Changed paths:
-   M /trunk/.pkgmeta
    M /trunk/TitanReputation.toc
 
-toc bump, no code change.
+5.3 toc bump
 ------------------------------------------------------------------------

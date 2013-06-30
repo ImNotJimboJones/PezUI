@@ -1,0 +1,17 @@
+tag 5.3.0-2.2
+51a7cf06b8f29c8c2c6877bb67e75b353ea7d498
+James D. Callahan III <jcallahan@curse.com>
+2013-06-12 22:10:18 -0500
+
+
+
+--------------------
+
+James D. Callahan III:
+	- Bump ToC version to 50300.
+	- Cleanup.
+	- Function renames for clarity.
+	- Stylistic changes.
+	- Make IntelliJ stop complaining about global vars.
+	- Make copies of DEFAULT_PRESET_VALUES where appropriate so new/default presets on the first use of the AddOn doesn't result in insanity when all the presets are suddenly mirrored.
+	- Dead code removal and cleanup.

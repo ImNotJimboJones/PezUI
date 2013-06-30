@@ -198,10 +198,12 @@ local function addLinesToItemTooltip(tooltip, link)
 		if idx then
 			link = link:sub(idx + 5);
 			idx = link:find(":");
-			local itemID = tonumber(link:sub(1, idx - 1));
-			if speciesIDFromItemID[itemID] then
-				local speciesName = C_PetJournal.GetPetInfoBySpeciesID(addon.staticData.speciesIDFromItemID[itemID]);
-				addDataToTooltip(tooltip, speciesName, config.includeLevel, config.includeBreed);
+			if idx then
+				local itemID = tonumber(link:sub(1, idx - 1));
+				if speciesIDFromItemID[itemID] then
+					local speciesName = C_PetJournal.GetPetInfoBySpeciesID(addon.staticData.speciesIDFromItemID[itemID]);
+					addDataToTooltip(tooltip, speciesName, config.includeLevel, config.includeBreed);
+				end
 			end
 		end
 	end
@@ -226,7 +228,7 @@ local cageTooltipBreedString = BattlePetTooltip:CreateFontString(nil, "ARTWORK",
 cageTooltipBreedString:SetPoint("TOPLEFT", BattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
 local function mouseoverPet_Cage(speciesID, level, rarity, health, power, speed)
 	local config = addon.db.profile.itemTooltips;
-	if config.enabled then
+	if config.enabled and speciesID then
 		local name = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
 		local lines = addon:tooltipLineForPet(name, config.includeLevel, config.includeBreed);
 		local offset = 0;
@@ -273,7 +275,7 @@ local hyperlinkTooltipBreedString = FloatingBattlePetTooltip:CreateFontString(ni
 hyperlinkTooltipBreedString:SetPoint("TOPLEFT", FloatingBattlePetTooltip.Level, "BOTTOMLEFT", 0, -2);
 local function hyperlinkPet_Cage(speciesID, level, rarity, health, power, speed)
 	local config = addon.db.profile.itemTooltips;
-	if config.enabled then
+	if config.enabled and speciesID then
 		local name = C_PetJournal.GetPetInfoBySpeciesID(speciesID);
 		local lines = addon:tooltipLineForPet(name, config.includeLevel, config.includeBreed);
 		local offset = 0;

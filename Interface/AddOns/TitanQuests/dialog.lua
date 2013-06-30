@@ -707,7 +707,7 @@ function createSingleQuestDialog()
 	info = {}
 	info.notCheckable = true
 	info.text = TitanQuestsLocale["LINK_QUEST_TEXT"]
-	info.func = function () ChatFrameEditBox:Insert(GetQuestLink(questIndex)) end
+	info.func = function () ChatEdit_InsertLink(GetQuestLink(questIndex)) end
 	UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL)
 end
 

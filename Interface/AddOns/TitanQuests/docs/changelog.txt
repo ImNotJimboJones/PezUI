@@ -19,7 +19,18 @@ legend:
 * = changed feature (bugfixes, changed behavior, etc.)
 - = removed feature
 
-version 3.0.8 (01-01-2012 17:30 UTC)
+version 3.0.9 (06-16-2013 17:27 UTC)
+* no changes compared to 3.0.9 - beta 2
+
+version 3.0.9 - beta 2 (05-27-2013 21:55 UTC)
+* updated toc for WoW 5.3.x
+
+version 3.0.9 - beta 1 (03-10-2013 18:35 UTC)
+* fixed incompatibility issues with WoW 5.2.x (thanks for Tazany for reporting the bug)
+* updated toc for WoW 5.2.x
+* corrected timestamp for previous release in changelog
+
+version 3.0.8 (01-01-2013 17:30 UTC)
 * corrected timestamps for previous releases in changelog
 
 version 3.0.8 - beta 1 (12-18-2012 13:10 UTC)

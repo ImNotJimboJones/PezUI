@@ -9,7 +9,7 @@ local Config = LibStub("AceConfig-3.0")
 
 local db
 
-addon.svnrev["config.lua"] = tonumber(("$Revision: 298 $"):match("%d+"))
+addon.svnrev["config.lua"] = tonumber(("$Revision: 312 $"):match("%d+"))
 
 -- local (optimal) references to Blizzard's strings
 local COLOR = COLOR -- "Color"
@@ -196,6 +196,12 @@ function module:BuildOptions()
 						if value then vars.icon:Show("SavedInstances") else vars.icon:Hide("SavedInstances") end
 					end,
 				},
+				DisableMouseover = {
+					type = "toggle",
+					name = L["Disable mouseover"],
+					desc = L["Disable tooltip display on icon mouseover"],
+					order = 3.5,
+				},
 				ShowHints = {
 					type = "toggle",
 					name = L["Show tooltip hints"],
@@ -290,6 +296,14 @@ function module:BuildOptions()
 					name = L["Raids before dungeons"],
 					desc = L["List raid categories before dungeon categories"],
 					order = 17,
+				},
+			        Scale = {
+					type = "range",
+					name = L["Tooltip Scale"],
+					order = 17.5,
+					min = 0.1,
+					max = 5,
+					bigStep = 0.1,
 				},
 			        RowHighlight = {
 					type = "range",

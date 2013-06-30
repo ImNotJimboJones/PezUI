@@ -1,11 +1,11 @@
-﻿## Interface: 50100
-## Title: Titan Panel [|cffeda55fQuests|r] |cff00aa003.0.8|r
-## Title-ruRU: Titan Panel [|cffeda55fЗадания|r] |cff00aa003.0.8|r
+﻿## Interface: 50300
+## Title: Titan Panel [|cffeda55fQuests|r] |cff00aa003.0.9|r
+## Title-ruRU: Titan Panel [|cffeda55fЗадания|r] |cff00aa003.0.9|r
 ## Notes: A quest list for Titan Panel.
 ## Notes-deDE: Questliste für Titan Panel.
 ## Author: Corgi/Ryessa/PcHaXoR/r3neGaDe/urnati/Luke1410
 ## Dependencies: Titan
-## Version: 3.0.8
+## Version: 3.0.9
 ## X-Website: http://www.luke1410.de/typo3/index.php?id=14
 
 # 3rd party library includes
