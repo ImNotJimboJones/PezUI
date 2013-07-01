@@ -1,6 +1,7 @@
 
 Omen3DB = {
 	["profileKeys"] = {
+		["Xëthra - Burning Blade"] = "Default",
 		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {

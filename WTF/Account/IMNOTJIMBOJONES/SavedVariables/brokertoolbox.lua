@@ -29,5 +29,20 @@ BrokerToolBoxDB = {
 				},
 			},
 		},
+		["Xëthra"] = {
+			["tools"] = {
+				["money"] = {
+					["UnitFactionGroup"] = "Horde",
+					["money"] = 91048179,
+				},
+				["repair"] = {
+					["autorepair"] = true,
+					["BrokenWarningSound"] = true,
+					["autoguildrepair"] = true,
+					["autojunksell"] = true,
+					["BrokenWarning"] = true,
+				},
+			},
+		},
 	},
 }

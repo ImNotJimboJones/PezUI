@@ -1,6 +1,7 @@
 
 RecountDB = {
 	["profileKeys"] = {
+		["Xëthra - Burning Blade"] = "Default",
 		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
@@ -15,9 +16,9 @@ RecountDB = {
 				},
 				["ShowScrollbar"] = false,
 				["Position"] = {
-					["y"] = -459.9992904663086,
+					["y"] = -459.9999389648438,
 					["x"] = -357,
-					["w"] = 213.0000762939453,
+					["w"] = 213.0000152587891,
 					["h"] = 154.0000305175781,
 				},
 				["HideTotalBar"] = false,

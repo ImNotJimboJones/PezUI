@@ -43,6 +43,7 @@ ZygorGuidesViewerSettings = {
 	},
 	["profileKeys"] = {
 		["Pezzer - Burning Blade"] = "Default",
+		["Xëthra - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
 		["Default"] = {

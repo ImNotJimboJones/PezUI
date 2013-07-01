@@ -1,5 +1,6 @@
 
 SexyMap2DB = {
+	["Pezzer-Burning Blade"] = "global",
 	["global"] = {
 		["ping"] = {
 			["showPing"] = true,
@@ -85,11 +86,6 @@ SexyMap2DB = {
 			["fontsize"] = 10,
 			["yOffset"] = -20,
 		},
-		["fader"] = {
-			["enabled"] = false,
-			["normalOpacity"] = 1,
-			["hoverOpacity"] = 0.25,
-		},
 		["clock"] = {
 			["bgColor"] = {
 				["a"] = 1,
@@ -156,5 +152,5 @@ SexyMap2DB = {
 	},
 	["presets"] = {
 	},
-	["Pezzer-Burning Blade"] = "global",
+	["Xëthra-Burning Blade"] = "global",
 }

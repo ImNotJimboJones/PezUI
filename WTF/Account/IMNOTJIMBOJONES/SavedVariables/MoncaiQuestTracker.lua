@@ -18,6 +18,7 @@ MQTC = {
 }
 MQTdb = {
 	["profileKeys"] = {
+		["Xëthra - Burning Blade"] = "Default",
 		["Pezzer - Burning Blade"] = "Default",
 	},
 	["profiles"] = {
