@@ -1,0 +1,8 @@
+﻿## Interface: 50001
+## Title: Loot Won Alert Hider/Mover
+## Version: 1.01.00
+## Author: Choonster
+## Notes: Hides/moves the loot won alert frames.
+## SavedVariables: LOOTWON_HIDE, LOOTWON_SAVED_POSITIONS
+
+core.lua
