@@ -34,12 +34,12 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
-			["spellGlowAlt"] = false,
+			["ctrl"] = false,
 			["stealth"] = false,
+			["spellGlowAlt"] = false,
+			["custom"] = false,
 			["remap"] = false,
 			["reaction"] = false,
-			["ctrl"] = false,
-			["custom"] = false,
 			["possess"] = false,
 			["bindText"] = true,
 			["barLockCtrl"] = false,
@@ -53,12 +53,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Serpent Sting;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Serpent Sting()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -89,12 +89,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Arcane Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Arcane Shot()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -125,12 +125,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Cobra Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast Cobra Shot()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -161,12 +161,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Widow Venom;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Widow Venom()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -197,12 +197,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Deterrence;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cancelaura Deterrence\n/cast Deterrence",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -233,12 +233,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Multi-Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Multi-Shot()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -274,7 +274,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Virmen's Bite",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -305,12 +305,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Master's Call;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Master's Call()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -346,7 +346,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Healthstone",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -377,12 +377,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Tranquilizing Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Tranquilizing Shot()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -413,12 +413,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Scare Beast;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Scare Beast()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -449,12 +449,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Disengage;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/stopcasting\n/stopcasting\n/stopcasting\n/cast Disengage()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -501,7 +501,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Hearthstone",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -532,12 +532,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Mass Resurrection;Guild Perk",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Mass Resurrection(Guild Perk)",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -568,12 +568,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Mobile Banking;Guild Perk",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Mobile Banking(Guild Perk)",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -676,12 +676,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Eagle Eye;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Eagle Eye()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -712,12 +712,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Beast Lore;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Beast Lore()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -748,12 +748,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Tame Beast;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Tame Beast()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -856,12 +856,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Dismiss Pet;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Dismiss Pet()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -892,12 +892,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Revive Pet;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Revive Pet()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -928,12 +928,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Scatter Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Scatter Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -964,12 +964,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Concussive Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Concussive Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1000,12 +1000,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Silencing Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/stopcasting\n/stopcasting\n/stopcasting\n/cast Silencing Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1036,12 +1036,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Freezing Trap;Frost - Trap Launcher",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#show Freezing Trap\n/cast !Trap Launcher\n/cast Freezing Trap",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1072,12 +1072,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Ice Trap;Frost - Trap Launcher",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#show Ice Trap\n/cast !Trap Launcher\n/cast Ice Trap",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1108,12 +1108,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Explosive Trap;Fire - Trap Launcher",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#show Explosive Trap\n/cast !Trap Launcher\n/cast Explosive Trap",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1144,12 +1144,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Flare;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Flare()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1180,12 +1180,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Snake Trap;Nature - Trap Launcher",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#show Snake Trap\n/cast !Trap Launcher\n/cast Snake Trap",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1252,12 +1252,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Mend Pet;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [nopet] Call Pet 1; [pet, dead] Revive Pet; Mend Pet;",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1288,12 +1288,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Distracting Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Distracting Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1324,12 +1324,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Kill Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Kill Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1360,12 +1360,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Explosive Shot;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Explosive Shot()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1396,12 +1396,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Black Arrow;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Black Arrow()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1432,12 +1432,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Dire Beast;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Dire Beast()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1468,12 +1468,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "A Murder of Crows;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast A Murder of Crows()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1504,12 +1504,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Stampede;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Stampede()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1540,12 +1540,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Glaive Toss;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Glaive Toss()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1581,7 +1581,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use 13",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1612,12 +1612,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Rapid Fire;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Rapid Fire()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1653,7 +1653,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use 14",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1684,12 +1684,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Misdirection;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/dismount\n/cast [@focus, exists, help, nodead] [@pet] Misdirection()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1720,12 +1720,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Readiness;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Readiness()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1756,12 +1756,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Misdirection;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Misdirection()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1797,7 +1797,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#showtooltip Call Pet 4()\n/cast [nobtn:2] Call Pet 4()\n/stopmacro [nobtn:2]\n/flyout blizz:9:l:b:t:1:c",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1833,7 +1833,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Virmen's Bite",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1977,7 +1977,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Heavy Windwool Bandage",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2013,7 +2013,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Healthstone",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2152,12 +2152,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Aspect of the Iron Hawk;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast !Aspect of the Hawk",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2188,12 +2188,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Aspect of the Cheetah;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast !Aspect of the Cheetah()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2228,8 +2228,8 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_MOUNT_MAMMOTH_WHITE",
+					["macro_Text"] = "/click GoGoButton",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2296,12 +2296,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Aspect of the Pack;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast !Aspect of the Pack()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2336,8 +2336,8 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_SPY",
+					["macro_Text"] = "/run ToggleFrame(WorldMapFrame)",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2372,8 +2372,8 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_DRUID_FLIGHTFORM",
+					["macro_Text"] = "/use 15",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2408,8 +2408,8 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\SPELL_FROST_FROSTWARD",
+					["macro_Text"] = "/click ExtraActionButton1",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2444,8 +2444,8 @@ IonCDB = {
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
-					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Icon"] = "INTERFACE\\ICONS\\ABILITY_ROGUE_SPRINT",
+					["macro_Text"] = "/use 6",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2476,12 +2476,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Feign Death;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Feign Death()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2512,12 +2512,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Camouflage;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Camouflage()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2548,12 +2548,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Rocket Jump;Racial",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Rocket Jump(Racial)",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2589,7 +2589,7 @@ IonCDB = {
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/use Flask of Spring Blossoms",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -3488,12 +3488,12 @@ IonCDB = {
 			["barLockCtrl"] = false,
 			["bindText"] = false,
 			["possess"] = true,
-			["remap"] = false,
-			["custom"] = false,
-			["reaction"] = false,
 			["spellGlowAlt"] = false,
-			["stealth"] = false,
+			["reaction"] = false,
+			["custom"] = false,
 			["ctrl"] = false,
+			["stealth"] = false,
+			["remap"] = false,
 			["stance"] = false,
 		}, -- [1]
 		{
@@ -3533,12 +3533,12 @@ IonCDB = {
 			["barLockCtrl"] = false,
 			["bindText"] = true,
 			["possess"] = false,
-			["remap"] = false,
-			["custom"] = false,
-			["reaction"] = false,
 			["spellGlowAlt"] = false,
-			["stealth"] = false,
+			["reaction"] = false,
+			["custom"] = false,
 			["ctrl"] = false,
+			["stealth"] = false,
+			["remap"] = false,
 			["stance"] = false,
 		}, -- [2]
 		{
@@ -3574,12 +3574,12 @@ IonCDB = {
 			["tooltipsEnhanced"] = true,
 			["customNames"] = false,
 			["fishing"] = false,
-			["spellGlowAlt"] = false,
+			["ctrl"] = false,
 			["stealth"] = false,
+			["spellGlowAlt"] = false,
+			["custom"] = false,
 			["remap"] = false,
 			["reaction"] = false,
-			["ctrl"] = false,
-			["custom"] = false,
 			["possess"] = false,
 			["bindText"] = true,
 			["barLockCtrl"] = false,
@@ -3623,12 +3623,12 @@ IonCDB = {
 			["barLockCtrl"] = false,
 			["bindText"] = false,
 			["possess"] = false,
-			["remap"] = false,
-			["custom"] = false,
-			["reaction"] = false,
 			["spellGlowAlt"] = false,
-			["stealth"] = false,
+			["reaction"] = false,
+			["custom"] = false,
 			["ctrl"] = false,
+			["stealth"] = false,
+			["remap"] = false,
 			["stance"] = false,
 		}, -- [4]
 		nil, -- [5]
@@ -3669,12 +3669,12 @@ IonCDB = {
 			["barLockCtrl"] = false,
 			["bindText"] = false,
 			["possess"] = true,
-			["ctrl"] = false,
-			["reaction"] = false,
-			["custom"] = false,
 			["remap"] = false,
-			["stealth"] = false,
+			["custom"] = false,
+			["reaction"] = false,
 			["spellGlowAlt"] = false,
+			["stealth"] = false,
+			["ctrl"] = false,
 			["stance"] = false,
 		}, -- [6]
 		{
@@ -3714,12 +3714,12 @@ IonCDB = {
 			["barLockCtrl"] = false,
 			["bindText"] = false,
 			["possess"] = true,
-			["ctrl"] = false,
-			["reaction"] = false,
-			["custom"] = false,
 			["remap"] = false,
-			["stealth"] = false,
+			["custom"] = false,
+			["reaction"] = false,
 			["spellGlowAlt"] = false,
+			["stealth"] = false,
+			["ctrl"] = false,
 			["stance"] = false,
 		}, -- [7]
 	},
