@@ -4,6 +4,9 @@ Copyright 2011 ~ 2013 - Arith Hsu
 ==============
 = Change Log =
 ==============
+* 3.04 (2013/07/01)
+    - Added MidSummer Pandaria map.
+
 * 3.03 (2013/05/24)
     - Update the coming holidays' dates until Feb. 2014.
 
