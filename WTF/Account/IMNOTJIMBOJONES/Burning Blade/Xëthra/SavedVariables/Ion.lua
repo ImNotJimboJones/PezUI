@@ -53,12 +53,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Judgment;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Judgment()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -89,12 +89,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Crusader Strike;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Crusader Strike()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -125,12 +125,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Rebuke;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Rebuke()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -161,12 +161,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Fist of Justice;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Fist of Justice()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -197,12 +197,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Divine Shield;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Divine Shield()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -233,12 +233,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hammer of the Righteous;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Hammer of the Righteous()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -377,12 +377,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Turn Evil;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Turn Evil()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -449,12 +449,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hand of Freedom;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Hand of Freedom()",
 					["macro_Note"] = "",
 					["macro_Watch"] = false,
 					["macro_UseNote"] = false,
@@ -928,12 +928,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Avenger's Shield;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Avenger's Shield()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -964,12 +964,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Shield of the Righteous;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Shield of the Righteous()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1000,12 +1000,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Eternal Flame;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Eternal Flame()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1036,12 +1036,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Flash of Light;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Flash of Light()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1072,12 +1072,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Lay on Hands;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Lay on Hands()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1108,12 +1108,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Holy Wrath;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Holy Wrath()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1180,12 +1180,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hand of Protection;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Hand of Protection()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1252,12 +1252,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Cleanse;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Cleanse()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1324,12 +1324,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hammer of Wrath;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Hammer of Wrath()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1360,12 +1360,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Reckoning;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Reckoning()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1396,12 +1396,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Divine Protection;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Divine Protection()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1432,12 +1432,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Avenging Wrath;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Avenging Wrath()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1468,12 +1468,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Ardent Defender;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Ardent Defender()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1504,12 +1504,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Guardian of Ancient Kings;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Guardian of Ancient Kings()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1540,12 +1540,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Consecration;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Consecration()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1684,12 +1684,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hand of Sacrifice;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Hand of Sacrifice()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1720,12 +1720,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Devotion Aura;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Devotion Aura()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -1756,12 +1756,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Hand of Salvation;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "/cast [@mouseover,help] [] Hand of Salvation()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2152,12 +2152,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Seal of Truth;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Seal of Truth()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2188,12 +2188,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Seal of Righteousness;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Seal of Righteousness()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2260,12 +2260,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Seal of Insight;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Seal of Insight()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2296,12 +2296,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Righteous Fury;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Righteous Fury()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2476,12 +2476,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Blessing of Kings;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Blessing of Kings()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2512,12 +2512,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Blessing of Might;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Blessing of Might()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
@@ -2548,12 +2548,12 @@ IonCDB = {
 		{
 			{
 				["homestate"] = {
-					["macro_Auto"] = false,
+					["macro_Auto"] = "Redemption;",
 					["macro_Name"] = "",
 					["actionID"] = false,
 					["macro_Equip"] = false,
 					["macro_Icon"] = false,
-					["macro_Text"] = "",
+					["macro_Text"] = "#autowrite\n/cast Redemption()",
 					["macro_Note"] = "",
 					["macro_UseNote"] = false,
 					["macro_Watch"] = false,
