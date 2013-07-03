@@ -123,6 +123,9 @@ function psealocale()
 	whrabrannemo2 = "seguridad desactivada. Comenzando la purga de la memoria y"
 	whragundemo = "así que tienes agallas"
 	whratitle = "    Heróicas del Rey Lich"
+	raerrormodulereq = "Necesita un módulo adicional:"
+	raerroraddoninst = "¡Error! El addon no está ..."
+	
 	
 end
 

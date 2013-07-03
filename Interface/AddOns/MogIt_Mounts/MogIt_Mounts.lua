@@ -1,7 +1,7 @@
 local MogIt_Mounts,m = ...;
 local mog = MogIt;
 
-local module = mog:GetModule("MogIt_Mounts") or mog:RegisterModule("MogIt_Mounts",{});
+local module = mog:RegisterModule(MogIt_Mounts,tonumber(GetAddOnMetadata(MogIt_Mounts, "X-MogItModuleVersion")));
 local mounts = {
 	Ground = {},
 	Flying = {},
@@ -76,17 +76,18 @@ end
 function module.OnEnter(module,self)
 	if not self or not self.data.display then return end;
 	GameTooltip:SetOwner(self,"ANCHOR_RIGHT");
-	
+	GameTooltip[mog] = true;
+
 	local name,_,icon = GetSpellInfo(self.data.spell);
 	local link = GetSpellLink(self.data.spell);
 	GameTooltip:AddLine("\124T"..icon..":18\124t "..(link or name),0,1,0);
 	if self.data.item then
-		local _,link = GetItemInfo(self.data.item);
+		local _,link = mog:GetItemInfo(self.data.item,"ModelOnEnter");
 		if link then
 			GameTooltip:AddDoubleLine("Item:",link);
 		end
 	end
-	
+
 	GameTooltip:Show();
 end
 
@@ -131,9 +132,10 @@ function module.BuildList(module)
 	return list;
 end
 
-function module.Help(module)
-	GameTooltip:AddDoubleLine("Spell chat link","Shift + Left click",0,1,0,1,1,1);
-	GameTooltip:AddDoubleLine("Item chat link","Ctrl + Left click",0,1,0,1,1,1);
-	GameTooltip:AddDoubleLine("Spell URL","Shift + Right click",0,1,0,1,1,1);
-	GameTooltip:AddDoubleLine("Item URL","Ctrl + Right click",0,1,0,1,1,1);
-end
+module.Help = {
+
+	"Shift-left click to link spell",
+	"Shift-right click for spell URL",
+	"Ctrl-left click to link item",
+	"Ctrl-right click for item URL",
+};

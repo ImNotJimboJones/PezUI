@@ -241,7 +241,14 @@ local arg1, arg2, arg3,arg4,arg5,arg6,argNEW1,arg7,arg8,arg9,argNEW2,arg10,arg11
 --Heart of Fear
 if GetCurrentMapAreaID()==897 then
 
+if arg2=="SPELL_CAST_SUCCESS" and arg10==122786 then
+	if prraspisokon[1]==1 and raachdone1 then
+		prrafailnoreason(1) --arg8
+	end
+end
 
+end
+--
 
 --Mogushan
 if GetCurrentMapAreaID()==896 then
@@ -291,15 +298,7 @@ end
 --
 
 
-if arg2=="SPELL_CAST_SUCCESS" and arg10==122786 then
-	if prraspisokon[1]==1 and raachdone1 then
-		prrafailnoreason(1) --arg8
-	end
-end
 
-
-end
---
 
 
 
