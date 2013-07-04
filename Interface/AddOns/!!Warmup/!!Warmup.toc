@@ -1,0 +1,13 @@
+## Interface: 20000
+## DefaultState: disabled
+
+## Title: Warmup
+## Notes: Tracks how long between loadup events
+## Author: Tekkub Stoutwrithe
+## X-Website: http://code.google.com/p/tekkub-wow/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Development Tools
+
+## SavedVariables: WarmupSV
+
+Warmup.xml
