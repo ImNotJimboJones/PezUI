@@ -1,0 +1,12 @@
+tag v2.4.8
+ae8a77599b1fe25ed0a50e16b04db6fa8eba8606
+funkydude <none>
+2013-07-02 14:03:22 +0100
+
+Tagging as v2.4.8
+
+
+--------------------
+
+funkydude:
+	- grab latest locale updates
