@@ -216,6 +216,13 @@ X: 0
 Y: 128
 W: 150
 H: 42
+Frame: xanAchievementMover_Anchor
+FrameLevel: 1
+Anchor: RIGHT
+X: -221
+Y: 162
+W: 336
+H: 80
 Frame: RaidUnitFramesMover
 FrameLevel: 1
 Anchor: LEFT
