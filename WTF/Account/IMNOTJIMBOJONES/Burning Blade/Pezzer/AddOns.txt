@@ -28,7 +28,7 @@ Auc-Stat-Simple: disabled
 Auc-Stat-StdDev: disabled
 Auc-Util-FixAH: enabled
 Bazooka: enabled
-Bazooka_Options: disabled
+Bazooka_Options: enabled
 BeanCounter: disabled
 Bison: enabled
 Broker_DualSpec: enabled
@@ -47,7 +47,7 @@ GoGoMount: enabled
 Informant: enabled
 KeyBindingSearch: enabled
 kgPanels: enabled
-kgPanelsConfig: disabled
+kgPanelsConfig: enabled
 LibRangeCheck-2.0: enabled
 LightHeaded: enabled
 LightHeaded_Data_A: enabled
@@ -80,10 +80,10 @@ MogIt_Sets: enabled
 MogIt_TwoHanded: enabled
 MoncaiQuestTracker: enabled
 MoveAnything: enabled
-MSBTOptions: disabled
+MSBTOptions: enabled
 Omen: enabled
 OmniCC: enabled
-OmniCC_Config: disabled
+OmniCC_Config: enabled
 PitBull4: enabled
 PitBull4_AuraBar: enabled
 PitBull4_Aggro: enabled
@@ -185,7 +185,7 @@ TidyPlates_Quatre: disabled
 TidyPlates_ThreatPlates: enabled
 TipTac: enabled
 TipTacItemRef: enabled
-TipTacOptions: disabled
+TipTacOptions: enabled
 TipTacTalents: enabled
 TitanReputation: enabled
 TitanBag: disabled
@@ -206,13 +206,13 @@ VerticalRep: enabled
 VerticalXP: enabled
 Volumizer: enabled
 VuhDo: enabled
-VuhDoOptions: disabled
+VuhDoOptions: enabled
 WhisperWhisper: enabled
 YssDrop: enabled
 shPerformance: enabled
 DETrackingBroker: enabled
 DBM-Core: enabled
-DBM-GUI: disabled
+DBM-GUI: enabled
 DBM-BaradinHold: enabled
 DBM-BastionTwilight: enabled
 DBM-BlackTemple: enabled
