@@ -302,4 +302,5 @@ SimpleILevel_Social: disabled
 ThnansMod_BattlePets: enabled
 DBM-Brawlers: enabled
 DBM-ThroneofThunder: enabled
-xanachievementmover: enabled
+DBM-SiegeOfOrgrimmar: enabled
+AchievementsReminder: enabled
