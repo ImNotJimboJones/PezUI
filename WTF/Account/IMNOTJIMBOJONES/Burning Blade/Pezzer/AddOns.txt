@@ -304,3 +304,4 @@ DBM-Brawlers: enabled
 DBM-ThroneofThunder: enabled
 DBM-SiegeOfOrgrimmar: enabled
 AchievementsReminder: enabled
+!!Warmup: disabled
